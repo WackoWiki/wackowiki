@@ -32,8 +32,8 @@ else
 	{
 		echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n";
 	}
-
-	// echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('Help'), 0)."</li>\n";
+	// Show Help link
+	# echo "<li>".$this->compose_link_to_page($this->get_translation('HelpPage'), "", $this->get_translation('Help'), 0)."</li>\n";
 	echo "</ul>\n";
 }
 
@@ -201,123 +201,128 @@ else
 	// display more icon and text
 	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icons/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> ".$this->get_translation('PageHandlerMoreTip')."</a> \n";
 	// only display 'more' text that shows handler list on hover
-	echo '<li class="dropdown"><a href="#" id="more">'.$this->get_translation('PageHandlerMoreTip').'<span class="dropdown_arrow">&#9660;</span></a>'." \n";
-	echo '<ul class="dropdown_menu">'."\n";
 
-	// print tab
-	// TODO: should add 'PrintTip' to the language file
-	echo echo_tab(
-		$this->href('print'),
-		$this->get_translation('PrintVersion'),
-		$this->has_access('read') ? $this->get_translation('PrintText') : '',
-		$this->method == 'print',
-		2,
-		'v');
+	// TODO: show only if user is allowed to read the page
+	if ($this->has_access('read'))
+	{
+		echo '<li class="dropdown"><a href="#" id="more">'.$this->get_translation('PageHandlerMoreTip').'<span class="dropdown_arrow">&#9660;</span></a>'." \n";
+		echo '<ul class="dropdown_menu">'."\n";
 
-	// create tab
-	echo echo_tab(
-		$this->href('new'),
-		$this->get_translation('CreateNewPageTip'),
-		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
-			($this->forum === false && $this->has_access('write')) ||
-			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
-			? $this->get_translation('CreateNewPageText') : '',
-		$this->method == 'new',
-		2,
-		'n');
+		// print tab
+		// TODO: should add 'PrintTip' to the language file
+		echo echo_tab(
+			$this->href('print'),
+			$this->get_translation('PrintVersion'),
+			$this->has_access('read') ? $this->get_translation('PrintText') : '',
+			$this->method == 'print',
+			2,
+			'v');
 
-	// remove tab
-	echo echo_tab(
-		$this->href('remove'),
-		$this->get_translation('DeleteTip'),
-		($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
-			($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
-			($this->forum === false && $this->user_is_owner()))))
-			? $this->get_translation('DeleteText') : '',
-		$this->method == 'remove',
-		2,
-		'');
+		// create tab
+		echo echo_tab(
+			$this->href('new'),
+			$this->get_translation('CreateNewPageTip'),
+			((!$this->page && $this->has_access('create')) || $this->is_admin() ||
+				($this->forum === false && $this->has_access('write')) ||
+				($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+				? $this->get_translation('CreateNewPageText') : '',
+			$this->method == 'new',
+			2,
+			'n');
 
-	// rename tab
-	echo echo_tab(
-		$this->href('rename'),
-		$this->get_translation('RenameTip'),
-		($this->page && ($this->is_admin() || $this->user_is_owner() && (
-			($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
-			($this->forum === false && $this->user_is_owner()))))
-			? $this->get_translation('RenameText') : '',
-		$this->method == 'rename',
-		2,
-		'');
+		// remove tab
+		echo echo_tab(
+			$this->href('remove'),
+			$this->get_translation('DeleteTip'),
+			($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
+				($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
+				($this->forum === false && $this->user_is_owner()))))
+				? $this->get_translation('DeleteText') : '',
+			$this->method == 'remove',
+			2,
+			'');
 
-	// moderation tab
-	echo echo_tab(
-		$this->href('moderate'),
-		$this->get_translation('ModerateTip'),
-		($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
-		$this->method == 'moderate',
-		2,
-		'm');
+		// rename tab
+		echo echo_tab(
+			$this->href('rename'),
+			$this->get_translation('RenameTip'),
+			($this->page && ($this->is_admin() || $this->user_is_owner() && (
+				($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
+				($this->forum === false && $this->user_is_owner()))))
+				? $this->get_translation('RenameText') : '',
+			$this->method == 'rename',
+			2,
+			'');
 
-	// permissions tab
-	echo echo_tab(
-		$this->href('permissions'),
-		$this->get_translation('ACLTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('ACLText') : '',
-		$this->method == 'permissions',
-		2,
-		'a');
+		// moderation tab
+		echo echo_tab(
+			$this->href('moderate'),
+			$this->get_translation('ModerateTip'),
+			($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
+			$this->method == 'moderate',
+			2,
+			'm');
 
-	// categories tab
-	echo echo_tab(
-		$this->href('categories'),
-		$this->get_translation('CategoriesTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('CategoriesText') : '',
-		$this->method == 'categories',
-		2,
-		'c');
+		// permissions tab
+		echo echo_tab(
+			$this->href('permissions'),
+			$this->get_translation('ACLTip'),
+			($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('ACLText') : '',
+			$this->method == 'permissions',
+			2,
+			'a');
 
-	// referrers tab
-	echo echo_tab(
-		$this->href('referrers'),
-		$this->get_translation('ReferrersTip'),
-		($this->page && $this->has_access('read') && $this->get_user()) ? $this->get_translation('ReferrersText') : '',
-		$this->method == 'referrers' || $this->method == 'referrers_sites',
-		2,
-		'l');
+		// categories tab
+		echo echo_tab(
+			$this->href('categories'),
+			$this->get_translation('CategoriesTip'),
+			($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('CategoriesText') : '',
+			$this->method == 'categories',
+			2,
+			'c');
 
-	// watch tab
-	echo echo_tab(
-		$this->href('watch'),
-		($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
-		$this->method == 'watch',
-		($this->iswatched === true ? 'watch-on.png' : 'watch-off.png'),
-		'a');
+		// referrers tab
+		echo echo_tab(
+			$this->href('referrers'),
+			$this->get_translation('ReferrersTip'),
+			($this->page && $this->has_access('read') && $this->get_user()) ? $this->get_translation('ReferrersText') : '',
+			$this->method == 'referrers' || $this->method == 'referrers_sites',
+			2,
+			'l');
 
-	// review tab
-	echo echo_tab(
-		$this->href('review'),
-		($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview')),
-		($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? $this->get_translation('Review') : '',
-		$this->method == 'review',
-		($this->page['reviewed'] == 1 ? 'review2.png' : 'review1.png'),
-		'z');
+		// watch tab
+		echo echo_tab(
+			$this->href('watch'),
+			($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
+			($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+			$this->method == 'watch',
+			($this->iswatched === true ? 'watch-on.png' : 'watch-off.png'),
+			'a');
 
-	// upload tab
-	echo echo_tab(
-		$this->href('upload'),
-		$this->get_translation('FilesTip'),
-		($this->forum === false && $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
-		$this->method == 'upload',
-		2,
-		'u');
+		// review tab
+		echo echo_tab(
+			$this->href('review'),
+			($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview')),
+			($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? $this->get_translation('Review') : '',
+			$this->method == 'review',
+			($this->page['reviewed'] == 1 ? 'review2.png' : 'review1.png'),
+			'z');
 
-		// last empty
-		echo "<li></li>\n";
-		echo "</ul>\n";
-		echo "</li>\n";
-	#echo "</ul>\n";
+		// upload tab
+		echo echo_tab(
+			$this->href('upload'),
+			$this->get_translation('FilesTip'),
+			($this->forum === false && $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
+			$this->method == 'upload',
+			2,
+			'u');
+
+			// last empty
+			echo "<li></li>\n";
+			echo "</ul>\n";
+			echo "</li>\n";
+	}
+	#echo "</ul>\n"; // list continues with search
 ?>
 <li class="search">
 <div id="search">
