@@ -145,7 +145,7 @@ $wacko_config_defaults = array(
 	'username_chars_min' => 3,
 	'username_chars_max' => 20,
 
-	'standard_handlers' => 'addcomment|categories|claim|clone|diff|edit|latex|msword|new|permissions|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|show|source|watch',
+	'standard_handlers' => 'addcomment|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|msword|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|show|source|upload|watch',
 
 	'upload' => 'admins',
 	'upload_images_only' => 0,
