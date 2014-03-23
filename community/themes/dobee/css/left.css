@@ -125,7 +125,7 @@
 }
 
 .navOpened .titleHandle {
-  background-image: url(../images/navopened.gif);
+  background-image: url(../images/navopened.png);
   background-position: left top;
   background-repeat: no-repeat;
   width: 20px;
@@ -161,7 +161,7 @@
 
 .navClosed .titleRight,
 .navOpened .titleRight {
-  background-image: url(../images/topright.gif);
+  background-image: url(../images/topright.png);
   background-position: top;
   background-repeat: no-repeat;
   width: 3px;
@@ -169,7 +169,7 @@
 }
 
 .navClosed .titleHandle {
-  background-image: url(../images/navclosed.gif);
+  background-image: url(../images/navclosed.png);
   background-repeat: no-repeat;
 }
 

@@ -252,7 +252,7 @@ code, tt {
 
 /* Unordered list elements (this is a workaround of a bug inside Wacko) */
 li {
-	list-style-image:	url("../icons/list.gif"); /* Works not correct in IE */
+	list-style-image:	url("../icons/list.png"); /* Works not correct in IE */
 }
 /* Ordered list elements */
 ol li {

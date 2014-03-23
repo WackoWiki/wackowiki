@@ -37,7 +37,7 @@ require ('themes/_common/_header.php');
 							 width="100%">
 							<tr>
 								<td class="titleLeft"><img
-									src="<?php echo $this->config['theme_url'] ?>images/1x1.gif"
+									src="<?php echo $this->config['theme_url'] ?>images/1x1.png"
 									width="14" /></td>
 								<td class="titleText" width="100%"><?php echo $this->get_translation('YourBookmarks'); ?>
 								</td>
@@ -110,7 +110,7 @@ require ('themes/_common/_header.php');
 							 width="100%">
 							<tr>
 								<td class="titleLeft"><img
-									src="<?php echo $this->config['theme_url'] ?>images/1x1.gif"
+									src="<?php echo $this->config['theme_url'] ?>images/1x1.png"
 									width="14" /></td>
 								<td class="titleText" width="100%"><?php echo $this->get_translation('ThisPage'); ?>
 								</td>
@@ -135,16 +135,16 @@ require ('themes/_common/_header.php');
 						}
 						echo '<br />';
 						if ($this->page['modified']) {
-							echo "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\"><img src=\"".$this->config['theme_url']."icons/vers.gif\""."style=\"vertical-align: middle\""."\">".$this->get_translation('SettingsRevisions')."</a>\n";
+							echo "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\"><img src=\"".$this->config['theme_url']."icons/vers.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('SettingsRevisions')."</a>\n";
 						}
 						// if this page exists
 						if ($this->page) {
 							// if owner is current user
 							if ($this->user_is_owner()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/ren.gif\""."style=\"vertical-align: middle\""."\">".$this->get_translation('RenameText')."</a>");
+								print(" <a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/ren.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('RenameText')."</a>");
 								echo '<br />';
-								print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icons/access.gif\""."style=\"vertical-align: middle\"".">".$this->get_translation('ACLText')."</a>");
+								print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icons/access.png\""."style=\"vertical-align: middle\"".">".$this->get_translation('ACLText')."</a>");
 							}
 
 							if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner()) {
@@ -158,7 +158,7 @@ require ('themes/_common/_header.php');
 							}
 
 							echo '<br />';
-							print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icons/prop.gif\""."style=\"vertical-align: middle\"".">".$this->get_translation('SettingsText')."</a>");
+							print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icons/prop.png\""."style=\"vertical-align: middle\"".">".$this->get_translation('SettingsText')."</a>");
 
 							echo '<br />';
 							print "<a href=\"".$this->href('export.xml')."\" title=\"".$this->get_translation('RevisionXMLTip')."\"><img src=\"".$this->config['theme_url']."icons/1xml.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('ExportToXML')."</a>\n";
@@ -195,7 +195,7 @@ require ('themes/_common/_header.php');
 		| <?php
 		if ($this->get_user()) { ?> <span class="nobr"> <?php echo $this->get_translation('YouAre'); ?>
 		<img
-			src="<?php echo $this->config['theme_url'] ?>icons/user.gif"
+			src="<?php echo $this->config['theme_url'] ?>icons/user.png"
 			alt="" width="16" height="16" align="middle"
 			style="vertical-align: baseline;" /> <?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>

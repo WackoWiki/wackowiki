@@ -3,7 +3,7 @@ margin:0;
 }
 
 div#head {
-background-image:url(/themes/coolblue/images/head_back.gif);
+background-image:url(/themes/coolblue/images/head_back.png);
 background-repeat:no-repeat;
 height:50px;
 margin:0 auto;
@@ -11,7 +11,7 @@ width:960px;
 }
 
 input#search {
-background:url(/themes/coolblue/images/search.gif) no-repeat left top;
+background:url(/themes/coolblue/images/search.png) no-repeat left top;
 border:0;
 color:#999;
 float:right;
@@ -42,7 +42,7 @@ width:800px;
 }
 
 div#credits {
-background-image:url(/themes/coolblue/images/footer_back.gif);
+background-image:url(/themes/coolblue/images/footer_back.png);
 background-position:center;
 background-repeat:no-repeat;
 clear:both;
