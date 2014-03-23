@@ -57,7 +57,7 @@ a:hover {
   padding: 12px 11px 60px 12px;
   width: 185px;
   margin: 0;
-  background-image: url(../../images/powered_by.gif);
+  background-image: url(../../images/powered_by.png);
   background-position: left bottom;
   background-repeat: no-repeat;
 }
@@ -87,7 +87,7 @@ a:hover {
 }
 
 .navOpened .titleHandle {
-  background-image: url(../images/navopened.gif);
+  background-image: url(../images/navopened.png);
   background-position: left top;
   background-repeat: no-repeat;
   width: 20px;
@@ -115,7 +115,7 @@ a:hover {
 
 .navClosed .titleLeft,
 .navOpened .titleLeft {
-  background-image: url(../images/topleft.gif);
+  background-image: url(../images/topleft.png);
   background-position: top;
   background-repeat: no-repeat;
   width: 14px;
@@ -124,7 +124,7 @@ a:hover {
 
 .navClosed .titleRight,
 .navOpened .titleRight {
-  background-image: url(../images/topright.gif);
+  background-image: url(../images/topright.png);
   background-position: top;
   background-repeat: no-repeat;
   width: 3px;
@@ -132,7 +132,7 @@ a:hover {
 }
 
 .navClosed .titleHandle {
-  background-image: url(../images/navclosed.gif);
+  background-image: url(../images/navclosed.png);
   background-repeat: no-repeat;
 }
 

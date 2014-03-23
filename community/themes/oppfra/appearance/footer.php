@@ -160,7 +160,7 @@ echo $this->get_translation('LoginPassword') ?>
 		:&nbsp;
 		<input type="password" name="password" class="login" size="8" />
 		&nbsp;
-		<input name="image" type="image" src="<?php echo $this->config['theme_url'] ?>icons/login.gif" alt=">>>" align="top" />
+		<input name="image" type="image" src="<?php echo $this->config['theme_url'] ?>icons/login.png" alt=">>>" align="top" />
 	</span>
 <?php
 }
