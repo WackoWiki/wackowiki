@@ -22,17 +22,17 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	if (!$selected)
 	{
-		echo "<div class='TabSelected$bonus' style='background-image:url(".$engine->config['theme_url']."icons/tabbg.gif);' >";
+		echo "<div class='TabSelected$bonus' style='background-image:url(".$engine->config['theme_url']."icons/tabbg.png);' >";
 	}
 	else
 	{
-		echo "<div class='Tab$bonus' style='background-image:url(".$engine->config['theme_url']."icons/tabbg".($bonus=="2a" ? "del" : "1").".gif);'>";
+		echo "<div class='Tab$bonus' style='background-image:url(".$engine->config['theme_url']."icons/tabbg".($bonus=="2a" ? "del" : "1").".png);'>";
 	}
 
 	$bonus2 = $bonus=="2a"?"del":"";
 
 	echo '<table ><tr>';
-	echo "<td><img src='".$engine->config['theme_url']."icons/tabr$selected".$bonus2.".gif' width='$xsize' align='top' height='$ysize' alt='' /></td>";
+	echo "<td><img src='".$engine->config['theme_url']."icons/tabr$selected".$bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
 
 	if (!$selected)
 	{
@@ -45,7 +45,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	echo "<div class='TabText'>".$text."</div>";
 	echo "</td>";
-	echo "<td><img src='".$engine->config['theme_url']."icons/tabl$selected".$bonus2.".gif' width='$xsize' align='top' height='$ysize' alt='' /></td>";
+	echo "<td><img src='".$engine->config['theme_url']."icons/tabl$selected".$bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
 	echo '</tr></table>';
 	echo "</div>";
 }
@@ -107,7 +107,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 			echo_tab(
 			$this->href('remove'),
 			$this->get_translation('DeleteTip'),
-			'<img src="'.$this->config['theme_url'].'icons/del'.($this->method != 'remove' ? '' : '_').'.gif" width="14" height="15" alt="" />'.$this->get_translation('DeleteText'),
+			'<img src="'.$this->config['theme_url'].'icons/del'.($this->method != 'remove' ? '' : '_').'.png" width="14" height="15" alt="" />'.$this->get_translation('DeleteText'),
 			$this->method != 'remove',
 			"2a"
 			);
