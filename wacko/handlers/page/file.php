@@ -60,7 +60,7 @@ if (($extension == 'gif') || ($extension == 'jpg') || ($extension == 'jpeg') || 
 
 	if ($error)
 	{
-		$filepath = 'images/upload'.$error.'.gif';
+		$filepath = 'images/upload'.$error.'.png';
 
 		if (!headers_sent())
 		{
