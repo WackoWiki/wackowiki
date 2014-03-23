@@ -92,7 +92,7 @@ echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
   <br />
   <?php echo $this->get_translation('LoginPassword') ?>:<br />
   <input type="password" name="password" class="login" size="8" alt="password" />
-  <input type="image" src="<?php echo $this->config['theme_url'] ?>icons/login.gif" alt=">>>" align="top" />
+  <input type="image" src="<?php echo $this->config['theme_url'] ?>icons/login.png" alt=">>>" align="top" />
   <?php // Closing Login form
 echo $this->form_close();
 ?>
