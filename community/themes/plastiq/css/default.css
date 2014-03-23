@@ -180,7 +180,7 @@ input, select, textarea {
 input#button, input#submit, .btnlite, .btnmain {
 	color: #EDEDED;
 	background-color: #003399;
-	background-image: url(./../images/body_button_inactive.gif);
+	background-image: url(./../images/body_button_inactive.png);
 	background-repeat: repeat-x;
 	background-position: top left;
 	font-size: 11px;
@@ -191,7 +191,7 @@ input#button, input#submit, .btnlite, .btnmain {
 }
 input#button:hover, input#submit:hover, .btnlite:hover, .btnmain:hover {
 	background-color: #003399;
-	background-image: url(./../images/body_button_active.gif);
+	background-image: url(./../images/body_button_active.png);
 	background-repeat: repeat-x;
 	background-position: top left;
 }
@@ -205,7 +205,7 @@ textarea {
 	letter-spacing: 1px;
 	width: 100%;
 	border: 1px solid #999999;
-	background-image: url(./../images/body_field.gif);
+	background-image: url(./../images/body_field.png);
 	background-repeat: repeat-x;
 	background-position: top left;
 	padding: 0px;

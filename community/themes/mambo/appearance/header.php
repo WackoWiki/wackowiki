@@ -29,12 +29,12 @@ require ('themes/_common/_header.php');
 					<th onclick="opentree('sw_n0')" valign="top">
 						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)"   width="100%">
 							<tr>
-								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="14"/></td>
+								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="14"/></td>
 								<td class="titleText" width="100%">
 									<?php echo $this->get_translation('YourBookmarks'); ?>
 								</td>
-								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="20"/></td>
-								<td class="titleRight"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="3"/></td>
+								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="20"/></td>
+								<td class="titleRight"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="3"/></td>
 							</tr>
 						</table>
 					</th>
@@ -99,10 +99,10 @@ require ('themes/_common/_header.php');
 					<th onclick="opentree('sw_n1')" valign="top">
 						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)"   width="100%">
 							<tr>
-								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="14"/></td>
+								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="14"/></td>
 								<td class="titleText" width="100%">This Page</td>
-								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="20"/></td>
-								<td class="titleRight"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="3"/></td>
+								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="20"/></td>
+								<td class="titleRight"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="3"/></td>
 							</tr>
 						</table>
 					</th>
@@ -198,7 +198,7 @@ require ('themes/_common/_header.php');
 		if ($this->get_user()) { ?>
 		<span class="nobr">
 				<?php echo $this->get_translation('YouAre'); ?>
-				<img src="<?php echo $this->config['theme_url'] ?>icons/user.gif" width="12" height="12" style="vertical-align: baseline; " alt=""/>
+				<img src="<?php echo $this->config['theme_url'] ?>icons/user.png" width="12" height="12" style="vertical-align: baseline; " alt=""/>
 				<?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 			</span>
 			<small>
