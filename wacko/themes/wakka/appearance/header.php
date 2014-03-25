@@ -104,5 +104,8 @@ echo $this->form_close();
 <div id="content">
 <?php
 // here we show messages
-if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
+if ($message = $this->get_message())
+{
+	$this->show_message($message, 'info');
+}
 ?>
