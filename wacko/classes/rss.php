@@ -107,6 +107,7 @@ class RSS
 		$name			= 'news';
 		$newscluster	= $this->engine->config['news_cluster'];
 		$newslevels		= $this->engine->config['news_levels'];
+		$news_pages		= '';
 		$prefix			= $this->engine->config['table_prefix'];
 
 		//  collect data

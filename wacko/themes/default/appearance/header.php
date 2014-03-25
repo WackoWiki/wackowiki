@@ -356,6 +356,6 @@ echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = tru
 // here we show messages
 if ($message = $this->get_message())
 {
-	echo "<div class=\"info\">$message</div>";
+	$this->show_message($message, 'info');
 }
 ?>

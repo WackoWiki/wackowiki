@@ -81,5 +81,8 @@ require ('themes/_common/_header.php');
 <?php echo $this->form_close(); ?>
 <?php
 // here we show messages
-if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
+if ($message = $this->get_message())
+{
+	$this->show_message($message, 'info');
+}
 ?>
