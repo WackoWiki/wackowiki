@@ -43,53 +43,46 @@ if ($this->has_access('read'))
 			header('HTTP/1.0 404 Not Found');
 		}
 
-		echo '<br /><div class="notice">'.
-			$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
-			'</div>';
+		$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '');
+		$this->show_message($message, 'notice');
 	}
 	else
 	{
 		if ($this->page['deleted'] == 1)
 		{
-			echo '<div class="info">'.
-					#$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
-			'BACKUP of deleted page!'. // TODO: localize and add description: to restore the page you ...
-			'</div>';
-		}
-
-		// comment header?
-		if ($this->page['comment_on_id'])
-		{
-			echo '<div class="commentinfo">'.$this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', '', 0).', '.$this->get_translation('PostedBy').' '.($this->is_wiki_name($this->page['user_name']) ? $this->link($this->page['user_name']) : $this->page['user_name']).' '.$this->get_translation('At').' '.$this->get_time_string_formatted($this->page['modified']).'</div>';
+			#$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
+			$message = 'BACKUP of deleted page!'; // TODO: localize and add description: to restore the page you ...
+			$this->show_message($message, 'info');
 		}
 
 		// revision header
 		if ($this->page['latest'] == 0)
 		{
-			echo '<div class="revisioninfo">'.
-			str_replace('%1', $this->href(),
-			str_replace('%2', $this->tag,
-			str_replace('%3', $this->get_page_time_formatted(),
-			str_replace('%4', '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>',
+			$message =
+				str_replace('%1', $this->href(),
+				str_replace('%2', $this->tag,
+				str_replace('%3', $this->get_page_time_formatted(),
+				str_replace('%4', '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>',
 			$this->get_translation('Revision')))));
+
+
 
 			// if this is an old revision, display ReEdit button
 			if ($this->has_access('write'))
 			{
 				$latest = $this->load_page($this->tag);
-				?>
-				<br />
-				<?php echo $this->form_open('edit') ?>
-				<input type="hidden" name="previous" value="<?php echo $latest['modified'] ?>" />
-				<input type="hidden" name="id" value="<?php echo $this->page['page_id'] ?>" />
-				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" />
-				<input type="submit" value="<?php echo $this->get_translation('ReEditOldRevision') ?>" />
-				<input name="cancel" id="button" type="button" value="<?php echo $this->get_translation('EditCancelButton') ?>" onclick="document.location='<?php echo addslashes($this->href()) ?>';" />
-				<?php echo $this->form_close(); ?>
-				<?php
+
+				$message .= '<br />';
+				$message .= $this->form_open('edit');
+				$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
+				$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
+				$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
+				$message .= '<input type="submit" value="'.$this->get_translation('ReEditOldRevision').'" />';
+				$message .= '<input name="cancel" id="button" type="button" value="'.$this->get_translation('EditCancelButton').'" onclick="document.location=\''.addslashes($this->href()).'\'" />';
+				$message .= $this->form_close();
 			}
 
-			echo "</div>";
+			$this->show_message($message, 'revisioninfo');
 		}
 
 		// count page hit (we don't count for page owner)
@@ -134,7 +127,7 @@ if ($this->has_access('read'))
 
 		// display page body
 		$data = $this->format($this->page['body_r'], 'post_wacko', array('bad' => 'good'));
-		$data = $this->numerate_toc( $data ); //  numerate toc if needed
+		$data = $this->numerate_toc($data); //  numerate toc if needed
 		echo $data;
 
 		$this->set_language($this->user_lang);
@@ -152,7 +145,8 @@ else
 		header('HTTP/1.0 403 Forbidden');
 	}
 
-	echo $this->get_translation('ReadAccessDenied');
+	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
+
 }
 ?>
 <br style="clear: both" />&nbsp;</div>

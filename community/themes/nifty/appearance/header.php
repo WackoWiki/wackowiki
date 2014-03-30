@@ -322,7 +322,7 @@ if ($doubleclick == true)
 		// TODO: position this div static and use some js to hide it on click or after some seconds
 		if ($message = $this->get_message())
 		{
-			echo "<div class=\"info\">$message</div>";
+			$this->show_message($message, 'info');
 		}
 		?>
 

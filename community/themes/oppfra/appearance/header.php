@@ -31,7 +31,7 @@ require ('themes/_common/_header.php');
 // here we show messages
 if ($message = $this->get_message())
 {
-	echo "<div class=\"info\">$message</div>";
+	$this->show_message($message, 'info');
 }
 ?>
 <div class="article_inner">

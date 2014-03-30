@@ -150,6 +150,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 else
 {
 	echo "<div id=\"page\">".$this->get_translation('CommentAccessDenied')."</div>\n";
+	#$this->show_message($message, 'info');
 }
 
 ?>

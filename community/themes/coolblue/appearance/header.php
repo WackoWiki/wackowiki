@@ -162,6 +162,9 @@ if ($this->is_admin()){
 <div id="content">
 <?php
 // here we show messages
-if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
+if ($message = $this->get_message())
+{
+	$this->show_message($message, 'info');
+}
 ?>
 <loc><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?><a title="<?php echo $this->config['search_title_help']?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></loc>

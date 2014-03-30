@@ -29,33 +29,27 @@ if ($this->page['comment_on_id'])
 
 if ($this->has_access('read'))
 {
-	if (!$this->page)
+	/* obsolete code - or do we need an ability to print old revisions?
+	if ($this->page['latest'] == 0)
 	{
-		echo str_replace('%1', $this->href('edit'), $this->get_translation('DoesNotExists'));
-	}
-	else
-	{
-		/* obsolete code - or do we need an ability to print old revisions?
-		if ($this->page['latest'] == 0)
-		{
-			echo "<div class=\"revisioninfo\">".
-			str_replace('%1', $this->href(),
-			str_replace('%2', $this->tag,
-			str_replace('%3', $this->page['modified'],
-			$this->get_translation('Revision')))).".</div>";
-		}*/
+		echo "<div class=\"revisioninfo\">".
+		str_replace('%1', $this->href(),
+		str_replace('%2', $this->tag,
+		str_replace('%3', $this->page['modified'],
+		$this->get_translation('Revision')))).".</div>";
+	}*/
 
-		// build html body
-		$data = $this->page['body'];
+	// build html body
+	$data = $this->page['body'];
 
-		// display page
-		$data = $this->format($data, 'source', array('bad' => 'good'));
-		echo $data;
-	}
+	// display page
+	$data = $this->format($data, 'source', array('bad' => 'good'));
+	echo $data;
 }
 else
 {
-	echo $this->get_translation('ReadAccessDenied');
+	$message = $this->get_translation('ReadAccessDenied');
+	$this->show_message($message, 'info');
 }
 
 ?>

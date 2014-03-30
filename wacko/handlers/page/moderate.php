@@ -5,9 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// TODO:
-//
-
 ?>
 
 <div id="page">

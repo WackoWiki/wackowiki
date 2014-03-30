@@ -211,11 +211,11 @@ if ($user = $this->get_user())
 		echo $this->get_translation('NoneReferrers')."<br />\n";
 	}
 
-
 }
 else
 {
-	echo $this->get_translation('ReadAccessDenied');
+	$message = $this->get_translation('ReadAccessDenied');
+	$this->show_message($message, 'info');
 }
 
 ?>

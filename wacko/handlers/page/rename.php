@@ -191,7 +191,8 @@ if ($registered
 }
 else
 {
-	echo $this->get_translation('NotOwnerAndCantRename');
+	$message = $this->get_translation('NotOwnerAndCantRename');
+	$this->show_message($message, 'info');
 }
 ?></div>
 <?php
