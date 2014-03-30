@@ -497,10 +497,10 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r5_1_0), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 
 					// upload
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, alter_upload_r5_1_0), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, alter_upload_r5_1_1), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, alter_upload_r5_1_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, alter_upload_r5_1_3), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_0), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_1), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_3), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
