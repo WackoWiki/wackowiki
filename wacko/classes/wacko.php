@@ -81,7 +81,6 @@ class Wacko
 		$this->dblink	= $dblink;
 
 		$this->charset	= $this->get_charset();
-		#$this->charset	= "cp1251";
 	}
 
 	// DATABASE
@@ -2280,13 +2279,21 @@ class Wacko
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'message']))
 		{
 			$message = $_SESSION[$this->config['session_prefix'].'_'.'message'];
+			// reset message
 			$_SESSION[$this->config['session_prefix'].'_'.'message'] = '';
+
 			return $message;
 		}
 		else
 		{
 			return null;
 		}
+	}
+
+	function show_message($message, $type='info')
+	{
+		// TODO: filter and sanitize ..
+		echo '<div class="'.$type.'">'.$message."</div>\n";
 	}
 
 	function redirect($url, $permanent = false)
@@ -3243,6 +3250,7 @@ class Wacko
 
 		// Find the string of text
 		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/'.$this->config['standard_handlers'].'\/(.*)$/i';
+
 		// Find the word
 		$this->REGEX_WACKO_HANDLERS = '/\b('.$this->config['standard_handlers'].')\b/i';
 
@@ -6050,6 +6058,7 @@ class Wacko
 				{
 					$error += 5;
 				}
+
 				break;
 
 			case 2:
@@ -6059,6 +6068,7 @@ class Wacko
 				{
 					$error += 5;
 				}
+
 				break;
 
 			case 3:
@@ -6069,8 +6079,10 @@ class Wacko
 				{
 					$error += 5;
 				}
+
 				break;
 		}
+
 		return $error;
 	}
 
@@ -6266,12 +6278,6 @@ class Wacko
 		}
 
 		return $pagination;
-	}
-
-	function show_message($message, $type)
-	{
-		// TODO: filter and sanitize ..
-		echo '<div class="'.$type.'">'.$message.'</div>';
 	}
 
 	// show captcha form on a page. must be incorporated as an input
