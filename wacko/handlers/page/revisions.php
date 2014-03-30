@@ -153,7 +153,8 @@ if ($this->has_access('read'))
 }
 else
 {
-	echo $this->get_translation('ReadAccessDenied');
+	$message = $this->get_translation('ReadAccessDenied');
+	$this->show_message($message, 'info');
 }
 
 ?>

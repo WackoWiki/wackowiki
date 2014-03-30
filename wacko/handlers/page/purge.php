@@ -30,28 +30,31 @@ if ($this->user_is_owner() || $this->is_admin())
 	if (isset($_POST['purge']) && $_POST['purge'] == 1)
 	{
 		// Purge page
-		echo "<br /><em>";
+		$message = "<ol><em>";
 
 		if (isset($_POST['comments']) && $_POST['comments'] == 1)
 		{
 			$this->remove_comments($this->tag);
 			$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogRemovedAllComments', $this->config['language'])));
-			echo $this->get_translation('CommentsPurged')."<br />\n";
+			$message .= "<li>".$this->get_translation('CommentsPurged')."</li>\n";
 		}
 		if (isset($_POST['files']) && $_POST['files'] == 1)
 		{
 			$this->remove_files($this->tag);
 			$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogRemovedAllFiles', $this->config['language'])));
-			echo $this->get_translation('FilesPurged')."<br />\n";
+			$message .= "<li>".$this->get_translation('FilesPurged')."</li>\n";
 		}
 		if (isset($_POST['revisions']) && $_POST['revisions'] == 1 && $this->is_admin())
 		{
 			$this->remove_revisions($this->tag);
 			$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogRemovedAllRevisions', $this->config['language'])));
-			echo $this->get_translation('RevisionsPurged')."<br />\n";
+			$message .= "<li>".$this->get_translation('RevisionsPurged')."</li>\n";
 		}
-		echo '</em>';
-		echo $this->get_translation('ThisActionHavenotUndo')."\n";
+
+		$message .= '</em></ol><br />';
+		$message .= $this->get_translation('ThisActionHavenotUndo')."\n";
+
+		$this->show_message($message, 'info');
 	}
 	else
 	{
@@ -84,7 +87,8 @@ if ($this->user_is_owner() || $this->is_admin())
 }
 else
 {
-	echo "<em>".$this->get_translation('NotOwnerAndCantPurge')."</em>";
+	$message = "<em>".$this->get_translation('NotOwnerAndCantPurge')."</em>";
+	$this->show_message($message, 'info');
 }
 ?>
 </div>

@@ -292,7 +292,8 @@ if ($this->user_is_owner() || $this->is_admin())
 }
 else
 {
-	echo $this->get_translation('ACLAccessDenied');
+	$message = $this->get_translation('ACLAccessDenied');
+	$this->show_message($message, 'info');
 }
 
 ?>

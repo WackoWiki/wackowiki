@@ -78,7 +78,8 @@ if ($this->has_access('create', $this->get_page_id($this->tag)))
 }
 else
 {
-	echo "<em>".$this->get_translation('CreatePageDenied')."</em>";
+	$message = "<em>".$this->get_translation('CreatePageDenied')."</em>";
+	$this->show_message($message, 'info');
 }
 
 echo "";
@@ -93,6 +94,7 @@ if (substr_count($this->tag, '/') > 0)
 	echo $this->form_open('new');
 	echo "<input type=\"hidden\" name=\"option\" value=\"2\" />";
 	echo "<label for=\"create_pageparentcluster\">".$this->get_translation('CreatePageParentCluster').":</label><br />";
+
 	if ($this->has_access('create', $this->get_page_id($parent)))
 	{
 		echo "<tt>".( strlen($parent) > 50 ? "...".substr($parent, -50) : $parent )."/</tt>".
@@ -101,10 +103,10 @@ if (substr_count($this->tag, '/') > 0)
 	}
 	else
 	{
-		echo "<em>".$this->get_translation('CreatePageDenied')."</em>";
+		$message = "<em>".$this->get_translation('CreatePageDenied')."</em>";
+		$this->show_message($message, 'info');
 	}
 
-	echo "";
 	echo $this->form_close();
 	echo "<br />";
 }
@@ -115,7 +117,6 @@ echo "<input type=\"hidden\" name=\"option\" value=\"3\" />";
 echo "<label for=\"create_randompage\">".$this->get_translation('CreateRandomPage').":</label><br />";
 echo "<input id=\"create_randompage\" name=\"tag\" value=\"".( isset($_POST['option']) && $_POST['option'] === 3 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' )."\" size=\"60\" maxlength=\"255\" /> ".
 	"<input id=\"submit_randompage\" type=\"submit\" value=\"".$this->get_translation('CreatePageButton')."\" />";
-echo "";
 echo $this->form_close();
 
 ?>

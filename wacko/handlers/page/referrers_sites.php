@@ -90,7 +90,8 @@ if ($user = $this->get_user())
 }
 else
 {
-	echo $this->get_translation('ReadAccessDenied');
+	$message = $this->get_translation('ReadAccessDenied');
+	$this->show_message($message, 'info');
 }
 
 ?>

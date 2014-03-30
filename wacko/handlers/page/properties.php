@@ -393,7 +393,8 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 else
 {
-	echo $this->get_translation('ReadAccessDenied');
+	$message = $this->get_translation('ReadAccessDenied');
+	$this->show_message($message, 'info');
 }
 ?>
 <br style="clear: both;" />

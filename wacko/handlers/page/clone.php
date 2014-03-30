@@ -5,7 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// TODO:
 ?>
 <div id="page">
 <h3><?php echo $this->get_translation('ClonePage') ?> <?php echo $this->compose_link_to_page($this->tag, '', '', 0) ?></h3>
@@ -13,6 +12,7 @@ if (!defined('IN_WACKO'))
 <?php
 
 $output = '';
+$message = '';
 
 // redirect to show method if page don't exists
 if (!$this->page)
@@ -66,18 +66,19 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 			if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 			{
-				print($this->get_translation('InvalidWikiName')."<br />\n");
+				$message = $this->get_translation('InvalidWikiName')."<br />\n";
+
 			}
 			// if ($this->supertag == $super_new_name)
 			else if ($this->tag == $new_name)
 			{
-				print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n");
+				$message .= str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n";
 			}
 			else
 			{
 				if ($this->supertag != $super_new_name && $page = $this->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 				{
-					print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
+					$message .= str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n";
 				}
 				else
 				{
@@ -93,6 +94,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 							$need_redirect = 1;
 						}
 
+						// edit after creation
 						if ($need_redirect == 1)
 						{
 							$this->set_message($edit_note);
@@ -100,18 +102,20 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 						}
 						else
 						{
-							print(str_replace('%1', $this->link('/'.$new_name), $this->get_translation('PageCloned'))."<br />\n");
+							$message .= str_replace('%1', $this->link('/'.$new_name), $this->get_translation('PageCloned'))."<br />\n";
 						}
 					}
 				}
 			}
+
+			$this->show_message($message, 'info');
 		}
 
 		//massclone
 		if ($need_massclone == 1)
 		{
 			// TODO: clone all sheeps and optional ACLs
-			print "<p><b>".$this->get_translation('MassCloning')."</b><p>";   //!!!
+			echo "<p><b>".$this->get_translation('MassCloning')."</b><p>";   //!!!
 			recursive_clone($this, $this->tag );
 		}
 	}
@@ -154,8 +158,8 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 }
 else
 {
-	echo "<div class=\"error\">Warning: The page handler \"clone\" is only for Wiki Admin</div>";
-	echo $this->get_translation('ReadAccessDenied');
+	$message = $this->get_translation('ReadAccessDenied');
+	$this->show_message($message, 'info');
 }
 
 //$this->redirect($this->href());

@@ -108,7 +108,8 @@ if ($registered
 		}
 		else
 		{
-			echo $this->get_translation('UploadFileNotFound');
+			$message = $this->get_translation('UploadFileNotFound');
+			$this->show_message($message, 'info');
 		}
 
 		echo '</div>'; // ???
@@ -178,7 +179,8 @@ if ($registered
 		}
 		else
 		{
-			echo $this->get_translation('UploadFileNotFound');
+			$message = $this->get_translation('UploadFileNotFound');
+			$this->show_message($message, 'info');
 		}
 
 		echo '</div>';
