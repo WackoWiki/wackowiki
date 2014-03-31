@@ -85,7 +85,6 @@ echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']
  */
 
 $drivers	= array();
-#$drivers[]	= array('mysql',	'mysql_legacy',		'MySQL'); // The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead
 $drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi ('.$lang['Recommended'].')');
 $drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL');
 // $drivers[]	= array('pdo',		'pgsql',		'PDO PostgreSQL');
@@ -150,6 +149,9 @@ echo "    </select>\n";
 ?>
    </ul>
    <br />
+   <?php
+if ($config['is_update'] == false)
+{?>
    <div class="fake_hr_seperator">
       <hr />
    </div>
@@ -179,6 +181,13 @@ for($count = 0; $count < count($engines); $count++)
 ?>
    </ul>
    <br />
+   <?php
+}
+else
+{
+	echo '<input type="hidden" value="'.$config['database_engine'].'" name="config[database_engine]">';
+}
+?>
    <div class="fake_hr_seperator">
       <hr />
    </div>

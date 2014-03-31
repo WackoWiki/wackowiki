@@ -16,6 +16,7 @@ $wacko_config_defaults = array(
 	'database_password' => '',
 	'database_collation' => 0,
 	'database_charset' => '',
+	'database_engine' => 'MyISAM',
 
 	'table_prefix' => 'wacko_',
 	'cookie_prefix' => 'wacko_',
