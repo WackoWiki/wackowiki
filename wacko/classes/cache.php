@@ -239,10 +239,11 @@ class Cache
 
 		foreach ($_GET as $k => $v)
 		{
-			if ($k != 'v' && $k != 'page')
-			{
+			// XXX: from old AddDatetime function
+			#if ($k != 'v' && $k != 'page')
+			#{
 				$_query[$k] = $v;
-			}
+			#}
 		}
 
 		if (isset($_query))
