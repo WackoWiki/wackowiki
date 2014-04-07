@@ -484,6 +484,7 @@ switch($config['database_driver'])
 
 					// cache
 					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r5_1_0), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r5_1_1), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
 
 					// link
 					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r5_1_0), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
@@ -665,6 +666,7 @@ switch($config['database_driver'])
 
 					// cache
 					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r5_1_0, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r5_1_1, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
 
 					// link
 					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r5_1_0, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
