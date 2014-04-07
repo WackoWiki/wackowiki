@@ -18,11 +18,13 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_cache = "CREATE TABLE {$pref}cache (".
+					"cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"name VARCHAR(32) NOT NULL DEFAULT '',".
 					"method VARCHAR(20) NOT NULL DEFAULT '',".
 					"query VARCHAR(100) NOT NULL DEFAULT '',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"cache_time TIMESTAMP NOT NULL,".
+					"PRIMARY KEY (cache_id),".
 					"INDEX (name),".
 					"KEY idx_cache_time (cache_time)".
 				") {$engine} COMMENT='' {$charset}";
