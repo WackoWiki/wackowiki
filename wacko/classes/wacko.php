@@ -1673,14 +1673,21 @@ class Wacko
 		// cache handling
 		if ($this->config['cache'])
 		{
+			// page cache
 			if ($comment_on_id)
 			{
-				$this->cache->cache_invalidate($this->get_page_tag($comment_on_id));
+				$this->cache->invalidate_page_cache($this->get_page_tag($comment_on_id));
 			}
 			else
 			{
-				$this->cache->cache_invalidate($this->tag);
-				$this->cache->cache_invalidate($this->supertag);
+				$this->cache->invalidate_page_cache($this->tag);
+				$this->cache->invalidate_page_cache($this->supertag);
+			}
+
+			// SQL queries cache
+			if ($this->config['cache_sql'])
+			{
+				$this->cache->invalidate_sql_cache();
 			}
 		}
 
@@ -5047,7 +5054,7 @@ class Wacko
 		// remove outdated pages cache, purge sql cache,
 		if (time() > ($this->config['maint_last_cache'] + 3600))
 		{
-			// pages
+			// pages cache
 			if ($ttl = $this->config['cache_ttl'])
 			{
 				// clear from db
@@ -5073,7 +5080,7 @@ class Wacko
 				//$this->log(7, 'Maintenance: cached pages purged');
 			}
 
-			// query results
+			// sql query cache
 			if ($ttl = $this->config['cache_sql_ttl'])
 			{
 				// delete from fs

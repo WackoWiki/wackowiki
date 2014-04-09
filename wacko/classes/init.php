@@ -547,7 +547,7 @@ class Init
 	// cache class methods):
 	//		log		= Log
 	//		check	= check_http_request
-	//		store	= store_to_cache
+	//		store	= store_page_cache
 	function cache($op = '')
 	{
 		// check config data
@@ -579,7 +579,7 @@ class Init
 
 				if (!empty($data))
 				{
-					return $this->cache->store_to_cache($data);
+					return $this->cache->store_page_cache($data);
 				}
 				else
 				{
@@ -730,6 +730,7 @@ class Init
 					echo "<li>Config language: ".$this->config['language']."</li>\n";
 					echo "<li>User selected language: ".(isset($this->engine->user_lang) ? $this->engine->user_lang : '')."</li>\n";
 					echo "<li>Charset: ".$this->engine->get_charset()."</li>\n";
+					echo "<li>HTML Entities Charset: ".HTML_ENTITIES_CHARSET."</li>\n";
 					echo "</ul>\n";
 				}
 

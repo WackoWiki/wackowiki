@@ -75,7 +75,7 @@ class Cache
 	}
 
 	// Get page content from cache
-	function get_cached($page, $method, $query)
+	function get_page_cached($page, $method, $query)
 	{
 		$file_name = $this->construct_id($page, $method, $query);
 
@@ -142,8 +142,8 @@ class Cache
 		return @filemtime($file_name);
 	}
 
-	//Store content to cache
-	function store_to_cache($data, $page = false, $method = false, $query = false)
+	//Store page content to cache
+	function store_page_cache($data, $page = false, $method = false, $query = false)
 	{
 		if (!$page)
 		{
@@ -178,8 +178,8 @@ class Cache
 		return true;
 	}
 
-	//Invalidate the cache
-	function cache_invalidate($page)
+	//Invalidate the page cache
+	function invalidate_page_cache($page)
 	{
 		if ($this->wacko)
 		{
@@ -189,15 +189,15 @@ class Cache
 						"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'";
 			$params	= $this->wacko->load_all($sql);
 
-			$this->log('cache_invalidate page='.$page);
-			$this->log('cache_invalidate query='.$sql);
-			$this->log('cache_invalidate count params='.count($params));
+			$this->log('invalidate_page_cache page='.$page);
+			$this->log('invalidate_page_cache query='.$sql);
+			$this->log('invalidate_page_cache count params='.count($params));
 
 			foreach ($params as $param)
 			{
 				$file_name = $this->construct_id($page, $param['method'], $param['query']);
 
-				$this->log('cache_invalidate delete='.$file_name);
+				$this->log('invalidate_page_cache delete='.$file_name);
 
 				if (@file_exists($file_name))
 				{
@@ -209,7 +209,7 @@ class Cache
 				"DELETE FROM ".$this->wacko->config['table_prefix']."cache ".
 				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
-			$this->log('cache_invalidate end');
+			$this->log('invalidate_page_cache end');
 
 			return true;
 		}
@@ -217,6 +217,31 @@ class Cache
 		{
 			return false;
 		}
+	}
+
+	//Invalidate the SQL cache
+	function invalidate_sql_cache($ttl)
+	{
+		// delete from fs
+		clearstatcache();
+		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_SQL_DIR, '/'));
+
+		while (false !== ($file = readdir($handle)))
+		{
+			/* if (is_file($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file) &&
+			((time() - @filemtime($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file)) > $ttl))
+			{
+				@unlink($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file);
+			} */
+			if ($file != '.' && $file != '..' && !is_dir($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file))
+			{
+				unlink($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file);
+			}
+		}
+
+		closedir($handle);
+
+		//$this->wacko->log(7, 'Maintenance: cached sql results purged');
 	}
 
 	function log($msg)
@@ -294,7 +319,7 @@ class Cache
 					die();
 				}
 
-				$cached = $this->get_cached($page, $method, $query);
+				$cached = $this->get_page_cached($page, $method, $query);
 				header ("Last-Modified: ".$gmt);
 				header ("ETag: \"".$gmt."\"");
 				//header ("Content-Type: text/xml");

@@ -39,9 +39,9 @@ if ($this->is_admin())
 		{
 			@set_time_limit(0);
 
+			// pages cache
 			if (isset($_POST['pages_cache']) && $_POST['pages_cache'] == 1)
 			{
-				// pages
 				$handle = opendir(rtrim($this->config['cache_dir'].CACHE_PAGE_DIR, '/'));
 
 				while (false !== ($file = readdir($handle)))
@@ -53,25 +53,18 @@ if ($this->is_admin())
 				}
 
 				closedir($handle);
-				$this->sql_query("DELETE FROM ".$this->config['table_prefix']."cache");
+				#$this->sql_query("DELETE FROM ".$this->config['table_prefix']."cache");
+				// empties cache table and reset AUTO_INCREMENT value to its start value
+				$this->sql_query("TRUNCATE ".$this->config['table_prefix']."cache");
 			}
 
+			// SQL cache
 			if (isset($_POST['sql_cache']) && $_POST['sql_cache'] == 1)
 			{
-				// queries
-				$handle = opendir(rtrim($this->config['cache_dir'].CACHE_SQL_DIR, '/'));
-
-				while (false !== ($file = readdir($handle)))
-				{
-					if ($file != '.' && $file != '..' && !is_dir($this->config['cache_dir'].CACHE_SQL_DIR.$file))
-					{
-						unlink($this->config['cache_dir'].CACHE_SQL_DIR.$file);
-					}
-				}
-
-				closedir($handle);
+				$this->cache->invalidate_sql_cache();
 			}
 
+			// config cache
 			if (isset($_POST['config_cache']) && $_POST['config_cache'] == 1)
 			{
 				// config
@@ -88,6 +81,7 @@ if ($this->is_admin())
 				closedir($handle);
 			}
 
+			// feeds cache
 			if (isset($_POST['config_feed']) && $_POST['config_feed'] == 1)
 			{
 				// feeds

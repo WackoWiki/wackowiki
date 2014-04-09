@@ -209,13 +209,13 @@ if ($user == false)
 		// here we show messages
 		if ($message = $engine->get_message())
 		{
-			echo "<div class=\"info\">$message</div>";
+			$engine->show_message($message, 'info');
 		}
 ?>
 		<div id="loginbox">
 			<strong><?php echo $engine->get_translation('Authorization'); ?></strong><br />
 			<?php echo $engine->get_translation('AuthorizationTip'); ?>
-			<br /><br />
+			<br /><?php #echo $engine->charset; // XXX: only for testing ?><br />
 			<form action="admin.php" method="post" name="emergency">
 				<label for="password"><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong></label>
 				<input name="password" id="password" type="password" autocomplete="off" value="" />
@@ -389,7 +389,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 // here we show messages
 if ($message = $engine->get_message())
 {
-	echo "<div class=\"info\">$message</div>";
+	$engine->show_message($message, 'info');
 }
 ?>
 <!-- begin page output -->

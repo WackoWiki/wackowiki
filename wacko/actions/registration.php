@@ -42,8 +42,8 @@ if (isset($_GET['confirm']))
 		// cache handling
 		if ($this->config['cache'])
 		{
-			$this->cache->cache_invalidate($this->tag);
-			$this->cache->cache_invalidate($this->supertag);
+			$this->cache->invalidate_page_cache($this->tag);
+			$this->cache->invalidate_page_cache($this->supertag);
 		}
 		// log event
 		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
