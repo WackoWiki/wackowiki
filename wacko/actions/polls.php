@@ -53,20 +53,20 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 
 			// update cache
 			$this->set_message($this->get_translation('PollsDone'));
-			$this->cache->cache_invalidate($this->supertag);
+			$this->cache->invalidate_page_cache($this->supertag);
 		}
 	}
 	else if ($polls_obj->poll_is_voted($header['poll_id']))
 	{
 		$vote = $header['poll_id'];
 		$this->set_message($this->get_translation('PollsAlreadyVoted'));
-		$this->cache->cache_invalidate($this->supertag);
+		$this->cache->invalidate_page_cache($this->supertag);
 	}
 	else if ($header['start'] != SQL_NULLDATE && $header['end'] != SQL_NULLDATE)
 	{
 		$vote = $header['poll_id'];
 		$this->set_message($this->get_translation('PollsAlreadyEnded'));
-		$this->cache->cache_invalidate($this->supertag);
+		$this->cache->invalidate_page_cache($this->supertag);
 	}
 	else
 	{

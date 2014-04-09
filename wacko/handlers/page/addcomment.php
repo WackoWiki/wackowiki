@@ -40,7 +40,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 	if (!$body)
 	{
-		if (!$user) $this->cache->cache_invalidate($this->supertag);
+		if (!$user)
+		{
+			$this->cache->invalidate_page_cache($this->supertag);
+		}
+
 		$this->set_message($this->get_translation('EmptyComment'));
 	}
 	else if (isset($_POST['preview']))
@@ -48,7 +52,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// comment preview
 		if (!$user)
 		{
-			$this->cache->cache_invalidate($this->supertag);
+			$this->cache->invalidate_page_cache($this->supertag);
 		}
 
 		$_SESSION['preview']	= $body;
@@ -62,7 +66,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// posting flood protection
 		if (!$user)
 		{
-			$this->cache->cache_invalidate($this->supertag);
+			$this->cache->invalidate_page_cache($this->supertag);
 		}
 
 		$this->set_message('<div class="error">'.str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded')).'</div>');

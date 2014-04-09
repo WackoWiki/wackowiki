@@ -99,7 +99,7 @@ if (isset($_POST['_user_menu']))
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."menu SET ".
 					"menu_position	= '".quote($this->dblink, $item['menu_position'])."', ".
-					"menu_title		= '".quote($this->dblink, substr(trim($_POST['title_'.$item['menu_id']]),0,250))."' ".
+					"menu_title		= '".quote($this->dblink, substr(trim($_POST['title_'.$item['menu_id']]), 0, 250))."' ".
 				"WHERE menu_id = '".quote($this->dblink, $item['menu_id'])."' ".
 				"LIMIT 1");
 		}

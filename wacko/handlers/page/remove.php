@@ -168,6 +168,12 @@ if ($this->is_admin() ||
 				"LIMIT 1");
 		}
 
+		// purge SQL queries cache
+		if ($this->config['cache_sql'])
+		{
+			$this->cache->invalidate_sql_cache();
+		}
+
 		// log event
 		if (!$comment_on_id)
 		{
