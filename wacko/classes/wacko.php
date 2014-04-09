@@ -4963,13 +4963,14 @@ class Wacko
 	{
 		// delete from fs
 		clearstatcache();
-		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_CONFIG_DIR, '/'));
+		$directory	= $this->config['cache_dir'].CACHE_CONFIG_DIR;
+		$handle		= opendir(rtrim($directory, '/'));
 
 		while (false !== ($file = readdir($handle)))
 		{
-			if (is_file($this->config['cache_dir'].CACHE_CONFIG_DIR.$file))
+			if (is_file($directory.$file))
 			{
-				@unlink($this->config['cache_dir'].CACHE_CONFIG_DIR.$file);
+				@unlink($directory.$file);
 			}
 		}
 
@@ -5064,14 +5065,15 @@ class Wacko
 
 				// delete from fs
 				clearstatcache();
-				$handle = opendir(rtrim($this->config['cache_dir'].CACHE_PAGE_DIR, '/'));
+				$directory	= $this->config['cache_dir'].CACHE_PAGE_DIR;
+				$handle		= opendir(rtrim($directory, '/'));
 
 				while (false !== ($file = readdir($handle)))
 				{
-					if (is_file($this->config['cache_dir'].CACHE_PAGE_DIR.$file) &&
-					((time() - @filemtime($this->config['cache_dir'],CACHE_PAGE_DIR.$file)) > $ttl))
+					if (is_file($directory.$file) &&
+					((time() - @filemtime($directory.$file)) > $ttl))
 					{
-						@unlink($this->config['cache_dir'].CACHE_PAGE_DIR.$file);
+						@unlink($directory.$file);
 					}
 				}
 
@@ -5085,14 +5087,15 @@ class Wacko
 			{
 				// delete from fs
 				clearstatcache();
-				$handle = opendir(rtrim($this->config['cache_dir'].CACHE_SQL_DIR, '/'));
+				$directory	= $this->config['cache_dir'].CACHE_SQL_DIR;
+				$handle		= opendir(rtrim($directory, '/'));
 
 				while (false !== ($file = readdir($handle)))
 				{
-					if (is_file($this->config['cache_dir'].CACHE_SQL_DIR.$file) &&
-					((time() - @filemtime($this->config['cache_dir'].CACHE_SQL_DIR.$file)) > $ttl))
+					if (is_file($directory.$file) &&
+					((time() - @filemtime($directory.$file)) > $ttl))
 					{
-						@unlink($this->config['cache_dir'].CACHE_SQL_DIR.$file);
+						@unlink($directory.$file);
 					}
 				}
 

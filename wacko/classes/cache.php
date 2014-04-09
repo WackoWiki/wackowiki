@@ -220,22 +220,23 @@ class Cache
 	}
 
 	//Invalidate the SQL cache
-	function invalidate_sql_cache($ttl)
+	function invalidate_sql_cache($ttl='')
 	{
 		// delete from fs
 		clearstatcache();
-		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_SQL_DIR, '/'));
+		$directory	= $this->wacko->config['cache_dir'].CACHE_SQL_DIR;
+		$handle		= opendir(rtrim($directory, '/'));
 
 		while (false !== ($file = readdir($handle)))
 		{
-			/* if (is_file($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file) &&
-			((time() - @filemtime($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file)) > $ttl))
+			/* if (is_file($directory.$file) &&
+			((time() - @filemtime($directory.$file)) > $ttl))
 			{
-				@unlink($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file);
+				@unlink($directory.$file);
 			} */
-			if ($file != '.' && $file != '..' && !is_dir($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file))
+			if ($file != '.' && $file != '..' && !is_dir($directory.$file))
 			{
-				unlink($this->wacko->config['cache_dir'].CACHE_SQL_DIR.$file);
+				unlink($directory.$file);
 			}
 		}
 

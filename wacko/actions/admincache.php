@@ -42,13 +42,14 @@ if ($this->is_admin())
 			// pages cache
 			if (isset($_POST['pages_cache']) && $_POST['pages_cache'] == 1)
 			{
-				$handle = opendir(rtrim($this->config['cache_dir'].CACHE_PAGE_DIR, '/'));
+				$directory	= $this->config['cache_dir'].CACHE_PAGE_DIR;
+				$handle		= opendir(rtrim($directory, '/'));
 
 				while (false !== ($file = readdir($handle)))
 				{
-					if ($file != '.' && $file != '..' && !is_dir($this->config['cache_dir'].CACHE_PAGE_DIR.$file))
+					if ($file != '.' && $file != '..' && !is_dir($directory.$file))
 					{
-						unlink($this->config['cache_dir'].CACHE_PAGE_DIR.$file);
+						unlink($directory.$file);
 					}
 				}
 
@@ -68,13 +69,14 @@ if ($this->is_admin())
 			if (isset($_POST['config_cache']) && $_POST['config_cache'] == 1)
 			{
 				// config
-				$handle = opendir(rtrim($this->config['cache_dir'].CACHE_CONFIG_DIR, '/'));
+				$directory	= $this->config['cache_dir'].CACHE_CONFIG_DIR;
+				$handle		= opendir(rtrim($directory, '/'));
 
 				while (false !== ($file = readdir($handle)))
 				{
-					if ($file != '.' && $file != '..' && !is_dir($this->config['cache_dir'].CACHE_CONFIG_DIR.$file))
+					if ($file != '.' && $file != '..' && !is_dir($directory.$file))
 					{
-						unlink($this->config['cache_dir'].CACHE_CONFIG_DIR.$file);
+						unlink($directory.$file);
 					}
 				}
 
@@ -85,20 +87,22 @@ if ($this->is_admin())
 			if (isset($_POST['config_feed']) && $_POST['config_feed'] == 1)
 			{
 				// feeds
-				$handle = opendir(rtrim($this->config['cache_dir'].CACHE_FEED_DIR, '/'));
+				$directory	= $this->config['cache_dir'].CACHE_FEED_DIR;
+				$handle		= opendir(rtrim($directory, '/'));
 
 				while (false !== ($file = readdir($handle)))
 				{
-					if (!is_dir($this->config['cache_dir'].CACHE_FEED_DIR.$file))
+					if (!is_dir($directory.$file))
 					{
-						unlink($this->config['cache_dir'].CACHE_FEED_DIR.$file);
+						unlink($directory.$file);
 					}
 				}
 
 				closedir($handle);
 			}
 
-			echo $this->get_translation('CacheCleared');
+			$message = $this->get_translation('CacheCleared');
+			$this->show_message($message, 'info');
 		}
 	}
 }
