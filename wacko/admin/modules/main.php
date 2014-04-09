@@ -40,13 +40,14 @@ function admin_lock(&$engine, &$module)
 	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
 	{
 		// pages
-		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_PAGE_DIR, '/'));
+		$directory	= $engine->config['cache_dir'].CACHE_PAGE_DIR;
+		$handle		= opendir(rtrim($directory, '/'));
 
 		while (false !== ($file = readdir($handle)))
 		{
-			if (!is_dir($engine->config['cache_dir'].CACHE_PAGE_DIR.$file))
+			if (!is_dir($directory.$file))
 			{
-				unlink($engine->config['cache_dir'].CACHE_PAGE_DIR.$file);
+				unlink($directory.$file);
 			}
 		}
 
@@ -57,26 +58,28 @@ function admin_lock(&$engine, &$module)
 		$engine->cache->invalidate_sql_cache();
 
 		// config
-		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_CONFIG_DIR, '/'));
+		$directory	= $engine->config['cache_dir'].CACHE_CONFIG_DIR;
+		$handle		= opendir(rtrim($directory, '/'));
 
 		while (false !== ($file = readdir($handle)))
 		{
-			if ($file != '.' && $file != '..' && !is_dir($engine->config['cache_dir'].CACHE_CONFIG_DIR.$file))
+			if ($file != '.' && $file != '..' && !is_dir($directory.$file))
 			{
-				unlink($engine->config['cache_dir'].CACHE_CONFIG_DIR.$file);
+				unlink($directory.$file);
 			}
 		}
 
 		closedir($handle);
 
 		// feeds
-		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_FEED_DIR, '/'));
+		$directory	= $engine->config['cache_dir'].CACHE_FEED_DIR;
+		$handle		= opendir(rtrim($directory, '/'));
 
 		while (false !== ($file = readdir($handle)))
 		{
-			if (!is_dir($engine->config['cache_dir'].CACHE_FEED_DIR.$file))
+			if (!is_dir($directory.$file))
 			{
-				unlink($engine->config['cache_dir'].CACHE_FEED_DIR.$file);
+				unlink($directory.$file);
 			}
 		}
 
