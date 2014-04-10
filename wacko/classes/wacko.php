@@ -4138,7 +4138,7 @@ class Wacko
 	}
 
 	// COMMENTS AND COUNTS
-	// TODO: "AND p.deleted <> '1' "
+
 	// recount all comments for a given page
 	function count_comments($comment_on_id, $deleted = 0)
 	{
@@ -4155,9 +4155,9 @@ class Wacko
 	}
 
 	// get current number of comments
-	function get_comments_count($tag = '')
+	function get_comments_count($page_id = '')
 	{
-		if ($this->page && $tag == false)
+		if ($this->page && $page_id == false)
 		{
 			return $this->page['comments'];
 		}
@@ -4166,10 +4166,10 @@ class Wacko
 			$count = $this->load_single(
 				"SELECT comments ".
 				"FROM {$this->config['table_prefix']}page ".
-				"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 				"LIMIT 1");
 
-			return $count['comments'];
+			return (int)$count['comments'];
 		}
 
 		return false;
