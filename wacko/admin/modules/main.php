@@ -58,18 +58,7 @@ function admin_lock(&$engine, &$module)
 		$engine->cache->invalidate_sql_cache();
 
 		// config
-		$directory	= $engine->config['cache_dir'].CACHE_CONFIG_DIR;
-		$handle		= opendir(rtrim($directory, '/'));
-
-		while (false !== ($file = readdir($handle)))
-		{
-			if ($file != '.' && $file != '..' && !is_dir($directory.$file))
-			{
-				unlink($directory.$file);
-			}
-		}
-
-		closedir($handle);
+		$engine->cache->destroy_config_cache();
 
 		// feeds
 		$directory	= $engine->config['cache_dir'].CACHE_FEED_DIR;

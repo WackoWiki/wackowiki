@@ -245,6 +245,27 @@ class Cache
 		//$this->wacko->log(7, 'Maintenance: cached sql results purged');
 	}
 
+	// destroy cache data #$cache->destroy('config');
+	function destroy_config_cache()
+	{
+		// delete from fs
+		clearstatcache();
+		$directory	= $this->wacko->config['cache_dir'].CACHE_CONFIG_DIR;
+		$handle		= opendir(rtrim($directory, '/'));
+
+		while (false !== ($file = readdir($handle)))
+		{
+			if (is_file($directory.$file)) // if ($file != '.' && $file != '..' && !is_dir($directory.$file))
+			{
+				@unlink($directory.$file);
+			}
+		}
+
+		closedir($handle);
+
+		//$this->log(7, 'Maintenance: cached config destroyed');
+	}
+
 	function log($msg)
 	{
 		if ($this->debug > 1)

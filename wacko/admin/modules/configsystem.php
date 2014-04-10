@@ -69,7 +69,7 @@ function admin_configsystem(&$engine, &$module)
 			$engine->set_config($key, $value);
 		}
 
-		$engine->destroy_config_cache();
+		$engine->cache->destroy_config_cache();
 		$engine->log(1, 'Updated config parameters');
 		$engine->redirect(rawurldecode($engine->href()));
 	}

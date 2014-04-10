@@ -68,19 +68,7 @@ if ($this->is_admin())
 			// config cache
 			if (isset($_POST['config_cache']) && $_POST['config_cache'] == 1)
 			{
-				// config
-				$directory	= $this->config['cache_dir'].CACHE_CONFIG_DIR;
-				$handle		= opendir(rtrim($directory, '/'));
-
-				while (false !== ($file = readdir($handle)))
-				{
-					if ($file != '.' && $file != '..' && !is_dir($directory.$file))
-					{
-						unlink($directory.$file);
-					}
-				}
-
-				closedir($handle);
+				$this->cache->destroy_config_cache();
 			}
 
 			// feeds cache
