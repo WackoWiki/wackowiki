@@ -50,7 +50,7 @@ function admin_configemail(&$engine, &$module)
 			$engine->set_config($key, $value);
 		}
 
-		$engine->destroy_config_cache();
+		$engine->cache->destroy_config_cache();
 		$engine->log(1, '!!Updated email settings!!');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
