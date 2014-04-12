@@ -728,6 +728,7 @@ $wacko_translation = array(
 	'FileAdded' => 'Added',
 	'FileSize' => 'Size',
 	'FileName' => 'Name',
+	'FileSyntax' => 'Syntax',
 
 	'Files_0' => 'Sellel lehel ei ole faile.',
 	'Files_1' => 'Siin lehel on üks fail.',

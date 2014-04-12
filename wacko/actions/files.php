@@ -25,6 +25,7 @@ if (!isset($global))	$global = '';
 if (!isset($tag))		$tag = ''; // FIXME: $tag == $page
 if (!isset($owner))		$owner = '';
 if (!isset($page))		$page = '';
+if (!isset($ppage))		$ppage = '';
 if (!isset($legend))	$legend = '';
 if (!isset($picture))	$picture = null;
 if (!isset($max))		$max = '';

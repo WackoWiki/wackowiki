@@ -735,6 +735,7 @@ $wacko_translation = array(
 	'FileAdded'					=> 'Added',
 	'FileSize'					=> 'Size',
 	'FileName'					=> 'Name',
+	'FileSyntax'				=> 'Syntax',
 
 	'Files_0'					=> 'Attach Files',
 	'Files_1'					=> 'Show Files (1 file)',
