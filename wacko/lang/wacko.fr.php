@@ -728,6 +728,7 @@ $wacko_translation = array(
 	'FileAdded'					=> 'Ajouté',
 	'FileSize'					=> 'Taille',
 	'FileName'					=> 'No',
+	'FileSyntax'				=> 'Syntax',
 
 	'Files_0'					=> 'Aucun fichier n&rsquo;est joint à cette page. ',
 	'Files_1'					=> 'Un seul fichier est joint à cette page.',

@@ -728,6 +728,7 @@ $wacko_translation = array(
 	'FileAdded' => 'Added',
 	'FileSize' => 'Size',
 	'FileName' => 'Name',
+	'FileSyntax' => 'Syntax',
 
 	'Files_0' => 'Der er ingen filer tilknyttet denne side.',
 	'Files_1' => 'Der er en fil tilknyttet denne side.',

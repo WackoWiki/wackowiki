@@ -72,7 +72,9 @@ if ($registered
 				$this->page['owner_id'] == $this->get_user_id())) || (
 				$file['user_id'] == $this->get_user_id()))
 			{
-				echo '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
+				$message = '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
+				$this->show_message($message, 'info');
+
 				echo $this->form_open('upload');
 				// !!!!! place here a reference to delete files
 ?>
@@ -141,7 +143,9 @@ if ($registered
 				$this->page['owner_id'] == $this->get_user_id())) || (
 				$file['user_id'] == $this->get_user_id()))
 			{
-				echo '<strong>'.$this->get_translation('UploadEditConfirm').'</strong>';
+				$message = '<strong>'.$this->get_translation('UploadEditConfirm').'</strong>';
+				$this->show_message($message, 'info');
+
 				echo $this->form_open('upload');
 				// !!!!! place here a reference to delete files
 ?>
@@ -523,7 +527,7 @@ if ($registered
 			<li><?php echo $this->link('file:'.$small_name); ?>
 				<ul>
 					<li><span>&nbsp;</span></li>
-
+					<li><span class="info_title"><?php echo $this->get_translation('FileSyntax'); ?>:</span><?php echo '<code>file:'.$small_name.'</code>'; ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($uploaded_dt); ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$file_size_kb.' '.$this->get_translation('UploadKB').')'; ?></li>
 					<li><span>&nbsp;</span></li>
