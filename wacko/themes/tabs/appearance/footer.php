@@ -55,30 +55,33 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 <img src="<?php echo $this->config['base_url'];?>images/z.png" width="5" height="1" alt="" align="left" />
 <img src="<?php echo $this->config['base_url'];?>images/z.png" width="5" height="1" alt="" align="right" />
 <?php
-	echo_tab(
-	$this->href('show'),
-	$this->get_translation('ShowTip'),
-	$this->has_access('read') ? $this->get_translation('ShowText') : "",
-	$this->method != 'show'
-	);
 
-	echo_tab(
-	$this->href('edit'),
-	$this->get_translation('EditTip'),
-	$this->has_access('write') ? $this->get_translation('EditText') : "",
-	$this->method != 'edit'
-	);
-
-	echo_tab(
-	$this->href('revisions'),
-	$this->get_translation('RevisionTip'),
-	$this->page['modified'] ? $this->get_page_time_formatted() : "",
-	$this->method != 'revisions'
-	);
-
-	// if this page exists
-	if ($this->page)
+// if this page exists
+if ($this->page)
+{
+	if ($this->has_access('read'))
 	{
+		echo_tab(
+		$this->href('show'),
+		$this->get_translation('ShowTip'),
+		$this->has_access('read') ? $this->get_translation('ShowText') : "",
+		$this->method != 'show'
+		);
+
+		echo_tab(
+		$this->href('edit'),
+		$this->get_translation('EditTip'),
+		$this->has_access('write') ? $this->get_translation('EditText') : "",
+		$this->method != 'edit'
+		);
+
+		echo_tab(
+		$this->href('revisions'),
+		$this->get_translation('RevisionTip'),
+		$this->page['modified'] ? $this->get_page_time_formatted() : "",
+		$this->method != 'revisions'
+		);
+
 		if($this->has_access('write') && $this->get_user() || $this->is_admin())
 		{
 			echo_tab(
@@ -134,34 +137,38 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 		$this->method != 'referrers',
 		"2"
 		);
-	} ?>
+	}
+} ?>
 <div class="TabSpace">
 <div class="TabText" style="padding-left: 10px">
 <?php
 // if this page exists
 if ($this->page)
 {
-	// if owner is current user
-	if ($this->user_is_owner())
+	if ($this->has_access('read'))
 	{
-		echo $this->get_translation('YouAreOwner');
-	}
-	else
-	{
-		if ($owner = $this->get_page_owner())
+		// if owner is current user
+		if ($this->user_is_owner())
 		{
-			if ($owner == 'System')
-			{
-				echo $this->get_translation('Owner').": ".$owner."\n";
-			}
-			else
-			{
-				echo $this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."\n";
-			}
+			echo $this->get_translation('YouAreOwner');
 		}
-		else if (!$this->page['comment_on_id'])
+		else
 		{
-			print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
+			if ($owner = $this->get_page_owner())
+			{
+				if ($owner == 'System')
+				{
+					echo $this->get_translation('Owner').": ".$owner."\n";
+				}
+				else
+				{
+					echo $this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."\n";
+				}
+			}
+			else if (!$this->page['comment_on_id'])
+			{
+				print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
+			}
 		}
 	}
 }

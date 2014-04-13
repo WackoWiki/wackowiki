@@ -18,46 +18,34 @@ echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"
 // If this page exists
 if ($this->page)
 {
-	// Revisions link
-	echo (( $this->hide_revisions === false || $this->is_admin() )
-			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
-			: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
-		);
-
-	// Show Owner of this page
-	if ($owner = $this->get_page_owner())
+	if ($this->has_access('read'))
 	{
-		if ($owner == 'System')
+		// Revisions link
+		echo (( $this->hide_revisions === false || $this->is_admin() )
+				? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
+				: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
+			);
+
+		// Show Owner of this page
+		if ($owner = $this->get_page_owner())
 		{
-			echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+			if ($owner == 'System')
+			{
+				echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+			}
+			else
+			{
+				echo "<li>".$this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."</li>\n";
+			}
 		}
-		else
+		else if (!$this->page['comment_on_id'])
 		{
-			echo "<li>".$this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."</li>\n";
+			echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)</li>\n" : "");
 		}
+
+		// Permalink
+		echo "<li>".$this->action('permalink')."</li>\n";
 	}
-	else if (!$this->page['comment_on_id'])
-	{
-		echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)</li>\n" : "");
-	}
-
-	#if($this->has_access('write') && $this->get_user() || $this->is_admin())
-	#{
-		// referrers icon
-	#	echo "<li><a href=\"".$this->href('referrers')."\"><img src=\"".$this->config['theme_url']."icons/referrer.png\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a></li>\n";
-	#}
-
-	#if ($this->get_user())
-	#{
-		// Watch/Unwatch icon
-		#echo ($this->iswatched === true ? "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  /></a></li>\n" : "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a></li>\n");
-	#}
-
-	// Print icon
-	# echo "<li><a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.png\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a></li>\n";
-
-	// Permalink
-	echo "<li>".$this->action('permalink')."</li>\n";
 }
 
 ?>
