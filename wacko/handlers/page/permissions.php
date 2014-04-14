@@ -36,6 +36,7 @@ if ($this->user_is_owner() || $this->is_admin())
 		$_create_acl	= isset($_POST['create_acl']) ? $_POST['create_acl'] : '';
 		$_upload_acl	= isset($_POST['upload_acl']) ? $_POST['upload_acl'] : '';
 		$_new_owner		= isset($_POST['new_owner']) ? $_POST['new_owner'] : '';
+
 		// acls for page or entire cluster
 		$need_massacls	= 0;
 
@@ -228,6 +229,13 @@ if ($this->user_is_owner() || $this->is_admin())
 
 		// redirect back to page
 		$this->set_message($message.'!');
+
+		// purge SQL queries cache
+		if ($this->config['cache_sql'])
+		{
+			$this->cache->invalidate_sql_cache();
+		}
+
 		$this->redirect($this->href());
 	}
 	else

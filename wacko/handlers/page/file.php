@@ -11,6 +11,7 @@ if (!isset($is_plain)) $is_plain = '';
 $error = '';
 $file404 = 'images/upload404.png';
 $file403 = 'images/upload403.png';
+$file_path = '';
 
 // 1. check existence
 if (isset($_GET['global']))
@@ -23,69 +24,82 @@ else
 }
 
 $file = $this->load_single(
-	"SELECT u.user_name AS user, f.upload_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits ".
+	"SELECT u.user_name AS user, f.user_id, f.upload_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits ".
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 		"AND f.file_name='".quote($this->dblink, $_GET['get'])."' ".
 	"LIMIT 1");
 
-if (count($file) > 0)
+if ($file)
 {
-	// 2. check rights
-	if ($this->is_admin() || (isset($file['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
-	($this->has_access('read')) || ($file['user_id'] == $this->get_user_id()) )
+	if (count($file) > 0)
 	{
-		$filepath = $this->config['upload_path'.($page_id ? '_per_page' : '')].'/'.
-		($page_id ? ('@'.$this->page['page_id'].'@') : '').
-		$file['file_name'];
+		// 2. check rights
+		if ($this->is_admin() || (isset($file['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
+		($this->has_access('read')) || ($file['user_id'] == $this->get_user_id()) )
+		{
+			$file_path = $this->config['upload_path'.($page_id ? '_per_page' : '')].'/'.
+			($page_id ? ('@'.$this->page['page_id'].'@') : '').
+			$file['file_name'];
+		}
+		else
+		{
+			$error = 403;
+		}
+	}
+
+	// 3. passthru
+	$extension = strtolower($file['file_ext']);
+
+	if (($extension == 'gif') || ($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'png'))
+	{
+		$is_image = true;
+		header('Content-Type: image/'.$extension);
+	}
+	else if ($extension == 'txt')
+	{
+		$is_plain = true;
+		header('Content-Type: text/plain');
+	}
+	else if ($extension == 'pdf')
+	{
+		header('Cache-control: private');
+		header('Content-Type: application/pdf');
 	}
 	else
 	{
-		$error = 403;
+		header('Cache-control: private');
+		header('Content-Type: application/download');
 	}
 }
 else
 {
 	$error = 404;
-}
 
-// 3. passthru
-$extension = strtolower($file['file_ext']);
-
-if (($extension == 'gif') || ($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'png'))
-{
-	$is_image = true;
-	header('Content-Type: image/'.$extension);
-
-	if ($error)
+	if (!headers_sent())
 	{
-		$filepath = 'images/upload'.$error.'.png';
-
-		if (!headers_sent())
-		{
-			header('HTTP/1.0 404 Not Found');
-		}
-
+		header('HTTP/1.0 404 Not Found');
 	}
 }
-else if ($extension == 'txt')
-{
-	$is_plain = true;
-	header('Content-Type: text/plain');
-}
-else if ($extension == 'pdf')
-{
-	header('Cache-control: private');
-	header('Content-Type: application/pdf');
-}
-else
-{
-	header('Cache-control: private');
-	header('Content-Type: application/download');
-}
 
-if ($filepath)
+#########################################################
+if ($error)
+{
+	$is_image = true;
+	$extension = 'png';
+	header('Content-Type: image/'.$extension);
+	$file_path = 'images/upload'.$error.'.png';
+
+	if (!headers_sent())
+	{
+		header('HTTP/1.0 404 Not Found'); // 403
+	}
+
+}
+#########################################################
+
+if ($file_path)
 {
 	header('Content-Disposition:'.($is_image || $is_plain ? '' : ' attachment;').' filename="'.$file['file_name'].'"');
 
@@ -99,7 +113,7 @@ if ($filepath)
 			"LIMIT 1");
 	}
 
-	$f = @fopen($filepath, 'rb');
+	$f = @fopen($file_path, 'rb');
 	@fpassthru ($f);
 }
 else if ($error == 404)
