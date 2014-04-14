@@ -163,7 +163,7 @@ if (isset($_POST['_user_menu']))
 							$menu_formatted[] = array ($menu_item[0], $menu_item[1], $this->format($menu_item[1], 'wacko'));
 						}
 
-						$_SESSION[$this->config['session_prefix'].'_'.'menu_link']	= $menu_page_ids;
+						$_SESSION[$this->config['session_prefix'].'_'.'menu_id']	= $menu_page_ids;
 						$_SESSION[$this->config['session_prefix'].'_'.'menu']		= $menu_formatted;
 					}
 				}
@@ -214,8 +214,16 @@ if (isset($_POST['_user_menu']))
 	}
 
 	// reload user data
-	$this->set_user($this->load_user('', $_user_id, '', true), 0, 1, true);
-	$this->set_menu(MENU_USER);
+	#$this->set_user($this->load_user('', $_user_id, '', true), 0, 1, true);
+
+	// purge SQL queries cache
+	if ($this->config['cache_sql'])
+	{
+		$this->cache->invalidate_sql_cache();
+	}
+
+	$this->set_menu(MENU_USER, 1);
+	$this->redirect($this->href('', '', 'menu'));
 }
 
 if ($_user_id)

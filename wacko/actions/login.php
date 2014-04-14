@@ -29,6 +29,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 	}
 
 	$_POST['action'] = 'logout';
+	$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
 }
 
 // logout
@@ -59,43 +60,47 @@ else if ($user = $this->get_user())
 	echo '<div class="cssform">';
 	echo '<h3>'.$this->get_translation('Hello').", ".$this->compose_link_to_page($this->config['users_page'].'/'.$user['user_name'], '', $user['user_name']).'!</h3>';
 
-	if ($user['session_time'] == true)
+	if ($this->get_cookie('auth'))
 	{
-		$output .= $this->get_translation('LastVisit').' <tt>'. $this->get_time_string_formatted($user['session_time']).'</tt>.<br />';
+		if ($user['session_time'] == true)
+		{
+			$output .= $this->get_translation('LastVisit').' <tt>'. $this->get_time_string_formatted($user['session_time']).'</tt>.<br />';
+		}
+
+		$output .= $this->get_translation('SessionEnds').' <tt>';
+
+		$cookie = explode(';', $this->get_cookie('auth'));
+
+		// session expiry date
+		$output .= $this->get_unix_time_formatted($cookie[2]).'</tt> ';
+		// session time left
+		$time_diff = $cookie[2] - time();
+
+		if ($time_diff > 2 * 24 * 3600)
+		{
+			$output .= '(in '.ceil($time_diff / 24 / 3600).' days).';
+		}
+		else if ($time_diff > 5 * 3600)
+		{
+			$output .= '(in '.ceil($time_diff / 3600).' hours).';
+		}
+		else
+		{
+			$output .= '(in '.ceil($time_diff / 60).' minutes).';
+		}
+
+		$output .= '<br />';
+
+		// Only allow your session to be used from this IP address.
+		$output .= $this->get_translation('BindSessionIp').' '. ( $user['validate_ip'] == 1 ? $this->get_translation('BindSessionIpOn').' <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).'.<br />';
+
+		if ($this->config['tls'] == true || $this->config['tls_proxy'] == true)
+		{
+			$output .= $this->get_translation('TrafficProtection').' <tt>'. ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ).'</tt>.';
+		}
+
+		$this->set_message($output);
 	}
-
-	$output .= $this->get_translation('SessionEnds').' <tt>';
-
-	$cookie = explode(';', $this->get_cookie('auth'));
-	// session expiry date
-	$output .= $this->get_unix_time_formatted($cookie[2]).'</tt> ';
-	// session time left
-	$time_diff = $cookie[2] - time();
-
-	if ($time_diff > 2 * 24 * 3600)
-	{
-		$output .= '(in '.ceil($time_diff / 24 / 3600).' days).';
-	}
-	else if ($time_diff > 5 * 3600)
-	{
-		$output .= '(in '.ceil($time_diff / 3600).' hours).';
-	}
-	else
-	{
-		$output .= '(in '.ceil($time_diff / 60).' minutes).';
-	}
-
-	$output .= '<br />';
-
-	// Only allow your session to be used from this IP address.
-	$output .= $this->get_translation('BindSessionIp').' '. ( $user['validate_ip'] == 1 ? $this->get_translation('BindSessionIpOn').' <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).'.<br />';
-
-	if ($this->config['tls'] == true || $this->config['tls_proxy'] == true)
-	{
-		$output .= $this->get_translation('TrafficProtection').' <tt>'. ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ).'</tt>.';
-	}
-
-	$this->set_message($output);
 
 	echo "<p><input class=\"CancelBtn\" type=\"button\" value=\"".$this->get_translation('LogoutButton')."\" onclick=\"document.location='".$this->href('', '', 'action=logout')."'\" /></p>";
 	echo '<p>'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).' | <a href="?action=clearcookies">'.$this->get_translation('ClearCookies').'</a></p>';
