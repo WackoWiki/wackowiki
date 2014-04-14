@@ -35,8 +35,9 @@ if (!function_exists('load_user_menu'))
 	}
 }
 
-// {{menu system=[0|1]}}
+// {{menu system=[0|1] redirect=''}}
 
+if (!isset($redirect)) $redirect = 0; // required for usersettings action
 if (!isset($system))
 {
 	$system = 0;
@@ -223,7 +224,9 @@ if (isset($_POST['_user_menu']))
 	}
 
 	$this->set_menu(MENU_USER, 1);
-	$this->redirect($this->href('', '', 'menu'));
+
+	#if ($redirect = '')
+	$this->redirect($this->href('', '', $redirect ? 'menu' : ''));
 }
 
 if ($_user_id)
