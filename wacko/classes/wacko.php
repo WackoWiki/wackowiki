@@ -4807,12 +4807,12 @@ class Wacko
 		}
 	}
 
-	function set_menu($set = MENU_AUTO)
+	function set_menu($set = MENU_AUTO, $update = 0)
 	{
 		$user = $this->get_user();
 
 		// initial menu table construction
-		if ($set || !($menu = $this->get_menu()))
+		if ($set || (!($menu = $this->get_menu()) && $update == 0) )
 		{
 			$user_menu	= $this->get_user_menu($user['user_id']);
 			$menu		= ( $user_menu
