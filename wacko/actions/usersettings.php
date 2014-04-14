@@ -182,7 +182,7 @@ else if ($user = $this->get_user())
 		$user = $this->get_user();
 
 		// forward
-		$this->set_message($this->get_translation('UserSettingsStored', $_POST['lang']));
+		$this->set_message($this->get_translation('UserSettingsStored', (isset($_POST['lang']) ? $_POST['lang'] : '')));
 		$this->redirect(($_POST['action'] == 'update_extended' ? $this->href('', '', 'extended') : $this->href()));
 
 	}
