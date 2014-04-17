@@ -15,7 +15,7 @@ $wacko_config_defaults = array(
 	'database_user' => '',
 	'database_password' => '',
 	'database_collation' => 0,
-	'database_charset' => '',
+	'database_charset' => 'latin1',
 	'database_engine' => 'MyISAM',
 
 	'table_prefix' => 'wacko_',
@@ -116,6 +116,7 @@ $wacko_config_defaults = array(
 	'disable_safehtml' => 0,
 	'urls_underscores' => 0,
 
+	// TODO: uniform use of term 'page' and 'cluster' ('groups_page' but 'news_cluster')
 	'groups_page' => 'Groups',
 	'users_page' => 'Users',
 	'category_page' => 'Category',

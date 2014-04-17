@@ -255,7 +255,7 @@ class Cache
 
 		while (false !== ($file = readdir($handle)))
 		{
-			if (is_file($directory.$file)) // if ($file != '.' && $file != '..' && !is_dir($directory.$file))
+			if ($file != '.' && $file != '..' && !is_dir($directory.$file)) // if (is_file($directory.$file))
 			{
 				@unlink($directory.$file);
 			}
