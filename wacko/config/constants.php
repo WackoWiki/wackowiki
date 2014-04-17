@@ -35,7 +35,7 @@ define('TRAN_DONTLOAD',					1);
 
 // do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 define('WACKO_VERSION',					'5.4.0');
-define('HTML_ENTITIES_CHARSET',			'ISO-8859-1');
+define('HTML_ENTITIES_CHARSET',			'ISO-8859-1'); // ISO-8859-1, cp1251
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 #define('XML_HTMLSAX3',					dirname(__FILE__).'/lib/HTMLSax3/');
 define('ACTIONS4DIFF',					'anchor, toc'); //allowed actions in DIFF

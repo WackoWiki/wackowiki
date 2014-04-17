@@ -11,6 +11,9 @@ if (!defined('IN_WACKO'))
 //				  a comma-delimeted list of tag names of pages that must be
 //				  considered subforums, and not topics. tags must not be relative
 
+// define variables
+$_pages = '';
+
 // make sure that we're executing inside the forum cluster
 if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 {
