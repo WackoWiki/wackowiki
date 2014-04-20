@@ -53,7 +53,7 @@ function admin_deletedpages(&$engine, &$module)
 		foreach ($pages as $page)
 		{
 			// day header
-			list($day, $time) = explode(' ', $page['date']);
+			list($day, $time) = explode(' ', $page['modified']);
 
 			if ($day != $curday)
 			{
