@@ -40,14 +40,19 @@ function admin_dbbackup(&$engine, &$module)
 	if (isset($_GET['files']) 		&& $_GET['files']		== 1)	$scheme['files']		= 1;
 
 	$getstr = '';
+
 	if (is_array($scheme))
 	{
 		foreach ($scheme as $key => $val)
 		{
 			if ($val == 1)
+			{
 				$getstr .= '&'.$key.'=1';
+			}
 			else
+			{
 				$getstr .= '&'.$key.'=0';
+			}
 		}
 	}
 ?>
@@ -59,11 +64,12 @@ function admin_dbbackup(&$engine, &$module)
 		@set_time_limit(1800);
 
 		$time	= time();
-		$pack	= SetPackDir($engine, $time);	// backup directory
+		$pack	= set_pack_dir($engine, $time);	// backup directory
 		$root	= $_POST['root'];
 		$data	= array();
 		$strc	= array();
 		$fils	= array();
+		$sql	= '';
 
 		foreach ($_POST as $val => $key)
 		{
@@ -79,13 +85,13 @@ function admin_dbbackup(&$engine, &$module)
 			else if ($key == 'data' && $val == true)
 			{
 				$data[] = $val;
-				GetData($engine, $tables, $pack, $val, $root);
+				get_data($engine, $tables, $pack, $val, $root);
 			}
 			// compress files
 			else if ($key == 'files' && $val == true)
 			{
 				$fils[] = $val;
-				GetFiles($engine, $pack, $val, $root);
+				get_files($engine, $pack, $val, $root);
 			}
 		}
 
@@ -96,22 +102,30 @@ function admin_dbbackup(&$engine, &$module)
 			{
 				// check whether table data was backed up
 				if (in_array($table, $data) && $root == false)
+				{
 					$drop = 1;
+				}
 				else
+				{
 					$drop = 0;
+				}
 
 				// force drop for tables w/o WHERE clause
 				if (in_array($table, $data) &&
-				$tables[$engine->config['table_prefix'].$table]['where'] === false)
+				$tables[$table]['where'] === false)
+				{
 					$drop = 1;
+				}
 
 				// ...and for these specific tables
 				if ($table == $engine->config['table_prefix'].'cache' ||
 				$table == $engine->config['table_prefix'].'referrer' ||
 				$table == $engine->config['table_prefix'].'log')
+				{
 					$drop = 1;
+				}
 
-				$sql .= GetTable($engine, $table, $drop)."\n";
+				$sql .= get_table($engine, $table, $drop)."\n";
 			}
 		}
 
@@ -121,7 +135,11 @@ function admin_dbbackup(&$engine, &$module)
 			// check file existance
 			clearstatcache();
 			$filename = $pack.BACKUP_FILE_STRUCTURE;
-			if (file_exists($filename) === true) unlink($filename);
+
+			if (file_exists($filename) === true)
+			{
+				unlink($filename);
+			}
 
 			// open file with writa access
 			$file	= fopen($filename, 'w');
@@ -136,7 +154,11 @@ function admin_dbbackup(&$engine, &$module)
 		// save backup log
 		clearstatcache();
 		$filename = $pack.BACKUP_FILE_LOG;
-		if (file_exists($filename) === true) unlink($filename);
+
+		if (file_exists($filename) === true)
+		{
+			unlink($filename);
+		}
 
 		// open file with writa access
 		$file	= fopen($filename, 'w');
@@ -176,7 +198,7 @@ function admin_dbbackup(&$engine, &$module)
 			global backup files and cache files (with their choice of
 			they are always saved in full).<br />
 			<br />
-			<u>Attention</u>: To avoid loss of information from the database,
+			<span class="underline">Attention</span>: To avoid loss of information from the database,
 			indicate the root cluster, the table from this backup will not be
 			restructured; similar, with only the reserve of
 			table without saving the data. To complete the conversion tables in the format
@@ -202,7 +224,9 @@ function admin_dbbackup(&$engine, &$module)
 			$check = false;
 
 			if ($table['name'] != 'cache' && $table['name'] != 'referrer' && $table['name'] != 'log')
+			{
 				$check = true;
+			}
 
 			echo '<tr class="hl_setting">'.
 					'<td class="label"><strong>'.$table['name'].'</strong></td>'.
@@ -221,7 +245,10 @@ function admin_dbbackup(&$engine, &$module)
 		{
 			$check = false;
 
-			if ($dir != $engine->config['cache_dir']) $check = true;
+			if ($dir != $engine->config['cache_dir'])
+			{
+				$check = true;
+			}
 
 			$dir = rtrim($dir, '/');
 

@@ -23,7 +23,7 @@ if (isset($tables, $directories) !== true)
 			$engine->config['table_prefix'].'cache' => array(
 				'name'	=> $engine->config['table_prefix'].'cache',
 				'where'	=> false,
-				'order'	=> 'name',
+				'order'	=> 'cache_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'config' => array(
@@ -88,8 +88,8 @@ if (isset($tables, $directories) !== true)
 			),
 			$engine->config['table_prefix'].'revision' => array(
 				'name'	=> $engine->config['table_prefix'].'revision',
-				'where'	=> 'tag',
-				'order'	=> 'tag',
+				'where'	=> 'revision_id',
+				'order'	=> 'revision_id',
 				'limit' => 500
 			),
 			$engine->config['table_prefix'].'upload' => array(
@@ -101,7 +101,7 @@ if (isset($tables, $directories) !== true)
 			$engine->config['table_prefix'].'user' => array(
 				'name'	=> $engine->config['table_prefix'].'user',
 				'where'	=> false,
-				'order'	=> 'user_name',
+				'order'	=> 'user_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'user_setting' => array(
@@ -113,7 +113,7 @@ if (isset($tables, $directories) !== true)
 			$engine->config['table_prefix'].'usergroup' => array(
 							'name'	=> $engine->config['table_prefix'].'usergroup',
 							'where'	=> false,
-							'order'	=> 'group_name',
+							'order'	=> 'group_id',
 							'limit' => 1000
 			),
 			$engine->config['table_prefix'].'usergroup_member' => array(
@@ -146,7 +146,7 @@ else
 }
 
 // set backup directory
-function SetPackDir(&$engine, $time)
+function set_pack_dir(&$engine, $time)
 {
 	// check dir name and create if not exists
 	$pack = date('Ymd_His', $time);
@@ -163,8 +163,10 @@ function SetPackDir(&$engine, $time)
 }
 
 // delete backup pack from the server
-function RemovePack(&$engine, $pack)
+function remove_pack(&$engine, $pack)
 {
+	$offset = 0;
+	$pathdir = '';
 	$packdir = $engine->config['upload_path_backup'].'/'.$pack.'/';
 
 	// read log
@@ -242,7 +244,7 @@ function RemovePack(&$engine, $pack)
 
 // adapted and updated from phpBB 2.x
 // construct sql for table recreataion
-function GetTable(&$engine, $table, $drop = true)
+function get_table(&$engine, $table, $drop = true)
 {
 	/***************************************************************************
 	*                             admin_db_utilities.php
@@ -272,10 +274,11 @@ function GetTable(&$engine, $table, $drop = true)
 	*	adapted from the unoficial phpMyAdmin 2.2.0.
 	***************************************************************************/
 
+	$index			= array();
 	$schema_create	= "";
 	$field_query	= "SHOW FIELDS FROM $table";
 	$key_query		= "SHOW KEYS FROM $table";
-	$collation_db	= $engine->load_single("SELECT @@collation_database");
+	#$collation_db	= $engine->load_single("SELECT @@collation_database"); // TODO: obsolete
 
 	if ($drop == true) $schema_create .= "DROP TABLE IF EXISTS `$table`;\n";
 
@@ -316,12 +319,18 @@ function GetTable(&$engine, $table, $drop = true)
 		$kname = $row['Key_name'];
 
 		if (($kname != 'PRIMARY') && ($row['Non_unique'] == 0))
+		{
 			$kname = "UNIQUE|$kname";
+		}
 		else if ($kname != 'PRIMARY' && $row['Index_type'] == 'FULLTEXT')
+		{
 			$kname = "FULLTEXT|$kname";
+		}
 
-		if(!is_array($index[$kname]))
+		if(!is_array(isset($index[$kname]) ? $index[$kname] : null))
+		{
 			$index[$kname] = array();
+		}
 
 		$index[$kname][] = '`'.$row['Column_name'].'`'.( $row['Sub_part'] ? '('.$row['Sub_part'].')' : '' );
 	}
@@ -340,17 +349,14 @@ function GetTable(&$engine, $table, $drop = true)
 			$schema_create .= "	KEY `$x` (" . implode($columns, ', ') . ')';
 	}
 
-	$schema_create .= "\n) ENGINE={$engine->config['database_engine']} CHARSET={$collation_db['@@collation_database']};"; // TODO: CHARSET per table
+	$schema_create .= "\n) ENGINE={$engine->config['database_engine']} CHARSET={$engine->config['database_charset']};"; // TODO: CHARSET per table
 
-	if (get_magic_quotes_runtime())
-		return (stripslashes($schema_create));
-	else
-		return ($schema_create);
+	return ($schema_create);
 }
 
 // extract and compress table dump into the out file
 // $tables var is a tables definition array
-function GetData(&$engine, &$tables, $pack, $table, $root = '')
+function get_data(&$engine, &$tables, $pack, $table, $root = '')
 {
 	$where = '';
 	$tweak = '';
@@ -432,6 +438,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 			$t++;	// total rows processed
 		}
 	}
+
 	// save and close file
 	gzclose($file);
 	chmod($filename, 0644);
@@ -440,8 +447,11 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 }
 
 // store compressed WackoWiki data files into the backup pack
-function GetFiles(&$engine, $pack, $dir, $root)
+function get_files(&$engine, $pack, $dir, $root)
 {
+	$subdir = '';
+	$offset = 0;
+
 	// set file mask for cluster backup
 	if ($root == true && $dir == $engine->config['upload_path_per_page'])
 	{
@@ -520,7 +530,7 @@ function GetFiles(&$engine, $pack, $dir, $root)
 }
 
 // restore tables structure
-function PutTable(&$engine, $pack)
+function put_table(&$engine, $pack)
 {
 	// read sql data
 	$dir = $engine->config['upload_path_backup'].'/'.$pack.'/';
@@ -542,8 +552,10 @@ function PutTable(&$engine, $pack)
 
 // insert table dump into the database
 // $mode - sql instruction to be used (i.e. INSERT or REPLACE)
-function PutData(&$engine, $pack, $table, $mode)
+function put_data(&$engine, $pack, $table, $mode)
 {
+	$point = '';
+
 	// open table dump file with read access
 	$filename	= $engine->config['upload_path_backup'].'/'.$pack.'/'.$table.BACKUP_FILE_DUMP_SUFFIX;
 	$file		= gzopen($filename, 'rb');
@@ -605,8 +617,11 @@ function PutData(&$engine, $pack, $table, $mode)
 }
 
 // decompress files and restore them into the filesystem
-function PutFiles(&$engine, $pack, $dir, $keep = false)
+function put_files(&$engine, $pack, $dir, $keep = false)
 {
+	$subdir = '';
+	$offset = 0;
+
 	$packdir = $engine->config['upload_path_backup'].'/'.$pack.'/'.$dir;
 
 	// restore files subdir or full path recursively if needed

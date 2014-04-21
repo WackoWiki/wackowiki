@@ -78,7 +78,7 @@ function admin_dbrestore(&$engine, &$module)
 			$results .= file_get_contents($dir.$pack.'/'.BACKUP_FILE_STRUCTURE)."\n\n";
 
 			// run
-			$total = PutTable($engine, $pack);
+			$total = put_table($engine, $pack);
 
 			$results .= '<strong>'.date('H:i:s').' - Completed. Processed instructions: '.$total.'</strong>'."\n\n\n";
 		}
@@ -116,7 +116,7 @@ function admin_dbrestore(&$engine, &$module)
 				$results .= "\t".'<strong>'.date('H:i:s').' - '.$table."\n".
 					"\t".'==========================</strong>'."\n";
 
-				$total		= PutData($engine, $pack, $table, $mode);
+				$total		= put_data($engine, $pack, $table, $mode);
 				$overall	+= $total;
 
 				$results .= "\t\t".'records:   '.$total."\n\n";
@@ -151,14 +151,16 @@ function admin_dbrestore(&$engine, &$module)
 				$results .= "\t".'<strong>'.date('H:i:s').' - '.$dir."\n".
 					"\t".'==========================</strong>'."\n";
 
-				$total		= PutFiles($engine, $pack, $dir, $keep);
-				$overall[0]	+= $total[0];
-				$overall[1]	+= $total[1];
+				$total		= put_files($engine, $pack, $dir, $keep);
+
+				$overall[0]	+= $total[0]; //isset($total[0]) ? $total[0] : null;
+				$overall[1]	+= $total[1]; //isset($total[1]) ? $total[1] : null;
 
 				$results .=
 					"\t\t".'File:    '.(int)array_sum($total)."\n".
 					"\t\t".'recorded:  '.(int)$total[0]."\n".
 					"\t\t".'skipped: '.(int)$total[1]."\n\n";
+
 			}
 
 			$results .= '<strong>'.date('H:i:s').' - Completed. Total files:'."\n".
@@ -192,12 +194,12 @@ function admin_dbrestore(&$engine, &$module)
 		{
 			if ($_POST['id'] == true)
 			{
-				RemovePack($engine, $_POST['id']);
+				remove_pack($engine, $_POST['id']);
 				$engine->log(1, 'Removed backup database '.$_POST['id']);
 			}
 			else if ($_GET['id'] == true)
 			{
-				RemovePack($engine, $_GET['id']);
+				remove_pack($engine, $_GET['id']);
 				$engine->log(1, 'Removed backup database '.$_GET['id']);
 			}
 
@@ -315,14 +317,14 @@ function admin_dbrestore(&$engine, &$module)
 				</form>
 				<br />
 				<p><small>
-					* Before restoring the backup <u>cluster</u>, the target table
+					* Before restoring the backup <span class="underline">cluster</span>, the target table
 					not destroyed (to prevent loss of information from non -
 					Clusters). Thus, in the recovery process will occur
 					duplicate record. In normal mode, they will be replaced by recordings of
 					backup (using SQL-instructions  <tt>REPLACE</tt>), but if this
 					checked, all duplicates will be skipped (to be kept current
 					values of records), and added to the table only the records with new keys
-					(SQL-instruction <tt>INSERT IGNORE</tt>). <u>Note</u>: to restore
+					(SQL-instruction <tt>INSERT IGNORE</tt>). <span class="underline">Note</span>: to restore
 					complete backup of the site, this option has no value.<br />
 					<br />
 					** If the backup contains the user files (global and
