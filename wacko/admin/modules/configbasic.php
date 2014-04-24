@@ -66,7 +66,8 @@ function admin_configbasic(&$engine, &$module)
 		}
 
 		$engine->cache->destroy_config_cache();
-		$engine->log(1, 'Updated basic parameters');
+		$engine->log(1, 'Updated basic settings');
+		$engine->set_message('Updated basic settings');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 ?>

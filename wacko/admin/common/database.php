@@ -57,10 +57,10 @@ if (isset($tables, $directories) !== true)
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'menu' => array(
-					'name'	=> $engine->config['table_prefix'].'menu',
-					'where'	=> false,
-					'order'	=> 'menu_id',
-					'limit' => 1000
+				'name'	=> $engine->config['table_prefix'].'menu',
+				'where'	=> false,
+				'order'	=> 'menu_id',
+				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'page' => array(
 				'name'	=> $engine->config['table_prefix'].'page',
@@ -111,22 +111,22 @@ if (isset($tables, $directories) !== true)
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'usergroup' => array(
-							'name'	=> $engine->config['table_prefix'].'usergroup',
-							'where'	=> false,
-							'order'	=> 'group_id',
-							'limit' => 1000
+				'name'	=> $engine->config['table_prefix'].'usergroup',
+				'where'	=> false,
+				'order'	=> 'group_id',
+				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'usergroup_member' => array(
-							'name'	=> $engine->config['table_prefix'].'usergroup_member',
-							'where'	=> false,
-							'order'	=> 'group_id',
-							'limit' => 1000
+				'name'	=> $engine->config['table_prefix'].'usergroup_member',
+				'where'	=> false,
+				'order'	=> 'group_id',
+				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'watch' => array(
-							'name'	=> $engine->config['table_prefix'].'watch',
-							'where'	=> 'page_id',
-							'order'	=> 'page_id',
-							'limit' => 1000
+				'name'	=> $engine->config['table_prefix'].'watch',
+				'where'	=> 'page_id',
+				'order'	=> 'page_id',
+				'limit' => 1000
 			)
 		);
 
@@ -278,9 +278,11 @@ function get_table(&$engine, $table, $drop = true)
 	$schema_create	= "";
 	$field_query	= "SHOW FIELDS FROM $table";
 	$key_query		= "SHOW KEYS FROM $table";
-	#$collation_db	= $engine->load_single("SELECT @@collation_database"); // TODO: obsolete
 
-	if ($drop == true) $schema_create .= "DROP TABLE IF EXISTS `$table`;\n";
+	if ($drop == true)
+	{
+		$schema_create .= "DROP TABLE IF EXISTS `$table`;\n";
+	}
 
 	$schema_create .= "CREATE TABLE IF NOT EXISTS `$table` (\n";
 
@@ -294,13 +296,19 @@ function get_table(&$engine, $table, $drop = true)
 		$schema_create .= '	`' . $row['Field'] . '` ' . $row['Type'];
 
 		if (!empty($row['Default']) && $row['Type'] != 'timestamp')
+		{
 			$schema_create .= ' DEFAULT \'' . $row['Default'] . '\'';
+		}
 
 		if ($row['Null'] != 'YES')
+		{
 			$schema_create .= ' NOT NULL';
+		}
 
 		if ($row['Extra'] != '')
+		{
 			$schema_create .= ' ' . $row['Extra'];
+		}
 
 		$schema_create .= ",\n";
 	}
@@ -340,13 +348,21 @@ function get_table(&$engine, $table, $drop = true)
 		$schema_create .= ", \n";
 
 		if ($x == 'PRIMARY')
+		{
 			$schema_create .= '	PRIMARY KEY (' . implode($columns, ', ') . ')';
+		}
 		else if (substr($x,0,6) == 'UNIQUE')
+		{
 			$schema_create .= '	UNIQUE `' . substr($x,7) . '` (' . implode($columns, ', ') . ')';
+		}
 		else if (substr($x,0,8) == 'FULLTEXT')
+		{
 			$schema_create .= '	FULLTEXT KEY `' . substr($x,9) . '` (' . implode($columns, ', ') . ')';
+		}
 		else
+		{
 			$schema_create .= "	KEY `$x` (" . implode($columns, ', ') . ')';
+		}
 	}
 
 	$schema_create .= "\n) ENGINE={$engine->config['database_engine']} CHARSET={$engine->config['database_charset']};"; // TODO: CHARSET per table
@@ -362,15 +378,39 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	$tweak = '';
 
 	// sql clauses
-	if ($root == true && $tables[$engine->config['table_prefix'].$table]['where'] == true)
+	if ($root == true && $tables[$table]['where'] == true)
 	{
+		// all cluster related page_id's
+		static $cluster_pages;
+
+		// get array with cluster related page_id's
+		if (!isset($cluster_pages[$root]))
+		{
+			$query = "'".quote($engine->dblink, $engine->translit($root))."%'";
+			$pages = $engine->load_all(
+				"SELECT page_id ".
+				"FROM ".$engine->config['table_prefix']."page ".
+				"WHERE supertag LIKE ".$query."");
+
+			foreach ($pages as $page)
+			{
+				if ($page != '')
+				{
+					$result	.= "'".$page['page_id']."', ";
+				}
+			}
+
+			$result					= substr($result, 0, strlen($result) - 2);
+			$cluster_pages[$root]	= $result;
+		}
+
 		if ($table != $engine->config['table_prefix'].'page')	// not page table
 		{
-			$where = "WHERE {$tables[$table]['where']} LIKE '".quote($engine->dblink, $root)."%' ";
+			$where = "WHERE {$tables[$table]['where']} IN (".$cluster_pages[$root].") ";
 		}
 		else
 		{
-			$where = "WHERE tag LIKE '".quote($engine->dblink, $root)."%' OR comment_on_id LIKE '".quote($engine->dblink, $root)."%' ";
+			$where = "WHERE tag LIKE '".quote($engine->dblink, $root)."%' OR comment_on_id IN (".$cluster_pages[$root].") ";
 		}
 	}
 

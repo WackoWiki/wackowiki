@@ -105,6 +105,7 @@ function admin_dbrestore(&$engine, &$module)
 
 			// run
 			$overall = 0;
+
 			foreach ($list as $table)
 			{
 				// force sql mode for some tables
@@ -146,6 +147,7 @@ function admin_dbrestore(&$engine, &$module)
 
 			// run
 			$overall = array();
+
 			foreach ($list as $dir)
 			{
 				$results .= "\t".'<strong>'.date('H:i:s').' - '.$dir."\n".
@@ -177,12 +179,11 @@ function admin_dbrestore(&$engine, &$module)
 		// finishing
 		$results .= '<strong>================================================'."\n".
 			date('H:i:s').' - RESTORATION COMPLETED</strong>';
+
+				$message = 'The backup is restored, the implementation of the report is attached below. To
+							delete this backup file, click <a href="?mode=dbrestore&remove=1&id=<?php echo $pack; ?>">here</a>.';
+				$engine->show_message($message);
 ?>
-				<p>
-					The backup is restored, the implementation of the report is attached below. To
-					delete this backup file, click <a href="?mode=dbrestore&remove=1&id=<?php echo $pack; ?>">here</a>.
-				</p>
-				<br />
 				<div class="code" style="padding:3px;"><small><pre><?php echo $results; ?></pre></small></div><br />
 <?php
 		$engine->log(1, 'Restored backup of a database '.$pack);
@@ -203,7 +204,8 @@ function admin_dbrestore(&$engine, &$module)
 				$engine->log(1, 'Removed backup database '.$_GET['id']);
 			}
 
-			echo '<p class="green"><em>The selected backup has been successfully removed.</em></p><br />';
+			$message = '<p class="green"><em>The selected backup has been successfully removed.</em></p>';
+			$engine->show_message($message);
 		}
 ?>
 				<p>
