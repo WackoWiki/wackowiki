@@ -47,7 +47,8 @@ function admin_configuploads(&$engine, &$module)
 		}
 
 		$engine->cache->destroy_config_cache();
-		$engine->log(1, 'Updated upload parameters');
+		$engine->log(1, 'Updated upload settings');
+		$engine->set_message('Updated upload settings');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 ?>

@@ -154,8 +154,6 @@ textarea {
 }
 .info {
 	font-style: italic;
-	font-weight: 600;
-	text-align: center;
 	padding-top: 15px;
 }
 .error {

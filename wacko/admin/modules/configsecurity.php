@@ -81,6 +81,7 @@ function admin_configsecurity(&$engine, &$module)
 
 		$engine->cache->destroy_config_cache();
 		$engine->log(1, '!!Updated security settings!!');
+		$engine->set_message('Updated security settings');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 ?>

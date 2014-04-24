@@ -70,7 +70,8 @@ function admin_configsystem(&$engine, &$module)
 		}
 
 		$engine->cache->destroy_config_cache();
-		$engine->log(1, 'Updated config parameters');
+		$engine->log(1, 'Updated system settings');
+		$engine->set_message('Updated system settings');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 ?>
