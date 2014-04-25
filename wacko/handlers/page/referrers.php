@@ -20,6 +20,26 @@ if ($this->page['comment_on_id'])
 
 $referrers = '';
 $perpage = '';
+$pertime = '';
+
+if ($user = $this->get_user())
+{
+	$usermax = $user['changes_count'];
+
+	if ($usermax == 0)
+	{
+		$usermax = 10;
+	}
+}
+else
+{
+	$usermax = 50;
+}
+
+if (!isset($max) || $usermax < $max)
+{
+	$max = $usermax;
+}
 
 if ($user = $this->get_user())
 {
@@ -29,6 +49,7 @@ if ($user = $this->get_user())
 		echo "<ul class=\"menu\">
 			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
+			<li><a href=\"".$this->href('referrers', '', 'pertime=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
 			<li class=\"active\">".$this->get_translation('ViewReferrersGlobal')."</li>
 		</ul><br /><br />\n";
 	}
@@ -37,6 +58,17 @@ if ($user = $this->get_user())
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPerPage')."</h3>";
 		echo "<ul class=\"menu\">
 			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
+			<li class=\"active\">".$this->get_translation('ViewReferrersPerPage')."</li>
+			<li><a href=\"".$this->href('referrers', '', 'pertime=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
+			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">".$this->get_translation('ViewReferrersGlobal')."</a></li>
+		</ul><br /><br />\n";
+	}
+	else if (isset($_GET['pertime']))
+	{
+		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPerPage')."</h3>";
+		echo "<ul class=\"menu\">
+			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
+			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
 			<li class=\"active\">".$this->get_translation('ViewReferrersPerPage')."</li>
 			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">".$this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
@@ -47,6 +79,7 @@ if ($user = $this->get_user())
 		echo "<ul class=\"menu\">
 			<li class=\"active\">".$this->get_translation('ViewReferrersPage')."</li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">". $this->get_translation('ViewReferrersPerPage')."</a></li>
+			<li><a href=\"".$this->href('referrers', '', 'pertime=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">". $this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 	}
@@ -86,6 +119,23 @@ if ($user = $this->get_user())
 			LEFT JOIN ".$this->config['table_prefix']."page p ON ( p.page_id = r.page_id )
 			GROUP BY r.page_id
 			ORDER BY num DESC");
+	}
+	else if ($pertime = isset($_GET['pertime']))
+	{
+		$title		= str_replace('%1', $this->href('referrers_sites', '', 'pertime=1'),
+				str_replace('%2',
+						($this->config['referrers_purge_time']
+								? ($this->config['referrers_purge_time'] == 1
+										? $this->get_translation('Last24Hours')
+										: str_replace('%1', $this->config['referrers_purge_time'], $this->get_translation('LastDays')))
+								: ''),
+						$this->get_translation('ExternalPagesGlobal')));
+
+		$pages		= $this->load_all(
+			"SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title
+			FROM ".$this->config['table_prefix']."referrer r
+			LEFT JOIN ".$this->config['table_prefix']."page p ON ( p.page_id = r.page_id )
+			ORDER BY r.referrer_time DESC");
 	}
 	else
 	{
@@ -138,7 +188,7 @@ if ($user = $this->get_user())
 
 	echo "<strong>$title</strong><br /><br />\n";
 
-	if ($referrers || $perpage)
+	if ($referrers || $perpage || $pertime)
 	{
 		if ($perpage)
 		{
@@ -187,6 +237,88 @@ if ($user = $this->get_user())
 						}
 
 						echo "</ul>\n<br /></li>\n";
+
+					}
+				}
+			}
+
+			echo "</ul>\n";
+		}
+		if ($pertime)
+		{
+			echo "<ul class=\"ul_list\">\n";
+
+			foreach ($pages as $referrer)
+			{
+				if (isset($referrer['page_id']))
+				{
+					if ($page['page_id'] == 0)
+					{
+						$access = true; // 404er
+					}
+					else if ($this->config['hide_locked'])
+					{
+						$access = $this->has_access('read', $referrer['page_id']);
+					}
+					else
+					{
+						$access = true;
+					}
+
+					if ($access && ($count < $max))
+					{
+
+						$count++;
+
+						// tz offset
+						$time_tz = $this->get_time_tz( strtotime($referrer['referrer_time']) );
+						$time_tz = date('Y-m-d H:i:s', $time_tz);
+
+						// day header
+						list($day, $time) = explode(' ', $time_tz);
+
+						if (!isset($curday))
+						{
+							$curday = '';
+						}
+
+						if ($day != $curday)
+						{
+							if ($curday)
+							{
+								echo "</ul>\n<br /></li>\n";
+							}
+
+							echo "<li><b>".date($this->config['date_format'], strtotime($day))."</b>\n<ul>\n";
+							$curday = $day;
+						}
+
+						if ($referrer['page_id'] == 0)
+						{
+							$page_link = '404';
+						}
+						else
+						{
+						#$page_link = $this->compose_link_to_page($page['tag']);
+						$page_link = $this->link('/'.$referrer['tag'], '', $referrer['title']);
+						}
+
+						#echo '<li><strong>'.$page_link.'</strong>'.' ('.$page['num'].')';
+								#$referrers = $this->load_referrers($page['page_id']);
+
+						echo "<ul>\n";
+
+						#foreach ($referrers as $referrer)
+						#{
+							echo "<li class=\"lined\">";
+							echo "<span class=\"\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &nbsp; ";
+
+							echo "<span class=\"\"><a href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></span >";
+							echo ' . . . . . . . . . . . . . . . . '.'<small>'.$page_link.'</small>';
+							echo "</li>\n";
+						#}
+
+					echo "</ul>\n</li>\n";
 
 					}
 				}

@@ -36,7 +36,7 @@ if (!function_exists('formatter_source_callback'))
 if ($options['default'] == 'wacko')
 {
 	// cut comments
-	$text = preg_replace( "/(\n?)%%\((c|comments)\).*?%%([\n\r]*)/ims", '', $text );
+	$text = preg_replace( "/(\n?)%%\((comment)\).*?%%([\n\r]*)/ims", '', $text );
 
 	// insert about the source
 	$text = $text.="\n\n----\n".$this->get_translation('SourceFrom')."((".$options['source']."))";
