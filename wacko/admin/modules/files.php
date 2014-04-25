@@ -27,7 +27,7 @@ function admin_files(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
-	$user = strtolower($engine->get_user_id());
+	$user = $engine->get_user_id();
 
 	if (isset($_GET['remove'])) // show the form
 	{
