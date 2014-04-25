@@ -296,7 +296,7 @@ if ($registered
 					$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
 					$description = rtrim( $description, '\\' );
 
-					// Make HTML in the description redundant ;¬)
+					// Make HTML in the description redundant
 					$description = $this->format($description, 'pre_wacko');
 					$description = $this->format($description, 'safehtml');
 					$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
@@ -482,7 +482,7 @@ if ($registered
 							$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
 							$description = rtrim( $description, '\\' );
 
-							// Make HTML in the description redundant ;¬)
+							// Make HTML in the description redundant
 							$description = $this->format($description, 'pre_wacko');
 							$description = $this->format($description, 'safehtml');
 							$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());

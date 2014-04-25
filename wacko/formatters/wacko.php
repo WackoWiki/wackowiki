@@ -20,12 +20,12 @@ $wtext	= $texts[0];
 
 for ($i = 2; $i < count($texts); $i = $i + 2)
 {
-	$wtext = $wtext."\xa6".$texts[$i];
+	$wtext = $wtext."\xfe\xa6".$texts[$i];
 }
 
 $wtext	= preg_replace_callback($parser->MOREREGEXP, array(&$parser, 'wacko_middleprocess'), $wtext);
 $wtext	= preg_replace_callback($parser->LONGREGEXP, array(&$parser, 'wacko_callback'), $wtext);
-$wtexts	= explode("\xa6", $wtext);
+$wtexts	= explode("\xfe\xa6", $wtext);
 $text	= '';
 
 for ($i = 0; $i < count($wtexts); $i++)

@@ -65,8 +65,6 @@ if ($this->has_access('read'))
 				str_replace('%4', '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>',
 			$this->get_translation('Revision')))));
 
-
-
 			// if this is an old revision, display ReEdit button
 			if ($this->has_access('write'))
 			{

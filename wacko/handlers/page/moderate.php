@@ -1072,7 +1072,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						else
 						{
 							$this->set_message($this->get_translation('ModerateCommentsSplitFailed'));
-							$this->log(2, 'Error when separating comments from the topic ((/'.$this->tag.')) a new topic '.$section.'/'.$tag.': page was not created');  // ru: Ошибка при отделении комментариев из темы     в новую тему        документ не был создан
+							$this->log(2, 'Error when separating comments from the topic ((/'.$this->tag.')) a new topic '.$section.'/'.$tag.': page was not created');
 						}
 					}
 					else
@@ -1082,7 +1082,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$ids_str .= "'".quote($this->dblink, $comment_id)."', ";
 						}
 
-						$ids_str = substr($ids_str, 0, strlen($ids_str)-2);
+						$ids_str = substr($ids_str, 0, strlen($ids_str) - 2);
 
 						// update acl
 						// Give comments the same read rights as their parent page

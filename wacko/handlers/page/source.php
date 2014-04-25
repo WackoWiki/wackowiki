@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 <?php
 
 /*
-	the source text will be shown with exception of those fragments which are hidden by formatters %%(comments)..%%
+	the source text will be shown with exception of those fragments which are hidden by formatters %%(comment)..%%
 
 	TODO: add config option to set an treshhold or to disable the source handler
 */
