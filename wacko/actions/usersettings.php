@@ -164,11 +164,14 @@ else if ($user = $this->get_user())
 						$this->get_translation('EmailGoodbye')."\n".
 						$this->config['site_name']."\n".
 						$this->config['base_url'];
+
 			$this->send_mail($email, $subject, $body);
+
+			$message = $this->get_translation('SettingsCodeResent').'<br />'; // TODO: add to lang files
 		}
 		else
 		{
-			$this->set_message($this->get_translation('SettingsCodeNotSent'));
+			$message = $this->get_translation('SettingsCodeNotSent').'<br />'; // TODO: add to lang files
 		}
 	}
 
@@ -181,8 +184,9 @@ else if ($user = $this->get_user())
 		$this->set_user_setting('session_time', $_session_time);
 		$user = $this->get_user();
 
+		$message .= $this->get_translation('UserSettingsStored', (isset($_POST['lang']) ? $_POST['lang'] : ''));
 		// forward
-		$this->set_message($this->get_translation('UserSettingsStored', (isset($_POST['lang']) ? $_POST['lang'] : '')));
+		$this->set_message($message);
 		$this->redirect(($_POST['action'] == 'update_extended' ? $this->href('', '', 'extended') : $this->href()));
 
 	}
