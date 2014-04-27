@@ -29,7 +29,9 @@ class Email
 
 	function php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset = '', $xtra_headers = '')
 	{
-		$this->engine->use_class('PHPMailer', 'lib/phpmailer/', 'class.phpmailer');
+		#$this->engine->use_class('PHPMailer', 'lib/phpmailer/', 'class.phpmailer');
+		$this->engine->use_class('PHPMailer', 'lib/phpmailer/', 'PHPMailerAutoload');
+		#require '../PHPMailerAutoload.php';
 
 		$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
 
