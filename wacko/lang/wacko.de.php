@@ -413,6 +413,8 @@ $wacko_translation = array(
 	'LoggedOutAuto'				=> 'Aus Sicherheitsgründen wurde deine Sitzung beendet. Bitte melde dich erneut an.',
 
 	// user settings
+	'SettingsCodeResent'		=> 'E-Mail-Bestätigungscode wurde erneut zugesand.',
+	'SettingsCodeNotSent'		=> 'Senden des Bestätigungscodes nicht möglich: E-Mail wurde nicht angegeben!',
 	'Hello'						=> 'Hallo',
 	'UserName'					=> 'Benutzername',
 	'YourEmail'					=> 'Deine E-Mailadresse',
@@ -535,7 +537,7 @@ $wacko_translation = array(
 	'EmailNotVerified'			=> 'E-Mail wurde nicht bestätigt!',
 	'EmailNotVerifiedDesc'		=> 'Du erhälst keine Benachrichtigung über Änderungen oder Kommentare von beobachteten Seiten, '.
 									'Nachrichten von anderen Nutzern, ebenso wirst du nicht in der Lage sein <u> ein vergessenes Passwort wieder herzustellen</u>, '.
-									'bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst.'.
+									'bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst. '.
 									'Wenn innerhalb weniger Tage nach der Registrierung du keine E-Mail erhalten hast, kannst du sie erneut anfragen, klicke dazu ',
 
 	'ForgotComment'				=> 'Benutzername und E-Mailadresse angeben,'."\n".'du bekommst dann eine E-Mail mit weiteren Anweisungen.',

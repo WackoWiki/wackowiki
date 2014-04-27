@@ -410,6 +410,8 @@ $wacko_translation = array(
 	'LoggedOutAuto'			=> 'For security, your session has ended. Please log in again.',
 
 	// user settings
+	'SettingsCodeResent'		=> 'Повторный код подтверждения email выслан на Ваш адрес.',
+	'SettingsCodeNotSent'		=> 'Невозможно отправить код подтверждения: email не указан!',
 	'Hello' => 'Здравейте',
 	'UserName' => 'User name',
 	'YourEmail' => 'Адрес на електонната поща',
