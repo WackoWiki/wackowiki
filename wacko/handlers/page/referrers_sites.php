@@ -25,7 +25,7 @@ if ($user = $this->get_user())
 {
 	if ($global = isset($_GET['global']))
 	{
-		$title		= str_replace('%1', $this->href('referrers', '', 'global=1'),$this->get_translation('DomainsSitesPagesGlobal'));
+		$title		= str_replace('%1', $this->href('referrers', '', 'global=1'), $this->get_translation('DomainsSitesPagesGlobal'));
 		$referrers	= $this->load_referrers();
 	}
 	else

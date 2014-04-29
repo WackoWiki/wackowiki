@@ -329,7 +329,8 @@ $wacko_translation = array(
 	'ViewReferringSitesGlobal' => '<a href="%1">Bekijk globale verwijzende sites</a>',
 
 	'ViewReferrersPage' =>'naar pagina',
-	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersPerPage'	=> 'per pagina',
+	'ViewReferrersByTime'		=> 'door de tijd',
 	'ViewReferrersGlobal' => 'global',
 	'NoneReferrers' => 'None',
 	'NotOwnerAndCanDelete' => 'U ben niet de eigenaar van deze pagina en kunt deze niet verwijderen',

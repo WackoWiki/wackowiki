@@ -329,7 +329,8 @@ $wacko_translation = array(
 	'ViewReferringSitesGlobal' => '<a href="%1">Vis alle netsteder</a>',
 
 	'ViewReferrersPage' => 'til side',
-	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersPerPage'	=> 'per side',
+	'ViewReferrersByTime'	=> 'efter tid',
 	'ViewReferrersGlobal' => 'alle',
 	'NoneReferrers' => 'Ingen',
 	'NotOwnerAndCanDelete' => 'Du ejer ikke denne side og kan ikke slette den.',

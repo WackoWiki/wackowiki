@@ -333,6 +333,7 @@ $wacko_translation = array(
 	'ViewReferringSitesGlobal'	=> '<a href="%1">View global referring sites</a>',
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'per page',
+	'ViewReferrersByTime'		=> 'by time',
 	'ViewReferrersGlobal'		=> 'global',
 
 	'NoneReferrers'				=> 'None',

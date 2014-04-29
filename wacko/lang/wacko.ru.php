@@ -332,7 +332,8 @@ $wacko_translation = array(
 	'ViewReferringSitesGlobal'	=> '<a href="%1">Сайты, ссылающиеся</a>',
 
 	'ViewReferrersPage'			=> 'to page',
-	'ViewReferrersPerPage'		=> 'per page',
+	'ViewReferrersPerPage'		=> 'на странице',
+	'ViewReferrersByTime'		=> 'по времени',
 	'ViewReferrersGlobal'		=> 'Ссылки',
 	'NoneReferrers'				=> 'Нет',
 	'NotOwnerAndCanDelete'		=> 'Вы не владеете этой страницей и поэтому не можете удалить её',
