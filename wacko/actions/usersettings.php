@@ -156,22 +156,22 @@ else if ($user = $this->get_user())
 
 			$subject = $this->config['site_name'].". ".$this->get_translation('EmailConfirm');
 			$body = $this->get_translation('EmailHello'). $user['user_name'].".\n\n".
-						str_replace('%1', $this->config['site_name'],
-						str_replace('%2', $user['user_name'],
-						str_replace('%3', $this->href().
-						($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
-						$this->get_translation('EmailVerify'))))."\n\n".
-						$this->get_translation('EmailGoodbye')."\n".
-						$this->config['site_name']."\n".
-						$this->config['base_url'];
+				str_replace('%1', $this->config['site_name'],
+				str_replace('%2', $user['user_name'],
+				str_replace('%3', $this->href().
+				($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
+				$this->get_translation('EmailVerify'))))."\n\n".
+				$this->get_translation('EmailGoodbye')."\n".
+				$this->config['site_name']."\n".
+				$this->config['base_url'];
 
 			$this->send_mail($email, $subject, $body);
 
-			$message = $this->get_translation('SettingsCodeResent').'<br />'; // TODO: add to lang files
+			$message = $this->get_translation('SettingsCodeResent').'<br />';
 		}
 		else
 		{
-			$message = $this->get_translation('SettingsCodeNotSent').'<br />'; // TODO: add to lang files
+			$message = $this->get_translation('SettingsCodeNotSent').'<br />';
 		}
 	}
 
