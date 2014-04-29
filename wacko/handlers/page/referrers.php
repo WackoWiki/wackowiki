@@ -5,6 +5,32 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+if (!function_exists('load_referrers'))
+{
+	function load_referrers(&$wacko, $query = '', $limit = 50, $parameters = '')
+	{
+		$limit		= (int) $limit;
+		$pagination	= '';
+
+		// count referrers
+		if ($count_referrers = $wacko->load_all(
+			"{$query}"));
+
+		if ($count_referrers)
+		{
+			$count		= count($count_referrers);
+			$wacko->debug_print_r($count);
+
+			$pagination = $wacko->pagination($count, $limit, 'r', $parameters, 'referrers');
+
+			$referrers = $wacko->load_all(
+				"{$query} ".
+				"LIMIT {$pagination['offset']}, {$limit}");
+
+			return array($referrers, $pagination);
+		}
+	}
+}
 ?>
 <div id="page">
 <?php
@@ -18,9 +44,11 @@ if ($this->page['comment_on_id'])
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
 }
 
-$referrers = '';
-$perpage = '';
-$pertime = '';
+$referrers	= '';
+$perpage	= '';
+$bytime	= '';
+$url_maxlen = 80;
+$spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . . '
 
 if ($user = $this->get_user())
 {
@@ -43,13 +71,14 @@ if (!isset($max) || $usermax < $max)
 
 if ($user = $this->get_user())
 {
+	// navigation
 	if (isset($_GET['global']))
 	{
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersGlobal')."</h3>";
 		echo "<ul class=\"menu\">
 			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
-			<li><a href=\"".$this->href('referrers', '', 'pertime=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
+			<li><a href=\"".$this->href('referrers', '', 'bytime=1')."\">".$this->get_translation('ViewReferrersByTime')."</a></li>
 			<li class=\"active\">".$this->get_translation('ViewReferrersGlobal')."</li>
 		</ul><br /><br />\n";
 	}
@@ -59,17 +88,17 @@ if ($user = $this->get_user())
 		echo "<ul class=\"menu\">
 			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
 			<li class=\"active\">".$this->get_translation('ViewReferrersPerPage')."</li>
-			<li><a href=\"".$this->href('referrers', '', 'pertime=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
+			<li><a href=\"".$this->href('referrers', '', 'bytime=1')."\">".$this->get_translation('ViewReferrersByTime')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">".$this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 	}
-	else if (isset($_GET['pertime']))
+	else if (isset($_GET['bytime']))
 	{
-		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPerPage')."</h3>";
+		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersByTime')."</h3>";
 		echo "<ul class=\"menu\">
 			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
-			<li class=\"active\">".$this->get_translation('ViewReferrersPerPage')."</li>
+			<li class=\"active\">".$this->get_translation('ViewReferrersByTime')."</li>
 			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">".$this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 	}
@@ -79,32 +108,15 @@ if ($user = $this->get_user())
 		echo "<ul class=\"menu\">
 			<li class=\"active\">".$this->get_translation('ViewReferrersPage')."</li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">". $this->get_translation('ViewReferrersPerPage')."</a></li>
-			<li><a href=\"".$this->href('referrers', '', 'pertime=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
+			<li><a href=\"".$this->href('referrers', '', 'bytime=1')."\">".$this->get_translation('ViewReferrersByTime')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">". $this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 	}
 
 	if ($global = isset($_GET['global']))
 	{
+		$parameters = '';
 		$title		= str_replace('%1', $this->href('referrers_sites', '', 'global=1'),
-		str_replace('%2',
-			($this->config['referrers_purge_time']
-			? ($this->config['referrers_purge_time'] == 1
-				? $this->get_translation('Last24Hours')
-				: str_replace('%1', $this->config['referrers_purge_time'], $this->get_translation('LastDays')))
-			: ''),
-			$this->get_translation('ExternalPagesGlobal')));
-
-		$pages		= $this->load_all(
-			"SELECT count( r.referrer ) AS num
-			FROM ".$this->config['table_prefix']."referrer r
-			");
-
-		$referrers	= $this->load_referrers();
-	}
-	else if ($perpage = isset($_GET['perpage']))
-	{
-		$title		= str_replace('%1', $this->href('referrers_sites', '', 'perpage=1'),
 			str_replace('%2',
 			($this->config['referrers_purge_time']
 			? ($this->config['referrers_purge_time'] == 1
@@ -113,17 +125,34 @@ if ($user = $this->get_user())
 			: ''),
 			$this->get_translation('ExternalPagesGlobal')));
 
-		$pages		= $this->load_all(
-			"SELECT r.page_id, count( r.referrer ) AS num, p.tag, p.title
+		$query = "SELECT count( r.referrer ) AS num
+			FROM ".$this->config['table_prefix']."referrer r";
+
+		$referrers	= $this->load_referrers();
+	}
+	else if ($perpage = isset($_GET['perpage']))
+	{
+		$parameters = 'perpage=1';
+		$title		= str_replace('%1', $this->href('referrers_sites', '', $parameters),
+			str_replace('%2',
+			($this->config['referrers_purge_time']
+			? ($this->config['referrers_purge_time'] == 1
+				? $this->get_translation('Last24Hours')
+				: str_replace('%1', $this->config['referrers_purge_time'], $this->get_translation('LastDays')))
+			: ''),
+			$this->get_translation('ExternalPagesGlobal')));
+
+		$query = "SELECT r.page_id, count( r.referrer ) AS num, p.tag, p.title
 			FROM ".$this->config['table_prefix']."referrer r
 			LEFT JOIN ".$this->config['table_prefix']."page p ON ( p.page_id = r.page_id )
 			GROUP BY r.page_id
-			ORDER BY num DESC");
+			ORDER BY num DESC";
 	}
-	else if ($pertime = isset($_GET['pertime']))
+	else if ($bytime = isset($_GET['bytime']))
 	{
-		$title		= str_replace('%1', $this->href('referrers_sites', '', 'pertime=1'),
-				str_replace('%2',
+		$parameters = 'bytime=1';
+		$title		= str_replace('%1', $this->href('referrers_sites', '', $parameters),
+						str_replace('%2',
 						($this->config['referrers_purge_time']
 								? ($this->config['referrers_purge_time'] == 1
 										? $this->get_translation('Last24Hours')
@@ -131,11 +160,10 @@ if ($user = $this->get_user())
 								: ''),
 						$this->get_translation('ExternalPagesGlobal')));
 
-		$pages		= $this->load_all(
-			"SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title
+		$query = "SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title
 			FROM ".$this->config['table_prefix']."referrer r
 			LEFT JOIN ".$this->config['table_prefix']."page p ON ( p.page_id = r.page_id )
-			ORDER BY r.referrer_time DESC");
+			ORDER BY r.referrer_time DESC";
 	}
 	else
 	{
@@ -174,6 +202,7 @@ if ($user = $this->get_user())
 			echo $this->get_translation('NoReferringPages')."<p></p>";
 		}
 
+		$parameters = '';
 		$title		= str_replace('%1', $this->compose_link_to_page($this->tag),
 			str_replace('%2',
 			($this->config['referrers_purge_time']
@@ -188,10 +217,17 @@ if ($user = $this->get_user())
 
 	echo "<strong>$title</strong><br /><br />\n";
 
-	if ($referrers || $perpage || $pertime)
+	if ($referrers || $perpage || $bytime)
 	{
-		if ($perpage)
+		// per page
+		if ($perpage && list ($pages, $pagination) = load_referrers($this, $query, (int)$max, $parameters))
 		{
+			// pagination
+			if (isset($pagination['text']))
+			{
+				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			}
+
 			echo "<ul class=\"ul_list\">\n";
 
 			foreach ($pages as $page)
@@ -230,25 +266,47 @@ if ($user = $this->get_user())
 
 						foreach ($referrers as $referrer)
 						{
+							// shorten url name if too long
+							if (strlen($referrer['referrer']) > $url_maxlen)
+							{
+								$referrer_text = substr($referrer['referrer'], 0, 30).'[..]'.substr($referrer['referrer'], -20);
+							}
+							else
+							{
+								$referrer_text = $referrer['referrer'];
+							}
+
 							echo "<li class=\"lined\">";
 							echo "<span class=\"\">".$referrer['num']."</span> &nbsp; ";
-							echo "<span class=\"\"><a href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></span >";
+							echo "<span class=\"\"><a title=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\" href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></span >";
 							echo "</li>\n";
 						}
 
 						echo "</ul>\n<br /></li>\n";
-
 					}
 				}
 			}
 
 			echo "</ul>\n";
+
+			// pagination
+			if (isset($pagination['text']))
+			{
+				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			}
 		}
-		if ($pertime)
+		// by time
+		if ($bytime && list ($referrers, $pagination) = load_referrers($this, $query, (int)$max, $parameters))
 		{
+			// pagination
+			if (isset($pagination['text']))
+			{
+				echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
+			}
+
 			echo "<ul class=\"ul_list\">\n";
 
-			foreach ($pages as $referrer)
+			foreach ($referrers as $referrer)
 			{
 				if (isset($referrer['page_id']))
 				{
@@ -299,42 +357,61 @@ if ($user = $this->get_user())
 						}
 						else
 						{
-						#$page_link = $this->compose_link_to_page($page['tag']);
-						$page_link = $this->link('/'.$referrer['tag'], '', $referrer['title']);
+							#$page_link = $this->compose_link_to_page($page['tag']);
+							$page_link = $this->link('/'.$referrer['tag'], '', $referrer['title']);
 						}
 
-						#echo '<li><strong>'.$page_link.'</strong>'.' ('.$page['num'].')';
-								#$referrers = $this->load_referrers($page['page_id']);
+						// shorten url name if too long
+						if (strlen($referrer['referrer']) > $url_maxlen)
+						{
+							$referrer_text = substr($referrer['referrer'], 0, 30).'[..]'.substr($referrer['referrer'], -20);
+						}
+						else
+						{
+							$referrer_text = $referrer['referrer'];
+						}
 
 						echo "<ul>\n";
 
-						#foreach ($referrers as $referrer)
-						#{
-							echo "<li class=\"lined\">";
-							echo "<span class=\"\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &nbsp; ";
+						echo "<li class=\"lined\">";
+						echo "<span class=\"\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &nbsp; ";
+						echo "<span class=\"\"><a title=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\" href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></span >";
+						echo $spacer.'<small>'.$page_link.'</small>';
+						echo "</li>\n";
 
-							echo "<span class=\"\"><a href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></span >";
-							echo ' . . . . . . . . . . . . . . . . '.'<small>'.$page_link.'</small>';
-							echo "</li>\n";
-						#}
-
-					echo "</ul>\n</li>\n";
-
+						echo "</ul>\n</li>\n";
 					}
 				}
 			}
 
 			echo "</ul>\n";
+
+			// pagination
+			if (isset($pagination['text']))
+			{
+				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			}
 		}
+		// global
 		else
 		{
 			echo "<table>\n";
 
 			foreach ($referrers as $referrer)
 			{
+				// shorten url name if too long
+				if (strlen($referrer['referrer']) > $url_maxlen)
+				{
+					$referrer_text = substr($referrer['referrer'], 0, 30).'[..]'.substr($referrer['referrer'], -20);
+				}
+				else
+				{
+					$referrer_text = $referrer['referrer'];
+				}
+
 				echo "<tr>";
-				echo "<td width=\"30\" align=\"right\" valign=\"top\" style=\"padding-right: 10px\">".$referrer['num']."</td>";
-				echo "<td valign=\"top\"><a href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></td>";
+				echo "<td width=\"30\" align=\"right\" style=\"padding-right: 10px\">".$referrer['num']."</td>";
+				echo "<td valign=\"top\"><a title=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\" href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></td>";
 				echo "</tr>\n";
 			}
 

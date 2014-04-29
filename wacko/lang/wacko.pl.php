@@ -329,7 +329,8 @@ $wacko_translation = array(
 	'ViewReferringSitesGlobal' => 'Poka¿ wszystkie odsy³acze z podzia³em na: <a href="%1">domeny</a>',
 
 	'ViewReferrersPage' => 'witryny',
-	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersPerPage'	=> 'na stronie',
+	'ViewReferrersByTime'		=> 'przez czas',
 	'ViewReferrersGlobal' => 'witryny',
 	'NoneReferrers' => 'Brak',
 	'NotOwnerAndCanDelete' => 'Przepraszamy. Tê stronê mo¿e usun±æ tylko oryginalny autor.',

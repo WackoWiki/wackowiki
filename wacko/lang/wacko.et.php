@@ -330,6 +330,7 @@ $wacko_translation = array(
 
 	'ViewReferrersPage' => 'to page',
 	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersByTime'		=> 'by time',
 	'ViewReferrersGlobal' => 'globaalseid>',
 	'NoneReferrers' => 'Ei',
 	'NotOwnerAndCanDelete' => 'Sa ei ole selle lehe omanik, seega ei saa ka kustutada',

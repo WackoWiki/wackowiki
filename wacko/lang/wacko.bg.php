@@ -330,6 +330,7 @@ $wacko_translation = array(
 
 	'ViewReferrersPage' => 'to page',
 	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersByTime'	=> 'от време',
 	'ViewReferrersGlobal' => 'Препратки',
 	'NoneReferrers' => 'Нет',
 	'NotOwnerAndCanDelete' => 'Вие не сте собственик на тази страница и затова не можете да я изтриете',
