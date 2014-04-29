@@ -634,7 +634,7 @@ class WackoFormatter
 		{
 			return '<span class="underline">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</span>';
 		}
-		// monospace
+		// code
 		else if (preg_match('/^\#\#(.*?)\#\#$/', $thing, $matches) ||
 				 preg_match('/^\¹\¹(.*?)\¹\¹$/', $thing, $matches))
 		{
