@@ -1175,7 +1175,7 @@ class Wacko
 		{
 			$lang = $user['lang'];
 		}
-		else if (isset($this->config['multilanguage']))
+		else if (!empty($this->config['multilanguage']))
 		{
 			$lang = $this->user_agent_language();
 		}
@@ -4738,7 +4738,7 @@ class Wacko
 			{
 				$lang = $user['lang'];
 			}
-			else if (isset($this->config['multilanguage']))
+			else if (!empty($this->config['multilanguage']))
 			{
 				$lang = $this->user_agent_language();
 			}
