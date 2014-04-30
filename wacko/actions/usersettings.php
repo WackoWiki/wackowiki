@@ -9,7 +9,8 @@ if (!defined('IN_WACKO'))
 <!--notypo-->
 <?php
 
-$error = '';
+$error		= '';
+$message	= '';
 
 // reconnect securely in tls mode
 if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
@@ -408,7 +409,14 @@ else if ($user = $this->get_user())
 	<th class="form_left" scope="row"><label for="lang"><?php echo $this->get_translation('YourLanguage');?></label></th>
 	<td class="form_right"><select id="lang" name="lang">
 	<?php
-	$langs = $this->available_languages();
+	if ($this->config['multilanguage'])
+	{
+		$langs = $this->available_languages();
+	}
+	else
+	{
+		$langs[] = $this->config['language'];
+	}
 
 	for ($i = 0; $i < count($langs); $i++)
 	{
