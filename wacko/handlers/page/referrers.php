@@ -282,6 +282,8 @@ if ($user = $this->get_user())
 							echo "</li>\n";
 						}
 
+						unset($referrers);
+
 						echo "</ul>\n<br /></li>\n";
 					}
 				}
@@ -383,6 +385,8 @@ if ($user = $this->get_user())
 					}
 				}
 			}
+
+			unset($referrers);
 
 			echo "</ul>\n";
 

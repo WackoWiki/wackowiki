@@ -234,12 +234,13 @@ else
 
 	if ($error)
 	{
-		# $this->set_message($error);
-		echo '<div class="error">'.$this->format($error).'</div>';
+		$message = $this->format($error);
+		$this->show_message($message, 'error');
 	}
 	else if($this->config['max_login_attempts'] && $_failed_login_count >= $this->config['max_login_attempts'])
 	{
-		echo '<div class="error">'.$this->get_translation('LoginAttemtsExceeded').'</div>';
+		$message = $this->get_translation('LoginAttemtsExceeded');
+		$this->show_message($message, 'error');
 	}
 
 	echo '<div class="cssform">'."\n";
