@@ -184,7 +184,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><strong>Filtering HTML:</strong><br />
-				<small>Blocks dangerous HTML-conservation facilities. Turn off the filter to open the site when the support HTML <u>very</u> undesirable!</small></td>
+				<small>Blocks dangerous HTML-conservation facilities. Turn off the filter to open the site when the support HTML <span class="underline">very</span> undesirable!</small></td>
 				<td>
 					<input type="radio" id="disable_safehtml_on" name="disable_safehtml" value="0"<?php echo ( !$engine->config['disable_safehtml'] ? ' checked="checked"' : '' );?> /><label for="disable_safehtml_on">On.</label>
 					<input type="radio" id="disable_safehtml_off" name="disable_safehtml" value="1"<?php echo ( $engine->config['disable_safehtml'] ? ' checked="checked"' : '' );?> /><label for="disable_safehtml_off">Off.</label>
