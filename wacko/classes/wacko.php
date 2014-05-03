@@ -5168,7 +5168,8 @@ class Wacko
 					}
 
 					$this->logout_user();
-					$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
+					#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag); // TODO: $this->get_translation('LoginPage') and $this->config['login_page'] -> multilanguage: we need encoding related default pages till we use utf-8
+					$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
 				}
 			}
 		}
@@ -5182,7 +5183,8 @@ class Wacko
 		{
 			$this->log(1, '<strong><span class="cite">User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->ip_address().'</span></strong>');
 			$this->logout_user();
-			$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
+			#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
+			$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
 			$session = false;
 		}
 
