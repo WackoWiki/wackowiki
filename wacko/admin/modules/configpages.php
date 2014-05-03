@@ -136,7 +136,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="search_page"><strong>Search:</strong><br />
-				<small>Page with the search form (action <tt>{{search}}</tt>).</small></label></td>
+				<small>Page with the search form (action <code>{{search}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="search_page" name="search_page" value="<?php echo htmlspecialchars($engine->config['search_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -144,7 +144,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="registration_page"><strong>Register on our site:</strong><br />
-				<small>Page new user registration (action <tt>{{registration}}</tt>).</small></label></td>
+				<small>Page new user registration (action <code>{{registration}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="registration_page" name="registration_page" value="<?php echo htmlspecialchars($engine->config['registration_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -152,7 +152,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="login_page"><strong>User login:</strong><br />
-				<small>Login page on the site (action <tt>{{login}}</tt>).</small></label></td>
+				<small>Login page on the site (action <code>{{login}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="login_page" name="login_page" value="<?php echo htmlspecialchars($engine->config['login_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -160,7 +160,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="settings_page"><strong>Profile Settings:</strong><br />
-				<small>Page customize the user profile (action <tt>{{usersettings}}</tt>).</small></label></td>
+				<small>Page customize the user profile (action <code>{{usersettings}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="settings_page" name="settings_page" value="<?php echo htmlspecialchars($engine->config['settings_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -168,7 +168,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="password_page"><strong>Change Password:</strong><br />
-				<small>Page with a form to change / query user password (action <tt>{{ChangePassword}}</tt>).</small></label></td>
+				<small>Page with a form to change / query user password (action <code>{{ChangePassword}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="password_page" name="password_page" value="<?php echo htmlspecialchars($engine->config['password_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -176,7 +176,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="users_page"><strong>User list:</strong><br />
-				<small>Page with a list of registered users (action <tt>{{users}}</tt>).</small></label></td>
+				<small>Page with a list of registered users (action <code>{{users}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="users_page" name="users_page" value="<?php echo htmlspecialchars($engine->config['users_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -184,7 +184,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="permalink_page"><strong>Permalink:</strong><br />
-				<small>Page with a list of registered users (action <tt>{{permalinkproxy}}</tt>).</small></label></td>
+				<small>Page with a list of registered users (action <code>{{permalinkproxy}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="permalink_page" name="permalink_page" value="<?php echo htmlspecialchars($engine->config['permalink_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -192,7 +192,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="category_page"><strong>Category :</strong><br />
-				<small>Page with a list of categorized pages (action <tt>{{category}}</tt>).</small></label></td>
+				<small>Page with a list of categorized pages (action <code>{{category}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->config['category_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -200,7 +200,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="category_page"><strong>Tag :</strong><br />
-				<small>Page with a list of tagged pages (action <tt>{{tag}}</tt>).</small></label></td>
+				<small>Page with a list of tagged pages (action <code>{{tag}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->config['tag_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -208,7 +208,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="groups_page"><strong>Groups:</strong><br />
-				<small>Page with a list of working groups (action <tt>{{usergroups}}</tt>).</small></label></td>
+				<small>Page with a list of working groups (action <code>{{usergroups}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="groups_page" name="groups_page" value="<?php echo htmlspecialchars($engine->config['groups_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -216,7 +216,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="changes_page"><strong>Recent changes:</strong><br />
-				<small>Page with a list of the last modified pages (action <tt>{{changes}}</tt>).</small></label></td>
+				<small>Page with a list of the last modified pages (action <code>{{changes}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="changes_page" name="changes_page" value="<?php echo htmlspecialchars($engine->config['changes_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -224,7 +224,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="comments_page"><strong>Recent comments:</strong><br />
-				<small>Page with a list of recent comment on the page (action <tt>{{commented}}</tt>).</small></label></td>
+				<small>Page with a list of recent comment on the page (action <code>{{commented}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="comments_page" name="comments_page" value="<?php echo htmlspecialchars($engine->config['comments_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -232,7 +232,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="removals_page"><strong>Deleted pages:</strong><br />
-				<small>Page with a list of recently deleted pages (action <tt>{{deleted}}</tt>).</small></label></td>
+				<small>Page with a list of recently deleted pages (action <code>{{deleted}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="removals_page" name="removals_page" value="<?php echo htmlspecialchars($engine->config['removals_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -240,7 +240,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="wanted_page"><strong>Wanted pages:</strong><br />
-				<small>Page with a list of missing pages that are referenced (action <tt>{{wanted}}</tt>).</small></label></td>
+				<small>Page with a list of missing pages that are referenced (action <code>{{wanted}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="wanted_page" name="wanted_page" value="<?php echo htmlspecialchars($engine->config['wanted_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -248,7 +248,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="orphaned_page"><strong>Orphaned pages:</strong><br />
-				<small>Page with a list of existing pages are not related links with the rest (action <tt>{{orphaned}}</tt>).</small></label></td>
+				<small>Page with a list of existing pages are not related links with the rest (action <code>{{orphaned}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="orphaned_page" name="orphaned_page" value="<?php echo htmlspecialchars($engine->config['orphaned_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -256,7 +256,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="todo_page"><strong>ToDo:</strong><br />
-				<small>Page with a list of To Do (constructed with the help of <tt>{{backlinks}}</tt> and makro <tt>::*::</tt>).</small></label></td>
+				<small>Page with a list of To Do (constructed with the help of <code>{{backlinks}}</code> and makro <code>::*::</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="todo_page" name="todo_page" value="<?php echo htmlspecialchars($engine->config['todo_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">

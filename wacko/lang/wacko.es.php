@@ -226,7 +226,7 @@ $wacko_translation = array(
 	'SourceFromLink'		=> 'referencia',
 	'SourceCopyToClipboard'	=> 'copiar a portapapeles',
 	'Source'				=> 'ver código fuente',
-	'SourceDesc'			=> 'se mostrará el código fuente con excepción de las partes ocultos con marcas <nobr><tt>%%(comentarios)..%%</tt></nobr>',
+	'SourceDesc'			=> 'se mostrará el código fuente con excepción de las partes ocultos con marcas <nobr><code>%%(comentarios)..%%</code></nobr>',
 
 	// groups handler
 	'GroupsMembers'			=> 'Miembros del grupo',
@@ -266,7 +266,7 @@ $wacko_translation = array(
 	'GroupsName'				=> 'Group',
 	'GroupsMembers'				=> 'Members',
 	'GroupsCreated'				=> 'Created',
-	'GroupsNotFound'			=> 'Group <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'GroupsNotFound'			=> 'Group <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
 	'GroupsProfile'				=> 'Profile',
 	'GroupsList'				=> 'View the entire list of groups',
 	'GroupsMembersSortName'		=> '[Sort by name]',
@@ -513,7 +513,7 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'editar',
 	'PageAlreadyExistsEditDenied' => 'No se puede modificar.',
 
-	'PageReservedWord'			=> 'No puede usar <tt>%1</tt> como parte de la dirección porque es una palabra reservada.',
+	'PageReservedWord'			=> 'No puede usar <code>%1</code> como parte de la dirección porque es una palabra reservada.',
 	'UserReservedWord'			=> 'Nombres de usuario no deben contener ##%1## porque es una palabra reservada.',
 
 	'DontRedirect' => 'No autorizar la redirección automática.',
@@ -587,7 +587,7 @@ $wacko_translation = array(
 	'UsersRevisions'		=> 'Revisiones',
 	'UsersSignup'			=> 'Registro',
 	'UsersLastSession'		=> 'Ultima sesión',
-	'UsersNotFound'			=> 'Usuario <tt>%2</tt> no encontrado. Presione <a href="%1">aquí</a>, para ir a la lista principal.',
+	'UsersNotFound'			=> 'Usuario <code>%2</code> no encontrado. Presione <a href="%1">aquí</a>, para ir a la lista principal.',
 	'UsersProfile'			=> 'Perfil',
 	'UsersContact'			=> 'Contacto',
 	'UsersList'				=> 'Ver la lista completa de los usuarios',

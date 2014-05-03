@@ -224,7 +224,7 @@ $wacko_translation = array(
 	'SourceFromLink'			=> 'Link',
 	'SourceCopyToClipboard'		=> 'In die Zwischenablage speichern',
 	'Source'					=> 'Quelltext anzeigen',
-	'SourceDesc'				=> 'Der Quelltext wird angezeigt werden mit Ausnahme der Fragmente, welche durch den Formatierer nicht ausgegeben werden <nobr><tt>%%(comments)..%%</tt></nobr>',
+	'SourceDesc'				=> 'Der Quelltext wird angezeigt werden mit Ausnahme der Fragmente, welche durch den Formatierer nicht ausgegeben werden <nobr><code>%%(comments)..%%</code></nobr>',
 
 	// groups handler
 	'GroupsMembers'				=> 'Mitglieder der Gruppe',
@@ -259,7 +259,7 @@ $wacko_translation = array(
 	'GroupsName'				=> 'Gruppe',
 	'GroupsMembers'				=> 'Mitglieder',
 	'GroupsCreated'				=> 'Erstellt',
-	'GroupsNotFound'			=> 'Gruppe <tt>%2</tt> nicht gefunden. Klicke <a href="%1">hier</a>, um zur Hauptliste zu gehen.',
+	'GroupsNotFound'			=> 'Gruppe <code>%2</code> nicht gefunden. Klicke <a href="%1">hier</a>, um zur Hauptliste zu gehen.',
 	'GroupsProfile'				=> 'Profil',
 	'GroupsList'				=> 'Zeige gesamte Liste der Gruppen',
 	'GroupsMembersSortName'		=> '[Sortiere nach Name]',
@@ -514,7 +514,7 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2'	=> 'editieren',
 	'PageAlreadyExistsEditDenied'	=> 'Du kannst sie nicht editieren',
 
-	'PageReservedWord'			=> 'You can\'t use <tt>%1</tt> as the part of the address as it\'s a reserved word.',
+	'PageReservedWord'			=> 'You can\'t use <code>%1</code> as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Keine automatische Weiterleitung erlauben, obwohl eine gesetzt ist.',
@@ -588,7 +588,7 @@ $wacko_translation = array(
 	'UsersRevisions'			=> 'Revisionen',
 	'UsersSignup'				=> 'Anmeldung',
 	'UsersLastSession'			=> 'Letzter Besuch',
-	'UsersNotFound'				=> 'Benutzer <tt>%2</tt> nicht gefunden. Klicke <a href="%1">hier</a>, um zur Hauptliste zu gehen.',
+	'UsersNotFound'				=> 'Benutzer <code>%2</code> nicht gefunden. Klicke <a href="%1">hier</a>, um zur Hauptliste zu gehen.',
 	'UsersProfile'				=> 'Profil',
 	'UsersContact'				=> 'Kontakt',
 	'UsersList'					=> 'Zeige gesamte Liste der Benutzer',

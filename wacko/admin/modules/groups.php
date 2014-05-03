@@ -140,7 +140,7 @@ function admin_groups(&$engine, &$module)
 					echo '<input type="hidden" name="mode" value="'.groups.'" />';
 					echo '<input type="hidden" name="member_id" value="'.htmlspecialchars($_POST['changemember'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 					echo '<table class="formation">';
-					echo '<tr><td><label for="">'.$engine->get_translation('MembersRemove').' \'<tt>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</tt>\'?</label> '.
+					echo '<tr><td><label for="">'.$engine->get_translation('MembersRemove').' \'<code>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 						'<input id="submit" type="submit" name="removemember" value="yes" style="width:40px;" /> '.
 						'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 						'<br /><small>'.$engine->get_translation('MembersDeleteInfo').'</small>'.
@@ -272,7 +272,7 @@ function admin_groups(&$engine, &$module)
 				echo '<input type="hidden" name="mode" value="groups" />';
 				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
-				echo '<tr><td><label for="newname">'.$engine->get_translation('GroupsRename').' \'<tt>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</tt>\' in</label></td>'.
+				echo '<tr><td><label for="newname">'.$engine->get_translation('GroupsRename').' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label></td>'.
 					'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" /></td></tr>'.
 					'<tr><td><label for="newdescription">'.$engine->get_translation('GroupsDescription').'</label></td>'.
 					'<td><input id="newdescription" name="newdescription" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newdescription'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" /></td></tr>'.
@@ -310,7 +310,7 @@ function admin_groups(&$engine, &$module)
 				echo '<input type="hidden" name="mode" value="groups" />';
 				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
-				echo '<tr><td><label for="">'.$engine->get_translation('GroupsDelete').' \'<tt>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</tt>\'?</label> '.
+				echo '<tr><td><label for="">'.$engine->get_translation('GroupsDelete').' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 					'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
 					'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 					'<br /><small>'.$engine->get_translation('GroupsDeleteInfo').'</small>'.

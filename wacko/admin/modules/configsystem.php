@@ -168,7 +168,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="paragrafica"><strong>Paragrafica markings:</strong><br />
-				<small>Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <tt>{{toc}}</tt>.</small></label></td>
+				<small>Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <code>{{toc}}</code>.</small></label></td>
 				<td><input type="checkbox" id="paragrafica" name="paragrafica" value="1"<?php echo ( $engine->config['paragrafica'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -198,7 +198,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="allow_x11colors"><strong>X11 Colors Usage:</strong><br />
-				<small>Extents the available colors for <tt>??(color) background??</tt> and <tt>!!(color) text!!</tt> Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
+				<small>Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code> Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
 				<td><input type="checkbox" id="allow_x11colors" name="allow_x11colors" value="1"<?php echo ( $engine->config['allow_x11colors'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -206,7 +206,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_tikilinks"><strong>Disable Tikilinks:</strong><br />
-				<small>Disables linking for <tt>Double.CamelCaseWords</tt>.</small></label></td>
+				<small>Disables linking for <code>Double.CamelCaseWords</code>.</small></label></td>
 				<td><input type="checkbox" id="disable_tikilinks" name="disable_tikilinks" value="1"<?php echo ( $engine->config['disable_tikilinks'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -214,7 +214,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_wikilinks"><strong>Disable Wikilinks:</strong><br />
-				<small>Disables linking for <tt>CamelCaseWords</tt>, your CamelCase Words will no longer be linked directly to a new page </small></label></td>
+				<small>Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page </small></label></td>
 				<td><input type="checkbox" id="disable_wikilinks" name="disable_wikilinks" value="1"<?php echo ( $engine->config['disable_wikilinks'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -222,7 +222,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_bracketslinks"><strong>Disable bracketslinks:</strong><br />
-				<small>Disables <tt>[[link]]</tt> and <tt>((link))</tt> syntax.</small></label></td>
+				<small>Disables <code>[[link]]</code> and <code>((link))</code> syntax.</small></label></td>
 				<td><input type="checkbox" id="disable_bracketslinks" name="disable_bracketslinks" value="1"<?php echo ( $engine->config['disable_bracketslinks'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -230,7 +230,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<!--<tr class="hl_setting">
 				<td class="label"><label for="disable_npjlinks"><strong>Disable Npjlinks:</strong><br />
-				<small>Disables linking for <tt>See::Example</tt> and <tt>user@node:address</tt> links.</small></label></td>
+				<small>Disables linking for <code>See::Example</code> and <code>user@node:address</code> links.</small></label></td>
 				<td><input type="checkbox" id="disable_npjlinks" name="disable_npjlinks" value="1"<?php echo ( $engine->config['disable_npjlinks'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -238,7 +238,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>-->
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_formatters"><strong>Disable Formatters:</strong><br />
-				<small>Disables <tt>%%code%%</tt> syntax, used for highlighters.</small></label></td>
+				<small>Disables <code>%%code%%</code> syntax, used for highlighters.</small></label></td>
 				<td><input type="checkbox" id="disable_formatters" name="disable_formatters" value="1"<?php echo ( $engine->config['disable_formatters'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr>
@@ -393,7 +393,7 @@ function admin_configsystem(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="rewrite_mode"><strong>Use <tt>mod_rewrite</tt>:</strong><br />
+				<td class="label"><label for="rewrite_mode"><strong>Use <code>mod_rewrite</code>:</strong><br />
 				<small>If your web server supports this feature, turn to get "beautiful" the addresses of pages.</small></label></td>
 				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1"<?php echo ( $engine->config['rewrite_mode'] == 1 ? ' checked="checked"' : '' );?> /></td>
 			</tr>

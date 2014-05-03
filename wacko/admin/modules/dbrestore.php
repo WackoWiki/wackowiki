@@ -323,10 +323,10 @@ function admin_dbrestore(&$engine, &$module)
 					not destroyed (to prevent loss of information from non -
 					Clusters). Thus, in the recovery process will occur
 					duplicate record. In normal mode, they will be replaced by recordings of
-					backup (using SQL-instructions  <tt>REPLACE</tt>), but if this
+					backup (using SQL-instructions  <code>REPLACE</code>), but if this
 					checked, all duplicates will be skipped (to be kept current
 					values of records), and added to the table only the records with new keys
-					(SQL-instruction <tt>INSERT IGNORE</tt>). <span class="underline">Note</span>: to restore
+					(SQL-instruction <code>INSERT IGNORE</code>). <span class="underline">Note</span>: to restore
 					complete backup of the site, this option has no value.<br />
 					<br />
 					** If the backup contains the user files (global and

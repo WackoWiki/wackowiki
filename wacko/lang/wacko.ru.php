@@ -229,7 +229,7 @@ $wacko_translation = array(
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 	'Source'					=> 'view the source',
-	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>',
+	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <nobr><code>%%(comments)..%%</code></nobr>',
 
 	// groups handler
 	'GroupsMembers'				=> 'Members for Group',
@@ -269,7 +269,7 @@ $wacko_translation = array(
 	'GroupsName'				=> 'Group',
 	'GroupsMembers'				=> 'Members',
 	'GroupsCreated'				=> 'Created',
-	'GroupsNotFound'			=> 'Group <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'GroupsNotFound'			=> 'Group <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
 	'GroupsProfile'				=> 'Profile',
 	'GroupsList'				=> 'View the entire list of groups',
 	'GroupsMembersSortName'		=> '[Sort by name]',
@@ -516,7 +516,7 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2'	=> 'Отредактировать',
 	'PageAlreadyExistsEditDenied'	=> 'Вы не можете отредактировать её.',
 
-	'PageReservedWord'			=> 'You can\'t use <tt>%1</tt> as the part of the address as it\'s a reserved word.',
+	'PageReservedWord'			=> 'You can\'t use <code>%1</code> as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Не давать действию Redirect автоматически перенаправлять',
@@ -598,7 +598,7 @@ $wacko_translation = array(
 	'UsersRevisions'			=> 'Редакций',
 	'UsersSignup'				=> 'Регистрация',
 	'UsersLastSession'			=> 'Последнее посещение',
-	'UsersNotFound'				=> 'Пользователь <tt>%2</tt> не найден. Нажмите <a href="%1">здесь</a>, чтобы перейти к общему списку.',
+	'UsersNotFound'				=> 'Пользователь <code>%2</code> не найден. Нажмите <a href="%1">здесь</a>, чтобы перейти к общему списку.',
 	'UsersProfile'				=> 'Досье',
 	'UsersContact'				=> 'Связь',
 	'UsersList'					=> 'Открыть общий список пользователей',

@@ -64,15 +64,15 @@ else if ($user = $this->get_user())
 	{
 		if ($user['session_time'] == true)
 		{
-			$output .= $this->get_translation('LastVisit').' <tt>'. $this->get_time_string_formatted($user['session_time']).'</tt>.<br />';
+			$output .= $this->get_translation('LastVisit').' <code>'. $this->get_time_string_formatted($user['session_time']).'</code>.<br />';
 		}
 
-		$output .= $this->get_translation('SessionEnds').' <tt>';
+		$output .= $this->get_translation('SessionEnds').' <code>';
 
 		$cookie = explode(';', $this->get_cookie('auth'));
 
 		// session expiry date
-		$output .= $this->get_unix_time_formatted($cookie[2]).'</tt> ';
+		$output .= $this->get_unix_time_formatted($cookie[2]).'</code> ';
 		// session time left
 		$time_diff = $cookie[2] - time();
 
@@ -92,11 +92,11 @@ else if ($user = $this->get_user())
 		$output .= '<br />';
 
 		// Only allow your session to be used from this IP address.
-		$output .= $this->get_translation('BindSessionIp').' '. ( $user['validate_ip'] == 1 ? $this->get_translation('BindSessionIpOn').' <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).'.<br />';
+		$output .= $this->get_translation('BindSessionIp').' '. ( $user['validate_ip'] == 1 ? $this->get_translation('BindSessionIpOn').' <code>'.$user['ip'].'</code>)' : '<code>Off</code>' ).'.<br />';
 
 		if ($this->config['tls'] == true || $this->config['tls_proxy'] == true)
 		{
-			$output .= $this->get_translation('TrafficProtection').' <tt>'. ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ).'</tt>.';
+			$output .= $this->get_translation('TrafficProtection').' <code>'. ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ).'</code>.';
 		}
 
 		$this->set_message($output);

@@ -96,7 +96,7 @@ function admin_configbasic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="meta_description"><strong>Description of the document by default:</strong><br />
-					<small>The text used by default for meta-tags <tt>description</tt> (maximum of 255 characters).</small></label></td>
+					<small>The text used by default for meta-tags <code>description</code> (maximum of 255 characters).</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="meta_description" name="meta_description"><?php echo htmlspecialchars($engine->config['meta_description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
@@ -104,7 +104,7 @@ function admin_configbasic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="meta_keywords"><strong>Keywords page default:</strong><br />
-					<small>Key words used by default for meta-tags <tt>keywords</tt> (maximum of 255 characters).</small></label></td>
+					<small>Key words used by default for meta-tags <code>keywords</code> (maximum of 255 characters).</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="meta_keywords" name="meta_keywords"><?php echo htmlspecialchars($engine->config['meta_keywords'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">

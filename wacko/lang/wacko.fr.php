@@ -226,7 +226,7 @@ $wacko_translation = array(
 	'SourceFromLink'			=> 'référence',
 	'SourceCopyToClipboard'		=> 'copier vers le presse-papier',
 	'Source'					=> 'voir la source',
-	'SourceDesc'				=> 'la source sera affichée à l&rsquo;exception des fragments cachés par les formateurs <nobr><tt>%%(comments)..%%</tt></nobr>',
+	'SourceDesc'				=> 'la source sera affichée à l&rsquo;exception des fragments cachés par les formateurs <nobr><code>%%(comments)..%%</code></nobr>',
 
 	// groups handler
 	'GroupsMembers'				=> 'Membres du groupe',
@@ -266,7 +266,7 @@ $wacko_translation = array(
 	'GroupsName'				=> 'Groupe',
 	'GroupsMembers'				=> 'Membres',
 	'GroupsCreated'				=> 'Créé',
-	'GroupsNotFound'			=> 'Groupe <tt>%2</tt> non trouvé. Cliquer <a href="%1">ici</a>, pour aller à la liste principale.',
+	'GroupsNotFound'			=> 'Groupe <code>%2</code> non trouvé. Cliquer <a href="%1">ici</a>, pour aller à la liste principale.',
 	'GroupsProfile'				=> 'Profil',
 	'GroupsList'				=> 'Voir la liste complète des groupes',
 	'GroupsMembersSortName'		=> '[Trier par nom]',
@@ -513,7 +513,7 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2'	=> 'l&rsquo;éditer',
 	'PageAlreadyExistsEditDenied'	=> 'Vous ne pouvez pas l&rsquo;éditer.',
 
-	'PageReservedWord'			=> 'Vous ne pouvez pas inclure <tt>%1</tt> dans l&rsquo; adresse car c&rsquo;est un mot réservé.',
+	'PageReservedWord'			=> 'Vous ne pouvez pas inclure <code>%1</code> dans l&rsquo; adresse car c&rsquo;est un mot réservé.',
 	'UserReservedWord'			=> 'Les noms d&rsquo; utrilisateurs ne pevent pas contenir ##%1## car c&rsquo;est un mot réservé.',
 
 	'DontRedirect'				=> 'Ne pas autoriser la redirection automatique par l&rsquo;action de redirection {{Redirect}} ',
@@ -587,7 +587,7 @@ $wacko_translation = array(
 	'UsersRevisions'			=> 'Révisions',
 	'UsersSignup'				=> 'Inscription',
 	'UsersLastSession'			=> 'Dernière session',
-	'UsersNotFound'				=> 'Utilisateur <tt>%2</tt> non trouvé. Cliquez <a href="%1">ici</a>, to gafficher la liste principale.',
+	'UsersNotFound'				=> 'Utilisateur <code>%2</code> non trouvé. Cliquez <a href="%1">ici</a>, to gafficher la liste principale.',
 	'UsersProfile'				=> 'Profil',
 	'UsersContact'				=> 'Contact',
 	'UsersList'					=> 'Voir la liste de tous les utilisateurs',

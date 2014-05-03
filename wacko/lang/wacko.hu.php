@@ -229,7 +229,7 @@ $wacko_translation = array(
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 	'Source'					=> 'view the source',
-	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>',
+	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <nobr><code>%%(comments)..%%</code></nobr>',
 
 	// groups handler
 	'GroupsMembersFor'			=> 'Members for Group',
@@ -269,7 +269,7 @@ $wacko_translation = array(
 	'GroupsName'				=> 'Group',
 	'GroupsMembers'				=> 'Members',
 	'GroupsCreated'				=> 'Created',
-	'GroupsNotFound'			=> 'Group <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'GroupsNotFound'			=> 'Group <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
 	'GroupsProfile'				=> 'Profile',
 	'GroupsList'				=> 'View the entire list of groups',
 	'GroupsMembersSortName'		=> '[Sort by name]',
@@ -518,7 +518,7 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2'	=> 'edit',
 	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
 
-	'PageReservedWord'			=> 'You can\'t use <tt>%1</tt> as the part of the address as it\'s a reserved word.',
+	'PageReservedWord'			=> 'You can\'t use <code>%1</code> as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
 
 
@@ -593,7 +593,7 @@ $wacko_translation = array(
 	'UsersRevisions'			=> 'Revisions',
 	'UsersSignup'				=> 'Signup',
 	'UsersLastSession'			=> 'Last session',
-	'UsersNotFound'				=> 'User <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'UsersNotFound'				=> 'User <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'				=> 'Profile',
 	'UsersContact'				=> 'Contact',
 	'UsersList'					=> 'View the entire list of users',

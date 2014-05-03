@@ -219,7 +219,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				'<input name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" /><br /> ';
 			if ($group)
 			{
-				echo '<small><input type="radio" id="group1" name="group" value="1" checked="checked" /> <label for="group1">'.$this->get_translation('CategoriesAddGrouped').' \'<tt>'.$word['category'].'</tt>\'.</label></small><br />';
+				echo '<small><input type="radio" id="group1" name="group" value="1" checked="checked" /> <label for="group1">'.$this->get_translation('CategoriesAddGrouped').' \'<code>'.$word['category'].'</code>\'.</label></small><br />';
 				echo '<small><input type="radio" id="group0" name="group" value="0" /> <label for="group0">'.$this->get_translation('CategoriesAddGroupedNo').'</label></small><br />';
 			}
 			echo '<input id="submit" type="submit" name="create" value="'.$this->get_translation('CategoriesSaveButton').'" /> '.
@@ -237,7 +237,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
-					$this->get_translation('CategoriesRename').' \'<tt>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</tt>\' in</label> '.
+					$this->get_translation('CategoriesRename').' \'<code>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label> '.
 					'<input name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" /> '.
 					'<input id="submit" type="submit" name="rename" value="'.$this->get_translation('CategoriesSaveButton').'" /> '.
 					'<input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" onclick="document.location=\''.addslashes($this->href('categories')).'\';" />'.
@@ -269,7 +269,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
-					$this->get_translation('CategoriesGroup').' \'<tt>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</tt>\' with</label> '.
+					$this->get_translation('CategoriesGroup').' \'<code>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' with</label> '.
 					'<select style="width:100px;" name="parent">'.
 						'<option value="0">[no group]</option>'.
 						$options.
@@ -291,7 +291,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
-					$this->get_translation('CategoriesDelete').' \'<tt>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</tt>\'?</label> '.
+					$this->get_translation('CategoriesDelete').' \'<code>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 					'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
 					'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($this->href('categories')).'\';" />'.
 					'<br /><small>'.$this->get_translation('CategoriesDeleteInfo').'</small>'.
