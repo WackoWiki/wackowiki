@@ -110,7 +110,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="antidupe"><strong>Anti-clone:</strong><br />
-					<small>Disable register on the website under the names, <u>like</u> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <u>identical</u> names.</small></label></td>
+					<small>Disable register on the website under the names, <span class="underline">like</span> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <span class="underline">identical</span> names.</small></label></td>
 				<td><input type="checkbox" id="antidupe" name="antidupe" value="1"<?php echo ( $engine->config['antidupe'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
