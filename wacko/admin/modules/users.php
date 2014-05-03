@@ -217,7 +217,7 @@ function admin_users(&$engine, &$module)
 			echo '<input type="hidden" name="mode" value="users" />';
 			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 			echo '<table class="formation">';
-			echo '<tr><td><label for="newname">'.$engine->get_translation('UsersRename').' \'<tt>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</tt>\' in</label></td>'.
+			echo '<tr><td><label for="newname">'.$engine->get_translation('UsersRename').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label></td>'.
 				'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="newrealname">'.$engine->get_translation('RealName').'</label> '.
 				'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" /></td></tr>'.
@@ -257,7 +257,7 @@ function admin_users(&$engine, &$module)
 			echo '<input type="hidden" name="mode" value="users" />';
 			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 			echo '<table class="formation">';
-			echo '<tr><td><label for="">'.$engine->get_translation('UsersDelete').' \'<tt>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</tt>\'?</label> '.
+			echo '<tr><td><label for="">'.$engine->get_translation('UsersDelete').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 				'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
 				'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 				'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.

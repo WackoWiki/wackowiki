@@ -64,7 +64,7 @@ function admin_configuploads(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="upload"><strong>Right to the upload files:</strong><br />
-					<small><tt>"admins"</tt> means that only users belongig to admins group can upload the files. <tt>"1"</tt> means that uploading is opened to everybody. <tt>"0"</tt> means that upload disabled</small></label></td>
+					<small><code>"admins"</code> means that only users belongig to admins group can upload the files. <code>"1"</code> means that uploading is opened to everybody. <code>"0"</code> means that upload disabled</small></label></td>
 				<td style="width:40%;"><input maxlength="7" style="width:200px;" id="upload" name="upload" value="<?php echo htmlspecialchars($engine->config['upload'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
