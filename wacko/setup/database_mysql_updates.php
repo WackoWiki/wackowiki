@@ -3,11 +3,11 @@
 /*
 	Wacko Wiki MySQL Table Updates Script
 
-	These are all the updates that need to applied to earlier Wacko version to bring them up to 5.1 specs
+	These are all the updates that need to applied to earlier Wacko version to bring them up to 5.4 specs
 */
 
 $pref		= $config['table_prefix'];
-$charset	= 'DEFAULT CHARSET=utf8';
+$charset	= 'DEFAULT CHARSET='.$config['database_charset'];
 $engine		= 'ENGINE='.$config['database_engine'];
 
 // ACL
