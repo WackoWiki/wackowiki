@@ -20,9 +20,9 @@ $lang = array(
    Language Selection Page
 */
 'lang' => 'Выбор языка',
-'PleaseUpgradeToR5' => 'You aware to be running an old (pre 5.0.0) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <tt class="version">5.0.x</code>.',
-'UpgradeFromWacko' => 'Добро пожаловать в WackoWiki! Сейчас начнётся обновление WackoWiki с <tt class="version">%1</code> до <tt class="version">%2</code>.  Процесс её обновления займёт несколько следующих страниц.',
-'FreshInstall' => 'Добро пожаловать в WackoWiki! Всё готово для установки WackoWiki <tt class="version">%1</code>.  Процесс её установки займёт несколько следующих страниц.',
+'PleaseUpgradeToR5' => 'You aware to be running an old (pre 5.0.0) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">5.0.x</code>.',
+'UpgradeFromWacko' => 'Добро пожаловать в WackoWiki! Сейчас начнётся обновление WackoWiki с <code class="version">%1</code> до <code class="version">%2</code>.  Процесс её обновления займёт несколько следующих страниц.',
+'FreshInstall' => 'Добро пожаловать в WackoWiki! Всё готово для установки WackoWiki <code class="version">%1</code>.  Процесс её установки займёт несколько следующих страниц.',
 'PleaseBackup' => 'Cделайте резервную копию базы данных, конфигурационного файла и других изменённых вами файлов (например, файлов темы) до начала процесса установки. Это может спасти вас от очень неприятных моментов.',
 'LangDesc' => 'Пожалуйста, выберите язык. Он будет использоваться в процессе установки, а также станет языком по умолчанию установленной WackoWiki.',
 
