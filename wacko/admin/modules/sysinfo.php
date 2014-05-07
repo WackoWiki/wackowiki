@@ -26,7 +26,7 @@ function admin_sysinfo(&$engine, &$module)
 	<br />
 	Version informations:<br />
 	<br />
-	<table cellspacing="1" cellpadding="4" style="max-width:600px" class="formation">
+	<table style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 		<tr>
 			<th style="width:120px;">Parameter</th>
 			<th style="text-align:left;"></th>

@@ -633,7 +633,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-				'<table cellspacing="1" cellpadding="4" class="formation">'.
+				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateDeleteConfirm').'</th></td>'.
 					'<tr><td>'.
 						'<em>'.implode('<br />', $accept_text).'</em><br />'.
@@ -666,7 +666,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-				'<table cellspacing="1" cellpadding="4" class="formation">'.
+				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateMovesConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
@@ -686,7 +686,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if ($accept_action == 'rename')
 		{
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-				'<table cellspacing="1" cellpadding="4" class="formation">'.
+				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateRenameConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
@@ -718,7 +718,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-				'<table cellspacing="1" cellpadding="4" class="formation">'.
+				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateMergeConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
@@ -738,7 +738,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// print moderation controls...
 		echo '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'.
 			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? ((int)$_GET['p']) : '').'" />'."\n";
-		echo '<table cellspacing="1" cellpadding="4">'.
+		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="5">'.
 						'<input name="delete" id="submit" type="submit" value="'.$this->get_translation('ModerateDelete').'" /> '.
@@ -1194,7 +1194,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$accept_text = '&laquo;'.$this->page['title'].'&raquo;';
 
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-				'<table cellspacing="1" cellpadding="4" class="formation">'.
+				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateDeleteConfirm').'</th></td>'.
 					'<tr><td>'.
 						'<em>'.$accept_text.'</em><br />'.
@@ -1226,7 +1226,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-					'<table cellspacing="1" cellpadding="4" class="formation">'.
+					'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 						'<tr><th>'.$this->get_translation('ModerateMoveConfirm').'</th></td>'.
 						'<tr><td>'.
 							($error == true
@@ -1245,7 +1245,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			else
 			{
 				echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-					'<table cellspacing="1" cellpadding="4" class="formation">'.
+					'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 						'<tr><th>'.$this->get_translation('ModeratePgMoveConfirm').'</th></td>'.
 						'<tr><td>'.
 							($error == true
@@ -1263,7 +1263,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if ($accept_action == 'topic_rename')
 		{
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-				'<table cellspacing="1" cellpadding="4" class="formation">'.
+				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateRenameConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
@@ -1279,7 +1279,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if ($accept_action == 'posts_delete')
 		{
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-				'<table cellspacing="1" cellpadding="4" class="formation">'.
+				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.str_replace('%2', ( count($set) > 1 ? $this->get_translation('ModerateComments') : $this->get_translation('ModerateComment') ), str_replace('%1', count($set), $this->get_translation('ModerateComDelConfirm'))).'</th></td>'.
 					'<tr><td>'.
 						($error == true
@@ -1294,7 +1294,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if ($accept_action == 'posts_split')
 		{
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
-				'<table cellspacing="1" cellpadding="4" class="formation">'.
+				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.($forum_cluster === true ? $this->get_translation('ModerateSplitNewName') : $this->get_translation('ModerateSplitPageName') ).'</th></td>'.
 					'<tr><td>'.
 						($error == true
@@ -1315,7 +1315,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// print moderation controls...
 		echo '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'.
 			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? ((int)$_GET['p']) : '').'" />'."\n";
-		echo '<table cellspacing="1" cellpadding="4">'.
+		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="2">'.
 						'<input name="topic_delete" id="submit" type="submit" value="'.$this->get_translation('ModerateDeleteTopic').'" /> '.

@@ -198,6 +198,8 @@ table.forum th {
 	font-size: 12px;
 	text-align: center;
 	white-space: nowrap;
+	border-spacing: 3px;
+	border-collapse: separate;
 }
 
 
