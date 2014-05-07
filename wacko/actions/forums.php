@@ -69,7 +69,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$forums	= $this->load_all($sql, 1);
 
 	// display list
-	echo '<table cellspacing="1" cellpadding="4" class="forum">'.
+	echo '<table class="forum">'.
 			'<tr>'.
 				'<th>'.$this->get_translation('ForumSubforums').'</th>'.
 				'<th>'.$this->get_translation('ForumTopics').'</th>'.

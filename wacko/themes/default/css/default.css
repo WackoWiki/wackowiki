@@ -1103,6 +1103,8 @@ table.formation {
 	background-color: #EDEDED;
 	border: 1px solid #CDCDCD;
 	border-collapse: collapse;
+	border-spacing: 3px;
+	border-collapse: separate;
 }
 table.formation th, tr.formation th {
 	background-color: #DDDDDD;
@@ -1475,10 +1477,17 @@ table.forum {
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	border-spacing: 3px;
+	border-collapse: separate;
 }
 
 table.forum th {
 	font-size: 12px;
 	text-align: center;
 	white-space: nowrap;
+	padding: 5px;
+}
+
+table.forum td {
+	padding: 5px;
 }

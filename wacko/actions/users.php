@@ -119,7 +119,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 		// basic info
 ?>
-		<table cellspacing="3">
+		<table style="border-spacing: 3px; border-collapse: separate;">
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('RealName'); ?></td>
 				<td><?php echo $user['real_name']; ?></td>
@@ -418,7 +418,7 @@ else
 	echo '</td></tr></table><br />'."\n";
 
 	// print list
-	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
+	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;\">\n";
 
 	// pagination
 	if (isset($pagination['text']))

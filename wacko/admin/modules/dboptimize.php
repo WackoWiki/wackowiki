@@ -84,7 +84,7 @@ function admin_dboptimize(&$engine, &$module)
 		<br />
 		<form action="admin.php" method="post" name="optimize">
 			<input type="hidden" name="mode" value="dboptimize" />
-			<table cellspacing="1" cellpadding="4" style="max-width:250px" class="formation">
+			<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
 					<th style="width:50px;" colspan="2"><a href="?mode=dboptimize<?php echo $getstr.( $scheme['all'] == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
 					<th style="text-align:left;">Fragmentation</th>

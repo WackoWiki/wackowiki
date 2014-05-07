@@ -215,7 +215,7 @@ function admin_dbrestore(&$engine, &$module)
 				<br />
 				<form action="admin.php" method="post" name="restore">
 					<input type="hidden" name="mode" value="dbrestore" />
-					<table cellspacing="1" cellpadding="4" class="formation">
+					<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 						<tr>
 							<th>Creation Date</th>
 							<th>The contents of the package</th>
