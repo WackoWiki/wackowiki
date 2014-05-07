@@ -3266,6 +3266,19 @@ class Wacko
 			return $message = $match[0];
 		}
 
+		// disallow pages with Comment[0-9] and all sub pages, we do not want sub pages on a comment.
+		if (preg_match( '/\b(Comment([0-9]+))\b/i', $_data, $match ))
+		{
+			return "Comment([0-9]+)";
+		}
+
+		// TODO: disallow random pages for the first level in the users cluster except the own [UserName].
+		/* if (preg_match( '/\b('.$this->config['users_page'].'\/*\/)\b/i', $_data, $match ))
+		{
+			$this->debug_print_r($match);
+			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
+		} */
+
 		/*
 		if (preg_match( '/^\/[0-9]+/', $_data, $match ))
 		{
@@ -3273,6 +3286,7 @@ class Wacko
 			/// !!! to messageset, begins with 0-9
 		}
 		*/
+
 		return 0;
 	}
 
