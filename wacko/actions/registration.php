@@ -27,15 +27,15 @@ if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTT
 if (isset($_GET['confirm']))
 {
 	if ($temp = $this->load_single(
-		"SELECT user_name, email, email_confirm ".
-		"FROM ".$this->config['user_table']." ".
-		"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."' ".
-		"LIMIT 1"))
+			"SELECT user_name, email, email_confirm ".
+			"FROM ".$this->config['user_table']." ".
+			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."' ".
+			"LIMIT 1"))
 	{
 		$this->sql_query(
 			"UPDATE ".$this->config['user_table']." ".
 			"SET email_confirm = '' ".
-			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'");
+			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
 
 		echo "<div class=\"info\">".$this->get_translation('EmailConfirmed')."</div><br />";
 
@@ -177,6 +177,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				$salt_length		= 10;
 				$salt				= $this->random_password($salt_length, 3);
 				$confirm			= hash('sha256', $password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
+				$confirm_hash		= hash('sha256', $confirm.hash('sha256', $this->config['system_seed']));
 				$password_encrypted	= hash('sha256', $user_name.$salt.$password);
 
 				/* $timezone			= date('Z') / 3600;
@@ -205,7 +206,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"user_name		= '".quote($this->dblink, $user_name)."', ".
 						#"real_name		= '".quote($this->dblink, $real_name)."', ".
 						"email			= '".quote($this->dblink, $email)."', ".
-						"email_confirm	= '".quote($this->dblink, $confirm)."', ".
+						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
 						"password		= '".quote($this->dblink, $password_encrypted)."', ".
 						"salt			= '".quote($this->dblink, $salt)."'");
 
