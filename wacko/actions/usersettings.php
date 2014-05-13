@@ -24,13 +24,13 @@ if (isset($_GET['confirm']))
 	if ($temp = $this->load_single(
 			"SELECT user_name, email, email_confirm ".
 			"FROM ".$this->config['user_table']." ".
-			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."' ".
+			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."' ".
 			"LIMIT 1"))
 	{
 		$this->sql_query(
 			"UPDATE ".$this->config['user_table']." ".
 			"SET email_confirm = '' ".
-			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'");
+			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
 
 		echo '<div class="info">'.$this->get_translation('EmailConfirmed').'</div>';
 
@@ -147,12 +147,13 @@ else if ($user = $this->get_user())
 	{
 		if ($email = ( $_GET['resend_code'] == 1 ? $user['email'] : $_POST['email'] ))
 		{
-			$confirm = hash('sha256', $user['password'].mt_rand().time().mt_rand().$email.mt_rand());
+			$confirm		= hash('sha256', $user['password'].mt_rand().time().mt_rand().$email.mt_rand());
+			$confirm_hash	= hash('sha256', $confirm.hash('sha256', $this->config['system_seed']));
 
 			$this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
-				"SET email_confirm = '".quote($this->dblink, $confirm)."' ".
-				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+				"SET email_confirm = '".quote($this->dblink, $confirm_hash)."' ".
+				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 				"LIMIT 1");
 
 			$subject = $this->config['site_name'].". ".$this->get_translation('EmailConfirm');

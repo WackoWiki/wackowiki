@@ -32,7 +32,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 	$user = $this->load_single(
 		"SELECT user_id, user_name ".
 		"FROM ".$this->config['user_table']." ".
-		"WHERE change_password='".quote($this->dblink, $code)."' ".
+		"WHERE change_password='".quote($this->dblink, hash('sha256', $code.hash('sha256', $this->config['system_seed'])))."' ".
 		"LIMIT 1");
 
 	if ($user)
@@ -322,7 +322,8 @@ else
 		{
 			if ($this->config['enable_email'] == true && $user['email_confirm'] == '')
 			{
-				$code = hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
+				$code		= hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
+				$code_hash	= hash('sha256', $code.hash('sha256', $this->config['system_seed']));
 
 				$subject =	$this->get_translation('EmailForgotSubject').
 							$this->config['site_name'];
@@ -339,8 +340,8 @@ else
 				// update table
 				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
-						"change_password = '".quote($this->dblink, $code)."' ".
-					"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+						"change_password = '".quote($this->dblink, $code_hash)."' ".
+					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
 
 				// send code
