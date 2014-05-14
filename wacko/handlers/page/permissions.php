@@ -35,7 +35,7 @@ if ($this->user_is_owner() || $this->is_admin())
 		$_comment_acl	= isset($_POST['comment_acl']) ? $_POST['comment_acl'] : '';
 		$_create_acl	= isset($_POST['create_acl']) ? $_POST['create_acl'] : '';
 		$_upload_acl	= isset($_POST['upload_acl']) ? $_POST['upload_acl'] : '';
-		$_new_owner		= isset($_POST['new_owner']) ? $_POST['new_owner'] : '';
+		$_new_owner_id	= isset($_POST['new_owner_id']) ? $_POST['new_owner_id'] : '';
 
 		// acls for page or entire cluster
 		$need_massacls	= 0;
@@ -83,19 +83,18 @@ if ($this->user_is_owner() || $this->is_admin())
 			$message = $this->get_translation('ACLUpdated');
 
 			// change owner?
-			if ($new_owner = $_new_owner)
+			if ($new_owner_id = $_new_owner_id)
 			{
 				// check user exists
 				$user = $this->load_single(
 					"SELECT user_id, user_name, email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
-					"WHERE user_id = '".quote($this->dblink, $new_owner)."' ".
+					"WHERE user_id = '".quote($this->dblink, $new_owner_id)."' ".
 					"LIMIT 1");
 
 				if ($user == true)
 				{
 					$new_owner		= $user['user_name'];
-					$new_owner_id	= $user['user_id'];
 
 					// update user statistics
 					if ($owner_id = $this->page['owner_id'])
@@ -190,9 +189,8 @@ if ($this->user_is_owner() || $this->is_admin())
 				}
 
 				// change owner?
-				if ($new_owner = $_new_owner)
+				if ($new_owner_id = $_new_owner_id)
 				{
-					$new_owner_id = $this->get_user_id($new_owner);
 					$this->set_page_owner($page['page_id'], $new_owner_id);
 					$ownedpages .= $this->href('', $page['tag'])."\n";
 
@@ -203,20 +201,18 @@ if ($this->user_is_owner() || $this->is_admin())
 
 			$message = $this->get_translation('ACLUpdated');
 
-			if ($new_owner = $_new_owner)
+			if ($new_owner_id = $_new_owner_id)
 			{
-				$message .= $this->get_translation('ACLGaveOwnership').$new_owner;
-
 				$user = $this->load_single(
-					"SELECT email, email_confirm ".
+					"SELECT user_name, email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
-					"WHERE user_name = '".quote($this->dblink, $new_owner)."' ".
+					"WHERE user_id = '".quote($this->dblink, $new_owner_id)."' ".
 					"LIMIT 1");
 
 				if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 				{
 					$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageOwnership');
-					$body  = $this->get_translation('EmailHello').$new_owner.".\n\n";
+					$body  = $this->get_translation('EmailHello').$user['user_name'].".\n\n";
 					$body .= str_replace('%2', $this->config['site_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
 					$body .= $ownedpages."\n";
 					$body .= $this->get_translation('PageOwnershipInfo')."\n";
@@ -224,6 +220,8 @@ if ($this->user_is_owner() || $this->is_admin())
 					$body .= $this->get_translation('EmailGoodbye')."\n".$this->config['site_name']."\n".$this->config['base_url'];
 					$this->send_mail($user['email'], $subject, $body);
 				}
+
+				$message .= $this->get_translation('ACLGaveOwnership').$user['user_name'];
 			}
 		}
 
@@ -275,8 +273,8 @@ if ($this->user_is_owner() || $this->is_admin())
 </p>
 
 <p>
-	<label for="new_owner"><?php echo $this->get_translation('SetOwner'); ?></label>
-	<select id="new_owner" name="new_owner">
+	<label for="new_owner_id"><?php echo $this->get_translation('SetOwner'); ?></label>
+	<select id="new_owner_id" name="new_owner_id">
 		<option value=""><?php echo $this->get_translation('OwnerDontChange'); ?></option>
 	<?php
 			if ($users = $this->load_users())

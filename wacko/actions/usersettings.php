@@ -368,7 +368,7 @@ else if ($user = $this->get_user())
 		$code = $this->load_single(
 			"SELECT email_confirm ".
 			"FROM {$this->config['user_table']} ".
-			"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+			"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 			"LIMIT 1");
 
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('UserSettingsGeneral')."</h3>";
