@@ -3888,24 +3888,24 @@ class Wacko
 	// update current session time
 	function update_session_time($user)
 	{
-		if ($user['user_name'] == true)
+		if ($user['user_id'] == true)
 		{
 			return $this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET session_time = NOW() ".
-				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 				"LIMIT 1");
 		}
 	}
 
 	function update_last_mark($user)
 	{
-		if ($user['user_name'] == true)
+		if ($user['user_id'] == true)
 		{
 			return $this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET last_mark = NOW() ".
-				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 				"LIMIT 1");
 		}
 	}
@@ -3933,11 +3933,13 @@ class Wacko
 			$cookie		= implode(';', array($user['user_name'], $user['password'], $ses_time));
 		}
 
-		$this->set_session_cookie('auth', $cookie, '', ( $this->config['tls'] == true ? 1 : 0 ));
-
 		if ($persistent)
 		{
 			$this->set_persistent_cookie('auth', $cookie, $session, ( $this->config['tls'] == true ? 1 : 0 ));
+		}
+		else
+		{
+			$this->set_session_cookie('auth', $cookie, '', ( $this->config['tls'] == true ? 1 : 0 ));
 		}
 
 		// update session expiry and clear password recovery
@@ -3946,7 +3948,7 @@ class Wacko
 			"UPDATE {$this->config['user_table']} SET ".
 				"session_expire		= '".quote($this->dblink, $ses_time)."', ".
 				"change_password	= '' ".
-			"WHERE user_name		= '".quote($this->dblink, $user['user_name'])."' ".
+			"WHERE user_id		= '".quote($this->dblink, $user['user_id'])."' ".
 			"LIMIT 1");
 
 		// restart logged in user session with specific session id
@@ -4005,7 +4007,7 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET session_expire = 0 ".
-			"WHERE user_name = '".quote($this->dblink, $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_name'])."' ".
+			"WHERE user_id = '".quote($this->dblink, $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id'])."' ".
 			"LIMIT 1");
 
 		$this->delete_cookie('auth', true, true);
