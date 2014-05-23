@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 if (!function_exists('full_text_search'))
 {
-	function full_text_search(&$wacko, $phrase, $for, $limit = 50, $filter)
+	function full_text_search(&$wacko, $phrase, $for, $limit = 50, $filter, $deleted = 0)
 	{
 		$limit		= (int) $limit;
 		$pagination	= '';
@@ -26,7 +26,12 @@ if (!function_exists('full_text_search'))
 					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
 					: "").
 				($filter
-					? "AND a.comment_on_id = '0'"
+					? "AND a.comment_on_id = '0' "
+					: "").
+				($deleted != 1
+					? ($for
+							? "AND (a.deleted <> '1' OR b.deleted <> '1')"
+							: "AND a.deleted <> '1'")
 					: "").
 				" )", 1);
 
@@ -48,7 +53,12 @@ if (!function_exists('full_text_search'))
 					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
 					: "").
 				($filter
-					? "AND a.comment_on_id = '0'"
+					? "AND a.comment_on_id = '0' "
+					: "").
+				($deleted != 1
+					? ($for
+							? "AND (a.deleted <> '1' OR b.deleted <> '1')"
+							: "AND a.deleted <> '1'")
 					: "").
 				" )".
 			"ORDER BY score DESC ".
