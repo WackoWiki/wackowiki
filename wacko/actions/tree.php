@@ -40,6 +40,7 @@ if ($pages = $this->load_all(
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND tag LIKE '".quote($this->dblink, $root)."%' ".
+		"AND deleted <> '1' ".
 	"ORDER BY tag", 1))
 {
 	// pick all subpages up to the desired depth level
