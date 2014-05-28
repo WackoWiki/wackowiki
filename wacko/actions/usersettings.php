@@ -44,7 +44,7 @@ if (isset($_GET['confirm']))
 	}
 	else
 	{
-		echo "<br /><br />".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed'))."<br /><br />";
+		echo '<div class="info">'.str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed')).'</div>';
 	}
 }
 else if (isset($_GET['action']) && $_GET['action'] == 'logout')
