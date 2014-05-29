@@ -12,6 +12,7 @@ if (!defined('IN_WACKO'))
 $user_name		= '';
 $real_name		= '';
 $email			= '';
+$lang			= '';
 $password		= '';
 $confpassword	= '';
 $error			= '';
@@ -66,7 +67,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 		$email			= trim($_POST['email']);
 		$password		= $_POST['password'];
 		$confpassword	= $_POST['confpassword'];
-		$lang			= (isset($_POST['lang']) ? $_POST['lang'] : '');
+		$lang			= (isset($_POST['lang']) ? $_POST['lang'] : $this->config['language']);
 		#$timezone		= trim($_POST['timezone']);
 		$complexity		= $this->password_complexity($user_name, $password);
 
@@ -254,7 +255,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 								str_replace('%1', $this->config['site_name'],
 								str_replace('%2', $user_name,
 								str_replace('%3', $this->href().
-								($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
+								($this->config['rewrite_mode'] ? "?" : "&")."confirm=".$confirm,
 								$this->get_translation('EmailRegistered'))))."\n\n".
 								$this->get_translation('EmailGoodbye')."\n".
 								$this->config['site_name']."\n".
