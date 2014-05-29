@@ -32,7 +32,7 @@ if (isset($_GET['confirm']))
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
 
-		echo '<div class="info">'.$this->get_translation('EmailConfirmed').'</div>';
+		$this->show_message( $this->get_translation('EmailConfirmed') );
 
 		// log event
 		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
@@ -44,7 +44,7 @@ if (isset($_GET['confirm']))
 	}
 	else
 	{
-		echo '<div class="info">'.str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed')).'</div>';
+		$this->show_message( str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed')) );
 	}
 }
 else if (isset($_GET['action']) && $_GET['action'] == 'logout')
@@ -161,7 +161,7 @@ else if ($user = $this->get_user())
 				str_replace('%1', $this->config['site_name'],
 				str_replace('%2', $user['user_name'],
 				str_replace('%3', $this->href().
-				($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
+				($this->config['rewrite_mode'] ? "?" : "&")."confirm=".$confirm,
 				$this->get_translation('EmailVerify'))))."\n\n".
 				$this->get_translation('EmailGoodbye')."\n".
 				$this->config['site_name']."\n".
@@ -399,7 +399,8 @@ else if ($user = $this->get_user())
 		if (!$user['email'] || $code['email_confirm'])
 			echo "<div class=\"BewareChangeLang\"><strong class=\"cite\">".
 				$this->get_translation('EmailNotVerified')."</strong><br />".
-				"<small>".$this->get_translation('EmailNotVerifiedDesc')."<strong><a href=\"?resend_code=1\">".$this->get_translation('HereLink')."</a></strong>.</small></div>";
+				"<small>".$this->get_translation('EmailNotVerifiedDesc')."<strong><a href=\"".$this->href().
+								($this->config['rewrite_mode'] ? "?" : "&")."resend_code=1\">".$this->get_translation('HereLink')."</a></strong>.</small></div>";
 ?></td>
 	</tr>
 	<tr>
