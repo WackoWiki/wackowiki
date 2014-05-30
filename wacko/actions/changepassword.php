@@ -106,7 +106,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 		{
 			//Password forgotten. Provided secret code only. Print password change form.
 			echo $this->form_open();
-			echo "<input type=\"hidden\" name=\"secret_code\" value=\"".$code."\" />";
+			echo '<input type="hidden" name="secret_code" value="'.$code.'" />';
 			?>
 
 			<div class="cssform">
@@ -331,7 +331,7 @@ else
 							str_replace('%1', $this->config['site_name'],
 							str_replace('%2', $user['user_name'],
 							str_replace('%3', $this->href().
-							($this->config['rewrite_mode'] ? "?" : "&amp;")."secret_code=".$code,
+							($this->config['rewrite_mode'] ? "?" : "&")."secret_code=".$code,
 							$this->get_translation('EmailForgotMessage'))))."\n";
 				$body.=	"\n".$this->get_translation('EmailGoodbye').
 							"\n".$this->config['site_name'].
