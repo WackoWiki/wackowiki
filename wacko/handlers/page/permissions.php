@@ -28,13 +28,42 @@ else if ($this->forum === true && !$this->is_admin())
 
 if ($this->user_is_owner() || $this->is_admin())
 {
+	// check who u are, can u upload?
+	if ($user = $this->get_user())
+	{
+		$user_name	= strtolower($this->get_user_name());
+	}
+	else
+	{
+		$user_name		= GUEST;
+	}
+
+	// check if upload is allowed for user
+	if (
+	($this->config['upload'] === true) ||
+	($this->config['upload'] == 1) ||
+	($this->check_acl($user_name, $this->config['upload']))
+	)
+	{
+		$upload_allowed = true;
+	}
+	else
+	{
+		$upload_allowed = false;
+	}
+
 	if ($_POST)
 	{
 		$_read_acl		= isset($_POST['read_acl']) ? $_POST['read_acl'] : '';
 		$_write_acl		= isset($_POST['write_acl']) ? $_POST['write_acl'] : '';
 		$_comment_acl	= isset($_POST['comment_acl']) ? $_POST['comment_acl'] : '';
 		$_create_acl	= isset($_POST['create_acl']) ? $_POST['create_acl'] : '';
-		$_upload_acl	= isset($_POST['upload_acl']) ? $_POST['upload_acl'] : '';
+
+		if ($upload_allowed == true)
+		{
+			$_upload_acl	= isset($_POST['upload_acl']) ? $_POST['upload_acl'] : '';
+		}
+
 		$_new_owner_id	= isset($_POST['new_owner_id']) ? $_POST['new_owner_id'] : '';
 
 		// acls for page or entire cluster
@@ -53,7 +82,11 @@ if ($this->user_is_owner() || $this->is_admin())
 			$this->save_acl($this->page['page_id'], 'write', $_write_acl);
 			$this->save_acl($this->page['page_id'], 'comment', $_comment_acl);
 			$this->save_acl($this->page['page_id'], 'create', $_create_acl);
-			$this->save_acl($this->page['page_id'], 'upload', $_upload_acl);
+
+			if ($upload_allowed == true)
+			{
+				$this->save_acl($this->page['page_id'], 'upload', $_upload_acl);
+			}
 
 			// log event
 			$this->log(2, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
@@ -161,7 +194,11 @@ if ($this->user_is_owner() || $this->is_admin())
 				$this->save_acl($page['page_id'], 'write', $_write_acl);
 				$this->save_acl($page['page_id'], 'comment', $_comment_acl);
 				$this->save_acl($page['page_id'], 'create', $_create_acl);
-				$this->save_acl($page['page_id'], 'upload', $_upload_acl);
+
+				if ($upload_allowed == true)
+				{
+					$this->save_acl($page['page_id'], 'upload', $_upload_acl);
+				}
 
 				// log event
 				$this->log(2, str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
@@ -243,7 +280,11 @@ if ($this->user_is_owner() || $this->is_admin())
 		$write_acl		= $this->load_acl($this->page['page_id'], 'write', 1, 0);
 		$comment_acl	= $this->load_acl($this->page['page_id'], 'comment', 1, 0);
 		$create_acl		= $this->load_acl($this->page['page_id'], 'create', 1, 0);
-		$upload_acl		= $this->load_acl($this->page['page_id'], 'upload', 1, 0);
+
+		if ($upload_allowed == true)
+		{
+			$upload_acl		= $this->load_acl($this->page['page_id'], 'upload', 1, 0);
+		}
 
 		// show form
 ?>
@@ -267,11 +308,15 @@ if ($this->user_is_owner() || $this->is_admin())
 	<label for="create_acl"><?php echo $this->get_translation('ACLCreate'); ?></label>
 	<textarea id="create_acl" name="create_acl" rows="4" cols="20"><?php echo $create_acl['list'] ?></textarea>
 </p>
+<?php
+// check if upload is available for user
+if ($upload_allowed == true)
+{ ?>
 <p>
 	<label for="upload_acl"><?php echo $this->get_translation('ACLUpload'); ?></label>
 	<textarea id="upload_acl" name="upload_acl" rows="4" cols="20"><?php echo $upload_acl['list'] ?></textarea>
 </p>
-
+<?php } ?>
 <p>
 	<label for="new_owner_id"><?php echo $this->get_translation('SetOwner'); ?></label>
 	<select id="new_owner_id" name="new_owner_id">
