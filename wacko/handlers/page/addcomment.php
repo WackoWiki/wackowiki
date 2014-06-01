@@ -33,7 +33,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	// watch page
-	if ($this->page && isset($_POST['watchpage']) && (isset($_POST['noid_publication']) && $_POST['noid_publication'] != $this->page['page_id']) && $user && $this->iswatched !== true)
+	if ($this->page && (isset($_POST['watchpage']) && ($_POST['watchpage'])) && ($_POST['noid_publication'] != $this->page['page_id']) && $user && $this->iswatched !== true)
 	{
 		$this->set_watch($user['user_id'], $this->page['page_id']);
 	}

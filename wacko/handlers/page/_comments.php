@@ -208,8 +208,9 @@ if ($this->has_access('read'))
 				// watch a page
 				if ($this->page && $this->iswatched !== true)
 				{
-					$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting('send_watchmail') == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation('NotifyMe')."</label></small>";
-					$output .= "<br />";
+					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? 'checked="checked"' : '' ).' />';
+					$output .= '<small><label for="watchpage">'.$this->get_translation('NotifyMe').'</label></small>';
+					$output .= '<br />';
 				}
 
 				echo '<br />'.$output;
