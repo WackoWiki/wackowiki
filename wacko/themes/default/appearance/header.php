@@ -293,7 +293,8 @@ else
 		echo echo_tab(
 			$this->href('watch'),
 			($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
-			($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+			#($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+			($this->page && ($this->get_user())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
 			$this->method == 'watch',
 			($this->iswatched === true ? 'watch-on.png' : 'watch-off.png'),
 			'a');
