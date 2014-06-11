@@ -103,8 +103,8 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
-					"body_r MEDIUMTEXT NOT NULL,".
-					"body_toc TEXT NOT NULL,".
+					"body_r MEDIUMTEXT NOT NULL DEFAULT '',".
+					"body_toc TEXT NOT NULL DEFAULT '',".
 					"formatting VARCHAR(20) NOT NULL DEFAULT 'wacko',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
@@ -193,7 +193,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
-					"body_r MEDIUMTEXT NOT NULL,".
+					"body_r MEDIUMTEXT NOT NULL DEFAULT '',".
 					"formatting VARCHAR(20) DEFAULT NULL DEFAULT '',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
