@@ -276,6 +276,11 @@ form input.submitinput {
 	padding: 10px 18px;
 }
 
+.comment:hover {
+	/* border: 2px solid #FF6600; */
+	background-color: #E7F9FF;
+}
+
 /* Comment author and date */
 .commentinfo {
 	color: #AAAAAA;
