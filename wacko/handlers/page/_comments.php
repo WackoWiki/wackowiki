@@ -107,8 +107,8 @@ if ($this->has_access('read'))
 				// show remove comment button
 				if ($this->is_admin() ||
 				(!$this->config['remove_onlyadmins'] &&
-						($this->user_is_owner($comment['page_id']) ||
-						($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id']))
+					($this->user_is_owner($comment['page_id']) ||
+					($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id']))
 				)))
 				{
 					echo "<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.png\" title=\"".$this->get_translation('DeleteCommentTip')."\" alt=\"".$this->get_translation('DeleteText')."\" align=\"right\" /></a>";
