@@ -9,11 +9,11 @@
 	.calendar tr td
 */
 
-if (!isset($year)) $year = '';
-if (!isset($month)) $month = '';
-if (!isset($highlight)) $highlight = '';
-if (!isset($daywidth)) $daywidth = '';
-if (!isset($days)) $days = '';
+if (!isset($year))		$year		= '';
+if (!isset($month))		$month		= '';
+if (!isset($highlight))	$highlight	= '';
+if (!isset($daywidth))	$daywidth	= '';
+if (!isset($days))		$days		= '';
 
 
 $time			= time();
@@ -74,33 +74,34 @@ if (function_exists('generate_calendar') == false)
 
 		$day_names = array(); // generate all the day names according to the current locale
 
-		for($n = 0, $t = (3 + $first_day) * 86400; $n < 7; $n++, $t+=86400) // January 4, 1970 was a Sunday
+		for ($n = 0, $t = (3 + $first_day) * 86400; $n < 7; $n++, $t+=86400) // January 4, 1970 was a Sunday
 		{
 			$day_names[$n] = ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
 		}
 
-		list($month, $year, $month_name, $weekday) = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
+		list ($month, $year, $month_name, $weekday) = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
 
 		$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
 		$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&nbsp;'.$year;  // note that some locales don't capitalize month and day names
 
 		// Begin calendar. Uses a real <caption>.
-		@list($p, $pl) = each($pn);
-		@list($n, $nl) = each($pn); // previous and next links, if applicable
+		@list ($p, $pl) = each($pn);
+		@list ($n, $nl) = each($pn); // previous and next links, if applicable
 
-		if($p)
+		if ($p)
 		{
 			$p = '<span class="calendar-prev">'.($pl ? '<a href="'.htmlspecialchars($pl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$p.'</a>' : $p).'</span>&nbsp;';
 		}
 
-		if($n)
+		if ($n)
 		{
 			$n = '&nbsp;<span class="calendar-next">'.($nl ? '<a href="'.htmlspecialchars($nl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$n.'</a>' : $n).'</span>';
 		}
+
 		$calendar = '<table class="calendar">'."\n".
 			'<caption class="calendar-month">'.$p.($month_href ? '<a href="'.htmlspecialchars($month_href, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$title.'</a>' : $title).$n."</caption>\n<tr>";
 
-		if($day_name_length)
+		if ($day_name_length)
 		{
 			// if the day names should be shown ($day_name_length > 0)
 			// if day_name_length is >3, the full name of the day will be printed
@@ -112,14 +113,14 @@ if (function_exists('generate_calendar') == false)
 			$calendar .= "</tr>\n<tr>";
 		}
 
-		if($weekday > 0)
+		if ($weekday > 0)
 		{
 			$calendar .= '<td colspan="'.$weekday.'">&nbsp;</td>'; // initial 'empty' days
 		}
 
-		for($day = 1, $days_in_month = gmdate('t', $first_of_month); $day <= $days_in_month; $day++, $weekday++)
+		for ($day = 1, $days_in_month = gmdate('t', $first_of_month); $day <= $days_in_month; $day++, $weekday++)
 		{
-			if($weekday == 7)
+			if ($weekday == 7)
 			{
 				$weekday   = 0; // start a new week
 				$calendar .= "</tr>\n<tr>";

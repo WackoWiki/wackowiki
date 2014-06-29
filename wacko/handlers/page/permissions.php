@@ -54,10 +54,10 @@ if ($this->user_is_owner() || $this->is_admin())
 
 	if ($_POST)
 	{
-		$_read_acl		= isset($_POST['read_acl']) ? $_POST['read_acl'] : '';
-		$_write_acl		= isset($_POST['write_acl']) ? $_POST['write_acl'] : '';
-		$_comment_acl	= isset($_POST['comment_acl']) ? $_POST['comment_acl'] : '';
-		$_create_acl	= isset($_POST['create_acl']) ? $_POST['create_acl'] : '';
+		$_read_acl		= isset($_POST['read_acl'])		? $_POST['read_acl']	: '';
+		$_write_acl		= isset($_POST['write_acl'])	? $_POST['write_acl']	: '';
+		$_comment_acl	= isset($_POST['comment_acl'])	? $_POST['comment_acl']	: '';
+		$_create_acl	= isset($_POST['create_acl'])	? $_POST['create_acl']	: '';
 
 		if ($upload_allowed == true)
 		{
@@ -289,7 +289,11 @@ if ($this->user_is_owner() || $this->is_admin())
 		// show form
 ?>
 <h3><?php echo str_replace('%1', $this->compose_link_to_page($this->tag, '', '', 0), $this->get_translation('ACLFor')); ?></h3>
-<?php echo $this->form_open('permissions') ?> <?php echo "<input type=\"checkbox\" id=\"massacls\" name=\"massacls\" "; echo " /> <label for=\"massacls\">".$this->get_translation('AclForEntireCluster')."</label>"; ?>
+<?php
+echo $this->form_open('permissions');
+
+echo '<input type="checkbox" id="massacls" name="massacls" />';
+echo '<label for="massacls">'.$this->get_translation('AclForEntireCluster').'</label>'; ?>
 <br />
 <div class="cssform">
 <p>
