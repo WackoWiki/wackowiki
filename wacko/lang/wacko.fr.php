@@ -229,7 +229,7 @@ $wacko_translation = array(
 	'SourceDesc'				=> 'la source sera affichée à l&rsquo;exception des fragments cachés par les formateurs <nobr><code>%%(comments)..%%</code></nobr>',
 
 	// groups handler
-	'GroupsMembers'				=> 'Membres du groupe',
+	'GroupsMembersFor'				=> 'Membres du groupe',
 	'GroupsDescription'			=> 'Description',
 	'GroupsModerator'			=> 'Modérateur',
 	'GroupsOpen'				=> 'Ouvert',

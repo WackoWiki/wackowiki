@@ -229,7 +229,7 @@ $wacko_translation = array(
 	'SourceDesc'			=> 'se mostrará el código fuente con excepción de las partes ocultos con marcas <nobr><code>%%(comentarios)..%%</code></nobr>',
 
 	// groups handler
-	'GroupsMembers'			=> 'Miembros del grupo',
+	'GroupsMembersFor'			=> 'Miembros del grupo',
 	'GroupsDescription'	=> 'Descripción',
 	'GroupsModerator'	=> 'Moderador',
 	'GroupsOpen'		=> 'Abierto',
