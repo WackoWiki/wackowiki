@@ -53,7 +53,7 @@ function admin_configuploads(&$engine, &$module)
 	}
 ?>
 	<form action="admin.php" method="post" name="upload">
-		<input type="hidden" name="mode" value="configupload" />
+		<input type="hidden" name="mode" value="configuploads" />
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<tr>
