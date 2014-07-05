@@ -227,7 +227,7 @@ $wacko_translation = array(
 	'SourceDesc'				=> 'Der Quelltext wird angezeigt werden mit Ausnahme der Fragmente, welche durch den Formatierer nicht ausgegeben werden <nobr><code>%%(comments)..%%</code></nobr>',
 
 	// groups handler
-	'GroupsMembers'				=> 'Mitglieder der Gruppe',
+	'GroupsMembersFor'				=> 'Mitglieder der Gruppe',
 	'GroupsDescription'			=> 'Beschreibung',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Offen',
@@ -247,7 +247,7 @@ $wacko_translation = array(
 	'GroupsSaveButton'			=> 'Absenden',
 	'GroupsCancelButton'		=> 'Abbrechen',
 	'GroupsAddButton'			=> 'Hinzufügen',
-	'GroupsEditButton'			=> 'Bearbeiten',
+	'GroupsEditButton'			=> 'Gruppe Bearbeiten',
 	'GroupsRemoveButton'		=> 'Entfernen',
 	'GroupsEditInfo'			=> 'Zum Bearbeiten der Gruppen-Liste wähle das Optionsfeld',
 
@@ -1053,7 +1053,7 @@ $wacko_translation = array(
 
 	// Admin panel
 	'Authorization'				=> 'Autorisation',
-	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (make also sure that cookies are allowed in your browser).',
+	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von Deinem Browser akzeptiert werden).',
 	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
 	'NoRecoceryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
 

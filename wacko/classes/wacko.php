@@ -306,7 +306,9 @@ class Wacko
 	function get_time_tz($time)
 	{
 		$user			= $this->get_user();
-		$zone_offset	= ($user['timezone'] * 3600) + ($user['dst'] * 3600);
+		$timezone		= isset($user['timezone'])	? $user['timezone']	: $this->config['timezone'];
+		$dst			= isset($user['dst'])		? $user['dst']		: $this->config['dst'];
+		$zone_offset	= ($timezone * 3600) + ($dst * 3600);
 		$tz_time		= $time + $zone_offset - date('Z');
 
 		return $tz_time;
@@ -1202,7 +1204,6 @@ class Wacko
 			foreach ($menu_items as $item)
 			{
 				$pages[] = $item['tag'];
-
 			}
 		}
 
