@@ -467,7 +467,8 @@ function admin_users(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=users&order='.isset($_GET['order']) ? htmlspecialchars($_GET['order'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '', '', 'admin.php');
+		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=users&order='.isset($order_pagination) ? htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '', '', 'admin.php');
 
 		$users = $engine->load_all(
 			"SELECT u.*, p.lang ".
