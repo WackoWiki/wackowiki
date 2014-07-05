@@ -130,14 +130,14 @@ function admin_groups(&$engine, &$module)
 			}
 
 			// remove member from group
-			if (isset($_POST['remove_member']) && isset($_POST['changemember']))
+			if (isset($_POST['remove_member']) && isset($_POST['change_member']))
 			{
-				if ($member = $engine->load_single("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['changemember'])."' LIMIT 1"))
+				if ($member = $engine->load_single("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['change_member'])."' LIMIT 1"))
 				{
 					echo '<form action="admin.php" method="post" name="groups">';
 					echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
 					echo '<input type="hidden" name="mode" value="groups" />';
-					echo '<input type="hidden" name="member_id" value="'.htmlspecialchars($_POST['changemember'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
+					echo '<input type="hidden" name="member_id" value="'.htmlspecialchars($_POST['change_member'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 					echo '<table class="formation">';
 					echo '<tr><td><label for="">'.$engine->get_translation('MembersRemove').' \'<code>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 						'<input id="submit" type="submit" name="remove_member" value="yes" style="width:40px;" /> '.
@@ -363,7 +363,7 @@ function admin_groups(&$engine, &$module)
 		foreach ($members as $member)
 		{
 			echo '<tr class="lined">'."\n".
-			'<td align="center"><input type="radio" name="changemember" value="'.$member['user_id'].'" /></td>'.
+			'<td align="center"><input type="radio" name="change_member" value="'.$member['user_id'].'" /></td>'.
 					'<td align="center">'.$member['user_id'].'</td>'.
 					'<td align="center" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$member['user_id'].'">'.$member['user_name'].'</a></strong></td>'.
 			'</tr>';
