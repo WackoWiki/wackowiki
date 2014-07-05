@@ -105,7 +105,8 @@ function admin_systemlog(&$engine, &$module)
 		"FROM {$engine->config['table_prefix']}log l ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
 
-	$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.isset($_GET['order']) ? htmlspecialchars($_GET['order'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '', '', 'admin.php');
+	$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
+	$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.isset($order_pagination) ? htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '', '', 'admin.php');
 
 	$log = $engine->load_all(
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ".
