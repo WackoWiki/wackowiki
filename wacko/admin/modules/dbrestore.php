@@ -240,14 +240,14 @@ function admin_dbrestore(&$engine, &$module)
 					echo '<tr>'."\n";
 
 					// pack
-					echo '<td valign="top"><table><tr><td class="label" style="width:10px;">'.
+					echo '<td><table><tr><td class="label" style="width:10px;">'.
 							'<input name="id" type="radio" value="'.$packname.'" />'.
 						'</td><th style="text-align:left;white-space:nowrap;">'.
 							date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).
 						'</th></tr></table></td>'."\n";
 
 					// description
-					echo '<td valign="top"><table>';
+					echo '<td><table>';
 						// cluster root
 						echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">'.
 								'Cluster: '.( $log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">Entire site</em>' ).
@@ -260,39 +260,57 @@ function admin_dbrestore(&$engine, &$module)
 							'</tr>'."\n";
 						// structure
 						echo '<tr>'.
-								'<td valign="top">';
+								'<td>';
 						$list = explode(';', $log[3]);
+
 						foreach ($tables as $table)
 						{
 							if (in_array($table['name'], $list))
+							{
 								echo '<strong>'.$table['name'].'</strong><br />';
+							}
 							else
+							{
 								echo '<em class="grey">'.$table['name'].'</em><br />';
+							}
 						}
+
 						// data
 						echo '</td>'."\n".
-							'<td valign="top">';
+							'<td>';
 						$list = explode(';', $log[4]);
+
 						foreach ($tables as $table)
 						{
 							if (in_array($table['name'], $list))
+							{
 								echo '<strong>'.$table['name'].'</strong><br />';
+							}
 							else
+							{
 								echo '<em class="grey">'.$table['name'].'</em><br />';
+							}
 						}
+
 						// files
 						echo '</td>'."\n".
-							'<td valign="top">';
+							'<td>';
 						$list = explode(';', $log[5]);
+
 						foreach ($directories as $directory)
 						{
 							$directory = rtrim($directory, '/');
 
 							if (in_array($directory, $list))
+							{
 								echo '<strong>'.$directory.'</strong><br />';
+							}
 							else
+							{
 								echo '<em class="grey">'.$directory.'</em><br />';
+							}
 						}
+
 						echo	 '</td>'."\n".
 							'</tr></table>'."\n";
 
