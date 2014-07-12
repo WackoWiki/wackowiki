@@ -101,7 +101,7 @@ function admin_dboptimize(&$engine, &$module)
 					echo '<tr class="hl_setting">'.
 							'<td class="label"><input name="'.$table['Name'].'" type="checkbox" value="table" '.( $table['Data_free'] > 0 || (isset($scheme['all']) && $scheme['all'] == true) ? 'checked="checked"' : '' ).'/></td>'.
 							'<td>&nbsp;&nbsp;<strong>'.$table['Name'].'&nbsp;&nbsp;</strong></td>'.
-							'<td>'.( $table['Data_free'] > 0 ? '<strong class="red">' : '' ).ceil($table['Data_free'] / 1000).' Kb'.( $table['Data_free'] > 0 ? '</strong>' : '' ).'</td>'.
+							'<td>'.( $table['Data_free'] > 0 ? '<strong class="red">' : '' ).ceil($table['Data_free'] / 1024).' KiB'.( $table['Data_free'] > 0 ? '</strong>' : '' ).'</td>'.
 						'</tr>'.
 						'<tr class="lined"><td colspan="3"></td></tr>'."\n";
 				}
