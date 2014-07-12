@@ -33,11 +33,11 @@ define('TRAN_LOWERCASE',				1);
 define('TRAN_LOAD',						0);
 define('TRAN_DONTLOAD',					1);
 
-// do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
+// do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 define('WACKO_VERSION',					'5.4.0');
 define('HTML_ENTITIES_CHARSET',			'ISO-8859-1'); // ISO-8859-1, cp1251
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
-#define('XML_HTMLSAX3',					dirname(__FILE__).'/lib/HTMLSax3/');
+
 define('ACTIONS4DIFF',					'anchor, toc'); //allowed actions in DIFF
 define('PHP_MIN_VERSION',				'5.4.0'); //minimum required PHP version
 define('PHP_ERROR_REPORTING',			0); // PHP error reporting: 0 - off, 5 - all
