@@ -254,6 +254,7 @@ $wacko_translation = array(
 	'GroupsEditInfo'			=> 'Pour modifier la liste des groupes utilisez le bouton radio.',
 
 	'MembersAddNew'				=> 'Ajouter un membre',
+	'MembersAdded'				=> 'Added new member to the group successfully.',
 	'MembersRemove'				=> 'Êtes-vous sûr de vouloir ôter le membre ',
 	'MembersRemoved'			=> 'Le membre a été ôté du groupe.',
 	'MembersDeleteInfo'			=> '* Note&nbsp;: Les modifications affecteront tous les membres de ce groupe.',

@@ -58,17 +58,18 @@ function admin_groups(&$engine, &$module)
 		if (isset($_GET['group_id']) || isset($_POST['add_member'])|| isset($_POST['remove_member']))
 		{
 			$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
+			$usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".quote($engine->dblink, $group_id)."' LIMIT 1");
 
 			// add member into group
-			if (isset($_POST['add_member']) && isset($_POST['new_member']))
+			if (isset($_POST['add_member']) && isset($_POST['new_member_id']))
 			{
 				$engine->sql_query(
 					"INSERT INTO {$engine->config['table_prefix']}usergroup_member SET ".
 						"group_id	= '".quote($engine->dblink, $_POST['group_id'])."', ".
-						"user_id	= '".quote($engine->dblink, (int)$_POST['new_member'])."'");
+						"user_id	= '".quote($engine->dblink, (int)$_POST['new_member_id'])."'");
 
-					$engine->set_message($engine->get_translation('GroupsAdded'));
-					$engine->log(4, "Added member //'{$_POST['new_member']}'// into group //'{$_POST['group_id']}'// ");
+					$engine->show_message($engine->get_translation('MembersAdded'));
+					$engine->log(4, "Added member //'{$_POST['new_member_id']}'// into group //'{$_POST['group_id']}'// ");
 					unset($_POST['add_member']);
 			}
 
@@ -80,8 +81,8 @@ function admin_groups(&$engine, &$module)
 					"WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."' ".
 						"AND user_id = '".quote($engine->dblink, $_POST['member_id'])."'");
 
-				$engine->set_message($engine->get_translation('MembersRemoved'));
-				$engine->log(4, "Removed member //'{$usergroup['group_name']}'//  from group ");
+				$engine->show_message($engine->get_translation('MembersRemoved'));
+				$engine->log(4, "Removed member //'{$_POST['member_id']}'// from group //'{$usergroup['group_name']}'// (//'{$_POST['group_id']}'//)");
 			}
 
 			/////////////////////////////////////////////
@@ -109,8 +110,8 @@ function admin_groups(&$engine, &$module)
 				echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
 				echo '<input type="hidden" name="mode" value="groups" />';
 				echo '<table class="formation">';
-				echo '<tr><td><label for="new_member">'.$engine->get_translation('MembersAddNew').'</label></td>'.
-					'<td><select id="new_member" name="new_member">';?>
+				echo '<tr><td><label for="new_member_id">'.$engine->get_translation('MembersAddNew').'</label></td>'.
+					'<td><select id="new_member_id" name="new_member_id">';?>
 						<option value=""></option>
 						<?php
 						if ($available_users)
@@ -160,7 +161,7 @@ function admin_groups(&$engine, &$module)
 			"WHERE group_name = '".quote($engine->dblink, $_POST['new_group_name'])."' ".
 			"LIMIT 1"))
 			{
-				$engine->set_message($engine->get_translation('GroupsAlreadyExists'));
+				$engine->show_message($engine->get_translation('GroupsAlreadyExists'));
 				$_POST['change'] = $_POST['group_id'];
 				$_POST['create'] = 1;
 			}
@@ -175,7 +176,7 @@ function admin_groups(&$engine, &$module)
 						"open			= '".quote($engine->dblink, (int)$_POST['open'])."', ".
 						"active			= '".quote($engine->dblink, (int)$_POST['active'])."'");
 
-				$engine->set_message($engine->get_translation('GroupsAdded'));
+				$engine->show_message($engine->get_translation('GroupsAdded'));
 				$engine->log(4, "Created a new group //'{$_POST['new_group_name']}'//");
 				unset($_POST['create']);
 			}
@@ -206,8 +207,8 @@ function admin_groups(&$engine, &$module)
 					"LIMIT 1");
 
 
-				$engine->set_message($engine->get_translation('GroupsRenamed'));
-				$engine->log(4, "Group //'{$usergroup['group_name']}'// renamed //'{$_POST['new_group_name']}'//");
+				$engine->show_message($engine->get_translation('GroupsRenamed'));
+				$engine->log(4, "Group //'{$usergroup['group_name']}'// (//'{$_POST['group_id']}'//) renamed //'{$_POST['new_group_name']}'//");
 			}
 		}
 		// delete group
@@ -222,7 +223,7 @@ function admin_groups(&$engine, &$module)
 				"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
 				"WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."'");
 
-			$engine->set_message($engine->get_translation('GroupsDeleted'));
+			$engine->show_message($engine->get_translation('GroupsDeleted'));
 			$engine->log(4, "Removed group //'{$usergroup['group_name']}'//");
 
 			unset($_GET['group_id']);
