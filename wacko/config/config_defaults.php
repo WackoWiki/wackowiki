@@ -147,13 +147,13 @@ $wacko_config_defaults = array(
 	'username_chars_min' => 3,
 	'username_chars_max' => 20,
 
-	'standard_handlers' => 'addcomment|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|msword|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|show|source|upload|watch',
+	'standard_handlers' => 'addcomment|admin\.php|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|msword|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|robots\.txt|sitemap\.xml|show|source|upload|watch',
 
 	'upload' => 'admins',
 	'upload_images_only' => 0,
 	'upload_max_size' => 256,
 	'upload_quota' => 0,
-	'upload_quota_per_user' => 500000,
+	'upload_quota_per_user' => 102400,
 	'upload_path' => 'files/global',
 	'upload_path_per_page' => 'files/perpage',
 	'upload_banned_exts' => 'php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources',
