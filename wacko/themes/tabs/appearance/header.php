@@ -131,8 +131,8 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 <?php echo"<a href=\"".$this->href('print')."\">" ?><img
 	src="<?php echo $this->config['theme_url'] ?>icons/print.png"
 	width="21" height="20"
-	alt="<?php echo $this->get_translation('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('msword')."\">" ?><img
-	src="<?php echo $this->config['theme_url'] ?>icons/msword.png"
+	alt="<?php echo $this->get_translation('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('wordprocessor')."\">" ?><img
+	src="<?php echo $this->config['theme_url'] ?>icons/wordprocessor.png"
 	width="16" height="16"
 	alt="<?php echo $this->get_translation('MsWordVersion') ?>" /></a></div>
 <div class="header">
