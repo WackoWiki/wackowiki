@@ -24,7 +24,7 @@ $wacko_config_defaults = array(
 	'session_prefix' => 'wacko5',
 
 	'root_page' => 'HomePage',
-	'site_name' => 'MyWackoSite',
+	'site_name' => 'MyWikiSite',
 	'site_desc' => 'Cover what you do best. Link to the rest!',
 	'base_url' => ($_SERVER['SERVER_PORT'] == 443
 						? 'https'
@@ -162,7 +162,7 @@ $wacko_config_defaults = array(
 	'username_chars_min' => 3,
 	'username_chars_max' => 20,
 
-	'standard_handlers' => 'addcomment|admin\.php|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|msword|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|robots\.txt|sitemap\.xml|show|source|upload|watch',
+	'standard_handlers' => 'addcomment|admin\.php|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|robots\.txt|sitemap\.xml|show|source|upload|watch|wordprocessor',
 
 	'upload' => 'admins',
 	'upload_images_only' => 0,

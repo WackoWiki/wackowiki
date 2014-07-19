@@ -3057,7 +3057,7 @@ class Wacko
 			}
 			else
 			{
-				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'msword') ? 'p' : '') . 'w' . $tpl;
+				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'wordprocessor') ? 'p' : '') . 'w' . $tpl;
 				$page_link	= $this->href('edit', $tag, $lang ? 'lang='.$lang : '', 1);
 				$accicon	= $this->get_translation('wantedicon');
 				$title		= $this->get_translation('CreatePage');
@@ -5392,9 +5392,9 @@ class Wacko
 			{
 				$mod = 'print';
 			}
-			else if (preg_match('/msword$/', $this->method))
+			else if (preg_match('/wordprocessor$/', $this->method))
 			{
-				$mod = 'msword';
+				$mod = 'wordprocessor';
 			}
 			else
 			{
