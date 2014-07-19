@@ -322,7 +322,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	echo "<td class=\"form_right\">".$this->get_time_string_formatted($this->page['modified'])."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsSize')."&nbsp;&nbsp;</th>";
-	echo "<td class=\"form_right\" title=\"".$this->get_translation('SettingsSizeTip')."\">".ceil(strlen($this->page['body']) / 1000).' kB / '.ceil(strlen($this->page['body_r']) / 1000)." kB"."</td>";
+	echo "<td class=\"form_right\" title=\"".$this->get_translation('SettingsSizeTip')."\">".ceil(strlen($this->page['body']) / 1024).' KiB / '.ceil(strlen($this->page['body_r']) / 1024)." KiB"."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalRevs')."</th>";
 	echo "<td class=\"form_right\"><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".(int)$revs['total']."</a></td>";
@@ -383,7 +383,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	echo '<li><a href="'.$this->href('referrers').'">'.$this->get_translation('SettingsReferrers').'</a></li>';
 	echo '<li><a href="'.$this->href('watch').'">'.($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')).'</a></li>';
 	echo '<li><a href="'.$this->href('print').'">'.$this->get_translation('SettingsPrint').'</a></li>';
-	# echo '<li><a href="'.$this->href('msword').'">'.$this->get_translation('SettingsMsword').'</a></li>';
+	# echo '<li><a href="'.$this->href('wordprocessor').'">'.$this->get_translation('SettingsMsword').'</a></li>';
 	# echo '<li><a href="'.$this->href('latex').'">'.$this->get_translation('SettingsLatex').'</a></li>';
 	echo '<li><a href="'.$this->href('export.xml').'">'.$this->get_translation('SettingsXML').'</a></li>';
 

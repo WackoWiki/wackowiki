@@ -666,7 +666,7 @@ class Init
 	// DEBUG INFO
 	function debug()
 	{
-		if ($this->config['debug'] >= 1 && strpos($this->method, '.xml') === false && $this->method != 'print' && $this->method != 'msword')
+		if ($this->config['debug'] >= 1 && strpos($this->method, '.xml') === false && $this->method != 'print' && $this->method != 'wordprocessor')
 		{
 			if (($this->config['debug_admin_only'] == true && $this->engine->is_admin() === true) || $this->config['debug_admin_only'] == false)
 			{
@@ -683,7 +683,7 @@ class Init
 
 				if ($execmem)
 				{
-					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>\n";
+					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MiB </li>\n";
 				}
 
 				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>\n";

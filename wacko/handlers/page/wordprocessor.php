@@ -37,7 +37,7 @@ if ($this->has_access('read'))
 
 	// display page
 	$this->context[++$this->current_context] = $this->tag;
-	$data = $this->format($this->page['body'], 'msword');
+	$data = $this->format($this->page['body'], 'wordprocessor');
 	$data = $this->numerate_toc($data); //  numerate toc if needed
 
 
