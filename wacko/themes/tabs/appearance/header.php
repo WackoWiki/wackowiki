@@ -134,7 +134,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 	alt="<?php echo $this->get_translation('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('wordprocessor')."\">" ?><img
 	src="<?php echo $this->config['theme_url'] ?>icons/wordprocessor.png"
 	width="16" height="16"
-	alt="<?php echo $this->get_translation('MsWordVersion') ?>" /></a></div>
+	alt="<?php echo $this->get_translation('WordprocessorVersion') ?>" /></a></div>
 <div class="header">
 	<h1><span class="Main"><?php echo $this->config['site_name'] ?>:</span> <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?> </h1>
 <?php if (($this->method != 'edit') || !$this->has_access('write')) { ?>
