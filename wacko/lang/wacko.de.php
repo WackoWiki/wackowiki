@@ -69,7 +69,7 @@ $wacko_translation = array(
 	// other
 	'Guest'						=> 'Gast',
 	'Help'						=> 'Hilfe',
-	'MsWordVersion'				=> 'Microsoft Word Version',
+	'WordprocessorVersion'		=> 'Textverarbeitungs-Version',
 	'EmailHello'				=> 'Hallo ',
 	'EmailGoodbye'				=> 'MfG, ',
 	'WatchedPageChanged'		=> 'Seite wurde geändert ',
