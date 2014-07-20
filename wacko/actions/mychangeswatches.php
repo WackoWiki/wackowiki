@@ -34,7 +34,7 @@ if ($user_id = $this->get_user_id())
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET watch_time = NOW() ".
-				"WHERE page_id = '".(int)$page['page_id']."' ".
+				"WHERE page_id = '".$page['page_id']."' ".
 					"AND user_id = '".(int)$user_id."'");
 		$this->redirect($this->href('', '', 'mode=mychangeswatches').'#list');
 	}

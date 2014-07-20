@@ -58,7 +58,11 @@ function admin_groups(&$engine, &$module)
 		if (isset($_GET['group_id']) || isset($_POST['add_member'])|| isset($_POST['remove_member']))
 		{
 			$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
-			$usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".quote($engine->dblink, $group_id)."' LIMIT 1");
+			$usergroup = $engine->load_single(
+				"SELECT group_name ".
+				"FROM {$engine->config['table_prefix']}usergroup ".
+				"WHERE group_id = '".(int)$group_id."' ".
+				"LIMIT 1");
 
 			// add member into group
 			if (isset($_POST['add_member']) && isset($_POST['new_member_id']))
@@ -133,7 +137,11 @@ function admin_groups(&$engine, &$module)
 			// remove member from group
 			if (isset($_POST['remove_member']) && isset($_POST['change_member']))
 			{
-				if ($member = $engine->load_single("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['change_member'])."' LIMIT 1"))
+				if ($member = $engine->load_single("
+					SELECT user_name ".
+					"FROM {$engine->config['table_prefix']}user ".
+					"WHERE user_id = '".(int)$_POST['change_member']."' ".
+					"LIMIT 1"))
 				{
 					echo '<form action="admin.php" method="post" name="groups">';
 					echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
@@ -187,7 +195,7 @@ function admin_groups(&$engine, &$module)
 			// do we have identical names?
 			if ($engine->load_single(
 			"SELECT group_id FROM {$engine->config['table_prefix']}usergroup ".
-			"WHERE group_name = '".quote($engine->dblink, $_POST['new_group_name'])."' AND group_id <> '".quote($engine->dblink, $_POST['group_id'])."' ".
+			"WHERE group_name = '".quote($engine->dblink, $_POST['new_group_name'])."' AND group_id <> '".(int)$_POST['group_id']."' ".
 			"LIMIT 1"))
 			{
 				$engine->set_message($engine->get_translation('GroupsAlreadyExists'));
@@ -214,7 +222,7 @@ function admin_groups(&$engine, &$module)
 		// delete group
 		else if (isset($_POST['delete']) && isset($_POST['group_id']))
 		{
-			$usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."' LIMIT 1");
+			$usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['group_id']."' LIMIT 1");
 
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}usergroup ".
@@ -271,7 +279,7 @@ function admin_groups(&$engine, &$module)
 		// edit group
 		else if (isset($_POST['edit']) && isset($_POST['change']))
 		{
-			if ($usergroup = $engine->load_single("SELECT group_name, description, moderator, open, active FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($usergroup = $engine->load_single("SELECT group_name, description, moderator, open, active FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['change']."' LIMIT 1"))
 			{
 				echo '<form action="admin.php" method="post" name="groups">';
 				echo '<input type="hidden" name="mode" value="groups" />';
@@ -309,7 +317,7 @@ function admin_groups(&$engine, &$module)
 		// delete group
 		if (isset($_POST['delete']) && isset($_POST['change']))
 		{
-			if ($usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['change']."' LIMIT 1"))
 			{
 				echo '<form action="admin.php" method="post" name="groups">';
 				echo '<input type="hidden" name="mode" value="groups" />';

@@ -68,7 +68,7 @@ function admin_polls(&$engine, &$module)
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}poll ".
 				"SET end = NOW() ".
-				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0 ".
+				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0 ".
 				"LIMIT 1");
 
 			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollStopped', $engine->config['language'])));
@@ -79,12 +79,12 @@ function admin_polls(&$engine, &$module)
 			$engine->sql_query(	// reset start date
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"start	= NOW() ".
-				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
+				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
 			$engine->sql_query(	// reset votes and update servey id
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"poll_id		= ".($polls_obj->get_last_poll_id() + 1).", ".
 					"votes	= 0 ".
-				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id']));
+				"WHERE poll_id = ".(int)$_POST['id']);
 
 			#$xml->news(); // update news feed
 			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollReset', $engine->config['language'])));
@@ -95,7 +95,7 @@ function admin_polls(&$engine, &$module)
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}poll ".
 				"SET start = NOW() ".
-				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
+				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
 
 			#$engine->$xml->news(); // update news feed
 			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollStarted', $engine->config['language'])));

@@ -108,8 +108,8 @@ if ($file_path)
 		// count file download
 		$this->sql_query(
 			"UPDATE {$this->config['table_prefix']}upload ".
-			"SET hits = '".quote($this->dblink, $file['hits'] + 1)."' ".
-			"WHERE upload_id = '".(int)$file['upload_id']."' ".
+			"SET hits = '".($file['hits'] + 1)."' ".
+			"WHERE upload_id = '".$file['upload_id']."' ".
 			"LIMIT 1");
 	}
 

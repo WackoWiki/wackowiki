@@ -43,10 +43,10 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		$this->sql_query(
 			"UPDATE ".$this->config['table_prefix']."page SET ".
 				(isset($_POST['extended'])
-				?	"footer_comments	= '".quote($this->dblink, (int)$_POST['footer_comments'])."', ".
-					"footer_files		= '".quote($this->dblink, (int)$_POST['footer_files'])."', ".
+				?	"footer_comments	= '".(int)$_POST['footer_comments']."', ".
+					"footer_files		= '".(int)$_POST['footer_files']."', ".
 					($this->config['footer_rating'] != 0
-						? "footer_rating	= '".quote($this->dblink, (int)$_POST['footer_rating'])."', "
+						? "footer_rating	= '".(int)$_POST['footer_rating']."', "
 						: "").
 					"hide_toc			= '".(int)$_POST['hide_toc']."', ".
 					"hide_index			= '".(int)$_POST['hide_index']."', ".
@@ -62,7 +62,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 					"keywords			= '".quote($this->dblink, htmlspecialchars(trim($_POST['keywords']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
 					"description		= '".quote($this->dblink, htmlspecialchars(trim($_POST['description']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."' "
 				).
-			"WHERE page_id = '".(int)$this->page['page_id']."' ".
+			"WHERE page_id = '".$this->page['page_id']."' ".
 			"LIMIT 1");
 
 		// log event
@@ -77,7 +77,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	$revs = $this->load_single(
 		"SELECT COUNT(revision_id) AS total ".
 		"FROM {$this->config['table_prefix']}revision ".
-		"WHERE page_id = '".(int)$this->page['page_id']."' ".
+		"WHERE page_id = '".$this->page['page_id']."' ".
 		"GROUP BY tag ".
 		"LIMIT 1");
 

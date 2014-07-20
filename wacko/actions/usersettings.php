@@ -93,7 +93,7 @@ else if ($user = $this->get_user())
 					"UPDATE ".$this->config['user_table']." SET ".
 						"real_name			= '".quote($this->dblink, trim($_POST['real_name']))."', ".
 						"email				= '".quote($this->dblink, $_POST['email'])."' ".
-					"WHERE user_id = '".(int)$user['user_id']."' ".
+					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 
 				// FIXME: the next if condition will repeat these both following actions

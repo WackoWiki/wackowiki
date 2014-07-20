@@ -233,7 +233,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			$pages = $this->load_all(
 				"SELECT page_id, tag, title, created ".
 				"FROM {$this->config['table_prefix']}page ".
-				"WHERE owner_id = '".(int)$user['user_id']."' ".
+				"WHERE owner_id = '".$user['user_id']."' ".
 					"AND comment_on_id = '0' ".
 					"AND deleted <> '1' ".
 				"ORDER BY ".( isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'tag ASC' : 'created DESC' )." ".
@@ -284,7 +284,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag ".
 					"FROM {$this->config['table_prefix']}page c ".
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
-					"WHERE c.owner_id = '".(int)$user['user_id']."' ".
+					"WHERE c.owner_id = '".$user['user_id']."' ".
 						"AND c.comment_on_id <> '0' ".
 						"AND c.deleted <> '1' ".
 						"AND p.deleted <> '1' ".

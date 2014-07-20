@@ -41,7 +41,7 @@ function admin_resync(&$engine, &$module)
 				$engine->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_pages = ".(int)$user['n']." ".
-					"WHERE user_id = '".(int)$user['owner_id']."' ".
+					"WHERE user_id = '".$user['owner_id']."' ".
 					"LIMIT 1");
 			}
 
@@ -57,7 +57,7 @@ function admin_resync(&$engine, &$module)
 				$engine->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_comments = ".(int)$user['n']." ".
-					"WHERE user_id = '".(int)$user['user_id']."' ".
+					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
 
@@ -73,7 +73,7 @@ function admin_resync(&$engine, &$module)
 				$engine->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_revisions = ".(int)$user['n']." ".
-					"WHERE user_id = '".(int)$user['user_id']."' ".
+					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
 
@@ -89,7 +89,7 @@ function admin_resync(&$engine, &$module)
 				$engine->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_uploads = ".(int)$user['n']." ".
-					"WHERE user_id = '".(int)$user['user_id']."' ".
+					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
 
@@ -168,7 +168,7 @@ function admin_resync(&$engine, &$module)
 							"UPDATE {$engine->config['table_prefix']}page SET ".
 								"body_r		= '".quote($engine->dblink, $page['body_r'])."', ".
 								"body_toc	= '".quote($engine->dblink, $page['body_toc'])."' ".
-							"WHERE page_id = '".(int)$page['page_id']."' ".
+							"WHERE page_id = '".$page['page_id']."' ".
 							"LIMIT 1");
 
 						#if ($body_t) unset($body_t);

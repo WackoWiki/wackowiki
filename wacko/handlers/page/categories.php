@@ -179,7 +179,7 @@ if ($this->user_is_owner() || $this->is_admin())
 	$_selected = $this->load_all(
 		"SELECT category_id ".
 		"FROM {$this->config['table_prefix']}category_page ".
-		"WHERE page_id = '".(int)$this->page['page_id']."'");
+		"WHERE page_id = '".$this->page['page_id']."'");
 
 	// exploding categories into array
 	foreach ($_selected as $key => &$val)

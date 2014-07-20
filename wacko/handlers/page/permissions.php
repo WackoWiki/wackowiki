@@ -95,8 +95,8 @@ if ($this->user_is_owner() || $this->is_admin())
 			$comments = $this->load_all(
 				"SELECT page_id ".
 				"FROM ".$this->config['table_prefix']."page ".
-				"WHERE comment_on_id = '".(int)$this->page['page_id']."' ".
-					"AND owner_id='".(int)$this->get_user_id()."'");
+				"WHERE comment_on_id = '".$this->page['page_id']."' ".
+					"AND owner_id='".$this->get_user_id()."'");
 
 			foreach ($comments as $num => $comment)
 			{
@@ -185,7 +185,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					") ".
 				($this->is_admin()
 					? ""
-					: "AND p.owner_id = '".(int)$this->get_user_id()."'"));
+					: "AND p.owner_id = '".$this->get_user_id()."'"));
 
 			foreach ($pages as $num => $page)
 			{
@@ -207,8 +207,8 @@ if ($this->user_is_owner() || $this->is_admin())
 				$comments = $this->load_all(
 					"SELECT page_id ".
 					"FROM ".$this->config['table_prefix']."page ".
-					"WHERE comment_on_id = '".(int)$page['page_id']."' ".
-						"AND owner_id='".(int)$this->get_user_id()."'");
+					"WHERE comment_on_id = '".$page['page_id']."' ".
+						"AND owner_id='".$this->get_user_id()."'");
 
 				foreach ($comments as $num => $comment)
 				{
