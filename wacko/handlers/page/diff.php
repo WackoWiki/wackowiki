@@ -23,7 +23,7 @@ if (!function_exists('handler_diff_load_page_by_id'))
 				"SELECT r.page_id, r.revision_id, r.modified, r.body, u.user_name ".
 				"FROM ".$wacko->config['table_prefix']."revision r ".
 					"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
-				"WHERE r.revision_id = '".quote($wacko->dblink, $id)."' ".
+				"WHERE r.revision_id = '".(int)$id."' ".
 				"LIMIT 1");
 		}
 		else
@@ -32,7 +32,7 @@ if (!function_exists('handler_diff_load_page_by_id'))
 				"SELECT p.page_id, p.page_id AS revision_id, p.modified, p.body, u.user_name ".
 				"FROM ".$wacko->config['table_prefix']."page p ".
 					"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-				"WHERE p.page_id = '".quote($wacko->dblink, $wacko->get_page_id())."' ".
+				"WHERE p.page_id = '".(int)$wacko->get_page_id()."' ".
 				"LIMIT 1");
 		}
 	}

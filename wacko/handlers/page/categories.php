@@ -51,7 +51,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			$word = $this->load_single(
 				"SELECT category_id, parent, category ".
 				"FROM {$this->config['table_prefix']}category ".
-				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' ".
+				"WHERE category_id = '".(int)$_POST['id']."' ".
 				"LIMIT 1");
 		}
 
@@ -74,7 +74,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$this->sql_query(
 					"INSERT INTO {$this->config['table_prefix']}category SET ".
 						( $_POST['id'] && $_POST['group'] == 1
-							? "parent = '".quote($this->dblink, (int)( $word['parent'] != 0 ? $word['parent'] : $word['category_id'] ))."', "
+							? "parent = '". (int)( $word['parent'] != 0 ? $word['parent'] : $word['category_id'] )."', "
 							: ''
 						).
 						"lang = '".quote($this->dblink, $this->page['lang'])."', ".
@@ -104,7 +104,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}category ".
 					"SET category = '".quote($this->dblink, $_POST['newname'])."' ".
-					"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
+					"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
 
 				$this->set_message($this->get_translation('CategoriesRenamed'));
 				$this->log(4, "category //'{$word['category']}'// renamed //'{$_POST['newname']}'//");
@@ -119,7 +119,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}category ".
 					"SET parent = 0 ".
-					"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
+					"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
 				$this->set_message($this->get_translation('CategoriesUngrouped'));
 				$this->log(4, "Category //'{$word['category']}'// debundled");
 			}
@@ -128,19 +128,19 @@ if ($this->user_is_owner() || $this->is_admin())
 				$parent = $this->load_single(
 					"SELECT parent, category ".
 					"FROM {$this->config['table_prefix']}category ".
-					"WHERE category_id = '".quote($this->dblink, $_POST['parent'])."' ".
+					"WHERE category_id = '".(int)$_POST['parent']."' ".
 					"LIMIT 1");
 
 				if ($parent['parent'] == 0)
 				{
 					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}category ".
-						"SET parent = '".quote($this->dblink, $_POST['parent'])."' ".
-						"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
+						"SET parent = '".(int)$_POST['parent']."' ".
+						"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
 					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}category ".
 						"SET parent = 0 ".
-						"WHERE parent = '".quote($this->dblink, $_POST['id'])."'");
+						"WHERE parent = '".(int)$_POST['id']."'");
 					$this->set_message($this->get_translation('CategoriesGrouped'));
 					$this->log(4, "Category //'{$word['category']}'// grouped with the word //'{$parent['category']}'//");
 				}
@@ -155,14 +155,14 @@ if ($this->user_is_owner() || $this->is_admin())
 		{
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}category ".
-				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."'");
+				"WHERE category_id = '".(int)$_POST['id']."'");
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}category_page ".
-				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."'");
+				"WHERE category_id = '".(int)$_POST['id']."'");
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}category ".
 				"SET parent = 0 ".
-				"WHERE parent = '".quote($this->dblink, $_POST['id'])."'");
+				"WHERE parent = '".(int)$_POST['id']."'");
 			$this->set_message($this->get_translation('CategoriesDeleted'));
 			$this->log(4, "Category //'{$word['category']}'// removed from the database");
 		}
@@ -179,7 +179,7 @@ if ($this->user_is_owner() || $this->is_admin())
 	$_selected = $this->load_all(
 		"SELECT category_id ".
 		"FROM {$this->config['table_prefix']}category_page ".
-		"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."'");
+		"WHERE page_id = '".(int)$this->page['page_id']."'");
 
 	// exploding categories into array
 	foreach ($_selected as $key => &$val)
@@ -206,7 +206,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$word = $this->load_single(
 					"SELECT category_id, parent, category ".
 					"FROM {$this->config['table_prefix']}category ".
-					"WHERE category_id = '".quote($this->dblink, $_POST['change'])."' ".
+					"WHERE category_id = '".(int)$_POST['change']."' ".
 					"LIMIT 1");
 				$group = ( $word['parent'] == 0 ? $word['category_id'] : $group = $word['parent'] );
 			}

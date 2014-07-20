@@ -48,12 +48,12 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 					($this->config['footer_rating'] != 0
 						? "footer_rating	= '".quote($this->dblink, (int)$_POST['footer_rating'])."', "
 						: "").
-					"hide_toc			= '".quote($this->dblink, (int)$_POST['hide_toc'])."', ".
-					"hide_index			= '".quote($this->dblink, (int)$_POST['hide_index'])."', ".
-					"tree_level			= '".quote($this->dblink, (int)$_POST['tree_level'])."', ".
-					"allow_rawhtml		= '".quote($this->dblink, $allow_rawhtml)."', ".
-					"disable_safehtml	= '".quote($this->dblink, $disable_safehtml)."', ".
-					"noindex			= '".quote($this->dblink, (int)$_POST['noindex'])."' "
+					"hide_toc			= '".(int)$_POST['hide_toc']."', ".
+					"hide_index			= '".(int)$_POST['hide_index']."', ".
+					"tree_level			= '".(int)$_POST['tree_level']."', ".
+					"allow_rawhtml		= '".(int)$allow_rawhtml."', ".
+					"disable_safehtml	= '".(int)$disable_safehtml."', ".
+					"noindex			= '".(int)$_POST['noindex']."' "
 				: 	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, (isset($_POST['theme']) ? $_POST['theme'] : ''))."', ".
 					"menu_tag			= '".quote($this->dblink, htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
@@ -62,7 +62,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 					"keywords			= '".quote($this->dblink, htmlspecialchars(trim($_POST['keywords']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
 					"description		= '".quote($this->dblink, htmlspecialchars(trim($_POST['description']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."' "
 				).
-			"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+			"WHERE page_id = '".(int)$this->page['page_id']."' ".
 			"LIMIT 1");
 
 		// log event
@@ -77,7 +77,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	$revs = $this->load_single(
 		"SELECT COUNT(revision_id) AS total ".
 		"FROM {$this->config['table_prefix']}revision ".
-		"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+		"WHERE page_id = '".(int)$this->page['page_id']."' ".
 		"GROUP BY tag ".
 		"LIMIT 1");
 
