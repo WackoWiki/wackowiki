@@ -78,7 +78,7 @@ function admin_sysupdate(&$engine, &$module)
 					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}page SET ".
 							"supertag = '".quote($engine->dblink, $engine->translit($page['tag']))."' ".
-						"WHERE page_id = '".quote($engine->dblink, $page['page_id']))."'";
+						"WHERE page_id = '".(int)$page['page_id'])."'";
 				}
 
 				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
@@ -108,7 +108,7 @@ function admin_sysupdate(&$engine, &$module)
 					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}revision ".
 						"SET supertag = '".quote($engine->dblink, $engine->translit($page['tag']))."' ".
-						"WHERE revision_id = '".quote($engine->dblink, $page['revision_id']))."'";
+						"WHERE revision_id = '".(int)$page['revision_id'])."'";
 				}
 
 				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
