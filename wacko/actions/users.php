@@ -32,7 +32,8 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 				if (in_array($user['user_name'], $group_users))
 				{
-					$groups[] = $group_name;
+					#$groups[] = $group_name;
+					$groups[] = '<a href="'.$this->href('', ($this->config['groups_page']), 'profile='.htmlspecialchars($group_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$group_name.'</a>';
 				}
 			}
 
