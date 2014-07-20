@@ -2189,7 +2189,7 @@ class Wacko
 		$_old_version = $this->load_single(
 			"SELECT version_id ".
 			"FROM {$this->config['table_prefix']}revision ".
-			"WHERE page_id = '".(int) $old_page['page_id']."' ".
+			"WHERE page_id = '".$old_page['page_id']."' ".
 			"ORDER BY version_id DESC ".
 			"LIMIT 1");
 
