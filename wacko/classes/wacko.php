@@ -181,7 +181,7 @@ class Wacko
 		$page = $this->load_single(
 			"SELECT tag ".
 			"FROM ".$this->config['table_prefix']."page ".
-			"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+			"WHERE page_id = '".(int)$page_id."' ".
 			"LIMIT 1");
 
 		return $page['tag'];
@@ -259,7 +259,7 @@ class Wacko
 			$file = $this->load_single(
 				"SELECT upload_id, user_id, file_name, file_size, lang, file_description, picture_w, picture_h, file_ext ".
 				"FROM ".$this->config['table_prefix']."upload ".
-				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+				"WHERE page_id = '".(int)$page_id."' ".
 					"AND file_name = '".quote($this->dblink, $file_name)."' ".
 				"LIMIT 1");
 
@@ -969,7 +969,7 @@ class Wacko
 						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE ".( $page_id != 0
-						? "page_id  = '".quote($this->dblink, $page_id)."' "
+						? "page_id  = '".(int)$page_id."' "
 						: "supertag = '".quote($this->dblink, $supertag)."' " ).
 						( $deleted != 1
 							? "AND p.deleted <> '1' "
@@ -989,12 +989,12 @@ class Wacko
 							"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 							"LEFT JOIN ".$this->config['table_prefix']."page s ON (p.page_id = s.page_id) ".
 						"WHERE ".( $page_id != 0
-							? "p.page_id  = '".quote($this->dblink, $page_id)."' "
+							? "p.page_id  = '".(int)$page_id."' "
 							: "p.supertag = '".quote($this->dblink, $supertag)."' " ).
 							( $deleted != 1
 								? "AND p.deleted <> '1' "
 								: "").
-							"AND revision_id = '".quote($this->dblink, $revision_id)."' ".
+							"AND revision_id = '".(int)$revision_id."' ".
 						"LIMIT 1");
 
 					$page['owner_id'] = $owner_id;
@@ -1029,7 +1029,7 @@ class Wacko
 							( $deleted != 1
 								? "AND p.deleted <> '1' "
 								: "").
-							"AND revision_id = '".quote($this->dblink, $revision_id)."' ".
+							"AND revision_id = '".(int)$revision_id."' ".
 						"LIMIT 1");
 
 					$page['owner_id'] = $owner_id;
@@ -1162,7 +1162,7 @@ class Wacko
 		if ($links = $this->load_all(
 			"SELECT to_tag ".
 			"FROM ".$this->config['table_prefix']."link ".
-			"WHERE from_page_id = '".quote($this->dblink, $this->page['page_id'])."'"))
+			"WHERE from_page_id = '".(int)$this->page['page_id']."'"))
 		{
 			$cl = count($links);
 
@@ -1191,13 +1191,13 @@ class Wacko
 			"SELECT DISTINCT p.tag ".
 			"FROM ".$this->config['table_prefix']."menu b ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
-			"WHERE (b.user_id IN ( '".quote($this->dblink, $this->get_user_id('System'))."' ) ".
+			"WHERE (b.user_id IN ( '".(int) $this->get_user_id('System')."' ) ".
 				($lang
 					? "AND b.lang = '".quote($this->dblink, $lang)."' "
 					: "").
 					") ".
 				($user
-					? "OR (b.user_id IN ( '".quote($this->dblink, $user['user_id'])."' )) "
+					? "OR (b.user_id IN ( '".(int)$user['user_id']."' )) "
 					: "").
 			"", 1))
 		{
@@ -1298,7 +1298,7 @@ class Wacko
 			"FROM ".$this->config['table_prefix']."revision p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
-			"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
+			"WHERE p.page_id = '".(int)$page_id."' ".
 				($minor_edit
 					? "AND p.minor_edit = '0' "
 					: "").
@@ -1314,7 +1314,7 @@ class Wacko
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
-				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
+				"WHERE p.page_id = '".(int)$page_id."' ".
 					($minor_edit
 						? "AND p.minor_edit = '0' "
 						: "").
@@ -1334,7 +1334,7 @@ class Wacko
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
-				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
+				"WHERE p.page_id = '".(int)$page_id."' ".
 					($deleted != 1
 						? "AND p.deleted <> '1' "
 						: "").
@@ -1499,7 +1499,7 @@ class Wacko
 			"WHERE p.deleted = '1' ".
 			"ORDER BY p.modified DESC, p.tag ASC ".
 			( $limit > 0
-				? "LIMIT $limit"
+				? "LIMIT {$limit}"
 				: ''
 			), $cache);
 	}
@@ -1511,7 +1511,7 @@ class Wacko
 			"FROM {$this->config['table_prefix']}category c ".
 				"INNER JOIN {$this->config['table_prefix']}category_page cp ON (c.category_id = cp.category_id) ".
 			"WHERE ".( $page_id != 0
-				? "cp.page_id  = '".quote($this->dblink, $page_id)."' "
+				? "cp.page_id  = '".(int)$page_id."' "
 				: "cp.supertag = '".quote($this->dblink, $supertag)."' " )
 			);
 
@@ -1825,14 +1825,14 @@ class Wacko
 
 				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."page SET ".
-						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
+						"comment_on_id 	= '".(int)$comment_on_id."', ".
 						(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
 						"created		= NOW(), ".
 						"modified		= NOW(), ".
 						"commented		= NOW(), ".
-						"depth			= '".quote($this->dblink, $depth)."', ".
-						"owner_id		= '".quote($this->dblink, $owner_id)."', ".
-						"user_id		= '".quote($this->dblink, $user_id)."', ".
+						"depth			= '".(int)$depth."', ".
+						"owner_id		= '".(int)$owner_id."', ".
+						"user_id		= '".(int)$user_id."', ".
 						"ip				= '".quote($this->dblink, $ip)."', ".
 						"latest			= '1', ".
 						"tag			= '".quote($this->dblink, $tag)."', ".
@@ -1841,11 +1841,11 @@ class Wacko
 						"body_r			= '".quote($this->dblink, $body_r)."', ".
 						"body_toc		= '".quote($this->dblink, $body_toc)."', ".
 						"edit_note		= '".quote($this->dblink, $edit_note)."', ".
-						"minor_edit		= '".quote($this->dblink, $minor_edit)."', ".
+						"minor_edit		= '".(int)$minor_edit."', ".
 						(isset($reviewed)
-							?	"reviewed		= '".quote($this->dblink, $reviewed)."', ".
+							?	"reviewed		= '".(int)$reviewed."', ".
 								"reviewed_time	= NOW(), ".
-								"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', "
+								"reviewer_id	= '".(int)$reviewer_id."', "
 							:	"").
 						"lang			= '".quote($this->dblink, $lang)."', ".
 						"title			= '".quote($this->dblink, $title)."'");
@@ -1868,14 +1868,14 @@ class Wacko
 						"UPDATE {$this->config['table_prefix']}page SET ".
 							"comments	= '".(int)$this->count_comments($comment_on_id)."', ".
 							"commented	= NOW() ".
-						"WHERE page_id = '".quote($this->dblink, $comment_on_id)."' ".
+						"WHERE page_id = '".(int)$comment_on_id."' ".
 						"LIMIT 1");
 
 					// update user comments count
 					$this->sql_query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_comments = total_comments + 1 ".
-						"WHERE user_id = '".quote($this->dblink, $owner_id)."' ".
+						"WHERE user_id = '".(int)$owner_id."' ".
 						"LIMIT 1");
 				}
 				else
@@ -1884,7 +1884,7 @@ class Wacko
 					$this->sql_query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_pages = total_pages + 1 ".
-						"WHERE user_id = '".quote($this->dblink, $owner_id)."' ".
+						"WHERE user_id = '".(int)$owner_id."' ".
 						"LIMIT 1");
 				}
 
@@ -1913,7 +1913,7 @@ class Wacko
 									"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
 									"FROM " .$this->config['user_table']." u ".
 										"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-									"WHERE u.user_id = '".quote($this->dblink, $moderator_id)."' ".
+									"WHERE u.user_id = '".(int)$moderator_id."' ".
 									"LIMIT 1");
 
 								if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
@@ -1945,7 +1945,7 @@ class Wacko
 									"SELECT DISTINCT w.user_id, u.user_name ".
 									"FROM ".$this->config['table_prefix']."watch w ".
 										"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
-									"WHERE w.page_id = '".quote($this->dblink, $comment_on_id)."'");
+									"WHERE w.page_id = '".(int)$comment_on_id."'");
 
 					if ($watchers && !$mute)
 					{
@@ -1957,8 +1957,8 @@ class Wacko
 								$pending = $this->load_single(
 									"SELECT comment_id ".
 									"FROM {$this->config['table_prefix']}watch ".
-									"WHERE page_id = '".quote($this->dblink, $comment_on_id)."' ".
-										"AND user_id = '".quote($this->dblink, $watcher['user_id'])."' ".
+									"WHERE page_id = '".(int)$comment_on_id."' ".
+										"AND user_id = '".(int)$watcher['user_id']."' ".
 									"LIMIT 1");
 
 								// ...and add one if so
@@ -1966,9 +1966,9 @@ class Wacko
 								{
 									$this->sql_query(
 										"UPDATE {$this->config['table_prefix']}watch ".
-										"SET comment_id = '".quote($this->dblink, $page_id)."' ".
-										"WHERE page_id = '".quote($this->dblink, $comment_on_id)."' ".
-											"AND user_id = '".quote($this->dblink, $watcher['user_id'])."'");
+										"SET comment_id = '".(int)$page_id."' ".
+										"WHERE page_id = '".(int)$comment_on_id."' ".
+											"AND user_id = '".(int)$watcher['user_id']."'");
 								}
 								else
 								{
@@ -1981,7 +1981,7 @@ class Wacko
 										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."' ".
+										"WHERE u.user_id = '".(int)$watcher['user_id']."' ".
 										"LIMIT 1");
 
 									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
@@ -2039,11 +2039,11 @@ class Wacko
 					// update current page copy
 					$this->sql_query(
 						"UPDATE ".$this->config['table_prefix']."page SET ".
-							"comment_on_id	= '".quote($this->dblink, $comment_on_id)."', ".
+							"comment_on_id	= '".(int)$comment_on_id."', ".
 							"modified		= NOW(), ".
 							"created		= '".quote($this->dblink, $old_page['created'])."', ".
-							"owner_id		= '".quote($this->dblink, $owner_id)."', ".
-							"user_id		= '".quote($this->dblink, $user_id)."', ".
+							"owner_id		= '".(int)$owner_id."', ".
+							"user_id		= '".(int)$user_id."', ".
 							"latest			= '2', ".
 							"description	= '".quote($this->dblink, ($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc ))."', ".
 							"supertag		= '".quote($this->dblink, $this->translit($tag))."', ".
@@ -2051,11 +2051,11 @@ class Wacko
 							"body_r			= '".quote($this->dblink, $body_r)."', ".
 							"body_toc		= '".quote($this->dblink, $body_toc)."', ".
 							"edit_note		= '".quote($this->dblink, $edit_note)."', ".
-							"minor_edit		= '".quote($this->dblink, $minor_edit)."', ".
+							"minor_edit		= '".(int)$minor_edit."', ".
 							(isset($reviewed)
-								?	"reviewed		= '".quote($this->dblink, $reviewed)."', ".
+								?	"reviewed		= '".(int)$reviewed."', ".
 									"reviewed_time	= NOW(), ".
-									"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', "
+									"reviewer_id	= '".(int)$reviewer_id."', "
 								:	"").
 							"title			= '".quote($this->dblink, $title)."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
@@ -2085,7 +2085,7 @@ class Wacko
 						"SELECT DISTINCT w.user_id, u.user_name ".
 						"FROM ".$this->config['table_prefix']."watch w ".
 							"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
-						"WHERE w.page_id = '".quote($this->dblink, $page_id)."'");
+						"WHERE w.page_id = '".(int)$page_id."'");
 
 					if ($watchers && !$mute)
 					{
@@ -2099,7 +2099,7 @@ class Wacko
 										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."' ".
+										"WHERE u.user_id = '".(int)$watcher['user_id']."' ".
 										"LIMIT 1");
 
 									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
@@ -2189,7 +2189,7 @@ class Wacko
 		$_old_version = $this->load_single(
 			"SELECT version_id ".
 			"FROM {$this->config['table_prefix']}revision ".
-			"WHERE page_id = '".quote($this->dblink, $old_page['page_id'])."' ".
+			"WHERE page_id = '".(int) $old_page['page_id']."' ".
 			"ORDER BY version_id DESC ".
 			"LIMIT 1");
 
@@ -2226,7 +2226,7 @@ class Wacko
 			$this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET total_revisions = total_revisions + 1 ".
-				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+				"WHERE user_id = '".(int)$user['user_id']."' ".
 				"LIMIT 1");
 		}
 	}
@@ -3337,7 +3337,7 @@ class Wacko
 		$this->sql_query(
 			"DELETE ".
 			"FROM ".$this->config['table_prefix']."link ".
-			"WHERE from_page_id = '".quote($this->dblink, $from_page_id)."'");
+			"WHERE from_page_id = '".(int)$from_page_id."'");
 
 		if ($link_table = $this->get_link_table())
 		{
@@ -3347,7 +3347,7 @@ class Wacko
 
 				if (!isset($written[$lower_to_tag]))
 				{
-					$query .= "('".quote($this->dblink, $from_page_id)."','".quote($this->dblink, $this->get_page_id($to_tag))."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->translit($to_tag))."'),";
+					$query .= "('".(int)$from_page_id."','".(int)$this->get_page_id($to_tag)."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->translit($to_tag))."'),";
 					$written[$lower_to_tag] = 1;
 				}
 			}
@@ -3465,7 +3465,7 @@ class Wacko
 
 			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."referrer SET ".
-					"page_id		= '".quote($this->dblink, $page_id)."', ".
+					"page_id		= '".(int)$page_id."', ".
 					"referrer		= '".quote($this->dblink, $referrer)."', ".
 					"referrer_time	= NOW()");
 		}
@@ -3480,7 +3480,7 @@ class Wacko
 				: "page_id, referrer, count(referrer) AS num ").
 			"FROM ".$this->config['table_prefix']."referrer ".
 			(!is_null($page_id)
-				? "WHERE page_id = '".quote($this->dblink, $page_id)."' "
+				? "WHERE page_id = '".(int)$page_id."' "
 				: "").
 			"GROUP BY referrer ".
 			"ORDER BY num DESC");
@@ -3597,6 +3597,7 @@ class Wacko
 
 		$method_location = $handler.'/'.$method.'.php';
 
+		// TODO: localize: 'Unknown method'
 		return $this->include_buffered($method_location, "<em>Unknown method \"$method_location\"</em>", '', $this->config['handler_path']);
 	}
 
@@ -3608,6 +3609,7 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
+		// TODO: localize: 'Formatter %1 not found'
 		$text = $this->include_buffered('formatters/'.$formatter.'.php', "<em>Formatter \"$formatter\" not found</em>", compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
@@ -3628,7 +3630,7 @@ class Wacko
 			"FROM ".$this->config['table_prefix']."usergroup g ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator = u.user_id) ".
 			"WHERE ".( $group_id != 0
-				? "g.group_id		= '".quote($this->dblink, $group_id)."' "
+				? "g.group_id		= '".(int)$group_id."' "
 				: "g.group_name		= '".quote($this->dblink, $group_name)."' ").
 			"LIMIT 1");
 
@@ -3768,7 +3770,7 @@ class Wacko
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id != 0
-					? "u.user_id		= '".quote($this->dblink, $user_id)."' "
+					? "u.user_id		= '".(int)$user_id."' "
 					: "u.user_name	= '".quote($this->dblink, $user_name)."' ").
 					"AND u.account_type = '0' ".
 			($password === 0
@@ -3897,7 +3899,7 @@ class Wacko
 			return $this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET session_time = NOW() ".
-				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+				"WHERE user_id = '".(int)$user['user_id']."' ".
 				"LIMIT 1");
 		}
 	}
@@ -3909,7 +3911,7 @@ class Wacko
 			return $this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET last_mark = NOW() ".
-				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+				"WHERE user_id = '".(int)$user['user_id']."' ".
 				"LIMIT 1");
 		}
 	}
@@ -3952,7 +3954,7 @@ class Wacko
 			"UPDATE {$this->config['user_table']} SET ".
 				"session_expire		= '".quote($this->dblink, $ses_time)."', ".
 				"change_password	= '' ".
-			"WHERE user_id		= '".quote($this->dblink, $user['user_id'])."' ".
+			"WHERE user_id		= '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
 		// restart logged in user session with specific session id
@@ -4011,7 +4013,7 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET session_expire = 0 ".
-			"WHERE user_id = '".quote($this->dblink, $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id'])."' ".
+			"WHERE user_id = '".(int)$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']."' ".
 			"LIMIT 1");
 
 		$this->delete_cookie('auth', true, true);
@@ -4039,7 +4041,7 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET login_count = login_count+1 ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
 		return true;
@@ -4051,7 +4053,7 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET failed_login_count = failed_login_count+1 ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
 		return true;
@@ -4063,7 +4065,7 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET failed_login_count = 0 ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
 		return true;
@@ -4075,7 +4077,7 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET lost_password_request_count = lost_password_request_count+1 ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
 		return true;
@@ -4087,7 +4089,7 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET lost_password_request_count = 0 ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
 		return true;
@@ -4165,7 +4167,7 @@ class Wacko
 		$count = $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}page ".
-			"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."' ".
+			"WHERE comment_on_id = '".(int)$comment_on_id."' ".
 				($deleted != 1
 					? "AND deleted <> '1' "
 					: "").
@@ -4186,7 +4188,7 @@ class Wacko
 			$count = $this->load_single(
 				"SELECT comments ".
 				"FROM {$this->config['table_prefix']}page ".
-				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+				"WHERE page_id = '".(int)$page_id."' ".
 				"LIMIT 1");
 
 			return (int)$count['comments'];
@@ -4205,7 +4207,7 @@ class Wacko
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
-				"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
+				"WHERE p.comment_on_id = '".(int)$page_id."' ".
 					($deleted != 1
 						? "AND p.deleted <> '1' "
 						: "").
@@ -4363,8 +4365,8 @@ class Wacko
 		// updated latest revision with new owner
 		$this->sql_query(
 			"UPDATE ".$this->config['table_prefix']."page ".
-			"SET owner_id = '".quote($this->dblink, $user_id)."' ".
-			"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+			"SET owner_id = '".(int)$user_id."' ".
+			"WHERE page_id = '".(int)$page_id."' ".
 			"LIMIT 1");
 	}
 
@@ -4375,7 +4377,7 @@ class Wacko
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."acl SET ".
 					"list = '".quote($this->dblink, trim(str_replace("\r", '', $list)))."' ".
-				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+				"WHERE page_id = '".(int)$page_id."' ".
 					"AND privilege = '".quote($this->dblink, $privilege)."' ");
 		}
 		else
@@ -4383,7 +4385,7 @@ class Wacko
 			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."acl SET ".
 					"list		= '".quote($this->dblink, trim(str_replace("\r", '', $list)))."', ".
-					"page_id	= '".quote($this->dblink, $page_id)."', ".
+					"page_id	= '".(int)$page_id."', ".
 					"privilege	= '".quote($this->dblink, $privilege)."'");
 		}
 	}
@@ -4435,7 +4437,7 @@ class Wacko
 					$acl = $this->load_single(
 						"SELECT * ".
 						"FROM ".$this->config['table_prefix']."acl ".
-						"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+						"WHERE page_id = '".(int)$page_id."' ".
 							"AND privilege = '".quote($this->dblink, $privilege)."' ".
 						"LIMIT 1");
 				}
@@ -4693,8 +4695,8 @@ class Wacko
 		return $this->load_single(
 			"SELECT watch_id ".
 			"FROM ".$this->config['table_prefix']."watch ".
-			"WHERE user_id		= '".quote($this->dblink, $user_id)."' ".
-				"AND page_id	= '".quote($this->dblink, $page_id)."' ".
+			"WHERE user_id		= '".(int)$user_id."' ".
+				"AND page_id	= '".(int)$page_id."' ".
 			"LIMIT 1");
 	}
 
@@ -4707,7 +4709,8 @@ class Wacko
 		{
 			return $this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."watch (user_id, page_id) ".
-				"VALUES ( '".quote($this->dblink, $user_id)."', '".quote($this->dblink, $page_id)."')" );
+				"VALUES (	'".(int)$user_id."',
+							'".(int)$page_id."')" );
 				// TIMESTAMP type is filled automatically by MySQL
 		}
 		else
@@ -4720,8 +4723,8 @@ class Wacko
 	{
 		return $this->sql_query(
 			"DELETE FROM ".$this->config['table_prefix']."watch ".
-			"WHERE user_id		= '".quote($this->dblink, $user_id)."' ".
-				"AND page_id	= '".quote($this->dblink, $page_id)."'");
+			"WHERE user_id		= '".(int)$user_id."' ".
+				"AND page_id	= '".(int)$page_id."'");
 	}
 
 	// REVIEW
@@ -4734,10 +4737,10 @@ class Wacko
 		{
 			return $this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page SET ".
-					"reviewed		= '".quote($this->dblink, $reviewed)."', ".
+					"reviewed		= '".(int)$reviewed."', ".
 					"reviewed_time	= NOW(), ".
-					"reviewer_id	= '".quote($this->dblink, $reviewer_id)."' ".
-				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+					"reviewer_id	= '".(int)$reviewer_id."' ".
+				"WHERE page_id = '".(int)$page_id."' ".
 				"LIMIT 1");
 
 		}
@@ -4796,7 +4799,7 @@ class Wacko
 				"SELECT p.page_id, p.tag, p.title, m.menu_title, m.lang ".
 				"FROM ".$this->config['table_prefix']."menu m ".
 					"LEFT JOIN ".$this->config['table_prefix']."page p ON (m.page_id = p.page_id) ".
-				"WHERE m.user_id = '".quote($this->dblink, $user_id)."' ".
+				"WHERE m.user_id = '".(int)$user_id."' ".
 					($lang
 						? "AND m.lang = '".quote($this->dblink, $lang)."' "
 						: "").
@@ -4875,23 +4878,23 @@ class Wacko
 				$_menu_position = $this->load_all(
 					"SELECT m.menu_id ".
 					"FROM ".$this->config['table_prefix']."menu m ".
-					"WHERE m.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
+					"WHERE m.user_id = '".(int)$user['user_id']."' ", 0);
 
 				$_menu_item_count = count($_menu_position);
 
 				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."menu SET ".
-					"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
-					"page_id			= '".quote($this->dblink, $this->page['page_id'])."', ".
+					"user_id			= '".(int)$user['user_id']."', ".
+					"page_id			= '".(int)$this->page['page_id']."', ".
 					"lang				= '".quote($this->dblink, ($user['lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
-					"menu_position		= '".quote($this->dblink, ($_menu_item_count + 1))."'");
+					"menu_position		= '".(int)($_menu_item_count + 1)."'");
 			}
 
 			// parsing menu items into link table
 			foreach ($menu as $menu_item)
 			{
-				$menu_page_ids[] = $menu_item[0];
-				$menu_formatted[] = array ($menu_item[0], $menu_item[1]);
+				$menu_page_ids[]	= $menu_item[0];
+				$menu_formatted[]	= array ($menu_item[0], $menu_item[1]);
 			}
 
 			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
@@ -4920,8 +4923,8 @@ class Wacko
 
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."menu ".
-				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
-					"AND page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+				"WHERE user_id = '".(int)$user['user_id']."' ".
+					"AND page_id = '".(int)$this->page['page_id']."' ".
 				"LIMIT 1");
 
 			// parsing menu items into link table
@@ -5652,7 +5655,7 @@ class Wacko
 				"SELECT title ".
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE ".( $page_id != 0
-					? "page_id	= '".quote($this->dblink, (int)$page_id)."' "
+					? "page_id	= '".(int)$page_id."' "
 					: "tag	= '".quote($this->dblink, $tag)."' " ).
 				"LIMIT 1");
 
@@ -5777,7 +5780,7 @@ class Wacko
 				"deleted	= '1', ".
 				#"edit_note	= '".$this->get_user_ip()."', ".
 				"user_id	= '".$this->get_user_id()."' ".
-				"WHERE page_id	= '".quote($this->dblink, $page_id)."' ".
+				"WHERE page_id	= '".(int)$page_id."' ".
 				"LIMIT 1");
 		}
 		else
@@ -5785,7 +5788,7 @@ class Wacko
 			// delete page
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."page ".
-				"WHERE page_id = '".quote($this->dblink, $page_id)."' ");
+				"WHERE page_id = '".(int)$page_id."' ");
 		}
 
 		// for removed comment correct comments count and date on commented page
@@ -5795,7 +5798,7 @@ class Wacko
 			$comment = $this->load_single(
 				"SELECT created ".
 				"FROM {$this->config['table_prefix']}page ".
-				"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."' ".
+				"WHERE comment_on_id = '".(int)$comment_on_id."' ".
 				"ORDER BY created DESC ".
 				"LIMIT 1");
 
@@ -5803,7 +5806,7 @@ class Wacko
 				"UPDATE {$this->config['table_prefix']}page SET ".
 					"comments	= '".(int)$this->count_comments($comment_on_id)."', ".
 					"commented	= '".quote($this->dblink, $comment['created'])."' ".
-				"WHERE page_id	= '".quote($this->dblink, $comment_on_id)."' ".
+				"WHERE page_id	= '".(int)$comment_on_id."' ".
 				"LIMIT 1");
 		}
 
@@ -5966,7 +5969,7 @@ class Wacko
 			$files = $this->load_all(
 				"SELECT file_name ".
 				"FROM {$this->config['table_prefix']}upload ".
-				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
+				"WHERE page_id = '".(int)$page['page_id']."'");
 
 			// store a copy in ...
 			if ($this->config['store_deleted_pages'] && !$dontkeep)
@@ -5985,7 +5988,7 @@ class Wacko
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}upload SET ".
 					"deleted	= '1' ".
-					"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
+					"WHERE page_id = '".(int)$page['page_id']."'");
 			}
 			else
 			{
@@ -6001,7 +6004,7 @@ class Wacko
 				// remove from DB
 				$this->sql_query(
 					"DELETE FROM {$this->config['table_prefix']}upload ".
-					"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
+					"WHERE page_id = '".(int)$page['page_id']."'");
 			}
 		}
 
@@ -6407,8 +6410,8 @@ class Wacko
 		// current timestamp set automatically
 		return $this->sql_query(
 			"INSERT INTO {$this->config['table_prefix']}log SET ".
-				"level		= '".quote($this->dblink, $level)."', ".
-				"user_id	= '".quote($this->dblink, $user_id ? $user_id : 0 )."', ".
+				"level		= '".(int) $level."', ".
+				"user_id	= '".(int) $user_id ? $user_id : 0 ."', ".
 				"ip			= '".quote($this->dblink, $this->get_user_ip())."', ".
 				"message	= '".quote($this->dblink, $message)."'");
 	}
@@ -6504,7 +6507,7 @@ class Wacko
 			{
 				foreach ($set as $id)
 				{
-					$values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $page_id)."')";
+					$values[] = "(".(int)$id.", '".(int)$page_id."')";
 				}
 
 				$this->sql_query(

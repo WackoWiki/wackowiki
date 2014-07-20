@@ -155,10 +155,10 @@ class Polls
 	}
 
 	// add a new poll into the database
-	function submit_poll($id, $topic, $plural, $answers, $user, $start = 0)
+	function submit_poll($id, $topic, $plural, $answers, $user_id, $start = 0)
 	{
-		$topic	= quote($this->engine->dblink, $topic);
-		$user	= quote($this->engine->dblink, $user);
+		$topic		= quote($this->engine->dblink, $topic);
+		$user_id	= (int)$user_id;
 
 		if ($plural != 1) $plural = 0;
 
@@ -167,7 +167,7 @@ class Polls
 			"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 				"poll_id	= $id, ".
 				"text		= '".quote($this->engine->dblink, rtrim($topic, '.'))."', ".
-				"user_id	= '".quote($this->engine->dblink, $user)."', ".
+				"user_id	= '".(int)$user_id."', ".
 				"plural		= $plural, ".
 				"start		= ".($start == 1 ? "NOW()" : "'".SQL_NULLDATE."'"));
 
@@ -186,11 +186,11 @@ class Polls
 	}
 
 	// remove a given poll from the datebase
-	function remove_poll($id)
+	function remove_poll($poll_id)
 	{
 		return $this->engine->sql_query(
 			"DELETE FROM {$this->engine->config['table_prefix']}poll ".
-			"WHERE poll_id = $id");
+			"WHERE poll_id = $poll_id");
 	}
 
 	// print voting form
@@ -335,10 +335,10 @@ class Polls
 	// vote a given poll
 	// if $ballot is an array it is
 	// presumed that survey is plural
-	function vote_poll($id, $ballot)
+	function vote_poll($poll_id, $ballot)
 	{
-		$header	= $this->get_poll_title($id);
-		$vars	= $this->get_poll_vars($id, 1);
+		$header	= $this->get_poll_title($poll_id);
+		$vars	= $this->get_poll_vars($poll_id, 1);
 
 		if (!is_array($ballot))
 		{
@@ -351,23 +351,23 @@ class Polls
 			{
 				if ($var['v_id'] == $vote_id)
 				{
-					$new = $var['votes'] + 1;
+					$new_votes = $var['votes'] + 1;
 					$this->engine->sql_query(
 						"UPDATE {$this->engine->config['table_prefix']}poll ".
-						"SET votes = '".quote($this->engine->dblink, $new)."' ".
-						"WHERE poll_id = '".quote($this->engine->dblink, $id)."' ".
-							"AND v_id = '".quote($this->engine->dblink, $vote_id)."'");
+						"SET votes = '".(int) $new_votes."' ".
+						"WHERE poll_id = '".(int)$poll_id."' ".
+							"AND v_id = '".(int)$vote_id."'");
 //					$total++;
 				}
 			}
 		}
 
-		$new = $header['votes'] + 1; //$total;
+		$new_votes = $header['votes'] + 1; //$total;
 
 		$this->engine->sql_query(
 			"UPDATE {$this->engine->config['table_prefix']}poll ".
-			"SET votes = '".quote($this->engine->dblink, $new)."' ".
-			"WHERE poll_id = '".quote($this->engine->dblink, $id)."' ".
+			"SET votes = '".(int)$new_votes."' ".
+			"WHERE poll_id = '".(int)$poll_id."' ".
 				"AND v_id = '0'");
 
 		return true;

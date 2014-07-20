@@ -606,7 +606,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"WHERE p.page_id = a.page_id ".
 				"AND a.privilege = 'create' AND a.list = '' ".
 				"AND ".
-				"p.tag LIKE '{$this->tag}/%' ".
+				"p.tag LIKE '{quote($this->dblink, $this->tag)}/%' ".
 			"ORDER BY commented DESC ".
 			"LIMIT {$pagination['offset']}, $limit";
 
@@ -967,7 +967,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						"UPDATE {$this->config['table_prefix']}page SET ".
 							"comments	= '".(int)$this->count_comments($this->page['page_id'])."', ".
 							"commented	= NOW() ".
-						"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+						"WHERE page_id = '".(int)$this->page['page_id']."' ".
 						"LIMIT 1");
 
 					unset($accept_action);
@@ -1128,13 +1128,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page ".
 							"SET comments = '".(int)$this->count_comments($this->page['page_id'])."' ".
-							"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+							"WHERE page_id = '".(int)$this->page['page_id']."' ".
 							"LIMIT 1");
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
 								"comments	= '".(int)$this->count_comments($page_id)."', ".
 								"commented	= NOW() ".
-							"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+							"WHERE page_id = '".(int)$page_id."' ".
 							"LIMIT 1");
 
 						$this->log(3, str_replace('%2', $title.' '.$this->get_page_title($title), str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
