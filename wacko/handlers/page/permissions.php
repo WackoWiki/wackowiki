@@ -95,8 +95,8 @@ if ($this->user_is_owner() || $this->is_admin())
 			$comments = $this->load_all(
 				"SELECT page_id ".
 				"FROM ".$this->config['table_prefix']."page ".
-				"WHERE comment_on_id = '".quote($this->dblink, $this->page['page_id'])."' ".
-					"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
+				"WHERE comment_on_id = '".(int)$this->page['page_id']."' ".
+					"AND owner_id='".(int)$this->get_user_id()."'");
 
 			foreach ($comments as $num => $comment)
 			{
@@ -122,7 +122,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$user = $this->load_single(
 					"SELECT user_id, user_name, email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
-					"WHERE user_id = '".quote($this->dblink, $new_owner_id)."' ".
+					"WHERE user_id = '".(int)$new_owner_id."' ".
 					"LIMIT 1");
 
 				if ($user == true)
@@ -135,14 +135,14 @@ if ($this->user_is_owner() || $this->is_admin())
 						$this->sql_query(
 							"UPDATE {$this->config['user_table']} ".
 							"SET total_pages	= total_pages		- 1 ".
-							"WHERE user_id		= '".quote($this->dblink, $owner_id)."' ".
+							"WHERE user_id		= '".(int)$owner_id."' ".
 							"LIMIT 1");
 					}
 
 					$this->sql_query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_pages	= total_pages		+ 1 ".
-						"WHERE user_id		= '".quote($this->dblink, $new_owner_id)."' ".
+						"WHERE user_id		= '".(int)$new_owner_id."' ".
 						"LIMIT 1");
 
 					$this->set_page_owner($this->page['page_id'], $new_owner_id);
@@ -185,7 +185,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					") ".
 				($this->is_admin()
 					? ""
-					: "AND p.owner_id = '".quote($this->dblink, $this->get_user_id())."'"));
+					: "AND p.owner_id = '".(int)$this->get_user_id()."'"));
 
 			foreach ($pages as $num => $page)
 			{
@@ -207,8 +207,8 @@ if ($this->user_is_owner() || $this->is_admin())
 				$comments = $this->load_all(
 					"SELECT page_id ".
 					"FROM ".$this->config['table_prefix']."page ".
-					"WHERE comment_on_id = '".quote($this->dblink, $page['page_id'])."' ".
-						"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
+					"WHERE comment_on_id = '".(int)$page['page_id']."' ".
+						"AND owner_id='".(int)$this->get_user_id()."'");
 
 				foreach ($comments as $num => $comment)
 				{
@@ -243,7 +243,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$user = $this->load_single(
 					"SELECT user_name, email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
-					"WHERE user_id = '".quote($this->dblink, $new_owner_id)."' ".
+					"WHERE user_id = '".(int)$new_owner_id."' ".
 					"LIMIT 1");
 
 				if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')

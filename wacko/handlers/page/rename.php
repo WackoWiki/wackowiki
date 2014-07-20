@@ -221,7 +221,7 @@ function recursive_move(&$parent, $root, $new_root)
 		"FROM ".$parent->config['table_prefix']."page ".
 		"WHERE supertag LIKE ".$query.
 		($owner_id
-			? " AND owner_id ='".quote($parent->dblink, $owner_id)."'"
+			? " AND owner_id ='".(int)$owner_id."'"
 			: "").
 		" AND comment_on_id = '0'");
 

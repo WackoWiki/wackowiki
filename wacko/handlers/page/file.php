@@ -27,7 +27,7 @@ $file = $this->load_single(
 	"SELECT u.user_name AS user, f.user_id, f.upload_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits ".
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
+	"WHERE f.page_id = '".(int)$page_id."'".
 		"AND f.file_name='".quote($this->dblink, $_GET['get'])."' ".
 	"LIMIT 1");
 
@@ -109,7 +109,7 @@ if ($file_path)
 		$this->sql_query(
 			"UPDATE {$this->config['table_prefix']}upload ".
 			"SET hits = '".quote($this->dblink, $file['hits'] + 1)."' ".
-			"WHERE upload_id = '".quote($this->dblink, $file['upload_id'])."' ".
+			"WHERE upload_id = '".(int)$file['upload_id']."' ".
 			"LIMIT 1");
 	}
 

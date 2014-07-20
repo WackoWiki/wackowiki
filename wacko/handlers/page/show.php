@@ -21,7 +21,7 @@ if ($this->page['comment_on_id'])
 	$count = $this->load_single(
 		"SELECT COUNT(tag) AS n ".
 		"FROM {$this->config['table_prefix']}page ".
-		"WHERE comment_on_id = '".quote($this->dblink, $this->page['comment_on_id'])."' ".
+		"WHERE comment_on_id = '".(int)$this->page['comment_on_id']."' ".
 			"AND created <= '".quote($this->dblink, $this->page['created'])."' ".
 		"GROUP BY comment_on_id ".
 		"LIMIT 1", 1);
@@ -89,7 +89,7 @@ if ($this->has_access('read'))
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page ".
 				"SET hits = hits + 1 ".
-				"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."'");
+				"WHERE page_id = '".(int)$this->page['page_id']."'");
 		}
 
 		$this->set_language($this->page_lang);
@@ -115,7 +115,7 @@ if ($this->has_access('read'))
 					"UPDATE ".$this->config['table_prefix']."page SET ".
 						"body_r		= '".quote($this->dblink, $this->page['body_r'])."', ".
 						"body_toc	= '".quote($this->dblink, $this->page['body_toc'])."' ".
-					"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+					"WHERE page_id = '".(int)$this->page['page_id']."' ".
 					"LIMIT 1");
 			}
 		}

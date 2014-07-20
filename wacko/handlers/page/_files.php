@@ -72,7 +72,7 @@ if ($this->has_access('read'))
 			$files = $this->load_all(
 				"SELECT upload_id ".
 				"FROM ".$this->config['table_prefix']."upload ".
-				"WHERE page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
+				"WHERE page_id = '". (int)$this->page['page_id'] ."'");
 		}
 		else
 		{

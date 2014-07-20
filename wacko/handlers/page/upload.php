@@ -569,7 +569,7 @@ if ($registered
 			else
 			{
 				// TODO: we use KiB for quota in config -> * 1024 which is error prone
-				$error = $this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->config['upload_quota_per_user']* 1024) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota_per_user'] * 1024), true, true, true);
+				$error = $this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->config['upload_quota_per_user'] * 1024) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota_per_user'] * 1024), true, true, true);
 				$error .= '<br />'.$this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($files['used_quota'], false, true, true).' ('.round(($files['used_quota']/($this->config['upload_quota'] * 1024) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota'] * 1024), true, true, true);
 			}
 		}

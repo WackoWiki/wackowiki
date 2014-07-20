@@ -19,7 +19,7 @@ if (!function_exists('load_referrers'))
 		if ($count_referrers)
 		{
 			$count		= count($count_referrers);
-			$wacko->debug_print_r($count);
+			#$wacko->debug_print_r($count);
 
 			$pagination = $wacko->pagination($count, $limit, 'r', $parameters, 'referrers');
 
