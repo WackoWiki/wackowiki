@@ -31,11 +31,11 @@ function admin_deletedpages(&$engine, &$module)
 	{
 		$engine->sql_query(
 			"DELETE FROM {$engine->config['table_prefix']}revision ".
-			"WHERE page_id = '".quote($engine->dblink, $_GET['remove'])."'");
+			"WHERE page_id = '".(int)$_GET['remove'])."'";
 
 		$engine->sql_query(
 			"DELETE FROM {$engine->config['table_prefix']}page ".
-			"WHERE page_id = '".quote($engine->dblink, $_GET['remove'])."'");
+			"WHERE page_id = '".(int)$_GET['remove'])."'";
 	}
 
 	$pages = $engine->load_recently_deleted(100000, 0);

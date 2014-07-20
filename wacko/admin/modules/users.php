@@ -55,7 +55,7 @@ function admin_users(&$engine, &$module)
 				"SELECT u.user_name, u.real_name, u.email, p.theme, p.lang, u.enabled ".
 				"FROM {$engine->config['table_prefix']}user u ".
 					"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-				"WHERE u.user_id = '".quote($engine->dblink, $user_id)."' ".
+				"WHERE u.user_id = '".(int)$user_id."' ".
 					"AND u.account_type = '0' ".
 				"LIMIT 1");
 		}
@@ -78,9 +78,9 @@ function admin_users(&$engine, &$module)
 				$engine->sql_query(
 					"INSERT INTO {$engine->config['table_prefix']}user SET ".
 						"signup_time		= NOW(), ".
-						"email	= '".quote($engine->dblink, $_POST['email'])."', ".
+						"email			= '".quote($engine->dblink, $_POST['email'])."', ".
 						"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
-						"enabled			= '".quote($engine->dblink, (int)$_POST['enabled'])."', ".
+						"enabled		= '".(int)$_POST['enabled']."', ".
 						"user_name		= '".quote($engine->dblink, $_POST['newname'])."'");
 
 				// get new user_id
@@ -94,11 +94,11 @@ function admin_users(&$engine, &$module)
 				$engine->sql_query(
 					"INSERT INTO ".$engine->config['table_prefix']."user_setting ".
 					"SET ".
-						"user_id		= '".quote($engine->dblink, $_user_id['user_id'])."', ".
+						"user_id		= '".(int)$_user_id['user_id']."', ".
 						"typografica	= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
 						"lang			= '".quote($engine->dblink, ($lang ? $lang : $engine->config['language']))."', ".
 						"theme			= '".quote($engine->dblink, $engine->config['theme'])."', ".
-						"send_watchmail	= '".quote($engine->dblink, 1)."'");
+						"send_watchmail	= '1'");
 
 				$engine->set_message($engine->get_translation('UsersAdded'));
 				$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
@@ -122,18 +122,18 @@ function admin_users(&$engine, &$module)
 			{
 				$engine->sql_query(
 					"UPDATE {$engine->config['table_prefix']}user SET ".
-					"user_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
-					"email	= '".quote($engine->dblink, $_POST['newemail'])."', ".
-					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
-					"enabled		= '".quote($engine->dblink, (int)$_POST['enabled'])."' ".
-					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
-					"LIMIT 1");
+						"user_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
+						"email	= '".quote($engine->dblink, $_POST['newemail'])."', ".
+						"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
+						"enabled		= '".(int)$_POST['enabled']."' ".
+						"WHERE user_id = '".(int)$_POST['user_id']."' ".
+						"LIMIT 1");
 
 				$engine->sql_query(
 					"UPDATE {$engine->config['table_prefix']}user_setting SET ".
-					"lang		= '".quote($engine->dblink, $_POST['lang'])."' ".
-					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
-					"LIMIT 1");
+						"lang		= '".quote($engine->dblink, $_POST['lang'])."' ".
+						"WHERE user_id = '".(int)$_POST['user_id']."' ".
+						"LIMIT 1");
 
 				$engine->set_message($engine->get_translation('UsersRenamed'));
 				$engine->log(4, "User //'{$user['user_name']}'// renamed //'{$_POST['newname']}'//");
@@ -145,19 +145,19 @@ function admin_users(&$engine, &$module)
 		{
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}user ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
+				"WHERE user_id = '".(int)$_POST['user_id']."'");
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}user_setting ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
+				"WHERE user_id = '".(int)$_POST['user_id']."'");
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
+				"WHERE user_id = '".(int)$_POST['user_id']."'");
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}menu ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
+				"WHERE user_id = '".(int)$_POST['user_id']."'");
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}watch ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
+				"WHERE user_id = '".(int)$_POST['user_id']."'");
 
 			$engine->set_message($engine->get_translation('UsersDeleted'));
 			$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
@@ -209,7 +209,7 @@ function admin_users(&$engine, &$module)
 			"SELECT u.user_name, u.real_name, u.email, p.lang, u.enabled ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-			"WHERE u.user_id = '".quote($engine->dblink, $_POST['change'])."' ".
+			"WHERE u.user_id = '".(int)$_POST['change']."' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1"))
 		{
