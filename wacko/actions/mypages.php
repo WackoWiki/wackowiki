@@ -36,7 +36,7 @@ if ($user_id = $this->get_user_id())
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE owner_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
@@ -44,7 +44,7 @@ if ($user_id = $this->get_user_id())
 		if ($pages = $this->load_all(
 			"SELECT tag, title, created ".
 			"FROM {$prefix}page ".
-			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE owner_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY created DESC, tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
@@ -95,7 +95,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}revision AS r ".
 				"ON (p.page_id = r.page_id ".
-					"AND p.owner_id = '".quote($this->dblink, $user_id)."') ".
+					"AND p.owner_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0'", 1);
 
@@ -112,7 +112,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}revision AS r ".
 				"ON (p.page_id = r.page_id ".
-					"AND p.owner_id = '".quote($this->dblink, $user_id)."') ".
+					"AND p.owner_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0' ".
 			"GROUP BY tag ".
@@ -164,7 +164,7 @@ if ($user_id = $this->get_user_id())
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE owner_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
@@ -177,7 +177,7 @@ if ($user_id = $this->get_user_id())
 		if ($pages = $this->load_all(
 			"SELECT tag, title, modified ".
 			"FROM {$prefix}page ".
-			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE owner_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))

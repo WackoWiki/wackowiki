@@ -222,7 +222,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."user_setting ".
 					"SET ".
-						"user_id		= '".quote($this->dblink, $_user_id['user_id'])."', ".
+						"user_id		= '".(int)$_user_id['user_id']."', ".
 						"typografica	= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
 						"lang			= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
 						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".

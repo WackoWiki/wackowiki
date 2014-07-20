@@ -93,7 +93,7 @@ else if ($user = $this->get_user())
 					"UPDATE ".$this->config['user_table']." SET ".
 						"real_name			= '".quote($this->dblink, trim($_POST['real_name']))."', ".
 						"email				= '".quote($this->dblink, $_POST['email'])."' ".
-					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+					"WHERE user_id = '".(int)$user['user_id']."' ".
 					"LIMIT 1");
 
 				// FIXME: the next if condition will repeat these both following actions
@@ -111,29 +111,29 @@ else if ($user = $this->get_user())
 		$this->sql_query(
 			"UPDATE ".$this->config['table_prefix']."user_setting SET ".
 			($_POST['action'] == 'update_extended'
-				?	"doubleclick_edit	= '".quote($this->dblink, (int)$_POST['doubleclick_edit'])."', ".
-					"show_comments		= '".quote($this->dblink, (int)$_POST['show_comments'])."', ".
-					"show_spaces		= '".quote($this->dblink, (int)$_POST['show_spaces'])."', ".
-					#"typografica		= '".quote($this->dblink, (int)$_POST['typografica'])."', ".
-					"autocomplete		= '".quote($this->dblink, (int)$_POST['autocomplete'])."', ".
-					"numerate_links		= '".quote($this->dblink, (int)$_POST['numerate_links'])."', ".
-					"dont_redirect		= '".quote($this->dblink, (int)$_POST['dont_redirect'])."', ".
-					"send_watchmail		= '".quote($this->dblink, (int)$_POST['send_watchmail'])."', ".
-					"show_files			= '".quote($this->dblink, (int)$_POST['show_files'])."', ".
-					"allow_intercom		= '".quote($this->dblink, (int)$_POST['allow_intercom'])."', ".
-					"allow_massemail	= '".quote($this->dblink, (int)$_POST['allow_massemail'])."', ".
-					"hide_lastsession	= '".quote($this->dblink, (int)$_POST['hide_lastsession'])."', ".
-					"validate_ip		= '".quote($this->dblink, (int)$_POST['validate_ip'])."', ".
-					"noid_pubs			= '".quote($this->dblink, (int)$_POST['noid_pubs'])."', ".
-					"session_expiration	= '".quote($this->dblink, (int)$_POST['session_expiration'])."' "
+				?	"doubleclick_edit	= '".(int)$_POST['doubleclick_edit']."', ".
+					"show_comments		= '".(int)$_POST['show_comments']."', ".
+					"show_spaces		= '".(int)$_POST['show_spaces']."', ".
+					#"typografica		= '".(int)$_POST['typografica']."', ".
+					"autocomplete		= '".(int)$_POST['autocomplete']."', ".
+					"numerate_links		= '".(int)$_POST['numerate_links']."', ".
+					"dont_redirect		= '".(int)$_POST['dont_redirect']."', ".
+					"send_watchmail		= '".(int)$_POST['send_watchmail']."', ".
+					"show_files			= '".(int)$_POST['show_files']."', ".
+					"allow_intercom		= '".(int)$_POST['allow_intercom']."', ".
+					"allow_massemail	= '".(int)$_POST['allow_massemail']."', ".
+					"hide_lastsession	= '".(int)$_POST['hide_lastsession']."', ".
+					"validate_ip		= '".(int)$_POST['validate_ip']."', ".
+					"noid_pubs			= '".(int)$_POST['noid_pubs']."', ".
+					"session_expiration	= '".(int)$_POST['session_expiration']."' "
 				:	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
-					"timezone			= '".quote($this->dblink, (float)$_POST['timezone'])."', ".
-					"dst				= '".quote($this->dblink, (int)$_POST['dst'])."', ".
-					"revisions_count	= '".quote($this->dblink, (int)$_POST['revisions_count'])."', ".
-					"changes_count		= '".quote($this->dblink, (int)$_POST['changes_count'])."' "
+					"timezone			= '".(float)$_POST['timezone']."', ".
+					"dst				= '".(int)$_POST['dst']."', ".
+					"revisions_count	= '".(int)$_POST['revisions_count']."', ".
+					"changes_count		= '".(int)$_POST['changes_count']."' "
 				).
-			"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
 		$this->set_message($this->get_translation('UserSettingsStored'));
@@ -153,7 +153,7 @@ else if ($user = $this->get_user())
 			$this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET email_confirm = '".quote($this->dblink, $confirm_hash)."' ".
-				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+				"WHERE user_id = '".(int)$user['user_id']."' ".
 				"LIMIT 1");
 
 			$subject = $this->config['site_name'].". ".$this->get_translation('EmailConfirm');
@@ -368,7 +368,7 @@ else if ($user = $this->get_user())
 		$code = $this->load_single(
 			"SELECT email_confirm ".
 			"FROM {$this->config['user_table']} ".
-			"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('UserSettingsGeneral')."</h3>";

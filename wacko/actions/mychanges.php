@@ -35,7 +35,7 @@ if ($user_id = $this->get_user_id())
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
@@ -43,7 +43,7 @@ if ($user_id = $this->get_user_id())
 		if ($pages = $this->load_all(
 			"SELECT tag, title, modified, edit_note ".
 			"FROM {$prefix}page ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY modified DESC, tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
@@ -107,7 +107,7 @@ if ($user_id = $this->get_user_id())
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges#list');
@@ -115,7 +115,7 @@ if ($user_id = $this->get_user_id())
 		if ($pages = $this->load_all(
 			"SELECT tag, title, modified ".
 			"FROM {$prefix}page ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC, modified DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))

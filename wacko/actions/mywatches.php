@@ -26,7 +26,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}watch AS w ".
 				"ON (p.page_id = w.page_id ".
-					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
+					"AND w.user_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND w.user_id IS NULL", 1);
 
@@ -42,7 +42,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}watch AS w ".
 				"ON (p.page_id = w.page_id ".
-					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
+					"AND w.user_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND w.user_id IS NULL ".
 			"ORDER BY pagetag ASC ".
@@ -84,7 +84,7 @@ if ($user_id = $this->get_user_id())
 		$count	= $this->load_single(
 			"SELECT COUNT( DISTINCT page_id ) as n ".
 			"FROM {$prefix}watch ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."'", 1);
+			"WHERE user_id = '".(int)$user_id."'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
 
@@ -99,7 +99,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}watch AS w ".
 			"LEFT JOIN {$prefix}page AS p ".
 				"ON (p.page_id = w.page_id) ".
-			"WHERE w.user_id = '".quote($this->dblink, $user_id)."' ".
+			"WHERE w.user_id = '".(int)$user_id."' ".
 			"GROUP BY tag ".
 			"LIMIT {$pagination['offset']}, $limit"))
 		{
@@ -120,6 +120,7 @@ if ($user_id = $this->get_user_id())
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list">'.
 						"<img src=\"".$this->config['theme_url']."icons/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  />".'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
+
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;

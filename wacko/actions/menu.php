@@ -28,7 +28,7 @@ if (!function_exists('load_user_menu'))
 			"SELECT p.tag, p.title, b.menu_id, b.user_id, b.menu_title, b.lang, b.menu_position ".
 			"FROM ".$wacko->config['table_prefix']."menu b ".
 				"LEFT JOIN ".$wacko->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
-			"WHERE b.user_id = '".quote($wacko->dblink, $user_id)."' ".
+			"WHERE b.user_id = '".(int)$user_id."' ".
 			"ORDER BY b.menu_position", 0);
 
 		return $_menu;
@@ -99,9 +99,9 @@ if (isset($_POST['_user_menu']))
 		{
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."menu SET ".
-					"menu_position	= '".quote($this->dblink, $item['menu_position'])."', ".
+					"menu_position	= '".(int)$item['menu_position']."', ".
 					"menu_title		= '".quote($this->dblink, substr(trim($_POST['title_'.$item['menu_id']]), 0, 250))."' ".
-				"WHERE menu_id = '".quote($this->dblink, $item['menu_id'])."' ".
+				"WHERE menu_id = '".(int)$item['menu_id']."' ".
 				"LIMIT 1");
 		}
 	}
@@ -124,8 +124,8 @@ if (isset($_POST['_user_menu']))
 					if ($this->load_single(
 						"SELECT menu_id ".
 						"FROM ".$this->config['table_prefix']."menu ".
-						"WHERE user_id = '".quote($this->dblink, $_user_id)."' ".
-							"AND page_id = '".quote($this->dblink, $_page_id)."' ".
+						"WHERE user_id = '".(int)$_user_id."' ".
+							"AND page_id = '".(int)$_page_id."' ".
 						"LIMIT 1"))
 					{
 						$message .= $this->get_translation('BookmarkAlreadyExists');
@@ -145,16 +145,16 @@ if (isset($_POST['_user_menu']))
 							$_menu_position = $this->load_all(
 								"SELECT b.menu_id ".
 								"FROM ".$this->config['table_prefix']."menu b ".
-								"WHERE b.user_id = '".quote($this->dblink, $_user_id)."' ", 0);
+								"WHERE b.user_id = '".(int)$_user_id."' ", 0);
 
 							$_menu_item_count = count($_menu_position);
 
 							$this->sql_query(
 								"INSERT INTO ".$this->config['table_prefix']."menu SET ".
-								"user_id			= '".quote($this->dblink, $_user_id)."', ".
-								"page_id			= '".quote($this->dblink, $_page_id)."', ".
+								"user_id			= '".(int)$_user_id."', ".
+								"page_id			= '".(int)$_page_id."', ".
 								"lang				= '".quote($this->dblink, ($user['lang'] != $page['lang'] ? $page['lang'] : ""))."', ".
-								"menu_position		= '".quote($this->dblink, ($_menu_item_count + 1))."'");
+								"menu_position		= '".(int)($_menu_item_count + 1)."'");
 						}
 
 						// parsing menu items into link table

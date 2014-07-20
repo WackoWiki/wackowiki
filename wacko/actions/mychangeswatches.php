@@ -22,8 +22,8 @@ if ($user_id = $this->get_user_id())
 			"FROM {$pref}page AS p, {$pref}watch AS w ".
 			"WHERE p.page_id = w.page_id ".
 				"AND p.modified > w.watch_time ".
-				"AND w.user_id = '".quote($this->dblink, $user_id)."' ".
-				"AND p.user_id <> '".quote($this->dblink, $user_id)."' ".
+				"AND w.user_id = '".(int)$user_id."' ".
+				"AND p.user_id <> '".(int)$user_id."' ".
 			"GROUP BY p.tag ".
 			"ORDER BY p.modified DESC, p.tag ASC ".
 			"LIMIT $limit");
@@ -34,8 +34,8 @@ if ($user_id = $this->get_user_id())
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET watch_time = NOW() ".
-				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".
-					"AND user_id = '".quote($this->dblink, $user_id)."'");
+				"WHERE page_id = '".(int)$page['page_id']."' ".
+					"AND user_id = '".(int)$user_id."'");
 		$this->redirect($this->href('', '', 'mode=mychangeswatches').'#list');
 	}
 

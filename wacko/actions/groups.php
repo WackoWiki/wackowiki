@@ -54,7 +54,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 							"LEFT JOIN ".$this->config['table_prefix']."usergroup_member m ON (m.group_id = g.group_id) ".
 						"WHERE ".
 							"g.active = '1' ".
-							"AND g.group_id = '".quote($this->dblink, $usergroup['group_id'])."' ".
+							"AND g.group_id = '".(int)$usergroup['group_id']."' ".
 						"LIMIT 1", 1);
 
 		echo '<h2 id="pages">'.$count['total_members'].' '.$this->get_translation('GroupsMembers').'</a></h2>'."\n";
@@ -72,7 +72,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				"SELECT u.user_id, u.user_name, u.signup_time, u.total_pages, u.total_revisions, u.total_comments ".
 				"FROM {$this->config['table_prefix']}user u ".
 					"LEFT JOIN {$this->config['table_prefix']}usergroup_member m ON (u.user_id = m.user_id) ".
-				"WHERE m.group_id = '".quote($this->dblink, $usergroup['group_id'])."' ".
+				"WHERE m.group_id = '".(int) $usergroup['group_id']."' ".
 				"ORDER BY ".( isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'u.user_name ASC' : 'signup_time DESC' )." ".
 				"LIMIT {$pagination['offset']}, $limit");
 
