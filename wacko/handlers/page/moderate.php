@@ -249,14 +249,14 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 			"owner_id		= '".$page['owner_id']."', ".
 			"user_id		= '".$page['user_id']."', ".
 			"ip				= '".quote($engine->dblink, $page['ip'])."' ".
-		"WHERE page_id = '".(int)$new_page_id."'");
+		"WHERE page_id = '".$new_page_id."'");
 
 	// move remaining comments to the new topic
 	foreach ($comment_ids as $comment_id)
 	{
 		$engine->sql_query(
 			"UPDATE {$engine->config['table_prefix']}page SET ".
-				"comment_on_id = '".(int)$new_page_id."' ".
+				"comment_on_id = '".$new_page_id."' ".
 			"WHERE page_id = '".(int)$comment_id."'");
 
 		// saving acls
@@ -287,7 +287,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".$engine->count_comments($new_page_id)."', ".
 			"commented	= NOW() ".
-		"WHERE page_id = '".(int)$new_page_id."' ".
+		"WHERE page_id = '".$new_page_id."' ".
 		"LIMIT 1");
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page ".
@@ -589,8 +589,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				"AND a.privilege = 'create' AND a.list = '' ".
-				"AND ".
-				"p.tag LIKE '{$this->tag}/%' ".
+				"AND p.tag LIKE '".quote($this->dblink, $this->tag)."/%' ".
 			"LIMIT 1";
 
 		// count topics and make pagination
@@ -605,8 +604,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				"AND a.privilege = 'create' AND a.list = '' ".
-				"AND ".
-				"p.tag LIKE '{quote($this->dblink, $this->tag)}/%' ".
+				"AND p.tag LIKE '".quote($this->dblink, $this->tag)."/%' ".
 			"ORDER BY commented DESC ".
 			"LIMIT {$pagination['offset']}, $limit";
 
@@ -656,8 +654,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					"{$this->config['table_prefix']}acl AS a ".
 				"WHERE p.page_id = a.page_id ".
 					"AND a.privilege = 'comment' AND a.list = '' ".
-					"AND ".
-					"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
+					"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
 				"ORDER BY modified ASC", 1);
 
 			foreach ($sections as $section)
@@ -1168,6 +1165,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 			"WHERE comment_on_id = '{$this->page['page_id']}' ".
+			"AND p.deleted <> '1' ".
 			"ORDER BY created ASC ".
 			"LIMIT {$pagination['offset']}, $limit";
 
