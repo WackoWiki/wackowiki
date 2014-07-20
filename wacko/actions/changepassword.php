@@ -86,7 +86,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 						"password			= '".quote($this->dblink, $password_encrypted)."', ".
 						"salt				= '".quote($this->dblink, $salt)."', ".
 						"change_password	= '' ".
-					"WHERE user_id = '".(int)$user['user_id']."' ".
+					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 
 				// log event
@@ -225,7 +225,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 				"UPDATE ".$this->config['user_table']." SET ".
 					"password			= '".quote($this->dblink, $password_encrypted)."', ".
 					"salt				= '".quote($this->dblink, $salt)."' ".
-				"WHERE user_id = '".(int)$user['user_id']."' ".
+				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 
 			// reinitialize user session
@@ -341,7 +341,7 @@ else
 				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
 						"change_password = '".quote($this->dblink, $code_hash)."' ".
-					"WHERE user_id = '".(int)$user['user_id']."' ".
+					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 
 				// send code

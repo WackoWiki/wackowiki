@@ -73,8 +73,8 @@ if ($this->has_access('read'))
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET comment_id = '0' ".
-				"WHERE page_id = '".(int)$this->page['page_id']."' ".
-				"AND user_id = '".(int)$user['user_id']."'");
+				"WHERE page_id = '".$this->page['page_id']."' ".
+				"AND user_id = '".$user['user_id']."'");
 		}
 
 		// clear anonymous publication uncorrelator
@@ -251,7 +251,7 @@ if ($this->has_access('read'))
 	}
 	else
 	{
-		$c = (int)$this->page['comments'];
+		$c = $this->page['comments'];
 
 		if		($c  <  1)
 		{

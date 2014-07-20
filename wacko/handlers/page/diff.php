@@ -32,7 +32,7 @@ if (!function_exists('handler_diff_load_page_by_id'))
 				"SELECT p.page_id, p.page_id AS revision_id, p.modified, p.body, u.user_name ".
 				"FROM ".$wacko->config['table_prefix']."page p ".
 					"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-				"WHERE p.page_id = '".(int)$wacko->get_page_id()."' ".
+				"WHERE p.page_id = '".$wacko->get_page_id()."' ".
 				"LIMIT 1");
 		}
 	}

@@ -99,9 +99,9 @@ if (isset($_POST['_user_menu']))
 		{
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."menu SET ".
-					"menu_position	= '".(int)$item['menu_position']."', ".
+					"menu_position	= '".$item['menu_position']."', ".
 					"menu_title		= '".quote($this->dblink, substr(trim($_POST['title_'.$item['menu_id']]), 0, 250))."' ".
-				"WHERE menu_id = '".(int)$item['menu_id']."' ".
+				"WHERE menu_id = '".$item['menu_id']."' ".
 				"LIMIT 1");
 		}
 	}
@@ -201,7 +201,7 @@ if (isset($_POST['_user_menu']))
 					$deletion .= ', ';
 				}
 
-				$deletion .= quote($this->dblink, $item['menu_id']);
+				$deletion .= $item['menu_id'];
 			}
 
 			if ($deletion != '')

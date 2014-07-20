@@ -283,7 +283,7 @@ function admin_inconsistencies(&$engine, &$module)
 			$upload = $engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}upload ul ".
 					"LEFT JOIN {$engine->config['table_prefix']}user u ON (ul.user_id = u.user_id) ".
-				"SET ul.user_id		= '".quote($engine->dblink, $admin_id['user_id'])."' ".
+				"SET ul.user_id		= '".(int)$admin_id['user_id']."' ".
 				"WHERE
 					u.user_id IS NULL");
 

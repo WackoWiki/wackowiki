@@ -61,8 +61,8 @@ if ($registered
 			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-				"AND f.upload_id ='".quote($this->dblink, $_GET['file_id'])."' ".
+			"WHERE f.page_id = '". $page_id."'".
+				"AND f.upload_id ='".(int)$_GET['file_id']."' ".
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -132,8 +132,8 @@ if ($registered
 			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-				"AND f.upload_id ='".quote($this->dblink, $_GET['file_id'])."' ".
+			"WHERE f.page_id = '".$page_id."'".
+				"AND f.upload_id ='".(int)$_GET['file_id']."' ".
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -208,8 +208,8 @@ if ($registered
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."' ".
+				"WHERE f.page_id = '".$page_id."'".
+					"AND f.upload_id ='".(int)$_POST['file_id']."' ".
 				"LIMIT 1");
 
 			if (count($file) > 0)
@@ -222,13 +222,13 @@ if ($registered
 					// 2. remove from DB
 					$this->sql_query(
 						"DELETE FROM ".$this->config['table_prefix']."upload ".
-						"WHERE upload_id = '". quote($this->dblink, $file['upload_id'])."'" );
+						"WHERE upload_id = '".$file['upload_id']."'" );
 
 					// update user uploads count
 					$this->sql_query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_uploads = total_uploads - 1 ".
-						"WHERE user_id = '".quote($this->dblink, $file['user_id'])."' ".
+						"WHERE user_id = '".$file['user_id']."' ".
 						"LIMIT 1");
 
 					$message .= $this->get_translation('UploadRemovedFromDB').'<br />';
@@ -282,8 +282,8 @@ if ($registered
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."' ".
+				"WHERE f.page_id = '".$page_id."'".
+					"AND f.upload_id ='".(int)$_POST['file_id']."' ".
 				"LIMIT 1");
 
 			if (count($file) > 0)
@@ -306,7 +306,7 @@ if ($registered
 						"UPDATE ".$this->config['table_prefix']."upload SET ".
 							"lang				= '".quote($this->dblink, $this->page['lang'])."', ".
 							"file_description	= '".quote($this->dblink, $description)."' ".
-						"WHERE upload_id = '". quote($this->dblink, $file['upload_id'])."' ".
+						"WHERE upload_id = '". $file['upload_id']."' ".
 						"LIMIT 1");
 
 					$message .= $this->get_translation('UploadEditedMeta')."<br />";
@@ -351,7 +351,7 @@ if ($registered
 			$user_files	= $this->load_single(
 				"SELECT SUM(file_size) AS used_user_quota ".
 				"FROM ".$this->config['table_prefix']."upload ".
-				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."'".
+				"WHERE user_id = '".$user['user_id']."'".
 				"LIMIT 1");
 			// TODO: Set used_quota in config table (?)
 			$files	= $this->load_single(
@@ -490,14 +490,14 @@ if ($registered
 							// 5. insert line into DB
 							$this->sql_query(
 								"INSERT INTO ".$this->config['table_prefix']."upload SET ".
-									"page_id			= '".quote($this->dblink, $is_global ? "0" : $this->page['page_id'])."', ".
-									"user_id			= '".quote($this->dblink, $user['user_id'])."',".
+									"page_id			= '".$is_global ? "0" : $this->page['page_id']."', ".
+									"user_id			= '".$user['user_id']."',".
 									"file_name			= '".quote($this->dblink, $small_name)."', ".
 									"lang				= '".quote($this->dblink, $this->page['lang'])."', ".
 									"file_description	= '".quote($this->dblink, $description)."', ".
-									"file_size			= '".quote($this->dblink, $file_size)."',".
-									"picture_w			= '".quote($this->dblink, $size[0])."',".
-									"picture_h			= '".quote($this->dblink, $size[1])."',".
+									"file_size			= '".(int)$file_size."',".
+									"picture_w			= '".(int)$size[0]."',".
+									"picture_h			= '".(int)$size[1]."',".
 									"file_ext			= '".quote($this->dblink, substr($ext, 0, 10))."',".
 									"uploaded_dt		= '".quote($this->dblink, $uploaded_dt)."' ");
 
@@ -505,7 +505,7 @@ if ($registered
 							$this->sql_query(
 								"UPDATE {$this->config['user_table']} ".
 								"SET total_uploads = total_uploads + 1 ".
-								"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+								"WHERE user_id = '".$user['user_id']."' ".
 								"LIMIT 1");
 
 							// 4. output link to file

@@ -113,8 +113,8 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 			// move comments to the base topic
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}page SET ".
-					"comment_on_id = '".quote($engine->dblink, $base_id)."' ".
-				"WHERE comment_on_id = '".quote($engine->dblink, $topic_id)."'");
+					"comment_on_id = '".(int)$base_id."' ".
+				"WHERE comment_on_id = '".(int)$topic_id."'");
 
 			// for the forum moderation only
 			if ($move_topics === true)
@@ -142,8 +142,8 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 						"modified		= '".quote($engine->dblink, $page['modified'])."', ".
 						"created		= '".quote($engine->dblink, $page['created'])."', ".
 						"commented		= '".quote($engine->dblink, $page['commented'])."', ".
-						"owner_id		= '".quote($engine->dblink, $page['owner_id'])."', ".
-						"user_id		= '".quote($engine->dblink, $page['user_id'])."', ".
+						"owner_id		= '".$page['owner_id']."', ".
+						"user_id		= '".$page['user_id']."', ".
 						"ip				= '".quote($engine->dblink, $page['ip'])."' ".
 					"WHERE tag = '".quote($engine->dblink, 'Comment'.$num)."'");
 
@@ -166,7 +166,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$comments = $engine->load_all(
 		"SELECT page_id, tag, body_r ".
 		"FROM {$engine->config['table_prefix']}page ".
-		"WHERE comment_on_id = '".quote($engine->dblink, $base_id)."'");
+		"WHERE comment_on_id = '".(int)$base_id."'");
 
 	foreach ($comments as $comment)
 	{
@@ -190,9 +190,9 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	// recount comments for the base topic
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
-			"comments	= '".(int)$engine->count_comments($base_id)."', ".
+			"comments	= '".$engine->count_comments($base_id)."', ".
 			"commented	= NOW() ".
-		"WHERE page_id = '".quote($engine->dblink, $base_id)."' ".
+		"WHERE page_id = '".(int)$base_id."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -246,18 +246,18 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"modified		= '".quote($engine->dblink, $page['modified'])."', ".
 			"created		= '".quote($engine->dblink, $page['created'])."', ".
-			"owner_id		= '".quote($engine->dblink, $page['owner_id'])."', ".
-			"user_id		= '".quote($engine->dblink, $page['user_id'])."', ".
+			"owner_id		= '".$page['owner_id']."', ".
+			"user_id		= '".$page['user_id']."', ".
 			"ip				= '".quote($engine->dblink, $page['ip'])."' ".
-		"WHERE page_id = '".quote($engine->dblink, $new_page_id)."'");
+		"WHERE page_id = '".(int)$new_page_id."'");
 
 	// move remaining comments to the new topic
 	foreach ($comment_ids as $comment_id)
 	{
 		$engine->sql_query(
 			"UPDATE {$engine->config['table_prefix']}page SET ".
-				"comment_on_id = '".quote($engine->dblink, $new_page_id)."' ".
-			"WHERE page_id = '".quote($engine->dblink, $comment_id)."'");
+				"comment_on_id = '".(int)$new_page_id."' ".
+			"WHERE page_id = '".(int)$comment_id."'");
 
 		// saving acls
 		$engine->save_acl($comment_id, 'write',		$write_acl);
@@ -285,14 +285,14 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	// recount comments for old and new topics
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
-			"comments	= '".(int)$engine->count_comments($new_page_id)."', ".
+			"comments	= '".$engine->count_comments($new_page_id)."', ".
 			"commented	= NOW() ".
-		"WHERE page_id = '".quote($engine->dblink, $new_page_id)."' ".
+		"WHERE page_id = '".(int)$new_page_id."' ".
 		"LIMIT 1");
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page ".
-		"SET comments = '".(int)$engine->count_comments($old_page_id)."' ".
-		"WHERE page_id = '".quote($engine->dblink, $old_page_id)."' ".
+		"SET comments = '".$engine->count_comments($old_page_id)."' ".
+		"WHERE page_id = '".(int)$old_page_id."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -965,9 +965,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					// recount comments for current topic
 					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}page SET ".
-							"comments	= '".(int)$this->count_comments($this->page['page_id'])."', ".
+							"comments	= '".$this->count_comments($this->page['page_id'])."', ".
 							"commented	= NOW() ".
-						"WHERE page_id = '".(int)$this->page['page_id']."' ".
+						"WHERE page_id = '".$this->page['page_id']."' ".
 						"LIMIT 1");
 
 					unset($accept_action);
@@ -1079,7 +1079,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						foreach ($comment_ids as $comment_id)
 						{
-							$ids_str .= "'".quote($this->dblink, $comment_id)."', ";
+							$ids_str .= "'".$comment_id."', ";
 						}
 
 						$ids_str = substr($ids_str, 0, strlen($ids_str) - 2);
@@ -1096,7 +1096,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						// move
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
-								"comment_on_id = '".quote($this->dblink, $page_id)."' ".
+								"comment_on_id = '".$page_id."' ".
 							"WHERE page_id IN ( $ids_str )");
 
 						// update link table
@@ -1127,12 +1127,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						// recount comments for the old and new page
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page ".
-							"SET comments = '".(int)$this->count_comments($this->page['page_id'])."' ".
-							"WHERE page_id = '".(int)$this->page['page_id']."' ".
+							"SET comments = '".$this->count_comments($this->page['page_id'])."' ".
+							"WHERE page_id = '".$this->page['page_id']."' ".
 							"LIMIT 1");
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
-								"comments	= '".(int)$this->count_comments($page_id)."', ".
+								"comments	= '".$this->count_comments($page_id)."', ".
 								"commented	= NOW() ".
 							"WHERE page_id = '".(int)$page_id."' ".
 							"LIMIT 1");
