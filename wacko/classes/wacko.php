@@ -1709,7 +1709,8 @@ class Wacko
 			$body = $this->format($body, 'pre_wacko');
 
 			// making page body components
-			$body_r = $this->format($body, 'wacko');
+			$body_r		= $this->format($body, 'wacko');
+			$body_toc	= '';
 
 			if ($this->config['paragrafica'] && !$comment_on_id)
 			{
@@ -1730,7 +1731,7 @@ class Wacko
 				{
 					$lang_list = $this->available_languages();
 
-					if ($_REQUEST['lang'] && in_array($_REQUEST['lang'], $lang_list))
+					if (isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
 					{
 						$lang = $_REQUEST['lang'];
 					}
@@ -1767,7 +1768,7 @@ class Wacko
 					$root_id		= $this->get_page_id($root);
 					$write_acl		= $this->load_acl($this->get_page_id($root), 'write');
 
-					while ($write_acl['default'] == 1)
+					while (!empty($write_acl['default']) && $write_acl['default'] == 1)
 					{
 						$_root		= $root;
 						$root		= preg_replace( '/^(.*)\\/([^\\/]+)$/', '$1', $root );
@@ -5126,7 +5127,7 @@ class Wacko
 	function run($tag, $method = '')
 	{
 		// mandatory tls?
-		if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+		if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 		{
 			$this->redirect(str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->href($method, $tag)));
 		}

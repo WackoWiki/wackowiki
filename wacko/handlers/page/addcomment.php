@@ -26,6 +26,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	$user = $this->get_user();
 	$body = str_replace("\r", '', $_POST['body']);
 	$body = trim($_POST['body']);
+	$error = '';
 
 	if(isset($_POST['title']))
 	{
