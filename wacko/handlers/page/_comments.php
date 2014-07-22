@@ -260,8 +260,14 @@ if ($this->has_access('read'))
 				$show_comments = $this->get_translation('Comments_0');
 			}
 		}
-		else if	($c === 1)	$show_comments = $this->get_translation('Comments_1');
-		else if	($c  >  1)	$show_comments = str_replace('%1', $c, $this->get_translation('Comments_n'));
+		else if	($c == 1)
+		{
+			$show_comments = $this->get_translation('Comments_1');
+		}
+		else if	($c  >  1)
+		{
+			$show_comments = str_replace('%1', $c, $this->get_translation('Comments_n'));
+		}
 
 		// show link to show comment only if there is one or/and user has the right to add a new one
 		if (!empty($show_comments))
