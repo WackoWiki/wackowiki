@@ -261,6 +261,7 @@ function admin_dbrestore(&$engine, &$module)
 						// structure
 						echo '<tr>'.
 								'<td>';
+
 						$list = explode(';', $log[3]);
 
 						foreach ($tables as $table)
@@ -278,6 +279,7 @@ function admin_dbrestore(&$engine, &$module)
 						// data
 						echo '</td>'."\n".
 							'<td>';
+
 						$list = explode(';', $log[4]);
 
 						foreach ($tables as $table)
@@ -295,6 +297,7 @@ function admin_dbrestore(&$engine, &$module)
 						// files
 						echo '</td>'."\n".
 							'<td>';
+
 						$list = explode(';', $log[5]);
 
 						foreach ($directories as $directory)
