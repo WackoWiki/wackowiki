@@ -406,14 +406,14 @@ if ($can_view)
 					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the upload table, remember we can have many derived versions from the original image
 					/* $this->sql_query(
 						"INSERT INTO ".$this->config['table_prefix']."upload SET ".
-						"user_id			= '".quote($this->dblink, $file['user_id'])."', ".
-						"page_id			= '".quote($this->dblink, $filepage['page_id'])."', ".
+						"user_id			= '".(int)$file['user_id']."', ".
+						"page_id			= '".(int)$filepage['page_id']."', ".
 						"file_name			= '".quote($this->dblink, $small_id.$file_name)."', ".
 						"file_description	= '".quote($this->dblink, $file['file_description'])."', ".
 						"uploaded_dt		= '".quote($this->dblink, date("Y-m-d H:i:s"))."', ".
-						"file_size			= '".quote($this->dblink, sizeof($newfilename))."', ".
-						"picture_w			= '".quote($this->dblink, $diw)."', ".
-						"picture_h			= '".quote($this->dblink, $height)."', ".
+						"file_size			= '".(int)sizeof($newfilename)."', ".
+						"picture_w			= '".(int)$diw."', ".
+						"picture_h			= '".(int)$height."', ".
 						"file_ext			= '".quote($this->dblink, $filepage['file_ext'])."'"); */
 
 					if($table)
