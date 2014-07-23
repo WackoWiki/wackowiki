@@ -62,7 +62,7 @@ if ($this->method == 'edit')
 	<script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.
-// Enabled only for registered users who don't swith it off (requires class=page in show handler).
+// Enabled only for registered users who don't switch it off (requires class=page in show handler).
 $doubleclick = '';
 
 if ($user = $this->get_user())
