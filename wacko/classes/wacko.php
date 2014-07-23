@@ -3940,7 +3940,7 @@ class Wacko
 			$cookie		= implode(';', array($user['user_name'], $user['password'], $ses_time));
 		}
 
-		if ($persistent)
+		if ($persistent && $this->config['allow_persistent_cookie'] == true)
 		{
 			$this->set_persistent_cookie('auth', $cookie, $session, ( $this->config['tls'] == true ? 1 : 0 ));
 		}

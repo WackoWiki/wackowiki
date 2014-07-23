@@ -225,6 +225,7 @@ $wacko_config_defaults = array(
 	'ap_max_login_attempts' => 3,
 
 	'session_encrypt_cookie' => 0,
+	'allow_persistent_cookie' => 1,
 	'antidupe' => 0,
 	'session_match_ip' => false,
 	'session_match_useragent' => true,

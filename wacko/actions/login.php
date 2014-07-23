@@ -249,18 +249,24 @@ else
 	echo $this->form_open();
 	echo '<input type="hidden" name="action" value="login" />'."\n";
 	echo '<input type="hidden" name="goback" value="'.(isset($_GET['goback']) ? stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) : '').'" />'."\n";
+
 	echo '<p>';
 	echo '<label for="user_name">'.$this->format_translation('LoginName').':</label>';
 	echo '<input id="user_name" name="user_name" size="25" maxlength="25" value="'.(isset($user_name) ? $user_name : '').'" tabindex="1" />'."\n";
 	echo '</p>'."\n";
+
 	echo '<p>';
 	echo '<label for="password">'.$this->get_translation('LoginPassword').':</label>'."\n";
 	echo '<input id="password" type="password" name="password" size="25" tabindex="2" autocomplete="off" />'."\n";
 	echo '</p>';
-	echo '<p>'."\n";
-	echo '<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>'."\n";
-	echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
-	echo '</p>'."\n";
+
+	if ($this->config['allow_persistent_cookie'])
+	{
+		echo '<p>'."\n";
+		echo '<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>'."\n";
+		echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
+		echo '</p>'."\n";
+	}
 
 	// captcha code starts
 
