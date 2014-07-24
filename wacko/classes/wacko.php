@@ -868,7 +868,7 @@ class Wacko
 		return htmlspecialchars($meta_description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	}
 
-	// wrapper for old_load_page
+	// wrapper for _load_page
 	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
 	{
 		$page = '';
@@ -891,19 +891,19 @@ class Wacko
 		// 1. search for page_id (... is preferred, $supertag next)
 		if ($page_id != 0)
 		{
-			$page = $this->old_load_page('', $page_id, $revision_id, $cache, false, $metadata_only, $deleted);
+			$page = $this->_load_page('', $page_id, $revision_id, $cache, false, $metadata_only, $deleted);
 		}
 
 		// 2. search for supertag
 		if (!$page)
 		{
-			$page = $this->old_load_page($this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadata_only, $deleted);
+			$page = $this->_load_page($this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadata_only, $deleted);
 		}
 
 		// 3. if not found, search for tag
 		if (!$page)
 		{
-			$page = $this->old_load_page($tag, 0, $revision_id, $cache, false, $metadata_only, $deleted);
+			$page = $this->_load_page($tag, 0, $revision_id, $cache, false, $metadata_only, $deleted);
 		}
 
 		// 4. still nothing? file under wanted
@@ -918,7 +918,7 @@ class Wacko
 		return $page;
 	}
 
-	function old_load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadata_only = 0, $deleted = 0)
+	function _load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
 		$supertag = '';
 		$cached_page = '';
@@ -1107,7 +1107,7 @@ class Wacko
 			);
 
 		}
-		else if ($this->old_load_page($tag, $page_id, '', 1, false, 1) == '')
+		else if ($this->_load_page($tag, $page_id, '', 1, false, 1) == '')
 		{
 			($page_id != 0
 				? $this->wanted_cache['page_id'][$page_id] = 1
