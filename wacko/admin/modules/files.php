@@ -127,6 +127,9 @@ function admin_files(&$engine, &$module)
 			unset($_data[ count($_data)-1 ]);
 			$name	= implode( '.', $_data );
 			$name	= str_replace('@', '_', $name);
+			// here would be place for translit
+			$name = $engine->format($name, 'translit');
+
 			$dir	= $engine->config['upload_path'].'/';
 			$banned	= explode('|', $engine->config['upload_banned_exts']);
 
@@ -270,6 +273,7 @@ function admin_files(&$engine, &$module)
 	if ($order == 'size_desc')	$order_by = 'file_size DESC';
 	if ($order == 'ext')		$order_by = 'file_ext ASC';
 	$limit	= 50;
+	$owner = ''; // TODO: show owner in list and add filter
 	$global = true;
 
 	$count = $engine->load_all(

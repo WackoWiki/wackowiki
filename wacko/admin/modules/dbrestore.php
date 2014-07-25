@@ -280,7 +280,7 @@ function admin_dbrestore(&$engine, &$module)
 						echo '</td>'."\n".
 							'<td>';
 
-						$list = explode(';', $log[4]);
+						$list = explode(';', isset($log[4]) ? $log[4] : null);
 
 						foreach ($tables as $table)
 						{
@@ -298,7 +298,7 @@ function admin_dbrestore(&$engine, &$module)
 						echo '</td>'."\n".
 							'<td>';
 
-						$list = explode(';', $log[5]);
+						$list = explode(';', isset($log[5]) ? $log[5] : null);
 
 						foreach ($directories as $directory)
 						{
