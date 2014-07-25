@@ -6411,8 +6411,8 @@ class Wacko
 		// current timestamp set automatically
 		return $this->sql_query(
 			"INSERT INTO {$this->config['table_prefix']}log SET ".
-				"level		= '".(int) $level."', ".
-				"user_id	= '".(int) $user_id ? $user_id : 0 ."', ".
+				"level		= '".(int)$level."', ".
+				"user_id	= '".($user_id ? (int)$user_id : 0 )."', ".
 				"ip			= '".quote($this->dblink, $this->get_user_ip())."', ".
 				"message	= '".quote($this->dblink, $message)."'");
 	}
