@@ -173,7 +173,7 @@ function remove_pack(&$engine, $pack)
 	$log = str_replace("\n", '', file($packdir.BACKUP_FILE_LOG));
 
 	// get subdirs list (in reverse order)
-	$subdirs = explode(';', $log[5]);
+	$subdirs = explode(';', isset($log[5]) ? $log[5] : null);
 	rsort($subdirs);
 
 	// remove subdirs contents

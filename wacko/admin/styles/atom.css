@@ -104,6 +104,7 @@ table td {
 	margin: 0px;
 	padding: 0px;
 	border: 0px none;
+	vertical-align: top;
 }
 table th {
 	color: #FFFFFF;

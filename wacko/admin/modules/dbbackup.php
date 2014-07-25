@@ -26,6 +26,8 @@ function admin_dbbackup(&$engine, &$module)
 	$tables			= & $module['vars'][0];
 	$directories	= & $module['vars'][1];
 
+	$scheme			= array();
+
 	// backup scheme
 	if (!isset($_GET['structure']) &&
 		!isset($_GET['data'])  &&
@@ -215,8 +217,8 @@ function admin_dbbackup(&$engine, &$module)
 				</tr>
 				<tr>
 					<th>Table</th>
-					<th>&nbsp;&nbsp;<a href="?mode=dbbackup<?php echo $getstr.( $scheme['structure'] == 1 ? '&structure=0' : '&structure=1' ); ?>">Structure</a></th>
-					<th><a href="?mode=dbbackup<?php echo $getstr.( $scheme['data'] == 1 ? '&data=0' : '&data=1' ); ?>">Data</a></th>
+					<th>&nbsp;&nbsp;<a href="?mode=dbbackup<?php echo $getstr.( isset($scheme['structure']) && $scheme['structure'] == 1 ? '&structure=0' : '&structure=1' ); ?>">Structure</a></th>
+					<th><a href="?mode=dbbackup<?php echo $getstr.( isset($scheme['data']) && $scheme['data'] == 1 ? '&data=0' : '&data=1' ); ?>">Data</a></th>
 				</tr>
 <?php
 		foreach ($tables as $table)
@@ -230,15 +232,15 @@ function admin_dbbackup(&$engine, &$module)
 
 			echo '<tr class="hl_setting">'.
 					'<td class="label"><strong>'.$table['name'].'</strong></td>'.
-					'<td align="center">&nbsp;&nbsp;<input name="__str__'.$table['name'].'" type="checkbox" value="structure"'.( $scheme['structure'] == true ? 'checked="checked"' : '' ).' /></td>'.
-					'<td align="center"><input name="__dat__'.$table['name'].'" type="checkbox" value="data"'.( $check === true && $scheme['data'] == true ? 'checked="checked"' : '' ).' /></td>'.
+					'<td align="center">&nbsp;&nbsp;<input name="__str__'.$table['name'].'" type="checkbox" value="structure"'.( isset($scheme['structure']) && $scheme['structure'] == true ? 'checked="checked"' : '' ).' /></td>'.
+					'<td align="center"><input name="__dat__'.$table['name'].'" type="checkbox" value="data"'.( $check === true && isset($scheme['data']) && $scheme['data'] == true ? 'checked="checked"' : '' ).' /></td>'.
 				'</tr>'.
 				'<tr class="lined"><td colspan="3"></td></tr>'."\n";
 		}
 ?>
 				<tr>
 					<th colspan="2">Folder</th>
-					<th>&nbsp;&nbsp;<a href="?mode=dbbackup<?php echo $getstr.( $scheme['files'] == 1 ? '&files=0' : '&files=1' ); ?>">Files</a></th>
+					<th>&nbsp;&nbsp;<a href="?mode=dbbackup<?php echo $getstr.( isset($scheme['files']) && $scheme['files'] == 1 ? '&files=0' : '&files=1' ); ?>">Files</a></th>
 				</tr>
 <?php
 		foreach ($directories as $dir)

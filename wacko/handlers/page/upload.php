@@ -490,7 +490,7 @@ if ($registered
 							// 5. insert line into DB
 							$this->sql_query(
 								"INSERT INTO ".$this->config['table_prefix']."upload SET ".
-									"page_id			= '".$is_global ? "0" : $this->page['page_id']."', ".
+									"page_id			= '".($is_global ? "0" : $this->page['page_id'])."', ".
 									"user_id			= '".$user['user_id']."',".
 									"file_name			= '".quote($this->dblink, $small_name)."', ".
 									"lang				= '".quote($this->dblink, $this->page['lang'])."', ".
