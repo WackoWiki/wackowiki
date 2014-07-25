@@ -920,15 +920,14 @@ class Wacko
 
 	function _load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
-		$supertag = '';
-		$cached_page = '';
+		$supertag		= '';
+		$cached_page	= '';
+		$page			= null;
 
 		if ($page_id == 0 && $tag == '')
 		{
 			return '';
 		}
-
-		$page = null;
 
 		if ($page_id == 0)
 		{
@@ -5901,6 +5900,7 @@ class Wacko
 				"DELETE FROM {$this->config['table_prefix']}rating ".
 				"WHERE page_id = '{$id['page_id']}'");
 		}
+
 		return true;
 	}
 
