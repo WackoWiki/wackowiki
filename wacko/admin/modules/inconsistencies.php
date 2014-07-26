@@ -253,6 +253,8 @@ function admin_inconsistencies(&$engine, &$module)
 
 			// -> DELETE
 
+			// TODO: check for abandoned files, files with no reference left in the upload table
+
 			foreach ($inconsistencies as $param => $value)
 			{
 				if ($value[1] >= 1)
@@ -504,7 +506,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 2.9. revision without page
 			$revision = $engine->sql_query(
 				"DELETE
-					r.revision_id
+					r.*
 				FROM
 					{$engine->config['table_prefix']}revision r
 					LEFT JOIN {$engine->config['table_prefix']}page p ON (r.page_id = p.page_id)

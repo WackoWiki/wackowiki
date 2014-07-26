@@ -29,10 +29,13 @@ function admin_systemlog(&$engine, &$module)
 		$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'])));
 	}
 
-	if (isset($_POST['update']))
+	if (isset($_POST['update']) || isset($_GET['level_mod']))
 	{
+		$_level_mod = isset($_POST['level_mod']) ? (int)$_POST['level_mod'] : (isset($_GET['level_mod']) ? (int)$_GET['level_mod'] : '');
+		$_level = isset($_POST['level']) ? (int)$_POST['level'] : (isset($_GET['level']) ? (int)$_GET['level'] : '');
+
 		// level filtering
-		switch ($_POST['level_mod'])
+		switch (isset($_level_mod))
 		{
 			case 'not_lower':
 				$mod = '<=';
@@ -44,9 +47,8 @@ function admin_systemlog(&$engine, &$module)
 				$mod = '=';
 				break;
 		}
-		$where = "WHERE l.level $mod ".(int)$_POST['level'].' ';
 
-
+		$where = "WHERE l.level $mod ".$_level.' ';
 	}
 
 	// set time ordering
@@ -105,8 +107,10 @@ function admin_systemlog(&$engine, &$module)
 		"FROM {$engine->config['table_prefix']}log l ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
 
-	$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
-	$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.isset($order_pagination) ? htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '', '', 'admin.php');
+	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
+	$level_pagination		= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
+	$level_mod_pagination	= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
+	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode=systemlog'.(!empty($order_pagination) ? '&order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&level='.htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&level_mod='.htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 	$log = $engine->load_all(
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ".
