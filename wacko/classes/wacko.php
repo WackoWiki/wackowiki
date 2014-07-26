@@ -2215,6 +2215,7 @@ class Wacko
 				"latest			= '0', ".
 				"handler		= '{$old_page['handler']}', ".
 				"comment_on_id	= '{$old_page['comment_on_id']}', ".
+				"lang			= '{$old_page['lang']}', ".
 				"supertag		= '{$old_page['supertag']}', ".
 				"title			= '{$old_page['title']}', ".
 				"keywords		= '{$old_page['keywords']}', ".
