@@ -58,9 +58,9 @@ function admin_statistics(&$engine, &$module)
 				echo '<tr class="hl_setting">'.
 						'<td class="label"><strong>'.$table['Name'].'</strong></td>'.
 						'<td>&nbsp;&nbsp;&nbsp;'.number_format($table['Rows'], 0, ',', '.').'</td>'.
-						'<td>'.ceil($table['Data_length'] / 1024).' KiB</td>'.
-						'<td>'.ceil($table['Index_length'] / 1024).' KiB</td>'.
-						'<td>'.ceil($table['Data_free'] / 1024).' KiB</td>'.
+						'<td>'.$engine->binary_multiples($table['Data_length'], false, true, true).'</td>'.
+						'<td>'.$engine->binary_multiples($table['Index_length'], false, true, true).'</td>'.
+						'<td>'.$engine->binary_multiples($table['Data_free'], false, true, true).'</td>'.
 					'</tr>'.
 					'<tr class="lined"><td colspan="5"></td></tr>'."\n";
 
@@ -74,9 +74,9 @@ function admin_statistics(&$engine, &$module)
 		<tr class="lined">
 			<td class="label"><strong>Total:</strong></td>
 			<td></td>
-			<td><strong><?php echo round($tdata / 1048576, 2); ?> MiB</strong></td>
-			<td><strong><?php echo round($tindex / 1048576, 2); ?> MiB</strong></td>
-			<td><strong><?php echo round($tfrag / 1048576, 2); ?> MiB</strong></td>
+			<td><strong><?php echo $engine->binary_multiples($tdata, false, true, false); ?></strong></td>
+			<td><strong><?php echo $engine->binary_multiples($tindex, false, true, false); ?></strong></td>
+			<td><strong><?php echo $engine->binary_multiples($tfrag, false, true, false); ?></strong></td>
 		</tr>
 	</table>
 	<br />
@@ -118,7 +118,7 @@ function admin_statistics(&$engine, &$module)
 			echo '<tr class="lined">'.
 					'<td class="label"><strong>'.$dir.'</strong></td>'.
 					'<td>&nbsp;&nbsp;&nbsp;'.$files.'</td>'.
-					'<td>'.ceil($size / 1024).' KiB</td>'.
+					'<td>'.$engine->binary_multiples($size, false, true, true).'</td>'.
 				'</tr>'."\n";
 		}
 
@@ -128,7 +128,7 @@ function admin_statistics(&$engine, &$module)
 		<tr class="lined">
 			<td class="label"><strong>Total:</strong></td>
 			<td>&nbsp;&nbsp;&nbsp;<strong><?php echo $tfiles; ?></strong></td>
-			<td><strong><?php echo round($tsize / 1048576, 2); ?> MiB</strong></td>
+			<td><strong><?php echo $engine->binary_multiples($tsize); ?></strong></td>
 		</tr>
 	</table>
 
