@@ -94,12 +94,9 @@ function admin_resync(&$engine, &$module)
 			}
 
 			$engine->log(1, 'Synchronized user statistics');
-?>
-			<p>
-				<em>User Statistics synchronized.</em>
-			</p>
-			<br />
-<?php
+
+			$message = 'User Statistics synchronized.';
+			$engine->show_message($message);
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
 		{
@@ -115,12 +112,9 @@ function admin_resync(&$engine, &$module)
 
 			$engine->log(1, 'Synchronized RSS feeds');
 			unset($xml);
-?>
-			<p>
-				<em>RSS-feeds updated.</em>
-			</p>
-			<br />
-<?php
+
+				$message = 'RSS-feeds updated.';
+				$engine->show_message($message);
 		}
 		else if ($_REQUEST['action'] == 'wikilinks')
 		{
@@ -189,12 +183,8 @@ function admin_resync(&$engine, &$module)
 			}
 			else
 			{
-?>
-				<p>
-					<em>Wiki-links restored.</em>
-				</p>
-				<br />
-<?php
+				$message = 'Wiki-links restored.';
+				$engine->show_message($message);
 			}
 		}
 	}
