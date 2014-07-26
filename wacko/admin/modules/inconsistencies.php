@@ -25,6 +25,10 @@ function admin_inconsistencies(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
+
+	/////////////////////////////////////////////
+	//   check for inconsistencies
+	/////////////////////////////////////////////
 	if (isset($_POST['check']))
 	{
 		if ($_REQUEST['action'] == 'check_inconsistencies')
@@ -53,7 +57,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 1.2. menu without user
 			$menu = $engine->load_all(
 				"SELECT
-					m.*
+					m.menu_id
 				FROM
 					{$engine->config['table_prefix']}menu m
 					LEFT JOIN {$engine->config['table_prefix']}user u ON (m.user_id = u.user_id)
@@ -66,7 +70,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 1.3. upload without user
 			$upload = $engine->load_all(
 				"SELECT
-					u.*
+					u.user_id
 				FROM
 					{$engine->config['table_prefix']}upload ul
 					LEFT JOIN {$engine->config['table_prefix']}user u ON (ul.user_id = u.user_id)
@@ -79,7 +83,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 1.4. user_settings without user
 			$user_settings = $engine->load_all(
 				"SELECT
-					us.*
+					us.setting_id
 				FROM
 					{$engine->config['table_prefix']}user_setting us
 					LEFT JOIN {$engine->config['table_prefix']}user u ON (us.user_id = u.user_id)
@@ -93,7 +97,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 1.5. watches without user
 			$watches = $engine->load_all(
 				"SELECT
-					w.*
+					w.watch_id
 				FROM
 					{$engine->config['table_prefix']}watch w
 					LEFT JOIN {$engine->config['table_prefix']}user u ON (w.user_id = u.user_id)
@@ -133,7 +137,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 2.3. link without page
 			$link = $engine->load_all(
 				"SELECT
-					l.*
+					l.link_id
 				FROM
 					{$engine->config['table_prefix']}link l
 					LEFT JOIN {$engine->config['table_prefix']}page p ON (l.from_page_id = p.page_id)
@@ -146,7 +150,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 2.4. menu without page
 			$menu2 = $engine->load_all(
 				"SELECT
-					m.*
+					m.menu_id
 				FROM
 					{$engine->config['table_prefix']}menu m
 					LEFT JOIN {$engine->config['table_prefix']}page p ON (m.page_id = p.page_id)
@@ -199,7 +203,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 2.8. watch without page
 			$watch2 = $engine->load_all(
 				"SELECT
-					w.*
+					w.watch_id
 				FROM
 					{$engine->config['table_prefix']}watch w
 					LEFT JOIN {$engine->config['table_prefix']}page p ON (w.page_id = p.page_id)
@@ -238,7 +242,7 @@ function admin_inconsistencies(&$engine, &$module)
 			// 3.2. page without valid user_id (e.g. deleted user)
 			$page_user = $engine->load_all(
 				"SELECT
-					p.*
+					p.page_id
 				FROM
 					{$engine->config['table_prefix']}page p
 					LEFT JOIN {$engine->config['table_prefix']}user u ON (p.user_id = u.user_id)
@@ -280,6 +284,10 @@ function admin_inconsistencies(&$engine, &$module)
 <?php
 		}
 	}
+
+	/////////////////////////////////////////////
+	//   solve inconsistencies
+	/////////////////////////////////////////////
 	if (isset($_POST['solve']))
 	{
 		if ($_REQUEST['action'] == 'check_inconsistencies')
@@ -548,16 +556,12 @@ function admin_inconsistencies(&$engine, &$module)
 			echo '</table>';
 
 			$engine->log(1, 'Removed inconsistencies');
-			?>
-				<p>
-					<br />
-					<em>Data Inconsistencies solved.</em>
-				</p>
-				<br />
-	<?php
-			}
 
+			$message = 'Data Inconsistencies solved.';
+			$engine->show_message($message);
 		}
+
+	}
 ?>
 	<h3></h3>
 	<br />
