@@ -322,7 +322,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	echo "<td class=\"form_right\">".$this->get_time_string_formatted($this->page['modified'])."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsSize')."&nbsp;&nbsp;</th>";
-	echo "<td class=\"form_right\" title=\"".$this->get_translation('SettingsSizeTip')."\">".ceil(strlen($this->page['body']) / 1024).' KiB / '.ceil(strlen($this->page['body_r']) / 1024)." KiB"."</td>";
+	echo "<td class=\"form_right\" title=\"".$this->get_translation('SettingsSizeTip')."\">".$this->binary_multiples(strlen($this->page['body']), false, true, true).' / '.$this->binary_multiples(strlen($this->page['body_r']), false, true, true)."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalRevs')."</th>";
 	echo "<td class=\"form_right\"><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".(int)$revs['total']."</a></td>";
