@@ -263,7 +263,7 @@ if ($registered
 			}
 			else
 			{
-				$this->set_message($this->get_translation('UploadRemoveNotFound'));
+				$this->set_message($this->get_translation('UploadRemoveNotFound')); // TODO: add message set to lang files
 			}
 		}
 		else if (isset($_POST['edit'])) // edit

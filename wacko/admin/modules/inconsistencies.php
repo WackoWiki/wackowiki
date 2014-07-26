@@ -29,8 +29,14 @@ function admin_inconsistencies(&$engine, &$module)
 	{
 		if ($_REQUEST['action'] == 'check_inconsistencies')
 		{
-			echo '<table>';
-
+			echo '<table class="formation" style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
+			?>
+			<tr>
+				<th style="width:250px;">Inconsistencies</th>
+				<th style="text-align:left;"></th>
+				<th style="text-align:left;">Records</th>
+			</tr>
+			<?php
 			// 1.1 usergroup_member without user
 			$usergroup_member = $engine->load_all(
 				"SELECT
@@ -41,7 +47,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>usergroup_member without user </td><td>'.count($usergroup_member).'</td></tr>';
+			$inconsistencies['1.1'] = array('usergroup_member without user', count($usergroup_member));
 			// -> DELETE
 
 			// 1.2. menu without user
@@ -54,7 +60,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>menu without user </td><td>'.count($menu).'</td></tr>';
+			$inconsistencies['1.2'] = array('menu without user', count($menu));
 				// -> DELETE
 
 			// 1.3. upload without user
@@ -67,7 +73,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>upload without user </td><td>'.count($upload).'</td></tr>';
+			$inconsistencies['1.3'] = array('upload without user', count($upload));
 				// -> DELETE / assign to new user
 
 			// 1.4. user_settings without user
@@ -80,7 +86,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>user_settings without user </td><td>'.count($user_settings).'</td></tr>';
+			$inconsistencies['1.4'] = array('user_settings without user', count($user_settings));
 				// -> DELETE
 
 
@@ -94,7 +100,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id is NULL");
 
-			echo '<tr class="hl_setting"><td>watches without user </td><td>'.count($watches).'</td></tr>';
+			$inconsistencies['1.5'] = array('watches without user', count($watches));
 				// -> DELETE
 
 			// 2. without page
@@ -108,7 +114,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>acl without page </td><td>'.count($acl).'</td></tr>';
+			$inconsistencies['2.1'] = array('acl without page', count($acl));
 				// -> DELETE
 
 			// 2.2. category_page without page
@@ -121,7 +127,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>category_page without page </td><td>'.count($category_page).'</td></tr>';
+			$inconsistencies['2.2'] = array('category_page without page', count($category_page));
 				// -> DELETE
 
 			// 2.3. link without page
@@ -134,7 +140,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>link without page </td><td>'.count($link).'</td></tr>';
+			$inconsistencies['2.3'] = array('link without page', count($link));
 				// -> DELETE
 
 			// 2.4. menu without page
@@ -147,7 +153,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>menu without page </td><td>'.count($menu2).'</td></tr>';
+			$inconsistencies['2.4'] = array('menu without page', count($menu2));
 				// -> DELETE
 
 			// 2.5. rating without page
@@ -160,7 +166,7 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 				p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>rating without page </td><td>'.count($rating).'</td></tr>';
+			$inconsistencies['2.5'] = array('rating without page', count($rating));
 				// -> DELETE
 
 			// 2.6. referrer without page
@@ -173,13 +179,13 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>referrer without page </td><td>'.count($referrer).'</td></tr>';
+			$inconsistencies['2.6'] = array('referrer without page', count($referrer));
 				// -> DELETE
 
 			// 2.7. upload without page and not global
 			$upload2 = $engine->load_all(
 				"SELECT
-					u.*
+					u.upload_id
 				FROM
 					{$engine->config['table_prefix']}upload u
 					LEFT JOIN {$engine->config['table_prefix']}page p ON (u.page_id = p.page_id)
@@ -187,7 +193,7 @@ function admin_inconsistencies(&$engine, &$module)
 					p.page_id IS NULL AND
 					u.page_id NOT LIKE 0");
 
-			echo '<tr class="hl_setting"><td>upload without page and not global </td><td>'.count($upload2).'</td></tr>';
+			$inconsistencies['2.7'] = array('upload without page and not global', count($upload2));
 				// -> DELETE
 
 			// 2.8. watch without page
@@ -200,8 +206,21 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>watch without page </td><td>'.count($watch2).'</td></tr>';
+			$inconsistencies['2.8'] = array('watch without page', count($watch2));
 				// -> DELETE
+
+			// 2.9. revision without page
+			$revision = $engine->load_all(
+				"SELECT
+					r.revision_id
+				FROM
+					{$engine->config['table_prefix']}revision r
+					LEFT JOIN {$engine->config['table_prefix']}page p ON (r.page_id = p.page_id)
+				WHERE
+					p.page_id IS NULL");
+
+			$inconsistencies['2.9'] = array('revision without page', count($revision));
+			// -> DELETE
 
 			// 3.1. usergroup_member without group
 			$usergroup_member2 = $engine->load_all(
@@ -213,22 +232,42 @@ function admin_inconsistencies(&$engine, &$module)
 				WHERE
 					g.group_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>usergroup_member without usergroup </td><td>'.count($usergroup_member2).'</td></tr>';
+			$inconsistencies['3.1'] = array('usergroup_member without usergroup', count($usergroup_member2));
 			// -> DELETE
 
 			// 3.2. page without valid user_id (e.g. deleted user)
 			$page_user = $engine->load_all(
-					"SELECT
+				"SELECT
 					p.*
-					FROM
+				FROM
 					{$engine->config['table_prefix']}page p
 					LEFT JOIN {$engine->config['table_prefix']}user u ON (p.user_id = u.user_id)
-					WHERE
+				WHERE
 					u.user_id IS NULL");
 
-					echo '<tr class="hl_setting"><td>page without valid user_id </td><td>'.count($page_user).'</td></tr>';
-					// -> DELETE
+			$inconsistencies['3.2'] = array('page without valid user_id', count($page_user));
 
+			// -> DELETE
+
+			foreach ($inconsistencies as $param => $value)
+			{
+				if ($value[1] >= 1)
+				{
+					echo '<tr class="hl_setting">'.
+						'<td class="label">'.
+							($value[1] >= 1
+								? '<strong>'.$value[0].'</strong>'
+								: '<em class="grey">'.$value[0].'</em>').
+							'</td>'.
+						'<td> </td>'.
+						'<td>'.
+							($value[1] >= 1
+								? '<strong>'.$value[1].'</strong>'
+								: '<em class="grey">'.$value[1].'</em>').
+						'</td>'.
+						'<tr class="lined"><td colspan="5"></td></tr>'."\n";
+				}
+			}
 
 			echo '</table>';
 
@@ -240,14 +279,19 @@ function admin_inconsistencies(&$engine, &$module)
 			<br />
 <?php
 		}
-
 	}
 	if (isset($_POST['solve']))
 	{
 		if ($_REQUEST['action'] == 'check_inconsistencies')
 		{
-			echo '<table>';
-
+			echo '<table class="formation" style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
+			?>
+			<tr>
+				<th style="width:250px;">Inconsistencies</th>
+				<th style="text-align:left;"></th>
+				<th style="text-align:left;">Records</th>
+			</tr>
+			<?php
 			// 1.1 usergroup_member without user
 			$usergroup_member = $engine->sql_query(
 					"DELETE
@@ -258,8 +302,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>usergroup_member without user </td><td>'.count($usergroup_member).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
 
+			$_solved['1.1'] = array('usergroup_member without user', $_count['ROW_COUNT()']);
 
 			// 1.2. menu without user
 			$menu = $engine->sql_query(
@@ -271,7 +317,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>menu without user </td><td>'.count($menu).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['1.2'] = array('menu without user', $_count['ROW_COUNT()']);
 
 			// 1.3. upload without user
 			$admin_id = $engine->load_single(
@@ -287,7 +336,10 @@ function admin_inconsistencies(&$engine, &$module)
 				"WHERE
 					u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>upload without user </td><td>'.count($upload).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['1.3'] = array('upload without user', $_count['ROW_COUNT()']);
 
 			// 1.4. user_settings without user
 			$user_settings = $engine->sql_query(
@@ -299,7 +351,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>user_settings without user </td><td>'.count($user_settings).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['1.4'] = array('user_settings without user', $_count['ROW_COUNT()']);
 
 			// 1.5. watches without user
 			$watches = $engine->sql_query(
@@ -311,7 +366,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						u.user_id is NULL");
 
-			echo '<tr class="hl_setting"><td>watches without user </td><td>'.count($watches).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['1.5'] = array('watches without user', $_count['ROW_COUNT()']);
 
 			// 2. without page
 			// 2.1. acl without page
@@ -324,7 +382,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>acl without page </td><td>'.count($acl).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['2.1'] = array('acl without page', $_count['ROW_COUNT()']);
 
 			// 2.2. category_page without page
 			$category_page = $engine->sql_query(
@@ -336,7 +397,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>category_page without page </td><td>'.count($category_page).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['2.2'] = array('category_page without page', $_count['ROW_COUNT()']);
 
 			// 2.3. link without page
 			$link = $engine->sql_query(
@@ -348,7 +412,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>link without page </td><td>'.count($link).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['2.3'] = array('link without page', $_count['ROW_COUNT()']);
 
 			// 2.4. menu without page
 			$menu2 = $engine->sql_query(
@@ -360,7 +427,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>menu without page </td><td>'.count($menu2).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['2.4'] = array('menu without page', $_count['ROW_COUNT()']);
 
 			// 2.5. rating without page
 			$rating = $engine->sql_query(
@@ -372,7 +442,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 					p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>rating without page </td><td>'.count($rating).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['2.5'] = array('rating without page', $_count['ROW_COUNT()']);
 
 			// 2.6. referrer without page
 			$referrer = $engine->sql_query(
@@ -384,7 +457,10 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>referrer without page </td><td>'.count($referrer).'</td></tr>';
+			$count		= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count	= fetch_assoc($count);
+
+			$_solved['2.6'] = array('referrer without page', $_count['ROW_COUNT()']);
 
 			// 2.7. upload without page and not global
 			$upload2 = $engine->sql_query(
@@ -397,7 +473,10 @@ function admin_inconsistencies(&$engine, &$module)
 						p.page_id IS NULL AND
 						u.page_id NOT LIKE 0");
 
-			echo '<tr class="hl_setting"><td>upload without page and not global </td><td>'.count($upload2).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['2.7']	= array('upload without page and not global', $_count['ROW_COUNT()']);
 
 			// 2.8. watch without page
 			$watch2 = $engine->sql_query(
@@ -409,21 +488,63 @@ function admin_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>watch without page </td><td>'.count($watch2).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['2.8'] = array('watch without page', $_count['ROW_COUNT()']);
+
+			// 2.9. revision without page
+			$revision = $engine->sql_query(
+				"DELETE
+					r.revision_id
+				FROM
+					{$engine->config['table_prefix']}revision r
+					LEFT JOIN {$engine->config['table_prefix']}page p ON (r.page_id = p.page_id)
+				WHERE
+					p.page_id IS NULL");
+
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['2.9'] = array('revision without page', $_count['ROW_COUNT()']);
 
 			// 3.1. usergroup_member without group
 			$usergroup_member2 = $engine->sql_query(
-					"DELETE
-						gm.*
-					FROM
-			{$engine->config['table_prefix']}usergroup_member gm
-						LEFT JOIN {$engine->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)
-					WHERE
-						g.group_id IS NULL");
+				"DELETE
+					gm.*
+				FROM
+					{$engine->config['table_prefix']}usergroup_member gm
+					LEFT JOIN {$engine->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)
+				WHERE
+					g.group_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>usergroup_member without usergroup </td><td>'.count($usergroup_member2).'</td></tr>';
+			$count			= $engine->sql_query("SELECT ROW_COUNT();");
+			$_count			= fetch_assoc($count);
+
+			$_solved['3.1'] = array('usergroup_member without usergroup', $_count['ROW_COUNT()']);
 
 			// TODO: // 3.2. page without valid user_id (e.g. deleted user)
+
+			foreach ($_solved as $param => $value)
+			{
+				if ($value[1] >= 1)
+				{
+					echo '<tr class="hl_setting">'.
+							'<td class="label">'.
+							($value[1] >= 1
+									? '<strong>'.$value[0].'</strong>'
+									: '<em class="grey">'.$value[0].'</em>').
+									'</td>'.
+									'<td> </td>'.
+									'<td>'.
+									($value[1] >= 1
+											? '<strong>'.$value[1].'</strong>'
+											: '<em class="grey">'.$value[1].'</em>').
+											'</td>'.
+											'<tr class="lined"><td colspan="5"></td></tr>'."\n";
+				}
+			}
+
 			echo '</table>';
 
 			$engine->log(1, 'Removed inconsistencies');
@@ -438,7 +559,7 @@ function admin_inconsistencies(&$engine, &$module)
 
 		}
 ?>
-	<h3>Data inconsistencies</h3>
+	<h3></h3>
 	<br />
 	<p>
 	show / count mismatches / inconsistencies<br />
