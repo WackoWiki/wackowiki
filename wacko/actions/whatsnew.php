@@ -124,7 +124,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			// print entry
 			$separator	= ' . . . . . . . . . . . . . . . . ';
 			$author		= ( !$page['user_name'] ? '<em title="'.( $admin ? $page['ip'] : '' ).'">'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'" title="'.( $admin ? $page['ip'] : '' ).'">'.$page['user_name'].'</a>' );
-			$viewed		= ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' viewed' : '' );
+			$viewed		= ( isset($user['last_mark']) && $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' viewed' : '' );
 			$time_modified	= (($this->hide_revisions === false || $this->is_admin()) && ($page['ctype'] != 2 || $page['comment_on_id'] === 0)
 								? $this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime($time)), 0, $this->get_translation('RevisionTip'))
 								: date($this->config['time_format_seconds'], strtotime($time))

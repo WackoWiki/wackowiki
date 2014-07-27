@@ -5746,7 +5746,10 @@ class Wacko
 			"FROM ".$this->config['table_prefix']."acl a ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
 					"ON (a.page_id = p.page_id) ".
-			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE p.tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR p.tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 
 		return true;
 	}
@@ -5792,7 +5795,7 @@ class Wacko
 				"WHERE page_id = '".(int)$page_id."' ");
 		}
 
-		// for removed comment correct comments count and date on commented page
+		// update for removed comment correct comments count and date on commented page
 		if ($comment_on_id)
 		{
 			// load latest comment
@@ -5823,7 +5826,10 @@ class Wacko
 
 		return $this->sql_query(
 			"DELETE FROM {$this->config['table_prefix']}revision ".
-			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 	}
 
 	function remove_comments($tag, $cluster = false, $dontkeep = 0)
@@ -5836,7 +5842,11 @@ class Wacko
 		if ($comments = $this->load_all(
 		"SELECT a.page_id FROM ".$this->config['table_prefix']."page a ".
 			"INNER JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
-		"WHERE b.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' "))
+		"WHERE b.tag = '".quote($this->dblink, $tag)."' ".
+			($cluster === true
+				? "OR b.tag LIKE '".quote($this->dblink, $tag)."/%' "
+				: "") )
+			)
 		{
 			foreach ($comments as $comment)
 			{
@@ -5849,7 +5859,10 @@ class Wacko
 			"UPDATE {$this->config['table_prefix']}page SET ".
 				"comments	= '0', ".
 				"commented	= created ".
-			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 
 		return true;
 	}
@@ -5866,7 +5879,10 @@ class Wacko
 			"FROM ".$this->config['table_prefix']."menu b ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
 					"ON (b.page_id = p.page_id) ".
-			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE p.tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR p.tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 	}
 
 	function remove_watches($tag, $cluster = false)
@@ -5881,7 +5897,10 @@ class Wacko
 			"FROM ".$this->config['table_prefix']."watch w ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
 					"ON (w.page_id = p.page_id) ".
-			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE p.tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR p.tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 	}
 
 	function remove_ratings($tag, $cluster = false)
@@ -5891,15 +5910,18 @@ class Wacko
 			return false;
 		}
 
-		$ids = $this->load_all(
+		$pages = $this->load_all(
 			"SELECT page_id FROM {$this->config['table_prefix']}page ".
-			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 
-		foreach ($ids as $id)
+		foreach ($pages as $page)
 		{
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}rating ".
-				"WHERE page_id = '{$id['page_id']}'");
+				"WHERE page_id = '{$page['page_id']}'");
 		}
 
 		return true;
@@ -5917,7 +5939,10 @@ class Wacko
 			"FROM ".$this->config['table_prefix']."link l ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
 					"ON (l.from_page_id = p.page_id) ".
-			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE p.tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR p.tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 	}
 
 	function remove_categories($tag, $cluster = false)
@@ -5932,7 +5957,10 @@ class Wacko
 			"FROM {$this->config['table_prefix']}category_page k ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
 					"ON (k.page_id = p.page_id) ".
-			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE p.tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR p.tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 
 		return true;
 	}
@@ -5949,8 +5977,10 @@ class Wacko
 				"r.* ".
 			"FROM ".$this->config['table_prefix']."referrer r ".
 				"INNER JOIN ".$this->config['table_prefix']."page p ON (r.page_id = p.page_id) ".
-			"WHERE ".
-				"p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE p.tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR p.tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 	}
 
 	function remove_files($tag, $cluster = false, $dontkeep = 0)
@@ -5963,7 +5993,10 @@ class Wacko
 		$pages = $this->load_all(
 			"SELECT page_id ".
 			"FROM {$this->config['table_prefix']}page ".
-			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				($cluster === true
+					? "OR tag LIKE '".quote($this->dblink, $tag)."/%' "
+					: "") );
 
 		foreach ($pages as $page)
 		{
