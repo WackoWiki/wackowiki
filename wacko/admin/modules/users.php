@@ -69,7 +69,7 @@ function admin_users(&$engine, &$module)
 			"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' ".
 			"LIMIT 1"))
 			{
-				$engine->set_message($engine->get_translation('UsersAlreadyExists'));
+				$engine->show_message($engine->get_translation('UsersAlreadyExists'));
 				$_POST['change'] = $_POST['user_id'];
 				$_POST['create'] = 1;
 			}
@@ -87,7 +87,7 @@ function admin_users(&$engine, &$module)
 				$_user_id = $engine->load_single(
 					"SELECT user_id ".
 					"FROM ".$engine->config['table_prefix']."user ".
-					"WHERE user_name = '".quote($engine->dblink, $user_name)."' ".
+					"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' ".
 					"LIMIT 1");
 
 				// INSERT user settings
@@ -96,11 +96,18 @@ function admin_users(&$engine, &$module)
 					"SET ".
 						"user_id		= '".(int)$_user_id['user_id']."', ".
 						"typografica	= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
-						"lang			= '".quote($engine->dblink, ($lang ? $lang : $engine->config['language']))."', ".
+						"lang			= '".quote($engine->dblink, ($_POST['lang'] ? $_POST['lang'] : $engine->config['language']))."', ".
 						"theme			= '".quote($engine->dblink, $engine->config['theme'])."', ".
 						"send_watchmail	= '1'");
 
-				$engine->set_message($engine->get_translation('UsersAdded'));
+				// add your user page template here
+				$user_page_template	= '**((user:'.$_POST['newname'].' '.$_POST['newname'].'))** ('.$engine->format('::+::', 'pre_wacko').')';
+				$change_summary		= $engine->get_translation('NewUserAccount'); //'auto created';
+
+				// add user page
+				$engine->save_page($engine->config['users_page'].'/'.$_POST['newname'], '', $user_page_template, $change_summary, '', '', '', ($_POST['lang'] ? $_POST['lang'] : $engine->config['language']), '', $_POST['newname'], true);
+
+				$engine->show_message($engine->get_translation('UsersAdded'));
 				$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
 				unset($_POST['create']);
 			}
@@ -135,7 +142,7 @@ function admin_users(&$engine, &$module)
 						"WHERE user_id = '".(int)$_POST['user_id']."' ".
 						"LIMIT 1");
 
-				$engine->set_message($engine->get_translation('UsersRenamed'));
+				$engine->show_message($engine->get_translation('UsersRenamed'));
 				$engine->log(4, "User //'{$user['user_name']}'// renamed //'{$_POST['newname']}'//");
 			}
 		}
@@ -159,7 +166,28 @@ function admin_users(&$engine, &$module)
 				"DELETE FROM {$engine->config['table_prefix']}watch ".
 				"WHERE user_id = '".(int)$_POST['user_id']."'");
 
-			$engine->set_message($engine->get_translation('UsersDeleted'));
+			// remove user space
+			$user_space = $engine->config['users_page'].'/'.$user['user_name'];
+
+			$engine->remove_referrers	($user_space, true);
+			$engine->remove_links		($user_space, true);
+			$engine->remove_categories	($user_space, true);
+			$engine->remove_acls		($user_space, true);
+			$engine->remove_menu_items	($user_space, true);
+			$engine->remove_watches		($user_space, true);
+			$engine->remove_ratings		($user_space, true);
+			$engine->remove_comments	($user_space, true, $dontkeep);
+			$engine->remove_files		($user_space, true);
+			$engine->remove_revisions	($user_space, true);
+
+			$engine->sql_query(
+				"DELETE FROM {$engine->config['table_prefix']}page ".
+				"WHERE tag = '".quote($engine->dblink, $user_space)."' ".
+						"OR tag LIKE '".quote($engine->dblink, $user_space)."/%' ".
+					#"AND owner_id = '".(int)$_POST['user_id']."'".
+				"");
+
+			$engine->show_message($engine->get_translation('UsersDeleted'));
 			$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
 		}
 	}
@@ -504,7 +532,7 @@ function admin_users(&$engine, &$module)
 					<th style="width:5px;"></th>
 					<th style="width:5px;">ID</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuser; ?>">Username</a></th>
-					<th style="width:150px;"><a href="?mode=users&order=<?php echo $ordername; ?>">Realname</a></th>
+					<!--<th style="width:150px;"><a href="?mode=users&order=<?php echo $ordername; ?>">Realname</a></th>-->
 					<th>Email</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderpages; ?>">Pages</a></th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $ordercomments; ?>">Comments</a></th>
@@ -524,7 +552,7 @@ function admin_users(&$engine, &$module)
 						'<td valign="top" align="center"><input type="radio" name="change" value="'.$row['user_id'].'" /></td>'.
 						'<td valign="top" align="center">'.$row['user_id'].'</td>'.
 						'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.
-						'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['real_name'].'</td>'.
+						#'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['real_name'].'</td>'.
 						'<td valign="top">'.$row['email'].'</td>'.
 						'<td valign="top" align="center">'.$row['total_pages'].'</td>'.
 						'<td valign="top" align="center">'.$row['total_comments'].'</td>'.
