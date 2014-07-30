@@ -234,7 +234,7 @@ else
 	$groups = $this->load_all(
 		"SELECT g.group_name, g.description, g.created, u.user_name AS moderator, COUNT(m.user_id) AS members ".
 		"FROM {$this->config['table_prefix']}usergroup g ".
-			"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator = u.user_id) ".
+			"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator_id = u.user_id) ".
 			"LEFT JOIN ".$this->config['table_prefix']."usergroup_member m ON (m.group_id = g.group_id) ".
 		( $where == true ? $where : '' ).
 		( $where ? 'AND ' : "WHERE ").

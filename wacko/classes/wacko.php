@@ -1913,7 +1913,7 @@ class Wacko
 									"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
 									"FROM " .$this->config['user_table']." u ".
 										"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-									"WHERE u.user_id = '".(int)$moderator_id."' ".
+									"WHERE u.user_id = '".$moderator_id."' ".
 									"LIMIT 1");
 
 								if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
@@ -3629,7 +3629,7 @@ class Wacko
 		$usergroup = $this->load_single(
 			"SELECT {$fiels_default} ".
 			"FROM ".$this->config['table_prefix']."usergroup g ".
-				"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator = u.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator_id = u.user_id) ".
 			"WHERE ".( $group_id != 0
 				? "g.group_id		= '".(int)$group_id."' "
 				: "g.group_name		= '".quote($this->dblink, $group_name)."' ").
