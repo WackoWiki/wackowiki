@@ -32,6 +32,66 @@ function admin_users(&$engine, &$module)
 	<br />
 <?php
 
+	// simple and rude input sanitization
+	foreach ($_POST as $key => $val)
+	{
+		$_POST[$key] = htmlspecialchars($val, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+	}
+
+	// IDs PROCESSING (COMMON PROCEDURES)
+	$set = array();
+
+	// pass previously selected items
+	if (isset($_REQUEST['ids']))
+	{
+		$ids = explode('-', $_REQUEST['ids']);
+
+		foreach ($ids as $id)
+		{
+			if (!in_array($id, $set))
+			{
+				$set[] = $id;
+			}
+		}
+
+		unset($ids, $id);
+	}
+
+	// keep currently selected list items
+	foreach ($_POST as $val => $key)
+	{
+		if ($key == 'id' && !in_array($val, $set))
+		{
+			$set[] = $val;
+		}
+	}
+
+	unset($key, $val);
+
+	// save user ids for later operations (correct if needed)
+	if (isset($_POST['set']))
+	{
+		$set = array();
+
+		foreach ($_POST as $val => $key)
+		{
+			if ($key == 'id')
+			{
+				$set[] = $val;
+			}
+		}
+
+		unset($key, $val);
+	}
+	// reset user ids
+	else if (isset($_POST['reset']))
+	{
+		$set = array();
+	}
+
+	reset($set);
+	unset($n, $page_id);
+
 	/////////////////////////////////////////////
 	//   list change/update
 	/////////////////////////////////////////////
@@ -113,7 +173,7 @@ function admin_users(&$engine, &$module)
 			}
 		}
 		// edit user
-		else if (isset($_POST['edit']) && isset($_POST['user_id']) && (isset($_POST['newname']) || isset($_POST['moderator'])))
+		else if (isset($_POST['edit']) && isset($_POST['user_id']) && (isset($_POST['newname']) || isset($_POST['moderator_id'])))
 		{
 			// do we have identical names?
 			if ($engine->load_single(
@@ -148,47 +208,69 @@ function admin_users(&$engine, &$module)
 		}
 		// delete user
 		// TODO: reassign acls uploads, pages and revisions, delete user page
-		else if (isset($_POST['delete']) && isset($_POST['user_id']))
+		#else if (isset($_POST['delete']) && isset($_POST['user_id'])  && $set == true)
+		else if (isset($_POST['delete'])  && $set == true)
 		{
-			$engine->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}user ".
-				"WHERE user_id = '".(int)$_POST['user_id']."'");
-			$engine->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}user_setting ".
-				"WHERE user_id = '".(int)$_POST['user_id']."'");
-			$engine->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
-				"WHERE user_id = '".(int)$_POST['user_id']."'");
-			$engine->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}menu ".
-				"WHERE user_id = '".(int)$_POST['user_id']."'");
-			$engine->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}watch ".
-				"WHERE user_id = '".(int)$_POST['user_id']."'");
+			if (array_filter($set) == false)
+			{
+				$error = 'Please select at least one comment via the Set button.';//$this->get_translation('ModerateMoveNotExists');
+				$engine->show_message($error);
+			}
+				//(int)$_POST['user_id']
+			if ($error != true)
+			{
+				foreach ($set as $user_id)
+				{
+					$user = $engine->load_single(
+						"SELECT u.user_name ".
+						"FROM {$engine->config['table_prefix']}user u ".
+						"WHERE u.user_id = '".$user_id."' ".
+							"AND u.account_type = '0' ".
+						"LIMIT 1");
 
-			// remove user space
-			$user_space = $engine->config['users_page'].'/'.$user['user_name'];
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}user ".
+						"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}user_setting ".
+						"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
+						"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}menu ".
+						"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}watch ".
+						"WHERE user_id = '".$user_id."'");
 
-			$engine->remove_referrers	($user_space, true);
-			$engine->remove_links		($user_space, true);
-			$engine->remove_categories	($user_space, true);
-			$engine->remove_acls		($user_space, true);
-			$engine->remove_menu_items	($user_space, true);
-			$engine->remove_watches		($user_space, true);
-			$engine->remove_ratings		($user_space, true);
-			$engine->remove_comments	($user_space, true, $dontkeep);
-			$engine->remove_files		($user_space, true);
-			$engine->remove_revisions	($user_space, true);
+					// remove user space
+					$user_space = $engine->config['users_page'].'/'.$user['user_name'];
 
-			$engine->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}page ".
-				"WHERE tag = '".quote($engine->dblink, $user_space)."' ".
-						"OR tag LIKE '".quote($engine->dblink, $user_space)."/%' ".
-					#"AND owner_id = '".(int)$_POST['user_id']."'".
-				"");
+					$engine->remove_referrers	($user_space, true);
+					$engine->remove_links		($user_space, true);
+					$engine->remove_categories	($user_space, true);
+					$engine->remove_acls		($user_space, true);
+					$engine->remove_menu_items	($user_space, true);
+					$engine->remove_watches		($user_space, true);
+					$engine->remove_ratings		($user_space, true);
+					$engine->remove_comments	($user_space, true, $dontkeep);
+					$engine->remove_files		($user_space, true);
+					$engine->remove_revisions	($user_space, true);
 
-			$engine->show_message($engine->get_translation('UsersDeleted'));
-			$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}page ".
+						"WHERE tag = '".quote($engine->dblink, $user_space)."' ".
+								"OR tag LIKE '".quote($engine->dblink, $user_space)."/%' ".
+							#"AND owner_id = '".(int)$_POST['user_id']."'".
+						"");
+
+					$engine->show_message($engine->get_translation('UsersDeleted'));
+					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
+				}
+
+				$set = array();
+			}
 		}
 	}
 
@@ -520,6 +602,14 @@ function admin_users(&$engine, &$module)
 			$control_buttons = '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
 			$control_buttons .=  '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
 			$control_buttons .=  '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+			$control_buttons .=  '<input name="ids" type="hidden" value="'.implode('-', $set).'" />';
+			$control_buttons .=  '<br />'."\n".
+									'<input name="set" id="submit" type="submit" value="'.$engine->get_translation('ModerateSet').'" /> '.
+									($set
+											? '<input name="reset" id="submit" type="submit" value="'.$engine->get_translation('ModerateReset').'" /> '.
+											'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
+											: ''
+									);
 
 			echo $control_buttons;
 
@@ -529,6 +619,7 @@ function admin_users(&$engine, &$module)
 			} ?>
 			<table style="padding: 3px;" class="formation">
 				<tr>
+					<th style="width:5px;"></th>
 					<th style="width:5px;"></th>
 					<th style="width:5px;">ID</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuser; ?>">Username</a></th>
@@ -549,6 +640,7 @@ function admin_users(&$engine, &$module)
 			foreach ($users as $row)
 			{
 				echo '<tr class="lined">'."\n".
+						'<td valign="middle" style="width:10px;" class="label"><input name="'.$row['user_id'].'" type="checkbox" value="id" '.( in_array($row['user_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 						'<td valign="top" align="center"><input type="radio" name="change" value="'.$row['user_id'].'" /></td>'.
 						'<td valign="top" align="center">'.$row['user_id'].'</td>'.
 						'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.

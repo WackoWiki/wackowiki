@@ -179,7 +179,7 @@ function admin_groups(&$engine, &$module)
 					"INSERT INTO {$engine->config['table_prefix']}usergroup SET ".
 						"created		= NOW(), ".
 						"description	= '".quote($engine->dblink, $_POST['description'])."', ".
-						"moderator		= '".(int)$_POST['moderator']."', ".
+						"moderator_id		= '".(int)$_POST['moderator_id']."', ".
 						"group_name		= '".quote($engine->dblink, $_POST['new_group_name'])."', ".
 						"open			= '".(int)$_POST['open']."', ".
 						"active			= '".(int)$_POST['active']."'");
@@ -190,7 +190,7 @@ function admin_groups(&$engine, &$module)
 			}
 		}
 		// edit group
-		else if (isset($_POST['edit']) && isset($_POST['group_id']) && (isset($_POST['new_group_name']) || isset($_POST['moderator'])))
+		else if (isset($_POST['edit']) && isset($_POST['group_id']) && (isset($_POST['new_group_name']) || isset($_POST['moderator_id'])))
 		{
 			// do we have identical names?
 			if ($engine->load_single(
@@ -208,7 +208,7 @@ function admin_groups(&$engine, &$module)
 					"UPDATE {$engine->config['table_prefix']}usergroup SET ".
 					"group_name		= '".quote($engine->dblink, $_POST['new_group_name'])."', ".
 					"description	= '".quote($engine->dblink, $_POST['new_description'])."', ".
-					"moderator		= '".(int)$_POST['moderator']."', ".
+					"moderator_id		= '".(int)$_POST['moderator_id']."', ".
 					"open			= '".(int)$_POST['open']."', ".
 					"active			= '".(int)$_POST['active']."' ".
 					"WHERE group_id = '".(int)$_POST['group_id']."' ".
@@ -253,8 +253,8 @@ function admin_groups(&$engine, &$module)
 				'<td><input id="new_group_name" name="new_group_name" value="'.( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="description">'.$engine->get_translation('GroupsDescription').'</label></td>'.
 				'<td><input id="description" name="description" value="'.( isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="50" maxlength="100" /></td></tr>'.
-				'<tr><td><label for="moderator">'.$engine->get_translation('GroupsModerator').'</label></td>'.
-				'<td><select id="moderator" name="moderator">';?>
+				'<tr><td><label for="moderator_id">'.$engine->get_translation('GroupsModerator').'</label></td>'.
+				'<td><select id="moderator_id" name="moderator_id">';?>
 					<option value=""></option>
 					<?php
 					if ($users = $engine->load_users())
@@ -279,7 +279,7 @@ function admin_groups(&$engine, &$module)
 		// edit group
 		else if (isset($_POST['edit']) && isset($_POST['change']))
 		{
-			if ($usergroup = $engine->load_single("SELECT group_name, description, moderator, open, active FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['change']."' LIMIT 1"))
+			if ($usergroup = $engine->load_single("SELECT group_name, description, moderator_id, open, active FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['change']."' LIMIT 1"))
 			{
 				echo '<form action="admin.php" method="post" name="groups">';
 				echo '<input type="hidden" name="mode" value="groups" />';
@@ -289,15 +289,15 @@ function admin_groups(&$engine, &$module)
 					'<td><input id="new_group_name" name="new_group_name" value="'.( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" /></td></tr>'.
 					'<tr><td><label for="new_description">'.$engine->get_translation('GroupsDescription').'</label></td>'.
 					'<td><input id="new_description" name="new_description" value="'.( isset($_POST['new_description']) ? htmlspecialchars($_POST['new_description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" /></td></tr>'.
-					'<tr><td><label for="moderator">'.$engine->get_translation('GroupsModerator').'</label></td>'.
-					'<td><select id="moderator" name="moderator">'.
+					'<tr><td><label for="moderator_id">'.$engine->get_translation('GroupsModerator').'</label></td>'.
+					'<td><select id="moderator_id" name="moderator_id">'.
 					'<option value=""></option> ';
 
 					if ($users = $engine->load_users())
 					{
 						foreach($users as $user)
 						{
-							echo "<option value=\"".$user['user_id']."\" ".($usergroup['moderator'] == $user['user_id'] ? " selected=\"selected\"" : "").">".$user['user_name']."</option>\n";
+							echo "<option value=\"".$user['user_id']."\" ".($usergroup['moderator_id'] == $user['user_id'] ? " selected=\"selected\"" : "").">".$user['user_name']."</option>\n";
 						}
 					}
 
@@ -346,7 +346,7 @@ function admin_groups(&$engine, &$module)
 	{
 		$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
 		$usergroup = $engine->load_single(
-			"SELECT group_id, moderator, group_name FROM {$engine->config['table_prefix']}usergroup ".
+			"SELECT group_id, moderator_id, group_name FROM {$engine->config['table_prefix']}usergroup ".
 			"WHERE group_id = '".(int)$group_id."' ".
 			"LIMIT 1");
 
@@ -443,9 +443,9 @@ function admin_groups(&$engine, &$module)
 		}
 
 		// filter by lang
-		if (isset($_GET['moderator']))
+		if (isset($_GET['moderator_id']))
 		{
-			$where = "WHERE g.moderator = '".quote($engine->dblink, $_GET['moderator'])."' ";
+			$where = "WHERE g.moderator_id = '".(int)$_GET['moderator_id']."' ";
 		}
 
 		// entries to display
@@ -464,7 +464,7 @@ function admin_groups(&$engine, &$module)
 		$groups = $engine->load_all(
 			"SELECT g.*, u.user_name, COUNT(m.user_id) AS members ".
 			"FROM {$engine->config['table_prefix']}usergroup g ".
-				"LEFT JOIN {$engine->config['table_prefix']}user u ON (g.moderator = u.user_id) ".
+				"LEFT JOIN {$engine->config['table_prefix']}user u ON (g.moderator_id = u.user_id) ".
 				"LEFT JOIN ".$engine->config['table_prefix']."usergroup_member m ON (m.group_id = g.group_id) ".
 			( $where ? $where : '' ).
 			"GROUP BY g.group_id ".
@@ -516,7 +516,7 @@ function admin_groups(&$engine, &$module)
 						'<td align="center">'.$row['group_id'].'</td>'.
 						'<td align="left" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=groups&group_id='.$row['group_id'].'">'.$row['group_name'].'</a></strong></td>'.
 						'<td>'.$row['description'].'</td>'.
-						'<td align="center"><small><a href="?mode=groups&moderator='.$row['moderator'].'">'.$row['user_name'].'</a></small></td>'.
+						'<td align="center"><small><a href="?mode=groups&moderator='.$row['moderator_id'].'">'.$row['user_name'].'</a></small></td>'.
 						'<td align="center">'.$row['members'].'</td>'.
 						'<td align="center">'.$row['open'].'</td>'.
 						'<td align="center">'.$row['active'].'</td>'.
