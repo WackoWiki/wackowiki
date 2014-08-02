@@ -17,7 +17,7 @@ class Wacko
 	var $supertag;
 	var $forum;
 	var $categories;
-	var $iswatched;
+	var $is_watched;
 	var $query_time;
 	var $query_log				= array();
 	var $inter_wiki				= array();
@@ -5360,7 +5360,7 @@ class Wacko
 		{
 			if ($this->is_watched($user['user_id'], $this->page['page_id']))
 			{
-				$this->iswatched = true;
+				$this->is_watched = true;
 			}
 		}
 

@@ -756,20 +756,20 @@ if ($doubleclick == true)
 
 						// watch tab
 						#echo echo_tab(
-						#	$this->href(($this->iswatched === true ? 'watch-on' : 'watch-off')),
-						#	($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
-						#	($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+						#	$this->href(($this->is_watched === true ? 'watch-on' : 'watch-off')),
+						#	($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
+						#	($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
 						#	$this->method == 'watch',
 						#	1,
 						#	'a');
 
 						echo echo_tab(
 							$this->href('watch'),
-							($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
-							($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ): '',
+							($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
+							($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ): '',
 							$this->method == 'watch',
 							1,
-							($this->iswatched === true ? 'watch-on.png' : 'watch-off.png'),
+							($this->is_watched === true ? 'watch-on.png' : 'watch-off.png'),
 							'a');
 
 						// review tab

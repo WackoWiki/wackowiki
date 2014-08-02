@@ -188,7 +188,7 @@ require ('themes/_common/_header.php');
 		<td><!-- wrapper --> <?php echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
 		<input type="hidden" name="action" value="login" />
 
-		<div class="header"><?php echo ($this->iswatched === true
+		<div class="header"><?php echo ($this->is_watched === true
 		? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\" /></a>"
 		: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a>" ) ?>
 		| <?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.png\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";?>

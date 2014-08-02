@@ -381,7 +381,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	echo '<li><a href="'.$this->href('categories').'">'.$this->get_translation('SettingsCategories').'</a></li>';
 	echo '<li><a href="'.$this->href('upload').'">'.$this->get_translation('SettingsUpload').'</a></li>';
 	echo '<li><a href="'.$this->href('referrers').'">'.$this->get_translation('SettingsReferrers').'</a></li>';
-	echo '<li><a href="'.$this->href('watch').'">'.($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')).'</a></li>';
+	echo '<li><a href="'.$this->href('watch').'">'.($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')).'</a></li>';
 	echo '<li><a href="'.$this->href('print').'">'.$this->get_translation('SettingsPrint').'</a></li>';
 	echo '<li><a href="'.$this->href('wordprocessor').'">'.$this->get_translation('SettingsWordprocessor').'</a></li>';
 	# echo '<li><a href="'.$this->href('latex').'">'.$this->get_translation('SettingsLatex').'</a></li>';
