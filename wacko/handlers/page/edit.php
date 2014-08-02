@@ -60,10 +60,10 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		$textchars	= strlen($_body);
 
 		// watch page
-		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->page['page_id'] && $user && $this->iswatched !== true)
+		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->page['page_id'] && $user && $this->is_watched !== true)
 		{
 			$this->set_watch($user['user_id'], $this->page['page_id']);
-			$this->iswatched = true;
+			$this->is_watched = true;
 		}
 
 		// only if saving:
@@ -374,7 +374,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			}
 
 			// watch a page
-			if ($this->page && $this->iswatched !== true)
+			if ($this->page && $this->is_watched !== true)
 			{
 				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? ' checked="checked"' : '' ).' />';
 				$output .= '<small><label for="watchpage">'.$this->get_translation('NotifyMe').'</label></small>';

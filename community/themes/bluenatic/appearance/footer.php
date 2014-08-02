@@ -33,7 +33,7 @@ if ($this->page)
 
 		?> <li><a href="<?php echo $this->href('properties'); ?>"><?php echo $this->get_translation('PropertiesText'); ?></a>
 </li><li> <?php // Watch page ?> <a
-	href="<?php echo $this->href('watch'); ?>"> <?php if($this->iswatched === true) { ?>
+	href="<?php echo $this->href('watch'); ?>"> <?php if($this->is_watched === true) { ?>
 <img
 	src="<?php echo $this->config['theme_url']; ?>images/watch-remove.png"
 	alt="<?php echo $this->get_translation('RemoveWatch'); ?>"

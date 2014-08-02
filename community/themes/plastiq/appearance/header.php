@@ -169,7 +169,7 @@ echo "\n";
 	{
 		if ($this->get_user())
 		{
-			if ($this->iswatched === true)
+			if ($this->is_watched === true)
 			{
 				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->get_translation('RemoveWatch'); ?>"><?php echo $this->get_translation('UnWatchText'); ?></a> &nbsp;&nbsp; <?php
 			}

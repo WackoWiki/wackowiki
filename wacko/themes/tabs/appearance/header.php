@@ -118,7 +118,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 <?php if ($this->method == 'edit') echo "style=\"margin-bottom:0;padding-bottom:0\""?>>
 <div class="Print">
 <?php if ($this->get_user()) { ?>
-<?php echo ($this->iswatched === true ?
+<?php echo ($this->is_watched === true ?
 			"<a href=\"".$this->href('watch')."\">".$this->get_translation('RemoveWatch')."</a>" :
 			"<a href=\"".$this->href('watch')."\">".$this->get_translation('SetWatch')."</a>" ) ?> ::
 	<?php if (!in_array($this->page['page_id'], $this->get_menu_links())) {?>
