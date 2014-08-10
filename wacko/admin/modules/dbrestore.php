@@ -234,9 +234,20 @@ function admin_dbrestore(&$engine, &$module)
 				file_exists($dir.$packname.'/'.BACKUP_FILE_LOG) === true)
 				{
 					// read log
-					$log = str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG));
+					$logs[] = str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG));
 
-					// open row
+				}
+			}
+
+			// sort 'creation date' descending with custom numeric comparisons function
+			usort($logs, function (array $a, array $b) { return $b[0] - $a[0]; });
+
+			#$engine->debug_print_r($logs);
+
+			if (is_array($logs))
+			{
+				foreach ($logs as $log)
+				{	// open row
 					echo '<tr>'."\n";
 
 					// pack
