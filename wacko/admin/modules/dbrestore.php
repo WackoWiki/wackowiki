@@ -233,9 +233,10 @@ function admin_dbrestore(&$engine, &$module)
 				if (is_dir($dir.$packname) === true && //strlen($packname) == 49) &&
 				file_exists($dir.$packname.'/'.BACKUP_FILE_LOG) === true)
 				{
+					$_array1 = str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG));
+					$_array2 = array('pack' => $packname);
 					// read log
-					$logs[] = str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG));
-
+					$logs[] = array_merge($_array1, $_array2);
 				}
 			}
 
@@ -252,7 +253,7 @@ function admin_dbrestore(&$engine, &$module)
 
 					// pack
 					echo '<td><table><tr><td class="label" style="width:10px;">'.
-							'<input name="id" type="radio" value="'.$packname.'" />'.
+							'<input name="id" type="radio" value="'.$log['pack'].'" />'.
 						'</td><th style="text-align:left;white-space:nowrap;">'.
 							date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).
 						'</th></tr></table></td>'."\n";
