@@ -376,6 +376,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 {
 	$where = '';
 	$tweak = '';
+	$result = '';
 
 	// sql clauses
 	if ($root == true && $tables[$table]['where'] == true)
@@ -397,6 +398,9 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 				if ($page != '')
 				{
 					$result	.= "'".$page['page_id']."', ";
+
+					// we'll need this for backing up the related cluster files
+					$engine->cluster_pages[$root][]	= $page['page_id'];
 				}
 			}
 
@@ -495,7 +499,7 @@ function get_files(&$engine, $pack, $dir, $root)
 	// set file mask for cluster backup
 	if ($root == true && $dir == $engine->config['upload_path_per_page'])
 	{
-		$tag = '@'.str_replace('/', '@', $engine->translit($root)).'@';
+		$cluster = true;
 	}
 
 	// create write (backup) subdir or restore path recursively if needed
@@ -533,8 +537,13 @@ function get_files(&$engine, $pack, $dir, $root)
 		while (false !== ($filename = readdir($dh)))
 		{
 			// for cluster backup process only affected cluster files
-			if ($root == true && $tag == true && substr($filename, 0, strlen($tag)) != $tag)
+			if ($root == true && $cluster == true
+				&& (preg_match('/@{1}((d*[0-9])+)@{1}/sm', $filename, $matches)
+						&& !in_array($matches[1], $engine->cluster_pages[$root]))
+			)
+			{
 				continue;
+			}
 
 			// subdirs skipped
 			if (is_dir($dir.'/'.$filename) !== true)
