@@ -168,7 +168,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="password_page"><strong>Change Password:</strong><br />
-				<small>Page with a form to change / query user password (action <code>{{ChangePassword}}</code>).</small></label></td>
+				<small>Page with a form to change / query user password (action <code>{{changepassword}}</code>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="password_page" name="password_page" value="<?php echo htmlspecialchars($engine->config['password_page'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">

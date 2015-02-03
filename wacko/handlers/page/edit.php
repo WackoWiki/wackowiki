@@ -218,10 +218,10 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	$this->no_cache();
 
 	// fetch fields
-	$previous	= isset($_POST['previous']) ? $_POST['previous'] : $this->page['modified'];
-	$body		= isset($_POST['body']) ? $_POST['body'] : $this->page['body'];
+	$previous	= isset($_POST['previous'])	? $_POST['previous']	: $this->page['modified'];
+	$body		= isset($_POST['body'])		? $_POST['body']		: $this->page['body'];
 	$body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	$title		= isset($_POST['title']) ? $_POST['title'] : $this->page['title'];
+	$title		= isset($_POST['title'])	? $_POST['title']		: $this->page['title'];
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
@@ -238,9 +238,9 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 
 	if (isset($_REQUEST['add']))
 	{
-		$output .=	'<input name="lang" type="hidden" value="'.$this->page_lang.'" />'.
-					'<input name="tag" type="hidden" value="'.$this->tag.'" />'.
-					'<input name="add" type="hidden" value="1" />';
+		$output .=	'<input name="lang"	type="hidden" value="'.$this->page_lang.'" />'.
+					'<input name="tag"	type="hidden" value="'.$this->tag.'" />'.
+					'<input name="add"	type="hidden" value="1" />';
 	}
 
 	echo $output;
@@ -258,9 +258,9 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		&nbsp;
 		<input class="CancelBtn_Top" type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
-		$preview = $this->format($body, 'pre_wacko');
-		$preview = $this->format($preview, 'wacko');
-		$preview = $this->format($preview, 'post_wacko');
+		$preview = $this->format($body,		'pre_wacko');
+		$preview = $this->format($preview,	'wacko');
+		$preview = $this->format($preview,	'post_wacko');
 
 		$output = '<div class="preview"><p class="preview"><span>'.$this->get_translation('EditPreview').' ('.$textchars.' '.$this->get_translation('Chars').")</span></p>\n";
 
@@ -281,22 +281,22 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 
 	if (isset($_SESSION['body']) && $_SESSION['body'] != '')
 	{
-		$body = $_SESSION['body'];
-		$_SESSION['body'] = '';
+		$body				= $_SESSION['body'];
+		$_SESSION['body']	= '';
 	}
 
 	if (isset($_SESSION['title']) && $_SESSION['title'] != '')
 	{
-		$title = $_SESSION['title'];
-		$_SESSION['title'] = '';
+		$title				= $_SESSION['title'];
+		$_SESSION['title']	= '';
 	}
 	else if (isset($_POST['title']) && $_POST['title'] == true)
 	{
-		$title = $_POST['title'];
+		$title				= $_POST['title'];
 	}
 	else
 	{
-		$title = $this->page['title'];
+		$title				= $this->page['title'];
 	}
 ?>
 	<input class="OkBtn_Top" name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
