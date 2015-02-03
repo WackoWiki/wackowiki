@@ -35,6 +35,8 @@ $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->settings('user_table',	$init->config['table_prefix'].'user');
 $init->settings('cookie_hash',	hash('md5', $init->config['base_url'].$init->config['system_seed']));
+$init->settings('ap_mode',		true);
+
 
 $init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
 
@@ -70,12 +72,6 @@ if ($engine->config['tls'] == true)
 	{
 		$engine->config['base_url'] = str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->config['base_url']);
 	}
-}
-
-// enable rewrite_mode to avoid href() appends '?page='
-if ($engine->config['rewrite_mode'] == false)
-{
-	$engine->config['rewrite_mode'] = 1;
 }
 
 ########################################################
