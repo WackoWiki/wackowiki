@@ -38,7 +38,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	// comment header?
 	if ($this->page['comment_on_id'])
 	{
-		$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', '', 0).', '.$this->get_translation('PostedBy').' '.'<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>'.' '.$this->get_translation('At').' '.$this->get_time_string_formatted($this->page['modified']);
+		$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->get_translation('PostedBy').' '.'<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>'.' '.$this->get_translation('At').' '.$this->get_time_string_formatted($this->page['modified']);
 		$this->show_message($message, 'commentinfo');
 	}
 
