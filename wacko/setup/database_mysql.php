@@ -333,7 +333,7 @@ $table_usergroup = "CREATE TABLE {$pref}usergroup (".
 					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"group_name VARCHAR(100) NOT NULL DEFAULT '',".
 					"description VARCHAR(255) NOT NULL DEFAULT '',".
-					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
 					"is_system TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"open TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".

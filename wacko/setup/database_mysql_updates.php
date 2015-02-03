@@ -56,6 +56,7 @@ $alter_upload_r5_1_3 = "ALTER TABLE {$pref}upload CHANGE description file_descri
 // USER SETTING
 
 // USERGROUP
+$alter_usergroup_r5_4_0 = "ALTER TABLE {$pref}usergroup CHANGE `moderator` `moderator_id` INT(10) UNSIGNED NOT NULL DEFAULT '0';";
 
 // WATCH
 
