@@ -2447,7 +2447,7 @@ class Wacko
 	{
 		$_rewrite_mode = '';
 		
-		if ($this->config['ap_mode'] === true)
+		if (isset($this->config['ap_mode']) && $this->config['ap_mode'] === true)
 		{
 			// enable rewrite_mode to avoid href() appends '?page='
 			$_rewrite_mode = 1;
