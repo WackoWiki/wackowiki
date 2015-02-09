@@ -73,7 +73,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("h1","Heading 1","'==','==',0,1");
  this.addButton("h2","Heading 2","'===','===',0,1");
  this.addButton("h3","Heading 3","'====','====',0,1");
-// this.addButton("h4","Heading 4","'=====','=====',0,1");
+ this.addButton("h4","Heading 4","'=====','=====',0,1");
 // this.addButton("h5","Heading 5","'======','======',0,1");
  this.addButton("customhtml",'<li><div class="btn-separator"/></div></li>');
  this.addButton("bold","Bold","'**','**'");
@@ -101,6 +101,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("quote","Quote","'<[',']>',2");
  this.addButton("textred","Marked text","'!!','!!',2");
  this.addButton("highlightcolor","Highlight text","'??','??',2");
+//this.addButton("shade","Shade","'%%(wacko wrapper="shade")','%%',2");
  this.addButton("createlink","Hyperlink","","document.getElementById('" + this.id + "')._owner.createLink");
  
  if (this.autocomplete) this.autocomplete.addButton();

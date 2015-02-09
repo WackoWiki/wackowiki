@@ -384,14 +384,14 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	{
 		foreach ($words as $id => $word)
 		{
-			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' />'.
+			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent_id']]) && $_POST['category'.$id.'|'.$word['parent_id']] == 'set' ? ' checked="checked"' : '' ).' />'.
 						'<label for="category'.$id.'"><strong>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</strong></label></span> ';
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
-					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' />'.
+					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent_id']]) && $_POST['category'.$id.'|'.$word['parent_id']] == 'set' ? ' checked="checked"' : '' ).' />'.
 								'<label for="category'.$id.'">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</label></span> ';
 				}
 			}

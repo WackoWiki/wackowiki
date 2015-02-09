@@ -119,13 +119,13 @@ $insert_admin_setting		= "INSERT INTO ".$config['table_prefix']."user_setting (u
 // $config['aliases'] = array('Admins' => $config['admin_name']);
 
 // default groups
-$insert_admin_group			= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_admin_group			= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator_id, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
 $insert_admin_group_member	= "INSERT INTO ".$config['table_prefix']."usergroup_member (group_id, user_id) VALUES ((SELECT group_id FROM ".$config['table_prefix']."usergroup WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1))";
 
-$insert_everybody_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Everybody', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_registered_group	= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Registered', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_moderator_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Moderator', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Reviewer', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_everybody_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator_id, created) VALUES ('Everybody', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_registered_group	= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator_id, created) VALUES ('Registered', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_moderator_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator_id, created) VALUES ('Moderator', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator_id, created) VALUES ('Reviewer', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
 
 $insert_logo_image			= "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, file_description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko_logo.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
@@ -141,7 +141,7 @@ $config_db['acl_lock']						= $config['acl_lock'];
 $config_db['admin_email']					= $config['admin_email'];
 $config_db['admin_name']					= $config['admin_name'];
 $config_db['allow_email_reuse']				= $config['allow_email_reuse'];
-$config_db['allow_persistent_cookie']				= $config['allow_persistent_cookie'];
+$config_db['allow_persistent_cookie']		= $config['allow_persistent_cookie'];
 $config_db['allow_rawhtml']					= $config['allow_rawhtml'];
 $config_db['allow_registration']			= $config['allow_registration'];
 $config_db['allow_swfobject']				= $config['allow_swfobject'];
@@ -244,6 +244,8 @@ $config_db['publish_anonymously']			= $config['publish_anonymously'];
 $config_db['pwd_char_classes']				= $config['pwd_char_classes'];
 $config_db['pwd_min_chars']					= $config['pwd_min_chars'];
 $config_db['pwd_unlike_login']				= $config['pwd_unlike_login'];
+$config_db['rand_seed']						= $config['rand_seed'];
+$config_db['rand_seed_last_update']			= $config['rand_seed_last_update'];
 $config_db['referrers_purge_time']			= $config['referrers_purge_time'];
 $config_db['remove_onlyadmins']				= $config['remove_onlyadmins'];
 $config_db['rename_globalacl']				= $config['rename_globalacl'];
@@ -395,6 +397,7 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'rating', $lang['DeletingTable']), @mysqli_query($dblink, $table_rating_drop), str_replace('%1', 'rating', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'referrer', $lang['DeletingTable']), @mysqli_query($dblink, $table_referrer_drop), str_replace('%1', 'referrer', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'revision', $lang['DeletingTable']), @mysqli_query($dblink, $table_revision_drop), str_replace('%1', 'revision', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'session', $lang['DeletingTable']), @mysqli_query($dblink, $table_session_drop), str_replace('%1', 'session', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'tag', $lang['DeletingTable']), @mysqli_query($dblink, $table_tag_drop), str_replace('%1', 'tag', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'tag_page', $lang['DeletingTable']), @mysqli_query($dblink, $table_tag_page_drop), str_replace('%1', 'tag_page', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'upload', $lang['DeletingTable']), @mysqli_query($dblink, $table_upload_drop), str_replace('%1', 'upload', $lang['ErrorDeletingTable']));
@@ -429,6 +432,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysqli_query($dblink, $table_rating), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'referrer', $lang['CreatingTable']), @mysqli_query($dblink, $table_referrer), str_replace('%1', 'referrer', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'revision', $lang['CreatingTable']), @mysqli_query($dblink, $table_revision), str_replace('%1', 'revision', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'session', $lang['CreatingTable']), @mysqli_query($dblink, $table_session), str_replace('%1', 'session', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_page), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'upload', $lang['CreatingTable']), @mysqli_query($dblink, $table_upload), str_replace('%1', 'upload', $lang['ErrorCreatingTable']));
@@ -470,9 +474,6 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					/* test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_4), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_5), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
- */
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_0_1), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_0_2), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
@@ -504,6 +505,29 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_3), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
+					echo "            </ol>\n";
+
+				// upgrade from R5.1.0 to R5.5.x
+				case '5.4.0':
+					echo "         <h2>Wacko 5.4.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					// category
+					test(str_replace('%1', 'category', $lang['AlterTable']), @mysqli_query($dblink, $alter_category_r5_4_0), str_replace('%1', 'category', $lang['ErrorAlteringTable']));
+					
+					// revision
+					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r5_4_0), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
+					
+					// session
+					test(str_replace('%1', 'session', $lang['CreatingTable']), @mysqli_query($dblink, $table_session_r5_4_0), str_replace('%1', 'session', $lang['ErrorCreatingTable']));
+					
+					// user
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r5_4_0), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					
+					// usergroup
+					test(str_replace('%1', 'usergroup', $lang['AlterTable']), @mysqli_query($dblink, $alter_usergroup_r5_4_0), str_replace('%1', 'usergroup', $lang['ErrorAlteringTable']));
+
+					
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
@@ -575,6 +599,7 @@ switch($config['database_driver'])
 				test_pdo(str_replace('%1', 'rating', $lang['DeletingTable']), $table_rating_drop, str_replace('%1', 'rating', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'referrer', $lang['DeletingTable']), $table_referrer_drop, str_replace('%1', 'referrer', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'revision', $lang['DeletingTable']), $table_revision_drop, str_replace('%1', 'revision', $lang['ErrorDeletingTable']));
+				test_pdo(str_replace('%1', 'session', $lang['DeletingTable']), $table_session_drop, str_replace('%1', 'session', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'tag', $lang['DeletingTable']), $table_tag_drop, str_replace('%1', 'tag', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'tag_page', $lang['DeletingTable']), $table_tag_page_drop, str_replace('%1', 'tag_page', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'upload', $lang['DeletingTable']), $table_upload_drop, str_replace('%1', 'upload', $lang['ErrorDeletingTable']));
@@ -609,6 +634,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'rating', $lang['CreatingTable']), $table_rating, str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'referrer', $lang['CreatingTable']), $table_referrer, str_replace('%1', 'referrer', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'revision', $lang['CreatingTable']), $table_revision, str_replace('%1', 'revision', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'session', $lang['CreatingTable']), $table_session, str_replace('%1', 'session', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'tag', $lang['CreatingTable']), $table_tag, str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'tag_page', $lang['CreatingTable']), $table_tag_page, str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'upload', $lang['CreatingTable']), $table_upload, str_replace('%1', 'upload', $lang['ErrorCreatingTable']));
@@ -652,9 +678,6 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					/* test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_4, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_5, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
- */
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_0_1, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_0_2, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
@@ -686,9 +709,31 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_2, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_3, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
+					echo "            </ol>\n";
+
+				// upgrade from R5.4.0 to R5.5.x
+				case '5.4.0':
+					echo "         <h2>Wacko 5.4.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					// category
+					test_pdo(str_replace('%1', 'category', $lang['AlterTable']), $alter_category_r5_4_0, str_replace('%1', 'category', $lang['ErrorAlteringTable']));
+					
+					// revision
+					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r5_4_0, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
+					
+					// session
+					test_pdo(str_replace('%1', 'session', $lang['CreatingTable']), $table_session_r5_4_0, str_replace('%1', 'session', $lang['ErrorCreatingTable']));
+					
+					// user
+					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r5_4_0, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					
+					// usergroup
+					test_pdo(str_replace('%1', 'usergroup', $lang['AlterTable']), $alter_usergroup_r5_4_0, str_replace('%1', 'usergroup', $lang['ErrorAlteringTable']));
+					
+
 					// inserting config values
 					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
-
 
 					echo "            </ol>\n";
 					echo "         <br />\n";

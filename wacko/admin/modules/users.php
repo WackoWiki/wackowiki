@@ -448,20 +448,20 @@ function admin_users(&$engine, &$module)
 			$signup_time	= 'signup_asc';
 		}
 
-		// set sessiontime ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'session_asc')
+		// set last_visit ordering
+		if (isset($_GET['order']) && $_GET['order'] == 'last_visit_asc')
 		{
-			$order		= 'ORDER BY session_time ASC ';
-			$session_time	= 'session_desc';
+			$order		= 'ORDER BY last_visit ASC ';
+			$last_visit	= 'last_visit_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'session_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'last_visit_desc')
 		{
-			$order		= 'ORDER BY session_time DESC ';
-			$session_time	= 'session_asc';
+			$order		= 'ORDER BY last_visit DESC ';
+			$last_visit	= 'last_visit_asc';
 		}
 		else
 		{
-			$session_time	= 'session_asc';
+			$last_visit	= 'last_visit_asc';
 		}
 
 		// set total_pages ordering
@@ -632,7 +632,7 @@ function admin_users(&$engine, &$module)
 					<th style="width:20px;">Language</th>
 					<th style="width:20px;">Enabled</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signup_time; ?>">Signuptime</a></th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $session_time; ?>">Sessiontime</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $last_visit; ?>">Last active</a></th>
 				</tr>
 <?php
 		if ($users)
@@ -653,7 +653,7 @@ function admin_users(&$engine, &$module)
 						'<td valign="top" align="center"><small><a href="?mode=users&lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
 						'<td valign="top" align="center">'.$row['enabled'].'</td>'.
 						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
-						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['session_time'])).'</small></td>'.
+						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.
 					'</tr>';
 			}
 		}

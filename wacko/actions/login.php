@@ -36,9 +36,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$this->log(5, str_replace('%1', $this->get_user_name(), $this->get_translation('LogUserLoggedOut', $this->config['language'])));
-	$this->logout_user();
+	$this->log_user_out();
 	$this->set_menu(MENU_DEFAULT);
-	$this->set_message($this->get_translation('LoggedOut'));
+	$this->set_message($this->get_translation('LoggedOut')); // TODO: message is reset with session before it it can display the message set after the redirect
 	$this->context[++$this->current_context] = '';
 
 	if (!empty($_GET['goback']))
@@ -62,9 +62,9 @@ else if ($user = $this->get_user())
 
 	if ($this->get_cookie('auth'))
 	{
-		if ($user['session_time'] == true)
+		if ($user['last_visit'] == true)
 		{
-			$output .= $this->get_translation('LastVisit').' <code>'. $this->get_time_string_formatted($user['session_time']).'</code>.<br />';
+			$output .= $this->get_translation('LastVisit').' <code>'. $this->get_time_string_formatted($user['last_visit']).'</code>.<br />';
 		}
 
 		$output .= $this->get_translation('SessionEnds').' <code>';
@@ -117,8 +117,10 @@ else
 	// is user trying to log in or register?
 	if (isset($_POST['action']) && $_POST['action'] == 'login')
 	{
+		$_user_name = isset($_POST['user_name']) ? $_POST['user_name'] : '';
+
 		// if user name already exists, check password
-		if ($existing_user = $this->load_user($_POST['user_name']))
+		if ($existing_user = $this->load_user($_user_name))
 		{
 			// check for disabled account
 			if (($existing_user['enabled'] == false) || $existing_user['account_type'] != 0 )
@@ -144,30 +146,32 @@ else
 
 				if (!$error)
 				{
+					$_password = isset($_POST['password']) ? $_POST['password'] : '';
+
 					// check for old md5 password
 					if (strlen($existing_user['password']) < 64)
 					{
 						if (strlen($existing_user['password']) == 32)
 						{
-							$_processed_password = hash('md5', $_POST['password']);
+							$_processed_password = hash('md5', $_password);
 						}
 
 						if ($existing_user['password'] == $_processed_password)
 						{
 							$salt		= $this->random_password(10, 3);
-							$password	= hash('sha256', $_POST['user_name'].$salt.$_POST['password']);
+							$password	= hash('sha256', $_user_name.$salt.$_password);
 
 							// update database with the sha256 password for future logins
 							$this->sql_query(
 								"UPDATE ".$this->config['table_prefix']."user SET ".
 									"password	= '".quote($this->dblink, $password)."', ".
 									"salt		= '".quote($this->dblink, $salt)."' ".
-								"WHERE user_name = '".quote($this->dblink, $_POST['user_name'])."'");
+								"WHERE user_name = '".quote($this->dblink, $_user_name)."'");
 						}
 					}
 					else
 					{
-						$_processed_password = hash('sha256', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
+						$_processed_password = hash('sha256', $_user_name.$existing_user['salt'].$_password);
 					}
 
 					// check password
@@ -217,13 +221,12 @@ else
 					else
 					{
 						$error		= $this->get_translation('WrongPassword');
-						$user_name	= $_POST['user_name'];
 						$focus		= 1;
 
 						$this->set_failed_user_login_count($existing_user['user_id']);
 
 						// log failed attempt
-						$this->log(2, str_replace('%1', $_POST['user_name'], $this->get_translation('LogUserLoginFailed', $this->config['language'])));
+						$this->log(2, str_replace('%1', $_user_name, $this->get_translation('LogUserLoginFailed', $this->config['language'])));
 					}
 				}
 			}
@@ -252,7 +255,7 @@ else
 
 	echo '<p>';
 	echo '<label for="user_name">'.$this->format_translation('LoginName').':</label>';
-	echo '<input id="user_name" name="user_name" size="25" maxlength="25" value="'.(isset($user_name) ? $user_name : '').'" tabindex="1" />'."\n";
+	echo '<input id="user_name" name="user_name" size="25" maxlength="25" value="'.(isset($_user_name) ? $_user_name : '').'" tabindex="1" />'."\n";
 	echo '</p>'."\n";
 
 	echo '<p>';

@@ -54,7 +54,7 @@ if ($this->is_admin())
 				}
 
 				closedir($handle);
-				#$this->sql_query("DELETE FROM ".$this->config['table_prefix']."cache");
+
 				// empties cache table and reset AUTO_INCREMENT value to its start value
 				$this->sql_query("TRUNCATE ".$this->config['table_prefix']."cache");
 			}

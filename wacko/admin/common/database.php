@@ -92,6 +92,12 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'revision_id',
 				'limit' => 500
 			),
+			$engine->config['table_prefix'].'session' => array(
+					'name'	=> $engine->config['table_prefix'].'session',
+					'where'	=> false,
+					'order'	=> 'user_id',
+					'limit' => 1000
+			),
 			$engine->config['table_prefix'].'upload' => array(
 				'name'	=> $engine->config['table_prefix'].'upload',
 				'where'	=> false,
@@ -647,7 +653,7 @@ function put_data(&$engine, $pack, $table, $mode)
 
 			foreach ($row as $cell)
 			{
-				$row[$j++] = "'".quote($engine->dblink, $cell)."'";//( $cell == 'null' ? $cell :  "'".quote($engine->dblink, $cell)."'" );
+				$row[$j++] = "'".quote($engine->dblink, $cell)."'"; //( $cell == 'null' ? $cell :  "'".quote($engine->dblink, $cell)."'" );
 			}
 
 			// run and count sql query

@@ -236,6 +236,9 @@ $wacko_config_defaults = array(
 	'x_frame_option' => '',
 	'x_csp' => '',
 
+	'rand_seed_last_update' => 0,
+	'rand_seed' => '',
+
 	'system_seed' => '', // installer autogenerate random one
 	'recovery_password' => '',
 

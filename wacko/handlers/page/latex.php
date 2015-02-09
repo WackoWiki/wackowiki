@@ -38,7 +38,7 @@ if ($this->has_access('read'))
 		// display page
 		$this->context[++$this->current_context] = $this->tag;
 		$text = preg_replace('/{{(tableofcontents|toc).*?}}/i', '', $this->page['body']);
-		$data = $this->format($text, "wiki");
+		$data = $this->format($text, 'wiki');
 
 		// Convert everything that doesn't need regexps
 		$data = str_replace(

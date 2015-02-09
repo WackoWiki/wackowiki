@@ -15,10 +15,12 @@ $error			= '';
 // display usergroup profile
 if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 {
+	$_usergroup = isset($_GET['profile']) ? $_GET['profile'] : (isset($_POST['profile']) ? $_POST['profile'] : '');
+
 	// does requested usergroup exists?
-	if (false == $usergroup = $this->load_usergroup($_REQUEST['profile']))
+	if (false == $usergroup = $this->load_usergroup($_usergroup))
 	{
-		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))).'</div>';
+		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_usergroup, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))).'</div>';
 	}
 	else
 	{
@@ -93,9 +95,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				$order = "ORDER BY signup_time ";
 				$param = "sort=".$_GET['sort'];
 			}
-			else if (isset($_GET['sort']) && $_GET['sort'] == 'session')
+			else if (isset($_GET['sort']) && $_GET['sort'] == 'last_visit')
 			{
-				$order = "ORDER BY session_time ";
+				$order = "ORDER BY last_visit ";
 				$param = "sort=".$_GET['sort'];
 			}
 
@@ -111,7 +113,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			}
 
 			$members = $this->load_all(
-				"SELECT u.user_id, u.user_name, u.signup_time, u.total_pages, u.total_revisions, u.total_comments, u.session_time, s.hide_lastsession ".
+				"SELECT u.user_id, u.user_name, u.signup_time, u.total_pages, u.total_revisions, u.total_comments, u.last_visit, s.hide_lastsession ".
 				"FROM {$this->config['table_prefix']}user u ".
 					"LEFT JOIN {$this->config['table_prefix']}usergroup_member m ON (u.user_id = m.user_id) ".
 					"LEFT JOIN {$this->config['table_prefix']}user_setting s ON (u.user_id = s.user_id) ".
@@ -136,7 +138,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			($this->get_user()
 				?
 				'<th><a href="'.$this->href('', '', 'profile='.$_GET['profile'].'&amp;sort=signup'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersSignup').( isset($_GET['sort']) && $_GET['sort'] == 'signup' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
-				'<th><a href="'.$this->href('', '', 'profile='.$_GET['profile'].'&amp;sort=session'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'
+				'<th><a href="'.$this->href('', '', 'profile='.$_GET['profile'].'&amp;sort=last_visit'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'last_visit' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'
 				: '').
 			"</tr>\n";
 
@@ -154,9 +156,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 									'<td align="center">'.$this->get_time_string_formatted($member['signup_time']).'</td>'.
 									'<td align="center">'.( $member['hide_lastsession'] == 1
 				? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
-				: ( !$member['session_time'] || $member['session_time'] == SQL_NULLDATE
+				: ( !$member['last_visit'] || $member['last_visit'] == SQL_NULLDATE
 				? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
-				: $this->get_time_string_formatted($member['session_time']) )
+				: $this->get_time_string_formatted($member['last_visit']) )
 				).'</td>'
 				: '').
 							"</tr>\n";
