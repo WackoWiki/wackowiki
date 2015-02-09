@@ -1066,6 +1066,11 @@ $wacko_translation = array(
 	'LogEvent'					=> 'Événement',
 	'LogUsername'				=> 'Nom d&rsquo;utilisateur',
 
+	'PurgeSessions'				=> 'Purge all sessions',
+	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
+	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
+	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
+		
 	// log
 	'LogLevel1'					=> 'critique',
 	'LogLevel2'					=> 'le plus élevé',
