@@ -229,7 +229,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 				"LIMIT 1");
 
 			// reinitialize user session
-			$this->logout_user();
+			$this->log_user_out();
 			$this->set_menu(MENU_DEFAULT);
 			$this->context[++$this->current_context] = '';
 
@@ -237,7 +237,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			$this->log(3, str_replace('%1', $user['user_name'], $this->get_translation('LogUserPasswordChanged', $this->config['language'])));
 
 			// forward
-			$this->set_message($this->get_translation('PasswordChanged'));
+			$this->set_message($this->get_translation('PasswordChanged')); // // TODO: message is reset with session before it it can display the message set after the redirect
 			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0,1000)));
 		}
 	}

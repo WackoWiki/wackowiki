@@ -14,6 +14,7 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"privilege VARCHAR(10) NOT NULL DEFAULT '',".
 					"list TEXT NOT NULL,".
+					// "updated TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,".
 					"UNIQUE KEY idx_page_id (page_id,privilege)".
 				") {$engine} COMMENT='' {$charset}";
 
@@ -31,7 +32,7 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 
 $table_category = "CREATE TABLE {$pref}category (".
 					"category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"parent INT(10) UNSIGNED NOT NULL DEFAULT 0,".
+					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT 0,".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"category VARCHAR(100) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (category_id),".
@@ -229,6 +230,21 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"PRIMARY KEY ( session_id )".
 				") {$engine} COMMENT='' {$charset}";*/
 
+$table_session = "CREATE TABLE IF NOT EXISTS `{$pref}session` (
+					`cookie_token` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+					`user_id` INT(10) unsigned NOT NULL DEFAULT '0',
+					`session_last_visit` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+					`session_start` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+					`session_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+					`session_ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
+					`session_browser` varchar(150) COLLATE utf8_bin NOT NULL DEFAULT '',
+					`session_admin` tinyint(1) unsigned NOT NULL DEFAULT '0',
+					PRIMARY KEY (`cookie_token`),
+					KEY `session_time` (`session_time`),
+					KEY `session_user_id` (`user_id`)
+					) {$engine} COMMENT='' {$charset}";
+
+
 $table_tag = "CREATE TABLE {$pref}tag (".
 					"tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -282,7 +298,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"change_password VARCHAR(64) NOT NULL DEFAULT '',".
 					"email_confirm VARCHAR(64) NOT NULL DEFAULT '',".
-					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"session_expire INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"last_mark DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"login_count INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -381,7 +397,7 @@ $table_poll_drop				= "DROP TABLE {$pref}poll";
 $table_rating_drop				= "DROP TABLE {$pref}rating";
 $table_referrer_drop			= "DROP TABLE {$pref}referrer";
 $table_revision_drop			= "DROP TABLE {$pref}revision";
-/*$table_session_drop			= "DROP TABLE {$pref}session";*/
+$table_session_drop				= "DROP TABLE {$pref}session";
 $table_tag_drop					= "DROP TABLE {$pref}tag";
 $table_tag_page_drop			= "DROP TABLE {$pref}tag_page";
 $table_upload_drop				= "DROP TABLE {$pref}upload";

@@ -15,10 +15,12 @@ $error			= '';
 // display user profile
 if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 {
+	$_user_name = isset($_GET['profile']) ? $_GET['profile'] : (isset($_POST['profile']) ? $_POST['profile'] : '');
+
 	// does requested user exists?
-	if (false == $user = $this->load_user($_REQUEST['profile']))
+	if (false == $user = $this->load_user($_user_name))
 	{
-		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))).'</div>';
+		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))).'</div>';
 	}
 	else
 	{
@@ -133,9 +135,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				<td class="userprofil"><?php echo $this->get_translation('UsersLastSession'); ?></td>
 				<td><?php echo ( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
-					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
+					: ( !$user['last_visit'] || $user['last_visit'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
-						: $this->get_time_string_formatted($user['session_time']) )
+						: $this->get_time_string_formatted($user['last_visit']) )
 					); ?></td>
 			</tr>
 			<tr class="lined"><?php // Have all user pages as sub pages of the current Users page. ?>
@@ -373,9 +375,9 @@ else
 		$order = "ORDER BY signup_time ";
 		$param = "sort=".$_GET['sort'];
 	}
-	else if (isset($_GET['sort']) && $_GET['sort'] == 'session')
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'last_visit')
 	{
-		$order = "ORDER BY session_time ";
+		$order = "ORDER BY last_visit ";
 		$param = "sort=".$_GET['sort'];
 	}
 
@@ -399,7 +401,7 @@ else
 
 	// collect data
 	$users = $this->load_all(
-		"SELECT u.user_name, u.signup_time, u.session_time, u.total_pages, u.total_revisions, u.total_comments, s.hide_lastsession ".
+		"SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, s.hide_lastsession ".
 		"FROM {$this->config['user_table']} u ".
 			"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 		($where == true ? $where : '').
@@ -436,7 +438,7 @@ else
 		($this->get_user()
 			?
 			'<th><a href="'.$this->href('', '', 'sort=signup'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersSignup').( isset($_GET['sort']) && $_GET['sort'] == 'signup' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=session'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'
+			'<th><a href="'.$this->href('', '', 'sort=last_visit'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'last_visit' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'
 			: '').
 		"</tr>\n";
 
@@ -460,9 +462,9 @@ else
 					'<td align="center">'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
 					'<td align="center">'.( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
-					: (!$user['session_time'] || $user['session_time'] == SQL_NULLDATE
+					: (!$user['last_visit'] || $user['last_visit'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
-						: $this->get_time_string_formatted($user['session_time']))
+						: $this->get_time_string_formatted($user['last_visit']))
 					).'</td>'
 					: '').
 			"</tr>\n";

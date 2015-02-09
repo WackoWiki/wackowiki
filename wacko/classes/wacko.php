@@ -2264,9 +2264,17 @@ class Wacko
 		);
 
 		$cookie_path	= $this->config['cookie_path'];
+		$cookie_name	= $prefix.$name.$cookie_hash;
 
-		setcookie($prefix.$name.$cookie_hash, '', 1, $cookie_path, '');
-		$_COOKIE[$prefix.$name.$cookie_hash] = '';
+		// ensures that cookie expires in browser
+		setcookie($cookie_name, '', 1, $cookie_path, '');
+		$_COOKIE[$cookie_name] = '';
+
+		// removing cookie
+		setcookie($cookie_name, false);
+
+		// removes the cookie from script
+		unset($_COOKIE[$cookie_name]);
 	}
 
 	function get_cookie($name)
@@ -3770,10 +3778,10 @@ class Wacko
 		#}
 	}
 
-	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false)
+	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
-		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, u.session_time, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst';
+		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst, t.session_time, t.cookie_token ';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst, t.cookie_token ';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
@@ -3782,9 +3790,12 @@ class Wacko
 				).
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."session t ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id != 0
 					? "u.user_id		= '".(int)$user_id."' "
-					: "u.user_name	= '".quote($this->dblink, $user_name)."' ").
+					: 	( $login_token !== false
+						? "t.cookie_token	= '".quote($this->dblink, $login_token)."' "
+						: "u.user_name	= '".quote($this->dblink, $user_name)."' ")).
 					"AND u.account_type = '0' ".
 			($password === 0
 				? ""
@@ -3910,7 +3921,7 @@ class Wacko
 		if ($user['user_id'] == true)
 		{
 			return $this->sql_query(
-				"UPDATE {$this->config['user_table']} ".
+				"UPDATE ".$this->config['table_prefix']."session ".
 				"SET session_time = NOW() ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
@@ -3929,27 +3940,69 @@ class Wacko
 		}
 	}
 
+	/**
+	 * Return unique id
+	 * @param string $extra additional entropy
+	 */
+	function unique_id($extra = 'c')
+	{
+		static $dss_seeded = false;
+
+		$val = $this->config['rand_seed'] . microtime();
+		$val = hash('md5', $val);
+		$this->config['rand_seed'] = hash('md5', $this->config['rand_seed'] . $val . $extra);
+
+		if ($dss_seeded !== true && ($this->config['rand_seed_last_update'] < time() - rand(1,10)))
+		{
+			$this->set_config('rand_seed_last_update', time(), true);
+			$this->set_config('rand_seed', $this->config['rand_seed'], true);
+			$dss_seeded = true;
+		}
+
+		return substr($val, 4, 16);
+	}
+
 	function log_user_in($user, $persistent = 0, $session = 0)
 	{
 		// cookie elements
-		$session	= ( $session == 0 ? $this->config['session_expiration'] : $session );
-		$session	= ( $persistent ? $session : 0.25 );
-		$ses_time	= time() + $session * 24 * 3600;
+		$session		= ( $session == 0 ? $this->config['session_expiration'] : $session );
+		$session		= ( $persistent ? $session : 0.25 );
+		$ses_time		= time() + $session * 24 * 3600;
+
+		//  generate a string to use as the identifier for the login cookie
+		$login_token			= $this->unique_id(); // TODO:
+		$this->cookie_token		= hash('md5', $login_token);
+
+		$this->time_now			= date('Y-m-d H:i:s');
+
+		if ($user['user_id'])
+		{
+			$this->session_last_visit = (!empty($user['session_time']) && $user['session_time']) ? $user['session_time'] : (($user['last_visit']) ? $user['last_visit'] : $this->time_now );
+		}
+		else
+		{
+			$this->session_last_visit = $this->time_now;
+		}
+
+		#$this->update_session_page	= $update_session_page;
+		$this->browser				= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+		$this->referer				= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+		$this->forwarded_for		= isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
+		$this->ip					= $this->get_user_ip();
 
 		if ($this->config['session_encrypt_cookie'] == true)
 		{
 			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
-			$user_name	= $user['user_name'];
 			$password	= base64_encode(hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
 			// authenticating cookie data:
 			// seed | username | composed pwd | raw session time | raw password
-			$cookie_mac	= hash('sha1', $this->config['system_seed'].$user_name.$password.$ses_time.$user['password']);
+			$cookie_mac	= hash('sha1', $this->config['system_seed'].$login_token.$password.$ses_time.$user['password']);
 			// construct and set cookie
-			$cookie		= implode(';', array($user_name, $password, $ses_time, $cookie_mac));
+			$cookie		= implode(';', array($login_token, $password, $ses_time, $cookie_mac));
 		}
 		else
 		{
-			$cookie		= implode(';', array($user['user_name'], $user['password'], $ses_time));
+			$cookie		= implode(';', array($login_token, $user['password'], $ses_time));
 		}
 
 		if ($persistent && $this->config['allow_persistent_cookie'] == true)
@@ -3965,10 +4018,42 @@ class Wacko
 		// code in user data table
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} SET ".
-				"session_expire		= '".quote($this->dblink, $ses_time)."', ".
+				"session_expire		= '".(int) $ses_time."', ".
 				"change_password	= '' ".
 			"WHERE user_id		= '".$user['user_id']."' ".
 			"LIMIT 1");
+
+		if (empty($user['cookie_token']))
+		{
+			$this->sql_query(
+				"INSERT INTO {$this->config['table_prefix']}session SET ".
+				"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
+				"user_id				= '".(int)$user['user_id']."', ".
+				"session_start			= NOW(), ".
+				"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
+				"session_time			= '".quote($this->dblink, $this->time_now)."', ".
+				"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
+				"session_forwarded_for	= '".quote($this->dblink, (string) $this->forwarded_for)."', ".
+				"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
+				#"session_autologin		= ($session_autologin) ? 1 : 0, ".
+				#"session_admin			= ($set_admin) ? 1 : 0 ".
+				"");
+		}
+		else
+		{
+			$this->sql_query(
+				"UPDATE {$this->config['table_prefix']}session SET ".
+					"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
+					"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
+					"session_time			= '".quote($this->dblink, $this->time_now)."', ".
+					"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
+					"session_forwarded_for	= '".quote($this->dblink, (string) $this->forwarded_for)."', ".
+					"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
+					#"session_autologin		= ($session_autologin) ? 1 : 0, ".
+					#"session_admin			= ($set_admin) ? 1 : 0 ".
+					"WHERE user_id		= '".$user['user_id']."' ".
+					"LIMIT 1");
+		}
 
 		// restart logged in user session with specific session id
 		return $this->restart_user_session($user, $ses_time);
@@ -3978,6 +4063,7 @@ class Wacko
 	function restart_user_session($user, $session_time)
 	{
 		$this->delete_cookie('sid', true, false);
+
 		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']);
 		session_destroy(); // destroy session data in storage
 
@@ -3995,18 +4081,19 @@ class Wacko
 		{
 			if ($this->config['session_encrypt_cookie'] == true)
 			{
-				list($user_name, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
+				list($login_token, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
+
 				$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
 				$password	= hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
-				$recalc_mac	= hash('sha1', $this->config['system_seed'].$user_name.$b64password.$ses_time.$password);
+				$recalc_mac	= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$ses_time.$password);
 			}
 			else
 			{
-				list($user_name, $password, $ses_time) = explode(';', $cookie);
+				list($login_token, $password, $ses_time) = explode(';', $cookie);
 			}
 
 			return array(
-				'user_name'		=> $user_name,
+				'login_token'	=> $login_token,
 				'password'		=> $password,
 				'ses_time'		=> $ses_time,
 				'cookie_mac'	=> $cookie_mac,
@@ -4020,12 +4107,13 @@ class Wacko
 	}
 
 	// end user session and free session vars
-	function logout_user()
+	function log_user_out()
 	{
 		// clear session expiry in user data table
 		$this->sql_query(
-			"UPDATE {$this->config['user_table']} ".
-			"SET session_expire = 0 ".
+			"UPDATE {$this->config['table_prefix']}user SET ".
+				"session_expire	= 0, ".
+				"last_visit		= NOW() ".
 			"WHERE user_id = '".(int)$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']."' ".
 			"LIMIT 1");
 
@@ -4121,10 +4209,10 @@ class Wacko
 		if (!empty($user_name))
 		{
 			$user = $this->load_single(
-					"SELECT user_id ".
-					"FROM ".$this->config['table_prefix']."user ".
-					"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
-					"LIMIT 1");
+				"SELECT user_id ".
+				"FROM ".$this->config['table_prefix']."user ".
+				"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
+				"LIMIT 1");
 
 			// Get user value
 			$user_id = $user['user_id'];
@@ -5164,7 +5252,7 @@ class Wacko
 
 		// parse authentication cookie and get user data
 		$auth = $this->decompose_auth_cookie();
-		$user = $this->load_user($auth['user_name'], 0, $auth['password'], true);
+		$user = $this->load_user(false, 0, $auth['password'], true, hash('md5', $auth['login_token']) );
 
 		// run in tls mode?
 		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
@@ -5203,7 +5291,7 @@ class Wacko
 						$this->log(2, 'Expired user session terminated');
 					}
 
-					$this->logout_user();
+					$this->log_user_out();
 					#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag); // TODO: $this->get_translation('LoginPage') and $this->config['login_page'] -> multilanguage: we need encoding related default pages till we use utf-8
 					$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
 				}
@@ -5218,7 +5306,7 @@ class Wacko
 		if ($this->get_user_setting('validate_ip') == 1 && $this->get_user_setting('ip') != $this->ip_address() )
 		{
 			$this->log(1, '<strong><span class="cite">User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->ip_address().'</span></strong>');
-			$this->logout_user();
+			$this->log_user_out();
 			#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
 			$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
 			$session = false;
@@ -6470,10 +6558,10 @@ class Wacko
 	function get_categories_list($lang, $cache = 1, $root = false)
 	{
 		if ($_categories = $this->load_all(
-		"SELECT category_id, parent, category ".
+		"SELECT category_id, parent_id, category ".
 		"FROM {$this->config['table_prefix']}category ".
 		"WHERE lang = '".quote($this->dblink, $lang)."' ".
-		"ORDER BY parent ASC, category ASC", $cache))
+		"ORDER BY parent_id ASC, category ASC", $cache))
 		{
 			// process pages count (if have to)
 			if ($root !== false)
@@ -6502,7 +6590,7 @@ class Wacko
 			foreach ($_categories as $word)
 			{
 				$categories[$word['category_id']] = array(
-					'parent'	=> $word['parent'],
+					'parent_id'	=> $word['parent_id'],
 					'category'	=> $word['category'],
 					'n'			=> (isset($counts[$word['category_id']]) ? $counts[$word['category_id']] : '')
 				);
@@ -6510,9 +6598,9 @@ class Wacko
 
 			foreach ($categories as $id => $word)
 			{
-				if (isset($categories[$word['parent']]))
+				if (isset($categories[$word['parent_id']]))
 				{
-					$categories[$word['parent']]['childs'][$id] = $word;
+					$categories[$word['parent_id']]['childs'][$id] = $word;
 					unset($categories[$id]);
 				}
 			}

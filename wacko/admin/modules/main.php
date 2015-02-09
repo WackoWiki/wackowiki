@@ -51,7 +51,7 @@ function admin_lock(&$engine, &$module)
 		}
 
 		closedir($handle);
-		$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}cache");
+		$engine->sql_query("TRUNCATE FROM {$engine->config['table_prefix']}cache");
 
 		// queries
 		$engine->cache->invalidate_sql_cache();
@@ -72,6 +72,16 @@ function admin_lock(&$engine, &$module)
 		}
 
 		closedir($handle);
+	}
+	// purge sessions
+	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
+	{
+		$sql = "TRUNCATE FROM {$engine->config['table_prefix']}session";
+		$engine->sql_query($sql);
+
+		// queries
+		#$engine->cache->invalidate_sql_cache();
+
 	}
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -99,6 +109,17 @@ function admin_lock(&$engine, &$module)
 			<tr>
 				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('ClearCache');?></td>
 				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation('CacheCleared') : '<input id="submit" type="submit" value="clean" />');?></td>
+			</tr>
+		</table>
+	</form>
+		<form action="admin.php" method="post" name="purge_sessions">
+		<input type="hidden" name="mode" value="lock" />
+		<input type="hidden" name="action" value="purge_sessions" />
+		<table style="max-width:200px" class="formation">
+			<tr>
+				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('PurgeSessions');?>
+				<br /><?php #echo $engine->get_translation('PurgeSessionsExplain');?></td>
+				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->get_translation('PurgeSessionsDone') : '<input id="submit" type="submit" value="purge" />');?></td>
 			</tr>
 		</table>
 	</form>

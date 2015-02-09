@@ -20,13 +20,13 @@ if (!defined('IN_WACKO'))
 
 // TODO: should also work with parameter 'page', but didn't
 
-if (!isset($for))		$for = '';
-if (!isset($page))		$page = '';
-if (!isset($nomark))	$nomark = '';
-if (!isset($max))		$max = '';
-if (!isset($legend))	$legend = '';
-if (!isset($title))		$title = '';
-if (!isset($dontrecurse)) $dontrecurse = false;
+if (!isset($for))			$for = '';
+if (!isset($page))			$page = '';
+if (!isset($nomark))		$nomark = '';
+if (!isset($max))			$max = '';
+if (!isset($legend))		$legend = '';
+if (!isset($title))			$title = '';
+if (!isset($dontrecurse))	$dontrecurse = false;
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;
