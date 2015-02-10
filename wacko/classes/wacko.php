@@ -3790,7 +3790,7 @@ class Wacko
 				).
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
-				"LEFT JOIN ".$this->config['table_prefix']."session t ON (u.user_id = s.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."session t ON (u.user_id = t.user_id) ".
 			"WHERE ".( $user_id != 0
 					? "u.user_id		= '".(int)$user_id."' "
 					: 	( $login_token !== false
