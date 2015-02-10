@@ -221,28 +221,20 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"KEY idx_comment_on_id (comment_on_id)".
 				") {$engine} COMMENT='' {$charset}";
 
-/*$table_session = "CREATE TABLE {$pref}session (".
-					"session_id VARCHAR( 40 ) DEFAULT '0' NOT NULL ,".
-					"ip_address VARCHAR( 16 ) DEFAULT '0' NOT NULL ,".
-					"user_agent VARCHAR( 50 ) NOT NULL ,".
-					"last_activity INT( 10 ) unsigned DEFAULT 0 NOT NULL ,".
-					"user_data text NOT NULL ,".
-					"PRIMARY KEY ( session_id )".
-				") {$engine} COMMENT='' {$charset}";*/
-
-$table_session = "CREATE TABLE IF NOT EXISTS `{$pref}session` (
-					`cookie_token` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-					`user_id` INT(10) unsigned NOT NULL DEFAULT '0',
-					`session_last_visit` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-					`session_start` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-					`session_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-					`session_ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
-					`session_browser` varchar(150) COLLATE utf8_bin NOT NULL DEFAULT '',
-					`session_admin` tinyint(1) unsigned NOT NULL DEFAULT '0',
-					PRIMARY KEY (`cookie_token`),
-					KEY `session_time` (`session_time`),
-					KEY `session_user_id` (`user_id`)
-					) {$engine} COMMENT='' {$charset}";
+$table_session = "CREATE TABLE {$pref}session (".
+					"cookie_token CHAR(32) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"session_forwarded_for VARCHAR(255) NOT NULL,".
+					"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+					"PRIMARY KEY (cookie_token),".
+					"KEY session_time (session_time),".
+					"KEY session_user_id (user_id)".
+				") {$engine} COMMENT='' {$charset}";
 
 
 $table_tag = "CREATE TABLE {$pref}tag (".
