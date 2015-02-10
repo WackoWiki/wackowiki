@@ -48,14 +48,15 @@ $update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, (SELECT page_id, lang FR
 
 // SESSION
 $table_session_r5_4_0 = "CREATE TABLE {$pref}session (".
-							"cookie_token char(32) COLLATE utf8_bin NOT NULL DEFAULT '',".
-							"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+							"cookie_token CHAR(32) COLLATE utf8_bin NOT NULL DEFAULT '',".
+							"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 							"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 							"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 							"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-							"session_ip varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
-							"session_browser varchar(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
-							"session_admin tinyint(1) unsigned NOT NULL DEFAULT '0',".
+							"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
+							"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
+							"session_forwarded_for VARCHAR(255) NOT NULL,".
+							"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 							"PRIMARY KEY (cookie_token),".
 							"KEY session_time (session_time),".
 							"KEY session_user_id (user_id)".
@@ -75,7 +76,7 @@ $alter_user_r5_4_0 = "ALTER TABLE `{$pref}user` CHANGE `session_time` `last_visi
 // USER SETTING
 
 // USERGROUP
-$alter_usergroup_r5_4_0 = "ALTER TABLE {$pref}usergroup CHANGE `moderator` `moderator_id` INT(10) UNSIGNED NOT NULL DEFAULT '0'";
+$alter_usergroup_r5_4_0 = "ALTER TABLE {$pref}usergroup CHANGE moderator moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0'";
 
 // WATCH
 
