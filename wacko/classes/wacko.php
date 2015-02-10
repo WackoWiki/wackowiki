@@ -3995,7 +3995,7 @@ class Wacko
 			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
 			$password	= base64_encode(hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
 			// authenticating cookie data:
-			// seed | username | composed pwd | raw session time | raw password
+			// seed | login token | composed pwd | raw session time | raw password
 			$cookie_mac	= hash('sha1', $this->config['system_seed'].$login_token.$password.$ses_time.$user['password']);
 			// construct and set cookie
 			$cookie		= implode(';', array($login_token, $password, $ses_time, $cookie_mac));
