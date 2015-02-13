@@ -44,6 +44,8 @@ function admin_dbrestore(&$engine, &$module)
 				<h1><?php echo $module['title']; ?></h1>
 				<br />
 <?php
+	$logs			= '';
+
 	if (isset($_POST['start']) && $_POST['id'] == true)
 	{
 		set_time_limit(3600);
@@ -240,13 +242,13 @@ function admin_dbrestore(&$engine, &$module)
 				}
 			}
 
-			// sort 'creation date' descending with custom numeric comparisons function
-			usort($logs, function (array $a, array $b) { return $b[0] - $a[0]; });
-
 			#$engine->debug_print_r($logs);
 
 			if (is_array($logs))
 			{
+				// sort 'creation date' descending with custom numeric comparisons function
+				usort($logs, function (array $a, array $b) { return $b[0] - $a[0]; });
+
 				foreach ($logs as $log)
 				{	// open row
 					echo '<tr>'."\n";
