@@ -31,7 +31,7 @@ else
 $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->settings('user_table',	$init->config['table_prefix'].'user');
-$init->settings('cookie_hash',	hash('md5', $init->config['base_url'].$init->config['system_seed']));
+$init->settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
 
 // run in tls mode?
 if ($init->config['tls'] == true && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') && !empty($init->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ) ))

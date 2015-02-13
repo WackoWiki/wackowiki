@@ -211,11 +211,11 @@ else
 
 						if (!empty($_POST['goback']))
 						{
-							$this->redirect($this->href('', stripslashes($_POST['goback']), 'cache='.rand(0,1000)));
+							#$this->redirect($this->href('', stripslashes($_POST['goback']), 'cache='.rand(0,1000)));
 						}
 						else
 						{
-							$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+							#$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
 						}
 					}
 					else
