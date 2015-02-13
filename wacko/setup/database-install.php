@@ -336,86 +336,142 @@ if (isset($config['wacko_version']))
 	}
 }
 
+if ($config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo'))
+{
+	// mysql / mariadb only
+	require_once('setup/database_mysql.php');
+	require_once('setup/database_mysql_updates.php');
+}
+/* else if  ($config['database_driver'] == 'pgsql')
+{
+	require_once('setup/database_pgsql.php');
+} */
+
+// add install array for all e.g. mysqli, mysql_pdo, etc.
+
+// delete_tables
+//.		$value[0] - table name
+// 		$value[1] - SQL query
+$delete_table[]	= array('acl',				$table_acl_drop);
+$delete_table[]	= array('menu',				$table_menu_drop);
+$delete_table[]	= array('cache',			$table_cache_drop);
+$delete_table[]	= array('config',			$table_config_drop);
+$delete_table[]	= array('usergroup',		$table_usergroup_drop);
+$delete_table[]	= array('usergroup_member',	$table_usergroup_member_drop);
+$delete_table[]	= array('category',			$table_category_drop);
+$delete_table[]	= array('category_page',	$table_category_page_drop);
+$delete_table[]	= array('link',				$table_link_drop);
+$delete_table[]	= array('log',				$table_log_drop);
+$delete_table[]	= array('page',				$table_page_drop);
+$delete_table[]	= array('poll',				$table_poll_drop);
+$delete_table[]	= array('rating',			$table_rating_drop);
+$delete_table[]	= array('referrer',			$table_referrer_drop);
+$delete_table[]	= array('revision',			$table_revision_drop);
+$delete_table[]	= array('session',			$table_session_drop);
+$delete_table[]	= array('tag',				$table_tag_drop);
+$delete_table[]	= array('tag_page',			$table_tag_page_drop);
+$delete_table[]	= array('upload',			$table_upload_drop);
+$delete_table[]	= array('user',				$table_user_drop);
+$delete_table[]	= array('user_setting',		$table_user_setting_drop);
+$delete_table[]	= array('watch',			$table_watch_drop);
+
+// INSTALL
+// create tables
+// 		$value[0] - table name
+// 		$value[1] - SQL query
+$create_table[]	= array('acl',				$table_acl);
+$create_table[]	= array('menu',				$table_menu);
+$create_table[]	= array('cache',			$table_cache);
+$create_table[]	= array('config',			$table_config);
+$create_table[]	= array('usergroup',		$table_usergroup);
+$create_table[]	= array('usergroup_member',	$table_usergroup_member);
+$create_table[]	= array('category',			$table_category);
+$create_table[]	= array('category_page',	$table_category_page);
+$create_table[]	= array('link',				$table_link);
+$create_table[]	= array('log',				$table_log);
+$create_table[]	= array('page',				$table_page);
+$create_table[]	= array('poll',				$table_poll);
+$create_table[]	= array('rating',			$table_rating);
+$create_table[]	= array('referrer',			$table_referrer);
+$create_table[]	= array('revision',			$table_revision);
+$create_table[]	= array('session',			$table_session);
+$create_table[]	= array('tag',				$table_tag);
+$create_table[]	= array('tag_page',			$table_tag_page);
+$create_table[]	= array('upload',			$table_upload);
+$create_table[]	= array('user',				$table_user);
+$create_table[]	= array('user_setting',		$table_user_setting);
+$create_table[]	= array('watch',			$table_watch);
+
+/* echo '<pre>';
+ print_r($create_table);
+echo '</pre>'; */
+
+// insert_records
+// 		$value[0] - table name
+// 		$value[1] - SQL query
+// 		$value[2] - record
+$insert_records[]	= array($lang['InstallingSystemAccount'],	$insert_system,					'system account');
+$insert_records[]	= array($lang['InstallingAdmin'],			$insert_admin,					'admin user');
+$insert_records[]	= array($lang['InstallingAdminSetting'],	$insert_admin_setting,			'admin user settings');
+$insert_records[]	= array($lang['InstallingAdminGroup'],		$insert_admin_group,			'admin group');
+$insert_records[]	= array($lang['InstallingAdminGroupMember'],$insert_admin_group_member,		'admin group member');
+$insert_records[]	= array($lang['InstallingEverybodyGroup'],	$insert_everybody_group,		'everybody group');
+$insert_records[]	= array($lang['InstallingRegisteredGroup'],	$insert_registered_group,		'registered group');
+$insert_records[]	= array($lang['InstallingModeratorGroup'],	$insert_moderator_group,		'moderator group');
+$insert_records[]	= array($lang['InstallingReviewerGroup'],	$insert_reviewer_group,			'reviewer group');
+
+// UPGRADE
+// 5.0.0
+// $update_tables
+// 		$value[0] - message
+// 		$value[1] - table name
+// 		$value[2] - SQL query
+// 		$value[3] - error message
+$upgrade_5_0_0[]	= array($lang['UpdateTable'], 'page', $update_page_r5_0_1, $lang['ErrorUpdatingTable']);
+$upgrade_5_0_0[]	= array($lang['UpdateTable'], 'page', $update_page_r5_0_2, $lang['ErrorUpdatingTable']);
+
+// 5.1.0
+// cache
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'cache', $alter_cache_r5_1_0, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'cache', $alter_cache_r5_1_1, $lang['ErrorAlteringTable']);
+
+// link
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'link', $alter_link_r5_1_0, $lang['ErrorAlteringTable']);
+
+// page
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'page', $alter_page_r5_1_0, $lang['ErrorAlteringTable']);
+
+$upgrade_5_1_0[]	= array($lang['UpdateTable'], 'page', $update_page_r5_1_0, $lang['ErrorUpdatingTable']);
+
+// revision
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'revision', $alter_revision_r5_1_0, $lang['ErrorAlteringTable']);
+
+// upload
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_0, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_1, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_2, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_3, $lang['ErrorAlteringTable']);
+
+// 5.4.0
+// category
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_0,		$lang['ErrorAlteringTable']);
+// revision
+$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']);
+// session
+$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'session',		$table_session_r5_4_0,		$lang['ErrorCreatingTable']);
+// user
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
+// usergroup
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
+
 
 //TODO: if (preg_match('/5\.0\.\d+/i', $version) || $continue == true)
 switch($config['database_driver'])
 {
 	case 'mysqli_legacy':
-		require_once('setup/database_mysql.php');
-		require_once('setup/database_mysql_updates.php');
 
-		// add install array for all e.g. mysqli, mysql_pdo, etc.
-
-
-		// delete_tables
-		$delete_table[]	= array('acl',				$table_acl_drop);
-		$delete_table[]	= array('menu',				$table_menu_drop);
-		$delete_table[]	= array('cache',			$table_cache_drop);
-		$delete_table[]	= array('config',			$table_config_drop);
-		$delete_table[]	= array('usergroup',		$table_usergroup_drop);
-		$delete_table[]	= array('usergroup_member',	$table_usergroup_member_drop);
-		$delete_table[]	= array('category',			$table_category_drop);
-		$delete_table[]	= array('category_page',	$table_category_page_drop);
-		$delete_table[]	= array('link',				$table_link_drop);
-		$delete_table[]	= array('log',				$table_log_drop);
-		$delete_table[]	= array('page',				$table_page_drop);
-		$delete_table[]	= array('poll',				$table_poll_drop);
-		$delete_table[]	= array('rating',			$table_rating_drop);
-		$delete_table[]	= array('referrer',			$table_referrer_drop);
-		$delete_table[]	= array('revision',			$table_revision_drop);
-		$delete_table[]	= array('session',			$table_session_drop);
-		$delete_table[]	= array('tag',				$table_tag_drop);
-		$delete_table[]	= array('tag_page',			$table_tag_page_drop);
-		$delete_table[]	= array('upload',			$table_upload_drop);
-		$delete_table[]	= array('user',				$table_user_drop);
-		$delete_table[]	= array('user_setting',		$table_user_setting_drop);
-		$delete_table[]	= array('watch',			$table_watch_drop);
-
-		// create tables
-		$create_table[]	= array('acl',				$table_acl);
-		$create_table[]	= array('menu',				$table_menu);
-		$create_table[]	= array('cache',			$table_cache);
-		$create_table[]	= array('config',			$table_config);
-		$create_table[]	= array('usergroup',		$table_usergroup);
-		$create_table[]	= array('usergroup_member',	$table_usergroup_member);
-		$create_table[]	= array('category',			$table_category);
-		$create_table[]	= array('category_page',	$table_category_page);
-		$create_table[]	= array('link',				$table_link);
-		$create_table[]	= array('log',				$table_log);
-		$create_table[]	= array('page',				$table_page);
-		$create_table[]	= array('poll',				$table_poll);
-		$create_table[]	= array('rating',			$table_rating);
-		$create_table[]	= array('referrer',			$table_referrer);
-		$create_table[]	= array('revision',			$table_revision);
-		$create_table[]	= array('session',			$table_session);
-		$create_table[]	= array('tag',				$table_tag);
-		$create_table[]	= array('tag_page',			$table_tag_page);
-		$create_table[]	= array('upload',			$table_upload);
-		$create_table[]	= array('user',				$table_user);
-		$create_table[]	= array('user_setting',		$table_user_setting);
-		$create_table[]	= array('watch',			$table_watch);
-
-		/* echo '<pre>';
-		print_r($create_table);
-		echo '</pre>'; */
-
-		// insert_records
-		$insert_records[]	= array($lang['InstallingSystemAccount'],	$insert_system,					'system account');
-		$insert_records[]	= array($lang['InstallingAdmin'],			$insert_admin,					'admin user');
-		$insert_records[]	= array($lang['InstallingAdminSetting'],	$insert_admin_setting,			'admin user settings');
-		$insert_records[]	= array($lang['InstallingAdminGroup'],		$insert_admin_group,			'admin group');
-		$insert_records[]	= array($lang['InstallingAdminGroupMember'],$insert_admin_group_member,		'admin group member');
-		$insert_records[]	= array($lang['InstallingEverybodyGroup'],	$insert_everybody_group,		'everybody group');
-		$insert_records[]	= array($lang['InstallingRegisteredGroup'],	$insert_registered_group,		'registered group');
-		$insert_records[]	= array($lang['InstallingModeratorGroup'],	$insert_moderator_group,		'moderator group');
-		$insert_records[]	= array($lang['InstallingReviewerGroup'],	$insert_reviewer_group,			'reviewer group');
-
-		// $update_tables
-		$update_tables[]	= array('CreatingTable', 'acl', 'table_acl', 'ErrorCreatingTable');
-
-
-		if ( !isset ( $config['database_port'] ) ) $config['database_port'] = '3306';
-		if (!$port = trim($config['database_port'])) $port = '3306';
+		if ( !isset ( $config['database_port'] ) )		$config['database_port']	= '3306';
+		if (!$port = trim($config['database_port']))	$port						= '3306';
 
 		echo "         <ul>\n";
 
@@ -456,9 +512,6 @@ switch($config['database_driver'])
 
 				foreach ($delete_table as $param => $value)
 				{
-					// $value[0] - table name
-					// $value[1] - SQL query
-
 					test(str_replace('%1', $value[0], $lang['DeletingTable']), @mysqli_query($dblink, $value[1]), str_replace('%1', $value[0], $lang['ErrorDeletingTable']));
 
 					/* echo '<pre>';
@@ -482,18 +535,11 @@ switch($config['database_driver'])
 
 					foreach ($create_table as $param => $value)
 					{
-						// $value[0] - table name
-						// $value[1] - SQL query
-
 						test(str_replace('%1', $value[0], $lang['CreatingTable']), @mysqli_query($dblink, $value[1]), str_replace('%1', $value[0], $lang['ErrorCreatingTable']));
 					}
 
 					foreach ($insert_records as $param => $value)
 					{
-						// $value[0] - table name
-						// $value[1] - SQL query
-						// $value[2] - record
-
 						test($value[0], @mysqli_query($dblink, $value[1]), str_replace('%1', $value[2], $lang['ErrorAlreadyExists']));
 					}
 
@@ -521,8 +567,10 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_0_1), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_0_2), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+					foreach ($upgrade_5_0_0 as $param => $value)
+					{
+						test(str_replace('%1', $value[1], $value[0]), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $value[3]));
+					}
 
 					echo "            </ol>\n";
 
@@ -531,26 +579,10 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					// cache
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r5_1_0), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r5_1_1), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-
-					// link
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r5_1_0), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-
-					// page
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r5_1_0), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_1_0), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// revision
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r5_1_0), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					// upload
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_0), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_1), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r5_1_3), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					foreach ($upgrade_5_1_0 as $param => $value)
+					{
+						test(str_replace('%1', $value[1], $value[0]), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $value[3]));
+					}
 
 					echo "            </ol>\n";
 
@@ -559,33 +591,22 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.4.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					// category
-					test(str_replace('%1', 'category', $lang['AlterTable']), @mysqli_query($dblink, $alter_category_r5_4_0), str_replace('%1', 'category', $lang['ErrorAlteringTable']));
+					foreach ($upgrade_5_4_0 as $param => $value)
+					{
+						test(str_replace('%1', $value[1], $value[0]), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $value[3]));
+					}
 
-					// revision
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r5_4_0), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
+				// inserting config values
+				test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
-					// session
-					test(str_replace('%1', 'session', $lang['CreatingTable']), @mysqli_query($dblink, $table_session_r5_4_0), str_replace('%1', 'session', $lang['ErrorCreatingTable']));
-
-					// user
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r5_4_0), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-
-					// usergroup
-					test(str_replace('%1', 'usergroup', $lang['AlterTable']), @mysqli_query($dblink, $alter_usergroup_r5_4_0), str_replace('%1', 'usergroup', $lang['ErrorAlteringTable']));
-
-
-					// inserting config values
-					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-					echo "         <br />\n";
-					echo "         <h2>".$lang['InstallingDefaultData']."</h2>\n";
-					echo "         <ul>\n";
-					echo "            <li>".$lang['InstallingPagesBegin'];
-					require_once('setup/inserts.php');
-					echo "</li>\n";
-					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
+				echo "            </ol>\n";
+				echo "         <br />\n";
+				echo "         <h2>".$lang['InstallingDefaultData']."</h2>\n";
+				echo "         <ul>\n";
+				echo "            <li>".$lang['InstallingPagesBegin'];
+				require_once('setup/inserts.php');
+				echo "</li>\n";
+				echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
 			}
 
 			echo "         </ul>\n";
@@ -602,8 +623,6 @@ switch($config['database_driver'])
 				break;
 			case 'sqlite2': */
 			case 'mysql_pdo':
-				require_once('setup/database_mysql.php');
-				require_once('setup/database_mysql_updates.php'); // mysql only
 
 				if ($config['database_driver'] == 'mysql_pdo')
 				{
@@ -613,7 +632,6 @@ switch($config['database_driver'])
 				$dsn = "mysql:host=".$config['database_host'].($config['database_port'] != '' ? ";port=".$config['database_port'] : '').";dbname=".$config['database_database'].($config['database_charset'] != '' ? ";charset=".$config['database_charset'] : '');
 				break;
 			/* case 'pgsql':
-				require_once('setup/database_pgsql.php');
 				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 				break; */
 		}
@@ -634,9 +652,6 @@ switch($config['database_driver'])
 
 				foreach ($delete_table as $value)
 				{
-					// $value[0] - table name
-					// $value[1] - SQL query
-
 					test_pdo(str_replace('%1', $value[0], $lang['DeletingTable']), $value[1], str_replace('%1', $value[0], $lang['ErrorDeletingTable']));
 				}
 
@@ -656,18 +671,11 @@ switch($config['database_driver'])
 
 					foreach ($create_table as $value)
 					{
-						// $value[0] - table name
-						// $value[1] - SQL query
-
 						test_pdo(str_replace('%1', $value[0], $lang['CreatingTable']), $value[1], str_replace('%1', $value[0], $lang['ErrorCreatingTable']));
 					}
 
 					foreach ($insert_records as $param => $value)
 					{
-						// $value[0] - table name
-						// $value[1] - SQL query
-						// $value[2] - record
-
 						test_pdo($value[0], $value[1], str_replace('%1', $value[2], $lang['ErrorAlreadyExists']));
 					}
 
@@ -691,14 +699,15 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-
 				// upgrade from R5.0.0 to R5.1.x
 				case '5.0.0':
 					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_0_1, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_0_2, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+					foreach ($upgrade_5_0_0 as $param => $value)
+					{
+						test_pdo(str_replace('%1', $value[1], $value[0]), $value[2], str_replace('%1', $value[1], $value[3]));
+					}
 
 					echo "            </ol>\n";
 
@@ -707,26 +716,10 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					// cache
-					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r5_1_0, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r5_1_1, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-
-					// link
-					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r5_1_0, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-
-					// page
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r5_1_0, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_1_0, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// revision
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r5_1_0, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					// upload
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_0, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_1, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_2, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_3, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					foreach ($upgrade_5_1_0 as $param => $value)
+					{
+						test_pdo(str_replace('%1', $value[1], $value[0]), $value[2], str_replace('%1', $value[1], $value[3]));
+					}
 
 					echo "            </ol>\n";
 
@@ -735,33 +728,22 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.4.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					// category
-					test_pdo(str_replace('%1', 'category', $lang['AlterTable']), $alter_category_r5_4_0, str_replace('%1', 'category', $lang['ErrorAlteringTable']));
+					foreach ($upgrade_5_4_0 as $param => $value)
+					{
+						test_pdo(str_replace('%1', $value[1], $value[0]), $value[2], str_replace('%1', $value[1], $value[3]));
+					}
 
-					// revision
-					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r5_4_0, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
+				// inserting config values
+				test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
-					// session
-					test_pdo(str_replace('%1', 'session', $lang['CreatingTable']), $table_session_r5_4_0, str_replace('%1', 'session', $lang['ErrorCreatingTable']));
-
-					// user
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r5_4_0, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-
-					// usergroup
-					test_pdo(str_replace('%1', 'usergroup', $lang['AlterTable']), $alter_usergroup_r5_4_0, str_replace('%1', 'usergroup', $lang['ErrorAlteringTable']));
-
-
-					// inserting config values
-					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-					echo "         <br />\n";
-					echo "         <h2>".$lang['InstallingDefaultData']."</h2>\n";
-					echo "         <ul>\n";
-					echo "            <li>".$lang['InstallingPagesBegin'];
-					require_once('setup/inserts.php');
-					echo "</li>\n";
-					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
+				echo "            </ol>\n";
+				echo "         <br />\n";
+				echo "         <h2>".$lang['InstallingDefaultData']."</h2>\n";
+				echo "         <ul>\n";
+				echo "            <li>".$lang['InstallingPagesBegin'];
+				require_once('setup/inserts.php');
+				echo "</li>\n";
+				echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
 			}
 
 			echo "         </ul>\n";
