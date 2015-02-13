@@ -97,7 +97,7 @@ class Cache
 		// Remove extra spaces and tabs
 		$query		= preg_replace('/[\n\r\s\t]+/', ' ', $query);
 
-		return $this->cache_dir.CACHE_SQL_DIR.hash('md5', $query);
+		return $this->cache_dir.CACHE_SQL_DIR.hash('sha1', $query);
 	}
 
 	// Get page content from cache
@@ -143,9 +143,9 @@ class Cache
 		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', rawurldecode($page)))));
 
 		$this->log('construct_id page='.$page);
-		$this->log('construct_id md5='.hash('md5', $page.'_'.$method.'_'.$query));
+		$this->log('construct_id sha1='.hash('sha1', $page.'_'.$method.'_'.$query));
 
-		$file_name = $this->cache_dir.CACHE_PAGE_DIR.hash('md5', $page.'_'.$method.'_'.$query);
+		$file_name = $this->cache_dir.CACHE_PAGE_DIR.hash('sha1', $page.'_'.$method.'_'.$query);
 
 		return $file_name;
 	}
@@ -193,7 +193,7 @@ class Cache
 		{
 			$this->wacko->sql_query(
 				"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
-				"name	='".quote($this->wacko->dblink, hash('md5', $page))."', ".
+				"name	='".quote($this->wacko->dblink, hash('sha1', $page))."', ".
 				"method	='".quote($this->wacko->dblink, $method)."', ".
 				"query	='".quote($this->wacko->dblink, $query)."'");
 				// TIMESTAMP type is filled automatically by MySQL
@@ -212,7 +212,7 @@ class Cache
 			$page	= strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
 			$sql	= "SELECT method, query ".
 						"FROM ".$this->wacko->config['table_prefix']."cache ".
-						"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'";
+						"WHERE name ='".quote($this->wacko->dblink, hash('sha1', $page))."'";
 			$params	= $this->wacko->load_all($sql);
 
 			$this->log('invalidate_page_cache page='.$page);
@@ -233,7 +233,7 @@ class Cache
 
 			$this->wacko->sql_query(
 				"DELETE FROM ".$this->wacko->config['table_prefix']."cache ".
-				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
+				"WHERE name ='".quote($this->wacko->dblink, hash('sha1', $page))."'");
 
 			$this->log('invalidate_page_cache end');
 

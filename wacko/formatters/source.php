@@ -69,7 +69,7 @@ else
 	}
 }
 
-$div_id = "document_source_".hash('md5', $options['source']);
+$div_id = "document_source_".hash('sha1', $options['source']);
 echo "<!--no"."typo-->";
 
 // copy to clipboard is implemented only for MSIE for now

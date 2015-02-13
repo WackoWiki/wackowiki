@@ -2446,7 +2446,7 @@ class Wacko
 	function href($method = '', $tag = '', $params = '', $addpage = 0, $anchor = '')
 	{
 		$_rewrite_mode = '';
-		
+
 		if (isset($this->config['ap_mode']) && $this->config['ap_mode'] === true)
 		{
 			// enable rewrite_mode to avoid href() appends '?page='
@@ -2456,7 +2456,7 @@ class Wacko
 		{
 			$_rewrite_mode = $this->config['rewrite_mode'];
 		}
-		
+
 		$href = $this->config['base_url'].( $_rewrite_mode ? '' : '?page=' ).$this->mini_href($method, $tag, $addpage);
 
 		if ($addpage)
@@ -3949,8 +3949,8 @@ class Wacko
 		static $dss_seeded = false;
 
 		$val = $this->config['rand_seed'] . microtime();
-		$val = hash('md5', $val);
-		$this->config['rand_seed'] = hash('md5', $this->config['rand_seed'] . $val . $extra);
+		$val = hash('sha1', $val);
+		$this->config['rand_seed'] = hash('sha1', $this->config['rand_seed'] . $val . $extra);
 
 		if ($dss_seeded !== true && ($this->config['rand_seed_last_update'] < time() - rand(1,10)))
 		{
@@ -3971,7 +3971,7 @@ class Wacko
 
 		//  generate a string to use as the identifier for the login cookie
 		$login_token			= $this->unique_id(); // TODO:
-		$this->cookie_token		= hash('md5', $login_token);
+		$this->cookie_token		= hash('sha1', $login_token);
 
 		$this->time_now			= date('Y-m-d H:i:s');
 
@@ -5252,7 +5252,7 @@ class Wacko
 
 		// parse authentication cookie and get user data
 		$auth = $this->decompose_auth_cookie();
-		$user = $this->load_user(false, 0, $auth['password'], true, hash('md5', $auth['login_token']) );
+		$user = $this->load_user(false, 0, $auth['password'], true, hash('sha1', $auth['login_token']) );
 
 		// run in tls mode?
 		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
