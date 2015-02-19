@@ -168,8 +168,8 @@ if ($config['is_update'] == false)
  */
 
 $engines	= array();
-$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM');
 $engines[]	= array('mysql_innodb', 'InnoDB', 'InnoDB ('.$lang['Recommended'].')');
+$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM');
 
 $detected = 0;
 
