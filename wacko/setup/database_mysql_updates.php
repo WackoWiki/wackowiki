@@ -48,7 +48,7 @@ $update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, (SELECT page_id, lang FR
 
 // SESSION
 $table_session_r5_4_0 = "CREATE TABLE {$pref}session (".
-							"cookie_token CHAR(32) COLLATE utf8_bin NOT NULL DEFAULT '',".
+							"cookie_token CHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
 							"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 							"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 							"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
