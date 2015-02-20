@@ -4051,7 +4051,7 @@ class Wacko
 					"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
 					#"session_autologin		= ($session_autologin) ? 1 : 0, ".
 					#"session_admin			= ($set_admin) ? 1 : 0 ".
-					"WHERE user_id		= '".$user['user_id']."' ".
+					"WHERE user_id			= '".$user['user_id']."' ".
 					"LIMIT 1");
 		}
 
@@ -5236,6 +5236,7 @@ class Wacko
 		$url	= explode('@@', $tag);
 		$tag	= trim($url[0]);
 		$lang	= (isset($url[1]) ? trim($url[1]) : null);
+		$user	= '';
 
 		if (!trim($tag))
 		{
@@ -5252,7 +5253,12 @@ class Wacko
 
 		// parse authentication cookie and get user data
 		$auth = $this->decompose_auth_cookie();
-		$user = $this->load_user(false, 0, $auth['password'], true, hash('sha1', $auth['login_token']) );
+
+		if ($auth['login_token'])
+		{
+			$login_token	= hash('sha1', $auth['login_token']);
+			$user			= $this->load_user(false, 0, $auth['password'], true, $login_token );
+		}
 
 		// run in tls mode?
 		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
