@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['categories'] = array(
-		'order'	=> 4,
+		'order'	=> 3,
 		'cat'	=> 'Content',
 		'mode'	=> 'categories',
 		'name'	=> 'Categories',

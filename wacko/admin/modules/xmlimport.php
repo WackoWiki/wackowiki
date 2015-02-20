@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['xmlimport'] = array(
-		'order'	=> 4,
+		'order'	=> 3,
 		'cat'	=> 'Content',
 		'mode'	=> 'xmlimport',
 		'name'	=> 'Import XML',

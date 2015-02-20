@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['menu'] = array(
-		'order'	=> 4,
+		'order'	=> 3,
 		'cat'	=> 'Content',
 		'mode'	=> 'menu',
 		'name'	=> 'Menu',

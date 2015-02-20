@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['tags'] = array(
-		'order'	=> 4,
+		'order'	=> 3,
 		'cat'	=> 'Content',
 		'mode'	=> 'tags',
 		'name'	=> 'Tags',

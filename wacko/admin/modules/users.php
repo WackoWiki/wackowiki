@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['users'] = array(
-		'order'	=> 5,
+		'order'	=> 4,
 		'cat'	=> 'Users',
 		'mode'	=> 'users',
 		'name'	=> 'Users',

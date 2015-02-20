@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['files'] = array(
-		'order'	=> 4,
+		'order'	=> 3,
 		'cat'	=> 'Content',
 		'mode'	=> 'files',
 		'name'	=> 'Files',

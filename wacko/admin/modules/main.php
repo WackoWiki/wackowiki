@@ -51,7 +51,7 @@ function admin_lock(&$engine, &$module)
 		}
 
 		closedir($handle);
-		$engine->sql_query("TRUNCATE FROM {$engine->config['table_prefix']}cache");
+		$engine->sql_query("TRUNCATE {$engine->config['table_prefix']}cache");
 
 		// queries
 		$engine->cache->invalidate_sql_cache();
@@ -76,7 +76,7 @@ function admin_lock(&$engine, &$module)
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
 	{
-		$sql = "TRUNCATE FROM {$engine->config['table_prefix']}session";
+		$sql = "TRUNCATE {$engine->config['table_prefix']}session";
 		$engine->sql_query($sql);
 
 		// queries

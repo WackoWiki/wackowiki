@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['groups'] = array(
-		'order'	=> 5,
+		'order'	=> 4,
 		'cat'	=> 'Users',
 		'mode'	=> 'groups',
 		'name'	=> 'Groups',
