@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['inconsistencies'] = array(
-		'order'	=> 10,
+		'order'	=> 5,
 		'cat'	=> 'Database',
 		'mode'	=> 'inconsistencies',
 		'name'	=> 'Data Inconsistencies',

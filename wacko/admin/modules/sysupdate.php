@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['sysupdate'] = array(
-		'order'	=> 10,
+		'order'	=> 5,
 		'cat'	=> 'Database',
 		'mode'	=> 'sysupdate',
 		'name'	=> 'Update',

@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['resync'] = array(
-		'order'	=> 10,
+		'order'	=> 5,
 		'cat'	=> 'Database',
 		'mode'	=> 'resync',
 		'name'	=> 'Data Synchronization',

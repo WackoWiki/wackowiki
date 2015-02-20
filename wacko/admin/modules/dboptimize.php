@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['dboptimize'] = array(
-		'order'	=> 10,
+		'order'	=> 5,
 		'cat'	=> 'Database',
 		'mode'	=> 'dboptimize',
 		'name'	=> 'Optimization',
