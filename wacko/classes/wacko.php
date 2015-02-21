@@ -1206,7 +1206,11 @@ class Wacko
 			}
 		}
 
-		$pages[]	= $this->config['users_page'].'/'.$user['user_name'];
+		if(isset($user['user_name']))
+		{
+			$pages[]	= $this->config['users_page'].'/'.$user['user_name'];
+		}
+
 		$pages[]	= $this->config['users_page'];
 		$pages[]	= $this->tag;
 

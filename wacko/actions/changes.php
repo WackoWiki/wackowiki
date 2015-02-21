@@ -5,12 +5,13 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($root)) $root = $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
-if (!isset($root)) $root = $this->page['tag'];
-if (!isset($date)) $date = isset($_GET['date']) ? $_GET['date'] : '';
+if (!isset($root))		$root = $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
+if (!isset($root))		$root = $this->page['tag'];
+if (!isset($date))		$date = isset($_GET['date']) ? $_GET['date'] : '';
 if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] : '';
-if (!isset($noxml)) $noxml = 0;
+if (!isset($noxml))		$noxml = 0;
 if (!isset($title))		$title = '';
+$viewed = '';
 
 if ($user = $this->get_user())
 {
@@ -128,6 +129,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 				$edit_note = '';
 			}
 
+			if(isset($user['last_mark']))
 			$viewed = ($user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '');
 
 			// print entry
