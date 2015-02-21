@@ -81,6 +81,7 @@ if ($engine->config['tls'] == true)
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$engine->delete_cookie('admin', true, true);
+	$engine->set_user($_user, 0);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
 	$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
 	exit;
@@ -182,14 +183,16 @@ if (isset($_POST['password']))
 }
 
 // check authorization
-$user = '';
+$user			= '';
+$authorization	= '';
 
 if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == hash('sha256', $_processed_password.$engine->config['base_url']))
 {
-	$user = array('user_name' => $engine->config['admin_name']);
+	#$user = array('user_name' => $engine->config['admin_name']);
+	$authorization = true;
 }
 
-if ($user == false)
+if ($authorization == false)
 {
 	header('Content-Type: text/html; charset='.$engine->get_charset());
 ?>
@@ -241,8 +244,8 @@ unset($_processed_password);
 
 // setting temporary admin user context
 global $_user;
-$_user = $engine->get_user();
-$engine->set_user($user, 0);
+#$_user = $engine->get_user();
+#$engine->set_user($user, 0);
 
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 900)) //1800
 {
@@ -265,7 +268,7 @@ if (!isset($_SESSION['created']))
 else if (time() - $_SESSION['created'] > 1800)
 {
 	// session started more than 30 minates ago
-	$engine->restart_user_session(); // TODO: we need extra user session here, hence we need a session table
+	$engine->restart_user_session($user, $session_time); // TODO: we need extra user session here, hence we need a session table
 	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
 	$_SESSION['created'] = time();  // update creation time
 }
@@ -449,6 +452,6 @@ $init->debug();
 ########################################################
 
 // getting out of temp context
-$engine->set_user($_user, 0);
+#$engine->set_user($_user, 0);
 
 ?>
