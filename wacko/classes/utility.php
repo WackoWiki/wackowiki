@@ -13,7 +13,7 @@ class Utility
 		$this->wacko = &$wacko;
 	}
 
-	function untag($xml, $tag)
+	static function untag($xml, $tag)
 	{
 		$z = strpos ($xml, "<$tag>");
 
