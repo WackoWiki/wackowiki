@@ -628,7 +628,7 @@ class Wacko
 
 		$this->load_translation($lang);
 
-		if (is_array($this->languages[$lang]['unicode_entities']))
+		if (isset($this->languages[$lang]['unicode_entities']) && is_array($this->languages[$lang]['unicode_entities']))
 		{
 			return @strtr($string, $this->languages[$lang]['unicode_entities']);
 		}

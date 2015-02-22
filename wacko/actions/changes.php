@@ -130,7 +130,9 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			}
 
 			if(isset($user['last_mark']))
-			$viewed = ($user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '');
+			{
+				$viewed = ($user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '');
+			}
 
 			// print entry
 			echo "<li class=\"lined".$viewed."\"><span class=\"dt\">".

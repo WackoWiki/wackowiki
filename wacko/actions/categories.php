@@ -10,9 +10,9 @@ if (!defined('IN_WACKO'))
 // path -
 
 $path = $this->config['category_page'];
-if (!isset($list)) $list = 0;
-if (!isset($path)) $path = 'Category';
-if (!isset($nomark)) $nomark = '';
+if (!isset($list))		$list = 0;
+if (!isset($path))		$path = 'Category';
+if (!isset($nomark))	$nomark = '';
 
 $output	= '';
 $i		= '';
@@ -46,7 +46,11 @@ if (isset($this->categories))
 		}
 		else
 		{
-			if ($i++ > 0) $output .= ', ';
+			if ($i++ > 0)
+			{
+				$output .= ', ';
+			}
+
 			$output .= $_category;
 		}
 	}
