@@ -519,3 +519,7 @@ div#loginbox {
 	padding: 30px;
 	border: 1px dotted #CCCCCC;
 }
+
+.tickcross {
+	vertical-align: middle;
+}
