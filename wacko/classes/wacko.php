@@ -1905,39 +1905,43 @@ class Wacko
 					if (is_array($this->config['aliases']))
 					{
 						$list		= $this->config['aliases'];
-						$moderators	= explode("\n", $list['Moderator']);
 
-						if (!$mute) foreach ($moderators as $moderator)
+						if (isset($list['Moderator']))
 						{
-							if ($user_name != $moderator)
+							$moderators	= explode("\n", $list['Moderator']);
+
+							if (!$mute) foreach ($moderators as $moderator)
 							{
-								$moderator_id = $this->get_user_id($moderator);
-
-								$_user = $this->load_single(
-									"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
-									"FROM " .$this->config['user_table']." u ".
-										"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-									"WHERE u.user_id = '".$moderator_id."' ".
-									"LIMIT 1");
-
-								if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+								if ($user_name != $moderator)
 								{
-									$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
-									$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moderator.".\n\n".
-											str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
-											"'$title'\n".
-											$this->href('', $tag)."\n\n".
-											$this->get_translation('EmailGoodbye')."\n".
-											$this->config['site_name']."\n".
-											$this->config['base_url'];
+									$moderator_id = $this->get_user_id($moderator);
 
-									$this->send_mail($_user['email'], $subject, $body);
-									$this->set_watch($moderator_id, $page_id);
+									$_user = $this->load_single(
+										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
+										"FROM " .$this->config['user_table']." u ".
+											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+										"WHERE u.user_id = '".$moderator_id."' ".
+										"LIMIT 1");
+
+									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+									{
+										$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
+										$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moderator.".\n\n".
+												str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
+												"'$title'\n".
+												$this->href('', $tag)."\n\n".
+												$this->get_translation('EmailGoodbye')."\n".
+												$this->config['site_name']."\n".
+												$this->config['base_url'];
+
+										$this->send_mail($_user['email'], $subject, $body);
+										$this->set_watch($moderator_id, $page_id);
+									}
 								}
 							}
-						}
 
-						unset($list, $moderators, $moderator, $moderator_id);
+							unset($list, $moderators, $moderator, $moderator_id);
+						}
 					}
 				}
 
