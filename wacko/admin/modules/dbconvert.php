@@ -99,12 +99,12 @@ function admin_dbconvert(&$engine, &$module)
 		// https://dev.mysql.com/doc/refman/5.6/en/engines-table.html
 		// https://dev.mysql.com/doc/refman/5.6/en/information-schema.html
 		// If InnoDB is available, but not the default engine, the result will be YES. If it's not available, the result will obviously be NO.
-		$_InnoDB_support = "SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE = 'InnoDB'";
-		$InnoDB_support = $engine->load_all($_InnoDB_support);
+		$_InnoDB_support	= "SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE = 'InnoDB'";
+		$InnoDB_support		= $engine->load_all($_InnoDB_support);
 
-		$_mysql_version =$engine->load_all("SELECT version()");
-		$mysql_version = $_mysql_version[0]['version()'];
-		$mysql_version = preg_replace('#[^0-9\.]#', '', $mysql_version);
+		$_mysql_version		= $engine->load_all("SELECT version()");
+		$mysql_version		= $_mysql_version[0]['version()'];
+		$mysql_version		= preg_replace('#[^0-9\.]#', '', $mysql_version);
 
 		// Draws a tick or cross next to a result
 		function output_image($ok)
@@ -125,10 +125,6 @@ function admin_dbconvert(&$engine, &$module)
 			echo output_image(false).'<strong class="red">Requires at least MySQL 5.6.4, available version: </strong> ' . $mysql_version . "<br />\n";
 		}
 
-/* 		echo '<pre>';
-		print_r($results);
-		echo '</pre>'; */
-
 		if ($InnoDB_support[0]['SUPPORT'] == 'YES' || 'DEFAULT')
 		{
 			$required_engine = true;
@@ -142,10 +138,11 @@ function admin_dbconvert(&$engine, &$module)
 
 		if ($required_mysql_version === true && $required_engine = true)
 		{
-			$results = $engine->load_all("SELECT TABLE_NAME, ENGINE FROM INFORMATION_SCHEMA.TABLES
-											WHERE TABLE_SCHEMA = '{$engine->config['database_database']}'
-											AND ENGINE = 'MyISAM'
-											");
+			$results = $engine->load_all(
+				"SELECT TABLE_NAME, ENGINE FROM INFORMATION_SCHEMA.TABLES
+				WHERE TABLE_SCHEMA = '{$engine->config['database_database']}'
+				AND ENGINE = 'MyISAM'
+				");
 
 			echo '<br />';
 

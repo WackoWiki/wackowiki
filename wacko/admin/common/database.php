@@ -138,9 +138,9 @@ if (isset($tables, $directories) !== true)
 
 	// define files dirs
 	$directories = array(
-			$engine->config['cache_dir'].CACHE_FEED_DIR,
-			$engine->config['cache_dir'].CACHE_PAGE_DIR,
-			$engine->config['cache_dir'].CACHE_SQL_DIR,
+			#$engine->config['cache_dir'].CACHE_FEED_DIR,
+			#$engine->config['cache_dir'].CACHE_PAGE_DIR,
+			#$engine->config['cache_dir'].CACHE_SQL_DIR,
 			$engine->config['upload_path'],
 			$engine->config['upload_path_per_page']
 		);
