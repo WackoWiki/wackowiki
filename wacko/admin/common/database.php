@@ -442,7 +442,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		unlink($filename);
 	}
 
-	// open file with writa access
+	// open file with write access
 	$file = gzopen($filename, 'ab'.BACKUP_COMPRESSION_RATE);
 
 	// read table data until it's exhausted
