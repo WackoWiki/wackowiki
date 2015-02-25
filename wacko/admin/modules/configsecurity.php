@@ -144,7 +144,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="notify_new_user_account"><strong>Notify new user account:</strong><br />
 					<small>The Admin will to be notified when a new user has been created using the "signup form".</small></label></td>
-				<td><input type="checkbox" id="notify_new_user_account" name="allow_email_reuse" value="1"<?php echo ( $engine->config['notify_new_user_account'] ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="notify_new_user_account" name="notify_new_user_account" value="1"<?php echo ( $engine->config['notify_new_user_account'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
