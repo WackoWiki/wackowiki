@@ -537,7 +537,7 @@ $wacko_translation = array(
 	'EmailNotConfirmed'			=> 'Adresse de messagerie non confirmée. Ceci peut être dû à un code de confirmation erroné, mais cette adresse peut aussi avoir été déjà confirmée. Identifiez-vous et vérifiez-le sur votre page %1.',
 	'EmailNotVerified'			=> 'Adresse courriel non vérifiée!',
 	'EmailNotVerifiedDesc'		=> 'Vous ne serez pas informé des modifications ou commentaires sur les pages que vous surveillez, des'.
-									'messages des autres utilisateurs et <u>ne pourrez pas récupérer un mot des passe oublié</u>, jusqu&rsquo;à'.
+									'messages des autres utilisateurs et <span class="underline">ne pourrez pas récupérer un mot des passe oublié</span>, jusqu&rsquo;à'.
 									'confirmation de votre adresse de messagerie en suivant le lien contenu dans le courriel qui vous a été envoyé. '.
 									'Si, les jours suivant votre enregistrement vous n&rsquo;avez pas reçu ce courriel, demandez-le en cliquant ',
 
@@ -893,7 +893,7 @@ $wacko_translation = array(
 	'ModerateReset'				=> 'Réinitialiser',
 	'ModerateAccept'			=> 'Accepter',
 	'ModerateDecline'			=> 'Annuler',
-	'ModerateDeleteConfirm'		=> 'Êtes-vous sût(e) de vouloir <u>enlever</ u> les sujets suivants ',
+	'ModerateDeleteConfirm'		=> 'Êtes-vous sût(e) de vouloir <span class="underline">enlever</span> les sujets suivants ',
 	'ModerateRenameConfirm'		=> 'Entrez un nouveau nom pour la page sélectionnée',
 	'ModerateRenameExists'		=> 'Une page de même nom existe déjà ! Choisissez un nouveau nom.',
 	'ModerateRename1Only'		=> 'Note: renommé pour être seulement la première page que vous avez choisie !',
@@ -904,7 +904,7 @@ $wacko_translation = array(
 	'ModerateMoveNotExists'		=> 'Le page / le groupe n&rsquo;existe pas. Vérifiez le nom et réessayez.',
 	'ModerateMergeConfirm'		=> 'Choisissez un sujet, qui devrait combiner le reste',
 	'ModerateMerge2Min'			=> 'Pour fusionner, vous devez choisir au moins deux sujets  !',
-	'ModerateComDelConfirm'		=> 'Êtes-vous sûr(e) de vouloir <u>enlever</u> %1 %2?',
+	'ModerateComDelConfirm'		=> 'Êtes-vous sûr(e) de vouloir <span class="underline">enlever</span> %1 %2?',
 	'ModerateComment'			=> 'Commentaire',
 	'ModerateComments'			=> 'Commentaires',
 	'ModerateSplitNewName'		=> 'Choisissez un nom pour le sujet à détacher et un schéma de séparation',
