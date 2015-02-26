@@ -251,7 +251,7 @@ function admin_dbrestore(&$engine, &$module)
 
 				foreach ($logs as $log)
 				{	// open row
-					echo '<tr>'."\n";
+					echo '<tr class="hl_setting">'."\n";
 
 					// pack
 					echo '<td><table><tr><td class="label" style="width:10px;">'.

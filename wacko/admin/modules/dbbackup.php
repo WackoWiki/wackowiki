@@ -187,7 +187,7 @@ function admin_dbbackup(&$engine, &$module)
 			retained in the backup-directory directory files.<br />To obtain
 			use FTP (not sure if you copy the structure to maintain
 			directories and file names and directories).<br />To restore a backup
-			copy or remove a package, go to <a href="?mode=dbrestore">Restoration</a>.
+			copy or remove a package, go to <a href="?mode=dbrestore">Restore database</a>.
 			</p>';
 
 		$engine->show_message($message);
