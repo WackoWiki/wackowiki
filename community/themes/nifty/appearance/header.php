@@ -149,16 +149,16 @@ if ($doubleclick == true)
 						// TODO: should be taken out of user session
 						foreach ($this->get_user_menu($user['user_id']) as $_bookmark)
 						{
-						$formatted_user_menu = $this->format($_bookmark[1], 'wiki');
+							$formatted_user_menu = $this->format($_bookmark[1], 'wiki');
 
-						if ($this->page['page_id'] == $_bookmark[0])
-						{
-							echo '<li class="active">';
-						}
-						else
-						{
-							echo '<li>';
-						}
+							if ($this->page['page_id'] == $_bookmark[0])
+							{
+								echo '<li class="active">';
+							}
+							else
+							{
+								echo '<li>';
+							}
 
 							echo $formatted_user_menu."</li>\n\t\t\t\t\t";
 						}
