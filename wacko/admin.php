@@ -88,31 +88,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 }
 
 ########################################################
-##     Include admin modules and common functions     ##
-########################################################
-
-$dirs = array(
-	'admin/common',
-	'admin/modules'
-);
-
-foreach ($dirs as $dir)
-{
-	if ($dh = opendir($dir))
-	{
-		while (false !== ($filename = readdir($dh)))
-		{
-			if (is_dir($dir.'/'.$filename) !== true && substr($filename, -4) == '.php')
-			{
-				include($dir.'/'.$filename);
-			}
-		}
-
-		closedir($dh);
-	}
-}
-
-########################################################
 ##           Authorization & preparations             ##
 ########################################################
 
@@ -121,6 +96,7 @@ if ($engine->config['recovery_password'] == false)
 {
 	echo '<strong>'.$engine->get_translation('NoRecoceryPassword').'</strong><br />';
 	echo $engine->get_translation('NoRecoceryPasswordTip');
+
 	die();
 }
 else
@@ -148,6 +124,7 @@ if (isset($_POST['password']))
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
 		$engine->set_session_cookie('admin', hash('sha256', hash('sha256', $engine->config['system_seed'].$_POST['password']).$engine->config['base_url']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
+
 		$_SESSION['created']			= time();
 		$_SESSION['last_activity']		= time();
 		$_SESSION['failed_login_count']	= 0;
@@ -168,7 +145,6 @@ if (isset($_POST['password']))
 		}
 
 		$engine->set_config('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1, '', true);
-
 		$engine->log(1, str_replace('%1', $_POST['password'], $engine->get_translation('LogAdminLoginFailed', $engine->config['language'])));
 
 		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
@@ -177,6 +153,7 @@ if (isset($_POST['password']))
 		{
 			$init->lock('lock_ap');
 			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
+
 			$_SESSION['failed_login_count'] = 0;
 		}
 	}
@@ -185,6 +162,7 @@ if (isset($_POST['password']))
 // check authorization
 $user			= '';
 $authorization	= '';
+$_title			= '';
 
 if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == hash('sha256', $_processed_password.$engine->config['base_url']))
 {
@@ -274,6 +252,88 @@ else if (time() - $_SESSION['created'] > 1800)
 }
 
 ########################################################
+##     Include admin modules and common functions     ##
+########################################################
+
+$dirs = array(
+'admin/common',
+'admin/modules'
+);
+
+foreach ($dirs as $dir)
+{
+	if ($dh = opendir($dir))
+	{
+		while (false !== ($filename = readdir($dh)))
+		{
+			if (is_dir($dir.'/'.$filename) !== true && substr($filename, -4) == '.php')
+			{
+				include($dir.'/'.$filename);
+			}
+		}
+
+		closedir($dh);
+	}
+}
+
+########################################################
+##     Build menue                                    ##
+########################################################
+
+$menue = '<ul><li class="text submenu">'.$module['lock']['cat'].
+			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
+				? "\n<ul>\n<li class=\"active\">"
+				: "\n<ul>\n<li>").
+			'<a href="admin.php">'.$module['lock']['name'].'</a>'.
+			"</li>\n";
+
+$category = $module['lock']['cat'];
+
+uasort($module,
+			create_function(
+			'$a, $b',
+			'if ((array)$a["order"] < (array)$b["order"])
+						return -1;
+					else if ((array)$a["order"] > (array)$b["order"])
+						return 1;
+					else
+						return 0;')
+);
+
+foreach ($module as $row)
+{
+	if ($row['mode'] != 'lock')
+	{
+		$menue .= ($row['cat'] != $category
+					? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
+					: '');
+
+		if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
+		{
+			$menue .= '<li class="active">';
+			$_title = $row['cat'].' &gt; '.$row['name'];
+		}
+		else
+		{
+			$menue .= '<li>';
+		}
+
+		$menue .= '<a href="?mode='.$row['mode'].'" title="'.$row['title'].'">'.$row['name'].'</a>';
+		$menue .= "</li>\n";
+	}
+	else
+	{
+		continue;
+	}
+
+	$category = $row['cat'];
+}
+
+$menue .= '</ul></li></ul>';
+
+unset($category);
+
+########################################################
 ##                     Page header                    ##
 ########################################################
 
@@ -282,7 +342,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>WackoWiki Management System</title>
+<title>WackoWiki Management System <?php echo ': '.$_title; ?></title>
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta http-equiv="Content-Type" content="text/html; "/>
 <link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/atom.css" rel="stylesheet" type="text/css" media="screen" />
@@ -326,53 +386,10 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 ?>
 	<div id="menu" class="menu">
 		<div class="sub">
-			<ul>
-			<li class="text submenu"><?php echo $module['lock']['cat']; ?>
-			<?php echo ( isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
-				? "\n<ul>\n<li class=\"active\">"
-				: "\n<ul>\n<li>" ); ?>
-			<a href="admin.php">
-			<?php echo $module['lock']['name']; ?></a>
-			<?php echo "</li>\n";
-
-			$category = $module['lock']['cat'];
-
-			uasort($module,
-				create_function(
-					'$a, $b',
-					'if ((array)$a["order"] < (array)$b["order"])
-						return -1;
-					else if ((array)$a["order"] > (array)$b["order"])
-						return 1;
-					else
-						return 0;')
-				);
-
-			foreach ($module as $row)
-			{
-				if ($row['mode'] != 'lock')
-				{
-					echo ($row['cat'] != $category
-						? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
-						: '');
-					echo (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode']
-						? '<li class="active">'
-						: "<li>"); ?>
-					<a href="?mode=<?php echo $row['mode']; ?>" title="<?php echo $row['title']; ?>"><?php echo $row['name']; ?></a>
-					<?php echo "</li>\n";
-				}
-				else
-				{
-					continue;
-				}
-
-				$category = $row['cat'];
-			}
-
-			unset($category);
-
+<?php
+			echo $menue;
 ?>
-</ul></li></ul></div>
+		</div>
 	</div>
 <?php
 
