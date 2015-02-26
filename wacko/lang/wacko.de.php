@@ -538,7 +538,7 @@ $wacko_translation = array(
 	'EmailNotConfirmed'			=> 'E-Mail konnte nicht bestätigt werden. Dies könnte an einen falschen Bestätigung-Code liegen oder die E-Mail-Adresse wurde möglicherweise bereits bestätigt. Du kannst prüfen ob die E-Mail bereits bestätigt wurde indem du dich anmeldst und deinen Status auf deiner %1 Seite einsiehst.',
 	'EmailNotVerified'			=> 'E-Mail wurde nicht bestätigt!',
 	'EmailNotVerifiedDesc'		=> 'Du erhälst keine Benachrichtigung über Änderungen oder Kommentare von beobachteten Seiten, '.
-									'Nachrichten von anderen Nutzern, ebenso wirst du nicht in der Lage sein <u> ein vergessenes Passwort wieder herzustellen</u>, '.
+									'Nachrichten von anderen Nutzern, ebenso wirst du nicht in der Lage sein <span class="underline"> ein vergessenes Passwort wieder herzustellen</span>, '.
 									'bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst. '.
 									'Wenn innerhalb weniger Tage nach der Registrierung du keine E-Mail erhalten hast, kannst du sie erneut anfragen, klicke dazu ',
 
@@ -895,7 +895,7 @@ $wacko_translation = array(
 	'ModerateReset'				=> 'Zurücksetzen',
 	'ModerateAccept'			=> 'Bestätigen',
 	'ModerateDecline'			=> 'Abbrechen',
-	'ModerateDeleteConfirm'		=> 'Bist du dir sicher das du folgende Themen <u>löschen</ u> willst?',
+	'ModerateDeleteConfirm'		=> 'Bist du dir sicher das du folgende Themen <span class="underline">löschen</span> willst?',
 	'ModerateRenameConfirm'		=> 'Gib einen neuen Namen für die gewählte Seite an',
 	'ModerateRenameExists'		=> 'Es gibt bereits eine Seite mit dem gleichen Namen! Wähle einen anderen Seiten-Namen.',
 	'ModerateRename1Only'		=> 'Hinweise: renamed to be only the first page you chose!',
@@ -906,7 +906,7 @@ $wacko_translation = array(
 	'ModerateMoveNotExists'		=> 'Diese Seite / Cluster gibt es nicht. Bitte überprüfe den Namen und versuche es erneut.',
 	'ModerateMergeConfirm'		=> 'Wähle ein Thema, unter welchem die bestehenden zusammengeführt werden sollen',
 	'ModerateMerge2Min'			=> 'Zum Zusammenführen musst du mindestens zwei Themen wählen!',
-	'ModerateComDelConfirm'		=> 'Bist du dir sicher das du  %1 %2 <u>löschen</u> willst?',
+	'ModerateComDelConfirm'		=> 'Bist du dir sicher das du  %1 %2 <span class="underline">löschen</span> willst?',
 	'ModerateComment'			=> 'Kommentar',
 	'ModerateComments'			=> 'Kommentare',
 	'ModerateSplitNewName'		=> 'Gib den Namen für das zu trennende Thema an und wähle ein Trennungs-Schema',

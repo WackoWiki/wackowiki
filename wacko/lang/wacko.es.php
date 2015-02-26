@@ -537,7 +537,7 @@ $wacko_translation = array(
 	'EmailNotConfirmed' => 'El Email no se ha podido confirmar. La causa puede ser un código de confirmación incorrecto o la dirección de email podrá ya estar confirmado. Puede verificar si la dirección de email ya fue confirmada, si se luguéa y entra en la página %1 para ver su estado.',
 	'EmailNotVerified' => 'Email no verificado!',
 	'EmailNotVerifiedDesc' => 'No podrá recibir notificaciones de cambios o de comentarios en páginas observadas, '.
-							'mensajes de otros usuarios, y tambien <u>no podrá poder recuperar una contraseña olvidada</u>, '.
+							'mensajes de otros usuarios, y tambien <span class="underline">no podrá poder recuperar una contraseña olvidada</span>, '.
 							'hasta que confirme su email, siguiendo el enlace en el email enviado. '.
 							'Si no recibe un email luego de registrarse, solicitelo de nuevo presionando ',
 
@@ -893,7 +893,7 @@ $wacko_translation = array(
 	'ModerateReset'			=> 'Resetear',
 	'ModerateAccept'		=> 'Aceptar',
 	'ModerateDecline'		=> 'Cancelar',
-	'ModerateDeleteConfirm'	=> 'Está seguro que desea <u>eliminar</ u> los tópicos siguientes?',
+	'ModerateDeleteConfirm'	=> 'Está seguro que desea <span class="underline">eliminar</span> los tópicos siguientes?',
 	'ModerateRenameConfirm'	=> 'Ingrese un nombre nuevo para la página seleccionada',
 	'ModerateRenameExists'	=> 'Ya existe una página con el mismo nombre! Elija otro nombre.',
 	'ModerateRename1Only'	=> 'Observación: renamed to be only the first page you chose!',
@@ -904,7 +904,7 @@ $wacko_translation = array(
 	'ModerateMoveNotExists'	=> 'La página / cluster no existe. Por favor verifique el nombre e intente de nuevo.',
 	'ModerateMergeConfirm'	=> 'Elija un tópico que se ajuste a los demás',
 	'ModerateMerge2Min'		=> 'Para unir debe seleccionar al menos dos tópicos!',
-	'ModerateComDelConfirm'	=> 'Está seguro que desea <u>eliminar</u> %1 %2?',
+	'ModerateComDelConfirm'	=> 'Está seguro que desea <span class="underline">eliminar</span> %1 %2?',
 	'ModerateComment'		=> 'Comentario',
 	'ModerateComments'		=> 'Comentarios',
 	'ModerateSplitNewName'	=> 'Especifique un nombre del tópico a separar y seleccione un esquema de separación',

@@ -449,7 +449,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					if (moderate_page_exists($this, $new_tags[$i++]) === true)
 					{
-						$error[] = '<u>&laquo;'.$this->get_page_title('', $page_id).'&raquo;</u>';
+						$error[] = '<span class="underline">&laquo;'.$this->get_page_title('', $page_id).'&raquo;</span>';
 					}
 				}
 
@@ -843,7 +843,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						if (moderate_page_exists($this, $new_tag) === true)
 						{
-							$error = '<u>&laquo;'.$this->page['title'].'&raquo;</u>';
+							$error = '<span class="underline">&laquo;'.$this->page['title'].'&raquo;</span>';
 						}
 					}
 				}
