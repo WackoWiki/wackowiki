@@ -63,7 +63,7 @@ if($user = $this->get_user())
 				$group_members = implode('<br />', $allowed_groups);
 
 				// Print out the usergroup name and then a list of the users under it
-				echo '<strong>$group_name</strong>:<br />'.str_replace("\n","<br />",$group_members).'<br />';
+				echo '<strong>'.'<a href="'.$this->href('', ($this->config['groups_page']), 'profile='.htmlspecialchars($group_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$group_name.'</a>'.'</strong>:<br />'.str_replace("\n","<br />",$group_members).'<br />';
 				echo '</td>';
 
 				$i++;
