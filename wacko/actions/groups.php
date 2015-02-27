@@ -59,7 +59,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				"AND g.group_id = '".$usergroup['group_id']."' ".
 			"LIMIT 1", 1);
 
-		echo '<h2 id="pages">'.$count['total_members'].' '.$this->get_translation('GroupsMembers').'</a></h2>'."\n";
+		echo '<h2 id="pages">'.$count['total_members'].' '.$this->get_translation('GroupsMembers').'</h2>'."\n";
 
 
 		// print list
