@@ -11,20 +11,22 @@ if (!isset($nomark)) $nomark = '';
 
 if (!function_exists('MyGroups'))
 {
-	function my_groups($user_name, $alias)
+	function my_groups(&$wacko, $user_name, $alias)
 	{
 		$my_groups_count = 0;
 
-		foreach($alias as $usergroup => $members)
+		foreach($alias as $group_name => $members)
 		{
-			$groupmembers = explode("\\n", $members);
+			$group_members = explode("\\n", $members);
 
-			if(in_array ($user_name, $groupmembers))
+			if(in_array ($user_name, $group_members))
 			{
-				echo $usergroup.'<br />';
+				echo '<a href="'.$wacko->href('', ($wacko->config['groups_page']), 'profile='.htmlspecialchars($group_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$group_name.'</a>'.'<br />';
+
 				$my_groups_count++;
 			}
 		}
+
 		return $my_groups_count;
 	}
 }
@@ -38,8 +40,7 @@ if($user = $this->get_user())
 		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$user['user_name'].": ".$this->get_translation('MyGroups')."</span></p>\n";
 	}
 
-	$groups_count = my_groups($user['user_name'], $alias);
-	echo "<em>".$groups_count." ".($groups_count == 1 ? $this->get_translation('Group') : $this->get_translation('Groups'))."</em><br />\n";
+	$groups_count = my_groups($this, $user['user_name'], $alias);
 
 	if (!$nomark)
 	{
