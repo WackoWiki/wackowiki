@@ -63,13 +63,13 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 
 		// print list
-		echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
-
 
 		$pagination = $this->pagination($count['total_members'], $limit, 'd', 'profile='.$usergroup['group_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#members');
 
 		if ($count['total_members'])
 		{
+			echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
+
 			if (isset($_GET['sort']) && $_GET['sort'] == 'name')
 			{
 				$order = "ORDER BY user_name ";
