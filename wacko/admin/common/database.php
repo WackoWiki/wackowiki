@@ -393,11 +393,12 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		// get array with cluster related page_id's
 		if (!isset($cluster_pages[$root]))
 		{
-			$query = "'".quote($engine->dblink, $engine->translit($root))."%'";
+			$_root = $engine->translit($root);
 			$pages = $engine->load_all(
 				"SELECT page_id ".
 				"FROM ".$engine->config['table_prefix']."page ".
-				"WHERE supertag LIKE ".$query."");
+				"WHERE supertag LIKE  '".quote($engine->dblink, $_root)."/%' ".
+					"OR supertag = '".quote($engine->dblink, $_root)."'");
 
 			foreach ($pages as $page)
 			{
@@ -420,7 +421,9 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		}
 		else
 		{
-			$where = "WHERE tag LIKE '".quote($engine->dblink, $root)."%' OR comment_on_id IN (".$cluster_pages[$root].") ";
+			$where = "WHERE tag LIKE '".quote($engine->dblink, $root)."/%' ".
+						"OR tag = '".quote($engine->dblink, $root)."' ".
+						"OR comment_on_id IN (".$cluster_pages[$root].") ";
 		}
 	}
 
