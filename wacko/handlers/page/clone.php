@@ -188,19 +188,17 @@ function recursive_clone(&$parent, $root, $edit_note)
 			? " AND owner_id ='".(int)$owner_id."'"
 			: "").
 		" AND comment_on_id = '0'");
-	echo $new_root.': '.'<br />';
-	echo "<ol>\n";
+
+	$message = $new_root.': '.'<br />';
+	$message .= "<ol>\n";
 
 	foreach($pages as $page)
 	{
-
-
 		// $new_name = str_replace( $root, $new_root, $page['tag'] );
 		$new_name		= preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
 
 		// FIXME: preg_quote is not universally suitable for escaping the replacement string. A single . will become \. and the preg_replace call will not undo the escaping.
-		$new_name = stripslashes($new_name);
-
+		$new_name		= stripslashes($new_name);
 		$super_new_name	= $parent->translit($new_name);
 		$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : (isset($edit_note) ? $edit_note : '');
 
@@ -209,9 +207,10 @@ function recursive_clone(&$parent, $root, $edit_note)
 		$parent->clear_cache_wanted_page($new_name);
 		$parent->clear_cache_wanted_page($super_new_name);
 
-		echo "<li><b>".$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name)."</li>\n";
+		$message .= "<li>".str_replace('%1', $parent->link('/'.$new_name), $parent->get_translation('PageCloned'))."</li>\n";
 	}
 
-	echo "</ol>\n";
+	$message .= "</ol>\n";
+	$parent->show_message($message, 'info');
 }
 ?>
