@@ -5566,6 +5566,8 @@ class Wacko
 			$_link = $link;
 		}
 
+		$page['body_toc'] = (isset($page['body_toc']) ? $page['body_toc'] : null);
+
 		$toc = explode('<heading,row>', $page['body_toc']);
 
 		foreach ($toc as $k => $toc_item)
@@ -5579,6 +5581,7 @@ class Wacko
 		{
 			if (isset($toc_item[2]))
 			{
+				// '(include)' - included toc
 				if ($toc_item[2] == 99999)
 				{
 					if (!in_array($toc_item[0], $this->toc_context))
@@ -5593,6 +5596,7 @@ class Wacko
 				}
 				else
 				{
+					// '(p)' - paragraph
 					if ($toc_item[2] == 77777)
 					{
 						$toc[$k][3]	= $_link;
