@@ -116,7 +116,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		{
 			// TODO: clone all sheeps and optional ACLs
 			echo "<p><b>".$this->get_translation('MassCloning')."</b><p>";   //!!!
-			recursive_clone($this, $this->tag );
+			recursive_clone($this, $this->tag, $edit_note);
 		}
 	}
 	else
@@ -168,7 +168,7 @@ else
 </div>
 <?php
 
-function recursive_clone(&$parent, $root)
+function recursive_clone(&$parent, $root, $edit_note)
 {
 	$new_root = trim($_POST['newname'], '/');
 
@@ -177,22 +177,23 @@ function recursive_clone(&$parent, $root)
 		exit; // who and where did intend to move root???
 	}
 
-	// FIXME: missing $owner_id
-	$query = "'".quote($parent->dblink, $parent->translit($root))."%'";
+	// FIXME: missing $owner_id -> rename_globalacl || owner
+	$_root = $parent->translit($root);
 	$pages = $parent->load_all(
 		"SELECT page_id, tag, supertag ".
 		"FROM ".$parent->config['table_prefix']."page ".
-		"WHERE supertag LIKE ".$query.
+		"WHERE (supertag LIKE '".quote($parent->dblink, $_root)."/%' ".
+			" OR supertag = '".quote($parent->dblink, $_root)."') ".
 		($owner_id
 			? " AND owner_id ='".(int)$owner_id."'"
 			: "").
 		" AND comment_on_id = '0'");
-
+	echo $new_root.': '.'<br />';
 	echo "<ol>\n";
 
 	foreach($pages as $page)
 	{
-		echo "<li><b>".$page['tag']."</b>\n";
+
 
 		// $new_name = str_replace( $root, $new_root, $page['tag'] );
 		$new_name		= preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
@@ -201,11 +202,14 @@ function recursive_clone(&$parent, $root)
 		$new_name = stripslashes($new_name);
 
 		$super_new_name	= $parent->translit($new_name);
-		$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
+		$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : (isset($edit_note) ? $edit_note : '');
 
 		$parent->clone_page($page['tag'], $new_name, $super_new_name, $edit_note);
 
-		echo "</li>\n";
+		$parent->clear_cache_wanted_page($new_name);
+		$parent->clear_cache_wanted_page($super_new_name);
+
+		echo "<li><b>".$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name)."</li>\n";
 	}
 
 	echo "</ol>\n";
