@@ -215,11 +215,12 @@ function recursive_move(&$parent, $root, $new_root)
 
 	// FIXME: missing $owner_id -> rename_globalacl || owner
 	$owner_id = '';
-	$query = "'".quote($parent->dblink, $parent->translit($root))."%'";
+	$_root = $parent->translit($root);
 	$pages = $parent->load_all(
 		"SELECT page_id, tag, supertag ".
 		"FROM ".$parent->config['table_prefix']."page ".
-		"WHERE supertag LIKE ".$query.
+		"WHERE (supertag LIKE '".quote($parent->dblink, $_root)."/%' ".
+			" OR supertag = '".quote($parent->dblink, $_root)."') ".
 		($owner_id
 			? " AND owner_id ='".(int)$owner_id."'"
 			: "").
