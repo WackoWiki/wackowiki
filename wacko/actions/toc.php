@@ -66,8 +66,11 @@ if ($_page)
 			$numbers	= array();
 			$depth		= 0;
 
+			#$this->debug_print_r($toc);
+
 			for($i = 0; $i < $toc_len; $i++)
 			{
+				// neither '(p)' nor '(include)'
 				if ($toc[$i][2] < 66666)
 				{
 					// normalized depth immersion
@@ -84,15 +87,41 @@ if ($_page)
 						// if left lower level, nothing else to do.
 						// store and increase the depth meter item
 						$depth = $toc[$i][2];
+
+						// add missing levels if level starts with missing parent level
+						if ($depth > 0)
+						{
+							$_depth = $depth;
+
+							while ($_depth > 0 && !isset($this->_depth[$_depth]))
+							{
+								if (!isset($numbers[$_depth]))
+								{
+									$numbers[$_depth] = 1;
+									$this->_depth[$_depth] = 1;
+								}
+
+								$_depth--;
+							}
+						}
+
 						$numbers[$depth]++;
+
+						#echo $numbers[$depth].'-'.$depth.'<br />';
+						#$this->debug_print_r($numbers);
+
 						// collect numbering on the array of $ numbers from start to the current depth, allowing zero
 						$num = '';
 
 						for($j = 1; $j <= $depth; $j++)
 						{
+							#echo $depth.'->>'.$numbers[$j].'<br />';
+
 							if (isset($numbers[$j]) && $numbers[$j] > 0)
 							{
 								$num .= $numbers[$j].'.';
+
+								#echo $depth.'->>'.$num.'<br />';
 							}
 						}
 
@@ -129,28 +158,41 @@ if ($_page)
 		// begin list
 		echo "\n<ul id=\"toc\">\n";
 
-		$i	= 0;
-		$ul	= 0;
+		$i			= 0;
+		$ul			= 0;
+		$tabs		= '';
+		$prev_level	= $start_depth + 1;
 
 		foreach ($toc as $toc_item)
 		{
 			if (isset($toc_item[4]) && $toc_item[4])
 			{
 				// check page level
-				$curlevel	= $toc_item[4];
+				$cur_level	= $toc_item[4];
 
 				// indents (sublevels)
-				if ($i > 0)
+				if ($i >= 0)
 				{
 					// levels difference
-					$diff = $curlevel - $prevlevel;
+					$diff = $cur_level - $prev_level;
+
+					#echo '  ['.$i.'] '.$cur_level.' - '.$prev_level.' = '.$diff.'<br />';
 
 					if ($diff > 0)
 					{
 						while ($diff > 0)
 						{
-							echo "\n<ul>\n";	// open nested list
+							echo "\t<li>\n\t\t<ul>\n";	// open nested list
 							$diff--;
+							$ul++;
+						}
+					}
+					else if (($diff < 0) && ($i == 0))
+					{
+						while ($diff < 0)
+						{
+							echo "\t<li>\n\t\t<ul>\n";	// open nested list
+							$diff++;
 							$ul++;
 						}
 					}
@@ -158,28 +200,33 @@ if ($_page)
 					{
 						while ($diff < 0)
 						{
-							echo "\n</ul>\n</li>\n";	// close nested list
+							echo $tabs."</li>\n\t\t</ul>\n\t</li>\n\n\n";	// close nested list
 							$diff++;
 							$ul--;
 						}
 					}
 					else
 					{
-						echo "</li>\n";
+						echo "\t</li>\n";
 					}
 				}
 
 				// begin element
-				echo '<li>';
+				while ($ul +1 > 0)
+				{
+					$tabs .= "\t";
+					$ul--;
+				}
+				echo $tabs."<li>\n";
 
-					echo '<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
+					echo $tabs."\t".'<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
 							(!empty($numerate)
 								?	'<span class="tocnumber">'.$toc_item[5].'</span>'
 								:	'').
-							'<span class="toctext">'.strip_tags($toc_item[6]).'</span></a>';
+							'<span class="toctext">'.strip_tags($toc_item[6]).'</span></a>'."\n";
 
 				// recheck page level
-				$prevlevel	= $toc_item[4];
+				$prev_level	= $toc_item[4];
 
 				$i++;
 			}
@@ -190,13 +237,13 @@ if ($_page)
 		{
 			while ($ul > 0)
 			{
-				echo "</ul>\n</li>\n";
+				echo "\n\t\t</ul>\n\t</li>\n\n";
 				$ul--;
 			}
 		}
 		else
 		{
-			echo "</li>\n";
+			echo $tabs."</li>\n";
 		}
 
 		// end list
