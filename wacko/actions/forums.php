@@ -140,7 +140,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					}
 
 					echo '<small><a href="'.$this->href('', $comment['comment_on'], 'p=last').'#'.$comment['tag'].'">'.$comment['topic_title'].'</a><br />'.
-						( $comment['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
+						( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
 				}
 				else
 				{
@@ -150,7 +150,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					}
 
 					echo '<small><a href="'.$this->href('', $comment['tag']).'">'.$comment['title'].'</a><br />'.
-						( $comment['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
+						( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
 				}
 			}
 			else

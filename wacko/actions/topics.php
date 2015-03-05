@@ -113,7 +113,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$pagination	= $this->pagination($count['n'], $this->config['forum_topics']);
 
 	// make collector query
-	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.lang, u.user_name, o.user_name as owner_name ".
+	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.lang, u.user_name, o.user_name as owner_name ".
 		"FROM {$this->config['table_prefix']}page AS p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 			"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
@@ -163,7 +163,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			if ($topic['comments'] > 0)
 			{
 				$comment = $this->load_single(
-					"SELECT p.tag, p.ip, p.created, u.user_name, o.user_name AS owner_name ".
+					"SELECT p.tag, p.ip, p.created, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name ".
 					"FROM {$this->config['table_prefix']}page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
@@ -196,7 +196,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					).
 					'</td>'.
 					'<td align="center" style="white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
-						'&nbsp;&nbsp;'.( $topic['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] == GUEST ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
+						'&nbsp;&nbsp;'.( $topic['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_id'] == 0 ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
 						'&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'&nbsp;&nbsp;'.
 					'</small></td>'.
 					'<td align="center"><small>'.$topic['comments'].'</small></td>'.
@@ -207,7 +207,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			if ($comment == true)
 			{
 				echo '<small'.( $updated === true ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
-					( $comment['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $comment['owner_name'] == GUEST ? $comment['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['user_name']).'">'.$comment['user_name'].'</a>' ) ).'<br />'.
+					( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $comment['owner_id'] == 0 ? $comment['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['user_name']).'">'.$comment['user_name'].'</a>' ) ).'<br />'.
 					'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_string_formatted($comment['created']).'</a></small>';
 			}
 			else
