@@ -771,7 +771,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				echo '<tr class="lined">'.
 						'<td valign="middle" style="width:10px;" class="label"><input name="'.$topic['page_id'].'" type="checkbox" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 						'<td align="left" style="padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
-						'<td align="center"'.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' : $topic['user_name'] ) ).'&nbsp;&nbsp;</small></td>'.
+						'<td align="center"'.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' : $topic['user_name'] ) ).'&nbsp;&nbsp;</small></td>'.
 						'<td align="center"><small>'.$topic['comments'].'</small></td>'.
 						'<td align="center" style="white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'</small></td>'.
 					'</tr>'."\n";
@@ -1337,7 +1337,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</tr>'."\n".
 				'<tr class="lined">'.
 					'<td colspan="2" style="padding-bottom:30px;">'.
-						'<strong><small><span'.($this->is_admin() ? ' title="'.$this->page['ip'].'"' : '' ).'>'.( $forum_cluster === false ? $this->page['owner_name'] : ( $this->page['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $this->page['user_name'] ) ).'</span> ('.$this->get_time_string_formatted($this->page['created']).')</small></strong>'.
+						'<strong><small><span'.($this->is_admin() ? ' title="'.$this->page['ip'].'"' : '' ).'>'.( $forum_cluster === false ? $this->page['owner_name'] : ( $this->page['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $this->page['user_name'] ) ).'</span> ('.$this->get_time_string_formatted($this->page['created']).')</small></strong>'.
 						'<br />'.$body.
 					'</td>'.
 				'</tr>'."\n";
@@ -1374,7 +1374,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				echo '<tr class="lined">'.
 						'<td valign="middle" style="width:10px;" class="label"><input name="'.$comment['page_id'].'" type="checkbox" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-						'<td align="left" style="padding-left:5px;"><strong><small><span'.( $this->is_admin() ? ' title="'.$comment['ip'].'"' : '' ).'>'.( $comment['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).'</span> ('.$this->get_time_string_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_name'] != GUEST ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
+						'<td align="left" style="padding-left:5px;"><strong><small><span'.( $this->is_admin() ? ' title="'.$comment['ip'].'"' : '' ).'>'.( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).'</span> ('.$this->get_time_string_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
 							'<br />'.$desc.'</td>'.
 					'</tr>'."\n";
 			}

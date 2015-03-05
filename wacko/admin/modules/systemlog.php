@@ -197,7 +197,7 @@ function admin_systemlog(&$engine, &$module)
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
 					'<td valign="top">'.$engine->format($row['message'], 'post_wacko').'</td>'.
 					'<td valign="top" align="center"><small>'.
-						'<a href="?mode=systemlog&user_id='.$row['user_id'].'">'.( $row['user_name'] == GUEST ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
+						'<a href="?mode=systemlog&user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
 						'<br />'.'<a href="?mode=systemlog&ip='.$row['ip'].'">'.$row['ip'].'</a>'.
 					'</small></td>'.
 				'</tr>';
