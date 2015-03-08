@@ -164,7 +164,7 @@ if ($_page)
 		$tabs		= '';
 		$_array_debug = '';
 
-		// TODO: properly indent list elements?
+		// TODO: properly indent list elements
 		$tabs[0] = "";
 		$tabs[1] = "";
 		$tabs[2] = "\t";
@@ -196,7 +196,7 @@ if ($_page)
 					// levels difference
 					$diff = $cur_level - $prev_level;
 
-					$_array_debug .= '<br />  ['.$i.'] '.$cur_level.' - '.$prev_level.' = '.$diff."<br />\n"; // debug
+					#$_array_debug .= '<br />  ['.$i.'] '.$cur_level.' - '.$prev_level.' = '.$diff."<br />\n"; // debug
 
 					if ($diff > 0)
 					{
@@ -204,28 +204,29 @@ if ($_page)
 
 						while ($diff > 0 && !(($diff == 1) && ($i == 0)))
 						{
-							if ($ul > 1)
-							{
-								#$_tabs = "\t\t\t"; #<!--[".$ul."]: (".$i.") only-->
-							}
-
 							# ONE
 							// open nested list
 							if (($diff !== 1 && $j !== 0) || ($j == 0 && $i == 0) || $j > 0)
 							{
 								// open nested <li> tag
-								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs."<li><!--ONE: [".$ul."]: (".$j.") open nested list item-->\n";
+								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs.
+									"<li>".
+									#"<!--ONE: [".$ul."]: (".$j.") open nested list item-->".
+									"\n";
 
-								$ident_level['li']++;
+									$ident_level['li']++;
 							}
 
-							echo		$tabs[($ident_level['ul'] + $ul - 1)].$_tabs."\t<ul><!--ONE: [".$ul.']: '.$diff.'->('.$j.") open nested list-->\n";
+							echo $tabs[($ident_level['ul'] + $ul - 1)].$_tabs."\t".
+								"<ul>".
+								#"<!--ONE: [".$ul.']: '.$diff.'->('.$j.") open nested list-->".
+								"\n";
+
+								$ident_level['ul']++;
 
 							$diff--;
 							$ul++;
 							$j++;
-
-							$ident_level['ul']++;
 						}
 					}
 					else if ($diff < 0)
@@ -239,16 +240,25 @@ if ($_page)
 							if (($diff < 0 || $ul != 1) && $k == 0 )
 							{
 								// close nested <li> tag
-								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)]."</li><!--TWO: close  list item-->\n";
+								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].
+									"</li>".
+									#"<!--TWO: close  list item-->".
+									"\n";
 
-								$ident_level['li']--;
+									$ident_level['li']--;
 							}
 
-							echo	$tabs[($ident_level['ul'] + $ul - 1)]."</ul><!--TWO: [".$ul.']: '.$diff.'->('.$k.") close nested list-->\n";
-							$ident_level['ul']--;
+							echo $tabs[($ident_level['ul'] + $ul - 1)].
+								"</ul>".
+								#"<!--TWO: [".$ul.']: '.$diff.'->('.$k.") close nested list-->".
+								"\n";
 
-							echo		$tabs[($ident_level['li'] + $ident_level['ul'] - 1)]."</li>\n";
-							$ident_level['li']--;
+								$ident_level['ul']--;
+
+							echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].
+								"</li>\n";
+
+								$ident_level['li']--;
 
 							$diff++;
 							$ul--;
@@ -259,33 +269,34 @@ if ($_page)
 					{
 						# THREE
 						// close opened <li> tag
-						echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)]."</li><!--THREE: [".$ul.']: '."-->\n";
+						echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].
+							"</li>".
+							#"<!--THREE: [".$ul.']: '."-->".
+							"\n";
 
-						$ident_level['li']--;
+							$ident_level['li']--;
 					}
 				}
 
 				# FOUR
 				// open list item element
+				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs.
+					"<li>".
+					#"<!--FOUR: [".$ul."]: (".$i.")".$ident_level['li']." begin element-->".
+					"\n";
+				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs."\t".
+					'<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
+						(!empty($numerate)
+							?	'<span class="tocnumber">'.$toc_item[5].'</span>'
+							:	'').
+						'<span class="toctext">'.strip_tags($toc_item[6]).'</span></a>'."\n";
 
-				if ($ul > 1)
-				{
-					#$_tabs = "\t\t"; #<!--[".$ul."]: (".$i.") only-->
-				}
-
-				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs."<li><!--FOUR: [".$ul."]: (".$i.")".$ident_level['li']." begin element-->\n";
-				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs."\t".'<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
-							(!empty($numerate)
-								?	'<span class="tocnumber">'.$toc_item[5].'</span>'
-								:	'').
-							'<span class="toctext">'.strip_tags($toc_item[6]).'</span></a>'."\n";
+					$ident_level['li']++;
 
 				// recheck page level
 				$prev_level	= $toc_item[4];
 
 				$i++;
-
-				$ident_level['li']++;
 			}
 		}
 
@@ -300,15 +311,27 @@ if ($_page)
 				if ($m == 0)
 				{
 					// close nested <li> tag
-					echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)]."</li><!--FIVE: [".$ul.']: ('.$m.") close all nested <li> tags-->\n";
+					echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].
+						"</li>".
+						#"<!--FIVE: [".$ul.']: ('.$m.") close all nested <li> tags-->".
+						"\n";
 
-					$ident_level['li']--;
+						$ident_level['li']--;
 				}
 
-				echo	$tabs[($ident_level['ul'] + $ul - 1)]."</ul><!--FIVE: [".$ul.']: ('.$m.") close all opened <ul> tags-->\n";
-				$ident_level['ul']--;
-				echo	$tabs[($ident_level['li'] + $ident_level['ul'] - 1)]."</li><!--FIVE: [".$ul.']: ('.$m.") close all opened <li> tags-->\n";
-				$ident_level['li']--;
+				echo $tabs[($ident_level['ul'] + $ul - 1)].
+					"</ul>".
+					#"<!--FIVE: [".$ul.']: ('.$m.") close all opened <ul> tags-->".
+					"\n";
+
+					$ident_level['ul']--;
+
+				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].
+					"</li>".
+					#"<!--FIVE: [".$ul.']: ('.$m.") close all opened <li> tags-->".
+					"\n";
+
+					$ident_level['li']--;
 
 				$ul--;
 				$m++;
@@ -318,9 +341,12 @@ if ($_page)
 		{
 			# SIX
 			// close opened <li> tag
-			echo $tabs[$ident_level['li']]."</li><!--SIX:  [".$ul.']: '."-->\n";
+			echo $tabs[$ident_level['li']].
+				"</li>".
+				#"<!--SIX:  [".$ul.']: '."-->".
+				"\n";
 
-			$ident_level['li']--;
+				$ident_level['li']--;
 		}
 
 		// end list
