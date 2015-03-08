@@ -159,14 +159,27 @@ if ($_page)
 		echo "\n<ul id=\"toc\">\n";
 
 		$i			= 0;
-		$ul			= 0;
+		$ul			= 1;
+		$li			= 0;
 		$tabs		= '';
-		$prev_level	= $start_depth + 1;
+		$_array_debug = '';
+
+		// TODO: properly indent list elements?
+		$tabs[0] = "";
+		$tabs[1] = "";
+		$tabs[2] = "\t";
+		$tabs[3] = "\t\t";
+		$tabs[4] = "\t\t\t";
+		$tabs[5] = "\t\t\t\t";
+		$tabs[6] = "\t\t\t\t\t";
+		$_tabs = "\t";
 
 		foreach ($toc as $toc_item)
 		{
 			if (isset($toc_item[4]) && $toc_item[4])
 			{
+				if (!isset($prev_level)) $prev_level	= 0;
+
 				// check page level
 				$cur_level	= $toc_item[4];
 
@@ -176,50 +189,73 @@ if ($_page)
 					// levels difference
 					$diff = $cur_level - $prev_level;
 
-					#echo '  ['.$i.'] '.$cur_level.' - '.$prev_level.' = '.$diff.'<br />';
+					$_array_debug .= '<br />  ['.$i.'] '.$cur_level.' - '.$prev_level.' = '.$diff."<br />\n"; // debug
 
 					if ($diff > 0)
 					{
-						while ($diff > 0)
+						$j = 0;
+
+						while ($diff > 0 && !(($diff == 1) && ($i == 0)))
 						{
-							echo "\t<li>\n\t\t<ul>\n";	// open nested list
+							if ($ul > 1)
+							{
+								$_tabs = "\t\t\t"; #<!--[".$ul."]: (".$i.") only-->
+							}
+
+							# ONE
+							// open nested list
+							if (($diff !== 1 && $j !== 0) || ($j == 0 && $i == 0) || $j > 0)
+							{
+								// open nested <li> tag
+								echo $tabs[($ul)].$_tabs."<li><!--ONE: [".$ul."]: (".$j.") open nested list item-->\n";
+							}
+
+							echo		$tabs[$ul].$_tabs."\t<ul><!--ONE: [".$ul.']: '.$diff.'->('.$j.") open nested list-->\n";
+
 							$diff--;
 							$ul++;
-						}
-					}
-					else if (($diff < 0) && ($i == 0))
-					{
-						while ($diff < 0)
-						{
-							echo "\t<li>\n\t\t<ul>\n";	// open nested list
-							$diff++;
-							$ul++;
+							$j++;
 						}
 					}
 					else if ($diff < 0)
 					{
+						$k = 0;
+
 						while ($diff < 0)
 						{
-							echo $tabs."</li>\n\t\t</ul>\n\t</li>\n\n\n";	// close nested list
+							# TWO
+							// close nested list
+							if (($diff < 0 || $ul != 1) && $k == 0 )
+							{
+								// close nested <li> tag
+								echo $tabs[$ul]."\t\t</li><!--TWO: close  list item-->\n";
+							}
+
+							echo				$tabs[$ul]."\t</ul><!--TWO: [".$ul.']: '.$diff.'->('.$k.") close nested list-->\n".
+												$tabs[$ul]."</li>\n";
 							$diff++;
 							$ul--;
+							$k++;
 						}
 					}
 					else
 					{
-						echo "\t</li>\n";
+						# THREE
+						// close opened <li> tag
+						echo $tabs[$ul]."\t</li><!--THREE: [".$ul.']: '."-->\n";
 					}
 				}
 
-				// begin element
-				while ($ul +1 > 0)
-				{
-					$tabs .= "\t";
-					$ul--;
-				}
-				echo $tabs."<li>\n";
+				# FOUR
+				// open list item element
 
-					echo $tabs."\t".'<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
+				if ($ul > 1)
+				{
+					$_tabs = "\t\t"; #<!--[".$ul."]: (".$i.") only-->
+				}
+
+				echo $tabs[$ul].$_tabs."<li><!--FOUR: [".$ul."]: (".$i.") begin element-->\n";
+				echo $tabs[$ul].$_tabs."\t".'<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
 							(!empty($numerate)
 								?	'<span class="tocnumber">'.$toc_item[5].'</span>'
 								:	'').
@@ -232,22 +268,36 @@ if ($_page)
 			}
 		}
 
-		// close all opened <ul> tags
-		if ($ul > 0)
+		// close all opened nested <ul> tags
+		if ($ul > 1)
 		{
-			while ($ul > 0)
+			$m = 0;
+
+			while ($ul > 1)
 			{
-				echo "\n\t\t</ul>\n\t</li>\n\n";
+				# FIVE
+				if ($m == 0)
+				{
+					// close nested <li> tag
+					echo $tabs[$ul]."\t\t</li>\n";
+				}
+
+				echo		$tabs[$ul]."\t</ul><!--FIVE: [".$ul.']: ('.$m.") close all opened <ul> tags-->\n".
+							$tabs[$ul]."</li>\n";
 				$ul--;
+				$m++;
 			}
 		}
 		else
 		{
-			echo $tabs."</li>\n";
+			# SIX
+			echo $tabs[$ul]."</li><!--SIX:  [".$ul.']: '."-->\n";
 		}
 
 		// end list
 		echo "</ul>\n";
+
+		echo $_array_debug;
 	}
 }
 else
