@@ -84,19 +84,17 @@ if ($_page)
 							echo '<br />## START DEBUG ITEM '.$i.' ##############################<br />';
 
 						$_level = $toc[$i][2];
+
 						// if dive deeper, reset the meter for new depths
-						#if ($toc[$i][2] > $depth)
-						#{
-							while ($_level > $depth)
-							{
-								$numbers[ $_level] = 0;
+						while ($_level > $depth)
+						{
+							$numbers[ $_level] = 0;
 
-								if ($debug == true)
-									echo '## RESET level: tiefe '.$depth.' < h_level <b>['.$_level.'] => 0</b><br />';
+							if ($debug == true)
+								echo '## RESET level: depth '.$depth.' < h_level <b>['.$_level.'] => 0</b><br />';
 
-								$_level--;
-							}
-						#}
+							$_level--;
+						}
 
 						// if left lower level, nothing else to do.
 						// store and increase the depth meter item
@@ -136,23 +134,19 @@ if ($_page)
 						{
 							echo '##'.' $numbers[]:'.'<br />';
 							$this->debug_print_r($numbers);
-						}
 
-
-						if ($debug == true)
 							if ($dummy_level == true)
 							{
 								echo '##'.' dummy $numbers[]:'.'<br />';
 								$this->debug_print_r($this->_depth);
 							}
+						}
 
 						// collect numbering on the array of $ numbers from start to the current depth, allowing zero
 						$num = '';
 
 						for($j = 1; $j <= $depth; $j++)
 						{
-							#echo '## ['.$j.']: '.$depth.'->>'.$numbers[$j].'<br />';
-
 							if (isset($numbers[$j]) && $numbers[$j] > 0)
 							{
 								$num .= $numbers[$j].'.';
