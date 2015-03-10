@@ -17,6 +17,7 @@ if (!isset($numerate))	$numerate = '';
 if (!isset($from))		$from = '';
 if (!isset($to))		$to = '';
 if (!isset($legend))	$legend = '';
+if (!isset($debug))		$debug = false;
 
 if ($for)				$page = $for;
 if ($page)
@@ -66,7 +67,8 @@ if ($_page)
 			$numbers	= array();
 			$depth		= 0;
 
-			#$this->debug_print_r($toc);
+			if ($debug == true)
+			$this->debug_print_r($toc);
 
 			for($i = 0; $i < $toc_len; $i++)
 			{
@@ -78,63 +80,98 @@ if ($_page)
 
 					if ($numerate)
 					{
+						if ($debug == true)
+							echo '<br />## START DEBUG ITEM '.$i.' ##############################<br />';
+
+						$_level = $toc[$i][2];
 						// if dive deeper, reset the meter for new depths
-						if ($toc[$i][2] > $depth)
-						{
-							$numbers[ $toc[$i][2] ] = 0;
-						}
+						#if ($toc[$i][2] > $depth)
+						#{
+							while ($_level > $depth)
+							{
+								$numbers[ $_level] = 0;
+
+								if ($debug == true)
+									echo '## RESET level: tiefe '.$depth.' < h_level <b>['.$_level.'] => 0</b><br />';
+
+								$_level--;
+							}
+						#}
 
 						// if left lower level, nothing else to do.
 						// store and increase the depth meter item
-						$depth = $toc[$i][2];
+						$depth = $toc[$i][4];
+
+						$numbers[$depth]++;
 
 						// add missing levels if level starts with missing parent level
 						if ($depth > 0)
 						{
 							$_depth = $depth;
 
-							while ($_depth > 0 && !isset($this->_depth[$_depth]))
+							while ($_depth > 0  )
 							{
-								if (!isset($numbers[$_depth]))
+								if (!isset($numbers[$_depth]) || (isset($numbers[$_depth]) && $numbers[$_depth] == 0 ))
 								{
-									$numbers[$_depth] = 1;
-									$this->_depth[$_depth] = 1;
+									$numbers[$_depth]		= 1;
+
+									if ($debug == true)
+										echo '## Dummy depth for empty level: ['.$_depth.'] => 1<br />';
+
+									$dummy_level = true;
+
+									$this->_depth[$_depth]	= 1;
 								}
+
+								ksort($numbers);
 
 								$_depth--;
 							}
 						}
 
-						$numbers[$depth]++;
+						if ($debug == true)
+							echo '<br />## number last level ['.$depth.'] => '.$numbers[$depth].'<br />';
 
-						#echo $numbers[$depth].'-'.$depth.'<br />';
-						#$this->debug_print_r($numbers);
+						if ($debug == true)
+						{
+							echo '##'.' $numbers[]:'.'<br />';
+							$this->debug_print_r($numbers);
+						}
+
+
+						if ($debug == true)
+							if ($dummy_level == true)
+							{
+								echo '##'.' dummy $numbers[]:'.'<br />';
+								$this->debug_print_r($this->_depth);
+							}
 
 						// collect numbering on the array of $ numbers from start to the current depth, allowing zero
 						$num = '';
 
 						for($j = 1; $j <= $depth; $j++)
 						{
-							#echo $depth.'->>'.$numbers[$j].'<br />';
+							#echo '## ['.$j.']: '.$depth.'->>'.$numbers[$j].'<br />';
 
 							if (isset($numbers[$j]) && $numbers[$j] > 0)
 							{
 								$num .= $numbers[$j].'.';
 
-								#echo $depth.'->>'.$num.'<br />';
+								if ($debug == true)
+									echo '## ['.$j.']: '.$depth.'->>'.$num.'----------------------------------<br />';
 							}
 						}
 
 						// Human content TOC
-						$toc[$i][5] = $num; // toc number
-						$toc[$i][6] = $toc[$i][1]; // toc text
+						$toc[$i][5] = $num;					// toc number, e.g. 2.4.1
+						$toc[$i][6] = $toc[$i][1];			// toc title
 
-						$toc[$i][1] = $num.' '.$toc[$i][1];
+						$toc[$i][1] = $num.' '.$toc[$i][1]; // toc number + toc title
 
 					}
 					else
 					{
-						$toc[$i][6] = $toc[$i][1];
+						$toc[$i][6] = $toc[$i][1];			// toc title
 					}
 				}
 			}
@@ -151,7 +188,8 @@ if ($_page)
 			}
 		} // --------------------------------------------------------------
 
-		#$this->debug_print_r($toc);
+		if ($debug == true)
+			$this->debug_print_r($toc);
 
 		// display!
 
@@ -162,21 +200,21 @@ if ($_page)
 		$ul			= 1;
 		$li			= 0;
 		$tabs		= '';
+		$_tabs		= "\t";
 		$_array_debug = '';
 
 		// TODO: properly indent list elements
-		$tabs[0] = "";
-		$tabs[1] = "";
-		$tabs[2] = "\t";
-		$tabs[3] = "\t\t";
-		$tabs[4] = "\t\t\t";
-		$tabs[5] = "\t\t\t\t";
-		$tabs[6] = "\t\t\t\t\t";
-		$tabs[7] = "\t\t\t\t\t\t";
-		$tabs[8] = "\t\t\t\t\t\t\t";
-		$tabs[9] = "\t\t\t\t\t\t\t\t";
-		$tabs[10] = "\t\t\t\t\t\t\t\t\t";
-		$_tabs = "\t";
+		$tabs[0]	= "";
+		$tabs[1]	= "";
+		$tabs[2]	= "\t";
+		$tabs[3]	= "\t\t";
+		$tabs[4]	= "\t\t\t";
+		$tabs[5]	= "\t\t\t\t";
+		$tabs[6]	= "\t\t\t\t\t";
+		$tabs[7]	= "\t\t\t\t\t\t";
+		$tabs[8]	= "\t\t\t\t\t\t\t";
+		$tabs[9]	= "\t\t\t\t\t\t\t\t";
+		$tabs[10]	= "\t\t\t\t\t\t\t\t\t";
 
 		$ident_level['li'] = 1;
 		$ident_level['ul'] = 1;
