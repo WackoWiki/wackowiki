@@ -994,14 +994,14 @@ class WackoFormatter
 			if ($this->intable)
 			{
 				$closers	= &$this->tdindent_closers;
-				$oldlevel	= &$this->tdold_indent_level;
-				$oldtype	= &$this->tdold_indent_type;
+				$old_level	= &$this->tdold_indent_level;
+				$old_type	= &$this->tdold_indent_type;
 			}
 			else
 			{
 				$closers	= &$this->indent_closers;
-				$oldlevel	= &$this->old_indent_level;
-				$oldtype	= &$this->old_indent_type;
+				$old_level	= &$this->old_indent_level;
+				$old_type	= &$this->old_indent_type;
 			}
 
 			// we definitely want no line break in this one.
@@ -1025,13 +1025,13 @@ class WackoFormatter
 				$opener		= '<div class="indent">';
 				$closer		= '</div>';
 				$this->br	= 1;
-				$newtype	= 'i';
+				$new_type	= 'i';
 			}
 			else if ($new_indent_type == '-' || $new_indent_type == '*')
 			{
 				$opener		= '<ul><li>';
 				$closer		= '</li></ul>';
-				$newtype	= '*';
+				$new_type	= '*';
 				$li			= 1;
 			}
 			else
@@ -1039,7 +1039,7 @@ class WackoFormatter
 				$opener		= '<ol type="'.$new_indent_type.'"><li'.
 							  ($start ? ' value="'.$start.'"' : '').'>';
 				$closer		= '</li></ol>';
-				$newtype	= 1;
+				$new_type	= 1;
 				$li			= 1;
 			}
 
@@ -1053,30 +1053,30 @@ class WackoFormatter
 				$new_indent_level = strlen($matches[2]);
 			}
 
-			if ($new_indent_level > $oldlevel)
+			if ($new_indent_level > $old_level)
 			{
-				for ($i = 0; $i < $new_indent_level - $oldlevel; $i++)
+				for ($i = 0; $i < $new_indent_level - $old_level; $i++)
 				{
 					$result .= $opener;
 					array_push($closers, $closer);
 				}
 			}
-			else if ($new_indent_level < $oldlevel)
+			else if ($new_indent_level < $old_level)
 			{
-				for ($i = 0; $i < $oldlevel - $new_indent_level; $i++)
+				for ($i = 0; $i < $old_level - $new_indent_level; $i++)
 				{
 					$result .= array_pop($closers);
 				}
 			}
-			else if ($new_indent_level == $oldlevel && $oldtype != $newtype)
+			else if ($new_indent_level == $old_level && $old_type != $new_type)
 			{
 				$result .= array_pop($closers);
 				$result .= $opener;
 				array_push($closers, $closer);
 			}
 
-			$oldlevel	= $new_indent_level;
-			$oldtype	= $newtype;
+			$old_level	= $new_indent_level;
+			$old_type	= $new_type;
 
 			if ($li && !preg_match('/'.str_replace(')', '\)', $opener).'$/', $result))
 			{
