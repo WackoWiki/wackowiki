@@ -39,8 +39,8 @@ else
 	$link		= '';
 }
 
-if (!$from)	$from	= 'h2';
-if (!$to)	$to		= 'h9';
+if (!$from)		$from	= 'h2';
+if (!$to)		$to		= 'h9';
 
 $start_depth	= $from[1];
 $end_depth		= $to[1];
@@ -67,9 +67,6 @@ if ($_page)
 			$numbers	= array();
 			$depth		= 0;
 
-			if ($debug == true)
-			$this->debug_print_r($toc);
-
 			for($i = 0; $i < $toc_len; $i++)
 			{
 				// neither '(p)' nor '(include)'
@@ -80,18 +77,12 @@ if ($_page)
 
 					if ($numerate)
 					{
-						if ($debug == true)
-							echo '<br />## START DEBUG ITEM '.$i.' ##############################<br />';
-
 						$_level = $toc[$i][2];
 
 						// if dive deeper, reset the meter for new depths
 						while ($_level > $depth)
 						{
 							$numbers[ $_level] = 0;
-
-							if ($debug == true)
-								echo '## RESET level: depth '.$depth.' < h_level <b>['.$_level.'] => 0</b><br />';
 
 							$_level--;
 						}
@@ -107,38 +98,17 @@ if ($_page)
 						{
 							$_depth = $depth;
 
-							while ($_depth > 0  )
+							while ($_depth > 0)
 							{
 								if (!isset($numbers[$_depth]) || (isset($numbers[$_depth]) && $numbers[$_depth] == 0 ))
 								{
 									$numbers[$_depth]		= 1;
-
-									if ($debug == true)
-										echo '## Dummy depth for empty level: ['.$_depth.'] => 1<br />';
-
-									$dummy_level = true;
-
 									$this->_depth[$_depth]	= 1;
 								}
 
 								ksort($numbers);
 
 								$_depth--;
-							}
-						}
-
-						if ($debug == true)
-							echo '<br />## number last level ['.$depth.'] => '.$numbers[$depth].'<br />';
-
-						if ($debug == true)
-						{
-							echo '##'.' $numbers[]:'.'<br />';
-							$this->debug_print_r($numbers);
-
-							if ($dummy_level == true)
-							{
-								echo '##'.' dummy $numbers[]:'.'<br />';
-								$this->debug_print_r($this->_depth);
 							}
 						}
 
@@ -150,9 +120,6 @@ if ($_page)
 							if (isset($numbers[$j]) && $numbers[$j] > 0)
 							{
 								$num .= $numbers[$j].'.';
-
-								if ($debug == true)
-									echo '## ['.$j.']: '.$depth.'->>'.$num.'----------------------------------<br />';
 							}
 						}
 
@@ -181,9 +148,6 @@ if ($_page)
 				$this->post_wacko_action['toc']	= 1;
 			}
 		} // --------------------------------------------------------------
-
-		if ($debug == true)
-			$this->debug_print_r($toc);
 
 		// display!
 
@@ -227,8 +191,6 @@ if ($_page)
 				{
 					// levels difference
 					$diff = $cur_level - $prev_level;
-
-					#$_array_debug .= '<br />  ['.$i.'] '.$cur_level.' - '.$prev_level.' = '.$diff."<br />\n"; // debug
 
 					if ($diff > 0)
 					{
@@ -383,8 +345,6 @@ if ($_page)
 
 		// end list
 		echo "</ul>\n";
-
-		#echo $_array_debug;
 	}
 }
 else
