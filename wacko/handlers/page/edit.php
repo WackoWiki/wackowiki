@@ -221,7 +221,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	$previous	= isset($_POST['previous'])	? $_POST['previous']	: $this->page['modified'];
 	$body		= isset($_POST['body'])		? $_POST['body']		: $this->page['body'];
 	$body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	$title		= isset($_POST['title'])	? $_POST['title']		: $this->page['title'];
+	$title		= isset($_POST['title'])	? $_POST['title']		: isset($this->page['title']) ? $this->page['title'] : $_SESSION['title'];
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
