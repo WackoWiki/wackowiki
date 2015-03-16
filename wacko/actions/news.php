@@ -12,8 +12,8 @@ if (!empty($this->config['news_cluster']))
 	if (!isset($max))	$max = '';
 	if (isset($_GET['category']))
 	{
-		$mode = 'category';
-		$category_id = $_GET['category'];
+		$mode			= 'category';
+		$category_id	= $_GET['category'];
 	}
 	if (!isset($mode))	$mode = 'latest';
 	if (!isset($title))	$title = 1;
