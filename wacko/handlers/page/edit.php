@@ -236,11 +236,11 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
 	$output .= $this->form_open('edit', '', 'post', 'edit', ' cf="true" ');
 
-	if (isset($_REQUEST['add']))
+	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
-		$output .=	'<input name="lang"	type="hidden" value="'.$this->page_lang.'" />'.
-					'<input name="tag"	type="hidden" value="'.$this->tag.'" />'.
-					'<input name="add"	type="hidden" value="1" />';
+		$output .=	'<input name="lang"	type="hidden" value="'.$this->page_lang.'" />'."\n".
+					'<input name="tag"	type="hidden" value="'.$this->tag.'" />'."\n".
+					'<input name="add"	type="hidden" value="1" />'."\n";
 	}
 
 	echo $output;
@@ -307,7 +307,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	<br />
 	<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 <?php
-	$output .= '<input type="hidden" name="previous" value="'.htmlspecialchars($previous, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /><br />';
+	$output .= '<input type="hidden" name="previous" value="'.htmlspecialchars($previous, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /><br />'."\n";
 	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
 	$output .= htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</textarea><br />\n";
 
@@ -316,7 +316,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	{
 		$output .= '<label for="addcomment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
 		$output .= '<input id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
-		$output .= '<br />';
+		$output .= '<br />'."\n";
 	}
 	else
 	{
@@ -341,11 +341,11 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		{
 			$output .= '<input id="minor_edit" type="checkbox" value="1" name="minor_edit"/>';
 			$output .= '<label for="minor_edit">'.$this->get_translation('EditMinor').'</label>';
-			$output .= '<br />';
+			$output .= '<br />'."\n";
 		}
 		else
 		{
-			$output .= '<br />';
+			$output .= '<br />'."\n";
 		}
 
 		if ($user)
@@ -355,7 +355,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			{
 				$output .= '<input id="reviewed" type="checkbox" value="1" name="reviewed"/>';
 				$output .= '<label for="reviewed">'.$this->get_translation('Reviewed').'</label>';
-				$output .= '<br />';
+				$output .= '<br />'."\n";
 			}
 
 			// publish anonymously
@@ -363,7 +363,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			{
 				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'"'.( $this->get_user_setting('noid_pubs') == 1 ? ' checked="checked"' : '' ).' />';
 				$output .= '<small><label for="noid_publication">'.$this->get_translation('PostAnonymously').'</label></small>';
-				$output .= '<br />';
+				$output .= '<br />'."\n";
 			}
 
 			// watch a page
@@ -371,12 +371,12 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			{
 				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? ' checked="checked"' : '' ).' />';
 				$output .= '<small><label for="watchpage">'.$this->get_translation('NotifyMe').'</label></small>';
-				$output .= '<br />';
+				$output .= '<br />'."\n";
 			}
 		}
 		else
 		{
-			$output .= '<br />';
+			$output .= '<br />'."\n";
 		}
 	}
 
@@ -385,19 +385,19 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		foreach ($words as $id => $word)
 		{
 			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent_id']]) && $_POST['category'.$id.'|'.$word['parent_id']] == 'set' ? ' checked="checked"' : '' ).' />'.
-						'<label for="category'.$id.'"><strong>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</strong></label></span> ';
+						'<label for="category'.$id.'"><strong>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</strong></label></span>'."\n";
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
 					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent_id']]) && $_POST['category'.$id.'|'.$word['parent_id']] == 'set' ? ' checked="checked"' : '' ).' />'.
-								'<label for="category'.$id.'">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</label></span> ';
+								'<label for="category'.$id.'">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</label></span>'."\n";
 				}
 			}
 		}
 
-		$output .= '<br />'.$this->get_translation('Categories').':<div class="setcategory"><small><br /><br />'.substr(implode(' ', $_words), 6).'</small></div><br /><br />';
+		$output .= '<br />'.$this->get_translation('Categories').':'."\n".'<div class="setcategory"><br />'."\n".substr(implode(' ', $_words), 6).'</div><br /><br />'."\n";
 	}
 
 	echo $output;
