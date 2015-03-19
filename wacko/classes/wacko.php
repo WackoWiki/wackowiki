@@ -1277,11 +1277,11 @@ class Wacko
 		{
 			$this->page_lang = $page['lang'];
 		}
-		else if (isset($_REQUEST['add']) && isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
+		else if (((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1)) && isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
 		{
 			$this->page_lang = $_REQUEST['lang'];
 		}
-		else if (isset($_REQUEST['add']))
+		else if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 		{
 			$this->page_lang = $this->user_lang;
 		}
@@ -2438,6 +2438,7 @@ class Wacko
 		{
 			$tag = $this->tag;
 		}
+
 		if (!$addpage)
 		{
 			$tag = $this->slim_url($tag);
@@ -2451,7 +2452,7 @@ class Wacko
 	}
 
 	// returns the full url to a page/method.
-	function href($method = '', $tag = '', $params = '', $addpage = 0, $anchor = '')
+	function href($method = '', $tag = '', $params = '', $addpage = false, $anchor = '')
 	{
 		$_rewrite_mode = '';
 
@@ -3449,7 +3450,7 @@ class Wacko
 			$form_method = 'post';
 		}
 
-		$add	= isset($_REQUEST['add']) ? $_REQUEST['add'] : '';
+		$add	= ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1)) ? true : '';
 		$result	= '<form action="'.$this->href($method, $tag, $href_param, $add).'" '.$form_more.' method="'.$form_method.'" '.($form_name ? 'name="'.$form_name.'" ' : '').">\n";
 
 		if (!$this->config['rewrite_mode'])
