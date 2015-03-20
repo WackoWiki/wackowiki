@@ -1070,6 +1070,11 @@ div.newsarticle:hover {
 .newstitle {
 	font-size: 13px;
 	border: none;
+	border-color: red;
+	border-style: solid;
+	border-width: 0 0 0 4px;
+	margin-top: 10px;
+	padding-left: 9px;
 /*	background-color: #DDEEFF;
 	border-color: #CCCCAA -moz-use-text-color;
 	border-style: dashed none;
@@ -1440,7 +1445,7 @@ table.formation td {
 
 .setcategory{
 	border:1px solid #9495A2;
-	font-size:11px;
+/* 	font-size:11px; */
 	height:250px;
 	margin-bottom:27px;
 	overflow:auto;
