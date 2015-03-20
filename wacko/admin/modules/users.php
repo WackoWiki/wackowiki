@@ -207,7 +207,7 @@ function admin_users(&$engine, &$module)
 			}
 		}
 		// delete user
-		// TODO: reassign acls uploads, pages and revisions, delete user page
+		// TODO: reassign acls, uploads, pages and revisions, delete user page
 		#else if (isset($_POST['delete']) && isset($_POST['user_id'])  && $set == true)
 		else if (isset($_POST['delete'])  && $set == true)
 		{
