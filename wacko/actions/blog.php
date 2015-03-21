@@ -5,11 +5,14 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{news [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
+// {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
+if (!isset($page))		$page = '';
 $access = '';
 
-if (!empty($this->config['news_cluster']))
+$blog_cluster = $page;
+
+if (!empty($blog_cluster))
 {
 	if (!isset($max))	$max = '';
 	if (isset($_GET['category']))
@@ -26,8 +29,8 @@ if (!empty($this->config['news_cluster']))
 
 	$pages			= '';
 	$prefix			= $this->config['table_prefix'];
-	$newscluster	= $this->config['news_cluster'];
-	$newslevels		= $this->config['news_levels'];
+	$blogcluster	= $blog_cluster;
+	$bloglevels		= $this->config['news_levels'];
 
 	// check privilege
 	if ($this->has_access('create') === true)
@@ -89,7 +92,7 @@ if (!empty($this->config['news_cluster']))
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=latest');
@@ -99,7 +102,7 @@ if (!empty($this->config['news_cluster']))
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
 	}
@@ -109,7 +112,7 @@ if (!empty($this->config['news_cluster']))
 			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}category_page c ".
 			"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
-			"WHERE p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"WHERE p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 				"AND c.category_id = '$category_id' ".
 				"AND p.comment_on_id = '0'", 1);
 
@@ -126,7 +129,7 @@ if (!empty($this->config['news_cluster']))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 				"INNER JOIN {$prefix}category_page c  ON (c.page_id = p.page_id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 				"AND c.category_id = '$category_id' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
@@ -136,7 +139,7 @@ if (!empty($this->config['news_cluster']))
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 				"AND created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 				"AND comment_on_id = '0'", 1);
 
@@ -147,7 +150,7 @@ if (!empty($this->config['news_cluster']))
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 				"AND p.created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
@@ -157,7 +160,7 @@ if (!empty($this->config['news_cluster']))
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 				"AND created > '$date' ".
 				"AND comment_on_id = '0'", 1);
 
@@ -169,7 +172,7 @@ if (!empty($this->config['news_cluster']))
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 				"AND p.created > '$date' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
@@ -189,16 +192,16 @@ if (!empty($this->config['news_cluster']))
 			$_category_title = '';
 		}
 
-		if ($this->page['tag'] == $this->config['news_cluster'])
+		if ($this->page['tag'] == $blogcluster)
 		{
 			$_title = $this->get_translation('News').$_category_title;
 		}
 		else
 		{
-			$_title = $this->compose_link_to_page($this->config['news_cluster'], '', $this->get_translation('News'), 0).$_category_title;
+			$_title = $this->compose_link_to_page($blogcluster, '', $this->get_translation('News'), 0).$_category_title;
 		}
 
-		echo "<h1>".$_title."</h1>";
+		# echo "<h1>".$_title."</h1>";
 	}
 
 	// displaying XML icon
@@ -207,15 +210,18 @@ if (!empty($this->config['news_cluster']))
 		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/news_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.png"."\" title=\"".$this->get_translation('RecentNewsXMLTip')."\" alt=\"XML\" /></a></span>\n";
 	}
 
+	echo '<div><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
+			'<p style="float: right">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</p></div>'."\n";
+
+	// pagination
+	if (isset($pagination['text']))
+	{
+		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+	}
+
 	// displaying articles
 	if ($pages)
 	{
-		// pagination
-		if (isset($pagination['text']))
-		{
-			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
-		}
-
 		foreach ($pages as $page)
 		{
 			$_category = '';
