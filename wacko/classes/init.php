@@ -95,6 +95,9 @@ class Init
 			}
 		}
 
+		// don't let cookies ever interfere with request vars
+		$_REQUEST = array_merge($_GET, $_POST);
+
 		if (!isset($_REQUEST))
 		{
 			die('$_REQUEST[] not found. WackoWiki requires PHP_MIN_VERSION or higher!');
@@ -320,9 +323,9 @@ class Init
 		{
 			$this->request = $_SERVER['PATH_INFO'];
 		}
-		else if(isset($_REQUEST['page']))
+		else if(isset($_GET['page']))
 		{
-			$this->request = @$_REQUEST['page'];
+			$this->request = @$_GET['page'];
 		}
 
 		// remove leading slash
@@ -686,6 +689,7 @@ class Init
 					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MiB </li>\n";
 				}
 
+				#echo "<li>UTC: ".date('Y-m-d H:i:s', time())."</li>\n";
 				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>\n";
 
 				if ($this->config['debug'] >= 2)
