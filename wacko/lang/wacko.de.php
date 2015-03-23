@@ -469,7 +469,7 @@ $wacko_translation = array(
 	'TreeClusterTitle'			=> 'Baumansicht des Clusters %1',
 	'TreeSiteTitle'				=> 'Baumansicht der Seite',
 	'TreeEmpty'					=> '%1&nbsp;hat keine Unterseiten',
-	'TreeEmptyLevels'			=> '%1&nbsp;hat keine Unterseiten für die angegebene Baumtiefe. Erhöhe den Wert für dir Tiefe.',
+	'TreeEmptyLevels'			=> '%1&nbsp;hat keine Unterseiten für die angegebene Baumtiefe. Erhöhe den Wert für die Tiefe.',
 
 	// clone handler
 	'ClonePage'					=> 'Klone Seite',
@@ -1072,7 +1072,7 @@ $wacko_translation = array(
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
-		
+
 	// log
 	'LogLevel1'					=> 'kritisch',
 	'LogLevel2'					=> 'höchste',
