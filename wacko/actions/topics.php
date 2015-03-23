@@ -238,9 +238,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		<input type="hidden" name="action" value="topicadd" />
 		<table class="formation">
 			<tr>
-				<td class="label"><?php echo $this->get_translation('ForumTopicName'); ?>:</td>
+				<td class="label"><label for="topictitle"><?php echo $this->get_translation('ForumTopicName'); ?>:</label></td>
 				<td>
-					<input name="title" size="50" maxlength="100" value="" />
+					<input id="topictitle" name="title" size="50" maxlength="100" value="" />
 					<input id="submit" type="submit" value="<?php echo $this->get_translation('ForumTopicSubmit'); ?>" />
 				</td>
 			</tr>

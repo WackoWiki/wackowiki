@@ -26,7 +26,7 @@ if (!empty($this->config['news_cluster']))
 
 	$pages			= '';
 	$prefix			= $this->config['table_prefix'];
-	$newscluster	= $this->config['news_cluster'];
+	$newscluster		= $this->config['news_cluster'];
 	$newslevels		= $this->config['news_levels'];
 
 	// check privilege
@@ -79,7 +79,7 @@ if (!empty($this->config['news_cluster']))
 			// .date('Y/').date('W/')				- 2011/29
 			$blog_cluster_structure = date('Y/').date('m/');
 
-			$this->redirect($this->href('edit', $this->config['news_cluster'].'/'.$blog_cluster_structure.$name, '', 1));
+			$this->redirect($this->href('edit', $newscluster.'/'.$blog_cluster_structure.$name, '', 1));
 		}
 	}
 	// collect data
