@@ -11,7 +11,6 @@ if (!defined('IN_WACKO'))
 
 // constants
 $limit	= 500;
-$style	= 'ul';
 
 // input
 if (!isset($root) && !isset($page))
@@ -19,8 +18,10 @@ if (!isset($root) && !isset($page))
 if (!isset($page)) $page = '';
 if ($page)			$root	= $page;
 if ($root == '/')	$root	= '';
-$_root = $root; // without slalsh -> LIKE /%
-if ($root)			$root	= $this->unwrap_link($root).'/';
+if ($root)			$root	= $this->unwrap_link($root);
+
+$_root		= $root; // without slash -> LIKE /%
+$root		= $root.'/';
 
 if (!isset($depth)) $depth = '';
 if (!$depth || $depth < 1)
