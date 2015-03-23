@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
-if (!isset($page))		$page = '';
+if (!isset($page))		$page = ''; // $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
 $access = '';
 
 $blog_cluster = $page;
@@ -82,7 +82,7 @@ if (!empty($blog_cluster))
 			// .date('Y/').date('W/')				- 2011/29
 			$blog_cluster_structure = date('Y/').date('m/');
 
-			$this->redirect($this->href('edit', $this->config['news_cluster'].'/'.$blog_cluster_structure.$name, '', 1));
+			$this->redirect($this->href('edit', $blogcluster.'/'.$blog_cluster_structure.$name, '', 1));
 		}
 	}
 	// collect data
@@ -201,7 +201,7 @@ if (!empty($blog_cluster))
 			$_title = $this->compose_link_to_page($blogcluster, '', $this->get_translation('News'), 0).$_category_title;
 		}
 
-		# echo "<h1>".$_title."</h1>";
+		echo "<h1>".$_title."</h1>";
 	}
 
 	// displaying XML icon
@@ -216,7 +216,7 @@ if (!empty($blog_cluster))
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		#echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 	}
 
 	// displaying articles
@@ -273,11 +273,18 @@ if (!empty($blog_cluster))
 		echo $this->form_open();
 		?>
 		<br /><a id="newtopic"></a><br />
-		<input type="hidden" name="action" value="newsadd" />
-		<label for="newstitle"><?php echo $this->get_translation('NewsName'); ?>:</label>
-		<input id="newstitle" name="title" size="50" maxlength="100" value="" />
-		<input id="submit" type="submit" value="<?php echo $this->get_translation('NewsSubmit'); ?>" />
+				<table class="formation">
+			<tr>
+				<td class="label"><label for="posttitle"><?php echo $this->get_translation('ForumTopicName'); ?>:</label></td>
+				<td>
+					<input type="hidden" name="action" value="newsadd" />
+					<input id="posttitle" name="title" size="50" maxlength="100" value="" />
+					<input id="submit" type="submit" value="<?php echo $this->get_translation('ForumTopicSubmit'); ?>" />
+				</td>
+			</tr>
+		</table>
 
+		<?php #echo $this->get_translation('NewsName'); ?>
 		<?php echo $this->form_close();
 	}
 
