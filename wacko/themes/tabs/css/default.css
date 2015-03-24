@@ -3,6 +3,8 @@
 body{ padding:0; margin:0; background:#eeeeee; line-height: 130%; }
 img {
 	border-width: 0px;
+	max-width: 100%;
+	height:auto;
 }
 /* cellspacing */
 table {

@@ -2,7 +2,7 @@ TEXTAREA { font-size:100%; font-family: Georgia, Courier New; color:#222222;   l
 UL, OL { margin-bottom: 3px; }
 LI { margin-bottom: 2px; }
 
-img {border-width: 0px;	vertical-align: middle;	}
+img {border-width: 0px;	vertical-align: middle; max-width: 100%; height:auto;}
 
 /* paddings headers */
 FORM, H1, H2, H3, H4, H5 {
