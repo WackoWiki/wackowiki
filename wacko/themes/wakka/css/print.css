@@ -34,6 +34,8 @@ input {
 /* Display no images in print out */
 img {
 	/*display:		none;*/
+	max-width: 100%;
+	height:auto;
 }
 
 /* Specifies the wikiname on top */

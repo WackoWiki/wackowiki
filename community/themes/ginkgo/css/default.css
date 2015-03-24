@@ -20,6 +20,8 @@ label {cursor:pointer; cursor:hand;}
 img {
 	border-width: 0px;
 	vertical-align: middle;
+	max-width: 100%;
+	height:auto;
 	}
 .textarea {
   width: 100%; 
