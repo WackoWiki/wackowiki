@@ -325,7 +325,7 @@ class Init
 		}
 		else if(isset($_GET['page']))
 		{
-			$this->request = @$_GET['page'];
+			$this->request = $_GET['page'];
 		}
 
 		// remove leading slash
