@@ -8,7 +8,8 @@ if (!defined('IN_WACKO'))
 // {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
 if (!isset($page))		$page = ''; // $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
-$access = '';
+$access	= '';
+$error	= '';
 
 $blog_cluster = $page;
 
