@@ -210,8 +210,8 @@ if (!empty($blog_cluster))
 		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/news_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.png"."\" title=\"".$this->get_translation('RecentNewsXMLTip')."\" alt=\"XML\" /></a></span>\n";
 	}
 
-	echo '<div><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
-			'<p style="float: right">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</p></div>'."\n";
+	echo '<div style="width:100%;"><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
+			'<p style="float: right">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</p><br style="clear:both" /></div>'."\n";
 
 	// pagination
 	if (isset($pagination['text']))
