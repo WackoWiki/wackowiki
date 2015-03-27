@@ -275,7 +275,7 @@ else
 		echo echo_tab(
 			$this->href('categories'),
 			$this->get_translation('CategoriesTip'),
-			($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('CategoriesText') : '',
+			($this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('CategoriesText') : '',
 			$this->method == 'categories',
 			2,
 			'c');

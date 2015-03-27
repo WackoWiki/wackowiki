@@ -218,27 +218,7 @@ if (!empty($this->config['news_cluster']))
 
 		foreach ($pages as $page)
 		{
-			$_category = '';
-
-			$categories	= $this->load_all(
-				"SELECT
-					c.category_id, c.category
-				FROM
-					{$prefix}category_page p
-				INNER JOIN {$prefix}category c ON (p.category_id = c.category_id)
-				WHERE
-					p.page_id = '{$page['page_id']}'", 0);
-
-			foreach ($categories as $id => $category)
-			{
-				if ($id > 0)
-				{
-					$_category .= ', ';
-				}
-
-				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>';
-			}
-
+			$_category = $this->get_categories($page['page_id']);
 			$_category = !empty($_category) ? $this->get_translation('Category').': '.$_category.' | ' : '';
 
 			echo "<div class=\"newsarticle\">";

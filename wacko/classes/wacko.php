@@ -115,7 +115,7 @@ class Wacko
 		return $result;
 	}
 
-	function load_all($query, $docache = 0)
+	function load_all($query, $docache = false)
 	{
 		$data	= array();
 
@@ -155,7 +155,7 @@ class Wacko
 		}
 	}
 
-	function load_single($query, $docache = 0)
+	function load_single($query, $docache = false)
 	{
 		if ($data = $this->load_all($query, $docache))
 
@@ -918,7 +918,7 @@ class Wacko
 		return $page;
 	}
 
-	function _load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadata_only = 0, $deleted = 0)
+	function _load_page($tag, $page_id = 0, $revision_id = '', $cache = true, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
 		$supertag		= '';
 		$cached_page	= '';
@@ -1492,7 +1492,7 @@ class Wacko
 		}
 	}
 
-	function load_recently_deleted($limit = 1000, $cache = 1)
+	function load_recently_deleted($limit = 1000, $cache = true)
 	{
 		$meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.keywords, p.description';
 
@@ -1507,7 +1507,7 @@ class Wacko
 			), $cache);
 	}
 
-	function load_categories($tag, $page_id = 0)
+	function load_categories($tag, $page_id = 0, $cache = false)
 	{
 		$categories = $this->load_all(
 			"SELECT c.category_id, c.category ".
@@ -1516,7 +1516,7 @@ class Wacko
 			"WHERE ".( $page_id != 0
 				? "cp.page_id  = '".(int)$page_id."' "
 				: "cp.supertag = '".quote($this->dblink, $supertag)."' " )
-			);
+			, $cache);
 
 		return $categories;
 	}
@@ -6570,11 +6570,35 @@ class Wacko
 				"message	= '".quote($this->dblink, $message)."'");
 	}
 
+	function get_categories($page_id, $cache = true)
+	{
+		$_category = '';
+
+		if ($categories	= $this->load_categories('', $page_id, $cache = true))
+		{
+			foreach ($categories as $id => $category)
+			{
+				if ($id > 0)
+				{
+					$_category .= ', ';
+				}
+
+				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>';
+			}
+
+			return $_category;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	// load categories for the page's particular language.
 	// if root string value is passed, returns number of
 	// pages under each category and below defined root
 	// page
-	function get_categories_list($lang, $cache = 1, $root = false)
+	function get_categories_list($lang, $cache = true, $root = false)
 	{
 		if ($_categories = $this->load_all(
 		"SELECT category_id, parent_id, category ".

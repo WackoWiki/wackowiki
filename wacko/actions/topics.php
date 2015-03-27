@@ -186,6 +186,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				$topic['description']	= $this->do_unicode_entities($topic['description'], $topic['lang']);
 			}
 
+			// load related categories
+			$_category = $this->get_categories($topic['page_id']);
+			$_category = !empty($_category) ? '<br />'./* $this->get_translation('Category').': '. */$_category : '';
+
 			// print
 			echo '<tr class="lined">'.
 					'<td align="left">'.
@@ -218,7 +222,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			echo	'</td>'.
 				'</tr>'.
 				'<tr>'.
-					'<td colspan="6" class="description"><small>'.$topic['description'].'</small></td>'.
+					'<td colspan="6" class="description">'.$topic['description'].''.
+					$_category.'</td>'.
 				'</tr>'."\n";
 		}
 
