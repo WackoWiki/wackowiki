@@ -224,13 +224,12 @@ class Polls
 
 			foreach ($vars as $var)
 			{
-				$poll	.= '<tr><td class="label">'.
+				$poll	.= '<tr class="lined"><td class="label">'.
 							($header['plural'] == 1
 								? '<input id="'.$var['v_id'].'" name="'.$var['v_id'].'" type="checkbox" value="1" />'
 								: '<input name="id" type="radio" value="'.$var['v_id'].'" />').
 							'</td>'.
-						'<td style="width:95%;text-align:left;"><label for="'.$var['v_id'].'">'.$var['text'].'</label></td></tr>'.
-						'<tr class="lined"><td colspan="2"></td></tr>'."\n";
+						'<td style="width:95%;text-align:left;"><label for="'.$var['v_id'].'">'.$var['text'].'</label></td></tr>'."\n";
 			}
 
 			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->get_translation('PollsLasts').': '.$duration.
