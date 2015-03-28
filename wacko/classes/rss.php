@@ -101,12 +101,12 @@ class RSS
 		$this->write_file($name, $xml);
 	}
 
-	function news()
+	function news($news_cluster)
 	{
 		$limit			= 10;
 		$name			= 'news';
-		$newscluster	= $this->engine->config['news_cluster'];
-		$newslevels		= $this->engine->config['news_levels'];
+		$news_cluster	= !isset($news_cluster) ? $this->engine->config['news_cluster'] : $news_cluster;
+		$news_levels	= $this->engine->config['news_levels'];
 		$news_pages		= '';
 		$prefix			= $this->engine->config['table_prefix'];
 
@@ -115,7 +115,7 @@ class RSS
 			"SELECT page_id, tag, title, created, body_r, comments ".
 			"FROM {$prefix}page ".
 			"WHERE comment_on_id = '0' ".
-				"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND tag REGEXP '^{$news_cluster}{$news_levels}$' ".
 			"ORDER BY tag");
 
 		if ($pages)
@@ -150,7 +150,7 @@ class RSS
 				'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> '."\n".
 					'<channel>'."\n".
 						'<title>'.$this->engine->config['site_name'].$this->engine->get_translation('RecentNewsTitleXML').'</title>'."\n".
-						'<link>'.$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($newscluster)).'</link>'."\n".
+						'<link>'.$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($news_cluster)).'</link>'."\n".
 						'<description>'.$this->engine->get_translation('RecentNewsXML').$this->engine->config['site_name'].'</description>'."\n".
 						'<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n".
 						'<language>'.$this->engine->config['language'].'</language>'."\n".
@@ -158,7 +158,7 @@ class RSS
 						'<lastBuildDate>'.date('r').'</lastBuildDate>'."\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentNewsTitleXML')."</title>\n";
-		$xml .= "<link>".$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($newscluster))."</link>\n";
+		$xml .= "<link>".$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($news_cluster))."</link>\n";
 		$xml .= "<url>".$this->engine->config['base_url']."files/global/wacko_logo.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
@@ -183,7 +183,7 @@ class RSS
 
 				// this is a news article
 				$title	= $page['title'];
-				$cat	= substr_replace ($page['tag'], '', 0, strlen ($newscluster) + 1); // removes news cluster name
+				$cat	= substr_replace ($page['tag'], '', 0, strlen ($news_cluster) + 1); // removes news cluster name
 				$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
 				$link	= $this->engine->href('', $page['tag']);
 				$pdate	= date('r', strtotime($page['modified']));
