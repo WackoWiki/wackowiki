@@ -8,7 +8,7 @@ require ('themes/_common/_header.php');
 ?>
 <body onload="all_init();">
 <div id="mainwrapper">
-	<div id="header">
+	<header>
 		<div id="header-main">
 			<div id="header-top">
 			<span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?>
@@ -40,7 +40,7 @@ else
 // End if
 ?></div>
 		</div>
-<div id="navigation">
+<nav>
 <?php
 // outputs bookmarks menu
 	echo '<div id="usermenu">';
@@ -344,15 +344,15 @@ echo $this->form_close();
 </div>
 </li></ul>
 </div>
-</div>
+</nav>
 <div class="breadcrumb">
 <?php
 // shows breadcrumbs
 echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
 ?>
 </div>
-</div>
-<div id="content">
+</header>
+<section>
 <?php
 // here we show messages
 if ($message = $this->get_message())

@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ?>
-<div id="page" class="page">
+<article>
 <?php
 
 if (!isset ($this->config['comments_count']))
@@ -153,7 +153,7 @@ else
 
 }
 ?>
-<br style="clear: both" />&nbsp;</div>
+<br style="clear: both" />&nbsp;</article>
 <?php
 // page comments and files
 if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['comment_on_id'])

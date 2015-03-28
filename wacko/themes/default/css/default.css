@@ -131,7 +131,7 @@ form input.submitinput {
 	/* font-family:"Lucida Console","Courier New",monospace; */
 }
 
-#header {
+header {
 	padding: 0px;
 	float: left;
 	width: 96%;
@@ -146,7 +146,7 @@ form input.submitinput {
 	width: 100%;
 }
 
-#navigation {
+nav {
 	padding: 5px 20px 0;
 	float: left;
 	/*overflow: hidden;
@@ -180,7 +180,7 @@ form input.submitinput {
 	margin-right: auto;
 }
 
-#content {
+section {
 	background-color: #FFFFFF;
 	padding: 9px 20px 0px;
 	float: left;
@@ -188,7 +188,7 @@ form input.submitinput {
 	clear: both;
 }
 
-#page {
+article {
 	background-color: #FFFFFF;
 	padding: 5px 0px 20px 0px;
 	float: left;
@@ -208,7 +208,7 @@ form input.submitinput {
 	height: 400px;
 }
 
-#footer {
+footer {
 	float: left;
 	width: 96%;
 }
