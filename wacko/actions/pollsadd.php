@@ -186,6 +186,7 @@ if (isset($_POST['submit_poll']))
 					   $this->get_translation('MailGoodbye')."\n".
 					   $this->config['site_name']."\n".
 					   $this->config['base_url'];
+
 			$this->send_mail($this->config['admin_email'], $subject, $body);
 			$this->log(4, str_replace('%1', $edit_id, $this->get_translation('LogPollCreated', $this->config['language'])));
 		}
