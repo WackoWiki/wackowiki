@@ -6,8 +6,8 @@
  */
 
 ?>
-</div>
-<div id="footer">
+</section>
+<footer>
 <div class="footer">
 <div class="footerlist">
 <ul>
@@ -66,7 +66,7 @@ if ($this->config['policy_page'])
 }
 
 ?></div>
-</div>
+</footer>
 </div>
 <?php
 

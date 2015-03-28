@@ -3,8 +3,8 @@
 // HTTP header with right Charset settings
 header('Content-Type: text/html; charset='.$this->get_charset());
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
+<!DOCTYPE html>
+<html lang="<?php echo $this->page['lang'] ?>">
 <head>
 	<title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');?></title>
 <?php
@@ -17,7 +17,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 	<meta name="language" content="<?php echo $this->page['lang'] ?>" />
-	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
+	<meta charset="<?php echo $this->get_charset(); ?>" />
 
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
 <?php if ($this->config['allow_x11colors']) {?>
