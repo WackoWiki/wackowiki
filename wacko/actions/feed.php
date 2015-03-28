@@ -268,6 +268,11 @@ else
 
 				echo "<p class=\"feed-content\">".$item->get_content()."</p>";
 
+				if ($enclosure = $item->get_enclosure())
+				{
+					echo "<img src=\"" . $enclosure->get_link() . "\">";
+				}
+
 				// item-paragraph ending
 				echo "</div>";
 

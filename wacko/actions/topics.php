@@ -146,13 +146,13 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				'<p style="float: right">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</p></div>'."\n";
 
 		echo '<table class="forum">'.
-				'<tr>'.
+				'<thead><tr>'.
 					'<th>'.$this->get_translation('ForumTopic').'</th>'.
 					'<th>'.$this->get_translation('ForumAuthor').'</th>'.
 					'<th>'.$this->get_translation('ForumReplies').'</th>'.
 					'<th>'.$this->get_translation('ForumViews').'</th>'.
 					'<th colspan="2">'.$this->get_translation('ForumLastComment').'</th>'.
-				'</tr>'."\n";
+				'</tr></thead>'."\n";
 
 		foreach ($topics as $topic)
 		{
@@ -191,7 +191,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$_category = !empty($_category) ? '<br />'./* $this->get_translation('Category').': '. */$_category : '';
 
 			// print
-			echo '<tr class="lined">'.
+			echo '<tbody class="lined"><tr>'.
 					'<td align="left">'.
 					( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
 					( $updated === true
@@ -224,7 +224,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				'<tr>'.
 					'<td colspan="6" class="description">'.$topic['description'].''.
 					$_category.'</td>'.
-				'</tr>'."\n";
+				'</tr></tbody>'."\n";
 		}
 
 		echo '</table>'."\n";
