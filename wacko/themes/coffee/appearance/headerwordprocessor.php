@@ -11,7 +11,7 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 <meta name="keywords" content="<?php echo $this->config['meta_keywords'] ?>" />
 <meta name="description" content="<?php echo $this->config['meta_description'] ?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/wordprocessor.css" />
+<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/wordprocessor.css" />
 </head>
 
 <body>

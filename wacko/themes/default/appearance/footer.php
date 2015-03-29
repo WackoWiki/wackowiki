@@ -8,7 +8,7 @@
 ?>
 </section>
 <footer>
-<div class="footer">
+<nav class="footer">
 <div class="footerlist">
 <ul>
 <?php
@@ -51,7 +51,7 @@ if ($this->page)
 ?>
 </ul>
 </div>
-</div>
+</nav>
 <div id="credits"><?php
 
 if ($this->get_user())

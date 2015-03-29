@@ -293,7 +293,7 @@ else
 		echo '<p>'.$this->format_translation('LoginWelcome2').'</p>'."\n";
 	}
 
-	echo '<script type="text/javascript">';
+	echo '<script>';
 	echo '	document.getElementById("f'.$focus.'").focus();';
 	echo '</script>';
 

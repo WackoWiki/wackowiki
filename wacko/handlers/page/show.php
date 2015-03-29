@@ -136,7 +136,7 @@ if ($this->has_access('read'))
 
 		$this->set_language($this->user_lang);
 		?>
-		<script type="text/javascript">
+		<script>
 			var dbclick = "page";
 		</script>
 		<?php

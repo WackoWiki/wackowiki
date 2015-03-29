@@ -19,11 +19,11 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	<meta name="language" content="<?php echo $this->page['lang'] ?>" />
 	<meta charset="<?php echo $this->get_charset(); ?>" />
 
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
+	<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
 <?php if ($this->config['allow_x11colors']) {?>
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" />
+	<link rel="stylesheet" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" />
 <?php } ?>
-	<link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
+	<link media="print" rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
 	<link  rel="start" title="<?php echo $this->config['root_page'];?>" href="<?php echo $this->config['base_url'];?>"/>
 <?php if ($this->config['policy_page']) {?>
@@ -44,7 +44,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 // JS files.
 // default.js contains common procedures and should be included everywhere
 ?>
-	<script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/default.js"></script>
+	<script src="<?php echo $this->config['base_url'];?>js/default.js"></script>
 <?php
 // load swfobject with flash action (e.g. $this->config['allow_swfobject'] = 1), by default it is set off
 if ($this->config['allow_swfobject'])
@@ -59,7 +59,7 @@ if ($this->method == 'edit')
 	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
 }
 ?>
-	<script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/captcha.js"></script>
+	<script src="<?php echo $this->config['base_url'];?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't switch it off (requires class=page in show handler).
@@ -80,7 +80,7 @@ else if($this->has_access('write'))
 if ($doubleclick == true)
 {
 ?>
-	<script type="text/javascript">
+	<script>
 	var edit = "<?php echo $this->href('edit');?>";
 	</script>
 <?php

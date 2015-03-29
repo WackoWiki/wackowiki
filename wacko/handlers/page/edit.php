@@ -411,7 +411,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	}
 	// end captcha
 ?>
-	<script type="text/javascript">
+	<script>
 		wE = new WikiEdit();
 <?php
 	if ($user = $this->get_user())
