@@ -75,6 +75,11 @@ if (!empty($blog_cluster))
 			$_SESSION['body']	= $template;
 			$_SESSION['title']	= $namehead;
 
+			if ($this->config['enable_feeds'])
+			{
+				$_SESSION['feed']	= true;
+			}
+
 			// needs to be numeric for ordering
 			// TODO: add this as config option to Admin panel
 			// .date('Y/')							- 2011
@@ -229,13 +234,13 @@ if (!empty($blog_cluster))
 			$_category = $this->get_categories($page['page_id']);
 			$_category = !empty($_category) ? $this->get_translation('Category').': '.$_category.' | ' : '';
 
-			echo "<div class=\"newsarticle\">";
+			echo "<article class=\"newsarticle\">";
 			echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
 			echo "<div class=\"newsinfo\"><span>".$this->get_time_string_formatted($page['created']).' '.$this->get_translation('By').' '.( $page['owner'] == '' ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' )."</span></div>\n";
 			echo "<div class=\"newscontent\">".$this->action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
 			echo "<div class=\"newsmeta\">".$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->get_translation('EditText'), 0)." | " : "")."  ".
 				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#commentsheader" title="'.$this->get_translation('NewsDiscuss').' '.$page['title'].'">'.(int)$page['comments']." ".$this->get_translation('Comments_all')." &raquo; "."</a></div>\n";
-			echo "</div>";
+			echo "</article>";
 
 			unset ($_category);
 		}
