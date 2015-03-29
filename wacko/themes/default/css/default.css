@@ -223,6 +223,7 @@ footer {
 .footer {
 	margin: 0;
 	float: left;
+	height: auto;
 	overflow: hidden;
 	clear: both;
 	width: 100%;

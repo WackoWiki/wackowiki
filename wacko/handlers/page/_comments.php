@@ -229,7 +229,7 @@ if ($this->has_access('read'))
 			}
 			// end captcha
 		?>
-		<script type="text/javascript">
+		<script>
 		wE = new WikiEdit();
 <?php
 		if ($user = $this->get_user())
