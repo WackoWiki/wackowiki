@@ -14,10 +14,10 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 }
 ?>
+	<meta charset="<?php echo $this->get_charset(); ?>" />
 	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 	<meta name="language" content="<?php echo $this->page['lang'] ?>" />
-	<meta charset="<?php echo $this->get_charset(); ?>" />
 
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
 <?php if ($this->config['allow_x11colors']) {?>
@@ -49,14 +49,14 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 // load swfobject with flash action (e.g. $this->config['allow_swfobject'] = 1), by default it is set off
 if ($this->config['allow_swfobject'])
 {
-	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/swfobject.js\"></script>\n";
+	echo "<script src=\"".$this->config['base_url']."js/swfobject.js\"></script>\n";
 }
 // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
 if ($this->method == 'edit')
 {
-	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
-	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit.js\"></script>\n";
-	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
+	echo "<script src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
+	echo "<script src=\"".$this->config['base_url']."js/wikiedit.js\"></script>\n";
+	echo "<script src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
 }
 ?>
 	<script src="<?php echo $this->config['base_url'];?>js/captcha.js"></script>
