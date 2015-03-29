@@ -29,7 +29,7 @@ if(isset($vars[0]))
 	}
 
 	$href = htmlspecialchars($href, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	echo "<a name=\"$href\" href=\"#$href\" title=\"$title\">$text</a>\n";
+	echo '<a id="'.$href.'" href="#'.$href.'" title="'.$title.'">'.$text.'</a>'."\n";
 }
 
 ?>
