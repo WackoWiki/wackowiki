@@ -742,7 +742,6 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			#return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h6>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h6>';
 			return $result.'<h6 id="h'.$this->page_id.'-'.$wacko->header_count.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h6>';
 		}
 		else if (preg_match('/\n[ \t]*======(.*?)={2,7}$/', $thing, $matches))
@@ -751,7 +750,6 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			#return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h5>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h5>';
 			return $result.'<h5 id="h'.$this->page_id.'-'.$wacko->header_count.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h5>';
 		}
 		else if (preg_match('/\n[ \t]*=====(.*?)={2,7}$/', $thing, $matches))
@@ -760,7 +758,6 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			#return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h4>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h4>';
 			return $result.'<h4 id="h'.$this->page_id.'-'.$wacko->header_count.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h4>';
 		}
 		else if (preg_match('/\n[ \t]*====(.*?)={2,7}$/', $thing, $matches))
@@ -769,7 +766,6 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			#return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h3>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h3>';
 			return $result.'<h3 id="h'.$this->page_id.'-'.$wacko->header_count.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h3>';
 		}
 		else if (preg_match('/\n[ \t]*===(.*?)={2,7}$/', $thing, $matches))
@@ -778,7 +774,6 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			#return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h2>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h2>';
 			return $result.'<h2 id="h'.$this->page_id.'-'.$wacko->header_count.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h2>';
 		}
 		else if (preg_match('/\n[ \t]*==(.*?)={2,7}$/', $thing, $matches))
@@ -787,7 +782,6 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			#return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h1>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h1>';
 			return $result.'<h1 id="h'.$this->page_id.'-'.$wacko->header_count.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h1>';
 		}
 		// separators

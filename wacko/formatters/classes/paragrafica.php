@@ -22,7 +22,6 @@ class paragrafica
 	var $t1				= array( // terminators like <-t>$1
 		array( // rightinators
 			"!(<table)!si",
-			#"!(<a[^>]*></a><h[1-9]>)!si",
 			"!(<h[1-9][^>]*>)!si",
 			"!(<(u|o)l)!si",
 			"!(<div)!si",
@@ -165,7 +164,7 @@ class paragrafica
 
 		while ($_w != $what);
 
-		// 3. replace each <t->....<-t> to <p class="auto">....</p>
+		// 3. replace each <t->....<-t> to <p class="auto">...</p>
 		$pcount = 0;
 		$pieces = explode( $this->mark2, $what );
 
@@ -212,8 +211,7 @@ class paragrafica
 						if (strlen($inside))
 						{
 							$pcount++;
-							$pieces[$k] = #'<a name="p'.$page_id.'-'.$pcount.'"></a>'.
-										$this->prefix1.
+							$pieces[$k] = $this->prefix1.
 										$page_id.'-'.$pcount.
 										$this->prefix2.
 										$inside.
@@ -258,10 +256,8 @@ class paragrafica
 		// 1. get all ^^ of this
 		$this->toc = array();
 		$what = preg_replace_callback( '!'.
-		#"(<a name=\"(h[0-9]+-[0-9]+)\"></a><h([0-9])>(.*?)</h\\3>)".	// 2=id, 3=depth, 4=name
 		"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)".				// 2=depth, 3=id, 4=name
 									"|".
-		#"(<a name=\"(p[0-9]+-[0-9]+)\"></a>)".						// 6=id
 		"(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">)".				// 6=id
 									"|".
 		"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
