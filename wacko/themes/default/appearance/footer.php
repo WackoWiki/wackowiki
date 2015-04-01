@@ -6,7 +6,7 @@
  */
 
 ?>
-</section>
+</main>
 <footer>
 <nav class="footer">
 <div class="footerlist">
