@@ -352,7 +352,7 @@ echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = tru
 ?>
 </div>
 </header>
-<section>
+<main>
 <?php
 // here we show messages
 if ($message = $this->get_message())
