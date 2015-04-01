@@ -2161,7 +2161,7 @@ class Wacko
 					{
 						if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
 						{
-							$xml->news();
+							$xml->news($this->tag);
 						}
 					}
 				}
@@ -3034,7 +3034,7 @@ class Wacko
 
 			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
 			{
-				$aname = 'name="'.$supertag.'"';
+				$aname = 'id="'.$supertag.'"';
 				$this->first_inclusion[$supertag] = 1;
 			}
 
@@ -5642,7 +5642,8 @@ class Wacko
 		{
 			// #2. find all <a></a><hX> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatters/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<a name=\"(h[0-9]+-[0-9]+)\"></a><h([0-9])>(.*?)</h\\3>)!i",
+			#$what = preg_replace_callback("!(<a name=\"(h[0-9]+-[0-9]+)\"></a><h([0-9])>(.*?)</h\\3>)!i",
+			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)!i",
 				array(&$this, 'numerate_toc_callback_toc'), $what);
 		}
 
@@ -5650,7 +5651,8 @@ class Wacko
 		{
 			// #2. find all <a></a><p...> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatters/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<a name=\"(p[0-9]+-[0-9]+)\"></a><p([^>]+)>(.+?)</p>)!is",
+			#$what = preg_replace_callback("!(<a name=\"(p[0-9]+-[0-9]+)\"></a><p([^>]+)>(.+?)</p>)!is",
+			$what = preg_replace_callback("!(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">(.+?)</p>)!is",
 				array(&$this, 'numerate_toc_callback_p'), $what);
 		}
 
@@ -5659,11 +5661,12 @@ class Wacko
 
 	function numerate_toc_callback_toc($matches)
 	{
-		return '<a name="'.$matches[2].'"></a><h'.$matches[3].'>'.
-			(isset($this->post_wacko_toc_hash[$matches[2]][1])
-				? $this->post_wacko_toc_hash[$matches[2]][1]
+		#return '<a name="'.$matches[2].'"></a><h'.$matches[3].'>'.
+		return '<h'.$matches[2].' id="'.$matches[3].'">'.
+			(isset($this->post_wacko_toc_hash[$matches[3]][1])
+				? $this->post_wacko_toc_hash[$matches[3]][1]
 				: $matches[4]).
-			'</h'.$matches[3].'>';
+			'</h'.$matches[2].'>';
 	}
 
 	function numerate_toc_callback_p($matches)
@@ -5687,8 +5690,9 @@ class Wacko
 			$style[$v] = str_replace('##', $link, $style[$v]);
 		}
 
-		return $style['_before'].'<a name="'.$matches[2].'"></a><p'.$matches[3].'>'.
-			$style['before'].$matches[4].$style['after'].
+		#return $style['_before'].'<a name="'.$matches[2].'"></a><p'.$matches[3].'>'.
+		return $style['_before'].'<p class="auto" id='.$matches[2].'>'.
+			$style['before'].$matches[3].$style['after'].
 			'</p>'.$style['_after'];
 	}
 

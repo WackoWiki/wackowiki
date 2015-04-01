@@ -22,7 +22,8 @@ class paragrafica
 	var $t1				= array( // terminators like <-t>$1
 		array( // rightinators
 			"!(<table)!si",
-			"!(<a[^>]*></a><h[1-9]>)!si",
+			#"!(<a[^>]*></a><h[1-9]>)!si",
+			"!(<h[1-9][^>]*>)!si",
 			"!(<(u|o)l)!si",
 			"!(<div)!si",
 			"!(<p)!si",
@@ -211,7 +212,7 @@ class paragrafica
 						if (strlen($inside))
 						{
 							$pcount++;
-							$pieces[$k] = '<a name="p'.$page_id.'-'.$pcount.'"></a>'.
+							$pieces[$k] = #'<a name="p'.$page_id.'-'.$pcount.'"></a>'.
 										$this->prefix1.
 										$page_id.'-'.$pcount.
 										$this->prefix2.
@@ -248,6 +249,8 @@ class paragrafica
 			}
 		}
 
+		#$this->wacko->debug_print_r($what);
+
 		// ==================================================================
 		// Forming body_toc
 		//  * in wacko formatter we have done "#h1249_1"
@@ -255,9 +258,11 @@ class paragrafica
 		// 1. get all ^^ of this
 		$this->toc = array();
 		$what = preg_replace_callback( '!'.
-		"(<a name=\"(h[0-9]+-[0-9]+)\"></a><h([0-9])>(.*?)</h\\3>)". // 2=id, 3=depth, 4=name
+		#"(<a name=\"(h[0-9]+-[0-9]+)\"></a><h([0-9])>(.*?)</h\\3>)".	// 2=id, 3=depth, 4=name
+		"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)".				// 2=depth, 3=id, 4=name
 									"|".
-		"(<a name=\"(p[0-9]+-[0-9]+)\"></a>)".						// 6=id
+		#"(<a name=\"(p[0-9]+-[0-9]+)\"></a>)".						// 6=id
+		"(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">)".				// 6=id
 									"|".
 		"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
 		// {{include xxxx="TAG" notoc="1"}}
@@ -269,6 +274,7 @@ class paragrafica
 	// for further TOC creation routines
 	function add_toc_entry($matches)
 	{
+		#$this->wacko->debug_print_r($matches);
 		if (!isset($matches[6])) $matches[6] = '';
 		if (!isset($matches[8])) $matches[8] = '';
 
@@ -288,7 +294,7 @@ class paragrafica
 			}
 			else
 			{
-				$this->toc[] = array($matches[2], $matches[4], $matches[3]);
+				$this->toc[] = array($matches[3], $matches[4], $matches[2]);
 			}
 		}
 
