@@ -28,7 +28,7 @@ else
 		echo '<tr>';
 			echo '<td class="label"></td>';
 			echo '<td style="text-align:left;width:80%;">'.$row['text'].'</td>';
-			echo '<td valign="top">'.$user.'</td>';
+			echo '<td>'.$user.'</td>';
 		echo '</tr>';
 		echo '<tr>';
 			$vars	= $polls_obj->get_poll_vars($row['poll_id']);

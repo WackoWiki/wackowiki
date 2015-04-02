@@ -27,42 +27,42 @@ class Polls
 	// id number of the latest poll
 	function get_last_poll_id()
 	{
-		$id = $this->engine->load_single(
+		$poll_id = $this->engine->load_single(
 			'SELECT poll_id '.
 			'FROM '.$this->engine->config['table_prefix'].'poll '.
 			'ORDER BY poll_id DESC '.
 			'LIMIT 1');
 
-		if ($id['poll_id'] == false)
+		if ($poll_id['poll_id'] == false)
 		{
 			return 0;
 		}
 		else
 		{
-			return $id['poll_id'];
+			return $poll_id['poll_id'];
 		}
 	}
 
 	// title information for a given poll
-	function get_poll_title($id)
+	function get_poll_title($poll_id)
 	{
 		$title = $this->engine->load_single(
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name ".
 			"FROM {$this->engine->config['table_prefix']}poll p ".
 				"LEFT JOIN {$this->engine->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
-			"WHERE p.poll_id = $id AND p.v_id = 0");
+			"WHERE p.poll_id = '".$poll_id."' AND p.v_id = 0");
 
 		return $title;
 	}
 
 	// variants data for a given poll
 	// sorts by total votes if "$votes = 1"
-	function get_poll_vars($id, $votes = 0)
+	function get_poll_vars($poll_id, $votes = 0)
 	{
 		$vars = $this->engine->load_all(
 			"SELECT poll_id, v_id, text, votes ".
 			"FROM {$this->engine->config['table_prefix']}poll ".
-			"WHERE poll_id = $id AND v_id <> 0 ".
+			"WHERE poll_id = '".$poll_id."' AND v_id <> 0 ".
 			"ORDER BY ".($votes == 1 ? "votes DESC, " : "")."v_id ASC");
 
 		return $vars;
@@ -138,7 +138,7 @@ class Polls
 					"FROM {$this->engine->config['table_prefix']}poll p ".
 						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
-						"AND end <> '".SQL_NULLDATE."' AND YEAR(start) = $year ".
+						"AND end <> '".SQL_NULLDATE."' AND YEAR(start) = '".$year."' ".
 					"ORDER BY end DESC");
 				break;
 
@@ -151,11 +151,12 @@ class Polls
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
 					"ORDER BY start DESC");
 		}
+
 		return $list;
 	}
 
 	// add a new poll into the database
-	function submit_poll($id, $topic, $plural, $answers, $user_id, $start = 0)
+	function submit_poll($poll_id, $topic, $plural, $answers, $user_id, $start = 0)
 	{
 		$topic		= quote($this->engine->dblink, $topic);
 		$user_id	= (int)$user_id;
@@ -165,10 +166,10 @@ class Polls
 		// submitting title
 		$this->engine->sql_query(
 			"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
-				"poll_id	= (int)$id, ".
+				"poll_id	= '".(int)$poll_id."', ".
 				"text		= '".quote($this->engine->dblink, rtrim($topic, '.'))."', ".
 				"user_id	= '".(int)$user_id."', ".
-				"plural		= $plural, ".
+				"plural		= '".$plural."', ".
 				"start		= ".($start == 1 ? "NOW()" : "'".SQL_NULLDATE."'"));
 
 		// submitting variants
@@ -178,10 +179,11 @@ class Polls
 			$v_text	= quote($this->engine->dblink, $v_text);
 			$this->engine->sql_query(
 				"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
-					"poll_id	= (int)$id, ".
-					"v_id		= (int)$v_id, ".
+					"poll_id	= '".(int)$poll_id."', ".
+					"v_id		= '".(int)$v_id."', ".
 					"text		= '".quote($this->engine->dblink, rtrim($v_text, '.'))."'");
 		}
+
 		return true;
 	}
 
@@ -190,19 +192,19 @@ class Polls
 	{
 		return $this->engine->sql_query(
 			"DELETE FROM {$this->engine->config['table_prefix']}poll ".
-			"WHERE poll_id = $poll_id");
+			"WHERE poll_id = '".$poll_id."'");
 	}
 
 	// print voting form
 	// tag parameter specifies wiki page
 	// for form action url if necessary
-	function show_poll_vote($id, $tag = '')
+	function show_poll_vote($poll_id, $tag = '')
 	{
 		if ($tag != '') $tag = str_replace('%2F', '/', rawurlencode($tag));
 
 		// load poll data
-		$header		= $this->get_poll_title($id);
-		$vars		= $this->get_poll_vars($id);
+		$header		= $this->get_poll_title($poll_id);
+		$vars		= $this->get_poll_vars($poll_id);
 		$duration	= $this->poll_time($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
 		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
 
@@ -215,19 +217,19 @@ class Polls
 		}
 		else
 		{
-			$poll	= $this->engine->form_open('', $tag, '', '', '', '#poll'.$id.'_form').
+			$poll	= $this->engine->form_open('', $tag, '', '', '', '#poll'.$poll_id.'_form').
 					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
-					'<a name="poll'.$id.'_form"></a>'.
-					'<input name="poll" type="hidden" value="'.$id.'" />'.
+					'<a name="poll'.$poll_id.'_form"></a>'.
+					'<input name="poll" type="hidden" value="'.$poll_id.'" />'.
 					'<table class="formation">'."\n".
-					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$id).'): '.$header['text'].'</th></tr>'."\n";
+					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$poll_id).'): '.$header['text'].'</th></tr>'."\n";
 
 			foreach ($vars as $var)
 			{
 				$poll	.= '<tr class="lined"><td class="label">'.
 							($header['plural'] == 1
 								? '<input id="'.$var['v_id'].'" name="'.$var['v_id'].'" type="checkbox" value="1" />'
-								: '<input name="id" type="radio" value="'.$var['v_id'].'" />').
+								: '<input id="'.$var['v_id'].'" name="id" type="radio" value="'.$var['v_id'].'" />').
 							'</td>'.
 						'<td style="width:95%;text-align:left;"><label for="'.$var['v_id'].'">'.$var['text'].'</label></td></tr>'."\n";
 			}
@@ -246,13 +248,13 @@ class Polls
 	}
 
 	// print survey results
-	function show_poll_results($id)
+	function show_poll_results($poll_id)
 	{
 		$total = '';
 
 		// load poll data
-		$header		= $this->get_poll_title($id);
-		$vars		= $this->get_poll_vars($id, 1);
+		$header		= $this->get_poll_title($poll_id);
+		$vars		= $this->get_poll_vars($poll_id, 1);
 		$duration	= $this->poll_time($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
 		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
 		$voters		= $header['votes'];
@@ -271,9 +273,9 @@ class Polls
 		{
 			$poll	= $this->engine->form_open().
 					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
-					'<a name="poll'.$id.'_form"></a>'.
+					'<a name="poll'.$poll_id.'_form"></a>'.
 					'<table class="formation">'.
-					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$id).'): '.$header['text'].'</th></tr>';
+					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$poll_id).'): '.$header['text'].'</th></tr>';
 
 			foreach ($vars as $var)
 			{
@@ -302,12 +304,12 @@ class Polls
 	}
 
 	// determine if user has voted a given poll
-	function poll_is_voted($id)
+	function poll_is_voted($poll_id)
 	{
 		$cookie	= $this->engine->get_cookie('poll');
 		$ids	= explode(';', $cookie);
 
-		if (in_array($id, $ids) === true || $id == $cookie)
+		if (in_array($poll_id, $ids) === true || $poll_id == $cookie)
 		{
 			return true;
 		}
@@ -318,14 +320,14 @@ class Polls
 	}
 
 	// set poll cookie
-	function set_poll_cookie($id)
+	function set_poll_cookie($poll_id)
 	{
 		if ($cookie = $this->engine->get_cookie('poll'))
 		{
 			$ids = explode(';', $cookie);
 		}
 
-		$ids[]	= $id;
+		$ids[]	= $poll_id;
 		$cookie	= implode(';', $ids);
 		$this->engine->set_session_cookie('poll', $cookie);
 		$this->engine->set_persistent_cookie('poll', $cookie, 365);
