@@ -76,6 +76,7 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 else if (isset($_POST['results']) && isset($_POST['poll']))
 {
 	$vote = (int)$_POST['poll'];
+	$results = 1;
 }
 
 // print survey forms/results
@@ -103,7 +104,7 @@ else
 
 		foreach ($polls as $poll)
 		{
-			echo ($align == 'v' ? '<tr>' : '').'<td valign="top">';
+			echo ($align == 'v' ? '<tr>' : '').'<td>';
 
 			if ($results == 1 || $vote == $poll['poll_id'] || $polls_obj->poll_is_voted($poll['poll_id']))
 			{
@@ -122,7 +123,7 @@ else
 	}
 	else
 	{
-		echo '<table class="formation"><tr><td align="center"><em>';
+		echo '<table class="formation"><tr><td><em>';
 		echo $this->get_translation('PollsNone');
 		echo '</em></td></tr></table>';
 	}

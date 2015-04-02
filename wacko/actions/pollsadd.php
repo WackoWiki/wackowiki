@@ -265,9 +265,9 @@ else if ($stop_mod !== true)
 	// fill out survey answers
 	foreach ($vars as $var)
 	{
-		echo '<tr>';
-			echo '<td class="label">'.$this->get_translation('PollsVariant').' '.$var['v_id'].':</td>';
-			echo '<td><input name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.htmlspecialchars($var['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></td>';
+		echo '<tr class="lined">';
+			echo '<td class="label"><label for="pollvariant_'.$var['v_id'].'">'.$this->get_translation('PollsVariant').' '.$var['v_id'].':</label></td>';
+			echo '<td><input id="pollvariant_'.$var['v_id'].'" name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.htmlspecialchars($var['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></td>';
 		echo '</tr>';
 	}
 
