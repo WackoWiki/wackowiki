@@ -256,7 +256,7 @@ else if ($stop_mod !== true)
 	echo ($moderation === true ? '<input name="mode" type="hidden" value="'.$mode.'" />'.
 		'<input name="moderation" type="hidden" value="'.$edit_id.'" />'.
 		'<input name="user" type="hidden" value="'.$user.'" />' : '');
-	echo '<a name="pollsadd_form"></a><table class="formation">';
+	echo '<a id="pollsadd_form"></a><table class="formation">';
 	echo '<tr>';
 		echo '<th>'.$this->get_translation('PollsTopic').':</th>';
 		echo '<th style="text-align:left;"><input name="topic" type="text" size="70" maxlength="250" value="'.$topic.'" style="font-weight:normal;" /></th>';

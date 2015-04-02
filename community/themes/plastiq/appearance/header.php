@@ -19,7 +19,6 @@ require ('themes/_common/_header.php');
 					</td>
 					<td valign="top">
 						<div id="controls">
-							<a name="top"></a>
 <?php
 $user = '';
 

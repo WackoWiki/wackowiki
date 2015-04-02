@@ -218,8 +218,8 @@ class Polls
 		else
 		{
 			$poll	= $this->engine->form_open('', $tag, '', '', '', '#poll'.$poll_id.'_form').
-					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
-					'<a name="poll'.$poll_id.'_form"></a>'.
+					'<a id="p'.date('dm', strtotime($header['start'])).'"></a>'.
+					'<a id="poll'.$poll_id.'_form"></a>'.
 					'<input name="poll" type="hidden" value="'.$poll_id.'" />'.
 					'<table class="formation">'."\n".
 					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$poll_id).'): '.$header['text'].'</th></tr>'."\n";
@@ -272,8 +272,8 @@ class Polls
 		else
 		{
 			$poll	= $this->engine->form_open().
-					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
-					'<a name="poll'.$poll_id.'_form"></a>'.
+					'<a id="p'.date('dm', strtotime($header['start'])).'"></a>'.
+					'<a id="poll'.$poll_id.'_form"></a>'.
 					'<table class="formation">'.
 					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$poll_id).'): '.$header['text'].'</th></tr>';
 

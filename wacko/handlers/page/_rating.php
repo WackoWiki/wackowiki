@@ -29,9 +29,8 @@ if ($this->config['footer_rating'] != 0 && ($this->config['footer_rating'] != 2 
 if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isset($_GET['show_rating']) && $_GET['show_rating'] != 1) )
 {
 	// display rating header
-	echo '<a name="rating"></a>';
 	echo '<div id="rateheader">';
-	echo $this->get_translation('RatingHeader').' [<a href="'.$this->href('', '', 'show_rating=1').'#rating">'.$this->get_translation('RatingResults').'</a>]';
+	echo $this->get_translation('RatingHeader').' [<a href="'.$this->href('', '', 'show_rating=1').'#rateheader">'.$this->get_translation('RatingResults').'</a>]';
 	echo "</div>\n";
 
 	// display rating form
@@ -59,11 +58,10 @@ else
 	if ($results['ratio'] > 0)			$results['ratio'] = '+'.$results['ratio'];
 
 	// display rating header
-	echo '<a name="rating"></a>';
 	echo '<div id="rateheader">';
 	echo $this->get_translation('RatingHeaderResults').
 	(handler_show_page_is_rated($this, $this->page['page_id']) === false
-	? ' [<a href="'.$this->href('', '', 'show_rating=0').'#rating">'.$this->get_translation('RatingForm').'</a>]'
+	? ' [<a href="'.$this->href('', '', 'show_rating=0').'#rateheader">'.$this->get_translation('RatingForm').'</a>]'
 	: '');
 	echo "</div>\n";
 
