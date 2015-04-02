@@ -120,7 +120,7 @@ if ($this->has_access('read'))
 
 				foreach ($this->numerate_links as $l => $n)
 				{
-					echo "<small><strong><sup><a name=\"reflink\">$n</a></sup></strong> $l</small>\n";
+					echo "<small><strong><sup><span class=\"reflink\">$n</span></sup></strong> $l</small>\n";
 
 					if (++$i < $c)
 					{

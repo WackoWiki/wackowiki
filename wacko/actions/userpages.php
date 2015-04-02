@@ -16,22 +16,22 @@ if ($this->get_user_name())
 
 	if (isset($_GET['mode']) && $_GET['mode'] == 'mypages')
 	{
-		echo "<a name=\"list\"></a><h3>".$this->get_translation('ListMyPages')."</h3>";
+		echo "<a id=\"list\"></a><h3>".$this->get_translation('ListMyPages')."</h3>";
 		echo $this->action('mypages');
 	}
 	else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
 	{
-		echo "<a name=\"list\"></a><h3>".$this->get_translation('ListMyWatches')."</h3>";
+		echo "<a id=\"list\"></a><h3>".$this->get_translation('ListMyWatches')."</h3>";
 		echo $this->action('mywatches');
 	}
 	else if (!isset($_GET['mode']) || $_GET['mode'] == 'mychangeswatches')
 	{
-		echo "<a name=\"list\"></a><h3>".$this->get_translation('ListMyChangesWatches')."</h3>";
+		echo "<a id=\"list\"></a><h3>".$this->get_translation('ListMyChangesWatches')."</h3>";
 		echo $this->action('mychangeswatches');
 	}
 	else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
 	{
-		echo "<a name=\"list\"></a><h3>".$this->get_translation('ListMyChanges')."</h3>";
+		echo "<a id=\"list\"></a><h3>".$this->get_translation('ListMyChanges')."</h3>";
 		echo $this->action('mychanges');
 	}
 }
