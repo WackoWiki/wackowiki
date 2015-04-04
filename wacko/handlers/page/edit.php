@@ -193,12 +193,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 					}
 
 					// now we render it internally so we can write the updated link table.
-					$this->clear_link_table();
-					$this->start_link_tracking();
-					$dummy = $this->format($body_r, 'post_wacko');
-					$this->stop_link_tracking();
-					$this->write_link_table($this->page['page_id']);
-					$this->clear_link_table();
+					$this->update_link_table($this->page['page_id'], $body_r);
 				}
 
 				// forward

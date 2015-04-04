@@ -68,12 +68,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	$page = $engine->load_page($new_tag);
 	$engine->current_context++;
 	$engine->context[$engine->current_context] = $new_tag;
-	$engine->clear_link_table();
-	$engine->start_link_tracking();
-	$dummy = $engine->format($page['body_r'], 'post_wacko');
-	$engine->stop_link_tracking();
-	$engine->write_link_table($page['page_id']);
-	$engine->clear_link_table();
+	$engine->update_link_table($page['page_id'], $page['body_r']);
 	$engine->current_context--;
 
 	// update title in meta and body if needed
@@ -171,12 +166,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	foreach ($comments as $comment)
 	{
 		$engine->context[++$engine->current_context] = $comment['tag'];
-		$engine->clear_link_table();
-		$engine->start_link_tracking();
-		$dummy = $engine->format($comment['body_r'], 'post_wacko');
-		$engine->stop_link_tracking();
-		$engine->write_link_table($comment['page_id']);
-		$engine->clear_link_table();
+		$engine->update_link_table($comment['page_id'], $comment['body_r']);
 		$engine->current_context--;
 
 		// saving acls
@@ -274,12 +264,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$page = $engine->load_page('', $new_page_id);
 	$engine->current_context++;
 	$engine->context[$engine->current_context] = $new_tag;
-	$engine->clear_link_table();
-	$engine->start_link_tracking();
-	$dummy = $engine->format($page['body_r'], 'post_wacko');
-	$engine->stop_link_tracking();
-	$engine->write_link_table($page['page_id']);
-	$engine->clear_link_table();
+	$engine->update_link_table($page['page_id'], $page['body_r']);
 	$engine->current_context--;
 
 	// recount comments for old and new topics
@@ -1105,12 +1090,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						foreach ($comments as $comment)
 						{
 							$this->context[++$this->current_context] = $comment['tag'];
-							$this->clear_link_table();
-							$this->start_link_tracking();
-							$dummy = $this->format($comment['body_r'], 'post_wacko');
-							$this->stop_link_tracking();
-							$this->write_link_table($comment['page_id']);
-							$this->clear_link_table();
+							$engine->update_link_table($comment['page_id'], $comment['body_r']);
 							$this->current_context--;
 
 							// saving acls

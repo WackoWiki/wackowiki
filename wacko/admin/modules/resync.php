@@ -170,12 +170,7 @@ function admin_resync(&$engine, &$module)
 
 					// rendering links
 					$engine->context[++$engine->current_context] = ( $page['comment_on_id'] ? $page['comment_on_id'] : $page['tag'] );
-					$engine->clear_link_table();
-					$engine->start_link_tracking();
-					$dummy = $engine->format($page['body_r'], 'post_wacko');
-					$engine->stop_link_tracking();
-					$engine->write_link_table($page['page_id']);
-					$engine->clear_link_table();
+					$engine->update_link_table($page['page_id'], $page['body_r']);
 					$engine->current_context--;
 				}
 
