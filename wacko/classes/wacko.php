@@ -3389,6 +3389,17 @@ class Wacko
 		}
 	}
 
+	function update_link_table($page_id = '', $body_r)
+	{
+		// now we render it internally so we can write the updated link table.
+		$this->clear_link_table();
+		$this->start_link_tracking();
+		$dummy = $this->format($body_r, 'post_wacko');
+		$this->stop_link_tracking();
+		$this->write_link_table($page_id);
+		$this->clear_link_table();
+	}
+
 	// INTERWIKI STUFF
 	function read_inter_wiki_config()
 	{

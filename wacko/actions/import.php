@@ -93,12 +93,7 @@ if ($this->is_admin())
 				// now we render it internally in the context of imported
 				// page so we can write the updated link table
 				$this->context[++$this->current_context] = $tag;
-				$this->clear_link_table();
-				$this->start_link_tracking();
-				$dummy = $this->format($body_r, 'post_wacko');
-				$this->stop_link_tracking();
-				$this->write_link_table($page_id);
-				$this->clear_link_table();
+				$this->update_link_table($page_id, $body_r);
 				$this->current_context--;
 
 				// log import
