@@ -265,7 +265,7 @@ footer {
 	width: 100%;
 }
 
-.files,.comment,.rating {
+.files,.comment,.rating, .categories {
 	background-color: #FFFFFF;
 	padding: 10px 20px;
 	margin: 0 -20px;
