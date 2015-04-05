@@ -128,12 +128,6 @@ if ($this->has_access('read'))
 		$data = $this->numerate_toc($data); //  numerate toc if needed
 		echo $data;
 
-		// show category tags
-		if ($this->forum === true)
-		{
-			echo "<div class=\"newscontent\">".$this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1)."</div>\n";
-		}
-
 		$this->set_language($this->user_lang);
 		?>
 		<script>
@@ -155,6 +149,13 @@ else
 ?>
 <br style="clear: both" />&nbsp;</article>
 <?php
+
+// show category tags
+if ($this->forum === true)
+{
+	echo "<div class=\"categories\">".$this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1)."</div>\n";
+}
+
 // page comments and files
 if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['comment_on_id'])
 {

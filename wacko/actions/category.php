@@ -133,7 +133,7 @@ if (!$ids)
 
 			# if (!$inline && $i++ > 0) echo '<br />';
 
-			echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."";
+			echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'" rel="tag">' : '' ).htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."";
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
@@ -141,7 +141,7 @@ if (!$ids)
 
 				foreach ($word['childs'] as $id => $word)
 				{
-					echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."</li>\n";
+					echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'" rel="tag">' : '' ).htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."</li>\n";
 				}
 
 				echo "</ul>\n</li>\n";
