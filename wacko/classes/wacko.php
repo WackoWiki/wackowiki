@@ -2941,22 +2941,22 @@ class Wacko
 				$method		= $handler;
 			}
 
-			$thispage		= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
+			$this_page		= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
 
-			if (!$thispage && $link_lang)
+			if (!$this_page && $link_lang)
 			{
 				$this->set_language($link_lang);
 				$lang		= $link_lang;
-				$thispage	= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
+				$this_page	= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
 			}
 
-			if ($thispage)
+			if ($this_page)
 			{
 				$_lang		= $this->language['code'];
 
-				if ($thispage['lang'])
+				if ($this_page['lang'])
 				{
-					$lang	= $thispage['lang'];
+					$lang	= $this_page['lang'];
 				}
 				else
 				{
@@ -3038,9 +3038,9 @@ class Wacko
 				$this->first_inclusion[$supertag] = 1;
 			}
 
-			if ($thispage)
+			if ($this_page)
 			{
-				$page_link	= $this->href($method, $thispage['tag']).($anchor ? $anchor : '');
+				$page_link	= $this->href($method, $this_page['tag']).($anchor ? $anchor : '');
 				$page_id	= $this->get_page_id($tag);
 
 				if ($this->config['hide_locked'])
