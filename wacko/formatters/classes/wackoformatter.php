@@ -861,7 +861,7 @@ class WackoFormatter
 						$text = substr($url, 1);
 					}
 
-					return ($sup ? '<sup>' : '').'<a href="#o'.$aname.'" name="'.$aname.'">'.$text.'</a>'.($sup ? '</sup>' : '');
+					return ($sup ? '<sup>' : '').'<a href="#o'.$aname.'" id="'.$aname.'">'.$text.'</a>'.($sup ? '</sup>' : '');
 				}
 				// footnote [[#*]], [[#**]], [[#1]], [[#2]]
 				else if ($url[0] == '#')
