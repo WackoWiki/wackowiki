@@ -148,13 +148,13 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				echo '<tr class="lined">';
 
 				echo	'<td style="padding-left:5px;"><a href="'.$this->href('', ($this->config['users_page']), 'profile='.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$member['user_name'].'</a></td>'.
-									'<td align="center">'.$member['total_pages'].'</td>'.
-									'<td align="center">'.$member['total_comments'].'</td>'.
-									'<td align="center">'.$member['total_revisions'].'</td>'.
+									'<td>'.$member['total_pages'].'</td>'.
+									'<td>'.$member['total_comments'].'</td>'.
+									'<td>'.$member['total_revisions'].'</td>'.
 				($this->get_user()
 				?
-									'<td align="center">'.$this->get_time_string_formatted($member['signup_time']).'</td>'.
-									'<td align="center">'.( $member['hide_lastsession'] == 1
+									'<td>'.$this->get_time_string_formatted($member['signup_time']).'</td>'.
+									'<td>'.( $member['hide_lastsession'] == 1
 				? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 				: ( !$member['last_visit'] || $member['last_visit'] == SQL_NULLDATE
 				? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
@@ -278,7 +278,7 @@ else
 	// list entries
 	if ($groups == false)
 	{
-		echo '<tr class="lined"><td colspan="5" align="center" style="padding:10px;"><small><em>'.$this->get_translation('UsersNoMatching')."</em></small></td></tr>\n";
+		echo '<tr class="lined"><td colspan="5" style="padding:10px;"><small><em>'.$this->get_translation('UsersNoMatching')."</em></small></td></tr>\n";
 	}
 	else
 	{
@@ -287,12 +287,12 @@ else
 			echo '<tr class="lined">';
 
 			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$usergroup['group_name'].'</a></td>'.
-					'<td align="center">'.$usergroup['members'].'</td>'.
-					/* '<td align="center">'.$usergroup['total_comments'].'</td>'.
-					'<td align="center">'.$usergroup['total_revisions'].'</td>'. */
+					'<td>'.$usergroup['members'].'</td>'.
+					/* '<td>'.$usergroup['total_comments'].'</td>'.
+					'<td>'.$usergroup['total_revisions'].'</td>'. */
 				($this->get_user()
 					?
-					'<td align="center">'.$this->get_time_string_formatted($usergroup['created']).'</td>'
+					'<td>'.$this->get_time_string_formatted($usergroup['created']).'</td>'
 					: '').
 			"</tr>\n";
 		}

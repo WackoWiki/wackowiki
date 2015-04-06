@@ -212,7 +212,7 @@ class Polls
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
 					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
-					'<tr><td align="center"><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
+					'<tr><td><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
 					'</table>';
 		}
 		else
@@ -266,7 +266,7 @@ class Polls
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
 					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
-					'<tr><td align="center"><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
+					'<tr><td><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
 					'</table>';
 		}
 		else

@@ -167,7 +167,7 @@ function admin_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsCurrent').'</th></tr>';
-			echo '<tr><td align="center"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><td><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
@@ -207,7 +207,7 @@ function admin_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsModeration').'</th></tr>';
-			echo '<tr><td align="center"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><td><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
@@ -260,7 +260,7 @@ function admin_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsEnded').'</th></tr>';
-			echo '<tr><td align="center"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><td><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{

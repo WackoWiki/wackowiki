@@ -372,9 +372,9 @@ function admin_groups(&$engine, &$module)
 		foreach ($members as $member)
 		{
 			echo '<tr class="lined">'."\n".
-			'<td align="center"><input type="radio" name="change_member" value="'.$member['user_id'].'" /></td>'.
-					'<td align="center">'.$member['user_id'].'</td>'.
-					'<td align="center" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$member['user_id'].'">'.$member['user_name'].'</a></strong></td>'.
+			'<td><input type="radio" name="change_member" value="'.$member['user_id'].'" /></td>'.
+					'<td>'.$member['user_id'].'</td>'.
+					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$member['user_id'].'">'.$member['user_name'].'</a></strong></td>'.
 			'</tr>';
 		}
 			?>
@@ -512,21 +512,21 @@ function admin_groups(&$engine, &$module)
 			foreach ($groups as $row)
 			{
 				echo '<tr class="lined">'."\n".
-						'<td align="center"><input type="radio" name="change" value="'.$row['group_id'].'" /></td>'.
-						'<td align="center">'.$row['group_id'].'</td>'.
-						'<td align="left" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=groups&group_id='.$row['group_id'].'">'.$row['group_name'].'</a></strong></td>'.
+						'<td><input type="radio" name="change" value="'.$row['group_id'].'" /></td>'.
+						'<td>'.$row['group_id'].'</td>'.
+						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=groups&group_id='.$row['group_id'].'">'.$row['group_name'].'</a></strong></td>'.
 						'<td>'.$row['description'].'</td>'.
-						'<td align="center"><small><a href="?mode=groups&moderator='.$row['moderator_id'].'">'.$row['user_name'].'</a></small></td>'.
-						'<td align="center">'.$row['members'].'</td>'.
-						'<td align="center">'.$row['open'].'</td>'.
-						'<td align="center">'.$row['active'].'</td>'.
-						'<td align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['created'])).'</small></td>'.
+						'<td><small><a href="?mode=groups&moderator='.$row['moderator_id'].'">'.$row['user_name'].'</a></small></td>'.
+						'<td>'.$row['members'].'</td>'.
+						'<td>'.$row['open'].'</td>'.
+						'<td>'.$row['active'].'</td>'.
+						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['created'])).'</small></td>'.
 					'</tr>';
 			}
 		}
 		else
 		{
-			echo '<tr><td colspan="5" align="center"><br /><em>No groups that meet the criteria</em></td></tr>';
+			echo '<tr><td colspan="5"><br /><em>No groups that meet the criteria</em></td></tr>';
 		}
 ?>
 			</table>

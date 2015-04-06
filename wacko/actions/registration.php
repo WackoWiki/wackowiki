@@ -406,7 +406,7 @@ if (!isset($_POST['confirm']))
 
 		echo '<p>';
 		echo '<label for="email">'.$this->get_translation('Email').':</label>';
-		echo '<input id="email" name="email" size="30" value="'.htmlspecialchars($email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
+		echo '<input type="email" id="email" name="email" size="30" value="'.htmlspecialchars($email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
 		echo '<small> <a title="'.$this->get_translation('RegistrationEmailInfo').'">(?)</a></small></p>';
 
 		/*if ($this->config['policy_page'])

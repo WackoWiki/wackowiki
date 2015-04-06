@@ -290,7 +290,7 @@ function admin_users(&$engine, &$module)
 			'<tr><td><label for="newrealname">'.$engine->get_translation('RealName').'</label></td>'.
 			'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" /></td></tr>'.
 			'<tr><td><label for="email">'.$engine->get_translation('Email').'</label></td>'.
-			'<td><input id="email" name="email" value="'.( isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="50" maxlength="100" /></td></tr>'.
+			'<td><input type="email" id="email" name="email" value="'.( isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="50" maxlength="100" /></td></tr>'.
 			'<tr><td><label for="lang">'.$engine->get_translation('YourLanguage').'</label></td>'.
 			'<td><select id="lang" name="lang">';?>
 				<option value=""></option>
@@ -333,7 +333,7 @@ function admin_users(&$engine, &$module)
 				'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" /></td></tr>'.
 				'</td></tr>'.
 				'<tr><td><label for="newemail">'.$engine->get_translation('Email').'</label> '.
-				'<td><input id="newemail" name="newemail" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" /></td></tr>'.
+				'<td><input type="email" id="newemail" name="newemail" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="lang">'.$engine->get_translation('YourLanguage').'</label></td>'.
 				'<td><select id="lang" name="lang">';?>
 					<option value=""></option>
@@ -391,29 +391,29 @@ function admin_users(&$engine, &$module)
 		<?php
 
 			echo '<tr class="lined">'."\n".
-					'<th valign="top" align="center">'.$engine->get_translation('UserName').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;"><strong>'.$user['user_name'].'</strong></td>'.
+					'<th>'.$engine->get_translation('UserName').'</th>'.
+					'<td style="padding-left:5px; padding-right:5px;"><strong>'.$user['user_name'].'</strong></td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th valign="top" align="center">'.$engine->get_translation('RealName').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['real_name'].'</td>'.
+					'<th>'.$engine->get_translation('RealName').'</th>'.
+					'<td style="padding-left:5px; padding-right:5px;">'.$user['real_name'].'</td>'.
 				'</tr>'.
 
 				'<tr class="lined">'."\n".
-					'<th valign="top" align="center">'.$engine->get_translation('YourEmail').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['email'].'</td>'.
+					'<th>'.$engine->get_translation('YourEmail').'</th>'.
+					'<td style="padding-left:5px; padding-right:5px;">'.$user['email'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th valign="top" align="center">'.$engine->get_translation('YourLanguage').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['lang'].'</td>'.
+					'<th>'.$engine->get_translation('YourLanguage').'</th>'.
+					'<td style="padding-left:5px; padding-right:5px;">'.$user['lang'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th valign="top" align="center">'.$engine->get_translation('ChooseTheme').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['theme'].'</td>'.
+					'<th>'.$engine->get_translation('ChooseTheme').'</th>'.
+					'<td style="padding-left:5px; padding-right:5px;">'.$user['theme'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th valign="top" align="center">'.$engine->get_translation('UserEnabled').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['enabled'].'</td>'.
+					'<th>'.$engine->get_translation('UserEnabled').'</th>'.
+					'<td style="padding-left:5px; padding-right:5px;">'.$user['enabled'].'</td>'.
 				'</tr>';
 ?>
 		</table>
@@ -640,26 +640,26 @@ function admin_users(&$engine, &$module)
 			foreach ($users as $row)
 			{
 				echo '<tr class="lined">'."\n".
-						'<td valign="middle" style="width:10px;" class="label"><input name="'.$row['user_id'].'" type="checkbox" value="id" '.( in_array($row['user_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-						'<td valign="top" align="center"><input type="radio" name="change" value="'.$row['user_id'].'" /></td>'.
-						'<td valign="top" align="center">'.$row['user_id'].'</td>'.
-						'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.
-						#'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['real_name'].'</td>'.
-						'<td valign="top">'.$row['email'].'</td>'.
-						'<td valign="top" align="center">'.$row['total_pages'].'</td>'.
-						'<td valign="top" align="center">'.$row['total_comments'].'</td>'.
-						'<td valign="top" align="center">'.$row['total_revisions'].'</td>'.
-						'<td valign="top" align="center">'.$row['total_uploads'].'</td>'.
-						'<td valign="top" align="center"><small><a href="?mode=users&lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
-						'<td valign="top" align="center">'.$row['enabled'].'</td>'.
-						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
-						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.
+						'<td style="width:10px;" class="label"><input name="'.$row['user_id'].'" type="checkbox" value="id" '.( in_array($row['user_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
+						'<td><input type="radio" name="change" value="'.$row['user_id'].'" /></td>'.
+						'<td>'.$row['user_id'].'</td>'.
+						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.
+						#'<td style="padding-left:5px; padding-right:5px;">'.$row['real_name'].'</td>'.
+						'<td>'.$row['email'].'</td>'.
+						'<td>'.$row['total_pages'].'</td>'.
+						'<td>'.$row['total_comments'].'</td>'.
+						'<td>'.$row['total_revisions'].'</td>'.
+						'<td>'.$row['total_uploads'].'</td>'.
+						'<td><small><a href="?mode=users&lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
+						'<td>'.$row['enabled'].'</td>'.
+						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
+						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.
 					'</tr>';
 			}
 		}
 		else
 		{
-			echo '<tr><td colspan="5" align="center"><br /><em>No users that meet the criteria</em></td></tr>';
+			echo '<tr><td colspan="5"><br /><em>No users that meet the criteria</em></td></tr>';
 		}
 ?>
 			</table>

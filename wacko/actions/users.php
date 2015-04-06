@@ -210,7 +210,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				}
 				else
 				{
-					echo '<tr><td colspan="2" align="center"><strong><em>'.$this->get_translation('UsersIntercomDisabled').'</em></strong></td></tr>';
+					echo '<tr><td colspan="2"><strong><em>'.$this->get_translation('UsersIntercomDisabled').'</em></strong></td></tr>';
 				}
 ?>
 			</table>
@@ -219,7 +219,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			}
 			else
 			{
-				echo '<table class="formation"><tr><td colspan="2" align="center"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
+				echo '<table class="formation"><tr><td colspan="2"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
 			}
 		}
 
@@ -413,7 +413,7 @@ else
 	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('UsersSearch').': </td><td>';
-	echo '<input name="user" maxchars="40" size="40" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
+	echo '<input type="search" name="user" maxchars="40" size="40" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->get_translation('UsersFilter').'" /> ';
 	echo '<input id="button" type="submit" value="'.$this->get_translation('UsersOpenProfile').'" name="gotoprofile" />';
 	echo $this->form_close();
@@ -444,7 +444,7 @@ else
 	// list entries
 	if ($users == false)
 	{
-		echo '<tr class="lined"><td colspan="5" align="center" style="padding:10px;"><small><em>'.$this->get_translation('UsersNoMatching')."</em></small></td></tr>\n";
+		echo '<tr class="lined"><td colspan="5" style="padding:10px;"><small><em>'.$this->get_translation('UsersNoMatching')."</em></small></td></tr>\n";
 	}
 	else
 	{
@@ -453,13 +453,13 @@ else
 			echo '<tr class="lined">';
 
 			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$user['user_name'].'</a></td>'.
-					'<td align="center">'.$user['total_pages'].'</td>'.
-					'<td align="center">'.$user['total_comments'].'</td>'.
-					'<td align="center">'.$user['total_revisions'].'</td>'.
+					'<td>'.$user['total_pages'].'</td>'.
+					'<td>'.$user['total_comments'].'</td>'.
+					'<td>'.$user['total_revisions'].'</td>'.
 				($this->get_user()
 					?
-					'<td align="center">'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
-					'<td align="center">'.( $user['hide_lastsession'] == 1
+					'<td>'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
+					'<td>'.( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: (!$user['last_visit'] || $user['last_visit'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
