@@ -237,7 +237,7 @@ function admin_files(&$engine, &$module)
 	<table >
 		<tr>
 			<td><?php echo $engine->get_translation('UploadFor');?>:&nbsp;</td>
-			<td nowrap="nowrap"><input name="file" type="file"  />&nbsp;(Unlimited)</td>
+			<td nowrap="nowrap"><input type="file" name="file" />&nbsp;(Unlimited)</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>

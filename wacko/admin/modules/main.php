@@ -97,7 +97,7 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="action" value="lock" />
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo ( $init->is_locked() === true ? '<span class="red">The site is closed</span>' : '<span class="green">The site is open</span>' ); ?></td>
-				<td align="center"><input id="submit" type="submit" value="<?php echo ( $init->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
+				<td><input id="submit" type="submit" value="<?php echo ( $init->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
 			</tr>
 	</form>
 	<br />
@@ -106,7 +106,7 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="action" value="cache" />
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('ClearCache');?></td>
-				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation('CacheCleared') : '<input id="submit" type="submit" value="clean" />');?></td>
+				<td><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation('CacheCleared') : '<input id="submit" type="submit" value="clean" />');?></td>
 			</tr>
 	</form>
 		<form action="admin.php" method="post" name="purge_sessions">
@@ -115,7 +115,7 @@ function admin_lock(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('PurgeSessions');?>
 				<br /><?php #echo $engine->get_translation('PurgeSessionsExplain');?></td>
-				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->get_translation('PurgeSessionsDone') : '<input id="submit" type="submit" value="purge" />');?></td>
+				<td><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->get_translation('PurgeSessionsDone') : '<input id="submit" type="submit" value="purge" />');?></td>
 			</tr>
 		</table>
 	</form>

@@ -123,7 +123,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
 				<small>This address will appear as the<code>"From:"</code> all the email-notification site.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -131,7 +131,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="abuse_email"><strong>Email service abuse:</strong><br />
 				<small>Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->config['abuse_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->config['abuse_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

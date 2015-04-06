@@ -199,14 +199,14 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 						: '<strong>'.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 					).
 					'</td>'.
-					'<td align="center" style="white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
+					'<td style="white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
 						'&nbsp;&nbsp;'.( $topic['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_id'] == 0 ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
 						'&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'&nbsp;&nbsp;'.
 					'</small></td>'.
-					'<td align="center"><small>'.$topic['comments'].'</small></td>'.
-					'<td align="center"><small>'.$topic['hits'].'</small></td>'.
+					'<td><small>'.$topic['comments'].'</small></td>'.
+					'<td><small>'.$topic['hits'].'</small></td>'.
 					'<td>&nbsp;&nbsp;&nbsp;</td>'.
-					'<td align="center">';
+					'<td>';
 
 			if ($comment == true)
 			{

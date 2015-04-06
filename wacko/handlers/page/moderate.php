@@ -756,9 +756,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				echo '<tr class="lined">'.
 						'<td valign="middle" style="width:10px;" class="label"><input name="'.$topic['page_id'].'" type="checkbox" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 						'<td align="left" style="padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
-						'<td align="center"'.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' : $topic['user_name'] ) ).'&nbsp;&nbsp;</small></td>'.
-						'<td align="center"><small>'.$topic['comments'].'</small></td>'.
-						'<td align="center" style="white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'</small></td>'.
+						'<td '.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' : $topic['user_name'] ) ).'&nbsp;&nbsp;</small></td>'.
+						'<td><small>'.$topic['comments'].'</small></td>'.
+						'<td style="white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'</small></td>'.
 					'</tr>'."\n";
 			}
 		}
