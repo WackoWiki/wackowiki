@@ -6,7 +6,7 @@ $config_global	= $config;
 $dblink_global	= $dblink;
 $lang_global	= $lang;
 
-// TODO: mysql / mysqli / pdo
+// TODO: mysqli / mysql pdo
 // indicate what character set the client will use to send SQL statements to the server
 switch($config_global['database_driver'])
 {
