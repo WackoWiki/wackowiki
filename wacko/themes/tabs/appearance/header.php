@@ -79,10 +79,10 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 	<br clear="all" />
 	<img src="<?php echo $this->config['base_url'] ?>images/z.png" width="1" height="1" alt="" /></div>
 <div class="TopDiv"><img src="<?php echo $this->config['base_url'];?>images/z.png" width="1" height="1" alt="" /></div>
-<table width="100%">
+<table style="width:100%;">
 	<tr>
 		<td style="vertical-align:top;" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->get_translation('Bookmarks') ?>:</strong>&nbsp;&nbsp;</td>
-		<td width="100%" class="Bookmarks">
+		<td style="width:100%;" class="Bookmarks">
 <?php
 	echo '<div id="usermenu">';
 	echo "<ol>\n";

@@ -7,12 +7,12 @@ require ('themes/_common/_header.php');
 
 <body onload="all_init();">
 
-<table class="topbody" align="center"   width="100%">
+<table class="topbody" style="text-align:center; width:100%;">
 	<tr>
 		<td>
 			<?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
 		</td>
-		<td class="searchArea" align="right" valign="bottom">
+		<td class="searchArea" style="text-align:right; vertical-align:bottom;">
 			<?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
 			<?php echo $this->get_translation('SearchText') ?>
 			<input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
@@ -21,16 +21,16 @@ require ('themes/_common/_header.php');
 	</tr>
 </table>
 
-<table align="center"   width="100%">
+<table style="text-align:center; width:100%;">
 	<tr>
-		<td class="left" valign="top">
-			<table class="navOpened" id="sw_n0" align="center"   width="100%">
+		<td class="left" style="vertical-align:top;">
+			<table class="navOpened" id="sw_n0" style="text-align:center; width:100%;">
 				<tr>
-					<th onclick="opentree('sw_n0')" valign="top">
-						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)"   width="100%">
+					<th onclick="opentree('sw_n0')" style="vertical-align:top;">
+						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" style="width:100%;">
 							<tr>
 								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="14"/></td>
-								<td class="titleText" width="100%">
+								<td class="titleText" style="width:100%">
 									<?php echo $this->get_translation('YourBookmarks'); ?>
 								</td>
 								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="20"/></td>
@@ -94,13 +94,13 @@ require ('themes/_common/_header.php');
 				</tr>
 			</table>
 
-			<table class="navOpened" id="sw_n1" align="center"   width="100%">
+			<table class="navOpened" id="sw_n1" style="text-align:center; width:100%;">
 				<tr>
-					<th onclick="opentree('sw_n1')" valign="top">
-						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)"   width="100%">
+					<th onclick="opentree('sw_n1')" style="vertical-align:top;">
+						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" style="width:100%;">
 							<tr>
 								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="14"/></td>
-								<td class="titleText" width="100%">This Page</td>
+								<td class="titleText" style="width:100%;">This Page</td>
 								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="20"/></td>
 								<td class="titleRight"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="3"/></td>
 							</tr>

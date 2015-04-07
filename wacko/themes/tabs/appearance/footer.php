@@ -40,7 +40,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	}
 	else
 	{
-		echo "<td valign='top'>";
+		echo '<td style="vertical-align:top;">';
 	}
 
 	echo "<div class='TabText'>".$text."</div>";

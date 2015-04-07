@@ -8,10 +8,10 @@ require ('themes/_common/_header.php');
 
 ?>
 <body onload="all_init();">
-<table width="100%" >
+<table style="width:100%;">
 	<tr>
-		<td width="100%" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>
-		<td width="100%"><div align="right"><?php
+		<td style="width:100%; vertical-align:bottom; white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>
+		<td style="width:100%;"><div style="text-align:right;"><?php
 // Opens Search form
 echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
 
@@ -26,8 +26,8 @@ echo $this->form_close();
 ?></div></td>
 	</tr>
 	<tr>
-		<td valign="top"><div class="tagline"><?php echo $this->config['site_desc']; ?></div></td>
-		<td width="100%">&nbsp;</td>
+		<td style="vertical-align:top;"><div class="tagline"><?php echo $this->config['site_desc']; ?></div></td>
+		<td style="width:100%">&nbsp;</td>
 	</tr>
 	<tr>
 		<td colspan="2" bgcolor="#5C743D"></td>
@@ -36,7 +36,7 @@ echo $this->form_close();
 		<td colspan="2" bgcolor="#85a43c"></td>
 	</tr>
 	<tr bgcolor="#85a43c">
-		<td height="20" colspan="2"><table width="100%" >
+		<td colspan="2" style="height:20;"><table style="width:100%;">
 	<tr>
 		<td><div class="navText">
 <?php
@@ -44,7 +44,7 @@ echo $this->form_close();
 echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
 ?>
 			</div></td>
-		<td align="right"><?php
+		<td style="text-align:right;"><?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
 {
@@ -79,10 +79,10 @@ else
 		<td colspan="2" bgcolor="#5C743D"></td>
 	</tr>
 </table>
-<table align="center"   width="100%">
+<table style="text-align:center; width:100%;">
 <tr>
-	<td valign="top" class="left" width="185" style="white-space: nowrap;"><table width="185" align="left"  >
-		<tr align="left">
+	<td class="left" style="vertical-align:top; white-space: nowrap; width:185;"><table style="text-align:left; width:185;" >
+		<tr style="text-align:left;">
 			<td><div>
 <?php
 echo '<div class="leftNav"><ul class="leftNav">'."\n";
