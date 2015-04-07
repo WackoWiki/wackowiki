@@ -8,10 +8,9 @@
 </tr>
 </table>
 
-<table class="bottom" align="center" 
-	 width="100%">
+<table class="bottom" style="text-align:center; width:100%;">
 	<tr>
-		<td id="credits"><?php 
+		<td id="credits"><?php
 		if ($this->get_user()){
 			echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki');
 		}

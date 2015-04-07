@@ -413,9 +413,9 @@ if ($user = $this->get_user())
 					$referrer_text = $referrer['referrer'];
 				}
 
-				echo "<tr>";
-				echo "<td width=\"30\" align=\"right\" style=\"padding-right: 10px\">".$referrer['num']."</td>";
-				echo "<td valign=\"top\"><a title=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\" href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></td>";
+				echo '<tr>';
+				echo '<td style="text-align:right; width:30; padding-right: 10px">'.$referrer['num'].'</td>';
+				echo '<td style="vertical-align:top;"><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></td>';
 				echo "</tr>\n";
 			}
 

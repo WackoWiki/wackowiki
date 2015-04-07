@@ -8,38 +8,33 @@ require ('themes/_common/_header.php');
 <body
 	onload="all_init();">
 
-<table class="topbody" align="center"
-	 width="100%">
+<table class="topbody" style="text-align:center; width:100%;">
 	<tr>
 		<td><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
 		</td>
-		<td class="searchArea" align="right" valign="bottom"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
+		<td class="searchArea" style="text-align:right; vertical-align:bottom;"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
 		<input name="phrase" type="text"
 			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0px; margin: 0px; background-color: #FFFFFF;"
 			size="21" /> <?php echo $this->form_close(); ?></td>
 	</tr>
 </table>
 
-<table align="center"
-	width="100%">
+<table style="text-align:center; width:100%;">
 	<tr>
-		<td valign="top" class="left" width="185" style="white-space: nowrap;">
-		<table width="185" align="left"
-			>
-			<tr align="left">
+		<td class="left" style="vertical-align:top; white-space: nowrap; width:185;">
+		<table style="text-align:left; width:185;">
+			<tr style="text-align:left;">
 				<td>
-				<table class="navOpened" id="sw_n0" align="left"
-					 width="100%">
+				<table class="navOpened" id="sw_n0" style="text-align:left; width:100%;">
 					<tr>
-						<th onclick="opentree('sw_n0')" valign="top">
+						<th onclick="opentree('sw_n0')" style="vertical-align:top;">
 						<table class="navTitle" onmouseover="mover(this)"
 							onmouseout="mout(this)"
-							 width="100%">
+							 style="width:100%">
 							<tr>
 								<td class="titleLeft"><img
-									src="<?php echo $this->config['theme_url'] ?>images/1x1.png"
-									width="14" /></td>
-								<td class="titleText" width="100%"><?php echo $this->get_translation('YourBookmarks'); ?>
+									src="<?php echo $this->config['theme_url'] ?>images/1x1.png" width="14" /></td>
+								<td class="titleText" style="width:100%"><?php echo $this->get_translation('YourBookmarks'); ?>
 								</td>
 							</tr>
 						</table>
@@ -99,20 +94,19 @@ require ('themes/_common/_header.php');
 				</table>
 				</td>
 			</tr>
-			<tr align="left">
+			<tr style="text-align:left;">
 				<td>
-				<table class="navOpened" id="sw_n1" align="center"
-					 width="100%">
+				<table class="navOpened" id="sw_n1" style="text-align:center; width:100%;">
 					<tr>
-						<th onclick="opentree('sw_n1')" valign="top">
+						<th onclick="opentree('sw_n1')" style="vertical-align:top;">
 						<table class="navTitle" onmouseover="mover(this)"
 							onmouseout="mout(this)"
-							 width="100%">
+							 style="width:100%">
 							<tr>
 								<td class="titleLeft"><img
 									src="<?php echo $this->config['theme_url'] ?>images/1x1.png"
 									width="14" /></td>
-								<td class="titleText" width="100%"><?php echo $this->get_translation('ThisPage'); ?>
+								<td class="titleText" style="width:100%"><?php echo $this->get_translation('ThisPage'); ?>
 								</td>
 							</tr>
 						</table>
@@ -196,8 +190,8 @@ require ('themes/_common/_header.php');
 		if ($this->get_user()) { ?> <span class="nobr"> <?php echo $this->get_translation('YouAre'); ?>
 		<img
 			src="<?php echo $this->config['theme_url'] ?>icons/user.png"
-			alt="" width="16" height="16" align="middle"
-			style="vertical-align: baseline;" /> <?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
+			alt="" width="16" height="16"
+			style="text-align:middle; vertical-align: baseline;" /> <?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
 		| <a
 			onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
