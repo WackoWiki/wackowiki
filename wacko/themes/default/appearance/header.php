@@ -11,7 +11,7 @@ require ('themes/_common/_header.php');
 	<header>
 		<div id="header-main">
 			<div id="header-top">
-			<span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?>
+			<span class="main"><h1><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>: </h1></span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?>
 		</div>
 		<div id="login">
 <?php
@@ -334,7 +334,7 @@ echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
 ?>
 <span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
 <input type="text" name="phrase" id="phrase" size="20" />
-<input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/>
+<input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/>
 </span>
 <?php
 

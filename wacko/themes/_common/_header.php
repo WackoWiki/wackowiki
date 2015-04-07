@@ -7,7 +7,16 @@ header('Content-Type: text/html; charset='.$this->get_charset());
 <html lang="<?php echo $this->page['lang'] ?>">
 <head>
 	<meta charset="<?php echo $this->get_charset(); ?>" />
-	<title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');?></title>
+<?php
+// create meta title
+$site_name	= htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+$page_title	= (isset($this->page['title'])
+				? $this->page['title']
+				: $this->add_spaces($this->tag)).($this->method != 'show'
+						? ' ('.$this->method.')'
+						: '');
+?>
+	<title><?php echo $page_title.' - '.$site_name;?></title>
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
