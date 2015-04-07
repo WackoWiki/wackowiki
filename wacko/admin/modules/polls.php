@@ -167,7 +167,7 @@ function admin_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsCurrent').'</th></tr>';
-			echo '<tr><td><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><td style="text-align:center;"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
@@ -207,7 +207,7 @@ function admin_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsModeration').'</th></tr>';
-			echo '<tr><td><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><td style="text-align:center;"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
@@ -218,7 +218,7 @@ function admin_polls(&$engine, &$module)
 				echo '<tr>';
 					echo '<td class="label"><input name="id" type="radio" value="'.$row['poll_id'].'" /></td>';
 					echo '<td style="text-align:left;width:80%;">'.$row['text'].'</td>';
-					echo '<td valign="top">'.$row['user_name'].'</td>';
+					echo '<td style="vertical-align:top;">'.$row['user_name'].'</td>';
 				echo '</tr>';
 				echo '<tr>';
 					$vars	= $polls_obj->get_poll_vars($row['poll_id']);
@@ -231,7 +231,7 @@ function admin_polls(&$engine, &$module)
 					}
 
 					echo '</table></td>';
-					echo '<td style="text-align:left;" valign="top">'.
+					echo '<td style="text-align:left; vertical-align:top;">'.
 						($row['plural'] == 1 ? $engine->get_translation('PollsPlural') : $engine->get_translation('PollsSingular')).'</td>';
 				echo '</tr>';
 			}
@@ -260,7 +260,7 @@ function admin_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsEnded').'</th></tr>';
-			echo '<tr><td><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><td style="text-align:center;"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{

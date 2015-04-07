@@ -192,11 +192,11 @@ function admin_systemlog(&$engine, &$module)
 			$time_tz = date($engine->config['date_precise_format'], $time_tz);
 
 			echo '<tr class="lined">'."\n".
-					'<td>'.$row['log_id'].'</td>'.
-					'<td><small>'.$time_tz.'</small></td>'.
-					'<td style="padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
-					'<td valign="top">'.$engine->format($row['message'], 'post_wacko').'</td>'.
-					'<td><small>'.
+					'<td style="vertical-align:top; text-align:center;">'.$row['log_id'].'</td>'.
+					'<td style="vertical-align:top; text-align:center;"><small>'.$time_tz.'</small></td>'.
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
+					'<td style="vertical-align:top;">'.$engine->format($row['message'], 'post_wacko').'</td>'.
+					'<td style="vertical-align:top; text-align:center;"><small>'.
 						'<a href="?mode=systemlog&user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
 						'<br />'.'<a href="?mode=systemlog&ip='.$row['ip'].'">'.$row['ip'].'</a>'.
 					'</small></td>'.
@@ -205,7 +205,7 @@ function admin_systemlog(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5"><br /><em>'.$engine->get_translation('LogNoMatch').'</em></td></tr>';
+		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>'.$engine->get_translation('LogNoMatch').'</em></td></tr>';
 	}
 ?>
 		</table>

@@ -227,11 +227,11 @@ if ($can_view)
 	{
 		if ($table)
 		{
-			echo '<table width="100%">';
+			echo '<table style="text-align:center; width:100%">';
 		}
 		else
 		{
-			echo '<div class="gallery">'."\n";
+			echo '<div class="gallery" style="text-align:center;">'."\n";
 		}
 
 		foreach ($files as $file)
@@ -283,7 +283,7 @@ if ($can_view)
 						echo '<tr>';
 					}
 
-					echo '<td>';
+					echo '<td style="text-align:center;">';
 				}
 				else
 				{
@@ -423,7 +423,7 @@ if ($can_view)
 							echo '<tr>';
 						}
 
-						echo '<td>';
+						echo '<td style="text-align:center;">';
 					}
 					else
 					{
@@ -501,7 +501,7 @@ if ($can_view)
 			</figcaption>
 		</figure> */
 
-		echo '<div id="'.$param_token.'">';
+		echo '<div id="'.$param_token.'" style="text-align:center;">';
 
 		$path2	= 'file:';
 		$link	= $this->link($path2.$_GET['photo'], '', '', $_GET['photo']);

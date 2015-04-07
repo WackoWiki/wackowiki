@@ -192,21 +192,21 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			// print
 			echo '<tbody class="lined"><tr>'.
-					'<td align="left">'.
+					'<td style="text-align:left;">'.
 					( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
 					( $updated === true
 						? '<strong><span class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 						: '<strong>'.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 					).
 					'</td>'.
-					'<td style="white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
+					'<td style="text-align:center; white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
 						'&nbsp;&nbsp;'.( $topic['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_id'] == 0 ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
 						'&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'&nbsp;&nbsp;'.
 					'</small></td>'.
-					'<td><small>'.$topic['comments'].'</small></td>'.
-					'<td><small>'.$topic['hits'].'</small></td>'.
+					'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
+					'<td style="text-align:center;"><small>'.$topic['hits'].'</small></td>'.
 					'<td>&nbsp;&nbsp;&nbsp;</td>'.
-					'<td>';
+					'<td style="text-align:center;">';
 
 			if ($comment == true)
 			{
