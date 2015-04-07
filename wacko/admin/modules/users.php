@@ -391,29 +391,29 @@ function admin_users(&$engine, &$module)
 		<?php
 
 			echo '<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('UserName').'</th>'.
-					'<td style="padding-left:5px; padding-right:5px;"><strong>'.$user['user_name'].'</strong></td>'.
+					'<th style="vertical-align:top; text-align:center;">'.$engine->get_translation('UserName').'</th>'.
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;"><strong>'.$user['user_name'].'</strong></td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('RealName').'</th>'.
-					'<td style="padding-left:5px; padding-right:5px;">'.$user['real_name'].'</td>'.
+					'<th style="vertical-align:top; text-align:center;">'.$engine->get_translation('RealName').'</th>'.
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$user['real_name'].'</td>'.
 				'</tr>'.
 
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('YourEmail').'</th>'.
-					'<td style="padding-left:5px; padding-right:5px;">'.$user['email'].'</td>'.
+					'<th style="vertical-align:top; text-align:center;">'.$engine->get_translation('YourEmail').'</th>'.
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$user['email'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('YourLanguage').'</th>'.
-					'<td style="padding-left:5px; padding-right:5px;">'.$user['lang'].'</td>'.
+					'<th style="vertical-align:top; text-align:center;">'.$engine->get_translation('YourLanguage').'</th>'.
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$user['lang'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('ChooseTheme').'</th>'.
-					'<td style="padding-left:5px; padding-right:5px;">'.$user['theme'].'</td>'.
+					'<th style="vertical-align:top; text-align:center;">'.$engine->get_translation('ChooseTheme').'</th>'.
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$user['theme'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('UserEnabled').'</th>'.
-					'<td style="padding-left:5px; padding-right:5px;">'.$user['enabled'].'</td>'.
+					'<th style="vertical-align:top; text-align:center;">'.$engine->get_translation('UserEnabled').'</th>'.
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$user['enabled'].'</td>'.
 				'</tr>';
 ?>
 		</table>
@@ -640,26 +640,26 @@ function admin_users(&$engine, &$module)
 			foreach ($users as $row)
 			{
 				echo '<tr class="lined">'."\n".
-						'<td style="width:10px;" class="label"><input name="'.$row['user_id'].'" type="checkbox" value="id" '.( in_array($row['user_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-						'<td><input type="radio" name="change" value="'.$row['user_id'].'" /></td>'.
-						'<td>'.$row['user_id'].'</td>'.
-						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.
-						#'<td style="padding-left:5px; padding-right:5px;">'.$row['real_name'].'</td>'.
-						'<td>'.$row['email'].'</td>'.
-						'<td>'.$row['total_pages'].'</td>'.
-						'<td>'.$row['total_comments'].'</td>'.
-						'<td>'.$row['total_revisions'].'</td>'.
-						'<td>'.$row['total_uploads'].'</td>'.
-						'<td><small><a href="?mode=users&lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
-						'<td>'.$row['enabled'].'</td>'.
-						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
-						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.
+						'<td style="vertical-align:middle; width:10px;" class="label"><input name="'.$row['user_id'].'" type="checkbox" value="id" '.( in_array($row['user_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
+						'<td style="vertical-align:top; text-align:center;"><input type="radio" name="change" value="'.$row['user_id'].'" /></td>'.
+						'<td style="vertical-align:top; text-align:center;">'.$row['user_id'].'</td>'.
+						'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.
+						#'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$row['real_name'].'</td>'.
+						'<td style="vertical-align:top; text-align:center;">'.$row['email'].'</td>'.
+						'<td style="vertical-align:top; text-align:center;">'.$row['total_pages'].'</td>'.
+						'<td style="vertical-align:top; text-align:center;">'.$row['total_comments'].'</td>'.
+						'<td style="vertical-align:top; text-align:center;">'.$row['total_revisions'].'</td>'.
+						'<td style="vertical-align:top; text-align:center;">'.$row['total_uploads'].'</td>'.
+						'<td style="vertical-align:top; text-align:center;"><small><a href="?mode=users&lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
+						'<td style="vertical-align:top; text-align:center;">'.$row['enabled'].'</td>'.
+						'<td style="vertical-align:top; text-align:center;"><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
+						'<td style="vertical-align:top; text-align:center;"><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.
 					'</tr>';
 			}
 		}
 		else
 		{
-			echo '<tr><td colspan="5"><br /><em>No users that meet the criteria</em></td></tr>';
+			echo '<tr><td colspan="5" style="text-align:center;"><br /><em>No users that meet the criteria</em></td></tr>';
 		}
 ?>
 			</table>

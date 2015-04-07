@@ -51,7 +51,7 @@ if($user = $this->get_user())
 			 */
 			if($this->is_admin() || in_array($user['user_name'], $arr))
 			{
-				echo '<td valign="top">';
+				echo '<td style="vertical-align:top;">';
 
 				foreach ($arr as $k => $user_name)
 				{

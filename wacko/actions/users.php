@@ -210,7 +210,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				}
 				else
 				{
-					echo '<tr><td colspan="2"><strong><em>'.$this->get_translation('UsersIntercomDisabled').'</em></strong></td></tr>';
+					echo '<tr><td colspan="2" style="text-align:center;"><strong><em>'.$this->get_translation('UsersIntercomDisabled').'</em></strong></td></tr>';
 				}
 ?>
 			</table>
@@ -219,7 +219,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			}
 			else
 			{
-				echo '<table class="formation"><tr><td colspan="2"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
+				echo '<table class="formation"><tr><td colspan="2" style="text-align:center;"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
 			}
 		}
 
@@ -444,7 +444,7 @@ else
 	// list entries
 	if ($users == false)
 	{
-		echo '<tr class="lined"><td colspan="5" style="padding:10px;"><small><em>'.$this->get_translation('UsersNoMatching')."</em></small></td></tr>\n";
+		echo '<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>'.$this->get_translation('UsersNoMatching')."</em></small></td></tr>\n";
 	}
 	else
 	{
@@ -453,13 +453,13 @@ else
 			echo '<tr class="lined">';
 
 			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$user['user_name'].'</a></td>'.
-					'<td>'.$user['total_pages'].'</td>'.
-					'<td>'.$user['total_comments'].'</td>'.
-					'<td>'.$user['total_revisions'].'</td>'.
+					'<td style="text-align:center;">'.$user['total_pages'].'</td>'.
+					'<td style="text-align:center;">'.$user['total_comments'].'</td>'.
+					'<td style="text-align:center;">'.$user['total_revisions'].'</td>'.
 				($this->get_user()
 					?
-					'<td>'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
-					'<td>'.( $user['hide_lastsession'] == 1
+					'<td style="text-align:center;">'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
+					'<td style="text-align:center;">'.( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: (!$user['last_visit'] || $user['last_visit'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'

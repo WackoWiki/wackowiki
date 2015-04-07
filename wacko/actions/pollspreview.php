@@ -16,7 +16,7 @@ $list = $polls_obj->get_polls_list('moderation');
 if (empty($list))
 {
 	echo '<tr><th>'.$this->get_translation('PollsModeration').'</th></tr>';
-	echo '<tr><td><em>'.$this->get_translation('PollsEmptyList').'</em></td></tr>';
+	echo '<tr><td style="text-align:center;"><em>'.$this->get_translation('PollsEmptyList').'</em></td></tr>';
 }
 else
 {
@@ -41,7 +41,7 @@ else
 			}
 
 			echo '</table></td>';
-			echo '<td style="text-align:left;" valign="top">'.
+			echo '<td style="text-align:left; vertical-align:top;">'.
 				($row['plural'] == 1 ? $this->get_translation('PollsPlural') : $this->get_translation('PollsSingular')).'</td>';
 		echo '</tr>';
 	}

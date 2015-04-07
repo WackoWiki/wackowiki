@@ -373,9 +373,9 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 				$numbers .= ($start_number + $i) . "\n";
 			}
 			$this->_output = '<table ' . $this->_getStyling('table', false) . ' width="100%"><tr>' .
-                             '<td '. $this->_getStyling('gutter', false) .' align="right" valign="top">' .
+                             '<td '. $this->_getStyling('gutter', false) .' style="text-align:right; vertical-align:top;">' .
                              '<pre>' . $numbers . '</pre></td><td '. $this->_getStyling('main', false) .
-                             ' valign="top"><pre>' .
+                             ' style="vertical-align:top;"><pre>' .
 			$html_output . '</pre></td></tr></table>';
 		}
 		if (!$this->_numbers) {

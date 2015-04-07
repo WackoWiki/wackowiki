@@ -119,7 +119,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			// print
 			echo '<tr class="lined">'.
-					'<td style="width:60%" valign="top">'.
+					'<td style="width:60%; vertical-align:top;">'.
 						( $this->has_access('write', $forum['page_id'], '*') === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
 						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark'] ? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> ' : '' ).
 						'<strong>'.$this->link('/'.$forum['tag'], '', $forum['title'], '', 0, '', $_lang).'</strong><br />'.
@@ -130,7 +130,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			if ($comment == true)
 			{
-				echo '<td style="text-align:left" valign="top">';
+				echo '<td style="text-align:left; vertical-align:top;">';
 
 				if ($comment['comment_on_id'] == true)
 				{
