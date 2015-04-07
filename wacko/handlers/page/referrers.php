@@ -46,7 +46,7 @@ if ($this->page['comment_on_id'])
 
 $referrers	= '';
 $perpage	= '';
-$bytime	= '';
+$bytime		= '';
 $url_maxlen = 80;
 $spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . . '
 
@@ -276,9 +276,9 @@ if ($user = $this->get_user())
 								$referrer_text = $referrer['referrer'];
 							}
 
-							echo "<li class=\"lined\">";
-							echo "<span class=\"\">".$referrer['num']."</span> &nbsp; ";
-							echo "<span class=\"\"><a title=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\" href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></span >";
+							echo '<li class="lined">';
+							echo '<span class="">'.$referrer['num'].'</span> &nbsp; ';
+							echo '<span class=""><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></span >';
 							echo "</li>\n";
 						}
 
@@ -375,9 +375,9 @@ if ($user = $this->get_user())
 
 						echo "<ul>\n";
 
-						echo "<li class=\"lined\">";
-						echo "<span class=\"\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &nbsp; ";
-						echo "<span class=\"\"><a title=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\" href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</a></span >";
+						echo '<li class="lined">';
+						echo '<span class="">'.date($this->config['time_format_seconds'], strtotime( $time )).'</span> &nbsp; ';
+						echo '<span class=""><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></span >';
 						echo $spacer.'<small>'.$page_link.'</small>';
 						echo "</li>\n";
 
@@ -399,32 +399,39 @@ if ($user = $this->get_user())
 		// global
 		else
 		{
-			echo "<table>\n";
-
-			foreach ($referrers as $referrer)
+			if ($referrers)
 			{
-				// shorten url name if too long
-				if (strlen($referrer['referrer']) > $url_maxlen)
+				echo "<table>\n";
+
+				foreach ($referrers as $referrer)
 				{
-					$referrer_text = substr($referrer['referrer'], 0, 30).'[..]'.substr($referrer['referrer'], -20);
-				}
-				else
-				{
-					$referrer_text = $referrer['referrer'];
+					// shorten url name if too long
+					if (strlen($referrer['referrer']) > $url_maxlen)
+					{
+						$referrer_text = substr($referrer['referrer'], 0, 30).'[..]'.substr($referrer['referrer'], -20);
+					}
+					else
+					{
+						$referrer_text = $referrer['referrer'];
+					}
+
+					echo '<tr>';
+					echo '<td style="text-align:right; width:30; padding-right: 10px">'.$referrer['num'].'</td>';
+					echo '<td style="vertical-align:top;"><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></td>';
+					echo "</tr>\n";
 				}
 
-				echo '<tr>';
-				echo '<td style="text-align:right; width:30; padding-right: 10px">'.$referrer['num'].'</td>';
-				echo '<td style="vertical-align:top;"><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></td>';
-				echo "</tr>\n";
+				echo "</table>\n";
 			}
-
-			echo "</table>\n";
+			else
+			{
+				echo $this->get_translation('NoneReferrers')."<br /><br />\n";
+			}
 		}
 	}
 	else
 	{
-		echo $this->get_translation('NoneReferrers')."<br />\n";
+		echo $this->get_translation('NoneReferrers')."<br /><br />\n";
 	}
 
 }
