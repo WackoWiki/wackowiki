@@ -350,8 +350,8 @@ if ($config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo'))
 // add install array for all e.g. mysqli, mysql_pdo, etc.
 
 // delete_tables
-//.		$value[0] - table name
-// 		$value[1] - SQL query
+//		$value[0] - table name
+//		$value[1] - SQL query
 $delete_table[]	= array('acl',				$table_acl_drop);
 $delete_table[]	= array('menu',				$table_menu_drop);
 $delete_table[]	= array('cache',			$table_cache_drop);
@@ -377,8 +377,8 @@ $delete_table[]	= array('watch',			$table_watch_drop);
 
 // INSTALL
 // create tables
-// 		$value[0] - table name
-// 		$value[1] - SQL query
+//		$value[0] - table name
+//		$value[1] - SQL query
 $create_table[]	= array('acl',				$table_acl);
 $create_table[]	= array('menu',				$table_menu);
 $create_table[]	= array('cache',			$table_cache);
@@ -402,14 +402,10 @@ $create_table[]	= array('user',				$table_user);
 $create_table[]	= array('user_setting',		$table_user_setting);
 $create_table[]	= array('watch',			$table_watch);
 
-/* echo '<pre>';
- print_r($create_table);
-echo '</pre>'; */
-
 // insert_records
-// 		$value[0] - table name
-// 		$value[1] - SQL query
-// 		$value[2] - record
+//		$value[0] - table name
+//		$value[1] - SQL query
+//		$value[2] - record
 $insert_records[]	= array($lang['InstallingSystemAccount'],	$insert_system,					'system account');
 $insert_records[]	= array($lang['InstallingAdmin'],			$insert_admin,					'admin user');
 $insert_records[]	= array($lang['InstallingAdminSetting'],	$insert_admin_setting,			'admin user settings');
@@ -421,14 +417,15 @@ $insert_records[]	= array($lang['InstallingModeratorGroup'],	$insert_moderator_g
 $insert_records[]	= array($lang['InstallingReviewerGroup'],	$insert_reviewer_group,			'reviewer group');
 
 // UPGRADE
-// 5.0.0
-// $update_tables
+// update tables
 // 		$value[0] - message
 // 		$value[1] - table name
 // 		$value[2] - SQL query
 // 		$value[3] - error message
+
+// 5.0.0
+// page
 $upgrade_5_0_0[]	= array($lang['UpdateTable'], 'page', $update_page_r5_0_1, $lang['ErrorUpdatingTable']);
-$upgrade_5_0_0[]	= array($lang['UpdateTable'], 'page', $update_page_r5_0_2, $lang['ErrorUpdatingTable']);
 
 // 5.1.0
 // cache
@@ -455,12 +452,19 @@ $upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_3, $l
 // 5.4.0
 // category
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_0,		$lang['ErrorAlteringTable']);
+
+// page
+$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
+
 // revision
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']);
+
 // session
 $upgrade_5_4_0[]	= array($lang['CreatingTable'],	'session',		$table_session_r5_4_0,		$lang['ErrorCreatingTable']);
+
 // user
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
+
 // usergroup
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
 
