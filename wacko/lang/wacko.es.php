@@ -879,7 +879,7 @@ $wacko_translation = array(
 	'Topics'				=> 'topicos',
 	'ModerateSection'		=> 'sección / página ',
 
-	'NotModerator'			=> '<h3>No está autorizado de moderar la página /capítulo</h3>',
+	'NotModerator'			=> 'No está autorizado de moderar la página /capítulo',
 	'ModerateDelete'		=> 'Eliminar',
 	'ModerateDeleteTopic'	=> 'Eliminar tópico / Página',
 	'ModerateDeletePosts'	=> 'Eliminar comentarios',

@@ -880,7 +880,7 @@ $wacko_translation = array(
 	'Topics'					=> 'topics',
 	'ModerateSection'			=> 'section / page ',
 
-	'NotModerator'				=> '<h3>You have no authority to moderation of the page / chapter</h3>',
+	'NotModerator'				=> 'You have no authority to moderation of the page / chapter',
 	'ModerateDelete'			=> 'Delete',
 	'ModerateDeleteTopic'		=> 'Delete topic / page',
 	'ModerateDeletePosts'		=> 'Delete comments',
@@ -1071,7 +1071,7 @@ $wacko_translation = array(
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
-		
+
 	// log
 	'LogLevel1'					=> 'critical',
 	'LogLevel2'					=> 'highest',
