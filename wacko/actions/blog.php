@@ -240,7 +240,7 @@ if (!empty($blog_cluster))
 			echo "<div class=\"newscontent\">".$this->action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
 			echo "<div class=\"newsmeta\">".$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->get_translation('EditText'), 0)." | " : "")."  ".
 				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#commentsheader" title="'.$this->get_translation('NewsDiscuss').' '.$page['title'].'">'.(int)$page['comments']." ".$this->get_translation('Comments_all')." &raquo; "."</a></div>\n";
-			echo "</article>";
+			echo "</article>\n";
 
 			unset ($_category);
 		}

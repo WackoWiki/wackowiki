@@ -1373,7 +1373,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 }
 else
 {
-	echo $this->get_translation('NotModerator');
+	$this->show_message($this->get_translation('NotModerator'), 'info');
 }
 
 // set forum context
