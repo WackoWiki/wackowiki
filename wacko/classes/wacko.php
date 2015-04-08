@@ -2971,8 +2971,6 @@ class Wacko
 				$supertag	= $this->translit($untag, TRAN_LOWERCASE, TRAN_DONTLOAD);
 			}
 
-			$aname = '';
-
 			if (substr($tag, 0, 2) == '!/')
 			{
 				$icon		= $this->get_translation('childicon');
@@ -3034,7 +3032,6 @@ class Wacko
 
 			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
 			{
-				$aname = 'id="'.$supertag.'"';
 				$this->first_inclusion[$supertag] = 1;
 			}
 
@@ -3112,8 +3109,6 @@ class Wacko
 				}
 
 				//TODO: pagepath
-				$aname		= str_replace('/',			'.',		$aname);
-				$res		= str_replace('{aname}',	$aname,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
 				$res		= str_replace('{accicon}',	$accicon,	$res);
 				$res		= str_replace('{class}',	$class,		$res);
