@@ -70,7 +70,7 @@ else
 }
 
 $div_id = "document_source_".hash('sha1', $options['source']);
-echo '<!--no'.'typo-->';
+echo '<!--notypo-->';
 
 // copy to clipboard is implemented only for MSIE for now
 if ($options['copy_button'])
@@ -91,6 +91,6 @@ echo '<div id="'.$div_id.'" class="code" style="padding:5px">';
 echo $output;
 echo '</div>';
 
-echo '<!--/no'.'typo-->';
+echo '<!--/notypo-->';
 
 ?>

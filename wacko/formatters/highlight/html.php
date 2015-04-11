@@ -184,9 +184,9 @@ $xhtml_tags = array(
              	$source .= '</ol>';
              }
 
-             echo '<!--no'.'typo-->';
+             echo '<!--notypo-->';
              echo '<pre class="code">';
              echo  str_replace("\t","  ",$source);
              echo "</pre>";
-             echo '<!--/no'.'typo-->';
+             echo '<!--/notypo-->';
              ?>
