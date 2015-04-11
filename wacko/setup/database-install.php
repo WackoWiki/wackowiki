@@ -418,14 +418,10 @@ $insert_records[]	= array($lang['InstallingReviewerGroup'],	$insert_reviewer_gro
 
 // UPGRADE
 // update tables
-// 		$value[0] - message
-// 		$value[1] - table name
-// 		$value[2] - SQL query
-// 		$value[3] - error message
-
-// 5.0.0
-// page
-$upgrade_5_0_0[]	= array($lang['UpdateTable'], 'page', $update_page_r5_0_1, $lang['ErrorUpdatingTable']);
+//		$value[0] - message
+//		$value[1] - table name
+//		$value[2] - SQL query
+//		$value[3] - error message
 
 // 5.1.0
 // cache
@@ -455,6 +451,7 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_
 
 // page
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
+$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_1,		$lang['ErrorUpdatingTable']);
 
 // revision
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']);
