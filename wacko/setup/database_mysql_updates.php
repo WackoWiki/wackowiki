@@ -31,9 +31,10 @@ $alter_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx
 // PAGE
 $alter_page_r5_1_0 = "ALTER TABLE {$pref}page ADD INDEX idx_deleted (deleted)";
 
-$update_page_r5_0_1 = "UPDATE {$pref}page SET body_r = ''";
+
 $update_page_r5_1_0 = "UPDATE {$pref}page AS page SET noindex = '0' WHERE page.noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
+$update_page_r5_4_1 = "UPDATE {$pref}page SET body_r = ''";
 
 // POLL
 

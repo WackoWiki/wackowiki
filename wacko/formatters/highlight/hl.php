@@ -11,9 +11,14 @@ if ($options['_default'])
 	}
 	else
 	{
-		echo "<!--no"."typo-->";
-		echo "<pre class=\"code\">".$hl->highlight($text)."</pre>";
-		echo "<!--/no"."typo-->";
+		echo '<!--no'.'typo-->';
+
+		// Highlighter class adds already a <pre> tag wrapper
+		echo #'<pre class="code">'.
+					$hl->highlight($text).
+			#'</pre>'.
+			'';
+		echo '<!--/no'.'typo-->';
 	}
 }
 else
