@@ -3,11 +3,11 @@
 $this->use_class('delphihightlighter', 'formatters/classes/');
 
 $dh = new DelphiHightlighter();
-echo '<!--no'.'typo-->';
+echo '<!--notypo-->';
 echo '<pre class="code">';
 echo $dh->analysecode($text);
 echo "</pre>";
-echo '<!--/no'.'typo-->';
+echo '<!--/notypo-->';
 unset($dh);
 
 ?>

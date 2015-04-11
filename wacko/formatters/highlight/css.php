@@ -192,12 +192,12 @@ $special_keywords = array(	'color',
 		$source .= '</ol>';
 	}
 
-	if (isset($options['notypo'])) echo '<!--no'.'typo-->';
+	if (isset($options['notypo'])) echo '<!--notypo-->';
 	if (!isset($options['nopre'])) echo '<pre class="code">';
 
 	echo preg_replace('/\&nbsp\;/', '', str_replace("\t","	",$css), 1);
 
 	if (!isset($options['nopre'])) echo '</pre>';
-	if (isset($options['notypo'])) echo '<!--/no'.'typo-->"';
+	if (isset($options['notypo'])) echo '<!--/notypo-->"';
 
 ?>
