@@ -9,8 +9,8 @@ require ('themes/_common/_header.php');
 
 ?>
 <!-- load bootstrap css -->
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>./css/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>./css/bootstrap.min.css" />
+<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>./css/bootstrap.css" />
+<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>./css/bootstrap.min.css" />
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="./js/jquery-2.1.3.min.js"></script>

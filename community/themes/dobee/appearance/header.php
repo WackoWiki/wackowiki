@@ -3,7 +3,7 @@
 require ('themes/_common/_header.php');
 
 ?>
-<script type="text/javascript" src="<?php echo $this->config['theme_url'] ?>js/leftframe.js"></script>
+<script src="<?php echo $this->config['theme_url'] ?>js/leftframe.js"></script>
 
 <body
 	onload="all_init();">

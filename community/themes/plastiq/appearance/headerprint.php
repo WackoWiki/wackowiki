@@ -9,9 +9,9 @@
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 <meta http-equiv="imagetoolbar" content="no" />
 <!-- style sheets attachment -->
-<link href="<?php echo $this->config['theme_url'] ?>css/atom.css" rel="stylesheet" type="text/css" media="screen, print" />
-<link href="<?php echo $this->config['theme_url'] ?>css/wacko.css" rel="stylesheet" type="text/css" media="screen, print" />
-<link href="<?php echo $this->config['theme_url'] ?>css/print.css" rel="stylesheet" type="text/css" media="screen, print" />
+<link href="<?php echo $this->config['theme_url'] ?>css/atom.css" rel="stylesheet" media="screen, print" />
+<link href="<?php echo $this->config['theme_url'] ?>css/wacko.css" rel="stylesheet" media="screen, print" />
+<link href="<?php echo $this->config['theme_url'] ?>css/print.css" rel="stylesheet" media="screen, print" />
 <!-- nav destinations -->
 <link rel="start" href="/" />
 <link rel="credits" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />

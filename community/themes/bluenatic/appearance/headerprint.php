@@ -6,7 +6,7 @@
 	<?php // do not index alternative print pages
 	echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
+	<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 </head>
 
 <body>

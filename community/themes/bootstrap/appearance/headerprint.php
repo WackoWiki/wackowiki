@@ -7,7 +7,7 @@ header('Content-Type: text/html; charset='.$this->get_charset());
 <title><?php echo htmlspecialchars(($this->config['site_name']).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->tag), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></title>
 <meta name="robots" content="noindex, nofollow" />
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
+<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 
 <link rel="start" href="/" />
 <link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
