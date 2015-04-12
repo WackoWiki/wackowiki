@@ -129,11 +129,8 @@ if ($this->has_access('read'))
 		echo $data;
 
 		$this->set_language($this->user_lang);
-		?>
-		<script>
-			var dbclick = "page";
-		</script>
-		<?php
+
+		echo '<script>var dbclick = "page";</script>';
 	}
 }
 else

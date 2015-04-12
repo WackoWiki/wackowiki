@@ -49,14 +49,14 @@ require_once 'lib/phpthumb/ThumbLib.inc.php';
 <script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
 <!-- Add fancyBox -->
 <script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox.pack.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox.css?v=2.1.4" media="screen" />
+<link rel="stylesheet" href="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox.css?v=2.1.4" media="screen" />
 
 <!-- Add Button helper (this is optional) -->
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+<link rel="stylesheet" href="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
 <script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox-buttons.js?v=1.0.5"></script>
 
 <!-- Add Thumbnail helper (this is optional) -->
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+<link rel="stylesheet" href="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
 <script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox-thumbs.js?v=1.0.7"></script>
 
 <script>
