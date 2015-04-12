@@ -49,7 +49,7 @@ color:#C00;
 }
 .cl-yellow {color: #ffff00;}
 
-.code {
+.code, .hl-main pre {
 background:#FFF;
 border:solid #888 2px;
 color:#000;
@@ -610,7 +610,7 @@ padding:4px;
 vertical-align:top;
 }
 
-code, tt {
+code {
 background:#ffc;
 color:#660;
 padding:0 2px;

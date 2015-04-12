@@ -181,7 +181,7 @@ sup {
 }
 
 /* Code areas: SYNTAX %%code%% */
-code, tt {
+code {
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;
 }
