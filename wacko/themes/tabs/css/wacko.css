@@ -97,8 +97,7 @@ del.diff {
 }
 
 .code-break {
-	white-space: pre;           /* CSS 2.0 */
-	white-space: pre-wrap;      /* CSS 2.1 */
+	white-space: pre-wrap;
 }
 
 .notes {  color: #888800; }
