@@ -87,7 +87,7 @@ if ($pages = $this->load_all(
 
 		// cache acls
 		if ($acls = $this->load_all(
-		"SELECT * FROM {$this->config['table_prefix']}acl ".
+		"SELECT page_id, privilege, list FROM {$this->config['table_prefix']}acl ".
 		"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) AND privilege = 'read'", 1))
 		{
 			for ($i = 0; $i < count($acls); $i++)
