@@ -459,7 +459,7 @@ class WackoFormatter
 			$this->intablebr	= true;
 			$this->table_scope	= true;
 
-			return '<table class="usertable" border="1">';
+			return '<table class="usertable">';
 		}
 		//table end
 		else if (($thing == '|#' || $thing == '||#') && $this->table_scope)

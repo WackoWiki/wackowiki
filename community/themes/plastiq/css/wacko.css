@@ -288,6 +288,7 @@ span.tocnumber {
 
 
 table.usertable {
+	border: 1px none;
 	font-size: 12px;
 	width: auto;
 	margin-top: 20px;
