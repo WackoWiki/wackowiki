@@ -6,7 +6,7 @@
 <head>
 <title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?> / <?php echo $this->get_page_path(true) ?> (<?php echo $this->get_translation('PrintVersion');?>)</title>
 <meta name="robots" content="noindex, nofollow" />
-<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
+<meta charset="<?php echo $this->get_charset(); ?>" />
 <meta http-equiv="imagetoolbar" content="no" />
 <!-- style sheets attachment -->
 <link href="<?php echo $this->config['theme_url'] ?>css/atom.css" rel="stylesheet" media="screen, print" />

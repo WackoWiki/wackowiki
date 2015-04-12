@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <!--
 I tried to fit the W3C standards while creating this template.
 Please do NEVER forget: Microsoft != standard
@@ -6,12 +6,12 @@ Please do NEVER forget: Microsoft != standard
 Based on the NoProbs template from Gururaj:
 http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
+<html lang="<?php echo $this->page['lang'] ?>">
 <head>
 	<meta name="author" content="Theme for WackoWiki by Robert Vaeth" />
 	<meta name="keywords" content="<?php echo $this->get_keywords(); ?>" />
 	<meta name="description" content="<?php echo $this->get_description(); ?>" />
-	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
+	<meta charset="<?php echo $this->get_charset(); ?>" />
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/default.css" media="screen" />
 	<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/page.css" media="screen" />
