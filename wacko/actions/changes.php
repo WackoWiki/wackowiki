@@ -108,7 +108,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			{
 				if ($page['reviewed'] == 0)
 				{
-					$review = " <span class=\"review\">[".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('Review'), 0)."]</span>";
+					$review = '<span class="review">['.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('Review'), 0).']</span>';
 				}
 				else
 				{
@@ -135,7 +135,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			}
 
 			// print entry
-			echo "<li class=\"lined".$viewed."\"><span class=\"dt\">".
+			echo '<li class="lined'.$viewed.'"><span class="dt">'.
 			($this->hide_revisions === false || $this->is_admin()
 				? "".$this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime( $time )), 0, $this->get_translation('RevisionTip'))." "
 				: date($this->config['time_format_seconds'], strtotime( $time ))
@@ -147,7 +147,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			).
 			" . . . . . . . . . . . . . . . . <small>".
 			($page['user_name']
-				? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['user_name'])."\">".$page['user_name']."</a>"
+				? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'">'.$page['user_name'].'</a>'
 				: $this->get_translation('Guest')).
 			$review.' '.
 			$edit_note.
