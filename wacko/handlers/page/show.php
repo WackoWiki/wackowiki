@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ?>
-<article>
+<article class="page">
 <?php
 
 if (!isset ($this->config['comments_count']))
