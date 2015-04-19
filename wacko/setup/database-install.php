@@ -37,6 +37,7 @@ function output_error($error_text = '')
 	echo "<ul class=\"install_error\"><li>".$error_text."</li></ul>";
 }
 
+// TODO: refactoring - same function in wacko class
 function random_seed($length, $seed_complexity)
 {
 	$chars_uc	= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -256,6 +257,7 @@ $config_db['review']						= $config['review'];
 $config_db['revisions_hide_cancel']			= $config['revisions_hide_cancel'];
 $config_db['rewrite_mode']					= $config['rewrite_mode'];
 $config_db['root_page']						= $config['root_page'];
+$config_db['session_encrypt_cookie']		= $config['session_encrypt_cookie'];
 $config_db['session_match_ip']				= $config['session_match_ip'];
 $config_db['session_match_useragent']		= $config['session_match_useragent'];
 $config_db['session_prefix']				= $config['session_prefix'];
@@ -272,7 +274,7 @@ $config_db['show_spaces']					= $config['show_spaces'];
 $config_db['spam_filter']					= $config['spam_filter'];
 $config_db['standard_handlers']				= $config['standard_handlers'];
 $config_db['store_deleted_pages']			= $config['store_deleted_pages'];
-$config_db['session_encrypt_cookie']		= $config['session_encrypt_cookie'];
+$config_db['system_message']				= $config['system_message'];
 $config_db['tag_page']						= $config['tag_page'];
 $config_db['theme']							= $config['theme'];
 $config_db['time_format']					= $config['time_format'];
@@ -446,6 +448,9 @@ $upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_2, $l
 $upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_3, $lang['ErrorAlteringTable']);
 
 // 5.4.0
+// cache
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_0,		$lang['ErrorAlteringTable']);
+
 // category
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_0,		$lang['ErrorAlteringTable']);
 
