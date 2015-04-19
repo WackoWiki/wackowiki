@@ -20,7 +20,7 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 
 $table_cache = "CREATE TABLE {$pref}cache (".
 					"cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"name VARCHAR(40) NOT NULL DEFAULT '',".
+					"name CHAR(40) NOT NULL DEFAULT '',".
 					"method VARCHAR(20) NOT NULL DEFAULT '',".
 					"query VARCHAR(100) NOT NULL DEFAULT '',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".

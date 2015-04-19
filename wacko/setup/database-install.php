@@ -454,6 +454,9 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_0,		$l
 // category
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_0,		$lang['ErrorAlteringTable']);
 
+// config
+$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
+
 // page
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_1,		$lang['ErrorUpdatingTable']);
