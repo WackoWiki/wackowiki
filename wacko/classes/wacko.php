@@ -1539,16 +1539,19 @@ class Wacko
 		words defined as spam.  If we find any then we return from the function, not saving the changes.
 		See bug#188 - Enhanced Spam filtering
 		*/
-		$this->spam = file('config/antispam.conf', 1);
-
-		if ($this->config['spam_filter'] && is_array($this->spam))
+		if ($this->config['spam_filter'])
 		{
-			foreach ($this->spam as $spam)
+			$this->spam = file('config/antispam.conf', 1);
+
+			if (is_array($this->spam))
 			{
-				if (strpos($text, trim($spam))!== false)
+				foreach ($this->spam as $spam)
 				{
-					$this->set_message('Error: Identified Potential Spam: '.$spam) ; // TODO: localize
-					return true;
+					if (strpos($text, trim($spam))!== false)
+					{
+						$this->set_message('Error: Identified Potential Spam: '.$spam) ; // TODO: localize
+						return true;
+					}
 				}
 			}
 		}
@@ -3488,7 +3491,9 @@ class Wacko
 
 		if (!$referrer = trim($referrer))
 		{
-			$referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+			$referrer	= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+			#$browser	= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+			#$ip			= $this->get_user_ip();
 		}
 
 		// check if it's coming from another site
