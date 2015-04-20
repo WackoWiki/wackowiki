@@ -103,7 +103,7 @@ function admin_systemlog(&$engine, &$module)
 
 	// collecting data
 	$count = $engine->load_single(
-		"SELECT COUNT(message) AS n ".
+		"SELECT COUNT(log_id) AS n ".
 		"FROM {$engine->config['table_prefix']}log l ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
 
