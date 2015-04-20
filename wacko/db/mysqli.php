@@ -46,14 +46,14 @@ function quote($dblink, $string)
 	}
 }
 
-function free_result($rs)
+function free_result($results)
 {
-	return mysqli_free_result($rs);
+	return mysqli_free_result($results);
 }
 
-function fetch_assoc($rs)
+function fetch_assoc($results)
 {
-	return mysqli_fetch_assoc($rs);
+	return mysqli_fetch_assoc($results);
 }
 
 ?>
