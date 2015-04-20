@@ -78,14 +78,14 @@ function quote($dblink, $string)
 					));
 }
 
-function free_result($rs)
+function free_result($results)
 {
-	$rs->closeCursor();
+	$results->closeCursor();
 }
 
-function fetch_assoc($rs)
+function fetch_assoc($results)
 {
-	return $rs->fetch(PDO::FETCH_ASSOC);
+	return $results->fetch(PDO::FETCH_ASSOC);
 }
 
 ?>
