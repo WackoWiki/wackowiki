@@ -270,7 +270,10 @@ else
 
 				if ($enclosure = $item->get_enclosure())
 				{
-					echo "<img src=\"" . $enclosure->get_link() . "\">";
+					if (!empty($enclosure->get_link()))
+					{
+						echo "<img src=\"" . $enclosure->get_link() . "\">";
+					}
 				}
 
 				// item-paragraph ending
