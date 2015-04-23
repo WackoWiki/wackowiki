@@ -12,18 +12,15 @@ class Cache
 	var $debug		= 0;
 
 	//Constructor
-	function __construct($cache_dir, $cache_ttl)
+	function __construct($cache_dir, $cache_ttl, $debug)
 	{
 		$this->cache_dir	= $cache_dir;
 		$this->cache_ttl	= $cache_ttl;
+		$this->debug		= $debug;
 		$this->timer		= $this->get_micro_time();
+		$this->charset		= 'windows-1252';
 		#$this->charset		= $this->engine->languages[$this->engine->config['language']]['charset'];
-		#$this->lang			= $this->engine->languages[$this->engine->config['language']]['charset'];
-
-		if (isset($this->wacko->config['debug']))
-		{
-			$this->debug = $this->wacko->config['debug'];
-		}
+		#$this->lang		= $this->engine->languages[$this->engine->config['language']]['charset'];
 	}
 
 	// save serialized sql results
@@ -132,7 +129,8 @@ class Cache
 			return false;
 		}
 
-		$contents	= "<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp).", contents follows -->\n".$contents;
+		$contents	= $contents."\n<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp)." -->\n";
+
 		fclose($fp);
 
 		return $contents;
@@ -268,7 +266,7 @@ class Cache
 
 	function log($msg)
 	{
-		if ($this->debug > 1)
+		if ($this->debug > 2)
 		{
 			$file_name = $this->cache_dir.'log';
 
@@ -341,7 +339,11 @@ class Cache
 					die();
 				}
 
+				// HTTP header with right Charset settings
+				header('Content-Type: text/html; charset='.$this->charset);
+
 				$cached = $this->get_page_cached($page, $method, $query);
+
 				header ("Last-Modified: ".$gmt);
 				header ("ETag: \"".$gmt."\"");
 				//header ("Content-Type: text/xml");
@@ -354,7 +356,7 @@ class Cache
 				if ($this->debug >= 1 && strpos($method, '.xml') === false)
 				{
 					$ddd = $this->get_micro_time();
-					echo '<div class="debug">cache time: '.(number_format(($ddd-$this->timer),3)).' s<br />';
+					echo '<div id="debug" class="debug">cache time: '.(number_format(($ddd-$this->timer), 3)).' s<br />';
 					echo '</div>';
 				}
 
