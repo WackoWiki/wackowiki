@@ -189,7 +189,7 @@ class Init
 				// retrieving configuration data from db
 				$wacko_db_query = "SELECT config_name, config_value FROM {$this->config['table_prefix']}config";
 
-				if ($result = sql_query($this->dblink, $wacko_db_query , 0))
+				if ($result = sql_query($this->dblink, $wacko_db_query, 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
@@ -562,7 +562,7 @@ class Init
 		if ($this->cache == false || $op == false)
 		{
 			require('classes/cache.php');
-			return $this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl']);
+			return $this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
 		}
 		else if ($this->cache == true && $op == 'check')
 		{
@@ -774,6 +774,7 @@ class Init
 				if ($this->config['debug'] >= 3)
 				{
 					$this->engine->debug_print_r($_SESSION);
+					$this->engine->debug_print_r($this->engine->context);
 					#$this->engine->debug_print_r($this->config);
 					#$this->engine->debug_print_r($this->engine->page);
 				}
