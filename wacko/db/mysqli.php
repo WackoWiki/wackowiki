@@ -56,4 +56,10 @@ function fetch_assoc($results)
 	return mysqli_fetch_assoc($results);
 }
 
+function affected_rows($dblink, $results = null)
+{
+	// $results only required for pdo
+	return mysqli_affected_rows($dblink);
+}
+
 ?>
