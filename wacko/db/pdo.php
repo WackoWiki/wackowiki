@@ -88,4 +88,10 @@ function fetch_assoc($results)
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
 
+function affected_rows($dblink, $results)
+{
+	// $dblink only required for mysqli
+	return $results->rowCount();
+}
+
 ?>
