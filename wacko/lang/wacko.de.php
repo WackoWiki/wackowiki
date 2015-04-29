@@ -26,7 +26,7 @@ $wacko_translation = array(
 	'RegistrationPage'			=> 'Registrierung',
 	'SiteRegistered'			=> 'Du hast dich erfolgreich auf der Website registriert ',
 	'RegistrationEmailInfo'		=> 'Eine gültige E-Mail-Adresse. Alle E-Mails der Website werden an diese Adresse gesendet werden. Die E-Mail-Adresse wird nicht veröffentlicht und wird nur verwendet, wenn ein neues Passwort anfordern wird oder wenn eingestellt wird, bestimmte Informationen oder Benachrichtigungen per E-Mail zu erhalten.',
-	'SiteEmailConfirm'			=> 'Bitte bestätige deine E-Mailadresse gemäß der dir zugesanden Anleitung. <br />Notice that not verify the address, you can not retrieve password!',
+	'SiteEmailConfirm'			=> 'Bitte bestätige deine E-Mail-Adresse gemäß der dir zugesanden Anleitung. <br /> Beachte, bei unbestätigter E-Mail-Adresse kann das vergessene Passwort nicht zurückgesetzt werden.',
 	'NameTooShort'				=> 'Der Benutzername ist zu kurz, es sind mindestens %2 Zeichen erforderlich.',
 	'NameTooLong'				=> 'Der Benutzername ist zu lang, es sind maximal %2 Zeichen zulässig.',
 	'NameAlphanumOnly'			=> 'Der Benutzername muss zwischen %1 und %2 Zeichen lang sein und darf nur aus alphanumerischen Zeichen bestehen.',
@@ -272,12 +272,12 @@ $wacko_translation = array(
 	'MembersRemoved'			=> 'Das Mitglied wurde aus der Gruppe entfernt.',
 	'MembersDeleteInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
 
-	'UserEnabled'				=> 'Enabled',
+	'UserEnabled'				=> 'Aktiviert',
 	'UsersAddNew'				=> 'Füge einen neuen Nutzer hinzu',
 	'UsersDelete'				=> 'Bist du dir sicher das du den Nutzer entfernen willst ',
 	'UsersDeleted'				=> 'Der Nutzer wurde aus der Datenbank entfernt.',
 	'UsersRename'				=> 'Nutzer umbenennen',
-	'UsersRenameInfo'			=> '* Note: Die Änderung wirkt sich auf alle Seiten aus, die diesem Nutzer zugeordnet sind.',
+	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Nutzer zugeordnet sind.',
 	'UsersRenamed'				=> 'Nutzer erfolgreich umbenannt.',
 
 	'MetaUpdated'				=> 'Metadaten aktualisiert',
@@ -305,7 +305,7 @@ $wacko_translation = array(
 	'CommentAdded'				=> 'Kommentar hinzugefügt.',
 	'YouAreNowTheOwner'			=> 'Du bist nicht der Besitzer dieser Seite.',
 
-	'FullDiff'					=> 'Full diff',
+	'FullDiff'					=> 'vollständiger Vergleich',
 	'SimpleDiff'				=> 'einfacher Vergleich',
 	'SourceDiff'				=> 'Quelltext',
 	'RevisionsShowAll'			=> 'Alle Revisionen anzeigen...',
@@ -515,8 +515,8 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2'	=> 'editieren',
 	'PageAlreadyExistsEditDenied'	=> 'Du kannst sie nicht editieren',
 
-	'PageReservedWord'			=> 'You can\'t use <code>%1</code> as the part of the address as it\'s a reserved word.',
-	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+	'PageReservedWord'			=> 'Du kannst <code>%1</code> als Teil der Adresse nicht verwenden, weil es ein reserviertes Wort ist.',
+	'UserReservedWord'			=> 'Benutzernamen können nicht ##%1## enthalten, da es ein reserviertes Wort ist.',
 
 	'DontRedirect'				=> 'Keine automatische Weiterleitung erlauben, obwohl eine gesetzt ist.',
 	'SendWatchEmail'			=> 'Bestätigunsmail senden, wenn jemand (außer dir) Seiten verändert, die du beobachtest',
