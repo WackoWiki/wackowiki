@@ -129,14 +129,14 @@ class Wacko
 		}
 
 		// retrieving from db
-		if ($r = $this->sql_query($query))
+		if ($result = $this->sql_query($query))
 		{
-			while ($row = fetch_assoc($r))
+			while ($row = fetch_assoc($result))
 			{
 				$data[] = $row;
 			}
 
-			free_result($r);
+			free_result($result);
 		}
 
 		// saving to cache
@@ -1801,7 +1801,7 @@ class Wacko
 					// forum topic privileges
 					if ($this->forum === true)
 					{
-						$write_acl		= '';
+						$write_acl		= $user_name; # '';
 						$comment_acl	= '*';
 						$create_acl		= '';
 						$upload_acl		= '';
