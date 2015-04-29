@@ -304,7 +304,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 	}
 }
 
-if (!isset($_POST['confirm']))
+if (!isset($_GET['confirm']))
 {
 	if ($this->config['allow_registration'] || $this->is_admin())
 	{
