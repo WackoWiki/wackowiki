@@ -131,7 +131,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				$error .= $this->get_translation('SpecifyEmail')." ";
 			}
 			// invalid email
-			else if (!preg_match('/^.+?\@.+$/', $email))
+			else if (!$this->validate_email($email))
 			{
 				$error .= $this->get_translation('NotAEmail')." ";
 			}

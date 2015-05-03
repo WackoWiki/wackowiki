@@ -130,8 +130,14 @@ function admin_users(&$engine, &$module)
 			"LIMIT 1"))
 			{
 				$engine->show_message($engine->get_translation('UsersAlreadyExists'));
-				$_POST['change'] = $_POST['user_id'];
-				$_POST['create'] = 1;
+				$_POST['change']	= $_POST['user_id'];
+				$_POST['create']	= 1;
+			}
+			else if (!$engine->validate_email($_POST['email']))
+			{
+				$engine->show_message($engine->get_translation('NotAEmail'));
+				$_POST['change']	= $_POST['user_id'];
+				$_POST['create']	= 1;
 			}
 			else
 			{
@@ -182,6 +188,12 @@ function admin_users(&$engine, &$module)
 			"LIMIT 1"))
 			{
 				$engine->set_message($engine->get_translation('UsersAlreadyExists'));
+				$_POST['change'] = $_POST['user_id'];
+				$_POST['edit'] = 1;
+			}
+			else if (!$engine->validate_email($_POST['email']))
+			{
+				$engine->show_message($engine->get_translation('NotAEmail'));
 				$_POST['change'] = $_POST['user_id'];
 				$_POST['edit'] = 1;
 			}
@@ -432,8 +444,15 @@ function admin_users(&$engine, &$module)
 	}
 	else
 	{
+		// defining WHERE and ORDER clauses
+		// $param is passed to the pagination links
+		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
+		{
+			$where = "WHERE user_name LIKE '%".quote($this->dblink, $_GET['user'])."%' ";
+			$param = "user=".htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+		}
 		// set signuptime ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
 		{
 			$order		= 'ORDER BY signup_time ASC ';
 			$signup_time	= 'signup_desc';
