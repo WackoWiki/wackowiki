@@ -68,7 +68,7 @@ else if ($user = $this->get_user())
 			$error .= $this->get_translation('SpecifyEmail')." ";
 		}
 		// invalid email
-		else if (!preg_match('/^[\w.-]+?\@[\w.-]+?\.[\w]+$/', $_POST['email']))
+		else if (!$this->validate_email($_POST['email']))
 		{
 			$error .= $this->get_translation('NotAEmail')." ";
 		}

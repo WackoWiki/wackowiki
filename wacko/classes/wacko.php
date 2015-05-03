@@ -1801,7 +1801,7 @@ class Wacko
 					// forum topic privileges
 					if ($this->forum === true)
 					{
-						$write_acl		= $user_name; # '';
+						$write_acl		= $user_name;
 						$comment_acl	= '*';
 						$create_acl		= '';
 						$upload_acl		= '';
@@ -6533,6 +6533,30 @@ class Wacko
 		}
 	}
 
+	// Check for valid email address.
+	//		$email_address = email address to check
+	// returns boolean
+	// true		- valid
+	// false	- invalid
+	function validate_email($email_address)
+	{
+		if ($this->config['email_pattern'] == 'html5')
+		{
+			// Use the pattern given by the HTML5 spec for 'email' type form input elements
+			// http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
+			$HTML5_email_pattern = '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' .
+								'[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/sD';
+
+			return (boolean) preg_match($HTML5_email_pattern, $email_address);
+		}
+		else
+		{
+			// Use PHP built-in FILTER_VALIDATE_EMAIL, does not allow 'dotless' domains;
+			// http://php.net/filter.filters.validate
+			return (boolean) filter_var($email_address, FILTER_VALIDATE_EMAIL);
+		}
+	}
+
 	// log event into the system journal. $message may use wiki
 	// syntax, however if used before locale translations registration,
 	// will be saved in plain text only.
@@ -6594,7 +6618,7 @@ class Wacko
 					$_category .= ', ';
 				}
 
-				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'" rel="tag">' .htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>';
+				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'" class="tag" rel="tag">' .htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>';
 			}
 
 			return $_category;
