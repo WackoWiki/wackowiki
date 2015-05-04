@@ -277,8 +277,8 @@ if ($user = $this->get_user())
 							}
 
 							echo '<li class="lined">';
-							echo '<span class="">'.$referrer['num'].'</span> &nbsp; ';
-							echo '<span class=""><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\">".htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></span >';
+							echo '<span class="list_count">'.$referrer['num'].'</span> &nbsp; ';
+							echo '<span class=""><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" rel="nofollow noreferrer">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></span >';
 							echo "</li>\n";
 						}
 
@@ -373,15 +373,11 @@ if ($user = $this->get_user())
 							$referrer_text = $referrer['referrer'];
 						}
 
-						echo "<ul>\n";
-
 						echo '<li class="lined">';
 						echo '<span class="">'.date($this->config['time_format_seconds'], strtotime( $time )).'</span> &nbsp; ';
-						echo '<span class=""><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></span >';
+						echo '<span class=""><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" rel="nofollow noreferrer">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></span >';
 						echo $spacer.'<small>'.$page_link.'</small>';
 						echo "</li>\n";
-
-						echo "</ul>\n</li>\n";
 					}
 				}
 			}
@@ -401,7 +397,7 @@ if ($user = $this->get_user())
 		{
 			if ($referrers)
 			{
-				echo "<table>\n";
+				echo "<ul class=\"ul_list\">\n";
 
 				foreach ($referrers as $referrer)
 				{
@@ -414,14 +410,14 @@ if ($user = $this->get_user())
 					{
 						$referrer_text = $referrer['referrer'];
 					}
-
-					echo '<tr>';
-					echo '<td style="text-align:right; width:30; padding-right: 10px">'.$referrer['num'].'</td>';
-					echo '<td style="vertical-align:top;"><a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a></td>';
-					echo "</tr>\n";
+					#style="text-align:right; width:30px; float: left; padding-right: 10px"
+					echo '<li class="lined">';
+					echo '<span class="list_count">'.$referrer['num'].'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+					echo '<a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" rel="nofollow noreferrer">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>';
+					echo "</li>\n";
 				}
 
-				echo "</table>\n";
+				echo "</ul>\n";
 			}
 			else
 			{
