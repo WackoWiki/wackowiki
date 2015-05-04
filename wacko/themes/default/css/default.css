@@ -188,7 +188,7 @@ main {
 	clear: both;
 }
 
-article {
+article, #page {
 	background-color: #FFFFFF;
 	padding: 5px 0px 20px 0px;
 	float: left;
@@ -1455,6 +1455,13 @@ table.formation td {
 	width:auto;
 }
 
+.list_count{
+	text-align:right; 
+	width:30px; 
+	float: left; 
+	padding-right: 10px
+}
+
 .userprofil {
 	color: #444444;
 	font-weight: bold;
@@ -1503,4 +1510,16 @@ table.forum th {
 
 table.forum td {
 	padding: 5px;
+}
+
+.tag {
+	background: #f0f4f5;
+	display: inline-block;
+	font-size: 12px;
+	line-height: 1;
+	margin: 2px 2px 2px 0;
+	padding: 0.4em 0.5em;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
 }

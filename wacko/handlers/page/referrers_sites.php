@@ -5,6 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// TODO: remove or reuse ?obsolete? message sets: ViewReferringSitesGlobal, ViewReferringSites
+
 ?>
 <div id="page">
 <?php
@@ -19,6 +21,24 @@ if (!$this->page)
 if ($this->page['comment_on_id'])
 {
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
+}
+
+// navigation
+if (isset($_GET['global']))
+{
+	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersGlobal')."</h3>";
+	echo "<ul class=\"menu\">
+			<li><a href=\"".$this->href('referrers_sites')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
+			<li class=\"active\">".$this->get_translation('ViewReferrersGlobal')."</li>
+		</ul><br /><br />\n";
+}
+else
+{
+	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPage')."</h3>";
+	echo "<ul class=\"menu\">
+			<li class=\"active\">".$this->get_translation('ViewReferrersPage')."</li>
+			<li><a href=\"".$this->href('referrers_sites', '', 'global=1')."\">". $this->get_translation('ViewReferrersGlobal')."</a></li>
+		</ul><br /><br />\n";
 }
 
 if ($user = $this->get_user())
@@ -64,28 +84,24 @@ if ($user = $this->get_user())
 		array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 		reset($referrer_sites);
 
-		echo '<div class="cssform3">';
+		echo "<ul class=\"ul_list\">\n";
 
 		foreach ($referrer_sites as $site => $site_count)
 		{
-			echo '<span class="site_count">'.$site_count.'</span>&nbsp;&nbsp;&nbsp;&nbsp;'.((($site != 'unknown') ? '<a href="http://'.$site.'">'.$site.'</a>' : $site)).'<br />';
-
+			echo '<li class="lined">';
+			echo '<span class="list_count">'.$site_count.'</span>&nbsp;&nbsp;&nbsp;&nbsp;'.
+				(($site != 'unknown')
+					? '<a href="http://'.htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" rel="nofollow noreferrer">'.htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>'
+					: $site
+				);
+			echo "</li>\n";
 		}
 
-		echo '</div>';
+		echo "</ul>\n";
 	}
 	else
 	{
 		echo $this->get_translation('NoneReferrers')."<br />\n";
-	}
-
-	if ($global)
-	{
-		print("<br />[".str_replace('%1',$this->href('referrers_sites'), str_replace('%2', $this->tag, $this->get_translation('ViewReferringSites')))." | ".str_replace('%1', $this->href('referrers'), str_replace('%2', $this->tag, $this->get_translation('ViewReferrersFor')))."]");
-	}
-	else
-	{
-		print("<br />[".str_replace('%1', $this->href('referrers_sites', '', 'global=1'), $this->get_translation('ViewReferringSitesGlobal')) ." | ".str_replace('%1', $this->href('referrers', '', 'global=1'), $this->get_translation('ViewReferrersForGlobal'))."]");
 	}
 }
 else
