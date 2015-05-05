@@ -13,14 +13,14 @@ if (!defined('IN_WACKO'))
 //				  will not be displayed. tags must be absolute
 //					  ^^^ UNTESTED FUNCTIONALITY!!! ^^^
 
-$access = '';
-
 // make sure that we're executing inside the forum cluster
 if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 {
 	// count slashes in the tag
-	$i		= 0;
-	$tag	= $this->tag;
+	$i			= 0;
+	$tag		= $this->tag;
+	$access		= '';
+	$category	= false;
 
 	while (strpos($tag, '/') !== false)
 	{
@@ -52,13 +52,13 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	{
 		if (isset($_POST['title']) && $_POST['title'] == true)
 		{
-			$name		= trim($_POST['title'], ". \t");
-			$title		= $name;
-			$name		= ucwords($name);
-			$name		= preg_replace('/[^- \\w]/', '', $name);
-			$name		= str_replace(array(' ', "\t"), '', $name);
+			$topic_name		= trim($_POST['title'], ". \t");
+			$page_title		= $topic_name;
+			$topic_name		= ucwords($topic_name);
+			$topic_name		= preg_replace('/[^- \\w]/', '', $topic_name);
+			$topic_name		= str_replace(array(' ', "\t"), '', $topic_name);
 
-			if ($name == '')
+			if ($topic_name == '')
 			{
 				$error = $this->get_translation('ForumNoTopicName');
 			}
@@ -77,9 +77,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		else
 		{
 			// redirecting to the edit form
-			$_SESSION['title']	= $title;
-			$_SESSION['body']	= "==".$title."==\n\n";
-			$this->redirect($this->href('edit', $this->tag.'/'.$name, '', 1));
+			$_SESSION['title']	= $page_title;
+			$_SESSION['body']	= "==".$page_title."==\n\n";
+			$this->redirect($this->href('edit', $this->tag.'/'.$topic_name, '', 1));
 		}
 	}
 
@@ -92,9 +92,18 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		$pages = trim(explode(',', $pages), '/ ');
 	}
 
+	// filter categories
+	if (isset($_GET['category']) && $_GET['category'] == true)
+	{
+		$category = (int) $_GET['category'];
+	}
+
 	// make counter query
 	$sql = "SELECT COUNT(p.tag) AS n ".
 		"FROM {$this->config['table_prefix']}page AS p, ".
+		($category
+			? "INNER JOIN {$this->config['table_prefix']}category_page AS k ON (k.page_id = p.page_id) "
+			: "").
 			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
 			"AND a.privilege = 'create' AND a.list = '' ".
@@ -108,6 +117,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		}
 	}
 
+	if ($category)
+	{
+		$sql .= "AND k.category_id IN ( ".quote($this->dblink, $category)." ) AND k.page_id = p.page_id ";
+	}
+
 	// count topics and make pagination
 	$count		= $this->load_single($sql);
 	$pagination	= $this->pagination($count['n'], $this->config['forum_topics']);
@@ -115,6 +129,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// make collector query
 	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.lang, u.user_name, o.user_name as owner_name ".
 		"FROM {$this->config['table_prefix']}page AS p ".
+		($category
+			? "INNER JOIN {$this->config['table_prefix']}category_page AS k ON (k.page_id = p.page_id) "
+			: "").
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 			"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
 			"{$this->config['table_prefix']}acl AS a ".
@@ -128,6 +145,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		{
 			$sql .= "AND p.tag NOT LIKE '".quote($this->dblink, $page)."/%' ";
 		}
+	}
+
+	if ($category)
+	{
+			$sql .= "AND k.category_id IN ( ".quote($this->dblink, $category)." ) AND k.page_id = p.page_id ";
 	}
 
 	$sql .= "ORDER BY p.commented DESC ".
