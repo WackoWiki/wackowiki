@@ -298,7 +298,7 @@ if ($user = $this->get_user())
 			}
 		}
 		// by time
-		if ($bytime && list ($referrers, $pagination) = load_referrers($this, $query, (int)$max, $parameters))
+		else if ($bytime && list ($referrers, $pagination) = load_referrers($this, $query, (int)$max, $parameters))
 		{
 			// pagination
 			if (isset($pagination['text']))
@@ -410,7 +410,7 @@ if ($user = $this->get_user())
 					{
 						$referrer_text = $referrer['referrer'];
 					}
-					#style="text-align:right; width:30px; float: left; padding-right: 10px"
+
 					echo '<li class="lined">';
 					echo '<span class="list_count">'.$referrer['num'].'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
 					echo '<a title="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" href="'.htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" rel="nofollow noreferrer">'.htmlspecialchars($referrer_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>';
