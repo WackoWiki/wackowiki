@@ -92,7 +92,7 @@ else
 
 <?php
 	// defining tabs constructor
-	// image - 1 image only, 2 image and text
+	//	image - 0 text only, 1 image only, 2 image and text
 	function echo_tab($link, $hint, $title, $active = false, $image, $accesskey = '')
 	{
 		global $engine;
@@ -125,16 +125,16 @@ else
 					$_title = $title;
 				}
 
-				$tab = "<li class=\"$method active\"><span><img src=\"".$engine->config['theme_url']."icons/$_image\" alt=\"$title\" />"." ".$_title."</span></li>\n";
+				$tab = '<li class="'.$method.' active"><span><img src="'.$engine->config['theme_url'].'icons/'.$_image.'" alt="'.$title.'" />'.' '.$_title.'</span></li>'."\n";
 			}
 			else
 			{
-				$tab = "<li class=\"$method active\"><span>"." ".$title."</span></li>\n";
+				$tab = '<li class="'.$method.' active"><span>'.' '.$title.'</span></li>'."\n";
 			}
 		}
 		else
 		{
-			if ($method == 'show') $link = ".";
+			if ($method == 'show') $link = '.';
 
 			if ($image)
 			{
@@ -143,11 +143,11 @@ else
 					$_title = ' '.$title;
 				}
 
-				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icons/$_image\" alt=\"$title\" />".$_title."</a></li>\n";
+				$tab = '<li class="'.$method.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$accesskey.'"><img src="'.$engine->config['theme_url'].'icons/'.$_image.'" alt="'.$title.'" />'.$_title.'</a></li>'."\n";
 			}
 			else
 			{
-				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\">$title</a></li>\n";
+				$tab = '<li class="'.$method.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$accesskey.'">'.$title.'</a></li>'."\n";
 			}
 		}
 
