@@ -23,13 +23,12 @@ div.header h1 {font-size: 10pt}
 BODY, TD, P, LI { font-family: Georgia, Verdana; font-size:12pt }
 TEXTAREA { font-family: MonoCondensedCTT, Lucida Console, sans; color:#222222;   line-height: 1.3em; }
 
-cite {color:#888800;font-style:normal;}
 .cite {color:#ff0000;font-style:normal;}
 
 /* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
-.mark { border:1px solid #000; background: #ddd; }
+mark { border:1px solid #000; background: #ddd; }
 .center { text-align: center; }
 .indent { margin-left: 40px; }
 

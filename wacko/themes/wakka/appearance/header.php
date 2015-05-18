@@ -87,7 +87,7 @@ else
 <div id="search">
 <?php
 // Opens Search form
-echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
+echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage'));
 
 // Searchbar
 ?>

@@ -79,7 +79,7 @@ else if($this->has_access('write'))
 	<div id="mainwrapper">
 		<div id="header">
 			<?php // Insert search form ?>
-			<?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
+			<?php echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
 			<input type="text" name="phrase" size="15" value="<?php echo $this->get_translation('SearchButtonText'); ?>" class="search" />
 			<?php echo $this->form_close(); ?>
 
@@ -166,7 +166,7 @@ else if($this->has_access('write'))
 			</a>
 			<?php } else { ?>
 			<div class="loginbox">
-				<?php echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
+				<?php echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage')); ?>
 				<input type="hidden" name="action" value="login" />
 				<input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag); ?>" />
 				<?php echo $this->get_translation('LoginWelcome'); ?>

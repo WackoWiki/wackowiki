@@ -8,7 +8,6 @@ dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; curso
 del { color:#999999 }
 del a:visited, del a:link { color:#999999 }
 
-cite {color:#888800;font-style:normal;}
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
@@ -262,7 +261,7 @@ code { color:#666600; background:#ffffcc; padding: 0 2px }
 .underline { text-decoration:underline; }
 
 /* Highlighted text: SYNTAX ??text?? */
-.mark {background: #ffffaa; /* old red: #ffaaaa */ }
+mark {background: #ffffaa; /* old red: #ffaaaa */ }
 
 /* Highlighted text: SYNTAX ??(green)text?? */
 .mark-yellow {background: #ffff00;}

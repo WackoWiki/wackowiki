@@ -113,7 +113,7 @@ dfn {
 }
 
 /* Highlighted text: SYNTAX ??text?? */
-.mark {
+mark {
 	font-style:		italic;
 }
 

@@ -20,7 +20,7 @@ if ($this->get_user())
 {
 	echo '<span class="nobr">'.$this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span><small> ( <span class="nobr Tune">'.
 		$this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0).
-		" | <a onclick=\"return confirm('".$this->get_translation('LogoutAreYouSure')."');\" href=\"".$this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;")."action=logout&amp;goback=".$this->slim_url($this->tag)."\">".$this->get_translation('LogoutLink')."</a></span>)</small>";
+		" | <a onclick=\"return confirm('".$this->get_translation('LogoutAreYouSure')."');\" href=\"".$this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;")."action=logout&amp;goback=".$this->slim_url($this->tag)."\">".$this->get_translation('LogoutLink')."</a></span> )</small>";
 // else shows login's controls
 }
 else
@@ -297,7 +297,7 @@ else
 			($this->page && ($this->get_user())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
 			$this->method == 'watch',
 			($this->is_watched === true ? 'watch-on.png' : 'watch-off.png'),
-			'a');
+			'w');
 
 		// review tab
 		echo echo_tab(
@@ -328,7 +328,7 @@ else
 <div id="search">
 <?php
 // opens search form
-echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
+echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage'));
 
 // searchbar
 ?>

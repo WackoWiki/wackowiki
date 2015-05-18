@@ -18,7 +18,6 @@ H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px
 BODY, TD, P, LI { font-family: Georgia, Verdana; font-size:95% }
 TEXTAREA { font-family: MonoCondensedCTT, Lucida Console, sans; color:#222222; line-height: 1.3em; }
 
-cite {color:#888800;font-style:normal;}
 .cite {color:#888800;font-style:normal;}
 /* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }

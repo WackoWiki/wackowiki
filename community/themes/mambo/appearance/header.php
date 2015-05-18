@@ -13,7 +13,7 @@ require ('themes/_common/_header.php');
 			<?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
 		</td>
 		<td class="searchArea" style="text-align:right; vertical-align:bottom;">
-			<?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
+			<?php echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
 			<?php echo $this->get_translation('SearchText') ?>
 			<input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
 			<?php echo $this->form_close(); ?>
@@ -186,7 +186,7 @@ require ('themes/_common/_header.php');
 		<td>
 <!-- wrapper -->
 
-<?php echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
+<?php echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage')); ?>
 <input type="hidden" name="action" value="login" />
 
 <div class="header">

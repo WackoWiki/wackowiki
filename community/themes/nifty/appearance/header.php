@@ -298,7 +298,7 @@ if ($doubleclick == true)
 		<div id="search">
 		<?php
 		// opens search form
-		echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
+		echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage'));
 
 		// searchbar
 		?>

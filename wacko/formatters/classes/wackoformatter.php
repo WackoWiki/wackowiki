@@ -665,10 +665,10 @@ class WackoFormatter
 
 			if ($matches[3] && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
 			{
-				return '<span class="mark-'.$color.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]).'</span>';
+				return '<mark class="mark-'.$color.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]).'</mark>';
 			}
 
-			return '<span class="mark">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</span>';
+			return '<mark>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</mark>';
 		}
 		// urls
 		else if (preg_match('/^([[:alpha:]]+:\/\/\S+?|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/', $thing, $matches) ||
