@@ -9,7 +9,7 @@ require ('themes/_common/_header.php');
 ?>
 <body onload="all_init();">
 
-	<?php echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
+	<?php echo $this->form_open('login', '', 'post', false, $this->get_translation('LoginPage')); ?>
 <input type="hidden" name="action" value="login" />
 
 <div class="header">

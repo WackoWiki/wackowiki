@@ -146,7 +146,7 @@ ul {
 #print .email1, #print .email2 {
 	color: #666666;
 }
-#print .mark {
+#print mark {
 	color: #333333;
 	background-color: #EDEDED;
 	border-color: #333333;	

@@ -229,7 +229,7 @@ height:21px;
 font-size:22px;
 }
 
-.mark {
+mark {
 background:#faa;
 }
 
@@ -449,10 +449,6 @@ margin:5px 0;
 padding:0;
 }
 
-cite {
-color:#880;
-font-style:normal;
-}
 
 dfn {
 border-bottom:1px dotted #000;

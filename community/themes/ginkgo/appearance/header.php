@@ -13,7 +13,7 @@ require ('themes/_common/_header.php');
 		<td style="width:100%; vertical-align:bottom; white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>
 		<td style="width:100%;"><div style="text-align:right;"><?php
 // Opens Search form
-echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
+echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage'));
 
 // Searchbar
 ?>

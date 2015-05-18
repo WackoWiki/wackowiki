@@ -117,7 +117,7 @@ if ($this->page)
 
 <?php
 // Opens Search form
-echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
+echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
 <div>
 <?php
 // Searchbar
@@ -132,7 +132,7 @@ echo $this->form_close();
 
 <?php
 // Begin Login form
-echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
+echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage')); ?>
 	<input type="hidden" name="action" value="login" />
 <?php
 

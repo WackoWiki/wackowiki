@@ -11,7 +11,7 @@ require ('themes/_common/_header.php');
 <div id="head">
   <?php
 // Searchbar
-echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
+echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
   <input name="phrase" type="text" id="search" />
   <?php
 // Search form close
@@ -84,7 +84,7 @@ if ($this->get_user()) { ?>
   <br />
   <?php
 // Begin Login form
-echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
+echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage')); ?>
   <input type="hidden" name="action" value="login" />
   <input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" />
   <?php echo $this->get_translation('LoginWelcome') ?>:<br />

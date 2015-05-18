@@ -12,7 +12,7 @@ require ('themes/_common/_header.php');
 	<tr>
 		<td><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
 		</td>
-		<td class="searchArea" style="text-align:right; vertical-align:bottom;"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
+		<td class="searchArea" style="text-align:right; vertical-align:bottom;"><?php echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
 		<input name="phrase" type="text"
 			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0px; margin: 0px; background-color: #FFFFFF;"
 			size="21" /> <?php echo $this->form_close(); ?></td>
@@ -179,7 +179,7 @@ require ('themes/_common/_header.php');
 			</tr>
 		</table>
 		</td>
-		<td><!-- wrapper --> <?php echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
+		<td><!-- wrapper --> <?php echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage')); ?>
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->is_watched === true

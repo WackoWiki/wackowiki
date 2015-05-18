@@ -13,7 +13,7 @@ require ('themes/_common/_header.php');
 <body onload="all_init();">
 <div class="Top<?php if (!$this->get_user()) echo "LoggedOut";?>">
 	<div class="TopRight">
-<?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
+<?php echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage')); ?>
 	<span class="nobr">
 <?php
 
@@ -60,7 +60,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 		<table >
 			<tr>
 				<td>
-			<?php echo $this->form_open('', 'Login', 'post'); ?>
+			<?php echo $this->form_open('login', '', 'post', false, 'Login'); ?>
 			<input type="hidden" name="action" value="login" />
 			<img src="<?php echo $this->config['theme_url'] ?>icons/norole.png" width="9" height="15" alt="" /></td>
 				<td><strong><?php echo $this->get_translation('LoginWelcome') ?>:&nbsp;</strong> </td>
