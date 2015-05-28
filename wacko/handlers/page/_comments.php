@@ -168,7 +168,7 @@ if ($this->has_access('read'))
 		{
 			echo "<div class=\"commentform\">\n";
 
-			echo $this->form_open('addcomment');
+			echo $this->form_open('add_comment', 'addcomment', '', true);
 
 			// preview
 			if (!empty($preview))
@@ -177,7 +177,7 @@ if ($this->has_access('read'))
 				$preview = $this->format($preview, 'wacko');
 				$preview = $this->format($preview, 'post_wacko');
 
-				echo "<div id=\"preview\" class=\"preview\"><p class=\"preview\"><span>".$this->get_translation('EditPreviewSlim')."</span></p>\n".
+				echo '<div id="preview" class="preview"><p class="preview"><span>'.$this->get_translation('EditPreviewSlim').'</span></p>'."\n".
 						 '<div class="commentpreview">'."\n".
 						 '<div class="commenttitle">'.$title."</div>\n".
 						 $preview.
@@ -185,9 +185,9 @@ if ($this->has_access('read'))
 			}
 
 			// load WikiEdit
-			echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
-				echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit.js\"></script>\n";
-				echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
+			echo "<script src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
+			echo "<script src=\"".$this->config['base_url']."js/wikiedit.js\"></script>\n";
+			echo "<script src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
 			?>
 				<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 
@@ -205,8 +205,9 @@ if ($this->has_access('read'))
 				// publish anonymously
 				if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
-					$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".$this->page['page_id']."\"".( $this->get_user_setting('noid_pubs') == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
-					$output .= "<br />";
+					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'" '.( $this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' ).' /> ';
+					$output .= '<small><label for="noid_publication">'.$this->get_translation('PostAnonymously').'</label></small>';
+					$output .= '<br />';
 				}
 
 				// watch a page

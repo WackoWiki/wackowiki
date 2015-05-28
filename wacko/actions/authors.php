@@ -75,7 +75,10 @@ else
 				if (!isset($authors[$author['name']]))
 				{
 					// new entry
-					$authors[$author['name']] = array('name' => $author['name'], 'years' => $author['year'], 'total' => 1);
+					$authors[$author['name']] = array(
+							'name' => $author['name'],
+							'years' => $author['year'],
+							'total' => 1);
 				}
 				else
 				{

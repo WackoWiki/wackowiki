@@ -11,7 +11,7 @@ if ($this->is_admin())
 {
 	if (!isset($_POST['clear_cache']))
 	{
-		echo $this->form_open();
+		echo $this->form_open('purge_cache');
 
 		echo '<div class="layout-box">';
 		// config cache

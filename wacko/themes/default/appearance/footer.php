@@ -13,7 +13,7 @@
 <ul>
 <?php
 // If User has rights to edit page, show Edit link
-echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation('EditTip')."\">".$this->get_translation('EditText')."</a></li>\n" : "";
+echo ($this->has_access('write') && ($this->method != 'edit')) ? '<li><a href="'.$this->href('edit').'" accesskey="E" title="'.$this->get_translation('EditTip').'">'.$this->get_translation('EditText')."</a></li>\n" : '';
 
 // If this page exists
 if ($this->page)
@@ -22,8 +22,8 @@ if ($this->page)
 	{
 		// Revisions link
 		echo (( $this->hide_revisions === false || $this->is_admin() )
-				? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
-				: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
+				? '<li><a href="'.$this->href('revisions').'" title="'.$this->get_translation('RevisionTip').'">'.$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
+				: '<li>'.$this->get_time_string_formatted($this->page['modified'])."</li>\n"
 			);
 
 		// Show Owner of this page
@@ -31,20 +31,20 @@ if ($this->page)
 		{
 			if ($owner == 'System')
 			{
-				echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+				echo '<li>'.$this->get_translation('Owner').": ".$owner."</li>\n";
 			}
 			else
 			{
-				echo "<li>".$this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."</li>\n";
+				echo '<li>'.$this->get_translation('Owner').': '.'<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner."</a></li>\n";
 			}
 		}
 		else if (!$this->page['comment_on_id'])
 		{
-			echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)</li>\n" : "");
+			echo '<li>'.$this->get_translation('Nobody').($this->get_user() ? ' (<a href="'.$this->href('claim').'">'.$this->get_translation('TakeOwnership')."</a>)</li>\n" : '');
 		}
 
 		// Permalink
-		echo "<li>".$this->action('permalink')."</li>\n";
+		echo '<li>'.$this->action('permalink')."</li>\n";
 	}
 }
 

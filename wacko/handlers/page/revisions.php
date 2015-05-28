@@ -43,10 +43,10 @@ if ($this->is_admin())
 // get page_id for deleted but stored page
 if ($this->page['deleted'] == 1)
 {
-	echo '<div class="info">'.
+	$this->show_message(
 			#$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
-			'BACKUP of deleted page!'. // TODO: localize and add description: to restore the page you ...
-			'</div>';
+			'BACKUP of deleted page!' // TODO: localize and add description: to restore the page you ...
+			);
 }
 
 if ($this->has_access('read'))
@@ -55,7 +55,7 @@ if ($this->has_access('read'))
 	if ($revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $deleted))
 	{
 		$this->context[++$this->current_context] = '';
-		$output .= $this->form_open('diff', '', 'get');
+		$output .= $this->form_open('diff_versions', 'diff', 'get');
 		$output .= "<p>\n";
 		$output .= "<input type=\"submit\" value=\"".$this->get_translation('ShowDifferencesButton')."\" />";
 		#$output .= "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";

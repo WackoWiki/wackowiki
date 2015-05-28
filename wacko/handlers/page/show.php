@@ -71,7 +71,7 @@ if ($this->has_access('read'))
 				$latest = $this->load_page($this->tag);
 
 				$message .= '<br />';
-				$message .= $this->form_open('edit');
+				$message .= $this->form_open('edit_revision', 'edit');
 				$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
 				$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
 				$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
@@ -130,6 +130,7 @@ if ($this->has_access('read'))
 
 		$this->set_language($this->user_lang);
 
+		// edit via double click
 		echo '<script>var dbclick = "page";</script>';
 	}
 }
@@ -150,7 +151,7 @@ else
 // show category tags
 if ($this->forum === true)
 {
-	echo "<div class=\"categories\">".$this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1)."</div>\n";
+	echo '<div class="categories">'.$this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1)."</div>\n";
 }
 
 // page comments and files

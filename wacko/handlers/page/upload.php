@@ -75,7 +75,7 @@ if ($registered
 				$message = '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
 				$this->show_message($message, 'info');
 
-				echo $this->form_open('upload');
+				echo $this->form_open('remove_file', 'upload');
 				// !!!!! place here a reference to delete files
 ?>
 	<br />
@@ -146,7 +146,7 @@ if ($registered
 				$message = '<strong>'.$this->get_translation('UploadEditConfirm').'</strong>';
 				$this->show_message($message, 'info');
 
-				echo $this->form_open('upload');
+				echo $this->form_open('upload_file', 'upload');
 				// !!!!! place here a reference to delete files
 ?>
 	<br />
@@ -245,7 +245,7 @@ if ($registered
 					}
 					else
 					{
-						$message .= '<div class="error">'.$this->get_translation('UploadRemovedFromFSError').'</div>';
+						$message .= '<span class="error">'.$this->get_translation('UploadRemovedFromFSError').'</span>';
 					}
 
 					if ($message)
@@ -323,7 +323,7 @@ if ($registered
 					#}
 					#else
 					#{
-					#	$message .= '<div class="error">'.$this->get_translation('UploadRemovedFromFSError').'</div>';
+					#	$this->set_message($this->get_translation('UploadRemovedFromFSError'), 'error');
 					#}
 
 					if ($message)
@@ -510,7 +510,7 @@ if ($registered
 
 							// 4. output link to file
 							// !!!!! write after providing filelink syntax
-							$this->set_message("<strong>".$this->get_translation('UploadDone')."</strong>");
+							$this->set_message('<strong>'.$this->get_translation('UploadDone').'</strong>');
 
 							// log event
 							if ($is_global)
@@ -576,7 +576,7 @@ if ($registered
 
 		if ($error)
 		{
-			$this->set_message('<div class="error">'.$error.'</div>');
+			$this->set_message($error, 'error');
 		}
 
 		echo $this->action('upload', array()).'<br />';

@@ -60,7 +60,7 @@ if (!function_exists('full_text_search'))
 							? "AND (a.deleted <> '1' OR b.deleted <> '1')"
 							: "AND a.deleted <> '1'")
 					: "").
-				" )".
+				" ) ".
 			"ORDER BY score DESC ".
 			"LIMIT {$pagination['offset']}, $limit");
 
@@ -245,14 +245,16 @@ if (!function_exists('highlight_this'))
 	}
 }
 
-if (!isset($topic))		$topic = '';
-if (!isset($title))		$title = '';
-if (!isset($filter))	$filter = '';
-if (!isset($style))		$style = '';
-if (!isset($nomark))	$nomark = '';
-if (!isset($for))		$for = '';
-if (!isset($term))		$term = '';
-if (!isset($options))	$options = 1;
+// end functions
+
+if (!isset($topic))		$topic		= '';
+if (!isset($title))		$title		= '';
+if (!isset($filter))	$filter		= '';
+if (!isset($style))		$style		= '';
+if (!isset($nomark))	$nomark		= '';
+if (!isset($for))		$for		= '';
+if (!isset($term))		$term		= '';
+if (!isset($options))	$options	= 1;
 $output = '';
 
 if ($user = $this->get_user())
@@ -319,7 +321,7 @@ else
 
 if ($form)
 {
-	echo $this->form_open('', '', 'get');
+	echo $this->form_open('search', '', 'get');
 
 	echo '<label for="searchfor">'.$this->get_translation('SearchFor').':</label><br />';
 	echo '<input type="search" name="phrase" id="searchfor" size="40" value="'.(isset($_GET['phrase']) ? htmlspecialchars($_GET['phrase'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" />';
@@ -390,12 +392,12 @@ if ($phrase)
 						// generate preview
 						if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
 						{
-							$body = $this->format($page['body'], 'cleanwacko');
-							$context = get_line_with_phrase($phrase, $body, $clean);
-							$context = preview_text($text = $context, $limit = 500, $tags = 0);
-							$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
+							$body		= $this->format($page['body'], 'cleanwacko');
+							$context	= get_line_with_phrase($phrase, $body, $clean);
+							$context	= preview_text($text = $context, $limit = 500, $tags = 0);
+							$context	= highlight_this($text = $context, $words = $phrase, $the_place = 0);
 							list($context, $count) = $context;
-							$preview = "<div>".str_replace("\n", '<br />', $context)."</div>";
+							$preview	= "<div>".str_replace("\n", '<br />', $context)."</div>";
 						}
 
 						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>".' ('.$count.')';

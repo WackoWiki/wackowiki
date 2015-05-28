@@ -15,8 +15,10 @@ p {
 code {
 	font-family: "Lucida Console", "Courier New", monospace;
 	text-align: left;
-	/*background-color: #EDEDED;
-	padding: 1px;*/
+	background-color: #ffffcc;
+	padding: 0 2px;
+	color: #666600;
+
 }
 pre {
 	font-family: "Lucida Console", "Courier New", monospace;

@@ -32,11 +32,11 @@ require ('themes/_common/_header.php');
 
 
 <span class="navbar-brand">
-<?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>: 
+<?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>:
 
 
 <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?></span>
-		
+
 
 </div>
 <?php /* <div id="navbar" class="collapse navbar-collapse">
@@ -49,7 +49,7 @@ require ('themes/_common/_header.php');
 
 <form class="navbar-form navbar-right" role="search">
 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
- 
+
 	<div id="search">
 <?php
 // opens search form
@@ -69,7 +69,7 @@ echo $this->form_close();
 </div>
 
  </form>
- 
+
 
 </div>
 </div>
@@ -400,8 +400,5 @@ echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = tru
 <div id="content">
 <?php
 // here we show messages
-if ($message = $this->get_message())
-{
-	$this->show_message($message, 'info');
-}
+$this->output_messages();
 ?>

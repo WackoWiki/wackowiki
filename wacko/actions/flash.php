@@ -88,7 +88,7 @@ else if($url)
 	// Load swfobject with header
 	$this->config['allow_swfobject'] = 1;
 
-	echo "<script type=\"text/javascript\">\n";
+	echo "<script>\n";
 	echo "		// <![CDATA[\n";
 	echo "		swfobject.embedSWF(\"".$url."\", \"".$name."\", \"".$width."\", \"".$height."\", \"".$version."\", \"".$this->config['base_url']."themes/_common/expressInstall.swf\", {}, {";
 

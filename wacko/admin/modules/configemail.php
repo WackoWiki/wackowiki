@@ -114,7 +114,7 @@ function admin_configemail(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="email_from"><strong>Sender name of the site owner:</strong><br />
-				<small>The sender name, part of <code>"From:"</code> header in emails for all the email-notification site.</small></label></td>
+				<small>The sender name, part of <code>'From:'</code> header in emails for all the email-notification site.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->config['email_from'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -122,7 +122,7 @@ function admin_configemail(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
-				<small>This address will appear as the<code>"From:"</code> all the email-notification site.</small></label></td>
+				<small>This address will appear as the<code>'From:'</code> all the email-notification site.</small></label></td>
 				<td><input type="email" maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -149,7 +149,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_port"><strong>SMTP server port:</strong><br />
 				<small>Only change this if you know your SMTP server is on a different port. (default 25 or 587)</small></label></td>
-				<td><input maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->config['smtp_port'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->config['smtp_port'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

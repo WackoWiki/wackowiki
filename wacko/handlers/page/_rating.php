@@ -34,7 +34,7 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 	echo "</div>\n";
 
 	// display rating form
-	echo '<div class="rating">'.$this->form_open('rate').'';
+	echo '<div class="rating">'.$this->form_open('rate', 'rate').'';
 	echo '<input id="minus3" name="value" type="radio" value="-3" /><label for="minus3">-3</label>'.
 				 '<input id="minus2" name="value" type="radio" value="-2" /><label for="minus2">-2</label>'.
 				 '<input id="minus1" name="value" type="radio" value="-1" /><label for="minus1">-1</label>'.

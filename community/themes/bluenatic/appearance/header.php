@@ -180,8 +180,5 @@ else if($this->has_access('write'))
 		</div>
 	<?php
 	// here we show messages
-	if ($message = $this->get_message())
-	{
-		$this->show_message($message, 'info');
-	}
+	$this->output_messages();
 	?>

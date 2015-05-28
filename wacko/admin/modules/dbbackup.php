@@ -194,6 +194,12 @@ function admin_dbbackup(&$engine, &$module)
 	}
 	else
 	{
+		if (!is_writable($engine->config['upload_path_backup'].'/'))
+		{
+			echo output_image($engine, false).'<strong class="red">The '.$engine->config['upload_path_backup'].'/'.' directory is not writable.</strong>'. "<br />\n";
+		}
+		else
+		{
 ?>
 		<p>
 			Specify the desired scheme of Backup. The root cluster does not affect the
@@ -221,50 +227,51 @@ function admin_dbbackup(&$engine, &$module)
 					<th><a href="?mode=dbbackup<?php echo $getstr.( isset($scheme['data']) && $scheme['data'] == 1 ? '&data=0' : '&data=1' ); ?>">Data</a></th>
 				</tr>
 <?php
-		foreach ($tables as $table)
-		{
-			$check = false;
-
-			if ($table['name'] != 'cache' && $table['name'] != 'referrer' && $table['name'] != 'log')
+			foreach ($tables as $table)
 			{
-				$check = true;
-			}
+				$check = false;
 
-			echo '<tr class="hl_setting">'.
-					'<td class="label"><strong>'.$table['name'].'</strong></td>'.
-					'<td style="text-align:center;">&nbsp;&nbsp;<input name="__str__'.$table['name'].'" type="checkbox" value="structure"'.( isset($scheme['structure']) && $scheme['structure'] == true ? 'checked="checked"' : '' ).' /></td>'.
-					'<td style="text-align:center;"><input name="__dat__'.$table['name'].'" type="checkbox" value="data"'.( $check === true && isset($scheme['data']) && $scheme['data'] == true ? 'checked="checked"' : '' ).' /></td>'.
-				'</tr>'.
-				'<tr class="lined"><td colspan="3"></td></tr>'."\n";
-		}
+				if ($table['name'] != 'cache' && $table['name'] != 'referrer' && $table['name'] != 'log')
+				{
+					$check = true;
+				}
+
+				echo '<tr class="hl_setting">'.
+						'<td class="label"><strong>'.$table['name'].'</strong></td>'.
+						'<td style="text-align:center;">&nbsp;&nbsp;<input name="__str__'.$table['name'].'" type="checkbox" value="structure"'.( isset($scheme['structure']) && $scheme['structure'] == true ? 'checked="checked"' : '' ).' /></td>'.
+						'<td style="text-align:center;"><input name="__dat__'.$table['name'].'" type="checkbox" value="data"'.( $check === true && isset($scheme['data']) && $scheme['data'] == true ? 'checked="checked"' : '' ).' /></td>'.
+					'</tr>'.
+					'<tr class="lined"><td colspan="3"></td></tr>'."\n";
+			}
 ?>
 				<tr>
 					<th colspan="2">Folder</th>
 					<th>&nbsp;&nbsp;<a href="?mode=dbbackup<?php echo $getstr.( isset($scheme['files']) && $scheme['files'] == 1 ? '&files=0' : '&files=1' ); ?>">Files</a></th>
 				</tr>
 <?php
-		foreach ($directories as $dir)
-		{
-			$check = false;
-
-			if ($dir != $engine->config['cache_dir'])
+			foreach ($directories as $dir)
 			{
-				$check = true;
+				$check = false;
+
+				if ($dir != $engine->config['cache_dir'])
+				{
+					$check = true;
+				}
+
+				$dir = rtrim($dir, '/');
+
+				echo '<tr>'.
+						'<td colspan="2" class="label"><strong>'.$dir.'</strong></td>'.
+						'<td style="text-align:center;">&nbsp;&nbsp;<input name="__dir__'.$dir.'" type="checkbox" value="files"'.( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? 'checked="checked"' : '' ).' /></td>'.
+					'</tr>'.
+					'<tr class="lined"><td colspan="3"></td></tr>'."\n";
 			}
-
-			$dir = rtrim($dir, '/');
-
-			echo '<tr>'.
-					'<td colspan="2" class="label"><strong>'.$dir.'</strong></td>'.
-					'<td style="text-align:center;">&nbsp;&nbsp;<input name="__dir__'.$dir.'" type="checkbox" value="files"'.( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? 'checked="checked"' : '' ).' /></td>'.
-				'</tr>'.
-				'<tr class="lined"><td colspan="3"></td></tr>'."\n";
-		}
 ?>
-			</table>
-			<input name="start" id="submit" type="submit" value="save" />
-		</form>
+				</table>
+				<input name="start" id="submit" type="submit" value="backup" />
+			</form>
 <?php
+		}
 	}
 }
 

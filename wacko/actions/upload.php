@@ -42,7 +42,7 @@ if ($registered
 )
 {
 	// displaying
-	echo $this->form_open('upload', '', 'post', '', ' enctype="multipart/form-data" ');
+	echo $this->form_open('upload', 'upload', 'post', true, '', ' enctype="multipart/form-data" ');
 
 	if ($maxsize)
 	{

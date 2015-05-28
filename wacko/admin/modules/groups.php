@@ -214,7 +214,6 @@ function admin_groups(&$engine, &$module)
 					"WHERE group_id = '".(int)$_POST['group_id']."' ".
 					"LIMIT 1");
 
-
 				$engine->show_message($engine->get_translation('GroupsRenamed'));
 				$engine->log(4, "Group //'{$usergroup['group_name']}'// (//'{$_POST['group_id']}'//) renamed //'{$_POST['new_group_name']}'//");
 			}

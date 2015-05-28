@@ -27,7 +27,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	// check for reserved word
 	if ($result = $this->validate_reserved_words($this->tag))
 	{
-		$error = $result;
+		$error .= $result;
 		$this->set_message(str_replace('%1', $result, $this->get_translation('PageReservedWord')));
 		$this->redirect($this->href('new', $this->config['root_page'])); // $this->tag is reserved word
 
@@ -56,6 +56,8 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 
 	if (isset($_POST))
 	{
+
+
 		$_body		= isset($_POST['body']) ? $_POST['body'] : '';
 		$textchars	= strlen($_body);
 
@@ -94,13 +96,20 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			// check for reserved word
 			if ($result = $this->validate_reserved_words($this->tag))
 			{
-				$error = $result;
+				$error .= $result;
+			}
+
+			// TODO: if captcha .. else
+			// check form token
+			if (!$this->validate_form_token('edit_page'))
+			{
+				$error .= $this->get_translation('FormInvalid');
 			}
 
 			// check for overwriting
 			if ($this->page && $this->page['modified'] != $_POST['previous'])
 			{
-				$error = $this->get_translation('OverwriteAlert');
+				$error .= $this->get_translation('OverwriteAlert');
 			}
 
 			// check text length
@@ -231,11 +240,11 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	// display form
 	if ($error)
 	{
-		$this->set_message("<div class=\"error\">$error</div>\n");
+		$this->set_message($error, 'error');
 	}
 
 	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
-	$output .= $this->form_open('edit', '', 'post', 'edit', ' cf="true" ');
+	$output .= $this->form_open('edit_page', 'edit', 'post', true, '', ' cf="true" ');
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{

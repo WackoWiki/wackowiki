@@ -99,13 +99,13 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 
 			if ($error)
 			{
-				$this->set_message($error);
+				$this->set_message($error, 'error');
 			}
 		}
 		else
 		{
 			//Password forgotten. Provided secret code only. Print password change form.
-			echo $this->form_open();
+			echo $this->form_open('reset_password');
 			echo '<input type="hidden" name="secret_code" value="'.$code.'" />';
 			?>
 
@@ -243,7 +243,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 	}
 
 	//Print simple change password form
-	echo $this->form_open();
+	echo $this->form_open('change_password');
 
 	if (isset($error))
 	{
@@ -377,7 +377,7 @@ else
 		}
 
 		//View password forgot form
-		echo $this->form_open();
+		echo $this->form_open('forgot_password');
 ?>
 		<input type="hidden" name="action" value="send" />
 

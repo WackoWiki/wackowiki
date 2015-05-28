@@ -238,7 +238,7 @@ if ($_user_id)
 		// echo "<h4>".$this->get_translation('YourBookmarks')."</h4>";
 
 		// user is logged in; display config form
-		echo $this->form_open();
+		echo $this->form_open('edit_bookmarks');
 		echo '<input type="hidden" name="_user_menu" value="yes" />';
 
 		echo '<table>';
@@ -253,24 +253,24 @@ if ($_user_id)
 
 		foreach($_menu as $menu_item)
 		{
-			echo "<tr class=\"lined\">
-			<td class=\"\">
-			<input name=\"pos_".$menu_item['menu_id']."\" type=\"text\" size=\"2\" value=\"".$menu_item['menu_position']."\" />
+			echo '<tr class=\"lined\">
+			<td class="">
+				<input type="number" name="pos_'.$menu_item['menu_id'].'" size="2" value="'.$menu_item['menu_position'].'" />
 			</td><td>
-			<input name=\"title_".$menu_item['menu_id']."\" type=\"text\" size=\"40\" value=\"".$menu_item['menu_title']."\" />
+				<input type="text" name="title_'.$menu_item['menu_id'].'" size="40" value="'.$menu_item['menu_title'].'" />
 			</td><td>
-			<!--<input type=\"radio\" id=\"menu_item".$menu_item['menu_id']."\" name=\"change\" value=\"".$menu_item['menu_id']."\" /> -->
-			<label for=\"menu_item".$menu_item['menu_id']."\" title=\"".$menu_item['title']."\">&raquo; ".$menu_item['tag']."</label>
+				<!--<input type="radio" id="menu_item'.$menu_item['menu_id'].'" name="change" value="'.$menu_item['menu_id'].'" /> -->
+			<label for="menu_item'.$menu_item['menu_id'].'" title="'.$menu_item['title'].'">&raquo; '.$menu_item['tag'].'</label>
 			</td><td>
-			<input id=\"menu_item".$menu_item['menu_id']."\" name=\"delete_".$menu_item['menu_id']."\" type=\"checkbox\" />
+				<input type="checkbox" id="menu_item'.$menu_item['menu_id'].'" name="delete_'.$menu_item['menu_id'].'" />
 			</td><!--<td>
 
-			".(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title'])."
-			</td>-->";
+			'.(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title']).'
+			</td>-->';
 
 			if ($system)
 			{
-				echo '<td>'.(!empty($menu_item['lang']) ? $menu_item['lang'] : "");
+				echo '<td>'.(!empty($menu_item['lang']) ? $menu_item['lang'] : '');
 			}
 
 			echo "</td>\n</tr>\n";
@@ -290,7 +290,7 @@ if ($_user_id)
 		echo $this->get_translation('BookmarkNone');
 	}
 
-	echo $this->form_open();
+	echo $this->form_open('add_bookmark');
 	echo '<input type="hidden" name="_user_menu" value="yes" />';
 	echo '<br /><br />';
 	echo '<label for="add_menu_item">'.$this->get_translation('BookmarksAddPage').':</label><br />';

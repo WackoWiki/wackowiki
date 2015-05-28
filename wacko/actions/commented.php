@@ -50,7 +50,7 @@ if (!function_exists('load_recently_commented'))
 
 					// load complete comments
 					$comments = $wacko->load_all(
-						"SELECT b.tag as comment_on_tag, b.title as page_title, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
+						"SELECT b.tag as comment_on_tag, b.title as page_title, b.lang AS page_lang, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.lang AS comment_lang, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
 						"FROM ".$wacko->config['table_prefix']."page a ".
 							"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 							"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
@@ -112,7 +112,7 @@ if ($this->user_allowed_comments())
 
 		if ($root == '' && !(int)$noxml)
 		{
-			echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/comments_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.png"."\" title=\"".$this->get_translation('RecentCommentsXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
+			echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icons/xml.png" title="'.$this->get_translation('RecentCommentsXMLTip').'" alt="XML" /></a></span><br /><br />'."\n";
 		}
 
 		// pagination
@@ -161,17 +161,38 @@ if ($this->user_allowed_comments())
 						$curday = $day;
 					}
 
+					// do unicode entities
+					// page lang
+					if ($this->page['lang'] != $page['page_lang'])
+					{
+						$page_lang = $page['page_lang'];
+					}
+					else
+					{
+						$page_lang = '';
+					}
+
+					// comment lang
+					if ($this->page['lang'] != $page['comment_lang'])
+					{
+						$comment_lang = $page['comment_lang'];
+					}
+					else
+					{
+						$comment_lang = '';
+					}
+
 					$viewed = ( $user['last_mark'] == true && $page['comment_user_name'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
 
 					// print entry
-					echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
+					echo '<li '.$viewed.'><span class="dt">'.date($this->config['time_format_seconds'], strtotime( $time )).'</span> &mdash; '.
 					($title == 1
-						? $this->link('/'.$page['comment_tag'], '', $page['page_title'], '', 0, 1, '', 0)
-						: $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'])
+						? $this->link('/'.$page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
+						: $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
 					).
-					" . . . . . . . . . . . . . . . . <small>".$this->get_translation('LatestCommentBy')." ".
+					' . . . . . . . . . . . . . . . . <small>'.$this->get_translation('LatestCommentBy').' '.
 					($page['comment_user_name']
-						? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['comment_owner_name'])."\">".$page['comment_owner_name']."</a>"
+						? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['comment_owner_name']).'">'.$page['comment_owner_name'].'</a>'
 						: $this->get_translation('Guest')).
 					"</small></li>\n";
 				}

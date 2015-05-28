@@ -199,7 +199,6 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	}
 
 	$old_page_id	= $engine->get_page_id($old_tag);
-	$title_id		= $engine->get_page_id($title);
 
 	// set forum context
 	$forum_context	= $engine->forum;
@@ -209,9 +208,16 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$first_tag		= $engine->get_page_tag(array_shift($comment_ids));
 	$page			= $engine->load_page($first_tag);
 
+	// temporary unset page context
+	$oldpage = $engine->page;
+	unset($engine->page);
+
 	// resave modified body
 	$page['body']	= '=='.$title."==\n\n".$page['body'];
-	$engine->save_page($new_tag, false, $page['body'], '', '', '', $title_id, '', true);
+	$engine->save_page($new_tag, $title, $page['body'], '', '', '', 0, '', true);
+
+	// set page context back
+	$engine->page = $oldpage;
 
 	$new_page_id	= $engine->get_page_id($new_tag);
 
@@ -599,7 +605,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$topics	= $this->load_all($sql);
 
 		// display list
-		echo $this->form_open('moderate');
+		echo $this->form_open('moderate_subforum', 'moderate');
 
 		// pagination
 		if (isset($pagination['text']))
@@ -1158,7 +1164,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$body = (strlen($body) > 300 ? substr($body, 0, 300).'[..]' : $body.' [..]');
 
 		// display list
-		echo $this->form_open('moderate');
+		echo $this->form_open('moderate_topic', 'moderate');
 
 		// pagination
 		if (isset($pagination['text']))

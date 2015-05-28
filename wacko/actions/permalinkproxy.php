@@ -51,7 +51,7 @@ if ( isset($page_id) )
 				{
 					// This is the current revision of this page, as edited by [user_name] at [modified]. The present address (URL) is a permanent link to this version.
 					// This is an old revision of this page, as edited by [user_name] at [modified]. It may differ significantly from the current revision.
-					echo '<div class="info">'.$this->get_translation((isset($revision_id) ? 'PermaLinkRevision' :'PermaLinkRecent'))." ".$this->link('/'.$page_tag).'</div>';
+					$this->show_message($this->get_translation((isset($revision_id) ? 'PermaLinkRevision' :'PermaLinkRecent'))." ".$this->link('/'.$page_tag));
 
 					if (isset($revision_id))
 					{
@@ -80,17 +80,17 @@ if ( isset($page_id) )
 		}
 		else
 		{
-			echo '<div class="info"><em>'.$this->get_translation('WrongPage4Redirect').'</em></div>';
+			$this->show_message('<em>'.$this->get_translation('WrongPage4Redirect').'</em>');
 		}
 	}
 	else
 	{
-		echo '<div class="info"><em>'.$this->get_translation('WrongPage4Redirect').'</em></div>';
+		$this->show_message('<em>'.$this->get_translation('WrongPage4Redirect').'</em>');
 	}
 }
 else
 {
-	echo '<div class="info">'.$this->get_translation('PermaLinkEmpty').'</div>';
+	$this->show_message($this->get_translation('PermaLinkEmpty'));
 
 };
 

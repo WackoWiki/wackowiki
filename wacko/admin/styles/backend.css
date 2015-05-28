@@ -523,3 +523,8 @@ div#loginbox {
 .tickcross {
 	vertical-align: middle;
 }
+
+/*	alternate row style	*/
+.alternate {
+	background-color: #f7fcfe;
+}
