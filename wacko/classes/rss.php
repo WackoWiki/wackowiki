@@ -172,14 +172,7 @@ class RSS
 			{
 				$i++;
 
-				$categories	= $this->engine->load_all(
-					"SELECT
-						c.category_id, c.category
-					FROM
-						{$prefix}category_page p
-					INNER JOIN {$prefix}category c ON (p.category_id = c.category_id)
-					WHERE
-						p.page_id = '{$page['page_id']}'", 0);
+				$categories	= $this->engine->load_categories('', $page['page_id'], false);
 
 				// this is a news article
 				$title	= $page['title'];
