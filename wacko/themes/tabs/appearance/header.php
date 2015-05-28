@@ -145,8 +145,5 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 </div>
 <?php
 // here we show messages
-if ($message = $this->get_message())
-{
-	$this->show_message($message, 'info');
-}
+$this->output_messages();
 ?>

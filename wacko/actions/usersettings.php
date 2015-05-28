@@ -136,7 +136,7 @@ else if ($user = $this->get_user())
 			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
-		$this->set_message($this->get_translation('UserSettingsStored'));
+		#$this->set_message($this->get_translation('UserSettingsStored')); // see below
 
 		// log event
 		$this->log(6, str_replace('%1', $user['user_name'], $this->get_translation('LogUserSettingsUpdate', $this->config['language'])));
@@ -208,7 +208,7 @@ else if ($user = $this->get_user())
 	{
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('UserSettingsExtended')."</h3>";
 		echo "<ul class=\"menu\"><li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li><a href=\"".$this->href('', '', 'menu')."\">".$this->get_translation('Bookmarks')."</a></li><li class=\"active\">".$this->get_translation('UserSettingsExtended')."</li></ul><br /><br />\n";
-		echo $this->form_open();
+		echo $this->form_open('user_settings_extended');
 		echo "<input type=\"hidden\" name=\"action\" value=\"update_extended\" />";
 		?>
 		<div class="page_settings">
@@ -327,9 +327,9 @@ else if ($user = $this->get_user())
 		<th class="form_left"><label for="session_expiration"><?php echo $this->get_translation('SessionDuration');?></label></th>
 		<td class="form_right">
 			<?php
-			echo "<input type=\"radio\" id=\"duration1\" name=\"session_expiration\" value=\"1\" ".( $user['session_expiration'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"duration1\">".$this->get_translation('SessionDurationDay')."</label>";
-			echo "<input type=\"radio\" id=\"duration7\" name=\"session_expiration\" value=\"7\" ".( $user['session_expiration'] == 7 ? "checked=\"checked\"" : "" )."/><label for=\"duration7\">".$this->get_translation('SessionDurationWeek')."</label>";
-			echo "<input type=\"radio\" id=\"duration30\" name=\"session_expiration\" value=\"30\" ".( $user['session_expiration'] == 30 ? "checked=\"checked\"" : "" )."/><label for=\"duration30\">".$this->get_translation('SessionDurationMonth')."</label>";
+			echo '<input type="radio" id="duration1" name="session_expiration" value="1" '.( $user['session_expiration'] == 1 ? 'checked="checked"' : '' ).'/><label for="duration1">'.$this->get_translation('SessionDurationDay').'</label>';
+			echo '<input type="radio" id="duration7" name="session_expiration" value="7" '.( $user['session_expiration'] == 7 ? 'checked="checked"' : '' ).'/><label for="duration7">'.$this->get_translation('SessionDurationWeek').'</label>';
+			echo '<input type="radio" id="duration30" name="session_expiration" value="30" '.( $user['session_expiration'] == 30 ? 'checked="checked"' : '' ).'/><label for="duration30">'.$this->get_translation('SessionDurationMonth').'</label>';
 			?>
 		</td>
 	</tr>
@@ -363,7 +363,7 @@ else if ($user = $this->get_user())
 	else
 	{
 		// user is logged in, display config form
-		echo $this->form_open();
+		echo $this->form_open('user_settings_general');
 
 		$code = $this->load_single(
 			"SELECT email_confirm ".
@@ -482,18 +482,18 @@ else if ($user = $this->get_user())
 		<th class="form_left"><label for="dst"><?php echo $this->get_translation('DST');?></label></th>
 		<td class="form_right">
 			<?php
-			echo "<input type=\"radio\" id=\"dst0\" name=\"dst\" value=\"0\" ".( $user['dst'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"dst0\">".$this->get_translation('MetaOff')."</label>";
-			echo "<input type=\"radio\" id=\"dst1\" name=\"dst\" value=\"1\" ".( $user['dst'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"dst1\">".$this->get_translation('MetaOn')."</label>";
+			echo '<input type="radio" id="dst0" name="dst" value="0" '.( $user['dst'] == 0 ? 'checked="checked"' : '' ).'/><label for="dst0">'.$this->get_translation('MetaOff').'</label>';
+			echo '<input type="radio" id="dst1" name="dst" value="1" '.( $user['dst'] == 1 ? 'checked="checked"' : '' ).'/><label for="dst1">'.$this->get_translation('MetaOn').'</label>';
 			?>
 		</td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="changes_count"><?php echo $this->get_translation('RecentChangesLimit');?></label></th>
-		<td class="form_right"><input id="changes_count" name="changes_count" value="<?php echo $user['changes_count'] ?>" size="40" /></td>
+		<td class="form_right"><input type="number" id="changes_count" name="changes_count" value="<?php echo $user['changes_count'] ?>" size="40" /></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="revisions_count"><?php echo $this->get_translation('RevisionListLimit');?></label></th>
-		<td class="form_right"><input id="revisions_count" name="revisions_count" value="<?php echo $user['revisions_count'] ?>" size="40" /></td>
+		<td class="form_right"><input type="number" id="revisions_count" name="revisions_count" value="<?php echo $user['revisions_count'] ?>" size="40" /></td>
 	</tr>
 	<tr>
 		<td></td>

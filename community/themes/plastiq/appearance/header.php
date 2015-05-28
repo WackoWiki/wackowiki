@@ -415,9 +415,6 @@ echo "\n";
 					<td style="height:321; vertical-align:top; background-image:url(<?php echo $this->config['theme_url'] ?>images/body_divider.png); background-repeat:no-repeat;">
 						<div id="body"><div id="content">
 <?php
-	if ($message = $this->get_message())
-	{
-		$this->show_message($message, 'info');
-	}
+	$this->output_messages();
 ?>
 <!-- begin page output -->

@@ -320,10 +320,7 @@ if ($doubleclick == true)
 		<?php
 		// displays messages
 		// TODO: position this div static and use some js to hide it on click or after some seconds
-		if ($message = $this->get_message())
-		{
-			$this->show_message($message, 'info');
-		}
+		$this->output_messages();
 		?>
 
 		<?php

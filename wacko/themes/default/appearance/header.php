@@ -355,8 +355,5 @@ echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = tru
 <main>
 <?php
 // here we show messages
-if ($message = $this->get_message())
-{
-	$this->show_message($message, 'info');
-}
+$this->output_messages();
 ?>

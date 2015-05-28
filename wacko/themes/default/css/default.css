@@ -88,7 +88,7 @@ form input.submitinput {
 	font-size: 12px;
 }
 
-/* Errors */
+/* show message boxes */
 .error {
 	color: #CC3333;
 	font-weight: bold;
@@ -1129,6 +1129,7 @@ table.formation td {
 	padding: 3px;
 }
 
+/* infoboxes -----------------------------------------*/
 .nb td, .fyi td, .inf td {
 	padding: 5px;
 	height: 50px;
@@ -1225,7 +1226,7 @@ table.formation td {
 	background-color: #FCFCFC;
 }
 
-/* Submenu items */
+/* submenu items */
 #handler ul ul {
 	display:none; /* Sub menus are hidden by default */
 	position:absolute;
@@ -1278,7 +1279,7 @@ table.formation td {
 	margin-left: -1px;
 }
 
-/* Make the sub menus appear on hover */
+/* make the sub menus appear on hover */
 #handler ul li:hover ul {
 	display: block; /* Show the sub menus */
 }
@@ -1512,6 +1513,7 @@ table.forum td {
 	padding: 5px;
 }
 
+/* categories tag ------------- */
 .tag {
 	background: #f0f4f5;
 	display: inline-block;

@@ -230,7 +230,7 @@ function admin_files(&$engine, &$module)
 	}
 
 	// displaying
-	echo $engine->form_open('', '', 'post', '', ' enctype="multipart/form-data" ');
+	echo $engine->form_open('files', '', 'post', true, '', ' enctype="multipart/form-data" ');
 
 ?>
 	<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />

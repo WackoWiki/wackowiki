@@ -17,7 +17,6 @@ if (!isset($numerate))	$numerate = '';
 if (!isset($from))		$from = '';
 if (!isset($to))		$to = '';
 if (!isset($legend))	$legend = '';
-if (!isset($debug))		$debug = false;
 
 if ($for)				$page = $for;
 if ($page)
@@ -59,13 +58,15 @@ if ($_page)
 	}
 	else
 	{
-		$toc = $this->build_toc($context, $start_depth, $end_depth, $numerate, $link);
+		if ($toc = $this->build_toc($context, $start_depth, $end_depth, $numerate, $link))
 		{
 			// ---------------------- toc numeration ------------------------
 			// identify what size where faces
 			$toc_len	= count($toc);
 			$numbers	= array();
 			$depth		= 0;
+
+			#$this->debug_print_r($toc);
 
 			for($i = 0; $i < $toc_len; $i++)
 			{
@@ -150,9 +151,8 @@ if ($_page)
 		} // --------------------------------------------------------------
 
 		// display!
-
 		// begin list
-		echo "\n<ul id=\"toc\">\n";
+		echo "\n".'<ul id="toc">'."\n";
 
 		$i			= 0;
 		$ul			= 1;

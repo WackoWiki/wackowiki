@@ -106,34 +106,26 @@ function admin_dbconvert(&$engine, &$module)
 		$mysql_version		= $_mysql_version[0]['version()'];
 		$mysql_version		= preg_replace('#[^0-9\.]#', '', $mysql_version);
 
-		// Draws a tick or cross next to a result
-		function output_image($ok)
-		{
-			global $engine;
-			return '<img src="'.$engine->config['base_url'].'setup/images/'.($ok ? 'tick' : 'cross').'.png" width="20" height="20" alt="'.($ok ? 'OK' : 'Problem').'" title="'.($ok ? 'OK' : 'Problem').'" class="tickcross" />'.' ';
-			#$output_image = '';
-		}
-
 		if (version_compare($mysql_version, '5.6.4', '>='))
 		{
 			$required_mysql_version = true;
-			echo output_image(true).'Requires at least MySQL 5.6.4, available version: ' . $mysql_version . "<br />\n";
+			echo output_image($engine, true).'Requires at least MySQL 5.6.4, available version: ' . $mysql_version . "<br />\n";
 		}
 		else
 		{
 			$required_mysql_version = false;
-			echo output_image(false).'<strong class="red">Requires at least MySQL 5.6.4, available version: </strong> ' . $mysql_version . "<br />\n";
+			echo output_image($engine, false).'<strong class="red">Requires at least MySQL 5.6.4, available version: </strong> ' . $mysql_version . "<br />\n";
 		}
 
 		if ($InnoDB_support[0]['SUPPORT'] == 'YES' || 'DEFAULT')
 		{
 			$required_engine = true;
-			echo output_image(true).'InnoDB is available. '. $InnoDB_support[0]['SUPPORT']. "<br />\n";
+			echo output_image($engine, true).'InnoDB is available. '. $InnoDB_support[0]['SUPPORT']. "<br />\n";
 		}
 		else
 		{
 			$required_engine = false;
-			echo output_image(false).'<strong class="red">InnoDB is not available.</strong>'. "<br />\n";
+			echo output_image($engine, false).'<strong class="red">InnoDB is not available.</strong>'. "<br />\n";
 		}
 
 		if ($required_mysql_version === true && $required_engine = true)

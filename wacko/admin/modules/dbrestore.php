@@ -182,11 +182,12 @@ function admin_dbrestore(&$engine, &$module)
 		$results .= '<strong>================================================'."\n".
 			date('H:i:s').' - RESTORATION COMPLETED</strong>';
 
-				$message = 'The backup is restored, the implementation of the report is attached below. To
-							delete this backup file, click <a href="?mode=dbrestore&remove=1&id=<?php echo $pack; ?>">here</a>.';
-				$engine->show_message($message);
+		$message = 'The backup is restored, the implementation of the report is attached below. To
+					delete this backup file, click <a href="?mode=dbrestore&remove=1&id=<?php echo $pack; ?>">here</a>.';
+
+		$engine->show_message($message);
 ?>
-				<div class="code" style="padding:3px;"><small><pre><?php echo $results; ?></pre></small></div><br />
+		<div class="code" style="padding:3px;"><small><pre><?php echo $results; ?></pre></small></div><br />
 <?php
 		$engine->log(1, 'Restored backup of a database '.$pack);
 	}
@@ -214,6 +215,15 @@ function admin_dbrestore(&$engine, &$module)
 					You can restore any of the packages found Standby or
 					Remove it from the server.
 				</p>
+<?php
+		if (!is_executable($engine->config['upload_path_backup'].'/'))
+		{
+			echo substr(sprintf('%o', fileperms($engine->config['upload_path_backup'].'/')), -4). "<br />\n";
+			echo output_image($engine, false).'<strong class="red">The '.$engine->config['upload_path_backup'].'/'.' directory is not executable.</strong>'. "<br />\n";
+		}
+		else
+		{
+		?>
 				<br />
 				<form action="admin.php" method="post" name="restore">
 					<input type="hidden" name="mode" value="dbrestore" />
@@ -371,6 +381,7 @@ function admin_dbrestore(&$engine, &$module)
 					on the server) files.
 				</small></p>
 <?php
+		}
 	}
 }
 

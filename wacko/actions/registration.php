@@ -38,7 +38,7 @@ if (isset($_GET['confirm']))
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
 
-		echo "<div class=\"info\">".$this->get_translation('EmailConfirmed')."</div><br />";
+		$this->show_message($this->get_translation('EmailConfirmed'));
 
 		// cache handling
 		if ($this->config['cache'])
@@ -53,7 +53,7 @@ if (isset($_GET['confirm']))
 	}
 	else
 	{
-		echo "<div class=\"info\">".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed'))."</div><br />";
+		$this->show_message(str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed')))."</div><br />";
 	}
 }
 else if (isset($_POST['action']) && $_POST['action'] == 'register')
@@ -61,6 +61,12 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 	// create new account if possible
 	if ($this->config['allow_registration'] || $this->is_admin())
 	{
+		// check form token
+		if (!$this->validate_form_token('register'))
+		{
+			$error .= $this->get_translation('FormInvalid');
+		}
+
 		// passing vars from user input
 		$user_name		= trim($_POST['user_name']);
 		#$real_name		= trim($_POST['real_name']);
@@ -73,7 +79,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 
 		// Start Registration Captcha
 
-		// Only show captcha if the admin enabled it in the config file
+		// Only show captcha if the admin enabled it in the config
 		if(!$this->is_admin() && $this->config['captcha_registration'])
 		{
 			// captcha validation
@@ -176,10 +182,11 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 			else
 			{
 				$salt_length		= 10;
-				$salt				= $this->random_password($salt_length, 3);
-				$confirm			= hash('sha256', $password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
+				$salt_password		= $this->random_password($salt_length, 3);
+				$salt_user_form		= $this->random_password($salt_length, 3);
+				$confirm			= hash('sha256', $password.$salt_password.mt_rand().time().mt_rand().$email.mt_rand());
 				$confirm_hash		= hash('sha256', $confirm.hash('sha256', $this->config['system_seed']));
-				$password_encrypted	= hash('sha256', $user_name.$salt.$password);
+				$password_encrypted	= hash('sha256', $user_name.$salt_password.$password);
 
 				/* $timezone			= date('Z') / 3600;
 				$is_dst				= date('I');
@@ -209,7 +216,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"email			= '".quote($this->dblink, $email)."', ".
 						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
 						"password		= '".quote($this->dblink, $password_encrypted)."', ".
-						"salt			= '".quote($this->dblink, $salt)."'");
+						"salt			= '".quote($this->dblink, $salt_password)."', ".
+						"user_form_salt	= '".quote($this->dblink, $salt_user_form)."'");
 
 				// get new user_id
 				$_user_id = $this->load_single(
@@ -314,7 +322,7 @@ if (!isset($_GET['confirm']))
 		}
 
 		echo '<div class="cssform">';
-		echo $this->form_open();
+		echo $this->form_open('register', '', '', true);
 
 		echo '<input type="hidden" name="action" value="register" />';
 
@@ -330,20 +338,20 @@ if (!isset($_GET['confirm']))
 
 			for ($i = 0; $i < count($langs); $i++)
 			{
-				echo "<option value=\"".$langs[$i]."\"".
+				echo '<option value="'.$langs[$i].'"'.
 					($lang == $langs[$i]
-						? "selected=\"selected\""
+						? 'selected="selected"'
 						: (!isset($lang) && $this->config['language'] == $langs[$i]
-							? "selected=\"selected\""
-							: "")
-					).">".$langs[$i]."</option>\n";
+							? 'selected="selected"'
+							: '')
+					).'>'.$langs[$i]."</option>\n";
 			}
 
 			echo '</select></p>';
 		}
 
 		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
-		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
+		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" autocomplete="off" required autofocus />';
 
 		if ($this->config['disable_wikiname'] === false)
 		{
@@ -367,7 +375,7 @@ if (!isset($_GET['confirm']))
 		#echo '<p><label for="real_name">'.$this->format_translation('RegistrationRealName').':</label>';
 		#echo '<input id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></p>';
 		echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
-		echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" />';
+		echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" autocomplete="off" required />';
 
 		if ($this->config['pwd_char_classes'] > 0)
 		{
@@ -402,11 +410,11 @@ if (!isset($_GET['confirm']))
 		echo '</p>';
 
 		echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';
-		echo '<input type="password" id="confpassword" name="confpassword" size="24" value="'.$confpassword.'" /></p>';
+		echo '<input type="password" id="confpassword" name="confpassword" size="24" value="'.$confpassword.'" autocomplete="off" /></p>';
 
 		echo '<p>';
 		echo '<label for="email">'.$this->get_translation('Email').':</label>';
-		echo '<input type="email" id="email" name="email" size="30" value="'.htmlspecialchars($email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
+		echo '<input type="email" id="email" name="email" size="30" value="'.htmlspecialchars($email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" required />';
 		echo '<small> <a title="'.$this->get_translation('RegistrationEmailInfo').'">(?)</a></small></p>';
 
 		/*if ($this->config['policy_page'])

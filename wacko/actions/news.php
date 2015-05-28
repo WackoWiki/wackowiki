@@ -59,7 +59,7 @@ if (!empty($this->config['news_cluster']))
 		// if errors were found - return, else continue
 		if ($error)
 		{
-			$this->set_message('<div class="error">'.$error.'</div>');
+			$this->set_message($error, 'error');
 			$this->redirect($this->href());
 		}
 		else
@@ -244,7 +244,7 @@ if (!empty($this->config['news_cluster']))
 
 	if ($access === true)
 	{
-		echo $this->form_open();
+		echo $this->form_open('add_topic');
 		?>
 		<br /><a id="newtopic"></a><br />
 		<input type="hidden" name="action" value="newsadd" />

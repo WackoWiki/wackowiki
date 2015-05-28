@@ -71,7 +71,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		// display error or continue
 		if ($error)
 		{
-			$this->set_message('<div class="error">'.$error.'</div>');
+			$this->set_message($error, 'error');
 			$this->redirect($this->href());
 		}
 		else
@@ -259,7 +259,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// display new topic form when applicable
 	if ($access === true)
 	{
-		echo $this->form_open();
+		echo $this->form_open('add_topic');
 		?>
 		<a id="newtopic"></a><br />
 		<input type="hidden" name="action" value="topicadd" />

@@ -67,12 +67,13 @@ if ($this->is_admin())
 
 	if ($error)
 	{
-		$this->set_message($this->format($error));
+		$message = $this->format($error);
+		$this->set_message($message, 'error');
 	}
 
 	echo '<h2>Generate the pasword hash for your recovery_password </h2>';
 
-	echo $this->form_open('', '', 'post');
+	echo $this->form_open('generate_hash', '', 'post');
 
 	echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
 	echo '<input type="password" id="recovery_password" name="recovery_password" size="24" value="'.$password.'" />';

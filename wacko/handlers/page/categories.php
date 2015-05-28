@@ -211,7 +211,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$group = ( $word['parent_id'] == 0 ? $word['category_id'] : $group = $word['parent_id'] );
 			}
 
-			echo $this->form_open('categories');
+			echo $this->form_open('add_category', 'categories');
 			echo '<input type="hidden" name="id" value="'.htmlspecialchars($group, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 			echo '<table class="formation">';
 			echo '<tr><td><label for="">'.
@@ -233,7 +233,7 @@ if ($this->user_is_owner() || $this->is_admin())
 		{
 			if ($word = $this->load_single("SELECT category FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
-				echo $this->form_open('categories');
+				echo $this->form_open('rename_category', 'categories');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
@@ -265,7 +265,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					$options .= '<option value="'.$parent['category_id'].'" '.($word['parent_id'] == $parent['category_id'] ? 'selected="selected"' : '').'>'.htmlspecialchars($parent['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</option>';
 				}
 
-				echo $this->form_open('categories');
+				echo $this->form_open('group_categories', 'categories');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
@@ -287,7 +287,7 @@ if ($this->user_is_owner() || $this->is_admin())
 		{
 			if ($word = $this->load_single("SELECT category FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
-				echo $this->form_open('categories');
+				echo $this->form_open('remove_category', 'categories');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
@@ -306,7 +306,7 @@ if ($this->user_is_owner() || $this->is_admin())
 	//   print list
 	/////////////////////////////////////////////
 
-	echo $this->form_open('categories');
+	echo $this->form_open('store_categories', 'categories');
 
 	// print categories list
 	if (is_array($categories))
@@ -322,8 +322,18 @@ if ($this->user_is_owner() || $this->is_admin())
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
-					if ($i++ < 1) echo '<br /><div class="indent">';
-					echo '<span class="nobr">'.($this->is_admin() || $this->config['owners_can_change_categories'] == true ? '<input type="radio" name="change" value="'.$id.'" />' : '').'<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /><label for="category'.$id.'">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</label>&nbsp;&nbsp;&nbsp;</span>'."\n";
+					if ($i++ < 1)
+					{
+						echo '<br /><div class="indent">';
+					}
+
+					echo '<span class="nobr">'.
+							($this->is_admin() || $this->config['owners_can_change_categories'] == true
+								? '<input type="radio" name="change" value="'.$id.'" />'
+								: '').
+							'<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' />'.
+							'<label for="category'.$id.'">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</label>'.
+						'&nbsp;&nbsp;&nbsp;</span>'."\n";
 				}
 			}
 

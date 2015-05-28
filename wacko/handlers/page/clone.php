@@ -122,7 +122,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	else
 	{
 		echo $this->get_translation('CloneName');
-		echo $this->form_open('clone');
+		echo $this->form_open('clone_page', 'clone');
 
 		?>
 		<input type="hidden" name="clone" value="1" />
@@ -131,21 +131,21 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		// edit note
 		if ($this->config['edit_summary'] != 0)
 		{
-			$output .= "<label for=\"edit_note\">".$this->get_translation('EditNote').":</label><br />";
-			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\" size=\"60\" name=\"edit_note\"/>";
+			$output .= '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />'."\n";
+			$output .= '<input id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>'."\n";
 
 			echo $output;
 		}
 		?>
 		<br /><br />
 		<?php
-				echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" />";
-				echo " <label for=\"redirect\">".$this->get_translation('ClonedRedirect')."</label>"; ?>
+				echo '<input type="checkbox" id="redirect" name="redirect" />'."\n";
+				echo ' <label for="redirect">'.$this->get_translation('ClonedRedirect').'</label>'."\n"; ?>
 		<br />
 		<?php if ($this->check_acl($user_name, $this->config['rename_globalacl']))
 			{
-				echo "<input type=\"checkbox\" id=\"massclone\" name=\"massclone\" />";
-				echo " <label for=\"massclone\">".$this->get_translation('MassClone')."</label>";
+				echo '<input type="checkbox" id="massclone" name="massclone" />'."\n";
+				echo ' <label for="massclone">'.$this->get_translation('MassClone').'</label>'."\n";
 			}
 		?>
 		<br /><br />

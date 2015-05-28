@@ -7,6 +7,14 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('comment') && $this->has_access('read'))
 {
+	// check form token
+	if (!$this->validate_form_token('add_comment'))
+	{
+		$this->set_message($this->get_translation('FormInvalid'));
+
+		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
+	}
+
 	// find number
 	if ($latest_comment = $this->load_single(
 	"SELECT tag, page_id
@@ -60,6 +68,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$_SESSION['body']		= $body;
 		$_SESSION['title']		= $title;
 		$_SESSION['guest']		= $guest;
+
 		$this->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
 	}
 	else if (isset($_SESSION['comment_delay']) && ((time() - $_SESSION['comment_delay']) < $this->config['comment_delay']))
@@ -70,9 +79,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->cache->invalidate_page_cache($this->supertag);
 		}
 
-		$this->set_message('<div class="error">'.str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded')).'</div>');
 		$_SESSION['body']			= $body;
+		$_SESSION['title']			= $title;
 		$_SESSION['comment_delay']	= time();
+
+		$this->set_message(str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded')), 'error');
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
 	else
@@ -151,7 +162,7 @@ else
 {
 	$message =  $this->get_translation('CommentAccessDenied');
 
-	echo "<div id=\"page\">".$this->show_message($message, 'info')."</div>\n";
+	echo '<div id="page">'.$this->show_message($message, 'info')."</div>\n";
 }
 
 ?>

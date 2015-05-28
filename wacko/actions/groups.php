@@ -20,7 +20,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 	// does requested usergroup exists?
 	if (false == $usergroup = $this->load_usergroup($_usergroup))
 	{
-		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_usergroup, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))).'</div>';
+		$this->show_message( str_replace('%2', htmlspecialchars($_usergroup, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))) );
 	}
 	else
 	{
@@ -247,7 +247,7 @@ else
 
 	// usergroup filter form
 	echo '<table class="formation"><tr><td class="label">';
-	echo $this->form_open('', '', 'get');
+	echo $this->form_open('search_group', '', 'get');
 	echo $this->get_translation('GroupsSearch').': </td><td>';
 	echo '<input name="group" maxchars="40" size="40" value="'.(isset($_GET['group']) ? htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->get_translation('GroupsFilter').'" /> ';
