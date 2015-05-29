@@ -104,7 +104,7 @@ if ($config['is_update'] == false)
    </div>
    <h2><?php echo $lang['Mail'];?></h2>
    <p class="notop"><?php echo $lang['MailDesc'];?></p>
-   <input type="text" maxlength="320" name="config[admin_email]" value="<?php if ( isset ( $config['admin_email'] ) ) echo $config['admin_email']; ?>" class="text_input" />
+   <input type="email" maxlength="320" name="config[admin_email]" value="<?php if ( isset ( $config['admin_email'] ) ) echo $config['admin_email']; ?>" class="text_input" />
    <br />
 <?php
 }

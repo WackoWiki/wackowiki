@@ -104,8 +104,9 @@ if ($config['system_seed'] == '')
 	$config['system_seed'] = random_seed(20, 3);
 }
 
-$salt					= random_seed(10, 3);
-$password_encrypted		= hash('sha256', $config['admin_name'].$salt.$_POST['password']);
+$salt_password			= random_seed(10, 3);
+$salt_user_form			= random_seed(10, 3);
+$password_encrypted		= hash('sha256', $config['admin_name'].$salt_password.$_POST['password']);
 
 $config_insert = '';
 // set back theme to default, just a precaution
@@ -113,7 +114,7 @@ $config_insert = '';
 
 // user 'system' holds all default pages
 $insert_system				= "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '', '1', NOW())";
-$insert_admin				= "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, signup_time) VALUES ('".$config['admin_name']."', '".$password_encrypted."', '".$salt."', '".$config['admin_email']."', NOW())";
+$insert_admin				= "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, signup_time, user_form_salt) VALUES ('".$config['admin_name']."', '".$password_encrypted."', '".$salt_password."', '".$config['admin_email']."', NOW(), '".$salt_user_form."')";
 $insert_admin_setting		= "INSERT INTO ".$config['table_prefix']."user_setting (user_id, theme, lang) VALUES ((SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), '".$config['theme']."', '".$config['language']."')";
 
 // TODO: for Upgrade insert other aliases also in usergroup table
@@ -198,6 +199,7 @@ $config_db['enable_security_headers']		= $config['enable_security_headers'];
 $config_db['footer_comments']				= $config['footer_comments'];
 $config_db['footer_files']					= $config['footer_files'];
 $config_db['footer_rating']					= $config['footer_rating'];
+$config_db['form_token_sid_guests']			= $config['form_token_sid_guests'];
 $config_db['form_token_time']				= $config['form_token_time'];
 $config_db['forum_cluster']					= $config['forum_cluster'];
 $config_db['forum_topics']					= $config['forum_topics'];
@@ -469,6 +471,7 @@ $upgrade_5_4_0[]	= array($lang['CreatingTable'],	'session',		$table_session_r5_4
 
 // user
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$lang['ErrorAlteringTable']);
 
 // usergroup
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);

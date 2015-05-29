@@ -2297,9 +2297,9 @@ class Wacko
 	}
 
 	// HTTP/REQUEST/LINK RELATED
-	function set_message($message)
+	function set_message($message, $type = 'info')
 	{
-		$_SESSION[$this->config['session_prefix'].'_'.'message'] = $message;
+		$_SESSION[$this->config['session_prefix'].'_'.'message'][] = array($message, $type);
 	}
 
 	function get_message()
@@ -2318,9 +2318,28 @@ class Wacko
 		}
 	}
 
-	function show_message($message, $type='info')
+	// output all messages stored in session array
+	function output_messages()
 	{
-		// TODO: filter and sanitize ..
+		// here we show messages
+		if ($messages = $this->get_message())
+		{
+			#$this->debug_print_r($messages);
+
+			if (is_array($messages))
+			{
+				// TODO: filter and sanitize ..
+				foreach ($messages as $message)
+				{
+					list($_message, $_type) = $message;
+					$this->show_message($_message, $_type);
+				}
+			}
+		}
+	}
+
+	function show_message($message, $type = 'info')
+	{
 		echo '<div class="'.$type.'">'.$message."</div>\n";
 	}
 
@@ -3142,6 +3161,7 @@ class Wacko
 						$refnum = '[link'.((string)count($this->numerate_links) + 1).']';
 						$this->numerate_links[$page_link] = $refnum;
 					}
+
 					$res .= '<sup class="refnum">'.$refnum.'</sup>';
 				}
 
@@ -3452,7 +3472,7 @@ class Wacko
 	}
 
 	// FORMS
-	function form_open($method = '', $tag = '', $form_method = 'post', $form_name = '', $form_more = '', $href_param = '')
+	function form_open($form_name = '', $page_method = '', $form_method = 'post', $form_token = false, $tag = '', $form_more = '', $href_param = '')
 	{
 		if (!$form_method)
 		{
@@ -3460,11 +3480,17 @@ class Wacko
 		}
 
 		$add	= ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1)) ? true : '';
-		$result	= '<form action="'.$this->href($method, $tag, $href_param, $add).'" '.$form_more.' method="'.$form_method.'" '.($form_name ? 'name="'.$form_name.'" ' : '').">\n";
+		$result	= '<form action="'.$this->href($page_method, $tag, $href_param, $add).'" '.$form_more.' method="'.$form_method.'" '.($form_name ? 'name="'.$form_name.'" ' : '').">\n";
 
 		if (!$this->config['rewrite_mode'])
 		{
-			$result .= '<input type="hidden" name="page" value="'.$this->mini_href($method, $tag, $add)."\" />\n";
+			$result .= '<input type="hidden" name="page" value="'.$this->mini_href($page_method, $tag, $add)."\" />\n";
+		}
+
+		// add form token
+		if ($form_token == true)
+		{
+			$result .= $this->form_token($form_name);
 		}
 
 		if ($this->config['tls'] == true)
@@ -3478,6 +3504,102 @@ class Wacko
 	function form_close()
 	{
 		return "</form>\n";
+	}
+
+
+	// adds a secret form token
+	//		- string $form_name has to match the name used in validate_form_token function
+	function form_token($form_name)
+	{
+		$now		= time();
+		$user		= $this->get_user();
+
+		if ($user['user_name'] == '')
+		{
+			$salt_length			= 10;
+			$user['user_name']		= GUEST;
+			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = $this->random_password($salt_length, 3);
+		}
+
+		$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? session_id() : ''; #$user['cookie_token']
+		$token		= sha1($user['user_form_salt'] . $form_name . $token_sid);
+
+		$data = array('creation_time' => $now);
+		$_SESSION['formdata'][$token] = $data;
+
+		$fields		= '';
+		$fields		.= '<input type="hidden" name="form_token" value="'.$token.'" />'."\n";
+
+		return $fields;
+	}
+
+
+	// validate the form token. Required for all altering actions not secured by confirm_box
+	//		- string $form_name has to match the name used in form_token function
+	//		- int $timespan The maximum acceptable age for a submitted form in seconds
+	function validate_form_token($form_name, $timespan = false)
+	{
+		$user		= $this->get_user();
+
+		if ($user['user_name'] == '')
+		{
+			$user['user_name']		= GUEST;
+			$user['user_form_salt']	= $_SESSION['guest_form_salt'];
+		}
+
+		if ($timespan === false)
+		{
+			// we enforce a minimum value of 30 seconds
+			$timespan = ($this->config['form_token_time'] == -1) ? -1 : max(30, $this->config['form_token_time']);
+		}
+
+		if (isset($_POST['form_token']))
+		{
+			$token			= isset($_POST['form_token']) ? $_POST['form_token'] : '';
+			$creation_time	= $_SESSION['formdata'][$token]['creation_time'];
+
+			$diff = time() - $creation_time;
+
+			// If creation_time and the time() now is zero we can assume it was not a human doing this (the check for if ($diff)...
+			if ($diff && ($diff <= $timespan || $timespan === -1))
+			{
+				$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? session_id() : ''; #$user['cookie_token']
+				$key		= sha1($user['user_form_salt'] . $form_name . $token_sid);
+
+				if ($key === $token)
+				{
+
+					return true;
+				}
+				else
+				{
+					/* $this->debug_print_r(array(
+							$creation_time,
+							$diff,
+							$timespan,
+							$token_sid,
+							$user['user_form_salt'],
+							$key,
+							$token,
+					)); */
+
+					// TODO: token should be reset, generation of per-request tokens as opposed to per-session tokens
+					// TODO: suspiciously repeated form requests/form submissions, using Captchas to prevent automatic requests
+					$this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'); # 'Invalid form token'
+
+					return false;
+				}
+			}
+
+			// TODO: ? show indication e.g. timeout, pls. resubmit
+			/* $this->debug_print_r(array(
+					$creation_time,
+					$diff,
+					$timespan,
+			)); */
+		}
+
+		return false;
 	}
 
 	// REFERRERS
@@ -3801,7 +3923,7 @@ class Wacko
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
 		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst, t.session_time, t.cookie_token ';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst, t.cookie_token ';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst, t.cookie_token ';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
@@ -3993,6 +4115,9 @@ class Wacko
 		$login_token			= $this->unique_id(); // TODO:
 		$this->cookie_token		= hash('sha1', $login_token);
 
+		$salt_length		= 10;
+		$salt_user_form		= $this->random_password($salt_length, 3);
+
 		$this->time_now			= date('Y-m-d H:i:s');
 
 		if ($user['user_id'])
@@ -4034,11 +4159,12 @@ class Wacko
 			$this->set_session_cookie('auth', $cookie, '', ( $this->config['tls'] == true ? 1 : 0 ));
 		}
 
-		// update session expiry and clear password recovery
+		// update session expiry, user_form_salt and clear password recovery
 		// code in user data table
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} SET ".
 				"session_expire		= '".(int) $ses_time."', ".
+				"user_form_salt		= '".quote($this->dblink, $salt_user_form)."', ".
 				"change_password	= '' ".
 			"WHERE user_id		= '".$user['user_id']."' ".
 			"LIMIT 1");
@@ -4129,16 +4255,20 @@ class Wacko
 	// end user session and free session vars
 	function log_user_out()
 	{
-		// clear session expiry in user data table
-		$this->sql_query(
-			"UPDATE {$this->config['table_prefix']}user SET ".
-				"session_expire	= 0, ".
-				"last_visit		= NOW() ".
-			"WHERE user_id = '".(int)$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']."' ".
-			"LIMIT 1");
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']))
+		{
+			// clear session expiry in user data table
+			$this->sql_query(
+				"UPDATE {$this->config['table_prefix']}user SET ".
+					"session_expire	= 0, ".
+					"last_visit		= NOW() ".
+				"WHERE user_id = '".(int)$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']."' ".
+				"LIMIT 1");
+		}
 
 		$this->delete_cookie('auth', true, true);
 		$this->delete_cookie('sid', true, false);
+
 		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']);
 
 		$session_id = hash('sha1', $this->timer.$this->config['system_seed'].$this->get_user_setting('password').session_id());
@@ -5303,7 +5433,7 @@ class Wacko
 				// log event: invalid auth cookie
 				if ($auth['recalc_mac'] != $auth['cookie_mac'])
 				{
-					$this->log(1, '<strong><span class="cite">Malformed/forged user authentication cookie detected. Destroying existing session (if any)</span></strong>');
+					$this->log(1, '!!**'.'Malformed/forged user authentication cookie detected. Destroying existing session (if any)'.'!!**');
 				}
 
 				$session = false;
@@ -5331,7 +5461,7 @@ class Wacko
 		// check IP validity
 		if ($this->get_user_setting('validate_ip') == 1 && $this->get_user_setting('ip') != $this->ip_address() )
 		{
-			$this->log(1, '<strong><span class="cite">User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->ip_address().'</span></strong>');
+			$this->log(1, '**??'.'User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->ip_address().'??**');
 			$this->log_user_out();
 			#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
 			$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
@@ -5424,7 +5554,7 @@ class Wacko
 			$page		= $this->load_page($this->tag, 0, $revision_id);
 		}
 
-		// TODO: obsolete?
+		// TODO: obsolete? Add description what it does
 		if ($this->config['outlook_workaround'] && !$page)
 		{
 			$page = $this->load_page($this->supertag."'", 0, $revision_id);
@@ -5740,7 +5870,7 @@ class Wacko
 				$links[] = $prev.$steps[$i];
 			}
 
-			# camel case'ing
+			// camel case'ing
 			$linktext = preg_replace('([A-Z][a-z])', ' ${0}', $steps[$i]);
 
 			for ($i = 0; $i < count($steps) -1; $i++)
@@ -6267,11 +6397,11 @@ class Wacko
 
 
 	// Generate random password of defined $length that satisfise the complexity rules:
-	// containing n>0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
+	// containing n > 0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
 	// The password complexity can be defined in $pwd_complexity :
-	// $pwd_complexity = 2 -- password consists of uppercase, lowercase, digits
-	// $pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
-	function random_password($length, $pwd_complexity)
+	//		$pwd_complexity = 2 -- password consists of uppercase, lowercase, digits
+	//		$pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
+	function random_password($length = 10, $pwd_complexity)
 	{
 		$chars_uc	= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$chars_lc	= 'abcdefghijklmnopqrstuvwxyz';
@@ -6329,10 +6459,10 @@ class Wacko
 	}
 
 	// pages listing/navigation for multipage lists.
-	// 		$total		= total elements in the list
-	// 		$perpage	= total elements on a page
-	// 		$name		= page number variable in $_GET
-	// 		$params		= $_GET parameters to be passed with the page link
+	//		$total		= total elements in the list
+	//		$perpage	= total elements on a page
+	//		$name		= page number variable in $_GET
+	//		$params		= $_GET parameters to be passed with the page link
 	// returns an array with 'text' (navigation) and 'offset' (offset value
 	// for SQL queries) elements.
 	function pagination($total, $perpage = 100, $name = 'p', $params = '', $method = '', $tag = '')
