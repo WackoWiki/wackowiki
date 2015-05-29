@@ -7,6 +7,9 @@ if (!defined('IN_WACKO'))
 
 // Default configuration values
 
+// DO NOT EDIT HERE; instead make changes in config.php or config table.
+// These default settings are used when config.php is not present.
+
 $wacko_config_defaults = array(
 	'database_driver' => '',
 	'database_host' => 'localhost',
@@ -211,13 +214,13 @@ $wacko_config_defaults = array(
 	'pwd_min_chars' => 9,
 
 	'max_failed_login_count' => 8,
+	'system_message' => '',
 
 	'captcha_new_comment' => 1,
 	'captcha_new_page' => 1,
 	'captcha_edit_page' => 1,
 	'captcha_registration' => 1,
 
-	'form_token_time' => 7200,
 	'max_login_attempts' => 3,
 	'ip_login_limit_max' => 50,
 
@@ -235,6 +238,9 @@ $wacko_config_defaults = array(
 	'enable_security_headers' => 1,
 	'x_frame_option' => '',
 	'x_csp' => '',
+
+	'form_token_time' => 7200,
+	'form_token_sid_guests' => 1,
 
 	'rand_seed_last_update' => 0,
 	'rand_seed' => '',

@@ -72,6 +72,8 @@ function admin_configsecurity(&$engine, &$module)
 		$config['ip_login_limit_max']			= (int)$_POST['ip_login_limit_max'];
 		$config['username_chars_min']			= (int)$_POST['username_chars_min'];
 		$config['username_chars_max']			= (int)$_POST['username_chars_max'];
+		$config['form_token_time']				= (int)$_POST['form_token_time'];
+		$config['form_token_sid_guests']		= (int)$_POST['form_token_sid_guests'];
 		#$config['x_frame_option']				= (int)$_POST['x_frame_option'];
 		#$config['x_csp']						= (int)$_POST['x_csp'];
 
@@ -152,7 +154,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="username_chars_min"><strong>Username length:</strong><br />
 					<small>Minimum and maximum number of characters in usernames.</small></label></td>
-				<td><input maxlength="3" style="width:30px;" id="username_chars_min" name="username_chars_min" value="<?php echo htmlspecialchars($engine->config['username_chars_min'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /> Min&nbsp;&nbsp;<input maxlength="3" style="width:30px;" id="username_chars_max" name="username_chars_max" value="<?php echo htmlspecialchars($engine->config['username_chars_max'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /> Max</td>
+				<td><input type="number" maxlength="3" style="width:40px;" id="username_chars_min" name="username_chars_min" value="<?php echo htmlspecialchars($engine->config['username_chars_min'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /> Min&nbsp;&nbsp;<input type="number" maxlength="3" style="width:40px;" id="username_chars_max" name="username_chars_max" value="<?php echo htmlspecialchars($engine->config['username_chars_max'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /> Max</td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -286,7 +288,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="moders_can_edit"><strong>Term human moderation:</strong><br />
 					<small>Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="moders_can_edit" name="moders_can_edit" value="<?php echo htmlspecialchars($engine->config['moders_can_edit'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="moders_can_edit" name="moders_can_edit" value="<?php echo htmlspecialchars($engine->config['moders_can_edit'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -353,7 +355,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="pwd_min_chars"><strong>Minimum password length:</strong></label></td>
-				<td><input maxlength="3" style="width:200px;" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo htmlspecialchars($engine->config['pwd_min_chars'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="3" style="width:200px;" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo htmlspecialchars($engine->config['pwd_min_chars'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -391,7 +393,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="max_login_attempts"><strong>Maximum number of login attempts per username:</strong><br />
 					<small>The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo htmlspecialchars($engine->config['max_login_attempts'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo htmlspecialchars($engine->config['max_login_attempts'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 						<tr class="lined">
 				<td colspan="2"></td>
@@ -399,7 +401,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="ip_login_limit_max"><strong>Maximum number of login attempts per IP address:</strong><br />
 					<small>The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo htmlspecialchars($engine->config['ip_login_limit_max'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo htmlspecialchars($engine->config['ip_login_limit_max'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -447,7 +449,29 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="log_purge_time"><strong>Storage time of Log:</strong><br />
 					<small>Remove event log over a given number of days.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="log_purge_time" name="log_purge_time" value="<?php echo htmlspecialchars($engine->config['log_purge_time'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="log_purge_time" name="log_purge_time" value="<?php echo htmlspecialchars($engine->config['log_purge_time'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+			</tr>
+			<tr class="hl_setting">
+				<th colspan="2">
+					<br />
+					Forms
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="form_token_time"><strong>Maximum time to submit forms:</strong><br />
+					<small>The time a user has to submit a form (in seconds).<br /> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.</small></label></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="form_token_time" name="form_token_time" value="<?php echo htmlspecialchars($engine->config['form_token_time'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="form_token_sid_guests"><strong>Tie forms to guest sessions:</strong><br />
+					<small>If enabled, the form token issued to guests will be session-exclusive. This can cause problems with some ISPs.</small></label></td>
+					<td>
+						<input type="radio" id="form_token_sid_guests_on" name="form_token_sid_guests" value="1"<?php echo ( $engine->config['form_token_sid_guests'] == 1 ? ' checked="checked"' : '' );?> /><label for="form_token_sid_guests_on">On.</label>
+						<input type="radio" id="form_token_sid_guests_off" name="form_token_sid_guests" value="0"<?php echo ( $engine->config['form_token_sid_guests'] == 0 ? ' checked="checked"' : '' );?> /><label for="form_token_sid_guests_off">Off.</label>
+					</td>
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
@@ -458,7 +482,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="session_expiration"><strong>Term login cookie:</strong><br />
 					<small>The lifetime of the user cookie login by default (in days).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="session_expiration" name="session_expiration" value="<?php echo htmlspecialchars($engine->config['session_expiration'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="session_expiration" name="session_expiration" value="<?php echo htmlspecialchars($engine->config['session_expiration'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -466,7 +490,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="comment_delay"><strong>Anti-flood for comments:</strong><br />
 					<small>The minimum delay between the publication of the new user comments (in seconds).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo htmlspecialchars($engine->config['comment_delay'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo htmlspecialchars($engine->config['comment_delay'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -474,7 +498,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="intercom_delay"><strong>Anti-flood for personal communications:</strong><br />
 					<small>The minimum delay between sending a private message user connection (in seconds).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="intercom_delay" name="intercom_delay" value="<?php echo htmlspecialchars($engine->config['intercom_delay'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="intercom_delay" name="intercom_delay" value="<?php echo htmlspecialchars($engine->config['intercom_delay'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 		</table>
 		<br />
