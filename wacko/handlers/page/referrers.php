@@ -13,21 +13,21 @@ if (!function_exists('load_referrers'))
 		$pagination	= '';
 
 		// count referrers
-		if ($count_referrers = $wacko->load_all(
-			"{$query}"));
-
-		if ($count_referrers)
+		if ($count_referrers = $wacko->load_all($query));
 		{
-			$count		= count($count_referrers);
-			#$wacko->debug_print_r($count);
+			if ($count_referrers)
+			{
+				$count		= count($count_referrers);
+				#$wacko->debug_print_r($count);
 
-			$pagination = $wacko->pagination($count, $limit, 'r', $parameters, 'referrers');
+				$pagination = $wacko->pagination($count, $limit, 'r', $parameters, 'referrers');
 
-			$referrers = $wacko->load_all(
-				"{$query} ".
-				"LIMIT {$pagination['offset']}, {$limit}");
+				$referrers = $wacko->load_all(
+					$query.
+					" LIMIT {$pagination['offset']}, {$limit}");
 
-			return array($referrers, $pagination);
+				return array($referrers, $pagination);
+			}
 		}
 	}
 }
@@ -75,41 +75,41 @@ if ($user = $this->get_user())
 	if (isset($_GET['global']))
 	{
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersGlobal')."</h3>";
-		echo "<ul class=\"menu\">
-			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
-			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
-			<li><a href=\"".$this->href('referrers', '', 'bytime=1')."\">".$this->get_translation('ViewReferrersByTime')."</a></li>
-			<li class=\"active\">".$this->get_translation('ViewReferrersGlobal')."</li>
+		echo '<ul class="menu">
+			<li><a href="'.$this->href('referrers').'">'.$this->get_translation('ViewReferrersPage').'</a></li>
+			<li><a href="'.$this->href('referrers', '', 'perpage=1').'">'.$this->get_translation('ViewReferrersPerPage').'</a></li>
+			<li><a href="'.$this->href('referrers', '', 'bytime=1').'">'.$this->get_translation('ViewReferrersByTime').'</a></li>
+			<li class="active">'.$this->get_translation('ViewReferrersGlobal')."</li>
 		</ul><br /><br />\n";
 	}
 	else if (isset($_GET['perpage']))
 	{
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPerPage')."</h3>";
-		echo "<ul class=\"menu\">
-			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
-			<li class=\"active\">".$this->get_translation('ViewReferrersPerPage')."</li>
-			<li><a href=\"".$this->href('referrers', '', 'bytime=1')."\">".$this->get_translation('ViewReferrersByTime')."</a></li>
-			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">".$this->get_translation('ViewReferrersGlobal')."</a></li>
+		echo '<ul class="menu">
+			<li><a href="'.$this->href('referrers').'">'.$this->get_translation('ViewReferrersPage').'</a></li>
+			<li class="active">'.$this->get_translation('ViewReferrersPerPage').'</li>
+			<li><a href="'.$this->href('referrers', '', 'bytime=1').'">'.$this->get_translation('ViewReferrersByTime').'</a></li>
+			<li><a href="'.$this->href('referrers', '', 'global=1').'">'.$this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 	}
 	else if (isset($_GET['bytime']))
 	{
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersByTime')."</h3>";
-		echo "<ul class=\"menu\">
-			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
-			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
-			<li class=\"active\">".$this->get_translation('ViewReferrersByTime')."</li>
-			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">".$this->get_translation('ViewReferrersGlobal')."</a></li>
+		echo '<ul class="menu">
+			<li><a href="'.$this->href('referrers').'">'.$this->get_translation('ViewReferrersPage').'</a></li>
+			<li><a href="'.$this->href('referrers', '', 'perpage=1').'">'.$this->get_translation('ViewReferrersPerPage').'</a></li>
+			<li class="active">'.$this->get_translation('ViewReferrersByTime').'</li>
+			<li><a href="'.$this->href('referrers', '', 'global=1').'">'.$this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 	}
 	else
 	{
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPage')."</h3>";
-		echo "<ul class=\"menu\">
-			<li class=\"active\">".$this->get_translation('ViewReferrersPage')."</li>
-			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">". $this->get_translation('ViewReferrersPerPage')."</a></li>
-			<li><a href=\"".$this->href('referrers', '', 'bytime=1')."\">".$this->get_translation('ViewReferrersByTime')."</a></li>
-			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">". $this->get_translation('ViewReferrersGlobal')."</a></li>
+		echo '<ul class="menu">
+			<li class="active">'.$this->get_translation('ViewReferrersPage').'</li>
+			<li><a href="'.$this->href('referrers', '', 'perpage=1').'">'. $this->get_translation('ViewReferrersPerPage').'</a></li>
+			<li><a href="'.$this->href('referrers', '', 'bytime=1').'">'.$this->get_translation('ViewReferrersByTime').'</a></li>
+			<li><a href="'.$this->href('referrers', '', 'global=1').'">'. $this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 	}
 
@@ -168,7 +168,7 @@ if ($user = $this->get_user())
 	else
 	{
 		$title		= $this->get_translation('ReferringPages').":";
-		echo "<strong>$title</strong><br /><br />\n";
+		echo "<strong>".$title."</strong><br /><br />\n";
 
 		// show backlinks
 		if ($pages = $this->load_pages_linking_to($this->tag))
@@ -215,7 +215,7 @@ if ($user = $this->get_user())
 		$referrers = $this->load_referrers($this->page['page_id']);
 	}
 
-	echo "<strong>$title</strong><br /><br />\n";
+	echo "<strong>".$title."</strong><br /><br />\n";
 
 	if ($referrers || $perpage || $bytime)
 	{
@@ -225,7 +225,7 @@ if ($user = $this->get_user())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+				echo '<br /><span class="pagination">'.$pagination['text'].'</span>'."\n";
 			}
 
 			echo "<ul class=\"ul_list\">\n";
@@ -294,7 +294,7 @@ if ($user = $this->get_user())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+				echo '<br /><span class="pagination">'.$pagination['text'].'</span>'."\n";
 			}
 		}
 		// by time
@@ -303,7 +303,7 @@ if ($user = $this->get_user())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
+				echo '<span class="pagination">'.$pagination['text'].'</span><br />'."\n";
 			}
 
 			echo "<ul class=\"ul_list\">\n";
@@ -389,7 +389,7 @@ if ($user = $this->get_user())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+				echo '<br /><span class="pagination">'.$pagination['text'].'</span>'."\n";
 			}
 		}
 		// global

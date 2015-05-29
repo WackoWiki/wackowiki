@@ -27,17 +27,17 @@ if ($this->page['comment_on_id'])
 if (isset($_GET['global']))
 {
 	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersGlobal')."</h3>";
-	echo "<ul class=\"menu\">
-			<li><a href=\"".$this->href('referrers_sites')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
-			<li class=\"active\">".$this->get_translation('ViewReferrersGlobal')."</li>
+	echo '<ul class="menu">
+			<li><a href="'.$this->href('referrers_sites').'">'.$this->get_translation('ViewReferrersPage').'</a></li>
+			<li class="active">'.$this->get_translation('ViewReferrersGlobal')."</li>
 		</ul><br /><br />\n";
 }
 else
 {
 	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPage')."</h3>";
-	echo "<ul class=\"menu\">
-			<li class=\"active\">".$this->get_translation('ViewReferrersPage')."</li>
-			<li><a href=\"".$this->href('referrers_sites', '', 'global=1')."\">". $this->get_translation('ViewReferrersGlobal')."</a></li>
+	echo '<ul class="menu">
+			<li class="active">'.$this->get_translation('ViewReferrersPage').'</li>
+			<li><a href="'.$this->href('referrers_sites', '', 'global=1').'">'. $this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 }
 
@@ -62,7 +62,7 @@ if ($user = $this->get_user())
 		$referrers = $this->load_referrers($this->page['page_id']);
 	}
 
-	echo "<strong>$title</strong><br /><br />\n";
+	echo "<strong>".$title."</strong><br /><br />\n";
 
 	if ($referrers)
 	{

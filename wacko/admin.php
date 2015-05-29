@@ -58,6 +58,19 @@ $init->session();
 $cache	= $init->cache();
 $engine	= $init->engine();
 
+
+
+// redirect, send them home
+if (!$engine->is_admin())
+{
+	if (!headers_sent())
+	{
+		header('HTTP/1.1 404 Not Found');
+	}
+
+	$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
+}
+
 // register locale resources
 $init->engine('lang');
 
@@ -184,15 +197,15 @@ if ($authorization == false)
 	<body>
 <?php
 		// here we show messages
-		if ($message = $engine->get_message())
-		{
-			$engine->show_message($message, 'info');
-		}
+		$engine->output_messages();
 ?>
 		<div id="loginbox">
 			<strong><?php echo $engine->get_translation('Authorization'); ?></strong><br />
 			<?php echo $engine->get_translation('AuthorizationTip'); ?>
 			<br /><?php #echo $engine->charset; // XXX: only for testing ?><br />
+			<?php
+			#$engine->form_open('emergency');
+			?>
 			<form action="admin.php" method="post" name="emergency">
 				<label for="password"><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong></label>
 				<input name="password" id="password" type="password" autocomplete="off" value="" />
@@ -200,13 +213,13 @@ if ($authorization == false)
 				// captcha code starts
 
 				// Only show captcha if the admin enabled it in the config file
-				#if($engine->config['ap_max_login_attempts'] && $engine->config['ap_failed_login_count'] >= $engine->config['max_login_attempts'])
-				#{
-					#echo '<p>';
-					#echo '<br />';
-					#$engine->show_captcha(false);
-					#echo '</p>';
-				#}
+				/* if($engine->config['ap_max_login_attempts'] && $engine->config['ap_failed_login_count'] >= $engine->config['max_login_attempts'])
+				{
+					echo '<p>';
+					echo '<br />';
+					$engine->show_captcha(false);
+					echo '</p>';
+				} */
 				// end captcha
 ?>
 				<input id="submit" type="submit" value="ok" />
@@ -403,10 +416,8 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 <div id="page">
 <?php
 // here we show messages
-if ($message = $engine->get_message())
-{
-	$engine->show_message($message, 'info');
-}
+$engine->output_messages();
+
 ?>
 <!-- begin page output -->
 
