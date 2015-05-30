@@ -113,7 +113,7 @@ function admin_files(&$engine, &$module)
 	}
 	else // process upload
 	{
-		$user	= $engine->get_user_id();
+		$user	= $engine->get_user();
 		$files	= $engine->load_all(
 			"SELECT upload_id ".
 			"FROM {$engine->config['table_prefix']}upload ".
