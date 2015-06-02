@@ -58,7 +58,7 @@ $init->session();
 $cache	= $init->cache();
 $engine	= $init->engine();
 
-
+$engine->http_security_headers();
 
 // redirect, send them home
 if (!$engine->is_admin())
@@ -118,7 +118,7 @@ else
 }
 
 // recovery preauthorization
-if (isset($_POST['password']))
+if (isset($_POST['ap_password']))
 {
 	// Start Login Captcha, if there are too much login attempts (max_login_attempts)
 
@@ -133,10 +133,10 @@ if (isset($_POST['password']))
 	} */
 	// End Registration Captcha
 
-	if (hash('sha256', $engine->config['system_seed'].$_POST['password']) == $_processed_password)
+	if (hash('sha256', $engine->config['system_seed'].$_POST['ap_password']) == $_processed_password)
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
-		$engine->set_session_cookie('admin', hash('sha256', hash('sha256', $engine->config['system_seed'].$_POST['password']).$engine->config['base_url']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
+		$engine->set_session_cookie('admin', hash('sha256', hash('sha256', $engine->config['system_seed'].$_POST['ap_password']).$engine->config['base_url']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
 
 		$_SESSION['created']			= time();
 		$_SESSION['last_activity']		= time();
@@ -158,7 +158,7 @@ if (isset($_POST['password']))
 		}
 
 		$engine->set_config('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1, '', true);
-		$engine->log(1, str_replace('%1', $_POST['password'], $engine->get_translation('LogAdminLoginFailed', $engine->config['language'])));
+		$engine->log(1, $engine->get_translation('LogAdminLoginFailed', $engine->config['language']));
 
 		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
 
@@ -207,8 +207,8 @@ if ($authorization == false)
 			#$engine->form_open('emergency');
 			?>
 			<form action="admin.php" method="post" name="emergency">
-				<label for="password"><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong></label>
-				<input name="password" id="password" type="password" autocomplete="off" value="" />
+				<label for="ap_password"><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong></label>
+				<input name="ap_password" id="ap_password" type="password" autocomplete="off" value="" />
 <?php
 				// captcha code starts
 

@@ -190,7 +190,7 @@ function admin_configbasic(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>Disable comments:</strong><br />
+				<td class="label"><strong>Allow comments:</strong><br />
 					<small>Enable comments for guest or registered users only or disable them on the entire site.</small></td>
 				<td>
 					<input type="radio" id="enable_comments" name="enable_comments" value="1"<?php echo ( $engine->config['enable_comments'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_comments_on">On.</label>
@@ -264,8 +264,8 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>The panel sections:</strong><br />
-					<small>By default the display panel adjacent documents (requires support in the templates).</small></td>
+				<td class="label"><strong>Sections panel :</strong><br />
+					<small>By default display the panel of adjacent pages (requires support in the templates).</small></td>
 				<td>
 					<input type="radio" id="hide_index_on" name="hide_index" value="0"<?php echo ( !$engine->config['hide_index'] ? ' checked="checked"' : '' );?> /><label for="hide_index_on">On.</label>
 					<input type="radio" id="hide_index_off" name="hide_index" value="1"<?php echo ( $engine->config['hide_index'] ? ' checked="checked"' : '' );?> /><label for="hide_index_off">Off.</label>
@@ -276,7 +276,7 @@ function admin_configbasic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><strong>Displaying sections:</strong><br />
-					<small>When the previous options, whether to display only daughter of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).</small></td>
+					<small>When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).</small></td>
 				<td>
 					<input type="radio" id="full_index" name="tree_level" value="0"<?php echo ( $engine->config['tree_level'] == 0 ? ' checked="checked"' : '' );?> /><label for="full_index">Tree</label>
 					<input type="radio" id="lower_index" name="tree_level" value="1"<?php echo ( $engine->config['tree_level'] == 1 ? ' checked="checked"' : '' );?> /><label for="lower_index">Lower</label>
