@@ -97,11 +97,11 @@ if ($this->has_access('read'))
 		// display comments themselves
 		if ($comments)
 		{
-			echo "<ol id=\"comments\">\n";
+			echo '<ol id="comments">'."\n";
 
 			foreach ($comments as $comment)
 			{
-				echo "<li id=\"".$comment['tag']."\" class=\"comment\">\n";
+				echo '<li id="'.$comment['tag'].'" class="comment">'."\n";
 				$del = '';
 
 				// show remove comment button
@@ -111,13 +111,13 @@ if ($this->has_access('read'))
 					($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id']))
 				)))
 				{
-					echo "<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.png\" title=\"".$this->get_translation('DeleteCommentTip')."\" alt=\"".$this->get_translation('DeleteText')."\" align=\"right\" /></a>";
+					echo '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icons/delete_comment.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" align="right" /></a>';
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->user_is_owner($comment['page_id']))
 				{
-					echo "<a href=\"".$this->href('edit', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.png\" title=\"".$this->get_translation('EditCommentTip')."\" alt=\"".$this->get_translation('EditComment')."\" align=\"right\" /></a>";
+					echo '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icons/edit.png" title="'.$this->get_translation('EditCommentTip').'" alt="'.$this->get_translation('EditComment').'" align="right" /></a>';
 				}
 
 				if ($comment['body_r'])
@@ -185,9 +185,9 @@ if ($this->has_access('read'))
 			}
 
 			// load WikiEdit
-			echo "<script src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
-			echo "<script src=\"".$this->config['base_url']."js/wikiedit.js\"></script>\n";
-			echo "<script src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
+			echo '<script src="'.$this->config['base_url'].'js/protoedit.js"></script>'."\n";
+			echo '<script src="'.$this->config['base_url'].'js/wikiedit.js"></script>'."\n";
+			echo '<script src="'.$this->config['base_url'].'js/autocomplete.js"></script>'."\n";
 			?>
 				<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 
@@ -200,7 +200,7 @@ if ($this->has_access('read'))
 			<?php
 			if ($user)
 			{
-				$output			= '';
+				$output		= '';
 
 				// publish anonymously
 				if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
@@ -229,26 +229,34 @@ if ($this->has_access('read'))
 				$this->show_captcha(false);
 			}
 			// end captcha
-		?>
-		<script>
-		wE = new WikiEdit();
-<?php
-		if ($user = $this->get_user())
-		if ($user['autocomplete'])
-		{
-?>
-			if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" ); }
-<?php
-		}
-?>
-		wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
-		</script><br />
-		<input name="save" type="submit" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
-		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
-		<?php echo $this->form_close();
-				echo "</div>\n";
+			?>
+
+			<script>
+			wE = new WikiEdit();
+
+			<?php
+			if ($user = $this->get_user())
+			{
+				if ($user['autocomplete'])
+				{
+				?>
+					if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" ); }
+				<?php
 				}
-			// end comment form
+			}
+			?>
+
+			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
+			</script>
+
+			<br />
+			<input type="submit" name="save" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
+			<input type="submit" name="preview" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
+			<?php echo $this->form_close();
+
+			echo "</div>\n";
+		}
+		// end comment form
 	}
 	else
 	{
