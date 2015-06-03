@@ -82,7 +82,7 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config
 require_once('setup/lang/installer.'.$config['language'].'.php');
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $config['language']; ?>" lang="<?php echo $config['language']; ?>">
+<html lang="<?php echo $config['language']; ?>">
    <head>
       <title><?php echo $lang['Title'].': '.WACKO_VERSION.' - '.$lang[$install_action]; ?></title>
       <meta name="robots" content="noindex, nofollow, noarchive" />
