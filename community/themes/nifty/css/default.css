@@ -1807,7 +1807,7 @@ fieldset {
 	border: red 2px solid;
 }
 
-.preview p {
+p.preview {
 	color: red;
 	font-weight: bold;
 	margin: -1.5em 0px 10px 0px;
