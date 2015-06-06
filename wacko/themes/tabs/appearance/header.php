@@ -70,7 +70,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 					<input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" />
 					<input type="password" name="password" size="8" />&nbsp;
 				</td>
-				<td><input class="OkBtn_Top" type="submit" value="&nbsp;&nbsp;&raquo;&nbsp;&nbsp;" /></td>
+				<td><input type="submit" class="OkBtn_Top" value="&nbsp;&nbsp;&raquo;&nbsp;&nbsp;" /></td>
 			</tr>
 		<?php echo $this->form_close(); ?>
 		</table>

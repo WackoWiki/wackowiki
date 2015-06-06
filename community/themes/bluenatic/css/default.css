@@ -285,7 +285,7 @@ ol li {
 	border:			dashed 1px #999;
 	/*-moz-border-radius:	5px;	/* Mozilla, Firefox only */
 }
-.preview p {
+p.preview {
 	font-weight:		900;
 }
 
