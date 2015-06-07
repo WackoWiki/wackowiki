@@ -222,7 +222,7 @@ if (!empty($blog_cluster))
 	// pagination
 	if (isset($pagination['text']))
 	{
-		#echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		#echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 	}
 
 	// displaying articles
@@ -247,7 +247,7 @@ if (!empty($blog_cluster))
 		// pagination
 		if (isset($pagination['text']))
 		{
-			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 		}
 	}
 	else

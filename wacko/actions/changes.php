@@ -159,7 +159,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 	}
 }
 else

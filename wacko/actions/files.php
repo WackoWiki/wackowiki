@@ -246,7 +246,7 @@ if ($can_view)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 	}
 }
 else

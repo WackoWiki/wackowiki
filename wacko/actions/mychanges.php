@@ -90,7 +90,7 @@ if ($user_id = $this->get_user_id())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+				echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 			}
 		}
 		else
@@ -151,7 +151,7 @@ if ($user_id = $this->get_user_id())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+				echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 			}
 		}
 		else
