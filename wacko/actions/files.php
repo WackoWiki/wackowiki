@@ -149,7 +149,7 @@ if ($can_view)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
+		echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
 	}
 
 	if (!$nomark)
