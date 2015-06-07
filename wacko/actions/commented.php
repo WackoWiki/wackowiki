@@ -118,7 +118,7 @@ if ($this->user_allowed_comments())
 		// pagination
 		if (isset($pagination['text']))
 		{
-			echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
+			echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
 		}
 
 		echo "<ul class=\"ul_list\">\n";
