@@ -2326,18 +2326,18 @@ class Wacko
 		{
 			$type		= ''; // TODO: set type also via backend and store it [where?]
 			$message	= $this->config['system_message'];
-		
+
 			// check current page lang for different charset to do_unicode_entities()
 			if (isset($this->page['lang']) && $this->page['lang'] != $this->config['language'])
 			{
 				$message	= $this->do_unicode_entities($message, $this->config['language']);
 			}
-		
+
 			echo '<div class="sysmessage">';
 			$this->show_message($message, $type);
 			echo '</div>';
 		}
-		
+
 		// get event message
 		if ($messages = $this->get_message())
 		{
@@ -3590,15 +3590,7 @@ class Wacko
 				}
 				else
 				{
-					/* $this->debug_print_r(array(
-							$creation_time,
-							$diff,
-							$timespan,
-							$token_sid,
-							$user['user_form_salt'],
-							$key,
-							$token,
-					)); */
+					header('HTTP/1.0 400 Bad Request');
 
 					// TODO: token should be reset, generation of per-request tokens as opposed to per-session tokens
 					// TODO: suspiciously repeated form requests/form submissions, using Captchas to prevent automatic requests
@@ -3609,11 +3601,6 @@ class Wacko
 			}
 
 			// TODO: ? show indication e.g. timeout, pls. resubmit
-			/* $this->debug_print_r(array(
-					$creation_time,
-					$diff,
-					$timespan,
-			)); */
 		}
 
 		return false;
