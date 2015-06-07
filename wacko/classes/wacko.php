@@ -2321,17 +2321,34 @@ class Wacko
 	// output all messages stored in session array
 	function output_messages()
 	{
-		// here we show messages
+		// get system message
+		if(!empty($this->config['system_message']) && !(isset($this->config['ap_mode']) && $this->config['ap_mode'] === true))
+		{
+			$type		= ''; // TODO: set type also via backend and store it [where?]
+			$message	= $this->config['system_message'];
+		
+			// check current page lang for different charset to do_unicode_entities()
+			if (isset($this->page['lang']) && $this->page['lang'] != $this->config['language'])
+			{
+				$message	= $this->do_unicode_entities($message, $this->config['language']);
+			}
+		
+			echo '<div class="sysmessage">';
+			$this->show_message($message, $type);
+			echo '</div>';
+		}
+		
+		// get event message
 		if ($messages = $this->get_message())
 		{
-			#$this->debug_print_r($messages);
-
 			if (is_array($messages))
 			{
 				// TODO: filter and sanitize ..
 				foreach ($messages as $message)
 				{
 					list($_message, $_type) = $message;
+
+					// here we show messages
 					$this->show_message($_message, $_type);
 				}
 			}
@@ -3585,7 +3602,7 @@ class Wacko
 
 					// TODO: token should be reset, generation of per-request tokens as opposed to per-session tokens
 					// TODO: suspiciously repeated form requests/form submissions, using Captchas to prevent automatic requests
-					$this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'); # 'Invalid form token'
+					$this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' '.$form_name); # 'Invalid form token'
 
 					return false;
 				}
@@ -3744,7 +3761,7 @@ class Wacko
 			$this->stop_link_tracking();
 		}
 
-		$result = $this->include_buffered(strtolower($action).'.php', "<em>".$this->get_translation('UnknownAction')." \"$action\"</em>", $params, $this->config['action_path']);
+		$result = $this->include_buffered(strtolower($action).'.php', '<em>'.$this->get_translation('UnknownAction').' "'.$action.'"</em>', $params, $this->config['action_path']);
 
 		$this->start_link_tracking();
 		$this->no_cache();
@@ -3761,7 +3778,7 @@ class Wacko
 		$method_location = $handler.'/'.$method.'.php';
 
 		// TODO: localize: 'Unknown method'
-		return $this->include_buffered($method_location, "<em>Unknown method \"$method_location\"</em>", '', $this->config['handler_path']);
+		return $this->include_buffered($method_location, '<em>Unknown method "'.$method_location.'"</em>', '', $this->config['handler_path']);
 	}
 
 	// wrapper for the next method
@@ -3773,11 +3790,11 @@ class Wacko
 	function _format($text, $formatter, &$options)
 	{
 		// TODO: localize: 'Formatter %1 not found'
-		$text = $this->include_buffered('formatters/'.$formatter.'.php', "<em>Formatter \"$formatter\" not found</em>", compact('text', 'options'));
+		$text = $this->include_buffered('formatters/'.$formatter.'.php', '<em>Formatter "'.$formatter.'" not found</em>', compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
-			$text = $this->include_buffered('formatters/typografica.php', "<em>Formatter \"$formatter\" not found</em>", compact('text'));
+			$text = $this->include_buffered('formatters/typografica.php', '<em>Formatter "'.$formatter.'" not found</em>', compact('text'));
 		}
 
 		return $text;
