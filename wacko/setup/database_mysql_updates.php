@@ -74,7 +74,7 @@ $alter_upload_r5_1_2 = "ALTER TABLE {$pref}upload DROP INDEX page_id_2, ADD INDE
 $alter_upload_r5_1_3 = "ALTER TABLE {$pref}upload CHANGE description file_description VARCHAR(250) NOT NULL DEFAULT ''";
 
 // USER
-$alter_user_r5_4_0 = "ALTER TABLE `{$pref}user` CHANGE `session_time` `last_visit` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_user_r5_4_0 = "ALTER TABLE {$pref}user CHANGE session_time last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
 $alter_user_r5_4_1 = "ALTER TABLE {$pref}user ADD user_form_salt VARCHAR(40) NOT NULL DEFAULT '' AFTER `change_password`";
 
 // USER SETTING

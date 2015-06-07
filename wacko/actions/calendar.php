@@ -1,6 +1,6 @@
 <?php
 
-/* {{ calendar [year=2012|2013...] [month="1|2|..."] [highlight="today|1|2|..."] [daywidth="3"]}} */
+/* {{calendar [year=2012|2013...] [month="1|2|..."] [highlight="today|1|2|..."] [daywidth="3"]}} */
 
 /* stylesheet parameters:
 	.calendar			(table container class)

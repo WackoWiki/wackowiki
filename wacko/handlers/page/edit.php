@@ -69,7 +69,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		}
 
 		// only if saving:
-		if (isset($_POST['save']) && $_POST['body'] != '')
+		if (isset($_POST['save']) && (isset($_POST['body']) && $_POST['body'] != ''))
 		{
 			if(isset($_POST['edit_note']))
 			{
@@ -215,6 +215,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		// saving blank document
 		else if (isset($_POST['body']) && $_POST['body'] == '')
 		{
+			$this->set_message($this->get_translation('EmptyPage'), 'error');
 			$this->redirect($this->href());
 		}
 	}
@@ -259,7 +260,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	$preview		= '';
 	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="'.$this->get_translation('EditStoreButton').'" />&nbsp;'.
 						'<input type="submit" class="OkBtn_Top" name="preview" value="'.$this->get_translation('EditPreviewButton').'" />&nbsp;'.
-						'<input type="button" class="CancelBtn_Top" value="'.$this->get_translation('EditCancelButton').'" onclick="document.location=\''.addslashes($this->href('')).'\';" />'; // $this->href('', '', '', 1)
+						'<input type="button" class="CancelBtn_Top" value="'.$this->get_translation('EditCancelButton').'" onclick="document.location=\''.addslashes($this->href('')).'\';" />'."\n"; // $this->href('', '', '', 1)
 
 	// preview?
 	if (isset($_POST['preview']))
