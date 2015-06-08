@@ -56,7 +56,7 @@ else
 
 if(!$nomark)
 {
-	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('MostCommentedPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
+	echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('MostCommentedPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
 }
 
 if(!$for)

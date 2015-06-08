@@ -5465,7 +5465,7 @@ class Wacko
 		// check IP validity
 		if ($this->get_user_setting('validate_ip') == 1 && $this->get_user_setting('ip') != $this->ip_address() )
 		{
-			$this->log(1, '**??'.'User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->ip_address().'??**');
+			$this->log(1, '<strong><span class="cite">'.'User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->ip_address().'</span></strong>');
 			$this->log_user_out();
 			#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
 			$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);

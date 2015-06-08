@@ -100,7 +100,7 @@ if ($this->user_allowed_comments())
 
 		if ($root == '' && !(int)$noxml)
 		{
-			echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/comments_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.png"."\" title=\"".$this->get_translation('RecentCommentsXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
+			echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icons/xml.png'.'" title="'.$this->get_translation('RecentCommentsXMLTip').'" alt="XML" /></a></span>'."<br /><br />\n";
 		}
 
 		// pagination
@@ -147,14 +147,14 @@ if ($this->user_allowed_comments())
 				$viewed = ( $user['last_mark'] == true && $page['comment_user'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
 
 				// print entry
-				echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
+				echo '<li '.$viewed.'><span class="dt">'.date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
 				($title == 1
 					? $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, '', 0)
 					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'])
 				).
 				") . . . . . . . . . . . . . . . . <small>"./*$this->get_translation('LatestCommentBy').*/" ".
 				($page['comment_user']
-					? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['comment_user'])."\">".$page['comment_user']."</a>"
+					? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['comment_user']).'">'.$page['comment_user'].'</a>'
 					: $this->get_translation('Guest')).
 				"</small></li>\n";
 			}
