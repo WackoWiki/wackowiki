@@ -33,7 +33,7 @@ if ($this->user_is_owner($page_id))
 		$title = str_replace('%1', $this->link('/'.$tag, '', $tag),  $title);
 		if (!$nomark)
 		{
-			echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n";
+			echo '<div class="layout-box"><p class="layout-box"><span>'.$title.":</span></p>\n";
 		}
 
 		echo '<ol class="">'."\n";

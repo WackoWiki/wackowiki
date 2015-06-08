@@ -427,7 +427,7 @@ if ($phrase)
 
 			if (!$nomark)
 			{
-				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
+				echo '<div class="layout-box"><p class="layout-box"><span>'.
 					$this->get_translation(($mode == 'topic' ? 'Topic' : '')."SearchResults").
 					" \"$phrase\" (<b>".$i."</b>):</span></p>";
 			}

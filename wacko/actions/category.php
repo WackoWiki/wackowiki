@@ -56,7 +56,7 @@ if ($list && ($ids || isset($_GET['category'])))
 			$words = strtolower(implode(', ', $words));
 		}
 
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
 	}
 
 	if ($sort == 'abc')
@@ -119,7 +119,7 @@ if (!$ids)
 	// header
 	if (!$nomark)
 	{
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('Categories').( $root ? " of cluster ".$this->link('/'.$root, '', '', '', 0) : '' ).":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('Categories').( $root ? " of cluster ".$this->link('/'.$root, '', '', '', 0) : '' ).":</span></p>\n";
 	}
 
 	// categories list
@@ -133,7 +133,7 @@ if (!$ids)
 
 			# if (!$inline && $i++ > 0) echo '<br />';
 
-			echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'" rel="tag">' : '' ).htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."";
+			echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'" rel="tag" class="tag">' : '' ).htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."";
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
@@ -141,7 +141,7 @@ if (!$ids)
 
 				foreach ($word['childs'] as $id => $word)
 				{
-					echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'" rel="tag">' : '' ).htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."</li>\n";
+					echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'" rel="tag" class="tag">' : '' ).htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."</li>\n";
 				}
 
 				echo "</ul>\n</li>\n";

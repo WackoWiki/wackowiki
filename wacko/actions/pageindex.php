@@ -172,7 +172,7 @@ if ($pages_to_display)
 	{
 		// all
 		$top_links .= "<ul class=\"ul_letters\">\n";
-		$top_links .= "<li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('Any')."</a></li>\n";
+		$top_links .= '<li><a href="'.$this->href('', '', '').'">'.$this->get_translation('Any')."</a></li>\n";
 
 		foreach($this->letters as $letter => $letter_count)
 		{
@@ -180,16 +180,16 @@ if ($pages_to_display)
 			{
 				if ($letter === $_letter)
 				{
-					$top_links.="<li class=\"active\"><strong>".$letter."</strong></li>\n";
+					$top_links .= '<li class="active"><strong>'.$letter."</strong></li>\n";
 				}
 				else
 				{
-					$top_links.="<li><a href=\"".$this->href('', '', 'letter=').$letter."\">".$letter."</a></li>\n";
+					$top_links .= '<li><a href="'.$this->href('', '', 'letter=').$letter.'">'.$letter."</a></li>\n";
 				}
 			}
 			else
 			{
-				$top_links.="<li><a href=\"".$this->href('', '', 'letter=').$letter."\">".$letter."</a></li>\n";
+				$top_links .= '<li><a href="'.$this->href('', '', 'letter=').$letter.'">'.$letter."</a></li>\n";
 			}
 		}
 
@@ -225,7 +225,7 @@ if ($pages_to_display)
 				echo "</ul></li>\n";
 			}
 
-			echo "\n<li><strong>$first_char</strong>\n<ul>\n";
+			echo "\n<li><strong>".$first_char."</strong>\n<ul>\n";
 
 			$cur_char = $first_char;
 		}
