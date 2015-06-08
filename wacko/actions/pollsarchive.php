@@ -44,7 +44,11 @@ $years	= $polls_obj->poll_years();
 // print list
 if(!$nomark)
 {
-	print('<div class="layout-box"><p class="layout-box"><span>'.($year == 0 ? $this->get_translation('PollsArchiveAll') : str_replace('%1', $year, $this->get_translation('PollsArchiveYear')))."</span></p>\n");
+	echo '<div class="layout-box"><p class="layout-box"><span>'.
+			($year == 0
+				? $this->get_translation('PollsArchiveAll')
+				: str_replace('%1', $year, $this->get_translation('PollsArchiveYear'))
+			)."</span></p>\n";
 }
 
 	if ($list) // normal list

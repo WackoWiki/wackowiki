@@ -213,7 +213,7 @@ if (!empty($blog_cluster))
 	// displaying XML icon
 	if (!(int)$noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/news_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.png"."\" title=\"".$this->get_translation('RecentNewsXMLTip')."\" alt=\"XML\" /></a></span>\n";
+		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/news_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icons/xml.png'.'" title="'.$this->get_translation('RecentNewsXMLTip').'" alt="XML" /></a></span>'."\n";
 	}
 
 	echo '<div style="width:100%;"><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.

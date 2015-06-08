@@ -16,7 +16,7 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		print(str_replace('%1',$this->href('edit'),$this->get_translation('DoesNotExists')));
+		echo str_replace('%1',$this->href('edit'),$this->get_translation('DoesNotExists'));
 	}
 	else
 	{
@@ -28,11 +28,11 @@ if ($this->has_access('read'))
 
 		if ($this->page['latest'] == 0)
 		{
-			print("<div class=\"revisioninfo\">".
+			 '<div class="revisioninfo">'.
 			str_replace('%1',$this->href(),
 			str_replace('%2',$this->tag,
 			str_replace('%3',$this->page['modified'],
-			$this->get_translation('Revision')))).".</div>");
+			$this->get_translation('Revision')))).'.</div>';
 		}
 
 		// display page
