@@ -96,7 +96,7 @@ if ($write_file == true)
 
 	echo output_image(true)."</li>\n";
 
-	echo "            <li>".$lang['RemovingWritePrivilege']."   ".output_image($perm_changed))."</li>\n";
+	echo "            <li>".$lang['RemovingWritePrivilege']."   ".output_image($perm_changed)."</li>\n";
 }
 else
 {
