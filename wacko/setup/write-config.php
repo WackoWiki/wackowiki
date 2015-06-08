@@ -96,12 +96,12 @@ if ($write_file == true)
 
 	echo output_image(true)."</li>\n";
 
-	print("            <li>".$lang['RemovingWritePrivilege']."   ".output_image($perm_changed))."</li>\n";
+	echo "            <li>".$lang['RemovingWritePrivilege']."   ".output_image($perm_changed))."</li>\n";
 }
 else
 {
 	// Problem saving file
-	print(output_image(false)."</li>\n");
+	echo output_image(false)."</li>\n";
 }
 
 echo "         </ul>\n";
@@ -124,8 +124,8 @@ if($write_file == false)
 echo "         </ul>\n";
 
 ?>
-<form action="<?php echo my_location() ?>?installAction=write-config"
-	method="post"><?php
+<form action="<?php echo my_location() ?>?installAction=write-config" method="post">
+<?php
 	write_config_hidden_nodes(array('none' => ''));
 
 	// If there was a problem then show the "Try Again" button.
@@ -136,13 +136,14 @@ echo "         </ul>\n";
 	}
 	else
 	{
-		?> <input type="submit" value="<?php echo $lang['TryAgain'];?>" class="next" /> <?php
+		?> <input type="submit" value="<?php echo $lang['TryAgain'];?>" class="next" />
+		<?php
 	}
 	?></form>
 	<?php
 	if($write_file = false)
 	{
-		echo "         <div id=\"config_code\" class=\"config_code\"><pre>".htmlentities($config_code, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</pre></div>\n";
+		echo '         <div id="config_code" class="config_code"><pre>'.htmlentities($config_code, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</pre></div>\n";
 	}
 	?>
 <br />

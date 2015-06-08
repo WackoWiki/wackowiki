@@ -428,8 +428,8 @@ if ($phrase)
 			if (!$nomark)
 			{
 				echo '<div class="layout-box"><p class="layout-box"><span>'.
-					$this->get_translation(($mode == 'topic' ? 'Topic' : '')."SearchResults").
-					" \"$phrase\" (<b>".$i."</b>):</span></p>";
+					$this->get_translation(($mode == 'topic' ? 'Topic' : '').'SearchResults').
+					' "'.$phrase.'" (<b>'.$i.'</b>):</span></p>';
 			}
 
 			//show results
@@ -447,11 +447,11 @@ if ($phrase)
 			}
 		}
 		else
-		if (!$nomark) echo $this->get_translation('NoResultsFor')."\"$phrase\".";
+		if (!$nomark) echo $this->get_translation('NoResultsFor').'"'.$phrase.'".';
 	}
 	else
 	{
-		if (!$nomark) echo $this->get_translation('NoResultsFor')."\"$phrase\".";
+		if (!$nomark) echo $this->get_translation('NoResultsFor').'"'.$phrase.'".';
 	}
 }
 
