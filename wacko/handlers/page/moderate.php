@@ -1158,8 +1158,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// load comments data
 		$comments = $this->load_all($sql);
 
-		$this->page['body'] = $this->format($this->page['body'], 'bbcode');
-
 		$body = $this->format($this->page['body'], 'cleanwacko');
 		$body = (strlen($body) > 300 ? substr($body, 0, 300).'[..]' : $body.' [..]');
 		$body = htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
@@ -1354,8 +1352,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// ...and comments list
 			foreach ($comments as $comment)
 			{
-				$comment['body'] = $this->format($comment['body'], 'bbcode');
-
 				$desc = $this->format($comment['body'], 'cleanwacko');
 				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300).'[..]' : $desc.' [..]');
 				$desc = htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);

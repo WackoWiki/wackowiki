@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // Removes all the basic wiki-markup, giving a simple text.
 // Formatter is most suitable for the purification of the text after
-// Replace the bbcode on wacko-syntax.
+// replace the bbcode on wacko-syntax.
 
 if ($text == '')
 {
