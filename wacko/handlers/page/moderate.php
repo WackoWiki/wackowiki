@@ -817,7 +817,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if (isset($_POST['accept']) && (isset($_POST['section']) || isset($_POST['cluster'])))
 			{
 				$pos		= strrpos($this->tag, '/');
-				$sub_tag	= substr($this->tag, ( $pos ? $pos+1 : 0 ));
+				$sub_tag	= substr($this->tag, ( $pos ? $pos + 1 : 0 ));
 				$old_tag	= $this->tag;
 				$new_tag	= ($_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/').'/' ) : $_POST['section'].'/').$sub_tag;
 
@@ -1162,6 +1162,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		$body = $this->format($this->page['body'], 'cleanwacko');
 		$body = (strlen($body) > 300 ? substr($body, 0, 300).'[..]' : $body.' [..]');
+		$body = htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 		// display list
 		echo $this->form_open('moderate_topic', 'moderate');
@@ -1357,6 +1358,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				$desc = $this->format($comment['body'], 'cleanwacko');
 				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300).'[..]' : $desc.' [..]');
+				$desc = htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 				echo '<tr class="lined">'.
 						'<td style="vertical-align:middle; width:10px;" class="label"><input name="'.$comment['page_id'].'" type="checkbox" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
