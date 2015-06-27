@@ -360,25 +360,27 @@ class Wacko
 		#$this->charset = $this->language['charset'];
 	}
 
+	// TODO: refactor / normalize
 	function load_translation($lang)
 	{
 		if (!isset($this->translations[$lang]))
 		{
-			$resourcefile = 'lang/wacko.'.$lang.'.php';
+			// wacko.xy
+			$lang_file = 'lang/wacko.'.$lang.'.php';
 
-			if (@file_exists($resourcefile))
+			if (@file_exists($lang_file))
 			{
-				include($resourcefile);
+				include($lang_file);
 			}
 
 			// wacko.all
-			$resourcefile = 'lang/wacko.all.php';
+			$lang_file = 'lang/wacko.all.php';
 
 			if (!$this->translations['all'])
 			{
-				if (@file_exists($resourcefile))
+				if (@file_exists($lang_file))
 				{
-					include($resourcefile);
+					include($lang_file);
 				}
 
 				$this->translations['all'] = & $wacko_all_resource;
@@ -391,29 +393,51 @@ class Wacko
 
 			$wacko_resource = array_merge($wacko_translation, $this->translations['all']);
 
-			// theme
-			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
-
-			if (@file_exists($resourcefile))
+			if (isset($this->config['ap_mode']) && $this->config['ap_mode'] === true)
 			{
-				include($resourcefile);
+				// ap.xy
+				$lang_file = 'admin/lang/ap.'.$lang.'.php';
+
+				if (@file_exists($lang_file))
+				{
+					include($lang_file);
+				}
+
+				if (!isset($ap_translation))
+				{
+					$ap_translation = '';
+				}
+
+				$wacko_resource = array_merge((array)$wacko_resource, (array)$ap_translation);
 			}
-			if (!isset($theme_translation))
+			else
 			{
-				$theme_translation = '';
+				// theme lang files
+				$lang_file = 'themes/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
+
+				if (@file_exists($lang_file))
+				{
+					include($lang_file);
+				}
+
+				if (!isset($theme_translation))
+				{
+					$theme_translation = '';
+				}
+
+				$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
+
+				// wacko.all theme
+				$lang_file = 'themes/'.$this->config['theme'].'/lang/wacko.all.php';
+
+				if (@file_exists($lang_file))
+				{
+					include($lang_file);
+				}
+
+				$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
+
 			}
-
-			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
-
-			// wacko.all theme
-			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.all.php';
-
-			if (@file_exists($resourcefile))
-			{
-				include($resourcefile);
-			}
-
-			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
 			$this->translations[$lang] = $wacko_resource;
 			$this->load_lang($lang);
@@ -426,11 +450,11 @@ class Wacko
 
 		if (!isset($this->languages[$lang]))
 		{
-			$resourcefile = 'lang/lang.'.$lang.'.php';
+			$lang_file = 'lang/lang.'.$lang.'.php';
 
-			if (@file_exists($resourcefile))
+			if (@file_exists($lang_file))
 			{
-				include($resourcefile);
+				include($lang_file);
 			}
 
 			$this->languages[$lang] = $wacko_language;
@@ -2378,16 +2402,32 @@ class Wacko
 	}
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
+	//		X-Frame-Options: DENY | SAMEORIGIN
+	//		X-Content-Security-Policy:
+	//		Strict-Transport-Security:
 	function http_security_headers()
 	{
 		if ($this->config['enable_security_headers'])
 		{
 			if ( !headers_sent() )
 			{
-				#	if (isset($this->config['x_frame_option']))
-				header( 'X-Frame-Options: DENY' ); // or SAMEORIGIN
-				#	if (isset($this->config['x_csp']))
-				header( "X-Content-Security-Policy: allow 'self'; script-src 'self'; options inline-script; img-src *;" );
+				if (isset($this->config['x_frame_option']))
+				{
+					if ($this->config['x_frame_option'] == 1)
+					{
+						header( 'X-Frame-Options: DENY' );
+					}
+					else if ($this->config['x_frame_option'] == 2)
+					{
+						header( 'X-Frame-Options: SAMEORIGIN' );
+					}
+				}
+
+				if (isset($this->config['x_csp']))
+				{
+					// TODO: add option to put custom settings e.g. via constant
+					header( "X-Content-Security-Policy: allow 'self'; script-src 'self'; options inline-script; img-src *;" );
+				}
 
 				if ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] != 'off' ) )
 				{
