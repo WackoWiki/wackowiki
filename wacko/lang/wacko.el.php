@@ -301,6 +301,7 @@ $wacko_translation = array(
 	'NotifyMe' => 'Notify me about new comments and changes of the page',
 	'OverwriteAlert' => 'OVERWRITE ALERT: This page was modified by someone else while you were editing it.<br />Please copy your changes and re-edit this page.',
 	'WriteAccessDenied' => 'Δεν έχετε δικαιώματα εγγραφής σε αυτή την σελίδα.',
+	'EmptyPage'					=> 'Page body was empty -- δεν αποθηκεύτηκε!',
 	'EmptyComment' => 'Το κύριο μέρος του σχόλιου είναι κενό -- δεν αποθηκεύτηκε!',
 	'CommentAccessDenied' => 'Λυπάμαι, δεν μπορείτε να αναρτήσετε σχόλια σε αυτή την σελίδα.',
 	'CommentFlooded' => 'The interval between the publication of the messages shall not be less than %1 seconds.',

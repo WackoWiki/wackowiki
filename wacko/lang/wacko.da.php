@@ -301,6 +301,7 @@ $wacko_translation = array(
 	'NotifyMe' => 'Notify me about new comments and changes of the page',
 	'OverwriteAlert' => 'OVERSKRIVNING ADVARSEL: Denne side blev ændret af en anden mens du redigerede den.<br />Kopier venligst dine ændringer, og rediger forfra.',
 	'WriteAccessDenied' => 'Du har ikke tilladelse til at skrive denne side.',
+	'EmptyPage'					=> 'Page body was empty - ikke gemt!',
 	'EmptyComment' => 'Hov, den er tom - ikke gemt!',
 	'CommentAccessDenied' => 'Beklager, men du har ikke tilladelse til at kommentere på denne side.',
 	'CommentFlooded' => 'The interval between the publication of the messages shall not be less than %1 seconds.',
