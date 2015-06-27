@@ -301,6 +301,7 @@ $wacko_translation = array(
 	'NotifyMe' => 'Notify me about new comments and changes of the page',
 	'OverwriteAlert' => 'Ülekirjutuse hoiatus: kuni sina seda lehte muutsid, muutis seda lehte veel keegi teine.<br />Kopeeri oma muudatused ja nimeta leht ümber.',
 	'WriteAccessDenied' => 'Sul ei ole sellele lehe kirjutamise õigusi.',
+	'EmptyPage'					=> 'Page body was empty -- ei salvestatud!',
 	'EmptyComment' => 'Kommentaar on tühi -- ei salvestatud!',
 	'CommentAccessDenied' => 'Sul pole lubatud seda lehte kommenteerida.',
 	'CommentFlooded' => 'The interval between the publication of the messages shall not be less than %1 seconds.',
@@ -1070,7 +1071,7 @@ $wacko_translation = array(
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
-		
+
 	// log
 	'LogLevel1'					=> 'critical',
 	'LogLevel2'					=> 'highest',

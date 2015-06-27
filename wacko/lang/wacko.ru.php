@@ -304,6 +304,7 @@ $wacko_translation = array(
 	'NotifyMe'					=> 'Уведомлять о новых комментариях и изменениях документа',
 	'OverwriteAlert'			=> 'УВЕДОМЛЕНИЕ О ПЕРЕЗАПИСИ: Эта страница была изменена кем-то ещё, пока вы редактировали её.<br/>Пожалуйста, скопируйте свои изменения и отредактируйте страницу повторно.',
 	'WriteAccessDenied'			=> 'У вас нет прав на изменение этой страницы.',
+	'EmptyPage'					=> 'Page body was empty -- он не будет сохранен!',
 	'EmptyComment'				=> 'Комментарий пуст -- он не будет сохранен!',
 	'CommentAccessDenied'		=> '!Извините, у вас нет прав на коментирование этой страницы.',
 	'CommentFlooded'			=> 'Интервал между публикацией сообщений должен быть не менее %1 секунд.',
@@ -1080,7 +1081,7 @@ $wacko_translation = array(
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
-		
+
 	// log
 	'LogLevel1'					=> 'Критический',
 	'LogLevel2'					=> 'Наивысший',

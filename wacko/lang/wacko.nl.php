@@ -301,6 +301,7 @@ $wacko_translation = array(
 	'NotifyMe' => 'Notify me about new comments and changes of the page',
 	'OverwriteAlert' => 'OVERSCHRIJF-WAARSCHUWING: Deze pagina is gewijzigd door iemand anders terwijl u deze aan het wijzigen was.<br />Maak een kopie van uw wijzigingen en bewerk de pagina opnieuw.',
 	'WriteAccessDenied' => 'U heeft geen schrijf rechten op deze pagina.',
+	'EmptyPage'					=> 'Page was leeg en is dus niet bewaard!',
 	'EmptyComment' => 'Reactietekst was leeg en is dus niet bewaard!',
 	'CommentAccessDenied' => 'U heeft geen rechten om reacties op deze pagina te plaatsen.',
 	'CommentFlooded' => 'The interval between the publication of the messages shall not be less than %1 seconds.',
@@ -1070,7 +1071,7 @@ $wacko_translation = array(
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
-		
+
 	// log
 	'LogLevel1'					=> 'critical',
 	'LogLevel2'					=> 'highest',

@@ -301,6 +301,7 @@ $wacko_translation = array(
 	'NotifyMe'					=> 'Me notifier les nouveaux commentaires et modifications de la page',
 	'OverwriteAlert'			=> 'ALERTE: Cette page a été modifiée par une autre personne pendant que vous l&rsquo;éditiez.<br />Copiez vos modifications et rééditez la.',
 	'WriteAccessDenied'			=> 'Vous n&rsquo;êtes pas autorisé(e) à écrire sur cette page.',
+	'EmptyPage'					=> 'La page était vide -- il n&rsquo;a pas été enregistré !',
 	'EmptyComment'				=> 'Le commentaire était vide -- il n&rsquo;a pas été enregistré !',
 	'CommentAccessDenied'		=> 'Vous n&rsquo;êtes pas autorisé à commenter cette page.',
 	'CommentFlooded'			=> 'Les publications de messages doivent être espacées d&rsquo;au moins une seconde.',
@@ -1070,7 +1071,7 @@ $wacko_translation = array(
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
-		
+
 	// log
 	'LogLevel1'					=> 'critique',
 	'LogLevel2'					=> 'le plus élevé',
