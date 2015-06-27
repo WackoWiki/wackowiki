@@ -240,8 +240,8 @@ function set_language($lng)
 
 	if ( !isset($languages[$lng]) )
 	{
-		$resourcefile = 'lang/lang.'.$lng.'.php';
-		if (@file_exists($resourcefile)) include($resourcefile);
+		$lang_file = 'lang/lang.'.$lng.'.php';
+		if (@file_exists($lang_file)) include($lang_file);
 		$languages[$lng] = $wacko_language;
 	}
 

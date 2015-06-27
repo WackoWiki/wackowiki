@@ -69,6 +69,7 @@ $wacko_config_defaults = array(
 	'limit_email_domain' => '',
 	'check_mx_record' => 0,
 	'validate_email' => 1,
+	'email_pattern' => '',
 	'notify_new_user_account' => 1,
 	'allow_email_reuse' => 0,
 
@@ -236,8 +237,8 @@ $wacko_config_defaults = array(
 	'session_time_to_update' => 300,
 
 	'enable_security_headers' => 1,
-	'x_frame_option' => '',
-	'x_csp' => '',
+	'x_frame_option' => 1,
+	'x_csp' => 1,
 
 	'form_token_time' => 7200,
 	'form_token_sid_guests' => 1,
