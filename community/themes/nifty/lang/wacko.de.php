@@ -1,7 +1,5 @@
 <?php
 $theme_translation = array(
-	'SettingsPage' => 'Einstellungen',
-
 	// content sidebar
 	'TOCTitle' => 'Inhalt dieser Seite',
 	'RecentCommentsThisPage' => 'Kommentare',
