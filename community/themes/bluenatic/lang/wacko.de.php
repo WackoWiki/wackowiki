@@ -1,5 +1,5 @@
-<?php                               
-$theme_translation = array(             
-'SettingsPage' => 'Einstellungen',
-);                                  
+<?php
+$theme_translation = array(
+
+);
 ?>
