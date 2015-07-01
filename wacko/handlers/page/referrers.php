@@ -175,6 +175,8 @@ if ($user = $this->get_user())
 		{
 			echo "<ol>";
 
+			$anchor = $this->translit($this->tag);
+
 			foreach ($pages as $page)
 			{
 				if ($page['tag'])
@@ -190,7 +192,7 @@ if ($user = $this->get_user())
 
 					if ($access)
 					{
-						echo '<li>'.$this->link('/'.$page['tag'])."</li>\n";
+						echo '<li>'.$this->link('/'.$page['tag']."#".$anchor, '', $page['tag'], $page['title'])."</li>\n";
 					}
 				}
 			}

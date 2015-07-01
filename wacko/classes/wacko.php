@@ -3050,6 +3050,8 @@ class Wacko
 				$supertag	= $this->translit($untag, TRAN_LOWERCASE, TRAN_DONTLOAD);
 			}
 
+			$aname = '';
+
 			if (substr($tag, 0, 2) == '!/')
 			{
 				$icon		= $this->get_translation('childicon');
@@ -3111,6 +3113,7 @@ class Wacko
 
 			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
 			{
+				$aname = 'id="'.$supertag.'"';
 				$this->first_inclusion[$supertag] = 1;
 			}
 
@@ -3188,6 +3191,8 @@ class Wacko
 				}
 
 				//TODO: pagepath
+				$aname		= str_replace('/',			'.',		$aname);
+				$res		= str_replace('{aname}',	$aname,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
 				$res		= str_replace('{accicon}',	$accicon,	$res);
 				$res		= str_replace('{class}',	$class,		$res);
@@ -4148,12 +4153,12 @@ class Wacko
 		return substr($val, 4, 16);
 	}
 
-	function log_user_in($user, $persistent = 0, $session = 0)
+	function log_user_in($user, $persistent = 0, $session_expiration = 0)
 	{
 		// cookie elements
-		$session		= ( $session == 0 ? $this->config['session_expiration'] : $session );
-		$session		= ( $persistent ? $session : 0.25 );
-		$ses_time		= time() + $session * 24 * 3600;
+		$session_expiration		= ( $session_expiration == 0 ? $this->config['session_expiration'] : $session_expiration );
+		$session_expiration		= ( $persistent ? $session_expiration : 0.25 );
+		$session_expire		= time() + $session_expiration * 24 * 3600;
 
 		//  generate a string to use as the identifier for the login cookie
 		$login_token			= $this->unique_id(); // TODO:
@@ -4181,17 +4186,17 @@ class Wacko
 
 		if ($this->config['session_encrypt_cookie'] == true)
 		{
-			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
+			$time_pad	= str_pad($session_expire, 32, '0', STR_PAD_LEFT);
 			$password	= base64_encode(hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
 			// authenticating cookie data:
 			// seed | login token | composed pwd | raw session time | raw password
-			$cookie_mac	= hash('sha1', $this->config['system_seed'].$login_token.$password.$ses_time.$user['password']);
+			$cookie_mac	= hash('sha1', $this->config['system_seed'].$login_token.$password.$session_expire.$user['password']);
 			// construct and set cookie
-			$cookie		= implode(';', array($login_token, $password, $ses_time, $cookie_mac));
+			$cookie		= implode(';', array($login_token, $password, $session_expire, $cookie_mac));
 		}
 		else
 		{
-			$cookie		= implode(';', array($login_token, $user['password'], $ses_time));
+			$cookie		= implode(';', array($login_token, $user['password'], $session_expire));
 		}
 
 		if ($persistent && $this->config['allow_persistent_cookie'] == true)
@@ -4207,7 +4212,7 @@ class Wacko
 		// code in user data table
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} SET ".
-				"session_expire		= '".(int) $ses_time."', ".
+				"session_expire		= '".(int) $session_expire."', ".
 				"user_form_salt		= '".quote($this->dblink, $salt_user_form)."', ".
 				"change_password	= '' ".
 			"WHERE user_id		= '".$user['user_id']."' ".
@@ -4246,18 +4251,18 @@ class Wacko
 		}
 
 		// restart logged in user session with specific session id
-		return $this->restart_user_session($user, $ses_time);
+		return $this->restart_user_session($user, $session_expire);
 	}
 
 	// regenerate session id for registered user
-	function restart_user_session($user, $session_time)
+	function restart_user_session($user, $session_expire)
 	{
 		$this->delete_cookie('sid', true, false);
 
 		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']);
 		session_destroy(); // destroy session data in storage
 
-		session_id(hash('sha1', $this->timer.$this->config['system_seed'].$session_time.$user['user_name'].$user['password']));
+		session_id(hash('sha1', $this->timer.$this->config['system_seed'].$session_expire.$user['user_name'].$user['password']));
 		return session_start();
 	}
 
@@ -4271,23 +4276,23 @@ class Wacko
 		{
 			if ($this->config['session_encrypt_cookie'] == true)
 			{
-				list($login_token, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
+				list($login_token, $b64password, $session_expire, $cookie_mac) = explode(';', $cookie);
 
-				$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
+				$time_pad	= str_pad($session_expire, 32, '0', STR_PAD_LEFT);
 				$password	= hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
-				$recalc_mac	= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$ses_time.$password);
+				$recalc_mac	= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$session_expire.$password);
 			}
 			else
 			{
-				list($login_token, $password, $ses_time) = explode(';', $cookie);
+				list($login_token, $password, $session_expire) = explode(';', $cookie);
 			}
 
 			return array(
-				'login_token'	=> $login_token,
-				'password'		=> $password,
-				'ses_time'		=> $ses_time,
-				'cookie_mac'	=> $cookie_mac,
-				'recalc_mac'	=> $recalc_mac
+				'login_token'		=> $login_token,
+				'password'			=> $password,
+				'session_expire'	=> $session_expire,
+				'cookie_mac'		=> $cookie_mac,
+				'recalc_mac'		=> $recalc_mac
 			);
 		}
 		else
@@ -5362,6 +5367,7 @@ class Wacko
 
 				// delete from fs
 				clearstatcache();
+
 				$directory	= $this->config['cache_dir'].CACHE_PAGE_DIR;
 				$handle		= opendir(rtrim($directory, '/'));
 
@@ -5467,7 +5473,7 @@ class Wacko
 		if ($this->config['session_encrypt_cookie'] == true)
 		{
 			if ($user['session_expire'] != 0 && time() < $user['session_expire'] &&
-			time() < $auth['ses_time'] && $user['session_expire'] == $auth['ses_time'] &&
+			time() < $auth['session_expire'] && $user['session_expire'] == $auth['session_expire'] &&
 			$auth['recalc_mac'] == $auth['cookie_mac'])
 			{
 				$session = true;
@@ -5486,7 +5492,7 @@ class Wacko
 				if ($this->get_user())
 				{
 					// log event: session expired
-					if (time() > $auth['ses_time'])
+					if (time() > $auth['session_expire'])
 					{
 						$this->log(2, 'Expired user session terminated');
 					}
@@ -5515,7 +5521,7 @@ class Wacko
 		// start user session
 		if (!$this->get_user() && $session === true && $user == true)
 		{
-			$this->restart_user_session($user, $auth['ses_time']);
+			$this->restart_user_session($user, $auth['session_expire']);
 			$this->set_user($user, 1);
 			$this->update_session_time($user);
 			unset($user);

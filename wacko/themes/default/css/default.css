@@ -73,6 +73,22 @@ img {
 	height:auto;
 }
 
+kbd {
+	background-color: #f7f7f7;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+	color: #333;
+	display: inline-block;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	line-height: 1.4;
+	margin: 0 0.1em;
+	padding: 0.1em 0.6em;
+	text-shadow: 0 1px 0 #fff;
+	white-space: nowrap;
+}
+
 form input.submitinput {
 	color: #000;
 }
@@ -90,6 +106,9 @@ form input.submitinput {
 
 /* show message boxes */
 .error {
+	background: #f8d4cc;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
 	color: #CC3333;
 	font-weight: bold;
 }
@@ -198,7 +217,7 @@ article, #page {
 #pageedit {
 	background-color: #FFFFFF;
 	border-bottom: none;
-	padding: 5px 20px 20px 20px;
+	padding: 5px 0px 20px;
 	float: left;
 	width: 100%;
 }
@@ -422,6 +441,19 @@ fieldset {
 	visibility: hidden
 }
 
+.upload {
+/*	 border: 0 none;
+	border-collapse: collapse; */
+	table-layout: fixed;
+	width: 100%;
+}
+
+.upload img {
+/* 	max-width: 10%;
+	max-height: 10%;
+	transform: scale(10); */
+}
+
 .upload tr:hover {
 	background: #CCFFCC
 }
@@ -439,22 +471,25 @@ fieldset {
 }
 
 .upload td.dt- {
-	padding-right: 0
+	padding-right: 0;
+	width: 15%;
 }
 
 .upload td.remove- {
-	padding-right: 0
+	padding-right: 0;
+	width: 5%;
 }
 
 .upload td.size- {
 	padding-right: 0;
-	text-align: right
+	text-align: right;
+	width: 5%;
 }
 
 .upload td.desc- {
 	font-size: 80%;
 	color: #444444;
-	width: 100%
+	width: 20%;
 }
 
 .upload td.dt- .dt2-, .upload td.remove- .remove2-, .upload td.size- .size2- {
@@ -475,7 +510,7 @@ fieldset {
 	border: red 2px solid;
 }
 
-.preview p {
+p.preview {
 	color: red;
 	font-weight: bold;
 	margin: -1.5em 0px 10px 0px;
@@ -515,11 +550,9 @@ p.layout-box span {
 	padding:0;
 	line-height:25px;
 }
-.layout-box dd:target {
-	background-color:#FFEEEE;
-}
-
-.footnote *:target {
+.layout-box dd:target,
+.footnote *:target,
+a:target {
 	background-color:#FFEEEE;
 }
 
@@ -1525,3 +1558,26 @@ table.forum td {
 	text-decoration: none;
 	white-space: nowrap;
 }
+
+/* system message ------------- */
+.sysmessage {
+	background: rgba(51, 51, 51, 0.9) none repeat scroll 0 0;
+	bottom: 0;
+	color: #ccc;
+	left: 0;
+	padding-right: 10px;
+	position: fixed;
+	text-align: center;
+	width: 100%;
+	z-index: 5000;
+	padding: 20px 0 20px 20px;
+}
+
+.errorbox_js {
+	border: 1px solid red;
+	font-family: "Courier New",Courier,monospace;
+	margin: 0.5em 0;
+	padding: 1em 0.5em;
+	text-align: center;
+}
+
