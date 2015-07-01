@@ -46,7 +46,7 @@ if ($pages = $this->load_pages_linking_to($tag))
 				}
 				else
 				{
-					$_link = $this->link('/'.$page['tag']."#".$this->translit($tag), '', $page['tag']);
+					$_link = $this->link('/'.$page['tag']."#".$this->translit($tag), '', $page['tag'], $page['title']);
 				}
 
 				if (strpos($_link, 'span class="missingpage"') === false)

@@ -161,6 +161,7 @@ $wacko_config_defaults = array(
 	'publish_anonymously' => 0,
 
 	'allow_registration' => 1,
+	'antidupe' => 0,
 	'disable_autosubscribe' => 0,
 	'disable_wikiname' => 1,
 	'username_chars_min' => 3,
@@ -230,7 +231,6 @@ $wacko_config_defaults = array(
 
 	'session_encrypt_cookie' => 0,
 	'allow_persistent_cookie' => 1,
-	'antidupe' => 0,
 	'session_match_ip' => false,
 	'session_match_useragent' => true,
 	'session_use_db' => false,

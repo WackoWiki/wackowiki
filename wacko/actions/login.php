@@ -187,16 +187,16 @@ else
 
 						if (!empty($existing_user['session_expiration']))
 						{
-							$session = $existing_user['session_expiration'];
+							$session_expiration = $existing_user['session_expiration'];
 						}
 						else
 						{
-							$session = $this->config['session_expiration'];
+							$session_expiration = $this->config['session_expiration'];
 						}
 
 						$_persistent = isset($_POST['persistent']) ? $_POST['persistent'] : 0;
 
-						$this->log_user_in($existing_user, $_persistent, $session);
+						$this->log_user_in($existing_user, $_persistent, $session_expiration);
 						$this->set_user($existing_user, 1);
 						$this->update_session_time($existing_user);
 						$this->set_menu(MENU_USER);
