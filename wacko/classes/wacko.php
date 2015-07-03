@@ -2279,7 +2279,7 @@ class Wacko
 		// set to default if no pediod given
 		if ($days == 0)
 		{
-			$days = $this->config['session_expiration'];
+			$days = $this->config['session_length'];
 		}
 
 		setcookie($this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash'], $value, time() + $days * 24 * 3600, $this->config['cookie_path'], '', ( $secure ? true : false ), ( $httponly ? true : false ));
@@ -3542,6 +3542,7 @@ class Wacko
 		}
 
 		$add	= ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1)) ? true : '';
+
 		$result	= '<form action="'.$this->href($page_method, $tag, $href_param, $add).'" '.$form_more.' method="'.$form_method.'" '.($form_name ? 'name="'.$form_name.'" ' : '').">\n";
 
 		if (!$this->config['rewrite_mode'])
@@ -3971,8 +3972,8 @@ class Wacko
 
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
-		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst, t.session_time, t.cookie_token ';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst, t.cookie_token ';
+		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, t.session_time, t.cookie_token ';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, t.cookie_token ';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
@@ -4106,19 +4107,6 @@ class Wacko
 		return true;
 	}
 
-	// update current session time
-	function update_session_time($user)
-	{
-		if ($user['user_id'] == true)
-		{
-			return $this->sql_query(
-				"UPDATE ".$this->config['table_prefix']."session ".
-				"SET session_time = NOW() ".
-				"WHERE user_id = '".$user['user_id']."' ".
-				"LIMIT 1");
-		}
-	}
-
 	function update_last_mark($user)
 	{
 		if ($user['user_id'] == true)
@@ -4153,12 +4141,12 @@ class Wacko
 		return substr($val, 4, 16);
 	}
 
-	function log_user_in($user, $persistent = 0, $session_expiration = 0)
+	function log_user_in($user, $persistent = 0, $session_length = 0)
 	{
 		// cookie elements
-		$session_expiration		= ( $session_expiration == 0 ? $this->config['session_expiration'] : $session_expiration );
-		$session_expiration		= ( $persistent ? $session_expiration : 0.25 );
-		$session_expire		= time() + $session_expiration * 24 * 3600;
+		$session_length		= ($session_length == 0 ? $this->config['session_length'] : $session_length);
+		$session_length		= ($persistent ? $session_length : 0.25);
+		$session_expire		= time() + $session_length * 24 * 3600;
 
 		//  generate a string to use as the identifier for the login cookie
 		$login_token			= $this->unique_id(); // TODO:
@@ -4168,6 +4156,7 @@ class Wacko
 		$salt_user_form		= $this->random_password($salt_length, 3);
 
 		$this->time_now			= date('Y-m-d H:i:s');
+		$this->session_time		= date('Y-m-d H:i:s', $session_expire);
 
 		if ($user['user_id'])
 		{
@@ -4180,7 +4169,7 @@ class Wacko
 
 		#$this->update_session_page	= $update_session_page;
 		$this->browser				= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
-		$this->referer				= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+		#$this->referer				= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 		$this->forwarded_for		= isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
 		$this->ip					= $this->get_user_ip();
 
@@ -4226,7 +4215,7 @@ class Wacko
 				"user_id				= '".(int)$user['user_id']."', ".
 				"session_start			= NOW(), ".
 				"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
-				"session_time			= '".quote($this->dblink, $this->time_now)."', ".
+				"session_time			= '".quote($this->dblink, $this->session_time)."', ".
 				"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
 				"session_forwarded_for	= '".quote($this->dblink, (string) $this->forwarded_for)."', ".
 				"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
@@ -4240,7 +4229,7 @@ class Wacko
 				"UPDATE {$this->config['table_prefix']}session SET ".
 					"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
 					"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
-					"session_time			= '".quote($this->dblink, $this->time_now)."', ".
+					"session_time			= '".quote($this->dblink, $this->session_time)."', ".
 					"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
 					"session_forwarded_for	= '".quote($this->dblink, (string) $this->forwarded_for)."', ".
 					"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
@@ -5418,9 +5407,61 @@ class Wacko
 				$xml->site_map();
 			}
 
+			$this->set_config('maint_last_xml_sitemap', time(), '', true);
 			//$this->log(7, 'Maintenance: wrote XML Sitemap');
 		}*/
 
+		// purge expired cookie_tokens (once per 3 days)
+		if (($days = 3) && (time() > ($this->config['maint_last_session'] + 3 * 86400)) )
+		{
+			$sql = "SELECT user_id, MAX(session_time) AS recent_time
+					FROM {$this->config['table_prefix']}session
+					WHERE session_time < NOW()
+					GROUP BY user_id";
+
+			$sessions = $this->load_all($sql);
+
+			// composing a list of candidates
+			if (is_array($sessions))
+			{
+				#$del_sessions = 0;
+				$remove = array();
+
+				foreach ($sessions as $session)
+				{
+					$sql = "UPDATE {$this->config['table_prefix']}user
+							SET last_visit = '".$session['recent_time']."'
+							WHERE user_id = '".$session['user_id']."'
+							LIMIT 1";
+
+					$this->sql_query($sql);
+
+					// does the session has been deleted earlier than specified number of days ago?
+					if (strtotime($session['session_time']) < (time() - (3600 * 24 * $days)))
+					{
+						$remove[] = "'".$session['user_id']."'";
+					}
+
+					#$del_sessions++;
+					#$del_user_id[] = (int) $row['user_id'];
+				}
+
+				if (count($remove))
+				{
+					// Delete expired sessions
+					$sql = "DELETE FROM {$this->config['table_prefix']}session
+					WHERE user_id IN ( ".implode(', ', $remove)." )
+								AND session_time < NOW()";
+
+					$this->sql_query($sql);
+
+					unset($remove);
+				}
+			}
+
+			$this->set_config('maint_last_session', time(), '', true);
+			$this->log(7, 'Maintenance: expired cookie_tokens purged');
+		}
 	}
 
 	// MAIN EXECUTION ROUTINE
@@ -5523,7 +5564,7 @@ class Wacko
 		{
 			$this->restart_user_session($user, $auth['session_expire']);
 			$this->set_user($user, 1);
-			$this->update_session_time($user);
+
 			unset($user);
 		}
 

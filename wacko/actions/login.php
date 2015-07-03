@@ -185,20 +185,19 @@ else
 						// define session duration in days
 						$_session = isset($_POST['session']) ? $_POST['session'] : null;
 
-						if (!empty($existing_user['session_expiration']))
+						if (!empty($existing_user['session_length']))
 						{
-							$session_expiration = $existing_user['session_expiration'];
+							$session_length = $existing_user['session_length'];
 						}
 						else
 						{
-							$session_expiration = $this->config['session_expiration'];
+							$session_length = $this->config['session_length'];
 						}
 
 						$_persistent = isset($_POST['persistent']) ? $_POST['persistent'] : 0;
 
-						$this->log_user_in($existing_user, $_persistent, $session_expiration);
+						$this->log_user_in($existing_user, $_persistent, $session_length);
 						$this->set_user($existing_user, 1);
-						$this->update_session_time($existing_user);
 						$this->set_menu(MENU_USER);
 						$this->context[++$this->current_context] = '';
 
