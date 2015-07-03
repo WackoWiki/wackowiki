@@ -23,7 +23,7 @@ $wacko_config_defaults = array(
 
 	'table_prefix' => 'wacko_',
 	'cookie_prefix' => 'wacko_',
-	'session_expiration' => 30, // cookie_expire_days
+	'session_length' => 30, // cookie_expire_days
 	'session_prefix' => 'wacko5',
 
 	'root_page' => 'HomePage',

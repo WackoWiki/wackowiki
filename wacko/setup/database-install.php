@@ -165,7 +165,6 @@ $config_db['category_page']					= $config['category_page'];
 $config_db['comments_count']				= $config['comments_count'];
 $config_db['comment_delay']					= $config['comment_delay'];
 $config_db['cookie_prefix']					= $config['cookie_prefix'];
-$config_db['session_expiration']			= $config['session_expiration'];
 $config_db['date_format']					= $config['date_format'];
 $config_db['date_macro_format']				= $config['date_macro_format'];
 $config_db['date_precise_format']			= $config['date_precise_format'];
@@ -219,10 +218,12 @@ $config_db['log_default_show']				= $config['log_default_show'];
 $config_db['log_level']						= $config['log_level'];
 $config_db['log_purge_time']				= $config['log_purge_time'];
 $config_db['maint_last_cache']				= NULL; // $config['maint_last_cache'];
-$config_db['maint_last_log']				= NULL; // $config['maint_last_log'];
-$config_db['maint_last_refs']				= NULL; // $config['maint_last_refs'];
 $config_db['maint_last_delpages']			= NULL; // $config['maint_last_delpages'];
+$config_db['maint_last_log']				= NULL; // $config['maint_last_log'];
 $config_db['maint_last_oldpages']			= NULL; // $config['maint_last_oldpages'];
+$config_db['maint_last_refs']				= NULL; // $config['maint_last_refs'];
+$config_db['maint_last_session']			= NULL; // $config['maint_last_session'];
+$config_db['maint_last_xml_sitemap']		= NULL; // $config['maint_last_xml_sitemap'];
 $config_db['max_login_attempts']			= $config['max_login_attempts'];
 $config_db['meta_description']				= $config['meta_description'];
 $config_db['meta_keywords']					= $config['meta_keywords'];
@@ -260,6 +261,7 @@ $config_db['revisions_hide_cancel']			= $config['revisions_hide_cancel'];
 $config_db['rewrite_mode']					= $config['rewrite_mode'];
 $config_db['root_page']						= $config['root_page'];
 $config_db['session_encrypt_cookie']		= $config['session_encrypt_cookie'];
+$config_db['session_length']				= $config['session_length'];
 $config_db['session_match_ip']				= $config['session_match_ip'];
 $config_db['session_match_useragent']		= $config['session_match_useragent'];
 $config_db['session_prefix']				= $config['session_prefix'];
@@ -460,6 +462,7 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_
 
 // config
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
+$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_1,		$lang['ErrorUpdatingTable']);
 
 // page
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
@@ -474,6 +477,9 @@ $upgrade_5_4_0[]	= array($lang['CreatingTable'],	'session',		$table_session_r5_4
 // user
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$lang['ErrorAlteringTable']);
+
+// user setting
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']);
 
 // usergroup
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);

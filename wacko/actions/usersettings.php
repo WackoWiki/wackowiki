@@ -125,7 +125,7 @@ else if ($user = $this->get_user())
 					"hide_lastsession	= '".(int)$_POST['hide_lastsession']."', ".
 					"validate_ip		= '".(int)$_POST['validate_ip']."', ".
 					"noid_pubs			= '".(int)$_POST['noid_pubs']."', ".
-					"session_expiration	= '".(int)$_POST['session_expiration']."' "
+					"session_length	= '".(int)$_POST['session_length']."' "
 				:	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
 					"timezone			= '".(float)$_POST['timezone']."', ".
@@ -180,10 +180,9 @@ else if ($user = $this->get_user())
 	// reload user data
 	if ( (isset($_POST['action']) && ($_POST['action'] == 'update' || $_POST['action'] == 'update_extended')) || (isset($_GET['resend_code']) && $_GET['resend_code'] == 1))
 	{
-		$_session_time = $user['session_time'];
 		$this->set_user($this->load_user(0, $user['user_id'], 0, true), 1);
 		$this->set_menu(MENU_USER);
-		$this->set_user_setting('session_time', $_session_time);
+
 		$user = $this->get_user();
 
 		$message .= $this->get_translation('UserSettingsStored', (isset($_POST['lang']) ? $_POST['lang'] : ''));
@@ -324,12 +323,12 @@ else if ($user = $this->get_user())
 	}
 	?>
 	<tr class="lined">
-		<th class="form_left"><label for="session_expiration"><?php echo $this->get_translation('SessionDuration');?></label></th>
+		<th class="form_left"><label for="session_length"><?php echo $this->get_translation('SessionDuration');?></label></th>
 		<td class="form_right">
 			<?php
-			echo '<input type="radio" id="duration1" name="session_expiration" value="1" '.( $user['session_expiration'] == 1 ? 'checked="checked"' : '' ).'/><label for="duration1">'.$this->get_translation('SessionDurationDay').'</label>';
-			echo '<input type="radio" id="duration7" name="session_expiration" value="7" '.( $user['session_expiration'] == 7 ? 'checked="checked"' : '' ).'/><label for="duration7">'.$this->get_translation('SessionDurationWeek').'</label>';
-			echo '<input type="radio" id="duration30" name="session_expiration" value="30" '.( $user['session_expiration'] == 30 ? 'checked="checked"' : '' ).'/><label for="duration30">'.$this->get_translation('SessionDurationMonth').'</label>';
+			echo '<input type="radio" id="duration1" name="session_length" value="1" '.( $user['session_length'] == 1 ? 'checked="checked"' : '' ).'/><label for="duration1">'.$this->get_translation('SessionDurationDay').'</label>';
+			echo '<input type="radio" id="duration7" name="session_length" value="7" '.( $user['session_length'] == 7 ? 'checked="checked"' : '' ).'/><label for="duration7">'.$this->get_translation('SessionDurationWeek').'</label>';
+			echo '<input type="radio" id="duration30" name="session_length" value="30" '.( $user['session_length'] == 30 ? 'checked="checked"' : '' ).'/><label for="duration30">'.$this->get_translation('SessionDurationMonth').'</label>';
 			?>
 		</td>
 	</tr>
