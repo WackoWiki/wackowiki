@@ -32,7 +32,7 @@ if (!function_exists('load_recent_comments'))
 			$pagination = $wacko->pagination($count, $limit);
 
 			$comments = $wacko->load_all(
-				"SELECT b.tag as comment_on_tag, b.title as page_title, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
+				"SELECT b.tag as comment_on_tag, b.title as page_title, b.lang AS page_lang, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
 				"FROM ".$wacko->config['table_prefix']."page a ".
 					"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 					"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
@@ -146,13 +146,24 @@ if ($this->user_allowed_comments())
 
 				$viewed = ( $user['last_mark'] == true && $page['comment_user'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
 
+				// do unicode entities
+				// page lang
+				if ($this->page['lang'] != $page['page_lang'])
+				{
+					$page_lang = $page['page_lang'];
+				}
+				else
+				{
+					$page_lang = '';
+				}
+
 				// print entry
-				echo '<li '.$viewed.'><span class="dt">'.date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
+				echo '<li '.$viewed.'><span class="dt">'.date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
 				($title == 1
-					? $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, '', 0)
-					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'])
+					? $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
+					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'], 0, 1, $page_lang, 0)
 				).
-				") . . . . . . . . . . . . . . . . <small>"./*$this->get_translation('LatestCommentBy').*/" ".
+				" . . . . . . . . . . . . . . . . <small>"./*$this->get_translation('LatestCommentBy').*/" ".
 				($page['comment_user']
 					? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['comment_user']).'">'.$page['comment_user'].'</a>'
 					: $this->get_translation('Guest')).
