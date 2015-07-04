@@ -142,7 +142,7 @@ if ($user = $this->get_user())
 			: ''),
 			$this->get_translation('ExternalPagesGlobal')));
 
-		$query = "SELECT r.page_id, count( r.referrer ) AS num, p.tag, p.title
+		$query = "SELECT r.page_id, count( r.referrer ) AS num, p.tag, p.title, p.lang
 			FROM ".$this->config['table_prefix']."referrer r
 			LEFT JOIN ".$this->config['table_prefix']."page p ON ( p.page_id = r.page_id )
 			GROUP BY r.page_id
@@ -160,7 +160,7 @@ if ($user = $this->get_user())
 								: ''),
 						$this->get_translation('ExternalPagesGlobal')));
 
-		$query = "SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title
+		$query = "SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.lang
 			FROM ".$this->config['table_prefix']."referrer r
 			LEFT JOIN ".$this->config['table_prefix']."page p ON ( p.page_id = r.page_id )
 			ORDER BY r.referrer_time DESC";
@@ -257,9 +257,22 @@ if ($user = $this->get_user())
 						}
 						else
 						{
+							// check current page lang for different charset to do_unicode_entities() against
+							// - page lang
+							if ($this->page['lang'] != $page['lang'])
+							{
+								$_lang = $page['lang'];
+							}
+							else
+							{
+								$_lang = '';
+							}
+
 							#$page_link = $this->compose_link_to_page($page['tag']);
-							$page_link = $this->link('/'.$page['tag'], '', $page['title']);
+							$page_link = $this->link('/'.$page['tag'], '', $page['title'], '', '', '', $_lang);
 						}
+
+
 
 						echo '<li><strong>'.$page_link.'</strong>'.' ('.$page['num'].')';
 						$referrers = $this->load_referrers($page['page_id']);
@@ -361,8 +374,19 @@ if ($user = $this->get_user())
 						}
 						else
 						{
+							// check current page lang for different charset to do_unicode_entities() against
+							// - page lang
+							if ($this->page['lang'] != $referrer['lang'])
+							{
+								$_lang = $referrer['lang'];
+							}
+							else
+							{
+								$_lang = '';
+							}
+
 							#$page_link = $this->compose_link_to_page($page['tag']);
-							$page_link = $this->link('/'.$referrer['tag'], '', $referrer['title']);
+							$page_link = $this->link('/'.$referrer['tag'], '', $referrer['title'], '', '', '', $_lang);
 						}
 
 						// shorten url name if too long
