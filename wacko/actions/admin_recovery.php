@@ -29,38 +29,38 @@ if ($this->is_admin())
 		// confirmed password mismatch
 		if ($confpassword != $password)
 		{
-			$error .= $this->get_translation('PasswordsDidntMatch')." ";
+			$error .= $this->get_translation('PasswordsDidntMatch').' ';
 		}
 		// spaces in password
 		else if (preg_match('/ /', $password))
 		{
-			$error .= $this->get_translation('SpacesArentAllowed')." ";
+			$error .= $this->get_translation('SpacesArentAllowed').' ';
 		}
 		// password complexity validation
 		else if ($complexity > 0)
 		{
 			if ($complexity >= 5)
 			{
-				$error .= $this->get_translation('PwdCplxWeak')." ";
+				$error .= $this->get_translation('PwdCplxWeak').' ';
 				$complexity -= 5;
 			}
 
 			if ($complexity >= 2)
 			{
-				$error .= $this->get_translation('PwdCplxShort')." ";
+				$error .= $this->get_translation('PwdCplxShort').' ';
 				$complexity -= 2;
 			}
 
 			if ($complexity >= 1)
 			{
-				$error .= $this->get_translation('PwdCplxEquals')." ";
+				$error .= $this->get_translation('PwdCplxEquals').' ';
 				$complexity -= 1;
 			}
 		}
 		else
 		{
 			echo '<div class="notice">';
-			echo '\'recovery_password\' => \''.hash('sha256', $this->config['system_seed'].$password).'\','."<br /><br />";
+			echo '\'recovery_password\' => \''.hash('sha256', $this->config['system_seed'].$password).'\','.'<br /><br />';
 			echo '</div>';
 		}
 	}
@@ -95,19 +95,19 @@ if ($this->is_admin())
 			$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
 		}
 
-		$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
+		$pwd_cplx_text .= '. '.$this->get_translation('PwdCplxDesc5');
 	}
 
-	echo "<br /><small>".
+	echo '<br /><small>'.
 		$this->get_translation('PwdCplxDesc1').
 		str_replace('%1', $this->config['pwd_min_chars'],
 		$this->get_translation('PwdCplxDesc2')).
 		($this->config['pwd_unlike_login'] > 0
-			? ", ".$this->get_translation('PwdCplxDesc3')
-			: "").
+			? ', '.$this->get_translation('PwdCplxDesc3')
+			: '').
 		($this->config['pwd_char_classes'] > 0
-			? ", ".$pwd_cplx_text
-			: "")."</small>";
+			? ', '.$pwd_cplx_text
+			: '').'</small>';
 	echo '</p>';
 
 	echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';
