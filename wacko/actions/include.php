@@ -12,9 +12,10 @@ if (!isset($nowarning))		$nowarning = '';
 if (!isset($revision_id))	$revision_id = '';
 
 $page = $this->unwrap_link($page);
-if (!isset($first_anchor))		$first_anchor = '';
-if (!isset($last_anchor))		$last_anchor = '';
-if (!isset($track))				$track = '';
+
+if (!isset($first_anchor))	$first_anchor = '';
+if (!isset($last_anchor))	$last_anchor = '';
+if (!isset($track))			$track = '';
 
 if ($_SESSION[$this->config['session_prefix'].'_'.'linktracking'] && $track)
 {
@@ -47,7 +48,7 @@ else
 
 	if (!$inc_page = $this->load_page($page, 0, $revision_id))
 	{
-		echo "<em> ".$this->get_translation('SourcePageDoesntExist')."(".$this->link('/'.$page).")</em>\n";
+		echo '<em> '.$this->get_translation('SourcePageDoesntExist').'('.$this->link('/'.$page).")</em>\n";
 	}
 	else
 	{
@@ -69,25 +70,42 @@ else
 		$strings = preg_replace("/.*<!--action:begin-->anchor name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->anchor name=\"?$last_anchor\"?<!--action:end-->.*$/is", "\$1", $strings);
 
 		// header
-		if (($this->method != 'print') && ($nomark != 1) && ($nomark != 2 || $this->has_access('write', $page_id)))
+		if (($this->method != 'print')
+			&& ($nomark != 1)
+			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			echo "\n<div class=\"include\">\n"."<div class=\"name\">".$this->link('/'.$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
-				"<a href=\"".$this->href('edit', $inc_page['tag'])."\">".$this->get_translation('EditIcon')."</a></div>\n";
+			$edit_link = '<div class="name">'.
+
+				// show page link
+				$this->link('/'.$inc_page['tag']).
+
+				// show edit link
+				($this->has_access('write', $page_id)
+					? '&nbsp;&nbsp;::&nbsp;'.
+					  '<a href="'.$this->href('edit', $inc_page['tag']).'">'.$this->get_translation('EditIcon').'</a>'
+					: '').
+
+				"</div>\n";
+
+			echo "\n".'<div class="include">'."\n".$edit_link;
 		}
 
 		// body
 		$this->stop_link_tracking();
 		$this->context[++$this->current_context] = $inc_page['tag'];
+
 		echo $this->format($strings, 'post_wacko');
+
 		$this->context[$this->current_context] = '~~'; // clean stack
 		$this->current_context--;
 		$this->start_link_tracking();
 
 		// footer
-		if (($this->method != 'print') && ($nomark !=1 ) && ($nomark != 2 || $this->has_access('write', $page_id)))
+		if (($this->method != 'print')
+			&& ($nomark != 1)
+			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			echo "\n<div class=\"name\">".$this->link('/'.$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
-				"<a href=\"".$this->href('edit', $inc_page['tag'])."\">".$this->get_translation('EditIcon')."</a></div>\n</div>\n";
+			echo "\n".$edit_link."</div>\n";
 		}
 	}
 }
