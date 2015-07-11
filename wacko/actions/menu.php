@@ -253,31 +253,35 @@ if ($_user_id)
 
 		foreach($_menu as $menu_item)
 		{
-			echo '<tr class=\"lined\">
+			echo '<tr class="lined">
 			<td class="">
-				<input type="number" name="pos_'.$menu_item['menu_id'].'" size="2" value="'.$menu_item['menu_position'].'" />
-			</td><td>
+				<input type="number" name="pos_'.$menu_item['menu_id'].'" size="2" style="width: 40px;" value="'.$menu_item['menu_position'].'" />
+			</td>
+			<td>
 				<input type="text" name="title_'.$menu_item['menu_id'].'" size="40" value="'.$menu_item['menu_title'].'" />
-			</td><td>
+			</td>
+			<td>
 				<!--<input type="radio" id="menu_item'.$menu_item['menu_id'].'" name="change" value="'.$menu_item['menu_id'].'" /> -->
-			<label for="menu_item'.$menu_item['menu_id'].'" title="'.$menu_item['title'].'">&raquo; '.$menu_item['tag'].'</label>
-			</td><td>
+				<label for="menu_item'.$menu_item['menu_id'].'" title="'.$menu_item['title'].'">&raquo; '.$menu_item['tag'].'</label>
+			</td>
+			<td style="text-align:center;" >
 				<input type="checkbox" id="menu_item'.$menu_item['menu_id'].'" name="delete_'.$menu_item['menu_id'].'" />
-			</td><!--<td>
+			</td>
+			<!--<td>
 
 			'.(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title']).'
 			</td>-->';
 
 			if ($system)
 			{
-				echo '<td>'.(!empty($menu_item['lang']) ? $menu_item['lang'] : '');
+				echo '<td>'.(!empty($menu_item['lang']) ? $menu_item['lang'] : '')."</td>\n";
 			}
 
-			echo "</td>\n</tr>\n";
+			echo "</tr>\n";
 		}
 
 		echo '<tfoot>';
-		echo "<tr>\n<td colspan=\"2\">\n";
+		echo "<tr>\n".'<td colspan="3">'."\n";
 		echo '<input name="update_menu" type="submit" value="'.$this->get_translation('BookmarkSaveChanges').'" />';
 		echo '</td><td>';
 		echo '<input name="delete_menu_item" type="submit" value="'.$this->get_translation('BookmarkDeleteSelected').'" />';
