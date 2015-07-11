@@ -42,7 +42,7 @@ if (isset($_GET['markread']) && $user == true)
 	$user = $this->get_user();
 }
 
-if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, $date, $hide_minor_edit))
+if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $hide_minor_edit))
 {
 	$count	= 0;
 

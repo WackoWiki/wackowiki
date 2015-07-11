@@ -1385,7 +1385,7 @@ class Wacko
 			" ORDER BY tag", 1);
 	}
 
-	function load_recently_changed($limit = 100, $for = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
+	function load_changed($limit = 100, $for = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
 	{
 		$limit = (int)$limit;
 
@@ -1466,7 +1466,7 @@ class Wacko
 		}
 	}
 
-	function load_recently_comment($limit = 100, $for = '', $deleted = 0)
+	function load_comment($limit = 100, $for = '', $deleted = 0)
 	{
 		$limit = (int) $limit;
 
@@ -1516,7 +1516,7 @@ class Wacko
 		}
 	}
 
-	function load_recently_deleted($limit = 1000, $cache = true)
+	function load_deleted($limit = 1000, $cache = true)
 	{
 		$meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.keywords, p.description';
 
@@ -5307,7 +5307,7 @@ class Wacko
 
 		// purge deleted pages (once per 3 days)
 		if (($days = $this->config['keep_deleted_time']) && (time() > ($this->config['maint_last_delpages'] + 3 * 86400)) &&
-		($pages = $this->load_recently_deleted(1000, 0)))
+		($pages = $this->load_deleted(1000, 0)))
 		{
 			// composing a list of candidates
 			if (is_array($pages))

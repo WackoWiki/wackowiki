@@ -61,7 +61,7 @@ class RSS
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-		if (list ($pages, $pagination) = $this->engine->load_recently_changed())
+		if (list ($pages, $pagination) = $this->engine->load_changed())
 		{
 			foreach ($pages as $i => $page)
 			{
@@ -241,7 +241,7 @@ class RSS
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-		if ($comments = $this->engine->load_recently_comment())
+		if ($comments = $this->engine->load_comment())
 		{
 			foreach ($comments as $i => $comment)
 			{
