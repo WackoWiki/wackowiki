@@ -2423,10 +2423,17 @@ class Wacko
 					}
 				}
 
-				if (isset($this->config['x_csp']))
+				if (isset($this->config['csp']))
 				{
-					// TODO: add option to put custom settings e.g. via constant
-					header( "X-Content-Security-Policy: allow 'self'; script-src 'self'; options inline-script; img-src *;" );
+					if ($this->config['csp'] == 1)
+					{
+						// http://www.w3.org/TR/CSP2/
+						header( "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;" );
+					}
+					else if ($this->config['csp'] == 2)
+					{
+						header( CSP_CUSTOM );
+					}
 				}
 
 				if ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] != 'off' ) )
@@ -2510,26 +2517,6 @@ class Wacko
 		return $tag;
 	}
 
-	// returns just PageName[/method].
-	function mini_href($method = '', $tag = '', $addpage = 0)
-	{
-		if (!$tag = trim($tag))
-		{
-			$tag = $this->tag;
-		}
-
-		if (!$addpage)
-		{
-			$tag = $this->slim_url($tag);
-		}
-		// if (!$addpage)		$tag = $this->translit($tag);
-
-		$tag = trim($tag, '/.');
-		// $tag = str_replace(array('%2F', '%3F', '%3D'), array('/', '?', '='), rawurlencode($tag));
-
-		return $tag.($method ? '/'.$method : '');
-	}
-
 	// returns the full url to a page/method.
 	function href($method = '', $tag = '', $params = '', $addpage = false, $anchor = '')
 	{
@@ -2565,9 +2552,32 @@ class Wacko
 		return $href;
 	}
 
+	// returns just PageName[/method].
+	function mini_href($method = '', $tag = '', $addpage = 0)
+	{
+		if (!$tag = trim($tag))
+		{
+			$tag = $this->tag;
+		}
+
+		if (!$addpage && $this->config['ap_mode'] === false)
+		{
+			$tag = $this->slim_url($tag);
+		}
+		// if (!$addpage)		$tag = $this->translit($tag);
+
+		$tag = trim($tag, '/.');
+		// $tag = str_replace(array('%2F', '%3F', '%3D'), array('/', '?', '='), rawurlencode($tag));
+
+		return $tag.($method ? '/'.$method : '');
+	}
+
 	function slim_url($text)
 	{
 		$text = $this->translit($text, TRAN_DONTCHANGE); // TODO: set config option ?
+		// why we do this, what are the assumptions?
+		//	dont want this behavior in the AP, it breaks the redirect for e.g. config_basic.php
+		//	looks like an undo of the reverse in the tranlit function
 		$text = str_replace('_', "'", $text);
 
 		if ($this->config['urls_underscores'] == 1)

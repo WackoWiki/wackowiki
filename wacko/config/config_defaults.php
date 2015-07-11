@@ -238,7 +238,7 @@ $wacko_config_defaults = array(
 
 	'enable_security_headers' => 1,
 	'x_frame_option' => 1,
-	'x_csp' => 1,
+	'csp' => 1,
 
 	'form_token_time' => 7200,
 	'form_token_sid_guests' => 1,
