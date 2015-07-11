@@ -26,7 +26,7 @@ else if ($this->forum === true && !$this->is_admin())
 	$this->redirect($this->href());
 }
 
-if ($this->user_is_owner() || $this->is_admin())
+if ($this->is_owner() || $this->is_admin())
 {
 	// check who u are, can u upload?
 	if ($user = $this->get_user())

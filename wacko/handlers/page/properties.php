@@ -29,7 +29,7 @@ else if ($this->forum === true && !$this->is_admin())
 	$this->redirect($this->href());
 }
 
-if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
+if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
 	if ($_POST)
 	{
@@ -105,7 +105,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 
 		// load settings (shows only if owner is current user or Admin)
-		if ($this->user_is_owner() || $this->is_admin())
+		if ($this->is_owner() || $this->is_admin())
 		{
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaComments')."</th>";
@@ -208,7 +208,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 		// show form
 		// load settings (shows only if owner is current user or Admin)
-		if ($this->user_is_owner() || $this->is_admin())
+		if ($this->is_owner() || $this->is_admin())
 		{
 			echo '<tr class="lined">';
 			echo '<th class="form_left" scope="row"><label for="title">'.$this->get_translation('MetaTitle').'</label></th>';
@@ -354,13 +354,13 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	echo '<li><a href="'.$this->href('clone').'">'.$this->get_translation('SettingsClone').'</a></li>';
 
 	// Rename link (shows only if owner is current user or Admin)
-	if ($this->user_is_owner() || $this->is_admin())
+	if ($this->is_owner() || $this->is_admin())
 	{
 		echo "<li><a href=\"".$this->href('rename')."\">".$this->get_translation('SettingsRename')."</a></li>";
 	}
 
 	// Remove link (shows only for page owner if allowed)
-	if ($this->user_is_owner() && !$this->config['remove_onlyadmins'] || $this->is_admin())
+	if ($this->is_owner() && !$this->config['remove_onlyadmins'] || $this->is_admin())
 	{
 		echo "<li><a href=\"".$this->href('remove')."\">".$this->get_translation('SettingsRemove')."</a></li>\n";
 		echo "<li><a href=\"".$this->href('purge')."\">".$this->get_translation('SettingsPurge')."</a></li>\n";
@@ -373,7 +373,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	}
 
 	// ACL link (shows only if owner is current user or Admin)
-	if ($this->user_is_owner() || $this->is_admin())
+	if ($this->is_owner() || $this->is_admin())
 	{
 		echo "<li><a href=\"".$this->href('permissions')."\">".$this->get_translation('SettingsPermissions')."</a></li>\n";
 	}

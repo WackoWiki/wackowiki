@@ -226,7 +226,7 @@ echo $this->form_close();
 		$this->get_translation('EditTip'),
 		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 			($this->forum === false && $this->has_access('write')) ||
-			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+			($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
 			? $this->get_translation('EditText') : '',
 		$this->method == 'edit',
 		1,
@@ -245,7 +245,7 @@ echo $this->form_close();
 	echo echo_tab(
 		$this->href('properties'),
 		$this->get_translation('PropertiesTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('PropertiesText') : '',
+		($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('PropertiesText') : '',
 		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
 		1,
 		's');
@@ -277,7 +277,7 @@ echo $this->form_close();
 			$this->get_translation('CreateNewPageTip'),
 			((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 				($this->forum === false && $this->has_access('write')) ||
-				($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+				($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
 				? $this->get_translation('CreateNewPageText') : '',
 			$this->method == 'new',
 			2,
@@ -288,8 +288,8 @@ echo $this->form_close();
 			$this->href('remove'),
 			$this->get_translation('DeleteTip'),
 			($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
-				($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
-				($this->forum === false && $this->user_is_owner()))))
+				($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
+				($this->forum === false && $this->is_owner()))))
 				? $this->get_translation('DeleteText') : '',
 			$this->method == 'remove',
 			2,
@@ -299,9 +299,9 @@ echo $this->form_close();
 		echo echo_tab(
 			$this->href('rename'),
 			$this->get_translation('RenameTip'),
-			($this->page && ($this->is_admin() || $this->user_is_owner() && (
-				($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
-				($this->forum === false && $this->user_is_owner()))))
+			($this->page && ($this->is_admin() || $this->is_owner() && (
+				($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
+				($this->forum === false && $this->is_owner()))))
 				? $this->get_translation('RenameText') : '',
 			$this->method == 'rename',
 			2,
@@ -320,7 +320,7 @@ echo $this->form_close();
 		echo echo_tab(
 			$this->href('permissions'),
 			$this->get_translation('ACLTip'),
-			($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('ACLText') : '',
+			($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('ACLText') : '',
 			$this->method == 'permissions',
 			2,
 			'a');
@@ -329,7 +329,7 @@ echo $this->form_close();
 		echo echo_tab(
 			$this->href('categories'),
 			$this->get_translation('CategoriesTip'),
-			($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('CategoriesText') : '',
+			($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('CategoriesText') : '',
 			$this->method == 'categories',
 			2,
 			'c');
@@ -347,7 +347,7 @@ echo $this->form_close();
 		echo echo_tab(
 			$this->href('watch'),
 			($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
-			#($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+			#($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
 			($this->page && ($this->get_user())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
 			$this->method == 'watch',
 			($this->iswatched === true ? 'watch-on.png' : 'watch-off.png'),

@@ -25,7 +25,7 @@ else if ($this->forum === true)
 }
 
 // TODO: config->owners_can_remove_comments ?
-if ($this->user_is_owner() || $this->is_admin())
+if ($this->is_owner() || $this->is_admin())
 {
 	if (isset($_POST['purge']) && $_POST['purge'] == 1)
 	{

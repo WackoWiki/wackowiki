@@ -112,7 +112,7 @@ require ('themes/_common/_header.php');
 						<div class="modulecontent">
 						<?php
 	// Revisions link
-	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() )
+	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() )
 			? "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a>\n"
 			: "".$this->get_time_string_formatted($this->page['modified'])."\n"
 		);
@@ -132,14 +132,14 @@ require ('themes/_common/_header.php');
 							if ($this->page)
 							{
 								// if owner is current user
-								if ($this->user_is_owner()) {
+								if ($this->is_owner()) {
 									echo '<br />';
 									print(" <a href=\"".$this->href('rename')."\">".$this->get_translation('RenameText')."</a>");
 									echo '<br />';
 									print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"").">".$this->get_translation('ACLText')."</a>");
 								}
 
-								if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner())
+								if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner())
 								{
 									echo '<br />';
 									print(" <a href=\"".$this->href('rename')."\">".$this->get_translation('RenameText')."</a>");
@@ -159,7 +159,7 @@ require ('themes/_common/_header.php');
 
 								//print $this->format( '{{TOC}}' );
 
-								if ($this->user_is_owner())
+								if ($this->is_owner())
 								{
 									echo "<hr />";
 									print($this->get_translation('YouAreOwner'));

@@ -24,7 +24,7 @@ $options	= '';
 // redirect to show method if page don't exists
 if (!$this->page) $this->redirect($this->href('show'));
 
-if ($this->user_is_owner() || $this->is_admin())
+if ($this->is_owner() || $this->is_admin())
 {
 	/////////////////////////////////////////////
 	//   list change/update

@@ -26,7 +26,7 @@ if ($this->page)
 				: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
 			);
 		// If owner is current user
-		if ($this->user_is_owner())
+		if ($this->is_owner())
 		{
 			echo "<li>".$this->get_translation('YouAreOwner')."</li>\n";
 
@@ -73,12 +73,12 @@ if ($this->page)
 		}
 
 		// Rename link
-		if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner())
+		if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner())
 		{
 			print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/rename.png\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n");
 		}
 		// Remove link (shows only for Admins)
-		if ($this->is_admin() && !$this->user_is_owner())
+		if ($this->is_admin() && !$this->is_owner())
 		{
 			print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icons/delete.png\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n");
 

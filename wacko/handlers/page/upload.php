@@ -43,7 +43,7 @@ if ($registered
 	($this->check_acl($user_name, $this->config['upload']))
 	)
 	&&
-	($this->has_access('upload') && $this->has_access('write') && $this->has_access('read') || $this->user_is_owner() || $this->is_admin() || (isset($_POST['to']) && $_POST['to'] == 'global'))
+	($this->has_access('upload') && $this->has_access('write') && $this->has_access('read') || $this->is_owner() || $this->is_admin() || (isset($_POST['to']) && $_POST['to'] == 'global'))
 	)
 {
 	if (isset($_GET['remove'])) // show the form
