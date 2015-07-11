@@ -38,7 +38,7 @@ if ($registered
 ($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
 ($this->check_acl($user_name, $this->config['upload']))
 )
-&& ($this->has_access('upload') && $this->has_access('write') && $this->has_access('read')) || $this->user_is_owner() || $this->is_admin()
+&& ($this->has_access('upload') && $this->has_access('write') && $this->has_access('read')) || $this->is_owner() || $this->is_admin()
 )
 {
 	// displaying

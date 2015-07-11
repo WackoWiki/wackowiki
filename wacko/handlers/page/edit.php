@@ -24,7 +24,8 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
-	|| ($this->page['comment_on_id'] && $this->user_is_owner())
+	|| ($this->page['comment_on_id'] && $this->is_owner())
+	|| ($this->page['comment_on_id'] && $this->is_admin())
 	|| (!$this->page && $this->has_access('create'))))
 {
 	// check for reserved word

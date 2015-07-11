@@ -4588,7 +4588,7 @@ class Wacko
 	}
 
 	// returns true if logged in user is owner of current page, or page specified in $tag
-	function user_is_owner($page_id = '')
+	function is_owner($page_id = '')
 	{
 		// check if user is logged in
 		if (!$this->get_user())
@@ -4834,7 +4834,7 @@ class Wacko
 		// if current user is owner or admin, return true. they can do anything!
 		if ($user_name == '' && $user_name != GUEST)
 		{
-			if ($this->user_is_owner($page_id) || $this->is_admin())
+			if ($this->is_owner($page_id) || $this->is_admin())
 			{
 				return true;
 			}
@@ -5722,7 +5722,7 @@ class Wacko
 		}
 
 		// check revision hideing (1 - guests, 2 - registered users)
-		if ( $this->page && ( $this->config['hide_revisions'] === true || ($this->config['hide_revisions'] == 1 && !$this->get_user()) || ($this->config['hide_revisions'] == 2 && !$this->user_is_owner())  ) )
+		if ( $this->page && ( $this->config['hide_revisions'] === true || ($this->config['hide_revisions'] == 1 && !$this->get_user()) || ($this->config['hide_revisions'] == 2 && !$this->is_owner())  ) )
 		{
 			$this->hide_revisions = true;
 		}

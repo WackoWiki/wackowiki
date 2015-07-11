@@ -346,7 +346,7 @@ echo "\n";
 		$this->get_translation('EditTip'),
 		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 			($this->forum === false && $this->has_access('write')) ||
-			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+			($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
 			? $this->get_translation('EditText') : '',
 		$this->method == 'edit',
 		'e');
@@ -355,7 +355,7 @@ echo "\n";
 	echo echo_tab(
 		$this->href('revisions'),
 		$this->get_translation('RevisionTip'),
-		((($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() ) && $this->forum === false && $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
+		((($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() ) && $this->forum === false && $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
 		$this->method == 'revisions' || $this->method == 'diff',
 		'r');
 
@@ -364,8 +364,8 @@ echo "\n";
 		$this->href('remove'),
 		$this->get_translation('DeleteTip'),
 		($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
-			($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
-			($this->forum === false && $this->user_is_owner()))))
+			($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
+			($this->forum === false && $this->is_owner()))))
 			? $this->get_translation('DeleteText')  : '',
 		$this->method == 'remove');
 
@@ -389,7 +389,7 @@ echo "\n";
 	echo echo_tab(
 		$this->href('properties'),
 		$this->get_translation('PropertiesTip'),
-		(/* $this->forum === false && $this->page && */ ($this->is_admin() /*|| $this->is_moderator() */|| $this->user_is_owner())) ? $this->get_translation('PropertiesText') : '',
+		(/* $this->forum === false && $this->page && */ ($this->is_admin() /*|| $this->is_moderator() */|| $this->is_owner())) ? $this->get_translation('PropertiesText') : '',
 		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
 		's');
 
@@ -405,7 +405,7 @@ echo "\n";
 	echo echo_tab(
 		$this->href('permissions'),
 		$this->get_translation('ACLTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('ACLText') : '',
+		($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('ACLText') : '',
 		$this->method == 'permissions',
 		'a');
 ?>

@@ -93,7 +93,7 @@ if ($this->page)
 		}
 
 		// if owner is current user
-		if ($this->user_is_owner())
+		if ($this->is_owner())
 		{
 			echo_tab(
 			$this->href('permissions'),
@@ -105,7 +105,7 @@ if ($this->page)
 			);
 		}
 
-		if ($this->is_admin() || (!$this->config['remove_onlyadmins'] && $this->user_is_owner()))
+		if ($this->is_admin() || (!$this->config['remove_onlyadmins'] && $this->is_owner()))
 		{
 			echo_tab(
 			$this->href('remove'),
@@ -148,7 +148,7 @@ if ($this->page)
 	if ($this->has_access('read'))
 	{
 		// if owner is current user
-		if ($this->user_is_owner())
+		if ($this->is_owner())
 		{
 			echo $this->get_translation('YouAreOwner');
 		}

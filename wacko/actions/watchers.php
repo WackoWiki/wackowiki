@@ -18,7 +18,7 @@ else
 	$page_id = $this->page['page_id'];
 }
 
-if ($this->user_is_owner($page_id))
+if ($this->is_owner($page_id))
 {
 	$watchers = $this->load_all(
 		"SELECT w.*, u.user_name ".

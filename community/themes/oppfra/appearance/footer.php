@@ -18,13 +18,13 @@ echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"
 if ($this->page)
 {
 	// Revisions link
-	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() )
+	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() )
 			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
 			: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
 		);
 
 	// If owner is current user
-	if ($this->user_is_owner())
+	if ($this->is_owner())
 	{
 		echo "<li>".$this->get_translation('YouAreOwner')."</li>\n";
 
@@ -67,12 +67,12 @@ if ($this->page)
 	}
 
 	// Rename link
-	if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner())
+	if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner())
 	{
 		print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/rename.png\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n");
 	}
 	// Remove link (shows only for Admins)
-	if ($this->is_admin() && !$this->user_is_owner())
+	if ($this->is_admin() && !$this->is_owner())
 	{
 		print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icons/delete.png\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n");
 
@@ -85,7 +85,7 @@ if ($this->page)
 		// Page  settings link
 		print("<li><a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditPropertiesConfirm')."');\"":"").">".$this->get_translation('PropertiesText')."</a></li>\n");
 
-		if ($this->user_is_owner() || $this->is_admin())
+		if ($this->is_owner() || $this->is_admin())
 		{
 			// Add Categories link (shows only for page owner if allowed)
 			print("<li><a href=\"".$this->href('categories')."\"".(($this->method=='categories') ? " onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"" : "")."><img src=\"".$this->config['theme_url']."icons/add_tag.png\" title=\"".$this->get_translation('CategoriesTip')."\" alt=\"".$this->get_translation('CategoriesTip')."\" /></a></li>\n");

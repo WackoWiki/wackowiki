@@ -107,7 +107,7 @@ echo $this->form_close();
 if ($this->page)
 {
  // If owner is current user
- if ($this->user_is_owner())
+ if ($this->is_owner())
  {
    print($this->get_translation('YouAreOwner')."<br /> \n");
 
@@ -139,7 +139,7 @@ echo ($this->is_watched === true ? "<a href=\"".$this->href('watch')."\">".$this
   <br />
   <?php
  // Rename link
- if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner())
+ if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner())
  {
    print("<a href=\"".$this->href('rename')."\">".$this->get_translation('RenameText')."</a><br />");
  }
@@ -153,7 +153,7 @@ if ($this->is_admin()){
 ?><hr noshade="noshade" />
 <?php
 	// Revisions link
-	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() )
+	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() )
 			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
 			: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
 		);
