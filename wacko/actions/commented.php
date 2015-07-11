@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!function_exists('load_recently_commented'))
+if (!function_exists('load_commented'))
 {
-	function load_recently_commented(&$wacko, $for = '', $limit = 50, $deleted = 0)
+	function load_commented(&$wacko, $for = '', $limit = 50, $deleted = 0)
 	{
 		$_ids		= '';
 		$limit		= (int) $limit;
@@ -103,7 +103,7 @@ if ($this->user_allowed_comments())
 		$user = $this->get_user();
 	}
 
-	if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max))
+	if (list ($pages, $pagination) = load_commented($this, $root, (int)$max))
 	{
 		if ($user == true)
 		{
