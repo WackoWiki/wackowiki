@@ -183,8 +183,6 @@ else
 					if ($existing_user['password'] == $_processed_password)
 					{
 						// define session duration in days
-						$_session = isset($_POST['session']) ? $_POST['session'] : null;
-
 						if (!empty($existing_user['session_length']))
 						{
 							$session_length = $existing_user['session_length'];
