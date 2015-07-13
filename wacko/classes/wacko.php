@@ -2576,8 +2576,8 @@ class Wacko
 	{
 		$text = $this->translit($text, TRAN_DONTCHANGE); // TODO: set config option ?
 		// why we do this, what are the assumptions?
-		//	dont want this behavior in the AP, it breaks the redirect for e.g. config_basic.php
-		//	looks like an undo of the reverse in the tranlit function
+		//	this behavior in unwanted in the AP, it breaks the redirect for e.g. config_basic.php
+		//	looks like an undo of the reverse in the tranlit function (?)
 		$text = str_replace('_', "'", $text);
 
 		if ($this->config['urls_underscores'] == 1)
@@ -2611,7 +2611,7 @@ class Wacko
 	}
 
 	// preparing links to save them to body_r
-	function pre_link($tag, $text = '', $track = 1, $imgurl = 0)
+	function pre_link($tag, $text = '', $track = 1, $img_url = 0)
 	{
 		// if (!$text) $text = $this->add_spaces($tag);
 
@@ -2626,7 +2626,7 @@ class Wacko
 
 		$text = str_replace('%20', ' ', urldecode($text));
 
-		if ($imgurl == 1)
+		if ($img_url == 1)
 		{
 			return '<!--imglink:begin-->'.str_replace(' ', '%20', urldecode($tag)).' =='.$text.'<!--imglink:end-->';
 		}
@@ -2947,7 +2947,7 @@ class Wacko
 		}
 		else if ($this->config['disable_tikilinks'] != 1 && preg_match('/^('.$this->language['UPPER'].$this->language['LOWER'].$this->language['ALPHANUM'].'*)\.('.$this->language['ALPHA'].$this->language['ALPHANUM'].'+)$/s', $tag, $matches))
 		{
-			// it`s a Tiki link!
+			// it`s a Tiki link! (Tiki.Link -> /Tiki/Link)
 			$tag	= '/'.$matches[1].'/'.$matches[2];
 
 			if (!$text)
@@ -3555,7 +3555,7 @@ class Wacko
 
 		$result	= '<form action="'.$this->href($page_method, $tag, $href_param, $add).'" '.$form_more.' method="'.$form_method.'" '.($form_name ? 'name="'.$form_name.'" ' : '').">\n";
 
-		if (!$this->config['rewrite_mode'])
+		if (!$this->config['rewrite_mode']  && $this->config['ap_mode'] === false)
 		{
 			$result .= '<input type="hidden" name="page" value="'.$this->mini_href($page_method, $tag, $add)."\" />\n";
 		}
@@ -5257,22 +5257,59 @@ class Wacko
 	// set config value
 	function set_config($config_name, $config_value, $is_dynamic = false, $delete_cache = false)
 	{
-		if (isset($this->config[$config_name]))
+		// FIXME: do not take into account that the array is merged with default_config
+		// and it may try to update unsuccessfully the secondary config where it should do an INSERT instead
+		// check also if the value has chaned
+		/* if (isset($this->config[$config_name]))
 		{
-			$sql = "UPDATE {$this->config['table_prefix']}config
-				SET config_value = '".quote($this->dblink, $config_value)."'
-				WHERE config_name = '".quote($this->dblink, $config_name)."'";
+			$sql = "UPDATE {$this->config['table_prefix']}config SET
+						config_value = '".quote($this->dblink, $config_value)."'
+					WHERE config_name = '".quote($this->dblink, $config_name)."'";
 		}
 		else
 		{
 			$sql = "INSERT INTO {$this->config['table_prefix']}config SET ".
-				"config_name	= '".quote($this->dblink, $config_name)."', ".
-				"config_value	= '".quote($this->dblink, $config_value)."'";
+						"config_name	= '".quote($this->dblink, $config_name)."', ".
+						"config_value	= '".quote($this->dblink, $config_value)."'";
+		}
+		*/
+
+		$config[$config_name]	= $config_value;
+
+		$this->_set_config($config, $is_dynamic = false, $delete_cache = false);
+	}
+
+	function _set_config($config, $is_dynamic = false, $delete_cache = false)
+	{
+		$config_insert	= '';
+		$i				= '';
+		// if (is_array()){}
+		foreach($config as $config_name => $config_value)
+		{
+			if ($i > 0)
+			{
+				$config_insert .= ", ";
+			}
+
+			$config_insert .= "(0, '$config_name', '$config_value')";
+
+			$this->config[$config_name] = $config_value;
+
+			$i++;
 		}
 
-		$this->sql_query($sql);
+		unset($i);
 
-		$this->config[$config_name] = $config_value;
+		// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
+		// http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
+
+		$sql = "INSERT INTO {$this->config['table_prefix']}config (config_id, config_name, config_value)
+				VALUES ".$config_insert." ".
+				"ON DUPLICATE KEY UPDATE
+					config_name		= VALUES(config_name),
+					config_value	= VALUES(config_value);";
+
+		$this->sql_query($sql);
 
 		if (!$is_dynamic && $delete_cache)
 		{
@@ -5509,6 +5546,7 @@ class Wacko
 		{
 			$login_token	= hash('sha1', $auth['login_token']);
 			$user			= $this->load_user(false, 0, $auth['password'], true, $login_token );
+			#$this->debug_print_r($user);
 		}
 
 		// run in tls mode?
@@ -5523,9 +5561,11 @@ class Wacko
 		// in strong cookie mode check session validity
 		if ($this->config['session_encrypt_cookie'] == true)
 		{
-			if ($user['session_expire'] != 0 && time() < $user['session_expire'] &&
-			time() < $auth['session_expire'] && $user['session_expire'] == $auth['session_expire'] &&
-			$auth['recalc_mac'] == $auth['cookie_mac'])
+			if ($user['session_expire'] != 0
+				&& time() < $user['session_expire']
+				&& time() < $auth['session_expire']
+				&& $user['session_expire'] == $auth['session_expire']
+				&& $auth['recalc_mac'] == $auth['cookie_mac'])
 			{
 				$session = true;
 			}
