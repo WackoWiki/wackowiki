@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Basic settings                                   ##
 ########################################################
 
-$module['configbasic'] = array(
+$module['config_basic'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'mode'	=> 'configbasic',
+		'status'=> true,
+		'mode'	=> 'config_basic',
 		'name'	=> 'Basic',
 		'title'	=> 'Basic parameters',
 	);
 
 ########################################################
 
-function admin_configbasic(&$engine, &$module)
+function admin_config_basic(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -41,6 +42,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['footer_comments']			= (int)$_POST['footer_comments'];
 		$config['footer_files']				= (int)$_POST['footer_files'];
 		$config['footer_rating']			= (int)$_POST['footer_rating'];
+		$config['footer_tags']				= (int)$_POST['footer_tags'];
 		$config['hide_revisions']			= (int)$_POST['hide_revisions'];
 		$config['hide_toc']					= (int)$_POST['hide_toc'];
 		$config['hide_index']				= (int)$_POST['hide_index'];
@@ -60,19 +62,15 @@ function admin_configbasic(&$engine, &$module)
 		$config['enable_feeds']				= (int)$_POST['enable_feeds'];
 		$config['enable_comments']			= (int)$_POST['enable_comments'];
 
-		foreach($config as $key => $value)
-		{
-			$engine->set_config($key, $value);
-		}
+		$engine->_set_config($config, '', true);
 
-		$engine->cache->destroy_config_cache();
 		$engine->log(1, 'Updated basic settings');
 		$engine->set_message('Updated basic settings');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
+
+	echo $engine->form_open('basic', '', 'post', true, '', '');
 ?>
-	<form action="admin.php" method="post" name="basic">
-		<input type="hidden" name="mode" value="configbasic" />
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<tr>
@@ -235,6 +233,18 @@ function admin_configbasic(&$engine, &$module)
 					<input type="radio" id="footer_rating_on" name="footer_rating" value="1"<?php echo ( $engine->config['footer_rating'] == 1 ? ' checked="checked"' : '' );?> /><label for="footer_rating_on">On.</label>
 					<input type="radio" id="footer_rating_guest" name="footer_rating" value="2"<?php echo ( $engine->config['footer_rating'] == 2 ? ' checked="checked"' : '' );?> /><label for="footer_rating_guest">Registered.</label>
 					<input type="radio" id="footer_rating_off" name="footer_rating" value="0"<?php echo ( $engine->config['footer_rating'] == 0 ? ' checked="checked"' : '' );?> /><label for="footer_rating_off">Off.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><strong>Tags panel :</strong><br />
+					<small>The default display of the tags panel in the bottom of the page.</small></td>
+				<td>
+					<input type="radio" id="footer_tags_on" name="footer_tags" value="1"<?php echo ( $engine->config['footer_tags'] == 1 ? ' checked="checked"' : '' );?> /><label for="footer_tags_on">On.</label>
+					<input type="radio" id="footer_tags_guest" name="footer_tags" value="2"<?php echo ( $engine->config['footer_tags'] == 2 ? ' checked="checked"' : '' );?> /><label for="footer_tags_guest">Registered.</label>
+					<input type="radio" id="footer_tags_off" name="footer_tags" value="0"<?php echo ( $engine->config['footer_tags'] == 0 ? ' checked="checked"' : '' );?> /><label for="footer_tags_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -418,8 +428,8 @@ function admin_configbasic(&$engine, &$module)
 			<input id="submit" type="submit" value="save" />
 			<input id="button" type="reset" value="reset" />
 		</div>
-	</form>
 <?php
+	echo $engine->form_close();
 }
 
 ?>

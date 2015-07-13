@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   DB Synchronization                               ##
 ########################################################
 
-$module['resync'] = array(
+$module['db_resync'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'mode'	=> 'resync',
+		'status'=> true,
+		'mode'	=> 'db_resync',
 		'name'	=> 'Data Synchronization',
 		'title'	=> 'Synchronizing databases',
 	);
 
 ########################################################
 
-function admin_resync(&$engine, &$module)
+function admin_db_resync(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -34,7 +35,18 @@ function admin_resync(&$engine, &$module)
 				"SELECT p.owner_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
+				"AND p.deleted <> '1' ".
 				"GROUP BY p.owner_id");
+
+			/* SELECT
+					u.user_id
+				FROM
+					doc_user u
+					LEFT JOIN doc_page p ON (u.user_id = p.owner_id)
+				WHERE
+                u.total_pages <> '0'
+                AND
+					p.owner_id IS NULL */
 
 			foreach ($users as $user)
 			{
@@ -50,6 +62,7 @@ function admin_resync(&$engine, &$module)
 				"SELECT p.user_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
+				"AND p.deleted <> '1' ".
 				"GROUP BY p.user_id");
 
 			foreach ($users as $user)
@@ -82,6 +95,7 @@ function admin_resync(&$engine, &$module)
 					"SELECT u.user_id, COUNT(f.upload_id) AS n ".
 					"FROM {$engine->config['table_prefix']}upload f, {$engine->config['user_table']} AS u ".
 					"WHERE f.user_id = u.user_id ".
+					"AND f.deleted <> '1' ".
 					"GROUP BY f.user_id");
 
 			foreach ($users as $user)
@@ -147,7 +161,6 @@ function admin_resync(&$engine, &$module)
 					{
 
 						// build html body
-						#$page['body_r'] = $engine->format($engine->format(( $body_t ? $body_t : $page['body'] ), 'bbcode'), 'wacko');
 						$page['body_r'] = $engine->format($page['body'], 'wacko');
 
 						// build toc
@@ -192,11 +205,12 @@ function admin_resync(&$engine, &$module)
 		allows updating statistics on current actual data of the database.
 	</p>
 	<br />
-	<form action="admin.php" method="post" name="usersupdate">
-		<input type="hidden" name="mode" value="resync" />
+<?php
+	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
+?>
 		<input type="hidden" name="action" value="userstats" />
 		<input name="start" id="submit" type="submit" value="synchronize" />
-	</form>
+<?php	echo $engine->form_close();?>
 	<br />
 	<hr />
 	<h3>RSS-Feeds</h3>
@@ -207,11 +221,12 @@ function admin_resync(&$engine, &$module)
 		Current state of the database.
 	</p>
 	<br />
-	<form action="admin.php" method="post" name="usersupdate">
-		<input type="hidden" name="mode" value="resync" />
+<?php
+	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
+?>
 		<input type="hidden" name="action" value="rssfeeds" />
 		<input name="start" id="submit" type="submit" value="synchronize" />
-	</form>
+<?php		echo $engine->form_close();;?>
 	<br />
 	<hr />
 	<h3>Wiki-links</h3>
@@ -222,12 +237,13 @@ function admin_resync(&$engine, &$module)
 		considerable time).
 	</p>
 	<br />
-	<form action="admin.php" method="post" name="usersupdate">
-		<input type="hidden" name="mode" value="resync" />
+<?php
+	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
+?>
 		<input type="hidden" name="action" value="wikilinks" />
 		<input name="start" id="submit" type="submit" value="synchronize" />
-	</form>
 <?php
+	echo $engine->form_close();;
 }
 
 ?>

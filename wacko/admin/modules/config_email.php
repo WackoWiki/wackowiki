@@ -9,23 +9,24 @@ if (!defined('IN_WACKO'))
 ##   Security settings                                ##
 ########################################################
 
-$module['configemail'] = array(
+$module['config_email'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'mode'	=> 'configemail',
+		'status'=> true,
+		'mode'	=> 'config_email',
 		'name'	=> 'Email',
 		'title'	=> 'Email settings',
 	);
 
 ########################################################
 
-function admin_configemail(&$engine, &$module)
+function admin_config_email(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 	<p>
-		This information is used when the board sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.
+		This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.
 	</p>
 	<br />
 <?php
@@ -45,27 +46,25 @@ function admin_configemail(&$engine, &$module)
 		$config['phpmailer']					= (int)$_POST['phpmailer'];
 		$config['phpmailer_method']				= (string)$_POST['phpmailer_method'];
 
-		foreach($config as $key => $value)
-		{
-			$engine->set_config($key, $value);
-		}
+		$engine->_set_config($config, '', true);
 
-		$engine->cache->destroy_config_cache();
 		$engine->log(1, '!!Updated email settings!!');
 		$engine->set_message('Updated email settings');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
+
+	echo $engine->form_open('email', '', 'post', true, '', '');
 ?>
-	<form action="admin.php" method="post" name="email">
-		<input type="hidden" name="mode" value="configemail" />
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<tr>
 				<th colspan="2">Basic parameters</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="enable_email"><strong>Email:</strong><br />
-				<small>Enabling email</small></label></td>
+				<td class="label">
+					<label for="enable_email"><strong>Email:</strong><br />
+					<small>Enabling email</small></label>
+				</td>
 				<td style="width:40%;">
 					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ( $engine->config['enable_email'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_on">Enabled.</label>
 					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ( $engine->config['enable_email'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_off">Disabled.</label>
@@ -75,10 +74,12 @@ function admin_configemail(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="enable_email_notification"><strong>Email Notification:</strong><br />
-				<small>Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that
+				<td class="label">
+					<label for="enable_email_notification"><strong>Email Notification:</strong><br />
+					<small>Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that
 	 					disabling email notifications has no effect on emails generated as part
-	 					of the user signup process.</small></label></td>
+	 					of the user signup process.</small></label>
+	 			</td>
 				<td style="width:40%;">
 					<input type="radio" id="enable_email_notification_on" name="enable_email_notification" value="1"<?php echo ( $engine->config['enable_email_notification'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_on">Enabled.</label>
 					<input type="radio" id="enable_email_notification_off" name="enable_email_notification" value="0"<?php echo ( $engine->config['enable_email_notification'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_off">Disabled.</label>
@@ -88,8 +89,10 @@ function admin_configemail(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="phpmailer"><strong>Phpmailer:</strong><br />
-				<small>Use the Phpmailer class. Enabling this option ...</small></label></td>
+				<td class="label">
+					<label for="phpmailer"><strong>Phpmailer:</strong><br />
+					<small>Use the Phpmailer class. Enabling this option ...</small></label>
+				</td>
 				<td style="width:40%;">
 					<input type="radio" id="phpmailer_on" name="phpmailer" value="1"<?php echo ( $engine->config['phpmailer'] == 1 ? ' checked="checked"' : '' );?> /><label for="phpmailer_on">Enabled.</label>
 					<input type="radio" id="phpmailer_off" name="phpmailer" value="0"<?php echo ( $engine->config['phpmailer'] == 0 ? ' checked="checked"' : '' );?> /><label for="phpmailer_off">Disabled.</label>
@@ -99,9 +102,11 @@ function admin_configemail(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="phpmailer_method"><strong>E-mail function name:</strong><br />
-				<small>The e-mail function used to send mails through PHP.</small></label></td>
-				<td><select style="width:200px;" id="phpmailer_method" name="phpmailer_method">
+				<td class="label">
+					<label for="phpmailer_method"><strong>E-mail function name:</strong><br />
+					<small>The e-mail function used to send mails through PHP.</small></label></td>
+				<td>
+					<select style="width:200px;" id="phpmailer_method" name="phpmailer_method">
 						<option value=""<?php echo ( (string)$engine->config['phpmailer_method'] === '' ? ' selected="selected"' : '' );?>>default</option>
 						<option value="mail"<?php echo ( (string)$engine->config['phpmailer_method'] === 'mail' ? ' selected="selected"' : '' );?>>mail</option>
 						<option value="sendmail"<?php echo ( (string)$engine->config['phpmailer_method'] === 'sendmail' ? ' selected="selected"' : '' );?>>sendmail</option>
@@ -113,9 +118,13 @@ function admin_configemail(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="email_from"><strong>Sender name of the site owner:</strong><br />
-				<small>The sender name, part of <code>'From:'</code> header in emails for all the email-notification site.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->config['email_from'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td class="label">
+					<label for="email_from"><strong>Sender name of the site owner:</strong><br />
+					<small>The sender name, part of <code>'From:'</code> header in emails for all the email-notification site.</small></label>
+				</td>
+				<td>
+					<input maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->config['email_from'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -192,8 +201,8 @@ function admin_configemail(&$engine, &$module)
 			<input id="submit" type="submit" value="save" />
 			<input id="button" type="reset" value="reset" />
 		</div>
-	</form>
 <?php
+	echo $engine->form_close();
 }
 
 ?>

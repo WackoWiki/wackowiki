@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Pages settings                                   ##
 ########################################################
 
-$module['configpages'] = array(
+$module['config_pages'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'mode'	=> 'configpages',
+		'status'=> true,
+		'mode'	=> 'config_pages',
 		'name'	=> 'Pages',
 		'title'	=> 'Pages and site parameters',
 	);
 
 ########################################################
 
-function admin_configpages(&$engine, &$module)
+function admin_config_pages(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -54,19 +55,15 @@ function admin_configpages(&$engine, &$module)
 		$config['sandbox']				= trim((string)$_POST['sandbox'], '/');
 		$config['wiki_docs']			= trim((string)$_POST['wiki_docs'], '/');
 
-		foreach($config as $key => $value)
-		{
-			$engine->set_config($key, $value);
-		}
+		$engine->_set_config($config, '', true);
 
-		$engine->cache->destroy_config_cache();
 		$engine->log(1, 'Updated settings base pages');
 		$engine->set_message('Updated settings base pages');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
+
+	echo $engine->form_open('pages', '', 'post', true, '', '');
 ?>
-	<form action="admin.php" method="post" name="pages">
-		<input type="hidden" name="mode" value="configpages" />
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<tr>
@@ -281,8 +278,8 @@ function admin_configpages(&$engine, &$module)
 			<input id="submit" type="submit" value="save" />
 			<input id="button" type="reset" value="reset" />
 		</div>
-	</form>
 <?php
+	echo $engine->form_close();
 }
 
 ?>

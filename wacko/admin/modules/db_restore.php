@@ -9,10 +9,11 @@ if (!defined('IN_WACKO'))
 ##   DB Restore                                       ##
 ########################################################
 
-$module['dbrestore'] = array(
+$module['db_restore'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'mode'	=> 'dbrestore',
+		'status'=> true,
+		'mode'	=> 'db_restore',
 		'name'	=> 'Restore database',
 		'title'	=> 'Restoring backup data',
 		'vars'	=> array(&$tables, &$directories),
@@ -20,7 +21,7 @@ $module['dbrestore'] = array(
 
 ########################################################
 
-function admin_dbrestore(&$engine, &$module)
+function admin_db_restore(&$engine, &$module)
 {
 
 //$dir = $engine->config['upload_path_backup'].'/2007_06_27_20_53_bd57f009381325efff2d684d4c2fbd54';
@@ -225,8 +226,9 @@ function admin_dbrestore(&$engine, &$module)
 		{
 		?>
 				<br />
-				<form action="admin.php" method="post" name="restore">
-					<input type="hidden" name="mode" value="dbrestore" />
+<?php
+				echo $engine->form_open('restore', '', 'post', true, '', '');
+?>
 					<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 						<tr>
 							<th>Creation Date</th>
@@ -361,7 +363,7 @@ function admin_dbrestore(&$engine, &$module)
 					</table>
 					<input name="start" id="submit" type="submit" value="restore" />
 					<input name="remove" id="submit" type="submit" value="remove" />
-				</form>
+<?php 		echo $engine->form_close(); ?>
 				<br />
 				<p><small>
 					* Before restoring the backup <span class="underline">cluster</span>, the target table

@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Pages                                            ##
 ########################################################
 
-$module['tags'] = array(
+$module['content_categories'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'mode'	=> 'tags',
-		'name'	=> 'Tags',
-		'title'	=> 'Manage tags',
+		'status'=> false,
+		'mode'	=> 'content_categories',
+		'name'	=> 'Categories',
+		'title'	=> 'Manage categories',
 	);
 
 ########################################################
 
-function admin_tags(&$engine, &$module)
+function admin_content_categories(&$engine, &$module)
 {
 	$order = '';
 	$error = '';

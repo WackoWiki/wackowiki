@@ -6,27 +6,27 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   XML Import                                       ##
+##   Menu                                             ##
 ########################################################
 
-$module['xmlimport'] = array(
-		'order'	=> 3,
+$module['content_menu'] = array(
+		'order'	=> 15,
 		'cat'	=> 'Content',
 		'status'=> true,
-		'mode'	=> 'xmlimport',
-		'name'	=> 'Import XML',
-		'title'	=> 'Import and restore of the pages of the XML-file',
+		'mode'	=> 'content_menu',
+		'name'	=> 'Menu',
+		'title'	=> 'Add, edit or remove default menu items',
 	);
 
 ########################################################
 
-function admin_xmlimport(&$engine, &$module)
+function admin_content_menu(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
-	echo $engine->action('import');
+	echo $engine->action('menu', array('system' => 1));
 }
 
 ?>

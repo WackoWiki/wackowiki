@@ -12,6 +12,7 @@ if (!defined('IN_WACKO'))
 $module['lock'] = array(
 		'order'	=> 1,
 		'cat'	=> 'Basic functions',
+		'status'=> true,
 		'mode'	=> 'lock',
 		'name'	=> 'Main Menu',
 		'title'	=> 'WackoWiki Administration',
@@ -90,26 +91,33 @@ function admin_lock(&$engine, &$module)
 		Note: Before the administration of technical activities
 		<span class="underline">strongly</span> are encouraged to block access to the site!
 	</p>
-	<br />
+	<br /><?php echo $engine->get_translation('ApTestText');?>
 	<table style="max-width:200px" class="formation">
-	<form action="admin.php" method="post" name="lock">
-		<input type="hidden" name="mode" value="lock" />
+<?php
+	echo $engine->form_open('lock', '', 'post', true, '', '');
+?>
 		<input type="hidden" name="action" value="lock" />
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo ( $init->is_locked() === true ? '<span class="red">The site is closed</span>' : '<span class="green">The site is open</span>' ); ?></td>
 				<td style="text-align:center;"><input id="submit" type="submit" value="<?php echo ( $init->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
 			</tr>
-	</form>
 	<br />
-	<form action="admin.php" method="post" name="cache">
-		<input type="hidden" name="mode" value="lock" />
+<?php
+	echo $engine->form_close();
+	echo '<br />';
+	echo $engine->form_open('cache', '', 'post', true, '', '');
+?>
 		<input type="hidden" name="action" value="cache" />
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('ClearCache');?></td>
 				<td style="text-align:center;"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation('CacheCleared') : '<input id="submit" type="submit" value="clean" />');?></td>
 			</tr>
-	</form>
-		<form action="admin.php" method="post" name="purge_sessions">
+<?php
+	echo $engine->form_close();
+
+	echo $engine->form_open('purge_sessions', '', 'post', true, '', '');
+?>
+		<form action="admin.php" method="post" name="">
 		<input type="hidden" name="mode" value="lock" />
 		<input type="hidden" name="action" value="purge_sessions" />
 			<tr class="hl_setting">
@@ -118,12 +126,10 @@ function admin_lock(&$engine, &$module)
 				<td><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->get_translation('PurgeSessionsDone') : '<input id="submit" type="submit" value="purge" />');?></td>
 			</tr>
 		</table>
-	</form>
-	<?php
-	# echo $engine->action('admincache'); // TODO: solve redirect issue
-	?>
-
 <?php
+	echo $engine->form_close();
+	# echo $engine->action('admincache'); // TODO: solve redirect issue
+
 }
 
 ?>

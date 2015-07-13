@@ -9,10 +9,11 @@ if (!defined('IN_WACKO'))
 ##   Pages                                            ##
 ########################################################
 
-$module['statistics'] = array(
+$module['system_statistics'] = array(
 		'order'	=> 1,
 		'cat'	=> 'Basic functions',
-		'mode'	=> 'statistics',
+		'status'=> true,
+		'mode'	=> 'system_statistics',
 		'name'	=> 'Statistics',
 		'title'	=> 'Show statistics',
 		'vars'	=> array(&$tables, &$directories),
@@ -21,7 +22,7 @@ $module['statistics'] = array(
 
 ########################################################
 
-function admin_statistics(&$engine, &$module)
+function admin_system_statistics(&$engine, &$module)
 {
 	$order = '';
 	$error = '';
