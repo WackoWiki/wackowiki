@@ -149,7 +149,9 @@ else
 <?php
 
 // show category tags
-if ($this->forum === true)
+if ($this->forum === true
+	|| ($this->has_access('read') && $this->page && $this->config['footer_tags'] == 1
+		|| ($this->config['footer_tags'] == 2 && $this->get_user())))
 {
 	echo '<div class="categories">'.$this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1)."</div>\n";
 }

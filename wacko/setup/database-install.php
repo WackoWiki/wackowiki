@@ -198,6 +198,7 @@ $config_db['enable_security_headers']		= $config['enable_security_headers'];
 $config_db['footer_comments']				= $config['footer_comments'];
 $config_db['footer_files']					= $config['footer_files'];
 $config_db['footer_rating']					= $config['footer_rating'];
+$config_db['footer_tags']					= $config['footer_tags'];
 $config_db['form_token_sid_guests']			= $config['form_token_sid_guests'];
 $config_db['form_token_time']				= $config['form_token_time'];
 $config_db['forum_cluster']					= $config['forum_cluster'];
@@ -310,10 +311,12 @@ foreach($config_db as $key => $value)
 }
 
 // to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE: http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
-$insert_config = "INSERT INTO ".$config['table_prefix']."config (config_id, config_name, config_value) VALUES ".
-				$config_insert."
-				(0, 'maint_last_update', NOW()) ".
-				"ON DUPLICATE KEY UPDATE config_name=VALUES(config_name),config_value=VALUES(config_value);";
+$insert_config =	"INSERT INTO ".$config['table_prefix']."config (config_id, config_name, config_value)
+						VALUES ".$config_insert."(0, 'maint_last_update', NOW()) ".
+					"ON DUPLICATE KEY
+						UPDATE
+							config_name		= VALUES(config_name),
+							config_value	= VALUES(config_value);";
 
 /*
  Setup the tables depending on which database we selected

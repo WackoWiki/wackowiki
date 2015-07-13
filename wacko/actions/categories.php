@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 
 $path = $this->config['category_page'];
 if (!isset($list))		$list = 0;
-if (!isset($path))		$path = 'Category';
+if (empty($path))		$path = 'Category';
 if (!isset($nomark))	$nomark = '';
 
 $output	= '';
