@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Recently deleted pages controls                  ##
 ########################################################
 
-$module['deletedpages'] = array(
+$module['content_deletedpages'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'mode'	=> 'deletedpages',
+		'status'=> true,
+		'mode'	=> 'content_deletedpages',
 		'name'	=> 'Deleted pages',
 		'title'	=> 'Copies of the newly deleted pages',
 	);
 
 ########################################################
 
-function admin_deletedpages(&$engine, &$module)
+function admin_content_deletedpages(&$engine, &$module)
 {
 	$curday = '';
 ?>
@@ -38,7 +39,7 @@ function admin_deletedpages(&$engine, &$module)
 			"WHERE page_id = '".(int)$_GET['remove']."'");
 	}
 
-	$pages = $engine->load_recently_deleted(100000, 0);
+	$pages = $engine->load_deleted(100000, 0);
 ?>
 	<p>
 		List of removed pages, copies which were in the table revision.

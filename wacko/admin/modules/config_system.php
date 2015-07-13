@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Maintaince setting                               ##
 ########################################################
 
-$module['configsystem'] = array(
+$module['config_system'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'mode'	=> 'configsystem',
+		'status'=> true,
+		'mode'	=> 'config_system',
 		'name'	=> 'System',
 		'title'	=> 'System options',
 	);
 
 ########################################################
 
-function admin_configsystem(&$engine, &$module)
+function admin_config_system(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -64,19 +65,15 @@ function admin_configsystem(&$engine, &$module)
 		$config['reverse_proxy_header']		= (int)$_POST['reverse_proxy_header'];
 		$config['reverse_proxy_addresses']	= (int)$_POST['reverse_proxy_addresses'];
 
-		foreach($config as $key => $value)
-		{
-			$engine->set_config($key, $value);
-		}
+		$engine->_set_config($config, '', true);
 
-		$engine->cache->destroy_config_cache();
 		$engine->log(1, 'Updated system settings');
 		$engine->set_message('Updated system settings');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
+
+	echo $engine->form_open('system', '', 'post', true, '', '');
 ?>
-	<form action="admin.php" method="post" name="system">
-		<input type="hidden" name="mode" value="configsystem" />
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<tr>
@@ -151,13 +148,6 @@ function admin_configsystem(&$engine, &$module)
 					Text Handler
 				</th>
 			</tr>
-			<!--<tr class="hl_setting">
-				<td class="label"><label for="bbcode"><strong>Parser BBCode:</strong></label></td>
-				<td><input type="checkbox" id="bbcode" name="bbcode" value="1" <?php #echo ( $engine->config['bbcode'] ? ' checked="checked"' : '' );?> /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>-->
 			<tr class="hl_setting">
 				<td class="label"><label for="default_typografica"><strong>Typographical Proofreader:</strong><br />
 				<small>Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
@@ -403,8 +393,8 @@ function admin_configsystem(&$engine, &$module)
 			<input id="submit" type="submit" value="save" />
 			<input id="button" type="reset" value="reset" />
 		</div>
-	</form>
 <?php
+	echo $engine->form_close();
 }
 
 ?>

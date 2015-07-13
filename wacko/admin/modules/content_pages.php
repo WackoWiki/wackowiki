@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Pages                                            ##
 ########################################################
 
-$module['pages'] = array(
+$module['content_pages'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'mode'	=> 'pages',
+		'status'=> false,
+		'mode'	=> 'content_pages',
 		'name'	=> 'Pages',
 		'title'	=> 'Manage pages',
 	);
 
 ########################################################
 
-function admin_pages(&$engine, &$module)
+function admin_content_pages(&$engine, &$module)
 {
 	$order = '';
 	$error = '';

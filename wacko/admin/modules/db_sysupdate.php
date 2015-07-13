@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   DB Update                                        ##
 ########################################################
 
-$module['sysupdate'] = array(
+$module['db_sysupdate'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'mode'	=> 'sysupdate',
+		'status'=> true,
+		'mode'	=> 'db_sysupdate',
 		'name'	=> 'Update',
 		'title'	=> 'Update the structure and contents of the database',
 	);
 
 ########################################################
 
-function admin_sysupdate(&$engine, &$module)
+function admin_db_sysupdate(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -60,12 +61,13 @@ function admin_sysupdate(&$engine, &$module)
 					<li value="1"><del>Transliterate field `to_supertag` in table `link`</del>.</li>
 				</ol>
 				<br />
-				<form action="admin.php" method="post" name="sysupdate">
-					<input type="hidden" name="mode" value="sysupdate" />
+<?php
+				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+?>
 					<input type="hidden" name="step" value="2" />
 					<input name="start" id="submit" type="submit" value="continue" />
-				</form>
 <?php
+				echo $engine->form_close();
 			}
 		}
 		// pages
@@ -90,12 +92,13 @@ function admin_sysupdate(&$engine, &$module)
 					<li value="2"><del>Transliterate field `supertag` and `super_comment_on` in table `page`</del>.</li>
 				</ol>
 				<br />
-				<form action="admin.php" method="post" name="sysupdate">
-					<input type="hidden" name="mode" value="sysupdate" />
+<?php
+				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+?>
 					<input type="hidden" name="step" value="3" />
 					<input name="start" id="submit" type="submit" value="continue" />
-				</form>
 <?php
+				echo $engine->form_close();
 			}
 		}
 		// revisions
@@ -120,12 +123,13 @@ function admin_sysupdate(&$engine, &$module)
 					<li value="3"><del>Transliterate field `supertag` and `super_comment_on` in table `revision`</del>.</li>
 				</ol>
 				<br />
-				<form action="admin.php" method="post" name="sysupdate">
-					<input type="hidden" name="mode" value="sysupdate" />
+<?php
+				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+?>
 					<input type="hidden" name="step" value="4" />
 					<input name="start" id="submit" type="submit" value="continue" />
-				</form>
 <?php
+				echo $engine->form_close();
 			}
 		}
 		// files
@@ -175,12 +179,13 @@ function admin_sysupdate(&$engine, &$module)
 			<li>Transliterate the names of attached files.</li>
 		</ol>
 		<br />
-		<form action="admin.php" method="post" name="sysupdate">
-			<input type="hidden" name="mode" value="sysupdate" />
+<?php
+		echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+?>
 			<input type="hidden" name="step" value="1" />
 			<input name="start" id="submit" type="submit" value="Start" />
-		</form>
 <?php
+		echo $engine->form_close();
 	}
 }
 

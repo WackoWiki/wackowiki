@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Security settings                                ##
 ########################################################
 
-$module['configsecurity'] = array(
+$module['config_security'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'mode'	=> 'configsecurity',
+		'status'=> true,
+		'mode'	=> 'config_security',
 		'name'	=> 'Security',
 		'title'	=> 'Security subsystems settings',
 	);
 
 ########################################################
 
-function admin_configsecurity(&$engine, &$module)
+function admin_config_security(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -64,32 +65,28 @@ function admin_configsecurity(&$engine, &$module)
 		$config['log_level']					= (int)$_POST['log_level'];
 		$config['log_default_show']				= (int)$_POST['log_default_show'];
 		$config['log_purge_time']				= (int)$_POST['log_purge_time'];
-		$config['session_expiration']			= (int)$_POST['session_expiration'];
+		$config['session_length']			= (int)$_POST['session_length'];
 		$config['comment_delay']				= (int)$_POST['comment_delay'];
 		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
 		$config['enable_security_headers']		= (int)$_POST['enable_security_headers'];
+		$config['csp']						= (int)$_POST['csp'];
+		$config['x_frame_option']				= (int)$_POST['x_frame_option'];
 		$config['max_login_attempts']			= (int)$_POST['max_login_attempts'];
 		$config['ip_login_limit_max']			= (int)$_POST['ip_login_limit_max'];
 		$config['username_chars_min']			= (int)$_POST['username_chars_min'];
 		$config['username_chars_max']			= (int)$_POST['username_chars_max'];
 		$config['form_token_time']				= (int)$_POST['form_token_time'];
 		$config['form_token_sid_guests']		= (int)$_POST['form_token_sid_guests'];
-		#$config['x_frame_option']				= (int)$_POST['x_frame_option'];
-		#$config['x_csp']						= (int)$_POST['x_csp'];
 
-		foreach($config as $key => $value)
-		{
-			$engine->set_config($key, $value);
-		}
+		$engine->_set_config($config, '', true);
 
-		$engine->cache->destroy_config_cache();
 		$engine->log(1, '!!Updated security settings!!');
 		$engine->set_message('Updated security settings');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
+
+	echo $engine->form_open('security', '', 'post', true, '', '');
 ?>
-	<form action="admin.php" method="post" name="security">
-		<input type="hidden" name="mode" value="configsecurity" />
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<tr>
@@ -337,15 +334,27 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="x_frame_option"><strong>X-Frame-Options:</strong><br />
 					<small>The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a &lt;frame&gt; or &lt;iframe&gt;. Use this to avoid clickjacking attacks, by ensuring that the content is not embedded into other sites. frame busting (DENY or SAMEORIGIN).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="x_frame_option" name="x_frame_option" value="<?php echo htmlspecialchars($engine->config['x_frame_option'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td>
+					<select style="width:200px;" id="x_frame_option" name="x_frame_option">
+						<option value="0"<?php echo ( (int)$engine->config['x_frame_option'] === 0 ? ' selected="selected"' : '' );?>>disabled</option>
+						<option value="1"<?php echo ( (int)$engine->config['x_frame_option'] === 1 ? ' selected="selected"' : '' );?>>DENY</option>
+						<option value="2"<?php echo ( (int)$engine->config['x_frame_option'] === 2 ? ' selected="selected"' : '' );?>>SAMEORIGIN</option>
+					</select>
+				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="x_csp"><strong>X-Content-Security-Policy (CSP):</strong><br />
+				<td class="label"><label for="csp"><strong>X-Content-Security-Policy (CSP):</strong><br />
 					<small>Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using X-Content-Security-Policy to establish your policy.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="x_csp" name="x_csp" value="<?php echo htmlspecialchars($engine->config['x_csp'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><select style="width:200px;" id="csp" name="csp">
+						<option value="0"<?php echo ( (int)$engine->config['csp'] === 0 ? ' selected="selected"' : '' );?>>disabled</option>
+						<option value="1"<?php echo ( (int)$engine->config['csp'] === 1 ? ' selected="selected"' : '' );?>>strict</option>
+						<option value="2"<?php echo ( (int)$engine->config['csp'] === 2 ? ' selected="selected"' : '' );?>>custom</option>
+					</select>
+					<input maxlength="4" style="width:200px;" id="csp" name="csp" value="<?php echo htmlspecialchars($engine->config['csp'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -480,9 +489,9 @@ function admin_configsecurity(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="session_expiration"><strong>Term login cookie:</strong><br />
+				<td class="label"><label for="session_length"><strong>Term login cookie:</strong><br />
 					<small>The lifetime of the user cookie login by default (in days).</small></label></td>
-				<td><input type="number" maxlength="4" style="width:200px;" id="session_expiration" name="session_expiration" value="<?php echo htmlspecialchars($engine->config['session_expiration'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" maxlength="4" style="width:200px;" id="session_length" name="session_length" value="<?php echo htmlspecialchars($engine->config['session_length'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -506,8 +515,8 @@ function admin_configsecurity(&$engine, &$module)
 			<input id="submit" type="submit" value="save" />
 			<input id="button" type="reset" value="reset" />
 		</div>
-	</form>
 <?php
+	echo $engine->form_close();
 }
 
 ?>

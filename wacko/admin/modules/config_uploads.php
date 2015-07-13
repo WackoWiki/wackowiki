@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Upload settrings                                 ##
 ########################################################
 
-$module['configuploads'] = array(
+$module['config_uploads'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'mode'	=> 'configuploads',
+		'status'=> true,
+		'mode'	=> 'config_uploads',
 		'name'	=> 'Uploads',
 		'title'	=> 'Attachment settings',
 	);
 
 ########################################################
 
-function admin_configuploads(&$engine, &$module)
+function admin_config_uploads(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -41,12 +42,8 @@ function admin_configuploads(&$engine, &$module)
 		$config['img_create_thumbnail']		= (int)$_POST['img_create_thumbnail'];
 		$config['img_max_thumb_width']		= (int)$_POST['img_max_thumb_width'];
 
-		foreach($config as $key => $value)
-		{
-			$engine->set_config($key, $value);
-		}
+		$engine->_set_config($config, '', true);
 
-		$engine->cache->destroy_config_cache();
 		$engine->log(1, 'Updated upload settings');
 		$engine->set_message('Updated upload settings');
 		$engine->redirect(rawurldecode($engine->href()));
@@ -59,9 +56,9 @@ function admin_configuploads(&$engine, &$module)
 			"LIMIT 1");
 
 	$used_upload_quota = round($files['used_quota'] / 1048576, 2); // 1024*1024
+
+	echo $engine->form_open('upload', '', 'post', true, '', '');
 ?>
-	<form action="admin.php" method="post" name="upload">
-		<input type="hidden" name="mode" value="configuploads" />
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<tr>
@@ -136,8 +133,8 @@ function admin_configuploads(&$engine, &$module)
 			<input id="submit" type="submit" value="save" />
 			<input id="button" type="reset" value="reset" />
 		</div>
-	</form>
 <?php
+	echo $engine->form_close();
 }
 
 ?>

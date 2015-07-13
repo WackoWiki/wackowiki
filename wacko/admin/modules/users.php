@@ -12,6 +12,7 @@ if (!defined('IN_WACKO'))
 $module['users'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Users',
+		'status'=> true,
 		'mode'	=> 'users',
 		'name'	=> 'Users',
 		'title'	=> 'User management',
@@ -191,7 +192,7 @@ function admin_users(&$engine, &$module)
 				$_POST['change'] = $_POST['user_id'];
 				$_POST['edit'] = 1;
 			}
-			else if (!$engine->validate_email($_POST['email']))
+			else if (!$engine->validate_email($_POST['newemail']))
 			{
 				$engine->show_message($engine->get_translation('NotAEmail'));
 				$_POST['change'] = $_POST['user_id'];
@@ -293,8 +294,8 @@ function admin_users(&$engine, &$module)
 	// add new user
 	if (isset($_POST['create']))
 	{
-		echo '<form action="admin.php" method="post" name="users">';
-		echo '<input type="hidden" name="mode" value="users" />';
+		echo $engine->form_open('users', '', 'post', true, '', '');
+
 		echo '<h2>'.$engine->get_translation('UsersAddNew').'</h2>';
 		echo '<table class="formation">';
 		echo '<tr><td><label for="newname">'.$engine->get_translation('UserName').'</label></td>'.
@@ -322,7 +323,7 @@ function admin_users(&$engine, &$module)
 			'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 			'</td></tr>';
 		echo '</table><br />';
-		echo '</form>';
+		echo $engine->form_close();
 	}
 	// edit user
 	else if (isset($_POST['edit']) && isset($_POST['change']))
@@ -335,8 +336,7 @@ function admin_users(&$engine, &$module)
 				"AND u.account_type = '0' ".
 			"LIMIT 1"))
 		{
-			echo '<form action="admin.php" method="post" name="users">';
-			echo '<input type="hidden" name="mode" value="users" />';
+			echo $engine->form_open('users', '', 'post', true, '', '');
 			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 			echo '<table class="formation">';
 			echo '<tr><td><label for="newname">'.$engine->get_translation('UsersRename').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label></td>'.
@@ -366,7 +366,7 @@ function admin_users(&$engine, &$module)
 				'<br /><small>'.$engine->get_translation('UsersRenameInfo').'</small>'.
 				'</td></tr>';
 			echo '</table><br />';
-			echo '</form>';
+			echo $engine->form_close();
 		}
 	}
 
@@ -375,8 +375,7 @@ function admin_users(&$engine, &$module)
 	{
 		if ($user = $engine->load_single("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 		{
-			echo '<form action="admin.php" method="post" name="users">';
-			echo '<input type="hidden" name="mode" value="users" />';
+			echo $engine->form_open('users', '', 'post', true, '', '');
 			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 			echo '<table class="formation">';
 			echo '<tr><td><label for="">'.$engine->get_translation('UsersDelete').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
@@ -385,7 +384,7 @@ function admin_users(&$engine, &$module)
 				'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
 				'</td></tr>';
 			echo '</table><br />';
-			echo '</form>';
+			echo $engine->form_close();
 		}
 	}
 
@@ -394,9 +393,8 @@ function admin_users(&$engine, &$module)
 	{
 		echo "<h2>".$user['user_name']."</h2>";
 		// user data
+		echo $engine->form_open('users', '', 'post', true, '', '');
 		?>
-		<form action="admin.php" method="post" name="users">
-		<input type="hidden" name="mode" value="users" />
 		<input type="hidden" name="user_id" value="<?php echo $group_id; ?>" />
 
 		<table style="padding: 3px;" class="formation">
@@ -438,9 +436,7 @@ function admin_users(&$engine, &$module)
 		echo '<br /><input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
 		echo '<input id="button" type="submit" name="removemember" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
 		echo '<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />';
-?>
-		</form>
-<?php
+		echo $engine->form_close();
 	}
 	else
 	{
@@ -608,11 +604,8 @@ function admin_users(&$engine, &$module)
 				"u.account_type = '0' ".
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");
-?>
-		<form action="admin.php" method="post" name="users">
-		<input type="hidden" name="mode" value="users" />
 
-			<?php
+		echo $engine->form_open('users', '', 'post', true, '', '');
 
 			/////////////////////////////////////////////
 			//   control buttons
@@ -692,10 +685,7 @@ function admin_users(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		echo $control_buttons;
-?>
-		</form>
-
-<?php
+		echo $engine->form_close();
 	}
 }
 

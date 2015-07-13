@@ -9,10 +9,11 @@ if (!defined('IN_WACKO'))
 ##   DB Backup                                        ##
 ########################################################
 
-$module['dbbackup'] = array(
+$module['db_backup'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'mode'	=> 'dbbackup',
+		'status'=> true,
+		'mode'	=> 'db_backup',
 		'name'	=> 'Backup database',
 		'title'	=> 'Backing up data',
 		'vars'	=> array(&$tables, &$directories),
@@ -20,7 +21,7 @@ $module['dbbackup'] = array(
 
 ########################################################
 
-function admin_dbbackup(&$engine, &$module)
+function admin_db_backup(&$engine, &$module)
 {
 	// import passed variables and objects
 	$tables			= & $module['vars'][0];
@@ -214,8 +215,10 @@ function admin_dbbackup(&$engine, &$module)
 			data (structure plus contents) without specifying the cluster</em>.
 		</p>
 		<br />
-		<form action="admin.php" method="post" name="backup">
-			<input type="hidden" name="mode" value="dbbackup" />
+
+<?php
+		echo $engine->form_open('backup', '', 'post', true, '', '');
+?>
 			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
 					<th style="text-align:right">Cluster:</th>
@@ -269,8 +272,8 @@ function admin_dbbackup(&$engine, &$module)
 ?>
 				</table>
 				<input name="start" id="submit" type="submit" value="backup" />
-			</form>
 <?php
+			echo $engine->form_close();
 		}
 	}
 }

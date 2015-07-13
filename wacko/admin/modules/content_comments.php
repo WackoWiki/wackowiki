@@ -6,26 +6,31 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   Menu                                             ##
+##   Comments                                         ##
 ########################################################
 
-$module['menu'] = array(
+$module['content_comments'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'mode'	=> 'menu',
-		'name'	=> 'Menu',
-		'title'	=> 'Add, edit or remove default menu items',
+		'status'=> false,
+		'mode'	=> 'content_comments',
+		'name'	=> 'Comments',
+		'title'	=> 'Manage comments',
 	);
 
 ########################################################
 
-function admin_menu(&$engine, &$module)
+function admin_content_comments(&$engine, &$module)
 {
+	$order = '';
+	$error = '';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
+
+
 <?php
-	echo $engine->action('menu', array('system' => 1));
+
 }
 
 ?>

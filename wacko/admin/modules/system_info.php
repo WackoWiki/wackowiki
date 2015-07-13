@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   System Informations                              ##
 ########################################################
 
-$module['sysinfo'] = array(
+$module['system_info'] = array(
 		'order'	=> 1,
 		'cat'	=> 'Basic functions',
-		'mode'	=> 'sysinfo',
+		'status'=> true,
+		'mode'	=> 'system_info',
 		'name'	=> 'System Info',
 		'title'	=> 'System Informations',
 	);
 
 ########################################################
 
-function admin_sysinfo(&$engine, &$module)
+function admin_system_info(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>

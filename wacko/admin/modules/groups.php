@@ -12,6 +12,7 @@ if (!defined('IN_WACKO'))
 $module['groups'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Users',
+		'status'=> true,
 		'mode'	=> 'groups',
 		'name'	=> 'Groups',
 		'title'	=> 'Group management',
@@ -110,9 +111,8 @@ function admin_groups(&$engine, &$module)
 
 				#$engine->debug_print_r($available_users);
 
-				echo '<form action="admin.php" method="post" name="groups">';
+				echo $engine->form_open('groups', '', 'post', true, '', '');
 				echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
-				echo '<input type="hidden" name="mode" value="groups" />';
 				echo '<table class="formation">';
 				echo '<tr><td><label for="new_member_id">'.$engine->get_translation('MembersAddNew').'</label></td>'.
 					'<td><select id="new_member_id" name="new_member_id">';?>
@@ -131,7 +131,7 @@ function admin_groups(&$engine, &$module)
 					'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 					'</td></tr>';
 				echo '</table><br />';
-				echo '</form>';
+				echo $engine->form_close();
 			}
 
 			// remove member from group
@@ -143,9 +143,8 @@ function admin_groups(&$engine, &$module)
 					"WHERE user_id = '".(int)$_POST['change_member']."' ".
 					"LIMIT 1"))
 				{
-					echo '<form action="admin.php" method="post" name="groups">';
+					echo $engine->form_open('groups', '', 'post', true, '', '');
 					echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
-					echo '<input type="hidden" name="mode" value="groups" />';
 					echo '<input type="hidden" name="member_id" value="'.htmlspecialchars($_POST['change_member'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 					echo '<table class="formation">';
 					echo '<tr><td><label for="">'.$engine->get_translation('MembersRemove').' \'<code>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
@@ -154,7 +153,7 @@ function admin_groups(&$engine, &$module)
 						'<br /><small>'.$engine->get_translation('MembersDeleteInfo').'</small>'.
 						'</td></tr>';
 					echo '</table><br />';
-					echo '</form>';
+					echo $engine->form_close();
 				}
 			}
 
@@ -245,8 +244,7 @@ function admin_groups(&$engine, &$module)
 		// add new group
 		if (isset($_POST['create']))
 		{
-			echo '<form action="admin.php" method="post" name="groups">';
-			echo '<input type="hidden" name="mode" value="groups" />';
+			echo $engine->form_open('groups', '', 'post', true, '', '');
 			echo '<table class="formation">';
 			echo '<tr><td><label for="new_group_name">'.$engine->get_translation('GroupsAdd').'</label></td>'.
 				'<td><input id="new_group_name" name="new_group_name" value="'.( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" /></td></tr>'.
@@ -260,7 +258,7 @@ function admin_groups(&$engine, &$module)
 					{
 						foreach($users as $user)
 						{
-							echo "<option value=\"".$user['user_id']."\">".htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
+							echo '<option value="'.$user['user_id'].'">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
 						}
 					}
 
@@ -273,15 +271,14 @@ function admin_groups(&$engine, &$module)
 				'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 				'</td></tr>';
 			echo '</table><br />';
-			echo '</form>';
+			echo $engine->form_close();
 		}
 		// edit group
 		else if (isset($_POST['edit']) && isset($_POST['change']))
 		{
 			if ($usergroup = $engine->load_single("SELECT group_name, description, moderator_id, open, active FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['change']."' LIMIT 1"))
 			{
-				echo '<form action="admin.php" method="post" name="groups">';
-				echo '<input type="hidden" name="mode" value="groups" />';
+				echo $engine->form_open('groups', '', 'post', true, '', '');
 				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="new_group_name">'.$engine->get_translation('GroupsRename').' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label></td>'.
@@ -296,7 +293,7 @@ function admin_groups(&$engine, &$module)
 					{
 						foreach($users as $user)
 						{
-							echo "<option value=\"".$user['user_id']."\" ".($usergroup['moderator_id'] == $user['user_id'] ? " selected=\"selected\"" : "").">".$user['user_name']."</option>\n";
+							echo '<option value="'.$user['user_id'].'" '.($usergroup['moderator_id'] == $user['user_id'] ? ' selected="selected"' : '').'>'.$user['user_name']."</option>\n";
 						}
 					}
 
@@ -310,7 +307,7 @@ function admin_groups(&$engine, &$module)
 					'<br /><small>'.$engine->get_translation('GroupsRenameInfo').'</small>'.
 					'</td></tr>';
 				echo '</table><br />';
-				echo '</form>';
+				echo $engine->form_close();
 			}
 		}
 		// delete group
@@ -318,8 +315,7 @@ function admin_groups(&$engine, &$module)
 		{
 			if ($usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['change']."' LIMIT 1"))
 			{
-				echo '<form action="admin.php" method="post" name="groups">';
-				echo '<input type="hidden" name="mode" value="groups" />';
+				echo $engine->form_open('groups', '', 'post', true, '', '');
 				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.$engine->get_translation('GroupsDelete').' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
@@ -328,7 +324,7 @@ function admin_groups(&$engine, &$module)
 					'<br /><small>'.$engine->get_translation('GroupsDeleteInfo').'</small>'.
 					'</td></tr>';
 				echo '</table><br />';
-				echo '</form>';
+				echo $engine->form_close();
 			}
 
 			echo "<!-- end trying to delete group -->";
@@ -356,9 +352,9 @@ function admin_groups(&$engine, &$module)
 				"INNER JOIN {$engine->config['table_prefix']}usergroup_member m ON (g.group_id = m.group_id) ".
 				"INNER JOIN {$engine->config['table_prefix']}user u ON (m.user_id = u.user_id) ".
 			"WHERE g.group_id = '".(int)$group_id."' ");
+
+		echo $engine->form_open('groups', '', 'post', true, '', '');
 ?>
-		<form action="admin.php" method="post" name="groups">
-		<input type="hidden" name="mode" value="groups" />
 		<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 
 		<table style="padding: 3px;" class="formation">
@@ -387,9 +383,7 @@ function admin_groups(&$engine, &$module)
 		echo '<br /><input id="button" type="submit" name="add_member" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
 		echo '<input id="button" type="submit" name="remove_member" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
 		echo '<input id="button" type="reset" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />';
-	 ?>
-		</form>
-		<?php
+		echo $engine->form_close();
 	}
 	else
 	{
@@ -474,11 +468,8 @@ function admin_groups(&$engine, &$module)
 	//   print list
 	/////////////////////////////////////////////
 
-	?>
-		<form action="admin.php" method="post" name="groups">
-		<input type="hidden" name="mode" value="groups" />
+		echo $engine->form_open('groups', '', 'post', true, '', '');
 
-			<?php
 			/////////////////////////////////////////////
 			//   control buttons
 			/////////////////////////////////////////////
@@ -536,10 +527,7 @@ function admin_groups(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		echo $control_buttons;
-?>
-		</form>
-
-<?php
+		echo $engine->form_close();
 	}
 }
 

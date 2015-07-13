@@ -9,10 +9,11 @@ if (!defined('IN_WACKO'))
 ##   DB Optimization                                  ##
 ########################################################
 
-$module['dboptimize'] = array(
+$module['db_optimize'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'mode'	=> 'dboptimize',
+		'status'=> true,
+		'mode'	=> 'db_optimize',
 		'name'	=> 'Optimization',
 		'title'	=> 'Optimizing the database',
 		'vars'	=> array(&$tables),
@@ -20,7 +21,7 @@ $module['dboptimize'] = array(
 
 ########################################################
 
-function admin_dboptimize(&$engine, &$module)
+function admin_db_optimize(&$engine, &$module)
 {
 	// import passed variables and objects
 	$tables	= & $module['vars'][0];
@@ -88,8 +89,9 @@ function admin_dboptimize(&$engine, &$module)
 			space occupied by the database, and increases productivity.
 		</p>
 		<br />
-		<form action="admin.php" method="post" name="optimize">
-			<input type="hidden" name="mode" value="dboptimize" />
+<?php
+		echo $engine->form_open('optimize', '', 'post', true, '', '');
+?>
 			<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
 					<th style="width:50px;" colspan="2"><a href="?mode=dboptimize<?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
@@ -116,8 +118,8 @@ function admin_dboptimize(&$engine, &$module)
 ?>
 			</table>
 			<input name="start" id="submit" type="submit" value="optimize" />
-		</form>
 <?php
+		echo $engine->form_close();
 	}
 }
 

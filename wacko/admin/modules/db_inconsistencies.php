@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Data Inconsistencies                             ##
 ########################################################
 
-$module['inconsistencies'] = array(
+$module['db_inconsistencies'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'mode'	=> 'inconsistencies',
+		'status'=> true,
+		'mode'	=> 'db_inconsistencies',
 		'name'	=> 'Data Inconsistencies',
 		'title'	=> 'Fixing Data Inconsistencies',
 	);
 
 ########################################################
 
-function admin_inconsistencies(&$engine, &$module)
+function admin_db_inconsistencies(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -573,14 +574,14 @@ function admin_inconsistencies(&$engine, &$module)
 	assign records to new user / value<br />
 	</p>
 	<br />
-	<form action="admin.php" method="post" name="usersupdate">
-		<input type="hidden" name="mode" value="inconsistencies" />
+<?php
+	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
+?>
 		<input type="hidden" name="action" value="check_inconsistencies" />
 		<input name="check" id="submit" type="submit" value="check" />
 		<input name="solve" id="submit" type="submit" value="solve" />
-	</form>
-
 <?php
+	echo $engine->form_close();
 }
 
 ?>

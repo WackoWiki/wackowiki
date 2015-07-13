@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Polls Moderation                                 ##
 ########################################################
 
-$module['polls'] = array(
+$module['content_polls'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'mode'	=> 'polls',
+		'status'=> true,
+		'mode'	=> 'content_polls',
 		'name'	=> 'Polls',
 		'title'	=> 'Editing, start and stop polls',
 	);
 
 ########################################################
 
-function admin_polls(&$engine, &$module)
+function admin_content_polls(&$engine, &$module)
 {
 	$confirmation = '';
 	$moderation = '';
@@ -132,10 +133,9 @@ function admin_polls(&$engine, &$module)
 		// poll remove confirmation dialog
 		if ($confirmation === true)
 		{
-			#echo $engine->form_open('', $mode_file);
+			#echo $engine->form_open('', $mode_file); // FIXME: check href()
 			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
-			echo '	<form action="admin.php" method="post" name="polls">';
-			echo '<input type="hidden" name="mode" value="polls" />';
+			echo $engine->form_open('polls', '', 'post', true, '', '');
 
 			echo '<input name="delete" type="hidden" value="'.$remove_id.'" />';
 			echo '<table class="formation">';
@@ -158,8 +158,7 @@ function admin_polls(&$engine, &$module)
 		// current active polls
 		#echo $engine->form_open('', $mode_file);
 		#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
-		echo '	<form action="admin.php" method="post" name="polls">';
-		echo '<input type="hidden" name="mode" value="polls" />';
+		echo $engine->form_open('polls', '', 'post', true, '', '');
 
 		echo '<table class="formation">';
 		$list = $polls_obj->get_polls_list('current');
@@ -198,8 +197,8 @@ function admin_polls(&$engine, &$module)
 		// polls for moderation
 			#echo $engine->form_open('', $mode_file);
 			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
-			echo '	<form action="admin.php" method="post" name="polls">';
-			echo '<input type="hidden" name="mode" value="polls" />';
+			echo $engine->form_open('polls', '', 'post', true, '', '');
+
 
 		echo '<table class="formation">';
 		$list = $polls_obj->get_polls_list('moderation');
@@ -249,8 +248,8 @@ function admin_polls(&$engine, &$module)
 		// ended polls
 			#echo $engine->form_open('', $mode_file);
 			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
-			echo '	<form action="admin.php" method="post" name="polls">';
-			echo '<input type="hidden" name="mode" value="polls" />';
+			echo $engine->form_open('polls', '', 'post', true, '', '');
+
 
 		echo '<table class="formation">';
 		// make list

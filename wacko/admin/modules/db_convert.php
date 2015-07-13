@@ -9,10 +9,11 @@ if (!defined('IN_WACKO'))
 ##   DB Engine Convertion                             ##
 ########################################################
 
-$module['dbconvert'] = array(
+$module['db_convert'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'mode'	=> 'dbconvert',
+		'status'=> true,
+		'mode'	=> 'db_convert',
 		'name'	=> 'Convert',
 		'title'	=> 'Converting Tables from MyISAM to InnoDB',
 		'vars'	=> array(&$tables),
@@ -20,7 +21,7 @@ $module['dbconvert'] = array(
 
 ########################################################
 
-function admin_dbconvert(&$engine, &$module)
+function admin_db_convert(&$engine, &$module)
 {
 	// import passed variables and objects
 	$tables	= & $module['vars'][0];
@@ -140,9 +141,8 @@ function admin_dbconvert(&$engine, &$module)
 
 			if ($results)
 			{
+				echo $engine->form_open('convert', '', 'post', true, '', '');
 ?>
-				<form action="admin.php" method="post" name="convert">
-					<input type="hidden" name="mode" value="dbconvert" />
 					<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 						<tr>
 							<th style="width:50px;" colspan="2"><a href="?mode=dbconvert<?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
@@ -168,8 +168,8 @@ function admin_dbconvert(&$engine, &$module)
 ?>
 					</table>
 					<input name="start" id="submit" type="submit" value="convert" />
-				</form>
 <?php
+				echo $engine->form_close();
 			}
 			else
 			{

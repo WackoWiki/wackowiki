@@ -9,17 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Uploaded Files                                   ##
 ########################################################
 
-$module['files'] = array(
+$module['content_files'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'mode'	=> 'files',
+		'status'=> true,
+		'mode'	=> 'content_files',
 		'name'	=> 'Files',
 		'title'	=> 'Manage uploaded files',
 	);
 
 ########################################################
 
-function admin_files(&$engine, &$module)
+function admin_content_files(&$engine, &$module)
 {
 	$order = '';
 	$error = '';
@@ -58,7 +59,7 @@ function admin_files(&$engine, &$module)
 		}
 		else
 		{
-			echo $engine->get_translation('UploadFileNotFound');
+			$engine->show_message($engine->get_translation('UploadFileNotFound'));
 		}
 
 		echo '</div>';
@@ -89,25 +90,28 @@ function admin_files(&$engine, &$module)
 				"LIMIT 1");
 
 			echo '<br />';
-			echo '<div><em>'.$engine->get_translation('UploadRemovedFromDB').'</em></div>';
+			$message =  '<em>'.$engine->get_translation('UploadRemovedFromDB').'</em><br />';
 
 			// 3. remove from FS
 			$real_filename = $engine->config['upload_path'].'/'.$file['file_name'];
 
 			if (@unlink($real_filename))
 			{
-				echo '<div><em>'.$engine->get_translation('UploadRemovedFromFS').'</em></div><br /><br /> ';
+				$message .= '<em>'.$engine->get_translation('UploadRemovedFromFS').'</em>';
+				$engine->show_message($message);
 			}
 			else
 			{
-				echo '<div class="error">'.$engine->get_translation('UploadRemovedFromFSError').'</div><br /><br /> ';
+				$message = $engine->get_translation('UploadRemovedFromFSError');
+				$engine->show_message($message, 'error');
 			}
 
 			$engine->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
 		}
 		else
 		{
-			echo $engine->get_translation('UploadRemoveNotFound');
+			$message = $engine->get_translation('UploadRemoveNotFound');
+			$engine->show_message($message);
 		}
 
 	}
@@ -226,7 +230,7 @@ function admin_files(&$engine, &$module)
 	}
 	if ($error)
 	{
-		echo $error.'<br /><br />';
+		$engine->show_message($error, 'error');
 	}
 
 	// displaying
@@ -314,7 +318,7 @@ function admin_files(&$engine, &$module)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<span class=\"pagination\">{$pagination['text']}</span><br /><br />\n";
+		echo '<span class="pagination">'.$pagination['text']."</span><br /><br />\n";
 	}
 
 	if (count($files))
@@ -363,7 +367,7 @@ function admin_files(&$engine, &$module)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 	}
 
 	echo "</fieldset>\n";
