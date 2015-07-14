@@ -5546,7 +5546,6 @@ class Wacko
 		{
 			$login_token	= hash('sha1', $auth['login_token']);
 			$user			= $this->load_user(false, 0, $auth['password'], true, $login_token );
-			#$this->debug_print_r($user);
 		}
 
 		// run in tls mode?
@@ -5561,7 +5560,7 @@ class Wacko
 		// in strong cookie mode check session validity
 		if ($this->config['session_encrypt_cookie'] == true)
 		{
-			if ($user['session_expire'] != 0
+			if (isset($user['session_expire']) && $user['session_expire'] != 0
 				&& time() < $user['session_expire']
 				&& time() < $auth['session_expire']
 				&& $user['session_expire'] == $auth['session_expire']
