@@ -95,94 +95,97 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 	// EXTENDED
 	if (isset($_GET['extended']) || isset($_POST['extended']))
 	{
-		echo "<ul class=\"menu\"><li><a href=\"".$this->href('properties', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li class=\"active\">".$this->get_translation('UserSettingsExtended')."</li></ul><br /><br />\n";
+		echo '<ul class="menu">
+				<li><a href="'.$this->href('properties', '', '').'">'.$this->get_translation('UserSettingsGeneral').'</a></li>
+				<li class="active">'.$this->get_translation('UserSettingsExtended')."</li>
+			</ul><br /><br />\n";
 
-		echo "<div class=\"page_settings\">";
+		echo '<div class="page_settings">';
 
 		echo $this->form_open('extended_properties', 'properties'); // , '', '', '', '', "extended"
-		echo "<input type=\"hidden\" name=\"extended\" value=\"yes\" />";
-		echo "\n<table class=\"form_tbl\">\n";
+		echo '<input type="hidden" name="extended" value="yes" />';
+		echo "\n".'<table class="form_tbl">'."\n";
 
 
 		// load settings (shows only if owner is current user or Admin)
 		if ($this->is_owner() || $this->is_admin())
 		{
-			echo "<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaComments')."</th>";
-			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"commentsOn\"		name=\"footer_comments\" value=\"1\" ".( $this->config['footer_comments'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOn\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"commentsGuest\"	name=\"footer_comments\" value=\"2\" ".( $this->config['footer_comments'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"commentsGuest\">".$this->get_translation('MetaRegistered')."</label>";
-			echo "<input type=\"radio\" id=\"commentsOff\"		name=\"footer_comments\" value=\"0\" ".( $this->config['footer_comments'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOff\">".$this->get_translation('MetaOff')."</label>";
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaComments')."</th>";
+			echo '<td class="form_right">';
+			echo '<input type="radio" id="commentsOn"		name="footer_comments" value="1" '.( $this->config['footer_comments'] == 1 ? 'checked="checked" ' : '' ).'/><label for="commentsOn">'.$this->get_translation('MetaOn')."</label>";
+			echo '<input type="radio" id="commentsGuest"	name="footer_comments" value="2" '.( $this->config['footer_comments'] == 2 ? 'checked="checked" ' : '' ).'/><label for="commentsGuest">'.$this->get_translation('MetaRegistered')."</label>";
+			echo '<input type="radio" id="commentsOff"		name="footer_comments" value="0" '.( $this->config['footer_comments'] == 0 ? 'checked="checked" ' : '' ).'/><label for="commentsOff">'.$this->get_translation('MetaOff')."</label>";
 
 			echo "</td>";
 			echo "</tr>\n";
-			echo "<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaFiles')."</th>";
-			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"filesOn\" name=\"footer_files\" value=\"1\" ".( $this->config['footer_files'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"filesOn\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"filesGuest\" name=\"footer_files\" value=\"2\" ".( $this->config['footer_files'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"filesGuest\">".$this->get_translation('MetaRegistered')."</label>";
-			echo "<input type=\"radio\" id=\"filesOff\" name=\"footer_files\" value=\"0\" ".( $this->config['footer_files'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"filesOff\">".$this->get_translation('MetaOff')."</label>";
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaFiles')."</th>";
+			echo '<td class="form_right">';
+			echo '<input type="radio" id="filesOn" name="footer_files" value="1" '.( $this->config['footer_files'] == 1 ? 'checked="checked" ' : '' ).'/><label for="filesOn">'.$this->get_translation('MetaOn')."</label>";
+			echo '<input type="radio" id="filesGuest" name="footer_files" value="2" '.( $this->config['footer_files'] == 2 ? 'checked="checked" ' : '' ).'/><label for="filesGuest">'.$this->get_translation('MetaRegistered')."</label>";
+			echo '<input type="radio" id="filesOff" name="footer_files" value="0" '.( $this->config['footer_files'] == 0 ? 'checked="checked" ' : '' ).'/><label for="filesOff">'.$this->get_translation('MetaOff')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
 
 			if ($this->config['footer_rating'] != 0)
 			{
-				echo "<tr class=\"lined\">";
-				echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaRating')."</th>";
-				echo "<td class=\"form_right\">";
-				echo "<input type=\"radio\" id=\"ratingOn\" name=\"footer_rating\" value=\"1\" ".( $this->config['footer_rating'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"ratingOn\">".$this->get_translation('MetaOn')."</label>";
-				echo "<input type=\"radio\" id=\"ratingGuest\" name=\"footer_rating\" value=\"2\" ".( $this->config['footer_rating'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"ratingGuest\">".$this->get_translation('MetaRegistered')."</label>";
-				echo "<input type=\"radio\" id=\"ratingOff\" name=\"footer_rating\" value=\"0\" ".( $this->config['footer_rating'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"ratingOff\">".$this->get_translation('MetaOff')."</label>";
+				echo '<tr class="lined">';
+				echo '<th class="form_left" scope="row">'.$this->get_translation('MetaRating')."</th>";
+				echo '<td class="form_right">';
+				echo '<input type="radio" id="ratingOn" name="footer_rating" value="1" '.( $this->config['footer_rating'] == 1 ? 'checked="checked" ' : '' ).'/><label for="ratingOn">'.$this->get_translation('MetaOn')."</label>";
+				echo '<input type="radio" id="ratingGuest" name="footer_rating" value="2" '.( $this->config['footer_rating'] == 2 ? 'checked="checked" ' : '' ).'/><label for="ratingGuest">'.$this->get_translation('MetaRegistered')."</label>";
+				echo '<input type="radio" id="ratingOff" name="footer_rating" value="0" '.( $this->config['footer_rating'] == 0 ? 'checked="checked" ' : '' ).'/><label for="ratingOff">'.$this->get_translation('MetaOff')."</label>";
 				echo "</td>";
 				echo "</tr>\n";
 			}
 
-			echo "<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaToc')."</th>";
-			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"tocOn\" name=\"hide_toc\" value=\"0\" ".( !$this->config['hide_toc'] ? "checked=\"checked\"" : "" )."/><label for=\"tocOn\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"tocOff\" name=\"hide_toc\" value=\"1\" ".( $this->config['hide_toc'] ? "checked=\"checked\"" : "" )."/><label for=\"tocOff\">".$this->get_translation('MetaOff')."</label>";
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaToc')."</th>";
+			echo '<td class="form_right">';
+			echo '<input type="radio" id="tocOn" name="hide_toc" value="0" '.( !$this->config['hide_toc'] ? 'checked="checked" ' : '' ).'/><label for="tocOn">'.$this->get_translation('MetaOn')."</label>";
+			echo '<input type="radio" id="tocOff" name="hide_toc" value="1" '.( $this->config['hide_toc'] ? 'checked="checked" ' : '' ).'/><label for="tocOff">'.$this->get_translation('MetaOff')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
-			echo "<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaIndex')."</th>";
-			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"indexOn\" name=\"hide_index\" value=\"0\" ".( !$this->config['hide_index'] ? "checked=\"checked\"" : "" )."/><label for=\"indexOn\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"indexOff\" name=\"hide_index\" value=\"1\" ".( $this->config['hide_index'] ? "checked=\"checked\"" : "" )."/><label for=\"indexOff\">".$this->get_translation('MetaOff')."</label>";
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaIndex')."</th>";
+			echo '<td class="form_right">';
+			echo '<input type="radio" id="indexOn" name="hide_index" value="0" '.( !$this->config['hide_index'] ? 'checked="checked" ' : '' ).'/><label for="indexOn">'.$this->get_translation('MetaOn')."</label>";
+			echo '<input type="radio" id="indexOff" name="hide_index" value="1" '.( $this->config['hide_index'] ? 'checked="checked" ' : '' ).'/><label for="indexOff">'.$this->get_translation('MetaOff')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
-			echo "<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaIndexMode')."</th>";
-			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"indexmodeF\" name=\"tree_level\" value=\"0\" ".( $this->config['tree_level'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeF\">".$this->get_translation('MetaIndexFull')."</label>";
-			echo "<input type=\"radio\" id=\"indexmodeL\" name=\"tree_level\" value=\"1\" ".( $this->config['tree_level'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeL\">".$this->get_translation('MetaIndexLower')."</label>";
-			echo "<input type=\"radio\" id=\"indexmodeU\" name=\"tree_level\" value=\"2\" ".( $this->config['tree_level'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeU\">".$this->get_translation('MetaIndexUpper')."</label>";
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaIndexMode')."</th>";
+			echo '<td class="form_right">';
+			echo '<input type="radio" id="indexmodeF" name="tree_level" value="0" '.( $this->config['tree_level'] == 0 ? 'checked="checked" ' : '' ).'/><label for="indexmodeF">'.$this->get_translation('MetaIndexFull')."</label>";
+			echo '<input type="radio" id="indexmodeL" name="tree_level" value="1" '.( $this->config['tree_level'] == 1 ? 'checked="checked" ' : '' ).'/><label for="indexmodeL">'.$this->get_translation('MetaIndexLower')."</label>";
+			echo '<input type="radio" id="indexmodeU" name="tree_level" value="2" '.( $this->config['tree_level'] == 2 ? 'checked="checked" ' : '' ).'/><label for="indexmodeU">'.$this->get_translation('MetaIndexUpper')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
 
 			if ($this->is_admin())
 			{
-				echo "<tr class=\"lined\">";
-				echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaHtml')."</th>";
-				echo "<td class=\"form_right\">";
-				echo "<input type=\"radio\" id=\"htmlOn\" name=\"allow_rawhtml\" value=\"1\" ".( $this->config['allow_rawhtml'] ? "checked=\"checked\"" : "" )."/><label for=\"htmlOn\">".$this->get_translation('MetaOn')."</label>";
-				echo "<input type=\"radio\" id=\"htmlOff\" name=\"allow_rawhtml\" value=\"0\" ".( !$this->config['allow_rawhtml'] ? "checked=\"checked\"" : "" )."/><label for=\"htmlOff\">".$this->get_translation('MetaOff')."</label>";
+				echo '<tr class="lined">';
+				echo '<th class="form_left" scope="row">'.$this->get_translation('MetaHtml')."</th>";
+				echo '<td class="form_right">';
+				echo '<input type="radio" id="htmlOn" name="allow_rawhtml" value="1" '.( $this->config['allow_rawhtml'] ? 'checked="checked" ' : '' ).'/><label for="htmlOn">'.$this->get_translation('MetaOn')."</label>";
+				echo '<input type="radio" id="htmlOff" name="allow_rawhtml" value="0" '.( !$this->config['allow_rawhtml'] ? 'checked="checked" ' : '' ).'/><label for="htmlOff">'.$this->get_translation('MetaOff')."</label>";
 				echo "</td>";
 				echo "</tr>\n";
-				echo "<tr class=\"lined\">";
-				echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaSafeHtml')."</th>";
-				echo "<td class=\"form_right\">";
-				echo "<input type=\"radio\" id=\"safehtmlOn\" name=\"disable_safehtml\" value=\"0\" ".( !$this->config['disable_safehtml'] ? "checked=\"checked\"" : '' )."/><label for=\"safehtmlOn\">".$this->get_translation('MetaOn')."</label>";
-				echo "<input type=\"radio\" id=\"safehtmlOff\" name=\"disable_safehtml\" value=\"1\" ".( $this->config['disable_safehtml'] ? "checked=\"checked\"" : '' )."/><label for=\"safehtmlOff\">".$this->get_translation('MetaOff')."</label>";
+				echo '<tr class="lined">';
+				echo '<th class="form_left" scope="row">'.$this->get_translation('MetaSafeHtml')."</th>";
+				echo '<td class="form_right">';
+				echo '<input type="radio" id="safehtmlOn" name="disable_safehtml" value="0" '.( !$this->config['disable_safehtml'] ? 'checked="checked" ' : '' ).'/><label for="safehtmlOn">'.$this->get_translation('MetaOn')."</label>";
+				echo '<input type="radio" id="safehtmlOff" name="disable_safehtml" value="1" '.( $this->config['disable_safehtml'] ? 'checked="checked" ' : '' ).'/><label for="safehtmlOff">'.$this->get_translation('MetaOff')."</label>";
 				echo "</td>";
 				echo "</tr>\n";
 			}
 
-			echo "<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaNoIndex')."</th>";
-			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"noindexOn\" name=\"noindex\" value=\"1\" ".( $this->page['noindex'] ? "checked=\"checked\"" : '' )."/><label for=\"noindexOn\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"noindexOff\" name=\"noindex\" value=\"0\" ".( !$this->page['noindex'] ? "checked=\"checked\"" : '' )."/><label for=\"noindexOff\">".$this->get_translation('MetaOff')."</label>";
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaNoIndex')."</th>";
+			echo '<td class="form_right">';
+			echo '<input type="radio" id="noindexOn" name="noindex" value="1" '.( $this->page['noindex'] ? 'checked="checked" ' : '' ).'/><label for="noindexOn">'.$this->get_translation('MetaOn')."</label>";
+			echo '<input type="radio" id="noindexOff" name="noindex" value="0" '.( !$this->page['noindex'] ? 'checked="checked" ' : '' ).'/><label for="noindexOff">'.$this->get_translation('MetaOff')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
 			echo "<tr>";
@@ -201,10 +204,13 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 	// GENERAL
 	else
 	{
-		echo "<ul class=\"menu\"><li class=\"active\">".$this->get_translation('UserSettingsGeneral')."</li><li><a href=\"".$this->href('properties', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
-		echo "<div class=\"page_settings\">";
+		echo '<ul class="menu">
+				<li class="active">'.$this->get_translation('UserSettingsGeneral').'</li>
+				<li><a href="'.$this->href('properties', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
+			</ul><br /><br />\n";
+		echo '<div class="page_settings">';
 		echo $this->form_open('general_properties', 'properties');
-		echo "<table class=\"form_tbl\">";
+		echo '<table class="form_tbl">';
 
 		// show form
 		// load settings (shows only if owner is current user or Admin)
@@ -218,7 +224,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			echo '<th class="form_left" scope="row"><label for="keywords">'.$this->get_translation('MetaKeywords').'</label></th>';
 			echo '<td class="form_right"><textarea id="keywords" name="keywords" rows="4" cols="51">'.$this->page['keywords'].'</textarea></td>';
 
-			echo "</tr>\n<tr class=\"lined\">";
+			echo "</tr>\n".'<tr class="lined">';
 			echo '<th class="form_left" scope="row"><label for="description">'.$this->get_translation('MetaDescription').'</label></th>';
 			echo '<td class="form_right"><textarea id="description" name="description" rows="4" cols="51">'.$this->page['description'].'</textarea></td>';
 
@@ -229,11 +235,11 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			/* echo '<tr class="lined">';
 			echo '<th class="form_left" scope="row"><label for="show_menu_tag">'.$this->get_translation('SetShowMenuLabel').'</label></th>';
 			echo '<td class="form_right">';
-			echo "<input type=\"radio\" id=\"menu_tag_on\" name=\"show_menu_tag\" value=\"1\" ".( $this->page['show_menu_tag'] ? "checked=\"checked\"" : "" )."/><label for=\"menu_tag_on\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"menu_tag_off\" name=\"show_menu_tag\" value=\"0\" ".( !$this->page['show_menu_tag'] ? "checked=\"checked\"" : "" )."/><label for=\"menu_tag_off\">".$this->get_translation('MetaOff')."</label>";
+			echo '<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" '.( $this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_on">'.$this->get_translation('MetaOn')."</label>";
+			echo '<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" '.( !$this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_off">'.$this->get_translation('MetaOff')."</label>";
 			echo "</td>"; */
 
-			echo "</tr>\n<tr class=\"lined\">";
+			echo "</tr>\n".'<tr class="lined">';
 			echo '<th class="form_left" scope="row"><label for="lang">'.$this->get_translation('SetLang').'</label></th>';
 			echo '<td class="form_right"><select id="lang" name="lang">';
 
@@ -246,7 +252,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			{
 				foreach ($langs as $lang)
 				{
-					echo "<option value=\"".$lang."\" ".($clang == $lang ? "selected=\"selected\"" : "").">".$lang."</option>\n";
+					echo '<option value="'.$lang.'" '.($clang == $lang ? 'selected="selected" ' : '').'>'.$lang."</option>\n";
 				}
 			}
 
@@ -258,9 +264,9 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 
 			if ($this->config['allow_themes_per_page'] == true)
 			{
-				echo "<tr class=\"lined\">\n";
-				echo "<th class=\"form_left\" scope=\"row\"><label for=\"theme\">".$this->get_translation('ChooseTheme')."</label></th>\n";
-				echo "<td class=\"form_right\"><select id=\"theme\" name=\"theme\">\n";
+				echo '<tr class="lined">'."\n";
+				echo '<th class="form_left" scope="row"><label for="theme">'.$this->get_translation('ChooseTheme')."</label></th>\n";
+				echo '<td class="form_right"><select id="theme" name="theme">'."\n";
 
 				echo '<option value="">--</option>';
 				$themes = $this->available_themes();
@@ -269,9 +275,9 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				{
 					echo '<option value="'.$themes[$i].'" '.
 						(isset($this->page['theme']) && $this->page['theme'] == $themes[$i]
-							? "selected=\"selected\""
-							: ""
-						).">".$themes[$i]."</option>\n";
+							? 'selected="selected" '
+							: ''
+						).'>'.$themes[$i]."</option>\n";
 				}
 
 				echo "</select></td>\n";
@@ -287,18 +293,18 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		}
 		else
 		{
-			echo "<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaTitle')."</th>";
-			echo "<td class=\"form_right\">".$this->page['title']."</td>";
-			echo "</tr>\n<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaKeywords')."</th>";
-			echo "<td class=\"form_right\">".$this->page['keywords']."</td>";
-			echo "</tr>\n<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaDescription')."</th>";
-			echo "<td class=\"form_right\">".$this->page['description']."</td>";
-			echo "</tr>\n<tr class=\"lined\">";
-			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SetLang')."</th>";
-			echo "<td class=\"form_right\">".$this->page['lang']."</td>";
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaTitle')."</th>";
+			echo '<td class="form_right">'.$this->page['title']."</td>";
+			echo "</tr>\n".'<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaKeywords')."</th>";
+			echo '<td class="form_right">'.$this->page['keywords']."</td>";
+			echo "</tr>\n".'<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('MetaDescription')."</th>";
+			echo '<td class="form_right">'.$this->page['description']."</td>";
+			echo "</tr>\n".'<tr class="lined">';
+			echo '<th class="form_left" scope="row">'.$this->get_translation('SetLang')."</th>";
+			echo '<td class="form_right">'.$this->page['lang']."</td>";
 		}
 
 		echo "</tr>\n</table>";
@@ -306,40 +312,40 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		echo "</div>";
 	}
 
-	echo "<div class=\"page_tools\">";
-	echo "<table class=\"form_tbl\">";
-	echo "<tr class=\"lined\">";
-	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsID')."</th>";
-	echo "<td class=\"form_right\">".$this->page['page_id']."</td>";
-	echo "</tr>\n<tr class=\"lined\">";
-	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('Owner')."</th>";
-	echo "<td class=\"form_right\">"."<a href=\"".$this->href('', $this->config['users_page'], "profile=".$this->page['owner_name'])."\">".$this->page['owner_name']."</a>"."</td>";
-	echo "</tr>\n<tr class=\"lined\">";
-	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsCreated')."</th>";
-	echo "<td class=\"form_right\">".$this->get_time_string_formatted($this->page['created'])."</td>";
-	echo "</tr>\n<tr class=\"lined\">";
-	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsCurrent')."</th>";
-	echo "<td class=\"form_right\">".$this->get_time_string_formatted($this->page['modified'])."</td>";
-	echo "</tr>\n<tr class=\"lined\">";
-	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsSize')."&nbsp;&nbsp;</th>";
-	echo "<td class=\"form_right\" title=\"".$this->get_translation('SettingsSizeTip')."\">".$this->binary_multiples(strlen($this->page['body']), false, true, true).' / '.$this->binary_multiples(strlen($this->page['body_r']), false, true, true)."</td>";
-	echo "</tr>\n<tr class=\"lined\">";
-	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalRevs')."</th>";
-	echo "<td class=\"form_right\"><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".(int)$revs['total']."</a></td>";
+	echo '<div class="page_tools">';
+	echo '<table class="form_tbl">';
+	echo '<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsID')."</th>";
+	echo '<td class="form_right">'.$this->page['page_id']."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('Owner')."</th>";
+	echo '<td class="form_right">'."<a href=\"".$this->href('', $this->config['users_page'], "profile=".$this->page['owner_name'])."\">".$this->page['owner_name']."</a>"."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsCreated')."</th>";
+	echo '<td class="form_right">'.$this->get_time_string_formatted($this->page['created'])."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsCurrent')."</th>";
+	echo '<td class="form_right">'.$this->get_time_string_formatted($this->page['modified'])."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsSize')."&nbsp;&nbsp;</th>";
+	echo '<td class="form_right" title="'.$this->get_translation('SettingsSizeTip').'">'.$this->binary_multiples(strlen($this->page['body']), false, true, true).' / '.$this->binary_multiples(strlen($this->page['body_r']), false, true, true)."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsTotalRevs')."</th>";
+	echo '<td class="form_right"><a href="'.$this->href('revisions').'" title="'.$this->get_translation('RevisionTip').'">'.(int)$revs['total']."</a></td>";
 	unset($revs);
-	echo "</tr>\n<tr class=\"lined\">";
-	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalComs')."</th>";
-	echo "<td class=\"form_right\"><a href=\"".$this->href('', '', 'show_comments=1#commentsheader')."\" title=\"".$this->get_translation('ShowComments')."\">".$this->page['comments']."</a></td>";
-	echo "</tr>\n<tr class=\"lined\">";
-	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsHits')."</th>";
-	echo "<td class=\"form_right\">".number_format($this->page['hits'], 0, ',', '.')."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsTotalComs')."</th>";
+	echo '<td class="form_right"><a href=\"'.$this->href('', '', 'show_comments=1#commentsheader')."\" title=\"".$this->get_translation('ShowComments')."\">".$this->page['comments']."</a></td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsHits')."</th>";
+	echo '<td class="form_right">'.number_format($this->page['hits'], 0, ',', '.')."</td>";
 	echo "</tr>\n";
 
 	if ($this->config['footer_rating'] != 0)
 	{
-		echo "<tr class=\"lined\">";
-		echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsRating')."</th>";
-		echo "<td class=\"form_right\">".$rating['ratio'].' ('.$this->get_translation('RatingVoters').': '.(int)$rating['voters'].')'."</td>";
+		echo '<tr class="lined">';
+		echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsRating')."'</th>\n";
+		echo '<td class="form_right">'.$rating['ratio'].' ('.$this->get_translation('RatingVoters').': '.(int)$rating['voters'].')'."</td>\n";
 		unset($rating);
 		echo "</tr>\n";
 	}
@@ -356,26 +362,26 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 	// Rename link (shows only if owner is current user or Admin)
 	if ($this->is_owner() || $this->is_admin())
 	{
-		echo "<li><a href=\"".$this->href('rename')."\">".$this->get_translation('SettingsRename')."</a></li>";
+		echo '<li><a href="'.$this->href('rename').'">'.$this->get_translation('SettingsRename')."</a></li>\n";
 	}
 
 	// Remove link (shows only for page owner if allowed)
 	if ($this->is_owner() && !$this->config['remove_onlyadmins'] || $this->is_admin())
 	{
-		echo "<li><a href=\"".$this->href('remove')."\">".$this->get_translation('SettingsRemove')."</a></li>\n";
-		echo "<li><a href=\"".$this->href('purge')."\">".$this->get_translation('SettingsPurge')."</a></li>\n";
+		echo '<li><a href="'.$this->href('remove').'">'.$this->get_translation('SettingsRemove')."</a></li>\n";
+		echo '<li><a href="'.$this->href('purge').'">'.$this->get_translation('SettingsPurge')."</a></li>\n";
 	}
 
 	// Moderate link (shows only if current user is Moderator or Admin)
 	if ($this->is_moderator() || $this->is_admin())
 	{
-		echo "<li><a href=\"".$this->href('moderate')."\">".$this->get_translation('SettingsModerate')."</a></li>\n";
+		echo '<li><a href="'.$this->href('moderate').'">'.$this->get_translation('SettingsModerate')."</a></li>\n";
 	}
 
 	// ACL link (shows only if owner is current user or Admin)
 	if ($this->is_owner() || $this->is_admin())
 	{
-		echo "<li><a href=\"".$this->href('permissions')."\">".$this->get_translation('SettingsPermissions')."</a></li>\n";
+		echo '<li><a href="'.$this->href('permissions').'">'.$this->get_translation('SettingsPermissions')."</a></li>\n";
 	}
 
 	echo '<li><a href="'.$this->href('categories').'">'.$this->get_translation('SettingsCategories').'</a></li>';
