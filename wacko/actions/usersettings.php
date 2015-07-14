@@ -156,8 +156,8 @@ else if ($user = $this->get_user())
 				"WHERE user_id = '".(int)$user['user_id']."' ".
 				"LIMIT 1");
 
-			$subject = $this->config['site_name'].". ".$this->get_translation('EmailConfirm');
-			$body = $this->get_translation('EmailHello'). $user['user_name'].".\n\n".
+			$subject	= $this->config['site_name'].". ".$this->get_translation('EmailConfirm');
+			$body		= $this->get_translation('EmailHello'). $user['user_name'].".\n\n".
 				str_replace('%1', $this->config['site_name'],
 				str_replace('%2', $user['user_name'],
 				str_replace('%3', $this->href().
@@ -183,9 +183,9 @@ else if ($user = $this->get_user())
 		$this->set_user($this->load_user(0, $user['user_id'], 0, true), 1);
 		$this->set_menu(MENU_USER);
 
-		$user = $this->get_user();
+		$user		= $this->get_user();
 
-		$message .= $this->get_translation('UserSettingsStored', (isset($_POST['lang']) ? $_POST['lang'] : ''));
+		$message	.= $this->get_translation('UserSettingsStored', (isset($_POST['lang']) ? $_POST['lang'] : ''));
 		// forward
 		$this->set_message($message);
 		$this->redirect(($_POST['action'] == 'update_extended' ? $this->href('', '', 'extended') : $this->href()));
@@ -197,19 +197,27 @@ else if ($user = $this->get_user())
 	// MENU
 	if (isset($_GET['menu']) || isset($_POST['_user_menu']) )
 	{
-		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('Bookmarks')."</h3>";
-		echo "<ul class=\"menu\"><li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li class=\"active\">".$this->get_translation('Bookmarks')."</li><li><a href=\"".$this->href('', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
+		echo '<h3>'.$this->get_translation('UserSettings').' &raquo; '.$this->get_translation('Bookmarks').'</h3>';
+		echo '<ul class="menu">
+				<li><a href="'.$this->href('', '', '').'">'.$this->get_translation('UserSettingsGeneral').'</a></li>
+				<li class="active">'.$this->get_translation('Bookmarks').'</li>
+				<li><a href="'.$this->href('', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
+				</ul><br /><br />\n";
 		echo $this->action('menu', array('redirect' => 1));
 	}
 
 	// EXTENDED
 	else if (isset($_GET['extended']) || (isset($_POST['action'])&& $_POST['action'] == 'update_extended'))
 	{
-		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('UserSettingsExtended')."</h3>";
-		echo "<ul class=\"menu\"><li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li><a href=\"".$this->href('', '', 'menu')."\">".$this->get_translation('Bookmarks')."</a></li><li class=\"active\">".$this->get_translation('UserSettingsExtended')."</li></ul><br /><br />\n";
+		echo '<h3>'.$this->get_translation('UserSettings').' &raquo; '.$this->get_translation('UserSettingsExtended').'</h3>';
+		echo '<ul class="menu">
+				<li><a href="'.$this->href('', '', '').'">'.$this->get_translation('UserSettingsGeneral').'</a></li>
+				<li><a href="'.$this->href('', '', 'menu').'">'.$this->get_translation('Bookmarks').'</a></li>
+				<li class="active">'.$this->get_translation('UserSettingsExtended')."</li>
+				</ul><br /><br />\n";
 		echo $this->form_open('user_settings_extended');
-		echo "<input type=\"hidden\" name=\"action\" value=\"update_extended\" />";
-		?>
+		echo '<input type="hidden" name="action" value="update_extended" />';
+?>
 		<div class="page_settings">
 		<table class="form_tbl">
 		<tbody>
@@ -262,10 +270,10 @@ else if ($user = $this->get_user())
 			<label for="dont_redirect"><?php echo $this->get_translation('DontRedirect');?></label>
 		</td>
 	</tr>
-	<?php
+<?php
 	if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true)
 	{
-	?>
+?>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
@@ -281,9 +289,9 @@ else if ($user = $this->get_user())
 			<label for="allow_intercom"><?php echo $this->get_translation('AllowIntercom');?></label>
 		</td>
 	</tr>
-	<?php
+<?php
 	}
-	?>
+?>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="allow_massemail" value="0" />
@@ -307,10 +315,10 @@ else if ($user = $this->get_user())
 			<label for="hide_lastsession"><?php echo $this->get_translation('HideLastSession');?></label>
 		</td>
 	</tr>
-	<?php
+<?php
 	if ($this->config['publish_anonymously'] == true)
 	{
-	?>
+?>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
@@ -319,17 +327,17 @@ else if ($user = $this->get_user())
 			<label for="noid_pubs"><?php echo $this->get_translation('ProfileAnonymousPub');?></label>
 		</td>
 	</tr>
-	<?php
+<?php
 	}
-	?>
+?>
 	<tr class="lined">
 		<th class="form_left"><label for="session_length"><?php echo $this->get_translation('SessionDuration');?></label></th>
 		<td class="form_right">
-			<?php
+<?php
 			echo '<input type="radio" id="duration1" name="session_length" value="1" '.( $user['session_length'] == 1 ? 'checked="checked"' : '' ).'/><label for="duration1">'.$this->get_translation('SessionDurationDay').'</label>';
 			echo '<input type="radio" id="duration7" name="session_length" value="7" '.( $user['session_length'] == 7 ? 'checked="checked"' : '' ).'/><label for="duration7">'.$this->get_translation('SessionDurationWeek').'</label>';
 			echo '<input type="radio" id="duration30" name="session_length" value="30" '.( $user['session_length'] == 30 ? 'checked="checked"' : '' ).'/><label for="duration30">'.$this->get_translation('SessionDurationMonth').'</label>';
-			?>
+?>
 		</td>
 	</tr>
 	<!--<tr>
@@ -370,8 +378,12 @@ else if ($user = $this->get_user())
 			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
-		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('UserSettingsGeneral')."</h3>";
-		echo "<ul class=\"menu\"><li class=\"active\">".$this->get_translation('UserSettingsGeneral')."</li><li><a href=\"".$this->href('', '', 'menu')."\">".$this->get_translation('Bookmarks')."</a></li><li><a href=\"".$this->href('', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
+		echo '<h3>'.$this->get_translation('UserSettings').' &raquo; '.$this->get_translation('UserSettingsGeneral').'</h3>';
+		echo '<ul class="menu">
+				<li class="active">'.$this->get_translation('UserSettingsGeneral').'</li>
+				<li><a href="'.$this->href('', '', 'menu').'">'.$this->get_translation('Bookmarks').'</a></li>
+				<li><a href="'.$this->href('', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
+				</ul><br /><br />\n";
 ?>
 <input type="hidden" name="action" value="update" />
 <div class="page_settings">
@@ -380,7 +392,7 @@ else if ($user = $this->get_user())
 <tbody>
 	<tr class="lined">
 		<th class="form_left" scope="row"><?php echo $this->get_translation('UserName');?></th>
-		<td><strong><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$user['user_name'])."\">".$user['user_name']."</a>";?></strong></td>
+		<td><strong><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'">'.$user['user_name'].'</a>';?></strong></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="real_name"><?php echo $this->get_translation('RealName');?></label></th>
@@ -396,10 +408,10 @@ else if ($user = $this->get_user())
 		<td><input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;<?php echo $user['email_confirm'] == '' ? '<img src="'.$this->config['base_url'].'images/tick.png" alt="'.$this->get_translation('EmailConfirmed').'" title="'.$this->get_translation('EmailConfirmed').'" width="20" height="20" />' : '<img src="'.$this->config['base_url'].'images/warning.png" alt="'.$this->get_translation('EmailConfirm').'" title="'.$this->get_translation('EmailConfirm').'" width="16" height="16" />' ?>
 <?php
 		if (!$user['email'] || $code['email_confirm'])
-			echo "<div class=\"BewareChangeLang\"><strong class=\"cite\">".
-				$this->get_translation('EmailNotVerified')."</strong><br />".
-				"<small>".$this->get_translation('EmailNotVerifiedDesc')."<strong><a href=\"".$this->href().
-								($this->config['rewrite_mode'] ? "?" : "&")."resend_code=1\">".$this->get_translation('HereLink')."</a></strong>.</small></div>";
+			echo '<div class="BewareChangeLang"><strong class="cite">'.
+				$this->get_translation('EmailNotVerified').'</strong><br />'.
+				'<small>'.$this->get_translation('EmailNotVerifiedDesc').'<strong><a href="'.$this->href().
+								($this->config['rewrite_mode'] ? '?' : '&').'resend_code=1">'.$this->get_translation('HereLink').'</a></strong>.</small></div>';
 ?></td>
 	</tr>
 	<tr>
@@ -409,7 +421,7 @@ else if ($user = $this->get_user())
 	<tr class="lined">
 	<th class="form_left" scope="row"><label for="lang"><?php echo $this->get_translation('YourLanguage');?></label></th>
 	<td class="form_right"><select id="lang" name="lang">
-	<?php
+<?php
 	if ($this->config['multilanguage'])
 	{
 		$langs = $this->available_languages();
@@ -421,15 +433,15 @@ else if ($user = $this->get_user())
 
 	for ($i = 0; $i < count($langs); $i++)
 	{
-		echo "<option value=\"".$langs[$i]."\" ".
+		echo '<option value="'.$langs[$i].'" '.
 			($user['lang'] == $langs[$i]
-				? " selected=\"selected\""
+				? ' selected="selected" '
 				: (!isset($user['lang']) && $this->config['language'] == $langs[$i]
-					? "selected=\"selected\""
-					: "")
-			).">".$langs[$i]."</option>\n";
+					? 'selected="selected"'
+					: '')
+			).'>'.$langs[$i]."</option>\n";
 	}
-	?>
+?>
 </select></td>
 	</tr>
 	<tr class="lined">
@@ -443,13 +455,13 @@ else if ($user = $this->get_user())
 	{
 		echo '<option value="'.$themes[$i].'" '.
 			(isset($user['theme']) && $user['theme'] == $themes[$i]
-				? "selected=\"selected\""
+				? 'selected="selected" '
 				: ($this->config['theme'] == $themes[$i]
-					? "selected=\"selected\""
-					: "")
-			).">".$themes[$i]."</option>\n";
+					? 'selected="selected" '
+					: '')
+			).'>'.$themes[$i]."</option>\n";
 	}
-	?>
+?>
 		</select></td>
 	</tr>
 		<tr class="lined">
@@ -468,22 +480,22 @@ else if ($user = $this->get_user())
 
 		echo '<option value="'.$offset.'" '.
 			(isset($user['timezone']) && $user['timezone'] == $offset
-				? "selected=\"selected\""
+				? 'selected="selected" '
 				: ($this->config['timezone'] == $offset
-					? "selected=\"selected\""
-					: "")
-			).">".$timezone."</option>\n";
+					? 'selected="selected" '
+					: '')
+			).'>'.$timezone."</option>\n";
 	}
-	?>
+?>
 		</select></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left"><label for="dst"><?php echo $this->get_translation('DST');?></label></th>
 		<td class="form_right">
-			<?php
+<?php
 			echo '<input type="radio" id="dst0" name="dst" value="0" '.( $user['dst'] == 0 ? 'checked="checked"' : '' ).'/><label for="dst0">'.$this->get_translation('MetaOff').'</label>';
 			echo '<input type="radio" id="dst1" name="dst" value="1" '.( $user['dst'] == 1 ? 'checked="checked"' : '' ).'/><label for="dst1">'.$this->get_translation('MetaOn').'</label>';
-			?>
+?>
 		</td>
 	</tr>
 	<tr class="lined">
@@ -510,7 +522,7 @@ else if ($user = $this->get_user())
 </table>
 </div>
 <br />
-	<?php
+<?php
 	//  echo $this->format_translation('SeeListOfPages')."<br />";
 	echo $this->form_close();
 	}
