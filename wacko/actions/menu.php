@@ -5,6 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// {{menu system=[0|1] redirect=''}}
+
 if (!function_exists('menu_sorting'))
 {
 	function menu_sorting ($a, $b)
@@ -22,20 +24,21 @@ if (!function_exists('menu_sorting'))
 
 if (!function_exists('load_user_menu'))
 {
-	function load_user_menu(&$wacko, $user_id)
+	function load_user_menu(&$wacko, $user_id, $lang = '')
 	{
 		$_menu = $wacko->load_all(
 			"SELECT p.tag, p.title, b.menu_id, b.user_id, b.menu_title, b.lang, b.menu_position ".
 			"FROM ".$wacko->config['table_prefix']."menu b ".
 				"LEFT JOIN ".$wacko->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
 			"WHERE b.user_id = '".(int)$user_id."' ".
+				($lang
+					? "AND b.lang =  '".$lang."' "
+					: "").
 			"ORDER BY b.menu_position", 0);
 
 		return $_menu;
 	}
 }
-
-// {{menu system=[0|1] redirect=''}}
 
 if (!isset($redirect)) $redirect = 0; // required for usersettings action
 if (!isset($system))
@@ -43,12 +46,37 @@ if (!isset($system))
 	$system = 0;
 }
 
-$message	= '';
+$message		= '';
+$user			= '';
+$default_menu	= '';
+$menu_lang		= '';
+
+#$this->debug_print_r($_REQUEST);
 
 // get default menu items
 if ($this->is_admin() && $system == true)
 {
-	$_user_id	= $this->get_user_id('System');
+	$_user_id		= $this->get_user_id('System');
+	$default_menu	= true;
+
+	if ($this->config['multilanguage'] == false)
+	{
+		$menu_lang = $this->config['language'];
+	}
+	else
+	{
+		#$menu_lang = isset($_GET['lang']) ? $_GET['lang'] : isset($_POST['lang']) ? $_POST['lang'] : $this->config['language'];
+		$menu_lang = isset($_REQUEST['lang']) ? $_REQUEST['lang'] : $this->config['language'];
+
+		// sanitize in_array ...
+		if(!in_array($menu_lang, $this->available_languages()))
+		{
+			//language doesn't have any language files so use the admin set language instead
+			$menu_lang = $this->config['language'];
+		}
+	}
+
+	#$this->set_menu(MENU_DEFAULT);
 }
 else
 {
@@ -59,7 +87,7 @@ else
 /// Processing of our special form
 if (isset($_POST['_user_menu']))
 {
-	$_menu		= load_user_menu($this, $_user_id);
+	$_menu		= load_user_menu($this, $_user_id, $menu_lang);
 	$a			= $_menu;
 	$b			= array();
 
@@ -116,6 +144,7 @@ if (isset($_POST['_user_menu']))
 			if ($page = $this->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
 				$_page_id = $this->get_page_id($new_tag);
+				$_user_lang = (isset($_POST['lang_new']) ? $_POST['lang_new'] : $user['lang']);
 
 				// check existing page write access
 				if ($this->has_access('write', $_page_id))
@@ -125,6 +154,9 @@ if (isset($_POST['_user_menu']))
 						"SELECT menu_id ".
 						"FROM ".$this->config['table_prefix']."menu ".
 						"WHERE user_id = '".(int)$_user_id."' ".
+							($default_menu === true
+									? "AND lang = '".$_user_lang."' "
+									: "").
 							"AND page_id = '".(int)$_page_id."' ".
 						"LIMIT 1"))
 					{
@@ -133,19 +165,24 @@ if (isset($_POST['_user_menu']))
 					else
 					{
 						// writing menu item
-						$_menu_page_ids = $this->get_menu_links();
+						$_menu_page_ids = $this->get_menu_links(); // FIXME: loads not user array for system menu!
+						$menu = array();
 
 						if (!in_array($_page_id, $_menu_page_ids))
 						{
 							$menu[] = array(
 								$_page_id,
-								'(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $page['lang'] ? ' @@'.$page['lang'] : '').'))'
+								'(('.$page['tag'].' '.$this->get_page_title($page['tag']).($_user_lang != $page['lang'] ? ' @@'.$page['lang'] : '').'))'
 								);
 
 							$_menu_position = $this->load_all(
 								"SELECT b.menu_id ".
 								"FROM ".$this->config['table_prefix']."menu b ".
-								"WHERE b.user_id = '".(int)$_user_id."' ", 0);
+								"WHERE b.user_id = '".(int)$_user_id."' ".
+									($default_menu === true
+										? "AND b.lang = '".$_user_lang."' "
+										: "")
+									, 0);
 
 							$_menu_item_count = count($_menu_position);
 
@@ -153,7 +190,7 @@ if (isset($_POST['_user_menu']))
 								"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 								"user_id			= '".(int)$_user_id."', ".
 								"page_id			= '".(int)$_page_id."', ".
-								"lang				= '".quote($this->dblink, ($user['lang'] != $page['lang'] ? $page['lang'] : ""))."', ".
+								"lang				= '".quote($this->dblink, (($_user_lang != $page['lang']) && $default_menu === false ? $page['lang'] : $_user_lang))."', ".
 								"menu_position		= '".(int)($_menu_item_count + 1)."'");
 						}
 
@@ -225,13 +262,14 @@ if (isset($_POST['_user_menu']))
 
 	$this->set_menu(MENU_USER, 1);
 
+	// XXX: seems to work without
 	#if ($redirect = '')
-	$this->redirect($this->href('', '', $redirect ? 'menu' : ''));
+	#$this->redirect($this->href('', '', $redirect ? 'menu' : ''));
 }
 
 if ($_user_id)
 {
-	$_menu = load_user_menu($this, $_user_id);
+	$_menu = load_user_menu($this, $_user_id, $menu_lang);
 
 	if ($_menu)
 	{
@@ -239,7 +277,37 @@ if ($_user_id)
 
 		// user is logged in; display config form
 		echo $this->form_open('edit_bookmarks');
+
 		echo '<input type="hidden" name="_user_menu" value="yes" />';
+
+		if ($default_menu === true)
+		{
+			echo '<label for="lang">'.$this->get_translation('YourLanguage').' </label>';
+			// FIXME: add a common function for this?
+			echo '<select id="lang" name="lang">';
+
+			if ($this->config['multilanguage'])
+			{
+				$langs = $this->available_languages();
+			}
+			else
+			{
+				$langs[] = $this->config['language'];
+			}
+
+			if ($langs)
+			{
+				foreach ($langs as $lang)
+				{
+					echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$lang."</option>\n";
+				}
+			}
+
+			echo "</select>\n";
+
+			echo '<input name="update" id="submit" type="submit" value="update" />';
+			echo '<br /><br />';
+		}
 
 		echo '<table>';
 		echo '<tr><th>'.$this->get_translation('BookmarkNumber').'</th><th>'.$this->get_translation('BookmarkTitle').'</th><th>'.$this->get_translation('BookmarkPage').'</th><th>'.$this->get_translation('BookmarkMark').'</th><!--<th>Display</th>-->';
@@ -297,9 +365,35 @@ if ($_user_id)
 	echo $this->form_open('add_bookmark');
 	echo '<input type="hidden" name="_user_menu" value="yes" />';
 	echo '<br /><br />';
-	echo '<label for="add_menu_item">'.$this->get_translation('BookmarksAddPage').':</label><br />';
-	echo '<input id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> '.
-		'<input name="add_menu_item" type="submit" value="'.$this->get_translation('CreatePageButton').'" />';
+	echo '<label for="add_menu_item">'.$this->get_translation('BookmarksAddPage').':</label><br />'.
+		 '<input id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
+
+	if ($default_menu === true)
+	{
+		// FIXME: add a common function for this?
+		echo '<select id="lang_new" name="lang_new">';
+
+		if ($this->config['multilanguage'])
+		{
+			$langs = $this->available_languages();
+		}
+		else
+		{
+			$langs[] = $this->config['language'];
+		}
+
+		if ($langs)
+		{
+			foreach ($langs as $lang)
+			{
+				echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$lang."</option>\n";
+			}
+		}
+
+		echo "</select>\n";
+	}
+
+	echo  '<input name="add_menu_item" type="submit" value="'.$this->get_translation('CreatePageButton').'" />';
 
 	echo $this->form_close();
 }
