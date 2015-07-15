@@ -2323,7 +2323,10 @@ class Wacko
 	// HTTP/REQUEST/LINK RELATED
 	function set_message($message, $type = 'info')
 	{
-		$_SESSION[$this->config['session_prefix'].'_'.'message'][] = array($message, $type);
+		if (!empty($message))
+		{
+			$_SESSION[$this->config['session_prefix'].'_'.'message'][] = array($message, $type);
+		}
 	}
 
 	function get_message()
@@ -2381,7 +2384,10 @@ class Wacko
 
 	function show_message($message, $type = 'info')
 	{
-		echo '<div class="'.$type.'">'.$message."</div>\n";
+		if (!empty($message))
+		{
+			echo '<div class="'.$type.'">'.$message."</div>\n";
+		}
 	}
 
 	function redirect($url, $permanent = false)

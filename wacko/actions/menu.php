@@ -164,9 +164,9 @@ if (isset($_POST['_user_menu']))
 					}
 					else
 					{
-						// writing menu item
-						$_menu_page_ids = $this->get_menu_links(); // FIXME: loads not user array for system menu!
-						$menu = array();
+						// writing new menu item
+						$_menu_page_ids		= $this->get_menu_links(); // FIXME: loads not user array for system menu!
+						$menu				= array();
 
 						if (!in_array($_page_id, $_menu_page_ids))
 						{
@@ -192,13 +192,15 @@ if (isset($_POST['_user_menu']))
 								"page_id			= '".(int)$_page_id."', ".
 								"lang				= '".quote($this->dblink, (($_user_lang != $page['lang']) && $default_menu === false ? $page['lang'] : $_user_lang))."', ".
 								"menu_position		= '".(int)($_menu_item_count + 1)."'");
+
+							#$message .= $this->get_translation('MenuItemAdded'); // TODO: msg set
 						}
 
 						// parsing menu items into link table
 						foreach ($menu as $menu_item)
 						{
-							$menu_page_ids[] = $menu_item[0];
-							$menu_formatted[] = array ($menu_item[0], $menu_item[1], $this->format($menu_item[1], 'wacko'));
+							$menu_page_ids[]	= $menu_item[0];
+							$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $this->format($menu_item[1], 'wacko'));
 						}
 
 						$_SESSION[$this->config['session_prefix'].'_'.'menu_id']	= $menu_page_ids;
