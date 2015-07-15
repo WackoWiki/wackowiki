@@ -144,12 +144,12 @@ function admin_system_log(&$engine, &$module)
 			<input name="update" id="submit" type="submit" value="update" />
 			<input name="reset" id="submit" type="submit" value="reset" />
 		</div>
-		<?php
+<?php
 		if (isset($pagination['text']))
 		{
 			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
 		}
-		?>
+?>
 		<table style="padding: 3px;" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>

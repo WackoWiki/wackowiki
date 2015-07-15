@@ -22,7 +22,7 @@ $alter_category_r5_4_0 = "ALTER TABLE {$pref}category CHANGE parent parent_id IN
 
 // CONFIG
 $update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|wordprocessor' WHERE config_name = 'standard_handlers'";
-$update_config_r5_4_1 = "DELETE FROM {$pref}config WHERE config_name = 'session_expiration'";
+$update_config_r5_4_1 = "DELETE FROM {$pref}config WHERE config_name = 'session_expiration'"; // TODO:  config_name = AND 'x_csp'
 
 // LINK
 $alter_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx_from_tag (from_page_id, to_tag(78))";
@@ -30,6 +30,7 @@ $alter_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx
 // LOG
 
 // MENU
+$alter_menu_r5_4_0 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE idx_user_id (user_id, page_id, lang) USING BTREE";
 
 // PAGE
 $alter_page_r5_1_0 = "ALTER TABLE {$pref}page ADD INDEX idx_deleted (deleted)";

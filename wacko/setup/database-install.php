@@ -13,7 +13,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 	{
 		if($error_text)
 		{
-			$error_output = "\n<ul class=\"install_error\"><li>".$error_text." <br />";
+			$error_output = "\n".'<ul class="install_error"><li>'.$error_text." <br />";
 
 			/* if ($config['database_driver'] == 'mysqli_legacy')
 			{
@@ -34,7 +34,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 
 function output_error($error_text = '')
 {
-	echo "<ul class=\"install_error\"><li>".$error_text."</li></ul>";
+	echo '<ul class="install_error"><li>'.$error_text."</li></ul>";
 }
 
 // TODO: refactoring - same function in wacko class
@@ -466,6 +466,9 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_
 // config
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_1,		$lang['ErrorUpdatingTable']);
+
+//menu
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_0,			$lang['ErrorAlteringTable']);
 
 // page
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
