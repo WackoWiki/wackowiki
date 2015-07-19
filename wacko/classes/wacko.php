@@ -2312,6 +2312,66 @@ class Wacko
 		unset($_COOKIE[$cookie_name]);
 	}
 
+	// purge cockie_tokens
+	//	- user_id
+	//	- time
+	function delete_cookie_token($user_id = '', $expired = true, $purge_days = 3)
+	{
+		$sql = "SELECT user_id, MAX(session_time) AS recent_time
+				FROM {$this->config['table_prefix']}session ".
+				($expired
+					? "WHERE session_time < NOW() "
+					: "").
+				($user_id
+					? "WHERE user_id = '".(int)$user_id."' "
+					: "").
+					"GROUP BY user_id";
+
+		$sessions = $this->load_all($sql);
+
+		// composing a list of candidates
+		if (is_array($sessions))
+		{
+			#$del_sessions = 0;
+			$remove = array();
+
+			foreach ($sessions as $session)
+			{
+				$sql = "UPDATE {$this->config['table_prefix']}user SET
+							session_expire	= 0, ".
+							($expired
+								? "last_visit	= '".$session['recent_time']."' "
+								: "last_visit	= NOW() ").
+						"WHERE user_id = '".(int)$session['user_id']."'
+						LIMIT 1";
+
+				$this->sql_query($sql);
+
+				// does the session has been deleted earlier than specified number of days ago?
+				if (strtotime($session['recent_time']) < (time() - (3600 * 24 * $purge_days)) || !$expired )
+				{
+					$remove[] = "'".(int)$session['user_id']."'";
+				}
+
+				#$del_sessions++;
+				#$del_user_id[] = (int) $row['user_id'];
+			}
+
+			if (count($remove))
+			{
+				// Delete expired sessions
+				$sql = "DELETE FROM {$this->config['table_prefix']}session
+				WHERE user_id IN ( ".implode(', ', $remove)." ) ".
+				($expired
+					? "AND session_time < NOW()"
+					: "");
+
+				$this->sql_query($sql);
+
+				unset($remove);
+			}
+		}
+	}
 	function get_cookie($name)
 	{
 		if (isset($_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']]))
@@ -4309,15 +4369,14 @@ class Wacko
 	// end user session and free session vars
 	function log_user_out()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']))
+		$user_id = isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id'])
+			? $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']
+			: '';
+
+		if ($user_id)
 		{
-			// clear session expiry in user data table
-			$this->sql_query(
-				"UPDATE {$this->config['table_prefix']}user SET ".
-					"session_expire	= 0, ".
-					"last_visit		= NOW() ".
-				"WHERE user_id = '".(int)$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']."' ".
-				"LIMIT 1");
+			// clear session expiry in user data table and cookie_token in session table
+			$this->delete_cookie_token($user_id, false);
 		}
 
 		$this->delete_cookie('auth', true, true);
@@ -5467,50 +5526,7 @@ class Wacko
 		// purge expired cookie_tokens (once per 3 days)
 		if (($days = 3) && (time() > ($this->config['maint_last_session'] + 3 * 86400)) )
 		{
-			$sql = "SELECT user_id, MAX(session_time) AS recent_time
-					FROM {$this->config['table_prefix']}session
-					WHERE session_time < NOW()
-					GROUP BY user_id";
-
-			$sessions = $this->load_all($sql);
-
-			// composing a list of candidates
-			if (is_array($sessions))
-			{
-				#$del_sessions = 0;
-				$remove = array();
-
-				foreach ($sessions as $session)
-				{
-					$sql = "UPDATE {$this->config['table_prefix']}user
-							SET last_visit = '".$session['recent_time']."'
-							WHERE user_id = '".$session['user_id']."'
-							LIMIT 1";
-
-					$this->sql_query($sql);
-
-					// does the session has been deleted earlier than specified number of days ago?
-					if (strtotime($session['session_time']) < (time() - (3600 * 24 * $days)))
-					{
-						$remove[] = "'".$session['user_id']."'";
-					}
-
-					#$del_sessions++;
-					#$del_user_id[] = (int) $row['user_id'];
-				}
-
-				if (count($remove))
-				{
-					// Delete expired sessions
-					$sql = "DELETE FROM {$this->config['table_prefix']}session
-					WHERE user_id IN ( ".implode(', ', $remove)." )
-								AND session_time < NOW()";
-
-					$this->sql_query($sql);
-
-					unset($remove);
-				}
-			}
+			$this->delete_cookie_token('', true, $days);
 
 			$this->set_config('maint_last_session', time(), '', true);
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
