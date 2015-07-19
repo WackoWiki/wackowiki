@@ -301,7 +301,12 @@ function get_table(&$engine, $table, $drop = true)
 	{
 		$schema_create .= '	`' . $row['Field'] . '` ' . $row['Type'];
 
-		if (!empty($row['Default']) && $row['Type'] != 'timestamp')
+		// provide timestamp with CURRENT_TIMESTAMP without quotes
+		if (!empty($row['Default']) && $row['Type'] == 'timestamp' && $row['Default'] == 'CURRENT_TIMESTAMP')
+		{
+			$schema_create .= ' DEFAULT ' . $row['Default'] . '';
+		}
+		else
 		{
 			$schema_create .= ' DEFAULT \'' . $row['Default'] . '\'';
 		}
@@ -321,7 +326,7 @@ function get_table(&$engine, $table, $drop = true)
 	//
 	// Drop the last ',\n' off ;)
 	//
-	$schema_create = preg_replace('/,'."\n".'$/', "", $schema_create);
+	$schema_create = preg_replace('/,'."\n".'$/', '', $schema_create);
 
 	//
 	// Get any Indexed fields from the database...
@@ -677,8 +682,9 @@ function put_data(&$engine, $pack, $table, $mode)
 // decompress files and restore them into the filesystem
 function put_files(&$engine, $pack, $dir, $keep = false)
 {
-	$subdir = '';
-	$offset = 0;
+	$subdir	= '';
+	$offset	= 0;
+	$total	= array();
 
 	$packdir = $engine->config['upload_path_backup'].'/'.$pack.'/'.$dir;
 
@@ -702,8 +708,6 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 	}
 
 	// open backup dir and run through all files
-	$total = array();
-
 	if ($dh = opendir($packdir))
 	{
 		while (false !== ($filename = readdir($dh)))
