@@ -46,6 +46,8 @@ function admin_db_restore(&$engine, &$module)
 				<br />
 <?php
 	$logs			= '';
+	$ikeys			= '';
+	$ifiles			= '';
 
 	if (isset($_POST['start']) && $_POST['id'] == true)
 	{
@@ -55,8 +57,8 @@ function admin_db_restore(&$engine, &$module)
 		$pack	= $_POST['id'];
 
 		// set parameters
-		if ($_POST['ignore_keys']	== 1) $ikeys	= true;
-		if ($_POST['ignore_files']	== 1) $ifiles	= true;
+		if (isset($_POST['ignore_keys']) && $_POST['ignore_keys']	== 1) $ikeys	= true;
+		if (isset($_POST['ignore_files']) && $_POST['ignore_files']	== 1) $ifiles	= true;
 
 		// read backup log
 		$log = str_replace("\n", '', file($dir.$pack.'/'.BACKUP_FILE_LOG));

@@ -88,7 +88,7 @@ $table_menu = "CREATE TABLE {$pref}menu (".
 					"menu_title VARCHAR(100) NOT NULL DEFAULT '',".
 					"menu_position SMALLINT(2) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (menu_id),".
-					"UNIQUE KEY idx_user_id (user_id, page_id, ,lang)".
+					"UNIQUE KEY idx_user_id (user_id, page_id, lang)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_page = "CREATE TABLE {$pref}page (".

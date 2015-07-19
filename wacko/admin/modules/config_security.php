@@ -65,11 +65,11 @@ function admin_config_security(&$engine, &$module)
 		$config['log_level']					= (int)$_POST['log_level'];
 		$config['log_default_show']				= (int)$_POST['log_default_show'];
 		$config['log_purge_time']				= (int)$_POST['log_purge_time'];
-		$config['session_length']			= (int)$_POST['session_length'];
+		$config['session_length']				= (int)$_POST['session_length'];
 		$config['comment_delay']				= (int)$_POST['comment_delay'];
 		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
 		$config['enable_security_headers']		= (int)$_POST['enable_security_headers'];
-		$config['csp']						= (int)$_POST['csp'];
+		$config['csp']							= (int)$_POST['csp'];
 		$config['x_frame_option']				= (int)$_POST['x_frame_option'];
 		$config['max_login_attempts']			= (int)$_POST['max_login_attempts'];
 		$config['ip_login_limit_max']			= (int)$_POST['ip_login_limit_max'];
@@ -311,7 +311,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="tls_proxy"><strong>TLS Proxy:</strong><br />
-					<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash.</small></label></td>
+					<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash and without https://.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->config['tls_proxy'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="hl_setting">
@@ -353,7 +353,6 @@ function admin_config_security(&$engine, &$module)
 						<option value="1"<?php echo ( (int)$engine->config['csp'] === 1 ? ' selected="selected"' : '' );?>>strict</option>
 						<option value="2"<?php echo ( (int)$engine->config['csp'] === 2 ? ' selected="selected"' : '' );?>>custom</option>
 					</select>
-					<input maxlength="4" style="width:200px;" id="csp" name="csp" value="<?php echo htmlspecialchars($engine->config['csp'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr>
