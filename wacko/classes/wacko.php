@@ -2314,7 +2314,8 @@ class Wacko
 
 	// purge cockie_tokens
 	//	- user_id
-	//	- time
+	//	- expired
+	//	- purge_days
 	function delete_cookie_token($user_id = '', $expired = true, $purge_days = 3)
 	{
 		$sql = "SELECT user_id, MAX(session_time) AS recent_time
@@ -2352,9 +2353,6 @@ class Wacko
 				{
 					$remove[] = "'".(int)$session['user_id']."'";
 				}
-
-				#$del_sessions++;
-				#$del_user_id[] = (int) $row['user_id'];
 			}
 
 			if (count($remove))
@@ -4287,16 +4285,16 @@ class Wacko
 		{
 			$this->sql_query(
 				"INSERT INTO {$this->config['table_prefix']}session SET ".
-				"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
-				"user_id				= '".(int)$user['user_id']."', ".
-				"session_start			= NOW(), ".
-				"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
-				"session_time			= '".quote($this->dblink, $this->session_time)."', ".
-				"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
-				"session_forwarded_for	= '".quote($this->dblink, (string) $this->forwarded_for)."', ".
-				"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
-				#"session_autologin		= ($session_autologin) ? 1 : 0, ".
-				#"session_admin			= ($set_admin) ? 1 : 0 ".
+					"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
+					"user_id				= '".(int)$user['user_id']."', ".
+					"session_start			= NOW(), ".
+					"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
+					"session_time			= '".quote($this->dblink, $this->session_time)."', ".
+					"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
+					"session_forwarded_for	= '".quote($this->dblink, (string) $this->forwarded_for)."', ".
+					"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
+					#"session_autologin		= ($session_autologin) ? 1 : 0, ".
+					#"session_admin			= ($set_admin) ? 1 : 0 ".
 				"");
 		}
 		else

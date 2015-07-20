@@ -49,7 +49,7 @@ function admin_db_restore(&$engine, &$module)
 	$ikeys			= '';
 	$ifiles			= '';
 
-	if (isset($_POST['start']) && $_POST['id'] == true)
+	if (isset($_POST['start']) && (isset($_POST['id']) && $_POST['id'] == true))
 	{
 		set_time_limit(3600);
 
@@ -186,7 +186,7 @@ function admin_db_restore(&$engine, &$module)
 			date('H:i:s').' - RESTORATION COMPLETED</strong>';
 
 		$message = 'The backup is restored, the implementation of the report is attached below. To
-					delete this backup file, click <a href="?mode=dbrestore&remove=1&id=<?php echo $pack; ?>">here</a>.';
+					delete this backup file, click <a href="?mode=db_restore&amp;remove=1&amp;id='.htmlspecialchars($pack, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">here</a>.';
 
 		$engine->show_message($message);
 ?>
