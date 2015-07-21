@@ -6,23 +6,23 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_language = array(
-	"name"					=> "Spanish",
-	"code"					=> "es",
-	"charset"				=> "iso-8859-1",
-	"locale"				=> array("es","es_ES","spanish"),
-	"utfdecode"				=> array(),
-	"UPPER_P"				=> "A-Z\xc0-\xd6\xd8-\xdd",
-	"LOWER_P"				=> "a-z\xdf-\xf6\xf8-\xfd\xff\/'",
-	"ALPHA_P"				=> "A-Za-z\xc0-\xd6\xd8-\xdd\xdf-\xf6\xf8-\xfd\xff\_\-\/'",
-	"TranslitLettersFrom"	=> "àáâãåçèéêëìíîïòóôõùúûýÀÁÂÃÅÇÈÉÊËÌÍÎÏÒÓÔÕÙÚÛÝñÑ",
-	"TranslitLettersTo"		=> "aaaaaceeeeiiiioooouuuyAAAAACEEEEIIIIOOOOUUUYnN",
-	"TranslitCaps"			=> "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ",
-	"TranslitSmall"			=> "abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ",
-	"TranslitBiLetters"		=> array(
+	'name'					=> "Spanish",
+	'code'					=> "es",
+	'charset'				=> "windows-1252",
+	'locale'				=> array("es","es_ES","spanish"),
+	'utfdecode'				=> array(),
+	'UPPER_P'				=> "A-Z\xc0-\xd6\xd8-\xdd",
+	'LOWER_P'				=> "a-z\xdf-\xf6\xf8-\xfd\xff\/'",
+	'ALPHA_P'				=> "A-Za-z\xc0-\xd6\xd8-\xdd\xdf-\xf6\xf8-\xfd\xff\_\-\/'",
+	'TranslitLettersFrom'	=> "àáâãåçèéêëìíîïòóôõùúûýÀÁÂÃÅÇÈÉÊËÌÍÎÏÒÓÔÕÙÚÛÝñÑ",
+	'TranslitLettersTo'		=> "aaaaaceeeeiiiioooouuuyAAAAACEEEEIIIIOOOOUUUYnN",
+	'TranslitCaps'			=> "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ",
+	'TranslitSmall'			=> "abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ",
+	'TranslitBiLetters'		=> array(
 								"ä"=>"ae", "ñ"=>"ny", "ö"=>"oe", "ø"=>"oe", "ü"=>"ue", "æ"=>"ae", "Ä"=>"Ae",
 								"Ñ"=>"Ny", "Ö"=>"Oe", "Ø"=>"Oe", "Ü"=>"Ue", "Æ"=>"Ae", "ÿ"=>"yu", "ß"=>"ss",
 								),
-	"unicode_entities"		=> array(
+	'unicode_entities'		=> array(
 								"À"=>"&#192;", "Á"=>"&#193;", "Â"=>"&#194;", "Ã"=>"&#195;", "Ä"=>"&#196;", "Å"=>"&#197;", "Æ"=>"&#198;",
 								"Ç"=>"&#199;", "È"=>"&#200;", "É"=>"&#201;", "Ê"=>"&#202;", "Ë"=>"&#203;", "Ì"=>"&#204;", "Í"=>"&#205;",
 								"Î"=>"&#206;", "Ï"=>"&#207;", "Ð"=>"&#208;", "Ñ"=>"&#209;", "Ò"=>"&#210;", "Ó"=>"&#211;", "Ô"=>"&#212;",
