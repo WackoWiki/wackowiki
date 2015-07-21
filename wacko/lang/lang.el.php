@@ -6,24 +6,24 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_language = array(
-	"name"					=> "Greek",
-	"code"					=> "el",
-	"charset"				=> "iso-8859-7",
-	"locale"				=> "el_GR",
-	"utfdecode"				=> array(),
+	'name'					=> "Greek",
+	'code'					=> "el",
+	'charset'				=> "iso-8859-7",
+	'locale'				=> "el_GR",
+	'utfdecode'				=> array(),
 	//http://en.wikipedia.org/wiki/ISO-8859-7
-	"UPPER_P"				=> "A-Z\xc1\xb6\xc2-\xc5\xb8\xc6\xc7\xb9\xc8\xc9\xba\xda\xca-\xcf\xbc\xd0-\xd5\xbe\xdb\xd6-\xd9\xbf",
-	"LOWER_P"				=> "a-z\xe1\xdc\xe2-\xe5\xdd\xe6\xe7\xde\xe8\xe9\xdf\xfa\xc0\xea-\xef\xfc\xf0-\xf5\xfd\xfb\xe0\xf6-\xf9\xfe\/'",
-	"ALPHA_P"				=> "A-Za-z\xb6\xb8-\xba\xbc\xbe-\xfe\/'",
-	"TranslitLettersFrom"	=> "¶¸¹º¼¾¿ÀÚÛÜÝÞßàúûüýþáâãäåæçéêëìíïðñóòôõö÷ùÁÂÃÄÅÆÇÉÊËÌÍÏÐÑÓÔÕÖ×Ù",
-	"TranslitLettersTo"		=> "aehioywiiyaehiyiyoywavgdezhiklmnoprsstyfxwavgdezhiklmnoprstyfxw",
-	"TranslitCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
-	"TranslitSmall"			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
-	"TranslitBiLetters"		=> array(
+	'UPPER_P'				=> "A-Z\xc1\xb6\xc2-\xc5\xb8\xc6\xc7\xb9\xc8\xc9\xba\xda\xca-\xcf\xbc\xd0-\xd5\xbe\xdb\xd6-\xd9\xbf",
+	'LOWER_P'				=> "a-z\xe1\xdc\xe2-\xe5\xdd\xe6\xe7\xde\xe8\xe9\xdf\xfa\xc0\xea-\xef\xfc\xf0-\xf5\xfd\xfb\xe0\xf6-\xf9\xfe\/'",
+	'ALPHA_P'				=> "A-Za-z\xb6\xb8-\xba\xbc\xbe-\xfe\/'",
+	'TranslitLettersFrom'	=> "¶¸¹º¼¾¿ÀÚÛÜÝÞßàúûüýþáâãäåæçéêëìíïðñóòôõö÷ùÁÂÃÄÅÆÇÉÊËÌÍÏÐÑÓÔÕÖ×Ù",
+	'TranslitLettersTo'		=> "aehioywiiyaehiyiyoywavgdezhiklmnoprsstyfxwavgdezhiklmnoprstyfxw",
+	'TranslitCaps'			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
+	'TranslitSmall'			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
+	'TranslitBiLetters'		=> array(
 								"è"=>"th", "È"=>"th", "î"=>"ks", "Î"=>"ks", "ø"=>"ps", "Ø"=>"ps"
 	),
 	// http://tlt.psu.edu/suggestions/international/bylanguage/greekchart.html
-	"unicode_entities" => array(
+	'unicode_entities' => array(
 		"´" => "&#900;", "µ" => "&#901;", "¶" => "&#902;", "?" => "&#903;", "¸" => "&#904;", "¹" => "&#905;",
 		"º" => "&#906;", "¼" => "&#908;", "¾" => "&#910;", "¿" => "&#911;", "À" => "&#912;", "Á" => "&#913;",
 		"Â" => "&#914;", "Ã" => "&#915;", "Ä" => "&#916;", "Å" => "&#917;", "Æ" => "&#918;", "Ç" => "&#919;",
