@@ -5337,32 +5337,32 @@ class Wacko
 
 		if ( $size )
 		{
-			echo '### 1';
+			#echo '### 1';
 			if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail']))
 			{
 				$count = count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
-				echo '### @: ['.$count.']';
+				#echo '### @: ['.$count.']';
 
 				#$this->debug_print_r($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
 
 				if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail'][$count - 1][0])
 					&&    $_SESSION[$this->config['session_prefix'].'_'.'user_trail'][$count - 1][0] == $page_id)
 				{
-					echo '### 4: ['.$count.']';
+					#echo '### 2: ['.$count.']';
 					// nothing
 				}
 				else
 				{
-					echo '### 2';
+					#echo '### 3';
 
 					if (count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']) > $size)
 					{
-						echo '### 3';
+						#echo '### 4';
 						$_SESSION[$this->config['session_prefix'].'_'.'user_trail']	= array_slice($_SESSION[$this->config['session_prefix'].'_'.'user_trail'], -5 );
 						#$this->debug_print_r($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
 					}
 
-					echo '### 5';
+					#echo '### 5';
 					$_user_trail[-1]	= array ($page_id, $this->page['tag'], $this->page['title']);
 					$user_trail			= $_SESSION[$this->config['session_prefix'].'_'.'user_trail'] + $_user_trail;
 					$user_trail			= array_values($user_trail);
@@ -5372,7 +5372,7 @@ class Wacko
 			}
 			else
 			{
-				echo '### 6';
+				#echo '### 6';
 				$_SESSION[$this->config['session_prefix'].'_'.'user_trail'][] = array ($page_id, $this->page['tag'], $this->page['title']);
 			}
 		}
@@ -5380,7 +5380,7 @@ class Wacko
 
 	// USER TRAIL navigation
 	//		call this function in your theme header or footer
-	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $root_page = false, $size)
+	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size)
 	{
 		// don't call this inside the run function, it will also writes all included pages
 		// in the user trail because the engine parses them before it includes them
@@ -5394,17 +5394,6 @@ class Wacko
 			$size		= (int)$size;
 			$i			= 0;
 
-			// don't call this inside the run function, it will also writes all included pages
-			// in the user trail because the engine parses them before it includes them
-			#$this->set_user_trail($size);
-
-			// adds home page in front of user trail
-			if ($root_page == true)
-			{
-				$result .= $this->compose_link_to_page($this->config['root_page']).' :: ';
-			}
-
-			#$links = array_reverse($links);
 			#$this->debug_print_r($links);
 
 			foreach ($links as $link)
