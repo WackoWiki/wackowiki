@@ -5337,17 +5337,34 @@ class Wacko
 
 		if ( $size )
 		{
+			echo '### 1';
 			if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail']))
 			{
-				if (count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']) > $size - 1)
-				{
-					$_SESSION[$this->config['session_prefix'].'_'.'user_trail']	= array_slice($_SESSION[$this->config['session_prefix'].'_'.'user_trail'], 0, $size - 1);
-				}
+				$count = count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
+				echo '### @: ['.$count.']';
 
-				if ($_SESSION[$this->config['session_prefix'].'_'.'user_trail'][0][0] != $page_id)
+				#$this->debug_print_r($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
+
+				if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail'][$count - 1][0])
+					&&    $_SESSION[$this->config['session_prefix'].'_'.'user_trail'][$count - 1][0] == $page_id)
 				{
+					echo '### 4: ['.$count.']';
+					// nothing
+				}
+				else
+				{
+					echo '### 2';
+
+					if (count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']) > $size)
+					{
+						echo '### 3';
+						$_SESSION[$this->config['session_prefix'].'_'.'user_trail']	= array_slice($_SESSION[$this->config['session_prefix'].'_'.'user_trail'], -5 );
+						#$this->debug_print_r($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
+					}
+
+					echo '### 5';
 					$_user_trail[-1]	= array ($page_id, $this->page['tag'], $this->page['title']);
-					$user_trail			= $_user_trail + $_SESSION[$this->config['session_prefix'].'_'.'user_trail'];
+					$user_trail			= $_SESSION[$this->config['session_prefix'].'_'.'user_trail'] + $_user_trail;
 					$user_trail			= array_values($user_trail);
 
 					$_SESSION[$this->config['session_prefix'].'_'.'user_trail'] = $user_trail;
@@ -5355,7 +5372,8 @@ class Wacko
 			}
 			else
 			{
-				$_SESSION[$this->config['session_prefix'].'_'.'user_trail'][] = $page_id;
+				echo '### 6';
+				$_SESSION[$this->config['session_prefix'].'_'.'user_trail'][] = array ($page_id, $this->page['tag'], $this->page['title']);
 			}
 		}
 	}
@@ -5364,16 +5382,21 @@ class Wacko
 	//		call this function in your theme header or footer
 	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $root_page = false, $size)
 	{
+		// don't call this inside the run function, it will also writes all included pages
+		// in the user trail because the engine parses them before it includes them
+		$this->set_user_trail($size);
+
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail']))
 		{
 			$links		= $_SESSION[$this->config['session_prefix'].'_'.'user_trail'];
+			#$count		= count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
 			$result		= '';
 			$size		= (int)$size;
 			$i			= 0;
 
 			// don't call this inside the run function, it will also writes all included pages
 			// in the user trail because the engine parses them before it includes them
-			$this->set_user_trail($size);
+			#$this->set_user_trail($size);
 
 			// adds home page in front of user trail
 			if ($root_page == true)
@@ -5381,12 +5404,12 @@ class Wacko
 				$result .= $this->compose_link_to_page($this->config['root_page']).' :: ';
 			}
 
-			$links = array_reverse($links);
-			$this->debug_print_r($links);
+			#$links = array_reverse($links);
+			#$this->debug_print_r($links);
 
 			foreach ($links as $link)
 			{
-				if ($i < $size)
+				if ($i < $size && $this->page['page_id'] != $link[0])
 				{
 					if ($titles == false)
 					{
@@ -5407,7 +5430,7 @@ class Wacko
 
 			if ($titles == false)
 			{
-				$result .= $steps[count($steps) - 1];
+				$result .= $this->page['tag'];
 			}
 			else
 			{
@@ -6094,7 +6117,7 @@ class Wacko
 			'</p>'.$style['_after'];
 	}
 
-	// BREADCRUMBS -- additional navigation added with WackoClusters
+	// BREADCRUMBS -- navigation inside WackoClusters
 	function get_page_path($titles = false, $separator = '/', $linking = true, $root_page = false)
 	{
 		$result		= '';
@@ -6156,7 +6179,7 @@ class Wacko
 			}
 			else
 			{
-				$result .= $this->get_page_title($this->tag);
+				$result .=  $this->page['title'];
 			}
 		}
 
