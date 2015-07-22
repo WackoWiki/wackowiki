@@ -360,12 +360,12 @@ class Wacko
 		#$this->charset = $this->language['charset'];
 	}
 
-	// TODO: refactor / normalize
+	// TODO: refactor / normalize # better load_message_set() ?
 	function load_translation($lang)
 	{
-		if (!isset($this->translations[$lang]))
+		if (!isset($this->translations[$lang]) && isset($lang))
 		{
-			// wacko.xy
+			// wacko.xy.php $wacko_translation[]
 			$lang_file = 'lang/wacko.'.$lang.'.php';
 
 			if (@file_exists($lang_file))
@@ -373,7 +373,7 @@ class Wacko
 				include($lang_file);
 			}
 
-			// wacko.all
+			// wacko.all.php $wacko_all_resource[]
 			$lang_file = 'lang/wacko.all.php';
 
 			if (!$this->translations['all'])
@@ -383,6 +383,8 @@ class Wacko
 					include($lang_file);
 				}
 
+				// stored in object required for merge with all language files,
+				// but not with multilanguages off
 				$this->translations['all'] = & $wacko_all_resource;
 			}
 
@@ -395,7 +397,7 @@ class Wacko
 
 			if (isset($this->config['ap_mode']) && $this->config['ap_mode'] === true)
 			{
-				// ap.xy
+				// ap.xy.php $ap_translation[]
 				$lang_file = 'admin/lang/ap.'.$lang.'.php';
 
 				if (@file_exists($lang_file))
@@ -412,7 +414,7 @@ class Wacko
 			}
 			else
 			{
-				// theme lang files
+				// theme lang files $theme_translation[]
 				$lang_file = 'themes/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
 
 				if (@file_exists($lang_file))
@@ -478,11 +480,18 @@ class Wacko
 			return;
 		}
 
-		$langs = $this->available_languages();
-
-		foreach ($langs as $lang)
+		if ($this->config['multilanguage']) // TEST: do we need to load all languages if multilanguage is disabled?
 		{
-			$this->load_lang($lang);
+			$langs = $this->available_languages();
+
+			foreach ($langs as $lang)
+			{
+				$this->load_lang($lang);
+			}
+		}
+		else
+		{
+			$this->load_lang($this->config['language']);
 		}
 	}
 
@@ -5314,6 +5323,98 @@ class Wacko
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']))
 		{
 			return $_SESSION[$this->config['session_prefix'].'_'.'menu_page_id'];
+		}
+	}
+
+	// TODO: do not add
+	// - comments, system pages, methodes,
+	// - url arguments ?profile= array('page_id', 'arguments')
+	// - add parameter for trail size in user settings ?
+	// parse only once, without included pages (avoid call in run function!)
+	function set_user_trail($size = 5)
+	{
+		$page_id = $this->page['page_id'];
+
+		if ( $size )
+		{
+			if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail']))
+			{
+				if (count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']) > $size - 1)
+				{
+					$_SESSION[$this->config['session_prefix'].'_'.'user_trail']	= array_slice($_SESSION[$this->config['session_prefix'].'_'.'user_trail'], 0, $size - 1);
+				}
+
+				if ($_SESSION[$this->config['session_prefix'].'_'.'user_trail'][0][0] != $page_id)
+				{
+					$_user_trail[-1]	= array ($page_id, $this->page['tag'], $this->page['title']);
+					$user_trail			= $_user_trail + $_SESSION[$this->config['session_prefix'].'_'.'user_trail'];
+					$user_trail			= array_values($user_trail);
+
+					$_SESSION[$this->config['session_prefix'].'_'.'user_trail'] = $user_trail;
+				}
+			}
+			else
+			{
+				$_SESSION[$this->config['session_prefix'].'_'.'user_trail'][] = $page_id;
+			}
+		}
+	}
+
+	// USER TRAIL navigation
+	//		call this function in your theme header or footer
+	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $root_page = false, $size)
+	{
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail']))
+		{
+			$links		= $_SESSION[$this->config['session_prefix'].'_'.'user_trail'];
+			$result		= '';
+			$size		= (int)$size;
+			$i			= 0;
+
+			// don't call this inside the run function, it will also writes all included pages
+			// in the user trail because the engine parses them before it includes them
+			$this->set_user_trail($size);
+
+			// adds home page in front of user trail
+			if ($root_page == true)
+			{
+				$result .= $this->compose_link_to_page($this->config['root_page']).' :: ';
+			}
+
+			$links = array_reverse($links);
+			$this->debug_print_r($links);
+
+			foreach ($links as $link)
+			{
+				if ($i < $size)
+				{
+					if ($titles == false)
+					{
+						$result .= $this->link($link[1], '', $link[1]).$separator;
+					}
+					else if ($linking == true)
+					{
+						$result .= $this->link($link[1], '', $link[2]).$separator;
+					}
+					else
+					{
+						$result .= $link[2].' '.$separator.' ';
+					}
+				}
+
+				$i++;
+			}
+
+			if ($titles == false)
+			{
+				$result .= $steps[count($steps) - 1];
+			}
+			else
+			{
+				$result .= $this->page['title'];
+			}
+
+			return $result;
 		}
 	}
 
