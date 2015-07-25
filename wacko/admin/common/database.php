@@ -306,7 +306,7 @@ function get_table(&$engine, $table, $drop = true)
 		{
 			$schema_create .= ' DEFAULT ' . $row['Default'] . '';
 		}
-		else
+		else if (isset($row['Default']) && $row['Default'] !== '')
 		{
 			$schema_create .= ' DEFAULT \'' . $row['Default'] . '\'';
 		}
