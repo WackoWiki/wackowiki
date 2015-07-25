@@ -296,7 +296,7 @@ else if ($stop_mod !== true)
 	echo '<input name="submit_poll" id="submit" type="submit" value="'.$this->get_translation('PollsSubmit').'" /> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
-		echo ($moderation === true ? '<input name="cancel" id="button" type="button" value="'.$this->get_translation('PollsCancel').'" onclick="document.location=\''.addslashes($this->href('', $mode_file, $mode_http)).'\';" />' : '').
+		echo ($moderation === true ? '<a href="'.$this->href('', $mode_file, $mode_http).'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('PollsCancel').'"/></a>' : '').
 			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input name="startmod" type="checkbox" id="startmod" value="1"'.($startmod == 1 ? ' checked="checked" ' : ' ').'/> '.
 			'<label for="startmod">'.$this->get_translation('PollsStartMod').'</label>' : '').
 			'</td></tr>';

@@ -264,7 +264,7 @@ if ($this->has_access('read')
 	$preview		= '';
 	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="'.$this->get_translation('EditStoreButton').'" />&nbsp;'.
 						'<input type="submit" class="OkBtn_Top" name="preview" value="'.$this->get_translation('EditPreviewButton').'" />&nbsp;'.
-						'<input type="button" class="CancelBtn_Top" value="'.$this->get_translation('EditCancelButton').'" onclick="document.location=\''.addslashes($this->href('')).'\';" />'."\n"; // $this->href('', '', '', 1)
+						'<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" class="CancelBtn_Top" value="'.$this->get_translation('EditCancelButton').'" /></a>'."\n"; // $this->href('', '', '', 1)
 
 	// preview?
 	if (isset($_POST['preview']))

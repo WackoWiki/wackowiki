@@ -627,7 +627,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'<tr><td>'.
 						'<em>'.implode('<br />', $accept_text).'</em><br />'.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -666,7 +666,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$list.
 						'</select> '.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -682,7 +682,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '').
 						'<input name="title" size="50" maxlength="100" value="'.$this->get_page_title('', $set[0]).'" /> '.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						(count($set) > 1
 							? '<br /><small>'.$this->get_translation('ModerateRename1Only').'</small>'
 							: '').
@@ -718,7 +718,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$list.
 						'</select> '.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -1182,7 +1182,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'<tr><td>'.
 						'<em>'.$accept_text.'</em><br />'.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -1221,7 +1221,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 								$list.
 							'</select> or <input name="cluster" size="50" maxlength="250" /><br />'.
 							'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-							'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+							'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						'</td></tr>'.
 					'</table><br />'."\n";
 			}
@@ -1237,7 +1237,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							'<em>'.$accept_text.'</em><br />'.
 							'<input name="cluster" size="50" maxlength="250" /> '.
 							'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-							'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+							'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						'</td></tr>'.
 					'</table><br />'."\n";
 			}
@@ -1254,7 +1254,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '' ).
 						'<input name="title" size="50" maxlength="100" value="'.$this->page['title'].'" /> '.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -1269,7 +1269,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
 							: '' ).
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -1285,7 +1285,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '').
 						'<input name="title" size="50" maxlength="250" value="" /> '.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						'<br />'.
 						'<small>'.
 						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked="checked" ' : '' ).'/> <label for="after">'.$this->get_translation('ModerateSplitAllAfter').'</label><br />'.

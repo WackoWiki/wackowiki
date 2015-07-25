@@ -139,7 +139,7 @@ function admin_user_groups(&$engine, &$module)
 						<td>
 							<br />
 							<input id="submit" type="submit" name="add_member" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-							'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+							'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
 						'</td>
 					</tr>'.
 				'</table>
@@ -166,7 +166,7 @@ function admin_user_groups(&$engine, &$module)
 							<td>
 								<label for="">'.$engine->get_translation('MembersRemove').' \'<code>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 								'<input id="submit" type="submit" name="remove_member" value="yes" style="width:40px;" /> '.
-								'<input id="button" type="button" value="no" style="width: 40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+								'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width: 40px;" /></a>'.
 								'<br /><small>'.$engine->get_translation('MembersDeleteInfo').'</small>'.
 							'</td>
 						</tr>'.
@@ -321,7 +321,7 @@ function admin_user_groups(&$engine, &$module)
 						<td>
 		 					<br />
 		 					<input id="submit" type="submit" name="create" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-							'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+							'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
 						'</td>
 					</tr>'.
 				'</table>
@@ -382,7 +382,7 @@ function admin_user_groups(&$engine, &$module)
 					'<tr><td>
 						<br />
 						<input id="submit" type="submit" name="edit" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-						'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
 						'<br /><small>'.$engine->get_translation('GroupsRenameInfo').'</small>'.
 					'</td></tr>'.
 					'</table><br />';
@@ -403,7 +403,7 @@ function admin_user_groups(&$engine, &$module)
 							<td>
 								<label for="">'.$engine->get_translation('GroupsDelete').' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 								'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
-								'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+								'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
 								'<br /><small>'.$engine->get_translation('GroupsDeleteInfo').'</small>'.
 							'</td>
 						</tr>'.
@@ -471,7 +471,7 @@ function admin_user_groups(&$engine, &$module)
 
 		echo '<br /><input id="button" type="submit" name="add_member" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
 		echo '<input id="button" type="submit" name="remove_member" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		echo '<input id="button" type="reset" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />';
+		echo '<input id="button" type="reset" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
 
 		echo $engine->form_close();
 	}

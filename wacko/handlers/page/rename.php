@@ -188,7 +188,7 @@ if ($registered
 			?> <br />
 <br />
 <input class="OkBtn" name="submit" type="submit" value="<?php echo $this->get_translation('RenameButton'); ?>" /> &nbsp;
-<input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
 <br />
 <br />
 			<?php echo $this->form_close();

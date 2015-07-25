@@ -345,7 +345,7 @@ function admin_user_users(&$engine, &$module)
 					<td>
 						<br />
 						<input id="submit" type="submit" name="create" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-						'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
 					'</td>
 				</tr>'.
 			'</table><br />';
@@ -422,7 +422,7 @@ function admin_user_users(&$engine, &$module)
 					<td>
 						<br />
 						<input id="submit" type="submit" name="edit" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-						'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
 						'<br />
 						<small>'.$engine->get_translation('UsersRenameInfo').'</small>'.
 					'</td>
@@ -447,7 +447,7 @@ function admin_user_users(&$engine, &$module)
 						<td>
 							<label for="">'.$engine->get_translation('UsersDelete').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 							'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
-							'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+							'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
 							'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
 						'</td>
 					</tr>'.
@@ -504,7 +504,7 @@ function admin_user_users(&$engine, &$module)
 
 		echo '<br /><input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
 		echo '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		echo '<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />';
+		echo '<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
 		echo $engine->form_close();
 	}
 	else
