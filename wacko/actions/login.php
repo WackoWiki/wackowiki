@@ -102,8 +102,8 @@ else if ($user = $this->get_user())
 		$this->set_message($output);
 	}
 
-	echo '<p><input class="CancelBtn" type="button" value="'.$this->get_translation('LogoutButton')."\" onclick=\"document.location='".$this->href('', '', 'action=logout')."'\" /></p>";
-	echo '<p>'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).' | <a href="?action=clearcookies">'.$this->get_translation('ClearCookies').'</a></p>';
+	echo '<p><a href="'.$this->href('', '', 'action=logout').'" style="text-decoration: none;"><input class="CancelBtn" type="button" value="'.$this->get_translation('LogoutButton').'"/></a></p>';
+	echo '<p>'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).' | <a href="'.$this->href('', '', 'action=clearcookies').'">'.$this->get_translation('ClearCookies').'</a></p>';
 	echo '</div>';
 
 	echo $this->form_close();

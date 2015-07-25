@@ -356,7 +356,7 @@ else if ($user = $this->get_user())
 	<td class="form_right">
 		<input class="OkBtn" id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
 		&nbsp;
-		<input class="CancelBtn" id="logout" name="logout" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
+		<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input class="CancelBtn" id="logout" name="logout" type="button" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
 	</td>
 	</tr>
 	</tbody>
@@ -401,7 +401,7 @@ else if ($user = $this->get_user())
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><a href="<?php echo $this->href('', 'Password')?>"><?php echo $this->get_translation('YouWantChangePassword');?></a></th>
-		<td><input id="button" type="button" onclick="location.href='password'" value="<?php echo $this->get_translation('YouWantChangePassword');?>" name="_password"/></td>
+		<td><a href="<?php echo $this->href('', 'password');?>" style="text-decoration: none;"><input id="button" type="button" value="<?php echo $this->get_translation('YouWantChangePassword');?>" name="_password"/></a></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="email"><?php echo $this->get_translation('YourEmail');?></label></th>
@@ -515,7 +515,7 @@ else if ($user = $this->get_user())
 	<td class="form_right">
 		<input class="OkBtn" id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
 		&nbsp;
-		<input class="CancelBtn" id="logout" name="logout" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
+		<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input class="CancelBtn" id="logout" name="logout" type="button" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
 	</td>
 	</tr>
 	</tbody>

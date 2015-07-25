@@ -193,7 +193,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			echo '<th class="form_left"></th>';
 			echo '<td class="form_right">';
 			echo '	<input class="OkBtn" type="submit" name="extended" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp;';
-			echo '	<input class="CancelBtn" type="button" value="'.$this->get_translation('MetaCancelButton').'" onclick="history.back();" style="width: 120px" />';
+			echo '	<a href="'.$this->href('properties').'" style="text-decoration: none;"><input class="CancelBtn" type="button" value="'.$this->get_translation('MetaCancelButton').'" style="width: 120px" /></a>';
 			echo '</td>';
 
 			echo "</tr>\n</table>";
@@ -288,7 +288,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			echo '<th class="form_left"></th>';
 			echo '<td class="form_right">';
 			echo '<input class="OkBtn" type="submit" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp;';
-			echo '<input class="CancelBtn" type="button" value="'.$this->get_translation('MetaCancelButton').'" onclick="history.back();" style="width: 120px" />';
+			echo '<a href="'.$this->href().'" style="text-decoration: none;"><input class="CancelBtn" type="button" value="'.$this->get_translation('MetaCancelButton').'" style="width: 120px" /></a>';
 			echo '</td>';
 		}
 		else

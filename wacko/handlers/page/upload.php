@@ -93,11 +93,11 @@ if ($registered
 		</li>
 	</ul>
 	<br />
-	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
-	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
+	<input type="hidden" name="remove" value="<?php echo $_GET['remove'];?>" />
+	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id'];?>" />
 	<input class="OkBtn" name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />
 	&nbsp;
-	<input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
 	<br />
 	<br />
 <?php
@@ -170,7 +170,7 @@ if ($registered
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
 	<input class="OkBtn" name="submit" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 	&nbsp;
-	<input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
 	<br />
 	<br />
 <?php
@@ -597,7 +597,7 @@ if ($this->has_access('read'))
 
 if (!$this->config['revisions_hide_cancel'])
 {
-	echo "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
+	echo '<a href="'.$this->href('', '', 'action=logout').'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
 }
 
 ?>

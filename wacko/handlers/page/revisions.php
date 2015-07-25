@@ -31,7 +31,7 @@ if ($this->page['comment_on_id'])
 // show minor edits
 if (!isset($hide_minor_edit))
 {
-	$hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] :"";
+	$hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] : '';
 }
 
 // show deleted pages
@@ -58,7 +58,7 @@ if ($this->has_access('read'))
 		$output .= $this->form_open('diff_versions', 'diff', 'get');
 		$output .= "<p>\n";
 		$output .= '<input type="submit" value="'.$this->get_translation('ShowDifferencesButton').'" />';
-		#$output .= '<input type="button" value="'.$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
+		#$output .= '<a href="'.$this->href('').'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
 		$output .= '&nbsp;&nbsp;&nbsp;
 					<input type="radio" id="fulldiff" name="diffmode" value="0" checked="checked" />
 					<label for="fulldiff">'.$this->get_translation('FullDiff').'</label>';
@@ -153,7 +153,7 @@ if ($this->has_access('read'))
 
 		if (!$this->config['revisions_hide_cancel'])
 		{
-			$output .= '<input type="button" value="'.$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
+			$output .= '<a href="'.$this->href('').'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
 		}
 
 		$output .= $this->form_close()."\n";

@@ -338,7 +338,7 @@ if ($upload_allowed == true)
 </p>
 <p>
 	<input class="OkBtn" id="submit" type="submit" value="<?php echo $this->get_translation('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
-	<input class="CancelBtn" id="button" type="button" value="<?php echo $this->get_translation('ACLCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" id="button" type="button" value="<?php echo $this->get_translation('ACLCancelButton'); ?>"/></a>
 </p>
 </div>
 <?php

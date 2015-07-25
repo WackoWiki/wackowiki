@@ -141,7 +141,7 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><td><em>&quot;'.$title.'&quot;</em></td></tr>';
 			echo '<tr><td>'.
 					'<input name="yes" id="submit" type="submit" value="'.$engine->get_translation('PollsSubmit').'" /> '.
-					'<input name="cancel" id="button" type="button" value="'.$engine->get_translation('PollsCancel').'" onclick="document.location=\''.addslashes(rawurldecode($engine->href('', $mode_file, $mode_http))).'\';" />'.
+					'<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http)).'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$engine->get_translation('PollsCancel').'" /></a>'.
 				'</td></tr>';
 			echo '</table>';
 			echo $engine->form_close();

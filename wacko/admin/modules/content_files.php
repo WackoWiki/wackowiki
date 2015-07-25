@@ -52,7 +52,7 @@ function admin_content_files(&$engine, &$module)
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
 	<input id="submit" name="submit" type="submit" value="<?php echo $engine->get_translation('RemoveButton'); ?>" />
-	<input id="button" type="button" value="<?php echo str_replace("\n", ' ', $engine->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes(rawurldecode($engine->href('upload')))?>';" />
+	<a href="<?php echo rawurldecode($engine->href('upload'));?>" style="text-decoration: none;"><input id="button" type="button" value="<?php echo str_replace("\n", ' ', $engine->get_translation('EditCancelButton')); ?>"/></a>
 	<br /><br />
 <?php
 			echo $engine->form_close();

@@ -223,8 +223,8 @@ if ($this->is_owner() || $this->is_admin())
 				echo '<small><input type="radio" id="group0" name="group" value="0" /> <label for="group0">'.$this->get_translation('CategoriesAddGroupedNo').'</label></small><br />';
 			}
 			echo '<input id="submit" type="submit" name="create" value="'.$this->get_translation('CategoriesSaveButton').'" /> '.
-				'<input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" onclick="document.location=\''.addslashes($this->href('categories')).'\';" />'.
-				'</td></tr>';
+				 '<a href="'.$this->href('categories').'" style="text-decoration: none;"><input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" /></a>'.
+				 '</td></tr>';
 			echo '</table><br />';
 			echo $this->form_close();
 		}
@@ -240,7 +240,7 @@ if ($this->is_owner() || $this->is_admin())
 					$this->get_translation('CategoriesRename').' \'<code>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label> '.
 					'<input name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" /> '.
 					'<input id="submit" type="submit" name="rename" value="'.$this->get_translation('CategoriesSaveButton').'" /> '.
-					'<input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" onclick="document.location=\''.addslashes($this->href('categories')).'\';" />'.
+					'<a href="'.$this->href('categories').'" style="text-decoration: none;"><input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" /></a>'.
 					'<br /><small>'.$this->get_translation('CategoriesRenameInfo').'</small>'.
 					'</td></tr>';
 				echo '</table><br />';
@@ -275,7 +275,7 @@ if ($this->is_owner() || $this->is_admin())
 						$options.
 					'</select> '.
 					'<input id="submit" type="submit" name="ugroup" value="'.$this->get_translation('CategoriesSaveButton').'" /> '.
-					'<input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" onclick="document.location=\''.addslashes($this->href('categories')).'\';" />'.
+					'<a href="'.$this->href('categories').'" style="text-decoration: none;"><input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" /></a>'.
 					'<br /><small>'.$this->get_translation('CategoriesGroupInfo').'</small>'.
 					'</td></tr>';
 				echo '</table><br />';
@@ -293,7 +293,7 @@ if ($this->is_owner() || $this->is_admin())
 				echo '<tr><td><label for="">'.
 					$this->get_translation('CategoriesDelete').' \'<code>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
 					'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
-					'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($this->href('categories')).'\';" />'.
+					'<a href="'.$this->href('categories').'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
 					'<br /><small>'.$this->get_translation('CategoriesDeleteInfo').'</small>'.
 					'</td></tr>';
 				echo '</table><br />';
@@ -355,13 +355,13 @@ if ($this->is_owner() || $this->is_admin())
 
 		echo '<br />';
 		echo '<input id="submit" type="submit" name="save" value="'.$this->get_translation('CategoriesStoreButton').'" /> ';
-		echo '<input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" onclick="history.back();" /> ';
+		echo '<a href="'.$this->href('').'" style="text-decoration: none;"><input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'"/></a> ';
 		echo '<small><br />'.$this->get_translation('CategoriesStoreInfo').'<br /><br /></small> ';
 	}
 	else
 	{
 		echo $this->get_translation('NoCategoriesForThisLanguage').'<br /><br /><br />'; // Availability depends on the page language and your access rights, additionally you need also the right to create new ones.
-		echo '<input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" onclick="history.back();" /><br /><br /> ';
+		echo '<a href="'.$this->href('').'" style="text-decoration: none;"><input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" /></a><br /><br /> ';
 	}
 
 	if ($this->is_admin() || $this->config['owners_can_change_categories'] == true)

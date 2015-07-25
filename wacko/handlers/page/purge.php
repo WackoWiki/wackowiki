@@ -79,7 +79,7 @@ if ($this->is_owner() || $this->is_admin())
 		<br />
 		<input type="hidden" name="purge" value="1" />
 		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('PurgeButton'); ?>" />
-		<input id="button" type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="history.back();" />
+		<a href="<?php echo $this->href('properties');?>" style="text-decoration: none;"><input id="button" type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" /></a>
 		<br />
 
 <?php	echo $this->form_close();
