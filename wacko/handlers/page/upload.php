@@ -597,7 +597,7 @@ if ($this->has_access('read'))
 
 if (!$this->config['revisions_hide_cancel'])
 {
-	echo '<a href="'.$this->href('', '', 'action=logout').'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
+	echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
 }
 
 ?>
