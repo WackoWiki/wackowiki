@@ -67,8 +67,8 @@ function admin_content_polls(&$engine, &$module)
 		else if (isset($_POST['stop']) && $_POST['id'])
 		{
 			$engine->sql_query(
-				"UPDATE {$engine->config['table_prefix']}poll ".
-				"SET end = NOW() ".
+				"UPDATE {$engine->config['table_prefix']}poll SET ".
+					"end = NOW() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0 ".
 				"LIMIT 1");
 
@@ -94,8 +94,8 @@ function admin_content_polls(&$engine, &$module)
 		else if (isset($_POST['activate']) && $_POST['id'])
 		{
 			$engine->sql_query(
-				"UPDATE {$engine->config['table_prefix']}poll ".
-				"SET start = NOW() ".
+				"UPDATE {$engine->config['table_prefix']}poll SET ".
+					"start = NOW() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
 
 			#$engine->$xml->news(); // update news feed
@@ -133,8 +133,6 @@ function admin_content_polls(&$engine, &$module)
 		// poll remove confirmation dialog
 		if ($confirmation === true)
 		{
-			#echo $engine->form_open('', $mode_file); // FIXME: check href()
-			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 			echo $engine->form_open('polls', '', 'post', true, '', '');
 
 			echo '<input name="delete" type="hidden" value="'.$remove_id.'" />';
@@ -142,8 +140,8 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><th>'.$engine->get_translation('PollsConfirmDelete').'</th></tr>';
 			echo '<tr><td><em>&quot;'.$title.'&quot;</em></td></tr>';
 			echo '<tr><td>'.
-				'<input name="yes" id="submit" type="submit" value="'.$engine->get_translation('PollsSubmit').'" /> '.
-				'<input name="cancel" id="button" type="button" value="'.$engine->get_translation('PollsCancel').'" onclick="document.location=\''.addslashes(rawurldecode($engine->href('', $mode_file, $mode_http))).'\';" />'.
+					'<input name="yes" id="submit" type="submit" value="'.$engine->get_translation('PollsSubmit').'" /> '.
+					'<input name="cancel" id="button" type="button" value="'.$engine->get_translation('PollsCancel').'" onclick="document.location=\''.addslashes(rawurldecode($engine->href('', $mode_file, $mode_http))).'\';" />'.
 				'</td></tr>';
 			echo '</table>';
 			echo $engine->form_close();
@@ -156,8 +154,6 @@ function admin_content_polls(&$engine, &$module)
 		}
 
 		// current active polls
-		#echo $engine->form_open('', $mode_file);
-		#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 		echo $engine->form_open('polls', '', 'post', true, '', '');
 
 		echo '<table class="formation">';
@@ -175,19 +171,21 @@ function admin_content_polls(&$engine, &$module)
 			foreach ($list as $row)
 			{
 				echo '<tr class="lined">';
-					echo '<td class="label"><input name="id" type="radio" value="'.$row['poll_id'].'" /></td>';
-					echo '<td style="text-align:left;width:95%;"><a href="'.
-						rawurldecode($engine->href('', $mode_file.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
-						date('d/m', strtotime($row['start'])).': '.$row['text'].'</a></td>';
+					echo '<td class="label">
+						<input name="id" type="radio" value="'.$row['poll_id'].'" /></td>';
+					echo '<td style="text-align:left;width:95%;">
+							<a href="'.
+							rawurldecode($engine->href('', $mode_file.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
+							date('d/m', strtotime($row['start'])).': '.$row['text'].'</a></td>';
 					echo '<td>'.$row['user_name'].'</td>';
 					echo '<td style="white-space:nowrap;">'.$polls_obj->poll_time($row['start'], time()).'</td>';
 				echo '</tr>';
 			}
 
 			echo '<tr><td colspan="4">'.
-				'<input name="stop" id="submit" type="submit" value="'.$engine->get_translation('PollsStop').'" /> '.
-				'<input name="reset" id="submit" type="submit" value="'.$engine->get_translation('PollsReset').'" /> '.
-				'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
+					'<input name="stop" id="submit" type="submit" value="'.$engine->get_translation('PollsStop').'" /> '.
+					'<input name="reset" id="submit" type="submit" value="'.$engine->get_translation('PollsReset').'" /> '.
+					'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
 				'</td></tr>';
 		}
 
@@ -195,8 +193,6 @@ function admin_content_polls(&$engine, &$module)
 		echo $engine->form_close();
 
 		// polls for moderation
-			#echo $engine->form_open('', $mode_file);
-			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 			echo $engine->form_open('polls', '', 'post', true, '', '');
 
 
@@ -236,9 +232,9 @@ function admin_content_polls(&$engine, &$module)
 			}
 
 			echo '<tr><td colspan="3">'.
-				'<input name="activate" id="submit" type="submit" value="'.$engine->get_translation('PollsActivate').'" /> '.
-				'<input name="edit" id="submit" type="submit" value="'.$engine->get_translation('PollsEdit').'" /> '.
-				'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
+					'<input name="activate" id="submit" type="submit" value="'.$engine->get_translation('PollsActivate').'" /> '.
+					'<input name="edit" id="submit" type="submit" value="'.$engine->get_translation('PollsEdit').'" /> '.
+					'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
 				'</td></tr>';
 		}
 
@@ -246,9 +242,7 @@ function admin_content_polls(&$engine, &$module)
 		echo $engine->form_close();
 
 		// ended polls
-			#echo $engine->form_open('', $mode_file);
-			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
-			echo $engine->form_open('polls', '', 'post', true, '', '');
+		echo $engine->form_open('polls', '', 'post', true, '', '');
 
 
 		echo '<table class="formation">';
@@ -295,19 +289,27 @@ function admin_content_polls(&$engine, &$module)
 		{
 			foreach ($years as $item)
 			{
-				if ($item == $year) echo $item.' ';
-				else echo '<a href="'.rawurldecode($engine->href('', $mode_file.'&amp;year='.$item)).'">'.$item.'</a> ';
+				if ($item == $year)
+				{
+					echo $item.' ';
+				}
+				else
+				{
+					echo '<a href="'.rawurldecode($engine->href('', $mode_file.'&amp;year='.$item)).'">'.$item.'</a> ';
+				};
 			}
 		}
+
 		echo '</small>';
 		echo '</td></tr>';
 
 		if (!empty($list))
 		{
 			echo '<tr><td colspan="4">'.
-				'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
+					'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
 				'</td></tr>';
 		}
+
 		echo '</table>';
 		echo $engine->form_close();
 	}

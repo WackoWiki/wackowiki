@@ -123,8 +123,12 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			// print
 			echo '<tr class="lined">'.
 					'<td style="width:60%; vertical-align:top;">'.
-						( $this->has_access('write', $forum['page_id'], '*') === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
-						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark'] ? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> ' : '' ).
+						( $this->has_access('write', $forum['page_id'], '*') === false
+							? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon'))
+							: '' ).
+						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
+							? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> '
+							: '' ).
 						'<strong>'.$this->link('/'.$forum['tag'], '', $forum['title'], '', 0, '', $_lang).'</strong><br />'.
 						'<small>'.$forum['description'].'</small>'.
 					'</td>'.
@@ -143,7 +147,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					}
 
 					echo '<small><a href="'.$this->href('', $comment['comment_on'], 'p=last').'#'.$comment['tag'].'">'.$comment['topic_title'].'</a><br />'.
-						( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
+						( $comment['user_id'] == 0
+							? '<em>'.$this->get_translation('Guest').'</em>'
+							: $comment['user_name'] ).
+						' ('.$this->get_time_string_formatted($comment['created']).')</small>';
 				}
 				else
 				{
@@ -153,7 +160,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					}
 
 					echo '<small><a href="'.$this->href('', $comment['tag']).'">'.$comment['title'].'</a><br />'.
-						( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
+						( $comment['user_id'] == 0
+							? '<em>'.$this->get_translation('Guest').'</em>'
+							: $comment['user_name'] ).
+						' ('.$this->get_time_string_formatted($comment['created']).')</small>';
 				}
 			}
 			else
