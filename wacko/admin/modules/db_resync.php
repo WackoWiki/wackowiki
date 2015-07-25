@@ -31,39 +31,61 @@ function admin_db_resync(&$engine, &$module)
 		if ($_REQUEST['action'] == 'userstats')
 		{
 			// total pages in ownership
-			$users = $engine->load_all(
-				"SELECT p.owner_id, COUNT(p.tag) AS n ".
+			$users1 = $engine->load_all(
+				"SELECT u.user_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
 				"AND p.deleted <> '1' ".
 				"GROUP BY p.owner_id");
 
-			/* SELECT
-					u.user_id
+			// missing pages
+			$users2 =  $engine->load_all(
+				"SELECT
+					u.user_id, '0' as n
 				FROM
-					doc_user u
-					LEFT JOIN doc_page p ON (u.user_id = p.owner_id)
+					{$engine->config['table_prefix']}user u
+					LEFT JOIN {$engine->config['table_prefix']}page p ON (u.user_id = p.owner_id)
 				WHERE
-                u.total_pages <> '0'
-                AND
-					p.owner_id IS NULL */
+					u.total_pages <> '0'
+				AND
+					p.owner_id IS NULL");
+
+			$users = array_merge($users1, $users2);
 
 			foreach ($users as $user)
 			{
 				$engine->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_pages = ".(int)$user['n']." ".
-					"WHERE user_id = '".$user['owner_id']."' ".
+					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
 
 			// total comments posted
-			$users = $engine->load_all(
+			$users1 = $engine->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
 				"AND p.deleted <> '1' ".
 				"GROUP BY p.user_id");
+
+			// missing comments
+			$users2 =  $engine->load_all(
+				"SELECT
+					u.user_id, '0' as n
+				FROM
+					{$engine->config['table_prefix']}user u
+					LEFT JOIN {$engine->config['table_prefix']}page p ON (u.user_id = p.owner_id)
+				WHERE
+					(u.total_comments <> '0'
+					AND
+					p.owner_id IS NULL
+					OR
+					(p.owner_id = u.user_id AND p.comment_on_id = '0' ".
+					"AND p.deleted <> '1' ))
+				");
+
+			$users = array_merge($users1, $users2);
 
 			foreach ($users as $user)
 			{

@@ -528,3 +528,8 @@ div#loginbox {
 .alternate {
 	background-color: #f7fcfe;
 }
+
+.listcenter td {
+	vertical-align:top;
+	text-align:center;
+}

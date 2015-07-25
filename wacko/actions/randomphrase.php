@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 if (!isset($use_empty_string)) $use_empty_string= '';
 
-$vars[0] = $this->unwrap_link($vars[0]);
+$page_tag = $this->unwrap_link($vars[0]);
 $page_id = $this->get_page_id($vars[0]);
 
 if (! $this->has_access('read', $page_id))
@@ -25,7 +25,7 @@ else
 		$revision_id = '';
 	}
 
-	if (!$phrase_page = $this->load_page($vars[0], 0, $revision_id))
+	if (!$phrase_page = $this->load_page($page_tag, 0, $revision_id))
 	{
 		echo '<em> '.$this->get_translation('SourcePageDoesntExist').'('.$vars[0].')</em>';
 	}

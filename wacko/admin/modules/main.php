@@ -77,9 +77,9 @@ function admin_lock(&$engine, &$module)
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
 	{
-		$sql = "TRUNCATE {$engine->config['table_prefix']}session";
-		$engine->sql_query($sql);
-
+		#$sql = "TRUNCATE {$engine->config['table_prefix']}session";
+		#$engine->sql_query($sql);
+		$engine->delete_cookie_token('', false);
 		// queries
 		#$engine->cache->invalidate_sql_cache();
 
@@ -94,7 +94,7 @@ function admin_lock(&$engine, &$module)
 	<br /><?php echo $engine->get_translation('ApTestText');?>
 	<table style="max-width:200px" class="formation">
 <?php
-	echo $engine->form_open('lock', '', 'post', true, '', '');
+	echo $engine->form_open('lock', '', 'post', true, 'admin.php', '', '');
 ?>
 		<input type="hidden" name="action" value="lock" />
 			<tr class="hl_setting">
@@ -105,7 +105,8 @@ function admin_lock(&$engine, &$module)
 <?php
 	echo $engine->form_close();
 	echo '<br />';
-	echo $engine->form_open('cache', '', 'post', true, '', '');
+	// $form_name = '', $page_method = '', $form_method = 'post', $form_token = false, $tag = '', $form_more = '', $href_param = ''
+	echo $engine->form_open('cache', '', 'post', true, 'admin.php', '');
 ?>
 		<input type="hidden" name="action" value="cache" />
 			<tr class="hl_setting">
@@ -115,7 +116,7 @@ function admin_lock(&$engine, &$module)
 <?php
 	echo $engine->form_close();
 
-	echo $engine->form_open('purge_sessions', '', 'post', true, '', '');
+	echo $engine->form_open('purge_sessions', '', 'post', true, 'admin.php', '');
 ?>
 		<form action="admin.php" method="post" name="">
 		<input type="hidden" name="mode" value="lock" />

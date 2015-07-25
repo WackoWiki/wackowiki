@@ -1285,7 +1285,8 @@ class Wacko
 		}
 
 		if ($read_acls = $this->load_all(
-		"SELECT a.* FROM ".$this->config['table_prefix']."acl a ".
+		"SELECT a.* ".
+		"FROM ".$this->config['table_prefix']."acl a ".
 			"INNER JOIN ".$this->config['table_prefix']."page p ON (p.page_id = a.page_id) ".
 		"WHERE BINARY p.tag IN (".$pages_str.") AND a.privilege = 'read'", 1))
 		{
@@ -1913,8 +1914,8 @@ class Wacko
 
 					// update user comments count
 					$this->sql_query(
-						"UPDATE {$this->config['user_table']} ".
-						"SET total_comments = total_comments + 1 ".
+						"UPDATE {$this->config['user_table']} SET ".
+							"total_comments = total_comments + 1 ".
 						"WHERE user_id = '".(int)$owner_id."' ".
 						"LIMIT 1");
 				}
@@ -1922,8 +1923,8 @@ class Wacko
 				{
 					// update user pages count
 					$this->sql_query(
-						"UPDATE {$this->config['user_table']} ".
-						"SET total_pages = total_pages + 1 ".
+						"UPDATE {$this->config['user_table']} SET ".
+							"total_pages = total_pages + 1 ".
 						"WHERE user_id = '".(int)$owner_id."' ".
 						"LIMIT 1");
 				}
@@ -2009,8 +2010,8 @@ class Wacko
 								if ($pending['comment_id'] == false)
 								{
 									$this->sql_query(
-										"UPDATE {$this->config['table_prefix']}watch ".
-										"SET comment_id = '".(int)$page_id."' ".
+										"UPDATE {$this->config['table_prefix']}watch SET ".
+											"comment_id = '".(int)$page_id."' ".
 										"WHERE page_id = '".(int)$comment_on_id."' ".
 											"AND user_id = '".$watcher['user_id']."'");
 								}
@@ -2269,8 +2270,8 @@ class Wacko
 		if ($user = $this->get_user())
 		{
 			$this->sql_query(
-				"UPDATE {$this->config['user_table']} ".
-				"SET total_revisions = total_revisions + 1 ".
+				"UPDATE {$this->config['user_table']} SET ".
+					"total_revisions = total_revisions + 1 ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 		}
@@ -2335,7 +2336,7 @@ class Wacko
 				($user_id
 					? "WHERE user_id = '".(int)$user_id."' "
 					: "").
-					"GROUP BY user_id";
+				"GROUP BY user_id";
 
 		$sessions = $this->load_all($sql);
 
@@ -2368,10 +2369,10 @@ class Wacko
 			{
 				// Delete expired sessions
 				$sql = "DELETE FROM {$this->config['table_prefix']}session
-				WHERE user_id IN ( ".implode(', ', $remove)." ) ".
-				($expired
-					? "AND session_time < NOW()"
-					: "");
+						WHERE user_id IN ( ".implode(', ', $remove)." ) ".
+						($expired
+							? "AND session_time < NOW()"
+							: "");
 
 				$this->sql_query($sql);
 
@@ -3948,7 +3949,8 @@ class Wacko
 		if (!$this->config['antidupe'])
 		{
 			if ($this->load_single(
-			"SELECT user_id FROM {$this->config['user_table']} ".
+			"SELECT user_id ".
+			"FROM {$this->config['user_table']} ".
 			"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
 			"LIMIT 1"))
 			{
@@ -4014,7 +4016,8 @@ class Wacko
 
 		// checking database
 		if ($this->load_single(
-		"SELECT user_id FROM {$this->config['user_table']} ".
+		"SELECT user_id ".
+		"FROM {$this->config['user_table']} ".
 		"WHERE user_name REGEXP '".quote($this->dblink, implode('', $user_name))."' ".
 		"LIMIT 1", 1))
 		{
@@ -4040,7 +4043,8 @@ class Wacko
 		#if (!$this->config['allow_email_reuse'])
 		#{
 			if ($this->load_single(
-				"SELECT user_id FROM {$this->config['user_table']} ".
+				"SELECT user_id ".
+				"FROM {$this->config['user_table']} ".
 				"WHERE email = '".quote($this->dblink, $email)."' ".
 				"LIMIT 1"))
 			{
@@ -4195,8 +4199,8 @@ class Wacko
 		if ($user['user_id'] == true)
 		{
 			return $this->sql_query(
-				"UPDATE {$this->config['user_table']} ".
-				"SET last_mark = NOW() ".
+				"UPDATE {$this->config['user_table']} SET ".
+					"last_mark = NOW() ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 		}
@@ -4318,8 +4322,8 @@ class Wacko
 					"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
 					#"session_autologin		= ($session_autologin) ? 1 : 0, ".
 					#"session_admin			= ($set_admin) ? 1 : 0 ".
-					"WHERE user_id			= '".$user['user_id']."' ".
-					"LIMIT 1");
+				"WHERE user_id			= '".$user['user_id']."' ".
+				"LIMIT 1");
 		}
 
 		// restart logged in user session with specific session id
@@ -4410,8 +4414,8 @@ class Wacko
 	function login_count($user_id)
 	{
 		$this->sql_query(
-			"UPDATE {$this->config['user_table']} ".
-			"SET login_count = login_count+1 ".
+			"UPDATE {$this->config['user_table']} SET ".
+				"login_count = login_count + 1 ".
 			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
@@ -4422,8 +4426,8 @@ class Wacko
 	function set_failed_user_login_count($user_id)
 	{
 		$this->sql_query(
-			"UPDATE {$this->config['user_table']} ".
-			"SET failed_login_count = failed_login_count+1 ".
+			"UPDATE {$this->config['user_table']} SET ".
+				"failed_login_count = failed_login_count + 1 ".
 			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
@@ -4434,8 +4438,8 @@ class Wacko
 	function reset_failed_user_login_count($user_id)
 	{
 		$this->sql_query(
-			"UPDATE {$this->config['user_table']} ".
-			"SET failed_login_count = 0 ".
+			"UPDATE {$this->config['user_table']} SET ".
+				"failed_login_count = 0 ".
 			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
@@ -4446,8 +4450,8 @@ class Wacko
 	function set_lost_password_count($user_id)
 	{
 		$this->sql_query(
-			"UPDATE {$this->config['user_table']} ".
-			"SET lost_password_request_count = lost_password_request_count+1 ".
+			"UPDATE {$this->config['user_table']} SET ".
+				"lost_password_request_count = lost_password_request_count + 1 ".
 			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
@@ -4458,8 +4462,8 @@ class Wacko
 	function reset_lost_password_count($user_id)
 	{
 		$this->sql_query(
-			"UPDATE {$this->config['user_table']} ".
-			"SET lost_password_request_count = 0 ".
+			"UPDATE {$this->config['user_table']} SET ".
+				"lost_password_request_count = 0 ".
 			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 
@@ -4735,8 +4739,8 @@ class Wacko
 
 		// updated latest revision with new owner
 		$this->sql_query(
-			"UPDATE ".$this->config['table_prefix']."page ".
-			"SET owner_id = '".(int)$user_id."' ".
+			"UPDATE ".$this->config['table_prefix']."page SET ".
+				"owner_id = '".(int)$user_id."' ".
 			"WHERE page_id = '".(int)$page_id."' ".
 			"LIMIT 1");
 	}
@@ -5331,6 +5335,7 @@ class Wacko
 	// - url arguments ?profile= array('page_id', 'arguments')
 	// - add parameter for trail size in user settings ?
 	// parse only once, without included pages (avoid call in run function!)
+	//		$size	=
 	function set_user_trail($size = 5)
 	{
 		$page_id = $this->page['page_id'];
@@ -5380,6 +5385,7 @@ class Wacko
 
 	// USER TRAIL navigation
 	//		call this function in your theme header or footer
+	//		$separator	= &gt; &raquo;
 	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size)
 	{
 		// don't call this inside the run function, it will also writes all included pages
@@ -5433,23 +5439,6 @@ class Wacko
 	// set config value
 	function set_config($config_name, $config_value, $is_dynamic = false, $delete_cache = false)
 	{
-		// FIXME: do not take into account that the array is merged with default_config
-		// and it may try to update unsuccessfully the secondary config where it should do an INSERT instead
-		// check also if the value has chaned
-		/* if (isset($this->config[$config_name]))
-		{
-			$sql = "UPDATE {$this->config['table_prefix']}config SET
-						config_value = '".quote($this->dblink, $config_value)."'
-					WHERE config_name = '".quote($this->dblink, $config_name)."'";
-		}
-		else
-		{
-			$sql = "INSERT INTO {$this->config['table_prefix']}config SET ".
-						"config_name	= '".quote($this->dblink, $config_name)."', ".
-						"config_value	= '".quote($this->dblink, $config_value)."'";
-		}
-		*/
-
 		$config[$config_name]	= $config_value;
 
 		$this->_set_config($config, $is_dynamic = false, $delete_cache = false);

@@ -86,7 +86,7 @@ write_config_hidden_nodes(array('none' => ''));
 
 
 	// If the cache directory is writable then we can enable caching as default
-	echo "            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $config['cache'])."\" />\n";
+	echo '            <input type="hidden" name="config[cache]" value="'.(is__writable('_cache/') ? '1' : $config['cache']).'" />'."\n";
 
 	$file_permissions_result = is__writable('config/config.php') && is__writable('_cache/config/') && is__writable('_cache/feeds/') && is__writable('_cache/pages/') && is__writable('_cache/queries/') && is__writable('xml/') && is__writable('files/backup/') && is__writable('files/global/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
 	?>

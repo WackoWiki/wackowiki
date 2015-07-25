@@ -199,6 +199,7 @@ else
 						$this->set_menu(MENU_USER);
 						$this->context[++$this->current_context] = '';
 
+						// TODO: merge into one function? 3 updates
 						$this->login_count($existing_user['user_id']);
 						$this->reset_failed_user_login_count($existing_user['user_id']);
 						$this->reset_lost_password_count($existing_user['user_id']);
