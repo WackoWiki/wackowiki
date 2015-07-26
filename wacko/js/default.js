@@ -2,16 +2,21 @@ var isDOM = document.getElementById;
 var isIE = document.all && document.all.item;
 var isMZ = isDOM && (navigator.appName == 'Netscape');
 var isO = window.opera && isDOM;
+
 function undef(param) {
   return param;
 }
-// Smooth scrolling on the page
 
+//all_init() initializes all js features:
+//* WikiEdit
+//* Doubleclick editing
+//* Smooth scrolling
 window.onload = function () {
     // alert('Load Test: OK');
     all_init();
-}
+};
 
+//Smooth scrolling on the page
 function travelA(Aname, quick, noplus)
 {
   if (isMZ && navigator.userAgent.substr(navigator.userAgent.indexOf('Gecko/') + 6, 4) == '2003') isMZ = false;
