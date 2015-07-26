@@ -10,7 +10,7 @@
 require ('themes/_common/_header.php');
 
 ?>
-<body onload="all_init();">
+<body>
 <div class="Top<?php if (!$this->get_user()) echo "LoggedOut";?>">
 	<div class="TopRight">
 <?php echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage')); ?>

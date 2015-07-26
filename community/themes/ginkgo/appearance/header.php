@@ -7,7 +7,7 @@ Common header file.
 require ('themes/_common/_header.php');
 
 ?>
-<body onload="all_init();">
+<body>
 <table style="width:100%;">
 	<tr>
 		<td style="width:100%; vertical-align:bottom; white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>

@@ -90,7 +90,7 @@ if ($doubleclick == true)
 //	* Doubleclick editing
 //	* Smooth scrolling
 ?>
-<body onload="all_init();">
+<body>
 
 <div id="top-background"></div>
 <div id="top-background-second"></div>

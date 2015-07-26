@@ -75,7 +75,7 @@ else if($this->has_access('write'))
 ?>
 </head>
 
-<body onload="all_init();">
+<body>
 	<div id="mainwrapper">
 		<div id="header">
 			<?php // Insert search form ?>

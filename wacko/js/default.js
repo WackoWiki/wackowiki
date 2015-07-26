@@ -7,6 +7,11 @@ function undef(param) {
 }
 // Smooth scrolling on the page
 
+window.onload = function () {
+    // alert('Load Test: OK');
+    all_init();
+}
+
 function travelA(Aname, quick, noplus)
 {
   if (isMZ && navigator.userAgent.substr(navigator.userAgent.indexOf('Gecko/') + 6, 4) == '2003') isMZ = false;

@@ -7,7 +7,7 @@
 require ('themes/_common/_header.php');
 
 ?>
-<body onload="all_init();">
+<body>
 
 	<?php echo $this->form_open('login', '', 'post', false, $this->get_translation('LoginPage')); ?>
 <input type="hidden" name="action" value="login" />
