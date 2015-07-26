@@ -84,12 +84,7 @@ if ($doubleclick == true)
 }
 ?>
 </head>
-<?php
-// all_init() initializes all js features:
-//	* WikiEdit
-//	* Doubleclick editing
-//	* Smooth scrolling
-?>
+
 <body>
 
 <div id="top-background"></div>
