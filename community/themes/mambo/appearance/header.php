@@ -5,7 +5,7 @@ require ('themes/_common/_header.php');
 ?>
 <script src="<?php echo $this->config['theme_url'] ?>js/leftframe.js"></script>
 
-<body onload="all_init();">
+<body>
 
 <table class="topbody" style="text-align:center; width:100%;">
 	<tr>

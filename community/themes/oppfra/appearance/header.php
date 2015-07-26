@@ -7,7 +7,7 @@ Common header file.
 require ('themes/_common/_header.php');
 
 ?>
-<body onload="all_init();">
+<body>
 <!--BEGINN: KOPF-->
 <div id="header">
 <div class="navigation">

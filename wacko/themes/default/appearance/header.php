@@ -6,7 +6,7 @@
 
 require ('themes/_common/_header.php');
 ?>
-<body onload="all_init();">
+<body>
 <div id="mainwrapper">
 	<header>
 		<div id="header-main">
@@ -48,8 +48,10 @@ else
 	// main page
 	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 
+	$menu = $this->get_menu();
+
 	// menu
-	if ($menu = $this->get_menu())
+	if ($menu)
 	{
 		foreach ($menu as $menu_item)
 		{
@@ -349,6 +351,7 @@ echo $this->form_close();
 <?php
 // shows breadcrumbs
 echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
+echo '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8);
 ?>
 </div>
 </header>

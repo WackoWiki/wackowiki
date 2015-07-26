@@ -4,7 +4,7 @@ require ('themes/_common/_header.php');
 
 ?>
 </head>
-<body onload="all_init();">
+<body>
 <table style="width:100%;">
 	<tr>
 		<td style="width:50; height:64; background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_1.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.png" width="50" height="1" /></td>

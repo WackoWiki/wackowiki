@@ -7,7 +7,7 @@
 require ('themes/_common/_header.php');
 
 ?>
-<body onload="all_init();">
+<body>
 <div id="mainwrapper">
 	<div id="header">
 		<div id="header-main">
