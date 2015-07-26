@@ -48,7 +48,6 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php } ?>
 <?php } ?>
-
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -95,12 +94,5 @@ if ($doubleclick == true)
 <?php
 }
 ?>
+
 </head>
-
-<?php
-// all_init() initializes all js features:
-//	* WikiEdit
-//	* Doubleclick editing
-//	* Smooth scrolling
-
-?>
