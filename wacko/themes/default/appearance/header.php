@@ -351,7 +351,7 @@ echo $this->form_close();
 <?php
 // shows breadcrumbs
 echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
-echo '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8);
+#echo '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8);
 ?>
 </div>
 </header>
