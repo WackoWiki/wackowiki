@@ -778,7 +778,7 @@ class Wacko
 	}
 
 	// PAGES
-	function translit($tag, $strtolow = TRAN_LOWERCASE, $donotload = TRAN_LOAD)
+	function translit($tag, $strtolow = TRANSLIT_LOWERCASE, $donotload = TRANSLIT_LOAD)
 	{
 		// Lookup transliteration result in the cache and return it if found
 		static $translit_cache;
@@ -930,7 +930,7 @@ class Wacko
 		// 2. search for supertag
 		if (!$page)
 		{
-			$page = $this->_load_page($this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadata_only, $deleted);
+			$page = $this->_load_page($this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD), 0, $revision_id, $cache, true, $metadata_only, $deleted);
 		}
 
 		// 3. if not found, search for tag
@@ -965,7 +965,7 @@ class Wacko
 		if ($page_id == 0)
 		{
 			(!$supertagged
-				? $supertag = $this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD)
+				? $supertag = $this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD)
 				: $supertag = $tag
 			);
 		}
@@ -1121,7 +1121,7 @@ class Wacko
 		{
 			if (!$page['supertag'])
 			{
-				$page['supertag'] = $this->translit($page['tag'], TRAN_LOWERCASE, TRAN_DONTLOAD);
+				$page['supertag'] = $this->translit($page['tag'], TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
 			}
 
 			$this->page_cache['supertag'][$page['supertag']]			= $page;
@@ -1256,7 +1256,7 @@ class Wacko
 		{
 			if ($page != '')
 			{
-				$spages_str	.= "'".quote($this->dblink, $this->translit($page, TRAN_LOWERCASE, TRAN_DONTLOAD))."', ";
+				$spages_str	.= "'".quote($this->dblink, $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD))."', ";
 				$pages_str	.= "'".quote($this->dblink, $page)."', ";
 			}
 		}
@@ -2648,9 +2648,9 @@ class Wacko
 
 	function slim_url($text)
 	{
-		$text = $this->translit($text, TRAN_DONTCHANGE); // TODO: set config option ?
+		$text = $this->translit($text, TRANSLIT_DONTCHANGE); // TODO: set config option ?
 		// why we do this, what are the assumptions?
-		//	this behavior in unwanted in the AP, it breaks the redirect for e.g. config_basic.php
+		//	this behavior is unwanted in the AP, it breaks the redirect for e.g. config_basic.php
 		//	looks like an undo of the reverse in the tranlit function (?)
 		$text = str_replace('_', "'", $text);
 
@@ -3131,7 +3131,7 @@ class Wacko
 			}
 			else
 			{
-				$supertag	= $this->translit($untag, TRAN_LOWERCASE, TRAN_DONTLOAD);
+				$supertag	= $this->translit($untag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
 			}
 
 			$aname = '';
