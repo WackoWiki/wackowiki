@@ -3275,7 +3275,7 @@ class Wacko
 				}
 
 				//TODO: pagepath
-				$aname		= str_replace('/',			'.',		$aname);
+				#$aname		= str_replace('/',			'.',		$aname); // FIXME: missmatch id="doc.deutsch" but anchor '#doc/deutsch' - what was the purpose of setting a dot here if it breaks the anchor?
 				$res		= str_replace('{aname}',	$aname,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
 				$res		= str_replace('{accicon}',	$accicon,	$res);
