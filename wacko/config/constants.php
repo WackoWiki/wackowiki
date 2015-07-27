@@ -24,14 +24,16 @@ define('LOAD_META',						1);
 define('MENU_AUTO',						0);
 define('MENU_USER',						1);
 define('MENU_DEFAULT',					2);
+define('RECOVERY_MODE',					0);		// restore database
 define('SESSION_HANDLER_ID',			'sid');
 define('SESSION_HANDLER_PATH',			null);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
 define('SQL_NULLDATE',					'0000-00-00 00:00:00');
 define('SQL_DATE_FORMAT',				'Y-m-d H:i:s');
-define('TRAN_DONTCHANGE',				0);
-define('TRAN_LOWERCASE',				1);
-define('TRAN_LOAD',						0);
-define('TRAN_DONTLOAD',					1);
+define('TRANSLIT_DONTCHANGE',			0);
+define('TRANSLIT_LOWERCASE',			1);
+define('TRANSLIT_LOAD',					0);
+define('TRANSLIT_DONTLOAD',				1);
+define('CSP_CUSTOM',					null); // Content-Security-Policy "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;"
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 define('WACKO_VERSION',					'5.4.0');
@@ -40,6 +42,6 @@ define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 
 define('ACTIONS4DIFF',					'anchor, toc'); //allowed actions in DIFF
 define('PHP_MIN_VERSION',				'5.4.0'); //minimum required PHP version
-define('PHP_ERROR_REPORTING',			0); // PHP error reporting: 0 - off, 5 - all
+define('PHP_ERROR_REPORTING',			5); // PHP error reporting: 0 - off, 5 - all
 
 ?>
