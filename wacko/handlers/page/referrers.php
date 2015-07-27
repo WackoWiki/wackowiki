@@ -269,7 +269,7 @@ if ($user = $this->get_user())
 							}
 
 							#$page_link = $this->compose_link_to_page($page['tag']);
-							$page_link = $this->link('/'.$page['tag'], '', $page['title'], '', '', '', $_lang);
+							$page_link = $this->link('/'.$page['tag'], '', $page['title'], '', '', '', $_lang, 0);
 						}
 
 
@@ -386,7 +386,7 @@ if ($user = $this->get_user())
 							}
 
 							#$page_link = $this->compose_link_to_page($page['tag']);
-							$page_link = $this->link('/'.$referrer['tag'], '', $referrer['title'], '', '', '', $_lang);
+							$page_link = $this->link('/'.$referrer['tag'], '', $referrer['title'], '', '', '', $_lang, 0);
 						}
 
 						// shorten url name if too long

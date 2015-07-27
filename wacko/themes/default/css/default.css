@@ -66,6 +66,13 @@ a:active {
 	color: #FF0000;
 }
 
+a:target {
+	/* color: #FF0000; */
+	/* border: 2px solid #FF6600; */
+	background-color:#FFEEEE;
+	/* padding: 5px 10px; */
+}
+
 img {
 	border-width: 0px;
 	vertical-align: middle;
