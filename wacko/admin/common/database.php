@@ -634,9 +634,9 @@ function put_data(&$engine, $pack, $table, $mode)
 		$point += $clean + 1;
 
 		// okay, this is it
-		$data = substr($data, 0, $clean);
-		$data = explode("\n", $data);
-		$i = 0;
+		$data	= substr($data, 0, $clean);
+		$data	= explode("\n", $data);
+		$i		= 0;
 
 		// processing...
 		foreach ($data as $row)
@@ -661,7 +661,15 @@ function put_data(&$engine, $pack, $table, $mode)
 
 			foreach ($row as $cell)
 			{
-				$row[$j++] = "'".quote($engine->dblink, $cell)."'"; //( $cell == 'null' ? $cell :  "'".quote($engine->dblink, $cell)."'" );
+				// DEFAULT (NULL, '', etc.)
+				if ($cell == '')
+				{
+					$row[$j++] = 'DEFAULT';
+				}
+				else
+				{
+					$row[$j++] = "'".quote($engine->dblink, $cell)."'"; //( $cell == 'null' ? $cell :  "'".quote($engine->dblink, $cell)."'" );
+				}
 			}
 
 			// run and count sql query
