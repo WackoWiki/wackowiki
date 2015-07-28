@@ -46,7 +46,7 @@ $wacko_config_defaults = array(
 
 	'reverse_proxy' => 0,
 	'reverse_proxy_header' => '',
-	'reverse_proxy_addresses' => array(), // array('a.b.c.d', ...)
+	'reverse_proxy_addresses' => '', // 'a.b.c.d', ...'
 
 	'classes_path' => 'classes',
 	'action_path' => 'actions',
