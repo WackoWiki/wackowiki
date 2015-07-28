@@ -4115,7 +4115,7 @@ class Wacko
 			{
 				// If an array of known reverse proxy IPs is provided, then trust
 				// the XFF header if request really comes from one of them.
-				$reverse_proxy_addresses = !empty($this->config['reverse_proxy_addresses']) ? $this->config['reverse_proxy_addresses'] : array();
+				$reverse_proxy_addresses = !empty($this->config['reverse_proxy_addresses']) ? array($this->config['reverse_proxy_addresses']) : array();
 
 				// Turn XFF header into an array.
 				$forwarded = explode(',', $_SERVER[$reverse_proxy_header]);
