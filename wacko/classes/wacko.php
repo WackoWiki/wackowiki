@@ -5441,7 +5441,9 @@ class Wacko
 	{
 		$config[$config_name]	= $config_value;
 
-		$this->_set_config($config, $is_dynamic = false, $delete_cache = false);
+		$this->debug_print_r($config);
+
+		$this->_set_config($config, $is_dynamic, $delete_cache);
 	}
 
 	function _set_config($config, $is_dynamic = false, $delete_cache = false)
