@@ -8,7 +8,7 @@
 //   backup files
 // - write modules for users administration (remove, ban and so on)
 // - allow multiple admins login with personal credentials in
-//   addition to recovery password login (in case of db corruption)
+//   addition to recovery password login (in case of db corruption -> recoverymode)
 
 ########################################################
 ##                  Wacko engine init                 ##
@@ -28,7 +28,11 @@ if ($cached_config = $init->load_cached_settings('config'))
 else
 {
 	$init->settings();	// populate from config.php
-	$init->settings();	// initialize DBAL and populate from config table.
+
+	if (!RECOVERY_MODE)
+	{
+		$init->settings();	// initialize DBAL and populate from config table. [disable for recovery mode!]
+	}
 }
 
 $init->dbal();
@@ -60,8 +64,8 @@ $engine	= $init->engine();
 
 $engine->http_security_headers();
 
-// redirect, send them home
-if (!$engine->is_admin())
+// redirect, send them home [disable for recovery mode!]
+if (!$engine->is_admin() && !RECOVERY_MODE)
 {
 	if (!headers_sent())
 	{
@@ -269,9 +273,9 @@ else if (time() - $_SESSION['created'] > 1800)
 ########################################################
 
 $dirs = array(
-'admin/common',
-'admin/modules'
-);
+	'admin/common',
+	'admin/modules'
+	);
 
 foreach ($dirs as $dir)
 {
@@ -295,7 +299,7 @@ foreach ($dirs as $dir)
 
 $menue = '<ul><li class="text submenu">'.$module['lock']['cat'].
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
-				? "\n<ul>\n<li class=\"active\">"
+				? "\n<ul>\n".'<li class="active">'
 				: "\n<ul>\n<li>").
 			'<a href="admin.php">'.$module['lock']['name'].'</a>'.
 			"</li>\n";
@@ -303,40 +307,43 @@ $menue = '<ul><li class="text submenu">'.$module['lock']['cat'].
 $category = $module['lock']['cat'];
 
 uasort($module,
-			create_function(
+		create_function(
 			'$a, $b',
 			'if ((array)$a["order"] < (array)$b["order"])
-						return -1;
-					else if ((array)$a["order"] > (array)$b["order"])
-						return 1;
-					else
-						return 0;')
+				return -1;
+			else if ((array)$a["order"] > (array)$b["order"])
+				return 1;
+			else
+				return 0;')
 );
 
 foreach ($module as $row)
 {
-	if ($row['mode'] != 'lock')
+	if ($row['status'] === true)
 	{
-		$menue .= ($row['cat'] != $category
-					? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
-					: '');
-
-		if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
+		if ($row['mode'] != 'lock')
 		{
-			$menue .= '<li class="active">';
-			$_title = $row['cat'].' &gt; '.$row['name'];
+			$menue .= ($row['cat'] != $category
+						? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
+						: '');
+
+			if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
+			{
+				$menue .= '<li class="active">';
+				$_title = $row['cat'].' &gt; '.$row['name'];
+			}
+			else
+			{
+				$menue .= '<li>';
+			}
+
+			$menue .= '<a href="?mode='.$row['mode'].'" title="'.$row['title'].'">'.$row['name'].'</a>';
+			$menue .= "</li>\n";
 		}
 		else
 		{
-			$menue .= '<li>';
+			continue;
 		}
-
-		$menue .= '<a href="?mode='.$row['mode'].'" title="'.$row['title'].'">'.$row['name'].'</a>';
-		$menue .= "</li>\n";
-	}
-	else
-	{
-		continue;
 	}
 
 	$category = $row['cat'];
@@ -430,9 +437,11 @@ if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
 		// page context
 		$engine->tag = $engine->supertag = 'admin.php?mode='.$_REQUEST['mode'];
 		$engine->context[++$engine->current_context] = $engine->tag;
+
 		// module run
 		$exec = 'admin_'.$_REQUEST['mode'];
 		$exec($engine, $module[$_REQUEST['mode']]);
+
 		$engine->current_context--;
 	}
 	else
