@@ -88,10 +88,9 @@ function admin_lock(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 	<p>
-		Note: Before the administration of technical activities
-		<span class="underline">strongly</span> are encouraged to block access to the site!
+		<?php echo $engine->get_translation('MainNote');?>
 	</p>
-	<br /><?php echo $engine->get_translation('ApTestText');?>
+	<br />
 	<table style="max-width:200px" class="formation">
 <?php
 	echo $engine->form_open('lock', '', 'post', true, 'admin.php', '', '');
