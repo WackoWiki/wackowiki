@@ -7,9 +7,26 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('comment') && $this->has_access('read'))
 {
+	$body	= str_replace("\r", '', $_POST['body']);
+	$body	= trim($_POST['body']);
+	$error	= '';
+
+	if(isset($_POST['title']))
+	{
+		$title = trim($_POST['title']);
+	}
+
 	// check form token
 	if (!$this->validate_form_token('add_comment'))
 	{
+		if (!$user)
+		{
+			$this->cache->invalidate_page_cache($this->supertag);
+		}
+
+		$_SESSION['body']		= $body;
+		$_SESSION['title']		= $title;
+
 		$this->set_message($this->get_translation('FormInvalid'));
 
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
@@ -32,14 +49,6 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	$user = $this->get_user();
-	$body = str_replace("\r", '', $_POST['body']);
-	$body = trim($_POST['body']);
-	$error = '';
-
-	if(isset($_POST['title']))
-	{
-		$title = trim($_POST['title']);
-	}
 
 	// watch page
 	if ($this->page && (isset($_POST['watchpage']) && ($_POST['watchpage'])) && ($_POST['noid_publication'] != $this->page['page_id']) && $user && $this->is_watched !== true)
