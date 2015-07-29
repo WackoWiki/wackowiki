@@ -151,9 +151,12 @@ else
 // show category tags
 if ($this->forum === true
 	|| ($this->has_access('read') && $this->page && $this->config['footer_tags'] == 1
-		|| ($this->config['footer_tags'] == 2 && $this->get_user())))
+	|| ($this->config['footer_tags'] == 2 && $this->get_user())))
 {
-	echo '<div class="categories">'.$this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1)."</div>\n";
+	if ($categories = $this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1))
+	{
+		echo '<div class="categories">'.$categories."</div>\n";
+	}
 }
 
 // page comments and files
@@ -188,6 +191,8 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 		$_SESSION['preview']	= '';
 	}
 
+	// places footer inside, to include the footer in the themes footer
+	// set $this->config['footer_inside'] = 0; in theme/lang/wacko.all.php
 	if (!isset($this->config['footer_inside']))
 	{
 		// files code starts

@@ -17,23 +17,6 @@ if (!isset($nomark))	$nomark = '';
 $output	= '';
 $i		= '';
 
-if ($list)
-{
-	if (!$nomark)
-	{
-		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('Categories').":</span></p>\n";
-	}
-
-	echo '<ol>';
-}
-else
-{
-	if (!$nomark)
-	{
-		echo "<div class=\"layout-box\">\n";
-	}
-}
-
 if (isset($this->categories))
 {
 	foreach($this->categories as $id => $category)
@@ -56,18 +39,37 @@ if (isset($this->categories))
 	}
 }
 
-echo (!empty($_category) && (!$list) ? $this->get_translation('Categories').': ' : '').$output;
-
-if ($list)
+if (!empty($_category))
 {
-	echo '</ol>';
+	if ($list)
+	{
+		if (!$nomark)
+		{
+			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('Categories').":</span></p>\n";
+		}
 
-}
-if (!$nomark)
-{
-	echo "</div>\n";
-}
+		echo '<ol>';
+	}
+	else
+	{
+		if (!$nomark)
+		{
+			echo "<div class=\"layout-box\">\n";
+		}
+	}
 
+	echo (!empty($_category) && (!$list) ? $this->get_translation('Categories').': ' : '').$output;
+
+	if ($list)
+	{
+		echo '</ol>';
+
+	}
+	if (!$nomark)
+	{
+		echo "</div>\n";
+	}
+}
 # $this->debug_print_r($this->categories);
 
 ?>
