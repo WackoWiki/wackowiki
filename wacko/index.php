@@ -42,7 +42,7 @@ if ($init->config['tls'] == true && (( ((isset($_SERVER['HTTPS']) && $_SERVER['H
 
 $init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
 
-if ($init->is_locked() === true)
+if ($init->is_locked() === true || RECOVERY_MODE)
 {
 	if (!headers_sent())
 	{
