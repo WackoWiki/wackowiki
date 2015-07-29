@@ -5441,7 +5441,7 @@ class Wacko
 	{
 		$config[$config_name]	= $config_value;
 
-		$this->debug_print_r($config);
+		#$this->debug_print_r($config);
 
 		$this->_set_config($config, $is_dynamic, $delete_cache);
 	}
@@ -5450,37 +5450,40 @@ class Wacko
 	{
 		$config_insert	= '';
 		$i				= '';
-		// if (is_array()){}
-		foreach($config as $config_name => $config_value)
+
+		if (is_array($config))
 		{
-			if ($i > 0)
+			foreach($config as $config_name => $config_value)
 			{
-				$config_insert .= ", ";
+				if ($i > 0)
+				{
+					$config_insert .= ", ";
+				}
+
+				$config_insert .= "(0, '$config_name', '$config_value')";
+
+				$this->config[$config_name] = $config_value;
+
+				$i++;
 			}
 
-			$config_insert .= "(0, '$config_name', '$config_value')";
+			unset($i);
 
-			$this->config[$config_name] = $config_value;
+			// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
+			// http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
 
-			$i++;
-		}
+			$sql = "INSERT INTO {$this->config['table_prefix']}config (config_id, config_name, config_value)
+					VALUES ".$config_insert." ".
+					"ON DUPLICATE KEY UPDATE
+						config_name		= VALUES(config_name),
+						config_value	= VALUES(config_value);";
 
-		unset($i);
+			$this->sql_query($sql);
 
-		// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
-		// http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
-
-		$sql = "INSERT INTO {$this->config['table_prefix']}config (config_id, config_name, config_value)
-				VALUES ".$config_insert." ".
-				"ON DUPLICATE KEY UPDATE
-					config_name		= VALUES(config_name),
-					config_value	= VALUES(config_value);";
-
-		$this->sql_query($sql);
-
-		if (!$is_dynamic && $delete_cache)
-		{
-			$this->cache->destroy_config_cache();
+			if (!$is_dynamic && $delete_cache)
+			{
+				$this->cache->destroy_config_cache();
+			}
 		}
 	}
 
