@@ -60,7 +60,7 @@ $config_file['recovery_password']		= $config['recovery_password'];
 // paths
 $config_file['cache_dir']				= $config['cache_dir'];
 $config_file['action_path']				= $config['action_path'];
-$config_file['classes_path']			= $config['classes_path'];
+$config_file['class_path']			= $config['class_path'];
 $config_file['formatter_path']			= $config['formatter_path'];
 $config_file['handler_path']			= $config['handler_path'];
 $config_file['theme_path']				= $config['theme_path'];
