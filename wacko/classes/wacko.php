@@ -276,11 +276,11 @@ class Wacko
 
 	function available_themes()
 	{
-		$handle	= opendir('themes');
+		$handle	= opendir($this->config['theme_path']);
 
 		while (false !== ($file = readdir($handle)))
 		{
-			if ($file != '.' && $file != '..' && is_dir('themes/'.$file) && $file != '_common')
+			if ($file != '.' && $file != '..' && is_dir($this->config['theme_path'].'/'.$file) && $file != '_common')
 			{
 				$themelist[] = $file;
 			}
@@ -415,7 +415,7 @@ class Wacko
 			else
 			{
 				// theme lang files $theme_translation[]
-				$lang_file = 'themes/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
+				$lang_file = $this->config['theme_path'].'/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
 
 				if (@file_exists($lang_file))
 				{
@@ -430,7 +430,7 @@ class Wacko
 				$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
 				// wacko.all theme
-				$lang_file = 'themes/'.$this->config['theme'].'/lang/wacko.all.php';
+				$lang_file = $this->config['theme_path'].'/'.$this->config['theme'].'/lang/wacko.all.php';
 
 				if (@file_exists($lang_file))
 				{
@@ -2121,7 +2121,7 @@ class Wacko
 					$_GET['a']			= -1;
 					$_GET['b']			= $page['revision_id'];
 					$_GET['diffmode']	= 1;
-					$diff				= $this->include_buffered('handlers/page/diff.php', 'oops', array('source' => 1));
+					$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops', array('source' => 1));
 
 					// notifying watchers
 					$title				= $this->get_page_title(0, $page_id);
@@ -3691,7 +3691,7 @@ class Wacko
 		if ($user['user_name'] == '')
 		{
 			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $_SESSION['guest_form_salt'];
+			$user['user_form_salt']	= $_SESSION['guest_form_salt'];// TODO: cache -> Notice: Undefined index: guest_form_salt
 		}
 
 		if ($timespan === false)
@@ -3703,7 +3703,7 @@ class Wacko
 		if (isset($_POST['form_token']))
 		{
 			$token			= isset($_POST['form_token']) ? $_POST['form_token'] : '';
-			$creation_time	= $_SESSION['formdata'][$token]['creation_time'];
+			$creation_time	= $_SESSION['formdata'][$token]['creation_time']; // TODO: cache -> Notice: Undefined index: formdata
 
 			$diff = time() - $creation_time;
 
@@ -3833,12 +3833,12 @@ class Wacko
 
 	function header($mod = '')
 	{
-		return $this->include_buffered('header'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', 'themes/'.$this->config['theme'].'/appearance');
+		return $this->include_buffered('header'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', $this->config['theme_path'].'/'.$this->config['theme'].'/appearance');
 	}
 
 	function footer($mod = '')
 	{
-		return $this->include_buffered('footer'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', 'themes/'.$this->config['theme'].'/appearance');
+		return $this->include_buffered('footer'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', $this->config['theme_path'].'/'.$this->config['theme'].'/appearance');
 	}
 
 	function use_class($class_name, $class_dir = '', $file_name = '')
@@ -3882,6 +3882,7 @@ class Wacko
 
 		$this->start_link_tracking();
 		$this->no_cache();
+
 		return $result;
 	}
 
@@ -3907,11 +3908,11 @@ class Wacko
 	function _format($text, $formatter, &$options)
 	{
 		// TODO: localize: 'Formatter %1 not found'
-		$text = $this->include_buffered('formatters/'.$formatter.'.php', '<em>Formatter "'.$formatter.'" not found</em>', compact('text', 'options'));
+		$text = $this->include_buffered($this->config['formatter_path'].'/'.$formatter.'.php', '<em>Formatter "'.$formatter.'" not found</em>', compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
-			$text = $this->include_buffered('formatters/typografica.php', '<em>Formatter "'.$formatter.'" not found</em>', compact('text'));
+			$text = $this->include_buffered($this->config['formatter_path'].'/typografica.php', '<em>Formatter "'.$formatter.'" not found</em>', compact('text'));
 		}
 
 		return $text;
@@ -5680,7 +5681,7 @@ class Wacko
 		{
 			$this->config['open_url']		= $this->config['base_url'];
 			$this->config['base_url']		= str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
-			$this->config['theme_url']		= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
+			$this->config['theme_url']		= $this->config['base_url'].$this->config['theme_path'].'/'.$this->config['theme'].'/';
 			$this->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
 		}
 
@@ -5768,7 +5769,7 @@ class Wacko
 		if (is_array($user) && isset($user['theme']))
 		{
 			$this->config['theme']		= $user['theme'];
-			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
+			$this->config['theme_url']	= $this->config['base_url'].$this->config['theme_path'].'/'.$this->config['theme'].'/';
 		}
 
 		if (!$this->config['multilanguage'])
@@ -5858,7 +5859,7 @@ class Wacko
 				}
 			}
 
-			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
+			$this->config['theme_url']	= $this->config['base_url'].$this->config['theme_path'].'/'.$this->config['theme'].'/';
 
 			// set page categories. this defines $categories (array) object property
 			$categories = $this->load_categories('', $this->page['page_id']);
@@ -6049,7 +6050,7 @@ class Wacko
 		if (isset($this->post_wacko_action['toc']))
 		{
 			// #2. find all <hX></hX> & guide them in subroutine
-			//     notice that complex regexp is copied & duplicated in formatters/paragrafica (subject to refactor)
+			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
 			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)!i",
 				array(&$this, 'numerate_toc_callback_toc'), $what);
 		}
@@ -6057,7 +6058,7 @@ class Wacko
 		if (isset($this->post_wacko_action['p']))
 		{
 			// #2. find all <p class="auto"> & guide them in subroutine
-			//     notice that complex regexp is copied & duplicated in formatters/paragrafica (subject to refactor)
+			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
 			$what = preg_replace_callback("!(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">(.+?)</p>)!is",
 				array(&$this, 'numerate_toc_callback_p'), $what);
 		}
