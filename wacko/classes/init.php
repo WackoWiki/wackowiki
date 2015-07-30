@@ -590,7 +590,7 @@ class Init
 				}
 			}
 		}
-		else if ($this->cache == true && $op == 'log')
+		else if ($this->config['cache'] && $this->cache == true && $op == 'log')
 		{
 			return $this->cache->log('Before Run WackoWiki='.$this->engine->config['wacko_version']);
 		}
@@ -632,6 +632,7 @@ class Init
 			$this->engine = new Wacko($this->config, $this->dblink);
 			$this->engine->header_count = 0;
 
+			// FIXME:
 			if ($this->cache == true)
 			{
 				$this->cache->wacko		= & $this->engine;
@@ -646,6 +647,8 @@ class Init
 		}
 		else if ($this->engine == true && $op == 'lang')
 		{
+			// registers locale resources for admin panel
+			//		call $init->engine('lang');
 			if ($lang == false)
 			{
 				$lang = $this->config['language'];
@@ -675,8 +678,8 @@ class Init
 			{
 				$overall_time = $this->get_micro_time() - $this->timer;
 
-				echo "<div id=\"debug\">".
-					 "<p class=\"debug\">Program execution statistics</p>\n<ul>\n";
+				echo '<div id="debug">'.
+					 '<p class="debug">Program execution statistics</p>'."\n<ul>\n";
 
 				// get memory usage
 				if(function_exists('memory_get_peak_usage'))
@@ -723,7 +726,7 @@ class Init
 				if ($this->config['debug'] >= 2)
 				{
 					$user = $this->engine->get_user();
-					echo "<p class=\"debug\">Language data</p>\n<ul>\n";
+					echo '<p class="debug">Language data</p>'."\n<ul>\n";
 					echo "<li>Multilanguage: ".($this->config['multilanguage'] == 1 ? 'true' : 'false')."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
@@ -757,7 +760,7 @@ class Init
 
 				if ($this->config['debug'] >= 3)
 				{
-					echo "<p class=\"debug\">Session data</p>\n<ul>\n";
+					echo '<p class="debug">Session data</p>'."\n<ul>\n";
 					echo "<li>session_id(): ".session_id()."</li>\n";
 					echo "<li>Base URL: ".$this->config['base_url']."</li>\n";
 					echo "<li>HTTPS: ".(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')."</li>\n";
