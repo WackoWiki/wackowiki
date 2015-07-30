@@ -48,9 +48,11 @@ $wacko_config_defaults = array(
 	'reverse_proxy_header' => '',
 	'reverse_proxy_addresses' => '', // 'a.b.c.d', ...'
 
+	'action_path' => 'action',
 	'classes_path' => 'classes',
-	'action_path' => 'actions',
-	'handler_path' => 'handlers',
+	'formatter_path' => 'formatter',
+	'handler_path' => 'handler',
+	'theme_path' => 'theme',
 
 	'phpmailer' => 0,
 	'phpmailer_method' => 'mail',
