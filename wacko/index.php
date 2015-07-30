@@ -29,7 +29,7 @@ else
 }
 
 $init->dbal();
-$init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
+$init->settings('theme_url',	$init->config['base_url'].$init->config['theme_path'].'/'.$init->config['theme'].'/');
 $init->settings('user_table',	$init->config['table_prefix'].'user');
 $init->settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
 $init->settings('ap_mode',		false);
@@ -62,6 +62,8 @@ $cache	= $init->cache();
 $init->cache('check');
 $engine	= $init->engine();
 $init->cache('log');
+
+#require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 
 // execute and cache
 $init->engine('run');
