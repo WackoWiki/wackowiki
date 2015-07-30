@@ -25,7 +25,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
 	<?php if ($this->config['allow_x11colors']) {?>
-	<link rel="stylesheet" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" />
+	<link rel="stylesheet" href="<?php echo $this->config['base_url'].$this->config['theme_path']; ?>/_common/X11colors.css" />
 	<?php } ?>
 	<link media="print" rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />

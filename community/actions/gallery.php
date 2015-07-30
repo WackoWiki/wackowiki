@@ -33,7 +33,7 @@ TODO: config settings
 
 - generated thumbnails full-blown 32-bit PNGs (or at least 24-bit) resulting in a file size often larger than the original image
 - remove thumbs with file or page
-- load the JS with the header (themes/_common/_header.php), see flash action (to avoid multiple loads)
+- load the JS with the header (theme/_common/_header.php), see flash action (to avoid multiple loads)
 - fall back if no JS or Image manipulation library is available
 
 */
