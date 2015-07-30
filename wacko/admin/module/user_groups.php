@@ -471,7 +471,7 @@ function admin_user_groups(&$engine, &$module)
 
 		echo '<br /><input id="button" type="submit" name="add_member" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
 		echo '<input id="button" type="submit" name="remove_member" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		echo '<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="reset" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
+		echo '<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
 
 		echo $engine->form_close();
 	}
