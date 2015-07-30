@@ -366,7 +366,7 @@ function admin_user_users(&$engine, &$module)
 			echo $engine->form_open('edit_user', '', 'post', true, '', '');
 
 			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
-				'<table class="formation">';
+				'<table class="formation">'.
 				'<tr>
 					<td>
 						<label for="newname">'.$engine->get_translation('UsersRename').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label>
