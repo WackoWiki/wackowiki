@@ -13,7 +13,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<meta name="description" content="<?php echo $this->get_description(); ?>" />
 	<meta charset="<?php echo $this->get_charset(); ?>" />
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/default.css" media="screen" />
-	<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
+	<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" href="<?php echo $this->config['base_url'].$this->config['theme_path']; ?>/_common/X11colors.css" /><?php } ?>
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/page.css" media="screen" />
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/wacko.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->config['theme_url']; ?>icons/icon.png" />

@@ -8,7 +8,7 @@ Default is a theme (a.k.a. template) for WackoWiki.
 DOWNLOAD AND INSTALLATION ------------------------------------------------------
 
 * Download Default as ZIP- or TAR.GZ archive, unzip it and copy the
-  'default' directory to your themes folder of the WackoWiki
+  'default' directory to your theme folder of the WackoWiki
   installation.
 * Edit your config.php (or personal.config.php) and set
   "theme" => "default".

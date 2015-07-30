@@ -1,6 +1,6 @@
 <?php
 
-require ('themes/_common/_header.php');
+require ($this->config['theme_path'].'/_common/_header.php');
 
 ?>
 <script src="<?php echo $this->config['theme_url'] ?>js/leftframe.js"></script>
