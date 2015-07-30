@@ -49,7 +49,7 @@ $wacko_config_defaults = array(
 	'reverse_proxy_addresses' => '', // 'a.b.c.d', ...'
 
 	'action_path' => 'action',
-	'classes_path' => 'class',
+	'class_path' => 'class',
 	'formatter_path' => 'formatter',
 	'handler_path' => 'handler',
 	'theme_path' => 'theme',

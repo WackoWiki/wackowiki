@@ -3852,7 +3852,7 @@ class Wacko
 
 			if ($class_dir == '')
 			{
-				$class_dir = $this->config['classes_path'];
+				$class_dir = $this->config['class_path'];
 			}
 
 			$class_file = $class_dir.'/'.$file_name.'.php';
