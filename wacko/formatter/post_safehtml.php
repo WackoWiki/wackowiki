@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$rh->use_class('post_safehtml', $this->config['formatter_path'].'/classes/');
+$rh->use_class('post_safehtml', $this->config['formatter_path'].'/class/');
 
 $parser = new post_safehtml($this, &$options);
 

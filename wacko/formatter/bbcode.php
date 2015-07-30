@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$this->use_class('bbcode', $this->config['formatter_path'].'/classes/');
+$this->use_class('bbcode', $this->config['formatter_path'].'/class/');
 
 $parser = new bbcode($this);
 
