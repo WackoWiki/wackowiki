@@ -10,7 +10,7 @@ if ($text == '')
 	return;
 }
 
-$this->use_class('typografica', $this->config['formatter_path'].'/classes/');
+$this->use_class('typografica', $this->config['formatter_path'].'/class/');
 
 $typo = new typografica($this);
 

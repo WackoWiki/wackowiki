@@ -3,7 +3,7 @@
 define('IN_WACKO', true);
 
 // initialize engine api
-require('classes/init.php');
+require('class/init.php');
 $init = new init();
 
 // define settings

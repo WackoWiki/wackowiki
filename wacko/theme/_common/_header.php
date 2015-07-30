@@ -49,7 +49,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 <?php } ?>
 <?php } ?>
 
-<?php bb2_insert_head(); ?>
+<?php #bb2_insert_head(); ?>
 
 <?php
 // JS files.

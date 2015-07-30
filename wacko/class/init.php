@@ -561,7 +561,7 @@ class Init
 
 		if ($this->cache == false || $op == false)
 		{
-			require('classes/cache.php');
+			require($this->config['classes_path'].'/cache.php');
 			return $this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
 		}
 		else if ($this->cache == true && $op == 'check')
@@ -628,11 +628,11 @@ class Init
 				die("Error starting WackoWiki engine: no database connection established.");
 			}
 
-			require('classes/wacko.php');
+			require($this->config['classes_path'].'/wacko.php');
 			$this->engine = new Wacko($this->config, $this->dblink);
 			$this->engine->header_count = 0;
 
-			// FIXME:
+			// FIXME: add description
 			if ($this->cache == true)
 			{
 				$this->cache->wacko		= & $this->engine;

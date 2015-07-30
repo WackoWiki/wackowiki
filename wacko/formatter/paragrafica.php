@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 
 // this formatter WISELY replace <BR>s with paragraphs.
 
-$this->use_class('paragrafica', $this->config['formatter_path'].'/classes/');
+$this->use_class('paragrafica', $this->config['formatter_path'].'/class/');
 
 // we got pure HTML on input.
 $para	= new paragrafica( $this );
