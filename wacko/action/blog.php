@@ -30,7 +30,7 @@ if (!empty($blog_cluster))
 
 	$pages			= '';
 	$prefix			= $this->config['table_prefix'];
-	$blogcluster	= $blog_cluster;
+	$blogcluster		= $blog_cluster;
 	$bloglevels		= $this->config['news_levels'];
 
 	// check privilege
@@ -99,7 +99,8 @@ if (!empty($blog_cluster))
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
-				"AND comment_on_id = '0'", 1);
+				"AND comment_on_id = '0'".
+				"AND deleted <> '1' ", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=latest');
 
@@ -109,6 +110,7 @@ if (!empty($blog_cluster))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND p.deleted <> '1' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
 	}
@@ -120,6 +122,7 @@ if (!empty($blog_cluster))
 			"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
 			"WHERE p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
 				"AND c.category_id = '$category_id' ".
+				"AND p.deleted <> '1' ".
 				"AND p.comment_on_id = '0'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'category='.$category_id);
@@ -136,6 +139,7 @@ if (!empty($blog_cluster))
 				"INNER JOIN {$prefix}category_page c  ON (c.page_id = p.page_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND p.deleted <> '1' ".
 				"AND c.category_id = '$category_id' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
@@ -146,6 +150,7 @@ if (!empty($blog_cluster))
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND deleted <> '1' ".
 				"AND created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 				"AND comment_on_id = '0'", 1);
 
@@ -157,6 +162,7 @@ if (!empty($blog_cluster))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND p.deleted <> '1' ".
 				"AND p.created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
@@ -167,6 +173,7 @@ if (!empty($blog_cluster))
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND deleted <> '1' ".
 				"AND created > '$date' ".
 				"AND comment_on_id = '0'", 1);
 
@@ -179,13 +186,14 @@ if (!empty($blog_cluster))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND p.deleted <> '1' ".
 				"AND p.created > '$date' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
 	}
 
 	// start output
-	echo "<div class=\"news\">";
+	echo '<div class="news">';
 
 	if ($title == 1)
 	{
@@ -216,8 +224,10 @@ if (!empty($blog_cluster))
 		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/news_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icons/xml.png'.'" title="'.$this->get_translation('RecentNewsXMLTip').'" alt="XML" /></a></span>'."\n";
 	}
 
-	echo '<div style="width:100%;"><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
-			'<p style="float: right">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</p><br style="clear:both" /></div>'."\n";
+	echo '<div style="width:100%;">
+			<p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
+			'<p style="float: right">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</p><br style="clear:both" />
+		</div>'."\n";
 
 	// pagination
 	if (isset($pagination['text']))
@@ -230,15 +240,14 @@ if (!empty($blog_cluster))
 	{
 		foreach ($pages as $page)
 		{
-
 			$_category = $this->get_categories($page['page_id']);
 			$_category = !empty($_category) ? $this->get_translation('Category').': '.$_category.' | ' : '';
 
-			echo "<article class=\"newsarticle\">";
+			echo '<article class="newsarticle">';
 			echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
-			echo "<div class=\"newsinfo\"><span>".$this->get_time_string_formatted($page['created']).' '.$this->get_translation('By').' '.( $page['owner'] == '' ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' )."</span></div>\n";
-			echo "<div class=\"newscontent\">".$this->action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
-			echo "<div class=\"newsmeta\">".$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->get_translation('EditText'), 0)." | " : "")."  ".
+			echo '<div class="newsinfo"><span>'.$this->get_time_string_formatted($page['created']).' '.$this->get_translation('By').' '.( $page['owner'] == '' ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' )."</span></div>\n";
+			echo '<div class="newscontent">'.$this->action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
+			echo '<div class="newsmeta">'.$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->get_translation('EditText'), 0)." | " : "")."  ".
 				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#commentsheader" title="'.$this->get_translation('NewsDiscuss').' '.$page['title'].'">'.(int)$page['comments']." ".$this->get_translation('Comments_all')." &raquo; "."</a></div>\n";
 			echo "</article>\n";
 

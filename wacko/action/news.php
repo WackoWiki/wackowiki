@@ -26,8 +26,8 @@ if (!empty($this->config['news_cluster']))
 
 	$pages			= '';
 	$prefix			= $this->config['table_prefix'];
-	$news_cluster	= $this->config['news_cluster'];
-	$news_levels	= $this->config['news_levels'];
+	$news_cluster		= $this->config['news_cluster'];
+	$news_levels		= $this->config['news_levels'];
 
 	// check privilege
 	if ($this->has_access('create') === true)
@@ -90,7 +90,8 @@ if (!empty($this->config['news_cluster']))
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' ".
-				"AND comment_on_id = '0'", 1);
+				"AND comment_on_id = '0'".
+				"AND deleted <> '1' ", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=latest');
 
@@ -100,6 +101,7 @@ if (!empty($this->config['news_cluster']))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
+				"AND p.deleted <> '1' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
 	}
@@ -111,6 +113,7 @@ if (!empty($this->config['news_cluster']))
 			"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
 			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
 				"AND c.category_id = '$category_id' ".
+				"AND p.deleted <> '1' ".
 				"AND p.comment_on_id = '0'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'category='.$category_id);
@@ -127,6 +130,7 @@ if (!empty($this->config['news_cluster']))
 				"INNER JOIN {$prefix}category_page c  ON (c.page_id = p.page_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
+				"AND p.deleted <> '1' ".
 				"AND c.category_id = '$category_id' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
@@ -137,6 +141,7 @@ if (!empty($this->config['news_cluster']))
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' ".
+				"AND deleted <> '1' ".
 				"AND created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 				"AND comment_on_id = '0'", 1);
 
@@ -148,6 +153,7 @@ if (!empty($this->config['news_cluster']))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
+				"AND p.deleted <> '1' ".
 				"AND p.created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
@@ -158,6 +164,7 @@ if (!empty($this->config['news_cluster']))
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' ".
+				"AND deleted <> '1' ".
 				"AND created > '$date' ".
 				"AND comment_on_id = '0'", 1);
 
@@ -170,13 +177,14 @@ if (!empty($this->config['news_cluster']))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
+				"AND p.deleted <> '1' ".
 				"AND p.created > '$date' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
 	}
 
 	// start output
-	echo "<div class=\"news\">";
+	echo '<div class="news">';
 
 	if ($title == 1)
 	{
