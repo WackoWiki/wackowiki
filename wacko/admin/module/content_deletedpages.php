@@ -39,6 +39,20 @@ function admin_content_deletedpages(&$engine, &$module)
 			"WHERE page_id = '".(int)$_GET['remove']."'");
 	}
 
+	// restore specific page revisions
+	if (isset($_GET['restore']))
+	{
+		/* $engine->sql_query(
+				"UPDATE {$engine->config['table_prefix']}revision SET ".
+					"deleted	= '0' ".
+				"WHERE page_id = '".(int)$_GET['remove']."'"); */
+
+		$engine->sql_query(
+				"UPDATE {$engine->config['table_prefix']}page SET ".
+					"deleted	= '0' ".
+				"WHERE page_id = '".(int)$_GET['restore']."'");
+	}
+
 	$pages = $engine->load_deleted(100000, 0);
 ?>
 	<p>
@@ -70,7 +84,9 @@ function admin_content_deletedpages(&$engine, &$module)
 			// print entry
 			echo '<tr>'.
 					'<td style="text-align:left">'.
-						'<small>('.date($engine->config['time_format_seconds'], strtotime($time)).' - <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->get_translation('RemoveButton').'</a>)</small> '.
+						'<small>'.date($engine->config['time_format_seconds'], strtotime($time)).' - '.
+						' [ <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->get_translation('RemoveButton').'</a> ]'.
+						' [ <a href="'.rawurldecode($engine->href()).'&amp;restore='.$page['page_id'].'">'.$engine->get_translation('RestoreButton').'</a> ]</small> '.
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0).
 					'</td>'.
 				"</tr>\n";

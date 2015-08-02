@@ -20,11 +20,14 @@ if ($this->page)
 {
 	if ($this->has_access('read'))
 	{
-		// Revisions link
-		echo (( $this->hide_revisions === false || $this->is_admin() )
-				? '<li><a href="'.$this->href('revisions').'" title="'.$this->get_translation('RevisionTip').'">'.$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
-				: '<li>'.$this->get_time_string_formatted($this->page['modified'])."</li>\n"
-			);
+		if (isset($this->page['modified']))
+		{
+			// Revisions link
+			echo (( $this->hide_revisions === false || $this->is_admin() )
+					? '<li><a href="'.$this->href('revisions').'" title="'.$this->get_translation('RevisionTip').'">'.$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
+					: '<li>'.$this->get_time_string_formatted($this->page['modified'])."</li>\n"
+				);
+		}
 
 		// Show Owner of this page
 		if ($owner = $this->get_page_owner())
@@ -38,7 +41,7 @@ if ($this->page)
 				echo '<li>'.$this->get_translation('Owner').': '.'<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner."</a></li>\n";
 			}
 		}
-		else if (!$this->page['comment_on_id'])
+		else if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 		{
 			echo '<li>'.$this->get_translation('Nobody').($this->get_user() ? ' (<a href="'.$this->href('claim').'">'.$this->get_translation('TakeOwnership')."</a>)</li>\n" : '');
 		}

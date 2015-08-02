@@ -25,7 +25,7 @@ function admin_user_users(&$engine, &$module)
 	$where = '';
 	$order = '';
 
-	$engine->debug_print_r($_POST);
+	#$engine->debug_print_r($_POST);
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />

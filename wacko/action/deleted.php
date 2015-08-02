@@ -15,7 +15,7 @@ if ($this->is_admin())
 	{
 		$i = 0;
 
-		echo "<ul class=\"ul_list\">\n";
+		echo '<ul class="ul_list">'."\n";
 
 		foreach ($pages as $page)
 		{
@@ -50,7 +50,7 @@ if ($this->is_admin())
 
 				// print entry
 				echo "<li>".
-						"<span style=\"text-align:left\">".
+						'<span style="text-align:left">'.
 							"<small>".date($this->config['time_format_seconds'], strtotime($time))."</small>  &mdash; ".
 							#$this->compose_link_to_page($page['tag'], 'revisions', '', 0).
 							$this->compose_link_to_page($page['tag'], '', '', 0).

@@ -456,6 +456,7 @@ $wacko_translation = array(
 	'WrongPage4Redirect' => 'Ei saa ümber suunata, kuna tegemist on valede parameetritega',
 	'ReallyDelete' => 'Kas tõesti tahad seda lehte kustutada?<br />Seda ei saa taastada!<br /><br />TÄHELEPANU! Kustutades selle lehe kustutad kõik selle lehe versioonid, kommentaarid, manused, kasutajateloendid ja viited.',
 	'RemoveButton' => 'Jah, kustuta!',
+	'RestoreButton'				=> 'Restore',
 	'CommentForWatchedPage' => 'Uus kommentaar jälgitud lehel',
 	'SomeoneCommented' => ' kommenteeris seda lehte, mida sa praegu vaatad: ',
 	'AlertReferringPages' => 'Sellele lehele viidavad järgmised lehed',

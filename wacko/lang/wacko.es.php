@@ -456,6 +456,7 @@ $wacko_translation = array(
 	'WrongPage4Redirect' => 'No se puede efectuar la redirección.',
 	'ReallyDelete' => 'Seguro que quieres ELIMINAR la página?<br />Esta acción no se puede recuperar!<br /><br />ADVERTENCIA: eliminar una página consiste en eliminar todas las versiones pasadas de la página, comentarios, archivos adjuntos, ACLs y referencias.',
 	'RemoveButton' => 'Eliminar',
+	'RestoreButton'				=> 'Restore',
 	'CommentForWatchedPage' => 'Nuevo comentario para esta página  ',
 	'SomeoneCommented' => ' ha comentado esta página que estas vigilando: ',
 	'AlertReferringPages' => 'Esta página esta referenciada desde estas páginas',

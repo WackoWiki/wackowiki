@@ -457,6 +457,7 @@ $wacko_translation = array(
 	'WrongPage4Redirect'		=> 'Umleitung funktioniert wegen falschen Umleitungsparametern nicht',
 	'ReallyDelete'				=> 'Willst du wirklich diese Seite löschen?<br />Diese Aktion kann nicht rückgängig gemacht werden!<br /><br />WARNUNG: Mit dieser Seite werden alle zur Seite gehörigen Versionen, Kommentare, Anhänge, Berechtigungen und Verweise gelöscht.',
 	'RemoveButton'				=> 'Ja, löschen!',
+	'RestoreButton'				=> 'Wiederherstellen',
 	'CommentForWatchedPage'		=> 'neuer Kommentar zur Seite ',
 	'SomeoneCommented'			=> ' kommentierte die von dir beobachtete Seite: ',
 	'AlertReferringPages'		=> 'Auf diese Seite wird von folgenden Seiten verwiesen',

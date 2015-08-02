@@ -456,6 +456,7 @@ $wacko_translation = array(
 	'WrongPage4Redirect' => 'Hov, den kan vi ikke finde',
 	'ReallyDelete' => 'Er du sikker på at du vil SLETTE siden?<br />Der er ingen fortrydelsesret!<br /><br />ADVARSEL: Alle versioner af siden slettes.',
 	'RemoveButton' => 'Ja, slet!',
+	'RestoreButton'				=> 'Restore',
 	'CommentForWatchedPage' => 'Nye kommentarer til siden ',
 	'SomeoneCommented' => ' kommenterer en side du overvåger: ',
 	'AlertReferringPages' => 'Følgende sider henviser til denne',

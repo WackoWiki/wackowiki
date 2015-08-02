@@ -456,6 +456,7 @@ $wacko_translation = array(
 	'WrongPage4Redirect' => 'Wykonanie przekierowania by³o niemo¿liwe, poniewa¿ podano nieprawid³owy parametr',
 	'ReallyDelete' => 'Czy na pewno USUN¡Æ tê stronê?<br />Tej czynno¶ci nie mo¿na cofn±æ!<br /><br />OSTRZE¯ENIE: Usuniêcie tej strony spowoduje usuniêcie wszystkich zachowanych wersji strony, komentarzy, za³±czniki, odsy³aczy i list dostêpu.',
 	'RemoveButton' => 'Usuñ na pewno!',
+	'RestoreButton'				=> 'Restore',
 	'CommentForWatchedPage' => 'Nowy komentarz na stronie ',
 	'SomeoneCommented' => ' skomentowa³ obserwowan± przez Ciebie stronê: ',
 	'AlertReferringPages' => 'Do tej strony odwo³uj± siê nastêpuj±ce dokumenty',
