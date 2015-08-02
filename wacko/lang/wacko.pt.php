@@ -456,6 +456,7 @@ $wacko_translation = array(
 	'WrongPage4Redirect'		=> 'Impossível redirecionar por causa de parâmetro errado',
 	'ReallyDelete'				=> 'Quer mesmo apagar a página?<br />Não poderá deppois anular esta acção!<br /><br />AVISO: ao Apagar esta página irá eliminar todas as suas revisões, comentários, anexos, permissões e referenciadores.',
 	'RemoveButton'				=> 'Sim, Apague!',
+	'RestoreButton'				=> 'Restore',
 	'CommentForWatchedPage'		=> 'Novo comentário para página ',
 	'SomeoneCommented'			=> ' comentou esta página que está a acompanhar: ',
 	'AlertReferringPages'		=> 'Esta página é referenciada por estas páginas',

@@ -8,6 +8,8 @@ WackoFormatter.
 class WackoFormatter
 {
 	var $object;
+	var $page_id;
+	var $table_scope;
 	var $old_indent_level	= 0;
 	var $indent_closers		= array();
 	var $tdold_indent_level	= 0;
@@ -409,7 +411,10 @@ class WackoFormatter
 		$wacko		= & $this->object;
 		$callback	= array(&$this, 'wacko_callback');
 
-		$this->page_id = $wacko->page['page_id'];
+		if (isset($wacko->page['page_id']))
+		{
+			$this->page_id = $wacko->page['page_id'];
+		}
 
 		if (!$this->page_id)
 		{

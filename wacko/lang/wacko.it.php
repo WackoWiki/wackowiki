@@ -456,6 +456,7 @@ $wacko_translation = array(
 	'WrongPage4Redirect' => 'Reindirizzo impossibile a causa di parametri di reindirizzo errati',
 	'ReallyDelete' => 'Vuoi davvero CANCELLARE la pagina?<br />Dopo non potrai annullare questa azione!<br /><br />ATTENZIONE: cancellando la pagina, si cancelleranno tutte le sue versioni, i suoi commenti, gli allegati, gli ACL ed i suoi riferimenti.',
 	'RemoveButton' => 'Si, elimina!',
+	'RestoreButton'				=> 'Restore',
 	'CommentForWatchedPage' => 'Nuovo commento sulla pagina ',
 	'SomeoneCommented' => ' ha commentato la pagina che stai osservando: ',
 	'AlertReferringPages' => 'La pagina è richiamata da queste altre pagine',

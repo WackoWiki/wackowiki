@@ -11,7 +11,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 	<header>
 		<div id="header-main">
 			<div id="header-top">
-			<h1><span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?></h1>
+			<h1><span class="main"><?php echo (isset($this->page['tag']) && $this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : '<a href="'.$this->config['base_url'].'">'.$this->config['site_name'].'</a>') ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?></h1>
 		</div>
 		<div id="login">
 <?php

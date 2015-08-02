@@ -456,6 +456,7 @@ $wacko_translation = array(
 	'WrongPage4Redirect'		=> 'Cette page semble vous diriger vers une autre, non trouvée. Vous pouvez éditer cette page pour connaître le nom de l&rsquo;autre.',
 	'ReallyDelete'				=> 'Voulez-vous vraiment EFFACER cette page?<br />Cette effacement sera définitif !<br /><br />AVERTISSEMENT&nbsp;: supprimer cette page entraîne la suppression ou effacement de toutes ses versions, commentaires, pièces jointes, droits associés et référents.',
 	'RemoveButton'				=> 'Oui, supprimer !',
+	'RestoreButton'				=> 'Restore',
 	'CommentForWatchedPage'		=> 'Nouveau commentaire sur la page ',
 	'SomeoneCommented'			=> ' a commenté cette page que vous surveillez&nbsp;: ',
 	'AlertReferringPages'		=> 'Cette page est référencée depuis les pages suivantes ',
