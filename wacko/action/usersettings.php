@@ -224,49 +224,49 @@ else if ($user = $this->get_user())
 			<tr class="lined">
 		<th class="form_left" scope="row"><?php echo $this->get_translation('UserSettingsOther');?></th>
 		<td class="form_right"><input type="hidden" name="doubleclick_edit" value="0" />
-			<input type="checkbox" id="doubleclick_edit" name="doubleclick_edit" value="1" <?php echo (isset($user['doubleclick_edit']) && $user['doubleclick_edit'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="doubleclick_edit" name="doubleclick_edit" value="1" <?php echo (isset($user['doubleclick_edit']) && $user['doubleclick_edit'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="doubleclick_edit"><?php echo $this->get_translation('DoubleclickEditing');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="autocomplete" value="0" />
-			<input type="checkbox" id="autocomplete" name="autocomplete" value="1" <?php echo (isset($user['autocomplete']) && $user['autocomplete'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="autocomplete" name="autocomplete" value="1" <?php echo (isset($user['autocomplete']) && $user['autocomplete'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="autocomplete"><?php echo $this->get_translation('WikieditAutocomplete');?></label>
 		</td>
 	</tr>
 		<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="numerate_links" value="0" />
-			<input type="checkbox" id="numerate_links" name="numerate_links" value="1" <?php echo (isset($user['numerate_links']) && $user['numerate_links'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="numerate_links" name="numerate_links" value="1" <?php echo (isset($user['numerate_links']) && $user['numerate_links'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="numerate_links"><?php echo $this->get_translation('NumerateLinks');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="show_comments" value="0" />
-			<input type="checkbox" id="show_comments" name="show_comments" value="1" <?php echo (isset($user['show_comments']) && $user['show_comments'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="show_comments" name="show_comments" value="1" <?php echo (isset($user['show_comments']) && $user['show_comments'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="show_comments"><?php echo $this->get_translation('ShowComments?');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="show_files" value="0" />
-			<input type="checkbox" id="show_files" name="show_files" value="1" <?php echo (isset($user['show_files']) && $user['show_files'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="show_files" name="show_files" value="1" <?php echo (isset($user['show_files']) && $user['show_files'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="show_files"><?php echo $this->get_translation('ShowFiles?');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="show_spaces" value="0" />
-			<input type="checkbox" id="show_spaces" name="show_spaces" value="1" <?php echo (isset($user['show_spaces']) && $user['show_spaces'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="show_spaces" name="show_spaces" value="1" <?php echo (isset($user['show_spaces']) && $user['show_spaces'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="show_spaces"><?php echo $this->get_translation('ShowSpaces');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="dont_redirect" value="0" />
-			<input type="checkbox" id="dont_redirect" name="dont_redirect" value="1" <?php echo (isset($user['dont_redirect']) && $user['dont_redirect'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="dont_redirect" name="dont_redirect" value="1" <?php echo (isset($user['dont_redirect']) && $user['dont_redirect'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="dont_redirect"><?php echo $this->get_translation('DontRedirect');?></label>
 		</td>
 	</tr>
@@ -278,14 +278,14 @@ else if ($user = $this->get_user())
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
 			<input type="hidden" name="send_watchmail" value="0" />
-			<input type="checkbox" id="send_watchmail" name="send_watchmail" value="1" <?php echo (isset($user['send_watchmail']) && $user['send_watchmail'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="send_watchmail" name="send_watchmail" value="1" <?php echo (isset($user['send_watchmail']) && $user['send_watchmail'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="send_watchmail"><?php echo $this->get_translation('SendWatchEmail');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="allow_intercom" value="0" />
-			<input type="checkbox" id="allow_intercom" name="allow_intercom" value="1" <?php echo (isset($user['allow_intercom']) && $user['allow_intercom'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="allow_intercom" name="allow_intercom" value="1" <?php echo (isset($user['allow_intercom']) && $user['allow_intercom'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="allow_intercom"><?php echo $this->get_translation('AllowIntercom');?></label>
 		</td>
 	</tr>
@@ -295,7 +295,7 @@ else if ($user = $this->get_user())
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right"><input type="hidden" name="allow_massemail" value="0" />
-			<input type="checkbox" id="allow_massemail" name="allow_massemail" value="1" <?php echo (isset($user['allow_massemail']) && $user['allow_massemail'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<input type="checkbox" id="allow_massemail" name="allow_massemail" value="1" <?php echo (isset($user['allow_massemail']) && $user['allow_massemail'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="allow_massemail"><?php echo $this->get_translation('AllowMassemail');?></label>
 		</td>
 	</tr>
@@ -343,7 +343,7 @@ else if ($user = $this->get_user())
 	<!--<tr>
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
-			<input type="hidden" name="typografica" value="0" /><input type="checkbox" id="typografica" name="typografica" value="1" <?php echo (isset($user['typografica']) && $user['typografica'] == 1) ? "checked=\"checked\"" : "" ?> />
+			<input type="hidden" name="typografica" value="0" /><input type="checkbox" id="typografica" name="typografica" value="1" <?php echo (isset($user['typografica']) && $user['typografica'] == 1) ? 'checked="checked"' : ''; ?> />
 			<label for="typografica"><?php echo $this->get_translation('Typografica');?></label>
 		</td>
 	</tr>-->
@@ -410,8 +410,9 @@ else if ($user = $this->get_user())
 		if (!$user['email'] || $code['email_confirm'])
 			echo '<div class="BewareChangeLang"><strong class="cite">'.
 				$this->get_translation('EmailNotVerified').'</strong><br />'.
-				'<small>'.$this->get_translation('EmailNotVerifiedDesc').'<strong><a href="'.$this->href().
-								($this->config['rewrite_mode'] ? '?' : '&').'resend_code=1">'.$this->get_translation('HereLink').'</a></strong>.</small></div>';
+				'<small>'.$this->get_translation('EmailNotVerifiedDesc').
+				'<strong><a href="'.$this->href('', '', 'resend_code=1').'">'.$this->get_translation('HereLink').'</a></strong>.
+				</small></div>';
 ?></td>
 	</tr>
 	<tr>

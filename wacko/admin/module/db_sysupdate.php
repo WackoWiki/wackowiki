@@ -52,7 +52,7 @@ function admin_db_sysupdate(&$engine, &$module)
 						"WHERE to_tag = '".quote($engine->dblink, $page['to_tag'])."'");
 				}
 
-				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
+				$engine->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'].'&amp;start=1&amp;step='.$_REQUEST['step'].'&amp;i='.(++$i))));
 			}
 			else
 			{
@@ -83,7 +83,7 @@ function admin_db_sysupdate(&$engine, &$module)
 						"WHERE page_id = '".$page['page_id'])."'";
 				}
 
-				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
+				$engine->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'].'&amp;start=1&amp;step='.$_REQUEST['step'].'&amp;i='.(++$i))));
 			}
 			else
 			{
@@ -114,7 +114,7 @@ function admin_db_sysupdate(&$engine, &$module)
 						"WHERE revision_id = '".$page['revision_id'])."'";
 				}
 
-				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
+				$engine->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'].'&amp;start=1&amp;step='.$_REQUEST['step'].'&amp;i='.(++$i))));
 			}
 			else
 			{
