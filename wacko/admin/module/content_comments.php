@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['content_comments'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'status'=> false,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_comments',
 		'name'	=> 'Comments',
 		'title'	=> 'Manage comments',

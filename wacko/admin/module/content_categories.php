@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['content_categories'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'status'=> false,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_categories',
 		'name'	=> 'Categories',
 		'title'	=> 'Manage categories',

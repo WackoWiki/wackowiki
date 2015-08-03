@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['config_pages'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_pages',
 		'name'	=> 'Pages',
 		'title'	=> 'Pages and site parameters',

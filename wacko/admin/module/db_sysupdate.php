@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['db_sysupdate'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'db_sysupdate',
 		'name'	=> 'Update',
 		'title'	=> 'Update the structure and contents of the database',

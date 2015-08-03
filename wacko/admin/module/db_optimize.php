@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['db_optimize'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'db_optimize',
 		'name'	=> 'Optimization',
 		'title'	=> 'Optimizing the database',

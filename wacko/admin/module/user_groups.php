@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['user_groups'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Users',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'user_groups',
 		'name'	=> 'Groups',
 		'title'	=> 'Group management',

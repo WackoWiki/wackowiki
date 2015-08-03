@@ -14,7 +14,7 @@ $module['db_restore'] = array(
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_restore',
-		'name'	=> 'Restore database',
+		'name'	=> 'Restore',
 		'title'	=> 'Restoring backup data',
 		'vars'	=> array(&$tables, &$directories),
 	);
@@ -49,6 +49,7 @@ function admin_db_restore(&$engine, &$module)
 	$ikeys			= '';
 	$ifiles			= '';
 
+	// RESTORE backup
 	if (isset($_POST['start']) && (isset($_POST['id']) && $_POST['id'] == true))
 	{
 		set_time_limit(3600);
@@ -196,6 +197,7 @@ function admin_db_restore(&$engine, &$module)
 	}
 	else
 	{
+		// REMOVE backup
 		if ((isset($_POST['remove']) && $_POST['id'] == true) ||
 		(isset($_GET['remove']) && $_GET['id'] == true))
 		{

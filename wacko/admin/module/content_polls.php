@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['content_polls'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_polls',
 		'name'	=> 'Polls',
 		'title'	=> 'Editing, start and stop polls',
@@ -37,7 +37,7 @@ function admin_content_polls(&$engine, &$module)
 	$admin		= true; #$engine->is_admin();
 	$mode		= $module['mode'];
 	$mode_http	= ''; //'mode='.$mode.'&amp;';
-	$mode_file	= 'admin.php?mode='.$module['mode'];//$_SERVER['PHP_SELF']
+	$mode_file	= 'admin.php?mode='.$module['mode']; //$_SERVER['PHP_SELF']
 
 	// processing input
 	if ($admin === true)

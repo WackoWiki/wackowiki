@@ -12,9 +12,9 @@ if (!defined('IN_WACKO'))
 $module['db_inconsistencies'] = array(
 		'order'	=> 5,
 		'cat'	=> 'Database',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'db_inconsistencies',
-		'name'	=> 'Data Inconsistencies',
+		'name'	=> 'Inconsistencies',
 		'title'	=> 'Fixing Data Inconsistencies',
 	);
 
