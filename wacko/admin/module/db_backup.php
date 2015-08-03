@@ -14,7 +14,7 @@ $module['db_backup'] = array(
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_backup',
-		'name'	=> 'Backup database',
+		'name'	=> 'Backup',
 		'title'	=> 'Backing up data',
 		'vars'	=> array(&$tables, &$directories),
 	);

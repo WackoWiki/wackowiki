@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['xmlimport'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'xmlimport',
 		'name'	=> 'Import XML',
 		'title'	=> 'Import and restore of the pages of the XML-file',

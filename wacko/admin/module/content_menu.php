@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['content_menu'] = array(
 		'order'	=> 15,
 		'cat'	=> 'Content',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_menu',
 		'name'	=> 'Menu',
 		'title'	=> 'Add, edit or remove default menu items',

@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['config_basic'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_basic',
 		'name'	=> 'Basic',
 		'title'	=> 'Basic parameters',

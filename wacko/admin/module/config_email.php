@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['config_email'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_email',
 		'name'	=> 'Email',
 		'title'	=> 'Email settings',

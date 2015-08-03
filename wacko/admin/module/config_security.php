@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['config_security'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_security',
 		'name'	=> 'Security',
 		'title'	=> 'Security subsystems settings',

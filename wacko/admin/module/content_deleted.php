@@ -9,18 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Recently deleted pages controls                  ##
 ########################################################
 
-$module['content_deletedpages'] = array(
+$module['content_deleted'] = array(
 		'order'	=> 3,
 		'cat'	=> 'Content',
-		'status'=> true,
-		'mode'	=> 'content_deletedpages',
-		'name'	=> 'Deleted pages',
-		'title'	=> 'Copies of the newly deleted pages',
+		'status'=> (RECOVERY_MODE ? false : true),
+		'mode'	=> 'content_deleted',
+		'name'	=> 'Deleted',
+		'title'	=> 'Newly deleted content',
 	);
 
 ########################################################
 
-function admin_content_deletedpages(&$engine, &$module)
+function admin_content_deleted(&$engine, &$module)
 {
 	$curday = '';
 ?>
@@ -77,13 +77,13 @@ function admin_content_deletedpages(&$engine, &$module)
 					echo "\n";
 				}
 
-				echo '<tr class="lined"><td colspan="2"><br /><strong>'.date($engine->config['date_format'],strtotime($day)).":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br /><strong>'.date($engine->config['date_format'],strtotime($day)).":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
 			// print entry
 			echo '<tr>'.
-					'<td style="text-align:left">'.
+					'<td class="lined" style="text-align:left">'.
 						'<small>'.date($engine->config['time_format_seconds'], strtotime($time)).' - '.
 						' [ <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->get_translation('RemoveButton').'</a> ]'.
 						' [ <a href="'.rawurldecode($engine->href()).'&amp;restore='.$page['page_id'].'">'.$engine->get_translation('RestoreButton').'</a> ]</small> '.

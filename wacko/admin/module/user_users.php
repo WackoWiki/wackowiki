@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $module['user_users'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Users',
-		'status'=> true,
+		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'user_users',
 		'name'	=> 'Users',
 		'title'	=> 'User management',
