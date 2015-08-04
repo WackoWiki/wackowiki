@@ -33,7 +33,7 @@ function admin_content_pages(&$engine, &$module)
 <?php
 	if (isset($_POST['reset']))
 	{
-		$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'])));
+		$engine->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'])));
 	}
 
 	if (isset($_POST['update']) || isset($_GET['level_mod']))
@@ -134,7 +134,7 @@ function admin_content_pages(&$engine, &$module)
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
 	$level_pagination		= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
 	$level_mod_pagination	= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
-	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&level='.htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&level_mod='.htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&amp;level='.htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&amp;level_mod='.htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 	$pages = $engine->load_all(
 		"SELECT l.*, length(body) as page_size, u.* ".
@@ -151,13 +151,11 @@ function admin_content_pages(&$engine, &$module)
 			<h4><?php echo $engine->get_translation('LogFilterTip'); ?>:</h4><br />
 			<?php echo $engine->get_translation('LogLevel'); ?>
 
-
 			<select name="level_mod">
 				<option value="not_lower"<?php echo ( !isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_lower') ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelNotLower'); ?></option>
 				<option value="not_higher"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_higher' ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelNotHigher'); ?></option>
 				<option value="equal"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'equal' ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelEqual'); ?></option>
 			</select>
-
 
 <?php
 		// FIXME: add a common function for this?
@@ -183,7 +181,6 @@ function admin_content_pages(&$engine, &$module)
 		echo "</select>\n";
 ?>
 
-
 			<input name="update" id="submit" type="submit" value="update" />
 			<input name="reset" id="submit" type="submit" value="reset" />
 		</div>
@@ -196,10 +193,10 @@ function admin_content_pages(&$engine, &$module)
 		<table style="padding: 3px;" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&order=<?php echo $ordertime; ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&order=<?php echo $orderlevel; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&amp;order=<?php echo $ordertime; ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&amp;order=<?php echo $orderlevel; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
 				<th><?php echo $engine->get_translation('LogEvent'); ?></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&order=<?php echo $ordersize; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&amp;order=<?php echo $ordersize; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
 				<th style="width:20px;"><?php echo $engine->get_translation('LogUsername'); ?></th>
 			</tr>
 <?php
@@ -244,8 +241,8 @@ function admin_content_pages(&$engine, &$module)
 					'<td style="vertical-align:top;">'.$row['title'].'</td>'.
 					'<td style="vertical-align:top;">'.$engine->binary_multiples($row['page_size'], false, true, true).'</td>'.
 					'<td style="vertical-align:top; text-align:center;"><small>'.
-						'<a href="?mode='.$module['mode'].'&user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
-						'<br />'.'<a href="?mode='.$module['mode'].'&ip='.$row['ip'].'">'.$row['ip'].'</a>'.
+						'<a href="?mode='.$module['mode'].'&amp;user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
+						'<br />'.'<a href="?mode='.$module['mode'].'&amp;ip='.$row['ip'].'">'.$row['ip'].'</a>'.
 					'</small></td>'.
 				'</tr>';
 		}
