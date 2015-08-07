@@ -285,7 +285,7 @@ if ($this->is_owner() || $this->is_admin())
 			}
 		}
 		// delete item
-		if (isset($_POST['delete']) && $_POST['change'])
+		if (isset($_POST['delete']) && isset($_POST['change']) && $_POST['change'])
 		{
 			if ($word = $this->load_single("SELECT category FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
