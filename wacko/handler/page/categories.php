@@ -74,7 +74,9 @@ if ($this->is_owner() || $this->is_admin())
 				$this->sql_query(
 					"INSERT INTO {$this->config['table_prefix']}category SET ".
 						( $_POST['id'] && $_POST['group'] == 1
-							? "parent_id = '". (int)( $word['parent_id'] != 0 ? $word['parent_id'] : $word['category_id'] )."', "
+							? "parent_id = '". (int)( $word['parent_id'] != 0
+								? $word['parent_id']
+								: $word['category_id'] )."', "
 							: ''
 						).
 						"lang = '".quote($this->dblink, $this->page['lang'])."', ".
@@ -102,8 +104,8 @@ if ($this->is_owner() || $this->is_admin())
 			else
 			{
 				$this->sql_query(
-					"UPDATE {$this->config['table_prefix']}category ".
-					"SET category = '".quote($this->dblink, $_POST['newname'])."' ".
+					"UPDATE {$this->config['table_prefix']}category SET ".
+						"category = '".quote($this->dblink, $_POST['newname'])."' ".
 					"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
 
 				$this->set_message($this->get_translation('CategoriesRenamed'));
@@ -117,8 +119,8 @@ if ($this->is_owner() || $this->is_admin())
 			if ($_POST['parent_id'] == 0)
 			{
 				$this->sql_query(
-					"UPDATE {$this->config['table_prefix']}category ".
-					"SET parent_id = 0 ".
+					"UPDATE {$this->config['table_prefix']}category SET ".
+						"parent_id = 0 ".
 					"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
 				$this->set_message($this->get_translation('CategoriesUngrouped'));
 				$this->log(4, "Category //'{$word['category']}'// debundled");
@@ -134,12 +136,12 @@ if ($this->is_owner() || $this->is_admin())
 				if ($parent['parent_id'] == 0)
 				{
 					$this->sql_query(
-						"UPDATE {$this->config['table_prefix']}category ".
-						"SET parent_id = '".(int)$_POST['parent_id']."' ".
+						"UPDATE {$this->config['table_prefix']}category SET ".
+							"parent_id = '".(int)$_POST['parent_id']."' ".
 						"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
 					$this->sql_query(
-						"UPDATE {$this->config['table_prefix']}category ".
-						"SET parent_id = 0 ".
+						"UPDATE {$this->config['table_prefix']}category SET ".
+							"parent_id = 0 ".
 						"WHERE parent_id = '".(int)$_POST['id']."'");
 					$this->set_message($this->get_translation('CategoriesGrouped'));
 					$this->log(4, "Category //'{$word['category']}'// grouped with the word //'{$parent['category']}'//");
@@ -160,8 +162,8 @@ if ($this->is_owner() || $this->is_admin())
 				"DELETE FROM {$this->config['table_prefix']}category_page ".
 				"WHERE category_id = '".(int)$_POST['id']."'");
 			$this->sql_query(
-				"UPDATE {$this->config['table_prefix']}category ".
-				"SET parent_id = 0 ".
+				"UPDATE {$this->config['table_prefix']}category SET ".
+					"parent_id = 0 ".
 				"WHERE parent_id = '".(int)$_POST['id']."'");
 			$this->set_message($this->get_translation('CategoriesDeleted'));
 			$this->log(4, "Category //'{$word['category']}'// removed from the database");
@@ -313,10 +315,17 @@ if ($this->is_owner() || $this->is_admin())
 	{
 		$i = '';
 
+		echo '<ul class="ul_list hide_radio">'."\n";
+
 		foreach ($categories as $id => $word)
 		{
 			# if ($n++ > 0) echo '<hr />';
-			echo ($this->is_admin() || $this->config['owners_can_change_categories'] == true ? '<input type="radio" name="change" value="'.$id.'" />' : '').'<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /> <label for="category'.$id.'"><strong>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</strong></label>'."\n";
+			echo '<li><span class="">'."\n\t";
+			echo ($this->is_admin() || $this->config['owners_can_change_categories'] == true
+					? '<input type="radio" name="change" value="'.$id.'" />'
+					: '').
+				'<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /> '."\n\t".
+				'<label for="category'.$id.'"><strong>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</strong></label></span>'."\n";
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
@@ -324,30 +333,32 @@ if ($this->is_owner() || $this->is_admin())
 				{
 					if ($i++ < 1)
 					{
-						echo '<br /><div class="indent">';
+						echo "\t<ul>\n";
 					}
 
-					echo '<span class="nobr">'.
+					echo "\t\t".'<li><span class="nobr">'."\n\t\t\t".
 							($this->is_admin() || $this->config['owners_can_change_categories'] == true
-								? '<input type="radio" name="change" value="'.$id.'" />'
+								? '<input type="radio" name="change" value="'.$id.'" />'."\n\t\t\t"
 								: '').
-							'<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' />'.
-							'<label for="category'.$id.'">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</label>'.
-						'&nbsp;&nbsp;&nbsp;</span>'."\n";
+							'<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' />'."\n\t\t\t".
+							'<label for="category'.$id.'">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</label></span>'."\n\t\t".
+						'&nbsp;&nbsp;&nbsp;</li>'."\n";
 				}
 			}
 
 			if ($i > 0)
 			{
-				echo "</div>\n";
+				echo "\t</ul>\n</li>\n";
 			}
 			else
 			{
-				echo "<br />\n";
+				echo "</li>\n";
 			}
 
 			$i = 0;
 		}
+
+		echo "</ul>\n";
 
 		/////////////////////////////////////////////
 		//   control buttons

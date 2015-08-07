@@ -889,7 +889,7 @@ td.form_left, th.form_left {
 	color: #FF0000;
 }
 
-#search {
+#search_box {
 	margin: 0 auto 0;
 	overflow: hidden;
 	float: right;
@@ -897,7 +897,7 @@ td.form_left, th.form_left {
 	position: relative;
 }
 
-#search label {
+#search_box label {
 	display: none;
 }
 
@@ -910,7 +910,7 @@ td.form_left, th.form_left {
 	font-size: 1.3em;
 }
 
-#login {
+#login_box {
 	font-size: 12px;
 	margin: 0 auto 0;
 	overflow: hidden;
@@ -919,17 +919,17 @@ td.form_left, th.form_left {
 	position: relative;
 }
 
-#login form {
+#login_box form {
 	display: inline;
 }
 
-#login ul {
+#login_box ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-#login li {
+#login_box li {
 	border-left: 1px solid #aaa;
 	float: left;
 	line-height: 1.2em;
@@ -938,22 +938,22 @@ td.form_left, th.form_left {
 	white-space: nowrap;
 }
 
-#login li a {
+#login_box li a {
 	display: inline;
 	border: none;
 	text-decoration: none;
 }
 
-#login li a:visited {
+#login_box li a:visited {
 	color: #003399;
 }
 
-#login li a:hover {
+#login_box li a:hover {
 	color: #B90022;
 	text-decoration: underline;
 }
 
-#login li a:active {
+#login_box li a:active {
 	color: #FF0000;
 }
 
@@ -1586,6 +1586,20 @@ table.forum td {
 	padding: 20px 0 20px 20px;
 }
 
+@keyframes marquee {
+	0%   { text-indent: 800px }
+	100% { text-indent: -800px }
+}
+.marquee{
+	animation: marquee 10s linear infinite;
+	font-weight: 800;
+}
+
+.marquee:hover {
+	animation-play-state: paused;
+}
+
+/* noscript ------------- */
 .errorbox_js {
 	border: 1px solid red;
 	font-family: "Courier New",Courier,monospace;
@@ -1594,3 +1608,15 @@ table.forum td {
 	text-align: center;
 }
 
+
+/* category handles ------------- */
+.hide_radio input[type="radio"] {
+	visibility:hidden;
+	/* display: none; */
+}
+
+.hide_radio span:hover input[type="radio"], .hide_radio span input[type="radio"]:checked
+{
+	visibility: visible;
+	/* display: inline; */
+}
