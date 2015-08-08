@@ -1,0 +1,59 @@
+
+Bad Behavior for WackoWiki
+==========================
+
+About
+-----
+
+Bad Behavior (http://www.bad-behavior.ioerror.us/) is a spam protection
+system for blog, forum or wiki written in php.
+
+WackoWiki (http://wackowiki.org/) is nice wiki system written in php.
+http://wackowiki.sourceforge.net/doc/Dev/PatchesHacks/BadBehavior
+
+
+Installation
+------------
+
+WackoWiki does not support automatic installation of plugins,
+so a few manual actions are needed:
+
+1. First, download latest Bad Behavior release from official site
+and unzip to your site directory (I guess you've already done that).
+Then unzip "bad-behavior-wackowiki.zip" into the Bad-Behavior folder
+(so that "bad-behavior-wackowiki.php" and "bad-behavior-generic.php"
+reside in one folder).
+
+
+2. Then open "index.php" (located in root directory of you WackoWiki)
+in editor and find this line (usually in the bottom of the file):
+
+$init->engine('run');
+
+Insert the following line just BEFORE the located line:
+
+require_once('/path/to/Bad-Behavior/bad-behavior-wackowiki.php');
+
+
+3. If you like to enable "screener" cookie for advanced protection,
+go to /theme/YOUR_THEME/appearance/ folder (where YOUR_THEME is the
+name of theme used on your site), open "header.php" in editor and add
+the folowing line just BEFORE the closing "</head>" tag:
+
+<?php bb2_insert_head() ?>
+
+4. Open "settings.ini" to change Bad Behavior options. For details read
+http://bad-behavior.ioerror.us/support/configuration/.
+
+5. The file 'tool_badebehavior.php' contains the admin panel module for Bad Behavior.
+Options must still set in "settings.ini", this might change in the future.
+
+
+That's all - now go to your site and check if it is still working ;)
+
+
+Author
+------
+
+WackoWiki plugin module created by Sergey Martynoff and WackoWiki Team.
+Feel free to write me to sergey AT martynoff DOT info
