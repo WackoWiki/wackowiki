@@ -174,9 +174,13 @@ $table_rating = "CREATE TABLE {$pref}rating (".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_referrer = "CREATE TABLE {$pref}referrer (".
+					"referrer_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"referrer VARCHAR(255) NOT NULL DEFAULT '',".
 					"referrer_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"user_agent VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"PRIMARY KEY (referrer_id),".
 					"KEY idx_page_id (page_id),".
 					"KEY idx_referrer_time (referrer_time)".
 				") {$engine} COMMENT='' {$charset}";
@@ -391,8 +395,8 @@ $table_rating_drop				= "DROP TABLE {$pref}rating";
 $table_referrer_drop			= "DROP TABLE {$pref}referrer";
 $table_revision_drop			= "DROP TABLE {$pref}revision";
 $table_session_drop				= "DROP TABLE {$pref}session";
-$table_tag_drop					= "DROP TABLE {$pref}tag";
-$table_tag_page_drop			= "DROP TABLE {$pref}tag_page";
+#$table_tag_drop				= "DROP TABLE {$pref}tag";
+#$table_tag_page_drop			= "DROP TABLE {$pref}tag_page";
 $table_upload_drop				= "DROP TABLE {$pref}upload";
 $table_user_drop				= "DROP TABLE {$pref}user";
 $table_user_setting_drop		= "DROP TABLE {$pref}user_setting";
