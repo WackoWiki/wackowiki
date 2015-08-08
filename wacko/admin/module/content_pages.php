@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['content_pages'] = array(
-		'order'	=> 3,
+		'order'	=> 11,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_pages',
@@ -237,7 +237,7 @@ function admin_content_pages(&$engine, &$module)
 			echo '<tr class="lined">'."\n".
 					'<td style="vertical-align:top; text-align:center;">'.$row['page_id'].'</td>'.
 					'<td style="vertical-align:top; text-align:center;"><small>'.$time_tz.'</small></td>'.
-					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$row['tag'].'</td>'.
+					'<td style="vertical-align:top; padding-left:5px; padding-right:5px;">'.$row['tag'].'</td>'.
 					'<td style="vertical-align:top;">'.$row['title'].'</td>'.
 					'<td style="vertical-align:top;">'.$engine->binary_multiples($row['page_size'], false, true, true).'</td>'.
 					'<td style="vertical-align:top; text-align:center;"><small>'.

@@ -62,6 +62,7 @@ $init->session();
 $cache	= $init->cache();
 $engine	= $init->engine();
 
+#require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 $engine->http_security_headers();
 
 // redirect, send them home [disable for recovery mode!]
@@ -166,7 +167,7 @@ if (isset($_POST['ap_password']))
 
 		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
 
-		if (($_SESSION['failed_login_count'] >= 3) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
+		if (($_SESSION['failed_login_count'] >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
 			$init->lock('lock_ap');
 			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
@@ -196,7 +197,7 @@ if ($authorization == false)
 	<head>
 	<title>Authorization Admin</title>
 	<meta name="robots" content="noindex, nofollow, noarchive" />
-	<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/backend.css" rel="stylesheet" media="screen" />
+	<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
 	</head>
 	<body>
 <?php
@@ -324,7 +325,7 @@ foreach ($module as $row)
 		if ($row['mode'] != 'lock')
 		{
 			$menue .= ($row['cat'] != $category
-						? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
+						? "</ul>\n</li>\n".'<li class="text submenu2">'.$row['cat']."<ul>\n"
 						: '');
 
 			if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
@@ -349,7 +350,7 @@ foreach ($module as $row)
 	$category = $row['cat'];
 }
 
-$menue .= '</ul></li></ul>';
+$menue .= "</ul>\n</li>\n</ul>";
 
 unset($category);
 
@@ -365,9 +366,9 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 <title>WackoWiki Management System <?php echo ': '.$_title; ?></title>
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta http-equiv="Content-Type" content="text/html; "/>
-<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/atom.css" rel="stylesheet" media="screen" />
-<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/wiki.css" rel="stylesheet" media="screen" />
-<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/backend.css" rel="stylesheet" media="screen" />
+<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/style/atom.css" rel="stylesheet" media="screen" />
+<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/style/wiki.css" rel="stylesheet" media="screen" />
+<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
 
 </head>
 <body>

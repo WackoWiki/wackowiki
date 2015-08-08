@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['system_statistics'] = array(
-		'order'	=> 1,
+		'order'	=> 2,
 		'cat'	=> 'Basic functions',
 		'status'=> true,
 		'mode'	=> 'system_statistics',

@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['db_sysupdate'] = array(
-		'order'	=> 5,
+		'order'	=> 27,
 		'cat'	=> 'Database',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'db_sysupdate',

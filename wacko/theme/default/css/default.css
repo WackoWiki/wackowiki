@@ -1615,7 +1615,8 @@ table.forum td {
 	/* display: none; */
 }
 
-.hide_radio span:hover input[type="radio"], .hide_radio span input[type="radio"]:checked
+.hide_radio span:hover input[type="radio"], 
+.hide_radio span input[type="radio"]:checked
 {
 	visibility: visible;
 	/* display: inline; */
