@@ -45,6 +45,7 @@ $update_page_r5_4_1 = "UPDATE {$pref}page SET body_r = ''";
 // RATING
 
 // REFERRER
+$alter_referrer_r5_4_0 = "ALTER TABLE {$pref}referrer ADD referrer_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST";
 
 // REVISION
 $alter_revision_r5_1_0 = "ALTER TABLE {$pref}revision ADD INDEX idx_deleted (deleted)";
