@@ -6,9 +6,9 @@ if (!defined('IN_WACKO'))
 }
 
 // Param name
-if(isset($vars[0]))
+if(isset($vars['href']))
 {
-	$href = $vars[0];
+	$href = $vars['href'];
 	$text = '';
 
 	if(isset($vars['text']))

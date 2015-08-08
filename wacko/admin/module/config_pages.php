@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['config_pages'] = array(
-		'order'	=> 2,
+		'order'	=> 10,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_pages',
@@ -106,7 +106,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="news_levels"><strong>Depth of news pages from the root cluster:</strong><br />
-				<small>Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. /.+/.+/.+)</small></label></td>
+				<small>Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="news_levels" name="news_levels" value="<?php echo htmlspecialchars($engine->config['news_levels'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>

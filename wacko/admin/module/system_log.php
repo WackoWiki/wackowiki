@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['system_log'] = array(
-		'order'	=> 1,
+		'order'	=> 4,
 		'cat'	=> 'Basic functions',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'system_log',

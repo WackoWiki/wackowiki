@@ -192,7 +192,7 @@ if ($user = $this->get_user())
 
 					if ($access)
 					{
-						echo '<li>'.$this->link('/'.$page['tag']."#".$anchor, '', $page['tag'], $page['title'])."</li>\n";
+						echo '<li>'.$this->link('/'.$page['tag']."#a-".$anchor, '', $page['tag'], $page['title'])."</li>\n";
 					}
 				}
 			}

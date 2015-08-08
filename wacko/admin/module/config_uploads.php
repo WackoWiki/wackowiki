@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['config_uploads'] = array(
-		'order'	=> 2,
+		'order'	=> 9,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_uploads',

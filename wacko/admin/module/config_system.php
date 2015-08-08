@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['config_system'] = array(
-		'order'	=> 2,
+		'order'	=> 6,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_system',

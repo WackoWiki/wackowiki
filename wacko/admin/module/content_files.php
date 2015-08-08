@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['content_files'] = array(
-		'order'	=> 3,
+		'order'	=> 17,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_files',

@@ -13,7 +13,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 			<div id="header-top">
 			<h1><span class="main"><?php echo (isset($this->page['tag']) && $this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : '<a href="'.$this->config['base_url'].'">'.$this->config['site_name'].'</a>') ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?></h1>
 		</div>
-		<div id="login">
+		<div id="login_box">
 <?php
 // if user are logged, shows "You are UserName"
 if ($this->get_user())
@@ -327,7 +327,7 @@ else
 	#echo "</ul>\n"; // list continues with search
 ?>
 <li class="search">
-<div id="search">
+<div id="search_box">
 <?php
 // opens search form
 echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage'));

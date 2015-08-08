@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['user_groups'] = array(
-		'order'	=> 4,
+		'order'	=> 19,
 		'cat'	=> 'Users',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'user_groups',
@@ -128,7 +128,7 @@ function admin_user_groups(&$engine, &$module)
 						{
 							foreach($available_users as $user)
 							{
-								echo "<option value=\"".$user['user_id']."\">".htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
+								echo '<option value="'.$user['user_id'].'">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
 							}
 						}
 
