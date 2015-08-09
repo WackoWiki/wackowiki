@@ -233,7 +233,11 @@ if ($this->is_owner() || $this->is_admin())
 		// rename item
 		else if (isset($_POST['rename']) && isset($_POST['change']))
 		{
-			if ($word = $this->load_single("SELECT category FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($word = $this->load_single(
+				"SELECT category
+				FROM {$this->config['table_prefix']}category
+				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
+				LIMIT 1"))
 			{
 				echo $this->form_open('rename_category', 'categories');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
@@ -252,7 +256,11 @@ if ($this->is_owner() || $this->is_admin())
 		// (un)group item
 		else if (isset($_POST['ugroup']) && isset($_POST['change']))
 		{
-			if ($word = $this->load_single("SELECT category_id, parent_id, category, lang FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($word = $this->load_single(
+				"SELECT category_id, parent_id, category, lang
+				FROM {$this->config['table_prefix']}category
+				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
+				LIMIT 1"))
 			{
 				$parents = $this->load_all(
 					"SELECT category_id, category ".
@@ -287,7 +295,11 @@ if ($this->is_owner() || $this->is_admin())
 		// delete item
 		if (isset($_POST['delete']) && isset($_POST['change']) && $_POST['change'])
 		{
-			if ($word = $this->load_single("SELECT category FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($word = $this->load_single(
+				"SELECT category
+				FROM {$this->config['table_prefix']}category
+				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
+				LIMIT 1"))
 			{
 				echo $this->form_open('remove_category', 'categories');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";

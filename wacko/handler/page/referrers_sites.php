@@ -84,7 +84,7 @@ if ($user = $this->get_user())
 		array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 		reset($referrer_sites);
 
-		echo "<ul class=\"ul_list\">\n";
+		echo '<ul class="ul_list">'."\n";
 
 		foreach ($referrer_sites as $site => $site_count)
 		{

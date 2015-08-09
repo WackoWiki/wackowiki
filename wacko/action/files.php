@@ -96,7 +96,7 @@ if ($can_view)
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
 			($owner
 				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
-				: ''), 1);
+				: ''), true);
 
 	$count		= count($count);
 	$pagination = $this->pagination($count, $limit, 'f');

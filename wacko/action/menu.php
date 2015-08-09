@@ -34,7 +34,7 @@ if (!function_exists('load_user_menu'))
 				($lang
 					? "AND b.lang =  '".$lang."' "
 					: "").
-			"ORDER BY b.menu_position", 0);
+			"ORDER BY b.menu_position", false);
 
 		return $_menu;
 	}
@@ -182,7 +182,7 @@ if (isset($_POST['_user_menu']))
 									($default_menu === true
 										? "AND b.lang = '".$_user_lang."' "
 										: "")
-									, 0);
+									, false);
 
 							$_menu_item_count = count($_menu_position);
 

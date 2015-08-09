@@ -646,7 +646,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"WHERE p.page_id = a.page_id ".
 					"AND a.privilege = 'comment' AND a.list = '' ".
 					"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
-				"ORDER BY modified ASC", 1);
+				"ORDER BY modified ASC", true);
 
 			foreach ($sections as $section)
 			{
@@ -1201,7 +1201,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						"AND a.privilege = 'comment' AND a.list = '' ".
 						"AND ".
 						"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
-					"ORDER BY modified ASC", 1);
+					"ORDER BY modified ASC", true);
 
 				foreach ($sections as $section)
 				{

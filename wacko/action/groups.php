@@ -57,7 +57,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			"WHERE ".
 				"g.active = '1' ".
 				"AND g.group_id = '".$usergroup['group_id']."' ".
-			"LIMIT 1", 1);
+			"LIMIT 1", true);
 
 		echo '<h2 id="pages">'.$count['total_members'].' '.$this->get_translation('GroupsMembers').'</h2>'."\n";
 
@@ -124,7 +124,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			// sorting and pagination
 
 			if (isset($pagination['text']))
-				echo " <span class=\"pagination\">".$pagination['text']."</span>\n";
+				echo '<span class="pagination">'.$pagination['text']."</span>\n";
 
 			// members list itself
 			#echo '<div>'."\n";

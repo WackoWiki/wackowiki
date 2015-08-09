@@ -45,7 +45,7 @@ $count = $this->load_single(
 					: "tag ").
 				"LIKE '{$_letter}%' "
 			: "")
-	, 1);
+	, true);
 
 $pagination = $this->pagination($count['n'], $limit, $name = 'p', (!empty($_letter) ? 'letter='.$_letter : ''));
 
@@ -62,7 +62,7 @@ if ($pages = $this->load_all(
 		($title == 1
 			? "title ASC "
 			: "tag ASC ")
-		, 1))
+		, true))
 {
 	foreach ($pages as $page)
 	{
@@ -115,7 +115,7 @@ if ($pages = $this->load_all(
 		($title == 1
 			? "title ASC "
 			: "tag ASC ").
-	"LIMIT {$pagination['offset']}, ".(2 * $limit), 1))
+	"LIMIT {$pagination['offset']}, ".(2 * $limit), true))
 {
 	foreach ($pages as $page)
 	{
@@ -196,7 +196,7 @@ if ($pages_to_display)
 		echo $top_links."</ul><br /><br />\n";
 	}
 
-	echo "<ul class=\"ul_list\">\n";
+	echo '<ul class="ul_list">'."\n";
 
 	// display collected data
 	foreach ($pages_to_display as $page)

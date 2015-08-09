@@ -43,7 +43,7 @@ if ($pages = $this->load_all(
 	"WHERE comment_on_id = '0' ".
 		"AND tag LIKE '".quote($this->dblink, $_root)."/%' ".
 		"AND deleted <> '1' ".
-	"ORDER BY tag", 1))
+	"ORDER BY tag", true))
 {
 	// pick all subpages up to the desired depth level
 	if ($depth > 0)
@@ -77,7 +77,7 @@ if ($pages = $this->load_all(
 		if ($links = $this->load_all(
 		"SELECT {$this->page_meta} ".
 		"FROM {$this->config['table_prefix']}page ".
-		"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", 1))
+		"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", true))
 		{
 			for ($i = 0; $i < count($links); $i++)
 			{
@@ -88,7 +88,7 @@ if ($pages = $this->load_all(
 		// cache acls
 		if ($acls = $this->load_all(
 		"SELECT page_id, privilege, list FROM {$this->config['table_prefix']}acl ".
-		"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) AND privilege = 'read'", 1))
+		"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) AND privilege = 'read'", true))
 		{
 			for ($i = 0; $i < count($acls); $i++)
 			{

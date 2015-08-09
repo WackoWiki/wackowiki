@@ -36,8 +36,8 @@ function admin_system_info(&$engine, &$module)
 <?php
 
 	// get mysql version
-	$_mysql_version =$engine->load_all("SELECT version()");
-	$mysql_version = $_mysql_version[0]['version()'];
+	$_mysql_version	= $engine->load_all("SELECT version()");
+	$mysql_version	= $_mysql_version[0]['version()'];
 
 	$upload_max_filesize = trim(str_replace('M', '', get_cfg_var('upload_max_filesize')));
 
