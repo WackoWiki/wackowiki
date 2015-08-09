@@ -62,7 +62,7 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 		echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
 	}
 
-	echo "<ul class=\"ul_list\">\n";
+	echo '<ul class="ul_list">'."\n";
 	$access = true;
 
 	foreach ($pages as $i => $page)

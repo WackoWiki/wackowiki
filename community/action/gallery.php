@@ -186,7 +186,7 @@ if ($can_view)
 				"AND f.picture_w <> '0' ".
 			($owner
 					? "AND u.user_name = '".quote($this->dblink, $owner)."' "
-					: ''), 1);
+					: ''), true);
 
 	$count		= count($count);
 	$pagination = $this->pagination($count, $limit, $param_token);
@@ -220,7 +220,7 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".htmlspecialchars($title, NULL, '').":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.htmlspecialchars($title, NULL, '').":</span></p>\n";
 	}
 
 	if (!isset($_GET['photo']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
@@ -389,7 +389,7 @@ if ($can_view)
 						// handle error here however you'd like
 					}
 
-					// TODO: trusting blindly the db record can cause -> Fatal error: Call to a member function resize() on a non-object in /wacko/actions/gallery.php
+					// TODO: trusting blindly the db record can cause -> Fatal error: Call to a member function resize() on a non-object in /wacko/action/gallery.php
 					// $thumb->resize(100, 100);
 					 $thumb->resize($height, $height);
 

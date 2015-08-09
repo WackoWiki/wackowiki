@@ -287,7 +287,7 @@ function admin_content_files(&$engine, &$module)
 			"WHERE f.page_id = '". ($global ? 0 : '')."' ".
 	($owner
 	? "AND u.user_name = '".quote($engine->dblink, $owner)."' "
-	: ''), 1);
+	: ''), true);
 
 	$count		= count($count);
 	$pagination = $engine->pagination($count, $limit, 'f','mode=files', '', 'admin.php');

@@ -33,7 +33,7 @@ if (!function_exists('full_text_search'))
 							? "AND (a.deleted <> '1' OR b.deleted <> '1')"
 							: "AND a.deleted <> '1'")
 					: "").
-				" )", 1);
+				" )", true);
 
 		$count		= count($count_results);
 		$pagination = $wacko->pagination($count, $limit, 'p', 'phrase='.$phrase);
@@ -87,7 +87,7 @@ if (!function_exists('tag_search'))
 				? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
 					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
 				: "")
-			, 1);
+			, true);
 
 		$count		= count($count_results);
 		$pagination = $wacko->pagination($count, $limit, 'p', 'phrase='.$phrase);
@@ -239,7 +239,7 @@ if (!function_exists('highlight_this'))
 
 		}
 		//added to show how many keywords were found
-		#echo "<br /><div class=\"emphasis\">A search for <strong>" . $words. "</strong> found <strong>" . $the_count . "</strong> matches within the " . $the_place. ".</div><br />";
+		#echo '<br /><div class="emphasis">A search for <strong>' . $words. '</strong> found <strong>' . $the_count . '</strong> matches within the ' . $the_place. '.</div><br />';
 
 		return array($text, $the_count);
 	}
@@ -329,7 +329,7 @@ if ($form)
 
 	if ($options == 1)
 	{
-		echo '<input type="checkbox" name="topic" '.($mode == 'topic' ? 'checked="checked"' : '' ).' id="checkboxSearch" />';
+		echo '<input type="checkbox" name="topic" '.($mode == 'topic' ? ' checked="checked"' : '' ).' id="checkboxSearch" />';
 		echo '<label for="checkboxSearch">'.$this->get_translation('TopicSearchText').'</label>';
 	}
 

@@ -244,7 +244,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			// sorting and pagination
 			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#pages">'.$this->get_translation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#pages">'.$this->get_translation('UsersDocsSortName').'</a>' ).'</small>';
 			if (isset($pagination['text']))
-				echo " <span class=\"pagination\">".$pagination['text']."</span>\n";
+				echo '<span class="pagination">'.$pagination['text']."</span>\n";
 
 			// pages list itself
 			echo '<div>'."\n";
@@ -296,7 +296,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				// pagination
 				if (isset($pagination['text']))
 				{
-					echo "<span class=\"pagination\">".$pagination['text']."</span>\n";
+					echo '<span class="pagination">'.$pagination['text']."</span>\n";
 				}
 
 				// comments list itself

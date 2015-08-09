@@ -42,7 +42,7 @@ if ($list && ($ids || isset($_GET['category'])))
 
 	if ($_words = $this->load_all(
 	"SELECT category FROM {$this->config['table_prefix']}category ".
-	"WHERE category_id IN ( ".quote($this->dblink, $category)." )", 1));
+	"WHERE category_id IN ( ".quote($this->dblink, $category)." )", true));
 
 	if ($nomark != 2)
 	{
@@ -76,11 +76,11 @@ if ($list && ($ids || isset($_GET['category'])))
 		($root
 			? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
 			: '' ).
-	"ORDER BY p.$order ", 1))
+	"ORDER BY p.$order ", true))
 	{
 		if ($_words = $this->load_all(
 		"SELECT category FROM {$this->config['table_prefix']}category ".
-		"WHERE category_id IN ( ".quote($this->dblink, $category)." )", 1))
+		"WHERE category_id IN ( ".quote($this->dblink, $category)." )", true))
 		{
 			echo '<ol>';
 

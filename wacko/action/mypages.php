@@ -37,7 +37,7 @@ if ($user_id = $this->get_user_id())
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
-				"AND comment_on_id = '0'", 1);
+				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
 
@@ -47,9 +47,9 @@ if ($user_id = $this->get_user_id())
 			"WHERE owner_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY created DESC, tag ASC ".
-			"LIMIT {$pagination['offset']}, $limit", 1))
+			"LIMIT {$pagination['offset']}, $limit", true))
 		{
-			echo "<ul class=\"ul_list\">\n";
+			echo '<ul class="ul_list">'."\n";
 
 			foreach ($pages as $page)
 			{
@@ -97,7 +97,7 @@ if ($user_id = $this->get_user_id())
 				"ON (p.page_id = r.page_id ".
 					"AND p.owner_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND r.comment_on_id = '0'", 1);
+				"AND r.comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
 
@@ -117,9 +117,9 @@ if ($user_id = $this->get_user_id())
 				"AND r.comment_on_id = '0' ".
 			"GROUP BY tag ".
 			"ORDER BY modified DESC, tag ASC ".
-			"LIMIT {$pagination['offset']}, $limit", 1))
+			"LIMIT {$pagination['offset']}, $limit", true))
 		{
-			echo "<ul class=\"ul_list\">\n";
+			echo '<ul class="ul_list">'."\n";
 
 			foreach ($pages as $page)
 			{
@@ -165,7 +165,7 @@ if ($user_id = $this->get_user_id())
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
-				"AND comment_on_id = '0'", 1);
+				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
 
@@ -180,9 +180,9 @@ if ($user_id = $this->get_user_id())
 			"WHERE owner_id = '".(int)$user_id."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC ".
-			"LIMIT {$pagination['offset']}, $limit", 1))
+			"LIMIT {$pagination['offset']}, $limit", true))
 		{
-			echo "<ul class=\"ul_list\">\n";
+			echo '<ul class="ul_list">'."\n";
 
 			foreach ($pages as $page)
 			{

@@ -31,7 +31,7 @@ if (!function_exists('load_commented'))
 				? "AND a.deleted <> '1' "
 				: "").
 			"ORDER BY a.created DESC"
-			, 1));
+			, true));
 		{
 				if ($ids)
 				{
@@ -121,7 +121,7 @@ if ($this->user_allowed_comments())
 			echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
 		}
 
-		echo "<ul class=\"ul_list\">\n";
+		echo '<ul class="ul_list">'."\n";
 
 		if ($pages)
 		{

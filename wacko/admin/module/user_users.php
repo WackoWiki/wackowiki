@@ -437,7 +437,11 @@ function admin_user_users(&$engine, &$module)
 	// delete user
 	if (isset($_POST['delete']) && isset($_POST['change']))
 	{
-		if ($user = $engine->load_single("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
+		if ($user = $engine->load_single(
+			"SELECT user_name
+			FROM {$engine->config['table_prefix']}user
+			WHERE user_id = '".quote($engine->dblink, $_POST['change'])."'
+			LIMIT 1"))
 		{
 			echo $engine->form_open('delete_user', '', 'post', true, '', '');
 

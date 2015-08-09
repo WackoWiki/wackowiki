@@ -33,8 +33,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// parse subforums list if any
 	if (!empty($pages))
 	{
-		#$pages = trim($pages, '/ ');
 		$pages = explode(',', $pages);
+		$pages = array_map('trim', $pages);
 	}
 
 	// make query
@@ -66,7 +66,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$sql .= "ORDER BY p.created ASC";
 
 	// load subforums data
-	$forums	= $this->load_all($sql, 1);
+	$forums	= $this->load_all($sql, true);
 
 	// display list
 	echo '<table class="forum">'.
@@ -87,14 +87,14 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				"SELECT count(a.page_id) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
 				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
-					"AND a.deleted <> '1' ", 1);
+					"AND a.deleted <> '1' ", true);
 
 			// count total posts
 			$posts = $this->load_single(
 				"SELECT sum(a.comments) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
 				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
-					"AND a.deleted <> '1' ", 1);
+					"AND a.deleted <> '1' ", true);
 
 			// load latest comment
 			$comment = $this->load_single(
@@ -106,7 +106,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					"OR a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 					"AND a.deleted <> '1' ".
 				"ORDER BY a.created DESC ".
-				"LIMIT 1", 1);
+				"LIMIT 1", true);
 
 			$forum['description'] = htmlspecialchars($forum['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 

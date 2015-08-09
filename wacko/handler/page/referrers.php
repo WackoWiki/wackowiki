@@ -168,12 +168,12 @@ if ($user = $this->get_user())
 	else
 	{
 		$title		= $this->get_translation('ReferringPages').":";
-		echo "<strong>".$title."</strong><br /><br />\n";
+		echo '<strong>'.$title."</strong><br /><br />\n";
 
 		// show backlinks
 		if ($pages = $this->load_pages_linking_to($this->tag))
 		{
-			echo "<ol>";
+			echo '<ol>'."\n";
 
 			$anchor = $this->translit($this->tag);
 
@@ -197,7 +197,7 @@ if ($user = $this->get_user())
 				}
 			}
 
-			echo "</ol><p></p>";
+			echo "</ol>\n<p></p>";
 		}
 		else
 		{
@@ -217,7 +217,7 @@ if ($user = $this->get_user())
 		$referrers = $this->load_referrers($this->page['page_id']);
 	}
 
-	echo "<strong>".$title."</strong><br /><br />\n";
+	echo '<strong>'.$title."</strong><br /><br />\n";
 
 	if ($referrers || $perpage || $bytime)
 	{
@@ -230,7 +230,7 @@ if ($user = $this->get_user())
 				echo '<br /><span class="pagination">'.$pagination['text'].'</span>'."\n";
 			}
 
-			echo "<ul class=\"ul_list\">\n";
+			echo '<ul class="ul_list">'."\n";
 
 			foreach ($pages as $page)
 			{
@@ -321,7 +321,7 @@ if ($user = $this->get_user())
 				echo '<span class="pagination">'.$pagination['text'].'</span><br />'."\n";
 			}
 
-			echo "<ul class=\"ul_list\">\n";
+			echo '<ul class="ul_list">'."\n";
 
 			foreach ($referrers as $referrer)
 			{
@@ -423,7 +423,7 @@ if ($user = $this->get_user())
 		{
 			if ($referrers)
 			{
-				echo "<ul class=\"ul_list\">\n";
+				echo '<ul class="ul_list">'."\n";
 
 				foreach ($referrers as $referrer)
 				{

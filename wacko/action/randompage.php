@@ -40,7 +40,7 @@ $query = "SELECT p.supertag ".
 			#"AND p.body != '{{randompage}}' ". // very expensive
 			"LIMIT {$max}";
 
-$pages = $this->load_all($query, 1);
+$pages = $this->load_all($query, true);
 
 is_array ( $pages )
 	? $page = array_rand ( $pages )

@@ -239,7 +239,11 @@ function admin_user_groups(&$engine, &$module)
 		// delete group
 		else if (isset($_POST['delete']) && isset($_POST['group_id']))
 		{
-			$usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['group_id']."' LIMIT 1");
+			$usergroup = $engine->load_single(
+				"SELECT group_name
+				FROM {$engine->config['table_prefix']}usergroup
+				WHERE group_id = '".(int)$_POST['group_id']."'
+				LIMIT 1");
 
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}usergroup ".
@@ -332,7 +336,11 @@ function admin_user_groups(&$engine, &$module)
 		// edit group
 		else if (isset($_POST['edit']) && isset($_POST['change']))
 		{
-			if ($usergroup = $engine->load_single("SELECT group_name, description, moderator_id, open, active FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['change']."' LIMIT 1"))
+			if ($usergroup = $engine->load_single(
+				"SELECT group_name, description, moderator_id, open, active
+				FROM {$engine->config['table_prefix']}usergroup
+				WHERE group_id = '".(int)$_POST['change']."'
+				LIMIT 1"))
 			{
 				echo $engine->form_open('edit_group', '', 'post', true, '', '');
 
@@ -393,7 +401,11 @@ function admin_user_groups(&$engine, &$module)
 		// delete group
 		if (isset($_POST['delete']) && isset($_POST['change']))
 		{
-			if ($usergroup = $engine->load_single("SELECT group_name FROM {$engine->config['table_prefix']}usergroup WHERE group_id = '".(int)$_POST['change']."' LIMIT 1"))
+			if ($usergroup = $engine->load_single(
+				"SELECT group_name
+				FROM {$engine->config['table_prefix']}usergroup
+				WHERE group_id = '".(int)$_POST['change']."'
+				LIMIT 1"))
 			{
 				echo $engine->form_open('delete_group', '', 'post', true, '', '');
 

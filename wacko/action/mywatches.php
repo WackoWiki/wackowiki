@@ -28,7 +28,7 @@ if ($user_id = $this->get_user_id())
 				"ON (p.page_id = w.page_id ".
 					"AND w.user_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND w.user_id IS NULL", 1);
+				"AND w.user_id IS NULL", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches&amp;unwatched=1#list');
 
@@ -59,6 +59,7 @@ if ($user_id = $this->get_user_id())
 					if ($firstChar != $curChar)
 					{
 						if ($curChar) echo "<br />\n";
+
 						echo "<strong>$firstChar</strong><br />\n";
 						$curChar = $firstChar;
 					}
@@ -67,12 +68,15 @@ if ($user_id = $this->get_user_id())
 						"<img src=\"".$this->config['theme_url']."icons/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\"  />".'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
+
 				if ($cnt >= $limit) break;
 			}
 
 			// pagination
 			if (isset($pagination['text']))
+			{
 				echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+			}
 		}
 		else
 		{
@@ -84,7 +88,7 @@ if ($user_id = $this->get_user_id())
 		$count	= $this->load_single(
 			"SELECT COUNT( DISTINCT page_id ) as n ".
 			"FROM {$prefix}watch ".
-			"WHERE user_id = '".(int)$user_id."'", 1);
+			"WHERE user_id = '".(int)$user_id."'", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
 
@@ -108,12 +112,14 @@ if ($user_id = $this->get_user_id())
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 				{
 					$firstChar = strtoupper($page['tag'][0]);
+
 					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
 						$firstChar = '#';
 
 					if ($firstChar != $curChar)
 					{
 						if ($curChar) echo "<br />\n";
+
 						echo "<strong>$firstChar</strong><br />\n";
 						$curChar = $firstChar;
 					}
@@ -123,12 +129,15 @@ if ($user_id = $this->get_user_id())
 
 					$cnt++;
 				}
+
 				if ($cnt >= $limit) break;
 			}
 
 			// pagination
 			if (isset($pagination['text']))
+			{
 				echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+			}
 		}
 		else
 		{

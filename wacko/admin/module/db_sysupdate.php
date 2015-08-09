@@ -42,7 +42,10 @@ function admin_db_sysupdate(&$engine, &$module)
 		// links
 		if ((int)$_REQUEST['step'] === 1)
 		{
-			if ($pages = $engine->load_all("SELECT to_tag FROM {$engine->config['table_prefix']}link LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all(
+				"SELECT to_tag
+				FROM {$engine->config['table_prefix']}link
+				LIMIT ".($i * $limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
@@ -73,7 +76,10 @@ function admin_db_sysupdate(&$engine, &$module)
 		// pages
 		else if ((int)$_REQUEST['step'] === 2)
 		{
-			if ($pages = $engine->load_all("SELECT page_id, tag FROM {$engine->config['table_prefix']}page LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all(
+				"SELECT page_id, tag
+				FROM {$engine->config['table_prefix']}page
+				LIMIT ".($i * $limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
@@ -104,7 +110,10 @@ function admin_db_sysupdate(&$engine, &$module)
 		// revisions
 		else if ((int)$_REQUEST['step'] === 3)
 		{
-			if ($pages = $engine->load_all("SELECT revision_id, tag FROM {$engine->config['table_prefix']}revision LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all(
+					"SELECT revision_id, tag
+					FROM {$engine->config['table_prefix']}revision
+					LIMIT ".($i * $limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{

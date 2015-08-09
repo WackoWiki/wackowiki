@@ -45,7 +45,7 @@ function admin_system_statistics(&$engine, &$module)
 			<th style="text-align:left;">Overhead</th>
 		</tr>
 <?php
-	$results	= $engine->load_all("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
+	$results	= $engine->load_all("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`", true);
 	$tdata		= '';
 	$tindex		= '';
 	$tfrag		= '';

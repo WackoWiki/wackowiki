@@ -33,7 +33,7 @@ $pages1 = $this->load_all(
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
 	"WHERE (u.account_type = '0' OR p.user_id = '0') ".
 	"ORDER BY p.created DESC ".
-	"LIMIT ".($max * 2), 1);
+	"LIMIT ".($max * 2), true);
 
 // loading revisions
 $pages2 = $this->load_all(
@@ -45,7 +45,7 @@ $pages2 = $this->load_all(
 		"AND p.deleted = '0' ".
 		"AND (u.account_type = '0' OR p.user_id = '0') ".
 	"ORDER BY modified DESC ".
-	"LIMIT ".($max * 2), 1);
+	"LIMIT ".($max * 2), true);
 
 // loading uloads
 $files = $this->load_all(
@@ -56,7 +56,7 @@ $files = $this->load_all(
 	"WHERE u.account_type = '0' ".
 		"AND f.deleted = '0' ".
 	"ORDER BY f.uploaded_dt DESC ".
-	"LIMIT ".($max * 2), 1);
+	"LIMIT ".($max * 2), true);
 
 if ($pages = array_merge($pages1, $pages2, $files))
 {
@@ -81,7 +81,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 	}
 #$this->debug_print_r($pages);
 #echo count($pages);
-	echo "<ul class=\"ul_list\">\n";
+	echo '<ul class="ul_list">'."\n";
 
 	foreach ($pages as $page)
 	{

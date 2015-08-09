@@ -24,7 +24,7 @@ if (!function_exists('load_recent_comments'))
 			($deleted != 1
 				? "AND a.deleted <> '1' "
 				: "")
-			, 1));
+			, true));
 
 		if ($count_pages)
 		{
@@ -109,7 +109,7 @@ if ($this->user_allowed_comments())
 			echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
 		}
 
-		echo "<ul class=\"ul_list\">\n";
+		echo '<ul class="ul_list">'."\n";
 
 		$curday = '';
 
