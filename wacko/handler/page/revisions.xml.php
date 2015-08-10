@@ -51,7 +51,7 @@ if ($this->has_access('read') && $this->hide_revisions === false )
 
 				$xml .= "<item>\n";
 				$xml .= "<title>".$this->get_time_string_formatted($_GET['c'])."</title>\n";
-				$xml .= "<link>".$this->href('show').($this->config['rewrite_mode'] ? "?" : "&amp;")."revision_id=".$_GET['a']."</link>\n";
+				$xml .= "<link>".$this->href('show', '', 'revision_id='.$_GET['a'])."</link>\n";
 				$xml .= "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
 
 

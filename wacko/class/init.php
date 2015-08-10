@@ -745,7 +745,7 @@ class Init
 				{
 					$query = 'SHOW VARIABLES LIKE "%character_set%";';
 
-					if ($r = $this->engine->load_all($query))
+					if ($r = $this->engine->load_all($query, true))
 					{
 						echo "<p class=\"debug\">MySQL character set</p>\n<ul>\n";
 

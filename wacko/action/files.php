@@ -140,7 +140,7 @@ if ($can_view)
 		$path2 = 'file:';
 	}
 
-	// !!!!! patch link not to show pictures when not needed
+	// !!!!! patch link to not show pictures when not needed
 	if ($picture == false)
 	{
 		$path2 = str_replace('file:', '_file:', $path2);
