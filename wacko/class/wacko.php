@@ -905,8 +905,12 @@ class Wacko
 	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
 	{
 		$page = '';
-
-		if ($page_id != 0)
+		#echo '@@ '.$tag.' - '.$deleted.'<br />';
+		if ($deleted)
+		{
+			$cache = false;
+		}
+		else if ($page_id != 0)
 		{
 			if ($this->get_cached_wanted_page('', $page_id) == 1)
 			{
@@ -953,6 +957,8 @@ class Wacko
 
 	function _load_page($tag, $page_id = 0, $revision_id = '', $cache = true, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
+		#echo '## '.$deleted.'<br />';
+		#$deleted = 1;
 		$supertag		= '';
 		$cached_page	= '';
 		$page			= null;
@@ -1084,7 +1090,8 @@ class Wacko
 		{
 			if (isset($this->page_cache['page_id'][$page_id]))
 			{
-				if ($this->page_cache['page_id'][$page_id]['mdonly'] == 0 || $metadata_only == $this->page_cache['page_id'][$page_id]['mdonly'])
+				if (isset($this->page_cache['page_id'][$page_id]['mdonly'])
+					&& ($this->page_cache['page_id'][$page_id]['mdonly'] == 0 || $metadata_only == $this->page_cache['page_id'][$page_id]['mdonly']))
 				{
 					return $this->page_cache['page_id'][$page_id];
 				}
@@ -1231,7 +1238,7 @@ class Wacko
 				($user
 					? "OR (b.user_id IN ( '".$user['user_id']."' )) "
 					: "").
-			"", 1))
+			"", true))
 		{
 			foreach ($menu_items as $item)
 			{
@@ -1267,7 +1274,7 @@ class Wacko
 		if ($links = $this->load_all(
 		"SELECT ".$this->page_meta." ".
 		"FROM ".$this->config['table_prefix']."page ".
-		"WHERE supertag IN (".$spages_str.")", 1))
+		"WHERE supertag IN (".$spages_str.")", true))
 		{
 			for ($i = 0; $i < count($links); $i++)
 			{
@@ -1288,7 +1295,7 @@ class Wacko
 		"SELECT a.* ".
 		"FROM ".$this->config['table_prefix']."acl a ".
 			"INNER JOIN ".$this->config['table_prefix']."page p ON (p.page_id = a.page_id) ".
-		"WHERE BINARY p.tag IN (".$pages_str.") AND a.privilege = 'read'", 1))
+		"WHERE BINARY p.tag IN (".$pages_str.") AND a.privilege = 'read'", true))
 		{
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
@@ -1392,7 +1399,7 @@ class Wacko
 				? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
 				"(l.to_supertag = '".quote($this->dblink, $this->translit($tag))."')".
-			" ORDER BY tag", 1);
+			" ORDER BY tag", true);
 	}
 
 	function load_changed($limit = 100, $for = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
@@ -1446,7 +1453,7 @@ class Wacko
 				? "AND (u.account_type = '0' OR p.user_id = '0') "
 				: "").
 		"ORDER BY p.modified DESC ".
-		"LIMIT {$pagination['offset']}, {$limit}", 1))
+		"LIMIT {$pagination['offset']}, {$limit}", true))
 		{
 			foreach ($pages as $page)
 			{
@@ -1464,7 +1471,7 @@ class Wacko
 					: '').
 			"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
-			"LIMIT {$limit}", 1))
+			"LIMIT {$limit}", true))
 			{
 				for ($i = 0; $i < count($read_acls); $i++)
 				{
@@ -1765,7 +1772,7 @@ class Wacko
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!$old_page = $this->load_page('', $page_id))
+			if (!$old_page = $this->load_page('', $page_id,'','','', $deleted = 1))
 			{
 				if (empty($lang))
 				{
@@ -1823,12 +1830,16 @@ class Wacko
 					}
 
 					$write_acl		= $write_acl['list'];
+
 					$read_acl		= $this->load_acl($root_id, 'read');
 					$read_acl		= $read_acl['list'];
+
 					$comment_acl	= $this->load_acl($root_id, 'comment');
 					$comment_acl	= $comment_acl['list'];
+
 					$create_acl		= $this->load_acl($root_id, 'create');
 					$create_acl		= $create_acl['list'];
+
 					$upload_acl		= $this->load_acl($root_id, 'upload');
 					$upload_acl		= $upload_acl['list'];
 
@@ -2419,7 +2430,7 @@ class Wacko
 		// get system message
 		if(!empty($this->config['system_message']) && !(isset($this->config['ap_mode']) && $this->config['ap_mode'] === true))
 		{
-			$type		= ''; // TODO: set type also via backend and store it [where?]
+			$type		= $this->config['system_message_type']; // TODO: set type also via backend and store it [where?]
 			$message	= $this->config['system_message'];
 
 			// check current page lang for different charset to do_unicode_entities()
@@ -2428,9 +2439,9 @@ class Wacko
 				$message	= $this->do_unicode_entities($message, $this->config['language']);
 			}
 
-			echo '<div class="sysmessage">';
-			$this->show_message($message, $type);
-			echo '</div>';
+			#echo '<div class="sysmessage">';
+			$this->show_message($message, 'sysmessage'.' '.$type);
+			#echo '</div>';
 		}
 
 		// get event message
@@ -2454,6 +2465,8 @@ class Wacko
 	{
 		if (!empty($message))
 		{
+			#$message = htmlspecialchars($message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+
 			echo '<div class="'.$type.'">'.$message."</div>\n";
 		}
 	}
@@ -2816,21 +2829,27 @@ class Wacko
 		}
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
 		{
+	$this->debug_print_r($matches);
 			// this is a file:
-			$noimg	= $matches[1];
+			// TODO: add file link tracking
+			$noimg	= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
 			$thing	= $matches[2];
 			$arr	= explode('/', $thing);
-
+	$this->debug_print_r($arr);
 			if (count($arr) == 1) // file:some.zip
 			{
+echo '#########1 <br />';
 				//try to find in global storage and return if success
 				$desc = $this->check_file_exists($thing);
 
 				if (is_array($desc))
 				{
-					$title	= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-					$alt	= $desc['file_description'];
-					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$thing;
+					$title		= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
+					$alt		= $desc['file_description'];
+					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$thing;
+
+					$img_link	= false;
+					$tpl		= 'localfile';
 
 					if ($desc['file_ext'] == 'pdf')
 					{
@@ -2852,9 +2871,6 @@ class Wacko
 					{
 						$icon	= $this->get_translation('fileicon');
 					}
-
-					$img_link	= false;
-					$tpl		= 'localfile';
 
 					if ($desc['picture_w'] && !$noimg)
 					{
@@ -2874,12 +2890,15 @@ class Wacko
 			{
 				//try to find in global storage and return if success
 				$desc = $this->check_file_exists($arr[1]);
-
+echo '#########2 <br />';
 				if (is_array($desc))
 				{
-					$title	= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-					$alt	= $desc['file_description'];
-					$url	= $this->config['base_url'].$this->config['upload_path'].$thing;
+					$title		= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
+					$alt		= $desc['file_description'];
+					$url		= $this->config['base_url'].$this->config['upload_path'].$thing;
+
+					$img_link	= false;
+					$tpl		= 'localfile';
 
 					if ($desc['file_ext'] == 'pdf')
 					{
@@ -2901,9 +2920,6 @@ class Wacko
 					{
 						$icon	= $this->get_translation('fileicon');
 					}
-
-					$img_link	= false;
-					$tpl		= 'localfile';
 
 					if ($desc['picture_w'] && !$noimg)
 					{
@@ -2927,6 +2943,7 @@ class Wacko
 
 			if (!$url)
 			{
+echo '#########3 <br />';
 				$file		= $arr[count($arr) - 1];
 				unset($arr[count($arr) - 1]);
 				$_page_tag	= implode('/', $arr);
@@ -2946,16 +2963,17 @@ class Wacko
 				if (is_array($desc))
 				{
 					//check 403 here!
-					if ($this->is_admin() || (
-					$desc['upload_id'] && (
-					$this->page['owner_id'] == $this->get_user_id())) || (
-					$this->has_access('read', $page_id)) || (
-					$desc['user_id'] == $this->get_user_id()))
+					if ($this->is_admin()
+						|| ($desc['upload_id'] && ($this->page['owner_id'] == $this->get_user_id()))
+						|| ($this->has_access('read', $page_id))
+						|| ($desc['user_id'] == $this->get_user_id()))
 					{
 						$title		= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
 						$alt		= $desc['file_description'];
-						$url		= $this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
+						$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file);
+
 						$img_link	= false;
+						$tpl		= 'localfile';
 
 						if ($desc['file_ext'] == 'pdf')
 						{
@@ -2978,30 +2996,30 @@ class Wacko
 							$icon	= $this->get_translation('fileicon');
 						}
 
-						$tpl	= 'localfile';
+
 
 						if ($desc['picture_w'] != 0 && !$noimg)
 						{
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
+								return '<img src="'.$this->href('file', trim($page_tag, '/'), 'get='.$file).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
 							}
 							else
 							{
-								return '<a href="'.$this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
+								return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file).'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
 						/*
 						else
 						{
-							return '<a href="'.$this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
+							return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file).'" title="'.$title.'">'.$text.'</a>';
 						} */
 
 					}
 					else //403
 					{
-						$url		= $this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
+						$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file);
 						$icon		= $this->get_translation('lockicon');
 						$img_link	= false;
 						$tpl		= 'localfile';
@@ -3197,7 +3215,7 @@ class Wacko
 
 			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
 			{
-				$aname = 'id="'.$supertag.'"';
+				$aname = 'id="a-'.$supertag.'"';
 				$this->first_inclusion[$supertag] = 1;
 			}
 
@@ -3541,7 +3559,7 @@ class Wacko
 
 				if (!isset($written[$lower_to_tag]))
 				{
-					$query .= "('".(int)$from_page_id."','".$this->get_page_id($to_tag)."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->translit($to_tag))."'),";
+					$query .= "('".(int)$from_page_id."', '".$this->get_page_id($to_tag)."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->translit($to_tag))."'),";
 					$written[$lower_to_tag] = 1;
 				}
 			}
@@ -3748,9 +3766,10 @@ class Wacko
 		if (!$referrer = trim($referrer))
 		{
 			$referrer	= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-			#$browser	= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
-			#$ip			= $this->get_user_ip();
 		}
+
+		#$user_agent	= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+		#$ip			= $this->get_user_ip();
 
 		// check if it's coming from another site
 		if ($referrer && !preg_match('/^'.preg_quote($this->config['base_url'], '/').'/', $referrer) && isset($_GET['sid']) === false) // TODO: isset($_GET['PHPSESSID']) === false
@@ -3764,6 +3783,8 @@ class Wacko
 				"INSERT INTO ".$this->config['table_prefix']."referrer SET ".
 					"page_id		= '".(int)$page_id."', ".
 					"referrer		= '".quote($this->dblink, $referrer)."', ".
+					#"user_agent		= '".quote($this->dblink, (string) trim(substr($user_agent, 0, 149)))."', ".
+					#"ip				= '".quote($this->dblink, (string) $ip)."', ".
 					"referrer_time	= NOW()");
 		}
 	}
@@ -4020,7 +4041,7 @@ class Wacko
 		"SELECT user_id ".
 		"FROM {$this->config['user_table']} ".
 		"WHERE user_name REGEXP '".quote($this->dblink, implode('', $user_name))."' ".
-		"LIMIT 1", 1))
+		"LIMIT 1", true))
 		{
 			return true;
 		}
@@ -4060,8 +4081,8 @@ class Wacko
 
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
-		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, t.session_time, t.cookie_token ';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, t.cookie_token ';
+		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, t.session_time, t.cookie_token ';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, t.cookie_token ';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
@@ -4103,9 +4124,50 @@ class Wacko
 		}
 	}
 
+	function check_ip($ip)
+	{
+		if (!empty($ip) && ip2long($ip)!=-1 && ip2long($ip)!= false)
+		{
+			$private_ips = array (
+					array('0.0.0.0','2.255.255.255'),
+					array('10.0.0.0','10.255.255.255'),
+					array('127.0.0.0','127.255.255.255'),
+					array('169.254.0.0','169.254.255.255'),
+					array('172.16.0.0','172.31.255.255'),
+					array('192.0.2.0','192.0.2.255'),
+					array('192.168.0.0','192.168.255.255'),
+					array('255.255.255.0','255.255.255.255')
+			);
+
+			foreach ($private_ips as $r)
+			{
+				$min = ip2long($r[0]);
+				$max = ip2long($r[1]);
+
+				if ((ip2long($ip) >= $min) && (ip2long($ip) <= $max))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function ip_address()
 	{
-		$ip_address = $_SERVER['REMOTE_ADDR'];
+		if (isset($_SERVER['HTTP_X_REMOTE_ADDR']) && $this->check_ip($_SERVER["HTTP_X_REMOTE_ADDR"]))
+		{
+			$ip_address = $_SERVER["HTTP_X_REMOTE_ADDR"];
+		}
+		else
+		{
+			$ip_address = $_SERVER['REMOTE_ADDR'];
+		}
 
 		//only accept http_x for reverse-proxy or tls-proxy
 		if ($this->config['reverse_proxy'] || ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']))
@@ -4692,7 +4754,14 @@ class Wacko
 		{
 			if (!$revision_id)
 			{
-				return $this->page['owner_name'];
+				if(isset($this->page['owner_name']))
+				{
+					return $this->page['owner_name'];
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{
@@ -5179,7 +5248,7 @@ class Wacko
 					($lang
 						? "AND m.lang = '".quote($this->dblink, $lang)."' "
 						: "").
-				"ORDER BY m.menu_position", 1);
+				"ORDER BY m.menu_position", true);
 
 			if ($_menu)
 			{
@@ -5254,7 +5323,7 @@ class Wacko
 				$_menu_position = $this->load_all(
 					"SELECT m.menu_id ".
 					"FROM ".$this->config['table_prefix']."menu m ".
-					"WHERE m.user_id = '".$user['user_id']."' ", 0);
+					"WHERE m.user_id = '".$user['user_id']."' ", false);
 
 				$_menu_item_count = count($_menu_position);
 
@@ -5820,9 +5889,11 @@ class Wacko
 		else
 		{
 			$page		= $this->load_page($this->tag, 0, $revision_id);
+			#$page		= $this->load_page($this->tag, 0, $revision_id, '', '', 1);
 		}
 
 		// TODO: obsolete? Add description what it does
+		// creates dummy array
 		if ($this->config['outlook_workaround'] && !$page)
 		{
 			$page = $this->load_page($this->supertag."'", 0, $revision_id);
@@ -7053,7 +7124,7 @@ class Wacko
 					( $root != ''
 						? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
 						: '' ).
-				"GROUP BY category_id", 1))
+				"GROUP BY category_id", true))
 				{
 					foreach ($_counts as $count)
 					{

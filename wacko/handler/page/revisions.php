@@ -115,7 +115,7 @@ if ($this->has_access('read'))
 				$output .= '&nbsp;&nbsp;&nbsp;
 							<input type="radio" name="b" value="'.($c == 1 ? '-1' : $page['revision_m_id']).'" '.($c == 2 ? 'checked="checked"' : '').' />';
 				$output .= '&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="'.$this->href('show').($this->config['rewrite_mode'] ? '?' : '&amp;').'revision_id='.$page['revision_m_id'].'">'.$this->get_time_string_formatted($page['modified']).'</a>';
+							<a href="'.$this->href('show', '', 'revision_id='.$page['revision_m_id']).'">'.$this->get_time_string_formatted($page['modified']).'</a>';
 				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_m_id']."</span> ";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->get_translation('By')." ".
 				($page['user_name']

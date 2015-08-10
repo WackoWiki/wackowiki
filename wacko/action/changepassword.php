@@ -330,8 +330,7 @@ else
 				$body	=	$this->get_translation('EmailHello'). $user_name.".\n\n".
 							str_replace('%1', $this->config['site_name'],
 							str_replace('%2', $user['user_name'],
-							str_replace('%3', $this->href().
-							($this->config['rewrite_mode'] ? "?" : "&")."secret_code=".$code,
+							str_replace('%3', $this->href('', '', 'secret_code='.$code),
 							$this->get_translation('EmailForgotMessage'))))."\n";
 				$body.=	"\n".$this->get_translation('EmailGoodbye').
 							"\n".$this->config['site_name'].

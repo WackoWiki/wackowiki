@@ -262,8 +262,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$body =		$this->get_translation('EmailHello'). $user_name.",\n\n".
 								str_replace('%1', $this->config['site_name'],
 								str_replace('%2', $user_name,
-								str_replace('%3', $this->href().
-								($this->config['rewrite_mode'] ? "?" : "&")."confirm=".$confirm,
+								str_replace('%3', $this->href('', '', 'confirm='.$confirm),
 								$this->get_translation('EmailRegistered'))))."\n\n".
 								$this->get_translation('EmailGoodbye')."\n".
 								$this->config['site_name']."\n".
