@@ -76,7 +76,7 @@ if ($this->get_user()) { ?>
   <?php
       echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
   <br />
-  <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></small>
+  <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?></a></small>
   <?php
 // Else Wacko shows login's controls
 } else {
@@ -164,4 +164,4 @@ if ($this->is_admin()){
 // here we show messages
 $this->output_messages();
 ?>
-<loc><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?><a title="<?php echo $this->config['search_title_help']?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></loc>
+<loc><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?></loc>
