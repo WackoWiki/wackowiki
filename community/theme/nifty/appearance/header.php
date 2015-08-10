@@ -208,10 +208,10 @@ if ($doubleclick == true)
 						?>
 						 |
 						<a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo "<img src=\"".$this->config['theme_url']."icons/logout.png\" title=\"".$this->get_translation('LogoutButton')."\" alt=\"".$this->get_translation('LogoutButton')."\" />"; ?>
+							href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo "<img src=\"".$this->config['theme_url']."icons/logout.png\" title=\"".$this->get_translation('LogoutButton')."\" alt=\"".$this->get_translation('LogoutButton')."\" />"; ?>
 						</a>
 						<a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?>
+							href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?>
 						</a>
 						)
 					<?php

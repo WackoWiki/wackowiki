@@ -17,6 +17,6 @@
 <body>
 
 <div class="header">
-<h1><?php echo $this->config['site_name'] ?>: <?php echo '<a href="'.$this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;").'phrase='.urlencode($this->tag).'">'.(isset($this->page['title']) ? $this->page['title'] : $this->tag).'</a>'; ?></h1>
+<h1><?php echo $this->config['site_name'].':  '.(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></h1>
 </div>
 
