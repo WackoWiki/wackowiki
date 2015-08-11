@@ -28,8 +28,8 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 else
 {
 	// Show Register / Login link
-	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage').($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation('LoginPage'), 0)."</li>\n";
-	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n</ul>";
+	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage'), '', $this->get_translation('LoginPage'), 0, '', 'goback='.$this->slim_url($this->tag))."</li>\n";
+	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), '', $this->get_translation('RegistrationPage'), 0)."</li>\n</ul>";
 }
 
 // End if
