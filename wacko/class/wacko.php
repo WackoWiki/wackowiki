@@ -2681,7 +2681,7 @@ class Wacko
 		return $text;
 	}
 
-	function compose_link_to_page($tag, $method = '', $text = '', $track = 1, $title = '')
+	function compose_link_to_page($tag, $method = '', $text = '', $track = 1, $title = '', $params = '')
 	{
 		if (!$text)
 		{
@@ -2694,7 +2694,7 @@ class Wacko
 			$this->track_link_to($tag);
 		}
 
-		return '<a href="'.$this->href($method, $tag).'"'.($title ? ' title="'.$title.'"' : '').'>'.$text.'</a>';
+		return '<a href="'.$this->href($method, $tag, $params).'"'.($title ? ' title="'.$title.'"' : '').'>'.$text.'</a>';
 	}
 
 	// preparing links to save them to body_r
