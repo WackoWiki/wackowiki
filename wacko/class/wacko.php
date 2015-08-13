@@ -2838,8 +2838,8 @@ class Wacko
 			$_global		= true;
 			$file_access	= false;
 
-	#$this->debug_print_r($matches);
-	#$this->debug_print_r($arr);
+			#$this->debug_print_r($matches);
+			#$this->debug_print_r($arr);
 
 			if (count($arr) == 1) // case 1 -> file:some.zip
 			{
@@ -2984,101 +2984,6 @@ class Wacko
 
 			unset($file_data);
 		}
-
-			/* if (!$url)
-			{
-echo '#########3 <br />';
-				$file		= $arr[count($arr) - 1];
-				unset($arr[count($arr) - 1]);
-				$_page_tag	= implode('/', $arr);
-
-				if ($_page_tag == '')
-				{
-					$_page_tag = '!/';
-				}
-
-				//unwrap tag (check !/, ../ cases)
-				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
-				$page_id	= $this->get_page_id($page_tag);
-
-				//try to find in local $tag storage
-				$desc		= $this->check_file_exists($file, $page_tag);
-
-				if (is_array($desc))
-				{
-					//check 403 here!
-					if ($this->is_admin()
-						|| ($desc['upload_id'] && ($this->page['owner_id'] == $this->get_user_id()))
-						|| ($this->has_access('read', $page_id))
-						|| ($desc['user_id'] == $this->get_user_id()))
-					{
-						$title		= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-						$alt		= $desc['file_description'];
-						$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file);
-
-						$img_link	= false;
-						$tpl		= 'localfile';
-
-						if ($desc['file_ext'] == 'pdf')
-						{
-							$icon	= $this->get_translation('pdficon');
-						}
-						else if ($desc['file_ext'] == 'txt')
-						{
-							$icon	= $this->get_translation('texticon');
-						}
-						else if ($desc['file_ext'] == 'odt')
-						{
-							$icon	= $this->get_translation('odticon');
-						}
-						else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
-						{
-							$icon	= $this->get_translation('imageicon');
-						}
-						else
-						{
-							$icon	= $this->get_translation('fileicon');
-						}
-
-						if ($desc['picture_w'] != 0 && !$noimg)
-						{
-							if (!$text)
-							{
-								$text = $title;
-								return '<img src="'.$this->href('file', trim($page_tag, '/'), 'get='.$file).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
-							}
-							else
-							{
-								return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file).'" title="'.$title.'">'.$text.'</a>';
-							}
-						}
-						/*
-						else
-						{
-							return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file).'" title="'.$title.'">'.$text.'</a>';
-						} */
-
-					/*	}
-					else //403
-					{
-						$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file);
-						$icon		= $this->get_translation('lockicon');
-						$img_link	= false;
-						$tpl		= 'localfile';
-						$class		= 'denied';
-					}
-				}
-				else //404
-				{
-					$title	= '404: /'.trim($page_tag, '/').'/file'.($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
-					$url	= '404';
-					$tpl	= 'wlocalfile';
-				}
-
-				unset($desc);
-			}
-			//forgot 'bout 403
-		} */
 		else if ($this->config['disable_tikilinks'] != 1 && preg_match('/^('.$this->language['UPPER'].$this->language['LOWER'].$this->language['ALPHANUM'].'*)\.('.$this->language['ALPHA'].$this->language['ALPHANUM'].'+)$/s', $tag, $matches))
 		{
 			// it`s a Tiki link! (Tiki.Link -> /Tiki/Link)
