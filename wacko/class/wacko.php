@@ -257,7 +257,7 @@ class Wacko
 		if (!$file)
 		{
 			$file = $this->load_single(
-				"SELECT upload_id, user_id, file_name, file_size, lang, file_description, picture_w, picture_h, file_ext ".
+				"SELECT upload_id, page_id, user_id, file_name, file_size, lang, file_description, picture_w, picture_h, file_ext ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE page_id = '".(int)$page_id."' ".
 					"AND file_name = '".quote($this->dblink, $file_name)."' ".
@@ -2829,119 +2829,163 @@ class Wacko
 		}
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
 		{
-	$this->debug_print_r($matches);
 			// this is a file:
 			// TODO: add file link tracking
-			$noimg	= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
-			$thing	= $matches[2];
-			$arr	= explode('/', $thing);
-	$this->debug_print_r($arr);
-			if (count($arr) == 1) // file:some.zip
+			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
+			$_file_name		= $matches[2];
+			$arr			= explode('/', $_file_name);
+			$page_tag		= '';
+			$_global		= true;
+			$file_access	= false;
+
+	#$this->debug_print_r($matches);
+	#$this->debug_print_r($arr);
+
+			if (count($arr) == 1) // case 1 -> file:some.zip
 			{
-echo '#########1 <br />';
-				//try to find in global storage and return if success
-				$desc = $this->check_file_exists($thing);
+				#echo '####1: file:some.zip<br />';
+				$file_name = $_file_name;
 
-				if (is_array($desc))
+				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$title		= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-					$alt		= $desc['file_description'];
-					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$thing;
+					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+				}
+			}
+			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip
+			{
+				#echo '####2: file:/some.zip <br />'.$arr[1].'####<br />';
+				$file_name = $arr[1];
 
+				if ($file_data = $this->check_file_exists($file_name, $page_tag))
+				{
+					$url		= $this->config['base_url'].$this->config['upload_path'].$file_name;
+				}
+			}
+
+			if (!$url) // case 3 -> check for local file
+			{
+				#echo '####3: local file <br />';
+				$_global	= false;
+				$file_name	= $arr[count($arr) - 1];
+
+				unset($arr[count($arr) - 1]);
+				$_page_tag	= implode('/', $arr);
+
+				if ($_page_tag == '')
+				{
+					$_page_tag = '!/';
+				}
+
+				//unwrap tag (check !/, ../ cases)
+				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
+				$page_id	= $this->get_page_id($page_tag);
+
+				$file_data = $this->check_file_exists($file_name, $page_tag);
+				$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
+
+				if ($this->is_admin()
+				|| ($file_data['upload_id'] && ($this->page['owner_id'] == $this->get_user_id()))
+				|| ($this->has_access('read', $page_id))
+				|| ($file_data['user_id'] == $this->get_user_id()))
+				{
+					$file_access = true;
+				}
+			}
+
+			//try to find in global / local storage and return if success
+			#$this->debug_print_r($file_data);
+			if (is_array($file_data))
+			{
+				#echo '---------------------------<br />';
+				// check 403 here!
+				if ($_global == true || $file_access == true)
+				{
+					$title		= $file_data['file_description'].' ('.$this->binary_multiples($file_data['file_size'], false, true, true).')';
+					$alt		= $file_data['file_description'];
 					$img_link	= false;
 					$tpl		= 'localfile';
+					$file_ext	= array (
+									'pdf' => 'pdficon',
+									'txt' => 'texticon',
+									'odt' => 'odticon',
+									'png' => 'imageicon',
+									'gif' => 'imageicon',
+									'jpg' => 'imageicon');
 
-					if ($desc['file_ext'] == 'pdf')
+					if (in_array($file_data['file_ext'], array_keys($file_ext)))
 					{
-						$icon	= $this->get_translation('pdficon');
-					}
-					else if ($desc['file_ext'] == 'txt')
-					{
-						$icon	= $this->get_translation('texticon');
-					}
-					else if ($desc['file_ext'] == 'odt')
-					{
-						$icon	= $this->get_translation('odticon');
-					}
-					else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
-					{
-						$icon	= $this->get_translation('imageicon');
+						$icon	= $this->get_translation($file_ext[$file_data['file_ext']]);
 					}
 					else
 					{
 						$icon	= $this->get_translation('fileicon');
 					}
 
-					if ($desc['picture_w'] && !$noimg)
+					if ($file_data['picture_w'] && !$noimg)
 					{
-						if (!$text)
+						/* if (!$text)
 						{
 							$text = $title;
-						}
+						} */
+						// direct file access
+						if ($_global == true)
+						{
 
-						return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$thing.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
+							if (!$text)
+							{
+								$text = $title;
+								return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+							}
+							else
+							{
+								return '<a href="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" title="'.$title.'">'.$text.'</a>';
+							}
+						}
+						else
+						{
+							// no direct file access for files per page
+							// the file handler checks the access rights
+							#return '<img src="'.$this->config['base_url'].$this->config['upload_path_per_page'].'/'.'@'.$file_data['page_id'].'@'.$_file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+							if (!$text)
+							{
+								$text = $title;
+								return '<img src="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+							}
+							else
+							{
+								return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" title="'.$title.'">'.$text.'</a>';
+							}
+						}
 					}
 				}
-
-				unset($desc);
-			}
-
-			if (count($arr) == 2 && $arr[0] == '')	// file:/some.zip
-			{
-				//try to find in global storage and return if success
-				$desc = $this->check_file_exists($arr[1]);
-echo '#########2 <br />';
-				if (is_array($desc))
+				else //403
 				{
-					$title		= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-					$alt		= $desc['file_description'];
-					$url		= $this->config['base_url'].$this->config['upload_path'].$thing;
-
+					$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
+					$icon		= $this->get_translation('lockicon');
 					$img_link	= false;
 					$tpl		= 'localfile';
-
-					if ($desc['file_ext'] == 'pdf')
-					{
-						$icon	= $this->get_translation('pdficon');
-					}
-					else if ($desc['file_ext'] == 'txt')
-					{
-						$icon	= $this->get_translation('texticon');
-					}
-					else if ($desc['file_ext'] == 'odt')
-					{
-						$icon	= $this->get_translation('odticon');
-					}
-					else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
-					{
-						$icon	= $this->get_translation('imageicon');
-					}
-					else
-					{
-						$icon	= $this->get_translation('fileicon');
-					}
-
-					if ($desc['picture_w'] && !$noimg)
-					{
-						if (!$text)
-						{
-							$text = $title;
-						}
-
-						return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$thing.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
-					}
+					$class		= 'denied';
 				}
-				else	//404
-				{
-					$tpl	= 'wlocalfile';
-					$title	= '404: /'.$this->config['upload_path'].$thing;
-					$url	= '404';
-				}
-
-				unset($desc);
 			}
+			else	//404
+			{
+				$tpl	= 'wlocalfile';
+				$url	= '404';
 
-			if (!$url)
+				if ($_global == true)
+				{
+					$title	= '404: /'.$this->config['upload_path'].$file_name;
+				}
+				else
+				{
+					$title	= '404: /'.trim($page_tag, '/').'/file'.($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file_name;
+				}
+			} //forgot 'bout 403
+
+			unset($file_data);
+		}
+
+			/* if (!$url)
 			{
 echo '#########3 <br />';
 				$file		= $arr[count($arr) - 1];
@@ -2996,8 +3040,6 @@ echo '#########3 <br />';
 							$icon	= $this->get_translation('fileicon');
 						}
 
-
-
 						if ($desc['picture_w'] != 0 && !$noimg)
 						{
 							if (!$text)
@@ -3016,7 +3058,7 @@ echo '#########3 <br />';
 							return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file).'" title="'.$title.'">'.$text.'</a>';
 						} */
 
-					}
+					/*	}
 					else //403
 					{
 						$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file);
@@ -3036,7 +3078,7 @@ echo '#########3 <br />';
 				unset($desc);
 			}
 			//forgot 'bout 403
-		}
+		} */
 		else if ($this->config['disable_tikilinks'] != 1 && preg_match('/^('.$this->language['UPPER'].$this->language['LOWER'].$this->language['ALPHANUM'].'*)\.('.$this->language['ALPHA'].$this->language['ALPHANUM'].'+)$/s', $tag, $matches))
 		{
 			// it`s a Tiki link! (Tiki.Link -> /Tiki/Link)
