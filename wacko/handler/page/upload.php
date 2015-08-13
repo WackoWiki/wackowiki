@@ -86,6 +86,13 @@ if ($registered
 				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file['uploaded_dt']); ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file['file_size'], false, true, true).')'; ?></li>
+<?php
+// image dimension
+if ($file['picture_w'])
+{ ?>
+				<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
+<?php
+} ?>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file['file_description']; ?></li>
@@ -129,7 +136,7 @@ if ($registered
 		}
 
 		$file = $this->load_single(
-			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt ".
+			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".$page_id."'".
@@ -156,7 +163,14 @@ if ($registered
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file['file_size'], false, true, true).')'; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
+<?php
+// image dimension
+if ($file['picture_w'])
+{ ?>
+				<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
+<?php
+} ?>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="file_description" id="UploadDesc" type="text" size="80" value="<?php echo $file['file_description']; ?>"/></li>
@@ -529,7 +543,14 @@ if ($registered
 					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileSyntax'); ?>:</span><?php echo '<code>file:'.$small_name.'</code>'; ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($uploaded_dt); ?></li>
-					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$file_size_kb.' '.$this->get_translation('UploadKB').')'; ?></li>
+					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$file_size_kb.' '.$this->get_translation('UploadKB').''; ?></li>
+<?php
+// image dimension
+if ($file['picture_w'])
+{ ?>
+					<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$size[0].' x '.$size[1].'px'; ?></li>
+<?php
+} ?>
 					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $small_name; ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $description; ?></li>

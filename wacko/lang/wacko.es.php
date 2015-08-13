@@ -733,6 +733,7 @@ $wacko_translation = array(
 	'UploadBy' => 'Subido por',
 	'FileAdded' => 'Agregado',
 	'FileSize' => 'Tamaño',
+	'FileDimension'				=> 'Dimension',
 	'FileName' => 'Nombre',
 	'FileSyntax' => 'Syntax',
 
