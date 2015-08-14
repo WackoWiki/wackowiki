@@ -2938,7 +2938,8 @@ class Wacko
 							}
 							else
 							{
-								return '<a href="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" title="'.$title.'">'.$text.'</a>';
+								// continue
+								#return '<a href="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
 						else
@@ -2953,7 +2954,8 @@ class Wacko
 							}
 							else
 							{
-								return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" title="'.$title.'">'.$text.'</a>';
+								// continue
+								#return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
 					}
