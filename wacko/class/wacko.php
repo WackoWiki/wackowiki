@@ -2745,7 +2745,7 @@ class Wacko
 
 		if (preg_match('/^[\.\-'.$this->language['ALPHANUM_P'].']+\.(gif|jpg|jpe|jpeg|png)$/i', $text))
 		{
-			$img_link = $this->config['base_url'].'/images/'.$text;
+			$img_link = $this->config['base_url'].'/image/'.$text;
 		}
 		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i', preg_replace('/<\/?nobr>/', '', $text)))
 		{
@@ -6895,7 +6895,7 @@ class Wacko
 				echo $inline ? '' : '<br />';
 				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />';
 				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
-				echo '<img src="'.$this->config['base_url'].'images/reload.png" width="18" height="17" alt="'.$this->get_translation('CaptchaReload').'" /></a> <br />';
+				echo '<img src="'.$this->config['base_url'].'image/reload.png" width="18" height="17" alt="'.$this->get_translation('CaptchaReload').'" /></a> <br />';
 				#echo $inline ? '' : '<br />';
 				echo '<input id="captcha" type="text" name="captcha" maxlength="6" style="width: 273px;" />';
 				echo $inline ? '' : '<br />';

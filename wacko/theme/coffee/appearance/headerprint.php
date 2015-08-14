@@ -17,8 +17,8 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <body>
 
 <div class="header">
-<h1><?php echo file_exists("images/".$this->config['site_name'].".png")
-	? "<img src='/images/".$this->config['site_name'].".png' alt='".$this->config['site_name']."' />"
+<h1><?php echo file_exists("image/".$this->config['site_name'].".png")
+	? "<img src='/image/".$this->config['site_name'].".png' alt='".$this->config['site_name']."' />"
 	: $this->config['site_name'] ?>
 : <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->tag); ?>
 </h1>

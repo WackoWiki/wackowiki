@@ -44,7 +44,7 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
   if (!(this.MZ || isIE || isO8)) return;
   this._init(id);
   // if (!this.area.id) this.area.id = "area_"+String(Math.floor(Math.random()*10000));
-  this.imagesPath = (imgPath ? imgPath : 'images/');
+  this.imagesPath = (imgPath ? imgPath : 'image/');
   //this.editorName = name;
   this.editorNameClass = nameClass;
   this.actionName = 'document.getElementById(\'' + this.id + '\')._owner.insTag';
