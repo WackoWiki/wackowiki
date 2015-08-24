@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['db_restore'] = array(
-		'order'	=> 21,
+		'order'	=> 22,
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_restore',

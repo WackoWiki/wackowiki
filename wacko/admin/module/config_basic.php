@@ -61,6 +61,8 @@ function admin_config_basic(&$engine, &$module)
 		$config['xml_sitemap']				= (int)$_POST['xml_sitemap'];
 		$config['enable_feeds']				= (int)$_POST['enable_feeds'];
 		$config['enable_comments']			= (int)$_POST['enable_comments'];
+		$config['sorting_comments']			= (int)$_POST['sorting_comments'];
+
 
 		$engine->_set_config($config, '', true);
 
@@ -129,7 +131,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="allow_themes"><strong>Allowed Themes:</strong><br />
-					<small>Allowed themes, which the user can choose: "0" – all available themes are allowed (default), <br />"default,coffee" – here only these both themes are allowed.</small></label></td>
+					<small>Allowed themes, which the user can choose: "0" - all available themes are allowed (default), <br />"default,coffee" - here only these both themes are allowed.</small></label></td>
 				<td><input maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->config['allow_themes'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -194,6 +196,19 @@ function admin_config_basic(&$engine, &$module)
 					<input type="radio" id="enable_comments" name="enable_comments" value="1"<?php echo ( $engine->config['enable_comments'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_comments_on">On.</label>
 					<input type="radio" id="enable_comments_guest" name="enable_comments" value="2"<?php echo ( $engine->config['enable_comments'] == 2 ? ' checked="checked"' : '' );?> /><label for="enable_comments_guest">Registered.</label>
 					<input type="radio" id="enable_comments_off" name="enable_comments" value="0"<?php echo ( $engine->config['enable_comments'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_comments_off">Off.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><strong>Sorting comments:</strong><br />
+					<small>Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.</small></td>
+				<td>
+					<select id="sorting_comments" name="sorting_comments">
+						<option value="0" <?php echo ( $engine->config['sorting_comments']  == 0  ? ' selected="selected"' : '' ).'>'.$engine->get_translation('SortCommentAsc');?></option>
+						<option value="1" <?php echo ( $engine->config['sorting_comments']  == 1  ? ' selected="selected"' : '' ).'>'.$engine->get_translation('SortCommentDesc');?></option>
+					</select>
 				</td>
 			</tr>
 			<tr>

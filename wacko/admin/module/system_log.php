@@ -30,6 +30,16 @@ function admin_system_log(&$engine, &$module)
 		$engine->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'])));
 	}
 
+	if (isset($_POST['action']) && $_POST['action'] == 'purge_log')
+	{
+		$sql = "TRUNCATE {$engine->config['table_prefix']}log";
+		$engine->sql_query($sql);
+
+		// queries
+		$engine->cache->invalidate_sql_cache();
+
+	}
+
 	if (isset($_POST['update']) || isset($_GET['level_mod']))
 	{
 		$_level_mod	= isset($_POST['level_mod'])	? $_POST['level_mod']	: (isset($_GET['level_mod'])	? $_GET['level_mod'] : '');

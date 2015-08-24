@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['user_users'] = array(
-		'order'	=> 18,
+		'order'	=> 19,
 		'cat'	=> 'Users',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'user_users',
@@ -164,7 +164,7 @@ function admin_user_users(&$engine, &$module)
 			$change_summary		= $engine->get_translation('NewUserAccount'); //'auto created';
 
 			// add user page
-			$engine->save_page($engine->config['users_page'].'/'.$_POST['newname'], '', $user_page_template, $change_summary, '', '', '', ($_POST['lang'] ? $_POST['lang'] : $engine->config['language']), '', $_POST['newname'], true);
+			$engine->save_page($engine->config['users_page'].'/'.$_POST['newname'], '', $user_page_template, $change_summary, '', '', '', '', ($_POST['lang'] ? $_POST['lang'] : $engine->config['language']), '', $_POST['newname'], true);
 
 			$engine->show_message($engine->get_translation('UsersAdded'));
 			$engine->log(4, "Created a new user //'{$_POST['newname']}'//");

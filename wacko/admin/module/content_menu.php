@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['content_menu'] = array(
-		'order'	=> 13,
+		'order'	=> 14,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_menu',

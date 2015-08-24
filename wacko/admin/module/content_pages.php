@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['content_pages'] = array(
-		'order'	=> 11,
+		'order'	=> 12,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_pages',
