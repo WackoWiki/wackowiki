@@ -215,6 +215,7 @@ $config_db['ip_login_limit_max']			= $config['ip_login_limit_max'];
 $config_db['keep_deleted_time']				= $config['keep_deleted_time'];
 $config_db['language']						= $config['language'];
 $config_db['license']						= $config['license'];
+$config_db['link_target']					= $config['link_target'];
 $config_db['log_default_show']				= $config['log_default_show'];
 $config_db['log_level']						= $config['log_level'];
 $config_db['log_purge_time']				= $config['log_purge_time'];
