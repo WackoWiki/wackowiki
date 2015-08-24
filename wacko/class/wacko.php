@@ -1658,11 +1658,12 @@ class Wacko
 	// $edit_note		- edit summary
 	// $minor_edit		- minor edit
 	// $comment_on_id	- commented page id
+	// $parent_id		- commented parent id
 	// $lang			- page language
 	// $mute			- supress email reminders and xml rss recompilation
 	// $user_name		- attach guest pseudonym
 	// $user_page		- user is page owner
-	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = '', $mute = false, $user_name = false, $user_page = false)
+	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = false, $user_page = false)
 	{
 		$desc = '';
 		// user data
@@ -1879,6 +1880,7 @@ class Wacko
 					"INSERT INTO ".$this->config['table_prefix']."page SET ".
 						"comment_on_id 	= '".(int)$comment_on_id."', ".
 						(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
+						"parent_id 		= '".(int)$parent_id."', ".
 						"created		= NOW(), ".
 						"modified		= NOW(), ".
 						"commented		= NOW(), ".
@@ -2851,7 +2853,7 @@ class Wacko
 					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
 				}
 			}
-			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip
+			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - only global file
 			{
 				#echo '####2: file:/some.zip <br />'.$arr[1].'####<br />';
 				$file_name = $arr[1];
@@ -3231,6 +3233,7 @@ class Wacko
 
 			$icon			= str_replace('{theme}', $this->config['theme_url'], $icon);
 			$accicon		= str_replace('{theme}', $this->config['theme_url'], $accicon);
+			// see lang/wacko.all.php
 			$res			= $this->get_translation('tpl.'.$tpl);
 			$text			= trim($text);
 
@@ -3303,16 +3306,26 @@ class Wacko
 					$class	= 'outerlink';
 				}
 
+				if ($this->config['link_target'])
+				{
+					$target = 'target="_blank"';
+				}
+				else
+				{
+					$target = '';
+				}
+
 				if (isset($this->method) && $this->method == 'print')
 				{
 					$icon	= '';
 				}
 
-				$res		= str_replace('{icon}',		$icon,	$res);
-				$res		= str_replace('{class}',	$class,	$res);
-				$res		= str_replace('{title}',	$title,	$res);
-				$res		= str_replace('{url}',		$url,	$res);
-				$res		= str_replace('{text}',		$text,	$res);
+				$res		= str_replace('{target}',	$target,	$res);
+				$res		= str_replace('{icon}',		$icon,		$res);
+				$res		= str_replace('{class}',	$class,		$res);
+				$res		= str_replace('{title}',	$title,		$res);
+				$res		= str_replace('{url}',		$url,		$res);
+				$res		= str_replace('{text}',		$text,		$res);
 
 				// numerated outer links and file links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $url != $text && $url != '404' && $url != '403')
@@ -3460,6 +3473,7 @@ class Wacko
 		return preg_match('/^'.$this->language['UPPER'].$this->language['LOWER'].'+'.$this->language['UPPERNUM'].$this->language['ALPHANUM'].'*$/', $text);
 	}
 
+	// TRACK LINKS
 	function track_link_to($tag)
 	{
 		$this->linktable[] = $tag;
@@ -4030,8 +4044,8 @@ class Wacko
 
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
-		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, t.session_time, t.cookie_token ';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, t.cookie_token ';
+		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.cookie_token ';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
@@ -4584,13 +4598,13 @@ class Wacko
 		return false;
 	}
 
-	function load_comments($page_id, $limit = 0, $count = 30, $deleted = 0)
+	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0)
 	{
 		// avoid results if $page_id is 0 (page does not exists)
 		if ($page_id)
 		{
 			return $this->load_all(
-				"SELECT p.page_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name ".
+				"SELECT p.page_id, parent_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
@@ -4599,6 +4613,9 @@ class Wacko
 						? "AND p.deleted <> '1' "
 						: "").
 				"ORDER BY p.created ".
+					($sort
+						? "DESC "
+						: "").
 				"LIMIT {$limit}, {$count}");
 		}
 	}
@@ -6247,7 +6264,7 @@ class Wacko
 
 		return
 			// save
-			$this->save_page($new_tag, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user_name = false);
+			$this->save_page($new_tag, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = $page['lang'], $mute = false, $user_name = false);
 	}
 
 	function rename_page($tag, $new_tag, $new_supertag = '')

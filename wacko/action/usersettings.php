@@ -130,6 +130,7 @@ else if ($user = $this->get_user())
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
 					"timezone			= '".(float)$_POST['timezone']."', ".
 					"dst				= '".(int)$_POST['dst']."', ".
+					"sorting_comments	= '".(int)$_POST['sorting_comments']."', ".
 					"revisions_count	= '".(int)$_POST['revisions_count']."', ".
 					"changes_count		= '".(int)$_POST['changes_count']."' "
 				).
@@ -502,12 +503,37 @@ else if ($user = $this->get_user())
 		</td>
 	</tr>
 	<tr class="lined">
+		<th class="form_left"><label for="sorting_comments"><?php echo $this->get_translation('SortComment');?></label></th>
+		<td class="form_right">
+			<select id="sorting_comments" name="sorting_comments">
+				<option value="0" <?php echo ( $user['sorting_comments']  == 0  ? ' selected="selected"' : '' ).'>'.$this->get_translation('SortCommentAsc');?></option>
+				<option value="1" <?php echo ( $user['sorting_comments']  == 1  ? ' selected="selected"' : '' ).'>'.$this->get_translation('SortCommentDesc');?></option>
+			</select>
+		</td>
+	</tr>
+	<tr class="lined">
 		<th class="form_left" scope="row"><label for="changes_count"><?php echo $this->get_translation('RecentChangesLimit');?></label></th>
-		<td class="form_right"><input type="number" id="changes_count" name="changes_count" value="<?php echo $user['changes_count'] ?>" size="40" /></td>
+		<td class="form_right">
+			<select id="changes_count" name="changes_count">
+				<option value="10" <?php echo ( $user['changes_count']  == 10  ? ' selected="selected"' : '' );?>>10</option>
+				<option value="20" <?php echo ( $user['changes_count']  == 20  ? ' selected="selected"' : '' );?>>20</option>
+				<option value="30" <?php echo ( $user['changes_count']  == 30  ? ' selected="selected"' : '' );?>>30</option>
+				<option value="50" <?php echo ( $user['changes_count']  == 50  ? ' selected="selected"' : '' );?>>50</option>
+				<option value="100" <?php echo ( $user['changes_count'] == 100 ? ' selected="selected"' : '' );?>>100</option>
+			</select>
+		</td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="revisions_count"><?php echo $this->get_translation('RevisionListLimit');?></label></th>
-		<td class="form_right"><input type="number" id="revisions_count" name="revisions_count" value="<?php echo $user['revisions_count'] ?>" size="40" /></td>
+		<td class="form_right">
+			<select id="revisions_count" name="revisions_count">
+				<option value="10" <?php echo ( $user['revisions_count']  == 10  ? ' selected="selected"' : '' );?>>10</option>
+				<option value="20" <?php echo ( $user['revisions_count']  == 20  ? ' selected="selected"' : '' );?>>20</option>
+				<option value="30" <?php echo ( $user['revisions_count']  == 30  ? ' selected="selected"' : '' );?>>30</option>
+				<option value="50" <?php echo ( $user['revisions_count']  == 50  ? ' selected="selected"' : '' );?>>50</option>
+				<option value="100" <?php echo ( $user['revisions_count'] == 100 ? ' selected="selected"' : '' );?>>100</option>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<td></td>

@@ -76,7 +76,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	{
 		// resave modified body
 		$page['body'] = preg_replace('/^==.*?==/', '=='.$title.'==', $page['body']);
-		$engine->save_page($new_tag, $title, $page['body'], '', '', '', '', '', true, false);
+		$engine->save_page($new_tag, $title, $page['body'], '', '', '', '', '', '', true, false);
 	}
 
 	// restore forum context
@@ -129,7 +129,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 				$page = $engine->load_page($topic);
 
 				$page['body'] = preg_replace('/^==.*?==(\\n)*/', '', str_replace("\r", '', $page['body']));
-				$engine->save_page('Comment'.$num, false, $page['body'], '', '', '', $base_id, '', true);
+				$engine->save_page('Comment'.$num, false, $page['body'], '', '', '', $base_id, '', '', true);
 
 				// restore creation date
 				$engine->sql_query(
@@ -214,7 +214,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 
 	// resave modified body
 	$page['body']	= '=='.$title."==\n\n".$page['body'];
-	$engine->save_page($new_tag, $title, $page['body'], '', '', '', 0, '', true);
+	$engine->save_page($new_tag, $title, $page['body'], '', '', '', 0, '', '', true);
 
 	// set page context back
 	$engine->page = $oldpage;

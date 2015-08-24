@@ -7,13 +7,20 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('comment') && $this->has_access('read'))
 {
-	$body	= str_replace("\r", '', $_POST['body']);
-	$body	= trim($_POST['body']);
-	$error	= '';
+	$body		= str_replace("\r", '', $_POST['body']);
+	$body		= trim($_POST['body']);
+	$error		= '';
+	$title		= '';
+	$parent_id	= '';
 
 	if(isset($_POST['title']))
 	{
 		$title = trim($_POST['title']);
+	}
+
+	if(isset($_POST['parent_id']))
+	{
+		$parent_id = (int)$_POST['parent_id'];
 	}
 
 	// check form token
@@ -138,7 +145,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$comment_on_id = $this->page['page_id'];
 
 			// store new comment
-			$body_r	= $this->save_page('Comment'.$num, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id);
+			$body_r	= $this->save_page('Comment'.$num, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id, $parent_id);
 
 			// log event
 			$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', $this->config['language']))));

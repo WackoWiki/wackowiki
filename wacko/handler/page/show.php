@@ -24,7 +24,7 @@ if ($this->page['comment_on_id'])
 		"WHERE comment_on_id = '".$this->page['comment_on_id']."' ".
 			"AND created <= '".quote($this->dblink, $this->page['created'])."' ".
 		"GROUP BY comment_on_id ".
-		"LIMIT 1", 1);
+		"LIMIT 1", true);
 
 	// determine comments page number where this comment is located
 	$p = ceil($count['n'] / $this->config['comments_count']);
@@ -52,6 +52,18 @@ if ($this->has_access('read'))
 		{
 			#$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
 			$message = 'BACKUP of deleted page!'; // TODO: localize and add description: to restore the page you ...
+			$message .= '<br />';
+			if ($this->is_admin())
+			{
+				$message .= $this->form_open('restore_page', 'edit');
+				#$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
+				$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
+				#$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
+				$message .= '<input type="submit" value="'.$this->get_translation('RestoreButton').'" />';
+				#$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('EditCancelButton').'"/></a>';
+				$message .= $this->form_close();
+			}
+
 			$this->show_message($message, 'info');
 		}
 
@@ -63,21 +75,38 @@ if ($this->has_access('read'))
 				str_replace('%2', $this->tag,
 				str_replace('%3', $this->get_page_time_formatted(),
 				str_replace('%4', '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>',
-			$this->get_translation('Revision')))));
+				$this->get_translation('Revision')))));
 
 			// if this is an old revision, display ReEdit button
 			if ($this->has_access('write'))
 			{
-				$latest = $this->load_page($this->tag);
+				// check against latest edit for overwrite warning
+				if ($this->page['deleted'] == 1)
+				{
+					$latest['modified'] = date('Y-m-d H:i:s');
+				}
+				else
+				{
+					#$latest = $this->load_page($this->tag);
+					$latest = $this->load_page($this->tag, '', '', '', '', $deleted = 1);
+				}
 
-				$message .= '<br />';
-				$message .= $this->form_open('edit_revision', 'edit');
-				$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
-				$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
-				$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
-				$message .= '<input type="submit" value="'.$this->get_translation('ReEditOldRevision').'" />';
-				$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('EditCancelButton').'"/></a>';
-				$message .= $this->form_close();
+				if ($latest['deleted'] == 1)
+				{
+					$message2 = 'BACKUP of deleted page!';
+					$this->show_message($message2, 'info');
+				}
+				else
+				{
+					$message .= '<br />';
+					$message .= $this->form_open('edit_revision', 'edit');
+					$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
+					$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
+					$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
+					$message .= '<input type="submit" value="'.$this->get_translation('ReEditOldRevision').'" />';
+					$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('EditCancelButton').'"/></a>';
+					$message .= $this->form_close();
+				}
 			}
 
 			$this->show_message($message, 'revisioninfo');

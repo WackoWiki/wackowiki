@@ -10,6 +10,7 @@ $error			= '';
 $minor_edit		= 0;
 $output			= '';
 $reviewed		= 0;
+$title			= '';
 
 // invoke autocomplete if needed
 if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
@@ -307,7 +308,7 @@ if ($this->has_access('read')
 	{
 		$title				= $_POST['title'];
 	}
-	else
+	else if (isset($this->page['title']))
 	{
 		$title				= $this->page['title'];
 	}
@@ -322,7 +323,7 @@ if ($this->has_access('read')
 	$output .= htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</textarea><br />\n";
 
 	// comment title
-	if ($this->page['comment_on_id'] != 0)
+	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
 		$output .= '<label for="addcomment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
 		$output .= '<input id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
@@ -437,7 +438,7 @@ if ($this->has_access('read')
 		}
 	}
 ?>
-		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
+		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>image/wikiedit/');
 	</script>
 	<br />
 

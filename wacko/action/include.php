@@ -48,7 +48,7 @@ else
 
 	if (!$inc_page = $this->load_page($page, 0, $revision_id))
 	{
-		echo '<em> '.$this->get_translation('SourcePageDoesntExist').'('.$this->link('/'.$page).")</em>\n";
+		echo '<em> '.$this->get_translation('SourcePageDoesntExist').' ('.$this->link('/'.$page).")</em>\n";
 	}
 	else
 	{

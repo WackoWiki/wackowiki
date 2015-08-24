@@ -276,6 +276,7 @@ $config_db['smtp_password']					= $config['smtp_password'];
 $config_db['smtp_port']						= $config['smtp_port'];
 $config_db['smtp_username']					= $config['smtp_username'];
 $config_db['show_spaces']					= $config['show_spaces'];
+$config_db['sorting_comments']				= $config['sorting_comments'];
 $config_db['spam_filter']					= $config['spam_filter'];
 $config_db['standard_handlers']				= $config['standard_handlers'];
 $config_db['store_deleted_pages']			= $config['store_deleted_pages'];
@@ -490,6 +491,7 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$l
 
 // user setting
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']);
+$upgrade_5_4_1[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_1,	$lang['ErrorAlteringTable']);
 
 // usergroup
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
