@@ -122,6 +122,7 @@ $wacko_config_defaults = array(
 	'allow_rawhtml' => 1,
 	'disable_safehtml' => 0,
 	'urls_underscores' => 0,
+	'link_target' => 0,
 
 	// TODO: uniform use of term 'page' and 'cluster' ('groups_page' but 'news_cluster')
 	'groups_page' => 'Groups',
@@ -210,6 +211,7 @@ $wacko_config_defaults = array(
 	'cache_sql_ttl' => 600,
 
 	'spam_filter' => 1,
+	'sorting_comments' => 0,
 	'comment_delay' => 30,
 	'intercom_delay' => 30,
 	'moders_can_edit' => 3,

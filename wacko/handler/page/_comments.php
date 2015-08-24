@@ -37,8 +37,17 @@ $pagination = $this->pagination($this->get_comments_count(), $this->config['comm
 // comments form output begins
 if ($this->has_access('read'))
 {
+	// sorting comments ASC / DESC
+	$sort_comment = null;
+	$sort_comment = $this->get_user_setting('sorting_comments');
+
+	if (!isset($sort_comment))
+	{
+		$sort_comment	= $this->config['sorting_comments'];
+	}
+
 	// load comments for this page
-	$comments = $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count']);
+	$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count'], $sort_comment);
 
 	// store comments display in session
 	if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']]))
@@ -97,6 +106,9 @@ if ($this->has_access('read'))
 		// display comments themselves
 		if ($comments)
 		{
+			// TODO: evaluate -> option / array to handle nested comments
+			// display relation as @link to an extra handler which filters / shows only the current tree
+
 			echo '<ol id="comments">'."\n";
 
 			foreach ($comments as $comment)
@@ -106,41 +118,41 @@ if ($this->has_access('read'))
 
 				// show remove comment button
 				if ($this->is_admin() ||
-				(!$this->config['remove_onlyadmins'] &&
-					($this->is_owner($comment['page_id']) ||
-					($this->config['owners_can_remove_comments'] && $this->is_owner($this->page['page_id']))
+				(!$this->config['remove_onlyadmins']
+					&& ($this->is_owner($comment['page_id'])
+					|| ($this->config['owners_can_remove_comments'] && $this->is_owner($this->page['page_id']))
 				)))
 				{
-					echo '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icons/delete_comment.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" align="right" /></a>';
+					echo '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icons/delete_comment.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" style="float: right; padding: 2px;"/></a>';
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->is_owner($comment['page_id']))
 				{
-					echo '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icons/edit.png" title="'.$this->get_translation('EditCommentTip').'" alt="'.$this->get_translation('EditComment').'" align="right" /></a>';
+					echo '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icons/edit.png" title="'.$this->get_translation('EditCommentTip').'" alt="'.$this->get_translation('EditComment').'" style="float: right; padding: 2px;"/></a>';
 				}
 
 				if ($comment['body_r'])
 				{
-					$strings = $comment['body_r'];
+					$pre_body = $comment['body_r'];
 				}
 				else
 				{
-					$strings = $this->format($comment['body'], 'wacko');
+					$pre_body = $this->format($comment['body'], 'wacko');
 				}
 
 				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
 
 				// print comment
 				// header
-				echo "<div class=\"commenttext\">\n";
-				echo "<div class=\"commenttitle\">\n<a href=\"".$this->href('', $comment['tag'])."\">".$comment['title']."</a>\n</div>\n";
-				echo $this->format($strings, 'post_wacko')."\n";
+				echo '<div class="commenttext">'."\n";
+				echo '<div class="commenttitle">'."\n".'<a href="'.$this->href('', $comment['tag']).'">'.$comment['title']."</a>\n</div>\n";
+				echo $this->format($pre_body, 'post_wacko')."\n";
 				echo "</div>\n";
-				echo "<ul class=\"commentinfo\">\n".
+				echo '<ul class="commentinfo">'."\n".
 						"<li>".
 						($comment['owner_name']
-							? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name'])."\">".$comment['owner_name']."</a>"
+							? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$comment['owner_name'].'</a>'
 							: $this->get_translation('Guest')
 						).
 						"</li>".
@@ -152,10 +164,36 @@ if ($this->has_access('read'))
 							? "<li>".$this->get_translation('UsersComments').': '.$user_stats['comments'].'&nbsp;&nbsp; '.$this->get_translation('UsersPages').': '.$user_stats['pages'].'&nbsp;&nbsp; '.$this->get_translation('UsersRevisions').': '.$user_stats['revisions']."</li>\n"
 							: '').*/
 					"</ul>\n";
-				echo "</li>";
+
+				// comment footer
+				/* echo '<div class="commenttool">'."\n";
+				echo '<ul class="" style="padding-left: 0px;">'."\n".
+						"".
+						'<li class="voting">
+							<a title="Vote up" class="vote-up  count-0" href="'.$this->href('rate', '', 'vote=1').'">
+								<span class="updatable count">0</span>
+								<span class="control">&and;</span>
+							</a>
+							<a title="Vote down" class="vote-down  count-0" href="'.$this->href('rate', '', 'vote=0').'">
+								<span class="control">&or;</span>
+							</a>
+						</li>
+						<li class="bullet">.</li>
+						<li class="reply">';
+
+						// reply button
+						if ($this->is_admin() || $this->is_owner($comment['page_id']))
+						{
+							echo '<a href="'.$this->href('', '', 'parent_id='.$comment['page_id'].'#commentform').'">'.$this->get_translation('ReplyComment').'</a>';
+						}
+
+						echo '</li>'.
+						"</ul>\n";
+
+				echo "</div>\n"; */
 			}
 
-			echo "</ol>";
+			echo "</ol>\n";
 		}
 
 		if (isset($pagination['text']))
@@ -166,9 +204,11 @@ if ($this->has_access('read'))
 		// display comment form
 		if ($this->has_access('comment'))
 		{
-			echo "<div class=\"commentform\">\n";
+			$parent_id = (isset($_GET['parent_id']) && $_GET['parent_id'] ? (int)$_GET['parent_id'] : 0);
+			echo '<div class="commentform" id="commentform">'."\n";
 
 			echo $this->form_open('add_comment', 'addcomment', '', true);
+			echo '<input name="parent_id"	type="hidden" value="'.$parent_id.'" />'."\n";
 
 			// preview
 			if (!empty($preview))
@@ -181,7 +221,7 @@ if ($this->has_access('read'))
 						 '<div class="commentpreview">'."\n".
 						 '<div class="commenttitle">'.$title."</div>\n".
 						 $preview.
-						 "</div></div><br />\n";
+						 "</div>\n</div><br />\n";
 			}
 
 			// load WikiEdit
@@ -246,7 +286,7 @@ if ($this->has_access('read'))
 			}
 			?>
 
-			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
+			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>image/wikiedit/');
 			</script>
 
 			<br />
