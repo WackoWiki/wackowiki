@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['user_groups'] = array(
-		'order'	=> 19,
+		'order'	=> 20,
 		'cat'	=> 'Users',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'user_groups',
@@ -151,8 +151,8 @@ function admin_user_groups(&$engine, &$module)
 			// remove member from group
 			if (isset($_POST['remove_member']) && isset($_POST['change_member']))
 			{
-				if ($member = $engine->load_single("
-					SELECT user_name ".
+				if ($member = $engine->load_single(
+					"SELECT user_name ".
 					"FROM {$engine->config['table_prefix']}user ".
 					"WHERE user_id = '".(int)$_POST['change_member']."' ".
 					"LIMIT 1"))
