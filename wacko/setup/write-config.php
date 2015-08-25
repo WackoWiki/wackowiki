@@ -21,6 +21,7 @@ function array_to_str ($arr, $name = '')
 
 	$str .= $entries.");\n";
 	$str .= $arrays;
+
 	return $str;
 }
 
@@ -30,14 +31,32 @@ if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty
 	$config['database_port'] = $config['database_port'] = '3306';
 }
 
+if ($config['wacko_version'] == '5.0')
+{
+	// reset old default upload path to new location -> R5.0
+	if ($config['upload_path'] == 'files')
+	{
+		$config['upload_path'] = 'files/global';
+	}
+}
+
+if ($config['wacko_version'] == '5.4')
+{
+	// reset old default action path to new location -> R5.5
+	if ($config['action_path'] == 'actions')
+	{
+		$config['action_path'] = 'action';
+	}
+
+	// reset old default handler path to new location -> R5.5
+	if ($config['handler_path'] == 'handlers')
+	{
+		$config['handler_path'] = 'handler';
+	}
+}
+
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
-
-// reset old default upload path to new location
-if ($config['upload_path'] == 'files')
-{
-	$config['upload_path'] = 'files/global';
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	BEGIN MANDATORY CONFIGURATION
@@ -60,7 +79,7 @@ $config_file['recovery_password']		= $config['recovery_password'];
 // paths
 $config_file['cache_dir']				= $config['cache_dir'];
 $config_file['action_path']				= $config['action_path'];
-$config_file['class_path']			= $config['class_path'];
+$config_file['class_path']				= $config['class_path'];
 $config_file['formatter_path']			= $config['formatter_path'];
 $config_file['handler_path']			= $config['handler_path'];
 $config_file['theme_path']				= $config['theme_path'];
