@@ -77,14 +77,14 @@ else
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icons/bookmark1.png" alt="+" title="'.
+				.'icon/bookmark1.png" alt="+" title="'.
 				$this->get_translation('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icons/bookmark2.png" alt="-" title="'.
+				.'icon/bookmark2.png" alt="-" title="'.
 				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 		}
 	}
@@ -127,7 +127,7 @@ else
 					$_title = $title;
 				}
 
-				$tab = '<li class="'.$method.' active"><span><img src="'.$engine->config['theme_url'].'icons/'.$_image.'" alt="'.$title.'" />'.' '.$_title.'</span></li>'."\n";
+				$tab = '<li class="'.$method.' active"><span><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.' '.$_title.'</span></li>'."\n";
 			}
 			else
 			{
@@ -145,7 +145,7 @@ else
 					$_title = ' '.$title;
 				}
 
-				$tab = '<li class="'.$method.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$accesskey.'"><img src="'.$engine->config['theme_url'].'icons/'.$_image.'" alt="'.$title.'" />'.$_title.'</a></li>'."\n";
+				$tab = '<li class="'.$method.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$accesskey.'"><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.$_title.'</a></li>'."\n";
 			}
 			else
 			{
@@ -201,7 +201,7 @@ else
 	// show more tab
 
 	// display more icon and text
-	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icons/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> ".$this->get_translation('PageHandlerMoreTip')."</a> \n";
+	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icon/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> ".$this->get_translation('PageHandlerMoreTip')."</a> \n";
 	// only display 'more' text that shows handler list on hover
 
 	if ($this->has_access('read'))

@@ -54,14 +54,14 @@ echo $this->form_close();
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icons/bookmark1.png" alt="+" title="'.
+				.'icon/bookmark1.png" alt="+" title="'.
 				$this->get_translation('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icons/bookmark2.png" alt="-" title="'.
+				.'icon/bookmark2.png" alt="-" title="'.
 				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 		}
 	}
@@ -92,7 +92,7 @@ echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage'));
   <br />
   <?php echo $this->get_translation('LoginPassword') ?>:<br />
   <input type="password" name="password" class="login" size="8" alt="password" />
-  <input type="image" src="<?php echo $this->config['theme_url'] ?>icons/login.png" alt=">>>" align="top" />
+  <input type="image" src="<?php echo $this->config['theme_url'] ?>icon/login.png" alt=">>>" align="top" />
   <?php // Closing Login form
 echo $this->form_close();
 ?>

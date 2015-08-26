@@ -52,7 +52,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 	</div>
 	<div class="TopLeft">
 		<?php if ($this->get_user()) { ?>
-		<img src="<?php echo $this->config['theme_url'] ?>icons/role.png" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+		<img src="<?php echo $this->config['theme_url'] ?>icon/role.png" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
 		<?php
 echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
 		| <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', 'Login', 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small>
@@ -62,7 +62,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 				<td>
 			<?php echo $this->form_open('login', '', 'post', false, 'Login'); ?>
 			<input type="hidden" name="action" value="login" />
-			<img src="<?php echo $this->config['theme_url'] ?>icons/norole.png" width="9" height="15" alt="" /></td>
+			<img src="<?php echo $this->config['theme_url'] ?>icon/norole.png" width="9" height="15" alt="" /></td>
 				<td><strong><?php echo $this->get_translation('LoginWelcome') ?>:&nbsp;</strong> </td>
 				<td><input type="text" name="name" size="18" /></td>
 				<td>&nbsp;&nbsp;&nbsp;<?php echo $this->get_translation('LoginPassword') ?>:&nbsp; </td>
@@ -122,24 +122,24 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 			"<a href=\"".$this->href('watch')."\">".$this->get_translation('RemoveWatch')."</a>" :
 			"<a href=\"".$this->href('watch')."\">".$this->get_translation('SetWatch')."</a>" ) ?> ::
 	<?php if (!in_array($this->page['page_id'], $this->get_menu_links())) {?>
-	<a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icons/bookmark.png" width="12" height="12" alt="<?php echo $this->get_translation('AddToBookmarks') ?>" /></a> ::
+	<a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icon/bookmark.png" width="12" height="12" alt="<?php echo $this->get_translation('AddToBookmarks') ?>" /></a> ::
 <?php } else { ?>
 	<a href="<?php echo $this->href('', '', "removebookmark=yes")?>">
-	<img src="<?php echo $this->config['theme_url'] ?>icons/unbookmark.png" width="12" height="12" alt="<?php echo $this->get_translation('RemoveFromBookmarks') ?>" /></a> ::
+	<img src="<?php echo $this->config['theme_url'] ?>icon/unbookmark.png" width="12" height="12" alt="<?php echo $this->get_translation('RemoveFromBookmarks') ?>" /></a> ::
 <?php } }
 ?>
 <?php echo"<a href=\"".$this->href('print')."\">" ?><img
-	src="<?php echo $this->config['theme_url'] ?>icons/print.png"
+	src="<?php echo $this->config['theme_url'] ?>icon/print.png"
 	width="21" height="20"
 	alt="<?php echo $this->get_translation('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('wordprocessor')."\">" ?><img
-	src="<?php echo $this->config['theme_url'] ?>icons/wordprocessor.png"
+	src="<?php echo $this->config['theme_url'] ?>icon/wordprocessor.png"
 	width="16" height="16"
 	alt="<?php echo $this->get_translation('WordprocessorVersion') ?>" /></a></div>
 <div class="header">
 	<h1><span class="Main"><?php echo $this->config['site_name'] ?>:</span> <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?> </h1>
 <?php if (($this->method != 'edit') || !$this->has_access('write')) { ?>
-	<div style="background-image:url(<?php echo $this->config['theme_url'] ?>icons/shade2.png);" class="Shade"><img
-	src="<?php echo $this->config['theme_url'] ?>icons/shade1.png"
+	<div style="background-image:url(<?php echo $this->config['theme_url'] ?>icon/shade2.png);" class="Shade"><img
+	src="<?php echo $this->config['theme_url'] ?>icon/shade1.png"
 	width="106" height="6" alt="" /></div>
 <?php } ?>
 </div>

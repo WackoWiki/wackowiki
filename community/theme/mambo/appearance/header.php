@@ -76,14 +76,14 @@ require ($this->config['theme_path'].'/_common/_header.php');
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icons/bookmark1.png" alt="+" title="'.
+				.'icon/bookmark1.png" alt="+" title="'.
 				$this->get_translation('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icons/bookmark2.png" alt="-" title="'.
+				.'icon/bookmark2.png" alt="-" title="'.
 				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 		}
 	}
@@ -191,14 +191,14 @@ require ($this->config['theme_path'].'/_common/_header.php');
 
 <div class="header">
 	<?php echo ($this->is_watched === true
-			? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\" /></a>"
-			: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a>" ) ?> |
-	<?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.png\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";?> |
+			? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\" /></a>"
+			: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a>" ) ?> |
+	<?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icon/print.png\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";?> |
 	<?php
 		if ($this->get_user()) { ?>
 		<span class="nobr">
 				<?php echo $this->get_translation('YouAre'); ?>
-				<img src="<?php echo $this->config['theme_url'] ?>icons/user.png" width="12" height="12" style="vertical-align: baseline; " alt=""/>
+				<img src="<?php echo $this->config['theme_url'] ?>icon/user.png" width="12" height="12" style="vertical-align: baseline; " alt=""/>
 				<?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 			</span>
 			<small>

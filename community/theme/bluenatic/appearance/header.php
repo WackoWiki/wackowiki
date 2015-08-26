@@ -16,7 +16,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" href="<?php echo $this->config['base_url'].$this->config['theme_path']; ?>/_common/X11colors.css" /><?php } ?>
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/page.css" media="screen" />
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/wacko.css" media="screen" />
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->config['theme_url']; ?>icons/icon.png" />
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->config['theme_url']; ?>icon/icon.png" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
@@ -123,14 +123,14 @@ else if($this->has_access('write'))
 						{
 							echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 								.'"><img src="'. $this->config['theme_url']
-								.'icons/bookmark-remove.png" alt="+" title="'.
+								.'icon/bookmark-remove.png" alt="+" title="'.
 								$this->get_translation('AddToBookmarks') .'"/></a></li>';
 						}
 						else
 						{
 							echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 								.'"><img src="'. $this->config['theme_url']
-								.'icons/bookmark-add.png" alt="-" title="'.
+								.'icon/bookmark-add.png" alt="-" title="'.
 								$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 						}
 					}*/
@@ -173,7 +173,7 @@ else if($this->has_access('write'))
 				<input type="text" name="name" size="15" class="login" />
 				<?php echo $this->get_translation('LoginPassword'); ?>
 				<input type="password" name="password" size="10" class="login" />
-				<input type="image" src="<?php echo $this->config['theme_url']; ?>icons/login.png" alt="<?php echo $this->get_translation('LoginWelcome'); ?>" class="login" />
+				<input type="image" src="<?php echo $this->config['theme_url']; ?>icon/login.png" alt="<?php echo $this->get_translation('LoginWelcome'); ?>" class="login" />
 				<?php echo $this->form_close(); ?>
 			</div>
 			<?php } ?>

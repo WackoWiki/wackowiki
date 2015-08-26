@@ -28,7 +28,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	<link rel="stylesheet" href="<?php echo $this->config['base_url'].$this->config['theme_path']; ?>/_common/X11colors.css" />
 	<?php } ?>
 	<link media="print" rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
-	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icon/favicon.ico" type="image/x-icon" />
 	<link  rel="start" title="<?php echo $this->config['root_page'];?>" href="<?php echo $this->config['base_url'];?>"/>
 	<?php if ($this->config['policy_page']) {?>
 	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
@@ -113,7 +113,7 @@ if ($doubleclick == true)
 
 							// compose link with icon to bookmarks list
 							// TODO: add BookmarkTip to translation
-							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"".$this->config['theme_url']."icons/bookmark.png\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a>";
+							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"".$this->config['theme_url']."icon/bookmark.png\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a>";
 
 							// display bookmarks text
 							# ".$this->get_translation('Bookmarks')."
@@ -164,16 +164,16 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icons/spacer.png\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icon/spacer.png\" /></a></div>";
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icons/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icon/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icons/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
+							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
 						}
 						echo "\n";
 
@@ -188,7 +188,7 @@ if ($doubleclick == true)
 					if ($this->get_user())
 					{
 						// compose user identity icon with link to user page
-						echo "<a href=\"".$this->config['base_url'].$this->config['users_page']."/".$this->get_user_name()."\"><img src=\"".$this->config['theme_url']."icons/user_identity_white.png\" title=\"".$this->get_translation('YouAre').$this->get_user_name()."\" alt=\"".$this->get_translation('YouAre').$this->get_user_name()."\" /></a>\n";
+						echo "<a href=\"".$this->config['base_url'].$this->config['users_page']."/".$this->get_user_name()."\"><img src=\"".$this->config['theme_url']."icon/user_identity_white.png\" title=\"".$this->get_translation('YouAre').$this->get_user_name()."\" alt=\"".$this->get_translation('YouAre').$this->get_user_name()."\" /></a>\n";
 						?>
 						<span class="nobr">
 						<?php
@@ -201,14 +201,14 @@ if ($doubleclick == true)
 						(
 						<?php
 						// compose user account settings icon with link to account settings page
-						echo "<a href=\"".$this->config['base_url'].$this->get_translation('AccountLink')."\"><img src=\"".$this->config['theme_url']."icons/account_settings_white.png\" title=\"".$this->get_translation('AccountTip')."\" alt=\"".$this->get_translation('AccountTip')."\" /></a>\n";
+						echo "<a href=\"".$this->config['base_url'].$this->get_translation('AccountLink')."\"><img src=\"".$this->config['theme_url']."icon/account_settings_white.png\" title=\"".$this->get_translation('AccountTip')."\" alt=\"".$this->get_translation('AccountTip')."\" /></a>\n";
 						// display link to user settings page
 						echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0);
 						// display logout icon and link
 						?>
 						 |
 						<a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo "<img src=\"".$this->config['theme_url']."icons/logout.png\" title=\"".$this->get_translation('LogoutButton')."\" alt=\"".$this->get_translation('LogoutButton')."\" />"; ?>
+							href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo "<img src=\"".$this->config['theme_url']."icon/logout.png\" title=\"".$this->get_translation('LogoutButton')."\" alt=\"".$this->get_translation('LogoutButton')."\" />"; ?>
 						</a>
 						<a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
 							href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?>
@@ -276,7 +276,7 @@ if ($doubleclick == true)
 	<div class="breadcrumbs">
 	<?php
 	// display a home icon, clickable if its not the root page
-	echo ($this->page['tag'] == $this->config['root_page'] ? "<img class=\"home-icon\" src=\"".$this->config['theme_url']."icons/home_grey_suse.png\" title=\"".$this->config['root_page']."\" alt=\"".$this->config['root_page']."\" />\n" : "<a href=\"".$this->config['base_url']."\"><img class=\"home-icon\" src=\"".$this->config['theme_url']."icons/home_grey_suse.png\" title=\"".$this->config['root_page']."\" alt=\"".$this->config['root_page']."\" /></a>");
+	echo ($this->page['tag'] == $this->config['root_page'] ? "<img class=\"home-icon\" src=\"".$this->config['theme_url']."icon/home_grey_suse.png\" title=\"".$this->config['root_page']."\" alt=\"".$this->config['root_page']."\" />\n" : "<a href=\"".$this->config['base_url']."\"><img class=\"home-icon\" src=\"".$this->config['theme_url']."icon/home_grey_suse.png\" title=\"".$this->config['root_page']."\" alt=\"".$this->config['root_page']."\" /></a>");
 	echo " &gt; ";
 	// show breadcrumbs
 	echo "<span class=\"breadcrumb\">" . $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true) . "</span>";
@@ -429,16 +429,16 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icons/spacer.png\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icon/spacer.png\" /></a></div>";
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icons/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icon/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icons/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
+							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
 						}
 						echo "\n";
 
@@ -502,7 +502,7 @@ if ($doubleclick == true)
 						{
 							// TODO: add translation TocTip and TocText
 							// compose image to indicate a toc-list
-							echo "<a class=\"toc-icon\"><img src=\"".$this->config['theme_url']."icons/toc_ordered.png\" title=\"".$this->get_translation('MetaToc')."\" alt=\"".$this->get_translation('MetaToc')."\" /></a>\n";
+							echo "<a class=\"toc-icon\"><img src=\"".$this->config['theme_url']."icon/toc_ordered.png\" title=\"".$this->get_translation('MetaToc')."\" alt=\"".$this->get_translation('MetaToc')."\" /></a>\n";
 
 							// display the page toc list, numerated (?), without labels and markup
 							// toc numerated does not work as intended
@@ -531,7 +531,7 @@ if ($doubleclick == true)
 					// display a "back-to-page" button/icon next to the page tag/title
 					if ($this->method !== 'show')
 					{
-						echo "<a href=\"".$this->config['base_url'].$this->tag."\"><img src=\"".$this->config['theme_url']."icons/show_back.png\" title=\"".$this->get_translation('ShowTip')."\" alt=\"".$this->get_translation('ShowText')."\" /></a>";
+						echo "<a href=\"".$this->config['base_url'].$this->tag."\"><img src=\"".$this->config['theme_url']."icon/show_back.png\" title=\"".$this->get_translation('ShowTip')."\" alt=\"".$this->get_translation('ShowText')."\" /></a>";
 					}
 					?>
 				</div>
@@ -561,12 +561,12 @@ if ($doubleclick == true)
 								if ($display_option == 2)
 									{
 										// img + text
-										$tab = "<li class=\"$method active\"><img src=\"".$engine->config['theme_url']."icons/$image_name\" alt=\"$title\" />".$title."</li>\n";
+										$tab = "<li class=\"$method active\"><img src=\"".$engine->config['theme_url']."icon/$image_name\" alt=\"$title\" />".$title."</li>\n";
 									}
 								else if ($display_option == 1)
 								{
 									// img only
-									$tab = "<li class=\"$method active\"><img src=\"".$engine->config['theme_url']."icons/$image_name\" alt=\"$title\" /></li>\n";
+									$tab = "<li class=\"$method active\"><img src=\"".$engine->config['theme_url']."icon/$image_name\" alt=\"$title\" /></li>\n";
 								}
 							}
 							else
@@ -584,12 +584,12 @@ if ($doubleclick == true)
 								if ($display_option == 2)
 								{
 									// img and text
-									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icons/$image_name\" alt=\"$title\" />".$title."</a></li>\n";
+									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icon/$image_name\" alt=\"$title\" />".$title."</a></li>\n";
 								}
 								else if ($display_option == 1)
 								{
 									// img only
-									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icons/$image_name\" alt=\"$title\" /></a></li>\n";
+									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icon/$image_name\" alt=\"$title\" /></a></li>\n";
 								}
 							}
 							else
@@ -640,7 +640,7 @@ if ($doubleclick == true)
 					// show more tab
 					// TODO: add translation to all theme translations ... $this->get_translation('PageHandlerMoreTip')
 					// display more icon with descriptive text
-					# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icons/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> more</a> \n";
+					# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icon/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> more</a> \n";
 					// display 'more' text that shows a list with page handlers on hover
 					echo "<li class='sublist'><a href='#' id='more'>".$this->get_translation('PageHandlerMoreTip')."</a> \n\t";
 						echo "<ul class='sublist'>\n\t";

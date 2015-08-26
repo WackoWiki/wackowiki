@@ -76,14 +76,14 @@ require ($this->config['theme_path'].'/_common/_header.php');
 							{
 								echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 									.'"><img src="'. $this->config['theme_url']
-									.'icons/bookmark1.png" alt="+" title="'.
+									.'icon/bookmark1.png" alt="+" title="'.
 									$this->get_translation('AddToBookmarks') .'"/></a></li>';
 							}
 							else
 							{
 								echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 									.'"><img src="'. $this->config['theme_url']
-									.'icons/bookmark2.png" alt="-" title="'.
+									.'icon/bookmark2.png" alt="-" title="'.
 									$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 							}
 						}
@@ -124,21 +124,21 @@ require ($this->config['theme_path'].'/_common/_header.php');
 						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 
 						if ($this->has_access('write')) {
-							echo "<a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation('EditTip')."\"><img src=\"".$this->config['theme_url']."icons/edit.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('EditText')."</a>\n";
+							echo "<a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation('EditTip')."\"><img src=\"".$this->config['theme_url']."icon/edit.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('EditText')."</a>\n";
 
 						}
 						echo '<br />';
 						if ($this->page['modified']) {
-							echo "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\"><img src=\"".$this->config['theme_url']."icons/vers.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('SettingsRevisions')."</a>\n";
+							echo "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\"><img src=\"".$this->config['theme_url']."icon/vers.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('SettingsRevisions')."</a>\n";
 						}
 						// if this page exists
 						if ($this->page) {
 							// if owner is current user
 							if ($this->is_owner()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/ren.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('RenameText')."</a>");
+								print(" <a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icon/ren.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('RenameText')."</a>");
 								echo '<br />';
-								print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icons/access.png\""."style=\"vertical-align: middle\"".">".$this->get_translation('ACLText')."</a>");
+								print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icon/access.png\""."style=\"vertical-align: middle\"".">".$this->get_translation('ACLText')."</a>");
 							}
 
 							if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner()) {
@@ -148,14 +148,14 @@ require ($this->config['theme_path'].'/_common/_header.php');
 
 							if ($this->is_admin()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icons/delete.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('DeleteText')."</a>");
+								print(" <a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('DeleteText')."</a>");
 							}
 
 							echo '<br />';
-							print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icons/prop.png\""."style=\"vertical-align: middle\"".">".$this->get_translation('SettingsText')."</a>");
+							print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icon/prop.png\""."style=\"vertical-align: middle\"".">".$this->get_translation('SettingsText')."</a>");
 
 							echo '<br />';
-							print "<a href=\"".$this->href('export.xml')."\" title=\"".$this->get_translation('RevisionXMLTip')."\"><img src=\"".$this->config['theme_url']."icons/1xml.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('ExportToXML')."</a>\n";
+							print "<a href=\"".$this->href('export.xml')."\" title=\"".$this->get_translation('RevisionXMLTip')."\"><img src=\"".$this->config['theme_url']."icon/1xml.png\""."style=\"vertical-align: middle\""."\">".$this->get_translation('ExportToXML')."</a>\n";
 
 							//print $this->format( '{{TOC}}' );
 
@@ -183,13 +183,13 @@ require ($this->config['theme_path'].'/_common/_header.php');
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->is_watched === true
-		? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\" /></a>"
-		: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a>" ) ?>
-		| <?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.png\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";?>
+		? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\" /></a>"
+		: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a>" ) ?>
+		| <?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icon/print.png\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";?>
 		| <?php
 		if ($this->get_user()) { ?> <span class="nobr"> <?php echo $this->get_translation('YouAre'); ?>
 		<img
-			src="<?php echo $this->config['theme_url'] ?>icons/user.png"
+			src="<?php echo $this->config['theme_url'] ?>icon/user.png"
 			alt="" width="16" height="16"
 			style="text-align:middle; vertical-align: baseline;" /> <?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
