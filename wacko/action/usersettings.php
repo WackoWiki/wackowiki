@@ -485,7 +485,7 @@ else if ($user = $this->get_user())
 		echo '<option value="'.$offset.'" '.
 			(isset($user['timezone']) && $user['timezone'] == $offset
 				? 'selected="selected" '
-				: ($this->config['timezone'] == $offset
+				: ($this->config['timezone'] == $offset && !isset($user['timezone'])
 					? 'selected="selected" '
 					: '')
 			).'>'.$timezone."</option>\n";
