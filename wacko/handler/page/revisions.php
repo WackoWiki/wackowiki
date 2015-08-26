@@ -70,7 +70,7 @@ if ($this->has_access('read'))
 					<label for="source">'.$this->get_translation('SourceDiff').'</label>';
 		$output .= '&nbsp;&nbsp;&nbsp;
 					<a href="'.$this->href('revisions.xml').'">
-						<img src="'.$this->config['theme_url'].'icons/xml.png'.'" title="'.$this->get_translation('RevisionXMLTip').'" alt="XML" />
+						<img src="'.$this->config['theme_url'].'icon/xml.png'.'" title="'.$this->get_translation('RevisionXMLTip').'" alt="XML" />
 					</a>';
 
 		if ($this->config['minor_edit'])
