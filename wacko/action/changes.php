@@ -53,7 +53,7 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 
 	if ($root == '' && !(int)$noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/changes_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icons/xml.png'.'" title="'.$this->get_translation('RecentChangesXMLTip').'" alt="XML" /></a></span>'."<br /><br />\n";
+		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/changes_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/xml.png'.'" title="'.$this->get_translation('RecentChangesXMLTip').'" alt="XML" /></a></span>'."<br /><br />\n";
 	}
 
 	// pagination
