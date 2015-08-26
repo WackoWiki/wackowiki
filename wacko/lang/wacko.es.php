@@ -795,14 +795,14 @@ $wacko_translation = array(
 	'Any'					=> 'Todos',
 
 	//icons
-	'outericon' => '<img src="{theme}icons/web.png" alt="sitio web" />',
-	'fileicon' => '<img src="{theme}icons/file.png" alt="Archivo" />',
-	'pdficon'  => '<img src="{theme}icons/pdf.png" alt="Documento PDF" />',
-	'rdficon'  => '<img src="{theme}icons/rdf.png" alt="Documento RDF" />',
-	'emailicon' => '<img src="{theme}icons/mail.png" alt="email" />',
-	'jabbericon' => '<img src="{theme}icons/jabber.png" alt="xmpp - jabber" />',
-	'lockicon' => '<img src="{theme}icons/lock.png" alt="Accesso denegado" />',
-	'keyicon' => '<img src="{theme}icons/key.png" alt="Página con acceso especial" />',
+	'outericon' => '<img src="{theme}icon/web.png" alt="sitio web" />',
+	'fileicon' => '<img src="{theme}icon/file.png" alt="Archivo" />',
+	'pdficon'  => '<img src="{theme}icon/pdf.png" alt="Documento PDF" />',
+	'rdficon'  => '<img src="{theme}icon/rdf.png" alt="Documento RDF" />',
+	'emailicon' => '<img src="{theme}icon/mail.png" alt="email" />',
+	'jabbericon' => '<img src="{theme}icon/jabber.png" alt="xmpp - jabber" />',
+	'lockicon' => '<img src="{theme}icon/lock.png" alt="Accesso denegado" />',
+	'keyicon' => '<img src="{theme}icon/key.png" alt="Página con acceso especial" />',
 	'wantedicon' => '?',
 
 	// My Groups

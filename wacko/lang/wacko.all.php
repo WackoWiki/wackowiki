@@ -47,9 +47,9 @@ $wacko_all_resource = array(
 	'UpLinkIcon'	=> '../',
 
 	// mime (temp)
-	'texticon'		=> '<img src="{theme}icons/txt.png" alt="Text" />',
-	'odticon'		=> '<img src="{theme}icons/odt.png" alt="OpenDocument" />',
-	'imageicon'		=> '<img src="{theme}icons/image.png" alt="Image" />',
+	'texticon'		=> '<img src="{theme}icon/txt.png" alt="Text" />',
+	'odticon'		=> '<img src="{theme}icon/odt.png" alt="OpenDocument" />',
+	'imageicon'		=> '<img src="{theme}icon/image.png" alt="Image" />',
 );
 
 ?>

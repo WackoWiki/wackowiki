@@ -33,7 +33,7 @@ if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty
 
 if ($config['wacko_version'] == '5.0')
 {
-	// reset old default upload path to new location -> R5.0
+	// reset old default upload path to new location
 	if ($config['upload_path'] == 'files')
 	{
 		$config['upload_path'] = 'files/global';
@@ -42,13 +42,13 @@ if ($config['wacko_version'] == '5.0')
 
 if ($config['wacko_version'] == '5.4')
 {
-	// reset old default action path to new location -> R5.5
+	// reset old default action path to new location
 	if ($config['action_path'] == 'actions')
 	{
 		$config['action_path'] = 'action';
 	}
 
-	// reset old default handler path to new location -> R5.5
+	// reset old default handler path to new location
 	if ($config['handler_path'] == 'handlers')
 	{
 		$config['handler_path'] = 'handler';
