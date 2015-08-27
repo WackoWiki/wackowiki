@@ -56,6 +56,8 @@ $lang = array(
 'HomeDefault' => 'KoduLeht',
 'MultiLang' => 'Mitmekeelne reşiim',
 'MultiLangDesc' => 'Mitmekeelne reşiim võimaldab ühe installatsiooni sees kasutada erinevatel lehtedele erinevaid keelte määranguid. Kui see reşiim on lubatud, siis installeerimise käigus tekitatakse kõigi võimalike keelte jaoks, mis paketiga kaasas on, ühesugused lehed erinevates keeltes.',
+'AllowedLang' => 'Allowed Languages',
+'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Adminni nimi',
 'AdminDesc' => 'Sisesta administraatori kasutajanimi. Peaks olema <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiNimi</a> (e.g. WikiAdmin).',
 'Password' => 'Sisesta parool',

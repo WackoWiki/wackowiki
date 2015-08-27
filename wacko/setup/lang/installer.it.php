@@ -56,6 +56,8 @@ $lang = array(
 'HomeDefault' => 'HomePage',
 'MultiLang' => 'Multi Language Mode',
 'MultiLangDesc' => 'Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial pages for all languages available in distribution.',
+'AllowedLang' => 'Allowed Languages',
+'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Nome dell\'amministratore',
 'AdminDesc' => 'Immetti username dell\'amministratore (dovrà essere un <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>) (e.g. WikiAdmin).',
 'Password' => 'Admin Password',

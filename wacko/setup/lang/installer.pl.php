@@ -56,6 +56,8 @@ $lang = array(
 'HomeDefault' => 'HomePage',
 'MultiLang' => 'Tryb Wieloj&#281;zyczny',
 'MultiLangDesc' => 'Tryb Wieloj&#281;zyczny pozwala posiada&#263; strony z r&#243;&#380;nymi ustawieniami j&#281;zykowymi za pomoc&#261; jednej instalacji. Je&#380;eli ten tryb jest w&#322;&#261;czony, instalator stworzy strony pocz&#261;tkowe dla wszystkich j&#281;zyk&#243;w dost&#281;pnych w dystrybucji.',
+'AllowedLang' => 'Allowed Languages',
+'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Nazwa admina',
 'AdminDesc' => 'Wpisz nazw&#281; administratora. Powinna by&#263; <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">Naz&#261;Wiki</a> (e.g. WikiAdmin).',
 'Password' => 'Admina wpisz has&#322;o',
