@@ -56,6 +56,8 @@ $lang = array(
 'HomeDefault' => 'HomePage',
 'MultiLang' => 'Mode multilingue',
 'MultiLangDesc' => 'Le mode multilingue permet d&rsquo;avoir des pages avec plusieurs réglages de langue sur le même site. Si ce mode est choisi, l&rsquo;installeur crée un jeu de pages de base dans chacune des langues incluses dans la distribution.',
+'AllowedLang' => 'Allowed Languages',
+'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Nom de l&rsquo;administrateur',
 'AdminDesc' => 'Indiquez le nom de l&rsquo;administrateur, ce doit être un <a href="http://wackowiki.sourceforge.net/doc/Doc/Francophone/NomWiki" title="Voir l&rsquo;aide" target="_blank">Nom Wiki</a> (e.g. WikiAdmin).',
 'Password' => 'Mot de passe de l&rsquo;administrateur',

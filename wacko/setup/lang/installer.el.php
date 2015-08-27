@@ -58,6 +58,8 @@ $lang = array(
 'HomeDefault' => 'HomePage',
 'MultiLang' => 'Πολυγλωσσική Υποστήριξη',
 'MultiLangDesc' => 'Η πολυγλωσσική υποστήριξη σας επιτρέπει να έχετε σελίδες με διαφορετικές γλωσσικές ρυθμίσεις μέσα σε μία μόνη εγκατάσταση. Εάν αυτή η επιλογή είναι ενεργοποιημένη, τότε το πρόγραμμα εγκατάστασης θα δημιουργήσει αρχικές σελίδες για όλες τις διαθέσιμες γλώσσες στην διανομή.',
+'AllowedLang' => 'Allowed Languages',
+'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Όνομα Διαχειριστή',
 'AdminDesc' => 'Εισάγεται το όνομα του διαχειριστή, αυτό πρέπει να είναι ένα <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. WikiAdmin).',
 'Password' => 'Συνθηματικό Διαχειριστή',

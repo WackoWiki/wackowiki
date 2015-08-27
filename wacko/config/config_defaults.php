@@ -77,6 +77,7 @@ $wacko_config_defaults = array(
 
 	'language' => 'en',
 	'multilanguage' => 0,
+	'allowed_languages' => 0,
 
 	'theme' => 'default',
 	'allow_themes' => 0,

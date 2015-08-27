@@ -56,6 +56,8 @@ $lang = array(
 'HomeDefault' => 'HomePage',
 'MultiLang' => 'Режим многоязычности',
 'MultiLangDesc' => 'Режим многоязычности позволяет держать страницы на разных языках в одной вики. Если режим включён, программа установки создаст начальные страницы для всех языков, включённых в дистрибутив.',
+'AllowedLang' => 'Allowed Languages',
+'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Имя администратора',
 'AdminDesc' => 'Введите имя администратора, оно должно быть <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">ВикиИменем</a> (без русских букв) (например, WikiAdmin).',
 'Password' => 'Пароль администратора',

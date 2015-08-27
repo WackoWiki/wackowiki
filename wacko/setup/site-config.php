@@ -36,6 +36,41 @@
 	// -->
 </script>
 
+<?php
+// TODO: refactor -> same function as in wacko class
+// show pre selected
+function available_languages()
+{
+	#if (!$this->_lang_list)
+	#{
+		// subset
+
+		#{
+			// all available languages
+			$handle = opendir('lang');
+
+			while (false !== ($file = readdir($handle)))
+			{
+				if ($file != '.'
+				&& $file != '..'
+				&& $file != 'wacko.all.php'
+				&& !is_dir('lang/'.$file)
+				&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+				{
+					$lang_list[] = $match[1];
+				}
+			}
+
+			closedir($handle);
+			sort($lang_list, SORT_STRING);
+			#$this->_lang_list = $lang_list;
+		#}
+	#}
+
+	return $lang_list;
+}
+?>
+
 <form action="<?php echo my_location() ?>?installAction=database-config" method="post" name="form1">
 <?php
 
@@ -43,6 +78,7 @@ write_config_hidden_nodes(array(
 	'site_name'		=> '',
 	'root_page'		=> '',
 	'multilanguage'	=> '',
+	'allowed_languages'	=> '',
 	'admin_name'	=> '',
 	'password'		=> '',
 	'admin_email'	=> '',
@@ -80,7 +116,48 @@ else
    <label class="indented_label" for="wiki_multilanguage"><?php echo $lang['Enabled'];?></label>
    <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? 'checked="checked"' : '' ?> class="checkbox_input" />
    <br />
+
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+
+   <h2><?php echo $lang['AllowedLang'];?></h2>
+   <p class="notop"><?php echo $lang['AllowedLangDesc'];?></p>
+   <p class="notop">
 <?php
+
+if ($config['multilanguage'])
+{
+	$langs = available_languages();
+
+	if (isset($this->config['allowed_languages']))
+	{
+		$lang_list[] = explode(',', $this->config['allowed_languages']);
+	}
+	else $lang_list= array();
+}
+else
+{
+	$langs[] = $config['language'];
+}
+
+for ($i = 0; $i < count($langs); $i++)
+{
+	/* echo '<option value="'.$langs[$i].'" '.
+			($user['lang'] == $langs[$i]
+					? ' selected="selected" '
+					: (!isset($user['lang']) && $this->config['language'] == $langs[$i]
+							? 'selected="selected"'
+							: '')
+			).'>'.$langs[$i]."</option>\n"; */
+
+	echo  '<input type="checkbox" name="config[allowed_languages]['.$i.']" id="lang_'.$langs[$i].'" value="'.$langs[$i].'" '. (in_array($langs[$i], $lang_list) ? 'checked' : ''). ' />'."\n".
+	'<label for="lang_'.$langs[$i].'">'.$langs[$i].'</label>'."\n";
+
+}
+echo '</p>';
+
+
 if ($config['is_update'] == false)
 {?>
    <div class="fake_hr_seperator">

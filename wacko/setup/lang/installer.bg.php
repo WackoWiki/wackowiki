@@ -56,6 +56,8 @@ $lang = array(
 'HomeDefault' => 'HomePage',
 'MultiLang' => '&laquo;Многоезичен&raquo; режим',
 'MultiLangDesc' => '&laquo;Многоезичен&raquo; режим, позволяващ работа на няколко езика. Ако е включен, инсталаторът ще инициализира страници на няколко различни езика.',
+'AllowedLang' => 'Allowed Languages',
+'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Име',
 'AdminDesc' => 'Изберете име. Нещо от тип <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (без кирилица).',
 'Password' => 'Име Парола',

@@ -499,21 +499,32 @@ class Wacko
 	{
 		if (!$this->_lang_list)
 		{
-			$handle = opendir('lang');
 
-			while (false !== ($file = readdir($handle)))
+			// allowed languages
+			if (isset($this->config['allowed_languages']) && $this->config['allowed_languages'])
 			{
-				if ($file != '.'
-				&& $file != '..'
-				&& $file != 'wacko.all.php'
-				&& !is_dir('lang/'.$file)
-				&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+				$lang_list = explode(',', $this->config['allowed_languages']);  // TODO: check against lang folder?
+			}
+			else
+			{
+				// all available languages
+				$handle = opendir('lang');
+
+				while (false !== ($file = readdir($handle)))
 				{
-					$lang_list[] = $match[1];
+					if ($file != '.'
+					&& $file != '..'
+					&& $file != 'wacko.all.php'
+					&& !is_dir('lang/'.$file)
+					&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+					{
+						$lang_list[] = $match[1];
+					}
 				}
+
+				closedir($handle);
 			}
 
-			closedir($handle);
 			sort($lang_list, SORT_STRING);
 			$this->_lang_list = $lang_list;
 		}

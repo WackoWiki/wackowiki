@@ -11,7 +11,7 @@ function my_location()
 function output_image($ok)
 {
 	global $lang;
-	return '<img src="'.my_location().'setup/imag/'.($ok ? 'tick' : 'cross').'.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross" />';
+	return '<img src="'.my_location().'setup/image/'.($ok ? 'tick' : 'cross').'.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross" />';
 }
 
 function is__writable($path)
@@ -61,6 +61,11 @@ function write_config_hidden_nodes($skip_values)
 	{
 		foreach ($config_parameters as $key => $value)
 		{
+			if (is_array($value))
+			{
+				$value = implode(',', $value);
+			}
+
 			echo '   <input type="hidden" name="config['.$key.']" value="'.$value.'" />' . "\n";
 		}
 	}
@@ -81,12 +86,18 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config
 
 require_once('setup/lang/installer.'.$config['language'].'.php');
 ?>
+
+<?php
+
+// HTTP header with right Charset settings
+header('Content-Type: text/html; charset='.$lang['Charset']);
+?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
    <head>
+      <meta charset="<?php echo $lang['Charset']; ?>" />
       <title><?php echo $lang['Title'].': '.WACKO_VERSION.' - '.$lang[$install_action]; ?></title>
       <meta name="robots" content="noindex, nofollow, noarchive" />
-      <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $lang['Charset']; ?>" />
       <link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css" />
       <link rel="shortcut icon" href="<?php echo my_location() ?>setup/images/favicon.ico" type="image/x-icon" />
    </head>
