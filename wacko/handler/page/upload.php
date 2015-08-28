@@ -546,7 +546,7 @@ if ($file['picture_w'])
 					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$file_size_kb.' '.$this->get_translation('UploadKB').''; ?></li>
 <?php
 // image dimension
-if ($file['picture_w'])
+if (isset($file['picture_w']))
 { ?>
 					<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$size[0].' x '.$size[1].'px'; ?></li>
 <?php

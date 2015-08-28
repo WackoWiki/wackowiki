@@ -29,6 +29,7 @@ function admin_config_basic(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
+		#$engine->debug_print_r($_POST);
 		$config['site_name']				= (string)$_POST['site_name'];
 		$config['site_desc']				= (string)$_POST['site_desc'];
 		$config['meta_description']			= (string)$_POST['meta_description'];
@@ -39,6 +40,16 @@ function admin_config_basic(&$engine, &$module)
 		$config['admin_name']				= (string)$_POST['admin_name'];
 		$config['language']					= (string)$_POST['language'];
 		$config['multilanguage']			= (int)$_POST['multilanguage'];
+
+		if (is_array($_POST['allowed_languages']))
+		{
+			$config['allowed_languages'] = implode(',', $_POST['allowed_languages']);
+		}
+		else
+		{
+			$config['allowed_languages'] = 0;
+		}
+		#$config['allowed_languages']		= (string)$_POST['allowed_languages'];
 		$config['footer_comments']			= (int)$_POST['footer_comments'];
 		$config['footer_files']				= (int)$_POST['footer_files'];
 		$config['footer_rating']			= (int)$_POST['footer_rating'];
@@ -62,6 +73,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['enable_feeds']				= (int)$_POST['enable_feeds'];
 		$config['enable_comments']			= (int)$_POST['enable_comments'];
 		$config['sorting_comments']			= (int)$_POST['sorting_comments'];
+
 
 
 		$engine->_set_config($config, '', true);
@@ -181,8 +193,47 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="multilanguage"><strong>Multilanguage support:</strong><br />
 					<small>Include a choice of language on the page by page basis.</small></label></td>
-				<td><input type="checkbox" id="multilanguage" name="multilanguage" value="1"<?php echo ( $engine->config['multilanguage'] ? ' checked="checked"' : '' );?> /></td>
+				<td>
+					<input type="checkbox" id="multilanguage" name="multilanguage" value="1"<?php echo ( $engine->config['multilanguage'] ? ' checked="checked"' : '' );?> />
+				</td>
 			</tr>
+<?php if ($engine->config['multilanguage'])
+{?>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for=""><strong>Allowed languages:</strong><br />
+					<small>It is recomended to select only the set of languages you want to use, other wise all languages are selected.</small></label></td>
+				<td>
+<?php
+					if ($engine->config['multilanguage'])
+					{
+						$langs = $engine->available_languages($subset = false);
+					}
+					else
+					{
+						$langs[] = $engine->config['language'];
+					}
+
+					if (isset($engine->config['allowed_languages']))
+					{
+						$lang_list = explode(',', $engine->config['allowed_languages']);
+					}
+					else
+					{
+						$lang_list= array();
+					}
+
+					for ($i = 0; $i < count($langs); $i++)
+					{
+						echo	'<input type="checkbox" name="allowed_languages['.$i.']" id="lang_'.$langs[$i].'" value="'.$langs[$i].'" '. (in_array($langs[$i], $lang_list) ? ' checked="checked"' : ''). ' />'."\n".
+								'<label for="lang_'.$langs[$i].'">'.$langs[$i].'</label>'."\n";
+
+					} ?>
+				</td>
+			</tr>
+			<?php } ?>
 			<tr>
 				<th colspan="2">
 					<br />
