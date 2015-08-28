@@ -163,8 +163,8 @@ function admin_system_log(&$engine, &$module)
 		<table style="padding: 3px;" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="?mode=system_log&amp;order=<?php echo $ordertime;  ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="?mode=system_log&amp;order=<?php echo $orderlevel; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$ordertime;  ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderlevel; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
 				<th><?php echo $engine->get_translation('LogEvent'); ?></th>
 				<th style="width:20px;"><?php echo $engine->get_translation('LogUsername'); ?></th>
 			</tr>
@@ -209,8 +209,8 @@ function admin_system_log(&$engine, &$module)
 					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
 					'<td style="vertical-align:top;">'.$engine->format($row['message'], 'post_wacko').'</td>'.
 					'<td style="vertical-align:top; text-align:center;"><small>'.
-						'<a href="?mode=system_log&amp;user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
-						'<br />'.'<a href="?mode=system_log&amp;ip='.$row['ip'].'">'.$row['ip'].'</a>'.
+						'<a href="'.$engine->href().'&amp;user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.'<br />'.
+						'<a href="'.$engine->href().'&amp;ip='.$row['ip'].'">'.$row['ip'].'</a>'.
 					'</small></td>'.
 				'</tr>';
 		}

@@ -43,13 +43,13 @@ function admin_config_basic(&$engine, &$module)
 
 		if (is_array($_POST['allowed_languages']))
 		{
-			$config['allowed_languages'] = implode(',', $_POST['allowed_languages']);
+			$config['allowed_languages'] = (string) implode(',', $_POST['allowed_languages']);
 		}
 		else
 		{
 			$config['allowed_languages'] = 0;
 		}
-		#$config['allowed_languages']		= (string)$_POST['allowed_languages'];
+
 		$config['footer_comments']			= (int)$_POST['footer_comments'];
 		$config['footer_files']				= (int)$_POST['footer_files'];
 		$config['footer_rating']			= (int)$_POST['footer_rating'];
@@ -73,8 +73,6 @@ function admin_config_basic(&$engine, &$module)
 		$config['enable_feeds']				= (int)$_POST['enable_feeds'];
 		$config['enable_comments']			= (int)$_POST['enable_comments'];
 		$config['sorting_comments']			= (int)$_POST['sorting_comments'];
-
-
 
 		$engine->_set_config($config, '', true);
 

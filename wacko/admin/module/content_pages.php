@@ -144,7 +144,7 @@ function admin_content_pages(&$engine, &$module)
 		( $order ? $order : 'ORDER BY l.page_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");
 
-	echo $engine->form_open('systemlog', '', 'post', true, '', '');
+	echo $engine->form_open('content_pages', '', 'post', true, '', '');
 
 ?>
 		<div>
@@ -193,10 +193,10 @@ function admin_content_pages(&$engine, &$module)
 		<table style="padding: 3px;" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&amp;order=<?php echo $ordertime; ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&amp;order=<?php echo $orderlevel; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$ordertime; ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$orderlevel; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
 				<th><?php echo $engine->get_translation('LogEvent'); ?></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode']; ?>&amp;order=<?php echo $ordersize; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$ordersize; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
 				<th style="width:20px;"><?php echo $engine->get_translation('LogUsername'); ?></th>
 			</tr>
 <?php

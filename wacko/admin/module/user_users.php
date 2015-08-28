@@ -666,7 +666,7 @@ function admin_user_users(&$engine, &$module)
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=users'.(!empty($order_pagination) ? '&order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 		$users = $engine->load_all(
 			"SELECT u.*, p.lang ".
@@ -707,17 +707,17 @@ function admin_user_users(&$engine, &$module)
 					<th style="width:5px;"></th>
 					<th style="width:5px;"></th>
 					<th style="width:5px;">ID</th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuser; ?>">Username</a></th>
-					<!--<th style="width:150px;"><a href="?mode=users&order=<?php echo $ordername; ?>">Realname</a></th>-->
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuser; ?>">Username</a></th>
+					<!--<th style="width:150px;"><a href="<?php echo $engine->href().'&amp;order='.$ordername; ?>">Realname</a></th>-->
 					<th>Email</th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderpages; ?>">Pages</a></th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $ordercomments; ?>">Comments</a></th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderrevisions; ?>">Revisions</a></th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuploads; ?>">Uploads</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderpages; ?>">Pages</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$ordercomments; ?>">Comments</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderrevisions; ?>">Revisions</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuploads; ?>">Uploads</a></th>
 					<th style="width:20px;">Language</th>
 					<th style="width:20px;">Enabled</th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signup_time; ?>">Signuptime</a></th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $last_visit; ?>">Last active</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>">Signuptime</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$last_visit; ?>">Last active</a></th>
 				</tr>
 <?php
 		if ($users)
@@ -732,14 +732,14 @@ function admin_user_users(&$engine, &$module)
 							<input type="radio" name="change" value="'.$row['user_id'].'" />
 						</td>'.
 						'<td>'.$row['user_id'].'</td>'.
-						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_users&user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.
+						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="'.$engine->href().'&amp;user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.
 						#'<td style="padding-left:5px; padding-right:5px;">'.$row['real_name'].'</td>'.
 						'<td>'.$row['email'].'</td>'.
 						'<td>'.$row['total_pages'].'</td>'.
 						'<td>'.$row['total_comments'].'</td>'.
 						'<td>'.$row['total_revisions'].'</td>'.
 						'<td>'.$row['total_uploads'].'</td>'.
-						'<td><small><a href="?mode=users&lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
+						'<td><small><a href="'.$engine->href().'&amp;lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
 						'<td>'.$row['enabled'].'</td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.

@@ -590,13 +590,13 @@ function admin_user_groups(&$engine, &$module)
 				<tr>
 					<th style="width:5px;"></th>
 					<th style="width:5px;">ID</th>
-					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $ordergroup; ?>">Group</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$ordergroup; ?>">Group</a></th>
 					<th>Description</th>
 					<th style="width:20px;">Moderator</th>
-					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $ordermembers; ?>">Members</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$ordermembers; ?>">Members</a></th>
 					<th style="width:20px;">Open</th>
 					<th style="width:20px;">Active</th>
-					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $created; ?>">Created</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$created; ?>">Created</a></th>
 				</tr>
 <?php
 		if ($groups)
@@ -607,9 +607,9 @@ function admin_user_groups(&$engine, &$module)
 						'<td>
 							<input type="radio" name="change" value="'.$row['group_id'].'" /></td>'.
 						'<td>'.$row['group_id'].'</td>'.
-						'<td style="text-align:left; padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_groups&group_id='.$row['group_id'].'">'.$row['group_name'].'</a></strong></td>'.
+						'<td style="text-align:left; padding-left:5px; padding-right:5px;"><strong><a href="'.$engine->href().'&amp;group_id='.$row['group_id'].'">'.$row['group_name'].'</a></strong></td>'.
 						'<td>'.$row['description'].'</td>'.
-						'<td><small><a href="?mode=groups&moderator='.$row['moderator_id'].'">'.$row['user_name'].'</a></small></td>'.
+						'<td><small><a href="'.$engine->href().'&amp;moderator='.$row['moderator_id'].'">'.$row['user_name'].'</a></small></td>'.
 						'<td>'.$row['members'].'</td>'.
 						'<td>'.$row['open'].'</td>'.
 						'<td>'.$row['active'].'</td>'.
