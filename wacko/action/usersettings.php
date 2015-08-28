@@ -223,49 +223,56 @@ else if ($user = $this->get_user())
 		<tbody>
 			<tr class="lined">
 		<th class="form_left" scope="row"><?php echo $this->get_translation('UserSettingsOther');?></th>
-		<td class="form_right"><input type="hidden" name="doubleclick_edit" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="doubleclick_edit" value="0" />
 			<input type="checkbox" id="doubleclick_edit" name="doubleclick_edit" value="1" <?php echo (isset($user['doubleclick_edit']) && $user['doubleclick_edit'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="doubleclick_edit"><?php echo $this->get_translation('DoubleclickEditing');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
-		<td class="form_right"><input type="hidden" name="autocomplete" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="autocomplete" value="0" />
 			<input type="checkbox" id="autocomplete" name="autocomplete" value="1" <?php echo (isset($user['autocomplete']) && $user['autocomplete'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="autocomplete"><?php echo $this->get_translation('WikieditAutocomplete');?></label>
 		</td>
 	</tr>
 		<tr class="lined">
 		<td class="form_left">&nbsp;</td>
-		<td class="form_right"><input type="hidden" name="numerate_links" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="numerate_links" value="0" />
 			<input type="checkbox" id="numerate_links" name="numerate_links" value="1" <?php echo (isset($user['numerate_links']) && $user['numerate_links'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="numerate_links"><?php echo $this->get_translation('NumerateLinks');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
-		<td class="form_right"><input type="hidden" name="show_comments" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="show_comments" value="0" />
 			<input type="checkbox" id="show_comments" name="show_comments" value="1" <?php echo (isset($user['show_comments']) && $user['show_comments'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="show_comments"><?php echo $this->get_translation('ShowComments?');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
-		<td class="form_right"><input type="hidden" name="show_files" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="show_files" value="0" />
 			<input type="checkbox" id="show_files" name="show_files" value="1" <?php echo (isset($user['show_files']) && $user['show_files'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="show_files"><?php echo $this->get_translation('ShowFiles?');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
-		<td class="form_right"><input type="hidden" name="show_spaces" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="show_spaces" value="0" />
 			<input type="checkbox" id="show_spaces" name="show_spaces" value="1" <?php echo (isset($user['show_spaces']) && $user['show_spaces'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="show_spaces"><?php echo $this->get_translation('ShowSpaces');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
-		<td class="form_right"><input type="hidden" name="dont_redirect" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="dont_redirect" value="0" />
 			<input type="checkbox" id="dont_redirect" name="dont_redirect" value="1" <?php echo (isset($user['dont_redirect']) && $user['dont_redirect'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="dont_redirect"><?php echo $this->get_translation('DontRedirect');?></label>
 		</td>
@@ -284,7 +291,8 @@ else if ($user = $this->get_user())
 	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
-		<td class="form_right"><input type="hidden" name="allow_intercom" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="allow_intercom" value="0" />
 			<input type="checkbox" id="allow_intercom" name="allow_intercom" value="1" <?php echo (isset($user['allow_intercom']) && $user['allow_intercom'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="allow_intercom"><?php echo $this->get_translation('AllowIntercom');?></label>
 		</td>
@@ -294,7 +302,8 @@ else if ($user = $this->get_user())
 ?>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
-		<td class="form_right"><input type="hidden" name="allow_massemail" value="0" />
+		<td class="form_right">
+			<input type="hidden" name="allow_massemail" value="0" />
 			<input type="checkbox" id="allow_massemail" name="allow_massemail" value="1" <?php echo (isset($user['allow_massemail']) && $user['allow_massemail'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="allow_massemail"><?php echo $this->get_translation('AllowMassemail');?></label>
 		</td>
@@ -391,21 +400,35 @@ else if ($user = $this->get_user())
 <table class="form_tbl">
 <tbody>
 	<tr class="lined">
-		<th class="form_left" scope="row"><?php echo $this->get_translation('UserName');?></th>
-		<td><strong><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'">'.$user['user_name'].'</a>';?></strong></td>
-	</tr>
-	<tr class="lined">
-		<th class="form_left" scope="row"><label for="real_name"><?php echo $this->get_translation('RealName');?></label></th>
-		<td><input id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />
+		<th class="form_left" scope="row">
+			<?php echo $this->get_translation('UserName');?>
+		</th>
+		<td>
+			<strong><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'">'.$user['user_name'].'</a>';?></strong>
 		</td>
 	</tr>
 	<tr class="lined">
-		<th class="form_left" scope="row"><a href="<?php echo $this->href('', 'Password')?>"><?php echo $this->get_translation('YouWantChangePassword');?></a></th>
-		<td><a href="<?php echo $this->href('', 'password');?>" style="text-decoration: none;"><input id="button" type="button" value="<?php echo $this->get_translation('YouWantChangePassword');?>" name="_password"/></a></td>
+		<th class="form_left" scope="row">
+			<label for="real_name"><?php echo $this->get_translation('RealName');?></label>
+		</th>
+		<td>
+			<input id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />
+		</td>
 	</tr>
 	<tr class="lined">
-		<th class="form_left" scope="row"><label for="email"><?php echo $this->get_translation('YourEmail');?></label></th>
-		<td><input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;
+		<th class="form_left" scope="row">
+			<a href="<?php echo $this->href('', 'Password')?>"><?php echo $this->get_translation('YouWantChangePassword');?></a>
+		</th>
+		<td>
+			<a href="<?php echo $this->href('', 'password');?>" style="text-decoration: none;"><input id="button" type="button" value="<?php echo $this->get_translation('YouWantChangePassword');?>" name="_password"/></a>
+		</td>
+	</tr>
+	<tr class="lined">
+		<th class="form_left" scope="row">
+			<label for="email"><?php echo $this->get_translation('YourEmail');?></label>
+		</th>
+		<td>
+			<input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;
 <?php echo $user['email_confirm'] == ''
 		? '<img src="'.$this->config['base_url'].'image/tick.png" alt="'.$this->get_translation('EmailConfirmed').'" title="'.$this->get_translation('EmailConfirmed').'" width="20" height="20" />'
 		: '<img src="'.$this->config['base_url'].'image/warning.png" alt="'.$this->get_translation('EmailConfirm').'" title="'.$this->get_translation('EmailConfirm').'" width="16" height="16" />' ?>
@@ -423,7 +446,9 @@ else if ($user = $this->get_user())
 		<td></td>
 	</tr>
 	<tr class="lined">
-	<th class="form_left" scope="row"><label for="lang"><?php echo $this->get_translation('YourLanguage');?></label></th>
+	<th class="form_left" scope="row">
+		<label for="lang"><?php echo $this->get_translation('YourLanguage');?></label>
+	</th>
 	<td class="form_right"><select id="lang" name="lang">
 <?php
 	if ($this->config['multilanguage'])
@@ -449,8 +474,11 @@ else if ($user = $this->get_user())
 </select></td>
 	</tr>
 	<tr class="lined">
-		<th class="form_left" scope="row"><label for="theme"><?php echo $this->get_translation('ChooseTheme');?></label></th>
-		<td class="form_right"><select id="theme" name="theme">
+		<th class="form_left" scope="row">
+			<label for="theme"><?php echo $this->get_translation('ChooseTheme');?></label>
+		</th>
+		<td class="form_right">
+			<select id="theme" name="theme">
 
 <?php
 	$themes = $this->available_themes();
@@ -469,8 +497,11 @@ else if ($user = $this->get_user())
 		</select></td>
 	</tr>
 		<tr class="lined">
-		<th class="form_left" scope="row"><label for="timezone"><?php echo $this->get_translation('Timezone');?></label></th>
-		<td class="form_right"><select id="timezone" name="timezone">
+		<th class="form_left" scope="row">
+			<label for="timezone"><?php echo $this->get_translation('Timezone');?></label>
+		</th>
+		<td class="form_right">
+			<select id="timezone" name="timezone">
 
 <?php
 	$timezones = $this->get_translation('TzZones');
@@ -494,7 +525,9 @@ else if ($user = $this->get_user())
 		</select></td>
 	</tr>
 	<tr class="lined">
-		<th class="form_left"><label for="dst"><?php echo $this->get_translation('DST');?></label></th>
+		<th class="form_left">
+			<label for="dst"><?php echo $this->get_translation('DST');?></label>
+		</th>
 		<td class="form_right">
 <?php
 			echo '<input type="radio" id="dst0" name="dst" value="0" '.( $user['dst'] == 0 ? 'checked="checked"' : '' ).'/><label for="dst0">'.$this->get_translation('MetaOff').'</label>';
@@ -503,7 +536,9 @@ else if ($user = $this->get_user())
 		</td>
 	</tr>
 	<tr class="lined">
-		<th class="form_left"><label for="sorting_comments"><?php echo $this->get_translation('SortComment');?></label></th>
+		<th class="form_left">
+			<label for="sorting_comments"><?php echo $this->get_translation('SortComment');?></label>
+		</th>
 		<td class="form_right">
 			<select id="sorting_comments" name="sorting_comments">
 				<option value="0" <?php echo ( $user['sorting_comments']  == 0  ? ' selected="selected"' : '' ).'>'.$this->get_translation('SortCommentAsc');?></option>
@@ -512,7 +547,9 @@ else if ($user = $this->get_user())
 		</td>
 	</tr>
 	<tr class="lined">
-		<th class="form_left" scope="row"><label for="changes_count"><?php echo $this->get_translation('RecentChangesLimit');?></label></th>
+		<th class="form_left" scope="row">
+			<label for="changes_count"><?php echo $this->get_translation('RecentChangesLimit');?></label>
+		</th>
 		<td class="form_right">
 			<select id="changes_count" name="changes_count">
 				<option value="10" <?php echo ( $user['changes_count']  == 10  ? ' selected="selected"' : '' );?>>10</option>
@@ -524,7 +561,9 @@ else if ($user = $this->get_user())
 		</td>
 	</tr>
 	<tr class="lined">
-		<th class="form_left" scope="row"><label for="revisions_count"><?php echo $this->get_translation('RevisionListLimit');?></label></th>
+		<th class="form_left" scope="row">
+			<label for="revisions_count"><?php echo $this->get_translation('RevisionListLimit');?></label>
+		</th>
 		<td class="form_right">
 			<select id="revisions_count" name="revisions_count">
 				<option value="10" <?php echo ( $user['revisions_count']  == 10  ? ' selected="selected"' : '' );?>>10</option>
