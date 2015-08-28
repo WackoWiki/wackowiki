@@ -495,13 +495,15 @@ class Wacko
 		}
 	}
 
-	function available_languages()
+	function available_languages($subset = true)
 	{
-		if (!$this->_lang_list)
+		if (!$this->_lang_list || $subset == false)
 		{
 
 			// allowed languages
-			if (isset($this->config['allowed_languages']) && $this->config['allowed_languages'])
+			if (isset($this->config['allowed_languages'])
+				&& $this->config['allowed_languages']
+				&& $subset == true)
 			{
 				$lang_list = explode(',', $this->config['allowed_languages']);  // TODO: check against lang folder?
 			}

@@ -119,16 +119,19 @@ else
 if ($config['multilanguage'])
 {
 	$langs = available_languages();
-
-	if (isset($this->config['allowed_languages']))
-	{
-		$lang_list = explode(',', $this->config['allowed_languages']);
-	}
-	else $lang_list= array();
 }
 else
 {
 	$langs[] = $config['language'];
+}
+
+if (isset($this->config['allowed_languages']))
+{
+	$lang_list = explode(',', $this->config['allowed_languages']);
+}
+else
+{
+	$lang_list= array();
 }
 
 for ($i = 0; $i < count($langs); $i++)
@@ -137,7 +140,7 @@ for ($i = 0; $i < count($langs); $i++)
 			'<label for="lang_'.$langs[$i].'">'.$langs[$i].'</label>'."\n";
 
 }
-echo '</p>';
+echo "</p>\n";
 
 
 if ($config['is_update'] == false)
