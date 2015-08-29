@@ -9,8 +9,8 @@ if (!isset($is_image)) $is_image = '';
 if (!isset($is_plain)) $is_plain = '';
 
 $error = '';
-$file404 = 'images/upload404.png';
-$file403 = 'images/upload403.png';
+$file404 = 'image/upload404.png';
+$file403 = 'image/upload403.png';
 $file_path = '';
 
 // 1. check existence
@@ -89,7 +89,7 @@ if ($error)
 	$is_image = true;
 	$extension = 'png';
 	header('Content-Type: image/'.$extension);
-	$file_path = 'images/upload'.$error.'.png';
+	$file_path = 'image/upload'.$error.'.png';
 
 	if (!headers_sent())
 	{
