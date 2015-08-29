@@ -58,7 +58,7 @@ if ($registered
 		}
 
 		$file = $this->load_single(
-			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt ".
+			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '". $page_id."'".
@@ -85,7 +85,7 @@ if ($registered
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file['file_size'], false, true, true).')'; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
 <?php
 // image dimension
 if ($file['picture_w'])
@@ -490,7 +490,7 @@ if ($file['picture_w'])
 								$small_name = $small_name[ count($small_name) -1 ];
 							}
 
-							$file_size_kb	= ceil($file_size / 1024);
+							$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
 							$uploaded_dt	= date('Y-m-d H:i:s');
 
 							$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
@@ -529,11 +529,11 @@ if ($file['picture_w'])
 							// log event
 							if ($is_global)
 							{
-								$this->log(4, str_replace('%3', $file_size_kb, str_replace('%2', $small_name, $this->get_translation('LogFileUploadedGlobal', $this->config['language']))));
+								$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, $this->get_translation('LogFileUploadedGlobal', $this->config['language']))));
 							}
 							else
 							{
-								$this->log(4, str_replace('%3', $file_size_kb, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogFileUploadedLocal', $this->config['language'])))));
+								$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogFileUploadedLocal', $this->config['language'])))));
 							}
 							?>
 		<br />
@@ -543,10 +543,10 @@ if ($file['picture_w'])
 					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileSyntax'); ?>:</span><?php echo '<code>file:'.$small_name.'</code>'; ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($uploaded_dt); ?></li>
-					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$file_size_kb.' '.$this->get_translation('UploadKB').''; ?></li>
+					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$file_size_ft.''; ?></li>
 <?php
 // image dimension
-if (isset($file['picture_w']))
+if (isset($size))
 { ?>
 					<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$size[0].' x '.$size[1].'px'; ?></li>
 <?php
