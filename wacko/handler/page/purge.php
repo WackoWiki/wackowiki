@@ -58,7 +58,7 @@ if ($this->is_owner() || $this->is_admin())
 	}
 	else
 	{
-		echo "<div class=\"warning\">".$this->get_translation('ReallyPurge')."</div><br />";
+		echo '<div class="warning">'.$this->get_translation('ReallyPurge').'</div><br />';
 		echo $this->form_open('purge_data', 'purge');
 ?>
 

@@ -27,6 +27,7 @@ if (!isset($owner))		$owner = '';
 if (!isset($page))		$page = '';
 if (!isset($ppage))		$ppage = '';
 if (!isset($legend))	$legend = '';
+if (!isset($deleted))	$deleted = 0;
 if (!isset($picture))	$picture = null;
 if (!isset($max))		$max = '';
 
@@ -96,7 +97,10 @@ if ($can_view)
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
 			($owner
 				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
-				: ''), true);
+				: '').
+			($deleted != 1
+				? "AND f.deleted <> '1' "
+				: ""), true);
 
 	$count		= count($count);
 	$pagination = $this->pagination($count, $limit, 'f');
@@ -110,6 +114,9 @@ if ($can_view)
 			($owner
 				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
 				: '')." ".
+			($deleted != 1
+			? "AND f.deleted <> '1' "
+					: "").
 		"ORDER BY f.".$order_by." ".
 		"LIMIT {$pagination['offset']}, {$limit}");
 
@@ -215,12 +222,12 @@ if ($can_view)
 <?php
 		if ($remove_mode)
 		{
-			echo '<td class="remove-"><a href="'.$edit_href.'" class="remove2-">'.$edit.'</a>&nbsp;</td>';
-			echo '<td class="remove-"><a href="'.$remove_href.'" class="remove2-">'.$del.'</a>&nbsp;</td>';
+			echo '<td class="remove-"><a href="'.$edit_href.'" class="remove2-">'.$edit.'</a>&nbsp;</td>'."\n";
+			echo '<td class="remove-"><a href="'.$remove_href.'" class="remove2-">'.$del.'</a>&nbsp;</td>'."\n";
 		}
 		else
 		{
-			echo '<td class="remove-">&nbsp;</td>';
+			echo '<td class="remove-">&nbsp;</td>'."\n";
 		}
 ?>
 		<td class="size-"><span class="size2-">(<?php echo $file_size; ?>)</span>&nbsp;</td>

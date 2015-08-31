@@ -225,6 +225,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 		// user-owned pages
 		$limit = 20;
+
 		echo '<h2 id="pages">'.$this->get_translation('UsersPages').'</h2>'."\n";
 		echo '<div class="indent"><small>'.$this->get_translation('UsersOwnedPages').': '.$user['total_pages'].'&nbsp;&nbsp;&nbsp; '.$this->get_translation('UsersRevisionsMade').': '.$user['total_revisions']."</small></div><br />\n";
 
@@ -233,7 +234,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		if ($user['total_pages'])
 		{
 			$pages = $this->load_all(
-				"SELECT page_id, tag, title, created ".
+				"SELECT page_id, tag, title, created, lang ".
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE owner_id = '".$user['user_id']."' ".
 					"AND comment_on_id = '0' ".
@@ -253,7 +254,17 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			{
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id'], $this->get_user_name()) === true)
 				{
-					echo '<small>'.$this->get_time_string_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0)."<br />\n";
+					// check current page lang for different charset to do_unicode_entities() against
+					if ($this->page['lang'] != $page['lang'])
+					{
+						$_lang = $page['lang'];
+					}
+					else
+					{
+						$_lang = '';
+					}
+
+					echo '<small>'.$this->get_time_string_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang)."<br />\n";
 
 					$i = 0;
 
@@ -283,7 +294,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			if ($user['total_comments'])
 			{
 				$comments = $this->load_all(
-					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag ".
+					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.lang ".
 					"FROM {$this->config['table_prefix']}page c ".
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
 					"WHERE c.owner_id = '".$user['user_id']."' ".
@@ -306,7 +317,17 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				{
 					if (!$this->config['hide_locked'] || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()) === true)
 					{
-						echo '<small>'.$this->get_time_string_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'])."<br />\n";
+						// check current page lang for different charset to do_unicode_entities() against
+						if ($this->page['lang'] != $comment['lang'])
+						{
+							$_lang = $comment['lang'];
+						}
+						else
+						{
+							$_lang = '';
+						}
+
+						echo '<small>'.$this->get_time_string_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang)."<br />\n";
 
 						$i = 0;
 

@@ -72,7 +72,8 @@ if ($this->has_access('read'))
 			$files = $this->load_all(
 				"SELECT upload_id ".
 				"FROM ".$this->config['table_prefix']."upload ".
-				"WHERE page_id = '". $this->page['page_id'] ."'");
+				"WHERE page_id = '". $this->page['page_id'] ."' ".
+					"AND deleted <> '1' ");
 		}
 		else
 		{
