@@ -5129,14 +5129,14 @@ class Wacko
 
 		if ($registered
 			&& (   $this->config['upload'] === true
-					|| $this->config['upload'] == 1
-					|| $this->check_acl($user_name, $this->config['upload']) )
+				|| $this->config['upload'] == 1
+				|| $this->check_acl($user_name, $this->config['upload']) )
 			&& (   $this->has_access('upload')
-					&& $this->has_access('write')
-					&& $this->has_access('read') )
-			|| $this->is_owner()
-			|| $this->is_admin()
-			#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for upload handler
+				&& $this->has_access('write')
+				&& $this->has_access('read')
+				|| $this->is_owner()
+				|| $this->is_admin() )
+			#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
 		)
 		{
 			return true;

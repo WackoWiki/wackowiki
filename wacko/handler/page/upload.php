@@ -28,6 +28,7 @@ if ($this->page['comment_on_id'])
 // check who u are, can u upload?
 if ($this->can_upload() === true)
 {
+	// SHOW FORMS
 	if (isset($_GET['remove'])) // show the form
 	{
 		if ($_GET['remove'] == 'global')
@@ -69,12 +70,12 @@ if ($this->can_upload() === true)
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file['uploaded_dt']); ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
 <?php
-// image dimension
-if ($file['picture_w'])
-{ ?>
+			// image dimension
+			if ($file['picture_w'])
+			{ ?>
 				<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
 <?php
-} ?>
+			} ?>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file['file_description']; ?></li>
@@ -148,11 +149,11 @@ if ($file['picture_w'])
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
 <?php
 // image dimension
-if ($file['picture_w'])
-{ ?>
+			if ($file['picture_w'])
+			{ ?>
 				<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
 <?php
-} ?>
+			} ?>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="file_description" id="UploadDesc" type="text" size="80" value="<?php echo $file['file_description']; ?>"/></li>
@@ -160,7 +161,6 @@ if ($file['picture_w'])
 		</li>
 	</ul>
 	<br />
-
 
 	<input type="hidden" name="edit" value="<?php echo $_GET['edit']?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
@@ -188,6 +188,7 @@ if ($file['picture_w'])
 	}
 	else
 	{
+		// PROCESS POSTS
 		if (isset($_POST['remove'])) // delete
 		{
 			// 1. where, existence

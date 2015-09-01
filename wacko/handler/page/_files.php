@@ -52,10 +52,9 @@ if ($this->has_access('read'))
 
 		// display form
 		if (isset($registered)
-			&&
-				(
-					($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-					($this->check_acl($user_name, $this->config['upload']))
+			&& (   $this->config['upload'] === true
+				|| $this->config['upload'] == 1
+				|| $this->check_acl($user_name, $this->config['upload'])
 				)
 			)
 		{
@@ -83,9 +82,11 @@ if ($this->has_access('read'))
 		switch ($c = count($files))
 		{
 			case 0:
-				if ($this->get_user() &&
-					($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-					($this->check_acl($user_name, $this->config['upload']))
+				if ($this->get_user()
+					&& (   $this->config['upload'] === true
+						|| $this->config['upload'] == 1
+						|| $this->check_acl($user_name, $this->config['upload'])
+						)
 				)
 				{
 					$show_files = $this->get_translation('Files_0');
