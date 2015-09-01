@@ -203,9 +203,10 @@ if ($can_view)
 			$hits	= '';
 		}
 
-		if ($this->is_admin() || (!isset($is_global) &&
-		($this->get_page_owner_id($page_id) == $this->get_user_id())) ||
-		($file['user_id'] == $this->get_user_id()))
+		if ($this->is_admin()
+			|| (!isset($is_global)
+				&& ($this->get_page_owner_id($page_id) == $this->get_user_id()))
+			|| $file['user_id'] == $this->get_user_id())
 		{
 			$remove_mode = 1;
 		}
