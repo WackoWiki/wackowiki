@@ -12,7 +12,6 @@ if (!defined('IN_WACKO'))
 $is_global		= '';
 $message		= '';
 $error			= '';
-$registered		= '';
 
 // redirect to show method if page don't exists
 if (!$this->page)
@@ -26,25 +25,8 @@ if ($this->page['comment_on_id'])
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
 }
 
-if ($user = $this->get_user())
-{
-	$user_name		= strtolower($this->get_user_name());
-	$registered		= true;
-}
-else
-{
-	$user_name		= GUEST;
-}
-
-if ($registered
-	&&
-	(
-	($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-	($this->check_acl($user_name, $this->config['upload']))
-	)
-	&&
-	($this->has_access('upload') && $this->has_access('write') && $this->has_access('read') || $this->is_owner() || $this->is_admin() || (isset($_POST['to']) && $_POST['to'] == 'global'))
-	)
+// check who u are, can u upload?
+if ($this->can_upload() === true)
 {
 	if (isset($_GET['remove'])) // show the form
 	{
