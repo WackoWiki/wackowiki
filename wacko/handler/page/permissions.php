@@ -39,10 +39,9 @@ if ($this->is_owner() || $this->is_admin())
 	}
 
 	// check if upload is allowed for user
-	if (
-	($this->config['upload'] === true) ||
-	($this->config['upload'] == 1) ||
-	($this->check_acl($user_name, $this->config['upload']))
+	if (   $this->config['upload'] === true
+		|| $this->config['upload'] == 1
+		|| $this->check_acl($user_name, $this->config['upload'])
 	)
 	{
 		$upload_allowed = true;
