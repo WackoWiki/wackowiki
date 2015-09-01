@@ -22,24 +22,7 @@ if ($global) $global = 'global';
 // we display a form to make an upload
 
 // check who u are, can u upload?
-if ($user = $this->get_user())
-{
-	$user_name	= strtolower($this->get_user_name());
-	$registered	= true;
-}
-else
-{
-	$user_name		= GUEST;
-}
-
-if ($registered
-&&
-(
-($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-($this->check_acl($user_name, $this->config['upload']))
-)
-&& ($this->has_access('upload') && $this->has_access('write') && $this->has_access('read')) || $this->is_owner() || $this->is_admin()
-)
+if ($this->can_upload() === true)
 {
 	// displaying
 	echo $this->form_open('upload', 'upload', 'post', true, '', ' enctype="multipart/form-data" ');
@@ -127,7 +110,7 @@ if ($registered
 }
 else
 {
-	echo "<em>".$this->get_translation('UploadForbidden')."</em> ";
+	echo '<em>'.$this->get_translation('UploadForbidden').'</em>';
 }
 
 ?>

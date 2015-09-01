@@ -5113,6 +5113,40 @@ class Wacko
 		return $acl;
 	}
 
+	// check if user has the right to upload files
+	function can_upload()
+	{
+		if ($user = $this->get_user())
+		{
+			$user_name		= strtolower($this->get_user_name());
+			$registered		= true;
+		}
+		else
+		{
+			$user_name		= GUEST;
+			$registered		= false;
+		}
+
+		if ($registered
+			&& (   $this->config['upload'] === true
+					|| $this->config['upload'] == 1
+					|| $this->check_acl($user_name, $this->config['upload']) )
+			&& (   $this->has_access('upload')
+					&& $this->has_access('write')
+					&& $this->has_access('read') )
+			|| $this->is_owner()
+			|| $this->is_admin()
+			#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for upload handler
+		)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	// WATCHES
 	function is_watched($user_id, $page_id)
 	{
