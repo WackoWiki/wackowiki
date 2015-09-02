@@ -2866,7 +2866,7 @@ class Wacko
 					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
 				}
 			}
-			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - only global file
+			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - syntax for global only file
 			{
 				#echo '####2: file:/some.zip <br />'.$arr[1].'####<br />';
 				$file_name = $arr[1];
@@ -3012,6 +3012,27 @@ class Wacko
 			}
 
 			return $this->link($tag, $method, $text, $title, $track, 1);
+		}
+		else if (preg_match('/^(user)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
+		{
+			// user link -> user:UserName
+			$parts	= explode('/', $matches[2]);
+
+			for ($i = 0; $i < count($parts); $i++)
+			{
+				$parts[$i] = str_replace('%23', '#', urlencode($parts[$i]));
+			}
+
+			if ($link_lang)
+			{
+				$text	= $this->do_unicode_entities($text, $link_lang);
+			}
+
+			$url	= $this->href('', $this->config['users_page'].'/', 'profile='.implode('/', $parts));
+
+			$class	= '';
+			$icon	= $this->get_translation('usericon');
+			$tpl	= 'userlink';
 		}
 		else if (preg_match('/^([[:alnum:]]+)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
 		{

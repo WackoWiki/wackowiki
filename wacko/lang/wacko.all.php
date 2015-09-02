@@ -27,6 +27,7 @@ $wacko_all_resource = array(
 	'tpl.pwdescrpage'	=> '<span class="missingpage">{text}</span>',
 	'tpl.anchor'		=> '<a href="{url}">{text}</a>',
 	'tpl.outerlink'		=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
+		'tpl.userlink'		=> '<a href="{url}" title="{title}" class="{class}">{icon}{text}</a>',
 	'tpl.interwiki'		=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
 	'tpl.email'			=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
 	'tpl.jabber'		=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
@@ -46,7 +47,9 @@ $wacko_all_resource = array(
 	'SubLinkIcon'	=> '!/',
 	'UpLinkIcon'	=> '../',
 
-	// mime (temp)
+	'usericon'		=> '', // '<img src="{theme}icon/user.png" alt="User" />'
+
+	// mime (temp -> localize)
 	'texticon'		=> '<img src="{theme}icon/txt.png" alt="Text" />',
 	'odticon'		=> '<img src="{theme}icon/odt.png" alt="OpenDocument" />',
 	'imageicon'		=> '<img src="{theme}icon/image.png" alt="Image" />',
