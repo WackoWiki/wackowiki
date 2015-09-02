@@ -83,6 +83,7 @@ function admin_db_resync(&$engine, &$module)
 					OR
 					(p.owner_id = u.user_id AND p.comment_on_id = '0' ".
 					"AND p.deleted <> '1' ))
+					GROUP BY u.user_id
 				");
 
 			$users = array_merge($users1, $users2);
