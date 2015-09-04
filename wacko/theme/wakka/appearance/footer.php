@@ -40,7 +40,7 @@ if ($this->page)
 			print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icon/rename.png\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n");
 
 			// Remove link (shows only for page owner if allowed)
-			if (!$this->config['remove_onlyadmins']) print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete.png\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n");
+			if (!$this->config['remove_onlyadmins']) print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete_page.png\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n");
 
 			//Edit ACLs link
 			print("<li><a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"").">".$this->get_translation('ACLText')."</a></li>\n");
@@ -80,7 +80,7 @@ if ($this->page)
 		// Remove link (shows only for Admins)
 		if ($this->is_admin() && !$this->is_owner())
 		{
-			print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete.png\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n");
+			print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete_page.png\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n");
 
 			// Edit ACLs link (shows also for Admins)
 			print("<li><a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"").">".$this->get_translation('ACLText')."</a></li>\n");

@@ -123,13 +123,13 @@ if ($this->has_access('read'))
 					|| ($this->config['owners_can_remove_comments'] && $this->is_owner($this->page['page_id']))
 				)))
 				{
-					echo '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icons/delete_comment.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" style="float: right; padding: 2px;"/></a>';
+					echo '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icon/delete.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" style="float: right; padding: 2px;"/></a>';
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->is_owner($comment['page_id']))
 				{
-					echo '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icons/edit.png" title="'.$this->get_translation('EditCommentTip').'" alt="'.$this->get_translation('EditComment').'" style="float: right; padding: 2px;"/></a>';
+					echo '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icon/edit.png" title="'.$this->get_translation('EditCommentTip').'" alt="'.$this->get_translation('EditComment').'" style="float: right; padding: 2px;"/></a>';
 				}
 
 				if ($comment['body_r'])
@@ -226,6 +226,7 @@ if ($this->has_access('read'))
 
 			// load WikiEdit
 			echo '<script src="'.$this->config['base_url'].'js/protoedit.js"></script>'."\n";
+			echo '<script src="'.$this->config['base_url'].'js/lang/wikiedit.'.$this->user_lang.'.js"></script>'."\n";
 			echo '<script src="'.$this->config['base_url'].'js/wikiedit.js"></script>'."\n";
 			echo '<script src="'.$this->config['base_url'].'js/autocomplete.js"></script>'."\n";
 			?>
