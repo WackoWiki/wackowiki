@@ -66,6 +66,7 @@ if ($this->config['allow_swfobject'])
 if ($this->method == 'edit')
 {
 	echo '<script src="'.$this->config['base_url'].'js/protoedit.js"></script>'."\n";
+	echo '<script src="'.$this->config['base_url'].'js/lang/wikiedit.'.$this->user_lang.'.js"></script>'."\n";
 	echo '<script src="'.$this->config['base_url'].'js/wikiedit.js"></script>'."\n";
 	echo '<script src="'.$this->config['base_url'].'js/autocomplete.js"></script>'."\n";
 }

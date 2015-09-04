@@ -61,47 +61,47 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
   {
     this.area.addBehavior(this.imagesPath + 'sel.htc');
   }
-  this.addButton('h1', 'Heading 1', '\'==\',\'==\',0,1');
-  this.addButton('h2', 'Heading 2', '\'===\',\'===\',0,1');
-  this.addButton('h3', 'Heading 3', '\'====\',\'====\',0,1');
-  this.addButton('h4', 'Heading 4', '\'=====\',\'=====\',0,1');
-  // this.addButton("h5","Heading 5","'======','======',0,1");
+  this.addButton('h1', lang.Heading1, '\'==\',\'==\',0,1');
+  this.addButton('h2', lang.Heading2, '\'===\',\'===\',0,1');
+  this.addButton('h3', lang.Heading3, '\'====\',\'====\',0,1');
+  this.addButton('h4', lang.Heading4, '\'=====\',\'=====\',0,1');
+  // this.addButton('h5', lang.Heading5, "'======','======',0,1");
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
-  this.addButton('bold', 'Bold', '\'**\',\'**\'');
-  this.addButton('italic', 'Italic', '\'//\',\'//\'');
-  this.addButton('underline', 'Underline', '\'__\',\'__\'');
-  this.addButton('strike', 'Strikethrough', '\'--\',\'--\'');
-  // this.addButton("fixed","Monospace","'##','##'");
+  this.addButton('bold', lang.Bold, '\'**\',\'**\'');
+  this.addButton('italic', lang.Italic, '\'//\',\'//\'');
+  this.addButton('underline', lang.Underline, '\'__\',\'__\'');
+  this.addButton('strike', lang.Strikethrough, '\'--\',\'--\'');
+  // this.addButton('fixed', lang.Code, "'##','##'");
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
-  this.addButton('ul', 'List', '\'  * \',\'\',0,1,1');
-  this.addButton('ol', 'Numbered list', '\'  1. \',\'\',0,1,1');
+  this.addButton('ul', lang.List, '\'  * \',\'\',0,1,1');
+  this.addButton('ol', lang.NumberedList, '\'  1. \',\'\',0,1,1');
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
-  //this.addButton("left","Left","'%%(wacko wrapper=text wrapper_align=left)','%%',2");
-  this.addButton('center', 'Center', '\'%%(wacko wrapper=text wrapper_align=center)\',\'%%\',2');
-  this.addButton('right', 'Right', '\'%%(wacko wrapper=text wrapper_align=right)\',\'%%\',2');
-  this.addButton('justify', 'Justify', '\'%%(wacko wrapper=text wrapper_align=justify)\',\'%%\',2');
+  //this.addButton('left', lang.Left,"'%%(wacko wrapper=text wrapper_align=left)','%%',2");
+  this.addButton('center', lang.Center, '\'%%(wacko wrapper=text wrapper_align=center)\',\'%%\',2');
+  this.addButton('right', lang.Right, '\'%%(wacko wrapper=text wrapper_align=right)\',\'%%\',2');
+  this.addButton('justify', lang.Justify, '\'%%(wacko wrapper=text wrapper_align=justify)\',\'%%\',2');
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
-  this.addButton('outdent', 'Outdent', '', 'document.getElementById(\'' + this.id + '\')._owner.unindent');
-  this.addButton('indent', 'Indent', '\'  \',\'\',0,1');
+  this.addButton('outdent', lang.Outdent, '', 'document.getElementById(\'' + this.id + '\')._owner.unindent');
+  this.addButton('indent', lang.Indent, '\'  \',\'\',0,1');
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
-  // this.addButton("code","Code","'%% ',' %%',2");
-  // this.addButton("html","HTML","'<# ',' #>',2");
-  // this.addButton("action","Action","'{{ ',' }}',2");
-  this.addButton('hr', 'Line', '\'\',\'\\n----\\n\',2');
-  // this.addButton("signature","Signature","'::@::',' ',1");
-  this.addButton('quote', 'Quote', '\'<[\',\']>\',2');
-  this.addButton('textred', 'Marked text', '\'!!\',\'!!\',2');
-  this.addButton('highlightcolor', 'Highlight text', '\'??\',\'??\',2');
-  //this.addButton("shade","Shade","'%%(wacko wrapper="shade")','%%',2");
+  // this.addButton('code', lang.CodeWrapper,"'%% ',' %%',2");
+  // this.addButton('html', lang.HTML,"'<# ',' #>',2");
+  // this.addButton('action', lang.Action,"'{{ ',' }}',2");
+  this.addButton('hr', lang.Line, '\'\',\'\\n----\\n\',2');
+  // this.addButton("signature",lang.Signature,"'::@::',' ',1");
+  this.addButton('quote', lang.Quote, '\'<[\',\']>\',2');
+  this.addButton('textred', lang.MarkedText, '\'!!\',\'!!\',2');
+  this.addButton('highlightcolor', lang.HighlightText, '\'??\',\'??\',2');
+  //this.addButton('shade', lang.Shade,"'%%(wacko wrapper="shade")','%%',2");
   this.addButton('createlink', 'Hyperlink', '', 'document.getElementById(\'' + this.id + '\')._owner.createLink');
   if (this.autocomplete) this.autocomplete.addButton();
-  this.addButton('createtable', 'Insert Table', '\'\',\'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\',2');
+  this.addButton('createtable', lang.InsertTable, '\'\',\'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\',2');
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
-  this.addButton('help', 'Help & About', '', 'document.getElementById(\'' + this.id + '\')._owner.help');
+  this.addButton('help', lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
   this.addButton('customhtml', '<li><div style="font:12px Arial;text-decoration:underline; padding: 3px 3px 4px 4px;" id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
   + 'onmouseout=\'this.className="btn-";\' class="btn-" '
-  + 'onclick="this.className=\'btn-pressed\';window.open(\'http://wackowiki.sourceforge.net/doc/Doc/English/Formatting\');" '
-  + ' title="Help on Wiki-formatting">Help'
+  + 'onclick="this.className=\'btn-pressed\';window.open(\'http://wackowiki.sourceforge.net/doc/' + lang.HelpFormattingPage + '\');" '
+  + ' title="' + lang.HelpFormattingTip + '">' + lang.HelpFormatting + ''
   + '</div></li>');
   try {
     var toolbar = document.createElement('div');
@@ -635,27 +635,11 @@ return false;
 }
 WikiEdit.prototype.help = function ()
 {
-s = '         WikiEdit 3.08 \n';
-s += '  (c) Roman Ivanov, 2003-2011   \n';
+s = '         WikiEdit 3.15 \n';
+s += '  (c) Roman Ivanov, 2003-2015   \n';
 s += '  http://wackowiki.sourceforge.net/doc/Dev/Projects/WikiEdit \n';
 s += '\n';
-s += ' Shortcuts:\n';
-s += ' Ctrl+B - Bold\n';
-s += ' Ctrl+I - Italic\n';
-s += ' Ctrl+U - Underline\n';
-s += ' Ctrl+Shift+S - Strikethrough\n';
-s += ' Ctrl+Shift+1 .. 4 - Heading 1..4\n';
-s += ' Alt+I or Ctrl+T - Indent\n';
-s += ' Alt+U or Ctrl+Shift+T - Unindent\n';
-s += ' Ctrl+J - MarkUp (!!)\n';
-s += ' Ctrl+H - MarkUp (??)\n';
-s += ' Alt+L - Link\n';
-s += ' Ctrl+L - Link with description\n';
-s += ' Ctrl+Shift+L - Unordered List\n';
-s += ' Ctrl+Shift+N - Ordered List\n';
-s += ' Ctrl+Shift+O - Ordered List\n';
-s += ' Ctrl+= - Small text\n';
-s += ' Ctrl+Shift+Minus - Horizontal line\n';
-s += ' NB: all Alt-shortcuts do not work in Opera.\n';
+s += lang.HelpAboutTip;
+
 alert(s);
 }
