@@ -374,6 +374,7 @@ $delete_table[]	= array('usergroup',		$table_usergroup_drop);
 $delete_table[]	= array('usergroup_member',	$table_usergroup_member_drop);
 $delete_table[]	= array('category',			$table_category_drop);
 $delete_table[]	= array('category_page',	$table_category_page_drop);
+$delete_table[]	= array('file_link',		$table_file_link_drop);
 $delete_table[]	= array('link',				$table_link_drop);
 $delete_table[]	= array('log',				$table_log_drop);
 $delete_table[]	= array('page',				$table_page_drop);
@@ -401,6 +402,7 @@ $create_table[]	= array('usergroup',		$table_usergroup);
 $create_table[]	= array('usergroup_member',	$table_usergroup_member);
 $create_table[]	= array('category',			$table_category);
 $create_table[]	= array('category_page',	$table_category_page);
+$create_table[]	= array('file_link',		$table_file_link);
 $create_table[]	= array('link',				$table_link);
 $create_table[]	= array('log',				$table_log);
 $create_table[]	= array('page',				$table_page);
@@ -469,6 +471,9 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_
 // config
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_1,		$lang['ErrorUpdatingTable']);
+
+// file link
+$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'file_link',	$table_file_link_r5_4_0,		$lang['ErrorCreatingTable']);
 
 //menu
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_0,			$lang['ErrorAlteringTable']);

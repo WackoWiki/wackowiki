@@ -1,7 +1,7 @@
 /*
 ////////////////////////////////////////////////////////////////////////
 // WikiEdit                                                           //
-// v. 3.03                                                            //
+// v. 3.15                                                            //
 // supported: MZ1.4+, MSIE5+, Opera 8+                                //
 //                                                                    //
 // (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2005             //
@@ -15,6 +15,7 @@
 
 For license see LICENSE.TXT
 */
+
 var WikiEdit = function () {
   this.mark = '##inspoint##';
   this.begin = '##startpoint##';

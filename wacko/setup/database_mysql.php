@@ -54,6 +54,15 @@ $table_config = "CREATE TABLE {$pref}config (".
 					"UNIQUE KEY idx_config_name (config_name)".
 				") {$engine} COMMENT='' {$charset}";
 
+$table_file_link = "CREATE TABLE {$pref}link (".
+					"file_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"file_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"PRIMARY KEY (file_link_id),".
+					"KEY idx_page_id (page_id),".
+					"KEY idx_file_id (file_id)".
+					") {$engine} COMMENT='' {$charset}";
+
 $table_link = "CREATE TABLE {$pref}link (".
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -388,6 +397,7 @@ $table_cache_drop				= "DROP TABLE {$pref}cache";
 $table_config_drop				= "DROP TABLE {$pref}config";
 $table_category_drop			= "DROP TABLE {$pref}category";
 $table_category_page_drop		= "DROP TABLE {$pref}category_page";
+$table_file_link_drop			= "DROP TABLE {$pref}file_link";
 $table_link_drop				= "DROP TABLE {$pref}link";
 $table_log_drop					= "DROP TABLE {$pref}log";
 $table_page_drop				= "DROP TABLE {$pref}page";
