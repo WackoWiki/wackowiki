@@ -19,6 +19,7 @@ class Wacko
 	var $categories;
 	var $is_watched;
 	var $query_time;
+	var $file					= array();	// for file tracking
 	var $query_log				= array();
 	var $inter_wiki				= array();
 	var $_acl					= array();
@@ -272,6 +273,22 @@ class Wacko
 		}
 
 		return $file;
+	}
+
+	function upload_quota($user_id = '')
+	{
+		// get used upload quota
+		$files	= $this->load_single(
+				"SELECT SUM(file_size) AS used_quota ".
+				"FROM ".$this->config['table_prefix']."upload ".
+					($user_id
+						? "WHERE user_id = '{$user_id}' "
+						: "").
+				"LIMIT 1");
+
+		$used_upload_quota = $files['used_quota'];
+
+		return $used_upload_quota;
 	}
 
 	function available_themes()
@@ -1411,8 +1428,22 @@ class Wacko
 			"WHERE ".($for
 				? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-				"(l.to_supertag = '".quote($this->dblink, $this->translit($tag))."')".
-			" ORDER BY tag", true);
+				"(l.to_supertag = '".quote($this->dblink, $this->translit($tag))."') ".
+			"ORDER BY tag", true);
+	}
+
+	function load_files_linked($file_id, $for = '')
+	{
+		return $this->load_all(
+			"SELECT p.page_id, p.tag AS tag, p.title ".
+			"FROM ".$this->config['table_prefix']."file_link l ".
+				"INNER JOIN ".$this->config['table_prefix']."page p ON (p.page_id = l.page_id) ".
+				"INNER JOIN ".$this->config['table_prefix']."upload u ON (u.upload_id = l.file_id) ".
+			"WHERE ".($for
+						? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
+						: "").
+				"l.file_id = '".(int) $file_id."' ".
+			"ORDER BY tag", true);
 	}
 
 	function load_changed($limit = 100, $for = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
@@ -2748,6 +2779,15 @@ class Wacko
 		$img_link	= false;
 		$text		= str_replace('"', '&quot;', $text);
 
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
+		{
+			$link_tracking = true;
+		}
+		else
+		{
+			$link_tracking = false;
+		}
+
 		if (!$safe)
 		{
 			$text = htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
@@ -2844,7 +2884,7 @@ class Wacko
 		}
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
 		{
-			// this is a file:
+			// this is a uploaded file:
 			// TODO: add file link tracking
 			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
 			$_file_name		= $matches[2];
@@ -2864,9 +2904,21 @@ class Wacko
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
 					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+
+					// tracking file link
+					if ($link_tracking)
+					{
+						// add file link only once
+						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file))
+						{
+							#echo '## 1 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
+							$this->file[] = $file_data['upload_id'];
+							$this->track_link_to($file_data['upload_id'], 'file');
+						}
+					}
 				}
 			}
-			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - syntax for global only file
+			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - global only file
 			{
 				#echo '####2: file:/some.zip <br />'.$arr[1].'####<br />';
 				$file_name = $arr[1];
@@ -2874,6 +2926,18 @@ class Wacko
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
 					$url		= $this->config['base_url'].$this->config['upload_path'].$file_name;
+
+					// tracking file link
+					if ($link_tracking)
+					{
+						// add file link only once
+						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file))
+						{
+							#echo '## 2 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
+							$this->file[] = $file_data['upload_id'];
+							$this->track_link_to($file_data['upload_id'], 'file');
+						}
+					}
 				}
 			}
 
@@ -2895,8 +2959,20 @@ class Wacko
 				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
 				$page_id	= $this->get_page_id($page_tag);
 
-				$file_data = $this->check_file_exists($file_name, $page_tag);
+				$file_data	= $this->check_file_exists($file_name, $page_tag);
 				$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
+
+				// tracking file link
+				if ($link_tracking)
+				{
+					// add file link only once
+					if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file))
+					{
+						#echo '## 3 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
+						$this->file[] = $file_data['upload_id'];
+						$this->track_link_to($file_data['upload_id'], 'file');
+					}
+				}
 
 				if ($this->is_admin()
 				|| ($file_data['upload_id'] && ($this->page['owner_id'] == $this->get_user_id()))
@@ -3193,11 +3269,13 @@ class Wacko
 			$anchor			= isset($matches[2]) ? $matches[2] : '';
 			$tag			= $unwtag;
 
-			if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
+			// track page link
+			if ($link_tracking)
 			{
-				$this->track_link_to($tag);
+				$this->track_link_to($tag, 'page');
 			}
 
+			// set a anchor once for link at the first appearance
 			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
 			{
 				$aname = 'id="a-'.$supertag.'"';
@@ -3508,14 +3586,32 @@ class Wacko
 	}
 
 	// TRACK LINKS
-	function track_link_to($tag)
+	//		$tag 		= 'page tag' --
+	//		$link_type = 'file' -- file link
+	//		$link_type = 'page' -- page link
+	function track_link_to($tag, $link_type = 'page' )
 	{
-		$this->linktable[] = $tag;
+		if ($link_type == 'page')
+		{
+			$this->linktable['page'][] = $tag;
+		}
+		else if ($link_type == 'file')
+		{
+			$this->linktable['file'][] = $tag;
+		}
+		#$this->debug_print_r($this->linktable);
 	}
 
-	function get_link_table()
+	function get_link_table($link_type)
 	{
-		return $this->linktable;
+		if ($link_type == 'page')
+		{
+			return $this->linktable['page'];
+		}
+		else if ($link_type == 'file')
+		{
+			return $this->linktable['file'];
+		}
 	}
 
 	function clear_link_table()
@@ -3535,25 +3631,28 @@ class Wacko
 
 	function write_link_table($from_page_id = '')
 	{
-		$query = '';
 
-		// delete old link table
 		if ($from_page_id == '')
 		{
 			$from_page_id = $this->page['page_id'];
 		}
 
-		$this->sql_query(
-			"DELETE ".
-			"FROM ".$this->config['table_prefix']."link ".
-			"WHERE from_page_id = '".(int)$from_page_id."'");
-
-		if ($link_table = $this->get_link_table())
+		// page link
+		if ($link_table = $this->get_link_table('page'))
 		{
+			$query = '';
+
+			// delete related old links in table
+			$this->sql_query(
+				"DELETE ".
+				"FROM ".$this->config['table_prefix']."link ".
+				"WHERE from_page_id = '".(int)$from_page_id."'");
+
 			foreach ($link_table as $to_tag)
 			{
 				$lower_to_tag = strtolower($to_tag);
 
+				// add link only once
 				if (!isset($written[$lower_to_tag]))
 				{
 					$query .= "('".(int)$from_page_id."', '".$this->get_page_id($to_tag)."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->translit($to_tag))."'),";
@@ -3565,6 +3664,38 @@ class Wacko
 				"INSERT INTO ".$this->config['table_prefix']."link ".
 					"(from_page_id, to_page_id, to_tag, to_supertag) ".
 				"VALUES ".rtrim($query, ','));
+
+			unset($query);
+		}
+
+		// file link
+		if ($file_table = $this->get_link_table('file'))
+		{
+			$query = '';
+
+			// delete page related old file links in table
+			$this->sql_query(
+				"DELETE ".
+				"FROM ".$this->config['table_prefix']."file_link ".
+				"WHERE page_id = '".(int)$from_page_id."'");
+
+			foreach ($file_table as $upload_id)
+			{
+				#$lower_to_tag = strtolower($to_tag);
+
+				#if (!isset($written[$lower_to_tag]))
+				#{
+					$query .= "('".(int)$from_page_id."', '".(int)$upload_id."'),";
+					#$written[$lower_to_tag] = 1;
+				#}
+			}
+
+			$this->sql_query(
+					"INSERT INTO ".$this->config['table_prefix']."file_link ".
+					"(page_id, file_id) ".
+					"VALUES ".rtrim($query, ','));
+
+			unset($query);
 		}
 	}
 

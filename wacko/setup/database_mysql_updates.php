@@ -24,6 +24,16 @@ $alter_category_r5_4_0 = "ALTER TABLE {$pref}category CHANGE parent parent_id IN
 $update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|wordprocessor' WHERE config_name = 'standard_handlers'";
 $update_config_r5_4_1 = "DELETE FROM {$pref}config WHERE config_name IN ('session_expiration', 'x_csp')";
 
+// FILE LINK
+$table_file_link_r5_4_0 = "CREATE TABLE {$pref}link (".
+							"file_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
+							"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+							"file_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+							"PRIMARY KEY (file_link_id),".
+							"KEY idx_page_id (page_id),".
+							"KEY idx_file_id (file_id)".
+						") {$engine} COMMENT='' {$charset}";
+
 // LINK
 $alter_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx_from_tag (from_page_id, to_tag(78))";
 
