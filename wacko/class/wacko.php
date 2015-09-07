@@ -3681,13 +3681,7 @@ class Wacko
 
 			foreach ($file_table as $upload_id)
 			{
-				#$lower_to_tag = strtolower($to_tag);
-
-				#if (!isset($written[$lower_to_tag]))
-				#{
-					$query .= "('".(int)$from_page_id."', '".(int)$upload_id."'),";
-					#$written[$lower_to_tag] = 1;
-				#}
+				$query .= "('".(int)$from_page_id."', '".(int)$upload_id."'),";
 			}
 
 			$this->sql_query(
