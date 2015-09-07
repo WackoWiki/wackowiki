@@ -54,7 +54,7 @@ $table_config = "CREATE TABLE {$pref}config (".
 					"UNIQUE KEY idx_config_name (config_name)".
 				") {$engine} COMMENT='' {$charset}";
 
-$table_file_link = "CREATE TABLE {$pref}link (".
+$table_file_link = "CREATE TABLE {$pref}file_link (".
 					"file_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".

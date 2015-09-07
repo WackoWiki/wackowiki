@@ -224,7 +224,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		}
 
 		// user-owned pages
-		$limit = 20;
+		$limit = 10;
 
 		echo '<h2 id="pages">'.$this->get_translation('UsersPages').'</h2>'."\n";
 		echo '<div class="indent"><small>'.$this->get_translation('UsersOwnedPages').': '.$user['total_pages'].'&nbsp;&nbsp;&nbsp; '.$this->get_translation('UsersRevisionsMade').': '.$user['total_revisions']."</small></div><br />\n";
@@ -281,7 +281,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		}
 
 		// last user comments
-		$limit = 20;
+		$limit = 10;
 
 		echo '<h2 id="comments">'.$this->get_translation('UsersComments').'</h2>'."\n";
 
@@ -348,6 +348,90 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		{
 			echo $this->get_translation('CommentsDisabled');
 		}
+
+		if ($this->get_user())
+		{
+			// last user uploads
+			$limit = 10;
+
+			echo '<h2 id="uploads">'.$this->get_translation('UsersUploads').'</h2>'."\n";
+
+			if ($this->config['upload'] == 1 || $this->is_admin())
+			{
+				echo '<div class="indent"><small>'.$this->get_translation('UsersFilesUploaded').': '.$user['total_uploads']."</small></div>\n";
+
+				$pagination = $this->pagination($user['total_uploads'], $limit, 'u', 'profile='.$user['user_name'].'#comments');
+
+				if ($user['total_uploads'])
+				{
+					$uploads = $this->load_all(
+							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.lang, c.tag ".
+							"FROM {$this->config['table_prefix']}upload u ".
+							"LEFT JOIN {$this->config['table_prefix']}page c ON (u.page_id = c.page_id) ".
+							"WHERE u.user_id = '".$user['user_id']."' ".
+							"AND u.deleted <> '1' ".
+							#"AND p.deleted <> '1' ".
+							"ORDER BY u.uploaded_dt DESC ".
+							"LIMIT {$pagination['offset']}, $limit");
+
+					// pagination
+					if (isset($pagination['text']))
+					{
+						echo '<span class="pagination">'.$pagination['text']."</span>\n";
+					}
+
+					// $uploads list itself
+					echo '<div>'."\n";
+
+					foreach ($uploads as $upload)
+					{
+						if (!$this->config['hide_locked']
+							|| ($upload['page_id'] && $this->has_access('read', $upload['page_id'], $this->get_user_name()) === true)
+							||	!$upload['page_id'])
+						{
+							// check current page lang for different charset to do_unicode_entities() against
+							if ($this->page['lang'] != $upload['lang'])
+							{
+								$_lang = $upload['lang'];
+							}
+							else
+							{
+								$_lang = '';
+							}
+
+							if ($upload['page_id']) // !$global
+							{
+								$path2		= '_file:/'.($this->slim_url($upload['tag'])).'/';
+								#$on_page	= $this->get_translation('To').' '.$this->link('/'.$upload['comment_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
+							}
+							else
+							{
+								$path2		= '_file:';
+								#$on_page	= '<span title="">&rarr; '.'global';
+							}
+
+							echo '<small>'.$this->get_time_string_formatted($upload['uploaded_dt']).'</small>  &mdash; '.$this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang)."<br />\n";
+
+							$i = 0;
+
+							if (++$i >= $limit) break 1;
+						}
+					}
+
+					echo "</div>\n";
+
+					unset($uploads, $upload, $limit, $i);
+				}
+				else
+				{
+					echo '<em>'.$this->get_translation('UsersNA2').'</em>';
+				}
+			}
+			else
+			{
+				echo $this->get_translation('CommentsDisabled');
+			}
+		}
 	}
 }
 // display whole userlist instead of the particular profile
@@ -383,6 +467,11 @@ else
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'comments')
 	{
 		$order = "ORDER BY total_comments ";
+		$param = "sort=".$_GET['sort'];
+	}
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'uploads')
+	{
+		$order = "ORDER BY total_uploads ";
 		$param = "sort=".$_GET['sort'];
 	}
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'revisions')
@@ -421,7 +510,7 @@ else
 
 	// collect data
 	$users = $this->load_all(
-		"SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, s.hide_lastsession ".
+		"SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession ".
 		"FROM {$this->config['user_table']} u ".
 			"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 		($where == true ? $where : '').
@@ -457,6 +546,7 @@ else
 			'<th><a href="'.$this->href('', '', 'sort=revisions'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersRevisions').( isset($_GET['sort']) && $_GET['sort'] == 'revisions' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
 		($this->get_user()
 			?
+			'<th><a href="'.$this->href('', '', 'sort=uploads'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersUploads').( isset($_GET['sort']) && $_GET['sort'] == 'uploads' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
 			'<th><a href="'.$this->href('', '', 'sort=signup'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersSignup').( isset($_GET['sort']) && $_GET['sort'] == 'signup' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
 			'<th><a href="'.$this->href('', '', 'sort=last_visit'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'last_visit' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'
 			: '').
@@ -479,6 +569,7 @@ else
 					'<td style="text-align:center;">'.$user['total_revisions'].'</td>'.
 				($this->get_user()
 					?
+					'<td style="text-align:center;">'.$user['total_uploads'].'</td>'.
 					'<td style="text-align:center;">'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
 					'<td style="text-align:center;">'.( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'

@@ -25,7 +25,7 @@ $update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|adm
 $update_config_r5_4_1 = "DELETE FROM {$pref}config WHERE config_name IN ('session_expiration', 'x_csp')";
 
 // FILE LINK
-$table_file_link_r5_4_0 = "CREATE TABLE {$pref}link (".
+$table_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (".
 							"file_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
 							"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 							"file_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
