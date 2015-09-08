@@ -19,7 +19,7 @@ class Wacko
 	var $categories;
 	var $is_watched;
 	var $query_time;
-	var $file					= array();	// for file tracking
+	var $file_link				= array();	// for file tracking
 	var $query_log				= array();
 	var $inter_wiki				= array();
 	var $_acl					= array();
@@ -2909,10 +2909,10 @@ class Wacko
 					if ($link_tracking)
 					{
 						// add file link only once
-						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file))
+						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file_link))
 						{
 							#echo '## 1 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
-							$this->file[] = $file_data['upload_id'];
+							$this->file_link[] = $file_data['upload_id'];
 							$this->track_link_to($file_data['upload_id'], 'file');
 						}
 					}
@@ -2931,10 +2931,10 @@ class Wacko
 					if ($link_tracking)
 					{
 						// add file link only once
-						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file))
+						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file_link))
 						{
 							#echo '## 2 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
-							$this->file[] = $file_data['upload_id'];
+							$this->file_link[] = $file_data['upload_id'];
 							$this->track_link_to($file_data['upload_id'], 'file');
 						}
 					}
@@ -2966,10 +2966,10 @@ class Wacko
 				if ($link_tracking)
 				{
 					// add file link only once
-					if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file))
+					if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file_link))
 					{
 						#echo '## 3 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
-						$this->file[] = $file_data['upload_id'];
+						$this->file_link[] = $file_data['upload_id'];
 						$this->track_link_to($file_data['upload_id'], 'file');
 					}
 				}
