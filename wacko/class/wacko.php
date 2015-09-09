@@ -3373,6 +3373,7 @@ class Wacko
 					$text	= htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 				}
 
+				// disable and visualize self-referencing link
 				if ($this->config['youarehere_text'])
 				{
 					if (isset($this->context[$this->current_context]) && ($this->translit($tag) == $this->translit($this->context[$this->current_context])) )
