@@ -52,6 +52,9 @@ function admin_config_formatter(&$engine, &$module)
 		$config['timezone']					= (float)$_POST['timezone'];
 		$config['dst']						= (int)$_POST['dst'];
 		$config['link_target']				= (int)$_POST['link_target'];
+		$config['urls_underscores']			= (int)$_POST['urls_underscores'];
+		$config['show_spaces']				= (int)$_POST['show_spaces'];
+		$config['youarehere_text']			= (string)$_POST['youarehere_text'];
 
 		$engine->_set_config($config, '', true);
 
@@ -250,6 +253,30 @@ function admin_config_formatter(&$engine, &$module)
 				<td class="label"><label for="enable_link_target"><strong>Where external links open:</strong><br />
 				<small>Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.</small></label></td>
 				<td><input type="checkbox" id="enable_link_target" name="link_target" value="1"<?php echo ( $engine->config['link_target'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="enable_urls_underscores"><strong>Form addresses (URLs) with underscores:</strong><br />
+				<small>For example <code>http://[..]/WackoWiki</code> becames <code>http://[..]/Wacko_Wiki</code> with this option.</small></label></td>
+				<td><input type="checkbox" id="enable_urls_underscores" name="urls_underscores" value="1"<?php echo ( $engine->config['urls_underscores'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="enable_show_spaces"><strong>Show spaces in WikiNames:</strong><br />
+				<small>Show spaces in WikiNames, e.g. <code>MyName</code> beeing displayed as <code>My Name</code> with this option.</small></label></td>
+				<td><input type="checkbox" id="enable_show_spaces" name="show_spaces" value="1"<?php echo ( $engine->config['show_spaces'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="enable_youarehere_text"><strong>Disable and visualize self-referencing links:</strong><br />
+				<small>Visualizing links to the same page, try to <code>'&lt;b&gt;####&lt;/b&gt;'</code>, all links-to-self became not links, but bold text.</small></label></td>
+				<td><input maxlength="50" style="width:200px;" id="enable_youarehere_text" name="youarehere_text" value="<?php echo htmlspecialchars($engine->config['youarehere_text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 		</table>
 		<br />
