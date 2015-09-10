@@ -32,8 +32,8 @@ if ($this->has_access('read')
 	// check for reserved word
 	if ($result = $this->validate_reserved_words($this->tag))
 	{
-		$error .= $result;
-		$this->set_message(str_replace('%1', $result, $this->get_translation('PageReservedWord')));
+		$message = str_replace('%1', $result, $this->get_translation('PageReservedWord'));
+		$this->set_message($message);
 		$this->redirect($this->href('new', $this->config['root_page'])); // $this->tag is reserved word
 
 	}
@@ -101,32 +101,42 @@ if ($this->has_access('read')
 			// check for reserved word
 			if ($result = $this->validate_reserved_words($this->tag))
 			{
-				$error .= $result;
+				$message = $result;
+				$this->set_message($message , 'error');
+				$error = true;
 			}
 
 			// TODO: if captcha .. else
 			// check form token
 			if (!$this->validate_form_token('edit_page'))
 			{
-				$error .= $this->get_translation('FormInvalid');
+				$message = $this->get_translation('FormInvalid');
+				$this->set_message($message , 'error');
+				$error = true;
 			}
 
 			// check for overwriting
 			if ($this->page && $this->page['modified'] != $_POST['previous'])
 			{
-				$error .= $this->get_translation('OverwriteAlert');
+				$message = $this->get_translation('OverwriteAlert');
+				$this->set_message($message , 'error');
+				$error = true;
 			}
 
 			// check text length
 			#if ($textchars > $maxchars)
 			#{
+				#$message = str_replace('%1', $textchars - $maxchars, $this->get_translation('TextDBOversize')).' ';
+				#$this->set_message($message , 'error');
 			#	$error .= str_replace('%1', $textchars - $maxchars, $this->get_translation('TextDBOversize')).' ';
 			#}
 
 			// check for edit note
 			if (($this->config['edit_summary'] == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
 			{
-				$error .= $this->get_translation('EditNoteMissing');
+				$message = $this->get_translation('EditNoteMissing');
+				$this->set_message($message , 'error');
+				$error = true;
 			}
 
 			// check categories
@@ -141,7 +151,9 @@ if ($this->has_access('read')
 				// captcha validation
 				if ($this->validate_captcha() === false)
 				{
-					$error .= $this->get_translation('CaptchaFailed');
+					$message = $this->get_translation('CaptchaFailed');
+					$this->set_message($message , 'error');
+					$error = true;
 				}
 			}
 
@@ -150,7 +162,16 @@ if ($this->has_access('read')
 			// You're not allowed to have empty comments as they would be kinda pointless.
 			if (!$body && $this->page['comment_on_id'] != 0)
 			{
-				$error .= $this->get_translation('EmptyComment');
+				$message = $this->get_translation('EmptyComment');
+				$this->set_message($message , 'error');
+				$error = true;
+			}
+
+			if ($bad_words = $this->bad_words($body))
+			{
+				$message = $bad_words;
+				$this->set_message($message , 'error');
+				$error = true;
 			}
 
 			// store
@@ -220,7 +241,8 @@ if ($this->has_access('read')
 		// saving blank document
 		else if (isset($_POST['body']) && $_POST['body'] == '')
 		{
-			$this->set_message($this->get_translation('EmptyPage'), 'error');
+			$message = $this->get_translation('EmptyPage');
+			$this->set_message($message, 'error');
 			$this->redirect($this->href());
 		}
 	}
@@ -244,10 +266,6 @@ if ($this->has_access('read')
 	if (isset($_POST['minor_edit']))	$minor_edit	= $_POST['minor_edit'];
 
 	// display form
-	if ($error)
-	{
-		$this->set_message($error, 'error');
-	}
 
 	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
 	$output .= $this->form_open('edit_page', 'edit', 'post', true, '', ' cf="true" ');
@@ -421,6 +439,8 @@ if ($this->has_access('read')
 		$this->show_captcha(false);
 	}
 	// end captcha
+
+	#$this->set_js_translation(array('YouAre', 'LogoutAreYouSure'));
 ?>
 	<script>
 		wE = new WikiEdit();

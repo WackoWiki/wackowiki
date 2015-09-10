@@ -889,6 +889,9 @@ $wacko_translation = array(
 	'SetAsReviewed'				=> 'Seite als geprüft gesetzt',
 	'SetAsUnreviewed'			=> 'Seite als ungeprüfed gesetzt',
 
+	// word filter
+	'PotentialSpam'				=> 'Fehler: möglicher Spam erkannt',
+
 	// moderation handler
 	'Moderation'				=> 'Moderation',
 	'Topics'					=> 'Themen',

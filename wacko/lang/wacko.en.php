@@ -895,6 +895,9 @@ $wacko_translation = array(
 	'SetAsReviewed'				=> 'Set page as reviewed',
 	'SetAsUnreviewed'			=> 'Set page as unreviewed',
 
+	// word filter
+	'PotentialSpam'				=> 'Error: Identified Potential Spam',
+
 	// moderation handler
 	'Moderation'				=> 'Moderation',
 	'Topics'					=> 'topics',
@@ -1069,6 +1072,23 @@ $wacko_translation = array(
 		'12.75'	=> '[UTC + 12:45] Chatham Islands Time',
 		'13'	=> '[UTC + 13] Tonga Time, Phoenix Islands Time',
 		'14'	=> '[UTC + 14] Line Island Time',
+	),
+
+	'Languages'	=>  array(
+		'bg' => 'bulgarian',
+		'da' => 'danish',
+		'nl' => 'dutch',
+		'el' => 'greek',
+		'en' => 'english',
+		'et' => 'estonian',
+		'fr' => 'french',
+		'de' => 'german',
+		'hu' => 'hungarian',
+		'it' => 'italian',
+		'pl' => 'polish',
+		'pt' => 'portuguese',
+		'ru' => 'russian',
+		'es' => 'spanish',
 	),
 
 	// log

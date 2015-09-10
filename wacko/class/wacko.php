@@ -1632,10 +1632,12 @@ class Wacko
 			{
 				foreach ($this->spam as $spam)
 				{
-					if (strpos($text, trim($spam))!== false)
+					if (stripos($text, trim($spam)) !== false)
 					{
-						$this->set_message('Error: Identified Potential Spam: '.$spam) ; // TODO: localize
-						return true;
+						$message = $this->get_translation('PotentialSpam').' : <code>'.$spam.'</code>';
+						#$this->set_message($message, 'warning');
+
+						return $message;
 					}
 				}
 			}
@@ -1745,10 +1747,10 @@ class Wacko
 
 
 		//	Check for bad words.  If we find any then we return from the function, not saving the changes. See bug#188 - Enhanced Spam filtering
-		if ($this->bad_words($body))
-		{
-			return;
-		}
+		#if ($this->bad_words($body))
+		#{
+		#	return;
+		#}
 
 
 		// write tag
@@ -3559,7 +3561,7 @@ class Wacko
 			// disallow pages with Comment[0-9] and all sub pages, we do not want sub pages on a comment.
 			if (preg_match( '/\b(Comment([0-9]+))\b/i', $_data, $match ))
 			{
-				return "Comment([0-9]+)";
+				return 'Comment([0-9]+)';
 			}
 		}
 
@@ -3578,7 +3580,7 @@ class Wacko
 		}
 		*/
 
-		return 0;
+		return false;
 	}
 
 	function is_wiki_name($text)
@@ -3898,6 +3900,11 @@ class Wacko
 		if ($referrer && !preg_match('/^'.preg_quote($this->config['base_url'], '/').'/', $referrer) && isset($_GET['sid']) === false) // TODO: isset($_GET['PHPSESSID']) === false
 		{
 			if (!preg_match('`^https?://`', $referrer))
+			{
+				return;
+			}
+
+			if ($this->bad_words($referrer))
 			{
 				return;
 			}
