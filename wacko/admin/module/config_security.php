@@ -322,7 +322,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_security_headers"><strong>Enable Security Headers:</strong><br />
-					<small>Set security headers (frame busting, clickjacking/XSS/CSRF protection).</small></label></td>
+					<small>Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br />CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br />Disabling Content Security Policy is a security risk !</small></label></td>
 					<td>
 						<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ( $engine->config['enable_security_headers'] == 1 ? ' checked="checked"' : '' );?> /><label for="security_headers_on">On.</label>
 						<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ( $engine->config['enable_security_headers'] == 0 ? ' checked="checked"' : '' );?> /><label for="security_headers_off">Off.</label>

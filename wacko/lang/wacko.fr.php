@@ -887,6 +887,9 @@ $wacko_translation = array(
 	'SetAsReviewed'				=> 'Définir la page comme revue',
 	'SetAsUnreviewed'			=> 'Définir la page comme non revue',
 
+	// word filter
+	'PotentialSpam'				=> 'Error: Identified Potential Spam',
+
 	// moderation handler
 	'Moderation'				=> 'Modération',
 	'Topics'					=> 'sujets',

@@ -49,14 +49,6 @@ function admin_config_uploads(&$engine, &$module)
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 
-	// get used upload quota
-	$files	= $engine->load_single(
-			"SELECT SUM(file_size) AS used_quota ".
-			"FROM ".$engine->config['table_prefix']."upload ".
-			"LIMIT 1");
-
-	$used_upload_quota = round($files['used_quota'] / 1048576, 2); // 1024*1024
-
 	echo $engine->form_open('upload', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="update" />
@@ -93,7 +85,7 @@ function admin_config_uploads(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota"><strong>Total upload quota: (KiB):</strong><br />
-					<small>Maximum drive space available for attachments for the whole engine, with 0 being unlimited. <strong><?php echo $used_upload_quota;?> MiB</strong> used.</small></label></td>
+					<small>Maximum drive space available for attachments for the whole engine, with 0 being unlimited. <strong><?php echo $engine->binary_multiples($engine->upload_quota(), false, true, true);?></strong> used.</small></label></td>
 				<td><input type="number" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int)$engine->config['upload_quota'];?>" />KiB</td>
 			</tr>
 			<tr class="lined">

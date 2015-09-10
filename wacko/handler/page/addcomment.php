@@ -99,14 +99,27 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$_SESSION['title']			= $title;
 		$_SESSION['comment_delay']	= time();
 
-		$this->set_message(str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded')), 'error');
+		$message = str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded'));
+		$this->set_message($message, 'error');
+		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
+	}
+	else if ($bad_words = $this->bad_words($body))
+	{
+		$_SESSION['body']			= $body;
+		$_SESSION['title']			= $title;
+		$_SESSION['comment_delay']	= time();
+
+		$message = $bad_words;
+		$this->set_message($message , 'error');
+		#$error = true;
+
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
 	else
 	{
 		// Start Comment Captcha
 
-		// Only show captcha if the admin enabled it in the config file
+		// Only show captcha if enabled
 		if ($this->config['captcha_new_comment'])
 		{
 			// captcha validation
@@ -114,7 +127,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			{
 				//not the right word
 				$error = $this->get_translation('CaptchaFailed');
-				$this->set_message($this->get_translation('CaptchaFailed'));
+				$this->set_message($error);
 				$_SESSION['freecap_old_comment'] = $body;
 			}
 			else
