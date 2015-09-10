@@ -35,7 +35,6 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$_SESSION['title']		= $title;
 
 		$this->set_message($this->get_translation('FormInvalid'), 'error');
-
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
 
