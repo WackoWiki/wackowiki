@@ -128,7 +128,7 @@ if ($this->has_access('read')
 			#{
 				#$message = str_replace('%1', $textchars - $maxchars, $this->get_translation('TextDBOversize')).' ';
 				#$this->set_message($message , 'error');
-			#	$error .= str_replace('%1', $textchars - $maxchars, $this->get_translation('TextDBOversize')).' ';
+			#	$error = true;
 			#}
 
 			// check for edit note
@@ -142,7 +142,9 @@ if ($this->has_access('read')
 			// check categories
 			#if (!$this->page && $this->get_categories_list($this->page_lang, 1) && $this->save_categories_list($this->page['page_id'], 1) !== true)
 			#{
-			#	$error .= 'Select at least one referring category (field) to the page. ';
+				#$message = 'Select at least one referring category (field) to the page. ';
+				#$this->set_message($message , 'error');
+			#	$error = true;
 			#}
 
 			// captcha code starts
@@ -440,7 +442,6 @@ if ($this->has_access('read')
 	}
 	// end captcha
 
-	#$this->set_js_translation(array('YouAre', 'LogoutAreYouSure'));
 ?>
 	<script>
 		wE = new WikiEdit();

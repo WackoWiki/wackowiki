@@ -1615,13 +1615,14 @@ class Wacko
 	function get_child_list()
 	{}
 
+
 	function bad_words($text)
 	{
 		/*
 		ANTISPAM
 
 		We load in the external antispam.conf file and then search the entire body content for each of the
-		words defined as spam.  If we find any then we return from the function, not saving the changes.
+		words defined as spam.  If we find any then we return a notice.
 		See bug#188 - Enhanced Spam filtering
 		*/
 		if ($this->config['spam_filter'])
@@ -1635,7 +1636,6 @@ class Wacko
 					if (stripos($text, trim($spam)) !== false)
 					{
 						$message = $this->get_translation('PotentialSpam').' : <code>'.$spam.'</code>';
-						#$this->set_message($message, 'warning');
 
 						return $message;
 					}
@@ -1744,14 +1744,6 @@ class Wacko
 		}
 
 		$page_id = $this->get_page_id($tag);
-
-
-		//	Check for bad words.  If we find any then we return from the function, not saving the changes. See bug#188 - Enhanced Spam filtering
-		#if ($this->bad_words($body))
-		#{
-		#	return;
-		#}
-
 
 		// write tag
 		if(isset($_POST['tag']))
