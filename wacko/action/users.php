@@ -380,7 +380,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 						echo '<span class="pagination">'.$pagination['text']."</span>\n";
 					}
 
-					// $uploads list itself
+					// uploads list itself
 					echo '<div>'."\n";
 
 					foreach ($uploads as $upload)
@@ -529,14 +529,14 @@ else
 	echo $this->form_close();
 	echo '</td></tr></table><br />'."\n";
 
-	// print list
-	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;\">\n";
-
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<tr><td colspan="6"><span class="pagination">'.$pagination['text'].'</span></td></tr>'."\n";
+		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 	}
+
+	// print list
+	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;\">\n";
 
 	// list header
 	echo '<tr>'.
@@ -582,13 +582,13 @@ else
 		}
 	}
 
+	echo "</table>\n";
+
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<tr><td colspan="6"><span class="pagination">'.$pagination['text'].'</span></td></tr>'."\n";
+		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
 	}
-
-	echo "</table>\n";
 }
 
 ?>
