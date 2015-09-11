@@ -120,8 +120,23 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 				$review = '';
 			}
 
+			// do unicode entities
+			if ($this->page['lang'] != $page['lang'])
+			{
+				$page_lang = $page['lang'];
+			}
+			else
+			{
+				$page_lang = '';
+			}
+
 			if ($page['edit_note'])
 			{
+				if ($page_lang)
+				{
+					$page['edit_note'] = $this->do_unicode_entities($page['edit_note'], $page_lang);
+				}
+
 				$edit_note = '<span class="editnote">['.$page['edit_note'].']</span>';
 			}
 			else
@@ -142,8 +157,8 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 			).
 			"</span> &mdash; ".
 			($title == 1
-				? $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0)
-				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'])
+				? $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
+				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
 			).
 			" . . . . . . . . . . . . . . . . <small>".
 			($page['user_name']

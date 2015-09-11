@@ -31,7 +31,7 @@ if ($max)				$limit = $max;
 else $limit	= 50;
 
 $count = $this->load_single(
-	"SELECT COUNT(tag) AS n ".
+	"SELECT COUNT(page_id) AS n ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
@@ -51,7 +51,7 @@ $pagination = $this->pagination($count['n'], $limit, $name = 'p', (!empty($_lett
 
 // get letters of alphabet with existing pages
 if ($pages = $this->load_all(
-	"SELECT page_id, tag, title ".
+	"SELECT tag, title ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
@@ -97,7 +97,7 @@ if ($pages = $this->load_all(
 
 // collect data for index
 if ($pages = $this->load_all(
-	"SELECT page_id, tag, title ".
+	"SELECT page_id, tag, title, lang ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
@@ -171,7 +171,7 @@ if ($pages_to_display)
 	if($this->letters)
 	{
 		// all
-		$top_links .= "<ul class=\"ul_letters\">\n";
+		$top_links .= '<ul class="ul_letters">'."\n";
 		$top_links .= '<li><a href="'.$this->href('', '', '').'">'.$this->get_translation('Any')."</a></li>\n";
 
 		foreach($this->letters as $letter => $letter_count)
@@ -201,6 +201,16 @@ if ($pages_to_display)
 	// display collected data
 	foreach ($pages_to_display as $page)
 	{
+		// do unicode entities
+		if ($this->page['lang'] != $page['lang'])
+		{
+			$page_lang = $page['lang'];
+		}
+		else
+		{
+			$page_lang = '';
+		}
+
 		if ($title == 1)
 		{
 			if ($page['title'])
@@ -234,11 +244,11 @@ if ($pages_to_display)
 
 		if ($title == 1)
 		{
-			echo $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0);
+			echo $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
 		}
 		else
 		{
-			echo $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, '', 0);
+			echo $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
 		}
 
 		echo "</li>\n";
