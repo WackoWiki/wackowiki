@@ -236,7 +236,7 @@ if ($can_view)
 
 		foreach ($files as $file)
 		{
-			$this->files_cache[$file['page_id']][$file['file_name']] = &$file;
+			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
 			$file_name			= $file['file_name'];
 			$file_width			= ''; // $file['picture_w'];
