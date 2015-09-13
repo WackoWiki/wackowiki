@@ -332,7 +332,7 @@ if ($this->is_owner() || $this->is_admin())
 		foreach ($categories as $id => $word)
 		{
 			# if ($n++ > 0) echo '<hr />';
-			echo '<li><span class="">'."\n\t";
+			echo '<li class="lined"><span class="">'."\n\t";
 			echo ($this->is_admin() || $this->config['owners_can_change_categories'] == true
 					? '<input type="radio" name="change" value="'.$id.'" />'
 					: '').

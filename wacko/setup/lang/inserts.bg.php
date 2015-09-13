@@ -29,7 +29,7 @@ insert_page('Регистрация', 'Регистрация', '{{registration}}', $lng, 'Admins', fa
 
 insert_page('Password', 'Password', '{{changepassword}}', $lng, 'Admins', false, false);
 insert_page('Search', 'Search', '{{search}}', $lng, 'Admins', false, false);
-insert_page('Login', 'Login', '{{login}}', $lng, 'Admins', false, false);
+insert_page('влизане', 'влизане', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Settings', 'Settings', '{{usersettings}}', $lng, 'Admins', false, false);
 
 ?>
