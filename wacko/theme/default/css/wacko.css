@@ -192,7 +192,15 @@ span.tocnumber {
 .email-even {color:#808000}
 
 /* Quotes: SYNTAX <[text]> */
-blockquote {  border-left:#cccccc 3px solid; padding:5px; color: #666666; }
+blockquote {
+	border-color: #f5f5f5 #f5f5f5 #f5f5f5 #729fcf;
+	border-style: solid;
+	border-width: 1px 1px 1px 3px;
+	color: #444444;
+	padding: 25px 30px;
+
+	/* background: #f5f5f5; */
+}
 blockquote p {  padding:0px;  margin: 5px 0px; }
 
 /* Paragraphs */
