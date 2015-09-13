@@ -28,6 +28,7 @@ if (!isset($page))		$page = '';
 if (!isset($ppage))		$ppage = '';
 if (!isset($legend))	$legend = '';
 if (!isset($deleted))	$deleted = 0;
+if (!isset($track))		$track = 0;
 if (!isset($picture))	$picture = null;
 if (!isset($max))		$max = '';
 
@@ -172,7 +173,7 @@ if ($can_view)
 
 	foreach($files as $file)
 	{
-		$this->files_cache[$file['page_id']][$file['file_name']] = &$file;
+		$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
 		$dt			= $file['uploaded_dt'];
 		$desc		= $this->format($file['file_description'], 'typografica' );
@@ -192,7 +193,7 @@ if ($can_view)
 		$text		= ($picture == false) ? $file_name : '';
 		$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, ".") + 1);
-		$link		= $this->link($path2.$file_name, '', $text);
+		$link		= $this->link($path2.$file_name, '', $text, '', $track);
 
 		if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png')
 		{
@@ -245,6 +246,8 @@ if ($can_view)
 	{
 		echo '</table>';
 	}
+
+	unset($files);
 
 	if (!$nomark)
 	{
