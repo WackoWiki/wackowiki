@@ -41,10 +41,11 @@ if ($this->can_upload() === true)
 		}
 
 		$file = $this->load_single(
-			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h ".
+			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '". $page_id."'".
+				"LEFT JOIN ".$this->config['table_prefix']."page p ON (f.page_id = p.page_id) ".
+			"WHERE f.page_id = '". $page_id."' ".
 				"AND f.upload_id ='".(int)$_GET['file_id']."' ".
 			"LIMIT 1");
 
@@ -58,12 +59,21 @@ if ($this->can_upload() === true)
 				$message = '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
 				$this->show_message($message, 'info');
 
+				if ($file['page_id'])
+				{
+					$path = 'file:/'.$file['supertag'].'/';
+				}
+				else
+				{
+					$path = 'file:';
+				}
+
 				echo $this->form_open('remove_file', 'upload');
 				// !!!!! place here a reference to delete files
 ?>
 	<br />
 	<ul class="upload">
-		<li><?php echo $this->link('file:'.$file['file_name'] ); ?>
+		<li><?php echo $this->link($path.$file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
@@ -79,6 +89,7 @@ if ($this->can_upload() === true)
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file['file_description']; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileUsage'); ?>:</span><?php echo $this->action('fileusage', array('file_id' => $file['upload_id'], 'nomark' => 1)); ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -119,10 +130,11 @@ if ($this->can_upload() === true)
 		}
 
 		$file = $this->load_single(
-			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h ".
+			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '".$page_id."'".
+				"LEFT JOIN ".$this->config['table_prefix']."page p ON (f.page_id = p.page_id) ".
+			"WHERE f.page_id = '".$page_id."' ".
 				"AND f.upload_id ='".(int)$_GET['file_id']."' ".
 			"LIMIT 1");
 
@@ -136,12 +148,21 @@ if ($this->can_upload() === true)
 				$message = '<strong>'.$this->get_translation('UploadEditConfirm').'</strong>';
 				$this->show_message($message, 'info');
 
+				if ($file['page_id'])
+				{
+					$path = 'file:/'.$file['supertag'].'/';
+				}
+				else
+				{
+					$path = 'file:';
+				}
+
 				echo $this->form_open('upload_file', 'upload');
 				// !!!!! place here a reference to delete files
 ?>
 	<br />
 	<ul class="upload">
-		<li><?php echo $this->link('file:'.$file['file_name'] ); ?>
+		<li><?php echo $this->link($path.$file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
@@ -527,13 +548,13 @@ if ($this->can_upload() === true)
 					<li><span class="info_title"><?php echo $this->get_translation('FileSyntax'); ?>:</span><?php echo '<code>file:'.$small_name.'</code>'; ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($uploaded_dt); ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$file_size_ft.''; ?></li>
-<?php
-// image dimension
-if (isset($size))
-{ ?>
+					<?php
+					// image dimension
+					if (isset($size))
+					{ ?>
 					<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$size[0].' x '.$size[1].'px'; ?></li>
-<?php
-} ?>
+					<?php
+					} ?>
 					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $small_name; ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $description; ?></li>
