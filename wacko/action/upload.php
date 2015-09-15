@@ -51,13 +51,12 @@ if ($this->can_upload() === true)
 		}
 	}
 
-	$maxfilesize *= 1024;
 ?>
 <table >
 	<tr>
 		<td><label for="FileUpload"><?php echo $this->get_translation('UploadFor');?>:&nbsp;</label>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" /></td>
-		<td style="white-space: nowrap;"><input type="file" name="file" id="FileUpload" />&nbsp;(<?php echo $this->get_translation('UploadMax').$this->binary_multiples(($this->config['upload_max_size'] * 1024), false, true, true);?>)</td>
+		<td style="white-space: nowrap;"><input type="file" name="file" id="FileUpload" />&nbsp;(<?php echo $this->get_translation('UploadMax').$this->binary_multiples(($this->config['upload_max_size']), false, true, true);?>)</td>
 	</tr>
 	<?php
 	if ($global)

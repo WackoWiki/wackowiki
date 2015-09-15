@@ -30,15 +30,19 @@ function admin_config_uploads(&$engine, &$module)
 	</p>
 	<br />
 <?php
+
+	$binary_factor = array('0' => 1, '1' => 1024, '2' => (1024 * 1024));
+	#echo $_POST['upload_quota_factor'].' - '.$binary_factor[$_POST['upload_quota_factor']];
+	#$engine->debug_print_r($_POST);
+
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['upload']					= (string)$_POST['upload'];
 		$config['upload_images_only']		= (int)$_POST['upload_images_only'];
-		$config['upload_max_size']			= (int)$_POST['upload_max_size'];
-		$config['upload_quota']				= (int)$_POST['upload_quota'];
-		$config['upload_quota_per_user']	= (int)$_POST['upload_quota_per_user'];
-
+		$config['upload_max_size']			= (int)$_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']];
+		$config['upload_quota']				= (int)$_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']];
+		$config['upload_quota_per_user']	= (int)$_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
 		$config['img_create_thumbnail']		= (int)$_POST['img_create_thumbnail'];
 		$config['img_max_thumb_width']		= (int)$_POST['img_max_thumb_width'];
 
@@ -78,7 +82,14 @@ function admin_config_uploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_max_size"><strong>Maximum file size (KiB):</strong><br />
 					<small>Maximum size of each file.</small></label></td>
-				<td><input type="number" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int)$engine->config['upload_max_size'];?>" />KiB</td>
+				<td><input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_max_size'], false, true, true, false);?>" />
+					<?php $x = $engine->binary_multiples_factor($engine->config['upload_max_size'], false); ?>
+					<select name="upload_max_size_factor">
+						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
+						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
+						<option value="2" <?php echo ( $x == 2 ? ' selected="selected"' : '' );?> >MiB</option>
+					</select>
+				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -86,7 +97,15 @@ function admin_config_uploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota"><strong>Total upload quota: (KiB):</strong><br />
 					<small>Maximum drive space available for attachments for the whole engine, with 0 being unlimited. <strong><?php echo $engine->binary_multiples($engine->upload_quota(), false, true, true);?></strong> used.</small></label></td>
-				<td><input type="number" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int)$engine->config['upload_quota'];?>" />KiB</td>
+				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_quota'], false, true, true, false);?>" />
+				<?php $x = $engine->binary_multiples_factor($engine->config['upload_quota'], false); ?>
+				<select name="upload_quota_factor">
+						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
+						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
+						<option value="2" <?php echo ( $x == 2 ? ' selected="selected"' : '' );?> >MiB</option>
+						<option value="3" <?php echo ( $x == 3 ? ' selected="selected"' : '' );?> >GiB</option>
+					</select>
+				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -94,7 +113,15 @@ function admin_config_uploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage per user (KiB):</strong><br />
 					<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
-				<td><input type="number" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int)$engine->config['upload_quota_per_user'];?>" />KiB</td>
+				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_quota_per_user'], false, true, true, false);?>" />
+					<?php $x = $engine->binary_multiples_factor($engine->config['upload_quota_per_user'], false); ?>
+					<select name="upload_quota_per_user_factor">
+						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
+						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
+						<option value="2" <?php echo ( $x == 2 ? ' selected="selected"' : '' );?> >MiB</option>
+						<option value="3" <?php echo ( $x == 3 ? ' selected="selected"' : '' );?> >GiB</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -116,7 +143,7 @@ function admin_config_uploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><strong>Maximum thumbnail width in pixel:</strong><br />
 					<small>A generated thumbnail will not exceed the width set here.</small></td>
-				<td><input type="number" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int)$engine->config['img_max_thumb_width'];?>" />px</td>
+				<td><input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int)$engine->config['img_max_thumb_width'];?>" />px</td>
 			</tr>
 
 		</table>

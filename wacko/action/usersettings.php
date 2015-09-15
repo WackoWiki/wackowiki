@@ -180,7 +180,7 @@ else if ($user = $this->get_user())
 	// reload user data
 	if ( (isset($_POST['action']) && ($_POST['action'] == 'update' || $_POST['action'] == 'update_extended')) || (isset($_GET['resend_code']) && $_GET['resend_code'] == 1))
 	{
-		$this->set_user($this->load_user(0, $user['user_id'], 0, true), 1);
+		$this->set_user($this->load_user(0, $user['user_id'], 0, false), 1);
 		$this->set_menu(MENU_USER);
 
 		$user		= $this->get_user();
@@ -593,6 +593,42 @@ else if ($user = $this->get_user())
 <?php
 	//  echo $this->format_translation('SeeListOfPages')."<br />";
 	echo $this->form_close();
+
+	echo '<div class="page_tools">';
+	echo '<table class="form_tbl">';
+	echo '<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('UserSpace')."</th>";
+	echo '<td class="form_right">'."<a href=\"".$this->href('', ($this->config['users_page'].'/'.$user['user_name']))."\">".$this->config['users_page'].'/'.$user['user_name']."</a>"."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('UsersSignup')."</th>";
+	echo '<td class="form_right">'.$this->get_time_string_formatted($user['signup_time'])."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('UsersLastSession')."</th>";
+	echo '<td class="form_right">'.$this->get_time_string_formatted($user['last_visit'])."</td>";
+	echo "</tr>\n".'<tr class="lined">';
+	#js ReferenceError:  is not defined
+	echo '<th class="form_left" scope="row">'.$this->get_translation('UploadQuota')."&nbsp;&nbsp;</th>";
+	$percentage =  round( ($this->upload_quota($user['user_id']) / (($this->config['upload_quota_per_user']) / 100)) ).'%';
+	echo '<td class="form_right" title="'.$this->get_translation('SettingsSizeTip').'"><div class="meter"><span style="width: 25%">'.$this->binary_multiples($this->upload_quota($user['user_id']), false, true, true).' ('.$percentage.")</span></div></td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('UsersPages')."</th>";
+	echo '<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'" title="'.$this->get_translation('RevisionTip').'">'.(int)$user['total_pages']."</a></td>";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('UsersRevisions')."</th>";
+	echo '<td class="form_right"><a href="'.$this->href('revisions').'" title="'.$this->get_translation('RevisionTip').'">'.(int)$user['total_revisions']."</a></td>";
+
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('UsersComments')."</th>";
+	echo '<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'" title="'.$this->get_translation('ShowComments').'">'.$user['total_comments'].'</a></td>';
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('UsersUploads')."</th>";
+	echo '<td class="form_right">'.number_format($user['total_uploads'], 0, ',', '.')."</td>";
+	echo "</tr>\n";
+	echo "</tr>\n".'<tr class="lined">';
+	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsHits')."</th>";
+	echo '<td class="form_right">'.number_format($user['login_count'], 0, ',', '.')."</td>";
+	echo "</tr>\n";
+	echo "</tr>\n</table>";
 	}
 }
 else

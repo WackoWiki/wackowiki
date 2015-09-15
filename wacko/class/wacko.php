@@ -245,7 +245,15 @@ class Wacko
 		else
 		{
 			$page		= $this->load_page($unwrapped_tag, 0, '', LOAD_CACHE, LOAD_META);
-			$page_id	= $page['page_id'];
+
+			if ($page)
+			{
+				$page_id	= $page['page_id'];
+			}
+			else
+			{
+				$page_id	= '';
+			}
 
 			if (!$page_id)
 			{
@@ -253,7 +261,9 @@ class Wacko
 			}
 		}
 
-		$file = (isset($this->files_cache[$page_id][$file_name]) ? $this->files_cache[$page_id][$file_name] : '');
+		$file = (isset($this->files_cache[$page_id][$file_name])
+					? $this->files_cache[$page_id][$file_name]
+					: '');
 
 		if (!$file)
 		{
@@ -271,6 +281,8 @@ class Wacko
 
 			$this->files_cache[$page_id][$file_name] = $file;
 		}
+
+		#$this->debug_print_r($this->files_cache);
 
 		return $file;
 	}
@@ -2559,7 +2571,9 @@ class Wacko
 					}
 					else if ($this->config['csp'] == 2)
 					{
-						header( CSP_CUSTOM );
+						$csp_custom = str_replace(array("\r", "\n", "\t"), '', CSP_CUSTOM);
+
+						header( $csp_custom );
 					}
 				}
 
@@ -2897,7 +2911,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
 
 					// tracking file link
 					if ($link_tracking)
@@ -2919,7 +2933,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url		= $this->config['base_url'].$this->config['upload_path'].$file_name;
+					$url	= $this->config['base_url'].$this->config['upload_path'].$file_name;
 
 					// tracking file link
 					if ($link_tracking)
@@ -3012,6 +3026,7 @@ class Wacko
 						{
 							$text = $title;
 						} */
+
 						// direct file access
 						if ($_global == true)
 						{
@@ -3581,9 +3596,9 @@ class Wacko
 	}
 
 	// TRACK LINKS
-	//		$tag 		= 'page tag' --
-	//		$link_type = 'file' -- file link
-	//		$link_type = 'page' -- page link
+	//		$tag 		= 'page tag'
+	//		$link_type	= 'file'
+	//		$link_type	= 'page'
 	function track_link_to($tag, $link_type = 'page' )
 	{
 		if ($link_type == 'page')
@@ -3632,16 +3647,16 @@ class Wacko
 			$from_page_id = $this->page['page_id'];
 		}
 
+		// delete related old links in table
+		$this->sql_query(
+				"DELETE ".
+				"FROM ".$this->config['table_prefix']."link ".
+				"WHERE from_page_id = '".(int)$from_page_id."'");
+
 		// page link
 		if ($link_table = $this->get_link_table('page'))
 		{
 			$query = '';
-
-			// delete related old links in table
-			$this->sql_query(
-				"DELETE ".
-				"FROM ".$this->config['table_prefix']."link ".
-				"WHERE from_page_id = '".(int)$from_page_id."'");
 
 			foreach ($link_table as $to_tag)
 			{
@@ -3663,16 +3678,16 @@ class Wacko
 			unset($query);
 		}
 
+		// delete page related old file links in table
+		$this->sql_query(
+				"DELETE ".
+				"FROM ".$this->config['table_prefix']."file_link ".
+				"WHERE page_id = '".(int)$from_page_id."'");
+
 		// file link
 		if ($file_table = $this->get_link_table('file'))
 		{
 			$query = '';
-
-			// delete page related old file links in table
-			$this->sql_query(
-				"DELETE ".
-				"FROM ".$this->config['table_prefix']."file_link ".
-				"WHERE page_id = '".(int)$from_page_id."'");
 
 			foreach ($file_table as $upload_id)
 			{
@@ -7364,11 +7379,11 @@ class Wacko
 		}
 	}
 
-	function binary_multiples($size, $praefix = true, $short = true, $rounded = false)
+	function binary_multiples($size, $prefix = true, $short = true, $rounded = false, $suffix = true)
 	{
 		if(is_numeric($size))
 		{
-			if($praefix === true)
+			if($prefix === true)
 			{
 				// Decimal prefix
 				if($short === true)
@@ -7409,15 +7424,43 @@ class Wacko
 			// TODO: $this->get_translation($norm[$x])
 			if ($rounded === true)
 			{
-				$size = round($size, 0) . '&nbsp;' . $norm[$x];
+				$size = round($size, 0);
 			}
 			else
 			{
-				$size = sprintf('%01.2f', $size) . '&nbsp;' . $norm[$x];
+				$size = sprintf('%01.2f', $size);
+			}
+
+			if($suffix === true)
+			{
+				$size= $size . '&nbsp;' . $norm[$x];
 			}
 
 			return $size;
 		}
+	}
+
+	function binary_multiples_factor ($size, $prefix = true)
+	{
+		$count	= 9; #count($norm) -1;
+		$x		= 0;
+
+		if($prefix === true)
+		{
+			$factor = 1000;
+		}
+		else
+		{
+			$factor = 1024;
+		}
+
+		while ($size >= $factor && $x < $count)
+		{
+			$size /= $factor;
+			$x++;
+		}
+
+		return $x;
 	}
 
 	function debug_print_r ($array)
