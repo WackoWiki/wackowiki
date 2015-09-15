@@ -689,7 +689,7 @@ class Init
 
 				if ($execmem)
 				{
-					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MiB </li>\n";
+					echo "<li>Memory allocated: ".$this->engine->binary_multiples($execmem, false, true, false)."</li>\n";
 				}
 
 				#echo "<li>UTC: ".date('Y-m-d H:i:s', time())."</li>\n";
