@@ -80,7 +80,7 @@ function admin_config_uploads(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_max_size"><strong>Maximum file size (KiB):</strong><br />
+				<td class="label"><label for="upload_max_size"><strong>Maximum file size:</strong><br />
 					<small>Maximum size of each file.</small></label></td>
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_max_size'], false, true, true, false);?>" />
 					<?php $x = $engine->binary_multiples_factor($engine->config['upload_max_size'], false); ?>
@@ -95,7 +95,7 @@ function admin_config_uploads(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_quota"><strong>Total upload quota: (KiB):</strong><br />
+				<td class="label"><label for="upload_quota"><strong>Total upload quota:</strong><br />
 					<small>Maximum drive space available for attachments for the whole engine, with 0 being unlimited. <strong><?php echo $engine->binary_multiples($engine->upload_quota(), false, true, true);?></strong> used.</small></label></td>
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_quota'], false, true, true, false);?>" />
 				<?php $x = $engine->binary_multiples_factor($engine->config['upload_quota'], false); ?>
@@ -111,7 +111,7 @@ function admin_config_uploads(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage per user (KiB):</strong><br />
+				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage per user:</strong><br />
 					<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_quota_per_user'], false, true, true, false);?>" />
 					<?php $x = $engine->binary_multiples_factor($engine->config['upload_quota_per_user'], false); ?>
