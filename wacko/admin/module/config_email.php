@@ -158,7 +158,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_port"><strong>SMTP server port:</strong><br />
 				<small>Only change this if you know your SMTP server is on a different port. (default 25 or 587)</small></label></td>
-				<td><input type="number" maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->config['smtp_port'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->config['smtp_port'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
