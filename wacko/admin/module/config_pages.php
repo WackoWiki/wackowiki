@@ -80,7 +80,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="forum_topics"><strong>Number of topics per page:</strong><br />
 				<small>Number of topics displayed on each page of the list in the forum sections.</small></label></td>
-				<td><input type="number" maxlength="3" style="width:200px;" id="forum_topics" name="forum_topics" value="<?php echo htmlspecialchars($engine->config['forum_topics'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" min="0" maxlength="3" style="width:200px;" id="forum_topics" name="forum_topics" value="<?php echo htmlspecialchars($engine->config['forum_topics'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -88,7 +88,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="comments_count"><strong>Number of comments per page:</strong><br />
 				<small>Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.</small></label></td>
-				<td><input type="number" maxlength="3" style="width:200px;" id="comments_count" name="comments_count" value="<?php echo htmlspecialchars($engine->config['comments_count'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" min="0" maxlength="3" style="width:200px;" id="comments_count" name="comments_count" value="<?php echo htmlspecialchars($engine->config['comments_count'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

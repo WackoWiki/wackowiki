@@ -80,7 +80,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="debug_sql_threshold"><strong>Threshold performance RDBMS:</strong><br />
 				<small>In the detailed debug mode to record only the queries take longer than the number of seconds.</small></label></td>
-				<td><input type="number" maxlength="10" style="width:200px;" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo htmlspecialchars($engine->config['debug_sql_threshold'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" min="0" maxlength="10" style="width:200px;" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo htmlspecialchars($engine->config['debug_sql_threshold'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -107,7 +107,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cache_ttl"><strong>Term relevance cached pages:</strong><br />
 				<small>Cache pages no more than a specified number of seconds.</small></label></td>
-				<td><input type="number" maxlength="5" style="width:200px;" id="cache_ttl" name="cache_ttl" value="<?php echo htmlspecialchars($engine->config['cache_ttl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="cache_ttl" name="cache_ttl" value="<?php echo htmlspecialchars($engine->config['cache_ttl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -123,7 +123,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cache_sql_ttl"><strong>Term relevance Cache Database:</strong><br />
 				<small>Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.</small></label></td>
-				<td><input type="number" maxlength="5" style="width:200px;" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo htmlspecialchars($engine->config['cache_sql_ttl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo htmlspecialchars($engine->config['cache_sql_ttl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

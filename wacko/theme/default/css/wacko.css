@@ -198,6 +198,7 @@ blockquote {
 	border-width: 1px 1px 1px 3px;
 	color: #444444;
 	padding: 25px 30px;
+	font-family: sans-serif;
 
 	/* background: #f5f5f5; */
 }
