@@ -200,7 +200,7 @@ function admin_content_files(&$engine, &$module)
 			echo '<strong>'.$engine->get_translation('UploadDone').'</strong>';
 
 			// log event
-			$engine->log(4, str_replace('%3', ceil($file_size / 1024), str_replace('%2', $small_name, $engine->get_translation('LogFileUploadedGlobal', $engine->config['language']))));
+			$engine->log(4, str_replace('%3', $engine->binary_multiples($file_size, false, true, true), str_replace('%2', $small_name, $engine->get_translation('LogFileUploadedGlobal', $engine->config['language']))));
 ?>
 <br /><ul>
 <li><?php echo $engine->link( 'file:'.$small_name ); ?></li>
