@@ -133,7 +133,7 @@ if ($pages = $this->load_all(
 			$rootlevel = substr_count($root, '/');
 
 			// begin list
-			echo "<ul class=\"tree\">\n";
+			echo '<ul class="tree">'."\n";
 
 			$i	= 0;
 			$ul	= 0;
