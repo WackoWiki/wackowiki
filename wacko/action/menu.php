@@ -41,6 +41,7 @@ if (!function_exists('load_user_menu'))
 }
 
 if (!isset($redirect)) $redirect = 0; // required for usersettings action
+
 if (!isset($system))
 {
 	$system = 0;
@@ -104,7 +105,7 @@ if (isset($_POST['_user_menu']))
 
 	if (isset($_POST['update_menu']))
 	{
-		// repos
+		// reposition
 		$data = array();
 
 		foreach($object->data['user_menu'] as $k => $item)
@@ -143,11 +144,11 @@ if (isset($_POST['_user_menu']))
 			// check target page existance
 			if ($page = $this->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$_page_id = $this->get_page_id($new_tag);
-				$_user_lang = (isset($_POST['lang_new']) ? $_POST['lang_new'] : $user['lang']);
+				$_page_id		= $this->get_page_id($new_tag);
+				$_user_lang		= (isset($_POST['lang_new']) ? $_POST['lang_new'] : $user['lang']);
 
 				// check existing page write access
-				if ($this->has_access('write', $_page_id))
+				if ($this->has_access('write', $_page_id)) // TODO: why we need write access here?
 				{
 					// check if menu item already exists
 					if ($this->load_single(
@@ -165,46 +166,25 @@ if (isset($_POST['_user_menu']))
 					else
 					{
 						// writing new menu item
-						$_menu_page_ids		= $this->get_menu_links(); // FIXME: loads not user array for system menu!
-						$menu				= array();
+						$_menu_position = $this->load_all(
+							"SELECT b.menu_id ".
+							"FROM ".$this->config['table_prefix']."menu b ".
+							"WHERE b.user_id = '".(int)$_user_id."' ".
+								($default_menu === true
+									? "AND b.lang = '".$_user_lang."' "
+									: "")
+								, false);
 
-						if (!in_array($_page_id, $_menu_page_ids))
-						{
-							$menu[] = array(
-								$_page_id,
-								'(('.$page['tag'].' '.$this->get_page_title($page['tag']).($_user_lang != $page['lang'] ? ' @@'.$page['lang'] : '').'))'
-								);
+						$_menu_item_count = count($_menu_position);
 
-							$_menu_position = $this->load_all(
-								"SELECT b.menu_id ".
-								"FROM ".$this->config['table_prefix']."menu b ".
-								"WHERE b.user_id = '".(int)$_user_id."' ".
-									($default_menu === true
-										? "AND b.lang = '".$_user_lang."' "
-										: "")
-									, false);
+						$this->sql_query(
+							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
+							"user_id			= '".(int)$_user_id."', ".
+							"page_id			= '".(int)$_page_id."', ".
+							"lang				= '".quote($this->dblink, (($_user_lang != $page['lang']) && $default_menu === false ? $page['lang'] : $_user_lang))."', ".
+							"menu_position		= '".(int)($_menu_item_count + 1)."'");
 
-							$_menu_item_count = count($_menu_position);
-
-							$this->sql_query(
-								"INSERT INTO ".$this->config['table_prefix']."menu SET ".
-								"user_id			= '".(int)$_user_id."', ".
-								"page_id			= '".(int)$_page_id."', ".
-								"lang				= '".quote($this->dblink, (($_user_lang != $page['lang']) && $default_menu === false ? $page['lang'] : $_user_lang))."', ".
-								"menu_position		= '".(int)($_menu_item_count + 1)."'");
-
-							#$message .= $this->get_translation('MenuItemAdded'); // TODO: msg set
-						}
-
-						// parsing menu items into link table
-						foreach ($menu as $menu_item)
-						{
-							$menu_page_ids[]	= $menu_item[0];
-							$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $this->format($menu_item[1], 'wacko'));
-						}
-
-						$_SESSION[$this->config['session_prefix'].'_'.'menu_id']	= $menu_page_ids;
-						$_SESSION[$this->config['session_prefix'].'_'.'menu']		= $menu_formatted;
+						#$message .= $this->get_translation('MenuItemAdded'); // TODO: msg set
 					}
 				}
 				else
