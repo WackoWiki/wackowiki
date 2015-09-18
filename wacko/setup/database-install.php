@@ -471,6 +471,9 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_
 // config
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_1,		$lang['ErrorUpdatingTable']);
+$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_2,		$lang['ErrorUpdatingTable']);
+$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_3,		$lang['ErrorUpdatingTable']);
+$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_4,		$lang['ErrorUpdatingTable']);
 
 // file link
 $upgrade_5_4_0[]	= array($lang['CreatingTable'],	'file_link',	$table_file_link_r5_4_0,		$lang['ErrorCreatingTable']);
