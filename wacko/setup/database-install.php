@@ -6,6 +6,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 {
 	global $lang;
 	global $config;
+	global $dblink;
 
 	echo "            <li>".$text."   ".output_image($condition);
 
@@ -15,10 +16,10 @@ function test($text, $condition, $error_text = '', $dblink = '')
 		{
 			$error_output = "\n".'<ul class="install_error"><li>'.$error_text." <br />";
 
-			/* if ($config['database_driver'] == 'mysqli_legacy')
+			if ($config['database_driver'] == 'mysqli_legacy')
 			{
 				$error_output .= mysqli_error($dblink);
-			} */
+			}
 
 			$error_output .= "</li></ul>";
 			echo $error_output;
@@ -352,7 +353,7 @@ if (isset($config['wacko_version']))
 
 if ($config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo'))
 {
-	// mysql / mariadb only
+	// mariadb / mysql only
 	require_once('setup/database_mysql.php');
 	require_once('setup/database_mysql_updates.php');
 }
@@ -660,10 +661,7 @@ switch($config['database_driver'])
 		$dsn = '';
 		switch($config['database_driver'])
 		{
-			/* case 'firebird':
-				$dsn = $config['database_driver'].":dbname=".$config['database_host'].":".$config['database_database'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
-				break;
-			case 'sqlite2': */
+			/* case 'sqlite2': */
 			case 'mysql_pdo':
 
 				if ($config['database_driver'] == 'mysql_pdo')
