@@ -9,18 +9,18 @@ if (!defined('IN_WACKO'))
 ##   DB Update                                        ##
 ########################################################
 
-$module['db_sysupdate'] = array(
+$module['maint_transliterate'] = array(
 		'order'	=> 28,
-		'cat'	=> 'Database',
+		'cat'	=> 'Maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'db_sysupdate',
-		'name'	=> 'Update',
+		'mode'	=> 'maint_transliterate',
+		'name'	=> 'Transliterate',
 		'title'	=> 'Update the structure and contents of the database',
 	);
 
 ########################################################
 
-function admin_db_sysupdate(&$engine, &$module)
+function admin_maint_transliterate(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
