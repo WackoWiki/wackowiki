@@ -175,11 +175,12 @@ function admin_config_basic(&$engine, &$module)
 				<td>
 					<select style="width:200px;" id="language" name="language">
 <?php
+						$languages = $engine->get_translation('Languages');
 						$langs = $engine->available_languages();
 
-						for ($i = 0; $i < count($langs); $i++)
+						foreach ($langs as $lang)
 						{
-							echo '<option value="'.$langs[$i].'" '.($engine->config['language'] == $langs[$i] ? 'selected="selected"' : '').'>'.$langs[$i].'</option>';
+							echo '<option value="'.$lang.'" '.($engine->config['language'] == $lang ? 'selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.')</option>';
 						}
 ?>
 					</select>
@@ -223,12 +224,27 @@ function admin_config_basic(&$engine, &$module)
 						$lang_list= array();
 					}
 
-					for ($i = 0; $i < count($langs); $i++)
-					{
-						echo	'<input type="checkbox" name="allowed_languages['.$i.']" id="lang_'.$langs[$i].'" value="'.$langs[$i].'" '. (in_array($langs[$i], $lang_list) ? ' checked="checked"' : ''). ' />'."\n".
-								'<label for="lang_'.$langs[$i].'">'.$langs[$i].'</label>'."\n";
+					$languages = $engine->get_translation('Languages');
+					$n = 1;
 
-					} ?>
+					echo '<table><tr>';
+
+					foreach ($langs as $lang)
+					{
+						echo	'<td><input type="checkbox" name="allowed_languages['.$n.']" id="lang_'.$lang.'" value="'.$lang.'" '. (in_array($lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n".
+								'<label for="lang_'.$lang.'">'.$languages[$lang].' ('.$lang.')</label></td>'."\n";
+
+						// modulus operator: every third loop add a break
+						if ($n % 3 == 0)
+						{
+							echo '</tr>';
+						}
+;
+						$n++;
+					}
+
+					echo '</tr></table>';
+					?>
 				</td>
 			</tr>
 			<?php } ?>

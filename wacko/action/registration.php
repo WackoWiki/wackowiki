@@ -332,18 +332,19 @@ if (!isset($_GET['confirm']))
 			echo '<p><label for="lang">'.$this->format_translation('RegistrationLang').':</label>';
 			echo '<select id="lang" name="lang">';
 
-			$lang	= $this->user_agent_language();
-			$langs	= $this->available_languages();
+			$languages	= $this->get_translation('Languages');
+			$user_lang		= $this->user_agent_language();
+			$langs		= $this->available_languages();
 
-			for ($i = 0; $i < count($langs); $i++)
+			foreach ($langs as $lang)
 			{
-				echo '<option value="'.$langs[$i].'"'.
-					($lang == $langs[$i]
+				echo '<option value="'.$lang.'"'.
+					($user_lang == $lang
 						? 'selected="selected"'
-						: (!isset($lang) && $this->config['language'] == $langs[$i]
+						: (!isset($user_lang) && $this->config['language'] == $lang
 							? 'selected="selected"'
 							: '')
-					).'>'.$langs[$i]."</option>\n";
+					).'>'.$languages[$lang].' ('.$lang.")</option>\n";
 			}
 
 			echo '</select></p>';

@@ -268,6 +268,8 @@ if ($_user_id)
 			// FIXME: add a common function for this?
 			echo '<select id="lang" name="lang">';
 
+			$languages = $this->get_translation('Languages');
+
 			if ($this->config['multilanguage'])
 			{
 				$langs = $this->available_languages();
@@ -281,7 +283,7 @@ if ($_user_id)
 			{
 				foreach ($langs as $lang)
 				{
-					echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$lang."</option>\n";
+					echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 				}
 			}
 
@@ -355,6 +357,8 @@ if ($_user_id)
 		// FIXME: add a common function for this?
 		echo '<select id="lang_new" name="lang_new">';
 
+		$languages = $this->get_translation('Languages');
+
 		if ($this->config['multilanguage'])
 		{
 			$langs = $this->available_languages();
@@ -368,7 +372,7 @@ if ($_user_id)
 		{
 			foreach ($langs as $lang)
 			{
-				echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$lang."</option>\n";
+				echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 			}
 		}
 

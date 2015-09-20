@@ -125,7 +125,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			echo '<input type="radio" id="filesOn" name="footer_files" value="1" '.( $this->config['footer_files'] == 1 ? 'checked="checked" ' : '' ).'/><label for="filesOn">'.$this->get_translation('MetaOn')."</label>";
 			echo '<input type="radio" id="filesGuest" name="footer_files" value="2" '.( $this->config['footer_files'] == 2 ? 'checked="checked" ' : '' ).'/><label for="filesGuest">'.$this->get_translation('MetaRegistered')."</label>";
 			echo '<input type="radio" id="filesOff" name="footer_files" value="0" '.( $this->config['footer_files'] == 0 ? 'checked="checked" ' : '' ).'/><label for="filesOff">'.$this->get_translation('MetaOff')."</label>";
-			echo "</td>";
+			echo '</td>';
 			echo "</tr>\n";
 
 			if ($this->config['footer_rating'] != 0)
@@ -136,7 +136,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				echo '<input type="radio" id="ratingOn" name="footer_rating" value="1" '.( $this->config['footer_rating'] == 1 ? 'checked="checked" ' : '' ).'/><label for="ratingOn">'.$this->get_translation('MetaOn')."</label>";
 				echo '<input type="radio" id="ratingGuest" name="footer_rating" value="2" '.( $this->config['footer_rating'] == 2 ? 'checked="checked" ' : '' ).'/><label for="ratingGuest">'.$this->get_translation('MetaRegistered')."</label>";
 				echo '<input type="radio" id="ratingOff" name="footer_rating" value="0" '.( $this->config['footer_rating'] == 0 ? 'checked="checked" ' : '' ).'/><label for="ratingOff">'.$this->get_translation('MetaOff')."</label>";
-				echo "</td>";
+				echo '</td>';
 				echo "</tr>\n";
 			}
 
@@ -248,11 +248,13 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				$clang = $this->config['language'];
 			}
 
+			$languages = $this->get_translation('Languages');
+
 			if ($langs = $this->available_languages())
 			{
 				foreach ($langs as $lang)
 				{
-					echo '<option value="'.$lang.'" '.($clang == $lang ? 'selected="selected" ' : '').'>'.$lang."</option>\n";
+					echo '<option value="'.$lang.'" '.($clang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 				}
 			}
 

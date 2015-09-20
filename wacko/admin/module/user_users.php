@@ -322,11 +322,13 @@ function admin_user_users(&$engine, &$module)
 						<select id="lang" name="lang">
 							<option value=""></option>';
 
+				$languages = $engine->get_translation('Languages');
+
 				if ($langs = $engine->available_languages())
 				{
-					for ($i = 0; $i < count($langs); $i++)
+					foreach ($langs as $lang)
 					{
-						echo '<option value="'.$langs[$i].'" '.($user['lang'] == $langs[$i] ? ' selected="selected"' : '').'>'.$langs[$i]."</option>\n";
+						echo '<option value="'.$lang.'" '.($user['lang'] == $lang ? ' selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 					}
 				}
 
@@ -399,11 +401,13 @@ function admin_user_users(&$engine, &$module)
 						<select id="lang" name="lang">
 							<option value=""></option>';
 
+					$languages = $engine->get_translation('Languages');
+
 					if ($langs = $engine->available_languages())
 					{
-						for ($i = 0; $i < count($langs); $i++)
+						foreach ($langs as $lang)
 						{
-							echo '<option value="'.$langs[$i].'" '.($user['lang'] == $langs[$i] ? ' selected="selected"' : '').'>'.$langs[$i]."</option>\n";
+							echo '<option value="'.$lang.'" '.($user['lang'] == $lang ? ' selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 						}
 					}
 

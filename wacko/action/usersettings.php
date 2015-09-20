@@ -451,6 +451,9 @@ else if ($user = $this->get_user())
 	</th>
 	<td class="form_right"><select id="lang" name="lang">
 <?php
+
+	$languages = $this->get_translation('Languages');
+
 	if ($this->config['multilanguage'])
 	{
 		$langs = $this->available_languages();
@@ -460,15 +463,15 @@ else if ($user = $this->get_user())
 		$langs[] = $this->config['language'];
 	}
 
-	for ($i = 0; $i < count($langs); $i++)
+	foreach ($langs as $lang)
 	{
-		echo '<option value="'.$langs[$i].'" '.
-			($user['lang'] == $langs[$i]
+		echo '<option value="'.$lang.'" '.
+			($user['lang'] == $lang
 				? ' selected="selected" '
-				: (!isset($user['lang']) && $this->config['language'] == $langs[$i]
+				: (!isset($user['lang']) && $this->config['language'] == $lang
 					? 'selected="selected"'
 					: '')
-			).'>'.$langs[$i]."</option>\n";
+			).'>'.$languages[$lang].' ('.$lang.")</option>\n";
 	}
 ?>
 </select></td>
