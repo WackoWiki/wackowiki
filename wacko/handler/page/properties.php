@@ -403,5 +403,5 @@ else
 	$this->show_message($message, 'info');
 }
 ?>
-<br style="clear: both;" />
+
 </div>
