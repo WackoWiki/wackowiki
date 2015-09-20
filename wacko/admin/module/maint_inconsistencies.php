@@ -9,18 +9,18 @@ if (!defined('IN_WACKO'))
 ##   Data Inconsistencies                             ##
 ########################################################
 
-$module['db_inconsistencies'] = array(
-		'order'	=> 24,
-		'cat'	=> 'Database',
+$module['maint_inconsistencies'] = array(
+		'order'	=> 25,
+		'cat'	=> 'Maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'db_inconsistencies',
+		'mode'	=> 'maint_inconsistencies',
 		'name'	=> 'Inconsistencies',
 		'title'	=> 'Fixing Data Inconsistencies',
 	);
 
 ########################################################
 
-function admin_db_inconsistencies(&$engine, &$module)
+function admin_maint_inconsistencies(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -566,8 +566,7 @@ function admin_db_inconsistencies(&$engine, &$module)
 
 	}
 ?>
-	<h3></h3>
-	<br />
+
 	<p>
 	show / count mismatches / inconsistencies<br />
 	delete records<br />

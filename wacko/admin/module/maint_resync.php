@@ -9,18 +9,18 @@ if (!defined('IN_WACKO'))
 ##   DB Synchronization                               ##
 ########################################################
 
-$module['db_resync'] = array(
+$module['maint_resync'] = array(
 		'order'	=> 29,
-		'cat'	=> 'Database',
+		'cat'	=> 'Maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'db_resync',
+		'mode'	=> 'maint_resync',
 		'name'	=> 'Data Synchronization',
 		'title'	=> 'Synchronizing databases',
 	);
 
 ########################################################
 
-function admin_db_resync(&$engine, &$module)
+function admin_maint_resync(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
@@ -85,9 +85,12 @@ function admin_db_resync(&$engine, &$module)
 					"AND p.deleted <> '1' ))
 					GROUP BY u.user_id
 				");
-
+$engine->debug_print_r($users1);
+$engine->debug_print_r($users2);
 			$users = array_merge($users1, $users2);
-
+$engine->debug_print_r($users);
+			$users = array_unique($users);
+$engine->debug_print_r($users);
 			foreach ($users as $user)
 			{
 				$engine->sql_query(
@@ -166,6 +169,7 @@ function admin_db_resync(&$engine, &$module)
 				// truncate table
 				$i = 0;
 				$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}link");
+				$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}file_link");
 			}
 
 			$engine->set_user_setting('dont_redirect', '1');
@@ -241,7 +245,7 @@ function admin_db_resync(&$engine, &$module)
 	<p>
 		In the case of direct editing of pages in the database, the content of RSS-feeds are not
 		reflect the changes made. This function synchronizes the RSS-channels
-		Current state of the database.
+		with the current state of the database.
 	</p>
 	<br />
 <?php
