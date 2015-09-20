@@ -159,7 +159,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$topics	= $this->load_all($sql);
 
 	//  display search
-	echo '<div style="float: right; clear: both; margin-bottom: 10px;">'.$this->action('search', array('for' => $this->tag, 'nomark' => 1, 'options' => 0)).'</div>'.'<div style="clear: both;"></div>'."\n";
+	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">'.$this->action('search', array('for' => $this->tag, 'nomark' => 1, 'options' => 0)).'</div>'."\n";
 
 	if (!isset($_GET['phrase']))
 	{
@@ -251,9 +251,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 		echo '</table>'."\n";
 
-		echo '<div><p style="float: left">'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</p>'.
-				'<p style="float: right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</p></div>'."\n".
-				'<div style="clear: both;"></div>'."\n";
+		echo '<div class="clearfix"><p style="float: left">'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</p>'.
+				'<p style="float: right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</p></div>'."\n";
 	}
 
 	// display new topic form when applicable

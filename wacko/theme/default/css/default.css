@@ -96,6 +96,13 @@ kbd {
 	white-space: nowrap;
 }
 
+.clearfix:after,
+#mainwrapper:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
 form input.submitinput {
 	color: #000;
 }
@@ -1433,15 +1440,15 @@ table.formation td {
 	background-repeat: no-repeat;
 }
 #handler li.remove img {
-	background-image: url("./../icon/delete.png");
+	background-image: url("./../icon/delete_page.png");
 	background-repeat: no-repeat;
 }
 #handler li.remove a img {
-	background-image: url("./../icon/delete.png");
+	background-image: url("./../icon/delete_page.png");
 	background-repeat: no-repeat;
 }
 #handler li.remove a:hover img {
-	background-image: url("./../icon/delete.png");
+	background-image: url("./../icon/delete_page.png");
 	background-repeat: no-repeat;
 }
 #handler li.rename img {
@@ -1613,8 +1620,12 @@ table.forum td {
 	100% { text-indent: -800px }
 }
 .marquee{
-	animation: marquee 10s linear infinite;
+	animation: marquee 50s linear infinite;
 	font-weight: 800;
+	white-space: nowrap;
+	box-sizing: border-box;
+	margin: 0 auto;
+	overflow: hidden;
 }
 
 .marquee:hover {

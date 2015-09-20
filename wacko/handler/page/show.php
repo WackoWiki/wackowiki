@@ -174,7 +174,7 @@ else
 
 }
 ?>
-<br style="clear: both" />&nbsp;</article>
+</article>
 <?php
 
 // show category tags
