@@ -1076,6 +1076,23 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Остров Лайн',
 	),
 
+	'Languages'	=>  array(
+		'bg' => 'bulgarian',
+		'da' => 'danish',
+		'nl' => 'dutch',
+		'el' => 'greek',
+		'en' => 'english',
+		'et' => 'estonian',
+		'fr' => 'french',
+		'de' => 'german',
+		'hu' => 'hungarian',
+		'it' => 'italian',
+		'pl' => 'polish',
+		'pt' => 'portuguese',
+		'ru' => 'russian',
+		'es' => 'spanish',
+	),
+
 	// log
 	'LogAdminLoginSuccess'		=> 'Успешный вход в административную панель',
 	'LogAdminLogout'			=> 'Завершение работы в административной панели',

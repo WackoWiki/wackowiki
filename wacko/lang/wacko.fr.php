@@ -1066,6 +1066,23 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Île de Wight',
 	),
 
+	'Languages'	=>  array(
+		'bg' => 'bulgarian',
+		'da' => 'danish',
+		'nl' => 'dutch',
+		'el' => 'greek',
+		'en' => 'english',
+		'et' => 'estonian',
+		'fr' => 'french',
+		'de' => 'german',
+		'hu' => 'hungarian',
+		'it' => 'italian',
+		'pl' => 'polish',
+		'pt' => 'portuguese',
+		'ru' => 'russian',
+		'es' => 'spanish',
+	),
+
 	// log
 	'LogAdminLoginSuccess'		=> 'Connexion réussie au panneau d&rsquo;administration',
 	'LogAdminLogout'			=> 'Déconnexion du panneau d&rsquo;administration',
