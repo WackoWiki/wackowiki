@@ -764,7 +764,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<td style="text-align:left; padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
 						'<td style="text-align:center;" '.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' : $topic['user_name'] ) ).'&nbsp;&nbsp;</small></td>'.
 						'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
-						'<td style="text-align:center; white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'</small></td>'.
+						'<td style="text-align:center; white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_formatted($topic['created']).'</small></td>'.
 					'</tr>'."\n";
 			}
 		}
@@ -947,7 +947,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 						moderate_delete_page($this, $page['tag']);
-						$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user_name'], str_replace('%1', $this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
+						$this->log(1, str_replace('%3', $this->get_time_formatted($page['created']), str_replace('%2', $page['user_name'], str_replace('%1', $this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 					}
 
 					// recount comments for current topic
@@ -1322,7 +1322,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</tr>'."\n".
 				'<tr class="lined">'.
 					'<td colspan="2" style="padding-bottom:30px;">'.
-						'<strong><small><span'.($this->is_admin() ? ' title="'.$this->page['ip'].'"' : '' ).'>'.( $forum_cluster === false ? $this->page['owner_name'] : ( $this->page['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $this->page['user_name'] ) ).'</span> ('.$this->get_time_string_formatted($this->page['created']).')</small></strong>'.
+						'<strong><small><span'.($this->is_admin() ? ' title="'.$this->page['ip'].'"' : '' ).'>'.( $forum_cluster === false ? $this->page['owner_name'] : ( $this->page['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $this->page['user_name'] ) ).'</span> ('.$this->get_time_formatted($this->page['created']).')</small></strong>'.
 						'<br />'.$body.
 					'</td>'.
 				'</tr>'."\n";
@@ -1358,7 +1358,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				echo '<tr class="lined">'.
 						'<td style="vertical-align:middle; width:10px;" class="label"><input name="'.$comment['page_id'].'" type="checkbox" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-						'<td style="text-align:left; padding-left:5px;"><strong><small><span'.( $this->is_admin() ? ' title="'.$comment['ip'].'"' : '' ).'>'.( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).'</span> ('.$this->get_time_string_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
+						'<td style="text-align:left; padding-left:5px;"><strong><small><span'.( $this->is_admin() ? ' title="'.$comment['ip'].'"' : '' ).'>'.( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).'</span> ('.$this->get_time_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
 							'<br />'.$desc.'</td>'.
 					'</tr>'."\n";
 			}

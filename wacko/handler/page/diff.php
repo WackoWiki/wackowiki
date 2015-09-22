@@ -76,28 +76,28 @@ if ($this->has_access('read'))
 			$deleted	= array_diff($body_b, $body_a);
 
 			$output .=
-			str_replace('%1', "<a href=\"".$this->href('', '', ($b != -1 ? 'revision_id='.$page_a['revision_id'] : ''))."\">".$this->get_time_string_formatted($page_a['modified'])."</a>",
-			str_replace('%2', "<a href=\"".$this->href('', '', ($a != -1 ? 'revision_id='.$page_b['revision_id'] : ''))."\">".$this->get_time_string_formatted($page_b['modified'])."</a>",
+			str_replace('%1', '<a href="'.$this->href('', '', ($b != -1 ? 'revision_id='.$page_a['revision_id'] : '')).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
+			str_replace('%2', '<a href="'.$this->href('', '', ($a != -1 ? 'revision_id='.$page_b['revision_id'] : '')).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
 			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
-			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n";
+			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div><br />\n";
 
 			if ($added)
 			{
 				// remove blank lines
 				$output .= "<br />\n".$this->get_translation('SimpleDiffAdditions')."<br />\n\n";
-				$output .= "<div class=\"additions\">".($source == 1
+				$output .= '<div class="additions">'.($source == 1
 															? '<pre>'.wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $added))
-														)."</div>";
+														)."</div>\n";
 			}
 
 			if ($deleted)
 			{
 				$output .= "<br />\n\n".$this->get_translation('SimpleDiffDeletions')."<br />\n\n";
-				$output .= "<div class=\"deletions\">".($source == 1
+				$output .= '<div class="deletions">'.($source == 1
 															? '<pre>'.wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $deleted))
-														)."</div>";
+														)."</div>\n";
 			}
 
 			if (!$added && !$deleted)
@@ -182,20 +182,20 @@ if ($this->has_access('read'))
 					{
 						// deleted word
 						$side_a->copy_whitespace($output);
-						$output .= "<!--markup:1:begin-->";
+						$output .= '<!--markup:1:begin-->';
 						$side_a->copy_word($output);
 						$side_a->copy_until_ordinal($argument[1],$output);
-						$output .= "<!--markup:1:end-->";
+						$output .= '<!--markup:1:end-->';
 					}
 
 					if ($letter == 'a' || $letter == 'c')
 					{
 						// inserted word
 						$side_b->copy_whitespace($output);
-						$output .= "<!--markup:2:begin-->";
+						$output .= '<!--markup:2:begin-->';
 						$side_b->copy_word($output);
 						$side_b->copy_until_ordinal($argument[3],$output);
-						$output .= "<!--markup:2:end-->";
+						$output .= '<!--markup:2:end-->';
 					}
 				}
 			}
@@ -203,10 +203,11 @@ if ($this->has_access('read'))
 			$side_b->copy_until_ordinal($count_total_right,$output);
 			$side_b->copy_whitespace($output);
 			$out = $this->format($output);
-			$out = str_replace('%1', "<a href=\"".$this->href('', '', 'revision_id='.$page_b['revision_id'])."\">".$this->get_time_string_formatted($page_b['modified'])."</a>",
-			str_replace('%2', "<a href=\"".$this->href('', '', 'revision_id='.$page_a['revision_id'])."\">".$this->get_time_string_formatted($page_a['modified'])."</a>",
-			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
-			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n<br />\n".$out;
+			$out =
+			str_replace('%1', '<a href="'.$this->href('', '', 'revision_id='.$page_b['revision_id']).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
+			str_replace('%2', '<a href="'.$this->href('', '', 'revision_id='.$page_a['revision_id']).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
+			str_replace('%3', $this->compose_link_to_page($this->tag, '', '', 0),
+			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div><br />\n<br />\n".$out;
 			echo $out;
 		}
 	}

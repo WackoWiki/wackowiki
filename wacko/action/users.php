@@ -128,7 +128,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			</tr>
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('UsersSignupDate'); ?></td>
-				<td><?php echo $this->get_time_string_formatted($user['signup_time']); ?></td>
+				<td><?php echo $this->get_time_formatted($user['signup_time']); ?></td>
 			</tr>
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('UsersLastSession'); ?></td>
@@ -136,7 +136,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: ( !$user['last_visit'] || $user['last_visit'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
-						: $this->get_time_string_formatted($user['last_visit']) )
+						: $this->get_time_formatted($user['last_visit']) )
 					); ?></td>
 			</tr>
 			<tr class="lined"><?php // Have all user pages as sub pages of the current Users page. ?>
@@ -264,7 +264,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 						$_lang = '';
 					}
 
-					echo '<small>'.$this->get_time_string_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang)."<br />\n";
+					echo '<small>'.$this->get_time_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang)."<br />\n";
 
 					$i = 0;
 
@@ -327,7 +327,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 							$_lang = '';
 						}
 
-						echo '<small>'.$this->get_time_string_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang)."<br />\n";
+						echo '<small>'.$this->get_time_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang)."<br />\n";
 
 						$i = 0;
 
@@ -365,7 +365,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				if ($user['total_uploads'])
 				{
 					$uploads = $this->load_all(
-							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.lang, c.tag ".
+							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.lang, c.tag file_on_page ".
 							"FROM {$this->config['table_prefix']}upload u ".
 							"LEFT JOIN {$this->config['table_prefix']}page c ON (u.page_id = c.page_id) ".
 							"WHERE u.user_id = '".$user['user_id']."' ".
@@ -383,6 +383,8 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					// uploads list itself
 					echo '<div>'."\n";
 
+					$separator	= ' . . . . . . . . . . . . . . . . ';
+
 					foreach ($uploads as $upload)
 					{
 						if (!$this->config['hide_locked']
@@ -399,18 +401,34 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 								$_lang = '';
 							}
 
+							if ($upload['file_description'])
+							{
+								if ($_lang)
+								{
+									$upload['file_description'] = $this->do_unicode_entities($upload['file_description'], $_lang);
+								}
+
+								$file_description = ' <span class="editnote">['.$upload['file_description'].']</span>';
+							}
+							else
+							{
+								$file_description = '';
+							}
+
+							preg_match('/^[^\/]+/', $upload['file_on_page'], $sub_tag);
+
 							if ($upload['page_id']) // !$global
 							{
-								$path2		= '_file:/'.($this->slim_url($upload['tag'])).'/';
-								#$on_page	= $this->get_translation('To').' '.$this->link('/'.$upload['comment_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
+								$path2		= '_file:/'.($this->slim_url($upload['file_on_page'])).'/';
+								$on_page	= $this->get_translation('To').' '.$this->link('/'.$upload['file_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
 							}
 							else
 							{
 								$path2		= '_file:';
-								#$on_page	= '<span title="">&rarr; '.'global';
+								$on_page	= '<span title="">&rarr; '.'global';
 							}
 
-							echo '<small>'.$this->get_time_string_formatted($upload['uploaded_dt']).'</small>  &mdash; '.$this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang)."<br />\n";
+							echo '<small>'.$this->get_time_formatted($upload['uploaded_dt']).'</small>  &mdash; '.$this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang).$separator.' '.$on_page.'</span>'.$file_description."<br />\n";
 
 							$i = 0;
 
@@ -570,12 +588,12 @@ else
 				($this->get_user()
 					?
 					'<td style="text-align:center;">'.$user['total_uploads'].'</td>'.
-					'<td style="text-align:center;">'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
+					'<td style="text-align:center;">'.$this->get_time_formatted($user['signup_time']).'</td>'.
 					'<td style="text-align:center;">'.( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: (!$user['last_visit'] || $user['last_visit'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
-						: $this->get_time_string_formatted($user['last_visit']))
+						: $this->get_time_formatted($user['last_visit']))
 					).'</td>'
 					: '').
 			"</tr>\n";

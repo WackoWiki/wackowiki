@@ -343,7 +343,7 @@ class Wacko
 		return $tz_time;
 	}
 
-	function get_time_string_formatted($time)
+	function get_time_formatted($time)
 	{
 		$tz_time = $this->get_time_tz( strtotime($time) );
 
@@ -357,11 +357,6 @@ class Wacko
 
 		return date($this->config['date_format'].' '.
 			$this->config['time_format_seconds'], $tz_time);
-	}
-
-	function get_page_time_formatted()
-	{
-		return $this->get_time_string_formatted($this->page['modified']);
 	}
 
 	// LANG FUNCTIONS

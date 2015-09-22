@@ -324,10 +324,10 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 	echo '<td class="form_right">'."<a href=\"".$this->href('', $this->config['users_page'], "profile=".$this->page['owner_name'])."\">".$this->page['owner_name']."</a>"."</td>";
 	echo "</tr>\n".'<tr class="lined">';
 	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsCreated')."</th>";
-	echo '<td class="form_right">'.$this->get_time_string_formatted($this->page['created'])."</td>";
+	echo '<td class="form_right">'.$this->get_time_formatted($this->page['created'])."</td>";
 	echo "</tr>\n".'<tr class="lined">';
 	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsCurrent')."</th>";
-	echo '<td class="form_right">'.$this->get_time_string_formatted($this->page['modified'])."</td>";
+	echo '<td class="form_right">'.$this->get_time_formatted($this->page['modified'])."</td>";
 	echo "</tr>\n".'<tr class="lined">';
 	echo '<th class="form_left" scope="row">'.$this->get_translation('SettingsSize')."&nbsp;&nbsp;</th>";
 	echo '<td class="form_right" title="'.$this->get_translation('SettingsSizeTip').'">'.$this->binary_multiples(strlen($this->page['body']), false, true, true).' / '.$this->binary_multiples(strlen($this->page['body_r']), false, true, true)."</td>";

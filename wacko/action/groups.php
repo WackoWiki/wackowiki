@@ -38,7 +38,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			</tr>
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('GroupsCreated'); ?></td>
-				<td><?php echo $this->get_time_string_formatted($usergroup['created']); ?></td>
+				<td><?php echo $this->get_time_formatted($usergroup['created']); ?></td>
 			</tr>
 			<tr class="lined"><?php // Have all usergroup pages as sub pages of the current Groups page. ?>
 				<td class="userprofil"><?php echo $this->get_translation('GroupSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></td>
@@ -153,12 +153,12 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 									'<td style="text-align:center;">'.$member['total_revisions'].'</td>'.
 				($this->get_user()
 				?
-									'<td style="text-align:center;">'.$this->get_time_string_formatted($member['signup_time']).'</td>'.
+									'<td style="text-align:center;">'.$this->get_time_formatted($member['signup_time']).'</td>'.
 									'<td style="text-align:center;">'.( $member['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: ( !$member['last_visit'] || $member['last_visit'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
-						: $this->get_time_string_formatted($member['last_visit']) )
+						: $this->get_time_formatted($member['last_visit']) )
 					).'</td>'
 				: '').
 							"</tr>\n";
@@ -292,7 +292,7 @@ else
 					'<td style="text-align:center;">'.$usergroup['total_revisions'].'</td>'. */
 				($this->get_user()
 					?
-					'<td style="text-align:center;">'.$this->get_time_string_formatted($usergroup['created']).'</td>'
+					'<td style="text-align:center;">'.$this->get_time_formatted($usergroup['created']).'</td>'
 					: '').
 			"</tr>\n";
 		}

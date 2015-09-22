@@ -22,8 +22,8 @@ if ($this->page)
 	{
 		// Revisions link
 		echo (( $this->hide_revisions === false || $this->is_admin() )
-				? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
-				: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
+				? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
+				: "<li>".$this->get_time_formatted($this->page['modified'])."</li>\n"
 			);
 		// If owner is current user
 		if ($this->is_owner())

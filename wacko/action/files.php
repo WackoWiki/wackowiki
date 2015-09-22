@@ -220,7 +220,7 @@ if ($can_view)
 		$edit_href		= $this->href('upload', $page, 'edit='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
 ?>
 		<tr>
-			<td class="dt-"><span class="dt2-"><?php echo $this->get_time_string_formatted($dt) ?></span>&nbsp;</td>
+			<td class="dt-"><span class="dt2-"><?php echo $this->get_time_formatted($dt) ?></span>&nbsp;</td>
 <?php
 		if ($remove_mode)
 		{

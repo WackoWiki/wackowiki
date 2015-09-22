@@ -156,9 +156,9 @@ if ($this->has_access('read'))
 							: $this->get_translation('Guest')
 						).
 						"</li>".
-						"<li>".$this->get_time_string_formatted($comment['created'])."</li>\n".
+						"<li>".$this->get_time_formatted($comment['created'])."</li>\n".
 						($comment['modified'] != $comment['created']
-							? "<li>".$this->get_time_string_formatted($comment['modified'])." ".$this->get_translation('CommentEdited')."</li>\n"
+							? "<li>".$this->get_time_formatted($comment['modified'])." ".$this->get_translation('CommentEdited')."</li>\n"
 							: '').
 						/*($user_stats == true
 							? "<li>".$this->get_translation('UsersComments').': '.$user_stats['comments'].'&nbsp;&nbsp; '.$this->get_translation('UsersPages').': '.$user_stats['pages'].'&nbsp;&nbsp; '.$this->get_translation('UsersRevisions').': '.$user_stats['revisions']."</li>\n"

@@ -73,7 +73,7 @@ if ($this->has_access('read'))
 			$message =
 				str_replace('%1', $this->href(),
 				str_replace('%2', $this->tag,
-				str_replace('%3', $this->get_page_time_formatted(),
+				str_replace('%3', $this->get_time_formatted($this->page['modified']),
 				str_replace('%4', '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>',
 				$this->get_translation('Revision')))));
 
