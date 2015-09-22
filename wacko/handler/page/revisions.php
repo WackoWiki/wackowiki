@@ -9,9 +9,10 @@ if (!defined('IN_WACKO'))
 <div id="page">
 <?php
 
-$max		= '';
-$output		= '';
-$deleted	= 1;
+$max			= '';
+$output			= '';
+$deleted		= 1;
+$place_holder	= '&nbsp;&nbsp;&nbsp;';
 
 // redirect to show method if hide_revisions is true
 if ($this->hide_revisions === true)
@@ -55,21 +56,22 @@ if ($this->has_access('read'))
 	if ($revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $deleted))
 	{
 		$this->context[++$this->current_context] = '';
+
 		$output .= $this->form_open('diff_versions', 'diff', 'get');
 		$output .= "<p>\n";
 		$output .= '<input type="submit" value="'.$this->get_translation('ShowDifferencesButton').'" />';
 		#$output .= '<a href="'.$this->href('').'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
-		$output .= '&nbsp;&nbsp;&nbsp;
-					<input type="radio" id="fulldiff" name="diffmode" value="0" checked="checked" />
+		$output .= $place_holder.
+					'<input type="radio" id="fulldiff" name="diffmode" value="0" checked="checked" />
 					<label for="fulldiff">'.$this->get_translation('FullDiff').'</label>';
-		$output .= '&nbsp;&nbsp;&nbsp;
-					<input type="radio" id="fastdiff" name="diffmode" value="1" />
+		$output .= $place_holder.
+					'<input type="radio" id="fastdiff" name="diffmode" value="1" />
 					<label for="fastdiff">'.$this->get_translation('SimpleDiff').'</label>';
-		$output .= '&nbsp;&nbsp;&nbsp;
-					<input type="radio" id="source" name="diffmode" value="2" />
+		$output .= $place_holder.
+					'<input type="radio" id="source" name="diffmode" value="2" />
 					<label for="source">'.$this->get_translation('SourceDiff').'</label>';
-		$output .= '&nbsp;&nbsp;&nbsp;
-					<a href="'.$this->href('revisions.xml').'">
+		$output .= $place_holder.
+					'<a href="'.$this->href('revisions.xml').'">
 						<img src="'.$this->config['theme_url'].'icon/xml.png'.'" title="'.$this->get_translation('RevisionXMLTip').'" alt="XML" />
 					</a>';
 
@@ -78,7 +80,7 @@ if ($this->has_access('read'))
 			$output .= '<br />'.((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? '<a href="'.$this->href('revisions', '', 'minor_edit=1').'">'.$this->get_translation('MinorEditHide').'</a>' : '<a href="'.$this->href('revisions', '', 'minor_edit=0').'">'.$this->get_translation('MinorEditShow').'</a>');
 		}
 
-		$output .= "</p>\n<ul class=\"revisions\">\n";
+		$output .= "</p>\n".'<ul class="revisions">'."\n";
 
 		if (isset($_GET['show']) && $_GET['show'] == 'all')
 		{
@@ -112,12 +114,12 @@ if ($this->has_access('read'))
 				$output .= '<li>';
 				$output .= '<span style="display: inline-block; width:40px;">'.($t--).'.</span>';
 				$output .= '<input type="radio" name="a" value="'.($c == 1 ? '-1' : $page['revision_m_id']).'" '.($c == 1 ? 'checked="checked"' : '').' />';
-				$output .= '&nbsp;&nbsp;&nbsp;
-							<input type="radio" name="b" value="'.($c == 1 ? '-1' : $page['revision_m_id']).'" '.($c == 2 ? 'checked="checked"' : '').' />';
-				$output .= '&nbsp;&nbsp;&nbsp;&nbsp;
+				$output .= $place_holder.
+							'<input type="radio" name="b" value="'.($c == 1 ? '-1' : $page['revision_m_id']).'" '.($c == 2 ? 'checked="checked"' : '').' />';
+				$output .= $place_holder.'&nbsp;
 							<a href="'.$this->href('show', '', 'revision_id='.$page['revision_m_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
 				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_m_id']."</span> ";
-				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->get_translation('By')." ".
+				$output .= $place_holder."&nbsp;".$this->get_translation('By')." ".
 				($page['user_name']
 					? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'">'.$page['user_name'].'</a>'
 					: $this->get_translation('Guest')).'';

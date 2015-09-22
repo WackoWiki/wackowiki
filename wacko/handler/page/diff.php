@@ -44,8 +44,9 @@ if (!function_exists('handler_diff_load_page_by_id'))
 #	$this->redirect($this->href('show'));
 #}
 
-$a = $_GET['a'];
-$b = $_GET['b'];
+$a			= (int)$_GET['a'];
+$b			= (int)$_GET['b'];
+$diff_mode	= $_GET['diffmode']; // isset($_GET['diffmode'])
 
 // If asked, call original diff
 if ($this->has_access('read'))
@@ -59,12 +60,12 @@ if ($this->has_access('read'))
 		// 0 - full diff
 		// 1 - simple diff
 		// 2 - source diff
-		if (isset($_GET['diffmode']) & $_GET['diffmode'] == 2)
+		if ($diff_mode == 2)
 		{
-			$source = 1;
+			$source = true;
 		}
 
-		if (isset($_GET['diffmode']) && $_GET['diffmode'] >= 1)
+		if ($diff_mode >= 1)
 		{
 			// This is a really cheap way to do it.
 
@@ -79,13 +80,24 @@ if ($this->has_access('read'))
 			str_replace('%1', '<a href="'.$this->href('', '', ($b != -1 ? 'revision_id='.$page_a['revision_id'] : '')).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
 			str_replace('%2', '<a href="'.$this->href('', '', ($a != -1 ? 'revision_id='.$page_b['revision_id'] : '')).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
 			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
-			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div><br />\n";
+			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div>\n";
+
+			$output .=
+			'<ul class="menu">'.
+				'<li><a href="'.$this->href('diff', '', 'diffmode=0'.'&amp;a='.$a.'&amp;b='.$b).'">'.$this->get_translation('FullDiff').'</a></li>'.
+				($source === true
+					?	'<li><a href="'.$this->href('diff', '', 'diffmode=1'.'&amp;a='.$a.'&amp;b='.$b).'">'.$this->get_translation('SimpleDiff').'</a></li>'.
+						'<li class="active">'.$this->get_translation('SourceDiff').'</li>'
+					:	'<li class="active">'.$this->get_translation('SimpleDiff').'</li>'.
+						'<li><a href="'.$this->href('diff', '', 'diffmode=2'.'&amp;a='.$a.'&amp;b='.$b).'">'.$this->get_translation('SourceDiff').'</a></li>'
+					).
+			'</ul>';
 
 			if ($added)
 			{
 				// remove blank lines
 				$output .= "<br />\n".$this->get_translation('SimpleDiffAdditions')."<br />\n\n";
-				$output .= '<div class="additions">'.($source == 1
+				$output .= '<div class="additions">'.($source === true
 															? '<pre>'.wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $added))
 														)."</div>\n";
@@ -94,7 +106,7 @@ if ($this->has_access('read'))
 			if ($deleted)
 			{
 				$output .= "<br />\n\n".$this->get_translation('SimpleDiffDeletions')."<br />\n\n";
-				$output .= '<div class="deletions">'.($source == 1
+				$output .= '<div class="deletions">'.($source === true
 															? '<pre>'.wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $deleted))
 														)."</div>\n";
@@ -203,12 +215,21 @@ if ($this->has_access('read'))
 			$side_b->copy_until_ordinal($count_total_right,$output);
 			$side_b->copy_whitespace($output);
 			$out = $this->format($output);
-			$out =
+
+			$meta =
 			str_replace('%1', '<a href="'.$this->href('', '', 'revision_id='.$page_b['revision_id']).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
 			str_replace('%2', '<a href="'.$this->href('', '', 'revision_id='.$page_a['revision_id']).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
 			str_replace('%3', $this->compose_link_to_page($this->tag, '', '', 0),
-			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div><br />\n<br />\n".$out;
-			echo $out;
+			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div>\n";
+
+			$meta .=
+			'<ul class="menu">'.
+				'<li class="active">'.$this->get_translation('FullDiff').'</li>'.
+				'<li><a href="'.$this->href('diff', '', 'diffmode=1'.'&amp;a='.$a.'&amp;b='.$b).'">'.$this->get_translation('SimpleDiff').'</a></li>'.
+				'<li><a href="'.$this->href('diff', '', 'diffmode=2'.'&amp;a='.$a.'&amp;b='.$b).'">'.$this->get_translation('SourceDiff').'</a></li>'.
+			'</ul>';
+
+			echo $meta.'<br /><br />'.$out;
 		}
 	}
 	else
