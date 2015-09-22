@@ -189,7 +189,7 @@ if ($this->is_admin() ||
 		}
 		else
 		{
-			$this->log(1, str_replace('%3', $this->get_time_string_formatted($this->page['created']), str_replace('%2', $this->page['user_name'], str_replace('%1', $this->get_page_tag($comment_on_id)." ".$this->get_page_title('', $comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
+			$this->log(1, str_replace('%3', $this->get_time_formatted($this->page['created']), str_replace('%2', $this->page['user_name'], str_replace('%1', $this->get_page_tag($comment_on_id)." ".$this->get_page_title('', $comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 		}
 
 		$message .= "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
@@ -210,7 +210,7 @@ if ($this->is_admin() ||
 			// TODO: add function for
 			echo '<div class="preview">';
 
-			$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->get_translation('PostedBy').' '.'<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>'.' '.$this->get_translation('At').' '.$this->get_time_string_formatted($this->page['modified']);
+			$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->get_translation('PostedBy').' '.'<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>'.' '.$this->get_translation('At').' '.$this->get_time_formatted($this->page['modified']);
 			$this->show_message($message, 'commentinfo');
 
 			$desc = $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');

@@ -223,7 +223,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					'</td>'.
 					'<td style="text-align:center; white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
 						'&nbsp;&nbsp;'.( $topic['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_id'] == 0 ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
-						'&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'&nbsp;&nbsp;'.
+						'&nbsp;&nbsp;'.$this->get_time_formatted($topic['created']).'&nbsp;&nbsp;'.
 					'</small></td>'.
 					'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
 					'<td style="text-align:center;"><small>'.$topic['hits'].'</small></td>'.
@@ -234,11 +234,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			{
 				echo '<small'.( $updated === true ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
 					( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : ( $comment['owner_id'] == 0 ? $comment['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['user_name']).'">'.$comment['user_name'].'</a>' ) ).'<br />'.
-					'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_string_formatted($comment['created']).'</a></small>';
+					'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_formatted($comment['created']).'</a></small>';
 			}
 			else
 			{
-				echo '<small><em>('.$this->get_time_string_formatted($topic['created']).')</em></small>';
+				echo '<small><em>('.$this->get_time_formatted($topic['created']).')</em></small>';
 			}
 
 			echo	'</td>'.

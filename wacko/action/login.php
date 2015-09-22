@@ -64,7 +64,7 @@ else if ($user = $this->get_user())
 	{
 		if ($user['last_visit'] == true)
 		{
-			$output .= $this->get_translation('LastVisit').' <code>'. $this->get_time_string_formatted($user['last_visit']).'</code>.<br />';
+			$output .= $this->get_translation('LastVisit').' <code>'. $this->get_time_formatted($user['last_visit']).'</code>.<br />';
 		}
 
 		$output .= $this->get_translation('SessionEnds').' <code>';

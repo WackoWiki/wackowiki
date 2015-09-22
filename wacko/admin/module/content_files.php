@@ -348,7 +348,7 @@ function admin_content_files(&$engine, &$module)
 			<td style=""><?php echo $link; ?></td>
 			<td>(<?php echo $file_size; ?>)</td>
 			<td><?php echo $desc ?></td>
-			<td style="white-space:nowrap;"><?php echo $engine->get_time_string_formatted($dt) ?></td>
+			<td style="white-space:nowrap;"><?php echo $engine->get_time_formatted($dt) ?></td>
 			<td><a href="<?php echo $remove_href; ?>"><?php echo $engine->get_translation('RemoveButton') ?></a></td>
 		</tr>
 		<tr class="lined">

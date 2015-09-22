@@ -604,10 +604,10 @@ else if ($user = $this->get_user())
 	echo '<td class="form_right">'."<a href=\"".$this->href('', ($this->config['users_page'].'/'.$user['user_name']))."\">".$this->config['users_page'].'/'.$user['user_name']."</a>"."</td>";
 	echo "</tr>\n".'<tr class="lined">';
 	echo '<th class="form_left" scope="row">'.$this->get_translation('UsersSignup')."</th>";
-	echo '<td class="form_right">'.$this->get_time_string_formatted($user['signup_time'])."</td>";
+	echo '<td class="form_right">'.$this->get_time_formatted($user['signup_time'])."</td>";
 	echo "</tr>\n".'<tr class="lined">';
 	echo '<th class="form_left" scope="row">'.$this->get_translation('UsersLastSession')."</th>";
-	echo '<td class="form_right">'.$this->get_time_string_formatted($user['last_visit'])."</td>";
+	echo '<td class="form_right">'.$this->get_time_formatted($user['last_visit'])."</td>";
 	echo "</tr>\n".'<tr class="lined">';
 	#js ReferenceError:  is not defined
 	echo '<th class="form_left" scope="row">'.$this->get_translation('UploadQuota')."&nbsp;&nbsp;</th>";

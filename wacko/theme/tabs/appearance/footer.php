@@ -78,7 +78,7 @@ if ($this->page)
 		echo_tab(
 		$this->href('revisions'),
 		$this->get_translation('RevisionTip'),
-		$this->page['modified'] ? $this->get_page_time_formatted() : "",
+		$this->page['modified'] ? $this->get_time_formatted($this->page['modified']) : "",
 		$this->method != 'revisions'
 		);
 

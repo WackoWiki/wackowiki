@@ -9,7 +9,8 @@ if (!defined('IN_WACKO'))
 // {{forums [pages="subtag1, subtag2, ..."]}}
 //		pages	= to create multilevel forums this optional parameter passes
 //				  a comma-delimeted list of tag names of pages that must be
-//				  considered subforums, and not topics. tags must not be relative
+//				  considered subforums, and not topics. tags must be absolut (not relative)
+//		if you define pages, it must be done for all subforums and topic pages
 
 // define variables
 $_pages = '';
@@ -71,7 +72,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// display list
 	echo '<table class="forum">'.
 			'<tr>'.
-				'<th>'.$this->get_translation('ForumSubforums').'</th>'.
+				'<th>'.$this->get_translation('ForumSubforum').'</th>'.
 				'<th>'.$this->get_translation('ForumTopics').'</th>'.
 				'<th>'.$this->get_translation('ForumPosts').'</th>'.
 				'<th>'.$this->get_translation('ForumLastComment').'</th>'.
@@ -150,7 +151,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 						( $comment['user_id'] == 0
 							? '<em>'.$this->get_translation('Guest').'</em>'
 							: $comment['user_name'] ).
-						' ('.$this->get_time_string_formatted($comment['created']).')</small>';
+						' ('.$this->get_time_formatted($comment['created']).')</small>';
 				}
 				else
 				{
@@ -163,7 +164,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 						( $comment['user_id'] == 0
 							? '<em>'.$this->get_translation('Guest').'</em>'
 							: $comment['user_name'] ).
-						' ('.$this->get_time_string_formatted($comment['created']).')</small>';
+						' ('.$this->get_time_formatted($comment['created']).')</small>';
 				}
 			}
 			else

@@ -63,7 +63,7 @@ if(!$nomark)
 			}
 			else
 			{
-				$date = $this->get_time_string_formatted($row['start']);
+				$date = $this->get_time_formatted($row['start']);
 			}
 
 			echo ($style == 'ul' ? '<li>' : '');

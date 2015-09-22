@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 // {{mychanges [max=Number] [bydate=1]}}
 
 if (!isset($title))		$title = '';
-if (!isset($bydate)) $bydate = '';
-if (!isset($max)) $max = '';
+if (!isset($bydate))	$bydate = '';
+if (!isset($max))		$max = '';
 $cur_char = '';
 $cur_day = '';
 
@@ -28,8 +28,10 @@ if ($user_id = $this->get_user_id())
 
 	if(isset($_GET['bydate']) && $_GET['bydate'] == 1)
 	{
-		echo $this->get_translation('MyChangesTitle1')." [<a href=\"".
-			$this->href('', '', 'mode=mychanges', '', 'list')."\">".$this->get_translation('OrderABC')."</a>].<br /><br />\n";
+		echo '<ul class="menu">'."\n".
+				'<li class="active">'.$this->get_translation('MyChangesTitle1')."</li>\n".
+				'<li>'." [<a href=\"".$this->href('', '', 'mode=mychanges', '', 'list')."\">".$this->get_translation('OrderABC')."</a>]"."</li>\n".
+			"</ul>\n";
 
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
@@ -71,7 +73,7 @@ if ($user_id = $this->get_user_id())
 
 				if ($page['edit_note'])
 				{
-					$edit_note = " <span class=\"editnote\">[".$page['edit_note']."]</span>";
+					$edit_note = ' <span class="editnote">['.$page['edit_note'].']</span>';
 				}
 				else
 				{
@@ -79,7 +81,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				echo "<li>$time (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0).$edit_note."</li>\n";
+				echo "<li>".$this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime( $time )), 0, $this->get_translation('RevisionTip'))." &mdash; ".$this->compose_link_to_page($page['tag'], '', '', 0).$edit_note."</li>\n";
 
 
 			}
@@ -99,8 +101,8 @@ if ($user_id = $this->get_user_id())
 	}
 	else
 	{
-		echo $this->get_translation('MyChangesTitle2')." [<a href=\"".
-			$this->href('', '', 'mode=mychanges&amp;bydate=1')."#list\">".
+		echo $this->get_translation('MyChangesTitle2').
+			" [<a href=\"".$this->href('', '', 'mode=mychanges&amp;bydate=1')."#list\">".
 			$this->get_translation('OrderChange')."</a>].</strong><br /><br />\n";
 
 		$count	= $this->load_single(
@@ -142,7 +144,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				echo "<li>".$this->get_time_string_formatted($page['modified'])." (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
+				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->get_translation('RevisionTip')).' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 			}
 
 			echo "</ul>\n</li>\n</ul>\n";

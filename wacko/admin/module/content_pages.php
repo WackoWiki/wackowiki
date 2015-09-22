@@ -161,6 +161,8 @@ function admin_content_pages(&$engine, &$module)
 		// FIXME: add a common function for this?
 		echo '<select id="level" name="level">';
 
+		$languages = $engine->get_translation('Languages');
+
 		if ($engine->config['multilanguage'])
 		{
 			$langs = $engine->available_languages();
@@ -174,7 +176,7 @@ function admin_content_pages(&$engine, &$module)
 		{
 			foreach ($langs as $lang)
 			{
-				echo '<option value="'.$lang.'" '.($_level == $lang ? 'selected="selected" ' : '').'>'.$lang."</option>\n";
+				echo '<option value="'.$lang.'" '.($_level == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 			}
 		}
 

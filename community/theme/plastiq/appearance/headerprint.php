@@ -21,7 +21,7 @@
 <div id="header">
 	<div class="container">
 		<h1><?php echo $this->config['site_name']; ?></h1>
-		<a href="/"><?php echo rtrim($this->config['base_url'], '/'); ?></a><?php if ($this->page) { ?>&nbsp;&nbsp;&nbsp;&nbsp;modified: <?php echo $this->get_page_time_formatted(); } ?><br />
+		<a href="/"><?php echo rtrim($this->config['base_url'], '/'); ?></a><?php if ($this->page) { ?>&nbsp;&nbsp;&nbsp;&nbsp;modified: <?php echo $this->get_time_formatted($this->page['modified']); } ?><br />
 		<?php echo $this->get_page_path() ?><br />
 		<a href="<?php echo $this->href() ?>">&laquo; back</a>
 	</div>
