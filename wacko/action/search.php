@@ -383,11 +383,7 @@ if ($phrase)
 
 						$_lang = '';
 
-						if ($this->page['lang'] != $page['lang'])
-						{
-							#$page['title'] = $this->do_unicode_entities($page['title'], $page['lang']);
-							$_lang = $page['lang'];
-						}
+
 
 						// generate preview
 						if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
@@ -398,6 +394,14 @@ if ($phrase)
 							$context	= highlight_this($text = $context, $words = $phrase, $the_place = 0);
 							list($context, $count) = $context;
 							$preview	= "<div>".str_replace("\n", '<br />', $context)."</div>";
+						}
+
+						if ($this->page['lang'] != $page['lang'])
+						{
+							#$page['title'] = $this->do_unicode_entities($page['title'], $page['lang']);
+							$_lang	= $page['lang'];
+
+							$preview = $this->do_unicode_entities($preview, $_lang);
 						}
 
 						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>".' ('.$count.')';
