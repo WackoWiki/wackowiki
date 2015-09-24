@@ -74,23 +74,42 @@ if ($this->can_upload() === true)
 	<br />
 	<ul class="upload">
 		<li><?php echo $this->link($path.$file['file_name'] ); ?>
-			<ul>
-				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
+			<br /><br />
+			<table>
+				<tr class="lined">
+					<th class="form_left" scope="row"><?php echo $this->get_translation('UploadBy'); ?>:</th>
+					<td><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></td>
+				</tr>
+				<tr class="">
+					<th class="form_left" scope="row"><?php echo $this->get_translation('FileAdded'); ?>:</th>
+					<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
+				</tr>
+				<tr class="">
+					<th class="form_left" scope="row"><?php echo $this->get_translation('FileSize'); ?>:</th>
+					<td><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></td>
+				</tr>
 <?php
 			// image dimension
 			if ($file['picture_w'])
 			{ ?>
-				<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
+				<tr class="lined">
+					<th class="form_left" scope="row"><?php echo $this->get_translation('FileDimension'); ?>:</th>
+					<td><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></td>
+				</tr>
 <?php
 			} ?>
-				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file['file_description']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileUsage'); ?>:</span><?php echo $this->action('fileusage', array('file_id' => $file['upload_id'], 'nomark' => 1)); ?></li>
-			</ul>
+				<tr class="">
+					<th class="form_left" scope="row"><?php echo $this->get_translation('FileName'); ?>:</th>
+					<td><?php echo $file['file_name']; ?></td>
+				</tr>
+				<tr class="lined">
+					<th class="form_left" scope="row"><?php echo $this->get_translation('UploadDesc'); ?>:</th>
+					<td><?php echo $file['file_description']; ?></td>
+				<tr class="lined">
+					<th class="form_left" scope="row"><?php echo $this->get_translation('FileUsage'); ?>:</th>
+					<td><?php echo $this->action('fileusage', array('file_id' => $file['upload_id'], 'nomark' => 1)); ?></td>
+				</tr>
+			</table>
 		</li>
 	</ul>
 	<br />
@@ -487,11 +506,13 @@ if ($this->can_upload() === true)
 							if ($is_global)
 							{
 								$small_name = $result_name;
+								$path		= 'file:';
 							}
 							else
 							{
 								$small_name = explode('@', $result_name);
 								$small_name = $small_name[ count($small_name) -1 ];
+								$path		= 'file:/'.$this->page['supertag'].'/';
 							}
 
 							$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
@@ -542,7 +563,7 @@ if ($this->can_upload() === true)
 							?>
 		<br />
 		<ul class="upload">
-			<li><?php echo $this->link('file:'.$small_name); ?>
+			<li><?php echo $this->link($path.$small_name); ?>
 				<ul>
 					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileSyntax'); ?>:</span><?php echo '<code>file:'.$small_name.'</code>'; ?></li>
