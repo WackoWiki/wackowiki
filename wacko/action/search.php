@@ -396,12 +396,12 @@ if ($phrase)
 							$preview	= "<div>".str_replace("\n", '<br />', $context)."</div>";
 						}
 
+						// check current page lang for different charset to do_unicode_entities() against
 						if ($this->page['lang'] != $page['lang'])
 						{
 							#$page['title'] = $this->do_unicode_entities($page['title'], $page['lang']);
-							$_lang	= $page['lang'];
-
-							$preview = $this->do_unicode_entities($preview, $_lang);
+							$_lang		= $page['lang'];
+							$preview	= $this->do_unicode_entities($preview, $_lang);
 						}
 
 						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>".' ('.$count.')';
