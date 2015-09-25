@@ -117,8 +117,8 @@ require ($this->config['theme_path'].'/_common/_header.php');
 						<div class="modulecontent"><?php
 							// Revisions link
 								echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() )
-									? "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a>\n"
-									: "".$this->get_time_string_formatted($this->page['modified'])."\n"
+									? "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a>\n"
+									: "".$this->get_time_formatted($this->page['modified'])."\n"
 								);
 
 						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";

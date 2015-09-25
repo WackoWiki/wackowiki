@@ -134,7 +134,7 @@ echo "\n";
 
 			if ($this->page['created'] != SQL_NULLDATE)
 			{
-				echo 'Theme open '.$this->get_time_string_formatted($this->page['created']);
+				echo 'Theme open '.$this->get_time_formatted($this->page['created']);
 			}
 		}
 		else
@@ -153,10 +153,10 @@ echo "\n";
 
 			if ($this->page['created'] != SQL_NULLDATE)
 			{
-				echo '('.$this->get_translation('Created').' '.$this->get_time_string_formatted($this->page['created']).'), ';
+				echo '('.$this->get_translation('Created').' '.$this->get_time_formatted($this->page['created']).'), ';
 			}
 
-			echo $this->get_translation('Modified').' '.$this->get_time_string_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.( $this->page['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) .')';
+			echo $this->get_translation('Modified').' '.$this->get_time_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.( $this->page['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) .')';
 		}
 	}
 	echo "\n";
