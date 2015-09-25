@@ -6,6 +6,10 @@ Please do NEVER forget: Microsoft != standard
 Based on the NoProbs template from Gururaj:
 http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 -->
+<?php
+// HTTP header with right Charset settings
+header('Content-Type: text/html; charset='.$this->get_charset());
+?>
 <html lang="<?php echo $this->page['lang'] ?>">
 <head>
 	<meta name="author" content="Theme for WackoWiki by Robert Vaeth" />
