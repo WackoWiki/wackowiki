@@ -2801,11 +2801,11 @@ class Wacko
 			$this->set_language($link_lang);
 		}
 
-		if (preg_match('/^[\.\-'.$this->language['ALPHANUM_P'].']+\.(gif|jpg|jpe|jpeg|png)$/i', $text))
+		if (preg_match('/^[\.\-'.$this->language['ALPHANUM_P'].']+\.(gif|jpg|jpe|jpeg|png|svg)$/i', $text))
 		{
 			$img_link = $this->config['base_url'].'/image/'.$text;
 		}
-		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i', preg_replace('/<\/?nobr>/', '', $text)))
+		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg)$/i', preg_replace('/<\/?nobr>/', '', $text)))
 		{
 			$img_link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
 		}
@@ -2832,7 +2832,7 @@ class Wacko
 			$url	= $tag;
 			$tpl	= 'anchor';
 		}
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg)$/i', $tag))
 		{
 			// external image
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
@@ -3003,6 +3003,7 @@ class Wacko
 									'txt' => 'texticon',
 									'odt' => 'odticon',
 									'png' => 'imageicon',
+									'svg' => 'imageicon',
 									'gif' => 'imageicon',
 									'jpg' => 'imageicon');
 
@@ -3015,12 +3016,21 @@ class Wacko
 						$icon	= $this->get_translation('fileicon');
 					}
 
-					if ($file_data['picture_w'] && !$noimg)
+					if ( ($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
 					{
 						/* if (!$text)
 						{
 							$text = $title;
 						} */
+
+						if ($file_data['file_ext'] == 'svg')
+						{
+							$scale = '';
+						}
+						else
+						{
+							$scale = 'width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'"';
+						}
 
 						// direct file access
 						if ($_global == true)
@@ -3029,7 +3039,7 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+								return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' '.$scale.' />';
 							}
 							else
 							{
@@ -3045,7 +3055,7 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+								return '<img src="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' '.$scale.' />';
 							}
 							else
 							{
