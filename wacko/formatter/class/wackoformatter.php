@@ -681,10 +681,11 @@ class WackoFormatter
 		{
 			$url = strtolower($matches[1]);
 
-			if (substr($url, -4) == '.jpg' ||
-				substr($url, -4) == '.gif' ||
-				substr($url, -4) == '.png' ||
+			if (substr($url, -4) == '.gif' ||
 				substr($url, -4) == '.jpe' ||
+				substr($url, -4) == '.jpg' ||
+				substr($url, -4) == '.png' ||
+				substr($url, -4) == '.svg' ||
 				substr($url, -5) == '.jpeg')
 			{
 				return '<img src="'.$matches[1].'" />'.$matches[2];

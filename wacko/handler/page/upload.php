@@ -10,6 +10,7 @@ if (!defined('IN_WACKO'))
 <?php
 
 $is_global		= '';
+$is_image		= '';
 $message		= '';
 $error			= '';
 
@@ -405,10 +406,10 @@ if ($this->can_upload() === true)
 			}
 
 			// 1. upload quota
-			if ( (!$this->config['upload_quota_per_user'] ||
-				 ($user_files['used_user_quota'] < $this->config['upload_quota_per_user'])) &&
-				 (!$this->config['upload_quota'] ||
-				 ($files['used_quota'] < $this->config['upload_quota'])) )
+			if ( (!$this->config['upload_quota_per_user']
+					|| ($user_files['used_user_quota'] < $this->config['upload_quota_per_user']))
+				 && (!$this->config['upload_quota']
+					|| ($files['used_quota'] < $this->config['upload_quota'])) )
 			{
 				if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
 				{
@@ -424,6 +425,13 @@ if ($this->can_upload() === true)
 					if (in_array($ext, $banned))
 					{
 						$ext = $ext.'.txt';
+					}
+
+					$image = array('gif', 'jpeg', 'jpg', 'png');
+
+					if (in_array($ext, $image))
+					{
+						$is_image= true;
 					}
 
 					$name	= implode('.', $_data);
@@ -470,24 +478,28 @@ if ($this->can_upload() === true)
 					$file_size		= $_FILES['file']['size'];
 
 					// 1.6. check filesize, if asked
-					$maxfilesize = $this->config['upload_max_size'];
+					$max_filesize = $this->config['upload_max_size'];
 
 					if (isset($_POST['maxsize']))
 					{
-						if ($maxfilesize > 1 * $_POST['maxsize'])
+						if ($max_filesize > 1 * $_POST['maxsize'])
 						{
-							$maxfilesize = 1 * $_POST['maxsize'];
+							$max_filesize = 1 * $_POST['maxsize'];
 						}
 					}
 
 					// Admins can upload unlimited
-					if (($file_size < $maxfilesize) || $this->is_admin())
+					if (($file_size < $max_filesize) || $this->is_admin())
 					{
 						// 1.7. check is image, if asked
 						$forbid		= 0;
 						$size		= array(0, 0);
 						$src		= $_FILES['file']['tmp_name'];
-						$size		= @getimagesize($src);
+
+						if ($is_image === true)
+						{
+							$size	= @getimagesize($src);
+						}
 
 						if ($this->config['upload_images_only'])
 						{

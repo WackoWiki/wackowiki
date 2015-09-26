@@ -36,11 +36,13 @@ if ($file)
 	if (count($file) > 0)
 	{
 		// 2. check rights
-		if ($this->is_admin() || (isset($file['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
-		($this->has_access('read')) || ($file['user_id'] == $this->get_user_id()) )
+		if ($this->is_admin() || (isset($file['upload_id']) && ($this->page['owner_id'] == $this->get_user_id()))
+		|| ($this->has_access('read')) || ($file['user_id'] == $this->get_user_id()) )
 		{
 			$file_path = $this->config['upload_path'.($page_id ? '_per_page' : '')].'/'.
-			($page_id ? ('@'.$this->page['page_id'].'@') : '').
+			($page_id
+				? '@'.$this->page['page_id'].'@'
+				: '').
 			$file['file_name'];
 		}
 		else
@@ -56,6 +58,11 @@ if ($file)
 	{
 		$is_image = true;
 		header('Content-Type: image/'.$extension);
+	}
+	else if ($extension == 'svg')
+	{
+		$is_image = true;
+		header('Content-Type: image/svg+xml');
 	}
 	else if ($extension == 'txt')
 	{
