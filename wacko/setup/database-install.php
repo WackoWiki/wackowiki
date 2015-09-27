@@ -390,6 +390,7 @@ $delete_table[]	= array('upload',			$table_upload_drop);
 $delete_table[]	= array('user',				$table_user_drop);
 $delete_table[]	= array('user_setting',		$table_user_setting_drop);
 $delete_table[]	= array('watch',			$table_watch_drop);
+$delete_table[]	= array('word',				$table_word_drop);
 
 // INSTALL
 // create tables
@@ -418,6 +419,7 @@ $create_table[]	= array('upload',			$table_upload);
 $create_table[]	= array('user',				$table_user);
 $create_table[]	= array('user_setting',		$table_user_setting);
 $create_table[]	= array('watch',			$table_watch);
+$create_table[]	= array('word',				$table_word);
 
 // insert_records
 //		$value[0] - table name
@@ -468,6 +470,7 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_0,		$l
 
 // category
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_0,		$lang['ErrorAlteringTable']);
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_1,		$lang['ErrorAlteringTable']);
 
 // config
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
@@ -507,6 +510,8 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_settin
 // usergroup
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
 
+// usergroup
+$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'word',			$table_word_r5_4_0,			$lang['ErrorCreatingTable']);
 
 //TODO: if (preg_match('/5\.0\.\d+/i', $version) || $continue == true)
 switch($config['database_driver'])

@@ -3,7 +3,6 @@
 		function check()
 		{
 			var f = document.forms.form1;
-			var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
 
 			// Ensure a database driver is selected
 			var db_driver_selected = false;

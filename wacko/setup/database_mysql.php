@@ -35,6 +35,7 @@ $table_category = "CREATE TABLE {$pref}category (".
 					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT 0,".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"category VARCHAR(100) NOT NULL DEFAULT '',".
+					"description VARCHAR(255) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (category_id),".
 					"UNIQUE KEY idx_category (lang, category)".
 				") {$engine} COMMENT='' {$charset}";
@@ -380,12 +381,12 @@ $table_watch = "CREATE TABLE {$pref}watch (".
 					"PRIMARY KEY (watch_id)".
 				") {$engine} COMMENT='' {$charset}";
 
-/* $table_word = "CREATE TABLE {$pref}word (".
+$table_word = "CREATE TABLE {$pref}word (".
 					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"word VARCHAR(255) NOT NULL DEFAULT '',".
 					"replacement VARCHAR(255) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (word_id)".
-				") {$engine} COMMENT='' {$charset}"; */
+				") {$engine} COMMENT='' {$charset}";
 
 /*
  Wacko Wiki MySQL Table Deletion Script
@@ -414,6 +415,6 @@ $table_user_setting_drop		= "DROP TABLE {$pref}user_setting";
 $table_usergroup_drop			= "DROP TABLE {$pref}usergroup";
 $table_usergroup_member_drop	= "DROP TABLE {$pref}usergroup_member";
 $table_watch_drop				= "DROP TABLE {$pref}watch";
-/* $table_word_drop				= "DROP TABLE {$pref}word"; */
+$table_word_drop				= "DROP TABLE {$pref}word";
 
 ?>
