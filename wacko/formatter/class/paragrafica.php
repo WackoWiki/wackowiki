@@ -261,7 +261,7 @@ class paragrafica
 		"(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">)".				// 6=id
 									"|".
 		"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
-		// {{include xxxx="TAG" notoc="1"}}
+		// {{include page="TAG" notoc=1}}
 									"!i", array( &$this, 'add_toc_entry' ), $what );
 
 		return $what;
@@ -278,7 +278,7 @@ class paragrafica
 		{
 			if ($matches[8] == '')
 			{
-				$this->toc[] = array($this->wacko->unwrap_link(trim($matches[7],'"')), '(include)', 99999);
+				$this->toc[] = array($this->wacko->unwrap_link(trim($matches[7], '"')), '(include)', 99999);
 			}
 		}
 		else
