@@ -884,7 +884,7 @@ $wacko_translation = array(
 	'SetAsUnreviewed'	=> 'Set page as unreviewed',
 
 	// word filter
-	'PotentialSpam'				=> 'Error: Identified Potential Spam',
+	'PotentialSpam'				=> 'Identified Potential Spam',
 
 	// moderation handler
 	'Moderation'			=> 'Moderation',
