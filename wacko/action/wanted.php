@@ -4,6 +4,57 @@ if (!defined('IN_WACKO'))
 {
 	exit;
 }
+
+if (!function_exists('load_wanted'))
+{
+	function load_wanted(&$wacko, $for = '', $limit = 50, $deleted = 0)
+	{
+		$limit		= (int) $limit;
+		$pagination	= '';
+		$pref		= $wacko->config['table_prefix'];
+
+		// count pages
+		if ($count_pages = $wacko->load_all(
+				"SELECT DISTINCT l.to_tag AS wanted_tag ".
+				"FROM ".$pref."link l ".
+					"LEFT JOIN ".$pref."page p ON ".
+					"((l.to_tag = p.tag ".
+						"AND l.to_supertag = '') ".
+						"OR l.to_supertag = p.supertag) ".
+				"WHERE ".
+					($for
+						? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
+						: "").
+					"p.tag is NULL GROUP BY wanted_tag ".
+				"ORDER BY wanted_tag ASC "
+			, true));
+
+		if ($count_pages)
+		{
+			$count		= count($count_pages);
+			$pagination = $wacko->pagination($count, $limit);
+
+			$wanted = $wacko->load_all(
+					"SELECT DISTINCT l.to_tag AS wanted_tag ".
+					"FROM ".$pref."link l ".
+						"LEFT JOIN ".$pref."page p ON ".
+						"((l.to_tag = p.tag ".
+							"AND l.to_supertag = '') ".
+							"OR l.to_supertag = p.supertag) ".
+					"WHERE ".
+						($for
+							? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
+							: "").
+						"p.tag is NULL GROUP BY wanted_tag ".
+					"ORDER BY wanted_tag ASC ".
+					"LIMIT {$pagination['offset']}, {$limit}");
+
+			return array($wanted, $pagination);
+		}
+
+	}
+}
+
 if (!isset($root)) $root = $this->unwrap_link($vars[0]);
 
 if (!isset($root))
@@ -40,24 +91,41 @@ if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
 else
 {
 	$for	= $root;
-	$pref	= $this->config['table_prefix'];
-	$sql	= "SELECT DISTINCT l.to_tag AS wanted_tag ".
-		"FROM ".$pref."link l ".
-			"LEFT JOIN ".$pref."page p ON ".
-			"((l.to_tag = p.tag ".
-				"AND l.to_supertag = '') ".
-				"OR l.to_supertag = p.supertag) ".
-		"WHERE ".
-			($for
-				? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
-				: "").
-		"p.tag is NULL GROUP BY wanted_tag ".
-		"ORDER BY wanted_tag ASC";
 
-	if ($pages = $this->load_all($sql))
+	if ($user = $this->get_user())
+	{
+		$usermax = $user['changes_count'];
+
+		if ($usermax == 0)
+		{
+			$usermax = 10;
+		}
+	}
+	else
+	{
+		$usermax = 50;
+	}
+
+	if (!isset($max) || $usermax < $max)
+	{
+		$max = $usermax;
+	}
+
+	if ($max > 100)
+	{
+		$max	= 100;
+	}
+
+	if (list ($pages, $pagination) = load_wanted($this, $root, (int)$max))
 	{
 		if (is_array($pages))
 		{
+			// pagination
+			if (isset($pagination['text']))
+			{
+				echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
+			}
+
 			echo "<ol>\n";
 
 			foreach($pages as $page)
@@ -89,6 +157,12 @@ else
 			}
 
 			echo "</ol>\n";
+
+			// pagination
+			if (isset($pagination['text']))
+			{
+				echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+			}
 		}
 	}
 	else
