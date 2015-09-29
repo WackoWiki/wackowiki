@@ -101,18 +101,18 @@ class RSS
 		$this->write_file($name, $xml);
 	}
 
-	function news($news_cluster)
+	function news($news_cluster = '')
 	{
 		$limit			= 10;
 		$name			= 'news';
-		$news_cluster	= !isset($news_cluster) ? $this->engine->config['news_cluster'] : $news_cluster;
+		$news_cluster	= empty($news_cluster) ? $this->engine->config['news_cluster'] : $news_cluster;
 		$news_levels	= $this->engine->config['news_levels'];
 		$news_pages		= '';
 		$prefix			= $this->engine->config['table_prefix'];
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT page_id, tag, title, created, body_r, comments ".
+			"SELECT page_id, tag, title, created, body_r, comments, lang ".
 			"FROM {$prefix}page ".
 			"WHERE comment_on_id = '0' ".
 				"AND tag REGEXP '^{$news_cluster}{$news_levels}$' ".
@@ -127,8 +127,15 @@ class RSS
 
 				if ($access)
 				{
-					$news_pages[]	= array('page_id' => $page['page_id'], 'tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
-						'body_r' => $page['body_r'], 'comments' => $page['comments'], 'date' => date('Y/m-d', strtotime($page['created'])));
+					$news_pages[]	= array(
+										'page_id'	=> $page['page_id'],
+										'tag'		=> $page['tag'],
+										'title'		=> $page['title'],
+										'modified'	=> $page['created'],
+										'body_r'	=> $page['body_r'],
+										'comments'	=> $page['comments'],
+										'lang'		=> $page['lang'],
+										'date'		=> date('Y/m-d', strtotime($page['created'])));
 				}
 			}
 
@@ -176,13 +183,18 @@ class RSS
 
 				// this is a news article
 				$title	= $page['title'];
-				$cat	= substr_replace ($page['tag'], '', 0, strlen ($news_cluster) + 1); // removes news cluster name
-				$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
 				$link	= $this->engine->href('', $page['tag']);
 				$pdate	= date('r', strtotime($page['modified']));
-				$coms	= $link.'?show_comments=1#commentsheader';
-				$body	= $this->engine->load_page($page['tag']);
+				$coms	= $this->engine->href('', $page['tag'], 'show_comments=1#commentsheader');
+				// TODO: might fail if body_r is empty
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
+
+				// check current page lang for different charset to do_unicode_entities() against
+				if ($this->engine->config['language'] != $page['lang'])
+				{
+					$title	= $this->engine->do_unicode_entities($title, $page['lang']);
+					$text	= $this->engine->do_unicode_entities($text, $page['lang']);
+				}
 
 				$xml .= '<item>'."\n".
 							'<title>'.$title.'</title>'."\n".
@@ -257,6 +269,18 @@ class RSS
 				if ( $access && ($count < 30) )
 				{
 					$count++;
+
+					// TODO: might fail if body_r is empty
+					$text = $this->engine->format($comment['body_r'], 'post_wacko');
+
+					// check current page lang for different charset to do_unicode_entities() against
+					if ($this->engine->config['language'] != $comment['lang'])
+					{
+						$text					= $this->engine->do_unicode_entities($text, $comment['lang']);
+						$comment['title']		= $this->engine->do_unicode_entities($comment['title'], $comment['lang']);
+						$comment['page_title']	= $this->engine->do_unicode_entities($comment['page_title'], $comment['lang']);
+					}
+
 					$xml .= "<item>\n";
 					$xml .= "<title>".$comment['title']." ".$this->engine->get_translation('To')." ".$comment['page_title']." ".$this->engine->get_translation('From')." ".
 						($comment['user_name']
@@ -267,7 +291,7 @@ class RSS
 					$xml .= "<guid>".$this->engine->href('show', $comment['tag'], '')."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($comment['modified']))."</pubDate>\n";
 					$xml .= "<dc:creator>".$comment['user_name']."</dc:creator>\n";
-					$text = $this->engine->format($comment['body_r'], "post_wacko");
+
 					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></description>\n";
 					#$xml .= "<content:encoded><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></content:encoded>\n";
 					$xml .= "</item>\n";
