@@ -1548,7 +1548,7 @@ class Wacko
 				? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 				: "").
 			($deleted != 1
-				? "AND p.deleted <> '1' "
+				? "AND p.deleted <> '1' AND c.deleted <> '1' "
 				: "").
 		"ORDER BY c.modified DESC ".
 		"LIMIT ".$limit))
