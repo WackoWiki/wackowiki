@@ -21,12 +21,12 @@ if (!function_exists('load_commented'))
 			"FROM ".$wacko->config['table_prefix']."page a ".
 				"LEFT JOIN ".$wacko->config['table_prefix']."page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
 			($for
-				? 	"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				?	"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				:	"").
 			"WHERE ".
 			($for
-				? 	"a2.page_id IS NULL AND b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
-				: 	"a2.page_id IS NULL AND a.comment_on_id <> '0' ").
+				?	"a2.page_id IS NULL AND b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
+				:	"a2.page_id IS NULL AND a.comment_on_id <> '0' ").
 			($deleted != 1
 				? "AND a.deleted <> '1' "
 				: "").
