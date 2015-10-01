@@ -25,8 +25,7 @@ if (!function_exists('load_wanted'))
 					($for
 						? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
 						: "").
-					"p.tag is NULL GROUP BY wanted_tag ".
-				"ORDER BY wanted_tag ASC "
+					"p.tag is NULL GROUP BY wanted_tag "
 			, true));
 
 		if ($count_pages)
@@ -134,7 +133,7 @@ else
 
 				if(!$this->config['hide_locked'] || $this->has_access('read', $page_parent))
 				{
-					// Update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
+					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
 
 					if($referring_pages = $this->load_pages_linking_to($page['wanted_tag'], $root))
