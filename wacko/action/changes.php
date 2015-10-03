@@ -149,6 +149,9 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 				$viewed = ($user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '');
 			}
 
+			// cache page_id for for has_access validation in link function
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+
 			// print entry
 			echo '<li class="lined'.$viewed.'"><span class="dt">'.
 			($this->hide_revisions === false || $this->is_admin()

@@ -113,7 +113,10 @@ if (list ($pages, $pagination) = load_orphaned_pages($this, $root, (int)$max))
 			{
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 				{
-					echo "<li>".$this->link('/'.$page['tag'], '', '', '', 0)."</li>\n";
+					// cache page_id for for has_access validation in link function
+					$this->page_id_cache[$page['tag']] = $page['page_id'];
+
+					echo '<li>'.$this->link('/'.$page['tag'], '', '', '', 0)."</li>\n";
 				}
 			}
 		}

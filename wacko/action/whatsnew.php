@@ -94,6 +94,9 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			$access = true;
 		}
 
+		// cache page_id for for has_access validation in link function
+		$this->page_id_cache[$page['tag']] = $page['page_id'];
+
 		if (!isset($printed[$page['tag']]))
 		{
 			$printed[$page['tag']] = '';

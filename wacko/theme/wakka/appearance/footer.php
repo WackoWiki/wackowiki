@@ -13,7 +13,7 @@
 <ul>
 <?php
 // If User has rights to edit page, show Edit link
-echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation('EditTip')."\">".$this->get_translation('EditText')."</a></li>\n" : "";
+echo ($this->has_access('write') && ($this->method != 'edit')) ? '<li><a href="'.$this->href('edit').'" accesskey="E" title="'.$this->get_translation('EditTip').'">'.$this->get_translation('EditText')."</a></li>\n" : '';
 
 // If this page exists
 if ($this->page)

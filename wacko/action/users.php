@@ -264,6 +264,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 						$_lang = '';
 					}
 
+					// cache page_id for for has_access validation in link function
+					$this->page_id_cache[$page['tag']] = $page['page_id'];
+
 					echo '<small>'.$this->get_time_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang)."<br />\n";
 
 					$i = 0;
@@ -326,6 +329,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 						{
 							$_lang = '';
 						}
+
+						// cache page_id for for has_access validation in link function
+						$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 
 						echo '<small>'.$this->get_time_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang)."<br />\n";
 
@@ -419,6 +425,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 							if ($upload['page_id']) // !$global
 							{
+								// cache page_id for for has_access validation in link function
+								$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
+
 								$path2		= '_file:/'.($this->slim_url($upload['file_on_page'])).'/';
 								$on_page	= $this->get_translation('To').' '.$this->link('/'.$upload['file_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
 							}

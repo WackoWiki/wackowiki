@@ -86,6 +86,9 @@ if ($list && ($ids || isset($_GET['category'])))
 
 			foreach ($pages as $page)
 			{
+				// cache page_id for for has_access validation in link function
+				$this->page_id_cache[$page['tag']] = $page['page_id'];
+
 				if ($this->has_access('read', $page['page_id']) !== true)
 				{
 					continue;
