@@ -192,6 +192,9 @@ if ($user = $this->get_user())
 
 					if ($access)
 					{
+						// cache page_id for for has_access validation in link function
+						$this->page_id_cache[$page['tag']] = $page['page_id'];
+
 						echo '<li>'.$this->link('/'.$page['tag']."#a-".$anchor, '', $page['tag'], $page['title'])."</li>\n";
 					}
 				}
@@ -268,11 +271,12 @@ if ($user = $this->get_user())
 								$_lang = '';
 							}
 
+							// cache page_id for for has_access validation in link function
+							$this->page_id_cache[$page['tag']] = $page['page_id'];
+
 							#$page_link = $this->compose_link_to_page($page['tag']);
 							$page_link = $this->link('/'.$page['tag'], '', $page['title'], '', '', '', $_lang, 0);
 						}
-
-
 
 						echo '<li><strong>'.$page_link.'</strong>'.' ('.$page['num'].')';
 						$referrers = $this->load_referrers($page['page_id']);
@@ -384,6 +388,9 @@ if ($user = $this->get_user())
 							{
 								$_lang = '';
 							}
+
+							// cache page_id for for has_access validation in link function
+							$this->page_id_cache[$referrer['tag']] = $referrer['page_id'];
 
 							#$page_link = $this->compose_link_to_page($page['tag']);
 							$page_link = $this->link('/'.$referrer['tag'], '', $referrer['title'], '', '', '', $_lang, 0);

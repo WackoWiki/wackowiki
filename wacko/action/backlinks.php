@@ -40,6 +40,9 @@ if ($pages = $this->load_pages_linking_to($tag))
 
 			if ($access)
 			{
+				// cache page_id for for has_access validation in link function
+				$this->page_id_cache[$page['tag']] = $page['page_id'];
+
 				if ($title == 1)
 				{
 					$_link = $this->link('/'.$page['tag']."#a-".$this->translit($tag), '', $page['title']);

@@ -24,6 +24,7 @@ class Wacko
 	var $inter_wiki				= array();
 	var $_acl					= array();
 	var $acl_cache				= array();
+	var $page_id_cache			= array();
 	var $context				= array();
 	var $current_context		= 0;
 	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description';
@@ -1232,21 +1233,6 @@ class Wacko
 		$acl	= '';
 		$lang	= '';
 		$user	= $this->get_user();
-		$cl		= 0;
-
-		// get links
-		if ($links = $this->load_all(
-			"SELECT to_tag ".
-			"FROM ".$this->config['table_prefix']."link ".
-			"WHERE from_page_id = '".$this->page['page_id']."'"))
-		{
-			$cl = count($links);
-
-			for ($i = 0; $i < $cl; $i++)
-			{
-				$pages[] = $links[$i]['to_tag'];
-			}
-		}
 
 		// get lang
 		if(isset($user['lang']))
@@ -1260,6 +1246,18 @@ class Wacko
 		else
 		{
 			$lang = $this->config['language'];
+		}
+
+		// get page links
+		if ($links = $this->load_all(
+			"SELECT to_tag ".
+			"FROM ".$this->config['table_prefix']."link ".
+			"WHERE from_page_id = '".$this->page['page_id']."'"))
+		{
+			foreach ($links as $link)
+			{
+				$pages[] = $link['to_tag'];
+			}
 		}
 
 		// get menu items
@@ -1283,6 +1281,7 @@ class Wacko
 			}
 		}
 
+		// get default links
 		if(isset($user['user_name']))
 		{
 			$pages[]	= $this->config['users_page'].'/'.$user['user_name'];
@@ -1291,8 +1290,9 @@ class Wacko
 		$pages[]	= $this->config['users_page'];
 		$pages[]	= $this->tag;
 
+		$pages[]	= $this->tag;
+
 		$pages		= array_unique($pages);
-		$spages		= $pages;
 		$spages_str	= '';
 		$pages_str	= '';
 
@@ -1300,7 +1300,9 @@ class Wacko
 		{
 			if ($page != '')
 			{
-				$spages_str	.= "'".quote($this->dblink, $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD))."', ";
+				$_spages	= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
+				$spages[]	= $_spages;
+				$spages_str	.= "'".quote($this->dblink, $_spages)."', ";
 				$pages_str	.= "'".quote($this->dblink, $page)."', ";
 			}
 		}
@@ -1313,19 +1315,20 @@ class Wacko
 		"FROM ".$this->config['table_prefix']."page ".
 		"WHERE supertag IN (".$spages_str.")", true))
 		{
-			for ($i = 0; $i < count($links); $i++)
+			foreach ($links as $link)
 			{
-				$this->cache_page($links[$i], 0, 1);
-				$exists[] = $links[$i]['supertag'];
+				$this->cache_page($link, 0, 1);
+				$this->page_id_cache[$link['tag']] = $link['page_id'];
+				$exists[] = $link['supertag'];
 			}
 		}
 
 		$notexists = @array_values(@array_diff($spages, $exists));
 
-		for ($i = 0; $i < count($notexists); $i++)
+		foreach ($notexists as $notexist)
 		{
-			$this->cache_wanted_page($pages[array_search($notexists[$i], $spages)], 0, 1);
-			$this->cache_acl($this->get_page_id($notexists[$i]), 'read', 1, $acl);
+			$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, 1);
+			#$this->cache_acl($this->get_page_id($notexist), 'read', 1, $acl);
 		}
 
 		if ($read_acls = $this->load_all(
@@ -1334,9 +1337,9 @@ class Wacko
 			"INNER JOIN ".$this->config['table_prefix']."page p ON (p.page_id = a.page_id) ".
 		"WHERE BINARY p.tag IN (".$pages_str.") AND a.privilege = 'read'", true))
 		{
-			for ($i = 0; $i < count($read_acls); $i++)
+			foreach ($read_acls as $read_acl)
 			{
-				$this->cache_acl($read_acls[$i]['page_id'], 'read', 1, $read_acls[$i]);
+				$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acl);
 			}
 		}
 	}
@@ -1859,7 +1862,7 @@ class Wacko
 				{
 					$root			= preg_replace( '/^(.*)\\/([^\\/]+)$/', '$1', $this->context[$this->current_context] );
 					$root_id		= $this->get_page_id($root);
-					$write_acl		= $this->load_acl($this->get_page_id($root), 'write');
+					$write_acl		= $this->load_acl($root_id, 'write');
 
 					while (!empty($write_acl['default']) && $write_acl['default'] == 1)
 					{
@@ -2960,8 +2963,7 @@ class Wacko
 
 				//unwrap tag (check !/, ../ cases)
 				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
-				$page_id	= $this->get_page_id($page_tag);
-
+				$page_id	= $this->get_page_id($page_tag); // TODO: supertag won't match tag! in cache
 				$file_data	= $this->check_file_exists($file_name, $page_tag);
 				$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
 
