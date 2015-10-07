@@ -24,8 +24,10 @@ function admin_user_users(&$engine, &$module)
 {
 	$where = '';
 	$order = '';
+	$error = '';
 
 	#$engine->debug_print_r($_POST);
+	#$engine->debug_print_r($_REQUEST);
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
@@ -51,7 +53,7 @@ function admin_user_users(&$engine, &$module)
 
 		foreach ($ids as $id)
 		{
-			if (!in_array($id, $set))
+			if (!in_array($id, $set) && !empty($id))
 			{
 				$set[] = $id;
 			}
@@ -63,7 +65,7 @@ function admin_user_users(&$engine, &$module)
 	// keep currently selected list items
 	foreach ($_POST as $val => $key)
 	{
-		if ($key == 'id' && !in_array($val, $set))
+		if ($key == 'id' && !in_array($val, $set) && !empty($val))
 		{
 			$set[] = $val;
 		}
@@ -78,7 +80,7 @@ function admin_user_users(&$engine, &$module)
 
 		foreach ($_POST as $val => $key)
 		{
-			if ($key == 'id')
+			if ($key == 'id' && !empty($val))
 			{
 				$set[] = $val;
 			}
@@ -102,7 +104,8 @@ function admin_user_users(&$engine, &$module)
 	// get user
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
-		$user_id = (isset($_GET['user_id']) ? $_GET['user_id'] : $_POST['user_id']);
+		#$user_id = (isset($_POST['user_id']) ? $_POST['user_id'] : isset($_GET['user_id']) ? $_GET['user_id'] : '');
+		$user_id = (isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : '');
 
 		$user = $engine->load_single(
 			"SELECT u.user_name, u.real_name, u.email, p.theme, p.lang, u.enabled ".
@@ -172,7 +175,7 @@ function admin_user_users(&$engine, &$module)
 		}
 	}
 	// edit user
-	else if (isset($_POST['edit']) && isset($_POST['user_id']) && (isset($_POST['newname']) || isset($_POST['moderator_id'])))
+	else if (isset($_POST['edit']) && $user_id && (isset($_POST['newname']) || isset($_POST['moderator_id'])))
 	{
 		// do we have identical names?
 		if ($engine->load_single(
@@ -214,65 +217,72 @@ function admin_user_users(&$engine, &$module)
 	}
 	// delete user
 	// TODO: reassign acls, uploads, pages and revisions, delete user page
-	#else if (isset($_POST['delete']) && isset($_POST['user_id'])  && $set == true)
-	else if (isset($_POST['delete'])  && $set == true)
+	else if (isset($_POST['delete']) && ($user_id || $set == true))
 	{
-		if (array_filter($set) == false)
+		if (array_filter($set) == false && empty($user_id))
 		{
-			$error = 'Please select at least one comment via the Set button.';//$this->get_translation('ModerateMoveNotExists');
+			$error = 'Please select at least one user via the Set button.';//$this->get_translation('ModerateMoveNotExists');
 			$engine->show_message($error);
 		}
 			//(int)$_POST['user_id']
-		if ($error != true)
+		if ($error != true || !empty($user_id))
 		{
+			if (!empty($user_id))
+			{
+				$set[] = (int)$user_id;
+			}
+
 			foreach ($set as $user_id)
 			{
-				$user = $engine->load_single(
-					"SELECT u.user_name ".
-					"FROM {$engine->config['table_prefix']}user u ".
-					"WHERE u.user_id = '".$user_id."' ".
-						"AND u.account_type = '0' ".
-					"LIMIT 1");
+				if ((int)$user_id)
+				{
+					$user = $engine->load_single(
+						"SELECT u.user_name ".
+						"FROM {$engine->config['table_prefix']}user u ".
+						"WHERE u.user_id = '".$user_id."' ".
+							"AND u.account_type = '0' ".
+						"LIMIT 1");
 
-				$engine->sql_query(
-					"DELETE FROM {$engine->config['table_prefix']}user ".
-					"WHERE user_id = '".$user_id."'");
-				$engine->sql_query(
-					"DELETE FROM {$engine->config['table_prefix']}user_setting ".
-					"WHERE user_id = '".$user_id."'");
-				$engine->sql_query(
-					"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
-					"WHERE user_id = '".$user_id."'");
-				$engine->sql_query(
-					"DELETE FROM {$engine->config['table_prefix']}menu ".
-					"WHERE user_id = '".$user_id."'");
-				$engine->sql_query(
-					"DELETE FROM {$engine->config['table_prefix']}watch ".
-					"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}user ".
+						"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}user_setting ".
+						"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
+						"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}menu ".
+						"WHERE user_id = '".$user_id."'");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}watch ".
+						"WHERE user_id = '".$user_id."'");
 
-				// remove user space
-				$user_space = $engine->config['users_page'].'/'.$user['user_name'];
+					// remove user space
+					$user_space = $engine->config['users_page'].'/'.$user['user_name'];
 
-				$engine->remove_referrers	($user_space, true);
-				$engine->remove_links		($user_space, true);
-				$engine->remove_categories	($user_space, true);
-				$engine->remove_acls		($user_space, true);
-				$engine->remove_menu_items	($user_space, true);
-				$engine->remove_watches		($user_space, true);
-				$engine->remove_ratings		($user_space, true);
-				$engine->remove_comments	($user_space, true, $dontkeep);
-				$engine->remove_files		($user_space, true);
-				$engine->remove_revisions	($user_space, true);
+					$engine->remove_referrers	($user_space, true);
+					$engine->remove_links		($user_space, true);
+					$engine->remove_categories	($user_space, true);
+					$engine->remove_acls		($user_space, true);
+					$engine->remove_menu_items	($user_space, true);
+					$engine->remove_watches		($user_space, true);
+					$engine->remove_ratings		($user_space, true);
+					$engine->remove_comments	($user_space, true, $dontkeep = true);
+					$engine->remove_files		($user_space, true);
+					$engine->remove_revisions	($user_space, true);
 
-				$engine->sql_query(
-					"DELETE FROM {$engine->config['table_prefix']}page ".
-					"WHERE tag = '".quote($engine->dblink, $user_space)."' ".
-						"OR tag LIKE '".quote($engine->dblink, $user_space)."/%' ".
-						#"AND owner_id = '".(int)$_POST['user_id']."'".
-					"");
+					$engine->sql_query(
+						"DELETE FROM {$engine->config['table_prefix']}page ".
+						"WHERE tag = '".quote($engine->dblink, $user_space)."' ".
+							"OR tag LIKE '".quote($engine->dblink, $user_space)."/%' ".
+							#"AND owner_id = '".(int)$_POST['user_id']."'".
+						"");
 
-				$engine->show_message($engine->get_translation('UsersDeleted'));
-				$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
+					$engine->show_message($engine->get_translation('UsersDeleted'));
+					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
+				}
 			}
 
 			$set = array();
@@ -355,19 +365,19 @@ function admin_user_users(&$engine, &$module)
 		echo $engine->form_close();
 	}
 	// edit user
-	else if (isset($_POST['edit']) && isset($_POST['change']))
+	else if (isset($_POST['edit']) && $user_id)
 	{
 		if ($user = $engine->load_single(
 			"SELECT u.user_name, u.real_name, u.email, p.lang, u.enabled ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-			"WHERE u.user_id = '".(int)$_POST['change']."' ".
+			"WHERE u.user_id = '".(int)$user_id."' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1"))
 		{
 			echo $engine->form_open('edit_user', '', 'post', true, '', '');
 
-			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
+			echo '<input type="hidden" name="user_id" value="'.(int)$user_id.'" />'."\n".
 				'<table class="formation">'.
 				'<tr>
 					<td>
@@ -439,21 +449,47 @@ function admin_user_users(&$engine, &$module)
 	}
 
 	// delete user
-	if (isset($_POST['delete']) && isset($_POST['change']))
+	if (isset($_POST['remove']) && (isset($user_id) || $set == true))
 	{
-		if ($user = $engine->load_single(
-			"SELECT user_name
-			FROM {$engine->config['table_prefix']}user
-			WHERE user_id = '".quote($engine->dblink, $_POST['change'])."'
-			LIMIT 1"))
-		{
-			echo $engine->form_open('delete_user', '', 'post', true, '', '');
+		$users	= '';
+		$i		= 0;
 
-			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
-				'<table class="formation">'.
+		if (!empty($user_id) && !in_array($user_id, $set))
+		{
+			$set[] = (int)$user_id;
+		}
+
+		echo $engine->form_open('delete_user', '', 'post', true, '', '');
+
+		foreach ($set as $user_id)
+		{
+			if ((int)$user_id)
+			{
+				if ($i > 0)
+				{
+					$users	.= ', ';
+				}
+
+				if ($user = $engine->load_single(
+					"SELECT user_name
+					FROM {$engine->config['table_prefix']}user
+					WHERE user_id = '".(int) $user_id."'
+					LIMIT 1"))
+				{
+
+					$users	.= '<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>';
+				}
+
+				$i++;
+			}
+		}
+
+		echo '<input type="hidden" name="user_id" value="'.(int)$user_id.'" />'."\n".
+			 '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'."\n".
+				 '<table class="formation">'.
 					'<tr>
 						<td>
-							<label for="">'.$engine->get_translation('UsersDelete').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
+							<label for="">'.$engine->get_translation('UsersDelete').' '.$users.'?</label> '.
 							'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
 							'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
 							'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
@@ -462,8 +498,7 @@ function admin_user_users(&$engine, &$module)
 				'</table>
 				<br />';
 
-			echo $engine->form_close();
-		}
+		echo $engine->form_close();
 	}
 
 	// get user
@@ -473,33 +508,33 @@ function admin_user_users(&$engine, &$module)
 		// user data
 		echo $engine->form_open('get_user', '', 'post', true, '', '');
 		?>
-		<input type="hidden" name="change" value="<?php echo $user_id; ?>" />
+		<input type="hidden" name="user_id" value="<?php echo $user_id; ?>" />
 
 		<table style="padding: 3px;" class="formation">
 		<?php
 
 			echo '<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('UserName').'</th>'.
+					'<th class="label">'.$engine->get_translation('UserName').'</th>'.
 					'<td><strong>'.$user['user_name'].'</strong></td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('RealName').'</th>'.
+					'<th  class="label">'.$engine->get_translation('RealName').'</th>'.
 					'<td>'.$user['real_name'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('YourEmail').'</th>'.
+					'<th class="label">'.$engine->get_translation('YourEmail').'</th>'.
 					'<td>'.$user['email'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('YourLanguage').'</th>'.
+					'<th class="label">'.$engine->get_translation('YourLanguage').'</th>'.
 					'<td>'.$user['lang'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('ChooseTheme').'</th>'.
+					'<th class="label">'.$engine->get_translation('ChooseTheme').'</th>'.
 					'<td>'.$user['theme'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th>'.$engine->get_translation('UserEnabled').'</th>'.
+					'<th class="label">'.$engine->get_translation('UserEnabled').'</th>'.
 					'<td>'.$user['enabled'].'</td>'.
 				'</tr>';
 ?>
@@ -511,8 +546,8 @@ function admin_user_users(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		echo '<br /><input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
-		echo '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		echo '<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
+		echo '<input id="button" type="submit" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+		echo '<a href="'.$engine->href().'" class="cancel" ><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
 		echo $engine->form_close();
 	}
 	else
@@ -521,7 +556,7 @@ function admin_user_users(&$engine, &$module)
 		// $param is passed to the pagination links
 		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
 		{
-			$where = "WHERE user_name LIKE '%".quote($this->dblink, $_GET['user'])."%' ";
+			$where = "WHERE user_name LIKE '%".quote($engine->dblink, $_GET['user'])."%' ";
 			$param = "user=".htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 		}
 		// set signuptime ordering
@@ -682,47 +717,58 @@ function admin_user_users(&$engine, &$module)
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");
 
+		// user filter form
+		$search = $engine->form_open('search_user', '', 'get', '', '', '', '');
+		$search .= '<input name="mode" type="hidden" value="'.$module['mode'].'" />'; // required to pass mode module via GET
+		$search .= $engine->get_translation('UsersSearch').': </td><td>';
+		$search .= '<input type="search" name="user" maxchars="40" size="30" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
+		$search .= '<input id="submit" type="submit" value="'.$engine->get_translation('UsersFilter').'" /> ';
+		$search .= $engine->form_close();
+		echo '<span style="float: right;">'.$search.'</span>';
+
 		echo $engine->form_open('users', '', 'post', true, '', '');
 
-			/////////////////////////////////////////////
-			//   control buttons
-			/////////////////////////////////////////////
+		/////////////////////////////////////////////
+		//   control buttons
+		/////////////////////////////////////////////
 
-			$control_buttons = '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
-			$control_buttons .=  '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
-			$control_buttons .=  '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-			$control_buttons .=  '<input name="ids" type="hidden" value="'.implode('-', $set).'" />';
-			$control_buttons .=  '<br />'."\n".
-									'<input name="set" id="submit" type="submit" value="'.$engine->get_translation('ModerateSet').'" /> '.
-									($set
-											? '<input name="reset" id="submit" type="submit" value="'.$engine->get_translation('ModerateReset').'" /> '.
-											'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
-											: ''
-									);
+		$control_buttons = '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
+		$control_buttons .= '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
+		$control_buttons .= '<input id="button" type="submit" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+		$control_buttons .= '<input name="ids" type="hidden" value="'.implode('-', $set).'" />';
+		$control_buttons .= '<br />'."\n".
+								'<input name="set" id="submit" type="submit" value="'.$engine->get_translation('ModerateSet').'" /> '.
+								($set
+										? '<input name="reset" id="submit" type="submit" value="'.$engine->get_translation('ModerateReset').'" /> '.
+										'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
+										: ''
+								);
 
-			echo $control_buttons;
 
-			if (isset($pagination['text']))
-			{
-				echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
-			} ?>
-			<table style="padding: 3px;" class="formation listcenter">
-				<tr>
-					<th style="width:5px;"></th>
-					<th style="width:5px;"></th>
-					<th style="width:5px;">ID</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuser; ?>">Username</a></th>
-					<!--<th style="width:150px;"><a href="<?php echo $engine->href().'&amp;order='.$ordername; ?>">Realname</a></th>-->
-					<th>Email</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderpages; ?>">Pages</a></th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$ordercomments; ?>">Comments</a></th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderrevisions; ?>">Revisions</a></th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuploads; ?>">Uploads</a></th>
-					<th style="width:20px;">Language</th>
-					<th style="width:20px;">Enabled</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>">Signuptime</a></th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$last_visit; ?>">Last active</a></th>
-				</tr>
+
+		echo $control_buttons;
+
+		if (isset($pagination['text']))
+		{
+			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
+		} ?>
+		<table style="padding: 3px;" class="formation listcenter">
+			<tr>
+				<th style="width:5px;"></th>
+				<th style="width:5px;"></th>
+				<th style="width:5px;">ID</th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuser; ?>">Username</a></th>
+				<!--<th style="width:150px;"><a href="<?php echo $engine->href().'&amp;order='.$ordername; ?>">Realname</a></th>-->
+				<th>Email</th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderpages; ?>">Pages</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$ordercomments; ?>">Comments</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderrevisions; ?>">Revisions</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuploads; ?>">Uploads</a></th>
+				<th style="width:20px;">Language</th>
+				<th style="width:20px;">Enabled</th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>">Signuptime</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$last_visit; ?>">Last active</a></th>
+			</tr>
 <?php
 		if ($users)
 		{
@@ -733,7 +779,7 @@ function admin_user_users(&$engine, &$module)
 							<input name="'.$row['user_id'].'" type="checkbox" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ).'/>
 						</td>'.
 						'<td>
-							<input type="radio" name="change" value="'.$row['user_id'].'" />
+							<input type="radio" name="user_id" value="'.$row['user_id'].'" />
 						</td>'.
 						'<td>'.$row['user_id'].'</td>'.
 						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="'.$engine->href().'&amp;user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.

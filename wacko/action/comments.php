@@ -157,6 +157,7 @@ if ($this->user_allowed_comments())
 					$page_lang = '';
 				}
 
+
 				// print entry
 				echo '<li '.$viewed.'><span class="dt">'.date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
 				($title == 1
