@@ -56,4 +56,3 @@ Author
 ------
 
 WackoWiki plugin module created by Sergey Martynoff and WackoWiki Team.
-Feel free to write me to sergey AT martynoff DOT info
