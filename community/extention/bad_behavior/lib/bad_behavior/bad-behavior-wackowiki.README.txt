@@ -26,19 +26,19 @@ reside in one folder).
 
 
 2. Then open "index.php" (located in root directory of you WackoWiki)
-in editor and find this line (usually in the bottom of the file):
+in editor and find this line:
 
 $init->engine('run');
 
 Insert the following line just BEFORE the located line:
 
-require_once('/path/to/Bad-Behavior/bad-behavior-wackowiki.php');
+require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 
 
 3. If you like to enable "screener" cookie for advanced protection,
 go to /theme/YOUR_THEME/appearance/ folder (where YOUR_THEME is the
 name of theme used on your site), open "header.php" in editor and add
-the folowing line just BEFORE the closing "</head>" tag:
+the following line just BEFORE the closing "</head>" tag:
 
 <?php bb2_insert_head() ?>
 

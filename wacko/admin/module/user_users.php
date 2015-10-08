@@ -556,18 +556,18 @@ function admin_user_users(&$engine, &$module)
 		// $param is passed to the pagination links
 		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
 		{
-			$where = "WHERE user_name LIKE '%".quote($engine->dblink, $_GET['user'])."%' ";
-			$param = "user=".htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+			$where			= "WHERE user_name LIKE '%".quote($engine->dblink, $_GET['user'])."%' ";
+			$param			= "user=".htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 		}
 		// set signuptime ordering
 		else if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
 		{
-			$order		= 'ORDER BY signup_time ASC ';
+			$order			= 'ORDER BY signup_time ASC ';
 			$signup_time	= 'signup_desc';
 		}
 		else if (isset($_GET['order']) && $_GET['order'] == 'signup_desc')
 		{
-			$order		= 'ORDER BY signup_time DESC ';
+			$order			= 'ORDER BY signup_time DESC ';
 			$signup_time	= 'signup_asc';
 		}
 		else
@@ -578,44 +578,44 @@ function admin_user_users(&$engine, &$module)
 		// set last_visit ordering
 		if (isset($_GET['order']) && $_GET['order'] == 'last_visit_asc')
 		{
-			$order		= 'ORDER BY last_visit ASC ';
-			$last_visit	= 'last_visit_desc';
+			$order			= 'ORDER BY last_visit ASC ';
+			$last_visit		= 'last_visit_desc';
 		}
 		else if (isset($_GET['order']) && $_GET['order'] == 'last_visit_desc')
 		{
-			$order		= 'ORDER BY last_visit DESC ';
-			$last_visit	= 'last_visit_asc';
+			$order			= 'ORDER BY last_visit DESC ';
+			$last_visit		= 'last_visit_asc';
 		}
 		else
 		{
-			$last_visit	= 'last_visit_asc';
+			$last_visit		= 'last_visit_asc';
 		}
 
 		// set total_pages ordering
 		if (isset($_GET['order']) && $_GET['order'] == 'total_pages_asc')
 		{
-			$order		= 'ORDER BY total_pages ASC ';
-			$orderpages	= 'total_pages_desc';
+			$order			= 'ORDER BY total_pages ASC ';
+			$orderpages		= 'total_pages_desc';
 		}
 		else if (isset($_GET['order']) && $_GET['order'] == 'total_pages_desc')
 		{
-			$order		= 'ORDER BY total_pages DESC ';
-			$orderpages	= 'total_pages_asc';
+			$order			= 'ORDER BY total_pages DESC ';
+			$orderpages		= 'total_pages_asc';
 		}
 		else
 		{
-			$orderpages	= 'total_pages_asc';
+			$orderpages		= 'total_pages_asc';
 		}
 
 		// set total_comments ordering
 		if (isset($_GET['order']) && $_GET['order'] == 'total_comments_asc')
 		{
-			$order		= 'ORDER BY total_comments ASC ';
+			$order			= 'ORDER BY total_comments ASC ';
 			$ordercomments	= 'total_comments_desc';
 		}
 		else if (isset($_GET['order']) && $_GET['order'] == 'total_comments_desc')
 		{
-			$order		= 'ORDER BY total_comments DESC ';
+			$order			= 'ORDER BY total_comments DESC ';
 			$ordercomments	= 'total_comments_asc';
 		}
 		else
@@ -626,12 +626,12 @@ function admin_user_users(&$engine, &$module)
 		// set total_revisions ordering
 		if (isset($_GET['order']) && $_GET['order'] == 'total_revisions_asc')
 		{
-			$order		= 'ORDER BY total_revisions ASC ';
+			$order			= 'ORDER BY total_revisions ASC ';
 			$orderrevisions	= 'total_revisions_desc';
 		}
 		else if (isset($_GET['order']) && $_GET['order'] == 'total_revisions_desc')
 		{
-			$order		= 'ORDER BY total_revisions DESC ';
+			$order			= 'ORDER BY total_revisions DESC ';
 			$orderrevisions	= 'total_revisions_asc';
 		}
 		else
@@ -642,12 +642,12 @@ function admin_user_users(&$engine, &$module)
 		// set total_uploads ordering
 		if (isset($_GET['order']) && $_GET['order'] == 'total_uploads_asc')
 		{
-			$order		= 'ORDER BY total_uploads ASC ';
+			$order			= 'ORDER BY total_uploads ASC ';
 			$orderuploads	= 'total_uploads_desc';
 		}
 		else if (isset($_GET['order']) && $_GET['order'] == 'total_uploads_desc')
 		{
-			$order		= 'ORDER BY total_uploads DESC ';
+			$order			= 'ORDER BY total_uploads DESC ';
 			$orderuploads	= 'total_uploads_asc';
 		}
 		else
@@ -658,39 +658,39 @@ function admin_user_users(&$engine, &$module)
 		// set user_name ordering
 		if (isset($_GET['order']) && $_GET['order'] == 'user_asc')
 		{
-			$order		= 'ORDER BY user_name DESC ';
-			$orderuser	= 'user_desc';
+			$order			= 'ORDER BY user_name DESC ';
+			$orderuser		= 'user_desc';
 		}
 		else if (isset($_GET['order']) && $_GET['order'] == 'user_desc')
 		{
-			$order		= 'ORDER BY user_name ASC ';
-			$orderuser	= 'user_asc';
+			$order			= 'ORDER BY user_name ASC ';
+			$orderuser		= 'user_asc';
 		}
 		else
 		{
-			$orderuser	= 'user_desc';
+			$orderuser		= 'user_desc';
 		}
 
 		// set real_name ordering
 		if (isset($_GET['order']) && $_GET['order'] == 'name_asc')
 		{
-			$order		= 'ORDER BY real_name DESC ';
-			$ordername	= 'name_desc';
+			$order			= 'ORDER BY real_name DESC ';
+			$ordername		= 'name_desc';
 		}
 		else if (isset($_GET['order']) && $_GET['order'] == 'name_desc')
 		{
-			$order		= 'ORDER BY real_name ASC ';
-			$ordername	= 'name_asc';
+			$order			= 'ORDER BY real_name ASC ';
+			$ordername		= 'name_asc';
 		}
 		else
 		{
-			$ordername	= 'name_desc';
+			$ordername		= 'name_desc';
 		}
 
 		// filter by lang
 		if (isset($_GET['lang']))
 		{
-			$where = "WHERE p.lang = '".quote($engine->dblink, $_GET['lang'])."' ";
+			$where			= "WHERE p.lang = '".quote($engine->dblink, $_GET['lang'])."' ";
 		}
 
 		// entries to display
