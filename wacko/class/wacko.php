@@ -1442,7 +1442,7 @@ class Wacko
 			"ORDER BY tag", true);
 	}
 
-	function load_files_linked($file_id, $for = '')
+	function load_file_usage($file_id, $for = '')
 	{
 		return $this->load_all(
 			"SELECT p.page_id, p.tag AS tag, p.title ".

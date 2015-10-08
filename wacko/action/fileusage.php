@@ -11,7 +11,7 @@ if (!isset($title))		$title = '';
 
 if ($file_id)
 {
-	if ($pages = $this->load_files_linked($file_id))
+	if ($pages = $this->load_file_usage($file_id))
 	{
 		if(!$nomark)
 		{
