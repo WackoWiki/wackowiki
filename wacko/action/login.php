@@ -248,6 +248,8 @@ else
 		$this->show_message($message, 'error');
 	}
 
+	$this->no_cache();
+
 	echo '<div class="cssform">'."\n";
 	echo '<h3>'.$this->get_translation('LoginWelcome').'</h3>'."\n";
 

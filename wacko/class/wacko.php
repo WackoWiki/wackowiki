@@ -2548,18 +2548,6 @@ class Wacko
 		{
 			if ( !headers_sent() )
 			{
-				if (isset($this->config['x_frame_option']))
-				{
-					if ($this->config['x_frame_option'] == 1)
-					{
-						header( 'X-Frame-Options: DENY' );
-					}
-					else if ($this->config['x_frame_option'] == 2)
-					{
-						header( 'X-Frame-Options: SAMEORIGIN' );
-					}
-				}
-
 				if (isset($this->config['csp']))
 				{
 					if ($this->config['csp'] == 1)

@@ -243,7 +243,6 @@ $wacko_config_defaults = array(
 	'session_time_to_update' => 300,
 
 	'enable_security_headers' => 1,
-	'x_frame_option' => 1,
 	'csp' => 1,
 
 	'form_token_time' => 7200,

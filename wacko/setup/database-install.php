@@ -304,7 +304,6 @@ $config_db['username_chars_min']			= $config['username_chars_min'];
 $config_db['username_chars_max']			= $config['username_chars_max'];
 $config_db['users_page']					= $config['users_page'];
 $config_db['csp']							= $config['csp'];
-$config_db['x_frame_option']				= $config['x_frame_option'];
 $config_db['xml_sitemap']					= $config['xml_sitemap'];
 $config_db['youarehere_text']				= $config['youarehere_text'];
 #$config_db[''] = $config[''];
