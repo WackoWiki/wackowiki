@@ -547,14 +547,14 @@ else
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// user filter form
-	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('search_user', '', 'get');
+	echo '<table class="formation"><tr><td class="label">';
 	echo $this->get_translation('UsersSearch').': </td><td>';
 	echo '<input type="search" name="user" maxchars="40" size="40" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->get_translation('UsersFilter').'" /> ';
 	echo '<input id="button" type="submit" value="'.$this->get_translation('UsersOpenProfile').'" name="gotoprofile" />';
-	echo $this->form_close();
 	echo '</td></tr></table><br />'."\n";
+	echo $this->form_close();
 
 	// pagination
 	if (isset($pagination['text']))

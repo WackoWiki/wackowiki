@@ -70,7 +70,6 @@ function admin_config_security(&$engine, &$module)
 		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
 		$config['enable_security_headers']		= (int)$_POST['enable_security_headers'];
 		$config['csp']							= (int)$_POST['csp'];
-		$config['x_frame_option']				= (int)$_POST['x_frame_option'];
 		$config['max_login_attempts']			= (int)$_POST['max_login_attempts'];
 		$config['ip_login_limit_max']			= (int)$_POST['ip_login_limit_max'];
 		$config['username_chars_min']			= (int)$_POST['username_chars_min'];
@@ -327,20 +326,6 @@ function admin_config_security(&$engine, &$module)
 						<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ( $engine->config['enable_security_headers'] == 1 ? ' checked="checked"' : '' );?> /><label for="security_headers_on">On.</label>
 						<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ( $engine->config['enable_security_headers'] == 0 ? ' checked="checked"' : '' );?> /><label for="security_headers_off">Off.</label>
 					</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="x_frame_option"><strong>X-Frame-Options:</strong><br />
-					<small>The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a &lt;frame&gt; or &lt;iframe&gt;. Use this to avoid clickjacking attacks, by ensuring that the content is not embedded into other sites. frame busting (DENY or SAMEORIGIN).</small></label></td>
-				<td>
-					<select style="width:200px;" id="x_frame_option" name="x_frame_option">
-						<option value="0"<?php echo ( (int)$engine->config['x_frame_option'] === 0 ? ' selected="selected"' : '' );?>>disabled</option>
-						<option value="1"<?php echo ( (int)$engine->config['x_frame_option'] === 1 ? ' selected="selected"' : '' );?>>DENY</option>
-						<option value="2"<?php echo ( (int)$engine->config['x_frame_option'] === 2 ? ' selected="selected"' : '' );?>>SAMEORIGIN</option>
-					</select>
-				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
