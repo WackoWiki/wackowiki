@@ -226,6 +226,7 @@ article, #page {
 	padding: 5px 0px 20px 0px;
 	float: left;
 	width: 100%;
+	min-height: 200px;
 }
 
 #pageedit {
@@ -503,11 +504,13 @@ fieldset {
 	vertical-align: bottom
 }
 
-.upload td.dt-, .upload td.file- {
+.upload td.dt-,
+.upload td.file- {
 	white-space: nowrap;
 	font-size: 80%;
 	font-weight: bold;
-	color: #000000
+	color: #000000;
+	vertical-align: top;
 }
 
 td.file- {
@@ -536,6 +539,7 @@ td.file- {
 	font: 11px Tahoma;
 	color: #666666;
 	padding: 5px;
+	white-space: nowrap;
 }
 
 .upload td.remove- a.remove2-:hover, .upload td.remove- a.remove2-:active {
