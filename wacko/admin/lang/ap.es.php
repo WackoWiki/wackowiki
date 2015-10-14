@@ -37,6 +37,16 @@ $ap_translation = array(
 	'LogLevel5'					=> 'bajo',
 	'LogLevel6'					=> 'más bajo',
 	'LogLevel7'					=> 'depuración',
+
+	// Massemail
+	'SendToGroup'				=> 'Send to group',
+
+	// db restore module
+	'ConfirmDbRestore'			=> 'Do you want to restore backup',
+	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
+	'BackupDelete'				=> 'Are you sure you want to remove backup',
+	'BackupDeleteInfo'			=> '',
+
 );
 
 ?>

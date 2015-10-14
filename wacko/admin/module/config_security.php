@@ -331,8 +331,8 @@ function admin_config_security(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="csp"><strong>X-Content-Security-Policy (CSP):</strong><br />
-					<small>Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using X-Content-Security-Policy to establish your policy.</small></label></td>
+				<td class="label"><label for="csp"><strong>Content-Security-Policy (CSP):</strong><br />
+					<small>Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.</small></label></td>
 				<td><select style="width:200px;" id="csp" name="csp">
 						<option value="0"<?php echo ( (int)$engine->config['csp'] === 0 ? ' selected="selected"' : '' );?>>disabled</option>
 						<option value="1"<?php echo ( (int)$engine->config['csp'] === 1 ? ' selected="selected"' : '' );?>>strict</option>

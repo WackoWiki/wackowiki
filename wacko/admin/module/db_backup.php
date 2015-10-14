@@ -66,13 +66,13 @@ function admin_db_backup(&$engine, &$module)
 	{
 		@set_time_limit(1800);
 
-		$time	= time();
-		$pack	= set_pack_dir($engine, $time);	// backup directory
-		$root	= $_POST['root'];
-		$data	= array();
-		$strc	= array();
-		$fils	= array();
-		$sql	= '';
+		$time		= time();
+		$pack		= set_pack_dir($engine, $time);	// backup directory
+		$root		= $_POST['root'];
+		$data		= array();
+		$structure	= array();
+		$files		= array();
+		$sql		= '';
 
 		foreach ($_POST as $val => $key)
 		{
@@ -82,7 +82,7 @@ function admin_db_backup(&$engine, &$module)
 			// collect table names for sql recreation query
 			if ($key == 'structure' && $val == true)
 			{
-				$strc[] = $val;
+				$structure[] = $val;
 			}
 			// extract table data
 			else if ($key == 'data' && $val == true)
@@ -93,15 +93,15 @@ function admin_db_backup(&$engine, &$module)
 			// compress files
 			else if ($key == 'files' && $val == true)
 			{
-				$fils[] = $val;
+				$files[] = $val;
 				get_files($engine, $pack, $val, $root);
 			}
 		}
 
 		// write sql for recreating selected tables
-		if ($strc == true)
+		if ($structure == true)
 		{
-			foreach ($strc as $table)
+			foreach ($structure as $table)
 			{
 				// check whether table data was backed up
 				if (in_array($table, $data) && $root == false)
@@ -121,9 +121,9 @@ function admin_db_backup(&$engine, &$module)
 				}
 
 				// ...and for these specific tables
-				if ($table == $engine->config['table_prefix'].'cache' ||
-				$table == $engine->config['table_prefix'].'referrer' ||
-				$table == $engine->config['table_prefix'].'log')
+				if ($table == $engine->config['table_prefix'].'cache'
+				||  $table == $engine->config['table_prefix'].'referrer'
+				||  $table == $engine->config['table_prefix'].'log')
 				{
 					$drop = 1;
 				}
@@ -168,12 +168,16 @@ function admin_db_backup(&$engine, &$module)
 
 		// log contents
 		$contents = array(
-			$time,					// 0: backup time (unix format)
+			$time,						// 0: backup time (unix format)
 			rtrim(substr($pack, strlen($engine->config['upload_path_backup']) + 18), '/'),	// 1: id
-			$root,					// 2: cluster root
-			implode(';', $strc),	// 3: structure
-			implode(';', $data),	// 4: table data
-			implode(';', $fils)		// 5: files
+			$root,						// 2: cluster root
+			implode(';', $structure),	// 3: structure
+			implode(';', $data),		// 4: table data
+			implode(';', $files),		// 5: files
+			WACKO_VERSION				// 6. wacko_version
+			// TODO: add metadata to avoid conflicts
+			// 7: unique_instance_key	-> warn / show user if he restores data from another deployment or
+
 		);
 
 		// write log file
@@ -184,8 +188,8 @@ function admin_db_backup(&$engine, &$module)
 		$engine->log(1, 'Saved backup database '.trim($pack, '/'));
 
 		$message = '<p>
-			Backing up and archiving completed. Package backup
-			retained in the backup-directory directory files.<br />To obtain
+			Backing up and archiving completed. Backup package files
+			stored in the backup directory.<br />To obtain
 			use FTP (not sure if you copy the structure to maintain
 			directories and file names and directories).<br />To restore a backup
 			copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.
