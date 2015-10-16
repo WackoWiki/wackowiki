@@ -347,7 +347,8 @@ function admin_config_security(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="pwd_min_chars"><strong>Minimum password length:</strong></label></td>
+				<td class="label"><label for="pwd_min_chars"><strong>Minimum password length:</strong><br />
+				<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br />The use of passphrases instead of passwords is encouraged.</small></label></td>
 				<td><input type="number" min="5" maxlength="3" style="width:200px;" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo htmlspecialchars($engine->config['pwd_min_chars'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">

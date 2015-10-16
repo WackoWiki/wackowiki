@@ -367,6 +367,7 @@ if ($config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo'))
 //		$value[0] - table name
 //		$value[1] - SQL query
 $delete_table[]	= array('acl',				$table_acl_drop);
+$delete_table[]	= array('auth_token',		$table_auth_token_drop);
 $delete_table[]	= array('menu',				$table_menu_drop);
 $delete_table[]	= array('cache',			$table_cache_drop);
 $delete_table[]	= array('config',			$table_config_drop);
@@ -382,7 +383,6 @@ $delete_table[]	= array('poll',				$table_poll_drop);
 $delete_table[]	= array('rating',			$table_rating_drop);
 $delete_table[]	= array('referrer',			$table_referrer_drop);
 $delete_table[]	= array('revision',			$table_revision_drop);
-$delete_table[]	= array('session',			$table_session_drop);
 #$delete_table[]	= array('tag',				$table_tag_drop);
 #$delete_table[]	= array('tag_page',			$table_tag_page_drop);
 $delete_table[]	= array('upload',			$table_upload_drop);
@@ -396,6 +396,7 @@ $delete_table[]	= array('word',				$table_word_drop);
 //		$value[0] - table name
 //		$value[1] - SQL query
 $create_table[]	= array('acl',				$table_acl);
+$create_table[]	= array('auth_token',		$table_auth_token);
 $create_table[]	= array('menu',				$table_menu);
 $create_table[]	= array('cache',			$table_cache);
 $create_table[]	= array('config',			$table_config);
@@ -411,7 +412,6 @@ $create_table[]	= array('poll',				$table_poll);
 $create_table[]	= array('rating',			$table_rating);
 $create_table[]	= array('referrer',			$table_referrer);
 $create_table[]	= array('revision',			$table_revision);
-$create_table[]	= array('session',			$table_session);
 #$create_table[]	= array('tag',				$table_tag);
 #$create_table[]	= array('tag_page',			$table_tag_page);
 $create_table[]	= array('upload',			$table_upload);
@@ -464,6 +464,10 @@ $upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_2, $l
 $upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_3, $lang['ErrorAlteringTable']);
 
 // 5.4.0
+
+// auth_token
+$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'auth_token',	$table_auth_token_r5_4_0,	$lang['ErrorCreatingTable']);
+
 // cache
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_0,		$lang['ErrorAlteringTable']);
 
@@ -494,9 +498,6 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_
 
 // revision
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']);
-
-// session
-$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'session',		$table_session_r5_4_0,		$lang['ErrorCreatingTable']);
 
 // user
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
