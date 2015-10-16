@@ -23,7 +23,6 @@ $wacko_config_defaults = array(
 
 	'table_prefix' => 'wacko_',
 	'cookie_prefix' => 'wacko_',
-	'session_length' => 30, // cookie_expire_days
 	'session_prefix' => 'wacko5',
 
 	'root_page' => 'HomePage',
@@ -236,6 +235,7 @@ $wacko_config_defaults = array(
 	'ap_max_login_attempts' => 3,
 
 	'session_encrypt_cookie' => 0,
+	'session_length' => 30, // cookie_expire_days
 	'allow_persistent_cookie' => 1,
 	'session_match_ip' => false,
 	'session_match_useragent' => true,

@@ -12,6 +12,22 @@ $engine		= 'ENGINE='.$config['database_engine'];
 
 // ACL
 
+// AUTH TOKEN
+$table_auth_token_r5_4_0 = "CREATE TABLE {$pref}auth_token (".
+		"cookie_token CHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
+		"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+		"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+		"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+		"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+		"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
+		"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
+		"session_forwarded_for VARCHAR(255) NOT NULL,".
+		"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+		"PRIMARY KEY (cookie_token),".
+		"KEY session_time (session_time),".
+		"KEY session_user_id (user_id)".
+		") {$engine} COMMENT='' {$charset}";
+
 // CACHE
 $alter_cache_r5_1_0 = "ALTER TABLE {$pref}cache DROP INDEX timestamp, ADD INDEX idx_cache_time (cache_time)";
 $alter_cache_r5_1_1 = "ALTER TABLE {$pref}cache ADD cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (cache_id)";
@@ -65,22 +81,6 @@ $alter_referrer_r5_4_0 = "ALTER TABLE {$pref}referrer ADD referrer_id INT(10) UN
 $alter_revision_r5_1_0 = "ALTER TABLE {$pref}revision ADD INDEX idx_deleted (deleted)";
 
 $update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, (SELECT page_id, lang FROM {$pref}page) AS p SET r.lang = p.lang WHERE r.page_id = p.page_id";
-
-// SESSION
-$table_session_r5_4_0 = "CREATE TABLE {$pref}session (".
-							"cookie_token CHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
-							"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-							"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-							"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-							"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-							"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
-							"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
-							"session_forwarded_for VARCHAR(255) NOT NULL,".
-							"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
-							"PRIMARY KEY (cookie_token),".
-							"KEY session_time (session_time),".
-							"KEY session_user_id (user_id)".
-						") {$engine} COMMENT='' {$charset}";
 
 // TAG
 

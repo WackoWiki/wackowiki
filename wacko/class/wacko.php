@@ -2339,21 +2339,26 @@ class Wacko
 	}
 
 	// COOKIES
-	function set_session_cookie($name, $value, $dummy = null, $secure = 0, $httponly = 1)
+	function set_cookie($name, $value, $days = 0, $persistent = false, $secure = 0, $httponly = 1)
 	{
-		setcookie($this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash'], $value, 0, $this->config['cookie_path'], '', ( $secure ? true : false ), ( $httponly ? true : false ));
-		$_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']] = $value;
-	}
-
-	function set_persistent_cookie($name, $value, $days = 0, $secure = 0, $httponly = 1)
-	{
-		// set to default if no pediod given
-		if ($days == 0)
+		if ($persistent && $this->config['allow_persistent_cookie'] == true)
 		{
-			$days = $this->config['session_length'];
+			// set to default if no period given
+			if ($days == 0)
+			{
+				$days = $this->config['session_length'];
+			}
+
+			// persistent cookie
+			$expire = time() + $days * 24 * 3600;
+		}
+		else
+		{
+			// session cookie
+			$expire = 0;
 		}
 
-		setcookie($this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash'], $value, time() + $days * 24 * 3600, $this->config['cookie_path'], '', ( $secure ? true : false ), ( $httponly ? true : false ));
+		setcookie($this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash'], $value, $expire, $this->config['cookie_path'], '', ( $secure ? true : false ), ( $httponly ? true : false ));
 		$_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']] = $value;
 	}
 
@@ -2390,7 +2395,7 @@ class Wacko
 	function delete_cookie_token($user_id = '', $expired = true, $purge_days = 3)
 	{
 		$sql = "SELECT user_id, MAX(session_time) AS recent_time
-				FROM {$this->config['table_prefix']}session ".
+				FROM {$this->config['table_prefix']}auth_token ".
 				($expired
 					? "WHERE session_time < NOW() "
 					: "").
@@ -2429,7 +2434,7 @@ class Wacko
 			if (count($remove))
 			{
 				// Delete expired sessions
-				$sql = "DELETE FROM {$this->config['table_prefix']}session
+				$sql = "DELETE FROM {$this->config['table_prefix']}auth_token
 						WHERE user_id IN ( ".implode(', ', $remove)." ) ".
 						($expired
 							? "AND session_time < NOW()"
@@ -2539,8 +2544,7 @@ class Wacko
 	}
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
-	//		X-Frame-Options: DENY | SAMEORIGIN
-	//		X-Content-Security-Policy:
+	//		Content-Security-Policy:
 	//		Strict-Transport-Security:
 	function http_security_headers()
 	{
@@ -4223,7 +4227,7 @@ class Wacko
 				).
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
-				"LEFT JOIN ".$this->config['table_prefix']."session t ON (u.user_id = t.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."auth_token t ON (u.user_id = t.user_id) ".
 			"WHERE ".( $user_id != 0
 					? "u.user_id		= '".(int)$user_id."' "
 					: 	( $login_token !== false
@@ -4423,9 +4427,11 @@ class Wacko
 		return substr($val, 4, 16);
 	}
 
-	function log_user_in($user, $persistent = 0, $session_length = 0)
+	function log_user_in($user, $persistent = false, $session_length = 0)
 	{
 		// cookie elements
+
+		// session length in days
 		$session_length		= ($session_length == 0 ? $this->config['session_length'] : $session_length);
 		$session_length		= ($persistent ? $session_length : 0.25);
 		$session_expire		= time() + $session_length * 24 * 3600;
@@ -4470,14 +4476,8 @@ class Wacko
 			$cookie		= implode(';', array($login_token, $user['password'], $session_expire));
 		}
 
-		if ($persistent && $this->config['allow_persistent_cookie'] == true)
-		{
-			$this->set_persistent_cookie('auth', $cookie, $session, ( $this->config['tls'] == true ? 1 : 0 ));
-		}
-		else
-		{
-			$this->set_session_cookie('auth', $cookie, '', ( $this->config['tls'] == true ? 1 : 0 ));
-		}
+		// set auth cookie
+		$this->set_cookie('auth', $cookie, $session_length, $persistent, ( $this->config['tls'] == true ? 1 : 0 ));
 
 		// update session expiry, user_form_salt and clear password recovery
 		// code in user data table
@@ -4492,7 +4492,7 @@ class Wacko
 		if (empty($user['cookie_token']))
 		{
 			$this->sql_query(
-				"INSERT INTO {$this->config['table_prefix']}session SET ".
+				"INSERT INTO {$this->config['table_prefix']}auth_token SET ".
 					"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
 					"user_id				= '".(int)$user['user_id']."', ".
 					"session_start			= NOW(), ".
@@ -4508,7 +4508,7 @@ class Wacko
 		else
 		{
 			$this->sql_query(
-				"UPDATE {$this->config['table_prefix']}session SET ".
+				"UPDATE {$this->config['table_prefix']}auth_token SET ".
 					"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
 					"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
 					"session_time			= '".quote($this->dblink, $this->session_time)."', ".
@@ -4581,7 +4581,7 @@ class Wacko
 
 		if ($user_id)
 		{
-			// clear session expiry in user data table and cookie_token in session table
+			// clear session expiry in user data table and cookie_token in auth_token table
 			$this->delete_cookie_token($user_id, false);
 		}
 

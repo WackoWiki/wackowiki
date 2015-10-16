@@ -18,6 +18,21 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 					"UNIQUE KEY idx_page_id (page_id,privilege)".
 				") {$engine} COMMENT='' {$charset}";
 
+$table_auth_token = "CREATE TABLE {$pref}auth_token (".
+					"cookie_token CHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"session_forwarded_for VARCHAR(255) NOT NULL,".
+					"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+					"PRIMARY KEY (cookie_token),".
+					"KEY session_time (session_time),".
+					"KEY session_user_id (user_id)".
+					") {$engine} COMMENT='' {$charset}";
+
 $table_cache = "CREATE TABLE {$pref}cache (".
 					"cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"name CHAR(40) NOT NULL DEFAULT '',".
@@ -235,22 +250,6 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"KEY idx_comment_on_id (comment_on_id)".
 				") {$engine} COMMENT='' {$charset}";
 
-$table_session = "CREATE TABLE {$pref}session (".
-					"cookie_token CHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
-					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
-					"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
-					"session_forwarded_for VARCHAR(255) NOT NULL,".
-					"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
-					"PRIMARY KEY (cookie_token),".
-					"KEY session_time (session_time),".
-					"KEY session_user_id (user_id)".
-				") {$engine} COMMENT='' {$charset}";
-
-
 $table_tag = "CREATE TABLE {$pref}tag (".
 					"tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -393,6 +392,7 @@ $table_word = "CREATE TABLE {$pref}word (".
 */
 
 $table_acl_drop					= "DROP TABLE {$pref}acl";
+$table_auth_token_drop			= "DROP TABLE {$pref}auth_token";
 $table_menu_drop				= "DROP TABLE {$pref}menu";
 $table_cache_drop				= "DROP TABLE {$pref}cache";
 $table_config_drop				= "DROP TABLE {$pref}config";
@@ -406,7 +406,6 @@ $table_poll_drop				= "DROP TABLE {$pref}poll";
 $table_rating_drop				= "DROP TABLE {$pref}rating";
 $table_referrer_drop			= "DROP TABLE {$pref}referrer";
 $table_revision_drop			= "DROP TABLE {$pref}revision";
-$table_session_drop				= "DROP TABLE {$pref}session";
 #$table_tag_drop				= "DROP TABLE {$pref}tag";
 #$table_tag_page_drop			= "DROP TABLE {$pref}tag_page";
 $table_upload_drop				= "DROP TABLE {$pref}upload";

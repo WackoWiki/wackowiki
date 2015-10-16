@@ -77,7 +77,7 @@ function admin_lock(&$engine, &$module)
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
 	{
-		#$sql = "TRUNCATE {$engine->config['table_prefix']}session";
+		#$sql = "TRUNCATE {$engine->config['table_prefix']}auth_token";
 		#$engine->sql_query($sql);
 		$engine->delete_cookie_token('', false);
 		// queries
