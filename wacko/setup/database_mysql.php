@@ -295,7 +295,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
-					"password VARCHAR(64) NOT NULL DEFAULT '',".
+					"password VARCHAR(255) NOT NULL DEFAULT '',".
 					"salt VARCHAR(40) NOT NULL DEFAULT '',".
 					"email VARCHAR(100) NOT NULL DEFAULT '',".
 					"account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
