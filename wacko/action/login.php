@@ -171,7 +171,7 @@ else
 						if ($existing_user['password'] == $_processed_password)
 						{
 							$salt		= $this->random_password(10, 3);
-							$password	= hash('sha256', $_user_name.$salt.$_password);
+							$password	= $_user_name.$salt.$_password;
 							$password	= password_hash(
 													base64_encode(
 															hash('sha256', $password, true)
@@ -185,11 +185,13 @@ else
 									"password	= '".quote($this->dblink, $password)."', ".
 									"salt		= '".quote($this->dblink, $salt)."' ".
 								"WHERE user_name = '".quote($this->dblink, $_user_name)."'");
+
+							$_processed_password = $password;
 						}
 					}
 					else
 					{
-						$_processed_password = hash('sha256', $_user_name.$existing_user['salt'].$_password);
+						$_processed_password = $_user_name.$existing_user['salt'].$_password;
 					}
 
 					// check password

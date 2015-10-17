@@ -79,7 +79,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 			{
 				$salt_length		= 10;
 				$salt				= $this->random_password($salt_length, 3);
-				$password_hashed	= hash('sha256', $user['user_name'].$salt.$new_password);
+				$password_hashed	= $user['user_name'].$salt.$new_password;
 				$password_hashed	= password_hash(
 											base64_encode(
 													hash('sha256', $password_hashed, true)
@@ -187,7 +187,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		// wrong current password
 		if (password_verify(
 				base64_encode(
-						hash('sha256', hash('sha256', $user['user_name'].$user['salt'].$password), true)
+						hash('sha256', $user['user_name'].$user['salt'].$password, true)
 						),
 				$user['password']
 				) == false)
@@ -229,7 +229,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		{
 			$salt_length		= 10;
 			$salt				= $this->random_password($salt_length, 3);
-			$password_hashed	= hash('sha256', $user['user_name'].$salt.$new_password);
+			$password_hashed	= $user['user_name'].$salt.$new_password;
 			$password_hashed	= password_hash(
 										base64_encode(
 												hash('sha256', $password_hashed, true)
