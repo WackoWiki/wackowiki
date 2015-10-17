@@ -107,7 +107,7 @@ if ($config['system_seed'] == '')
 
 $salt_password			= random_seed(10, 3);
 $salt_user_form			= random_seed(10, 3);
-$password_hashed		= hash('sha256', $config['admin_name'].$salt_password.$_POST['password']);
+$password_hashed		= $config['admin_name'].$salt_password.$_POST['password'];
 $password_hashed		= password_hash(
 								base64_encode(
 										hash('sha256', $password_hashed, true)
