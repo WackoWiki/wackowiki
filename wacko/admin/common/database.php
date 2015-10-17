@@ -20,6 +20,12 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
+			$engine->config['table_prefix'].'auth_token' => array(
+					'name'	=> $engine->config['table_prefix'].'auth_token',
+					'where'	=> false,
+					'order'	=> 'user_id',
+					'limit' => 1000
+			),
 			$engine->config['table_prefix'].'cache' => array(
 				'name'	=> $engine->config['table_prefix'].'cache',
 				'where'	=> false,
@@ -97,12 +103,6 @@ if (isset($tables, $directories) !== true)
 				'where'	=> 'revision_id',
 				'order'	=> 'revision_id',
 				'limit' => 500
-			),
-			$engine->config['table_prefix'].'auth_token' => array(
-					'name'	=> $engine->config['table_prefix'].'auth_token',
-					'where'	=> false,
-					'order'	=> 'user_id',
-					'limit' => 1000
 			),
 			$engine->config['table_prefix'].'upload' => array(
 				'name'	=> $engine->config['table_prefix'].'upload',

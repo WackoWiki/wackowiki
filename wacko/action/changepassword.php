@@ -79,11 +79,17 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 			{
 				$salt_length		= 10;
 				$salt				= $this->random_password($salt_length, 3);
-				$password_encrypted	= hash('sha256', $user['user_name'].$salt.$new_password);
+				$password_hashed	= hash('sha256', $user['user_name'].$salt.$new_password);
+				$password_hashed	= password_hash(
+											base64_encode(
+													hash('sha256', $password_hashed, true)
+													),
+											PASSWORD_DEFAULT
+											);
 
 				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
-						"password			= '".quote($this->dblink, $password_encrypted)."', ".
+						"password			= '".quote($this->dblink, $password_hashed)."', ".
 						"salt				= '".quote($this->dblink, $salt)."', ".
 						"change_password	= '' ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -179,7 +185,12 @@ else if (!isset($forgot) && $user = $this->get_user())
 		$complexity		= $this->password_complexity($user['user_name'], $new_password);
 
 		// wrong current password
-		if (hash('sha256', $user['user_name'].$user['salt'].$password) != $user['password'])
+		if (password_verify(
+				base64_encode(
+						hash('sha256', hash('sha256', $user['user_name'].$user['salt'].$password), true)
+						),
+				$user['password']
+				) == false)
 		{
 			$error = $this->get_translation('WrongPassword');
 			// log event
@@ -218,12 +229,18 @@ else if (!isset($forgot) && $user = $this->get_user())
 		{
 			$salt_length		= 10;
 			$salt				= $this->random_password($salt_length, 3);
-			$password_encrypted	= hash('sha256', $user['user_name'].$salt.$new_password);
+			$password_hashed	= hash('sha256', $user['user_name'].$salt.$new_password);
+			$password_hashed	= password_hash(
+										base64_encode(
+												hash('sha256', $password_hashed, true)
+												),
+										PASSWORD_DEFAULT
+										);
 
 			// store new password
 			$this->sql_query(
 				"UPDATE ".$this->config['user_table']." SET ".
-					"password			= '".quote($this->dblink, $password_encrypted)."', ".
+					"password			= '".quote($this->dblink, $password_hashed)."', ".
 					"salt				= '".quote($this->dblink, $salt)."' ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");

@@ -154,17 +154,30 @@ else
 					$_password = isset($_POST['password']) ? $_POST['password'] : '';
 
 					// check for old md5 password
-					if (strlen($existing_user['password']) < 64)
+					if (strlen($existing_user['password']) == 32 || strlen($existing_user['password']) == 64)
 					{
 						if (strlen($existing_user['password']) == 32)
 						{
 							$_processed_password = hash('md5', $_password);
 						}
 
+						// check for old sha256 password
+						else if (strlen($existing_user['password']) == 64)
+						{
+							$_processed_password = hash('sha256', $_user_name.$existing_user['salt'].$_password);
+						}
+
+						// rehash password
 						if ($existing_user['password'] == $_processed_password)
 						{
 							$salt		= $this->random_password(10, 3);
 							$password	= hash('sha256', $_user_name.$salt.$_password);
+							$password	= password_hash(
+													base64_encode(
+															hash('sha256', $password, true)
+															),
+													PASSWORD_DEFAULT
+													);
 
 							// update database with the sha256 password for future logins
 							$this->sql_query(
@@ -180,7 +193,13 @@ else
 					}
 
 					// check password
-					if ($existing_user['password'] == $_processed_password)
+					if (password_verify(
+							base64_encode(
+									hash('sha256', $_processed_password, true)
+									),
+							$existing_user['password']
+							)
+						)
 					{
 						// define session duration in days
 						if (!empty($existing_user['session_length']))
