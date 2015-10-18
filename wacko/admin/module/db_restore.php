@@ -81,19 +81,13 @@ function admin_db_restore(&$engine, &$module)
 
 			echo $engine->form_open('delete_backup', '', 'post', true, '', '');
 
-			echo	'<input type="hidden" name="backup_id" value="'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
-					'<input type="hidden" name="start" value="true" />'."\n".
-					'<label for="">'.$engine->get_translation('ConfirmDbRestore').' \'<code>'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
-					'<input id="submit" type="submit" name="restore" value="yes" style="width:40px;" /> '.
-					'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
-					'<br /><small>'.$engine->get_translation('ConfirmDbRestoreInfo').'</small>';
-
 			// check for possible backwards compatibility issues if the version differs
 			if ($log[6] !== WACKO_VERSION)
 			{
 				$engine->show_message('Wrong WackoWiki version!', 'error') ;
 			}
 
+			// show details of backup package
 			echo '<table class="formation">'.
 						'<tr>
 							<td>'.
@@ -216,6 +210,32 @@ function admin_db_restore(&$engine, &$module)
 						</tr>'.
 					'</table>
 				<br />';
+
+				echo	'<input type="hidden" name="backup_id" value="'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
+						'<input type="hidden" name="start" value="true" />'."\n".
+						'<label for="">'.$engine->get_translation('ConfirmDbRestore').' \'<code>'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
+						'<input id="submit" type="submit" name="restore" value="yes" style="width:40px;" /> '.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
+						'<br /><small>'.$engine->get_translation('ConfirmDbRestoreInfo').'</small>';
+
+				echo '<br /><br />
+						<p><small>
+							* Before restoring the backup <span class="underline">cluster</span>, the target table
+							not destroyed (to prevent loss of information from non -
+							Clusters). Thus, in the recovery process will occur
+							duplicate record. In normal mode, they will be replaced by recordings of
+							backup (using SQL-instructions  <code>REPLACE</code>), but if this
+							checked, all duplicates will be skipped (to be kept current
+							values of records), and added to the table only the records with new keys
+							(SQL-instruction <code>INSERT IGNORE</code>). <span class="underline">Note</span>: to restore
+							complete backup of the site, this option has no value.<br />
+							<br />
+							** If the backup contains the user files (global and
+							perpage, cache files, etc.), while in normal mode when you restore it 			will replace the same
+							files are placed in the same directory. This option allows you to save the 	current
+							copies of the files and restore from a backup only new (missing
+							on the server) files.
+						</small></p>';
 
 			echo $engine->form_close();
 		}
@@ -580,25 +600,8 @@ function admin_db_restore(&$engine, &$module)
 ?>
 					</table>
 <?php	echo $control_buttons;
- 		echo $engine->form_close(); ?>
-				<br />
-				<p><small>
-					* Before restoring the backup <span class="underline">cluster</span>, the target table
-					not destroyed (to prevent loss of information from non -
-					Clusters). Thus, in the recovery process will occur
-					duplicate record. In normal mode, they will be replaced by recordings of
-					backup (using SQL-instructions  <code>REPLACE</code>), but if this
-					checked, all duplicates will be skipped (to be kept current
-					values of records), and added to the table only the records with new keys
-					(SQL-instruction <code>INSERT IGNORE</code>). <span class="underline">Note</span>: to restore
-					complete backup of the site, this option has no value.<br />
-					<br />
-					** If the backup contains the user files (global and
-					perpage, cache files, etc.), while in normal mode when you restore it 			will replace the same
-					files are placed in the same directory. This option allows you to save the 	current
-					copies of the files and restore from a backup only new (missing
-					on the server) files.
-				</small></p>
+		echo $engine->form_close(); ?>
+
 <?php
 		}
 	}
