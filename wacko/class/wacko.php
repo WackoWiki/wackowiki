@@ -4461,20 +4461,14 @@ class Wacko
 		$this->forwarded_for		= isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
 		$this->ip					= $this->get_user_ip();
 
-		if ($this->config['session_encrypt_cookie'] == true)
-		{
-			$time_pad	= str_pad($session_expire, 32, '0', STR_PAD_LEFT);
-			$password	= base64_encode(hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
-			// authenticating cookie data:
-			// seed | login token | composed pwd | raw session time | raw password
-			$cookie_mac	= hash('sha1', $this->config['system_seed'].$login_token.$password.$session_expire.$user['password']);
-			// construct and set cookie
-			$cookie		= implode(';', array($login_token, $password, $session_expire, $cookie_mac));
-		}
-		else
-		{
-			$cookie		= implode(';', array($login_token, $user['password'], $session_expire));
-		}
+		// cookie MAC
+		$time_pad		= str_pad($session_expire, 32, '0', STR_PAD_LEFT);
+		$b64password	= base64_encode(hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
+		// authenticating cookie data:
+		// seed | login token | composed pwd | raw session time | raw password
+		$cookie_mac		= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$session_expire.$user['password']);
+		// construct and set cookie
+		$cookie			= implode(';', array($login_token, $b64password, $session_expire, $cookie_mac));
 
 		// set auth cookie
 		$this->set_cookie('auth', $cookie, $session_length, $persistent, ( $this->config['tls'] == true ? 1 : 0 ));
@@ -4545,18 +4539,11 @@ class Wacko
 
 		if (true == $cookie = $this->get_cookie($name))
 		{
-			if ($this->config['session_encrypt_cookie'] == true)
-			{
-				list($login_token, $b64password, $session_expire, $cookie_mac) = explode(';', $cookie);
+			list($login_token, $b64password, $session_expire, $cookie_mac) = explode(';', $cookie);
 
-				$time_pad	= str_pad($session_expire, 32, '0', STR_PAD_LEFT);
-				$password	= hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
-				$recalc_mac	= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$session_expire.$password);
-			}
-			else
-			{
-				list($login_token, $password, $session_expire) = explode(';', $cookie);
-			}
+			$time_pad	= str_pad($session_expire, 32, '0', STR_PAD_LEFT);
+			$password	= hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
+			$recalc_mac	= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$session_expire.$password);
 
 			return array(
 				'login_token'		=> $login_token,
@@ -5923,45 +5910,38 @@ class Wacko
 			$this->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
 		}
 
-		// in strong cookie mode check session validity
-		if ($this->config['session_encrypt_cookie'] == true)
+		// check session validity
+		if (isset($user['session_expire']) && $user['session_expire'] != 0
+			&& time() < $user['session_expire']
+			&& time() < $auth['session_expire']
+			&& $user['session_expire'] == $auth['session_expire']
+			&& $auth['recalc_mac'] == $auth['cookie_mac'])
 		{
-			if (isset($user['session_expire']) && $user['session_expire'] != 0
-				&& time() < $user['session_expire']
-				&& time() < $auth['session_expire']
-				&& $user['session_expire'] == $auth['session_expire']
-				&& $auth['recalc_mac'] == $auth['cookie_mac'])
-			{
-				$session = true;
-			}
-			else
-			{
-				// log event: invalid auth cookie
-				if ($auth['recalc_mac'] != $auth['cookie_mac'])
-				{
-					$this->log(1, '!!**'.'Malformed/forged user authentication cookie detected. Destroying existing session (if any)'.'!!**');
-				}
-
-				$session = false;
-
-				// terminate expired/invalid session
-				if ($this->get_user())
-				{
-					// log event: session expired
-					if (time() > $auth['session_expire'])
-					{
-						$this->log(2, 'Expired user session terminated');
-					}
-
-					$this->log_user_out();
-					#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag); // TODO: $this->get_translation('LoginPage') and $this->config['login_page'] -> multilanguage: we need encoding related default pages till we use utf-8
-					$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
-				}
-			}
+			$session = true;
 		}
 		else
 		{
-			$session = true;
+			// log event: invalid auth cookie
+			if ($auth['recalc_mac'] != $auth['cookie_mac'])
+			{
+				$this->log(1, '!!**'.'Malformed/forged user authentication cookie detected. Destroying existing session (if any)'.'!!**');
+			}
+
+			$session = false;
+
+			// terminate expired/invalid session
+			if ($this->get_user())
+			{
+				// log event: session expired
+				if (time() > $auth['session_expire'])
+				{
+					$this->log(2, 'Expired user session terminated');
+				}
+
+				$this->log_user_out();
+				#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag); // TODO: $this->get_translation('LoginPage') and $this->config['login_page'] -> multilanguage: we need encoding related default pages till we use utf-8
+				$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
+			}
 		}
 
 		// check IP validity
