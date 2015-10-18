@@ -270,7 +270,6 @@ $config_db['review']						= $config['review'];
 $config_db['revisions_hide_cancel']			= $config['revisions_hide_cancel'];
 $config_db['rewrite_mode']					= $config['rewrite_mode'];
 $config_db['root_page']						= $config['root_page'];
-$config_db['session_encrypt_cookie']		= $config['session_encrypt_cookie'];
 $config_db['session_length']				= $config['session_length'];
 $config_db['session_match_ip']				= $config['session_match_ip'];
 $config_db['session_match_useragent']		= $config['session_match_useragent'];

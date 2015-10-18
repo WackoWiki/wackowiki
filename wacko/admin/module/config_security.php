@@ -38,7 +38,6 @@ function admin_config_security(&$engine, &$module)
 		$config['captcha_new_page']				= (int)$_POST['captcha_new_page'];
 		$config['captcha_edit_page']			= (int)$_POST['captcha_edit_page'];
 		$config['captcha_registration']			= (int)$_POST['captcha_registration'];
-		$config['session_encrypt_cookie']		= (int)$_POST['session_encrypt_cookie'];
 		$config['allow_persistent_cookie']		= (int)$_POST['allow_persistent_cookie'];
 		$config['antidupe']						= (int)$_POST['antidupe'];
 		$config['disable_wikiname']				= (int)$_POST['disable_wikiname'];
@@ -95,14 +94,6 @@ function admin_config_security(&$engine, &$module)
 				<td class="label"><label for="allow_registration"><strong>Register online:</strong><br />
 					<small>Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.</small></label></td>
 				<td style="width:40%;"><input type="checkbox" id="allow_registration" name="allow_registration" value="1"<?php echo ( $engine->config['allow_registration'] ? ' checked="checked"' : '' );?> /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="session_encrypt_cookie"><strong>Secure cookies:</strong><br />
-					<small>Use the authenticated cookie with protection against unauthorized use. Enabling this option may complicate the work of users simultaneously through multiple browsers.</small></label></td>
-				<td><input type="checkbox" id="session_encrypt_cookie" name="session_encrypt_cookie" value="1"<?php echo ( $engine->config['session_encrypt_cookie'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
