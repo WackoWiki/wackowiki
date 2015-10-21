@@ -59,8 +59,16 @@ if ($this->is_admin())
 		}
 		else
 		{
+			$password_hashed	= $this->config['system_seed'].$password;
+			$password_hashed	= password_hash(
+					base64_encode(
+							hash('sha256', $password_hashed, true)
+							),
+					PASSWORD_DEFAULT
+					);
+
 			echo '<div class="notice">';
-			echo '\'recovery_password\' => \''.hash('sha256', $this->config['system_seed'].$password).'\','.'<br /><br />';
+			echo '\'recovery_password\' => \''.$password_hashed.'\','.'<br /><br />';
 			echo '</div>';
 		}
 	}
@@ -71,7 +79,7 @@ if ($this->is_admin())
 		$this->set_message($message, 'error');
 	}
 
-	echo '<h2>Generate the pasword hash for your recovery_password </h2>';
+	echo '<h2>Generate the pasword hash for your recovery_password</h2>';
 
 	echo $this->form_open('generate_hash', '', 'post');
 

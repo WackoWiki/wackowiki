@@ -199,7 +199,7 @@ else
 							base64_encode(
 									hash('sha256', $_processed_password, true)
 									),
-							$existing_user['password']
+								$existing_user['password']
 							)
 						)
 					{
