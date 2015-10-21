@@ -31,7 +31,7 @@ else
 
 	if (!RECOVERY_MODE)
 	{
-		$init->settings();	// initialize DBAL and populate from config table. [disable for recovery mode!]
+		$init->settings();	// initialize DBAL and populate from config table. [disabled for recovery mode!]
 	}
 }
 
@@ -62,7 +62,11 @@ $init->session();
 $cache	= $init->cache();
 $engine	= $init->engine();
 
-#require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
+#if (!empty($init->config['bad_behavior']))
+#{
+#	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
+#}
+
 $engine->http_security_headers();
 
 // redirect, send them home [disable for recovery mode!]
@@ -138,10 +142,16 @@ if (isset($_POST['ap_password']))
 	} */
 	// End Registration Captcha
 
-	if (hash('sha256', $engine->config['system_seed'].$_POST['ap_password']) == $_processed_password)
+	if (password_verify(
+			base64_encode(
+					hash('sha256', $engine->config['system_seed'].$_POST['ap_password'], true)
+					),
+				$_processed_password
+			)
+		)
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
-		$engine->set_session_cookie('admin', hash('sha256', hash('sha256', $engine->config['system_seed'].$_POST['ap_password']).$engine->config['base_url']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
+		$engine->set_cookie('admin', hash('sha256', $_processed_password.$engine->config['base_url']), '', false, ( $engine->config['tls'] == true ? 1 : 0 ));
 
 		$_SESSION['created']			= time();
 		$_SESSION['last_activity']		= time();
@@ -182,7 +192,8 @@ $user			= '';
 $authorization	= '';
 $_title			= '';
 
-if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == hash('sha256', $_processed_password.$engine->config['base_url']))
+if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']])
+	&& $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == hash('sha256', $_processed_password.$engine->config['base_url']))
 {
 	#$user = array('user_name' => $engine->config['admin_name']);
 	$authorization = true;
@@ -263,7 +274,7 @@ if (!isset($_SESSION['created']))
 }
 else if (time() - $_SESSION['created'] > 1800)
 {
-	// session started more than 30 minates ago
+	// session started more than 30 minutes ago // TODO: $session_time missing!
 	$engine->restart_user_session($user, $session_time); // TODO: we need extra user session here, hence we need a session table
 	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
 	$_SESSION['created'] = time();  // update creation time
@@ -376,7 +387,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 	<div id="pane">
 		<div class="left"></div>
 		<div class="middle">
-			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']).$engine->config['upload_path'].'/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
+			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']).'image/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
 		</div>
 		<div id="tools">
 			<span>
