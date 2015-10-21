@@ -4467,11 +4467,16 @@ class Wacko
 		// authenticating cookie data:
 		// seed | login token | composed pwd | raw session time | raw password
 		$cookie_mac		= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$session_expire.$user['password']);
+
+		// TODO: use hash_hmac instead
+		#$hmac_key		= hash("sha256", $password, true);
+		#$cookie_hmac	= hash_hmac('sha256', $login_token|$session_expire, $hmac_key);
+
 		// construct and set cookie
-		$cookie			= implode(';', array($login_token, $b64password, $session_expire, $cookie_mac));
+		$cookie_value	= implode(';', array($login_token, $b64password, $session_expire, $cookie_mac));
 
 		// set auth cookie
-		$this->set_cookie('auth', $cookie, $session_length, $persistent, ( $this->config['tls'] == true ? 1 : 0 ));
+		$this->set_cookie('auth', $cookie_value, $session_length, $persistent, ( $this->config['tls'] == true ? 1 : 0 ));
 
 		// update session expiry, user_form_salt and clear password recovery
 		// code in user data table
@@ -4531,12 +4536,13 @@ class Wacko
 		return session_start();
 	}
 
-	// restore username/password/etc from auth cookie
+	// restore login_token/password/etc from auth cookie
 	function decompose_auth_cookie($name = 'auth')
 	{
 		$recalc_mac = '';
 		$cookie_mac = '';
 
+		// get cookie value
 		if (true == $cookie = $this->get_cookie($name))
 		{
 			list($login_token, $b64password, $session_expire, $cookie_mac) = explode(';', $cookie);
