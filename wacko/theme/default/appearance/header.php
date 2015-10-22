@@ -18,19 +18,19 @@ require ($this->config['theme_path'].'/_common/_header.php');
 // if user are logged, shows "You are UserName"
 if ($this->get_user())
 {
-	echo '<span class="nobr">'.$this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span><small> ( <span class="nobr Tune">'.
-		$this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0).
-		" | <a onclick=\"return confirm('".$this->get_translation('LogoutAreYouSure')."');\" href=\"".$this->href('', $this->get_translation('LoginPage'), "action=logout&amp;goback=".$this->slim_url($this->tag))."\">".$this->get_translation('LogoutLink')."</a></span> )</small>";
+	echo '<span class="nobr">'.$this->get_translation('YouAre').' '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span><small> ( <span class="nobr Tune">'.
+		$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).
+		' | <a onclick="return confirm(\''.$this->get_translation('LogoutAreYouSure').'\');" href="'.$this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)).'">'.$this->get_translation('LogoutLink').'</a></span> )</small>';
 // else shows login's controls
 }
 else
 {
 	// show Register / Login link
-	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage'), "", $this->get_translation('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
+	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage'), '', $this->get_translation('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
 
 	if ($this->config['allow_registration'] == true)
 	{
-		echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n";
+		echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), '', $this->get_translation('RegistrationPage'), 0)."</li>\n";
 	}
 	// Show Help link
 	# echo "<li>".$this->compose_link_to_page($this->get_translation('HelpPage'), "", $this->get_translation('Help'), 0)."</li>\n";

@@ -306,18 +306,19 @@ class Wacko
 
 	function available_themes()
 	{
-		$handle	= opendir($this->config['theme_path']);
+		$theme_list	= '';
+		$handle		= opendir($this->config['theme_path']);
 
 		while (false !== ($file = readdir($handle)))
 		{
 			if ($file != '.' && $file != '..' && is_dir($this->config['theme_path'].'/'.$file) && $file != '_common')
 			{
-				$themelist[] = $file;
+				$theme_list[] = $file;
 			}
 		}
 
 		closedir($handle);
-		sort($themelist, SORT_STRING);
+		sort($theme_list, SORT_STRING);
 
 		if ($allow = trim($this->config['allow_themes']))
 		{
@@ -325,11 +326,11 @@ class Wacko
 
 			if (is_array($ath) && $ath[0])
 			{
-				$themelist = array_intersect ($ath, $themelist);
+				$theme_list = array_intersect ($ath, $theme_list);
 			}
 		}
 
-		return $themelist;
+		return $theme_list;
 	}
 
 	// TIME FUNCTIONS
@@ -1032,9 +1033,6 @@ class Wacko
 			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.lang, p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, u.user_name, o.user_name AS owner_name';
 		}
 
-		//
-		$settings = '';
-
 		if (!$page)
 		{
 			if ($supertagged || $page_id)
@@ -1157,13 +1155,13 @@ class Wacko
 
 	function cache_page($page, $page_id = 0, $metadata_only = 0)
 	{
-		if ($page_id != 0)
-		{
+		#if ($page_id != 0) // cache for both cases to avoid roundtrips
+		#{
 			$this->page_cache['page_id'][$page['page_id']]				= $page;
 			$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
-		}
-		else
-		{
+		#}
+		#else
+		#{
 			if (!$page['supertag'])
 			{
 				$page['supertag'] = $this->translit($page['tag'], TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
@@ -1171,7 +1169,7 @@ class Wacko
 
 			$this->page_cache['supertag'][$page['supertag']]			= $page;
 			$this->page_cache['supertag'][$page['supertag']]['mdonly']	= $metadata_only;
-		}
+		#}
 	}
 
 	function cache_wanted_page($tag, $page_id = 0, $check = 0)
@@ -1285,12 +1283,22 @@ class Wacko
 		if(isset($user['user_name']))
 		{
 			$pages[]	= $this->config['users_page'].'/'.$user['user_name'];
+			$pages[]	= $this->get_translation('AccountLink');
+		}
+		else
+		{
+			$pages[]	= $this->get_translation('RegistrationPage');
 		}
 
+		$pages[]	= $this->config['root_page'];
 		$pages[]	= $this->config['users_page'];
+		$pages[]	= $this->config['policy_page'];
+		$pages[]	= $this->config['permalink_page'];
+		$pages[]	= $this->get_translation('LoginPage');
+		$pages[]	= $this->get_translation('TextSearchPage');
 		$pages[]	= $this->tag;
 
-		$pages[]	= $this->tag;
+		#$pages[]	= $this->tag;
 
 		$pages		= array_unique($pages);
 		$spages_str	= '';
@@ -1610,7 +1618,7 @@ class Wacko
 				"INNER JOIN {$this->config['table_prefix']}category_page cp ON (c.category_id = cp.category_id) ".
 			"WHERE ".( $page_id != 0
 				? "cp.page_id  = '".(int)$page_id."' "
-				: "cp.supertag = '".quote($this->dblink, $supertag)."' " )
+				: "cp.supertag = '".quote($this->dblink, $this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD))."' " )
 			, $cache);
 
 		return $categories;
@@ -1637,6 +1645,7 @@ class Wacko
 		*/
 		if ($this->config['spam_filter'])
 		{
+			// TODO: read table word and cache it
 			$this->spam = file('config/antispam.conf', 1);
 
 			if (is_array($this->spam))
@@ -1722,6 +1731,7 @@ class Wacko
 	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = false, $user_page = false)
 	{
 		$desc = '';
+
 		// user data
 		$ip = $this->get_user_ip();
 
@@ -2772,7 +2782,6 @@ class Wacko
 		$class		= '';
 		$icon		= '';
 		$lang		= '';
-		$desc		= '';
 		$url		= '';
 		$img_link	= false;
 		$text		= str_replace('"', '&quot;', $text);
@@ -3153,7 +3162,7 @@ class Wacko
 
 				if (!isset($_ptag))
 				{
-					$_ptag = '';
+					$_ptag = ''; // XXX: ???
 				}
 
 				$ptag		= $match[1];
@@ -3169,7 +3178,7 @@ class Wacko
 				{
 					if (!isset($data))
 					{
-						$data = '';
+						$data = ''; // XXX: ???
 					}
 
 					$opar	= '/'.$untag.'/';
@@ -4674,7 +4683,7 @@ class Wacko
 				"SELECT user_id ".
 				"FROM ".$this->config['table_prefix']."user ".
 				"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
-				"LIMIT 1");
+				"LIMIT 1", true);
 
 			// Get user value
 			$user_id = $user['user_id'];
@@ -5265,7 +5274,7 @@ class Wacko
 	// check if user has the right to upload files
 	function can_upload()
 	{
-		if ($user = $this->get_user())
+		if ($this->get_user())
 		{
 			$user_name		= strtolower($this->get_user_name());
 			$registered		= true;
@@ -5974,6 +5983,7 @@ class Wacko
 		unset($auth);
 
 		// user settings
+		##if(!$this->userlang = $lang)  // TEST: ??? - openspace handle
 		if(isset($user['lang']))
 		{
 			if($user['lang'] == '')
@@ -6303,9 +6313,6 @@ class Wacko
 
 	function numerate_toc_callback_p($matches)
 	{
-		$before	= '';
-		$after	= '';
-
 		if (!($style = $this->paragrafica_styles[$this->post_wacko_action['p']]))
 		{
 			$this->post_wacko_action['p'] = 'before';
@@ -6365,7 +6372,7 @@ class Wacko
 			}
 
 			// camel case'ing
-			$linktext = preg_replace('([A-Z][a-z])', ' ${0}', $steps[$i]);
+			#$linktext = preg_replace('([A-Z][a-z])', ' ${0}', $steps[$i]);
 
 			for ($i = 0; $i < count($steps) -1; $i++)
 			{
@@ -6966,15 +6973,16 @@ class Wacko
 			$perpage = 10; // no division by zero
 		}
 
-		$sep	= ', ';		// page links divider
-		$pages	= ceil($total / $perpage);
-		$page	= ((isset($_GET[$name])) && $_GET[$name] == true			// if page param = 'last' magic word,
-					? ($_GET[$name] == 'last'	// then open last page of the list
-						? ($pages > 0
-							? $pages
-							: 1)
-						: (int)$_GET[$name])
-					: 1);
+		$pagination = '';
+		$sep		= ', ';		// page links divider
+		$pages		= ceil($total / $perpage);
+		$page		= ((isset($_GET[$name])) && $_GET[$name] == true			// if page param = 'last' magic word,
+						? ($_GET[$name] == 'last'	// then open last page of the list
+							? ($pages > 0
+								? $pages
+								: 1)
+							: (int)$_GET[$name])
+						: 1);
 
 		if ($page <= 0)
 		{
@@ -7322,6 +7330,8 @@ class Wacko
 	function save_categories_list($page_id, $dryrun = 0)
 	{
 		$set = '';
+		$ids = '';
+		$values = '';
 
 		// what's selected
 		foreach ($_POST as $key => $val)
