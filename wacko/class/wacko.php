@@ -1535,9 +1535,9 @@ class Wacko
 			"ORDER BY modified DESC ".
 			"LIMIT {$limit}", true))
 			{
-				for ($i = 0; $i < count($read_acls); $i++)
+				foreach ($read_acls as $read_acl)
 				{
-					$this->cache_acl($read_acls[$i]['page_id'], 'read', 1,$read_acls[$i]);
+					$this->cache_acl($read_acl['page_id'], 'read', 1,$read_acl);
 				}
 			}
 
@@ -1585,9 +1585,9 @@ class Wacko
 			"ORDER BY modified DESC ".
 			"LIMIT {$limit}"))
 			{
-				for ($i = 0; $i < count($read_acls); $i++)
+				foreach ($read_acls as $read_acl)
 				{
-					$this->cache_acl($read_acls[$i]['page_id'], 'read', 1, $read_acls[$i]);
+					$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acls);
 				}
 			}
 

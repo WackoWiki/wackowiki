@@ -486,15 +486,15 @@ else if ($user = $this->get_user())
 <?php
 	$themes = $this->available_themes();
 
-	for ($i = 0; $i < count($themes); $i++)
+	foreach ($themes as $theme)
 	{
-		echo '<option value="'.$themes[$i].'" '.
-			(isset($user['theme']) && $user['theme'] == $themes[$i]
+		echo '<option value="'.$theme.'" '.
+			(isset($user['theme']) && $user['theme'] == $theme
 				? 'selected="selected" '
-				: ($this->config['theme'] == $themes[$i]
+				: ($this->config['theme'] == $theme
 					? 'selected="selected" '
 					: '')
-			).'>'.$themes[$i]."</option>\n";
+			).'>'.$theme."</option>\n";
 	}
 ?>
 		</select></td>

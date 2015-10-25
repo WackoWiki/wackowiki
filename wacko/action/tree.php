@@ -79,9 +79,12 @@ if ($pages = $this->load_all(
 		"FROM {$this->config['table_prefix']}page ".
 		"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", true))
 		{
-			for ($i = 0; $i < count($links); $i++)
+			foreach ($links as $link)
 			{
-				$this->cache_page($links[$i], 0, 1);
+				$this->cache_page($link, 0, 1);
+
+				// cache page_id for for has_access validation in link function
+				$this->page_id_cache[$link['tag']] = $link['page_id'];
 			}
 		}
 
@@ -90,9 +93,9 @@ if ($pages = $this->load_all(
 		"SELECT page_id, privilege, list FROM {$this->config['table_prefix']}acl ".
 		"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) AND privilege = 'read'", true))
 		{
-			for ($i = 0; $i < count($acls); $i++)
+			foreach ($acls as $acl)
 			{
-				$this->cache_acl($acls[$i]['page_id'], 'read', 1, $acls[$i]);
+				$this->cache_acl($acl['page_id'], 'read', 1, $acl);
 			}
 		}
 
