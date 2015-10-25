@@ -128,9 +128,9 @@ function admin_config_basic(&$engine, &$module)
 <?php
 						$themes = $engine->available_themes();
 
-						for ($i = 0; $i < count($themes); $i++)
+						foreach ($themes as $theme)
 						{
-							echo '<option value="'.$themes[$i].'" '.($engine->config['theme'] == $themes[$i] ? 'selected="selected"' : '').'>'.$themes[$i].'</option>';
+							echo '<option value="'.$theme.'" '.($engine->config['theme'] == $theme ? 'selected="selected"' : '').'>'.$theme.'</option>';
 						}
 ?>
 					</select>

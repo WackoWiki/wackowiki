@@ -47,8 +47,13 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		}
 
 		// prepare and send personal message
-		if ($this->config['enable_email'] == true && isset($_POST['send_pm']) && $_POST['mail_body'] == true && $this->get_user() &&
-		$user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
+		if ($this->config['enable_email'] == true
+			&& isset($_POST['send_pm'])
+			&& $_POST['mail_body'] == true
+			&& $this->get_user()
+			&& $user['allow_intercom'] == 1
+			&& $user['email']
+			&& !$user['email_confirm'])
 		{
 			// check for errors
 			// message is too long
@@ -355,9 +360,10 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			echo $this->get_translation('CommentsDisabled');
 		}
 
+		// last user uploads
+		// show files only for registered users
 		if ($this->get_user())
 		{
-			// last user uploads
 			$limit = 10;
 
 			echo '<h2 id="uploads">'.$this->get_translation('UsersUploads').'</h2>'."\n";
@@ -461,6 +467,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		}
 	}
 }
+// USERLIST
 // display whole userlist instead of the particular profile
 else
 {

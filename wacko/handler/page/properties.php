@@ -270,13 +270,13 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 
 				$themes = $this->available_themes();
 
-				for ($i = 0; $i < count($themes); $i++)
+				foreach ($themes as $theme)
 				{
-					echo '<option value="'.$themes[$i].'" '.
-						(isset($this->page['theme']) && $this->page['theme'] == $themes[$i]
+					echo '<option value="'.$theme.'" '.
+						(isset($this->page['theme']) && $this->page['theme'] == $theme
 							? 'selected="selected" '
 							: ''
-						).'>'.$themes[$i]."</option>\n";
+						).'>'.$theme."</option>\n";
 				}
 
 				echo 		"</select></td>\n".

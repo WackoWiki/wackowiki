@@ -694,15 +694,15 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $page_id)
 			{
-				$accept_text[] = '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
-				$topics_list[] = $this->get_page_tag($page_id);
+				$options['accept_text'][]	= '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
+				$options['topic'][]			= $this->get_page_tag($page_id);
 			}
 
 			$list = '';
 
-			for ($i = 0; $i < count($topics_list); $i++)
+			foreach ($options as $option)
 			{
-				$list .= "<option value=\"{$topics_list[$i]}\">{$accept_text[$i]}</option>\n";
+				$list .= "<option value=\"{$option['topic']}\">{$option['accept_text']}</option>\n";
 			}
 
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
