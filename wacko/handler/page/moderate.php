@@ -332,7 +332,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		foreach ($ids as $id)
 		{
-			if (!in_array($id, $set))
+			if (!in_array($id, $set) && !empty($id))
 			{
 				$set[] = $id;
 			}
@@ -344,7 +344,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	// keep currently selected list items
 	foreach ($_POST as $val => $key)
 	{
-		if ($key == 'id' && !in_array($val, $set))
+		if ($key == 'id' && !in_array($val, $set) && !empty($val))
 		{
 			$set[] = $val;
 		}
@@ -359,7 +359,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		foreach ($_POST as $val => $key)
 		{
-			if ($key == 'id')
+			if ($key == 'id'  && !empty($val))
 			{
 				$set[] = $val;
 			}
@@ -692,10 +692,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// select base for merging topics
 		else if ($accept_action == 'merge')
 		{
+			$i = 0;
+
 			foreach ($set as $page_id)
 			{
-				$options['accept_text'][]	= '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
-				$options['topic'][]			= $this->get_page_tag($page_id);
+				$options[$i]['accept_text']	= '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
+				$options[$i]['topic']		= $this->get_page_tag($page_id);
+				$i++;
 			}
 
 			$list = '';
@@ -703,6 +706,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($options as $option)
 			{
 				$list .= "<option value=\"{$option['topic']}\">{$option['accept_text']}</option>\n";
+				$accept_text[] = $option['accept_text'];
 			}
 
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
