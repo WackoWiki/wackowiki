@@ -9,13 +9,13 @@ if (!isset($nomark)) $nomark = '';
 
 if (isset($vars['for']))
 {
-	$tag = $this->unwrap_link($vars[0]);
-	$page_id = $this->get_page_id($tag);
+	$tag		= $this->unwrap_link($vars[0]);
+	$page_id	= $this->get_page_id($tag);
 }
 else
 {
-	$tag = $this->tag;
-	$page_id = $this->page['page_id'];
+	$tag		= $this->tag;
+	$page_id	= $this->page['page_id'];
 }
 
 if ($this->is_owner($page_id))
@@ -42,7 +42,7 @@ if ($this->is_owner($page_id))
 		{
 			$user_name = $watcher['user_name'];
 			#echo $this->link('user:'.$user_name, '', $user_name)."<br />";
-			echo "<li><a href=\"".$this->href('', $this->config['users_page'], 'profile='.$user_name)."\">".$user_name."</a></li>\n";
+			echo '<li><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'">'.$user_name."</a></li>\n";
 		}
 
 		echo "</ol>\n";

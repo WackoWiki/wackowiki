@@ -327,7 +327,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"theme VARCHAR(20) DEFAULT NULL DEFAULT '',".
 					"lang VARCHAR(2) DEFAULT NULL DEFAULT '',".
-					"changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50',".
+					"list_count INT(10) UNSIGNED NOT NULL DEFAULT '50',".
 					"dont_redirect TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"send_watchmail TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"show_files TINYINT(1) UNSIGNED DEFAULT NULL,".
