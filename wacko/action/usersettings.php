@@ -614,16 +614,16 @@ else if ($user = $this->get_user())
 					'<td class="form_right" title="'.$this->get_translation('UploadQuotaTip').'"><div class="meter"><span style="width: 25%">'.$this->binary_multiples($this->upload_quota($user['user_id']), false, true, true).' ('.$percentage.")</span></div></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('UsersPages')."</th>".
-					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'" title="'.$this->get_translation('RevisionTip').'">'.(int)$user['total_pages']."</a></td>".
+					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name'], '', 'pages').'" title="'.$this->get_translation('RevisionTip').'">'.(int)$user['total_pages']."</a></td>".
 				#"</tr>\n".'<tr class="lined">'.
 					#'<th class="form_left" scope="row">'.$this->get_translation('UsersRevisions')."</th>".
 					#'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'" title="'.$this->get_translation('RevisionTip').'">'.(int)$user['total_revisions']."</a></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('UsersComments')."</th>".
-					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'" title="'.$this->get_translation('ShowComments').'">'.$user['total_comments'].'</a></td>'.
+					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name'], '', 'comments').'" title="'.$this->get_translation('ShowComments').'">'.$user['total_comments'].'</a></td>'.
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('UsersUploads')."</th>".
-					'<td class="form_right">'.number_format($user['total_uploads'], 0, ',', '.')."</td>".
+					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name'], '', 'uploads').'" title="'.$this->get_translation('ShowComments').'">'.number_format($user['total_uploads'], 0, ',', '.').'</a></td>'.
 				#"</tr>\n".'<tr class="lined">'.
 				#	'<th class="form_left" scope="row">'.$this->get_translation('UsersLogins')."</th>".
 				#	'<td class="form_right">'.number_format($user['login_count'], 0, ',', '.')."</td>".
