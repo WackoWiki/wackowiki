@@ -88,7 +88,7 @@ if ($this->has_access('read'))
 		}
 		else if ($user = $this->get_user())
 		{
-			$max = $user['changes_count'];
+			$max = $user['list_count'];
 		}
 		else
 		{

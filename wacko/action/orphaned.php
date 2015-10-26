@@ -72,7 +72,7 @@ else
 
 if ($user = $this->get_user())
 {
-	$usermax = $user['changes_count'];
+	$usermax = $user['list_count'];
 
 	if ($usermax == 0)
 	{

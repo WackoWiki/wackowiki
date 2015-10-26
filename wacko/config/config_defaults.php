@@ -180,7 +180,7 @@ $wacko_config_defaults = array(
 	'upload_quota_per_user' => 104857600,
 	'upload_path' => 'files/global',
 	'upload_path_per_page' => 'files/perpage',
-	'upload_banned_exts' => 'php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources',
+	'upload_banned_exts' => 'php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|pht|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources',
 
 	'upload_path_backup'	=> 'files/backup',
 
