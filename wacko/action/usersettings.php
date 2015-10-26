@@ -131,7 +131,6 @@ else if ($user = $this->get_user())
 					"timezone			= '".(float)$_POST['timezone']."', ".
 					"dst				= '".(int)$_POST['dst']."', ".
 					"sorting_comments	= '".(int)$_POST['sorting_comments']."', ".
-					"revisions_count	= '".(int)$_POST['revisions_count']."', ".
 					"changes_count		= '".(int)$_POST['changes_count']."' "
 				).
 			"WHERE user_id = '".(int)$user['user_id']."' ".
@@ -560,20 +559,6 @@ else if ($user = $this->get_user())
 				<option value="30" <?php echo ( $user['changes_count']  == 30  ? ' selected="selected"' : '' );?>>30</option>
 				<option value="50" <?php echo ( $user['changes_count']  == 50  ? ' selected="selected"' : '' );?>>50</option>
 				<option value="100" <?php echo ( $user['changes_count'] == 100 ? ' selected="selected"' : '' );?>>100</option>
-			</select>
-		</td>
-	</tr>
-	<tr class="lined">
-		<th class="form_left" scope="row">
-			<label for="revisions_count"><?php echo $this->get_translation('RevisionListLimit');?></label>
-		</th>
-		<td class="form_right">
-			<select id="revisions_count" name="revisions_count">
-				<option value="10" <?php echo ( $user['revisions_count']  == 10  ? ' selected="selected"' : '' );?>>10</option>
-				<option value="20" <?php echo ( $user['revisions_count']  == 20  ? ' selected="selected"' : '' );?>>20</option>
-				<option value="30" <?php echo ( $user['revisions_count']  == 30  ? ' selected="selected"' : '' );?>>30</option>
-				<option value="50" <?php echo ( $user['revisions_count']  == 50  ? ' selected="selected"' : '' );?>>50</option>
-				<option value="100" <?php echo ( $user['revisions_count'] == 100 ? ' selected="selected"' : '' );?>>100</option>
 			</select>
 		</td>
 	</tr>

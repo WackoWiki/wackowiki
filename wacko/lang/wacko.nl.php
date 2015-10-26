@@ -423,7 +423,6 @@ $wacko_translation = array(
 	'UserName' => 'User name',
 	'YourEmail' => 'Uw emailadres',
 	'RealName' => 'Real name',
-	'RevisionListLimit' => 'Aantal revisies tonen',
 	'RecentChangesLimit' => 'Aantal recente wijzigingen tonen',
 	'ShowComments?' => 'Reacties altijd tonen?',
 	'DoubleclickEditing' => 'Dubbelklik om te wijzigen',

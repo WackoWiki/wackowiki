@@ -1258,7 +1258,7 @@ class Wacko
 			}
 		}
 
-		// get menu items
+		// get menu links
 		if ($menu_items = $this->load_all(
 			"SELECT DISTINCT p.tag ".
 			"FROM ".$this->config['table_prefix']."menu b ".
@@ -1302,7 +1302,6 @@ class Wacko
 
 		$pages		= array_unique($pages);
 		$spages_str	= '';
-		$pages_str	= '';
 
 		foreach ($pages as $page)
 		{
@@ -1311,12 +1310,10 @@ class Wacko
 				$_spages	= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
 				$spages[]	= $_spages;
 				$spages_str	.= "'".quote($this->dblink, $_spages)."', ";
-				$pages_str	.= "'".quote($this->dblink, $page)."', ";
 			}
 		}
 
 		$spages_str	= substr($spages_str, 0, strlen($spages_str) - 2);
-		$pages_str	= substr($pages_str, 0, strlen($pages_str) - 2);
 
 		if ($links = $this->load_all(
 		"SELECT ".$this->page_meta." ".
@@ -1327,7 +1324,8 @@ class Wacko
 			{
 				$this->cache_page($link, 0, 1);
 				$this->page_id_cache[$link['tag']] = $link['page_id'];
-				$exists[] = $link['supertag'];
+				$exists[]	= $link['supertag'];
+				$page_id[]	= $link['page_id'];
 			}
 		}
 
@@ -1339,11 +1337,12 @@ class Wacko
 			#$this->cache_acl($this->get_page_id($notexist), 'read', 1, $acl);
 		}
 
+		$page_ids	= implode(', ', $page_id);
+
 		if ($read_acls = $this->load_all(
-		"SELECT a.* ".
-		"FROM ".$this->config['table_prefix']."acl a ".
-			"INNER JOIN ".$this->config['table_prefix']."page p ON (p.page_id = a.page_id) ".
-		"WHERE BINARY p.tag IN (".$pages_str.") AND a.privilege = 'read'", true))
+		"SELECT page_id, privilege, list ".
+		"FROM ".$this->config['table_prefix']."acl ".
+		"WHERE page_id IN (".$page_ids.") AND privilege = 'read'", true))
 		{
 			foreach ($read_acls as $read_acl)
 			{
@@ -4226,8 +4225,8 @@ class Wacko
 
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
-		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.cookie_token ';
+		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.cookie_token ';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
@@ -4990,12 +4989,10 @@ class Wacko
 		$this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults] = $acl;
 	}
 
+	// TODO: add bulk option -> load entire page related priveleges at once in obj-cache
 	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = '')
 	{
-		if (!isset($acl))
-		{
-			$acl = '';
-		}
+		$acl = '';
 
 		if ($use_cache && $use_parent)
 		{
@@ -5017,7 +5014,7 @@ class Wacko
 				if (!$new_tag)
 				{
 					$acl = $this->load_single(
-						"SELECT * ".
+						"SELECT page_id, privilege, list ".
 						"FROM ".$this->config['table_prefix']."acl ".
 						"WHERE page_id = '".(int)$page_id."' ".
 							"AND privilege = '".quote($this->dblink, $privilege)."' ".
@@ -5082,7 +5079,6 @@ class Wacko
 			$user_name = GUEST;
 		}
 
-
 		if (!$page_id = trim($page_id))
 		{
 			$page_id = $this->page['page_id'];
@@ -5106,6 +5102,7 @@ class Wacko
 
 		// load acl
 		$acl		= $this->load_acl($page_id, $privilege, 1, 1, $use_parent, $new_tag);
+		// cache
 		$this->_acl	= $acl;
 
 		// lock down to read only
@@ -5123,7 +5120,14 @@ class Wacko
 			}
 		}
 
-		return $this->check_acl($user_name, $acl['list'], true);
+		if ($acl)
+		{
+			return $this->check_acl($user_name, $acl['list'], true);
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	function check_acl($user_name, $acl_list, $copy_to_this_acl = false, $debug = 0)

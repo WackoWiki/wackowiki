@@ -426,7 +426,6 @@ $wacko_translation = array(
 	'UserName'					=> 'Имя пользователя',
 	'YourEmail'					=> 'Адрес электронной почты',
 	'RealName'					=> 'Настоящее имя',
-	'RevisionListLimit'			=> 'Ограничение списка правок страницы',
 	'RecentChangesLimit'		=> 'Ограничение списка изменённых страниц',
 	'ShowComments?'				=> 'Показывать комментарии по умолчанию',
 	'DoubleclickEditing'		=> 'Редактирование двойным щелчком мыши',
