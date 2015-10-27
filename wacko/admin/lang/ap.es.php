@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = array(
-	'ApTestText' => 'Ap Test Text',
-	'MainNote' => 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'ApTestText'			=> 'Ap Test Text',
+	'MainNote'				=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'Authorization'			=> 'Autorización',
 	'AuthorizationTip'		=> 'Por favor ingrese la contraseña del administrador (asegúrese que su navegador permita cookies).',

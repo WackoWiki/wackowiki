@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = array(
-	'ApTestText' => 'Ap Test Text',
-	'MainNote' => 'Внимание: перед проведением технических административных мероприятий <span class="underline">настоятельно</span> рекомендуется закрыть доступ к сайту!',
+	'ApTestText'				=> 'Ap Test Text',
+	'MainNote'					=> 'Внимание: перед проведением технических административных мероприятий <span class="underline">настоятельно</span> рекомендуется закрыть доступ к сайту!',
 
 	// Admin panel
 	'Authorization'				=> 'Авторизация',
