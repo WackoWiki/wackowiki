@@ -131,7 +131,7 @@ else if ($user = $this->get_user())
 					"timezone			= '".(float)$_POST['timezone']."', ".
 					"dst				= '".(int)$_POST['dst']."', ".
 					"sorting_comments	= '".(int)$_POST['sorting_comments']."', ".
-					"changes_count		= '".(int)$_POST['changes_count']."' "
+					"list_count			= '".(int)$_POST['list_count']."' "
 				).
 			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
@@ -158,13 +158,13 @@ else if ($user = $this->get_user())
 
 			$subject	= $this->config['site_name'].". ".$this->get_translation('EmailConfirm');
 			$body		= $this->get_translation('EmailHello'). $user['user_name'].".\n\n".
-				str_replace('%1', $this->config['site_name'],
-				str_replace('%2', $user['user_name'],
-				str_replace('%3', $this->href('', '', 'confirm='.$confirm),
-				$this->get_translation('EmailVerify'))))."\n\n".
-				$this->get_translation('EmailGoodbye')."\n".
-				$this->config['site_name']."\n".
-				$this->config['base_url'];
+							str_replace('%1', $this->config['site_name'],
+							str_replace('%2', $user['user_name'],
+							str_replace('%3', $this->href('', '', 'confirm='.$confirm),
+							$this->get_translation('EmailVerify'))))."\n\n".
+							$this->get_translation('EmailGoodbye')."\n".
+							$this->config['site_name']."\n".
+							$this->config['base_url'];
 
 			$this->send_mail($email, $subject, $body);
 
@@ -550,15 +550,15 @@ else if ($user = $this->get_user())
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row">
-			<label for="changes_count"><?php echo $this->get_translation('RecentChangesLimit');?></label>
+			<label for="list_count"><?php echo $this->get_translation('RecordsPerPage');?></label>
 		</th>
 		<td class="form_right">
-			<select id="changes_count" name="changes_count">
-				<option value="10" <?php echo ( $user['changes_count']  == 10  ? ' selected="selected"' : '' );?>>10</option>
-				<option value="20" <?php echo ( $user['changes_count']  == 20  ? ' selected="selected"' : '' );?>>20</option>
-				<option value="30" <?php echo ( $user['changes_count']  == 30  ? ' selected="selected"' : '' );?>>30</option>
-				<option value="50" <?php echo ( $user['changes_count']  == 50  ? ' selected="selected"' : '' );?>>50</option>
-				<option value="100" <?php echo ( $user['changes_count'] == 100 ? ' selected="selected"' : '' );?>>100</option>
+			<select id="list_count" name="list_count">
+				<option value="10" <?php echo ( $user['list_count']  == 10  ? ' selected="selected"' : '' );?>>10</option>
+				<option value="20" <?php echo ( $user['list_count']  == 20  ? ' selected="selected"' : '' );?>>20</option>
+				<option value="30" <?php echo ( $user['list_count']  == 30  ? ' selected="selected"' : '' );?>>30</option>
+				<option value="50" <?php echo ( $user['list_count']  == 50  ? ' selected="selected"' : '' );?>>50</option>
+				<option value="100" <?php echo ( $user['list_count'] == 100 ? ' selected="selected"' : '' );?>>100</option>
 			</select>
 		</td>
 	</tr>
