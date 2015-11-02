@@ -63,7 +63,10 @@ $init->cache('check');
 $engine	= $init->engine();
 $init->cache('log');
 
-#require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
+if (!empty($init->config['ext_bad_behavior']))
+{
+	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
+}
 
 // execute and cache
 $init->engine('run');
