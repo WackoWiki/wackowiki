@@ -62,10 +62,10 @@ $init->session();
 $cache	= $init->cache();
 $engine	= $init->engine();
 
-#if (!empty($init->config['bad_behavior']))
-#{
-#	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
-#}
+if (!empty($init->config['ext_bad_behavior']))
+{
+	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
+}
 
 $engine->http_security_headers();
 
@@ -391,12 +391,14 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 		</div>
 		<div id="tools">
 			<span>
+				<?php echo (RECOVERY_MODE === true ? '<strong>RECOVERY_MODE</strong>' : 'site opened'); ?>
+				&nbsp;&nbsp;
 				<?php $time_left = round((1800 - (time() - $_SESSION['created'])) / 60);
 				echo "Time left: ".$time_left." minutes"; ?>
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
 				&nbsp;&nbsp;
-				<?php echo ( $init->is_locked() === true ? '<strong>site closed</strong>' : 'site opened' ); ?>
+				<?php echo ($init->is_locked() === true ? '<strong>site closed</strong>' : 'site opened'); ?>
 				&nbsp;&nbsp;
 				version <?php echo $engine->config['wacko_version']; ?>
 			</span>

@@ -250,7 +250,7 @@ $wacko_config_defaults = array(
 	'rand_seed_last_update' => 0,
 	'rand_seed' => '',
 
-	'system_seed' => '', // installer autogenerate random one
+	'system_seed' => '', // installer autogenerates random one
 	'recovery_password' => '',
 
 	'date_format' => 'd.m.Y',
@@ -273,6 +273,9 @@ $wacko_config_defaults = array(
 	'referrers_purge_time' => 1,
 	'pages_purge_time' => 0,
 	'keep_deleted_time' => 0,
+
+	// enable extentions
+	'ext_bad_behavior' => 1,
 );
 
 ?>
