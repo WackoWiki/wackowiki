@@ -769,7 +769,7 @@ $wacko_translation = array(
 	'ACLForCluster'				=> 'Berechtigungen für gesamten Cluster %1',
 	'ACLAreYouSure'				=> 'Du bist dabei die ACLs von dieser Seite und aller ihrer Unterseiten zu ändern. Fortfahren?',
 
-	'BookmarkDeleteSelected'	=> 'Löschen Ausgewählte',
+	'BookmarkDeleteSelected'	=> 'Lösche Ausgewählte',
 	'BookmarkMark'				=> 'Markieren',
 	'BookmarkNumber'			=> 'Nr.',
 	'BookmarkNone'				=> 'Du hast keine Lesezeichen gesetzt.',
@@ -859,10 +859,10 @@ $wacko_translation = array(
 	'ExportClusterXML'			=> 'Export des ganzen Clusters von ',
 	'AccessDeniedXML'			=> 'Du hast keine Berechtigung für den Zugriff auf diese Seite.',
 
-	'RecentChangesRSS'			=> 'Änderungen',
-	'RecentCommentsRSS'			=> 'Kommentare',
-	'RecentNewsRSS'				=> 'Nachrichten',
-	'HistoryRevisionsRSS'		=> 'Versionen von ',
+	'ChangesRSS'			=> 'Änderungen',
+	'CommentsRSS'			=> 'Kommentare',
+	'NewsRSS'				=> 'Nachrichten',
+	'RevisionsRSS'		=> 'Versionen von ',
 
 	'LastModification'			=> 'Letzte Änderung',
 

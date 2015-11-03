@@ -49,30 +49,35 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 				if($critical)
 				{
 					mysqli_query($dblink_global, $page_insert);
+
 					if(mysqli_errno($dblink_global) != 0)
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPage'])." - ".mysqli_error($dblink_global));
 					}
 
 					mysqli_query($dblink_global, $perm_read_insert);
+
 					if(mysqli_errno($dblink_global) != 0)
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageReadPermission'])." - ".mysqli_error($dblink_global));
 					}
 
 					mysqli_query($dblink_global, $perm_write_insert);
+
 					if(mysqli_errno($dblink_global) != 0)
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageWritePermission'])." - ".mysqli_error($dblink_global));
 					}
 
 					mysqli_query($dblink_global, $perm_comment_insert);
+
 					if(mysqli_errno($dblink_global) != 0)
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".mysqli_error($dblink_global));
 					}
 
 					mysqli_query($dblink_global, $perm_create_insert);
+
 					if(mysqli_errno($dblink_global) != 0)
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCreatePermission'])." - ".mysqli_error($dblink_global));

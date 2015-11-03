@@ -858,10 +858,10 @@ $wacko_translation = array(
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
 	'AccessDeniedXML'			=> 'Δεν είναι επιτρεπτή η πρόσβαση σε αυτή την πληροφορία.',
 
-	'RecentChangesRSS'			=> 'Πρόσφατες αλλαγές',
-	'RecentCommentsRSS'			=> 'Πρόσφατα σχόλια',
-	'RecentNewsRSS'				=> 'Ειδήσεις',
-	'HistoryRevisionsRSS'		=> 'Ιστορικό/εκδόσεις του ',
+	'ChangesRSS'			=> 'Πρόσφατες αλλαγές',
+	'CommentsRSS'			=> 'Πρόσφατα σχόλια',
+	'NewsRSS'				=> 'Ειδήσεις',
+	'RevisionsRSS'		=> 'Ιστορικό/εκδόσεις του ',
 
 	'LastModification'			=> 'Τελευταίες Τροποποιήσεις',
 
