@@ -44,6 +44,12 @@ else
 	die("Error loading WackoWiki constants data: file `config/constants.php` is missing.");
 }
 
+// Compatibility with the password_* functions that ship with PHP 5.5
+if (version_compare(PHP_VERSION, '5.5.0') < 0)
+{
+	require_once('lib/php_compatibility/password_compat.php');
+}
+
 class Init
 {
 	// WRAPPER VARIABLES
