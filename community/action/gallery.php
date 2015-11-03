@@ -39,7 +39,7 @@ TODO: config settings
 */
 
 // Include PHP Thumbnailer
-require_once 'lib/phpthumb/ThumbLib.inc.php';
+require_once 'lib/phpthumb/PHPThumb.php';
 
 ?>
 
@@ -349,7 +349,7 @@ if ($can_view)
 						$new_filename	= $thumb_dir.'/@'.$filepage['page_id'].'@'.$small_id.$file_name;
 					}
 
-					## thumbnail library will do all of this math, but in case you’re stuck ...
+					## thumbnail library will do all of this math, but in case you're stuck ...
 
 					// Original values obtained from the top image
 					// can come from getimagesize(), imagesx()/imagesy(), or similar
@@ -508,7 +508,7 @@ if ($can_view)
 
 		echo $link;
 		echo '<br /><br />';
-		echo '<a href="'.$this->href('', $source_page_tag, '').'">&lt; Back</a>';
+		echo '<a href="'.$this->href('', $this->tag, '').'">&lt; Back</a>';
 		echo "</div>\n";
 	}
 
