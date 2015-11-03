@@ -98,7 +98,7 @@ $config_file['wacko_version']			= $config['wacko_version'];
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // convert config array into PHP code
-$config_code = "<?php\n// config.php ".$lang['WrittenAt'].strftime("%c")."\n// ".$lang['ConfigDescription']."\n// ".$lang['DontChange']."\n\n";
+$config_code  = "<?php\n// config.php ".$lang['WrittenAt'].strftime("%c")."\n// ".$lang['ConfigDescription']."\n// ".$lang['DontChange']."\n\n";
 $config_code .= array_to_str($config_file)."\n?>";
 
 // try to write configuration file
@@ -107,14 +107,14 @@ echo "         <ul>\n";
 echo "            <li>".$lang['Writing']." - ";
 
 $perm_changed	= true;
-$filename		= 'config/config.php';
-$write_file		= file_put_contents($filename, $config_code);
+$file_name		= 'config/config.php';
+$write_file		= file_put_contents($file_name, $config_code);
 
 if ($write_file == true)
 {
 	// Try and make it non-writable
-	@chmod($filename, 0644);
-	$perm_changed = !is__writable($filename);
+	@chmod($file_name, 0644);
+	$perm_changed = !is__writable($file_name);
 
 	echo output_image(true)."</li>\n";
 
