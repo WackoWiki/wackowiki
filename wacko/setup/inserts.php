@@ -15,7 +15,19 @@ switch($config_global['database_driver'])
 		break;
 }
 
-function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $critical = false, $is_menu = false, $menu_title = false)
+/*
+insert default pages, all related acls and menu item
+	$tag		=
+	$title		=
+	$body		=
+	$lang		=
+	$rights		=
+	$critical	=
+	$is_menu	=
+	$menu_title	=
+	$noindex	=
+*/
+function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $critical = false, $is_menu = false, $menu_title = false, $noindex = 1)
 {
 	global $config_global, $dblink_global, $lang_global;
 
@@ -23,7 +35,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$owner_id				= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
-	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, footer_comments, footer_files, footer_rating) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0')";
+	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
 
 	$page_id				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
 
