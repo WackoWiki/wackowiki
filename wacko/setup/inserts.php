@@ -15,7 +15,7 @@ switch($config_global['database_driver'])
 		break;
 }
 
-function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $critical = false, $is_menu = false, $menu_title = false)
+function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $critical = false, $is_menu = false, $menu_title = false)
 {
 	global $config_global, $dblink_global, $lang_global;
 
@@ -23,7 +23,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 	$owner_id				= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
-	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, footer_comments, footer_files, footer_rating) VALUES ('".$tag."', '".translit($tag, $lng)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."', '0', '0', '0')";
+	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, footer_comments, footer_files, footer_rating) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0')";
 
 	$page_id				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
 
@@ -33,8 +33,8 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 	$perm_create_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'create', '$')";
 	$perm_upload_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'upload', '')";
 
-	$default_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$menu_title."')";
-	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$menu_title."')";
+	$default_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
+	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 
 	switch($config_global['database_driver'])
 	{
@@ -223,9 +223,9 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 	}
 }
 
-function translit($tag, $lng)
+function translit($tag, $lang)
 {
-	$language = set_language($lng);
+	$language = set_language($lang);
 
 	$tag = str_replace( '//', '/', $tag );
 	$tag = str_replace( '-', '', $tag );
@@ -239,18 +239,18 @@ function translit($tag, $lng)
 	return rtrim($tag, '/');
 }
 
-function set_language($lng)
+function set_language($lang)
 {
 	global $config, $language, $languages;
 
-	if ( !isset($languages[$lng]) )
+	if ( !isset($languages[$lang]) )
 	{
-		$lang_file = 'lang/lang.'.$lng.'.php';
+		$lang_file = 'lang/lang.'.$lang.'.php';
 		if (@file_exists($lang_file)) include($lang_file);
-		$languages[$lng] = $wacko_language;
+		$languages[$lang] = $wacko_language;
 	}
 
-	$language = &$languages[$lng];
+	$language = &$languages[$lang];
 	setlocale(LC_CTYPE,$language['locale']);
 	$language['locale'] = setlocale(LC_CTYPE,0);
 	return $language;
@@ -277,7 +277,7 @@ if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 
 	foreach ($lang_list as $_lang)
 	{
-		unset($lng);
+		unset($lang);
 		unset($languages);
 		require_once('setup/lang/inserts.'.$_lang.'.php');
 	}
