@@ -46,13 +46,14 @@ $wacko_all_resource = array(
 	'RootLinkIcon'	=> '/',
 	'SubLinkIcon'	=> '!/',
 	'UpLinkIcon'	=> '../',
+	'wantedicon'	=> '?',
 
-	'usericon'		=> '', // '<img src="{theme}icon/user.png" alt="User" />'
+	'usericon'		=> '', // ''<span class="icon"></span>'
 
-	// mime (temp -> localize)
-	'texticon'		=> '<img src="{theme}icon/txt.png" alt="Text" />',
-	'odticon'		=> '<img src="{theme}icon/odt.png" alt="OpenDocument" />',
-	'imageicon'		=> '<img src="{theme}icon/image.png" alt="Image" />',
+	// see wacko.css in theme folder, e.g. a.fileicon .icon {
+	'outericon'		=> '<span class="icon"></span>',
+
+
 );
 
 ?>
