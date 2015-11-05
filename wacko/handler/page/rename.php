@@ -33,7 +33,8 @@ if ($user = $this->get_user())
 }
 else
 {
-	$user_name		= GUEST;
+	$user_name	= GUEST;
+	$registered	= false;
 }
 
 $message = '';

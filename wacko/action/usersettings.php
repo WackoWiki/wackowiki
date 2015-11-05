@@ -57,6 +57,7 @@ else if (isset($_GET['action']) && $_GET['action'] == 'logout')
 else if ($user = $this->get_user())
 {
 	$email_changed = '';
+	$user = $this->load_user(0, $user['user_id'], 0, false);
 	$this->set_page_lang($this->user_lang);
 
 	// is user trying to update?
