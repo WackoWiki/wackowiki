@@ -283,3 +283,56 @@ mark {background: #ffffaa; /* old red: #ffaaaa */ }
 .mark-blue {background: #9ec6ff;}
 .mark-red {background: #ffbaba;}
 
+/* Wiki links: SYNTAX (prefix://) */
+a.outerlink .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/web.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+/* mime */
+a.texticon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/txt.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+a.odticon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/odt.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+a.imageicon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/image.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+a.fileicon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/file.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+a.xmlicon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/xml.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+a.pdficon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/pdf.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+a.rdficon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/rdf.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+a.emailicon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/mail.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+a.jabbericon .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/jabber.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+/* lockicon */
+a.denied .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/lock.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+/* keyicon */
+a.customsec .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/key.png") no-repeat scroll left center;
+	padding-left: 15px;
+}
+
