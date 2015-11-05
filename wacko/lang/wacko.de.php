@@ -801,18 +801,6 @@ $wacko_translation = array(
 	// filter
 	'Any'						=> 'Alle',
 
-	//icons
-	'outericon'					=> '<img src="{theme}icon/web.png" alt="externer Link" />',
-	'fileicon'					=> '<img src="{theme}icon/file.png" alt="Datei" />',
-	'xmlicon'					=> '<img src="{theme}icon/xml.png" alt="XML" />',
-	'pdficon'					=> '<img src="{theme}icon/pdf.png" alt="PDF" />',
-	'rdficon'					=> '<img src="{theme}icon/rdf.png" alt="RDF" />',
-	'emailicon'					=> '<img src="{theme}icon/mail.png" alt="E-Mail" />',
-	'jabbericon'				=> '<img src="{theme}icon/jabber.png" alt="XMPP" />',
-	'lockicon'					=> '<img src="{theme}icon/lock.png" alt="Zugriff verweigert" />',
-	'keyicon'					=> '<img src="{theme}icon/key.png" alt="Zugriff eingeschränkt" />',
-	'wantedicon'				=> '?',
-
 	// My Groups
 	'UserGroups'				=> 'Nutzergruppen',
 	'MyGroups'					=> 'Gruppenzugehörigkeiten',
