@@ -2819,7 +2819,7 @@ class Wacko
 			$url	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:'.$tag);
 			$title	= $this->get_translation('EmailLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'emailicon';
+			$class	= 'email-link';
 			$tpl	= 'email';
 		}
 		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
@@ -2828,7 +2828,7 @@ class Wacko
 			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:'.$tag);
 			$title	= $this->get_translation('JabberLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'jabbericon';
+			$class	= 'jabber-link';
 			$tpl	= 'jabber';
 		}
 		else if (preg_match('/^#/', $tag))
@@ -2860,7 +2860,7 @@ class Wacko
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('FileLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'fileicon';
+			$class	= 'file-link';
 			$tpl	= 'file';
 		}
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/', $tag))
@@ -2869,7 +2869,7 @@ class Wacko
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('PDFLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'pdficon';
+			$class	= 'pdf-link';
 			$tpl	= 'file';
 		}
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/', $tag))
@@ -2878,7 +2878,7 @@ class Wacko
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('RDFLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'rdficon';
+			$class	= 'rdf-link';
 			$tpl	= 'file';
 		}
 		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
@@ -3006,13 +3006,13 @@ class Wacko
 					$img_link	= false;
 					$tpl		= 'localfile';
 					$file_ext	= array (
-									'pdf' => 'pdficon',
-									'txt' => 'texticon',
-									'odt' => 'odticon',
-									'png' => 'imageicon',
-									'svg' => 'imageicon',
-									'gif' => 'imageicon',
-									'jpg' => 'imageicon');
+									'pdf' => 'pdf-link',
+									'txt' => 'text-link',
+									'odt' => 'odt-link',
+									'png' => 'image-link',
+									'svg' => 'image-link',
+									'gif' => 'image-link',
+									'jpg' => 'image-link');
 
 					if (in_array($file_data['file_ext'], array_keys($file_ext)))
 					{
@@ -3022,7 +3022,7 @@ class Wacko
 					else
 					{
 						$icon	= $this->get_translation('outericon');
-						$class	= 'fileicon';
+						$class	= 'file-link';
 					}
 
 					if ( ($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
@@ -3080,7 +3080,7 @@ class Wacko
 					$icon		= $this->get_translation('outericon');
 					$img_link	= false;
 					$tpl		= 'localfile';
-					$class		= 'denied';
+					$class		= 'acl-denied';
 				}
 			}
 			else	//404
@@ -3326,8 +3326,8 @@ class Wacko
 
 				if (!$access || $this->_acl['list'] == '')
 				{
-					$class		= 'denied';
-					$accicon	= $this->get_translation('lockicon');
+					$class		= 'acl-denied';
+					$accicon	= $this->get_translation('outericon');
 				}
 				else if ($this->_acl['list'] == '*')
 				{
@@ -3336,8 +3336,8 @@ class Wacko
 				}
 				else
 				{
-					$class		= 'customsec';
-					$accicon	= $this->get_translation('keyicon');
+					$class		= 'acl-customsec';
+					$accicon	= $this->get_translation('outericon');
 				}
 
 				if ($text == trim($otag, '/') || $link_lang)
@@ -3442,7 +3442,7 @@ class Wacko
 			{
 				if (!$class)
 				{
-					$class	= 'outerlink';
+					$class	= 'external-link';
 				}
 
 				if ($this->config['link_target'])
