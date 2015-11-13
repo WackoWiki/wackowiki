@@ -52,8 +52,8 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 ?>
 <div class="Footer">
-<img src="<?php echo $this->config['base_url'];?>image/z.png" width="5" height="1" alt="" align="left" />
-<img src="<?php echo $this->config['base_url'];?>image/z.png" width="5" height="1" alt="" align="right" />
+<img src="<?php echo $this->config['base_url'];?>image/spacer.png" width="5" height="1" alt="" align="left" />
+<img src="<?php echo $this->config['base_url'];?>image/spacer.png" width="5" height="1" alt="" align="right" />
 <?php
 
 // if this page exists
