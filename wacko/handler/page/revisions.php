@@ -72,7 +72,7 @@ if ($this->has_access('read'))
 					<label for="source">'.$this->get_translation('SourceDiff').'</label>';
 		$output .= $place_holder.
 					'<a href="'.$this->href('revisions.xml').'">
-						<img src="'.$this->config['theme_url'].'icon/xml.png'.'" title="'.$this->get_translation('RevisionXMLTip').'" alt="XML" />
+						<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RevisionXMLTip').'" alt="XML" class="btn-feed"/>
 					</a>';
 
 		if ($this->config['minor_edit'])

@@ -13,22 +13,22 @@ if (!defined('IN_WACKO'))
 
 	Calling order (* - mandatory for engine startup):
 
-	1.  init()*			- constructor, unescape magic quotes, version checks
-	2.  settings()*		- load primary engine config from file: variables and constants
-	3.  settings()*		- load secondary engine config from database (calls dbal())
-	4.  settings($p,$v)	- set additional config parameters if needed
-	5.  request()		- parse request string if needed for wacko pages processing
-	6.  dbal()*			- establish DBAL for database operations and connect to DB (required by engine())
-	7.  session()		- start user session
-	8.  is_locked()		- check website for locking
-	9.  installer()		- start installer if necessary
+	1.  init()*				- constructor, unescape magic quotes, version checks
+	2.  settings()*			- load primary engine config from file: variables and constants
+	3.  settings()*			- load secondary engine config from database (calls dbal())
+	4.  settings($p,$v)		- set additional config parameters if needed
+	5.  request()			- parse request string if needed for wacko pages processing
+	6.  dbal()*				- establish DBAL for database operations and connect to DB (required by engine())
+	7.  session()			- start user session
+	8.  is_locked()			- check website for locking
+	9.  installer()			- start installer if necessary
 	10. get_micro_time()	- return precise timer
-	11. cache()			- initialize caching engine
-	12. cache('check')	- process request for caching purposes (required by cache('store'))
-	13. engine()*		- initialize Wacko engine
-	14. engine('run')	- execute script and open start page (requires engine())
-	15. cache('store')	- cache page (requires engine())
-	16. debug()			- print debugging information
+	11. cache()				- initialize caching engine
+	12. cache('check')		- process request for caching purposes (required by cache('store'))
+	13. engine()*			- initialize Wacko engine
+	14. engine('run')		- execute script and open start page (requires engine())
+	15. cache('store')		- cache page (requires engine())
+	16. debug()				- print debugging information
 
 	Additional information can be found in class methods' comments.
 
@@ -562,7 +562,7 @@ class Init
 		// check config data
 		if ($this->config == false)
 		{
-			die("Error starting WackoWiki cache engine: config data must be initialized.");
+			die('Error starting WackoWiki cache engine: config data must be initialized.');
 		}
 
 		if ($this->cache == false || $op == false)
@@ -574,7 +574,8 @@ class Init
 		{
 			if ($this->config['cache'] && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
 			{
-				if (!isset($_COOKIE[$this->config['cookie_prefix'].'auth'.'_'.$this->config['cookie_hash']]))	// anonymous user
+				// anonymous user
+				if (!isset($_COOKIE[$this->config['cookie_prefix'].'auth'.'_'.$this->config['cookie_hash']]))
 				{
 					return $this->cacheval = $this->cache->check_http_request($this->page, $this->method);
 				}
@@ -586,7 +587,7 @@ class Init
 			{
 				$data = ob_get_contents();
 
-				if (!empty($data))
+				if (!empty($data) && $this->engine->disable_cache === false)
 				{
 					return $this->cache->store_page_cache($data);
 				}
@@ -744,6 +745,7 @@ class Init
 					echo "<li>User selected language: ".(isset($this->engine->user_lang) ? $this->engine->user_lang : '')."</li>\n";
 					echo "<li>Charset: ".$this->engine->get_charset()."</li>\n";
 					echo "<li>HTML Entities Charset: ".HTML_ENTITIES_CHARSET."</li>\n";
+					echo "<li>Disable cache: ".($this->engine->disable_cache === true ? 'true' : 'false')."</li>\n";
 					echo "</ul>\n";
 				}
 

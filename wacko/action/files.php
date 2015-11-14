@@ -127,17 +127,19 @@ if ($can_view)
 	}
 
 	// display
-	$del	= $this->get_translation('UploadRemove');
 	$edit	= $this->get_translation('UploadEdit');
+	$edit2	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('UploadEdit').'" alt="'.$this->get_translation('UploadEdit').'" class="btn-edit"/>';
+	$del	= $this->get_translation('UploadRemove');
+	$del2	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('UploadRemove').'" alt="'.$this->get_translation('UploadRemove').'" class="btn-delete"/>';
 
-	if (!$global)
+	/* if (!$global)
 	{
 		$path = '@'.$filepage['page_id'].'@';
 	}
 	else
 	{
 		$path = '';
-	}
+	} */
 
 	if (!$global)
 	{
@@ -152,6 +154,11 @@ if ($can_view)
 	if ($picture == false)
 	{
 		$path2 = str_replace('file:', '_file:', $path2);
+		$style = 'upload';
+	}
+	else
+	{
+		$style = 'upload tbl_fixed';
 	}
 
 	// pagination
@@ -168,83 +175,111 @@ if ($can_view)
 
 	if (count($files))
 	{
-		echo '<table class="upload" >';
-	}
+		echo '<table class="'.$style.'" >';
 
-	foreach($files as $file)
-	{
-		$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
-		$dt			= $file['uploaded_dt'];
-		$desc		= $this->format($file['file_description'], 'typografica' );
-
-		if ($this->page['lang'] != $file['lang'])
+		foreach($files as $file)
 		{
-			$desc	= $this->do_unicode_entities($desc, $file['lang']);
+			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
+
+			$dt			= $file['uploaded_dt'];
+			$desc		= $this->format($file['file_description'], 'typografica' );
+
+			if ($this->page['lang'] != $file['lang'])
+			{
+				$desc	= $this->do_unicode_entities($desc, $file['lang']);
+			}
+
+			if ($desc == '')
+			{
+				$desc = "&nbsp;";
+			}
+
+			$file_id	= $file['upload_id'];
+			$file_name	= $file['file_name'];
+			$text		= ($picture == false) ? $file_name : '';
+			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
+			$file_ext	= substr($file_name, strrpos($file_name, ".") + 1);
+			$link		= $this->link($path2.$file_name, '', $text, '', $track);
+
+			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')
+			{
+				$hits	= $file['hits'].' '.$this->get_translation('SettingsHits');
+			}
+			else
+			{
+				$hits	= '';
+			}
+
+			if ($this->is_admin()
+				|| (!isset($is_global)
+					&& $this->get_page_owner_id($page_id) == $this->get_user_id())
+				|| $file['user_id'] == $this->get_user_id())
+			{
+				$remove_mode = 1;
+			}
+			else
+			{
+				$remove_mode = 0;
+			}
+
+			$remove_href	= $this->href('upload', $page, 'remove='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
+			$edit_href		= $this->href('upload', $page, 'edit='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
+
+			echo '<tr>'.
+					'<td class="file-">'.$link.'</td>';
+
+			if ($picture == false)
+			{
+				echo '<td class="desc-">'.$desc.'</td>'.
+					'<td class="size-">
+						<span class="size2-">'.$file_size.', '.$hits.'</span>&nbsp;'.
+					'</td>'.
+					'<td class="dt-">'.
+						'<span class="dt2-">'.$this->get_time_formatted($dt).'</span>&nbsp;'.
+					'</td>';
+			}
+			else
+			{
+				echo '<td class="desc-">'.
+					$desc.'<br /><br />'.
+					$file['file_name'].'<br /><br />'.
+
+					($file['picture_w']
+						? $file['picture_w'].' x '.$file['picture_h'].'px<br />'
+						: $hits.'<br />'
+					).
+
+					$file_size.', '.$hits.'<br />'.
+					$this->get_time_formatted($dt).
+				'</td>';
+			}
+
+			if ($remove_mode)
+			{
+				echo '<td class="remove-">'.
+						'<span class="dt2-">'.
+							'<a href="'.$edit_href.'" class="remove2-">'.$edit2.'</a>'. # &nbsp;
+							'<a href="'.$remove_href.'" class="remove2-">'.$del2.'</a>'.
+						'</span>'.
+					 '</td>'."\n";
+			}
+			else
+			{
+				#echo '<td class="remove-">&nbsp;</td>'."\n";
+				#echo '<td class="remove-">&nbsp;</td>'."\n";
+			}
+	?>
+
+
+		</tr>
+	<?php
+			unset($link);
+			unset($desc);
+			#unset($text);
 		}
 
-		if ($desc == '')
-		{
-			$desc = "&nbsp;";
-		}
-
-		$file_id	= $file['upload_id'];
-		$file_name	= $file['file_name'];
-		$text		= ($picture == false) ? $file_name : '';
-		$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
-		$file_ext	= substr($file_name, strrpos($file_name, ".") + 1);
-		$link		= $this->link($path2.$file_name, '', $text, '', $track);
-
-		if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png')
-		{
-			$hits	= ", ".$file['hits']." ".( $file['hits'] === 1 ? 'hit' : 'hits' );
-		}
-		else
-		{
-			$hits	= '';
-		}
-
-		if ($this->is_admin()
-			|| (!isset($is_global)
-				&& $this->get_page_owner_id($page_id) == $this->get_user_id())
-			|| $file['user_id'] == $this->get_user_id())
-		{
-			$remove_mode = 1;
-		}
-		else
-		{
-			$remove_mode = 0;
-		}
-
-		$remove_href	= $this->href('upload', $page, 'remove='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
-		$edit_href		= $this->href('upload', $page, 'edit='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
-?>
-		<tr>
-			<td class="dt-"><span class="dt2-"><?php echo $this->get_time_formatted($dt) ?></span>&nbsp;</td>
-<?php
-		if ($remove_mode)
-		{
-			echo '<td class="remove-"><a href="'.$edit_href.'" class="remove2-">'.$edit.'</a>&nbsp;</td>'."\n";
-			echo '<td class="remove-"><a href="'.$remove_href.'" class="remove2-">'.$del.'</a>&nbsp;</td>'."\n";
-		}
-		else
-		{
-			echo '<td class="remove-">&nbsp;</td>'."\n";
-		}
-?>
-		<td class="size-"><span class="size2-">(<?php echo $file_size; ?>)</span>&nbsp;</td>
-		<td class="file-"><?php echo $link; ?></td>
-		<td class="desc-"><?php echo $desc; ?></td>
-	</tr>
-<?php
-		unset($link);
-		unset($desc);
-		#unset($text);
-	}
-
-	if (count($files))
-	{
-		echo '</table>';
+			echo '</table>';
 	}
 
 	unset($files);

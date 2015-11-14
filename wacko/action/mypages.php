@@ -7,11 +7,11 @@ if (!defined('IN_WACKO'))
 
 // action/mypages.php
 if (!isset($title))		$title = '';
-if (!isset($bydate)) $bydate = '';
-if (!isset($max)) $max = '';
-if (!isset($bychange)) $bychange = '';
+if (!isset($bydate))	$bydate = '';
+if (!isset($max))		$max = '';
+if (!isset($bychange))	$bychange = '';
 $cur_char = '';
-$cur_day = '';
+$current_day = '';
 
 if ($user_id = $this->get_user_id())
 {
@@ -60,23 +60,25 @@ if ($user_id = $this->get_user_id())
 				// day header
 				list($day, $time) = explode(' ', $time_tz);
 
-				if ($day != $cur_day)
+				if ($day != $current_day)
 				{
-					if ($cur_day)
+					if ($current_day)
 					{
 						echo "</ul>\n<br /></li>\n";
 					}
 
 					echo "<li><strong>$day:</strong><ul>\n";
-					$cur_day = $day;
+					$current_day = $day;
 				}
 
 				// print entry
-				echo "<li>$time (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n";
+				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime( $time )), 0, $this->get_translation('RevisionTip')).' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 
 
 			}
+
 			echo "</ul>\n</li>\n</ul>\n";
+
 			// pagination
 			if (isset($pagination['text']))
 			{
@@ -130,19 +132,19 @@ if ($user_id = $this->get_user_id())
 				// day header
 				list($day, $time) = explode(' ', $time_tz);
 
-				if ($day != $cur_day)
+				if ($day != $current_day)
 				{
-					if ($cur_day)
+					if ($current_day)
 					{
 						echo "</ul>\n<br /></li>\n";
 					}
 
 					echo "<li><strong>$day:</strong><ul>\n";
-					$cur_day = $day;
+					$current_day = $day;
 				}
 
 				// print entry
-				echo "<li>".$this->get_time_string_formatted($time)." (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
+				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime( $time )), 0, $this->get_translation('RevisionTip')).' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 
 			}
 
