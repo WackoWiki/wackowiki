@@ -320,8 +320,8 @@ class Cache
 			$this->log('check_http_request incache mtime='.$mtime);
 
 			$gmt	= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-			$etag	= (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : '');
-			$lastm	= (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : '');
+			$etag	= (isset($_SERVER['HTTP_IF_NONE_MATCH'])		? $_SERVER['HTTP_IF_NONE_MATCH']		: '');
+			$lastm	= (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])	? $_SERVER['HTTP_IF_MODIFIED_SINCE']	: '');
 
 			if ($p = strpos($lastm, ';'))
 			{
@@ -342,7 +342,7 @@ class Cache
 				// HTTP header with right Charset settings
 				header('Content-Type: text/html; charset='.$this->charset);
 
-				$cached = $this->get_page_cached($page, $method, $query);
+				$cached_page = $this->get_page_cached($page, $method, $query);
 
 				header ("Last-Modified: ".$gmt);
 				header ("ETag: \"".$gmt."\"");
@@ -350,7 +350,8 @@ class Cache
 				//header ("Content-Length: ".strlen($cached));
 				//header ("Cache-Control: max-age=0");
 				//header ("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time()));
-				echo ($cached);
+
+				echo $cached_page;
 
 				// how much time script take
 				if ($this->debug >= 1 && strpos($method, '.xml') === false)
