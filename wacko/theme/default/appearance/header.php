@@ -77,15 +77,15 @@ else
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icon/bookmark1.png" alt="+" title="'.
-				$this->get_translation('AddToBookmarks') .'"/></a></li>';
+				.'icon/spacer.png" alt="+" title="'.
+				$this->get_translation('AddToBookmarks') .'" class="btn-addbookmark"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icon/bookmark2.png" alt="-" title="'.
-				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+				.'icon/spacer.png" alt="-" title="'.
+				$this->get_translation('RemoveFromBookmarks') .'" class="btn-removebookmark"/></a></li>';
 		}
 	}
 	echo "\n</ol></div>";
@@ -94,8 +94,8 @@ else
 
 <?php
 	// defining tabs constructor
-	//	image - 0 text only, 1 image only, 2 image and text
-	function echo_tab($link, $hint, $title, $active = false, $image, $accesskey = '')
+	//		$image - 0 text only, 1 image only, 2 image and text
+	function echo_tab($link, $hint, $title, $active = false, $image, $tab_class = '', $access_key = '')
 	{
 		global $engine;
 
@@ -111,12 +111,13 @@ else
 		{
 			$_image = 'spacer.png';
 		}
-		else
-		{
-			$_image = $image;
-		}
 
 		$method = substr($link, strrpos($link, '/') + 1);
+
+		if (!$tab_class)
+		{
+			$tab_class = $method;
+		}
 
 		if ($active)
 		{
@@ -127,11 +128,11 @@ else
 					$_title = $title;
 				}
 
-				$tab = '<li class="'.$method.' active"><span><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.' '.$_title.'</span></li>'."\n";
+				$tab = '<li class="'.$tab_class.' active"><span><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.' '.$_title.'</span></li>'."\n";
 			}
 			else
 			{
-				$tab = '<li class="'.$method.' active"><span>'.' '.$title.'</span></li>'."\n";
+				$tab = '<li class="'.$tab_class.' active"><span>'.' '.$title.'</span></li>'."\n";
 			}
 		}
 		else
@@ -145,11 +146,11 @@ else
 					$_title = ' '.$title;
 				}
 
-				$tab = '<li class="'.$method.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$accesskey.'"><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.$_title.'</a></li>'."\n";
+				$tab = '<li class="'.$tab_class.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$access_key.'"><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.$_title.'</a></li>'."\n";
 			}
 			else
 			{
-				$tab = '<li class="'.$method.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$accesskey.'">'.$title.'</a></li>'."\n";
+				$tab = '<li class="'.$tab_class.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$access_key.'">'.$title.'</a></li>'."\n";
 			}
 		}
 
@@ -166,6 +167,7 @@ else
 		$this->has_access('read') ? $this->get_translation('ShowText') : '',
 		$this->method == 'show',
 		1,
+		'',
 		'v');
 
 	// edit tab
@@ -178,6 +180,7 @@ else
 			? $this->get_translation('EditText') : '',
 		$this->method == 'edit',
 		1,
+		'',
 		'e');
 
 	// revisions tab
@@ -187,6 +190,7 @@ else
 		($this->forum === false && $this->page && $this->has_access('read') && $this->hide_revisions === false ) ? $this->get_translation('RevisionText') : '',
 		$this->method == 'revisions' || $this->method == 'diff',
 		1,
+		'',
 		'r');
 
 	// properties tab
@@ -196,12 +200,13 @@ else
 		($this->forum === false && $this->page && ($this->is_owner()) || $this->is_admin()) ? $this->get_translation('PropertiesText') : '',
 		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
 		1,
+		'',
 		's');
 
 	// show more tab
 
 	// display more icon and text
-	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icon/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> ".$this->get_translation('PageHandlerMoreTip')."</a> \n";
+	# echo '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->config['theme_url'].'icon/more.png" title="'.$this->get_translation('PageHandlerMoreTip').'" alt="'.$this->get_translation('PageHandlerMoreTip').'" /> '.$this->get_translation('PageHandlerMoreTip')."</a> \n";
 	// only display 'more' text that shows handler list on hover
 
 	if ($this->has_access('read'))
@@ -217,6 +222,7 @@ else
 			$this->has_access('read') ? $this->get_translation('PrintText') : '',
 			$this->method == 'print',
 			2,
+			'',
 			'v');
 
 		// create tab
@@ -229,6 +235,7 @@ else
 				? $this->get_translation('CreateNewPageText') : '',
 			$this->method == 'new',
 			2,
+			'',
 			'n');
 
 		// remove tab
@@ -241,6 +248,7 @@ else
 				? $this->get_translation('DeleteText') : '',
 			$this->method == 'remove',
 			2,
+			'',
 			'');
 
 		// rename tab
@@ -253,6 +261,7 @@ else
 				? $this->get_translation('RenameText') : '',
 			$this->method == 'rename',
 			2,
+			'',
 			'');
 
 		// moderation tab
@@ -262,6 +271,7 @@ else
 			($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
 			$this->method == 'moderate',
 			2,
+			'',
 			'm');
 
 		// permissions tab
@@ -271,6 +281,7 @@ else
 			($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('ACLText') : '',
 			$this->method == 'permissions',
 			2,
+			'',
 			'a');
 
 		// categories tab
@@ -280,6 +291,7 @@ else
 			($this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('CategoriesText') : '',
 			$this->method == 'categories',
 			2,
+			'',
 			'c');
 
 		// referrers tab
@@ -289,6 +301,7 @@ else
 			($this->page && $this->has_access('read') && $this->get_user()) ? $this->get_translation('ReferrersText') : '',
 			$this->method == 'referrers' || $this->method == 'referrers_sites',
 			2,
+			'',
 			'l');
 
 		// watch tab
@@ -298,7 +311,8 @@ else
 			#($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
 			($this->page && ($this->get_user())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
 			$this->method == 'watch',
-			($this->is_watched === true ? 'watch-on.png' : 'watch-off.png'),
+			2,
+			($this->is_watched === true ? 'watch-off' : 'watch-on'),
 			'w');
 
 		// review tab
@@ -307,7 +321,8 @@ else
 			($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview')),
 			($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? $this->get_translation('Review') : '',
 			$this->method == 'review',
-			($this->page['reviewed'] == 1 ? 'review2.png' : 'review1.png'),
+			2,
+			($this->page['reviewed'] == 1 ? 'review2' : 'review1'),
 			'z');
 
 		// upload tab
@@ -317,6 +332,7 @@ else
 			($this->forum === false && $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
 			$this->method == 'upload',
 			2,
+			'',
 			'u');
 
 			// last empty

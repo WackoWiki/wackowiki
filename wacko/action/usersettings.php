@@ -430,8 +430,8 @@ else if ($user = $this->get_user())
 		<td>
 			<input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;
 <?php echo $user['email_confirm'] == ''
-		? '<img src="'.$this->config['base_url'].'image/tick.png" alt="'.$this->get_translation('EmailConfirmed').'" title="'.$this->get_translation('EmailConfirmed').'" width="20" height="20" />'
-		: '<img src="'.$this->config['base_url'].'image/warning.png" alt="'.$this->get_translation('EmailConfirm').'" title="'.$this->get_translation('EmailConfirm').'" width="16" height="16" />' ?>
+		? '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('EmailConfirmed').'" title="'.$this->get_translation('EmailConfirmed').'" class="btn-tick"/>'
+		: '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('EmailConfirm').'" title="'.$this->get_translation('EmailConfirm').'" class="btn-warning"/>' ?>
 <?php
 		if (!$user['email'] || $code['email_confirm'])
 			echo '<div class="BewareChangeLang"><strong class="cite">'.

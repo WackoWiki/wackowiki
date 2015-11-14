@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 if (!isset($max)) $max = '';
-if (!isset($curChar)) $curChar = '';
+if (!isset($current_char)) $current_char = '';
 
 if ($user_id = $this->get_user_id())
 {
@@ -52,24 +52,33 @@ if ($user_id = $this->get_user_id())
 			{
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 				{
-					$firstChar = strtoupper($page['pagetag'][0]);
-					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
-						$firstChar = '#';
+					$first_char = strtoupper($page['pagetag'][0]);
 
-					if ($firstChar != $curChar)
+					if (!preg_match('/'.$this->language['ALPHA'].'/', $first_char))
 					{
-						if ($curChar) echo "<br />\n";
-
-						echo "<strong>$firstChar</strong><br />\n";
-						$curChar = $firstChar;
+						$first_char = '#';
 					}
 
-					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list">'.
-						"<img src=\"".$this->config['theme_url']."icons/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\"  />".'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
+					if ($first_char != $current_char)
+					{
+						if ($current_char)
+						{
+							echo "<br />\n";
+						}
+
+						echo "<strong>$first_char</strong><br />\n";
+						$current_char = $first_char;
+					}
+
+					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list" class="watch-on">'.
+						'<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('SetWatch').'" alt="'.$this->get_translation('SetWatch').'"  />'.'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 
-				if ($cnt >= $limit) break;
+				if ($cnt >= $limit)
+				{
+					break;
+				}
 			}
 
 			// pagination
@@ -111,21 +120,26 @@ if ($user_id = $this->get_user_id())
 			{
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 				{
-					$firstChar = strtoupper($page['tag'][0]);
+					$first_char = strtoupper($page['tag'][0]);
 
-					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
-						$firstChar = '#';
-
-					if ($firstChar != $curChar)
+					if (!preg_match('/'.$this->language['ALPHA'].'/', $first_char))
 					{
-						if ($curChar) echo "<br />\n";
-
-						echo "<strong>$firstChar</strong><br />\n";
-						$curChar = $firstChar;
+						$first_char = '#';
 					}
 
-					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list">'.
-						"<img src=\"".$this->config['theme_url']."icons/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  />".'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
+					if ($first_char != $current_char)
+					{
+						if ($current_char)
+						{
+							echo "<br />\n";
+						}
+
+						echo "<strong>$first_char</strong><br />\n";
+						$current_char = $first_char;
+					}
+
+					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list" class="watch-off">'.
+						'<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('RemoveWatch').'" alt="'.$this->get_translation('RemoveWatch').'" />'.'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
 
 					$cnt++;
 				}

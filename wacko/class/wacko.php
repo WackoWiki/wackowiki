@@ -30,6 +30,7 @@ class Wacko
 	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description';
 	var $first_inclusion		= array();	// for backlinks
 	var $format_safe			= true;		//for htmlspecialchars() in pre_link
+	var $disable_cache			= false;
 	var $unicode_entities		= array();	//common unicode array
 	var $timer;
 	var $toc_context			= array();
@@ -2584,8 +2585,11 @@ class Wacko
 		}
 	}
 
-	function no_cache()
+	// disable caching
+	//		$client_only - client-side caching
+	function no_cache($client_only = true)
 	{
+		// disable browser cache for page
 		if ( !headers_sent() )
 		{
 			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');				// Date in the past
@@ -2593,6 +2597,12 @@ class Wacko
 			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
 			header('Cache-Control: post-check=0, pre-check=0', false);
 			header('Pragma: no-cache');										// HTTP 1.0
+		}
+
+		// disable server cache for page
+		if ($client_only === false)
+		{
+			$this->disable_cache = true;
 		}
 	}
 
@@ -3129,9 +3139,30 @@ class Wacko
 
 			$url	= $this->href('', $this->config['users_page'].'/', 'profile='.implode('/', $parts));
 
-			$class	= '';
-			$icon	= $this->get_translation('usericon');
+			$class	= 'user-link';
+			$icon	= $this->get_translation('outericon');
 			$tpl	= 'userlink';
+		}
+		else if (preg_match('/^(group)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
+		{
+			// group link -> group:UserGroup
+			$parts	= explode('/', $matches[2]);
+
+			for ($i = 0; $i < count($parts); $i++)
+			{
+				$parts[$i] = str_replace('%23', '#', urlencode($parts[$i]));
+			}
+
+			if ($link_lang)
+			{
+				$text	= $this->do_unicode_entities($text, $link_lang);
+			}
+
+			$url	= $this->href('', $this->config['groups_page'].'/', 'profile='.implode('/', $parts));
+
+			$class	= 'group-link';
+			$icon	= $this->get_translation('outericon');
+			$tpl	= 'grouplink';
 		}
 		else if (preg_match('/^([[:alnum:]]+)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
 		{
@@ -7123,7 +7154,7 @@ class Wacko
 				echo $inline ? '' : '<br />';
 				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />';
 				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
-				echo '<img src="'.$this->config['base_url'].'image/reload.png" width="18" height="17" alt="'.$this->get_translation('CaptchaReload').'" /></a> <br />';
+				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('CaptchaReload').'" class="btn-reload"/></a> <br />';
 				#echo $inline ? '' : '<br />';
 				echo '<input id="captcha" type="text" name="captcha" maxlength="6" style="width: 273px;" />';
 				echo $inline ? '' : '<br />';

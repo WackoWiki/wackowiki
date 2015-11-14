@@ -53,7 +53,7 @@ class RSS
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentCommentsTitleXML')."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
-		$xml .= "<url>".$this->engine->config['base_url']."files/global/wacko_logo.png"."</url>\n";
+		$xml .= "<url>".$this->engine->config['base_url']."image/wacko_logo.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -166,7 +166,7 @@ class RSS
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentNewsTitleXML')."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($news_cluster))."</link>\n";
-		$xml .= "<url>".$this->engine->config['base_url']."files/global/wacko_logo.png"."</url>\n";
+		$xml .= "<url>".$this->engine->config['base_url']."image/wacko_logo.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -245,7 +245,7 @@ class RSS
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentCommentsTitleXML')."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
-		$xml .= "<url>".$this->engine->config['base_url']."files/global/wacko_logo.png"."</url>\n";
+		$xml .= "<url>".$this->engine->config['base_url']."image/wacko_logo.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";

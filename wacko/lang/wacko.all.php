@@ -27,6 +27,7 @@ $wacko_all_resource = array(
 	'tpl.pwdescrpage'	=> '<span class="missingpage">{text}</span>',
 	'tpl.anchor'		=> '<a href="{url}">{text}</a>',
 	'tpl.outerlink'		=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
+	'tpl.grouplink'		=> '<a href="{url}" title="{title}" class="{class}">{icon}{text}</a>',
 	'tpl.userlink'		=> '<a href="{url}" title="{title}" class="{class}">{icon}{text}</a>',
 	'tpl.interwiki'		=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
 	'tpl.email'			=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
@@ -48,6 +49,7 @@ $wacko_all_resource = array(
 	'UpLinkIcon'	=> '../',
 	'wantedicon'	=> '?',
 
+	'groupicon'		=> '', // ''<span class="icon"></span>'
 	'usericon'		=> '', // ''<span class="icon"></span>'
 
 	// see wacko.css in theme folder, e.g. a.fileicon .icon {

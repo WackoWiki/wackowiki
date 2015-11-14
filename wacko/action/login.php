@@ -13,6 +13,8 @@ $error		= '';
 $output		= '';
 $user_name	= '';
 
+$this->no_cache(false);
+
 // reconnect securely in tls mode
 #if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
@@ -268,8 +270,6 @@ else
 		$message = $this->get_translation('LoginAttemtsExceeded');
 		$this->show_message($message, 'error');
 	}
-
-	$this->no_cache();
 
 	echo '<div class="cssform">'."\n";
 	echo '<h3>'.$this->get_translation('LoginWelcome').'</h3>'."\n";

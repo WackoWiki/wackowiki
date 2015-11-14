@@ -160,7 +160,7 @@ if (function_exists('generate_calendar') == false)
 $oldlocale = setlocale(LC_TIME, NULL); // save current locale
 setlocale(LC_TIME, array('de_DE@euro', 'de_DE', 'deu_deu'));
 
-echo "<table style=\"margin: auto\">";
+echo '<table style="margin: auto">';
 echo "<tr>";
 
 
@@ -170,7 +170,7 @@ echo "<tr>";
 
 for($month; $month <= $_range; $month++)
 {
-		echo "<td style=\"vertical-align: top\">";
+		echo '<td style="vertical-align: top">';
 		echo generate_calendar($year, $month, $days, $daywidth);
 
 		echo "</td>";
