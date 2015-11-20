@@ -50,7 +50,7 @@ if (!function_exists('load_commented'))
 
 					// load complete comments
 					$comments = $wacko->load_all(
-						"SELECT b.tag as comment_on_tag, b.title as page_title, b.lang AS page_lang, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.lang AS comment_lang, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
+						"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
 						"FROM ".$wacko->config['table_prefix']."page a ".
 							"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 							"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
@@ -163,7 +163,7 @@ if ($this->user_allowed_comments())
 
 					// do unicode entities
 					// page lang
-					if ($this->page['lang'] != $page['page_lang'])
+					if ($this->page['page_lang'] != $page['page_lang'])
 					{
 						$page_lang = $page['page_lang'];
 					}
@@ -173,7 +173,7 @@ if ($this->user_allowed_comments())
 					}
 
 					// comment lang
-					if ($this->page['lang'] != $page['comment_lang'])
+					if ($this->page['page_lang'] != $page['comment_lang'])
 					{
 						$comment_lang = $page['comment_lang'];
 					}
@@ -191,9 +191,7 @@ if ($this->user_allowed_comments())
 						: $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
 					).
 					' . . . . . . . . . . . . . . . . <small>'.$this->get_translation('LatestCommentBy').' '.
-					($page['comment_user_name']
-						? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['comment_owner_name']).'">'.$page['comment_owner_name'].'</a>'
-						: $this->get_translation('Guest')).
+					$this->user_link($page['comment_owner_name']).
 					"</small></li>\n";
 				}
 			}

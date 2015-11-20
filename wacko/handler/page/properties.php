@@ -54,7 +54,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 					"allow_rawhtml		= '".(int)$allow_rawhtml."', ".
 					"disable_safehtml	= '".(int)$disable_safehtml."', ".
 					"noindex			= '".(int)$_POST['noindex']."' "
-				: 	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
+				: 	"page_lang			= '".quote($this->dblink, $_POST['page_lang'])."', ".
 					"theme				= '".quote($this->dblink, (isset($_POST['theme']) ? $_POST['theme'] : ''))."', ".
 					"menu_tag			= '".quote($this->dblink, htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
 					"show_menu_tag		= '".quote($this->dblink, (int)$_POST['show_menu_tag'])."', ".
@@ -235,11 +235,11 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 						"</td>". */
 
 					"</tr>\n".'<tr class="lined">'.
-						'<th class="form_left" scope="row"><label for="lang">'.$this->get_translation('SetLang').'</label></th>'.
+						'<th class="form_left" scope="row"><label for="page_lang">'.$this->get_translation('SetLang').'</label></th>'.
 						'<td class="form_right">'.
-							'<select id="lang" name="lang">';
+							'<select id="page_lang" name="page_lang">';
 
-			if (!($clang = $this->page['lang']))
+			if (!($clang = $this->page['page_lang']))
 			{
 				$clang = $this->config['language'];
 			}
@@ -303,7 +303,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 						'<td class="form_right">'.$this->page['description']."</td>";
 					"</tr>\n".'<tr class="lined">';
 						'<th class="form_left" scope="row">'.$this->get_translation('SetLang')."</th>";
-						'<td class="form_right">'.$this->page['lang']."</td>";
+						'<td class="form_right">'.$this->page['page_lang']."</td>";
 		}
 
 		echo "</tr>\n</table>";
@@ -318,7 +318,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 					'<td class="form_right">'.$this->page['page_id']."</td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('Owner')."</th>".
-					'<td class="form_right">'."<a href=\"".$this->href('', $this->config['users_page'], "profile=".$this->page['owner_name'])."\">".$this->page['owner_name']."</a>"."</td>".
+					'<td class="form_right">'.$this->user_link($this->page['owner_name'], $lang = '', true, false)."</td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsCreated')."</th>".
 					'<td class="form_right">'.$this->get_time_formatted($this->page['created'])."</td>".

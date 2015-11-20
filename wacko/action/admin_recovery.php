@@ -22,7 +22,7 @@ if ($this->is_admin())
 		$user_name		= $this->get_user_name();
 		$password		= $_POST['recovery_password'];
 		$confpassword	= $_POST['confpassword'];
-		$lang			= (isset($_POST['lang']) ? $_POST['lang'] : '');
+		#$lang			= (isset($_POST['user_lang']) ? $_POST['user_lang'] : '');
 		#$timezone		= trim($_POST['timezone']);
 		$complexity		= $this->password_complexity($user_name, $password);
 

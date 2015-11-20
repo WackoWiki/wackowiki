@@ -10,7 +10,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 // HTTP header with right Charset settings
 header('Content-Type: text/html; charset='.$this->get_charset());
 ?>
-<html lang="<?php echo $this->page['lang'] ?>">
+<html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
 	<meta name="author" content="Theme for WackoWiki by Robert Vaeth" />
 	<meta name="keywords" content="<?php echo $this->get_keywords(); ?>" />

@@ -17,7 +17,7 @@ if (!defined('IN_WACKO'))
 if (!isset($root))			$root	= '/';
 if (!isset($list))			$list	= 1;
 if (!isset($ids)) 			$ids	= '';
-if (!isset($lang))			$lang	= $this->page['lang'];
+if (!isset($lang))			$lang	= $this->page['page_lang'];
 if (!isset($inline)) 		$inline	= '';
 if (!isset($sort) || !in_array($sort, array('abc', 'date')))
 {

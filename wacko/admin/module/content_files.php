@@ -33,7 +33,7 @@ function admin_content_files(&$engine, &$module)
 	if (isset($_GET['remove'])) // show the form
 	{
 		$file = $engine->load_single(
-			"SELECT user_id, upload_id, file_name, file_size, lang, file_description ".
+			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
 				"AND upload_id = '".(int)$_GET['file_id']."' ".
@@ -69,7 +69,7 @@ function admin_content_files(&$engine, &$module)
 	{
 		// 1. where, existence
 		$file = $engine->load_single(
-			"SELECT user_id, upload_id, file_name, file_size, lang, file_description ".
+			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
 				"AND upload_id = '".(int)$_POST['file_id']."' ".
@@ -186,7 +186,7 @@ function admin_content_files(&$engine, &$module)
 			$engine->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
 				"page_id			= '".'0'."', ".
 				"file_name			= '".quote($engine->dblink, $small_name)."', ".
-				"lang				= '".quote($engine->dblink, $engine->config['language'])."', ".
+				"upload_lang				= '".quote($engine->dblink, $engine->config['language'])."', ".
 				"file_description	= '".quote($engine->dblink, $description)."', ".
 				"file_size			= '".(int)$file_size."',".
 				"picture_w			= '".(int)$size[0]."',".

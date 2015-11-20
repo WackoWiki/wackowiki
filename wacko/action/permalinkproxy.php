@@ -59,7 +59,7 @@ if ( isset($page_id) )
 						str_replace('%1', $this->href(),
 						str_replace('%2', $this->tag,
 						str_replace('%3', $this->get_time_formatted($_page['modified']),
-						str_replace('%4', '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$_page['user_name']).'">'.$_page['user_name'].'</a>',
+						str_replace('%4', $this->user_link($_page['user_name'], $lang = '', true, false),
 						$this->get_translation('Revision')))));
 						echo "</div>";
 					}

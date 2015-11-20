@@ -59,7 +59,7 @@ if (!function_exists('print_tag_cloud'))
 
 if (!isset($root))			$root	= '/';
 if (!isset($nomark))		$nomark = '';
-if (!isset($lang))			$lang	= $this->page['lang'];
+if (!isset($lang))			$lang	= $this->page['page_lang'];
 if (!isset($owner))			$owner = '';
 if (!isset($sort) || !in_array($sort, array('abc', 'number')))
 {
@@ -82,7 +82,7 @@ $sql = "SELECT
 			($owner
 				? "INNER JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) "
 				: '' ).
-		"WHERE c.lang = '{$lang}' ".
+		"WHERE c.category_lang = '{$lang}' ".
 			($root
 				? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
 				: '' ).

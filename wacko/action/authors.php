@@ -21,6 +21,8 @@ print document and revisions' authors.
 				- GNU-FDL          (GNU Free Documentation License)
 				- PD               (Public Domain)
 	cluster	= consider all cluster subpages (if = 1) or current page only (0, default)
+
+	https://licensebuttons.net/
 */
 
 if (!isset($add)) $add = '';
@@ -55,7 +57,7 @@ else
 	{
 		// load overall authors data from revision and page table
 		if ($_authors = $this->load_all(
-		"( SELECT u.user_name AS name, YEAR(r.modified) AS year ".
+		"(SELECT u.user_name AS name, YEAR(r.modified) AS year ".
 		"FROM {$this->config['table_prefix']}revision r ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
 		"WHERE r.supertag = '".quote($this->dblink, $this->supertag)."' ".( $cluster ? "OR r.supertag LIKE '".quote($this->dblink, $this->supertag)."/%' " : '' ).
@@ -134,7 +136,7 @@ else
 						$all_authors[$author['years']] .= ', ';
 					}
 
-					$all_authors[$author['years']] .= '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$author['name']).'">'.$author['name'].'</a>';
+					$all_authors[$author['years']] .= $this->user_link($author['name'], $lang = '', true, false);
 				}
 				else
 				{
@@ -156,14 +158,14 @@ else
 	{
 		// license names and links to texts
 		$licenses = array(
-			'CC-BY-ND'		=> array('http://creativecommons.org/licenses/by-nd/3.0/',		'CreativeCommons-Attribution-NoDerivatives'),
-			'CC-BY-NC-SA'	=> array('http://creativecommons.org/licenses/by-nc-sa/3.0/',	'CreativeCommons-Attribution-NonCommercial-ShareAlike'),
-			'CC-BY-NC-ND'	=> array('http://creativecommons.org/licenses/by-nc-nd/3.0/',	'CreativeCommons-Attribution-Non-Commercial No Derivatives'),
-			'CC-BY-SA'		=> array('http://creativecommons.org/licenses/by-sa/3.0/',		'CreativeCommons-Attribution-ShareAlike'),
-			'CC-BY-NC'		=> array('http://creativecommons.org/licenses/by-nc/3.0/',		'CreativeCommons-Attribution-Non-Commercial'),
-			'CC-BY'			=> array('http://creativecommons.org/licenses/by/3.0/',		'Creative Commons Attribution License'),
+			'CC-BY-ND'		=> array('http://creativecommons.org/licenses/by-nd/4.0/',		'CreativeCommons-Attribution-NoDerivatives'),
+			'CC-BY-NC-SA'	=> array('http://creativecommons.org/licenses/by-nc-sa/4.0/',	'CreativeCommons-Attribution-NonCommercial-ShareAlike'),
+			'CC-BY-NC-ND'	=> array('http://creativecommons.org/licenses/by-nc-nd/4.0/',	'CreativeCommons-Attribution-Non-Commercial No Derivatives'),
+			'CC-BY-SA'		=> array('http://creativecommons.org/licenses/by-sa/4.0/',		'CreativeCommons-Attribution-ShareAlike'),
+			'CC-BY-NC'		=> array('http://creativecommons.org/licenses/by-nc/4.0/',		'CreativeCommons-Attribution-Non-Commercial'),
+			'CC-BY'			=> array('http://creativecommons.org/licenses/by/4.0/',			'Creative Commons Attribution License'),
 			'GNU-FDL'		=> array('http://www.gnu.org/licenses/fdl.html',				'GNU Free Documentation License'),
-			'PD'			=> array('http://creativecommons.org/publicdomain/mark/1.0/',			'Public Domain / Free Use'),
+			'PD'			=> array('http://creativecommons.org/publicdomain/mark/1.0/',	'Public Domain / Free Use'),
 		);
 
 		if (isset($licenses[$license]))
@@ -172,7 +174,7 @@ else
 			$license = '<br />Material is distributed under<br />'. // ru]: ћатериал распростран€етс€ на услови€х
 
 			$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
-			$this->link('file:'.strtolower(str_replace('-', '_', $license)).'.png', '', $licenses[$license][1]);
+			$this->link('file:'.strtolower(str_replace('-', '_', $license)).'.svg', '', $licenses[$license][1]);
 		}
 		else
 		{

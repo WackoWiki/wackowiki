@@ -108,7 +108,7 @@ function admin_user_users(&$engine, &$module)
 		$user_id = (isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : '');
 
 		$user = $engine->load_single(
-			"SELECT u.user_name, u.real_name, u.email, p.theme, p.lang, u.enabled ".
+			"SELECT u.user_name, u.real_name, u.email, p.theme, p.user_lang, u.enabled ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
@@ -158,7 +158,7 @@ function admin_user_users(&$engine, &$module)
 				"INSERT INTO ".$engine->config['table_prefix']."user_setting SET ".
 					"user_id		= '".(int)$_user_id['user_id']."', ".
 					"typografica	= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
-					"lang			= '".quote($engine->dblink, ($_POST['lang'] ? $_POST['lang'] : $engine->config['language']))."', ".
+					"user_lang			= '".quote($engine->dblink, ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']))."', ".
 					"theme			= '".quote($engine->dblink, $engine->config['theme'])."', ".
 					"send_watchmail	= '1'");
 
@@ -167,7 +167,7 @@ function admin_user_users(&$engine, &$module)
 			$change_summary		= $engine->get_translation('NewUserAccount'); //'auto created';
 
 			// add user page
-			$engine->save_page($engine->config['users_page'].'/'.$_POST['newname'], '', $user_page_template, $change_summary, '', '', '', '', ($_POST['lang'] ? $_POST['lang'] : $engine->config['language']), '', $_POST['newname'], true);
+			$engine->save_page($engine->config['users_page'].'/'.$_POST['newname'], '', $user_page_template, $change_summary, '', '', '', '', ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']), '', $_POST['newname'], true);
 
 			$engine->show_message($engine->get_translation('UsersAdded'));
 			$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
@@ -207,7 +207,7 @@ function admin_user_users(&$engine, &$module)
 
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}user_setting SET ".
-					"lang		= '".quote($engine->dblink, $_POST['lang'])."' ".
+					"user_lang		= '".quote($engine->dblink, $_POST['user_lang'])."' ".
 				"WHERE user_id = '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
@@ -326,10 +326,10 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="lang">'.$engine->get_translation('YourLanguage').'</label>
+						<label for="user_lang">'.$engine->get_translation('YourLanguage').'</label>
 					</td>'.
 					'<td>
-						<select id="lang" name="lang">
+						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
 
 				$languages = $engine->get_translation('Languages');
@@ -338,7 +338,7 @@ function admin_user_users(&$engine, &$module)
 				{
 					foreach ($langs as $lang)
 					{
-						echo '<option value="'.$lang.'" '.($user['lang'] == $lang ? ' selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
+						echo '<option value="'.$lang.'" '.($user['user_lang'] == $lang ? ' selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 					}
 				}
 
@@ -368,7 +368,7 @@ function admin_user_users(&$engine, &$module)
 	else if (isset($_POST['edit']) && $user_id)
 	{
 		if ($user = $engine->load_single(
-			"SELECT u.user_name, u.real_name, u.email, p.lang, u.enabled ".
+			"SELECT u.user_name, u.real_name, u.email, p.user_lang, u.enabled ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
@@ -405,10 +405,10 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="lang">'.$engine->get_translation('YourLanguage').'</label>
+						<label for="user_lang">'.$engine->get_translation('YourLanguage').'</label>
 					</td>'.
 					'<td>
-						<select id="lang" name="lang">
+						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
 
 					$languages = $engine->get_translation('Languages');
@@ -417,7 +417,7 @@ function admin_user_users(&$engine, &$module)
 					{
 						foreach ($langs as $lang)
 						{
-							echo '<option value="'.$lang.'" '.($user['lang'] == $lang ? ' selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
+							echo '<option value="'.$lang.'" '.($user['user_lang'] == $lang ? ' selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 						}
 					}
 
@@ -527,7 +527,7 @@ function admin_user_users(&$engine, &$module)
 				'</tr>'.
 				'<tr class="lined">'."\n".
 					'<th class="label">'.$engine->get_translation('YourLanguage').'</th>'.
-					'<td>'.$user['lang'].'</td>'.
+					'<td>'.$user['user_lang'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
 					'<th class="label">'.$engine->get_translation('ChooseTheme').'</th>'.
@@ -688,9 +688,9 @@ function admin_user_users(&$engine, &$module)
 		}
 
 		// filter by lang
-		if (isset($_GET['lang']))
+		if (isset($_GET['user_lang']))
 		{
-			$where			= "WHERE p.lang = '".quote($engine->dblink, $_GET['lang'])."' ";
+			$where			= "WHERE p.user_lang = '".quote($engine->dblink, $_GET['user_lang'])."' ";
 		}
 
 		// entries to display
@@ -708,7 +708,7 @@ function admin_user_users(&$engine, &$module)
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 		$users = $engine->load_all(
-			"SELECT u.*, p.lang ".
+			"SELECT u.*, p.user_lang ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 			( $where ? $where : '' ).
@@ -789,7 +789,7 @@ function admin_user_users(&$engine, &$module)
 						'<td>'.$row['total_comments'].'</td>'.
 						'<td>'.$row['total_revisions'].'</td>'.
 						'<td>'.$row['total_uploads'].'</td>'.
-						'<td><small><a href="'.$engine->href().'&amp;lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
+						'<td><small><a href="'.$engine->href().'&amp;lang='.$row['user_lang'].'">'.$row['user_lang'].'</a></small></td>'.
 						'<td>'.$row['enabled'].'</td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.

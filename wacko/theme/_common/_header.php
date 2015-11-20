@@ -4,7 +4,7 @@
 header('Content-Type: text/html; charset='.$this->get_charset());
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $this->page['lang'] ?>">
+<html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
 	<meta charset="<?php echo $this->get_charset(); ?>" />
 <?php
@@ -26,7 +26,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 ?>
 	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
-	<meta name="language" content="<?php echo $this->page['lang'] ?>" />
+	<meta name="language" content="<?php echo $this->page['page_lang'] ?>" />
 
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
 <?php if ($this->config['allow_x11colors']) {?>

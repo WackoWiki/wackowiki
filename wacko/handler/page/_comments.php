@@ -151,10 +151,7 @@ if ($this->has_access('read'))
 				echo "</div>\n";
 				echo '<ul class="commentinfo">'."\n".
 						"<li>".
-						($comment['owner_name']
-							? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$comment['owner_name'].'</a>'
-							: $this->get_translation('Guest')
-						).
+							$this->user_link($comment['owner_name']).
 						"</li>".
 						"<li>".$this->get_time_formatted($comment['created'])."</li>\n".
 						($comment['modified'] != $comment['created']
@@ -246,16 +243,16 @@ if ($this->has_access('read'))
 				// publish anonymously
 				if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
-					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'" '.( $this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' ).' /> ';
-					$output .= '<small><label for="noid_publication">'.$this->get_translation('PostAnonymously').'</label></small>';
+					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'" '.( $this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' )."/>\n";
+					$output .= '<label for="noid_publication"><small>'.$this->get_translation('PostAnonymously')."</small></label>\n";
 					$output .= '<br />';
 				}
 
 				// watch a page
 				if ($this->page && $this->is_watched !== true)
 				{
-					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? 'checked="checked"' : '' ).' />';
-					$output .= '<small><label for="watchpage">'.$this->get_translation('NotifyMe').'</label></small>';
+					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? 'checked="checked"' : '' )." />\n";
+					$output .= '<label for="watchpage"><small>'.$this->get_translation('NotifyMe')."</small></label>\n";
 					$output .= '<br />';
 				}
 

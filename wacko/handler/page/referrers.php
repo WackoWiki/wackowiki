@@ -142,7 +142,7 @@ if ($user = $this->get_user())
 			: ''),
 			$this->get_translation('ExternalPagesGlobal')));
 
-		$query = "SELECT r.page_id, count( r.referrer ) AS num, p.tag, p.title, p.lang
+		$query = "SELECT r.page_id, count( r.referrer ) AS num, p.tag, p.title, p.page_lang
 			FROM ".$this->config['table_prefix']."referrer r
 			LEFT JOIN ".$this->config['table_prefix']."page p ON ( p.page_id = r.page_id )
 			GROUP BY r.page_id
@@ -160,7 +160,7 @@ if ($user = $this->get_user())
 								: ''),
 						$this->get_translation('ExternalPagesGlobal')));
 
-		$query = "SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.lang
+		$query = "SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.page_lang
 			FROM ".$this->config['table_prefix']."referrer r
 			LEFT JOIN ".$this->config['table_prefix']."page p ON ( p.page_id = r.page_id )
 			ORDER BY r.referrer_time DESC";
@@ -262,9 +262,9 @@ if ($user = $this->get_user())
 						{
 							// check current page lang for different charset to do_unicode_entities() against
 							// - page lang
-							if ($this->page['lang'] != $page['lang'])
+							if ($this->page['page_lang'] != $page['page_lang'])
 							{
-								$_lang = $page['lang'];
+								$_lang = $page['page_lang'];
 							}
 							else
 							{
@@ -380,9 +380,9 @@ if ($user = $this->get_user())
 						{
 							// check current page lang for different charset to do_unicode_entities() against
 							// - page lang
-							if ($this->page['lang'] != $referrer['lang'])
+							if ($this->page['page_lang'] != $referrer['page_lang'])
 							{
-								$_lang = $referrer['lang'];
+								$_lang = $referrer['page_lang'];
 							}
 							else
 							{

@@ -94,7 +94,7 @@ if (!function_exists('tag_search'))
 
 		// load search results
 		$results = $wacko->load_all(
-			"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.lang ".
+			"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.page_lang ".
 			"FROM ".$wacko->config['table_prefix']."page a ".
 			($for
 				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
@@ -397,10 +397,10 @@ if ($phrase)
 						}
 
 						// check current page lang for different charset to do_unicode_entities() against
-						if ($this->page['lang'] != $page['lang'])
+						if ($this->page['page_lang'] != $page['page_lang'])
 						{
-							#$page['title'] = $this->do_unicode_entities($page['title'], $page['lang']);
-							$_lang		= $page['lang'];
+							#$page['title'] = $this->do_unicode_entities($page['title'], $page['page_lang']);
+							$_lang		= $page['page_lang'];
 							$preview	= $this->do_unicode_entities($preview, $_lang);
 						}
 

@@ -147,7 +147,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			{
 				echo '<tr class="lined">';
 
-				echo	'<td style="padding-left:5px;"><a href="'.$this->href('', ($this->config['users_page']), 'profile='.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$member['user_name'].'</a></td>'.
+				echo	'<td style="padding-left:5px;">'.$this->user_link($member['user_name'], $lang = '', true, false).'</td>'.
 									'<td style="text-align:center;">'.$member['total_pages'].'</td>'.
 									'<td style="text-align:center;">'.$member['total_comments'].'</td>'.
 									'<td style="text-align:center;">'.$member['total_revisions'].'</td>'.

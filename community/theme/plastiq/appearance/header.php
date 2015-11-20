@@ -59,7 +59,7 @@ echo "\n";
 	$this->stop_link_tracking();
 
 	// default menu
-	if ($menu = $this->get_default_menu($user['lang']))
+	if ($menu = $this->get_default_menu($user['user_lang']))
 	{
 		foreach ($menu as $menu_item)
 		{
@@ -126,10 +126,7 @@ echo "\n";
 		{
 			if ($owner = $this->get_page_owner())
 			{
-				echo 'By topic: '.( $owner == GUEST
-					? '<em>'.$this->get_translation('Guest').'</em>'
-					: '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>'
-				).', ';
+				echo 'By topic: '.$this->user_link($owner, $lang = '', true, false).', ';
 			}
 
 			if ($this->page['created'] != SQL_NULLDATE)
@@ -141,7 +138,7 @@ echo "\n";
 		{
 			if ($owner = $this->get_page_owner())
 			{
-				echo $this->get_translation('Owner').': '.( $owner == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).' ';
+				echo $this->get_translation('Owner').': '.$this->user_link($owner, $lang = '', true, false).' ';
 			}
 			else
 			{
@@ -156,7 +153,7 @@ echo "\n";
 				echo '('.$this->get_translation('Created').' '.$this->get_time_formatted($this->page['created']).'), ';
 			}
 
-			echo $this->get_translation('Modified').' '.$this->get_time_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.( $this->page['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) .')';
+			echo $this->get_translation('Modified').' '.$this->get_time_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.$this->user_link($this->page['user_name'], $lang = '', true, false) .')';
 		}
 	}
 	echo "\n";

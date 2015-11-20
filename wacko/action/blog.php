@@ -105,7 +105,7 @@ if (!empty($blog_cluster))
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=latest');
 
 		$pages	= $this->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS  owner ".
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
@@ -245,7 +245,7 @@ if (!empty($blog_cluster))
 
 			echo '<article class="newsarticle">';
 			echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
-			echo '<div class="newsinfo"><span>'.$this->get_time_formatted($page['created']).' '.$this->get_translation('By').' '.( $page['owner'] == '' ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' )."</span></div>\n";
+			echo '<div class="newsinfo"><span>'.$this->get_time_formatted($page['created']).' '.$this->get_translation('By').' '.$this->user_link($page['owner'])."</span></div>\n";
 			echo '<div class="newscontent">'.$this->action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
 			echo '<div class="newsmeta">'.$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->get_translation('EditText'), 0)." | " : "")."  ".
 				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#commentsheader" title="'.$this->get_translation('NewsDiscuss').' '.$page['title'].'">'.(int)$page['comments']." ".$this->get_translation('Comments_all')." &raquo; "."</a></div>\n";

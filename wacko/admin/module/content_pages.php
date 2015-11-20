@@ -28,7 +28,7 @@ function admin_content_pages(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 
-	TODO: filter pages: lang, hits, last_commented, owner, user, published, drafts, with no title, with no description, with no keywords, by date modified, category, theme, acls, size ...
+	TODO: filter pages: page_lang, hits, last_commented, owner, user, published, drafts, with no title, with no description, with no keywords, by date modified, category, theme, acls, size ...
 
 <?php
 	if (isset($_POST['reset']))
@@ -55,7 +55,7 @@ function admin_content_pages(&$engine, &$module)
 				break;
 		}
 
-		$where = "WHERE l.lang $mod '".quote($engine->dblink, $_level)."'  ";
+		$where = "WHERE l.page_lang $mod '".quote($engine->dblink, $_level)."'  ";
 	}
 
 	// set time ordering
@@ -243,8 +243,8 @@ function admin_content_pages(&$engine, &$module)
 					'<td style="vertical-align:top;">'.$row['title'].'</td>'.
 					'<td style="vertical-align:top;">'.$engine->binary_multiples($row['page_size'], false, true, true).'</td>'.
 					'<td style="vertical-align:top; text-align:center;"><small>'.
-						'<a href="?mode='.$module['mode'].'&amp;user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
-						'<br />'.'<a href="?mode='.$module['mode'].'&amp;ip='.$row['ip'].'">'.$row['ip'].'</a>'.
+						'<a href="'.$engine->href().'&amp;user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
+						'<br />'.'<a href="'.$engine->href().'&amp;ip='.$row['ip'].'">'.$row['ip'].'</a>'.
 					'</small></td>'.
 				'</tr>';
 		}

@@ -75,7 +75,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 		$email			= trim($_POST['email']);
 		$password		= $_POST['password'];
 		$confpassword	= $_POST['confpassword'];
-		$lang			= (isset($_POST['lang']) ? $_POST['lang'] : $this->config['language']);
+		$lang			= (isset($_POST['user_lang']) ? $_POST['user_lang'] : $this->config['language']);
 		#$timezone		= trim($_POST['timezone']);
 		$complexity		= $this->password_complexity($user_name, $password);
 
@@ -222,6 +222,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"signup_time	= NOW(), ".
 						"user_name		= '".quote($this->dblink, $user_name)."', ".
 						#"real_name		= '".quote($this->dblink, $real_name)."', ".
+						"account_lang	= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
 						"email			= '".quote($this->dblink, $email)."', ".
 						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
 						"password		= '".quote($this->dblink, $password_hashed)."', ".
@@ -241,7 +242,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					"SET ".
 						"user_id		= '".(int)$_user_id['user_id']."', ".
 						"typografica	= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
-						"lang			= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
+						"user_lang		= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
 						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".
 						#"timezone		= '".quote($this->dblink, ($timezone ? $timezone : (float)$this->config['timezone']))."', ".
 						#"dst			= '".quote($this->dblink, ($dst ? $dst : (int)$this->config['dst']))."', ".
@@ -338,8 +339,8 @@ if (!isset($_GET['confirm']))
 
 		if ($this->config['multilanguage'])
 		{
-			echo '<p><label for="lang">'.$this->format_translation('RegistrationLang').':</label>';
-			echo '<select id="lang" name="lang">';
+			echo '<p><label for="user_lang">'.$this->format_translation('RegistrationLang').':</label>';
+			echo '<select id="user_lang" name="user_lang">';
 
 			$languages	= $this->get_translation('Languages');
 			$user_lang		= $this->user_agent_language();

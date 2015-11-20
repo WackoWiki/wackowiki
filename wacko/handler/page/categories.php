@@ -79,8 +79,8 @@ if ($this->is_owner() || $this->is_admin())
 								: $word['category_id'] )."', "
 							: ''
 						).
-						"lang = '".quote($this->dblink, $this->page['lang'])."', ".
-						"category = '".quote($this->dblink, $_POST['newname'])."'");
+						"category_lang	= '".quote($this->dblink, $this->page['page_lang'])."', ".
+						"category		= '".quote($this->dblink, $_POST['newname'])."'");
 
 				$this->set_message($this->get_translation('CategoriesAdded'));
 				$this->log(4, "Created a new category //'{$_POST['newname']}'//");
@@ -175,7 +175,7 @@ if ($this->is_owner() || $this->is_admin())
 	/////////////////////////////////////////////
 
 	// load categories for the page's particular language
-	$categories = $this->get_categories_list($this->page['lang'], 0);
+	$categories = $this->get_categories_list($this->page['page_lang'], 0);
 
 	// get currently selected category_ids
 	$_selected = $this->load_all(
@@ -257,7 +257,7 @@ if ($this->is_owner() || $this->is_admin())
 		else if (isset($_POST['ugroup']) && isset($_POST['change']))
 		{
 			if ($word = $this->load_single(
-				"SELECT category_id, parent_id, category, lang
+				"SELECT category_id, parent_id, category, category_lang
 				FROM {$this->config['table_prefix']}category
 				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
 				LIMIT 1"))
@@ -266,7 +266,7 @@ if ($this->is_owner() || $this->is_admin())
 					"SELECT category_id, category ".
 					"FROM {$this->config['table_prefix']}category ".
 					"WHERE parent_id = 0 ".
-						"AND lang = '".quote($this->dblink, $word['lang'])."' ".
+						"AND category_lang = '".quote($this->dblink, $word['category_lang'])."' ".
 						"AND category_id <> '".$word['category_id']."' ".
 					"ORDER BY category ASC");
 
