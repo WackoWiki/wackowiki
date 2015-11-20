@@ -38,7 +38,7 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 					"name CHAR(40) NOT NULL DEFAULT '',".
 					"method VARCHAR(20) NOT NULL DEFAULT '',".
 					"query VARCHAR(100) NOT NULL DEFAULT '',".
-					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"cache_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"cache_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (cache_id),".
 					"INDEX (name),".
@@ -48,11 +48,11 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 $table_category = "CREATE TABLE {$pref}category (".
 					"category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT 0,".
-					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"category_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"category VARCHAR(100) NOT NULL DEFAULT '',".
 					"description VARCHAR(255) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (category_id),".
-					"UNIQUE KEY idx_category (lang, category)".
+					"UNIQUE KEY idx_category (category_lang, category)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_category_page = "CREATE TABLE {$pref}category_page (".
@@ -109,11 +109,11 @@ $table_menu = "CREATE TABLE {$pref}menu (".
 					"menu_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"menu_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"menu_title VARCHAR(100) NOT NULL DEFAULT '',".
 					"menu_position SMALLINT(2) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (menu_id),".
-					"UNIQUE KEY idx_user_id (user_id, page_id, lang)".
+					"UNIQUE KEY idx_user_id (user_id, page_id, menu_lang)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_page = "CREATE TABLE {$pref}page (".
@@ -144,7 +144,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"comments INT(4) UNSIGNED NOT NULL DEFAULT '0',".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"theme VARCHAR(20) DEFAULT NULL,".
-					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"page_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
@@ -234,7 +234,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"ip VARCHAR(15) NOT NULL DEFAULT '',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"page_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',".
@@ -253,7 +253,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 $table_tag = "CREATE TABLE {$pref}tag (".
 					"tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"tag_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
 					"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
@@ -275,7 +275,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_name VARCHAR(250) NOT NULL DEFAULT '',".
-					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"upload_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"file_description VARCHAR(250) NOT NULL DEFAULT '',".
 					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -295,6 +295,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
+					"account_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"password VARCHAR(255) NOT NULL DEFAULT '',".
 					"salt VARCHAR(40) NOT NULL DEFAULT '',".
 					"email VARCHAR(100) NOT NULL DEFAULT '',".
@@ -326,7 +327,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"theme VARCHAR(20) DEFAULT NULL DEFAULT '',".
-					"lang VARCHAR(2) DEFAULT NULL DEFAULT '',".
+					"user_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"list_count INT(10) UNSIGNED NOT NULL DEFAULT '50',".
 					"dont_redirect TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"send_watchmail TINYINT(1) UNSIGNED DEFAULT NULL,".

@@ -446,39 +446,41 @@ $insert_records[]	= array($lang['InstallingReviewerGroup'],	$insert_reviewer_gro
 //		$value[2] - SQL query
 //		$value[3] - error message
 
-// 5.1.0
+// 5.1.0 ############
 // cache
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'cache', $alter_cache_r5_1_0, $lang['ErrorAlteringTable']);
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'cache', $alter_cache_r5_1_1, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_1_0,		$lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_1_1,		$lang['ErrorAlteringTable']);
 
 // link
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'link', $alter_link_r5_1_0, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'link',			$alter_link_r5_1_0,			$lang['ErrorAlteringTable']);
 
 // page
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'page', $alter_page_r5_1_0, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'page',			$alter_page_r5_1_0,			$lang['ErrorAlteringTable']);
 
-$upgrade_5_1_0[]	= array($lang['UpdateTable'], 'page', $update_page_r5_1_0, $lang['ErrorUpdatingTable']);
+$upgrade_5_1_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_1_0,		$lang['ErrorUpdatingTable']);
 
 // revision
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'revision', $alter_revision_r5_1_0, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_1_0,		$lang['ErrorAlteringTable']);
 
 // upload
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_0, $lang['ErrorAlteringTable']);
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_1, $lang['ErrorAlteringTable']);
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_2, $lang['ErrorAlteringTable']);
-$upgrade_5_1_0[]	= array($lang['AlterTable'], 'upload', $alter_upload_r5_1_3, $lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_0,		$lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_1,		$lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_2,		$lang['ErrorAlteringTable']);
+$upgrade_5_1_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_3,		$lang['ErrorAlteringTable']);
 
-// 5.4.0
+// 5.4.0 ############
 
 // auth_token
 $upgrade_5_4_0[]	= array($lang['CreatingTable'],	'auth_token',	$table_auth_token_r5_4_0,	$lang['ErrorCreatingTable']);
 
 // cache
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_0,		$lang['ErrorAlteringTable']);
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_1,		$lang['ErrorAlteringTable']);
 
 // category
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_0,		$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_1,		$lang['ErrorAlteringTable']);
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_2,		$lang['ErrorAlteringTable']);
 
 // config
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
@@ -488,12 +490,14 @@ $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_3,
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_4,		$lang['ErrorUpdatingTable']);
 
 // file link
-$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'file_link',	$table_file_link_r5_4_0,		$lang['ErrorCreatingTable']);
+$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'file_link',	$table_file_link_r5_4_0,	$lang['ErrorCreatingTable']);
 
 //menu
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_0,			$lang['ErrorAlteringTable']);
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_1,			$lang['ErrorAlteringTable']);
 
 // page
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_0,			$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_1,		$lang['ErrorUpdatingTable']);
 
@@ -502,18 +506,27 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_
 
 
 // revision
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_0,		$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']);
+
+// tag
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'tag',			$alter_tag_r5_4_0,			$lang['ErrorAlteringTable']);
+
+// upload
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_4_0,		$lang['ErrorAlteringTable']);
 
 // user
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_2,			$lang['ErrorAlteringTable']);
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_3,			$lang['ErrorAlteringTable']);
 
 // user setting
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_1,	$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_2,	$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_3,	$lang['ErrorAlteringTable']);
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_4,	$lang['ErrorAlteringTable']);
 
 // usergroup
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
