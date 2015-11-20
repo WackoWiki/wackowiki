@@ -32,10 +32,12 @@ $table_auth_token_r5_4_0 = "CREATE TABLE {$pref}auth_token (".
 $alter_cache_r5_1_0 = "ALTER TABLE {$pref}cache DROP INDEX timestamp, ADD INDEX idx_cache_time (cache_time)";
 $alter_cache_r5_1_1 = "ALTER TABLE {$pref}cache ADD cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (cache_id)";
 $alter_cache_r5_4_0 = "ALTER TABLE {$pref}cache CHANGE name name CHAR(40) NOT NULL  DEFAULT ''";
+$alter_cache_r5_4_1 = "ALTER TABLE {$pref}cache CHANGE lang cache_lang VARCHAR(2) NOT NULL";
 
 // CATEGORY
 $alter_category_r5_4_0 = "ALTER TABLE {$pref}category CHANGE parent parent_id INT(10) UNSIGNED NOT NULL";
 $alter_category_r5_4_1 = "ALTER TABLE {$pref}category ADD description VARCHAR(255) NOT NULL DEFAULT '' AFTER category";
+$alter_category_r5_4_2 = "ALTER TABLE {$pref}category CHANGE lang category_lang VARCHAR(2) NOT NULL";
 
 // CONFIG
 $update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|wordprocessor' WHERE config_name = 'standard_handlers'";
@@ -60,11 +62,12 @@ $alter_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx
 // LOG
 
 // MENU
-$alter_menu_r5_4_0 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE idx_user_id (user_id, page_id, lang) USING BTREE";
+$alter_menu_r5_4_0 = "ALTER TABLE {$pref}menu CHANGE lang menu_lang VARCHAR(2) NOT NULL";
+$alter_menu_r5_4_1 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE idx_user_id (user_id, page_id, menu_lang) USING BTREE";
 
 // PAGE
 $alter_page_r5_1_0 = "ALTER TABLE {$pref}page ADD INDEX idx_deleted (deleted)";
-
+$alter_page_r5_4_0 = "ALTER TABLE {$pref}page CHANGE lang page_lang VARCHAR(2) NOT NULL";
 
 $update_page_r5_1_0 = "UPDATE {$pref}page AS page SET noindex = '0' WHERE page.noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
@@ -79,27 +82,32 @@ $alter_referrer_r5_4_0 = "ALTER TABLE {$pref}referrer ADD referrer_id INT(10) UN
 
 // REVISION
 $alter_revision_r5_1_0 = "ALTER TABLE {$pref}revision ADD INDEX idx_deleted (deleted)";
+$alter_revision_r5_4_0 = "ALTER TABLE {$pref}revision CHANGE lang page_lang VARCHAR(2) NOT NULL";
 
-$update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, (SELECT page_id, lang FROM {$pref}page) AS p SET r.lang = p.lang WHERE r.page_id = p.page_id";
+$update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, (SELECT page_id, page_lang FROM {$pref}page) AS p SET r.page_lang = p.page_lang WHERE r.page_id = p.page_id";
 
 // TAG
+$alter_tag_r5_4_0 = "ALTER TABLE {$pref}tag CHANGE lang tag_lang VARCHAR(2) NOT NULL";
 
 // UPLOAD
 $alter_upload_r5_1_0 = "ALTER TABLE {$pref}upload ADD INDEX idx_deleted (deleted)";
 $alter_upload_r5_1_1 = "ALTER TABLE {$pref}upload DROP INDEX page_id, ADD INDEX idx_page_id (page_id, file_name)";
 $alter_upload_r5_1_2 = "ALTER TABLE {$pref}upload DROP INDEX page_id_2, ADD INDEX idx_page_id_2 (page_id, uploaded_dt)";
 $alter_upload_r5_1_3 = "ALTER TABLE {$pref}upload CHANGE description file_description VARCHAR(250) NOT NULL DEFAULT ''";
+$alter_upload_r5_4_0 = "ALTER TABLE {$pref}upload CHANGE lang upload_lang VARCHAR(2) NOT NULL";
 
 // USER
 $alter_user_r5_4_0 = "ALTER TABLE {$pref}user CHANGE session_time last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
 $alter_user_r5_4_1 = "ALTER TABLE {$pref}user ADD user_form_salt VARCHAR(40) NOT NULL DEFAULT '' AFTER change_password";
 $alter_user_r5_4_2 = "ALTER TABLE {$pref}user CHANGE password password VARCHAR(255) NOT NULL";
+$alter_user_r5_4_3 = "ALTER TABLE {$pref}user ADD account_lang VARCHAR(2) NOT NULL AFTER real_name";
 
 // USER SETTING
 $alter_user_setting_r5_4_0 = "ALTER TABLE {$pref}user_setting CHANGE session_expiration session_length TINYINT(3) UNSIGNED NULL DEFAULT NULL";
 $alter_user_setting_r5_4_1 = "ALTER TABLE {$pref}user_setting ADD sorting_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER dst";
 $alter_user_setting_r5_4_2 = "ALTER TABLE {$pref}user_setting DROP revisions_count";
 $alter_user_setting_r5_4_3 = "ALTER TABLE {$pref}user_setting CHANGE changes_count list_count INT(10) UNSIGNED NOT NULL DEFAULT '50'";
+$alter_user_setting_r5_4_4 = "ALTER TABLE {$pref}user_setting CHANGE lang user_lang VARCHAR(2) NOT NULL DEFAULT ''";
 
 // USERGROUP
 $alter_usergroup_r5_4_0 = "ALTER TABLE {$pref}usergroup CHANGE moderator moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0'";
