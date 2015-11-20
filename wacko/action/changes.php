@@ -121,9 +121,9 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 			}
 
 			// do unicode entities
-			if ($this->page['lang'] != $page['lang'])
+			if ($this->page['page_lang'] != $page['page_lang'])
 			{
-				$page_lang = $page['lang'];
+				$page_lang = $page['page_lang'];
 			}
 			else
 			{
@@ -164,9 +164,7 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
 			).
 			" . . . . . . . . . . . . . . . . <small>".
-			($page['user_name']
-				? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'">'.$page['user_name'].'</a>'
-				: $this->get_translation('Guest')).
+			$this->user_link($page['user_name']).
 			$review.' '.
 			$edit_note.
 			"</small></li>\n";

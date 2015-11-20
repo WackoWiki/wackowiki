@@ -23,7 +23,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 	echo '<li>'.$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 
 	// default menu
-	if ($menu = $this->get_default_menu($user['lang']))
+	if ($menu = $this->get_default_menu($user['user_lang']))
 	{
 		foreach ($menu as $menu_item)
 		{

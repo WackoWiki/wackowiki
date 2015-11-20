@@ -165,7 +165,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 							} else {
 								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 								if ($owner = $this->get_page_owner()) {
-									print($this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>");
+									print($this->get_translation('Owner').": ".$this->user_link($owner, $lang = '', true, false));
 								} else if (!$this->page['comment_on_id']) {
 									print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
 								}

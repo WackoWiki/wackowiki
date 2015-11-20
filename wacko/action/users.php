@@ -239,7 +239,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		if ($user['total_pages'])
 		{
 			$pages = $this->load_all(
-				"SELECT page_id, tag, title, created, lang ".
+				"SELECT page_id, tag, title, created, page_lang ".
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE owner_id = '".$user['user_id']."' ".
 					"AND comment_on_id = '0' ".
@@ -260,9 +260,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id'], $this->get_user_name()) === true)
 				{
 					// check current page lang for different charset to do_unicode_entities() against
-					if ($this->page['lang'] != $page['lang'])
+					if ($this->page['page_lang'] != $page['page_lang'])
 					{
-						$_lang = $page['lang'];
+						$_lang = $page['page_lang'];
 					}
 					else
 					{
@@ -302,7 +302,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			if ($user['total_comments'])
 			{
 				$comments = $this->load_all(
-					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.lang ".
+					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang ".
 					"FROM {$this->config['table_prefix']}page c ".
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
 					"WHERE c.owner_id = '".$user['user_id']."' ".
@@ -326,9 +326,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					if (!$this->config['hide_locked'] || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()) === true)
 					{
 						// check current page lang for different charset to do_unicode_entities() against
-						if ($this->page['lang'] != $comment['lang'])
+						if ($this->page['page_lang'] != $comment['page_lang'])
 						{
-							$_lang = $comment['lang'];
+							$_lang = $comment['page_lang'];
 						}
 						else
 						{
@@ -404,9 +404,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 							||	!$upload['page_id'])
 						{
 							// check current page lang for different charset to do_unicode_entities() against
-							if ($this->page['lang'] != $upload['lang'])
+							if ($this->page['page_lang'] != $upload['upload_lang'])
 							{
-								$_lang = $upload['lang'];
+								$_lang = $upload['upload_lang'];
 							}
 							else
 							{
@@ -597,7 +597,7 @@ else
 		{
 			echo '<tr class="lined">';
 
-			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$user['user_name'].'</a></td>'.
+			echo	'<td style="padding-left:5px;">'.$this->user_link($user['user_name']).'</a></td>'.
 					'<td style="text-align:center;">'.$user['total_pages'].'</td>'.
 					'<td style="text-align:center;">'.$user['total_comments'].'</td>'.
 					'<td style="text-align:center;">'.$user['total_revisions'].'</td>'.

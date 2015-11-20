@@ -8,7 +8,7 @@
 header("Content-Type: text/html; charset=".$this->get_charset());
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $this->page['lang'] ?>">
+<html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
 	<title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');?></title>
 <?php
@@ -20,7 +20,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 ?>
 	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
-	<meta name="language" content="<?php echo $this->page['lang'] ?>" />
+	<meta name="language" content="<?php echo $this->page['page_lang'] ?>" />
 	<meta charset="<?php echo $this->get_charset(); ?>" />
 
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
@@ -128,7 +128,7 @@ if ($doubleclick == true)
 						#echo $formatedBMs;
 
 						// get default bookmarks - if not already displayed at global menu div
-						// $formated_default_bookmarks = $this->format($this->get_default_bookmarks($user['lang']), 'wiki');
+						// $formated_default_bookmarks = $this->format($this->get_default_bookmarks($user['user_lang']), 'wiki');
 						// $formated_default_bookmarks = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_default_bookmarks);
 						// echo $formated_default_bookmarks;
 
@@ -237,7 +237,7 @@ if ($doubleclick == true)
 					<?php
 					// display global bookmarks as a user menu, inline top
 					// use default bookmarks (owner is system-user)
-					#$formated_default_menu = $this->format($this->get_default_menu($user['lang']), 'wiki');
+					#$formated_default_menu = $this->format($this->get_default_menu($user['user_lang']), 'wiki');
 					#$formated_default_menu = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_default_menu);
 					#echo $formated_default_menu;
 					#echo "</li>\n";
@@ -245,7 +245,7 @@ if ($doubleclick == true)
 					#$this->context[++$this->current_context] = '/';
 					#$this->stop_link_tracking();
 
-					foreach ($this->get_default_menu($user['lang']) as $_menu)
+					foreach ($this->get_default_menu($user['user_lang']) as $_menu)
 					{
 						$formatted_menu = $this->format($this->format($_menu[1]), 'post_wacko');
 

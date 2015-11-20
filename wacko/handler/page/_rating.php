@@ -9,12 +9,12 @@ if ($this->config['footer_rating'] != 0 && ($this->config['footer_rating'] != 2 
 {
 	// registering local functions
 	// determine if user has rated a given page
-	function handler_show_page_is_rated(&$engine, $id)
+	function handler_show_page_is_rated(&$engine, $page_id)
 	{
 		$cookie	= $engine->get_cookie('rating');
 		$ids	= explode(';', $cookie);
 
-		if ($id = array_search($id, $ids))
+		if ($page_id = array_search($page_id, $ids))
 		{
 			return true;
 		}

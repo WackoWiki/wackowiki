@@ -32,7 +32,7 @@ if (!function_exists('load_recent_comments'))
 			$pagination = $wacko->pagination($count, $limit);
 
 			$comments = $wacko->load_all(
-				"SELECT b.tag as comment_on_tag, b.title as page_title, b.lang AS page_lang, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
+				"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
 				"FROM ".$wacko->config['table_prefix']."page a ".
 					"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 					"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
@@ -148,7 +148,7 @@ if ($this->user_allowed_comments())
 
 				// do unicode entities
 				// page lang
-				if ($this->page['lang'] != $page['page_lang'])
+				if ($this->page['page_lang'] != $page['page_lang'])
 				{
 					$page_lang = $page['page_lang'];
 				}
@@ -165,9 +165,7 @@ if ($this->user_allowed_comments())
 					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'], 0, 1, $page_lang, 0)
 				).
 				" . . . . . . . . . . . . . . . . <small>"./*$this->get_translation('LatestCommentBy').*/" ".
-				($page['comment_user']
-					? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['comment_user']).'">'.$page['comment_user'].'</a>'
-					: $this->get_translation('Guest')).
+				$this->user_link($page['comment_user']).
 				"</small></li>\n";
 			}
 		}

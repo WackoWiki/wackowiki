@@ -39,7 +39,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	}
 
 	// make query
-	$sql = "SELECT p.page_id, p.tag, p.title, p.description, p.lang ".
+	$sql = "SELECT p.page_id, p.tag, p.title, p.description, p.page_lang ".
 		"FROM {$this->config['table_prefix']}page AS p, ".
 			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
@@ -99,7 +99,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			// load latest comment
 			$comment = $this->load_single(
-				"SELECT a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.lang, b.tag as comment_on, b.title as topic_title, b.lang as topic_lang, u.user_name ".
+				"SELECT a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name ".
 				"FROM {$this->config['table_prefix']}page a ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
@@ -111,10 +111,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			$forum['description'] = htmlspecialchars($forum['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
-			if ($this->page['lang'] != $forum['lang'])
+			if ($this->page['page_lang'] != $forum['page_lang'])
 			{
-				$_lang = $forum['lang'];
-				$forum['description'] = $this->do_unicode_entities($forum['description'], $forum['lang']);
+				$_lang = $forum['page_lang'];
+				$forum['description'] = $this->do_unicode_entities($forum['description'], $forum['page_lang']);
 			}
 			else
 			{
@@ -142,28 +142,24 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 				if ($comment['comment_on_id'] == true)
 				{
-					if ($this->page['lang'] != $comment['topic_lang'])
+					if ($this->page['page_lang'] != $comment['topic_lang'])
 					{
 						$comment['topic_title'] = $this->do_unicode_entities($comment['topic_title'], $comment['topic_lang']);
 					}
 
 					echo '<small><a href="'.$this->href('', $comment['comment_on'], 'p=last').'#'.$comment['tag'].'">'.$comment['topic_title'].'</a><br />'.
-						( $comment['user_id'] == 0
-							? '<em>'.$this->get_translation('Guest').'</em>'
-							: $comment['user_name'] ).
+						$this->user_link($comment['user_name']).
 						' ('.$this->get_time_formatted($comment['created']).')</small>';
 				}
 				else
 				{
-					if ($this->page['lang'] != $comment['lang'])
+					if ($this->page['page_lang'] != $comment['page_lang'])
 					{
-						$comment['title']= $this->do_unicode_entities($comment['title'], $comment['lang']);
+						$comment['title']= $this->do_unicode_entities($comment['title'], $comment['page_lang']);
 					}
 
 					echo '<small><a href="'.$this->href('', $comment['tag']).'">'.$comment['title'].'</a><br />'.
-						( $comment['user_id'] == 0
-							? '<em>'.$this->get_translation('Guest').'</em>'
-							: $comment['user_name'] ).
+						$this->user_link($comment['user_name']).
 						' ('.$this->get_time_formatted($comment['created']).')</small>';
 				}
 			}

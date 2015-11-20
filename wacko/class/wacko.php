@@ -27,7 +27,7 @@ class Wacko
 	var $page_id_cache			= array();
 	var $context				= array();
 	var $current_context		= 0;
-	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description';
+	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	var $first_inclusion		= array();	// for backlinks
 	var $format_safe			= true;		//for htmlspecialchars() in pre_link
 	var $disable_cache			= false;
@@ -270,7 +270,7 @@ class Wacko
 		if (!$file)
 		{
 			$file = $this->load_single(
-				"SELECT upload_id, page_id, user_id, file_name, file_size, lang, file_description, picture_w, picture_h, file_ext ".
+				"SELECT upload_id, page_id, user_id, file_name, file_size, upload_lang, file_description, picture_w, picture_h, file_ext ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE page_id = '".(int)$page_id."' ".
 					"AND file_name = '".quote($this->dblink, $file_name)."' ".
@@ -842,9 +842,9 @@ class Wacko
 			{
 				$_lang = $this->language['code'];
 
-				if (isset($page['lang']))
+				if (isset($page['page_lang']))
 				{
-					$lang = $page['lang'];
+					$lang = $page['page_lang'];
 				}
 				else
 				{
@@ -1025,13 +1025,13 @@ class Wacko
 		// load page
 		if ($metadata_only)
 		{
-			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
 		}
 		else
 		{
 			$what_p = 'p.*, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.lang, p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, u.user_name, o.user_name AS owner_name';
+			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, u.user_name, o.user_name AS owner_name';
 		}
 
 		if (!$page)
@@ -1234,9 +1234,9 @@ class Wacko
 		$user	= $this->get_user();
 
 		// get lang
-		if(isset($user['lang']))
+		if(isset($user['user_lang']))
 		{
-			$lang = $user['lang'];
+			$lang = $user['user_lang'];
 		}
 		else if (!empty($this->config['multilanguage']))
 		{
@@ -1266,7 +1266,7 @@ class Wacko
 				"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
 			"WHERE (b.user_id IN ( '".(int) $this->get_user_id('System')."' ) ".
 				($lang
-					? "AND b.lang = '".quote($this->dblink, $lang)."' "
+					? "AND b.menu_lang = '".quote($this->dblink, $lang)."' "
 					: "").
 					") ".
 				($user
@@ -1362,9 +1362,9 @@ class Wacko
 			$this->tag = $this->page['tag'];
 		}
 
-		if ($page['lang'])
+		if ($page['page_lang'])
 		{
-			$this->page_lang = $page['lang'];
+			$this->page_lang = $page['page_lang'];
 		}
 		else if (((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1)) && isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
 		{
@@ -1495,7 +1495,7 @@ class Wacko
 		$pagination = $this->pagination($count, $limit);
 
 		if ($pages = $this->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, u.user_name ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, u.user_name ".
 		"FROM ".$this->config['table_prefix']."page p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
@@ -1597,7 +1597,7 @@ class Wacko
 
 	function load_deleted($limit = 1000, $cache = true)
 	{
-		$meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.keywords, p.description';
+		$meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.page_lang, p.title, p.keywords, p.description';
 
 		return $this->load_all(
 			"SELECT {$meta} ".
@@ -1959,7 +1959,7 @@ class Wacko
 								"reviewed_time	= NOW(), ".
 								"reviewer_id	= '".(int)$reviewer_id."', "
 							:	"").
-						"lang			= '".quote($this->dblink, $lang)."', ".
+						"page_lang		= '".quote($this->dblink, $lang)."', ".
 						"title			= '".quote($this->dblink, $title)."'");
 
 				// IMPORTANT! lookup newly created page_id
@@ -2025,7 +2025,7 @@ class Wacko
 									$moderator_id = $this->get_user_id($moderator);
 
 									$_user = $this->load_single(
-										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
+										"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 										"WHERE u.user_id = '".$moderator_id."' ".
@@ -2094,7 +2094,7 @@ class Wacko
 								if ($this->has_access('read', $comment_on_id, $watcher['user_name']))
 								{
 									$_user = $this->load_single(
-										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
+										"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 										"WHERE u.user_id = '".$watcher['user_id']."' ".
@@ -2102,7 +2102,7 @@ class Wacko
 
 									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 									{
-										$lang = $_user['lang'];
+										$lang = $_user['user_lang'];
 										$this->load_translation($lang);
 										$this->set_translation ($lang);
 										$this->set_language ($lang);
@@ -2212,7 +2212,7 @@ class Wacko
 								if ($this->has_access('read', $page_id, $watcher['user_name']))
 								{
 									$_user = $this->load_single(
-										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
+										"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 										"WHERE u.user_id = '".$watcher['user_id']."' ".
@@ -2220,7 +2220,7 @@ class Wacko
 
 									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 									{
-										$lang = $_user['lang'];
+										$lang = $_user['user_lang'];
 										$this->load_translation($lang);
 										$this->set_translation ($lang);
 										$this->set_language ($lang);
@@ -2331,7 +2331,7 @@ class Wacko
 				"latest			= '0', ".
 				"handler		= '{$old_page['handler']}', ".
 				"comment_on_id	= '{$old_page['comment_on_id']}', ".
-				"lang			= '{$old_page['lang']}', ".
+				"page_lang		= '{$old_page['page_lang']}', ".
 				"supertag		= '{$old_page['supertag']}', ".
 				"title			= '{$old_page['title']}', ".
 				"keywords		= '{$old_page['keywords']}', ".
@@ -2499,7 +2499,7 @@ class Wacko
 			$message	= $this->config['system_message'];
 
 			// check current page lang for different charset to do_unicode_entities()
-			if (isset($this->page['lang']) && $this->page['lang'] != $this->config['language'])
+			if (isset($this->page['page_lang']) && $this->page['page_lang'] != $this->config['language'])
 			{
 				$message	= $this->do_unicode_entities($message, $this->config['language']);
 			}
@@ -3250,9 +3250,9 @@ class Wacko
 			{
 				$_lang		= $this->language['code'];
 
-				if ($this_page['lang'])
+				if ($this_page['page_lang'])
 				{
-					$lang	= $this_page['lang'];
+					$lang	= $this_page['page_lang'];
 				}
 				else
 				{
@@ -3514,6 +3514,44 @@ class Wacko
 		}
 
 		return $text;
+	}
+
+	// TODO: add link off option, disable icon option
+	// atm. we have no means to do $this->do_unicode_entities($user_name, $user_lang)
+	//		-> the 'lang' in user_setting refer only to language setting for theme
+	//		-> requires 'lang' field in user table to distinguish the char set
+	function user_link($user_name, $account_lang = '', $linking = true, $add_icon = true)
+	{
+		if (!$user_name)
+		{
+			$user_name	= $this->get_translation('Guest');
+			$linking	= false;
+		}
+
+		if ($this->page['page_lang'] != $account_lang)
+		{
+			$user_name = $this->do_unicode_entities($user_name, $account_lang);
+		}
+
+		if ($add_icon)
+		{
+			$icon = '<span class="icon"></span>';
+		}
+		else
+		{
+			$icon = '';
+		}
+
+		#$this->is_admin() ? ' title="'.$comment['ip'].'"' : '' (a | span)
+		# $this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'')
+		if ($linking)
+		{
+			return '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'" class="user-link">'.$icon.$user_name.'</a>';
+		}
+		else
+		{
+			return '<span class="user-link">'.$icon.$user_name.'</span>';
+		}
 	}
 
 	function add_spaces($text)
@@ -5418,9 +5456,9 @@ class Wacko
 		{
 			$user = $this->get_user();
 
-			if(isset($user['lang']))
+			if(isset($user['user_lang']))
 			{
-				$lang = $user['lang'];
+				$lang = $user['user_lang'];
 			}
 			else if (!empty($this->config['multilanguage']))
 			{
@@ -5457,12 +5495,12 @@ class Wacko
 		if ($user_id)
 		{
 			$_menu = $this->load_all(
-				"SELECT p.page_id, p.tag, p.title, m.menu_title, m.lang ".
+				"SELECT p.page_id, p.tag, p.title, m.menu_title, m.menu_lang ".
 				"FROM ".$this->config['table_prefix']."menu m ".
 					"LEFT JOIN ".$this->config['table_prefix']."page p ON (m.page_id = p.page_id) ".
 				"WHERE m.user_id = '".(int)$user_id."' ".
 					($lang
-						? "AND m.lang = '".quote($this->dblink, $lang)."' "
+						? "AND m.menu_lang = '".quote($this->dblink, $lang)."' "
 						: "").
 				"ORDER BY m.menu_position", true);
 
@@ -5480,8 +5518,8 @@ class Wacko
 								: " ".$menu_item['tag']
 								)
 						).
-						(!empty($menu_item['lang'])
-							? " @@".$menu_item['lang']
+						(!empty($menu_item['menu_lang'])
+							? " @@".$menu_item['menu_lang']
 							: "").
 					"))");
 				}
@@ -5501,11 +5539,11 @@ class Wacko
 			$user_menu	= $this->get_user_menu($user['user_id']);
 			$menu		= ( $user_menu
 				? $user_menu
-				: $this->get_default_menu($user['lang']) );
+				: $this->get_default_menu($user['user_lang']) );
 
 			if ($set == MENU_DEFAULT)
 			{
-				$menu = $this->get_default_menu($user['lang']);
+				$menu = $this->get_default_menu($user['user_lang']);
 			}
 
 			if ($menu)
@@ -5533,7 +5571,7 @@ class Wacko
 			{
 				$menu[] = array(
 					$this->page['page_id'],
-					$this->format('(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))', 'wacko')
+					$this->format('(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['user_lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))', 'wacko')
 					);
 
 				$_menu_position = $this->load_all(
@@ -5547,7 +5585,7 @@ class Wacko
 					"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 					"user_id			= '".$user['user_id']."', ".
 					"page_id			= '".$this->page['page_id']."', ".
-					"lang				= '".quote($this->dblink, ($user['lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
+					"menu_lang				= '".quote($this->dblink, ($user['user_lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
 					"menu_position		= '".(int)($_menu_item_count + 1)."'");
 			}
 
@@ -6029,15 +6067,15 @@ class Wacko
 
 		// user settings
 		##if(!$this->userlang = $lang)  // TEST: ??? - openspace handle
-		if(isset($user['lang']))
+		if(isset($user['user_lang']))
 		{
-			if($user['lang'] == '')
+			if($user['user_lang'] == '')
 			{
 				$this->user_lang = $this->config['language'];
 			}
 			else
 			{
-				$this->user_lang = $user['lang'];
+				$this->user_lang = $user['user_lang'];
 			}
 		}
 		else
@@ -6505,7 +6543,7 @@ class Wacko
 
 		return
 			// save
-			$this->save_page($new_tag, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = $page['lang'], $mute = false, $user_name = false);
+			$this->save_page($new_tag, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = $page['page_lang'], $mute = false, $user_name = false);
 	}
 
 	function rename_page($tag, $new_tag, $new_supertag = '')
@@ -7315,7 +7353,7 @@ class Wacko
 		if ($_categories = $this->load_all(
 		"SELECT category_id, parent_id, category ".
 		"FROM {$this->config['table_prefix']}category ".
-		"WHERE lang = '".quote($this->dblink, $lang)."' ".
+		"WHERE category_lang = '".quote($this->dblink, $lang)."' ".
 		"ORDER BY parent_id ASC, category ASC", $cache))
 		{
 			// process pages count (if have to)
@@ -7328,7 +7366,7 @@ class Wacko
 					( $root != ''
 						? "INNER JOIN ".$this->config['table_prefix']."page p ON (kp.page_id = p.page_id) "
 						: '' ).
-				"WHERE k.lang = '".quote($this->dblink, $lang)."' AND kp.category_id = k.category_id ".
+				"WHERE k.category_lang = '".quote($this->dblink, $lang)."' AND kp.category_id = k.category_id ".
 					( $root != ''
 						? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
 						: '' ).

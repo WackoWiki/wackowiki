@@ -42,7 +42,7 @@ if ($this->is_owner($page_id))
 		{
 			$user_name = $watcher['user_name'];
 			#echo $this->link('user:'.$user_name, '', $user_name)."<br />";
-			echo '<li><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'">'.$user_name."</a></li>\n";
+			echo '<li>'.$this->user_link($user_name, $lang = '', true, false)."</li>\n";
 		}
 
 		echo "</ol>\n";

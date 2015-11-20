@@ -247,9 +247,9 @@ if ($can_view)
 
 			$file_description	= $this->format($file['file_description'], 'typografica' );
 
-			if ($this->page['lang'] != $file['lang'])
+			if ($this->page['page_lang'] != $file['upload_lang'])
 			{
-				$file_description	= $this->do_unicode_entities($file_description, $file['lang']);
+				$file_description	= $this->do_unicode_entities($file_description, $file['upload_lang']);
 			}
 
 			// check for upload location: global / per page

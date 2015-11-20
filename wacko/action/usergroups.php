@@ -55,7 +55,7 @@ if($user = $this->get_user())
 
 				foreach ($arr as $k => $user_name)
 				{
-					$allowed_groups[] = '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'">'.$user_name.'</a>';
+					$allowed_groups[] = $this->user_link($user_name, $lang = '', true, false);
 				}
 
 				sort($allowed_groups);

@@ -127,7 +127,7 @@ else if ($user = $this->get_user())
 					"validate_ip		= '".(int)$_POST['validate_ip']."', ".
 					"noid_pubs			= '".(int)$_POST['noid_pubs']."', ".
 					"session_length		= '".(int)$_POST['session_length']."' "
-				:	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
+				:	"user_lang			= '".quote($this->dblink, $_POST['user_lang'])."', ".
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
 					"timezone			= '".(float)$_POST['timezone']."', ".
 					"dst				= '".(int)$_POST['dst']."', ".
@@ -185,7 +185,7 @@ else if ($user = $this->get_user())
 
 		$user		= $this->get_user();
 
-		$message	.= $this->get_translation('UserSettingsStored', (isset($_POST['lang']) ? $_POST['lang'] : ''));
+		$message	.= $this->get_translation('UserSettingsStored', (isset($_POST['user_lang']) ? $_POST['user_lang'] : ''));
 		// forward
 		$this->set_message($message);
 		$this->redirect(($_POST['action'] == 'update_extended' ? $this->href('', '', 'extended') : $this->href()));
@@ -404,7 +404,7 @@ else if ($user = $this->get_user())
 			<?php echo $this->get_translation('UserName');?>
 		</th>
 		<td>
-			<strong><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'">'.$user['user_name'].'</a>';?></strong>
+			<strong><?php echo $this->user_link($user['user_name'], $lang = '', true, false);?></strong>
 		</td>
 	</tr>
 	<tr class="lined">
@@ -447,9 +447,10 @@ else if ($user = $this->get_user())
 	</tr>
 	<tr class="lined">
 	<th class="form_left" scope="row">
-		<label for="lang"><?php echo $this->get_translation('YourLanguage');?></label>
+		<label for="user_lang"><?php echo $this->get_translation('YourLanguage');?></label>
 	</th>
-	<td class="form_right"><select id="lang" name="lang">
+	<td class="form_right">
+		<select id="user_lang" name="user_lang">
 <?php
 
 	$languages = $this->get_translation('Languages');
@@ -466,9 +467,9 @@ else if ($user = $this->get_user())
 	foreach ($langs as $lang)
 	{
 		echo '<option value="'.$lang.'" '.
-			($user['lang'] == $lang
+			($user['user_lang'] == $lang
 				? ' selected="selected" '
-				: (!isset($user['lang']) && $this->config['language'] == $lang
+				: (!isset($user['user_lang']) && $this->config['language'] == $lang
 					? 'selected="selected"'
 					: '')
 			).'>'.$languages[$lang].' ('.$lang.")</option>\n";
@@ -600,7 +601,7 @@ else if ($user = $this->get_user())
 					'<td class="form_right" title="'.$this->get_translation('UploadQuotaTip').'"><div class="meter"><span style="width: 25%">'.$this->binary_multiples($this->upload_quota($user['user_id']), false, true, true).' ('.$percentage.")</span></div></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('UsersPages')."</th>".
-					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name'], '', 'pages').'" title="'.$this->get_translation('RevisionTip').'">'.(int)$user['total_pages']."</a></td>".
+					'<td class="form_right">'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name'], '', 'pages').'" title="'.$this->get_translation('RevisionTip').'">'.(int)$user['total_pages']."</a></td>".
 				#"</tr>\n".'<tr class="lined">'.
 					#'<th class="form_left" scope="row">'.$this->get_translation('UsersRevisions')."</th>".
 					#'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'" title="'.$this->get_translation('RevisionTip').'">'.(int)$user['total_revisions']."</a></td>".

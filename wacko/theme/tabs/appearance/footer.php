@@ -162,7 +162,7 @@ if ($this->page)
 				}
 				else
 				{
-					echo $this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."\n";
+					echo $this->get_translation('Owner').": ".$this->user_link($owner, $lang = '', true, false)."\n";
 				}
 			}
 			else if (!$this->page['comment_on_id'])

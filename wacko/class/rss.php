@@ -112,7 +112,7 @@ class RSS
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT page_id, tag, title, created, body_r, comments, lang ".
+			"SELECT page_id, tag, title, created, body_r, comments, page_lang ".
 			"FROM {$prefix}page ".
 			"WHERE comment_on_id = '0' ".
 				"AND tag REGEXP '^{$news_cluster}{$news_levels}$' ".
@@ -134,7 +134,7 @@ class RSS
 										'modified'	=> $page['created'],
 										'body_r'	=> $page['body_r'],
 										'comments'	=> $page['comments'],
-										'lang'		=> $page['lang'],
+										'page_lang'		=> $page['page_lang'],
 										'date'		=> date('Y/m-d', strtotime($page['created'])));
 				}
 			}
@@ -190,10 +190,10 @@ class RSS
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
 
 				// check current page lang for different charset to do_unicode_entities() against
-				if ($this->engine->config['language'] != $page['lang'])
+				if ($this->engine->config['language'] != $page['page_lang'])
 				{
-					$title	= $this->engine->do_unicode_entities($title, $page['lang']);
-					$text	= $this->engine->do_unicode_entities($text, $page['lang']);
+					$title	= $this->engine->do_unicode_entities($title, $page['page_lang']);
+					$text	= $this->engine->do_unicode_entities($text, $page['page_lang']);
 				}
 
 				$xml .= '<item>'."\n".
@@ -274,11 +274,11 @@ class RSS
 					$text = $this->engine->format($comment['body_r'], 'post_wacko');
 
 					// check current page lang for different charset to do_unicode_entities() against
-					if ($this->engine->config['language'] != $comment['lang'])
+					if ($this->engine->config['language'] != $comment['page_lang'])
 					{
-						$text					= $this->engine->do_unicode_entities($text, $comment['lang']);
-						$comment['title']		= $this->engine->do_unicode_entities($comment['title'], $comment['lang']);
-						$comment['page_title']	= $this->engine->do_unicode_entities($comment['page_title'], $comment['lang']);
+						$text					= $this->engine->do_unicode_entities($text, $comment['page_lang']);
+						$comment['title']		= $this->engine->do_unicode_entities($comment['title'], $comment['page_lang']);
+						$comment['page_title']	= $this->engine->do_unicode_entities($comment['page_title'], $comment['page_lang']);
 					}
 
 					$xml .= "<item>\n";

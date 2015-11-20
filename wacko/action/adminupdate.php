@@ -128,7 +128,7 @@ if ($this->is_admin())
 		else if (isset($_POST['set_title']))
 		{
 			$pages = $this->load_all(
-				"SELECT page_id, tag, lang ".
+				"SELECT page_id, tag, page_lang ".
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE title = ''");
 
@@ -138,9 +138,9 @@ if ($this->is_admin())
 
 				foreach ($pages as $page)
 				{
-					$this->load_translation($page['lang']);
-					$this->set_translation ($page['lang']);
-					$this->set_page_lang($page['lang']);
+					$this->load_translation($page['page_lang']);
+					$this->set_translation ($page['page_lang']);
+					$this->set_page_lang($page['page_lang']);
 					// tag to title
 					$title = $this->add_spaces_title(trim(substr($page['tag'], strrpos($page['tag'], '/')), '/'));
 

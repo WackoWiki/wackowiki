@@ -79,7 +79,7 @@ if ($this->can_upload() === true)
 			<table>
 				<tr class="lined">
 					<th class="form_left" scope="row"><?php echo $this->get_translation('UploadBy'); ?>:</th>
-					<td><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></td>
+					<td><?php echo $this->user_link($file['user_name'], $lang = '', true, false); ?></td>
 				</tr>
 				<tr class="">
 					<th class="form_left" scope="row"><?php echo $this->get_translation('FileAdded'); ?>:</th>
@@ -185,7 +185,7 @@ if ($this->can_upload() === true)
 		<li><?php echo $this->link($path.$file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], $lang = '', true, false); ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
 <?php
@@ -342,7 +342,7 @@ if ($this->can_upload() === true)
 					// 2. update file metadata
 					$this->sql_query(
 						"UPDATE ".$this->config['table_prefix']."upload SET ".
-							"lang				= '".quote($this->dblink, $this->page['lang'])."', ".
+							"upload_lang		= '".quote($this->dblink, $this->page['page_lang'])."', ".
 							"file_description	= '".quote($this->dblink, $description)."' ".
 						"WHERE upload_id = '". $file['upload_id']."' ".
 						"LIMIT 1");
@@ -544,7 +544,7 @@ if ($this->can_upload() === true)
 									"page_id			= '".($is_global ? "0" : $this->page['page_id'])."', ".
 									"user_id			= '".$user['user_id']."',".
 									"file_name			= '".quote($this->dblink, $small_name)."', ".
-									"lang				= '".quote($this->dblink, $this->page['lang'])."', ".
+									"upload_lang		= '".quote($this->dblink, $this->page['page_lang'])."', ".
 									"file_description	= '".quote($this->dblink, $description)."', ".
 									"file_size			= '".(int)$file_size."',".
 									"picture_w			= '".(int)$size[0]."',".

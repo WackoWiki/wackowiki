@@ -97,7 +97,7 @@ if ($pages = $this->load_all(
 
 // collect data for index
 if ($pages = $this->load_all(
-	"SELECT page_id, tag, title, lang ".
+	"SELECT page_id, tag, title, page_lang ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
@@ -202,9 +202,9 @@ if ($pages_to_display)
 	foreach ($pages_to_display as $page)
 	{
 		// do unicode entities
-		if ($this->page['lang'] != $page['lang'])
+		if ($this->page['page_lang'] != $page['page_lang'])
 		{
-			$page_lang = $page['lang'];
+			$page_lang = $page['page_lang'];
 		}
 		else
 		{
