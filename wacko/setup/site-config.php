@@ -116,7 +116,7 @@ else
    <p class="notop">
 <?php
 
-if ($config['multilanguage'])
+if ($config['multilanguage'] || $config['is_update'] == false)
 {
 	$langs = available_languages();
 }

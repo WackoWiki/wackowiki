@@ -35,7 +35,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$owner_id				= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
-	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
+	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
 
 	$page_id				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
 
@@ -45,8 +45,8 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$perm_create_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'create', '$')";
 	$perm_upload_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'upload', '')";
 
-	$default_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
-	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
+	$default_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
+	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 
 	switch($config_global['database_driver'])
 	{
