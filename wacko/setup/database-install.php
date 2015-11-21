@@ -520,6 +520,7 @@ $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$l
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_2,			$lang['ErrorAlteringTable']);
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_3,			$lang['ErrorAlteringTable']);
+$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$update_user_r5_4_0,		$lang['ErrorAlteringTable']);
 
 // user setting
 $upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']);
