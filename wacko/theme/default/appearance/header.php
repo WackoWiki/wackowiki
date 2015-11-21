@@ -319,7 +319,7 @@ else
 		echo echo_tab(
 			$this->href('review'),
 			($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview')),
-			($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? $this->get_translation('Review') : '',
+			($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? ($this->page['reviewed'] == 1 ? $this->get_translation('Reviewed') : $this->get_translation('Review')) : '',
 			$this->method == 'review',
 			2,
 			($this->page['reviewed'] == 1 ? 'review2' : 'review1'),

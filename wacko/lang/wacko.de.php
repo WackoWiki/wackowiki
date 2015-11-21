@@ -401,7 +401,7 @@ $wacko_translation = array(
 	'ThisIsCommentOn'			=> 'Das ist ein Kommentar zu',
 	'At'						=> 'am',
 	'To'						=> 'zu',
-	'By'						=> 'durch',
+	'By'						=> 'von',
 	'From'						=> 'von',
 	'For'						=> 'zu',
 	'ReturnToCommented'			=> 'zurück zur kommentierten Seite',
@@ -847,10 +847,10 @@ $wacko_translation = array(
 	'ExportClusterXML'			=> 'Export des ganzen Clusters von ',
 	'AccessDeniedXML'			=> 'Du hast keine Berechtigung für den Zugriff auf diese Seite.',
 
-	'ChangesRSS'			=> 'Änderungen',
-	'CommentsRSS'			=> 'Kommentare',
-	'NewsRSS'				=> 'Nachrichten',
-	'RevisionsRSS'		=> 'Versionen von ',
+	'ChangesRSS'				=> 'Änderungen',
+	'CommentsRSS'				=> 'Kommentare',
+	'NewsRSS'					=> 'Nachrichten',
+	'RevisionsRSS'				=> 'Versionen von ',
 
 	'LastModification'			=> 'Letzte Änderung',
 
@@ -871,8 +871,8 @@ $wacko_translation = array(
 
 	// Review
 	'Reviewer'					=> 'Prüfer',
-	'Reviewed'					=> 'überprüft',
-	'Review'					=> 'sichten',
+	'Reviewed'					=> 'Geprüft',
+	'Review'					=> 'Ungeprüft',
 	'ReviewedBy'				=> 'gesichtet von',
 	'RemoveReview'				=> 'Revidiere diese Version',
 	'SetReview'					=> 'Vidiere diese Version',
