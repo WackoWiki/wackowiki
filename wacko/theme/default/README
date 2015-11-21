@@ -10,7 +10,7 @@ DOWNLOAD AND INSTALLATION ------------------------------------------------------
 * Download Default as ZIP- or TAR.GZ archive, unzip it and copy the
   'default' directory to your theme folder of the WackoWiki
   installation.
-* Edit your config.php (or personal.config.php) and set
+* Edit your secondary config (or Admin panel) and set
   "theme" => "default".
 * Your wacko user may also select this theme on the Settings page.
 
@@ -19,8 +19,8 @@ FEATURES -----------------------------------------------------------------------
 
 The theme has been designed for all options you got by the wacko markup. It
 contains a small main navigation including the input field for the keyword
-search. At the footer you find the link to the login page or – if logged in –
-links to the user page, settings and logout. 
+search. At the header you find the link to the login or registration page 
+or if logged in links to the user page, account settings and logout. 
 
 
 CUSTOMIZATION ------------------------------------------------------------------
@@ -34,7 +34,7 @@ screen.css and typography.css at the layout folder.
 $menu = array(
     'WikiSite' => 'Name of Site',
     'YourHomePage' => 'Homepage',
-    'http://externlink.com' => 'Go away'
+    'http://externlink.example.com' => 'Go away'
 );
  
 /* == Stop here! ... and let it flow ================================ */
@@ -52,7 +52,8 @@ LICENSE ------------------------------------------------------------------------
 The Default Theme is part of the WackoWiki package.
 BSD licence.
 
-Some Icons were taken from the Oxygen Icons set.
-http://www.oxygen-icons.org
+Icons were taken from the Breeze (Plasma 5 icon theme) Icons set.
+https://github.com/NitruxSA/breeze-icon-theme
+Icons are licensed under the LGPLv3
 
 
