@@ -166,6 +166,21 @@ hr {
 	vertical-align: middle;
 }
 
+.cross {
+	background-image: url('../image/cross.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	height: 22px;
+	width: 22px;
+}
+.tick {
+	background-image: url('../image/tick.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	height: 22px;
+	width: 22px;
+}
+
 /*
    Site Configuration Specific
 */
@@ -199,7 +214,7 @@ ul.security {
 ul.security li {
 	min-height: 23px;
 	padding: 3px 0px 0px 35px;
-	background: url(../image/warning.png) no-repeat scroll 0% 0%;
+	background: url(../image/warning.svg) no-repeat scroll 0% 0%;
 }
 
 /*
