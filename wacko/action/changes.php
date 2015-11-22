@@ -164,7 +164,7 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
 			).
 			" . . . . . . . . . . . . . . . . <small>".
-			$this->user_link($page['user_name']).' '.
+			$this->user_link($page['user_name'], $lang = '', true, false).' '.
 			$review.' '.
 			$edit_note.
 			"</small></li>\n";
