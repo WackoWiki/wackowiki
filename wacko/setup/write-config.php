@@ -108,6 +108,7 @@ echo "            <li>".$lang['Writing']." - ";
 
 $perm_changed	= true;
 $file_name		= 'config/config.php';
+//
 $write_file		= file_put_contents($file_name, $config_code);
 
 if ($write_file == true)
@@ -163,7 +164,7 @@ echo "         </ul>\n";
 	}
 	?></form>
 	<?php
-	if($write_file = false)
+	if($write_file == false)
 	{
 		echo '         <div id="config_code" class="config_code"><pre>'.htmlentities($config_code, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</pre></div>\n";
 	}
