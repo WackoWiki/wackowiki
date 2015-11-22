@@ -761,15 +761,15 @@ a:target {
 	background-repeat: no-repeat;
 }
 .toolbar li.we-createlink img {
-	background-image:url("../../../image/wikiedit/createlink.svg");
+	background-image:url("../../../image/wikiedit/link.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-createtable img {
-	background-image:url("../../../image/wikiedit/createtable.svg");
+	background-image:url("../../../image/wikiedit/table.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-textred img {
-	background-image:url("../../../image/wikiedit/textred.svg");
+	background-image:url("../../../image/wikiedit/textcolor.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-highlightcolor img {
