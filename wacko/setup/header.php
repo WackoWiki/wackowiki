@@ -11,7 +11,7 @@ function my_location()
 function output_image($ok)
 {
 	global $lang;
-	return '<img src="'.my_location().'setup/image/'.($ok ? 'tick' : 'cross').'.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross" />';
+	return '<img src="'.my_location().'setup/image/'.($ok ? 'tick' : 'cross').'.svg" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross" />';
 }
 
 function is__writable($path)
@@ -84,6 +84,7 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config
 	$config['language'] = 'en';
 }
 
+global $lang;
 require_once('setup/lang/installer.'.$config['language'].'.php');
 ?>
 
