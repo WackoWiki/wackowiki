@@ -11,7 +11,7 @@ function my_location()
 function output_image($ok)
 {
 	global $lang;
-	return '<img src="'.my_location().'setup/image/'.($ok ? 'tick' : 'cross').'.svg" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross" />';
+	return '<img src="'.my_location().'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross '.($ok ? 'tick' : 'cross').'" />';
 }
 
 function is__writable($path)
