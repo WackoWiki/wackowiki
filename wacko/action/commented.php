@@ -191,7 +191,7 @@ if ($this->user_allowed_comments())
 						: $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
 					).
 					' . . . . . . . . . . . . . . . . <small>'.$this->get_translation('LatestCommentBy').' '.
-					$this->user_link($page['comment_owner_name']).
+					$this->user_link($page['comment_owner_name'], $lang = '', true, false).
 					"</small></li>\n";
 				}
 			}

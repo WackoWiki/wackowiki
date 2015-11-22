@@ -9,7 +9,7 @@ $where			= '';
 $order			= '';
 $param			= '';
 $groups			= '';
-$usergroups		= '';
+$user_groups		= '';
 $error			= '';
 
 // display user profile
@@ -34,13 +34,13 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 				if (in_array($user['user_name'], $group_users))
 				{
-					$groups[] = '<a href="'.$this->href('', ($this->config['groups_page']), 'profile='.htmlspecialchars($group_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$group_name.'</a>';
+					$groups[] = '<a href="'.$this->href('', ($this->config['groups_page']), 'profile='.htmlspecialchars($group_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'" class="group-link"><span class="icon"></span>'.$group_name.'</a>';
 				}
 			}
 
 			if ($groups == true)
 			{
-				$usergroups = implode(', ', $groups);
+				$user_groups = implode(', ', $groups);
 			}
 
 			unset($group_name, $group_str, $groups);
@@ -150,7 +150,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			</tr>
 			<tr class="lined">
 				<td class="userprofil"><a href="<?php echo $this->href('', $this->config['groups_page']); ?>"><?php echo $this->get_translation('UsersGroupMembership'); ?></a></td>
-				<td><?php echo ( $usergroups == true ? $usergroups : '<em>'.$this->get_translation('UsersNA2').'</em>' ); ?></td>
+				<td><?php echo ( $user_groups == true ? $user_groups : '<em>'.$this->get_translation('UsersNA2').'</em>' ); ?></td>
 			</tr>
 		</table>
 <?php
@@ -597,7 +597,7 @@ else
 		{
 			echo '<tr class="lined">';
 
-			echo	'<td style="padding-left:5px;">'.$this->user_link($user['user_name']).'</a></td>'.
+			echo	'<td style="padding-left:5px;">'.$this->user_link($user['user_name'], $lang = '', true, false).'</td>'.
 					'<td style="text-align:center;">'.$user['total_pages'].'</td>'.
 					'<td style="text-align:center;">'.$user['total_comments'].'</td>'.
 					'<td style="text-align:center;">'.$user['total_revisions'].'</td>'.
