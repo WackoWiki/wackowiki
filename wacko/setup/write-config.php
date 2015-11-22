@@ -108,22 +108,31 @@ echo "            <li>".$lang['Writing']." - ";
 
 $perm_changed	= true;
 $file_name		= 'config/config.php';
-//
-$write_file		= file_put_contents($file_name, $config_code);
 
-if ($write_file == true)
+if (is__writable('_cache/config/'))
 {
-	// Try and make it non-writable
-	@chmod($file_name, 0644);
-	$perm_changed = !is__writable($file_name);
+	$write_file		= file_put_contents($file_name, $config_code);
 
-	echo output_image(true)."</li>\n";
+	if ($write_file == true)
+	{
+		// Try and make it non-writable
+		@chmod($file_name, 0644);
+		$perm_changed = !is__writable($file_name);
 
-	echo "            <li>".$lang['RemovingWritePrivilege']."   ".output_image($perm_changed)."</li>\n";
+		echo output_image(true)."</li>\n";
+
+		echo "            <li>".$lang['RemovingWritePrivilege']."   ".output_image($perm_changed)."</li>\n";
+	}
+	else
+	{
+		// Problem saving file
+		echo output_image(false)."</li>\n";
+	}
 }
 else
 {
-	// Problem saving file
+	// Folder is non-writable
+	$write_file = false;
 	echo output_image(false)."</li>\n";
 }
 
