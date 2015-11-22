@@ -15,7 +15,7 @@ $module['maint_resync'] = array(
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'maint_resync',
 		'name'	=> 'Data Synchronization',
-		'title'	=> 'Synchronizing databases',
+		'title'	=> 'Synchronizing data',
 	);
 
 ########################################################
@@ -263,8 +263,8 @@ $engine->debug_print_r($users);
 	<h3>Wiki-links</h3>
 	<br />
 	<p>
-		Performs re-rendering all intrasite links and restores
-		the contents of the table 'links' in the event of damage or injury (this can take
+		Performs re-rendering for all intrasite links and restores
+		the contents of the table 'links' and 'file_links' in the event of damage or injury (this can take
 		considerable time).
 	</p>
 	<br />
