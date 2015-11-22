@@ -15,7 +15,7 @@ $module['db_convert'] = array(
 		'status'=> true,
 		'mode'	=> 'db_convert',
 		'name'	=> 'Convert',
-		'title'	=> 'Converting Tables from MyISAM to InnoDB',
+		'title'	=> 'Converting Tables from MyISAM to InnoDB/XtraDB',
 		'vars'	=> array(&$tables),
 );
 
@@ -92,7 +92,7 @@ function admin_db_convert(&$engine, &$module)
 	{
 ?>
 		<p>
-			If you have existing tables, that you want to convert to InnoDB for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.
+			If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.
 		</p>
 		<br />
 <?php
@@ -121,12 +121,12 @@ function admin_db_convert(&$engine, &$module)
 		if ($InnoDB_support[0]['SUPPORT'] == 'YES' || 'DEFAULT')
 		{
 			$required_engine = true;
-			echo output_image($engine, true).'InnoDB is available. '. $InnoDB_support[0]['SUPPORT']. "<br />\n";
+			echo output_image($engine, true).'InnoDB/XtraDB is available. '. $InnoDB_support[0]['SUPPORT']. "<br />\n";
 		}
 		else
 		{
 			$required_engine = false;
-			echo output_image($engine, false).'<strong class="red">InnoDB is not available.</strong>'. "<br />\n";
+			echo output_image($engine, false).'<strong class="red">InnoDB / XtraDB is not available.</strong>'. "<br />\n";
 		}
 
 		if ($required_mysql_version === true && $required_engine = true)
@@ -176,6 +176,16 @@ function admin_db_convert(&$engine, &$module)
 				echo 'No tables to convert.';
 			}
 		}
+
+		?>
+		<br /><br /><br />
+		<p><small>
+			* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.
+
+			It is fully backwards compatible, and it identifies itself to MariaDB as "ENGINE=InnoDB" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.
+		</small></p>
+		<br />
+<?php
 	}
 }
 
