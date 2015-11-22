@@ -136,7 +136,7 @@ if ($this->has_access('read'))
 					}
 					else if ($page['reviewed'] == 1)
 					{
-						$output .= '<span class="review">['.$this->get_translation('ReviewedBy').' '.$this->user_link($this->page['reviewer'], $lang = '', true, false).']</span>';
+						$output .= '<span class="review">['.$this->get_translation('ReviewedBy').' '.$this->user_link($page['reviewer'], $lang = '', true, false).']</span>';
 					}
 				}
 
