@@ -66,13 +66,14 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
   this.addButton('h2', lang.Heading2, '\'===\',\'===\',0,1');
   this.addButton('h3', lang.Heading3, '\'====\',\'====\',0,1');
   this.addButton('h4', lang.Heading4, '\'=====\',\'=====\',0,1');
-  // this.addButton('h5', lang.Heading5, "'======','======',0,1");
+  this.addButton('h5', lang.Heading5, '\'======\',\'======\',0,1');
+  //this.addButton('h6', lang.Heading6, '\'=======\',\'=======\',0,1');
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
   this.addButton('bold', lang.Bold, '\'**\',\'**\'');
   this.addButton('italic', lang.Italic, '\'//\',\'//\'');
   this.addButton('underline', lang.Underline, '\'__\',\'__\'');
   this.addButton('strike', lang.Strikethrough, '\'--\',\'--\'');
-  // this.addButton('fixed', lang.Code, "'##','##'");
+  this.addButton('code', lang.Code, "'##','##'");
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
   this.addButton('ul', lang.List, '\'  * \',\'\',0,1,1');
   this.addButton('ol', lang.NumberedList, '\'  1. \',\'\',0,1,1');
@@ -85,11 +86,11 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
   this.addButton('outdent', lang.Outdent, '', 'document.getElementById(\'' + this.id + '\')._owner.unindent');
   this.addButton('indent', lang.Indent, '\'  \',\'\',0,1');
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
-  // this.addButton('code', lang.CodeWrapper,"'%% ',' %%',2");
+  this.addButton('source', lang.CodeWrapper,"'%% ',' %%',2");
   // this.addButton('html', lang.HTML,"'<# ',' #>',2");
   // this.addButton('action', lang.Action,"'{{ ',' }}',2");
   this.addButton('hr', lang.Line, '\'\',\'\\n----\\n\',2');
-  // this.addButton("signature",lang.Signature,"'::@::',' ',1");
+  this.addButton("signature",lang.Signature,"'::@::',' ',1");
   this.addButton('quote', lang.Quote, '\'<[\',\']>\',2');
   this.addButton('textred', lang.MarkedText, '\'!!\',\'!!\',2');
   this.addButton('highlightcolor', lang.HighlightText, '\'??\',\'??\',2');
@@ -368,6 +369,12 @@ WikiEdit.prototype.keyDown = function (e) {
     case 2100: //4
       res = this.insTag('=====', '=====', 0, 1);
       break;
+    case 2101: //5 (broken)
+      res = this.insTag('======', '======', 0, 1);
+      break;
+    //case 2102: //6 (broken)
+      //res = this.insTag('=======', '=======', 0, 1);
+      //break;
     case 2109: //=
       if (sel)
       res = this.insTag('++', '++');
@@ -637,7 +644,7 @@ return false;
 WikiEdit.prototype.help = function ()
 {
 s = '         WikiEdit 3.15 \n';
-s += '  (c) Roman Ivanov, 2003-2015   \n';
+s += '  (c) Roman Ivanov, WackoWiki Team 2003-2015   \n';
 s += '  http://wackowiki.sourceforge.net/doc/Dev/Projects/WikiEdit \n';
 s += '\n';
 s += lang.HelpAboutTip;

@@ -105,11 +105,11 @@ ProtoEdit.prototype.createToolbar = function (id, width, height, readOnly) {
      else if (btn.name == 'customhtml')
     html += btn.desc;
      else
-    html += ' <li class="btns-"><div id="' + btn.name + '_' + id + '" onmouseover=\'this.className="btn-hover";\' '
+    html += ' <li class="btns- we-'+ btn.name + '"><div id="' + btn.name + '_' + id + '" onmouseover=\'this.className="btn-hover";\' '
     + 'onmouseout=\'this.className="btn-";\' class="btn-" '
     + 'onclick="this.className=\'btn-pressed\';' + btn.actionName + '(' //\'' + id + '\', ' 
     + btn.actionParams + ')"><img src="' + this.imagesPath
-    + btn.name + '.gif" ' + wh + ' alt="' + btn.desc + '" title="' + btn.desc
+    + 'spacer.png" ' + wh + ' alt="' + btn.desc + '" title="' + btn.desc
     + '"></div></li>\n';
   }
   html += '</ul>\n';
@@ -125,7 +125,7 @@ ProtoEdit.prototype.addButton = function (name, desc, actionParams, actionName) 
   this.buttons[i].actionParams = actionParams;
 }
 ProtoEdit.prototype.checkKey = function (k) {
-  if (k == 85 + 4096 || k == 73 + 4096 || k == 49 + 2048 || k == 50 + 2048 || k == 51 + 2048 || k == 52 + 2048 ||
+  if (k == 85 + 4096 || k == 73 + 4096 || k == 49 + 2048 || k == 50 + 2048 || k == 51 + 2048 || k == 52 + 2048 || k == 53 + 2048 || k == 54 + 2048 ||
   k == 76 + 4096 || k == 76 + 2048 || k == 78 + 2048 || k == 79 + 2048 || k == 66 + 2048 || k == 83 + 2048 ||
   k == 85 + 2048 || k == 72 + 2048 || k == 73 + 2048 || k == 74 + 2048 || k == 84 + 2048 || k == 2109 ||
   k == 2124 + 32 || k == 2126 + 32 || k == 2127 + 32 || k == 2114 + 32 || k == 2131 + 32 ||
