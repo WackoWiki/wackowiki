@@ -3016,13 +3016,15 @@ class Wacko
 					$img_link	= false;
 					$tpl		= 'localfile';
 					$file_ext	= array (
-									'pdf' => 'pdf-link',
-									'txt' => 'text-link',
-									'odt' => 'odt-link',
-									'png' => 'image-link',
-									'svg' => 'image-link',
-									'gif' => 'image-link',
-									'jpg' => 'image-link');
+									'pdf'	=> 'pdf-link',
+									'txt'	=> 'text-link',
+									'odt'	=> 'odt-link',
+									'png'	=> 'image-link',
+									'svg'	=> 'image-link',
+									'gif'	=> 'image-link',
+									'jpe'	=> 'image-link',
+									'jpeg'	=> 'image-link',
+									'jpg'	=> 'image-link');
 
 					if (in_array($file_data['file_ext'], array_keys($file_ext)))
 					{
@@ -3516,10 +3518,11 @@ class Wacko
 		return $text;
 	}
 
-	// TODO: add link off option, disable icon option
-	// atm. we have no means to do $this->do_unicode_entities($user_name, $user_lang)
-	//		-> the 'lang' in user_setting refer only to language setting for theme
-	//		-> requires 'lang' field in user table to distinguish the char set
+	// creates a link to the user profile
+	//		$user_name		=
+	//		$account_lang	=
+	//		$linking		=
+	//		$add_icon		=
 	function user_link($user_name, $account_lang = '', $linking = true, $add_icon = true)
 	{
 		if (!$user_name)
@@ -3528,9 +3531,14 @@ class Wacko
 			$linking	= false;
 		}
 
+		// check current page lang for different charset to do_unicode_entities()
 		if ($this->page['page_lang'] != $account_lang)
 		{
-			$user_name = $this->do_unicode_entities($user_name, $account_lang);
+			$text = $this->do_unicode_entities($user_name, $account_lang);
+		}
+		else
+		{
+			$text = $user_name;
 		}
 
 		if ($add_icon)
@@ -3546,7 +3554,7 @@ class Wacko
 		# $this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'')
 		if ($linking)
 		{
-			return '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'" class="user-link">'.$icon.$user_name.'</a>';
+			return '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'" class="user-link">'.$icon.$text.'</a>';
 		}
 		else
 		{
