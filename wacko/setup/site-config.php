@@ -134,12 +134,25 @@ else
 	$lang_list= array();
 }
 
-for ($i = 0; $i < count($langs); $i++)
-{
-	echo	'<input type="checkbox" name="config[allowed_languages]['.$i.']" id="lang_'.$langs[$i].'" value="'.$langs[$i].'" '. (in_array($langs[$i], $lang_list) ? 'checked' : ''). ' />'."\n".
-			'<label for="lang_'.$langs[$i].'">'.$langs[$i].'</label>'."\n";
+$n = 1;
 
+echo '<table><tr>';
+
+foreach ($langs as $_lang)
+{
+	echo	'<td><input type="checkbox" name="config[allowed_languages]['.$n.']" id="lang_'.$_lang.'" value="'.$_lang.'" '. (in_array($_lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n".
+			'<label for="lang_'.$_lang.'">'.$languages[$lang].' ('.$_lang.')</label></td>'."\n";
+
+	// modulus operator: every third loop add a break
+	if ($n % 3 == 0)
+	{
+		echo '</tr>';
+	}
+	;
+	$n++;
 }
+
+echo '</tr></table>';
 echo "</p>\n";
 
 
