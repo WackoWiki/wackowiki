@@ -113,7 +113,7 @@ else
 
    <h2><?php echo $lang['AllowedLang'];?></h2>
    <p class="notop"><?php echo $lang['AllowedLangDesc'];?></p>
-   <p class="notop">
+
 <?php
 
 if ($config['multilanguage'] || $config['is_update'] == false)
@@ -137,7 +137,7 @@ else
 $_languages = $lang['Languages'];
 $n = 1;
 
-echo "<table>\n\t<tr>\n";
+echo '<table  class="checkbox_input">'."\n\t<tr>\n";
 
 foreach ($langs as $_lang)
 {
@@ -153,8 +153,7 @@ foreach ($langs as $_lang)
 	$n++;
 }
 
-echo "\t</tr>\n</table>";
-echo "</p>\n";
+echo "\t</tr>\n</table>\n";
 
 
 if ($config['is_update'] == false)
