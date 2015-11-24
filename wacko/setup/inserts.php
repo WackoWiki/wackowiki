@@ -289,7 +289,7 @@ if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 
 	foreach ($lang_list as $_lang)
 	{
-		unset($lang);
+		unset($page_lang);
 		unset($languages);
 		require_once('setup/lang/inserts.'.$_lang.'.php');
 	}

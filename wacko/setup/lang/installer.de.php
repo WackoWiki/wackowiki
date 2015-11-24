@@ -77,6 +77,23 @@ $lang = array(
 'WarningRewriteMode' => 'ACHTUNG!\nDeine Basis-URL & die Umschreib-Rechte (rewrite-mode settings) schauen ungewöhnlich aus. Normalerweise ist da kein ? in der URL wenn Umschreibe-Rechte aktiviert sind - in deinem Fall ist da aber ein Fragezeichen.\n\nUm dennoch mit diesen Einstellungen fortzufahren drücke OK.\nZurück zu den Einstellungen (form & change settings) drücke ABBRECHEN.\n\nFalls du mit den Einstellungen fortfährst, kann diese Software-Installation zu unerwarteten Fehlern führen.',
 'ModRewriteStatusUnknown' => 'Der Installer kann nicht ermitteln ob mod_rewrite aktiviert ist, dies bedeutet jedoch nicht das es deaktiviert ist.',
 
+'Languages'	=>  array(
+	'bg' => 'bulgarian',
+	'da' => 'danish',
+	'nl' => 'dutch',
+	'el' => 'greek',
+	'en' => 'english',
+	'et' => 'estonian',
+	'fr' => 'french',
+	'de' => 'german',
+	'hu' => 'hungarian',
+	'it' => 'italian',
+	'pl' => 'polish',
+	'pt' => 'portuguese',
+	'ru' => 'russian',
+	'es' => 'spanish',
+),
+
 /*
    Database Config Page
 */
