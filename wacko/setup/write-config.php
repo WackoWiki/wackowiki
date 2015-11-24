@@ -149,7 +149,7 @@ echo "         </ul>\n";
 	}
 	?></form>
 	<?php
-	if($write_file = false)
+	if($write_file == false)
 	{
 		echo "         <div id=\"config_code\" class=\"config_code\"><pre>".htmlentities($config_code)."</pre></div>\n";
 	}
