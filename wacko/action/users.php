@@ -9,16 +9,16 @@ $where			= '';
 $order			= '';
 $param			= '';
 $groups			= '';
-$user_groups		= '';
+$user_groups	= '';
 $error			= '';
 
 // display user profile
 if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 {
-	$_user_name = isset($_GET['profile']) ? $_GET['profile'] : (isset($_POST['profile']) ? $_POST['profile'] : '');
+	$profile = isset($_GET['profile']) ? $_GET['profile'] : (isset($_POST['profile']) ? $_POST['profile'] : '');
 
 	// does requested user exists?
-	if (false == $user = $this->load_user($_user_name))
+	if (false == $user = $this->load_user($profile))
 	{
 		$this->show_message( str_replace('%2', htmlspecialchars($_user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))) );
 	}
@@ -44,6 +44,12 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			}
 
 			unset($group_name, $group_str, $groups);
+		}
+
+		if ($this->page['page_lang'] != $user['account_lang'])
+		{
+			#$user['user_name'] = $this->do_unicode_entities($user['user_name'], $user['account_lang']);
+			#$user['real_name'] = $this->do_unicode_entities($user['real_name'], $user['account_lang']);
 		}
 
 		// prepare and send personal message
@@ -377,7 +383,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				if ($user['total_uploads'])
 				{
 					$uploads = $this->load_all(
-							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.lang, c.tag file_on_page ".
+							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page ".
 							"FROM {$this->config['table_prefix']}upload u ".
 							"LEFT JOIN {$this->config['table_prefix']}page c ON (u.page_id = c.page_id) ".
 							"WHERE u.user_id = '".$user['user_id']."' ".
@@ -544,7 +550,7 @@ else
 
 	// collect data
 	$users = $this->load_all(
-		"SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession ".
+		"SELECT u.user_name, u.account_lang, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession ".
 		"FROM {$this->config['user_table']} u ".
 			"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 		($where == true ? $where : '').
@@ -597,7 +603,7 @@ else
 		{
 			echo '<tr class="lined">';
 
-			echo	'<td style="padding-left:5px;">'.$this->user_link($user['user_name'], $lang = '', true, false).'</td>'.
+			echo	'<td style="padding-left:5px;">'.$this->user_link($user['user_name'], $user['account_lang'], true, false).'</td>'.
 					'<td style="text-align:center;">'.$user['total_pages'].'</td>'.
 					'<td style="text-align:center;">'.$user['total_comments'].'</td>'.
 					'<td style="text-align:center;">'.$user['total_revisions'].'</td>'.

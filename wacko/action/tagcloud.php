@@ -72,7 +72,7 @@ else if ($sort == 'number')	$order = 'number DESC';
 
 $sql = "SELECT
 			c.category_id,
-			c.lang,
+			c.category_lang,
 			c.category,
 			COUNT(category) AS number
 		FROM

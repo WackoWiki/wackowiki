@@ -40,7 +40,7 @@ if (!function_exists('full_text_search'))
 
 		// load search results
 		$results = $wacko->load_all(
-			"SELECT a.page_id, a.title, a.tag, a.body, a.comment_on_id, a.lang, MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score ". //
+			"SELECT a.page_id, a.title, a.tag, a.body, a.comment_on_id, a.page_lang, MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score ". //
 			"FROM ".$wacko->config['table_prefix']."page a ".
 			($for
 				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
