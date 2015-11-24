@@ -137,23 +137,23 @@ else
 $_languages = $lang['Languages'];
 $n = 1;
 
-echo '<table><tr>';
+echo "<table>\n\t<tr>\n";
 
 foreach ($langs as $_lang)
 {
-	echo	'<td><input type="checkbox" name="config[allowed_languages]['.$n.']" id="lang_'.$_lang.'" value="'.$_lang.'" '. (in_array($_lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n".
-			'<label for="lang_'.$_lang.'">'.$_languages[$_lang].' ('.$_lang.')</label></td>'."\n";
+	echo	"\t\t<td>\n\t\t\t".'<input type="checkbox" name="config[allowed_languages]['.$n.']" id="lang_'.$_lang.'" value="'.$_lang.'" '. (in_array($_lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n\t\t\t".
+			'<label for="lang_'.$_lang.'">'.$_languages[$_lang].' ('.$_lang.')</label>'."\n\t\t</td>\n";
 
 	// modulus operator: every third loop add a break
 	if ($n % 3 == 0)
 	{
-		echo '</tr>';
+		echo "\t</tr>\n\t<tr>\n";
 	}
 	;
 	$n++;
 }
 
-echo '</tr></table>';
+echo "\t</tr>\n</table>";
 echo "</p>\n";
 
 

@@ -227,23 +227,23 @@ function admin_config_basic(&$engine, &$module)
 					$languages = $engine->get_translation('Languages');
 					$n = 1;
 
-					echo '<table><tr>';
+					echo "<table>\n\t<tr>\n";
 
 					foreach ($langs as $lang)
 					{
-						echo	'<td><input type="checkbox" name="allowed_languages['.$n.']" id="lang_'.$lang.'" value="'.$lang.'" '. (in_array($lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n".
-								'<label for="lang_'.$lang.'">'.$languages[$lang].' ('.$lang.')</label></td>'."\n";
+						echo	"\t\t<td>\n\t\t\t".'<input type="checkbox" name="allowed_languages['.$n.']" id="lang_'.$lang.'" value="'.$lang.'" '. (in_array($lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n\t\t\t".
+								'<label for="lang_'.$lang.'">'.$languages[$lang].' ('.$lang.')</label>'."\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break
 						if ($n % 3 == 0)
 						{
-							echo '</tr>';
+							echo "\t</tr>\n\t<tr>\n";
 						}
 ;
 						$n++;
 					}
 
-					echo '</tr></table>';
+					echo "\t</tr>\n</table>";
 					?>
 				</td>
 			</tr>

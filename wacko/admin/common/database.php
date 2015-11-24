@@ -783,7 +783,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 // Draws a tick or cross next to a result
 function output_image(&$engine, $ok)
 {
-	return '<img src="'.$engine->config['base_url'].'setup/image/'.($ok ? 'tick' : 'cross').'.png" width="20" height="20" alt="'.($ok ? 'OK' : 'Problem').'" title="'.($ok ? 'OK' : 'Problem').'" class="tickcross" />'.' ';
+	return '<img src="'.$engine->config['base_url'].'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? 'OK' : 'Problem').'" title="'.($ok ? 'OK' : 'Problem').'" class="tickcross '.($ok ? 'tick' : 'cross').'" />'.' ';
 }
 
 ?>
