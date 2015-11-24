@@ -142,7 +142,7 @@ echo '<table><tr>';
 foreach ($langs as $_lang)
 {
 	echo	'<td><input type="checkbox" name="config[allowed_languages]['.$n.']" id="lang_'.$_lang.'" value="'.$_lang.'" '. (in_array($_lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n".
-			'<label for="lang_'.$_lang.'">'.$_languages[$lang].' ('.$_lang.')</label></td>'."\n";
+			'<label for="lang_'.$_lang.'">'.$_languages[$_lang].' ('.$_lang.')</label></td>'."\n";
 
 	// modulus operator: every third loop add a break
 	if ($n % 3 == 0)
