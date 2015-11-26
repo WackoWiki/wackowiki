@@ -585,7 +585,7 @@ switch($config['database_driver'])
 				echo "<h2>".$lang['DeletingTables']."</h2>\n";
 				echo "            <ol>\n";
 
-				foreach ($delete_table as $param => $value)
+				foreach ($delete_table as $value)
 				{
 					test(str_replace('%1', $value[0], $lang['DeletingTable']), @mysqli_query($dblink, $value[1]), str_replace('%1', $value[0], $lang['ErrorDeletingTable']));
 
