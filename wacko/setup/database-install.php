@@ -541,7 +541,6 @@ $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r
 // usergroup
 $upgrade['5.4.0'][]	= array($lang['CreatingTable'],	'word',			$table_word_r5_4_0,			$lang['ErrorCreatingTable']);
 
-//TODO: if (preg_match('/5\.0\.\d+/i', $version) || $continue == true)
 switch($config['database_driver'])
 {
 	case 'mysqli_legacy':
@@ -602,7 +601,7 @@ switch($config['database_driver'])
 				$version = 0;
 			}
 
-			if ($version)
+			if (!is_null($version))
 			{
 				// new installation
 				if ($version == '0')
