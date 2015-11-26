@@ -215,7 +215,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			// print
 			echo '<tbody class="lined"><tr>'.
 					'<td style="text-align:left;">'.
-					( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
+					( $this->has_access('comment', $topic['page_id'], GUEST) === false
+						? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>'
+						: '' ).
 					( $updated === true
 						? '<strong><span class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 						: '<strong>'.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'

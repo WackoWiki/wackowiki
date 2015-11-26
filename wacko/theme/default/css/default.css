@@ -1667,6 +1667,20 @@ background-image: url('./../icon/attachment.svg'), none;
 	height: 16px;
 	width: 16px;
 }
+.btn-unlocked {
+background-image: url('./../icon/unlocked.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+}
+.btn-locked {
+background-image: url('./../icon/locked.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+}
 
 .viewed {
 	font-weight:600;

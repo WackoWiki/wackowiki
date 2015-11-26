@@ -115,7 +115,13 @@ $password_hashed		= password_hash(
 								PASSWORD_DEFAULT
 								);
 
-$config_insert = '';
+$config_db		= array();
+$delete_table	= array();
+$create_table	= array();
+$insert_records	= array();
+$upgrade		= array();
+$config_insert	= '';
+
 // set back theme to default, just a precaution
 # $config['theme'] = 'default';
 
@@ -448,92 +454,92 @@ $insert_records[]	= array($lang['InstallingReviewerGroup'],	$insert_reviewer_gro
 
 // 5.1.0 ############
 // cache
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_1_0,		$lang['ErrorAlteringTable']);
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_1_1,		$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_1_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_1_1,		$lang['ErrorAlteringTable']);
 
 // link
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'link',			$alter_link_r5_1_0,			$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'link',			$alter_link_r5_1_0,			$lang['ErrorAlteringTable']);
 
 // page
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'page',			$alter_page_r5_1_0,			$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_1_0,			$lang['ErrorAlteringTable']);
 
-$upgrade_5_1_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_1_0,		$lang['ErrorUpdatingTable']);
+$upgrade['5_1_0'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_1_0,		$lang['ErrorUpdatingTable']);
 
 // revision
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_1_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_1_0,		$lang['ErrorAlteringTable']);
 
 // upload
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_0,		$lang['ErrorAlteringTable']);
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_1,		$lang['ErrorAlteringTable']);
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_2,		$lang['ErrorAlteringTable']);
-$upgrade_5_1_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_3,		$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_1,		$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_2,		$lang['ErrorAlteringTable']);
+$upgrade['5_1_0'][]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_3,		$lang['ErrorAlteringTable']);
 
 // 5.4.0 ############
 
 // auth_token
-$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'auth_token',	$table_auth_token_r5_4_0,	$lang['ErrorCreatingTable']);
+$upgrade['5_4_0'][]	= array($lang['CreatingTable'],	'auth_token',	$table_auth_token_r5_4_0,	$lang['ErrorCreatingTable']);
 
 // cache
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_0,		$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_1,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_1,		$lang['ErrorAlteringTable']);
 
 // category
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_0,		$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_1,		$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_2,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_1,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'category',		$alter_category_r5_4_2,		$lang['ErrorAlteringTable']);
 
 // config
-$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
-$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_1,		$lang['ErrorUpdatingTable']);
-$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_2,		$lang['ErrorUpdatingTable']);
-$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_3,		$lang['ErrorUpdatingTable']);
-$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_4,		$lang['ErrorUpdatingTable']);
+$upgrade['5_4_0'][]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']);
+$upgrade['5_4_0'][]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_1,		$lang['ErrorUpdatingTable']);
+$upgrade['5_4_0'][]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_2,		$lang['ErrorUpdatingTable']);
+$upgrade['5_4_0'][]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_3,		$lang['ErrorUpdatingTable']);
+$upgrade['5_4_0'][]	= array($lang['UpdateTable'],	'config',		$update_config_r5_4_4,		$lang['ErrorUpdatingTable']);
 
 // file link
-$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'file_link',	$table_file_link_r5_4_0,	$lang['ErrorCreatingTable']);
+$upgrade['5_4_0'][]	= array($lang['CreatingTable'],	'file_link',	$table_file_link_r5_4_0,	$lang['ErrorCreatingTable']);
 
 //menu
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_0,			$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_1,			$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_0,			$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_1,			$lang['ErrorAlteringTable']);
 
 // page
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_0,			$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
-$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_1,		$lang['ErrorUpdatingTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_0,			$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
+$upgrade['5_4_0'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_1,		$lang['ErrorUpdatingTable']);
 
 // referrer
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_0,		$lang['ErrorAlteringTable']);
 
 
 // revision
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_0,		$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']);
 
 // tag
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'tag',			$alter_tag_r5_4_0,			$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'tag',			$alter_tag_r5_4_0,			$lang['ErrorAlteringTable']);
 
 // upload
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_4_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'upload',		$alter_upload_r5_4_0,		$lang['ErrorAlteringTable']);
 
 // user
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_2,			$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_3,			$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user',			$update_user_r5_4_0,		$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_2,			$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_3,			$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user',			$update_user_r5_4_0,		$lang['ErrorAlteringTable']);
 
 // user setting
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_1,	$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_2,	$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_3,	$lang['ErrorAlteringTable']);
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_4,	$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_1,	$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_2,	$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_3,	$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_4,	$lang['ErrorAlteringTable']);
 
 // usergroup
-$upgrade_5_4_0[]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
+$upgrade['5_4_0'][]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
 
 // usergroup
-$upgrade_5_4_0[]	= array($lang['CreatingTable'],	'word',			$table_word_r5_4_0,			$lang['ErrorCreatingTable']);
+$upgrade['5_4_0'][]	= array($lang['CreatingTable'],	'word',			$table_word_r5_4_0,			$lang['ErrorCreatingTable']);
 
 //TODO: if (preg_match('/5\.0\.\d+/i', $version) || $continue == true)
 switch($config['database_driver'])
@@ -631,25 +637,12 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-
-				// upgrade from R5.0.0 to R5.1.x
-				case '5.0.0':
-					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					foreach ($upgrade_5_0_0 as $param => $value)
-					{
-						test(str_replace('%1', $value[1], $value[0]), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $value[3]));
-					}
-
-					echo "            </ol>\n";
-
 				// upgrade from R5.1.0 to R5.4.x
 				case '5.1.0':
 					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					foreach ($upgrade_5_1_0 as $param => $value)
+					foreach ($upgrade['5_1_0'] as $param => $value)
 					{
 						test(str_replace('%1', $value[1], $value[0]), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $value[3]));
 					}
@@ -661,7 +654,7 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.4.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					foreach ($upgrade_5_4_0 as $param => $value)
+					foreach ($upgrade['5_4_0'] as $param => $value)
 					{
 						test(str_replace('%1', $value[1], $value[0]), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $value[3]));
 					}
@@ -766,24 +759,12 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-				// upgrade from R5.0.0 to R5.1.x
-				case '5.0.0':
-					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					foreach ($upgrade_5_0_0 as $param => $value)
-					{
-						test_pdo(str_replace('%1', $value[1], $value[0]), $value[2], str_replace('%1', $value[1], $value[3]));
-					}
-
-					echo "            </ol>\n";
-
 				// upgrade from R5.1.0 to R5.4.x
 				case '5.1.0':
 					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					foreach ($upgrade_5_1_0 as $param => $value)
+					foreach ($upgrade['5_1_0'] as $param => $value)
 					{
 						test_pdo(str_replace('%1', $value[1], $value[0]), $value[2], str_replace('%1', $value[1], $value[3]));
 					}
@@ -795,7 +776,7 @@ switch($config['database_driver'])
 					echo "         <h2>Wacko 5.4.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
-					foreach ($upgrade_5_4_0 as $param => $value)
+					foreach ($upgrade['5_4_0'] as $param => $value)
 					{
 						test_pdo(str_replace('%1', $value[1], $value[0]), $value[2], str_replace('%1', $value[1], $value[3]));
 					}

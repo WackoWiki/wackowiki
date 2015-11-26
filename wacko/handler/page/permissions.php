@@ -296,19 +296,19 @@ echo '<label for="massacls">'.$this->get_translation('AclForEntireCluster').'</l
 <br />
 <div class="cssform">
 <p>
-	<label for="read_acl"><?php echo $this->get_translation('ACLRead'); ?></label>
+	<label for="read_acl"><strong><?php echo $this->get_translation('ACLRead'); ?></strong></label>
 	<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $read_acl['list'] ?></textarea>
 </p>
 <p>
-	<label for="write_acl"><?php echo $this->get_translation('ACLWrite'); ?></label>
+	<label for="write_acl"><strong><?php echo $this->get_translation('ACLWrite'); ?></strong></label>
 	<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $write_acl['list'] ?></textarea>
 </p>
 <p>
-	<label for="comment_acl"><?php echo $this->get_translation('ACLComment'); ?></label>
+	<label for="comment_acl"><strong><?php echo $this->get_translation('ACLComment'); ?></strong></label>
 	<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $comment_acl['list'] ?></textarea>
 </p>
 <p>
-	<label for="create_acl"><?php echo $this->get_translation('ACLCreate'); ?></label>
+	<label for="create_acl"><strong><?php echo $this->get_translation('ACLCreate'); ?></strong></label>
 	<textarea id="create_acl" name="create_acl" rows="4" cols="20"><?php echo $create_acl['list'] ?></textarea>
 </p>
 <?php
@@ -316,12 +316,12 @@ echo '<label for="massacls">'.$this->get_translation('AclForEntireCluster').'</l
 if ($upload_allowed == true)
 { ?>
 <p>
-	<label for="upload_acl"><?php echo $this->get_translation('ACLUpload'); ?></label>
+	<label for="upload_acl"><strong><?php echo $this->get_translation('ACLUpload'); ?></strong></label>
 	<textarea id="upload_acl" name="upload_acl" rows="4" cols="20"><?php echo $upload_acl['list'] ?></textarea>
 </p>
 <?php } ?>
 <p>
-	<label for="new_owner_id"><?php echo $this->get_translation('SetOwner'); ?></label>
+	<label for="new_owner_id"><strong><?php echo $this->get_translation('SetOwner'); ?></strong></label>
 	<select id="new_owner_id" name="new_owner_id">
 		<option value=""><?php echo $this->get_translation('OwnerDontChange'); ?></option>
 	<?php
