@@ -609,12 +609,12 @@ switch($config['database_driver'])
 					echo "         <h2>".$lang['InstallingTables']."</h2>\n";
 					echo "         <ol>\n";
 
-					foreach ($create_table as $param => $value)
+					foreach ($create_table as $value)
 					{
 						test(str_replace('%1', $value[0], $lang['CreatingTable']), @mysqli_query($dblink, $value[1]), str_replace('%1', $value[0], $lang['ErrorCreatingTable']));
 					}
 
-					foreach ($insert_records as $param => $value)
+					foreach ($insert_records as $value)
 					{
 						test($value[0], @mysqli_query($dblink, $value[1]), str_replace('%1', $value[2], $lang['ErrorAlreadyExists']));
 					}
@@ -718,7 +718,7 @@ switch($config['database_driver'])
 						test_pdo(str_replace('%1', $value[0], $lang['CreatingTable']), $value[1], str_replace('%1', $value[0], $lang['ErrorCreatingTable']));
 					}
 
-					foreach ($insert_records as $param => $value)
+					foreach ($insert_records as $value)
 					{
 						test_pdo($value[0], $value[1], str_replace('%1', $value[2], $lang['ErrorAlreadyExists']));
 					}
