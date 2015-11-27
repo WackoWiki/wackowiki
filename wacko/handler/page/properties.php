@@ -311,7 +311,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		echo "</div>";
 	}
 
-	echo '<div class="page_tools">'.
+	echo '<aside class="page_tools">'.
 			'<table class="form_tbl">'.
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsID')."</th>".
@@ -393,7 +393,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 	#		'<li><a href="'.$this->href('latex').'">'.$this->get_translation('SettingsLatex').'</a></li>'.
 			'<li><a href="'.$this->href('export.xml').'">'.$this->get_translation('SettingsXML').'</a></li>'.
 		'</ul>'.
-	'</div>';
+	'</aside>';
 }
 
 else
