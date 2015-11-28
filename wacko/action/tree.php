@@ -114,14 +114,14 @@ if ($pages = $this->load_all(
 					$legend = str_replace('%1', $this->link('/'.$root, '', rtrim($root, '/')), $legend).':';
 				}
 
-				echo '<div class="layout-box"><p class="layout-box"><span>'.$legend."</span></p>\n";
+				echo '<nav class="layout-box"><p class="layout-box"><span>'.$legend."</span></p>\n";
 			}
 		}
 		else
 		{
 			if (!$nomark)
 			{
-				echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('TreeSiteTitle')."</span></p>\n";
+				echo '<nav class="layout-box"><p class="layout-box"><span>'.$this->get_translation('TreeSiteTitle')."</span></p>\n";
 			}
 		}
 
@@ -228,7 +228,7 @@ if ($pages = $this->load_all(
 		// footer
 		if (!$nomark)
 		{
-			echo "</div>\n";
+			echo "</nav>\n";
 		}
 	}
 	else

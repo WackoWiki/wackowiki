@@ -179,7 +179,7 @@ header {
 	width: 100%;
 }
 
-nav {
+.menu-main {
 	padding: 5px 20px 0;
 	float: left;
 	/*overflow: hidden;
@@ -1504,7 +1504,7 @@ table.formation td {
 	background-repeat: no-repeat;
 }
 #handler li.upload img {
-	background-image:url("./../icon/file.svg");
+	background-image:url("./../icon/attachment.svg");
 	background-repeat: no-repeat;
 }
 #handler li.edit img {

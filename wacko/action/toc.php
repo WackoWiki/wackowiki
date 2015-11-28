@@ -47,7 +47,7 @@ $end_depth		= $to[1];
 // 3. output
 if (!$nomark)
 {
-	echo '<div class="layout-box"><p class="layout-box"><span> '.$this->get_translation('TOCTitle').' '.$this->link($ppage, '', $legend).' </span></p>';
+	echo '<nav class="layout-box"><p class="layout-box"><span> '.$this->get_translation('TOCTitle').' '.$this->link($ppage, '', $legend).' </span></p>';
 }
 
 if ($_page)
@@ -354,7 +354,7 @@ else
 
 if (!$nomark)
 {
-	echo '</div>';
+	echo '</nav>';
 }
 
 ?>
