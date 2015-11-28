@@ -184,11 +184,10 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 			else
 			{
 				$salt_length		= 10;
-				$salt_password		= $this->random_password($salt_length, 3);
 				$salt_user_form		= $this->random_password($salt_length, 3);
-				$confirm			= hash('sha256', $password.$salt_password.mt_rand().time().mt_rand().$email.mt_rand());
+				$confirm			= hash('sha256', $password.mt_rand().time().mt_rand().$email.mt_rand());
 				$confirm_hash		= hash('sha256', $confirm.hash('sha256', $this->config['system_seed']));
-				$password_hashed	= $user_name.$salt_password.$password;
+				$password_hashed	= $user_name.$password;
 
 				$password_hashed	= password_hash(
 										base64_encode(
@@ -226,7 +225,6 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"email			= '".quote($this->dblink, $email)."', ".
 						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
 						"password		= '".quote($this->dblink, $password_hashed)."', ".
-						"salt			= '".quote($this->dblink, $salt_password)."', ".
 						"user_form_salt	= '".quote($this->dblink, $salt_user_form)."'");
 
 				// get new user_id

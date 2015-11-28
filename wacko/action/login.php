@@ -166,14 +166,19 @@ else
 						// check for old sha256 password
 						else if (strlen($existing_user['password']) == 64)
 						{
-							$_processed_password = hash('sha256', $_user_name.$existing_user['salt'].$_password);
+							// load old salt
+							$password_salt = $this->load_single(
+												"SELECT salt ".
+													"FROM ".$this->config['user_table']." ".
+													"WHERE user_name = '".quote($this->dblink, $_user_name)."' ".
+													"LIMIT 1");
+							$_processed_password = hash('sha256', $_user_name.$password_salt['salt'].$_password);
 						}
 
 						// rehash password
 						if ($existing_user['password'] == $_processed_password)
 						{
-							$salt		= $this->random_password(10, 3);
-							$password	= $_user_name.$salt.$_password;
+							$password	= $_user_name.$_password;
 							$password	= password_hash(
 													base64_encode(
 															hash('sha256', $password, true)
@@ -185,7 +190,7 @@ else
 							$this->sql_query(
 								"UPDATE ".$this->config['table_prefix']."user SET ".
 									"password	= '".quote($this->dblink, $password)."', ".
-									"salt		= '".quote($this->dblink, $salt)."' ".
+									"salt		= '' ".
 								"WHERE user_name = '".quote($this->dblink, $_user_name)."'");
 
 							$_processed_password = $password;
@@ -193,7 +198,7 @@ else
 					}
 					else
 					{
-						$_processed_password = $_user_name.$existing_user['salt'].$_password;
+						$_processed_password = $_user_name.$_password;
 					}
 
 					// check password

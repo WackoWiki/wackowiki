@@ -105,9 +105,8 @@ if ($config['system_seed'] == '')
 	$config['system_seed'] = random_seed(20, 3);
 }
 
-$salt_password			= random_seed(10, 3);
 $salt_user_form			= random_seed(10, 3);
-$password_hashed		= $config['admin_name'].$salt_password.$_POST['password'];
+$password_hashed		= $config['admin_name'].$_POST['password'];
 $password_hashed		= password_hash(
 								base64_encode(
 										hash('sha256', $password_hashed, true)
@@ -126,8 +125,8 @@ $config_insert	= '';
 # $config['theme'] = 'default';
 
 // user 'system' holds all default pages
-$insert_system				= "INSERT INTO ".$config['table_prefix']."user (user_name, account_lang, password, salt, email, account_type, signup_time) VALUES ('System', '".$config['language']."', '', '', '', '1', NOW())";
-$insert_admin				= "INSERT INTO ".$config['table_prefix']."user (user_name, account_lang, password, salt, email, signup_time, user_form_salt) VALUES ('".$config['admin_name']."', '".$config['language']."', '".$password_hashed."', '".$salt_password."', '".$config['admin_email']."', NOW(), '".$salt_user_form."')";
+$insert_system				= "INSERT INTO ".$config['table_prefix']."user (user_name, account_lang, password, email, account_type, signup_time) VALUES ('System', '".$config['language']."', '', '', '', '1', NOW())";
+$insert_admin				= "INSERT INTO ".$config['table_prefix']."user (user_name, account_lang, password, email, signup_time, user_form_salt) VALUES ('".$config['admin_name']."', '".$config['language']."', '".$password_hashed."', '".$config['admin_email']."', NOW(), '".$salt_user_form."')";
 $insert_admin_setting		= "INSERT INTO ".$config['table_prefix']."user_setting (user_id, theme, user_lang) VALUES ((SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), '".$config['theme']."', '".$config['language']."')";
 
 // TODO: for Upgrade insert other aliases also in usergroup table
