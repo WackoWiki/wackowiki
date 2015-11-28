@@ -32,7 +32,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 	$user = $this->load_single(
 		"SELECT user_id, user_name ".
 		"FROM ".$this->config['user_table']." ".
-		"WHERE change_password='".quote($this->dblink, hash('sha256', $code.hash('sha256', $this->config['system_seed'])))."' ".
+		"WHERE change_password = '".quote($this->dblink, hash('sha256', $code.hash('sha256', $this->config['system_seed'])))."' ".
 		"LIMIT 1");
 
 	if ($user)
@@ -77,9 +77,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 			}
 			else
 			{
-				$salt_length		= 10;
-				$salt				= $this->random_password($salt_length, 3);
-				$password_hashed	= $user['user_name'].$salt.$new_password;
+				$password_hashed	= $user['user_name'].$new_password;
 				$password_hashed	= password_hash(
 											base64_encode(
 													hash('sha256', $password_hashed, true)
@@ -90,7 +88,6 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
 						"password			= '".quote($this->dblink, $password_hashed)."', ".
-						"salt				= '".quote($this->dblink, $salt)."', ".
 						"change_password	= '' ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
@@ -187,7 +184,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		// wrong current password
 		if (password_verify(
 				base64_encode(
-						hash('sha256', $user['user_name'].$user['salt'].$password, true)
+						hash('sha256', $user['user_name'].$password, true)
 						),
 				$user['password']
 				) == false)
@@ -227,9 +224,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		}
 		else
 		{
-			$salt_length		= 10;
-			$salt				= $this->random_password($salt_length, 3);
-			$password_hashed	= $user['user_name'].$salt.$new_password;
+			$password_hashed	= $user['user_name'].$new_password;
 			$password_hashed	= password_hash(
 										base64_encode(
 												hash('sha256', $password_hashed, true)
@@ -240,8 +235,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			// store new password
 			$this->sql_query(
 				"UPDATE ".$this->config['user_table']." SET ".
-					"password			= '".quote($this->dblink, $password_hashed)."', ".
-					"salt				= '".quote($this->dblink, $salt)."' ".
+					"password			= '".quote($this->dblink, $password_hashed)."' ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 

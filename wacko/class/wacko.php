@@ -3935,7 +3935,7 @@ class Wacko
 		if ($user['user_name'] == '')
 		{
 			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $_SESSION['guest_form_salt'];// TODO: cache -> Notice: Undefined index: guest_form_salt
+			$user['user_form_salt']	= $_SESSION['guest_form_salt'];
 		}
 
 		if ($timespan === false)
@@ -4313,7 +4313,7 @@ class Wacko
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
 		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.list_count, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.salt,u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.list_count, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.cookie_token ';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.list_count, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.cookie_token ';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
