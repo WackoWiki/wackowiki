@@ -184,7 +184,7 @@ if ($this->forum === true
 {
 	if ($categories = $this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1))
 	{
-		echo '<div class="category">'.$categories."</div>\n";
+		echo '<nav class="category">'.$categories."</nav>\n";
 	}
 }
 
