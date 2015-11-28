@@ -1510,7 +1510,7 @@ table.formation td {
 #handler li.edit img {
 	background-image:url("./../icon/edit.svg");
 	background-repeat: no-repeat;
-	background-size:10px 10px;
+	/* background-size:10px 10px; */
 }
 #handler li.referrers img {
 	background-image:url("./../icon/link.svg");
