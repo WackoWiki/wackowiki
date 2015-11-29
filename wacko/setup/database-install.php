@@ -536,6 +536,7 @@ $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_set
 
 // usergroup
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
+$upgrade['5.4.0'][]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_1,	$lang['ErrorAlteringTable']);
 
 // usergroup
 $upgrade['5.4.0'][]	= array($lang['CreatingTable'],	'word',			$table_word_r5_4_0,			$lang['ErrorCreatingTable']);

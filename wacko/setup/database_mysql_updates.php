@@ -113,6 +113,7 @@ $alter_user_setting_r5_4_4 = "ALTER TABLE {$pref}user_setting CHANGE lang user_l
 
 // USERGROUP
 $alter_usergroup_r5_4_0 = "ALTER TABLE {$pref}usergroup CHANGE moderator moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0'";
+$alter_usergroup_r5_4_1 = "ALTER TABLE {$pref}usergroup ADD group_lang VARCHAR(2) NOT NULL AFTER group_name";
 
 // WATCH
 

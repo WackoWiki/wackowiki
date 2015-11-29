@@ -354,6 +354,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 $table_usergroup = "CREATE TABLE {$pref}usergroup (".
 					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"group_name VARCHAR(100) NOT NULL DEFAULT '',".
+					"group_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"description VARCHAR(255) NOT NULL DEFAULT '',".
 					"moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
