@@ -2791,6 +2791,7 @@ class Wacko
 		$class		= '';
 		$icon		= '';
 		$lang		= '';
+		$matches	= array();
 		$url		= '';
 		$img_link	= false;
 		$text		= str_replace('"', '&quot;', $text);
@@ -2847,6 +2848,10 @@ class Wacko
 			$url	= $tag;
 			$tpl	= 'anchor';
 		}
+		/* else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(.*)$/', $tag, $matches))
+		{
+			$this->debug_print_r($matches);
+		} */
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg)$/i', $tag))
 		{
 			// external image
@@ -2864,7 +2869,7 @@ class Wacko
 				$tpl	= 'outerlink';
 			}
 		}
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|tgz|bz2|7z)$/', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/', $tag))
 		{
 			// this is a file link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
@@ -2888,7 +2893,7 @@ class Wacko
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('RDFLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'rdf-link';
+			$class	= 'xml-link';
 			$tpl	= 'file';
 		}
 		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
@@ -3016,11 +3021,29 @@ class Wacko
 					$img_link	= false;
 					$tpl		= 'localfile';
 					$file_ext	= array (
+									'zip'	=> 'archive-link',
+									'7z'	=> 'archive-link',
+									'tar'	=> 'archive-link',
+									'bz2'	=> 'archive-link',
+									'gz'	=> 'archive-link',
+									'tgz'	=> 'archive-link',
+									'rar'	=> 'archive-link',
+									'mp3'	=> 'audio-link',
+									'ogg'	=> 'audio-link',
+									'opus'	=> 'audio-link',
+									'mp4'	=> 'video-link',
+									'ogv'	=> 'video-link',
+									'webm'	=> 'video-link',
+									'rdf'	=> 'xml-link',
+									'asc'	=> 'signature-link',
 									'pdf'	=> 'pdf-link',
 									'txt'	=> 'text-link',
-									'odt'	=> 'odt-link',
+									'odg'	=> 'drawing-link',
+									'odt'	=> 'document-link',
+									'odp'	=> 'presentation-link',
+									'ods'	=> 'spreadsheet-link',
 									'png'	=> 'image-link',
-									'svg'	=> 'image-link',
+									'svg'	=> 'drawing-link',
 									'gif'	=> 'image-link',
 									'jpe'	=> 'image-link',
 									'jpeg'	=> 'image-link',
@@ -3188,6 +3211,7 @@ class Wacko
 		else if (preg_match('/^([\!\.\-'.$this->language['ALPHANUM_P'].']+)(\#['.$this->language['ALPHANUM_P'].'\_\-]+)?$/', $tag, $matches))
 		{
 			// it's a Wiki link!
+			$match	= '';
 			$tag	= $otag		= $matches[1];
 			$untag	= $unwtag	= $this->unwrap_link($tag);
 
@@ -3559,6 +3583,50 @@ class Wacko
 		else
 		{
 			return '<span class="user-link">'.$icon.$user_name.'</span>';
+		}
+	}
+
+	// creates a link to the group profile
+	//		$group_name		=
+	//		$group_lang	=
+	//		$linking		=
+	//		$add_icon		=
+	function group_link($group_name, $group_lang = '', $linking = true, $add_icon = true)
+	{
+		if (!$group_name)
+		{
+			$user_name	= $this->get_translation('Guest');
+			$linking	= false;
+		}
+
+		// check current page lang for different charset to do_unicode_entities()
+		if ($this->page['page_lang'] != $group_lang)
+		{
+			$text = $this->do_unicode_entities($group_name, $group_lang);
+		}
+		else
+		{
+			$text = $group_name;
+		}
+
+		if ($add_icon)
+		{
+			$icon = '<span class="icon"></span>';
+		}
+		else
+		{
+			$icon = '';
+		}
+
+		#$this->is_admin() ? ' title="'.$comment['ip'].'"' : '' (a | span)
+		# $this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'')
+		if ($linking)
+		{
+			return '<a href="'.$this->href('', $this->config['groups_page'], 'profile='.$group_name).'" class="group-link">'.$icon.$text.'</a>';
+		}
+		else
+		{
+			return '<span class="group-link">'.$icon.$group_name.'</span>';
 		}
 	}
 
@@ -5207,7 +5275,7 @@ class Wacko
 			}
 		}
 
-		if ($acl)
+		if (isset($acl['list']))
 		{
 			return $this->check_acl($user_name, $acl['list'], true);
 		}
