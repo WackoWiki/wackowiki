@@ -2526,13 +2526,22 @@ class Wacko
 		}
 	}
 
-	function show_message($message, $type = 'info')
+	function show_message($message, $type = 'info', $show = true)
 	{
 		if (!empty($message))
 		{
 			#$message = htmlspecialchars($message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
-			echo '<div class="'.$type.'">'.$message."</div>\n";
+			$info_box = '<div class="'.$type.'">'.$message."</div>\n";
+
+			if ($show)
+			{
+				echo $info_box;
+			}
+			else
+			{
+				return $info_box;
+			}
 		}
 	}
 
@@ -4143,7 +4152,7 @@ class Wacko
 
 		if ($notfound_text)
 		{
-			return $notfound_text;
+			return $this->show_message($notfound_text, 'error', false);
 		}
 		else
 		{
