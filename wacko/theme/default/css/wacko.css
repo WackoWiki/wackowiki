@@ -302,8 +302,8 @@ a.text-link .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/text.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
-a.odt-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/odt.svg") no-repeat scroll left center;
+a.document-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/document.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
 a.image-link .icon {
@@ -322,9 +322,29 @@ a.pdf-link .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/pdf.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
-a.rdf-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/xml.svg") no-repeat scroll left center;
-	padding-left: 15px;
+a.archive-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/archive.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.spreadsheet-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/spreadsheet.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.presentation-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/presentation.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.drawing-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/drawing.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.audio-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/audio.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.video-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/video.svg") no-repeat scroll left center;
+	padding-left: 17px;
 }
 a.email-link .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/mail.svg") no-repeat scroll left center;

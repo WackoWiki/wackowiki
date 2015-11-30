@@ -34,7 +34,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 				if (in_array($user['user_name'], $group_users))
 				{
-					$groups[] = '<a href="'.$this->href('', ($this->config['groups_page']), 'profile='.htmlspecialchars($group_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'" class="group-link"><span class="icon"></span>'.$group_name.'</a>';
+					$groups[] = $this->group_link($group_name, '', true, false);
 				}
 			}
 

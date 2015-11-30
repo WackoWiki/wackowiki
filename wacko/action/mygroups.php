@@ -21,7 +21,7 @@ if (!function_exists('MyGroups'))
 
 			if(in_array ($user_name, $group_members))
 			{
-				echo '<a href="'.$wacko->href('', ($wacko->config['groups_page']), 'profile='.htmlspecialchars($group_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'').'">'.$group_name.'</a>'.'<br />';
+				echo $this->group_link($group_name, '', true, false).'<br />';
 
 				$my_groups_count++;
 			}

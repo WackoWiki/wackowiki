@@ -507,8 +507,8 @@ fieldset {
 .upload td.dt-,
 .upload td.file- {
 	white-space: nowrap;
-	font-size: 80%;
-	font-weight: bold;
+	/* font-size: 80%;
+	font-weight: bold; */
 	color: #000000;
 	vertical-align: top;
 }
