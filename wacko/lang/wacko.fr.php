@@ -228,7 +228,7 @@ $wacko_translation = array(
 	'SourceFromLink'			=> 'référence',
 	'SourceCopyToClipboard'		=> 'copier vers le presse-papier',
 	'Source'					=> 'voir la source',
-	'SourceDesc'				=> 'la source sera affichée à l&rsquo;exception des fragments cachés par les formateurs <nobr><code>%%(comments)..%%</code></nobr>',
+	'SourceDesc'				=> 'la source sera affichée à l&rsquo;exception des fragments cachés par les formateurs <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// groups handler
 	'GroupsMembersFor'				=> 'Membres du groupe',

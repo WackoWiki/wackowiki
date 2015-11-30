@@ -17,11 +17,11 @@ class typografica
 
 	var $wacko;
 	var $skip_tags	= true;
-	var $p_prefix	= "<p class=typo>";
-	var $p_postfix	= "</p>";
+	var $p_prefix	= '<p class="typo">';
+	var $p_postfix	= '</p>';
 	var $asoft		= true;
-	var $indent1	= "image/z.png width=25 height=1 border=0 alt=\'\' align=top />"; // <->
-	var $indent2	= "image/z.png width=50 height=1 border=0 alt=\'\' align=top />"; // <-->
+	var $indent1	= 'image/spacer.png" width=25 height=1 border=0 alt="" align=top />'; // <->
+	var $indent2	= 'image/spacer.png" width=50 height=1 border=0 alt="" align=top />'; // <-->
 	var $fixed_size	= 80; // maximum width
 	var $ignore		= "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
 	var $de_nobr	= true;
@@ -83,8 +83,8 @@ class typografica
 	function __construct( &$wacko )
 	{
 		$this->wacko	= &$wacko;
-		$this->indent1	= "<img src=".$wacko->config['base_url'].$this->indent1;
-		$this->indent2	= "<img src=".$wacko->config['base_url'].$this->indent2;
+		$this->indent1	= '<img src="'.$wacko->config['base_url'].$this->indent1;
+		$this->indent2	= '<img src="'.$wacko->config['base_url'].$this->indent2;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////

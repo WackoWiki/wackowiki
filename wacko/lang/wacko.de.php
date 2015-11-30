@@ -226,7 +226,7 @@ $wacko_translation = array(
 	'SourceFromLink'			=> 'Link',
 	'SourceCopyToClipboard'		=> 'In die Zwischenablage speichern',
 	'Source'					=> 'Quelltext anzeigen',
-	'SourceDesc'				=> 'Der Quelltext wird angezeigt werden mit Ausnahme der Fragmente, welche durch den Formatierer nicht ausgegeben werden <nobr><code>%%(comments)..%%</code></nobr>',
+	'SourceDesc'				=> 'Der Quelltext wird angezeigt werden mit Ausnahme der Fragmente, welche durch den Formatierer nicht ausgegeben werden <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// groups handler
 	'GroupsMembersFor'				=> 'Mitglieder der Gruppe',

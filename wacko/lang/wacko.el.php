@@ -228,7 +228,7 @@ $wacko_translation = array(
 	'SourceFromLink'		=> 'reference',
 	'SourceCopyToClipboard'	=> 'copy to clipboard',
 	'Source'				=> 'view the source',
-	'SourceDesc'			=> 'the source will be shown with exception of those fragments which are hidden by formatters <nobr><code>%%(comments)..%%</code></nobr>',
+	'SourceDesc'			=> 'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// groups handler
 	'GroupsMembersFor'			=> 'Members for Group',
