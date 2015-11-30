@@ -228,7 +228,7 @@ $wacko_translation = array(
 	'SourceFromLink'		=> 'referencia',
 	'SourceCopyToClipboard'	=> 'copiar a portapapeles',
 	'Source'				=> 'ver código fuente',
-	'SourceDesc'			=> 'se mostrará el código fuente con excepción de las partes ocultos con marcas <nobr><code>%%(comentarios)..%%</code></nobr>',
+	'SourceDesc'			=> 'se mostrará el código fuente con excepción de las partes ocultos con marcas <span class="nobr"><code>%%(comentarios)..%%</code></span>',
 
 	// groups handler
 	'GroupsMembersFor'			=> 'Miembros del grupo',
