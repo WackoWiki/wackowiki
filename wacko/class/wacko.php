@@ -4180,7 +4180,7 @@ class Wacko
 
 			if (!@is_readable($class_file))
 			{
-				die('Cannot load class '.$class_name.'  from '. $class_file. ' ('.$class_dir.')');
+				die( str_replace('%1', $class_name, $this->get_translation('CantLoadClass')).' '. $class_file. ' ('.$class_dir.')' );
 			}
 			else
 			{
@@ -4215,8 +4215,7 @@ class Wacko
 
 		$method_location = $handler.'/'.$method.'.php';
 
-		// TODO: localize: 'Unknown method'
-		return $this->include_buffered($method_location, '<em>Unknown method "'.$method_location.'"</em>', '', $this->config['handler_path']);
+		return $this->include_buffered($method_location, '<em>'.$this->get_translation('UnknownMethod').' "<code>'.$method_location.'</code>"</em>', '', $this->config['handler_path']);
 	}
 
 	// wrapper for the next method
@@ -4227,12 +4226,11 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
-		// TODO: localize: 'Formatter %1 not found'
-		$text = $this->include_buffered($this->config['formatter_path'].'/'.$formatter.'.php', '<em>Formatter "'.$formatter.'" not found</em>', compact('text', 'options'));
+		$text = $this->include_buffered($this->config['formatter_path'].'/'.$formatter.'.php', '<em>'.str_replace('%1', $formatter, $this->get_translation('FormatterNotFound')).'</em>', compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
-			$text = $this->include_buffered($this->config['formatter_path'].'/typografica.php', '<em>Formatter "'.$formatter.'" not found</em>', compact('text'));
+			$text = $this->include_buffered($this->config['formatter_path'].'/typografica.php', '<em>'.str_replace('%1', $formatter, $this->get_translation('FormatterNotFound')).'</em>', compact('text'));
 		}
 
 		return $text;

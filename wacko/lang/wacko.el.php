@@ -461,7 +461,7 @@ $wacko_translation = array(
 	'CommentForWatchedPage' => 'Νέο σχόλιο στην σελίδα ',
 	'SomeoneCommented' => ' η σελίδα που παρακολουθείτε έχει σχολιαστεί: ',
 	'AlertReferringPages' => 'Αυτή η σελίδα αναφέρεται από αυτές τις σελίδες',
-	'UnknownAction' => 'Άγνωστη ενέργεια',
+
 	'MarkRead'		=> 'Σημειώστε όλα τα ως αναγνωσμένα',
 	'CurrentTime'	=> 'current time',
 	'Created'		=> 'created',
@@ -1102,6 +1102,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'σε %1 μήνες',
 	'InAYear'		=> 'σ\' ένα χρόνο',
 	'InYears'		=> 'σε %1 χρόνια',
+
+	// loading error
+	'UnknownAction'				=> 'Άγνωστη ενέργεια',
+	'UnknownMethod'				=> 'Unknown method',
+	'FormatterNotFound'			=> 'Formatter %1 not found',
+	'CantLoadClass'				=> 'Cannot load class %1 from ',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',

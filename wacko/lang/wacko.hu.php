@@ -465,7 +465,7 @@ $wacko_translation = array(
 	'CommentForWatchedPage'		=> 'New comment for page ',
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
-	'UnknownAction'				=> 'Unknown action',
+
 	'MarkRead'					=> 'Mark all as read',
 	'CurrentTime'				=> 'It is currently',
 	'Created'					=> 'created',
@@ -1108,6 +1108,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// loading error
+	'UnknownAction'				=> 'Unknown action',
+	'UnknownMethod'				=> 'Unknown method',
+	'FormatterNotFound'			=> 'Formatter %1 not found',
+	'CantLoadClass'				=> 'Cannot load class %1 from ',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
