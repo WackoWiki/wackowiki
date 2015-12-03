@@ -2839,7 +2839,7 @@ class Wacko
 			$url	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:'.$tag);
 			$title	= $this->get_translation('EmailLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'email-link';
+			$class	= '';
 			$tpl	= 'email';
 		}
 		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
@@ -2848,7 +2848,7 @@ class Wacko
 			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:'.$tag);
 			$title	= $this->get_translation('JabberLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'jabber-link';
+			$class	= '';
 			$tpl	= 'jabber';
 		}
 		else if (preg_match('/^#/', $tag))
@@ -2857,10 +2857,6 @@ class Wacko
 			$url	= $tag;
 			$tpl	= 'anchor';
 		}
-		/* else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(.*)$/', $tag, $matches))
-		{
-			$this->debug_print_r($matches);
-		} */
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg)$/i', $tag))
 		{
 			// external image
@@ -2884,7 +2880,7 @@ class Wacko
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('FileLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'file-link';
+			$class	= '';
 			$tpl	= 'file';
 		}
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/', $tag))
@@ -2893,7 +2889,7 @@ class Wacko
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('PDFLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'pdf-link';
+			$class	= '';
 			$tpl	= 'file';
 		}
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/', $tag))
@@ -2902,7 +2898,7 @@ class Wacko
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('RDFLink');
 			$icon	= $this->get_translation('outericon');
-			$class	= 'xml-link';
+			$class	= '';
 			$tpl	= 'file';
 		}
 		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
@@ -3028,46 +3024,9 @@ class Wacko
 					$title		= $file_data['file_description'].' ('.$this->binary_multiples($file_data['file_size'], false, true, true).')';
 					$alt		= $file_data['file_description'];
 					$img_link	= false;
+					$icon		= $this->get_translation('outericon');
+					$class		= '';
 					$tpl		= 'localfile';
-					$file_ext	= array (
-									'zip'	=> 'archive-link',
-									'7z'	=> 'archive-link',
-									'tar'	=> 'archive-link',
-									'bz2'	=> 'archive-link',
-									'gz'	=> 'archive-link',
-									'tgz'	=> 'archive-link',
-									'rar'	=> 'archive-link',
-									'mp3'	=> 'audio-link',
-									'ogg'	=> 'audio-link',
-									'opus'	=> 'audio-link',
-									'mp4'	=> 'video-link',
-									'ogv'	=> 'video-link',
-									'webm'	=> 'video-link',
-									'rdf'	=> 'xml-link',
-									'asc'	=> 'signature-link',
-									'pdf'	=> 'pdf-link',
-									'txt'	=> 'text-link',
-									'odg'	=> 'drawing-link',
-									'odt'	=> 'document-link',
-									'odp'	=> 'presentation-link',
-									'ods'	=> 'spreadsheet-link',
-									'png'	=> 'image-link',
-									'svg'	=> 'drawing-link',
-									'gif'	=> 'image-link',
-									'jpe'	=> 'image-link',
-									'jpeg'	=> 'image-link',
-									'jpg'	=> 'image-link');
-
-					if (in_array($file_data['file_ext'], array_keys($file_ext)))
-					{
-						$icon	= $this->get_translation('outericon');
-						$class	= $file_ext[$file_data['file_ext']];
-					}
-					else
-					{
-						$icon	= $this->get_translation('outericon');
-						$class	= 'file-link';
-					}
 
 					if ( ($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
 					{

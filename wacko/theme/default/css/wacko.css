@@ -297,63 +297,87 @@ a.user-link .icon {
 	padding-left: 17px;
 }
 
-/* mime */
-a.text-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/text.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.document-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/document.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.image-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/image.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
 a.file-link .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/file.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
-a.xml-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/xml.svg") no-repeat scroll left center;
+
+a[href^="htts://"] .icon,
+a[href^="http://"] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/web.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
-a.pdf-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/pdf.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.archive-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/archive.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.spreadsheet-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/spreadsheet.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.presentation-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/presentation.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.drawing-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/drawing.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.audio-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/audio.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.video-link .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/video.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-a.email-link .icon {
+a[href^="mailto:"] .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/mail.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
-a.jabber-link .icon {
+a[href^="xmpp:"] .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/jabber.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
+
+/* mime */
+
+a[href $='.pdf'] .icon {
+background: rgba(0, 0, 0, 0) url("./../icon/pdf.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.txt'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/text.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odt'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/document.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.gif'] .icon,
+a[href $='.jpe'] .icon,
+a[href $='.jpeg'] .icon,
+a[href $='.jpg'] .icon,
+a[href $='.png'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/image.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.rdf'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/xml.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.zip'] .icon,
+a[href $='.7z'] .icon,
+a[href $='.tar'] .icon,
+a[href $='.bz2'] .icon,
+a[href $='.gz'] .icon,
+a[href $='.tgz'] .icon,
+a[href $='.rar'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/archive.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.ods'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/spreadsheet.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odp'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/presentation.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odg'] .icon,
+a[href $='.svg'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/drawing.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.mp3'] .icon,
+a[href $='.ogg'] .icon,
+a[href $='.opus'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/audio.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.mp4'] .icon,
+a[href $='.ogv'] .icon,
+a[href $='.webm'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/video.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+
 /* lockicon */
 a.acl-denied .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/locked.svg") no-repeat scroll left center;
