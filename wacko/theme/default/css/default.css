@@ -1537,7 +1537,7 @@ table.formation td {
 	background-repeat: no-repeat;
 }
 #handler li.permissions img {
-	background-image:url("./../icon/locked.svg");
+	background-image:url("./../icon/permission.svg");
 	background-repeat: no-repeat;
 }
 #handler li.show img {
