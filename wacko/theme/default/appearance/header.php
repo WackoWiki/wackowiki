@@ -55,18 +55,20 @@ else
 	{
 		foreach ($menu as $menu_item)
 		{
-			$formatted_menu = $this->format($menu_item[1], 'post_wacko');
+
 
 			if ($this->page['page_id'] == $menu_item[0])
 			{
+				$formatted_menu_item = $menu_item[1];
 				echo '<li class="active">';
 			}
 			else
 			{
+				$formatted_menu_item = $this->format($menu_item[2], 'post_wacko');
 				echo '<li>';
 			}
 
-			echo $formatted_menu."</li>\n";
+			echo $formatted_menu_item."</li>\n";
 		}
 	}
 
