@@ -44,7 +44,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 
 ?>
 	</span> <li> <?php echo $this->get_translation('SearchText') ?>
-		<input name="phrase" size="15" class="ShSearch" /></li>
+		<input type="search" name="phrase" size="15" class="ShSearch" /></li>
 <?php
 	echo $this->form_close();
 	echo "\n</ol></div>";

@@ -174,7 +174,7 @@ else
 			$license = '<br />Material is distributed under<br />'. // ru]: ћатериал распростран€етс€ на услови€х
 
 			$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
-			$this->link('file:'.strtolower(str_replace('-', '_', $license)).'.svg', '', $licenses[$license][1]);
+			'<img src="'.$this->config['base_url'].'image/cc-'.strtolower(str_replace('-', '_', $license)).'.svg" alt="'.$licenses[$license][1].'">';
 		}
 		else
 		{

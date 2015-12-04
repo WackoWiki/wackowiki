@@ -249,9 +249,9 @@ else
 	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('search_group', '', 'get');
 	echo $this->get_translation('GroupsSearch').': </td><td>';
-	echo '<input name="group" maxchars="40" size="40" value="'.(isset($_GET['group']) ? htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
-	echo '<input id="submit" type="submit" value="'.$this->get_translation('GroupsFilter').'" /> ';
-	echo '<input id="button" type="submit" value="'.$this->get_translation('GroupsOpenProfile').'" name="gotoprofile" />';
+	echo '<input type="search" name="group" maxchars="40" size="40" value="'.(isset($_GET['group']) ? htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
+	echo '<input type="submit" id="submit" value="'.$this->get_translation('GroupsFilter').'" /> ';
+	echo '<input type="submit" id="button" value="'.$this->get_translation('GroupsOpenProfile').'" name="gotoprofile" />';
 	echo $this->form_close();
 	echo '</td></tr></table><br />'."\n";
 

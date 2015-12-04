@@ -220,7 +220,7 @@ class Polls
 			$poll	= $this->engine->form_open('poll', $tag, '', true, '', '', '#poll'.$poll_id.'_form').
 					'<a id="p'.date('dm', strtotime($header['start'])).'"></a>'.
 					'<a id="poll'.$poll_id.'_form"></a>'.
-					'<input name="poll" type="hidden" value="'.$poll_id.'" />'.
+					'<input type="hidden" name="poll" value="'.$poll_id.'" />'.
 					'<table class="formation">'."\n".
 					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$poll_id).'): '.$header['text'].'</th></tr>'."\n";
 
@@ -228,8 +228,8 @@ class Polls
 			{
 				$poll	.= '<tr class="lined"><td class="label">'.
 							($header['plural'] == 1
-								? '<input id="'.$var['v_id'].'" name="'.$var['v_id'].'" type="checkbox" value="1" />'
-								: '<input id="'.$var['v_id'].'" name="id" type="radio" value="'.$var['v_id'].'" />').
+								? '<input type="checkbox" id="'.$var['v_id'].'" name="'.$var['v_id'].'" value="1" />'
+								: '<input type="radio" id="'.$var['v_id'].'" name="id" value="'.$var['v_id'].'" />').
 							'</td>'.
 						'<td style="width:95%;text-align:left;"><label for="'.$var['v_id'].'">'.$var['text'].'</label></td></tr>'."\n";
 			}
@@ -237,8 +237,8 @@ class Polls
 			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->get_translation('PollsLasts').': '.$duration.
 						'<br />'.$this->engine->get_translation('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'<tr><td colspan="2" style="white-space:nowrap;">'.
-					'<input name="vote" id="submit" type="submit" value="'.$this->engine->get_translation('PollsSubmit').'" /> '.
-					'<input name="results" id="submit" type="submit" value="'.$this->engine->get_translation('PollsResults').'" />'.
+					'<input type="submit" name="vote" id="submit" value="'.$this->engine->get_translation('PollsSubmit').'" /> '.
+					'<input type="submit" name="results" id="submit" value="'.$this->engine->get_translation('PollsResults').'" />'.
 					'</tr></td>'.
 					'</table>'.
 					$this->engine->form_close();

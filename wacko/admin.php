@@ -224,7 +224,7 @@ if ($authorization == false)
 			?>
 			<form action="admin.php" method="post" name="emergency">
 				<label for="ap_password"><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong></label>
-				<input name="ap_password" id="ap_password" type="password" autocomplete="off" value="" />
+				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" />
 <?php
 				// captcha code starts
 
@@ -238,7 +238,7 @@ if ($authorization == false)
 				} */
 				// end captcha
 ?>
-				<input id="submit" type="submit" value="ok" />
+				<input type="submit" id="submit" value="ok" />
 			</form>
 		</div>
 	</body>

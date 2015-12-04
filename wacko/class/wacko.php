@@ -7244,7 +7244,7 @@ class Wacko
 				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
 				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('CaptchaReload').'" class="btn-reload"/></a> <br />';
 				#echo $inline ? '' : '<br />';
-				echo '<input id="captcha" type="text" name="captcha" maxlength="6" style="width: 273px;" />';
+				echo '<input type="text" id="captcha" name="captcha" maxlength="6" style="width: 273px;" />';
 				echo $inline ? '' : '<br />';
 			}
 		}

@@ -92,7 +92,7 @@ echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSe
 // Searchbar
 ?>
 <span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label><input
-	type="text" name="phrase" id="phrase" size="20" /><input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/></span>
+	type="search" name="phrase" id="phrase" size="20" /><input type="submit" class="submitinput" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/></span>
 <?php
 
 // Search form close

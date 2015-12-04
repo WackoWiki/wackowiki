@@ -621,13 +621,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$accept_text[] = '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
 			}
 
-			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateDeleteConfirm').'</th></td>'.
 					'<tr><td>'.
 						'<em>'.implode('<br />', $accept_text).'</em><br />'.
-						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -653,7 +653,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$list .= "<option value=\"{$section['tag']}\">{$section['title']}</option>\n";
 			}
 
-			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateMovesConfirm').'</th></td>'.
 					'<tr><td>'.
@@ -665,24 +665,24 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							'<option selected="selected"></option>'.
 							$list.
 						'</select> '.
-						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// enter a new name for the renamed topic
 		else if ($accept_action == 'rename')
 		{
-			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateRenameConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
 							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
 							: '').
-						'<input name="title" size="50" maxlength="100" value="'.$this->get_page_title('', $set[0]).'" /> '.
-						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+						'<input type="text" name="title" size="50" maxlength="100" value="'.$this->get_page_title('', $set[0]).'" /> '.
+						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						(count($set) > 1
 							? '<br /><small>'.$this->get_translation('ModerateRename1Only').'</small>'
 							: '').
@@ -709,7 +709,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$accept_text[] = $option['accept_text'];
 			}
 
-			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateMergeConfirm').'</th></td>'.
 					'<tr><td>'.
@@ -721,31 +721,31 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							'<option selected="selected"></option>'.
 							$list.
 						'</select> '.
-						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 
 		// print moderation controls...
-		echo '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'.
-			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? ((int)$_GET['p']) : '').'" />'."\n";
+		echo '<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
+			'<input type="hidden" name="p" value="'.(isset($_GET['p']) ? ((int)$_GET['p']) : '').'" />'."\n";
 		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="5">'.
-						'<input name="delete" id="submit" type="submit" value="'.$this->get_translation('ModerateDelete').'" /> '.
-						'<input name="move" id="submit" type="submit" value="'.$this->get_translation('ModerateMove').'" /> '.
-						'<input name="rename" id="submit" type="submit" value="'.$this->get_translation('ModerateRename').'" /> '.
-						'<input name="merge" id="submit" type="submit" value="'.$this->get_translation('ModerateMerge').'" /> '.
-						'<input name="lock" id="submit" type="submit" value="'.$this->get_translation('ModerateLock').'" /> '.
-						'<input name="unlock" id="submit" type="submit" value="'.$this->get_translation('ModerateUnlock').'" /> '.
+						'<input type="submit" name="delete" id="submit" value="'.$this->get_translation('ModerateDelete').'" /> '.
+						'<input type="submit" name="move" id="submit" value="'.$this->get_translation('ModerateMove').'" /> '.
+						'<input type="submit" name="rename" id="submit" value="'.$this->get_translation('ModerateRename').'" /> '.
+						'<input type="submit" name="merge" id="submit" value="'.$this->get_translation('ModerateMerge').'" /> '.
+						'<input type="submit" name="lock" id="submit" value="'.$this->get_translation('ModerateLock').'" /> '.
+						'<input type="submit" name="unlock" id="submit" value="'.$this->get_translation('ModerateUnlock').'" /> '.
 						(isset($this->config['moders_docs'])
 							? '&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->config['moders_docs']).'">'.$this->get_translation('Help').'...</a>'
 							: '').
 						'<br />'."\n".
-						'<input name="set" id="submit" type="submit" value="'.$this->get_translation('ModerateSet').'" /> '.
+						'<input type="submit" name="set" id="submit" value="'.$this->get_translation('ModerateSet').'" /> '.
 						($set
-							? '<input name="reset" id="submit" type="submit" value="'.$this->get_translation('ModerateReset').'" /> '.
+							? '<input type="submit" name="reset" id="submit" value="'.$this->get_translation('ModerateReset').'" /> '.
 							  '&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
 							: ''
 						).
@@ -764,7 +764,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if ($this->has_access('read', $topic['page_id']))
 			{
 				echo '<tr class="lined">'.
-						'<td style="vertical-align:middle; width:10px;" class="label"><input name="'.$topic['page_id'].'" type="checkbox" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
+						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="'.$topic['page_id'].'" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 						'<td style="text-align:left; padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>' : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
 						'<td style="text-align:center;" '.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.$this->user_link($topic['owner_name'], $lang = '', true, false).'&nbsp;&nbsp;</small></td>'.
 						'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
@@ -1180,13 +1180,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			$accept_text = '&laquo;'.$this->page['title'].'&raquo;';
 
-			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateDeleteConfirm').'</th></td>'.
 					'<tr><td>'.
 						'<em>'.$accept_text.'</em><br />'.
-						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -1212,7 +1212,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$list .= "<option value=\"{$section['tag']}\">{$section['title']}</option>\n";
 				}
 
-				echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+				echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 					'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 						'<tr><th>'.$this->get_translation('ModerateMoveConfirm').'</th></td>'.
 						'<tr><td>'.
@@ -1223,15 +1223,15 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							'<select name="section">'.
 								'<option selected="selected"></option>'.
 								$list.
-							'</select> or <input name="cluster" size="50" maxlength="250" /><br />'.
-							'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-							'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+							'</select> or <input type="text" name="cluster" size="50" maxlength="250" /><br />'.
+							'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+							'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						'</td></tr>'.
 					'</table><br />'."\n";
 			}
 			else
 			{
-				echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+				echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 					'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 						'<tr><th>'.$this->get_translation('ModeratePgMoveConfirm').'</th></td>'.
 						'<tr><td>'.
@@ -1239,9 +1239,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 								? '<span class="cite"><strong>'.$error.'</strong></span><br />'
 								: '' ).
 							'<em>'.$accept_text.'</em><br />'.
-							'<input name="cluster" size="50" maxlength="250" /> '.
-							'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-							'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+							'<input type="text" name="cluster" size="50" maxlength="250" /> '.
+							'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+							'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						'</td></tr>'.
 					'</table><br />'."\n";
 			}
@@ -1249,47 +1249,47 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// enter a new name for topic renaming
 		else if ($accept_action == 'topic_rename')
 		{
-			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateRenameConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
 							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
 							: '' ).
-						'<input name="title" size="50" maxlength="100" value="'.$this->page['title'].'" /> '.
-						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+						'<input type="text" name="title" size="50" maxlength="100" value="'.$this->page['title'].'" /> '.
+						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// confirm comments deletion
 		else if ($accept_action == 'posts_delete')
 		{
-			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.str_replace('%2', ( count($set) > 1 ? $this->get_translation('ModerateComments') : $this->get_translation('ModerateComment') ), str_replace('%1', count($set), $this->get_translation('ModerateComDelConfirm'))).'</th></td>'.
 					'<tr><td>'.
 						($error == true
 							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
 							: '' ).
-						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// enter a new name for the detached topic
 		else if ($accept_action == 'posts_split')
 		{
-			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
+			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.($forum_cluster === true ? $this->get_translation('ModerateSplitNewName') : $this->get_translation('ModerateSplitPageName') ).'</th></td>'.
 					'<tr><td>'.
 						($error == true
 							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
 							: '').
-						'<input name="title" size="50" maxlength="250" value="" /> '.
-						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
+						'<input type="text" name="title" size="50" maxlength="250" value="" /> '.
+						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
+						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						'<br />'.
 						'<small>'.
 						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked="checked" ' : '' ).'/> <label for="after">'.$this->get_translation('ModerateSplitAllAfter').'</label><br />'.
@@ -1300,21 +1300,21 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		// print moderation controls...
-		echo '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'.
-			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? ((int)$_GET['p']) : '').'" />'."\n";
+		echo '<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
+			'<input type="hidden" name="p" value="'.(isset($_GET['p']) ? ((int)$_GET['p']) : '').'" />'."\n";
 		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="2">'.
-						'<input name="topic_delete" id="submit" type="submit" value="'.$this->get_translation('ModerateDeleteTopic').'" /> '.
-						'<input name="topic_move" id="submit" type="submit" value="'.$this->get_translation('ModerateMove').'" /> '.
+						'<input type="submit" name="topic_delete" id="submit" value="'.$this->get_translation('ModerateDeleteTopic').'" /> '.
+						'<input type="submit" name="topic_move" id="submit" value="'.$this->get_translation('ModerateMove').'" /> '.
 						($forum_cluster === true
-							? '<input name="topic_rename" id="submit" type="submit" value="'.$this->get_translation('ModerateRename').'" /> '
+							? '<input type="submit" name="topic_rename" id="submit" value="'.$this->get_translation('ModerateRename').'" /> '
 							: ''
 						).
 						($forum_cluster === true
 							? ($this->has_access('comment', $this->page['page_id'], GUEST) === true
-								? '<input name="topic_lock" id="submit" type="submit" value="'.$this->get_translation('ModerateLock').'" /> '
-								: '<input name="topic_unlock" id="submit" type="submit" value="'.$this->get_translation('ModerateUnlock').'" /> '
+								? '<input type="submit" name="topic_lock" id="submit" value="'.$this->get_translation('ModerateLock').'" /> '
+								: '<input type="submit" name="topic_unlock" id="submit" value="'.$this->get_translation('ModerateUnlock').'" /> '
 							)
 							: ''
 						).
@@ -1335,15 +1335,15 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			echo '<tr class="lined">'.
 					'<td colspan="2">'.
-						'<input name="posts_delete" id="submit" type="submit" value="'.$this->get_translation('ModerateDeletePosts').'" /> '.
-						'<input name="posts_split" id="submit" type="submit" value="'.$this->get_translation('ModerateSplit').'" /> '.
+						'<input type="submit" name="posts_delete" id="submit" value="'.$this->get_translation('ModerateDeletePosts').'" /> '.
+						'<input type="submit" name="posts_split" id="submit" value="'.$this->get_translation('ModerateSplit').'" /> '.
 						(isset($this->config['moders_docs'])
 							? '&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->config['moders_docs']).'">'.$this->get_translation('Help').'...</a>'
 							: '').
 						'<br />'."\n".
-						'<input name="set" id="submit" type="submit" value="'.$this->get_translation('ModerateSet').'" /> '.
+						'<input type="submit" name="set" id="submit" value="'.$this->get_translation('ModerateSet').'" /> '.
 						($set
-							? '<input name="reset" id="submit" type="submit" value="'.$this->get_translation('ModerateReset').'" /> '.
+							? '<input type="submit" name="reset" id="submit" value="'.$this->get_translation('ModerateReset').'" /> '.
 							  '&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
 							: ''
 						).
@@ -1361,7 +1361,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$desc = htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 				echo '<tr class="lined">'.
-						'<td style="vertical-align:middle; width:10px;" class="label"><input name="'.$comment['page_id'].'" type="checkbox" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
+						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="'.$comment['page_id'].'" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 						'<td style="text-align:left; padding-left:5px;"><strong><small>'.$this->user_link($comment['user_name'], $lang = '', true, false).' ('.$this->get_time_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
 							'<br />'.$desc.'</td>'.
 					'</tr>'."\n";

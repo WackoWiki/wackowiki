@@ -359,7 +359,7 @@ if (!isset($_GET['confirm']))
 		}
 
 		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
-		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" autocomplete="off" required autofocus />';
+		echo '<input type="text" id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" autocomplete="off" required autofocus />';
 
 		if ($this->config['disable_wikiname'] === false)
 		{
@@ -381,7 +381,7 @@ if (!isset($_GET['confirm']))
 		}
 
 		#echo '<p><label for="real_name">'.$this->format_translation('RegistrationRealName').':</label>';
-		#echo '<input id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></p>';
+		#echo '<input type="text" id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></p>';
 		echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
 		echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" autocomplete="off" required />';
 
@@ -429,7 +429,7 @@ if (!isset($_GET['confirm']))
 		{
 			echo '<p>';
 			echo '<label for="terms_of_use">'.$this->get_translation('TermsOfUse').':</label>';
-			echo '<input id="terms_of_use" name="terms_of_use" type="checkbox" value="1" />';
+			echo '<input type="checkbox" id="terms_of_use" name="terms_of_use" value="1" />';
 			echo '<small> '.$this->get_translation('AcceptTermsOfUse').' '.$this->config['site_name'].' <a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->get_translation('TermsOfUse').'</a><br /></small></p>';
 		}*/
 
@@ -444,7 +444,7 @@ if (!isset($_GET['confirm']))
 		}
 		// end captcha
 
-		echo '<p><input class="OkBtn" type="submit" value="'.$this->get_translation('RegistrationButton').'" /></p>';
+		echo '<p><input type="submit" class="OkBtn" value="'.$this->get_translation('RegistrationButton').'" /></p>';
 
 		echo $this->form_close();
 		echo '</div>';
