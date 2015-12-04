@@ -242,32 +242,32 @@ if ($can_view)
 			else
 			{
 				echo '<td class="desc-">'.
+					'<strong>'.$file['file_name'].'</strong><br /><br />'.
 					$desc.'<br /><br />'.
-					$file['file_name'].'<br /><br />'.
 
 					($file['picture_w']
 						? $file['picture_w'].' x '.$file['picture_h'].'px<br />'
 						: $hits.'<br />'
 					).
 
-					$file_size.', '.$hits.'<br />'.
+					$file_size.'<br />'.
 					$this->get_time_formatted($dt).
 				'</td>';
 			}
 
 			if ($remove_mode)
 			{
-				echo '<td class="remove-">'.
+				echo '<td class="tool-">'.
 						'<span class="dt2-">'.
-							'<a href="'.$edit_href.'" class="remove2-">'.$edit2.'</a>'. # &nbsp;
-							'<a href="'.$remove_href.'" class="remove2-">'.$del2.'</a>'.
+							'<a href="'.$edit_href.'" class="tool2-">'.$edit2.'</a>'. # &nbsp;
+							'<a href="'.$remove_href.'" class="tool2-">'.$del2.'</a>'.
 						'</span>'.
 					 '</td>'."\n";
 			}
 			else
 			{
-				#echo '<td class="remove-">&nbsp;</td>'."\n";
-				#echo '<td class="remove-">&nbsp;</td>'."\n";
+				#echo '<td class="tool-">&nbsp;</td>'."\n";
+				#echo '<td class="tool-">&nbsp;</td>'."\n";
 			}
 	?>
 

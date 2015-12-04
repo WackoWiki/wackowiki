@@ -356,7 +356,7 @@ fieldset {
 	padding-right: 0
 }
 
-.upload td.remove- {
+.upload td.tool- {
 	padding-right: 0
 }
 
@@ -371,12 +371,12 @@ fieldset {
 	width: 100%
 }
 
-.upload td.dt- .dt2-, .upload td.remove- .remove2-, .upload td.size- .size2- {
+.upload td.dt- .dt2-, .upload td.tool- .tool2-, .upload td.size- .size2- {
 	font: 11px Tahoma;
 	color: #666666;
 }
 
-.upload td.remove- a.remove2-:hover, .upload td.remove- a.remove2-:active {
+.upload td.tool- a.tool2-:hover, .upload td.tool- a.tool2-:active {
 	color: #ff0000
 }
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}

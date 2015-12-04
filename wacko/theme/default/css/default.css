@@ -33,6 +33,16 @@ textarea {
 	background-color: #FFFFFF;
 }
 
+input[type=text]:hover,
+textarea:hover {
+	border: 1px solid #93cee9;
+}
+input[type=text]:focus,
+textarea:focus {
+	border: 1px solid #3daee9;
+}
+
+
 body {
 	font-family: Verdana;
 	font-size: 13px;
@@ -521,8 +531,9 @@ td.file- {
 	padding-right: 0;
 }
 
-.upload td.remove- {
+.upload td.tool- {
 	padding-right: 0;
+	width: 5%;
 }
 
 .upload td.size- {
@@ -535,14 +546,14 @@ td.file- {
 	color: #444444;
 }
 
-.upload td.dt- .dt2-, .upload td.remove- .remove2-, .upload td.size- .size2- {
+.upload td.dt- .dt2-, .upload td.tool- .tool2-, .upload td.size- .size2- {
 	font: 11px Tahoma;
 	color: #666666;
 	padding: 5px;
 	white-space: nowrap;
 }
 
-.upload td.remove- a.remove2-:hover, .upload td.remove- a.remove2-:active {
+.upload td.tool- a.tool2-:hover, .upload td.tool- a.tool2-:active {
 	color: #ff0000
 }
 

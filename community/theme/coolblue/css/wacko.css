@@ -570,7 +570,7 @@ font-size:80%;
 width:100%;
 }
 
-table.upload td.dt- .dt2-,table.upload td.remove- .remove2-,table.upload td.size- .size2- {
+table.upload td.dt- .dt2-,table.upload td.tool- .tool2-,table.upload td.size- .size2- {
 color:#666;
 font:11px Tahoma;
 }
@@ -582,11 +582,11 @@ font-weight:700;
 white-space:nowrap;
 }
 
-table.upload td.dt-,table.upload td.remove- {
+table.upload td.dt-,table.upload td.tool- {
 padding-right:0;
 }
 
-table.upload td.remove- a.remove2-:hover,table.upload td.remove- a.remove2-:active,.hl-url,.hl-inlinetags {
+table.upload td.tool- a.tool2-:hover,table.upload td.tool- a.tool2-:active,.hl-url,.hl-inlinetags {
 color:red;
 }
 

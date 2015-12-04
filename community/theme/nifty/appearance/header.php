@@ -404,7 +404,7 @@ if ($doubleclick == true)
 				</div>
 				<div id="sidebar-user-bookmarks-list" class="sidebar-user-bookmarks-list">
 					<?php
-					// display the user bookmarks list and the add/remove-current-page-from-bookmarks-icon
+					// display the user bookmarks list and the add/tool-current-page-from-bookmarks-icon
 					echo "<ul>\n";
 						// TODO: should be taken out of user session
 						foreach ($this->get_user_menu($user['user_id']) as $_menu)

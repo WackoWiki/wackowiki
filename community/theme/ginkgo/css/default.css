@@ -408,14 +408,14 @@ a.navText:active {color:#fff; background:#c00;}
 .upload td.dt-,   
 .upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
 .upload td.dt-   { padding-right:0 }
-.upload td.remove-   { padding-right:0 }
+.upload td.tool-   { padding-right:0 }
 .upload td.size- { padding-right:0; text-align:right }
 .upload td.desc- { font-size: 80%; color:#444444; width:100% }
 .upload td.dt- .dt2-,
-.upload td.remove- .remove2-,
+.upload td.tool- .tool2-,
 .upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
-.upload td.remove- A.remove2-:HOVER,
-.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
+.upload td.tool- A.tool2-:HOVER,
+.upload td.tool- A.tool2-:ACTIVE { color:#ff0000 }
 
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
 p.preview {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
