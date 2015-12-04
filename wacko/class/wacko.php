@@ -5518,13 +5518,13 @@ class Wacko
 		if ($default_menu)
 		{
 			// parsing menu items into link table
-			foreach ($default_menu as $_default_menu)
+			foreach ($default_menu as $menu_item)
 			{
 				#$menu_page_ids[] = $menu_item[0];
-				$default_menu_formatted[] = array ($_default_menu[0], $_default_menu[1]);
+				$default_menu_formatted[] = array ($menu_item[0], $menu_item[1], $menu_item[2]);
 			}
 
-			#$this->debug_print_r($default_menu);
+			#$this->debug_print_r($default_menu_formatted);
 			return $default_menu_formatted;
 		}
 	}
@@ -5536,7 +5536,7 @@ class Wacko
 		// avoid results if $user_id is 0 (user does not exists)
 		if ($user_id)
 		{
-			$_menu = $this->load_all(
+			$user_menu = $this->load_all(
 				"SELECT p.page_id, p.tag, p.title, m.menu_title, m.menu_lang ".
 				"FROM ".$this->config['table_prefix']."menu m ".
 					"LEFT JOIN ".$this->config['table_prefix']."page p ON (m.page_id = p.page_id) ".
@@ -5546,12 +5546,19 @@ class Wacko
 						: "").
 				"ORDER BY m.menu_position", true);
 
-			if ($_menu)
+			if ($user_menu)
 			{
-				foreach($_menu as $c => $menu_item)
+				foreach($user_menu as $c => $menu_item)
 				{
-					$user_menu[$c] = array(
+					$user_menu_formatted[$c] = array(
 						$menu_item['page_id'],
+							(!empty($menu_item['menu_title'])
+							? $menu_item['menu_title']
+							: (!empty($menu_item['title'])
+								? $menu_item['title']
+								: $menu_item['tag']
+								)
+						),
 						"((".$menu_item['tag'].
 						(!empty($menu_item['menu_title'])
 							? " ".$menu_item['menu_title']
@@ -5563,20 +5570,21 @@ class Wacko
 						(!empty($menu_item['menu_lang'])
 							? " @@".$menu_item['menu_lang']
 							: "").
-					"))");
+						"))"
+					);
 				}
 			}
-			#$this->debug_print_r($user_menu);
-			return $user_menu;
+			#$this->debug_print_r($user_menu_formatted);
+			return $user_menu_formatted;
 		}
 	}
 
-	function set_menu($set = MENU_AUTO, $update = 0)
+	function set_menu($set = MENU_AUTO, $update = false)
 	{
 		$user = $this->get_user();
 
 		// initial menu table construction
-		if ($set || (!($menu = $this->get_menu()) && $update == 0) )
+		if ($set || (!($menu = $this->get_menu()) && $update == false) )
 		{
 			$user_menu	= $this->get_user_menu($user['user_id']);
 			$menu		= ( $user_menu
@@ -5594,13 +5602,12 @@ class Wacko
 				foreach ($menu as $menu_item)
 				{
 					$menu_page_ids[] = $menu_item[0];
-					$menu_formatted[] = array ($menu_item[0], $this->format($menu_item[1], 'wacko'));
+					$menu_formatted[] = array ($menu_item[0], $menu_item[1], $this->format($menu_item[2], 'wacko'));
 				}
 
 				$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
 				$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
 			}
-
 		}
 
 		// adding new menu item
@@ -5613,6 +5620,7 @@ class Wacko
 			{
 				$menu[] = array(
 					$this->page['page_id'],
+					($this->get_page_title() ? $this->get_page_title() : $this->tag),
 					$this->format('(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['user_lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))', 'wacko')
 					);
 
@@ -5635,7 +5643,7 @@ class Wacko
 			foreach ($menu as $menu_item)
 			{
 				$menu_page_ids[]	= $menu_item[0];
-				$menu_formatted[]	= array ($menu_item[0], $menu_item[1]);
+				$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $menu_item[2]);
 			}
 
 			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
@@ -5672,7 +5680,7 @@ class Wacko
 			foreach ($menu as $menu_item)
 			{
 				$menu_page_ids[] = $menu_item[0];
-				$menu_formatted[] = array ($menu_item[0], $menu_item[1]);
+				$menu_formatted[] = array ($menu_item[0], $menu_item[1], $menu_item[2]);
 			}
 
 			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
