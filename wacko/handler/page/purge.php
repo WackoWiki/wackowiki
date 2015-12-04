@@ -63,23 +63,23 @@ if ($this->is_owner() || $this->is_admin())
 ?>
 
 		<strong><?php echo $this->get_translation('SelectPurgeOptions') ?></strong><br />
-		<input id="purgecomments" type="checkbox" name="comments" value="1" />
+		<input type="checkbox" id="purgecomments" name="comments" value="1" />
 		<label for="purgecomments"><?php echo $this->get_translation('PurgeComments') ?></label><br />
-		<input id="purgefiles" type="checkbox" name="files" value="1" />
+		<input type="checkbox" id="purgefiles" name="files" value="1" />
 		<label for="purgefiles"><?php echo $this->get_translation('PurgeFiles') ?></label><br />
 <?php
 		if ($this->is_admin())
 		{
 ?>
-			<input id="purgerevisions" type="checkbox" name="revisions" value="1" />
+			<input type="checkbox" id="purgerevisions" name="revisions" value="1" />
 			<label for="purgerevisions"><?php echo $this->get_translation('PurgeRevisions') ?></label><br />
 <?php
 		}
 ?>
 		<br />
 		<input type="hidden" name="purge" value="1" />
-		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('PurgeButton'); ?>" />
-		<a href="<?php echo $this->href('properties');?>" style="text-decoration: none;"><input id="button" type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" /></a>
+		<input type="submit" id="submit" name="submit" value="<?php echo $this->get_translation('PurgeButton'); ?>" />
+		<a href="<?php echo $this->href('properties');?>" style="text-decoration: none;"><input type="button" id="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" /></a>
 		<br />
 
 <?php	echo $this->form_close();

@@ -104,7 +104,7 @@ else if ($user = $this->get_user())
 		$this->set_message($output);
 	}
 
-	echo '<p><a href="'.$this->href('', '', 'action=logout').'" style="text-decoration: none;"><input class="CancelBtn" type="button" value="'.$this->get_translation('LogoutButton').'"/></a></p>';
+	echo '<p><a href="'.$this->href('', '', 'action=logout').'" style="text-decoration: none;"><input type="button" class="CancelBtn" value="'.$this->get_translation('LogoutButton').'"/></a></p>';
 	echo '<p>'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).' | <a href="'.$this->href('', '', 'action=clearcookies').'">'.$this->get_translation('ClearCookies').'</a></p>';
 	echo '</div>';
 
@@ -285,18 +285,18 @@ else
 
 	echo '<p>';
 	echo '<label for="user_name">'.$this->format_translation('LoginName').':</label>';
-	echo '<input id="user_name" name="user_name" size="25" maxlength="25" value="'.(isset($_user_name) ? $_user_name : '').'" tabindex="1" required autofocus />'."\n";
+	echo '<input type="text" id="user_name" name="user_name" size="25" maxlength="25" value="'.(isset($_user_name) ? $_user_name : '').'" tabindex="1" required autofocus />'."\n";
 	echo '</p>'."\n";
 
 	echo '<p>';
 	echo '<label for="password">'.$this->get_translation('LoginPassword').':</label>'."\n";
-	echo '<input id="password" type="password" name="password" size="25" tabindex="2" autocomplete="off" required />'."\n";
+	echo '<input type="password" id="password" name="password" size="25" tabindex="2" autocomplete="off" required />'."\n";
 	echo '</p>';
 
 	if ($this->config['allow_persistent_cookie'])
 	{
 		echo '<p>'."\n";
-		echo '<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>'."\n";
+		echo '<input type="checkbox" id="persistent" name="persistent" value="1" tabindex="3"/>'."\n";
 		echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
 		echo '</p>'."\n";
 	}
@@ -313,7 +313,7 @@ else
 	// end captcha
 
 	echo '<p>'."\n";
-	echo '<input class="OkBtn" type="submit" value="'.$this->get_translation('LoginButton').'" tabindex="4" />'."\n";
+	echo '<input type="submit" class="OkBtn" value="'.$this->get_translation('LoginButton').'" tabindex="4" />'."\n";
 	#echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">'.$this->get_translation('ClearCookies').'</a></small>';
 	echo '</p>'."\n";
 	echo '<p>'.$this->format_translation('ForgotLink').'</p>'."\n";

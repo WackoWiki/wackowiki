@@ -289,7 +289,7 @@ if ($_user_id)
 
 			echo "</select>\n";
 
-			echo '<input name="update" id="submit" type="submit" value="update" />';
+			echo '<input type="submit" name="update" id="submit" value="update" />';
 			echo '<br /><br />';
 		}
 
@@ -334,9 +334,9 @@ if ($_user_id)
 
 		echo '<tfoot>';
 		echo "<tr>\n".'<td colspan="3">'."\n";
-		echo '<input name="update_menu" type="submit" value="'.$this->get_translation('BookmarkSaveChanges').'" />';
+		echo '<input type="submit" name="update_menu" value="'.$this->get_translation('BookmarkSaveChanges').'" />';
 		echo '</td><td>';
-		echo '<input name="delete_menu_item" type="submit" value="'.$this->get_translation('BookmarkDeleteSelected').'" />';
+		echo '<input type="submit" name="delete_menu_item" value="'.$this->get_translation('BookmarkDeleteSelected').'" />';
 		echo "</td>\n</tr>\n";
 		echo '</tfoot>';
 		echo '</table>';
@@ -350,7 +350,7 @@ if ($_user_id)
 	echo '<input type="hidden" name="_user_menu" value="yes" />';
 	echo '<br /><br />';
 	echo '<label for="add_menu_item">'.$this->get_translation('BookmarksAddPage').':</label><br />'.
-		 '<input id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
+		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
 
 	if ($default_menu === true)
 	{
@@ -379,7 +379,7 @@ if ($_user_id)
 		echo "</select>\n";
 	}
 
-	echo  '<input name="add_menu_item" type="submit" value="'.$this->get_translation('CreatePageButton').'" />';
+	echo  '<input type="submit" name="add_menu_item" value="'.$this->get_translation('CreatePageButton').'" />';
 
 	echo $this->form_close();
 }

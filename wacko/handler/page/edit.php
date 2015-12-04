@@ -274,9 +274,9 @@ if ($this->has_access('read')
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
-		$output .=	'<input name="page_lang"	type="hidden" value="'.$this->page_lang.'" />'."\n".
-					'<input name="tag"			type="hidden" value="'.$this->tag.'" />'."\n".
-					'<input name="add"			type="hidden" value="1" />'."\n";
+		$output .=	'<input type="hidden" name="page_lang"	value="'.$this->page_lang.'" />'."\n".
+					'<input type="hidden" name="tag"		value="'.$this->tag.'" />'."\n".
+					'<input type="hidden" name="add"		value="1" />'."\n";
 	}
 
 	echo $output;
@@ -346,7 +346,7 @@ if ($this->has_access('read')
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
 		$output .= '<label for="addcomment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
-		$output .= '<input id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
+		$output .= '<input type="text" id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
 		$output .= '<br />'."\n";
 	}
 	else
@@ -355,7 +355,7 @@ if ($this->has_access('read')
 		{
 			// new page title field
 			$output .= '<label for="addpage_title">'.$this->get_translation('MetaTitle').':</label><br />';
-			$output .= '<input id="addpage_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="100" name="title" /><br />';
+			$output .= '<input type="text" id="addpage_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="100" name="title" /><br />';
 		}
 
 		// edit note
@@ -363,14 +363,14 @@ if ($this->has_access('read')
 		{
 			$output .= '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
-			$output .= '<input id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>';
+			$output .= '<input type="text" id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>';
 			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
 		}
 
 		// minor edit
 		if ($this->page && $this->config['minor_edit'] != 0)
 		{
-			$output .= '<input id="minor_edit" type="checkbox" value="1" name="minor_edit"/>';
+			$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit"/>';
 			$output .= '<label for="minor_edit">'.$this->get_translation('EditMinor').'</label>';
 			$output .= '<br />'."\n";
 		}
@@ -384,7 +384,7 @@ if ($this->has_access('read')
 			// reviewed
 			if ($this->page && $this->config['review'] != 0 && $this->is_reviewer())
 			{
-				$output .= '<input id="reviewed" type="checkbox" value="1" name="reviewed"/>';
+				$output .= '<input type="checkbox" id="reviewed" value="1" name="reviewed"/>';
 				$output .= '<label for="reviewed">'.$this->get_translation('Reviewed').'</label>';
 				$output .= '<br />'."\n";
 			}

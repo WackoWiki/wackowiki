@@ -253,13 +253,13 @@ else if ($stop_mod !== true)
 {
 	// printing form
 	echo $this->form_open('add_poll', $mode_file, 'post', true, '', '', '#pollsadd_form');
-	echo ($moderation === true ? '<input name="mode" type="hidden" value="'.$mode.'" />'.
-		'<input name="moderation" type="hidden" value="'.$edit_id.'" />'.
-		'<input name="user" type="hidden" value="'.$user.'" />' : '');
+	echo ($moderation === true ? '<input type="hidden" name="mode" value="'.$mode.'" />'.
+		'<input type="hidden" name="moderation" value="'.$edit_id.'" />'.
+		'<input type="hidden" name="user" value="'.$user.'" />' : '');
 	echo '<a id="pollsadd_form"></a><table class="formation">';
 	echo '<tr>';
 		echo '<th>'.$this->get_translation('PollsTopic').':</th>';
-		echo '<th style="text-align:left;"><input name="topic" type="text" size="70" maxlength="250" value="'.$topic.'" style="font-weight:normal;" /></th>';
+		echo '<th style="text-align:left;"><input type="text" name="topic" size="70" maxlength="250" value="'.$topic.'" style="font-weight:normal;" /></th>';
 	echo '</tr>';
 
 	// fill out survey answers
@@ -267,7 +267,7 @@ else if ($stop_mod !== true)
 	{
 		echo '<tr class="lined">';
 			echo '<td class="label"><label for="pollvariant_'.$var['v_id'].'">'.$this->get_translation('PollsVariant').' '.$var['v_id'].':</label></td>';
-			echo '<td><input id="pollvariant_'.$var['v_id'].'" name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.htmlspecialchars($var['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></td>';
+			echo '<td><input type="text" id="pollvariant_'.$var['v_id'].'" name="'.$var['v_id'].'" size="40" maxlength="250" value="'.htmlspecialchars($var['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></td>';
 		echo '</tr>';
 	}
 
@@ -277,27 +277,27 @@ else if ($stop_mod !== true)
 
 		if ($total_vars < 20)
 		{
-			echo '<input name="addvar" id="submit" type="submit" value="'.$this->get_translation('PollsAddVariant').'" /> ';
+			echo '<input type="submit" name="addvar" id="submit" value="'.$this->get_translation('PollsAddVariant').'" /> ';
 		}
 
 		if ($total_vars > 5)
 		{
-			echo '<input name="delvar" id="submit" type="submit" value="'.$this->get_translation('PollsDelVariant').'" />';
+			echo '<input type="submit" name="delvar" id="submit" value="'.$this->get_translation('PollsDelVariant').'" />';
 		}
 
 		echo '</td>';
 	echo '</tr>';
 	echo '<tr><td colspan="2">'.
-		'<input name="plural" type="checkbox" id="plural" value="1"'.($plural == 1 ? ' checked="checked" ' : ' ').'/> '.
+		'<input type="checkbox" name="plural" id="plural" value="1"'.($plural == 1 ? ' checked="checked" ' : ' ').'/> '.
 		'<label for="plural">'.$this->get_translation('PollsPlural').'</label>'.
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
 	// begin captcha output
-	echo '<input name="submit_poll" id="submit" type="submit" value="'.$this->get_translation('PollsSubmit').'" /> ',
+	echo '<input type="submit" name="submit_poll" id="submit" value="'.$this->get_translation('PollsSubmit').'" /> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
-		echo ($moderation === true ? '<a href="'.$this->href('', $mode_file, $mode_http).'" style="text-decoration: none;"><input name="cancel" id="button" type="button" value="'.$this->get_translation('PollsCancel').'"/></a>' : '').
-			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input name="startmod" type="checkbox" id="startmod" value="1"'.($startmod == 1 ? ' checked="checked" ' : ' ').'/> '.
+		echo ($moderation === true ? '<a href="'.$this->href('', $mode_file, $mode_http).'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('PollsCancel').'"/></a>' : '').
+			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="startmod" id="startmod" value="1"'.($startmod == 1 ? ' checked="checked" ' : ' ').'/> '.
 			'<label for="startmod">'.$this->get_translation('PollsStartMod').'</label>' : '').
 			'</td></tr>';
 	echo '</table>';

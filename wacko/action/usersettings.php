@@ -363,9 +363,9 @@ else if ($user = $this->get_user())
 	<tr>
 	<td class="form_left">&nbsp;</td>
 	<td class="form_right">
-		<input class="OkBtn" id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
+		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
 		&nbsp;
-		<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input class="CancelBtn" id="logout" name="logout" type="button" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
+		<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
 	</td>
 	</tr>
 	</tbody>
@@ -412,7 +412,7 @@ else if ($user = $this->get_user())
 			<label for="real_name"><?php echo $this->get_translation('RealName');?></label>
 		</th>
 		<td>
-			<input id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />
+			<input type="text" id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />
 		</td>
 	</tr>
 	<tr class="lined">
@@ -420,7 +420,7 @@ else if ($user = $this->get_user())
 			<a href="<?php echo $this->href('', 'Password')?>"><?php echo $this->get_translation('YouWantChangePassword');?></a>
 		</th>
 		<td>
-			<a href="<?php echo $this->href('', 'password');?>" style="text-decoration: none;"><input id="button" type="button" value="<?php echo $this->get_translation('YouWantChangePassword');?>" name="_password"/></a>
+			<a href="<?php echo $this->href('', 'password');?>" style="text-decoration: none;"><input type="button" id="button" value="<?php echo $this->get_translation('YouWantChangePassword');?>" name="_password"/></a>
 		</td>
 	</tr>
 	<tr class="lined">
@@ -571,9 +571,9 @@ else if ($user = $this->get_user())
 	<tr>
 	<td class="form_left">&nbsp;</td>
 	<td class="form_right">
-		<input class="OkBtn" id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
+		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
 		&nbsp;
-		<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input class="CancelBtn" id="logout" name="logout" type="button" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
+		<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
 	</td>
 	</tr>
 	</tbody>

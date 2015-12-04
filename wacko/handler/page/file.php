@@ -31,6 +31,7 @@ $file = $this->load_single(
 		"AND f.file_name='".quote($this->dblink, $_GET['get'])."' ".
 	"LIMIT 1");
 
+// file is in upload table
 if ($file)
 {
 	if (count($file) > 0)
@@ -88,6 +89,18 @@ else
 	{
 		header('HTTP/1.0 404 Not Found');
 	}
+}
+
+// file not available
+if (!is_file($file_path))
+{
+		$error = 404;
+		#return false;
+}
+else if (!is_readable($file_path))
+{
+	$error = 403;
+	#return false;
 }
 
 #########################################################

@@ -122,7 +122,7 @@ if ($this->is_admin())
 	echo '<input type="password" id="confpassword" name="confpassword" size="24" value="'.$confpassword.'" /></p>';
 
 	?>
-	<input name="preview" type="submit" value="<?php echo $this->get_translation('CreatePageButton'); ?>" />
+	<input type="submit" name="preview" value="<?php echo $this->get_translation('CreatePageButton'); ?>" />
 	<?php
 
 	echo $this->form_close();

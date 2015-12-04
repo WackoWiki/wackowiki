@@ -116,9 +116,9 @@ if ($this->can_upload() === true)
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove'];?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id'];?>" />
-	<input class="OkBtn" name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />
+	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />
 	&nbsp;
-	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
 	<br />
 	<br />
 <?php
@@ -197,7 +197,7 @@ if ($this->can_upload() === true)
 			} ?>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="file_description" id="UploadDesc" type="text" size="80" value="<?php echo $file['file_description']; ?>"/></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input type="text" name="file_description" id="UploadDesc" size="80" value="<?php echo $file['file_description']; ?>"/></li>
 			</ul>
 		</li>
 	</ul>
@@ -205,9 +205,9 @@ if ($this->can_upload() === true)
 
 	<input type="hidden" name="edit" value="<?php echo $_GET['edit']?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
-	<input class="OkBtn" name="submit" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
+	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 	&nbsp;
-	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
 	<br />
 	<br />
 <?php

@@ -236,11 +236,11 @@ if ($this->is_admin() ||
 		{
 			if (!$comment_on_id)
 			{
-				echo '<input id="removerevisions" type="checkbox" name="revisions" value="1" />';
+				echo '<input type="checkbox" id="removerevisions" name="revisions" value="1" />';
 				echo '<label for="removerevisions">'.$this->get_translation('RemoveRevisions').'</label><br />';
-				echo '<input id="removecluster" type="checkbox" name="cluster" value="1" />';
+				echo '<input type="checkbox" id="removecluster" name="cluster" value="1" />';
 				echo '<label for="removecluster">'.$this->get_translation('RemoveCluster').'</label><br />';
-				echo '<input id="dontkeep" type="checkbox" name="dontkeep" value="1" />';
+				echo '<input type="checkbox" id="dontkeep" name="dontkeep" value="1" />';
 				echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeep').'</label><br />';
 			}
 		}
@@ -251,8 +251,8 @@ if ($this->is_admin() ||
 ?>
 		<br /><br />
 		<input type="hidden" name="delete" value="1" />
-		<input class="OkBtn" id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />&nbsp;
-		<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" id="button" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
+		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />&nbsp;
+		<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"/></a>
 		<br />
 <?php
 		echo $this->form_close();

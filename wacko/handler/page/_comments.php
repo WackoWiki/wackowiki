@@ -205,7 +205,7 @@ if ($this->has_access('read'))
 			echo '<div class="commentform" id="commentform">'."\n";
 
 			echo $this->form_open('add_comment', 'addcomment', '', true);
-			echo '<input name="parent_id"	type="hidden" value="'.$parent_id.'" />'."\n";
+			echo '<input type="hidden" name="parent_id" value="'.$parent_id.'" />'."\n";
 
 			// preview
 			if (!empty($preview))
@@ -233,7 +233,7 @@ if ($this->has_access('read'))
 				<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if (isset($payload)) echo htmlspecialchars($payload, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?></textarea>
 
 				<label for="addcomment_title"><?php echo $this->get_translation('AddCommentTitle');?></label><br />
-				<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) echo $title; ?>" /><br />
+				<input type="text" id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) echo $title; ?>" /><br />
 
 			<?php
 			if ($user)

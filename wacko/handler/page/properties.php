@@ -190,8 +190,8 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 					"<tr>".
 						'<th class="form_left"></th>'.
 						'<td class="form_right">'.
-							'<input class="OkBtn" type="submit" name="extended" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp;'.
-							'<a href="'.$this->href('properties').'" style="text-decoration: none;"><input class="CancelBtn" type="button" value="'.$this->get_translation('MetaCancelButton').'" style="width: 120px" /></a>'.
+							'<input type="submit" class="OkBtn" name="extended" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp;'.
+							'<a href="'.$this->href('properties').'" style="text-decoration: none;"><input type="button" class="CancelBtn" value="'.$this->get_translation('MetaCancelButton').'" style="width: 120px" /></a>'.
 						'</td>'.
 					"</tr>\n</table>";
 
@@ -216,7 +216,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		{
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row"><label for="title">'.$this->get_translation('MetaTitle').'</label></th>'.
-						'<td class="form_right"><input id="title" name="title" value="'.$this->page['title'].'" size="60" maxlength="100" /></td>'.
+						'<td class="form_right"><input type="text" id="title" name="title" value="'.$this->page['title'].'" size="60" maxlength="100" /></td>'.
 					"</tr>\n".'<tr class="lined">'.
 						'<th class="form_left" scope="row"><label for="keywords">'.$this->get_translation('MetaKeywords').'</label></th>'.
 						'<td class="form_right"><textarea id="keywords" name="keywords" rows="4" cols="51">'.$this->page['keywords'].'</textarea></td>'.
@@ -225,7 +225,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 						'<td class="form_right"><textarea id="description" name="description" rows="4" cols="51">'.$this->page['description'].'</textarea></td>'.
 					"</tr>\n".'<tr class="lined">'.
 						'<th class="form_left" scope="row"><label for="menu_tag">'.$this->get_translation('SetMenuLabel').'</label></th>'.
-						'<td class="form_right"><input id="menu_tag" name="menu_tag" value="'.(isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '').'" size="60" maxlength="100" /></td>'.
+						'<td class="form_right"><input type="text" id="menu_tag" name="menu_tag" value="'.(isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '').'" size="60" maxlength="100" /></td>'.
 
 			/*		"</tr>\n".'<tr class="lined">'.
 						'<th class="form_left" scope="row"><label for="show_menu_tag">'.$this->get_translation('SetShowMenuLabel').'</label></th>'.
@@ -286,8 +286,8 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			echo	"<tr>\n".
 						'<th class="form_left"></th>'.
 						'<td class="form_right">'.
-							'<input class="OkBtn" type="submit" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp;'.
-							'<a href="'.$this->href().'" style="text-decoration: none;"><input class="CancelBtn" type="button" value="'.$this->get_translation('MetaCancelButton').'" style="width: 120px" /></a>'.
+							'<input type="submit" class="OkBtn" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp;'.
+							'<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" class="CancelBtn" value="'.$this->get_translation('MetaCancelButton').'" style="width: 120px" /></a>'.
 						'</td>';
 		}
 		else

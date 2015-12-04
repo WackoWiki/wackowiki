@@ -336,8 +336,8 @@ if ($upload_allowed == true)
 	</select>
 </p>
 <p>
-	<input class="OkBtn" id="submit" type="submit" value="<?php echo $this->get_translation('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
-	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" id="button" type="button" value="<?php echo $this->get_translation('ACLCancelButton'); ?>"/></a>
+	<input type="submit" class="OkBtn" id="submit" value="<?php echo $this->get_translation('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo $this->get_translation('ACLCancelButton'); ?>"/></a>
 </p>
 </div>
 <?php

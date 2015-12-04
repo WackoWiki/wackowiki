@@ -163,7 +163,9 @@ if ($registered
 			echo $this->get_translation('NewName');
 			echo $this->form_open('rename_page', 'rename');
 
-			?> <input type="hidden" name="rename" value="1" /><input type="text" name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
+			?>
+			<input type="hidden" name="rename" value="1" />
+			<input type="text" name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
 <br />
 			<?php
 			echo '<input type="checkbox" id="redirect" name="redirect" ';
@@ -188,8 +190,8 @@ if ($registered
 			echo $this->action('backlinks', array('nomark' => 0));
 			?> <br />
 <br />
-<input class="OkBtn" name="submit" type="submit" value="<?php echo $this->get_translation('RenameButton'); ?>" /> &nbsp;
-<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
+<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->get_translation('RenameButton'); ?>" /> &nbsp;
+<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
 <br />
 <br />
 			<?php echo $this->form_close();

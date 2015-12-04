@@ -197,7 +197,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				<tr>
 					<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->get_translation('UsersIntercomSubject'); ?>:</td>
 					<td>
-						<input name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200" />
+						<input type="text" name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200" />
 						<?php
 						if (isset($_POST['ref']))
 						{
@@ -209,7 +209,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo (isset($_POST['mail_body']) ? htmlspecialchars($_POST['mail_body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ""); ?></textarea></td>
 				</tr>
 				<tr>
-					<td><input id="submit" type="submit" name="send_pm" value="<?php echo $this->get_translation('UsersIntercomSend'); ?>" /></td>
+					<td><input type="submit" id="submit" name="send_pm" value="<?php echo $this->get_translation('UsersIntercomSend'); ?>" /></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -564,8 +564,8 @@ else
 	echo '<table class="formation"><tr><td class="label">';
 	echo $this->get_translation('UsersSearch').': </td><td>';
 	echo '<input type="search" name="user" maxchars="40" size="40" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
-	echo '<input id="submit" type="submit" value="'.$this->get_translation('UsersFilter').'" /> ';
-	echo '<input id="button" type="submit" value="'.$this->get_translation('UsersOpenProfile').'" name="gotoprofile" />';
+	echo '<input type="submit" id="submit" value="'.$this->get_translation('UsersFilter').'" /> ';
+	echo '<input type="submit" id="button" value="'.$this->get_translation('UsersOpenProfile').'" name="gotoprofile" />';
 	echo '</td></tr></table><br />'."\n";
 	echo $this->form_close();
 

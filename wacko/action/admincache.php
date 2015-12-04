@@ -15,16 +15,16 @@ if ($this->is_admin())
 
 		echo '<div class="layout-box">';
 		// config cache
-		echo '<input id="purgeconfig_cache" type="checkbox" name="config_cache" value="1" />';
+		echo '<input type="checkbox" id="purgeconfig_cache" name="config_cache" value="1" />';
 		echo '<label for="purgeconfig_cache">'.$this->get_translation('ConfigCache').'</label><br />';
 		// page cache
-		echo '<input id="purgefiles_cache" type="checkbox" name="pages_cache" value="1" />';
+		echo '<input type="checkbox" id="purgefiles_cache" name="pages_cache" value="1" />';
 		echo '<label for="purgefiles_cache">'.$this->get_translation('PageCache').'</label><br />';
 		// sql cache
-		echo '<input id="purgesql_cache" type="checkbox" name="sql_cache" value="1" />';
+		echo '<input type="checkbox" id="purgesql_cache" name="sql_cache" value="1" />';
 		echo '<label for="purgesql_cache">'.$this->get_translation('SQLCache').'</label><br />';
 		// feed cache
-		echo '<input id="purgefeeds_cache" type="checkbox" name="feed_cache" value="1" />';
+		echo '<input type="checkbox" id="purgefeeds_cache" name="feed_cache" value="1" />';
 		echo '<label for="purgefeeds_cache">'.$this->get_translation('FeedCache').'</label><br /><br />';
 
 		echo '<input type="submit" name="clear_cache" value="'. $this->get_translation('ClearCache').'" />';
