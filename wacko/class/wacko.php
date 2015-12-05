@@ -4121,12 +4121,18 @@ class Wacko
 
 	function theme_header($mod = '')
 	{
-		return $this->include_buffered('header'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', $this->config['theme_path'].'/'.$this->config['theme'].'/appearance');
+		$theme_path		= $this->config['theme_path'].'/'.$this->config['theme'].'/appearance';
+		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
+
+		return $this->include_buffered('header'.$mod.'.php', $error_message, '', $theme_path);
 	}
 
 	function theme_footer($mod = '')
 	{
-		return $this->include_buffered('footer'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', $this->config['theme_path'].'/'.$this->config['theme'].'/appearance');
+		$theme_path		= $this->config['theme_path'].'/'.$this->config['theme'].'/appearance';
+		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
+
+		return $this->include_buffered('footer'.$mod.'.php', $error_message, '', $theme_path);
 	}
 
 	function use_class($class_name, $class_dir = '', $file_name = '')
@@ -4561,23 +4567,27 @@ class Wacko
 		// cookie elements
 
 		// session length in days
-		$session_length		= ($session_length == 0 ? $this->config['session_length'] : $session_length);
-		$session_length		= ($persistent ? $session_length : 0.25);
-		$session_expire		= time() + $session_length * 24 * 3600;
+		$session_length			= ($session_length == 0 ? $this->config['session_length'] : $session_length);
+		$session_length			= ($persistent ? $session_length : 0.25);
+		$session_expire			= time() + $session_length * 24 * 3600;
 
 		//  generate a string to use as the identifier for the login cookie
 		$login_token			= $this->unique_id(); // TODO:
 		$this->cookie_token		= hash('sha1', $login_token);
 
-		$salt_length		= 10;
-		$salt_user_form		= $this->random_password($salt_length, 3);
+		$salt_length			= 10;
+		$salt_user_form			= $this->random_password($salt_length, 3);
 
 		$this->time_now			= date('Y-m-d H:i:s');
 		$this->session_time		= date('Y-m-d H:i:s', $session_expire);
 
 		if ($user['user_id'])
 		{
-			$this->session_last_visit = (!empty($user['session_time']) && $user['session_time']) ? $user['session_time'] : (($user['last_visit']) ? $user['last_visit'] : $this->time_now );
+			$this->session_last_visit = (!empty($user['session_time']) && $user['session_time'])
+											? $user['session_time']
+											: ($user['last_visit']
+												? $user['last_visit']
+												: $this->time_now );
 		}
 		else
 		{
@@ -5559,18 +5569,18 @@ class Wacko
 								: $menu_item['tag']
 								)
 						),
-						"((".$menu_item['tag'].
+						'(('.$menu_item['tag'].
 						(!empty($menu_item['menu_title'])
-							? " ".$menu_item['menu_title']
+							? ' '.$menu_item['menu_title']
 							: (!empty($menu_item['title'])
-								? " ".$menu_item['title']
-								: " ".$menu_item['tag']
+								? ' '.$menu_item['title']
+								: ' '.$menu_item['tag']
 								)
 						).
 						(!empty($menu_item['menu_lang'])
-							? " @@".$menu_item['menu_lang']
-							: "").
-						"))"
+							? ' @@'.$menu_item['menu_lang']
+							: '').
+						'))'
 					);
 				}
 			}
@@ -5601,8 +5611,8 @@ class Wacko
 				// parsing menu items into link table
 				foreach ($menu as $menu_item)
 				{
-					$menu_page_ids[] = $menu_item[0];
-					$menu_formatted[] = array ($menu_item[0], $menu_item[1], $this->format($menu_item[2], 'wacko'));
+					$menu_page_ids[]	= $menu_item[0];
+					$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $this->format($menu_item[2], 'wacko'));
 				}
 
 				$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
@@ -5679,8 +5689,8 @@ class Wacko
 			// parsing menu items into link table
 			foreach ($menu as $menu_item)
 			{
-				$menu_page_ids[] = $menu_item[0];
-				$menu_formatted[] = array ($menu_item[0], $menu_item[1], $menu_item[2]);
+				$menu_page_ids[]	= $menu_item[0];
+				$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $menu_item[2]);
 			}
 
 			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
