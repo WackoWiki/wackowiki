@@ -34,10 +34,16 @@ textarea {
 }
 
 input[type=text]:hover,
+input[type=search]:hover,
+input[type=email]:hover,
+input[type=password]:hover,
 textarea:hover {
 	border: 1px solid #93cee9;
 }
 input[type=text]:focus,
+input[type=search]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
 textarea:focus {
 	border: 1px solid #3daee9;
 }
@@ -1017,13 +1023,15 @@ td.form_left, th.form_left {
 
 #usermenu {
 	margin: 0 auto 0;
-	overflow: hidden;
+	/* overflow: hidden; */
 	float: left;
 	text-align: left;
 	position: relative;
 }
 
-#usermenu ol {
+
+#usermenu ol,
+#usermenu ol ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -1036,6 +1044,20 @@ td.form_left, th.form_left {
 	margin: 0 .5em 0 -.5em;
 	padding: 0 .5em 0 .5em;
 	white-space: nowrap;
+}
+
+#usermenu ol ul li {
+	border-left: 0px;
+}
+
+#usermenu li.active {
+	font-weight: 600;
+	background-color: #439ce8;
+	background-image: linear-gradient(to bottom, #43ace8, #4383e8);
+	background-repeat: repeat-x;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 #usermenu li a {
@@ -1396,6 +1418,7 @@ table.formation td {
 	padding:0;
 }
 
+#usermenu ol li,
 #handler ul li {
 	display:block;
 	float:left;
@@ -1405,6 +1428,7 @@ table.formation td {
 	white-space:nowrap;
 }
 
+#usermenu ol li a,
 #handler ul li a {
 	display:block;
 }
@@ -1435,6 +1459,7 @@ table.formation td {
 }
 
 /* submenu items */
+#usermenu ol ul, 
 #handler ul ul {
 	display:none; /* Sub menus are hidden by default */
 	position:absolute;
@@ -1449,7 +1474,7 @@ table.formation td {
 	border-width:0 1px 1px;
 
 }
-
+#usermenu ol ul a,
 #handler ul ul a {
 	background: none repeat scroll 0 0 transparent;
 }
@@ -1459,6 +1484,7 @@ table.formation td {
 	text-decoration: none;
 }
 
+#usermenu ol ul li,
 #handler ul ul li {
 	left:auto;  /*resets the left: on the parent li */
 	margin:0; /* Reset the 1px margin from the top menu */
@@ -1471,7 +1497,10 @@ table.formation td {
 	vertical-align: baseline;
 
 }
-
+#usermenu ol ul li a,
+#usermenu ol li.active li a,
+#usermenu ol li:hover ul li a,
+#usermenu ol ul li span,
 #handler ul ul li a,
 #handler ul li.active li a,
 #handler ul li:hover ul li a,
@@ -1491,6 +1520,7 @@ table.formation td {
 }
 
 /* make the sub menus appear on hover */
+#usermenu ol li:hover ul,
 #handler ul li:hover ul {
 	display: block; /* Show the sub menus */
 }
@@ -1607,7 +1637,13 @@ table.formation td {
 	height: 22px;
 	width: 22px;
 }
-
+.btn-menu {
+background-image: url('./../icon/menu.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+}
 .btn-addbookmark {
 background-image: url('./../icon/bookmark.svg'), none;
 	background-repeat: no-repeat;

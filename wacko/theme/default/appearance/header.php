@@ -53,22 +53,50 @@ else
 	// menu
 	if ($menu)
 	{
+		$fmi		= array(); // formatted_menu_item
+		$level		= 'menu';
+		$max_items	= 5;
+		$i			= 1;
+
 		foreach ($menu as $menu_item)
 		{
+			if ($i > $max_items)
+			{
+				$level = 'submenu';
+			}
 
+			if ( ! isset($fmi[$level]))
+			{
+				$fmi[$level] = null;
+			}
 
 			if ($this->page['page_id'] == $menu_item[0])
 			{
-				$formatted_menu_item = $menu_item[1];
-				echo '<li class="active">';
+				$fmi[$level] .= '<li class="active">';
+				$fmi[$level] .= $menu_item[1];
 			}
 			else
 			{
-				$formatted_menu_item = $this->format($menu_item[2], 'post_wacko');
-				echo '<li>';
+				$fmi[$level] .= '<li>';
+				$fmi[$level] .= $this->format($menu_item[2], 'post_wacko');
 			}
 
-			echo $formatted_menu_item."</li>\n";
+			$fmi[$level] .= "</li>\n";
+
+			$i++;
+		}
+
+		echo $fmi['menu'];
+
+		if (isset($fmi['submenu']))
+		{
+			// dropdown
+			echo '<li class="dropdown"><a href="#" id="more">
+					<img src="'. $this->config['theme_url'].'icon/spacer.png" alt="-" title="'.
+					$this->get_translation('RemoveFromBookmarks') .'" class="btn-menu"/></a>';
+			echo '<ul class="dropdown_menu">'."\n";
+			echo $fmi['submenu'];
+			echo "</ul>\n</li>\n";
 		}
 	}
 
