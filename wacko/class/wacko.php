@@ -4119,12 +4119,12 @@ class Wacko
 		}
 	}
 
-	function header($mod = '')
+	function theme_header($mod = '')
 	{
 		return $this->include_buffered('header'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', $this->config['theme_path'].'/'.$this->config['theme'].'/appearance');
 	}
 
-	function footer($mod = '')
+	function theme_footer($mod = '')
 	{
 		return $this->include_buffered('footer'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', $this->config['theme_path'].'/'.$this->config['theme'].'/appearance');
 	}
@@ -6308,7 +6308,7 @@ class Wacko
 			$this->context[$this->current_context] = $this->tag;
 			$data .= $this->method($this->method);
 			$this->current_context--;
-			echo $this->header($mod).$data.$this->footer($mod);
+			echo $this->theme_header($mod).$data.$this->theme_footer($mod);
 		}
 
 		return $this->tag;
