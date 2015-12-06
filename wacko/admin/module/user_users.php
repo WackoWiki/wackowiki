@@ -158,7 +158,7 @@ function admin_user_users(&$engine, &$module)
 				"INSERT INTO ".$engine->config['table_prefix']."user_setting SET ".
 					"user_id		= '".(int)$_user_id['user_id']."', ".
 					"typografica	= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
-					"user_lang			= '".quote($engine->dblink, ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']))."', ".
+					"user_lang		= '".quote($engine->dblink, ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']))."', ".
 					"theme			= '".quote($engine->dblink, $engine->config['theme'])."', ".
 					"send_watchmail	= '1'");
 
@@ -199,16 +199,17 @@ function admin_user_users(&$engine, &$module)
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}user SET ".
 					"user_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
-					"email	= '".quote($engine->dblink, $_POST['newemail'])."', ".
+					"email			= '".quote($engine->dblink, $_POST['newemail'])."', ".
 					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
 					"enabled		= '".(int)$_POST['enabled']."' ".
-				"WHERE user_id = '".(int)$_POST['user_id']."' ".
+				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}user_setting SET ".
-					"user_lang		= '".quote($engine->dblink, $_POST['user_lang'])."' ".
-				"WHERE user_id = '".(int)$_POST['user_id']."' ".
+					"user_lang		= '".quote($engine->dblink, $_POST['user_lang'])."', ".
+					"theme			= '".quote($engine->dblink, $_POST['theme'])."' ".
+				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
 			$engine->show_message($engine->get_translation('UsersRenamed'));
@@ -368,7 +369,7 @@ function admin_user_users(&$engine, &$module)
 	else if (isset($_POST['edit']) && $user_id)
 	{
 		if ($user = $engine->load_single(
-			"SELECT u.user_name, u.real_name, u.email, p.user_lang, u.enabled ".
+			"SELECT u.user_name, u.real_name, u.email, p.user_lang,  p.theme, u.enabled ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
@@ -406,22 +407,39 @@ function admin_user_users(&$engine, &$module)
 				'<tr>
 					<td>
 						<label for="user_lang">'.$engine->get_translation('YourLanguage').'</label>
-					</td>'.
-					'<td>
+					</td>
+					<td>
 						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
 
-					$languages = $engine->get_translation('Languages');
+						$languages = $engine->get_translation('Languages');
 
-					if ($langs = $engine->available_languages())
-					{
-						foreach ($langs as $lang)
+						if ($langs = $engine->available_languages())
 						{
-							echo '<option value="'.$lang.'" '.($user['user_lang'] == $lang ? ' selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
+							foreach ($langs as $lang)
+							{
+								echo '<option value="'.$lang.'" '.($user['user_lang'] == $lang ? ' selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
+							}
 						}
-					}
 
-				echo '</select>
+					echo '</select>
+					</td>
+				</tr>'.
+				'<tr>
+					<td>
+						<label for="user_lang">'.$engine->get_translation('ChooseTheme').'</label>
+					</td>
+					<td>
+						<select style="width:200px;" id="theme" name="theme">'.
+
+						$themes = $engine->available_themes();
+
+						foreach ($themes as $theme)
+						{
+							echo '<option value="'.$theme.'" '.($user['theme'] == $theme ? 'selected="selected"' : '').'>'.$theme.'</option>';
+						}
+
+					echo '</select>
 					</td>
 				</tr>'.
 				'<tr>
