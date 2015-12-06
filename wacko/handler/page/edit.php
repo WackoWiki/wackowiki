@@ -190,25 +190,14 @@ if ($this->has_access('read')
 				// add page (revisions)
 				$body_r = $this->save_page($this->tag, $title, $body, $edit_note, $minor_edit, $reviewed, $this->page['comment_on_id']);
 
-				// log event
-				if ($this->page['comment_on_id'] != 0)
+				// is page ..
+				if ($this->page['comment_on_id'] == 0)
 				{
-					// comment modified
-					$this->log(6, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogCommentEdited', $this->config['language'])));
-				}
-				else
-				{
-					// log event, save categories
+					// save categories
 					if ($this->page == false)
 					{
 						// new page created
 						$this->save_categories_list($this->get_page_id($this->tag));
-						$this->log(4, str_replace('%1', $this->tag." ".$_POST['title'], $this->get_translation('LogPageCreated', $this->config['language'])));
-					}
-					else
-					{
-						// old page modified
-						$this->log(6, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogPageEdited', $this->config['language'])));
 					}
 
 					// restore username after anonymous publication
