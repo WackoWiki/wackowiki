@@ -2255,13 +2255,11 @@ class Wacko
 			$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops', array('source' => 1));
 
 			$object_id			= $page_id;
-			$subject			= '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
 		}
 		else if ($comment_on_id)
 		{
 			$object_id			= $comment_on_id;
 			$title				= $this->get_page_title(0, $comment_on_id);
-			$subject			= '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
 		}
 
 		$watchers	= $this->load_all(
@@ -2304,7 +2302,7 @@ class Wacko
 					if ($this->has_access('read', $object_id, $watcher['user_name']))
 					{
 						$_user = $this->load_single(
-							"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
+							"SELECT u.email, p.user_lang, u.email_confirm, u.enabled, p.send_watchmail ".
 							"FROM " .$this->config['user_table']." u ".
 								"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 							"WHERE u.user_id = '".$watcher['user_id']."' ".
@@ -2317,7 +2315,17 @@ class Wacko
 							$this->set_translation ($lang);
 							$this->set_language ($lang);
 
-							#$subject = '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+							// Email subject
+							if (!$comment_on_id && $is_revision)
+							{
+								$subject			= '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
+							}
+							else if ($comment_on_id)
+							{
+								$subject			= '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+							}
+
+							// Email body
 							$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
 									($user_name == GUEST ? $this->get_translation('Guest') : $user_name);
 
