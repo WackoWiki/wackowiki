@@ -1972,6 +1972,18 @@ class Wacko
 				$this->save_acl($page_id, 'create',		$create_acl);
 				$this->save_acl($page_id, 'upload',		$upload_acl);
 
+				// log event
+				if ($comment_on_id)
+				{
+					// see add_comment handler
+					#$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', $this->config['language']))));
+				}
+				else
+				{
+					// added new page
+					$this->log(4, str_replace('%1', $tag.' '.$title, $this->get_translation('LogPageCreated', $this->config['language'])));
+				}
+
 				// counters
 				if ($comment_on_id)
 				{
@@ -2010,130 +2022,14 @@ class Wacko
 					}
 
 					// subscribe & notify moderators
-					if (is_array($this->config['aliases']))
-					{
-						$list		= $this->config['aliases'];
-
-						if (isset($list['Moderator']))
-						{
-							$moderators	= explode("\n", $list['Moderator']);
-
-							if (!$mute) foreach ($moderators as $moderator)
-							{
-								if ($user_name != $moderator)
-								{
-									$moderator_id = $this->get_user_id($moderator);
-
-									$_user = $this->load_single(
-										"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
-										"FROM " .$this->config['user_table']." u ".
-											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-										"WHERE u.user_id = '".$moderator_id."' ".
-										"LIMIT 1");
-
-									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
-									{
-										$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
-										$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moderator.".\n\n".
-												str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
-												"'$title'\n".
-												$this->href('', $tag)."\n\n".
-												$this->get_translation('EmailGoodbye')."\n".
-												$this->config['site_name']."\n".
-												$this->config['base_url'];
-
-										$this->send_mail($_user['email'], $subject, $body);
-										$this->set_watch($moderator_id, $page_id);
-									}
-								}
-							}
-
-							unset($list, $moderators, $moderator, $moderator_id);
-						}
-					}
+					$this->notify_moderator($page_id, $tag, $title, $user_name, $mute);
 				}
 
 				if ($comment_on_id)
 				{
 					// notifying watchers
-					$title		= $this->get_page_title(0, $comment_on_id);
-					$watchers	= $this->load_all(
-									"SELECT DISTINCT w.user_id, u.user_name ".
-									"FROM ".$this->config['table_prefix']."watch w ".
-										"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
-									"WHERE w.page_id = '".(int)$comment_on_id."'");
-
-					if ($watchers && !$mute)
-					{
-						foreach ($watchers as $watcher)
-						{
-							if ($watcher['user_id'] != $user_id && $watcher['user_name'] != GUEST)
-							{
-								// assert that user has no comments pending...
-								$pending = $this->load_single(
-									"SELECT comment_id ".
-									"FROM {$this->config['table_prefix']}watch ".
-									"WHERE page_id = '".(int)$comment_on_id."' ".
-										"AND user_id = '".$watcher['user_id']."' ".
-									"LIMIT 1");
-
-								// ...and add one if so
-								if ($pending['comment_id'] == false)
-								{
-									$this->sql_query(
-										"UPDATE {$this->config['table_prefix']}watch SET ".
-											"comment_id = '".(int)$page_id."' ".
-										"WHERE page_id = '".(int)$comment_on_id."' ".
-											"AND user_id = '".$watcher['user_id']."'");
-								}
-								else
-								{
-									continue;	// skip current watcher
-								}
-
-								if ($this->has_access('read', $comment_on_id, $watcher['user_name']))
-								{
-									$_user = $this->load_single(
-										"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
-										"FROM " .$this->config['user_table']." u ".
-											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-										"WHERE u.user_id = '".$watcher['user_id']."' ".
-										"LIMIT 1");
-
-									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
-									{
-										$lang = $_user['user_lang'];
-										$this->load_translation($lang);
-										$this->set_translation ($lang);
-										$this->set_language ($lang);
-
-										$subject = '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
-										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
-												($user_name == GUEST ? $this->get_translation('Guest') : $user_name).
-												$this->get_translation('SomeoneCommented', $lang)."\n".
-												$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
-												"----------------------------------------------------------------------\n\n".
-												$body."\n\n".
-												"----------------------------------------------------------------------\n\n".
-												$this->get_translation('EmailGoodbye', $lang)."\n".
-												$this->config['site_name']."\n".
-												$this->config['base_url'];
-
-										$this->send_mail($_user['email'], $subject, $body);
-									}
-								}
-								else
-								{
-									$this->clear_watch($watcher['user_id'], $comment_on_id);
-								} // end of has_access
-							}
-						}// end of watchers
-					}
-
-					$this->load_translation($this->user_lang);
-					$this->set_translation($this->user_lang);
-					$this->set_language($this->user_lang);
-				} // end of comment_on
+					$this->notifying_watcher($page_id, $comment_on_id, $tag, $title, $user_id, $user_name, false, $mute);
+				}
 			} // end of new page
 			// RESAVING AN OLD PAGE, CREATING REVISION
 			else
@@ -2176,77 +2072,24 @@ class Wacko
 							"title			= '".quote($this->dblink, $title)."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
-				}
 
-				// Since there's no revision history for comments it's pointless to do the following for them.
-				if (!$comment_on_id)
-				{
-					// revisions diff
-					$page = $this->load_single(
-						"SELECT revision_id ".
-						"FROM ".$this->config['table_prefix']."revision ".
-						"WHERE tag = '".quote($this->dblink, $tag)."' ".
-						"ORDER BY modified DESC ".
-						"LIMIT 1");
-
-					$_GET['a']			= -1;
-					$_GET['b']			= $page['revision_id'];
-					$_GET['diffmode']	= 1;
-					$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops', array('source' => 1));
-
-					// notifying watchers
-					$title				= $this->get_page_title(0, $page_id);
-
-					$watchers	= $this->load_all(
-						"SELECT DISTINCT w.user_id, u.user_name ".
-						"FROM ".$this->config['table_prefix']."watch w ".
-							"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
-						"WHERE w.page_id = '".(int)$page_id."'");
-
-					if ($watchers && !$mute)
+					// log event
+					if ($this->page['comment_on_id'] != 0)
 					{
-						foreach ($watchers as $watcher)
-						{
-							if ($watcher['user_id'] !=  $user_id)
-							{
-								if ($this->has_access('read', $page_id, $watcher['user_name']))
-								{
-									$_user = $this->load_single(
-										"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
-										"FROM " .$this->config['user_table']." u ".
-											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-										"WHERE u.user_id = '".$watcher['user_id']."' ".
-										"LIMIT 1");
+						// comment modified
+						$this->log(6, str_replace('%1', $tag.' '.$title, $this->get_translation('LogCommentEdited', $this->config['language'])));
+					}
+					else
+					{
+						// old page modified
+						$this->log(6, str_replace('%1', $tag.' '.$title, $this->get_translation('LogPageEdited', $this->config['language'])));
+					}
 
-									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
-									{
-										$lang = $_user['user_lang'];
-										$this->load_translation($lang);
-										$this->set_translation ($lang);
-										$this->set_language ($lang);
-
-										$subject = '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
-										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
-												($user_name == GUEST ? $this->get_translation('Guest') : $user_name).
-												$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
-												(isset($title) ? $title : $tag)."\n".
-												$this->href('', $tag)."\n\n".
-												"======================================================================".
-												$this->format($diff, 'html2mail').
-												"\n======================================================================\n\n".
-												$this->get_translation('EmailGoodbye', $lang)."\n".
-												$this->config['site_name']."\n".
-												$this->config['base_url'];
-
-										$this->send_mail($_user['email'], $subject, $body);
-									}
-								} // end of has_access()
-							} // end of watchers
-						}
-
-						$this->load_translation($this->user_lang);
-						$this->set_translation ($this->user_lang);
-						$this->set_language ($this->user_lang);
+					// Since there's no revision history for comments it's pointless to do the following for them.
+					if (!$comment_on_id)
+					{
+						// notifying watchers
+						$this->notifying_watcher($page_id, $comment_on_id, $tag, $title, $user_id, $user_name, true, $mute);
 					}
 				} // end of new != old
 			} // end of existing page
@@ -2346,6 +2189,176 @@ class Wacko
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 		}
+	}
+
+	function notify_moderator($page_id, $tag, $title, $user_name, $mute)
+	{
+		// subscribe & notify moderators
+		if (is_array($this->config['aliases']))
+		{
+			$list	= $this->config['aliases'];
+
+			if (isset($list['Moderator']))
+			{
+				$moderators	= explode("\n", $list['Moderator']);
+
+				if (!$mute) foreach ($moderators as $moderator)
+				{
+					if ($user_name != $moderator)
+					{
+						$moderator_id = $this->get_user_id($moderator);
+
+						$_user = $this->load_single(
+							"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
+							"FROM " .$this->config['user_table']." u ".
+								"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+							"WHERE u.user_id = '".$moderator_id."' ".
+							"LIMIT 1");
+
+						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+						{
+							$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
+							$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moderator.".\n\n".
+									str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
+									"'$title'\n".
+									$this->href('', $tag)."\n\n".
+									$this->get_translation('EmailGoodbye')."\n".
+									$this->config['site_name']."\n".
+									$this->config['base_url'];
+
+							$this->send_mail($_user['email'], $subject, $body);
+							$this->set_watch($moderator_id, $page_id);
+						}
+					}
+				}
+
+				unset($list, $moderators, $moderator, $moderator_id);
+			}
+		}
+	}
+
+	function notifying_watcher($page_id, $comment_on_id, $tag, $title, $user_id, $user_name, $is_revision, $mute)
+	{
+		if (!$comment_on_id && $is_revision)
+		{
+			// revisions diff
+			$page = $this->load_single(
+				"SELECT revision_id ".
+				"FROM ".$this->config['table_prefix']."revision ".
+				"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				"ORDER BY modified DESC ".
+				"LIMIT 1");
+
+			$_GET['a']			= -1;
+			$_GET['b']			= $page['revision_id'];
+			$_GET['diffmode']	= 1;
+			$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops', array('source' => 1));
+
+			$object_id			= $page_id;
+			$subject			= '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
+		}
+		else if ($comment_on_id)
+		{
+			$object_id			= $comment_on_id;
+			$title				= $this->get_page_title(0, $comment_on_id);
+			$subject			= '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+		}
+
+		$watchers	= $this->load_all(
+						"SELECT DISTINCT w.user_id, u.user_name ".
+						"FROM ".$this->config['table_prefix']."watch w ".
+							"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
+						"WHERE w.page_id = '".(int)$object_id."'");
+
+		if ($watchers && !$mute)
+		{
+			foreach ($watchers as $watcher)
+			{
+				if ($watcher['user_id'] != $user_id && $watcher['user_name'] != GUEST)
+				{
+					if ($comment_on_id)
+					{
+						// assert that user has no comments pending...
+						$pending = $this->load_single(
+							"SELECT comment_id ".
+							"FROM {$this->config['table_prefix']}watch ".
+							"WHERE page_id = '".(int)$comment_on_id."' ".
+								"AND user_id = '".$watcher['user_id']."' ".
+							"LIMIT 1");
+
+						// ...and add one if so
+						if ($pending['comment_id'] == false)
+						{
+							$this->sql_query(
+								"UPDATE {$this->config['table_prefix']}watch SET ".
+									"comment_id = '".(int)$page_id."' ".
+								"WHERE page_id = '".(int)$comment_on_id."' ".
+									"AND user_id = '".$watcher['user_id']."'");
+						}
+						else
+						{
+							continue;	// skip current watcher
+						}
+					}
+
+					if ($this->has_access('read', $object_id, $watcher['user_name']))
+					{
+						$_user = $this->load_single(
+							"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
+							"FROM " .$this->config['user_table']." u ".
+								"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+							"WHERE u.user_id = '".$watcher['user_id']."' ".
+							"LIMIT 1");
+
+						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+						{
+							$lang = $_user['user_lang'];
+							$this->load_translation($lang);
+							$this->set_translation ($lang);
+							$this->set_language ($lang);
+
+							#$subject = '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+							$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
+									($user_name == GUEST ? $this->get_translation('Guest') : $user_name);
+
+									if (!$comment_on_id && $is_revision)
+									{
+										$body .=
+										$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
+										(isset($title) ? $title : $tag)."\n".
+										$this->href('', $tag)."\n\n".
+										"======================================================================".
+										$this->format($diff, 'html2mail').
+										"\n======================================================================\n\n";
+									}
+									else if ($comment_on_id)
+									{
+										$body .=
+										$this->get_translation('SomeoneCommented', $lang)."\n".
+										$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
+										"----------------------------------------------------------------------\n\n".
+										$body."\n\n".
+										"----------------------------------------------------------------------\n\n";
+									}
+
+							$body .= $this->get_translation('EmailGoodbye', $lang)."\n".
+									$this->config['site_name']."\n".
+									$this->config['base_url'];
+
+							$this->send_mail($_user['email'], $subject, $body);
+						}
+					}
+					else
+					{
+						$this->clear_watch($watcher['user_id'], $object_id);
+					} // end of has_access
+				}
+			}// end of watchers
+		}
+
+		$this->load_translation($this->user_lang);
+		$this->set_translation($this->user_lang);
+		$this->set_language($this->user_lang);
 	}
 
 	// COOKIES
