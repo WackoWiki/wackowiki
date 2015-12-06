@@ -2028,7 +2028,7 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// notifying watchers
-					$this->notifying_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false, $mute);
+					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false, $mute);
 				}
 			} // end of new page
 			// RESAVING AN OLD PAGE, CREATING REVISION
@@ -2089,7 +2089,7 @@ class Wacko
 					if (!$comment_on_id)
 					{
 						// notifying watchers
-						$this->notifying_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true, $mute);
+						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true, $mute);
 					}
 				} // end of new != old
 			} // end of existing page
@@ -2237,7 +2237,7 @@ class Wacko
 		}
 	}
 
-	function notifying_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision, $mute)
+	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision, $mute)
 	{
 		if (!$comment_on_id && $is_revision)
 		{
@@ -2263,10 +2263,10 @@ class Wacko
 		}
 
 		$watchers	= $this->load_all(
-						"SELECT DISTINCT w.user_id, u.user_name ".
-						"FROM ".$this->config['table_prefix']."watch w ".
-							"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
-						"WHERE w.page_id = '".(int)$object_id."'");
+			"SELECT DISTINCT w.user_id, u.user_name ".
+			"FROM ".$this->config['table_prefix']."watch w ".
+				"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
+			"WHERE w.page_id = '".(int)$object_id."'");
 
 		if ($watchers && !$mute)
 		{
