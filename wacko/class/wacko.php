@@ -2200,7 +2200,7 @@ class Wacko
 
 			if (isset($list['Moderator']))
 			{
-				$moderators	= explode("\n", $list['Moderator']);
+				$moderators	= explode("\\n", $list['Moderator']);
 
 				if (!$mute) foreach ($moderators as $moderator)
 				{
@@ -2209,7 +2209,7 @@ class Wacko
 						$moderator_id = $this->get_user_id($moderator);
 
 						$_user = $this->load_single(
-							"SELECT u.email, p.page_lang, u.email_confirm, u.enabled, p.send_watchmail ".
+							"SELECT u.email, p.user_lang, u.email_confirm, u.enabled, p.send_watchmail ".
 							"FROM " .$this->config['user_table']." u ".
 								"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 							"WHERE u.user_id = '".$moderator_id."' ".
@@ -2218,7 +2218,7 @@ class Wacko
 						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 						{
 							$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
-							$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moderator.".\n\n".
+							$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').' '.$moderator.".\n\n".
 									str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
 									"'$title'\n".
 									$this->href('', $tag)."\n\n".

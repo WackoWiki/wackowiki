@@ -71,9 +71,12 @@ $wacko_translation = array(
 	'Help'						=> 'Hilfe',
 	'WordprocessorVersion'		=> 'Textverarbeitungs-Version',
 	'EmailHello'				=> 'Hallo ',
+	'EmailModerator'			=> 'Moderator',
 	'EmailGoodbye'				=> 'MfG, ',
 	'WatchedPageChanged'		=> 'Seite wurde geändert ',
 	'SomeoneChangedThisPage'	=> ' änderte diese von dir beobachtete Seite: ',
+	'NewPageCreatedSubj'		=> 'A new page',
+	'NewPageCreatedBody'		=> 'User %1 has created a new page: ',
 	'ActionDenied'				=> 'Diese Aktion ist hier nicht erlaubt.',
 	'TOCTitle'					=> 'Inhalt ',
 	'OuterLink2'				=> 'externer Verweis',
@@ -229,7 +232,7 @@ $wacko_translation = array(
 	'SourceDesc'				=> 'Der Quelltext wird angezeigt werden mit Ausnahme der Fragmente, welche durch den Formatierer nicht ausgegeben werden <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// groups handler
-	'GroupsMembersFor'				=> 'Mitglieder der Gruppe',
+	'GroupsMembersFor'			=> 'Mitglieder der Gruppe',
 	'GroupsDescription'			=> 'Beschreibung',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Offen',
