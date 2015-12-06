@@ -84,7 +84,7 @@ else if($this->has_access('write'))
 		<div id="header">
 			<?php // Insert search form ?>
 			<?php echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
-			<input type="text" name="phrase" size="15" value="<?php echo $this->get_translation('SearchButtonText'); ?>" class="search" />
+			<input type="search" name="phrase" size="15" value="<?php echo $this->get_translation('SearchButtonText'); ?>" class="search" />
 			<?php echo $this->form_close(); ?>
 
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
