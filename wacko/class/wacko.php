@@ -2028,7 +2028,7 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// notifying watchers
-					$this->notifying_watcher($page_id, $comment_on_id, $tag, $title, $user_id, $user_name, false, $mute);
+					$this->notifying_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false, $mute);
 				}
 			} // end of new page
 			// RESAVING AN OLD PAGE, CREATING REVISION
@@ -2089,7 +2089,7 @@ class Wacko
 					if (!$comment_on_id)
 					{
 						// notifying watchers
-						$this->notifying_watcher($page_id, $comment_on_id, $tag, $title, $user_id, $user_name, true, $mute);
+						$this->notifying_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true, $mute);
 					}
 				} // end of new != old
 			} // end of existing page
@@ -2237,7 +2237,7 @@ class Wacko
 		}
 	}
 
-	function notifying_watcher($page_id, $comment_on_id, $tag, $title, $user_id, $user_name, $is_revision, $mute)
+	function notifying_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision, $mute)
 	{
 		if (!$comment_on_id && $is_revision)
 		{
@@ -2337,7 +2337,7 @@ class Wacko
 										$this->get_translation('SomeoneCommented', $lang)."\n".
 										$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
 										"----------------------------------------------------------------------\n\n".
-										$body."\n\n".
+										$page_body."\n\n".
 										"----------------------------------------------------------------------\n\n";
 									}
 
