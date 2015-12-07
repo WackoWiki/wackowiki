@@ -15,7 +15,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 		<td class="searchArea" style="text-align:right; vertical-align:bottom;">
 			<?php echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
 			<?php echo $this->get_translation('SearchText') ?>
-			<input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
+			<input type="search" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
 			<?php echo $this->form_close(); ?>
 		</td>
 	</tr>

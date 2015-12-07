@@ -298,8 +298,8 @@ if ($doubleclick == true)
 		// searchbar
 		?>
 		<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
-		<input type="text" name="phrase" id="phrase" size="15" />
-		<input id="search-submit-button" class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>" />
+		<input type="search" name="phrase" id="phrase" size="15" />
+		<input type="submit" id="search-submit-button" class="submitinput" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>" />
 		</span>
 		<?php
 		// search form close

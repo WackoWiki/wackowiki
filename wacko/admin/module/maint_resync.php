@@ -240,7 +240,7 @@ $engine->debug_print_r($users);
 	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="userstats" />
-		<input name="start" id="submit" type="submit" value="synchronize" />
+		<input type="submit" name="start" id="submit" value="synchronize" />
 <?php	echo $engine->form_close();?>
 	<br />
 	<hr />
@@ -256,7 +256,7 @@ $engine->debug_print_r($users);
 	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="rssfeeds" />
-		<input name="start" id="submit" type="submit" value="synchronize" />
+		<input type="submit" name="start" id="submit" value="synchronize" />
 <?php		echo $engine->form_close();;?>
 	<br />
 	<hr />
@@ -272,7 +272,7 @@ $engine->debug_print_r($users);
 	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="wikilinks" />
-		<input name="start" id="submit" type="submit" value="synchronize" />
+		<input type="submit" name="start" id="submit" value="synchronize" />
 <?php
 	echo $engine->form_close();;
 }

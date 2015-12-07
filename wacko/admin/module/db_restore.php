@@ -101,10 +101,10 @@ function admin_db_restore(&$engine, &$module)
 							<table>
 								<tr>'.
 									'<td style="vertical-align:middle; width:10px;" class="label">'.
-									#	'<input name="'.$log['pack'].'" type="checkbox" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ).'/>
+									#	'<input type="checkbox" name="'.$log['pack'].'" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ).'/>
 									#</td>'.
 									#'<td style="width:10px;">'.
-									#	'<input name="backup_id" type="radio" value="'.$log['pack'].'" />'.
+									#	'<input type="radio" name="backup_id" value="'.$log['pack'].'" />'.
 									'</td>
 									<th style="text-align:left;white-space:nowrap;">'.
 										date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).
@@ -202,9 +202,9 @@ function admin_db_restore(&$engine, &$module)
 						'<tr>
 							<td colspan="2">
 								<strong>Additional options for recovery:</strong><br />
-								<input id="ignore_keys" name="ignore_keys" type="checkbox" value="1" />
+								<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1" />
 								<label for="ignore_keys"><small>Ignore dublicated keys table (not replace) *</small></label><br />
-								<input id="ignore_files" name="ignore_files" type="checkbox" value="1" />
+								<input type="checkbox" id="ignore_files" name="ignore_files" value="1" />
 								<label for="ignore_files"><small>Ignore the same files (not overwrite) **</small></label><br />
 							</td>
 						</tr>'.
@@ -214,8 +214,8 @@ function admin_db_restore(&$engine, &$module)
 				echo	'<input type="hidden" name="backup_id" value="'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
 						'<input type="hidden" name="start" value="true" />'."\n".
 						'<label for="">'.$engine->get_translation('ConfirmDbRestore').' \'<code>'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
-						'<input id="submit" type="submit" name="restore" value="yes" style="width:40px;" /> '.
-						'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
+						'<input type="submit" id="submit" name="restore" value="yes" style="width:40px;" /> '.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>'.
 						'<br /><small>'.$engine->get_translation('ConfirmDbRestoreInfo').'</small>';
 
 				echo '<br /><br />
@@ -406,8 +406,8 @@ function admin_db_restore(&$engine, &$module)
 					'<tr>
 						<td>
 							<label for="">'.$engine->get_translation('BackupDelete').' \'<code>'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
-							'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
-							'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
+							'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
+							'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>'.
 							'<br /><small>'.$engine->get_translation('BackupDeleteInfo').'</small>'.
 						'</td>
 					</tr>'.
@@ -449,8 +449,8 @@ function admin_db_restore(&$engine, &$module)
 <?php
 				echo $engine->form_open('restore', '', 'post', true, '', '');
 
-				$control_buttons = '<input name="restore" id="submit" type="submit" value="restore" />'.
-									'<input name="remove" id="submit" type="submit" value="remove" />';
+				$control_buttons = '<input type="submit" name="restore" id="submit" value="restore" />'.
+									'<input type="submit" name="remove" id="submit" value="remove" />';
 				echo $control_buttons;
 ?>
 					<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
@@ -495,10 +495,10 @@ function admin_db_restore(&$engine, &$module)
 							<table>
 								<tr>'.
 									'<td style="vertical-align:middle; width:10px;" class="label">'.
-									#	'<input name="'.$log['pack'].'" type="checkbox" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ).'/>
+									#	'<input type="checkbox" name="'.$log['pack'].'" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ).'/>
 									#</td>'.
 									#'<td style="width:10px;">'.
-										'<input name="backup_id" type="radio" value="'.$log['pack'].'" />'.
+										'<input type="radio" name="backup_id" value="'.$log['pack'].'" />'.
 									'</td>
 									<th style="text-align:left;white-space:nowrap;">'.
 										date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).

@@ -307,14 +307,14 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">'.$engine->get_translation('UserName').'</label>'.
 					'</td>
 					<td>
-						<input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" />
+						<input type="text" id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" />
 					</td>
 				</tr>'.
 				'<tr>
 					<td>
 						<label for="newrealname">'.$engine->get_translation('RealName').'</label>'.
 					'<td>
-						<input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" />
+						<input type="text" id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" />
 					</td>
 				</tr>'.
 				'<tr>
@@ -357,8 +357,8 @@ function admin_user_users(&$engine, &$module)
 				'<tr>
 					<td>
 						<br />
-						<input id="submit" type="submit" name="create" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-						'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
+						<input type="submit" id="submit" name="create" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
 					'</td>
 				</tr>'.
 			'</table><br />';
@@ -385,7 +385,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">'.$engine->get_translation('UsersRename').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label>
 					</td>'.
 					'<td>
-						<input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" />
+						<input type="text" id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" />
 					</td>
 				</tr>'.
 				'<tr>
@@ -393,7 +393,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newrealname">'.$engine->get_translation('RealName').'</label> '.
 					'</td>
 					<td>
-						<input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" />
+						<input type="text" id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" />
 					</td>'.
 				'</tr>'.
 				'<tr>
@@ -453,8 +453,8 @@ function admin_user_users(&$engine, &$module)
 				'<tr>
 					<td>
 						<br />
-						<input id="submit" type="submit" name="edit" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-						'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
+						<input type="submit" id="submit" name="edit" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
 						'<br />
 						<small>'.$engine->get_translation('UsersRenameInfo').'</small>'.
 					'</td>
@@ -503,13 +503,13 @@ function admin_user_users(&$engine, &$module)
 		}
 
 		echo '<input type="hidden" name="user_id" value="'.(int)$user_id.'" />'."\n".
-			 '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'."\n".
+			 '<input type="hidden" name="ids" value="'.implode('-', $set).'" />'."\n".
 				 '<table class="formation">'.
 					'<tr>
 						<td>
 							<label for="">'.$engine->get_translation('UsersDelete').' '.$users.'?</label> '.
-							'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
-							'<a href="'.$engine->href().'" style="text-decoration: none;"><input id="button" type="button" value="no" style="width:40px;" /></a>'.
+							'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
+							'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>'.
 							'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
 						'</td>
 					</tr>'.
@@ -563,9 +563,9 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		echo '<br /><input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
-		echo '<input id="button" type="submit" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		echo '<a href="'.$engine->href().'" class="cancel" ><input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
+		echo '<br /><input type="submit" id="button" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
+		echo '<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+		echo '<a href="'.$engine->href().'" class="cancel" ><input type="button" id="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
 		echo $engine->form_close();
 	}
 	else
@@ -737,10 +737,10 @@ function admin_user_users(&$engine, &$module)
 
 		// user filter form
 		$search = $engine->form_open('search_user', '', 'get', '', '', '', '');
-		$search .= '<input name="mode" type="hidden" value="'.$module['mode'].'" />'; // required to pass mode module via GET
+		$search .= '<input type="hidden" name="mode" value="'.$module['mode'].'" />'; // required to pass mode module via GET
 		$search .= $engine->get_translation('UsersSearch').': </td><td>';
 		$search .= '<input type="search" name="user" maxchars="40" size="30" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
-		$search .= '<input id="submit" type="submit" value="'.$engine->get_translation('UsersFilter').'" /> ';
+		$search .= '<input type="submit" id="submit" value="'.$engine->get_translation('UsersFilter').'" /> ';
 		$search .= $engine->form_close();
 		echo '<span style="float: right;">'.$search.'</span>';
 
@@ -750,14 +750,14 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		$control_buttons = '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
-		$control_buttons .= '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
-		$control_buttons .= '<input id="button" type="submit" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		$control_buttons .= '<input name="ids" type="hidden" value="'.implode('-', $set).'" />';
+		$control_buttons = '<br /><input type="submit" id="button" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
+		$control_buttons .= '<input type="submit" id="button" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
+		$control_buttons .= '<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+		$control_buttons .= '<input type="hidden" name="ids" value="'.implode('-', $set).'" />';
 		$control_buttons .= '<br />'."\n".
-								'<input name="set" id="submit" type="submit" value="'.$engine->get_translation('ModerateSet').'" /> '.
+								'<input type="submit" name="set" id="submit" value="'.$engine->get_translation('ModerateSet').'" /> '.
 								($set
-										? '<input name="reset" id="submit" type="submit" value="'.$engine->get_translation('ModerateReset').'" /> '.
+										? '<input type="submit" name="reset" id="submit" value="'.$engine->get_translation('ModerateReset').'" /> '.
 										'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
 										: ''
 								);
@@ -794,7 +794,7 @@ function admin_user_users(&$engine, &$module)
 			{
 				echo '<tr class="lined">'."\n".
 						'<td style="vertical-align:middle; width:10px;" class="label">
-							<input name="'.$row['user_id'].'" type="checkbox" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ).'/>
+							<input type="checkbox" name="'.$row['user_id'].'" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ).'/>
 						</td>'.
 						'<td>
 							<input type="radio" name="user_id" value="'.$row['user_id'].'" />

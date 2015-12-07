@@ -13,7 +13,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 		<td><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
 		</td>
 		<td class="searchArea" style="text-align:right; vertical-align:bottom;"><?php echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
-		<input name="phrase" type="text"
+		<input type="search" name="phrase"
 			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0px; margin: 0px; background-color: #FFFFFF;"
 			size="21" /> <?php echo $this->form_close(); ?></td>
 	</tr>

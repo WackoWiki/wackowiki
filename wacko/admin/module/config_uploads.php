@@ -66,7 +66,7 @@ function admin_config_uploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload"><strong>Right to the upload files:</strong><br />
 					<small><code>'admins'</code> means that only users belongig to admins group can upload the files. <code>'1'</code> means that uploading is opened to everybody. <code>'0'</code> means that upload disabled</small></label></td>
-				<td style="width:40%;"><input maxlength="7" style="width:200px;" id="upload" name="upload" value="<?php echo htmlspecialchars($engine->config['upload'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td style="width:40%;"><input type="text" maxlength="7" style="width:200px;" id="upload" name="upload" value="<?php echo htmlspecialchars($engine->config['upload'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -149,8 +149,8 @@ function admin_config_uploads(&$engine, &$module)
 		</table>
 		<br />
 		<div class="center">
-			<input id="submit" type="submit" value="save" />
-			<input id="button" type="reset" value="reset" />
+			<input type="submit" id="submit" value="save" />
+			<input type="reset" id="button" value="reset" />
 		</div>
 <?php
 	echo $engine->form_close();

@@ -577,8 +577,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="check_inconsistencies" />
-		<input name="check" id="submit" type="submit" value="check" />
-		<input name="solve" id="submit" type="submit" value="solve" />
+		<input type="submit" name="check" id="submit" value="check" />
+		<input type="submit" name="solve" id="submit" value="solve" />
 <?php
 	echo $engine->form_close();
 }

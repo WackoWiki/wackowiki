@@ -122,7 +122,7 @@ echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPag
 <?php
 // Searchbar
 ?>
-  <?php echo $this->get_translation('SearchText') ?><input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
+  <?php echo $this->get_translation('SearchText') ?><input type="search" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
 </div>
 <?php
 
@@ -160,7 +160,7 @@ echo $this->get_translation('LoginPassword') ?>
 		:&nbsp;
 		<input type="password" name="password" class="login" size="8" />
 		&nbsp;
-		<input name="image" type="image" src="<?php echo $this->config['theme_url'] ?>icon/login.png" alt=">>>" align="top" />
+		<input type="image" name="image" src="<?php echo $this->config['theme_url'] ?>icon/login.png" alt=">>>" align="top" />
 	</span>
 <?php
 }

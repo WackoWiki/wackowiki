@@ -107,7 +107,7 @@ function admin_db_optimize(&$engine, &$module)
 				if ($table['Name'] == $wtable['name'])
 				{
 					echo '<tr class="hl_setting">'.
-							'<td class="label"><input name="'.$table['Name'].'" type="checkbox" value="table" '.( $table['Data_free'] > 0 || (isset($scheme['all']) && $scheme['all'] == true) ? 'checked="checked"' : '' ).'/></td>'.
+							'<td class="label"><input type="checkbox" name="'.$table['Name'].'" value="table" '.( $table['Data_free'] > 0 || (isset($scheme['all']) && $scheme['all'] == true) ? 'checked="checked"' : '' ).'/></td>'.
 							'<td>&nbsp;&nbsp;<strong>'.$table['Name'].'&nbsp;&nbsp;</strong></td>'.
 							'<td>'.( $table['Data_free'] > 0 ? '<strong class="red">' : '' ).$engine->binary_multiples($table['Data_free'], false, true, true).( $table['Data_free'] > 0 ? '</strong>' : '' ).'</td>'.
 						'</tr>'.
@@ -117,7 +117,7 @@ function admin_db_optimize(&$engine, &$module)
 		}
 ?>
 			</table>
-			<input name="start" id="submit" type="submit" value="optimize" />
+			<input type="submit" name="start" id="submit" value="optimize" />
 <?php
 		echo $engine->form_close();
 	}

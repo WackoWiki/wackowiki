@@ -98,7 +98,7 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="action" value="lock" />
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo ( $init->is_locked() === true ? '<span class="red">The site is closed</span>' : '<span class="green">The site is open</span>' ); ?></td>
-				<td style="text-align:center;"><input id="submit" type="submit" value="<?php echo ( $init->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
+				<td style="text-align:center;"><input type="submit" id="submit" value="<?php echo ( $init->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
 			</tr>
 	<br />
 <?php
@@ -110,7 +110,7 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="action" value="cache" />
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('ClearCache');?></td>
-				<td style="text-align:center;"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation('CacheCleared') : '<input id="submit" type="submit" value="clean" />');?></td>
+				<td style="text-align:center;"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation('CacheCleared') : '<input type="submit" id="submit" value="clean" />');?></td>
 			</tr>
 <?php
 	echo $engine->form_close();
@@ -123,7 +123,7 @@ function admin_lock(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('PurgeSessions');?>
 				<br /><?php #echo $engine->get_translation('PurgeSessionsExplain');?></td>
-				<td><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->get_translation('PurgeSessionsDone') : '<input id="submit" type="submit" value="purge" />');?></td>
+				<td><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->get_translation('PurgeSessionsDone') : '<input type="submit" id="submit" value="purge" />');?></td>
 			</tr>
 		</table>
 <?php

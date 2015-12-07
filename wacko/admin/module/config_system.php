@@ -155,7 +155,7 @@ function admin_config_system(&$engine, &$module)
 				<small>Set this value if your proxy server sends the client IP in a header
 				 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
 				 addresses, only the last one (the left-most) will be used.</small></label></td>
-				<td><input maxlength="50" style="width:200px;" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_header'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" style="width:200px;" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_header'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -168,7 +168,7 @@ function admin_config_system(&$engine, &$module)
 				 these, that is the request reaches the web server from one of your
 				 reverse proxies. Otherwise, the client could directly connect to
 				 your web server spoofing the X-Forwarded-For headers.</small></label></td>
-				<td><input maxlength="50" style="width:200px;" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_addresses'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" style="width:200px;" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_addresses'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -179,7 +179,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cookie_prefix"><strong>The prefix for the names of cookies:</strong><br />
 				<small>Special prefix used for all the cookies platform.</small></label></td>
-				<td><input maxlength="50" style="width:200px;" id="cookie_prefix" name="cookie_prefix" value="<?php echo htmlspecialchars($engine->config['cookie_prefix'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" style="width:200px;" id="cookie_prefix" name="cookie_prefix" value="<?php echo htmlspecialchars($engine->config['cookie_prefix'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -187,7 +187,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="session_prefix"><strong>The prefix for the names of session:</strong><br />
 				<small>Special prefix used for all the session platform.</small></label></td>
-				<td><input maxlength="50" style="width:200px;" id="session_prefix" name="session_prefix" value="<?php echo htmlspecialchars($engine->config['session_prefix'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" style="width:200px;" id="session_prefix" name="session_prefix" value="<?php echo htmlspecialchars($engine->config['session_prefix'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -200,8 +200,8 @@ function admin_config_system(&$engine, &$module)
 		</table>
 		<br />
 		<div class="center">
-			<input id="submit" type="submit" value="save" />
-			<input id="button" type="reset" value="reset" />
+			<input type="submit" id="submit" value="save" />
+			<input type="reset" id="button" value="reset" />
 		</div>
 <?php
 	echo $engine->form_close();

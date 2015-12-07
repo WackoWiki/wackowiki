@@ -302,7 +302,7 @@ function admin_config_security(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="tls_proxy"><strong>TLS Proxy:</strong><br />
 					<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash and without https://.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->config['tls_proxy'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="100" style="width:200px;" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->config['tls_proxy'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
@@ -488,8 +488,8 @@ function admin_config_security(&$engine, &$module)
 		</table>
 		<br />
 		<div class="center">
-			<input id="submit" type="submit" value="save" />
-			<input id="button" type="reset" value="reset" />
+			<input type="submit" id="submit" value="save" />
+			<input type="reset" id="button" value="reset" />
 		</div>
 <?php
 	echo $engine->form_close();

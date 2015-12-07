@@ -54,8 +54,8 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['server_software']		= array('Web server', $_SERVER['SERVER_SOFTWARE']);
 	$sysinfo['mysql_version']		= array('MySQL version', $mysql_version);
 	$sysinfo['php_version']			= array('PHP Version', PHP_VERSION);
-	$sysinfo['memory']				= array('Memory', $engine->binary_multiples($_php_ram*1024*1024, false, true, true));
-	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize*1024*1024, false, true, true));
+	$sysinfo['memory']				= array('Memory', $engine->binary_multiples($_php_ram * 1024 * 1024, false, true, true));
+	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true));
 	$sysinfo['max_execution_time']	= array('Max execution time', get_cfg_var('max_execution_time').' seconds');
 	$sysinfo['session_save_path']	= array('Session path', get_cfg_var('session.save_path'));
 	$sysinfo['php_extentions']		= array('PHP extentions', implode(', ',get_loaded_extensions()));
@@ -72,11 +72,12 @@ function admin_system_info(&$engine, &$module)
 
 	foreach ($sysinfo as $param => $value)
 	{
-		echo '<tr class="hl_setting">'.
+		echo '<tr class="lined">'.
 				'<td class="label"><strong>'.$value[0].'</strong></td>'.
 				'<td> </td>'.
 				'<td>'.$value[1].'</td>'.
-			'<tr class="lined"><td colspan="5"></td></tr>'."\n";
+			#'<tr class="lined"><td colspan="5"></td></tr>'.
+			"\n";
 	}
 ?>
 	</table>

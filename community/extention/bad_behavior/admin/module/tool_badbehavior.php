@@ -509,7 +509,7 @@ function bb2_whitelist(&$engine)
 		</tr>
 	</table>
 	<br />
-	<div class="center"><input class="button" type="submit" name="submit" value="Update &raquo;" /></div>
+	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
 	</form>
 <?php
 }
@@ -818,7 +818,7 @@ function bb2_options(&$engine)
 		</tr>
 	</table>
 	<br />
-	<div class="center"><input class="button" type="submit" name="submit" value="Update &raquo;" /></div>
+	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
 	</form>
 	</div>
 <?php

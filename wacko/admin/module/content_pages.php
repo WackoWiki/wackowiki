@@ -183,8 +183,8 @@ function admin_content_pages(&$engine, &$module)
 		echo "</select>\n";
 ?>
 
-			<input name="update" id="submit" type="submit" value="update" />
-			<input name="reset" id="submit" type="submit" value="reset" />
+			<input type="submit" name="update" id="submit" value="update" />
+			<input type="submit" name="reset" id="submit" value="reset" />
 		</div>
 <?php
 		if (isset($pagination['text']))
