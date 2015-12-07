@@ -72,16 +72,16 @@ else
 
 			if ($this->page['page_id'] == $menu_item[0])
 			{
-				$fmi[$level] .= '<li class="active">';
+				$fmi[$level] .= '<li class="active"><span>';
 				$fmi[$level] .= $menu_item[1];
+				$fmi[$level] .= "</span></li>\n";
 			}
 			else
 			{
 				$fmi[$level] .= '<li>';
 				$fmi[$level] .= $this->format($menu_item[2], 'post_wacko');
+				$fmi[$level] .= "</li>\n";
 			}
-
-			$fmi[$level] .= "</li>\n";
 
 			$i++;
 		}
