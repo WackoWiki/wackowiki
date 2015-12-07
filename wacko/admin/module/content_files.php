@@ -51,8 +51,8 @@ function admin_content_files(&$engine, &$module)
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
-	<input id="submit" name="submit" type="submit" value="<?php echo $engine->get_translation('RemoveButton'); ?>" />
-	<a href="<?php echo rawurldecode($engine->href('upload'));?>" style="text-decoration: none;"><input id="button" type="button" value="<?php echo str_replace("\n", ' ', $engine->get_translation('EditCancelButton')); ?>"/></a>
+	<input type="submit" id="submit" name="submit" value="<?php echo $engine->get_translation('RemoveButton'); ?>" />
+	<a href="<?php echo rawurldecode($engine->href('upload'));?>" style="text-decoration: none;"><input type="button" id="button" value="<?php echo str_replace("\n", ' ', $engine->get_translation('EditCancelButton')); ?>"/></a>
 	<br /><br />
 <?php
 			echo $engine->form_close();
@@ -255,13 +255,13 @@ function admin_content_files(&$engine, &$module)
 		</tr>
 		<tr>
 			<td><?php echo $engine->get_translation('UploadDesc');?>:&nbsp;</td>
-			<td><input name="file_description" type="text" size="40" /></td>
+			<td><input type="text" name="file_description" size="40" /></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>
 				<div style="padding-top:5px">
-				<input id="submit" type="submit" value="<?php echo $engine->get_translation('UploadButtonText'); ?>" />
+				<input type="submit" id="submit" value="<?php echo $engine->get_translation('UploadButtonText'); ?>" />
 				</div>
 			</td>
 		</tr>

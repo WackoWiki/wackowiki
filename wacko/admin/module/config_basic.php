@@ -91,7 +91,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="site_name"><strong>Site Name:</strong><br />
 					<small>The title that appears on this site, email-notification, etc.</small></label></td>
-				<td style="width:40%;"><input maxlength="255" style="width:200px;" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td style="width:40%;"><input type="text" maxlength="255" style="width:200px;" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -99,7 +99,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="site_desc"><strong>Site Description:</strong><br />
 					<small>Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.</small></label></td>
-				<td><input maxlength="255" style="width:200px;" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->config['site_desc'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" style="width:200px;" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->config['site_desc'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -142,7 +142,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="allow_themes"><strong>Allowed Themes:</strong><br />
 					<small>Allowed themes, which the user can choose: "0" - all available themes are allowed (default), <br />"default,coffee" - here only these both themes are allowed.</small></label></td>
-				<td><input maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->config['allow_themes'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->config['allow_themes'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -161,7 +161,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="admin_name"><strong>Admin of Site:</strong><br />
 					<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label></td>
-				<td><input maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->config['admin_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->config['admin_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -505,8 +505,8 @@ function admin_config_basic(&$engine, &$module)
 		</table>
 		<br />
 		<div class="center">
-			<input id="submit" type="submit" value="save" />
-			<input id="button" type="reset" value="reset" />
+			<input type="submit" id="submit" value="save" />
+			<input type="reset" id="button" value="reset" />
 		</div>
 <?php
 	echo $engine->form_close();

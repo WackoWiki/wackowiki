@@ -156,7 +156,7 @@ function admin_db_convert(&$engine, &$module)
 						if ($table['TABLE_NAME'] == $wtable['name'])
 						{
 							echo '<tr class="hl_setting">'.
-									'<td class="label"><input name="'.$table['TABLE_NAME'].'" type="checkbox" value="table" checked="checked" /></td>'.
+									'<td class="label"><input type="checkbox" name="'.$table['TABLE_NAME'].'" value="table" checked="checked" /></td>'.
 									'<td>&nbsp;&nbsp;<strong>'.$table['TABLE_NAME'].'&nbsp;&nbsp;</strong></td>'.
 									'<td>'.( $table['ENGINE'] == 'MyISAM' ? '<strong class="red">' : '' ).$table['ENGINE'].( $table['ENGINE'] == 'MyISAM' ? '</strong>' : '' ).'</td>'.
 								'</tr>'.
@@ -167,7 +167,7 @@ function admin_db_convert(&$engine, &$module)
 				}
 ?>
 					</table>
-					<input name="start" id="submit" type="submit" value="convert" />
+					<input type="submit" name="start" id="submit" value="convert" />
 <?php
 				echo $engine->form_close();
 			}

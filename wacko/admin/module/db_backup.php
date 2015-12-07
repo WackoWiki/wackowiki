@@ -226,7 +226,7 @@ function admin_db_backup(&$engine, &$module)
 			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
 					<th style="text-align:right">Cluster:</th>
-					<th colspan="2"><input name="root" size="30" value="" /></th>
+					<th colspan="2"><input type="text" name="root" size="30" value="" /></th>
 				</tr>
 				<tr>
 					<th>Table</th>
@@ -246,10 +246,10 @@ function admin_db_backup(&$engine, &$module)
 				echo '<tr class="hl_setting">'.
 						'<td class="label"><strong>'.$table['name'].'</strong></td>'.
 						'<td style="text-align:center;">&nbsp;&nbsp;
-							<input name="__str__'.$table['name'].'" type="checkbox" value="structure"'.( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked="checked"' : '' ).' />
+							<input type="checkbox" name="__str__'.$table['name'].'" value="structure"'.( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked="checked"' : '' ).' />
 						</td>'.
 						'<td style="text-align:center;">
-							<input name="__dat__'.$table['name'].'" type="checkbox" value="data"'.( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked="checked"' : '' ).' />
+							<input type="checkbox" name="__dat__'.$table['name'].'" value="data"'.( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked="checked"' : '' ).' />
 						</td>'.
 					'</tr>'.
 					'<tr class="lined"><td colspan="3"></td></tr>'."\n";
@@ -274,14 +274,14 @@ function admin_db_backup(&$engine, &$module)
 				echo '<tr>'.
 						'<td colspan="2" class="label"><strong>'.$dir.'</strong></td>'.
 						'<td style="text-align:center;">&nbsp;&nbsp;
-							<input name="__dir__'.$dir.'" type="checkbox" value="files"'.( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked="checked"' : '' ).' />
+							<input type="checkbox" name="__dir__'.$dir.'" value="files"'.( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked="checked"' : '' ).' />
 						</td>'.
 					'</tr>'.
 					'<tr class="lined"><td colspan="3"></td></tr>'."\n";
 			}
 ?>
 				</table>
-				<input name="start" id="submit" type="submit" value="backup" />
+				<input type="submit" name="start" id="submit" value="backup" />
 <?php
 			echo $engine->form_close();
 		}

@@ -68,7 +68,7 @@ function admin_maint_transliterate(&$engine, &$module)
 				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
 ?>
 					<input type="hidden" name="step" value="2" />
-					<input name="start" id="submit" type="submit" value="continue" />
+					<input type="submit" name="start" id="submit" value="continue" />
 <?php
 				echo $engine->form_close();
 			}
@@ -102,7 +102,7 @@ function admin_maint_transliterate(&$engine, &$module)
 				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
 ?>
 					<input type="hidden" name="step" value="3" />
-					<input name="start" id="submit" type="submit" value="continue" />
+					<input type="submit" name="start" id="submit" value="continue" />
 <?php
 				echo $engine->form_close();
 			}
@@ -136,7 +136,7 @@ function admin_maint_transliterate(&$engine, &$module)
 				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
 ?>
 					<input type="hidden" name="step" value="4" />
-					<input name="start" id="submit" type="submit" value="continue" />
+					<input type="submit" name="start" id="submit" value="continue" />
 <?php
 				echo $engine->form_close();
 			}
@@ -192,7 +192,7 @@ function admin_maint_transliterate(&$engine, &$module)
 		echo $engine->form_open('sysupdate', '', 'post', true, '', '');
 ?>
 			<input type="hidden" name="step" value="1" />
-			<input name="start" id="submit" type="submit" value="Start" />
+			<input type="submit" name="start" id="submit" value="Start" />
 <?php
 		echo $engine->form_close();
 	}

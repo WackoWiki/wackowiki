@@ -12,7 +12,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
   <?php
 // Searchbar
 echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
-  <input name="phrase" type="text" id="search" />
+  <input type="search" name="phrase" id="search" />
   <?php
 // Search form close
 echo $this->form_close();

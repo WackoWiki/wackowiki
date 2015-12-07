@@ -56,14 +56,15 @@ function admin_system_statistics(&$engine, &$module)
 		{
 			if ($table['Name'] == $wtable['name'])
 			{
-				echo '<tr class="hl_setting">'.
-						'<td class="label"><strong>'.$table['Name'].'</strong></td>'.
+				echo '<tr class="lined">'.
+						'<th class="label"><strong>'.$table['Name'].'</strong></th>'.
 						'<td>&nbsp;&nbsp;&nbsp;'.number_format($table['Rows'], 0, ',', '.').'</td>'.
 						'<td>'.$engine->binary_multiples($table['Data_length'], false, true, true).'</td>'.
 						'<td>'.$engine->binary_multiples($table['Index_length'], false, true, true).'</td>'.
 						'<td>'.$engine->binary_multiples($table['Data_free'], false, true, true).'</td>'.
 					'</tr>'.
-					'<tr class="lined"><td colspan="5"></td></tr>'."\n";
+					#'<tr class="lined"><td colspan="5"></td></tr>'.
+					"\n";
 
 				$tdata	+= $table['Data_length'];
 				$tindex	+= $table['Index_length'];
