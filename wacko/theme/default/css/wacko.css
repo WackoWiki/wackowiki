@@ -285,12 +285,12 @@ mark {background: #ffffaa; /* old red: #ffaaaa */ }
 
 /* Wiki links: SYNTAX (prefix://) */
 span.icon{
-/* 	background-size: 16px 16px;
+/* 	background-size: 16px 16px;*/
+	/* ! required for span width -> inline element */
 	display: inline-block;
-	*/
-	float: left; /* ! required for width empty span: The float property generates a "block box" which does have a width */
 	height: 16px;
 	width: 0px; 
+	vertical-align: text-bottom; /* middle */
 }
 
 a.external-link .icon {
