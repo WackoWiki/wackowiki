@@ -284,6 +284,15 @@ mark {background: #ffffaa; /* old red: #ffaaaa */ }
 .mark-red {background: #ffbaba;}
 
 /* Wiki links: SYNTAX (prefix://) */
+span.icon{
+/* 	background-size: 16px 16px;
+	display: inline-block;
+	*/
+	float: left; /* ! required for width empty span: The float property generates a "block box" which does have a width */
+	height: 16px;
+	width: 0px; 
+}
+
 a.external-link .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/web.svg") no-repeat scroll left center;
 	padding-left: 17px;
@@ -316,10 +325,21 @@ a[href^="xmpp:"] .icon {
 	padding-left: 17px;
 }
 
+/* lockicon */
+a.acl-denied .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/locked.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+/* keyicon */
+a.acl-customsec .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/unlocked.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+
 /* mime */
 
 a[href $='.pdf'] .icon {
-background: rgba(0, 0, 0, 0) url("./../icon/pdf.svg") no-repeat scroll left center;
+	background: rgba(0, 0, 0, 0) url("./../icon/pdf.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
 a[href $='.txt'] .icon {
@@ -375,17 +395,6 @@ a[href $='.mp4'] .icon,
 a[href $='.ogv'] .icon,
 a[href $='.webm'] .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/video.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-
-/* lockicon */
-a.acl-denied .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/locked.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
-/* keyicon */
-a.acl-customsec .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/unlocked.svg") no-repeat scroll left center;
 	padding-left: 17px;
 }
 

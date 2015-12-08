@@ -653,11 +653,6 @@ a:target {
 	cursor: pointer;
 }
 
-/*.toolbar img {
-	width: 20px;
-	height: 20px;
-}*/
-
 .toolbar .btn-hover {
 	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 }
