@@ -179,27 +179,15 @@ function bb2_summary(&$engine) {
 	</thead>
 	<tbody>
 <?php
-		$alternate = 0;
 		// all ip related host names
 
 		if ($results)
 		{
 			foreach ($results as $result)
 			{
-				$alternate++;
-
-				if ($alternate % 2)
-				{
-					echo '<tr id="request-' . '' . '"  style="vertical-align:top;" class="lined">'."\n";
-				}
-				else
-				{
-					echo '<tr id="request-' . '' . '" style="vertical-align:top;" class="alternate lined">'."\n";
-				}
-
+				echo '<tr id="request-' . '' . '"  style="vertical-align:top;" class="lined">'."\n";
 				echo '<td class="label">'.$result['n']."</td>\n";
 				#echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . "</td>\n";
-
 
 				if ($argument == 'status_key')
 				{
@@ -332,7 +320,6 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 	</thead>
 	<tbody>
 <?php
-	$alternate = 0;
 	// all ip related host names
 
 	if ($results)
@@ -340,16 +327,8 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 		foreach ($results as $result)
 		{
 			$status_key = bb2_get_response($result['status_key']);
-			$alternate++;
 
-			if ($alternate % 2)
-			{
-				echo '<tr id="request-' . $result['log_id'] . '"  style="vertical-align:top;" class="lined">'."\n";
-			}
-			else
-			{
-				echo '<tr id="request-' . $result['log_id'] . '" style="vertical-align:top;" class="alternate lined">'."\n";
-			}
+			echo '<tr id="request-' . $result['log_id'] . '"  style="vertical-align:top;" class="lined">'."\n";
 
 			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '" /></td>'."\n";
 
@@ -822,6 +801,16 @@ function bb2_options(&$engine)
 	</form>
 	</div>
 <?php
+}
+
+if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
+{
+	$sql = "TRUNCATE {$engine->config['table_prefix']}badbehavior";
+	$engine->sql_query($sql);
+
+	// queries
+	$engine->cache->invalidate_sql_cache();
+
 }
 
 

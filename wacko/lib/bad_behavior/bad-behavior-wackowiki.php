@@ -19,7 +19,7 @@ Please report any problems to bad . bots AT ioerror DOT us
 http://bad-behavior.ioerror.us/
 
 WackoWiki implementation, 2015 WackoWiki Team
-Version 0.2
+Version 0.4
 http://wackowiki.sourceforge.net/doc/Dev/PatchesHacks/BadBehavior
 
 */
@@ -224,7 +224,6 @@ function bb2_insert_stats($force = false) {
 		}
 	}
 }
-
 
 // Return the top-level relative path of wherever we are (for cookies)
 // You should provide in $url the top-level URL for your site.
