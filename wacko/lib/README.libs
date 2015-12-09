@@ -4,6 +4,7 @@ The version and status of each is summarized below:
 
 directory			| project			| version	| status
 -----------------------------------------------------------------
+bad_behavior		| Bad Behavior		| 2.2.17	| patched: various, see repo
 captcha				| freeCap			| 1.4.1		| patched: various, see repo
 htmlsax3			| HTMLSAX3			| 3.0.0		| unpatched
 password_compat		| password_compat	| 1.0.4		| unpatched
@@ -15,6 +16,7 @@ text_highlighter	| Text_Highlighter	| 0.7.1		| unpatched
 
 Upstream projects
 ==================
+bad_behavior		- http://bad-behavior.ioerror.us/
 freecap				- http://www.puremango.co.uk/cm_php_captcha_scr
 password_compat		- https://github.com/ircmaxell/password_compat
 phpmailer			- https://github.com/PHPMailer/PHPMailer
