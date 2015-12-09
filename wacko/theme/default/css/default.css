@@ -29,8 +29,35 @@ label {
 }
 
 /* Textareas */
-textarea {
+select, 
+textarea, 
+input:not([type]), 
+input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"] {
 	background-color: #FFFFFF;
+	border: 1px solid #cccccc;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+	
+	border: 1px solid #ccc;
+	/* border-radius: 3px; */
+	display: inline-block;
+	font-size: 14px;
+	height: 1.6em;
+	/* line-height: 1.6em; */
+	margin-bottom: 9px;
 }
 
 input[type=text]:hover,
@@ -46,8 +73,8 @@ input[type=email]:focus,
 input[type=password]:focus,
 textarea:focus {
 	border: 1px solid #3daee9;
+	/* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6); */
 }
-
 
 body {
 	font-family: Verdana;
@@ -419,6 +446,7 @@ ol#comments{
 
 .commentform form textarea {
 	width: 100%;
+	height: auto;
 	padding: 0;
 }
 
@@ -1032,6 +1060,10 @@ td.form_left, th.form_left {
 	padding: 0;
 }
 
+#usermenu li:first-child {
+	/* border-left: none; */
+	/* padding-left: 0px; */
+}
 #usermenu li {
 	border-left: 1px dotted #aaa;
 	float: left;
@@ -1531,76 +1563,76 @@ table.formation td {
 	width:16px;
 }
 
-#handler li.new img {
+#handler li.m-new img {
 	background-image:url("./../icon/add_page.svg");
 	background-repeat: no-repeat;
 }
-#handler li.categories img {
+#handler li.m-categories img {
 	background-image:url("./../icon/tag.svg");
 	background-repeat: no-repeat;
 }
-#handler li.upload img {
+#handler li.m-upload img {
 	background-image:url("./../icon/attachment.svg");
 	background-repeat: no-repeat;
 }
-#handler li.edit img {
+#handler li.m-edit img {
 	background-image:url("./../icon/edit.svg");
 	background-repeat: no-repeat;
 	/* background-size:10px 10px; */
 }
-#handler li.referrers img {
+#handler li.m-referrers img {
 	background-image:url("./../icon/link.svg");
 	background-repeat: no-repeat;
 }
-#handler li.revisions img {
+#handler li.m-revisions img {
 	background-image:url("./../icon/revisions.svg");
 	background-repeat: no-repeat;
 }
-#handler li.remove img {
+#handler li.m-remove img {
 	background-image: url("./../icon/delete_page.svg");
 	background-repeat: no-repeat;
 }
-#handler li.rename img {
+#handler li.m-rename img {
 	background-image: url("./../icon/edit.svg");
 	background-repeat: no-repeat;
 }
-#handler li.moderate img {
+#handler li.m-moderate img {
 	background-image: url("./../icon/moderate.svg");
 	background-repeat: no-repeat;
 }
-#handler li.properties img {
+#handler li.m-properties img {
 	background-image:url("./../icon/properties.svg");
 	background-repeat: no-repeat;
 }
-#handler li.permissions img {
+#handler li.m-permissions img {
 	background-image:url("./../icon/permission.svg");
 	background-repeat: no-repeat;
 }
-#handler li.show img {
+#handler li.m-show img {
 	background-image:url("./../icon/show.svg");
 	background-repeat: no-repeat;
 }
-#handler li.moderate img {
+#handler li.m-moderate img {
 	background-image:url("./../icon/comment.svg");
 	background-repeat: no-repeat;
 }
-#handler li.print img {
+#handler li.m-print img {
 	background-image:url("./../icon/print.svg");
 	background-repeat: no-repeat;
 }
-#handler li.watch-off img {
+#handler li.m-watch-off img {
 	background-image: url("./../icon/watch-off.svg");
 	background-repeat: no-repeat;
 }
-#handler li.watch-on img {
+#handler li.m-watch-on img {
 	background-image: url("./../icon/watch-on.svg");
 	background-repeat: no-repeat;
 }
-#handler li.review1 img {
+#handler li.m-review1 img {
 	background-image: url("./../icon/review1.svg");
 	background-repeat: no-repeat;
 }
-#handler li.review2 img {
+#handler li.m-review2 img {
 	background-image: url("./../icon/review2.svg");
 	background-repeat: no-repeat;
 }

@@ -1984,6 +1984,7 @@ class Wacko
 					$this->log(4, str_replace('%1', $tag.' '.$title, $this->get_translation('LogPageCreated', $this->config['language'])));
 				}
 
+				// TODO: move to additional function
 				// counters
 				if ($comment_on_id)
 				{
@@ -2942,6 +2943,7 @@ class Wacko
 			$_file_name		= $matches[2];
 			$arr			= explode('/', $_file_name);
 			$page_tag		= '';
+			$class			= 'file-link'; // generic file icon
 			$_global		= true;
 			$file_access	= false;
 
@@ -3046,7 +3048,7 @@ class Wacko
 					$alt		= $file_data['file_description'];
 					$img_link	= false;
 					$icon		= $this->get_translation('outericon');
-					$class		= '';
+					#$class		= '';
 					$tpl		= 'localfile';
 
 					if ( ($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)

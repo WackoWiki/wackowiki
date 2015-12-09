@@ -146,7 +146,7 @@ else
 
 		if (!$tab_class)
 		{
-			$tab_class = $method;
+			$tab_class = 'm-'.$method;
 		}
 
 		if ($active)
