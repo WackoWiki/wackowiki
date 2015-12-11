@@ -342,7 +342,7 @@ footer {
 	width: 100%;
 }
 
-.files,.comment,.rating, .category {
+.files, .comment, .rating, .category {
 	background-color: #FFFFFF;
 	padding: 10px 20px;
 	margin: 0 -20px;
@@ -671,8 +671,7 @@ a:target {
 	background: ButtonFace;
 }
 
-.toolbar .btn-,.toolbar  .btn-hover,.toolbar .btn-active,.toolbar .btn-pressed
-	{
+.toolbar .btn-, .toolbar .btn-hover, .toolbar .btn-active, .toolbar .btn-pressed {
 	background: ButtonFace;
 	color: ButtonText;
 	border: 1px solid ButtonFace;
@@ -685,7 +684,7 @@ a:target {
 	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 }
 
-.toolbar .btn-active,.toolbar .btn-pressed {
+.toolbar .btn-active, .toolbar .btn-pressed {
 	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
 }
 
@@ -821,7 +820,7 @@ a:target {
 	background-repeat: no-repeat;
 }
 
-.edname-w,.edname-r,.edname-s {
+.edname-w, .edname-r, .edname-s {
 	font: bold 14px Arial;
 	border: 3px solid #D4D0C8;
 	padding: 0 7px;
@@ -1017,7 +1016,6 @@ td.form_left, th.form_left {
 .feed .note {
 	font-size: 11px;
 	color: #777;
-	
 }
 
 .feed .note a {
