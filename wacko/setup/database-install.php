@@ -705,7 +705,7 @@ switch($config['database_driver'])
 				$version = 0;
 			}
 
-			if ($version)
+			if (!is_null($version))
 			{
 				// new installation
 				if ($version == '0')
