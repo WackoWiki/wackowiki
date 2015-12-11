@@ -60,6 +60,29 @@ img {
 	height:auto;
 }
 
+kbd {
+	background-color: #f7f7f7;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+	color: #333;
+	display: inline-block;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	line-height: 1.4;
+	margin: 0 0.1em;
+	padding: 0.1em 0.6em;
+	text-shadow: 0 1px 0 #fff;
+	white-space: nowrap;
+}
+
+.clearfix:after,
+#mainwrapper:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
 form input.submitinput {
 	color: #000;
 }
@@ -100,7 +123,7 @@ form input.submitinput {
 	color: #888888;
 }
 
-#header {
+header {
 	padding-top: 0px;
 	padding-right: 10px;
 	padding-bottom: 5px;
@@ -115,7 +138,7 @@ form input.submitinput {
 
 /** Styles for the main content in the page. *********************************/
 	/* Default settings */
-#content {
+main {
 	background-color: #FFFFFF;
 	padding: 9px 0px 0px;
 	border-top-width: 1px;
@@ -124,7 +147,7 @@ form input.submitinput {
 
 }
 
-#page {
+article, #page {
 	background-color: #FFFFFF;
 	padding-top: 5px;
 	padding-right: 10px;
@@ -192,7 +215,7 @@ form input.submitinput {
 	border-right: 1px inset;
 	border-top: 1px solid #CCCCCC;
 }
-.files, .comment {
+.files, .comment, .rating, .category {
 	background-color: #EEEEEE;
 	padding: 10px;
 	border-left: 1px inset;
@@ -420,10 +443,6 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	cursor: pointer;
 }
 
-.toolbar img {
-	width: 20px;
-	height: 20px;
-}
 .toolbar .btn-hover {
 	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 }
@@ -437,13 +456,133 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 }
 
 .toolbar .btn-separator {
-border-left: 1px solid buttonshadow;
-border-right: 1px solid buttonhighlight;
-height: 18px;
-margin: 3px;
-padding: 0;
-width: 0;
+	border-left: 1px solid buttonshadow;
+	border-right: 1px solid buttonhighlight;
+	height: 20px;
+	margin: 3px;
+	padding: 0;
+	width: 0;
 }
+
+.toolbar img, 
+.toolbar a img, 
+.toolbar span img {
+	border: medium none;
+	height: 22px;
+	width: 22px;
+}
+.toolbar li img {
+	background-size: 22px 22px;
+}
+.toolbar li.we-h1 img {
+	background-image:url("../../../image/wikiedit/h1.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-h2 img {
+	background-image:url("../../../image/wikiedit/h2.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-h3 img {
+	background-image:url("../../../image/wikiedit/h3.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-h4 img {
+	background-image:url("../../../image/wikiedit/h4.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-h5 img {
+	background-image:url("../../../image/wikiedit/h5.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-h6 img {
+	background-image:url("../../../image/wikiedit/h6.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-bold img {
+	background-image:url("../../../image/wikiedit/bold.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-italic img {
+	background-image:url("../../../image/wikiedit/italic.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-underline img {
+	background-image:url("../../../image/wikiedit/underline.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-strike img {
+	background-image:url("../../../image/wikiedit/strike.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-ul img {
+	background-image:url("../../../image/wikiedit/ul.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-ol img {
+	background-image:url("../../../image/wikiedit/ol.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-center img {
+	background-image:url("../../../image/wikiedit/center.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-justify img {
+	background-image:url("../../../image/wikiedit/justify.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-right img {
+	background-image:url("../../../image/wikiedit/right.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-outdent img {
+	background-image:url("../../../image/wikiedit/outdent.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-indent img {
+	background-image:url("../../../image/wikiedit/indent.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-hr img {
+	background-image:url("../../../image/wikiedit/hr.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-signature img {
+	background-image:url("../../../image/wikiedit/signature.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-quote img {
+	background-image:url("../../../image/wikiedit/quote.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-source img {
+	background-image:url("../../../image/wikiedit/source.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-code img {
+	background-image:url("../../../image/wikiedit/code.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-createlink img {
+	background-image:url("../../../image/wikiedit/link.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-createtable img {
+	background-image:url("../../../image/wikiedit/table.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-textred img {
+	background-image:url("../../../image/wikiedit/textcolor.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-highlightcolor img {
+	background-image:url("../../../image/wikiedit/highlightcolor.svg");
+	background-repeat: no-repeat;
+}
+.toolbar li.we-help img {
+	background-image:url("../../../image/wikiedit/help.svg");
+	background-repeat: no-repeat;
+}
+
 .edname-w, .edname-r, .edname-s {
 	font: bold 14px Arial;
 	border: 3px solid #D4D0C8;

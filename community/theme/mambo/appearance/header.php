@@ -54,7 +54,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 	{
 		foreach ($menu as $menu_item)
 		{
-			$formatted_menu = $this->format($menu_item[1], 'post_wacko');
+			$formatted_menu = $this->format($menu_item[2], 'post_wacko');
 
 			if ($this->page['page_id'] == $menu_item[0])
 			{

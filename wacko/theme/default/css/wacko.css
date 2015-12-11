@@ -1,4 +1,3 @@
-
 /* Wiki Formatting ---------------------------------------- */
 
 /* Definitions: SYNTAX (?icq i seek you?) */
@@ -275,7 +274,7 @@ code { color:#666600; background:#ffffcc; padding: 0 2px }
 .underline { text-decoration:underline; }
 
 /* Highlighted text: SYNTAX ??text?? */
-mark {background: #ffffaa; /* old red: #ffaaaa */ }
+mark {background: #ffffaa;}
 
 /* Highlighted text: SYNTAX ??(green)text?? */
 .mark-yellow {background: #ffff00;}

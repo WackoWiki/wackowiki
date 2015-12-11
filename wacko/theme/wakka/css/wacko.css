@@ -3,7 +3,6 @@
 /* Definitions: SYNTAX (?icq i seek you?) */
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
 
-
 /* Strike through text: SYNTAX --text-- */
 del { color:#999999 }
 del a:visited, del a:link { color:#999999 }
@@ -104,7 +103,11 @@ del.diff {
 	white-space: pre-wrap;
 }
 
-.notes {  color: #888800; }
+.code code{
+	background: #FFFFFF;
+}
+
+.notes { color: #888800; }
 
 /** Table-related ************************************************************/
 
@@ -243,6 +246,123 @@ mark { background:#FFFFAA; }
 
 /* Highlighted text: SYNTAX ??(green)text?? */
 .mark-yellow {background: #ffff00;}
-.mark-green {background: #008000;}
-.mark-blue {background: #0000ff;}
-.mark-red {background: #ff0000;}
+.mark-green {background: #a0ffa4;}
+.mark-blue {background: #9ec6ff;}
+.mark-red {background: #ffbaba;}
+
+/* Wiki links: SYNTAX (prefix://) */
+span.icon{
+/* 	background-size: 16px 16px;*/
+	/* ! required for span width -> inline element */
+	display: inline-block;
+	height: 16px;
+	width: 0px; 
+	vertical-align: text-bottom; /* middle */
+}
+
+a.external-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/web.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.group-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/group.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.user-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/user.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+a.file-link .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/file.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+a[href^="htts://"] .icon,
+a[href^="http://"] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/web.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href^="mailto:"] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/mail.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href^="xmpp:"] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/jabber.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+/* lockicon */
+a.acl-denied .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/locked.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+/* keyicon */
+a.acl-customsec .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/unlocked.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+/* mime */
+
+a[href $='.pdf'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/pdf.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.txt'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/text.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odt'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/document.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.gif'] .icon,
+a[href $='.ico'] .icon,
+a[href $='.jpe'] .icon,
+a[href $='.jpeg'] .icon,
+a[href $='.jpg'] .icon,
+a[href $='.png'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/image.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.rdf'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/xml.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.zip'] .icon,
+a[href $='.7z'] .icon,
+a[href $='.tar'] .icon,
+a[href $='.bz2'] .icon,
+a[href $='.gz'] .icon,
+a[href $='.tgz'] .icon,
+a[href $='.rar'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/archive.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.ods'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/spreadsheet.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odp'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/presentation.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odg'] .icon,
+a[href $='.svg'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/drawing.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.mp3'] .icon,
+a[href $='.ogg'] .icon,
+a[href $='.opus'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/audio.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.mp4'] .icon,
+a[href $='.ogv'] .icon,
+a[href $='.webm'] .icon {
+	background: rgba(0, 0, 0, 0) url("./../icon/video.svg") no-repeat scroll left center;
+	padding-left: 17px;
+}
+
