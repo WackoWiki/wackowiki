@@ -109,7 +109,7 @@ echo "            <li>".$lang['Writing']." - ";
 $perm_changed	= true;
 $file_name		= 'config/config.php';
 
-if (is__writable('_cache/config/'))
+if (is__writable($file_name))
 {
 	$write_file		= file_put_contents($file_name, $config_code);
 
