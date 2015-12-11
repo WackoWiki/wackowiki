@@ -280,10 +280,17 @@ class Init
 		$filename	= $this->settings_cache_id($file_name);
 		$sqldata	= serialize($data);
 
-		file_put_contents($filename, $sqldata);
-		chmod($filename, 0644);
+		if (is_writable($filename))
+		{
+			file_put_contents($filename, $sqldata);
+			chmod($filename, 0644);
 
-		return true;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	// retrieve and unserialize cached settings data
