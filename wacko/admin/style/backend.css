@@ -519,9 +519,23 @@ div#loginbox {
 	padding: 30px;
 	border: 1px dotted #CCCCCC;
 }
-
+/*	Version Check Specific	*/
 .tickcross {
 	vertical-align: middle;
+}
+.cross {
+	background-image: url('../../image/cross.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	height: 22px;
+	width: 22px;
+}
+.tick {
+	background-image: url('../../image/tick.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	height: 22px;
+	width: 22px;
 }
 
 /*	alternate row style	*/
@@ -532,4 +546,15 @@ div#loginbox {
 .listcenter td {
 	vertical-align:top;
 	text-align:center;
+}
+
+.formation > tbody > tr:nth-of-type(2n+1) {
+	background-color: #f9f9f9;
+}
+
+a.cancel,
+#page a.cancel:hover ,
+a.cancel:actice{
+	text-decoration: none !important;
+	border-bottom: 0px none!important;
 }

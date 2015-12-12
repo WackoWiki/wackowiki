@@ -169,16 +169,16 @@ hr {
 .cross {
 	background-image: url('../image/cross.svg'), none;
 	background-repeat: no-repeat;
-	background-size: 22px 22px;
-	height: 22px;
-	width: 22px;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
 }
 .tick {
 	background-image: url('../image/tick.svg'), none;
 	background-repeat: no-repeat;
-	background-size: 22px 22px;
-	height: 22px;
-	width: 22px;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
 }
 
 /*

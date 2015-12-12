@@ -180,21 +180,19 @@ table.formation th, tr.formation th, table.forum th {
 	background-color: #FFFFFF;
 	border-bottom: solid 1px #BABFC7;
 }
-td.label {
+td.label, th.label {
 	text-align: right;
 	padding-right: 5px;
 	border-right: 1px solid #CC0000;
+	border-bottom: 0px !important;
 }
 tr.lined td {
 	border-bottom: 1px dotted #BABFC7;
 }
 
-.lined:hover {
-	background:none repeat scroll 0 0 #CCFFCC;
-}
-
+.lined:hover,
 .hl_setting:hover {
-	background:none repeat scroll 0 0 #CCFFCC;
+	background:none repeat scroll 0 0 #CCFFCC !important;
 }
 
 table.forum th {
