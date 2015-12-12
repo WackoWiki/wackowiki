@@ -30,32 +30,19 @@ $extension_map	= array(
 	'7z'		=> array('application', 'application/x-7z-compressed'),
 
 	'odc'		=> array('application', 'application/vnd.oasis.opendocument.chart'),
-	#'otc'		=> array('application', 'application/vnd.oasis.opendocument.chart-template'),
 	'odb'		=> array('application', 'application/vnd.oasis.opendocument.database'),
 	'odf'		=> array('application', 'application/vnd.oasis.opendocument.formula'),
-	#'odft'		=> array('application', 'application/vnd.oasis.opendocument.formula-template'),
 	'odg'		=> array('application', 'application/vnd.oasis.opendocument.graphics'),
-	#'otg'		=> array('application', 'application/vnd.oasis.opendocument.graphics-template'),
 	'odi'		=> array('application', 'application/vnd.oasis.opendocument.image'),
-	#'oti'		=> array('application', 'application/vnd.oasis.opendocument.image-template'),
 	'odp'		=> array('application', 'application/vnd.oasis.opendocument.presentation'),
-	#'otp'		=> array('application', 'application/vnd.oasis.opendocument.presentation-template'),
 	'ods'		=> array('application', 'application/vnd.oasis.opendocument.spreadsheet'),
-	#'ots'		=> array('application', 'application/vnd.oasis.opendocument.spreadsheet-template'),
 	'odt'		=> array('application', 'application/vnd.oasis.opendocument.text'),
-	#'odm'		=> array('application', 'application/vnd.oasis.opendocument.text-master'),
-	#'ott'		=> array('application', 'application/vnd.oasis.opendocument.text-template'),
-	#'oth'		=> array('application', 'application/vnd.oasis.opendocument.text-web'),
+
 
 	// (legacy)
 	'pptx'		=> array('application', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'),
-	#'sldx'		=> array('application', 'application/vnd.openxmlformats-officedocument.presentationml.slide'),
-	#'ppsx'		=> array('application', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow'),
-	#'potx'		=> array('application', 'application/vnd.openxmlformats-officedocument.presentationml.template'),
 	'xlsx'		=> array('application', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-	#'xltx'		=> array('application', 'application/vnd.openxmlformats-officedocument.spreadsheetml.template'),
 	'docx'		=> array('application', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'),
-	#'dotx'		=> array('application', 'application/vnd.openxmlformats-officedocument.wordprocessingml.template'),
 
 	'mp3'		=> array('audio', 'audio/x-mpeg-3'),
 	'ogg'		=> array('audio', 'audio/ogg'),
@@ -76,7 +63,6 @@ $extension_map	= array(
 	'htm'		=> array('text', 'text/html'),
 	'html'		=> array('text', 'text/html'),
 	'rtf'		=> array('text', 'text/richtext'),
-	#'sh'		=> array('text', 'text/x-script.sh'),
 	'txt'		=> array('text', 'text/plain'),
 	'xml'		=> array('text', 'text/xml'),
 
