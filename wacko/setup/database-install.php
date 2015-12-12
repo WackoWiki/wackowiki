@@ -525,7 +525,6 @@ $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,		
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$lang['ErrorAlteringTable']);
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_2,			$lang['ErrorAlteringTable']);
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_3,			$lang['ErrorAlteringTable']);
-$upgrade['5.4.0'][]	= array($lang['UpdateTable'],	'user',			$update_user_r5_4_0,		$lang['ErrorUpdatingTable']);
 
 // user setting
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']);
@@ -533,6 +532,9 @@ $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_set
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_2,	$lang['ErrorAlteringTable']);
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_3,	$lang['ErrorAlteringTable']);
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_4,	$lang['ErrorAlteringTable']);
+
+// Make sure these are in order!
+$upgrade['5.4.0'][]	= array($lang['UpdateTable'],	'user',			$update_user_r5_4_0,		$lang['ErrorUpdatingTable']);
 
 // usergroup
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']);
