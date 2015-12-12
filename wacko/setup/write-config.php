@@ -109,7 +109,7 @@ echo "            <li>".$lang['Writing']." - ";
 $perm_changed	= true;
 $file_name		= 'config/config.php';
 
-if (is__writable($file_name))
+if (is_writable($file_name))
 {
 	$write_file		= file_put_contents($file_name, $config_code);
 
@@ -117,7 +117,7 @@ if (is__writable($file_name))
 	{
 		// Try and make it non-writable
 		@chmod($file_name, 0644);
-		$perm_changed = !is__writable($file_name);
+		$perm_changed = !is_writable($file_name);
 
 		echo output_image(true)."</li>\n";
 

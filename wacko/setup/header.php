@@ -33,43 +33,6 @@ function output_image($ok)
 	return '<img src="'.my_location().'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross '.($ok ? 'tick' : 'cross').'" />';
 }
 
-function is__writable($path)
-{
-	// http://uk2.php.net/manual/en/function.is-writable.php
-	// legolas558 d0t users dot sf dot net - 02-Mar-2007 08:18
-	// Will work in despite of Windows ACLs bug
-	// NOTE: use a trailing slash for folders!!!
-	// see http://bugs.php.net/bug.php?id=27609
-	// see http://bugs.php.net/bug.php?id=30931
-
-	if($path{strlen($path) - 1} == '/') // recursively return a temporary file path
-	{
-		return is__writable($path.uniqid(mt_rand()).'.tmp');
-	}
-	else if (is_dir($path))
-	{
-		return is__writable($path.'/'.uniqid(mt_rand()).'.tmp');
-	}
-
-	// check tmp file for read/write capabilities
-	$rm	= file_exists($path);
-	$f	= @fopen($path, 'a');
-
-	if ($f === false)
-	{
-		return false;
-	}
-
-	fclose($f);
-
-	if(!$rm)
-	{
-		unlink($path);
-	}
-
-	return true;
-}
-
 function write_config_hidden_nodes($skip_values)
 {
 	global $config;
