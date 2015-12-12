@@ -43,9 +43,10 @@ define('CSP_CUSTOM',					"Content-Security-Policy:
 											frame-src 'self' *.youtube.com *.youtube-nocookie.com;"); // Content-Security-Policy "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;"
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'5.5.0');
+define('WACKO_VERSION',					'5.5.beta');
 define('HTML_ENTITIES_CHARSET',			'ISO-8859-1'); // ISO-8859-1, cp1251
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
+define('HTML_FILTERING',				null); // safehtml, htmlpurifier
 
 define('ACTION4DIFF',					'anchor, toc'); //allowed actions in DIFF
 define('PHP_MIN_VERSION',				'5.4.0'); //minimum required PHP version
