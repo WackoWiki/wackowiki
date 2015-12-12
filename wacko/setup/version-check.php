@@ -86,35 +86,35 @@ write_config_hidden_nodes(array('none' => ''));
 
 
 	// If the cache directory is writable then we can enable caching as default
-	echo '            <input type="hidden" name="config[cache]" value="'.(is__writable('_cache/') ? '1' : $config['cache']).'" />'."\n";
+	echo '            <input type="hidden" name="config[cache]" value="'.(is_writable('_cache/') ? '1' : $config['cache']).'" />'."\n";
 
-	$file_permissions_result =	   is__writable('_cache/config/')
-								&& is__writable('_cache/feeds/')
-								&& is__writable('_cache/pages/')
-								&& is__writable('_cache/queries/')
-								&& is__writable('config/config.php')
-								&& is__writable('config/lock')
-								&& is__writable('config/lock_ap')
-								&& is__writable('files/backup/')
-								&& is__writable('files/global/')
-								&& is__writable('files/perpage/')
-								&& is__writable('xml/')
-								&& is__writable('sitemap.xml');
+	$file_permissions_result =	   is_writable('_cache/config/')
+								&& is_writable('_cache/feeds/')
+								&& is_writable('_cache/pages/')
+								&& is_writable('_cache/queries/')
+								&& is_writable('config/config.php')
+								&& is_writable('config/lock')
+								&& is_writable('config/lock_ap')
+								&& is_writable('files/backup/')
+								&& is_writable('files/global/')
+								&& is_writable('files/perpage/')
+								&& is_writable('xml/')
+								&& is_writable('sitemap.xml');
 	?>
 <h2><?php echo $lang['Permissions']; ?></h2>
 <ul>
-	<li>_cache/config   <?php		echo output_image(is__writable('_cache/config/')); ?></li>
-	<li>_cache/feeds   <?php		echo output_image(is__writable('_cache/feeds/')); ?></li>
-	<li>_cache/pages   <?php		echo output_image(is__writable('_cache/pages/')); ?></li>
-	<li>_cache/queries   <?php		echo output_image(is__writable('_cache/queries/')); ?></li>
-	<li>config/config.php   <?php	echo output_image(is__writable('config/config.php')); ?></li>
-	<li>config/lock   <?php			echo output_image(is__writable('config/lock')); ?></li>
-	<li>config/lock_ap   <?php		echo output_image(is__writable('config/lock_ap')); ?></li>
-	<li>files/backup   <?php		echo output_image(is__writable('files/backup/')); ?></li>
-	<li>files/global   <?php		echo output_image(is__writable('files/global/')); ?></li>
-	<li>files/perpage   <?php		echo output_image(is__writable('files/perpage/')); ?></li>
-	<li>xml   <?php					echo output_image(is__writable('xml/')); ?></li>
-	<li>sitemap.xml   <?php			echo output_image(is__writable('sitemap.xml')); ?></li>
+	<li>_cache/config   <?php		echo output_image(is_writable('_cache/config/')); ?></li>
+	<li>_cache/feeds   <?php		echo output_image(is_writable('_cache/feeds/')); ?></li>
+	<li>_cache/pages   <?php		echo output_image(is_writable('_cache/pages/')); ?></li>
+	<li>_cache/queries   <?php		echo output_image(is_writable('_cache/queries/')); ?></li>
+	<li>config/config.php   <?php	echo output_image(is_writable('config/config.php')); ?></li>
+	<li>config/lock   <?php			echo output_image(is_writable('config/lock')); ?></li>
+	<li>config/lock_ap   <?php		echo output_image(is_writable('config/lock_ap')); ?></li>
+	<li>files/backup   <?php		echo output_image(is_writable('files/backup/')); ?></li>
+	<li>files/global   <?php		echo output_image(is_writable('files/global/')); ?></li>
+	<li>files/perpage   <?php		echo output_image(is_writable('files/perpage/')); ?></li>
+	<li>xml   <?php					echo output_image(is_writable('xml/')); ?></li>
+	<li>sitemap.xml   <?php			echo output_image(is_writable('sitemap.xml')); ?></li>
 </ul>
 	<?php
 	/*
