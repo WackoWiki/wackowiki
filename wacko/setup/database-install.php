@@ -149,6 +149,11 @@ if (!isset($config['multilanguage']))
 	$config['multilanguage'] = 0;
 }
 
+if (!isset($config['allowed_languages']))
+{
+	$config['allowed_languages'] = '';
+}
+
 // inserting secondary config values
 $config_db['abuse_email']					= $config['admin_email'];
 $config_db['acl_lock']						= $config['acl_lock'];
