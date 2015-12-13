@@ -26,7 +26,12 @@ function admin_badbehavior(&$engine, &$module)
 	$tables			= & $module['vars'][0];
 	$directories	= & $module['vars'][1];
 
-require_once('lib/bad_behavior/bad-behavior/responses.inc.php');
+	if (!empty($engine->config['ext_bad_behavior']))
+	{
+		require_once('lib/bad_behavior/bad-behavior/responses.inc.php');
+	}
+
+	#$engine->debug_print_r($_POST);
 
 function bb2_httpbl_lookup($ip)
 {
@@ -502,6 +507,7 @@ function bb2_options(&$engine)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		#$config['display_stats']				= (string)$_POST['display_stats'];
+		$config['ext_bad_behavior']				= (int)$_POST['ext_bad_behavior'];
 		$config['strict']						= (string)$_POST['strict'];
 		$config['verbose']						= (string)$_POST['verbose'];
 		$config['logging']						= (string)$_POST['logging'];
@@ -669,10 +675,23 @@ function bb2_options(&$engine)
 <?php
 	echo $engine->form_open('bb2_options', '', 'post', true, '', 'setting=bb2_options');
 ?>
-	<input type="hidden" name="action" value="update" />
+	<input type="hidden" name="action" value="bb2_options" />
 	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | Settings | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
 
 	<table class="formation">
+
+		<tr class="lined">
+			<td colspan="2"></td>
+		</tr>
+		<tr class="hl_setting">
+			<td class="label"><strong>Enable Bad Behavior:</strong><br />
+				<small>All other settings can be changed in the config folder <code>bb_settings.conf</code>.</small></td>
+			<td>
+				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ( $engine->config['ext_bad_behavior'] ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on">On.</label>
+				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->config['ext_bad_behavior'] ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off">Off.</label>
+			</td>
+		</tr>
+
 		<tr>
 			<th colspan="2">
 				<br />
@@ -803,6 +822,18 @@ function bb2_options(&$engine)
 <?php
 }
 
+	// update settings
+	if (isset($_POST['action']) && $_POST['action'] == 'bb2_options')
+	{
+		$config['ext_bad_behavior']				= (int)$_POST['ext_bad_behavior'];
+
+		$engine->_set_config($config, '', true);
+
+		$engine->log(1, '!!Updated Bad Behavior settings!!');
+		$engine->set_message('Updated Bad Behavior settings');
+		$engine->redirect(rawurldecode($engine->href()));
+	}
+
 if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 {
 	$sql = "TRUNCATE {$engine->config['table_prefix']}badbehavior";
@@ -824,27 +855,49 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 	<p>For more information please visit the <a href="http://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a> homepage.</p>
 
 <?php
-if (isset($_GET['setting']) && $_GET['setting'] == 'bb2_options')
+
+	if (!empty($engine->config['ext_bad_behavior']))
 	{
-		bb2_options($engine);
-	}
-	else if (isset($_GET['setting']) && $_GET['setting'] == 'bb2_whitelist')
-	{
-		bb2_whitelist($engine);
-	}
-	else if (isset($_GET['setting']) && $_GET['setting'] == 'bb2_manage')
-	{
-		bb2_manage($engine);
+		if (isset($_GET['setting']) && $_GET['setting'] == 'bb2_options')
+		{
+			bb2_options($engine);
+		}
+		else if (isset($_GET['setting']) && $_GET['setting'] == 'bb2_whitelist')
+		{
+			bb2_whitelist($engine);
+		}
+		else if (isset($_GET['setting']) && $_GET['setting'] == 'bb2_manage')
+		{
+			bb2_manage($engine);
+		}
+		else
+		{
+			bb2_summary($engine);
+		}
 	}
 	else
 	{
-		bb2_summary($engine);
-	}
 
+	echo $engine->form_open('bb2_options', '', 'post', true, '', 'setting=bb2_options');
 ?>
-		<br />
+	<br />
+	<input type="hidden" name="action" value="bb2_options" />
 
+	<table class="formation">
+		<tr class="hl_setting">
+			<td class="label"><strong>Enable Bad Behavior:</strong><br />
+				<small>All other settings can be changed in the config folder.</small></td>
+			<td style="width:50%;">
+				<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ( $engine->config['ext_bad_behavior'] ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on">On.</label>
+				<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo ( !$engine->config['ext_bad_behavior'] ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off">Off.</label>
+			</td>
+		</tr>
+	</table>
+	<br />
+	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
+	</form>
 <?php
+	}
 }
 
 ?>
