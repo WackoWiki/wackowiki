@@ -1618,28 +1618,14 @@ table.formation td {
 	background-image:url("./../icon/print.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-watch-off img {
-	background-image: url("./../icon/watch-off.svg");
-	background-repeat: no-repeat;
-}
-#handler li.m-watch-on img {
-	background-image: url("./../icon/watch-on.svg");
-	background-repeat: no-repeat;
-}
-#handler li.m-review1 img {
-	background-image: url("./../icon/review1.svg");
-	background-repeat: no-repeat;
-}
-#handler li.m-review2 img {
-	background-image: url("./../icon/review2.svg");
-	background-repeat: no-repeat;
-}
 
 .desc_rss_feed {
 	float:right;
 	margin-right:20px;
 }
 
+.review1 img,
+.review2 img,
 .watch-off img,
 .watch-on img {
 	border:medium none;
@@ -1652,6 +1638,15 @@ table.formation td {
 }
 .watch-on img {
 	background-image: url("./../icon/watch-on.svg");
+	background-repeat: no-repeat;
+}
+
+.review1 img {
+	background-image: url("./../icon/review1.svg");
+	background-repeat: no-repeat;
+}
+.review2 img {
+	background-image: url("./../icon/review2.svg");
 	background-repeat: no-repeat;
 }
 
@@ -1892,3 +1887,51 @@ table.forum td {
 	/* display: inline; */
 }
 
+/* authors action ------------- */
+.license-CC-BY {
+	background-image:	url('../../../image/cc-by.svg');
+	background-repeat:	no-repeat;
+	background-position:	0;
+	height:	22px;
+	width:	22px;
+}
+.license-CC-PD {
+	background-image:	url('../../../image/cc-pd.svg');
+	background-repeat:	no-repeat;
+	background-position:	0;
+	height:	22px;
+	width:	22px;
+}
+.license-CC-BY-SA {
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-sa.svg');
+	background-repeat:	no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px;
+	height:	22px;
+	width:	44px;
+}
+.license-CC-BY-ND {
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-nd.svg');
+	background-repeat:	no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px;
+	height:	22px;
+	width:	44px;
+}
+.license-CC-BY-NC-SA {
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-nc.svg'),
+						url('../../../image/cc-sa.svg');
+	background-repeat:	no-repeat,
+						no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px,
+							44px;
+	height:	22px;
+	width:	66px;
+}
