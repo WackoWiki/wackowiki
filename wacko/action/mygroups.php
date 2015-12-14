@@ -21,7 +21,7 @@ if (!function_exists('MyGroups'))
 
 			if(in_array ($user_name, $group_members))
 			{
-				echo $this->group_link($group_name, '', true, false).'<br />';
+				echo $wacko->group_link($group_name, '', true, false).'<br />';
 
 				$my_groups_count++;
 			}
