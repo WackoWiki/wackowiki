@@ -275,7 +275,7 @@ $wacko_config_defaults = array(
 	'keep_deleted_time' => 0,
 
 	// enable extentions
-	'ext_bad_behavior' => 1,
+	'ext_bad_behavior' => 0,
 );
 
 ?>
