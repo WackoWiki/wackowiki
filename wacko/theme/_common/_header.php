@@ -49,7 +49,12 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 <?php } ?>
 <?php } ?>
 
-<?php #bb2_insert_head(); ?>
+<?php
+// set Bad Behavior "screener" cookie for advanced protection
+if (!empty($this->config['ext_bad_behavior']))
+{
+	bb2_insert_head();
+} ?>
 
 <?php
 // JS files.
