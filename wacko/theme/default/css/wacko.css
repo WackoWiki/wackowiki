@@ -310,11 +310,6 @@ a.file-link .icon {
 	padding-left: 17px;
 }
 
-a[href^="htts://"] .icon,
-a[href^="http://"] .icon {
-	background: rgba(0, 0, 0, 0) url("./../icon/web.svg") no-repeat scroll left center;
-	padding-left: 17px;
-}
 a[href^="mailto:"] .icon {
 	background: rgba(0, 0, 0, 0) url("./../icon/mail.svg") no-repeat scroll left center;
 	padding-left: 17px;
