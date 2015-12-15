@@ -1523,7 +1523,7 @@ class Wacko
 			}
 
 			if ($read_acls = $this->load_all(
-			"SELECT a.* ".
+			"SELECT a.page_id, a.privilege, a.list ".
 			"FROM ".$this->config['table_prefix']."acl a ".
 				"INNER JOIN ".$this->config['table_prefix']."page p ON (a.page_id = p.page_id) ".
 			"WHERE p.comment_on_id = '0' ".
@@ -1537,7 +1537,7 @@ class Wacko
 			{
 				foreach ($read_acls as $read_acl)
 				{
-					$this->cache_acl($read_acl['page_id'], 'read', 1,$read_acl);
+					$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acl);
 				}
 			}
 
@@ -1573,7 +1573,7 @@ class Wacko
 			}
 
 			if ($read_acls = $this->load_all(
-			"SELECT a.* ".
+			"SELECT a.page_id, a.privilege, a.list ".
 			"FROM ".$this->config['table_prefix']."acl a ".
 				"INNER JOIN ".$this->config['table_prefix']."page p ON (a.page_id = p.page_id) ".
 			"WHERE p.comment_on_id = '0' ".
@@ -1587,7 +1587,7 @@ class Wacko
 			{
 				foreach ($read_acls as $read_acl)
 				{
-					$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acls);
+					$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acl);
 				}
 			}
 
@@ -2113,7 +2113,7 @@ class Wacko
 					{
 						if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
 						{
-							$xml->news($this->tag);
+							$xml->news(); // $this->tag
 						}
 					}
 				}

@@ -107,7 +107,7 @@ class RSS
 		$name			= 'news';
 		$news_cluster	= empty($news_cluster) ? $this->engine->config['news_cluster'] : $news_cluster;
 		$news_levels	= $this->engine->config['news_levels'];
-		$news_pages		= '';
+		$news_pages		= array();
 		$prefix			= $this->engine->config['table_prefix'];
 
 		//  collect data
@@ -125,7 +125,7 @@ class RSS
 			{
 				$access = $this->engine->has_access('read', $page['page_id'], GUEST);
 
-				if ($access)
+				if ($access === true)
 				{
 					$news_pages[]	= array(
 										'page_id'	=> $page['page_id'],
@@ -134,7 +134,7 @@ class RSS
 										'modified'	=> $page['created'],
 										'body_r'	=> $page['body_r'],
 										'comments'	=> $page['comments'],
-										'page_lang'		=> $page['page_lang'],
+										'page_lang'	=> $page['page_lang'],
 										'date'		=> date('Y/m-d', strtotime($page['created'])));
 				}
 			}
