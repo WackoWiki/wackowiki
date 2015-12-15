@@ -1920,10 +1920,33 @@ table.forum td {
 	height:	22px;
 	width:	44px;
 }
+.license-CC-BY-NC {
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-nc.svg');
+	background-repeat:	no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px;
+	height:	22px;
+	width:	44px;
+}
 .license-CC-BY-NC-SA {
 	background-image:	url('../../../image/cc-by.svg'),
 						url('../../../image/cc-nc.svg'),
 						url('../../../image/cc-sa.svg');
+	background-repeat:	no-repeat,
+						no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px,
+							44px;
+	height:	22px;
+	width:	66px;
+}
+.license-CC-BY-NC-ND {
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-nc.svg'),
+						url('../../../image/cc-nd.svg');
 	background-repeat:	no-repeat,
 						no-repeat,
 						no-repeat;
