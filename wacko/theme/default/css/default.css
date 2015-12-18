@@ -53,7 +53,7 @@ input[type="color"] {
 	border: 1px solid #ccc;
 	display: inline-block;
 	font-size: 14px;
-	height: 1.6em;
+	height: auto;
 	/* line-height: 1.6em; */
 	/* margin-bottom: 9px; */
 }
@@ -1551,6 +1551,12 @@ table.formation td {
 #handler #more-icon {
 }
 
+.page_handler{
+	list-style: none;
+}
+
+.page_handler img,
+.page_handler a img,
 #handler img,
 #handler a img,
 #handler span img {
@@ -1559,61 +1565,81 @@ table.formation td {
 	width:16px;
 }
 
-#handler li.m-new img {
+.page_handler img {
+	padding: 2px 5px 2px 0;
+}
+
+li.m-new img {
 	background-image:url("./../icon/add_page.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-categories img {
+li.m-categories img {
 	background-image:url("./../icon/tag.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-upload img {
+li.m-upload img {
 	background-image:url("./../icon/attachment.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-edit img {
+li.m-clone img {
+	background-image:url("./../icon/copy.svg");
+	background-repeat: no-repeat;
+}
+li.m-edit img {
 	background-image:url("./../icon/edit.svg");
 	background-repeat: no-repeat;
 	/* background-size:10px 10px; */
 }
-#handler li.m-referrers img {
+li.m-referrers img {
 	background-image:url("./../icon/link.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-revisions img {
+li.m-revisions img {
 	background-image:url("./../icon/revisions.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-remove img {
+li.m-remove img {
 	background-image: url("./../icon/delete_page.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-rename img {
+li.m-purge img {
+	background-image: url("./../icon/delete.svg");
+	background-repeat: no-repeat;
+}
+li.m-rename img {
 	background-image: url("./../icon/edit.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-moderate img {
+li.m-moderate img {
 	background-image: url("./../icon/moderate.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-properties img {
+li.m-properties img {
 	background-image:url("./../icon/properties.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-permissions img {
+li.m-permissions img {
 	background-image:url("./../icon/permission.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-show img {
+li.m-show img {
 	background-image:url("./../icon/show.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-moderate img {
+li.m-moderate img {
 	background-image:url("./../icon/comment.svg");
 	background-repeat: no-repeat;
 }
-#handler li.m-print img {
+li.m-print img {
 	background-image:url("./../icon/print.svg");
+	background-repeat: no-repeat;
+}
+li.m-xml img {
+	background-image:url("./../icon/xml.svg");
+	background-repeat: no-repeat;
+}
+li.m-word img {
+	background-image:url("./../icon/document.svg");
 	background-repeat: no-repeat;
 }
 
@@ -1654,97 +1680,111 @@ table.formation td {
 	background-size: 22px 22px;
 	height: 22px;
 	width: 22px;
+	display: inline-block;
 }
 .btn-menu {
-background-image: url('./../icon/menu.svg'), none;
+	background-image: url('./../icon/menu.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-addbookmark {
-background-image: url('./../icon/bookmark.svg'), none;
+	background-image: url('./../icon/bookmark.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-removebookmark {
-background-image: url('./../icon/remove.svg'), none;
+	background-image: url('./../icon/remove.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-delete {
-background-image: url('./../icon/delete.svg'), none;
+	background-image: url('./../icon/delete.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-edit {
-background-image: url('./../icon/edit.svg'), none;
+	background-image: url('./../icon/edit.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-feed {
-background-image: url('./../icon/feed.svg'), none;
+	background-image: url('./../icon/feed.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-tick {
-background-image: url('./../icon/tick.svg'), none;
+	background-image: url('./../icon/tick.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-warning {
-background-image: url('./../icon/warning.svg'), none;
+	background-image: url('./../icon/warning.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-add_page {
-background-image: url('./../icon/add_page.svg'), none;
+	background-image: url('./../icon/add_page.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-comment {
-background-image: url('./../icon/comment.svg'), none;
+	background-image: url('./../icon/comment.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-attachment {
-background-image: url('./../icon/attachment.svg'), none;
+	background-image: url('./../icon/attachment.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-unlocked {
-background-image: url('./../icon/unlocked.svg'), none;
+	background-image: url('./../icon/unlocked.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 .btn-locked {
-background-image: url('./../icon/locked.svg'), none;
+	background-image: url('./../icon/locked.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+	display: inline-block;
 }
 
 .viewed {
