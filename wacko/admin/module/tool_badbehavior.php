@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 
 $module['badbehavior'] = array(
 		'order'	=> 30,
-		'cat'	=> 'Extention',
+		'cat'	=> 'Extension',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'badbehavior',
 		'name'	=> 'Bad Behavior',

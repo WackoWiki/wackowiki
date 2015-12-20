@@ -58,7 +58,7 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true));
 	$sysinfo['max_execution_time']	= array('Max execution time', get_cfg_var('max_execution_time').' seconds');
 	$sysinfo['session_save_path']	= array('Session path', get_cfg_var('session.save_path'));
-	$sysinfo['php_extentions']		= array('PHP extentions', implode(', ',get_loaded_extensions()));
+	$sysinfo['php_extensions']		= array('PHP extensions', implode(', ',get_loaded_extensions()));
 
 	if ( function_exists( 'apache_get_modules' ) )
 	{
