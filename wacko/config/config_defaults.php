@@ -274,7 +274,7 @@ $wacko_config_defaults = array(
 	'pages_purge_time' => 0,
 	'keep_deleted_time' => 0,
 
-	// enable extentions
+	// enable extensions
 	'ext_bad_behavior' => 0,
 );
 
