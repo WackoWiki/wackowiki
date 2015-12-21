@@ -17,7 +17,7 @@ text_highlighter	| Text_Highlighter	| 0.7.1		| unpatched
 Upstream projects
 ==================
 bad_behavior		- http://bad-behavior.ioerror.us/
-freecap				- http://www.puremango.co.uk/cm_php_captcha_scr
+freecap				- http://www.puremango.co.uk/2005/04/php_captcha_script_113/
 password_compat		- https://github.com/ircmaxell/password_compat
 phpmailer			- https://github.com/PHPMailer/PHPMailer
 phpthumb			- http://phpthumb.gxdlabs.com/
