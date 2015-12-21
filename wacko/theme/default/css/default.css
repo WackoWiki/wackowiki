@@ -1523,7 +1523,7 @@ table.formation td {
 #usermenu ol ul li a,
 #usermenu ol li.active li a,
 #usermenu ol li:hover ul li a,
-#usermenu ol ul li span,
+#usermenu ol ul li.active span,
 #handler ul ul li a,
 #handler ul li.active li a,
 #handler ul li:hover ul li a,
@@ -1546,6 +1546,7 @@ table.formation td {
 #usermenu ol li:hover ul,
 #handler ul li:hover ul {
 	display: block; /* Show the sub menus */
+	z-index: 20;
 }
 	
 #handler #more-icon {
