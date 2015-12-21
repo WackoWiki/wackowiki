@@ -35,7 +35,6 @@ if ($this->has_access('read')
 		$message = str_replace('%1', $result, $this->get_translation('PageReservedWord'));
 		$this->set_message($message);
 		$this->redirect($this->href('new', $this->config['root_page'])); // $this->tag is reserved word
-
 	}
 
 	$user	= $this->get_user();
