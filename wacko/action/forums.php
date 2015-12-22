@@ -124,7 +124,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			// print <span class="icon"></span>
 			echo '<tr class="lined">'.
 					'<td style="width:60%; vertical-align:top;">'.
-						( $this->has_access('create', $forum['page_id'], GUEST) === false
+						( $this->has_access('read', $forum['page_id'], GUEST) === false
 							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>'
 							: '' ).
 						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
