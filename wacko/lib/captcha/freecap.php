@@ -22,10 +22,10 @@
 *
 *
 \************************************************************/
-#__DIR__
-define('SESSION_HANDLER_PATH',		null);				// Where to find session files. Same setting as in config/constants.php
+
 define('COOKIE_PREFIX',				'wacko_');			// Part 1 of session_name - see init.php ln. 421 for details "  session_name($this->config['cookie_prefix'].SESSION_HANDLER_ID);  "
 define('SESSION_HANDLER_ID',		'sid');				// Part 2 of session_name - see previous . Same setting as in config/constants.php
+define('SESSION_HANDLER_PATH',		null);				// Where to find session files. Same setting as in config/constants.php
 
 $catch_session_name = COOKIE_PREFIX.SESSION_HANDLER_ID;
 
@@ -391,7 +391,7 @@ if($use_dict == 1)
 	$words	= @file($dict_location);
 	$word	= strtolower($words[$rand_func(0, sizeof($words) - 1)]);
 	// cut off line endings/other possible odd chars
-	$word	= preg_replace("/[^a-z]/", '', $word);
+	$word	= preg_replace('/[^a-z]/', '', $word);
 	// might be large file so forget it now (frees memory)
 	$words	= '';
 	unset($words);
@@ -501,9 +501,9 @@ if($bg_type != 0)
 		for($i = $rand_func(6, 20); $i < $width * 2; $i += $rand_func(10, 25))
 		{
 			ImageSetThickness($temp_bg,$rand_func(2, 6));
-			$text_r		= $rand_func(100, 150);
-			$text_g		= $rand_func(100, 150);
-			$text_b		= $rand_func(100, 150);
+			$text_r			= $rand_func(100, 150);
+			$text_g			= $rand_func(100, 150);
+			$text_b			= $rand_func(100, 150);
 			$text_colour3	= ImageColorAllocate($temp_bg, $text_r, $text_g, $text_b);
 
 			ImageLine($temp_bg, $i, 0, $i, $height * 2, $text_colour3);
@@ -518,7 +518,7 @@ if($bg_type != 0)
 			$text_b			= $rand_func(100, 150);
 			$text_colour3	= ImageColorAllocate($temp_bg, $text_r, $text_g, $text_b);
 
-			ImageLine($temp_bg,0,$i,$width*2, $i ,$text_colour3);
+			ImageLine($temp_bg, 0, $i, $width*2, $i ,$text_colour3);
 		}
 	}
 	else if($bg_type == 2)
@@ -531,9 +531,9 @@ if($bg_type != 0)
 
 		for($i = 0; $i < strlen($word) + 1; $i++)
 		{
-			$text_r		= $rand_func(100, 150);
-			$text_g		= $rand_func(100, 150);
-			$text_b		= $rand_func(100, 150);
+			$text_r			= $rand_func(100, 150);
+			$text_g			= $rand_func(100, 150);
+			$text_b			= $rand_func(100, 150);
 			$text_colour3	= ImageColorAllocate($temp_bg, $text_r, $text_g, $text_b);
 
 			$points = Array();
@@ -564,7 +564,7 @@ if($bg_type != 0)
 			$temp_height[$i]	= imagesy($temp_im[$i]);
 		}
 
-	$blocksize = $rand_func(20, 60);
+		$blocksize = $rand_func(20, 60);
 
 		for($i = 0; $i < $width * 2; $i += $blocksize)
 		{
@@ -668,9 +668,9 @@ for($i = 0 ; $i < strlen($word); $i++)
 {
 	if($col_type == 1)
 	{
-		$text_r		= rand_color();
-		$text_g		= rand_color();
-		$text_b		= rand_color();
+		$text_r			= rand_color();
+		$text_g			= rand_color();
+		$text_b			= rand_color();
 		$text_colour2	= ImageColorAllocate($im2, $text_r, $text_g, $text_b);
 	}
 
@@ -703,9 +703,12 @@ for($i = $word_start_x; $i < $word_pix_size; $i += $font_pixelwidth)
 	// deviates at least 4 pixels between each letter
 	$prev_y = $y_pos;
 
-	do{
+	do
+	{
 		$y_pos = $rand_func(-5, 5);
-	} while($y_pos < $prev_y + 2 && $y_pos > $prev_y - 2);
+	}
+	while($y_pos < $prev_y + 2 && $y_pos > $prev_y - 2);
+
 	ImageCopy($im, $im2, $i, $y_pos, $i, 0, $font_pixelwidth, $height);
 
 	// for debug:
@@ -738,7 +741,7 @@ for($j = 0; $j < strlen($word); $j++)
 		// had to change this to ImageCopyMerge when starting using ImageCreateTrueColor
 		// according to the manual; "when (pct is) 100 this function behaves identically to imagecopy()"
 		// but this is NOT true when dealing with transparencies...
-		ImageCopyMerge($im2, $im, $orig_x+$morph_x, $i + $y_pos, $orig_x, $i, $font_pixelwidth, $y_chunk, 100);
+		ImageCopyMerge($im2, $im, $orig_x + $morph_x, $i + $y_pos, $orig_x, $i, $font_pixelwidth, $y_chunk, 100);
 
 		// for debug:
 		//ImageLine($im2, $orig_x+$morph_x, $i, $orig_x+$morph_x+1, $i+$y_chunk, $debug2);
