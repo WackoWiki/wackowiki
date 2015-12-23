@@ -7270,15 +7270,15 @@ class Wacko
 			// if false, we assume it's anonymous
 			if ($this->get_user_name() == false)
 			{
-				echo $inline ? '' : '<br />';
-				echo '<label for="captcha">'.$this->get_translation('Captcha').':</label>';
-				echo $inline ? '' : '<br />';
-				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />';
+				echo $inline ? '' : "<br />\n";
+				echo '<label for="captcha">'.$this->get_translation('Captcha').":</label>\n";
+				echo $inline ? '' : "<br />\n";
+				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />'."\n";
 				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
-				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('CaptchaReload').'" class="btn-reload"/></a> <br />';
-				#echo $inline ? '' : '<br />';
+				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
+				#echo $inline ? '' : "<br />\n";
 				echo '<input type="text" id="captcha" name="captcha" maxlength="6" style="width: 273px;" />';
-				echo $inline ? '' : '<br />';
+				echo $inline ? '' : "<br />\n";
 			}
 		}
 	}
