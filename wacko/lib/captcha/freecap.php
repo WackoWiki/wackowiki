@@ -23,11 +23,16 @@
 *
 \************************************************************/
 
+//////////////////////////////////////////////////////
+////// Associate related session
+//////////////////////////////////////////////////////
+
 define('IN_CAPTCHA', true);
 
+// Get absolute path to load config file, the relative path to the page may vary
 $working_dir = preg_replace('/\/lib\/captcha/', '/', __DIR__);
+// load config file containing cookie prefix, session handler id and session handler path
 require_once($working_dir.'config/captcha.php');
-
 
 $catch_session_name = COOKIE_PREFIX.SESSION_HANDLER_ID;
 
@@ -39,7 +44,8 @@ if(isset($_GET[$catch_session_name]))
 	// Save session information where specified or with PHP's default
 	session_save_path(SESSION_HANDLER_PATH);
 
-	session_start();									// we don't actually start a new session - we open the existing one by name & id and add our variables
+	// we don't actually start a new session - we open the existing one by name & id and add our variables
+	session_start();
 }
 
 
@@ -279,7 +285,7 @@ else
 		//ImageString($im,5,0,20,"bugger off you spamming bastards!",$red);
 		ImageString($im, 5, 15, 20, 'service no longer available', $red);
 
-		sendImage($im);
+		send_image($im);
 	}
 }
 
@@ -311,13 +317,13 @@ function rand_color()
 	}
 }
 
-function myImageBlur($im)
+function my_image_blur($im)
 {
 	// w00t. my very own blur function
 	// in GD2, there's a gaussian blur function. bunch of bloody show-offs... :-)
 
-	$width = imagesx($im);
-	$height = imagesy($im);
+	$width	= imagesx($im);
+	$height	= imagesy($im);
 
 	$temp_im	= ImageCreateTrueColor($width, $height);
 	$bg			= ImageColorAllocate($temp_im, 150, 150, 150);
@@ -344,7 +350,7 @@ function myImageBlur($im)
 	return $im;
 }
 
-function sendImage($pic)
+function send_image($pic)
 {
 	// output image with appropriate headers
 	global $output, $im, $im2, $im3;
@@ -588,11 +594,11 @@ if($bg_type != 0)
 		}
 
 		// for debug:
-		//sendImage($temp_bg);
+		//send_image($temp_bg);
 	}
 
 	// for debug:
-	//sendImage($im3);
+	//send_image($im3);
 
 	if($morph_bg)
 	{
@@ -639,11 +645,11 @@ if($bg_type != 0)
 
 	if($blur_bg)
 	{
-		myImageBlur($im3);
+		my_image_blur($im3);
 	}
 }
 // for debug:
-//sendImage($im3);
+//send_image($im3);
 
 
 
@@ -684,7 +690,7 @@ for($i = 0 ; $i < strlen($word); $i++)
 $font_pixelwidth = $font_widths[$j];
 
 // for debug:
-//sendImage($im2);
+//send_image($im2);
 
 
 
@@ -718,7 +724,7 @@ for($i = $word_start_x; $i < $word_pix_size; $i += $font_pixelwidth)
 }
 
 // for debug:
-//sendImage($im);
+//send_image($im);
 
 ImageFilledRectangle($im2, 0, 0, $width, $height, $bg2);
 
@@ -752,7 +758,7 @@ for($j = 0; $j < strlen($word); $j++)
 }
 
 // for debug:
-//sendImage($im2);
+//send_image($im2);
 
 ImageFilledRectangle($im, 0, 0, $width, $height, $bg);
 // now do the same on the y-axis
@@ -774,16 +780,16 @@ for($i = 0; $i <= $width; $i += $x_chunk)
 }
 
 // for debug:
-//sendImage($im);
+//send_image($im);
 
 // blur edges:
 // doesn't really add any security, but looks a lot nicer, and renders text a little easier to read
 // for humans (hopefully not for OCRs, but if you know better, feel free to disable this function)
 // (and if you do, let me know why)
-myImageBlur($im);
+my_image_blur($im);
 
 // for debug:
-//sendImage($im);
+//send_image($im);
 
 if($output != 'jpg' && $bg_type == 0)
 {
@@ -830,7 +836,7 @@ if(is_array($site_tags))
 ImageCopyMerge($im2, $im, 0, 0, 0, 0, $width, $height, 80);
 ImageCopy($im, $im2, 0, 0, 0, 0, $width, $height);
 // for debug:
-//sendImage($im);
+//send_image($im);
 
 
 
@@ -851,7 +857,7 @@ if($bg_type != 0)
 		ImageFill($temp_im, 0, 0, $white);
 		ImageCopyMerge($im3, $temp_im, 0, 0, 0, 0, $width, $height, $bg_fade_pct);
 		// for debug:
-		//sendImage($im3);
+		//send_image($im3);
 		ImageDestroy($temp_im);
 		$c_fade_pct = 50;
 	}
@@ -875,7 +881,7 @@ if($bg_type != 0)
 	}
 }
 // for debug:
-//sendImage($im);
+//send_image($im);
 
 
 //////////////////////////////////////////////////////
@@ -921,6 +927,6 @@ unset($font_locations);
 
 
 // output final image :-)
-sendImage($im);
+send_image($im);
 // (sendImage also destroys all used images)
 ?>
