@@ -2,8 +2,8 @@
 
 function array_to_str ($arr, $name = '')
 {
-	if (!isset($entries)) $entries = '';
-	if (!isset($arrays)) $arrays = '';
+	$entries	= '';
+	$arrays		= '';
 
 	$str = "\$wacko_config".($name ? "[\"".$name."\"]" : "")." = array(\n";
 
@@ -58,6 +58,8 @@ if ($config['wacko_version'] == '5.4.0')
 
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
+
+$config_file = array();
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	BEGIN MANDATORY CONFIGURATION
