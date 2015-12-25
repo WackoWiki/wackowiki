@@ -290,7 +290,7 @@ function admin_content_files(&$engine, &$module)
 	: ''), true);
 
 	$count		= count($count);
-	$pagination = $engine->pagination($count, $limit, 'f','mode=files', '', 'admin.php');
+	$pagination = $engine->pagination($count, $limit, 'f','mode='.$module['mode'], '', 'admin.php');
 
 	// load files list
 	$files = $engine->load_all(
@@ -305,7 +305,7 @@ function admin_content_files(&$engine, &$module)
 		$files = array();
 	}
 
-	print('<fieldset><legend>'.$engine->get_translation('UploadTitleGlobal').":</legend>\n");
+	echo '<fieldset><legend>'.$engine->get_translation('UploadTitleGlobal').":</legend>\n";
 
 	// display
 	$del	= $engine->get_translation('UploadRemove');
