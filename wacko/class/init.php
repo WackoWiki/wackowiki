@@ -277,13 +277,13 @@ class Init
 	// save serialized settings results
 	function cache_settings($file_name, $data)
 	{
-		$filename	= $this->settings_cache_id($file_name);
-		$sqldata	= serialize($data);
+		$file_path	= $this->settings_cache_id($file_name);
+		$sql_data	= serialize($data);
 
-		if (is_writable($filename))
+		if (is_writable('_cache/'.CACHE_CONFIG_DIR))
 		{
-			file_put_contents($filename, $sqldata);
-			chmod($filename, 0644);
+			file_put_contents($file_path, $sql_data);
+			chmod($file_path, 0644);
 
 			return true;
 		}
@@ -296,17 +296,17 @@ class Init
 	// retrieve and unserialize cached settings data
 	function load_cached_settings($file_name)
 	{
-		$filename	= $this->settings_cache_id($file_name);
+		$file_path	= $this->settings_cache_id($file_name);
 
-		if (!@file_exists($filename))
+		if (!@file_exists($file_path))
 		{
 			return false;
 		}
 
-		$fp			= fopen($filename, 'r');
+		$fp			= fopen($file_path, 'r');
 
 		// check for false and empty strings
-		if(($data	= fread($fp, filesize($filename))) === '')
+		if(($data	= fread($fp, filesize($file_path))) === '')
 		{
 			return false;
 		}
