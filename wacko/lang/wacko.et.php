@@ -740,6 +740,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError' => 'Tundub, et seda faili on võimatu kustutada!',
 	'UploadRemoveConfirm' => 'Oled sa kindel, et tahad kustutada?',
 	'UploadRemoveDenied' => 'Sul ei ole lubatud seda faili eemaldada',
+	'UploadRemoveNotFound'		=> 'File not found.',
 	'UploadMax' => 'Mitte rohkem kui ',
 	'UploadUsedStorage'		=> 'Storage in use ',
 

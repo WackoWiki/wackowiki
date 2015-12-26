@@ -733,6 +733,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError' => 'Файлът не може да се изтрие!',
 	'UploadRemoveConfirm' => 'Изтриване на файла?',
 	'UploadRemoveDenied' => 'Не Ви е разрешено премахване на файла',
+	'UploadRemoveNotFound'		=> 'File not found.',
 	'UploadMax' => 'Не повече от ',
 	'UploadUsedStorage'		=> 'Storage in use ',
 

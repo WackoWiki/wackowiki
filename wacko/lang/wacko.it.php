@@ -740,6 +740,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError' => 'It seems to be impossible to erase file!',
 	'UploadRemoveConfirm' => 'Sure to remove this file?',
 	'UploadRemoveDenied' => 'You are not allowed to remove this file',
+	'UploadRemoveNotFound'		=> 'File not found.',
 	'UploadMax' => 'No more than ',
 	'UploadUsedStorage'		=> 'Storage in use ',
 

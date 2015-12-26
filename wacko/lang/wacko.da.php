@@ -740,6 +740,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError' => 'Der er problemer med at slette filen.!',
 	'UploadRemoveConfirm' => 'Er du sikker på, at du vil slette filen?',
 	'UploadRemoveDenied' => 'Du har ikke tilladelse til at slette filen',
+	'UploadRemoveNotFound'		=> 'File not found.',
 	'UploadMax' => 'Højst ',
 	'UploadUsedStorage'		=> 'Storage in use ',
 

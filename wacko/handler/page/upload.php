@@ -301,7 +301,7 @@ if ($this->can_upload() === true)
 			}
 			else
 			{
-				$this->set_message($this->get_translation('UploadRemoveNotFound')); // TODO: add message set to lang files
+				$this->set_message($this->get_translation('UploadRemoveNotFound'));
 			}
 		}
 		else if (isset($_POST['edit'])) // edit

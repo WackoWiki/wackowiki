@@ -740,6 +740,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError' => 'Het lukt me niet dit bestand te verwijderen!',
 	'UploadRemoveConfirm' => 'Weet u zeker dat u dit bestand wilt verwijderen?',
 	'UploadRemoveDenied' => 'U kunt dit bestand niet verwijderen.',
+	'UploadRemoveNotFound'		=> 'File not found.',
 	'UploadMax' => 'Maximaal ',
 	'UploadUsedStorage'		=> 'Storage in use ',
 

@@ -740,6 +740,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError' => 'Wygl±da na to, ¿e nie mo¿na skasowaæ tego pliku!',
 	'UploadRemoveConfirm' => 'Jeste¶ pewien usuniêcia tego pliku?',
 	'UploadRemoveDenied' => 'Nie masz prawa do usuniêcia tego pliku',
+	'UploadRemoveNotFound'		=> 'File not found.',
 	'UploadMax' => 'Nie wiêcej ni¿ ',
 	'UploadUsedStorage'		=> 'Storage in use ',
 
