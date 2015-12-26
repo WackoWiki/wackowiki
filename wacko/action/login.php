@@ -178,10 +178,10 @@ else
 						// rehash password
 						if ($existing_user['password'] == $_processed_password)
 						{
-							$password	= $_user_name.$_password;
-							$password	= password_hash(
+							$_processed_password	= $_user_name.$_password;
+							$password_hash	= password_hash(
 													base64_encode(
-															hash('sha256', $password, true)
+															hash('sha256', $_processed_password, true)
 															),
 													PASSWORD_DEFAULT
 													);
@@ -189,11 +189,12 @@ else
 							// update database with the sha256 password for future logins
 							$this->sql_query(
 								"UPDATE ".$this->config['table_prefix']."user SET ".
-									"password	= '".quote($this->dblink, $password)."', ".
+									"password	= '".quote($this->dblink, $password_hash)."', ".
 									"salt		= '' ".
 								"WHERE user_name = '".quote($this->dblink, $_user_name)."'");
 
-							$_processed_password = $password;
+							// reload user with updated user password hash
+							$existing_user = $this->load_user($_user_name);
 						}
 					}
 					else
