@@ -807,7 +807,7 @@ function admin_user_users(&$engine, &$module)
 						'<td>'.$row['total_comments'].'</td>'.
 						'<td>'.$row['total_revisions'].'</td>'.
 						'<td>'.$row['total_uploads'].'</td>'.
-						'<td><small><a href="'.$engine->href().'&amp;lang='.$row['user_lang'].'">'.$row['user_lang'].'</a></small></td>'.
+						'<td><small><a href="'.$engine->href().'&amp;user_lang='.$row['user_lang'].'">'.$row['user_lang'].'</a></small></td>'.
 						'<td>'.$row['enabled'].'</td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.
