@@ -165,7 +165,7 @@ if ($error)
 	$display_inline	= true;
 	$extension		= 'png';
 	header('Content-Type: image/'.$extension);
-	$file_path		= 'image/upload'.$error.'.png';
+	$file_path		= 'image/upload'.$error.'.svg';
 
 	if (!headers_sent())
 	{
