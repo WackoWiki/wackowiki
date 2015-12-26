@@ -283,7 +283,7 @@ if ($this->can_upload() === true)
 					}
 					else
 					{
-						$message .= '<span class="error">'.$this->get_translation('UploadRemovedFromFSError').'</span>';
+						$this->set_message($this->get_translation('UploadRemovedFromFSError'), 'error');
 					}
 
 					if ($message)
@@ -431,7 +431,7 @@ if ($this->can_upload() === true)
 
 					if (in_array($ext, $image))
 					{
-						$is_image= true;
+						$is_image = true;
 					}
 
 					$name	= implode('.', $_data);
