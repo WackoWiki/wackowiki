@@ -722,6 +722,7 @@ $wacko_translation = array(
 	'UploadForbidden' => 'Du må ikke uploade filer her.',
 	'UploadNoFile' => 'Hmmm, der var ikke nogen fil.',
 	'UploadMaxSizeReached' => 'Filen er for stor!',
+	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture' => 'Kan desværre ikke genkende filformatet, og kan derfor ikke tillade upload',
 	'UploadMaxFileQuota' => 'Sikke mange filer du uploader. Snak med administrator.',
 	'UploadDone' => 'Filupload lykkedes',

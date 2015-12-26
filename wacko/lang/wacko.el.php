@@ -722,6 +722,7 @@ $wacko_translation = array(
 	'UploadForbidden' => 'Δεν επιτρέπεται να ανεβάσετε εδώ αρχεία.',
 	'UploadNoFile' => 'Για κάποιο λόγο, δεν υπάρχει κανένα αρχείο στην φόρμα.',
 	'UploadMaxSizeReached' => 'Το μέγεθος του αρχείου είναι μεγαλύτερο από το επιτρεπτό όριο!',
+	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture' => 'Επιτρέπεται να ανεβάσετε μόνο εικόνες, τι προσπαθείτε να ανεβάσετε;',
 	'UploadMaxFileQuota' => 'Έχετε φτάσει στο ανώτατο όριο, αυτό το αρχείο δεν μπορεί να ανέβει',
 	'UploadDone' => 'Το αρχείο ανέβηκε επιτυχώς',

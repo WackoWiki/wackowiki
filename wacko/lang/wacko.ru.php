@@ -730,6 +730,7 @@ $wacko_translation = array(
 	'UploadForbidden'			=> 'Вам запрещено загружать сюда файлы.',
 	'UploadNoFile'				=> 'Почему-то в форме не был передан файл',
 	'UploadMaxSizeReached'		=> 'Файл слишком большого размера!',
+	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture'			=> 'Разрешено загружать только картинки, а вы что послали?',
 	'UploadMaxFileQuota'		=> 'Вы превысили квоту загружаемых файлов',
 	'UploadDone'				=> 'Успешно загружен файл',

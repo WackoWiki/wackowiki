@@ -722,6 +722,7 @@ $wacko_translation = array(
 	'UploadForbidden' => 'Sul ei ole luba siia faili laadida.',
 	'UploadNoFile' => 'Mingil põhjusel ei olnud vormil faili.',
 	'UploadMaxSizeReached' => 'Faili suurus ületab lubatud piiri!',
+	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture' => 'Ainult pilte on lubatud üles laadida. Ja mida sina üritad teha?',
 	'UploadMaxFileQuota' => 'Sa oled ületanud üleslaadimise piiri, seda faili enam kahjuks ei saa üles laadida',
 	'UploadDone' => 'Fail on edukalt üles laetud',
