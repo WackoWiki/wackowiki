@@ -741,6 +741,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError'	=> 'Löschen der Datei fehlgeschlagen!',
 	'UploadRemoveConfirm'		=> 'Sicher, dass diese Datei gelöscht werden soll?',
 	'UploadRemoveDenied'		=> 'Du hast keine Berechtigung, diese Datei zu löschen',
+	'UploadRemoveNotFound'		=> 'Datei wurde nicht gefunden.',
 	'UploadMax'					=> 'Nicht mehr als ',
 	'UploadUsedStorage'			=> 'Storage in use ',
 

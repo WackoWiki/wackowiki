@@ -748,6 +748,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError'	=> 'Не удалось физически удалить файл!',
 	'UploadRemoveConfirm'		=> 'Удалять файл?',
 	'UploadRemoveDenied'		=> 'Вам запрещено удалять этот файл',
+	'UploadRemoveNotFound'		=> 'File not found.',
 	'UploadMax'					=> 'Не более ',
 	'UploadUsedStorage'			=> 'Storage in use ',
 

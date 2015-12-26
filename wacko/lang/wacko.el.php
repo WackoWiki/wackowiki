@@ -740,6 +740,7 @@ $wacko_translation = array(
 	'UploadRemovedFromFSError' => 'Φαίνεται ότι είναι αδύνατη η διαγραφή του αρχείου!',
 	'UploadRemoveConfirm' => 'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το αρχείο;',
 	'UploadRemoveDenied' => 'Δεν επιτρέπεται να αφαιρέσετε αυτό το αρχείο',
+	'UploadRemoveNotFound'		=> 'File not found.',
 	'UploadMax' => 'Όχι μεγαλύτερο από ',
 	'UploadUsedStorage'		=> 'Storage in use ',
 
