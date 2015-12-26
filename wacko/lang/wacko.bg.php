@@ -715,6 +715,7 @@ $wacko_translation = array(
 	'UploadForbidden' => 'Не можете да качите файл тук.',
 	'UploadNoFile' => 'Няма файл.',
 	'UploadMaxSizeReached' => 'Файлът е много голям!',
+	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture' => 'Разрешени са само картинки, а Вие какво опитвате?',
 	'UploadMaxFileQuota' => 'С този файл, квотата Ви се надвишава',
 	'UploadDone' => 'Файлът е качен успешно',

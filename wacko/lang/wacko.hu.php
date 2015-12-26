@@ -726,6 +726,7 @@ $wacko_translation = array(
 	'UploadForbidden'			=> 'You are not allowed to upload files here.',
 	'UploadNoFile'				=> 'There was not file in form, for some reason.',
 	'UploadMaxSizeReached'		=> 'File size is over allowed limit!',
+	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture'			=> 'There is allowed to upload pictures only, and what do you trying to upload?',
 	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',
 	'UploadDone'				=> 'File upload successful',

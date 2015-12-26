@@ -722,6 +722,7 @@ $wacko_translation = array(
 	'UploadForbidden' => 'Nie masz prawa na wgrywanie tutaj plików.',
 	'UploadNoFile' => 'Z jakiego¶ powodu nie by³o pliku w formularzu.',
 	'UploadMaxSizeReached' => 'Rozmiar pliku wykracza poza dozwolony limit!',
+	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture' => 'Mo¿na wgrywaæ jedynie zdjêcia, a ty co próbujesz wgraæ?',
 	'UploadMaxFileQuota' => 'Osi±gn±³e¶ swój limit wgrywania, ten plik nie mo¿e zostaæ wgrany',
 	'UploadDone' => 'Plik wgrany pomy¶lnie',

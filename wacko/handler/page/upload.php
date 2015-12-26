@@ -459,120 +459,122 @@ if ($this->can_upload() === true)
 						$dir = $this->config['upload_path_per_page'].'/';
 					}
 
-					$_name	= $name;
-					$count	= 1;
-
-					while (file_exists($dir.$name.'.'.$ext))
+					if (is_writable($dir))
 					{
-						if ($name === $_name)
+						$_name	= $name;
+						$count	= 1;
+
+						while (file_exists($dir.$name.'.'.$ext))
 						{
-							$name = $_name.$count;
-						}
-						else
-						{
-							$name = $_name.(++$count);
-						}
-					}
-
-					$result_name	= $name.'.'.$ext;
-					$file_size		= $_FILES['file']['size'];
-
-					// 1.6. check filesize, if asked
-					$max_filesize = $this->config['upload_max_size'];
-
-					if (isset($_POST['maxsize']))
-					{
-						if ($max_filesize > 1 * $_POST['maxsize'])
-						{
-							$max_filesize = 1 * $_POST['maxsize'];
-						}
-					}
-
-					// Admins can upload unlimited
-					if (($file_size < $max_filesize) || $this->is_admin())
-					{
-						// 1.7. check is image, if asked
-						$forbid		= 0;
-						$size		= array(0, 0);
-						$src		= $_FILES['file']['tmp_name'];
-
-						if ($is_image === true)
-						{
-							$size	= @getimagesize($src);
-						}
-
-						if ($this->config['upload_images_only'])
-						{
-							if ($size[0] == 0)
+							if ($name === $_name)
 							{
-								$forbid = 1;
-							}
-						}
-
-						if (!$forbid)
-						{
-							// 3. save to permanent location
-							move_uploaded_file($_FILES['file']['tmp_name'], $dir.$result_name);
-							chmod($dir.$result_name, 0644);
-
-							if ($is_global)
-							{
-								$small_name = $result_name;
-								$path		= 'file:';
+								$name = $_name.$count;
 							}
 							else
 							{
-								$small_name = explode('@', $result_name);
-								$small_name = $small_name[ count($small_name) -1 ];
-								$path		= 'file:/'.$this->page['supertag'].'/';
+								$name = $_name.(++$count);
 							}
+						}
 
-							$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
-							$uploaded_dt	= date('Y-m-d H:i:s');
+						$result_name	= $name.'.'.$ext;
+						$file_size		= $_FILES['file']['size'];
 
-							$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
-							$description = rtrim( $description, '\\' );
+						// 1.6. check filesize, if asked
+						$max_filesize = $this->config['upload_max_size'];
 
-							// Make HTML in the description redundant
-							$description = $this->format($description, 'pre_wacko');
-							$description = $this->format($description, 'safehtml');
-							$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
-
-							// 5. insert line into DB
-							$this->sql_query(
-								"INSERT INTO ".$this->config['table_prefix']."upload SET ".
-									"page_id			= '".($is_global ? "0" : $this->page['page_id'])."', ".
-									"user_id			= '".$user['user_id']."',".
-									"file_name			= '".quote($this->dblink, $small_name)."', ".
-									"upload_lang		= '".quote($this->dblink, $this->page['page_lang'])."', ".
-									"file_description	= '".quote($this->dblink, $description)."', ".
-									"file_size			= '".(int)$file_size."',".
-									"picture_w			= '".(int)$size[0]."',".
-									"picture_h			= '".(int)$size[1]."',".
-									"file_ext			= '".quote($this->dblink, substr($ext, 0, 10))."',".
-									"uploaded_dt		= '".quote($this->dblink, $uploaded_dt)."' ");
-
-							// update user uploads count
-							$this->sql_query(
-								"UPDATE {$this->config['user_table']} ".
-								"SET total_uploads = total_uploads + 1 ".
-								"WHERE user_id = '".$user['user_id']."' ".
-								"LIMIT 1");
-
-							// 4. output link to file
-							// !!!!! write after providing filelink syntax
-							$this->set_message('<strong>'.$this->get_translation('UploadDone').'</strong>');
-
-							// log event
-							if ($is_global)
+						if (isset($_POST['maxsize']))
+						{
+							if ($max_filesize > 1 * $_POST['maxsize'])
 							{
-								$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, $this->get_translation('LogFileUploadedGlobal', $this->config['language']))));
+								$max_filesize = 1 * $_POST['maxsize'];
 							}
-							else
+						}
+
+						// Admins can upload unlimited
+						if (($file_size < $max_filesize) || $this->is_admin())
+						{
+							// 1.7. check is image, if asked
+							$forbid		= 0;
+							$size		= array(0, 0);
+							$src		= $_FILES['file']['tmp_name'];
+
+							if ($is_image === true)
 							{
-								$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogFileUploadedLocal', $this->config['language'])))));
+								$size	= @getimagesize($src);
 							}
-							?>
+
+							if ($this->config['upload_images_only'])
+							{
+								if ($size[0] == 0)
+								{
+									$forbid = 1;
+								}
+							}
+
+							if (!$forbid)
+							{
+								// 3. save to permanent location
+								move_uploaded_file($_FILES['file']['tmp_name'], $dir.$result_name);
+								chmod($dir.$result_name, 0644);
+
+								if ($is_global)
+								{
+									$small_name = $result_name;
+									$path		= 'file:';
+								}
+								else
+								{
+									$small_name = explode('@', $result_name);
+									$small_name = $small_name[ count($small_name) -1 ];
+									$path		= 'file:/'.$this->page['supertag'].'/';
+								}
+
+								$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
+								$uploaded_dt	= date('Y-m-d H:i:s');
+
+								$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
+								$description = rtrim( $description, '\\' );
+
+								// Make HTML in the description redundant
+								$description = $this->format($description, 'pre_wacko');
+								$description = $this->format($description, 'safehtml');
+								$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
+
+								// 5. insert line into DB
+								$this->sql_query(
+									"INSERT INTO ".$this->config['table_prefix']."upload SET ".
+										"page_id			= '".($is_global ? "0" : $this->page['page_id'])."', ".
+										"user_id			= '".$user['user_id']."',".
+										"file_name			= '".quote($this->dblink, $small_name)."', ".
+										"upload_lang		= '".quote($this->dblink, $this->page['page_lang'])."', ".
+										"file_description	= '".quote($this->dblink, $description)."', ".
+										"file_size			= '".(int)$file_size."',".
+										"picture_w			= '".(int)$size[0]."',".
+										"picture_h			= '".(int)$size[1]."',".
+										"file_ext			= '".quote($this->dblink, substr($ext, 0, 10))."',".
+										"uploaded_dt		= '".quote($this->dblink, $uploaded_dt)."' ");
+
+								// update user uploads count
+								$this->sql_query(
+									"UPDATE {$this->config['user_table']} ".
+									"SET total_uploads = total_uploads + 1 ".
+									"WHERE user_id = '".$user['user_id']."' ".
+									"LIMIT 1");
+
+								// 4. output link to file
+								// !!!!! write after providing filelink syntax
+								$this->set_message('<strong>'.$this->get_translation('UploadDone').'</strong>');
+
+								// log event
+								if ($is_global)
+								{
+									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, $this->get_translation('LogFileUploadedGlobal', $this->config['language']))));
+								}
+								else
+								{
+									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogFileUploadedLocal', $this->config['language'])))));
+								}
+								?>
 		<br />
 		<ul class="upload">
 			<li><?php echo $this->link($path.$small_name); ?>
@@ -597,15 +599,20 @@ if ($this->can_upload() === true)
 		<br />
 	<?php
 
+							}
+							else //forbid
+							{
+								$error = $this->get_translation('UploadNotAPicture');
+							}
 						}
-						else //forbid
+						else //maxsize
 						{
-							$error = $this->get_translation('UploadNotAPicture');
+							$error = $this->get_translation('UploadMaxSizeReached');
 						}
 					}
-					else //maxsize
+					else // is_writable
 					{
-						$error = $this->get_translation('UploadMaxSizeReached');
+						$error = $this->get_translation('UploadDirNotWritable');
 					}
 				} //!is_uploaded_file
 				else
