@@ -163,8 +163,8 @@ else if (!is_readable($file_path))
 if ($error)
 {
 	$display_inline	= true;
-	$extension		= 'png';
-	header('Content-Type: image/'.$extension);
+	$extension		= 'svg';
+	header('Content-Type: image/svg+xml');
 	$file_path		= 'image/upload'.$error.'.svg';
 
 	if (!headers_sent())
