@@ -181,74 +181,86 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$comment = false;
 			$updated = false;
 
-			// load latest comment
-			if ($topic['comments'] > 0)
+			if ($this->config['hide_locked'])
 			{
-				$comment = $this->load_single(
-					"SELECT p.tag, p.ip, p.created, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name ".
-					"FROM {$this->config['table_prefix']}page p ".
-					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
-					"WHERE p.comment_on_id = '".$topic['page_id']."' ".
-					"ORDER BY p.created DESC ".
-					"LIMIT 1");
-			}
-
-			// check new comments
-			if ($user['last_mark'] == true && ( ($comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']) || ($topic['owner_name'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ))
-			{
-				$updated = true;
-			}
-
-			$topic['description'] = htmlspecialchars($topic['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-
-			if ($this->page['page_lang'] != $topic['page_lang'])
-			{
-				$topic['title']			= $this->do_unicode_entities($topic['title'], $topic['page_lang']);
-				$topic['description']	= $this->do_unicode_entities($topic['description'], $topic['page_lang']);
-			}
-
-			// load related categories
-			$_category = $this->get_categories($topic['page_id']);
-			$_category = !empty($_category) ? '<br />'./* $this->get_translation('Category').': '. */$_category : '';
-
-			// print
-			echo '<tbody class="lined"><tr>'.
-					'<td style="text-align:left;">'.
-					( $this->has_access('comment', $topic['page_id'], GUEST) === false
-						? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>'
-						: '' ).
-					( $updated === true
-						? '<strong><span class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
-						: '<strong>'.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
-					).
-					'</td>'.
-					'<td style="text-align:center; white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
-						'&nbsp;&nbsp;'.$this->user_link($topic['owner_name']).'&nbsp;&nbsp;<br />'.
-						'&nbsp;&nbsp;'.$this->get_time_formatted($topic['created']).'&nbsp;&nbsp;'.
-					'</small></td>'.
-					'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
-					'<td style="text-align:center;"><small>'.$topic['hits'].'</small></td>'.
-					'<td>&nbsp;&nbsp;&nbsp;</td>'.
-					'<td style="text-align:center;">';
-
-			if ($comment == true)
-			{
-				echo '<small'.( $updated === true ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
-					$this->user_link($comment['user_name']).'<br />'.
-					'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_formatted($comment['created']).'</a></small>';
+				$access = $this->has_access('read', $topic['page_id']);
 			}
 			else
 			{
-				echo '<small><em>('.$this->get_time_formatted($topic['created']).')</em></small>';
+				$access = true;
 			}
 
-			echo	'</td>'.
-				'</tr>'.
-				'<tr>'.
-					'<td colspan="6" class="description">'.$topic['description'].''.
-					$_category.'</td>'.
-				'</tr></tbody>'."\n";
+			if ($access)
+			{
+				// load latest comment
+				if ($topic['comments'] > 0)
+				{
+					$comment = $this->load_single(
+						"SELECT p.tag, p.ip, p.created, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name ".
+						"FROM {$this->config['table_prefix']}page p ".
+						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
+						"WHERE p.comment_on_id = '".$topic['page_id']."' ".
+						"ORDER BY p.created DESC ".
+						"LIMIT 1");
+				}
+
+				// check new comments
+				if ($user['last_mark'] == true && ( ($comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']) || ($topic['owner_name'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ))
+				{
+					$updated = true;
+				}
+
+				$topic['description'] = htmlspecialchars($topic['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+
+				if ($this->page['page_lang'] != $topic['page_lang'])
+				{
+					$topic['title']			= $this->do_unicode_entities($topic['title'], $topic['page_lang']);
+					$topic['description']	= $this->do_unicode_entities($topic['description'], $topic['page_lang']);
+				}
+
+				// load related categories
+				$_category = $this->get_categories($topic['page_id']);
+				$_category = !empty($_category) ? '<br />'./* $this->get_translation('Category').': '. */$_category : '';
+
+				// print
+				echo '<tbody class="lined"><tr>'.
+						'<td style="text-align:left;">'.
+						( $this->has_access('comment', $topic['page_id'], GUEST) === false
+							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>'
+							: '' ).
+						( $updated === true
+							? '<strong><span class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
+							: '<strong>'.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
+						).
+						'</td>'.
+						'<td style="text-align:center; white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
+							'&nbsp;&nbsp;'.$this->user_link($topic['owner_name']).'&nbsp;&nbsp;<br />'.
+							'&nbsp;&nbsp;'.$this->get_time_formatted($topic['created']).'&nbsp;&nbsp;'.
+						'</small></td>'.
+						'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
+						'<td style="text-align:center;"><small>'.$topic['hits'].'</small></td>'.
+						'<td>&nbsp;&nbsp;&nbsp;</td>'.
+						'<td style="text-align:center;">';
+
+				if ($comment == true)
+				{
+					echo '<small'.( $updated === true ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
+						$this->user_link($comment['user_name']).'<br />'.
+						'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_formatted($comment['created']).'</a></small>';
+				}
+				else
+				{
+					echo '<small><em>('.$this->get_time_formatted($topic['created']).')</em></small>';
+				}
+
+				echo	'</td>'.
+					'</tr>'.
+					'<tr>'.
+						'<td colspan="6" class="description">'.$topic['description'].''.
+						$_category.'</td>'.
+					'</tr></tbody>'."\n";
+			}
 		}
 
 		echo '</table>'."\n";

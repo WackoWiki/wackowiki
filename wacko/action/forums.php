@@ -98,16 +98,32 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					"AND a.deleted <> '1' ", true);
 
 			// load latest comment
-			$comment = $this->load_single(
-				"SELECT a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name ".
+			$comments = $this->load_all(
+				"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name ".
 				"FROM {$this->config['table_prefix']}page a ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 				"WHERE b.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 					"OR a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 					"AND a.deleted <> '1' ".
-				"ORDER BY a.created DESC ".
-				"LIMIT 1", true);
+				"ORDER BY a.created DESC ", true);
+
+			foreach ($comments as $_comment)
+			{
+				if ($this->config['hide_locked'])
+				{
+					if ($this->has_access('read', $_comment['page_id']))
+					{
+						$comment = $_comment;
+						break;
+					}
+				}
+				else
+				{
+					$comment = $_comment;
+					break;
+				}
+			}
 
 			$forum['description'] = htmlspecialchars($forum['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
