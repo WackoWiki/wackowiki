@@ -1,7 +1,11 @@
 @import "wacko.css";
 
 /* basic -------------------------------------------------- */
-p, td, li, select, textarea {
+p,
+td,
+li,
+select,
+textarea {
 	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 13px;
 	line-height: 1.3em;
@@ -15,12 +19,13 @@ p, td, li, select, textarea {
 
 /* cellspacing */
 table {
-	border-collapse:collapse;
+	border-collapse: collapse;
 	border-spacing: 0;
 	
 }
 /* cellpadding */
-th, td {
+th,
+td {
 	padding: 0px;
 }
 
@@ -76,7 +81,7 @@ textarea:focus {
 
 body {
 	font-family: Verdana;
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 1.3;
 	color: #000000;
 	background-color: #fcfcfc;
@@ -110,15 +115,16 @@ a:active {
 a:target {
 	/* color: #FF0000; */
 	/* border: 2px solid #FF6600; */
-	background-color:#FFEEEE;
+	background-color: #FFEEEE;
 	/* padding: 5px 10px; */
 }
 
-svg, img {
+svg,
+img {
 	border-width: 0px;
 	vertical-align: middle;
 	max-width: 100%;
-	height:auto;
+	height: auto;
 }
 
 kbd {
@@ -148,9 +154,11 @@ form input.submitinput {
 	color: #000;
 }
 
-.main, .main a, .main a:visited {
-	color:#000000;
-	text-decoration:none;
+.main,
+.main a,
+.main a:visited {
+	color: #000000;
+	text-decoration: none;
 	font-weight: bold;
 }
 
@@ -199,7 +207,9 @@ form input.submitinput {
 	padding: 0 20px 20px 20px;
 	float: left;
 }
-.debug, #debug li, #debug pre {
+.debug,
+#debug li,
+#debug pre {
 	font-size: 11px;
 	color: #888888;
 	/* font-family:"Lucida Console","Courier New",monospace; */
@@ -226,22 +236,22 @@ header {
 	/*overflow: hidden;
 	*/
 	height: 25px;
-	background:#FFFFFF;
+	background: #FFFFFF;
 	width: 100%;
 }
 
 .breadcrumb {
 	/*overflow:hidden;#F6F6F6*/
 	/* background: #D2D0D0; */
-	border-bottom:1px dotted #B2B0B0;
-	border-top:1px dotted #B2B0B0;
+	border-bottom: 1px dotted #B2B0B0;
+	border-top: 1px dotted #B2B0B0;
 	/*clear:both;
-	*/color:#333333;
-	font-size:0.75em;
-	font-weight:normal;
-	margin:0;
+	*/color: #333333;
+	font-size: 0.75em;
+	font-weight: normal;
+	margin: 0;
 	padding: 0.1em 20px;
-	float:left;
+	float: left;
 	 width: 100%;
 }
 
@@ -264,7 +274,8 @@ main {
 	clear: both;
 }
 
-article, #page {
+article,
+#page {
 	background-color: #FFFFFF;
 	padding: 5px 0px 20px 0px;
 	float: left;
@@ -333,7 +344,9 @@ footer {
 
 /** File and comment-related *************************************************/
 	/* Headers (always visible) */
-#filesheader, #commentsheader, #rateheader {
+#filesheader,
+#commentsheader,
+#rateheader {
 	background-color: #F0F4F5;
 	padding: 2px 20px;
 	margin: 0 -20px;
@@ -342,7 +355,10 @@ footer {
 	width: 100%;
 }
 
-.files, .comment, .rating, .category {
+.files,
+.comment,
+.rating,
+.category {
 	background-color: #FFFFFF;
 	padding: 10px 20px;
 	margin: 0 -20px;
@@ -372,7 +388,7 @@ footer {
 li.comment {
 	overflow: hidden;
 }
-ol#comments{
+ol#comments {
 	list-style-image: none;
 	list-style-position: outside;
 	list-style-type: none;
@@ -381,19 +397,20 @@ ol#comments{
 }
 
 .commentinfo li {
-	border:medium none;
-	margin:0;
-	padding:0;
-	width:320px;
+	border: medium none;
+	margin: 0;
+	padding: 0;
+	width: 320px;
 }
 
-.commenttool, .commenttool a {
+.commenttool,
+.commenttool a {
 	color: #7f919e;
 }
 .commenttool li {
-	border:medium none;
-	margin:0;
-	padding:0;
+	border: medium none;
+	margin: 0;
+	padding: 0;
 	
 	float: left;
 	font-size: 13px;
@@ -409,7 +426,8 @@ ol#comments{
 	padding-right: 0;
 }
 
-.commenttext, .commenttool {
+.commenttext,
+.commenttool {
 	float: left;
 	width: 800px;
 }
@@ -428,10 +446,11 @@ ol#comments{
 }
 
 .review {
-	font-weight:bold;
+	font-weight: bold;
 }
 
-.filesform,.commentform {
+.filesform,
+.commentform {
 	padding: 10px 20px;
 	margin: 0 -20px;
 	border-top: 1px solid #CCCCCC;
@@ -454,7 +473,7 @@ ol#comments{
 	font-size: 11px;
 	color: #AAAAAA;
 	text-align: right;
-	padding:0px 20px;
+	padding: 0px 20px;
 	float: left;
 	width: 100%;
 }
@@ -580,14 +599,17 @@ td.file- {
 	color: #444444;
 }
 
-.upload td.dt- .dt2-, .upload td.tool- .tool2-, .upload td.size- .size2- {
+.upload td.dt- .dt2-,
+.upload td.tool- .tool2-,
+.upload td.size- .size2- {
 	font: 11px Tahoma;
 	color: #666666;
 	padding: 5px;
 	white-space: nowrap;
 }
 
-.upload td.tool- a.tool2-:hover, .upload td.tool- a.tool2-:active {
+.upload td.tool- a.tool2-:hover,
+.upload td.tool- a.tool2-:active {
 	color: #ff0000
 }
 
@@ -636,14 +658,14 @@ p.layout-box span {
 }
 
 .layout-box dd {
-	margin:-20px 0 0 50px;
-	padding:0;
-	line-height:25px;
+	margin: -20px 0 0 50px;
+	padding: 0;
+	line-height: 25px;
 }
 .layout-box dd:target,
 .footnote *:target,
 a:target {
-	background-color:#FFEEEE;
+	background-color: #FFEEEE;
 }
 
 .buttonsspacer {
@@ -655,23 +677,26 @@ a:target {
 	/* WikiEdit Toolbar -------------------------------------- */
 
 #buttons_1 {
-	clear:none;
-	float:left;
-	padding:0 0 0 0;
+	clear: none;
+	float: left;
+	padding: 0 0 0 0;
 }
 
 #buttons_1 li {
-	float:left;
-	padding-right:0.3em;
-	white-space:nowrap;
-	list-style:none outside none;
+	float: left;
+	padding-right: 0.3em;
+	white-space: nowrap;
+	list-style: none outside none;
 }
 
 .toolbar li {
 	background: ButtonFace;
 }
 
-.toolbar .btn-, .toolbar .btn-hover, .toolbar .btn-active, .toolbar .btn-pressed {
+.toolbar .btn-, 
+.toolbar .btn-hover, 
+.toolbar .btn-active, 
+.toolbar .btn-pressed {
 	background: ButtonFace;
 	color: ButtonText;
 	border: 1px solid ButtonFace;
@@ -820,7 +845,9 @@ a:target {
 	background-repeat: no-repeat;
 }
 
-.edname-w, .edname-r, .edname-s {
+.edname-w,
+.edname-r,
+.edname-s {
 	font: bold 14px Arial;
 	border: 3px solid #D4D0C8;
 	padding: 0 7px;
@@ -977,7 +1004,8 @@ a:target {
 	width: 100%;
 }
 
-.form_tbl td, .form_tbl th {
+.form_tbl td,
+.form_tbl th {
 	padding: 3px;
 	margin: 0px;
 }
@@ -999,7 +1027,8 @@ a:target {
 	vertical-align: top;
 	width: 30%;
 }
-td.form_left, th.form_left {
+td.form_left,
+th.form_left {
 	padding-right: 20px;
 }
 
@@ -1179,7 +1208,8 @@ td.form_left, th.form_left {
 	margin-top: 0.9375em;
 }
 
-.topnav ul,.topnav li {
+.topnav ul,
+.topnav li {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -1216,7 +1246,8 @@ td.form_left, th.form_left {
 }
 
 /* lists */
-.ul_list, .revisions {
+.ul_list,
+.revisions {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -1256,7 +1287,8 @@ td.form_left, th.form_left {
 /* #FCFCFC #FFCC99 #CCFFCC */
 
 /* settings */
-.lined td, .lined th {
+.lined td,
+.lined th {
 	border-bottom: 1px dotted #BABFC7;
 }
 
@@ -1271,7 +1303,8 @@ td.form_left, th.form_left {
 	background: #CCFFCC;
 }
 
-.lined-strike td, .lined-strike th {
+.lined-strike td,
+.lined-strike th {
 	border-bottom: 1px dotted #BABFC7;
 	/* text-decoration: line-through; */
 }
@@ -1374,7 +1407,8 @@ table.formation {
 	border-spacing: 3px;
 	border-collapse: separate;
 }
-table.formation th, tr.formation th {
+table.formation th,
+tr.formation th {
 	background-color: #DDDDDD;
 	letter-spacing: normal;
 	border: 1px solid #CDCDCD;
@@ -1385,16 +1419,22 @@ table.formation td {
 }
 
 /* infoboxes -----------------------------------------*/
-.nb td, .fyi td, .inf td {
+.nb td,
+.fyi td,
+.inf td {
 	padding: 5px;
 	height: 50px;
 }
-.nb .text, .fyi .text, .inf .text {
+.nb .text,
+.fyi .text,
+.inf .text {
 	padding-left: 20px;
 	border-top: none;
 	border-bottom: none;
 }
-.nb .sign, .fyi .sign, .inf .sign {
+.nb .sign,
+.fyi .sign,
+.inf .sign {
 	font-weight: 700;
 	font-size: 50px;
 	text-align: center;
@@ -1406,14 +1446,16 @@ table.formation td {
 	color: #CC0000;
 	font-family: Arial, Helvetica, sans-serif;
 }
-.nb .sign, .nb .text {
+.nb .sign,
+.nb .text {
 	border-color: #CC0000;
 }
 .fyi .sign {
 	color: #00AACC;
 	font-family: "Times New Roman", Times, serif;
 }
-.fyi .sign, .fyi .text {
+.fyi .sign,
+.fyi .text {
 	border-color: #00AACC;
 }
 .inf .sign {
@@ -1423,7 +1465,8 @@ table.formation td {
 .inf .text {
 	color: #6A7387;
 }
-.inf .sign, .inf .text {
+.inf .sign,
+.inf .text {
 	border-color: #BABFC7;
 }
 
@@ -1794,7 +1837,7 @@ li.m-word img {
 	font-weight:600;
 }
 
-.setcategory{
+.setcategory {
 	border:1px solid #9495A2;
 /* 	font-size:11px; */
 	height:250px;
@@ -1803,7 +1846,7 @@ li.m-word img {
 	width:auto;
 }
 
-.list_count{
+.list_count {
 	text-align:right; 
 	width:30px; 
 	float: left; 
@@ -1832,7 +1875,7 @@ ul.upload ul {
 	text-align: left;
 }
 
-.info_title{
+.info_title {
 	display: block;
 	float: left;
 	text-align: left;

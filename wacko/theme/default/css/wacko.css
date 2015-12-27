@@ -1,18 +1,26 @@
 /* Wiki Formatting ---------------------------------------- */
 
 /* Definitions: SYNTAX (?icq i seek you?) */
-dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
+dfn { 
+	font-variant: small-caps;
+	letter-spacing: 0.1em;
+	font-style: normal;
+	cursor: help;
+	border-bottom: 1px dotted #000;
+}
 
 /* Strike through text: SYNTAX --text-- */
-del { color:#999999 }
-del a:visited, del a:link { color:#999999 }
+del { color: #999999 }
+
+del a:visited,
+del a:link { color: #999999 }
 
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
-border-color:#CCCCCC;
-border-style:solid none none;
-border-width:1px 0 0;
+	border-color: #CCCCCC;
+	border-style: solid none none;
+	border-width: 1px 0 0;
 }
 
 /* No line break */
@@ -41,8 +49,8 @@ form, h1, h2, h3, h4, h5, h6 {
 h1 {
 	font-family: Verdana;
 	font-size: 24px;
-	padding-top:2px;
-	padding-bottom:7px;
+	padding-top: 2px;
+	padding-bottom: 7px;
 	line-height: 110%;
 	color: #333333;
 }
@@ -53,10 +61,10 @@ h5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; 
 h6 { font-family: Arial;   font-size: 12px; }
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
-.center{  text-align: center;}
+.center{ text-align: center;}
 
 /* Indent text: SYNTAX "  ", "  1.", etc. */
-.indent {  margin-left: 40px;}
+.indent { margin-left: 40px;}
 
 /** Revisions-related *********************************************************/
 
@@ -67,19 +75,22 @@ h6 { font-family: Arial;   font-size: 12px; }
 }
 
 /* Displays text: "Comparison for..." */
-.diffinfo { font-weight: bold; color: #555555; }
+.diffinfo {
+	font-weight: bold;
+	color: #555555; 
+}
 
 /* Simple differences */
 .additions {
-background-color: #EEFFEE;
+	background-color: #EEFFEE;
 }
 .deletions {
-background-color: #FFEEEE;
+	background-color: #FFEEEE;
 }
-.additions, .deletions {
-padding: 3px;
+.additions, 
+.deletions {
+	padding: 3px;
 }
-
 
 /* Default differences */
 ins.diff {
@@ -103,9 +114,9 @@ del.diff {
 	/* border-radius: 5px; */
 	font-family: "Courier New";
 	font-size: 10pt;
-	margin:1em 1.75em;
-	overflow:auto;
-	padding:0.25em;
+	margin: 1em 1.75em;
+	overflow: auto;
+	padding: 0.25em;
 }
 
 .code-break {
@@ -127,10 +138,11 @@ del.diff {
 }
 
 .usertable th {
-	background-color:#EEEEEE;
+	background-color: #EEEEEE;
 }
 
-.usertable td, .usertable th
+.usertable td, 
+.usertable th
 {
 	border-width: 1px;
 	border-color: #CCCCCC;
@@ -145,12 +157,18 @@ del.diff {
 
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 .dtable {
-	width:100%; 
-	border: 0px none; 
+	width: 100%;
+	border: 0px none;
 	border-collapse: collapse;
 	table-layout: fixed;
 }
-.dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
+.dtable td { 
+	vertical-align:top;
+	border-width: 0px;
+	border-color: #999999;
+	border-style: none;
+	padding: 4px;
+}
 
 /* Inside the table of content: SYNTAX {{toc}} */
 #toc {
@@ -177,18 +195,18 @@ span.tocnumber {
 
 /* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
 
-.micq1 { padding:2px; vertical-align:top; white-space: nowrap; font-weight: bold  }
-.micq2 { padding:2px; vertical-align:top; white-space: nowrap; font:10px tahoma, arial }
-.micq3 { padding:2px; vertical-align:top; width:100% }
+.micq1 { padding: 2px; vertical-align: top; white-space: nowrap; font-weight: bold  }
+.micq2 { padding: 2px; vertical-align: top; white-space: nowrap; font: 10px tahoma, arial }
+.micq3 { padding: 2px; vertical-align: top; width: 100% }
 
 /** Email-related ************************************************************/
 
 /* Quoted message on new email */
 
-.email1 {color:#800000}
-.email2 {color:#808000}
-.email-odd {color:#800000}
-.email-even {color:#808000}
+.email1 {color: #800000}
+.email2 {color: #808000}
+.email-odd {color: #800000}
+.email-even {color: #808000}
 
 /* Quotes: SYNTAX <[text]> */
 blockquote {
@@ -201,22 +219,26 @@ blockquote {
 
 	/* background: #f5f5f5; */
 }
-blockquote p {  padding:0px;  margin: 5px 0px; }
+blockquote p { padding: 0px;  margin: 5px 0px; }
 
 /* Paragraphs */
-p.auto { margin:0px; padding:0px; font-size:100%; }
-.pmark { color:#cccccc;font:10px Arial }
+p.auto { margin: 0px; padding: 0px; font-size: 100%; }
+.pmark { color: #cccccc; font: 10px Arial }
+
 .pmark a:link,
-.pmark a:visited { color:#cccccc }
+.pmark a:visited { color: #cccccc }
+
 .pmark a:hover,
-.pmark a:active  { color:#cc3300 }
+.pmark a:active  { color: #cc3300 }
+
 .pright {}
+
 .pright .p- { float:right; padding: 0 0 0 15px;  }
 .pright .pbody- { }
 
-.pleft { padding:0 }
-.pleft .p- { float:left; padding: 0 15px 0 0;  }
-.pleft .pbody- { padding:0 }
+.pleft { padding: 0 }
+.pleft .p- { float: left; padding: 0 15px 0 0;  }
+.pleft .pbody- { padding: 0 }
 
 /** Text highlighter-related *************************************************/
 
@@ -227,7 +249,7 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 	background-color: #CCCCCC;
 	padding-right: 10px;
 	font-family: monospace;
-	font-size:13px;
+	font-size: 13px;
 }
 .hl-table {border: solid 1px #000000; }
 
@@ -245,18 +267,18 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 .hl-special { color: #0000FF; }
 .hl-number { color: #007F00; }
 .hl-inlinetags { color: #FF0000; }
-.hl-builtin    { color:#996633; }
+.hl-builtin    { color: #996633; }
 
 /** Wrapper-related **********************************************************/
 
 /* SYNTAX %%(wrapper xyz)%% */
 
 div.action {
-	margin:2px;
+	margin: 2px;
 	background: #f6f7ed;
 	border: 1px dotted #CCCCCC;
 }
-div.action-content   { padding:10px 10px 25px 10px; }
+div.action-content { padding: 10px 10px 25px 10px; }
 
 /* Important colored text: SYNTAX !!(red)text!! */
 .cl-red {color: #CC0000;}
@@ -265,13 +287,13 @@ div.action-content   { padding:10px 10px 25px 10px; }
 .cl-yellow {color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
-code { color:#666600; background:#ffffcc; padding: 0 2px }
+code { color: #666600; background: #ffffcc; padding: 0 2px }
 
 /* Important text: SYNTAX !!text!! */
-.cite {color:#ff0000;font-style:normal;}
+.cite {color: #ff0000; font-style: normal;}
 
 /* underline text: SYNTAX __text__ */
-.underline { text-decoration:underline; }
+.underline { text-decoration: underline; }
 
 /* Highlighted text: SYNTAX ??text?? */
 mark {background: #ffffaa;}

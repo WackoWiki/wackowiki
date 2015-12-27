@@ -4027,7 +4027,7 @@ class Wacko
 
 					// TODO: token should be reset, generation of per-request tokens as opposed to per-session tokens
 					// TODO: suspiciously repeated form requests/form submissions, using Captchas to prevent automatic requests
-					$this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' '.$form_name); # 'Invalid form token'
+					$this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' [[/'.$this->page['tag'].']] '.$form_name); # 'Invalid form token'
 
 					return false;
 				}
