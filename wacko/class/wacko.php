@@ -434,7 +434,7 @@ class Wacko
 
 				if (!isset($ap_translation))
 				{
-					$ap_translation = '';
+					$ap_translation = array();
 				}
 
 				$wacko_resource = array_merge((array)$wacko_resource, (array)$ap_translation);
@@ -451,7 +451,7 @@ class Wacko
 
 				if (!isset($theme_translation))
 				{
-					$theme_translation = '';
+					$theme_translation = array();
 				}
 
 				$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
@@ -2319,11 +2319,11 @@ class Wacko
 							// Email subject
 							if (!$comment_on_id && $is_revision)
 							{
-								$subject			= '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
+								$subject	= '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
 							}
 							else if ($comment_on_id)
 							{
-								$subject			= '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+								$subject	= '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
 							}
 
 							// Email body
@@ -2336,9 +2336,9 @@ class Wacko
 										$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
 										(isset($title) ? $title : $tag)."\n".
 										$this->href('', $tag)."\n\n".
-										"======================================================================".
-										$this->format($diff, 'html2mail').
-										"\n======================================================================\n\n";
+										"======================================================================\n\n".
+										$this->format($diff, 'html2mail')."\n\n".
+										"======================================================================\n\n";
 									}
 									else if ($comment_on_id)
 									{
