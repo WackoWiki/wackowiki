@@ -392,6 +392,11 @@ class Wacko
 	{
 		if (!isset($this->translations[$lang]) && isset($lang))
 		{
+			$wacko_all_resource	= array();
+			$wacko_translation	= array();
+			$ap_translation		= array();
+			$theme_translation	= array();
+
 			// wacko.xy.php $wacko_translation[]
 			$lang_file = 'lang/wacko.'.$lang.'.php';
 
@@ -415,11 +420,6 @@ class Wacko
 				$this->translations['all'] = & $wacko_all_resource;
 			}
 
-			if (!isset($wacko_translation))
-			{
-				$wacko_translation = array();
-			}
-
 			$wacko_resource = array_merge($wacko_translation, $this->translations['all']);
 
 			if (isset($this->config['ap_mode']) && $this->config['ap_mode'] === true)
@@ -430,11 +430,6 @@ class Wacko
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
-				}
-
-				if (!isset($ap_translation))
-				{
-					$ap_translation = array();
 				}
 
 				$wacko_resource = array_merge((array)$wacko_resource, (array)$ap_translation);
@@ -449,11 +444,6 @@ class Wacko
 					include($lang_file);
 				}
 
-				if (!isset($theme_translation))
-				{
-					$theme_translation = array();
-				}
-
 				$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
 				// wacko.all theme
@@ -465,7 +455,6 @@ class Wacko
 				}
 
 				$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
-
 			}
 
 			$this->translations[$lang] = $wacko_resource;
@@ -726,6 +715,9 @@ class Wacko
 
 	function utf8_to_unicode_entities($source)
 	{
+		$decrement	= array();
+		$shift		= array();
+
 		// array used to figure what number to decrement from character order value
 		// according to number of characters used to map unicode to ascii by utf-8
 		$decrement[4] = 240;
@@ -1831,7 +1823,7 @@ class Wacko
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!$old_page = $this->load_page('', $page_id,'','','', $deleted = 1))
+			if (!$old_page = $this->load_page('', $page_id,'','','', 1))
 			{
 				if (empty($lang))
 				{
@@ -3586,8 +3578,7 @@ class Wacko
 	{
 		if (!$group_name)
 		{
-			$user_name	= $this->get_translation('Guest');
-			$linking	= false;
+			return false;
 		}
 
 		// check current page lang for different charset to do_unicode_entities()
@@ -3611,6 +3602,7 @@ class Wacko
 
 		#$this->is_admin() ? ' title="'.$comment['ip'].'"' : '' (a | span)
 		# $this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'')
+
 		if ($linking)
 		{
 			return '<a href="'.$this->href('', $this->config['groups_page'], 'profile='.$group_name).'" class="group-link">'.$icon.$text.'</a>';
@@ -3713,7 +3705,8 @@ class Wacko
 
 		if (preg_match( $this->REGEX_WACKO_HANDLERS, $_data, $match ))
 		{
-			return $message = $match[0];
+			// message
+			return $match[0];
 		}
 
 		if (!$this->page['comment_on_id'])
@@ -5372,6 +5365,8 @@ class Wacko
 	// aliases stuff
 	function replace_aliases($acl)
 	{
+		$aliases = array();
+
 		if (!isset($this->config['aliases']) || !is_array($this->config['aliases']))
 		{
 			return $acl;
@@ -5527,6 +5522,8 @@ class Wacko
 	// MENUS
 	function get_default_menu($lang = false)
 	{
+		$default_menu_formatted = array();
+
 		if (!isset($lang))
 		{
 			$user = $this->get_user();
@@ -5564,7 +5561,8 @@ class Wacko
 
 	function get_user_menu($user_id, $lang = '')
 	{
-		$user_menu = '';
+		$user_menu = array();
+		$user_menu_formatted = array();
 
 		// avoid results if $user_id is 0 (user does not exists)
 		if ($user_id)
@@ -5614,6 +5612,10 @@ class Wacko
 
 	function set_menu($set = MENU_AUTO, $update = false)
 	{
+		$menu_page_ids = array();
+		$menu_formatted = array();
+		$new_menu = array();
+
 		$user = $this->get_user();
 
 		// initial menu table construction
@@ -5926,6 +5928,8 @@ class Wacko
 			// composing a list of candidates
 			if (is_array($pages))
 			{
+				$remove = array();
+
 				foreach ($pages as $page)
 				{
 					// does the page has been deleted earlier than specified number of days ago?
@@ -6150,6 +6154,7 @@ class Wacko
 
 		// user settings
 		##if(!$this->userlang = $lang)  // TEST: ??? - openspace handle
+
 		if(isset($user['user_lang']))
 		{
 			if($user['user_lang'] == '')
@@ -6215,7 +6220,7 @@ class Wacko
 		// show also $deleted = 1
 		if ($this->is_admin())
 		{
-			$page		= $this->load_page($this->tag, 0, $revision_id, '', '', $deleted = 1);
+			$page		= $this->load_page($this->tag, 0, $revision_id, '', '', 1);
 		}
 		else
 		{
@@ -6331,15 +6336,10 @@ class Wacko
 				$mod = '';
 			}
 
-			if (!isset($data))
-			{
-				$data = '';
-			}
-
 			$this->cache_links();
 			$this->current_context++;
 			$this->context[$this->current_context] = $this->tag;
-			$data .= $this->method($this->method);
+			$data = $this->method($this->method);
 			$this->current_context--;
 			echo $this->theme_header($mod).$data.$this->theme_footer($mod);
 		}
@@ -6626,7 +6626,7 @@ class Wacko
 
 		return
 			// save
-			$this->save_page($new_tag, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = $page['page_lang'], $mute = false, $user_name = false);
+			$this->save_page($new_tag, $page['title'], $page['body'], $edit_note, 0, 0, 0, 0, $page['page_lang'], false, false);
 	}
 
 	function rename_page($tag, $new_tag, $new_supertag = '')
@@ -7433,6 +7433,8 @@ class Wacko
 	// page
 	function get_categories_list($lang, $cache = true, $root = false)
 	{
+		$categories = array();
+
 		if ($_categories = $this->load_all(
 		"SELECT category_id, parent_id, category ".
 		"FROM {$this->config['table_prefix']}category ".
