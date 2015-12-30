@@ -354,44 +354,46 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 
 	echo "<br />";
 
-	echo "<ul>".
-			'<li><a href="'.$this->href('edit').'">'.$this->get_translation('SettingsEdit').'</a></li>'.
-			'<li><a href="'.$this->href('revisions').'">'.$this->get_translation('SettingsRevisions').'</a></li>'.
-			'<li><a href="'.$this->href('clone').'">'.$this->get_translation('SettingsClone').'</a></li>';
+	$icon ='<img src="'. $this->config['theme_url'].'icon/spacer.png"/>';
+
+	echo '<ul class="page_handler">'.
+			'<li class="m-edit"><a href="'.$this->href('edit').'">'.$icon.$this->get_translation('SettingsEdit').'</a></li>'.
+			'<li class="m-revisions"><a href="'.$this->href('revisions').'">'.$icon.$this->get_translation('SettingsRevisions').'</a></li>'.
+			'<li class="m-clone"><a href="'.$this->href('clone').'">'.$icon.$this->get_translation('SettingsClone').'</a></li>';
 
 	// Rename link (shows only if owner is current user or Admin)
 	if ($this->is_owner() || $this->is_admin())
 	{
-		echo '<li><a href="'.$this->href('rename').'">'.$this->get_translation('SettingsRename')."</a></li>\n";
+		echo '<li class="m-edit"><a href="'.$this->href('rename').'">'.$icon.$this->get_translation('SettingsRename')."</a></li>\n";
 	}
 
 	// Remove link (shows only for page owner if allowed)
 	if ($this->is_owner() && !$this->config['remove_onlyadmins'] || $this->is_admin())
 	{
-		echo '<li><a href="'.$this->href('remove').'">'.$this->get_translation('SettingsRemove')."</a></li>\n";
-		echo '<li><a href="'.$this->href('purge').'">'.$this->get_translation('SettingsPurge')."</a></li>\n";
+		echo '<li class="m-remove"><a href="'.$this->href('remove').'">'.$icon.$this->get_translation('SettingsRemove')."</a></li>\n";
+		echo '<li class="m-purge"><a href="'.$this->href('purge').'">'.$icon.$this->get_translation('SettingsPurge')."</a></li>\n";
 	}
 
 	// Moderate link (shows only if current user is Moderator or Admin)
 	if ($this->is_moderator() || $this->is_admin())
 	{
-		echo '<li><a href="'.$this->href('moderate').'">'.$this->get_translation('SettingsModerate')."</a></li>\n";
+		echo '<li class="m-moderate"><a href="'.$this->href('moderate').'">'.$icon.$this->get_translation('SettingsModerate')."</a></li>\n";
 	}
 
 	// ACL link (shows only if owner is current user or Admin)
 	if ($this->is_owner() || $this->is_admin())
 	{
-		echo '<li><a href="'.$this->href('permissions').'">'.$this->get_translation('SettingsPermissions')."</a></li>\n";
+		echo '<li class="m-permissions"><a href="'.$this->href('permissions').'">'.$icon.$this->get_translation('SettingsPermissions')."</a></li>\n";
 	}
 
-	echo	'<li><a href="'.$this->href('categories').'">'.$this->get_translation('SettingsCategories').'</a></li>'.
-			'<li><a href="'.$this->href('upload').'">'.$this->get_translation('SettingsUpload').'</a></li>'.
-			'<li><a href="'.$this->href('referrers').'">'.$this->get_translation('SettingsReferrers').'</a></li>'.
-			'<li><a href="'.$this->href('watch').'">'.($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')).'</a></li>'.
-			'<li><a href="'.$this->href('print').'">'.$this->get_translation('SettingsPrint').'</a></li>'.
-			'<li><a href="'.$this->href('wordprocessor').'">'.$this->get_translation('SettingsWordprocessor').'</a></li>'.
-	#		'<li><a href="'.$this->href('latex').'">'.$this->get_translation('SettingsLatex').'</a></li>'.
-			'<li><a href="'.$this->href('export.xml').'">'.$this->get_translation('SettingsXML').'</a></li>'.
+	echo	'<li class="m-categories"><a href="'.$this->href('categories').'">'.$icon.$this->get_translation('SettingsCategories').'</a></li>'.
+			'<li class="m-upload"><a href="'.$this->href('upload').'">'.$icon.$this->get_translation('SettingsUpload').'</a></li>'.
+			'<li class="m-referrers"><a href="'.$this->href('referrers').'">'.$icon.$this->get_translation('SettingsReferrers').'</a></li>'.
+			'<li class="'.($this->is_watched === true ? 'watch-off' : 'watch-on').'"><a href="'.$this->href('watch').'">'.$icon.($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')).'</a></li>'.
+			'<li class="m-print"><a href="'.$this->href('print').'">'.$icon.$this->get_translation('SettingsPrint').'</a></li>'.
+			'<li class="m-word"><a href="'.$this->href('wordprocessor').'">'.$icon.$this->get_translation('SettingsWordprocessor').'</a></li>'.
+	#		'<li class="m-latex"><a href="'.$this->href('latex').'">'.$icon.$this->get_translation('SettingsLatex').'</a></li>'.
+			'<li class="m-xml"><a href="'.$this->href('export.xml').'">'.$icon.$this->get_translation('SettingsXML').'</a></li>'.
 		'</ul>'.
 	'</aside>';
 }
