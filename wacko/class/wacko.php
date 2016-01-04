@@ -1221,6 +1221,7 @@ class Wacko
 	function cache_links()
 	{
 		$pages	= '';
+		$page_id = array();
 		$acl	= '';
 		$lang	= '';
 		$user	= $this->get_user();
@@ -5561,8 +5562,8 @@ class Wacko
 
 	function get_user_menu($user_id, $lang = '')
 	{
-		$user_menu = array();
-		$user_menu_formatted = array();
+		$user_menu				= array();
+		$user_menu_formatted	= array();
 
 		// avoid results if $user_id is 0 (user does not exists)
 		if ($user_id)
@@ -5612,9 +5613,9 @@ class Wacko
 
 	function set_menu($set = MENU_AUTO, $update = false)
 	{
-		$menu_page_ids = array();
-		$menu_formatted = array();
-		$new_menu = array();
+		$menu_page_ids	= array();
+		$menu_formatted	= array();
+		$new_menu		= array();
 
 		$user = $this->get_user();
 
