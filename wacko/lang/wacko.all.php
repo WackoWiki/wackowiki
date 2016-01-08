@@ -38,22 +38,22 @@ $wacko_all_resource = array(
 	'tpl.lan'			=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
 
 	//icons
-	'childicon'		=> '!/',
-	'parenticon'	=> '../',
-	'equalicon'		=> '',
-	'rooticon'		=> '/',
-	'iwicon'		=> '',
-	'lanicon'		=> '',
-	'RootLinkIcon'	=> '/',
-	'SubLinkIcon'	=> '!/',
-	'UpLinkIcon'	=> '../',
-	'wantedicon'	=> '?',
+	'childicon'			=> '!/',
+	'parenticon'		=> '../',
+	'equalicon'			=> '',
+	'rooticon'			=> '/',
+	'iwicon'			=> '',
+	'lanicon'			=> '',
+	'RootLinkIcon'		=> '/',
+	'SubLinkIcon'		=> '!/',
+	'UpLinkIcon'		=> '../',
+	'wantedicon'		=> '?',
 
-	'groupicon'		=> '', // ''<span class="icon"></span>'
-	'usericon'		=> '', // ''<span class="icon"></span>'
+	'groupicon'			=> '', // '<span class="icon"></span>'
+	'usericon'			=> '', // '<span class="icon"></span>'
 
 	// see wacko.css in theme folder, e.g. a.fileicon .icon {
-	'outericon'		=> '<span class="icon"></span>',
+	'outericon'			=> '<span class="icon"></span>',
 
 
 );
