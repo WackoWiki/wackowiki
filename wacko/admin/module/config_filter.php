@@ -25,8 +25,9 @@ function admin_config_filter(&$engine, &$module)
 	/*
 	TODO:
 	1) use word table to add row 'set'
-	2) add option to choose action: block, replace
-	3) option to switch between antispam.conf file and word table
+	2) add option to choose action: block, replace, moderate
+	3) add option to switch between antispam.conf file and word table
+	4) add option to select where the filter is applied: edit, tags, registration, referrers
 	*/
 ?>
 	<h1><?php echo $module['title']; ?></h1>
