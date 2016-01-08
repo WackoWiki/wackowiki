@@ -29,8 +29,9 @@
 
 define('IN_CAPTCHA', true);
 
-// Get absolute path to load config file, the relative path to the page may vary
+// get absolute path to load config file, because the relative path to the page may vary
 $working_dir = preg_replace('/\/lib\/captcha/', '/', __DIR__);
+
 // load config file containing cookie prefix, session handler id and session handler path
 require_once($working_dir.'config/captcha.php');
 
