@@ -2012,7 +2012,7 @@ p.layout-box span {
 	/*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
 
-.BewareChangeLang {
+.hint {
 	border: 1px solid #ffee66;
 	width: 400px;
 	background-color: #ffffdd;

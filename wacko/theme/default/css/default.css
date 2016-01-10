@@ -195,6 +195,37 @@ form input.submitinput {
 	padding: 0 10px;
 }
 
+.warning {
+	color: red;
+	font-weight: bold;
+	/*background-color: #fbe6f2;*/
+	background-color: #fcfcfc;
+	background-image: url(./../icon/warning.svg);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border-width: 1px;
+	border-top-style: dotted;
+	border-right-style: none;
+	border-bottom-style: dotted;
+	border-left-style: none;
+	border-color: #d893a1;
+}
+
+.hint {
+	border: 1px solid #ffee66;
+	width: 400px;
+	background-color: #ffffdd;
+	background-image: url(./../icon/warning.svg);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 5px 5px 5px 40px;
+	position: relative;
+}
 
 /* Debugging informations*/
 .time {
@@ -885,30 +916,7 @@ a:target {
 }
 
 /* ------------------------------- */
-.warning {
-	color: red;
-	font-weight: bold;
-	/*background-color: #fbe6f2;*/
-	background-color: #fcfcfc;
-	background-image: url(./../icon/warning.svg);
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	border-top-style: dotted;
-	border-right-style: none;
-	border-bottom-style: dotted;
-	border-left-style: none;
-	border-top-color: #d893a1;
-	border-right-color: #d893a1;
-	border-bottom-color: #d893a1;
-	border-left-color: #d893a1;
-}
+
 
 /* CSS form formater */
 .cssform p {
@@ -943,19 +951,6 @@ a:target {
 	margin-left: -155px; /*width of left column*/
 	width: 150px;
 	/*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-
-.BewareChangeLang {
-	border: 1px solid #ffee66;
-	width: 400px;
-	background-color: #ffffdd;
-	background-image: url(./../icon/warning.svg);
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
-	margin: 10px;
-	padding: 5px 5px 5px 40px;
-	position: relative;
 }
 
 /* cssform1 for actions */
