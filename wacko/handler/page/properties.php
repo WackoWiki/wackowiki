@@ -256,7 +256,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 
 			echo "</select>\n";
 
-			echo '<div class="BewareChangeLang">'.$this->get_translation('BewareChangeLang').'</div>';
+			echo '<div class="hint">'.$this->get_translation('BewareChangeLang').'</div>';
 			echo "</td>\n";
 			echo "</tr>\n";
 

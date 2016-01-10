@@ -434,7 +434,7 @@ else if ($user = $this->get_user())
 		: '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('EmailConfirm').'" title="'.$this->get_translation('EmailConfirm').'" class="btn-warning"/>' ?>
 <?php
 		if (!$user['email'] || $code['email_confirm'])
-			echo '<div class="BewareChangeLang"><strong class="cite">'.
+			echo '<div class="hint"><strong class="cite">'.
 				$this->get_translation('EmailNotVerified').'</strong><br />'.
 				'<small>'.$this->get_translation('EmailNotVerifiedDesc').
 				'<strong><a href="'.$this->href('', '', 'resend_code=1').'">'.$this->get_translation('HereLink').'</a></strong>.

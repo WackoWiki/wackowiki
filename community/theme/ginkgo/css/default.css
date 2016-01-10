@@ -598,7 +598,7 @@ ul.leftNav { /* space at the bottom of the top left nav */
 	margin-left: -155px; /*width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
-.BewareChangeLang{
+.hint{
 	border: 1px solid #ffee66;
 	width: 400px;
 	background-color: #ffffdd;
