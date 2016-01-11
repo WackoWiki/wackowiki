@@ -47,8 +47,8 @@ $wacko_translation = array(
 	'UserApprovalPending'		=> 'Your account is still pending approval.',
 	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
 
-	'UserApprovedInfo'			=> 'You have been approved to access {sitename}',
-	'UserDeniedInfo'			=> 'You have been denied access to {sitename}.',
+	'UserApprovedInfo'			=> 'You have been approved to access %1',
+	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	// login panel
 	'LoginWelcome'				=> 'Login',
@@ -435,7 +435,7 @@ $wacko_translation = array(
 	'SettingsCodeNotSent'		=> 'Unable to send the confirmation code: email is not specified!',
 	'Hello'						=> 'Hello',
 	'UserName'					=> 'User name',
-	'EmailAddress'					=> 'Email address',
+	'EmailAddress'				=> 'Email address',
 	'RealName'					=> 'Real name',
 	'RecordsPerPage'			=> 'Records per page',
 	'ShowComments?'				=> 'Show comments by default',
@@ -865,10 +865,10 @@ $wacko_translation = array(
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
 	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
 
-	'ChangesRSS'			=> 'Changes',
-	'CommentsRSS'			=> 'Comments',
-	'NewsRSS'				=> 'News',
-	'RevisionsRSS'		=> 'History/revisions of ',
+	'ChangesFeed'				=> 'Changes',
+	'CommentsFeed'				=> 'Comments',
+	'NewsFeed'					=> 'News',
+	'RevisionsFeed'				=> 'History/revisions of ',
 
 	'LastModification'			=> 'Last Modification',
 
