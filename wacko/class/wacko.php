@@ -2094,8 +2094,8 @@ class Wacko
 		{
 			if (!isset($old_page['comment_on_id']) || !$comment_on_id)
 			{
-				$this->use_class('rss');
-				$xml = new rss($this);
+				$this->use_class('feed');
+				$xml = new feed($this);
 
 				if ($this->config['enable_feeds'])
 				{
@@ -2106,7 +2106,7 @@ class Wacko
 					{
 						if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
 						{
-							$xml->news(); // $this->tag
+							$xml->feed(); // $this->tag
 						}
 					}
 				}

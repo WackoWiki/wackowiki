@@ -155,8 +155,8 @@ if (isset($_POST['submit_poll']))
 		// update news RSS feed
 		if ($startmod == 1)
 		{
-			#$this->use_class('rss');
-			#$xml = new rss($this);
+			#$this->use_class('feed');
+			#$xml = new feed($this);
 			#$xml->news();
 			unset($xml);
 		}
