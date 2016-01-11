@@ -42,8 +42,8 @@ function admin_content_polls(&$engine, &$module)
 	// processing input
 	if ($admin === true)
 	{
-		#$engine->use_class('rss');
-		#$xml = new rss($engine);
+		#$engine->use_class('feed');
+		#$xml = new feed($engine);
 
 		// selected year for archived polls
 		if (!isset($_GET['year']))	$year	= date('Y');

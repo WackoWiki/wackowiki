@@ -34,6 +34,7 @@ function admin_config_security(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['allow_registration']			= (int)$_POST['allow_registration'];
+		$config['approve_new_user']				= (int)$_POST['approve_new_user'];
 		$config['captcha_new_comment']			= (int)$_POST['captcha_new_comment'];
 		$config['captcha_new_page']				= (int)$_POST['captcha_new_page'];
 		$config['captcha_edit_page']			= (int)$_POST['captcha_edit_page'];
@@ -97,6 +98,19 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td style="width:40%;">
 					<input type="checkbox" id="allow_registration" name="allow_registration" value="1"<?php echo ( $engine->config['allow_registration'] ? ' checked="checked"' : '' );?> />
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="approve_new_user"><strong>Approve new users:</strong><br />
+					<small>Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.</small></label>
+				</td>
+				<td>
+					<input type="radio" id="approve_new_user_on" name="approve_new_user" value="1"<?php echo ( $engine->config['approve_new_user'] == 1 ? ' checked="checked"' : '' );?> /><label for="approve_new_user_on">On.</label>
+					<input type="radio" id="approve_new_user_off" name="approve_new_user" value="0"<?php echo ( $engine->config['approve_new_user'] == 0 ? ' checked="checked"' : '' );?> /><label for="approve_new_user_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
