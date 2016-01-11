@@ -234,7 +234,7 @@ $wacko_translation = array(
 	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// groups handler
-	'GroupsMembersFor'				=> 'Members for Group',
+	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> 'описание',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Open',
@@ -552,12 +552,6 @@ $wacko_translation = array(
 									'пока не подтвердите свой email-адрес, пройд€ по ссылке из '.
 									'отправленного вам письма. ≈сли в течение суток после регистрации '.
 									'вы так и не получили письмо, запросите его повторно, щЄлкнув ',
-	'EmailAddressNVDesc'			=> '¬ы не сможете получать уведомлени€ об изменении и комментари€х '.
-									'наблюдаемых страниц, сообщени€ от других пользователей, а также '.
-									'<span class="underline">не будете иметь возможность восстановить забытый пароль</span>, '.
-									'пока не подтвердите свой email-адрес, пройд€ по ссылке из '.
-									'отправленного вам письма. ≈сли в течение суток после регистрации '.
-									'вы так и не получили письмо, запросите его повторно, щЄлкнув ',
 
 	'ForgotComment'				=> '¬ведите им€ пользовател€ и адрес электронной почты,'."\n".'и вам будет выслано письмо с инструкци€ми.',
 	'ForgotMain'				=> '«абыли пароль?',
@@ -862,7 +856,7 @@ $wacko_translation = array(
 	'ChangesRSS'			=> 'ѕоследние изменени€',
 	'CommentsRSS'			=> 'ѕоследние комментарии',
 	'NewsRSS'				=> 'ѕоследние новости',
-	'RevisionsRSS'		=> '»стори€ изменений ',
+	'RevisionsRSS'			=> '»стори€ изменений ',
 
 	'LastModification'			=> 'ѕоследнее изменение',
 
