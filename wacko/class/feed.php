@@ -74,7 +74,7 @@ class Feed
 					$access = true;
 				}
 
-				if ($access && ($count < 30))
+				if ($access && ($count < $limit))
 				{
 					$count++;
 					$xml .= "<item>\n";
@@ -266,7 +266,7 @@ class Feed
 					$access = true;
 				}
 
-				if ( $access && ($count < 30) )
+				if ( $access && ($count < $limit) )
 				{
 					$count++;
 
