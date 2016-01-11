@@ -40,6 +40,16 @@ $wacko_translation = array(
 	'NewAccountIP'				=> 'Remote IP address:',
 	'NewAccountSignupInfo'		=> 'The following account has been created:',
 
+	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
+	'UserRequiresApproval'		=> 'To approve or deny this user access to %1 go to',
+	'UserApprovalInfo'			=> 'After you register, your request will be sent to the site administrator for approval. You will then receive an email with further instructions.',
+
+	'UserApprovalPending'		=> 'Your account is still pending approval.',
+	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
+
+	'UserApprovedInfo'			=> 'You have been approved to access {sitename}',
+	'UserDeniedInfo'			=> 'You have been denied access to {sitename}.',
+
 	// login panel
 	'LoginWelcome'				=> 'Login',
 	'LoginWelcome2'				=> '((/Registration Create new account))',
@@ -425,7 +435,7 @@ $wacko_translation = array(
 	'SettingsCodeNotSent'		=> 'Unable to send the confirmation code: email is not specified!',
 	'Hello'						=> 'Hello',
 	'UserName'					=> 'User name',
-	'YourEmail'					=> 'Your email address',
+	'EmailAddress'					=> 'Email address',
 	'RealName'					=> 'Real name',
 	'RecordsPerPage'			=> 'Records per page',
 	'ShowComments?'				=> 'Show comments by default',
