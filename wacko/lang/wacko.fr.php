@@ -851,10 +851,10 @@ $wacko_translation = array(
 	'ExportClusterXML'			=> 'Export du groupe entier de ',
 	'AccessDeniedXML'			=> 'Vous n&rsquo;êtes pas autorisé(e) à accéder à cette information.',
 
-	'ChangesRSS'			=> 'Changements récents',
-	'CommentsRSS'			=> 'Commentaires récents',
-	'NewsRSS'				=> 'Nouvelles récents',
-	'RevisionsRSS'		=> 'Historique/révisions de ',
+	'ChangesFeed'			=> 'Changements récents',
+	'CommentsFeed'			=> 'Commentaires récents',
+	'NewsFeed'				=> 'Nouvelles récents',
+	'RevisionsFeed'		=> 'Historique/révisions de ',
 
 	'LastModification'			=> 'Dernière modification',
 
