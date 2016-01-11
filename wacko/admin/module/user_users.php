@@ -101,11 +101,12 @@ function admin_user_users(&$engine, &$module)
 	//   list change/update
 	/////////////////////////////////////////////
 
+	#$user_id = (isset($_POST['user_id']) ? $_POST['user_id'] : isset($_GET['user_id']) ? $_GET['user_id'] : '');
+	$user_id = (isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : '');
+
 	// get user
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
-		#$user_id = (isset($_POST['user_id']) ? $_POST['user_id'] : isset($_GET['user_id']) ? $_GET['user_id'] : '');
-		$user_id = (isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : '');
 
 		$user = $engine->load_single(
 			"SELECT u.user_name, u.real_name, u.email, p.theme, p.user_lang, u.enabled ".
@@ -540,7 +541,7 @@ function admin_user_users(&$engine, &$module)
 					'<td>'.$user['real_name'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th class="label">'.$engine->get_translation('YourEmail').'</th>'.
+					'<th class="label">'.$engine->get_translation('EmailAddress').'</th>'.
 					'<td>'.$user['email'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".

@@ -425,7 +425,7 @@ else if ($user = $this->get_user())
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row">
-			<label for="email"><?php echo $this->get_translation('YourEmail');?></label>
+			<label for="email"><?php echo $this->get_translation('EmailAddress');?></label>
 		</th>
 		<td>
 			<input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;
