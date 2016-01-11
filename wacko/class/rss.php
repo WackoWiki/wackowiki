@@ -8,12 +8,12 @@ if (!defined('IN_WACKO'))
 /*
 
 ########################################################
-##              RSS Channels Constructor              ##
+##              Feed Channels Constructor             ##
 ########################################################
 
 */
 
-class RSS
+class Feed
 {
 	// VARIABLES
 	var $engine;
@@ -101,13 +101,13 @@ class RSS
 		$this->write_file($name, $xml);
 	}
 
-	function news($news_cluster = '')
+	function feed($feed_cluster = '')
 	{
 		$limit			= 10;
 		$name			= 'news';
-		$news_cluster	= empty($news_cluster) ? $this->engine->config['news_cluster'] : $news_cluster;
+		$news_cluster	= empty($feed_cluster) ? $this->engine->config['news_cluster'] : $feed_cluster;
 		$news_levels	= $this->engine->config['news_levels'];
-		$news_pages		= array();
+		$feed_pages		= array();
 		$prefix			= $this->engine->config['table_prefix'];
 
 		//  collect data
@@ -127,7 +127,7 @@ class RSS
 
 				if ($access === true)
 				{
-					$news_pages[]	= array(
+					$feed_pages[]	= array(
 										'page_id'	=> $page['page_id'],
 										'tag'		=> $page['tag'],
 										'title'		=> $page['title'],
@@ -147,7 +147,7 @@ class RSS
 					'return 0;'.
 				'return ($a["date"] < $b["date"] ? 1 : -1);');
 			// sort pages array
-			usort($news_pages, $sort_dates);
+			usort($feed_pages, $sort_dates);
 		}
 
 		// build output
@@ -173,9 +173,9 @@ class RSS
 
 		$i = 0;
 
-		if ($news_pages)
+		if ($feed_pages)
 		{
-			foreach ($news_pages as $page)
+			foreach ($feed_pages as $page)
 			{
 				$i++;
 
