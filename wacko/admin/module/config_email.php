@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   Security settings                                ##
+##   Email settings                                   ##
 ########################################################
 
 $module['config_email'] = array(

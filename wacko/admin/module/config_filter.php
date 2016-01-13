@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   Security settings                                ##
+##   Filter settings                                  ##
 ########################################################
 
 $module['config_filter'] = array(
