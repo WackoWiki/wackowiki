@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   Maintaince setting                               ##
+##   Formatter setting                                ##
 ########################################################
 
 $module['config_formatter'] = array(
