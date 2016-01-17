@@ -6,53 +6,7 @@ if ($config['tls'] == true && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']
 	$config['base_url'] =	str_replace('http://', 'https://'.($config['tls_proxy'] ? $config['tls_proxy'].'/' : ''), $config['base_url']);
 }
 
-function my_location()
-{
-	global $config;
-
-	// run in tls mode?
-	if ( ($config['tls'] == true
-		&& ( ( ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' )
-				&& !empty($config['tls_proxy']) )
-			|| ( isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ) ) )
-		|| ( ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' )
-			|| ( isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ) )
-	)
-	{
-		$config['base_url'] =	str_replace('http://', 'https://'.($config['tls_proxy'] ? $config['tls_proxy'].'/' : ''), $config['base_url']);
-	}
-
-	list($url, ) = explode('?', $config['base_url']);
-	return $url;
-}
-
-// Draws a tick or cross next to a result
-function output_image($ok)
-{
-	global $lang;
-	return '<img src="'.my_location().'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross '.($ok ? 'tick' : 'cross').'" />';
-}
-
-function write_config_hidden_nodes($skip_values)
-{
-	global $config;
-
-	$config_parameters = array_diff_key($config, $skip_values, array('aliases' => ''));
-
-	if (is_array($config_parameters))
-	{
-		foreach ($config_parameters as $key => $value)
-		{
-			if (is_array($value))
-			{
-				$value = implode(',', $value);
-			}
-
-			echo '   <input type="hidden" name="config['.$key.']" value="'.$value.'" />' . "\n";
-		}
-	}
-}
-
+require_once('setup/common.php');
 global $config;
 
 // If we have any config data in the _POST then it means they have somehow navigated backwards so we should preserve their updated values.

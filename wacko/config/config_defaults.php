@@ -72,6 +72,7 @@ $wacko_config_defaults = array(
 	'validate_email' => 1,
 	'email_pattern' => '',
 	'notify_new_user_account' => 1,
+	'approve_new_user' => 0,
 	'allow_email_reuse' => 0,
 
 	'language' => 'en',
