@@ -18,14 +18,8 @@ function my_location()
 	}
 
 	list($url, ) = explode('?', $config['base_url']);
-	return $url;
-}
 
-// Draws a tick or cross next to a result
-function output_image($ok)
-{
-	global $lang;
-	return '<img src="'.my_location().'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross '.($ok ? 'tick' : 'cross').'" />';
+	return $url;
 }
 
 // setup header
@@ -52,6 +46,14 @@ function write_config_hidden_nodes($skip_values)
 function output_error($error_text = '')
 {
 	echo '<ul class="install_error"><li>'.$error_text."</li></ul>";
+}
+
+// Draws a tick or cross next to a result
+function output_image($ok)
+{
+	global $lang;
+
+	return '<img src="'.my_location().'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross '.($ok ? 'tick' : 'cross').'" />';
 }
 
 // TODO: refactoring - same function in wacko class
@@ -166,6 +168,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 	}
 
 	echo "</li>\n";
+
 	return true;
 }
 
@@ -231,13 +234,15 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 {
 	global $config_global, $dblink_global, $lang_global;
 
-	$page_select			= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag='".$tag."'";
-	$owner_id				= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
+	$acl_right_id = array();
+
+	$page_select				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag='".$tag."'";
+	$owner_id					= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
-	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
+	$page_insert				= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
 
-	$page_id				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
+	$page_id					= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
 
 	$acl_right_id['read']		= "SELECT acl_right_id FROM ".$config_global['table_prefix']."acl_right WHERE acl_right = 'read' LIMIT 1";
 	$acl_right_id['write']		= "SELECT acl_right_id FROM ".$config_global['table_prefix']."acl_right WHERE acl_right = 'write' LIMIT 1";
@@ -246,13 +251,13 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$acl_right_id['upload']		= "SELECT acl_right_id FROM ".$config_global['table_prefix']."acl_right WHERE acl_right = 'upload' LIMIT 1";
 
 
-	$perm_read_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['read']."), '*')";
-	$perm_write_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['write']."), '".$rights."')";
-	$perm_comment_insert	= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['comment']."), '$')";
-	$perm_create_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['create']."), '$')";
-	$perm_upload_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['upload']."), '')";
+	$perm_read_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['read']."), '*')";
+	$perm_write_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['write']."), '".$rights."')";
+	$perm_comment_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['comment']."), '$')";
+	$perm_create_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['create']."), '$')";
+	$perm_upload_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['upload']."), '')";
 
-	$default_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
+	$default_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 
 	switch($config_global['database_driver'])
@@ -449,16 +454,23 @@ function set_language($lang)
 	if ( !isset($languages[$lang]) )
 	{
 		$lang_file = 'lang/lang.'.$lang.'.php';
-		if (@file_exists($lang_file)) include($lang_file);
+
+		if (@file_exists($lang_file))
+		{
+			include($lang_file);
+		}
+
 		$languages[$lang] = $wacko_language;
 	}
 
 	$language = &$languages[$lang];
 	setlocale(LC_CTYPE,$language['locale']);
 	$language['locale'] = setlocale(LC_CTYPE,0);
+
 	return $language;
 }
 
+// TODO: refactor -> same function as in wacko class
 function translit($tag, $lang)
 {
 	$language = set_language($lang);
