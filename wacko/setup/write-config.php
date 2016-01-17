@@ -1,30 +1,5 @@
 <?php
 
-function array_to_str ($arr, $name = '')
-{
-	$entries	= '';
-	$arrays		= '';
-
-	$str = "\$wacko_config".($name ? "[\"".$name."\"]" : "")." = array(\n";
-
-	foreach ($arr as $k => $v)
-	{
-		if(is_array($v))
-		{
-			$arrays .= array_to_str($v, $k);
-		}
-		else
-		{
-			$entries .= "\t'".$k.'\' => \''.str_replace("\n", "\\n", $v)."',\n";
-		}
-	}
-
-	$str .= $entries.");\n";
-	$str .= $arrays;
-
-	return $str;
-}
-
 // config values
 if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty( $config['database_port'] ) )
 {

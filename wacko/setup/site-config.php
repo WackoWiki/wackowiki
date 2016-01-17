@@ -36,31 +36,6 @@
 	// -->
 </script>
 
-<?php
-// TODO: refactor -> same function as in wacko class
-function available_languages()
-{
-	$handle = opendir('lang');
-
-	while (false !== ($file = readdir($handle)))
-	{
-		if ($file != '.'
-		&& $file != '..'
-		&& $file != 'wacko.all.php'
-		&& !is_dir('lang/'.$file)
-		&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
-		{
-			$lang_list[] = $match[1];
-		}
-	}
-
-	closedir($handle);
-	sort($lang_list, SORT_STRING);
-
-	return $lang_list;
-}
-?>
-
 <form action="<?php echo my_location() ?>?installAction=database-config" method="post" name="form1">
 <?php
 

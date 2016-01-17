@@ -48,7 +48,7 @@ $update_config_r5_4_4 = "UPDATE {$pref}config SET config_value = config_value * 
 
 // FILE LINK
 $table_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (".
-							"file_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
+							"file_link_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 							"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 							"file_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 							"PRIMARY KEY (file_link_id),".
@@ -101,6 +101,7 @@ $alter_user_r5_4_0 = "ALTER TABLE {$pref}user CHANGE session_time last_visit DAT
 $alter_user_r5_4_1 = "ALTER TABLE {$pref}user ADD user_form_salt VARCHAR(40) NOT NULL DEFAULT '' AFTER change_password";
 $alter_user_r5_4_2 = "ALTER TABLE {$pref}user CHANGE password password VARCHAR(255) NOT NULL";
 $alter_user_r5_4_3 = "ALTER TABLE {$pref}user ADD account_lang VARCHAR(2) NOT NULL AFTER real_name";
+$alter_user_r5_4_4 = "ALTER TABLE {$pref}user ADD account_status TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER email";
 
 $update_user_r5_4_0 = "UPDATE {$pref}user AS u, (SELECT user_id, user_lang FROM {$pref}user_setting) AS s SET u.account_lang = s.user_lang WHERE u.user_id = s.user_id";
 
