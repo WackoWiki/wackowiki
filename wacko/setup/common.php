@@ -234,8 +234,6 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 {
 	global $config_global, $dblink_global, $lang_global;
 
-	$acl_right_id = array();
-
 	$page_select				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag='".$tag."'";
 	$owner_id					= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
@@ -244,18 +242,11 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 	$page_id					= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
 
-	$acl_right_id['read']		= "SELECT acl_right_id FROM ".$config_global['table_prefix']."acl_right WHERE acl_right = 'read' LIMIT 1";
-	$acl_right_id['write']		= "SELECT acl_right_id FROM ".$config_global['table_prefix']."acl_right WHERE acl_right = 'write' LIMIT 1";
-	$acl_right_id['comment']	= "SELECT acl_right_id FROM ".$config_global['table_prefix']."acl_right WHERE acl_right = 'comment' LIMIT 1";
-	$acl_right_id['create']		= "SELECT acl_right_id FROM ".$config_global['table_prefix']."acl_right WHERE acl_right = 'create' LIMIT 1";
-	$acl_right_id['upload']		= "SELECT acl_right_id FROM ".$config_global['table_prefix']."acl_right WHERE acl_right = 'upload' LIMIT 1";
-
-
-	$perm_read_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['read']."), '*')";
-	$perm_write_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['write']."), '".$rights."')";
-	$perm_comment_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['comment']."), '$')";
-	$perm_create_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['create']."), '$')";
-	$perm_upload_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, acl_right_id, list) VALUES ((".$page_id."), (".$acl_right_id['upload']."), '')";
+	$perm_read_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'read', '*')";
+	$perm_write_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'write', '".$rights."')";
+	$perm_comment_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'comment', '$')";
+	$perm_create_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'create', '$')";
+	$perm_upload_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'upload', '')";
 
 	$default_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
