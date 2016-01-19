@@ -238,7 +238,8 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$owner_id					= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
-	$page_insert				= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
+	// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
+	$page_insert				= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', '', '', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
 
 	$page_id					= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
 
