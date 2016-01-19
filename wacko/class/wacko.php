@@ -2156,6 +2156,7 @@ class Wacko
 				"tag			= '{$old_page['tag']}', ".
 				"modified		= '{$old_page['modified']}', ".
 				"body			= '{$old_page['body']}', ".
+				"body_r			= '', ". // specify value for columns that don't have defaults
 				"formatting		= '{$old_page['formatting']}', ".
 				"edit_note		= '{$old_page['edit_note']}', ".
 				"minor_edit		= '{$old_page['minor_edit']}', ".
