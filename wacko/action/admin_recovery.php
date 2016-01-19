@@ -79,7 +79,7 @@ if ($this->is_admin())
 		$this->set_message($message, 'error');
 	}
 
-	echo '<h2>Generate the pasword hash for your recovery_password</h2>';
+	echo '<h2>Generate the password hash for your recovery_password</h2>';
 
 	echo $this->form_open('generate_hash', '', 'post');
 
