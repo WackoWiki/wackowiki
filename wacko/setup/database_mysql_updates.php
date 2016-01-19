@@ -21,7 +21,7 @@ $table_auth_token_r5_4_0 = "CREATE TABLE {$pref}auth_token (".
 						"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 						"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
 						"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
-						"session_forwarded_for VARCHAR(255) NOT NULL,".
+						"session_forwarded_for VARCHAR(255) NOT NULL DEFAULT '',".
 						"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 						"PRIMARY KEY (cookie_token),".
 						"KEY session_time (session_time),".
@@ -100,7 +100,7 @@ $alter_upload_r5_4_0 = "ALTER TABLE {$pref}upload CHANGE lang upload_lang VARCHA
 $alter_user_r5_4_0 = "ALTER TABLE {$pref}user CHANGE session_time last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
 $alter_user_r5_4_1 = "ALTER TABLE {$pref}user ADD user_form_salt VARCHAR(40) NOT NULL DEFAULT '' AFTER change_password";
 $alter_user_r5_4_2 = "ALTER TABLE {$pref}user CHANGE password password VARCHAR(255) NOT NULL";
-$alter_user_r5_4_3 = "ALTER TABLE {$pref}user ADD account_lang VARCHAR(2) NOT NULL AFTER real_name";
+$alter_user_r5_4_3 = "ALTER TABLE {$pref}user ADD account_lang VARCHAR(2) NOT NULL DEFAULT '' AFTER real_name";
 $alter_user_r5_4_4 = "ALTER TABLE {$pref}user ADD account_status TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER email";
 
 $update_user_r5_4_0 = "UPDATE {$pref}user AS u, (SELECT user_id, user_lang FROM {$pref}user_setting) AS s SET u.account_lang = s.user_lang WHERE u.user_id = s.user_id";

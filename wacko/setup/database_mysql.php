@@ -26,7 +26,7 @@ $table_auth_token = "CREATE TABLE {$pref}auth_token (".
 					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
 					"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
-					"session_forwarded_for VARCHAR(255) NOT NULL,".
+					"session_forwarded_for VARCHAR(255) NOT NULL  DEFAULT '',".
 					"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (cookie_token),".
 					"KEY session_time (session_time),".
@@ -224,7 +224,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
-					"formatting VARCHAR(20) DEFAULT NULL DEFAULT '',".
+					"formatting VARCHAR(20) NOT NULL DEFAULT '',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
@@ -315,7 +315,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"total_revisions INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"total_comments INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"total_uploads INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"fingerprint VARCHAR(40),".
+					"fingerprint VARCHAR(40) DEFAULT '',".
 					"PRIMARY KEY (user_id),".
 					"UNIQUE KEY idx_user_name (user_name),".
 					"KEY idx_account_type (account_type),".
@@ -345,8 +345,8 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"noid_pubs TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"session_length TINYINT(3) UNSIGNED DEFAULT NULL,".
 					"timezone DECIMAL(5,2) NOT NULL DEFAULT '0.00',".
-					"dst TINYINT(1) UNSIGNED DEFAULT '0' NOT NULL,".
-					"sorting_comments TINYINT(1) UNSIGNED DEFAULT '0' NOT NULL,".
+					"dst TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+					"sorting_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (setting_id),".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".
@@ -358,7 +358,7 @@ $table_usergroup = "CREATE TABLE {$pref}usergroup (".
 					"group_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"description VARCHAR(255) NOT NULL DEFAULT '',".
 					"moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"is_system TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"open TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"active TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
