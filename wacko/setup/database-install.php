@@ -203,6 +203,7 @@ $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'menu',			$alter_menu_r5_4_1,		
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_0,			$lang['ErrorAlteringTable']);
 $upgrade['5.4.0'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0,		$lang['ErrorUpdatingTable']);
 $upgrade['5.4.0'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_1,		$lang['ErrorUpdatingTable']);
+$upgrade['5.4.0'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_2,		$lang['ErrorUpdatingTable']);
 
 // referrer
 $upgrade['5.4.0'][]	= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_0,		$lang['ErrorAlteringTable']);
