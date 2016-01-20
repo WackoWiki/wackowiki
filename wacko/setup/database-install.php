@@ -20,11 +20,10 @@ $password_hashed		= password_hash(
 								PASSWORD_DEFAULT
 								);
 
-
-$delete_table	= array();
-$create_table	= array();
-$insert_records	= array();
-$upgrade		= array();
+$delete_table			= array();
+$create_table			= array();
+$insert_records			= array();
+$upgrade				= array();
 
 require_once('setup/insert_default.php');
 require_once('setup/insert_config.php');
@@ -282,6 +281,17 @@ switch($config['database_driver'])
 			echo "         </ul>\n";
 			echo "         <br />\n";
 
+			// Check if database version matches engine and switch to MyISAM if necessary
+			if ($_mysql_version	= mysqli_get_server_info($dblink))
+			{
+				$mysql_version	= substr($_mysql_version, 0, strpos($_mysql_version, '-'));
+
+				if (version_compare($mysql_version, '5.6.4', '<'));
+				{
+					$config['database_engine'] = 'MyISAM';
+				}
+			}
+
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
 				echo "<h2>".$lang['DeletingTables']."</h2>\n";
@@ -403,6 +413,17 @@ switch($config['database_driver'])
 
 		if(!$fatal_error)
 		{
+			// Check if database version matches engine and switch to MyISAM if necessary
+			if ($_mysql_version = $dblink->getAttribute(PDO::ATTR_SERVER_VERSION))
+			{
+				$mysql_version = substr($_mysql_version, 0, strpos($_mysql_version, '-'));
+
+				if (version_compare($mysql_version, '5.6.4', '<'));
+				{
+					$config['database_engine'] = 'MyISAM';
+				}
+			}
+
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
 				echo "<h2>".$lang['DeletingTables']."</h2>\n";
