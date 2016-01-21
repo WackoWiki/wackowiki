@@ -252,84 +252,37 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$default_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 
+	$insert_data[]	= array($page_insert,			$lang_global['ErrorInsertingPage']);
+	$insert_data[]	= array($perm_read_insert,		$lang_global['ErrorInsertingPageReadPermission']);
+	$insert_data[]	= array($perm_write_insert,		$lang_global['ErrorInsertingPageWritePermission']);
+	$insert_data[]	= array($perm_comment_insert,	$lang_global['ErrorInsertingPageCommentPermission']);
+	$insert_data[]	= array($perm_create_insert,	$lang_global['ErrorInsertingPageCreatePermission']);
+	$insert_data[]	= array($perm_upload_insert,	$lang_global['ErrorInsertingPageUploadPermission']);
+
+	if($is_menu)
+	{
+		$insert_data[]	= array($default_menu_item,		$lang_global['ErrorInsertingDefaultMenuItem']);
+	}
+
 	switch($config_global['database_driver'])
 	{
 		case "mysqli_legacy":
 			if (0 == mysqli_num_rows(mysqli_query($dblink_global, $page_select)))
 			{
-				/*
-				 We flag some pages as critical in the insert.**.php file, if these don't get inserted then we have a
-				 serious problem and should indicate that to the user.
-				 */
-
-				if($critical)
+				foreach ($insert_data as $data)
 				{
-					mysqli_query($dblink_global, $page_insert);
+					mysqli_query($dblink_global, $data[0]);
 
-					if(mysqli_errno($dblink_global) != 0)
+					/*
+						We flag some pages as critical in the insert.**.php file, if these don't get inserted then we have a
+						serious problem and should indicate that to the user.
+					*/
+					if($critical)
 					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPage'])." - ".mysqli_error($dblink_global));
-					}
-
-					mysqli_query($dblink_global, $perm_read_insert);
-
-					if(mysqli_errno($dblink_global) != 0)
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageReadPermission'])." - ".mysqli_error($dblink_global));
-					}
-
-					mysqli_query($dblink_global, $perm_write_insert);
-
-					if(mysqli_errno($dblink_global) != 0)
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageWritePermission'])." - ".mysqli_error($dblink_global));
-					}
-
-					mysqli_query($dblink_global, $perm_comment_insert);
-
-					if(mysqli_errno($dblink_global) != 0)
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".mysqli_error($dblink_global));
-					}
-
-					mysqli_query($dblink_global, $perm_create_insert);
-
-					if(mysqli_errno($dblink_global) != 0)
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCreatePermission'])." - ".mysqli_error($dblink_global));
-					}
-
-					mysqli_query($dblink_global, $perm_upload_insert);
-
-					if(mysqli_errno($dblink_global) != 0)
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageUploadPermission'])." - ".mysqli_error($dblink_global));
-					}
-
-					if($is_menu)
-					{
-						mysqli_query($dblink_global, $default_menu_item);
-
 						if(mysqli_errno($dblink_global) != 0)
 						{
-							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultMenuItem'])." - ".mysqli_error($dblink_global));
+							output_error(str_replace('%1', $tag, $data[1])." - ".mysqli_error($dblink_global));
 						}
-					}
-				}
-				else
-				{
-					// page
-					mysqli_query($dblink_global, $page_insert);
-					// rights
-					mysqli_query($dblink_global, $perm_read_insert);
-					mysqli_query($dblink_global, $perm_write_insert);
-					mysqli_query($dblink_global, $perm_comment_insert);
-					mysqli_query($dblink_global, $perm_create_insert);
-					mysqli_query($dblink_global, $perm_upload_insert);
-
-					if($is_menu)
-					{
-						mysqli_query($dblink_global, $default_menu_item);
 					}
 				}
 			}
@@ -356,81 +309,18 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 			if(!$page_exists)
 			{
-				if($critical)
+				foreach ($insert_data as $data)
 				{
-					@$dblink_global->query($page_insert);
-					$error = $dblink_global->errorInfo();
+					@$dblink_global->query($data[0]);
 
-					if($error[0] != "00000")
+					if($critical)
 					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPage'])." - ".($error[2]));
-					}
-
-					@$dblink_global->query($perm_read_insert);
-					$error = $dblink_global->errorInfo();
-
-					if($error[0] != "00000")
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageReadPermission'])." - ".($error[2]));
-					}
-
-					@$dblink_global->query($perm_write_insert);
-					$error = $dblink_global->errorInfo();
-
-					if($error[0] != "00000")
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageWritePermission'])." - ".($error[2]));
-					}
-
-					@$dblink_global->query($perm_comment_insert);
-					$error = $dblink_global->errorInfo();
-
-					if($error[0] != "00000")
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".($error[2]));
-					}
-
-					@$dblink_global->query($perm_create_insert);
-					$error = $dblink_global->errorInfo();
-
-					if($error[0] != "00000")
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCreatePermission'])." - ".($error[2]));
-					}
-
-					@$dblink_global->query($perm_upload_insert);
-					$error = $dblink_global->errorInfo();
-
-					if($error[0] != "00000")
-					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageUploadPermission'])." - ".($error[2]));
-					}
-
-					if($is_menu)
-					{
-						@$dblink_global->query($default_menu_item);
 						$error = $dblink_global->errorInfo();
 
 						if($error[0] != "00000")
 						{
-							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultMenuItem'])." - ".($error[2]));
+							output_error(str_replace('%1', $tag, $data[1])." - ".($error[2]));
 						}
-					}
-				}
-				else
-				{
-					// page
-					@$dblink_global->query($page_insert);
-					// rights
-					@$dblink_global->query($perm_read_insert);
-					@$dblink_global->query($perm_write_insert);
-					@$dblink_global->query($perm_comment_insert);
-					@$dblink_global->query($perm_create_insert);
-					@$dblink_global->query($perm_upload_insert);
-
-					if($is_menu)
-					{
-						@$dblink_global->query($default_menu_item);
 					}
 				}
 			}
