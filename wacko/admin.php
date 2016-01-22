@@ -251,6 +251,7 @@ unset($_processed_password);
 
 // setting temporary admin user context
 global $_user;
+$session_length = 1800;
 #$_user = $engine->get_user();
 #$engine->set_user($user, 0);
 
@@ -274,8 +275,9 @@ if (!isset($_SESSION['created']))
 }
 else if (time() - $_SESSION['created'] > 1800)
 {
+	$session_expire			= time() + $session_length;
 	// session started more than 30 minutes ago // TODO: $session_time missing!
-	$engine->restart_user_session($user, $session_time); // TODO: we need extra user session here, hence we need a session table
+	$engine->restart_user_session($user, $session_expire); // TODO: we need extra user session here, hence we need a auth_token table
 	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
 	$_SESSION['created'] = time();  // update creation time
 }
