@@ -16,8 +16,11 @@ function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $d
 
 	switch($driver)
 	{
-		case "firebird":
-			$dsn = $driver.":dbname=".$db_host.":".$db_name.($db_port != '' ? ";port=".$db_port : '');
+		case 'pgsql':#host=localhost;port=5432;dbname=testdb;user=bruce;password=mypass
+			$dsn = $driver.":host=".$db_host.";port=".$db_port.";dbname=".$db_name;
+			break;
+		case 'sqlite':
+			$dsn = $driver.":".$db_name;
 			break;
 		default:
 			$dsn = $driver.":host=".$db_host.($db_port != '' ? ";port=".$db_port : '').";dbname=".$db_name.($db_charset != '' ? ";charset=".$db_charset : '');
@@ -48,11 +51,11 @@ function sql_query($dblink, $query, $debug)
 
 			if ($debug > 2)
 			{
-				die("Query failed: ".$query." (".$result->errorCode().": ".$result->errorInfo().")");
+				die('Query failed: '.$query.' ('.$result->errorCode().': '.$result->errorInfo().')');
 			}
 			else
 			{
-				die("DBAL error: SQL query failed.");
+				die('DBAL error: SQL query failed.');
 			}
 		}
 	}
