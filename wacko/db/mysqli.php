@@ -27,11 +27,11 @@ function sql_query($dblink, $query, $debug)
 
 		if ($debug > 2)
 		{
-			die("Query failed: ".$query." (".mysqli_connect_errno().": ".mysqli_connect_error().")");
+			die('Query failed: '.$query.' ('.mysqli_connect_errno().': '.mysqli_connect_error().')');
 		}
 		else
 		{
-			die("DBAL error: SQL query failed.");
+			die('DBAL error: SQL query failed.');
 		}
 	}
 

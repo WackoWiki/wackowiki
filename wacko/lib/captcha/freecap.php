@@ -418,7 +418,7 @@ else
 	$vowels		= 'aeuo';
 	$word		= '';
 
-	$wordlen = $rand_func(5, $max_word_length);
+	$wordlen	= $rand_func(5, $max_word_length);
 
 	for($i = 0 ; $i < $wordlen ; $i++)
 	{
@@ -535,6 +535,7 @@ if($bg_type != 0)
 		// draw squiggles!
 
 		$bg3 = ImageColorAllocate($im3, 255, 255, 255);
+
 		ImageFill($im3, 0, 0, $bg3);
 		ImageSetThickness($temp_bg, 4);
 
