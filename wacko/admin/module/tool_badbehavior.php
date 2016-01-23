@@ -119,28 +119,12 @@ function bb2_httpbl_lookup($ip)
 	return $d;
 }
 
-function bb2_summary(&$engine) {
-
-	$request_uri	= $_SERVER['REQUEST_URI'];
+function bb2_summary(&$engine)
+{
 	$bb_table		= $engine->config['table_prefix'] . 'bad_behavior';
-
-	if (!$request_uri)
-	{
-		$request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
-	}
-
 	$settings		= bb2_read_settings();
-
 	$where			= '';
 
-	$key_pagination				= isset($_GET['status_key'])		? $_GET['status_key']	: '';
-	$blocked_pagination			= isset($_GET['blocked'])			? $_GET['blocked']		: '';
-	$permitted_pagination		= isset($_GET['permitted'])			? $_GET['permitted']	: '';
-	$ip_pagination				= isset($_GET['ip'])				? $_GET['ip']			: '';
-	$user_agent_pagination		= isset($_GET['user_agent'])		? $_GET['user_agent']	: '';
-	$request_method_pagination	= isset($_GET['request_method'])	? $_GET['request_method']	: '';
-	#$level_pagination			= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
-	#$level_mod_pagination		= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
 	?>
 	<h2>Summary</h2>
 
@@ -164,9 +148,18 @@ function bb2_summary(&$engine) {
 
 	foreach ($arguments as $argument)
 	{
+		if ($argument == 'request_uri')
+		{
+			$additional_fields = 'request_uri_hash, ';
+		}
+		else
+		{
+			$additional_fields = '';
+		}
+
 		// Query the DB based on variables selected
-		$results		= $engine->load_all(
-			"SELECT {$argument} as group_type, COUNT(log_id) AS n ".
+		$results = $engine->load_all(
+			"SELECT {$argument} as group_type, {$additional_fields} COUNT(log_id) AS n ".
 			"FROM {$engine->config['table_prefix']}bad_behavior GROUP BY {$argument} ".
 			"ORDER BY n DESC ".
 			"LIMIT 10", true);
@@ -191,13 +184,17 @@ function bb2_summary(&$engine) {
 			foreach ($results as $result)
 			{
 				echo '<tr id="request-' . '' . '"  style="vertical-align:top;" class="lined">'."\n";
-				echo '<td class="label">'.$result['n']."</td>\n";
+				echo '<td class="label" style="width:5%;">'.$result['n']."</td>\n";
 				#echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . "</td>\n";
 
 				if ($argument == 'status_key')
 				{
 					$status_key	= bb2_get_response($result['group_type']);
 					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;status_key='.$result['group_type'] . '" title="' .'['.$status_key['response'].'] '.$status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
+				}
+				else if ($argument == 'request_uri')
+				{
+					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;'.$argument.'='.$result['request_uri_hash'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
 				}
 				else
 				{
@@ -219,15 +216,7 @@ function bb2_summary(&$engine) {
 
 function bb2_manage(&$engine)
 {
-
-	$request_uri	= $_SERVER['REQUEST_URI'];
 	$bb_table		= $engine->config['table_prefix'] . 'bad_behavior';
-
-	if (!$request_uri)
-	{
-		$request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
-	}
-
 	$settings		= bb2_read_settings();
 
 	$where			= '';
@@ -243,7 +232,7 @@ function bb2_manage(&$engine)
 	if (isset($_GET['ip']) && $_GET['ip'])							$where .= "AND `ip` 				= '" . quote($engine->dblink, $_GET['ip']) . "' ";
 	if (isset($_GET['user_agent']) && $_GET['user_agent'])			$where .= "AND `user_agent_hash`	= '" . quote($engine->dblink, $_GET['user_agent']) . "' ";
 	if (isset($_GET['request_method']) && $_GET['request_method'])	$where .= "AND `request_method`		= '" . quote($engine->dblink, $_GET['request_method']) . "' ";
-	if (isset($_GET['request_uri']) && $_GET['request_uri'])		$where .= "AND `request_uri`		= '" . quote($engine->dblink, $_GET['request_uri']) . "' ";
+	if (isset($_GET['request_uri']) && $_GET['request_uri'])		$where .= "AND `request_uri_hash`	= '" . quote($engine->dblink, $_GET['request_uri']) . "' ";
 
 	// collecting data
 	$count = $engine->load_single(
@@ -404,11 +393,8 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 		{
 			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n";
 		}
-		?>
 
-</form>
-
-<?php
+	echo $engine->form_close();
 }
 
 function bb2_whitelist(&$engine)
@@ -422,10 +408,6 @@ function bb2_whitelist(&$engine)
 		$whitelists['url']			= array();
 		$whitelists['useragent']	= array();
 	}
-
-	$request_uri = $_SERVER['REQUEST_URI'];
-
-	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
 
 	if ($_POST)
 	{
@@ -471,37 +453,49 @@ function bb2_whitelist(&$engine)
 		</tr>
 
 		<tr class="hl_setting">
-			<td class="label"><label for="whitelists_ip"><strong>IP Address:</strong><br />
-			<small>IP address or CIDR format address ranges to be whitelisted (one per line)</small></label></td>
-			<td><textarea cols="24" rows="6" id="whitelists_ip" name="ip"><?php echo implode("\n", $whitelists['ip']); ?></textarea></td>
+			<td class="label">
+				<label for="whitelists_ip"><strong>IP Address:</strong><br />
+				<small>IP address or CIDR format address ranges to be whitelisted (one per line)</small></label>
+			</td>
+			<td>
+				<textarea cols="24" rows="6" id="whitelists_ip" name="ip"><?php echo implode("\n", $whitelists['ip']); ?></textarea>
+			</td>
 		</tr>
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><label for="whitelists_url"><strong>URL:</strong><br />
-			<small>URL fragments beginning with the / after your web site hostname (one per line)</small></label></td>
-			<td><textarea cols="48" rows="6" id="whitelists_url" name="url"><?php echo implode("\n", $whitelists['url']); ?></textarea></td>
+			<td class="label">
+				<label for="whitelists_url"><strong>URL:</strong><br />
+				<small>URL fragments beginning with the / after your web site hostname (one per line)</small></label>
+			</td>
+			<td>
+				<textarea cols="48" rows="6" id="whitelists_url" name="url"><?php echo implode("\n", $whitelists['url']); ?></textarea>
+			</td>
 		</tr>
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><label for="whitelists_useragent"><strong>User Agent:</strong><br />
-			<small>User agent strings to be whitelisted (one per line)</small></label></td>
-			<td><textarea cols="48" rows="6" id="whitelists_useragent" name="useragent"><?php echo implode("\n", $whitelists['useragent']); ?></textarea></td>
+			<td class="label">
+				<label for="whitelists_useragent"><strong>User Agent:</strong><br />
+				<small>User agent strings to be whitelisted (one per line)</small></label>
+			</td>
+			<td>
+				<textarea cols="48" rows="6" id="whitelists_useragent" name="useragent"><?php echo implode("\n", $whitelists['useragent']); ?></textarea>
+			</td>
 		</tr>
 	</table>
 	<br />
 	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
-	</form>
+
 <?php
+	echo $engine->form_close();
 }
 
 function bb2_options(&$engine)
 {
 	$settings = bb2_read_settings();
-
 
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
@@ -527,18 +521,9 @@ function bb2_options(&$engine)
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 
-	$request_uri = $_SERVER['REQUEST_URI'];
-
-	if (!$request_uri)
-	{
-		$request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
-	}
-
 	if ($_POST)
 	{
 		#$_POST = array_map('stripslashes_deep', $_POST);
-
-
 
 		if ($_POST['strict'])
 		{
@@ -700,18 +685,30 @@ function bb2_options(&$engine)
 		</tr>
 
 		<tr class="hl_setting">
-			<td class="label"><label for="logging_verbose">Verbose</label></td>
-			<td><input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked="checked" <?php } ?>/></td>
+			<td class="label">
+				<label for="logging_verbose">Verbose</label>
+			</td>
+			<td>
+				<input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked="checked" <?php } ?>/>
+			</td>
 		</tr>
 
 		<tr class="hl_setting">
-			<td class="label"><label for="logging_normal">Normal (recommended)</label></td>
-			<td><input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked="checked" <?php } ?>/></td>
+			<td class="label">
+				<label for="logging_normal">Normal (recommended)</label>
+			</td>
+			<td>
+				<input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked="checked" <?php } ?>/>
+			</td>
 		</tr>
 
 		<tr class="hl_setting">
-			<td class="label"><label for="logging_false">Do not log (not recommended)</label></td>
-			<td><input type="radio" id="logging_false" name="logging" value="false" <?php if (!$settings['logging']) { ?>checked="checked" <?php } ?>/></td>
+			<td class="label">
+				<label for="logging_false">Do not log (not recommended)</label>
+			</td>
+			<td>
+				<input type="radio" id="logging_false" name="logging" value="false" <?php if (!$settings['logging']) { ?>checked="checked" <?php } ?>/>
+			</td>
 		</tr>
 
 		<tr>
@@ -722,17 +719,23 @@ function bb2_options(&$engine)
 		</tr>
 
 		<tr class="hl_setting">
-			<td class="label"><label for="strict_checking"><strong>Strict checking</strong><br />
-			blocks more spam but may block some people</label></td>
+			<td class="label">
+				<label for="strict_checking"><strong>Strict checking</strong><br />
+				blocks more spam but may block some people</label>
+			</td>
 			<td><input type="checkbox" id="strict_checking" name="strict" value="true" <?php if ($settings['strict']) { ?>checked="checked" <?php } ?>/></td>
 		</tr>
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><label for="offsite_forms"><strong>Allow form postings from other web sites</strong><br />
-			required for OpenID; increases spam received</label></td>
-			<td><input type="checkbox" id="offsite_forms" name="offsite_forms" value="true" <?php if ($settings['offsite_forms']) { ?>checked="checked" <?php } ?>/></td>
+			<td class="label">
+				<label for="offsite_forms"><strong>Allow form postings from other web sites</strong><br />
+				required for OpenID; increases spam received</label>
+			</td>
+			<td>
+				<input type="checkbox" id="offsite_forms" name="offsite_forms" value="true" <?php if ($settings['offsite_forms']) { ?>checked="checked" <?php } ?>/>
+			</td>
 		</tr>
 
 		<tr>
@@ -748,22 +751,34 @@ function bb2_options(&$engine)
 			</td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><label for="httpbl_key">http:BL Access Key</label></td>
-			<td><input type="text" size="12" maxlength="12" id="httpbl_key" name="httpbl_key" value="<?php echo $settings['httpbl_key']; ?>" /></td>
+			<td class="label">
+				<label for="httpbl_key">http:BL Access Key</label>
+			</td>
+			<td>
+				<input type="text" size="12" maxlength="12" id="httpbl_key" name="httpbl_key" value="<?php echo $settings['httpbl_key']; ?>" />
+			</td>
 		</tr>
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><label for="httpbl_threat">Minimum Threat Level (25 is recommended)</label></td>
-			<td><input type="text" size="3" maxlength="3" id="httpbl_threat" name="httpbl_threat" value="<?php echo intval($settings['httpbl_threat']); ?>" /></td>
+			<td class="label">
+				<label for="httpbl_threat">Minimum Threat Level (25 is recommended)</label>
+			</td>
+			<td>
+				<input type="text" size="3" maxlength="3" id="httpbl_threat" name="httpbl_threat" value="<?php echo intval($settings['httpbl_threat']); ?>" />
+			</td>
 		</tr>
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><label for="httpbl_maxage">Maximum Age of Data (30 is recommended)</label></td>
-			<td><input type="text" size="3" maxlength="3" id="httpbl_maxage" name="httpbl_maxage" value="<?php echo intval($settings['httpbl_maxage']); ?>" /></td>
+			<td class="label">
+				<label for="httpbl_maxage">Maximum Age of Data (30 is recommended)</label>
+			</td>
+			<td>
+				<input type="text" size="3" maxlength="3" id="httpbl_maxage" name="httpbl_maxage" value="<?php echo intval($settings['httpbl_maxage']); ?>" />
+			</td>
 		</tr>
 
 		<tr>
@@ -774,9 +789,13 @@ function bb2_options(&$engine)
 		</tr>
 
 		<tr class="hl_setting">
-			<td class="label"><label for="eu_cookie"><strong>EU cookie handling</strong><br />
-			Select this option if you believe Bad Behavior's site security cookie is not exempt from the 2012 EU cookie regulation. <a href="http://bad-behavior.ioerror.us/2012/05/04/eu-cookie-requirement-disclosure/" rel="noreferrer">More info</a></label></td>
-			<td><input type="checkbox" id="eu_cookie" name="eu_cookie" value="true" <?php if ($settings['eu_cookie']) { ?>checked="checked" <?php } ?>/></td>
+			<td class="label">
+				<label for="eu_cookie"><strong>EU cookie handling</strong><br />
+				Select this option if you believe Bad Behavior's site security cookie is not exempt from the 2012 EU cookie regulation. <a href="http://bad-behavior.ioerror.us/2012/05/04/eu-cookie-requirement-disclosure/" rel="noreferrer">More info</a></label>
+			</td>
+			<td>
+				<input type="checkbox" id="eu_cookie" name="eu_cookie" value="true" <?php if ($settings['eu_cookie']) { ?>checked="checked" <?php } ?>/>
+			</td>
 		</tr>
 
 		<tr>
@@ -797,27 +816,41 @@ function bb2_options(&$engine)
 		</tr>
 
 		<tr class="hl_setting">
-			<td class="label"><label for="reverse_proxy">Enable Reverse Proxy</label></td>
-			<td><input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="true" <?php if ($settings['reverse_proxy']) { ?>checked="checked" <?php } ?>/></td>
+			<td class="label">
+				<label for="reverse_proxy">Enable Reverse Proxy</label>
+			</td>
+			<td>
+				<input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="true" <?php if ($settings['reverse_proxy']) { ?>checked="checked" <?php } ?>/>
+			</td>
 		</tr>
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><label for="reverse_proxy_header">Header containing Internet clients' IP address</label></td>
-			<td><input type="text" size="32" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo $settings['reverse_proxy_header']; ?>" /></td>
+			<td class="label">
+				<label for="reverse_proxy_header">Header containing Internet clients' IP address</label>
+			</td>
+			<td>
+				<input type="text" size="32" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo $settings['reverse_proxy_header']; ?>" />
+			</td>
 		</tr>
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><label for="reverse_proxy_addresses">IP address or CIDR format address ranges for your proxy servers (one per line)</label></td>
-			<td><textarea cols="24" rows="6" id="reverse_proxy_addresses" name="reverse_proxy_addresses"><?php echo implode("\n", $settings['reverse_proxy_addresses']); ?></textarea></td>
+			<td class="label">
+				<label for="reverse_proxy_addresses">IP address or CIDR format address ranges for your proxy servers (one per line)</label>
+			</td>
+			<td>
+				<textarea cols="24" rows="6" id="reverse_proxy_addresses" name="reverse_proxy_addresses"><?php echo implode("\n", $settings['reverse_proxy_addresses']); ?></textarea>
+			</td>
 		</tr>
 	</table>
 	<br />
 	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
-	</form>
+<?php
+	echo $engine->form_close();
+?>
 	</div>
 <?php
 }
@@ -825,7 +858,7 @@ function bb2_options(&$engine)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'bb2_options')
 	{
-		$config['ext_bad_behavior']				= (int)$_POST['ext_bad_behavior'];
+		$config['ext_bad_behavior'] = (int)$_POST['ext_bad_behavior'];
 
 		$engine->_set_config($config, '', true);
 
@@ -877,26 +910,27 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 	}
 	else
 	{
-
-	echo $engine->form_open('bb2_options', '', 'post', true, '', 'setting=bb2_options');
+		echo $engine->form_open('bb2_options', '', 'post', true, '', 'setting=bb2_options');
 ?>
-	<br />
-	<input type="hidden" name="action" value="bb2_options" />
+		<br />
+		<input type="hidden" name="action" value="bb2_options" />
 
-	<table class="formation">
-		<tr class="hl_setting">
-			<td class="label"><strong>Enable Bad Behavior:</strong><br />
-				<small>All other settings can be changed in the config folder.</small></td>
-			<td style="width:50%;">
-				<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ( $engine->config['ext_bad_behavior'] ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on">On.</label>
-				<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo ( !$engine->config['ext_bad_behavior'] ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off">Off.</label>
-			</td>
-		</tr>
-	</table>
-	<br />
-	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
-	</form>
+		<table class="formation">
+			<tr class="hl_setting">
+				<td class="label">
+					<strong>Enable Bad Behavior:</strong><br />
+					<small>All other settings can be changed in the config folder.</small>
+				</td>
+				<td style="width:50%;">
+					<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ( $engine->config['ext_bad_behavior'] ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on">On.</label>
+					<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo ( !$engine->config['ext_bad_behavior'] ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off">Off.</label>
+				</td>
+			</tr>
+		</table>
+		<br />
+		<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
 <?php
+		echo $engine->form_close();
 	}
 }
 
