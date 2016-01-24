@@ -222,6 +222,7 @@ switch($bg_type)
 		$bg_fade_pct = 50;
 		break;
 }
+
 // slightly randomise the bg fade
 $bg_fade_pct += $rand_func(-2, 2);
 
@@ -297,8 +298,9 @@ else
 //////////////////////////////////////////////////////
 ////// Functions:
 //////////////////////////////////////////////////////
-function make_seed() {
-// from http://php.net/srand
+function make_seed()
+{
+	// from http://php.net/srand
 	list($usec, $sec) = explode(' ', microtime());
 	return (float) $sec + ((float) $usec * 100000);
 }
@@ -632,9 +634,8 @@ if($bg_type != 0)
 		for($y = 0; $y <= $height; $y += $morph_chunk)
 		{
 			$morph_chunk = $rand_func(1, 5);
-			$morph_x += $rand_func(-1, 1);
+			$morph_x    += $rand_func(-1, 1);
 			ImageCopy($im3, $temp_bg, $morph_x, $y, 0, $y, $width, $morph_chunk);
-
 		}
 	}
 	else
