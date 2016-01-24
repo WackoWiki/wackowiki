@@ -135,6 +135,7 @@ del.diff {
 .usertable {
 	border: 1px none;
 	border-collapse: collapse;
+	background-color: #FFFFFF;
 }
 
 .usertable th {
