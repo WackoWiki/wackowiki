@@ -196,7 +196,15 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			// deleted
 			else if ($page['deleted'])
 			{
-				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
+				if ($page['comment_on_page'])
+				{
+					preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
+				}
+				else
+				{
+					preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
+				}
+
 				echo '<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('NewCommentAdded').'" alt="[deleted]" class="btn-delete"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_cf_lang).' '.$this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1, $_cf_lang).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
 			}
 			// new comment

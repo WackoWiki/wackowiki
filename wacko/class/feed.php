@@ -29,11 +29,14 @@ class Feed
 
 	function write_file($name, $body)
 	{
-		$filename = 'xml/'.$name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->config['site_name'])).'.xml';
+		$file_name = 'xml/'.$name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->config['site_name'])).'.xml';
 
-		file_put_contents($filename, $body);
+		if (is_writable($file_name))
+		{
+			file_put_contents($file_name, $body);
 
-		@chmod($filename, 0644);
+			@chmod($file_name, 0644);
+		}
 	}
 
 	function changes()
