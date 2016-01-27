@@ -157,7 +157,7 @@ if (isset($_POST['submit_poll']))
 		{
 			#$this->use_class('feed');
 			#$xml = new feed($this);
-			#$xml->news();
+			#$xml->feed();
 			unset($xml);
 		}
 		// set confirmation message

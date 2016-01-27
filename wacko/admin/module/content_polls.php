@@ -87,7 +87,7 @@ function admin_content_polls(&$engine, &$module)
 					"votes	= 0 ".
 				"WHERE poll_id = ".(int)$_POST['id']);
 
-			#$xml->news(); // update news feed
+			#$xml->feed(); // update news feed
 			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollReset', $engine->config['language'])));
 		}
 		// activate new survey
@@ -98,7 +98,7 @@ function admin_content_polls(&$engine, &$module)
 					"start = NOW() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
 
-			#$engine->$xml->news(); // update news feed
+			#$engine->$xml->feed(); // update news feed
 			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollStarted', $engine->config['language'])));
 		}
 		// edit/moderate new survey
