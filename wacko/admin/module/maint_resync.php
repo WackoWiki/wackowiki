@@ -147,7 +147,7 @@ $engine->debug_print_r($users);
 
 			if ($engine->config['news_cluster'])
 			{
-				$xml->news();
+				$xml->feed();
 			}
 
 			$engine->log(1, 'Synchronized RSS feeds');

@@ -113,7 +113,7 @@ if ($this->is_admin() ||
 
 				if (preg_match('/'.$this->config['news_cluster'].'\/.+?\/.+/', $this->tag))
 				{
-					$xml->news();
+					$xml->feed();
 				}
 			}
 
