@@ -343,6 +343,7 @@ $wacko_translation = array(
 	'NotOwnerAndCanDelete'		=> 'Вы не владеете этой страницей и поэтому не можете удалить её',
 
 	// remove
+	'RemovePage'				=> 'Remove page',
 	'RemoveRevisions'			=> 'Удалить все редакции страницы',
 	'RemoveCluster'				=> 'Удалить все страницы кластера',
 	'RemoveDontKeep'			=> 'Не сохранять копию удаленной страницы и комментариев',
@@ -490,6 +491,7 @@ $wacko_translation = array(
 	'SortCommentAsc'			=> 'Most recent on bottom',
 	'SortCommentDesc'			=> 'Most recent on top',
 
+	'RenamePage'				=> 'Переименовать страницу',
 	'RenameText'				=> 'Переименовать',
 	'RenameTip'					=> 'Переименовать страницу',
 	'NewName'					=> 'Введите новое имя для этой страницы',
@@ -716,6 +718,7 @@ $wacko_translation = array(
 	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
+	'UploadFiles'				=> 'Upload files',
 	'UploadFor'					=> 'Загрузка файла',
 	'UploadButtonText'			=> 'Загрузить',
 	'UploadGlobalText'			=> 'будет доступен всем посетителям',
