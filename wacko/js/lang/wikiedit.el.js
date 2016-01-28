@@ -1,7 +1,7 @@
 lang = {
 	// wikiedit.js
 	HelpAbout:				"Help & About",
-	HelpFormatting :		"οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½",
+	HelpFormatting :		"Βοήθεια",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
 	
