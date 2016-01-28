@@ -354,6 +354,7 @@ $wacko_translation = array(
 	'NotOwnerAndCanDelete'		=> 'You aren\'t owner of this page and can\'t delete it',
 
 	// remove
+	'RemovePage'				=> 'Remove page',
 	'RemoveRevisions'			=> 'Remove all Revisions',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
@@ -501,6 +502,7 @@ $wacko_translation = array(
 	'SortCommentAsc'			=> 'Most recent on bottom',
 	'SortCommentDesc'			=> 'Most recent on top',
 
+	'RenamePage'				=> 'Rename page',
 	'RenameText'				=> 'Rename',
 	'RenameTip'					=> 'Rename page',
 	'NewName'					=> 'Enter new name for this page',
@@ -728,6 +730,7 @@ $wacko_translation = array(
 	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
+	'UploadFiles'				=> 'Upload files',
 	'UploadFor'					=> 'File upload',
 	'UploadButtonText'			=> 'Proceed',
 	'UploadGlobalText'			=> 'for public access',
