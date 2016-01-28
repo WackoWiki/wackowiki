@@ -5,13 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-
-<h3><?php echo str_replace('%1', $this->compose_link_to_page($this->tag, '', '', 0), $this->get_translation('PropertiesFor')); ?></h3>
-
-<?php
-
 // redirect to show method if page don't exists
 if (!$this->page)
 {
@@ -28,6 +21,13 @@ else if ($this->forum === true && !$this->is_admin())
 {
 	$this->redirect($this->href());
 }
+
+?>
+<div id="page">
+
+<h3><?php echo str_replace('%1', $this->compose_link_to_page($this->tag, '', '', 0), $this->get_translation('PropertiesFor')); ?></h3>
+
+<?php
 
 if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {

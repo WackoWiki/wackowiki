@@ -53,6 +53,7 @@ if ($this->has_access('read'))
 			#$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
 			$message = 'BACKUP of deleted page!'; // TODO: localize and add description: to restore the page you ...
 			$message .= '<br />';
+
 			if ($this->is_admin())
 			{
 				$message .= $this->form_open('restore_page', 'edit');

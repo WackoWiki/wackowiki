@@ -5,10 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-<?php
-
 $is_global		= '';
 $is_image		= '';
 $message		= '';
@@ -25,6 +21,12 @@ if ($this->page['comment_on_id'])
 {
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
 }
+
+?>
+<div id="page">
+<h3><?php echo $this->get_translation('UploadFiles'); ?></h3>
+<br />
+<?php
 
 // check who u are, can u upload?
 if ($this->can_upload() === true)

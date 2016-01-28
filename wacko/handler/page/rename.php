@@ -5,14 +5,17 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page"><?php
-
 // redirect to show method if page don't exists
 if (!$this->page)
 {
 	$this->redirect($this->href('show'));
 }
+
+?>
+<div id="page">
+<h3><?php echo $this->get_translation('RenamePage').' '.$this->compose_link_to_page($this->tag, '', '', 0); ?></h3>
+<br />
+<?php
 
 // deny for comment
 if ($this->page['comment_on_id'])
