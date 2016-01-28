@@ -52,5 +52,5 @@ lang = {
 							' Ctrl+Shift+O - Ordered List\n'+
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
-							' NB: all Alt-shortcuts do not work in Opera.\n',
+							' \n',
 };

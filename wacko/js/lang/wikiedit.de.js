@@ -52,5 +52,5 @@ lang = {
 							' Strg+Umschalt+O - Geordnete Liste\n'+
 							' Strg+= - Kleiner Text\n'+
 							' Strg+Umschalt+Minus - Horizontale Line\n'+
-							' NB: Alle Alt-Tastenkürzel funktionieren nicht in Opera.\n',
+							' \n',
 };

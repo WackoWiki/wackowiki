@@ -1,7 +1,7 @@
 lang = {
 	// wikiedit.js
 	HelpAbout:				"Help & About",
-	HelpFormatting :		"Βοήθεια",
+	HelpFormatting :		"οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
 	
@@ -52,6 +52,6 @@ lang = {
 							' Ctrl+Shift+O - Ordered List\n'+
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
-							' NB: all Alt-shortcuts do not work in Opera.\n',
+							' \n',
 
 };
