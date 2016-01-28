@@ -228,7 +228,7 @@ else
 		$this->href('properties'),
 		$this->get_translation('PropertiesTip'),
 		($this->forum === false && $this->page && ($this->is_owner()) || $this->is_admin()) ? $this->get_translation('PropertiesText') : '',
-		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
+		$this->method == 'properties',
 		1,
 		'',
 		's');

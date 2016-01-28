@@ -5,10 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-<?php
-
 $comment_on_id	= '';
 $dontkeep		= '';
 $message		= '';
@@ -18,6 +14,12 @@ if (!$this->page)
 {
 	$this->redirect($this->href());
 }
+
+?>
+<div id="page">
+<h3><?php echo $this->get_translation('RemovePage').' '.$this->compose_link_to_page($this->tag, '', '', 0); ?></h3>
+<br />
+<?php
 
 // check user permissions to delete
 if ($this->is_admin() ||
@@ -47,7 +49,7 @@ if ($this->is_admin() ||
 		}
 
 		$message .= '<b>'.$this->tag."</b>\n";
-		$message .= '<ol>';
+		$message .= "<ol>\n";
 
 		// Remove page
 		if ($this->remove_referrers($this->tag))

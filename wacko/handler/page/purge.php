@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 ?>
 <div id="page">
-<h3><?php echo $this->get_translation('PurgePage') ?> <?php echo $this->compose_link_to_page($this->tag, '', '', 0) ?></h3>
+<h3><?php echo $this->get_translation('PurgePage').' '.$this->compose_link_to_page($this->tag, '', '', 0); ?></h3>
 <?php
 
 // redirect to show method if page don't exists
