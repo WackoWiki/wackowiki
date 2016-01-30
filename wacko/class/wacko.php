@@ -2472,6 +2472,7 @@ class Wacko
 			}
 		}
 	}
+
 	function get_cookie($name)
 	{
 		if (isset($_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']]))
