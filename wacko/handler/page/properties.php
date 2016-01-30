@@ -391,9 +391,9 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			'<li class="m-referrers"><a href="'.$this->href('referrers').'">'.$icon.$this->get_translation('SettingsReferrers').'</a></li>'.
 			'<li class="'.($this->is_watched === true ? 'watch-off' : 'watch-on').'"><a href="'.$this->href('watch').'">'.$icon.($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')).'</a></li>'.
 			'<li class="m-print"><a href="'.$this->href('print').'">'.$icon.$this->get_translation('SettingsPrint').'</a></li>'.
-			'<li class="m-word"><a href="'.$this->href('wordprocessor').'">'.$icon.$this->get_translation('SettingsWordprocessor').'</a></li>'.
+	#		'<li class="m-word"><a href="'.$this->href('wordprocessor').'">'.$icon.$this->get_translation('SettingsWordprocessor').'</a></li>'.
 	#		'<li class="m-latex"><a href="'.$this->href('latex').'">'.$icon.$this->get_translation('SettingsLatex').'</a></li>'.
-			'<li class="m-xml"><a href="'.$this->href('export.xml').'">'.$icon.$this->get_translation('SettingsXML').'</a></li>'.
+	#		'<li class="m-xml"><a href="'.$this->href('export.xml').'">'.$icon.$this->get_translation('SettingsXML').'</a></li>'.
 		'</ul>'.
 	'</aside>';
 }
