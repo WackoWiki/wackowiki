@@ -436,7 +436,6 @@ $wacko_translation = array(
 	'WrongPassword' => 'Forkert password!',
 	'AlreadyRegistered' => 'Er du allerede registreret kan du logge ind her!',
 	'YourLogin' => 'Dit WikiNavn',
-	'Password' => 'Password (5+ karakterer)',
 	'StuffYouNeed' => 'Information som du skal angive når du logger ind første gang',
 	'ConfirmPassword' => 'Bekræft password',
 	'Email' => 'Emailadresse',

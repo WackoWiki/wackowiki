@@ -436,7 +436,6 @@ $wacko_translation = array(
 	'WrongPassword' => 'Nieprawid³owe has³o!',
 	'AlreadyRegistered' => 'Zaloguj siê!',
 	'YourLogin' => 'Twoja NazwaWiki',
-	'Password' => 'Has³o (min. 5 znaków)',
 	'StuffYouNeed' => 'Musisz wype³niæ jedynie, kiedy logujesz siê za pierwszym razem (i w ten sposób zapisuj±c siê jako nowy u¿ytkownik na tej stronie).',
 	'ConfirmPassword' => 'Potwierd¼ has³o',
 	'Email' => 'Adres e-mail',

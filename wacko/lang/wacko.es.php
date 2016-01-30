@@ -436,7 +436,6 @@ $wacko_translation = array(
 	'WrongPassword' => 'Contraseña erronea!',
 	'AlreadyRegistered' => 'Ya estás registrado, conectate aqui!',
 	'YourLogin' => 'Tu login (WikiName)',
-	'Password' => 'Contraseña (5+ letras)',
 	'StuffYouNeed' => 'Datos que tienes que introducir únicamente cuando te registras en este Wiki.',
 	'ConfirmPassword' => 'Confirmar contraseña',
 	'Email' => 'Email',

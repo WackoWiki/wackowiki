@@ -436,7 +436,6 @@ $wacko_translation = array(
 	'WrongPassword' => 'Verkeerd wachtwoord!',
 	'AlreadyRegistered' => 'Als u een geregistreerde gebruiker ben, kunt u hier inloggen!',
 	'YourLogin' => 'Uw wikinaam',
-	'Password' => 'Wachtwoord (5+ tekens)',
 	'StuffYouNeed' => 'Wat u moet invullen als u voor het eerst inlogt (en dus aanmeldt als een nieuwe gebruiker op deze site).',
 	'ConfirmPassword' => 'Bevestig het wachtwoord',
 	'Email' => 'Email adres',

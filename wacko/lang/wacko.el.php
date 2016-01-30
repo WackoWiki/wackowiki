@@ -436,7 +436,6 @@ $wacko_translation = array(
 	'WrongPassword' => 'Λανθασμένο συνθηματικό!',
 	'AlreadyRegistered' => 'Αν είστε ήδη εγγεγραμμένος χρήστης, συνδεθείτε εδώ!',
 	'YourLogin' => 'Το WikiName',
-	'Password' => 'Συνθηματικό (5+ χαρακτήρες)',
 	'StuffYouNeed' => 'Stuff you only need to fill in when you\'re logging in for the first time (and thus signing up as a new user on this site).',
 	'ConfirmPassword' => 'Επιβεβαίωση συνθηματικού',
 	'Email' => 'Διεύθυνση Ηλεκτρονικού Ταχυδρομείου',
