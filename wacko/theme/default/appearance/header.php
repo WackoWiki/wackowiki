@@ -218,7 +218,7 @@ else
 		$this->href('revisions'),
 		$this->get_translation('RevisionTip'),
 		($this->forum === false && $this->page && $this->has_access('read') && $this->hide_revisions === false ) ? $this->get_translation('RevisionText') : '',
-		$this->method == 'revisions' || $this->method == 'diff',
+		$this->method == 'revisions',
 		1,
 		'',
 		'r');
