@@ -10,6 +10,9 @@ if ($text == '') return;
 // remove tags <br />
 $text = str_replace('<br />', '', $text);
 
+// remove diff type navigation
+$text = preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $text);
+
 // convert links to pages in the format "Description (URL)"
 $text = preg_replace('/<a .*?href="(http:\/\/.*?)" class="".*?>(.*?)<\/a>/', '$2 ($1)', $text);
 

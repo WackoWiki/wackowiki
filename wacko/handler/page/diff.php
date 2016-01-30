@@ -79,10 +79,11 @@ if ($this->has_access('read'))
 			$output .=
 			str_replace('%1', '<a href="'.$this->href('', '', ($b != -1 ? 'revision_id='.$page_a['revision_id'] : '')).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
 			str_replace('%2', '<a href="'.$this->href('', '', ($a != -1 ? 'revision_id='.$page_b['revision_id'] : '')).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
-			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
+			str_replace('%3', $this->compose_link_to_page($this->tag, '', '', 0),
 			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div>\n";
 
 			$output .=
+			'<!--nomail-->'.
 			'<ul class="menu">'.
 				'<li><a href="'.$this->href('diff', '', 'diffmode=0'.'&amp;a='.$a.'&amp;b='.$b).'">'.$this->get_translation('FullDiff').'</a></li>'.
 				($source === true
@@ -91,7 +92,8 @@ if ($this->has_access('read'))
 					:	'<li class="active">'.$this->get_translation('SimpleDiff').'</li>'.
 						'<li><a href="'.$this->href('diff', '', 'diffmode=2'.'&amp;a='.$a.'&amp;b='.$b).'">'.$this->get_translation('SourceDiff').'</a></li>'
 					).
-			'</ul>';
+			'</ul>'.
+			'<!--/nomail-->';
 
 			if ($added)
 			{
