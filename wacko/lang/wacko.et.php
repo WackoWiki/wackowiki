@@ -436,7 +436,6 @@ $wacko_translation = array(
 	'WrongPassword' => 'Vale parool!',
 	'AlreadyRegistered' => 'Kui sa oled juba registreerunud, logi siit sisse!',
 	'YourLogin' => 'Sinu WikiNimi',
-	'Password' => 'Parool (vähemalt 5 tähemärki)',
 	'StuffYouNeed' => 'Asjad mis sa pead ära täitma, kui logid sisse esimest korda (seetõttu registreerud kui esmakordne kasutaja).',
 	'ConfirmPassword' => 'Korda parooli',
 	'Email' => 'E-posti aadress',

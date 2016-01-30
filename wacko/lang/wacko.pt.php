@@ -436,7 +436,6 @@ $wacko_translation = array(
 	'WrongPassword'				=> 'Password errada!',
 	'AlreadyRegistered'			=> 'Se já é um utilizador registado, faça aqui o seu login!',
 	'YourLogin'					=> 'O seu username',
-	'Password'					=> 'Password (5+ caracteres)',
 	'StuffYouNeed'				=> 'Coisas que só precisa de inserir na primeira vez que faz login (e assim registando-se como novo utilizador neste site).',
 	'ConfirmPassword'			=> 'Confirme password',
 	'Email'						=> 'Email',

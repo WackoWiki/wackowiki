@@ -436,7 +436,6 @@ $wacko_translation = array(
 	'WrongPassword'				=> 'Password non corretta!',
 	'AlreadyRegistered'			=> 'Se sei un utente già registrato, connettiti da qui!',
 	'YourLogin'					=> 'Il tuo NomeWiki',
-	'Password'					=> 'Password (almeno 6 caratteri)',
 	'StuffYouNeed'				=> 'Se ti stai connettendo per la prima volta, compila solo quello che serve (e diventa un nuovo utente del sito).',
 	'ConfirmPassword'			=> 'Conferma password',
 	'Email'						=> 'Indirizzo email',
