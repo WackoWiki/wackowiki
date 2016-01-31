@@ -234,34 +234,34 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 {
 	global $config_global, $dblink_global, $lang_global;
 
-	$page_select				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag='".$tag."'";
-	$owner_id					= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
+	$page_select			= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag='".$tag."'";
+	$owner_id				= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
 	// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
-	$page_insert				= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', '', '', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
+	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('".$tag."', '".translit($tag, $lang)."', '".$title."' , '".$body."', '', '', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lang."', '0', '0', '0', '".$noindex."')";
 
-	$page_id					= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
+	$page_id				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
 
-	$perm_read_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'read', '*')";
-	$perm_write_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'write', '".$rights."')";
-	$perm_comment_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'comment', '$')";
-	$perm_create_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'create', '$')";
-	$perm_upload_insert			= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'upload', '')";
+	$perm_read_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'read', '*')";
+	$perm_write_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'write', '".$rights."')";
+	$perm_comment_insert	= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'comment', '$')";
+	$perm_create_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'create', '$')";
+	$perm_upload_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'upload', '')";
 
-	$default_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
-	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
+	$default_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
+	#$site_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 
-	$insert_data[]	= array($page_insert,			$lang_global['ErrorInsertingPage']);
-	$insert_data[]	= array($perm_read_insert,		$lang_global['ErrorInsertingPageReadPermission']);
-	$insert_data[]	= array($perm_write_insert,		$lang_global['ErrorInsertingPageWritePermission']);
-	$insert_data[]	= array($perm_comment_insert,	$lang_global['ErrorInsertingPageCommentPermission']);
-	$insert_data[]	= array($perm_create_insert,	$lang_global['ErrorInsertingPageCreatePermission']);
-	$insert_data[]	= array($perm_upload_insert,	$lang_global['ErrorInsertingPageUploadPermission']);
+	$insert_data[]			= array($page_insert,			$lang_global['ErrorInsertingPage']);
+	$insert_data[]			= array($perm_read_insert,		$lang_global['ErrorInsertingPageReadPermission']);
+	$insert_data[]			= array($perm_write_insert,		$lang_global['ErrorInsertingPageWritePermission']);
+	$insert_data[]			= array($perm_comment_insert,	$lang_global['ErrorInsertingPageCommentPermission']);
+	$insert_data[]			= array($perm_create_insert,	$lang_global['ErrorInsertingPageCreatePermission']);
+	$insert_data[]			= array($perm_upload_insert,	$lang_global['ErrorInsertingPageUploadPermission']);
 
 	if($is_menu)
 	{
-		$insert_data[]	= array($default_menu_item,		$lang_global['ErrorInsertingDefaultMenuItem']);
+		$insert_data[]		= array($default_menu_item,		$lang_global['ErrorInsertingDefaultMenuItem']);
 	}
 
 	switch($config_global['database_driver'])
