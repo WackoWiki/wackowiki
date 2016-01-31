@@ -9,8 +9,8 @@ if (!defined('IN_WACKO'))
 <div id="page">
 <?php
 
-$output = '';
-$source = '';
+$output		= '';
+$source		= '';
 
 if (!function_exists('handler_diff_load_page_by_id'))
 {
@@ -127,35 +127,35 @@ if ($this->has_access('read'))
 			// load pages
 
 			// extract text from bodies
-			$text_a = $page_a['body'];
-			$text_b = $page_b['body'];
+			$text_a		= $page_a['body'];
+			$text_b		= $page_b['body'];
 
-			$side_a = new Side($text_a);
-			$side_b = new Side($text_b);
+			$side_a		= new Side($text_a);
+			$side_b		= new Side($text_b);
 
-			$body_a = '';
+			$body_a		= '';
 			$side_a->split_file_into_words($body_a);
 
-			$body_b = '';
+			$body_b		= '';
 			$side_b->split_file_into_words($body_b);
 
 			// diff on these two file
-			$diff = new Diff(explode("\n", $body_a), explode("\n", $body_b));
+			$diff		= new Diff(explode("\n", $body_a), explode("\n", $body_b));
 
 			// format output
 			$fmt = new DiffFormatter();
 
 			$side_o = new Side($fmt->format($diff));
 
-			$resync_left = 0;
-			$resync_right = 0;
+			$resync_left	= 0;
+			$resync_right	= 0;
 
 			$count_total_right = $side_b->getposition();
 
 			$side_a->init();
 			$side_b->init();
 
-			$output = '';
+			$output			= '';
 
 			while (1)
 			{
@@ -168,8 +168,8 @@ if ($this->has_access('read'))
 
 				if ($side_o->decode_directive_line())
 				{
-					$argument = $side_o->getargument();
-					$letter = $side_o->getdirective();
+					$argument	= $side_o->getargument();
+					$letter		= $side_o->getdirective();
 
 					switch ($letter)
 					{
@@ -190,7 +190,7 @@ if ($this->has_access('read'))
 					}
 
 					$side_a->skip_until_ordinal($resync_left);
-					$side_b->copy_until_ordinal($resync_right,$output);
+					$side_b->copy_until_ordinal($resync_right, $output);
 
 					if ($letter == 'd' || $letter == 'c')
 					{
@@ -198,7 +198,7 @@ if ($this->has_access('read'))
 						$side_a->copy_whitespace($output);
 						$output .= '<!--markup:1:begin-->';
 						$side_a->copy_word($output);
-						$side_a->copy_until_ordinal($argument[1],$output);
+						$side_a->copy_until_ordinal($argument[1], $output);
 						$output .= '<!--markup:1:end-->';
 					}
 
@@ -208,13 +208,13 @@ if ($this->has_access('read'))
 						$side_b->copy_whitespace($output);
 						$output .= '<!--markup:2:begin-->';
 						$side_b->copy_word($output);
-						$side_b->copy_until_ordinal($argument[3],$output);
+						$side_b->copy_until_ordinal($argument[3], $output);
 						$output .= '<!--markup:2:end-->';
 					}
 				}
 			}
 
-			$side_b->copy_until_ordinal($count_total_right,$output);
+			$side_b->copy_until_ordinal($count_total_right, $output);
 			$side_b->copy_whitespace($output);
 			$out = $this->format($output);
 
