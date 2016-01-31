@@ -277,7 +277,7 @@ class Cache
 		}
 	}
 
-	//Check http-request. May be, output cached version.
+	// Check http-request. May be, output cached version.
 	function check_http_request($page, $method)
 	{
 		if (!$page)
@@ -316,6 +316,8 @@ class Cache
 		}
 
 		$this->log('check_http_request query='.$query);
+
+		clearstatcache();
 
 		// check cache
 		if ($mtime = $this->get_cached_time($page, $method, $query))
@@ -380,29 +382,6 @@ class Cache
 		$this->query	= $query;
 
 		return true;
-	}
-
-	function output()
-	{
-		clearstatcache();
-
-		if (!($mtime = $this->get_cached_time($this->page, $this->method, $this->query)))
-		{
-			$mtime = time();
-		}
-
-		$gmt		= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-		$result		= &$this->result;
-
-		header ('Last-Modified: '.$gmt);
-		header ('ETag: "'.$gmt.'"');
-		header ('Content-Type: text/xml');
-		//header ('Content-Length: '.strlen($res));
-		//header ('Cache-Control: max-age=0');
-		//header ('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time()));
-
-		echo $result;
-		die();
 	}
 
 	function get_micro_time()
