@@ -11,14 +11,14 @@ class Cache
 	var $cache_dir	= '_cache/';
 	var $debug		= 0;
 
-	//Constructor
+	// Constructor
 	function __construct($cache_dir, $cache_ttl, $debug)
 	{
 		$this->cache_dir	= $cache_dir;
 		$this->cache_ttl	= $cache_ttl;
 		$this->debug		= $debug;
 		$this->timer		= $this->get_micro_time();
-		$this->charset		= 'windows-1252';
+		#$this->charset		= 'windows-1252';
 		#$this->charset		= $this->engine->languages[$this->engine->config['language']]['charset'];
 		#$this->lang		= $this->engine->languages[$this->engine->config['language']]['charset'];
 	}
@@ -63,7 +63,7 @@ class Cache
 		return unserialize($data);
 	}
 
-	//Invalidate the SQL cache
+	// Invalidate the SQL cache
 	function invalidate_sql_cache($ttl='')
 	{
 		// delete from fs
@@ -110,6 +110,7 @@ class Cache
 		if ((time() - ($timestamp = @filemtime($file_name))) > $this->cache_ttl)
 		{
 			unlink($file_name);
+
 			return false;
 		}
 
@@ -119,6 +120,7 @@ class Cache
 		if (empty($size))
 		{
 			unlink($file_name);
+
 			return false;
 		}
 
@@ -126,6 +128,7 @@ class Cache
 		if(($contents = fread($fp, $size)) === '')
 		{
 			unlink($file_name);
+
 			return false;
 		}
 
@@ -148,7 +151,7 @@ class Cache
 		return $file_name;
 	}
 
-	//Get timestamp of content from cache
+	// Get timestamp of content from cache
 	function get_cached_time($page, $method, $query)
 	{
 		$file_name = $this->construct_id($page, $method, $query);
@@ -166,7 +169,7 @@ class Cache
 		return @filemtime($file_name);
 	}
 
-	//Store page content to cache
+	// Store page content to cache
 	function store_page_cache($data, $page = false, $method = false, $query = false)
 	{
 		if (!$page)
@@ -202,7 +205,7 @@ class Cache
 		return true;
 	}
 
-	//Invalidate the page cache
+	// Invalidate the page cache
 	function invalidate_page_cache($page)
 	{
 		if ($this->wacko)
@@ -314,7 +317,7 @@ class Cache
 
 		$this->log('check_http_request query='.$query);
 
-		//check cache
+		// check cache
 		if ($mtime = $this->get_cached_time($page, $method, $query))
 		{
 			$this->log('check_http_request incache mtime='.$mtime);
@@ -335,21 +338,22 @@ class Cache
 				else if ($etag && $gmt != trim($etag, '\"'));
 				else
 				{
-					header ("HTTP/1.1 304 Not Modified");
+					header ('HTTP/1.1 304 Not Modified');
 					die();
 				}
 
 				// HTTP header with right Charset settings
-				header('Content-Type: text/html; charset='.$this->charset);
+				// TODO: How to determine the right charset in advance?
+				#header('Content-Type: text/html; charset='.$this->charset);
 
 				$cached_page = $this->get_page_cached($page, $method, $query);
 
-				header ("Last-Modified: ".$gmt);
-				header ("ETag: \"".$gmt."\"");
-				//header ("Content-Type: text/xml");
-				//header ("Content-Length: ".strlen($cached));
-				//header ("Cache-Control: max-age=0");
-				//header ("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time()));
+				header ('Last-Modified: '.$gmt);
+				header ('ETag: "'.$gmt.'"');
+				//header ('Content-Type: text/xml');
+				//header ('Content-Length: '.strlen($cached));
+				//header ('Cache-Control: max-age=0');
+				//header ('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time()));
 
 				echo $cached_page;
 
@@ -370,10 +374,11 @@ class Cache
 			}
 		}
 
-		//We have no valid cached page
+		// We have no valid cached page
 		$this->page		= $page;
 		$this->method	= $method;
 		$this->query	= $query;
+
 		return true;
 	}
 
@@ -386,22 +391,24 @@ class Cache
 			$mtime = time();
 		}
 
-		$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-		$res = &$this->result;
-		header ("Last-Modified: ".$gmt);
-		header ("ETag: \"".$gmt."\"");
-		header ("Content-Type: text/xml");
-		//header ("Content-Length: ".strlen($res));
-		//header ("Cache-Control: max-age=0");
-		//header ("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time()));
+		$gmt		= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
+		$result		= &$this->result;
 
-		echo $res;
+		header ('Last-Modified: '.$gmt);
+		header ('ETag: "'.$gmt.'"');
+		header ('Content-Type: text/xml');
+		//header ('Content-Length: '.strlen($res));
+		//header ('Cache-Control: max-age=0');
+		//header ('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time()));
+
+		echo $result;
 		die();
 	}
 
 	function get_micro_time()
 	{
 		list($usec, $sec) = explode(' ', microtime());
+
 		return ((float)$usec + (float)$sec);
 	}
 

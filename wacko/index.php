@@ -56,6 +56,7 @@ if ($init->is_locked() === true || RECOVERY_MODE)
 // misc
 $init->request();
 $init->session();
+$init->http_security_headers();
 
 // engine start
 $cache	= $init->cache();
