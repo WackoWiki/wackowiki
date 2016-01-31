@@ -575,6 +575,7 @@ class Init
 		if ($this->cache == false || $op == false)
 		{
 			require($this->config['class_path'].'/cache.php');
+
 			return $this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
 		}
 		else if ($this->cache == true && $op == 'check')
@@ -680,6 +681,38 @@ class Init
 		else
 		{
 			return false;
+		}
+	}
+
+	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
+	//		Content-Security-Policy:
+	//		Strict-Transport-Security:
+	function http_security_headers()
+	{
+		if ($this->config['enable_security_headers'])
+		{
+			if ( !headers_sent() )
+			{
+				if (isset($this->config['csp']))
+				{
+					if ($this->config['csp'] == 1)
+					{
+						// http://www.w3.org/TR/CSP2/
+						header( "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;" );
+					}
+					else if ($this->config['csp'] == 2)
+					{
+						$csp_custom = str_replace(array("\r", "\n", "\t"), '', CSP_CUSTOM);
+
+						header( $csp_custom );
+					}
+				}
+
+				if ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] != 'off' ) )
+				{
+					header( 'Strict-Transport-Security: max-age=7776000' );
+				}
+			}
 		}
 	}
 

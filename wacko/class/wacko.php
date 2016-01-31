@@ -2579,38 +2579,6 @@ class Wacko
 		}
 	}
 
-	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
-	//		Content-Security-Policy:
-	//		Strict-Transport-Security:
-	function http_security_headers()
-	{
-		if ($this->config['enable_security_headers'])
-		{
-			if ( !headers_sent() )
-			{
-				if (isset($this->config['csp']))
-				{
-					if ($this->config['csp'] == 1)
-					{
-						// http://www.w3.org/TR/CSP2/
-						header( "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;" );
-					}
-					else if ($this->config['csp'] == 2)
-					{
-						$csp_custom = str_replace(array("\r", "\n", "\t"), '', CSP_CUSTOM);
-
-						header( $csp_custom );
-					}
-				}
-
-				if ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] != 'off' ) )
-				{
-					header( 'Strict-Transport-Security: max-age=7776000' );
-				}
-			}
-		}
-	}
-
 	// disable caching
 	//		$client_only - client-side caching
 	function no_cache($client_only = true)
@@ -6286,8 +6254,6 @@ class Wacko
 		{
 			header('Last-Modified: '.gmdate('D, d M Y H:i:s', strtotime($this->page['modified']) + 120).' GMT');
 		}
-
-		$this->http_security_headers();
 
 		// check page watching
 		if ($user && $this->page)

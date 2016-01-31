@@ -57,6 +57,7 @@ if ($init->is_locked('lock_ap') === true)
 
 // misc
 $init->session();
+$init->http_security_headers();
 
 // engine start
 $cache	= $init->cache();
@@ -66,8 +67,6 @@ if (!empty($init->config['ext_bad_behavior']))
 {
 	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 }
-
-$engine->http_security_headers();
 
 // redirect, send them home [disable for recovery mode!]
 if (!$engine->is_admin() && !RECOVERY_MODE)
