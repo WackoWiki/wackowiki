@@ -2247,8 +2247,9 @@ class Wacko
 			$_GET['a']			= -1;
 			$_GET['b']			= $page['revision_id'];
 			$_GET['diffmode']	= 1;
-			$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops', array('source' => 1));
 
+			// 2 - source diff
+			$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops', array('source' => 2));
 			$object_id			= $page_id;
 		}
 		else if ($comment_on_id)
