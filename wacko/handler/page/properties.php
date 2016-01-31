@@ -215,27 +215,50 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		if ($this->is_owner() || $this->is_admin())
 		{
 			echo	'<tr class="lined">'.
-						'<th class="form_left" scope="row"><label for="title">'.$this->get_translation('MetaTitle').'</label></th>'.
-						'<td class="form_right"><input type="text" id="title" name="title" value="'.$this->page['title'].'" size="60" maxlength="100" /></td>'.
-					"</tr>\n".'<tr class="lined">'.
-						'<th class="form_left" scope="row"><label for="keywords">'.$this->get_translation('MetaKeywords').'</label></th>'.
-						'<td class="form_right"><textarea id="keywords" name="keywords" rows="4" cols="51">'.$this->page['keywords'].'</textarea></td>'.
-					"</tr>\n".'<tr class="lined">'.
-						'<th class="form_left" scope="row"><label for="description">'.$this->get_translation('MetaDescription').'</label></th>'.
-						'<td class="form_right"><textarea id="description" name="description" rows="4" cols="51">'.$this->page['description'].'</textarea></td>'.
-					"</tr>\n".'<tr class="lined">'.
-						'<th class="form_left" scope="row"><label for="menu_tag">'.$this->get_translation('SetMenuLabel').'</label></th>'.
-						'<td class="form_right"><input type="text" id="menu_tag" name="menu_tag" value="'.(isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '').'" size="60" maxlength="100" /></td>'.
+						'<th class="form_left" scope="row">
+							<label for="title">'.$this->get_translation('MetaTitle').'</label>
+						</th>'.
+						'<td class="form_right">
+							<input type="text" id="title" name="title" value="'.$this->page['title'].'" size="60" maxlength="100" />
+						</td>'.
+					"</tr>\n".
+					'<tr class="lined">'.
+						'<th class="form_left" scope="row">
+							<label for="keywords">'.$this->get_translation('MetaKeywords').'</label>
+						</th>'.
+						'<td class="form_right">
+							<textarea id="keywords" name="keywords" rows="4" cols="51">'.$this->page['keywords'].'</textarea>
+						</td>'.
+					"</tr>\n".
+					'<tr class="lined">'.
+						'<th class="form_left" scope="row">
+							<label for="description">'.$this->get_translation('MetaDescription').'</label>
+						</th>'.
+						'<td class="form_right">
+							<textarea id="description" name="description" rows="4" cols="51">'.$this->page['description'].'</textarea>
+						</td>'.
+					"</tr>\n".
+					'<tr class="lined">'.
+						'<th class="form_left" scope="row">
+							<label for="menu_tag">'.$this->get_translation('SetMenuLabel').'</label>
+						</th>'.
+						'<td class="form_right">
+							<input type="text" id="menu_tag" name="menu_tag" value="'.(isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '').'" size="60" maxlength="100" />
+						</td>'.
 
 			/*		"</tr>\n".'<tr class="lined">'.
-						'<th class="form_left" scope="row"><label for="show_menu_tag">'.$this->get_translation('SetShowMenuLabel').'</label></th>'.
+						'<th class="form_left" scope="row">
+							<label for="show_menu_tag">'.$this->get_translation('SetShowMenuLabel').'</label>
+						</th>'.
 						'<td class="form_right">'.
 							'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" '.( $this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_on">'.$this->get_translation('MetaOn')."</label>".
 							'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" '.( !$this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_off">'.$this->get_translation('MetaOff')."</label>".
 						"</td>". */
 
 					"</tr>\n".'<tr class="lined">'.
-						'<th class="form_left" scope="row"><label for="page_lang">'.$this->get_translation('SetLang').'</label></th>'.
+						'<th class="form_left" scope="row">
+							<label for="page_lang">'.$this->get_translation('SetLang').'</label>
+						</th>'.
 						'<td class="form_right">'.
 							'<select id="page_lang" name="page_lang">';
 
@@ -263,7 +286,9 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			if ($this->config['allow_themes_per_page'] == true)
 			{
 				echo	'<tr class="lined">'."\n".
-							'<th class="form_left" scope="row"><label for="theme">'.$this->get_translation('ChooseTheme')."</label></th>\n".
+							'<th class="form_left" scope="row">'.
+								'<label for="theme">'.$this->get_translation('ChooseTheme')."</label>".
+							"</th>\n".
 							'<td class="form_right">'.
 								'<select id="theme" name="theme">'."\n".
 									'<option value="">--</option>';
@@ -295,46 +320,56 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->get_translation('MetaTitle')."</th>";
 						'<td class="form_right">'.$this->page['title']."</td>";
-					"</tr>\n".'<tr class="lined">';
+					"</tr>\n".
+					'<tr class="lined">';
 						'<th class="form_left" scope="row">'.$this->get_translation('MetaKeywords')."</th>";
 						'<td class="form_right">'.$this->page['keywords']."</td>";
-					"</tr>\n".'<tr class="lined">';
+					"</tr>\n".
+					'<tr class="lined">';
 						'<th class="form_left" scope="row">'.$this->get_translation('MetaDescription')."</th>";
 						'<td class="form_right">'.$this->page['description']."</td>";
-					"</tr>\n".'<tr class="lined">';
+					"</tr>\n".
+					'<tr class="lined">';
 						'<th class="form_left" scope="row">'.$this->get_translation('SetLang')."</th>";
 						'<td class="form_right">'.$this->page['page_lang']."</td>";
 		}
 
-		echo "</tr>\n</table>";
+		echo "</tr>\n</table>\n";
 		echo $this->form_close();
-		echo "</div>";
+		echo "</div>\n";
 	}
 
-	echo '<aside class="page_tools">'.
-			'<table class="form_tbl">'.
+	echo '<aside class="page_tools">'."\n".
+			'<table class="form_tbl">'."\n".
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsID')."</th>".
 					'<td class="form_right">'.$this->page['page_id']."</td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n".
+				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('Owner')."</th>".
 					'<td class="form_right">'.$this->user_link($this->page['owner_name'], $lang = '', true, false)."</td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n".
+				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsCreated')."</th>".
 					'<td class="form_right">'.$this->get_time_formatted($this->page['created'])."</td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n".
+				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsCurrent')."</th>".
 					'<td class="form_right">'.$this->get_time_formatted($this->page['modified'])."</td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n".
+				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsSize')."&nbsp;&nbsp;</th>".
 					'<td class="form_right" title="'.$this->get_translation('SettingsSizeTip').'">'.$this->binary_multiples(strlen($this->page['body']), false, true, true).' / '.$this->binary_multiples(strlen($this->page['body_r']), false, true, true)."</td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n".
+				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsTotalRevs')."</th>".
 					'<td class="form_right"><a href="'.$this->href('revisions').'" title="'.$this->get_translation('RevisionTip').'">'.(int)$revs['total']."</a></td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n".
+				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsTotalComs')."</th>".
 					'<td class="form_right"><a href="'.$this->href('', '', 'show_comments=1#commentsheader').'" title="'.$this->get_translation('ShowComments').'">'.$this->page['comments'].'</a></td>'.
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n".
+				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsHits')."</th>".
 					'<td class="form_right">'.number_format($this->page['hits'], 0, ',', '.')."</td>".
 				"</tr>\n";
@@ -352,14 +387,14 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 
 	echo "</table>\n";
 
-	echo "<br />";
+	echo "<br />\n";
 
 	$icon ='<img src="'. $this->config['theme_url'].'icon/spacer.png"/>';
 
-	echo '<ul class="page_handler">'.
-			'<li class="m-edit"><a href="'.$this->href('edit').'">'.$icon.$this->get_translation('SettingsEdit').'</a></li>'.
-			'<li class="m-revisions"><a href="'.$this->href('revisions').'">'.$icon.$this->get_translation('SettingsRevisions').'</a></li>'.
-			'<li class="m-clone"><a href="'.$this->href('clone').'">'.$icon.$this->get_translation('SettingsClone').'</a></li>';
+	echo '<ul class="page_handler">'."\n".
+			'<li class="m-edit"><a href="'.$this->href('edit').'">'.$icon.$this->get_translation('SettingsEdit')."</a></li>\n".
+			'<li class="m-revisions"><a href="'.$this->href('revisions').'">'.$icon.$this->get_translation('SettingsRevisions')."</a></li>\n".
+			'<li class="m-clone"><a href="'.$this->href('clone').'">'.$icon.$this->get_translation('SettingsClone')."</a></li>\n";
 
 	// Rename link (shows only if owner is current user or Admin)
 	if ($this->is_owner() || $this->is_admin())
@@ -386,16 +421,16 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		echo '<li class="m-permissions"><a href="'.$this->href('permissions').'">'.$icon.$this->get_translation('SettingsPermissions')."</a></li>\n";
 	}
 
-	echo	'<li class="m-categories"><a href="'.$this->href('categories').'">'.$icon.$this->get_translation('SettingsCategories').'</a></li>'.
-			'<li class="m-upload"><a href="'.$this->href('upload').'">'.$icon.$this->get_translation('SettingsUpload').'</a></li>'.
-			'<li class="m-referrers"><a href="'.$this->href('referrers').'">'.$icon.$this->get_translation('SettingsReferrers').'</a></li>'.
-			'<li class="'.($this->is_watched === true ? 'watch-off' : 'watch-on').'"><a href="'.$this->href('watch').'">'.$icon.($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')).'</a></li>'.
-			'<li class="m-print"><a href="'.$this->href('print').'">'.$icon.$this->get_translation('SettingsPrint').'</a></li>'.
-	#		'<li class="m-word"><a href="'.$this->href('wordprocessor').'">'.$icon.$this->get_translation('SettingsWordprocessor').'</a></li>'.
-	#		'<li class="m-latex"><a href="'.$this->href('latex').'">'.$icon.$this->get_translation('SettingsLatex').'</a></li>'.
-	#		'<li class="m-xml"><a href="'.$this->href('export.xml').'">'.$icon.$this->get_translation('SettingsXML').'</a></li>'.
-		'</ul>'.
-	'</aside>';
+	echo	'<li class="m-categories"><a href="'.$this->href('categories').'">'.$icon.$this->get_translation('SettingsCategories')."</a></li>\n".
+			'<li class="m-upload"><a href="'.$this->href('upload').'">'.$icon.$this->get_translation('SettingsUpload')."</a></li>\n".
+			'<li class="m-referrers"><a href="'.$this->href('referrers').'">'.$icon.$this->get_translation('SettingsReferrers')."</a></li>\n".
+			'<li class="'.($this->is_watched === true ? 'watch-off' : 'watch-on').'"><a href="'.$this->href('watch').'">'.$icon.($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch'))."</a></li>\n".
+			'<li class="m-print"><a href="'.$this->href('print').'">'.$icon.$this->get_translation('SettingsPrint')."</a></li>\n".
+	#		'<li class="m-word"><a href="'.$this->href('wordprocessor').'">'.$icon.$this->get_translation('SettingsWordprocessor')."</a></li>\n".
+	#		'<li class="m-latex"><a href="'.$this->href('latex').'">'.$icon.$this->get_translation('SettingsLatex')."</a></li>\n".
+	#		'<li class="m-xml"><a href="'.$this->href('export.xml').'">'.$icon.$this->get_translation('SettingsXML')."</a></li>\n".
+		"</ul>\n".
+	"</aside>\n";
 }
 
 else
