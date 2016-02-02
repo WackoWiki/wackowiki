@@ -57,8 +57,8 @@ function admin_content_deleted(&$engine, &$module)
 ?>
 	<p>
 		List of removed pages, copies which were in the table revision.
-		Finally remove the pages from the database by clicking on the link <em>Remove</em>
-		in the corresponding row. (Be careful, no delete confirmation is requested!)
+		Finally remove or restore the pages from the database by clicking on the link <em>Remove</em>
+		or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)
 	</p>
 <?php
 	if ($pages == true)
