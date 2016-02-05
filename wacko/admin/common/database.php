@@ -471,8 +471,6 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	$order.
 	str_replace('%1', $r, $limit)))
 	{
-		$i = 0;
-
 		foreach ($data as $row)
 		{
 			$r++;	// count rows for LIMIT clause
@@ -515,9 +513,11 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 // store compressed WackoWiki data files into the backup pack
 function get_files(&$engine, $pack, $dir, $root)
 {
-	$cluster = '';
-	$subdir = '';
-	$offset = 0;
+	$cluster	= '';
+	$subdir		= '';
+	$offset		= 0;
+	$error		= '';
+	$matches	= array();
 
 	// set file mask for cluster backup
 	if ($root == true && $dir == $engine->config['upload_path_per_page'])
@@ -571,27 +571,40 @@ function get_files(&$engine, $pack, $dir, $root)
 			// subdirs skipped
 			if (is_dir($dir.'/'.$filename) !== true)
 			{
-				// open input and output files
-				$filep = fopen($dir.'/'.$filename, 'rb');
-				$filez = gzopen($pack.$dir.'/'.$filename.BACKUP_FILE_GZIP_SUFFIX, 'ab'.BACKUP_COMPRESSION_RATE);
-				$r = 0; // round number
-
-				// compress and write data
-				while (true == $data = fread($filep, BACKUP_MEMORY_STEP))
+				if (is_readable($dir.'/'.$filename))
 				{
-					gzwrite($filez, $data);
-					fseek($filep, (++$r) * BACKUP_MEMORY_STEP);
-				}
+					// open input and output files
+					$filep	= fopen($dir.'/'.$filename, 'rb');
+					$filez	= gzopen($pack.$dir.'/'.$filename.BACKUP_FILE_GZIP_SUFFIX, 'ab'.BACKUP_COMPRESSION_RATE);
+					$r		= 0; // round number
 
-				// close files
-				gzclose($filez);
-				fclose($filep);
-				chmod($pack.$dir.'/'.$filename.BACKUP_FILE_GZIP_SUFFIX, 0644);
-				$t++;	// total files processed
+					// compress and write data
+					while (true == $data = fread($filep, BACKUP_MEMORY_STEP))
+					{
+						gzwrite($filez, $data);
+						fseek($filep, (++$r) * BACKUP_MEMORY_STEP);
+					}
+
+					// close files
+					gzclose($filez);
+					fclose($filep);
+					chmod($pack.$dir.'/'.$filename.BACKUP_FILE_GZIP_SUFFIX, 0644);
+					$t++;	// total files processed
+				}
+				else
+				{
+					// Show warning
+					$error .= 'Can\'t read <code>'.$dir.'/'.$filename.'</code>.<br />';
+				}
 			}
 		}
 
 		closedir($dh);
+
+		if ($error)
+		{
+			$engine->show_message($error, 'error') ;
+		}
 
 		return $t;
 	}
@@ -605,13 +618,13 @@ function get_files(&$engine, $pack, $dir, $root)
 function put_table(&$engine, $pack)
 {
 	// read sql data
-	$dir = $engine->config['upload_path_backup'].'/'.$pack.'/';
-	$sql = explode(';', file_get_contents($dir.BACKUP_FILE_STRUCTURE));
+	$dir	= $engine->config['upload_path_backup'].'/'.$pack.'/';
+	$sql	= explode(';', file_get_contents($dir.BACKUP_FILE_STRUCTURE));
 
 	array_pop($sql);
 
 	// perform
-	$t = 0;
+	$t		= 0;
 
 	foreach ($sql as $instruction)
 	{
@@ -626,14 +639,14 @@ function put_table(&$engine, $pack)
 // $mode - sql instruction to be used (i.e. INSERT or REPLACE)
 function put_data(&$engine, $pack, $table, $mode)
 {
-	$point = '';
+	$point		= '';
 
 	// open table dump file with read access
 	$filename	= $engine->config['upload_path_backup'].'/'.$pack.'/'.$table.BACKUP_FILE_DUMP_SUFFIX;
 	$file		= gzopen($filename, 'rb');
 
 	// read and process file in iterations to the end
-	$t = 0;
+	$t			= 0;
 
 	while (true == $data = gzread($file, BACKUP_MEMORY_STEP))
 	{
@@ -751,9 +764,9 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 				}
 
 				// open input and output files
-				$filez = gzopen($packdir.'/'.$filename, 'rb');
-				$filep = fopen($dir.'/'.$plainfile, 'wb');
-				$r = 0; // round number
+				$filez	= gzopen($packdir.'/'.$filename, 'rb');
+				$filep	= fopen($dir.'/'.$plainfile, 'wb');
+				$r		= 0; // round number
 
 				// decompress and write data
 				while (true == $data = gzread($filez, BACKUP_MEMORY_STEP))
