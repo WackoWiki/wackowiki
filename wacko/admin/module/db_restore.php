@@ -451,158 +451,165 @@ function admin_db_restore(&$engine, &$module)
 
 				$control_buttons = '<input type="submit" name="restore" id="submit" value="restore" />'.
 									'<input type="submit" name="remove" id="submit" value="remove" />';
-				echo $control_buttons;
-?>
+
+			#$dir = $engine->config['upload_path_backup'].'/';
+
+			// open backups dir and run through all subdirs
+			if ($dh = opendir(rtrim($dir, '/')))
+			{
+				while (false !== ($packname = readdir($dh)))
+				{
+					// we only need subdirs with appropriate name length
+					// and with backup register contained within
+					if (is_dir($dir.$packname) === true //&& strlen($packname) == 49)
+					&& file_exists($dir.$packname.'/'.BACKUP_FILE_LOG) === true)
+					{
+						$_array1	= str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG));
+						$_array2	= array('pack' => $packname);
+						// read log
+						$logs[]		= array_merge($_array1, $_array2);
+					} // end dir check
+				} // end while loop
+
+				#$engine->debug_print_r($logs);
+
+				if (is_array($logs))
+				{
+					echo $control_buttons;
+	?>
 					<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 						<tr>
 							<th>Creation Date</th>
 							<th>The contents of the package</th>
 						</tr>
-<?php
-		#$dir = $engine->config['upload_path_backup'].'/';
+	<?php
+					// sort 'creation date' descending with custom numeric comparisons function
+					usort($logs, function (array $a, array $b) { return $b[0] - $a[0]; });
 
-		// open backups dir and run through all subdirs
-		if ($dh = opendir(rtrim($dir, '/')))
-		{
-			while (false !== ($packname = readdir($dh)))
-			{
-				// we only need subdirs with appropriate name length
-				// and with backup register contained within
-				if (is_dir($dir.$packname) === true //&& strlen($packname) == 49)
-				&& file_exists($dir.$packname.'/'.BACKUP_FILE_LOG) === true)
-				{
-					$_array1 = str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG));
-					$_array2 = array('pack' => $packname);
-					// read log
-					$logs[] = array_merge($_array1, $_array2);
-				}
-			}
+					foreach ($logs as $log)
+					{
+						// open row
+						echo '<tr class="hl_setting">'."\n";
 
-			#$engine->debug_print_r($logs);
+						// pack
+						echo '<td>
+								<table>
+									<tr>'.
+										'<td style="vertical-align:middle; width:10px;" class="label">'.
+										#	'<input type="checkbox" name="'.$log['pack'].'" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ).'/>
+										#</td>'.
+										#'<td style="width:10px;">'.
+											'<input type="radio" name="backup_id" value="'.$log['pack'].'" />'.
+										'</td>
+										<th style="text-align:left;white-space:nowrap;">'.
+											date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).
+										'</th>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											'.(isset($log[6]) ? $log[6] : null).'
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											<a href="'.rawurldecode($engine->href()).'&amp;remove=1&amp;backup_id='.htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$engine->get_translation('RemoveButton').'</a>
+										</td>
+									</tr>
+								</table>'.
+							"</td>\n";
 
-			if (is_array($logs))
-			{
-				// sort 'creation date' descending with custom numeric comparisons function
-				usort($logs, function (array $a, array $b) { return $b[0] - $a[0]; });
+						// description
+						echo '<td><table>';
+							// cluster root
+							echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">'.
+									'Cluster: '.( $log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">Entire site</em>' ).
+								'</th></tr>'."\n";
+							// contents
+							echo '<tr>'.
+									'<th>Structure</th>'.
+									'<th>Data</th>'.
+									'<th>Files</th>'.
+								'</tr>'."\n";
+							// structure
+							echo '<tr>'.
+									'<td>';
 
-				foreach ($logs as $log)
-				{
-					// open row
-					echo '<tr class="hl_setting">'."\n";
+							$list = explode(';', $log[3]);
 
-					// pack
-					echo '<td>
-							<table>
-								<tr>'.
-									'<td style="vertical-align:middle; width:10px;" class="label">'.
-									#	'<input type="checkbox" name="'.$log['pack'].'" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ).'/>
-									#</td>'.
-									#'<td style="width:10px;">'.
-										'<input type="radio" name="backup_id" value="'.$log['pack'].'" />'.
-									'</td>
-									<th style="text-align:left;white-space:nowrap;">'.
-										date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).
-									'</th>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										'.(isset($log[6]) ? $log[6] : null).'
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<a href="'.rawurldecode($engine->href()).'&amp;remove=1&amp;backup_id='.htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$engine->get_translation('RemoveButton').'</a>
-									</td>
-								</tr>
-							</table>'.
-						"</td>\n";
+							foreach ($tables as $table)
+							{
+								if (in_array($table['name'], $list))
+								{
+									echo '<strong>'.$table['name'].'</strong><br />';
+								}
+								else
+								{
+									echo '<em class="grey">'.$table['name'].'</em><br />';
+								}
+							}
 
-					// description
-					echo '<td><table>';
-						// cluster root
-						echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">'.
-								'Cluster: '.( $log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">Entire site</em>' ).
-							'</th></tr>'."\n";
-						// contents
-						echo '<tr>'.
-								'<th>Structure</th>'.
-								'<th>Data</th>'.
-								'<th>Files</th>'.
-							'</tr>'."\n";
-						// structure
-						echo '<tr>'.
+							// data
+							echo '</td>'."\n".
 								'<td>';
 
-						$list = explode(';', $log[3]);
+							$list = explode(';', isset($log[4]) ? $log[4] : null);
 
-						foreach ($tables as $table)
-						{
-							if (in_array($table['name'], $list))
+							foreach ($tables as $table)
 							{
-								echo '<strong>'.$table['name'].'</strong><br />';
+								if (in_array($table['name'], $list))
+								{
+									echo '<strong>'.$table['name'].'</strong><br />';
+								}
+								else
+								{
+									echo '<em class="grey">'.$table['name'].'</em><br />';
+								}
 							}
-							else
+
+							// files
+							echo '</td>'."\n".
+								'<td>';
+
+							$list = explode(';', isset($log[5]) ? $log[5] : null);
+
+							foreach ($directories as $directory)
 							{
-								echo '<em class="grey">'.$table['name'].'</em><br />';
+								$directory = rtrim($directory, '/');
+
+								if (in_array($directory, $list))
+								{
+									echo '<strong>'.$directory.'</strong><br />';
+								}
+								else
+								{
+									echo '<em class="grey">'.$directory.'</em><br />';
+								}
 							}
-						}
 
-						// data
-						echo '</td>'."\n".
-							'<td>';
+							echo	 "</td>\n".
+								"</tr>\n</table>\n";
 
-						$list = explode(';', isset($log[4]) ? $log[4] : null);
+						// close row
+						echo "</td>\n</tr>\n".
+							'<tr class="lined"><td colspan="2"></td></tr>'."\n";
+					} // end foreach
 
-						foreach ($tables as $table)
-						{
-							if (in_array($table['name'], $list))
-							{
-								echo '<strong>'.$table['name'].'</strong><br />';
-							}
-							else
-							{
-								echo '<em class="grey">'.$table['name'].'</em><br />';
-							}
-						}
+					echo '</table>';
+					echo $control_buttons;
 
-						// files
-						echo '</td>'."\n".
-							'<td>';
+				}
+				else
+				{
+					$message = 'No backups available.';
+					$engine->show_message($message, 'info') ;
+				}
 
-						$list = explode(';', isset($log[5]) ? $log[5] : null);
+				closedir($dh);
+			} // end opendir
 
-						foreach ($directories as $directory)
-						{
-							$directory = rtrim($directory, '/');
-
-							if (in_array($directory, $list))
-							{
-								echo '<strong>'.$directory.'</strong><br />';
-							}
-							else
-							{
-								echo '<em class="grey">'.$directory.'</em><br />';
-							}
-						}
-
-						echo	 "</td>\n".
-							"</tr>\n</table>\n";
-
-					// close row
-					echo "</td>\n</tr>\n".
-						'<tr class="lined"><td colspan="2"></td></tr>'."\n";
-				} // end dir check
-			} // end while loop
-			closedir($dh);
-		} // end opendir
-?>
-					</table>
-<?php	echo $control_buttons;
-		echo $engine->form_close(); ?>
-
-<?php
+			echo $engine->form_close();
 		}
 	}
 }
