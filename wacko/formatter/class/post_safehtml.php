@@ -4,7 +4,7 @@ class post_safehtml
 {
 	var $object;
 
-	function __construct( &$object, &$options )
+	function __construct(&$object, &$options)
 	{
 		$this->object	= &$object;
 		$this->options	= &$options;
@@ -17,8 +17,9 @@ class post_safehtml
 
 	function postcallback($things)
 	{
-		$thing	= $things[1];
-		$wacko	= &$this->object;
+		$matches	= array();
+		$thing		= $things[1];
+		$wacko		= &$this->object;
 
 		// forced links ((link link == desc desc))
 		if (preg_match('/^<!--link:begin-->([^\n]+)==([^\n]*)<!--link:end-->$/', $thing, $matches))
@@ -31,7 +32,7 @@ class post_safehtml
 				$url	= str_replace(' ', '%20', trim($url));
 				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text));
 
-				return $wacko->link($url, ($this->options["feed"] ? "no404" : ''), $text);
+				return $wacko->link($url, ($this->options['feed'] ? 'no404' : ''), $text);
 			}
 			else
 			{
@@ -44,11 +45,11 @@ class post_safehtml
 		{
 			// disassembly of the parameters
 			$p			= ' '.$matches[1].' ';
-			$paramcount	= preg_match_all( '/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER );
+			$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER);
 			$params		= array();
 			$c			= 0;
 
-			foreach( $matches as $m )
+			foreach($matches as $m)
 			{
 				$value				= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : '1';
 				$params[$c]			= $value;

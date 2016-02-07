@@ -147,7 +147,7 @@ $xhtml_tags = array(
 			{
 				return
 				'$matches[1].
-				$this->format($matches[2], "highlight/css", array("nopre" => true, "notypo" => false)).
+				$this->format($matches[2], 'highlight/css', array('nopre' => true, 'notypo' => false)).
 				"&lt;/style&gt;"';
 			},
   $source);

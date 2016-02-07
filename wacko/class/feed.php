@@ -189,7 +189,8 @@ class Feed
 				$link	= $this->engine->href('', $page['tag']);
 				$pdate	= date('r', strtotime($page['modified']));
 				$coms	= $this->engine->href('', $page['tag'], 'show_comments=1#commentsheader');
-				// TODO: might fail if body_r is empty
+				// TODO: might fail if body_r is empty,
+				// TODO: format -> add array('feed' => true)
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
 
 				// check current page lang for different charset to do_unicode_entities() against
