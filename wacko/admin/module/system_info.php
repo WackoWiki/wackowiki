@@ -35,9 +35,13 @@ function admin_system_info(&$engine, &$module)
 		</tr>
 <?php
 
-	// get mysql version
-	$_mysql_version	= $engine->load_all("SELECT version()");
-	$mysql_version	= $_mysql_version[0]['version()'];
+	// get MariaDB / mysql version
+	$_db_version	= $engine->load_all("SELECT version()");
+	$db_version		= $_db_version[0]['version()'];
+
+	// get SQL mode
+	$_sql_mode		= $engine->load_all("SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode;");
+	$sql_mode	= $_sql_mode[0]['@@GLOBAL.sql_mode'];
 
 	$upload_max_filesize = trim(str_replace('M', '', get_cfg_var('upload_max_filesize')));
 
@@ -52,7 +56,7 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['os']					= array('OS', PHP_OS.' ('.@php_uname().')');
 	#$sysinfo['os_extended']		= array('OS extended', @php_uname());
 	$sysinfo['server_software']		= array('Web server', $_SERVER['SERVER_SOFTWARE']);
-	$sysinfo['mysql_version']		= array('MariaDB / MySQL version', $mysql_version);
+	$sysinfo['db_version']			= array('MariaDB / MySQL version', $db_version);
 	$sysinfo['php_version']			= array('PHP Version', PHP_VERSION);
 	$sysinfo['memory']				= array('Memory', $engine->binary_multiples($_php_ram * 1024 * 1024, false, true, true));
 	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true));
@@ -66,6 +70,7 @@ function admin_system_info(&$engine, &$module)
 	}
 
 	$sysinfo['server_name']			= array('Server name', $_SERVER['SERVER_NAME']);
+	$sysinfo['sql_mode']			= array('Server SQL Modes', $sql_mode);
 
 	// add additional system parameters
 	#$sysinfo['other']				= addwhatyourmissing;

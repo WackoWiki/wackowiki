@@ -694,6 +694,9 @@ function put_data(&$engine, $pack, $table, $mode)
 				}
 			}
 
+			// setting the SQL Mode, disable possible Strict SQL Mode
+			$engine->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
+
 			// run and count sql query
 			$engine->sql_query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
 			$t++;	// rows processed
