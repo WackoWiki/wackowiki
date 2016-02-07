@@ -101,7 +101,7 @@ if ($this->has_access('read'))
 				$output .= "<br />\n".$this->get_translation('SimpleDiffAdditions')."<br />\n\n";
 				$output .= '<div class="additions">'.($source === true
 															? '<pre>'.wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1).'</pre>'
-															: $this->format(implode("\n", $added))
+															: $this->format(implode("\n", $added), 'wiki', array('diff' => true))
 														)."</div>\n";
 			}
 
@@ -110,7 +110,7 @@ if ($this->has_access('read'))
 				$output .= "<br />\n\n".$this->get_translation('SimpleDiffDeletions')."<br />\n\n";
 				$output .= '<div class="deletions">'.($source === true
 															? '<pre>'.wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1).'</pre>'
-															: $this->format(implode("\n", $deleted))
+															: $this->format(implode("\n", $deleted), 'wiki', array('diff' => true))
 														)."</div>\n";
 			}
 
@@ -216,7 +216,7 @@ if ($this->has_access('read'))
 
 			$side_b->copy_until_ordinal($count_total_right, $output);
 			$side_b->copy_whitespace($output);
-			$out = $this->format($output);
+			$out = $this->format($output, 'wiki', array('diff' => true));
 
 			$meta =
 			str_replace('%1', '<a href="'.$this->href('', '', 'revision_id='.$page_b['revision_id']).'">'.$this->get_time_formatted($page_b['modified']).'</a>',

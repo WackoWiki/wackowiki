@@ -4,7 +4,7 @@ class post_wacko
 {
 	var $object;
 
-	function __construct( &$object, &$options )
+	function __construct(&$object, &$options)
 	{
 		$this->object	= &$object;
 		$this->options	= &$options;
@@ -13,10 +13,11 @@ class post_wacko
 
 	function postcallback($things)
 	{
-		$lang	= '';
-		$thing	= $things[1];
+		$lang		= '';
+		$matches	= array();
+		$thing		= $things[1];
 
-		$wacko	= &$this->object;
+		$wacko		= &$this->object;
 
 		// forced links ((link link == desc desc))
 		if (preg_match('/^<!--link:begin-->([^\n]+)==([^\n]*)<!--link:end-->$/', $thing, $matches))
@@ -45,7 +46,7 @@ class post_wacko
 		// image link
 		else if (preg_match('/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/', $thing, $matches))
 		{
-			list ( , $url, $img) = $matches;
+			list (, $url, $img) = $matches;
 
 			if ($url && $img)
 			{
@@ -71,36 +72,36 @@ class post_wacko
 		// actions
 		else if (preg_match('/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s', $thing, $matches))
 		{
-			if ($matches[1] && (!isset($this->options['diff']) || in_array(strtolower($matches[1]), $this->action)))
+			// check for action parameters
+			$sep = strpos($matches[1], ' ');
+
+			if ($sep === false)
 			{
-				// check for action parameters
-				$sep = strpos( $matches[1], ' ' );
+				$action	= $matches[1];
+				$params	= array();
+			}
+			else
+			{
+				$action		= substr($matches[1], 0, $sep);
+				$p			= ' '.substr($matches[1], $sep).' ';
+				$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $_matches, PREG_SET_ORDER);
+				$params		= array();
+				$c			= 0;
 
-				if ($sep === false)
+				foreach($_matches as $m)
 				{
-					$action	= $matches[1];
-					$params	= array();
+					$value			= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : '1';
+					$params[$c]		= $value;
+					$params[$m[2]]	= $value;
+					$c++;
 				}
-				else
-				{
-					$action		= substr( $matches[1], 0, $sep );
-					$p			= ' '.substr( $matches[1], $sep ).' ';
-					$paramcount	= preg_match_all( "/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER );
-					$params		= array();
-					$c			= 0;
+			}
 
-					foreach( $matches as $m )
-					{
-						$value				= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : '1';
-						$params[$c]			= $value;
-						$params[ $m[2] ]	= $value;
-						$c++;
-					}
-				}
-
+			if ($action && (!isset($this->options['diff']) || in_array(strtolower($action), $this->action)))
+			{
 				return $wacko->action($action, $params);
 			}
-			else if ($this->options['diff'])
+			else if (isset($this->options['diff']))
 			{
 				return '{{'.$matches[1].'}}';
 			}
