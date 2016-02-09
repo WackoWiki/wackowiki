@@ -1611,7 +1611,7 @@ table.formation td {
 }
 
 li.m-new img {
-	background-image:url("./../icon/add_page.svg");
+	background-image:url("./../icon/page-add.svg");
 	background-repeat: no-repeat;
 }
 li.m-categories img {
@@ -1640,7 +1640,7 @@ li.m-revisions img {
 	background-repeat: no-repeat;
 }
 li.m-remove img {
-	background-image: url("./../icon/delete_page.svg");
+	background-image: url("./../icon/page-delete.svg");
 	background-repeat: no-repeat;
 }
 li.m-purge img {
@@ -1740,7 +1740,7 @@ li.m-word img {
 	display: inline-block;
 }
 .btn-removebookmark {
-	background-image: url('./../icon/remove.svg'), none;
+	background-image: url('./../icon/bookmark-remove.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
@@ -1788,7 +1788,7 @@ li.m-word img {
 	display: inline-block;
 }
 .btn-add_page {
-	background-image: url('./../icon/add_page.svg'), none;
+	background-image: url('./../icon/page-add.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
