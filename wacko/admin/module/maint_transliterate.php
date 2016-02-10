@@ -15,7 +15,7 @@ $module['maint_transliterate'] = array(
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'maint_transliterate',
 		'name'	=> 'Transliterate',
-		'title'	=> 'Update the files and records of the database',
+		'title'	=> 'Update the supertag in the database records',
 	);
 
 ########################################################
@@ -132,13 +132,12 @@ function admin_maint_transliterate(&$engine, &$module)
 					<li value="3"><del>Transliterate field <code>supertag</code> and <code>super_comment_on</code> in table `revision`</del>.</li>
 				</ol>
 				<br />
+				<p>The update procedure is completed.</p>
 <?php
-				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
-?>
-					<input type="hidden" name="step" value="4" />
-					<input type="submit" name="start" id="submit" value="continue" />
-<?php
-				echo $engine->form_close();
+				#echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+				#echo '<input type="hidden" name="step" value="4" />';
+				#echo '<input type="submit" name="start" id="submit" value="continue" />';
+				#echo $engine->form_close();
 			}
 		}
 	}

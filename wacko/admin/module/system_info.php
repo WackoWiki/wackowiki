@@ -39,15 +39,20 @@ function admin_system_info(&$engine, &$module)
 	$_db_version	= $engine->load_all("SELECT version()");
 	$db_version		= $_db_version[0]['version()'];
 
-	// get SQL mode
-	$_sql_mode		= $engine->load_all("SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode;");
-	$sql_mode	= $_sql_mode[0]['@@GLOBAL.sql_mode'];
+	// get SQL mode (SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode;)
+	$_sql_mode		= $engine->load_all("SELECT @@sql_mode;");
+	$sql_mode		= $_sql_mode[0]['@@sql_mode'];
 
 	$upload_max_filesize = trim(str_replace('M', '', get_cfg_var('upload_max_filesize')));
 
 	$memory = trim(str_replace('M', '', ini_get('memory_limit')));
+
 	// fallback if ini_get doesn't work
-	if (intval($memory) == 0) $memory = trim(str_replace('M', '', get_cfg_var('memory_limit')));
+	if (intval($memory) == 0)
+	{
+		$memory = trim(str_replace('M', '', get_cfg_var('memory_limit')));
+	}
+
 	$_php_ram = $memory;
 
 	// Sysinfo in array
@@ -55,8 +60,10 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['app_updated']			= array('Last update', $engine->config['maint_last_update']);
 	$sysinfo['os']					= array('OS', PHP_OS.' ('.@php_uname().')');
 	#$sysinfo['os_extended']		= array('OS extended', @php_uname());
+	$sysinfo['server_name']			= array('Server name', $_SERVER['SERVER_NAME']);
 	$sysinfo['server_software']		= array('Web server', $_SERVER['SERVER_SOFTWARE']);
 	$sysinfo['db_version']			= array('MariaDB / MySQL version', $db_version);
+	$sysinfo['sql_mode']			= array('SQL Modes', $sql_mode);
 	$sysinfo['php_version']			= array('PHP Version', PHP_VERSION);
 	$sysinfo['memory']				= array('Memory', $engine->binary_multiples($_php_ram * 1024 * 1024, false, true, true));
 	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true));
@@ -68,9 +75,6 @@ function admin_system_info(&$engine, &$module)
 	{
 		$sysinfo['apache_modules']		= array('Apache modules', implode(', ',apache_get_modules()));
 	}
-
-	$sysinfo['server_name']			= array('Server name', $_SERVER['SERVER_NAME']);
-	$sysinfo['sql_mode']			= array('Server SQL Modes', $sql_mode);
 
 	// add additional system parameters
 	#$sysinfo['other']				= addwhatyourmissing;
