@@ -15,7 +15,7 @@ $module['maint_transliterate'] = array(
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'maint_transliterate',
 		'name'	=> 'Transliterate',
-		'title'	=> 'Update the structure and contents of the database',
+		'title'	=> 'Update the files and records of the database',
 	);
 
 ########################################################
@@ -61,7 +61,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="1"><del>Transliterate field `to_supertag` in table `link`</del>.</li>
+					<li value="1"><del>Transliterate field <code>to_supertag</code> in table `link`</del>.</li>
 				</ol>
 				<br />
 <?php
@@ -95,7 +95,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="2"><del>Transliterate field `supertag` and `super_comment_on` in table `page`</del>.</li>
+					<li value="2"><del>Transliterate field <code>supertag</code> and <code>super_comment_on</code> in table `page`</del>.</li>
 				</ol>
 				<br />
 <?php
@@ -129,7 +129,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="3"><del>Transliterate field `supertag` and `super_comment_on` in table `revision`</del>.</li>
+					<li value="3"><del>Transliterate field <code>supertag</code> and <code>super_comment_on</code> in table `revision`</del>.</li>
 				</ol>
 				<br />
 <?php
@@ -141,51 +141,14 @@ function admin_maint_transliterate(&$engine, &$module)
 				echo $engine->form_close();
 			}
 		}
-		// files
-		else if ((int)$_REQUEST['step'] === 4)
-		{
-			$dir = $engine->config['upload_path_per_page'];
-
-			if ($dh = opendir($dir))
-			{
-				while (false !== ($file = readdir($dh)))
-				{
-					if (is_dir($dir.'/'.$file) !== true && $file != '.htaccess')
-					{
-						chmod($dir.'/'.$file, 0755);
-						rename($dir.'/'.$file, $dir.'/'.$engine->translit($file));
-					}
-				}
-
-				closedir($dh);
-			}
-
-			$version = WACKO_VERSION;
-
-			$engine->sql_query(
-				"UPDATE {$engine->config['table_prefix']}config ".
-				"SET config_value = '$version' ".
-				"WHERE config_name = 'wackowiki_version'");
-			$engine->log(1, 'Upgrading to version WackoWiki '.$version);
-?>
-			<ol>
-				<li value="4"><del>Transliterate the names of attached files</del>.</li>
-			</ol>
-			<br />
-			<p>
-				The procedure for renewal is completed.
-			</p>
-<?php
-		}
 	}
 	else
 	{
 ?>
 		<ol>
-			<li>Transliterate field `to_supertag` in table `link`.</li>
-			<li>Transliterate field `supertag` in table `page`.</li>
-			<li>Transliterate field `supertag` in table `revision`.</li>
-			<li>Transliterate the names of attached files.</li>
+			<li>Transliterate field <code>to_supertag</code> in table `link`.</li>
+			<li>Transliterate field <code>supertag</code> in table `page`.</li>
+			<li>Transliterate field <code>supertag</code> in table `revision`.</li>
 		</ol>
 		<br />
 <?php
