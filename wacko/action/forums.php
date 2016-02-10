@@ -72,7 +72,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// display list
 	echo '<table class="forum">'.
 			'<tr>'.
-				'<th>'.$this->get_translation('ForumSubforum').'</th>'.
+				'<th>'.$this->get_translation('ForumSubforums').'</th>'.
 				'<th>'.$this->get_translation('ForumTopics').'</th>'.
 				'<th>'.$this->get_translation('ForumPosts').'</th>'.
 				'<th>'.$this->get_translation('ForumLastComment').'</th>'.

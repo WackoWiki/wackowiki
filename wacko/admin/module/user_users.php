@@ -128,13 +128,13 @@ function admin_user_users(&$engine, &$module)
 		"LIMIT 1"))
 		{
 			$engine->show_message($engine->get_translation('UsersAlreadyExists'));
-			$_POST['change']	= $_POST['user_id'];
+			#$_POST['change']	= $_POST['user_id'];
 			$_POST['create']	= 1;
 		}
 		else if (!$engine->validate_email($_POST['email']))
 		{
 			$engine->show_message($engine->get_translation('NotAEmail'));
-			$_POST['change']	= $_POST['user_id'];
+			#$_POST['change']	= $_POST['user_id'];
 			$_POST['create']	= 1;
 		}
 		else
@@ -231,7 +231,8 @@ function admin_user_users(&$engine, &$module)
 		{
 			if (!empty($user_id))
 			{
-				$set[] = (int)$user_id;
+				$set[]	= (int)$user_id;
+				$set	= array_unique($set);
 			}
 
 			foreach ($set as $user_id)
@@ -271,7 +272,7 @@ function admin_user_users(&$engine, &$module)
 					$engine->remove_menu_items	($user_space, true);
 					$engine->remove_watches		($user_space, true);
 					$engine->remove_ratings		($user_space, true);
-					$engine->remove_comments	($user_space, true, $dontkeep = true);
+					$engine->remove_comments	($user_space, true, true); // dontkeep
 					$engine->remove_files		($user_space, true);
 					$engine->remove_revisions	($user_space, true);
 
