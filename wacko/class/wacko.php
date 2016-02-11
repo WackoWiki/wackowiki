@@ -2016,13 +2016,16 @@ class Wacko
 					}
 
 					// subscribe & notify moderators
-					$this->notify_moderator($page_id, $tag, $title, $user_name, $mute);
+					if ($mute === false)
+					{
+						$this->notify_moderator($page_id, $tag, $title, $user_name);
+					}
 				}
 
-				if ($comment_on_id)
+				if ($comment_on_id && $mute === false)
 				{
 					// notifying watchers
-					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false, $mute);
+					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false);
 				}
 			} // end of new page
 			// RESAVING AN OLD PAGE, CREATING REVISION
@@ -2080,10 +2083,10 @@ class Wacko
 					}
 
 					// Since there's no revision history for comments it's pointless to do the following for them.
-					if (!$comment_on_id)
+					if (!$comment_on_id && $mute === false)
 					{
 						// notifying watchers
-						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true, $mute);
+						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true);
 					}
 				} // end of new != old
 			} // end of existing page
@@ -2186,7 +2189,7 @@ class Wacko
 		}
 	}
 
-	function notify_moderator($page_id, $tag, $title, $user_name, $mute)
+	function notify_moderator($page_id, $tag, $title, $user_name)
 	{
 		// subscribe & notify moderators
 		if (is_array($this->config['aliases']))
@@ -2197,7 +2200,7 @@ class Wacko
 			{
 				$moderators	= explode("\\n", $list['Moderator']);
 
-				if (!$mute) foreach ($moderators as $moderator)
+				foreach ($moderators as $moderator)
 				{
 					if ($user_name != $moderator)
 					{
@@ -2232,7 +2235,7 @@ class Wacko
 		}
 	}
 
-	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision, $mute)
+	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision)
 	{
 		if (!$comment_on_id && $is_revision)
 		{
@@ -2262,7 +2265,7 @@ class Wacko
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
 			"WHERE w.page_id = '".(int)$object_id."'");
 
-		if ($watchers && !$mute)
+		if ($watchers)
 		{
 			foreach ($watchers as $watcher)
 			{
