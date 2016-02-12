@@ -43,19 +43,21 @@ if ($this->has_access('read') && $this->hide_revisions === false )
 			if (($c <= $max) && $c > 1)
 			{
 				$etag = str_replace('%2F', '/', rawurlencode($page['tag']));
-
+				$_GET['d'] = $page['modified'];
 				$_GET['a'] = $_GET['b'];
 				$_GET['b'] = $page['revision_m_id'];
 				$_GET['c'] = ($_GET['d'] == '' ? $this->page['modified'] : $_GET['d']);
-				$_GET['d'] = $page['modified'];
+
 
 				$xml .= "<item>\n";
 				$xml .= "<title>".$this->get_time_formatted($_GET['c'])."</title>\n";
 				$xml .= "<link>".$this->href('show', '', 'revision_id='.$_GET['a'])."</link>\n";
 				$xml .= "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
 
-
 				$diff = $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops');
+
+				// remove diff type navigation
+				$diff = preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $diff);
 
 				$xml .= "<description>".str_replace('<', "&lt;", str_replace('&', '&amp;', $diff))."</description>\n";
 				$xml .= "<pubDate>".date ('r', strtotime ($_GET['c']))."</pubDate>\n";
