@@ -60,10 +60,7 @@ if ($this->has_access('read')
 
 	if (isset($_POST))
 	{
-
-
 		$_body		= isset($_POST['body']) ? $_POST['body'] : '';
-		$textchars	= strlen($_body);
 
 		// watch page
 		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->page['page_id'] && $user && $this->is_watched !== true)
@@ -280,11 +277,12 @@ if ($this->has_access('read')
 	{
 		echo $form_buttons;
 
-		$preview = $this->format($body,		'pre_wacko');
-		$preview = $this->format($preview,	'wacko');
-		$preview = $this->format($preview,	'post_wacko');
+		$text_chars	= number_format(strlen($_body), 0, ',', '.');
+		$preview	= $this->format($body,		'pre_wacko');
+		$preview	= $this->format($preview,	'wacko');
+		$preview	= $this->format($preview,	'post_wacko');
 
-		$output = '<div class="preview"><p class="preview"><span>'.$this->get_translation('EditPreview').' ('.$textchars.' '.$this->get_translation('Chars').")</span></p>\n";
+		$output = '<div class="preview"><p class="preview"><span>'.$this->get_translation('EditPreview').' ('.$text_chars.' '.$this->get_translation('Chars').")</span></p>\n";
 
 		if ($this->config['edit_summary'] != 0)
 		{
