@@ -82,8 +82,8 @@ class Feed
 					$count++;
 					$xml .= "<item>\n";
 					$xml .= "<title>".$page['tag']."</title>\n";
-					$xml .= "<link>".$this->engine->href('show', $page['tag'], '')."</link>\n";
-					$xml .= "<guid>".$this->engine->href('show', $page['tag'], '')."</guid>\n";
+					$xml .= "<link>".$this->engine->href('', $page['tag'], '')."</link>\n";
+					$xml .= "<guid>".$this->engine->href('', $page['tag'], '')."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
 					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".
 						($page['user_name']
@@ -291,8 +291,8 @@ class Feed
 							? $comment['user_name']
 							: $this->engine->get_translation('Guest')).
 						"</title>\n";
-					$xml .= "<link>".$this->engine->href('show', $comment['tag'], '')."</link>\n";
-					$xml .= "<guid>".$this->engine->href('show', $comment['tag'], '')."</guid>\n";
+					$xml .= "<link>".$this->engine->href('', $comment['tag'], '')."</link>\n";
+					$xml .= "<guid>".$this->engine->href('', $comment['tag'], '')."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($comment['modified']))."</pubDate>\n";
 					$xml .= "<dc:creator>".$comment['user_name']."</dc:creator>\n";
 
