@@ -7140,7 +7140,7 @@ class Wacko
 			}
 			else
 			{
-				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page - 1).( $params == true ? '&amp;'.$params : '' )).'">&laquo; '.$this->get_translation('PrevAcr').'</a>';
+				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page - 1).( $params == true ? '&amp;'.$params : '' )).'" rel="prev">&laquo; '.$this->get_translation('PrevAcr').'</a>';
 			}
 
 			// pages range links
@@ -7221,7 +7221,7 @@ class Wacko
 			}
 			else
 			{
-				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page + 1).( $params == true ? '&amp;'.$params : '' )).'">'.$this->get_translation('NextAcr').' &raquo;</a>';
+				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page + 1).( $params == true ? '&amp;'.$params : '' )).'" rel="next">'.$this->get_translation('NextAcr').' &raquo;</a>';
 			}
 		}
 
