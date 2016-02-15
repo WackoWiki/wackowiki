@@ -23,9 +23,11 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 {
 	echo '	<meta name="robots" content="noindex, nofollow" />'."\n";
 }
-?>
+
+if ($this->has_access('read')) { ?>
 	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
+<?php } ?>
 	<meta name="language" content="<?php echo $this->page['page_lang'] ?>" />
 
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
@@ -89,7 +91,7 @@ if ($user = $this->get_user())
 		$doubleclick = true;
 	}
 }
-else if($this->has_access('write'))
+else if ($this->has_access('write'))
 {
 	$doubleclick = true;
 }
