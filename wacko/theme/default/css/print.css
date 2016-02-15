@@ -14,20 +14,20 @@
 }
 
 /* Specifies the wikiname on top */
-#header {
+header {
 	font-family:		"Lucida Console","Courier New",monospace;
 	letter-spacing:		1px;
 	font-size:			10px;
 	margin-bottom:		30px;
 }
 
-#header .container {
+header .container {
 	border-bottom:		1px dotted #000000;
 	margin-bottom:		20px;
 	padding-bottom:		5px;
 }
 
-#header h1 {
+header h1 {
 	font-size:			20px; /* 1.2em; */
 	margin-top:			0;
 	padding-bottom:		0;
@@ -37,7 +37,7 @@
 	font-weight:		bold;
 }
 
-#footer {
+footer {
 	border-top:			1px dotted #000000;
 	font-size:			11px;
 	line-height:		11px;
