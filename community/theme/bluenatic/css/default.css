@@ -213,7 +213,7 @@ code {
 	/*-moz-border-radius:	3px;		/* Mozilla, Firefox only */
 }
 
-/* Included pages: SYNTAX {{include file="xyz"}} */
+/* Included pages: SYNTAX {{include page="xyz"}} */
 .include {
 	background-color:	#f9f9f9;
 	color:			#000;
