@@ -517,15 +517,15 @@ ol#comments {
 	color: #FF0000;
 }
 
-.name {
-	text-align: right;
-	font-size: 11px;
-}
-
-/* Included pages: SYNTAX {{include file="xyz"}} */
+/* Included pages: SYNTAX {{include page="xyz"}} */
 .include {
 	background-color: #FCFCFC;
 	padding: 8px;
+}
+
+.name {
+	text-align: right;
+	font-size: 11px;
 }
 
 /* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */

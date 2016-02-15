@@ -17,3 +17,4 @@ header('Content-Type: text/html; charset='.$this->get_charset());
 			<h1><?php echo $this->config['site_name'].': '.(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?>
 			</h1>
 		</header>
+<!-- End of header //-->

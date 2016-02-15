@@ -6,11 +6,11 @@ if (!defined('IN_WACKO'))
 }
 
 ?>
-<div id="page">
+<article class="page">
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page)
+if (!$this->page || !$this->has_access('read'))
 {
 	$this->redirect($this->href());
 }
@@ -142,4 +142,4 @@ else
 	$this->show_message($message, 'info');
 }
 ?>
-</div>
+</article>
