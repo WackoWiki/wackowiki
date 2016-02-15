@@ -31,6 +31,7 @@ if ($this->is_owner($page_id))
 	{
 		$title = $this->get_translation('Watchers');
 		$title = str_replace('%1', $this->link('/'.$tag, '', $tag),  $title);
+
 		if (!$nomark)
 		{
 			echo '<div class="layout-box"><p class="layout-box"><span>'.$title.":</span></p>\n";
