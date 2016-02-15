@@ -11,15 +11,23 @@ require ($this->config['theme_path'].'/_common/_header.php');
 	<header>
 		<div id="header-main">
 			<div id="header-top">
-			<h1><span class="main"><?php echo (isset($this->page['tag']) && $this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : '<a href="'.$this->config['base_url'].'">'.$this->config['site_name'].'</a>') ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?></h1>
+			<h1><span class="main">
+				<?php echo (isset($this->page['tag']) && $this->page['tag'] == $this->config['root_page']
+					? $this->config['site_name']
+					: '<a href="'.$this->config['base_url'].'">'.$this->config['site_name'].'</a>')
+			?>: </span>
+				<?php echo (isset($this->page['title']) && $this->has_access('read')
+					? $this->page['title']
+					: $this->get_page_path() );
+		?></h1>
 		</div>
 		<div id="login_box">
 <?php
 // if user are logged, shows "You are UserName"
 if ($this->get_user())
 {
-	echo '<span class="nobr">'.$this->get_translation('YouAre').' '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span><small> ( <span class="nobr Tune">'.
-		$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).
+	echo '<span class="nobr">'.$this->get_translation('YouAre').' '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span>'.
+		 '<small> ( <span class="nobr Tune">'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).
 		' | <a onclick="return confirm(\''.$this->get_translation('LogoutAreYouSure').'\');" href="'.$this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)).'">'.$this->get_translation('LogoutLink').'</a></span> )</small>';
 // else shows login's controls
 }
@@ -38,11 +46,12 @@ else
 }
 
 // End if
-?></div>
+?>
 		</div>
-<nav class="menu-main">
+	</div>
+	<nav class="menu-main">
 <?php
-// outputs bookmarks menu
+	// outputs bookmarks menu
 	echo '<div id="usermenu">';
 	echo "<ol>\n";
 	// main page
@@ -158,11 +167,15 @@ else
 					$_title = $title;
 				}
 
-				$tab = '<li class="'.$tab_class.' active"><span><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.' '.$_title.'</span></li>'."\n";
+				$tab =	'<li class="'.$tab_class.' active">'.
+							'<span><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.' '.$_title.'</span>'.
+						'</li>'."\n";
 			}
 			else
 			{
-				$tab = '<li class="'.$tab_class.' active"><span>'.' '.$title.'</span></li>'."\n";
+				$tab =	'<li class="'.$tab_class.' active">'.
+							'<span>'.' '.$title.'</span>'.
+						'</li>'."\n";
 			}
 		}
 		else
@@ -176,11 +189,15 @@ else
 					$_title = ' '.$title;
 				}
 
-				$tab = '<li class="'.$tab_class.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$access_key.'"><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.$_title.'</a></li>'."\n";
+				$tab =	'<li class="'.$tab_class.'">'.
+							'<a href="'.$link.'" title="'.$hint.'" accesskey="'.$access_key.'"><img src="'.$engine->config['theme_url'].'icon/'.$_image.'" alt="'.$title.'" />'.$_title.'</a>'.
+						'</li>'."\n";
 			}
 			else
 			{
-				$tab = '<li class="'.$tab_class.'"><a href="'.$link.'" title="'.$hint.'" accesskey="'.$access_key.'">'.$title.'</a></li>'."\n";
+				$tab =	'<li class="'.$tab_class.'">'.
+							'<a href="'.$link.'" title="'.$hint.'" accesskey="'.$access_key.'">'.$title.'</a>'.
+						'</li>'."\n";
 			}
 		}
 
@@ -370,38 +387,38 @@ else
 			echo "</ul>\n";
 			echo "</li>\n";
 	}
-	#echo "</ul>\n"; // list continues with search
+			#echo "</ul>\n"; // list continues with search
 ?>
-<li class="search">
-<div id="search_box">
+			<li class="search">
+				<div id="search_box">
 <?php
-// opens search form
-echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage'));
+				// opens search form
+				echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage'));
 
-// searchbar
+				// searchbar
 ?>
-<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
-<input type="search" name="phrase" id="phrase" size="20" />
-<input type="submit" class="submitinput" title="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/>
-</span>
+				<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
+				<input type="search" name="phrase" id="phrase" size="20" />
+				<input type="submit" class="submitinput" title="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/>
+				</span>
 <?php
 
-// search form close
-echo $this->form_close();
+				// search form close
+				echo $this->form_close();
 ?>
-</div>
-</li></ul>
-</div>
-</nav>
-<nav class="breadcrumb">
+				</div>
+			</li></ul>
+		</div>
+		</nav>
+		<nav class="breadcrumb">
 <?php
-// shows breadcrumbs
-echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
-#echo '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8);
+		// shows breadcrumbs
+		echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
+		#echo '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8);
 ?>
-</nav>
-</header>
-<main>
+		</nav>
+	</header>
+	<main>
 <?php
 // here we show messages
 $this->output_messages();
