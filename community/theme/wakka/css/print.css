@@ -197,7 +197,7 @@ hr {
 	height:			1px;
 }
 
-/* Included pages: SYNTAX {{include file="xyz"}} */
+/* Included pages: SYNTAX {{include page="xyz"}} */
 .include {
 	color:			#000;
 }
