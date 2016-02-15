@@ -108,7 +108,9 @@ del.diff {
 
 /* Code areas: SYNTAX %%code%% */
 
-.code, .code-break, .hl-main pre {
+.code,
+.code-break,
+.hl-main pre {
 	background: #FFFFFF;
 	border: 1px #888888 solid;
 	/* border-radius: 5px; */
