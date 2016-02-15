@@ -22,7 +22,10 @@ $group		= '';
 $options	= '';
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href());
+}
 
 if ($this->is_owner() || $this->is_admin())
 {

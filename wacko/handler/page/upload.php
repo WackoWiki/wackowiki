@@ -13,7 +13,7 @@ $error			= '';
 // redirect to show method if page don't exists
 if (!$this->page)
 {
-	$this->redirect($this->href('show'));
+	$this->redirect($this->href());
 }
 
 // deny for comment
