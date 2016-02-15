@@ -8,9 +8,11 @@ if (!defined('IN_WACKO'))
 // list -
 // nomark -
 // path -
+// label -
 
 $path = $this->config['category_page'];
 if (!isset($list))		$list = 0;
+if (!isset($label))		$label = true;
 if (empty($path))		$path = 'Category';
 if (!isset($nomark))	$nomark = '';
 
@@ -58,7 +60,10 @@ if (!empty($_category))
 		}
 	}
 
-	echo (!empty($_category) && (!$list) ? $this->get_translation('Categories').': ' : '').$output;
+	echo (!empty($_category) && (!$list && $label == true)
+			? $this->get_translation('Categories').': '
+			: '').
+		$output;
 
 	if ($list)
 	{
