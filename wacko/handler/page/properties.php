@@ -231,7 +231,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 
 							if ($categories = $this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0), 1))
 							{
-								echo $categories;
+								echo '<br />'.$categories;
 							}
 
 			echo		'</td>'.
