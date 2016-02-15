@@ -206,7 +206,7 @@ code {
 }
 
 /* Fieldsets: SYNTAX {{toc}}, {{backlinks}} */
-#page fieldset,
+.page fieldset,
 .preview fieldset {
 	border:				none;
 }
@@ -235,7 +235,7 @@ hr {
 	height:				1px;
 }
 
-/* Included pages: SYNTAX {{include file="xyz"}} */
+/* Included pages: SYNTAX {{include page="xyz"}} */
 .include {
 	color:				#000;
 }
