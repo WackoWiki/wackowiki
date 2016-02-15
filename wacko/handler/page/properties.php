@@ -227,10 +227,17 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 							<label for="keywords">'.$this->get_translation('MetaKeywords').'</label>
 						</th>'.
 						'<td class="form_right">
-							<textarea id="keywords" name="keywords" rows="4" cols="51">'.$this->page['keywords'].'</textarea>
-						</td>'.
-					"</tr>\n".
-					'<tr class="lined">'.
+							<textarea id="keywords" name="keywords" rows="4" cols="51">'.$this->page['keywords']."</textarea>\n";
+
+							if ($categories = $this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0), 1))
+							{
+								echo $categories;
+							}
+
+			echo		'</td>'.
+					"</tr>\n";
+
+			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">
 							<label for="description">'.$this->get_translation('MetaDescription').'</label>
 						</th>'.
