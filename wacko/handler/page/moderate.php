@@ -297,7 +297,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 // redirect to show method if page doesn't exists
 if (!$this->page || $this->page['comment_on_id'] == true)
 {
-	$this->redirect($this->href('show'));
+	$this->redirect($this->href());
 }
 
 $forum_cluster = '';

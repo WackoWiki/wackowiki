@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 // redirect to show method if page don't exists
 if (!$this->page)
 {
-	$this->redirect($this->href('show'));
+	$this->redirect($this->href());
 }
 
 if ($this->has_access('read'))

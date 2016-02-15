@@ -41,7 +41,7 @@ if (!function_exists('handler_diff_load_page_by_id'))
 // redirect to show method if page don't exists
 #if (!$this->page)
 #{
-#	$this->redirect($this->href('show'));
+#	$this->redirect($this->href());
 #}
 
 $a			= (int)$_GET['a'];

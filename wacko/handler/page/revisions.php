@@ -17,11 +17,11 @@ $place_holder	= '&nbsp;&nbsp;&nbsp;';
 // redirect to show method if hide_revisions is true
 if ($this->hide_revisions === true)
 {
-	$this->redirect($this->href('show'));
+	$this->redirect($this->href());
 }
 
 // redirect to show method if page don't exists
-#if (!$this->page) $this->redirect($this->href('show'));
+#if (!$this->page) $this->redirect($this->href());
 
 // deny for comment
 if ($this->page['comment_on_id'])

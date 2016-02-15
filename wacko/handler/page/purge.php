@@ -11,7 +11,10 @@ if (!defined('IN_WACKO'))
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href());
+}
 
 // deny for comment
 if ($this->page['comment_on_id'])
