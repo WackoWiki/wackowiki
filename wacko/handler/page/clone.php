@@ -34,7 +34,7 @@ else if ($this->forum === true && !$this->is_admin())
 if ($user = $this->get_user())
 {
 	$user_name		= strtolower($this->get_user_name());
-	$registered	= true;
+	$registered		= true;
 }
 else
 {
