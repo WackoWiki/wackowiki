@@ -2025,7 +2025,7 @@ class Wacko
 				if ($comment_on_id && $mute === false)
 				{
 					// notifying watchers
-					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false);
+					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false, $minor_edit);
 				}
 			} // end of new page
 			// RESAVING AN OLD PAGE, CREATING REVISION
@@ -2086,7 +2086,7 @@ class Wacko
 					if (!$comment_on_id && $mute === false)
 					{
 						// notifying watchers
-						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true);
+						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true, $minor_edit);
 					}
 				} // end of new != old
 			} // end of existing page
@@ -2206,14 +2206,14 @@ class Wacko
 					{
 						$moderator_id = $this->get_user_id($moderator);
 
-						$_user = $this->load_single(
+						$user = $this->load_single(
 							"SELECT u.email, p.user_lang, u.email_confirm, u.enabled, p.send_watchmail ".
 							"FROM " .$this->config['user_table']." u ".
 								"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 							"WHERE u.user_id = '".$moderator_id."' ".
 							"LIMIT 1");
 
-						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['send_watchmail'] == true)
 						{
 							$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
 							$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').' '.$moderator.".\n\n".
@@ -2224,7 +2224,7 @@ class Wacko
 									$this->config['site_name']."\n".
 									$this->config['base_url'];
 
-							$this->send_mail($_user['email'], $subject, $body);
+							$this->send_mail($user['email'], $subject, $body);
 							$this->set_watch($moderator_id, $page_id);
 						}
 					}
@@ -2235,7 +2235,7 @@ class Wacko
 		}
 	}
 
-	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision)
+	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision, $minor_edit)
 	{
 		if (!$comment_on_id && $is_revision)
 		{
@@ -2298,16 +2298,16 @@ class Wacko
 
 					if ($this->has_access('read', $object_id, $watcher['user_name']))
 					{
-						$_user = $this->load_single(
+						$user = $this->load_single(
 							"SELECT u.email, p.user_lang, u.email_confirm, u.enabled, p.send_watchmail ".
 							"FROM " .$this->config['user_table']." u ".
 								"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 							"WHERE u.user_id = '".$watcher['user_id']."' ".
 							"LIMIT 1");
 
-						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['send_watchmail'] == true)
 						{
-							$lang = $_user['user_lang'];
+							$lang = $user['user_lang'];
 							$this->load_translation($lang);
 							$this->set_translation ($lang);
 							$this->set_language ($lang);
@@ -2350,7 +2350,7 @@ class Wacko
 									$this->config['site_name']."\n".
 									$this->config['base_url'];
 
-							$this->send_mail($_user['email'], $subject, $body);
+							$this->send_mail($user['email'], $subject, $body);
 						}
 					}
 					else

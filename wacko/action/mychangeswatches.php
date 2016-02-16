@@ -9,8 +9,15 @@ if (!isset($max)) $max = '';
 
 if ($user_id = $this->get_user_id())
 {
-	if ($max) $limit = $max;
-	else $limit	= 100;
+	if ($max)
+	{
+		$limit = $max;
+	}
+	else
+	{
+		$limit	= 100;
+	}
+
 	$pref	= $this->config['table_prefix'];
 
 	echo $this->get_translation('MyChangesWatches').
@@ -31,20 +38,27 @@ if ($user_id = $this->get_user_id())
 	if ((isset($_GET['reset']) && $_GET['reset'] == 1) && $pages == true)
 	{
 		foreach ($pages as $page)
+		{
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET watch_time = NOW() ".
 				"WHERE page_id = '".$page['page_id']."' ".
 					"AND user_id = '".(int)$user_id."'");
+		}
+
 		$this->redirect($this->href('', '', 'mode=mychangeswatches').'#list');
 	}
 
 	if ($pages == true)
 	{
 		foreach ($pages as $page)
+		{
 			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+			{
 				echo '<small>('.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->get_translation('History')).
 					')</small> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
+			}
+		}
 	}
 	else
 	{
