@@ -37,6 +37,7 @@ if ($user_id = $this->get_user_id())
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
+				"AND deleted <> '1' ".
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
@@ -45,6 +46,7 @@ if ($user_id = $this->get_user_id())
 			"SELECT tag, title, created ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
+				"AND deleted <> '1' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY created DESC, tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", true))
@@ -99,6 +101,7 @@ if ($user_id = $this->get_user_id())
 				"ON (p.page_id = r.page_id ".
 					"AND p.owner_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
+				"AND p.deleted <> '1' ".
 				"AND r.comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
@@ -116,6 +119,7 @@ if ($user_id = $this->get_user_id())
 				"ON (p.page_id = r.page_id ".
 					"AND p.owner_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
+				"AND p.deleted <> '1' ".
 				"AND r.comment_on_id = '0' ".
 			"GROUP BY tag ".
 			"ORDER BY modified DESC, tag ASC ".
@@ -167,6 +171,7 @@ if ($user_id = $this->get_user_id())
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
+				"AND deleted <> '1' ".
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
@@ -180,6 +185,7 @@ if ($user_id = $this->get_user_id())
 			"SELECT tag, title, modified ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
+				"AND deleted <> '1' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", true))
