@@ -324,26 +324,30 @@ if ($this->has_access('read')
 	<br />
 	<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 <?php
-	$output .= '<input type="hidden" name="previous" value="'.htmlspecialchars($previous, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /><br />'."\n";
-	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
-	$output .= htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</textarea><br />\n";
-
 	// comment title
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
+		$output .= '<br />'."\n";
 		$output .= '<label for="addcomment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
 		$output .= '<input type="text" id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
 		$output .= '<br />'."\n";
 	}
-	else
+	else if (!$this->page)
 	{
-		if (!$this->page)
-		{
-			// new page title field
-			$output .= '<label for="addpage_title">'.$this->get_translation('MetaTitle').':</label><br />';
-			$output .= '<input type="text" id="addpage_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="100" name="title" /><br />';
-		}
+		// new page title field
+		$output .= '<br />'."\n";
+		$output .= '<label for="addpage_title">'.$this->get_translation('MetaTitle').':</label><br />';
+		$output .= '<input type="text" id="addpage_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="100" name="title" />';
+		$output .= '<br />'."\n";
+	}
 
+	$output .= '<input type="hidden" name="previous" value="'.htmlspecialchars($previous, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /><br />'."\n";
+	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
+	$output .= htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</textarea>\n";
+	$output .= '<br />'."\n";
+
+	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
+	{
 		// edit note
 		if ($this->config['edit_summary'] != 0)
 		{
@@ -391,10 +395,6 @@ if ($this->has_access('read')
 				$output .= '<br />'."\n";
 			}
 		}
-		else
-		{
-			$output .= '<br />'."\n";
-		}
 	}
 
 	if (!$this->page && $words = $this->get_categories_list($this->page_lang, 1))
@@ -414,7 +414,8 @@ if ($this->has_access('read')
 			}
 		}
 
-		$output .= '<br />'.$this->get_translation('Categories').':'."\n".'<div class="setcategory"><br />'."\n".substr(implode(' ', $_words), 6).'</div><br /><br />'."\n";
+		$output .= '<br />'.$this->get_translation('Categories').':'."\n".'<div class="setcategory"><br />'."\n".substr(implode(' ', $_words), 6).'</div>'."\n";
+		$output .= '<br />'."\n";
 	}
 
 	echo $output;
