@@ -8,22 +8,14 @@ if (!defined('IN_WACKO'))
 // action/mypages.php
 if (!isset($title))		$title = '';
 if (!isset($bydate))	$bydate = '';
-if (!isset($max))		$max = '';
+if (!isset($max))		$max = null;
 if (!isset($bychange))	$bychange = '';
 $cur_char		= '';
 $current_day	= '';
 
 if ($user_id = $this->get_user_id())
 {
-	if ($max)
-	{
-		$limit = $max;
-	}
-	else
-	{
-		$limit	= 100;
-	}
-
+	$limit		= $this->get_list_count($max);
 	$prefix		= $this->config['table_prefix'];
 
 	if ((isset($_GET['bydate']) && $_GET['bydate'] == 1) || $bydate == 1)
