@@ -4529,6 +4529,35 @@ class Wacko
 		}
 	}
 
+	function get_list_count($max, $default = 50)
+	{
+		if ($user = $this->get_user())
+		{
+			$user_max = $user['list_count'];
+
+			if ($user_max == 0)
+			{
+				$user_max = 10;
+			}
+		}
+		else
+		{
+			$user_max = 50;
+		}
+
+		if (!isset($max) || $user_max < $max)
+		{
+			$max = $user_max;
+		}
+
+		if ($max > 100)
+		{
+			$max	= 100;
+		}
+
+		return $max;
+	}
+
 	/**
 	 * Return unique id
 	 * @param string $extra additional entropy

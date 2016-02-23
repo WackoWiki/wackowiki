@@ -5,19 +5,22 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($max)) $max = '';
+if (!isset($max))		$max = null;
 if (!isset($current_char)) $current_char = '';
 
 if ($user_id = $this->get_user_id())
 {
 	if (isset($_GET['unwatch']) && $_GET['unwatch'] != '')
+	{
 		$this->clear_watch($user_id, $_GET['unwatch']);
+	}
 	else if (isset($_GET['setwatch']) && $_GET['setwatch'] != '')
+	{
 		$this->set_watch($user_id, $_GET['setwatch']);
+	}
 
-	if ($max) $limit = $max;
-	else $limit	= 100;
-	$prefix = $this->config['table_prefix'];
+	$limit		= $this->get_list_count($max);
+	$prefix		= $this->config['table_prefix'];
 
 	if (isset($_GET['unwatched']) && $_GET['unwatched'] == 1)
 	{
@@ -28,6 +31,7 @@ if ($user_id = $this->get_user_id())
 				"ON (p.page_id = w.page_id ".
 					"AND w.user_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
+				"AND p.deleted <> '1' ".
 				"AND w.user_id IS NULL", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches&amp;unwatched=1#list');
@@ -44,6 +48,7 @@ if ($user_id = $this->get_user_id())
 				"ON (p.page_id = w.page_id ".
 					"AND w.user_id = '".(int)$user_id."') ".
 			"WHERE p.comment_on_id = '0' ".
+				"AND p.deleted <> '1' ".
 				"AND w.user_id IS NULL ".
 			"ORDER BY pagetag ASC ".
 			"LIMIT {$pagination['offset']}, ".($limit * 2)))

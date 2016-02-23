@@ -30,18 +30,11 @@ if (!isset($legend))	$legend = '';
 if (!isset($deleted))	$deleted = 0;
 if (!isset($track))		$track = 0;
 if (!isset($picture))	$picture = null;
-if (!isset($max))		$max = '';
+if (!isset($max))		$max = null;
 
-if ($max)
-{
-	$limit = $max;
-}
-else
-{
-	$limit	= 50;
-}
+$limit		= $this->get_list_count($max);
+$order_by	= "file_name ASC";
 
-$order_by = "file_name ASC";
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";

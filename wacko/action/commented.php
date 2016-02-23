@@ -69,29 +69,10 @@ if (!isset($root))	$root	= $this->unwrap_link(isset($vars['for']) ? $vars['for']
 if (!isset($root))	$root	= $this->page['tag'];
 if (!isset($title)) $title	= 0;
 if (!isset($noxml)) $noxml	= 0;
+if (!isset($max))		$max = null;
 
-if ($user = $this->get_user())
-{
-	$usermax = $user['list_count'];
-
-	if ($usermax == 0)
-	{
-		$usermax = 10;
-	}
-}
-else
-{
-	$usermax = 50;
-}
-if (!isset($max) || $usermax < $max)
-{
-	$max = $usermax;
-}
-
-if ($max > 100)
-{
-	$max	= 100;
-}
+$user	= $this->get_user();
+$max	= $this->get_list_count($max);
 
 if ($this->user_allowed_comments())
 {

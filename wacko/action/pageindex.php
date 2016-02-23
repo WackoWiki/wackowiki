@@ -26,9 +26,9 @@ $_letter	= ( isset($_GET['letter']) ) ? $_GET['letter'] : $letter;
 if(isset($_letter))		$_letter = strtoupper(substr($_letter, 0, 1));
 if (!isset($for))		$for = (isset($vars['for']) ? $this->unwrap_link($vars['for']) : '');
 if (!isset($for))		$for = $this->page['tag'];
-if (!isset($max))		$max = '';
-if ($max)				$limit = $max;
-else $limit	= 50;
+if (!isset($max))		$max = null;
+
+$limit		= $this->get_list_count($max);
 
 $count = $this->load_single(
 	"SELECT COUNT(page_id) AS n ".

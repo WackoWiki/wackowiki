@@ -9,22 +9,14 @@ if (!defined('IN_WACKO'))
 
 if (!isset($title))		$title = '';
 if (!isset($bydate))	$bydate = '';
-if (!isset($max))		$max = '';
-$cur_char = '';
-$cur_day = '';
+if (!isset($max))		$max = null;
+$cur_char	= '';
+$cur_day	= '';
 
 if ($user_id = $this->get_user_id())
 {
-	if ($max)
-	{
-		$limit = $max;
-	}
-	else
-	{
-		$limit	= 100;
-	}
-
-	$prefix = $this->config['table_prefix'];
+	$limit		= $this->get_list_count($max);
+	$prefix		= $this->config['table_prefix'];
 
 	if(isset($_GET['bydate']) && $_GET['bydate'] == 1)
 	{

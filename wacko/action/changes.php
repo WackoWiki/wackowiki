@@ -5,32 +5,18 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$viewed = '';
+
 if (!isset($root))		$root = $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
 if (!isset($root))		$root = $this->page['tag'];
 if (!isset($date))		$date = isset($_GET['date']) ? $_GET['date'] : '';
 if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] : '';
 if (!isset($noxml))		$noxml = 0;
 if (!isset($title))		$title = '';
-$viewed = '';
+if (!isset($max))		$max = null;
 
-if ($user = $this->get_user())
-{
-	$usermax = $user['list_count'];
-
-	if ($usermax == 0)
-	{
-		$usermax = 10;
-	}
-}
-else
-{
-	$usermax = 50;
-}
-
-if (!isset($max) || $usermax < $max)
-{
-	$max = $usermax;
-}
+$user	= $this->get_user();
+$max	= $this->get_list_count($max);
 
 $admin	= ($this->is_admin() ? true : false);
 

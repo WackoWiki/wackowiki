@@ -12,6 +12,8 @@ $groups			= '';
 $user_groups	= '';
 $error			= '';
 
+if (!isset($max))		$max = null;
+
 // display user profile
 if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 {
@@ -57,7 +59,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			&& isset($_POST['send_pm'])
 			&& $_POST['mail_body'] == true
 			&& $this->get_user()
-			&& $user['allow_intercom'] == 1
+			&& $user['allow_intercom'] == true
 			&& $user['email']
 			&& !$user['email_confirm'])
 		{
@@ -100,7 +102,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				}
 				else
 				{
-					$notice = $this->get_translation('UsersPMSent');
+					$notice	= $this->get_translation('UsersPMSent');
 				}
 
 				// proceed if no error encountered
@@ -115,6 +117,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
 					$this->set_message($notice);
 					$this->log(4, str_replace('%2', $user['user_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('LogPMSent', $this->config['language']))));
+
 					$_SESSION['intercom_delay']	= time();
 					$_POST['mail_body']			= '';
 					$_POST['mail_subject']		= '';
@@ -180,18 +183,18 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					}
 				}
 ?>
-			<br />
-			<?php echo $this->form_open('personal_message'); ?>
-			<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
-			<?php
-			if (isset($_POST['ref']))
-			{
-				echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
-			}?>
-			<table class="formation">
+				<br />
+				<?php echo $this->form_open('personal_message'); ?>
+				<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
+				<?php
+				if (isset($_POST['ref']))
+				{
+					echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
+				}?>
+				<table class="formation">
 <?php
 				// user must allow incoming messages, and needs confirmed email address set
-				if ($this->config['enable_email'] == true && $user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
+				if ($this->config['enable_email'] == true && $user['allow_intercom'] == true && $user['email'] && !$user['email_confirm'])
 				{
 ?>
 				<tr>
@@ -468,7 +471,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			}
 			else
 			{
-				echo $this->get_translation('CommentsDisabled');
+				# echo $this->get_translation('CommentsDisabled');
 			}
 		}
 	}
@@ -477,7 +480,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 // display whole userlist instead of the particular profile
 else
 {
-	$limit = 50;
+	$limit = $this->get_list_count($max);
 
 	// defining WHERE and ORDER clauses
 	// $param is passed to the pagination links
