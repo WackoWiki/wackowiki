@@ -55,7 +55,6 @@ $spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . 
 
 if (!isset($max))		$max = null;
 
-$user	= $this->get_user();
 $max	= $this->get_list_count($max);
 
 if ($user = $this->get_user())
