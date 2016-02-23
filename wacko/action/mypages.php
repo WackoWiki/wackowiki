@@ -10,8 +10,8 @@ if (!isset($title))		$title = '';
 if (!isset($bydate))	$bydate = '';
 if (!isset($max))		$max = '';
 if (!isset($bychange))	$bychange = '';
-$cur_char = '';
-$current_day = '';
+$cur_char		= '';
+$current_day	= '';
 
 if ($user_id = $this->get_user_id())
 {
@@ -24,7 +24,7 @@ if ($user_id = $this->get_user_id())
 		$limit	= 100;
 	}
 
-	$prefix = $this->config['table_prefix'];
+	$prefix		= $this->config['table_prefix'];
 
 	if ((isset($_GET['bydate']) && $_GET['bydate'] == 1) || $bydate == 1)
 	{

@@ -91,29 +91,10 @@ else
 {
 	$for	= $root;
 
-	if ($user = $this->get_user())
-	{
-		$usermax = $user['list_count'];
+	if (!isset($max))		$max = null;
 
-		if ($usermax == 0)
-		{
-			$usermax = 10;
-		}
-	}
-	else
-	{
-		$usermax = 50;
-	}
-
-	if (!isset($max) || $usermax < $max)
-	{
-		$max = $usermax;
-	}
-
-	if ($max > 100)
-	{
-		$max	= 100;
-	}
+	$user	= $this->get_user();
+	$max	= $this->get_list_count($max);
 
 	if (list ($pages, $pagination) = load_wanted($this, $root, (int)$max))
 	{

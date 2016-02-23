@@ -53,24 +53,10 @@ $bytime		= '';
 $url_maxlen = 80;
 $spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . . '
 
-if ($user = $this->get_user())
-{
-	$usermax = $user['list_count'];
+if (!isset($max))		$max = null;
 
-	if ($usermax == 0)
-	{
-		$usermax = 10;
-	}
-}
-else
-{
-	$usermax = 50;
-}
-
-if (!isset($max) || $usermax < $max)
-{
-	$max = $usermax;
-}
+$user	= $this->get_user();
+$max	= $this->get_list_count($max);
 
 if ($user = $this->get_user())
 {

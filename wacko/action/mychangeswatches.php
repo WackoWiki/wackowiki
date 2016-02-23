@@ -5,20 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($max)) $max = '';
+if (!isset($max))		$max = null;
 
 if ($user_id = $this->get_user_id())
 {
-	if ($max)
-	{
-		$limit = $max;
-	}
-	else
-	{
-		$limit	= 100;
-	}
-
-	$pref	= $this->config['table_prefix'];
+	$limit		= $this->get_list_count($max);
+	$pref		= $this->config['table_prefix'];
 
 	echo $this->get_translation('MyChangesWatches').
 		' (<a href="'.$this->href('', '', 'mode=mychangeswatches&amp;reset=1').'#list">'.
