@@ -247,6 +247,8 @@ if (!function_exists('highlight_this'))
 
 // end functions
 
+$output = '';
+
 if (!isset($topic))		$topic		= '';
 if (!isset($title))		$title		= '';
 if (!isset($filter))	$filter		= '';
@@ -255,30 +257,10 @@ if (!isset($nomark))	$nomark		= '';
 if (!isset($for))		$for		= '';
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
-$output = '';
+if (!isset($max))		$max = null;
 
-if ($user = $this->get_user())
-{
-	$usermax = $user['list_count'];
-
-	if ($usermax == 0)
-	{
-		$usermax = 10;
-	}
-}
-else
-{
-	$usermax = 50;
-}
-if (!isset($max) || $usermax < $max)
-{
-	$max = $usermax;
-}
-
-if ($max > 100)
-{
-	$max	= 100;
-}
+$user	= $this->get_user();
+$max	= $this->get_list_count($max);
 
 if ($topic == 1)
 {

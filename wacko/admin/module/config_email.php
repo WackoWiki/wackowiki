@@ -90,8 +90,8 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="phpmailer"><strong>Phpmailer:</strong><br />
-					<small>Use the Phpmailer class. Enabling this option ...</small></label>
+					<label for="phpmailer"><strong>PHPMailer:</strong><br />
+					<small>Use the PHPMailer class. Enabling this option ...</small></label>
 				</td>
 				<td style="width:40%;">
 					<input type="radio" id="phpmailer_on" name="phpmailer" value="1"<?php echo ( $engine->config['phpmailer'] == 1 ? ' checked="checked"' : '' );?> /><label for="phpmailer_on">Enabled.</label>
