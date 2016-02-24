@@ -219,7 +219,7 @@ if ($this->is_admin() ||
 			$desc = (strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' [..]');
 
 			echo '<div class="commenttitle">'.$this->page['title'].'</div>';
-			echo $desc;
+			echo htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 			echo '</div>';
 
 			$message = $this->get_translation('ReallyDeleteComment');
