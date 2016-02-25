@@ -109,7 +109,7 @@ else
 	$lang_list= array();
 }
 
-$_languages = $lang['Languages'];
+$_languages = $lang['LanguageArray'];
 $n = 1;
 
 echo '<table  class="checkbox_input">'."\n\t<tr>\n";
