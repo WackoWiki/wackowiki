@@ -274,7 +274,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				$clang = $this->config['language'];
 			}
 
-			$languages = $this->get_translation('Languages');
+			$languages = $this->get_translation('LanguageArray');
 
 			if ($langs = $this->available_languages())
 			{

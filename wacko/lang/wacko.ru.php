@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Удалить все редакции страницы',
 	'RemoveCluster'				=> 'Удалить все страницы кластера',
 	'RemoveDontKeep'			=> 'Не сохранять копию удаленной страницы и комментариев',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Внешние ссылки на страницу %1 удалены.',
 	'LinksRemoved'				=> 'Локальные ссылки с %1 удалены.',
 	'CategoriesRemoved'			=> 'Ключевые слова страницы удалены.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings'				=> 'Настройки пользователя',
 	'UserSettingsGeneral'		=> 'Общие',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended'		=> 'Расширенный',
 	'UserSettingsOther'			=> 'Прочие настройки',
 	'UserSpace'					=> 'Пользователь пространства',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Смена пароля',
 	'PasswordChanged'			=> 'Пароль успешно изменён',
 	'EmailWelcome'				=> 'Регистрация в ',
-	'EmailRegistered'			=> 'Вы успешно зарегистрировались в %1.'."\n".'Ваше имя пользователя: %2'."\n\n".'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:'."\n".'%3'."\n\n\n".''."\n".'Если вы не запрашивали никакой регистрации, проигнорируйте это сообщение, и ничего не произойдёт.'."\n\n".'НЕ ОТВЕЧАЙТЕ НА ЭТО СООБЩЕНИЕ'."\n\n".'',
+	'EmailRegistered'			=> 'Вы успешно зарегистрировались в %1.'."\n".'Ваше имя пользователя: %2'."\n\n".'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:'."\n".'%3'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Если вы не запрашивали никакой регистрации, проигнорируйте это сообщение, и ничего не произойдёт.'."\n\n",
+	'EmailDoNotReply'			=> 'НЕ ОТВЕЧАЙТЕ НА ЭТО СООБЩЕНИЕ'."\n\n",
 	'EmailVerify'				=> 'Кто-то (возможно, вы), указал ваш электронный адрес в %1.'."\n".'Ваше имя пользователя: %2'."\n\n".'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:'."\n".'%3'."\n".'',
 	'EmailConfirm'				=> 'Запрос на подтверждение адреса электронной почты',
 	'EmailConfirmed'			=> 'Ваш почтовый адрес успешно подтверждён.',
@@ -1022,7 +1025,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Часовой пояс',
 	'DST'						=> 'Летнее время',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC - 12] Меридиан смены дат (запад)',
 		'-11'	=> '[UTC - 11] о. Мидуэй, Самоа',
 		'-10'	=> '[UTC - 10] Гавайи',
@@ -1065,7 +1068,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Остров Лайн',
 	),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1080,6 +1083,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

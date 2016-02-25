@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Remove all Revisions',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> ' Riferimenti alla pagina %1 rimossi.',
 	'LinksRemoved'				=> ' Links dalla pagina %1 rimossi.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings'				=> 'User settings',
 	'UserSettingsGeneral'		=> 'General',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended'		=> 'Extended',
 	'UserSettingsOther'			=> 'Other settings',
 	'UserSpace'					=> 'User space',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Per cambiare la password',
 	'PasswordChanged'			=> 'Password modificata',
 	'EmailWelcome'				=> 'Sei registarto a ',
-	'EmailRegistered'			=> 'Registrazione riuscita a %1.'."\n".'Il tuo nome-utente: %2'."\n\n".'Se vuoi riceverne notifica, occorre che approvi la tua email. Per farlo basta che segui '."\n".'%3'."\n".'il link.'."\n\n\n".'Se la richiesta di iscrizione non è stata fatta da te, ignora semplicemente questo messaggio.'."\n\n".'NON RISPONDERE A QUESTO MESSAGGIO'."\n\n".'',
+	'EmailRegistered'			=> 'Registrazione riuscita a %1.'."\n".'Il tuo nome-utente: %2'."\n\n".'Se vuoi riceverne notifica, occorre che approvi la tua email. Per farlo basta che segui '."\n".'%3'."\n".'il link.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Se la richiesta di iscrizione non è stata fatta da te, ignora semplicemente questo messaggio.'."\n\n",
+	'EmailDoNotReply'			=> 'NON RISPONDERE A QUESTO MESSAGGIO'."\n\n",
 	'EmailVerify'				=> 'Qualcuno (forse tu) ha inserito la tua email con indirizzo di notifica a %1.'."\n".'Il tuo nome-utente: %2'."\n\n".'Se vuoi riceverne notifica, occorre che tu approvi la tua email. Per farlo basta che segui '."\n".'%3'."\n".'il link.'."\n\n".'',
 	'EmailConfirm'				=> 'Verifica la tua email',
 	'EmailConfirmed'			=> 'Conferma dell\'email riuscita.',
@@ -1021,7 +1024,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Fuso orario',
 	'DST'						=> 'Ora legale',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC -12] Isola Baker',
 		'-11'	=> '[UTC -11] Samoa, Isole Midway',
 		'-10'	=> '[UTC -10] Hawaii, Tahiti',
@@ -1063,7 +1066,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC +14] Isole della linea'
 	),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1078,6 +1081,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

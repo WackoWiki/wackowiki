@@ -175,7 +175,7 @@ function admin_config_basic(&$engine, &$module)
 				<td>
 					<select style="width:200px;" id="language" name="language">
 <?php
-						$languages = $engine->get_translation('Languages');
+						$languages = $engine->get_translation('LanguageArray');
 						$langs = $engine->available_languages();
 
 						foreach ($langs as $lang)
@@ -224,7 +224,7 @@ function admin_config_basic(&$engine, &$module)
 						$lang_list= array();
 					}
 
-					$languages = $engine->get_translation('Languages');
+					$languages = $engine->get_translation('LanguageArray');
 					$n = 1;
 
 					echo "<table>\n\t<tr>\n";

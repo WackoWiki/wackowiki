@@ -106,7 +106,7 @@ else if ($user = $this->get_user())
 		}
 	}
 
-	if (isset($_POST['action']) && ($_POST['action'] == 'update_extended' || $_POST['action'] == 'update'))
+	if (isset($_POST['action']) && ($_POST['action'] == 'update_notifications' || $_POST['action'] == 'update_extended' || $_POST['action'] == 'update'))
 	{
 		// update user_setting table
 		$this->sql_query(
@@ -201,11 +201,64 @@ else if ($user = $this->get_user())
 		echo '<ul class="menu">
 				<li><a href="'.$this->href('', '', '').'">'.$this->get_translation('UserSettingsGeneral').'</a></li>
 				<li class="active">'.$this->get_translation('Bookmarks').'</li>
+				<li><a href="'.$this->href('', '', 'notification').'">'.$this->get_translation('UserSettingsNotifications').'</a></li>
 				<li><a href="'.$this->href('', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
 				</ul><br /><br />\n";
 		echo $this->action('menu', array('redirect' => 1));
 	}
-
+	// NOTIFICATIONS
+	else if (isset($_GET['notification']) || (isset($_POST['action'])&& $_POST['action'] == 'update_notifications'))
+	{
+		echo '<h3>'.$this->get_translation('UserSettings').' &raquo; '.$this->get_translation('UserSettingsNotifications').'</h3>';
+		echo '<ul class="menu">
+				<li><a href="'.$this->href('', '', '').'">'.$this->get_translation('UserSettingsGeneral').'</a></li>
+				<li><a href="'.$this->href('', '', 'menu').'">'.$this->get_translation('Bookmarks').'</a></li>
+				<li class="active">'.$this->get_translation('UserSettingsNotifications').'</li>
+				<li><a href="'.$this->href('', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
+			</ul><br /><br />\n";
+		echo $this->form_open('user_settings_notifications');
+		echo '<input type="hidden" name="action" value="update_notifications" />';
+		?>
+		<div class="page_settings">
+		<table class="form_tbl">
+		<tbody>
+		<?php
+		if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true)
+		{
+	?>
+			<tr class="lined">
+				<td class="form_left"><?php echo $this->get_translation('UserSettingsEmailMe');?>&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="send_watchmail" value="0" />
+					<input type="checkbox" id="send_watchmail" name="send_watchmail" value="1" <?php echo (isset($user['send_watchmail']) && $user['send_watchmail'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="send_watchmail"><?php echo $this->get_translation('SendWatchEmail');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="allow_intercom" value="0" />
+					<input type="checkbox" id="allow_intercom" name="allow_intercom" value="1" <?php echo (isset($user['allow_intercom']) && $user['allow_intercom'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="allow_intercom"><?php echo $this->get_translation('AllowIntercom');?></label>
+				</td>
+			</tr>
+		<?php
+			}
+	?>
+		<tr class="lined">
+			<td class="form_left">&nbsp;</td>
+			<td class="form_right">
+				<input type="hidden" name="allow_massemail" value="0" />
+				<input type="checkbox" id="allow_massemail" name="allow_massemail" value="1" <?php echo (isset($user['allow_massemail']) && $user['allow_massemail'] == 1) ? 'checked="checked"' : '' ?> />
+				<label for="allow_massemail"><?php echo $this->get_translation('AllowMassemail');?></label>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<?php
+		echo $this->form_close();
+	}
 	// EXTENDED
 	else if (isset($_GET['extended']) || (isset($_POST['action'])&& $_POST['action'] == 'update_extended'))
 	{
@@ -213,6 +266,7 @@ else if ($user = $this->get_user())
 		echo '<ul class="menu">
 				<li><a href="'.$this->href('', '', '').'">'.$this->get_translation('UserSettingsGeneral').'</a></li>
 				<li><a href="'.$this->href('', '', 'menu').'">'.$this->get_translation('Bookmarks').'</a></li>
+				<li><a href="'.$this->href('', '', 'notification').'">'.$this->get_translation('UserSettingsNotifications').'</a></li>
 				<li class="active">'.$this->get_translation('UserSettingsExtended')."</li>
 				</ul><br /><br />\n";
 		echo $this->form_open('user_settings_extended');
@@ -275,37 +329,6 @@ else if ($user = $this->get_user())
 			<input type="hidden" name="dont_redirect" value="0" />
 			<input type="checkbox" id="dont_redirect" name="dont_redirect" value="1" <?php echo (isset($user['dont_redirect']) && $user['dont_redirect'] == 1) ? 'checked="checked"' : '' ?> />
 			<label for="dont_redirect"><?php echo $this->get_translation('DontRedirect');?></label>
-		</td>
-	</tr>
-<?php
-	if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true)
-	{
-?>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="send_watchmail" value="0" />
-			<input type="checkbox" id="send_watchmail" name="send_watchmail" value="1" <?php echo (isset($user['send_watchmail']) && $user['send_watchmail'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="send_watchmail"><?php echo $this->get_translation('SendWatchEmail');?></label>
-		</td>
-	</tr>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="allow_intercom" value="0" />
-			<input type="checkbox" id="allow_intercom" name="allow_intercom" value="1" <?php echo (isset($user['allow_intercom']) && $user['allow_intercom'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="allow_intercom"><?php echo $this->get_translation('AllowIntercom');?></label>
-		</td>
-	</tr>
-<?php
-	}
-?>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="allow_massemail" value="0" />
-			<input type="checkbox" id="allow_massemail" name="allow_massemail" value="1" <?php echo (isset($user['allow_massemail']) && $user['allow_massemail'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="allow_massemail"><?php echo $this->get_translation('AllowMassemail');?></label>
 		</td>
 	</tr>
 	<tr class="lined">
@@ -372,7 +395,7 @@ else if ($user = $this->get_user())
 </table>
 </div>
 <?php
-	echo $this->form_close();
+		echo $this->form_close();
 
 	}
 	// GENERAL
@@ -391,6 +414,7 @@ else if ($user = $this->get_user())
 		echo '<ul class="menu">
 				<li class="active">'.$this->get_translation('UserSettingsGeneral').'</li>
 				<li><a href="'.$this->href('', '', 'menu').'">'.$this->get_translation('Bookmarks').'</a></li>
+				<li><a href="'.$this->href('', '', 'notification').'">'.$this->get_translation('UserSettingsNotifications').'</a></li>
 				<li><a href="'.$this->href('', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
 				</ul><br /><br />\n";
 ?>
@@ -453,7 +477,7 @@ else if ($user = $this->get_user())
 		<select id="user_lang" name="user_lang">
 <?php
 
-	$languages = $this->get_translation('Languages');
+	$languages = $this->get_translation('LanguageArray');
 
 	if ($this->config['multilanguage'])
 	{
@@ -508,7 +532,7 @@ else if ($user = $this->get_user())
 			<select id="timezone" name="timezone">
 
 <?php
-	$timezones = $this->get_translation('TzZones');
+	$timezones = $this->get_translation('TzZoneArray');
 
 	foreach ($timezones as $offset => $timezone)
 	{

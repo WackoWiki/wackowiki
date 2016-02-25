@@ -229,6 +229,11 @@ if ($this->is_admin() ||
 			$message = $this->get_translation('ReallyDelete');
 		}
 
+		// show backlinks
+		echo '<br />';
+		echo $this->action('backlinks', array('nomark' => 0));
+		echo '<br /><br />';
+
 		$this->show_message($message, 'warning');
 
 		echo $this->form_open('remove_page', 'remove', '', true);
@@ -242,16 +247,24 @@ if ($this->is_admin() ||
 				echo '<label for="removerevisions">'.$this->get_translation('RemoveRevisions').'</label><br />';
 				echo '<input type="checkbox" id="removecluster" name="cluster" value="1" />';
 				echo '<label for="removecluster">'.$this->get_translation('RemoveCluster').'</label><br />';
-				echo '<input type="checkbox" id="dontkeep" name="dontkeep" value="1" />';
-				echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeep').'</label><br />';
+
+				if ($this->config['store_deleted_pages'])
+				{
+					echo '<input type="checkbox" id="dontkeep" name="dontkeep" value="1" />';
+					echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeep').'</label><br />';
+				}
+			}
+			else
+			{
+				if ($this->config['store_deleted_pages'])
+				{
+					echo '<input type="checkbox" id="dontkeep" name="dontkeep" value="1" />';
+					echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeepComment').'</label><br />';
+				}
 			}
 		}
-
-		// show backlinks
-		echo '<br />';
-		echo $this->action('backlinks', array('nomark' => 0));
 ?>
-		<br /><br />
+		<br />
 		<input type="hidden" name="delete" value="1" />
 		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />&nbsp;
 		<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"/></a>

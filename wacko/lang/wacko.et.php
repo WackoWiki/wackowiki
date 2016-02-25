@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Remove all Revisions',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Lehe viited %1 kustutatud.',
 	'LinksRemoved'				=> 'Lehe lingid %1 eemaldatud.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings' => 'User settings',
 	'UserSettingsGeneral' => 'General',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended' => 'Extended',
 	'UserSettingsOther' => 'Other settings',
 	'UserSpace' => 'User space',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword' => 'Muuda parool',
 	'PasswordChanged' => 'Parool muudetud',
 	'EmailWelcome' => 'Sa oled registreerunud ',
-	'EmailRegistered' => 'sa oled edukalt registreerunud %1.'."\n".'Sinu kasutajanimi on: %2'."\n\n".'Kui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi '."\n".'%3'."\n".'seda linki, et seda teha.'."\n\n\n".'Kui sa pole taodelnud registreerimist, ignoreeri seda teadet ja midagi ei juhtu.'."\n\n".'äRA VASTA SELLELE TEATELE'."\n\n".'',
+	'EmailRegistered' => 'sa oled edukalt registreerunud %1.'."\n".'Sinu kasutajanimi on: %2'."\n\n".'Kui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi '."\n".'%3'."\n".'seda linki, et seda teha.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Kui sa pole taodelnud registreerimist, ignoreeri seda teadet ja midagi ei juhtu.'."\n\n",
+	'EmailDoNotReply'			=> 'äRA VASTA SELLELE TEATELE'."\n\n",
 	'EmailVerify' => 'Keegi (võib-olla sa ise) on edastanud su e-posti aadressi, et saada sellele teateid %1.'."\n".'Sinu kasutajanimi: %2'."\n\n".'Kui sa tahad saada teateid, pead sa lubama selleks oma e-posti aadressi. Vaata '."\n".'%3'."\n".'seda, et seda teha.'."\n\n".'',
 	'EmailConfirm' => 'Palun kontrolli oma e-posti aadressi',
 	'EmailConfirmed' => 'E-posti aadressi õigsus on kinnitust leidnud.',
@@ -1021,7 +1024,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Ajatsoon',
 	'DST'						=> 'Suveaeg',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC - 12] Baker Island Time',
 		'-11'	=> '[UTC - 11] Niue Time, Samoa Standard Time',
 		'-10'	=> '[UTC - 10] Hawaii-Aleutian Standard Time, Cook Island Time',
@@ -1064,7 +1067,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Line Island Time',
 	),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1079,6 +1082,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

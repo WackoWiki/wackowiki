@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Supprimer toutes les versions antérieures',
 	'RemoveCluster'				=> 'Supprimer toutes les pages du groupe',
 	'RemoveDontKeep'			=> 'Ne pas garder une copie d&rsquo;une page supprimée et des commentaires',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Référents vers la page %1 enlevés.',
 	'LinksRemoved'				=> 'Liens depuis la page %1 enlevés.',
 	'CategoriesRemoved'			=> 'Pages mots-clés effacées.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings'				=> 'Réglages utilisateur',
 	'UserSettingsGeneral'		=> 'Général',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended'		=> 'Étendus',
 	'UserSettingsOther'			=> 'Autres réglages',
 	'UserSpace'					=> 'Espace utilisateur',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Changement de mot de passe',
 	'PasswordChanged'			=> 'Le mot de passe a été changé',
 	'EmailWelcome'				=> 'Bienvenue sur ',
-	'EmailRegistered'			=> 'Votre enregistrement est confirmé sur %1.'."\n".'Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2'."\n\n".'Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra&nbsp;:'."\n".' - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,'."\n".' - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.'."\n\n".'Pour confirmer votre adresse de messagerie suivez '."\n".'%3'."\n".'ce lien, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.'."\n\n\n".'Si vous n&rsquo;aviez fait aucune demande d&rsquo;enregistrement, ignorez ce message et rien ne sera fait.'."\n\n".'NE PAS RÉPONDRE À CE MESSAGE'."\n\n".'',
+	'EmailRegistered'			=> 'Votre enregistrement est confirmé sur %1.'."\n".'Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2'."\n\n".'Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra&nbsp;:'."\n".' - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,'."\n".' - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.'."\n\n".'Pour confirmer votre adresse de messagerie suivez '."\n".'%3'."\n".'ce lien, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Si vous n&rsquo;aviez fait aucune demande d&rsquo;enregistrement, ignorez ce message et rien ne sera fait.'."\n\n",
+	'EmailDoNotReply'			=> 'NE PAS RÉPONDRE À CE MESSAGE'."\n\n",
 	'EmailVerify'				=> 'Quelqu&rsquo;un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.'."\n".'Votre nom d&rsquo;utilisateur (NomWiki)&nbsp;: %2'."\n\n".'Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour cela suivez '."\n".'%3'."\n".'ce lien.'."\n\n".'',
 	'EmailConfirm'				=> 'Merci de vérifier votre adresse de messagerie',
 	'EmailConfirmed'			=> 'Adresse de messagerie confirmée.',
@@ -1021,7 +1024,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Fuseau horaire',
 	'DST'						=> 'Heure d&rsquo;été',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC - 12] Île Baker',
 		'-11'	=> '[UTC - 11] Niue, Samoa',
 		'-10'	=> '[UTC - 10] Hawaii-Aleutian, Île Cook',
@@ -1064,7 +1067,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Île de Wight',
 	),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1079,6 +1082,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

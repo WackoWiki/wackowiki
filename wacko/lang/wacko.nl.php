@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Remove all Revisions',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Verwijzingen naar pagina %1 zijn verwijderd.',
 	'LinksRemoved'				=> 'Links van pagina %1 zijn verwijderd.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings' => 'User settings',
 	'UserSettingsGeneral' => 'General',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended' => 'Extended',
 	'UserSettingsOther' => 'Other settings',
 	'UserSpace' => 'User space',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword' => 'Wachtwoord wijzigen',
 	'PasswordChanged' => 'Wachtwoord gewijzigd',
 	'EmailWelcome' => 'U hebt geregistreerd bij ',
-	'EmailRegistered' => 'Uw registratie bij %1 is succesvol verlopen.'."\n".'Uw gebruikersnaam: %2'."\n\n".'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik '."\n".'%3'."\n".'hier om dit te doen.'."\n\n\n".'Als u zich niet hebt aangemeld, dan kunt u dit bericht negeren. Dan gebeurt er niets.'."\n\n".'Verstuur geen antwoord op dit bericht'."\n\n".'',
+	'EmailRegistered' => 'Uw registratie bij %1 is succesvol verlopen.'."\n".'Uw gebruikersnaam: %2'."\n\n".'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik '."\n".'%3'."\n".'hier om dit te doen.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Als u zich niet hebt aangemeld, dan kunt u dit bericht negeren. Dan gebeurt er niets.'."\n\n",
+	'EmailDoNotReply'			=> 'Verstuur geen antwoord op dit bericht'."\n\n",
 	'EmailVerify' => 'Iemand (vermoedelijk uzelf) heeft uw emailadres als notificatie-adres ingevuld op %1.'."\n".'Uw gebruikersnaam: %2'."\n\n".'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik '."\n".'%3'."\n".'hier om dit te doen.'."\n\n".'',
 	'EmailConfirm' => 'Controleer uw emailadres',
 	'EmailConfirmed' => 'Emailadres is gecontroleerd.',
@@ -1021,7 +1024,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Tijdszone',
 	'DST'						=> 'Zomertijd',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[GMT - 12] Bakereiland tijd',
 		'-11'	=> '[GMT - 11] Niue tijd, Samoa tijd',
 		'-10'	=> '[GMT - 10] Hawaïaanse standaardtijd, Cookeilanden tijd',
@@ -1064,7 +1067,7 @@ $wacko_translation = array(
 		'14'	=> '[GMT + 14] Line Eilanden tijd',
 	),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1079,6 +1082,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

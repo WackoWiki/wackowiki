@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Remove all Revisions',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Referenciadores para a página %1 removidos.',
 	'LinksRemoved'				=> 'Ligações da página %1 removidas.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings'				=> 'User settings',
 	'UserSettingsGeneral'		=> 'General',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended'		=> 'Extended',
 	'UserSettingsOther'			=> 'Other settings',
 	'UserSpace'					=> 'User space',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Alterar password',
 	'PasswordChanged'			=> 'Password alterada',
 	'EmailWelcome'				=> 'Registou-se em ',
-	'EmailRegistered'			=> 'Registou-se com sucesso em %1.'."\n".'O seu username: %2'."\n\n".'Se quiser receber notificações , é necessário aprovar o seu email. Siga este '."\n".'%3'."\n".'link para o fazer.'."\n\n\n".'Caso você não tenha pedido nenhum registo, ignore esta mensagem e nada irá acontecer.'."\n\n".'NÃO RESPONDA A ESTA MENSAGEM'."\n\n".'',
+	'EmailRegistered'			=> 'Registou-se com sucesso em %1.'."\n".'O seu username: %2'."\n\n".'Se quiser receber notificações , é necessário aprovar o seu email. Siga este '."\n".'%3'."\n".'link para o fazer.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Caso você não tenha pedido nenhum registo, ignore esta mensagem e nada irá acontecer.'."\n\n",
+	'EmailDoNotReply'			=> 'NÃO RESPONDA A ESTA MENSAGEM'."\n\n",
 	'EmailVerify'				=> 'Alguém (talvez voçê) submeteu o seu email como alvo de notificação no site  %1.'."\n".'O seu username: %2'."\n\n".'Se quiser receber notificações , é necessário aprovar o seu email. Siga este '."\n".'%3'."\n".'link para o fazer.'."\n\n".'',
 	'EmailConfirm'				=> 'Por favor verifique o seu email',
 	'EmailConfirmed'			=> 'Email confirmado com sucesso.',
@@ -1021,7 +1024,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Fuso Horário',
 	'DST'						=> 'Horário de verão',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[TMG-12] Eniwetok, Kwajalein',
 		'-11'	=> '[TMG-11] Atol de Midway, Samoa',
 		'-10'	=> '[TMG-10] Havai, Honolulu',
@@ -1056,7 +1059,7 @@ $wacko_translation = array(
 		'12'	=> '[TMG+12] Auckland, Gemak, Fiji, Kamchatka, Ilhas Marshall, Suva, Wellington',
 	),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1071,6 +1074,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

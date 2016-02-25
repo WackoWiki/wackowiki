@@ -122,36 +122,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 					<label for="confpassword"><?php echo $this->get_translation('ConfirmPassword');?>:</label>
 					<input type="password" id="confpassword" name="confpassword" size="24" />
 					<?php
-					if ($this->config['pwd_char_classes'] > 0)
-					{
-						$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
-
-						if ($this->config['pwd_char_classes'] == 1)
-						{
-							$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
-						}
-						else if ($this->config['pwd_char_classes'] == 2)
-						{
-							$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
-						}
-						else if ($this->config['pwd_char_classes'] == 3)
-						{
-							$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
-						}
-
-						$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
-					}
-
-					echo "<br /><small>".
-						 $this->get_translation('PwdCplxDesc1').
-						 str_replace('%1', $this->config['pwd_min_chars'],
-							$this->get_translation('PwdCplxDesc2')).
-						 ($this->config['pwd_unlike_login'] > 0
-							? ", ".$this->get_translation('PwdCplxDesc3')
-							: "").
-						 ($this->config['pwd_char_classes'] > 0
-							? ", ".$pwd_cplx_text
-							: "")."</small>";
+					echo $this->show_password_complexity();
 					?>
 				</p>
 				<p>
@@ -272,36 +243,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			<label for="newpassword"><?php echo $this->get_translation('NewPassword');?>:</label>
 			<input type="password" id="newpassword" name="newpassword" size="24" />
 			<?php
-			if ($this->config['pwd_char_classes'] > 0)
-			{
-				$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
-
-				if 		($this->config['pwd_char_classes'] == 1)
-				{
-					$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
-				}
-				else if ($this->config['pwd_char_classes'] == 2)
-				{
-					$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
-				}
-				else if ($this->config['pwd_char_classes'] == 3)
-				{
-					$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
-				}
-
-				$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
-			}
-
-			echo "<br /><small>".
-				$this->get_translation('PwdCplxDesc1').
-				str_replace('%1', $this->config['pwd_min_chars'],
-					$this->get_translation('PwdCplxDesc2')).
-				($this->config['pwd_unlike_login'] > 0
-					? ", ".$this->get_translation('PwdCplxDesc3')
-					: "").
-				($this->config['pwd_char_classes'] > 0
-					? ", ".$pwd_cplx_text
-					: "")."</small>";
+			echo $this->show_password_complexity();
 			?>
 		</p>
 		<p>
@@ -342,10 +284,11 @@ else
 							str_replace('%1', $this->config['site_name'],
 							str_replace('%2', $user['user_name'],
 							str_replace('%3', $this->href('', '', 'secret_code='.$code),
-							$this->get_translation('EmailForgotMessage'))))."\n";
-				$body.=	"\n".$this->get_translation('EmailGoodbye').
-							"\n".$this->config['site_name'].
-							"\n".$this->config['base_url'];
+							$this->get_translation('EmailForgotMessage'))))."\n\n".
+							$this->get_translation('EmailDoNotReply')."\n\n".
+							$this->get_translation('EmailGoodbye')."\n".
+							$this->config['site_name']."\n".
+							$this->config['base_url'];
 
 				// update table
 				$this->sql_query(
