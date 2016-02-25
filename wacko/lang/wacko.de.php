@@ -345,6 +345,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Lösche alle Revisionen',
 	'RemoveCluster'				=> 'Lösche alle Seiten des Clusters',
 	'RemoveDontKeep'			=> 'Speichere keine Sicherungs-Kopie der entfernten Seiten und Kommentare',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Referenzen auf Seite %1 gelöscht.',
 	'LinksRemoved'				=> 'Links von Seite %1 gelöscht.',
 	'CategoriesRemoved'			=> 'Kategorien gelöscht.',
@@ -506,6 +507,7 @@ $wacko_translation = array(
 
 	'UserSettings'				=> 'Benutzereinstellungen',
 	'UserSettingsGeneral'		=> 'Allgemein',
+	'UserSettingsNotifications'	=> 'Benachrichtigung',
 	'UserSettingsExtended'		=> 'Erweitert',
 	'UserSettingsOther'			=> 'weitere Einstellungen',
 	'UserSpace'					=> 'Benutzerseite',
@@ -542,7 +544,8 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Passwort ändern',
 	'PasswordChanged'			=> 'Passwort geändert',
 	'EmailWelcome'				=> 'Du bist registriert bei ',
-	'EmailRegistered'			=> 'Du hast dich bei %1 registriert.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem '."\n".'%3'."\n".'Link.'."\n\n\n".'Wenn du dich nicht registriert hast, ignoriere diese Nachricht, es wird nichts passieren.'."\n\n".'NICHT AUF DIESE NACHRICHT ANTWORTEN'."\n\n".'',
+	'EmailRegistered'			=> 'Du hast dich bei %1 registriert.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem '."\n".'%3'."\n".'Link.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Wenn du dich nicht registriert hast, ignoriere diese Nachricht, es wird nichts passieren.'."\n\n",
+	'EmailDoNotReply'			=> 'NICHT AUF DIESE NACHRICHT ANTWORTEN'."\n\n",
 	'EmailVerify'				=> 'Jemand (vielleicht du) hat deine E-Mailadresse als Bestätigungsadresse bei %1 angegeben.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem '."\n".'%3'."\n".'Link.'."\n\n".'',
 	'EmailConfirm'				=> 'Bitte bestätige deine E-Mail.',
 	'EmailConfirmed'			=> 'E-Mail wurde erfolgreich bestätigt.',
@@ -1022,7 +1025,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Zeitzone',
 	'DST'						=> 'Sommerzeit',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC - 12] Baker Island Time',
 		'-11'	=> '[UTC - 11] Niue Time, Samoa Standard Time',
 		'-10'	=> '[UTC - 10] Hawaii-Aleutian Standard Time, Cook Island Time',
@@ -1065,7 +1068,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Line Island Time',
 		),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1080,6 +1083,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'gerade eben',

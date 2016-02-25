@@ -268,7 +268,7 @@ if ($_user_id)
 			// FIXME: add a common function for this?
 			echo '<select id="menu_lang" name="menu_lang">';
 
-			$languages = $this->get_translation('Languages');
+			$languages = $this->get_translation('LanguageArray');
 
 			if ($this->config['multilanguage'])
 			{
@@ -357,7 +357,7 @@ if ($_user_id)
 		// FIXME: add a common function for this?
 		echo '<select id="lang_new" name="lang_new">';
 
-		$languages = $this->get_translation('Languages');
+		$languages = $this->get_translation('LanguageArray');
 
 		if ($this->config['multilanguage'])
 		{

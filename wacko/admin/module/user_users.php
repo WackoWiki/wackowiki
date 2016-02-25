@@ -109,7 +109,7 @@ function admin_user_users(&$engine, &$module)
 	{
 
 		$user = $engine->load_single(
-			"SELECT u.user_name, u.real_name, u.email, p.theme, p.user_lang, u.enabled ".
+			"SELECT u.user_name, u.real_name, u.email, p.theme, p.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
@@ -202,7 +202,8 @@ function admin_user_users(&$engine, &$module)
 					"user_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
 					"email			= '".quote($engine->dblink, $_POST['newemail'])."', ".
 					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
-					"enabled		= '".(int)$_POST['enabled']."' ".
+					"enabled		= '".(int)$_POST['enabled']."', ".
+					"account_status	= '".(int)$_POST['account_status']."' ".
 				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
@@ -335,7 +336,7 @@ function admin_user_users(&$engine, &$module)
 						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
 
-				$languages = $engine->get_translation('Languages');
+				$languages = $engine->get_translation('LanguageArray');
 
 				if ($langs = $engine->available_languages())
 				{
@@ -371,7 +372,7 @@ function admin_user_users(&$engine, &$module)
 	else if (isset($_POST['edit']) && $user_id)
 	{
 		if ($user = $engine->load_single(
-			"SELECT u.user_name, u.real_name, u.email, p.user_lang,  p.theme, u.enabled ".
+			"SELECT u.user_name, u.real_name, u.email, p.user_lang, p.theme, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
@@ -414,7 +415,7 @@ function admin_user_users(&$engine, &$module)
 						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
 
-						$languages = $engine->get_translation('Languages');
+						$languages = $engine->get_translation('LanguageArray');
 
 						if ($langs = $engine->available_languages())
 						{
@@ -450,6 +451,27 @@ function admin_user_users(&$engine, &$module)
 					</td>'.
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked="checked"' : '' ).' />
+					</td>
+				</tr>'.
+				'<tr>
+					<td>
+						<label for="account_status">'.$engine->get_translation('AccountStatus').'</label>
+					</td>
+					<td>
+						<select id="account_status" name="account_status">';
+
+						$account_status = $engine->get_translation('AccountStatusArray');
+
+						foreach ($account_status as $offset => $status)
+						{
+							echo '<option value="'.$offset.'" '.
+								(isset($user['account_status']) && $user['account_status'] == $offset
+									? 'selected="selected" '
+									: '').
+								'>'.$status."</option>\n";
+						}
+
+					echo '</select>
 					</td>
 				</tr>'.
 				'<tr>
@@ -525,7 +547,10 @@ function admin_user_users(&$engine, &$module)
 	if (isset($_GET['user_id']))
 	{
 		echo "<h2>".$user['user_name']."</h2>";
+
 		// user data
+		$status = $engine->get_translation('AccountStatusArray');
+
 		echo $engine->form_open('get_user', '', 'post', true, '', '');
 		?>
 		<input type="hidden" name="user_id" value="<?php echo $user_id; ?>" />
@@ -556,6 +581,10 @@ function admin_user_users(&$engine, &$module)
 				'<tr class="lined">'."\n".
 					'<th class="label">'.$engine->get_translation('UserEnabled').'</th>'.
 					'<td>'.$user['enabled'].'</td>'.
+				'</tr>'.
+				'<tr class="lined">'."\n".
+					'<th class="label">'.$engine->get_translation('AccountStatus').'</th>'.
+					'<td>'.$status[$user['account_status']].'</td>'.
 				'</tr>';
 ?>
 		</table>

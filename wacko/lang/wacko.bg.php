@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Remove all Revisions',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Външните препратки на страница %1 изтрити.',
 	'LinksRemoved'				=> 'Локалните препратки от %1 изтрити.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -499,6 +500,7 @@ $wacko_translation = array(
 
 	'UserSettings'				=> 'User settings',
 	'UserSettingsGeneral'		=> 'General',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended'		=> 'Extended',
 	'UserSettingsOther'			=> 'Other settings',
 	'UserSpace'					=> 'User space',
@@ -534,7 +536,8 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Промяна на паролата',
 	'PasswordChanged'			=> 'Паролата е  успешно променена',
 	'EmailWelcome'				=> 'Регистрация ',
-	'EmailRegistered'			=> 'Успешна регистрация  %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на информация, трябва да потвърдите адреса си. Кликнете на '."\n".'%3'."\n".'този линк.'."\n\n\n".'Ако не сте регистрирани, пропуснете това съобщение.'."\n\n".'НЕ ОТГОВАРЯЙТЕ НА ТОВА СЪОБЩЕНИЕ'."\n\n".'',
+	'EmailRegistered'			=> 'Успешна регистрация  %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на информация, трябва да потвърдите адреса си. Кликнете на '."\n".'%3'."\n".'този линк.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Ако не сте регистрирани, пропуснете това съобщение.'."\n\n",
+	'EmailDoNotReply'			=> 'НЕ ОТГОВАРЯЙТЕ НА ТОВА СЪОБЩЕНИЕ'."\n\n",
 	'EmailVerify'				=> 'Някой, (вероятно Вие) е дал този адрес в %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на информация, трябва да потвърдите адреса си. Кликнете на '."\n".'%3'."\n".'този линк.'."\n\n".'',
 	'EmailConfirm'				=> 'Моля потвърдете вашия email',
 	'EmailConfirmed'			=> 'Вашият email е потвърден успешно.',
@@ -1014,7 +1017,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Времева зона',
 	'DST'						=> 'Лятно часово време',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC - 12] Остров Бейкър',
 		'-11'	=> '[UTC - 11] Ниуе, Самоа (стандартно)',
 		'-10'	=> '[UTC - 10] Хавай-Алишън (стандартно), Кук Остров',
@@ -1057,7 +1060,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Линия Айлънд',
 ),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1072,6 +1075,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

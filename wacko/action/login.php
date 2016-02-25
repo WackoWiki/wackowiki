@@ -132,7 +132,14 @@ else
 			// check for disabled account
 			if (($existing_user['enabled'] == false) || $existing_user['account_type'] != 0 )
 			{
-				$error = $this->get_translation('AccountDisabled');
+				if ($existing_user['account_status'] == 1)
+				{
+					$error = $this->get_translation('UserApprovalPending');
+				}
+				else
+				{
+					$error = $this->get_translation('AccountDisabled');
+				}
 			}
 			else
 			{

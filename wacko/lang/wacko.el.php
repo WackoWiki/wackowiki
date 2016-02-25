@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Κατάργηση όλων των αναθεωρήσεων',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Οι παραπομπές σε αυτήν την σελίδα %1 αφαιρέθηκαν.',
 	'LinksRemoved'				=> 'Οι σύνδεσμοι από αυτήν την σελίδα %1 αφαιρέθηκαν.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings' => 'Ρυθμίσεις χρήστη',
 	'UserSettingsGeneral' => 'General',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended' => 'Επέκταση',
 	'UserSettingsOther' => '¶λλες ρυθμίσεις',
 	'UserSpace' => 'User space',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword' => 'Αλλαγή συνθηματικού',
 	'PasswordChanged' => 'Το συνθηματικά άλλαξε',
 	'EmailWelcome' => 'Εγγραφήκατε στο ',
-	'EmailRegistered' => 'Εγγραφήκατε επιτυχώς στο %1.'."\n".'Το όνομα σύνδεσή σας είναι: %2'."\n\n".'Εάν θέλετε να λαμβάνετε ειδοποιήσεις, χρειάζεται να πιστοποιήσετε το ηλεκτρονικό σας  ταχυδρομείο. Παρακαλώ μεταβείτε '."\n".'%3'."\n".'σε αυτό το σύνδεσμο για να το κάνετε.'."\n\n\n".'Αν δεν ζητήσατε εγγραφή, παρακαλώ αγνοήστε το παρόν μήνυμα.'."\n\n".'ΜΗΝ ΑΠΑΝΤΗΣΕΤΕ ΣΕ ΑΥΤΟ ΤΟ ΜΗΝΥΜΑ'."\n\n".'',
+	'EmailRegistered' => 'Εγγραφήκατε επιτυχώς στο %1.'."\n".'Το όνομα σύνδεσή σας είναι: %2'."\n\n".'Εάν θέλετε να λαμβάνετε ειδοποιήσεις, χρειάζεται να πιστοποιήσετε το ηλεκτρονικό σας  ταχυδρομείο. Παρακαλώ μεταβείτε '."\n".'%3'."\n".'σε αυτό το σύνδεσμο για να το κάνετε.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Αν δεν ζητήσατε εγγραφή, παρακαλώ αγνοήστε το παρόν μήνυμα.'."\n\n",
+	'EmailDoNotReply'			=> 'ΜΗΝ ΑΠΑΝΤΗΣΕΤΕ ΣΕ ΑΥΤΟ ΤΟ ΜΗΝΥΜΑ'."\n\n",
 	'EmailVerify' => 'Κάποιος (πιθανόν εσείς) έχει ενεργοποιήσει την ειδοποίηση της ηλεκτρονικής αλληλογραφίας στο %1.'."\n".'Το όνομα χρήστη: %2'."\n\n".'Αν θέλετε να αποδέχεστε ειδοποιήσεις, πρέπει να αποδεχθείτε το email. Παρακαλώ ακολουθήστε '."\n".'%3'."\n".'τον σύνδεσμο για να το κάνετε αυτό.'."\n\n".'',
 	'EmailConfirm' => 'Παρακαλώ επιβεβαιώστε το ηλεκτρονικό σας ταχυδρομείο',
 	'EmailConfirmed' => 'Το ηλεκτρονικό σας ταχυδρομείο επιβεβαιώθηκε.',
@@ -1022,7 +1025,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Ωρολογιακή ζώνη',
 	'DST'						=> 'Θερινή ώρα',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC - 12] Baker Island Time',
 		'-11'	=> '[UTC - 11] Niue Time, Samoa Standard Time',
 		'-10'	=> '[UTC - 10] Hawaii-Aleutian Standard Time, Cook Island Time',
@@ -1065,7 +1068,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Line Island Time',
 	),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1080,6 +1083,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'μόλις τώρα',

@@ -203,7 +203,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				{
 					$timezone = ($is_dst) ? $timezone - 1 : $timezone;
 
-					if (!isset($this->get_translation['TzZones'][(string) $timezone]))
+					if (!isset($this->get_translation['TzZoneArray'][(string) $timezone]))
 					{
 						$timezone = $this->config['timezone'];
 					}
@@ -213,6 +213,23 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$timezone	= $this->config['timezone'];
 					$is_dst		= $this->config['dst'];
 				} */
+
+				// set new user approval
+				if ($this->config['approve_new_user'] == true)
+				{
+					$account_status		= 1;
+					$account_enabled	= 0;
+					$waiting_approval	= $this->get_translation('UserWaitingApproval');
+					$requires_approval	= $this->get_translation('UserRequiresApproval');
+				}
+				else
+				{
+					$account_status		= 0;
+					$account_enabled	= 1;
+					$waiting_approval	= '';
+					$requires_approval	= '';
+
+				}
 
 				// INSERT user
 				$this->sql_query(
@@ -225,6 +242,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"email			= '".quote($this->dblink, $email)."', ".
 						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
 						"password		= '".quote($this->dblink, $password_hashed)."', ".
+						"account_status	= '".quote($this->dblink, $account_status)."', ".
+						"enabled		= '".quote($this->dblink, $account_enabled)."', ".
 						"user_form_salt	= '".quote($this->dblink, $salt_user_form)."'");
 
 				// get new user_id
@@ -259,7 +278,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				// send email
 				if ($this->config['enable_email'] == true)
 				{
-					// 1. Send signup email
+					// 1. Send signup email to new user
 					/* TODO: set user language for email encoding */
 					$this->load_translation($lang);
 					$this->set_translation ($lang);
@@ -272,6 +291,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 								str_replace('%2', $user_name,
 								str_replace('%3', $this->href('', '', 'confirm='.$confirm),
 								$this->get_translation('EmailRegistered'))))."\n\n".
+								$waiting_approval."\n\n".
+								$this->get_translation('EmailDoNotReply')."\n\n".
 								$this->get_translation('EmailGoodbye')."\n".
 								$this->config['site_name']."\n".
 								$this->config['base_url'];
@@ -293,6 +314,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 									$this->get_translation('NewAccountUsername').' '.$user_name."\n".
 									$this->get_translation('NewAccountEmail').' '.$email."\n".
 									$this->get_translation('NewAccountIP').' '.$this->ip_address()."\n\n".
+									$requires_approval."\n\n".
 									$this->get_translation('NewAccountDoNotReply')."\n\n".
 									$this->config['site_name']."\n".
 									$this->config['base_url'];
@@ -309,9 +331,11 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				$this->log(4, str_replace('%2', $email, str_replace('%1', $user_name, $this->get_translation('LogUserRegistered', $this->config['language']))));
 
 				// forward
-				$this->set_message($this->get_translation('SiteRegistered').
-				$this->config['site_name'].". <br />".
-				$this->get_translation('SiteEmailConfirm'));
+				$this->set_message(
+					$this->get_translation('SiteRegistered').
+					$this->config['site_name'].'. <br /><br />'.
+					$this->get_translation('SiteEmailConfirm'));
+
 				$this->context[++$this->current_context] = '';
 				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0,1000)));
 			}
@@ -329,6 +353,12 @@ if (!isset($_GET['confirm']))
 		}
 
 		echo '<div class="cssform">';
+
+		if ($this->config['approve_new_user'] == true)
+		{
+			$this->show_message($this->get_translation('UserApprovalInfo'), 'hint');
+		}
+
 		echo $this->form_open('register', '', '', true);
 
 		echo '<input type="hidden" name="action" value="register" />';
@@ -340,8 +370,8 @@ if (!isset($_GET['confirm']))
 			echo '<p><label for="user_lang">'.$this->format_translation('RegistrationLang').':</label>';
 			echo '<select id="user_lang" name="user_lang">';
 
-			$languages	= $this->get_translation('Languages');
-			$user_lang		= $this->user_agent_language();
+			$languages	= $this->get_translation('LanguageArray');
+			$user_lang	= $this->user_agent_language();
 			$langs		= $this->available_languages();
 
 			foreach ($langs as $lang)
@@ -384,37 +414,7 @@ if (!isset($_GET['confirm']))
 		#echo '<input type="text" id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></p>';
 		echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
 		echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" autocomplete="off" required />';
-
-		if ($this->config['pwd_char_classes'] > 0)
-		{
-			$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
-
-			if ($this->config['pwd_char_classes'] == 1)
-			{
-				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
-			}
-			else if ($this->config['pwd_char_classes'] == 2)
-			{
-				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
-			}
-			else if ($this->config['pwd_char_classes'] == 3)
-			{
-				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
-			}
-
-			$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
-		}
-
-		echo "<br /><small>".
-			$this->get_translation('PwdCplxDesc1').
-			str_replace('%1', $this->config['pwd_min_chars'],
-				$this->get_translation('PwdCplxDesc2')).
-			($this->config['pwd_unlike_login'] > 0
-				? ", ".$this->get_translation('PwdCplxDesc3')
-				: "").
-			($this->config['pwd_char_classes'] > 0
-				? ", ".$pwd_cplx_text
-				: "")."</small>";
+		echo $this->show_password_complexity();
 		echo '</p>';
 
 		echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';

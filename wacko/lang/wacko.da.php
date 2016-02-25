@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Remove all Revisions',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Links til %1 er fjernet.',
 	'LinksRemoved'				=> 'Links fra siden %1 fjernet.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings'				=> 'User settings',
 	'UserSettingsGeneral'		=> 'General',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended'		=> 'Extended',
 	'UserSettingsOther'			=> 'Other settings',
 	'UserSpace'					=> 'User space',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Skift password',
 	'PasswordChanged'			=> 'Password ændret',
 	'EmailWelcome'				=> 'Du blev registreret den ',
-	'EmailRegistered'			=> 'Du er nu registreret i %1.'."\n".'Dit brugernavn: %2'."\n\n".'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg '."\n".'%3'."\n".'dette link for at godkende din mail.'."\n\n\n".'Hvis du ikke har prøvet at registrere dig skal du bare se bort fra denne meddelelse og ingenting vil ske.'."\n\n".'SVAR IKKE PÅ DENNE MEDDELELSE'."\n\n".'',
+	'EmailRegistered'			=> 'Du er nu registreret i %1.'."\n".'Dit brugernavn: %2'."\n\n".'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg '."\n".'%3'."\n".'dette link for at godkende din mail.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Hvis du ikke har prøvet at registrere dig skal du bare se bort fra denne meddelelse og ingenting vil ske.'."\n\n",
+	'EmailDoNotReply'			=> 'SVAR IKKE PÅ DENNE MEDDELELSE'."\n\n",
 	'EmailVerify'				=> 'Du er nu registreret i %1.'."\n".'Dit brugernavn: %2'."\n\n".'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg '."\n".'%3'."\n".'dette link for at godkende din mail.'."\n\n".'',
 	'EmailConfirm'				=> 'Bekræft din mail',
 	'EmailConfirmed'			=> 'Din mail er bekræftet.',
@@ -1021,7 +1024,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Tidszone',
 	'DST'						=> 'Sommertid',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC - 12] Howard- & Baker-øerne',
 		'-11'	=> '[UTC - 11] Midway-øerne',
 		'-10'	=> '[UTC - 10] Hawaii, Cook-øerne',
@@ -1064,7 +1067,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Linie-øerne',
 ),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1079,6 +1082,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

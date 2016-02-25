@@ -347,6 +347,7 @@ $wacko_translation = array(
 	'RemoveRevisions'			=> 'Remove all Revisions',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'ReferrersRemoved'			=> 'Odsy³acze do strony %1 zosta³y usuniête.',
 	'LinksRemoved'				=> 'Odno¶niki ze strony %1 zosta³y usuniête.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -505,6 +506,7 @@ $wacko_translation = array(
 
 	'UserSettings' => 'User settings',
 	'UserSettingsGeneral' => 'General',
+	'UserSettingsNotifications'	=> 'Notifications',
 	'UserSettingsExtended' => 'Extended',
 	'UserSettingsOther' => 'Other settings',
 	'UserSpace' => 'User space',
@@ -541,7 +543,8 @@ $wacko_translation = array(
 	'YouWantChangePassword' => 'Zmiana has³a',
 	'PasswordChanged' => 'Has³o zosta³o zmienione',
 	'EmailWelcome' => 'Dziêkujemy. Rejestracja przebieg³a pomy¶lnie ',
-	'EmailRegistered' => 'Dziêkujemy! Twoja rejestracja zosta³a zakoñczona pomy¶lnie'."\n".'Nazwa u¿ytkownika: %2'."\n\n".'Aby w³±czyæ mo¿liwo¶æ otrzymywania powiadomieñ z tej strony nale¿y potwierdziæ swój adres e-mail. W tym celu nale¿y po³±czyæ siê z '."\n".'%3'."\n".'t± stron±.'."\n\n\n".'Je¶li to nie twoje zg³oszenie, zignoruj tê wiadomo¶æ. Nic siê nie stanie.'."\n\n".'NIE ODPOWIADAJ NA TÊ WIADOMO¦Æ'."\n\n".'',
+	'EmailRegistered' => 'Dziêkujemy! Twoja rejestracja zosta³a zakoñczona pomy¶lnie'."\n".'Nazwa u¿ytkownika: %2'."\n\n".'Aby w³±czyæ mo¿liwo¶æ otrzymywania powiadomieñ z tej strony nale¿y potwierdziæ swój adres e-mail. W tym celu nale¿y po³±czyæ siê z '."\n".'%3'."\n".'t± stron±.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Je¶li to nie twoje zg³oszenie, zignoruj tê wiadomo¶æ. Nic siê nie stanie.'."\n\n",
+	'EmailDoNotReply'			=> 'NIE ODPOWIADAJ NA TÊ WIADOMO¦Æ'."\n\n",
 	'EmailVerify' => 'Kto¶ (prawdopodobnie Ty) zamierza otrzymywaæ powiadomienia do %1 na ten adres e-mail.'."\n".' Twoja nazwa u¿ytkownika:  %2'."\n\n".'Je¿eli chcesz otrzymywaæ od nas powiadomienia niezbêdne jest potwierdzenie. W tym celu nale¿y po³±czyæ siê z '."\n".'%3'."\n".'t± stron±.',
 	'EmailConfirm' => 'Weryfikacja adresu e-mail',
 	'EmailConfirmed' => 'Adres e-mail zosta³ potwierdzony.',
@@ -1021,7 +1024,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Strefa czasowa',
 	'DST'						=> 'Czas letni',
-	'TzZones'	=> array(
+	'TzZoneArray'	=> array(
 		'-12'	=> '[UTC - 12] Czas Wysp Baker',
 		'-11'	=> '[UTC - 11] Czas Niue, Czas Standardowy Samoa',
 		'-10'	=> '[UTC - 10] Hawajski Czas Standardowy, Czas Wysp Cooka',
@@ -1064,7 +1067,7 @@ $wacko_translation = array(
 		'14'	=> '[UTC + 14] Czas Wysp Line',
 	),
 
-	'Languages'	=>  array(
+	'LanguageArray'	=>  array(
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1079,6 +1082,14 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
+	),
+
+	'AccountStatus'				=> 'Account status',
+	'AccountStatusArray' => array(
+		'0' => 'active',
+		'1' => 'pending',
+		'2' => 'blocked',
+		'3' => 'inactive',
 	),
 
 	'JustNow'		=> 'just now',

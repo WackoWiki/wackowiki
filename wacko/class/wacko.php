@@ -7062,6 +7062,40 @@ class Wacko
 		return $error;
 	}
 
+	function show_password_complexity()
+	{
+		if ($this->config['pwd_char_classes'] > 0)
+		{
+			$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
+
+			if ($this->config['pwd_char_classes'] == 1)
+			{
+				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
+			}
+			else if ($this->config['pwd_char_classes'] == 2)
+			{
+				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
+			}
+			else if ($this->config['pwd_char_classes'] == 3)
+			{
+				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
+			}
+
+			$pwd_cplx_text .= '. '.$this->get_translation('PwdCplxDesc5');
+		}
+
+		return '<br /><small>'.
+			$this->get_translation('PwdCplxDesc1').
+			str_replace('%1', $this->config['pwd_min_chars'],
+				$this->get_translation('PwdCplxDesc2')).
+			($this->config['pwd_unlike_login'] > 0
+				? ', '.$this->get_translation('PwdCplxDesc3')
+				: '').
+			($this->config['pwd_char_classes'] > 0
+				? ', '.$pwd_cplx_text
+				: '')."</small>";
+	}
+
 
 	// Generate random password of defined $length that satisfise the complexity rules:
 	// containing n > 0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
