@@ -5,152 +5,181 @@
  * @author Davey Shafik <davey@php.net>
  * @copyright Copyright 2003 Davey Shafik and Synaptic Media. All Rights Reserved.
  */
-$options['color']['tags'] = "#000080";
-$options['color']['attributes'] = "#800000";
-$options['color']['other'] = "#A6A6A6";
-$options['color']['comment'] = "gray";
-$options['color']['attributevalues'] = "blue";
-$options['color']['entities'] = "orange";
-$options['line_numbers'] = false;
+$options['color']['tags']				= '#000080';
+$options['color']['attributes']			= '#800000';
+$options['color']['other']				= '#A6A6A6';
+$options['color']['comment']			= 'gray';
+$options['color']['attributevalues']	= 'blue';
+$options['color']['entities']			= 'orange';
+$options['line_numbers']				= false;
 
 $xhtml_tags = array(
-	"!DOCTYPE",
-	"a",
-	"abbr",
-	"acronym",
-	"address",
-	"applet",
-	"area",
-	"b",
-	"base",
-	"basefont",
-	"bgsound",
-	"bdo",
-	"big",
-	"blink",
-	"blockquote",
-	"body",
-	"br",
-	"button",
-	"caption",
-	"center",
-	"cite",
-	"code",
-	"col",
-	"colgroup",
-	"comment",
-	"dd",
-	"del",
-	"dfn",
-	"dir",
-	"div",
-	"dl",
-	"dt",
-	"em",
-	"embed",
-	"fieldset",
-	"font",
-	"form",
-	"frame",
-	"frameset",
-	"h",
-	"h1",
-	"h2",
-	"h3",
-	"h4",
-	"h5",
-	"h6",
-	"head",
-	"hr",
-	"hta:application",
-	"html",
-	"i",
-	"iframe",
-	"img",
-	"input",
-	"ins",
-	"isindex",
-	"kbd",
-	"label",
-	"legend",
-	"li",
-	"link",
-	"listing",
-	"map",
-	"marquee",
-	"menu",
-	"meta",
-	"multicol",
-	"nextid",
-	"nobr",
-	"noframes",
-	"noscript",
-	"object",
-	"ol",
-	"optgroup",
-	"option",
-	"p",
-	"param",
-	"plaintext",
-	"pre",
-	"q",
-	"s",
-	"samp",
-	"script",
-	"select",
-	"server",
-	"small",
-	"sound",
-	"spacer",
-	"span",
-	"strike",
-	"strong",
-	"style",
-	"sub",
-	"sup",
-	"table",
-	"tbody",
-	"td",
-	"textarea",
-	"textflow",
-	"tfoot",
-	"th",
-	"thead",
-	"title",
-	"tr",
-	"tt",
-	"u",
-	"ul",
-	"var",
-	"wbr",
-	"xmp"
+	'!DOCTYPE',
+	'a',
+	'abbr',
+	'acronym',
+	'address',
+	'applet',
+	'area',
+	'article', // HTML5
+	'aside', // HTML5
+	'audio', // HTML5
+	'b',
+	'base',
+	'basefont',
+	'bgsound',
+	'bdi', // HTML5
+	'bdo',
+	'big',
+	'blink',
+	'blockquote',
+	'body',
+	'br',
+	'button',
+	'canvas', // HTML5
+	'caption',
+	'center',
+	'cite',
+	'code',
+	'col',
+	'colgroup',
+	'comment',
+	'datalist', // HTML5
+	'dd',
+	'del',
+	'details', // HTML5
+	'dfn',
+	'dir',
+	'div',
+	'dl',
+	'dt',
+	'em',
+	'embed',
+	'fieldset',
+	'figcaption', // HTML5
+	'figure', // HTML5
+	'font',
+	'footer', // HTML5
+	'form',
+	'frame',
+	'frameset',
+	'h',
+	'h1',
+	'h2',
+	'h3',
+	'h4',
+	'h5',
+	'h6',
+	'head',
+	'header', // HTML5
+	'hgroup', // HTML5
+	'hr',
+	'hta:application',
+	'html',
+	'i',
+	'iframe',
+	'img',
+	'input',
+	'ins',
+	'isindex',
+	'kbd',
+	'keygen', // HTML5
+	'label',
+	'legend',
+	'li',
+	'link',
+	'listing',
+	'main', // HTML5
+	'map',
+	'mark',
+	'marquee',
+	'menu',
+	'meta',
+	'meter', // HTML5
+	'multicol',
+	'nav', // HTML5
+	'nextid',
+	'nobr',
+	'noframes',
+	'noscript',
+	'object',
+	'ol',
+	'optgroup',
+	'option',
+	'output', // HTML5
+	'p',
+	'param',
+	'plaintext',
+	'pre',
+	'progress', // HTML5
+	'q',
+	'ruby', // HTML5
+	'rp', // HTML5
+	'rt', // HTML5
+	's',
+	'samp',
+	'script',
+	'section', // HTML5
+	'select',
+	'server',
+	'small',
+	'sound',
+	'spacer',
+	'span',
+	'strike',
+	'strong',
+	'style',
+	'sub',
+	'summary', // HTML5
+	'sup',
+	'svg', // HTML5
+	'table',
+	'tbody',
+	'td',
+	'template', // HTML5
+	'textarea',
+	'textflow',
+	'tfoot',
+	'th',
+	'thead',
+	'time', // HTML5
+	'title',
+	'tr',
+	'track', // HTML5
+	'tt',
+	'u',
+	'ul',
+	'var',
+	'video', // HTML5
+	'wbr',
+	'xmp'
 	);
 
 	$source = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 	$source = preg_replace_callback(
 			'/&lt;!--(.*?)--&gt;/s',
-			function ($matches)
+			function ($matches) use ($options)
 			{
 				return
-				'"<span style=\"color: ".$options["color"]["comment"].";\">&lt;!--".
-				str_replace("&lt;","&lt;<!-- -->",
-				str_replace("=","=<!-- -->",
+				'<span style="color: '.$options['color']['comment'].';">&lt;!--'.
+				str_replace('&lt;',	'&lt;<!-- -->',
+				str_replace('=',	'=<!-- -->',
 				$matches[1])).
-				"--&gt;</span>"';
+				'--&gt;</span>';
 			},
-	$source);
+		$source);
 
 	$source = preg_replace_callback(
 			'/(&lt;style.*?&gt;)(.*?)&lt;\/style&gt;/s',
 			function ($matches)
 			{
 				return
-				'$matches[1].
-				$this->format($matches[2], "highlight/css", array("nopre" => true, "notypo" => false)).
-				"&lt;/style&gt;"';
+				$matches[1].
+				$this->format($matches[2], 'highlight/css', array('nopre' => true, 'notypo' => false)).
+				'&lt;/style&gt;';
 			},
-	$source);
+		$source);
 
 	foreach($xhtml_tags as $i)
 	{
@@ -160,9 +189,9 @@ $xhtml_tags = array(
 
 	$source = str_replace('/&gt;','<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">/&gt;</span>',$source);
 	$source = preg_replace(
-	'/([[:space:]]|&quot;|\'|\?)&gt;/',
-	'\\1<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&gt;</span>',
-	$source);
+			'/([[:space:]]|&quot;|\'|\?)&gt;/',
+			'\\1<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&gt;</span>',
+			$source);
 
 	$source = preg_replace( "/([a-z-]+)=(&quot;|\')(.*?)\\2/i",
 			'<span style="color: ' .$options['color']['attributes']. ';font-weight:bold;">$1=</span><span style="color: '
@@ -171,9 +200,9 @@ $xhtml_tags = array(
 
 	if ($options['line_numbers'] == true)
 	{
-		$lines = preg_split("/(\n|<br \/>)/s",$source);
-		$source = '<ol>';
-		$i = 0;
+		$lines		= preg_split("/(\n|<br \/>)/s",$source);
+		$source		= '<ol>';
+		$i			= 0;
 
 		foreach ($lines as $line)
 		{
