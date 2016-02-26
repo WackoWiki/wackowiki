@@ -183,11 +183,22 @@ $xhtml_tags = array(
 
 	foreach($xhtml_tags as $i)
 	{
-		$source = preg_replace('/&lt;' . $i . '(&gt;|[[:space:]])/', '<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&lt;' .$i. '\\1</span>', $source);
-		$source = str_replace('&lt;/' .$i. '&gt;','<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&lt;/' .$i. '&gt;</span>',$source);
+		$source = preg_replace(
+				'/&lt;' . $i . '(&gt;|[[:space:]])/',
+				'<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&lt;' .$i. '\\1</span>',
+				$source);
+
+		$source = str_replace(
+				'&lt;/' .$i. '&gt;',
+				'<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&lt;/' .$i. '&gt;</span>',
+				$source);
 	}
 
-	$source = str_replace('/&gt;','<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">/&gt;</span>',$source);
+	$source = str_replace(
+			'/&gt;',
+			'<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">/&gt;</span>',
+			$source);
+
 	$source = preg_replace(
 			'/([[:space:]]|&quot;|\'|\?)&gt;/',
 			'\\1<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&gt;</span>',
@@ -200,7 +211,7 @@ $xhtml_tags = array(
 
 	if ($options['line_numbers'] == true)
 	{
-		$lines		= preg_split("/(\n|<br \/>)/s",$source);
+		$lines		= preg_split("/(\n|<br \/>)/s", $source);
 		$source		= '<ol>';
 		$i			= 0;
 
