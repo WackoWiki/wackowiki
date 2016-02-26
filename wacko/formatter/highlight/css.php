@@ -5,14 +5,14 @@
  * @author Davey Shafik <davey@php.net>
  * @copyright Copyright 2003 Davey Shafik and Synaptic Media. All Rights Reserved.
  */
-$options['color']['tags'] = "red";
-$options['color']['attributes'] = "#800000";
-$options['color']['other'] = "#A6A6A6";
-$options['color']['comment'] = "gray";
-$options['color']['attributevalues'] = "blue";
-$options['color']['entities'] = "orange";
-$options['color']['digits'] = "green";
-$options['line_numbers'] = false;
+$options['color']['tags']				= 'red';
+$options['color']['attributes']			= '#800000';
+$options['color']['other']				= '#A6A6A6';
+$options['color']['comment']			= 'gray';
+$options['color']['attributevalues']	= 'blue';
+$options['color']['entities']			= 'orange';
+$options['color']['digits']				= 'green';
+$options['line_numbers']				= false;
 
 if (isset($options['notypo']) && $options['notypo'] !== false) $options['notypo'] = true;
 
@@ -207,7 +207,7 @@ $special_keyword2 = array(
 	if (isset($options['notypo'])) echo '<!--notypo-->';
 	if (!isset($options['nopre'])) echo '<pre class="code">';
 
-	echo preg_replace('/\&nbsp\;/', '', str_replace("\t","	", $css), 1);
+	echo preg_replace('/\&nbsp\;/', '', str_replace("\t", "	", $css), 1);
 
 	if (!isset($options['nopre'])) echo '</pre>';
 	if (isset($options['notypo'])) echo '<!--/notypo-->"';
