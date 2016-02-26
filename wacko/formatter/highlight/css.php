@@ -121,7 +121,8 @@ $keywords = array(
 );
 
 // These should NOT be followed by a -
-$special_keywords = array(	'color',
+$special_keywords = array(
+	'color',
 	'background',
 	'border',
 	'margin',
@@ -137,8 +138,10 @@ $special_keywords = array(	'color',
 	'border-right',
 	'border-left'
 	);
-	// These should NOT be preceeded by a -
-	$special_keyword2 = array(	'height',
+
+// These should NOT be preceeded by a -
+$special_keyword2 = array(
+	'height',
 	'left',
 	'bottom',
 	'top',
@@ -147,16 +150,16 @@ $special_keywords = array(	'color',
 	'width'
 	);
 
-	$css = str_replace(":","\:",$css);
+	$css = str_replace(":", "\:", $css);
 
 	foreach($keywords as $i)
 	{
-		$css = str_replace($i,'<span style="color: ##oct##;">' .$i. '</span>',$css);
+		$css = str_replace($i, '<span style="color: ##oct##;">' .$i. '</span>', $css);
 	}
 
 	foreach($special_keywords as $i)
 	{
-		$css = str_replace($i . '\:','<span style="color: ##oct##;">' .$i. '</span>\:',$css);
+		$css = str_replace($i . '\:', '<span style="color: ##oct##;">' .$i. '</span>\:', $css);
 	}
 
 	foreach($special_keyword2 as $i)
@@ -172,16 +175,25 @@ $special_keywords = array(	'color',
 	$css = str_replace("{", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">{</span>", $css);
 	$css = str_replace("}", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">}</span>", $css);
 
-	$css = preg_replace_callback('!/\*(.*?)\*/!s', function ($matches) { '"<span style=\"color: '.$options['color']['comment'].';\">/*".strip_tags($matches[1])."*/</span>"'; }, $css);
+	$css = preg_replace_callback(
+			'!/\*(.*?)\*/!s',
+			function ($matches) use ($options)
+			{
+				return
+				'<span style="color: '.$options['color']['comment'].';">/*'.
+				strip_tags($matches[1]).
+				'*/</span>';
+			},
+			$css);
 
 	$css = str_replace("##oct##", $options['color']['tags'], $css);
 	$css = str_replace("##ocv##", $options['color']['attributevalues'], $css);
 
 	if ($options['line_numbers'] == true)
 	{
-		$lines = preg_split("/(\n|<br \/>)/s",$css);
-		$source = '<ol>';
-		$i = 0;
+		$lines		= preg_split("/(\n|<br \/>)/s", $css);
+		$source		= '<ol>';
+		$i			= 0;
 
 		foreach ($lines as $line)
 		{
@@ -195,7 +207,7 @@ $special_keywords = array(	'color',
 	if (isset($options['notypo'])) echo '<!--notypo-->';
 	if (!isset($options['nopre'])) echo '<pre class="code">';
 
-	echo preg_replace('/\&nbsp\;/', '', str_replace("\t","	",$css), 1);
+	echo preg_replace('/\&nbsp\;/', '', str_replace("\t","	", $css), 1);
 
 	if (!isset($options['nopre'])) echo '</pre>';
 	if (isset($options['notypo'])) echo '<!--/notypo-->"';
