@@ -83,14 +83,15 @@ function admin_maint_resync(&$engine, &$module)
 					OR
 					(p.owner_id = u.user_id AND p.comment_on_id = '0' ".
 					"AND p.deleted <> '1' ))
-					GROUP BY u.user_id
+				GROUP BY u.user_id
 				");
-$engine->debug_print_r($users1);
-$engine->debug_print_r($users2);
+#$engine->debug_print_r($users1);
+#$engine->debug_print_r($users2);
 			$users = array_merge($users1, $users2);
-$engine->debug_print_r($users);
+#$engine->debug_print_r($users);
 			$users = array_unique($users);
-$engine->debug_print_r($users);
+#$engine->debug_print_r($users);
+
 			foreach ($users as $user)
 			{
 				$engine->sql_query(
@@ -136,6 +137,37 @@ $engine->debug_print_r($users);
 			$engine->log(1, 'Synchronized user statistics');
 
 			$message = 'User Statistics synchronized.';
+			$engine->show_message($message);
+		}
+		else if ($_REQUEST['action'] == 'pagestats')
+		{
+			$comments = $engine->load_all(
+					"SELECT p.page_id, COUNT( c.page_id ) AS n
+					FROM {$engine->config['table_prefix']}page AS c
+					RIGHT JOIN {$engine->config['table_prefix']}page AS p ON c.comment_on_id = p.page_id
+					WHERE c.deleted <> '1'
+					GROUP BY p.page_id
+
+					UNION ALL
+
+					SELECT p.page_id, '0' AS n
+					FROM {$engine->config['table_prefix']}page AS c
+					RIGHT JOIN {$engine->config['table_prefix']}page AS p ON c.comment_on_id = p.page_id
+					WHERE c.comment_on_id IS NULL
+					");
+
+			foreach ($comments as $comment)
+			{
+				$engine->sql_query(
+					"UPDATE {$engine->config['table_prefix']}page ".
+					"SET comments = ".(int)$comment['n']." ".
+					"WHERE page_id = '".$comment['page_id']."' ".
+					"LIMIT 1");
+			}
+
+			$engine->log(1, 'Synchronized page statistics');
+
+			$message = 'Page Statistics synchronized.';
 			$engine->show_message($message);
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
@@ -244,7 +276,23 @@ $engine->debug_print_r($users);
 <?php	echo $engine->form_close();?>
 	<br />
 	<hr />
-	<h3>RSS-Feeds</h3>
+	<h3>Page statistics</h3>
+	<br />
+	<p>
+		Page statistics (number of comments and revisions)
+		in some situations may differ from actual data. This operation
+		allows updating statistics on current actual data of the database.
+	</p>
+	<br />
+<?php
+	echo $engine->form_open('pageupdate', '', 'post', true, '', '');
+?>
+		<input type="hidden" name="action" value="pagestats" />
+		<input type="submit" name="start" id="submit" value="synchronize" />
+<?php		echo $engine->form_close();?>
+	<br />
+	<hr />
+	<h3>Feeds</h3>
 	<br />
 	<p>
 		In the case of direct editing of pages in the database, the content of RSS-feeds are not
@@ -253,11 +301,11 @@ $engine->debug_print_r($users);
 	</p>
 	<br />
 <?php
-	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
+	echo $engine->form_open('feedupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="rssfeeds" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
-<?php		echo $engine->form_close();;?>
+<?php		echo $engine->form_close();?>
 	<br />
 	<hr />
 	<h3>Wiki-links</h3>
@@ -269,12 +317,12 @@ $engine->debug_print_r($users);
 	</p>
 	<br />
 <?php
-	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
+	echo $engine->form_open('linksupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="wikilinks" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
 <?php
-	echo $engine->form_close();;
+	echo $engine->form_close();
 }
 
 ?>

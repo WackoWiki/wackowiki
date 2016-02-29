@@ -161,7 +161,7 @@ function admin_content_pages(&$engine, &$module)
 		// FIXME: add a common function for this?
 		echo '<select id="level" name="level">';
 
-		$languages = $engine->get_translation('Languages');
+		$languages = $engine->get_translation('LanguageArray');
 
 		if ($engine->config['multilanguage'])
 		{
