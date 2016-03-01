@@ -93,6 +93,14 @@ class Wacko
 	}
 
 	// DATABASE
+
+	/**
+	* Make DB SQL-query
+	*
+	* @param string $query SQL query
+	* @param int $debug
+	* @return resource Query result
+	*/
 	function sql_query($query, $debug = 0)
 	{
 		if ($debug)
@@ -124,6 +132,14 @@ class Wacko
 		return $result;
 	}
 
+	/**
+	* Makes DB query and load result in array
+	*
+	* @param string $query SQL query
+	* @param boolean $docache
+	* @return resource Query result
+	* @return array Array of rows
+	*/
 	function load_all($query, $docache = false)
 	{
 		$data	= array();
@@ -164,6 +180,13 @@ class Wacko
 		}
 	}
 
+	/**
+	* Makes DB query and return only first result
+	*
+	* @param string $query SQL query
+	* @param boolean $docache
+	* @return array First returned row
+	*/
 	function load_single($query, $docache = false)
 	{
 		if ($data = $this->load_all($query, $docache))
@@ -247,7 +270,7 @@ class Wacko
 	/**
 	* Check if file with filename exists. Check only DB entry,
 	* not file in FS
-	* @param string $filen_ame Filename
+	* @param string $file_name Filename
 	* @param string $unwrapped_tag Optional. Unwrapped supertag. If
 	* not set, then check if file exists in global space
 	* @return array File description array
@@ -476,6 +499,10 @@ class Wacko
 		}
 	}
 
+	/**
+	* Loads language file from lang/lang.<lang>.php.
+	* @param string $lang Language code
+	*/
 	function load_lang($lang)
 	{
 		$wacko_language = '';
@@ -525,6 +552,12 @@ class Wacko
 		}
 	}
 
+	/**
+	* Get array of all available resource translations
+	*
+	* @param string $subset
+	* @return Array of language codes
+	*/
 	function available_languages($subset = true)
 	{
 		if (!$this->_lang_list || $subset == false)
@@ -831,6 +864,15 @@ class Wacko
 	}
 
 	// PAGES
+
+	/**
+	* Transliterate tag to supertag
+	*
+	* @param string $tag
+	* @param int $strtolow Change tag case. TRAN_DONTCHANGE - don't change TRAN_LOWERCASE - convert to lowercase
+	* @param unknown_type $donotload WTF: doesn't use
+	* @return string
+	*/
 	function translit($tag, $strtolow = TRANSLIT_LOWERCASE, $donotload = TRANSLIT_LOAD)
 	{
 		// Lookup transliteration result in the cache and return it if found
@@ -955,6 +997,17 @@ class Wacko
 	}
 
 	// wrapper for _load_page
+	/**
+	* Loads page from DB
+	*
+	* @param string $tag Page tag or supertag
+	* @param int $page_id
+	* @param int $revision_id
+	* @param int $cache If LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
+	* @param int $metadataonly If LOAD_ALL loads all page fields, if LOAD_META - only  pages_meta fields.
+	* @param boolean $deleted
+	* @return array Loaded page
+	*/
 	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
 	{
 		$page = '';
@@ -1134,6 +1187,14 @@ class Wacko
 		return $page;
 	}
 
+	/**
+	* Get page from cache
+	*
+	* @param string $tag Page tag
+	* @param int $page_id
+	* @param boolean $metadataonly Returns only page with equal metadataonly marker. Default value is 0.
+	* @return mixed Page from cache or FALSE if not found
+	*/
 	function get_cached_page($supertag, $page_id = 0, $metadata_only = 0)
 	{
 		if ($page_id != 0)
@@ -1167,6 +1228,13 @@ class Wacko
 		}
 	}
 
+	/**
+	* Put page in pageCache.
+	*
+	* @param array $page Page data
+	* @param int $page_id
+	* @param boolean $metadataonly Marks that page contains metadata only (all atributes, excepts page body)
+	*/
 	function cache_page($page, $page_id = 0, $metadata_only = 0)
 	{
 		#if ($page_id != 0) // cache for both cases to avoid roundtrips
@@ -1205,6 +1273,12 @@ class Wacko
 		}
 	}
 
+	/**
+	* Clear Wanted cache from tag
+	*
+	* @param string $tag
+	* @param int $page_id
+	*/
 	function clear_cache_wanted_page($tag, $page_id = 0)
 	{
 		($page_id != 0
@@ -1213,6 +1287,13 @@ class Wacko
 		);
 	}
 
+	/**
+	* Check if page is in cache
+	*
+	* @param unknown_type $tag
+	* @param int $page_id
+	* @return boolean  Return TRUE if tag in Wanted cache and FALSE if not
+	*/
 	function get_cached_wanted_page($tag, $page_id = 0)
 	{
 		if ($page_id != 0)
@@ -2704,6 +2785,16 @@ class Wacko
 	}
 
 	// returns the full url to a page/method.
+	/**
+	* Returns the full URL for a page/method, including any additional URL-parameters and anchor
+	*
+	* @param string $method Optional Wakka method (default 'show' method added in Run() function)
+	* @param string $tag Optional tag. Returns current-page tag if empty
+	* @param string $params Optional URL parameters in HTTP name=value[&name=value][...] format
+	* @param string $addpage Optional
+	* @param string $anchor Optional HTTP anchor-fragment
+	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wakka 'rewrite_method' config-parameter)
+	*/
 	function href($method = '', $tag = '', $params = '', $addpage = false, $anchor = '')
 	{
 		$_rewrite_mode = '';
@@ -2739,6 +2830,13 @@ class Wacko
 	}
 
 	// returns just PageName[/method].
+	/**
+	* Returns value for page 'wakka' parameter, in tag[/method][#anchor] format
+	* @param string $method Optional Wacko method (default 'show' method added in Run() function)
+	* @param string $tag Optional tag - returns current-page tag if empty
+	* @param string $addpage Optional
+	* @return string String tag[/method]
+	*/
 	function mini_href($method = '', $tag = '', $addpage = 0)
 	{
 		if (!$tag = trim($tag))
@@ -2758,28 +2856,45 @@ class Wacko
 		return $tag.($method ? '/'.$method : '');
 	}
 
-	function slim_url($text)
+	/**
+	* Convert WikiWord to Wiki_Word in URLs if config value urls_underscores is 1
+	*
+	* @param string $tag Page tag
+	* @return string
+	*/
+	function slim_url($tag)
 	{
-		$text = $this->translit($text, TRANSLIT_DONTCHANGE); // TODO: set config option ?
+		$tag = $this->translit($tag, TRANSLIT_DONTCHANGE); // TODO: set config option ?
 		// why we do this, what are the assumptions?
 		//	this behavior is unwanted in the AP, it breaks the redirect for e.g. config_basic.php
 		//	looks like an undo of the reverse in the tranlit function (?)
-		$text = str_replace('_', "'", $text);
+		$tag = str_replace('_', "'", $tag);
 
 		if ($this->config['urls_underscores'] == 1)
 		{
-			$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1¶\\2', $text);
-			$text = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1¶\\2', $text);
-			$text = preg_replace('/('.$this->language['UPPER'].')¶(?='.$this->language['UPPER'].'¶'.$this->language['UPPERNUM'].')/', '\\1', $text);
-			$text = preg_replace('/('.$this->language['UPPER'].')¶(?='.$this->language['UPPER'].'¶\/)/', '\\1', $text);
-			$text = preg_replace('/('.$this->language['UPPERNUM'].')¶('.$this->language['UPPERNUM'].')($|\b)/', '\\1\\2', $text);
-			$text = preg_replace('/\/¶('.$this->language['UPPERNUM'].')/', '/\\1', $text);
-			$text = str_replace('¶', '_', $text);
+			$tag = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1¶\\2', $tag);
+			$tag = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1¶\\2', $tag);
+			$tag = preg_replace('/('.$this->language['UPPER'].')¶(?='.$this->language['UPPER'].'¶'.$this->language['UPPERNUM'].')/', '\\1', $tag);
+			$tag = preg_replace('/('.$this->language['UPPER'].')¶(?='.$this->language['UPPER'].'¶\/)/', '\\1', $tag);
+			$tag = preg_replace('/('.$this->language['UPPERNUM'].')¶('.$this->language['UPPERNUM'].')($|\b)/', '\\1\\2', $tag);
+			$tag = preg_replace('/\/¶('.$this->language['UPPERNUM'].')/', '/\\1', $tag);
+			$tag = str_replace('¶', '_', $tag);
 		}
 
-		return $text;
+		return $tag;
 	}
 
+	/**
+	* Add spaces and wraps page Href into <a> </a>
+	*
+	* @param string $tag Page tag.
+	* @param string $method Wacko method. Optional, default 'show' method added in Run() function.
+	* @param string $text Href text. Optinonal, default is $tag value
+	* @param boolean $track Track this link. Optional, default is TRUE
+	* @param string $title link title. Optional, default is ''
+	* @param string $params additional parameters. Optional, default is ''
+	* @return unknown
+	*/
 	function compose_link_to_page($tag, $method = '', $text = '', $track = 1, $title = '', $params = '')
 	{
 		if (!$text)
@@ -2797,6 +2912,16 @@ class Wacko
 	}
 
 	// preparing links to save them to body_r
+	/**
+	* Wraps links in special symbols <!--link:begin-->Link ==Text<!--link:end--> for
+	* detection in future (invoking from WackoFormatter).
+	*
+	* @param string $tag Link
+	* @param string $text Link text
+	* @param boolean $track Track this link. Optional, default is TRUE
+	* @param boolean $img_url
+	* @return string Wrapped link
+	*/
 	function pre_link($tag, $text = '', $track = 1, $img_url = 0)
 	{
 		// if (!$text) $text = $this->add_spaces($tag);
@@ -2822,6 +2947,22 @@ class Wacko
 		}
 	}
 
+	/**
+	* Returns full <A HREF=".."> or <IMG ...> HTML for Tag
+	*
+	* @param string $tag Link content - may be Wacko tag, interwiki wikiname:page tag,
+	* http/file/ftp/https/mailto/xmpp URL, [=] local or remote image-file for <img> link, or local or
+	* remote doc-file; if pagetag is for an external link but not protocol is specified, http:// is prepended
+	* @param string $method Optional Wacko method (default 'show' method added in Run() function)
+	* @param string $text Optional text or image-file for HREF link (defaults to same as pagetag)
+	* @param string $title
+	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINKS table).
+	* Optional, default is TRUE
+	* @param boolean $safe If false, then sanitize $text, else no.
+	* @param unknown_type $link_lang
+	* @param string $anchor_link Optional HTTP anchor-fragment
+	* @return string full Href link
+	*/
 	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1)
 	{
 		$class		= '';
@@ -3626,6 +3767,13 @@ class Wacko
 		}
 	}
 
+	/**
+	* Add spaces to WikiWords (if config parameter show_spaces = 1) and replace
+	* relative  path (/ !/ ../) to icons RootLinkIcon, SubLinkIcon, UpLinkIcon
+	*
+	* @param string $text Text with WikiWorlds
+	* @return string Text with Wiki Words
+	*/
 	function add_spaces($text)
 	{
 		$show = 1;
@@ -3761,9 +3909,15 @@ class Wacko
 	}
 
 	// TRACK LINKS
-	//		$tag 		= 'page tag'
-	//		$link_type	= 'file'
-	//		$link_type	= 'page'
+
+	/**
+	* Adds tag to current list stored in SESSION link-table. Link-tracking uses for collect
+	* all links in processed text.
+	*
+	* @param string $tag
+	* @param string $link_type [page|file]
+	*
+	*/
 	function track_link_to($tag, $link_type = 'page' )
 	{
 		if ($link_type == 'page')
@@ -3777,6 +3931,11 @@ class Wacko
 		#$this->debug_print_r($this->linktable);
 	}
 
+	/**
+	* Returns current link table array
+	*
+	* @return array Array of tags, tracked with trackLinkTo
+	*/
 	function get_link_table($link_type)
 	{
 		if ($link_type == 'page')
@@ -3794,16 +3953,27 @@ class Wacko
 		$this->linktable = array();
 	}
 
+	/**
+	* Clears current linktable array and enables linktracking
+	*/
 	function start_link_tracking()
 	{
 		$_SESSION[$this->config['session_prefix'].'_'.'linktracking'] = 1;
 	}
 
+	/**
+	* Disable linktracking
+	*/
 	function stop_link_tracking()
 	{
 		$_SESSION[$this->config['session_prefix'].'_'.'linktracking'] = 0;
 	}
 
+	/**
+	* Writes linktable for //$from_page_id// to database and clear linktable
+	*
+	* @param int $from_page_id
+	*/
 	function write_link_table($from_page_id = '')
 	{
 
@@ -4091,6 +4261,12 @@ class Wacko
 		}
 	}
 
+	/**
+	* Loads all referrers to this page from DB
+	* @param int $page_id
+	* @param int $backdays
+	* @return array Array of (referer, cnt)
+	*/
 	function load_referrers($page_id = null)
 	{
 		return $this->load_all(
@@ -5175,6 +5351,14 @@ class Wacko
 		}
 	}
 
+	/**
+	* Get ACL for tag from cache
+	*
+	* @param int $page_id
+	* @param string $privilege ACL privilege: read, write, comment, create, upload
+	* @param boolean $use_defaults
+	* @return array ACL
+	*/
 	function get_cached_acl($page_id, $privilege, $use_defaults)
 	{
 		if (isset( $this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults] ))
@@ -5187,9 +5371,17 @@ class Wacko
 		}
 	}
 
-	// $acl array must reflect acls table row structure
+	/**
+	* Add ACL to cache
+	*
+	* @param int $page_id
+	* @param string $privilege ACL privilege: read, write, comment, create, upload
+	* @param boolean $use_defaults
+	* @param array $acl Access control list
+	*/
 	function cache_acl($page_id, $privilege, $use_defaults, $acl)
 	{
+		// $acl array must reflect acls table row structure
 		$this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults] = $acl;
 	}
 
