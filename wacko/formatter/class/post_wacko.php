@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This formattesr resolves links and executes actions.
+ */
+
 class post_wacko
 {
 	var $object;

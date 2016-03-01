@@ -11,7 +11,7 @@ class Wacko
 	// VARIABLES
 	var $config					= array();
 	var $dblink;
-	var $page;
+	var $page;								// Requested page
 	var $tag;
 	var $charset;
 	var $supertag;
@@ -25,13 +25,13 @@ class Wacko
 	var $_acl					= array();
 	var $acl_cache				= array();
 	var $page_id_cache			= array();
-	var $context				= array();
-	var $current_context		= 0;
+	var $context				= array();	// Page context. Uses for correct processing of inclusions
+	var $current_context		= 0;		// Current context level
 	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	var $first_inclusion		= array();	// for backlinks
-	var $format_safe			= true;		//for htmlspecialchars() in pre_link
+	var $format_safe			= true;		// for htmlspecialchars() in pre_link
 	var $disable_cache			= false;
-	var $unicode_entities		= array();	//common unicode array
+	var $unicode_entities		= array();	// common unicode array
 	var $timer;
 	var $toc_context			= array();
 	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
@@ -76,7 +76,13 @@ class Wacko
 		'вики' => 'wiki', 'вака' => 'wacko', 'веб' => 'web'
 	);
 
-	// CONSTRUCTOR
+	/**
+	* CONSTRUCTOR
+	*
+	* Crates an instance of Wacko object
+	* @param array $config Current configuration as map key=value
+	* @return Wacko
+	*/
 	function __construct($config, $dblink)
 	{
 		$this->timer	= $this->get_micro_time();
@@ -238,6 +244,14 @@ class Wacko
 		return false;
 	}
 
+	/**
+	* Check if file with filename exists. Check only DB entry,
+	* not file in FS
+	* @param string $filen_ame Filename
+	* @param string $unwrapped_tag Optional. Unwrapped supertag. If
+	* not set, then check if file exists in global space
+	* @return array File description array
+	*/
 	function check_file_exists($file_name, $unwrapped_tag = '' )
 	{
 		if ($unwrapped_tag == '')
@@ -674,6 +688,13 @@ class Wacko
 		}
 	}
 
+	/**
+	* Replace symbols in $string to their Html Unicode entity
+	*
+	* @param string $string Input string
+	* @param string $lang Target language code
+	* @return string Converted string
+	*/
 	function do_unicode_entities($string, $lang)
 	{
 		if (!$this->config['multilanguage'])
@@ -2484,6 +2505,13 @@ class Wacko
 	}
 
 	// HTTP/REQUEST/LINK RELATED
+
+	/**
+	* set content for a popup message to be shown on opening the next Wacko page
+	* (actually just stores the session-value 'message')
+	*
+	* @param string $message
+	*/
 	function set_message($message, $type = 'info')
 	{
 		if (!empty($message))
@@ -2492,6 +2520,11 @@ class Wacko
 		}
 	}
 
+	/**
+	* Retrieve and clear the session-value 'message'
+	*
+	* @return string Session message
+	*/
 	function get_message()
 	{
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'message']))
@@ -2564,6 +2597,13 @@ class Wacko
 		}
 	}
 
+	/**
+	* Immediate redirect to the specified URL
+	* note - even though it's output as an HTTP Header, Wacko's output-buffering means that this
+	* function still works anywhere in a page
+	*
+	* @param string $url Target URL
+	*/
 	function redirect($url, $permanent = false)
 	{
 		if (!headers_sent())
@@ -3709,6 +3749,12 @@ class Wacko
 		return false;
 	}
 
+	/**
+	* Check if text is WikiName
+	*
+	* @param string $text Tested text
+	* @return boolean True if WikiName? else FALSE
+	*/
 	function is_wiki_name($text)
 	{
 		return preg_match('/^'.$this->language['UPPER'].$this->language['LOWER'].'+'.$this->language['UPPERNUM'].$this->language['ALPHANUM'].'*$/', $text);
@@ -4152,6 +4198,15 @@ class Wacko
 		}
 	}
 
+	/**
+	* Invokes {@link WackoWiki:/Dev/Actions Action} and returns its output.
+	*
+	* @param string $action Action name
+	* @param array $params Action parameters
+	* @param boolean $force_link_lracking If value is TRUE then all links in acton  will be tracking in table Links.
+	* Optional, default value is FALSE.
+	* @return string Result of action
+	*/
 	function action($action, $params = '', $force_link_tracking = 0)
 	{
 		$action = trim($action);
