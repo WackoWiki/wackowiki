@@ -124,7 +124,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			// sorting and pagination
 
 			if (isset($pagination['text']))
-				echo '<span class="pagination">'.$pagination['text']."</span>\n";
+				echo '<nav class="pagination">'.$pagination['text']."</nav>\n";
 
 			// members list itself
 			#echo '<div>'."\n";
@@ -261,7 +261,7 @@ else
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<tr><td colspan="6"><span class="pagination">'.$pagination['text'].'</span></td></tr>'."\n";
+		echo '<tr><td colspan="6"><nav class="pagination">'.$pagination['text'].'</nav></td></tr>'."\n";
 	}
 
 	// list header
@@ -301,7 +301,7 @@ else
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<tr><td colspan="6"><span class="pagination">'.$pagination['text'].'</span></td></tr>'."\n";
+		echo '<tr><td colspan="6"><nav class="pagination">'.$pagination['text'].'</nav></td></tr>'."\n";
 	}
 
 	echo "</table>\n";

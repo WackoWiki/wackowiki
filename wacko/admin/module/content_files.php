@@ -318,7 +318,7 @@ function admin_content_files(&$engine, &$module)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<span class="pagination">'.$pagination['text']."</span><br /><br />\n";
+		echo '<nav class="pagination">'.$pagination['text']."</nav><br /><br />\n";
 	}
 
 	if (count($files))
@@ -367,7 +367,7 @@ function admin_content_files(&$engine, &$module)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 	}
 
 	echo "</fieldset>\n";

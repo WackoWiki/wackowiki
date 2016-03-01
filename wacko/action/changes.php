@@ -45,7 +45,7 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
+		echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
 	}
 
 	echo '<ul class="ul_list">'."\n";
@@ -161,7 +161,7 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 	}
 }
 else

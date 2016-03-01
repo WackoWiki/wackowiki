@@ -218,7 +218,7 @@ if ($user = $this->get_user())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo '<br /><span class="pagination">'.$pagination['text'].'</span>'."\n";
+				echo '<br /><nav class="pagination">'.$pagination['text'].'</nav>'."\n";
 			}
 
 			echo '<ul class="ul_list">'."\n";
@@ -301,7 +301,7 @@ if ($user = $this->get_user())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo '<br /><span class="pagination">'.$pagination['text'].'</span>'."\n";
+				echo '<br /><nav class="pagination">'.$pagination['text'].'</nav>'."\n";
 			}
 		}
 		// by time
@@ -310,7 +310,7 @@ if ($user = $this->get_user())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo '<span class="pagination">'.$pagination['text'].'</span><br />'."\n";
+				echo '<nav class="pagination">'.$pagination['text'].'</nav><br />'."\n";
 			}
 
 			echo '<ul class="ul_list">'."\n";
@@ -410,7 +410,7 @@ if ($user = $this->get_user())
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo '<br /><span class="pagination">'.$pagination['text'].'</span>'."\n";
+				echo '<br /><nav class="pagination">'.$pagination['text'].'</nav>'."\n";
 			}
 		}
 		// global
