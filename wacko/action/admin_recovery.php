@@ -86,36 +86,7 @@ if ($this->is_admin())
 	echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
 	echo '<input type="password" id="recovery_password" name="recovery_password" size="24" value="'.$password.'" />';
 
-	if ($this->config['pwd_char_classes'] > 0)
-	{
-		$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
-
-		if ($this->config['pwd_char_classes'] == 1)
-		{
-			$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
-		}
-		else if ($this->config['pwd_char_classes'] == 2)
-		{
-			$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
-		}
-		else if ($this->config['pwd_char_classes'] == 3)
-		{
-			$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
-		}
-
-		$pwd_cplx_text .= '. '.$this->get_translation('PwdCplxDesc5');
-	}
-
-	echo '<br /><small>'.
-		$this->get_translation('PwdCplxDesc1').
-		str_replace('%1', $this->config['pwd_min_chars'],
-		$this->get_translation('PwdCplxDesc2')).
-		($this->config['pwd_unlike_login'] > 0
-			? ', '.$this->get_translation('PwdCplxDesc3')
-			: '').
-		($this->config['pwd_char_classes'] > 0
-			? ', '.$pwd_cplx_text
-			: '').'</small>';
+	echo $this->show_password_complexity();
 	echo '</p>';
 
 	echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';
