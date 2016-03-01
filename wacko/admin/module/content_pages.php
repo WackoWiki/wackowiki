@@ -189,7 +189,7 @@ function admin_content_pages(&$engine, &$module)
 <?php
 		if (isset($pagination['text']))
 		{
-			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
+			echo '<nav class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</nav>'."\n";
 		}
 ?>
 		<table style="padding: 3px;" class="formation">
@@ -258,7 +258,7 @@ function admin_content_pages(&$engine, &$module)
 		<?php
 		if (isset($pagination['text']))
 		{
-			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n";
+			echo '<nav class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</nav>'."\n";
 		}
 
 	echo $engine->form_close();

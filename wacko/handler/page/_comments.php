@@ -97,7 +97,7 @@ if ($this->has_access('read'))
 
 		if (isset($pagination['text']))
 		{
-			echo '<div class="pagination"><small>'.$pagination['text'].'</small></div>';
+			echo '<nav class="pagination"><small>'.$pagination['text'].'</small></nav>';
 		}
 
 		echo '<a href="'.$this->href('', '', 'show_comments=0').'" title="'.$this->get_translation('HideComments').'">'.$this->get_translation('Comments_all').'</a>';

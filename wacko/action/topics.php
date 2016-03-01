@@ -165,7 +165,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	{
 		// display list
 		echo '<div style="clear: both;"><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
-				'<p style="float: right">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</p></div>'."\n";
+				'<nav class="pagination">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</nav></div>'."\n";
 
 		echo '<table class="forum">'.
 				'<thead><tr>'.
@@ -224,7 +224,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				$_category = !empty($_category) ? '<br />'./* $this->get_translation('Category').': '. */$_category : '';
 
 				// print
-				echo '<tbody class="lined"><tr>'.
+				echo '<tbody class="lined"><tr style="background-color: #f9f9f9;">'.
 						'<td style="text-align:left;">'.
 						( $this->has_access('comment', $topic['page_id'], GUEST) === false
 							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>'
@@ -266,7 +266,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		echo '</table>'."\n";
 
 		echo '<div class="clearfix"><p style="float: left">'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</p>'.
-				'<p style="float: right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</p></div>'."\n";
+				'<nav class="pagination">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</nav></div>'."\n";
 	}
 
 	// display new topic form when applicable
