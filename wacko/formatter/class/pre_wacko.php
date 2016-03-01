@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Preformat text before when saving page: resolved macroses and some more
+ * Preformat text before when saving page: resolves macros and some more
  */
 
 class preformatter
