@@ -74,7 +74,7 @@ else
 			&& ($nomark != 1)
 			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			$edit_link = '<div class="name">'.
+			$edit_link = '<nav class="name">'.
 
 				// show page link
 				$this->link('/'.$inc_page['tag']).
@@ -85,7 +85,7 @@ else
 					  '<a href="'.$this->href('edit', $inc_page['tag']).'">'.$this->get_translation('EditIcon').'</a>'
 					: '').
 
-				"</div>\n";
+				"</nav>\n";
 
 			echo "\n".'<div class="include">'."\n".$edit_link;
 		}
