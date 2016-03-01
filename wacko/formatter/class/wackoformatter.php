@@ -181,34 +181,99 @@ class WackoFormatter
 
 		$this->LONGREGEXP =
 			'/('.
-			"<!--escaped-->.*?<!--escaped-->|".($this->object->config['allow_rawhtml'] == 1
+			// escaped text
+			"<!--escaped-->.*?<!--escaped-->|".
+			// escaped html <#...#>
+			($this->object->config['allow_rawhtml'] == 1
 				? '\<\#.*?\#\>|'
 				: '').
+			// html comments
+			#"<!--.*-->|".
+			//? (?...?)
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|".
+			// bracket links [[Tag Description]] or ((Tag Description))
 			($this->object->config['disable_bracketslinks'] == 1
 				? ''
-				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)|\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]|\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|").
+				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|".
+				  "\(\((\S+?)([ \t]+([^\n]+?))?\)\)|".
+				  "\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]|".
+				  "\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|").
+			// ?
 			"\n[ \t]*>+[^\n]*|".
+			// cite text <[...]>
 			"<\[.*?\]>|".
-			"\+\+\S\+\+|\+\+(\S[^\n]*?\S)\+\+|".
-			"\b[[:alpha:]]+:\/\/\S+|(mailto|xmpp)\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\_\.]+|\?\?\S\?\?|\?\?(\S.*?\S)\?\?|".
+			// small text ++...++
+			"\+\+\S\+\+|".
+			"\+\+(\S[^\n]*?\S)\+\+|".
+			// link ...://... or [mailto|xmpp]:...@...
+			"\b[[:alpha:]]+:\/\/\S+|(mailto|xmpp)\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\_\.]+|".
+			// highlighting  ??...??
+			"\?\?\S\?\?|".
+			"\?\?(\S.*?\S)\?\?|".
+			// \\\\...
 			"\\\\\\\\[".$object->language['ALPHANUM_P']."\-\_\\\!\.]+|".
-			"\*\*[^\n]*?\*\*|\#\#[^\n]*?\#\#|\¹\¹[^\n]*?\¹\¹|\'\'.*?\'\'|\!\!\S\!\!|\!\!(\S.*?\S)\!\!|__[^\n]*?__|".
-			"\^\^\S*?\^\^|vv\S*?vv|".
-			"<!--markup:1:begin-->\S<!--markup:1:end-->|<!--markup:2:begin-->\S<!--markup:2:end-->|<!--markup:1:begin-->(\S.*?\S)<!--markup:1:end-->|<!--markup:2:begin-->(\S.*?\S)<!--markup:2:end-->|".
-			"\#\|\||\#\||\|\|\#|\|\#|\|\|.*?\|\||\*\|.*?\|\*|".
-			"<|>|\/\/[^\n]*?(?<!http:|https:|ftp:|file:|nntp:)\/\/|".
-			"\n[ \t]*=======.*?={2,7}|\n[ \t]*======.*?={2,7}|\n[ \t]*=====.*?={2,7}|\n[ \t]*====.*?={2,7}|\n[ \t]*===.*?={2,7}|\n[ \t]*==.*?={2,7}|".
-			"[-]{4,}|---\n?\s*|--\S--|--(\S.*?[^- \t\n\r])--|".
+			// **...**
+			"\*\*[^\n]*?\*\*|".
+			// ##...##
+			"\#\#[^\n]*?\#\#|".
+			// ¹¹...¹¹
+			"\¹\¹[^\n]*?\¹\¹|".
+			// ''...'''
+			"\'\'.*?\'\'|".
+			// !!...!!
+			"\!\!\S\!\!|".
+			"\!\!(\S.*?\S)\!\!|".
+			// __...__
+			"__[^\n]*?__|".
+			//upper and lower indexes ^^...^^ and vv...vv
+			"\^\^\S*?\^\^|".
+			"vv\S*?vv|".
+			// deleted text for diff
+			// inserted text for diff
+			"<!--markup:1:begin-->\S<!--markup:1:end-->|".
+			"<!--markup:2:begin-->\S<!--markup:2:end-->|".
+			"<!--markup:1:begin-->(\S.*?\S)<!--markup:1:end-->|".
+			"<!--markup:2:begin-->(\S.*?\S)<!--markup:2:end-->|".
+			// tables #|| #| ||...|| ||# |#
+			"\#\|\||".
+			"\#\||".
+			"\|\|\#|".
+			"\|\#|".
+			"\|\|.*?\|\||".
+			"\*\|.*?\|\*|".
+			// symbols < or >
+			"<|>|".
+			// italic //...//
+			"\/\/[^\n]*?(?<!http:|https:|ftp:|file:|nntp:)\/\/|".
+			// headers
+			"\n[ \t]*=======.*?={2,7}|".
+			"\n[ \t]*======.*?={2,7}|".
+			"\n[ \t]*=====.*?={2,7}|".
+			"\n[ \t]*====.*?={2,7}|".
+			"\n[ \t]*===.*?={2,7}|".
+			"\n[ \t]*==.*?={2,7}|".
+			// separator
+			"[-]{4,}|".
+			// line break
+			"---\n?\s*|".
+			// strikethrough
+			"--\S--|".
+			"--(\S.*?[^- \t\n\r])--|".
+			// list including multilevel
 			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|".
+			// interwiki links
 			"\b[[:alnum:]]+[:][".$object->language['ALPHANUM_P']."\!\.][".$object->language['ALPHANUM_P']."\-\_\.\+\&\=\#]+|".
+			// disabled WikiNames
 			"~([^ \t\n]+)|".
+			// tikiwiki links
 			($this->object->config['disable_tikilinks'] == 1
 				? ''
 				: "\b(".$object->language['UPPER'].$object->language['LOWER'].$object->language['ALPHANUM']."*\.".$object->language['ALPHA'].$object->language['ALPHANUM']."+)\b|").
+			// wiki links (beside actions)
 			($this->object->config['disable_wikilinks'] == 1
 				? ''
 				: "(~?)(?<=[^\.".$object->language['ALPHANUM_P']."]|^)(((\.\.|!)?\/)?".$object->language['UPPER'].$object->language['LOWER']."+".$object->language['UPPERNUM'].$object->language['ALPHANUM']."*)\b|").
+			// npj links
 			($this->object->config['disable_npjlinks'] == 1
 				? ''
 				: "(~?)".$object->language['ALPHANUM']."+\@".$object->language['ALPHA']."*(?!".$object->language['ALPHANUM']."*\.".$object->language['ALPHANUM']."+)(\:".$object->language['ALPHANUM']."*)?|".$object->language['ALPHANUM']."+\:\:".$object->language['ALPHANUM']."+|").
