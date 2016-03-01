@@ -1,8 +1,9 @@
 <?php
 /*
-
-WackoFormatter.
-
+* WackoFormatter.
+*
+* Formats text with wacko-formatting.
+* Links and actions aren't processed. Its processed by PostWacko formatter
 */
 
 class WackoFormatter

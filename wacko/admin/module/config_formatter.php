@@ -210,7 +210,7 @@ function admin_config_formatter(&$engine, &$module)
 				<td class="form_right"><select id="timezone" name="timezone">
 
 		<?php
-			$timezones = $engine->get_translation('TzZones');
+			$timezones = $engine->get_translation('TzZoneArray');
 
 			foreach ($timezones as $offset => $timezone)
 			{
