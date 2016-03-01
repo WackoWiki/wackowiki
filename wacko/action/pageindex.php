@@ -22,6 +22,7 @@ $pages_to_display	= '';
 
 if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
+if (!isset($lang))		$lang = '';
 $_letter	= ( isset($_GET['letter']) ) ? $_GET['letter'] : $letter;
 if(isset($_letter))		$_letter = strtoupper(substr($_letter, 0, 1));
 if (!isset($for))		$for = (isset($vars['for']) ? $this->unwrap_link($vars['for']) : '');
@@ -37,6 +38,9 @@ $count = $this->load_single(
 		"AND deleted = '0' ".
 		($for
 			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
+			: "").
+		($lang
+			? "AND page_lang = '".quote($this->dblink, $lang)."' "
 			: "").
 		($_letter
 			? "AND ".
@@ -57,6 +61,9 @@ if ($pages = $this->load_all(
 		"AND deleted = '0' ".
 		($for
 			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
+			: "").
+		($lang
+			? "AND page_lang = '".quote($this->dblink, $lang)."' "
 			: "").
 	"ORDER BY ".
 		($title == 1
@@ -103,6 +110,9 @@ if ($pages = $this->load_all(
 		"AND deleted = '0' ".
 		($for
 			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
+			: "").
+		($lang
+			? "AND page_lang = '".quote($this->dblink, $lang)."' "
 			: "").
 		($_letter
 			? "AND ".
@@ -164,7 +174,7 @@ if ($pages_to_display)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
+		echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
 	}
 
 	// create the top links menu
@@ -265,7 +275,7 @@ if ($pages_to_display)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 	}
 }
 else

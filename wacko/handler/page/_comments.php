@@ -195,7 +195,7 @@ if ($this->has_access('read'))
 
 		if (isset($pagination['text']))
 		{
-			echo '<div class="commentspagination"><span class="pagination"><small>'.$pagination['text'].'</small></span></div>';
+			echo '<div class="commentspagination"><nav class="pagination"><small>'.$pagination['text'].'</small></nav></div>';
 		}
 
 		// display comment form

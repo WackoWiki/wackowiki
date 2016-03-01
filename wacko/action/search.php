@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 if (!function_exists('full_text_search'))
 {
-	function full_text_search(&$wacko, $phrase, $for, $limit = 50, $filter, $deleted = 0)
+	function full_text_search(&$wacko, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
 	{
 		$limit		= (int) $limit;
 		$pagination	= '';
@@ -176,7 +176,7 @@ if (!function_exists('preview_text'))
 		{
 			$counter = 0;
 
-			for ($i = 0; $i<= strlen($text); $i++)
+			for ($i = 0; $i <= strlen($text); $i++)
 			{
 				if ($text{$i} == '<')
 				{
@@ -334,11 +334,11 @@ if ($phrase)
 	{
 		if ($mode == 'topic')
 		{
-			$results = tag_search($this, $phrase, $for, (int)$max);
+			$results = tag_search($this, $phrase, $for,$lang, (int)$max);
 		}
 		else
 		{
-			$results = full_text_search($this, $phrase, $for, (int)$max ,($filter == 'all' ? 0 : 1));
+			$results = full_text_search($this, $phrase, $for, (int)$max ,($filter == 'all' ? 0 : 1), $lang);
 		}
 
 		$phrase = htmlspecialchars($phrase, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
@@ -408,7 +408,7 @@ if ($phrase)
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
+				echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
 			}
 
 			if (!$nomark)
@@ -429,7 +429,7 @@ if ($phrase)
 			// pagination
 			if (isset($pagination['text']))
 			{
-				echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
+				echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
 			}
 		}
 		else

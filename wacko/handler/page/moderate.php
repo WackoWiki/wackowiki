@@ -610,7 +610,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// pagination
 		if (isset($pagination['text']))
 		{
-			echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 		}
 
 		// confirm deletion
@@ -778,7 +778,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// pagination
 		if (isset($pagination['text']))
 		{
-			echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 		}
 
 		echo $this->form_close();
@@ -1172,7 +1172,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// pagination
 		if (isset($pagination['text']))
 		{
-			echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 		}
 
 		// confirm topic deletion
@@ -1373,7 +1373,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// pagination
 		if (isset($pagination['text']))
 		{
-			echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 		}
 
 		echo $this->form_close();

@@ -30,8 +30,8 @@ if (!empty($blog_cluster))
 
 	$pages			= '';
 	$prefix			= $this->config['table_prefix'];
-	$blogcluster		= $blog_cluster;
-	$bloglevels		= $this->config['news_levels'];
+	#$blog_cluster	= $blog_cluster;
+	$blog_levels	= $this->config['news_levels'];
 
 	// check privilege
 	if ($this->has_access('create') === true)
@@ -77,7 +77,7 @@ if (!empty($blog_cluster))
 
 			if ($this->config['enable_feeds'])
 			{
-				$_SESSION['feed']	= true;
+				#$_SESSION['feed']	= true;
 			}
 
 			// needs to be numeric for ordering
@@ -88,7 +88,7 @@ if (!empty($blog_cluster))
 			// .date('Y/').date('W/')				- 2011/29
 			$blog_cluster_structure = date('Y/').date('m/');
 
-			$this->redirect($this->href('edit', $blogcluster.'/'.$blog_cluster_structure.$name, '', 1));
+			$this->redirect($this->href('edit', $blog_cluster.'/'.$blog_cluster_structure.$name, '', 1));
 		}
 	}
 	// collect data
@@ -98,7 +98,7 @@ if (!empty($blog_cluster))
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND comment_on_id = '0'".
 				"AND deleted <> '1' ", true);
 
@@ -109,7 +109,7 @@ if (!empty($blog_cluster))
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND p.deleted <> '1' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", true);
@@ -120,7 +120,7 @@ if (!empty($blog_cluster))
 			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}category_page c ".
 			"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
-			"WHERE p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+			"WHERE p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND c.category_id = '$category_id' ".
 				"AND p.deleted <> '1' ".
 				"AND p.comment_on_id = '0'", true);
@@ -138,7 +138,7 @@ if (!empty($blog_cluster))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 				"INNER JOIN {$prefix}category_page c  ON (c.page_id = p.page_id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND p.deleted <> '1' ".
 				"AND c.category_id = '$category_id' ".
 			"ORDER BY p.created DESC ".
@@ -149,7 +149,7 @@ if (!empty($blog_cluster))
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND deleted <> '1' ".
 				"AND created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 				"AND comment_on_id = '0'", true);
@@ -161,7 +161,7 @@ if (!empty($blog_cluster))
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND p.deleted <> '1' ".
 				"AND p.created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 			"ORDER BY p.created DESC ".
@@ -172,7 +172,7 @@ if (!empty($blog_cluster))
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND deleted <> '1' ".
 				"AND created > '$date' ".
 				"AND comment_on_id = '0'", true);
@@ -185,7 +185,7 @@ if (!empty($blog_cluster))
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$blogcluster}{$bloglevels}$' ".
+				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND p.deleted <> '1' ".
 				"AND p.created > '$date' ".
 			"ORDER BY p.created DESC ".
@@ -206,13 +206,13 @@ if (!empty($blog_cluster))
 			$_category_title = '';
 		}
 
-		if ($this->page['tag'] == $blogcluster)
+		if ($this->page['tag'] == $blog_cluster)
 		{
 			$_title = $this->get_translation('News').$_category_title;
 		}
 		else
 		{
-			$_title = $this->compose_link_to_page($blogcluster, '', $this->get_translation('News'), 0).$_category_title;
+			$_title = $this->compose_link_to_page($blog_cluster, '', $this->get_translation('News'), 0).$_category_title;
 		}
 
 		echo "<h1>".$_title."</h1>";
@@ -221,7 +221,19 @@ if (!empty($blog_cluster))
 	// displaying XML icon
 	if (!(int)$noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/news_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
+		if ($this->config['news_cluster'])
+		{
+			if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
+			{
+				$feed_tag = 'news';
+			}
+		}
+		else
+		{
+			$feed_tag = 'blog'.$this->page['page_id'];
+		}
+
+		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/'.$feed_tag.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
 	}
 
 	echo '<div style="width:100%;">
@@ -232,7 +244,7 @@ if (!empty($blog_cluster))
 	// pagination
 	if (isset($pagination['text']))
 	{
-		#echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+		#echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 	}
 
 	// displaying articles
@@ -256,7 +268,7 @@ if (!empty($blog_cluster))
 		// pagination
 		if (isset($pagination['text']))
 		{
-			echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
+			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
 		}
 	}
 	else
