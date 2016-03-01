@@ -87,7 +87,7 @@ else
 
 				"</nav>\n";
 
-			echo "\n".'<div class="include">'."\n".$edit_link;
+			echo "\n".'<section class="include">'."\n".$edit_link;
 		}
 
 		// body
@@ -105,7 +105,7 @@ else
 			&& ($nomark != 1)
 			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			echo "\n".$edit_link."</div>\n";
+			echo "\n".$edit_link."</section>\n";
 		}
 	}
 }
