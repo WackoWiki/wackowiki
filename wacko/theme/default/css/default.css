@@ -70,6 +70,7 @@ input[type=password]:hover,
 textarea:hover {
 	border: 1px solid #93cee9;
 }
+
 input[type=text]:focus,
 input[type=search]:focus,
 input[type=email]:focus,
@@ -77,6 +78,12 @@ input[type=password]:focus,
 textarea:focus {
 	border: 1px solid #3daee9;
 	/* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6); */
+}
+
+input[type=checkbox],
+input[type=radio] {
+	margin-right: 10px;
+	margin-left: 8px;
 }
 
 body {
@@ -518,12 +525,12 @@ ol#comments {
 }
 
 /* Included pages: SYNTAX {{include page="xyz"}} */
-.include {
+.include-page {
 	background-color: #FCFCFC;
 	padding: 8px;
 }
 
-.name {
+.include-meta {
 	text-align: right;
 	font-size: 11px;
 }
