@@ -17,10 +17,11 @@ if (!defined('IN_WACKO'))
 if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 {
 	// count slashes in the tag
-	$i			= 0;
-	$tag		= $this->tag;
-	$access		= '';
-	$category	= false;
+	$i				= 0;
+	$tag			= $this->tag;
+	$create_access	= '';
+	$read_access	= '';
+	$category		= false;
 
 	while (strpos($tag, '/') !== false)
 	{
@@ -44,11 +45,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// check privilege
 	if ($this->has_access('create') === true)
 	{
-		$access = true;
+		$create_access = true;
 	}
 
 	// checking new topic input if any
-	if (isset($_POST['action']) && $_POST['action'] == 'topicadd' && $access === true)
+	if (isset($_POST['action']) && $_POST['action'] == 'topicadd' && $create_access === true)
 	{
 		if (isset($_POST['title']) && $_POST['title'] == true)
 		{
@@ -166,7 +167,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
 
 		// display list
-		echo '<div style="clear: both;"><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
+		echo '<div style="clear: both;">'.
+				'<p style="float: left">'.($create_access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
 				$show_pagination."</div>\n";
 
 		echo '<table class="forum">'.
@@ -185,14 +187,14 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			if ($this->config['hide_locked'])
 			{
-				$access = $this->has_access('read', $topic['page_id']);
+				$read_access = $this->has_access('read', $topic['page_id']);
 			}
 			else
 			{
-				$access = true;
+				$read_access = true;
 			}
 
-			if ($access)
+			if ($read_access)
 			{
 				// load latest comment
 				if ($topic['comments'] > 0)
@@ -272,7 +274,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	}
 
 	// display new topic form when applicable
-	if ($access === true)
+	if ($create_access === true)
 	{
 		echo $this->form_open('add_topic');
 		?>
