@@ -2791,7 +2791,7 @@ class Wacko
 	* @param string $method Optional Wakka method (default 'show' method added in Run() function)
 	* @param string $tag Optional tag. Returns current-page tag if empty
 	* @param string $params Optional URL parameters in HTTP name=value[&name=value][...] format
-	* @param string $addpage Optional
+	* @param boolean $addpage Optional
 	* @param string $anchor Optional HTTP anchor-fragment
 	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wakka 'rewrite_method' config-parameter)
 	*/
@@ -2834,7 +2834,7 @@ class Wacko
 	* Returns value for page 'wakka' parameter, in tag[/method][#anchor] format
 	* @param string $method Optional Wacko method (default 'show' method added in Run() function)
 	* @param string $tag Optional tag - returns current-page tag if empty
-	* @param string $addpage Optional
+	* @param boolean $addpage Optional
 	* @return string String tag[/method]
 	*/
 	function mini_href($method = '', $tag = '', $addpage = 0)
