@@ -7538,6 +7538,15 @@ class Wacko
 		return $pagination;
 	}
 
+	// TODO: option for _comments handler, forum action -> CSS small
+	function show_pagination($pagination = '')
+	{
+		if (isset($pagination))
+		{
+			return '<nav class="pagination">'.$pagination."</nav>\n";
+		}
+	}
+
 	// show captcha form on a page. must be incorporated as an input
 	// form component in every page that uses captcha testing
 	//		$inline	= adds <br /> between elements
