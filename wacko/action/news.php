@@ -218,11 +218,10 @@ if (!empty($this->config['news_cluster']))
 	// displaying articles
 	if ($pages)
 	{
+		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 		// pagination
-		if (isset($pagination['text']))
-		{
-			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-		}
+		echo $show_pagination;
 
 		foreach ($pages as $page)
 		{
@@ -240,10 +239,7 @@ if (!empty($this->config['news_cluster']))
 			unset ($_category);
 		}
 		// pagination
-		if (isset($pagination['text']))
-		{
-			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-		}
+		echo $show_pagination;
 	}
 	else
 	{

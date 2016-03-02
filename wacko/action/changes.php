@@ -42,11 +42,10 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/changes_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentChangesXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."<br /><br />\n";
 	}
 
+	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
-	}
+	echo $show_pagination;
 
 	echo '<ul class="ul_list">'."\n";
 	$access = true;
@@ -156,13 +155,11 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 			"</small></li>\n";
 		}
 	}
+
 	echo "</ul>\n</li>\n</ul>\n";
 
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-	}
+	echo $show_pagination;
 }
 else
 {

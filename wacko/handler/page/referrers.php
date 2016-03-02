@@ -215,11 +215,10 @@ if ($user = $this->get_user())
 		// per page
 		if ($perpage && list ($pages, $pagination) = load_referrers($this, $query, (int)$max, $parameters))
 		{
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<br /><nav class="pagination">'.$pagination['text'].'</nav>'."\n";
-			}
+			echo $show_pagination;
 
 			echo '<ul class="ul_list">'."\n";
 
@@ -299,19 +298,15 @@ if ($user = $this->get_user())
 			echo "</ul>\n";
 
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<br /><nav class="pagination">'.$pagination['text'].'</nav>'."\n";
-			}
+			echo $show_pagination;
 		}
 		// by time
 		else if ($bytime && list ($referrers, $pagination) = load_referrers($this, $query, (int)$max, $parameters))
 		{
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<nav class="pagination">'.$pagination['text'].'</nav><br />'."\n";
-			}
+			echo $show_pagination;
 
 			echo '<ul class="ul_list">'."\n";
 
@@ -408,10 +403,7 @@ if ($user = $this->get_user())
 			echo "</ul>\n";
 
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<br /><nav class="pagination">'.$pagination['text'].'</nav>'."\n";
-			}
+			echo $show_pagination;
 		}
 		// global
 		else

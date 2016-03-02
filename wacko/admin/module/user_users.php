@@ -797,10 +797,11 @@ function admin_user_users(&$engine, &$module)
 
 		echo $control_buttons;
 
-		if (isset($pagination['text']))
-		{
-			echo '<nav class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</nav>'."\n";
-		} ?>
+		$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
+		// pagination
+		echo $show_pagination;
+?>
 		<table style="padding: 3px;" class="formation listcenter">
 			<tr>
 				<th style="width:5px;"></th>
@@ -851,10 +852,9 @@ function admin_user_users(&$engine, &$module)
 		}
 ?>
 			</table>
-			<?php if (isset($pagination['text']))
-			{
-				echo '<nav class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</nav>'."\n";
-			}
+<?php
+		// pagination
+		echo $show_pagination;
 
 		/////////////////////////////////////////////
 		//   control buttons

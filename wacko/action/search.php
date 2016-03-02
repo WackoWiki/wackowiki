@@ -405,11 +405,10 @@ if ($phrase)
 				}
 			}
 
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
-			}
+			echo $show_pagination;
 
 			if (!$nomark)
 			{
@@ -427,10 +426,7 @@ if ($phrase)
 			if (!$nomark) echo "</div>";
 
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
-			}
+			echo $show_pagination;
 		}
 		else
 		if (!$nomark) echo $this->get_translation('NoResultsFor').'"'.$phrase.'".';

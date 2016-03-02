@@ -258,8 +258,11 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 			// sorting and pagination
 			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#pages">'.$this->get_translation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#pages">'.$this->get_translation('UsersDocsSortName').'</a>' ).'</small>';
-			if (isset($pagination['text']))
-				echo '<nav class="pagination">'.$pagination['text']."</nav>\n";
+
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
+			// pagination
+			echo $show_pagination;
 
 			// pages list itself
 			echo '<div>'."\n";
@@ -321,11 +324,10 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					"ORDER BY c.created DESC ".
 					"LIMIT {$pagination['offset']}, $limit");
 
+				$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 				// pagination
-				if (isset($pagination['text']))
-				{
-					echo '<nav class="pagination">'.$pagination['text']."</nav>\n";
-				}
+				echo $show_pagination;
 
 				// comments list itself
 				echo '<div>'."\n";
@@ -395,11 +397,10 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 							"ORDER BY u.uploaded_dt DESC ".
 							"LIMIT {$pagination['offset']}, $limit");
 
+					$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 					// pagination
-					if (isset($pagination['text']))
-					{
-						echo '<nav class="pagination">'.$pagination['text']."</nav>\n";
-					}
+					echo $show_pagination;
 
 					// uploads list itself
 					echo '<div>'."\n";
@@ -572,11 +573,10 @@ else
 	echo '</td></tr></table><br />'."\n";
 	echo $this->form_close();
 
+	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-	}
+	echo $show_pagination;
 
 	// print list
 	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;\">\n";
@@ -628,10 +628,7 @@ else
 	echo "</table>\n";
 
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-	}
+	echo $show_pagination;
 }
 
 ?>

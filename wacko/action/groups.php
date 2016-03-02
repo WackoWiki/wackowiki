@@ -123,8 +123,10 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 			// sorting and pagination
 
-			if (isset($pagination['text']))
-				echo '<nav class="pagination">'.$pagination['text']."</nav>\n";
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
+			// pagination
+			echo $show_pagination;
 
 			// members list itself
 			#echo '<div>'."\n";
@@ -258,11 +260,10 @@ else
 	// print list
 	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
 
+	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<tr><td colspan="6"><nav class="pagination">'.$pagination['text'].'</nav></td></tr>'."\n";
-	}
+	echo $show_pagination;
 
 	// list header
 	echo '<tr>'.
@@ -299,10 +300,7 @@ else
 	}
 
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<tr><td colspan="6"><nav class="pagination">'.$pagination['text'].'</nav></td></tr>'."\n";
-	}
+	echo $show_pagination;
 
 	echo "</table>\n";
 }
