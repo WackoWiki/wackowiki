@@ -1394,14 +1394,6 @@ div.newsarticle:hover {
 	float: right;
 }
 
-.commentspagination{
-	overflow: hidden;
-	padding: 0 20px;
-	width: 100%;
-	background-color: #FFF;
-}
-
-
 table.formation {
 	background-color: #EDEDED;
 	border: 1px solid #CDCDCD;

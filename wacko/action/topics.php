@@ -163,9 +163,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	if (!isset($_GET['phrase']))
 	{
+		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 		// display list
 		echo '<div style="clear: both;"><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
-				'<nav class="pagination">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</nav></div>'."\n";
+				$show_pagination."</div>\n";
 
 		echo '<table class="forum">'.
 				'<thead><tr>'.
@@ -266,7 +268,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		echo '</table>'."\n";
 
 		echo '<div class="clearfix"><p style="float: left">'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</p>'.
-				'<nav class="pagination">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</nav></div>'."\n";
+				$show_pagination."</div>\n";
 	}
 
 	// display new topic form when applicable

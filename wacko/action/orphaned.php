@@ -79,11 +79,10 @@ if (list ($pages, $pagination) = load_orphaned_pages($this, $root, (int)$max))
 {
 	if (is_array($pages))
 	{
+		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 		// pagination
-		if (isset($pagination['text']))
-		{
-			echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
-		}
+		echo $show_pagination;
 
 		echo "<ol>\n";
 
@@ -105,10 +104,7 @@ if (list ($pages, $pagination) = load_orphaned_pages($this, $root, (int)$max))
 		echo "</ol>\n";
 
 		// pagination
-		if (isset($pagination['text']))
-		{
-			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-		}
+		echo $show_pagination;
 	}
 }
 else

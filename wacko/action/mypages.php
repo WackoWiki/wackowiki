@@ -73,11 +73,10 @@ if ($user_id = $this->get_user_id())
 
 			echo "</ul>\n</li>\n</ul>\n";
 
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-			}
+			echo $show_pagination;
 		}
 		else
 		{
@@ -146,11 +145,10 @@ if ($user_id = $this->get_user_id())
 
 			echo "</ul>\n</li>\n</ul>\n";
 
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-			}
+			echo $show_pagination;
 		}
 		else
 		{
@@ -209,11 +207,10 @@ if ($user_id = $this->get_user_id())
 
 			echo "</ul>\n</li>\n</ul>\n";
 
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 			// pagination
-			if (isset($pagination['text']))
-			{
-				echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-			}
+			echo $show_pagination;
 		}
 		else
 		{

@@ -316,10 +316,10 @@ function admin_content_files(&$engine, &$module)
 	if (!isset($picture))	$path2 = str_replace('file:', '_file:', $path2);
 
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<nav class="pagination">'.$pagination['text']."</nav><br /><br />\n";
-	}
+	$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
+	// pagination
+	echo $show_pagination;
 
 	if (count($files))
 	{
@@ -365,10 +365,7 @@ function admin_content_files(&$engine, &$module)
 	}
 
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-	}
+	echo $show_pagination;
 
 	echo "</fieldset>\n";
 

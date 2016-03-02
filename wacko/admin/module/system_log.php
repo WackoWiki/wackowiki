@@ -155,10 +155,10 @@ function admin_system_log(&$engine, &$module)
 			<input type="submit" name="reset" id="submit" value="reset" />
 		</div>
 <?php
-		if (isset($pagination['text']))
-		{
-			echo '<nav class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</nav>'."\n";
-		}
+		$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
+		// pagination
+		echo $show_pagination;
 ?>
 		<table style="padding: 3px;" class="formation">
 			<tr>
@@ -221,11 +221,9 @@ function admin_system_log(&$engine, &$module)
 	}
 ?>
 		</table>
-		<?php
-		if (isset($pagination['text']))
-		{
-			echo '<nav class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</nav>'."\n";
-		}
+<?php
+	// pagination
+	echo $show_pagination;
 
 	echo $engine->form_close();
 }

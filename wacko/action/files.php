@@ -154,11 +154,10 @@ if ($can_view)
 		$style = 'upload tbl_fixed';
 	}
 
+	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
-	}
+	echo $show_pagination;
 
 	if (!$nomark)
 	{
@@ -283,10 +282,7 @@ if ($can_view)
 	}
 
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-	}
+	echo $show_pagination;
 }
 else
 {

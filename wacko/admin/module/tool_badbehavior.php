@@ -168,7 +168,7 @@ function bb2_summary(&$engine)
 
 	?>
 <table class="formation">
-<caption><?php echo $argument; ?></caption>
+<caption><?php #echo $argument; ?></caption>
 	<thead>
 		<tr>
 			<th scope="col">Hits</th>
@@ -298,10 +298,10 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 </div>
 
 <?php
-		if (isset($pagination['text']))
-		{
-			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
-		}
+		$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
+		// pagination
+		echo $show_pagination;
 ?>
 <table class="formation">
 	<thead>
@@ -388,11 +388,9 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 	</tbody>
 </table>
 
-		<?php
-		if (isset($pagination['text']))
-		{
-			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n";
-		}
+<?php
+	// pagination
+	echo $show_pagination;
 
 	echo $engine->form_close();
 }

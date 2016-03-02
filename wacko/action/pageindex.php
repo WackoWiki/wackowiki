@@ -171,11 +171,10 @@ if ($pages_to_display)
 	$top_links = '';
 	$cur_char = '';
 
+	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<nav class="pagination">'.$pagination['text']."</nav><br />\n";
-	}
+	echo $show_pagination;
 
 	// create the top links menu
 	if($this->letters)
@@ -273,10 +272,7 @@ if ($pages_to_display)
 	echo "</ul>\n";
 
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-	}
+	echo $show_pagination;
 }
 else
 {

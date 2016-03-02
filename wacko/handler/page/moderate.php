@@ -607,11 +607,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// display list
 		echo $this->form_open('moderate_subforum', 'moderate');
 
+		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 		// pagination
-		if (isset($pagination['text']))
-		{
-			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-		}
+		echo $show_pagination;
 
 		// confirm deletion
 		if ($accept_action == 'delete')
@@ -776,10 +775,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		echo '</table>'."\n";
 
 		// pagination
-		if (isset($pagination['text']))
-		{
-			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-		}
+		echo $show_pagination;
 
 		echo $this->form_close();
 	}
@@ -1169,11 +1165,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// display list
 		echo $this->form_open('moderate_topic', 'moderate');
 
+		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 		// pagination
-		if (isset($pagination['text']))
-		{
-			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-		}
+		echo $show_pagination;
 
 		// confirm topic deletion
 		if ($accept_action == 'topic_delete')
@@ -1371,10 +1366,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		echo '</table>'."\n";
 
 		// pagination
-		if (isset($pagination['text']))
-		{
-			echo '<br /><nav class="pagination">'.$pagination['text']."</nav>\n";
-		}
+		echo $show_pagination;
 
 		echo $this->form_close();
 	}
