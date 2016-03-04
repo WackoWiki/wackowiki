@@ -34,12 +34,22 @@ $wacko_translation = array(
 	'NewUserAccount'			=> 'neues Benutzerkonto',
 
 	'NewAccountSubject'			=> 'Konto Registrierung',
-	'NewAccountAdminCreated'	=> 'Der Benutzer %1 hat für dich ein Konto mit dem Benutzernamen „%2“ angelegt. Um die Registrierung abzuschließen, besuchen die folgende URL (stelle sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setze dein eigenes Zugangskennwort:',
+	'NewAccountAdminCreated'	=> 'Der Benutzer %1 hat für dich ein Konto mit dem Benutzernamen "%2" angelegt. Um die Registrierung abzuschließen, besuchen die folgende URL (stelle sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setze dein eigenes Zugangskennwort:',
 	'NewAccountUsername'		=> 'Benutzername:',
 	'NewAccountDoNotReply'		=> 'NICHT AUF DIESE NACHRICHT ANTWORTEN',
 	'NewAccountEmail'			=> 'E-Mail:',
 	'NewAccountIP'				=> 'Von IP-Adresse:',
 	'NewAccountSignupInfo'		=> 'Das folgende Konto wurde angelegt:',
+
+	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
+	'UserRequiresApproval'		=> 'Um den Benutzer zuzulassen oder abzulehnen gehe zu %1',
+	'UserApprovalInfo'			=> 'Nachdem du dich registriert hast, wird deine Registrierung zur Freischaltung an den Administrator der Seite geschickt. Du erhältst dann eine E-Mail mit weiteren Anweisungen.',
+
+	'UserApprovalPending'		=> 'Your account is still pending approval.',
+	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
+
+	'UserApprovedInfo'			=> 'You have been approved to access %1',
+	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	// login panel
 	'LoginWelcome'				=> 'Anmeldung',
