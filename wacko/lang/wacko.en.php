@@ -131,7 +131,7 @@ $wacko_translation = array(
 	'DoesNotExists'				=> 'This page doesn\'t exist.',
 	'PromptCreate'				=> 'Maybe you want to <b><a href="%1">create</a></b> it?',
 	'Revision'					=> 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
-	'ReadAccessDenied'			=> 'You aren\'t allowed to read this page.',
+	'ReadAccessDenied'			=> 'Please login to read this page.',
 	'YouAreOwner'				=> 'You are the owner of this page.',
 	'Owner'						=> 'Owner',
 	'Nobody'					=> 'Nobody',
