@@ -171,8 +171,14 @@ else
 		header('HTTP/1.0 403 Forbidden');
 	}
 
-	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
+	$message = $this->get_translation('ReadAccessDenied');
+	$this->show_message($message, 'info');
 
+	if ($this->has_access('read', '', GUEST) === false)
+	{
+		$message = $this->get_translation('ReadAccessDeniedHintGuest');
+		$this->show_message($message, 'hint');
+	}
 }
 ?>
 </article>

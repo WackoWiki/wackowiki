@@ -132,6 +132,7 @@ $wacko_translation = array(
 	'PromptCreate'				=> 'Хотите <a href="%1">создать</a>?',
 	'Revision'					=> 'Это старая версия <a href="%1">%2</a> за %3.',
 	'ReadAccessDenied'			=> 'У вас нет прав на чтение этой страницы.',
+	'ReadAccessDeniedHintGuest'	=> '',
 	'YouAreOwner'				=> 'Владелец: Вы. ',
 	'Owner'						=> 'Владелец',
 	'Nobody'					=> 'Никто',
