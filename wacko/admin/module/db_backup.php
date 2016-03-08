@@ -114,8 +114,8 @@ function admin_db_backup(&$engine, &$module)
 				}
 
 				// force drop for tables w/o WHERE clause
-				if (in_array($table, $data) &&
-				$tables[$table]['where'] === false)
+				if (in_array($table, $data)
+				&& $tables[$table]['where'] === false)
 				{
 					$drop = 1;
 				}
@@ -187,13 +187,7 @@ function admin_db_backup(&$engine, &$module)
 
 		$engine->log(1, 'Saved backup database '.trim($pack, '/'));
 
-		$message = '<p>
-			Backing up and archiving completed. Backup package files
-			stored in the backup directory.<br />To obtain
-			use FTP (not sure if you copy the structure to maintain
-			directories and file names and directories).<br />To restore a backup
-			copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.
-			</p>';
+		$message = '<p>'.$engine->get_translation('BackupCompleted').'</p>';
 
 		$engine->show_message($message);
 	}
@@ -207,16 +201,7 @@ function admin_db_backup(&$engine, &$module)
 		{
 ?>
 		<p>
-			Specify the desired scheme of Backup. The root cluster does not affect the
-			global backup files and cache files (with their choice of
-			they are always saved in full).<br />
-			<br />
-			<span class="underline">Attention</span>: To avoid loss of information from the database,
-			indicate the root cluster, the table from this backup will not be
-			restructured; similar, with only the reserve of
-			table without saving the data. To complete the conversion tables in the format
-			backup must be <em>full redundancy throughout the framework
-			data (structure plus contents) without specifying the cluster</em>.
+			<?php echo $engine->get_translation('BackupSettings'); ?>
 		</p>
 		<br />
 
@@ -225,13 +210,13 @@ function admin_db_backup(&$engine, &$module)
 ?>
 			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
-					<th style="text-align:right">Cluster:</th>
+					<th style="text-align:right"><?php echo $engine->get_translation('BackupCluster'); ?>:</th>
 					<th colspan="2"><input type="text" name="root" size="30" value="" /></th>
 				</tr>
 				<tr>
-					<th>Table</th>
-					<th>&nbsp;&nbsp;<a href="?mode=db_backup<?php echo $getstr.( isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1' ); ?>">Structure</a></th>
-					<th><a href="?mode=db_backup<?php echo $getstr.( isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1' ); ?>">Data</a></th>
+					<th><?php echo $engine->get_translation('BackupTable'); ?></th>
+					<th>&nbsp;&nbsp;<a href="?mode=db_backup<?php echo $getstr.( isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1' ); ?>"><?php echo $engine->get_translation('BackupStructure'); ?></a></th>
+					<th><a href="?mode=db_backup<?php echo $getstr.( isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1' ); ?>"><?php echo $engine->get_translation('BackupData'); ?></a></th>
 				</tr>
 <?php
 			foreach ($tables as $table)
@@ -256,8 +241,8 @@ function admin_db_backup(&$engine, &$module)
 			}
 ?>
 				<tr>
-					<th colspan="2">Folder</th>
-					<th>&nbsp;&nbsp;<a href="?mode=db_backup<?php echo $getstr.( isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1' ); ?>">Files</a></th>
+					<th colspan="2"><?php echo $engine->get_translation('BackupFolder'); ?></th>
+					<th>&nbsp;&nbsp;<a href="?mode=db_backup<?php echo $getstr.( isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1' ); ?>"><?php echo $engine->get_translation('BackupFiles'); ?></a></th>
 				</tr>
 <?php
 			foreach ($directories as $dir)

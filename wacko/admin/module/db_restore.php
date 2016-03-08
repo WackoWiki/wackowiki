@@ -84,7 +84,7 @@ function admin_db_restore(&$engine, &$module)
 			// check for possible backwards compatibility issues if the version differs
 			if ($log[6] !== WACKO_VERSION)
 			{
-				$engine->show_message('Wrong WackoWiki version!', 'error') ;
+				$engine->show_message($engine->get_translation('RestoreWrongVersion'), 'error') ;
 			}
 
 			// show details of backup package
@@ -129,13 +129,13 @@ function admin_db_restore(&$engine, &$module)
 					echo '<td><table>';
 						// cluster root
 						echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">'.
-								'Cluster: '.( $log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">Entire site</em>' ).
+								$engine->get_translation('BackupCluster').': '.( $log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">'.$engine->get_translation('BackupEntireSite').'</em>' ).
 							'</th></tr>'."\n";
 						// contents
 						echo '<tr>'.
-								'<th>Structure</th>'.
-								'<th>Data</th>'.
-								'<th>Files</th>'.
+								'<th>'.$engine->get_translation('BackupStructure').'</th>'.
+								'<th>'.$engine->get_translation('BackupData').'</th>'.
+								'<th>'.$engine->get_translation('BackupFiles').'</th>'.
 							'</tr>'."\n";
 						// structure
 						echo '<tr>'.
@@ -201,11 +201,11 @@ function admin_db_restore(&$engine, &$module)
 					// end dir check
 						'<tr>
 							<td colspan="2">
-								<strong>Additional options for recovery:</strong><br />
+								<strong>'.$engine->get_translation('RestoreOptions').':</strong><br />
 								<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1" />
-								<label for="ignore_keys"><small>Ignore dublicated keys table (not replace) *</small></label><br />
+								<label for="ignore_keys"><small>'.$engine->get_translation('IgnoreDuplicatedKeys').' *</small></label><br />
 								<input type="checkbox" id="ignore_files" name="ignore_files" value="1" />
-								<label for="ignore_files"><small>Ignore the same files (not overwrite) **</small></label><br />
+								<label for="ignore_files"><small>'.$engine->get_translation('IgnoreSameFiles').' **</small></label><br />
 							</td>
 						</tr>'.
 					'</table>
@@ -219,23 +219,9 @@ function admin_db_restore(&$engine, &$module)
 						'<br /><small>'.$engine->get_translation('ConfirmDbRestoreInfo').'</small>';
 
 				echo '<br /><br />
-						<p><small>
-							* Before restoring the backup <span class="underline">cluster</span>, the target table
-							not destroyed (to prevent loss of information from non -
-							Clusters). Thus, in the recovery process will occur
-							duplicate record. In normal mode, they will be replaced by recordings of
-							backup (using SQL-instructions  <code>REPLACE</code>), but if this
-							checked, all duplicates will be skipped (to be kept current
-							values of records), and added to the table only the records with new keys
-							(SQL-instruction <code>INSERT IGNORE</code>). <span class="underline">Note</span>: to restore
-							complete backup of the site, this option has no value.<br />
-							<br />
-							** If the backup contains the user files (global and
-							perpage, cache files, etc.), while in normal mode when you restore it 			will replace the same
-							files are placed in the same directory. This option allows you to save the 	current
-							copies of the files and restore from a backup only new (missing
-							on the server) files.
-						</small></p>';
+						<p><small>'.
+							$engine->get_translation('RestoreOptionsInfo').
+						'</small></p>';
 
 			echo $engine->form_close();
 		}
@@ -381,9 +367,8 @@ function admin_db_restore(&$engine, &$module)
 			$results .= '<strong>================================================'."\n".
 				date('H:i:s').' - RESTORATION COMPLETED</strong>';
 
-			$message = 'The backup is restored, the implementation of the report is attached below. To
-						delete this backup file, click <a href="'.rawurldecode($engine->href()).'&amp;remove=1&amp;backup_id='.htmlspecialchars($pack, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$engine->get_translation('RemoveButton').'</a>.';
-
+			$message = $engine->get_translation('BackupRestored').
+					' <a href="'.rawurldecode($engine->href()).'&amp;remove=1&amp;backup_id='.htmlspecialchars($pack, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$engine->get_translation('RemoveButton').'</a>.';
 			$engine->show_message($message);
 ?>
 			<div class="code" style="padding:3px;"><small><pre><?php echo $results; ?></pre></small></div><br />
@@ -424,10 +409,10 @@ function admin_db_restore(&$engine, &$module)
 			if ($backup_id)
 			{
 				remove_pack($engine, $backup_id);
-				$engine->log(1, 'Removed backup database '.$backup_id);
+				$engine->log(1, 'Removed database backup '.$backup_id);
 			}
 
-			$message = '<p class="green"><em>The selected backup has been successfully removed.</em></p>';
+			$message = '<p><em>'.$engine->get_translation('BackupRemoved').'</em></p>';
 			$engine->show_message($message);
 		}
 ?>
@@ -524,13 +509,13 @@ function admin_db_restore(&$engine, &$module)
 						echo '<td><table>';
 							// cluster root
 							echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">'.
-									'Cluster: '.( $log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">Entire site</em>' ).
+									$engine->get_translation('BackupCluster').': '.( $log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">'.$engine->get_translation('BackupEntireSite').'</em>' ).
 								'</th></tr>'."\n";
 							// contents
 							echo '<tr>'.
-									'<th>Structure</th>'.
-									'<th>Data</th>'.
-									'<th>Files</th>'.
+									'<th>'.$engine->get_translation('BackupStructure').'</th>'.
+									'<th>'.$engine->get_translation('BackupData').'</th>'.
+									'<th>'.$engine->get_translation('BackupFiles').'</th>'.
 								'</tr>'."\n";
 							// structure
 							echo '<tr>'.
@@ -602,7 +587,7 @@ function admin_db_restore(&$engine, &$module)
 				}
 				else
 				{
-					$message = 'No backups available.';
+					$message = $engine->get_translation('NoBackupsAvailable');
 					$engine->show_message($message, 'info') ;
 				}
 
