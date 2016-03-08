@@ -223,7 +223,7 @@ form input.submitinput {
 
 .hint {
 	border: 1px solid #ffee66;
-	width: 400px;
+	width: auto;
 	background-color: #ffffdd;
 	background-image: url(./../icon/warning.svg);
 	background-repeat: no-repeat;
