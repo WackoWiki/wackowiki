@@ -25,7 +25,7 @@ write_config_hidden_nodes(array('none' => ''));
 	/*
 	 Check which database extensions are installed and what versions of the db are there
 	 */
-	$database_result = extension_loaded('mysql') || extension_loaded('mysqli') || extension_loaded('pdo');
+	$database_result = extension_loaded('mysqli') || extension_loaded('pdo');
 
 	/*
 		With PDO it is not enough that we can just say "ok we've detected PDO".
@@ -61,7 +61,6 @@ write_config_hidden_nodes(array('none' => ''));
 	?>
 <h2><?php echo $lang['Database']; ?></h2>
 <ul>
-	<li>MySQL   <?php echo output_image(extension_loaded('mysql')); ?></li>
 	<li>MySQLi   <?php echo output_image(extension_loaded('mysqli')); ?></li>
 	<li>PDO   <?php echo output_image($detected > 0); ?></li>
 </ul>
