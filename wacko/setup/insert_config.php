@@ -76,6 +76,7 @@ $config_db['enable_comments']				= $config['enable_comments'];
 $config_db['enable_email']					= $config['enable_email'];
 $config_db['enable_email_notification']		= $config['enable_email_notification'];
 $config_db['enable_feeds']					= $config['enable_feeds'];
+$config_db['enable_referrers']				= $config['enable_referrers'];
 $config_db['enable_security_headers']		= $config['enable_security_headers'];
 $config_db['ext_bad_behavior']				= $config['ext_bad_behavior'];
 $config_db['footer_comments']				= $config['footer_comments'];

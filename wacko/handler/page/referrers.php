@@ -210,7 +210,7 @@ if ($user = $this->get_user())
 
 	echo '<strong>'.$title."</strong><br /><br />\n";
 
-	if ($referrers || $perpage || $bytime)
+	if (($referrers || $perpage || $bytime) && $this->config['enable_referrers'])
 	{
 		// per page
 		if ($perpage && list ($pages, $pagination) = load_referrers($this, $query, (int)$max, $parameters))

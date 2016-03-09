@@ -195,6 +195,7 @@ $wacko_config_defaults = array(
 
 	'outlook_workaround'		=> 1,
 	'enable_feeds'				=> 1,
+	'enable_referrers'			=> 0,
 
 	'forum_cluster'				=> 'Forum',
 	'forum_topics'				=> 10,
