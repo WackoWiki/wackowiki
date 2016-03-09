@@ -6485,7 +6485,12 @@ class Wacko
 		}
 
 		$this->set_page($page);
-		$this->log_referrer();
+
+		if ($this->config['enable_referrers'])
+		{
+			$this->log_referrer();
+		}
+
 		$this->set_menu();
 
 		// charset

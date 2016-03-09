@@ -71,6 +71,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['noindex']					= (int)$_POST['noindex'];
 		$config['xml_sitemap']				= (int)$_POST['xml_sitemap'];
 		$config['enable_feeds']				= (int)$_POST['enable_feeds'];
+		$config['enable_referrers']			= (int)$_POST['enable_referrers'];
 		$config['enable_comments']			= (int)$_POST['enable_comments'];
 		$config['sorting_comments']			= (int)$_POST['sorting_comments'];
 
@@ -435,7 +436,7 @@ function admin_config_basic(&$engine, &$module)
 					<input type="radio" id="disable_autosubscribe_off" name="disable_autosubscribe" value="1"<?php echo ( $engine->config['disable_autosubscribe'] ? ' checked="checked"' : '' );?> /><label for="disable_autosubscribe_off">Off.</label>
 				</td>
 			</tr>
-						<tr class="lined">
+			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
@@ -477,6 +478,17 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><label for="pages_purge_time"><strong>Storage time of page revisions:</strong><br />
 					<small>Automatically delete the older edition of the number of days. If you enter zero, the old edition will not be removed.</small></label></td>
 				<td><input type="number" min="0" maxlength="4" style="width:200px;" id="pages_purge_time" name="pages_purge_time" value="<?php echo htmlspecialchars($engine->config['pages_purge_time'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><strong>Enable Referrers:</strong><br />
+					<small>Allows to store and show external referrers.</small></td>
+				<td>
+					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ( $engine->config['enable_referrers'] ? ' checked="checked"' : '' );?> /><label for="enable_referrer_on">On.</label>
+					<input type="radio" id="enable_referrer_off" name="enable_referrers" value="0"<?php echo ( !$engine->config['enable_referrers'] ? ' checked="checked"' : '' );?> /><label for="enable_referrer_off">Off.</label>
+				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
