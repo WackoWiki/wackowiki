@@ -108,32 +108,44 @@ else if ($user = $this->get_user())
 
 	if (isset($_POST['action']) && ($_POST['action'] == 'update_notifications' || $_POST['action'] == 'update_extended' || $_POST['action'] == 'update'))
 	{
+		if ($_POST['action'] == 'update_extended')
+		{
+			$sql =
+			"doubleclick_edit	= '".(int)$_POST['doubleclick_edit']."', ".
+			"show_comments		= '".(int)$_POST['show_comments']."', ".
+			"show_spaces		= '".(int)$_POST['show_spaces']."', ".
+			#"typografica		= '".(int)$_POST['typografica']."', ".
+			"autocomplete		= '".(int)$_POST['autocomplete']."', ".
+			"numerate_links		= '".(int)$_POST['numerate_links']."', ".
+			"dont_redirect		= '".(int)$_POST['dont_redirect']."', ".
+			"show_files			= '".(int)$_POST['show_files']."', ".
+			"hide_lastsession	= '".(int)$_POST['hide_lastsession']."', ".
+			"validate_ip		= '".(int)$_POST['validate_ip']."', ".
+			"noid_pubs			= '".(int)$_POST['noid_pubs']."', ".
+			"session_length		= '".(int)$_POST['session_length']."' ";
+		}
+		else if	($_POST['action'] == 'update_notifications')
+		{
+			$sql =
+			"send_watchmail		= '".(int)$_POST['send_watchmail']."', ".
+			"allow_intercom		= '".(int)$_POST['allow_intercom']."', ".
+			"allow_massemail	= '".(int)$_POST['allow_massemail']."' ";
+		}
+		else
+		{
+			$sql =
+			"user_lang			= '".quote($this->dblink, $_POST['user_lang'])."', ".
+			"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
+			"timezone			= '".(float)$_POST['timezone']."', ".
+			"dst				= '".(int)$_POST['dst']."', ".
+			"sorting_comments	= '".(int)$_POST['sorting_comments']."', ".
+			"list_count			= '".(int)$_POST['list_count']."' " ;
+		}
+
 		// update user_setting table
 		$this->sql_query(
 			"UPDATE ".$this->config['table_prefix']."user_setting SET ".
-			($_POST['action'] == 'update_extended'
-				?	"doubleclick_edit	= '".(int)$_POST['doubleclick_edit']."', ".
-					"show_comments		= '".(int)$_POST['show_comments']."', ".
-					"show_spaces		= '".(int)$_POST['show_spaces']."', ".
-					#"typografica		= '".(int)$_POST['typografica']."', ".
-					"autocomplete		= '".(int)$_POST['autocomplete']."', ".
-					"numerate_links		= '".(int)$_POST['numerate_links']."', ".
-					"dont_redirect		= '".(int)$_POST['dont_redirect']."', ".
-					"send_watchmail		= '".(int)$_POST['send_watchmail']."', ".
-					"show_files			= '".(int)$_POST['show_files']."', ".
-					"allow_intercom		= '".(int)$_POST['allow_intercom']."', ".
-					"allow_massemail	= '".(int)$_POST['allow_massemail']."', ".
-					"hide_lastsession	= '".(int)$_POST['hide_lastsession']."', ".
-					"validate_ip		= '".(int)$_POST['validate_ip']."', ".
-					"noid_pubs			= '".(int)$_POST['noid_pubs']."', ".
-					"session_length		= '".(int)$_POST['session_length']."' "
-				:	"user_lang			= '".quote($this->dblink, $_POST['user_lang'])."', ".
-					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
-					"timezone			= '".(float)$_POST['timezone']."', ".
-					"dst				= '".(int)$_POST['dst']."', ".
-					"sorting_comments	= '".(int)$_POST['sorting_comments']."', ".
-					"list_count			= '".(int)$_POST['list_count']."' "
-				).
+				$sql.
 			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
@@ -178,18 +190,31 @@ else if ($user = $this->get_user())
 	}
 
 	// reload user data
-	if ( (isset($_POST['action']) && ($_POST['action'] == 'update' || $_POST['action'] == 'update_extended')) || (isset($_GET['resend_code']) && $_GET['resend_code'] == 1))
+	if ( (isset($_POST['action']) && ($_POST['action'] == 'update' || $_POST['action'] == 'update_notifications' || $_POST['action'] == 'update_extended')) || (isset($_GET['resend_code']) && $_GET['resend_code'] == 1))
 	{
 		$this->set_user($this->load_user(0, $user['user_id'], 0, false), 1);
 		$this->set_menu(MENU_USER);
 
 		$user		= $this->get_user();
-
 		$message	.= $this->get_translation('UserSettingsStored', (isset($_POST['user_lang']) ? $_POST['user_lang'] : ''));
-		// forward
-		$this->set_message($message);
-		$this->redirect(($_POST['action'] == 'update_extended' ? $this->href('', '', 'extended') : $this->href()));
 
+		$this->set_message($message);
+
+		// forward
+		if ($_POST['action'] == 'update_extended')
+		{
+			$tab = 'extended';
+		}
+		else if ($_POST['action'] == 'update_notifications')
+		{
+			$tab = 'notification';
+		}
+		else
+		{
+			$tab = '';
+		}
+
+		$this->redirect( $this->href('', '', $tab) );
 	}
 
 	#echo "<h3>".$this->get_translation('UserSettings')."</h3>";
@@ -251,6 +276,14 @@ else if ($user = $this->get_user())
 				<input type="hidden" name="allow_massemail" value="0" />
 				<input type="checkbox" id="allow_massemail" name="allow_massemail" value="1" <?php echo (isset($user['allow_massemail']) && $user['allow_massemail'] == 1) ? 'checked="checked"' : '' ?> />
 				<label for="allow_massemail"><?php echo $this->get_translation('AllowMassemail');?></label>
+			</td>
+		</tr>
+		<tr>
+			<td class="form_left">&nbsp;</td>
+			<td class="form_right">
+				<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
+				&nbsp;
+				<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
 			</td>
 		</tr>
 	</tbody>
