@@ -13,11 +13,13 @@ $error		= '';
 $output		= '';
 $user_name	= '';
 
+// disable server cache for page
 $this->no_cache(false);
 
 // reconnect securely in tls mode
 #if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
-if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
+if ($this->config['tls'] == true
+&& ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
 	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'].'/' : ''), $this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )) ));
 }
@@ -250,7 +252,7 @@ else
 
 						if (!empty($_POST['goback']))
 						{
-							$this->redirect($this->href('', stripslashes($_POST['goback']), 'cache='.rand(0,1000)));
+							$this->redirect($this->href('', stripslashes(htmlspecialchars($_POST['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.rand(0,1000)));
 						}
 						else
 						{
