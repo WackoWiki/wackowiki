@@ -47,6 +47,24 @@ $ap_translation = array(
 	// Massemail
 	'SendToGroup'				=> 'Send to group',
 
+	// DB Backup module
+	'BackupStructure'			=> 'Structure',
+	'BackupData'				=> 'Data',
+	'BackupFolder'				=> 'Folder',
+	'BackupTable'				=> 'Table',
+	'BackupCluster'				=> 'Cluster',
+	'BackupFiles'				=> 'Files',
+	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br />'.
+									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br />'.
+									'<br />'.
+									'<span class="underline">Attention</span>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
+									'same when backing up only table structure without saving the data. '.
+									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and contents) without specifying the cluster</em>.',
+	'BackupCompleted'			=> 'Backing up and archiving completed.<br />'.
+									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" named sub-directory of <code>files/backup</code> directory.<br />'.
+									'To download it use FTP (maintain the directory structure and file names when copying).<br />'.
+									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
+
 	// DB Restore module
 	'ConfirmDbRestore'			=> 'Do you want to restore backup',
 	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
@@ -67,29 +85,11 @@ $ap_translation = array(
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
 	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated table keys (not replace)',
 	'IgnoreSameFiles'			=> 'Ignore the same files (not overwrite)',
-	'NoBackupsAvailable'		=> 	'No backups available.',
+	'NoBackupsAvailable'		=> 'No backups available.',
 	'BackupEntireSite'			=> 'Entire site',
 	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
 
-
-	// DB Backup module
-	'BackupStructure'			=> 'Structure',
-	'BackupData'				=> 'Data',
-	'BackupFolder'				=> 'Folder',
-	'BackupTable'				=> 'Table',
-	'BackupCluster'				=> 'Cluster',
-	'BackupFiles'				=> 'Files',
-	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br />'.
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br />'.
-									'<br />'.
-									'<span class="underline">Attention</span>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
-									'same when backing up only table structure without saving the data. '.
-									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and contents) without specifying the cluster</em>.',
-	'BackupCompleted'			=> 'Backing up and archiving completed.<br />'.
-									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" named sub-directory of <code>files/backup</code> directory.<br />'.
-									'To download it use FTP (maintain the directory structure and file names when copying).<br />'.
-									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
 );
 
 ?>
