@@ -2702,8 +2702,11 @@ class Wacko
 		}
 	}
 
-	// disable caching
-	//		$client_only - client-side caching
+	/**
+	 * disable caching
+	 *
+	 * @param boolean $client_only - Disables only client-side caching. Optional, default is TRUE
+	 */
 	function no_cache($client_only = true)
 	{
 		// disable browser cache for page

@@ -18,6 +18,7 @@ $confpassword	= '';
 $error			= '';
 $word_ok		= '';
 
+// disable server cache for page
 $this->no_cache(false);
 
 // reconnect securely in tls mode
@@ -39,8 +40,6 @@ if (isset($_GET['confirm']))
 			"UPDATE ".$this->config['user_table']." ".
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
-
-
 
 		// cache handling
 		if ($this->config['cache'])
@@ -234,7 +233,6 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$account_enabled	= 1;
 					$waiting_approval	= '';
 					$requires_approval	= '';
-
 				}
 
 				// INSERT user
@@ -399,20 +397,20 @@ if (!isset($_GET['confirm']))
 
 		if ($this->config['disable_wikiname'] === false)
 		{
-			echo "<br /><small>".
+			echo '<br /><small>'.
 			str_replace('%1', $this->config['username_chars_min'],
 			str_replace('%2', $this->config['username_chars_max'],
 			$this->get_translation('NameCamelCaseOnly'))).
-			"</small>";
+			'</small>';
 			echo '</p>';
 		}
 		else
 		{
-			echo "<br /><small>".
+			echo '<br /><small>'.
 			str_replace('%1', $this->config['username_chars_min'],
 			str_replace('%2', $this->config['username_chars_max'],
 			$this->get_translation('NameAlphanumOnly'))).
-			"</small>";
+			'</small>';
 			echo '</p>';
 		}
 
