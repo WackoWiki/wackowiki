@@ -40,7 +40,7 @@ if (isset($_GET['confirm']))
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
 
-		$this->show_message($this->get_translation('EmailConfirmed'));
+
 
 		// cache handling
 		if ($this->config['cache'])
@@ -52,11 +52,17 @@ if (isset($_GET['confirm']))
 		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
 
 		unset($temp);
+
+		$message = $this->get_translation('EmailConfirmed');
+		$this->set_message($message, 'success');
 	}
 	else
 	{
-		$this->show_message(str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed')))."</div><br />";
+		$message = str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed'));
+		$this->set_message($message, 'error');
 	}
+
+	$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0,1000)));
 }
 else if (isset($_POST['action']) && $_POST['action'] == 'register')
 {
