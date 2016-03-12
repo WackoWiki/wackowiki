@@ -84,6 +84,49 @@ $ap_translation = array(
 	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
 
+	// User module
+	'UsersAdded'				=> 'User added',
+	'UsersDeleteInfo'			=> '[User delete Info here..]',
+
+	'UserEnabled'				=> 'Enabled',
+	'UsersAddNew'				=> 'Add new user',
+	'UsersDelete'				=> 'Are you sure you want to remove user ',
+	'UsersDeleted'				=> 'The user was deleted from the database.',
+	'UsersRename'				=> 'Rename the user',
+	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
+	'UsersRenamed'				=> 'User successfully renamed.',
+
+	// Groups module
+	'GroupsMembersFor'			=> 'Members for Group',
+	'GroupsDescription'			=> 'Description',
+	'GroupsModerator'			=> 'Moderator',
+	'GroupsOpen'				=> 'Open',
+	'GroupsActive'				=> 'Active',
+	'GroupsTip'					=> 'Click to edit Group',
+	'GroupsUpdated'				=> 'Groups updated',
+	'GroupsAlreadyExists'		=> 'This group already exists.',
+	'GroupsAdded'				=> 'Group added successfully.',
+	'GroupsRenamed'				=> 'Group successfully renamed.',
+	'GroupsDeleted'				=> 'The group was deleted from the database and all pages.',
+	'GroupsAdd'					=> 'Add a new group',
+	'GroupsRename'				=> 'Rename the group',
+	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
+	'GroupsDelete'				=> 'Are you sure you want to remove group ',
+	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
+	'GroupsStoreButton'			=> 'Save Groups',
+	'GroupsSaveButton'			=> 'Submit',
+	'GroupsCancelButton'		=> 'Cancel',
+	'GroupsAddButton'			=> 'Add',
+	'GroupsEditButton'			=> 'Edit',
+	'GroupsRemoveButton'		=> 'Remove',
+	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
+
+	'MembersAddNew'				=> 'Add new member',
+	'MembersAdded'				=> 'Added new member to the group successfully.',
+	'MembersRemove'				=> 'Are you sure you want to remove member ',
+	'MembersRemoved'			=> 'The member was removed from the group.',
+	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
+
 );
 
 ?>

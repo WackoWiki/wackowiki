@@ -83,6 +83,50 @@ $ap_translation = array(
 	'BackupEntireSite'			=> 'Entire site',
 	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
+
+	// User module
+	'UsersAdded'				=> 'User added',
+	'UsersDeleteInfo'			=> '[User delete Info here..]',
+
+	'UserEnabled'				=> 'Aktiviert',
+	'UsersAddNew'				=> 'Füge einen neuen Nutzer hinzu',
+	'UsersDelete'				=> 'Bist du dir sicher das du den Nutzer entfernen willst ',
+	'UsersDeleted'				=> 'Der Nutzer wurde aus der Datenbank entfernt.',
+	'UsersRename'				=> 'Nutzer umbenennen',
+	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Nutzer zugeordnet sind.',
+	'UsersRenamed'				=> 'Nutzer erfolgreich umbenannt.',
+
+	// Groups module
+	'GroupsMembersFor'			=> 'Mitglieder der Gruppe',
+	'GroupsDescription'			=> 'Beschreibung',
+	'GroupsModerator'			=> 'Moderator',
+	'GroupsOpen'				=> 'Offen',
+	'GroupsActive'				=> 'Aktiv',
+	'GroupsTip'					=> 'Klicke um die Gruppe zu bearbeiten',
+	'GroupsUpdated'				=> 'Gruppen aktualisiert',
+	'GroupsAlreadyExists'		=> 'Diese Gruppe gibt es bereits.',
+	'GroupsAdded'				=> 'Gruppe erfolgreich hinzugefügt.',
+	'GroupsRenamed'				=> 'Gruppe erfolgreich umbenannt.',
+	'GroupsDeleted'				=> 'Die Gruppe und alle Mitglieder wurde aus der Datenbank gelöscht.',
+	'GroupsAdd'					=> 'Eine neue Gruppe hinzufügen',
+	'GroupsRename'				=> 'Gruppe umbenennen',
+	'GroupsRenameInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Seiten aus, die dieser Gruppe zugeordnet sind.',
+	'GroupsDelete'				=> 'Bist du dir sicher das du die Gruppe entfernen möchtest ',
+	'GroupsDeleteInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
+	'GroupsStoreButton'			=> 'Speichere Gruppen',
+	'GroupsSaveButton'			=> 'Absenden',
+	'GroupsCancelButton'		=> 'Abbrechen',
+	'GroupsAddButton'			=> 'Hinzufügen',
+	'GroupsEditButton'			=> 'Gruppe Bearbeiten',
+	'GroupsRemoveButton'		=> 'Entfernen',
+	'GroupsEditInfo'			=> 'Zum Bearbeiten der Gruppen-Liste wähle das Optionsfeld',
+
+	'MembersAddNew'				=> 'Neues Mitglied hinzufügen',
+	'MembersAdded'				=> 'Neues Mitglied der Gruppe erfolgreich hinzugefügt.',
+	'MembersRemove'				=> 'Bist du dir sicher das du das Mitglied enfernen möchtest ',
+	'MembersRemoved'			=> 'Das Mitglied wurde aus der Gruppe entfernt.',
+	'MembersDeleteInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
+
 );
 
 ?>
