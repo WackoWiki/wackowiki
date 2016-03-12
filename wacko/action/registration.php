@@ -271,13 +271,15 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 
 				// INSERT user menu items
 
+				if ($this->config['approve_new_user'] == false)
+				{
+					// add your user page template here
+					$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
+					$change_summary		= $this->get_translation('NewUserAccount'); //'auto created';
 
-				// add your user page template here
-				$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
-				$change_summary		= $this->get_translation('NewUserAccount'); //'auto created';
-
-				// add user page
-				$this->save_page($this->config['users_page'].'/'.$user_name, '', $user_page_template, $change_summary, '', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);
+					// add user page
+					$this->save_page($this->config['users_page'].'/'.$user_name, '', $user_page_template, $change_summary, '', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);
+				}
 
 				// send email
 				if ($this->config['enable_email'] == true)
