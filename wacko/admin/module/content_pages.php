@@ -28,7 +28,7 @@ function admin_content_pages(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 
-	TODO: filter pages: page_lang, hits, last_commented, owner, user, published, drafts, with no title, with no description, with no keywords, by date modified, category, theme, acls, size ...
+	TODO: filter pages: page_lang, hits, last_commented, owner, user, published, drafts, with no title, with no description, with no keywords, by date modified, category, theme, acls, approved, size ...
 
 <?php
 	if (isset($_POST['reset']))
@@ -169,7 +169,7 @@ function admin_content_pages(&$engine, &$module)
 		}
 		else
 		{
-			$langs[] = $this->config['language'];
+			$langs[] = $engine->config['language'];
 		}
 
 		if ($langs)

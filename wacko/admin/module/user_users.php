@@ -214,7 +214,7 @@ function admin_user_users(&$engine, &$module)
 				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
-			$engine->show_message($engine->get_translation('UsersRenamed'));
+			$engine->show_message($engine->get_translation('UsersUpdated'));
 			$engine->log(4, "User //'{$user['user_name']}'// renamed //'{$_POST['newname']}'//");
 		}
 	}
@@ -385,7 +385,7 @@ function admin_user_users(&$engine, &$module)
 				'<table class="formation">'.
 				'<tr>
 					<td>
-						<label for="newname">'.$engine->get_translation('UsersRename').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label>
+						<label for="newname">'.$engine->get_translation('UsersRename').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in *</label>
 					</td>'.
 					'<td>
 						<input type="text" id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" />
@@ -594,7 +594,7 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		echo '<br /><input type="submit" id="button" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
+		echo '<br /><input type="submit" id="button" name="edit" value="'.$engine->get_translation('UserEditButton').'" /> ';
 		echo '<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
 		echo '<a href="'.$engine->href().'" class="cancel" ><input type="button" id="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
 		echo $engine->form_close();
@@ -782,7 +782,7 @@ function admin_user_users(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		$control_buttons = '<br /><input type="submit" id="button" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
-		$control_buttons .= '<input type="submit" id="button" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
+		$control_buttons .= '<input type="submit" id="button" name="edit" value="'.$engine->get_translation('UserEditButton').'" /> ';
 		$control_buttons .= '<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
 		$control_buttons .= '<input type="hidden" name="ids" value="'.implode('-', $set).'" />';
 		$control_buttons .= '<br />'."\n".
