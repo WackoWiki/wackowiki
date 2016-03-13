@@ -54,7 +54,7 @@ function admin_db_optimize(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
-	if (isset($_POST['start']))
+	if (isset($_POST['optimize']))
 	{
 		foreach ($_POST as $val => $key)
 		{
@@ -71,7 +71,7 @@ function admin_db_optimize(&$engine, &$module)
 			$engine->log(1, 'Optimize database');
 
 			$message = 'Optimization of the selected tables successfully.';
-			$engine->show_message($message);
+
 ?>
 			<br />
 			<div class="code" style="padding:3px;">
@@ -79,6 +79,12 @@ function admin_db_optimize(&$engine, &$module)
 			</div><br />
 <?php
 		}
+		else
+		{
+			$message = 'No table for optimization selected.';
+		}
+
+		$engine->show_message($message);
 	}
 	else
 	{
@@ -117,7 +123,7 @@ function admin_db_optimize(&$engine, &$module)
 		}
 ?>
 			</table>
-			<input type="submit" name="start" id="submit" value="optimize" />
+			<input type="submit" name="optimize" id="submit" value="optimize" />
 <?php
 		echo $engine->form_close();
 	}

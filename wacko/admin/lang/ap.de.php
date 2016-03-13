@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = array(
-	'ApTestText'				=> 'Ap Test Text',
+	'ApTestText'				=> 'Admin Panel Dummy Test Text',
 	'MainNote'					=> 'Hinweis: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'Authorization'				=> 'Autorisation',
@@ -42,30 +42,31 @@ $ap_translation = array(
 	'SendToGroup'				=> 'Send to group',
 
 	// DB Backup module
-	'BackupStructure'			=> 'Structure',
-	'BackupData'				=> 'Data',
-	'BackupFolder'				=> 'Folder',
-	'BackupTable'				=> 'Table',
+	'BackupStructure'			=> 'Struktur',
+	'BackupData'				=> 'Daten',
+	'BackupFolder'				=> 'Ordner',
+	'BackupTable'				=> 'Tabelle',
 	'BackupCluster'				=> 'Cluster',
-	'BackupFiles'				=> 'Files',
-	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br />'.
+	'BackupFiles'				=> 'Dateien',
+	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br />'.
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br />'.
 									'<br />'.
 									'<span class="underline">Attention</span>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
 									'same when backing up only table structure without saving the data. '.
-									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and contents) without specifying the cluster</em>.',
-	'BackupCompleted'			=> 'Backing up and archiving completed.<br />'.
-									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" named sub-directory of <code>files/backup</code> directory.<br />'.
-									'To download it use FTP (maintain the directory structure and file names when copying).<br />'.
-									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
+									'To make a complete conversion of the tables to the backup format you must make eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em>.',
+	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br />'.
+									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" benannten Unterverzeichnis unter <code>files/backup</code> directory.<br />'.
+									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br />'.
+									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="?mode=db_restore">Restore database</a>.',
 
 	// DB Restore module
-	'ConfirmDbRestore'			=> 'Do you want to restore backup',
-	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
-	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
-	'BackupDelete'				=> 'Are you sure you want to remove backup',
+	'RestoreInfo'				=> 'Du kannst jedes gefundene Sicherungsspaket wiederherstellen oder vom Server entfernen.',
+	'ConfirmDbRestore'			=> 'Möchtest du die Datensicherung wiederherstellen',
+	'ConfirmDbRestoreInfo'		=> 'Bitte warte dies kann einige Minuten benötigen.',
+	'RestoreWrongVersion'		=> 'WackoWiki Version stimmt nicht überein!',
+	'BackupDelete'				=> 'Willst du die Datensicherung wirklich entfernen',
 	'BackupDeleteInfo'			=> '',
-	'RestoreOptions'			=> 'Additional restore options',
+	'RestoreOptions'			=> 'Zusätzliche Otionen zur Daten-Wiederherstellung',
 	'RestoreOptionsInfo'		=> '* Before restoring the <span class="underline">cluster backup</span>, '.
 									'the target tables are not destroyed (to prevent loss of information from the clusters that have not been backed up). '.
 									'Thus, during the recovery process duplicate records will occur. '.
@@ -79,22 +80,22 @@ $ap_translation = array(
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
 	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated table keys (not replace)',
 	'IgnoreSameFiles'			=> 'Ignore the same files (not overwrite)',
-	'NoBackupsAvailable'		=> 'No backups available.',
-	'BackupEntireSite'			=> 'Entire site',
-	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
-	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
+	'NoBackupsAvailable'		=> 'Keien Datensicherung verfügbar.',
+	'BackupEntireSite'			=> 'Gesamte Website',
+	'BackupRestored'			=> 'Die Datensicherung wurde wiederhergestellt, ein zusammenfassender Bericht ist angefügt. Um die Dateien zu dieser Datensicherung zu löschen, klicke bitte',
+	'BackupRemoved'				=> 'Die ausgewählte Datensicherung wurde erfolgreich entfernt.',
 
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-
+	'UserEditButton'			=> 'Bearbeiten',
 	'UserEnabled'				=> 'Aktiviert',
-	'UsersAddNew'				=> 'Füge einen neuen Nutzer hinzu',
-	'UsersDelete'				=> 'Bist du dir sicher das du den Nutzer entfernen willst ',
-	'UsersDeleted'				=> 'Der Nutzer wurde aus der Datenbank entfernt.',
-	'UsersRename'				=> 'Nutzer umbenennen',
-	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Nutzer zugeordnet sind.',
-	'UsersRenamed'				=> 'Nutzer erfolgreich umbenannt.',
+	'UsersAddNew'				=> 'Füge einen neuen Benutzer hinzu',
+	'UsersDelete'				=> 'Bist du dir sicher das du den Benutzer entfernen willst ',
+	'UsersDeleted'				=> 'Der Benutzer wurde aus der Datenbank entfernt.',
+	'UsersRename'				=> 'Benutzer umbenennen',
+	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Benutzer zugeordnet sind.',
+	'UsersUpdated'				=> 'Benutzer erfolgreich aktualisiert.',
 
 	// Groups module
 	'GroupsMembersFor'			=> 'Mitglieder der Gruppe',
@@ -117,7 +118,7 @@ $ap_translation = array(
 	'GroupsSaveButton'			=> 'Absenden',
 	'GroupsCancelButton'		=> 'Abbrechen',
 	'GroupsAddButton'			=> 'Hinzufügen',
-	'GroupsEditButton'			=> 'Gruppe Bearbeiten',
+	'GroupsEditButton'			=> 'Bearbeiten',
 	'GroupsRemoveButton'		=> 'Entfernen',
 	'GroupsEditInfo'			=> 'Zum Bearbeiten der Gruppen-Liste wähle das Optionsfeld',
 

@@ -412,13 +412,12 @@ function admin_db_restore(&$engine, &$module)
 				$engine->log(1, 'Removed database backup '.$backup_id);
 			}
 
-			$message = '<p><em>'.$engine->get_translation('BackupRemoved').'</em></p>';
+			$message = $engine->get_translation('BackupRemoved');
 			$engine->show_message($message);
 		}
 ?>
 				<p>
-					You can restore any of the packages found Standby or
-					Remove it from the server.
+					<?php echo $engine->get_translation('RestoreInfo'); ?>
 				</p>
 <?php
 		if (!is_executable($engine->config['upload_path_backup'].'/'))

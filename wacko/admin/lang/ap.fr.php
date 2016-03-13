@@ -53,13 +53,14 @@ $ap_translation = array(
 									'<br />'.
 									'<span class="underline">Attention</span>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
 									'same when backing up only table structure without saving the data. '.
-									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and contents) without specifying the cluster</em>.',
+									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br />'.
 									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" named sub-directory of <code>files/backup</code> directory.<br />'.
 									'To download it use FTP (maintain the directory structure and file names when copying).<br />'.
 									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
 
 	// DB Restore module
+	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
 	'ConfirmDbRestore'			=> 'Do you want to restore backup',
 	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
@@ -87,14 +88,14 @@ $ap_translation = array(
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-
+	'UserEditButton'			=> 'Edit',
 	'UserEnabled'				=> 'En fonction',
 	'UsersAddNew'				=> 'Ajouter un utilisateur',
 	'UsersDelete'				=> 'Êtes-vous sûr de vouloir supprimer un utilisateur ',
 	'UsersDeleted'				=> 'L&rsquo;utilisateur a été supprimé de la base de données.',
 	'UsersRename'				=> 'Renommer l&rsquo;utilisateur',
 	'UsersRenameInfo'			=> '* Note&nbsp;: les modifications affecteront toutes les pages affectées à cet utilisateur.',
-	'UsersRenamed'				=> 'Utilisateur effectivement renommé.',
+	'UsersUpdated'				=> 'Utilisateur effectivement actualisé.',
 
 	// Groups module
 	'GroupsMembersFor'			=> 'Membres du groupe',

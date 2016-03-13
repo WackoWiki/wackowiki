@@ -53,13 +53,14 @@ $ap_translation = array(
 									'<br />'.
 									'<span class="underline">Attention</span>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
 									'same when backing up only table structure without saving the data. '.
-									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and contents) without specifying the cluster</em>.',
+									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br />'.
 									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" named sub-directory of <code>files/backup</code> directory.<br />'.
 									'To download it use FTP (maintain the directory structure and file names when copying).<br />'.
 									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
 
 	// DB Restore module
+	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
 	'ConfirmDbRestore'			=> 'Do you want to restore backup',
 	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
@@ -87,14 +88,14 @@ $ap_translation = array(
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-
+	'UserEditButton'			=> 'Edit',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user ',
 	'UsersDeleted'				=> 'The user was deleted from the database.',
 	'UsersRename'				=> 'Rename the user',
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
-	'UsersRenamed'				=> 'User successfully renamed.',
+	'UsersUpdated'				=> 'User successfully updated.',
 
 	// Groups module
 	'GroupsMembersFor'			=> 'Members for Group',

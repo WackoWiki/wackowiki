@@ -15,15 +15,15 @@ $ap_translation = array(
 	'NoRecoceryPassword'		=> 'Административный пароль не задан!',
 	'NoRecoceryPasswordTip'		=> 'Внимание: отсутствие административного пароля представляет угрозу для безопасности! Укажите пароль в файле настроек и запустите программу повторно.',
 
-	'LogFilterTip'				=> 'Filter events by criteria',
-	'LogLevel'					=> 'Level',
-	'LogLevelNotLower'			=> 'not less than',
-	'LogLevelNotHigher'			=> 'not higher than',
-	'LogLevelEqual'				=> 'equal',
-	'LogNoMatch'				=> 'No events that meet the criteria',
-	'LogDate'					=> 'Date',
-	'LogEvent'					=> 'Event',
-	'LogUsername'				=> 'Username',
+	'LogFilterTip'				=> 'Отфильтровать события по критериям',
+	'LogLevel'					=> 'Уровень',
+	'LogLevelNotLower'			=> 'не ниже, чем',
+	'LogLevelNotHigher'			=> 'не выше, чем',
+	'LogLevelEqual'				=> 'соответствует',
+	'LogNoMatch'				=> 'Нет событий, удовлетворяющих критериям',
+	'LogDate'					=> 'Дата',
+	'LogEvent'					=> 'Событие',
+	'LogUsername'				=> 'Пользователь',
 
 	'PurgeSessions'				=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
@@ -61,6 +61,7 @@ $ap_translation = array(
 									'Восстановить резервную копию или удалить пакет можно в разделе <a href="?mode=db_restore">Восстановление</a>.',
 
 	// DB Restore module
+	'RestoreInfo'				=> 'Вы можете восстановить любой из найденных резервных пакетов, либо удалить его с сервера.',
 	'ConfirmDbRestore'			=> 'Do you want to restore backup',
 	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
@@ -87,14 +88,14 @@ $ap_translation = array(
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-
+	'UserEditButton'			=> 'Edit',
 	'UserEnabled'				=> 'Включено',
 	'UsersAddNew'				=> 'Добавить нового пользователя',
 	'UsersDelete'				=> 'Are you sure you want to remove user ',
 	'UsersDeleted'				=> 'The user was deleted from the database.',
 	'UsersRename'				=> 'Rename the user',
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
-	'UsersRenamed'				=> 'User successfully renamed.',
+	'UsersUpdated'				=> 'User successfully updated.',
 
 	// Groups module
 	'GroupsMembersFor'			=> 'Members for Group',
