@@ -41,6 +41,7 @@ $ap_translation = array(
 
 	// Massemail
 	'SendToGroup'				=> 'Send to group',
+	'SendToUser'				=> 'Send to user',
 
 	// DB Backup module
 	'BackupStructure'			=> 'Structure',

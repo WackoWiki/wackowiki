@@ -129,6 +129,9 @@ else if ($user = $this->get_user())
 			$sql =
 			"send_watchmail		= '".(int)$_POST['send_watchmail']."', ".
 			"allow_intercom		= '".(int)$_POST['allow_intercom']."', ".
+			"notify_minor_edit	= '".(int)$_POST['notify_minor_edit']."', ".
+			"notify_page		= '".(int)$_POST['notify_page']."', ".
+			"notify_comment		= '".(int)$_POST['notify_comment']."', ".
 			"allow_massemail	= '".(int)$_POST['allow_massemail']."' ";
 		}
 		else
@@ -169,17 +172,13 @@ else if ($user = $this->get_user())
 				"WHERE user_id = '".(int)$user['user_id']."' ".
 				"LIMIT 1");
 
-			$subject	= $this->config['site_name'].". ".$this->get_translation('EmailConfirm');
-			$body		= $this->get_translation('EmailHello'). $user['user_name'].".\n\n".
-							str_replace('%1', $this->config['site_name'],
+			$subject	=	$this->get_translation('EmailConfirm');
+			$body		=	str_replace('%1', $this->config['site_name'],
 							str_replace('%2', $user['user_name'],
 							str_replace('%3', $this->href('', '', 'confirm='.$confirm),
-							$this->get_translation('EmailVerify'))))."\n\n".
-							$this->get_translation('EmailGoodbye')."\n".
-							$this->config['site_name']."\n".
-							$this->config['base_url'];
+							$this->get_translation('EmailVerify'))))."\n\n";
 
-			$this->send_mail($email, $subject, $body);
+			$this->send_user_email($email, $subject, $body);
 
 			$message = $this->get_translation('SettingsCodeResent').'<br />';
 		}
@@ -216,8 +215,6 @@ else if ($user = $this->get_user())
 
 		$this->redirect( $this->href('', '', $tab) );
 	}
-
-	#echo "<h3>".$this->get_translation('UserSettings')."</h3>";
 
 	// MENU
 	if (isset($_GET['menu']) || isset($_POST['_user_menu']) )
@@ -259,17 +256,57 @@ else if ($user = $this->get_user())
 					<label for="send_watchmail"><?php echo $this->get_translation('SendWatchEmail');?></label>
 				</td>
 			</tr>
-			<tr class="lined">
-				<td class="form_left">&nbsp;</td>
-				<td class="form_right">
-					<input type="hidden" name="allow_intercom" value="0" />
-					<input type="checkbox" id="allow_intercom" name="allow_intercom" value="1" <?php echo (isset($user['allow_intercom']) && $user['allow_intercom'] == 1) ? 'checked="checked"' : '' ?> />
-					<label for="allow_intercom"><?php echo $this->get_translation('AllowIntercom');?></label>
-				</td>
-			</tr>
+
+		<tr class="lined">
+			<th class="form_left">
+				<label for="notify_page"><?php echo $this->get_translation('NotifyPageEdit');?></label>
+			</th>
+			<td class="form_right">
 		<?php
-			}
+				echo '<input type="radio" id="notify_page0" name="notify_page" value="0" '.( $user['notify_page'] == 0 ? 'checked="checked"' : '' ).'/><label for="notify_page0">'.$this->get_translation('NotifyOff').'</label>';
+				echo '<input type="radio" id="notify_page1" name="notify_page" value="1" '.( $user['notify_page'] == 1 ? 'checked="checked"' : '' ).'/><label for="notify_page1">'.$this->get_translation('NotifyAlways').'</label>';
+				echo '<input type="radio" id="notify_page2" name="notify_page" value="2" '.( $user['notify_page'] == 2 ? 'checked="checked"' : '' ).'/><label for="notify_page2">'.$this->get_translation('NotifyPending').'</label>';
+				#echo '<input type="radio" id="notify_page3" name="notify_page" value="3" '.( $user['notify_page'] == 3 ? 'checked="checked"' : '' ).'/><label for="notify_page3">'.$this->get_translation('NotifyDigest').'</label>';
+		?>
+			</td>
+		</tr>
+		<tr class="lined">
+			<th class="form_left">
+				<label for="notify_comment"><?php echo $this->get_translation('NotifyComment');?></label>
+			</th>
+			<td class="form_right">
+<?php
+				echo '<input type="radio" id="notify_comment0" name="notify_comment" value="0" '.( $user['notify_comment'] == 0 ? 'checked="checked"' : '' ).'/><label for="notify_comment0">'.$this->get_translation('NotifyOff').'</label>';
+				echo '<input type="radio" id="notify_comment1" name="notify_comment" value="1" '.( $user['notify_comment'] == 1 ? 'checked="checked"' : '' ).'/><label for="notify_comment1">'.$this->get_translation('NotifyAlways').'</label>';
+				echo '<input type="radio" id="notify_comment2" name="notify_comment" value="2" '.( $user['notify_comment'] == 2 ? 'checked="checked"' : '' ).'/><label for="notify_comment2">'.$this->get_translation('NotifyPending').'</label>';
+				#echo '<input type="radio" id="notify_comment3" name="notify_comment" value="3" '.( $user['notify_comment'] == 3 ? 'checked="checked"' : '' ).'/><label for="notify_comment3">'.$this->get_translation('NotifyDigest').'</label>';
+?>
+			</td>
+		</tr>
+<?php
+			// minor edit
+			if ($this->page && $this->config['minor_edit'] != 0)
+			{
 	?>
+		<tr class="lined">
+			<td class="form_left">&nbsp;</td>
+			<td class="form_right">
+				<input type="hidden" name="notify_minor_edit" value="0" />
+				<input type="checkbox" id="notify_minor_edit" name="notify_minor_edit" value="1" <?php echo (isset($user['notify_minor_edit']) && $user['notify_minor_edit'] == 1) ? 'checked="checked"' : '' ?> />
+				<label for="notify_minor_edit"><?php echo $this->get_translation('NotifyMinorEdit');?></label>
+			</td>
+		</tr>
+		<?php }?>
+		<tr class="lined">
+			<td class="form_left">&nbsp;</td>
+			<td class="form_right">
+				<input type="hidden" name="allow_intercom" value="0" />
+				<input type="checkbox" id="allow_intercom" name="allow_intercom" value="1" <?php echo (isset($user['allow_intercom']) && $user['allow_intercom'] == 1) ? 'checked="checked"' : '' ?> />
+				<label for="allow_intercom"><?php echo $this->get_translation('AllowIntercom');?></label>
+			</td>
+		</tr>
+	<?php	}?>
+
 		<tr class="lined">
 			<td class="form_left">&nbsp;</td>
 			<td class="form_right">
@@ -282,8 +319,6 @@ else if ($user = $this->get_user())
 			<td class="form_left">&nbsp;</td>
 			<td class="form_right">
 				<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
-				&nbsp;
-				<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
 			</td>
 		</tr>
 	</tbody>
@@ -420,8 +455,6 @@ else if ($user = $this->get_user())
 	<td class="form_left">&nbsp;</td>
 	<td class="form_right">
 		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
-		&nbsp;
-		<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->get_translation('LogoutButton'); ?>" /></a>
 	</td>
 	</tr>
 	</tbody>

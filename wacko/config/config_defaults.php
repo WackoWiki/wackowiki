@@ -29,15 +29,15 @@ $wacko_config_defaults = array(
 	'site_name'					=> 'MyWikiSite',
 	'site_desc'					=> 'Cover what you do best. Link to the rest!',
 	'base_url'					=> ($_SERVER['SERVER_PORT'] == 443
-									? 'https'
-									: 'http'
-								).
-								'://'.$_SERVER['SERVER_NAME'].
-								($_SERVER['SERVER_PORT'] != 80
-									? ':'.$_SERVER['SERVER_PORT']
-									: ''
-								).
-								'/'.preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')).'/' ,
+										? 'https'
+										: 'http'
+									).
+									'://'.$_SERVER['SERVER_NAME'].
+									($_SERVER['SERVER_PORT'] != 80
+										? ':'.$_SERVER['SERVER_PORT']
+										: ''
+									).
+									'/'.preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')).'/' ,
 	'rewrite_mode'				=> ($found_rewrite_extension ? '1' : '0'),
 	'tls'						=> 0,
 	'tls_implicit'				=> 0,
@@ -195,7 +195,6 @@ $wacko_config_defaults = array(
 
 	'outlook_workaround'		=> 1,
 	'enable_feeds'				=> 1,
-	'enable_referrers'			=> 0,
 
 	'forum_cluster'				=> 'Forum',
 	'forum_topics'				=> 10,
@@ -208,7 +207,9 @@ $wacko_config_defaults = array(
 	'meta_keywords'				=> '',
 
 	'noindex'					=> 0,
+
 	'xml_sitemap'				=> 0,
+	'xml_sitemap_time'			=> 1,
 
 	'cache'						=> 0,
 	'cache_dir'					=> '_cache/',
@@ -277,6 +278,7 @@ $wacko_config_defaults = array(
 	'log_level'					=> 0,
 	'log_purge_time'			=> 0,
 
+	'enable_referrers'			=> 0,
 	'referrers_purge_time'		=> 1,
 	'pages_purge_time'			=> 0,
 	'keep_deleted_time'			=> 0,

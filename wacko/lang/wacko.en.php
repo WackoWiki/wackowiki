@@ -35,7 +35,6 @@ $wacko_translation = array(
 	'NewAccountSubject'			=> 'Account registration',
 	'NewAccountAdminCreated'	=> 'The user %1 has created an account for you with username "%2". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:',
 	'NewAccountUsername'		=> 'Username:',
-	'NewAccountDoNotReply'		=> 'Do not reply to this message',
 	'NewAccountEmail'			=> 'Email:',
 	'NewAccountIP'				=> 'Remote IP address:',
 	'NewAccountSignupInfo'		=> 'The following account has been created:',
@@ -46,6 +45,10 @@ $wacko_translation = array(
 
 	'UserApprovalPending'		=> 'Your account is still pending approval.',
 	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
+
+	'RegistrationApproved'		=> 'Registration Approved',
+	'RegistrationDenied'		=> 'Registration Denied',
+	'PendingApproval'			=> 'Pending Approval',
 
 	'UserApprovedInfo'			=> 'You have been approved to access %1',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
@@ -480,6 +483,16 @@ $wacko_translation = array(
 	'UserSettings'				=> 'User settings',
 	'UserSettingsGeneral'		=> 'General',
 	'UserSettingsNotifications'	=> 'Notifications',
+		'NotifyMinorEdit'			=> 'Notify also minor edit',
+		'NotifyPageEdit'			=> 'Edit',
+		'NotifyComment'				=> 'Comment',
+		'NotifyOff'					=> 'Off',
+		'NotifyAlways'				=> 'Always',
+		'NotifyPending'				=> 'Pending',
+		'NotifyDigest'				=> 'Digest',
+
+		'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
+
 	'UserSettingsEmailMe'		=> 'Email me when ...',
 	'UserSettingsExtended'		=> 'Extended',
 	'UserSettingsOther'			=> 'Other settings',
@@ -520,7 +533,7 @@ $wacko_translation = array(
 	'PasswordChanged'			=> 'Password changed',
 	'EmailWelcome'				=> 'You\'ve registered at ',
 	'EmailRegistered'			=> 'You\'ve successfully registered at %1.'."\n".'Your username: %2'."\n\n".'If you want to receive notifications, you must verify your email address. Please click on or copy the following link to a web browser: '."\n".'%3'."\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n".'If you did not request this registration, ignore this message and nothing will happen.'."\n\n",
-	'EmailDoNotReply'			=> 'Do not reply to this message'."\n\n",
+	'EmailDoNotReply'			=> 'Do not reply to this message.',
 	'EmailVerify'				=> 'Someone (maybe you) submitted your email as notification address at %1.'."\n".'Your username: %2'."\n\n".'If you want receive notifications, you need to approve your email. Please follow '."\n".'%3'."\n".'the link to do this.'."\n\n".'',
 	'EmailConfirm'				=> 'Please verify your email',
 	'EmailConfirmed'			=> 'Email successfully confirmed.',

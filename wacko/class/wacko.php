@@ -2219,7 +2219,11 @@ class Wacko
 				// TODO: add time parameter as config value xml_sitemap_ttl
 				if($this->config['xml_sitemap'])
 				{
-					$xml->site_map();
+					if (($days = $this->config['xml_sitemap_time']) && (time() > ($this->config['maint_last_xml_sitemap'] + $days * 86400)))
+					{
+						$xml->site_map();
+						$this->set_config('maint_last_xml_sitemap', time(), '', true);
+					}
 				}
 
 				unset($xml);
@@ -2291,6 +2295,89 @@ class Wacko
 		}
 	}
 
+	function add_user_page($user_name, $user_lang = null)
+	{
+		if (!isset($user_lang))
+		{
+			$user_lang = $this->config['language'];
+		}
+
+		// add your user page template here
+		$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
+		$change_summary		= $this->get_translation('NewUserAccount'); //'auto created';
+
+		// add user page
+		$this->save_page($this->config['users_page'].'/'.$user_name, '', $user_page_template, $change_summary, '', '', '', '', $user_lang, '', $user_name, true);
+	}
+
+	function set_account_status($user_id, $account_status)
+	{
+		// approved
+		if ($account_status === false)
+		{
+			$enabled = 1;
+		}
+		else
+		{
+			$enabled = 0;
+		}
+
+		$this->sql_query(
+				"UPDATE {$this->config['user_table']} SET ".
+					"enabled		= '".(int)$enabled."', ".
+					"account_status	= '".(int)$account_status."' ".
+				"WHERE user_id = '".(int)$user_id."' ".
+				"LIMIT 1");
+	}
+
+	function approve_user($user_id, $account_status, $user_lang)
+	{
+		$this->set_account_status($user_id, $account_status);
+
+		if ($account_status === false)
+		{
+			$this->add_user_page($user_name, $user_lang);
+
+			$this->load_translation($user_lang);
+			$this->set_translation ($user_lang);
+			$this->set_language ($user_lang);
+
+			// send email
+			if ($this->config['enable_email'] == true)
+			{
+				/* TODO: set user language for email encoding */
+				$this->load_translation($user_lang);
+				$this->set_translation ($user_lang);
+				$this->set_language ($user_lang);
+
+				$subject	=	$this->get_translation('RegistrationApproved');
+				$body		=	str_replace('%1', $this->config['site_name'],
+								$this->get_translation('UserApprovedInfo'))."\n\n";
+
+				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
+			}
+		}
+	}
+
+	function send_user_email($user_name, $email, $subject, $body, $user_lang)
+	{
+		$this->load_translation($user_lang);
+		$this->set_translation ($user_lang);
+		$this->set_language ($user_lang);
+
+		$subject	=	'['.$this->config['site_name'].'] '.$subject;
+		$body		=	$this->get_translation('EmailHello').' '.$user_name.",\n\n".
+
+						$body."\n\n".
+
+						$this->get_translation('EmailDoNotReply')."\n\n".
+						$this->get_translation('EmailGoodbye')."\n".
+						$this->config['site_name']."\n".
+						$this->config['base_url'];
+
+		$this->send_mail($email, $subject, $body);
+	}
+
 	function notify_moderator($page_id, $tag, $title, $user_name)
 	{
 		// subscribe & notify moderators
@@ -2309,24 +2396,25 @@ class Wacko
 						$moderator_id = $this->get_user_id($moderator);
 
 						$user = $this->load_single(
-							"SELECT u.email, p.user_lang, u.email_confirm, u.enabled, p.send_watchmail ".
+							"SELECT u.user_name, u.email, s.user_lang, u.email_confirm, u.enabled, s.send_watchmail ".
 							"FROM " .$this->config['user_table']." u ".
-								"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+								"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = p.user_id) ".
 							"WHERE u.user_id = '".$moderator_id."' ".
 							"LIMIT 1");
 
+						$this->load_translation($user['user_lang']);
+						$this->set_translation ($user['user_lang']);
+						$this->set_language ($user['user_lang']);
+
 						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['send_watchmail'] == true)
 						{
-							$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
-							$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').' '.$moderator.".\n\n".
-									str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
-									"'$title'\n".
-									$this->href('', $tag)."\n\n".
-									$this->get_translation('EmailGoodbye')."\n".
-									$this->config['site_name']."\n".
-									$this->config['base_url'];
+							$subject	=	$this->get_translation('NewPageCreatedSubj')." '$title'";
+							$body		=	$this->get_translation('EmailModerator').".\n\n".
+											str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
+											"'$title'\n".
+											$this->href('', $tag)."\n\n";
 
-							$this->send_mail($user['email'], $subject, $body);
+							$this->send_user_email($user['user_name'], $user['email'], $subject, $body, $user['user_lang']);
 							$this->set_watch($moderator_id, $page_id);
 						}
 					}
@@ -2339,6 +2427,7 @@ class Wacko
 
 	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision, $minor_edit)
 	{
+		// get page diff
 		if (!$comment_on_id && $is_revision)
 		{
 			// revisions diff
@@ -2358,13 +2447,18 @@ class Wacko
 		else if ($comment_on_id)
 		{
 			$object_id			= $comment_on_id;
-			$title				= $this->get_page_title(0, $comment_on_id);
+			$page_title			= $this->get_page_title(0, $comment_on_id);
 		}
 
+		// get watchers
 		$watchers	= $this->load_all(
-			"SELECT DISTINCT w.user_id, u.user_name ".
+			"SELECT DISTINCT
+				w.user_id, w.comment_id, w.pending,
+				u.email, u.user_name, u.email_confirm, u.enabled,
+				s.user_lang, s.send_watchmail, s.notify_minor_edit, s.notify_page, s.notify_comment ".
 			"FROM ".$this->config['table_prefix']."watch w ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (w.user_id = s.user_id) ".
 			"WHERE w.page_id = '".(int)$object_id."'");
 
 		if ($watchers)
@@ -2376,40 +2470,63 @@ class Wacko
 					if ($comment_on_id)
 					{
 						// assert that user has no comments pending...
-						$pending = $this->load_single(
-							"SELECT comment_id ".
-							"FROM {$this->config['table_prefix']}watch ".
-							"WHERE page_id = '".(int)$comment_on_id."' ".
-								"AND user_id = '".$watcher['user_id']."' ".
-							"LIMIT 1");
-
-						// ...and add one if so
-						if ($pending['comment_id'] == false)
+						if ($watcher['notify_comment'] > 1)
 						{
-							$this->sql_query(
-								"UPDATE {$this->config['table_prefix']}watch SET ".
-									"comment_id = '".(int)$page_id."' ".
-								"WHERE page_id = '".(int)$comment_on_id."' ".
-									"AND user_id = '".$watcher['user_id']."'");
+							// ...and add one if so
+							if ($watcher['comment_id'] == false)
+							{
+								$this->sql_query(
+									"UPDATE {$this->config['table_prefix']}watch SET ".
+										"comment_id	= '".(int)$page_id."' ".
+									"WHERE page_id = '".(int)$comment_on_id."' ".
+										"AND user_id = '".$watcher['user_id']."'");
+							}
+							else
+							{
+								continue;	// skip current watcher
+							}
 						}
-						else
+						else if ($watcher['notify_comment'] == 0)
 						{
 							continue;	// skip current watcher
+						}
+					}
+					else
+					{
+						if (($minor_edit && $watcher['notify_minor_edit'] == 0)
+							|| $watcher['notify_page'] == 0)
+						{
+							continue;	// skip current watcher
+						}
+
+						// assert that user has no comments pending...
+						if ($watcher['notify_page'] > 1)
+						{
+							// ...and add one if so
+							if ($watcher['pending'] == false)
+							{
+								$this->sql_query(
+									"UPDATE {$this->config['table_prefix']}watch SET ".
+										"pending	= '1' ".
+									"WHERE page_id = '".(int)$comment_on_id."' ".
+										"AND user_id = '".$watcher['user_id']."'");
+							}
+							else
+							{
+								continue;	// skip current watcher
+							}
 						}
 					}
 
 					if ($this->has_access('read', $object_id, $watcher['user_name']))
 					{
-						$user = $this->load_single(
-							"SELECT u.email, p.user_lang, u.email_confirm, u.enabled, p.send_watchmail ".
-							"FROM " .$this->config['user_table']." u ".
-								"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-							"WHERE u.user_id = '".$watcher['user_id']."' ".
-							"LIMIT 1");
-
-						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['send_watchmail'] == true)
+						if ($this->config['enable_email'] == true
+							&& $this->config['enable_email_notification'] == true
+							&& $watcher['enabled'] == true
+							&& $watcher['email_confirm'] == ''
+							&& $watcher['send_watchmail'] == true)
 						{
-							$lang = $user['user_lang'];
+							$lang = $watcher['user_lang'];
 							$this->load_translation($lang);
 							$this->set_translation ($lang);
 							$this->set_language ($lang);
@@ -2417,42 +2534,52 @@ class Wacko
 							// Email subject
 							if (!$comment_on_id && $is_revision)
 							{
-								$subject	= '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
+								$subject	= $this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
 							}
 							else if ($comment_on_id)
 							{
-								$subject	= '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+								$subject	= $this->get_translation('CommentForWatchedPage', $lang)."'".$page_title."'";
 							}
 
 							// Email body
-							$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
-									($user_name == GUEST ? $this->get_translation('Guest') : $user_name);
+							$body = ($user_name == GUEST ? $this->get_translation('Guest') : $user_name);
 
 									if (!$comment_on_id && $is_revision)
 									{
 										$body .=
-										$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
-										(isset($title) ? $title : $tag)."\n".
-										$this->href('', $tag)."\n\n".
-										"======================================================================\n\n".
-										$this->format($diff, 'html2mail')."\n\n".
-										"======================================================================\n\n";
+												$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
+												$this->href('', $tag)."\n\n".
+												(isset($title) ? $title : $tag)."\n".
+												"======================================================================\n\n".
+												$this->format($diff, 'html2mail')."\n\n".
+												"======================================================================\n\n";
+
+										if ($watcher['notify_page'] == 2)
+										{
+											$body .= $this->get_translation('FurtherPending', $lang)."\n\n";
+										}
 									}
 									else if ($comment_on_id)
 									{
 										$body .=
-										$this->get_translation('SomeoneCommented', $lang)."\n".
-										$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
-										"----------------------------------------------------------------------\n\n".
-										$page_body."\n\n".
-										"----------------------------------------------------------------------\n\n";
+												$this->get_translation('SomeoneCommented', $lang)."\n".
+												$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
+												(isset($title) ? $title : $tag)."\n".
+												"----------------------------------------------------------------------\n\n".
+												$page_body."\n\n".
+												"----------------------------------------------------------------------\n\n";
+
+										if ($watcher['notify_comment'] == 2)
+										{
+											$body .= $this->get_translation('FurtherPending', $lang)."\n\n";
+										}
 									}
 
-							$body .= $this->get_translation('EmailGoodbye', $lang)."\n".
-									$this->config['site_name']."\n".
-									$this->config['base_url'];
-
-							$this->send_mail($user['email'], $subject, $body);
+							$this->send_user_email($watcher['user_name'], $watcher['email'], $subject, $body, $lang);
+						}
+						else
+						{
+							continue;	// skip current watcher
 						}
 					}
 					else
@@ -4573,15 +4700,28 @@ class Wacko
 		#}
 	}
 
+	/**
+	 * Loads user data
+	 *
+	 * @param string $user_name
+	 * @param number $user_id
+	 * @param string $password
+	 * @param string $session_data
+	 * @param string $login_token
+	 *
+	 * @return string
+	 */
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
-		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.list_count, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.list_count, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.cookie_token ';
+		$fields_setting	= 's.doubleclick_edit, s.show_comments, s.list_count, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
+		$fields_default	= 'u.*, '.$fields_setting;
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, '.$fields_setting;
+
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
 				? "{$fields_session} "
-				: "{$fiels_default} "
+				: "{$fields_default} "
 				).
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -6223,7 +6363,7 @@ class Wacko
 			$this->log(7, 'Maintenance: system log purged');
 		}
 
-		// remove outdated pages cache, purge sql cache,
+		// remove outdated pages cache, purge sql cache (once per hour)
 		if (time() > ($this->config['maint_last_cache'] + 3600))
 		{
 			// pages cache
@@ -6280,16 +6420,18 @@ class Wacko
 		}
 
 		// write xml_sitemap
-		/*if (($days = $this->config['xml_sitemap_ttl']) && (time() > ($this->config['maint_last_xml_sitemap'] + 3 * 86400)))
+		if (($days = $this->config['xml_sitemap_time']) && (time() > ($this->config['maint_last_xml_sitemap'] + $days * 86400)))
 		{
 			if($this->config['xml_sitemap'])
 			{
+				$this->use_class('feed');
+				$xml = new feed($this);
 				$xml->site_map();
 			}
 
 			$this->set_config('maint_last_xml_sitemap', time(), '', true);
 			//$this->log(7, 'Maintenance: wrote XML Sitemap');
-		}*/
+		}
 
 		// purge expired cookie_tokens (once per 3 days)
 		if (($days = 3) && (time() > ($this->config['maint_last_session'] + 3 * 86400)) )

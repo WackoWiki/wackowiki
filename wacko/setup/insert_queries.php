@@ -181,5 +181,7 @@ $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'usergroup',	$alter_usergroup_
 // usergroup
 $upgrade['5.4.0'][]		= array($lang['CreatingTable'],	'word',			$table_word_r5_4_0,			$lang['ErrorCreatingTable']);
 
+// watch
+$upgrade['5.5.beta'][]	= array($lang['AlterTable'],	'watch',		$alter_watch_r5_4_0,		$lang['ErrorAlteringTable']);
 
 ?>

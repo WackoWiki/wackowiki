@@ -380,6 +380,7 @@ $table_watch = "CREATE TABLE {$pref}watch (".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"comment_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"pending TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"watch_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (watch_id)".
 				") {$engine} COMMENT='' {$charset}";

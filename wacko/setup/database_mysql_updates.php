@@ -121,7 +121,9 @@ $alter_usergroup_r5_4_0 = "ALTER TABLE {$pref}usergroup CHANGE moderator moderat
 $alter_usergroup_r5_4_1 = "ALTER TABLE {$pref}usergroup ADD group_lang VARCHAR(2) NOT NULL AFTER group_name";
 
 // WATCH
+$alter_watch_r5_4_0 = "ALTER TABLE {$pref}watch ADD pending TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER comment_id";
 
+// WORD
 $table_word_r5_4_0 = "CREATE TABLE {$pref}word (".
 					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"word VARCHAR(255) NOT NULL DEFAULT '',".
