@@ -119,9 +119,10 @@ if ($this->is_owner() || $this->is_admin())
 			{
 				// check user exists
 				$user = $this->load_single(
-					"SELECT user_id, user_name, email, email_confirm ".
-					"FROM {$this->config['user_table']} ".
-					"WHERE user_id = '".(int)$new_owner_id."' ".
+					"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
+					"FROM {$this->config['user_table']} u ".
+						"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+					"WHERE u.user_id = '".(int)$new_owner_id."' ".
 					"LIMIT 1");
 
 				if ($user == true)
@@ -148,14 +149,13 @@ if ($this->is_owner() || $this->is_admin())
 
 					if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 					{
-						$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageOwnership');
-						$body  = $this->get_translation('EmailHello').$new_owner.".\n\n";
-						$body .= str_replace('%2', $this->config['site_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
-						$body .= $this->href('', $this->tag, '')."\n\n";
-						$body .= $this->get_translation('PageOwnershipInfo')."\n";
-						//$email .= $this->href('', '', '')."\n\n";
-						$body .= $this->get_translation('EmailGoodbye')."\n".$this->config['site_name']."\n".$this->config['base_url'];
-						$this->send_mail($user['email'], $subject, $body);
+						$subject	= $this->get_translation('NewPageOwnership');
+						$body		.= str_replace('%2', $this->config['site_name'],
+									   str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
+						$body		.= $this->href('', $this->tag, '')."\n\n";
+						$body		.= $this->get_translation('PageOwnershipInfo')."\n";
+
+						$this->send_user_email($new_owner, $user['email'], $subject, $body, $user['user_lang']);
 					}
 
 					// log event
@@ -240,21 +240,21 @@ if ($this->is_owner() || $this->is_admin())
 			if ($new_owner_id = $_new_owner_id)
 			{
 				$user = $this->load_single(
-					"SELECT user_name, email, email_confirm ".
-					"FROM {$this->config['user_table']} ".
-					"WHERE user_id = '".(int)$new_owner_id."' ".
+					"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.userlang ".
+					"FROM {$this->config['user_table']} u ".
+						"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+					"WHERE u.user_id = '".(int)$new_owner_id."' ".
 					"LIMIT 1");
 
 				if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 				{
-					$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageOwnership');
-					$body  = $this->get_translation('EmailHello').$user['user_name'].".\n\n";
-					$body .= str_replace('%2', $this->config['site_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
-					$body .= $ownedpages."\n";
-					$body .= $this->get_translation('PageOwnershipInfo')."\n";
-					//$body .= $this->href('', '', '')."\n\n";
-					$body .= $this->get_translation('EmailGoodbye')."\n".$this->config['site_name']."\n".$this->config['base_url'];
-					$this->send_mail($user['email'], $subject, $body);
+					$subject	= $this->get_translation('NewPageOwnership');
+					$body		.= str_replace('%2', $this->config['site_name'],
+								   str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
+					$body		.= $this->href('', $this->tag, '')."\n\n";
+					$body		.= $this->get_translation('PageOwnershipInfo')."\n";
+
+					$this->send_user_email($new_owner, $user['email'], $subject, $body, $user['user_lang']);
 				}
 
 				$message .= $this->get_translation('ACLGaveOwnership').$user['user_name'];
@@ -329,7 +329,7 @@ if ($upload_allowed == true)
 			{
 				foreach($users as $user)
 				{
-					echo "<option value=\"".$user['user_id']."\">".htmlspecialchars($user['user_name'])."</option>\n";
+					echo '<option value="'.$user['user_id'].'">'.htmlspecialchars($user['user_name'])."</option>\n";
 				}
 			}
 	?>

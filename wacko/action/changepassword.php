@@ -265,10 +265,11 @@ else
 		$user_name	= str_replace(' ', '', $_POST['user_name']);
 		$email		= str_replace(' ', '', $_POST['email']);
 		$user		= $this->load_single(
-			"SELECT user_id, user_name, email, password, email_confirm ".
-			"FROM ".$this->config['user_table']." ".
-			"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
-				"AND email = '".quote($this->dblink, $email)."' ".
+			"SELECT u.user_id, u.user_name, u.email, u.password, u.email_confirm, s.user_lang ".
+			"FROM ".$this->config['user_table']." u ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+			"WHERE u.user_name = '".quote($this->dblink, $user_name)."' ".
+				"AND u.email = '".quote($this->dblink, $email)."' ".
 			"LIMIT 1");
 
 		if ($user)
@@ -278,17 +279,11 @@ else
 				$code		= hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
 				$code_hash	= hash('sha256', $code.hash('sha256', $this->config['system_seed']));
 
-				$subject =	$this->get_translation('EmailForgotSubject').
-							$this->config['site_name'];
-				$body	=	$this->get_translation('EmailHello'). $user_name.".\n\n".
-							str_replace('%1', $this->config['site_name'],
-							str_replace('%2', $user['user_name'],
-							str_replace('%3', $this->href('', '', 'secret_code='.$code),
-							$this->get_translation('EmailForgotMessage'))))."\n\n".
-							$this->get_translation('EmailDoNotReply')."\n\n".
-							$this->get_translation('EmailGoodbye')."\n".
-							$this->config['site_name']."\n".
-							$this->config['base_url'];
+				$subject	=	$this->get_translation('EmailForgotSubject');
+				$body		=	str_replace('%1', $this->config['site_name'],
+								str_replace('%2', $user['user_name'],
+								str_replace('%3', $this->href('', '', 'secret_code='.$code),
+								$this->get_translation('EmailForgotMessage'))))."\n\n";
 
 				// update table
 				$this->sql_query(
@@ -298,7 +293,7 @@ else
 					"LIMIT 1");
 
 				// send code
-				$this->send_mail($user['email'], $subject, $body);
+				$this->send_user_email($user_name, $user['email'], $subject, $body, $user['user_lang']);
 
 				// count attempt
 				$this->set_lost_password_count($user['user_id']);

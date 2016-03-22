@@ -22,7 +22,11 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 	// does requested user exists?
 	if (false == $user = $this->load_user($profile))
 	{
-		$this->show_message( str_replace('%2', htmlspecialchars($_user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))) );
+		$this->show_message( str_replace('%2', htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))) );
+	}
+	else if ($user['enabled'] == false)
+	{
+		$this->show_message($this->get_translation('AccountDisabled'));
 	}
 	else
 	{
@@ -548,7 +552,10 @@ else
 	$count = $this->load_single(
 		"SELECT COUNT(user_name) AS n ".
 		"FROM {$this->config['user_table']} ".
-		($where == true ? $where : ''));
+		($where == true ? $where : '').
+		($where ? 'AND ' : "WHERE ").
+			"u.account_type = '0' ".
+			"AND u.enabled = '1' ");
 
 	$pagination = $this->pagination($count['n'], $limit, 'p', $param);
 
@@ -560,6 +567,7 @@ else
 		($where == true ? $where : '').
 		($where ? 'AND ' : "WHERE ").
 			"u.account_type = '0' ".
+			"AND u.enabled = '1' ".
 		($order == true ? $order : "ORDER BY u.total_pages DESC ").
 		"LIMIT {$pagination['offset']}, $limit");
 

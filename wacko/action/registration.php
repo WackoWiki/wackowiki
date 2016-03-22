@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 $user_name		= '';
 $real_name		= '';
 $email			= '';
-$lang			= '';
+$user_lang		= '';
 $password		= '';
 $confpassword	= '';
 $error			= '';
@@ -80,7 +80,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 		$email			= trim($_POST['email']);
 		$password		= $_POST['password'];
 		$confpassword	= $_POST['confpassword'];
-		$lang			= (isset($_POST['user_lang']) ? $_POST['user_lang'] : $this->config['language']);
+		$user_lang			= (isset($_POST['user_lang']) ? $_POST['user_lang'] : $this->config['language']);
 		#$timezone		= trim($_POST['timezone']);
 		$complexity		= $this->password_complexity($user_name, $password);
 
@@ -224,8 +224,10 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				{
 					$account_status		= 1;
 					$account_enabled	= 0;
-					$waiting_approval	= $this->get_translation('UserWaitingApproval');
-					$requires_approval	= $this->get_translation('UserRequiresApproval');
+					$waiting_approval	= str_replace('%1', $this->config['site_name'],
+												$this->get_translation('UserWaitingApproval'));
+					$requires_approval	= str_replace('%1', $this->config['site_name'],
+												$this->get_translation('UserRequiresApproval'));
 				}
 				else
 				{
@@ -242,7 +244,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"signup_time	= NOW(), ".
 						"user_name		= '".quote($this->dblink, $user_name)."', ".
 						#"real_name		= '".quote($this->dblink, $real_name)."', ".
-						"account_lang	= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
+						"account_lang	= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
 						"email			= '".quote($this->dblink, $email)."', ".
 						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
 						"password		= '".quote($this->dblink, $password_hashed)."', ".
@@ -263,7 +265,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					"SET ".
 						"user_id		= '".(int)$_user_id['user_id']."', ".
 						"typografica	= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
-						"user_lang		= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
+						"user_lang		= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
 						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".
 						#"timezone		= '".quote($this->dblink, ($timezone ? $timezone : (float)$this->config['timezone']))."', ".
 						#"dst			= '".quote($this->dblink, ($dst ? $dst : (int)$this->config['dst']))."', ".
@@ -273,12 +275,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 
 				if ($this->config['approve_new_user'] == false)
 				{
-					// add your user page template here
-					$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
-					$change_summary		= $this->get_translation('NewUserAccount'); //'auto created';
-
-					// add user page
-					$this->save_page($this->config['users_page'].'/'.$user_name, '', $user_page_template, $change_summary, '', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);
+					$this->add_user_page($user_name, $user_lang);
 				}
 
 				// send email
@@ -286,24 +283,18 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				{
 					// 1. Send signup email to new user
 					/* TODO: set user language for email encoding */
-					$this->load_translation($lang);
-					$this->set_translation ($lang);
-					$this->set_language ($lang);
+					$this->load_translation($user_lang);
+					$this->set_translation ($user_lang);
+					$this->set_language ($user_lang);
 
-					$subject =	$this->get_translation('EmailWelcome').
-								$this->config['site_name'];
-					$body =		$this->get_translation('EmailHello'). $user_name.",\n\n".
-								str_replace('%1', $this->config['site_name'],
+					$subject =	$this->get_translation('EmailWelcome');
+					$body =		str_replace('%1', $this->config['site_name'],
 								str_replace('%2', $user_name,
 								str_replace('%3', $this->href('', '', 'confirm='.$confirm),
 								$this->get_translation('EmailRegistered'))))."\n\n".
-								$waiting_approval."\n\n".
-								$this->get_translation('EmailDoNotReply')."\n\n".
-								$this->get_translation('EmailGoodbye')."\n".
-								$this->config['site_name']."\n".
-								$this->config['base_url'];
+								$waiting_approval."\n\n";
 
-					$this->send_mail($email, $subject, $body);
+					$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
 					unset($subject, $body);
 
 					// 2. notify admin a new user has signed-up
@@ -315,17 +306,14 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						$this->set_translation ($lang_admin);
 						$this->set_language ($lang_admin);
 
-						$subject =	'['.$this->config['site_name'].'] '.$this->get_translation('NewAccountSubject');
-						$body =		$this->get_translation('NewAccountSignupInfo')."\n\n".
-									$this->get_translation('NewAccountUsername').' '.$user_name."\n".
-									$this->get_translation('NewAccountEmail').' '.$email."\n".
-									$this->get_translation('NewAccountIP').' '.$this->ip_address()."\n\n".
-									$requires_approval."\n\n".
-									$this->get_translation('NewAccountDoNotReply')."\n\n".
-									$this->config['site_name']."\n".
-									$this->config['base_url'];
+						$subject	=	$this->get_translation('NewAccountSubject');
+						$body		=	$this->get_translation('NewAccountSignupInfo')."\n\n".
+										$this->get_translation('NewAccountUsername').' '.$user_name."\n".
+										$this->get_translation('NewAccountEmail').' '.$email."\n".
+										$this->get_translation('NewAccountIP').' '.$this->ip_address()."\n\n".
+										$requires_approval."\n\n";
 
-						$this->send_mail($this->config['admin_email'], $subject, $body);
+						$this->send_user_email('WikiAdmin' ,$this->config['admin_email'], $subject, $body, $lang_admin);
 					}
 
 					$this->load_translation($this->user_lang);
