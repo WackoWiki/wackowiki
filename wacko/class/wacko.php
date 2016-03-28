@@ -7710,6 +7710,9 @@ class Wacko
 			// if false, we assume it's anonymous
 			if ($this->get_user_name() == false)
 			{
+				// disable server cache for page
+				$this->no_cache(false);
+
 				echo $inline ? '' : "<br />\n";
 				echo '<label for="captcha">'.$this->get_translation('Captcha').":</label>\n";
 				echo $inline ? '' : "<br />\n";

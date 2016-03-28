@@ -72,9 +72,7 @@ if ($this->method == 'edit')
 	echo '<script src="'.$this->config['base_url'].'js/wikiedit.js"></script>'."\n";
 	echo '<script src="'.$this->config['base_url'].'js/autocomplete.js"></script>'."\n";
 }
-?>
-	<script src="<?php echo $this->config['base_url'];?>js/captcha.js"></script>
-<?php
+
 // Doubleclick edit feature.
 // Enabled only for registered users who don't switch it off (requires class=page in show handler).
 $doubleclick = '';

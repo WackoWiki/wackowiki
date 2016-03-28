@@ -24,6 +24,7 @@ function sign(x)
 var wikiedit;
 var dbclick;
 var edit;
+
 function all_init() // initialization everything
 {
   if (wikiedit)
@@ -31,6 +32,15 @@ function all_init() // initialization everything
   if (dbclick)
   dclick(dbclick);
   crit_init();
+}
+// freecap
+function new_freecap() {
+  thesrc = document.getElementById('freecap').src;
+  if (thesrc.indexOf('&') !== - 1) {
+    thesrc = thesrc.substring(0, thesrc.lastIndexOf('&'));
+  }
+  document.getElementById('freecap').src = thesrc + '&'
+  + Math.round(Math.random() * 100000);
 }
 function dclick(frame)
 {
