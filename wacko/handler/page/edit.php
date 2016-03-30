@@ -383,7 +383,7 @@ if ($this->has_access('read')
 			if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 			{
 				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'"'.( $this->get_user_setting('noid_pubs') == 1 ? ' checked="checked"' : '' ).' />';
-				$output .= '<small><label for="noid_publication">'.$this->get_translation('PostAnonymously').'</label></small>';
+				$output .= '<label for="noid_publication">'.$this->get_translation('PostAnonymously').'</label>';
 				$output .= '<br />'."\n";
 			}
 
@@ -391,7 +391,7 @@ if ($this->has_access('read')
 			if ($this->page && $this->is_watched !== true)
 			{
 				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? ' checked="checked"' : '' ).' />';
-				$output .= '<small><label for="watchpage">'.$this->get_translation('NotifyMe').'</label></small>';
+				$output .= '<label for="watchpage">'.$this->get_translation('NotifyMe').'</label>';
 				$output .= '<br />'."\n";
 			}
 		}

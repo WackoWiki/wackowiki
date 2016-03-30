@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ?>
-<article class="page">
+<article id="showhandler" class="page" data-dbclick1="page">
 <?php
 
 if (!isset ($this->config['comments_count']))
@@ -120,6 +120,19 @@ if ($this->has_access('read'))
 				"UPDATE ".$this->config['table_prefix']."page ".
 				"SET hits = hits + 1 ".
 				"WHERE page_id = '".$this->page['page_id']."'");
+		}
+
+		$user			= $this->get_user();
+		$noid_protect	= $this->get_user_setting('noid_protect');
+
+		// clear new edits for watched page
+		if ($user && $this->page['latest'] != 0 && !$noid_protect)
+		{
+			$this->sql_query(
+					"UPDATE {$this->config['table_prefix']}watch ".
+					"SET pending = '0' ".
+					"WHERE page_id = '".$this->page['page_id']."' ".
+						"AND user_id = '".$user['user_id']."'");
 		}
 
 		$this->set_language($this->page_lang);

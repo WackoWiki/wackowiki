@@ -83,7 +83,7 @@ if ($this->has_access('read'))
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET comment_id = '0' ".
 				"WHERE page_id = '".$this->page['page_id']."' ".
-				"AND user_id = '".$user['user_id']."'");
+					"AND user_id = '".$user['user_id']."'");
 		}
 
 		// clear anonymous publication uncorrelator
@@ -242,7 +242,7 @@ if ($this->has_access('read'))
 				if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
 					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'" '.( $this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' )."/>\n";
-					$output .= '<label for="noid_publication"><small>'.$this->get_translation('PostAnonymously')."</small></label>\n";
+					$output .= '<label for="noid_publication">'.$this->get_translation('PostAnonymously')."</label>\n";
 					$output .= '<br />';
 				}
 
@@ -250,7 +250,7 @@ if ($this->has_access('read'))
 				if ($this->page && $this->is_watched !== true)
 				{
 					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? 'checked="checked"' : '' )." />\n";
-					$output .= '<label for="watchpage"><small>'.$this->get_translation('NotifyMe')."</small></label>\n";
+					$output .= '<label for="watchpage">'.$this->get_translation('NotifyMe')."</label>\n";
 					$output .= '<br />';
 				}
 
