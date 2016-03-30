@@ -20,7 +20,6 @@ class Cache
 		$this->timer		= $this->get_micro_time();
 		#$this->charset		= 'windows-1252';
 		#$this->charset		= $this->engine->languages[$this->engine->config['language']]['charset'];
-		#$this->lang		= $this->engine->languages[$this->engine->config['language']]['charset'];
 	}
 
 	// save serialized sql results
@@ -76,8 +75,9 @@ class Cache
 			/* if (is_file($directory.$file) &&
 				((time() - @filemtime($directory.$file)) > $ttl))
 			{
-			@unlink($directory.$file);
+				@unlink($directory.$file);
 			} */
+
 			if ($file != '.' && $file != '..' && !is_dir($directory.$file))
 			{
 				unlink($directory.$file);
@@ -251,6 +251,7 @@ class Cache
 	{
 		// delete from fs
 		clearstatcache();
+
 		$directory	= $this->wacko->config['cache_dir'].CACHE_CONFIG_DIR;
 		$handle		= opendir(rtrim($directory, '/'));
 
@@ -333,7 +334,7 @@ class Cache
 				$lastm = substr($lastm, 0, $p);
 			}
 
-			if ($_SERVER['REQUEST_METHOD'] == 'GET') //may be we need HEAD support ???
+			if ($_SERVER['REQUEST_METHOD'] == 'GET') // may be we need HEAD support ???
 			{
 				if (!$lastm && !$etag);
 				else if ($lastm && $gmt != $lastm);
@@ -347,6 +348,10 @@ class Cache
 				// HTTP header with right Charset settings
 				// TODO: How to determine the right charset in advance?
 				#header('Content-Type: text/html; charset='.$this->charset);
+
+				// making the internal charset declaration the sole source of character encoding information
+				// (e.g. <meta charset="windows-1252" />)
+				ini_set('default_charset', null);
 
 				$cached_page = $this->get_page_cached($page, $method, $query);
 
