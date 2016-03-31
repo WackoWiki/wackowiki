@@ -200,6 +200,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 												),
 										PASSWORD_DEFAULT
 										);
+				$user_ip			= $this->ip_address();
 
 				/* $timezone			= date('Z') / 3600;
 				$is_dst				= date('I');
@@ -248,8 +249,9 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"email			= '".quote($this->dblink, $email)."', ".
 						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
 						"password		= '".quote($this->dblink, $password_hashed)."', ".
-						"account_status	= '".quote($this->dblink, $account_status)."', ".
-						"enabled		= '".quote($this->dblink, $account_enabled)."', ".
+						"account_status	= '".(int) $account_status."', ".
+						"enabled		= '".(int) $account_enabled."', ".
+						"user_ip		= '".quote($this->dblink, $user_ip)."', ".
 						"user_form_salt	= '".quote($this->dblink, $salt_user_form)."'");
 
 				// get new user_id
@@ -310,7 +312,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						$body		=	$this->get_translation('NewAccountSignupInfo')."\n\n".
 										$this->get_translation('NewAccountUsername').' '.$user_name."\n".
 										$this->get_translation('NewAccountEmail').' '.$email."\n".
-										$this->get_translation('NewAccountIP').' '.$this->ip_address()."\n\n".
+										$this->get_translation('NewAccountIP').' '.$user_ip."\n\n".
 										$requires_approval."\n\n";
 
 						$this->send_user_email('WikiAdmin' ,$this->config['admin_email'], $subject, $body, $lang_admin);

@@ -24,8 +24,8 @@ $table_auth_token = "CREATE TABLE {$pref}auth_token (".
 					"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"session_ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
-					"session_browser VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"session_ip VARCHAR(40) NOT NULL DEFAULT '',".
+					"session_browser VARCHAR(150) NOT NULL DEFAULT '',".
 					"session_forwarded_for VARCHAR(255) NOT NULL  DEFAULT '',".
 					"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (cookie_token),".
@@ -303,6 +303,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"change_password VARCHAR(64) NOT NULL DEFAULT '',".
+					"user_ip VARCHAR(40) NOT NULL DEFAULT '',".
 					"user_form_salt VARCHAR(40) NOT NULL DEFAULT '',".
 					"email_confirm VARCHAR(64) NOT NULL DEFAULT '',".
 					"last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".

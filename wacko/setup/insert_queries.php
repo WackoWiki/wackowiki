@@ -159,6 +159,7 @@ $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'user',			$alter_user_r5_4_2,	
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'user',			$alter_user_r5_4_3,			$lang['ErrorAlteringTable']);
 
 $upgrade['5.5.beta'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_4,			$lang['ErrorAlteringTable']);
+$upgrade['5.5.beta'][]	= array($lang['AlterTable'],	'user',			$alter_user_r5_4_5,			$lang['ErrorAlteringTable']);
 
 // user setting
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']);
