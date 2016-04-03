@@ -46,6 +46,10 @@ $wacko_translation = array(
 	'UserApprovalPending'		=> 'Your account is still pending approval.',
 	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
 
+	'RegistrationApproved'		=> 'Registration Approved',
+	'RegistrationDenied'		=> 'Registration Denied',
+	'PendingApproval'			=> 'Pending Approval',
+
 	'UserApprovedInfo'			=> 'You have been approved to access %1',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
@@ -478,6 +482,19 @@ $wacko_translation = array(
 	'UserSettings'				=> 'User settings',
 	'UserSettingsGeneral'		=> 'General',
 	'UserSettingsNotifications'	=> 'Notifications',
+
+	'NotifyMinorEdit'			=> 'Notify also minor edit',
+	'NotifyPageEdit'			=> 'Edit',
+	'NotifyComment'				=> 'Comment',
+	'NotifyOff'					=> 'Off',
+	'NotifyAlways'				=> 'Always',
+	'NotifyPending'				=> 'Pending',
+	'NotifyDigest'				=> 'Digest',
+
+	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
+
+	'UserSettingsEmailMe'		=> 'Email me when ...',
+
 	'UserSettingsExtended'		=> 'Extended',
 	'UserSettingsOther'			=> 'Other settings',
 	'UserSpace'					=> 'User space',
