@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = array(
-
 	'FormInvalid'				=> 'Das übermittelte Formular war ungültig. Versuche erneut, das Formular abzusenden.',
 	// logged in panel
 	'YouAre'					=> 'Du bist ',
@@ -47,6 +46,10 @@ $wacko_translation = array(
 	'UserApprovalPending'		=> 'Your account is still pending approval.',
 	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
 
+	'RegistrationApproved'		=> 'Registration Approved',
+	'RegistrationDenied'		=> 'Registration Denied',
+	'PendingApproval'			=> 'Pending Approval',
+
 	'UserApprovedInfo'			=> 'You have been approved to access %1',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
@@ -78,6 +81,7 @@ $wacko_translation = array(
 	// other
 	'Guest'						=> 'Gast',
 	'Help'						=> 'Hilfe',
+	'TopicSearchText'			=> 'Nur in Seitentiteln suchen',
 	'WordprocessorVersion'		=> 'Textverarbeitungs-Version',
 	'EmailHello'				=> 'Hallo ',
 	'EmailModerator'			=> 'Moderator',
@@ -88,6 +92,7 @@ $wacko_translation = array(
 	'NewPageCreatedBody'		=> 'Nutzer %1 hat eine neue Seite erstellt: ',
 	'ActionDenied'				=> 'Diese Aktion ist hier nicht erlaubt.',
 	'TOCTitle'					=> 'Inhalt ',
+	'SearchButtonText'			=> 'Suche',
 	'OuterLink2'				=> 'externer Verweis',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Dokument',
@@ -163,6 +168,7 @@ $wacko_translation = array(
 	'ReferrersText'				=> 'Verweise',
 	'ModerateTip'				=> 'Moderation von Themen und Forumsbeiträgen',
 	'ModerateText'				=> 'Moderieren',
+	'SearchText'				=> 'Suchen: ',
 
 	'ACLUpdated'				=> 'Berechtigungen aktualisiert',
 	'ACLGaveOwnership'			=> ' und Besitzer geändert zu ',
@@ -294,6 +300,7 @@ $wacko_translation = array(
 	'NoDifferences'				=> 'Keine Unterschiede.',
 	'History'					=> 'Historie',
 	'ReEditOldRevision'			=> 'Editiere diese alte Version erneut',
+
 	'ExternalPages'				=> 'externe Seiten verlinkt zu %1 (%2) (<a href="%3">zeige Domänen</a>):',
 	'ExternalPagesGlobal'		=> 'Sites, die auf dieses WackoWiki verlinkt haben (%2) (<a href="%1">zeige Domänen</a>):',
 	'Last24Hours'				=> 'letzte 24 Stunden',
@@ -303,7 +310,6 @@ $wacko_translation = array(
 	'ViewReferringSites'		=> '<a href="%1">nur auf %2 verweisende Seiten</a> ',
 	'ViewReferringSitesPerPage'	=> '<a href="%1">nur auf %2 verweisende Seiten</a> ',
 	'ViewReferringSitesGlobal'	=> '<a href="%1">global verweisende Seiten</a>',
-
 	'ViewReferrersPage'			=> 'zur Seite',
 	'ViewReferrersPerPage'		=> 'nach Seite',
 	'ViewReferrersByTime'		=> 'nach Zeit',
@@ -361,14 +367,11 @@ $wacko_translation = array(
 	'NoRecentlyDeleted'			=> 'Keine gelöschten Seiten gefunden.',
 	'CommentsDisabled'			=> 'Kommentarfunktion ist nicht verfügbar.',
 
-	'SearchText'				=> 'Suchen: ',
-	'SearchButtonText'			=> 'Suche',
 	'SearchResults'				=> 'Suchergebnisse für ',
 	'NotFound'					=> 'nicht gefunden',
 	'NoResultsFor'				=> 'Keine Ergebnisse für ',
 	'SearchResultsFor'			=> 'Suchergebnisse für ',
 	'SearchFor'					=> 'Suche nach',
-	'TopicSearchText'			=> 'Nur in Seitentiteln suchen',
 	'TopicSearchResults'		=> 'Suchergebnisse in Titeln für ',
 	'NotFoundInTopics'			=> 'nicht in Titeln gefunden',
 	'TextSearchPage'			=> 'Suche',
@@ -479,6 +482,19 @@ $wacko_translation = array(
 	'UserSettings'				=> 'Benutzereinstellungen',
 	'UserSettingsGeneral'		=> 'Allgemein',
 	'UserSettingsNotifications'	=> 'Benachrichtigung',
+
+	'NotifyMinorEdit'			=> 'Notify also minor edit',
+	'NotifyPageEdit'			=> 'Edit',
+	'NotifyComment'				=> 'Comment',
+	'NotifyOff'					=> 'Off',
+	'NotifyAlways'				=> 'Always',
+	'NotifyPending'				=> 'Pending',
+	'NotifyDigest'				=> 'Digest',
+
+	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
+
+	'UserSettingsEmailMe'		=> 'Email me when ...',
+
 	'UserSettingsExtended'		=> 'Erweitert',
 	'UserSettingsOther'			=> 'weitere Einstellungen',
 	'UserSpace'					=> 'Benutzerseite',
@@ -488,8 +504,9 @@ $wacko_translation = array(
 	'CreateNewPage'				=> 'Neue Seite erstellen',
 	'CreateNewPageText'			=> 'Erstellen',
 	'CreateNewPageTip'			=> 'Neue Seite erstellen',
-	'CreatePageButton'			=> 'Erstellen',
+
 	'CreateRandomPage'			=> 'Beliebige Seite',
+	'CreatePageButton'			=> 'Erstellen',
 	'CreateSubPage'				=> 'Unterseite in diesem Cluster',
 	'CreatePageParentCluster'	=> 'Seite im übergeordneten Cluster',
 	'CreatePageDenied'			=> 'Du verfügst nicht über die erforderlichen Zugriffsrechte.',

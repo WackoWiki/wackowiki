@@ -308,13 +308,11 @@ $wacko_translation = array(
 	'DomainsSitesPages'			=> 'Domains/sites pages linking to  %1 (%2)  (<a href="%3">see list of different URLs</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Domains/sites linking to this WackoWiki (<a href="%1">see list of different URLs</a>):',
 	'ViewReferringSites'		=> '<a href="%1">View referring sites for %2 only</a> ',
-
 	'ViewReferringSitesGlobal'	=> '<a href="%1">View global referring sites</a>',
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'per page',
 	'ViewReferrersByTime'		=> 'by time',
 	'ViewReferrersGlobal'		=> 'global',
-
 	'NoneReferrers'				=> 'None',
 	'NotOwnerAndCanDelete'		=> 'You aren\'t owner of this page and can\'t delete it',
 
@@ -483,17 +481,19 @@ $wacko_translation = array(
 	'UserSettings'				=> 'User settings',
 	'UserSettingsGeneral'		=> 'General',
 	'UserSettingsNotifications'	=> 'Notifications',
-		'NotifyMinorEdit'			=> 'Notify also minor edit',
-		'NotifyPageEdit'			=> 'Edit',
-		'NotifyComment'				=> 'Comment',
-		'NotifyOff'					=> 'Off',
-		'NotifyAlways'				=> 'Always',
-		'NotifyPending'				=> 'Pending',
-		'NotifyDigest'				=> 'Digest',
 
-		'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
+	'NotifyMinorEdit'			=> 'Notify also minor edit',
+	'NotifyPageEdit'			=> 'Edit',
+	'NotifyComment'				=> 'Comment',
+	'NotifyOff'					=> 'Off',
+	'NotifyAlways'				=> 'Always',
+	'NotifyPending'				=> 'Pending',
+	'NotifyDigest'				=> 'Digest',
+
+	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
 
 	'UserSettingsEmailMe'		=> 'Email me when ...',
+
 	'UserSettingsExtended'		=> 'Extended',
 	'UserSettingsOther'			=> 'Other settings',
 	'UserSpace'					=> 'User space',
@@ -517,7 +517,6 @@ $wacko_translation = array(
 
 	'PageReservedWord'			=> 'You can\'t use <code>%1</code> as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
-
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',
@@ -633,7 +632,6 @@ $wacko_translation = array(
 								   'violates the rules of the site %2, please send it (using the button Forward /'.
 								   'Forward your mail program) to address %4.',
 	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send private messages to users.',
-
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',
