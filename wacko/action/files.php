@@ -120,10 +120,9 @@ if ($can_view)
 	}
 
 	// display
-	$edit	= $this->get_translation('UploadEdit');
-	$edit2	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('UploadEdit').'" alt="'.$this->get_translation('UploadEdit').'" class="btn-edit"/>';
-	$del	= $this->get_translation('UploadRemove');
-	$del2	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('UploadRemove').'" alt="'.$this->get_translation('UploadRemove').'" class="btn-delete"/>';
+
+	$edit_icon	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('UploadEdit').'" alt="'.$this->get_translation('UploadEdit').'" class="btn-edit"/>';
+	$del_icon	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('UploadRemove').'" alt="'.$this->get_translation('UploadRemove').'" class="btn-delete"/>';
 
 	/* if (!$global)
 	{
@@ -215,8 +214,8 @@ if ($can_view)
 				$remove_mode = 0;
 			}
 
-			$remove_href	= $this->href('upload', $page, 'remove='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
-			$edit_href		= $this->href('upload', $page, 'edit='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
+			$href_remove	= $this->href('upload', $page, 'remove='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
+			$href_edit		= $this->href('upload', $page, 'edit='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
 
 			echo '<tr>'.
 					'<td class="file-">'.$link.'</td>';
@@ -251,8 +250,8 @@ if ($can_view)
 			{
 				echo '<td class="tool-">'.
 						'<span class="dt2-">'.
-							'<a href="'.$edit_href.'" class="tool2-">'.$edit2.'</a>'. # &nbsp;
-							'<a href="'.$remove_href.'" class="tool2-">'.$del2.'</a>'.
+							'<a href="'.$href_edit.'" class="tool2-">'.$edit_icon.'</a>'. # &nbsp;
+							'<a href="'.$href_remove.'" class="tool2-">'.$del_icon.'</a>'.
 						'</span>'.
 					 '</td>'."\n";
 			}

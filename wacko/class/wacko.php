@@ -2306,12 +2306,16 @@ class Wacko
 			$user_lang = $this->config['language'];
 		}
 
+		$tag				= $this->config['users_page'].'/'.$user_name;
 		// add your user page template here
 		$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
 		$change_summary		= $this->get_translation('NewUserAccount'); //'auto created';
 
 		// add user page
-		$this->save_page($this->config['users_page'].'/'.$user_name, '', $user_page_template, $change_summary, '', '', '', '', $user_lang, '', $user_name, true);
+		if ($this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META) == false)
+		{
+			$this->save_page($tag, '', $user_page_template, $change_summary, '', '', '', '', $user_lang, '', $user_name, true);
+		}
 	}
 
 	function set_account_status($user_id, $account_status)
@@ -2358,9 +2362,9 @@ class Wacko
 				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
 
 				// reset user language
-				$this->load_translation($this->user_lang);
-				$this->set_translation($this->user_lang);
-				$this->set_language($this->user_lang);
+				$this->load_translation($this->config['language']);
+				$this->set_translation($this->config['language']);
+				$this->set_language($this->config['language']);
 			}
 		}
 	}
