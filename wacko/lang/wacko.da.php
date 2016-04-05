@@ -50,7 +50,7 @@ $wacko_translation = array(
 	'RegistrationDenied'		=> 'Registration Denied',
 	'PendingApproval'			=> 'Pending Approval',
 
-	'UserApprovedInfo'			=> 'You have been approved to access %1',
+	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	// login panel
@@ -531,7 +531,9 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Skift password',
 	'PasswordChanged'			=> 'Password ændret',
 	'EmailWelcome'				=> 'Du blev registreret den ',
-	'EmailRegistered'			=> 'Du er nu registreret i %1.'."\n".'Dit brugernavn: %2'."\n\n".'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg '."\n".'%3'."\n".'dette link for at godkende din mail.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Hvis du ikke har prøvet at registrere dig skal du bare se bort fra denne meddelelse og ingenting vil ske.'."\n\n",
+	'EmailRegistered'			=> 'Du er nu registreret i %1.'."\n".'Dit brugernavn: %2'."\n\n".'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg '."\n".'%3'."\n".'dette link for at godkende din mail.',
+	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredIgnore'		=> 'Hvis du ikke har prøvet at registrere dig skal du bare se bort fra denne meddelelse og ingenting vil ske.',
 	'EmailDoNotReply'			=> 'SVAR IKKE PÅ DENNE MEDDELELSE',
 	'EmailVerify'				=> 'Du er nu registreret i %1.'."\n".'Dit brugernavn: %2'."\n\n".'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg '."\n".'%3'."\n".'dette link for at godkende din mail.'."\n\n".'',
 	'EmailConfirm'				=> 'Bekræft din mail',

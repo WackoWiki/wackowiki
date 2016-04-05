@@ -50,7 +50,7 @@ $wacko_translation = array(
 	'RegistrationDenied'		=> 'Registration Denied',
 	'PendingApproval'			=> 'Pending Approval',
 
-	'UserApprovedInfo'			=> 'You have been approved to access %1',
+	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	// login panel
@@ -531,7 +531,9 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Changement de mot de passe',
 	'PasswordChanged'			=> 'Le mot de passe a été changé',
 	'EmailWelcome'				=> 'Bienvenue sur ',
-	'EmailRegistered'			=> 'Votre enregistrement est confirmé sur %1.'."\n".'Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2'."\n\n".'Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra&nbsp;:'."\n".' - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,'."\n".' - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.'."\n\n".'Pour confirmer votre adresse de messagerie suivez '."\n".'%3'."\n".'ce lien, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Si vous n&rsquo;aviez fait aucune demande d&rsquo;enregistrement, ignorez ce message et rien ne sera fait.'."\n\n",
+	'EmailRegistered'			=> 'Votre enregistrement est confirmé sur %1.'."\n".'Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2'."\n\n".'Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra&nbsp;:'."\n".' - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,'."\n".' - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.'."\n\n".'Pour confirmer votre adresse de messagerie suivez '."\n".'%3'."\n".'ce lien, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.',
+	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredIgnore'		=> 'Si vous n&rsquo;aviez fait aucune demande d&rsquo;enregistrement, ignorez ce message et rien ne sera fait.',
 	'EmailDoNotReply'			=> 'NE PAS RÉPONDRE À CE MESSAGE',
 	'EmailVerify'				=> 'Quelqu&rsquo;un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.'."\n".'Votre nom d&rsquo;utilisateur (NomWiki)&nbsp;: %2'."\n\n".'Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour cela suivez '."\n".'%3'."\n".'ce lien.'."\n\n".'',
 	'EmailConfirm'				=> 'Merci de vérifier votre adresse de messagerie',

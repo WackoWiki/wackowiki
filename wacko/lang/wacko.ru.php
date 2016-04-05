@@ -50,7 +50,7 @@ $wacko_translation = array(
 	'RegistrationDenied'		=> 'Registration Denied',
 	'PendingApproval'			=> 'Pending Approval',
 
-	'UserApprovedInfo'			=> 'You have been approved to access %1',
+	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	// login panel
@@ -531,7 +531,9 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Смена пароля',
 	'PasswordChanged'			=> 'Пароль успешно изменён',
 	'EmailWelcome'				=> 'Регистрация в ',
-	'EmailRegistered'			=> 'Вы успешно зарегистрировались в %1.'."\n".'Ваше имя пользователя: %2'."\n\n".'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:'."\n".'%3'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Если вы не запрашивали никакой регистрации, проигнорируйте это сообщение, и ничего не произойдёт.'."\n\n",
+	'EmailRegistered'			=> 'Вы успешно зарегистрировались в %1.'."\n".'Ваше имя пользователя: %2'."\n\n".'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:'."\n".'%3',
+	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredIgnore'		=> 'Если вы не запрашивали никакой регистрации, проигнорируйте это сообщение, и ничего не произойдёт.',
 	'EmailDoNotReply'			=> 'НЕ ОТВЕЧАЙТЕ НА ЭТО СООБЩЕНИЕ',
 	'EmailVerify'				=> 'Кто-то (возможно, вы), указал ваш электронный адрес в %1.'."\n".'Ваше имя пользователя: %2'."\n\n".'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:'."\n".'%3'."\n".'',
 	'EmailConfirm'				=> 'Запрос на подтверждение адреса электронной почты',

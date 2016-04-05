@@ -704,9 +704,13 @@ class Wacko
 		return true;
 	}
 
-	function get_charset()
+	function get_charset($lang = '')
 	{
-		$lang = $this->determine_lang();
+		if ($lang == '')
+		{
+			$lang = $this->determine_lang();
+		}
+
 		$this->load_translation($lang);
 
 		if (isset($this->languages[$lang]['charset']))
@@ -2330,17 +2334,13 @@ class Wacko
 				"LIMIT 1");
 	}
 
-	function approve_user($user_id, $account_status, $user_lang)
+	function approve_user($user_id, $account_status, $user_name, $email, $user_lang)
 	{
 		$this->set_account_status($user_id, $account_status);
 
 		if ($account_status === false)
 		{
-			$this->add_user_page($user_name, $user_lang);
-
-			$this->load_translation($user_lang);
-			$this->set_translation ($user_lang);
-			$this->set_language ($user_lang);
+			#$this->add_user_page($user_name, $user_lang);
 
 			// send email
 			if ($this->config['enable_email'] == true)
@@ -2352,9 +2352,15 @@ class Wacko
 
 				$subject	=	$this->get_translation('RegistrationApproved');
 				$body		=	str_replace('%1', $this->config['site_name'],
-								$this->get_translation('UserApprovedInfo'))."\n\n";
+								$this->get_translation('UserApprovedInfo'))."\n\n".
+								$this->get_translation('EmailRegisteredLogin')."\n\n";
 
 				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
+
+				// reset user language
+				$this->load_translation($this->user_lang);
+				$this->set_translation($this->user_lang);
+				$this->set_language($this->user_lang);
 			}
 		}
 	}
@@ -2365,6 +2371,7 @@ class Wacko
 		$this->set_translation ($user_lang);
 		$this->set_language ($user_lang);
 
+		$charset	=	$this->get_charset($user_lang);
 		$subject	=	'['.$this->config['site_name'].'] '.$subject;
 		$body		=	$this->get_translation('EmailHello').' '.$user_name.",\n\n".
 
@@ -2375,7 +2382,7 @@ class Wacko
 						$this->config['site_name']."\n".
 						$this->config['base_url'];
 
-		$this->send_mail($email, $subject, $body);
+		$this->send_mail($email, $subject, $body, null, $charset);
 	}
 
 	function notify_moderator($page_id, $tag, $title, $user_name)
