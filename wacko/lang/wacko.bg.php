@@ -50,7 +50,7 @@ $wacko_translation = array(
 	'RegistrationDenied'		=> 'Registration Denied',
 	'PendingApproval'			=> 'Pending Approval',
 
-	'UserApprovedInfo'			=> 'You have been approved to access %1',
+	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	// login panel
@@ -524,7 +524,9 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Промяна на паролата',
 	'PasswordChanged'			=> 'Паролата е  успешно променена',
 	'EmailWelcome'				=> 'Регистрация ',
-	'EmailRegistered'			=> 'Успешна регистрация  %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на информация, трябва да потвърдите адреса си. Кликнете на '."\n".'%3'."\n".'този линк.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Ако не сте регистрирани, пропуснете това съобщение.'."\n\n",
+	'EmailRegistered'			=> 'Успешна регистрация  %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на информация, трябва да потвърдите адреса си. Кликнете на '."\n".'%3'."\n".'този линк.'."\n\n\n".''."\n\n\n".'Ако не сте регистрирани, пропуснете това съобщение.'."\n\n",
+	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredIgnore'		=> '',
 	'EmailDoNotReply'			=> 'НЕ ОТГОВАРЯЙТЕ НА ТОВА СЪОБЩЕНИЕ',
 	'EmailVerify'				=> 'Някой, (вероятно Вие) е дал този адрес в %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на информация, трябва да потвърдите адреса си. Кликнете на '."\n".'%3'."\n".'този линк.'."\n\n".'',
 	'EmailConfirm'				=> 'Моля потвърдете вашия email',

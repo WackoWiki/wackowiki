@@ -50,7 +50,7 @@ $wacko_translation = array(
 	'RegistrationDenied'		=> 'Registration Denied',
 	'PendingApproval'			=> 'Pending Approval',
 
-	'UserApprovedInfo'			=> 'You have been approved to access %1',
+	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	// login panel
@@ -483,17 +483,17 @@ $wacko_translation = array(
 	'UserSettingsGeneral'		=> 'Allgemein',
 	'UserSettingsNotifications'	=> 'Benachrichtigung',
 
-	'NotifyMinorEdit'			=> 'Notify also minor edit',
-	'NotifyPageEdit'			=> 'Edit',
-	'NotifyComment'				=> 'Comment',
-	'NotifyOff'					=> 'Off',
-	'NotifyAlways'				=> 'Always',
-	'NotifyPending'				=> 'Pending',
-	'NotifyDigest'				=> 'Digest',
+	'NotifyMinorEdit'			=> 'Benachrichtigung auch bei kleinen Änderungen',
+	'NotifyPageEdit'			=> 'Änderung',
+	'NotifyComment'				=> 'Kommentar',
+	'NotifyOff'					=> 'Aus',
+	'NotifyAlways'				=> 'Immer',
+	'NotifyPending'				=> 'Ausstehend',
+	'NotifyDigest'				=> 'Sammeln',
 
 	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
 
-	'UserSettingsEmailMe'		=> 'Email me when ...',
+	'UserSettingsEmailMe'		=> 'Sende E-Mail wenn ...',
 
 	'UserSettingsExtended'		=> 'Erweitert',
 	'UserSettingsOther'			=> 'weitere Einstellungen',
@@ -532,7 +532,9 @@ $wacko_translation = array(
 	'YouWantChangePassword'		=> 'Passwort ändern',
 	'PasswordChanged'			=> 'Passwort geändert',
 	'EmailWelcome'				=> 'Du bist registriert bei ',
-	'EmailRegistered'			=> 'Du hast dich bei %1 registriert.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem '."\n".'%3'."\n".'Link.'."\n\n\n".'Please return to the Wiki and login with your new username and password.'."\n\n\n".'Wenn du dich nicht registriert hast, ignoriere diese Nachricht, es wird nichts passieren.'."\n\n",
+	'EmailRegistered'			=> 'Du hast dich bei %1 registriert.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem Link'."\n".'%3',
+	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredIgnore'		=> 'Wenn du dich nicht registriert hast, ignoriere diese Nachricht, es wird nichts passieren.',
 	'EmailDoNotReply'			=> 'NICHT AUF DIESE NACHRICHT ANTWORTEN',
 	'EmailVerify'				=> 'Jemand (vielleicht du) hat deine E-Mailadresse als Bestätigungsadresse bei %1 angegeben.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem '."\n".'%3'."\n".'Link.'."\n\n".'',
 	'EmailConfirm'				=> 'Bitte bestätige deine E-Mail.',

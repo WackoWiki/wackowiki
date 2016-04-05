@@ -234,7 +234,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				{
 					$account_status		= 0;
 					$account_enabled	= 1;
-					$waiting_approval	= '';
+					$waiting_approval	= $this->get_translation('EmailRegisteredLogin');
 					$requires_approval	= '';
 				}
 
@@ -294,7 +294,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 								str_replace('%2', $user_name,
 								str_replace('%3', $this->href('', '', 'confirm='.$confirm),
 								$this->get_translation('EmailRegistered'))))."\n\n".
-								$waiting_approval."\n\n";
+								$waiting_approval."\n\n".
+								$this->get_translation('EmailRegisteredIgnore')."\n\n";
 
 					$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
 					unset($subject, $body);
@@ -311,6 +312,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						$subject	=	$this->get_translation('NewAccountSubject');
 						$body		=	$this->get_translation('NewAccountSignupInfo')."\n\n".
 										$this->get_translation('NewAccountUsername').' '.$user_name."\n".
+										$this->get_translation('RegistrationLang').' '.$user_lang."\n".
 										$this->get_translation('NewAccountEmail').' '.$email."\n".
 										$this->get_translation('NewAccountIP').' '.$user_ip."\n\n".
 										$requires_approval."\n\n";
