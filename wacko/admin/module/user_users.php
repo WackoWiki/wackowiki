@@ -109,9 +109,9 @@ function admin_user_users(&$engine, &$module)
 	{
 
 		$user = $engine->load_single(
-			"SELECT u.user_name, u.real_name, u.email, p.theme, p.user_lang, u.enabled, u.account_status ".
+			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1");
@@ -163,17 +163,27 @@ function admin_user_users(&$engine, &$module)
 					"theme			= '".quote($engine->dblink, $engine->config['theme'])."', ".
 					"send_watchmail	= '1'");
 
-			// add your user page template here
-			$user_page_template	= '**((user:'.$_POST['newname'].' '.$_POST['newname'].'))** ('.$engine->format('::+::', 'pre_wacko').')';
-			$change_summary		= $engine->get_translation('NewUserAccount'); //'auto created';
-
 			// add user page
-			$engine->save_page($engine->config['users_page'].'/'.$_POST['newname'], '', $user_page_template, $change_summary, '', '', '', '', ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']), '', $_POST['newname'], true);
+			$engine->add_user_page($_POST['newname'], $_POST['user_lang']);
 
 			$engine->show_message($engine->get_translation('UsersAdded'));
 			$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
 			unset($_POST['create']);
 		}
+	}
+	// approve user
+	else if (isset($_POST['approve']) && $user_id )
+	{
+		$user = $engine->load_single(
+			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
+			"FROM {$engine->config['table_prefix']}user u ".
+					"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+			"WHERE u.user_id = '".(int)$user_id."' ".
+			"AND u.account_type = '0' ".
+			"LIMIT 1");
+
+		#$engine->add_user_page($user['user_name'], $user['user_lang']);
+		$engine->approve_user($user['user_id'], $user['account_status'], $user['user_name'], $user['email'], $user['user_lang']);
 	}
 	// edit user
 	else if (isset($_POST['edit']) && $user_id && (isset($_POST['newname']) || isset($_POST['moderator_id'])))
@@ -182,18 +192,19 @@ function admin_user_users(&$engine, &$module)
 		if ($engine->load_single(
 		"SELECT user_id ".
 		"FROM {$engine->config['table_prefix']}user ".
-		"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' AND user_id <> '".quote($engine->dblink, $_POST['user_id'])."' ".
+		"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' ".
+			"AND user_id <> '".quote($engine->dblink, $_POST['user_id'])."' ".
 		"LIMIT 1"))
 		{
 			$engine->set_message($engine->get_translation('UsersAlreadyExists'));
-			$_POST['change'] = $_POST['user_id'];
-			$_POST['edit'] = 1;
+			$_POST['change']	= $_POST['user_id'];
+			$_POST['edit']		= 1;
 		}
 		else if (!$engine->validate_email($_POST['newemail']))
 		{
 			$engine->show_message($engine->get_translation('NotAEmail'));
-			$_POST['change'] = $_POST['user_id'];
-			$_POST['edit'] = 1;
+			$_POST['change']	= $_POST['user_id'];
+			$_POST['edit'] 		= 1;
 		}
 		else
 		{
@@ -215,7 +226,7 @@ function admin_user_users(&$engine, &$module)
 				"LIMIT 1");
 
 			$engine->show_message($engine->get_translation('UsersUpdated'));
-			$engine->log(4, "User //'{$user['user_name']}'// renamed //'{$_POST['newname']}'//");
+			$engine->log(4, "Updated User //'{$user['user_name']}'//");
 		}
 	}
 	// delete user
@@ -372,9 +383,9 @@ function admin_user_users(&$engine, &$module)
 	else if (isset($_POST['edit']) && $user_id)
 	{
 		if ($user = $engine->load_single(
-			"SELECT u.user_name, u.real_name, u.email, p.user_lang, p.theme, u.enabled, u.account_status ".
+			"SELECT u.user_name, u.real_name, u.email, s.user_lang, s.theme, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1"))
@@ -606,7 +617,7 @@ function admin_user_users(&$engine, &$module)
 		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
 		{
 			$where			= "WHERE user_name LIKE '%".quote($engine->dblink, $_GET['user'])."%' ";
-			$param			= "user=".htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+			#$param			= "user=".htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 		}
 		// set signuptime ordering
 		else if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
@@ -745,6 +756,8 @@ function admin_user_users(&$engine, &$module)
 		// entries to display
 		$limit = 100;
 
+		$status = $engine->get_translation('AccountStatusArray');
+
 		// collecting data
 		$count = $engine->load_single(
 			"SELECT COUNT(user_name) AS n ".
@@ -767,12 +780,13 @@ function admin_user_users(&$engine, &$module)
 			"LIMIT {$pagination['offset']}, $limit");
 
 		// user filter form
-		$search = $engine->form_open('search_user', '', 'get', '', '', '', '');
-		$search .= '<input type="hidden" name="mode" value="'.$module['mode'].'" />'; // required to pass mode module via GET
-		$search .= $engine->get_translation('UsersSearch').': </td><td>';
-		$search .= '<input type="search" name="user" maxchars="40" size="30" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
-		$search .= '<input type="submit" id="submit" value="'.$engine->get_translation('UsersFilter').'" /> ';
-		$search .= $engine->form_close();
+		$search =	$engine->form_open('search_user', '', 'get', '', '', '', '').
+					'<input type="hidden" name="mode" value="'.$module['mode'].'" />'. // required to pass mode module via GET
+					$engine->get_translation('UsersSearch').': </td><td>'.
+					'<input type="search" name="user" maxchars="40" size="30" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> '.
+					'<input type="submit" id="submit" value="'.$engine->get_translation('UsersFilter').'" /> '.
+					$engine->form_close();
+
 		echo '<span style="float: right;">'.$search.'</span>';
 
 		echo $engine->form_open('users', '', 'post', true, '', '');
@@ -781,11 +795,12 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		$control_buttons = '<br /><input type="submit" id="button" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
-		$control_buttons .= '<input type="submit" id="button" name="edit" value="'.$engine->get_translation('UserEditButton').'" /> ';
-		$control_buttons .= '<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		$control_buttons .= '<input type="hidden" name="ids" value="'.implode('-', $set).'" />';
-		$control_buttons .= '<br />'."\n".
+		$control_buttons =	'<br /><input type="submit" id="button" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> '.
+							'<input type="submit" id="button" name="edit" value="'.$engine->get_translation('UserEditButton').'" /> '.
+							'<input type="submit" id="button" name="approve" value="'.$engine->get_translation('Approve').'" /> '.
+							'<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> '.
+							'<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
+							'<br />'."\n".
 								'<input type="submit" name="set" id="submit" value="'.$engine->get_translation('ModerateSet').'" /> '.
 								($set
 										? '<input type="submit" name="reset" id="submit" value="'.$engine->get_translation('ModerateReset').'" /> '.
@@ -816,6 +831,7 @@ function admin_user_users(&$engine, &$module)
 				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuploads; ?>">Uploads</a></th>
 				<th style="width:20px;">Language</th>
 				<th style="width:20px;">Enabled</th>
+				<th style="width:20px;"><?php echo $engine->get_translation('AccountStatus'); ?></th>
 				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>">Signuptime</a></th>
 				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$last_visit; ?>">Last active</a></th>
 			</tr>
@@ -841,6 +857,7 @@ function admin_user_users(&$engine, &$module)
 						'<td>'.$row['total_uploads'].'</td>'.
 						'<td><small><a href="'.$engine->href().'&amp;user_lang='.$row['user_lang'].'">'.$row['user_lang'].'</a></small></td>'.
 						'<td>'.$row['enabled'].'</td>'.
+						'<td>'.$status[$row['account_status']].'</td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.
 					'</tr>';
