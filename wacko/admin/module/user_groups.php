@@ -576,9 +576,9 @@ function admin_user_groups(&$engine, &$module)
 			//   control buttons
 			/////////////////////////////////////////////
 
-			$control_buttons = '<br /><input type="submit" id="button" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
-			$control_buttons .= '<input type="submit" id="button" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
-			$control_buttons .= '<input type="submit" id="button" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+			$control_buttons =	'<br /><input type="submit" id="button" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> '.
+								'<input type="submit" id="button" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> '.
+								'<input type="submit" id="button" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
 
 			echo $control_buttons;
 

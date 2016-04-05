@@ -131,7 +131,7 @@ function bb2_summary(&$engine)
 	<?php
 	echo $engine->form_open('bb2_manage', '', 'post', true, '', 'setting=bb2_manage');
 	?>
-	<p class="right">See also: Summary | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_manage"; ?>">Log</a> | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_options" ?>">Settings</a> | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
+	<p class="right">See also: <span class="active">Summary</span> | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_manage"; ?>">Log</a> | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_options" ?>">Settings</a> | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
 
 
 	<div class="alignleft">
@@ -278,7 +278,7 @@ function bb2_manage(&$engine)
 	echo $engine->form_open('bb2_manage', '', 'post', true, '', '');
 ?>
 
-	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | Log | <a href="<?php echo $engine->href()."&amp;setting=bb2_options" ?>">Settings</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
+	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <span class="active">Log</span> | <a href="<?php echo $engine->href()."&amp;setting=bb2_options" ?>">Settings</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
 
 
 <div class="alignleft">
@@ -439,7 +439,7 @@ function bb2_whitelist(&$engine)
 	echo $engine->form_open('bb2_whitelist', '', 'post', true, '', 'setting=bb2_whitelist');
 ?>
 	<p>Inappropriate whitelisting WILL expose you to spam, or cause Bad Behavior to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.</p>
-	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_options" ?>">Settings</a> | Whitelist</p>
+	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_options" ?>">Settings</a> | <span class="active">Whitelist</span></p>
 
 
 	<table class="formation">
@@ -659,7 +659,7 @@ function bb2_options(&$engine)
 	echo $engine->form_open('bb2_options', '', 'post', true, '', 'setting=bb2_options');
 ?>
 	<input type="hidden" name="action" value="bb2_options" />
-	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | Settings | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
+	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | <span class="active">Settings</span> | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
 
 	<table class="formation">
 
