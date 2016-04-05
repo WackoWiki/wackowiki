@@ -42,6 +42,14 @@ $ap_translation = array(
 	'SendToGroup'				=> 'Send to group',
 	'SendToUser'				=> 'Send to user',
 
+	// User approval module
+	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
+	'Approve'					=> 'Approve',
+	'Deny'						=> 'Deny',
+	'Pending'					=> 'Pending',
+	'Approved'					=> 'Approved',
+	'Denied'					=> 'Denied',
+
 	// DB Backup module
 	'BackupStructure'			=> 'Struktur',
 	'BackupData'				=> 'Daten',
@@ -97,6 +105,15 @@ $ap_translation = array(
 	'UsersRename'				=> 'Benutzer umbenennen',
 	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Benutzer zugeordnet sind.',
 	'UsersUpdated'				=> 'Benutzer erfolgreich aktualisiert.',
+
+	'UserName'					=> 'Username',
+	'UserRealname'				=> 'Realname',
+	'UserEmail'					=> 'Email',
+	'UserIP'					=> 'IP',
+	'UserLanguage'				=> 'Language',
+	'UserSignuptime'			=> 'Signuptime',
+	'UserActions'				=> 'Actions',
+	'NoMatchingUser'			=> 'No users that meet the criteria',
 
 	// Groups module
 	'GroupsMembersFor'			=> 'Mitglieder der Gruppe',
