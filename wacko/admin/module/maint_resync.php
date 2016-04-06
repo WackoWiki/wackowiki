@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['maint_resync'] = array(
-		'order'	=> 29,
+		'order'	=> 620,
 		'cat'	=> 'Maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'maint_resync',
@@ -67,10 +67,11 @@ function admin_maint_resync(&$engine, &$module)
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
 				"AND p.deleted <> '1' ".
-				"GROUP BY p.user_id");
+				"GROUP BY p.user_id ".
 
 			// missing comments
-			$users2 =  $engine->load_all(
+			"UNION ALL ".
+
 				"SELECT
 					u.user_id, '0' as n
 				FROM
@@ -83,14 +84,14 @@ function admin_maint_resync(&$engine, &$module)
 					OR
 					(p.owner_id = u.user_id AND p.comment_on_id = '0' ".
 					"AND p.deleted <> '1' ))
-				GROUP BY u.user_id
+
 				");
 #$engine->debug_print_r($users1);
 #$engine->debug_print_r($users2);
-			$users = array_merge($users1, $users2);
+			#$users = array_merge($users1, $users2);
 #$engine->debug_print_r($users);
 			$users = array_unique($users);
-#$engine->debug_print_r($users);
+$engine->debug_print_r($users);
 
 			foreach ($users as $user)
 			{
@@ -260,7 +261,7 @@ function admin_maint_resync(&$engine, &$module)
 		}
 	}
 ?>
-	<h3>User statistics</h3>
+	<h2>User statistics</h2>
 	<br />
 	<p>
 		User statistics (number of comments and pages owned)
@@ -276,7 +277,7 @@ function admin_maint_resync(&$engine, &$module)
 <?php	echo $engine->form_close();?>
 	<br />
 	<hr />
-	<h3>Page statistics</h3>
+	<h2>Page statistics</h2>
 	<br />
 	<p>
 		Page statistics (number of comments and revisions)
@@ -292,7 +293,7 @@ function admin_maint_resync(&$engine, &$module)
 <?php		echo $engine->form_close();?>
 	<br />
 	<hr />
-	<h3>Feeds</h3>
+	<h2>Feeds</h2>
 	<br />
 	<p>
 		In the case of direct editing of pages in the database, the content of RSS-feeds are not
@@ -308,7 +309,7 @@ function admin_maint_resync(&$engine, &$module)
 <?php		echo $engine->form_close();?>
 	<br />
 	<hr />
-	<h3>Wiki-links</h3>
+	<h2>Wiki-links</h2>
 	<br />
 	<p>
 		Performs re-rendering for all intrasite links and restores

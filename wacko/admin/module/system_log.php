@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['system_log'] = array(
-		'order'	=> 4,
+		'order'	=> 140,
 		'cat'	=> 'Basic functions',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'system_log',
@@ -22,6 +22,7 @@ $module['system_log'] = array(
 
 function admin_system_log(&$engine, &$module)
 {
+	$whois = 'https://www.db.ripe.net/whois?searchtext=';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 <?php

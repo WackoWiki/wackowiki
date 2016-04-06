@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['config_basic'] = array(
-		'order'	=> 5,
+		'order'	=> 200,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_basic',
@@ -513,6 +513,14 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><label for="xml_sitemap"><strong>XML Sitemap:</strong><br />
 					<small>Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.</small></label></td>
 				<td><input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ( $engine->config['xml_sitemap'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="xml_sitemap_time"><strong>XML Sitemap generation time:</strong><br />
+					<small>Generate a Sitemaps only once in this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label></td>
+				<td><input type="number" min="0" maxlength="4" style="width:200px;" id="xml_sitemap_time" name="xml_sitemap_time" value="<?php echo htmlspecialchars($engine->config['xml_sitemap_time'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 		</table>
 		<br />

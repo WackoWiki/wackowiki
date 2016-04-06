@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['db_backup'] = array(
-		'order'	=> 21,
+		'order'	=> 500,
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_backup',
