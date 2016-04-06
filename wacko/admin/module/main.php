@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['lock'] = array(
-		'order'	=> 1,
+		'order'	=> 100,
 		'cat'	=> 'Basic functions',
 		'status'=> true,
 		'mode'	=> 'lock',

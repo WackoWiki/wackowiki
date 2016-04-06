@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['user_users'] = array(
-		'order'	=> 19,
+		'order'	=> 410,
 		'cat'	=> 'Users',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'user_users',
@@ -95,7 +95,6 @@ function admin_user_users(&$engine, &$module)
 	}
 
 	reset($set);
-	unset($n, $page_id);
 
 	/////////////////////////////////////////////
 	//   list change/update
@@ -613,11 +612,9 @@ function admin_user_users(&$engine, &$module)
 	else
 	{
 		// defining WHERE and ORDER clauses
-		// $param is passed to the pagination links
 		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
 		{
 			$where			= "WHERE user_name LIKE '%".quote($engine->dblink, $_GET['user'])."%' ";
-			#$param			= "user=".htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 		}
 		// set signuptime ordering
 		else if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
@@ -747,6 +744,11 @@ function admin_user_users(&$engine, &$module)
 			$ordername		= 'name_desc';
 		}
 
+		// filter by account_status
+		if (isset($_GET['account_status']))
+		{
+			$where	= "WHERE u.account_status = '".(int) $_GET['account_status']."' ";
+		}
 		// filter by lang
 		if (isset($_GET['user_lang']))
 		{
@@ -857,7 +859,7 @@ function admin_user_users(&$engine, &$module)
 						'<td>'.$row['total_uploads'].'</td>'.
 						'<td><small><a href="'.$engine->href().'&amp;user_lang='.$row['user_lang'].'">'.$row['user_lang'].'</a></small></td>'.
 						'<td>'.$row['enabled'].'</td>'.
-						'<td>'.$status[$row['account_status']].'</td>'.
+						'<td><a href="'.$engine->href().'&amp;account_status='.$row['account_status'].'">'.$status[$row['account_status']].'</a></td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['last_visit'])).'</small></td>'.
 					'</tr>';

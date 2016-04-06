@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['db_restore'] = array(
-		'order'	=> 22,
+		'order'	=> 510,
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_restore',
@@ -433,7 +433,7 @@ function admin_db_restore(&$engine, &$module)
 <?php
 				echo $engine->form_open('restore', '', 'post', true, '', '');
 
-				$control_buttons = '<input type="submit" name="restore" id="submit" value="restore" />'.
+				$control_buttons =	'<input type="submit" name="restore" id="submit" value="restore" />'.
 									'<input type="submit" name="remove" id="submit" value="remove" />';
 
 			#$dir = $engine->config['upload_path_backup'].'/';

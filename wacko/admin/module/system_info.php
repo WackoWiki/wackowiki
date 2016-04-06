@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['system_info'] = array(
-		'order'	=> 3,
+		'order'	=> 130,
 		'cat'	=> 'Basic functions',
 		'status'=> true,
 		'mode'	=> 'system_info',
@@ -43,6 +43,8 @@ function admin_system_info(&$engine, &$module)
 	$_sql_mode		= $engine->load_all("SELECT @@sql_mode;");
 	$sql_mode		= $_sql_mode[0]['@@sql_mode'];
 
+	// get_cfg_var()	-> returns whatever is in php.ini
+	// ini_get()		-> returns runtime settings
 	$upload_max_filesize = trim(str_replace('M', '', get_cfg_var('upload_max_filesize')));
 
 	$memory = trim(str_replace('M', '', ini_get('memory_limit')));
@@ -69,6 +71,7 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true));
 	$sysinfo['max_execution_time']	= array('Max execution time', get_cfg_var('max_execution_time').' seconds');
 	$sysinfo['session_save_path']	= array('Session path', get_cfg_var('session.save_path'));
+	$sysinfo['default_charset']		= array('PHP default charset', ini_get('default_charset'));
 	$sysinfo['php_extensions']		= array('PHP extensions', implode(', ',get_loaded_extensions()));
 
 	if ( function_exists( 'apache_get_modules' ) )

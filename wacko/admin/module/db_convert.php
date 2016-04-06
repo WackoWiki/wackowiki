@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['db_convert'] = array(
-		'order'	=> 23,
+		'order'	=> 520,
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_convert',

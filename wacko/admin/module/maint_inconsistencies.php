@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 
 $module['maint_inconsistencies'] = array(
-		'order'	=> 25,
+		'order'	=> 600,
 		'cat'	=> 'Maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'maint_inconsistencies',
