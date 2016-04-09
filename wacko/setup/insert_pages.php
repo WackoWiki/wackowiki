@@ -22,17 +22,24 @@ $error_inserting_pages = false;
 
 if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 {
-	$handle = opendir('setup/lang');
-
-	while (false !== ($file = readdir($handle)))
+	if ($this->config['allowed_languages'])
 	{
-		if(1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
-		{
-			$lang_list[] = $match[1];
-		}
+		$lang_list = explode(',', $this->config['allowed_languages']);
 	}
+	else
+	{
+		$handle = opendir('setup/lang');
 
-	closedir($handle);
+		while (false !== ($file = readdir($handle)))
+		{
+			if(1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
+			{
+				$lang_list[] = $match[1];
+			}
+		}
+
+		closedir($handle);
+	}
 
 	foreach ($lang_list as $_lang)
 	{
