@@ -22,9 +22,9 @@ $error_inserting_pages = false;
 
 if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 {
-	if ($this->config['allowed_languages'])
+	if ($config['allowed_languages'])
 	{
-		$lang_list = explode(',', $this->config['allowed_languages']);
+		$lang_list = explode(',', $config['allowed_languages']);
 	}
 	else
 	{
