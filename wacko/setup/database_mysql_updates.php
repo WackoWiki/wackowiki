@@ -114,7 +114,7 @@ $alter_user_setting_r5_4_2 = "ALTER TABLE {$pref}user_setting DROP revisions_cou
 $alter_user_setting_r5_4_3 = "ALTER TABLE {$pref}user_setting CHANGE changes_count list_count INT(10) UNSIGNED NOT NULL DEFAULT '50'";
 $alter_user_setting_r5_4_4 = "ALTER TABLE {$pref}user_setting CHANGE lang user_lang VARCHAR(2) NOT NULL DEFAULT ''";
 $alter_user_setting_r5_4_5 = "ALTER TABLE {$pref}user_setting ADD notify_minor_edit TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER numerate_links";
-$alter_user_setting_r5_4_6 = "ALTER TABLE {$pref}user_setting ADD notify_page TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER notify_minor_edit";
+$alter_user_setting_r5_4_6 = "ALTER TABLE {$pref}user_setting ADD notify_page TINYINT(1) UNSIGNED NOT NULL DEFAULT '2' AFTER notify_minor_edit";
 $alter_user_setting_r5_4_7 = "ALTER TABLE {$pref}user_setting ADD notify_comment TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER notify_page";
 
 // USERGROUP
