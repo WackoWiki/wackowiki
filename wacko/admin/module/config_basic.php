@@ -519,7 +519,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="xml_sitemap_time"><strong>XML Sitemap generation time:</strong><br />
-					<small>Generate a Sitemaps only once in this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label></td>
+					<small>Generate a Sitemaps only once in this number of days.</small></label></td>
 				<td><input type="number" min="0" maxlength="4" style="width:200px;" id="xml_sitemap_time" name="xml_sitemap_time" value="<?php echo htmlspecialchars($engine->config['xml_sitemap_time'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 		</table>
