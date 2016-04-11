@@ -495,10 +495,10 @@ $wacko_translation = array(
 
 	'UserSettingsEmailMe'		=> 'Email me when ...',
 
-	'UserSettingsExtended' => 'Extended',
-	'UserSettingsOther' => 'Other settings',
-	'UserSpace' => 'User space',
-	'ChooseTheme' => 'Kies thema',
+	'UserSettingsExtended'		=> 'Extended',
+	'UserSettingsOther'			=> 'Other settings',
+	'UserSpace'					=> 'User space',
+	'ChooseTheme'				=> 'Kies thema',
 
 	'CreatePage' => 'Maak deze pagina aan',
 	'CreateNewPage' => 'Create a new page',
@@ -540,10 +540,10 @@ $wacko_translation = array(
 	'EmailConfirmed'			=> 'Emailadres is gecontroleerd.',
 	'EmailNotConfirmed'			=> 'Emailadres kon niet worden gecontroleerd. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'Email not verified!',
-	'EmailNotVerifiedDesc' => 'You will not receive notification of changes or comments of watched pages, '.
-							'messages from other users, as well you <span class="underline">will not be able to recover a forgotten password</span>, '.
-							'until your email-address was confirmed, by following the link in the email sent to you. '.
-							'If, within days after registration You never got a email, ask for it again by clicking ',
+	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, '.
+									'messages from other users, as well you <span class="underline">will not be able to recover a forgotten password</span>, '.
+									'until your email-address was confirmed, by following the link in the email sent to you. '.
+									'If, within days after registration You never got a email, ask for it again by clicking ',
 
 	'ForgotComment' => 'Vul uw gebruikersnaam en emailadres in. U krijgt dan een email met instructies.',
 	'ForgotMain' => 'Wachtwoord vergeten?',
@@ -791,20 +791,20 @@ $wacko_translation = array(
 	'MassNeedRedirect'			=> 'Verwijs de oude pagina\'s door naar de nieuwe pagina\'s',
 
 	// pagination
-	'ToThePage'				=> 'To page',
-	'Next'					=> 'Next',
-	'Prev'					=> 'Prev',
-	'NextAcr'				=> 'Next',
-	'PrevAcr'				=> 'Prev',
+	'ToThePage'					=> 'To page',
+	'Next'						=> 'Next',
+	'Prev'						=> 'Prev',
+	'NextAcr'					=> 'Next',
+	'PrevAcr'					=> 'Prev',
 
 	// filter
-	'Any'					=> 'Any',
+	'Any'						=> 'Any',
 
 	// My Groups
-	'UserGroups'			=> 'Gebruikersgroepen',
-	'MyGroups'				=> 'Group Associations',
-	'Group'					=> 'group',
-	'Groups'				=> 'groups',
+	'UserGroups'				=> 'Gebruikersgroepen',
+	'MyGroups'					=> 'Group Associations',
+	'Group'						=> 'group',
+	'Groups'					=> 'groups',
 
 	// Cache
 	'ClearCache'					=> 'Clear cache',
@@ -869,14 +869,14 @@ $wacko_translation = array(
 	'NewsDiscuss'	=> 'Discuss this article...',
 
 	// Review
-	'Reviewer'			=> 'Reviewer',
-	'Reviewed'			=> 'reviewed',
-	'Review'			=> 'review',
-	'ReviewedBy'		=> 'reviewed by',
-	'RemoveReview'		=> 'Remove review for this page',
-	'SetReview'			=> 'Reviewed this page',
-	'SetAsReviewed'		=> 'Set page as reviewed',
-	'SetAsUnreviewed'	=> 'Set page as unreviewed',
+	'Reviewer'				=> 'Reviewer',
+	'Reviewed'				=> 'reviewed',
+	'Review'				=> 'review',
+	'ReviewedBy'			=> 'reviewed by',
+	'RemoveReview'			=> 'Remove review for this page',
+	'SetReview'				=> 'Reviewed this page',
+	'SetAsReviewed'			=> 'Set page as reviewed',
+	'SetAsUnreviewed'		=> 'Set page as unreviewed',
 
 	// word filter
 	'PotentialSpam'				=> 'Identified Potential Spam',
@@ -1058,20 +1058,20 @@ $wacko_translation = array(
 	),
 
 	'LanguageArray'	=>  array(
-		'bg' => 'bulgarian',
-		'da' => 'danish',
-		'nl' => 'dutch',
-		'el' => 'greek',
-		'en' => 'english',
-		'et' => 'estonian',
-		'fr' => 'french',
-		'de' => 'german',
-		'hu' => 'hungarian',
-		'it' => 'italian',
-		'pl' => 'polish',
-		'pt' => 'portuguese',
-		'ru' => 'russian',
-		'es' => 'spanish',
+		'bg' => 'Bulgaars',
+		'da' => 'Deens',
+		'nl' => 'Nederlands',
+		'el' => 'Grieks',
+		'en' => 'Engels',
+		'et' => 'Estlands',
+		'fr' => 'Frans',
+		'de' => 'Duits',
+		'hu' => 'Hongaars',
+		'it' => 'Italiaans',
+		'pl' => 'Pools',
+		'pt' => 'Portugees',
+		'ru' => 'Russisch',
+		'es' => 'Spaans',
 	),
 
 	'AccountStatus'				=> 'Account status',
