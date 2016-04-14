@@ -362,6 +362,9 @@ class Feed
 
 		file_put_contents($filename, $xml);
 		@chmod($filename, 0644);
+
+		// reset sitemap update flag
+		$this->engine->set_config('xml_sitemap_update', 0, '', true);
 	}
 }
 

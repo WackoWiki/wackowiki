@@ -22,11 +22,15 @@ if (!$this->page)
 <?php
 
 // check user permissions to delete
-if ($this->is_admin() ||
-(!$this->config['remove_onlyadmins'] &&
-	(($this->get_page_owner_id($this->page['page_id']) == $this->get_user_id()) ||
-	($this->config['owners_can_remove_comments'] && $this->page['comment_on_id'] && $this->get_page_owner_id($this->page['comment_on_id']) == $this->get_user_id())
-)))
+if ($this->is_admin()
+	|| (!$this->config['remove_onlyadmins']
+		&& (($this->get_page_owner_id($this->page['page_id']) == $this->get_user_id())
+		|| ($this->config['owners_can_remove_comments']
+			&& $this->page['comment_on_id']
+			&& $this->get_page_owner_id($this->page['comment_on_id']) == $this->get_user_id())
+		)
+	)
+)
 {
 	if ($this->page['comment_on_id'])
 	{
@@ -48,55 +52,55 @@ if ($this->is_admin() ||
 			$dontkeep = 1;
 		}
 
-		$message .= '<b>'.$this->tag."</b>\n";
+		$message .= '<strong><code>'.$this->tag."</code></strong>\n";
 		$message .= "<ol>\n";
 
 		// Remove page
 		if ($this->remove_referrers($this->tag))
 		{
-			$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."</li>\n";
+			$message .= '<li>'.$this->get_translation('ReferrersRemoved')."</li>\n";
 		}
 
 		if ($this->remove_links($this->tag))
 		{
-			$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."</li>\n";
+			$message .= '<li>'.$this->get_translation('LinksRemoved')."</li>\n";
 		}
 
 		if ($this->remove_categories($this->tag))
 		{
-			$message .= "<li>".$this->get_translation('CategoriesRemoved')."</li>\n";
+			$message .= '<li>'.$this->get_translation('CategoriesRemoved')."</li>\n";
 		}
 
 		if ($this->remove_acls($this->tag))
 		{
-			$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."</li>\n";
+			$message .= '<li>'.$this->get_translation('AclsRemoved')."</li>\n";
 		}
 
 		if (!$comment_on_id)
 		{
 			if ($this->remove_menu_items($this->tag))
 			{
-				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."</li>\n";
+				$message .= '<li>'.$this->get_translation('BookmarksRemoved')."</li>\n";
 			}
 
 			if ($this->remove_watches($this->tag))
 			{
-				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."</li>\n";
+				$message .= '<li>'.$this->get_translation('WatchesRemoved')."</li>\n";
 			}
 
 			if ($this->remove_ratings($this->tag))
 			{
-				$message .= "<li>".$this->get_translation('RatingRemoved')."</li>\n";
+				$message .= '<li>'.$this->get_translation('RatingRemoved')."</li>\n";
 			}
 
 			if ($this->remove_comments($this->tag, false, $dontkeep))
 			{
-				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."</li>\n";
+				$message .= '<li>'.$this->get_translation('CommentsRemoved')."</li>\n";
 			}
 
 			if ($this->remove_files($this->tag))
 			{
-				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."</li>\n";
+				$message .= '<li>'.$this->get_translation('FilesRemoved')."</li>\n";
 			}
 		}
 
@@ -119,16 +123,19 @@ if ($this->is_admin() ||
 				}
 			}
 
-			$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."</li>\n";
+			$message .= '<li>'.$this->get_translation('PageRemoved')."</li>\n";
 		}
 
-		if ($this->is_admin() && (isset($_POST['revisions']) && $_POST['revisions'] == 1) && !$comment_on_id)
+		if ($this->is_admin()
+			&& (isset($_POST['revisions']) && $_POST['revisions'] == 1)
+			&& !$comment_on_id)
 		{
 			$this->remove_revisions($this->tag);
-			$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('RevisionsRemoved'))."</li>\n";
+			$message .= "<li>".$this->get_translation('RevisionsRemoved')."</li>\n";
 		}
 
-		if ($this->is_admin() && (isset($_POST['cluster']) && $_POST['cluster'] == 1))
+		if ($this->is_admin()
+			&& (isset($_POST['cluster']) && $_POST['cluster'] == 1))
 		{
 			$this->remove_referrers		($this->tag, true);
 			$this->remove_links			($this->tag, true);
@@ -155,7 +162,8 @@ if ($this->is_admin() ||
 				unset($list, $row);
 			}
 
-			if ((isset($_POST['revisions']) && $_POST['revisions'] == 1) || $comment_on_id)
+			if ((isset($_POST['revisions']) && $_POST['revisions'] == 1)
+				|| $comment_on_id)
 			{
 				$this->remove_revisions($this->tag, true);
 			}
@@ -183,6 +191,9 @@ if ($this->is_admin() ||
 		{
 			$this->cache->invalidate_sql_cache();
 		}
+
+		// update sitemap
+		$this->write_sitemap(true, false);
 
 		// log event
 		if (!$comment_on_id)
