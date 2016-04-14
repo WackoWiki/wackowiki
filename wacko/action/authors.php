@@ -173,6 +173,7 @@ else
 			// constant license
 			$license = '<br />Material is distributed under<br />'. // ru]: ћатериал распростран€етс€ на услови€х
 
+			// TODO: rel="license"
 			$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
 			'<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$licenses[$license][1].'" class="license-'.$license.'">';
 		}

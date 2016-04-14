@@ -21,7 +21,7 @@ $lang = array(
 */
 'lang' => 'Spracheinstellungen',
 'PleaseUpgradeToR5' => 'Bei dir läuft eine alte (pre 5.0.0) Version von WackoWiki (<code class="version">%1</code>). Um auf diese neue Version von WackoWiki zu aktualisieren, musst du zuerst deine Installation auf <code class="version">5.0.x</code> updaten.',
-'UpgradeFromWacko' => 'Wilkommen bei WackoWiki, es scheint das du von WackoWiki <b><code class="version">%1</code></b> auf <b><code class="version">%2</code></b> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
+'UpgradeFromWacko' => 'Wilkommen bei WackoWiki, es scheint das du von WackoWiki <strong><code class="version">%1</code></strong> auf <strong><code class="version">%2</code></strong> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
 'FreshInstall' => 'Wilkommen bei WackoWiki, du installierst gerade WackoWiki <code class="version">%1</code>.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
 'PleaseBackup' => 'Bitte erstelle eine Sicherungskopie von deiner Datenbank, der Konfigurationsdatei config.php und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang beginnst. Das kann dir im Problemfall viel Ärger ersparen.',
 'LangDesc' => 'Wähle eine Sprache für die Installation aus. Das wird die Standardsprache für deine WackoWiki Installation.',
@@ -66,7 +66,7 @@ $lang = array(
 'Mail' => 'E-Mail Adresse des Verwalters',
 'MailDesc' => 'Gib die E-Mail Adresse des Verwalters ein.',
 'Base' => 'Basis-URL',
-'BaseDesc' => 'Die Basis-URL deines WackoWikis. Die Seitennamen werden an diese angehängt. Falls mod_rewrite verfügbar ist, muß die URL mit einen Schrägstrich abschließen:</p><ul><li><b><em>http://example.com/</em></b></li><li><b><em>http://example.com/wiki/</em></b></li></ul>',
+'BaseDesc' => 'Die Basis-URL deines WackoWikis. Die Seitennamen werden an diese angehängt. Falls mod_rewrite verfügbar ist, muß die URL mit einen Schrägstrich abschließen:</p><ul><li><strong><em>http://example.com/</em></strong></li><li><strong><em>http://example.com/wiki/</em></strong></li></ul>',
 'Rewrite' => 'Umschreiben',
 'RewriteDesc' => '<a href="http://wackowiki.sourceforge.net/doc/Doc/Deutsch/RewriteModus" target="_blank">Umschreiben</a> sollte aktiviert sein, falls du WackoWiki mit URL-Umschreiben verwenden willst.',
 'Enabled' => 'Aktiviert:',

@@ -137,7 +137,7 @@ if ($this->user_allowed_comments())
 							echo "</ul>\n<br /></li>\n";
 						}
 
-						echo "<li><b>".date($this->config['date_format'], strtotime($day)).":</b>\n<ul>\n";
+						echo "<li><strong>".date($this->config['date_format'], strtotime($day)).":</strong>\n<ul>\n";
 						$curday = $day;
 					}
 

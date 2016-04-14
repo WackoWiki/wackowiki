@@ -188,6 +188,7 @@ $config_db['username_chars_max']			= $config['username_chars_max'];
 $config_db['users_page']					= $config['users_page'];
 $config_db['xml_sitemap']					= $config['xml_sitemap'];
 $config_db['xml_sitemap_time']				= $config['xml_sitemap_time'];
+$config_db['xml_sitemap_update']			= NULL;
 $config_db['youarehere_text']				= $config['youarehere_text'];
 #$config_db[''] = $config[''];
 

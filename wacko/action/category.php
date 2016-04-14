@@ -56,7 +56,7 @@ if ($list && ($ids || isset($_GET['category'])))
 			$words = strtolower(implode(', ', $words));
 		}
 
-		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('PagesCategory').( $words ? ' &laquo;<strong>'.$words.'</strong>&raquo;' : '' ).":</span></p>\n";
 	}
 
 	if ($sort == 'abc')
