@@ -2211,6 +2211,7 @@ class Wacko
 					$xml->changes();
 					$xml->comments();
 
+					// write news feed
 					if ($this->config['news_cluster'])
 					{
 						if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
@@ -2220,15 +2221,8 @@ class Wacko
 					}
 				}
 
-				// TODO: add time parameter as config value xml_sitemap_ttl
-				if($this->config['xml_sitemap'])
-				{
-					if (($days = $this->config['xml_sitemap_time']) && (time() > ($this->config['maint_last_xml_sitemap'] + $days * 86400)))
-					{
-						$xml->site_map();
-						$this->set_config('maint_last_xml_sitemap', time(), '', true);
-					}
-				}
+				// write sitemap
+				$this->write_sitemap(false, true);
 
 				unset($xml);
 			}
@@ -2296,6 +2290,46 @@ class Wacko
 					"total_revisions = total_revisions + 1 ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
+		}
+	}
+
+	function write_sitemap($write_site_map = false, $update = false)
+	{
+		// write sitemap
+		if ($this->config['xml_sitemap'])
+		{
+			// set flag for page change
+			if ($update == true && $this->config['xml_sitemap_update'] == 0)
+			{
+				$this->set_config('xml_sitemap_update', 1, '', true);
+			}
+
+			if ($write_site_map == false)
+			{
+				// on every page change
+				if ($this->config['xml_sitemap_time'] == 0)
+				{
+					$write_site_map = true;
+				}
+				else if ($this->config['xml_sitemap_update'] == true
+					&& ($days = $this->config['xml_sitemap_time'])
+					&& (time() > ($this->config['maint_last_xml_sitemap'] + $days * 86400)))
+				{
+					$write_site_map = true;
+				}
+			}
+
+			if ($write_site_map == true)
+			{
+				$this->use_class('feed');
+				$xml = new feed($this);
+
+				$xml->site_map();
+				$this->set_config('maint_last_xml_sitemap', time(), '', true);
+				$this->log(7, 'XML Sitemap generated');
+
+				unset($xml);
+			}
 		}
 	}
 
@@ -6303,7 +6337,8 @@ class Wacko
 	function maintenance()
 	{
 		// purge referrers (once a day)
-		if (($days = $this->config['referrers_purge_time']) && (time() > ($this->config['maint_last_refs'] + 1 * 86400)))
+		if (($days = $this->config['referrers_purge_time'])
+			&& (time() > ($this->config['maint_last_refs'] + 1 * 86400)))
 		{
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."referrer ".
@@ -6314,7 +6349,8 @@ class Wacko
 		}
 
 		// purge outdated pages revisions (once a week)
-		if (($days = $this->config['pages_purge_time']) && (time() > ($this->config['maint_last_oldpages'] + 7 * 86400)))
+		if (($days = $this->config['pages_purge_time'])
+			&& (time() > ($this->config['maint_last_oldpages'] + 7 * 86400)))
 		{
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."revision ".
@@ -6325,8 +6361,9 @@ class Wacko
 		}
 
 		// purge deleted pages (once per 3 days)
-		if (($days = $this->config['keep_deleted_time']) && (time() > ($this->config['maint_last_delpages'] + 3 * 86400)) &&
-		($pages = $this->load_deleted(1000, 0)))
+		if (($days = $this->config['keep_deleted_time'])
+			&& (time() > ($this->config['maint_last_delpages'] + 3 * 86400))
+			&& ($pages = $this->load_deleted(1000, 0)))
 		{
 			// composing a list of candidates
 			if (is_array($pages))
@@ -6363,7 +6400,8 @@ class Wacko
 		}
 
 		// purge system log entries (once per 3 days)
-		if (($days = $this->config['log_purge_time']) && (time() > ($this->config['maint_last_log'] + 3 * 86400)))
+		if (($days = $this->config['log_purge_time'])
+			&& (time() > ($this->config['maint_last_log'] + 3 * 86400)))
 		{
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}log ".
@@ -6431,21 +6469,11 @@ class Wacko
 		}
 
 		// write xml_sitemap
-		if (($days = $this->config['xml_sitemap_time']) && (time() > ($this->config['maint_last_xml_sitemap'] + $days * 86400)))
-		{
-			if($this->config['xml_sitemap'])
-			{
-				$this->use_class('feed');
-				$xml = new feed($this);
-				$xml->site_map();
-			}
-
-			$this->set_config('maint_last_xml_sitemap', time(), '', true);
-			//$this->log(7, 'Maintenance: wrote XML Sitemap');
-		}
+		$this->write_sitemap();
 
 		// purge expired cookie_tokens (once per 3 days)
-		if (($days = 3) && (time() > ($this->config['maint_last_session'] + 3 * 86400)) )
+		if (($days = 3)
+			&& (time() > ($this->config['maint_last_session'] + 3 * 86400)) )
 		{
 			$this->delete_cookie_token('', true, $days);
 
