@@ -23,7 +23,7 @@ $text = preg_replace('/<a .*?href="http:\/\/.*?">((?:0[1-9]|[12][0-9]|3[01])[-\/
 $text = preg_replace('/<a .*?href="http:\/\/.*?edit\\?add=1" title=".*\[create\]">.*?<\/a>/', '', $text);
 
 // replace the tags around the header at the asterisk
-$text = preg_replace('/<b>(Added:)<\/b>|<b>(Removed:)<\/b>/', '**$1$2**', $text);
+$text = preg_replace('/<strong>(Added:)<\/strong>|<strong>(Removed:)<\/strong>/', '**$1$2**', $text);
 
 // sanitizing remaining tags
 $text = preg_replace('/<\/?[a-z][a-z0-9]*[^<>]*?>|<!--.*?-->/', '', $text);

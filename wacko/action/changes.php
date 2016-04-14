@@ -84,7 +84,7 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 					echo "</ul>\n<br /></li>\n";
 				}
 
-				echo "<li><b>".date($this->config['date_format'], strtotime($day))."</b>\n<ul>\n";
+				echo "<li><strong>".date($this->config['date_format'], strtotime($day))."</strong>\n<ul>\n";
 				$curday = $day;
 			}
 

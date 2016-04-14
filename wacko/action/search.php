@@ -414,7 +414,7 @@ if ($phrase)
 			{
 				echo '<div class="layout-box"><p class="layout-box"><span>'.
 					$this->get_translation(($mode == 'topic' ? 'Topic' : '').'SearchResults').
-					' "'.$phrase.'" (<b>'.$i.'</b>):</span></p>';
+					' "'.$phrase.'" (<strong>'.$i.'</strong>):</span></p>';
 			}
 
 			//show results

@@ -34,7 +34,7 @@ $text = preg_replace("#\".*?\"#s", '<span style="color:#006666">$0</span>', $tex
 
 // Keywords & functions
 $text = preg_replace("#\001($functions)\001#si", '<span style="color:#770055">$1</span>', $text );
-$text = preg_replace("#\001($skipwords)\001#si", '<span style="color:green"><b>$1</b></span>', $text );
+$text = preg_replace("#\001($skipwords)\001#si", '<span style="color:green"><strong>$1</strong></span>', $text );
 $text = preg_replace("#\001($keywords)\001#si" , '<span style="color:blue">$1</span>', $text );
 
 // Comments

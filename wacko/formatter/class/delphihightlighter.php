@@ -44,13 +44,13 @@ class DelphiHightlighter{
 	/*************************************************/
 	/* Les styles donnes pour chaque type de donnees */
 	/*************************************************/
-	var $stylekeyword = array("<b>", "</b>");
+	var $stylekeyword = array("<strong>", "</strong>");
 	var $styletext = array("", "");
 	var $stylestring   = array("<span style=\"background-color:yellow\">", "</span>");
-	var $stylecomment = array("<i>", "</i>");
+	var $stylecomment = array("<em>", "</em>");
 	var $stylesymbol   = array("", "");
 	var $stylenumber   = array("", "");
-	var $stylepreproc = array("<i>", "</i>");
+	var $stylepreproc = array("<em>", "</em>");
 
 	/*****************/
 	/* Les mots cles */
@@ -144,7 +144,7 @@ class DelphiHightlighter{
 	/***************************************************/
 	/* On regarde si on ne tombe pas sur un delimiteur */
 	/***************************************************/
-	function parsearray($array, $color = "#000080", $style = array("<i>", "</i>"))
+	function parsearray($array, $color = "#000080", $style = array("<em>", "</em>"))
 	{
 		// On effectue quelques verifications
 		if (!is_array($array))   return FALSE;

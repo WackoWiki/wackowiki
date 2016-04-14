@@ -189,7 +189,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_password"><strong>SMTP password:</strong><br />
 				<small>Only enter a password if your SMTP server requires it.<br />
-				<b>Warning:</b> <em>This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em></small></label></td>
+				<strong>Warning:</strong> <em>This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em></small></label></td>
 				<td>
 					<input type="text" maxlength="255" style="width:200px;" type="password" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->config['smtp_password'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
