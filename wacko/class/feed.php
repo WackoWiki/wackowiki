@@ -315,21 +315,22 @@ class Feed
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT page_id, tag, modified ".
-			"FROM {$prefix}page ".
-			"WHERE comment_on_id = '0' ".
-				"AND noindex <> '1' ".
-			"ORDER BY modified DESC, BINARY tag");
+			"SELECT p.page_id, p.tag, p.modified ".
+			"FROM {$prefix}page p, ".
+				"{$prefix}acl AS a ".
+			"WHERE p.page_id = a.page_id ".
+				"AND a.privilege = 'read' AND a.list = '*' ".
+				"AND p.comment_on_id = '0' ".
+				"AND p.noindex <> '1' ".
+			"ORDER BY p.modified DESC, BINARY p.tag");
 
 		$xml = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n";
 		$xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 
 		if ($pages)
 		{
-			foreach ($pages as $i => $page)
+			foreach ($pages as $page)
 			{
-				if ($this->engine->config['hide_locked'] ? $this->engine->has_access('read', $page['page_id'], GUEST) : true)
-				{
 					$xml .= "<url>\n";
 					$xml .= "<loc>".$this->engine->href('', $page['tag'])."</loc>\n";
 					$xml .= "<lastmod>". substr($page['modified'], 0, 10) ."</lastmod>\n";
@@ -352,7 +353,6 @@ class Feed
 					// The only thing I'm not sure about how to handle dynamically...
 					$xml .= "<priority>0.8</priority>\n";
 					$xml .= "</url>\n";
-				}
 			}
 		}
 
