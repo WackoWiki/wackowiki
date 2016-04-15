@@ -89,16 +89,14 @@ class Init
 		// start execution timer
 		$this->timer = $this->get_micro_time();
 
+		// gzip_compression
 		if (ini_get('zlib.output_compression'))
 		{
 			ob_start();
 		}
-		else
+		else if (function_exists('ob_gzhandler'))
 		{
-			if (function_exists('ob_gzhandler'))
-			{
-				ob_start('ob_gzhandler');
-			}
+			ob_start('ob_gzhandler');
 		}
 
 		// don't let cookies ever interfere with request vars
@@ -819,6 +817,7 @@ class Init
 					echo "<li>TLS implicit: ".(($this->config['tls_implicit'] == true) ? 'on' : 'off')."</li>\n";
 					echo "<li>Cookie hash: ".(isset($this->config['cookie_hash']) ? $this->config['cookie_hash'] : '')."</li>\n";
 					echo "<li>Cookie path: ".$this->config['cookie_path']."</li>\n";
+					#echo "<li>GZIP: ".(@extension_loaded('zlib') ? 'On' : 'Off')."</li>\n";
 					echo "</ul>\n";
 				}
 
