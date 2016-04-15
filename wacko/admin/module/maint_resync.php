@@ -189,6 +189,14 @@ $engine->debug_print_r($users);
 				$message = 'RSS-feeds updated.';
 				$engine->show_message($message);
 		}
+		else if ($_REQUEST['action'] == 'xml_sitemap')
+		{
+			// update sitemap
+			$engine->write_sitemap(true, false);
+
+			$message = 'The new version of the site map created successfully.';
+			$engine->show_message($message);
+		}
 		else if ($_REQUEST['action'] == 'wikilinks')
 		{
 			// TODO:	1) dies if a rendered page throws a fatal error (e.g. action) -> fix broken page, its the last page shown in the list
@@ -262,61 +270,63 @@ $engine->debug_print_r($users);
 	}
 ?>
 	<h2>User statistics</h2>
-	<br />
 	<p>
 		User statistics (number of comments and pages owned)
-		in some situations may differ from actual data. This operation
+		in some situations may differ from actual data. <br />This operation
 		allows updating statistics on current actual data of the database.
 	</p>
-	<br />
+
 <?php
 	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="userstats" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
 <?php	echo $engine->form_close();?>
-	<br />
-	<hr />
+
 	<h2>Page statistics</h2>
-	<br />
 	<p>
 		Page statistics (number of comments and revisions)
-		in some situations may differ from actual data. This operation
+		in some situations may differ from actual data. <br />This operation
 		allows updating statistics on current actual data of the database.
 	</p>
-	<br />
 <?php
 	echo $engine->form_open('pageupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="pagestats" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
 <?php		echo $engine->form_close();?>
-	<br />
-	<hr />
+
 	<h2>Feeds</h2>
-	<br />
 	<p>
 		In the case of direct editing of pages in the database, the content of RSS-feeds are not
-		reflect the changes made. This function synchronizes the RSS-channels
+		reflect the changes made. <br />This function synchronizes the RSS-channels
 		with the current state of the database.
 	</p>
-	<br />
 <?php
 	echo $engine->form_open('feedupdate', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="rssfeeds" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
 <?php		echo $engine->form_close();?>
-	<br />
-	<hr />
+
+	<h2>XML-Sitemap</h2>
+	<p>
+		This function synchronizes the XML-Sitemap
+		with the current state of the database.
+	</p>
+<?php
+	echo $engine->form_open('sitemap_update', '', 'post', true, '', '');
+?>
+		<input type="hidden" name="action" value="xml_sitemap" />
+		<input type="submit" name="start" id="submit" value="synchronize" />
+<?php		echo $engine->form_close();?>
+
 	<h2>Wiki-links</h2>
-	<br />
 	<p>
 		Performs re-rendering for all intrasite links and restores
 		the contents of the table 'links' and 'file_links' in the event of damage or injury (this can take
 		considerable time).
 	</p>
-	<br />
 <?php
 	echo $engine->form_open('linksupdate', '', 'post', true, '', '');
 ?>
