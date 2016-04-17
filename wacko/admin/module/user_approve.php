@@ -107,7 +107,6 @@ function admin_user_approve(&$engine, &$module)
 	// get user
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
-
 		$user = $engine->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
@@ -142,7 +141,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->add_user_page($user['user_name'], $user['user_lang']);
 
 			$engine->show_message($engine->get_translation('RegistrationApproved'));
-			$engine->log(4, "User //'{$user['user_name']}'// approved");
+			$engine->log(4, "User ##'{$user['user_name']}'## approved");
 		}
 		else if ($_GET['approve'] == 2)
 		{
@@ -150,7 +149,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->set_account_status($user_id, 2);
 
 			$engine->show_message($engine->get_translation('RegistrationDenied'));
-			$engine->log(4, "User //'{$user['user_name']}'// blocked");
+			$engine->log(4, "User ##'{$user['user_name']}'## blocked");
 		}
 	}
 	// approve user
@@ -381,8 +380,12 @@ function admin_user_approve(&$engine, &$module)
 						'<td><a href="'.$engine->href().'&amp;account_status='.$row['account_status'].'">'.$status[$row['account_status']].'</a></td>'.
 						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td>'.
-							'<a href="'.$engine->href().'&amp;approve=1&amp;user_id='.$row['user_id'].'">'.$approve_icon.''.$engine->get_translation('Approve').'</a>'.
-							'<a href="'.$engine->href().'&amp;approve=2&amp;user_id='.$row['user_id'].'">'.$deny_icon.''.$engine->get_translation('Deny').'</a>'.
+							((isset($_GET['account_status']) && $_GET['account_status'] > 0) || !isset($_GET['account_status'])
+								? '<a href="'.$engine->href().'&amp;approve=1&amp;user_id='.$row['user_id'].'">'.$approve_icon.''.$engine->get_translation('Approve').'</a>'
+								: '').
+							((isset($_GET['account_status']) && $_GET['account_status'] < 2) || !isset($_GET['account_status'])
+								? '<a href="'.$engine->href().'&amp;approve=2&amp;user_id='.$row['user_id'].'">'.$deny_icon.''.$engine->get_translation('Deny').'</a>'
+								: '').
 						'</td>'.
 					'</tr>';
 			}
