@@ -141,7 +141,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->add_user_page($user['user_name'], $user['user_lang']);
 
 			$engine->show_message($engine->get_translation('RegistrationApproved'));
-			$engine->log(4, "User ##'{$user['user_name']}'## approved");
+			$engine->log(4, "User ##{$user['user_name']}## approved");
 		}
 		else if ($_GET['approve'] == 2)
 		{
@@ -149,7 +149,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->set_account_status($user_id, 2);
 
 			$engine->show_message($engine->get_translation('RegistrationDenied'));
-			$engine->log(4, "User ##'{$user['user_name']}'## blocked");
+			$engine->log(4, "User ##{$user['user_name']}## blocked");
 		}
 	}
 	// approve user
