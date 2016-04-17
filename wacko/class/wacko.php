@@ -4340,7 +4340,6 @@ class Wacko
 		return $fields;
 	}
 
-
 	// validate the form token. Required for all altering actions not secured by confirm_box
 	//		- string $form_name has to match the name used in form_token function
 	//		- int $timespan The maximum acceptable age for a submitted form in seconds

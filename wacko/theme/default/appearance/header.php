@@ -211,7 +211,8 @@ else
 	echo echo_tab(
 		$this->href('show'),
 		$this->get_translation('ShowTip'),
-		$this->has_access('read') ? $this->get_translation('ShowText') : '',
+		$this->has_access('read')
+			? $this->get_translation('ShowText') : '',
 		$this->method == 'show',
 		1,
 		'',
@@ -234,7 +235,8 @@ else
 	echo echo_tab(
 		$this->href('revisions'),
 		$this->get_translation('RevisionTip'),
-		($this->forum === false && $this->page && $this->has_access('read') && $this->hide_revisions === false ) ? $this->get_translation('RevisionText') : '',
+		($this->forum === false && $this->page && $this->has_access('read') && $this->hide_revisions === false )
+			? $this->get_translation('RevisionText') : '',
 		$this->method == 'revisions',
 		1,
 		'',
@@ -244,7 +246,8 @@ else
 	echo echo_tab(
 		$this->href('properties'),
 		$this->get_translation('PropertiesTip'),
-		($this->forum === false && $this->page && ($this->is_owner()) || $this->is_admin()) ? $this->get_translation('PropertiesText') : '',
+		($this->forum === false && $this->page && ($this->is_owner()) || $this->is_admin())
+			? $this->get_translation('PropertiesText') : '',
 		$this->method == 'properties',
 		1,
 		'',
@@ -266,7 +269,8 @@ else
 		echo echo_tab(
 			$this->href('print'),
 			$this->get_translation('PrintVersion'),
-			$this->has_access('read') ? $this->get_translation('PrintText') : '',
+			$this->has_access('read')
+				? $this->get_translation('PrintText') : '',
 			$this->method == 'print',
 			2,
 			'',
@@ -315,7 +319,8 @@ else
 		echo echo_tab(
 			$this->href('moderate'),
 			$this->get_translation('ModerateTip'),
-			($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
+			($this->is_moderator() && $this->has_access('read'))
+				? $this->get_translation('ModerateText') : '',
 			$this->method == 'moderate',
 			2,
 			'',
@@ -325,7 +330,8 @@ else
 		echo echo_tab(
 			$this->href('permissions'),
 			$this->get_translation('ACLTip'),
-			($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('ACLText') : '',
+			($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner()))
+				? $this->get_translation('ACLText') : '',
 			$this->method == 'permissions',
 			2,
 			'',
@@ -335,7 +341,8 @@ else
 		echo echo_tab(
 			$this->href('categories'),
 			$this->get_translation('CategoriesTip'),
-			($this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('CategoriesText') : '',
+			($this->page && ($this->is_admin() || $this->is_owner()))
+				? $this->get_translation('CategoriesText') : '',
 			$this->method == 'categories',
 			2,
 			'',
@@ -345,7 +352,8 @@ else
 		echo echo_tab(
 			$this->href('referrers'),
 			$this->get_translation('ReferrersTip'),
-			($this->page && $this->has_access('read') && $this->get_user()) ? $this->get_translation('ReferrersText') : '',
+			($this->page && $this->has_access('read') && $this->get_user())
+				? $this->get_translation('ReferrersText') : '',
 			$this->method == 'referrers' || $this->method == 'referrers_sites',
 			2,
 			'',
@@ -356,7 +364,11 @@ else
 			$this->href('watch'),
 			($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
 			#($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
-			($this->page && ($this->get_user())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+			($this->page && ($this->get_user()))
+				? ($this->is_watched === true
+						? $this->get_translation('UnWatchText')
+						: $this->get_translation('WatchText') )
+				: '',
 			$this->method == 'watch',
 			2,
 			($this->is_watched === true ? 'watch-off' : 'watch-on'),
@@ -366,7 +378,11 @@ else
 		echo echo_tab(
 			$this->href('review'),
 			($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview')),
-			($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? ($this->page['reviewed'] == 1 ? $this->get_translation('Reviewed') : $this->get_translation('Review')) : '',
+			($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer()))
+				? ($this->page['reviewed'] == 1
+						? $this->get_translation('Reviewed')
+						: $this->get_translation('Review'))
+				: '',
 			$this->method == 'review',
 			2,
 			($this->page['reviewed'] == 1 ? 'review2' : 'review1'),
@@ -376,7 +392,8 @@ else
 		echo echo_tab(
 			$this->href('upload'),
 			$this->get_translation('FilesTip'),
-			($this->forum === false && $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
+			($this->forum === false && $this->page && $this->has_access('upload'))
+				? $this->get_translation('FilesText') : '',
 			$this->method == 'upload',
 			2,
 			'',

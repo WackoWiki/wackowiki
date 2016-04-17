@@ -284,7 +284,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				if ($this->config['enable_email'] == true)
 				{
 					// 1. Send signup email to new user
-					/* TODO: set user language for email encoding */
+					// TODO: set user language for email encoding
 					$this->load_translation($user_lang);
 					$this->set_translation ($user_lang);
 					$this->set_language ($user_lang);
