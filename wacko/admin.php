@@ -40,8 +40,6 @@ $init->settings('theme_url',	$init->config['base_url'].$init->config['theme_path
 $init->settings('user_table',	$init->config['table_prefix'].'user');
 $init->settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
 $init->settings('ap_mode',		true);
-
-
 $init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
 
 if ($init->is_locked('lock_ap') === true)
@@ -51,7 +49,7 @@ if ($init->is_locked('lock_ap') === true)
 		header('HTTP/1.1 503 Service Temporarily Unavailable');
 	}
 
-	echo "The site is temporarily unavailable due to system maintenance. Please try again later.";
+	echo 'The site is temporarily unavailable due to system maintenance. Please try again later.';
 	exit;
 }
 
@@ -68,8 +66,11 @@ if (!empty($init->config['ext_bad_behavior']))
 	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 }
 
-// redirect, send them home [disable for recovery mode!]
-if (!$engine->is_admin() && !RECOVERY_MODE)
+// redirect, send them home [disabled for recovery mode!]
+if ((!$engine->is_admin()
+		#&& (!$init->is_locked() === true && !isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) ) )
+		&& (!$init->is_locked() === true ) )
+	&& !RECOVERY_MODE)
 {
 	if (!headers_sent())
 	{
@@ -176,6 +177,7 @@ if (isset($_POST['ap_password']))
 
 		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
 
+		// RECOVERY_MODE ON || RECOVERY_MODE OFF
 		if (($_SESSION['failed_login_count'] >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
 			$init->lock('lock_ap');
@@ -188,7 +190,7 @@ if (isset($_POST['ap_password']))
 
 // check authorization
 $user			= '';
-$authorization	= '';
+$authorization	= false;
 $_title			= '';
 
 if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']])
@@ -250,7 +252,7 @@ unset($_processed_password);
 
 // setting temporary admin user context
 global $_user;
-$session_length = 1800;
+$session_length = 1800; // 1800 -> 30 minutes
 #$_user = $engine->get_user();
 #$engine->set_user($user, 0);
 
@@ -272,10 +274,10 @@ if (!isset($_SESSION['created']))
 {
 	$_SESSION['created'] = time();
 }
-else if (time() - $_SESSION['created'] > 1800)
+else if (time() - $_SESSION['created'] > $session_length)
 {
 	$session_expire			= time() + $session_length;
-	// session started more than 30 minutes ago // TODO: $session_time missing!
+	// session started more than 30 minutes(default $session_length) ago  // TODO: $session_time missing!
 	$engine->restart_user_session($user, $session_expire); // TODO: we need extra user session here, hence we need a auth_token table
 	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
 	$_SESSION['created'] = time();  // update creation time
@@ -392,9 +394,9 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 		</div>
 		<div id="tools">
 			<span>
-				<?php echo (RECOVERY_MODE === true ? '<strong>RECOVERY_MODE</strong>' : 'site opened'); ?>
+				<?php echo (RECOVERY_MODE === true ? '<strong>RECOVERY_MODE</strong>' : ''); ?>
 				&nbsp;&nbsp;
-				<?php $time_left = round((1800 - (time() - $_SESSION['created'])) / 60);
+				<?php $time_left = round(($session_length - (time() - $_SESSION['created'])) / 60);
 				echo "Time left: ".$time_left." minutes"; ?>
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
@@ -435,7 +437,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 ?>
 
 <div id="content">
-<div id="page">
+	<div id="page">
 <?php
 // here we show messages
 $engine->output_messages();
@@ -478,7 +480,7 @@ else if (!($_GET && $_POST))
 
 <br />
 <!-- end page output -->
-</div>
+	</div>
 </div>
 <?php /*
 <div id="tabs">
