@@ -1,7 +1,7 @@
 /* Wiki Formatting ---------------------------------------- */
 
 /* Definitions: SYNTAX (?icq i seek you?) */
-dfn { 
+dfn {
 	font-variant: small-caps;
 	letter-spacing: 0.1em;
 	font-style: normal;
@@ -276,7 +276,8 @@ p.auto { margin: 0px; padding: 0px; font-size: 100%; }
 
 /* SYNTAX %%(wrapper xyz)%% */
 
-div.action {
+div.action,
+aside.action {
 	margin: 2px;
 	background: #f6f7ed;
 	border: 1px dotted #CCCCCC;
