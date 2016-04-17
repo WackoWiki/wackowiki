@@ -60,6 +60,10 @@ sup, sub {
 	padding:10px 10px 10px 40px;
 }
 
+.active {
+	font-weight: bold;
+}
+
 /*	Link styles	*/
 
 #content a {
@@ -552,9 +556,32 @@ div#loginbox {
 	background-color: #f9f9f9;
 }
 
+a.button {
+	appearance: button;
+
+	text-decoration: none;
+	color: initial;
+}
 a.cancel,
 #page a.cancel:hover ,
 a.cancel:actice{
 	text-decoration: none !important;
 	border-bottom: 0px none!important;
+}
+
+.btn-approve {
+	background-image: url("./../../image/user-approve.svg"), none;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+}
+.btn-deny {
+	background-image: url("./../../image/user-block.svg"), none;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
 }
