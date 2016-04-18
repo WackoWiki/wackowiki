@@ -257,7 +257,9 @@ function admin_user_approve(&$engine, &$module)
 			"SELECT COUNT(user_name) AS n ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-			( $where ? $where : '' )
+			( $where ? $where : '' ).
+			( $where ? 'AND ' : "WHERE ").
+				"u.user_name <> '".$engine->config['admin_name']."' "
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
@@ -270,6 +272,7 @@ function admin_user_approve(&$engine, &$module)
 			( $where ? $where : '' ).
 			( $where ? 'AND ' : "WHERE ").
 				"u.account_type = '0' ".
+				"AND u.user_name <> '".$engine->config['admin_name']."' ".
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");
 
@@ -278,6 +281,7 @@ function admin_user_approve(&$engine, &$module)
 				"SELECT account_status, count(account_status) AS n
 				FROM ".$engine->config['table_prefix']."user
 				WHERE account_type = '0'
+					AND user_name <> '".$engine->config['admin_name']."'
 				GROUP BY account_status");
 
 		// set default status count
