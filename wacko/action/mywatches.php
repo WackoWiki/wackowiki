@@ -152,6 +152,7 @@ if ($user_id = $this->get_user_id())
 			}
 
 			// pagination
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
 			echo $show_pagination;
 		}
 		else
