@@ -145,6 +145,7 @@ if ($user_id = $this->get_user_id())
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
 			echo $show_pagination;
 		}
 		else
