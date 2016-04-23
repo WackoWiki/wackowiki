@@ -156,11 +156,12 @@ function admin_user_users(&$engine, &$module)
 			// INSERT user settings
 			$engine->sql_query(
 				"INSERT INTO ".$engine->config['table_prefix']."user_setting SET ".
-					"user_id		= '".(int)$_user_id['user_id']."', ".
-					"typografica	= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
-					"user_lang		= '".quote($engine->dblink, ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']))."', ".
-					"theme			= '".quote($engine->dblink, $engine->config['theme'])."', ".
-					"send_watchmail	= '1'");
+					"user_id			= '".(int)$_user_id['user_id']."', ".
+					"typografica		= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
+					"user_lang			= '".quote($engine->dblink, ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']))."', ".
+					"theme				= '".quote($engine->dblink, $engine->config['theme'])."', ".
+					"sorting_comments	= '".(int)$engine->config['sorting_comments']."', ".
+					"send_watchmail		= '1'");
 
 			// add user page
 			$engine->add_user_page($_POST['newname'], $_POST['user_lang']);
