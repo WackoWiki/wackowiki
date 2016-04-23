@@ -265,13 +265,14 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."user_setting ".
 					"SET ".
-						"user_id		= '".(int)$_user_id['user_id']."', ".
-						"typografica	= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
-						"user_lang		= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
-						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".
-						#"timezone		= '".quote($this->dblink, ($timezone ? $timezone : (float)$this->config['timezone']))."', ".
-						#"dst			= '".quote($this->dblink, ($dst ? $dst : (int)$this->config['dst']))."', ".
-						"send_watchmail	= '".quote($this->dblink, 1)."'");
+						"user_id			= '".(int)$_user_id['user_id']."', ".
+						"typografica		= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
+						"user_lang			= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
+						"theme				= '".quote($this->dblink, $this->config['theme'])."', ".
+						"sorting_comments	= '".(int)$this->config['sorting_comment']."', ".
+						#"timezone			= '".quote($this->dblink, ($timezone ? $timezone : (float)$this->config['timezone']))."', ".
+						#"dst				= '".quote($this->dblink, ($dst ? $dst : (int)$this->config['dst']))."', ".
+						"send_watchmail		= '".quote($this->dblink, 1)."'");
 
 				// INSERT user menu items
 
