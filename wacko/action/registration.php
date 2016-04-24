@@ -270,8 +270,6 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"user_lang			= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
 						"theme				= '".quote($this->dblink, $this->config['theme'])."', ".
 						"sorting_comments	= '".(int)$this->config['sorting_comment']."', ".
-						#"timezone			= '".quote($this->dblink, ($timezone ? $timezone : (float)$this->config['timezone']))."', ".
-						#"dst				= '".quote($this->dblink, ($dst ? $dst : (int)$this->config['dst']))."', ".
 						"send_watchmail		= '".quote($this->dblink, 1)."'");
 
 				// INSERT user menu items
