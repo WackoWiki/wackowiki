@@ -39,11 +39,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	}
 
 	// make query
-	$sql = "SELECT p.page_id, p.tag, p.title, p.description, p.page_lang ".
-		"FROM {$this->config['table_prefix']}page AS p, ".
-			"{$this->config['table_prefix']}acl AS a ".
-		"WHERE p.page_id = a.page_id ".
-		"AND a.privilege = 'comment' AND a.list = '' ";
+	$sql =	"SELECT p.page_id, p.tag, p.title, p.description, p.page_lang ".
+			"FROM {$this->config['table_prefix']}page AS p, ".
+				"{$this->config['table_prefix']}acl AS a ".
+			"WHERE p.page_id = a.page_id ".
+				"AND a.privilege = 'comment' AND a.list = '' ";
 
 	if (!isset($pages))
 	{
