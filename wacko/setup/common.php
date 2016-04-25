@@ -119,21 +119,25 @@ function random_seed($length, $seed_complexity)
 // site config
 function available_languages()
 {
-	$handle = opendir('lang');
+	$lang_list	= '';
 
-	while (false !== ($file = readdir($handle)))
+	if ($handle = opendir('lang'))
 	{
-		if ($file != '.'
-		&& $file != '..'
-		&& $file != 'wacko.all.php'
-		&& !is_dir('lang/'.$file)
-		&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+		while (false !== ($file = readdir($handle)))
 		{
-			$lang_list[] = $match[1];
+			if ($file != '.'
+			&& $file != '..'
+			&& $file != 'wacko.all.php'
+			&& !is_dir('lang/'.$file)
+			&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+			{
+				$lang_list[] = $match[1];
+			}
 		}
+
+		closedir($handle);
 	}
 
-	closedir($handle);
 	sort($lang_list, SORT_STRING);
 
 	return $lang_list;

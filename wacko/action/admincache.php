@@ -43,17 +43,19 @@ if ($this->is_admin())
 			if (isset($_POST['pages_cache']) && $_POST['pages_cache'] == 1)
 			{
 				$directory	= $this->config['cache_dir'].CACHE_PAGE_DIR;
-				$handle		= opendir(rtrim($directory, '/'));
 
-				while (false !== ($file = readdir($handle)))
+				if ($handle = opendir(rtrim($directory, '/')))
 				{
-					if ($file != '.' && $file != '..' && !is_dir($directory.$file))
+					while (false !== ($file = readdir($handle)))
 					{
-						unlink($directory.$file);
+						if ($file != '.' && $file != '..' && !is_dir($directory.$file))
+						{
+							unlink($directory.$file);
+						}
 					}
-				}
 
-				closedir($handle);
+					closedir($handle);
+				}
 
 				// empties cache table and reset AUTO_INCREMENT value to its start value
 				$this->sql_query("TRUNCATE ".$this->config['table_prefix']."cache");
@@ -76,17 +78,19 @@ if ($this->is_admin())
 			{
 				// feeds
 				$directory	= $this->config['cache_dir'].CACHE_FEED_DIR;
-				$handle		= opendir(rtrim($directory, '/'));
 
-				while (false !== ($file = readdir($handle)))
+				if ($handle = opendir(rtrim($directory, '/')))
 				{
-					if (!is_dir($directory.$file))
+					while (false !== ($file = readdir($handle)))
 					{
-						unlink($directory.$file);
+						if (!is_dir($directory.$file))
+						{
+							unlink($directory.$file);
+						}
 					}
-				}
 
-				closedir($handle);
+					closedir($handle);
+				}
 			}
 
 			$message = $this->get_translation('CacheCleared');
