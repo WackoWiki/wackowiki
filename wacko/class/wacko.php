@@ -6461,8 +6461,8 @@ class Wacko
 				{
 					while (false !== ($file = readdir($handle)))
 					{
-						if (is_file($directory.$file) &&
-						((time() - @filemtime($directory.$file)) > $ttl))
+						if (is_file($directory.$file)
+							&& ((time() - @filemtime($directory.$file)) > $ttl))
 						{
 							@unlink($directory.$file);
 						}
