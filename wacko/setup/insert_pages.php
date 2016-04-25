@@ -28,17 +28,18 @@ if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 	}
 	else
 	{
-		$handle = opendir('setup/lang');
-
-		while (false !== ($file = readdir($handle)))
+		if ($handle = opendir('setup/lang'))
 		{
-			if(1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
+			while (false !== ($file = readdir($handle)))
 			{
-				$lang_list[] = $match[1];
+				if(1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
+				{
+					$lang_list[] = $match[1];
+				}
 			}
-		}
 
-		closedir($handle);
+			closedir($handle);
+		}
 	}
 
 	foreach ($lang_list as $_lang)

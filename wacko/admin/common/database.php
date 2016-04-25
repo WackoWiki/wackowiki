@@ -193,17 +193,18 @@ function remove_pack(&$engine, $pack)
 	{
 		foreach ($subdirs as $subdir)
 		{
-			$dh = opendir($packdir.$subdir);
-
-			while (false !== ($file = readdir($dh)))
+			if ($dh = opendir($packdir.$subdir))
 			{
-				if (is_file($packdir.$subdir.'/'.$file) === true)
+				while (false !== ($file = readdir($dh)))
 				{
-					unlink($packdir.$subdir.'/'.$file);
+					if (is_file($packdir.$subdir.'/'.$file) === true)
+					{
+						unlink($packdir.$subdir.'/'.$file);
+					}
 				}
-			}
 
-			closedir($dh);
+				closedir($dh);
+			}
 
 			// recursively remove subdirs in path
 			if (strpos($subdir, '/'))
@@ -236,17 +237,18 @@ function remove_pack(&$engine, $pack)
 	// remove pack contents and directory
 	if (is_dir(rtrim($packdir, '/')) === true)
 	{
-		$dh = opendir(rtrim($packdir, '/'));
-
-		while (false !== ($file = readdir($dh)))
+		if ($dh = opendir(rtrim($packdir, '/')))
 		{
-			if (is_file($packdir.$file) === true)
+			while (false !== ($file = readdir($dh)))
 			{
-				unlink($packdir.$file);
+				if (is_file($packdir.$file) === true)
+				{
+					unlink($packdir.$file);
+				}
 			}
-		}
 
-		closedir($dh);
+			closedir($dh);
+		}
 
 		rmdir(rtrim($packdir, '/'));
 	}

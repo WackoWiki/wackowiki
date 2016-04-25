@@ -41,17 +41,20 @@ function admin_lock(&$engine, &$module)
 	{
 		// pages
 		$directory	= $engine->config['cache_dir'].CACHE_PAGE_DIR;
-		$handle		= opendir(rtrim($directory, '/'));
 
-		while (false !== ($file = readdir($handle)))
+		if ($handle = opendir(rtrim($directory, '/')))
 		{
-			if (!is_dir($directory.$file))
+			while (false !== ($file = readdir($handle)))
 			{
-				unlink($directory.$file);
+				if (!is_dir($directory.$file))
+				{
+					unlink($directory.$file);
+				}
 			}
+
+			closedir($handle);
 		}
 
-		closedir($handle);
 		$engine->sql_query("TRUNCATE {$engine->config['table_prefix']}cache");
 
 		// queries
@@ -62,17 +65,19 @@ function admin_lock(&$engine, &$module)
 
 		// feeds
 		$directory	= $engine->config['cache_dir'].CACHE_FEED_DIR;
-		$handle		= opendir(rtrim($directory, '/'));
 
-		while (false !== ($file = readdir($handle)))
+		if ($handle = opendir(rtrim($directory, '/')))
 		{
-			if (!is_dir($directory.$file))
+			while (false !== ($file = readdir($handle)))
 			{
-				unlink($directory.$file);
+				if (!is_dir($directory.$file))
+				{
+					unlink($directory.$file);
+				}
 			}
-		}
 
-		closedir($handle);
+			closedir($handle);
+		}
 	}
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')

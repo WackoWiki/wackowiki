@@ -345,17 +345,20 @@ class Wacko
 	function available_themes()
 	{
 		$theme_list	= '';
-		$handle		= opendir($this->config['theme_path']);
 
-		while (false !== ($file = readdir($handle)))
+		if ($handle = opendir($this->config['theme_path']))
 		{
-			if ($file != '.' && $file != '..' && is_dir($this->config['theme_path'].'/'.$file) && $file != '_common')
+			while (false !== ($file = readdir($handle)))
 			{
-				$theme_list[] = $file;
+				if ($file != '.' && $file != '..' && is_dir($this->config['theme_path'].'/'.$file) && $file != '_common')
+				{
+					$theme_list[] = $file;
+				}
 			}
+
+			closedir($handle);
 		}
 
-		closedir($handle);
 		sort($theme_list, SORT_STRING);
 
 		if ($allow = trim($this->config['allow_themes']))
@@ -560,6 +563,8 @@ class Wacko
 	*/
 	function available_languages($subset = true)
 	{
+		$lang_list	= '';
+
 		if (!$this->_lang_list || $subset == false)
 		{
 
@@ -573,21 +578,22 @@ class Wacko
 			else
 			{
 				// all available languages
-				$handle = opendir('lang');
-
-				while (false !== ($file = readdir($handle)))
+				if ($handle = opendir('lang'))
 				{
-					if ($file != '.'
-					&& $file != '..'
-					&& $file != 'wacko.all.php'
-					&& !is_dir('lang/'.$file)
-					&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+					while (false !== ($file = readdir($handle)))
 					{
-						$lang_list[] = $match[1];
+						if ($file != '.'
+						&& $file != '..'
+						&& $file != 'wacko.all.php'
+						&& !is_dir('lang/'.$file)
+						&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+						{
+							$lang_list[] = $match[1];
+						}
 					}
-				}
 
-				closedir($handle);
+					closedir($handle);
+				}
 			}
 
 			sort($lang_list, SORT_STRING);
@@ -1630,7 +1636,7 @@ class Wacko
 				($for
 					? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 					: '').
-			"AND a.privilege = 'read' ".
+				"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
 			"LIMIT {$limit}", true))
 			{
@@ -6426,18 +6432,20 @@ class Wacko
 				clearstatcache();
 
 				$directory	= $this->config['cache_dir'].CACHE_PAGE_DIR;
-				$handle		= opendir(rtrim($directory, '/'));
 
-				while (false !== ($file = readdir($handle)))
+				if ($handle = opendir(rtrim($directory, '/')))
 				{
-					if (is_file($directory.$file) &&
-					((time() - @filemtime($directory.$file)) > $ttl))
+					while (false !== ($file = readdir($handle)))
 					{
-						@unlink($directory.$file);
+						if (is_file($directory.$file)
+							&& ((time() - @filemtime($directory.$file)) > $ttl))
+						{
+							@unlink($directory.$file);
+						}
 					}
-				}
 
-				closedir($handle);
+					closedir($handle);
+				}
 
 				//$this->log(7, 'Maintenance: cached pages purged');
 			}
@@ -6448,18 +6456,20 @@ class Wacko
 				// delete from fs
 				clearstatcache();
 				$directory	= $this->config['cache_dir'].CACHE_SQL_DIR;
-				$handle		= opendir(rtrim($directory, '/'));
 
-				while (false !== ($file = readdir($handle)))
+				if ($handle = opendir(rtrim($directory, '/')))
 				{
-					if (is_file($directory.$file) &&
-					((time() - @filemtime($directory.$file)) > $ttl))
+					while (false !== ($file = readdir($handle)))
 					{
-						@unlink($directory.$file);
+						if (is_file($directory.$file) &&
+						((time() - @filemtime($directory.$file)) > $ttl))
+						{
+							@unlink($directory.$file);
+						}
 					}
-				}
 
-				closedir($handle);
+					closedir($handle);
+				}
 
 				//$this->log(7, 'Maintenance: cached sql results purged');
 			}

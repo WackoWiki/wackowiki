@@ -68,23 +68,25 @@ class Cache
 		// delete from fs
 		clearstatcache();
 		$directory	= $this->wacko->config['cache_dir'].CACHE_SQL_DIR;
-		$handle		= opendir(rtrim($directory, '/'));
 
-		while (false !== ($file = readdir($handle)))
+		if ($handle = opendir(rtrim($directory, '/')))
 		{
-			/* if (is_file($directory.$file) &&
-				((time() - @filemtime($directory.$file)) > $ttl))
+			while (false !== ($file = readdir($handle)))
 			{
-				@unlink($directory.$file);
-			} */
+				/* if (is_file($directory.$file) &&
+					((time() - @filemtime($directory.$file)) > $ttl))
+				{
+					@unlink($directory.$file);
+				} */
 
-			if ($file != '.' && $file != '..' && !is_dir($directory.$file))
-			{
-				unlink($directory.$file);
+				if ($file != '.' && $file != '..' && !is_dir($directory.$file))
+				{
+					unlink($directory.$file);
+				}
 			}
-		}
 
-		closedir($handle);
+			closedir($handle);
+		}
 
 		//$this->wacko->log(7, 'Maintenance: cached sql results purged');
 	}
@@ -253,17 +255,19 @@ class Cache
 		clearstatcache();
 
 		$directory	= $this->wacko->config['cache_dir'].CACHE_CONFIG_DIR;
-		$handle		= opendir(rtrim($directory, '/'));
 
-		while (false !== ($file = readdir($handle)))
+		if ($handle = opendir(rtrim($directory, '/')))
 		{
-			if ($file != '.' && $file != '..' && !is_dir($directory.$file)) // if (is_file($directory.$file))
+			while (false !== ($file = readdir($handle)))
 			{
-				@unlink($directory.$file);
+				if ($file != '.' && $file != '..' && !is_dir($directory.$file)) // if (is_file($directory.$file))
+				{
+					@unlink($directory.$file);
+				}
 			}
-		}
 
-		closedir($handle);
+			closedir($handle);
+		}
 
 		//$this->wacko->log(7, 'Maintenance: cached config destroyed');
 	}
