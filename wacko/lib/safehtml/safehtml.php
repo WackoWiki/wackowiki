@@ -222,11 +222,13 @@ class SafeHTML
      * @var array
      */
     public $closeParagraph = array(
-        'address', 'blockquote', 'center', 'dd',      'dir',       'div',
-        'dl',      'dt',         'h1',     'h2',      'h3',        'h4',
-        'h5',      'h6',         'hr',     'isindex', 'listing',   'marquee',
-        'menu',    'multicol',   'ol',     'p',       'plaintext', 'pre',
-        'table',   'ul',         'xmp',
+        'address', 'article',    'aside',  'audio',    'blockquote', 'canvas',
+        'center',  'dd',         'dir',    'div',      'dl',         'dt',
+        'figure',  'figcaption', 'footer', 'h1',       'h2',         'h3',
+        'h4',      'h5',         'h6',     'header',   'hr',         'isindex',
+        'listing', 'marquee',    'menu',   'multicol', 'ol',         'output',
+        'p',       'plaintext',  'pre',    'section',  'table',      'ul',
+        'video',   'xmp',
     );
 
     /**
