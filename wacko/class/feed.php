@@ -61,7 +61,6 @@ class Feed
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
 		$xml .= "<language>".$this->engine->config['language']."</language>\n";
-		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 		if (list ($pages, $pagination) = $this->engine->load_changed())
@@ -115,21 +114,24 @@ class Feed
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT page_id, tag, title, created, body_r, comments, page_lang ".
-			"FROM {$prefix}page ".
-			"WHERE comment_on_id = '0' ".
-				"AND tag REGEXP '^{$news_cluster}{$news_levels}$' ".
-			"ORDER BY tag");
+			"SELECT p.page_id, p.tag, p.title, p.created, p.body_r, p.comments, p.page_lang ".
+			"FROM {$prefix}page p, ".
+				"{$prefix}acl AS a ".
+			"WHERE p.page_id = a.page_id ".
+				"AND a.privilege = 'read' AND a.list = '*' ".
+				"AND p.comment_on_id = '0' ".
+				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
+			"ORDER BY p.tag");
 
 		if ($pages)
 		{
 			// build an array
 			foreach ($pages as $page)
 			{
-				$access = $this->engine->has_access('read', $page['page_id'], GUEST);
+				#$access = $this->engine->has_access('read', $page['page_id'], GUEST);
 
-				if ($access === true)
-				{
+				#if ($access === true)
+				#{
 					$feed_pages[]	= array(
 										'page_id'	=> $page['page_id'],
 										'tag'		=> $page['tag'],
@@ -139,7 +141,7 @@ class Feed
 										'comments'	=> $page['comments'],
 										'page_lang'	=> $page['page_lang'],
 										'date'		=> date('Y/m-d', strtotime($page['created'])));
-				}
+				#}
 			}
 
 			// sorting function: sorts by dates
@@ -254,7 +256,6 @@ class Feed
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
 		$xml .= "<language>".$this->engine->config['language']."</language>\n";
-		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 		if ($comments = $this->engine->load_comment())
@@ -331,28 +332,28 @@ class Feed
 		{
 			foreach ($pages as $page)
 			{
-					$xml .= "<url>\n";
-					$xml .= "<loc>".$this->engine->href('', $page['tag'])."</loc>\n";
-					$xml .= "<lastmod>". substr($page['modified'], 0, 10) ."</lastmod>\n";
+				$xml .= "<url>\n";
+				$xml .= "<loc>".$this->engine->href('', $page['tag'])."</loc>\n";
+				$xml .= "<lastmod>". substr($page['modified'], 0, 10) ."</lastmod>\n";
 
-					$days_since_last_changed = floor((time() - strtotime(substr($page['modified'], 0, 10)))/86400);
+				$days_since_last_changed = floor((time() - strtotime(substr($page['modified'], 0, 10)))/86400);
 
-					if($days_since_last_changed < 30)
-					{
-						$xml .= "<changefreq>daily</changefreq>\n";
-					}
-					else if($days_since_last_changed < 60)
-					{
-						$xml .= "<changefreq>monthly</changefreq>\n";
-					}
-					else
-					{
-						$xml .= "<changefreq>yearly</changefreq>\n";
-					}
+				if($days_since_last_changed < 30)
+				{
+					$xml .= "<changefreq>daily</changefreq>\n";
+				}
+				else if($days_since_last_changed < 60)
+				{
+					$xml .= "<changefreq>monthly</changefreq>\n";
+				}
+				else
+				{
+					$xml .= "<changefreq>yearly</changefreq>\n";
+				}
 
-					// The only thing I'm not sure about how to handle dynamically...
-					$xml .= "<priority>0.8</priority>\n";
-					$xml .= "</url>\n";
+				// The only thing I'm not sure about how to handle dynamically...
+				$xml .= "<priority>0.8</priority>\n";
+				$xml .= "</url>\n";
 			}
 		}
 
