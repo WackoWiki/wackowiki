@@ -13,7 +13,7 @@ $module['config_upload'] = array(
 		'order'	=> 250,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'config_uploads',
+		'mode'	=> 'config_upload',
 		'name'	=> 'Upload',
 		'title'	=> 'Attachment settings',
 	);
