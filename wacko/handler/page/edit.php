@@ -245,7 +245,9 @@ if ($this->has_access('read')
 					: isset($this->page['title'])
 						? $this->page['title']
 						: isset($_SESSION['title'])
-							? $_SESSION['title']
+							? empty($_SESSION['title'])
+								? ''
+								: $_SESSION['title']
 							: '';
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 

@@ -6,21 +6,21 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   Upload settrings                                 ##
+##   Upload settings                                  ##
 ########################################################
 
-$module['config_uploads'] = array(
+$module['config_upload'] = array(
 		'order'	=> 250,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_uploads',
-		'name'	=> 'Uploads',
+		'name'	=> 'Upload',
 		'title'	=> 'Attachment settings',
 	);
 
 ########################################################
 
-function admin_config_uploads(&$engine, &$module)
+function admin_config_upload(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
