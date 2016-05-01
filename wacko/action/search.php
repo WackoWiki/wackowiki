@@ -255,6 +255,7 @@ if (!isset($filter))	$filter		= '';
 if (!isset($style))		$style		= '';
 if (!isset($nomark))	$nomark		= '';
 if (!isset($for))		$for		= '';
+if (!isset($lang))		$lang		= '';
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
 if (!isset($max))		$max = null;
