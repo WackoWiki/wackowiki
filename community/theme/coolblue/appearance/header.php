@@ -22,7 +22,7 @@ echo $this->form_close();
 <div id="navi">
   <?php
 // outputs bookmarks menu
-	echo '<div id="usermenu">';
+	echo '<div id="menu-user">';
 	echo "<ol>\n";
 	// main page
 	echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";

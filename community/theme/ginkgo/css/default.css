@@ -177,7 +177,7 @@ a.main:visited {
 .footerlist ul li form {
 	display: inline;
 }
-#filesheader, #commentsheader {
+#header-files, #header-comments {
   background-color: #D5EDB3;
   padding: 2px 10px;
   border-left: 1px inset;

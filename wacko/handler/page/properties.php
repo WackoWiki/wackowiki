@@ -374,7 +374,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				"</tr>\n".
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsTotalComs')."</th>".
-					'<td class="form_right"><a href="'.$this->href('', '', 'show_comments=1#commentsheader').'" title="'.$this->get_translation('ShowComments').'">'.$this->page['comments'].'</a></td>'.
+					'<td class="form_right"><a href="'.$this->href('', '', 'show_comments=1#header-comments').'" title="'.$this->get_translation('ShowComments').'">'.$this->page['comments'].'</a></td>'.
 				"</tr>\n".
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsHits')."</th>".

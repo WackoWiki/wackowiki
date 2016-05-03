@@ -22,9 +22,6 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config
 
 global $lang;
 require_once('setup/lang/installer.'.$config['language'].'.php');
-?>
-
-<?php
 
 // HTTP header with right Charset settings
 header('Content-Type: text/html; charset='.$lang['Charset']);

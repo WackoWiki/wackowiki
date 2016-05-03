@@ -21,7 +21,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 					: $this->get_page_path() );
 		?></h1>
 		</div>
-		<div id="login_box">
+		<div id="login-box">
 <?php
 // if user are logged, shows "You are UserName"
 if ($this->get_user())
@@ -52,7 +52,7 @@ else
 	<nav class="menu-main">
 <?php
 	// outputs bookmarks menu
-	echo '<div id="usermenu">';
+	echo '<div id="menu-user">';
 	echo "<ol>\n";
 	// main page
 	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";

@@ -41,7 +41,7 @@ if ($this->has_access('read'))
 	{
 		// display files header
 		?>
-	<div id="filesheader">
+	<div id="header-files">
 	<?php echo '<a href="'.$this->href('', '', 'show_files=0').'" title="'.$this->get_translation('HideFiles').'">'.$this->get_translation('Files_all').'</a>'; ?>
 	</div>
 
@@ -101,8 +101,8 @@ if ($this->has_access('read'))
 		// show link to show files only if there is one or/and user has the right to add a new one
 		if (!empty($show_files))
 		{
-			echo '<div id="filesheader">'."\n";
-			echo '<a href="'.$this->href('', '', 'show_files=1#filesheader').'" title="'.$this->get_translation('ShowFiles').'">'.$show_files.'</a>';
+			echo '<div id="header-files">'."\n";
+			echo '<a href="'.$this->href('', '', 'show_files=1#header-files').'" title="'.$this->get_translation('ShowFiles').'">'.$show_files.'</a>';
 			echo '</div>'."\n";
 		}
 		else

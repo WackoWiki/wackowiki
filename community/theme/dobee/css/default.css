@@ -82,7 +82,7 @@ div.bookmarks {padding: 5px 10px; font-size: 90%; border-bottom: 1px solid #ccc;
 
 /* Page footer */
 
-div#filesheader, div#commentsheader, div.footer {padding: 5px 10px; background-color: #DADADA; border-top: 1px solid #ccc; font-size: 90%}
+div#header-files, div#header-comments, div.footer {padding: 5px 10px; background-color: #DADADA; border-top: 1px solid #ccc; font-size: 90%}
 div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
 #credits {clear: right; color: #4C4749; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
@@ -335,7 +335,7 @@ legend {font-weight: normal; padding: 0 5px;}
 	font-weight: bold;
 }
 
-#usermenu ol {
+#menu-user ol {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;

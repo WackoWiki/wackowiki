@@ -253,7 +253,7 @@ form input.submitinput {
 
 /** File and comment-related *************************************************/
 	/* Headers (always visible) */
-#filesheader, #commentsheader, #rateheader {
+#header-files, #header-comments, #header-rating {
 	background-color: #F0F4F5;
 	padding: 2px 20px;
 	margin: 0 -20px;
@@ -804,7 +804,7 @@ td.form_left, th.form_left {
 /*Handlers --------------------------------------------------*/
 
 
-#usermenu {
+#menu-user {
 	margin: 0 auto 0;
 	overflow: hidden;
 	float: left;
@@ -812,13 +812,13 @@ td.form_left, th.form_left {
 	position: relative;
 }
 
-#usermenu ol {
+#menu-user ol {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-#usermenu li {
+#menu-user li {
 	border-left: 1px dotted #aaa;
 	float: left;
 	line-height: 1.2em;
@@ -827,22 +827,22 @@ td.form_left, th.form_left {
 	white-space: nowrap;
 }
 
-#usermenu li a {
+#menu-user li a {
 	display: inline;
 	border: none;
 	text-decoration: none;
 }
 
-#usermenu li a:visited {
+#menu-user li a:visited {
 	color: #003399;
 }
 
-#usermenu li a:hover {
+#menu-user li a:hover {
 	color: #B90022;
 	text-decoration: underline;
 }
 
-#usermenu li a:active {
+#menu-user li a:active {
 	color: #FF0000;
 }
 

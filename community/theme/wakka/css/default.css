@@ -208,7 +208,7 @@ article, #page {
 
 /** File and comment-related *************************************************/
 	/* Headers (always visible) */
-#filesheader, #commentsheader, #rateheader {
+#header-files, #header-comments, #header-rating {
 	background-color: #DDDDDD;
 	padding: 2px 10px;
 	border-left: 1px inset;
@@ -736,7 +736,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	padding: 0px 0px 0px 0px; /*overflow:hidden;*/
 }
 
-#usermenu {
+#menu-user {
 	margin: 0 auto 0;
 	overflow: hidden;
 	float: left;
@@ -744,13 +744,13 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	position: relative;
 }
 
-#usermenu ol {
+#menu-user ol {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-#usermenu li {
+#menu-user li {
 	border-left: 1px solid;
 	float: left;
 	line-height: 1.2em;
@@ -759,22 +759,22 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	white-space: nowrap;
 }
 
-#usermenu li a {
+#menu-user li a {
 	display: inline;
 	border: none;
 	text-decoration: none;
 }
 
-#usermenu li a:visited {
+#menu-user li a:visited {
 	color: #990000;
 }
 
-#usermenu li a:hover {
+#menu-user li a:hover {
 	color: #B90022;
 	text-decoration: underline;
 }
 
-#usermenu li a:active {
+#menu-user li a:active {
 	color: #FF0000;
 }
 

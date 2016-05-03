@@ -206,7 +206,7 @@ margin: 10px 0 10px;
 float: right;
 }
 
-#usermenu {
+#menu-user {
 	margin: 0 auto 0;
 	overflow: vissible;
 	float: left;
@@ -216,23 +216,23 @@ float: right;
 	
 }
 
-#usermenu:hover {
+#menu-user:hover {
 	/*border: 1px solid #BBBBBB;*/
 	}
 
-#usermenu ul  {
+#menu-user ul  {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	/*border: 1px solid #FFFFFF;*/
 }
 
-#usermenu ul li {
+#menu-user ul li {
 	margin: 0;
 	padding: 0;
 }
 
-#usermenu ul li.sublist {
+#menu-user ul li.sublist {
 	/*margin: 0;
 	padding: 0;*/
 	
@@ -242,7 +242,7 @@ float: right;
 	
 	}
 
-#usermenu ul li.sublist:hover {
+#menu-user ul li.sublist:hover {
 	background-color: #FFFFFF;
 	
 	border: 1px solid #BBBBBB;
@@ -253,14 +253,14 @@ float: right;
 	border-radius: 5px;
 	}
 
-#usermenu ul li.sublist a.bookmark {
+#menu-user ul li.sublist a.bookmark {
 	/*padding-bottom: 20px;*/
 	
 	/*border-bottom: 1px solid #000000;
 	margin-bottom: -1px;*/
 	}
 
-#usermenu ul li.sublist:hover a.bookmark {
+#menu-user ul li.sublist:hover a.bookmark {
 	padding-bottom: 20px;
 	border-bottom: 1px solid #fff;
 	margin-bottom: -1px;
@@ -268,19 +268,19 @@ float: right;
 	z-index: 3;
 }
 
-#usermenu ul li.sublist a.bookmark img.bookmark-icon {
+#menu-user ul li.sublist a.bookmark img.bookmark-icon {
 	padding: 3px 10px 0 10px;
 	}
 
-#usermenu ul li.sublist img.bookmark-icon:hover {
+#menu-user ul li.sublist img.bookmark-icon:hover {
 	padding-bottom: 15px;
 	}
 
-#usermenu ul li.sublist:hover ol {
+#menu-user ul li.sublist:hover ol {
 	display: block;
 	}
 
-#usermenu ol  {
+#menu-user ol  {
 	list-style: none;
 	margin: 0 -200px 0 -1px;
 	padding: 15px;
@@ -310,7 +310,7 @@ float: right;
 
 	}
 
-#usermenu ol li {
+#menu-user ol li {
 	/*border-left: 1px dotted #aaa;*/
 	
 	line-height: 1.2em;
@@ -326,22 +326,22 @@ float: right;
 	
 }
 
-#usermenu li a {
+#menu-user li a {
 	display: inline-block;
 	border: none;
 	text-decoration: none;
 }
 
-#usermenu li a:visited {
+#menu-user li a:visited {
 	color: #003399;
 }
 
-#usermenu li a:hover {
+#menu-user li a:hover {
 	color: #B90022;
 	text-decoration: underline;
 }
 
-#usermenu li a:active {
+#menu-user li a:active {
 	color: #FF0000;
 }
 
@@ -1434,7 +1434,7 @@ background-repeat: no-repeat;
 /* files and comments headers are always visible
 unless disabled through settings at config table */
 
-#filesheader, #commentsheader, #rateheader {
+#header-files, #header-comments, #header-rating {
 	/*min-height: 18px;*/
     padding: 5px 1% 5px;
     color: #444;

@@ -407,7 +407,7 @@ div .action-content {
 }
 
 /* comments header */
-.commentsheader, .filesheader, .linksheader {
+.header-comments, .header-files, .linksheader {
 	border-bottom:	1px solid #BABFC7;
 	letter-spacing:	2px;
 	margin-bottom:	10px;

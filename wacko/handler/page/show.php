@@ -99,7 +99,7 @@ if ($this->has_access('read'))
 				}
 				else
 				{
-					$message .= '<br />';
+					$message .= '<br /><br />';
 					$message .= $this->form_open('edit_revision', 'edit');
 					$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
 					$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
