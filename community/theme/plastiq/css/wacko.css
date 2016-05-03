@@ -40,12 +40,12 @@
 
 /*	Files/comments forms layout	*/
 
-#commentsheader, #filesheader, #rateheader {
+#header-comments, #header-files, #header-rating {
 	font-size: 11px;
 }
 
 
-#commentsheader, #filesheader, .linksheader {
+#header-comments, #header-files, .linksheader {
 	letter-spacing: 2px;
 	white-space: nowrap;
 	padding-left: 10px;
@@ -99,7 +99,7 @@ table.upload img {
 }
 
 
-#rateheader {
+#header-rating {
 	letter-spacing: 2px;
 	white-space: nowrap;
 	padding-left: 10px;

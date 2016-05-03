@@ -11,7 +11,7 @@ DOWNLOAD AND INSTALLATION ------------------------------------------------------
   'default' directory to your theme folder of the WackoWiki
   installation.
 * Edit your secondary config (or Admin panel) and set
-  "theme" => "default".
+  'theme' => 'default'.
 * Your wacko user may also select this theme on the Settings page.
 
 

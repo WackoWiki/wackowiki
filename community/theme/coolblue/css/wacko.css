@@ -134,7 +134,7 @@ background-color:#EEE;
 padding:10px;
 }
 
-.filesheader,.commentsheader {
+.header-files,.header-comments {
 background-color:#F0F0F0;
 padding:2px 10px;
 }

@@ -17,7 +17,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 	<span class="nobr">
 <?php
 
-	echo '<div id="usermenu">';
+	echo '<div id="menu-user">';
 	echo "<ol>\n";
 
 	echo '<li>'.$this->compose_link_to_page($this->config['root_page'])."</li>\n";
@@ -84,7 +84,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 		<td style="vertical-align:top;" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->get_translation('Bookmarks') ?>:</strong>&nbsp;&nbsp;</td>
 		<td style="width:100%;" class="Bookmarks">
 <?php
-	echo '<div id="usermenu">';
+	echo '<div id="menu-user">';
 	echo "<ol>\n";
 
 	// menu

@@ -90,7 +90,7 @@ else if($this->has_access('write'))
 			<div class="bookmarks">
 				<?php // Insert links to root page and personal bookmarks ?>
 				<?php
-					echo '<div id="usermenu">';
+					echo '<div id="menu-user">';
 					echo "<ol>\n";
 					// main page
 					#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";

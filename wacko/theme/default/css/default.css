@@ -390,9 +390,9 @@ footer {
 
 /** File and comment-related *************************************************/
 	/* Headers (always visible) */
-#filesheader,
-#commentsheader,
-#rateheader {
+#header-files,
+#header-comments,
+#header-rating {
 	background-color: #F0F4F5;
 	padding: 2px 20px;
 	margin: 0 -20px;
@@ -1081,7 +1081,7 @@ th.form_left {
 /*Handlers --------------------------------------------------*/
 
 
-#usermenu {
+#menu-user {
 	margin: 0 auto 0;
 	/* overflow: hidden; */
 	float: left;
@@ -1090,18 +1090,18 @@ th.form_left {
 }
 
 
-#usermenu ol,
-#usermenu ol ul {
+#menu-user ol,
+#menu-user ol ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-#usermenu li:first-child {
+#menu-user li:first-child {
 	/* border-left: none; */
 	/* padding-left: 0px; */
 }
-#usermenu li {
+#menu-user li {
 	border-left: 1px dotted #aaa;
 	float: left;
 	line-height: 1.2em;
@@ -1110,11 +1110,11 @@ th.form_left {
 	white-space: nowrap;
 }
 
-#usermenu ol ul li {
+#menu-user ol ul li {
 	border-left: 0px;
 }
 
-#usermenu li.active {
+#menu-user li.active {
 	font-weight: 600;
 	background-color: #439ce8;
 	background-image: linear-gradient(to bottom, #43ace8, #4383e8);
@@ -1124,22 +1124,22 @@ th.form_left {
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
-#usermenu li a {
+#menu-user li a {
 	display: inline;
 	border: none;
 	text-decoration: none;
 }
 
-#usermenu li a:visited {
+#menu-user li a:visited {
 	color: #003399;
 }
 
-#usermenu li a:hover {
+#menu-user li a:hover {
 	color: #B90022;
 	text-decoration: underline;
 }
 
-#usermenu li a:active {
+#menu-user li a:active {
 	color: #FF0000;
 }
 
@@ -1164,7 +1164,7 @@ th.form_left {
 	font-size: 1.3em;
 }
 
-#login_box {
+#login-box {
 	font-size: 12px;
 	margin: 0 auto 0;
 	overflow: hidden;
@@ -1173,17 +1173,17 @@ th.form_left {
 	position: relative;
 }
 
-#login_box form {
+#login-box form {
 	display: inline;
 }
 
-#login_box ul {
+#login-box ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-#login_box li {
+#login-box li {
 	border-left: 1px solid #aaa;
 	float: left;
 	line-height: 1.2em;
@@ -1192,22 +1192,22 @@ th.form_left {
 	white-space: nowrap;
 }
 
-#login_box li a {
+#login-box li a {
 	display: inline;
 	border: none;
 	text-decoration: none;
 }
 
-#login_box li a:visited {
+#login-box li a:visited {
 	color: #003399;
 }
 
-#login_box li a:hover {
+#login-box li a:hover {
 	color: #B90022;
 	text-decoration: underline;
 }
 
-#login_box li a:active {
+#login-box li a:active {
 	color: #FF0000;
 }
 
@@ -1488,7 +1488,7 @@ table.formation td {
 	padding:0;
 }
 
-#usermenu ol li,
+#menu-user ol li,
 #handler ul li {
 	display:block;
 	float:left;
@@ -1498,7 +1498,7 @@ table.formation td {
 	white-space:nowrap;
 }
 
-#usermenu ol li a,
+#menu-user ol li a,
 #handler ul li a {
 	display:block;
 }
@@ -1529,7 +1529,7 @@ table.formation td {
 }
 
 /* submenu items */
-#usermenu ol ul, 
+#menu-user ol ul, 
 #handler ul ul {
 	display:none; /* Sub menus are hidden by default */
 	position:absolute;
@@ -1544,7 +1544,7 @@ table.formation td {
 	border-width:0 1px 1px;
 
 }
-#usermenu ol ul a,
+#menu-user ol ul a,
 #handler ul ul a {
 	background: none repeat scroll 0 0 transparent;
 }
@@ -1554,7 +1554,7 @@ table.formation td {
 	text-decoration: none;
 }
 
-#usermenu ol ul li,
+#menu-user ol ul li,
 #handler ul ul li {
 	left:auto;  /*resets the left: on the parent li */
 	margin:0; /* Reset the 1px margin from the top menu */
@@ -1567,10 +1567,10 @@ table.formation td {
 	vertical-align: baseline;
 
 }
-#usermenu ol ul li a,
-#usermenu ol li.active li a,
-#usermenu ol li:hover ul li a,
-#usermenu ol ul li.active span,
+#menu-user ol ul li a,
+#menu-user ol li.active li a,
+#menu-user ol li:hover ul li a,
+#menu-user ol ul li.active span,
 #handler ul ul li a,
 #handler ul li.active li a,
 #handler ul li:hover ul li a,
@@ -1590,7 +1590,7 @@ table.formation td {
 }
 
 /* make the sub menus appear on hover */
-#usermenu ol li:hover ul,
+#menu-user ol li:hover ul,
 #handler ul li:hover ul {
 	display: block; /* Show the sub menus */
 	z-index: 20;

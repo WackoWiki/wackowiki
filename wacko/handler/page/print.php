@@ -73,7 +73,7 @@ if ($this->has_access('read'))
 				// display comments header
 				echo "<br /><br />";
 				echo "<div id=\"commentsfiles\">";
-				echo "<div class=\"commentsheader\">";
+				echo "<div class=\"header-comments\">";
 				echo $this->get_translation('Comments_all');
 				echo "</div>\n";
 

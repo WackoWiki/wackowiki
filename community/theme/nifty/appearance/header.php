@@ -103,7 +103,7 @@ if ($doubleclick == true)
 				// outputs bookmarks aka menu items
 				// there are default bookmarks and user bookmarks
 				// you can use them independetly or within one list
-					echo "<div id=\"usermenu\">\n\t\t\t\t\t";
+					echo "<div id=\"menu-user\">\n\t\t\t\t\t";
 					echo "<ul><li class=\"sublist\">";
 
 							// compose link with icon to bookmarks list

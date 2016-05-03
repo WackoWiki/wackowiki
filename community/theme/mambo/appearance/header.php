@@ -44,7 +44,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 						<div class="modulecontent">
 <?php
 // outputs bookmarks menu
-	echo '<div id="usermenu">';
+	echo '<div id="menu-user">';
 	echo "<ol>\n";
 	// main page
 	echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";

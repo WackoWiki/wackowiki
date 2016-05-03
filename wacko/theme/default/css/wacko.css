@@ -72,12 +72,38 @@ h6 { font-family: Arial;   font-size: 12px; }
 .revisioninfo {
 	color: #AAAAAA;
 	padding-bottom: 20px;
+	background: #f4fbff none repeat scroll 0 0;
+    border: 1px solid #d5d9e6;
+    color: #cc3333;
+    font-weight: bold;
+	background-image: url(./../icon/revisions.svg);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	position: relative;
+}
+
+.revision-count {
+	display: inline-block;
+	width:40px;
+}
+
+.revision-id {
+	display: inline-block;
+	width:80px;
 }
 
 /* Displays text: "Comparison for..." */
 .diffinfo {
 	font-weight: bold;
 	color: #555555; 
+	padding: 0 0 0 16px;
+	background-image: url(./../icon/diff2.svg);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	/* background-size: 24px 24px; */
 }
 
 /* Simple differences */

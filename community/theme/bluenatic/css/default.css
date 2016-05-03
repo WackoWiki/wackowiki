@@ -365,7 +365,7 @@ width:0;
 /** File and comment-related *************************************************/
 
 /* Headers (always visible) */
-#commentsheader, #filesheader {
+#header-comments, #header-files {
 	background-color:	#ddd;
 	/*border-top:		solid 1px #bbb;*/
 	border-bottom:		none;
@@ -425,7 +425,7 @@ width:0;
 	/*-moz-border-radius:	3px;		/* Mozilla, Firefox only */
 }
 /* Hyperlinks in header: "Show comments(files)/form" */
-#filesheader a, #commentsheader a {
+#header-files a, #header-comments a {
 	background-color:	transparent;
 	color:			#000;
 }

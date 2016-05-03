@@ -32,7 +32,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 }
 
 // pagination
-$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#commentsheader');
+$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#header-comments');
 
 // comments form output begins
 if ($this->has_access('read'))
@@ -93,7 +93,7 @@ if ($this->has_access('read'))
 		}
 
 		// display comments header
-		echo '<div id="commentsheader">';
+		echo '<div id="header-comments">';
 
 		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
 
@@ -317,8 +317,8 @@ if ($this->has_access('read'))
 		// show link to show comment only if there is one or/and user has the right to add a new one
 		if (!empty($show_comments))
 		{
-			echo '<div id="commentsheader">';
-			echo '<a href="'.$this->href('', '', 'show_comments=1#commentsheader').'" title="'.$this->get_translation('ShowComments').'">'.$show_comments.'</a>';
+			echo '<div id="header-comments">';
+			echo '<a href="'.$this->href('', '', 'show_comments=1#header-comments').'" title="'.$this->get_translation('ShowComments').'">'.$show_comments.'</a>';
 			echo '</div>'."\n";
 		}
 		else

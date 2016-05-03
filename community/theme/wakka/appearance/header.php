@@ -38,7 +38,7 @@ else
 <div id="navigation">
 <?php
 // Outputs Bookmarks AKA QuickLinks
-	echo '<div id="usermenu">';
+	echo '<div id="menu-user">';
 	echo "<ol>\n";
 	// Main page
 	echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
