@@ -783,111 +783,111 @@ a:target {
 	background-size: 22px 22px;
 }
 .toolbar li.we-h1 img {
-	background-image:url("../../../image/wikiedit/h1.svg");
+	background-image: url("../../../image/wikiedit/h1.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-h2 img {
-	background-image:url("../../../image/wikiedit/h2.svg");
+	background-image: url("../../../image/wikiedit/h2.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-h3 img {
-	background-image:url("../../../image/wikiedit/h3.svg");
+	background-image: url("../../../image/wikiedit/h3.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-h4 img {
-	background-image:url("../../../image/wikiedit/h4.svg");
+	background-image: url("../../../image/wikiedit/h4.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-h5 img {
-	background-image:url("../../../image/wikiedit/h5.svg");
+	background-image: url("../../../image/wikiedit/h5.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-h6 img {
-	background-image:url("../../../image/wikiedit/h6.svg");
+	background-image: url("../../../image/wikiedit/h6.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-bold img {
-	background-image:url("../../../image/wikiedit/bold.svg");
+	background-image: url("../../../image/wikiedit/bold.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-italic img {
-	background-image:url("../../../image/wikiedit/italic.svg");
+	background-image: url("../../../image/wikiedit/italic.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-underline img {
-	background-image:url("../../../image/wikiedit/underline.svg");
+	background-image: url("../../../image/wikiedit/underline.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-strike img {
-	background-image:url("../../../image/wikiedit/strike.svg");
+	background-image: url("../../../image/wikiedit/strike.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-ul img {
-	background-image:url("../../../image/wikiedit/ul.svg");
+	background-image: url("../../../image/wikiedit/ul.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-ol img {
-	background-image:url("../../../image/wikiedit/ol.svg");
+	background-image: url("../../../image/wikiedit/ol.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-center img {
-	background-image:url("../../../image/wikiedit/center.svg");
+	background-image: url("../../../image/wikiedit/center.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-justify img {
-	background-image:url("../../../image/wikiedit/justify.svg");
+	background-image: url("../../../image/wikiedit/justify.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-right img {
-	background-image:url("../../../image/wikiedit/right.svg");
+	background-image: url("../../../image/wikiedit/right.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-outdent img {
-	background-image:url("../../../image/wikiedit/outdent.svg");
+	background-image: url("../../../image/wikiedit/outdent.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-indent img {
-	background-image:url("../../../image/wikiedit/indent.svg");
+	background-image: url("../../../image/wikiedit/indent.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-hr img {
-	background-image:url("../../../image/wikiedit/hr.svg");
+	background-image: url("../../../image/wikiedit/hr.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-signature img {
-	background-image:url("../../../image/wikiedit/signature.svg");
+	background-image: url("../../../image/wikiedit/signature.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-quote img {
-	background-image:url("../../../image/wikiedit/quote.svg");
+	background-image: url("../../../image/wikiedit/quote.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-source img {
-	background-image:url("../../../image/wikiedit/source.svg");
+	background-image: url("../../../image/wikiedit/source.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-code img {
-	background-image:url("../../../image/wikiedit/code.svg");
+	background-image: url("../../../image/wikiedit/code.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-createlink img {
-	background-image:url("../../../image/wikiedit/link.svg");
+	background-image: url("../../../image/wikiedit/link.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-createtable img {
-	background-image:url("../../../image/wikiedit/table.svg");
+	background-image: url("../../../image/wikiedit/table.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-textred img {
-	background-image:url("../../../image/wikiedit/textcolor.svg");
+	background-image: url("../../../image/wikiedit/textcolor.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-highlightcolor img {
-	background-image:url("../../../image/wikiedit/highlightcolor.svg");
+	background-image: url("../../../image/wikiedit/highlightcolor.svg");
 	background-repeat: no-repeat;
 }
 .toolbar li.we-help img {
-	background-image:url("../../../image/wikiedit/help.svg");
+	background-image: url("../../../image/wikiedit/help.svg");
 	background-repeat: no-repeat;
 }
 
@@ -1335,18 +1335,18 @@ th.form_left {
 
 .menu
 {
-	list-style:none outside none;
-	float:right;
-	margin:0;
-	padding:0;
+	list-style: none outside none;
+	float: right;
+	margin: 0;
+	padding: 0;
 }
 .menu li {
-	border-left:1px dotted #CCCCCC;
-	float:left;
-	line-height:1.2em;
-	margin:0 0.5em 0 -0.5em;
-	padding:0 0.5em;
-	white-space:nowrap;
+	border-left: 1px dotted #CCCCCC;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 0.5em 0 -0.5em;
+	padding: 0 0.5em;
+	white-space: nowrap;
 }
 
 .menu li.active {
@@ -1474,28 +1474,28 @@ table.formation td {
 
 #handler {
 	/* clear:both; */
-	float:right;
-	margin:0 auto;
-	text-align:left;
-	z-index:1000;
-	position:relative;
+	float: right;
+	margin: 0 auto;
+	text-align: left;
+	z-index: 1000;
+	position: relative;
 }
 #handler ul {
-	list-style:none outside none;
-	float:right;
-	position:relative;
-	margin:0;
-	padding:0;
+	list-style: none outside none;
+	float: right;
+	position: relative;
+	margin: 0;
+	padding: 0;
 }
 
 #menu-user ol li,
 #handler ul li {
-	display:block;
-	float:left;
-	position:relative;
-	margin:0;
-	padding:1px 0.5em 4px;
-	white-space:nowrap;
+	display: block;
+	float: left;
+	position: relative;
+	margin: 0;
+	padding: 1px 0.5em 4px;
+	white-space: nowrap;
 }
 
 #menu-user ol li a,
@@ -1513,16 +1513,16 @@ table.formation td {
 
 #handler li.active {
 	border-color: #AAAAAA;
-	border-style:solid;
-	border-width:1px 1px 0;
+	border-style: solid;
+	border-width: 1px 1px 0;
 	background-color: #FCFCFC;
 }
 
 #handler ul ul li.active {
 	border-top-color: #AAAAAA;
 	border-left-color: #AAAAAA;
-	border-style:solid;
-	border-width:1px 1px 0;
+	border-style: solid;
+	border-width: 1px 1px 0;
 	border-right-color: #CCCCCC;
 	border-bottom-color: #CCCCCC;
 	background-color: #FCFCFC;
@@ -1531,17 +1531,17 @@ table.formation td {
 /* submenu items */
 #menu-user ol ul, 
 #handler ul ul {
-	display:none; /* Sub menus are hidden by default */
-	position:absolute;
-	/* top:0em; */
+	display: none; /* Sub menus are hidden by default */
+	position: absolute;
+	/* top: 0em; */
 	background: none repeat scroll 0 0 white;
 	padding-top: 4px !important;
 	left: -1px;
-	right:auto;
-	width:auto;
+	right: auto;
+	width: auto;
 	border-color: #CCCCCC;
-	border-style:solid;
-	border-width:0 1px 1px;
+	border-style: solid;
+	border-width: 0 1px 1px;
 
 }
 #menu-user ol ul a,
@@ -1561,12 +1561,24 @@ table.formation td {
 	clear:left;
 	width:100%;
 	margin: 0;
-	padding: 0;
+	padding: 0 20px 0 0;
 	/* background: none repeat scroll 0 0 white; */
 	white-space: nowrap;
 	vertical-align: baseline;
-
 }
+
+#menu-user ol ul li.active,
+#handler ul ul li.active {
+	padding: 0;
+}
+
+/* #menu-user ol li.active li a:active,
+#menu-user ol li:hover ul li a:active,
+#handler ul li.active li a:active,
+#handler ul li:hover ul li a:active {
+	padding: 0.25em 0em 0.2em 0.5em ;
+} */
+
 #menu-user ol ul li a,
 #menu-user ol li.active li a,
 #menu-user ol li:hover ul li a,
@@ -1582,7 +1594,7 @@ table.formation td {
 	line-height: 1.4em;
 	width: 100%;
 	margin: 0;
-	padding: 0.25em 0.5em 0.2em;
+	padding: 0.25em 20px 0.2em 0.5em;
 }
 
 #handler ul ul li.active {
@@ -1608,9 +1620,9 @@ table.formation td {
 #handler img,
 #handler a img,
 #handler span img {
-	border:medium none;
-	height:16px;
-	width:16px;
+	border: medium none;
+	height: 16px;
+	width: 16px;
 }
 
 .page_handler img {
@@ -1618,32 +1630,32 @@ table.formation td {
 }
 
 li.m-new img {
-	background-image:url("./../icon/page-add.svg");
+	background-image: url("./../icon/page-add.svg");
 	background-repeat: no-repeat;
 }
 li.m-categories img {
-	background-image:url("./../icon/tag.svg");
+	background-image: url("./../icon/tag.svg");
 	background-repeat: no-repeat;
 }
 li.m-upload img {
-	background-image:url("./../icon/attachment.svg");
+	background-image: url("./../icon/attachment.svg");
 	background-repeat: no-repeat;
 }
 li.m-clone img {
-	background-image:url("./../icon/copy.svg");
+	background-image: url("./../icon/copy.svg");
 	background-repeat: no-repeat;
 }
 li.m-edit img {
-	background-image:url("./../icon/edit.svg");
+	background-image: url("./../icon/edit.svg");
 	background-repeat: no-repeat;
 	/* background-size:10px 10px; */
 }
 li.m-referrers img {
-	background-image:url("./../icon/link.svg");
+	background-image: url("./../icon/link.svg");
 	background-repeat: no-repeat;
 }
 li.m-revisions img {
-	background-image:url("./../icon/revisions.svg");
+	background-image: url("./../icon/revisions.svg");
 	background-repeat: no-repeat;
 }
 li.m-remove img {
@@ -1651,7 +1663,7 @@ li.m-remove img {
 	background-repeat: no-repeat;
 }
 li.m-purge img {
-	background-image: url("./../icon/delete.svg");
+	background-image: url("./../icon/purge.svg");
 	background-repeat: no-repeat;
 }
 li.m-rename img {
@@ -1663,46 +1675,46 @@ li.m-moderate img {
 	background-repeat: no-repeat;
 }
 li.m-properties img {
-	background-image:url("./../icon/properties.svg");
+	background-image: url("./../icon/properties.svg");
 	background-repeat: no-repeat;
 }
 li.m-permissions img {
-	background-image:url("./../icon/permission.svg");
+	background-image: url("./../icon/permission.svg");
 	background-repeat: no-repeat;
 }
 li.m-show img {
-	background-image:url("./../icon/show.svg");
+	background-image: url("./../icon/show.svg");
 	background-repeat: no-repeat;
 }
 li.m-moderate img {
-	background-image:url("./../icon/comment.svg");
+	background-image: url("./../icon/comment.svg");
 	background-repeat: no-repeat;
 }
 li.m-print img {
-	background-image:url("./../icon/print.svg");
+	background-image: url("./../icon/print.svg");
 	background-repeat: no-repeat;
 }
 li.m-xml img {
-	background-image:url("./../icon/xml.svg");
+	background-image: url("./../icon/xml.svg");
 	background-repeat: no-repeat;
 }
 li.m-word img {
-	background-image:url("./../icon/document.svg");
+	background-image: url("./../icon/document.svg");
 	background-repeat: no-repeat;
 }
 
 .desc_rss_feed {
-	float:right;
-	margin-right:20px;
+	float: right;
+	margin-right: 20px;
 }
 
 .review1 img,
 .review2 img,
 .watch-off img,
 .watch-on img {
-	border:medium none;
-	height:16px;
-	width:16px;
+	border: medium none;
+	height: 16px;
+	width: 16px;
 }
 .watch-off img {
 	background-image: url("./../icon/watch-off.svg");
@@ -1836,21 +1848,21 @@ li.m-word img {
 }
 
 .viewed {
-	font-weight:600;
+	font-weight: 600;
 }
 
 .setcategory {
-	border:1px solid #9495A2;
+	border: 1px solid #9495A2;
 /* 	font-size:11px; */
-	height:250px;
-	margin-bottom:27px;
-	overflow:auto;
-	width:auto;
+	height: 250px;
+	margin-bottom: 27px;
+	overflow: auto;
+	width: auto;
 }
 
 .list_count {
-	text-align:right; 
-	width:30px; 
+	text-align: right; 
+	width: 30px; 
 	float: left; 
 	padding-right: 10px
 }
@@ -1858,10 +1870,10 @@ li.m-word img {
 .userprofil {
 	color: #444444;
 	font-weight: bold;
-	width:100px;
-	white-space:nowrap;
+	width: 100px;
+	white-space: nowrap;
 	vertical-align: top;
-	padding-right:20px;
+	padding-right: 20px;
 }
 
 ul.upload,
@@ -1962,7 +1974,7 @@ table.forum td {
 
 /* category handles ------------- */
 .hide_radio input[type="radio"] {
-	visibility:hidden;
+	visibility: hidden;
 	/* display: none; */
 }
 

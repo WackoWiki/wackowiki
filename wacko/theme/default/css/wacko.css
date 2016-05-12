@@ -73,9 +73,9 @@ h6 { font-family: Arial;   font-size: 12px; }
 	color: #AAAAAA;
 	padding-bottom: 20px;
 	background: #f4fbff none repeat scroll 0 0;
-    border: 1px solid #d5d9e6;
-    color: #cc3333;
-    font-weight: bold;
+	border: 1px solid #d5d9e6;
+	color: #cc3333;
+	font-weight: bold;
 	background-image: url(./../icon/revisions.svg);
 	background-repeat: no-repeat;
 	background-attachment: scroll;
@@ -87,12 +87,12 @@ h6 { font-family: Arial;   font-size: 12px; }
 
 .revision-count {
 	display: inline-block;
-	width:40px;
+	width: 40px;
 }
 
 .revision-id {
 	display: inline-block;
-	width:80px;
+	width: 80px;
 }
 
 /* Displays text: "Comparison for..." */
@@ -121,13 +121,13 @@ h6 { font-family: Arial;   font-size: 12px; }
 /* Default differences */
 ins.diff {
 	font-weight: bold;
-	color:#008800;
+	color: #008800;
 	text-decoration: underline;
 	background-color: #efe;
 }
 del.diff {
 	font-style: italic;
-	color:#c00;
+	color: #c00;
 	text-decoration: line-through;
 	background-color: #fee;
 }
@@ -192,7 +192,7 @@ del.diff {
 	table-layout: fixed;
 }
 .dtable td { 
-	vertical-align:top;
+	vertical-align: top;
 	border-width: 0px;
 	border-color: #999999;
 	border-style: none;
