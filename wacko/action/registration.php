@@ -269,6 +269,9 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"typografica		= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
 						"user_lang			= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
 						"theme				= '".quote($this->dblink, $this->config['theme'])."', ".
+						"notify_minor_edit	= '".(int)$this->config['notify_minor_edit']."', ".
+						"notify_page		= '".(int)$this->config['notify_page']."', ".
+						"notify_comment		= '".(int)$this->config['notify_comment']."', ".
 						"sorting_comments	= '".(int)$this->config['sorting_comments']."', ".
 						"send_watchmail		= '".quote($this->dblink, 1)."'");
 
