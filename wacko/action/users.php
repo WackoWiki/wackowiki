@@ -554,8 +554,8 @@ else
 		"FROM {$this->config['user_table']} ".
 		($where == true ? $where : '').
 		($where ? 'AND ' : "WHERE ").
-			"u.account_type = '0' ".
-			"AND u.enabled = '1' ");
+			"account_type = '0' ".
+			"AND enabled = '1' ");
 
 	$pagination = $this->pagination($count['n'], $limit, 'p', $param);
 
