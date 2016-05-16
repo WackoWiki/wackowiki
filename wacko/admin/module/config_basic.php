@@ -503,7 +503,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="noindex"><strong>Block search engines:</strong><br />
-					<small>I would like to block search engines, but allow normal visitors</small></label></td>
+					<small>I would like to block search engines, but allow normal visitors. Overrides page settings.</small></label></td>
 				<td><input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ( $engine->config['noindex'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
