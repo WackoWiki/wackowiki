@@ -160,6 +160,9 @@ function admin_user_users(&$engine, &$module)
 					"typografica		= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
 					"user_lang			= '".quote($engine->dblink, ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']))."', ".
 					"theme				= '".quote($engine->dblink, $engine->config['theme'])."', ".
+					"notify_minor_edit	= '".(int)$engine->config['notify_minor_edit']."', ".
+					"notify_page		= '".(int)$engine->config['notify_page']."', ".
+					"notify_comment		= '".(int)$engine->config['notify_comment']."', ".
 					"sorting_comments	= '".(int)$engine->config['sorting_comments']."', ".
 					"send_watchmail		= '1'");
 
