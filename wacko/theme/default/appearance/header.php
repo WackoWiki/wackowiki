@@ -62,10 +62,19 @@ else
 	// menu
 	if ($menu)
 	{
+		$i			= 1;
 		$fmi		= array(); // formatted_menu_item
 		$level		= 'menu';
-		$max_items	= 5;
-		$i			= 1;
+
+		if ($user = $this->get_user())
+		{
+			$max_items	= $user['menu_items']; // TODO: add max_menu_items to global and user settings
+		}
+		else
+		{
+			$max_items	= $this->config['menu_items'];
+		}
+
 
 		foreach ($menu as $menu_item)
 		{
@@ -95,7 +104,10 @@ else
 			$i++;
 		}
 
-		echo $fmi['menu'];
+		if (isset($fmi['menu']))
+		{
+			echo $fmi['menu'];
+		}
 
 		if (isset($fmi['submenu']))
 		{

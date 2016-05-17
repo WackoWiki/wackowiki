@@ -68,7 +68,7 @@ $wacko_config_defaults = array(
 	'enable_email_notification'	=> 1,
 
 	'notify_minor_edit'			=> 1,
-	'notify_page'				=> 1,
+	'notify_page'				=> 2,
 	'notify_comment'			=> 1,
 	'notify_new_user_account'	=> 1,
 
@@ -198,6 +198,7 @@ $wacko_config_defaults = array(
 	'forum_cluster'				=> 'Forum',
 	'forum_topics'				=> 10,
 	'comments_count'			=> 10,
+	'menu_items'				=> 5,
 
 	'news_cluster'				=> '',
 	'news_levels'				=> '',

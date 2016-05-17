@@ -58,6 +58,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['hide_toc']					= (int)$_POST['hide_toc'];
 		$config['hide_index']				= (int)$_POST['hide_index'];
 		$config['tree_level']				= (int)$_POST['tree_level'];
+		$config['menu_items']				= (int)$_POST['menu_items'];
 		$config['edit_summary']				= (int)$_POST['edit_summary'];
 		$config['minor_edit']				= (int)$_POST['minor_edit'];
 		$config['review']					= (int)$_POST['review'];
@@ -209,7 +210,8 @@ function admin_config_basic(&$engine, &$module)
 <?php
 					if ($engine->config['multilanguage'])
 					{
-						$langs = $engine->available_languages($subset = false);
+						// subset: false
+						$langs = $engine->available_languages(false);
 					}
 					else
 					{
@@ -373,6 +375,14 @@ function admin_config_basic(&$engine, &$module)
 					<input type="radio" id="lower_index" name="tree_level" value="1"<?php echo ( $engine->config['tree_level'] == 1 ? ' checked="checked"' : '' );?> /><label for="lower_index">Lower</label>
 					<input type="radio" id="upper_index" name="tree_level" value="2"<?php echo ( $engine->config['tree_level'] == 2 ? ' checked="checked"' : '' );?> /><label for="upper_index">Upper</label>
 				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="menu_items"><strong>Menu items:</strong><br />
+					<small>Default number of shown menu items (may need support in the templates).</small></label></td>
+				<td><input type="number" min="0" max="20" maxlength="4" style="width:200px;" id="menu_items" name="menu_items" value="<?php echo htmlspecialchars($engine->config['menu_items'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

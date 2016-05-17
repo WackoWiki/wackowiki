@@ -403,6 +403,7 @@ $wacko_translation = array(
 	'UserName'					=> 'User name',
 	'EmailAddress'				=> 'Il tuo indirizzo email',
 	'RealName'					=> 'Real name',
+	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Record per pagina',
 	'ShowComments?'				=> 'Mostra commenti di default',
 	'DoubleclickEditing'		=> 'Edita col doppio clic',

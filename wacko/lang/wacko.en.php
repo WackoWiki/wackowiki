@@ -402,6 +402,7 @@ $wacko_translation = array(
 	'UserName'					=> 'User name',
 	'EmailAddress'				=> 'Email address',
 	'RealName'					=> 'Real name',
+	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Records per page',
 	'ShowComments?'				=> 'Show comments by default',
 	'DoubleclickEditing'		=> 'Doubleclick Editing',
@@ -1109,6 +1110,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Unknown action',

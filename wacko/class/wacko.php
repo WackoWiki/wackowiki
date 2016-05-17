@@ -3140,7 +3140,7 @@ class Wacko
 	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINKS table).
 	* Optional, default is TRUE
 	* @param boolean $safe If false, then sanitize $text, else no.
-	* @param unknown_type $link_lang
+	* @param string $link_lang
 	* @param string $anchor_link Optional HTTP anchor-fragment
 	* @return string full Href link
 	*/
@@ -3148,10 +3148,10 @@ class Wacko
 	{
 		$class		= '';
 		$icon		= '';
+		$img_link	= false;
 		$lang		= '';
 		$matches	= array();
 		$url		= '';
-		$img_link	= false;
 		$text		= str_replace('"', '&quot;', $text);
 
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
@@ -4763,7 +4763,7 @@ class Wacko
 	 */
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
-		$fields_setting	= 's.doubleclick_edit, s.show_comments, s.list_count, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
+		$fields_setting	= 's.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
 		$fields_default	= 'u.*, '.$fields_setting;
 		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, '.$fields_setting;
 
