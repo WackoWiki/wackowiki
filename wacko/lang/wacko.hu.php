@@ -404,6 +404,7 @@ $wacko_translation = array(
 	'UserName'					=> 'User name',
 	'EmailAddress'				=> 'Email address',
 	'RealName'					=> 'Real name',
+	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Records per page',
 	'ShowComments?'				=> 'Show comments by default',
 	'DoubleclickEditing'		=> 'Doubleclick Editing',

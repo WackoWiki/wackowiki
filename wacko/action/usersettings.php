@@ -142,6 +142,7 @@ else if ($user = $this->get_user())
 			"timezone			= '".(float)$_POST['timezone']."', ".
 			"dst				= '".(int)$_POST['dst']."', ".
 			"sorting_comments	= '".(int)$_POST['sorting_comments']."', ".
+			"menu_items			= '".(int)$_POST['menu_items']."', ".
 			"list_count			= '".(int)$_POST['list_count']."' " ;
 		}
 
@@ -639,6 +640,10 @@ else if ($user = $this->get_user())
 				<option value="1" <?php echo ( $user['sorting_comments']  == 1  ? ' selected="selected"' : '' ).'>'.$this->get_translation('SortCommentDesc');?></option>
 			</select>
 		</td>
+	</tr>
+	<tr class="lined">
+		<th class="form_left" scope="row"><label for="menu_items"><?php echo $this->get_translation('MenuItemsShown');?></label></th>
+		<td class="form_right"><input type="number" id="menu_items" name="menu_items" value="<?php echo $user['menu_items'] ?>" size="40" min="0" max="20" /></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row">

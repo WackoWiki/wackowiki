@@ -116,6 +116,7 @@ $alter_user_setting_r5_4_4 = "ALTER TABLE {$pref}user_setting CHANGE lang user_l
 $alter_user_setting_r5_4_5 = "ALTER TABLE {$pref}user_setting ADD notify_minor_edit TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER numerate_links";
 $alter_user_setting_r5_4_6 = "ALTER TABLE {$pref}user_setting ADD notify_page TINYINT(1) UNSIGNED NOT NULL DEFAULT '2' AFTER notify_minor_edit";
 $alter_user_setting_r5_4_7 = "ALTER TABLE {$pref}user_setting ADD notify_comment TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER notify_page";
+$alter_user_setting_r5_4_8 = "ALTER TABLE {$pref}user_setting ADD menu_items INT(2) UNSIGNED NOT NULL DEFAULT '5' AFTER list_count";
 
 // USERGROUP
 $alter_usergroup_r5_4_0 = "ALTER TABLE {$pref}usergroup CHANGE moderator moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0'";

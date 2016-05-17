@@ -172,6 +172,8 @@ $upgrade['5.5.beta'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_
 $upgrade['5.5.beta'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_6,	$lang['ErrorAlteringTable']);
 $upgrade['5.5.beta'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_7,	$lang['ErrorAlteringTable']);
 
+$upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'user_setting',	$alter_user_setting_r5_4_8,	$lang['ErrorAlteringTable']);
+
 // Make sure these are in order!
 $upgrade['5.4.0'][]		= array($lang['UpdateTable'],	'user',			$update_user_r5_4_0,		$lang['ErrorUpdatingTable']);
 

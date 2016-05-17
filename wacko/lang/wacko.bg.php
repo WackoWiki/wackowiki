@@ -401,6 +401,7 @@ $wacko_translation = array(
 	'UserName'					=> 'User name',
 	'EmailAddress'				=> 'Адрес на електонната поща',
 	'RealName'					=> 'Real name',
+	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Записи на страница',
 	'ShowComments?'				=> 'Покажи коментариите по подразбиране',
 	'DoubleclickEditing'		=> 'Редактирание с двоен клик на мишката',

@@ -110,6 +110,7 @@ $config_db['maint_last_refs']				= NULL; // $config['maint_last_refs'];
 $config_db['maint_last_session']			= NULL; // $config['maint_last_session'];
 $config_db['maint_last_xml_sitemap']		= NULL; // $config['maint_last_xml_sitemap'];
 $config_db['max_login_attempts']			= $config['max_login_attempts'];
+$config_db['menu_items']					= $config['menu_items'];
 $config_db['meta_description']				= $config['meta_description'];
 $config_db['meta_keywords']					= $config['meta_keywords'];
 $config_db['minor_edit']					= $config['minor_edit'];
