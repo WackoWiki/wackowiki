@@ -491,6 +491,9 @@ $wacko_translation = array(
 	'NotifyAlways'				=> 'Immer',
 	'NotifyPending'				=> 'Ausstehend',
 	'NotifyDigest'				=> 'Sammeln',
+	'NotifyPendingPageTip'		=> 'Only one notification is sent for the first page change of a page you are watching.',
+	'NotifyPendingCommentTip'	=> 'Only one notification is sent for the first comment to a page you are watching.',
+	'NotifyPendingTip'			=> 'Notification is automatically re-enabled when you visit the current version of the page.',
 
 	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
 
