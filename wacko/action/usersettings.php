@@ -266,7 +266,7 @@ else if ($user = $this->get_user())
 		<?php
 				echo '<input type="radio" id="notify_page0" name="notify_page" value="0" '.( $user['notify_page'] == 0 ? 'checked="checked"' : '' ).'/><label for="notify_page0">'.$this->get_translation('NotifyOff').'</label>';
 				echo '<input type="radio" id="notify_page1" name="notify_page" value="1" '.( $user['notify_page'] == 1 ? 'checked="checked"' : '' ).'/><label for="notify_page1">'.$this->get_translation('NotifyAlways').'</label>';
-				echo '<input type="radio" id="notify_page2" name="notify_page" value="2" '.( $user['notify_page'] == 2 ? 'checked="checked"' : '' ).'/><label for="notify_page2">'.$this->get_translation('NotifyPending').'</label>';
+				echo '<input type="radio" id="notify_page2" name="notify_page" value="2" '.( $user['notify_page'] == 2 ? 'checked="checked"' : '' ).'/><label for="notify_page2" title="'.$this->get_translation('NotifyPendingPageTip').' '.$this->get_translation('NotifyPendingTip').'">'.$this->get_translation('NotifyPending').'</label>';
 				#echo '<input type="radio" id="notify_page3" name="notify_page" value="3" '.( $user['notify_page'] == 3 ? 'checked="checked"' : '' ).'/><label for="notify_page3">'.$this->get_translation('NotifyDigest').'</label>';
 		?>
 			</td>
@@ -279,7 +279,7 @@ else if ($user = $this->get_user())
 <?php
 				echo '<input type="radio" id="notify_comment0" name="notify_comment" value="0" '.( $user['notify_comment'] == 0 ? 'checked="checked"' : '' ).'/><label for="notify_comment0">'.$this->get_translation('NotifyOff').'</label>';
 				echo '<input type="radio" id="notify_comment1" name="notify_comment" value="1" '.( $user['notify_comment'] == 1 ? 'checked="checked"' : '' ).'/><label for="notify_comment1">'.$this->get_translation('NotifyAlways').'</label>';
-				echo '<input type="radio" id="notify_comment2" name="notify_comment" value="2" '.( $user['notify_comment'] == 2 ? 'checked="checked"' : '' ).'/><label for="notify_comment2">'.$this->get_translation('NotifyPending').'</label>';
+				echo '<input type="radio" id="notify_comment2" name="notify_comment" value="2" '.( $user['notify_comment'] == 2 ? 'checked="checked"' : '' ).'/><label for="notify_comment2" title="'.$this->get_translation('NotifyPendingCommentTip').' '.$this->get_translation('NotifyPendingTip').'">'.$this->get_translation('NotifyPending').'</label>';
 				#echo '<input type="radio" id="notify_comment3" name="notify_comment" value="3" '.( $user['notify_comment'] == 3 ? 'checked="checked"' : '' ).'/><label for="notify_comment3">'.$this->get_translation('NotifyDigest').'</label>';
 ?>
 			</td>
@@ -636,8 +636,8 @@ else if ($user = $this->get_user())
 		</th>
 		<td class="form_right">
 			<select id="sorting_comments" name="sorting_comments">
-				<option value="0" <?php echo ( $user['sorting_comments']  == 0  ? ' selected="selected"' : '' ).'>'.$this->get_translation('SortCommentAsc');?></option>
-				<option value="1" <?php echo ( $user['sorting_comments']  == 1  ? ' selected="selected"' : '' ).'>'.$this->get_translation('SortCommentDesc');?></option>
+				<option value="0" <?php echo ( $user['sorting_comments']  == 0  ? ' selected="selected"' : '' );?>><?php echo $this->get_translation('SortCommentAsc');?></option>
+				<option value="1" <?php echo ( $user['sorting_comments']  == 1  ? ' selected="selected"' : '' );?>><?php echo $this->get_translation('SortCommentDesc');?></option>
 			</select>
 		</td>
 	</tr>
