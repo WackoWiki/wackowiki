@@ -40,8 +40,10 @@ if (!function_exists('full_text_search'))
 
 		// load search results
 		$results = $wacko->load_all(
-			"SELECT a.page_id, a.title, a.tag, a.body, a.comment_on_id, a.page_lang, MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score ". //
+			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score, u.user_name, o.user_name as owner_name ". //
 			"FROM ".$wacko->config['table_prefix']."page a ".
+				"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
+				"LEFT JOIN ".$wacko->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
 			($for
 				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
@@ -72,7 +74,7 @@ if (!function_exists('tag_search'))
 {
 	function tag_search(&$wacko, $phrase, $for, $limit = 50)
 	{
-		$limit		= (int) $limit;
+		#$limit		= (int) $limit;
 		$pagination	= '';
 
 		$count_results = $wacko->load_all(
@@ -94,8 +96,10 @@ if (!function_exists('tag_search'))
 
 		// load search results
 		$results = $wacko->load_all(
-			"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.page_lang ".
+			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, u.user_name, o.user_name as owner_name ".
 			"FROM ".$wacko->config['table_prefix']."page a ".
+				"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
+				"LEFT JOIN ".$wacko->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
 			($for
 				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
@@ -258,7 +262,7 @@ if (!isset($for))		$for		= '';
 if (!isset($lang))		$lang		= '';
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
-if (!isset($max))		$max = null;
+if (!isset($max))		$max		= null;
 
 $user	= $this->get_user();
 $max	= $this->get_list_count($max);
@@ -335,7 +339,7 @@ if ($phrase)
 	{
 		if ($mode == 'topic')
 		{
-			$results = tag_search($this, $phrase, $for,$lang, (int)$max);
+			$results = tag_search($this, $phrase, $for, (int)$max, $lang);
 		}
 		else
 		{
@@ -364,7 +368,8 @@ if ($phrase)
 						if ($style == 'ul' || $style == 'ol')	$output .= "<li>";
 						if ($style == 'comma' && $i > 0)		$output .= ",\n";
 
-						$_lang = '';
+						$_lang		= '';
+						$preview	= '';
 
 
 
@@ -387,8 +392,13 @@ if ($phrase)
 							$preview	= $this->do_unicode_entities($preview, $_lang);
 						}
 
-						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>".' ('.$count.')';
-						$output .= $preview;
+						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>".' ('. ($mode != 'topic' ? $count : '').')';
+						$output .= '<br /><span style="color: #808080; line-height: 1.24; white-space: nowrap;">'.$this->get_time_formatted($page['modified']).' '.$page['user_name'].'</span>';
+
+						if ($mode != 'topic')
+						{
+							$output .= $preview;
+						}
 
 						// close item
 						if ($style == 'br')
@@ -422,15 +432,17 @@ if ($phrase)
 			echo $output;
 
 			// close list
-			if ($style == 'ul') echo "</ul>";
-			if ($style == 'ol') echo "</ol>";
-			if (!$nomark) echo "</div>";
+			if ($style == 'ul') echo "</ul>\n";
+			if ($style == 'ol') echo "</ol>\n";
+			if (!$nomark) echo "</div>\n";
 
 			// pagination
 			echo $show_pagination;
 		}
-		else
-		if (!$nomark) echo $this->get_translation('NoResultsFor').'"'.$phrase.'".';
+		else if (!$nomark)
+		{
+			echo $this->get_translation('NoResultsFor').'"'.$phrase.'".';
+		}
 	}
 	else
 	{
