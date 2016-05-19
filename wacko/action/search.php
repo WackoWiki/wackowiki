@@ -30,8 +30,8 @@ if (!function_exists('full_text_search'))
 					: "").
 				($deleted != 1
 					? ($for
-							? "AND (a.deleted <> '1' OR b.deleted <> '1')"
-							: "AND a.deleted <> '1'")
+							? "AND (a.deleted <> '1' OR b.deleted <> '1') "
+							: "AND a.deleted <> '1' ")
 					: "").
 				" )", true);
 
@@ -59,8 +59,8 @@ if (!function_exists('full_text_search'))
 					: "").
 				($deleted != 1
 					? ($for
-							? "AND (a.deleted <> '1' OR b.deleted <> '1')"
-							: "AND a.deleted <> '1'")
+							? "AND (a.deleted <> '1' OR b.deleted <> '1') "
+							: "AND a.deleted <> '1' ")
 					: "").
 				" ) ".
 			"ORDER BY score DESC ".
@@ -72,9 +72,9 @@ if (!function_exists('full_text_search'))
 
 if (!function_exists('tag_search'))
 {
-	function tag_search(&$wacko, $phrase, $for, $limit = 50)
+	function tag_search(&$wacko, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
 	{
-		#$limit		= (int) $limit;
+		$limit		= (int) $limit;
 		$pagination	= '';
 
 		$count_results = $wacko->load_all(
@@ -83,11 +83,19 @@ if (!function_exists('tag_search'))
 			($for
 				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
-			"WHERE lower(a.tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
-				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
+			"WHERE ( lower(a.tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
+				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
 			($for
 				? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
 					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
+				: "").
+			($filter
+				? "AND a.comment_on_id = '0' "
+				: "").
+			($deleted != 1
+				? ($for
+					? "AND (a.deleted <> '1' OR b.deleted <> '1') "
+					: "AND a.deleted <> '1' ")
 				: "")
 			, true);
 
@@ -103,12 +111,20 @@ if (!function_exists('tag_search'))
 			($for
 				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
-			"WHERE lower(a.tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
-				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
+			"WHERE (lower(a.tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
+				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
 			($for
 				? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
 					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
-					: "").
+				: "").
+			($filter
+				? "AND a.comment_on_id = '0' "
+				: "").
+			($deleted != 1
+				? ($for
+					? "AND (a.deleted <> '1' OR b.deleted <> '1') "
+					: "AND a.deleted <> '1' ")
+				: "").
 			"ORDER BY a.supertag ".
 			"LIMIT {$pagination['offset']}, $limit");
 
@@ -339,7 +355,7 @@ if ($phrase)
 	{
 		if ($mode == 'topic')
 		{
-			$results = tag_search($this, $phrase, $for, (int)$max, $lang);
+			$results = tag_search($this, $phrase, $for, (int)$max, ($filter == 'all' ? 0 : 1), $lang);
 		}
 		else
 		{
@@ -392,7 +408,7 @@ if ($phrase)
 							$preview	= $this->do_unicode_entities($preview, $_lang);
 						}
 
-						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>".' ('. ($mode != 'topic' ? $count : '').')';
+						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>". ($mode != 'topic' ? ' ('.$count.')' : '');
 						$output .= '<br /><span style="color: #808080; line-height: 1.24; white-space: nowrap;">'.$this->get_time_formatted($page['modified']).' '.$page['user_name'].'</span>';
 
 						if ($mode != 'topic')

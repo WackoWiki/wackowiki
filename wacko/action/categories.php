@@ -11,13 +11,13 @@ if (!defined('IN_WACKO'))
 // label -
 
 $path = $this->config['category_page'];
-if (!isset($list))		$list = 0;
-if (!isset($label))		$label = true;
-if (empty($path))		$path = 'Category';
-if (!isset($nomark))	$nomark = '';
+if (!isset($list))		$list		= 0;
+if (!isset($label))		$label		= true;
+if (empty($path))		$path		= 'Category';
+if (!isset($nomark))	$nomark		= '';
 
-$output	= '';
-$i		= '';
+$output		= '';
+$i			= '';
 
 if (isset($this->categories))
 {
@@ -75,6 +75,7 @@ if (!empty($_category))
 		echo "</div>\n";
 	}
 }
+
 # $this->debug_print_r($this->categories);
 
 ?>
