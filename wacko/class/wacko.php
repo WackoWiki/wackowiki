@@ -7739,7 +7739,7 @@ class Wacko
 	// TODO: option for _comments handler, forum action -> CSS small
 	function show_pagination($pagination = '')
 	{
-		if (isset($pagination))
+		if (!empty($pagination))
 		{
 			return '<nav class="pagination">'.$pagination."</nav>\n";
 		}
