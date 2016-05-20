@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This formattesr resolves links and executes actions.
+ * This formatter resolves links and executes actions.
  */
 
 class post_wacko
