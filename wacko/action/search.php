@@ -387,8 +387,6 @@ if ($phrase)
 						$_lang		= '';
 						$preview	= '';
 
-
-
 						// generate preview
 						if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
 						{
@@ -409,7 +407,7 @@ if ($phrase)
 						}
 
 						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>". ($mode != 'topic' ? ' ('.$count.')' : '');
-						$output .= '<br /><span style="color: #808080; line-height: 1.24; white-space: nowrap;">'.$this->get_time_formatted($page['modified']).' '.$page['user_name'].'</span>';
+						$output .= '<br /><span style="color: #808080; line-height: 1.24; white-space: nowrap;">'.$page['user_name'].' '.$this->get_time_formatted($page['modified']).'</span>';
 
 						if ($mode != 'topic')
 						{
@@ -448,9 +446,9 @@ if ($phrase)
 			echo $output;
 
 			// close list
-			if ($style == 'ul') echo "</ul>\n";
-			if ($style == 'ol') echo "</ol>\n";
-			if (!$nomark) echo "</div>\n";
+			if ($style == 'ul')		echo "</ul>\n";
+			if ($style == 'ol')		echo "</ol>\n";
+			if (!$nomark)			echo "</div>\n";
 
 			// pagination
 			echo $show_pagination;
