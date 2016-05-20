@@ -76,7 +76,7 @@ else
 		}
 
 
-		foreach ($menu as $menu_item)
+		foreach ((array)$menu as $menu_item)
 		{
 			if ($i > $max_items)
 			{

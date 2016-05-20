@@ -20,7 +20,7 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 }
 
 ?>
-<div id="pageedit">
+<div id="page-edit">
 <?php
 
 if ($this->has_access('read')

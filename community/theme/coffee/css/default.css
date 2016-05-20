@@ -45,7 +45,7 @@ span.small {font-size: 80%}
 #credits {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
-.commentinfo, #credits a { color: #AAAAAA; padding-bottom: 20px; }
+.comment-info, #credits a { color: #AAAAAA; padding-bottom: 20px; }
 /* Change summary */
 .editnote {
   color: #555555;
@@ -150,8 +150,8 @@ legend {font-weight: normal; padding: 0 5px;}
 
 .outerlink { color: #990000 }
 
-#pageedit { border-bottom: none; background: #FFFFFF }
-#pageedit form textarea {width: 100%;height: 400px; }
+#page-edit { border-bottom: none; background: #FFFFFF }
+#page-edit form textarea {width: 100%;height: 400px; }
 
 .print { font: 12px Trebuchet MS }
 

@@ -6,7 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 ?>
-<article id="showhandler" class="page" data-dbclick1="page">
+<article id="page-show" class="page" data-dbclick1="page">
+<section id="section-content">
 <?php
 
 if (!isset ($this->config['comments_count']))
@@ -174,7 +175,7 @@ if ($this->has_access('read'))
 		$this->set_language($this->user_lang);
 
 		// edit via double click
-		echo '<script>var dbclick = "page";</script>';
+		echo '<script>var dbclick = "page";</script>'."\n";
 	}
 }
 else
@@ -193,9 +194,9 @@ else
 		$this->show_message($message, 'hint');
 	}
 }
-?>
-</article>
-<?php
+
+// end section-content
+echo "</section>\n";
 
 // show category tags
 if ($this->forum === true
@@ -265,3 +266,4 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 }
 
 ?>
+</article>

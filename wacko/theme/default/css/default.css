@@ -183,6 +183,12 @@ form input.submitinput {
 	font-weight: bold;
 }
 
+.message {
+	overflow: hidden;
+	padding: 10px 20px;
+	width: 100%;
+}
+
 .info {
 	background: #F4FBFF;
 	margin: 10px;
@@ -263,7 +269,7 @@ form input.submitinput {
 
 header {
 	padding: 0px;
-	float: left;
+	/* float: left; */
 	width: 96%;
 }
 
@@ -321,23 +327,32 @@ main {
 }
 
 article,
-#page {
-	background-color: #FFFFFF;
-	padding: 5px 0px 20px 0px;
+#page-show,
+#page-edit
+{
 	float: left;
 	width: 100%;
+}
+
+#section-content,
+#page-edit,
+#page {
+	background-color: #FFFFFF;
 	min-height: 200px;
 }
 
-#pageedit {
-	background-color: #FFFFFF;
-	border-bottom: none;
-	padding: 5px 0px 20px;
-	float: left;
-	width: 100%;
+#section-content,
+#page {
+	padding: 5px 0px 20px 0px;
+	
 }
 
-#pageedit form textarea {
+#page-edit {
+	border-bottom: none;
+	padding: 5px 0px 20px;
+}
+
+#page-edit form textarea {
 	width: 100%;
 	height: 400px;
 }
@@ -424,7 +439,7 @@ footer {
 }
 
 /* Comment author and date */
-.commentinfo {
+.comment-info {
 	color: #AAAAAA;
 	padding-bottom: 20px;
 	float: right;
@@ -442,18 +457,18 @@ ol#comments {
 	padding: 0;
 }
 
-.commentinfo li {
+.comment-info li {
 	border: medium none;
 	margin: 0;
 	padding: 0;
 	width: 320px;
 }
 
-.commenttool,
-.commenttool a {
+.comment-tool,
+.comment-tool a {
 	color: #7f919e;
 }
-.commenttool li {
+.comment-tool li {
 	border: medium none;
 	margin: 0;
 	padding: 0;
@@ -472,17 +487,25 @@ ol#comments {
 	padding-right: 0;
 }
 
-.commenttext,
-.commenttool {
+.comment-text,
+.comment-tool {
 	float: left;
+	
+}
+
+.comment-text p {
 	width: 800px;
 }
 
-.commenttitle {
+.comment-title h2 {
+	font-size: 13px;
 	line-height: 22px;
 	font-weight: bold;
+	margin: 0px;
+	border: none;
 }
-.commentpreview {
+
+.comment-preview {
 	width: 800px;
 }
 

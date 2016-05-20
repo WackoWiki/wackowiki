@@ -1437,7 +1437,7 @@ class Wacko
 
 		$notexists = @array_values(@array_diff($spages, $exists));
 
-		foreach ($notexists as $notexist)
+		foreach ((array)$notexists as $notexist)
 		{
 			$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, 1);
 			#$this->cache_acl($this->get_page_id($notexist), 'read', 1, $acl);
@@ -6092,28 +6092,31 @@ class Wacko
 		{
 			$_menu_page_ids = $this->get_menu_links();
 
-			// writing menu item
-			if (!in_array($this->page['page_id'], $_menu_page_ids))
+			if (is_array($_menu_page_ids))
 			{
-				$menu[] = array(
-					$this->page['page_id'],
-					($this->get_page_title() ? $this->get_page_title() : $this->tag),
-					$this->format('(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['user_lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))', 'wacko')
-					);
+				// writing menu item
+				if (!in_array($this->page['page_id'], $_menu_page_ids))
+				{
+					$menu[] = array(
+						$this->page['page_id'],
+						($this->get_page_title() ? $this->get_page_title() : $this->tag),
+						$this->format('(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['user_lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))', 'wacko')
+						);
 
-				$_menu_position = $this->load_all(
-					"SELECT m.menu_id ".
-					"FROM ".$this->config['table_prefix']."menu m ".
-					"WHERE m.user_id = '".$user['user_id']."' ", false);
+					$_menu_position = $this->load_all(
+						"SELECT m.menu_id ".
+						"FROM ".$this->config['table_prefix']."menu m ".
+						"WHERE m.user_id = '".$user['user_id']."' ", false);
 
-				$_menu_item_count = count($_menu_position);
+					$_menu_item_count = count($_menu_position);
 
-				$this->sql_query(
-					"INSERT INTO ".$this->config['table_prefix']."menu SET ".
-					"user_id			= '".$user['user_id']."', ".
-					"page_id			= '".$this->page['page_id']."', ".
-					"menu_lang				= '".quote($this->dblink, ($user['user_lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
-					"menu_position		= '".(int)($_menu_item_count + 1)."'");
+					$this->sql_query(
+						"INSERT INTO ".$this->config['table_prefix']."menu SET ".
+						"user_id			= '".$user['user_id']."', ".
+						"page_id			= '".$this->page['page_id']."', ".
+						"menu_lang				= '".quote($this->dblink, ($user['user_lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
+						"menu_position		= '".(int)($_menu_item_count + 1)."'");
+				}
 			}
 
 			// parsing menu items into link table
@@ -6154,10 +6157,13 @@ class Wacko
 				"LIMIT 1");
 
 			// parsing menu items into link table
-			foreach ($menu as $menu_item)
+			foreach ((array)$menu as $menu_item)
 			{
-				$menu_page_ids[]	= $menu_item[0];
-				$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $menu_item[2]);
+				if (is_array($menu_item))
+				{
+					$menu_page_ids[]	= $menu_item[0];
+					$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $menu_item[2]);
+				}
 			}
 
 			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
