@@ -110,7 +110,7 @@ $wacko_config_defaults = array(
 	'revisions_hide_cancel'		=> 0,
 
 	'show_spaces'				=> 1,
-	'numerate_links'			=> 1,
+	'numerate_links'			=> 0,
 
 	'allow_x11colors'			=> 0,
 	'default_typografica'		=> 1,
@@ -170,7 +170,7 @@ $wacko_config_defaults = array(
 	'publish_anonymously'		=> 0,
 
 	'allow_registration'		=> 1,
-	'antidupe' => 0,
+	'antidupe'					=> 0,
 	'disable_autosubscribe'		=> 0,
 	'disable_wikiname'			=> 1,
 	'username_chars_min'		=> 3,

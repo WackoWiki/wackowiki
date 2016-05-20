@@ -26,7 +26,7 @@ function admin_config_formatter(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 	<p>
-			Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.
+		Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.
 	</p>
 	<br />
 <?php
@@ -55,6 +55,7 @@ function admin_config_formatter(&$engine, &$module)
 		$config['urls_underscores']			= (int)$_POST['urls_underscores'];
 		$config['show_spaces']				= (int)$_POST['show_spaces'];
 		$config['youarehere_text']			= (string)$_POST['youarehere_text'];
+		$config['numerate_links']			= (int)$_POST['numerate_links'];
 
 		$engine->_set_config($config, '', true);
 
@@ -269,6 +270,14 @@ function admin_config_formatter(&$engine, &$module)
 				<td class="label"><label for="enable_show_spaces"><strong>Show spaces in WikiNames:</strong><br />
 				<small>Show spaces in WikiNames, e.g. <code>MyName</code> beeing displayed as <code>My Name</code> with this option.</small></label></td>
 				<td><input type="checkbox" id="enable_show_spaces" name="show_spaces" value="1"<?php echo ( $engine->config['show_spaces'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="enable_numerate_links"><strong>Numerate links in print view:</strong><br />
+				<small>Numerates and lists all links at the bottom of the print view with this option.</small></label></td>
+				<td><input type="checkbox" id="enable_numerate_links" name="numerate_links" value="1"<?php echo ( $engine->config['numerate_links'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
