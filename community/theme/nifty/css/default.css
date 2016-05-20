@@ -1367,7 +1367,7 @@ background-repeat: no-repeat;
 
 /* page ----------------------------------------------------- page */
 
-#page, #pageedit {
+#page, #page-edit {
 	float: left;
 	width: 98%;
 	padding: 1%;
@@ -1411,7 +1411,7 @@ background-repeat: no-repeat;
 }
 
 /*
-#pageedit {
+#page-edit {
 	background-color: #FFFFFF;
 	border-bottom: none;
 	padding: 5px 10px 10px 10px;
@@ -1420,7 +1420,7 @@ background-repeat: no-repeat;
 }
 */
 
-#pageedit form textarea {
+#page-edit form textarea {
 	width: 100%;
 	height: 400px;
 }
@@ -1523,12 +1523,12 @@ ol#comments .comment {
 	padding: 10px 18px;
 }
 
-.commenttext {
+.comment-text {
 	/*float: left; */
 	/*width: 800px;*/
 }
 
-.commenttitle {
+.comment-title {
 	/*line-height: 22px;*/
 	font-weight: bold;
 	font-size: smaller;
@@ -1536,13 +1536,13 @@ ol#comments .comment {
 	margin-bottom: 3px;
 }
 
-.commenttitle a {
+.comment-title a {
 	padding-left: 3px;
 	}
 	
 /* Comment author and date */
 
-.commentinfo {
+.comment-info {
 	color: #AAAAAA;
 	padding-bottom: 20px;
 	/*float: right;*/
@@ -1555,7 +1555,7 @@ li.comment {
 	
 }
 
-.commentinfo li {
+.comment-info li {
 	border:medium none;
 	margin:0;
 	padding:0;
@@ -1564,11 +1564,11 @@ li.comment {
 	font-size: smaller;
 }
 
-.commentinfo li a {
+.comment-info li a {
 	border-top: 1px solid #CCCCCC;
 }
 
-.commentpreview {
+.comment-preview {
 	/*width: 800px;*/
 }
 

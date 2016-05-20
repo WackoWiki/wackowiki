@@ -39,11 +39,14 @@ if ($this->has_access('read'))
 	// display files!
 	if ($this->page && $_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']])
 	{
+		// display files section
+		echo '<section id="section-files">'."\n";
+
 		// display files header
 		?>
-	<div id="header-files">
-	<?php echo '<a href="'.$this->href('', '', 'show_files=0').'" title="'.$this->get_translation('HideFiles').'">'.$this->get_translation('Files_all').'</a>'; ?>
-	</div>
+		<header id="header-files">
+		<?php echo '<a href="'.$this->href('', '', 'show_files=0').'" title="'.$this->get_translation('HideFiles').'">'.$this->get_translation('Files_all').'</a>'; ?>
+		</header>
 
 		<?php
 		echo '<div class="files">'."\n";
@@ -62,6 +65,8 @@ if ($this->has_access('read'))
 			echo $this->action('upload', array('nomark' => 1));
 			echo '</div>'."\n";
 		}
+
+		echo "</section>\n";
 	}
 	else
 	{
@@ -101,9 +106,12 @@ if ($this->has_access('read'))
 		// show link to show files only if there is one or/and user has the right to add a new one
 		if (!empty($show_files))
 		{
-			echo '<div id="header-files">'."\n";
+			// display files section
+			echo '<section id="section-files">'."\n";
+			echo '<header id="header-files">'."\n";
 			echo '<a href="'.$this->href('', '', 'show_files=1#header-files').'" title="'.$this->get_translation('ShowFiles').'">'.$show_files.'</a>';
-			echo '</div>'."\n";
+			echo '</header>'."\n";
+			echo "</section>\n";
 		}
 		else
 		{

@@ -211,7 +211,7 @@ textarea {
 	padding: 0px;
 }
 
-#pageedit form textarea {
+#page-edit form textarea {
 	height: 400px;
 	width: 100%;
 }
@@ -590,7 +590,7 @@ p.layout-box span {
 	padding-right:20px;
 }
 
-.commenttitle {
+.comment-title {
 	border-bottom: 1px solid #BABFC7;
 	letter-spacing: 1px;
 }

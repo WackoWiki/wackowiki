@@ -92,8 +92,11 @@ if ($this->has_access('read'))
 			$this->set_user_setting('noid_protect', false);
 		}
 
+		// display comments section
+		echo '<section id="section-comments">'."\n";
+
 		// display comments header
-		echo '<div id="header-comments">';
+		echo '<header id="header-comments">'."\n";
 
 		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
 
@@ -101,7 +104,7 @@ if ($this->has_access('read'))
 		echo $show_pagination;
 
 		echo '<a href="'.$this->href('', '', 'show_comments=0').'" title="'.$this->get_translation('HideComments').'">'.$this->get_translation('Comments_all').'</a>';
-		echo "</div>\n";
+		echo "</header>\n";
 
 		// display comments themselves
 		if ($comments)
@@ -113,8 +116,12 @@ if ($this->has_access('read'))
 
 			foreach ($comments as $comment)
 			{
+				#$i ++;
 				echo '<li id="'.$comment['tag'].'" class="comment">'."\n";
-				$del = '';
+
+				// print comment
+				// header
+				echo '<article class="comment-text">'."\n";
 
 				// show remove comment button
 				if ($this->is_admin() ||
@@ -143,27 +150,31 @@ if ($this->has_access('read'))
 
 				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
 
-				// print comment
-				// header
-				echo '<div class="commenttext">'."\n";
-				echo '<div class="commenttitle">'."\n".'<a href="'.$this->href('', $comment['tag']).'">'.$comment['title']."</a>\n</div>\n";
-				echo $this->format($pre_body, 'post_wacko')."\n";
-				echo "</div>\n";
-				echo '<ul class="commentinfo">'."\n".
+
+				echo '<header class="comment-title">'."\n".
+						'<h2><a href="'.$this->href('', $comment['tag']).'">'.$comment['title']."</a></h2>\n".
+					 "</header>\n";
+
+				echo '<p>'.$this->format($pre_body, 'post_wacko')."</p>\n";
+
+				echo '<footer>'.
+						'<ul class="comment-info">'."\n".
 						"<li>".
 							$this->user_link($comment['owner_name']).
-						"</li>".
-						"<li>".$this->get_time_formatted($comment['created'])."</li>\n".
+						"</li>\n".
+						'<li><time datetime="'.$comment['created'].'">'.$this->get_time_formatted($comment['created'])."</time></li>\n".
 						($comment['modified'] != $comment['created']
-							? "<li>".$this->get_time_formatted($comment['modified'])." ".$this->get_translation('CommentEdited')."</li>\n"
+							? '<li><time datetime="'.$comment['modified'].'">'.$this->get_time_formatted($comment['modified'])."</time> ".$this->get_translation('CommentEdited')."</li>\n"
 							: '').
 						/*($user_stats == true
 							? "<li>".$this->get_translation('UsersComments').': '.$user_stats['comments'].'&nbsp;&nbsp; '.$this->get_translation('UsersPages').': '.$user_stats['pages'].'&nbsp;&nbsp; '.$this->get_translation('UsersRevisions').': '.$user_stats['revisions']."</li>\n"
 							: '').*/
-					"</ul>\n";
+					"</ul>\n".
+					"</footer>\n";
+				echo "</article>\n";
 
 				// comment footer
-				/* echo '<div class="commenttool">'."\n";
+				/* echo '<div class="comment-tool">'."\n";
 				echo '<ul class="" style="padding-left: 0px;">'."\n".
 						"".
 						'<li class="voting">
@@ -213,8 +224,8 @@ if ($this->has_access('read'))
 				$preview = $this->format($preview, 'post_wacko');
 
 				echo '<div id="preview" class="preview"><p class="preview"><span>'.$this->get_translation('EditPreviewSlim').'</span></p>'."\n".
-						 '<div class="commentpreview">'."\n".
-						 '<div class="commenttitle">'.$title."</div>\n".
+						 '<div class="comment-preview">'."\n".
+						 '<div class="comment-title">'.$title."</div>\n".
 						 $preview.
 						 "</div>\n</div><br />\n";
 			}
@@ -293,6 +304,8 @@ if ($this->has_access('read'))
 			echo "</div>\n";
 		}
 		// end comment form
+
+		echo "</section>\n";
 	}
 	else
 	{
@@ -317,9 +330,12 @@ if ($this->has_access('read'))
 		// show link to show comment only if there is one or/and user has the right to add a new one
 		if (!empty($show_comments))
 		{
-			echo '<div id="header-comments">';
+			// display comments section
+			echo '<section id="section-comments">';
+			echo '<header id="header-comments">';
 			echo '<a href="'.$this->href('', '', 'show_comments=1#header-comments').'" title="'.$this->get_translation('ShowComments').'">'.$show_comments.'</a>';
-			echo '</div>'."\n";
+			echo '</header>'."\n";
+			echo "</section>\n";
 		}
 		else
 		{

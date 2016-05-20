@@ -77,7 +77,7 @@ div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-
 #credits {clear: right; color: #eee; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
-.commentinfo, #credits a { color: #AAAAAA }
+.comment-info, #credits a { color: #AAAAAA }
 /* Change summary */
 .editnote {
   color: #555555;
@@ -137,8 +137,8 @@ div#page {padding: 10px 10px;}
 .outerlink { color: #990000 }
 
 
-#pageedit { border: 1px inset; border-bottom: none; background: #FFFFFF }
-#pageedit form textarea {width: 100%;height: 400px; } 
+#page-edit { border: 1px inset; border-bottom: none; background: #FFFFFF }
+#page-edit form textarea {width: 100%;height: 400px; } 
 
 .print { font: 12px Trebuchet MS }
 

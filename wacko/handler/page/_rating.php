@@ -28,10 +28,13 @@ if ($this->config['footer_rating'] != 0 && ($this->config['footer_rating'] != 2 
 // determine if user has rated this page
 if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isset($_GET['show_rating']) && $_GET['show_rating'] != 1) )
 {
+	// display rating section
+	echo '<section id="section-rating">';
+
 	// display rating header
-	echo '<div id="header-rating">';
+	echo '<header id="header-rating">';
 	echo $this->get_translation('RatingHeader').' [<a href="'.$this->href('', '', 'show_rating=1').'#header-rating">'.$this->get_translation('RatingResults').'</a>]';
-	echo "</div>\n";
+	echo "</header>\n";
 
 	// display rating form
 	echo '<div class="rating">'.$this->form_open('rate', 'rate').'';
@@ -44,6 +47,8 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 		 '<input type="radio" id="plus3" name="value" value="3" /><label for="plus3">+3</label>'.
 		 '<input type="submit" name="rate" id="submit" value="'.$this->get_translation('RatingSubmit').'" />';
 	echo ''.$this->form_close().'</div>';
+
+	echo "</section>\n";
 }
 else
 {
@@ -57,13 +62,16 @@ else
 	if (is_float($results['ratio']))	$results['ratio'] = round($results['ratio'], 2);
 	if ($results['ratio'] > 0)			$results['ratio'] = '+'.$results['ratio'];
 
+	// display rating section
+	echo '<section id="section-rating">'."\n";
+
 	// display rating header
-	echo '<div id="header-rating">';
+	echo '<header id="header-rating">'."\n";
 	echo $this->get_translation('RatingHeaderResults').
 	(handler_show_page_is_rated($this, $this->page['page_id']) === false
 	? ' [<a href="'.$this->href('', '', 'show_rating=0').'#header-rating">'.$this->get_translation('RatingForm').'</a>]'
 	: '');
-	echo "</div>\n";
+	echo "</header>\n";
 
 	// display rating results
 	if (isset($results['ratio']))
@@ -80,6 +88,8 @@ else
 		echo '<em>'.$this->get_translation('RatingNotRated').'</em>';
 		echo '</div>';
 	}
+
+	echo "</section>\n";
 }
 
 ?>

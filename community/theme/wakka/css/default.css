@@ -157,12 +157,12 @@ article, #page {
 	border-bottom: none;
 }
 
-#pageedit {
+#page-edit {
 	background-color: #FFFFFF;
 	border-bottom: none;
 }
 
-#pageedit form textarea {
+#page-edit form textarea {
 	width: 100%;
 	height: 400px;
 }
@@ -230,7 +230,7 @@ article, #page {
 }
 
 /* Comment author and date */
-.commentinfo {
+.comment-info {
 	color: #AAAAAA;
 	padding-bottom: 20px;
 	float: right;
@@ -248,24 +248,24 @@ ol#comments{
 	padding: 0;
 }
 
-.commentinfo li {
+.comment-info li {
 border:medium none;
 margin:0;
 padding:0;
 width:320px;
 }
 
-.commenttext {
+.comment-text {
 	float: left;
 	width: 800px;
 }
 
-.commenttitle {
+.comment-title {
 	line-height: 22px;
 	font-weight: bold;
 }
 
-.commentpreview {
+.comment-preview {
 	width: 800px;
 }
 
