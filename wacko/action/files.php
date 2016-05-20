@@ -195,7 +195,7 @@ if ($can_view)
 
 			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')
 			{
-				$hits	= $file['hits'].' '.$this->get_translation('SettingsHits');
+				$hits	= ', '.$file['hits'].' '.$this->get_translation('SettingsHits');
 			}
 			else
 			{
@@ -224,7 +224,7 @@ if ($can_view)
 			{
 				echo '<td class="desc-">'.$desc.'</td>'.
 					'<td class="size-">
-						<span class="size2-">'.$file_size.', '.$hits.'</span>&nbsp;'.
+						<span class="size2-">'.$file_size.$hits.'</span>&nbsp;'.
 					'</td>'.
 					'<td class="dt-">'.
 						'<span class="dt2-">'.$this->get_time_formatted($dt).'</span>&nbsp;'.
