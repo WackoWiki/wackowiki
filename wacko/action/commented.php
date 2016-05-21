@@ -86,25 +86,25 @@ if ($this->user_allowed_comments())
 
 	if (list ($pages, $pagination) = load_commented($this, $root, (int)$max))
 	{
-		if ($user == true)
-		{
-			echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
-		}
-
-		if ($root == '' && !(int)$noxml)
-		{
-			echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
-		}
-
-		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-		// pagination
-		echo $show_pagination;
-
-		echo '<ul class="ul_list">'."\n";
-
 		if ($pages)
 		{
+			if ($user == true)
+			{
+				echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
+			}
+
+			if ($root == '' && !(int)$noxml)
+			{
+				echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
+			}
+
+			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
+			// pagination
+			echo $show_pagination;
+
+			echo '<ul class="ul_list">'."\n";
+
 			foreach ($pages as $page)
 			{
 				if ($this->config['hide_locked'])
@@ -175,6 +175,7 @@ if ($this->user_allowed_comments())
 					"</small></li>\n";
 				}
 			}
+
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
