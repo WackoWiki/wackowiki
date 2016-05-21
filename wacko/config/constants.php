@@ -52,7 +52,7 @@ define('CSP_CUSTOM',					"Content-Security-Policy:
 											child-src 'self' archive.org *.youtube.com *.youtube-nocookie.com;"); // Content-Security-Policy "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;"
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'5.5.rc');
+define('WACKO_VERSION',					'5.5.0');
 define('HTML_ENTITIES_CHARSET',			'ISO-8859-1'); // ISO-8859-1, cp1251
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 
