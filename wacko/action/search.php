@@ -367,8 +367,6 @@ if ($phrase)
 		// make and display results
 		if (list ($pages, $pagination) = $results)
 		{
-
-
 			// open list
 			if ($style == 'ul') $output .= "<ul id=\"search_results\">\n";
 			if ($style == 'ol') $output .= "<ol id=\"search_results\">\n";
