@@ -16,7 +16,7 @@ if (!defined('IN_WACKO'))
 			"no" - means show no title
 			empty title - title taken from feed
 		[max=x]
-		[time=yes]
+		[time=1]
 		[nomark=1]
 			1 - makes feed header h3 and feed-items headers h4
 			0 - makes it all default
@@ -28,63 +28,97 @@ if (!defined('IN_WACKO'))
 //   * local image cache
 //   * feed_acl
 
-if (!isset($nomark)) $nomark = '';
-if (!isset($title)) $title = '';
-if (!isset($max)) $max = 5;
-if (!isset($time)) $time = '';
+if (!isset($nomark))	$nomark	= '';
+if (!isset($title))		$title	= '';
+if (!isset($max))		$max	= 5;
+if (!isset($time))		$time	= '';
 
 // Include SimplePie
+#include_once('lib/SimplePie/autoloader.php');
 include_once('lib/SimplePie/simplepie.class.php');
-# include_once('lib/SimplePie/idn/idna_convert.class.php');
 
-if (!function_exists('intervalCalc'))
+if (!function_exists('interval_calc'))
 {
-	function intervalCalc($postedtime)
+	function interval_calc($posted_time)
 	{
 		global $engine;
 
 		$now			= time();
-		$interval_secs	= $now - $postedtime;
+		$interval_secs	= $now - $posted_time;
 
 		if ($interval_secs > 2592000)
 		{
-			$interval = (($interval_secs - ($interval_secs%2592000))/2592000);
-			if ($interval == 1) $interval.= $engine->get_translation('FeedMonthAgo');
-			else $interval.= $engine->get_translation('FeedMonthsAgo');
+			$interval = (($interval_secs - ($interval_secs % 2592000)) / 2592000);
+
+			if ($interval == 1)
+			{
+				$interval.= $engine->get_translation('FeedMonthAgo');
+			}
+			else
+			{
+				$interval.= $engine->get_translation('FeedMonthsAgo');
+			}
 		}
 		else if ($interval_secs > 604800)
 		{
-			$interval = (($interval_secs - ($interval_secs%604800))/604800);
-			if ($interval == 1) $interval.= $engine->get_translation('FeedWeekAgo');
-			else $interval.= $engine->get_translation('FeedWeeksAgo');
+			$interval = (($interval_secs - ($interval_secs % 604800)) / 604800);
+
+			if ($interval == 1)
+			{
+				$interval.= $engine->get_translation('FeedWeekAgo');
+			}
+			else
+			{
+				$interval.= $engine->get_translation('FeedWeeksAgo');
+			}
 		}
 		else if ($interval_secs > 86400)
 		{
-			$interval = (($interval_secs - ($interval_secs%86400))/86400);
-			if ($interval == 1) $interval.= $engine->get_translation('FeedDayAgo');
-			else $interval.= $engine->get_translation('FeedDaysAgo');
+			$interval = (($interval_secs - ($interval_secs % 86400)) / 86400);
+
+			if ($interval == 1)
+			{
+				$interval.= $engine->get_translation('FeedDayAgo');
+			}
+			else
+			{
+				$interval.= $engine->get_translation('FeedDaysAgo');
+			}
 		}
 		else if ($interval_secs > 3600)
 		{
-			$interval = (($interval_secs - ($interval_secs%3600))/3600);
-			if ($interval == 1) $interval.= $engine->get_translation('FeedHourAgo');
-			else $interval.= $engine->get_translation('FeedHoursAgo');
+			$interval = (($interval_secs - ($interval_secs % 3600)) / 3600);
+
+			if ($interval == 1)
+			{
+				$interval.= $engine->get_translation('FeedHourAgo');
+			}
+			else
+			{
+				$interval.= $engine->get_translation('FeedHoursAgo');
+			}
 		}
 		else if ($interval_secs > 60)
 		{
-			$interval = (($interval_secs - ($interval_secs%60))/60);
-			if ($interval == 1) $interval.= $engine->get_translation('FeedMinuteAgo');
-			else $interval.= $engine->get_translation('FeedMinutesAgo');
+			$interval = (($interval_secs - ($interval_secs % 60)) / 60);
+
+			if ($interval == 1)
+			{
+				$interval.= $engine->get_translation('FeedMinuteAgo');
+			}
+			else
+			{
+				$interval.= $engine->get_translation('FeedMinutesAgo');
+			}
 		}
 
 		return  $interval;
-
 	}
 }
 
 if (!$url)
 {
-	echo "<p><em>".$this->get_translation('FeedNoURL')."</em></p>\n";
+	echo '<p><em>'.$this->get_translation('FeedNoURL')."</em></p>\n";
 }
 else
 {
@@ -120,25 +154,26 @@ else
 
 	if (!$nomark)
 	{
-		echo "<div class='layout-box'>\n";
+		echo '<div class="layout-box">'."\n";
 	}
 
 	$counturlset = count($urlset);
 
 	if (!$feed->get_title() && $counturlset == 1)
 	{
-		echo "<p><em>".$this->get_translation('FeedError')."</em></p>\n";
+		echo '<p><em>'.$this->get_translation('FeedError')."</em></p>\n";
 		#break;
 	}
 	else
 	{
-		$headertag = 'h4';
+		$header_feed = 'h1';
+		$header_item = 'h2';
 
 		if ($title != 'no')
 		{
-			if (($max)&&($max > 0))
+			if (($max) && ($max > 0))
 			{
-				$lastitems = " (last ".$max." items)";
+				$lastitems = ' (last '.$max.' items)';
 			}
 
 			// Make nice if $nomark == 1
@@ -146,19 +181,19 @@ else
 			{
 				if ($title != '' && $counturlset == 1)
 				{
-					echo "<h3 class=\"feed_element_title\">".$this->link($feed->get_permalink(), '', $title, '', 1, 1)."</h3>";
+					echo '<'.$header_feed.' class="feed_element_title">'.$this->link($feed->get_permalink(), '', $title, '', 1, 1).'</'.$header_feed.">\n";
 				}
 				if ($title != '' && $counturlset > 1)
 				{
-					echo "<h3>".$title."</h3>";
+					echo '<'.$header_feed.'>'.$title.'</'.$header_feed.">\n";
 				}
 				else if (!$title && $counturlset == 1)
 				{
-					echo "<h3 class=\"feed_element_title\">".$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1)."</h3>";
+					echo '<'.$header_feed.' class="feed_element_title">'.$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1).'</'.$header_feed.">\n";
 				}
 				else if (!$title && $counturlset > 1)
 				{
-					echo "<h3>".$this->get_translation('FeedMulti')."</h3>";
+					echo '<'.$header_feed.'>'.$this->get_translation('FeedMulti').'</'.$header_feed.">\n";
 				}
 
 				echo $lastitems;
@@ -169,20 +204,20 @@ else
 			{
 				if ($title != '' && $counturlset == 1)
 				{
-					echo "<p class=\"layout-box\"><span>".$this->get_translation('FeedTitle').": <strong>".$this->link($feed->get_permalink(), '', $title, '', 1, 1)."</strong>".$lastitems."<span></p>";
+					echo '<p class="layout-box"><span>'.$this->get_translation('FeedTitle').': <strong>'.$this->link($feed->get_permalink(), '', $title, '', 1, 1).'</strong>'.$lastitems."<span></p>\n";
 				}
 
 				if ($title != '' && $counturlset > 1)
 				{
-					echo "<p class=\"layout-box\"><span>".$this->get_translation('FeedTitle').": <strong>".$title."</strong>".$lastitems."</span></p>";
+					echo '<p class="layout-box"><span>'.$this->get_translation('FeedTitle').': <strong>'.$title.'</strong>'.$lastitems."</span></p>\n";
 				}
 				else if (!$title && $counturlset == 1)
 				{
-					echo "<p class=\"layout-box\"><span>".$this->get_translation('FeedTitle').": <strong>".$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1)."</strong>".$lastitems."</span></p>";
+					echo '<p class="layout-box"><span>'.$this->get_translation('FeedTitle').': <strong>'.$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1).'</strong>'.$lastitems."</span></p>\n";
 				}
 				else if (!$title && $counturlset > 1)
 				{
-					echo "<p class=\"layout-box\"><span><strong>".$this->get_translation('FeedMulti')."</strong>".$lastitems."</span></p>";
+					echo '<p class="layout-box"><span><strong>'.$this->get_translation('FeedMulti').'</strong>'.$lastitems."</span></p>\n";
 				}
 			}
 		}
@@ -206,27 +241,27 @@ else
 					$date = 0;
 				}
 
-				echo "<div class=\"feed\">";
-				echo "<".$headertag;
+				echo '<article class="feed">';
+				echo '<'.$header_item;
 
 				if($nomark)
 				{
-					echo " class=\"feed_element_title\"";
+					echo ' class="feed_element_title"';
 				}
 
-				echo ">".$this->link($item->get_permalink(), '', $item->get_title(), '', 1, 1)."</".$headertag.">";
-				echo "<p class=\"note\"><span>".$this->get_translation('FeedSource')." ".$this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 1, 1)." | ".$item->get_date('d.m.Y g:i')." | ";
+				echo '>'.$this->link($item->get_permalink(), '', $item->get_title(), '', 1, 1).'</'.$header_item.'>';
+				echo '<p class="note"><span>'.$this->get_translation('FeedSource').' '.$this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 1, 1).' | '.$item->get_date('d.m.Y g:i').' | ';
 
-				if (($time == 'yes') && ($date != 0))
+				if (($time == 1) && ($date != 0))
 				{
-					echo intervalCalc($date);
+					echo interval_calc($date);
 				}
 
-				echo "</span></p>";
-				echo "<p class=\"feed-content\">".$item->get_content()."</p>";
-				echo "</div>";
+				echo "</span></p>\n";
+				echo '<p class="feed-content">'.$item->get_content()."</p>\n";
+				echo "</article>\n";
 
-				if (($max)&&($current == $max))
+				if (($max) && ($current == $max))
 				{
 					break;
 				}
@@ -255,29 +290,29 @@ else
 					$date = 0;
 				}
 
-				echo "<div class=\"feed\">";
+				echo '<article class="feed">'."\n";
 
 				// headline
-				#echo "<a target=\"_blank\" href=\"$href\" class=\"outerlink\">$title</a>";
-				echo "<".$headertag.">".$this->link($href, '', $title, '', 1, 1)."</".$headertag.">";
+				#echo '<a target="_blank" href="'.$href.'" class="outerlink">'.$title.'</a>';
+				echo '<'.$header_item.'>'.$this->link($href, '', $title, '', 1, 1).'</'.$header_item.">\n";
 
-				if (($time == 'yes') && ($date != 0))
+				if (($time == 1) && ($date != 0))
 				{
-					echo "<p class=\"note\"><span>".intervalCalc($date)."</span></p>";
+					echo '<p class="note"><span>'.interval_calc($date)."</span></p>\n";
 				}
 
-				echo "<p class=\"feed-content\">".$item->get_content()."</p>";
+				echo '<p class="feed-content">'.$item->get_content()."</p>\n";
 
 				if ($enclosure = $item->get_enclosure())
 				{
 					if (!empty($enclosure->get_link()))
 					{
-						echo "<img src=\"" . $enclosure->get_link() . "\">";
+						echo '<img src="' . $enclosure->get_link() . '">'."\n";
 					}
 				}
 
 				// item-paragraph ending
-				echo "</div>";
+				echo "</article>\n";
 
 				if (($max) && ($current == $max))
 				{
