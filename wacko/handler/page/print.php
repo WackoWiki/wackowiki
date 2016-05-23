@@ -71,9 +71,9 @@ if ($this->has_access('read'))
 			if (!empty($comments))
 			{
 				// display comments header
-				echo "<br /><br />";
-				echo "<div id=\"commentsfiles\">";
-				echo "<div class=\"header-comments\">";
+				echo '<br /><br />';
+				echo '<div id="commentsfiles">';
+				echo '<div class="header-comments">';
 				echo $this->get_translation('Comments_all');
 				echo "</div>\n";
 
@@ -84,11 +84,11 @@ if ($this->has_access('read'))
 						$comment['body_r'] = $this->format($comment['body']);
 					}
 
-					echo "<div class=\"comment\">".
-							"<span class=\"commentinfo\">".
-								"<strong>&#8212; ".( $comment['user_id'] == 0 ? "<em>".$this->get_translation('Guest')."</em>" : $comment['user_name'] )."</strong> (".$this->get_time_formatted($comment['created']).
-								($comment['modified'] != $comment['created'] ? ", ".$this->get_translation('CommentEdited')." ".$this->get_time_formatted($comment['modified']) : "").")".
-							"&nbsp;&nbsp;&nbsp;</span><br />".
+					echo '<div class="comment">'.
+							'<span class="comment-info">'.
+								'<strong>&#8212; '.( $comment['user_id'] == 0 ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).'</strong> ('.$this->get_time_formatted($comment['created']).
+								($comment['modified'] != $comment['created'] ? ', '.$this->get_translation('CommentEdited').' '.$this->get_time_formatted($comment['modified']) : '').')'.
+							'&nbsp;&nbsp;&nbsp;</span><br />'.
 							$this->format($comment['body_r'], 'post_wacko').
 						"</div>\n";
 				}
@@ -102,11 +102,11 @@ if ($this->has_access('read'))
 		// numerated links
 		if (($c = count($this->numerate_links)) > 0)
 		{
-			if (!isset($comments)) echo "<br />";
+			if (!isset($comments)) echo '<br />';
 
-			echo "<br />";
-			echo "<div id=\"commentsfiles\">";
-			echo "<div class=\"linksheader\">";
+			echo '<br />';
+			echo '<div id="commentsfiles">';
+			echo '<div class="linksheader">';
 			echo $this->get_translation('Links');
 			echo "</div>\n";
 
@@ -114,7 +114,7 @@ if ($this->has_access('read'))
 
 			foreach ($this->numerate_links as $l => $n)
 			{
-				echo "<small><strong><sup><span class=\"reflink\">$n</span></sup></strong> $l</small>\n";
+				echo '<small><strong><sup><span class="reflink">'.$n.'</span></sup></strong> '.$l."</small>\n";
 
 				if (++$i < $c)
 				{

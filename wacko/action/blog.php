@@ -30,8 +30,8 @@ if (!empty($blog_cluster))
 
 	$pages			= '';
 	$prefix			= $this->config['table_prefix'];
-	#$blog_cluster	= $blog_cluster;
-	$blog_levels	= $this->config['news_levels'];
+	#$blog_cluster		= $blog_cluster;
+	$blog_levels		= $this->config['news_levels'];
 
 	// check privilege
 	if ($this->has_access('create') === true)
@@ -193,7 +193,7 @@ if (!empty($blog_cluster))
 	}
 
 	// start output
-	echo '<div class="news">';
+	echo '<section class="news">';
 
 	if ($title == 1)
 	{
@@ -256,10 +256,10 @@ if (!empty($blog_cluster))
 
 			echo '<article class="newsarticle">';
 			echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
-			echo '<div class="newsinfo"><span>'.$this->get_time_formatted($page['created']).' '.$this->get_translation('By').' '.$this->user_link($page['owner'], $lang = '', true, false)."</span></div>\n";
+			echo '<div class="newsinfo"><span><time datetime="'.$this->page['created'].'">'.$this->get_time_formatted($page['created']).'</time> '.$this->get_translation('By').' '.$this->user_link($page['owner'], $lang = '', true, false)."</span></div>\n";
 			echo '<div class="newscontent">'.$this->action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
-			echo '<div class="newsmeta">'.$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->get_translation('EditText'), 0)." | " : "")."  ".
-				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#header-comments" title="'.$this->get_translation('NewsDiscuss').' '.$page['title'].'">'.(int)$page['comments']." ".$this->get_translation('Comments_all')." &raquo; "."</a></div>\n";
+			echo '<footer class="newsmeta">'.$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->get_translation('EditText'), 0)." | " : "")."  ".
+				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#header-comments" title="'.$this->get_translation('NewsDiscuss').' '.$page['title'].'">'.(int)$page['comments']." ".$this->get_translation('Comments_all')." &raquo; "."</a></footer>\n";
 			echo "</article>\n";
 
 			unset ($_category);
@@ -293,7 +293,7 @@ if (!empty($blog_cluster))
 		<?php echo $this->form_close();
 	}
 
-	echo "</div>";
+	echo "</section>\n";
 }
 else
 {
