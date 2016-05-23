@@ -45,7 +45,7 @@ if ($this->has_access('read'))
 		// display files header
 		?>
 		<header id="header-files">
-		<?php echo '<a href="'.$this->href('', '', 'show_files=0').'" title="'.$this->get_translation('HideFiles').'">'.$this->get_translation('Files_all').'</a>'; ?>
+		<?php echo '<h1><a href="'.$this->href('', '', 'show_files=0').'" title="'.$this->get_translation('HideFiles').'">'.$this->get_translation('Files_all').'</a></h1>'; ?>
 		</header>
 
 		<?php
@@ -109,7 +109,7 @@ if ($this->has_access('read'))
 			// display files section
 			echo '<section id="section-files">'."\n";
 			echo '<header id="header-files">'."\n";
-			echo '<a href="'.$this->href('', '', 'show_files=1#header-files').'" title="'.$this->get_translation('ShowFiles').'">'.$show_files.'</a>';
+			echo '<h1><a href="'.$this->href('', '', 'show_files=1#header-files').'" title="'.$this->get_translation('ShowFiles').'">'.$show_files.'</a></h1>';
 			echo '</header>'."\n";
 			echo "</section>\n";
 		}

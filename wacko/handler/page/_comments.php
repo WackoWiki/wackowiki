@@ -103,7 +103,7 @@ if ($this->has_access('read'))
 		// pagination
 		echo $show_pagination;
 
-		echo '<a href="'.$this->href('', '', 'show_comments=0').'" title="'.$this->get_translation('HideComments').'">'.$this->get_translation('Comments_all').'</a>';
+		echo '<h1><a href="'.$this->href('', '', 'show_comments=0').'" title="'.$this->get_translation('HideComments').'">'.$this->get_translation('Comments_all').'</a></h1>';
 		echo "</header>\n";
 
 		// display comments themselves
@@ -333,7 +333,7 @@ if ($this->has_access('read'))
 			// display comments section
 			echo '<section id="section-comments">';
 			echo '<header id="header-comments">';
-			echo '<a href="'.$this->href('', '', 'show_comments=1#header-comments').'" title="'.$this->get_translation('ShowComments').'">'.$show_comments.'</a>';
+			echo '<h1><a href="'.$this->href('', '', 'show_comments=1#header-comments').'" title="'.$this->get_translation('ShowComments').'">'.$show_comments.'</a></h1>';
 			echo '</header>'."\n";
 			echo "</section>\n";
 		}

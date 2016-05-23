@@ -190,7 +190,7 @@ class Feed
 				$title	= $page['title'];
 				$link	= $this->engine->href('', $page['tag']);
 				$pdate	= date('r', strtotime($page['modified']));
-				$coms	= $this->engine->href('', $page['tag'], 'show_comments=1#commentsheader');
+				$coms	= $this->engine->href('', $page['tag'], 'show_comments=1#header-comments');
 				// TODO: might fail if body_r is empty,
 				// TODO: format -> add array('feed' => true)
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
