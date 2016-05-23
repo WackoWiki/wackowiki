@@ -405,7 +405,7 @@ if ($phrase)
 						}
 
 						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>". ($mode != 'topic' ? ' ('.$count.')' : '');
-						$output .= '<br /><span style="color: #808080; line-height: 1.24; white-space: nowrap;">'.$page['user_name'].' '.$this->get_time_formatted($page['modified']).'</span>';
+						$output .= '<br /><span style="color: #808080; line-height: 1.24; white-space: nowrap;">'.$this->user_link($page['user_name'], '', false, false).' '.$this->get_time_formatted($page['modified']).'</span>';
 
 						if ($mode != 'topic')
 						{
@@ -453,12 +453,12 @@ if ($phrase)
 		}
 		else if (!$nomark)
 		{
-			echo $this->get_translation('NoResultsFor').'"'.$phrase.'".';
+			echo $this->get_translation('NoResultsFor').' "'.$phrase.'".';
 		}
 	}
 	else
 	{
-		if (!$nomark) echo $this->get_translation('NoResultsFor').'"'.$phrase.'".';
+		if (!$nomark) echo $this->get_translation('NoResultsFor').' "'.$phrase.'".';
 	}
 }
 

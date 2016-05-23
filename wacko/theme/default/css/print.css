@@ -449,6 +449,15 @@ div .action-content {
 	font-size:			x-small;
 }
 
+.reflink {
+	font-size:			small;
+}
+
+.reflink sup {
+	font-weight:		bold;
+	font-size:			x-small;
+}
+
 /* Hiding Unfriendly Content *************************************************/
 .pagination {
 	display:			none !important;
