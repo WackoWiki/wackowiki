@@ -258,7 +258,7 @@ else
 				}
 
 				echo "</span></p>\n";
-				echo '<p class="feed-content">'.$item->get_content()."</p>\n";
+				echo '<div class="feed-content">'.$item->get_content()."</div>\n";
 				echo "</article>\n";
 
 				if (($max) && ($current == $max))
@@ -301,7 +301,7 @@ else
 					echo '<p class="note"><span>'.interval_calc($date)."</span></p>\n";
 				}
 
-				echo '<p class="feed-content">'.$item->get_content()."</p>\n";
+				echo '<div class="feed-content">'.$item->get_content()."</div>\n";
 
 				if ($enclosure = $item->get_enclosure())
 				{
