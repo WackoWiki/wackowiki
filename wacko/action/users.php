@@ -269,7 +269,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			echo $show_pagination;
 
 			// pages list itself
-			echo '<div>'."\n";
+			echo '<ul class="ul_list">'."\n";
 
 			foreach ($pages as $page)
 			{
@@ -288,14 +288,14 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					// cache page_id for for has_access validation in link function
 					$this->page_id_cache[$page['tag']] = $page['page_id'];
 
-					echo '<small>'.$this->get_time_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang)."<br />\n";
+					echo '<li class="lined"><small>'.$this->get_time_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang)."</li>\n";
 
 					$i = 0;
 
 					if (++$i >= $limit) break 1;
 				}
 			}
-			echo "</div>\n";
+			echo "</ul>\n";
 
 			unset($pages, $page, $limit, $i);
 		}
@@ -334,7 +334,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				echo $show_pagination;
 
 				// comments list itself
-				echo '<div>'."\n";
+				echo '<ul class="ul_list">'."\n";
 
 				foreach ($comments as $comment)
 				{
@@ -353,7 +353,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 						// cache page_id for for has_access validation in link function
 						$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 
-						echo '<small>'.$this->get_time_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang)."<br />\n";
+						echo '<li class="lined"><small>'.$this->get_time_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang)."</li>\n";
 
 						$i = 0;
 
@@ -361,7 +361,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					}
 				}
 
-				echo "</div>\n";
+				echo "</ul>\n";
 
 				unset($comments, $comment, $limit, $i);
 			}
@@ -407,7 +407,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					echo $show_pagination;
 
 					// uploads list itself
-					echo '<div>'."\n";
+					echo '<ul class="ul_list">'."\n";
 
 					$separator	= ' . . . . . . . . . . . . . . . . ';
 
@@ -457,7 +457,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 								$on_page	= '<span title="">&rarr; '.'global';
 							}
 
-							echo '<small>'.$this->get_time_formatted($upload['uploaded_dt']).'</small>  &mdash; '.$this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang).$separator.' '.$on_page.'</span>'.$file_description."<br />\n";
+							echo '<li class="lined"><small>'.$this->get_time_formatted($upload['uploaded_dt']).'</small>  &mdash; '.$this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang).$separator.' '.$on_page.'</span>'.$file_description."</li>\n";
 
 							$i = 0;
 
@@ -465,7 +465,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 						}
 					}
 
-					echo "</div>\n";
+					echo "</ul>\n";
 
 					unset($uploads, $upload, $limit, $i);
 				}
