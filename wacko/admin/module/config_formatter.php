@@ -247,9 +247,6 @@ function admin_config_formatter(&$engine, &$module)
 					Miscellaneous
 				</th>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_link_target"><strong>Where external links open:</strong><br />
 				<small>Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.</small></label></td>

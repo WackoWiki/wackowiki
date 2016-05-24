@@ -65,10 +65,6 @@ function admin_config_notifications(&$engine, &$module)
 					<input type="radio" id="enable_email_notification_off" name="enable_email_notification" value="0"<?php echo ( $engine->config['enable_email_notification'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_off">Disabled.</label>
 				</td>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-
 			<tr>
 				<th colspan="2">
 					<br />
@@ -112,10 +108,6 @@ function admin_config_notifications(&$engine, &$module)
 					<input type="radio" id="notify_comment2" name="notify_comment" value="2"<?php echo ( $engine->config['notify_comment'] == 2 ? ' checked="checked"' : '' );?> /><label for="notify_comment2"><?php echo $engine->get_translation('NotifyPending'); ?></label>
 				</td>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-
 			<tr class="hl_setting">
 				<th colspan="2">
 					<br />

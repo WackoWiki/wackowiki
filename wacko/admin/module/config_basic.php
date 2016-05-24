@@ -390,9 +390,6 @@ function admin_config_basic(&$engine, &$module)
 					Feeds
 				</th>
 			</tr>
-			<tr>
-				<td colspan="2"></td>
-			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_feeds"><strong>Enable Feeds:</strong><br />
 					<small>Turns on or off RSS feeds for the entire wiki.</small></label></td>

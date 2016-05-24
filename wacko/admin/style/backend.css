@@ -303,7 +303,7 @@ textarea {
 
 /*	Pop-up menus	*/
 
-div.menu {
+nav.menu {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	background-color: #FFFFFF;
@@ -314,27 +314,27 @@ div.menu {
 	overflow: hidden;
 	z-index: 10;*/
 }
-	div.menu a {
+	nav.menu a {
 		color: #073D69;
 		display: block;
 		text-decoration: none;
 		padding-left: 4px;
 		padding-right: 4px;
 	}
-	div.menu a:hover {
+	nav.menu a:hover {
 		color: #FFFFFF;
 		background-color: #1A5581;
 		text-decoration: none;
 	}
-	div.menu span.text {
+	nav.menu span.text {
 		display: block;
 		padding-left: 4px;
 		padding-right: 4px;
 	}
-	div.menu a.bookmark {
+	nav.menu a.bookmark {
 		text-align: center;
 	}
-	div.menu hr {
+	nav.menu hr {
 		background-color: #073D69;
 		border: none;
 		margin-top: 1px;
@@ -342,10 +342,10 @@ div.menu {
 		padding: 0px;
 		height: 1px;
 	}
-	div.menu img {
+	nav.menu img {
 		display: none;
 	}
-	div.menu div.sub {
+	nav.menu div.sub {
 		padding: 1px;
 	}
 #toc {
@@ -362,11 +362,11 @@ div.menu {
 span.tocnumber {
 	margin-right: 0.3em;
 }
-	div.menu ul, div.menu ol {
+	nav.menu ul, nav.menu ol {
 		padding-left: 0px;
 		list-style: none;
 	}
-	div.menu ul ul a, div.menu ol ol a {
+	nav.menu ul ul a, nav.menu ol ol a {
 		padding-left: 15px;
 	}
 #menu {
