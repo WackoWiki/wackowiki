@@ -386,7 +386,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 
 </head>
 <body>
-<div id="header">
+<header id="header">
 	<div id="pane">
 		<div class="left"></div>
 		<div class="middle">
@@ -412,7 +412,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php?action=logout" title="quit system administration">Log out</a>
 		</div>
 	</div>
-</div>
+</header>
 
 <?php
 
@@ -421,13 +421,13 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 ########################################################
 
 ?>
-	<div id="menu" class="menu">
+	<nav id="menu" class="menu">
 		<div class="sub">
 <?php
 			echo $menue;
 ?>
 		</div>
-	</div>
+	</nav>
 <?php
 
 ########################################################
@@ -436,7 +436,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 
 ?>
 
-<div id="content">
+<main id="content">
 	<div id="page">
 <?php
 // here we show messages
@@ -481,13 +481,13 @@ else if (!($_GET && $_POST))
 <br />
 <!-- end page output -->
 	</div>
-</div>
+</main>
 <?php /*
 <div id="tabs">
 	<div class="controls"></div>
 </div>
 */ ?>
-<div id="footer">System <a href="http://wackowiki.sourceforge.net/">WackoWiki</a></div>
+<footer id="footer">System <a href="http://wackowiki.sourceforge.net/">WackoWiki</a></footer>
 
 <?php
 
