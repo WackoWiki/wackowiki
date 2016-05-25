@@ -333,7 +333,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				// forward
 				$this->set_message(
 					$this->get_translation('SiteRegistered').
-					$this->config['site_name'].'. <br /><br />'.
+					'&laquo;'.$this->config['site_name'].'&raquo;. <br /><br />'.
 					$this->get_translation('SiteEmailConfirm'));
 
 				$this->context[++$this->current_context] = '';

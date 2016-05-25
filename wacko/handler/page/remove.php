@@ -192,6 +192,9 @@ if ($this->is_admin()
 			$this->cache->invalidate_sql_cache();
 		}
 
+		// update user menu
+		$this->set_menu(MENU_USER, 1);
+
 		// update sitemap
 		$this->write_sitemap(true, false);
 

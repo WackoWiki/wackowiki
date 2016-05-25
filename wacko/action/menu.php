@@ -242,11 +242,9 @@ if (isset($_POST['_user_menu']))
 		$this->cache->invalidate_sql_cache();
 	}
 
+	// update user menu
 	$this->set_menu(MENU_USER, 1);
 
-	// XXX: seems to work without
-	#if ($redirect = '')
-	#$this->redirect($this->href('', '', $redirect ? 'menu' : ''));
 }
 
 if ($_user_id)
