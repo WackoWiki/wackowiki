@@ -318,7 +318,7 @@ $wacko_translation = array(
 
 	// remove
 	'RemovePage'				=> 'Remove page',
-	'RemoveRevisions'			=> 'Remove all Revisions',
+	'RemoveComment'				=> 'Delete comment',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
 	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
