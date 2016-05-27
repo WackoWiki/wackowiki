@@ -318,8 +318,8 @@ $wacko_translation = array(
 	'NotOwnerAndCanDelete'		=> 'Вы не владеете этой страницей и поэтому не можете удалить её',
 
 	// remove
-	'RemovePage'				=> 'Remove page',
-	'RemoveRevisions'			=> 'Удалить все редакции страницы',
+	'RemovePage'				=> 'Удалить страницу',
+	'RemoveComment'				=> 'Удалить комментарий',
 	'RemoveCluster'				=> 'Удалить все страницы кластера',
 	'RemoveDontKeep'			=> 'Не сохранять копию удаленной страницы и комментариев',
 	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
@@ -692,7 +692,7 @@ $wacko_translation = array(
 	'SettingsPortal'			=> 'Прочие настройки и действия над страницей:',
 	'SettingsEdit'				=> 'Редактирование',
 	'SettingsRevisions'			=> 'Версии',
-	'SettingsClone'				=> 'Clone',
+	'SettingsClone'				=> 'Клон',
 	'SettingsRename'			=> 'Переименование',
 	'MassRename'				=> 'для всех страниц кластера',
 	'SettingsRemove'			=> 'Удаление',
@@ -852,10 +852,10 @@ $wacko_translation = array(
 	'ExportClusterXML'			=> 'Экспорт кластера целиком ',
 	'AccessDeniedXML'			=> 'У вас нет прав для доступа к данной информации.',
 
-	'ChangesFeed'			=> 'Последние изменения',
-	'CommentsFeed'			=> 'Последние комментарии',
-	'NewsFeed'				=> 'Последние новости',
-	'RevisionsFeed'			=> 'История изменений ',
+	'ChangesFeed'				=> 'Последние изменения',
+	'CommentsFeed'				=> 'Последние комментарии',
+	'NewsFeed'					=> 'Последние новости',
+	'RevisionsFeed'				=> 'История изменений ',
 
 	'LastModification'			=> 'Последнее изменение',
 

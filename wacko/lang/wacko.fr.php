@@ -319,7 +319,7 @@ $wacko_translation = array(
 
 	// remove
 	'RemovePage'				=> 'Remove page',
-	'RemoveRevisions'			=> 'Supprimer toutes les versions antérieures',
+	'RemoveComment'				=> 'Delete comment',
 	'RemoveCluster'				=> 'Supprimer toutes les pages du groupe',
 	'RemoveDontKeep'			=> 'Ne pas garder une copie d&rsquo;une page supprimée et des commentaires',
 	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',

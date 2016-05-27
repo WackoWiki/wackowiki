@@ -197,7 +197,7 @@ $wacko_translation = array(
 	'CommentsPurged'		=> 'All comments were deleted.',
 	'PurgeFiles'			=> 'Κατάργηση όλων των συνημμένων αρχείων',
 	'FilesPurged'			=> 'All attached files were removed.',
-	'PurgeRevisions'		=> 'Purge all revisions of the page',
+	'PurgeRevisions'		=> 'Κατάργηση όλων των αναθεωρήσεων',
 	'RevisionsPurged'		=> 'Revisions were perged.',
 	'PurgeButton'			=> 'Purge',
 
@@ -319,7 +319,7 @@ $wacko_translation = array(
 
 	// remove
 	'RemovePage'				=> 'Remove page',
-	'RemoveRevisions'			=> 'Κατάργηση όλων των αναθεωρήσεων',
+	'RemoveComment'				=> 'Delete comment',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
 	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
