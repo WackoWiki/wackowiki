@@ -17,7 +17,19 @@ if (!$this->page)
 
 ?>
 <div id="page">
-<h3><?php echo $this->get_translation('RemovePage').' '.$this->compose_link_to_page($this->tag, '', '', 0); ?></h3>
+<h3>
+<?php
+
+if ($this->page['comment_on_id'])
+{
+	echo $this->get_translation('RemoveComment').' '.$this->compose_link_to_page($this->tag, '', '', 0);
+}
+else
+{
+	echo $this->get_translation('RemovePage').' '.$this->compose_link_to_page($this->tag, '', '', 0);
+}
+?>
+</h3>
 <br />
 <?php
 
@@ -55,7 +67,7 @@ if ($this->is_admin()
 		$message .= '<strong><code>'.$this->tag."</code></strong>\n";
 		$message .= "<ol>\n";
 
-		// Remove page
+		// remove SINGLE page or comment
 		if ($this->remove_referrers($this->tag))
 		{
 			$message .= '<li>'.$this->get_translation('ReferrersRemoved')."</li>\n";
@@ -102,6 +114,11 @@ if ($this->is_admin()
 			{
 				$message .= '<li>'.$this->get_translation('FilesRemoved')."</li>\n";
 			}
+
+			if ($this->remove_revisions($this->tag))
+			{
+				$message .= '<li>'.$this->get_translation('RevisionsRemoved')."</li>\n";
+			}
 		}
 
 		if ($this->remove_page($this->page['page_id'], $comment_on_id, $dontkeep))
@@ -126,14 +143,7 @@ if ($this->is_admin()
 			$message .= '<li>'.$this->get_translation('PageRemoved')."</li>\n";
 		}
 
-		if ($this->is_admin()
-			&& (isset($_POST['revisions']) && $_POST['revisions'] == 1)
-			&& !$comment_on_id)
-		{
-			$this->remove_revisions($this->tag);
-			$message .= "<li>".$this->get_translation('RevisionsRemoved')."</li>\n";
-		}
-
+		// remove ENTIRE cluster
 		if ($this->is_admin()
 			&& (isset($_POST['cluster']) && $_POST['cluster'] == 1))
 		{
@@ -146,6 +156,7 @@ if ($this->is_admin()
 			$this->remove_ratings		($this->tag, true);
 			$this->remove_comments		($this->tag, true, $dontkeep);
 			$this->remove_files			($this->tag, true);
+			$this->remove_revisions		($this->tag, true);
 
 			// get list of pages in the cluster
 			if ($list = $this->load_all(
@@ -160,12 +171,6 @@ if ($this->is_admin()
 				}
 
 				unset($list, $row);
-			}
-
-			if ((isset($_POST['revisions']) && $_POST['revisions'] == 1)
-				|| $comment_on_id)
-			{
-				$this->remove_revisions($this->tag, true);
 			}
 
 			$message .= "<li>".$this->get_translation('ClusterRemoved')."</li>\n";
@@ -232,9 +237,9 @@ if ($this->is_admin()
 			$desc = $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');
 			$desc = (strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' [..]');
 
-			echo '<div class="commenttitle">'.$this->page['title'].'</div>';
+			echo '<div class="comment-title"><h2>'.$this->page['title'].'</h2></div>';
 			echo htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-			echo '</div>';
+			echo '</div><br />';
 
 			$message = $this->get_translation('ReallyDeleteComment');
 		}
@@ -244,9 +249,8 @@ if ($this->is_admin()
 		}
 
 		// show backlinks
-		echo '<br />';
 		echo $this->action('backlinks', array('nomark' => 0));
-		echo '<br /><br />';
+		echo '<br />';
 
 		$this->show_message($message, 'warning');
 
@@ -257,8 +261,6 @@ if ($this->is_admin()
 		{
 			if (!$comment_on_id)
 			{
-				echo '<input type="checkbox" id="removerevisions" name="revisions" value="1" />';
-				echo '<label for="removerevisions">'.$this->get_translation('RemoveRevisions').'</label><br />';
 				echo '<input type="checkbox" id="removecluster" name="cluster" value="1" />';
 				echo '<label for="removecluster">'.$this->get_translation('RemoveCluster').'</label><br />';
 
