@@ -161,12 +161,24 @@ form input.submitinput {
 	color: #000;
 }
 
-.main,
-.main a,
-.main a:visited {
+
+#header-top,
+#header-top h1,
+#header-top a,
+#header-top a:visited {
+	font-size: 24px;
+	font-weight: normal;
 	color: #000000;
 	text-decoration: none;
-	font-weight: bold;
+}
+
+#header-files h1,
+#header-comments h1,
+#header-rating h1 {
+	font-size: 13px;
+	line-height: 1.3;
+	font-weight: normal;
+	padding: 0;
 }
 
 .print {
@@ -1094,10 +1106,11 @@ th.form_left {
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-position: 0 1px;
-	padding-left: 20px;
+	padding-left: 0px;
+	font-size: 16px;
 }
 
-.feed h4 {
+.feed h2 {
 	font-size: 13px;
 	border-bottom: none;
 }
@@ -1113,7 +1126,6 @@ th.form_left {
 	position: relative;
 }
 
-
 #menu-user ol,
 #menu-user ol ul {
 	list-style: none;
@@ -1122,9 +1134,9 @@ th.form_left {
 }
 
 #menu-user li:first-child {
-	/* border-left: none; */
-	/* padding-left: 0px; */
+	border-left: 1px none;
 }
+
 #menu-user li {
 	border-left: 1px dotted #aaa;
 	float: left;
@@ -1388,7 +1400,7 @@ th.form_left {
 	/*width: 570px;*/
 }
 
-div.newsarticle:hover {
+article.newsarticle:hover {
 	background: #E7F9FF;
 }
 
@@ -1832,6 +1844,14 @@ li.m-word img {
 }
 .btn-add_page {
 	background-image: url('./../icon/page-add.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+}
+.btn-page {
+	background-image: url('./../icon/show.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;

@@ -180,7 +180,7 @@ function admin_user_users(&$engine, &$module)
 		$user = $engine->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
-					"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
 			"AND u.account_type = '0' ".
 			"LIMIT 1");
@@ -298,6 +298,7 @@ function admin_user_users(&$engine, &$module)
 							#"AND owner_id = '".(int)$_POST['user_id']."'".
 						"");
 
+					$engine->cache->destroy_config_cache();
 					$engine->show_message($engine->get_translation('UsersDeleted'));
 					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
 				}

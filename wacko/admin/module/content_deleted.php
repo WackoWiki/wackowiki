@@ -43,17 +43,17 @@ function admin_content_deleted(&$engine, &$module)
 	if (isset($_GET['restore']))
 	{
 		/* $engine->sql_query(
-				"UPDATE {$engine->config['table_prefix']}revision SET ".
-					"deleted	= '0' ".
-				"WHERE page_id = '".(int)$_GET['remove']."'"); */
+			"UPDATE {$engine->config['table_prefix']}revision SET ".
+				"deleted	= '0' ".
+			"WHERE page_id = '".(int)$_GET['remove']."'"); */
 
 		$engine->sql_query(
-				"UPDATE {$engine->config['table_prefix']}page SET ".
-					"deleted	= '0' ".
-				"WHERE page_id = '".(int)$_GET['restore']."'");
+			"UPDATE {$engine->config['table_prefix']}page SET ".
+				"deleted	= '0' ".
+			"WHERE page_id = '".(int)$_GET['restore']."'");
 	}
 
-	$pages = $engine->load_deleted(100000, 0);
+
 ?>
 	<p>
 		List of removed pages and copies which were in the table revision.
@@ -61,38 +61,49 @@ function admin_content_deleted(&$engine, &$module)
 		or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)
 	</p>
 <?php
-	if ($pages == true)
+	if (list ($pages, $pagination) = $engine->load_deleted(50, false))
 	{
-		echo '<table>';
+		$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
 
-		foreach ($pages as $page)
+		// pagination
+		echo $show_pagination;
+
+		if ($pages == true)
 		{
-			// day header
-			list($day, $time) = explode(' ', $page['modified']);
+			echo '<table>';
 
-			if ($day != $curday)
+			foreach ($pages as $page)
 			{
-				if ($curday)
+				// day header
+				list($day, $time) = explode(' ', $page['modified']);
+
+				if ($day != $curday)
 				{
-					echo "\n";
+					if ($curday)
+					{
+						echo "\n";
+					}
+
+					echo '<tr><td colspan="2"><br /><strong>'.date($engine->config['date_format'],strtotime($day)).":</strong></td></tr>\n";
+					$curday = $day;
 				}
 
-				echo '<tr><td colspan="2"><br /><strong>'.date($engine->config['date_format'],strtotime($day)).":</strong></td></tr>\n";
-				$curday = $day;
+				// print entry
+				echo '<tr>'.
+						'<td class="lined" style="text-align:left">'.
+							'<small>'.date($engine->config['time_format_seconds'], strtotime($time)).' - '.
+							' [ <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->get_translation('RemoveButton').'</a> ]'.
+							' [ <a href="'.rawurldecode($engine->href()).'&amp;restore='.$page['page_id'].'">'.$engine->get_translation('RestoreButton').'</a> ]</small> '.
+							$engine->compose_link_to_page($page['tag'], 'revisions', '', 0).
+						'</td>'.
+					"</tr>\n";
 			}
 
-			// print entry
-			echo '<tr>'.
-					'<td class="lined" style="text-align:left">'.
-						'<small>'.date($engine->config['time_format_seconds'], strtotime($time)).' - '.
-						' [ <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->get_translation('RemoveButton').'</a> ]'.
-						' [ <a href="'.rawurldecode($engine->href()).'&amp;restore='.$page['page_id'].'">'.$engine->get_translation('RestoreButton').'</a> ]</small> '.
-						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0).
-					'</td>'.
-				"</tr>\n";
+			echo '</table>';
 		}
 
-		echo '</table>';
+		// pagination
+		echo $show_pagination;
 	}
 	else
 	{

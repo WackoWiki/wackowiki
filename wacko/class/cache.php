@@ -274,7 +274,10 @@ class Cache
 
 	function log($msg)
 	{
-		if ($this->debug > 2)
+		// TODO: avoid unnecessary cache log calls
+		// TODO: check if dir is writable
+		// Warning: file_put_contents(_cache/log) [function.file-put-contents]: failed to open stream: Permission denied
+		if ($this->debug > 5)
 		{
 			$file_name = $this->cache_dir.'log';
 
