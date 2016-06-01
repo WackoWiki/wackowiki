@@ -205,7 +205,7 @@ ob_end_clean();
 
 if (!headers_sent())
 {
-	header('HTTP/1.0 200 Ok');
+	header('HTTP/1.1 200 Ok');
 	//header('Content-type: text/javascript; charset=windows-1251');
 	header('Last-Modified: '.(string)(gmdate('D, d M Y H:i:s \G\M\T', time()) ));
 }
