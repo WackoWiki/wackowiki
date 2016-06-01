@@ -38,7 +38,7 @@ if ( isset($page_id) )
 		{
 			if (!headers_sent())
 			{
-				header('HTTP/1.0 301 Moved Permanently');
+				header('HTTP/1.1 301 Moved Permanently');
 			}
 
 		}

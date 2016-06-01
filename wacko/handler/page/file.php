@@ -143,7 +143,7 @@ else
 
 	if (!headers_sent())
 	{
-		header('HTTP/1.0 404 Not Found');
+		header('HTTP/1.1 404 Not Found');
 	}
 }
 
@@ -169,7 +169,7 @@ if ($error)
 
 	if (!headers_sent())
 	{
-		header('HTTP/1.0 404 Not Found'); // 403
+		header('HTTP/1.1 404 Not Found'); // 403
 	}
 }
 #########################################################
@@ -196,7 +196,7 @@ else if ($error == 404)
 {
 	if (!headers_sent())
 	{
-		header('HTTP/1.0 404 Not Found');
+		header('HTTP/1.1 404 Not Found');
 	}
 
 	echo $this->get_translation('UploadFileNotFound');
@@ -205,7 +205,7 @@ else
 {
 	if (!headers_sent())
 	{
-		header('HTTP/1.0 403 Forbidden');
+		header('HTTP/1.1 403 Forbidden');
 	}
 
 	echo $this->get_translation('UploadFileForbidden');
