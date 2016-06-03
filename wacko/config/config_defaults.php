@@ -27,7 +27,7 @@ $wacko_config_defaults = array(
 
 	'root_page'						=> 'HomePage',
 	'site_name'						=> 'MyWikiSite',
-	'site_desc'						=> 'Cover what you do best. Link to the rest!',
+	'site_desc'						=> 'Cover what you do best. Link to the rest.',
 		'base_url'					=> ($_SERVER['SERVER_PORT'] == 443
 											? 'https'
 											: 'http'
@@ -106,8 +106,6 @@ $wacko_config_defaults = array(
 	'footer_files'					=> 1,
 	'footer_rating'					=> 0,
 	'footer_tags'					=> 1,
-
-	'revisions_hide_cancel'			=> 0,
 
 	'show_spaces'					=> 1,
 	'numerate_links'				=> 0,

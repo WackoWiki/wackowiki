@@ -44,7 +44,6 @@ if (isset($_GET['confirm']))
 		// cache handling
 		if ($this->config['cache'])
 		{
-			$this->cache->invalidate_page_cache($this->tag);
 			$this->cache->invalidate_page_cache($this->supertag);
 		}
 		// log event

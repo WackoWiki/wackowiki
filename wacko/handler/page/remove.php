@@ -121,6 +121,22 @@ if ($this->is_admin()
 			}
 		}
 
+		// purge related page cache
+		if ($this->config['cache'])
+		{
+			if ($comment_on_id)
+			{
+				$this->cache->invalidate_page_cache($this->get_page_tag($comment_on_id));
+			}
+			else
+			{
+				$this->cache->invalidate_page_cache($this->supertag);
+			}
+
+			$message .= '<li>'.$this->get_translation('PageCachePurged')."</li>\n";
+		}
+
+
 		if ($this->remove_page($this->page['page_id'], $comment_on_id, $dontkeep))
 		{
 			if ($this->config['enable_feeds'])

@@ -29,6 +29,7 @@ $extension_map	= array(
 	'zip'		=> array('application', 'application/x-zip-compressed'),
 	'7z'		=> array('application', 'application/x-7z-compressed'),
 
+	// open document format
 	'odc'		=> array('application', 'application/vnd.oasis.opendocument.chart'),
 	'odb'		=> array('application', 'application/vnd.oasis.opendocument.database'),
 	'odf'		=> array('application', 'application/vnd.oasis.opendocument.formula'),
@@ -38,12 +39,12 @@ $extension_map	= array(
 	'ods'		=> array('application', 'application/vnd.oasis.opendocument.spreadsheet'),
 	'odt'		=> array('application', 'application/vnd.oasis.opendocument.text'),
 
-
 	// (legacy)
 	'pptx'		=> array('application', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'),
 	'xlsx'		=> array('application', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
 	'docx'		=> array('application', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'),
 
+	// audio
 	'mp3'		=> array('audio', 'audio/x-mpeg-3'),
 	'ogg'		=> array('audio', 'audio/ogg'),
 	'opus'		=> array('audio', 'audio/ogg'),
@@ -88,6 +89,7 @@ $file = $this->load_single(
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".(int)$page_id."'".
 		"AND f.file_name='".quote($this->dblink, $_GET['get'])."' ".
+		"AND f.deleted <> '1' ".
 	"LIMIT 1");
 
 if ($file)
@@ -183,8 +185,8 @@ if ($file_path)
 	{
 		// count file download
 		$this->sql_query(
-			"UPDATE {$this->config['table_prefix']}upload ".
-			"SET hits = '".($file['hits'] + 1)."' ".
+			"UPDATE {$this->config['table_prefix']}upload SET ".
+				"hits = '".($file['hits'] + 1)."' ".
 			"WHERE upload_id = '".$file['upload_id']."' ".
 			"LIMIT 1");
 	}

@@ -37,85 +37,6 @@ if (!isset($time))		$time	= '';
 #include_once('lib/SimplePie/autoloader.php');
 include_once('lib/SimplePie/simplepie.class.php');
 
-if (!function_exists('interval_calc'))
-{
-	function interval_calc($posted_time)
-	{
-		global $engine;
-
-		$now			= time();
-		$interval_secs	= $now - $posted_time;
-
-		if ($interval_secs > 2592000)
-		{
-			$interval = (($interval_secs - ($interval_secs % 2592000)) / 2592000);
-
-			if ($interval == 1)
-			{
-				$interval.= $engine->get_translation('FeedMonthAgo');
-			}
-			else
-			{
-				$interval.= $engine->get_translation('FeedMonthsAgo');
-			}
-		}
-		else if ($interval_secs > 604800)
-		{
-			$interval = (($interval_secs - ($interval_secs % 604800)) / 604800);
-
-			if ($interval == 1)
-			{
-				$interval.= $engine->get_translation('FeedWeekAgo');
-			}
-			else
-			{
-				$interval.= $engine->get_translation('FeedWeeksAgo');
-			}
-		}
-		else if ($interval_secs > 86400)
-		{
-			$interval = (($interval_secs - ($interval_secs % 86400)) / 86400);
-
-			if ($interval == 1)
-			{
-				$interval.= $engine->get_translation('FeedDayAgo');
-			}
-			else
-			{
-				$interval.= $engine->get_translation('FeedDaysAgo');
-			}
-		}
-		else if ($interval_secs > 3600)
-		{
-			$interval = (($interval_secs - ($interval_secs % 3600)) / 3600);
-
-			if ($interval == 1)
-			{
-				$interval.= $engine->get_translation('FeedHourAgo');
-			}
-			else
-			{
-				$interval.= $engine->get_translation('FeedHoursAgo');
-			}
-		}
-		else if ($interval_secs > 60)
-		{
-			$interval = (($interval_secs - ($interval_secs % 60)) / 60);
-
-			if ($interval == 1)
-			{
-				$interval.= $engine->get_translation('FeedMinuteAgo');
-			}
-			else
-			{
-				$interval.= $engine->get_translation('FeedMinutesAgo');
-			}
-		}
-
-		return  $interval;
-	}
-}
-
 if (!$url)
 {
 	echo '<p><em>'.$this->get_translation('FeedNoURL')."</em></p>\n";
@@ -254,7 +175,7 @@ else
 
 				if (($time == 1) && ($date != 0))
 				{
-					echo interval_calc($date);
+					echo $this->get_time_interval($date);
 				}
 
 				echo "</span></p>\n";
@@ -298,7 +219,7 @@ else
 
 				if (($time == 1) && ($date != 0))
 				{
-					echo '<p class="note"><span>'.interval_calc($date)."</span></p>\n";
+					echo '<p class="note"><span>'.$this->get_time_interval($date)."</span></p>\n";
 				}
 
 				echo '<div class="feed-content">'.$item->get_content()."</div>\n";
