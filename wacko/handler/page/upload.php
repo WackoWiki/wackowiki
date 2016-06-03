@@ -74,7 +74,6 @@ if ($this->can_upload() === true)
 				echo $this->form_open('remove_file', 'upload');
 				// !!!!! place here a reference to delete files
 ?>
-	<br />
 	<ul class="upload">
 		<li><?php echo $this->link($path.$file['file_name'] ); ?>
 			<br /><br />
@@ -191,7 +190,7 @@ if ($this->can_upload() === true)
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
 <?php
-// image dimension
+			// image dimension
 			if ($file['picture_w'])
 			{ ?>
 				<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
@@ -670,10 +669,8 @@ if ($this->has_access('read'))
 	echo $this->action('files', array()).'<br />';
 }
 
-if (!$this->config['revisions_hide_cancel'])
-{
-	echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
-}
+echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
+
 
 ?>
 </div>

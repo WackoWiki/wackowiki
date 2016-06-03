@@ -146,7 +146,6 @@ $config_db['reverse_proxy']					= $config['reverse_proxy'];
 $config_db['reverse_proxy_header']			= $config['reverse_proxy_header'];
 $config_db['reverse_proxy_addresses']		= $config['reverse_proxy_addresses'];
 $config_db['review']						= $config['review'];
-$config_db['revisions_hide_cancel']			= $config['revisions_hide_cancel'];
 $config_db['rewrite_mode']					= $config['rewrite_mode'];
 $config_db['root_page']						= $config['root_page'];
 $config_db['session_length']				= $config['session_length'];

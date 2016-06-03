@@ -43,7 +43,7 @@ if ($this->has_access('read')
 	if ($this->page['comment_on_id'])
 	{
 		$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->get_translation('PostedBy').' '.$this->user_link($this->page['user_name'], $lang = '', true, false).' '.$this->get_translation('At').' '.$this->get_time_formatted($this->page['modified']);
-		$this->show_message($message, 'commentinfo');
+		$this->show_message($message, 'comment-info');
 	}
 
 	// TODO: add values to post in show handler
@@ -248,7 +248,7 @@ if ($this->has_access('read')
 							? empty($_SESSION['title'])
 								? ''
 								: $_SESSION['title']
-							: '';
+							: $this->tag;
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
@@ -288,7 +288,7 @@ if ($this->has_access('read')
 
 		if ($this->config['edit_summary'] != 0)
 		{
-			$output .= '<div class="commenttitle">'."\n".'<a href="#">'.$title."</a>\n</div>\n";
+			$output .= '<div class="comment-title">'."\n".'<a href="#">'.$title."</a>\n</div>\n";
 		}
 
 		$output .= $preview;
@@ -330,8 +330,8 @@ if ($this->has_access('read')
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
 		$output .= '<br />'."\n";
-		$output .= '<label for="addcomment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
-		$output .= '<input type="text" id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
+		$output .= '<label for="comment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
+		$output .= '<input type="text" id="comment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
 		$output .= '<br />'."\n";
 	}
 	else if (!$this->page)
@@ -341,6 +341,15 @@ if ($this->has_access('read')
 		$output .= '<label for="addpage_title">'.$this->get_translation('MetaTitle').':</label><br />';
 		$output .= '<input type="text" id="addpage_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="100" name="title" />';
 		$output .= '<br />'."\n";
+	}
+	else
+	{
+		// page title
+		$output .= '<br />'."\n";
+		#$output .= '<label for="page_title">'.$this->get_translation('MetaTitle').'</label><br />';
+		#$output .= '<input type="text" id="page_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
+		$output .= '<h1>'.$this->page['title'].'</h1>';
+		#$output .= '<br />'."\n";
 	}
 
 	$output .= '<input type="hidden" name="previous" value="'.htmlspecialchars($previous, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /><br />'."\n";

@@ -117,6 +117,8 @@ if ($this->has_access('read'))
 			foreach ($comments as $comment)
 			{
 				#$i ++;
+				$handler_button = '';
+
 				echo '<li id="'.$comment['tag'].'" class="comment">'."\n";
 
 				// print comment
@@ -130,13 +132,18 @@ if ($this->has_access('read'))
 					|| ($this->config['owners_can_remove_comments'] && $this->is_owner($this->page['page_id']))
 				)))
 				{
-					echo '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" style="float: right; padding: 2px;" class="btn-delete"/></a>';
+					$handler_button .= '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" style="float: right; padding: 2px;" class="btn-delete"/></a>';
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->is_owner($comment['page_id']))
 				{
-					echo '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('EditCommentTip').'" alt="'.$this->get_translation('EditComment').'" style="float: right; padding: 2px;" class="btn-edit"/></a>';
+					$handler_button .= '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('EditCommentTip').'" alt="'.$this->get_translation('EditComment').'" style="float: right; padding: 2px;" class="btn-edit"/></a>';
+				}
+
+				if (!empty($handler_button))
+				{
+					echo '<nav>'.$handler_button."</nav>\n";
 				}
 
 				if ($comment['body_r'])
@@ -224,10 +231,12 @@ if ($this->has_access('read'))
 				$preview = $this->format($preview, 'post_wacko');
 
 				echo '<div id="preview" class="preview"><p class="preview"><span>'.$this->get_translation('EditPreviewSlim').'</span></p>'."\n".
-						 '<div class="comment-preview">'."\n".
-						 '<div class="comment-title">'.$title."</div>\n".
-						 $preview.
-						 "</div>\n</div><br />\n";
+						'<div class="comment-preview">'."\n".
+						'<header class="comment-title">'.
+							'<h2>'.$title."</h2>'.
+						'</header>\n".
+						'<p>'.$preview.'</p>'.
+						"</div>\n</div><br />\n";
 			}
 
 			// load WikiEdit
