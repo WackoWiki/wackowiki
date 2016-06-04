@@ -136,6 +136,8 @@ $wacko_translation = array(
 	'Revision'					=> 'Това е стара версия на <a href="%1">%2</a> от %3.',
 	'ReadAccessDenied'			=> 'Вие нямате права за да четете тази страница.',
 	'ReadAccessDeniedHintGuest'	=> '',
+	'PageDeletedInfo'			=> 'This page has been deleted.',
+
 	'YouAreOwner'				=> 'Собственик: Вие. ',
 	'Owner'						=> 'Собственик',
 	'Nobody'					=> 'Никой',
@@ -193,7 +195,7 @@ $wacko_translation = array(
 	'NotOwnerAndCantPurge'		=> 'You are not the owner of the page and you can not purge it.',
 	'ReallyPurge'				=> 'ATTENTION: Purging the page is irreversible!',
 	'SelectPurgeOptions'		=> 'Select the necessary purge options:',
-	'PurgeComments'				=> 'Purge comments of the page',
+	'PurgeComments'				=> 'Purge all comments of the page',
 	'CommentsPurged'			=> 'All comments were deleted.',
 	'PurgeFiles'				=> 'Remove all attached files',
 	'FilesPurged'				=> 'All attached files were removed.',
@@ -333,9 +335,12 @@ $wacko_translation = array(
 	'CommentsRemoved'			=> 'Comments from page изтрити.',
 	'FilesRemoved'				=> 'Files from page изтрити.',
 	'PageRemoved'				=> 'Страница изтрита.',
+	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page изтрити.',
 	'ThisActionHavenotUndo'		=> 'Изтриването не може да се отмени.',
+	'PageRestored'				=> 'Page restored.',
+	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Версия за печат',
 	'PrintText'					=> 'Версия за печат',
@@ -577,6 +582,9 @@ $wacko_translation = array(
 	'NewPageCreated'			=> 'Created a new page',
 	'NewRevisionAdded'			=> 'Changed page',
 	'Cluster'					=> 'cluster',
+	'PageDeleted'				=> 'Page deleted',
+	'CommentDeleted'			=> 'Comment deleted',
+	'FileDeleted'				=> 'File deleted',
 
 	// users action
 	'UsersSearch'				=> 'Find Users',

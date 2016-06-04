@@ -136,6 +136,8 @@ $wacko_translation = array(
 	'Revision'					=> 'See on varasem redigeering <a href="%1">%2</a> %3.',
 	'ReadAccessDenied'			=> 'Sul pole õigusi seda lehte lugeda.',
 	'ReadAccessDeniedHintGuest'	=> '',
+	'PageDeletedInfo'			=> 'This page has been deleted.',
+
 	'YouAreOwner'				=> 'Sa oled selle lehe omanik.',
 	'Owner'						=> 'Omanik',
 	'Nobody'					=> 'Mittekeegi',
@@ -193,7 +195,7 @@ $wacko_translation = array(
 	'NotOwnerAndCantPurge'	=> 'You are not the owner of the page and you can not purge it.',
 	'ReallyPurge'			=> 'ATTENTION: Purging the page is irreversible!',
 	'SelectPurgeOptions'	=> 'Select the necessary purge options:',
-	'PurgeComments'			=> 'Purge comments of the page',
+	'PurgeComments'			=> 'Purge all comments of the page',
 	'CommentsPurged'		=> 'All comments were deleted.',
 	'PurgeFiles'			=> 'Remove all attached files',
 	'FilesPurged'			=> 'All attached files were removed.',
@@ -333,9 +335,12 @@ $wacko_translation = array(
 	'CommentsRemoved'			=> 'Comments from page eemaldatud.',
 	'FilesRemoved'				=> 'Files from page removed.',
 	'PageRemoved'				=> 'Leht eemaldatud.',
+	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page eemaldatud.',
 	'ThisActionHavenotUndo'		=> 'See tegevus pole taastatav.',
+	'PageRestored'				=> 'Page restored.',
+	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion' => 'Prinditav versioon',
 	'PrintText' => 'Print',
@@ -584,6 +589,9 @@ $wacko_translation = array(
 	'NewPageCreated'		=> 'Created a new page',
 	'NewRevisionAdded'		=> 'Changed page',
 	'Cluster'				=> 'cluster',
+	'PageDeleted'				=> 'Page deleted',
+	'CommentDeleted'			=> 'Comment deleted',
+	'FileDeleted'				=> 'File deleted',
 
 	// users action
 	'UsersSearch'			=> 'Find Users',

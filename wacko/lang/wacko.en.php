@@ -136,6 +136,8 @@ $wacko_translation = array(
 	'Revision'					=> 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
 	'ReadAccessDenied'			=> 'You aren\'t allowed to read this page.',
 	'ReadAccessDeniedHintGuest'	=> 'Consider logging in to read this page.',
+	'PageDeletedInfo'			=> 'This page has been deleted.',
+
 	'YouAreOwner'				=> 'You are the owner of this page.',
 	'Owner'						=> 'Owner',
 	'Nobody'					=> 'Nobody',
@@ -193,7 +195,7 @@ $wacko_translation = array(
 	'NotOwnerAndCantPurge'		=> 'You are not the owner of the page and you can not purge it.',
 	'ReallyPurge'				=> 'ATTENTION: Purging the page is irreversible!',
 	'SelectPurgeOptions'		=> 'Select the necessary purge options:',
-	'PurgeComments'				=> 'Purge comments of the page',
+	'PurgeComments'				=> 'Purge all comments of the page',
 	'CommentsPurged'			=> 'All comments were deleted.',
 	'PurgeFiles'				=> 'Remove all attached files',
 	'FilesPurged'				=> 'All attached files were removed.',
@@ -332,9 +334,12 @@ $wacko_translation = array(
 	'CommentsRemoved'			=> 'Comments from page removed.',
 	'FilesRemoved'				=> 'Files from page removed.',
 	'PageRemoved'				=> 'Page removed.',
+	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions removed.',
 	'ThisActionHavenotUndo'		=> 'This action cannot be undone.',
+	'PageRestored'				=> 'Page restored.',
+	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Print version',
 	'PrintText'					=> 'Print',
@@ -584,6 +589,9 @@ $wacko_translation = array(
 	'NewPageCreated'			=> 'Created a new page',
 	'NewRevisionAdded'			=> 'Changed page',
 	'Cluster'					=> 'cluster',
+	'PageDeleted'				=> 'Page deleted',
+	'CommentDeleted'			=> 'Comment deleted',
+	'FileDeleted'				=> 'File deleted',
 
 	// users action
 	'UsersSearch'				=> 'Find Users',

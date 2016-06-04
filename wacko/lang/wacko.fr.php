@@ -136,6 +136,8 @@ $wacko_translation = array(
 	'Revision'					=> 'Ceci est une ancienne version de <a href="%1">%2</a> de %3.',
 	'ReadAccessDenied'			=> 'Vous n&rsquo;êtes pas autorisé(e) à  voir cette page.',
 	'ReadAccessDeniedHintGuest'	=> '',
+	'PageDeletedInfo'			=> 'This page has been deleted.',
+
 	'YouAreOwner'				=> 'Vous êtes le propriétaire de cette page.',
 	'Owner'						=> 'Propriétaire ',
 	'Nobody'					=> 'Personne',
@@ -333,9 +335,12 @@ $wacko_translation = array(
 	'CommentsRemoved'			=> 'Commentaires de la page effacés.',
 	'FilesRemoved'				=> 'Fichiers pour la page enlevés.',
 	'PageRemoved'				=> 'Page effacée.',
+	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'Toutes le pages du groupe ont été effacées.',
 	'RevisionsRemoved'			=> 'Anciennes versions de la page effacées.',
 	'ThisActionHavenotUndo'		=> 'Cette action ne peut être annulée.',
+	'PageRestored'				=> 'Page restored.',
+	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Version pour impression',
 	'PrintText'					=> 'Impression',
@@ -584,6 +589,9 @@ $wacko_translation = array(
 	'NewPageCreated'			=> 'Nouvelle page créée',
 	'NewRevisionAdded'			=> 'Page modifiée',
 	'Cluster'					=> 'Groupe',
+	'PageDeleted'				=> 'Page deleted',
+	'CommentDeleted'			=> 'Comment deleted',
+	'FileDeleted'				=> 'File deleted',
 
 	// users action
 	'UsersSearch'				=> 'Trouver des utilisateurs',
