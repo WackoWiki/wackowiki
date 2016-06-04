@@ -35,11 +35,11 @@ if (!function_exists('formatter_source_callback'))
 
 if ($options['default'] == 'wacko')
 {
-	// cut comments
+	// strip comments
 	$text = preg_replace( '/(\n?)%%\((comment)\).*?%%([\n\r]*)/ims', '', $text );
 
 	// insert about the source
-	$text = $text.= "\n\n----\n".$this->get_translation('SourceFrom').'(('.$options['source'].'))';
+	$text = $text.= "\n\n----\n".$this->get_translation('SourceFrom').'((/'.$options['source'].'))';
 
 	// prepare a text to the conclusion
 	$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
@@ -62,8 +62,7 @@ else
 	else if ($options['default'] == 'simplebr')
 	{
 		// insert about the source
-		$text = $text.="\n\n<hr />\n".$this->get_translation('SourceFrom').
-		$this->href($options['source']);
+		$text = $text.="\n\n<hr />\n".$this->get_translation('SourceFrom').$this->href($options['source']);
 
 		$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	}
@@ -87,9 +86,9 @@ if ($options['copy_button'])
 	echo '<textarea style="display:none" id="textarea_'.$div_id.'" ></textarea>';
 }
 
-echo '<div id="'.$div_id.'" class="code" style="padding:5px">';
+echo '<pre id="'.$div_id.'" class="code" style="padding:5px">';
 echo $output;
-echo '</div>';
+echo '</pre>';
 
 echo '<!--/notypo-->';
 
