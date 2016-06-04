@@ -32,7 +32,7 @@ if ($this->has_access('read'))
 	/* obsolete code - or do we need an ability to print old revisions?
 	if ($this->page['latest'] == 0)
 	{
-		echo "<div class=\"revisioninfo\">".
+		echo '<div class="revisioninfo">'.
 		str_replace('%1', $this->href(),
 		str_replace('%2', $this->tag,
 		str_replace('%3', $this->page['modified'],
