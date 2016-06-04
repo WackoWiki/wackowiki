@@ -37,6 +37,11 @@ function admin_content_deleted(&$engine, &$module)
 		$engine->sql_query(
 			"DELETE FROM {$engine->config['table_prefix']}page ".
 			"WHERE page_id = '".(int)$_GET['remove']."'");
+
+		$engine->sql_query(
+			"DELETE FROM {$engine->config['table_prefix']}upload ".
+			"WHERE page_id = '".(int)$_GET['remove']."'");
+
 	}
 
 	// restore specific page revisions
@@ -47,10 +52,8 @@ function admin_content_deleted(&$engine, &$module)
 				"deleted	= '0' ".
 			"WHERE page_id = '".(int)$_GET['remove']."'"); */
 
-		$engine->sql_query(
-			"UPDATE {$engine->config['table_prefix']}page SET ".
-				"deleted	= '0' ".
-			"WHERE page_id = '".(int)$_GET['restore']."'");
+		$engine->restore_page((int)$_GET['restore']);
+		$engine->restore_file((int)$_GET['restore']);
 	}
 
 
@@ -94,7 +97,7 @@ function admin_content_deleted(&$engine, &$module)
 							'<small>'.date($engine->config['time_format_seconds'], strtotime($time)).' - '.
 							' [ <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->get_translation('RemoveButton').'</a> ]'.
 							' [ <a href="'.rawurldecode($engine->href()).'&amp;restore='.$page['page_id'].'">'.$engine->get_translation('RestoreButton').'</a> ]</small> '.
-							$engine->compose_link_to_page($page['tag'], 'revisions', '', 0).
+							$engine->compose_link_to_page($page['tag'], 'revisions', '', 0, $page['title']).
 						'</td>'.
 					"</tr>\n";
 			}

@@ -273,9 +273,10 @@ class Wacko
 	* @param string $file_name Filename
 	* @param string $unwrapped_tag Optional. Unwrapped supertag. If
 	* not set, then check if file exists in global space
+	* @param boolean $deleted
 	* @return array File description array
 	*/
-	function check_file_exists($file_name, $unwrapped_tag = '' )
+	function check_file_exists($file_name, $unwrapped_tag = '', $deleted = 0)
 	{
 		if ($unwrapped_tag == '')
 		{
@@ -311,6 +312,9 @@ class Wacko
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE page_id = '".(int)$page_id."' ".
 					"AND file_name = '".quote($this->dblink, $file_name)."' ".
+					($deleted != 1
+						? "AND deleted <> '1' "
+						: "").
 				"LIMIT 1");
 
 			if (count($file) == 0)
@@ -400,6 +404,80 @@ class Wacko
 
 		return date($this->config['date_format'].' '.
 			$this->config['time_format_seconds'], $tz_time);
+	}
+
+	function get_time_interval($posted_time)
+	{
+		$now			= time();
+		$interval_secs	= $now - $posted_time;
+
+		if ($interval_secs > 2592000)
+		{
+			$interval = (($interval_secs - ($interval_secs % 2592000)) / 2592000);
+
+			if ($interval == 1)
+			{
+				$interval.= $this->get_translation('FeedMonthAgo');
+			}
+			else
+			{
+				$interval.= $this->get_translation('FeedMonthsAgo');
+			}
+		}
+		else if ($interval_secs > 604800)
+		{
+			$interval = (($interval_secs - ($interval_secs % 604800)) / 604800);
+
+			if ($interval == 1)
+			{
+				$interval.= $this->get_translation('FeedWeekAgo');
+			}
+			else
+			{
+				$interval.= $this->get_translation('FeedWeeksAgo');
+			}
+		}
+		else if ($interval_secs > 86400)
+		{
+			$interval = (($interval_secs - ($interval_secs % 86400)) / 86400);
+
+			if ($interval == 1)
+			{
+				$interval.= $this->get_translation('FeedDayAgo');
+			}
+			else
+			{
+				$interval.= $this->get_translation('FeedDaysAgo');
+			}
+		}
+		else if ($interval_secs > 3600)
+		{
+			$interval = (($interval_secs - ($interval_secs % 3600)) / 3600);
+
+			if ($interval == 1)
+			{
+				$interval.= $this->get_translation('FeedHourAgo');
+			}
+			else
+			{
+				$interval.= $this->get_translation('FeedHoursAgo');
+			}
+		}
+		else if ($interval_secs > 60)
+		{
+			$interval = (($interval_secs - ($interval_secs % 60)) / 60);
+
+			if ($interval == 1)
+			{
+				$interval.= $this->get_translation('FeedMinuteAgo');
+			}
+			else
+			{
+				$interval.= $this->get_translation('FeedMinutesAgo');
+			}
+		}
+
+		return  $interval;
 	}
 
 	// LANG FUNCTIONS
@@ -1460,7 +1538,22 @@ class Wacko
 	function set_page($page)
 	{
 		$lang_list	= $this->available_languages();
-		$this->page	= $page;
+
+		if ($page['deleted'] == true && $this->is_admin() == false)
+		{
+			$page['body']			= '';
+			$page['body_r']			= '';
+			$page['title']			= '';
+			$page['description']	= '';
+			$page['keywords']		= '';
+			$page['noindex']		= 1;
+
+			$this->page	= $page;
+		}
+		else
+		{
+			$this->page	= $page;
+		}
 
 		if ($this->page['tag'])
 		{
@@ -1563,8 +1656,8 @@ class Wacko
 				"INNER JOIN ".$this->config['table_prefix']."page p ON (p.page_id = l.page_id) ".
 				"INNER JOIN ".$this->config['table_prefix']."upload u ON (u.upload_id = l.file_id) ".
 			"WHERE ".($for
-						? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
-						: "").
+					? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
+					: "").
 				"l.file_id = '".(int) $file_id."' ".
 			"ORDER BY tag", true);
 	}
@@ -1700,19 +1793,35 @@ class Wacko
 		}
 	}
 
-	function load_deleted($limit = 1000, $cache = true)
+	function load_deleted($limit = 50, $cache = true)
 	{
-		$meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.page_lang, p.title, p.keywords, p.description';
+		$limit		= (int) $limit;
+		$pagination	= '';
 
-		return $this->load_all(
-			"SELECT {$meta} ".
-			"FROM {$this->config['table_prefix']}page p ".
-			"WHERE p.deleted = '1' ".
-			"ORDER BY p.modified DESC, p.tag ASC ".
-			( $limit > 0
-				? "LIMIT {$limit}"
-				: ''
-			), $cache);
+		// count pages
+		if ($count_deleted = $this->load_all(
+			"SELECT p.page_id ".
+			"FROM ".$this->config['table_prefix']."page p ".
+			"WHERE p.deleted = '1' "
+			, true));
+
+		if ($count_deleted)
+		{
+			$count			= count($count_deleted);
+			$pagination		= $this->pagination($count, $limit);
+			$meta			= 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.page_lang, p.title, p.keywords, p.description, u.user_name';
+
+			$deleted = $this->load_all(
+				"SELECT {$meta} ".
+				"FROM ".$this->config['table_prefix']."page p ".
+					#"LEFT JOIN ".$this->config['table_prefix']."page b ON (p.comment_on_id = b.page_id) ".
+					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+				"WHERE p.deleted = '1' ".
+				"ORDER BY p.modified DESC, p.tag ASC ".
+				"LIMIT {$pagination['offset']}, {$limit}", $cache);
+
+			return array($deleted, $pagination);
+		}
 	}
 
 	function load_categories($tag, $page_id = 0, $cache = false)
@@ -1737,7 +1846,6 @@ class Wacko
 
 	function get_child_list()
 	{}
-
 
 	function bad_words($text)
 	{
@@ -1892,7 +2000,6 @@ class Wacko
 			}
 			else
 			{
-				$this->cache->invalidate_page_cache($this->tag);
 				$this->cache->invalidate_page_cache($this->supertag);
 			}
 
@@ -2371,11 +2478,11 @@ class Wacko
 		}
 
 		$this->sql_query(
-				"UPDATE {$this->config['user_table']} SET ".
-					"enabled		= '".(int)$enabled."', ".
-					"account_status	= '".(int)$account_status."' ".
-				"WHERE user_id = '".(int)$user_id."' ".
-				"LIMIT 1");
+			"UPDATE {$this->config['user_table']} SET ".
+				"enabled		= '".(int)$enabled."', ".
+				"account_status	= '".(int)$account_status."' ".
+			"WHERE user_id = '".(int)$user_id."' ".
+			"LIMIT 1");
 	}
 
 	function approve_user($user_id, $account_status, $user_name, $email, $user_lang)
@@ -3264,7 +3371,7 @@ class Wacko
 		}
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
 		{
-			// this is a uploaded file:
+			// this is a uploaded file
 			// TODO: add file link tracking
 			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
 			$_file_name		= $matches[2];
@@ -3273,6 +3380,7 @@ class Wacko
 			$class			= 'file-link'; // generic file icon
 			$_global		= true;
 			$file_access	= false;
+			$have_global	= false;
 
 			#$this->debug_print_r($matches);
 			#$this->debug_print_r($arr);
@@ -3285,6 +3393,7 @@ class Wacko
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
 					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+					$have_global = true;
 
 					// tracking file link
 					if ($link_tracking)
@@ -3322,8 +3431,17 @@ class Wacko
 				}
 			}
 
-			if (!$url) // case 3 -> check for local file
+			if (!$url || $have_global) // case 3 -> check for local file
 			{
+				// keep data from global file, maybe we need it
+				if ($have_global)
+				{
+					$_global_file_name	= $file_name;
+					$_global_file_data	= $file_data;
+					$_global_url		= $url;
+					$url				= '';
+				}
+
 				#echo '####3: local file <br />';
 				$_global	= false;
 				$file_name	= $arr[count($arr) - 1];
@@ -3339,27 +3457,41 @@ class Wacko
 				//unwrap tag (check !/, ../ cases)
 				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
 				$page_id	= $this->get_page_id($page_tag); // TODO: supertag won't match tag! in cache
-				$file_data	= $this->check_file_exists($file_name, $page_tag);
-				$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
 
-				// tracking file link
-				if ($link_tracking)
+				if ($file_data	= $this->check_file_exists($file_name, $page_tag))
 				{
-					// add file link only once
-					if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file_link))
+					$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
+
+					// tracking file link
+					if ($link_tracking)
 					{
-						#echo '## 3 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
-						$this->file_link[] = $file_data['upload_id'];
-						$this->track_link_to($file_data['upload_id'], 'file');
+						// add file link only once
+						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file_link))
+						{
+							#echo '## 3 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
+							$this->file_link[] = $file_data['upload_id'];
+							$this->track_link_to($file_data['upload_id'], 'file');
+						}
+					}
+
+					if ($this->is_admin()
+					|| ($file_data['upload_id'] && ($this->page['owner_id'] == $this->get_user_id()))
+					|| ($this->has_access('read', $page_id))
+					|| ($file_data['user_id'] == $this->get_user_id()))
+					{
+						$file_access = true;
 					}
 				}
 
-				if ($this->is_admin()
-				|| ($file_data['upload_id'] && ($this->page['owner_id'] == $this->get_user_id()))
-				|| ($this->has_access('read', $page_id))
-				|| ($file_data['user_id'] == $this->get_user_id()))
+				// no local file available, take the global file
+				if (!$url && $have_global)
 				{
-					$file_access = true;
+					$_global	= true;
+					$file_name	= $_global_file_name;
+					$file_data	= $_global_file_data;
+					$url		= $_global_url;
+
+					unset ($_global_url, $_global_file_data, $_global_file_name);
 				}
 			}
 
@@ -4385,7 +4517,7 @@ class Wacko
 				}
 				else
 				{
-					header('HTTP/1.0 400 Bad Request');
+					header('HTTP/1.1 400 Bad Request');
 
 					// TODO: token should be reset, generation of per-request tokens as opposed to per-session tokens
 					// TODO: suspiciously repeated form requests/form submissions, using Captchas to prevent automatic requests
@@ -4951,6 +5083,25 @@ class Wacko
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 		}
+	}
+
+	// update comments count and date on commented page
+	function update_comments_count($comment_on_id)
+	{
+		// load latest comment
+		$comment = $this->load_single(
+			"SELECT created ".
+			"FROM {$this->config['table_prefix']}page ".
+			"WHERE comment_on_id = '".(int)$comment_on_id."' ".
+			"ORDER BY created DESC ".
+			"LIMIT 1");
+
+		$this->sql_query(
+			"UPDATE {$this->config['table_prefix']}page SET ".
+				"comments	= '".$this->count_comments($comment_on_id)."', ".
+				"commented	= '".quote($this->dblink, $comment['created'])."' ".
+			"WHERE page_id	= '".(int)$comment_on_id."' ".
+			"LIMIT 1");
 	}
 
 	function get_list_count($max, $default = 50)
@@ -6112,22 +6263,25 @@ class Wacko
 
 					$this->sql_query(
 						"INSERT INTO ".$this->config['table_prefix']."menu SET ".
-						"user_id			= '".$user['user_id']."', ".
-						"page_id			= '".$this->page['page_id']."', ".
-						"menu_lang				= '".quote($this->dblink, ($user['user_lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
-						"menu_position		= '".(int)($_menu_item_count + 1)."'");
+							"user_id			= '".$user['user_id']."', ".
+							"page_id			= '".$this->page['page_id']."', ".
+							"menu_lang				= '".quote($this->dblink, ($user['user_lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
+							"menu_position		= '".(int)($_menu_item_count + 1)."'");
 				}
 			}
 
-			// parsing menu items into link table
-			foreach ($menu as $menu_item)
+			if (is_array($menu))
 			{
-				$menu_page_ids[]	= $menu_item[0];
-				$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $menu_item[2]);
-			}
+				// parsing menu items into link table
+				foreach ($menu as $menu_item)
+				{
+					$menu_page_ids[]	= $menu_item[0];
+					$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $menu_item[2]);
+				}
 
-			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
-			$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
+				$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
+				$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
+			}
 		}
 
 		// removing menu item
@@ -6668,12 +6822,12 @@ class Wacko
 		// show also $deleted = 1
 		if ($this->is_admin())
 		{
-			$page		= $this->load_page($this->tag, 0, $revision_id, '', '', 1);
+			$page		= $this->load_page($this->tag, 0, $revision_id, '', '', true);
 		}
 		else
 		{
 			$page		= $this->load_page($this->tag, 0, $revision_id);
-			#$page		= $this->load_page($this->tag, 0, $revision_id, '', '', 1);
+			#$page		= $this->load_page($this->tag, 0, $revision_id, '', '', true);
 		}
 
 		// TODO: obsolete? Add description what it does
@@ -7154,14 +7308,14 @@ class Wacko
 			// saving original
 			$this->save_revision($page);
 
-			// saving updated for the current user
+			// saving updated for the current user and flag it as deleted
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}page SET ".
-				"modified	= '".date(SQL_DATE_FORMAT)."', ".
-				"ip			= '".$this->get_user_ip()."', ".
-				"deleted	= '1', ".
-				#"edit_note	= '".$this->get_user_ip()."', ".
-				"user_id	= '".$this->get_user_id()."' ".
+					"modified	= '".date(SQL_DATE_FORMAT)."', ".
+					"ip			= '".$this->get_user_ip()."', ".
+					"deleted	= '1', ".
+					#"edit_note	= '".$this->get_user_ip()."', ". // removed
+					"user_id	= '".$this->get_user_id()."' ".
 				"WHERE page_id	= '".(int)$page_id."' ".
 				"LIMIT 1");
 		}
@@ -7176,20 +7330,7 @@ class Wacko
 		// update for removed comment correct comments count and date on commented page
 		if ($comment_on_id)
 		{
-			// load latest comment
-			$comment = $this->load_single(
-				"SELECT created ".
-				"FROM {$this->config['table_prefix']}page ".
-				"WHERE comment_on_id = '".(int)$comment_on_id."' ".
-				"ORDER BY created DESC ".
-				"LIMIT 1");
-
-			$this->sql_query(
-				"UPDATE {$this->config['table_prefix']}page SET ".
-					"comments	= '".$this->count_comments($comment_on_id)."', ".
-					"commented	= '".quote($this->dblink, $comment['created'])."' ".
-				"WHERE page_id	= '".(int)$comment_on_id."' ".
-				"LIMIT 1");
+			$this->update_comments_count($comment_on_id);
 		}
 
 		return true;
@@ -7400,7 +7541,7 @@ class Wacko
 				// flag record as deleted in DB
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}upload SET ".
-					"deleted	= '1' ".
+						"deleted	= '1' ".
 					"WHERE page_id = '".$page['page_id']."'");
 			}
 			else
@@ -7422,6 +7563,37 @@ class Wacko
 		}
 
 		return true;
+	}
+
+	function restore_page($page_id)
+	{
+		if (!$page_id)
+		{
+			return false;
+		}
+
+		$this->sql_query(
+			"UPDATE {$this->config['table_prefix']}page SET ".
+				"deleted	= '0' ".
+			"WHERE page_id = '".(int)$page_id."'");
+	}
+
+	function restore_revision()
+	{
+
+	}
+
+	function restore_file($page_id)
+	{
+		if (!$page_id)
+		{
+			return false;
+		}
+
+		$this->sql_query(
+			"UPDATE {$this->config['table_prefix']}upload SET ".
+				"deleted	= '0' ".
+			"WHERE page_id = '".(int)$page_id."'");
 	}
 
 	// ADDITIONAL METHODS
