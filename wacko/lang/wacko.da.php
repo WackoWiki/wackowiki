@@ -136,6 +136,8 @@ $wacko_translation = array(
 	'Revision'					=> 'Dette er en ældre version af <a href="%1">%2</a> fra %3.',
 	'ReadAccessDenied'			=> 'Du har ikke lov til at se denne side.',
 	'ReadAccessDeniedHintGuest'	=> '',
+	'PageDeletedInfo'			=> 'This page has been deleted.',
+
 	'YouAreOwner'				=> 'Du ejer denne side.',
 	'Owner'						=> 'Ejer',
 	'Nobody'					=> 'Ingen',
@@ -193,7 +195,7 @@ $wacko_translation = array(
 	'NotOwnerAndCantPurge'		=> 'You are not the owner of the page and you can not purge it.',
 	'ReallyPurge'				=> 'ATTENTION: Purging the page is irreversible!',
 	'SelectPurgeOptions'		=> 'Select the necessary purge options:',
-	'PurgeComments'				=> 'Purge comments of the page',
+	'PurgeComments'				=> 'Purge all comments of the page',
 	'CommentsPurged'			=> 'All comments were deleted.',
 	'PurgeFiles'				=> 'Remove all attached files',
 	'FilesPurged'				=> 'All attached files were removed.',
@@ -333,9 +335,12 @@ $wacko_translation = array(
 	'CommentsRemoved'			=> 'Comments from page fjernet.',
 	'FilesRemoved'				=> 'Files from page fjernet.',
 	'PageRemoved'				=> 'Siden fjernet.',
+	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page fjernet.',
 	'ThisActionHavenotUndo'		=> 'Denne handling kan du ikke fortryde!',
+	'PageRestored'				=> 'Page restored.',
+	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Udskrivningsversion',
 	'PrintText'					=> 'Udskrivning',
@@ -584,6 +589,9 @@ $wacko_translation = array(
 	'NewPageCreated'			=> 'Created a new page',
 	'NewRevisionAdded'			=> 'Changed page',
 	'Cluster'					=> 'cluster',
+	'PageDeleted'				=> 'Page deleted',
+	'CommentDeleted'			=> 'Comment deleted',
+	'FileDeleted'				=> 'File deleted',
 
 	// users action
 	'UsersSearch'				=> 'Find Users',

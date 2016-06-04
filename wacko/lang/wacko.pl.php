@@ -136,6 +136,8 @@ $wacko_translation = array(
 	'Revision'					=> 'To jest poprzednia wersja <a href="%1">%2</a> z %3.',
 	'ReadAccessDenied'			=> 'Przepraszamy! Nie masz dostêpu do tej strony.',
 	'ReadAccessDeniedHintGuest'	=> '',
+	'PageDeletedInfo'			=> 'This page has been deleted.',
+
 	'YouAreOwner'				=> 'Jeste¶ autorem tej strony.',
 	'Owner'						=> 'Autor',
 	'Nobody'					=> 'Anonim',
@@ -193,7 +195,7 @@ $wacko_translation = array(
 	'NotOwnerAndCantPurge'		=> 'You are not the owner of the page and you can not purge it.',
 	'ReallyPurge'				=> 'ATTENTION: Purging the page is irreversible!',
 	'SelectPurgeOptions'		=> 'Select the necessary purge options:',
-	'PurgeComments'				=> 'Purge comments of the page',
+	'PurgeComments'				=> 'Purge all comments of the page',
 	'CommentsPurged'			=> 'All comments were deleted.',
 	'PurgeFiles'				=> 'Remove all attached files',
 	'FilesPurged'				=> 'All attached files were removed.',
@@ -333,9 +335,12 @@ $wacko_translation = array(
 	'CommentsRemoved'			=> 'Comments from page usuniête.',
 	'FilesRemoved'				=> 'Files from page usuniête.',
 	'PageRemoved'				=> 'Strona zosta³a usuniêta.',
+	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page usuniête.',
 	'ThisActionHavenotUndo'		=> 'UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!',
+	'PageRestored'				=> 'Page restored.',
+	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion' => 'Wersja do druku',
 	'PrintText' => 'Print',
@@ -584,6 +589,9 @@ $wacko_translation = array(
 	'NewPageCreated'		=> 'Created a new page',
 	'NewRevisionAdded'		=> 'Changed page',
 	'Cluster'				=> 'cluster',
+	'PageDeleted'				=> 'Page deleted',
+	'CommentDeleted'			=> 'Comment deleted',
+	'FileDeleted'				=> 'File deleted',
 
 	// users action
 	'UsersSearch'			=> 'Find Users',
