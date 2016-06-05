@@ -53,7 +53,10 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 		// check new page write access
 		if ($this->has_access('create', $this->get_page_id($prefix.$new_tag)))
 		{
-			// str_replace: fixed newPage&amp;add=1
+			// keep the original input for page titel
+			$_SESSION['title'] = $new_tag;
+
+			// str_replace: fixes newPage&amp;add=1
 			$this->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix.$new_tag, '', 1))));
 		}
 		else
@@ -90,15 +93,19 @@ if (substr_count($this->tag, '/') > 0)
 {
 	$parent = substr($this->tag, 0, strrpos($this->tag, '/'));
 
-	echo $this->form_open('parent_cluster_page', 'new');
-	echo '<input type="hidden" name="option" value="2" />';
-	echo '<label for="create_pageparentcluster">'.$this->get_translation('CreatePageParentCluster').':</label><br />';
-
 	if ($this->has_access('create', $this->get_page_id($parent)))
 	{
-		echo '<code>'.( strlen($parent) > 50 ? '...'.substr($parent, -50) : $parent ).'/</code>'.
-			'<input type="text" id="create_pageparentcluster" name="tag" value="'.( isset($_POST['option']) && $_POST['option'] === 2 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="255" /> '.
-			'<input type="submit" id="submit_pageparentcluster" value="'.$this->get_translation('CreatePageButton').'" />';
+		// hide users cluster
+		if ($parent != $this->config['users_page'])
+		{
+			echo $this->form_open('parent_cluster_page', 'new');
+			echo '<input type="hidden" name="option" value="2" />';
+			echo '<label for="create_pageparentcluster">'.$this->get_translation('CreatePageParentCluster').':</label><br />';
+			echo '<code>'.( strlen($parent) > 50 ? '...'.substr($parent, -50) : $parent ).'/</code>'.
+				 '<input type="text" id="create_pageparentcluster" name="tag" value="'.( isset($_POST['option']) && $_POST['option'] === 2 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="255" /> '.
+				 '<input type="submit" id="submit_pageparentcluster" value="'.$this->get_translation('CreatePageButton').'" />';
+			echo $this->form_close();
+		}
 	}
 	else
 	{
@@ -106,7 +113,7 @@ if (substr_count($this->tag, '/') > 0)
 		$this->show_message($message, 'info');
 	}
 
-	echo $this->form_close();
+
 	echo '<br />';
 }
 
