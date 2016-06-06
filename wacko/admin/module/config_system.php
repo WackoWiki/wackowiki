@@ -34,25 +34,34 @@ function admin_config_system(&$engine, &$module)
 
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['debug']					= (int)$_POST['debug'];
-		$config['debug_sql_threshold']		= (float)$_POST['debug_sql_threshold'];
-		$config['debug_admin_only']			= (int)$_POST['debug_admin_only'];
-		$config['cache']					= (int)$_POST['cache'];
-		$config['cache_ttl']				= (int)$_POST['cache_ttl'];
-		$config['cache_sql']				= (int)$_POST['cache_sql'];
-		$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
-		$config['cookie_prefix']			= (string)$_POST['cookie_prefix'];
-		$config['session_prefix']			= (string)$_POST['session_prefix'];
-		$config['rewrite_mode']				= (int)$_POST['rewrite_mode'];
-		$config['reverse_proxy']			= (int)$_POST['reverse_proxy'];
-		$config['reverse_proxy_header']		= (int)$_POST['reverse_proxy_header'];
-		$config['reverse_proxy_addresses']	= (int)$_POST['reverse_proxy_addresses'];
+		// check form token
+		if (!$engine->validate_form_token('system'))
+		{
+			$message = $engine->get_translation('FormInvalid');
+			$engine->set_message($message, 'error');
+		}
+		else
+		{
+			$config['debug']					= (int)$_POST['debug'];
+			$config['debug_sql_threshold']		= (float)$_POST['debug_sql_threshold'];
+			$config['debug_admin_only']			= (int)$_POST['debug_admin_only'];
+			$config['cache']					= (int)$_POST['cache'];
+			$config['cache_ttl']				= (int)$_POST['cache_ttl'];
+			$config['cache_sql']				= (int)$_POST['cache_sql'];
+			$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
+			$config['cookie_prefix']			= (string)$_POST['cookie_prefix'];
+			$config['session_prefix']			= (string)$_POST['session_prefix'];
+			$config['rewrite_mode']				= (int)$_POST['rewrite_mode'];
+			$config['reverse_proxy']			= (int)$_POST['reverse_proxy'];
+			$config['reverse_proxy_header']		= (int)$_POST['reverse_proxy_header'];
+			$config['reverse_proxy_addresses']	= (int)$_POST['reverse_proxy_addresses'];
 
-		$engine->_set_config($config, '', true);
+			$engine->_set_config($config, '', true);
 
-		$engine->log(1, 'Updated system settings');
-		$engine->set_message('Updated system settings');
-		$engine->redirect(rawurldecode($engine->href()));
+			$engine->log(1, 'Updated system settings');
+			$engine->set_message('Updated system settings');
+			$engine->redirect(rawurldecode($engine->href()));
+		}
 	}
 
 	echo $engine->form_open('system', '', 'post', true, '', '');

@@ -29,58 +29,67 @@ function admin_config_basic(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		#$engine->debug_print_r($_POST);
-		$config['site_name']				= (string)$_POST['site_name'];
-		$config['site_desc']				= (string)$_POST['site_desc'];
-		$config['meta_description']			= (string)$_POST['meta_description'];
-		$config['meta_keywords']			= (string)$_POST['meta_keywords'];
-		$config['theme']					= (string)$_POST['theme'];
-		$config['allow_themes']				= (string)$_POST['allow_themes'];
-		$config['allow_themes_per_page']	= (string)$_POST['themes_per_page'];
-		$config['admin_name']				= (string)$_POST['admin_name'];
-		$config['language']					= (string)$_POST['language'];
-		$config['multilanguage']			= (int)$_POST['multilanguage'];
-
-		if (is_array($_POST['allowed_languages']))
+		// check form token
+		if (!$engine->validate_form_token('basic'))
 		{
-			$config['allowed_languages'] = (string) implode(',', $_POST['allowed_languages']);
+			$message = $engine->get_translation('FormInvalid');
+			$engine->set_message($message, 'error');
 		}
 		else
 		{
-			$config['allowed_languages'] = 0;
+			#$engine->debug_print_r($_POST);
+			$config['site_name']				= (string)$_POST['site_name'];
+			$config['site_desc']				= (string)$_POST['site_desc'];
+			$config['meta_description']			= (string)$_POST['meta_description'];
+			$config['meta_keywords']			= (string)$_POST['meta_keywords'];
+			$config['theme']					= (string)$_POST['theme'];
+			$config['allow_themes']				= (string)$_POST['allow_themes'];
+			$config['allow_themes_per_page']	= (string)$_POST['themes_per_page'];
+			$config['admin_name']				= (string)$_POST['admin_name'];
+			$config['language']					= (string)$_POST['language'];
+			$config['multilanguage']			= (int)$_POST['multilanguage'];
+
+			if (is_array($_POST['allowed_languages']))
+			{
+				$config['allowed_languages'] = (string) implode(',', $_POST['allowed_languages']);
+			}
+			else
+			{
+				$config['allowed_languages'] = 0;
+			}
+
+			$config['footer_comments']			= (int)$_POST['footer_comments'];
+			$config['footer_files']				= (int)$_POST['footer_files'];
+			$config['footer_rating']			= (int)$_POST['footer_rating'];
+			$config['footer_tags']				= (int)$_POST['footer_tags'];
+			$config['hide_revisions']			= (int)$_POST['hide_revisions'];
+			$config['hide_toc']					= (int)$_POST['hide_toc'];
+			$config['hide_index']				= (int)$_POST['hide_index'];
+			$config['tree_level']				= (int)$_POST['tree_level'];
+			$config['menu_items']				= (int)$_POST['menu_items'];
+			$config['edit_summary']				= (int)$_POST['edit_summary'];
+			$config['minor_edit']				= (int)$_POST['minor_edit'];
+			$config['review']					= (int)$_POST['review'];
+			$config['publish_anonymously']		= (int)$_POST['publish_anonymously'];
+			$config['disable_autosubscribe']	= (int)$_POST['disable_autosubscribe'];
+			$config['default_rename_redirect']	= (int)$_POST['default_rename_redirect'];
+			$config['store_deleted_pages']		= (int)$_POST['store_deleted_pages'];
+			$config['keep_deleted_time']		= (string)$_POST['keep_deleted_time'];
+			$config['pages_purge_time']			= (string)$_POST['pages_purge_time'];
+			$config['referrers_purge_time']		= (string)$_POST['referrers_purge_time'];
+			$config['noindex']					= (int)$_POST['noindex'];
+			$config['xml_sitemap']				= (int)$_POST['xml_sitemap'];
+			$config['enable_feeds']				= (int)$_POST['enable_feeds'];
+			$config['enable_referrers']			= (int)$_POST['enable_referrers'];
+			$config['enable_comments']			= (int)$_POST['enable_comments'];
+			$config['sorting_comments']			= (int)$_POST['sorting_comments'];
+
+			$engine->_set_config($config, '', true);
+
+			$engine->log(1, 'Updated basic settings');
+			$engine->set_message('Updated basic settings');
+			$engine->redirect(rawurldecode($engine->href()));
 		}
-
-		$config['footer_comments']			= (int)$_POST['footer_comments'];
-		$config['footer_files']				= (int)$_POST['footer_files'];
-		$config['footer_rating']			= (int)$_POST['footer_rating'];
-		$config['footer_tags']				= (int)$_POST['footer_tags'];
-		$config['hide_revisions']			= (int)$_POST['hide_revisions'];
-		$config['hide_toc']					= (int)$_POST['hide_toc'];
-		$config['hide_index']				= (int)$_POST['hide_index'];
-		$config['tree_level']				= (int)$_POST['tree_level'];
-		$config['menu_items']				= (int)$_POST['menu_items'];
-		$config['edit_summary']				= (int)$_POST['edit_summary'];
-		$config['minor_edit']				= (int)$_POST['minor_edit'];
-		$config['review']					= (int)$_POST['review'];
-		$config['publish_anonymously']		= (int)$_POST['publish_anonymously'];
-		$config['disable_autosubscribe']	= (int)$_POST['disable_autosubscribe'];
-		$config['default_rename_redirect']	= (int)$_POST['default_rename_redirect'];
-		$config['store_deleted_pages']		= (int)$_POST['store_deleted_pages'];
-		$config['keep_deleted_time']		= (string)$_POST['keep_deleted_time'];
-		$config['pages_purge_time']			= (string)$_POST['pages_purge_time'];
-		$config['referrers_purge_time']		= (string)$_POST['referrers_purge_time'];
-		$config['noindex']					= (int)$_POST['noindex'];
-		$config['xml_sitemap']				= (int)$_POST['xml_sitemap'];
-		$config['enable_feeds']				= (int)$_POST['enable_feeds'];
-		$config['enable_referrers']			= (int)$_POST['enable_referrers'];
-		$config['enable_comments']			= (int)$_POST['enable_comments'];
-		$config['sorting_comments']			= (int)$_POST['sorting_comments'];
-
-		$engine->_set_config($config, '', true);
-
-		$engine->log(1, 'Updated basic settings');
-		$engine->set_message('Updated basic settings');
-		$engine->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('basic', '', 'post', true, '', '');
@@ -274,8 +283,8 @@ function admin_config_basic(&$engine, &$module)
 					<small>Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.</small></td>
 				<td>
 					<select id="sorting_comments" name="sorting_comments">
-						<option value="0" <?php echo ( $engine->config['sorting_comments']  == 0  ? ' selected="selected"' : '' ).'>'.$engine->get_translation('SortCommentAsc');?></option>
-						<option value="1" <?php echo ( $engine->config['sorting_comments']  == 1  ? ' selected="selected"' : '' ).'>'.$engine->get_translation('SortCommentDesc');?></option>
+						<option value="0" <?php echo ( $engine->config['sorting_comments']  == 0  ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('SortCommentAsc');?></option>
+						<option value="1" <?php echo ( $engine->config['sorting_comments']  == 1  ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('SortCommentDesc');?></option>
 					</select>
 				</td>
 			</tr>

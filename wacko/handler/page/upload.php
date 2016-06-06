@@ -393,7 +393,7 @@ if ($this->can_upload() === true)
 				"WHERE user_id = '".$user['user_id']."'".
 				"LIMIT 1");
 			// TODO: Set used_quota in config table (?)
-			$files	= $this->load_single(
+			$files		= $this->load_single(
 				"SELECT SUM(file_size) AS used_quota ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"LIMIT 1");
@@ -557,8 +557,8 @@ if ($this->can_upload() === true)
 
 								// update user uploads count
 								$this->sql_query(
-									"UPDATE {$this->config['user_table']} ".
-									"SET total_uploads = total_uploads + 1 ".
+									"UPDATE {$this->config['user_table']} SET ".
+										"total_uploads = total_uploads + 1 ".
 									"WHERE user_id = '".$user['user_id']."' ".
 									"LIMIT 1");
 
@@ -599,7 +599,6 @@ if ($this->can_upload() === true)
 		</ul>
 		<br />
 	<?php
-
 							}
 							else //forbid
 							{
@@ -608,7 +607,7 @@ if ($this->can_upload() === true)
 						}
 						else //maxsize
 						{
-							$error = $this->get_translation('UploadMaxSizeReached');
+							$error = $this->get_translation('UploadMaxSizeReached'.' '.$_FILES['file']['size']);
 						}
 					}
 					else // is_writable
@@ -654,8 +653,6 @@ if ($this->can_upload() === true)
 		}
 
 		echo $this->action('upload', array()).'<br />';
-
-	// if (!$error) echo '<br /><hr />'.$this->action('upload', array()).'<hr /><br />';
 	}
 }
 else

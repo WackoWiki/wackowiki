@@ -33,23 +33,32 @@ function admin_config_email(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['email_from']					= (string)$_POST['email_from'];
-		$config['admin_email']					= (string)$_POST['admin_email'];
-		$config['abuse_email']					= (string)$_POST['abuse_email'];
-		$config['smtp_connection_mode']			= (string)$_POST['smtp_connection_mode'];
-		$config['smtp_host']					= (string)$_POST['smtp_host'];
-		$config['smtp_password']				= (string)$_POST['smtp_password'];
-		$config['smtp_port']					= (int)$_POST['smtp_port'];
-		$config['smtp_username']				= (string)$_POST['smtp_username'];
-		$config['enable_email']					= (int)$_POST['enable_email'];
-		$config['phpmailer']					= (int)$_POST['phpmailer'];
-		$config['phpmailer_method']				= (string)$_POST['phpmailer_method'];
+		// check form token
+		if (!$engine->validate_form_token('email'))
+		{
+			$message = $engine->get_translation('FormInvalid');
+			$engine->set_message($message, 'error');
+		}
+		else
+		{
+			$config['email_from']					= (string)$_POST['email_from'];
+			$config['admin_email']					= (string)$_POST['admin_email'];
+			$config['abuse_email']					= (string)$_POST['abuse_email'];
+			$config['smtp_connection_mode']			= (string)$_POST['smtp_connection_mode'];
+			$config['smtp_host']					= (string)$_POST['smtp_host'];
+			$config['smtp_password']				= (string)$_POST['smtp_password'];
+			$config['smtp_port']					= (int)$_POST['smtp_port'];
+			$config['smtp_username']				= (string)$_POST['smtp_username'];
+			$config['enable_email']					= (int)$_POST['enable_email'];
+			$config['phpmailer']					= (int)$_POST['phpmailer'];
+			$config['phpmailer_method']				= (string)$_POST['phpmailer_method'];
 
-		$engine->_set_config($config, '', true);
+			$engine->_set_config($config, '', true);
 
-		$engine->log(1, '!!Updated email settings!!');
-		$engine->set_message('Updated email settings');
-		$engine->redirect(rawurldecode($engine->href()));
+			$engine->log(1, '!!Updated email settings!!');
+			$engine->set_message('Updated email settings');
+			$engine->redirect(rawurldecode($engine->href()));
+		}
 	}
 
 	echo $engine->form_open('email', '', 'post', true, '', '');

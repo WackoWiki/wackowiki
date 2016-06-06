@@ -40,21 +40,30 @@ function admin_config_filter(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		// update secondary config
-		$config['spam_filter']					= (string)$_POST['spam_filter'];
-		#$config['spam_action']					= (string)$_POST['spam_action'];
+		// check form token
+		if (!$engine->validate_form_token('filter'))
+		{
+			$message = $engine->get_translation('FormInvalid');
+			$engine->set_message($message, 'error');
+		}
+		else
+		{
+			// update secondary config
+			$config['spam_filter']					= (string)$_POST['spam_filter'];
+			#$config['spam_action']					= (string)$_POST['spam_action'];
 
-		$engine->_set_config($config, '', true);
+			$engine->_set_config($config, '', true);
 
-		// write antispam.conf file
-		$phrase_list	= (string)$_POST['phrase_list'];
-		$file_name		= 'config/antispam.conf';
-		file_put_contents($file_name, $phrase_list);
-		chmod($file_name, 0644);
+			// write antispam.conf file
+			$phrase_list	= (string)$_POST['phrase_list'];
+			$file_name		= 'config/antispam.conf';
+			file_put_contents($file_name, $phrase_list);
+			chmod($file_name, 0644);
 
-		$engine->log(1, '!!Updated spam filter settings!!');
-		$engine->set_message('Updated spam filter settings');
-		$engine->redirect(rawurldecode($engine->href()));
+			$engine->log(1, '!!Updated spam filter settings!!');
+			$engine->set_message('Updated spam filter settings');
+			$engine->redirect(rawurldecode($engine->href()));
+		}
 	}
 
 	$phrases = implode('', file('config/antispam.conf', 1));

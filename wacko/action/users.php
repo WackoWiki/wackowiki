@@ -68,8 +68,13 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			&& !$user['email_confirm'])
 		{
 			// check for errors
+			// check form token
+			if (!$this->validate_form_token('personal_message'))
+			{
+				$error = $this->get_translation('FormInvalid');
+			}
 			// message is too long
-			if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
+			else if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
 			{
 				$error = str_replace('%1', strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE, $this->get_translation('UsersPMOversized'));
 			}
@@ -118,6 +123,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				{
 					$body .= "\n\n".$this->get_translation('MailGoodbye')."\n".$this->config['site_name']."\n".$this->config['base_url'];
 
+					// send email
 					$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
 					$this->set_message($notice);
 					$this->log(4, str_replace('%2', $user['user_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('LogPMSent', $this->config['language']))));
@@ -188,7 +194,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				}
 ?>
 				<br />
-				<?php echo $this->form_open('personal_message'); ?>
+				<?php echo $this->form_open('personal_message', '', '', true); ?>
 				<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 				<?php
 				if (isset($_POST['ref']))
