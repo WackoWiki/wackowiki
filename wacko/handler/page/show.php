@@ -7,6 +7,13 @@ if (!defined('IN_WACKO'))
 
 ?>
 <article id="page-show" class="page" data-dbclick1="page">
+	<h1>
+	<?php
+	#echo (isset($this->page['title']) && $this->has_access('read')
+	#	? $this->page['title']
+	#	: $this->get_page_path() );
+	?>
+	</h1>
 <section id="section-content">
 <?php
 
@@ -16,7 +23,7 @@ if (!isset ($this->config['comments_count']))
 }
 
 // redirect from comment page to the commented one
-if ($this->page['comment_on_id'])
+if ($this->page['comment_on_id'] && $this->page['deleted'] == 0)
 {
 	// count previous comments
 	$count = $this->load_single(
@@ -24,6 +31,7 @@ if ($this->page['comment_on_id'])
 		"FROM {$this->config['table_prefix']}page ".
 		"WHERE comment_on_id = '".$this->page['comment_on_id']."' ".
 			"AND created <= '".quote($this->dblink, $this->page['created'])."' ".
+			"AND deleted <> '1' ".
 		"GROUP BY comment_on_id ".
 		"LIMIT 1", true);
 
@@ -41,7 +49,7 @@ if ($this->has_access('read'))
 	{
 		if (!headers_sent())
 		{
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 		}
 
 		$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '');
@@ -51,13 +59,16 @@ if ($this->has_access('read'))
 	{
 		if ($this->page['deleted'] == 1)
 		{
-			#$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
-			$message = 'BACKUP of deleted page!'; // TODO: localize and add description: to restore the page you ...
-			$message .= '<br />';
+			if (!headers_sent())
+			{
+				header('HTTP/1.1 404 Not Found');
+			}
 
 			if ($this->is_admin())
 			{
-				$message .= $this->form_open('restore_page', 'edit');
+				$message = $this->get_translation('PageDeletedInfo'); // TODO: add description: to restore the page you ...
+				$message .= '<br /><br />';
+				$message .= $this->form_open('restore_page', 'restore');
 				#$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
 				$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
 				#$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
@@ -65,8 +76,13 @@ if ($this->has_access('read'))
 				#$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('EditCancelButton').'"/></a>';
 				$message .= $this->form_close();
 			}
+			else
+			{
+				$message = $this->get_translation('PageDeletedInfo'); // TODO: add description: to restore the page you ...
+				$message .= '<br />';
+			}
 
-			$this->show_message($message, 'info');
+			$this->show_message($message, 'warning');
 		}
 
 		// revision header
@@ -89,13 +105,13 @@ if ($this->has_access('read'))
 				}
 				else
 				{
-					#$latest = $this->load_page($this->tag);
-					$latest = $this->load_page($this->tag, '', '', '', '', $deleted = 1);
+					// load also deleted pages
+					$latest = $this->load_page($this->tag, '', '', '', '', true);
 				}
 
-				if ($latest['deleted'] == 1)
+				if ($latest['deleted'] == 1 && $this->is_admin() == false)
 				{
-					$message2 = 'BACKUP of deleted page!';
+					$message2 = $this->get_translation('PageDeletedInfo');
 					$this->show_message($message2, 'info');
 				}
 				else
@@ -118,8 +134,8 @@ if ($this->has_access('read'))
 		if ($this->get_user_id() != $this->page['owner_id'])
 		{
 			$this->sql_query(
-				"UPDATE ".$this->config['table_prefix']."page ".
-				"SET hits = hits + 1 ".
+				"UPDATE ".$this->config['table_prefix']."page SET ".
+					"hits = hits + 1 ".
 				"WHERE page_id = '".$this->page['page_id']."'");
 		}
 
@@ -130,17 +146,17 @@ if ($this->has_access('read'))
 		if ($user && $this->page['latest'] != 0 && !$noid_protect)
 		{
 			$this->sql_query(
-					"UPDATE {$this->config['table_prefix']}watch ".
-					"SET pending = '0' ".
-					"WHERE page_id = '".$this->page['page_id']."' ".
-						"AND user_id = '".$user['user_id']."'");
+				"UPDATE {$this->config['table_prefix']}watch SET ".
+					"pending = '0' ".
+				"WHERE page_id = '".$this->page['page_id']."' ".
+					"AND user_id = '".$user['user_id']."'");
 		}
 
 		$this->set_language($this->page_lang);
 
 		// recompile if necessary
-		if (($this->page['body_r'] == '') ||
-		(($this->page['body_toc'] == '') && $this->config['paragrafica']))
+		if (($this->page['body_r'] == '')
+			|| (($this->page['body_toc'] == '') && $this->config['paragrafica']))
 		{
 			// build html body
 			$this->page['body_r'] = $this->format($this->page['body'], 'wacko');
@@ -182,7 +198,7 @@ else
 {
 	if (!headers_sent())
 	{
-		header('HTTP/1.0 403 Forbidden');
+		header('HTTP/1.1 403 Forbidden');
 	}
 
 	$message = $this->get_translation('ReadAccessDenied');
