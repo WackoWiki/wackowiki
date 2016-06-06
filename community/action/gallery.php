@@ -40,6 +40,7 @@ TODO: config settings
 
 // Include PHP Thumbnailer
 require_once 'lib/phpthumb/PHPThumb.php';
+require_once 'lib/phpthumb/GD.php';
 
 ?>
 
@@ -53,11 +54,11 @@ require_once 'lib/phpthumb/PHPThumb.php';
 
 <!-- Add Button helper (this is optional) -->
 <link rel="stylesheet" href="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
-<script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script src="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
 
 <!-- Add Thumbnail helper (this is optional) -->
 <link rel="stylesheet" href="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
-<script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script src="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
 
 <script>
 
@@ -193,7 +194,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->load_all(
-			"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
+			"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
@@ -212,11 +213,10 @@ if ($can_view)
 	// Making an gallery
 	$cur = 0;
 
+	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<span class="pagination">'.$pagination['text']."</span><br />\n";
-	}
+	echo $show_pagination;
 
 	if (!$nomark)
 	{
@@ -382,7 +382,7 @@ if ($can_view)
 
 					try
 					{
-						$thumb = PhpThumbFactory::create($src_image);
+						$thumb = new PHPThumb\GD($src_image);
 					}
 					catch (Exception $e)
 					{
@@ -518,10 +518,7 @@ if ($can_view)
 	}
 
 	// pagination
-	if (isset($pagination['text']))
-	{
-		echo '<br /><span class="pagination">'.$pagination['text']."</span>\n";
-	}
+	echo $show_pagination;
 }
 else
 {
