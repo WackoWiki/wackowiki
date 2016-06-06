@@ -607,7 +607,7 @@ if ($this->can_upload() === true)
 						}
 						else //maxsize
 						{
-							$error = $this->get_translation('UploadMaxSizeReached'.' '.$_FILES['file']['size']);
+							$error = $this->get_translation('UploadMaxSizeReached');
 						}
 					}
 					else // is_writable

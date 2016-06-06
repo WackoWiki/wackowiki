@@ -126,11 +126,12 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 
 		?>
 		<input type="hidden" name="clone" value="1" />
-		<input type="text" name="newname" size="40"/><br />
+		<input type="text" name="newname" size="40"/>
 		<?php
 		// edit note
 		if ($this->config['edit_summary'] != 0)
 		{
+			$output .= '<br />';
 			$output .= '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />'."\n";
 			$output .= '<input type="text" id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>'."\n";
 
@@ -139,14 +140,15 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		?>
 		<br /><br />
 		<?php
-				echo '<input type="checkbox" id="redirect" name="redirect" />'."\n";
-				echo ' <label for="redirect">'.$this->get_translation('ClonedRedirect').'</label>'."\n"; ?>
+			echo '<input type="checkbox" id="redirect" name="redirect" />'."\n";
+			echo ' <label for="redirect">'.$this->get_translation('ClonedRedirect').'</label>'."\n"; ?>
 		<br />
-		<?php if ($this->check_acl($user_name, $this->config['rename_globalacl']))
-			{
-				echo '<input type="checkbox" id="massclone" name="massclone" />'."\n";
-				echo ' <label for="massclone">'.$this->get_translation('MassClone').'</label>'."\n";
-			}
+		<?php
+		if ($this->check_acl($user_name, $this->config['rename_globalacl']))
+		{
+			echo '<input type="checkbox" id="massclone" name="massclone" />'."\n";
+			echo ' <label for="massclone">'.$this->get_translation('MassClone').'</label>'."\n";
+		}
 		?>
 		<br /><br />
 		<input type="submit" name="submit" value="<?php echo $this->get_translation('CloneButton'); ?>" /> &nbsp;
@@ -185,9 +187,9 @@ function recursive_clone(&$parent, $root, $edit_note)
 		"WHERE (supertag LIKE '".quote($parent->dblink, $_root)."/%' ".
 			" OR supertag = '".quote($parent->dblink, $_root)."') ".
 		($owner_id
-			? " AND owner_id ='".(int)$owner_id."'"
+			? "AND owner_id = '".(int)$owner_id."' "
 			: "").
-		" AND comment_on_id = '0'");
+			"AND comment_on_id = '0'");
 
 	$message = $new_root.': '.'<br />';
 	$message .= "<ol>\n";

@@ -166,14 +166,14 @@ if ($can_view)
 {
 	if ($global || ($tag == $page))
 	{
-		$filepage = $this->page;
+		$file_page = $this->page;
 	}
 	else
 	{
-		$filepage = $this->load_page($page);
+		$file_page = $this->load_page($page);
 	}
 
-	if (!$global && !isset($filepage['page_id']))
+	if (!$global && !isset($file_page['page_id']))
 	{
 		return;
 	}
@@ -182,8 +182,8 @@ if ($can_view)
 	$count = $this->load_all(
 			"SELECT f.upload_id ".
 			"FROM ".$this->config['table_prefix']."upload f ".
-			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
+				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+			"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
 				"AND f.picture_w <> '0' ".
 			($owner
 					? "AND u.user_name = '".quote($this->dblink, $owner)."' "
@@ -196,8 +196,8 @@ if ($can_view)
 	$files = $this->load_all(
 			"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
 			"FROM ".$this->config['table_prefix']."upload f ".
-			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
+				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+			"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
 				"AND f.picture_w <> '0' ".
 			($owner
 					? "AND u.user_name = '".quote($this->dblink, $owner)."' "
@@ -261,7 +261,7 @@ if ($can_view)
 			}
 			else
 			{
-				$tnb_path	= $thumb_dir.'/@'.$filepage['page_id'].'@'.$tnb_name;
+				$tnb_path	= $thumb_dir.'/@'.$file_page['page_id'].'@'.$tnb_name;
 				$url		= $this->href('file', $source_page_tag, 'get='.$file_name);
 			}
 
@@ -272,7 +272,7 @@ if ($can_view)
 					#$file['user'].'<br />'.
 					#$file['picture_w'].'x'.$file['picture_h'].'<br />'.
 					#$file['hits'].'<br />'. // we do exclude images from hit cout atm -> see file handler
-				'</figcaption>';
+				"</figcaption>\n";
 
 			if (file_exists($tnb_path))
 			{
@@ -313,7 +313,7 @@ if ($can_view)
 					echo $caption;
 				}
 
-				echo '</figure>';
+				echo "</figure>\n";
 
 				if ($table)
 				{
@@ -333,88 +333,95 @@ if ($can_view)
 			}
 			else
 			{
-				if (!file_exists($thumb_dir.'/@'.$filepage['page_id'].'@'.$small_id.$file_name))
+				if ($file['page_id'] == 0)
 				{
-					@set_time_limit(0);
-					@ignore_user_abort(true);
+					$src_image		= $this->config['upload_path'].'/'.$file_name;
+					$thumb_name		= $thumb_dir.'/'.$prefix_global.'@'.$small_id.$file_name;
+				}
+				else
+				{
+					$src_image		= $this->config['upload_path_per_page'].'/@'.$file_page['page_id'].'@'.$file_name;
+					$thumb_name		= $thumb_dir.'/@'.$file_page['page_id'].'@'.$small_id.$file_name;
+				}
 
-					if ($file['page_id'] == 0)
+				if (file_exists($src_image))
+				{
+					// create tumbnail
+					if (!file_exists($thumb_name))
 					{
-						$src_image		= $this->config['upload_path'].'/'.$file_name;
-						$new_filename	= $thumb_dir.'/'.$prefix_global.'@'.$small_id.$file_name;
+						@set_time_limit(0);
+						@ignore_user_abort(true);
+
+						## thumbnail library will do all of this math, but in case you're stuck ...
+
+						// Original values obtained from the top image
+						// can come from getimagesize(), imagesx()/imagesy(), or similar
+						/*
+						$source_width		= 66;
+						$source_height		= 100;
+						$thumbnail_width	= 50;
+						$thumbnail_height	= 100;
+
+						// Compute aspect ratios
+						$source_ar			= $source_width / $source_height;
+						$thumbnail_ar		= $thumbnail_width / $thumbnail_height;
+
+						// Compute the output width and height based on the
+						// comparison of aspect ratios
+						if ($source_ar > $thumbnail_ar)
+						{
+							// Use the thumbnail width
+							$output_width	= $thumbnail_width;
+							$output_height	= round($original_height
+												/ $original_width * $thumbnail_width);
+						}
+						else
+						{
+							// Use the thumbnail height
+							$output_height	= $thumbnail_height;
+							$output_width	= round($original_width
+												/ $original_height * $thumbnail_height);
+						} */
+
+						try
+						{
+							$thumb = new PHPThumb\GD($src_image);
+						}
+						catch (Exception $e)
+						{
+							// handle error here however you'd like
+						}
+
+						// TODO: trusting blindly the db record can cause -> Fatal error: Call to a member function resize() on a non-object in /wacko/action/gallery.php
+						if (is_object($thumb))
+						{
+							// $thumb->resize(100, 100);
+							$thumb->resize($height, $height);
+
+							// $thumb->resizePercent(50);
+
+							// $thumb->adaptiveResize(175, 175);
+							#$thumb->adaptiveResize($height, $height);
+
+							// $thumb->cropFromCenter(200, 100);
+
+							// $thumb->save($thumb_dir.$file); // requires correct write permissions!
+							$thumb->save($thumb_name);
+						}
 					}
-					else
-					{
-						$src_image		= $this->config['upload_path_per_page'].'/@'.$filepage['page_id'].'@'.$file_name;
-						$new_filename	= $thumb_dir.'/@'.$filepage['page_id'].'@'.$small_id.$file_name;
-					}
-
-					## thumbnail library will do all of this math, but in case you're stuck ...
-
-					// Original values obtained from the top image
-					// can come from getimagesize(), imagesx()/imagesy(), or similar
-					/*
-					$source_width		= 66;
-					$source_height		= 100;
-					$thumbnail_width	= 50;
-					$thumbnail_height	= 100;
-
-					// Compute aspect ratios
-					$source_ar			= $source_width / $source_height;
-					$thumbnail_ar		= $thumbnail_width / $thumbnail_height;
-
-					// Compute the output width and height based on the
-					// comparison of aspect ratios
-					if ($source_ar > $thumbnail_ar)
-					{
-						// Use the thumbnail width
-						$output_width	= $thumbnail_width;
-						$output_height	= round($original_height
-											/ $original_width * $thumbnail_width);
-					}
-					else
-					{
-						// Use the thumbnail height
-						$output_height	= $thumbnail_height;
-						$output_width	= round($original_width
-											/ $original_height * $thumbnail_height);
-					} */
-
-					try
-					{
-						$thumb = new PHPThumb\GD($src_image);
-					}
-					catch (Exception $e)
-					{
-						// handle error here however you'd like
-					}
-
-					// TODO: trusting blindly the db record can cause -> Fatal error: Call to a member function resize() on a non-object in /wacko/action/gallery.php
-					// $thumb->resize(100, 100);
-					 $thumb->resize($height, $height);
-
-					// $thumb->resizePercent(50);
-
-					// $thumb->adaptiveResize(175, 175);
-					#$thumb->adaptiveResize($height, $height);
-
-					// $thumb->cropFromCenter(200, 100);
-
-					// $thumb->save($thumb_dir.$file); // requires correct write permissions!
-					$thumb->save($new_filename);
 
 					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the upload table, remember we can have many derived versions from the original image
 					/* $this->sql_query(
 						"INSERT INTO ".$this->config['table_prefix']."upload SET ".
 						"user_id			= '".(int)$file['user_id']."', ".
-						"page_id			= '".(int)$filepage['page_id']."', ".
+						"page_id			= '".(int)$file_page['page_id']."', ".
 						"file_name			= '".quote($this->dblink, $small_id.$file_name)."', ".
 						"file_description	= '".quote($this->dblink, $file['file_description'])."', ".
 						"uploaded_dt		= '".quote($this->dblink, date("Y-m-d H:i:s"))."', ".
 						"file_size			= '".(int)sizeof($newfilename)."', ".
 						"picture_w			= '".(int)$diw."', ".
 						"picture_h			= '".(int)$height."', ".
-						"file_ext			= '".quote($this->dblink, $filepage['file_ext'])."'"); */
+						"file_ext			= '".quote($this->dblink, $file_page['file_ext'])."'"); */
 
 					if($table)
 					{
@@ -452,7 +459,7 @@ if ($can_view)
 							echo $caption;
 						}
 
-						echo '</figure>';
+						echo "</figure>\n";
 
 						if($table)
 						{
@@ -463,7 +470,7 @@ if ($can_view)
 
 						if ($cur == 0)
 						{
-							echo ($table ? '</tr>' : '<br />');
+							echo ($table ? "</tr>\n" : '<br />');
 						}
 						else
 						{
