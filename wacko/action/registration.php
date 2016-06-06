@@ -75,12 +75,10 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 
 		// passing vars from user input
 		$user_name		= trim($_POST['user_name']);
-		#$real_name		= trim($_POST['real_name']);
 		$email			= trim($_POST['email']);
 		$password		= $_POST['password'];
 		$confpassword	= $_POST['confpassword'];
-		$user_lang			= (isset($_POST['user_lang']) ? $_POST['user_lang'] : $this->config['language']);
-		#$timezone		= trim($_POST['timezone']);
+		$user_lang		= (isset($_POST['user_lang']) ? $_POST['user_lang'] : $this->config['language']);
 		$complexity		= $this->password_complexity($user_name, $password);
 
 		// Start Registration Captcha
@@ -201,24 +199,6 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 										);
 				$user_ip			= $this->ip_address();
 
-				/* $timezone			= date('Z') / 3600;
-				$is_dst				= date('I');
-
-				if ($this->config['timezone'] == $timezone || $this->config['timezone'] == ($timezone - 1))
-				{
-					$timezone = ($is_dst) ? $timezone - 1 : $timezone;
-
-					if (!isset($this->get_translation['TzZoneArray'][(string) $timezone]))
-					{
-						$timezone = $this->config['timezone'];
-					}
-				}
-				else
-				{
-					$timezone	= $this->config['timezone'];
-					$is_dst		= $this->config['dst'];
-				} */
-
 				// set new user approval
 				if ($this->config['approve_new_user'] == true)
 				{
@@ -243,7 +223,6 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					"SET ".
 						"signup_time	= NOW(), ".
 						"user_name		= '".quote($this->dblink, $user_name)."', ".
-						#"real_name		= '".quote($this->dblink, $real_name)."', ".
 						"account_lang	= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
 						"email			= '".quote($this->dblink, $email)."', ".
 						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
@@ -409,8 +388,6 @@ if (!isset($_GET['confirm']))
 			echo '</p>';
 		}
 
-		#echo '<p><label for="real_name">'.$this->format_translation('RegistrationRealName').':</label>';
-		#echo '<input type="text" id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></p>';
 		echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
 		echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" autocomplete="off" required />';
 		echo $this->show_password_complexity();

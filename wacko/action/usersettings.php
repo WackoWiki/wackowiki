@@ -28,8 +28,8 @@ if (isset($_GET['confirm']))
 			"LIMIT 1"))
 	{
 		$this->sql_query(
-			"UPDATE ".$this->config['user_table']." ".
-			"SET email_confirm = '' ".
+			"UPDATE ".$this->config['user_table']." SET ".
+				"email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
 
 		$this->show_message( $this->get_translation('EmailConfirmed') );
@@ -61,7 +61,7 @@ else if ($user = $this->get_user())
 	$this->set_page_lang($this->user_lang);
 
 	// is user trying to update?
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if (isset($_POST['action']) && $_POST['action'] == 'update_general')
 	{
 		// no email given
 		if (!$_POST['email'])
@@ -106,7 +106,7 @@ else if ($user = $this->get_user())
 		}
 	}
 
-	if (isset($_POST['action']) && ($_POST['action'] == 'update_notifications' || $_POST['action'] == 'update_extended' || $_POST['action'] == 'update'))
+	if (isset($_POST['action']) && ($_POST['action'] == 'update_notifications' || $_POST['action'] == 'update_extended' || $_POST['action'] == 'update_general'))
 	{
 		if ($_POST['action'] == 'update_extended')
 		{
@@ -134,7 +134,7 @@ else if ($user = $this->get_user())
 			"notify_comment		= '".(int)$_POST['notify_comment']."', ".
 			"allow_massemail	= '".(int)$_POST['allow_massemail']."' ";
 		}
-		else
+		else if	($_POST['action'] == 'update_general')
 		{
 			$sql =
 			"user_lang			= '".quote($this->dblink, $_POST['user_lang'])."', ".
@@ -153,8 +153,6 @@ else if ($user = $this->get_user())
 			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
-		#$this->set_message($this->get_translation('UserSettingsStored')); // see below
-
 		// log event
 		$this->log(6, str_replace('%1', $user['user_name'], $this->get_translation('LogUserSettingsUpdate', $this->config['language'])));
 	}
@@ -168,8 +166,8 @@ else if ($user = $this->get_user())
 			$confirm_hash	= hash('sha256', $confirm.hash('sha256', $this->config['system_seed']));
 
 			$this->sql_query(
-				"UPDATE {$this->config['user_table']} ".
-				"SET email_confirm = '".quote($this->dblink, $confirm_hash)."' ".
+				"UPDATE {$this->config['user_table']} SET ".
+					"email_confirm = '".quote($this->dblink, $confirm_hash)."' ".
 				"WHERE user_id = '".(int)$user['user_id']."' ".
 				"LIMIT 1");
 
@@ -345,122 +343,122 @@ else if ($user = $this->get_user())
 		<table class="form_tbl">
 		<tbody>
 			<tr class="lined">
-		<th class="form_left" scope="row"><?php echo $this->get_translation('UserSettingsOther');?></th>
-		<td class="form_right">
-			<input type="hidden" name="doubleclick_edit" value="0" />
-			<input type="checkbox" id="doubleclick_edit" name="doubleclick_edit" value="1" <?php echo (isset($user['doubleclick_edit']) && $user['doubleclick_edit'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="doubleclick_edit"><?php echo $this->get_translation('DoubleclickEditing');?></label>
-		</td>
-	</tr>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="autocomplete" value="0" />
-			<input type="checkbox" id="autocomplete" name="autocomplete" value="1" <?php echo (isset($user['autocomplete']) && $user['autocomplete'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="autocomplete"><?php echo $this->get_translation('WikieditAutocomplete');?></label>
-		</td>
-	</tr>
-		<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="numerate_links" value="0" />
-			<input type="checkbox" id="numerate_links" name="numerate_links" value="1" <?php echo (isset($user['numerate_links']) && $user['numerate_links'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="numerate_links"><?php echo $this->get_translation('NumerateLinks');?></label>
-		</td>
-	</tr>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="show_comments" value="0" />
-			<input type="checkbox" id="show_comments" name="show_comments" value="1" <?php echo (isset($user['show_comments']) && $user['show_comments'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="show_comments"><?php echo $this->get_translation('ShowComments?');?></label>
-		</td>
-	</tr>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="show_files" value="0" />
-			<input type="checkbox" id="show_files" name="show_files" value="1" <?php echo (isset($user['show_files']) && $user['show_files'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="show_files"><?php echo $this->get_translation('ShowFiles?');?></label>
-		</td>
-	</tr>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="show_spaces" value="0" />
-			<input type="checkbox" id="show_spaces" name="show_spaces" value="1" <?php echo (isset($user['show_spaces']) && $user['show_spaces'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="show_spaces"><?php echo $this->get_translation('ShowSpaces');?></label>
-		</td>
-	</tr>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="dont_redirect" value="0" />
-			<input type="checkbox" id="dont_redirect" name="dont_redirect" value="1" <?php echo (isset($user['dont_redirect']) && $user['dont_redirect'] == 1) ? 'checked="checked"' : '' ?> />
-			<label for="dont_redirect"><?php echo $this->get_translation('DontRedirect');?></label>
-		</td>
-	</tr>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="validate_ip" value="0" />
-			<input type="checkbox" name="validate_ip" id="validate_ip" value="1" <?php echo (isset($user['validate_ip']) && $user['validate_ip'] == 1) ? 'checked' : '' ?> />
-			<label for="validate_ip"><?php echo $this->get_translation('ValidateIP');?></label>
-		</td>
-	</tr>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="hide_lastsession" value="0" />
-			<input type="checkbox" name="hide_lastsession" id="hide_lastsession" value="1" <?php echo (isset($user['hide_lastsession']) && $user['hide_lastsession'] == 1) ? 'checked' : '' ?> />
-			<label for="hide_lastsession"><?php echo $this->get_translation('HideLastSession');?></label>
-		</td>
-	</tr>
+				<th class="form_left" scope="row"><?php echo $this->get_translation('UserSettingsOther');?></th>
+				<td class="form_right">
+					<input type="hidden" name="doubleclick_edit" value="0" />
+					<input type="checkbox" id="doubleclick_edit" name="doubleclick_edit" value="1" <?php echo (isset($user['doubleclick_edit']) && $user['doubleclick_edit'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="doubleclick_edit"><?php echo $this->get_translation('DoubleclickEditing');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="autocomplete" value="0" />
+					<input type="checkbox" id="autocomplete" name="autocomplete" value="1" <?php echo (isset($user['autocomplete']) && $user['autocomplete'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="autocomplete"><?php echo $this->get_translation('WikieditAutocomplete');?></label>
+				</td>
+			</tr>
+				<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="numerate_links" value="0" />
+					<input type="checkbox" id="numerate_links" name="numerate_links" value="1" <?php echo (isset($user['numerate_links']) && $user['numerate_links'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="numerate_links"><?php echo $this->get_translation('NumerateLinks');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="show_comments" value="0" />
+					<input type="checkbox" id="show_comments" name="show_comments" value="1" <?php echo (isset($user['show_comments']) && $user['show_comments'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="show_comments"><?php echo $this->get_translation('ShowComments?');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="show_files" value="0" />
+					<input type="checkbox" id="show_files" name="show_files" value="1" <?php echo (isset($user['show_files']) && $user['show_files'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="show_files"><?php echo $this->get_translation('ShowFiles?');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="show_spaces" value="0" />
+					<input type="checkbox" id="show_spaces" name="show_spaces" value="1" <?php echo (isset($user['show_spaces']) && $user['show_spaces'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="show_spaces"><?php echo $this->get_translation('ShowSpaces');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="dont_redirect" value="0" />
+					<input type="checkbox" id="dont_redirect" name="dont_redirect" value="1" <?php echo (isset($user['dont_redirect']) && $user['dont_redirect'] == 1) ? 'checked="checked"' : '' ?> />
+					<label for="dont_redirect"><?php echo $this->get_translation('DontRedirect');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="validate_ip" value="0" />
+					<input type="checkbox" name="validate_ip" id="validate_ip" value="1" <?php echo (isset($user['validate_ip']) && $user['validate_ip'] == 1) ? 'checked' : '' ?> />
+					<label for="validate_ip"><?php echo $this->get_translation('ValidateIP');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="hide_lastsession" value="0" />
+					<input type="checkbox" name="hide_lastsession" id="hide_lastsession" value="1" <?php echo (isset($user['hide_lastsession']) && $user['hide_lastsession'] == 1) ? 'checked' : '' ?> />
+					<label for="hide_lastsession"><?php echo $this->get_translation('HideLastSession');?></label>
+				</td>
+			</tr>
 <?php
-	if ($this->config['publish_anonymously'] == true)
-	{
+		if ($this->config['publish_anonymously'] == true)
+		{
 ?>
-	<tr class="lined">
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="noid_pubs" value="0" />
-			<input type="checkbox" name="noid_pubs" id="noid_pubs" value="1" <?php echo (isset($user['noid_pubs']) && $user['noid_pubs'] == 1) ? 'checked' : '' ?> />
-			<label for="noid_pubs"><?php echo $this->get_translation('ProfileAnonymousPub');?></label>
-		</td>
-	</tr>
+			<tr class="lined">
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="noid_pubs" value="0" />
+					<input type="checkbox" name="noid_pubs" id="noid_pubs" value="1" <?php echo (isset($user['noid_pubs']) && $user['noid_pubs'] == 1) ? 'checked' : '' ?> />
+					<label for="noid_pubs"><?php echo $this->get_translation('ProfileAnonymousPub');?></label>
+				</td>
+			</tr>
 <?php
-	}
+		}
 ?>
-	<tr class="lined">
-		<th class="form_left"><label for="session_length"><?php echo $this->get_translation('SessionDuration');?></label></th>
-		<td class="form_right">
+			<tr class="lined">
+				<th class="form_left"><label for="session_length"><?php echo $this->get_translation('SessionDuration');?></label></th>
+				<td class="form_right">
 <?php
 			echo '<input type="radio" id="duration1" name="session_length" value="1" '.( $user['session_length'] == 1 ? 'checked="checked"' : '' ).'/><label for="duration1">'.$this->get_translation('SessionDurationDay').'</label>';
 			echo '<input type="radio" id="duration7" name="session_length" value="7" '.( $user['session_length'] == 7 ? 'checked="checked"' : '' ).'/><label for="duration7">'.$this->get_translation('SessionDurationWeek').'</label>';
 			echo '<input type="radio" id="duration30" name="session_length" value="30" '.( $user['session_length'] == 30 ? 'checked="checked"' : '' ).'/><label for="duration30">'.$this->get_translation('SessionDurationMonth').'</label>';
 ?>
-		</td>
-	</tr>
-	<!--<tr>
-		<td class="form_left">&nbsp;</td>
-		<td class="form_right">
-			<input type="hidden" name="typografica" value="0" /><input type="checkbox" id="typografica" name="typografica" value="1" <?php echo (isset($user['typografica']) && $user['typografica'] == 1) ? 'checked="checked"' : ''; ?> />
-			<label for="typografica"><?php echo $this->get_translation('Typografica');?></label>
-		</td>
-	</tr>-->
-	<tr>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-	<td class="form_left">&nbsp;</td>
-	<td class="form_right">
-		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
-	</td>
-	</tr>
-	</tbody>
-</table>
-</div>
+				</td>
+			</tr>
+			<!--<tr>
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="hidden" name="typografica" value="0" /><input type="checkbox" id="typografica" name="typografica" value="1" <?php echo (isset($user['typografica']) && $user['typografica'] == 1) ? 'checked="checked"' : ''; ?> />
+					<label for="typografica"><?php echo $this->get_translation('Typografica');?></label>
+				</td>
+			</tr>-->
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="form_left">&nbsp;</td>
+				<td class="form_right">
+					<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
+				</td>
+				</tr>
+				</tbody>
+			</table>
+			</div>
 <?php
 		echo $this->form_close();
 
@@ -485,7 +483,7 @@ else if ($user = $this->get_user())
 				<li><a href="'.$this->href('', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
 				</ul><br /><br />\n";
 ?>
-<input type="hidden" name="action" value="update" />
+<input type="hidden" name="action" value="update_general" />
 <div class="page_settings">
 
 <table class="form_tbl">
@@ -678,6 +676,7 @@ else if ($user = $this->get_user())
 <?php
 	//  echo $this->format_translation('SeeListOfPages')."<br />";
 	echo $this->form_close();
+
 	$percentage =  round( ($this->upload_quota($user['user_id']) / (($this->config['upload_quota_per_user']) / 100)) ).'%';
 	echo '<aside class="page_tools">'.
 			'<table class="form_tbl">'.
