@@ -83,26 +83,26 @@ require_once 'lib/phpthumb/GD.php';
 <?php
 
 // Loading parameters
-$thumb_dir	= 'files/thumbs';
-$small_id	= 'tn_';
-$imgclass	= '';
-$img_spacer	= '';
-$height		= 150; // $this->config['img_max_thumb_width']
+$thumb_dir		= 'files/thumbs';
+$small_id		= 'tn_';
+$imgclass		= '';
+$img_spacer		= '';
+$height			= 150; // $this->config['img_max_thumb_width']
 
-if (!isset($page))		$page = '';
+if (!isset($page))		$page		= '';
 if (!isset($title))		/*$title="Gallery";*/ $nomark = 1;
-if (!isset($toblank))	$toblank = ''; #$toblank = 'new';
-if (!isset($table))		$table = '';
-if (!isset($nodesc))	$nodesc = '';
-if (!isset($nomark))	$nomark = '';
+if (!isset($toblank))	$toblank	= ''; #$toblank = 'new';
+if (!isset($table))		$table		= 1;
+if (!isset($nodesc))	$nodesc		= '';
+if (!isset($nomark))	$nomark		= '';
 
 if(!isset($group_id))	$group_id	= 'fancybox-thumb';
 
-if (!isset($order))		$order = '';
-if (!isset($global))	$global = '';
-if (!isset($tag))		$tag = ''; // FIXME: $tag == $page
-if (!isset($owner))		$owner = '';
-if (!isset($max))		$max = '';
+if (!isset($order))		$order		= '';
+if (!isset($global))	$global		= '';
+if (!isset($tag))		$tag		= ''; // FIXME: $tag == $page
+if (!isset($owner))		$owner		= '';
+if (!isset($max))		$max		= '';
 
 if ($max)
 {
@@ -294,17 +294,17 @@ if ($can_view)
 
 				if (!$toblank)
 				{
-					echo "<a href=\"".$this->href('', $this->tag, 'photo='.$linkto.'&amp;token='.$param_token.'#'.$param_token)."\">".$img."</a>\n";
+					echo '<a href="'.$this->href('', $this->tag, 'photo='.$linkto.'&amp;token='.$param_token.'#'.$param_token).'">'.$img."</a>\n";
 				}
 				else
 				{
 					if ($toblank == 'new')
 					{
-						echo "<a href=\"".$url."\" class=\"fancybox-thumb\" ".($group_id ? "rel=\"".$group_id."\"" : "")." ".($file['file_description'] ? "alt=\"".$file_description."\" title=\"".$file_description."\"" : "").">".$img."</a>\n";
+						echo '<a href="'.$url.'" class="fancybox-thumb" '.($group_id ? 'rel="'.$group_id.'"' : '').' '.($file['file_description'] ? 'alt="'.$file_description.'" title="'.$file_description.'"' : '').'>'.$img."</a>\n";
 					}
 					else
 					{
-						echo "<a href=\"".$url."\">".$img."</a>\n";
+						echo '<a href="'.$url.'">'.$img."</a>\n";
 					}
 				}
 
@@ -434,17 +434,17 @@ if ($can_view)
 
 					if(!$toblank)
 					{
-						echo "<a href=\"".$this->href('', $this->tag, 'photo='.$linkto.'&amp;token='.$param_token)."\">".$img."</a>\n";
+						echo '<a href="'.$this->href('', $this->tag, 'photo='.$linkto.'&amp;token='.$param_token).'">'.$img."</a>\n";
 					}
 					else
 					{
 						if ($toblank == 'new')
 						{
-							echo "<a href=\"".$url."\" class=\"fancybox-thumb\" ".($group_id ? "rel=\"lightbox[".$group_id."]\"" : "rel=\"lightbox\"")." ".($file['file_description']?"alt=\"".$file_description."\" title=\"".$file_description."\"":"").">".$img."</a>\n";
+							echo '<a href="'.$url.'" class="fancybox-thumb" '.($group_id ? 'rel="lightbox['.$group_id.']"' : 'rel="lightbox"').' '.($file['file_description'] ? 'alt="'.$file_description.'" title="'.$file_description.'"' : '').'>'.$img."</a>\n";
 						}
 						else
 						{
-							echo "<a href=\"".$url."\">".$img."</a>\n";
+							echo '<a href="'.$url.'">'.$img."</a>\n";
 						}
 
 						if(!$nodesc)
