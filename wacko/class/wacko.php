@@ -1517,6 +1517,7 @@ class Wacko
 
 		foreach ((array)$notexists as $notexist)
 		{
+			$this->debug_print_r($spages);
 			$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, 1);
 			#$this->cache_acl($this->get_page_id($notexist), 'read', 1, $acl);
 		}
@@ -4500,7 +4501,7 @@ class Wacko
 		if (isset($_POST['form_token']))
 		{
 			$token			= isset($_POST['form_token']) ? $_POST['form_token'] : '';
-			$creation_time	= $_SESSION['formdata'][$token]['creation_time']; // TODO: cache -> Notice: Undefined index: formdata
+			$creation_time	= isset($_SESSION['formdata'][$token]['creation_time']) ? $_SESSION['formdata'][$token]['creation_time'] : '';
 
 			$diff = time() - $creation_time;
 

@@ -56,8 +56,8 @@ else if (isset($_GET['action']) && $_GET['action'] == 'logout')
 }
 else if ($user = $this->get_user())
 {
-	$email_changed = '';
-	$user = $this->load_user(0, $user['user_id'], 0, false);
+	$email_changed	= '';
+	$user			= $this->load_user(0, $user['user_id'], 0, false);
 	$this->set_page_lang($this->user_lang);
 
 	// is user trying to update?
@@ -188,7 +188,7 @@ else if ($user = $this->get_user())
 	}
 
 	// reload user data
-	if ( (isset($_POST['action']) && ($_POST['action'] == 'update' || $_POST['action'] == 'update_notifications' || $_POST['action'] == 'update_extended')) || (isset($_GET['resend_code']) && $_GET['resend_code'] == 1))
+	if ( (isset($_POST['action']) && ($_POST['action'] == 'update_general' || $_POST['action'] == 'update_notifications' || $_POST['action'] == 'update_extended')) || (isset($_GET['resend_code']) && $_GET['resend_code'] == 1))
 	{
 		$this->set_user($this->load_user(0, $user['user_id'], 0, false), 1);
 		$this->set_menu(MENU_USER);
