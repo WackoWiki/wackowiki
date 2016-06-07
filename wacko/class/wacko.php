@@ -1517,9 +1517,11 @@ class Wacko
 
 		foreach ((array)$notexists as $notexist)
 		{
-			$this->debug_print_r($spages);
-			$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, 1);
-			#$this->cache_acl($this->get_page_id($notexist), 'read', 1, $acl);
+			if (isset($pages[array_search($notexist, $spages)]))
+			{
+				$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, 1);
+				#$this->cache_acl($this->get_page_id($notexist), 'read', 1, $acl);
+			}
 		}
 
 		$page_ids	= implode(', ', $page_id);
