@@ -179,30 +179,30 @@ if ($can_view)
 
 	// TODO: we want only image files -> AND f.picture_w <> '0'
 	$count = $this->load_all(
-			"SELECT f.upload_id ".
-			"FROM ".$this->config['table_prefix']."upload f ".
-				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
-				"AND f.picture_w <> '0' ".
-			($owner
-					? "AND u.user_name = '".quote($this->dblink, $owner)."' "
-					: ''), true);
+		"SELECT f.upload_id ".
+		"FROM ".$this->config['table_prefix']."upload f ".
+			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
+			"AND f.picture_w <> '0' ".
+		($owner
+			? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+			: ''), true);
 
 	$count		= count($count);
 	$pagination = $this->pagination($count, $limit, $param_token);
 
 	// load files list
 	$files = $this->load_all(
-			"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
-			"FROM ".$this->config['table_prefix']."upload f ".
-				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
-				"AND f.picture_w <> '0' ".
-			($owner
-					? "AND u.user_name = '".quote($this->dblink, $owner)."' "
-					: '')." ".
-			"ORDER BY f.".$order_by." ".
-			"LIMIT {$pagination['offset']}, {$limit}");
+		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
+		"FROM ".$this->config['table_prefix']."upload f ".
+			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
+			"AND f.picture_w <> '0' ".
+		($owner
+			? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+			: '')." ".
+		"ORDER BY f.".$order_by." ".
+		"LIMIT {$pagination['offset']}, {$limit}");
 
 	if (!is_array($files))
 	{
@@ -256,7 +256,6 @@ if ($can_view)
 			{
 				$tnb_path		= $thumb_dir.'/'.$prefix_global.'@'.$tnb_name;
 				$url			= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
-
 			}
 			else
 			{
@@ -511,7 +510,7 @@ if ($can_view)
 
 		if (!$global)
 		{
-			$path2	= 'file:/'.$source_page_tag;
+			$path2	= 'file:/'.$source_page_tag.'/';
 		}
 		else
 		{
