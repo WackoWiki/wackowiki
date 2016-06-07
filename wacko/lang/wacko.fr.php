@@ -527,7 +527,7 @@ $wacko_translation = array(
 	'PageReservedWord'			=> 'Vous ne pouvez pas inclure <code>%1</code> dans l&rsquo; adresse car c&rsquo;est un mot réservé.',
 	'UserReservedWord'			=> 'Les noms d&rsquo; utrilisateurs ne pevent pas contenir ##%1## car c&rsquo;est un mot réservé.',
 
-	'DontRedirect'				=> 'Ne pas autoriser la redirection automatique par l&rsquo;action de redirection {{Redirect}} ',
+	'DontRedirect'				=> 'Ne pas autoriser la redirection automatique par l&rsquo;action de redirection {{redirect}} ',
 	'SendWatchEmail'			=> 'Envoyer un courriel de notification quand quelqu&rsquo;un<br /> (à part vous) a modifié une page que vous surveillez ',
 	'AllowIntercom'				=> 'Autoriser les autres utilisateurs à vous envoyer des messages privés',
 	'AllowMassemail'			=> 'Les administrateurs peuvent m&rsquo;informer par courriel',

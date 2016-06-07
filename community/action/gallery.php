@@ -136,18 +136,18 @@ if (!$global)
 {
 	if ($page == '')
 	{
-		$page		= $this->tag;
-		$page_id	= $this->page['page_id'];
-
+		$page				= $this->tag;
 		$source_page_tag	= $this->tag;
+		$page_id			= $this->page['page_id'];
 	}
 	else
 	{
-		$page = $this->unwrap_link($page);
+		$page				= $this->unwrap_link($page);
+		$source_page_tag	= $page;
 
 		if ($_page_id = $this->get_page_id($page))
 		{
-			$page_id	= $_page_id;
+			$page_id		= $_page_id;
 		}
 	}
 
@@ -156,9 +156,8 @@ if (!$global)
 }
 else
 {
-	$can_view	= 1;
-	$page		= $this->tag;
-
+	$can_view			= 1;
+	$page				= $this->tag;
 	$source_page_tag	= '/';
 }
 
@@ -220,7 +219,7 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>'.htmlspecialchars($title, NULL, '').":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.htmlspecialchars($title, null, '').":</span></p>\n";
 	}
 
 	if (!isset($_GET['photo']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
@@ -255,14 +254,14 @@ if ($can_view)
 			// check for upload location: global / per page
 			if ($file['page_id'] == '0')
 			{
-				$tnb_path	= $thumb_dir.'/'.$prefix_global.'@'.$tnb_name;
-				$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+				$tnb_path		= $thumb_dir.'/'.$prefix_global.'@'.$tnb_name;
+				$url			= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
 
 			}
 			else
 			{
-				$tnb_path	= $thumb_dir.'/@'.$file_page['page_id'].'@'.$tnb_name;
-				$url		= $this->href('file', $source_page_tag, 'get='.$file_name);
+				$tnb_path		= $thumb_dir.'/@'.$file_page['page_id'].'@'.$tnb_name;
+				$url			= $this->href('file', $source_page_tag, 'get='.$file_name);
 			}
 
 			$img	= '<img src="'.$this->config['base_url'].$tnb_path.'" '.($file['file_description'] ? 'alt="'.$file_description.'" title="'.$file_description.'"' : '').' width="'.$file_width.'" height="'.$file_height.'" '.($imgclass ? 'class="'.$imgclass.'"' : '').'/>';
@@ -510,7 +509,15 @@ if ($can_view)
 
 		echo '<div id="'.$param_token.'" style="text-align:center;">';
 
-		$path2	= 'file:';
+		if (!$global)
+		{
+			$path2	= 'file:/'.$source_page_tag;
+		}
+		else
+		{
+			$path2	= 'file:';
+		}
+
 		$link	= $this->link($path2.$_GET['photo'], '', '', $_GET['photo']);
 
 		echo $link;
