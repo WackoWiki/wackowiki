@@ -350,21 +350,6 @@ if ($this->can_upload() === true)
 
 					$message .= $this->get_translation('UploadEditedMeta')."<br />";
 
-					// 3. TODO: rename file
-					#$real_filename = ($page_id
-					#	? ($this->config['upload_path_per_page'].'/@'.$page_id.'@')
-					#	: ($this->config['upload_path'].'/')).
-					#	$file['file_name'];
-
-					#if (@unlink($real_filename))
-					#{
-					#	$message .= $this->get_translation('UploadRemovedFromFS');
-					#}
-					#else
-					#{
-					#	$this->set_message($this->get_translation('UploadRemovedFromFSError'), 'error');
-					#}
-
 					if ($message)
 					{
 						$this->set_message($message);
@@ -383,7 +368,7 @@ if ($this->can_upload() === true)
 				$this->set_message($this->get_translation('UploadRemoveNotFound'));
 			}
 		}
-		else // process upload
+		else if (isset($_POST['upload'])) // process upload
 		{
 			$user		= $this->get_user();
 			// TODO: Set user used_quota in user table (?)
@@ -520,14 +505,16 @@ if ($this->can_upload() === true)
 
 								if ($is_global)
 								{
-									$small_name = $result_name;
-									$path		= 'file:';
+									$small_name		= $result_name;
+									$path			= 'file:/';
+									$syntax_file	= 'file:/'.$small_name;
 								}
 								else
 								{
-									$small_name = explode('@', $result_name);
-									$small_name = $small_name[ count($small_name) -1 ];
-									$path		= 'file:/'.$this->page['supertag'].'/';
+									$small_name		= explode('@', $result_name);
+									$small_name		= $small_name[ count($small_name) -1 ];
+									$path			= 'file:/'.$this->page['supertag'].'/';
+									$syntax_file	= 'file:'.$small_name;
 								}
 
 								$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
@@ -581,7 +568,7 @@ if ($this->can_upload() === true)
 			<li><?php echo $this->link($path.$small_name); ?>
 				<ul>
 					<li><span>&nbsp;</span></li>
-					<li><span class="info_title"><?php echo $this->get_translation('FileSyntax'); ?>:</span><?php echo '<code>file:'.$small_name.'</code>'; ?></li>
+					<li><span class="info_title"><?php echo $this->get_translation('FileSyntax'); ?>:</span><?php echo '<code>'.$syntax_file.'</code>'; ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($uploaded_dt); ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$file_size_ft.''; ?></li>
 					<?php
