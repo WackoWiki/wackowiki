@@ -554,8 +554,8 @@ $wacko_translation = array(
 									'confirmation de votre adresse de messagerie en suivant le lien contenu dans le courriel qui vous a été envoyé. '.
 									'Si, les jours suivant votre enregistrement vous n&rsquo;avez pas reçu ce courriel, demandez-le en cliquant ',
 
-	'ForgotComment'				=> 'Indiquez votre NomWiki et votre adresse de messagerie,'."\n".'un courriel avec des instructions vous sera envoyé.',
-	'ForgotMain'				=> 'Avez-vous oublié votre mot de passe ?',
+	'ForgotPasswordHint'		=> 'Indiquez votre NomWiki et votre adresse de messagerie,'."\n".'un courriel avec des instructions vous sera envoyé.',
+	'ForgotPassword'			=> 'Avez-vous oublié votre mot de passe ?',
 	'SendButton'				=> 'Envoyer',
 	'UserNotFound'				=> 'Aucun utilisateur avec ce nom ou cette adresse de messagerie n&rsquo;a été trouvé.',
 	'NotConfirmedEmail'			=> 'Vous n&rsquo;avez pas confirmé votre adresse de messagerie suite au courriel que vous avez dû recevoir.<br />Aucun courriel ne peut être envoyé à une adresse non confirmée.',
