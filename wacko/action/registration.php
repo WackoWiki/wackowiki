@@ -37,8 +37,8 @@ if (isset($_GET['confirm']))
 			"LIMIT 1"))
 	{
 		$this->sql_query(
-			"UPDATE ".$this->config['user_table']." ".
-			"SET email_confirm = '' ".
+			"UPDATE ".$this->config['user_table']." SET ".
+				"email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
 
 		// cache handling
@@ -46,6 +46,7 @@ if (isset($_GET['confirm']))
 		{
 			$this->cache->invalidate_page_cache($this->supertag);
 		}
+
 		// log event
 		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
 
@@ -89,7 +90,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 			// captcha validation
 			if ($this->validate_captcha() === false)
 			{
-				$error = $this->get_translation('CaptchaFailed');
+				$error .= $this->get_translation('CaptchaFailed');
 			}
 		}
 		// End Registration Captcha
