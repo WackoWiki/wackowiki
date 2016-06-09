@@ -6021,7 +6021,7 @@ class Wacko
 	}
 
 	// check if user has the right to upload files
-	function can_upload()
+	function can_upload($global = false)
 	{
 		if ($this->get_user())
 		{
@@ -6034,19 +6034,41 @@ class Wacko
 			$registered		= false;
 		}
 
-		if ($registered
-			&& (   $this->config['upload'] === true
-				|| $this->config['upload'] == 1
-				|| $this->check_acl($user_name, $this->config['upload']) )
-			&& (   $this->has_access('upload')
-				&& $this->has_access('write')
-				&& $this->has_access('read')
-				|| $this->is_owner()
-				|| $this->is_admin() )
-			#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
-		)
+		if ($registered)
 		{
-			return true;
+			if ($global == false)
+			{
+				if ( ( $this->config['upload'] === true
+						|| $this->config['upload'] == 1
+						|| $this->check_acl($user_name, $this->config['upload']) )
+					&& (   $this->has_access('upload')
+						&& $this->has_access('write')
+						&& $this->has_access('read')
+						|| $this->is_owner()
+						|| $this->is_admin() )
+						|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
+					)
+				{
+					echo 'TRUE local';
+					return true;
+				}
+			}
+			else if ($global == true)
+			{
+				if (   $this->config['upload'] === true
+						|| $this->config['upload'] == 1
+						|| $this->check_acl($user_name, $this->config['upload'])
+						#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
+						)
+				{
+					echo 'TRUE global';
+					return true;
+				}
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{

@@ -554,8 +554,8 @@ $wacko_translation = array(
 									'until your email-address was confirmed, by following the link in the email sent to you. '.
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotComment'				=> 'Enter your login and email address,'."\n".'then email with instructions will be send to you.',
-	'ForgotMain'				=> 'Forgot password?',
+	'ForgotPasswordHint'		=> 'Enter your login and email address,'."\n".'then email with instructions will be send to you.',
+	'ForgotPassword'			=> 'Forgot password?',
 	'SendButton'				=> 'Send',
 	'UserNotFound'				=> 'User with this name or email address was not found.',
 	'NotConfirmedEmail'			=> 'Your email address is not confirmed.<br />Mail can\'t be send to non-confirmed address.',

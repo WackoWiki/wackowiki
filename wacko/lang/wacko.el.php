@@ -549,20 +549,20 @@ $wacko_translation = array(
 	'EmailConfirmed'			=> 'Το ηλεκτρονικό σας ταχυδρομείο επιβεβαιώθηκε.',
 	'EmailNotConfirmed'			=> 'Το ηλεκτρονικό σας ταχυδρομείο ΔΕΝ επιβεβαιώθηκε. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'Email not verified!',
-	'EmailNotVerifiedDesc' => 'You will not receive notification of changes or comments of watched pages, '.
-							'messages from other users, as well you <span class="underline">will not be able to recover a forgotten password</span>, '.
-							'until your email-address was confirmed, by following the link in the email sent to you. '.
-							'If, within days after registration You never got a email, ask for it again by clicking ',
+	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, '.
+									'messages from other users, as well you <span class="underline">will not be able to recover a forgotten password</span>, '.
+									'until your email-address was confirmed, by following the link in the email sent to you. '.
+									'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotComment' => 'Πληκτρολόγησε το όνομα χρήσης σου και την ηλεκτρονική σου διεύθυνση,'."\n".'και μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ',
-	'ForgotMain' => 'Ξέχασες το συνθηματικό σου?',
-	'SendButton' => 'Αποστολή',
-	'UserNotFound' => 'Δεν υπάρχει χρήστης με αυτό το όνομα ή με αυτήν την ηλεκτρονική διεύθυνση.',
-	'NotConfirmedEmail' => 'Your e-mail address is not confirmed.<br />Mail can\'t be send to non-confirmed address.',
-	'EmailForgotSubject' => 'Password renewal for ',
-	'EmailForgotMessage' => 'Κάποιος (ακόμα και εσείς) ξέχασε το συνθηματικό για το %1.'."\n".'Όνομα σύνδεσης: %2'."\n\n".'Πατήστε επάνω στο παρακάτω url link ή αντιγράψτε στο στην γραμμή διευθύνσεων του περιηγητή διαδικτύου σας για να αλλάξετε το συνθηματικό σας.'."\n".'%3'."\n\n".'',
-	'CodeWasSent' => 'Αποστάλθηκαν οδηγίες για την ανάκτηση του συνθηματικού σας μέσω ηλεκτρονικού ταχυδρομείου.',
-	'WrongCode' => 'Λάθος Κώδικας',
+	'ForgotPasswordHint'		=> 'Πληκτρολόγησε το όνομα χρήσης σου και την ηλεκτρονική σου διεύθυνση,'."\n".'και μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ',
+	'ForgotPassword'			=> 'Ξέχασες το συνθηματικό σου?',
+	'SendButton'				=> 'Αποστολή',
+	'UserNotFound'				=> 'Δεν υπάρχει χρήστης με αυτό το όνομα ή με αυτήν την ηλεκτρονική διεύθυνση.',
+	'NotConfirmedEmail'			=> 'Your e-mail address is not confirmed.<br />Mail can\'t be send to non-confirmed address.',
+	'EmailForgotSubject'		=> 'Password renewal for ',
+	'EmailForgotMessage'		=> 'Κάποιος (ακόμα και εσείς) ξέχασε το συνθηματικό για το %1.'."\n".'Όνομα σύνδεσης: %2'."\n\n".'Πατήστε επάνω στο παρακάτω url link ή αντιγράψτε στο στην γραμμή διευθύνσεων του περιηγητή διαδικτύου σας για να αλλάξετε το συνθηματικό σας.'."\n".'%3'."\n\n".'',
+	'CodeWasSent'				=> 'Αποστάλθηκαν οδηγίες για την ανάκτηση του συνθηματικού σας μέσω ηλεκτρονικού ταχυδρομείου.',
+	'WrongCode'					=> 'Λάθος Κώδικας',
 	'YouWantChangePasswordForUser' => '%1\'s τροποποίηση συνθηματικού',
 
 	'Watchers' => 'List of watchers for %1',

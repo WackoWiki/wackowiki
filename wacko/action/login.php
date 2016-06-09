@@ -33,7 +33,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 	}
 
 	$_POST['action'] = 'logout';
-	$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+	$this->redirect($this->href('', '', 'cache='.rand(0, 1000)));
 }
 
 // logout
@@ -47,11 +47,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 
 	if (!empty($_GET['goback']))
 	{
-		$this->redirect($this->href('', stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.rand(0,1000)));
+		$this->redirect($this->href('', stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.rand(0, 1000)));
 	}
 	else
 	{
-		$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+		$this->redirect($this->href('', '', 'cache='.rand(0, 1000)));
 	}
 }
 // logged in
@@ -136,11 +136,11 @@ else
 			{
 				if ($existing_user['account_status'] == 1)
 				{
-					$error = $this->get_translation('UserApprovalPending');
+					$error .= $this->get_translation('UserApprovalPending');
 				}
 				else
 				{
-					$error = $this->get_translation('AccountDisabled');
+					$error .= $this->get_translation('AccountDisabled');
 				}
 			}
 			else
@@ -153,7 +153,7 @@ else
 					// captcha validation
 					if ($this->validate_captcha() === false)
 					{
-						$error = $this->get_translation('CaptchaFailed');
+						$error .= $this->get_translation('CaptchaFailed');
 					}
 				}
 				// End Registration Captcha
@@ -252,16 +252,16 @@ else
 
 						if (!empty($_POST['goback']))
 						{
-							$this->redirect($this->href('', stripslashes(htmlspecialchars($_POST['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.rand(0,1000)));
+							$this->redirect($this->href('', stripslashes(htmlspecialchars($_POST['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.rand(0, 1000)));
 						}
 						else
 						{
-							$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+							$this->redirect($this->href('', '', 'cache='.rand(0, 1000)));
 						}
 					}
 					else
 					{
-						$error		= $this->get_translation('WrongPassword');
+						$error		.= $this->get_translation('WrongPassword');
 
 						$this->set_failed_user_login_count($existing_user['user_id']);
 

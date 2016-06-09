@@ -555,8 +555,8 @@ $wacko_translation = array(
 									'bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst. '.
 									'Wenn innerhalb weniger Tage nach der Registrierung du keine E-Mail erhalten hast, kannst du sie erneut anfragen, klicke dazu ',
 
-	'ForgotComment'				=> 'Benutzername und E-Mailadresse angeben,'."\n".'du bekommst dann eine E-Mail mit weiteren Anweisungen.',
-	'ForgotMain'				=> 'Passwort vergessen?',
+	'ForgotPasswordHint'		=> 'Benutzername und E-Mailadresse angeben,'."\n".'du bekommst dann eine E-Mail mit weiteren Anweisungen.',
+	'ForgotPassword'			=> 'Passwort vergessen?',
 	'SendButton'				=> 'Senden',
 	'UserNotFound'				=> 'Ein Benutzer mit diesem Namen oder E-Mailadresse wurde nicht gefunden.',
 	'NotConfirmedEmail'			=> 'Deine E-Mailadresse ist noch nicht bestätigt<br />E-Mails können nicht an unbestätigte E-Mailadressen verschickt werden.',

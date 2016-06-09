@@ -61,7 +61,7 @@ if (isset($_GET['confirm']))
 		$this->set_message($message, 'error');
 	}
 
-	$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0,1000)));
+	$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0, 1000)));
 }
 else if (isset($_POST['action']) && $_POST['action'] == 'register')
 {
@@ -316,7 +316,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$this->get_translation('SiteEmailConfirm'));
 
 				$this->context[++$this->current_context] = '';
-				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0,1000)));
+				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0, 1000)));
 			}
 		}
 	}
