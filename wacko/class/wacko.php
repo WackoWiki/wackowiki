@@ -6055,7 +6055,7 @@ class Wacko
 			}
 			else if ($global == true)
 			{
-				if (   $this->config['upload'] === true
+				if ( $this->config['upload'] === true
 						|| $this->config['upload'] == 1
 						|| $this->check_acl($user_name, $this->config['upload'])
 						#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
@@ -8012,12 +8012,6 @@ class Wacko
 				else
 				{
 					$word_ok = false;
-				}
-
-				if (!$word_ok)
-				{
-					//not the right word
-					#$this->set_message($this->get_translation('CaptchaFailed'));
 				}
 
 				return $word_ok;

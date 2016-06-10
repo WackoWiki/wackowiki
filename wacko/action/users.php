@@ -87,7 +87,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			// proceed if no error encountered
 			if ($error)
 			{
-				$this->set_message($error);
+				$this->set_message($error, 'error');
 			}
 			else
 			{
@@ -117,7 +117,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				// proceed if no error encountered
 				if ($error)
 				{
-					$this->set_message($error);
+					$this->set_message($error, 'error');
 				}
 				else
 				{

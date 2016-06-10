@@ -240,7 +240,7 @@ if ($stop_mod !== true)
 // print error message, if any
 if ($error)
 {
-	$this->set_message($error);
+	$this->set_message($error, 'error');
 }
 
 // for successful submit print a message

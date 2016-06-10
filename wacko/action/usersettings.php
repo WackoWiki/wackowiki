@@ -97,9 +97,6 @@ else if ($user = $this->get_user())
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 
-				// FIXME: the next if condition will repeat these both following actions
-				#$this->set_message($this->get_translation('UserSettingsStored'));
-
 				// log event
 				#$this->log(6, str_replace('%1', $user['user_name'], $this->get_translation('LogUserSettingsUpdate', $this->config['language'])));
 			}

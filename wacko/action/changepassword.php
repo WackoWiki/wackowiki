@@ -110,7 +110,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 		}
 		else
 		{
-			// Password forgotten. Provided secret code only. Print password change form.
+			// Password forgotten. Provided secret code only. Show password change form.
 			echo $this->form_open('reset_password');
 			echo '<input type="hidden" name="secret_code" value="'.$code.'" />';
 			?>
@@ -231,7 +231,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 
 	if (isset($error))
 	{
-		$this->set_message($this->format($error));
+		$this->set_message($this->format($error), 'error');
 	}
 	?>
 	<input type="hidden" name="action" value="change" />
@@ -267,12 +267,12 @@ else
 		$user_name	= str_replace(' ', '', $_POST['user_name']);
 		$email		= str_replace(' ', '', $_POST['email']);
 		$user		= $this->load_single(
-			"SELECT u.user_id, u.user_name, u.email, u.password, u.email_confirm, s.user_lang ".
-			"FROM ".$this->config['user_table']." u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
-			"WHERE u.user_name = '".quote($this->dblink, $user_name)."' ".
-				"AND u.email = '".quote($this->dblink, $email)."' ".
-			"LIMIT 1");
+						"SELECT u.user_id, u.user_name, u.email, u.password, u.email_confirm, s.user_lang ".
+						"FROM ".$this->config['user_table']." u ".
+							"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+						"WHERE u.user_name = '".quote($this->dblink, $user_name)."' ".
+							"AND u.email = '".quote($this->dblink, $email)."' ".
+						"LIMIT 1");
 
 		if ($user)
 		{
@@ -323,7 +323,7 @@ else
 	{
 		if (isset($error))
 		{
-			$this->set_message($error);
+			$this->set_message($error, 'error');
 		}
 
 		// view password forgot form
