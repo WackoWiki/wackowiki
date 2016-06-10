@@ -54,7 +54,7 @@ if ($this->is_admin()
 		// check form token
 		if (!$this->validate_form_token('remove_page'))
 		{
-			$this->set_message($this->get_translation('FormInvalid'));
+			$this->set_message($this->get_translation('FormInvalid'), 'error');
 
 			$this->redirect($this->href());
 		}

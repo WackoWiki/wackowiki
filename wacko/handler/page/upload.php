@@ -551,7 +551,7 @@ if ($this->can_upload() === true)
 
 								// 4. output link to file
 								// !!!!! write after providing filelink syntax
-								$this->set_message('<strong>'.$this->get_translation('UploadDone').'</strong>');
+								$this->set_message($this->get_translation('UploadDone'));
 
 								// log event
 								if ($is_global)

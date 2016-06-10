@@ -126,7 +126,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			{
 				//not the right word
 				$error = $this->get_translation('CaptchaFailed');
-				$this->set_message($error);
+				$this->set_message($error, 'error');
 				$_SESSION['freecap_old_comment'] = $body;
 			}
 			else

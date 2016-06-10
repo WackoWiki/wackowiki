@@ -262,7 +262,7 @@ if ($this->is_owner() || $this->is_admin())
 		}
 
 		// redirect back to page
-		$this->set_message($message.'!');
+		$this->set_message($message);
 
 		// purge SQL queries cache
 		if ($this->config['cache_sql'])
