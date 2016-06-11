@@ -379,7 +379,7 @@ if (!isset($_GET['confirm']))
 			str_replace('%2', $this->config['username_chars_max'],
 			$this->get_translation('NameCamelCaseOnly'))).
 			'</small>';
-			echo '</p>';
+			echo "</p>\n";
 		}
 		else
 		{
@@ -388,13 +388,13 @@ if (!isset($_GET['confirm']))
 			str_replace('%2', $this->config['username_chars_max'],
 			$this->get_translation('NameAlphanumOnly'))).
 			'</small>';
-			echo '</p>';
+			echo "</p>\n";
 		}
 
 		echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
 		echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" autocomplete="off" required />';
 		echo $this->show_password_complexity();
-		echo '</p>';
+		echo "</p>\n";
 
 		echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';
 		echo '<input type="password" id="confpassword" name="confpassword" size="24" value="'.$confpassword.'" autocomplete="off" /></p>';
@@ -419,14 +419,14 @@ if (!isset($_GET['confirm']))
 		{
 			echo '<p>';
 			$this->show_captcha();
-			echo '</p>';
+			echo "</p>\n";
 		}
 		// end captcha
 
 		echo '<p><input type="submit" class="OkBtn" value="'.$this->get_translation('RegistrationButton').'" /></p>';
 
 		echo $this->form_close();
-		echo '</div>';
+		echo "</div>\n";
 	}
 	else
 	{

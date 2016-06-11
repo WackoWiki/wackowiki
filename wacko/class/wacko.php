@@ -4087,7 +4087,7 @@ class Wacko
 	* Add spaces to WikiWords (if config parameter show_spaces = 1) and replace
 	* relative  path (/ !/ ../) to icons RootLinkIcon, SubLinkIcon, UpLinkIcon
 	*
-	* @param string $text Text with WikiWorlds
+	* @param string $text Text with WikiWords
 	* @return string Text with Wiki Words
 	*/
 	function add_spaces($text)

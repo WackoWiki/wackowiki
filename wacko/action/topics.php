@@ -79,7 +79,6 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		{
 			// redirecting to the edit form
 			$_SESSION['title']	= $page_title;
-			$_SESSION['body']	= "==".$page_title."==\n\n";
 			$this->redirect($this->href('edit', $this->tag.'/'.$topic_name, '', 1));
 		}
 	}
