@@ -11,17 +11,20 @@ require ($this->config['theme_path'].'/_common/_header.php');
 	<header>
 		<div id="header-main">
 			<div id="header-top">
-			<h1><span class="main">
-				<?php echo (isset($this->page['tag']) && $this->page['tag'] == $this->config['root_page']
+				<h1>
+			<?php
+				echo (isset($this->page['tag']) && $this->page['tag'] == $this->config['root_page']
 					? $this->config['site_name']
-					: '<a href="'.$this->config['base_url'].'">'.$this->config['site_name'].'</a>')
-			?>: </span>
-				<?php echo (isset($this->page['title']) && $this->has_access('read')
-					? $this->page['title']
-					: $this->get_page_path() );
-		?></h1>
-		</div>
-		<div id="login-box">
+					: '<a href="'.$this->config['base_url'].'" title="'.$this->config['site_desc'].'">'.$this->config['site_name'].'</a>');
+
+				#echo ': '.(isset($this->page['title']) && $this->has_access('read')
+				#	? $this->page['title']
+				#	: $this->get_page_path() );
+		?>
+				</h1>
+		<?php #echo $this->config['site_desc'];?>
+			</div>
+			<div id="login-box">
 <?php
 // if user are logged, shows "You are UserName"
 if ($this->get_user())
@@ -74,7 +77,6 @@ else
 		{
 			$max_items	= $this->config['menu_items'];
 		}
-
 
 		foreach ((array)$menu as $menu_item)
 		{

@@ -62,12 +62,12 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
   {
     this.area.addBehavior(this.imagesPath + 'sel.htc');
   }
-  this.addButton('h1', lang.Heading1, '\'==\',\'==\',0,1');
+  //this.addButton('h1', lang.Heading1, '\'==\',\'==\',0,1');
   this.addButton('h2', lang.Heading2, '\'===\',\'===\',0,1');
   this.addButton('h3', lang.Heading3, '\'====\',\'====\',0,1');
   this.addButton('h4', lang.Heading4, '\'=====\',\'=====\',0,1');
   this.addButton('h5', lang.Heading5, '\'======\',\'======\',0,1');
-  //this.addButton('h6', lang.Heading6, '\'=======\',\'=======\',0,1');
+  this.addButton('h6', lang.Heading6, '\'=======\',\'=======\',0,1');
   this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
   this.addButton('bold', lang.Bold, '\'**\',\'**\'');
   this.addButton('italic', lang.Italic, '\'//\',\'//\'');

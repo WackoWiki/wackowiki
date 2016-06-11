@@ -18,6 +18,8 @@ if (!isset($max))		$max = null;
 if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 {
 	$profile = isset($_GET['profile']) ? $_GET['profile'] : (isset($_POST['profile']) ? $_POST['profile'] : '');
+	// hide article H1 header
+	$this->config['hide_article_header'] = true;
 
 	// does requested user exists?
 	if (false == $user = $this->load_user($profile))

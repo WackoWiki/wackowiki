@@ -212,7 +212,7 @@ form input.submitinput {
 .notice {
 	background-color: #FFFFEF;
 	border: 1px dotted #DDDDAA;
-	font-size: 0.75em;
+	/* font-size: 0.75em; */
 	height: 35px;
 	line-height: 35px;
 	margin: 0 0 10px;
@@ -221,11 +221,13 @@ form input.submitinput {
 }
 
 .success {
-	background-color: #dff0d8;
-	color: #3c763d;
+	background: #dff2bf none repeat scroll 0 0;
+	border: 1px solid #adde5c;
+	color: #008000;
+	font-weight: bold;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
-	font-weight: bold; /* 400 */
+
 }
 
 .warning {
@@ -2099,4 +2101,9 @@ table.forum td {
 							44px;
 	height:	22px;
 	width:	66px;
+}
+
+/* gallery action */
+.gallery figure:hover {
+	background-color: #CCFFCC;
 }

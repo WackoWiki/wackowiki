@@ -7,14 +7,6 @@ if (!defined('IN_WACKO'))
 
 ?>
 <article id="page-show" class="page" data-dbclick1="page">
-	<h1>
-	<?php
-	#echo (isset($this->page['title']) && $this->has_access('read')
-	#	? $this->page['title']
-	#	: $this->get_page_path() );
-	?>
-	</h1>
-<section id="section-content">
 <?php
 
 if (!isset ($this->config['comments_count']))
@@ -180,18 +172,35 @@ if ($this->has_access('read'))
 			}
 		}
 
-		// display page title (usually displayed in theme header)
-		# echo '<h1>'.$this->page['title'].'</h1>';
-
-		// display page body
+		// parse page body
 		$data = $this->format($this->page['body_r'], 'post_wacko', array('bad' => 'good'));
 		$data = $this->numerate_toc($data); //  numerate toc if needed
+
+		// display page title
+		if (!isset($this->config['hide_article_header']) || !$this->config['hide_article_header'] == true)
+		{
+			echo '<header>'.
+				 '<h1>';
+			echo (isset($this->page['title']) && $this->has_access('read')
+				? $this->page['title']
+				: $this->get_page_path() );
+
+			echo '</h1>'.
+				 '</header>';
+		}
+
+		echo '<section id="section-content">';
+
+		// display page body
 		echo $data;
 
 		$this->set_language($this->user_lang);
 
 		// edit via double click
 		echo '<script>var dbclick = "page";</script>'."\n";
+
+		// end section-content
+		echo "</section>\n";
 	}
 }
 else
@@ -210,9 +219,6 @@ else
 		$this->show_message($message, 'hint');
 	}
 }
-
-// end section-content
-echo "</section>\n";
 
 // show category tags
 if ($this->forum === true

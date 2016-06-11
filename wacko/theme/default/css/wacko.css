@@ -44,17 +44,18 @@ ul, ol {
 form, h1, h2, h3, h4, h5, h6 {
 	margin: 0px;
 	padding: 0px;
+	font-weight: normal;
 }
 
 h1 {
 	font-family: Verdana;
 	font-size: 24px;
-	padding-top: 2px;
+	padding-top: 5px;
 	padding-bottom: 7px;
 	line-height: 110%;
-	color: #333333;
+	color: #235e9a;
 }
-h2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; border-bottom:3px dotted #ddd}
+h2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; border-bottom:3px dotted #ddd; color: #204a87;}
 h3 { font-family: Verdana; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:2px dotted #ddd}
 h4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:1px #999999 solid }
 h5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:1px #bbbbbb solid }
@@ -317,7 +318,7 @@ div.action-content { padding: 10px 10px 25px 10px; }
 .cl-yellow {color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
-code { color: #666600; background: #ffffcc; padding: 0 2px }
+code { color: #666600; background: #ffffcc; padding: 1px 5px; font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif; }
 
 /* Important text: SYNTAX !!text!! */
 .cite {color: #ff0000; font-style: normal;}

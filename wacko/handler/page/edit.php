@@ -32,9 +32,10 @@ if ($this->has_access('read')
 	// check for reserved word
 	if ($result = $this->validate_reserved_words($this->tag))
 	{
+		// $this->tag is reserved word
 		$message = str_replace('%1', $result, $this->get_translation('PageReservedWord'));
 		$this->set_message($message);
-		$this->redirect($this->href('new', $this->config['root_page'])); // $this->tag is reserved word
+		$this->redirect($this->href('new', $this->config['root_page']));
 	}
 
 	$user	= $this->get_user();
@@ -60,7 +61,7 @@ if ($this->has_access('read')
 
 	if (isset($_POST))
 	{
-		$_body		= isset($_POST['body']) ? $_POST['body'] : '';
+		$_body	= isset($_POST['body']) ? $_POST['body'] : '';
 
 		// watch page
 		if ($this->page && isset($_POST['watchpage']) && isset($_POST['noid_publication']) && ($_POST['noid_publication'] != $this->page['page_id']) && $user && $this->is_watched !== true)
@@ -246,9 +247,9 @@ if ($this->has_access('read')
 						? $this->page['title']
 						: isset($_SESSION['title'])
 							? empty($_SESSION['title'])
-								? ''
+								? $this->add_spaces_title($this->tag)
 								: $_SESSION['title']
-							: $this->tag;
+							: $this->add_spaces_title($this->tag);
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
@@ -284,15 +285,20 @@ if ($this->has_access('read')
 		$preview	= $this->format($preview,	'wacko');
 		$preview	= $this->format($preview,	'post_wacko');
 
-		$output = '<div class="preview"><p class="preview"><span>'.$this->get_translation('EditPreview').' ('.$text_chars.' '.$this->get_translation('Chars').")</span></p>\n";
+		$output = '<section class="preview"><p class="preview"><span>'.$this->get_translation('EditPreview').' ('.$text_chars.' '.$this->get_translation('Chars').")</span></p>\n";
 
-		if ($this->config['edit_summary'] != 0)
+		if ($this->page['comment_on_id'] != 0)
 		{
-			$output .= '<div class="comment-title">'."\n".'<a href="#">'.$title."</a>\n</div>\n";
+			$output .= '<header class="comment-title">'."\n".'<h2><a href="#">'.$title."</a></h2>\n</header>\n";
+		}
+		else
+		{
+			$output .= '<h1>'.$this->page['title'].'</h1>';
 		}
 
+
 		$output .= $preview;
-		$output .= "</div><br />\n";
+		$output .= "</section><br />\n";
 
 		echo $output;
 
@@ -433,7 +439,7 @@ if ($this->has_access('read')
 
 	// captcha code starts
 
-	// Only show captcha if the admin enabled it in the config file
+	// show captcha only if the admin enabled it in the config
 	if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
 	{
 		$this->show_captcha(false);
