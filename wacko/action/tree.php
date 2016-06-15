@@ -16,6 +16,7 @@ $limit	= 500;
 if (!isset($root) && !isset($page))
 					$root	= '/'.$this->page['tag'];
 if (!isset($page)) $page = '';
+if (!isset($title)) $title = 1;
 if ($page)			$root	= $page;
 if ($root == '/')	$root	= '';
 if ($root)			$root	= $this->unwrap_link($root);
@@ -75,9 +76,9 @@ if ($pages = $this->load_all(
 	{
 		// cache links
 		if ($links = $this->load_all(
-		"SELECT {$this->page_meta} ".
-		"FROM {$this->config['table_prefix']}page ".
-		"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", true))
+			"SELECT {$this->page_meta} ".
+			"FROM {$this->config['table_prefix']}page ".
+			"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", true))
 		{
 			foreach ($links as $link)
 			{
@@ -90,8 +91,9 @@ if ($pages = $this->load_all(
 
 		// cache acls
 		if ($acls = $this->load_all(
-		"SELECT page_id, privilege, list FROM {$this->config['table_prefix']}acl ".
-		"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) AND privilege = 'read'", true))
+			"SELECT page_id, privilege, list FROM {$this->config['table_prefix']}acl ".
+			"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) ".
+				"AND privilege = 'read'", true))
 		{
 			foreach ($acls as $acl)
 			{
@@ -144,8 +146,8 @@ if ($pages = $this->load_all(
 			foreach ($pages as $page)
 			{
 				// check read privilege and current page tag
-				if ($page['tag'] == $root ||
-				($this->config['hide_locked'] && !$this->has_access('read', $page['page_id'])))
+				if ($page['tag'] == $root
+					|| ($this->config['hide_locked'] && !$this->has_access('read', $page['page_id'])))
 				{
 					continue;
 				}
@@ -187,6 +189,8 @@ if ($pages = $this->load_all(
 				echo '<li>';
 
 				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
+
+				if ($title == 0) $page['title'] = null;
 
 				if ($this->tag == $page['tag'])
 				{

@@ -28,7 +28,7 @@ $wacko_config_defaults = array(
 	'root_page'						=> 'HomePage',
 	'site_name'						=> 'MyWikiSite',
 	'site_desc'						=> 'Cover what you do best. Link to the rest.',
-		'base_url'					=> ($_SERVER['SERVER_PORT'] == 443
+	'base_url'						=> ($_SERVER['SERVER_PORT'] == 443
 											? 'https'
 											: 'http'
 										).

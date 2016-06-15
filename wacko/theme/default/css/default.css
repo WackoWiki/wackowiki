@@ -168,7 +168,7 @@ form input.submitinput {
 #header-top a:visited {
 	font-size: 24px;
 	font-weight: normal;
-	color: #000000;
+	color: #444;
 	text-decoration: none;
 }
 
@@ -189,6 +189,10 @@ form input.submitinput {
 /* show message boxes */
 .error {
 	background: #f8d4cc;
+	background-image: url('./../icon/cross.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
 	color: #CC3333;
@@ -203,12 +207,17 @@ form input.submitinput {
 
 .info {
 	background: #F4FBFF;
+	background-image: url('./../icon/info.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
 	border: 1px solid #D5D9E6;
 	color: #CC3333;
 	font-weight: bold;
 }
+
 .notice {
 	background-color: #FFFFEF;
 	border: 1px dotted #DDDDAA;
@@ -221,13 +230,16 @@ form input.submitinput {
 }
 
 .success {
-	background: #dff2bf none repeat scroll 0 0;
-	border: 1px solid #adde5c;
+	background: #e9ffd9 none repeat scroll 0 0;
+	background-image: url('./../icon/tick.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	/* border: 1px solid #adde5c; */
 	color: #008000;
 	font-weight: bold;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
-
 }
 
 .warning {
@@ -350,6 +362,7 @@ article,
 }
 
 #section-content,
+#page-show,
 #page-edit,
 #page {
 	background-color: #FFFFFF;

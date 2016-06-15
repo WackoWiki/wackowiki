@@ -54,10 +54,10 @@ if ($this->can_upload() === true)
 
 		if (count($file) > 0)
 		{
-			if ($this->is_admin() || (
-				$page_id && (
-				$this->page['owner_id'] == $this->get_user_id())) || (
-				$file['user_id'] == $this->get_user_id()))
+			if ($this->is_admin()
+				|| ($page_id
+					&& ($this->page['owner_id'] == $this->get_user_id()))
+				|| ($file['user_id'] == $this->get_user_id()))
 			{
 				$message = '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
 				$this->show_message($message, 'info');
@@ -161,10 +161,10 @@ if ($this->can_upload() === true)
 
 		if (count($file) > 0)
 		{
-			if ($this->is_admin() || (
-				$page_id && (
-				$this->page['owner_id'] == $this->get_user_id())) || (
-				$file['user_id'] == $this->get_user_id()))
+			if ($this->is_admin()
+				|| ($page_id
+					&& ($this->page['owner_id'] == $this->get_user_id()))
+				|| ($file['user_id'] == $this->get_user_id()))
 			{
 				$message = '<strong>'.$this->get_translation('UploadEditConfirm').'</strong>';
 				$this->show_message($message, 'info');
@@ -247,16 +247,16 @@ if ($this->can_upload() === true)
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-				"WHERE f.page_id = '".$page_id."'".
+				"WHERE f.page_id = '".$page_id."' ".
 					"AND f.upload_id ='".(int)$_POST['file_id']."' ".
 				"LIMIT 1");
 
 			if (count($file) > 0)
 			{
-				if ($this->is_admin() || (
-					$page_id && (
-					$this->page['owner_id'] == $this->get_user_id())) || (
-					$file['user_id'] == $this->get_user_id()))
+				if ($this->is_admin()
+					|| ($page_id
+						&& ($this->page['owner_id'] == $this->get_user_id()))
+					|| ($file['user_id'] == $this->get_user_id()))
 				{
 					// 2. remove from DB
 					$this->sql_query(
@@ -265,8 +265,8 @@ if ($this->can_upload() === true)
 
 					// update user uploads count
 					$this->sql_query(
-						"UPDATE {$this->config['user_table']} ".
-						"SET total_uploads = total_uploads - 1 ".
+						"UPDATE {$this->config['user_table']} SET ".
+							"total_uploads = total_uploads - 1 ".
 						"WHERE user_id = '".$file['user_id']."' ".
 						"LIMIT 1");
 
@@ -321,16 +321,16 @@ if ($this->can_upload() === true)
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-				"WHERE f.page_id = '".$page_id."'".
+				"WHERE f.page_id = '".$page_id."' ".
 					"AND f.upload_id ='".(int)$_POST['file_id']."' ".
 				"LIMIT 1");
 
 			if (count($file) > 0)
 			{
-				if ($this->is_admin() || (
-					$page_id && (
-					$this->page['owner_id'] == $this->get_user_id())) || (
-					$file['user_id'] == $this->get_user_id()))
+				if ($this->is_admin()
+					|| ($page_id
+						&& ($this->page['owner_id'] == $this->get_user_id()))
+					|| ($file['user_id'] == $this->get_user_id()))
 				{
 					$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
 					$description = rtrim( $description, '\\' );
@@ -371,12 +371,14 @@ if ($this->can_upload() === true)
 		else if (isset($_POST['upload'])) // process upload
 		{
 			$user		= $this->get_user();
+
 			// TODO: Set user used_quota in user table (?)
 			$user_files	= $this->load_single(
 				"SELECT SUM(file_size) AS used_user_quota ".
 				"FROM ".$this->config['table_prefix']."upload ".
-				"WHERE user_id = '".$user['user_id']."'".
+				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
+
 			// TODO: Set used_quota in config table (?)
 			$files		= $this->load_single(
 				"SELECT SUM(file_size) AS used_quota ".
@@ -387,6 +389,7 @@ if ($this->can_upload() === true)
 			if (!isset($this->config['upload_path_per_page']))
 			{
 			}
+
 			if (!isset($this->config['upload_path']))
 			{
 			}
@@ -466,7 +469,7 @@ if ($this->can_upload() === true)
 						$file_size		= $_FILES['file']['size'];
 
 						// 1.6. check filesize, if asked
-						$max_filesize = $this->config['upload_max_size'];
+						$max_filesize	= $this->config['upload_max_size'];
 
 						if (isset($_POST['maxsize']))
 						{
@@ -520,13 +523,13 @@ if ($this->can_upload() === true)
 								$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
 								$uploaded_dt	= date('Y-m-d H:i:s');
 
-								$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
-								$description = rtrim( $description, '\\' );
+								$description	= substr(quote($this->dblink, $_POST['file_description']), 0, 250);
+								$description	= rtrim( $description, '\\' );
 
 								// Make HTML in the description redundant
-								$description = $this->format($description, 'pre_wacko');
-								$description = $this->format($description, 'safehtml');
-								$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
+								$description	= $this->format($description, 'pre_wacko');
+								$description	= $this->format($description, 'safehtml');
+								$description	= htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
 
 								// 5. insert line into DB
 								$this->sql_query(
@@ -551,7 +554,7 @@ if ($this->can_upload() === true)
 
 								// 4. output link to file
 								// !!!!! write after providing filelink syntax
-								$this->set_message($this->get_translation('UploadDone'));
+								$this->set_message($this->get_translation('UploadDone'), 'success');
 
 								// log event
 								if ($is_global)
@@ -623,13 +626,13 @@ if ($this->can_upload() === true)
 				if ($this->config['upload_quota_per_user'] > 0)
 				{
 					$error = $this->get_translation('UploadMaxFileQuota').'. <br />'.
-								'Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->config['upload_quota_per_user']) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota_per_user']), true, true, true);
+							 'Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->config['upload_quota_per_user']) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota_per_user']), true, true, true);
 				}
 
 				if ($this->config['upload_quota'] > 0)
 				{
 					$error .= '<br />'.$this->get_translation('UploadMaxFileQuota').'. <br />'.
-								'Storage in use '.$this->binary_multiples($files['used_quota'], false, true, true).' ('.round(($files['used_quota']/($this->config['upload_quota']) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota']), true, true, true);
+							  'Storage in use '.$this->binary_multiples($files['used_quota'], false, true, true).' ('.round(($files['used_quota']/($this->config['upload_quota']) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota']), true, true, true);
 				}
 			}
 		}

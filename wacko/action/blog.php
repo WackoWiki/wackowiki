@@ -102,7 +102,7 @@ if (!empty($blog_cluster))
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND comment_on_id = '0'".
+				"AND comment_on_id = '0' ".
 				"AND deleted <> '1' ", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=latest');
@@ -122,7 +122,7 @@ if (!empty($blog_cluster))
 		$count	= $this->load_single(
 			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}category_page c ".
-			"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
+				"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
 			"WHERE p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
 				"AND c.category_id = '$category_id' ".
 				"AND p.deleted <> '1' ".

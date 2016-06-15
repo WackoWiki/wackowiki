@@ -69,7 +69,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		$this->log(4, str_replace('%1', $this->tag.' '.(isset($_POST['title']) ? $_POST['title'] : ''), $this->get_translation('LogPageMetaUpdated', $this->config['language'])));
 
 		// reload page
-		$this->set_message($this->get_translation('MetaUpdated'));
+		$this->set_message($this->get_translation('MetaUpdated'), 'success');
 		$this->redirect((isset($_POST['extended']) ? $this->href('properties', '', 'extended') : $this->href('properties')));
 	}
 

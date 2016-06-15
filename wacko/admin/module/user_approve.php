@@ -180,9 +180,6 @@ function admin_user_approve(&$engine, &$module)
 							"AND u.account_type = '0' ".
 						"LIMIT 1");
 
-
-
-
 					$engine->show_message($engine->get_translation('UsersDeleted'));
 					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
 				}
@@ -357,9 +354,9 @@ function admin_user_approve(&$engine, &$module)
 				<th><?php echo $engine->get_translation('UserEmail'); ?></th>
 				<th><?php echo $engine->get_translation('UserIP'); ?></th>
 				<th style="width:20px;"><?php echo $engine->get_translation('UserLanguage'); ?></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>"><?php echo $engine->get_translation('UserSignuptime'); ?></a></th>
 				<th style="width:20px;"><?php echo $engine->get_translation('UserEnabled'); ?></th>
 				<th style="width:20px;"><?php echo $engine->get_translation('AccountStatus'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>"><?php echo $engine->get_translation('UserSignuptime'); ?></a></th>
 				<th style="width:200px;"><?php echo $engine->get_translation('UserActions'); ?></th>
 			</tr>
 <?php
@@ -380,9 +377,9 @@ function admin_user_approve(&$engine, &$module)
 						'<td>'.$row['email'].'</td>'.
 						'<td>'.$row['user_ip'].'</td>'.
 						'<td><small><a href="'.$engine->href().'&amp;user_lang='.$row['user_lang'].'">'.$row['user_lang'].'</a></small></td>'.
+						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td>'.$row['enabled'].'</td>'.
 						'<td><a href="'.$engine->href().'&amp;account_status='.$row['account_status'].'">'.$status[$row['account_status']].'</a></td>'.
-						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td>'.
 							((isset($_GET['account_status']) && $_GET['account_status'] > 0) || !isset($_GET['account_status'])
 								? '<a href="'.$engine->href().'&amp;approve=1&amp;user_id='.$row['user_id'].'">'.$approve_icon.''.$engine->get_translation('Approve').'</a>'

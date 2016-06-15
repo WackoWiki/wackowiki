@@ -40,18 +40,18 @@ $wacko_translation = array(
 	'NewAccountSignupInfo'		=> 'Das folgende Konto wurde angelegt:',
 
 	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
-	'UserRequiresApproval'		=> 'Um den Benutzer zuzulassen oder abzulehnen gehe zu %1',
+	'UserRequiresApproval'		=> 'Um den Benutzer für %1 zuzulassen oder abzulehnen gehe ins Admin-Panel.',
 	'UserApprovalInfo'			=> 'Nachdem du dich registriert hast, wird deine Registrierung zur Freischaltung an den Administrator der Seite geschickt. Du erhältst dann eine E-Mail mit weiteren Anweisungen.',
 
 	'UserApprovalPending'		=> 'Your account is still pending approval.',
 	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
 
-	'RegistrationApproved'		=> 'Registration Approved',
-	'RegistrationDenied'		=> 'Registration Denied',
-	'PendingApproval'			=> 'Pending Approval',
+	'RegistrationApproved'		=> 'Registrierung wurde freigeschalten',
+	'RegistrationDenied'		=> 'Registrierung abgelehnt',
+	'PendingApproval'			=> 'Ausstehende Freischaltung',
 
-	'UserApprovedInfo'			=> 'You have been approved to access %1.',
-	'UserDeniedInfo'			=> 'You have been denied access to %1.',
+	'UserApprovedInfo'			=> 'Dir wurde der Zugang zu %1 freigeschaltet.',
+	'UserDeniedInfo'			=> 'Der Zugang zu %1 wurde abgelehnt.',
 
 	// login panel
 	'LoginWelcome'				=> 'Anmeldung',
@@ -542,7 +542,7 @@ $wacko_translation = array(
 	'PasswordChanged'			=> 'Passwort geändert',
 	'EmailWelcome'				=> 'Du bist registriert bei ',
 	'EmailRegistered'			=> 'Du hast dich bei %1 registriert.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem Link'."\n".'%3',
-	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredLogin'		=> 'Bitte kehre zum Wiki zurück und melde dich mit deinem neuen Benutzernamen und Passwort an.',
 	'EmailRegisteredIgnore'		=> 'Wenn du dich nicht registriert hast, ignoriere diese Nachricht, es wird nichts passieren.',
 	'EmailDoNotReply'			=> 'NICHT AUF DIESE NACHRICHT ANTWORTEN',
 	'EmailVerify'				=> 'Jemand (vielleicht du) hat deine E-Mailadresse als Bestätigungsadresse bei %1 angegeben.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem '."\n".'%3'."\n".'Link.'."\n\n".'',
@@ -590,9 +590,9 @@ $wacko_translation = array(
 	'NewPageCreated'			=> 'Neue Seite erstellt',
 	'NewRevisionAdded'			=> 'Seite geändert',
 	'Cluster'					=> 'Cluster',
-	'PageDeleted'				=> 'Page deleted',
-	'CommentDeleted'			=> 'Comment deleted',
-	'FileDeleted'				=> 'File deleted',
+	'PageDeleted'				=> 'Seite gelöscht',
+	'CommentDeleted'			=> 'Kommentar gelöscht',
+	'FileDeleted'				=> 'Anhang gelöscht',
 
 	// users action
 	'UsersSearch'				=> 'Benutzersuche',
@@ -717,8 +717,8 @@ $wacko_translation = array(
 	'SettingsXML'				=> 'Export als XML',
 	'BewareChangeLang'			=> 'Verändere nicht die Spracheinstellungen, wenn du dir nicht sicher bist, was du tust. Eine Änderung der Sprache kann zur Änderung des Namens der Seite führen, in Abhängigkeit von den sprachlichen Besonderheiten der neu gewählten Sprache. Möglicherweise wird der gesamte Inhalt nicht mehr lesbar sein. Du kannst diesen Schritt rückgängig machen, indem du die Spracheinstellungen wieder auf den Ursprungswert zurückstellst.',
 	'SetLang'					=> 'Sprache dieser Seite',
-	'SetMenuLabel'				=> 'Menu label',
-	'SetShowMenuLabel'			=> 'Show in navigation',
+	'SetMenuLabel'				=> 'Menü-Label',
+	'SetShowMenuLabel'			=> 'Zeige in der Navigation',
 
 	// upload
 	'UploadFiles'				=> 'Dateien hochladen',
@@ -750,7 +750,7 @@ $wacko_translation = array(
 	'UploadRemoveDenied'		=> 'Du hast keine Berechtigung, diese Datei zu löschen',
 	'UploadRemoveNotFound'		=> 'Datei wurde nicht gefunden.',
 	'UploadMax'					=> 'Nicht mehr als ',
-	'UploadUsedStorage'			=> 'Storage in use ',
+	'UploadUsedStorage'			=> 'Speicherplatz in Verwendung',
 
 	'UploadBy'					=> 'Hochgeladen von',
 	'FileAdded'					=> 'Hinzugefügt',
@@ -854,7 +854,7 @@ $wacko_translation = array(
 	'RecentCommentsTitleXML'	=> ' - Letzte Kommentare',
 	'RecentCommentsXML'			=> 'Letzte Kommentare im ',
 	'RecentNewsTitleXML'		=> ' - Aktuelle Nachrichten',
-	'RecentNewsXML'				=> 'Recent news zu ',
+	'RecentNewsXML'				=> 'Aktuelle Nachrichten zu ',
 	'PageRevisionsXML'			=> 'Historie/Revisionen von ',
 	'ExportClusterXML'			=> 'Export des ganzen Clusters von ',
 	'AccessDeniedXML'			=> 'Du hast keine Berechtigung für den Zugriff auf diese Seite.',
@@ -920,7 +920,7 @@ $wacko_translation = array(
 	'ModerateMovesConfirm'		=> 'Wähle den Ziel-Cluster in welchen das Forum verschoben werden soll',
 	'ModerateMoveConfirm'		=> 'Wähle ein Forum oder gib einen Cluster an in welchen du die Themen verschieben willst. Um die Seite in die Root zu verschieben, schreibe &quot;/&quot;',
 	'ModeratePgMoveConfirm'		=> 'Gib den Namen des Clusters an, in welchen du die Seite verschieben willst. Um die Seite in die Root zu verschieben, schreibe &quot;/&quot;',
-	'ModerateMoveExists'		=> 'Vorgang abgebrochen: In dem Bereich gibt es bereits Themen mit dem gleichen Namen %1. If you still need to transfer the above-mentioned topics, please rename them first.',
+	'ModerateMoveExists'		=> 'Vorgang abgebrochen: In dem Bereich gibt es bereits Themen mit dem gleichen Namen %1.<br />Falls die ausgewählten Themen dennoch verschoben werden sollen, benenne diese bitte erst um.',
 	'ModerateMoveNotExists'		=> 'Diese Seite / Cluster gibt es nicht. Bitte überprüfe den Namen und versuche es erneut.',
 	'ModerateMergeConfirm'		=> 'Wähle ein Thema, unter welchem die bestehenden zusammengeführt werden sollen',
 	'ModerateMerge2Min'			=> 'Zum Zusammenführen musst du mindestens zwei Themen wählen!',
@@ -1087,12 +1087,12 @@ $wacko_translation = array(
 		'es' => 'Spanisch',
 	),
 
-	'AccountStatus'				=> 'Account status',
+	'AccountStatus'				=> 'Kontostatus',
 	'AccountStatusArray' => array(
-		'0' => 'active',
-		'1' => 'pending',
-		'2' => 'blocked',
-		'3' => 'inactive',
+		'0' => 'aktiv',
+		'1' => 'ausstehend',
+		'2' => 'gesperrt',
+		'3' => 'inaktiv',
 	),
 
 	'JustNow'		=> 'gerade eben',
