@@ -804,7 +804,7 @@ function admin_user_users(&$engine, &$module)
 
 		$control_buttons =	'<br /><input type="submit" id="button" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> '.
 							'<input type="submit" id="button" name="edit" value="'.$engine->get_translation('UserEditButton').'" /> '.
-							'<input type="submit" id="button" name="approve" value="'.$engine->get_translation('Approve').'" /> '.
+							#'<input type="submit" id="button" name="approve" value="'.$engine->get_translation('Approve').'" /> '.
 							'<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> '.
 							'<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
 							'<br />'."\n".

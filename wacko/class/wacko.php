@@ -2016,6 +2016,7 @@ class Wacko
 		// check privileges
 		if ( ($this->page && $this->has_access('write', $page_id))
 			|| (!$this->page && $this->has_access('create', '', $user_name)) // TODO: (!$this->page && $this->has_access('create', $tag))
+			#	|| $this->is_admin() // XXX: Only for testing - comment out afterwards!
 			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
 			|| $user_page == true)
 		{

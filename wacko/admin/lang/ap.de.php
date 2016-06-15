@@ -24,10 +24,10 @@ $ap_translation = array(
 	'LogEvent'					=> 'Ereignis',
 	'LogUsername'				=> 'Benutzername',
 
-	'PurgeSessions'				=> 'Purge all sessions',
+	'PurgeSessions'				=> 'Entferne alle Sitzungen',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
-	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
+	'PurgeSessionsDone'			=> 'Sitzungen erfolgreich enfernt.',
 
 	// log
 	'LogLevel1'					=> 'kritisch',
@@ -44,11 +44,11 @@ $ap_translation = array(
 
 	// User approval module
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
-	'Approve'					=> 'Approve',
-	'Deny'						=> 'Deny',
-	'Pending'					=> 'Pending',
-	'Approved'					=> 'Approved',
-	'Denied'					=> 'Denied',
+	'Approve'					=> 'Zulassen',
+	'Deny'						=> 'Ablehnen',
+	'Pending'					=> 'Ausstehend',
+	'Approved'					=> 'Bestätigt',
+	'Denied'					=> 'Abgelehnt',
 
 	// DB Backup module
 	'BackupStructure'			=> 'Struktur',
@@ -95,7 +95,7 @@ $ap_translation = array(
 	'BackupRemoved'				=> 'Die ausgewählte Datensicherung wurde erfolgreich entfernt.',
 
 	// User module
-	'UsersAdded'				=> 'User added',
+	'UsersAdded'				=> 'Benutzer hinzugefügt',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'UserEditButton'			=> 'Bearbeiten',
 	'UserEnabled'				=> 'Aktiviert',
@@ -106,14 +106,14 @@ $ap_translation = array(
 	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Benutzer zugeordnet sind.',
 	'UsersUpdated'				=> 'Benutzer erfolgreich aktualisiert.',
 
-	'UserName'					=> 'Username',
+	'UserName'					=> 'Benutzername',
 	'UserRealname'				=> 'Realname',
-	'UserEmail'					=> 'Email',
+	'UserEmail'					=> 'E-Mail',
 	'UserIP'					=> 'IP',
-	'UserLanguage'				=> 'Language',
-	'UserSignuptime'			=> 'Signuptime',
+	'UserLanguage'				=> 'Sprache',
+	'UserSignuptime'			=> 'Anmeldung',
 	'UserActions'				=> 'Actions',
-	'NoMatchingUser'			=> 'No users that meet the criteria',
+	'NoMatchingUser'			=> 'Keine Benutzer, welche diese Kriterien erfüllen.',
 
 	// Groups module
 	'GroupsMembersFor'			=> 'Mitglieder der Gruppe',

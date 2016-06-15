@@ -36,6 +36,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 	$this->redirect($this->href('', '', 'cache='.rand(0, 1000)));
 }
 
+// hide article H1 header
+$this->config['hide_article_header'] = true;
+
 // logout
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {

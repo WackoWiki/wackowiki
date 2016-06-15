@@ -40,11 +40,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 	// find number
 	if ($latest_comment = $this->load_single(
-	"SELECT tag, page_id
-	FROM ".$this->config['table_prefix']."page
-	WHERE comment_on_id <> '0'
-	ORDER BY page_id DESC
-	LIMIT 1"))
+		"SELECT tag, page_id
+		FROM ".$this->config['table_prefix']."page
+		WHERE comment_on_id <> '0'
+		ORDER BY page_id DESC
+		LIMIT 1"))
 	{
 		preg_match('/^Comment([0-9]+)$/', $latest_comment['tag'], $matches);
 		$num = $matches[1] + 1;
@@ -57,7 +57,10 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	$user = $this->get_user();
 
 	// watch page
-	if ($this->page && (isset($_POST['watchpage']) && ($_POST['watchpage'])) && ($_POST['noid_publication'] != $this->page['page_id']) && $user && $this->is_watched !== true)
+	if ($this->page
+		&& (isset($_POST['watchpage']) && ($_POST['watchpage']))
+		&& ($_POST['noid_publication'] != $this->page['page_id'])
+		&& $user && $this->is_watched !== true)
 	{
 		$this->set_watch($user['user_id'], $this->page['page_id']);
 	}

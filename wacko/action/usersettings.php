@@ -18,6 +18,9 @@ if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTT
 	$this->redirect(str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->href()));
 }
 
+// hide article H1 header
+$this->config['hide_article_header'] = true;
+
 // email confirmation
 if (isset($_GET['confirm']))
 {
@@ -193,7 +196,7 @@ else if ($user = $this->get_user())
 		$user		= $this->get_user();
 		$message	.= $this->get_translation('UserSettingsStored', (isset($_POST['user_lang']) ? $_POST['user_lang'] : ''));
 
-		$this->set_message($message);
+		$this->set_message($message, 'success');
 
 		// forward
 		if ($_POST['action'] == 'update_extended')

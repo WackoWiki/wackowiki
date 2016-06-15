@@ -43,7 +43,7 @@ if ($this->is_owner() || $this->is_admin())
 		$this->save_categories_list($this->page['page_id']);
 
 		$this->log(4, "Updated page categories [[/{$this->tag} {$this->page['title']}]]");
-		$this->set_message($this->get_translation('CategoriesUpdated'));
+		$this->set_message($this->get_translation('CategoriesUpdated'), 'success');
 		$this->redirect($this->href('properties'));
 	}
 	else if ($this->is_admin() || $this->config['owners_can_change_categories'] == true)
@@ -63,10 +63,10 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			// do we have identical names?
 			if ($this->load_single(
-			"SELECT category_id ".
-			"FROM {$this->config['table_prefix']}category ".
-			"WHERE category = '".quote($this->dblink, $_POST['newname'])."' ".
-			"LIMIT 1"))
+				"SELECT category_id ".
+				"FROM {$this->config['table_prefix']}category ".
+				"WHERE category = '".quote($this->dblink, $_POST['newname'])."' ".
+				"LIMIT 1"))
 			{
 				$this->set_message($this->get_translation('CategoriesAlreadyExists'));
 				$_POST['change'] = $_POST['id'];
@@ -85,7 +85,7 @@ if ($this->is_owner() || $this->is_admin())
 						"category_lang	= '".quote($this->dblink, $this->page['page_lang'])."', ".
 						"category		= '".quote($this->dblink, $_POST['newname'])."'");
 
-				$this->set_message($this->get_translation('CategoriesAdded'));
+				$this->set_message($this->get_translation('CategoriesAdded'), 'success');
 				$this->log(4, "Created a new category //'{$_POST['newname']}'//");
 				unset($_POST['create']);
 			}
@@ -95,10 +95,11 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			// do we have identical names?
 			if ($this->load_single(
-			"SELECT category_id ".
-			"FROM {$this->config['table_prefix']}category ".
-			"WHERE category = '".quote($this->dblink, $_POST['newname'])."' AND category_id <> '".quote($this->dblink, $_POST['id'])."' ".
-			"LIMIT 1"))
+				"SELECT category_id ".
+				"FROM {$this->config['table_prefix']}category ".
+				"WHERE category = '".quote($this->dblink, $_POST['newname'])."' ".
+					"AND category_id <> '".quote($this->dblink, $_POST['id'])."' ".
+				"LIMIT 1"))
 			{
 				$this->set_message($this->get_translation('CategoriesAlreadyExists'));
 				$_POST['change'] = $_POST['id'];
@@ -109,7 +110,8 @@ if ($this->is_owner() || $this->is_admin())
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}category SET ".
 						"category = '".quote($this->dblink, $_POST['newname'])."' ".
-					"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
+					"WHERE category_id = '".(int)$_POST['id']."' ".
+					"LIMIT 1");
 
 				$this->set_message($this->get_translation('CategoriesRenamed'));
 				$this->log(4, "category //'{$word['category']}'// renamed //'{$_POST['newname']}'//");
@@ -124,7 +126,9 @@ if ($this->is_owner() || $this->is_admin())
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}category SET ".
 						"parent_id = 0 ".
-					"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
+					"WHERE category_id = '".(int)$_POST['id']."' ".
+					"LIMIT 1");
+
 				$this->set_message($this->get_translation('CategoriesUngrouped'));
 				$this->log(4, "Category //'{$word['category']}'// debundled");
 			}
@@ -141,11 +145,14 @@ if ($this->is_owner() || $this->is_admin())
 					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}category SET ".
 							"parent_id = '".(int)$_POST['parent_id']."' ".
-						"WHERE category_id = '".(int)$_POST['id']."' LIMIT 1");
+						"WHERE category_id = '".(int)$_POST['id']."' ".
+						"LIMIT 1");
+
 					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}category SET ".
 							"parent_id = 0 ".
 						"WHERE parent_id = '".(int)$_POST['id']."'");
+
 					$this->set_message($this->get_translation('CategoriesGrouped'));
 					$this->log(4, "Category //'{$word['category']}'// grouped with the word //'{$parent['category']}'//");
 				}
@@ -161,13 +168,16 @@ if ($this->is_owner() || $this->is_admin())
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}category ".
 				"WHERE category_id = '".(int)$_POST['id']."'");
+
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}category_page ".
 				"WHERE category_id = '".(int)$_POST['id']."'");
+
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}category SET ".
 					"parent_id = 0 ".
 				"WHERE parent_id = '".(int)$_POST['id']."'");
+
 			$this->set_message($this->get_translation('CategoriesDeleted'));
 			$this->log(4, "Category //'{$word['category']}'// removed from the database");
 		}
@@ -195,6 +205,7 @@ if ($this->is_owner() || $this->is_admin())
 			# unset($selected[$key]);
 		}
 	}
+
 	$selected = $selected;
 
 	/////////////////////////////////////////////
@@ -222,11 +233,13 @@ if ($this->is_owner() || $this->is_admin())
 			echo '<tr><td><label for="">'.
 				$this->get_translation('CategoriesAdd').'</label> '.
 				'<input type="text" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" /><br /> ';
+
 			if ($group)
 			{
 				echo '<small><input type="radio" id="group1" name="group" value="1" checked="checked" /> <label for="group1">'.$this->get_translation('CategoriesAddGrouped').' \'<code>'.$word['category'].'</code>\'.</label></small><br />';
 				echo '<small><input type="radio" id="group0" name="group" value="0" /> <label for="group0">'.$this->get_translation('CategoriesAddGroupedNo').'</label></small><br />';
 			}
+
 			echo '<input type="submit" id="submit" name="create" value="'.$this->get_translation('CategoriesSaveButton').'" /> '.
 				 '<a href="'.$this->href('categories').'" style="text-decoration: none;"><input type="button" id="button" value="'.$this->get_translation('CategoriesCancelButton').'" /></a>'.
 				 '</td></tr>';
@@ -398,6 +411,7 @@ if ($this->is_owner() || $this->is_admin())
 		echo '<input type="submit" id="button" name="delete" value="'.$this->get_translation('CategoriesRemoveButton').'" /> ';
 		echo '<small><br />'.$this->get_translation('CategoriesEditInfo').'</small> ';
 	}
+
 	echo "<br /><br />";
 	echo $this->form_close();
 }
