@@ -23,8 +23,18 @@ class paragrafica
 		array( // rightinators
 			"!(<table)!si",
 			"!(<h[1-9][^>]*>)!si",
+			"!(<dl)!si",
 			"!(<(u|o)l)!si",
 			"!(<div)!si",
+			"!(<nav)!si",
+			"!(<aside)!si",
+			"!(<section)!si",
+			"!(<article)!si",
+			"!(<footer)!si",
+			"!(<header)!si",
+			"!(<address)!si",
+			"!(<figure)!si",
+			"!(<figcaption)!si",
 			"!(<p)!si",
 			"!(<form)!si",
 			"!(<textarea)!si",
@@ -44,8 +54,18 @@ class paragrafica
 		array( // rightinators
 			"!(</table>)!si",
 			"!(</h[1-9]>)!si",
+			"!(</dl>)!si",
 			"!(</(u|o)l>)!si",
 			"!(</div>)!si",
+			"!(</nav>)!si",
+			"!(</aside>)!si",
+			"!(</section>)!si",
+			"!(</article>)!si",
+			"!(</footer>)!si",
+			"!(</header>)!si",
+			"!(</address>)!si",
+			"!(</figure>)!si",
+			"!(</figcaption>)!si",
 			"!(</p>)!si",
 			"!(</form>)!si",
 			"!(</textarea>)!si",
@@ -212,10 +232,10 @@ class paragrafica
 						{
 							$pcount++;
 							$pieces[$k] = $this->prefix1.
-										$page_id.'-'.$pcount.
-										$this->prefix2.
-										$inside.
-										$this->postfix.substr($v, $pos + $sizeof_mark1);
+										  $page_id.'-'.$pcount.
+										  $this->prefix2.
+										  $inside.
+										  $this->postfix.substr($v, $pos + $sizeof_mark1);
 						}
 					}
 				}
@@ -242,7 +262,7 @@ class paragrafica
 
 				for ($i = 1; $i < $size; $i++)
 				{
-					$what= $what.$ignored[$i - 1].$a[$i];
+					$what = $what.$ignored[$i - 1].$a[$i];
 				}
 			}
 		}
@@ -256,13 +276,13 @@ class paragrafica
 		// 1. get all ^^ of this
 		$this->toc = array();
 		$what = preg_replace_callback( '!'.
-		"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)".				// 2=depth, 3=id, 4=name
+				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)".		// 2=depth, 3=id, 4=name
 									"|".
-		"(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">)".				// 6=id
+				"(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">)".			// 6=id
 									"|".
-		"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
-		// {{include page="TAG" notoc=1}}
-									"!i", array( &$this, 'add_toc_entry' ), $what );
+				"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
+				// {{include page="TAG" notoc=1}}
+				"!i", array( &$this, 'add_toc_entry' ), $what );
 
 		return $what;
 	}
