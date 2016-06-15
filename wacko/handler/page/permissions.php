@@ -54,7 +54,7 @@ if ($this->is_owner() || $this->is_admin())
 	if (!empty($_POST))
 	{
 		// check form token
-		if (!$this->validate_form_token('register'))
+		if (!$this->validate_form_token('set_permissions'))
 		{
 			$error = $this->get_translation('FormInvalid');
 			$this->set_message($error, 'error');
