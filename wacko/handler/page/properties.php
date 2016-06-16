@@ -100,16 +100,14 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				<li class="active">'.$this->get_translation('UserSettingsExtended')."</li>
 			</ul><br /><br />\n";
 
-		echo '<div class="page_settings">';
-
-		echo $this->form_open('extended_properties', 'properties'); // , '', '', '', '', "extended"
-		echo '<input type="hidden" name="extended" value="yes" />';
-		echo "\n".'<table class="form_tbl">'."\n";
-
-
 		// load settings (shows only if owner is current user or Admin)
 		if ($this->is_owner() || $this->is_admin())
 		{
+			echo '<div class="page_settings">';
+			echo $this->form_open('extended_properties', 'properties'); // , '', '', '', '', "extended"
+			echo '<input type="hidden" name="extended" value="yes" />';
+			echo "\n".'<table class="form_tbl">'."\n";
+
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->get_translation('MetaComments')."</th>".
 						'<td class="form_right">'.
@@ -206,14 +204,16 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				<li class="active">'.$this->get_translation('UserSettingsGeneral').'</li>
 				<li><a href="'.$this->href('properties', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
 			</ul><br /><br />\n";
+
 		echo '<div class="page_settings">';
-		echo $this->form_open('general_properties', 'properties');
-		echo '<table class="form_tbl">';
 
 		// show form
 		// load settings (shows only if owner is current user or Admin)
 		if ($this->is_owner() || $this->is_admin())
 		{
+
+			echo $this->form_open('general_properties', 'properties');
+			echo '<table class="form_tbl">';
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">
 							<label for="title">'.$this->get_translation('MetaTitle').'</label>
@@ -321,28 +321,31 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 							'<input type="submit" class="OkBtn" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp;'.
 							'<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" class="CancelBtn" value="'.$this->get_translation('MetaCancelButton').'" style="width: 120px" /></a>'.
 						'</td>';
+
+			echo "</tr>\n</table>\n";
+			echo $this->form_close();
 		}
 		else
 		{
+			echo '<table class="form_tbl">';
 			echo	'<tr class="lined">'.
-						'<th class="form_left" scope="row">'.$this->get_translation('MetaTitle')."</th>";
-						'<td class="form_right">'.$this->page['title']."</td>";
+						'<th class="form_left" scope="row">'.$this->get_translation('MetaTitle')."</th>".
+						'<td class="form_right">'.$this->page['title']."</td>".
 					"</tr>\n".
-					'<tr class="lined">';
-						'<th class="form_left" scope="row">'.$this->get_translation('MetaKeywords')."</th>";
-						'<td class="form_right">'.$this->page['keywords']."</td>";
+					'<tr class="lined">'.
+						'<th class="form_left" scope="row">'.$this->get_translation('MetaKeywords')."</th>".
+						'<td class="form_right">'.$this->page['keywords']."</td>".
 					"</tr>\n".
-					'<tr class="lined">';
-						'<th class="form_left" scope="row">'.$this->get_translation('MetaDescription')."</th>";
-						'<td class="form_right">'.$this->page['description']."</td>";
+					'<tr class="lined">'.
+						'<th class="form_left" scope="row">'.$this->get_translation('MetaDescription')."</th>".
+						'<td class="form_right">'.$this->page['description']."</td>".
 					"</tr>\n".
-					'<tr class="lined">';
-						'<th class="form_left" scope="row">'.$this->get_translation('SetLang')."</th>";
+					'<tr class="lined">'.
+						'<th class="form_left" scope="row">'.$this->get_translation('SetLang')."</th>".
 						'<td class="form_right">'.$this->page['page_lang']."</td>";
+			echo "</tr>\n</table>\n";
 		}
 
-		echo "</tr>\n</table>\n";
-		echo $this->form_close();
 		echo "</div>\n";
 	}
 

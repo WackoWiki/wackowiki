@@ -6,9 +6,9 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-	{{paragraphs style="BEFORE|after|left|right"				// table-type "left/right" don't implemented yet
+	{{paragraphs style="BEFORE|after|left|right"		// table-type "left/right" not implemented yet
 		// styles can be found in /classes/wacko.php
-		name="absolute|toc-relative|DOCUMENT-RELATIVE"  // "toc-relative" don't implemented yet
+		name="absolute|toc-relative|DOCUMENT-RELATIVE"	// "toc-relative" not implemented yet
 	}}
 */
 
@@ -44,26 +44,26 @@ if (!$style) $style = 'before';
 		$toc_len	= count($toc);
 		$numbers	= array();
 		$depth		= 0;
-		$pnum		= 0;
+		$p_num		= 0;
 
 		for($i = 0; $i < $toc_len; $i++)
 
 		if ($toc[$i][2] > 66666)
 		{
 			// normalizing submersion depth
-			$pnum++;
+			$p_num++;
 
 			if ($name == 'document-relative')
 			{
-				$num = $pnum;
+				$num = $p_num;
 			}
 			else
 			{
 				$num = str_replace('-', "&#0150;&sect;",
-						str_replace("p", "¹", $toc[$i][0] ));
+						str_replace('p', '¹', $toc[$i][0] ));
 			}
 
-			// editing TOC @66 contains
+			// editing TOC containing @66
 			$toc[$i][66] = $num;
 		}
 
@@ -73,7 +73,7 @@ if (!$style) $style = 'before';
 		// twisty-beasty changed in post-wacko and some digits could be added
 		$this->post_wacko_toc			= &$toc;
 		$this->post_wacko_action['p']	= $style;
-		$this->post_wacko_maxp			= $pnum;
+		$this->post_wacko_maxp			= $p_num;
 	} // --------------------------------------------------------------
 }
 
