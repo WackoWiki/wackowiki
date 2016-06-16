@@ -9,12 +9,13 @@ if ($options['wrapper_align'] == 'center')
 }
 else
 {
-	$align_style = 'float: '.$options['wrapper_align'];
+	$align_style = 'float: '.$options['wrapper_align'].';';
 }
 
-echo '<aside class="action" style="'.$align_style.'; width: '.$options['wrapper_width'].'px">';
-echo '<div class="action-content">';
-echo $text;
-echo '</div></aside>';
+echo	'<aside class="action" style="'.$align_style.' width: '.$options['wrapper_width'].'px;">'."\n".
+			'<div class="action-content">'."\n".
+				$text;
+			"</div>\n".
+		"</aside>\n";
 
 ?>

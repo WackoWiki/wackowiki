@@ -1,8 +1,8 @@
 <?php
 
-echo '<div class="action">';
-echo '<div class="action-content">';
+echo '<div class="action">'."\n";
+echo '<div class="action-content">'."\n";
 echo $text;
-echo '</div></div>';
+echo "</div>\n</div>\n";
 
 ?>

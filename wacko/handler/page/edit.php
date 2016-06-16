@@ -248,9 +248,9 @@ if ($this->has_access('read')
 						? $this->page['title']
 						: isset($_SESSION['title'])
 							? empty($_SESSION['title'])
-								? $this->add_spaces_title($this->tag)
+								? $this->get_page_title($this->tag)
 								: $_SESSION['title']
-							: $this->add_spaces_title($this->tag);
+							: $this->get_page_title($this->tag);
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
@@ -351,10 +351,8 @@ if ($this->has_access('read')
 	}
 	else
 	{
-		// page title
+		// show page title
 		$output .= '<br />'."\n";
-		#$output .= '<label for="page_title">'.$this->get_translation('MetaTitle').'</label><br />';
-		#$output .= '<input type="text" id="page_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
 		$output .= '<h1>'.$this->page['title'].'</h1>';
 		#$output .= '<br />'."\n";
 	}

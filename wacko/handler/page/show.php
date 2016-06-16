@@ -179,14 +179,14 @@ if ($this->has_access('read'))
 		// display page title
 		if (!isset($this->config['hide_article_header']) || !$this->config['hide_article_header'] == true)
 		{
-			echo '<header>'.
+			echo "<header>\n".
 				 '<h1>';
 			echo (isset($this->page['title']) && $this->has_access('read')
 				? $this->page['title']
 				: $this->get_page_path() );
 
-			echo '</h1>'.
-				 '</header>';
+			echo "</h1>\n".
+				 "</header>\n";
 		}
 
 		echo '<section id="section-content">';
