@@ -12,50 +12,44 @@
  * Peut facilement etre adapte pour d'autres langages (vb, c, c++...)
  * Il suffit de modifier le contenu des variables
  *
- * @version 1.0
- * @copyright FEREY Damien 23/06/2003
- * @copyright Dark Skull Software
- *          http://www.darkskull.net
- *
- *
  **/
 
 class JavaHighlighter{
 
-	var $code = ''; //the code to be hightlighed
-	var $newcode = ''; //the generated code
-	var $tok;            // Le mot en train d'etre decoupe
-	var $char;        // Le caractere en cours
-	var $i;          // La position en cours dans le code
-	var $codelength;  // La longueur de la chaine de code
+	var $code = '';		//the code to be hightlighed
+	var $newcode = '';	//the generated code
+	var $tok;			// Le mot en train d'etre decoupe
+	var $char;			// Le caractere en cours
+	var $i;				// La position en cours dans le code
+	var $codelength;	// La longueur de la chaine de code
 	/****************************************************************/
 	/* Les variables qui definissent le comportement de l'analyseur */
 	/****************************************************************/
-	var $case_sensitive = true;                   // Langage sensible a la case ou pas
-	var $tokdelimiters = " []()=+-/*:;,.\n\t\r  "; // Les delimiteurs de mots
+	var $case_sensitive	= true;                   // Langage sensible a la case ou pas
+	var $tokdelimiters	= " []()=+-/*:;,.\n\t\r  "; // Les delimiteurs de mots
 
 	/***************************************************/
 	/* Les couleurs associees a chaque type de donnees */
 	/***************************************************/
-	var $colorkeyword = "#0000CC";
-	var $colortext = "";
-	var $colorstring   = "#000000";
-	var $colorcomment = "#006600";
-	var $colorsymbol   = "";
-	var $colornumber   = "#000080";
-	var $colorpreproc = "#008000";
+	var $colorkeyword	= "#0000CC";
+	var $colortext		= "";
+	var $colorstring	= "#000000";
+	var $colorcomment	= "#006600";
+	var $colorsymbol	= "";
+	var $colornumber	= "#000080";
+	var $colorpreproc	= "#008000";
 
 	/*************************************************/
 	/* Les styles donnes pour chaque type de donnees */
 	/*************************************************/
-	var $stylekeyword = array("<strong>", "</strong>");
-	var $styletext = array("", "");
-	//var $stylestring   = array("<span style=\"background-color:yellow\">", "</span>");
-	var $stylestring   = array("","");
-	var $stylecomment = array("<em>", "</em>");
-	var $stylesymbol   = array("", "");
-	var $stylenumber   = array("", "");
-	var $stylepreproc = array("<em>", "</em>");
+	var $stylekeyword	= array("<strong>", "</strong>");
+	var $styletext		= array("", "");
+	//var $stylestring	= array("<span style=\"background-color:yellow\">", "</span>");
+	var $stylestring	 = array("","");
+	var $stylecomment	= array("<em>", "</em>");
+	var $stylesymbol	= array("", "");
+	var $stylenumber	= array("", "");
+	var $stylepreproc	= array("<em>", "</em>");
 
 	/*****************/
 	/* Keywords */
@@ -121,6 +115,7 @@ class JavaHighlighter{
 	{
 		if (!is_array($array)) return FALSE;
 		if (empty($array)) return FALSE;
+
 		foreach($array as $index=>$string)
 		if (strcasecmp($needle, $string) == 0) return intval($index);
 		return FALSE;
@@ -134,9 +129,11 @@ class JavaHighlighter{
 		// Si c'est un nombre
 		if (($tok[0] == '$') || ($tok[0] == '#') || ($tok == (string)intval($tok)))
 		return $this->formatspecialtok($tok, $this->colornumber, $this->stylenumber);
+
 		// Si c'est vide, on renvoie une chaine vide
 		if (empty($tok)) return $tok;
 		// Si c'est un mot cle
+
 		if ((($this->case_sensitive) && (is_integer(array_search($tok, $this->keywords, FALSE)))) ||
 		((!$this->case_sensitive) && (is_integer($this->array_search_case($tok, $this->keywords)))))
 		return $this->formatspecialtok($tok, $this->colorkeyword, $this->stylekeyword);
@@ -158,6 +155,7 @@ class JavaHighlighter{
 		// caractere de chaque premier delimiteur
 		foreach($array as $delimiterarray) {
 			$delimiter1 = $delimiterarray[0];
+
 			// Si le 1ø char correspond
 			if ($this->char == $delimiter1[0]) {
 				$match = TRUE;
@@ -166,22 +164,27 @@ class JavaHighlighter{
 				for ($j = 1; ($j < strlen($delimiter1)) && $match; $j++) {
 					$match = ($this->code[$this->i + $j] == $delimiter1[$j]);
 				} // for
+
 				// Si on l'a en entier
 				if ($match) {
 					$delimiter2 = $delimiterarray[1];
 					// Alors on recherche le delimiteur de fin
 					$delimiterend = strpos($this->code, $delimiter2, $this->i + strlen($delimiter1));
+
 					// Si on ne trouve pas le delimiteur de fin, on prend tout le fichier
 					if (!is_integer($delimiterend)) $delimiterend = strlen($this->code);
+
 					// Maintenant qu'on a tout, on analyse le mot avant le delimiteur, s'il existe
 					if (!empty($this->tok)) {
 						$this->newcode .= $this->analyseword($this->tok);
 						$this->tok = "";
 					}
+
 					// Ensuite, on place le texte contenu entre les delimiteurs
 					$this->newcode .= $this->formatspecialtok(substr($this->code, $this->i, $delimiterend - $this->i + strlen($delimiter2)), $color, $style);
 					// On replace l'indice au bon endroit
 					$this->i = $delimiterend + strlen($delimiter2);
+
 					// Enfin on recupere le caractere en cours
 					if ($this->i > $this->codelength) $this->char = null;
 					else $this->char = $this->code[$this->i];
@@ -190,6 +193,7 @@ class JavaHighlighter{
 				} //if
 			} // if
 		} // foreach
+
 		return FALSE;
 	}
 
@@ -199,13 +203,16 @@ class JavaHighlighter{
 	function parsearrays()
 	{
 		$haschanged = TRUE;
+
 		// A chaque changement, on redemarre la boucle entiere
 		while($haschanged){
 			// On regarde si on ne tombe pas sur un delimiteur de commentaire
 			$haschanged = $this->parsearray($this->preprocdelimiters, $this->colorpreproc, $this->stylepreproc);
+
 			if (!$haschanged) {
 				// On regarde si on ne tombe pas sur un delimiteur de commentaire
 				$haschanged = $this->parsearray($this->commentdelimiters, $this->colorcomment, $this->stylecomment);
+
 				if (!$haschanged) {
 					// Ou de chaine de caractere
 					$haschanged = $this->parsearray($this->stringdelimiters, $this->colorstring, $this->stylestring);
@@ -228,27 +235,31 @@ class JavaHighlighter{
 	function analysecode($text)
 	{
 		// Initialize variables
-		$this->newcode = "";
-		$this->tok = "";
-		$this->char = null;
-		$this->code = $text;
-		$this->codelength = strlen($this->code);
+		$this->newcode		= "";
+		$this->tok			= "";
+		$this->char			= null;
+		$this->code			= $text;
+		$this->codelength	= strlen($this->code);
 
 		$this->trace("debut analysecode");
 		$this->dump($this->codelength,"codelength");
 		$this->dump($this->code,"code");
+
 		for ($this->i = 0; $this->i < $this->codelength; $this->i++ ) {
 			$this->dump($this->i,"i");
 			$this->char = $this->code[$this->i];
 			$this->dump($this->char,"char");
 			// On regarde si on tombe sur un cas special
 			$this->parsearrays();
+
 			// On regarde si on est arrive au bout de la chaine
 			if ($this->char == null) return $this->newcode;
 			// On a fini d'analyser les commentaires, on regarde si on a un mot complet
+
 			if (is_integer(strpos($this->tokdelimiters, $this->char))) {
 				// On tombe sur un delimiteur, on coupe le mot
 				$this->newcode .= $this->analyseword($this->tok);
+
 				// On formatte le delimiteur
 				if ($this->visiblechar($this->char)) $this->newcode .= $this->formatspecialtok($this->char, $this->colorsymbol, $this->stylesymbol);
 				else $this->newcode .= $this->char;
@@ -259,6 +270,7 @@ class JavaHighlighter{
 				$this->tok .= $this->char;
 			}
 		} // for
+
 		// On regarde si on arrive au bout du code
 		if (!empty($this->tok)) $this->newcode .= $this->analyseword($this->tok);
 		return $this->newcode;
