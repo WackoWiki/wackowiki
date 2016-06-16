@@ -354,7 +354,7 @@ else
 
 if (!$nomark)
 {
-	echo '</nav>';
+	echo "</nav>\n";
 }
 
 ?>

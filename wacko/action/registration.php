@@ -14,15 +14,18 @@ $real_name		= '';
 $email			= '';
 $user_lang		= '';
 $password		= '';
-$confpassword	= '';
+$conf_password	= '';
 $error			= '';
+$message		= '';
 $word_ok		= '';
 
 // disable server cache for page
 $this->no_cache(false);
 
 // reconnect securely in tls mode
-if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+if ($this->config['tls'] == true
+	&& ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy']))
+	|| $_SERVER['SERVER_PORT'] != '443' ))
 {
 	$this->redirect(str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->href()));
 }
@@ -31,10 +34,10 @@ if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTT
 if (isset($_GET['confirm']))
 {
 	if ($temp = $this->load_single(
-			"SELECT user_name, email, email_confirm ".
-			"FROM ".$this->config['user_table']." ".
-			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."' ".
-			"LIMIT 1"))
+		"SELECT user_name, email, email_confirm ".
+		"FROM ".$this->config['user_table']." ".
+		"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."' ".
+		"LIMIT 1"))
 	{
 		$this->sql_query(
 			"UPDATE ".$this->config['user_table']." SET ".
@@ -79,7 +82,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 			$user_name		= trim($_POST['user_name']);
 			$email			= trim($_POST['email']);
 			$password		= $_POST['password'];
-			$confpassword	= $_POST['confpassword'];
+			$conf_password	= $_POST['conf_password'];
 			$user_lang		= (isset($_POST['user_lang']) ? $_POST['user_lang'] : $this->config['language']);
 			$complexity		= $this->password_complexity($user_name, $password);
 
@@ -99,10 +102,10 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 			if ((!$error) || $this->is_admin() || !$this->config['captcha_registration'])
 			{
 				// strip \-\_\'\.\/\\
-				$user_name	= str_replace('-',		'',		$user_name);
-				$user_name	= str_replace('.',		'',		$user_name);
-				#$user_name	= str_replace('/',		'',		$user_name); // TODO: check with valid user name vs strip -> usabilitiy?
-				$user_name = str_replace("'", '', str_replace('\\', '', str_replace('_', '', $user_name)));
+				$user_name	= str_replace('-',	'',		$user_name);
+				$user_name	= str_replace('.',	'',		$user_name);
+				#$user_name	= str_replace('/',	'',		$user_name); // TODO: check with valid user name vs strip -> usabilitiy?
+				$user_name	= str_replace("'",	'',		str_replace('\\', '', str_replace('_', '', $user_name)));
 
 				// check if name is WikiName style
 				if (!$this->is_wiki_name($user_name) && $this->config['disable_wikiname'] === false)
@@ -153,7 +156,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$error .= $this->get_translation('EmailTaken')." ";
 				}
 				// confirmed password mismatch
-				else if ($confpassword != $password)
+				else if ($conf_password != $password)
 				{
 					$error .= $this->get_translation('PasswordsDidntMatch')." ";
 				}
@@ -326,7 +329,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 
 if (!isset($_GET['confirm']))
 {
-	if ($this->config['allow_registration'] || $this->is_admin())
+	if ( ($this->config['allow_registration'] && !$this->get_user())
+		|| $this->is_admin() )
 	{
 		if ($error)
 		{
@@ -396,8 +400,8 @@ if (!isset($_GET['confirm']))
 		echo $this->show_password_complexity();
 		echo "</p>\n";
 
-		echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';
-		echo '<input type="password" id="confpassword" name="confpassword" size="24" value="'.$confpassword.'" autocomplete="off" /></p>';
+		echo '<p><label for="conf_password">'.$this->get_translation('ConfirmPassword').':</label>';
+		echo '<input type="password" id="conf_password" name="conf_password" size="24" value="'.$conf_password.'" autocomplete="off" /></p>';
 
 		echo '<p>';
 		echo '<label for="email">'.$this->get_translation('Email').':</label>';
@@ -430,7 +434,8 @@ if (!isset($_GET['confirm']))
 	}
 	else
 	{
-		echo($this->get_translation('RegistrationClosed'));
+		$message = $this->get_translation('RegistrationClosed');
+		echo $this->show_message($message, 'hint');
 	}
 }
 ?>

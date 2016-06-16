@@ -124,7 +124,6 @@ if ($this->is_admin())
 			<?php
 			echo $this->form_close();
 		}
-		// move global files from \\files to \\files\global folder
 		else if (isset($_POST['set_title']))
 		{
 			$pages = $this->load_all(
@@ -183,7 +182,6 @@ if ($this->is_admin())
 			<?php
 			echo $this->form_close();
 		}
-		// move global files from \\files to \\files\global folder
 		else if (isset($_POST['set_depth']))
 		{
 			$pages = $this->load_all(
@@ -236,7 +234,6 @@ if ($this->is_admin())
 			<?php
 			echo $this->form_close();
 		}
-		// move global files from \\files to \\files\global folder
 		else if (isset($_POST['set_version_id']))
 		{
 			$pages = $this->load_all(
