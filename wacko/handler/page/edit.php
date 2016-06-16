@@ -25,6 +25,7 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
+	#		|| $this->is_admin() // XXX: Only for testing - comment out afterwards!
 	|| ($this->page['comment_on_id'] && $this->is_owner())
 	|| ($this->page['comment_on_id'] && $this->is_admin())
 	|| (!$this->page && $this->has_access('create'))))
@@ -340,12 +341,12 @@ if ($this->has_access('read')
 		$output .= '<input type="text" id="comment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
 		$output .= '<br />'."\n";
 	}
-	else if (!$this->page)
+	else if (!$this->page || $this->is_owner() || $this->is_admin())
 	{
-		// new page title field
+		// edit page title
 		$output .= '<br />'."\n";
-		$output .= '<label for="addpage_title">'.$this->get_translation('MetaTitle').':</label><br />';
-		$output .= '<input type="text" id="addpage_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="100" name="title" />';
+		$output .= '<label for="page_title">'.$this->get_translation('MetaTitle').':</label><br />';
+		$output .= '<input type="text" id="page_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="100" name="title" />';
 		$output .= '<br />'."\n";
 	}
 	else
