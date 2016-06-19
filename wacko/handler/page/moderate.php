@@ -75,7 +75,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	if ($title != '')
 	{
 		// resave modified body
-		$page['body'] = preg_replace('/^==.*?==/', '=='.$title.'==', $page['body']);
+		#$page['body'] = preg_replace('/^==.*?==/', '=='.$title.'==', $page['body']); // XXX: obsolete, we use page title as h1
 		$engine->save_page($new_tag, $title, $page['body'], '', '', '', '', '', '', true, false);
 	}
 
@@ -128,7 +128,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 				// resave topic body as comment
 				$page = $engine->load_page($topic);
 
-				$page['body'] = preg_replace('/^==.*?==(\\n)*/', '', str_replace("\r", '', $page['body']));
+				#$page['body'] = preg_replace('/^==.*?==(\\n)*/', '', str_replace("\r", '', $page['body'])); // XXX: obsolete, we use page title as h1
 				$engine->save_page('Comment'.$num, false, $page['body'], '', '', '', $base_id, '', '', true);
 
 				// restore creation date
@@ -280,9 +280,10 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 			"commented	= NOW() ".
 		"WHERE page_id = '".$new_page_id."' ".
 		"LIMIT 1");
+
 	$engine->sql_query(
-		"UPDATE {$engine->config['table_prefix']}page ".
-		"SET comments = '".$engine->count_comments($old_page_id)."' ".
+		"UPDATE {$engine->config['table_prefix']}page SET ".
+			"comments = '".$engine->count_comments($old_page_id)."' ".
 		"WHERE page_id = '".(int)$old_page_id."' ".
 		"LIMIT 1");
 
@@ -419,7 +420,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				$set = array();
-				$this->set_message($this->get_translation('ModerateTopicsDeleted'));
+				$this->set_message($this->get_translation('ModerateTopicsDeleted'), 'success');
 				$this->redirect($this->href('moderate'));
 			}
 		}
@@ -468,7 +469,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 
 					$set = array();
-					$this->set_message($this->get_translation('ModerateTopicsRelocated'));
+					$this->set_message($this->get_translation('ModerateTopicsRelocated'), 'success');
 					$this->redirect($this->href('moderate'));
 				}
 			}
@@ -507,7 +508,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 
 					$set = array();
-					$this->set_message($this->get_translation('ModerateTopicsRenamed'));
+					$this->set_message($this->get_translation('ModerateTopicsRenamed'), 'success');
 					$this->redirect($this->href('moderate'));
 				}
 			}
@@ -540,7 +541,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				$set = array();
-				$this->set_message($this->get_translation('ModerateTopicsMerged'));
+				$this->set_message($this->get_translation('ModerateTopicsMerged'), 'success');
 				$this->redirect($this->href('moderate'));
 			}
 		}
@@ -556,7 +557,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			$set = array();
-			$this->set_message($this->get_translation('ModerateTopicsBlocked'));
+			$this->set_message($this->get_translation('ModerateTopicsBlocked'), 'success');
 			$this->redirect($this->href('moderate'));
 		}
 		// unlock topics
@@ -570,7 +571,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			$set = array();
-			$this->set_message($this->get_translation('ModerateTopicsUnlocked'));
+			$this->set_message($this->get_translation('ModerateTopicsUnlocked'), 'success');
 			$this->redirect($this->href('moderate'));
 		}
 
@@ -590,8 +591,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name, o.user_name as owner_name ".
 			"FROM {$this->config['table_prefix']}page AS p ".
-					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
+				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
 				"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				"AND a.privilege = 'create' AND a.list = '' ".
@@ -804,7 +805,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$xml->comments();
 				}
 
-				$this->set_message($this->get_translation('ModerateTopicDeleted'));
+				$this->set_message($this->get_translation('ModerateTopicDeleted'), 'success');
 				$this->redirect($this->href('moderate', substr($this->tag, 0, strrpos($this->tag, '/'))));
 			}
 		}
@@ -823,14 +824,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				if ($forum_cluster === true)
 				{
-					if (isset($_POST['cluster']) && $_POST['cluster'] != '/')
+					if (!empty($_POST['cluster']) && $_POST['cluster'] != '/')
 					{
 						if (moderate_page_exists($this, $_POST['cluster']) === false)
 						{
-							$error = $this->get_translation('ModerateMoveNotExists');
+							$error = $this->get_translation('ModerateMoveNotExists').' <code>'.htmlspecialchars($_POST['cluster'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>';
 						}
 					}
-					else if (isset($_POST['section']))
+					else if (!empty($_POST['section']))
 					{
 						if (moderate_page_exists($this, $new_tag) === true)
 						{
@@ -865,7 +866,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$xml->comments();
 					}
 
-					$this->set_message($this->get_translation('ModeratePageMoved'));
+					$this->set_message($this->get_translation('ModeratePageMoved'), 'success');
 					$this->redirect($this->href('moderate', $new_tag));
 				}
 			}
@@ -906,7 +907,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$xml->comments();
 					}
 
-					$this->set_message($this->get_translation('ModerateTopicRenamed'));
+					$this->set_message($this->get_translation('ModerateTopicRenamed'), 'success');
 					$this->redirect($this->href('moderate', $new_tag));
 				}
 			}
@@ -917,7 +918,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->save_acl($this->page['page_id'], 'comment', '!*');
 			$this->log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->get_translation('LogTopicLocked', $this->config['language'])));
-			$this->set_message($this->get_translation('ModerateTopicBlocked'));
+			$this->set_message($this->get_translation('ModerateTopicBlocked'), 'success');
 			$this->redirect($this->href('moderate'));
 		}
 		// unlock topic
@@ -925,7 +926,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			$this->save_acl($this->page['page_id'], 'comment', '*');
 			$this->log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->get_translation('LogTopicUnlocked', $this->config['language'])));
-			$this->set_message($this->get_translation('ModerateTopicUnlocked'));
+			$this->set_message($this->get_translation('ModerateTopicUnlocked'), 'success');
 			$this->redirect($this->href('moderate'));
 		}
 		// delete selected comments
@@ -966,7 +967,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 
 					$set = array();
-					$this->set_message($this->get_translation('ModerateCommentsDeleted'));
+					$this->set_message($this->get_translation('ModerateCommentsDeleted'), 'succcess');
 					$this->redirect($this->href('moderate'));
 				}
 			}
@@ -1054,12 +1055,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 								$xml->comments();
 							}
 
-							$this->set_message($this->get_translation('ModerateCommentsSplited'));
+							$this->set_message($this->get_translation('ModerateCommentsSplited'), 'success');
 							$this->redirect($this->href('moderate', $section.'/'.$tag));
 						}
 						else
 						{
-							$this->set_message($this->get_translation('ModerateCommentsSplitFailed'));
+							$this->set_message($this->get_translation('ModerateCommentsSplitFailed'), 'error');
 							$this->log(2, 'Error when separating comments from the topic ((/'.$this->tag.')) a new topic '.$section.'/'.$tag.': page was not created');
 						}
 					}
@@ -1109,10 +1110,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 						// recount comments for the old and new page
 						$this->sql_query(
-							"UPDATE {$this->config['table_prefix']}page ".
-							"SET comments = '".$this->count_comments($this->page['page_id'])."' ".
+							"UPDATE {$this->config['table_prefix']}page SET ".
+								"comments = '".$this->count_comments($this->page['page_id'])."' ".
 							"WHERE page_id = '".$this->page['page_id']."' ".
 							"LIMIT 1");
+
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
 								"comments	= '".$this->count_comments($page_id)."', ".
@@ -1128,7 +1130,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$xml->comments();
 						}
 
-						$this->set_message($this->get_translation('ModerateCommentsMoved'));
+						$this->set_message($this->get_translation('ModerateCommentsMoved'), 'success');
 						$this->redirect($this->href('moderate'));
 					}
 				}
@@ -1151,7 +1153,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 			"WHERE comment_on_id = '{$this->page['page_id']}' ".
-			"AND p.deleted <> '1' ".
+				"AND p.deleted <> '1' ".
 			"ORDER BY created ASC ".
 			"LIMIT {$pagination['offset']}, $limit";
 
