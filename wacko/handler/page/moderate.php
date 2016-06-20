@@ -17,10 +17,10 @@ if (!defined('IN_WACKO'))
 function moderate_page_exists(&$engine, $tag)
 {
 	if ($page = $engine->load_single(
-	"SELECT page_id ".
-	"FROM {$engine->config['table_prefix']}page ".
-	"WHERE tag = '".quote($engine->dblink, $tag)."' ".
-	"LIMIT 1"))
+		"SELECT page_id ".
+		"FROM {$engine->config['table_prefix']}page ".
+		"WHERE tag = '".quote($engine->dblink, $tag)."' ".
+		"LIMIT 1"))
 	{
 		return true;
 	}
@@ -74,8 +74,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	// update title in meta and body if needed
 	if ($title != '')
 	{
-		// resave modified body
-		#$page['body'] = preg_replace('/^==.*?==/', '=='.$title.'==', $page['body']); // XXX: obsolete, we use page title as h1
+		// resave modified page
 		$engine->save_page($new_tag, $title, $page['body'], '', '', '', '', '', '', true, false);
 	}
 
@@ -128,7 +127,6 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 				// resave topic body as comment
 				$page = $engine->load_page($topic);
 
-				#$page['body'] = preg_replace('/^==.*?==(\\n)*/', '', str_replace("\r", '', $page['body'])); // XXX: obsolete, we use page title as h1
 				$engine->save_page('Comment'.$num, false, $page['body'], '', '', '', $base_id, '', '', true);
 
 				// restore creation date
@@ -939,7 +937,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				if (array_filter($set) == false)
 				{
-					$error = 'Please select at least one comment via the Set button.';//$this->get_translation('ModerateMoveNotExists');
+					$error = $this->get_translation('ModerateNoItemChosen');
 				}
 
 				if ($error != true)
@@ -1006,7 +1004,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 					else if (array_filter($set) == false)
 					{
-						$error = 'Please select at least one comment via the Set button.';//$this->get_translation('ModerateMoveNotExists');
+						$error = $this->get_translation('ModerateNoItemChosen');
 					}
 				}
 

@@ -932,6 +932,7 @@ $wacko_translation = array(
 	'ModerateSplitAllAfter'		=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'		=> 'Separated only selected comments (total %1)',
 	'ModerateUserProfile'		=> 'profile',
+	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
 	'ModerateSection2'			=> 'moderate section...',
 	'ModerateTopicsDeleted'		=> 'Selected topics successfully deleted.',
