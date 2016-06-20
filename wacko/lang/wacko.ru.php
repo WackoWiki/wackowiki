@@ -932,6 +932,7 @@ $wacko_translation = array(
 	'ModerateSplitAllAfter'		=> 'Отделить все комментарии после первого выбранного (и включая его)',
 	'ModerateSplitSelected'		=> 'Отделить только выбранные комментарии (всего %1)',
 	'ModerateUserProfile'		=> 'профиль',
+	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
 	'ModerateSection2'				=> 'модерировать раздел...',
 	'ModerateTopicsDeleted'			=> 'Выбранные темы успешно удалены.',
