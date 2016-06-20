@@ -180,7 +180,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			// now we render it internally so we can write the updated link table.
 			$this->update_link_table($this->get_page_id('Comment'.$num), $body_r);
 
-			$this->set_message($this->get_translation('CommentAdded'));
+			$this->set_message($this->get_translation('CommentAdded'), 'success');
 		}
 
 		// End Comment Captcha

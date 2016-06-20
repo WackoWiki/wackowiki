@@ -14,7 +14,7 @@ else
 
 echo	'<aside class="action" style="'.$align_style.' width: '.$options['wrapper_width'].'px;">'."\n".
 			'<div class="action-content">'."\n".
-				$text;
+				$text.
 			"</div>\n".
 		"</aside>\n";
 
