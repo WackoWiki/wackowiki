@@ -2256,6 +2256,19 @@ class Wacko
 			{
 				$this->set_language($this->page_lang);
 
+				// getting title
+				if ($title == '')
+				{
+					if ($comment_on_id == true)
+					{
+						$title = $this->get_translation('Comment').' '.substr($tag, 7);
+					}
+					else
+					{
+						$title = $this->get_page_title($tag);
+					}
+				}
+
 				// aha! page isn't new. keep owner!
 				$owner_id = $old_page['owner_id'];
 
@@ -6050,7 +6063,7 @@ class Wacko
 						|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
 					)
 				{
-					echo 'TRUE local';
+					#echo '[debug] TRUE local';
 					return true;
 				}
 			}
@@ -6062,7 +6075,7 @@ class Wacko
 						#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
 						)
 				{
-					echo 'TRUE global';
+					#echo '[debug] TRUE global';
 					return true;
 				}
 			}

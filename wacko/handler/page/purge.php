@@ -66,7 +66,7 @@ if ($this->is_owner() || $this->is_admin())
 		$message .= '</em></ol><br />';
 		$message .= $this->get_translation('ThisActionHavenotUndo')."\n";
 
-		$this->show_message($message, 'info');
+		$this->show_message($message, 'success');
 	}
 	else
 	{
