@@ -60,7 +60,7 @@ if ($this->can_upload() === true)
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
 				$message = '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
-				$this->show_message($message, 'info');
+				$this->show_message($message, 'warning');
 
 				if ($file['page_id'])
 				{
@@ -289,7 +289,7 @@ if ($this->can_upload() === true)
 
 					if ($message)
 					{
-						$this->set_message($message);
+						$this->set_message($message, 'success');
 					}
 
 					// log event
