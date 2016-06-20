@@ -94,7 +94,7 @@ if ($this->is_admin())
 			}
 
 			$message = $this->get_translation('CacheCleared');
-			$this->show_message($message, 'info');
+			$this->show_message($message, 'success');
 		}
 	}
 }

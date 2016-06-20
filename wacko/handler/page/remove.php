@@ -231,7 +231,7 @@ if ($this->is_admin()
 
 		$message .= "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
 
-		$this->show_message($message, 'info');
+		$this->show_message($message, 'success');
 
 		// return to commented page
 		if ($comment_on_id)

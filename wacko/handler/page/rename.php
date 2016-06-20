@@ -163,7 +163,7 @@ if ($registered
 			// update sitemap
 			$this->write_sitemap(true, false);
 
-			$this->show_message($message, 'info');
+			$this->show_message($message, 'success');
 		}
 		else
 		{
@@ -172,7 +172,7 @@ if ($registered
 
 			?>
 			<input type="hidden" name="rename" value="1" />
-			<input type="text" name="newname" value="<?php echo $this->tag;?>" size="40" />
+			<input type="text" name="newname" value="<?php echo $this->tag;?>" size="60" />
 <br />
 <br />
 			<?php
