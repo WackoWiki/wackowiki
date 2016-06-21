@@ -300,7 +300,7 @@ function admin_db_restore(&$engine, &$module)
 					&& $ikeys == false)
 					{
 						$mode = 'REPLACE';
-					}
+					}
 					$results .= "\t".'<strong>'.date('H:i:s').' - '.$table."\n".
 						"\t".'==========================</strong>'."\n";
 
