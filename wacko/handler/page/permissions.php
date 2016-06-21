@@ -135,7 +135,7 @@ if ($this->is_owner() || $this->is_admin())
 						"WHERE u.user_id = '".(int)$new_owner_id."' ".
 						"LIMIT 1");
 
-					if ($user == true)
+					if ($user)
 					{
 						$new_owner		= $user['user_name'];
 
@@ -252,7 +252,7 @@ if ($this->is_owner() || $this->is_admin())
 				if ($new_owner_id = $_new_owner_id)
 				{
 					$user = $this->load_single(
-						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.userlang ".
+						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
 						"FROM {$this->config['user_table']} u ".
 							"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 						"WHERE u.user_id = '".(int)$new_owner_id."' ".
