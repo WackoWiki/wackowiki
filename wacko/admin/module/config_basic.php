@@ -79,6 +79,7 @@ function admin_config_basic(&$engine, &$module)
 			$config['referrers_purge_time']		= (string)$_POST['referrers_purge_time'];
 			$config['noindex']					= (int)$_POST['noindex'];
 			$config['xml_sitemap']				= (int)$_POST['xml_sitemap'];
+			$config['xml_sitemap_time']			= (int)$_POST['xml_sitemap_time'];
 			$config['enable_feeds']				= (int)$_POST['enable_feeds'];
 			$config['enable_referrers']			= (int)$_POST['enable_referrers'];
 			$config['enable_comments']			= (int)$_POST['enable_comments'];

@@ -2047,7 +2047,7 @@ class Wacko
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!$old_page = $this->load_page('', $page_id,'','','', 1))
+			if (!($old_page = $this->load_page('', $page_id,'','','', 1)))
 			{
 				if (empty($lang))
 				{
@@ -3144,7 +3144,7 @@ class Wacko
 	*/
 	function mini_href($method = '', $tag = '', $addpage = 0)
 	{
-		if (!$tag = trim($tag))
+		if (!($tag = trim($tag)))
 		{
 			$tag = $this->tag;
 		}
@@ -3934,7 +3934,7 @@ class Wacko
 				// numerated wiki-links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $page_link != $text && $title != $this->get_translation('CreatePage'))
 				{
-					if (!$refnum = (isset($this->numerate_links[$page_link]) ? $this->numerate_links[$page_link] : ''))
+					if (!($refnum = (isset($this->numerate_links[$page_link]) ? $this->numerate_links[$page_link] : '')))
 					{
 						$refnum = '[link'.((string)count($this->numerate_links) + 1).']';
 						$this->numerate_links[$page_link] = $refnum;
@@ -3993,7 +3993,7 @@ class Wacko
 				// numerated outer links and file links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $url != $text && $url != '404' && $url != '403')
 				{
-					if (!$refnum = (isset($this->numerate_links[$url]) ? $this->numerate_links[$url] : ''))
+					if (!($refnum = (isset($this->numerate_links[$url]) ? $this->numerate_links[$url] : '')))
 					{
 						$refnum = '[link'.((string)count($this->numerate_links) + 1).']';
 						$this->numerate_links[$url] = $refnum;
@@ -4554,12 +4554,12 @@ class Wacko
 	function log_referrer($page_id = '', $referrer = '')
 	{
 		// fill values
-		if (!$page_id = trim($page_id))
+		if (!($page_id = trim($page_id)))
 		{
 			$page_id = $this->page['page_id'];
 		}
 
-		if (!$referrer = trim($referrer))
+		if (!($referrer = trim($referrer)))
 		{
 			$referrer	= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 		}
@@ -4731,7 +4731,7 @@ class Wacko
 
 	function method($method)
 	{
-		if (!$handler = $this->page['handler'])
+		if (!($handler = $this->page['handler']))
 		{
 			$handler = 'page';
 		}
@@ -5447,7 +5447,7 @@ class Wacko
 
 	function user_wants_comments()
 	{
-		if (!$user = $this->get_user())
+		if (!($user = $this->get_user()))
 		{
 			return false;
 		}
@@ -5457,7 +5457,7 @@ class Wacko
 
 	function user_wants_files()
 	{
-		if (!$user = $this->get_user())
+		if (!($user = $this->get_user()))
 		{
 			return false;
 		}
@@ -5613,7 +5613,7 @@ class Wacko
 		}
 
 		// set default tag
-		if (!$page_id = trim($page_id))
+		if (!($page_id = trim($page_id)))
 		{
 			$page_id = $this->page['page_id'];
 		}
@@ -5627,7 +5627,7 @@ class Wacko
 
 	function get_page_owner($tag = '', $page_id = 0, $revision_id = '')
 	{
-		if (!$tag = trim($tag))
+		if (!($tag = trim($tag)))
 		{
 			if (!$revision_id)
 			{
@@ -5658,7 +5658,7 @@ class Wacko
 
 	function get_page_owner_id($page_id = '', $revision_id = '')
 	{
-		if (!$page_id = trim($page_id))
+		if (!($page_id = trim($page_id)))
 		{
 			if (!$revision_id)
 			{
@@ -5836,7 +5836,7 @@ class Wacko
 			$user_name = GUEST;
 		}
 
-		if (!$page_id = trim($page_id))
+		if (!($page_id = trim($page_id)))
 		{
 			$page_id = $this->page['page_id'];
 		}
@@ -6839,9 +6839,9 @@ class Wacko
 			}
 		}
 
-		if (!$this->method	= trim($method))
+		if (!($this->method = trim($method)))
 		{
-			$this->method	= 'show';
+			$this->method = 'show';
 		}
 
 		// normalizing tag name
