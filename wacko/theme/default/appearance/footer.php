@@ -59,7 +59,9 @@ if ($this->page)
 
 if ($this->get_user())
 {
-	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki').'<br />';
+	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki').
+		// STS: no need to add to config_default, it's private -dev feature
+		' '.$this->get_wacko_version().(@$this->config['wacko_patchlevel']).'<br />';
 }
 
 // comment this out for not showing website policy link at the bottom of your pages
