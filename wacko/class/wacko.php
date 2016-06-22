@@ -3278,6 +3278,54 @@ class Wacko
 		$url		= '';
 		$text		= str_replace('"', '&quot;', $text);
 
+		// parse off <img> resizing tags from text: height= / width= / align=
+		$_align		= '';
+		$_height	= '';
+		$_width		= '';
+		$resize		= '';
+		$trim		= 0;
+		$text = preg_replace_callback(
+			'/\s*\b([a-z]+)=([0-9a-z%]+)/i',
+			function ($mat) use (&$_align, &$_height, &$_width, &$trim)
+			{
+				if ($mat[1] == 'height')
+					$_height = $mat[2];
+				else if ($mat[1] == 'width')
+					$_width = $mat[2];
+				else if ($mat[1] == 'align')
+					$_align = $mat[2];
+				else
+					return $mat[0];
+				$trim = 1;
+				return '';
+			}, $text);
+		if ($trim)
+		{
+			$text = trim($text);
+		}
+		if ($_width || $_height)
+		{
+			if (!$_width) {
+				$_width = 'auto';
+			}
+			else if (preg_match('/^[0-9]+$/', $_width))
+			{
+				$_width .= 'px';
+			}
+			if (!$_height)
+			{
+				$_height = 'auto';
+			} else if (preg_match('/^[0-9]+$/', $_height))
+			{
+				$_height .= 'px';
+			}
+			$resize = " style=\"width:$_width;height:$_height;\"";
+		}
+		if ($_align)
+		{
+			$resize .= " align=$_align"; // XXX: deprecated in HTML 4 & 5 though
+		}
+
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
 		{
 			$link_tracking = true;
@@ -3337,7 +3385,7 @@ class Wacko
 
 			if ($text == $tag)
 			{
-				return '<img src="'.str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)).'" '.($text ? 'alt="'.$text.'" title="'.$text.'"' : '').' />';
+				return '<img src="'.str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)).'" '.($text ? 'alt="'.$text.'" title="'.$text.'"' : '').$resize.' />';
 			}
 			else
 			{
@@ -3540,7 +3588,7 @@ class Wacko
 						}
 						else
 						{
-							$scale = 'width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'"';
+							$scale = ' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'"';
 						}
 
 						// direct file access
@@ -3550,7 +3598,8 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' '.$scale.' />';
+								return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" '.
+										($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').$scale.$resize.' />';
 							}
 							else
 							{
@@ -3566,7 +3615,8 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' '.$scale.' />';
+								return '<img src="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" '.
+										($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').$scale.$resize.' />';
 							}
 							else
 							{
@@ -3793,7 +3843,7 @@ class Wacko
 
 			if ($img_link)
 			{
-				$text		= '<img src="'.$img_link.'" title="'.$text.'" />';
+				$text		= '<img src="'.$img_link.'" title="'.$text.'"'.$resize.' />';
 			}
 
 			if ($text)
@@ -3955,7 +4005,7 @@ class Wacko
 		{
 			if ($img_link)
 			{
-				$text		= '<img src="'.$img_link.'" title="'.$text.'" />';
+				$text		= '<img src="'.$img_link.'" title="'.$text.'"'.$resize.' />';
 			}
 
 			// XXX: obsolete -> see wacko.css
