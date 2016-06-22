@@ -29,6 +29,9 @@ define('MENU_AUTO',						0);
 define('MENU_USER',						1);
 define('MENU_DEFAULT',					2);
 
+define('LINK_PAGE',						0);
+define('LINK_FILE',						1);
+
 define('RECOVERY_MODE',					0);		// restore database
 
 define('SESSION_HANDLER_ID',			'sid');

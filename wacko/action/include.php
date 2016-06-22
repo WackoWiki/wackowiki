@@ -17,9 +17,9 @@ if (!isset($first_anchor))	$first_anchor	= '';
 if (!isset($last_anchor))	$last_anchor	= '';
 if (!isset($track))			$track			= '';
 
-if ($_SESSION[$this->config['session_prefix'].'_'.'linktracking'] && $track)
+if ($track && $this->link_tracking())
 {
-	$this->track_link_to($page);
+	$this->track_link_to($page, LINK_PAGE);
 }
 
 if (in_array($page, $this->context))

@@ -19,7 +19,6 @@ class Wacko
 	var $categories;
 	var $is_watched;
 	var $query_time;
-	var $file_link				= array();	// for file tracking
 	var $query_log				= array();
 	var $inter_wiki				= array();
 	var $_acl					= array();
@@ -221,7 +220,7 @@ class Wacko
 
 	function get_page_id($tag = '')
 	{
-		if(!$tag)
+		if (!$tag)
 		{
 			return $this->page['page_id'];
 		}
@@ -3208,9 +3207,9 @@ class Wacko
 		}
 
 		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
+		if ($track && $this->link_tracking())
 		{
-			$this->track_link_to($tag);
+			$this->track_link_to($tag, LINK_PAGE);
 		}
 
 		return '<a href="'.$this->href($method, $tag, $params).'"'.($title ? ' title="'.$title.'"' : '').'>'.$text.'</a>';
@@ -3233,10 +3232,10 @@ class Wacko
 
 		if (preg_match('/^[\!\.'.$this->language['ALPHANUM_P'].']+$/', $tag))
 		{
-			if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
+			if ($track && $this->link_tracking())
 			{
 				// it's a Wiki link!
-				$this->track_link_to($this->unwrap_link( $tag ));
+				$this->track_link_to($this->unwrap_link($tag), LINK_PAGE);
 			}
 		}
 
@@ -3326,13 +3325,9 @@ class Wacko
 			$resize .= " align=$_align"; // XXX: deprecated in HTML 4 & 5 though
 		}
 
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
+		if ($track)
 		{
-			$link_tracking = true;
-		}
-		else
-		{
-			$link_tracking = false;
+			$track = $this->link_tracking();
 		}
 
 		if (!$safe)
@@ -3457,19 +3452,13 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+					$url = $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
 					$have_global = true;
 
 					// tracking file link
-					if ($link_tracking)
+					if ($track && isset($file_data['upload_id']))
 					{
-						// add file link only once
-						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file_link))
-						{
-							#echo '## 1 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
-							$this->file_link[] = $file_data['upload_id'];
-							$this->track_link_to($file_data['upload_id'], 'file');
-						}
+						$this->track_link_to($file_data['upload_id'], LINK_FILE);
 					}
 				}
 			}
@@ -3480,18 +3469,12 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+					$url = $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
 
 					// tracking file link
-					if ($link_tracking)
+					if ($track && isset($file_data['upload_id']))
 					{
-						// add file link only once
-						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file_link))
-						{
-							#echo '## 2 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
-							$this->file_link[] = $file_data['upload_id'];
-							$this->track_link_to($file_data['upload_id'], 'file');
-						}
+						$this->track_link_to($file_data['upload_id'], LINK_FILE);
 					}
 				}
 			}
@@ -3523,20 +3506,14 @@ class Wacko
 				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
 				$page_id	= $this->get_page_id($page_tag); // TODO: supertag won't match tag! in cache
 
-				if ($file_data	= $this->check_file_exists($file_name, $page_tag))
+				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
+					$url = $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
 
 					// tracking file link
-					if ($link_tracking)
+					if ($track && isset($file_data['upload_id']))
 					{
-						// add file link only once
-						if (isset($file_data['upload_id']) && !in_array($file_data['upload_id'], $this->file_link))
-						{
-							#echo '## 3 ## '.$file_data['upload_id'].' - '.$file_name.'<br />';
-							$this->file_link[] = $file_data['upload_id'];
-							$this->track_link_to($file_data['upload_id'], 'file');
-						}
+						$this->track_link_to($file_data['upload_id'], LINK_FILE);
 					}
 
 					if ($this->is_admin()
@@ -3867,9 +3844,9 @@ class Wacko
 			$tag			= $unwtag;
 
 			// track page link
-			if ($link_tracking)
+			if ($track)
 			{
-				$this->track_link_to($tag, 'page');
+				$this->track_link_to($tag, LINK_PAGE);
 			}
 
 			// set a anchor once for link at the first appearance
@@ -4291,77 +4268,52 @@ class Wacko
 	// TRACK LINKS
 
 	/**
-	* Adds tag to current list stored in SESSION link-table. Link-tracking uses for collect
-	* all links in processed text.
+	* Link-tracking used to collect all links in processed text.
 	*
 	* @param string $tag
-	* @param string $link_type [page|file]
+	* @param enum $link_type [LINK_PAGE|LINK_FILE]
 	*
 	*/
-	function track_link_to($tag, $link_type = 'page' )
+	function track_link_to($tag, $link_type)
 	{
-		if ($link_type == 'page')
+		if (isset($this->linktable)) // no linktable? we are not tracking!
 		{
-			$this->linktable['page'][] = $tag;
+			$this->linktable[$link_type][strtolower($tag)] = $tag;
 		}
-		else if ($link_type == 'file')
-		{
-			$this->linktable['file'][] = $tag;
-		}
-		#$this->debug_print_r($this->linktable);
 	}
 
-	/**
-	* Returns current link table array
-	*
-	* @return array Array of tags, tracked with trackLinkTo
-	*/
 	function get_link_table($link_type)
 	{
-		if ($link_type == 'page')
+		if (isset($this->linktable[$link_type]))
 		{
-			return $this->linktable['page'];
-		}
-		else if ($link_type == 'file')
-		{
-			return $this->linktable['file'];
+			return $this->linktable[$link_type];
 		}
 	}
 
-	function clear_link_table()
-	{
-		$this->linktable = array();
-	}
-
-	/**
-	* Clears current linktable array and enables linktracking
-	*/
 	function start_link_tracking()
 	{
+		// STS: why in SESSION? is tracking between page instances possible?
 		$_SESSION[$this->config['session_prefix'].'_'.'linktracking'] = 1;
 	}
 
-	/**
-	* Disable linktracking
-	*/
 	function stop_link_tracking()
 	{
 		$_SESSION[$this->config['session_prefix'].'_'.'linktracking'] = 0;
 	}
 
+	function link_tracking()
+	{
+		$q = $this->config['session_prefix'].'_'.'linktracking';
+		return (isset($_SESSION[$q]) && $_SESSION[$q]);
+	}
+
 	/**
-	* Writes linktable for //$from_page_id// to database and clear linktable
+	* Write linktable for //$from_page_id// to database
 	*
 	* @param int $from_page_id
 	*/
-	function write_link_table($from_page_id = '')
+	function write_link_table($from_page_id)
 	{
-
-		if ($from_page_id == '')
-		{
-			$from_page_id = $this->page['page_id'];
-		}
-
 		// delete related old links in table
 		$this->sql_query(
 				"DELETE ".
@@ -4369,28 +4321,20 @@ class Wacko
 				"WHERE from_page_id = '".(int)$from_page_id."'");
 
 		// page link
-		if ($link_table = $this->get_link_table('page'))
+		if ($link_table = $this->get_link_table(LINK_PAGE))
 		{
 			$query = '';
 
-			foreach ($link_table as $to_tag)
+			foreach ($link_table as $dummy => $to_tag) // discard strtolowered index
 			{
-				$lower_to_tag = strtolower($to_tag);
-
-				// add link only once
-				if (!isset($written[$lower_to_tag]))
-				{
-					$query .= "('".(int)$from_page_id."', '".$this->get_page_id($to_tag)."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->translit($to_tag))."'),";
-					$written[$lower_to_tag] = 1;
-				}
+				$query .= "('".(int)$from_page_id."', '".$this->get_page_id($to_tag)."', '".
+							quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->translit($to_tag))."'),";
 			}
 
 			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."link ".
 					"(from_page_id, to_page_id, to_tag, to_supertag) ".
 				"VALUES ".rtrim($query, ','));
-
-			unset($query);
 		}
 
 		// delete page related old file links in table
@@ -4400,11 +4344,11 @@ class Wacko
 				"WHERE page_id = '".(int)$from_page_id."'");
 
 		// file link
-		if ($file_table = $this->get_link_table('file'))
+		if ($file_table = $this->get_link_table(LINK_FILE))
 		{
 			$query = '';
 
-			foreach ($file_table as $upload_id)
+			foreach ($file_table as $upload_id => $dummy) // index == value, BTW
 			{
 				$query .= "('".(int)$from_page_id."', '".(int)$upload_id."'),";
 			}
@@ -4413,20 +4357,25 @@ class Wacko
 					"INSERT INTO ".$this->config['table_prefix']."file_link ".
 					"(page_id, file_id) ".
 					"VALUES ".rtrim($query, ','));
-
-			unset($query);
 		}
 	}
 
-	function update_link_table($page_id = '', $body_r)
+	function update_link_table($page_id, $body_r)
 	{
 		// now we render it internally so we can write the updated link table.
-		$this->clear_link_table();
-		$this->start_link_tracking();
-		$dummy = $this->format($body_r, 'post_wacko');
-		$this->stop_link_tracking();
-		$this->write_link_table($page_id);
-		$this->clear_link_table();
+		if (isset($this->linktable))
+		{
+			$this->format($body_r, 'post_wacko');
+		}
+		else
+		{
+			$this->linktable = array();
+			$this->start_link_tracking();
+			$this->format($body_r, 'post_wacko');
+			$this->stop_link_tracking();
+			$this->write_link_table($page_id);
+			unset($this->linktable);
+		}
 	}
 
 	// INTERWIKI STUFF
