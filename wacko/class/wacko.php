@@ -3409,7 +3409,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+					$url		= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
 					$have_global = true;
 
 					// tracking file link
@@ -3432,7 +3432,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url	= $this->config['base_url'].$this->config['upload_path'].$file_name;
+					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
 
 					// tracking file link
 					if ($link_tracking)
