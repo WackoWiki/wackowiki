@@ -27,7 +27,7 @@ require ($this->config['theme_path'].'/_common/_header.php');
 			<div id="login-box">
 <?php
 // if user are logged, shows "You are UserName"
-if ($this->get_user())
+if ($logged_in = $this->get_user())
 {
 	echo '<span class="nobr">'.$this->get_translation('YouAre').' '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span>'.
 		 '<small> ( <span class="nobr Tune">'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).
@@ -54,77 +54,45 @@ else
 		</div>
 	</div>
 	<nav class="menu-main">
+
+	<div id="menu-user">
+	<ol>
 <?php
 	// outputs bookmarks menu
-	echo '<div id="menu-user">';
-	echo "<ol>\n";
 	// main page
 	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 
-	$menu = $this->get_menu();
+	$max_items = $logged_in? $logged_in['menu_items'] : $this->config['menu_items'];
 
-	// menu
-	if ($menu)
+	$i = 0;
+	foreach ((array)$this->get_menu() as $menu_item)
 	{
-		$i			= 1;
-		$fmi		= array(); // formatted_menu_item
-		$level		= 'menu';
-
-		if ($user = $this->get_user())
+		if ($i++ == $max_items)
 		{
-			$max_items	= $user['menu_items']; // TODO: add max_menu_items to global and user settings
+			// start dropdown menu for bookmarks over max_items
+			echo '<li class="dropdown"><a href="#" id="more">
+					<img src="'. $this->config['theme_url'].'icon/spacer.png" alt="-" title="'.
+					$this->get_translation('Bookmarks') .'" class="btn-menu"/></a>';
+			echo '<ul class="dropdown_menu">'."\n";
+		}
+
+		if ($this->page['page_id'] == $menu_item[0])
+		{
+			echo '<li class="active"><span>' . $menu_item[1] . "</span></li>\n";
 		}
 		else
 		{
-			$max_items	= $this->config['menu_items'];
-		}
-
-		foreach ((array)$menu as $menu_item)
-		{
-			if ($i > $max_items)
-			{
-				$level = 'submenu';
-			}
-
-			if ( ! isset($fmi[$level]))
-			{
-				$fmi[$level] = null;
-			}
-
-			if ($this->page['page_id'] == $menu_item[0])
-			{
-				$fmi[$level] .= '<li class="active"><span>';
-				$fmi[$level] .= $menu_item[1];
-				$fmi[$level] .= "</span></li>\n";
-			}
-			else
-			{
-				$fmi[$level] .= '<li>';
-				$fmi[$level] .= $this->format($menu_item[2], 'post_wacko');
-				$fmi[$level] .= "</li>\n";
-			}
-
-			$i++;
-		}
-
-		if (isset($fmi['menu']))
-		{
-			echo $fmi['menu'];
-		}
-
-		if (isset($fmi['submenu']))
-		{
-			// dropdown
-			echo '<li class="dropdown"><a href="#" id="more">
-					<img src="'. $this->config['theme_url'].'icon/spacer.png" alt="-" title="'.
-					$this->get_translation('RemoveFromBookmarks') .'" class="btn-menu"/></a>';
-			echo '<ul class="dropdown_menu">'."\n";
-			echo $fmi['submenu'];
-			echo "</ul>\n</li>\n";
+			echo '<li>' . $this->format($menu_item[2], 'post_wacko') . "</li>\n";
 		}
 	}
 
-	if ($this->get_user())
+	if ($i > $max_items)
+	{
+		// finish dropdown menu
+		echo "</ul>\n</li>\n";
+	}
+
+	if ($logged_in)
 	{
 		// determines what it should show: "add to menu" or "remove from menu" icon
 		if (!in_array($this->page['page_id'], (array)$this->get_menu_links()))
@@ -134,7 +102,7 @@ else
 				.'icon/spacer.png" alt="+" title="'.
 				$this->get_translation('AddToBookmarks') .'" class="btn-addbookmark"/></a></li>';
 		}
-		else
+		else if (!$this->get_menu_default())
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
@@ -142,8 +110,9 @@ else
 				$this->get_translation('RemoveFromBookmarks') .'" class="btn-removebookmark"/></a></li>';
 		}
 	}
-	echo "\n</ol></div>";
 ?>
+</ol></div>
+
 <div id="handler">
 
 <?php
@@ -280,7 +249,6 @@ else
 		echo '<ul class="dropdown_menu">'."\n";
 
 		// print tab
-		// TODO: should add 'PrintTip' to the language file
 		echo echo_tab(
 			$this->href('print'),
 			$this->get_translation('PrintVersion'),
@@ -367,7 +335,7 @@ else
 		echo echo_tab(
 			$this->href('referrers'),
 			$this->get_translation('ReferrersTip'),
-			($this->page && $this->has_access('read') && $this->get_user())
+			($this->page && $this->has_access('read') && $logged_in)
 				? $this->get_translation('ReferrersText') : '',
 			$this->method == 'referrers' || $this->method == 'referrers_sites',
 			2,
@@ -379,7 +347,7 @@ else
 			$this->href('watch'),
 			($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
 			#($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
-			($this->page && ($this->get_user()))
+			($this->page && $logged_in)
 				? ($this->is_watched === true
 						? $this->get_translation('UnWatchText')
 						: $this->get_translation('WatchText') )

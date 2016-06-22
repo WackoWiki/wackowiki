@@ -704,11 +704,8 @@ class Wacko
 	function get_user_language()
 	{
 		$user = $this->get_user();
-		if (isset($user['user_lang']) && in_array($user['user_lang'], $this->available_languages()))
-		{
-			$lang = $user['user_lang'];
-		}
-		else
+		$lang = @$user['user_lang'];
+		if (!in_array($lang, $this->available_languages()))
 		{
 			$lang = $this->user_agent_language();
 		}
@@ -6135,49 +6132,20 @@ class Wacko
 	}
 
 	// MENUS
-	function get_default_menu($lang = false)
+	function get_default_menu($lang = '')
 	{
-		$default_menu_formatted = array();
-
-		if (!isset($lang))
+		if (!$lang)
 		{
-			$user = $this->get_user();
-
-			if(isset($user['user_lang']))
-			{
-				$lang = $user['user_lang'];
-			}
-			else if (!empty($this->config['multilanguage']))
-			{
-				$lang = $this->user_agent_language();
-			}
-			else
-			{
-				$lang = $this->config['language'];
-			}
+			$lang = $this->get_user_language();
 		}
 
-		$user_id		= $this->get_user_id('System');
-		$default_menu	= $this->get_user_menu($user_id, $lang);
-
-		if ($default_menu)
-		{
-			// parsing menu items into link table
-			foreach ($default_menu as $menu_item)
-			{
-				#$menu_page_ids[] = $menu_item[0];
-				$default_menu_formatted[] = array ($menu_item[0], $menu_item[1], $menu_item[2]);
-			}
-
-			#$this->debug_print_r($default_menu_formatted);
-			return $default_menu_formatted;
-		}
+		$user_id = $this->get_user_id('System');
+		return $this->get_user_menu($user_id, $lang);
 	}
 
 	function get_user_menu($user_id, $lang = '')
 	{
-		$user_menu				= array();
-		$user_menu_formatted	= array();
+		$user_menu_formatted = array();
 
 		// avoid results if $user_id is 0 (user does not exists)
 		if ($user_id)
@@ -6192,175 +6160,152 @@ class Wacko
 						: "").
 				"ORDER BY m.menu_position", true);
 
-			if ($user_menu)
+			foreach ($user_menu as $menu_item)
 			{
-				foreach($user_menu as $c => $menu_item)
+				$title = $menu_item['menu_title'];
+				if ($title === '')
 				{
-					$user_menu_formatted[$c] = array(
-						$menu_item['page_id'],
-							(!empty($menu_item['menu_title'])
-							? $menu_item['menu_title']
-							: (!empty($menu_item['title'])
-								? $menu_item['title']
-								: $menu_item['tag']
-								)
-						),
-						'(('.$menu_item['tag'].
-						(!empty($menu_item['menu_title'])
-							? ' '.$menu_item['menu_title']
-							: (!empty($menu_item['title'])
-								? ' '.$menu_item['title']
-								: ' '.$menu_item['tag']
-								)
-						).
-						(!empty($menu_item['menu_lang'])
-							? ' @@'.$menu_item['menu_lang']
-							: '').
-						'))'
-					);
+					$title = $menu_item['title'];
 				}
+				$user_menu_formatted[] = array(
+					$menu_item['page_id'],
+					(($title !== '')? $title : $menu_item['tag']),
+					'(('.$menu_item['tag'].
+						(($title !== '')? ' '.$title : '').
+						($menu_item['menu_lang']? ' @@'.$menu_item['menu_lang'] : '').
+					'))',
+					$menu_item['menu_lang']
+				);
 			}
-			#$this->debug_print_r($user_menu_formatted);
-			return $user_menu_formatted;
 		}
+		return $user_menu_formatted;
 	}
 
 	function set_menu($set = MENU_AUTO, $update = false)
 	{
-		$menu_page_ids	= array();
-		$menu_formatted	= array();
-		$new_menu		= array();
+		$menu_default = &$_SESSION[$this->config['session_prefix'].'_'.'menu_default'];
+		$menu_page_ids = &$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id'];
+		if (!isset($menu_page_ids)) $menu_page_ids = array();
+		$menu_formatted = &$_SESSION[$this->config['session_prefix'].'_'.'menu'];
+		if (!isset($menu_formatted)) $menu_formatted = array();
 
 		$user = $this->get_user();
 
 		// initial menu table construction
-		if ($set || (!($menu = $this->get_menu()) && $update == false) )
+		if ($set != MENU_AUTO || !($menu_formatted || $update) )
 		{
-			$user_menu	= $this->get_user_menu($user['user_id']);
-			$menu		= ( $user_menu
-				? $user_menu
-				: $this->get_default_menu($user['user_lang']) );
-
-			if ($set == MENU_DEFAULT)
+			$menu = 0;
+			if ($set != MENU_DEFAULT)
 			{
-				$menu = $this->get_default_menu($user['user_lang']);
+				$menu = $this->get_user_menu($user['user_id']);
+				$menu_default = false;
+			}
+			if (!$menu)
+			{
+				$menu = $this->get_default_menu();
+				$menu_default = true;
 			}
 
-			if ($menu)
+			// parsing menu items into link table
+			$menu_page_ids = array();
+			$menu_formatted = array();
+			foreach ($menu as $menu_item)
 			{
-				// parsing menu items into link table
-				foreach ($menu as $menu_item)
-				{
-					$menu_page_ids[]	= $menu_item[0];
-					$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $this->format($menu_item[2], 'wacko'));
-				}
-
-				$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
-				$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
+				$menu_page_ids[] = $menu_item[0];
+				$menu_item[2] = $this->format($menu_item[2], 'wacko');
+				$menu_formatted[] = $menu_item;
 			}
 		}
 
 		// adding new menu item
-		if (!empty($_GET['addbookmark']) && $user)
+		if (@$_GET['addbookmark'] && $user)
 		{
-			$_menu_page_ids = $this->get_menu_links();
-
-			if (is_array($_menu_page_ids))
+			unset($_GET['addbookmark']);
+			// writing menu item
+			if (!in_array($this->page['page_id'], $menu_page_ids))
 			{
-				// writing menu item
-				if (!in_array($this->page['page_id'], $_menu_page_ids))
+				$position = $this->load_single(
+					"SELECT MAX(m.menu_position) AS max_position ".
+					"FROM ".$this->config['table_prefix']."menu m ".
+					"WHERE m.user_id = '".$user['user_id']."' ", false);
+				$position = (int)$position['max_position'];
+				if (!$position)
 				{
-					$menu[] = array(
-						$this->page['page_id'],
-						($this->get_page_title() ? $this->get_page_title() : $this->tag),
-						$this->format('(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['user_lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))', 'wacko')
-						);
-
-					$_menu_position = $this->load_all(
-						"SELECT m.menu_id ".
-						"FROM ".$this->config['table_prefix']."menu m ".
-						"WHERE m.user_id = '".$user['user_id']."' ", false);
-
-					$_menu_item_count = count($_menu_position);
-
-					$this->sql_query(
-						"INSERT INTO ".$this->config['table_prefix']."menu SET ".
+					// prepopulate user menu with default menu items
+					foreach ($menu_formatted as $menu_item)
+					{
+						$this->sql_query(
+							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 							"user_id			= '".$user['user_id']."', ".
-							"page_id			= '".$this->page['page_id']."', ".
-							"menu_lang				= '".quote($this->dblink, ($user['user_lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
-							"menu_position		= '".(int)($_menu_item_count + 1)."'");
-				}
-			}
-
-			if (is_array($menu))
-			{
-				// parsing menu items into link table
-				foreach ($menu as $menu_item)
-				{
-					$menu_page_ids[]	= $menu_item[0];
-					$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $menu_item[2]);
+							"page_id			= '".$menu_item[0]."', ".
+							"menu_lang			= '".$menu_item[3]."', ".
+							"menu_position		= '".++$position."'");
+					}
+					$menu_default = false;
 				}
 
-				$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
-				$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
+				$title = $this->get_page_title();
+				$lang = ($user['user_lang'] != $this->page_lang)? $this->page_lang : '';
+				$menu_page_ids[] = $this->page['page_id'];
+				$menu_formatted[] = array(
+					$this->page['page_id'],
+					($title? $title : $this->tag),
+					$this->format('(('.$this->tag.($title? ' '.$title : '').($lang? ' @@'.$lang : '').'))', 'wacko'),
+					$lang
+				);
+
+				$this->sql_query(
+					"INSERT INTO ".$this->config['table_prefix']."menu SET ".
+					"user_id			= '".$user['user_id']."', ".
+					"page_id			= '".$this->page['page_id']."', ".
+					"menu_lang			= '".quote($this->dblink, $lang)."', ".
+					"menu_position		= '".++$position."'");
 			}
 		}
 
 		// removing menu item
-		if (!empty($_GET['removebookmark']) && $user)
+		if (@$_GET['removebookmark'] && $user && !$menu_default)
 		{
+			unset($_GET['removebookmark']);
 			// rewriting menu table except containing current page tag
-			foreach ($menu as $menu_item)
+			$prev = $menu_formatted;
+			$menu_page_ids = array();
+			$menu_formatted = array();
+			foreach ($prev as $menu_item)
 			{
 				if ($menu_item[0] != $this->page['page_id'])
 				{
-					$new_menu[] = $menu_item;
+					$menu_page_ids[] = $menu_item[0];
+					$menu_formatted[] = $menu_item;
 				}
 			}
-
-			if (count($new_menu) < 1)
-			{
-				$new_menu[] = '';
-			}
-
-			$menu = $new_menu;
-			#$this->debug_print_r($menu);
 
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."menu ".
 				"WHERE user_id = '".$user['user_id']."' ".
 					"AND page_id = '".$this->page['page_id']."' ".
 				"LIMIT 1");
-
-			// parsing menu items into link table
-			foreach ((array)$menu as $menu_item)
+			if (!$menu_formatted)
 			{
-				if (is_array($menu_item))
-				{
-					$menu_page_ids[]	= $menu_item[0];
-					$menu_formatted[]	= array ($menu_item[0], $menu_item[1], $menu_item[2]);
-				}
+				$this->set_menu(MENU_DEFAULT);
 			}
-
-			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
-			$_SESSION[$this->config['session_prefix'].'_'.'menu']			= ( $menu_formatted ? $menu_formatted : '' );
 		}
 	}
 
 	function get_menu()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'menu']))
-		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'menu'];
-		}
+		return @$_SESSION[$this->config['session_prefix'].'_'.'menu'];
 	}
 
 	function get_menu_links()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']))
-		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'menu_page_id'];
-		}
+		return @$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id'];
+	}
+
+	function get_menu_default()
+	{
+		return (!isset($_SESSION[$this->config['session_prefix'].'_'.'menu_default'])) ||
+			$_SESSION[$this->config['session_prefix'].'_'.'menu_default'];
 	}
 
 	// TODO: do not add
@@ -7183,7 +7128,6 @@ class Wacko
 	// $page_id is preferred, $tag next
 	function get_page_title($tag = '', $page_id = 0)
 	{
-		$title = '';
 		$tag = trim($tag, '/');
 		if ($tag || $page_id)
 		{
@@ -7197,9 +7141,9 @@ class Wacko
 
 			$title = $page['title'];
 		}
-		else if ($this->page)
+		else
 		{
-			$title = $this->page['title'];
+			$title = @$this->page['title'];
 		}
 		// default page title is just page's WikiName
 		return $title? $title : $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));

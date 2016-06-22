@@ -56,6 +56,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 					"noindex			= '".(int)$_POST['noindex']."' "
 				: 	"page_lang			= '".quote($this->dblink, $_POST['page_lang'])."', ".
 					"theme				= '".quote($this->dblink, (isset($_POST['theme']) ? $_POST['theme'] : ''))."', ".
+					// menu_tag: unused currently, for use in custom theme menus
 					"menu_tag			= '".quote($this->dblink, htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
 					"show_menu_tag		= '".quote($this->dblink, (int)$_POST['show_menu_tag'])."', ".
 					"title				= '".quote($this->dblink, htmlspecialchars(trim($_POST['title']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
