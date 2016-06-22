@@ -141,8 +141,6 @@ class Wacko
 	*/
 	function load_all($query, $docache = false)
 	{
-		$data	= array();
-
 		// retrieving from cache
 		if ($this->config['cache_sql'] && $docache)
 		{
@@ -151,6 +149,8 @@ class Wacko
 				return $data;
 			}
 		}
+
+		$data = array();
 
 		// retrieving from db
 		if ($result = $this->sql_query($query))
@@ -169,14 +169,7 @@ class Wacko
 			$this->cache->save_sql($query, $data);
 		}
 
-		if (isset($data))
-		{
-			return $data;
-		}
-		else
-		{
-			return null;
-		}
+		return $data;
 	}
 
 	/**
@@ -188,16 +181,18 @@ class Wacko
 	*/
 	function load_single($query, $docache = false)
 	{
-		if ($data = $this->load_all($query, $docache))
+		// STS: future idea
+		//if (substr_compare($query, "LIMIT 1", -7, 7, true))
+		//{
+		//	$query .= " LIMIT 1";
+		//}
 
-			if (isset($data))
-			{
-				return $data[0];
-			}
-			else
-			{
-				return null;
-			}
+		if (($data = $this->load_all($query, $docache)))
+		{
+			return $data[0];
+		}
+
+		return null;
 	}
 
 	// MISC
@@ -612,7 +607,7 @@ class Wacko
 
 	function load_all_languages()
 	{
-		if (!$this->config['multilanguage'])
+		if (!$this->config['multilanguage']) // STS: refact!
 		{
 			return;
 		}
