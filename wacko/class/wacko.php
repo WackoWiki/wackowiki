@@ -34,7 +34,7 @@ class Wacko
 	var $timer;
 	var $toc_context			= array();
 	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
-	var $_lang_list				= null;
+	var $_lang_list				= null;		// array of all available resource translations
 	var $languages				= null;
 	var $translations			= null;
 	var $wanted_cache			= null;
@@ -628,80 +628,90 @@ class Wacko
 	}
 
 	/**
-	* Get array of all available resource translations
+	* Get array of available resource translations
 	*
-	* @param string $subset
+	* @param bool $subset, true for allowed_languages only
 	* @return Array of language codes
 	*/
 	function available_languages($subset = true)
 	{
-		$lang_list	= '';
-
-		if (!$this->_lang_list || $subset == false)
+		if (!$this->_lang_list)
 		{
+			$cache = &$_SESSION[$this->config['session_prefix'].'_'.'available_languages'];
+			if (!isset($cache))
+			{
+				$lang_list = array();
 
-			// allowed languages
-			if (isset($this->config['allowed_languages'])
-				&& $this->config['allowed_languages']
-				&& $subset == true)
-			{
-				$lang_list = explode(',', $this->config['allowed_languages']);  // TODO: check against lang folder?
-			}
-			else
-			{
-				// all available languages
-				if ($handle = opendir('lang'))
+				if (($handle = opendir('lang')))
 				{
 					while (false !== ($file = readdir($handle)))
 					{
-						if ($file != '.'
-						&& $file != '..'
-						&& $file != 'wacko.all.php'
-						&& !is_dir('lang/'.$file)
-						&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+						if (is_file('lang/'.$file) && is_readable('lang/'.$file)
+								&& preg_match('/^wacko\.([a-z][a-z])\.php$/', $file, $match))
 						{
 							$lang_list[] = $match[1];
 						}
 					}
-
 					closedir($handle);
+					sort($lang_list, SORT_STRING);
 				}
+
+				$cache = $lang_list;
 			}
 
-			sort($lang_list, SORT_STRING);
-			$this->_lang_list = $lang_list;
+			$this->_lang_list = $cache;
 		}
 
-		return $this->_lang_list;
+		// allowed languages
+		if ($subset && $this->config['allowed_languages'])
+		{
+			$list = array();
+			foreach (explode(',', $this->config['allowed_languages']) as $lang)
+			{
+				if (in_array($lang, $this->_lang_list))
+				{
+					$list[] = $lang;
+				}
+			}
+		}
+		else
+		{
+			$list = $this->_lang_list;
+		}
+
+		return $list;
 	}
 
 	function user_agent_language()
 	{
-		$lang = '';
+		$lang = $this->config['language'];
 
-		if ($this->config['multilanguage'])
+		if ($this->config['multilanguage'] && isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 		{
-			if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-			{
-				$this->user_lang = $lang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+			// STS: http://stackoverflow.com/questions/6038236/using-the-php-http-accept-language-server-variable
+			$want = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
 
-				// Check whether we have language files for this language
-				if(!in_array($this->user_lang, $this->available_languages()))
-				{
-					// The HTTP_ACCEPT_LANGUAGE language doesn't have any language files so use the admin set language instead
-					$this->user_lang = $lang = $this->config['language'];
-				}
-			}
-			else
+			// Check whether we have language files for this language
+			if (in_array($want, $this->available_languages()))
 			{
-				$this->user_lang = $lang = $this->config['language'];
+				$lang = $want;
 			}
 		}
-		else if (!$lang)
-		{
-			$this->user_lang = $lang = $this->config['language'];
-		}
 
+		return $lang;
+	}
+
+	function get_user_language()
+	{
+		$user = $this->get_user();
+		if (isset($user['user_lang']) && in_array($user['user_lang'], $this->available_languages()))
+		{
+			$lang = $user['user_lang'];
+		}
+		else
+		{
+			$lang = $this->user_agent_language();
+		}
 		return $lang;
 	}
 
@@ -1407,22 +1417,8 @@ class Wacko
 		$pages	= '';
 		$page_id = array();
 		$acl	= '';
-		$lang	= '';
 		$user	= $this->get_user();
-
-		// get lang
-		if(isset($user['user_lang']))
-		{
-			$lang = $user['user_lang'];
-		}
-		else if (!empty($this->config['multilanguage']))
-		{
-			$lang = $this->user_agent_language();
-		}
-		else
-		{
-			$lang = $this->config['language'];
-		}
+		$lang   = $this->get_user_language();
 
 		// get page links
 		if ($links = $this->load_all(
@@ -2616,8 +2612,9 @@ class Wacko
 		else if ($comment_on_id)
 		{
 			$object_id			= $comment_on_id;
-			$page_title			= $this->get_page_title(0, $comment_on_id);
+			$page_title			= $this->get_page_title('', $comment_on_id);
 		}
+		// TODO: dangle case (!$comment_on_id && !$is_revision)
 
 		// get watchers
 		$watchers	= $this->load_all(
@@ -4277,14 +4274,6 @@ class Wacko
 		}
 	}
 
-	function get_link_table($link_type)
-	{
-		if (isset($this->linktable[$link_type]))
-		{
-			return $this->linktable[$link_type];
-		}
-	}
-
 	function start_link_tracking()
 	{
 		// STS: why in SESSION? is tracking between page instances possible?
@@ -4316,7 +4305,7 @@ class Wacko
 				"WHERE from_page_id = '".(int)$from_page_id."'");
 
 		// page link
-		if ($link_table = $this->get_link_table(LINK_PAGE))
+		if ($link_table = @$this->linktable[LINK_PAGE])
 		{
 			$query = '';
 
@@ -4339,7 +4328,7 @@ class Wacko
 				"WHERE page_id = '".(int)$from_page_id."'");
 
 		// file link
-		if ($file_table = $this->get_link_table(LINK_FILE))
+		if ($file_table = @$this->linktable[LINK_FILE])
 		{
 			$query = '';
 
@@ -6788,23 +6777,7 @@ class Wacko
 		unset($auth);
 
 		// user settings
-		##if(!$this->userlang = $lang)  // TEST: ??? - openspace handle
-
-		if(isset($user['user_lang']))
-		{
-			if($user['user_lang'] == '')
-			{
-				$this->user_lang = $this->config['language'];
-			}
-			else
-			{
-				$this->user_lang = $user['user_lang'];
-			}
-		}
-		else
-		{
-			$this->user_agent_language();
-		}
+		$this->user_lang = $this->get_user_language();
 
 		if (is_array($user) && isset($user['theme']))
 		{
@@ -7210,38 +7183,26 @@ class Wacko
 	// $page_id is preferred, $tag next
 	function get_page_title($tag = '', $page_id = 0)
 	{
-		if ($tag)
-		{
-			$tag = trim($tag, '/');
-		}
-
-		if ($tag == true || $page_id != 0)
+		$title = '';
+		$tag = trim($tag, '/');
+		if ($tag || $page_id)
 		{
 			$page = $this->load_single(
 				"SELECT title ".
 				"FROM {$this->config['table_prefix']}page ".
-				"WHERE ".( $page_id != 0
+				"WHERE ".( $page_id
 					? "page_id	= '".(int)$page_id."' "
 					: "tag	= '".quote($this->dblink, $tag)."' " ).
 				"LIMIT 1");
 
-			if ($page['title'] == true)
-			{
-				return $page['title'];
-			}
-			else
-			{
-				return $this->add_spaces_title(trim(substr($tag, strrpos($tag, '/')), '/'));
-			}
+			$title = $page['title'];
 		}
-		else if ($tag == false && $this->page == true)
+		else if ($this->page)
 		{
-			return $this->page['title'];
+			$title = $this->page['title'];
 		}
-		else if ($tag == false && $this->page == false)
-		{
-			return $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
-		}
+		// default page title is just page's WikiName
+		return $title? $title : $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
 	}
 
 	// CLONE / RENAMING / MOVING
