@@ -3608,7 +3608,7 @@ class Wacko
 
 				if ($_global == true)
 				{
-					$title	= '404: /'.$this->config['upload_path'].$file_name;
+					$title	= '404: /'.$this->config['upload_path'].'/'.$file_name;
 				}
 				else
 				{
