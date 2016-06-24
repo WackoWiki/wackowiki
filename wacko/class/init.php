@@ -450,7 +450,7 @@ class Init
 			$db_name = $this->config['database_database'];
 		}
 
-		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'], $this->config['database_database'], $this->config['database_charset'], $this->config['database_driver'], $this->config['database_port']);
+		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'], $this->config['database_database'], $this->config['database_charset'], $this->config['database_driver'], $this->config['database_port'], $this->config['sql_mode_strict']);
 
 		if ($this->dblink)
 		{
@@ -734,22 +734,26 @@ class Init
 
 				if ($execmem)
 				{
-					echo "<li>Memory allocated: ".$this->engine->binary_multiples($execmem, false, true, false)."</li>\n";
+					echo "\t<li>Memory allocated: ".$this->engine->binary_multiples($execmem, false, true, false)."</li>\n";
 				}
 
 				#echo "<li>UTC: ".date('Y-m-d H:i:s', time())."</li>\n";
-				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>\n";
+				echo "\t<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>\n";
 
 				if ($this->config['debug'] >= 2)
 				{
-					echo "<li>Execution time: ".number_format($overall_time - $this->engine->query_time, 3)." sec.</li>\n";
-					echo "<li>SQL time: ".number_format($this->engine->query_time, 3)." sec.</li>\n";
+					echo "\t<li>Execution time: ".number_format($overall_time - $this->engine->query_time, 3)." sec.</li>\n";
+					echo "\t<li>SQL time: ".number_format($this->engine->query_time, 3)." sec.</li>\n";
 				}
 
 				if ($this->config['debug'] >= 3)
 				{
-					echo "<li>SQL queries: ".count($this->engine->query_log)."</li>\n";
-					echo "<li>SQL queries dump follows".( $this->config['debug_sql_threshold'] > 0 ? " (&gt;".$this->config['debug_sql_threshold']." sec.)" : "" ).":<ol>\n";
+					echo "\t<li>SQL queries: ".count($this->engine->query_log)."</li>\n";
+					echo "\t<li>SQL queries dump follows".
+							( $this->config['debug_sql_threshold'] > 0
+								? " (&gt;".$this->config['debug_sql_threshold']." sec.)"
+								: "" ).
+						":\n\t\t<ol>\n";
 
 					foreach ($this->engine->query_log as $query)
 					{
@@ -758,13 +762,13 @@ class Init
 							continue;
 						}
 
-						echo "<li>";
+						echo "\t<li>";
 						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query['query'])."<br />";
 						echo "[".number_format($query['time'], 4)." sec.]";
 						echo "</li>\n";
 					}
 
-					echo "</ol>\n</li>\n";
+					echo "\t\t</ol>\n\t</li>\n";
 				}
 				echo "</ul>\n";
 
@@ -772,18 +776,18 @@ class Init
 				{
 					$user = $this->engine->get_user();
 					echo '<p class="debug">Language data</p>'."\n<ul>\n";
-					echo "<li>Multilanguage: ".($this->config['multilanguage'] == 1 ? 'true' : 'false')."</li>\n";
-					echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
-					echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
-					echo "<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
-					echo "<li>User language set: ".(isset($user['user_lang']) ? 'true' : 'false')."</li>\n";
-					echo "<li>User language value: ".(isset($user['user_lang']) ? $user['user_lang'] : '')."</li>\n";
-					echo "<li>Page language: ".$this->engine->page['page_lang'] ."</li>\n";
-					echo "<li>Config language: ".$this->config['language']."</li>\n";
-					echo "<li>User selected language: ".(isset($this->engine->user_lang) ? $this->engine->user_lang : '')."</li>\n";
-					echo "<li>Charset: ".$this->engine->get_charset()."</li>\n";
-					echo "<li>HTML Entities Charset: ".HTML_ENTITIES_CHARSET."</li>\n";
-					echo "<li>Disable cache: ".($this->engine->disable_cache === true ? 'true' : 'false')."</li>\n";
+					echo "\t<li>Multilanguage: ".($this->config['multilanguage'] == 1 ? 'true' : 'false')."</li>\n";
+					echo "\t<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
+					echo "\t<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
+					echo "\t<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
+					echo "\t<li>User language set: ".(isset($user['user_lang']) ? 'true' : 'false')."</li>\n";
+					echo "\t<li>User language value: ".(isset($user['user_lang']) ? $user['user_lang'] : '')."</li>\n";
+					echo "\t<li>Page language: ".$this->engine->page['page_lang'] ."</li>\n";
+					echo "\t<li>Config language: ".$this->config['language']."</li>\n";
+					echo "\t<li>User selected language: ".(isset($this->engine->user_lang) ? $this->engine->user_lang : '')."</li>\n";
+					echo "\t<li>Charset: ".$this->engine->get_charset()."</li>\n";
+					echo "\t<li>HTML Entities Charset: ".HTML_ENTITIES_CHARSET."</li>\n";
+					echo "\t<li>Disable cache: ".($this->engine->disable_cache === true ? 'true' : 'false')."</li>\n";
 					echo "</ul>\n";
 				}
 
@@ -797,7 +801,7 @@ class Init
 
 						foreach ($r as $k => $charset_item)
 						{
-							echo "<li>".$charset_item['Variable_name'].": ".$charset_item['Value']."</li>\n";
+							echo "\t<li>".$charset_item['Variable_name'].": ".$charset_item['Value']."</li>\n";
 						}
 
 						echo "</ul>\n";
@@ -807,17 +811,17 @@ class Init
 				if ($this->config['debug'] >= 3)
 				{
 					echo '<p class="debug">Session data</p>'."\n<ul>\n";
-					echo "<li>session_id(): ".session_id()."</li>\n";
-					echo "<li>Base URL: ".$this->config['base_url']."</li>\n";
-					echo "<li>HTTPS: ".(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')."</li>\n";
-					echo "<li>IP-address: ".$this->engine->get_user_ip()."</li>\n";
-					echo "<li>SERVER_PORT: ".$_SERVER['SERVER_PORT']."</li>\n";
-					echo "<li>TLS: ".(isset($this->config['tls']) ? 'on' : 'off')."</li>\n";
-					echo "<li>TLS Proxy: ".(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'] : "false")."</li>\n";
-					echo "<li>TLS implicit: ".(($this->config['tls_implicit'] == true) ? 'on' : 'off')."</li>\n";
-					echo "<li>Cookie hash: ".(isset($this->config['cookie_hash']) ? $this->config['cookie_hash'] : '')."</li>\n";
-					echo "<li>Cookie path: ".$this->config['cookie_path']."</li>\n";
-					#echo "<li>GZIP: ".(@extension_loaded('zlib') ? 'On' : 'Off')."</li>\n";
+					echo "\t<li>session_id(): ".session_id()."</li>\n";
+					echo "\t<li>Base URL: ".$this->config['base_url']."</li>\n";
+					echo "\t<li>HTTPS: ".(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')."</li>\n";
+					echo "\t<li>IP-address: ".$this->engine->get_user_ip()."</li>\n";
+					echo "\t<li>SERVER_PORT: ".$_SERVER['SERVER_PORT']."</li>\n";
+					echo "\t<li>TLS: ".(isset($this->config['tls']) ? 'on' : 'off')."</li>\n";
+					echo "\t<li>TLS Proxy: ".(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'] : "false")."</li>\n";
+					echo "\t<li>TLS implicit: ".(($this->config['tls_implicit'] == true) ? 'on' : 'off')."</li>\n";
+					echo "\t<li>Cookie hash: ".(isset($this->config['cookie_hash']) ? $this->config['cookie_hash'] : '')."</li>\n";
+					echo "\t<li>Cookie path: ".$this->config['cookie_path']."</li>\n";
+					#echo "\t<li>GZIP: ".(@extension_loaded('zlib') ? 'On' : 'Off')."</li>\n";
 					echo "</ul>\n";
 				}
 

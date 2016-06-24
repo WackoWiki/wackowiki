@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $driver, $db_port)
+function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $driver, $db_port, $sql_mode = null)
 {
 	$dsn = '';
 
@@ -36,7 +36,7 @@ function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $d
 		die('PDO DSN Error: '.$e->getMessage());
 	}
 
-	set_sql_mode($dblink);
+	set_sql_mode($dblink, $sql_mode);
 
 	return $dblink;
 }
