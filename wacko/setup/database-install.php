@@ -80,6 +80,19 @@ switch($config['database_driver'])
 			/*
 			 The connection string and the database name are ok, proceed
 			 */
+
+			// set SESSION sql_mode
+			if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
+			{
+				$sql_modes = SQL_MODE_STRICT;
+			}
+			else
+			{
+				$sql_modes = SQL_MODE_PERMISSIVE;
+			}
+
+			mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
+
 			echo "         </ul>\n";
 			echo "         <br />\n";
 
@@ -217,6 +230,18 @@ switch($config['database_driver'])
 			test($lang['TestConnectionString'], false, "PDO Error: ".$e->getMessage());
 			$fatal_error = true;
 		}
+
+		// set SESSION sql_mode
+		if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
+		{
+			$sql_modes = SQL_MODE_STRICT;
+		}
+		else
+		{
+			$sql_modes = SQL_MODE_PERMISSIVE;
+		}
+
+		$dblink->query("SET SESSION sql_mode='$sql_modes'");
 
 		echo "         </ul>\n";
 		echo "         <br />\n";
