@@ -14,6 +14,8 @@ function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $d
 		mysqli_set_charset($dblink, $db_charset);
 	}
 
+	set_sql_mode($dblink);
+
 	return $dblink;
 }
 
@@ -60,6 +62,23 @@ function affected_rows($dblink, $results = null)
 {
 	// $results only required for pdo
 	return mysqli_affected_rows($dblink);
+}
+
+/**
+ * Change the current SQL mode at runtime
+ */
+function set_sql_mode($dblink, $mode = null )
+{
+	if (isset($mode) && $mode)
+	{
+		$sql_modes = SQL_MODE_STRICT;
+	}
+	else
+	{
+		$sql_modes = SQL_MODE_PERMISSIVE;
+	}
+
+	mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
 }
 
 ?>

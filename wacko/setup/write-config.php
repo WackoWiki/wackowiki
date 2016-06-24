@@ -49,6 +49,7 @@ $config_file['database_port']			= $config['database_port'];
 $config_file['database_database']		= $config['database_database'];
 $config_file['database_user']			= $config['database_user'];
 $config_file['database_password']		= $config['database_password'];
+$config_file['sql_mode_strict']			= $config['sql_mode_strict'];
 $config_file['table_prefix']			= $config['table_prefix'];
 // security values
 $config_file['system_seed']				= $config['system_seed'];

@@ -21,6 +21,8 @@ $wacko_config_defaults = array(
 	'database_charset'				=> 'latin1',
 	'database_engine'				=> 'MyISAM',
 
+	'sql_mode_strict'				=> false,
+
 	'table_prefix'					=> 'wacko_',
 	'cookie_prefix'					=> 'wacko_',
 	'session_prefix'				=> 'wacko5',

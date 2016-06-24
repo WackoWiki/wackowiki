@@ -36,6 +36,8 @@ function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $d
 		die('PDO DSN Error: '.$e->getMessage());
 	}
 
+	set_sql_mode($dblink);
+
 	return $dblink;
 }
 
@@ -95,6 +97,23 @@ function affected_rows($dblink, $results)
 {
 	// $dblink only required for mysqli
 	return $results->rowCount();
+}
+
+/**
+ * Change the current SQL mode at runtime
+ */
+function set_sql_mode($dblink, $mode = null)
+{
+	if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
+	{
+		$sql_modes = SQL_MODE_STRICT;
+	}
+	else
+	{
+		$sql_modes = SQL_MODE_PERMISSIVE;
+	}
+
+	$dblink->query("SET SESSION sql_mode='$sql_modes'");
 }
 
 ?>
