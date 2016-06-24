@@ -104,7 +104,7 @@ function affected_rows($dblink, $results)
  */
 function set_sql_mode($dblink, $mode = null)
 {
-	if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
+	if (isset($mode) && $mode)
 	{
 		$sql_modes = SQL_MODE_STRICT;
 	}
