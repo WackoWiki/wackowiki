@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $driver, $db_port = '')
+function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $driver, $db_port = '', $sql_mode = null)
 {
 	$dblink = mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port);
 
@@ -14,7 +14,7 @@ function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $d
 		mysqli_set_charset($dblink, $db_charset);
 	}
 
-	set_sql_mode($dblink);
+	set_sql_mode($dblink, $sql_mode);
 
 	return $dblink;
 }

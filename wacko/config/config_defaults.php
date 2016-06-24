@@ -19,7 +19,7 @@ $wacko_config_defaults = array(
 	'database_password'				=> '',
 	'database_collation'			=> 0,
 	'database_charset'				=> 'latin1',
-	'database_engine'				=> 'MyISAM',
+	'database_engine'				=> 'InnoDB',
 
 	'sql_mode_strict'				=> false,
 
