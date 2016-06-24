@@ -21,9 +21,9 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 $table_auth_token = "CREATE TABLE {$pref}auth_token (".
 					"cookie_token CHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"session_last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"session_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_last_visit DATETIME DEFAULT NULL,".
+					"session_start DATETIME DEFAULT NULL,".
+					"session_time DATETIME DEFAULT NULL,".
 					"session_ip VARCHAR(40) NOT NULL DEFAULT '',".
 					"session_browser VARCHAR(150) NOT NULL DEFAULT '',".
 					"session_forwarded_for VARCHAR(255) NOT NULL  DEFAULT '',".
@@ -126,8 +126,8 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"depth INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"created DATETIME DEFAULT NULL,".
+					"modified DATETIME DEFAULT NULL,".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"body_toc TEXT NOT NULL,".
@@ -135,7 +135,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
-					"reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"reviewed_time DATETIME DEFAULT NULL,".
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL DEFAULT '',".
 					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
@@ -145,7 +145,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"theme VARCHAR(20) DEFAULT NULL,".
 					"page_lang VARCHAR(2) NOT NULL DEFAULT '',".
-					"commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"commented DATETIME DEFAULT NULL,".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"footer_comments TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
@@ -183,8 +183,8 @@ $table_poll = "CREATE TABLE {$pref}poll (".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"plural TINYINT(1) NOT NULL DEFAULT '0',".
 					"votes SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',".
-					"start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"start DATETIME DEFAULT NULL,".
+					"end DATETIME DEFAULT NULL,".
 					"KEY idx_poll_id (poll_id),".
 					"KEY idx_time_frame (start,end)".
 				") {$engine} COMMENT='' {$charset}";
@@ -202,7 +202,7 @@ $table_referrer = "CREATE TABLE {$pref}referrer (".
 					"referrer_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"referrer VARCHAR(255) NOT NULL DEFAULT '',".
-					"referrer_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"referrer_time DATETIME DEFAULT NULL,".
 					"ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
 					"user_agent VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',".
 					"PRIMARY KEY (referrer_id),".
@@ -220,15 +220,15 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
-					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"created DATETIME DEFAULT NULL,".
+					"modified DATETIME DEFAULT NULL,".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"formatting VARCHAR(20) NOT NULL DEFAULT '',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
-					"reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"reviewed_time DATETIME DEFAULT NULL,".
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"latest TINYINT(1) UNSIGNED DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL DEFAULT '',".
@@ -255,8 +255,8 @@ $table_tag = "CREATE TABLE {$pref}tag (".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"tag_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
-					"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"date_created DATETIME DEFAULT NULL,".
+					"date_updated DATETIME DEFAULT NULL,".
 					"PRIMARY KEY (tag_id),".
 					"KEY idx_tag_name (tag_name)".
 				") {$engine} COMMENT='' {$charset}";
@@ -265,7 +265,7 @@ $table_tag_page = "CREATE TABLE {$pref}tag_page (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"tag_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"date_attached DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"date_attached DATETIME DEFAULT NULL,".
 					"PRIMARY KEY (page_id, tag_id),".
 					"KEY idx_tag_id (tag_id)".
 				") {$engine} COMMENT='' {$charset}";
@@ -277,7 +277,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"file_name VARCHAR(250) NOT NULL DEFAULT '',".
 					"upload_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"file_description VARCHAR(250) NOT NULL DEFAULT '',".
-					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"uploaded_dt DATETIME DEFAULT NULL,".
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -301,14 +301,14 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"account_status TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"signup_time DATETIME DEFAULT NULL,".
 					"change_password VARCHAR(64) NOT NULL DEFAULT '',".
 					"user_ip VARCHAR(40) NOT NULL DEFAULT '',".
 					"user_form_salt VARCHAR(40) NOT NULL DEFAULT '',".
 					"email_confirm VARCHAR(64) NOT NULL DEFAULT '',".
-					"last_visit DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"last_visit DATETIME DEFAULT NULL,".
 					"session_expire INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"last_mark DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"last_mark DATETIME DEFAULT NULL,".
 					"login_count INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
 					"failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
@@ -363,7 +363,7 @@ $table_usergroup = "CREATE TABLE {$pref}usergroup (".
 					"group_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"description VARCHAR(255) NOT NULL DEFAULT '',".
 					"moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"created DATETIME DEFAULT NULL,".
 					"is_system TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"open TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"active TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
