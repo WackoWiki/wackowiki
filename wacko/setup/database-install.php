@@ -12,8 +12,8 @@ $upgrade				= array();
 
 $db_version				= "SELECT VERSION() as mysql_version";
 
-require_once('setup/insert_default.php');
-require_once('setup/insert_config.php');
+require_once('setup/_insert_default.php');
+require_once('setup/_insert_config.php');
 
 /*
  Setup the tables depending on which database we selected
@@ -112,7 +112,7 @@ switch($config['database_driver'])
 			// mariadb / mysql only
 			require_once('setup/database_mysql.php');
 			require_once('setup/database_mysql_updates.php');
-			require_once('setup/insert_queries.php');
+			require_once('setup/_insert_queries.php');
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
@@ -264,7 +264,7 @@ switch($config['database_driver'])
 			// mariadb / mysql only
 			require_once('setup/database_mysql.php');
 			require_once('setup/database_mysql_updates.php');
-			require_once('setup/insert_queries.php');
+			require_once('setup/_insert_queries.php');
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{

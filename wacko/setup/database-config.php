@@ -228,7 +228,7 @@ else
    </div>
    <h2><?php echo $lang['DBPassword'];?></h2>
    <p class="notop"><?php echo $lang['DBPasswordDesc']; ?></p>
-   <input type="password" maxlength="50" name="config[database_password]" value="<?php echo $config['database_password'] ?>" class="text_input" />
+   <input type="password" maxlength="50" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
