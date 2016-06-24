@@ -806,6 +806,16 @@ class Init
 
 						echo "</ul>\n";
 					}
+
+					$query = 'SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode;';
+
+					if ($r = $this->engine->load_single($query, true))
+					{
+						echo "<p class=\"debug\">SQL mode set</p>\n<ul>\n";
+						echo "\t<li>".'GLOBAL'.": ".$r['@@GLOBAL.sql_mode']."</li>\n";
+						echo "\t<li>".'SESSION'.": ".$r['@@SESSION.sql_mode']."</li>\n";
+						echo "</ul>\n";
+					}
 				}
 
 				if ($this->config['debug'] >= 3)
