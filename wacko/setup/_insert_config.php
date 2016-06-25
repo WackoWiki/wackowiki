@@ -151,7 +151,6 @@ $config_db['root_page']						= $config['root_page'];
 $config_db['session_length']				= $config['session_length'];
 $config_db['session_match_ip']				= $config['session_match_ip'];
 $config_db['session_match_useragent']		= $config['session_match_useragent'];
-$config_db['session_prefix']				= $config['session_prefix'];
 $config_db['session_time_to_update']		= $config['session_time_to_update'];
 $config_db['session_use_db']				= $config['session_use_db'];
 $config_db['site_desc']						= $config['site_desc'];

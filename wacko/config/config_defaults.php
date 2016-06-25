@@ -25,7 +25,6 @@ $wacko_config_defaults = array(
 
 	'table_prefix'					=> 'wacko_',
 	'cookie_prefix'					=> 'wacko_',
-	'session_prefix'				=> 'wacko5',
 
 	'root_page'						=> 'HomePage',
 	'site_name'						=> 'MyWikiSite',
