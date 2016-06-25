@@ -33,27 +33,9 @@ if ($this->has_access('read'))
 		$this->get_translation('Revision')))).".</div>";
 	}*/
 
-	if ($user = $this->get_user())
-	{
-		if ($user['numerate_links'] == 0)
-		{
-			$_numerate_links = false;
-		}
-		else
-		{
-			$_numerate_links = true;
-		}
-	}
-	else if ($this->config['numerate_links'] == 0)
-	{
-		$_numerate_links = false;
-	}
-	else
-	{
-		$_numerate_links = true;
-	}
+	$_numerate_links = (($user = $this->get_user()))? $user['numerate_links'] : $this->config['numerate_links'];
 
-	if ($_numerate_links == true)
+	if ($_numerate_links)
 	{
 		// start enumerating links
 		$this->numerate_links = array();
@@ -68,43 +50,41 @@ if ($this->has_access('read'))
 	echo $data;
 
 	// display comments
-	if ( (isset($_SESSION['show_comments'][$this->page['page_id']]) && $_SESSION['show_comments'][$this->page['page_id']] == 1) || $this->forum)
+	if (@$_SESSION['show_comments'][$this->page['page_id']] || $this->forum)
 	{
-		if ($comments = $this->load_comments($this->page['page_id']));
+		if (($comments = $this->load_comments($this->page['page_id'])))
 		{
-			if (!empty($comments))
+			echo '<br /><br />';
+			echo '<section id="comments">';
+			echo '<header class="header-comments">';
+			echo $this->get_translation('Comments_all');
+			echo "</header>\n";
+
+			foreach ($comments as $comment)
 			{
-				// display comments header
-				echo '<br /><br />';
-				echo '<section id="comments">';
-				echo '<header class="header-comments">';
-				echo $this->get_translation('Comments_all');
-				echo "</header>\n";
-
-				foreach ($comments as $comment)
+				if (!$comment['body_r'])
 				{
-					if (!$comment['body_r'])
-					{
-						$comment['body_r'] = $this->format($comment['body']);
-					}
-
-					echo '<article class="comment">'.
-							'<span class="comment-info">'.
-								'<strong>&#8212; '.$this->user_link($comment['user_name']).'</strong> ('.$this->get_time_formatted($comment['created']).
-								($comment['modified'] != $comment['created'] ? ', '.$this->get_translation('CommentEdited').' '.$this->get_time_formatted($comment['modified']) : '').')'.
-							'&nbsp;&nbsp;&nbsp;</span><br />'.
-							$this->format($comment['body_r'], 'post_wacko').
-						"</article>\n";
+					$comment['body_r'] = $this->format($comment['body']);
 				}
-				echo "</section>\n";
+
+				echo '<article class="comment">' .
+						'<span class="comment-info">' .
+							'<strong>&#8212; ' . $this->user_link($comment['user_name']) . '</strong> (' .
+							$this->get_time_formatted($comment['created']) .
+							($comment['modified'] != $comment['created'] ? ', ' . $this->get_translation('CommentEdited') . ' ' .
+							$this->get_time_formatted($comment['modified']) : '') . ')'.
+						'&nbsp;&nbsp;&nbsp;</span><br />' .
+						$this->format($comment['body_r'], 'post_wacko') .
+					"</article>\n";
 			}
+			echo "</section>\n";
 		}
 	}
 
-	if ($_numerate_links == true)
+	if ($_numerate_links)
 	{
 		// numerated links
-		if (($c = count($this->numerate_links)) > 0)
+		if ($this->numerate_links)
 		{
 			if (!isset($comments)) echo '<br />';
 
@@ -118,12 +98,12 @@ if ($this->has_access('read'))
 
 			foreach ($this->numerate_links as $l => $n)
 			{
-				echo '<span class="reflink"><sup>'.$n.'</sup> '.$l."</span>\n";
-
-				if (++$i < $c)
+				if ($i++)
 				{
 					echo "<br /><br />\n";
 				}
+
+				echo '<span class="reflink"><sup>' . $n. '</sup> ' . $l . "</span>\n";
 			}
 
 			echo "</section>\n";
