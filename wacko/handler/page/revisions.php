@@ -151,10 +151,8 @@ if ($this->has_access('read'))
 			$output .=  '<a href="'.$this->href('revisions', '', 'show=all').'">'.$this->get_translation('RevisionsShowAll')."</a><br /><br />\n";
 		}
 
-		if (!$this->config['revisions_hide_cancel'])
-		{
-			$output .= '<a href="'.$this->href('').'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
-		}
+		$output .= '<a href="'.$this->href('').'" style="text-decoration: none;"><input type="button" value="'.
+					$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
 
 		$output .= $this->form_close()."\n";
 	}
