@@ -23,13 +23,14 @@ $pages_to_display	= '';
 if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
 if (!isset($lang))		$lang = '';
-$_letter	= ( isset($_GET['letter']) ) ? $_GET['letter'] : $letter;
-if(isset($_letter))		$_letter = strtoupper(substr($_letter, 0, 1));
 if (!isset($for))		$for = (isset($vars['for']) ? $this->unwrap_link($vars['for']) : '');
 if (!isset($for))		$for = $this->page['tag'];
 if (!isset($max))		$max = null;
 
-$limit		= $this->get_list_count($max);
+$_letter = isset($_GET['letter'])? $_GET['letter'] : $letter;
+$_letter = strtoupper(substr($_letter, 0, 1));
+
+$limit = $this->get_list_count($max);
 
 $count = $this->load_single(
 	"SELECT COUNT(page_id) AS n ".
@@ -47,11 +48,11 @@ $count = $this->load_single(
 				($title == 1
 					? "title "
 					: "tag ").
-				"LIKE '{$_letter}%' "
+				"LIKE '".$_letter."%' "
 			: "")
 	, true);
 
-$pagination = $this->pagination($count['n'], $limit, $name = 'p', (!empty($_letter) ? 'letter='.$_letter : ''));
+$pagination = $this->pagination($count['n'], $limit, 'p', ($_letter? 'letter=' . $_letter : ''));
 
 // get letters of alphabet with existing pages
 if ($pages = $this->load_all(
@@ -119,7 +120,7 @@ if ($pages = $this->load_all(
 				($title == 1
 					? "title "
 					: "tag ").
-				"LIKE '{$_letter}%' "
+				"LIKE '".$_letter."%' "
 			: "").
 	"ORDER BY ".
 		($title == 1
@@ -171,10 +172,7 @@ if ($pages_to_display)
 	$top_links = '';
 	$cur_char = '';
 
-	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-	// pagination
-	echo $show_pagination;
+	$this->print_pagination($pagination);
 
 	// create the top links menu
 	if($this->letters)
@@ -271,8 +269,7 @@ if ($pages_to_display)
 
 	echo "</ul>\n";
 
-	// pagination
-	echo $show_pagination;
+	$this->print_pagination($pagination);
 }
 else
 {

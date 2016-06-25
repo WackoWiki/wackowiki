@@ -74,6 +74,13 @@ class Wacko
 	var $translit_macros = array(
 		'вики' => 'wiki', 'вака' => 'wacko', 'веб' => 'web'
 	);
+	var $time_intervals = array(
+		2592000 => 'Month',
+		604800 => 'Week',
+		86400 => 'Day',
+		3600 => 'Hour',
+		60 => 'Minute'
+	);
 
 	/**
 	* CONSTRUCTOR
@@ -251,14 +258,9 @@ class Wacko
 	}
 
 	// checks if the parameter is an empty string or a string containing only whitespace
-	function is_blank( $variable )
+	function is_blank($str)
 	{
-		if( trim( $variable ) == '' )
-		{
-			return true;
-		}
-
-		return false;
+		return ctype_space($str) || $str === '';
 	}
 
 	/**
@@ -400,78 +402,20 @@ class Wacko
 			$this->config['time_format_seconds'], $tz_time);
 	}
 
-	function get_time_interval($posted_time)
+	function get_time_interval($was)
 	{
-		$now			= time();
-		$interval_secs	= $now - $posted_time;
+		$ago = time() - $was;
 
-		if ($interval_secs > 2592000)
+		foreach ($this->time_intervals as $val => $name)
 		{
-			$interval = (($interval_secs - ($interval_secs % 2592000)) / 2592000);
-
-			if ($interval == 1)
+			if ($ago >= $val)
 			{
-				$interval.= $this->get_translation('FeedMonthAgo');
-			}
-			else
-			{
-				$interval.= $this->get_translation('FeedMonthsAgo');
-			}
-		}
-		else if ($interval_secs > 604800)
-		{
-			$interval = (($interval_secs - ($interval_secs % 604800)) / 604800);
-
-			if ($interval == 1)
-			{
-				$interval.= $this->get_translation('FeedWeekAgo');
-			}
-			else
-			{
-				$interval.= $this->get_translation('FeedWeeksAgo');
-			}
-		}
-		else if ($interval_secs > 86400)
-		{
-			$interval = (($interval_secs - ($interval_secs % 86400)) / 86400);
-
-			if ($interval == 1)
-			{
-				$interval.= $this->get_translation('FeedDayAgo');
-			}
-			else
-			{
-				$interval.= $this->get_translation('FeedDaysAgo');
-			}
-		}
-		else if ($interval_secs > 3600)
-		{
-			$interval = (($interval_secs - ($interval_secs % 3600)) / 3600);
-
-			if ($interval == 1)
-			{
-				$interval.= $this->get_translation('FeedHourAgo');
-			}
-			else
-			{
-				$interval.= $this->get_translation('FeedHoursAgo');
-			}
-		}
-		else if ($interval_secs > 60)
-		{
-			$interval = (($interval_secs - ($interval_secs % 60)) / 60);
-
-			if ($interval == 1)
-			{
-				$interval.= $this->get_translation('FeedMinuteAgo');
-			}
-			else
-			{
-				$interval.= $this->get_translation('FeedMinutesAgo');
+				$interval = ($ago - $ago % $val) / $val;
+				return $interval . $this->get_translation('Feed'.$name.($interval == 1? '' : 's').'Ago');
 			}
 		}
 
-		return  $interval;
+		return 0 . $this->get_translation('FeedMinutesAgo');
 	}
 
 	// LANG FUNCTIONS
@@ -1434,7 +1378,8 @@ class Wacko
 			"SELECT DISTINCT p.tag ".
 			"FROM ".$this->config['table_prefix']."menu b ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
-			"WHERE (b.user_id IN ( '".(int) $this->get_user_id('System')."' ) ".
+			// TODO: why IN and not = ??
+			"WHERE (b.user_id IN ( '".$this->get_user_id('System')."' ) ".
 				($lang
 					? "AND b.menu_lang = '".quote($this->dblink, $lang)."' "
 					: "").
@@ -1785,33 +1730,31 @@ class Wacko
 
 	function load_deleted($limit = 50, $cache = true)
 	{
-		$limit		= (int) $limit;
+		$deleted = [];
 		$pagination	= '';
 
-		// count pages
-		if ($count_deleted = $this->load_all(
-			"SELECT p.page_id ".
-			"FROM ".$this->config['table_prefix']."page p ".
-			"WHERE p.deleted = '1' "
-			, true));
+		$count_deleted = $this->load_single(
+			"SELECT COUNT(page_id) AS n ".
+			"FROM ".$this->config['table_prefix']."page ".
+			"WHERE deleted = '1' LIMIT 1"
+			, $cache);
 
-		if ($count_deleted)
+		if ($count_deleted['n'])
 		{
-			$count			= count($count_deleted);
-			$pagination		= $this->pagination($count, $limit);
-			$meta			= 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.page_lang, p.title, p.keywords, p.description, u.user_name';
+			$pagination = $this->pagination($count_deleted['n'], $limit);
 
 			$deleted = $this->load_all(
-				"SELECT {$meta} ".
+				"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note,
+						p.minor_edit, p.latest, p.handler, p.comment_on_id, p.page_lang, p.title, p.keywords,
+						p.description, u.user_name ".
 				"FROM ".$this->config['table_prefix']."page p ".
-					#"LEFT JOIN ".$this->config['table_prefix']."page b ON (p.comment_on_id = b.page_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"WHERE p.deleted = '1' ".
 				"ORDER BY p.modified DESC, p.tag ASC ".
 				"LIMIT {$pagination['offset']}, {$limit}", $cache);
-
-			return array($deleted, $pagination);
 		}
+
+		return array($deleted, $pagination);
 	}
 
 	function load_categories($tag, $page_id = 0, $cache = false)
@@ -1827,15 +1770,6 @@ class Wacko
 
 		return $categories;
 	}
-
-	function get_parent_list()
-	{}
-
-	function get_sibling_list()
-	{}
-
-	function get_child_list()
-	{}
 
 	function bad_words($text)
 	{
@@ -2238,9 +2172,9 @@ class Wacko
 					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false, $minor_edit);
 				}
 			} // end of new page
-			// RESAVING AN OLD PAGE, CREATING REVISION
 			else
 			{
+				// RESAVING AN OLD PAGE, CREATING REVISION
 				$this->set_language($this->page_lang);
 
 				// getting title
@@ -2351,15 +2285,10 @@ class Wacko
 	// create revision of a given page
 	function save_revision($old_page)
 	{
-		if (!$old_page)
-		{
-			return false;
-		}
-
 		// prepare input
-		foreach ($old_page as $key => $val)
+		foreach ($old_page as &$val)
 		{
-			$old_page[$key] = quote($this->dblink, $old_page[$key]);
+			$val = quote($this->dblink, $val);
 		}
 
 		// get new version_id
@@ -4815,9 +4744,9 @@ class Wacko
 		}
 
 		// exploding substitutions table into array
-		foreach ($table as $key => &$val)
+		foreach ($table as &$val)
 		{
-			$table[$key] = preg_split('//', $table[$key], -1, PREG_SPLIT_NO_EMPTY);
+			$val = preg_split('//', $val, -1, PREG_SPLIT_NO_EMPTY);
 		}
 
 		// running through all chars positions needing replacement
@@ -4892,20 +4821,23 @@ class Wacko
 	 */
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
 	{
-		$fields_setting	= 's.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
+		$fields_setting	= 's.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica,
+							s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
+							s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
+							s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
 		$fields_default	= 'u.*, '.$fields_setting;
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.enabled, u.user_form_salt, u.email_confirm, t.session_time, u.last_visit, u.session_expire, u.last_mark, '.$fields_setting;
-
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.enabled, u.user_form_salt, u.email_confirm,
+							t.session_time, u.last_visit, u.session_expire, u.last_mark, '.$fields_setting;
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
-				? "{$fields_session} "
-				: "{$fields_default} "
+				? $fields_session
+				: $fields_default
 				).
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."auth_token t ON (u.user_id = t.user_id) ".
-			"WHERE ".( $user_id != 0
+			"WHERE ".( $user_id
 					? "u.user_id		= '".(int)$user_id."' "
 					: 	( $login_token !== false
 						? "t.cookie_token	= '".quote($this->dblink, $login_token)."' "
@@ -4917,7 +4849,7 @@ class Wacko
 				)." ".
 			"LIMIT 1");
 
-		if ($user['session_time'] == SQL_NULLDATE)
+		if (@$user['session_time'] == SQL_NULLDATE)
 		{
 			$user['session_time'] = '';
 		}
@@ -4927,14 +4859,7 @@ class Wacko
 
 	function get_user_name()
 	{
-		if ($user_name = $this->get_user_setting('user_name'))
-		{
-			return $user_name;
-		}
-		else
-		{
-			return null;
-		}
+		return $this->get_user_setting('user_name');
 	}
 
 	function check_ip($ip)
@@ -5016,14 +4941,11 @@ class Wacko
 
 	function get_user_ip()
 	{
-		if ($this->_userhost)
+		if (!$this->_userhost)
 		{
-			return $this->_userhost;
+			$this->_userhost = $this->ip_address();
 		}
-		else
-		{
-			return $this->_userhost = $this->ip_address();
-		}
+		return $this->_userhost;
 	}
 
 	// extract user data from the session array
@@ -5033,18 +4955,14 @@ class Wacko
 		{
 			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user'];
 		}
-		else
-		{
-			return null;
-		}
 	}
 
 	// extract specific element from user session array
 	function get_user_setting($setting, $guest = 0)
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )][$setting]))
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.($guest ? 'guest' : 'user')][$setting]))
 		{
-			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )][$setting];
+			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.($guest ? 'guest' : 'user')][$setting];
 		}
 	}
 
@@ -5062,7 +4980,7 @@ class Wacko
 		$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user'] = $user;
 
 		// define current IP for foregoing checks
-		if ($ip == true)
+		if ($ip)
 		{
 			$this->set_user_setting('ip', $this->get_user_ip() );
 		}
@@ -5072,7 +4990,7 @@ class Wacko
 
 	function update_last_mark($user)
 	{
-		if ($user['user_id'] == true)
+		if ($user['user_id'])
 		{
 			return $this->sql_query(
 				"UPDATE {$this->config['user_table']} SET ".
@@ -5101,30 +5019,26 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function get_list_count($max, $default = 50)
+	function get_list_count($max)
 	{
-		if ($user = $this->get_user())
-		{
-			$user_max = $user['list_count'];
-
-			if ($user_max == 0)
-			{
-				$user_max = 10;
-			}
-		}
-		else
+		$user_max = $this->get_user_setting('list_count');
+		if (!isset($user_max))
 		{
 			$user_max = 50;
 		}
-
-		if (!isset($max) || $user_max < $max)
+		else if ($user_max <= 0)
 		{
-			$max = $user_max;
+			$user_max = 10;
+		}
+		else if ($user_max > 100)
+		{
+			$user_max = 100;
 		}
 
-		if ($max > 100)
+		$max = (int)$max;
+		if ($max <= 0 || $max > $user_max)
 		{
-			$max	= 100;
+			$max = $user_max;
 		}
 
 		return $max;
@@ -5397,52 +5311,20 @@ class Wacko
 
 	function get_user_id($user_name = '')
 	{
-		if (!empty($user_name))
+		if ($user_name !== '')
 		{
 			$user = $this->load_single(
 				"SELECT user_id ".
 				"FROM ".$this->config['table_prefix']."user ".
 				"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
 				"LIMIT 1", true);
-
-			// Get user value
-			$user_id = $user['user_id'];
-
-			return $user_id;
-		}
-		else if($_user = $this->get_user())
-		{
-			$user_id = (isset($_user['user_id']) ? $_user['user_id'] : null);
-		}
-
-		if (isset($user_id))
-		{
-			return $user_id;
 		}
 		else
 		{
-			return null;
-		}
-	}
-
-	function user_wants_comments()
-	{
-		if (!($user = $this->get_user()))
-		{
-			return false;
+			$user = $this->get_user();
 		}
 
-		return ($user['show_comments'] == 1);
-	}
-
-	function user_wants_files()
-	{
-		if (!($user = $this->get_user()))
-		{
-			return false;
-		}
-
-		return (isset($user['show_files']) && $user['show_files'] == 1);
+		return (int) @$user['user_id']; // 0 if no such user
 	}
 
 	// Returns boolean indicating if the current user is allowed to see comments at all
@@ -6466,154 +6348,146 @@ class Wacko
 	}
 
 	// MAINTENANCE
+
+	function purge_cache_directory($directory, $ttl)
+	{
+		$n = 0;
+		clearstatcache();
+
+		if (($handle = opendir(rtrim($this->config['cache_dir'].$directory, '/'))))
+		{
+			$now = time();
+
+			while (false !== ($file = readdir($handle)))
+			{
+				$file = $directory . $file;
+				if (is_file($file) && $now - @filemtime($file) > $ttl && @unlink($file))
+				{
+					++$n;
+				}
+			}
+
+			closedir($handle);
+		}
+		return $n;
+	}
+
 	function maintenance()
 	{
+		$now = time();
+
 		// purge referrers (once a day)
 		if (($days = $this->config['referrers_purge_time'])
-			&& (time() > ($this->config['maint_last_refs'] + 1 * 86400)))
+				&& $now > $this->config['maint_last_refs'] + 1 * 86400)
 		{
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."referrer ".
 				"WHERE referrer_time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->set_config('maint_last_refs', time(), '', true);
+			$this->set_config('maint_last_refs', $now, '', true);
 			$this->log(7, 'Maintenance: referrers purged');
 		}
 
 		// purge outdated pages revisions (once a week)
 		if (($days = $this->config['pages_purge_time'])
-			&& (time() > ($this->config['maint_last_oldpages'] + 7 * 86400)))
+				&& $now > $this->config['maint_last_oldpages'] + 7 * 86400)
 		{
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."revision ".
 				"WHERE modified < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->set_config('maint_last_oldpages', time(), '', true);
+			$this->set_config('maint_last_oldpages', $now, '', true);
 			$this->log(7, 'Maintenance: outdated pages revisions purged');
 		}
 
 		// purge deleted pages (once per 3 days)
 		if (($days = $this->config['keep_deleted_time'])
-			&& (time() > ($this->config['maint_last_delpages'] + 3 * 86400))
-			&& ($pages = $this->load_deleted(1000, 0)))
+				&& $now > $this->config['maint_last_delpages'] + 3 * 86400)
 		{
-			// composing a list of candidates
-			if (is_array($pages))
-			{
-				$remove = array();
+			list($pages, ) = $this->load_deleted(1000, 0);
 
-				foreach ($pages as $page)
+			$remove = [];
+			$past = $now - 3600 * 24 * $days;
+			foreach ($pages as $page)
+			{
+				if (strtotime($page['modified']) < $past)
 				{
-					// does the page has been deleted earlier than specified number of days ago?
-					if (strtotime($page['modified']) < (time() - (3600 * 24 * $days)))
-					{
-						$remove[] = "'".$page['page_id']."'";
-					}
+					$remove[] = "'".$page['page_id']."'";
 				}
 			}
 
 			if ($remove)
 			{
+				$remove = implode(', ', $remove);
+
 				// deleted pages
 				$this->sql_query(
 					"DELETE FROM {$this->config['table_prefix']}page ".
-					"WHERE page_id IN ( ".implode(', ', $remove)." )");
+					"WHERE page_id IN ( ".$remove." )");
 
 				// revisions of deleted pages
 				$this->sql_query(
 					"DELETE FROM {$this->config['table_prefix']}revision ".
-					"WHERE page_id IN ( ".implode(', ', $remove)." )");
-
-				unset($remove);
+					"WHERE page_id IN ( ".$remove." )");
 			}
 
-			$this->set_config('maint_last_delpages', time(), '', true);
+			$this->set_config('maint_last_delpages', $now, '', true);
 			$this->log(7, 'Maintenance: deleted pages purged');
 		}
 
 		// purge system log entries (once per 3 days)
 		if (($days = $this->config['log_purge_time'])
-			&& (time() > ($this->config['maint_last_log'] + 3 * 86400)))
+				&& $now > $this->config['maint_last_log'] + 3 * 86400)
 		{
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}log ".
 				"WHERE log_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
 
-			$this->set_config('maint_last_log', time(), '', true);
+			$this->set_config('maint_last_log', $now, '', true);
 
 			$this->log(7, 'Maintenance: system log purged');
 		}
 
 		// remove outdated pages cache, purge sql cache (once per hour)
-		if (time() > ($this->config['maint_last_cache'] + 3600))
+		if ($now > $this->config['maint_last_cache'] + 3600)
 		{
 			// pages cache
-			if ($ttl = $this->config['cache_ttl'])
+			if (($ttl = $this->config['cache_ttl']))
 			{
 				// clear from db
 				$this->sql_query(
 					"DELETE FROM ".$this->config['table_prefix']."cache ".
 					"WHERE cache_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $ttl)."' SECOND )");
 
-				// delete from fs
-				clearstatcache();
-
-				$directory	= $this->config['cache_dir'].CACHE_PAGE_DIR;
-
-				if ($handle = opendir(rtrim($directory, '/')))
+				if ($this->purge_cache_directory(CACHE_PAGE_DIR, $ttl))
 				{
-					while (false !== ($file = readdir($handle)))
-					{
-						if (is_file($directory.$file)
-							&& ((time() - @filemtime($directory.$file)) > $ttl))
-						{
-							@unlink($directory.$file);
-						}
-					}
-
-					closedir($handle);
+					$this->log(7, 'Maintenance: cached pages purged');
 				}
-
-				//$this->log(7, 'Maintenance: cached pages purged');
 			}
 
 			// sql query cache
-			if ($ttl = $this->config['cache_sql_ttl'])
+			if (($ttl = $this->config['cache_sql_ttl']))
 			{
-				// delete from fs
-				clearstatcache();
-				$directory	= $this->config['cache_dir'].CACHE_SQL_DIR;
-
-				if ($handle = opendir(rtrim($directory, '/')))
+				if ($this->purge_cache_directory(CACHE_SQL_DIR, $ttl))
 				{
-					while (false !== ($file = readdir($handle)))
-					{
-						if (is_file($directory.$file)
-							&& ((time() - @filemtime($directory.$file)) > $ttl))
-						{
-							@unlink($directory.$file);
-						}
-					}
-
-					closedir($handle);
+					$this->log(7, 'Maintenance: cached sql results purged');
 				}
-
-				//$this->log(7, 'Maintenance: cached sql results purged');
 			}
 
-			$this->set_config('maint_last_cache', time(), '', true);
+			$this->set_config('maint_last_cache', $now, '', true);
 		}
 
 		// write xml_sitemap
+		// STS: didn't work here!!!!!
 		$this->write_sitemap();
 
 		// purge expired cookie_tokens (once per 3 days)
 		if (($days = 3)
-			&& (time() > ($this->config['maint_last_session'] + 3 * 86400)) )
+				&& $now > $this->config['maint_last_session'] + 3 * 86400)
 		{
 			$this->delete_cookie_token('', true, $days);
 
-			$this->set_config('maint_last_session', time(), '', true);
+			$this->set_config('maint_last_session', $now, '', true);
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
 		}
 	}
@@ -7729,137 +7603,120 @@ class Wacko
 	// for SQL queries) elements.
 	function pagination($total, $perpage = 100, $name = 'p', $params = '', $method = '', $tag = '')
 	{
-		if ($perpage == 0)
+		if ($perpage < 1)
 		{
 			$perpage = 10; // no division by zero
 		}
+		if ($total <= $perpage) {
+			// single page
+			return ['offset' => 0, 'text' => ''];
+		}
 
-		$pagination = '';
-		$sep		= ', ';		// page links divider
-		$pages		= ceil($total / $perpage);
-		$page		= ((isset($_GET[$name])) && $_GET[$name] == true			// if page param = 'last' magic word,
-						? ($_GET[$name] == 'last'	// then open last page of the list
-							? ($pages > 0
-								? $pages
-								: 1)
-							: (int)$_GET[$name])
-						: 1);
+		// multipage with navigation
+		$sep		= ', ';
+		$span		= ' ... ' . $sep;
+		$total		-= 1;
+		$pages		= ($total - $total % $perpage) / $perpage + 1;
+		$page		= @$_GET[$name];
+		$page		= ($page == 'last')? $pages : (int)$page;
 
-		if ($page <= 0)
+		if ($params)
+		{
+			$params = '&amp;' . $params;
+		}
+
+		if ($page <= 0 || $page > $pages)
 		{
 			$page = 1;
 		}
 
+		$make_link = function ($page, $body = '', $attrs = '') use ($method, $tag, $name, $params)
+		{
+			return '<a href="' . $this->href($method, $tag, $name . '=' . $page . $params) . '"' . $attrs . '>' .
+					($body? $body : $page) . '</a>';
+		};
+
+		$make_list = function ($from, $to) use ($page, $pages, $make_link, $sep)
+		{
+			$list = '';
+
+			for ($p = $from; $p <= $to; $p++)
+			{
+				$list .= ' ';
+				if ($p != $page)
+				{
+					$list .= $make_link($p);
+				}
+				else // don't make link for the current page
+				{
+					$list .= '<strong>' . $p . '</strong>';
+				}
+				if ($p != $pages)
+				{
+					$list .= $sep;
+				}
+			}
+
+			return $list;
+		};
+
 		$pagination['offset'] = $perpage * ($page - 1);
 
-		// display navigation if there are pages to navigate in
-		if ($pages > 1)
+		$navigation = $this->get_translation('ToThePage') . ': ';
+
+		if ($page > 1)
 		{
-			$pagination['text'] = $this->get_translation('ToThePage').': ';
-
-			// prev page shortcut
-			if ($page < 2)
-			{
-				$pagination['text'] .= '';
-			}
-			else
-			{
-				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page - 1).( $params == true ? '&amp;'.$params : '' )).'" rel="prev">&laquo; '.$this->get_translation('PrevAcr').'</a>';
-			}
-
-			// pages range links
-			if ($pages <= 10)	// not so many pages
-			{
-				for ($p = 1; $p <= $pages; $p++)
-				{
-					if ($p != $page)
-					{
-						$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
-					}
-					else	// don't make link for the current page
-					{
-						$pagination['text'] .= ' <strong>'.$p.'</strong>'.( $p != $pages ? $sep : '' );
-					}
-				}
-			}
-			else	// really many pages!
-			{
-				if ($page <= 4 || $page > ($pages - 4))	// current page is near the beginning or the end
-				{
-					// first pages
-					for ($p = 1; $p <= 5; $p++)
-					{
-						if ($p != $page)
-						{
-							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
-						}
-						else	// don't make link for the current page
-						{
-							$pagination['text'] .= ' <strong>'.$p.'</strong>'.( $p != $pages ? $sep : '' );
-						}
-					}
-
-					// middle skipped
-					$pagination['text'] .= ' ... ,';
-
-					// last pages
-					for ($p = ($pages - 4); $p <= $pages; $p++)
-					{
-						if ($p != $page)
-						{
-							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
-						}
-						else	// don't make link for the current page
-						{
-							$pagination['text'] .= ' <strong>'.$p.'</strong>'.( $p != $pages ? $sep : '' );
-						}
-					}
-				}
-				else	// current page is in the middle of the list
-				{
-					// first page
-					$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'=1'.( $params == true ? '&amp;'.$params : '' )).'">1</a>'.$sep.' ... '.$sep;
-
-					// middle pages
-					for ($p = ($page - 2); $p <= ($page + 2); $p++)
-					{
-						if ($p != $page)
-						{
-							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>,';
-						}
-						else	// don't make link for the current page
-						{
-							$pagination['text'] .= ' <strong>'.$p.'</strong>'.$sep;
-						}
-					}
-
-					// last page
-					$pagination['text'] .= ' ... '.$sep.'<a href="'.$this->href($method, $tag, $name.'='.$pages.( $params == true ? '&amp;'.$params : '' )).'">'.$pages.'</a>';
-				}
-			}
-
-			// next page shortcut
-			if ($page >= $pages)
-			{
-				$pagination['text'] .= '';
-			}
-			else
-			{
-				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page + 1).( $params == true ? '&amp;'.$params : '' )).'" rel="next">'.$this->get_translation('NextAcr').' &raquo;</a>';
-			}
+			$navigation .= $make_link($page - 1, ('&laquo; ' . $this->get_translation('PrevAcr')), ' rel="prev"') . ' ';
 		}
 
+		// pages range links
+		if ($pages <= 10)	// not so many pages, list all
+		{
+			$navigation .= $make_list(1, $pages);
+		}
+		else if ($page <= 4 || $page > $pages - 4)	// current page is near the beginning or the end
+		{
+			$navigation .= $make_list(1, 5);
+			$navigation .= $span;
+			$navigation .= $make_list($pages - 4, $pages);
+		}
+		else	// current page is in the middle of the list
+		{
+			$navigation .= $make_list(1, 1);
+			$navigation .= $span;
+			$navigation .= $make_list($page - 2, $page + 2);
+			$navigation .= $span;
+			$navigation .= $make_list($pages, $pages);
+		}
+
+		// next page shortcut
+		if ($page < $pages)
+		{
+			$navigation .= ' ' . $make_link($page + 1, ($this->get_translation('NextAcr') . ' &raquo;'), 'rel="next"'); 
+		}
+
+		$pagination['text'] = $navigation;
 		return $pagination;
 	}
 
 	// TODO: option for _comments handler, forum action -> CSS small
 	function show_pagination($pagination = '')
 	{
-		if (!empty($pagination))
+		if ($pagination)
 		{
-			return '<nav class="pagination">'.$pagination."</nav>\n";
+			$pagination = '<nav class="pagination">'.$pagination."</nav>\n";
+		}
+		return $pagination;
+	}
+
+	function print_pagination($pagination)
+	{
+		if (@$pagination['text'])
+		{
+			echo '<nav class="pagination">' . $pagination['text'] . "</nav>\n";
 		}
 	}
+
 
 	// show captcha form on a page. must be incorporated as an input
 	// form component in every page that uses captcha testing
