@@ -68,7 +68,7 @@ if ($this->has_access('read'))
 	echo $data;
 
 	// display comments
-	if ( (isset($_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']]) && $_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']] == 1) || $this->forum)
+	if ( (isset($_SESSION['show_comments'][$this->page['page_id']]) && $_SESSION['show_comments'][$this->page['page_id']] == 1) || $this->forum)
 	{
 		if ($comments = $this->load_comments($this->page['page_id']));
 		{

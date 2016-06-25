@@ -25,12 +25,11 @@ if ($this->is_admin())
 			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 			{
 				// tz offset
-				$time_tz = $this->get_time_tz( strtotime($page['modified']) );
-				$time_tz = date('Y-m-d H:i:s', $time_tz);
+				$time	= $this->get_time_tz(strtotime($page['modified']));
+				$day	= date('Y-m-d', $time);
+				$time	= date('H:i:s', $time);
 
 				// day header
-				list($day, $time) = explode(' ', $time_tz);
-
 				if ($day != $curday)
 				{
 					if ($curday)
@@ -43,7 +42,7 @@ if ($this->is_admin())
 				}
 
 				// do unicode entities
-				if (($edit_note = $page['edit_note']))
+				if (($edit_note = $page['edit_note']) !== '')
 				{
 					if ($this->page['page_lang'] != $page['page_lang'])
 					{
@@ -52,22 +51,18 @@ if ($this->is_admin())
 
 					$edit_note = ' <span class="editnote">[' . $edit_note . ']</span>';
 				}
-				else
-				{
-					$edit_note = '';
-				}
 
 				// print entry
 				echo '<li class="lined">' .
 						'<span style="text-align:left">' .
-							'<small>'.date($this->config['time_format_seconds'], strtotime($time)).'</small>  &mdash; ' .
+							'<small>' . date($this->config['time_format_seconds'], strtotime($time)) . '</small>  &mdash; ' .
 							// $this->compose_link_to_page($page['tag'], 'revisions', '', 0) .
-							'<img src="' . $this->config['theme_url'] . 'icon/spacer.png' . '" title="' . $this->get_translation('CommentDeleted') . '" alt="[deleted]" class="btn-delete"/> ' .
+							'<img src="' . $this->config['theme_url'] . 'icon/spacer.png' . '" title="' .
+									$this->get_translation('CommentDeleted') . '" alt="[deleted]" class="btn-delete"/> ' .
 							$this->compose_link_to_page($page['tag'], '', '', 0) .
 						'</span>' .
 						' . . . . . . . . . . . . . . . . <small>' .
 						$this->user_link($page['user_name'], '', true, false) .
-
 						$edit_note .
 						'</small>' .
 					"</li>\n";

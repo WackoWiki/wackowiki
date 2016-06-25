@@ -581,7 +581,7 @@ class Wacko
 	{
 		if (!$this->_lang_list)
 		{
-			$cache = &$_SESSION[$this->config['session_prefix'].'_'.'available_languages'];
+			$cache = &$_SESSION['available_languages'];
 			if (!isset($cache))
 			{
 				$lang_list = array();
@@ -1754,7 +1754,7 @@ class Wacko
 				"LIMIT {$pagination['offset']}, {$limit}", $cache);
 		}
 
-		return array($deleted, $pagination);
+		return [$deleted, $pagination];
 	}
 
 	function load_categories($tag, $page_id = 0, $cache = false)
@@ -2814,9 +2814,9 @@ class Wacko
 	*/
 	function set_message($message, $type = 'info')
 	{
-		if (!empty($message))
+		if ($message !== '')
 		{
-			$_SESSION[$this->config['session_prefix'].'_'.'message'][] = array($message, $type);
+			$_SESSION['message'][] = array($message, $type);
 		}
 	}
 
@@ -2827,17 +2827,11 @@ class Wacko
 	*/
 	function get_message()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'message']))
+		if (isset($_SESSION['message']))
 		{
-			$message = $_SESSION[$this->config['session_prefix'].'_'.'message'];
-			// reset message
-			$_SESSION[$this->config['session_prefix'].'_'.'message'] = '';
-
+			$message = $_SESSION['message'];
+			unset($_SESSION['message']);
 			return $message;
-		}
-		else
-		{
-			return null;
 		}
 	}
 
@@ -4203,18 +4197,17 @@ class Wacko
 	function start_link_tracking()
 	{
 		// STS: why in SESSION? is tracking between page instances possible?
-		$_SESSION[$this->config['session_prefix'].'_'.'linktracking'] = 1;
+		$_SESSION['linktracking'] = 1;
 	}
 
 	function stop_link_tracking()
 	{
-		$_SESSION[$this->config['session_prefix'].'_'.'linktracking'] = 0;
+		$_SESSION['linktracking'] = 0;
 	}
 
 	function link_tracking()
 	{
-		$q = $this->config['session_prefix'].'_'.'linktracking';
-		return (isset($_SESSION[$q]) && $_SESSION[$q]);
+		return @$_SESSION['linktracking'];
 	}
 
 	/**
@@ -4951,19 +4944,15 @@ class Wacko
 	// extract user data from the session array
 	function get_user()
 	{
-		if (isset( $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user'] ))
-		{
-			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user'];
-		}
+		$q = $this->config['cookie_hash'] . '_' . 'user';
+		return @$_SESSION[$q];
 	}
 
 	// extract specific element from user session array
 	function get_user_setting($setting, $guest = 0)
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.($guest ? 'guest' : 'user')][$setting]))
-		{
-			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.($guest ? 'guest' : 'user')][$setting];
-		}
+		$q = $this->config['cookie_hash'] . '_'. ($guest? 'guest' : 'user');
+		return @$_SESSION[$q][$setting];
 	}
 
 	// set/update specific element of user session array
@@ -4971,21 +4960,20 @@ class Wacko
 	// this poses a potential security threat
 	function set_user_setting($setting, $value, $guest = 0)
 	{
-		return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )][$setting] = $value;
+		$q = $this->config['cookie_hash'] . '_'. ($guest? 'guest' : 'user');
+		$_SESSION[$q][$setting] = $value;
 	}
 
 	// insert user data into the session array
 	function set_user($user, $ip = 1)
 	{
-		$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user'] = $user;
+		$_SESSION[$this->config['cookie_hash'].'_'.'user'] = $user;
 
 		// define current IP for foregoing checks
 		if ($ip)
 		{
 			$this->set_user_setting('ip', $this->get_user_ip() );
 		}
-
-		return true;
 	}
 
 	function update_last_mark($user)
@@ -5172,7 +5160,7 @@ class Wacko
 	{
 		$this->delete_cookie('sid', true, false);
 
-		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']);
+		unset($_SESSION[$this->config['cookie_hash'].'_'.'user']);
 		session_destroy(); // destroy session data in storage
 
 		session_id(hash('sha1', $this->timer.$this->config['system_seed'].$session_expire.$user['user_name'].$user['password']));
@@ -5211,11 +5199,7 @@ class Wacko
 	// end user session and free session vars
 	function log_user_out()
 	{
-		$user_id = isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id'])
-			? $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_id']
-			: '';
-
-		if ($user_id)
+		if (($user_id = $this->get_user_setting('user_id')))
 		{
 			// clear session expiry in user data table and cookie_token in auth_token table
 			$this->delete_cookie_token($user_id, false);
@@ -5224,7 +5208,7 @@ class Wacko
 		$this->delete_cookie('auth', true, true);
 		$this->delete_cookie('sid', true, false);
 
-		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']);
+		unset($_SESSION[$this->config['cookie_hash'].'_'.'user']);
 
 		$session_id = hash('sha1', $this->timer.$this->config['system_seed'].$this->get_user_setting('password').session_id());
 
@@ -6065,10 +6049,10 @@ class Wacko
 
 	function set_menu($set = MENU_AUTO, $update = false)
 	{
-		$menu_default = &$_SESSION[$this->config['session_prefix'].'_'.'menu_default'];
-		$menu_page_ids = &$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id'];
+		$menu_default = &$_SESSION['menu_default'];
+		$menu_page_ids = &$_SESSION['menu_page_id'];
 		if (!isset($menu_page_ids)) $menu_page_ids = array();
-		$menu_formatted = &$_SESSION[$this->config['session_prefix'].'_'.'menu'];
+		$menu_formatted = &$_SESSION['menu'];
 		if (!isset($menu_formatted)) $menu_formatted = array();
 
 		$user = $this->get_user();
@@ -6176,18 +6160,17 @@ class Wacko
 
 	function get_menu()
 	{
-		return @$_SESSION[$this->config['session_prefix'].'_'.'menu'];
+		return @$_SESSION['menu'];
 	}
 
 	function get_menu_links()
 	{
-		return @$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id'];
+		return @$_SESSION['menu_page_id'];
 	}
 
 	function get_menu_default()
 	{
-		return (!isset($_SESSION[$this->config['session_prefix'].'_'.'menu_default'])) ||
-			$_SESSION[$this->config['session_prefix'].'_'.'menu_default'];
+		return (!isset($_SESSION['menu_default'])) || $_SESSION['menu_default'];
 	}
 
 	// TODO: do not add
@@ -6203,15 +6186,15 @@ class Wacko
 		if ( $size )
 		{
 			#echo '### 1';
-			if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail']))
+			if (isset($_SESSION['user_trail']))
 			{
-				$count = count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
+				$count = count($_SESSION['user_trail']);
 				#echo '### @: ['.$count.']';
 
-				#$this->debug_print_r($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
+				#$this->debug_print_r($_SESSION['user_trail']);
 
-				if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail'][$count - 1][0])
-					&&    $_SESSION[$this->config['session_prefix'].'_'.'user_trail'][$count - 1][0] == $page_id)
+				if (isset($_SESSION['user_trail'][$count - 1][0])
+					&&    $_SESSION['user_trail'][$count - 1][0] == $page_id)
 				{
 					#echo '### 2: ['.$count.']';
 					// nothing
@@ -6220,25 +6203,25 @@ class Wacko
 				{
 					#echo '### 3';
 
-					if (count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']) > $size)
+					if (count($_SESSION['user_trail']) > $size)
 					{
 						#echo '### 4';
-						$_SESSION[$this->config['session_prefix'].'_'.'user_trail']	= array_slice($_SESSION[$this->config['session_prefix'].'_'.'user_trail'], -5 );
-						#$this->debug_print_r($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
+						$_SESSION['user_trail']	= array_slice($_SESSION['user_trail'], -5 );
+						#$this->debug_print_r($_SESSION['user_trail']);
 					}
 
 					#echo '### 5';
 					$_user_trail[-1]	= array ($page_id, $this->page['tag'], $this->page['title']);
-					$user_trail			= $_SESSION[$this->config['session_prefix'].'_'.'user_trail'] + $_user_trail;
+					$user_trail			= $_SESSION['user_trail'] + $_user_trail;
 					$user_trail			= array_values($user_trail);
 
-					$_SESSION[$this->config['session_prefix'].'_'.'user_trail'] = $user_trail;
+					$_SESSION['user_trail'] = $user_trail;
 				}
 			}
 			else
 			{
 				#echo '### 6';
-				$_SESSION[$this->config['session_prefix'].'_'.'user_trail'][] = array ($page_id, $this->page['tag'], $this->page['title']);
+				$_SESSION['user_trail'][] = array ($page_id, $this->page['tag'], $this->page['title']);
 			}
 		}
 	}
@@ -6252,10 +6235,10 @@ class Wacko
 		// in the user trail because the engine parses them before it includes them
 		$this->set_user_trail($size);
 
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'user_trail']))
+		if (isset($_SESSION['user_trail']))
 		{
-			$links		= $_SESSION[$this->config['session_prefix'].'_'.'user_trail'];
-			#$count		= count($_SESSION[$this->config['session_prefix'].'_'.'user_trail']);
+			$links		= $_SESSION['user_trail'];
+			#$count		= count($_SESSION['user_trail']);
 			$result		= '';
 			$size		= (int)$size;
 			$i			= 0;

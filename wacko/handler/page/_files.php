@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 if ($this->has_access('read'))
 {
 	// store "show files" status in _SESSION
-	$show_files = &$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']];
+	$show_files = &$_SESSION['show_files'][$this->page['page_id']];
 
 	if (!isset($show_files))
 	{
