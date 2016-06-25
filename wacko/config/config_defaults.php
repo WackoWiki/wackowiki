@@ -261,8 +261,8 @@ $wacko_config_defaults = array(
 	'recovery_password'				=> '',
 
 	'date_format'					=> 'd.m.Y',
-	'time_format'					=> 'H:i:s',
-	'time_format_seconds'			=> 'H:i',
+	'time_format'					=> 'H:i',
+	'time_format_seconds'			=> 'H:i:s',
 	'name_date_macro'				=> '%s (%s)',
 	'date_macro_format'				=> 'd.m.Y H:i',
 	'date_precise_format'			=> 'd.m.Y H:i:s',

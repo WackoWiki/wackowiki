@@ -6380,6 +6380,7 @@ class Wacko
 				if (strtotime($page['modified']) < $past)
 				{
 					$remove[] = "'".$page['page_id']."'";
+					unset($this->page_id_cache[$page['tag']]);
 				}
 			}
 
@@ -7072,12 +7073,13 @@ class Wacko
 			return false;
 		}
 
+		// loading page
+		$page = $this->load_page('', $page_id);
+		unset($this->page_id_cache[$page['tag']]);
+
 		// store a copy in revision
 		if ($this->config['store_deleted_pages'] && !$dontkeep)
 		{
-			// loading page
-			$page = $this->load_page('', $page_id);
-
 			// unlink comment tag
 			if ($page['comment_on_id'] != 0)
 			{
