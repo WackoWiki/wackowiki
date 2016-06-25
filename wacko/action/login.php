@@ -10,7 +10,6 @@ if (!defined('IN_WACKO'))
 <?php
 
 $error		= '';
-$output		= '';
 $user_name	= '';
 
 // disable server cache for page
@@ -58,7 +57,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 	}
 }
 // logged in
-else if ($user = $this->get_user())
+else if (($user = $this->get_user()))
 {
 	// user is logged in; display logout form
 	echo $this->form_open('logout');
@@ -69,44 +68,39 @@ else if ($user = $this->get_user())
 
 	if ($this->get_cookie('auth'))
 	{
-		if ($user['last_visit'] == true)
+		if ($user['last_visit'])
 		{
-			$output .= $this->get_translation('LastVisit').' <code>'. $this->get_time_formatted($user['last_visit']).'</code>.<br />';
+			$this->set_message($this->get_translation('LastVisit'));
+			$this->set_message(' <code>', 'add');
+			$this->set_message($this->get_time_formatted($user['last_visit']), 'add');
+			$this->set_message('</code>', 'add');
 		}
 
-		$output .= $this->get_translation('SessionEnds').' <code>';
-
+		$this->set_message($this->get_translation('SessionEnds'));
+		$this->set_message(' <code>', 'add');
 		$cookie = explode(';', $this->get_cookie('auth'));
 
 		// session expiry date
-		$output .= $this->get_unix_time_formatted($cookie[2]).'</code> ';
+		$this->set_message($this->get_unix_time_formatted($cookie[2]), 'add');
+		$this->set_message('</code> ', 'add');
+
 		// session time left
-		$time_diff = $cookie[2] - time();
-
-		if ($time_diff > 2 * 24 * 3600)
-		{
-			$output .= '(in '.ceil($time_diff / 24 / 3600).' days).';
-		}
-		else if ($time_diff > 5 * 3600)
-		{
-			$output .= '(in '.ceil($time_diff / 3600).' hours).';
-		}
-		else
-		{
-			$output .= '(in '.ceil($time_diff / 60).' minutes).';
-		}
-
-		$output .= '<br />';
+		$this->set_message('(' . $this->get_time_interval($cookie[2] - time(), true) . ')', 'add');
 
 		// Only allow your session to be used from this IP address.
-		$output .= $this->get_translation('BindSessionIp').' '. ( $user['validate_ip'] == 1 ? $this->get_translation('BindSessionIpOn').' <code>'.$user['ip'].'</code>)' : '<code>Off</code>' ).'.<br />';
+		$this->set_message($this->get_translation('BindSessionIp') . ' '.
+		    ($user['validate_ip']? $this->get_translation('BindSessionIpOn') . ' ' : ''));
+		$this->set_message('<code>', 'add');
+		$this->set_message($user['validate_ip']? $user['ip'] : 'Off', 'add');
+		$this->set_message('</code> ', 'add');
 
-		if ($this->config['tls'] == true || $this->config['tls_proxy'] == true)
+		if ($this->config['tls'] || $this->config['tls_proxy'])
 		{
-			$output .= $this->get_translation('TrafficProtection').' <code>'. ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ).'</code>.';
+		    $this->set_message($this->get_translation('TrafficProtection'));
+		    $this->set_message(' <code>', 'add');
+		    $this->set_message(( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ), 'add');
+		    $this->set_message('</code>', 'add');
 		}
-
-		$this->set_message($output);
 	}
 
 	echo '<p><a href="'.$this->href('', '', 'action=logout').'" style="text-decoration: none;"><input type="button" class="CancelBtn" value="'.$this->get_translation('LogoutButton').'"/></a></p>';

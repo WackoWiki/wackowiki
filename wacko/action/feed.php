@@ -175,7 +175,7 @@ else
 
 				if (($time == 1) && ($date != 0))
 				{
-					echo $this->get_time_interval($date);
+					echo $this->get_time_interval(time() - $date);
 				}
 
 				echo "</span></p>\n";
@@ -219,7 +219,7 @@ else
 
 				if (($time == 1) && ($date != 0))
 				{
-					echo '<p class="note"><span>'.$this->get_time_interval($date)."</span></p>\n";
+					echo '<p class="note"><span>'.$this->get_time_interval(time() - $date)."</span></p>\n";
 				}
 
 				echo '<div class="feed-content">'.$item->get_content()."</div>\n";
