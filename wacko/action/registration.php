@@ -270,9 +270,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					{
 						// 1. Send signup email to new user
 						// TODO: set user language for email encoding
-						$this->load_translation($user_lang);
-						$this->set_translation ($user_lang);
-						$this->set_language ($user_lang);
+						$save = $this->set_language($user_lang, true);
 
 						$subject =	$this->get_translation('EmailWelcome').$this->config['site_name'];
 						$body =		str_replace('%1', $this->config['site_name'],
@@ -283,6 +281,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 									$this->get_translation('EmailRegisteredIgnore')."\n\n";
 
 						$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
+						$this->set_language($save, true);
 						unset($subject, $body);
 
 						// 2. notify admin a new user has signed-up
@@ -290,9 +289,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						{
 							/* TODO: set user language for email encoding */
 							$lang_admin = $this->config['language'];
-							$this->load_translation($lang_admin);
-							$this->set_translation ($lang_admin);
-							$this->set_language ($lang_admin);
+							$save = $this->set_language($lang_admin, true);
 
 							$subject	=	$this->get_translation('NewAccountSubject');
 							$body		=	$this->get_translation('NewAccountSignupInfo')."\n\n".
@@ -303,11 +300,9 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 											$requires_approval."\n\n";
 
 							$this->send_user_email('WikiAdmin' ,$this->config['admin_email'], $subject, $body, $lang_admin);
+							$this->set_language($save, true);
 						}
 
-						$this->load_translation($this->user_lang);
-						$this->set_translation($this->user_lang);
-						$this->set_language($this->user_lang);
 					}
 
 					// log event

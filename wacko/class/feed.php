@@ -17,14 +17,16 @@ class Feed
 {
 	// VARIABLES
 	var $engine;
+	var $lang;
 	var $charset;
 
 	// CONSTRUCTOR
 	function __construct(&$engine)
 	{
 		$this->engine = & $engine;
-		$this->engine->load_translation($this->engine->config['language']);
-		$this->charset = $this->engine->languages[$this->engine->config['language']]['charset'];
+		$this->lang = $this->engine->config['language'];
+		$this->engine->load_translation($this->lang);
+		$this->charset = $this->engine->get_charset($this->lang);
 	}
 
 	function write_file($name, $body)
@@ -60,7 +62,7 @@ class Feed
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
-		$xml .= "<language>".$this->engine->config['language']."</language>\n";
+		$xml .= "<language>".$this->lang."</language>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 		if (list ($pages, $pagination) = $this->engine->load_changed())
@@ -165,7 +167,7 @@ class Feed
 						'<link>'.$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($news_cluster)).'</link>'."\n".
 						'<description>'.$this->engine->get_translation('RecentNewsXML').$this->engine->config['site_name'].'</description>'."\n".
 						'<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n".
-						'<language>'.$this->engine->config['language'].'</language>'."\n".
+						'<language>'.$this->lang.'</language>'."\n".
 						'<pubDate>'.date('r').'</pubDate>'."\n".
 						'<lastBuildDate>'.date('r').'</lastBuildDate>'."\n";
 		$xml .= "<image>\n";
@@ -196,7 +198,7 @@ class Feed
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
 
 				// check current page lang for different charset to do_unicode_entities() against
-				if ($this->engine->config['language'] != $page['page_lang'])
+				if ($this->lang != $page['page_lang'])
 				{
 					$title	= $this->engine->do_unicode_entities($title, $page['page_lang']);
 					$text	= $this->engine->do_unicode_entities($text, $page['page_lang']);
@@ -255,7 +257,7 @@ class Feed
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
-		$xml .= "<language>".$this->engine->config['language']."</language>\n";
+		$xml .= "<language>".$this->lang."</language>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 		if ($comments = $this->engine->load_comment())
@@ -279,7 +281,7 @@ class Feed
 					$text = $this->engine->format($comment['body_r'], 'post_wacko');
 
 					// check current page lang for different charset to do_unicode_entities() against
-					if ($this->engine->config['language'] != $comment['page_lang'])
+					if ($this->lang != $comment['page_lang'])
 					{
 						$text					= $this->engine->do_unicode_entities($text, $comment['page_lang']);
 						$comment['title']		= $this->engine->do_unicode_entities($comment['title'], $comment['page_lang']);

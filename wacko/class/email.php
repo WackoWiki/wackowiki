@@ -17,14 +17,12 @@ class Email
 {
 	// VARIABLES
 	var $engine;
-	var $charset;
 
 	// CONSTRUCTOR
 	function __construct(&$engine)
 	{
 		$this->engine = & $engine;
 		$this->engine->load_translation($this->engine->config['language']);
-		$this->charset = $this->engine->languages[$this->engine->config['language']]['charset'];
 	}
 
 	function php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset = '', $xtra_headers = '')
