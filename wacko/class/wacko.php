@@ -399,20 +399,28 @@ class Wacko
 			$this->config['time_format_seconds'], $tz_time);
 	}
 
-	function get_time_interval($was)
+	function get_time_interval($ago, $strip = false)
 	{
-		$ago = time() - $was;
+		$res = 0 . $this->get_translation('FeedMinutesAgo');
 
 		foreach ($this->time_intervals as $val => $name)
 		{
 			if ($ago >= $val)
 			{
 				$interval = ($ago - $ago % $val) / $val;
-				return $interval . $this->get_translation('Feed'.$name.($interval == 1? '' : 's').'Ago');
+				$res = $interval . $this->get_translation('Feed'.$name.($interval == 1? '' : 's').'Ago');
+				break;
 			}
 		}
 
-		return 0 . $this->get_translation('FeedMinutesAgo');
+		if ($strip)
+		{
+			// STS: hack! need to patch language files...
+			$res = substr($res, 0, strrpos($res, ' '));
+		}
+
+		return $res;
+
 	}
 
 	// LANG FUNCTIONS
@@ -650,7 +658,7 @@ class Wacko
 				{
 					if (!is_array($text) && $dounicode)
 					{
-						$text = $this->do_unicode_entities($text, $lang)
+						$text = $this->do_unicode_entities($text, $lang);
 					}
 					return $text;
 				}
@@ -2771,7 +2779,19 @@ class Wacko
 	{
 		if ($message)
 		{
-			$_SESSION['messages'][] = [$message, $type];
+			if ($type == 'add' && isset($_SESSION['messages'][0]))
+			{
+				$last = &$_SESSION['messages'][count($_SESSION['messages']) - 1][0];
+				if (!is_array($last))
+				{
+					$last = [$last];
+				}
+				$last[] = $message;
+			}
+			else
+			{
+				$_SESSION['messages'][] = [$message, $type];
+			}
 		}
 	}
 
@@ -2805,6 +2825,21 @@ class Wacko
 			foreach ($messages as $message)
 			{
 				list($_message, $_type) = $message;
+				if (is_array($_message))
+				{
+					$list = $_message;
+					$_message = '';
+					$i = 1;
+					foreach ($list as $item)
+					{
+						if ($i)
+						{
+							$item = htmlspecialchars($item, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+						}
+						$i = !$i;
+						$_message .= $item;
+					}
+				}
 				$this->show_message($_message, $_type);
 			}
 		}
@@ -2814,9 +2849,7 @@ class Wacko
 	{
 		if ($message)
 		{
-			$info_box = '<div class="' . $type . '">' .
-						htmlspecialchars($message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
-						"</div>\n";
+			$info_box = '<div class="' . $type . '">' . $message . "</div>\n";
 
 			if ($show)
 			{
