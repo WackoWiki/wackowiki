@@ -22,7 +22,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 	$this->config['hide_article_header'] = true;
 
 	// does requested user exists?
-	if (false == $user = $this->load_user($profile))
+	if (!($user = $this->load_user($profile)))
 	{
 		$this->show_message( str_replace('%2', htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))) );
 	}
@@ -497,10 +497,10 @@ else
 
 	// defining WHERE and ORDER clauses
 	// $param is passed to the pagination links
-	if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
+	if (isset($_GET['user']) && $_GET['user'] && strlen($_GET['user']) > 2)
 	{
 		// goto user profile directly if so desired
-		if (isset($_GET['gotoprofile']) && $this->load_user($_GET['user']) == true)
+		if (isset($_GET['gotoprofile']) && $this->load_user($_GET['user']))
 		{
 			$this->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)));
 		}

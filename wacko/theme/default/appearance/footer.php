@@ -20,12 +20,14 @@ if ($this->page)
 {
 	if ($this->has_access('read'))
 	{
-		if (isset($this->page['modified']))
+		if ($mtime = @$this->page['modified'])
 		{
 			// Revisions link
+			$formatted = $this->get_time_formatted($mtime);
 			echo (( $this->hide_revisions === false || $this->is_admin() )
-					? '<li><a href="'.$this->href('revisions').'" title="'.$this->get_translation('RevisionTip').'"><time datetime="'.$this->page['modified'].'">'.$this->get_time_formatted($this->page['modified'])."</time></a></li>\n"
-					: '<li><time datetime="'.$this->page['modified'].'">'.$this->get_time_formatted($this->page['modified'])."</time></li>\n"
+					? '<li><a href="'.$this->href('revisions').'" title="'.$this->get_translation('RevisionTip').'">'.
+					    '<time datetime="'.$mtime.'">'.$formatted."</time></a></li>\n"
+					: '<li><time datetime="'.$mtime.'">'.$formatted."</time></li>\n"
 				);
 		}
 
@@ -43,7 +45,8 @@ if ($this->page)
 		}
 		else if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 		{
-			echo '<li>'.$this->get_translation('Nobody').($this->get_user() ? ' (<a href="'.$this->href('claim').'">'.$this->get_translation('TakeOwnership')."</a>)</li>\n" : '');
+			echo '<li>'.$this->get_translation('Nobody').
+				($this->get_user() ? ' (<a href="'.$this->href('claim').'">'.$this->get_translation('TakeOwnership')."</a>)</li>\n" : '');
 		}
 
 		// Permalink
@@ -67,7 +70,8 @@ if ($this->get_user())
 // comment this out for not showing website policy link at the bottom of your pages
 if ($this->config['policy_page'])
 {
-	echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->get_translation('TermsOfUse').'</a><br />';
+	echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.
+		$this->get_translation('TermsOfUse').'</a><br />';
 }
 
 ?></div>

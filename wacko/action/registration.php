@@ -274,7 +274,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						$this->set_translation ($user_lang);
 						$this->set_language ($user_lang);
 
-						$subject =	$this->get_translation('EmailWelcome').' '.$this->config['site_name'];
+						$subject =	$this->get_translation('EmailWelcome').$this->config['site_name'];
 						$body =		str_replace('%1', $this->config['site_name'],
 									str_replace('%2', $user_name,
 									str_replace('%3', $this->href('', '', 'confirm='.$confirm),

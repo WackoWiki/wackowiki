@@ -52,7 +52,7 @@ if ($this->has_access('read'))
 	// store comments display in session
 	if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']]))
 	{
-		$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']] = ($this->user_wants_comments() ? '1' : '0');
+		$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']] = ($this->get_user_setting('show_comments') ? '1' : '0');
 	}
 
 	if(isset($_GET['show_comments']))
