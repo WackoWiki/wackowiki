@@ -662,17 +662,12 @@ class Init
 		{
 			// registers locale resources for admin panel
 			//		call $init->engine('lang');
-			if ($lang == false)
+			if (!$lang)
 			{
 				$lang = $this->config['language'];
 			}
 
-			$this->engine->load_all_languages();
-			$this->engine->load_translation($lang);
-			$this->engine->set_translation($lang);
-			$this->engine->set_language($lang);
-			// set charset
-			$this->engine->charset = $this->engine->languages[$lang]['charset'];
+			$this->engine->set_language($lang, true);
 
 			return true;
 		}

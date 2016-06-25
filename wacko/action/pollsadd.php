@@ -179,11 +179,11 @@ if (isset($_POST['submit_poll']))
 		if ($this->config['enable_email'] == true && $user != $this->config['admin_name'] && $moderation !== true)
 		{
 			$subject = $this->config['site_name'].'. '.$this->get_translation('PollsNotifySubj');
-			$body	 = $this->get_translation('MailHello').
+			$body	 = $this->get_translation('EmailHello').
 					   $this->config['admin_name'].".\n\n".
 					   str_replace('%1', $user, $this->get_translation('PollsNotifyBody'))."\n".
 					   $this->href('', 'admin.php')."\n\n".
-					   $this->get_translation('MailGoodbye')."\n".
+					   $this->get_translation('EmailGoodbye')."\n".
 					   $this->config['site_name']."\n".
 					   $this->config['base_url'];
 

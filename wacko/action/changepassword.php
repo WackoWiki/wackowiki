@@ -55,7 +55,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 				$error = $this->get_translation('PasswordsDidntMatch');
 			}
 			// spaces in password
-			else if (preg_match('/ /', $new_password))
+			else if (preg_match('/\s/', $new_password))
 			{
 				$error = $this->get_translation('SpacesArentAllowed');
 			}
@@ -103,10 +103,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0, 1000)));
 			}
 
-			if ($error)
-			{
-				$this->set_message($error, 'error');
-			}
+			$this->set_message($error, 'error');
 		}
 		else
 		{
@@ -269,19 +266,20 @@ else
 		$user		= $this->load_single(
 						"SELECT u.user_id, u.user_name, u.email, u.password, u.email_confirm, s.user_lang ".
 						"FROM ".$this->config['user_table']." u ".
-							"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+							"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 						"WHERE u.user_name = '".quote($this->dblink, $user_name)."' ".
 							"AND u.email = '".quote($this->dblink, $email)."' ".
 						"LIMIT 1");
 
 		if ($user)
 		{
-			if ($this->config['enable_email'] == true && $user['email_confirm'] == '')
+			if ($this->config['enable_email'] && !$user['email_confirm'])
 			{
 				$code		= hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
 				$code_hash	= hash('sha256', $code.hash('sha256', $this->config['system_seed']));
 
-				$subject	=	$this->get_translation('EmailForgotSubject');
+				$save = $this->set_language($user['user_lang'], true);
+				$subject	=	$this->get_translation('EmailForgotSubject') . $this->config['site_name'];
 				$body		=	str_replace('%1', $this->config['site_name'],
 								str_replace('%2', $user['user_name'],
 								str_replace('%3', $this->href('', '', 'secret_code='.$code),
@@ -296,6 +294,7 @@ else
 
 				// send code
 				$this->send_user_email($user_name, $user['email'], $subject, $body, $user['user_lang']);
+				$this->set_language($save, true);
 
 				// count attempt
 				$this->set_lost_password_count($user['user_id']);

@@ -117,7 +117,7 @@ if (($profile = @$_REQUEST['profile']))
 					$headers[] = "References: <$ref>";
 				}
 
-				$body .= "\n\n" . $this->get_translation('MailGoodbye') . "\n" . $this->config['site_name'] . "\n" . $this->config['base_url'];
+				$body .= "\n\n" . $this->get_translation('EmailGoodbye') . "\n" . $this->config['site_name'] . "\n" . $this->config['base_url'];
 
 				// send email
 				$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);

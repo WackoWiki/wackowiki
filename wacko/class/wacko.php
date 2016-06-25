@@ -13,7 +13,6 @@ class Wacko
 	var $dblink;
 	var $page;								// Requested page
 	var $tag;
-	var $charset;
 	var $supertag;
 	var $forum;
 	var $categories;
@@ -94,8 +93,6 @@ class Wacko
 		$this->timer	= $this->get_micro_time();
 		$this->config	= $config;
 		$this->dblink	= $dblink;
-
-		$this->charset	= $this->get_charset();
 	}
 
 	// DATABASE
@@ -344,9 +341,9 @@ class Wacko
 
 	function available_themes()
 	{
-		$theme_list	= '';
+		$theme_list	= [];
 
-		if ($handle = opendir($this->config['theme_path']))
+		if (($handle = opendir($this->config['theme_path'])))
 		{
 			while (false !== ($file = readdir($handle)))
 			{
@@ -424,48 +421,43 @@ class Wacko
 		$this->resource = & $this->translations[$lang];
 	}
 
-	function set_language($lang)
+	function set_language($lang, $set_translation = false)
 	{
-		$this->load_translation($lang);
-		$this->language = &$this->languages[$lang];
+		$old_lang = @$this->language['LANG'];
+		if ($old_lang != $lang)
+		{
+			$this->load_translation($lang);
+			$this->language = &$this->languages[$lang];
 
-		setlocale(LC_CTYPE, $this->language['locale']);
+			setlocale(LC_CTYPE, $this->language['locale']);
 
-		$this->language['locale']		= setlocale(LC_CTYPE, 0);
-		$this->language['UPPER']		= '['.$this->language['UPPER_P'].']';
-		$this->language['UPPERNUM']		= '[0-9'.$this->language['UPPER_P'].']';
-		$this->language['LOWER']		= '['.$this->language['LOWER_P'].']';
-		$this->language['ALPHA']		= '['.$this->language['ALPHA_P'].']';
-		$this->language['ALPHANUM']		= '[0-9'.$this->language['ALPHA_P'].']';
-		$this->language['ALPHANUM_P']	= '0-9'.$this->language['ALPHA_P'];
-
-		// set charset
-		#$this->charset = $this->language['charset'];
+			$this->language['locale'] = setlocale(LC_CTYPE, 0);
+		}
+		if ($set_translation)
+		{
+			$this->set_translation($lang);
+		}
+		return $old_lang;
 	}
 
 	// TODO: refactor / normalize # better load_message_set() ?
 	function load_translation($lang)
 	{
-		if (!isset($this->translations[$lang]) && isset($lang))
+		if ($lang && !isset($this->translations[$lang]))
 		{
-			$wacko_all_resource	= array();
-			$wacko_translation	= array();
-			$ap_translation		= array();
-			$theme_translation	= array();
-
 			// wacko.xy.php $wacko_translation[]
+			$wacko_translation = [];
 			$lang_file = 'lang/wacko.'.$lang.'.php';
-
 			if (@file_exists($lang_file))
 			{
 				include($lang_file);
 			}
 
 			// wacko.all.php $wacko_all_resource[]
-			$lang_file = 'lang/wacko.all.php';
-
-			if (!$this->translations['all'])
+			if (!isset($this->translations['all']))
 			{
+				$wacko_all_resource = [];
+				$lang_file = 'lang/wacko.all.php';
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
@@ -476,44 +468,45 @@ class Wacko
 				$this->translations['all'] = & $wacko_all_resource;
 			}
 
-			$wacko_resource = array_merge($wacko_translation, $this->translations['all']);
-
-			if (isset($this->config['ap_mode']) && $this->config['ap_mode'] === true)
+			$ap_translation = [];
+			$theme_translation = [];
+			$theme_translation0 = [];
+			if (@$this->config['ap_mode'])
 			{
 				// ap.xy.php $ap_translation[]
 				$lang_file = 'admin/lang/ap.'.$lang.'.php';
-
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
 				}
-
-				$wacko_resource = array_merge((array)$wacko_resource, (array)$ap_translation);
 			}
 			else
 			{
+				// STS: only FIRST theme's language loaded.... need to fix for multi-themed sites w/ nonempty theme lang files
 				// theme lang files $theme_translation[]
 				$lang_file = $this->config['theme_path'].'/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
-
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
 				}
-
-				$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
+				$theme_translation0 = $theme_translation;
 
 				// wacko.all theme
+				$theme_translation = [];
 				$lang_file = $this->config['theme_path'].'/'.$this->config['theme'].'/lang/wacko.all.php';
-
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
 				}
-
-				$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 			}
 
-			$this->translations[$lang] = $wacko_resource;
+			$this->translations[$lang] = array_merge(
+				$wacko_translation,
+				$this->translations['all'],
+				$ap_translation,
+				$theme_translation0,
+				$theme_translation);
+
 			$this->load_lang($lang);
 		}
 	}
@@ -524,50 +517,34 @@ class Wacko
 	*/
 	function load_lang($lang)
 	{
-		$wacko_language = '';
-
-		if (!isset($this->languages[$lang]))
+		if ($lang && !isset($this->languages[$lang]))
 		{
-			$lang_file = 'lang/lang.'.$lang.'.php';
-
+			$lang_file = 'lang/lang.' . $lang . '.php';
+			$wacko_language = [];
 			if (@file_exists($lang_file))
 			{
 				include($lang_file);
 			}
+			else
+			{
+				die("language file $lang_file not found");
+			}
+
+			$wacko_language['LANG']			= $lang;
+			$wacko_language['UPPER']		= '[' . $wacko_language['UPPER_P'] . ']';
+			$wacko_language['UPPERNUM']		= '[0-9' . $wacko_language['UPPER_P'] . ']';
+			$wacko_language['LOWER']		= '[' . $wacko_language['LOWER_P'] . ']';
+			$wacko_language['ALPHA']		= '[' . $wacko_language['ALPHA_P'] . ']';
+			$wacko_language['ALPHANUM_P']	= '0-9' . $wacko_language['ALPHA_P'];
+			$wacko_language['ALPHANUM']		= '[' . $wacko_language['ALPHANUM_P'] . ']';
 
 			$this->languages[$lang] = $wacko_language;
-			$ue = array();
-			$ue = @array_flip($wacko_language['unicode_entities']);
 
-			if (!isset($ue))
+			if (($ue = @array_flip($wacko_language['unicode_entities'])))
 			{
-				$ue = array();
+				$this->unicode_entities = array_merge($this->unicode_entities, $ue);
 			}
-
-			$this->unicode_entities = array_merge($this->unicode_entities, (array)$ue);
 			unset($this->unicode_entities[0]);
-		}
-	}
-
-	function load_all_languages()
-	{
-		if (!$this->config['multilanguage']) // STS: refact!
-		{
-			return;
-		}
-
-		if ($this->config['multilanguage']) // TEST: do we need to load all languages if multilanguage is disabled?
-		{
-			$langs = $this->available_languages();
-
-			foreach ($langs as $lang)
-			{
-				$this->load_lang($lang);
-			}
-		}
-		else
-		{
-			$this->load_lang($this->config['language']);
 		}
 	}
 
@@ -658,27 +635,25 @@ class Wacko
 
 	function get_translation($name, $lang = '', $dounicode = true)
 	{
-		if (!$this->config['multilanguage'])
+		if ($this->config['multilanguage'])
 		{
-			return $this->resource[$name];
-		}
-
-		if (!$lang && (isset($this->user_lang) && $this->user_lang != $this->page_lang))
-		{
-			$lang = $this->user_lang;
-		}
-
-		if ($lang != '')
-		{
-			$this->load_translation($lang);
-
-			if (isset($this->translations[$lang][$name]))
+			if (!$lang && (isset($this->user_lang) && $this->user_lang != $this->page_lang))
 			{
-				return (is_array($this->translations[$lang][$name]))
-					? $this->translations[$lang][$name]
-					: ($dounicode
-						? $this->do_unicode_entities($this->translations[$lang][$name], $lang)
-						: $this->translations[$lang][$name]);
+				$lang = $this->user_lang;
+			}
+
+			if ($lang)
+			{
+				$this->load_translation($lang);
+
+				if (($text = @$this->translations[$lang][$name]))
+				{
+					if (!is_array($text) && $dounicode)
+					{
+						$text = $this->do_unicode_entities($text, $lang)
+					}
+					return $text;
+				}
 			}
 		}
 
@@ -686,6 +661,8 @@ class Wacko
 		{
 			return $this->resource[$name];
 		}
+
+		return '???' . $name . '???';
 	}
 
 	function format_translation($name, $lang = '')
@@ -735,23 +712,14 @@ class Wacko
 
 	function get_charset($lang = '')
 	{
-		if ($lang == '')
+		if (!$lang)
 		{
 			$lang = $this->determine_lang();
 		}
 
-		$this->load_translation($lang);
+		$this->load_lang($lang);
 
-		if (isset($this->languages[$lang]['charset']))
-		{
-			#$this->charset	= $this->languages[$lang]['charset'];
-			#$this->debug_print_r($this->languages[$lang]['charset']);
-			return $this->languages[$lang]['charset'];
-		}
-		else
-		{
-			null;
-		}
+		return @$this->languages[$lang]['charset'];
 	}
 
 	/**
@@ -1809,7 +1777,7 @@ class Wacko
 	// $supress_tls			- don't change all http links to https links in the message body
 	function send_mail($email_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = '', $supress_tls = false)
 	{
-		if ($this->config['enable_email'] == false || ( !$email_to || !$subject || !$body) )
+		if (!$this->config['enable_email'] || ( !$email_to || !$subject || !$body) )
 		{
 			return;
 		}
@@ -2427,12 +2395,10 @@ class Wacko
 			#$this->add_user_page($user_name, $user_lang);
 
 			// send email
-			if ($this->config['enable_email'] == true)
+			if ($this->config['enable_email'])
 			{
 				/* TODO: set user language for email encoding */
-				$this->load_translation($user_lang);
-				$this->set_translation ($user_lang);
-				$this->set_language ($user_lang);
+				$save = $this->set_language($user_lang, true);
 
 				$subject	=	$this->get_translation('RegistrationApproved');
 				$body		=	str_replace('%1', $this->config['site_name'],
@@ -2441,32 +2407,26 @@ class Wacko
 
 				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
 
-				// reset user language
-				$this->load_translation($this->config['language']);
-				$this->set_translation($this->config['language']);
-				$this->set_language($this->config['language']);
+				$this->set_language($save, true);
 			}
 		}
 	}
 
 	function send_user_email($user_name, $email, $subject, $body, $user_lang)
 	{
-		$this->load_translation($user_lang);
-		$this->set_translation ($user_lang);
-		$this->set_language ($user_lang);
+		$save = $this->set_language($user_lang, true);
 
-		$charset	=	$this->get_charset($user_lang);
 		$subject	=	'['.$this->config['site_name'].'] '.$subject;
 		$body		=	$this->get_translation('EmailHello').' '.$user_name.",\n\n".
-
 						$body."\n\n".
-
 						$this->get_translation('EmailDoNotReply')."\n\n".
 						$this->get_translation('EmailGoodbye')."\n".
 						$this->config['site_name']."\n".
 						$this->config['base_url'];
 
-		$this->send_mail($email, $subject, $body, null, $charset);
+		$this->send_mail($email, $subject, $body, null, $this->get_charset($user_lang));
+
+		$this->set_language($save, true);
 	}
 
 	function notify_moderator($page_id, $tag, $title, $user_name)
@@ -2493,12 +2453,10 @@ class Wacko
 							"WHERE u.user_id = '".$moderator_id."' ".
 							"LIMIT 1");
 
-						$this->load_translation($user['user_lang']);
-						$this->set_translation ($user['user_lang']);
-						$this->set_language ($user['user_lang']);
-
-						if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['send_watchmail'] == true)
+						if ($this->config['enable_email'] && $this->config['enable_email_notification'] && $user['enabled'] && !$user['email_confirm'] && $user['send_watchmail'])
 						{
+							$save = $this->set_language($user['user_lang'], true);
+
 							$subject	=	$this->get_translation('NewPageCreatedSubj')." '$title'";
 							$body		=	$this->get_translation('EmailModerator').".\n\n".
 											str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
@@ -2506,12 +2464,12 @@ class Wacko
 											$this->href('', $tag)."\n\n";
 
 							$this->send_user_email($user['user_name'], $user['email'], $subject, $body, $user['user_lang']);
+
 							$this->set_watch($moderator_id, $page_id);
+							$this->set_language($save, true);
 						}
 					}
 				}
-
-				unset($list, $moderators, $moderator, $moderator_id);
 			}
 		}
 	}
@@ -2612,25 +2570,23 @@ class Wacko
 
 					if ($this->has_access('read', $object_id, $watcher['user_name']))
 					{
-						if ($this->config['enable_email'] == true
-							&& $this->config['enable_email_notification'] == true
-							&& $watcher['enabled'] == true
-							&& $watcher['email_confirm'] == ''
-							&& $watcher['send_watchmail'] == true)
+						if ($this->config['enable_email']
+								&& $this->config['enable_email_notification']
+								&& $watcher['enabled']
+								&& !$watcher['email_confirm']
+								&& $watcher['send_watchmail'])
 						{
 							$lang = $watcher['user_lang'];
-							$this->load_translation($lang);
-							$this->set_translation ($lang);
-							$this->set_language ($lang);
+							$save = $this->set_language($lang, true);
 
 							// Email subject
 							if (!$comment_on_id && $is_revision)
 							{
-								$subject	= $this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
+								$subject	= $this->get_translation('WatchedPageChanged')."'".$tag."'";
 							}
 							else if ($comment_on_id)
 							{
-								$subject	= $this->get_translation('CommentForWatchedPage', $lang)."'".$page_title."'";
+								$subject	= $this->get_translation('CommentForWatchedPage')."'".$page_title."'";
 							}
 
 							// Email body
@@ -2639,7 +2595,7 @@ class Wacko
 									if (!$comment_on_id && $is_revision)
 									{
 										$body .=
-												$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
+												$this->get_translation('SomeoneChangedThisPage')."\n".
 												$this->href('', $tag)."\n\n".
 												(isset($title) ? $title : $tag)."\n".
 												"======================================================================\n\n".
@@ -2648,13 +2604,13 @@ class Wacko
 
 										if ($watcher['notify_page'] == 2)
 										{
-											$body .= $this->get_translation('FurtherPending', $lang)."\n\n";
+											$body .= $this->get_translation('FurtherPending')."\n\n";
 										}
 									}
 									else if ($comment_on_id)
 									{
 										$body .=
-												$this->get_translation('SomeoneCommented', $lang)."\n".
+												$this->get_translation('SomeoneCommented')."\n".
 												$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
 												(isset($title) ? $title : $tag)."\n".
 												"----------------------------------------------------------------------\n\n".
@@ -2663,11 +2619,13 @@ class Wacko
 
 										if ($watcher['notify_comment'] == 2)
 										{
-											$body .= $this->get_translation('FurtherPending', $lang)."\n\n";
+											$body .= $this->get_translation('FurtherPending')."\n\n";
 										}
 									}
 
 							$this->send_user_email($watcher['user_name'], $watcher['email'], $subject, $body, $lang);
+
+							$this->set_language($save, true);
 						}
 						else
 						{
@@ -2681,10 +2639,6 @@ class Wacko
 				}
 			}// end of watchers
 		}
-
-		$this->load_translation($this->user_lang);
-		$this->set_translation($this->user_lang);
-		$this->set_language($this->user_lang);
 	}
 
 	// COOKIES
@@ -6565,23 +6519,13 @@ class Wacko
 
 		// user settings
 		$this->user_lang = $this->get_user_language();
+		$this->set_language($this->user_lang, true);
 
-		if (is_array($user) && isset($user['theme']))
+		if (isset($user['theme']))
 		{
 			$this->config['theme']		= $user['theme'];
 			$this->config['theme_url']	= $this->config['base_url'].$this->config['theme_path'].'/'.$this->config['theme'].'/';
 		}
-
-		if (!$this->config['multilanguage'])
-		{
-			$this->set_language($this->config['language']);
-		}
-
-		// registering translations
-		$this->load_all_languages();
-		$this->load_translation($this->user_lang);
-		$this->set_translation($this->user_lang);
-		$this->set_language($this->user_lang);
 
 		// SEO
 		foreach ($this->search_engines as $engine)
@@ -7383,7 +7327,7 @@ class Wacko
 	// config settings; returned error codes (or a sum of):
 	//		1 = password contains login
 	//		2 = not enough chars
-	//		5 = too weak (chars classes requirement)
+	//		4 = too weak (chars classes requirement)
 	//		0 (false) = good password
 	function password_complexity($login, $pwd)
 	{

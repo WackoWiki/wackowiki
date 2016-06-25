@@ -157,10 +157,12 @@ if ($this->is_owner() || $this->is_admin())
 
 						$this->set_page_owner($this->page['page_id'], $new_owner_id);
 
-						if (   $this->config['enable_email'] == true
-							&& $this->config['enable_email_notification'] == true
-							&& $user['email_confirm'] == '')
+						if (   $this->config['enable_email']
+							&& $this->config['enable_email_notification']
+							&& !$user['email_confirm'])
 						{
+							$save = $this->set_language($user['user_lang'], true);
+
 							$subject	= $this->get_translation('NewPageOwnership');
 							$body		.= str_replace('%2', $this->config['site_name'],
 										   str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
@@ -168,6 +170,7 @@ if ($this->is_owner() || $this->is_admin())
 							$body		.= $this->get_translation('PageOwnershipInfo')."\n";
 
 							$this->send_user_email($new_owner, $user['email'], $subject, $body, $user['user_lang']);
+							$this->set_language($save, true);
 						}
 
 						// log event

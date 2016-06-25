@@ -58,7 +58,7 @@ else
 	$feed->set_cache_location('./'.$this->config['cache_dir'].'feeds');
 
 	// Make sure that we're sending the right character set headers, etc.
-	$feed->set_output_encoding($this->languages[$this->config['language']]['charset']);
+	$feed->set_output_encoding($this->get_charset($this->config['language']));
 	$feed->strip_comments(true);
 
 

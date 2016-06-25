@@ -294,9 +294,6 @@ class WackoFormatter
 			"~([^ \t\n]+)|".
 			"<!--escaped-->.*?<!--escaped-->".
 			")/sm";
-
-		// charset
-		$this->charset = $object->language['charset'];
 	}
 
 	function indent_close()
