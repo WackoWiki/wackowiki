@@ -2811,27 +2811,13 @@ class Wacko
 	* (actually just stores the session-value 'message')
 	*
 	* @param string $message
+	* @param string $type
 	*/
 	function set_message($message, $type = 'info')
 	{
-		if ($message !== '')
+		if ($message)
 		{
-			$_SESSION['message'][] = array($message, $type);
-		}
-	}
-
-	/**
-	* Retrieve and clear the session-value 'message'
-	*
-	* @return string Session message
-	*/
-	function get_message()
-	{
-		if (isset($_SESSION['message']))
-		{
-			$message = $_SESSION['message'];
-			unset($_SESSION['message']);
-			return $message;
+			$_SESSION['messages'][] = [$message, $type];
 		}
 	}
 
@@ -2839,7 +2825,8 @@ class Wacko
 	function output_messages()
 	{
 		// get system message
-		if(!empty($this->config['system_message']) && !(isset($this->config['ap_mode']) && $this->config['ap_mode'] === true))
+		// STS: seems like should be removed
+		if (!empty($this->config['system_message']) && !(isset($this->config['ap_mode']) && $this->config['ap_mode'] === true))
 		{
 			$type		= $this->config['system_message_type']; // TODO: set type also via backend and store it [where?]
 			$message	= $this->config['system_message'];
@@ -2855,30 +2842,27 @@ class Wacko
 			#echo '</div>';
 		}
 
-		// get event message
-		if ($messages = $this->get_message())
+		if (isset($_SESSION['messages']))
 		{
-			if (is_array($messages))
-			{
-				// TODO: filter and sanitize ..
-				foreach ($messages as $message)
-				{
-					list($_message, $_type) = $message;
+			$messages = $_SESSION['messages'];
+			unset($_SESSION['messages']);
 
-					// here we show messages
-					$this->show_message($_message, $_type);
-				}
+			// TODO: maybe filter?
+			foreach ($messages as $message)
+			{
+				list($_message, $_type) = $message;
+				$this->show_message($_message, $_type);
 			}
 		}
 	}
 
 	function show_message($message, $type = 'info', $show = true)
 	{
-		if (!empty($message))
+		if ($message)
 		{
-			#$message = htmlspecialchars($message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-
-			$info_box = '<div class="'.$type.'">'.$message."</div>\n";
+			$info_box = '<div class="' . $type . '">' .
+						htmlspecialchars($message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
+						"</div>\n";
 
 			if ($show)
 			{
@@ -3873,13 +3857,13 @@ class Wacko
 				// numerated wiki-links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $page_link != $text && $title != $this->get_translation('CreatePage'))
 				{
-					if (!($refnum = (isset($this->numerate_links[$page_link]) ? $this->numerate_links[$page_link] : '')))
+					$refnum = &$this->numerate_links[$page_link];
+					if (!isset($refnum))
 					{
-						$refnum = '[link'.((string)count($this->numerate_links) + 1).']';
-						$this->numerate_links[$page_link] = $refnum;
+						$refnum = '[link' . count($this->numerate_links) . ']';
 					}
 
-					$res .= '<sup class="refnum">'.$refnum.'</sup>';
+					$res .= '<sup class="refnum">' . $refnum . '</sup>';
 				}
 
 				return $res;
@@ -4967,12 +4951,12 @@ class Wacko
 	// insert user data into the session array
 	function set_user($user, $ip = 1)
 	{
-		$_SESSION[$this->config['cookie_hash'].'_'.'user'] = $user;
+		$_SESSION[$this->config['cookie_hash'] . '_' . 'user'] = $user;
 
 		// define current IP for foregoing checks
 		if ($ip)
 		{
-			$this->set_user_setting('ip', $this->get_user_ip() );
+			$this->set_user_setting('ip', $this->get_user_ip());
 		}
 	}
 
@@ -5160,10 +5144,10 @@ class Wacko
 	{
 		$this->delete_cookie('sid', true, false);
 
-		unset($_SESSION[$this->config['cookie_hash'].'_'.'user']);
+		unset($_SESSION[$this->config['cookie_hash'] . '_' . 'user']);
 		session_destroy(); // destroy session data in storage
 
-		session_id(hash('sha1', $this->timer.$this->config['system_seed'].$session_expire.$user['user_name'].$user['password']));
+		session_id(hash('sha1', $this->timer . $this->config['system_seed'] . $session_expire . $user['user_name'] . $user['password']));
 		return session_start();
 	}
 

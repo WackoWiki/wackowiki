@@ -26,8 +26,8 @@ if ($this->is_admin())
 			{
 				// tz offset
 				$time	= $this->get_time_tz(strtotime($page['modified']));
-				$day	= date('Y-m-d', $time);
-				$time	= date('H:i:s', $time);
+				$day	= date($this->config['date_format'], $time);
+				$time	= date($this->config['time_format_seconds'], $time);
 
 				// day header
 				if ($day != $curday)
@@ -37,7 +37,7 @@ if ($this->is_admin())
 						echo "</ul>\n<br /></li>\n";
 					}
 
-					echo "<li><strong>".date($this->config['date_format'], strtotime($day)).":</strong>\n<ul>\n";
+					echo '<li><strong>' . $day . ":</strong>\n<ul>\n";
 					$curday = $day;
 				}
 
@@ -55,7 +55,7 @@ if ($this->is_admin())
 				// print entry
 				echo '<li class="lined">' .
 						'<span style="text-align:left">' .
-							'<small>' . date($this->config['time_format_seconds'], strtotime($time)) . '</small>  &mdash; ' .
+							'<small>' . $time . '</small>  &mdash; ' .
 							// $this->compose_link_to_page($page['tag'], 'revisions', '', 0) .
 							'<img src="' . $this->config['theme_url'] . 'icon/spacer.png' . '" title="' .
 									$this->get_translation('CommentDeleted') . '" alt="[deleted]" class="btn-delete"/> ' .
