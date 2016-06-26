@@ -435,7 +435,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 	echo	'<li class="m-categories"><a href="'.$this->href('categories').'">'.$icon.$this->get_translation('SettingsCategories')."</a></li>\n".
 			'<li class="m-upload"><a href="'.$this->href('upload').'">'.$icon.$this->get_translation('SettingsUpload')."</a></li>\n".
 			'<li class="m-referrers"><a href="'.$this->href('referrers').'">'.$icon.$this->get_translation('SettingsReferrers')."</a></li>\n".
-			'<li class="'.($this->is_watched === true ? 'watch-off' : 'watch-on').'"><a href="'.$this->href('watch').'">'.$icon.($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch'))."</a></li>\n".
+			'<li class="'.($this->is_watched? 'watch-off' : 'watch-on').'"><a href="'.$this->href('watch').'">'.$icon.($this->is_watched? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch'))."</a></li>\n".
 			'<li class="m-print"><a href="'.$this->href('print').'">'.$icon.$this->get_translation('SettingsPrint')."</a></li>\n".
 	#		'<li class="m-word"><a href="'.$this->href('wordprocessor').'">'.$icon.$this->get_translation('SettingsWordprocessor')."</a></li>\n".
 	#		'<li class="m-latex"><a href="'.$this->href('latex').'">'.$icon.$this->get_translation('SettingsLatex')."</a></li>\n".

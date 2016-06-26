@@ -14,9 +14,10 @@ class Wacko
 	var $page;								// Requested page
 	var $tag;
 	var $supertag;
-	var $forum;
+	var $forum					= false;
 	var $categories;
-	var $is_watched;
+	var $is_watched				= false;
+	var $hide_revisions			= false;
 	var $query_time;
 	var $query_log				= array();
 	var $inter_wiki				= array();
@@ -1865,7 +1866,7 @@ class Wacko
 			$owner_id	= $user_id	= $this->get_user_id();
 			$reg		= true;
 		}
-		else if ($this->forum === true || $comment_on_id)
+		else if ($this->forum || $comment_on_id)
 		{
 			$owner_id	= 0; // GUEST
 			$reg		= false;
@@ -2016,7 +2017,7 @@ class Wacko
 					$upload_acl		= $upload_acl['list'];
 
 					// forum topic privileges
-					if ($this->forum === true)
+					if ($this->forum)
 					{
 						$write_acl		= $user_name;
 						$comment_acl	= '*';
@@ -2094,7 +2095,7 @@ class Wacko
 				else
 				{
 					// added new page
-					$this->log(4, str_replace('%1', $tag.' '.$title, $this->get_translation('LogPageCreated', $this->config['language'])));
+					$this->log(4, perc_replace($this->get_translation('LogPageCreated', $this->config['language']), $tag.' '.$title));
 				}
 
 				// TODO: move to additional function
@@ -2207,12 +2208,12 @@ class Wacko
 					if ($this->page['comment_on_id'] != 0)
 					{
 						// comment modified
-						$this->log(6, str_replace('%1', $tag.' '.$title, $this->get_translation('LogCommentEdited', $this->config['language'])));
+						$this->log(6, perc_replace($this->get_translation('LogCommentEdited', $this->config['language']), $tag.' '.$title));
 					}
 					else
 					{
 						// old page modified
-						$this->log(6, str_replace('%1', $tag.' '.$title, $this->get_translation('LogPageEdited', $this->config['language'])));
+						$this->log(6, perc_replace($this->get_translation('LogPageEdited', $this->config['language']), $tag.' '.$title));
 					}
 
 					// Since there's no revision history for comments it's pointless to do the following for them.
@@ -2409,8 +2410,7 @@ class Wacko
 				$save = $this->set_language($user_lang, true);
 
 				$subject	=	$this->get_translation('RegistrationApproved');
-				$body		=	str_replace('%1', $this->config['site_name'],
-								$this->get_translation('UserApprovedInfo'))."\n\n".
+				$body		=	perc_replace($this->get_translation('UserApprovedInfo'), $this->config['site_name'])."\n\n".
 								$this->get_translation('EmailRegisteredLogin')."\n\n";
 
 				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
@@ -2467,7 +2467,7 @@ class Wacko
 
 							$subject	=	$this->get_translation('NewPageCreatedSubj')." '$title'";
 							$body		=	$this->get_translation('EmailModerator').".\n\n".
-											str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
+											perc_replace($this->get_translation('NewPageCreatedBody'), ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ))."\n".
 											"'$title'\n".
 											$this->href('', $tag)."\n\n";
 
@@ -4567,7 +4567,7 @@ class Wacko
 
 			if (!@is_readable($class_file))
 			{
-				die( str_replace('%1', $class_name, $this->get_translation('CantLoadClass')).' '. $class_file. ' ('.$class_dir.')' );
+				die( perc_replace($this->get_translation('CantLoadClass'), $class_name).' '. $class_file. ' ('.$class_dir.')' );
 			}
 			else
 			{
@@ -4622,11 +4622,12 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
-		$text = $this->include_buffered($this->config['formatter_path'].'/'.$formatter.'.php', '<em>'.str_replace('%1', $formatter, $this->get_translation('FormatterNotFound')).'</em>', compact('text', 'options'));
+		$err = '<em>'.perc_replace($this->get_translation('FormatterNotFound'), $formatter).'</em>';
+		$text = $this->include_buffered($this->config['formatter_path'].'/'.$formatter.'.php', $err, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
-			$text = $this->include_buffered($this->config['formatter_path'].'/typografica.php', '<em>'.str_replace('%1', $formatter, $this->get_translation('FormatterNotFound')).'</em>', compact('text'));
+			$text = $this->include_buffered($this->config['formatter_path'].'/typografica.php', $err, compact('text'));
 		}
 
 		return $text;
@@ -6120,8 +6121,7 @@ class Wacko
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."menu ".
 				"WHERE user_id = '".$user['user_id']."' ".
-					"AND page_id = '".$this->page['page_id']."' ".
-				"LIMIT 1");
+					"AND page_id = '".$this->page['page_id']."'");
 			if (!$menu_formatted)
 			{
 				$this->set_menu(MENU_DEFAULT);
@@ -6662,34 +6662,20 @@ class Wacko
 		}
 
 		// check page watching
-		if ($user && $this->page)
+		if ($user && $this->page && $this->is_watched($user['user_id'], $this->page['page_id']))
 		{
-			if ($this->is_watched($user['user_id'], $this->page['page_id']))
-			{
-				$this->is_watched = true;
-			}
+			$this->is_watched = true;
 		}
 
 		// check revision hideing (1 - guests, 2 - registered users)
-		if ( $this->page && ( $this->config['hide_revisions'] === true || ($this->config['hide_revisions'] == 1 && !$this->get_user()) || ($this->config['hide_revisions'] == 2 && !$this->is_owner())  ) )
-		{
-			$this->hide_revisions = true;
-		}
-		else
-		{
-			$this->hide_revisions = false;
-		}
+		$this->hide_revisions = ($this->page && (
+			$this->config['hide_revisions'] === true ||
+			($this->config['hide_revisions'] == 1 && !$this->get_user()) ||
+			($this->config['hide_revisions'] == 2 && !$this->is_owner())));
 
 		// forum page
-		if (preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->tag) ||
-		($this->page['comment_on_id'] ? preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->get_page_tag($this->page['comment_on_id'])) : ''))
-		{
-			$this->forum = true;
-		}
-		else
-		{
-			$this->forum = false;
-		}
+		$this->forum = !!(preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->tag) ||
+			($this->page['comment_on_id'] ? preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->get_page_tag($this->page['comment_on_id'])) : ''));
 
 		// display page contents
 		if (preg_match('/(\.xml)$/', $this->method))
@@ -7467,8 +7453,7 @@ class Wacko
 
 		return '<br /><small>'.
 			$this->get_translation('PwdCplxDesc1').
-			str_replace('%1', $this->config['pwd_min_chars'],
-				$this->get_translation('PwdCplxDesc2')).
+			perc_replace($this->get_translation('PwdCplxDesc2'), $this->config['pwd_min_chars']).
 			($this->config['pwd_unlike_login'] > 0
 				? ', '.$this->get_translation('PwdCplxDesc3')
 				: '').
