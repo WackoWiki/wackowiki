@@ -20,7 +20,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 	// does requested usergroup exists?
 	if (false == $usergroup = $this->load_usergroup($_usergroup))
 	{
-		$this->show_message( str_replace('%2', htmlspecialchars($_usergroup, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))) );
+		$this->show_message(perc_replace($this->get_translation('GroupsNotFound'),
+			$this->supertag,
+			htmlspecialchars($_usergroup, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)));
 	}
 	else
 	{

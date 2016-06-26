@@ -18,8 +18,8 @@ if (($profile = @$_REQUEST['profile']))
 	// does requested user exists?
 	if (!($user = $this->load_user($profile)))
 	{
-		$this->show_message( str_replace('%2', htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET),
-				str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))) );
+		$this->show_message(perc_replace($this->get_translation('UsersNotFound'),
+				$this->supertag, htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)));
 	}
 	else if (!$user['enabled'])
 	{
@@ -75,12 +75,12 @@ if (($profile = @$_REQUEST['profile']))
 			// message is too long
 			else if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
 			{
-				$error = str_replace('%1', strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE, $this->get_translation('UsersPMOversized'));
+				$error = perc_replace($this->get_translation('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
 			}
 			// personal messages flood control
 			else if (isset($_SESSION['intercom_delay']) && time() - $_SESSION['intercom_delay'] < $this->config['intercom_delay'])
 			{
-				$error = str_replace('%1', $this->config['intercom_delay'], $this->get_translation('UsersPMFlooded'));
+				$error = perc_replace($this->get_translation('UsersPMFlooded'), $this->config['intercom_delay']);
 			}
 
 			// proceed if no error encountered
@@ -102,11 +102,12 @@ if (($profile = @$_REQUEST['profile']))
 				{
 					$subject = $prefix1 .  $subject;
 				}
-				$body		= str_replace('%1', $this->get_user_name(), $this->get_translation('UsersPMBody'));
-				$body		= str_replace('%2', rtrim($this->config['base_url'], '/'), $body);
-				$body		= str_replace('%3', $this->href('', $this->tag, $profile.'&ref='.rawurlencode(base64_encode($msg_id.'@@'.$subject)).'#contacts'), $body);
-				$body		= str_replace('%4', $this->config['abuse_email'], $body);
-				$body		= str_replace('%5', $_POST['mail_body'], $body);
+				$body = perc_replace($this->get_translation('UsersPMBody'),
+						$this->get_user_name(),
+						rtrim($this->config['base_url'], '/'),
+						$this->href('', $this->tag, $profile.'&ref='.rawurlencode(base64_encode($msg_id.'@@'.$subject)).'#contacts'),
+						$this->config['abuse_email'],
+						$_POST['mail_body']);
 
 				// compose headers
 				$headers	= [];
@@ -122,7 +123,7 @@ if (($profile = @$_REQUEST['profile']))
 				// send email
 				$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
 				$this->set_message($this->get_translation('UsersPMSent'));
-				$this->log(4, str_replace('%2', $user['user_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('LogPMSent', $this->config['language']))));
+				$this->log(4, perc_replace($this->get_translation('LogPMSent', $this->config['language']), $this->get_user_name(), $user['user_name']));
 
 				$_SESSION['intercom_delay']	= time();
 				$_POST['mail_body']			= '';

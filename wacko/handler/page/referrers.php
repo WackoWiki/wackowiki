@@ -305,10 +305,7 @@ if ($user = $this->get_user())
 		// by time
 		else if ($bytime && list ($referrers, $pagination) = load_referrers($this, $query, (int)$max, $parameters))
 		{
-			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-			// pagination
-			echo $show_pagination;
+			$this->print_pagination($pagination);
 
 			echo '<ul class="ul_list">'."\n";
 
@@ -316,7 +313,7 @@ if ($user = $this->get_user())
 			{
 				if (isset($referrer['page_id']))
 				{
-					if ($page['page_id'] == 0)
+					if ($referrer['page_id'] == 0)
 					{
 						$access = true; // 404er
 					}
@@ -329,10 +326,8 @@ if ($user = $this->get_user())
 						$access = true;
 					}
 
-					if ($access && ($count < $max))
+					if ($access)
 					{
-
-						$count++;
 
 						// tz offset
 						$time_tz = $this->get_time_tz( strtotime($referrer['referrer_time']) );
@@ -404,8 +399,7 @@ if ($user = $this->get_user())
 
 			echo "</ul>\n";
 
-			// pagination
-			echo $show_pagination;
+			$this->print_pagination($pagination);
 		}
 		// global
 		else

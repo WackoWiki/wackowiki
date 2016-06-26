@@ -31,10 +31,10 @@ if ($this->has_access('read')
 	|| (!$this->page && $this->has_access('create'))))
 {
 	// check for reserved word
-	if ($result = $this->validate_reserved_words($this->tag))
+	if (($result = $this->validate_reserved_words($this->tag)))
 	{
 		// $this->tag is reserved word
-		$message = str_replace('%1', $result, $this->get_translation('PageReservedWord'));
+		$message = perc_replace($this->get_translation('PageReservedWord'), $result);
 		$this->set_message($message);
 		$this->redirect($this->href('new', $this->config['root_page']));
 	}
@@ -51,12 +51,11 @@ if ($this->has_access('read')
 	// TODO: add values to post in show handler
 	/* if ($this->page['latest'] == 0)
 	{
-		$message =
-		str_replace('%1', $this->href(),
-				str_replace('%2', $this->tag,
-						str_replace('%3', $this->get_time_formatted($this->page['modified']),
-								str_replace('%4', $this->user_link($this->page['user_name'], $lang = '', true, false),
-										$this->get_translation('Revision')))));
+		$message = perc_replace($this->get_translation('Revision'),
+			$this->href(),
+			$this->tag,
+			$this->get_time_formatted($this->page['modified']),
+			$this->user_link($this->page['user_name'], $lang = '', true, false));
 		$this->show_message($message, 'revisioninfo');
 	} */
 
@@ -65,7 +64,7 @@ if ($this->has_access('read')
 		$_body	= isset($_POST['body']) ? $_POST['body'] : '';
 
 		// watch page
-		if ($this->page && isset($_POST['watchpage']) && isset($_POST['noid_publication']) && ($_POST['noid_publication'] != $this->page['page_id']) && $user && $this->is_watched !== true)
+		if ($this->page && isset($_POST['watchpage']) && isset($_POST['noid_publication']) && ($_POST['noid_publication'] != $this->page['page_id']) && $user && !$this->is_watched)
 		{
 			$this->set_watch($user['user_id'], $this->page['page_id']);
 			$this->is_watched = true;
@@ -404,7 +403,7 @@ if ($this->has_access('read')
 			}
 
 			// watch a page
-			if ($this->page && $this->is_watched !== true)
+			if ($this->page && !$this->is_watched)
 			{
 				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? ' checked="checked"' : '' ).' />';
 				$output .= '<label for="watchpage">'.$this->get_translation('NotifyMe').'</label>';

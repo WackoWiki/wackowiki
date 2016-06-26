@@ -44,7 +44,7 @@ if ($this->has_access('read'))
 			header('HTTP/1.1 404 Not Found');
 		}
 
-		$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '');
+		$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  perc_replace($this->get_translation('PromptCreate'), $this->href('edit', '', '', 1)) : '');
 		$this->show_message($message, 'notice');
 	}
 	else
@@ -80,12 +80,11 @@ if ($this->has_access('read'))
 		// revision header
 		if ($this->page['latest'] == 0)
 		{
-			$message =
-				str_replace('%1', $this->href(),
-				str_replace('%2', $this->tag,
-				str_replace('%3', $this->get_time_formatted($this->page['modified']),
-				str_replace('%4', $this->user_link($this->page['user_name'], $lang = '', true, false),
-				$this->get_translation('Revision')))));
+			$message = perc_replace($this->get_translation('Revision'),
+				$this->href(),
+				$this->tag,
+				$this->get_time_formatted($this->page['modified']),
+				$this->user_link($this->page['user_name'], $lang = '', true, false));
 
 			// if this is an old revision, display ReEdit button
 			if ($this->has_access('write'))

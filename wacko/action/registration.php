@@ -51,7 +51,7 @@ if (isset($_GET['confirm']))
 		}
 
 		// log event
-		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
+		$this->log(4, perc_replace($this->get_translation('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));
 
 		unset($temp);
 
@@ -60,7 +60,7 @@ if (isset($_GET['confirm']))
 	}
 	else
 	{
-		$message = str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed'));
+		$message = perc_replace($this->get_translation('EmailNotConfirmed'), $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0));
 		$this->set_message($message, 'error');
 	}
 
@@ -114,13 +114,11 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				}
 				else if (strlen($user_name) < $this->config['username_chars_min'])
 				{
-					$error .= str_replace('%2', $this->config['username_chars_min'],
-							$this->get_translation('NameTooShort'))." ";
+					$error .= perc_replace($this->get_translation('NameTooShort'), 0, $this->config['username_chars_min'])." ";
 				}
 				else if (strlen($user_name) > $this->config['username_chars_max'])
 				{
-					$error .= str_replace('%2', $this->config['username_chars_min'],
-							$this->get_translation('NameTooLong'))." ";
+					$error .= perc_replace($this->get_translation('NameTooLong'), 0, $this->config['username_chars_max'])." ";
 				}
 				// check if valid user name (and disallow '/')
 				else if (!preg_match('/^(['.$this->language['ALPHANUM_P'].']+)$/', $user_name) || preg_match('/\//', $user_name))
@@ -128,9 +126,9 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$error .= $this->get_translation('InvalidUserName')." ";
 				}
 				// check if reserved word
-				else if($result = $this->validate_reserved_words($user_name))
+				else if (($result = $this->validate_reserved_words($user_name)))
 				{
-					$error .= str_replace('%1', $result, $this->get_translation('UserReservedWord'));
+					$error .= perc_replace($this->get_translation('UserReservedWord'), $result);
 				}
 				// if user name already exists
 				else if ($this->user_name_exists($user_name) === true)
@@ -138,7 +136,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$error .= $this->get_translation('RegistrationUserNameOwned');
 
 					// log event
-					$this->log(2, str_replace('%1', $user_name, $this->get_translation('LogUserSimiliarName', $this->config['language'])));
+					$this->log(2, perc_replace($this->get_translation('LogUserSimiliarName', $this->config['language']), $user_name));
 				}
 				// no email given
 				else if ($email == '')
@@ -209,10 +207,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					{
 						$account_status		= 1;
 						$account_enabled	= 0;
-						$waiting_approval	= str_replace('%1', $this->config['site_name'],
-													$this->get_translation('UserWaitingApproval'));
-						$requires_approval	= str_replace('%1', $this->config['site_name'],
-													$this->get_translation('UserRequiresApproval'));
+						$waiting_approval	= perc_replace($this->get_translation('UserWaitingApproval'), $this->config['site_name']);
+						$requires_approval	= perc_replace($this->get_translation('UserRequiresApproval'), $this->config['site_name']);
 					}
 					else
 					{
@@ -273,10 +269,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						$save = $this->set_language($user_lang, true);
 
 						$subject =	$this->get_translation('EmailWelcome').$this->config['site_name'];
-						$body =		str_replace('%1', $this->config['site_name'],
-									str_replace('%2', $user_name,
-									str_replace('%3', $this->href('', '', 'confirm='.$confirm),
-									$this->get_translation('EmailRegistered'))))."\n\n".
+						$body =		perc_replace($this->get_translation('EmailRegistered'),
+										$this->config['site_name'], $user_name, $this->href('', '', 'confirm='.$confirm))."\n\n".
 									$waiting_approval."\n\n".
 									$this->get_translation('EmailRegisteredIgnore')."\n\n";
 
@@ -306,7 +300,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					}
 
 					// log event
-					$this->log(4, str_replace('%2', $email, str_replace('%1', $user_name, $this->get_translation('LogUserRegistered', $this->config['language']))));
+					$this->log(4, perc_replace($this->get_translation('LogUserRegistered', $this->config['language']), $user_name, $email));
 
 					// forward
 					$this->set_message(
@@ -374,18 +368,18 @@ if (!isset($_GET['confirm']))
 		if ($this->config['disable_wikiname'] === false)
 		{
 			echo '<br /><small>'.
-			str_replace('%1', $this->config['username_chars_min'],
-			str_replace('%2', $this->config['username_chars_max'],
-			$this->get_translation('NameCamelCaseOnly'))).
+			perc_replace($this->get_translation('NameCamelCaseOnly'),
+				$this->config['username_chars_min'],
+				$this->config['username_chars_max']).
 			'</small>';
 			echo "</p>\n";
 		}
 		else
 		{
 			echo '<br /><small>'.
-			str_replace('%1', $this->config['username_chars_min'],
-			str_replace('%2', $this->config['username_chars_max'],
-			$this->get_translation('NameAlphanumOnly'))).
+			perc_replace($this->get_translation('NameAlphanumOnly'),
+				$this->config['username_chars_min'],
+				$this->config['username_chars_max']).
 			'</small>';
 			echo "</p>\n";
 		}

@@ -77,10 +77,10 @@ if ($this->has_access('read'))
 			$deleted	= array_diff($body_b, $body_a);
 
 			$output .=
-			str_replace('%1', '<a href="'.$this->href('', '', ($b != -1 ? 'revision_id='.$page_a['revision_id'] : '')).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
-			str_replace('%2', '<a href="'.$this->href('', '', ($a != -1 ? 'revision_id='.$page_b['revision_id'] : '')).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
-			str_replace('%3', $this->compose_link_to_page($this->tag, '', '', 0),
-			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div>\n";
+			perc_replace('<div class="diffinfo">'.$this->get_translation('Comparison'),
+				'<a href="'.$this->href('', '', ($b != -1 ? 'revision_id='.$page_a['revision_id'] : '')).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
+				'<a href="'.$this->href('', '', ($a != -1 ? 'revision_id='.$page_b['revision_id'] : '')).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
+				$this->compose_link_to_page($this->tag, '', '', 0)) ."</div>\n";
 
 			$output .=
 			'<!--nomail-->'.
@@ -219,10 +219,10 @@ if ($this->has_access('read'))
 			$out = $this->format($output, 'wiki', array('diff' => true));
 
 			$meta =
-			str_replace('%1', '<a href="'.$this->href('', '', 'revision_id='.$page_b['revision_id']).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
-			str_replace('%2', '<a href="'.$this->href('', '', 'revision_id='.$page_a['revision_id']).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
-			str_replace('%3', $this->compose_link_to_page($this->tag, '', '', 0),
-			'<div class="diffinfo">'.$this->get_translation('Comparison'))))."</div>\n";
+			perc_replace('<div class="diffinfo">'.$this->get_translation('Comparison'),
+			'<a href="'.$this->href('', '', 'revision_id='.$page_b['revision_id']).'">'.$this->get_time_formatted($page_b['modified']).'</a>',
+			'<a href="'.$this->href('', '', 'revision_id='.$page_a['revision_id']).'">'.$this->get_time_formatted($page_a['modified']).'</a>',
+			$this->compose_link_to_page($this->tag, '', '', 0)). "</div>\n";
 
 			$meta .=
 			'<ul class="menu">'.
