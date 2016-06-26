@@ -503,9 +503,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Enable Referrers:</strong><br />
 					<small>Allows to store and show external referrers.</small></td>
 				<td>
-					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ( $engine->config['enable_referrers'] ? ' checked="checked"' : '' );?> /><label for="enable_referrer_on">On.</label>
-					<input type="radio" id="enable_referrer_admin" name="enable_referrers" value="2"<?php echo ( $engine->config['enable_referrers'] ? ' checked="checked"' : '' );?> /><label for="enable_referrer_admin">Admin.</label>
-					<input type="radio" id="enable_referrer_off" name="enable_referrers" value="0"<?php echo ( !$engine->config['enable_referrers'] ? ' checked="checked"' : '' );?> /><label for="enable_referrer_off">Off.</label>
+					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ( $engine->config['enable_referrers'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_referrer_on">On.</label>
+					<input type="radio" id="enable_referrer_admin" name="enable_referrers" value="2"<?php echo ( $engine->config['enable_referrers'] == 2 ? ' checked="checked"' : '' );?> /><label for="enable_referrer_admin">Admin.</label>
+					<input type="radio" id="enable_referrer_off" name="enable_referrers" value="0"<?php echo ( $engine->config['enable_referrers'] == 0? ' checked="checked"' : '' );?> /><label for="enable_referrer_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
