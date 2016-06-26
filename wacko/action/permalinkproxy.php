@@ -55,13 +55,13 @@ if ( isset($page_id) )
 
 					if (isset($revision_id))
 					{
-						echo "<div class=\"revisioninfo\">".
-						str_replace('%1', $this->href(),
-						str_replace('%2', $this->tag,
-						str_replace('%3', $this->get_time_formatted($_page['modified']),
-						str_replace('%4', $this->user_link($_page['user_name'], $lang = '', true, false),
-						$this->get_translation('Revision')))));
-						echo "</div>";
+						echo '<div class="revisioninfo">'.
+							perc_replace($this->get_translation('Revision'),
+								$this->href(),
+								$this->tag,
+								$this->get_time_formatted($_page['modified']),
+								$this->user_link($_page['user_name'], '', true, false)).
+							'</div>';
 					}
 
 					echo "<div class=\"\">".$this->action('include', array('page' => '/'.$page_tag, 'notoc' => 0, 'nomark' => 0, 'revision_id' => $revision_id), 1)."</div>\n";

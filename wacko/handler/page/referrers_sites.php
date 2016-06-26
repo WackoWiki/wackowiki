@@ -23,8 +23,10 @@ if ($this->page['comment_on_id'])
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
 }
 
+$global = isset($_GET['global']);
+
 // navigation
-if (isset($_GET['global']))
+if ($global)
 {
 	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersGlobal')."</h3>";
 	echo '<ul class="menu">
@@ -41,57 +43,56 @@ else
 		</ul><br /><br />\n";
 }
 
-if ($user = $this->get_user())
+if ($this->get_user())
 {
-	if ($global = isset($_GET['global']))
+	if ($global)
 	{
-		$title		= str_replace('%1', $this->href('referrers', '', 'global=1'), $this->get_translation('DomainsSitesPagesGlobal'));
+		$title		= perc_replace($this->get_translation('DomainsSitesPagesGlobal'), $this->href('referrers', '', 'global=1'));
 		$referrers	= $this->load_referrers();
 	}
 	else
 	{
-		$title = str_replace('%1', $this->compose_link_to_page($this->tag),
-		str_replace('%2',
-		($this->config['referrers_purge_time'] ?
-		($this->config['referrers_purge_time'] == 1 ?
-		$this->get_translation('Last24Hours') :
-		str_replace('%1', $this->config['referrers_purge_time'],
-		$this->get_translation('LastDays'))): ''),
-		str_replace('%3', $this->href('referrers'),$this->get_translation('DomainsSitesPages'))));
-
+		$title = perc_replace($this->get_translation('DomainsSitesPages'),
+			$this->compose_link_to_page($this->tag),
+			(($i = $this->config['referrers_purge_time']) == 0? '' :
+				($i == 1? $this->get_translation('Last24Hours') :
+				perc_replace($this->get_translation('LastDays'), $i))),
+			$this->href('referrers'));
 		$referrers = $this->load_referrers($this->page['page_id']);
 	}
 
-	echo "<strong>".$title."</strong><br /><br />\n";
+	echo "<strong>" . $title . "</strong><br /><br />\n";
 
 	if ($referrers)
 	{
-		for ($a = 0; $a < count($referrers); $a++)
+		$referrer_sites = [];
+		$unknown = 'unknown';
+		foreach ($referrers as $ref)
 		{
-			$temp_parse_url = parse_url($referrers[$a]['referrer']);
-			$temp_parse_url = ($temp_parse_url['host'] != '') ? strtolower(preg_replace('/^www\./Ui', '', $temp_parse_url['host'])) : 'unknown';
+			$url = parse_url($ref['referrer']);
+			$url = $url['host']? strtolower(preg_replace('/^www\./Ui', '', $url['host'])) : $unknown;
 
-			if (isset($referrer_sites[$temp_parse_url]))
+			if (isset($referrer_sites[$url]))
 			{
-				$referrer_sites[$temp_parse_url] += $referrers[$a]['num'];
+				$referrer_sites[$url] += $ref['num'];
 			}
 			else
 			{
-				$referrer_sites[$temp_parse_url] = $referrers[$a]['num'];
+				$referrer_sites[$url] = $ref['num'];
 			}
 		}
 
 		array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
-		reset($referrer_sites);
 
 		echo '<ul class="ul_list">'."\n";
 
 		foreach ($referrer_sites as $site => $site_count)
 		{
 			echo '<li class="lined">';
-			echo '<span class="list_count">'.$site_count.'</span>&nbsp;&nbsp;&nbsp;&nbsp;'.
-				(($site != 'unknown')
-					? '<a href="http://'.htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" rel="nofollow noreferrer">'.htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>'
+			echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;'.
+				(($site !== $unknown)
+					? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">'.
+						htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>'
 					: $site
 				);
 			echo "</li>\n";

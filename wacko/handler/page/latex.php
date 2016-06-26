@@ -19,7 +19,7 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		echo str_replace('%1',$this->href('edit'),$this->get_translation('DoesNotExists'));
+		echo perc_replace($this->get_translation('DoesNotExists'), $this->href('edit'));
 	}
 	else
 	{
@@ -29,13 +29,11 @@ if ($this->has_access('read'))
 			echo '<div class="comment-info">'.$this->get_translation('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), "", "", 0).", ".$this->get_translation('PostedBy')." ".($this->is_wiki_name($this->page['user_name']) ? $this->link($this->page['user_name']) : $this->page['user_name'])." ".$this->get_translation('At')." ".$this->page['modified']."</div>";
 		}
 
-		if ($this->page['latest'] == 0)
+		if (!$this->page['latest'])
 		{
 			echo '<div class="revisioninfo">'.
-			str_replace('%1',$this->href(),
-			str_replace('%2',$this->tag,
-			str_replace('%3',$this->page['modified'],
-			$this->get_translation('Revision')))).'.</div>';
+				perc_replace($this->get_translation('Revision'), $this->href(), $this->tag, $this->page['modified']).
+				'</div>';
 		}
 
 		// display page

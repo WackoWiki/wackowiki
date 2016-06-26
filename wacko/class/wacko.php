@@ -4467,7 +4467,7 @@ class Wacko
 	* Loads all referrers to this page from DB
 	* @param int $page_id
 	* @param int $backdays
-	* @return array Array of (referer, cnt)
+	* @return array Array of (referer, num)
 	*/
 	function load_referrers($page_id = null)
 	{

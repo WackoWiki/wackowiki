@@ -37,14 +37,14 @@ if (isset($_GET['confirm']))
 		$this->show_message($this->get_translation('EmailConfirmed'));
 
 		// log event
-		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
+		$this->log(4, perc_replace($this->get_translation('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));
 
 		// TODO: reset user (session data)
 		// $this->set_user($this->load_user(0, $user['user_id'], 0, true), 1);
 	}
 	else
 	{
-		$this->show_message( str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed')) );
+		$this->show_message(perc_replace($this->get_translation('EmailNotConfirmed'), $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0)));
 	}
 }
 else if (isset($_GET['action']) && $_GET['action'] == 'logout')
@@ -66,16 +66,16 @@ else if ($user = $this->get_user())
 	// is user trying to update?
 	if ($action == 'update_general')
 	{
-		$error		= '';
+		$error = '';
 		// no email given
 		if (!$email)
 		{
-			$error = $this->get_translation('SpecifyEmail')." ";
+			$error = $this->get_translation('SpecifyEmail');
 		}
 		// invalid email
 		else if (!$this->validate_email($email))
 		{
-			$error = $this->get_translation('NotAEmail')." ";
+			$error = $this->get_translation('NotAEmail');
 		}
 
 		// check for errors and store
@@ -157,7 +157,7 @@ else if ($user = $this->get_user())
 			"LIMIT 1");
 
 		// log event
-		$this->log(6, str_replace('%1', $user['user_name'], $this->get_translation('LogUserSettingsUpdate', $this->config['language'])));
+		$this->log(6, perc_replace($this->get_translation('LogUserSettingsUpdate', $this->config['language']), $user['user_name']));
 	}
 
 	// (re)send email confirmation code
@@ -180,10 +180,10 @@ else if ($user = $this->get_user())
 
 			$save = $this->set_language($user['user_lang'], true);
 			$subject	=	$this->get_translation('EmailConfirm');
-			$body		=	str_replace('%1', $this->config['site_name'],
-							str_replace('%2', $user['user_name'],
-							str_replace('%3', $this->href('', '', 'confirm='.$confirm),
-							$this->get_translation('EmailVerify'))))."\n\n";
+			$body		=	perc_replace($this->get_translation('EmailVerify'),
+							$this->config['site_name'],
+							$user['user_name'],
+							$this->href('', '', 'confirm='.$confirm))."\n\n";
 
 			$this->send_user_email($user['user_name'], $email, $subject, $body, $user['user_lang']);
 			$this->set_language($save, true);
