@@ -54,29 +54,10 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 			{
 				$error = $this->get_translation('PasswordsDidntMatch');
 			}
-			// spaces in password
-			else if (preg_match('/\s/', $new_password))
-			{
-				$error = $this->get_translation('SpacesArentAllowed');
-			}
 			// password complexity validation
-			else if ($complexity > 0)
+			else if ($complexity)
 			{
-				if ($complexity >= 5)
-				{
-					$error .= $this->get_translation('PwdCplxWeak')." ";
-					$complexity -= 5;
-				}
-				if ($complexity >= 2)
-				{
-					$error .= $this->get_translation('PwdCplxShort')." ";
-					$complexity -= 2;
-				}
-				if ($complexity >= 1)
-				{
-					$error .= $this->get_translation('PwdCplxEquals')." ";
-					$complexity -= 1;
-				}
+				$error .= $complexity;
 			}
 			else
 			{
@@ -168,29 +149,10 @@ else if (!isset($forgot) && $user = $this->get_user())
 		{
 			$error = $this->get_translation('PasswordsDidntMatch');
 		}
-		// spaces in password
-		else if (preg_match('/ /', $new_password))
-		{
-			$error = $this->get_translation('SpacesArentAllowed');
-		}
 		// password complexity validation
-		else if ($complexity > 0)
+		else if ($complexity)
 		{
-			if ($complexity >= 5)
-			{
-				$error .= $this->get_translation('PwdCplxWeak')." ";
-				$complexity -= 5;
-			}
-			if ($complexity >= 2)
-			{
-				$error .= $this->get_translation('PwdCplxShort')." ";
-				$complexity -= 2;
-			}
-			if ($complexity >= 1)
-			{
-				$error .= $this->get_translation('PwdCplxEquals')." ";
-				$complexity -= 1;
-			}
+			$error .= $complexity;
 		}
 		else
 		{
