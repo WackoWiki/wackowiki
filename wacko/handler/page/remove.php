@@ -217,7 +217,7 @@ if ($this->is_admin()
 		$this->set_menu(MENU_USER, 1);
 
 		// update sitemap
-		$this->write_sitemap(true, false);
+		$this->update_sitemap();
 
 		// log event
 		if (!$comment_on_id)

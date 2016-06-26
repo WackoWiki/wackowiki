@@ -122,10 +122,9 @@ if ($registered
 							$this->cache_wanted_page($this->tag);
 							$this->cache_wanted_page($this->supertag);
 
-							// TODO: set message also in edit_note
-							if ($this->save_page($this->tag, '', '{{redirect page="/'.$new_name.'"}}'))
+							if ($this->save_page($this->tag, '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
 							{
-								$message .= '<li>'.$this->get_translation('RedirectCreated')."</li>\n";
+								$message .= '<li>'.perc_replace($this->get_translation('RedirectCreated'), $this->link($this->tag))."</li>\n";
 							}
 
 							$this->clear_cache_wanted_page($this->tag);
@@ -157,7 +156,7 @@ if ($registered
 			}
 
 			// update sitemap
-			$this->write_sitemap(true, false);
+			$this->update_sitemap();
 
 			$this->show_message($message, 'success');
 		}
@@ -311,9 +310,9 @@ function move(&$parent, $old_page, $new_name)
 					$parent->cache_wanted_page($old_page['tag']);
 					$parent->cache_wanted_page($old_page['supertag']);
 
-					if ($parent->save_page($old_page['tag'], '', '{{redirect page="/'.$new_name.'"}}'))
+					if ($parent->save_page($old_page['tag'], '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.$parent->get_translation('RedirectCreated')."</li>\n";
+						$message .= '<li>'.perc_replace($parent->get_translation('RedirectCreated'), $parent->link($old_page['tag']))."</li>\n";
 					}
 
 					$parent->clear_cache_wanted_page($old_page['tag']);
