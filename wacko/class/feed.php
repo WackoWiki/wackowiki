@@ -32,13 +32,8 @@ class Feed
 	function write_file($name, $body)
 	{
 		$file_name = 'xml/'.$name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->config['site_name'])).'.xml';
-
-		if (is_writable($file_name))
-		{
-			file_put_contents($file_name, $body);
-
-			@chmod($file_name, 0644);
-		}
+		@file_put_contents($file_name, $body);
+		@chmod($file_name, 0644);
 	}
 
 	function changes()
@@ -338,13 +333,13 @@ class Feed
 				$xml .= "<loc>".$this->engine->href('', $page['tag'])."</loc>\n";
 				$xml .= "<lastmod>". substr($page['modified'], 0, 10) ."</lastmod>\n";
 
-				$days_since_last_changed = floor((time() - strtotime(substr($page['modified'], 0, 10)))/86400);
+				$days_since_last_changed = (time() - strtotime($page['modified'])) / 86400;
 
-				if($days_since_last_changed < 30)
+				if ($days_since_last_changed < 30)
 				{
 					$xml .= "<changefreq>daily</changefreq>\n";
 				}
-				else if($days_since_last_changed < 60)
+				else if ($days_since_last_changed < 60)
 				{
 					$xml .= "<changefreq>monthly</changefreq>\n";
 				}
@@ -365,9 +360,6 @@ class Feed
 
 		file_put_contents($filename, $xml);
 		@chmod($filename, 0644);
-
-		// reset sitemap update flag
-		$this->engine->set_config('xml_sitemap_update', 0, '', true);
 	}
 }
 

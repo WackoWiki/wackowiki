@@ -18,6 +18,7 @@ class Wacko
 	var $categories;
 	var $is_watched				= false;
 	var $hide_revisions			= false;
+	var $xml_sitemap_update		= false;
 	var $query_time;
 	var $query_log				= array();
 	var $inter_wiki				= array();
@@ -2231,11 +2232,10 @@ class Wacko
 		{
 			if (!isset($old_page['comment_on_id']) || !$comment_on_id)
 			{
-				$this->use_class('feed');
-				$xml = new feed($this);
-
 				if ($this->config['enable_feeds'])
 				{
+					$this->use_class('feed');
+					$xml = new feed($this);
 					$xml->changes();
 					$xml->comments();
 
@@ -2249,10 +2249,7 @@ class Wacko
 					}
 				}
 
-				// write sitemap
-				$this->write_sitemap(false, true);
-
-				unset($xml);
+				$this->update_sitemap();
 			}
 		}
 
@@ -2316,43 +2313,34 @@ class Wacko
 		}
 	}
 
-	function write_sitemap($write_site_map = false, $update = false)
+	function update_sitemap()
 	{
-		// write sitemap
-		if ($this->config['xml_sitemap'])
+		$this->xml_sitemap_update = 1;
+	}
+
+	function write_sitemap()
+	{
+		if (($this->xml_sitemap_update || $this->config['xml_sitemap_update']) && $this->config['xml_sitemap'])
 		{
-			// set flag for page change
-			if ($update == true && $this->config['xml_sitemap_update'] == 0)
+			if (($days = $this->config['xml_sitemap_time']) <= 0)
+			{
+				// write
+			}
+			else if (time() > @$this->config['maint_last_xml_sitemap'])
+			{
+				$this->set_config('xml_sitemap_update', 0);
+				$this->set_config('maint_last_xml_sitemap', time() + $days * 86400, '', true);
+			}
+			else
 			{
 				$this->set_config('xml_sitemap_update', 1, '', true);
+				return;
 			}
 
-			if ($write_site_map == false)
-			{
-				// on every page change
-				if ($this->config['xml_sitemap_time'] == 0)
-				{
-					$write_site_map = true;
-				}
-				else if ($this->config['xml_sitemap_update'] == true
-					&& ($days = $this->config['xml_sitemap_time'])
-					&& (time() > ($this->config['maint_last_xml_sitemap'] + $days * 86400)))
-				{
-					$write_site_map = true;
-				}
-			}
-
-			if ($write_site_map == true)
-			{
-				$this->use_class('feed');
-				$xml = new feed($this);
-
-				$xml->site_map();
-				$this->set_config('maint_last_xml_sitemap', time(), '', true);
-				$this->log(7, 'XML Sitemap generated');
-
-				unset($xml);
-			}
+			$this->use_class('feed');
+			$xml = new feed($this);
+			$xml->site_map();
+			$this->log(7, 'XML Sitemap generated');
 		}
 	}
 
@@ -6233,46 +6221,33 @@ class Wacko
 	// set config value
 	function set_config($config_name, $config_value, $is_dynamic = false, $delete_cache = false)
 	{
-		$config[$config_name]	= $config_value;
-
-		#$this->debug_print_r($config);
-
+		$config[$config_name] = $config_value;
 		$this->_set_config($config, $is_dynamic, $delete_cache);
 	}
 
 	function _set_config($config, $is_dynamic = false, $delete_cache = false)
 	{
-		$config_insert	= '';
-		$i				= '';
-
-		if (is_array($config))
+		$values = [];
+		foreach ($config as $name => $value)
 		{
-			foreach($config as $config_name => $config_value)
+			if (!isset($this->config[$name]) || $this->config[$name] != $value)
 			{
-				if ($i > 0)
-				{
-					$config_insert .= ", ";
-				}
-
-				$config_insert .= "(0, '$config_name', '$config_value')";
-
-				$this->config[$config_name] = $config_value;
-
-				$i++;
+				$values[] = "(0, '$name', '" . quote($this->dblink, $value) . "')";
+				$this->config[$name] = $value;
 			}
+		}
 
-			unset($i);
+		// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
+		// http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
 
-			// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
-			// http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
-
-			$sql = "INSERT INTO {$this->config['table_prefix']}config (config_id, config_name, config_value)
-					VALUES ".$config_insert." ".
+		if ($values)
+		{
+			$this->sql_query(
+				"INSERT INTO {$this->config['table_prefix']}config (config_id, config_name, config_value)
+					VALUES ".implode(', ', $values)." ".
 					"ON DUPLICATE KEY UPDATE
 						config_name		= VALUES(config_name),
-						config_value	= VALUES(config_value);";
-
-			$this->sql_query($sql);
+						config_value	= VALUES(config_value)");
 
 			if (!$is_dynamic && $delete_cache)
 			{
@@ -6399,10 +6374,6 @@ class Wacko
 
 			$this->set_config('maint_last_cache', $now, '', true);
 		}
-
-		// write xml_sitemap
-		// STS: didn't work here!!!!!
-		$this->write_sitemap();
 
 		// purge expired cookie_tokens (once per 3 days)
 		if (($days = 3)
@@ -6672,6 +6643,8 @@ class Wacko
 			$this->current_context--;
 			echo $this->theme_header($mod).$data.$this->theme_footer($mod);
 		}
+
+		$this->write_sitemap();
 
 		return $this->tag;
 	}
