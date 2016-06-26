@@ -18,8 +18,6 @@ class Cache
 		$this->cache_ttl	= $cache_ttl;
 		$this->debug		= $debug;
 		$this->timer		= $this->get_micro_time();
-		#$this->charset		= 'windows-1252';
-		#$this->charset		= $this->engine->languages[$this->engine->config['language']]['charset'];
 	}
 
 	// save serialized sql results
@@ -102,73 +100,43 @@ class Cache
 	// Get page content from cache
 	function get_page_cached($page, $method, $query)
 	{
+		list($page, ) = $this->normalize_page($page);
 		$file_name = $this->construct_id($page, $method, $query);
 
-		if (!@file_exists($file_name))
+		if (($timestamp = @filemtime($file_name)))
 		{
-			return false;
+			if (time() - $timestamp <= $this->cache_ttl)
+			{
+				if (($contents = file_get_contents($file_name)))
+				{
+					return $contents."\n<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp)." -->\n";
+				}
+			}
+			@unlink($file_name);
 		}
 
-		if ((time() - ($timestamp = @filemtime($file_name))) > $this->cache_ttl)
-		{
-			unlink($file_name);
+		return false;
+	}
 
-			return false;
-		}
-
-		$fp			= fopen($file_name, 'r');
-		$size		= filesize($file_name);
-
-		if (empty($size))
-		{
-			unlink($file_name);
-
-			return false;
-		}
-
-		// check for false and empty strings
-		if(($contents = fread($fp, $size)) === '')
-		{
-			unlink($file_name);
-
-			return false;
-		}
-
-		$contents	= $contents."\n<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp)." -->\n";
-
-		fclose($fp);
-
-		return $contents;
+	function normalize_page($page)
+	{
+		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
+		return [$page, hash('sha1', $page)];
 	}
 
 	function construct_id($page, $method, $query)
 	{
-		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', rawurldecode($page)))));
-
-		$this->log('construct_id page='.$page);
-		$this->log('construct_id sha1='.hash('sha1', $page.'_'.$method.'_'.$query));
-
-		$file_name = $this->cache_dir.CACHE_PAGE_DIR.hash('sha1', $page.'_'.$method.'_'.$query);
-
-		return $file_name;
+		return $this->cache_dir . CACHE_PAGE_DIR . hash('sha1', $page.'_'.$method.'_'.$query);
 	}
 
 	// Get timestamp of content from cache
 	function get_cached_time($page, $method, $query)
 	{
+		list($page, ) = $this->normalize_page($page);
 		$file_name = $this->construct_id($page, $method, $query);
-
-		if (!@file_exists($file_name))
-		{
-			return false;
-		}
-
-		if ((time() - @filemtime($file_name)) > $this->cache_ttl)
-		{
-			return false;
-		}
-
-		return @filemtime($file_name);
+		$time = @filemtime($file_name);
+		$this->log("get_cached_time |$page|$method|$query| >> $time");
+		return ($time && time() - $time < $this->cache_ttl)? $time : false;
 	}
 
 	// Store page content to cache
@@ -187,7 +155,7 @@ class Cache
 			$query	= $this->query;
 		}
 
-		$page		= strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
+		list($page, $hash) = $this->normalize_page($page);
 		$file_name	= $this->construct_id($page, $method, $query);
 
 		file_put_contents($file_name, $data);
@@ -196,13 +164,15 @@ class Cache
 		{
 			$this->wacko->sql_query(
 				"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
-				"name	='".quote($this->wacko->dblink, hash('sha1', $page))."', ".
+				"name	='".quote($this->wacko->dblink, $hash)."', ".
 				"method	='".quote($this->wacko->dblink, $method)."', ".
 				"query	='".quote($this->wacko->dblink, $query)."'");
 				// TIMESTAMP type is filled automatically by MySQL
 		}
 
 		@chmod($file_name, octdec('0644'));
+
+		$this->log("store_page_cache |$page|$method|$query");
 
 		return true;
 	}
@@ -212,10 +182,10 @@ class Cache
 	{
 		if ($this->wacko)
 		{
-			$page	= strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
+			list($page, $hash) = $this->normalize_page($page);
 			$sql	= "SELECT method, query ".
 						"FROM ".$this->wacko->config['table_prefix']."cache ".
-						"WHERE name ='".quote($this->wacko->dblink, hash('sha1', $page))."'";
+						"WHERE name ='".quote($this->wacko->dblink, $hash)."'";
 			$params	= $this->wacko->load_all($sql);
 
 			$this->log('invalidate_page_cache page='.$page);
@@ -228,15 +198,12 @@ class Cache
 
 				$this->log('invalidate_page_cache delete='.$file_name);
 
-				if (@file_exists($file_name))
-				{
-					@unlink($file_name);
-				}
+				@unlink($file_name);
 			}
 
 			$this->wacko->sql_query(
 				"DELETE FROM ".$this->wacko->config['table_prefix']."cache ".
-				"WHERE name ='".quote($this->wacko->dblink, hash('sha1', $page))."'");
+				"WHERE name ='".quote($this->wacko->dblink, $hash)."'");
 
 			$this->log('invalidate_page_cache end');
 
@@ -279,9 +246,8 @@ class Cache
 		// Warning: file_put_contents(_cache/log) [function.file-put-contents]: failed to open stream: Permission denied
 		if ($this->debug > 5)
 		{
-			$file_name = $this->cache_dir.'log';
-
-			file_put_contents($file_name, $msg."\n", FILE_APPEND);
+			$file_name = $this->cache_dir . 'log';
+			@file_put_contents($file_name, date('ymdHis ') . $msg . "\n", FILE_APPEND);
 		}
 	}
 
@@ -293,34 +259,17 @@ class Cache
 			return false;
 		}
 
+		$_query = '';
 		foreach ($_GET as $k => $v)
 		{
-			// XXX: from old AddDatetime function
-			#if ($k != 'v' && $k != 'page')
-			#{
-				$_query[$k] = $v;
-			#}
+			$_query[$k] = $v;
 		}
+		ksort($_query);
 
-		if (isset($_query))
+		$query = '';
+		foreach ($_query as $k => $v)
 		{
-			ksort($_query);
-			reset($_query);
-
-			foreach($_query as $k => $v)
-			{
-				if (!isset($query))
-				{
-					$query = '';
-				}
-
-				$query .= urlencode($k).'='.urlencode($v).'&';
-			}
-		}
-
-		if (!isset($query))
-		{
-			$query = '';
+			$query .= urlencode($k).'='.urlencode($v).'&';
 		}
 
 		$this->log('check_http_request query='.$query);
@@ -328,7 +277,7 @@ class Cache
 		clearstatcache();
 
 		// check cache
-		if ($mtime = $this->get_cached_time($page, $method, $query))
+		if (($mtime = $this->get_cached_time($page, $method, $query)))
 		{
 			$this->log('check_http_request incache mtime='.$mtime);
 
@@ -354,7 +303,7 @@ class Cache
 
 				// HTTP header with right Charset settings
 				// TODO: How to determine the right charset in advance?
-				#header('Content-Type: text/html; charset='.$this->charset);
+				// header('Content-Type: text/html; charset='.$this->charset);
 
 				// making the internal charset declaration the sole source of character encoding information
 				// (e.g. <meta charset="windows-1252" />)

@@ -565,35 +565,36 @@ class Init
 	function cache($op = '')
 	{
 		// check config data
-		if ($this->config == false)
+		if (!$this->config)
 		{
 			die('Error starting WackoWiki cache engine: config data must be initialized.');
 		}
 
-		if ($this->cache == false || $op == false)
+		if (!$this->cache || !$op)
 		{
-			require($this->config['class_path'].'/cache.php');
+			require_once($this->config['class_path'].'/cache.php');
 
-			return $this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
+			$this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
 		}
-		else if ($this->cache == true && $op == 'check')
+
+		if ($op == 'check')
 		{
 			if ($this->config['cache'] && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
 			{
-				// anonymous user
+				// cache only for anonymous user
 				if (!isset($_COOKIE[$this->config['cookie_prefix'].'auth'.'_'.$this->config['cookie_hash']]))
 				{
-					return $this->cacheval = $this->cache->check_http_request($this->page, $this->method);
+					$this->cacheval = $this->cache->check_http_request($this->page, $this->method);
 				}
 			}
 		}
-		else if ($this->cache == true && $op == 'store')
+		else if ($op == 'store')
 		{
-			if ($this->cacheval == true)
+			if ($this->cacheval)
 			{
 				$data = ob_get_contents();
 
-				if (!empty($data) && $this->engine->disable_cache === false)
+				if (!empty($data) && !$this->engine->disable_cache)
 				{
 					return $this->cache->store_page_cache($data);
 				}
@@ -603,13 +604,9 @@ class Init
 				}
 			}
 		}
-		else if ($this->config['cache'] && $this->cache == true && $op == 'log')
+		else if ($this->config['cache'] && $op == 'log')
 		{
-			return $this->cache->log('Before Run WackoWiki='.$this->engine->config['wacko_version']);
-		}
-		else
-		{
-			return false;
+			$this->cache->log('Before Run WackoWiki='.$this->engine->config['wacko_version']);
 		}
 	}
 

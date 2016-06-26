@@ -58,7 +58,7 @@ $init->session();
 $init->http_security_headers();
 
 // engine start
-$cache	= $init->cache();
+$init->cache();
 $engine	= $init->engine();
 
 if (!empty($init->config['ext_bad_behavior']))

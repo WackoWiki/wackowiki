@@ -59,7 +59,7 @@ $init->session();
 $init->http_security_headers();
 
 // engine start
-$cache	= $init->cache();
+$init->cache();
 $init->cache('check');
 $engine	= $init->engine();
 $init->cache('log');

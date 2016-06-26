@@ -1969,9 +1969,9 @@ class Wacko
 				$this->set_language($lang);
 
 				// getting title
-				if ($title == '')
+				if (!$title)
 				{
-					if ($comment_on_id == true)
+					if ($comment_on_id)
 					{
 						$title = $this->get_translation('Comment').' '.substr($tag, 7);
 					}
@@ -2137,13 +2137,13 @@ class Wacko
 					}
 
 					// subscribe & notify moderators
-					if ($mute === false)
+					if (!$mute)
 					{
 						$this->notify_moderator($page_id, $tag, $title, $user_name);
 					}
 				}
 
-				if ($comment_on_id && $mute === false)
+				if ($comment_on_id && !$mute)
 				{
 					// notifying watchers
 					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false, $minor_edit);
@@ -2217,7 +2217,7 @@ class Wacko
 					}
 
 					// Since there's no revision history for comments it's pointless to do the following for them.
-					if (!$comment_on_id && $mute === false)
+					if (!$comment_on_id && !$mute)
 					{
 						// notifying watchers
 						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true, $minor_edit);
@@ -2227,7 +2227,7 @@ class Wacko
 		}
 
 		// writing xmls
-		if ($mute === false)
+		if (!$mute)
 		{
 			if (!isset($old_page['comment_on_id']) || !$comment_on_id)
 			{
@@ -2482,11 +2482,24 @@ class Wacko
 		}
 	}
 
-	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body = '', $user_id, $user_name, $is_revision, $minor_edit)
+	/*
+	 * notify watchers on new comment creation or existing page change
+	 */
+	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body, $user_id, $user_name, $minor_edit)
 	{
-		// get page diff
-		if (!$comment_on_id && $is_revision)
+		if (!$title)
 		{
+			$title = $tag;
+		}
+
+		if ($comment_on_id)
+		{
+			$object_id = $comment_on_id;
+			$page_title = $this->get_page_title('', $comment_on_id);
+		}
+		else
+		{
+			$object_id			= $page_id;
 			// revisions diff
 			$page = $this->load_single(
 				"SELECT revision_id ".
@@ -2499,14 +2512,7 @@ class Wacko
 			$_GET['b']			= $page['revision_id'];
 			$_GET['diffmode']	= 2; // 2 - source diff
 			$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops', array('source' => 1));
-			$object_id			= $page_id;
 		}
-		else if ($comment_on_id)
-		{
-			$object_id			= $comment_on_id;
-			$page_title			= $this->get_page_title('', $comment_on_id);
-		}
-		// TODO: dangle case (!$comment_on_id && !$is_revision)
 
 		// get watchers
 		$watchers	= $this->load_all(
@@ -2519,133 +2525,117 @@ class Wacko
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (w.user_id = s.user_id) ".
 			"WHERE w.page_id = '".(int)$object_id."'");
 
-		if ($watchers)
+		foreach ($watchers as $watcher)
 		{
-			foreach ($watchers as $watcher)
+			if ($watcher['user_id'] != $user_id && $watcher['user_name'] != GUEST)
 			{
-				if ($watcher['user_id'] != $user_id && $watcher['user_name'] != GUEST)
+				if ($comment_on_id)
 				{
-					if ($comment_on_id)
+					// assert that user has no comments pending...
+					if ($watcher['notify_comment'] > 1)
 					{
-						// assert that user has no comments pending...
-						if ($watcher['notify_comment'] > 1)
+						// ...and add one if so
+						if (!$watcher['comment_id'])
 						{
-							// ...and add one if so
-							if ($watcher['comment_id'] == false)
-							{
-								$this->sql_query(
-									"UPDATE {$this->config['table_prefix']}watch SET ".
-										"comment_id	= '".(int)$page_id."' ".
-									"WHERE page_id = '".(int)$comment_on_id."' ".
-										"AND user_id = '".$watcher['user_id']."'");
-							}
-							else
-							{
-								continue;	// skip current watcher
-							}
-						}
-						else if ($watcher['notify_comment'] == 0)
-						{
-							continue;	// skip current watcher
-						}
-					}
-					else
-					{
-						if (($minor_edit && $watcher['notify_minor_edit'] == 0)
-							|| $watcher['notify_page'] == 0)
-						{
-							continue;	// skip current watcher
-						}
-
-						// assert that user has no comments pending...
-						if ($watcher['notify_page'] > 1)
-						{
-							// ...and add one if so
-							if ($watcher['pending'] == false)
-							{
-								$this->sql_query(
-									"UPDATE {$this->config['table_prefix']}watch SET ".
-										"pending	= '1' ".
-									"WHERE page_id = '".(int)$comment_on_id."' ".
-										"AND user_id = '".$watcher['user_id']."'");
-							}
-							else
-							{
-								continue;	// skip current watcher
-							}
-						}
-					}
-
-					if ($this->has_access('read', $object_id, $watcher['user_name']))
-					{
-						if ($this->config['enable_email']
-								&& $this->config['enable_email_notification']
-								&& $watcher['enabled']
-								&& !$watcher['email_confirm']
-								&& $watcher['send_watchmail'])
-						{
-							$lang = $watcher['user_lang'];
-							$save = $this->set_language($lang, true);
-
-							// Email subject
-							if (!$comment_on_id && $is_revision)
-							{
-								$subject	= $this->get_translation('WatchedPageChanged')."'".$tag."'";
-							}
-							else if ($comment_on_id)
-							{
-								$subject	= $this->get_translation('CommentForWatchedPage')."'".$page_title."'";
-							}
-
-							// Email body
-							$body = ($user_name == GUEST ? $this->get_translation('Guest') : $user_name);
-
-									if (!$comment_on_id && $is_revision)
-									{
-										$body .=
-												$this->get_translation('SomeoneChangedThisPage')."\n".
-												$this->href('', $tag)."\n\n".
-												(isset($title) ? $title : $tag)."\n".
-												"======================================================================\n\n".
-												$this->format($diff, 'html2mail')."\n\n".
-												"======================================================================\n\n";
-
-										if ($watcher['notify_page'] == 2)
-										{
-											$body .= $this->get_translation('FurtherPending')."\n\n";
-										}
-									}
-									else if ($comment_on_id)
-									{
-										$body .=
-												$this->get_translation('SomeoneCommented')."\n".
-												$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
-												(isset($title) ? $title : $tag)."\n".
-												"----------------------------------------------------------------------\n\n".
-												$page_body."\n\n".
-												"----------------------------------------------------------------------\n\n";
-
-										if ($watcher['notify_comment'] == 2)
-										{
-											$body .= $this->get_translation('FurtherPending')."\n\n";
-										}
-									}
-
-							$this->send_user_email($watcher['user_name'], $watcher['email'], $subject, $body, $lang);
-
-							$this->set_language($save, true);
+							$this->sql_query(
+								"UPDATE {$this->config['table_prefix']}watch SET ".
+									"comment_id	= '".(int)$page_id."' ".
+								"WHERE page_id = '".(int)$comment_on_id."' ".
+									"AND user_id = '".$watcher['user_id']."'");
 						}
 						else
 						{
 							continue;	// skip current watcher
 						}
 					}
+					else if (!$watcher['notify_comment'])
+					{
+						continue;	// skip current watcher
+					}
+				}
+				else
+				{
+					if (($minor_edit && !$watcher['notify_minor_edit']) || !$watcher['notify_page'])
+					{
+						continue;	// skip current watcher
+					}
+
+					// assert that user has no comments pending...
+					if ($watcher['notify_page'] > 1)
+					{
+						// ...and add one if so
+						if (!$watcher['pending'])
+						{
+							$this->sql_query(
+								"UPDATE {$this->config['table_prefix']}watch SET ".
+									"pending	= '1' ".
+								"WHERE page_id = '".(int)$comment_on_id."' ".
+									"AND user_id = '".$watcher['user_id']."'");
+						}
+						else
+						{
+							continue;	// skip current watcher
+						}
+					}
+				}
+
+				if (!$this->has_access('read', $object_id, $watcher['user_name']))
+				{
+					$this->clear_watch($watcher['user_id'], $object_id);
+					continue;
+				}
+
+				if ($this->config['enable_email']
+						&& $this->config['enable_email_notification']
+						&& $watcher['enabled']
+						&& !$watcher['email_confirm']
+						&& $watcher['send_watchmail'])
+				{
+					$lang = $watcher['user_lang'];
+					$save = $this->set_language($lang, true);
+
+					$body = ($user_name == GUEST ? $this->get_translation('Guest') : $user_name);
+
+					if ($comment_on_id)
+					{
+						$subject = $this->get_translation('CommentForWatchedPage')."'".$page_title."'";
+
+						$body .=
+								$this->get_translation('SomeoneCommented')."\n".
+								$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
+								$title."\n".
+								"----------------------------------------------------------------------\n\n".
+								$page_body."\n\n".
+								"----------------------------------------------------------------------\n\n";
+
+						if ($watcher['notify_comment'] == 2)
+						{
+							$body .= $this->get_translation('FurtherPending')."\n\n";
+						}
+					}
 					else
 					{
-						$this->clear_watch($watcher['user_id'], $object_id);
-					} // end of has_access
+						$subject = $this->get_translation('WatchedPageChanged')."'".$tag."'";
+
+						$body .=
+								$this->get_translation('SomeoneChangedThisPage')."\n".
+								$this->href('', $tag)."\n\n".
+								$title."\n".
+								"======================================================================\n\n".
+								$this->format($diff, 'html2mail')."\n\n".
+								"======================================================================\n\n";
+
+						if ($watcher['notify_page'] == 2)
+						{
+							$body .= $this->get_translation('FurtherPending')."\n\n";
+						}
+					}
+
+					$this->send_user_email($watcher['user_name'], $watcher['email'], $subject, $body, $lang);
+
+					$this->set_language($save, true);
 				}
-			}// end of watchers
+			}
 		}
 	}
 
@@ -2986,7 +2976,7 @@ class Wacko
 	{
 		$_rewrite_mode = '';
 
-		if (isset($this->config['ap_mode']) && $this->config['ap_mode'] === true)
+		if (@$this->config['ap_mode'])
 		{
 			// enable rewrite_mode to avoid href() appends '?page='
 			$_rewrite_mode = 1;
@@ -3951,15 +3941,13 @@ class Wacko
 			$icon = '';
 		}
 
-		#$this->is_admin() ? ' title="'.$comment['ip'].'"' : '' (a | span)
-		# $this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'')
 		if ($linking)
 		{
 			return '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'" class="user-link">'.$icon.$text.'</a>';
 		}
 		else
 		{
-			return '<span class="user-link">'.$icon.$user_name.'</span>';
+			return '<span class="user-link">'.$icon.$text.'</span>';
 		}
 	}
 
@@ -5645,13 +5633,9 @@ class Wacko
 	// returns true if $user_name (defaults to the current user) has access to $privilege on $page_id (defaults to the current page)
 	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1)
 	{
-		if ($user_name == '')
+		if (!$user_name)
 		{
 			$user_name = strtolower($this->get_user_name());
-		}
-		else if ($user_name == GUEST)
-		{
-			$user_name = GUEST;
 		}
 
 		if (!($page_id = trim($page_id)))
@@ -5926,15 +5910,11 @@ class Wacko
 
 		if ($this->has_access('read', $page_id))
 		{
-			return $this->sql_query(
+			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."watch (user_id, page_id) ".
 				"VALUES (	'".(int)$user_id."',
 							'".(int)$page_id."')" );
 				// TIMESTAMP type is filled automatically by MySQL
-		}
-		else
-		{
-			return false;
 		}
 	}
 
@@ -6366,28 +6346,16 @@ class Wacko
 			{
 				if (strtotime($page['modified']) < $past)
 				{
-					$remove[] = "'".$page['page_id']."'";
-					unset($this->page_id_cache[$page['tag']]);
+					$remove[] = $page['page_id'];
 				}
 			}
 
 			if ($remove)
 			{
-				$remove = implode(', ', $remove);
-
-				// deleted pages
-				$this->sql_query(
-					"DELETE FROM {$this->config['table_prefix']}page ".
-					"WHERE page_id IN ( ".$remove." )");
-
-				// revisions of deleted pages
-				$this->sql_query(
-					"DELETE FROM {$this->config['table_prefix']}revision ".
-					"WHERE page_id IN ( ".$remove." )");
+				$this->delete_pages($remove);
+				$this->log(7, 'Maintenance: deleted pages purged');
 			}
-
 			$this->set_config('maint_last_delpages', $now, '', true);
-			$this->log(7, 'Maintenance: deleted pages purged');
 		}
 
 		// purge system log entries (once per 3 days)
@@ -7029,25 +6997,37 @@ class Wacko
 		return true;
 	}
 
+	function delete_pages($pages)
+	{
+		$remove = [];
+		$rev = array_flip($this->page_id_cache);
+		foreach ($pages as $id)
+		{
+			$remove[] = "'" . $id . "'";
+			unset($this->page_id_cache[@$rev[$id]]);
+		}
+
+		$remove = implode(', ', $remove);
+		$this->sql_query(
+			"DELETE FROM {$this->config['table_prefix']}page ".
+			"WHERE page_id IN ( ".$remove." )");
+		$this->sql_query(
+			"DELETE FROM {$this->config['table_prefix']}revision ".
+			"WHERE page_id IN ( ".$remove." )");
+	}
+
 	function remove_page($page_id, $comment_on_id = 0, $dontkeep = 0)
 	{
-		if (!$page_id)
+		if (!$page_id || !($page = $this->load_page('', $page_id)))
 		{
 			return false;
 		}
-
-		// loading page
-		$page = $this->load_page('', $page_id);
-		unset($this->page_id_cache[$page['tag']]);
 
 		// store a copy in revision
 		if ($this->config['store_deleted_pages'] && !$dontkeep)
 		{
 			// unlink comment tag
-			if ($page['comment_on_id'] != 0)
-			{
-				$page['comment_on_id']	= 0;
-			}
+			$page['comment_on_id']	= 0;
 
 			// saving original
 			$this->save_revision($page);
@@ -7055,20 +7035,17 @@ class Wacko
 			// saving updated for the current user and flag it as deleted
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}page SET ".
-					"modified	= '".date(SQL_DATE_FORMAT)."', ".
+					"modified	= NOW(), ".
 					"ip			= '".$this->get_user_ip()."', ".
 					"deleted	= '1', ".
-					#"edit_note	= '".$this->get_user_ip()."', ". // removed
+					// "edit_note	= '".$this->get_user_ip()."', ". // removed
 					"user_id	= '".$this->get_user_id()."' ".
 				"WHERE page_id	= '".(int)$page_id."' ".
 				"LIMIT 1");
 		}
 		else
 		{
-			// delete page
-			$this->sql_query(
-				"DELETE FROM ".$this->config['table_prefix']."page ".
-				"WHERE page_id = '".(int)$page_id."' ");
+			$this->delete_pages([$page_id]);
 		}
 
 		// update for removed comment correct comments count and date on commented page
@@ -7090,7 +7067,7 @@ class Wacko
 		return $this->sql_query(
 			"DELETE FROM {$this->config['table_prefix']}revision ".
 			"WHERE tag = '".quote($this->dblink, $tag)."' ".
-				($cluster === true
+				($cluster
 					? "OR tag LIKE '".quote($this->dblink, $tag)."/%' "
 					: "") );
 	}
@@ -7320,11 +7297,6 @@ class Wacko
 			"UPDATE {$this->config['table_prefix']}page SET ".
 				"deleted	= '0' ".
 			"WHERE page_id = '".(int)$page_id."'");
-	}
-
-	function restore_revision()
-	{
-
 	}
 
 	function restore_file($page_id)
