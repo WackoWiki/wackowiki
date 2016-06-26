@@ -764,7 +764,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				echo '<tr class="lined">'.
 						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="'.$topic['page_id'].'" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 						'<td style="text-align:left; padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>' : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
-						'<td style="text-align:center;" '.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.$this->user_link($topic['owner_name'], $lang = '', true, false).'&nbsp;&nbsp;</small></td>'.
+						'<td style="text-align:center;" '.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.$this->user_link($topic['owner_name'], '', true, false).'&nbsp;&nbsp;</small></td>'.
 						'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
 						'<td style="text-align:center; white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_formatted($topic['created']).'</small></td>'.
 					'</tr>'."\n";
@@ -1321,7 +1321,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</tr>'."\n".
 				'<tr class="lined">'.
 					'<td colspan="2" style="padding-bottom:30px;">'.
-						'<strong><small>'.($forum_cluster === false ? $this->user_link($this->page['owner_name'], $lang = '', true, false) : $this->user_link($this->page['user_name'], $lang = '', true, false)).' ('.$this->get_time_formatted($this->page['created']).')</small></strong>'.
+						'<strong><small>'.($forum_cluster === false ? $this->user_link($this->page['owner_name'], '', true, false) : $this->user_link($this->page['user_name'], '', true, false)).' ('.$this->get_time_formatted($this->page['created']).')</small></strong>'.
 						'<br />'.$body.
 					'</td>'.
 				'</tr>'."\n";
@@ -1357,7 +1357,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				echo '<tr class="lined">'.
 						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="'.$comment['page_id'].'" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-						'<td style="text-align:left; padding-left:5px;"><strong><small>'.$this->user_link($comment['user_name'], $lang = '', true, false).' ('.$this->get_time_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
+						'<td style="text-align:left; padding-left:5px;"><strong><small>'.$this->user_link($comment['user_name'], '', true, false).' ('.$this->get_time_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
 							'<br />'.$desc.'</td>'.
 					'</tr>'."\n";
 			}

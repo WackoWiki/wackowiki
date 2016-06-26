@@ -120,7 +120,7 @@ if ($this->has_access('read'))
 							<a href="'.$this->href('show', '', 'revision_id='.$page['revision_m_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
 				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_m_id']."</span> ";
 				$output .= $place_holder."&nbsp;".$this->get_translation('By')." ".
-							$this->user_link($page['user_name'], $lang = '', true, false);
+							$this->user_link($page['user_name'], '', true, false);
 				$output .= ''.$edit_note.'';
 				$output .= ' '.($page['minor_edit'] ? 'm' : '');
 
@@ -136,7 +136,7 @@ if ($this->has_access('read'))
 					}
 					else if ($page['reviewed'] == 1)
 					{
-						$output .= '<span class="review">['.$this->get_translation('ReviewedBy').' '.$this->user_link($page['reviewer'], $lang = '', true, false).']</span>';
+						$output .= '<span class="review">['.$this->get_translation('ReviewedBy').' '.$this->user_link($page['reviewer'], '', true, false).']</span>';
 					}
 				}
 

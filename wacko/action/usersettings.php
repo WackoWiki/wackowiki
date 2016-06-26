@@ -504,7 +504,7 @@ else if ($user = $this->get_user())
 			<?php echo $this->get_translation('UserName');?>
 		</th>
 		<td>
-			<strong><?php echo $this->user_link($user['user_name'], $lang = '', true, false);?></strong>
+			<strong><?php echo $this->user_link($user['user_name'], '', true, false);?></strong>
 		</td>
 	</tr>
 	<tr class="lined">

@@ -40,7 +40,7 @@ if ($this->page)
 			}
 			else
 			{
-				echo '<li>'.$this->get_translation('Owner').': '.$this->user_link($owner, $lang = '', true, false)."</li>\n";
+				echo '<li>'.$this->get_translation('Owner').': '.$this->user_link($owner, '', true, false)."</li>\n";
 			}
 		}
 		else if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])

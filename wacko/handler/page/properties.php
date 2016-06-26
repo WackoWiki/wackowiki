@@ -358,7 +358,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				"</tr>\n".
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('Owner')."</th>".
-					'<td class="form_right">'.$this->user_link($this->page['owner_name'], $lang = '', true, false)."</td>".
+					'<td class="form_right">'.$this->user_link($this->page['owner_name'], '', true, false)."</td>".
 				"</tr>\n".
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->get_translation('SettingsCreated')."</th>".

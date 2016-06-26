@@ -151,7 +151,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			{
 				echo '<tr class="lined">';
 
-				echo	'<td style="padding-left:5px;">'.$this->user_link($member['user_name'], $lang = '', true, false).'</td>'.
+				echo	'<td style="padding-left:5px;">'.$this->user_link($member['user_name'], '', true, false).'</td>'.
 									'<td style="text-align:center;">'.$member['total_pages'].'</td>'.
 									'<td style="text-align:center;">'.$member['total_comments'].'</td>'.
 									'<td style="text-align:center;">'.$member['total_revisions'].'</td>'.
