@@ -247,7 +247,7 @@ if ($this->is_admin()
 			// TODO: add function for
 			echo '<div class="preview">';
 
-			$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->get_translation('PostedBy').' '.$this->user_link($this->page['user_name'], $lang = '', true, false).' '.$this->get_translation('At').' '.$this->get_time_formatted($this->page['modified']);
+			$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->get_translation('PostedBy').' '.$this->user_link($this->page['user_name'], '', true, false).' '.$this->get_translation('At').' '.$this->get_time_formatted($this->page['modified']);
 			$this->show_message($message, 'comment-info');
 
 			$desc = $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');

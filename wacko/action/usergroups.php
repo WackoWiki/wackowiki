@@ -55,7 +55,7 @@ if($user = $this->get_user())
 
 				foreach ($arr as $k => $user_name)
 				{
-					$allowed_groups[] = $this->user_link($user_name, $lang = '', true, false);
+					$allowed_groups[] = $this->user_link($user_name, '', true, false);
 				}
 
 				sort($allowed_groups);
