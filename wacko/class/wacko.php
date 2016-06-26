@@ -7315,17 +7315,13 @@ class Wacko
 	// ADDITIONAL METHODS
 
 	// run checks of password complexity under current
-	// config settings; returned error codes (or a sum of):
-	//		1 = password contains login
-	//		2 = not enough chars
-	//		4 = too weak (chars classes requirement)
-	//		0 (false) = good password
+	// config settings; returned error diag, or '' if good
 	function password_complexity($login, $pwd)
 	{
 		$unlike_login	= $this->config['pwd_unlike_login'];
 		$char_classes	= $this->config['pwd_char_classes'];
 		$min_chars		= $this->config['pwd_min_chars'];
-		$error			= 0;
+		$res			= '';
 
 		$l = strlen($login);
 		$p = strlen($pwd);
@@ -7340,40 +7336,38 @@ class Wacko
 		}
 
 		// check if password is like a login or contains login string
+		$error = 0;
 		switch ($unlike_login)
 		{
 			case 2:	// don't run this check if login is much shorter than password or vice versa
 				if (($l > 4 && $p > 4) && $r < 4)
 				{
-					if (stristr($login, $pwd) !== false || stristr($pwd, $login) !== false)
-					{
-						$error += 1;
-						break;
-					}
+					$error += (stristr($login, $pwd) !== false || stristr($pwd, $login) !== false);
 				}
 			case 1:
-				if (strcasecmp($login, $pwd) === 0)
-				{
-					$error += 1;
-				}
+				$error += (strcasecmp($login, $pwd) === 0);
+		}
+		if ($error)
+		{
+			$res .= $this->get_translation('PwdCplxEquals') . ' ';
 		}
 
 		// check password length
 		if ($p < $min_chars)
 		{
-			$error += 2;
+			$res .= $this->get_translation('PwdCplxShort') . ' ';
 		}
 
 		// check character classes requirements
+		$error = 0;
 		switch ($char_classes)
 		{
 			case 1:
 				if (!preg_match('/[0-9]+/', $pwd) ||
 					!preg_match('/[a-zA-Zà-ÿÀ-ß]+/', $pwd))
 				{
-					$error += 5;
+					++$error;
 				}
-
 				break;
 
 			case 2:
@@ -7381,9 +7375,8 @@ class Wacko
 					!preg_match('/[A-ZÀ-ß]+/', $pwd) ||
 					!preg_match('/[a-zà-ÿ]+/', $pwd))
 				{
-					$error += 5;
+					++$error;
 				}
-
 				break;
 
 			case 3:
@@ -7392,13 +7385,21 @@ class Wacko
 					!preg_match('/[a-zà-ÿ]+/', $pwd) ||
 					!preg_match('/[\W]+/', $pwd))
 				{
-					$error += 5;
+					++$error;
 				}
-
 				break;
 		}
+		if ($error)
+		{
+			$res .= $this->get_translation('PwdCplxWeak') . ' ';
+		}
 
-		return $error;
+		if (preg_match('/\s/', $pwd))
+		{
+			$res .= $this->get_translation('SpacesArentAllowed') . ' ';
+		}
+
+		return $res;
 	}
 
 	function show_password_complexity()
