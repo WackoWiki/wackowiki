@@ -18,7 +18,6 @@ class Wacko
 	var $categories;
 	var $is_watched				= false;
 	var $hide_revisions			= false;
-	var $xml_sitemap_update		= false;
 	var $query_time;
 	var $query_log				= array();
 	var $inter_wiki				= array();
@@ -2315,12 +2314,12 @@ class Wacko
 
 	function update_sitemap()
 	{
-		$this->xml_sitemap_update = 1;
+		$_SESSION['xml_sitemap_update'] = 1;
 	}
 
 	function write_sitemap()
 	{
-		if (($this->xml_sitemap_update || $this->config['xml_sitemap_update']) && $this->config['xml_sitemap'])
+		if ((@$_SESSION['xml_sitemap_update'] || $this->config['xml_sitemap_update']) && $this->config['xml_sitemap'])
 		{
 			if (($days = $this->config['xml_sitemap_time']) <= 0)
 			{
@@ -2341,6 +2340,7 @@ class Wacko
 			$xml = new feed($this);
 			$xml->site_map();
 			$this->log(7, 'XML Sitemap generated');
+			$_SESSION['xml_sitemap_update'] = 0;
 		}
 	}
 
@@ -2851,6 +2851,8 @@ class Wacko
 	{
 		if (!headers_sent())
 		{
+			// NB: here you can finalize run() execution when short-circuited by redirect()
+
 			// Make sure no &amp;'s are in, this will break the redirect
 			$url = str_replace('&amp;', '&', $url);
 
@@ -6644,6 +6646,7 @@ class Wacko
 			echo $this->theme_header($mod).$data.$this->theme_footer($mod);
 		}
 
+		// NB: never been here if redirect() called!
 		$this->write_sitemap();
 
 		return $this->tag;
@@ -7964,6 +7967,10 @@ class Wacko
 		echo '</pre>';
 	}
 
+	function dbg($msg)
+	{
+		@file_put_contents('DEBUG', date('ymdHis ') . implode(' ', func_get_args()) . "\n", FILE_APPEND);
+	}
 }
 
 ?>
