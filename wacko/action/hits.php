@@ -8,24 +8,22 @@ if (!defined('IN_WACKO'))
 // {{hits}}
 // take $this->page['hits'] in the first place
 
-if (isset($vars['for']))
+if (isset($for))
 {
-	$tag = $this->unwrap_link( $vars['for'] );
+	$tag = $this->unwrap_link($for);
 
-	$rs = $this->load_all(
+	$rs = $this->load_single(
 		"SELECT hits ".
 		"FROM ".$this->config['table_prefix']."page ".
-		"WHERE tag='".quote($this->dblink, $tag)."'"
+		"WHERE tag='".quote($this->dblink, $tag)."' LIMIT 1"
 	);
 
-	if (isset($rs[0]['hits']))
+	if (isset($rs['hits']))
 	{
-		echo $rs[0]['hits'];
+		echo $rs['hits'];
 	}
 }
 else
 {
 	echo $this->page['hits'];
 }
-
-?>

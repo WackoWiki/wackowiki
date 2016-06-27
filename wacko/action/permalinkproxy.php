@@ -12,35 +12,23 @@ if (isset($_GET['page_id']))
 	$page_id = (int)$_GET['page_id'];
 }
 
-if (isset($_GET['rev_id']))
-{
-	$revision_id = (int)$_GET['rev_id'];
-}
-else
-{
-	$revision_id = 0;
-}
+$revision_id = (int)@$_GET['rev_id'];
 
 if (!isset($preview)) $preview = 0;
+if (!isset($permanent)) $permanent = 0;
 
-if ( isset($page_id) )
+if (isset($page_id))
 {
 	$page_tag = $this->get_page_tag($page_id);
-
-	#$is_permanent	= (isset($vars['permanent']) ? $vars['permanent'] : 0);
 
 	// TODO: check permissions if page is accessible
 	// show?revision_id=970
 
 	if ($page_tag)
 	{
-		if (isset($is_permanent))
+		if ($permanent && !headers_sent())
 		{
-			if (!headers_sent())
-			{
-				header('HTTP/1.1 301 Moved Permanently');
-			}
-
+			header('HTTP/1.1 301 Moved Permanently');
 		}
 
 		if ($_page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META))

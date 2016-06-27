@@ -312,7 +312,7 @@ if ($filter != 'pages')
 
 if (!isset($clean)) $clean = false;
 
-if (isset($vars[$term]))
+if (isset($vars[$term])) // TODO: some historical junk, $vars currently not available
 {
 	$phrase = $vars[$term];
 }
