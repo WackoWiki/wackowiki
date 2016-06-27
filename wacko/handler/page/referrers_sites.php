@@ -16,6 +16,15 @@ if (!$this->page)
 	$this->redirect($this->href());
 }
 
+if (($this->config['enable_referrers'] == 0) ||
+	($this->config['enable_referrers'] == 1 && !$this->get_user()) ||
+	($this->config['enable_referrers'] == 2 && !$this->is_admin()))
+{
+	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
+	return;
+}
+
+
 // deny for comment
 if ($this->page['comment_on_id'])
 {
@@ -46,71 +55,63 @@ else
 		</ul><br /><br />\n";
 }
 
-if ($this->get_user())
+$href = $this->href('referrers', '', 'o=' . $mode);
+if ($mode == 'global')
 {
-	$href = $this->href('referrers', '', 'o=' . $mode);
-	if ($mode == 'global')
-	{
-		$title		= perc_replace($this->get_translation('DomainsSitesPagesGlobal'), $href);
-		$referrers	= $this->load_referrers();
-	}
-	else
-	{
-		$title = perc_replace($this->get_translation('DomainsSitesPages'),
-			$this->compose_link_to_page($this->tag),
-			(($i = $this->config['referrers_purge_time']) == 0? '' :
-				($i == 1? $this->get_translation('Last24Hours') :
-				perc_replace($this->get_translation('LastDays'), $i))),
-			$href);
-		$referrers = $this->load_referrers($this->page['page_id']);
-	}
-
-	echo "<strong>" . $title . "</strong><br /><br />\n";
-
-	if ($referrers)
-	{
-		$referrer_sites = [];
-		$unknown = 'unknown';
-		foreach ($referrers as $ref)
-		{
-			$url = parse_url($ref['referrer']);
-			$url = $url['host']? strtolower(preg_replace('/^www\./Ui', '', $url['host'])) : $unknown;
-
-			if (isset($referrer_sites[$url]))
-			{
-				$referrer_sites[$url] += $ref['num'];
-			}
-			else
-			{
-				$referrer_sites[$url] = $ref['num'];
-			}
-		}
-
-		array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
-
-		echo '<ul class="ul_list">'."\n";
-
-		foreach ($referrer_sites as $site => $site_count)
-		{
-			echo '<li class="lined">';
-			echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;'.
-				(($site !== $unknown)
-					? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">'.
-						htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>'
-					: $site
-				);
-			echo "</li>\n";
-		}
-
-		echo "</ul>\n";
-	}
-	else
-	{
-		echo $this->get_translation('NoneReferrers')."<br />\n";
-	}
+	$title		= perc_replace($this->get_translation('DomainsSitesPagesGlobal'), $href);
+	$referrers	= $this->load_referrers();
 }
 else
 {
-	$message = $this->get_translation('ReadAccessDenied');
-	$this->show_message($message, 'info');
+	$title = perc_replace($this->get_translation('DomainsSitesPages'),
+		$this->compose_link_to_page($this->tag),
+		(($i = $this->config['referrers_purge_time']) == 0? '' :
+			($i == 1? $this->get_translation('Last24Hours') :
+			perc_replace($this->get_translation('LastDays'), $i))),
+		$href);
+	$referrers = $this->load_referrers($this->page['page_id']);
+}
+
+echo "<strong>" . $title . "</strong><br /><br />\n";
+
+if ($referrers)
+{
+	$referrer_sites = [];
+	$unknown = 'unknown';
+	foreach ($referrers as $ref)
+	{
+		$url = parse_url($ref['referrer']);
+		$url = $url['host']? strtolower(preg_replace('/^www\./Ui', '', $url['host'])) : $unknown;
+
+		if (isset($referrer_sites[$url]))
+		{
+			$referrer_sites[$url] += $ref['num'];
+		}
+		else
+		{
+			$referrer_sites[$url] = $ref['num'];
+		}
+	}
+
+	array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
+
+	echo '<ul class="ul_list">'."\n";
+
+	foreach ($referrer_sites as $site => $site_count)
+	{
+		echo '<li class="lined">';
+		echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;'.
+			(($site !== $unknown)
+				? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">'.
+					htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>'
+				: $site
+			);
+		echo "</li>\n";
+	}
+
+	echo "</ul>\n";
+}
+else
+{
+	echo $this->get_translation('NoneReferrers')."<br />\n";
 }
