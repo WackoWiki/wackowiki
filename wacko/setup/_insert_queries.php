@@ -138,13 +138,16 @@ $upgrade['5.4.0'][]		= array($lang['UpdateTable'],	'page',			$update_page_r5_4_0
 $upgrade['5.4.0'][]		= array($lang['UpdateTable'],	'page',			$update_page_r5_4_1,		$lang['ErrorUpdatingTable']);
 $upgrade['5.4.0'][]		= array($lang['UpdateTable'],	'page',			$update_page_r5_4_2,		$lang['ErrorUpdatingTable']);
 
+$upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_1,			$lang['ErrorAlteringTable']);
+
 // referrer
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_0,		$lang['ErrorAlteringTable']);
-
 
 // revision
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_0,		$lang['ErrorAlteringTable']);
 $upgrade['5.4.0'][]		= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']);
+
+$upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_1,		$lang['ErrorAlteringTable']);
 
 // tag
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'tag',			$alter_tag_r5_4_0,			$lang['ErrorAlteringTable']);
