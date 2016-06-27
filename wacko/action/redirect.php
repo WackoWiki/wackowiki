@@ -7,17 +7,13 @@ if (!defined('IN_WACKO'))
 
 // {{redirect to="!/NewPage" permanent="0 or 1"}}
 
-if (isset($vars['page']))
-{
-	$vars['to'] = $vars['page'];
-}
+if (isset($page))		$to = $page;
+if (!isset($to))		$to = '';
+if (!isset($permanent))	$permanent = 0;
 
-$page			= $this->unwrap_link(isset($vars['to']) ? $vars['to'] : '');
-$is_permanent	= (isset($vars['permanent']) ? $vars['permanent'] : 0);
-
-if ($page)
+if (($page = $this->unwrap_link($to)))
 {
-	if ($is_permanent)
+	if ($permanent)
 	{
 		if (!headers_sent())
 		{
@@ -27,25 +23,18 @@ if ($page)
 
 	if ($this->load_page($page, 0, '', LOAD_CACHE, LOAD_META))
 	{
-		if ($user = $this->get_user())
+		if (($user = $this->get_user()) && ($user['dont_redirect'] || @$_POST['redirect'] == 'no'))
 		{
-			if ($user['dont_redirect'] == 1 || (isset($_POST['redirect']) && $_POST['redirect'] == 'no'))
-			{
-				$this->show_message( $this->get_translation('PageMoved')." ".$this->link('/'.$page) );
-			}
-			else
-			{
-				$this->redirect($this->href('', $page));
-			}
+			$this->show_message($this->get_translation('PageMoved') . ' ' . $this->link('/' . $page));
 		}
 		else
 		{
 			$this->redirect($this->href('', $page));
+			// NEVER BEEN HERE
 		}
 	}
 	else
 	{
-		$this->show_message('<em>'.$this->get_translation('WrongPage4Redirect').'</em>');
+		$this->show_message('<em>' . $this->get_translation('WrongPage4Redirect') . '</em>');
 	}
-};
-?>
+}

@@ -5,11 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($nomark)) $nomark = '';
+if (!isset($nomark))	$nomark = false;
+if (!isset($for))		$for = '';
 
-if (isset($vars['for']))
+if ($for)
 {
-	$tag		= $this->unwrap_link($vars[0]);
+	$tag		= $this->unwrap_link($for);
 	$page_id	= $this->get_page_id($tag);
 }
 else
@@ -29,8 +30,7 @@ if ($this->is_owner($page_id))
 
 	if ($watchers)
 	{
-		$title = $this->get_translation('Watchers');
-		$title = str_replace('%1', $this->link('/'.$tag, '', $tag),  $title);
+		$title = perc_replace($this->get_translation('Watchers'), $this->link('/'.$tag, '', $tag));
 
 		if (!$nomark)
 		{
@@ -57,7 +57,7 @@ if ($this->is_owner($page_id))
 	{
 		if (!$nomark)
 		{
-			echo str_replace('%1',  $this->link('/'.$tag, '', $tag), $this->get_translation('NoWatchers'));
+			echo perc_replace($this->get_translation('NoWatchers'), $this->link('/'.$tag, '', $tag));
 		}
 	}
 }
@@ -65,7 +65,7 @@ else
 {
 	if (!$nomark)
 	{
-		echo str_replace('%1',  $this->link('/'.$tag, '', $tag), $this->get_translation('NotOwnerAndViewWatchers'));
+		echo perc_replace($this->get_translation('NotOwnerAndViewWatchers'), $this->link('/'.$tag, '', $tag));
 	}
 }
 

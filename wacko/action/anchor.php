@@ -5,31 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+if (!isset($text))	$text = '';
+if (!isset($title))	$title = '';
+
 // Param name
-if(isset($vars['href']))
+if (isset($href))
 {
-	$href = $vars['href'];
-	$text = '';
-
-	if(isset($vars['text']))
-	{
-		if(strpos($vars['text'], '~') !== false)
-		{
-			$vars['text'] = str_replace('~', $href, $vars['text']);
-		}
-
-		$text = htmlspecialchars($vars['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	}
-
-	$title = '';
-
-	if(isset($vars['title']))
-	{
-		$title = htmlspecialchars($vars['title'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	}
-
+	$text = str_replace('~', $href, $text);
+	$text = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+	$title = htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	$href = htmlspecialchars($href, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	echo '<a id="'.$href.'" href="#'.$href.'" title="'.$title.'">'.$text.'</a>'."\n";
-}
 
-?>
+	echo '<a id="' . $href . '" href="#' . $href . '" title="' . $title . '">' . $text . "</a>\n";
+}
