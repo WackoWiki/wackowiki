@@ -102,7 +102,7 @@ $wacko_translation = array(
 	'PermaLink'					=> 'Permalink',
 	'PermaLinkTip'				=> 'Permalink zu dieser Seite',
 	'PermaLinkRedirected'		=> 'Weitergeleiteter Permalink',
-	'PermaLinkEmpty'			=> 'No reference for redirect provided (e.g. ?page_id=506).',
+	'PermaLinkEmpty'			=> 'Kein Bezug für die Umleitung verfügbar (e.g. ?page_id=506).',
 	'PermaLinkRecent'			=> 'Permalink Adresse für ',
 	'PermaLinkRevision'			=> 'Permalink Adresse für Revision von ',
 
@@ -136,7 +136,7 @@ $wacko_translation = array(
 	'Revision'					=> 'Das ist eine alte Version von <a href="%1">%2</a> vom %3 bearbeitet durch %4.',
 	'ReadAccessDenied'			=> 'Du bist nicht berechtigt, diese Seite zu lesen.',
 	'ReadAccessDeniedHintGuest'	=> '',
-	'PageDeletedInfo'			=> 'This page has been deleted.',
+	'PageDeletedInfo'			=> 'Diese Seite wurde gelöscht.',
 
 	'YouAreOwner'				=> 'Diese Seite gehört dir.',
 	'Owner'						=> 'Besitzer',
@@ -324,7 +324,7 @@ $wacko_translation = array(
 	'RemoveComment'				=> 'Kommentar löschen',
 	'RemoveCluster'				=> 'Lösche alle Seiten des Clusters',
 	'RemoveDontKeep'			=> 'Speichere keine Sicherungs-Kopie der entfernten Seiten und Kommentare',
-	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
+	'RemoveDontKeepComment'		=> 'Speichere keine Sicherungs-Kopie des entfernten Kommentars',
 	'ReferrersRemoved'			=> 'Referenzen gelöscht.',
 	'LinksRemoved'				=> 'Links gelöscht.',
 	'CategoriesRemoved'			=> 'Kategorien gelöscht.',
@@ -339,8 +339,8 @@ $wacko_translation = array(
 	'ClusterRemoved'			=> 'Alle Seiten des Cluster gelöscht.',
 	'RevisionsRemoved'			=> 'Revisionen gelöscht.',
 	'ThisActionHavenotUndo'		=> 'Diese Aktion kann nicht rückgängig gemacht werden.',
-	'PageRestored'				=> 'Page restored.',
-	'LocalFilesRestored'		=> 'Local files restored.',
+	'PageRestored'				=> 'Seite wiederhergestellt.',
+	'LocalFilesRestored'		=> 'Angehängte Dateien wiederhergestellt.',
 
 	'PrintVersion'				=> 'Druckversion',
 	'PrintText'					=> 'Drucken',
@@ -408,7 +408,7 @@ $wacko_translation = array(
 	'UserName'					=> 'Benutzername',
 	'EmailAddress'				=> 'E-Mail-Adresse',
 	'RealName'					=> 'Vollständiger Name',
-	'MenuItemsShown'			=> 'Menu items shown',
+	'MenuItemsShown'			=> 'Gezeigte Menüpunkte',
 	'RecordsPerPage'			=> 'Datensätze pro Seite',
 	'ShowComments?'				=> 'Zeige Kommentare',
 	'DoubleclickEditing'		=> 'Editieren durch Doppelklick',
@@ -568,7 +568,7 @@ $wacko_translation = array(
 
 	'Watchers'					=> 'Beobachter für %1',
 	'NoWatchers'				=> 'Keine Beobachter für %1',
-	'NotOwnerAndViewWatchers'	=>'Du bist nicht der Besitzer dieser Seite und kannst die Liste der Beobachter nicht einsehen.',
+	'NotOwnerAndViewWatchers'	=> 'Du bist nicht der Besitzer dieser Seite und kannst die Liste der Beobachter nicht einsehen.',
 
 	// mywatches action
 	'WatchedPages'				=> 'Liste aller Seiten, die du auf Änderungen beobachtest',
@@ -820,12 +820,12 @@ $wacko_translation = array(
 	'Groups'					=> 'Gruppen',
 
 	// Cache
-	'ClearCache'				=> 'Cache leeren',
-	'CacheCleared'				=> 'Cache geleert.',
+	'ClearCache'				=> 'Zwischenspeicher leeren',
+	'CacheCleared'				=> 'Zwischenspeicher geleert.',
 	'ConfigCache'				=> 'Config cache',
-	'FeedCache'					=> 'Feed cache',
-	'PageCache'					=> 'Page cache',
-	'SQLCache'					=> 'SQL cache',
+	'FeedCache'					=> 'Feed Zwischenspeicher',
+	'PageCache'					=> 'Page Zwischenspeicher',
+	'SQLCache'					=> 'SQL Zwischenspeicher',
 
 	// Flash
 	'FlashNoURL'				=> 'Bitte gib eine Flashdatei mit dem Parameter url an. (z.B. {{flash url="file:the_movie.swf"}} )',
