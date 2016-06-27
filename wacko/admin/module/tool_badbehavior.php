@@ -298,10 +298,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 </div>
 
 <?php
-		$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-		// pagination
-		echo $show_pagination;
+		$engine->print_pagination($pagination);
 ?>
 <table class="formation">
 	<thead>
@@ -389,8 +386,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 </table>
 
 <?php
-	// pagination
-	echo $show_pagination;
+	$engine->print_pagination($pagination);
 
 	echo $engine->form_close();
 }

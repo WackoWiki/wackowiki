@@ -98,10 +98,7 @@ if ($this->has_access('read'))
 		// display comments header
 		echo '<header id="header-comments">'."\n";
 
-		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-		// pagination
-		echo $show_pagination;
+		$this->print_pagination($pagination);
 
 		echo '<h1><a href="'.$this->href('', '', 'show_comments=0').'" title="'.$this->get_translation('HideComments').'">'.$this->get_translation('Comments_all').'</a></h1>';
 		echo "</header>\n";
@@ -211,8 +208,7 @@ if ($this->has_access('read'))
 			echo "</ol>\n";
 		}
 
-		// pagination
-		echo $show_pagination;
+		$this->print_pagination($pagination);
 
 		// display comment form
 		if ($this->has_access('comment'))

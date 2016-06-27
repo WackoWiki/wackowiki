@@ -239,15 +239,12 @@ if (!empty($blog_cluster))
 		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/'.$feed_tag.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
 	}
 
-	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+	$show_pagination = $this->show_pagination($pagination['text']);
 
 	echo '<div style="width:100%;">
 			<p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
 			$show_pagination.'<br style="clear:both" />
 		</div>'."\n";
-
-	// pagination
-	#echo $show_pagination;
 
 	// displaying articles
 	if ($pages)

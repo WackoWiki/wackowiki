@@ -819,10 +819,7 @@ function admin_user_users(&$engine, &$module)
 
 		echo $control_buttons;
 
-		$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-		// pagination
-		echo $show_pagination;
+		$engine->print_pagination($pagination);
 ?>
 		<table style="padding: 3px;" class="formation listcenter">
 			<tr>
@@ -877,8 +874,7 @@ function admin_user_users(&$engine, &$module)
 ?>
 			</table>
 <?php
-		// pagination
-		echo $show_pagination;
+		$engine->print_pagination($pagination);
 
 		/////////////////////////////////////////////
 		//   control buttons

@@ -163,7 +163,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	if (!isset($_GET['phrase']))
 	{
-		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
+		$show_pagination = $this->show_pagination($pagination['text']);
 
 		// display list
 		echo '<div style="clear: both;">'.

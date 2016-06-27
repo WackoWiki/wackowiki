@@ -100,10 +100,7 @@ else
 	{
 		if (is_array($pages))
 		{
-			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-			// pagination
-			echo $show_pagination;
+			$this->print_pagination($pagination);
 
 			echo "<ol>\n";
 
@@ -137,8 +134,7 @@ else
 
 			echo "</ol>\n";
 
-			// pagination
-			echo $show_pagination;
+			$this->print_pagination($pagination);
 		}
 	}
 	else

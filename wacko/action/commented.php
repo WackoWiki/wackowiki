@@ -98,10 +98,7 @@ if ($this->user_allowed_comments())
 				echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
 			}
 
-			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-			// pagination
-			echo $show_pagination;
+			$this->print_pagination($pagination);
 
 			echo '<ul class="ul_list">'."\n";
 
@@ -178,8 +175,7 @@ if ($this->user_allowed_comments())
 
 			echo "</ul>\n</li>\n</ul>\n";
 
-			// pagination
-			echo $show_pagination;
+			$this->print_pagination($pagination);
 		}
 		else
 		{
