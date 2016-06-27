@@ -120,7 +120,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"title VARCHAR(100) NOT NULL DEFAULT '',".
+					"title VARCHAR(250) NOT NULL DEFAULT '',".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
@@ -216,7 +216,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"version_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"title VARCHAR(100) NOT NULL DEFAULT '',".
+					"title VARCHAR(250) NOT NULL DEFAULT '',".
 					"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
