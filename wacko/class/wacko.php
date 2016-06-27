@@ -2053,9 +2053,9 @@ class Wacko
 						"comment_on_id 	= '".(int)$comment_on_id."', ".
 						(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
 						"parent_id 		= '".(int)$parent_id."', ".
-						"created		= NOW(), ".
-						"modified		= NOW(), ".
-						"commented		= NOW(), ".
+						"created		= UTC_TIMESTAMP(), ".
+						"modified		= UTC_TIMESTAMP(), ".
+						"commented		= UTC_TIMESTAMP(), ".
 						"depth			= '".(int)$depth."', ".
 						"owner_id		= '".(int)$owner_id."', ".
 						"user_id		= '".(int)$user_id."', ".
@@ -2070,7 +2070,7 @@ class Wacko
 						"minor_edit		= '".(int)$minor_edit."', ".
 						(isset($reviewed)
 							?	"reviewed		= '".(int)$reviewed."', ".
-								"reviewed_time	= NOW(), ".
+								"reviewed_time	= UTC_TIMESTAMP(), ".
 								"reviewer_id	= '".(int)$reviewer_id."', "
 							:	"").
 						"page_lang		= '".quote($this->dblink, $lang)."', ".
@@ -2106,7 +2106,7 @@ class Wacko
 					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}page SET ".
 							"comments	= '".(int)$this->count_comments($comment_on_id)."', ".
-							"commented	= NOW() ".
+							"commented	= UTC_TIMESTAMP() ".
 						"WHERE page_id = '".(int)$comment_on_id."' ".
 						"LIMIT 1");
 
@@ -2183,7 +2183,7 @@ class Wacko
 					$this->sql_query(
 						"UPDATE ".$this->config['table_prefix']."page SET ".
 							"comment_on_id	= '".(int)$comment_on_id."', ".
-							"modified		= NOW(), ".
+							"modified		= UTC_TIMESTAMP(), ".
 							"created		= '".quote($this->dblink, $old_page['created'])."', ".
 							"owner_id		= '".(int)$owner_id."', ".
 							"user_id		= '".(int)$user_id."', ".
@@ -2197,7 +2197,7 @@ class Wacko
 							"minor_edit		= '".(int)$minor_edit."', ".
 							(isset($reviewed)
 								?	"reviewed		= '".(int)$reviewed."', ".
-									"reviewed_time	= NOW(), ".
+									"reviewed_time	= UTC_TIMESTAMP(), ".
 									"reviewer_id	= '".(int)$reviewer_id."', "
 								:	"").
 							"title			= '".quote($this->dblink, $title)."' ".
@@ -2686,7 +2686,7 @@ class Wacko
 		$sql = "SELECT user_id, MAX(session_time) AS recent_time
 				FROM {$this->config['table_prefix']}auth_token ".
 				($expired
-					? "WHERE session_time < NOW() "
+					? "WHERE session_time < UTC_TIMESTAMP() "
 					: "").
 				($user_id
 					? "WHERE user_id = '".(int)$user_id."' "
@@ -2707,7 +2707,7 @@ class Wacko
 							session_expire	= 0, ".
 							($expired
 								? "last_visit	= '".$session['recent_time']."' "
-								: "last_visit	= NOW() ").
+								: "last_visit	= UTC_TIMESTAMP() ").
 						"WHERE user_id = '".(int)$session['user_id']."'
 						LIMIT 1";
 
@@ -2726,7 +2726,7 @@ class Wacko
 				$sql = "DELETE FROM {$this->config['table_prefix']}auth_token
 						WHERE user_id IN ( ".implode(', ', $remove)." ) ".
 						($expired
-							? "AND session_time < NOW()"
+							? "AND session_time < UTC_TIMESTAMP()"
 							: "");
 
 				$this->sql_query($sql);
@@ -4433,7 +4433,7 @@ class Wacko
 					"referrer		= '".quote($this->dblink, $referrer)."', ".
 					#"user_agent		= '".quote($this->dblink, (string) trim(substr($user_agent, 0, 149)))."', ".
 					#"ip				= '".quote($this->dblink, (string) $ip)."', ".
-					"referrer_time	= NOW()");
+					"referrer_time	= UTC_TIMESTAMP()");
 		}
 	}
 
@@ -4922,7 +4922,7 @@ class Wacko
 		{
 			return $this->sql_query(
 				"UPDATE {$this->config['user_table']} SET ".
-					"last_mark = NOW() ".
+					"last_mark = UTC_TIMESTAMP() ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 		}
@@ -5065,7 +5065,7 @@ class Wacko
 				"INSERT INTO {$this->config['table_prefix']}auth_token SET ".
 					"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
 					"user_id				= '".(int)$user['user_id']."', ".
-					"session_start			= NOW(), ".
+					"session_start			= UTC_TIMESTAMP(), ".
 					"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
 					"session_time			= '".quote($this->dblink, $this->session_time)."', ".
 					"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
@@ -5917,7 +5917,7 @@ class Wacko
 			return $this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page SET ".
 					"reviewed		= '".(int)$reviewed."', ".
-					"reviewed_time	= NOW(), ".
+					"reviewed_time	= UTC_TIMESTAMP(), ".
 					"reviewer_id	= '".(int)$reviewer_id."' ".
 				"WHERE page_id = '".(int)$page_id."' ".
 				"LIMIT 1");
@@ -6283,7 +6283,7 @@ class Wacko
 		{
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."referrer ".
-				"WHERE referrer_time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+				"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
 			$this->set_config('maint_last_refs', $now, '', true);
 			$this->log(7, 'Maintenance: referrers purged');
@@ -6295,7 +6295,7 @@ class Wacko
 		{
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."revision ".
-				"WHERE modified < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+				"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
 			$this->set_config('maint_last_oldpages', $now, '', true);
 			$this->log(7, 'Maintenance: outdated pages revisions purged');
@@ -6331,7 +6331,7 @@ class Wacko
 		{
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}log ".
-				"WHERE log_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
+				"WHERE log_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
 
 			$this->set_config('maint_last_log', $now, '', true);
 
@@ -6347,7 +6347,7 @@ class Wacko
 				// clear from db
 				$this->sql_query(
 					"DELETE FROM ".$this->config['table_prefix']."cache ".
-					"WHERE cache_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $ttl)."' SECOND )");
+					"WHERE cache_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $ttl)."' SECOND )");
 
 				if ($this->purge_cache_directory(CACHE_PAGE_DIR, $ttl))
 				{
@@ -7001,7 +7001,7 @@ class Wacko
 			// saving updated for the current user and flag it as deleted
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}page SET ".
-					"modified	= NOW(), ".
+					"modified	= UTC_TIMESTAMP(), ".
 					"ip			= '".$this->get_user_ip()."', ".
 					"deleted	= '1', ".
 					// "edit_note	= '".$this->get_user_ip()."', ". // removed

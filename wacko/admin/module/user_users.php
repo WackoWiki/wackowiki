@@ -140,7 +140,7 @@ function admin_user_users(&$engine, &$module)
 		{
 			$engine->sql_query(
 				"INSERT INTO {$engine->config['table_prefix']}user SET ".
-					"signup_time		= NOW(), ".
+					"signup_time		= UTC_TIMESTAMP(), ".
 					"email			= '".quote($engine->dblink, $_POST['email'])."', ".
 					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
 					"enabled		= '".(int)$_POST['enabled']."', ".

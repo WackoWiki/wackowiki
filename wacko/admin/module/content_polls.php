@@ -68,7 +68,7 @@ function admin_content_polls(&$engine, &$module)
 		{
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
-					"end = NOW() ".
+					"end = UTC_TIMESTAMP() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0 ".
 				"LIMIT 1");
 
@@ -79,7 +79,7 @@ function admin_content_polls(&$engine, &$module)
 		{
 			$engine->sql_query(	// reset start date
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
-					"start	= NOW() ".
+					"start	= UTC_TIMESTAMP() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
 			$engine->sql_query(	// reset votes and update servey id
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
@@ -95,7 +95,7 @@ function admin_content_polls(&$engine, &$module)
 		{
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
-					"start = NOW() ".
+					"start = UTC_TIMESTAMP() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
 
 			#$engine->$xml->feed(); // update news feed

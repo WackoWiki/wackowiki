@@ -170,7 +170,7 @@ class Polls
 				"text		= '".quote($this->engine->dblink, rtrim($topic, '.'))."', ".
 				"user_id	= '".(int)$user_id."', ".
 				"plural		= '".$plural."', ".
-				"start		= ".($start == 1 ? "NOW()" : "'".SQL_NULLDATE."'"));
+				"start		= ".($start == 1 ? "UTC_TIMESTAMP()" : "'".SQL_NULLDATE."'"));
 
 		// submitting variants
 		foreach ($answers as $v_id => $v_text)

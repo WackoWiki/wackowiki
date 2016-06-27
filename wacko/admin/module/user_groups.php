@@ -197,7 +197,7 @@ function admin_user_groups(&$engine, &$module)
 			{
 				$engine->sql_query(
 					"INSERT INTO {$engine->config['table_prefix']}usergroup SET ".
-						"created		= NOW(), ".
+						"created		= UTC_TIMESTAMP(), ".
 						"description	= '".quote($engine->dblink, $_POST['description'])."', ".
 						"moderator_id		= '".(int)$_POST['moderator_id']."', ".
 						"group_name		= '".quote($engine->dblink, $_POST['new_group_name'])."', ".
