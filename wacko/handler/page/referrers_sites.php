@@ -7,9 +7,8 @@ if (!defined('IN_WACKO'))
 
 // TODO: remove or reuse ?obsolete? message sets: ViewReferringSitesGlobal, ViewReferringSites
 
-?>
-<div id="page">
-<?php
+echo '<div id="page">';
+$include_tail = '</div>';
 
 // redirect to show method if page don't exists
 if (!$this->page)
@@ -23,10 +22,14 @@ if ($this->page['comment_on_id'])
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
 }
 
-$global = isset($_GET['global']);
+$mode = @$_GET['o'];
+if (!ctype_lower($mode))
+{
+	$mode = '';
+}
 
 // navigation
-if ($global)
+if ($mode == 'global')
 {
 	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersGlobal')."</h3>";
 	echo '<ul class="menu">
@@ -39,15 +42,16 @@ else
 	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPage')."</h3>";
 	echo '<ul class="menu">
 			<li class="active">'.$this->get_translation('ViewReferrersPage').'</li>
-			<li><a href="'.$this->href('referrers_sites', '', 'global=1').'">'. $this->get_translation('ViewReferrersGlobal')."</a></li>
+			<li><a href="'.$this->href('referrers_sites', '', 'o=global').'">'. $this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 }
 
 if ($this->get_user())
 {
-	if ($global)
+	$href = $this->href('referrers', '', 'o=' . $mode);
+	if ($mode == 'global')
 	{
-		$title		= perc_replace($this->get_translation('DomainsSitesPagesGlobal'), $this->href('referrers', '', 'global=1'));
+		$title		= perc_replace($this->get_translation('DomainsSitesPagesGlobal'), $href);
 		$referrers	= $this->load_referrers();
 	}
 	else
@@ -57,7 +61,7 @@ if ($this->get_user())
 			(($i = $this->config['referrers_purge_time']) == 0? '' :
 				($i == 1? $this->get_translation('Last24Hours') :
 				perc_replace($this->get_translation('LastDays'), $i))),
-			$this->href('referrers'));
+			$href);
 		$referrers = $this->load_referrers($this->page['page_id']);
 	}
 
@@ -110,6 +114,3 @@ else
 	$message = $this->get_translation('ReadAccessDenied');
 	$this->show_message($message, 'info');
 }
-
-?>
-</div>

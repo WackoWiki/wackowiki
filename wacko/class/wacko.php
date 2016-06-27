@@ -671,7 +671,7 @@ class Wacko
 			return $this->resource[$name];
 		}
 
-		return '???' . $name . '???';
+		$this->log(3, "translation $lang/$name not found");
 	}
 
 	function format_translation($name, $lang = '')
@@ -4465,16 +4465,7 @@ class Wacko
 	// PLUGINS
 	function include_buffered($filename, $notfound_text = '', $vars = '', $path = '')
 	{
-		if ($path)
-		{
-			$dirs = explode(':', $path);
-		}
-		else
-		{
-			$dirs = array('');
-		}
-
-		foreach($dirs as $dir)
+		foreach (($path? explode(':', $path) : ['']) as $dir)
 		{
 			if ($dir)
 			{
@@ -4491,8 +4482,11 @@ class Wacko
 					extract($vars, EXTR_SKIP);
 				}
 
+				// include_tail is for extensions to use for closing markup tags, i.e. if return'ing early
+				$include_tail = '';
 				ob_start();
 				include($full_filename);
+				echo $include_tail;
 				$output = ob_get_contents();
 				ob_end_clean();
 
