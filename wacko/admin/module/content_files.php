@@ -315,11 +315,7 @@ function admin_content_files(&$engine, &$module)
 	// !!!!! patch link not to show pictures when not needed
 	if (!isset($picture))	$path2 = str_replace('file:', '_file:', $path2);
 
-	// pagination
-	$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-	// pagination
-	echo $show_pagination;
+	$engine->print_pagination($pagination);
 
 	if (count($files))
 	{
@@ -364,8 +360,7 @@ function admin_content_files(&$engine, &$module)
 <?php
 	}
 
-	// pagination
-	echo $show_pagination;
+	$engine->print_pagination($pagination);
 
 	echo "</fieldset>\n";
 

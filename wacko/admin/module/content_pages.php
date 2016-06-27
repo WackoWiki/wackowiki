@@ -187,10 +187,7 @@ function admin_content_pages(&$engine, &$module)
 			<input type="submit" name="reset" id="submit" value="reset" />
 		</div>
 <?php
-		$show_pagination = $engine->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-		// pagination
-		echo $show_pagination;
+		$engine->print_pagination($pagination);
 ?>
 		<table style="padding: 3px;" class="formation">
 			<tr>
@@ -256,8 +253,7 @@ function admin_content_pages(&$engine, &$module)
 ?>
 		</table>
 <?php
-	// pagination
-	echo $show_pagination;
+	$engine->print_pagination($pagination);
 
 	echo $engine->form_close();
 }

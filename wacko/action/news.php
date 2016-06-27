@@ -221,10 +221,7 @@ if (!empty($this->config['news_cluster']))
 	// displaying articles
 	if ($pages)
 	{
-		$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-		// pagination
-		echo $show_pagination;
+		$this->print_pagination($pagination);
 
 		foreach ($pages as $page)
 		{
@@ -243,7 +240,7 @@ if (!empty($this->config['news_cluster']))
 		}
 
 		// pagination
-		echo $show_pagination;
+		$this->print_pagination($pagination);
 	}
 	else
 	{

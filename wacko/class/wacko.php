@@ -480,7 +480,7 @@ class Wacko
 			$ap_translation = [];
 			$theme_translation = [];
 			$theme_translation0 = [];
-			if (@$this->config['ap_mode'])
+			if ($this->config['ap_mode'])
 			{
 				// ap.xy.php $ap_translation[]
 				$lang_file = 'admin/lang/ap.'.$lang.'.php';
@@ -491,7 +491,7 @@ class Wacko
 			}
 			else
 			{
-				// STS: only FIRST theme's language loaded.... need to fix for multi-themed sites w/ nonempty theme lang files
+				// TODO: only FIRST theme's language loaded.... need to fix for multi-themed sites w/ nonempty theme lang files
 				// theme lang files $theme_translation[]
 				$lang_file = $this->config['theme_path'].'/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
 				if (@file_exists($lang_file))
@@ -618,7 +618,7 @@ class Wacko
 
 		if ($this->config['multilanguage'] && isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 		{
-			// STS: http://stackoverflow.com/questions/6038236/using-the-php-http-accept-language-server-variable
+			// TODO: http://stackoverflow.com/questions/6038236/using-the-php-http-accept-language-server-variable
 			$want = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
 
 			// Check whether we have language files for this language
@@ -2777,21 +2777,16 @@ class Wacko
 	function output_messages()
 	{
 		// get system message
-		// STS: seems like should be removed
-		if (!empty($this->config['system_message']) && !(isset($this->config['ap_mode']) && $this->config['ap_mode'] === true))
+		// TODO: set type also via backend and store it [where?]
+		if (($message = @$this->config['system_message']) && !$this->config['ap_mode'])
 		{
-			$type		= $this->config['system_message_type']; // TODO: set type also via backend and store it [where?]
-			$message	= $this->config['system_message'];
-
 			// check current page lang for different charset to do_unicode_entities()
 			if (isset($this->page['page_lang']) && $this->page['page_lang'] != $this->config['language'])
 			{
 				$message	= $this->do_unicode_entities($message, $this->config['language']);
 			}
 
-			#echo '<div class="sysmessage">';
-			$this->show_message($message, 'sysmessage'.' '.$type);
-			#echo '</div>';
+			$this->show_message($message, 'sysmessage ' . @$this->config['system_message_type']);
 		}
 
 		if (isset($_SESSION['messages']))
@@ -2800,6 +2795,7 @@ class Wacko
 			unset($_SESSION['messages']);
 
 			// TODO: maybe filter?
+			// TODO: think about quoting....
 			foreach ($messages as $message)
 			{
 				list($_message, $_type) = $message;
@@ -2966,7 +2962,7 @@ class Wacko
 	{
 		$_rewrite_mode = '';
 
-		if (@$this->config['ap_mode'])
+		if ($this->config['ap_mode'])
 		{
 			// enable rewrite_mode to avoid href() appends '?page='
 			$_rewrite_mode = 1;
@@ -3011,7 +3007,7 @@ class Wacko
 			$tag = $this->tag;
 		}
 
-		if (!$addpage && $this->config['ap_mode'] === false)
+		if (!$addpage && !$this->config['ap_mode'])
 		{
 			$tag = $this->slim_url($tag);
 		}
@@ -4295,7 +4291,7 @@ class Wacko
 
 		$result	= '<form action="'.$this->href($page_method, $tag, $href_param, $add).'" '.$form_more.' method="'.$form_method.'" '.($form_name ? 'name="'.$form_name.'" ' : '').">\n";
 
-		if (!$this->config['rewrite_mode']  && $this->config['ap_mode'] === false)
+		if (!$this->config['rewrite_mode']  && !$this->config['ap_mode'])
 		{
 			$result .= '<input type="hidden" name="page" value="'.$this->mini_href($page_method, $tag, $add)."\" />\n";
 		}

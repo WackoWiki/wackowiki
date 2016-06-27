@@ -428,10 +428,7 @@ if ($phrase)
 				}
 			}
 
-			$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
-			// pagination
-			echo $show_pagination;
+			$this->print_pagination($pagination);
 
 			if (!$nomark)
 			{
@@ -448,8 +445,7 @@ if ($phrase)
 			if ($style == 'ol')		echo "</ol>\n";
 			if (!$nomark)			echo "</div>\n";
 
-			// pagination
-			echo $show_pagination;
+			$this->print_pagination($pagination);
 		}
 		else if (!$nomark)
 		{
