@@ -1579,8 +1579,8 @@ class Wacko
 		$limit = (int)$limit;
 
 		// count pages
-		$count_pages = $this->load_all(
-			"SELECT p.page_id, u.user_name ".
+		$count_pages = $this->load_single(
+			"SELECT COUNT(p.page_id) AS n ".
 			"FROM ".$this->config['table_prefix']."page p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
@@ -1593,18 +1593,17 @@ class Wacko
 				($minor_edit
 					? "AND p.minor_edit = '0' "
 					: "").
-				($deleted != 1
+				(!$deleted
 					? "AND p.deleted <> '1' "
 					: "").
-				($default_pages == false
+				(!$default_pages
 					? "AND (u.account_type = '0' OR p.user_id = '0') "
 					: "")
 			);
 
-		$count		= count($count_pages);
-		$pagination = $this->pagination($count, $limit);
+		$pagination = $this->pagination($count_pages['n'], $limit);
 
-		if ($pages = $this->load_all(
+		if (($pages = $this->load_all(
 		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, u.user_name ".
 		"FROM ".$this->config['table_prefix']."page p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
@@ -1618,21 +1617,21 @@ class Wacko
 			($minor_edit
 				? "AND p.minor_edit = '0' "
 				: "").
-			($deleted != 1
+			(!$deleted
 				? "AND p.deleted <> '1' "
 				: "").
-			($default_pages == false
+			(!$default_pages
 				? "AND (u.account_type = '0' OR p.user_id = '0') "
 				: "").
 		"ORDER BY p.modified DESC ".
-		"LIMIT {$pagination['offset']}, {$limit}", true))
+		"LIMIT {$pagination['offset']}, {$limit}", true)))
 		{
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, 0, 1);
 			}
 
-			if ($read_acls = $this->load_all(
+			if (($read_acls = $this->load_all(
 			"SELECT a.page_id, a.privilege, a.list ".
 			"FROM ".$this->config['table_prefix']."acl a ".
 				"INNER JOIN ".$this->config['table_prefix']."page p ON (a.page_id = p.page_id) ".
@@ -1643,7 +1642,7 @@ class Wacko
 					: '').
 				"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
-			"LIMIT {$limit}", true))
+			"LIMIT {$limit}", true)))
 			{
 				foreach ($read_acls as $read_acl)
 				{
@@ -4460,8 +4459,7 @@ class Wacko
 
 	// PLUGINS
 	// variables prefixed by __ to not mess with argument extraction from $vars
-	// NB $vars name is part of legacy API
-	function include_buffered($__filename, $__notfound = '', $vars = '', $__path = '')
+	function include_buffered($__filename, $__notfound = '', $__vars = '', $__path = '')
 	{
 		foreach (($__path? explode(':', $__path) : ['']) as $__dir)
 		{
@@ -4469,9 +4467,9 @@ class Wacko
 
 			if (@file_exists($__pathname))
 			{
-				if (is_array($vars))
+				if (is_array($__vars))
 				{
-					extract($vars, EXTR_SKIP);
+					extract($__vars, EXTR_SKIP);
 				}
 
 				// include_tail is for extensions to use for closing markup tags, i.e. if return'ing early

@@ -54,8 +54,6 @@ if (!function_exists('load_wanted'))
 	}
 }
 
-if (!isset($root)) $root = $this->unwrap_link($vars[0]);
-
 if (!isset($root))
 {
 	$root = $this->page['tag'];

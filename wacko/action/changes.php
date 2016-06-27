@@ -13,7 +13,7 @@ if (!isset($date))		$date = @$_GET['date'];
 if (!isset($hide_minor_edit)) $hide_minor_edit = @$_GET['minor_edit'];
 if (!isset($noxml))		$noxml = 0;
 if (!isset($title))		$title = '';
-if (!isset($max))		$max = null;
+if (!isset($max))		$max = '';
 
 $user	= $this->get_user();
 $max	= $this->get_list_count($max);
@@ -33,9 +33,12 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
 	}
 
-	if ($root == '' && !(int)$noxml)
+	if (!$root && !(int)$noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/changes_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentChangesXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."<br /><br />\n";
+		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/changes_'.
+			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.
+			$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentChangesXMLTip').
+			'" alt="XML" class="btn-feed"/></a></span>'."<br /><br />\n";
 	}
 
 	$this->print_pagination($pagination);
@@ -63,7 +66,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 				$curday = $day;
 			}
 
-			$review = $edit_note = $viewed = '';
+			$review = $viewed = '';
 
 			// review
 			if ($this->config['review'] && $this->is_reviewer() && !$page['reviewed'])
@@ -74,14 +77,14 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			// do unicode entities
 			$page_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
 
-			if ($page['edit_note'])
+			if (($edit_note = $page['edit_note']))
 			{
 				if ($page_lang)
 				{
-					$page['edit_note'] = $this->do_unicode_entities($page['edit_note'], $page_lang);
+					$edit_note = $this->do_unicode_entities($edit_note, $page_lang);
 				}
 
-				$edit_note = '<span class="editnote">['.$page['edit_note'].']</span>';
+				$edit_note = '<span class="editnote">[' . $edit_note . ']</span>';
 			}
 
 			if (isset($user['last_mark']) && $user['last_mark'] &&
@@ -96,7 +99,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			// print entry
 			echo '<li class="lined'.$viewed.'"><span class="dt">'.
 			(!$this->hide_revisions || $this->is_admin()
-				? "".$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip'))." "
+				? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip'))." "
 				: $time
 			).
 			"</span> &mdash; ".
@@ -120,5 +123,3 @@ else
 {
 	echo $this->get_translation('NoPagesFound');
 }
-
-?>

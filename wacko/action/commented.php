@@ -65,8 +65,7 @@ if (!function_exists('load_commented'))
 	}
 }
 
-if (!isset($root))	$root	= $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
-if (!isset($root))	$root	= $this->page['tag'];
+if (!isset($root))	$root	= $this->unwrap_link(isset($for) ? $for : '');
 if (!isset($title)) $title	= 0;
 if (!isset($noxml)) $noxml	= 0;
 if (!isset($max))		$max = null;

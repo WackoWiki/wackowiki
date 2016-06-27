@@ -5,29 +5,22 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($use_empty_string)) $use_empty_string= '';
+$revision_id = @$_GET['revision_id'];
+if (!isset($use_empty_string)) $use_empty_string = '';
+if (!isset($page)) $page = '';
 
-$page_tag = $this->unwrap_link($vars[0]);
-$page_id = $this->get_page_id($vars[0]);
+$page = $this->unwrap_link($page);
+$page_id = $this->get_page_id($page);
 
-if (! $this->has_access('read', $page_id))
+if (!$this->has_access('read', $page_id))
 {
 	echo $this->get_translation('NoAccessToSourcePage');
 }
 else
 {
-	if (isset($_GET['revision_id']))
+	if (!($phrase_page = $this->load_page($page, 0, $revision_id)))
 	{
-		$revision_id = $_GET['revision_id'];
-	}
-	else
-	{
-		$revision_id = '';
-	}
-
-	if (!$phrase_page = $this->load_page($page_tag, 0, $revision_id))
-	{
-		echo '<em> '.$this->get_translation('SourcePageDoesntExist').'('.$vars[0].')</em>';
+		echo '<em> ' . $this->get_translation('SourcePageDoesntExist') . '(' . $page . ')</em>';
 	}
 	else
 	{
@@ -35,7 +28,7 @@ else
 		$strings	= $this->format($strings);
 		$splitexpr	= '|<br />|';
 
-		if ($use_empty_string == 1)
+		if ($use_empty_string)
 		{
 			$splitexpr = '|<br />[\n\r ]*<br />|';
 		}
@@ -46,7 +39,5 @@ else
 		srand ((double) microtime() * 1000000);
 
 		echo $lines[rand(0, count($lines) - 1)];
-	};
+	}
 }
-
-?>
