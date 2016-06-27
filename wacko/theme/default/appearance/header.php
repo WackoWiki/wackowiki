@@ -238,7 +238,7 @@ else
 		}
 
 		// referrers tab
-		if ($this->page && $logged_in)
+		if ($this->page)
 		{
 			$echo_tab('referrers', 'ReferrersTip', 'ReferrersText', 2, '', 'l');
 		}

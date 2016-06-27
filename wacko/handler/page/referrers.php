@@ -73,10 +73,8 @@ if (
 $url_maxlen = 80;
 $spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . . '
 $modes		= ['ViewReferrersPage' => '', 'ViewReferrersPerPage' => 'perpage', 'ViewReferrersByTime' => 'bytime', 'ViewReferrersGlobal' => 'global'];
-
-$max = $this->get_list_count(@$max);
-
-$mode = @$_GET['o'];
+$max		= $this->get_list_count(@$max);
+$mode		= @$_GET['o'];
 if (!in_array($mode, $modes))
 {
 	$mode = '';
@@ -157,13 +155,13 @@ foreach ($modes as $text => $i)
 
 echo "</ul><br /><br />\n";
 
-// usual backlinks for default mode
+// in default mode we show intra-wiki backlinks before external referrers
 if (!$mode)
 {
 	$show_backlinks();
 }
 
-// external referrers header
+// referrers header
 echo '<strong>' . $title . "</strong><br /><br />\n";
 
 $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $spacer)

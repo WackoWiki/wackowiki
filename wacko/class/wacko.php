@@ -4459,19 +4459,15 @@ class Wacko
 	}
 
 	// PLUGINS
-	function include_buffered($filename, $notfound_text = '', $vars = '', $path = '')
+	// variables prefixed by __ to not mess with argument extraction from $vars
+	// NB $vars name is part of legacy API
+	function include_buffered($__filename, $__notfound = '', $vars = '', $__path = '')
 	{
-		foreach (($path? explode(':', $path) : ['']) as $dir)
+		foreach (($__path? explode(':', $__path) : ['']) as $__dir)
 		{
-			if ($dir)
-			{
-				$dir .= '/';
-			}
+			$__pathname = trim($__dir . '/' . $__filename, './');
 
-			$full_filename = $dir.$filename;
-			$full_filename = trim($full_filename, './');
-
-			if (@file_exists($full_filename))
+			if (@file_exists($__pathname))
 			{
 				if (is_array($vars))
 				{
@@ -4481,7 +4477,7 @@ class Wacko
 				// include_tail is for extensions to use for closing markup tags, i.e. if return'ing early
 				$include_tail = '';
 				ob_start();
-				include($full_filename);
+				include($__pathname);
 				echo $include_tail;
 				$output = ob_get_contents();
 				ob_end_clean();
@@ -4490,9 +4486,9 @@ class Wacko
 			}
 		}
 
-		if ($notfound_text)
+		if ($__notfound)
 		{
-			return $this->show_message($notfound_text, 'error', false);
+			return $this->show_message($__notfound, 'error', false);
 		}
 		else
 		{
@@ -4555,14 +4551,15 @@ class Wacko
 	*/
 	function action($action, $params = '', $force_link_tracking = 0)
 	{
-		$action = trim($action);
+		$action = strtolower(trim($action));
+		$errmsg = '<em>' . $this->get_translation('UnknownAction') . ' "<code>' . $action . '</code>"</em>';
 
 		if (!$force_link_tracking)
 		{
 			$this->stop_link_tracking();
 		}
 
-		$result = $this->include_buffered(strtolower($action).'.php', '<em>'.$this->get_translation('UnknownAction').' "'.$action.'"</em>', $params, $this->config['action_path']);
+		$result = $this->include_buffered($action . '.php', $errmsg, $params, $this->config['action_path']);
 
 		$this->start_link_tracking();
 		$this->no_cache();
@@ -4578,8 +4575,9 @@ class Wacko
 		}
 
 		$method_location = $handler.'/'.$method.'.php';
+		$errmsg = '<em>' . $this->get_translation('UnknownMethod') . ' "<code>' . $method_location . '</code>"</em>';
 
-		return $this->include_buffered($method_location, '<em>'.$this->get_translation('UnknownMethod').' "<code>'.$method_location.'</code>"</em>', '', $this->config['handler_path']);
+		return $this->include_buffered($method_location, $errmsg, '', $this->config['handler_path']);
 	}
 
 	// wrapper for the next method
