@@ -68,7 +68,7 @@ function bb2_table_structure($name)
 		`log_id` INT(11) NOT NULL AUTO_INCREMENT,
 		`ip` VARCHAR(45) NOT NULL DEFAULT '',
 		`host` VARCHAR(2083) NOT NULL DEFAULT '',
-		`date` DATETIME NOT NULL default '0000-00-00 00:00:00',
+		`date` DATETIME DEFAULT NULL,
 		`request_method` VARCHAR(8) NOT NULL DEFAULT '',
 		`request_uri` VARCHAR(2083) NOT NULL DEFAULT '',
 		`request_uri_hash` CHAR(40) NOT NULL DEFAULT '',

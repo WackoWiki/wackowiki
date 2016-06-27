@@ -179,7 +179,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".$engine->count_comments($base_id)."', ".
-			"commented	= NOW() ".
+			"commented	= UTC_TIMESTAMP() ".
 		"WHERE page_id = '".(int)$base_id."' ".
 		"LIMIT 1");
 
@@ -275,7 +275,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".$engine->count_comments($new_page_id)."', ".
-			"commented	= NOW() ".
+			"commented	= UTC_TIMESTAMP() ".
 		"WHERE page_id = '".$new_page_id."' ".
 		"LIMIT 1");
 
@@ -949,7 +949,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}page SET ".
 							"comments	= '".$this->count_comments($this->page['page_id'])."', ".
-							"commented	= NOW() ".
+							"commented	= UTC_TIMESTAMP() ".
 						"WHERE page_id = '".$this->page['page_id']."' ".
 						"LIMIT 1");
 
@@ -1112,7 +1112,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
 								"comments	= '".$this->count_comments($page_id)."', ".
-								"commented	= NOW() ".
+								"commented	= UTC_TIMESTAMP() ".
 							"WHERE page_id = '".(int)$page_id."' ".
 							"LIMIT 1");
 

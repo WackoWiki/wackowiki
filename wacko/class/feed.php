@@ -309,7 +309,7 @@ class Feed
 
 	function site_map()
 	{
-		$prefix			= $this->engine->config['table_prefix'];
+		$prefix		= $this->engine->config['table_prefix'];
 
 		//  collect data
 		$pages = $this->engine->load_all(

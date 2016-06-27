@@ -145,7 +145,7 @@ if (!empty($this->config['news_cluster']))
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' ".
 				"AND deleted <> '1' ".
-				"AND created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
+				"AND created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ".
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=week');
@@ -157,7 +157,7 @@ if (!empty($this->config['news_cluster']))
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
 				"AND p.deleted <> '1' ".
-				"AND p.created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
+				"AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", true);
 	}

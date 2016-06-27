@@ -198,7 +198,7 @@ foreach($config_db as $key => $value)
 
 // to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE: http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
 $insert_config =	"INSERT INTO ".$config['table_prefix']."config (config_id, config_name, config_value)
-						VALUES ".$config_insert."(0, 'maint_last_update', NOW()) ".
+						VALUES ".$config_insert."(0, 'maint_last_update', UTC_TIMESTAMP()) ".
 					"ON DUPLICATE KEY
 						UPDATE
 							config_name		= VALUES(config_name),

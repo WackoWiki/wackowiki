@@ -33,7 +33,7 @@ if ($user_id = $this->get_user_id())
 		{
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch ".
-				"SET watch_time = NOW() ".
+				"SET watch_time = UTC_TIMESTAMP() ".
 				"WHERE page_id = '".$page['page_id']."' ".
 					"AND user_id = '".(int)$user_id."'");
 		}

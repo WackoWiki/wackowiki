@@ -201,7 +201,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$this->sql_query(
 						"INSERT INTO ".$this->config['user_table']." ".
 						"SET ".
-							"signup_time	= NOW(), ".
+							"signup_time	= UTC_TIMESTAMP(), ".
 							"user_name		= '".quote($this->dblink, $user_name)."', ".
 							"account_lang	= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
 							"email			= '".quote($this->dblink, $email)."', ".
