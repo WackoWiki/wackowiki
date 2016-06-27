@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 echo '<div id="page">';
 $include_tail = '</div>';
 
-// redirect to show method if page don't exists or no referrers enabled
-if (!$this->page || !$this->config['enable_referrers'])
+// redirect to show method if no page exists
+if (!$this->page)
 {
 	$this->redirect($this->href());
 }
@@ -20,11 +20,56 @@ if ($this->page['comment_on_id'])
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1') . '#' . $this->page['tag']);
 }
 
-if (!$this->get_user())
+// let's start: print header
+echo '<h3>' . $this->get_translation('ReferrersText') . ' &raquo; ' . $this->get_translation('ViewReferrersGlobal') . '</h3>';
+
+$show_backlinks = function ()
 {
-	return $this->show_message($this->get_translation('ReadAccessDenied'), 'info');
+	echo '<strong>' . $this->get_translation('ReferringPages') . ":</strong><br /><br />\n";
+
+	// show backlinks
+	if (($pages = $this->load_pages_linking_to($this->tag)))
+	{
+		echo "<ol>\n";
+
+		$anchor = $this->translit($this->tag);
+
+		foreach ($pages as $page)
+		{
+			if ($page['tag'])
+			{
+				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+				{
+					// cache page_id for for has_access validation in link function
+					$this->page_id_cache[$page['tag']] = $page['page_id'];
+
+					echo '<li>' . $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['tag'], $page['title']) . "</li>\n";
+				}
+			}
+		}
+
+		echo "</ol>\n";
+	}
+	else
+	{
+		echo $this->get_translation('NoReferringPages');
+	}
+	echo '<p></p>';
+};
+
+// fast lane: show backlinks for those who don't deserve further service ;)
+// enable_referrers == 1 for all logged-in users, == 2 for admins only
+if (
+	($this->config['enable_referrers'] == 0) ||
+	($this->config['enable_referrers'] == 1 && !$this->get_user()) ||
+	($this->config['enable_referrers'] == 2 && !$this->is_admin()))
+{
+	echo "<br /><br />\n";
+	$show_backlinks();
+	return;
 }
 
+// set up for main show
 $url_maxlen = 80;
 $spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . . '
 $modes		= ['ViewReferrersPage' => '', 'ViewReferrersPerPage' => 'perpage', 'ViewReferrersByTime' => 'bytime', 'ViewReferrersGlobal' => 'global'];
@@ -36,30 +81,6 @@ if (!in_array($mode, $modes))
 {
 	$mode = '';
 }
-
-// print navigation
-echo '<h3>' . $this->get_translation('ReferrersText') . ' &raquo; ' . $this->get_translation('ViewReferrersGlobal') . '</h3>';
-echo '<ul class="menu">';
-
-foreach ($modes as $text => $i)
-{
-	if ($mode != $i)
-	{
-		echo '<li><a href="' . $this->href('referrers', '', ($i? 'o=' . $i : '')) . '">';
-	}
-	else
-	{
-		echo '<li class="active">';
-	}
-	echo $this->get_translation($text);
-	if ($mode != $i)
-	{
-		echo '</a>';
-	}
-	echo '</li>';
-}
-
-echo "</ul><br /><br />\n";
 
 // set up for main show
 $purge_time = (($t = $this->config['referrers_purge_time'])
@@ -100,37 +121,6 @@ else if ($mode == 'global')
 }
 else
 {
-	echo '<strong>' . $this->get_translation('ReferringPages') . ":</strong><br /><br />\n";
-
-	// show backlinks
-	if (($pages = $this->load_pages_linking_to($this->tag)))
-	{
-		echo "<ol>\n";
-
-		$anchor = $this->translit($this->tag);
-
-		foreach ($pages as $page)
-		{
-			if ($page['tag'])
-			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
-				{
-					// cache page_id for for has_access validation in link function
-					$this->page_id_cache[$page['tag']] = $page['page_id'];
-
-					echo '<li>' . $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['tag'], $page['title']) . "</li>\n";
-				}
-			}
-		}
-
-		echo "</ol>\n";
-	}
-	else
-	{
-		echo $this->get_translation('NoReferringPages');
-	}
-	echo '<p></p>';
-
 	$title = perc_replace($this->get_translation('ExternalPages'),
 		$this->compose_link_to_page($this->tag),
 		$purge_time,
@@ -144,14 +134,37 @@ else
 		"ORDER BY num DESC";
 }
 
-echo '<strong>' . $title . "</strong><br /><br />\n";
+// print navigation
+echo '<ul class="menu">';
 
-// enable_referrers == 1 for all logged-in users, == 2 for admins only
-if (!($this->config['enable_referrers'] == 1 || $this->is_admin()))
+foreach ($modes as $text => $i)
 {
-	echo $this->get_translation('NoneReferrers')."<br /><br />\n" ;
-	return;
+	if ($mode != $i)
+	{
+		echo '<li><a href="' . $this->href('referrers', '', ($i? 'o=' . $i : '')) . '">';
+	}
+	else
+	{
+		echo '<li class="active">';
+	}
+	echo $this->get_translation($text);
+	if ($mode != $i)
+	{
+		echo '</a>';
+	}
+	echo '</li>';
 }
+
+echo "</ul><br /><br />\n";
+
+// usual backlinks for default mode
+if (!$mode)
+{
+	$show_backlinks();
+}
+
+// external referrers header
+echo '<strong>' . $title . "</strong><br /><br />\n";
 
 $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $spacer)
 {
