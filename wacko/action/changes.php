@@ -7,10 +7,10 @@ if (!defined('IN_WACKO'))
 
 $viewed = '';
 
-if (!isset($root))		$root = $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
-if (!isset($root))		$root = $this->page['tag'];
-if (!isset($date))		$date = isset($_GET['date']) ? $_GET['date'] : '';
-if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] : '';
+if (!isset($root) && isset($for))	$root = $this->unwrap_link($for);
+if (!isset($root))		$root = '';
+if (!isset($date))		$date = @$_GET['date'];
+if (!isset($hide_minor_edit)) $hide_minor_edit = @$_GET['minor_edit'];
 if (!isset($noxml))		$noxml = 0;
 if (!isset($title))		$title = '';
 if (!isset($max))		$max = null;
@@ -18,21 +18,17 @@ if (!isset($max))		$max = null;
 $user	= $this->get_user();
 $max	= $this->get_list_count($max);
 
-$admin	= ($this->is_admin() ? true : false);
-
 // process 'mark read' - reset session time
-if (isset($_GET['markread']) && $user == true)
+if (isset($_GET['markread']) && $user)
 {
 	$this->update_last_mark($user);
-	$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-	$user = $this->get_user();
+	$this->set_user_setting('last_mark', date('Y-m-d H:i:s'));
 }
 
-if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $hide_minor_edit))
+if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_minor_edit))
 {
-	$count	= 0;
 
-	if ($user == true)
+	if ($user)
 	{
 		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
 	}
@@ -45,34 +41,16 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 	$this->print_pagination($pagination);
 
 	echo '<ul class="ul_list">'."\n";
-	$access = true;
 
+	$curday = '';
 	foreach ($pages as $i => $page)
 	{
-		if ($this->config['hide_locked'])
+		if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 		{
-			$access = $this->has_access('read', $page['page_id']);
-		}
-		else
-		{
-			$access = true;
-		}
-
-		if ($access && ($count < $max))
-		{
-			$count++;
-
 			// tz offset
-			$time_tz = $this->get_time_tz( strtotime($page['modified']) );
-			$time_tz = date('Y-m-d H:i:s', $time_tz);
-
-			// day header
-			list($day, $time) = explode(' ', $time_tz);
-
-			if (!isset($curday))
-			{
-				$curday = '';
-			}
+			$time_tz = $this->get_time_tz(strtotime($page['modified']));
+			$day = date($this->config['date_format'], $time_tz);
+			$time = date($this->config['time_format_seconds'], $time_tz);
 
 			if ($day != $curday)
 			{
@@ -85,32 +63,16 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 				$curday = $day;
 			}
 
+			$review = $edit_note = $viewed = '';
+
 			// review
-			if ($this->config['review'] && $this->is_reviewer())
+			if ($this->config['review'] && $this->is_reviewer() && !$page['reviewed'])
 			{
-				if ($page['reviewed'] == 0)
-				{
-					$review = '<span class="review">['.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('Review'), 0).']</span>';
-				}
-				else
-				{
-					$review = '';
-				}
-			}
-			else
-			{
-				$review = '';
+				$review = '<span class="review">['.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('Review'), 0).']</span>';
 			}
 
 			// do unicode entities
-			if ($this->page['page_lang'] != $page['page_lang'])
-			{
-				$page_lang = $page['page_lang'];
-			}
-			else
-			{
-				$page_lang = '';
-			}
+			$page_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
 
 			if ($page['edit_note'])
 			{
@@ -121,14 +83,11 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 
 				$edit_note = '<span class="editnote">['.$page['edit_note'].']</span>';
 			}
-			else
-			{
-				$edit_note = '';
-			}
 
-			if(isset($user['last_mark']))
+			if (isset($user['last_mark']) && $user['last_mark'] &&
+					$page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'])
 			{
-				$viewed = ($user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '');
+				$viewed = ' viewed';
 			}
 
 			// cache page_id for for has_access validation in link function
@@ -136,9 +95,9 @@ if (list ($pages, $pagination) = $this->load_changed((int)$max, $root, $date, $h
 
 			// print entry
 			echo '<li class="lined'.$viewed.'"><span class="dt">'.
-			($this->hide_revisions === false || $this->is_admin()
-				? "".$this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime( $time )), 0, $this->get_translation('RevisionTip'))." "
-				: date($this->config['time_format_seconds'], strtotime( $time ))
+			(!$this->hide_revisions || $this->is_admin()
+				? "".$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip'))." "
+				: $time
 			).
 			"</span> &mdash; ".
 			($title == 1
