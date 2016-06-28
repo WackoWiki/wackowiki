@@ -325,6 +325,21 @@ class Init
 
 		$request = ltrim($request, '/');
 
+		// check for permalink
+		$this->page = (($p = strpos($request, '/')) === false)? $request : substr($request, 0, $p);
+		require_once('lib/hashids/Hashids.php');
+		$hashids = new Hashids($this->config['system_seed']);
+		$ids = $hashids->decode($this->page);
+		if (count($ids) == 3)
+		{
+			sscanf(hash('sha1', $ids[0] . $this->config['system_seed'] . $ids[1]), '%7x', $cksum);
+			if ($ids[2] == $cksum)
+			{
+				$this->method = 'permalink';
+				return;
+			}
+		}
+
 		// split into page/method
 		if (($p = strrpos($request, '/')) === false)
 		{

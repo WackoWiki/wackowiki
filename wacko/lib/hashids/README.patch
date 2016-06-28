@@ -1,0 +1,13 @@
+--- /home/sts/ww/can/hashids.php-1.0.5/lib/Hashids/Hashids.php	2015-01-21 06:49:41.000000000 +0600
++++ Hashids.php	2016-06-29 01:20:31.109571000 +0600
+@@ -11,9 +11,7 @@
+ 	
+ */
+ 
+-namespace Hashids;
+-
+-class Hashids implements HashGenerator {
++class Hashids {
+ 	
+ 	const VERSION = '1.0.5';
+ 	

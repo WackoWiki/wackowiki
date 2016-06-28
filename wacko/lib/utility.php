@@ -14,7 +14,7 @@ function perc_replace()
 }
 
 
-// Generate random password of defined $length that satisfie the complexity rules:
+// Generate random password of defined $length that satisfy the complexity rules:
 // containing n > 0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
 // The password complexity can be defined in $pwd_complexity :
 //		$pwd_complexity = 2 -- password consists of uppercase, lowercase, digits

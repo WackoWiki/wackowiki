@@ -6468,41 +6468,64 @@ class Wacko
 			}
 		}
 
-		if (!($this->method = trim($method)))
+		// permalink
+		$page = 0;
+		if ($method == 'permalink')
 		{
-			$this->method = 'show';
+			require_once('lib/hashids/Hashids.php');
+			$hashids = new Hashids($this->config['system_seed']);
+			$ids = $hashids->decode($tag);
+			if (count($ids) == 3)
+			{
+				$page = $this->load_page('', $ids[0], $ids[1], '', '', $this->is_admin());
+				if ($page)
+				{
+					$this->method = 'show';
+					$this->tag = $page['tag'];
+					$this->supertag = $page['supertag'];
+					$_GET['revision_id'] = $ids[1];
+				}
+			}
 		}
 
-		// normalizing tag name
-		if (!preg_match('/^['.$this->language['ALPHANUM_P'].'\!]+$/', $tag))
+		if (!$page)
 		{
-			$tag = $this->try_utf_decode($tag);
-		}
+			if (!($this->method = trim($method)))
+			{
+				$this->method = 'show';
+			}
 
-		$tag = str_replace("'", '_', str_replace('\\', '', str_replace('_', '', $tag)));
-		$tag = preg_replace('/[^'.$this->language['ALPHANUM_P'].'\_\-\.]/', '', $tag);
+			// normalizing tag name
+			if (!preg_match('/^['.$this->language['ALPHANUM_P'].'\!]+$/', $tag))
+			{
+				$tag = $this->try_utf_decode($tag);
+			}
 
-		$this->tag		= $tag;
-		$this->supertag	= $this->translit($tag);
+			$tag = str_replace("'", '_', str_replace('\\', '', str_replace('_', '', $tag)));
+			$tag = preg_replace('/[^'.$this->language['ALPHANUM_P'].'\_\-\.]/', '', $tag);
 
-		$revision_id	= isset($_GET['revision_id']) ? (int)$_GET['revision_id'] : '';
+			$this->tag		= $tag;
+			$this->supertag	= $this->translit($tag);
 
-		// show also $deleted = 1
-		if ($this->is_admin())
-		{
-			$page		= $this->load_page($this->tag, 0, $revision_id, '', '', true);
-		}
-		else
-		{
-			$page		= $this->load_page($this->tag, 0, $revision_id);
-			#$page		= $this->load_page($this->tag, 0, $revision_id, '', '', true);
-		}
+			$revision_id	= isset($_GET['revision_id']) ? (int)$_GET['revision_id'] : '';
 
-		// TODO: obsolete? Add description what it does
-		// creates dummy array
-		if ($this->config['outlook_workaround'] && !$page)
-		{
-			$page = $this->load_page($this->supertag."'", 0, $revision_id);
+			// show also $deleted = 1
+			if ($this->is_admin())
+			{
+				$page		= $this->load_page($this->tag, 0, $revision_id, '', '', true);
+			}
+			else
+			{
+				$page		= $this->load_page($this->tag, 0, $revision_id);
+				#$page		= $this->load_page($this->tag, 0, $revision_id, '', '', true);
+			}
+
+			// TODO: obsolete? Add description what it does
+			// creates dummy array
+			if ($this->config['outlook_workaround'] && !$page)
+			{
+				$page = $this->load_page($this->supertag."'", 0, $revision_id);
+			}
 		}
 
 		$this->set_page($page);

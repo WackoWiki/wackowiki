@@ -2,12 +2,12 @@
 
 // Generic Default Inserts
 
-if ($config['system_seed'] == '')
+if (!$config['system_seed'])
 {
-	$config['system_seed'] = random_seed(20, 3);
+	$config['system_seed'] = random_password(20);
 }
 
-$salt_user_form			= random_seed(10, 3);
+$salt_user_form			= random_password(10);
 $password_hashed		= $config['admin_name'].$_POST['password'];
 $password_hashed		= password_hash(
 								base64_encode(
