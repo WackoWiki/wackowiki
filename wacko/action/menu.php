@@ -52,8 +52,6 @@ $user			= '';
 $default_menu	= '';
 $menu_lang		= '';
 
-#$this->debug_print_r($_REQUEST);
-
 // get default menu items
 if ($this->is_admin() && $system == true)
 {

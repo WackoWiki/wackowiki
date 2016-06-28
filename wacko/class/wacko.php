@@ -43,7 +43,6 @@ class Wacko
 	var $numerate_links			= null;
 	var $post_wacko_action		= null;
 	var $_userhost				= null;
-	var $dbg_running			= true;
 	var $paragrafica_styles		= array(
 		'before'	=> array(
 						'_before'	=> '',
@@ -3269,9 +3268,6 @@ class Wacko
 			$file_access	= false;
 			$have_global	= false;
 
-			#$this->debug_print_r($matches);
-			#$this->debug_print_r($arr);
-
 			if (count($arr) == 1) // case 1 -> file:some.zip
 			{
 				#echo '####1: file:some.zip<br />';
@@ -3365,7 +3361,6 @@ class Wacko
 			}
 
 			//try to find in global / local storage and return if success
-			#$this->debug_print_r($file_data);
 			if (is_array($file_data))
 			{
 				#echo '---------------------------<br />';
@@ -7856,20 +7851,5 @@ class Wacko
 		}
 
 		return $x;
-	}
-
-	function debug_print_r ($array)
-	{
-		echo '<pre>';
-		print_r($array);
-		echo '</pre>';
-	}
-
-	function dbg($msg)
-	{
-		if ($this->dbg_running)
-		{
-			$this->dbg_running = @file_put_contents('DEBUG', date('ymdHis ') . implode(' ', func_get_args()) . "\n", FILE_APPEND);
-		}
 	}
 }

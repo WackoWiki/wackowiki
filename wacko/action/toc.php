@@ -66,8 +66,6 @@ if ($_page)
 			$numbers	= array();
 			$depth		= 0;
 
-			#$this->debug_print_r($toc);
-
 			for($i = 0; $i < $toc_len; $i++)
 			{
 				// neither '(p)' nor '(include)'

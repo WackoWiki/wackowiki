@@ -59,6 +59,10 @@ function random_password($length = 10, $pwd_complexity = 3)
 }
 
 // convert any php value to string
+// can be safely used json-alike:
+//		$str = stringify($some, 1, 0); // $full set to 0 to return false if non-serializable data found
+//		if ($str === false) error, some non-serializable types found
+//		$some = eval("return $str;")
 function stringify($x, $compact = 0, $full = 1)
 {
 	if (is_null($x))				return "NULL";
@@ -66,29 +70,39 @@ function stringify($x, $compact = 0, $full = 1)
 	if (is_int($x) || is_float($x)) return (string) $x;
 	if (is_array($x))
 	{
-		$array = $hash = [];
+		$array = [];
 		$i = 0;
 		foreach ($x as $k => $v)
 		{
-			if (($v = stringify($v, $compact, $full)) === false ||
-				($kk = stringify($k, $compact, $full)) === false)
+			if (($v = stringify($v, $compact, $full)) === false)
 			{
 				return false;
 			}
-			if ($i >= 0)
+			// in php array keys can be integer or string
+			if (is_int($k))
 			{
-				if ($i++ === $k)
+				if ($i == $k)
 				{
+					++$i;
 					$array[] = $v;
+					continue;
 				}
-				else
+				if ($k > $i)
 				{
-					$i = -1;
+					$i = $k + 1;
 				}
 			}
-			$hash[] = $kk . ($compact? '=>' : ' => ') . $v;
+			else if (is_string($k))
+			{
+				$k = stringify($k);
+			}
+			else
+			{
+				die('stringify(): impossible key ' . stringify($k));
+			}
+			$array[] = $k . ($compact? '=>' : ' => ') . $v;
 		}
-		return '[' . implode(($compact? ',' : ', '), ($i >= 0)? $array : $hash) . ']';
+		return '[' . implode(($compact? ',' : ', '), $array) . ']';
 	}
 	if (is_string($x))
 	{
@@ -98,7 +112,7 @@ function stringify($x, $compact = 0, $full = 1)
 		}
 		else
 		{
-		    return "'" . addcslashes($x, '\'\\') . "'";
+		    return "'" . preg_replace('/\\\\(?=[\\\\\'])|\\\\$|\'/', '\\\\\\0', $x) . "'";
 		}
 	}
 	if (!$full)						return false;
@@ -107,3 +121,28 @@ function stringify($x, $compact = 0, $full = 1)
 	return '*UNKNOWN*';
 }
 
+// legacy from wacko class
+function debug_print_r($array)
+{
+	echo '<pre>';
+	echo stringify($array);
+	echo '</pre>';
+}
+
+function dbg($msg)
+{
+	static $running = 1;
+
+	if ($running)
+	{
+		$args = func_get_args();
+		foreach ($args as &$arg)
+		{
+			if (!is_string($arg) || $arg === '' || preg_match('/[\x00-\x1f\x7f]/', $arg))
+			{
+				$arg = stringify($arg);
+			}
+		}
+		$running = @file_put_contents('DEBUG', date('ymdHis ') . implode(' ', $args) . "\n", FILE_APPEND);
+	}
+}

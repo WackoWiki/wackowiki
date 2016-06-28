@@ -75,7 +75,3 @@ if (!empty($_category))
 		echo "</div>\n";
 	}
 }
-
-# $this->debug_print_r($this->categories);
-
-?>
