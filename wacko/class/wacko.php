@@ -43,6 +43,7 @@ class Wacko
 	var $numerate_links			= null;
 	var $post_wacko_action		= null;
 	var $_userhost				= null;
+	var $dbg_running			= true;
 	var $paragrafica_styles		= array(
 		'before'	=> array(
 						'_before'	=> '',
@@ -91,7 +92,7 @@ class Wacko
 	*/
 	function __construct($config, $dblink)
 	{
-		$this->timer	= $this->get_micro_time();
+		$this->timer	= microtime(1);
 		$this->config	= $config;
 		$this->dblink	= $dblink;
 	}
@@ -114,14 +115,14 @@ class Wacko
 
 		if ($this->config['debug'] >= 2)
 		{
-			$start = $this->get_micro_time();
+			$start = microtime(1);
 		}
 
 		$result = sql_query($this->dblink, $query, $this->config['debug']);
 
 		if ($this->config['debug'] >= 2)
 		{
-			$time = $this->get_micro_time() - $start;
+			$time = microtime(1) - $start;
 			$this->query_time += $time;
 
 			if ($this->config['debug'] >= 3)
@@ -201,12 +202,6 @@ class Wacko
 	}
 
 	// MISC
-	function get_micro_time()
-	{
-		list($usec, $sec) = explode(' ', microtime());
-		return ((float)$usec + (float)$sec);
-	}
-
 	function get_page_tag($page_id = 0)
 	{
 		$page = $this->load_single(
@@ -386,10 +381,7 @@ class Wacko
 
 	function get_time_formatted($time)
 	{
-		$tz_time = $this->get_time_tz( strtotime($time) );
-
-		return date($this->config['date_format'].' '.
-			$this->config['time_format_seconds'], $tz_time);
+		return $this->get_unix_time_formatted(strtotime($time));
 	}
 
 	function get_unix_time_formatted($time)
@@ -2782,7 +2774,7 @@ class Wacko
 			// check current page lang for different charset to do_unicode_entities()
 			if (isset($this->page['page_lang']) && $this->page['page_lang'] != $this->config['language'])
 			{
-				$message	= $this->do_unicode_entities($message, $this->config['language']);
+				$message = $this->do_unicode_entities($message, $this->config['language']);
 			}
 
 			$this->show_message($message, 'sysmessage ' . @$this->config['system_message_type']);
@@ -2946,7 +2938,6 @@ class Wacko
 		return $tag;
 	}
 
-	// returns the full url to a page/method.
 	/**
 	* Returns the full URL for a page/method, including any additional URL-parameters and anchor
 	*
@@ -6395,7 +6386,7 @@ class Wacko
 		}
 
 		// autotasks
-		if (!($this->get_micro_time() % 3))
+		if (!(time() % 3))
 		{
 			$this->maintenance();
 		}
@@ -7955,8 +7946,9 @@ class Wacko
 
 	function dbg($msg)
 	{
-		@file_put_contents('DEBUG', date('ymdHis ') . implode(' ', func_get_args()) . "\n", FILE_APPEND);
+		if ($this->dbg_running)
+		{
+			$this->dbg_running = @file_put_contents('DEBUG', date('ymdHis ') . implode(' ', func_get_args()) . "\n", FILE_APPEND);
+		}
 	}
 }
-
-?>

@@ -17,7 +17,7 @@ class Cache
 		$this->cache_dir	= $cache_dir;
 		$this->cache_ttl	= $cache_ttl;
 		$this->debug		= $debug;
-		$this->timer		= $this->get_micro_time();
+		$this->timer		= microtime(1);
 	}
 
 	// save serialized sql results
@@ -323,7 +323,7 @@ class Cache
 				// how much time script take
 				if ($this->debug >= 1 && strpos($method, '.xml') === false)
 				{
-					$ddd = $this->get_micro_time();
+					$ddd = microtime(1);
 					echo '<div id="debug" class="debug">cache time: '.(number_format(($ddd-$this->timer), 3)).' s<br />';
 					echo '</div>';
 				}
@@ -345,13 +345,4 @@ class Cache
 		return true;
 	}
 
-	function get_micro_time()
-	{
-		list($usec, $sec) = explode(' ', microtime());
-
-		return ((float)$usec + (float)$sec);
-	}
-
 }
-
-?>
