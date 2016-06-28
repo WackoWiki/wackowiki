@@ -89,7 +89,7 @@ class Init
 		}
 
 		// start execution timer
-		$this->timer = $this->get_micro_time();
+		$this->timer = microtime(1);
 
 		// gzip_compression
 		if (ini_get('zlib.output_compression'))
@@ -113,13 +113,6 @@ class Init
 		{
 			$_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
 		}
-	}
-
-	// INT TIMER
-	function get_micro_time()
-	{
-		list($usec, $sec) = explode(' ', microtime());
-		return ((float)$usec + (float)$sec);
 	}
 
 	// DEFINE WACKO SETTINGS
@@ -715,7 +708,7 @@ class Init
 		{
 			if (($this->config['debug_admin_only'] == true && $this->engine->is_admin() === true) || $this->config['debug_admin_only'] == false)
 			{
-				$overall_time = $this->get_micro_time() - $this->timer;
+				$overall_time = microtime(1) - $this->timer;
 
 				echo '<div id="debug">'.
 					 '<p class="debug">Program execution statistics</p>'."\n<ul>\n";
