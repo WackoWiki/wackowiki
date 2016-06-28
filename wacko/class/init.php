@@ -34,16 +34,8 @@ if (!defined('IN_WACKO'))
 
 */
 
-// constants
-if ( @file_exists('config/constants.php') )
-{
-	require_once('config/constants.php');
-}
-else
-{
-	die("Error loading WackoWiki constants data: file `config/constants.php` is missing.");
-}
-
+// mandatory includes
+require_once('config/constants.php');
 require_once('lib/utility.php');
 
 // Compatibility with the password_* functions that ship with PHP 5.5
@@ -61,7 +53,6 @@ class Init
 	var $cache;
 	var $engine;
 	var $page;
-	var $request;
 	var $method;
 	var $timer;
 
@@ -70,7 +61,7 @@ class Init
 	function __construct()
 	{
 		// setting PHP error reporting
-		switch(PHP_ERROR_REPORTING)
+		switch (PHP_ERROR_REPORTING)
 		{
 			case 0:		error_reporting(0); break;
 			case 1:		error_reporting(E_ERROR | E_WARNING | E_PARSE); break;
@@ -78,6 +69,7 @@ class Init
 			case 3:		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING)); break;
 			case 4:		error_reporting(E_ALL ^ E_NOTICE); break;
 			case 5:		error_reporting(E_ALL); break;
+			case 6:		error_reporting(-1); break; // uber all
 			default:	error_reporting(E_ALL);
 		}
 
@@ -318,52 +310,44 @@ class Init
 	// Process request string, define $page and $method vars
 	function request()
 	{
-		// check config data
-		if ($this->config == false)
-		{
-			die("Error processing request: WackoWiki config data must be initialized.");
-		}
-
-		// fetch wacko location
 		if (isset($_SERVER['PATH_INFO']) && function_exists('virtual'))
 		{
-			$this->request = $_SERVER['PATH_INFO'];
+			$request = $_SERVER['PATH_INFO'];
 		}
-		else if(isset($_GET['page']))
+		else if (isset($_GET['page']))
 		{
-			$this->request = $_GET['page'];
-		}
-
-		// remove leading slash
-		$this->request	= preg_replace('/^\//', '', $this->request);
-		$this->method	= '';
-
-		// split into page/method
-		$p = strrpos($this->request, '/');
-
-		if ($p === false)
-		{
-			$this->page = $this->request;
+			$request = $_GET['page'];
 		}
 		else
 		{
-			$this->page			= substr($this->request, 0, $p);
-			$m1	= $this->method = strtolower(substr($this->request, $p - strlen($this->request) + 1));
-
-			if (!@file_exists($this->config['handler_path'].'/page/'.$this->method.'.php'))
-			{
-				$this->page		= $this->request;
-				$this->method	= '';
-			}
-			else if (preg_match('/^(.*?)\/('.$this->config['standard_handlers'].')($|\/(.*)$)/i', $this->page, $match))
-			{
-				//translit case
-				$this->page		= $match[1];
-				$this->method	= $match[2];
-			}
+			$request = '';
 		}
 
-		return true;
+		$request = ltrim($request, '/');
+
+		// split into page/method
+		if (($p = strrpos($request, '/')) === false)
+		{
+			$this->page = $request;
+			$this->method = '';
+		}
+		else
+		{
+			$this->page = substr($request, 0, $p);
+			$this->method = strtolower(substr($request, $p + 1));
+
+			if (!@file_exists($this->config['handler_path'] . '/page/' . $this->method . '.php'))
+			{
+				$this->page	= $this->request;
+				$this->method = '';
+			}
+			else if (preg_match('#^(.*?)/(' . $this->config['standard_handlers'] . ')(|/(.*))$#i', $this->page, $match))
+			{
+				//translit case
+				$this->page = $match[1];
+				$this->method = $match[2];
+			}
+		}
 	}
 
 	// SESSION HANDLING
@@ -404,84 +388,44 @@ class Init
 			return;
 		}
 
-		// check config data
-		if ($this->config == false)
-		{
-			die("Error loading WackoWiki DBAL: config data must be initialized.");
-		}
-
-		// Load the correct database connector
-		if (!isset( $this->config['database_driver'] ))
-		{
-			$this->settings('database_driver', 'mysqli_legacy');
-		}
-
-		switch($this->config['database_driver'])
+		switch (@$this->config['database_driver'])
 		{
 			case 'mysql_pdo':
 				$db_file = 'db/pdo.php';
 				break;
-			case 'mysqli_legacy':
-				$db_file = 'db/mysqli.php';
-				break;
 			default:
+				$this->settings('database_driver', 'mysqli_legacy');
+				// FALLTHRU
+			case 'mysqli_legacy':
 				$db_file = 'db/mysqli.php';
 				break;
 		}
 
 		// load DBAL
-		if (@file_exists($db_file))
-		{
-			require($db_file);
-		}
-		else
-		{
-			die("Error loading WackoWiki DBAL: file ".$db_file." not found.");
-		}
+		require($db_file);
 
 		// connect to DB
-		if ($db_name == false)
+		if (!$db_name)
 		{
 			$db_name = $this->config['database_database'];
 		}
 
-		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'], $this->config['database_database'], $this->config['database_charset'], $this->config['database_driver'], $this->config['database_port'], $this->config['sql_mode_strict']);
+		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'],
+				$this->config['database_database'], $this->config['database_charset'], $this->config['database_driver'],
+				$this->config['database_port'], $this->config['sql_mode_strict']);
 
-		if ($this->dblink)
-		{
-			return $this->dblink;
-		}
-		else
+		if (!$this->dblink)
 		{
 			die("Error loading WackoWiki DBAL: could not establish database connection.");
 		}
+
+		return $this->dblink;
 	}
 
 	// CHECK WEBSITE LOCKING
 	function is_locked($file = 'lock')
 	{
-		$path = 'config/';
-		$lock_file = $path.$file;
-
-		clearstatcache();
-
-		if (@file_exists($lock_file))
-		{
-			$access = file($lock_file);
-
-			if ($access[0] == '1')
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
+		return substr(@file_get_contents('config/' . $file), 0, 1) == '1';
 	}
 
 	// lock / unlock
@@ -489,22 +433,7 @@ class Init
 	//		file	= lock file in config folder
 	function lock($file = 'lock')
 	{
-		$path		= 'config/';
-		$lock_file	= $path.$file;
-		$access		= $this->is_locked();
-		$file		= fopen($lock_file, 'w');
-
-		if ($access === true)
-		{
-			fwrite($file, '0');
-		}
-		else
-		{
-			fwrite($file, '1');
-		}
-
-		fclose($file);
-		unset($access);
+		@file_put_contents('config/' . $file, ($this->is_locked($file)? '0' : '1'));
 	}
 
 	// INSTALLER

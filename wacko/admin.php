@@ -42,7 +42,7 @@ $init->settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->con
 $init->settings('ap_mode',		true);
 $init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
 
-if ($init->is_locked('lock_ap') === true)
+if ($init->is_locked('lock_ap'))
 {
 	if (!headers_sent())
 	{
@@ -401,7 +401,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
 				&nbsp;&nbsp;
-				<?php echo ($init->is_locked() === true ? '<strong>site closed</strong>' : 'site opened'); ?>
+				<?php echo ($init->is_locked() ? '<strong>site closed</strong>' : 'site opened'); ?>
 				&nbsp;&nbsp;
 				version <?php echo $engine->config['wacko_version']; ?>
 			</span>

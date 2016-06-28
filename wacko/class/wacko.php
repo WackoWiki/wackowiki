@@ -43,6 +43,7 @@ class Wacko
 	var $numerate_links			= null;
 	var $post_wacko_action		= null;
 	var $_userhost				= null;
+	var $hide_article_header	= false;
 	var $paragrafica_styles		= array(
 		'before'	=> array(
 						'_before'	=> '',

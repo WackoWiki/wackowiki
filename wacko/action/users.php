@@ -13,7 +13,7 @@ $logged_in = $this->get_user();
 if (($profile = @$_REQUEST['profile']))
 {
 	// hide article H1 header
-	$this->config['hide_article_header'] = true;
+	$this->hide_article_header = true;
 
 	// does requested user exists?
 	if (!($user = $this->load_user($profile)))

@@ -36,7 +36,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 }
 
 // hide article H1 header
-$this->config['hide_article_header'] = true;
+$this->hide_article_header = true;
 
 // logout
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
