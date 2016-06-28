@@ -267,8 +267,6 @@ class paragrafica
 			}
 		}
 
-		#$this->wacko->debug_print_r($what);
-
 		// ==================================================================
 		// Forming body_toc
 		//  * in wacko formatter we have done "#h1249_1"
@@ -290,7 +288,6 @@ class paragrafica
 	// for further TOC creation routines
 	function add_toc_entry($matches)
 	{
-		#$this->wacko->debug_print_r($matches);
 		if (!isset($matches[6])) $matches[6] = '';
 		if (!isset($matches[8])) $matches[8] = '';
 

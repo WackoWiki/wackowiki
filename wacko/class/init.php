@@ -818,16 +818,16 @@ class Init
 					echo "\t<li>TLS implicit: ".(($this->config['tls_implicit'] == true) ? 'on' : 'off')."</li>\n";
 					echo "\t<li>Cookie hash: ".(isset($this->config['cookie_hash']) ? $this->config['cookie_hash'] : '')."</li>\n";
 					echo "\t<li>Cookie path: ".$this->config['cookie_path']."</li>\n";
-					#echo "\t<li>GZIP: ".(@extension_loaded('zlib') ? 'On' : 'Off')."</li>\n";
+					// echo "\t<li>GZIP: ".(@extension_loaded('zlib') ? 'On' : 'Off')."</li>\n";
 					echo "</ul>\n";
 				}
 
 				if ($this->config['debug'] >= 3)
 				{
-					$this->engine->debug_print_r($_SESSION);
-					$this->engine->debug_print_r($this->engine->context);
-					#$this->engine->debug_print_r($this->config);
-					#$this->engine->debug_print_r($this->engine->page);
+					debug_print_r($_SESSION);
+					debug_print_r($this->engine->context);
+					// debug_print_r($this->config);
+					// debug_print_r($this->engine->page);
 				}
 
 				echo "</div >\n";
