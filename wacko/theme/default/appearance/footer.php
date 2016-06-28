@@ -50,7 +50,7 @@ if ($this->page)
 		}
 
 		// Permalink
-		echo '<li>'.$this->action('permalink')."</li>\n";
+		echo '<li>'.$this->action('hashid')."</li>\n";
 	}
 }
 
