@@ -267,34 +267,21 @@ class Wacko
 	*/
 	function check_file_exists($file_name, $unwrapped_tag = '', $deleted = 0)
 	{
-		if ($unwrapped_tag == '')
+		if (!$unwrapped_tag)
 		{
 			$page_id = 0;
 		}
+		else if (($page = $this->load_page($unwrapped_tag, 0, '', LOAD_CACHE, LOAD_META)))
+		{
+			$page_id = $page['page_id'];
+		}
 		else
 		{
-			$page		= $this->load_page($unwrapped_tag, 0, '', LOAD_CACHE, LOAD_META);
-
-			if ($page)
-			{
-				$page_id	= $page['page_id'];
-			}
-			else
-			{
-				$page_id	= '';
-			}
-
-			if (!$page_id)
-			{
-				return false;
-			}
+			return false;
 		}
 
-		$file = (isset($this->files_cache[$page_id][$file_name])
-					? $this->files_cache[$page_id][$file_name]
-					: '');
-
-		if (!$file)
+		$file = &$this->files_cache[$page_id][$file_name];
+		if (empty($file))
 		{
 			$file = $this->load_single(
 				"SELECT upload_id, page_id, user_id, file_name, file_size, upload_lang, file_description, picture_w, picture_h, file_ext ".
@@ -305,16 +292,7 @@ class Wacko
 						? "AND deleted <> '1' "
 						: "").
 				"LIMIT 1");
-
-			if (count($file) == 0)
-			{
-				return false;
-			}
-
-			$this->files_cache[$page_id][$file_name] = $file;
 		}
-
-		#$this->debug_print_r($this->files_cache);
 
 		return $file;
 	}
@@ -4317,7 +4295,7 @@ class Wacko
 		{
 			$salt_length			= 10;
 			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = $this->random_password($salt_length, 3);
+			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = random_password($salt_length);
 		}
 
 		$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? session_id() : ''; #$user['cookie_token']
@@ -5000,7 +4978,7 @@ class Wacko
 		$this->cookie_token		= hash('sha1', $login_token);
 
 		$salt_length			= 10;
-		$salt_user_form			= $this->random_password($salt_length, 3);
+		$salt_user_form			= random_password($salt_length);
 
 		$this->time_now			= date('Y-m-d H:i:s');
 		$this->session_time		= date('Y-m-d H:i:s', $session_expire);
@@ -7392,69 +7370,6 @@ class Wacko
 			($this->config['pwd_char_classes'] > 0
 				? ', '.$pwd_cplx_text
 				: '')."</small>";
-	}
-
-
-	// Generate random password of defined $length that satisfise the complexity rules:
-	// containing n > 0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
-	// The password complexity can be defined in $pwd_complexity :
-	//		$pwd_complexity = 2 -- password consists of uppercase, lowercase, digits
-	//		$pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
-	function random_password($length = 10, $pwd_complexity)
-	{
-		$chars_uc	= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$chars_lc	= 'abcdefghijklmnopqrstuvwxyz';
-		$digits		= '0123456789';
-		$symbols	= '-_!@#%^&*(){}[]|~'; // removed '$'
-		$uc = 0;
-		$lc = 0;
-		$di = 0;
-		$sy = 0;
-
-		if ($pwd_complexity == 2)
-		{
-			$sy = 100;
-		}
-
-		while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0)
-		{
-			$password = '';
-
-			for ($i = 0; $i < $length; $i++)
-			{
-				$k = mt_rand(0, $pwd_complexity); //randomly choose what's next
-
-				if ($k == 0)
-				{
-					//uppercase
-					$password .= substr(str_shuffle($chars_uc), mt_rand(0, count($chars_uc) - 2), 1);
-					$uc++;
-				}
-
-				if ($k == 1)
-				{
-					//lowercase
-					$password .= substr(str_shuffle($chars_lc), mt_rand(0, count($chars_lc) - 2), 1);
-					$lc++;
-				}
-
-				if ($k == 2)
-				{
-					//digits
-					$password .= substr(str_shuffle($digits), mt_rand(0, count($digits) - 2), 1);
-					$di++;
-				}
-
-				if ($k == 3)
-				{
-					//symbols
-					$password .= substr(str_shuffle($symbols), mt_rand(0, count($symbols) - 2), 1);
-					$sy++;
-				}
-			}
-		}
-
-		return $password;
 	}
 
 	// pages listing/navigation for multipage lists.

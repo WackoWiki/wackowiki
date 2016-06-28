@@ -168,7 +168,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				else
 				{
 					$salt_length		= 10;
-					$salt_user_form		= $this->random_password($salt_length, 3);
+					$salt_user_form		= random_password($salt_length);
 					$confirm			= hash('sha256', $password.time().mt_rand().$email.$this->unique_id());
 					$confirm_hash		= hash('sha256', $confirm.hash('sha256', $this->config['system_seed']));
 					$password_hashed	= $user_name.$password;
