@@ -23,8 +23,8 @@ if (!isset($for))		$for = '';
 $limit = $this->get_list_count(@$max);
 $title = (int)$title;
 
-$_alnum = '/'.$this->language['ALPHANUM'].'/';
-$get_letter = function ($ch) use (&$_alnum)
+$_alnum = '/'.$this->language['ALPHANUM'].'/S';
+$get_letter = function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
 {
 	$ch = strtoupper(substr($ch, 0, 1));
 	if ($ch !== '' && !preg_match($_alnum, $ch))
@@ -104,8 +104,6 @@ $count = $this->load_single(
 				"LIKE '".$letter."%' "
 			: "")
 	, true);
-
-$this->dbg('counted pages', $count['n']);
 
 $pagination = $this->pagination($count['n'], $limit, 'p', ($letter !== ''? 'letter=' . $letter : ''));
 

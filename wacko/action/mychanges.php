@@ -10,8 +10,6 @@ if (!defined('IN_WACKO'))
 if (!isset($title))		$title = '';
 if (!isset($bydate))	$bydate = '';
 if (!isset($max))		$max = null;
-$cur_char	= '';
-$cur_day	= '';
 
 if ($user_id = $this->get_user_id())
 {
@@ -44,6 +42,7 @@ if ($user_id = $this->get_user_id())
 		{
 			echo '<ul class="ul_list">'."\n";
 
+			$cur_char = '';
 			foreach ($pages as $page)
 			{
 				$first_char = strtoupper($page['tag'][0]);
@@ -53,7 +52,7 @@ if ($user_id = $this->get_user_id())
 					$first_char = '#';
 				}
 
-				if ($first_char != $cur_char)
+				if ($first_char !== $cur_char)
 				{
 					if ($cur_char)
 					{
@@ -104,14 +103,12 @@ if ($user_id = $this->get_user_id())
 		{
 			echo '<ul class="ul_list">'."\n";
 
+			$cur_day = '';
 			foreach ($pages as $page)
 			{
-				// tz offset
-				$time_tz = $this->get_time_tz( strtotime($page['modified']) );
-				$time_tz = date('Y-m-d H:i:s', $time_tz);
-
-				// day header
-				list($day, $time) = explode(" ", $time_tz);
+				$time_tz = $this->get_time_tz(strtotime($page['modified']));
+				$day = date($this->config['date_format'], $time_tz);
+				$time = date($this->config['time_format_seconds'], $time_tz);
 
 				if ($day != $cur_day)
 				{
@@ -124,19 +121,14 @@ if ($user_id = $this->get_user_id())
 					$cur_day = $day;
 				}
 
-				if ($page['edit_note'])
+				if (($edit_note = $page['edit_note']))
 				{
-					$edit_note = ' <span class="editnote">['.$page['edit_note'].']</span>';
-				}
-				else
-				{
-					$edit_note = '';
+					$edit_note = ' <span class="editnote">[' . $edit_note . ']</span>';
 				}
 
 				// print entry
-				echo "<li>".$this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime( $time )), 0, $this->get_translation('RevisionTip'))." &mdash; ".$this->compose_link_to_page($page['tag'], '', '', 0).$edit_note."</li>\n";
-
-
+				echo "<li>".$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip')).
+					" &mdash; ".$this->compose_link_to_page($page['tag'], '', '', 0).$edit_note."</li>\n";
 			}
 
 			echo "</ul>\n</li>\n</ul>\n";
