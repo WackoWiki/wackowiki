@@ -80,6 +80,4 @@ else
 {
 	$this->show_message($this->get_translation('PermaLinkEmpty'));
 
-};
-
-?>
+}

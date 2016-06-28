@@ -6470,21 +6470,17 @@ class Wacko
 
 		// permalink
 		$page = 0;
-		if ($method == 'permalink')
+		if ($method == 'Hashid')
 		{
-			require_once('lib/hashids/Hashids.php');
-			$hashids = new Hashids($this->config['system_seed']);
-			$ids = $hashids->decode($tag);
-			if (count($ids) == 3)
+			$method = '';
+			$ids = explode('x', $tag);
+			$page = $this->load_page('', (int)$ids[0], (int)$ids[1], '', '', $this->is_admin());
+			if ($page)
 			{
-				$page = $this->load_page('', $ids[0], $ids[1], '', '', $this->is_admin());
-				if ($page)
-				{
-					$this->method = 'show';
-					$this->tag = $page['tag'];
-					$this->supertag = $page['supertag'];
-					$_GET['revision_id'] = $ids[1];
-				}
+				$this->method = 'show';
+				$this->tag = $page['tag'];
+				$this->supertag = $page['supertag'];
+				$_GET['revision_id'] = $ids[1];
 			}
 		}
 
