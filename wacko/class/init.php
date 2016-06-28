@@ -338,7 +338,7 @@ class Init
 
 			if (!@file_exists($this->config['handler_path'] . '/page/' . $this->method . '.php'))
 			{
-				$this->page	= $this->request;
+				$this->page	= $request;
 				$this->method = '';
 			}
 			else if (preg_match('#^(.*?)/(' . $this->config['standard_handlers'] . ')(|/(.*))$#i', $this->page, $match))
