@@ -36,8 +36,6 @@ else
 		$lines = preg_split($splitexpr, $strings);
 		$lines = array_values(array_filter($lines, 'trim'));
 
-		srand ((double) microtime() * 1000000);
-
-		echo $lines[rand(0, count($lines) - 1)];
+		echo $lines[mt_rand(0, count($lines) - 1)];
 	}
 }

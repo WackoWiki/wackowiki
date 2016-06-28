@@ -63,7 +63,7 @@ function admin_config_pages(&$engine, &$module)
 			$config['sandbox']				= trim((string)$_POST['sandbox'], '/');
 			$config['wiki_docs']			= trim((string)$_POST['wiki_docs'], '/');
 
-			$engine->_set_config($config, '', true);
+			$engine->_set_config($config);
 
 			$engine->log(1, 'Updated settings base pages');
 			$engine->set_message('Updated settings base pages');

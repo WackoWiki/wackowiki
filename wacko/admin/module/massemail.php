@@ -49,7 +49,7 @@ $mail_body = '';
 			$mail_body				= (string)$_POST['mail_body'];
 			$language				= (string)$_POST['language'];
 
-			#$engine->_set_config($config, '', true);
+			#$engine->_set_config($config);
 
 			$members = $engine->load_all(
 				"SELECT DISTINCT

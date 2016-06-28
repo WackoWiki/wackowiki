@@ -81,7 +81,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 
 				// forward
 				$this->set_message($this->get_translation('PasswordChanged'));
-				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0, 1000)));
+				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.mt_rand(0, 1000)));
 			}
 
 			$this->set_message($error, 'error');
@@ -181,7 +181,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 
 			// forward
 			$this->set_message($this->get_translation('PasswordChanged')); // // TODO: message is reset with session before it it can display the message set after the redirect
-			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0, 1000)));
+			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.mt_rand(0, 1000)));
 		}
 	}
 
@@ -237,7 +237,7 @@ else
 		{
 			if ($this->config['enable_email'] && !$user['email_confirm'])
 			{
-				$code		= hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
+				$code		= hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].$this->unique_id());
 				$code_hash	= hash('sha256', $code.hash('sha256', $this->config['system_seed']));
 
 				$save = $this->set_language($user['user_lang'], true);

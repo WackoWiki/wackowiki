@@ -53,7 +53,7 @@ function admin_config_email(&$engine, &$module)
 			$config['phpmailer']					= (int)$_POST['phpmailer'];
 			$config['phpmailer_method']				= (string)$_POST['phpmailer_method'];
 
-			$engine->_set_config($config, '', true);
+			$engine->_set_config($config);
 
 			$engine->log(1, '!!Updated email settings!!');
 			$engine->set_message('Updated email settings');
