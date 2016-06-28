@@ -326,16 +326,16 @@ class Init
 		$request = ltrim($request, '/');
 
 		// check for permalink
-		$this->page = (($p = strpos($request, '/')) === false)? $request : substr($request, 0, $p);
 		require_once('lib/hashids/Hashids.php');
 		$hashids = new Hashids($this->config['system_seed']);
-		$ids = $hashids->decode($this->page);
+		$ids = $hashids->decode((($p = strpos($request, '/')) === false)? $request : substr($request, 0, $p));
 		if (count($ids) == 3)
 		{
 			sscanf(hash('sha1', $ids[0] . $this->config['system_seed'] . $ids[1]), '%7x', $cksum);
 			if ($ids[2] == $cksum)
 			{
-				$this->method = 'permalink';
+				$this->page = $ids[0] . 'x' . $ids[1];
+				$this->method = 'Hashid';
 				return;
 			}
 		}
@@ -360,7 +360,7 @@ class Init
 			{
 				//translit case
 				$this->page = $match[1];
-				$this->method = $match[2];
+				$this->method = strtolower($match[2]);
 			}
 		}
 	}
