@@ -13,45 +13,37 @@ if (!defined('IN_WACKO'))
 //				  will not be displayed. tags must be absolute
 //					  ^^^ UNTESTED FUNCTIONALITY!!! ^^^
 
+if (!isset($pages))		$pages = '';
+
 // make sure that we're executing inside the forum cluster
 if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 {
 	// count slashes in the tag
-	$i				= 0;
-	$tag			= $this->tag;
-	$create_access	= '';
-	$read_access	= '';
-	$category		= false;
-
-	while (strpos($tag, '/') !== false)
+	$i = $off = 0;
+	while (($off = strpos($this->tag, '/', $off)) !== false)
 	{
-		$tag = substr($tag, strpos($tag, '/') + 1);
-		$i++;
+		++$i;
+		++$off;
 	}
-
 	$this->forum = $i - 1;
 
 	// load user data
 	$user = $this->get_user();
 
 	// process 'mark read' - reset session time
-	if (isset($_GET['markread']) && $user == true)
+	if (isset($_GET['markread']) && $user)
 	{
 		$this->update_last_mark($user);
 		$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-		$user = $this->get_user();
 	}
 
 	// check privilege
-	if ($this->has_access('create') === true)
-	{
-		$create_access = true;
-	}
+	$create_access = $this->has_access('create');
 
 	// checking new topic input if any
-	if (isset($_POST['action']) && $_POST['action'] == 'topicadd' && $create_access === true)
+	if (@$_POST['action'] == 'topicadd' && $create_access)
 	{
-		if (isset($_POST['title']) && $_POST['title'] == true)
+		if (@$_POST['title'])
 		{
 			$topic_name		= trim($_POST['title'], ". \t");
 			$page_title		= $topic_name;
@@ -59,7 +51,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$topic_name		= preg_replace('/[^- \\w]/', '', $topic_name);
 			$topic_name		= str_replace(array(' ', "\t"), '', $topic_name);
 
-			if ($topic_name == '')
+			if (!$topic_name)
 			{
 				$error = $this->get_translation('ForumNoTopicName');
 			}
@@ -87,16 +79,17 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$admin = $this->is_admin();
 
 	// parse subforums list if any
-	if (!empty($pages))
+	if ($pages)
 	{
-		$pages = trim(explode(',', $pages), '/ ');
+		$pages = explode(',', $pages);
+		foreach ($pages as &$page)
+		{
+			$page = trim($page, '/ ');
+		}
 	}
 
 	// filter categories
-	if (isset($_GET['category']) && $_GET['category'] == true)
-	{
-		$category = (int) $_GET['category'];
-	}
+	$category = (int)@$_GET['category'];
 
 	// make counter query
 	$sql = "SELECT COUNT(p.tag) AS n ".
@@ -109,7 +102,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			"AND a.privilege = 'create' AND a.list = '' ".
 			"AND p.tag LIKE '{$this->tag}/%' ";
 
-	if (isset($pages))
+	if ($pages)
 	{
 		foreach ($pages as $page)
 		{
@@ -139,7 +132,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			"AND a.privilege = 'create' AND a.list = '' ".
 			"AND p.tag LIKE '{$this->tag}/%' ";
 
-	if (isset($pages))
+	if ($pages)
 	{
 		foreach ($pages as $page)
 		{
@@ -163,12 +156,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	if (!isset($_GET['phrase']))
 	{
-		$show_pagination = $this->show_pagination($pagination['text']);
-
 		// display list
 		echo '<div style="clear: both;">'.
-				'<p style="float: left">'.($create_access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
-				$show_pagination."</div>\n";
+				'<p style="float: left">'.($create_access ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>';
+		$this->print_pagination($pagination);
+		echo "</div>\n";
 
 		echo '<table class="forum">'.
 				'<thead><tr>'.
@@ -181,19 +173,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 		foreach ($topics as $topic)
 		{
-			$comment = false;
-			$updated = false;
-
-			if ($this->config['hide_locked'])
-			{
-				$read_access = $this->has_access('read', $topic['page_id']);
-			}
-			else
-			{
-				$read_access = true;
-			}
-
-			if ($read_access)
+			if (!$this->config['hide_locked'] || $this->has_access('read', $topic['page_id']))
 			{
 				// load latest comment
 				if ($topic['comments'] > 0)
@@ -207,12 +187,15 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 						"ORDER BY p.created DESC ".
 						"LIMIT 1");
 				}
+				else
+				{
+					$comment = false;
+				}
 
 				// check new comments
-				if ($user['last_mark'] == true && ( ($comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']) || ($topic['owner_name'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ))
-				{
-					$updated = true;
-				}
+				$updated = ($user['last_mark'] && (
+					($comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']) ||
+					($topic['owner_name'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ));
 
 				$topic['description'] = htmlspecialchars($topic['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
@@ -229,10 +212,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				// print
 				echo '<tbody class="lined"><tr style="background-color: #f9f9f9;">'.
 						'<td style="text-align:left;">'.
-						( $this->has_access('comment', $topic['page_id'], GUEST) === false
+						( !$this->has_access('comment', $topic['page_id'], GUEST)
 							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>'
 							: '' ).
-						( $updated === true
+						( $updated
 							? '<strong><span class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 							: '<strong>'.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 						).
@@ -246,9 +229,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 						'<td>&nbsp;&nbsp;&nbsp;</td>'.
 						'<td style="text-align:center;">';
 
-				if ($comment == true)
+				if ($comment)
 				{
-					echo '<small'.( $updated === true ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
+					echo '<small'.( $updated ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
 						$this->user_link($comment['user_name']).'<br />'.
 						'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_formatted($comment['created']).'</a></small>';
 				}
@@ -268,12 +251,13 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 		echo '</table>'."\n";
 
-		echo '<div class="clearfix"><p style="float: left">'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</p>'.
-				$show_pagination."</div>\n";
+		echo '<div class="clearfix"><p style="float: left">'.( $user ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</p>';
+		$this->print_pagination($pagination);
+		echo "</div>\n";
 	}
 
 	// display new topic form when applicable
-	if ($create_access === true)
+	if ($create_access)
 	{
 		echo $this->form_open('add_topic');
 		?>

@@ -101,6 +101,7 @@ if ($this->user_allowed_comments())
 
 			echo '<ul class="ul_list">'."\n";
 
+			$curday = '';
 			foreach ($pages as $page)
 			{
 				if ($this->config['hide_locked'])
@@ -114,17 +115,9 @@ if ($this->user_allowed_comments())
 
 				if ($access)
 				{
-					// tz offset
-					$time_tz = $this->get_time_tz( strtotime($page['comment_time']) );
-					$time_tz = date('Y-m-d H:i:s', $time_tz);
-
-					// day header
-					list($day, $time) = explode(' ', $time_tz);
-
-					if (!isset($curday))
-					{
-						$curday = '';
-					}
+					$time_tz = $this->get_time_tz(strtotime($page['comment_time']));
+					$day = date($this->config['date_format'], $time_tz);
+					$time = date($this->config['time_format_seconds'], $time_tz);
 
 					if ($day != $curday)
 					{
@@ -133,36 +126,22 @@ if ($this->user_allowed_comments())
 							echo "</ul>\n<br /></li>\n";
 						}
 
-						echo "<li><strong>".date($this->config['date_format'], strtotime($day)).":</strong>\n<ul>\n";
+						echo '<li><strong>' . $day . ":</strong>\n<ul>\n";
 						$curday = $day;
 					}
 
 					// do unicode entities
 					// page lang
-					if ($this->page['page_lang'] != $page['page_lang'])
-					{
-						$page_lang = $page['page_lang'];
-					}
-					else
-					{
-						$page_lang = '';
-					}
+					$page_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
 
 					// comment lang
-					if ($this->page['page_lang'] != $page['comment_lang'])
-					{
-						$comment_lang = $page['comment_lang'];
-					}
-					else
-					{
-						$comment_lang = '';
-					}
+					$comment_lang = ($this->page['page_lang'] != $page['comment_lang'])?  $page['comment_lang'] : '';
 
-					$viewed = ( $user['last_mark'] == true && $page['comment_user_name'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
+					$viewed = ( $user['last_mark'] && $page['comment_user_name'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
 
 					// print entry
-					echo '<li '.$viewed.'><span class="dt">'.date($this->config['time_format_seconds'], strtotime( $time )).'</span> &mdash; '.
-					($title == 1
+					echo '<li '.$viewed.'><span class="dt">'.$time.'</span> &mdash; '.
+					($title
 						? $this->link('/'.$page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
 						: $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
 					).

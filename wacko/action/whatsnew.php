@@ -10,7 +10,6 @@ if (!defined('IN_WACKO'))
 if (!isset($max)) $max = '';
 if (!isset($noxml)) $noxml = '';
 if (!isset($printed)) $printed = '';
-if (!isset($curday)) $curday = '';
 
 if (!$max || $max > 100) $max = 100;
 
@@ -58,7 +57,7 @@ $files = $this->load_all(
 	"ORDER BY f.uploaded_dt DESC ".
 	"LIMIT ".($max * 2), true);
 
-if ($pages = array_merge($pages1, $pages2, $files))
+if (($pages = array_merge($pages1, $pages2, $files)))
 {
 	// sort by dates
 	$sort_dates = create_function(
@@ -83,6 +82,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 #echo count($pages);
 	echo '<ul class="ul_list">'."\n";
 
+	$curday = '';
 	foreach ($pages as $page)
 	{
 		if ($this->config['hide_locked'])
@@ -102,17 +102,16 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			$printed[$page['tag']] = '';
 		}
 
-		if ($access && ($printed[$page['tag']] != $page['date']) && ($count++ < $max))
+		if ($access && $printed[$page['tag']] != $page['date'] && ($count++ < $max))
 		{
 			$printed[$page['tag']] = $page['date'];	// ignore duplicates
 
 			// tz offset
-			$time_tz = $this->get_time_tz( strtotime($page['date']) );
-			$time_tz = date('Y-m-d H:i:s', $time_tz);
+			$time_tz = $this->get_time_tz(strtotime($page['date']));
+			$day = date($this->config['date_format'], $time_tz);
+			$time = date($this->config['time_format_seconds'], $time_tz);
 
 			// day header
-			list($day, $time) = explode(' ', $time_tz);
-
 			if ($day != $curday)
 			{
 				if ($curday)
@@ -148,28 +147,24 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			// print entry
 			$separator	= ' . . . . . . . . . . . . . . . . ';
 			$author		= $this->user_link($page['user_name'], '', true, false);
-			$viewed		= ( isset($user['last_mark']) && $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' viewed' : '' );
-			$time_modified	= (($this->hide_revisions === false || $this->is_admin()) && ($page['ctype'] != 2 || $page['comment_on_id'] === 0)
-								? $this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime($time)), 0, $this->get_translation('RevisionTip'))
-								: date($this->config['time_format_seconds'], strtotime($time))
+			$viewed		= ( isset($user['last_mark']) && $user['last_mark'] && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' viewed' : '' );
+			$time_modified	= ((!$this->hide_revisions || $this->is_admin()) && ($page['ctype'] != 2 || $page['comment_on_id'] === 0)
+								? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip'))
+								: $time
 							);
 
-			if ($page['edit_note'])
+			if (($edit_note = $page['edit_note']))
 			{
 				if ($_lang)
 				{
-					$page['edit_note'] = $this->do_unicode_entities($page['edit_note'], $_lang);
+					$edit_note = $this->do_unicode_entities($edit_note, $_lang);
 				}
 				else if ($_cf_lang)
 				{
-					$page['edit_note'] = $this->do_unicode_entities($page['edit_note'], $_cf_lang);
+					$edit_note = $this->do_unicode_entities($edit_note, $_cf_lang);
 				}
 
-				$edit_note = ' <span class="editnote">['.$page['edit_note'].']</span>';
-			}
-			else
-			{
-				$edit_note = '';
+				$edit_note = ' <span class="editnote">['.$edit_note.']</span>';
 			}
 
 			// time
@@ -183,7 +178,9 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				if ($page['page_id']) // !$global
 				{
 					$path2		= '_file:/'.($this->slim_url($page['tag'])).'/';
-					$on_page	= $this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['page_id']), '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
+					$on_page	= $this->get_translation('To').' '.
+						$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['page_id']), '', 0, 1, $_lang).
+						' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
 				}
 				else
 				{
@@ -191,7 +188,9 @@ if ($pages = array_merge($pages1, $pages2, $files))
 					$on_page	= '<span title="">&rarr; '.'global';
 				}
 
-				echo '<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('NewFileAdded').'" alt="[file]" class="btn-attachment"/> '.''.$this->link($path2.$page['title'], '', $page['title'], '', 0, 1, $_lang).' '.$on_page.$separator.$author.'</span>'.$edit_note;
+				echo '<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('NewFileAdded').
+					'" alt="[file]" class="btn-attachment"/> '.''.$this->link($path2.$page['title'], '', $page['title'], '', 0, 1, $_lang).
+					' '.$on_page.$separator.$author.'</span>'.$edit_note;
 			}
 			// deleted
 			else if ($page['deleted'])
