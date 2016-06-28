@@ -159,7 +159,7 @@ if (isset($_POST['ap_password']))
 
 		if ($engine->config['ap_failed_login_count'] > 0)
 		{
-			$engine->set_config('ap_failed_login_count', 0, '', true);
+			$engine->set_config('ap_failed_login_count', 0);
 		}
 
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
@@ -172,7 +172,7 @@ if (isset($_POST['ap_password']))
 			$_SESSION['failed_login_count'] = 0;
 		}
 
-		$engine->set_config('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1, '', true);
+		$engine->set_config('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1);
 		$engine->log(1, $engine->get_translation('LogAdminLoginFailed', $engine->config['language']));
 
 		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;

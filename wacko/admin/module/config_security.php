@@ -72,7 +72,7 @@ function admin_config_security(&$engine, &$module)
 			$config['form_token_time']				= (int)$_POST['form_token_time'];
 			$config['form_token_sid_guests']		= (int)$_POST['form_token_sid_guests'];
 
-			$engine->_set_config($config, '', true);
+			$engine->_set_config($config);
 
 			$engine->log(1, '!!Updated security settings!!');
 			$engine->set_message('Updated security settings');

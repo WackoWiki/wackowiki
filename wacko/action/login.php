@@ -32,7 +32,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 	}
 
 	$_POST['action'] = 'logout';
-	$this->redirect($this->href('', '', 'cache='.rand(0, 1000)));
+	$this->redirect($this->href('', '', 'cache='.mt_rand(0, 1000)));
 }
 
 // hide article H1 header
@@ -49,11 +49,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 
 	if (!empty($_GET['goback']))
 	{
-		$this->redirect($this->href('', stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.rand(0, 1000)));
+		$this->redirect($this->href('', stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.mt_rand(0, 1000)));
 	}
 	else
 	{
-		$this->redirect($this->href('', '', 'cache='.rand(0, 1000)));
+		$this->redirect($this->href('', '', 'cache='.mt_rand(0, 1000)));
 	}
 }
 // logged in
@@ -249,11 +249,11 @@ else
 
 						if (!empty($_POST['goback']))
 						{
-							$this->redirect($this->href('', stripslashes(htmlspecialchars($_POST['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.rand(0, 1000)));
+							$this->redirect($this->href('', stripslashes(htmlspecialchars($_POST['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.mt_rand(0, 1000)));
 						}
 						else
 						{
-							$this->redirect($this->href('', '', 'cache='.rand(0, 1000)));
+							$this->redirect($this->href('', '', 'cache='.mt_rand(0, 1000)));
 						}
 					}
 					else

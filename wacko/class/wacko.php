@@ -2318,12 +2318,12 @@ class Wacko
 			}
 			else if (time() > @$this->config['maint_last_xml_sitemap'])
 			{
-				$this->set_config('xml_sitemap_update', 0);
-				$this->set_config('maint_last_xml_sitemap', time() + $days * 86400, '', true);
+				$this->set_config('xml_sitemap_update', 0, false);
+				$this->set_config('maint_last_xml_sitemap', time() + $days * 86400);
 			}
 			else
 			{
-				$this->set_config('xml_sitemap_update', 1, '', true);
+				$this->set_config('xml_sitemap_update', 1);
 				return;
 			}
 
@@ -4965,16 +4965,21 @@ class Wacko
 	 */
 	function unique_id($extra = 'c')
 	{
+		static $seed = false;
 		static $dss_seeded = false;
 
-		$val = $this->config['rand_seed'] . microtime();
-		$val = hash('sha1', $val);
-		$this->config['rand_seed'] = hash('sha1', $this->config['rand_seed'] . $val . $extra);
-
-		if ($dss_seeded !== true && ($this->config['rand_seed_last_update'] < time() - rand(1,10)))
+		if (!$seed)
 		{
-			$this->set_config('rand_seed_last_update', time(), true);
-			$this->set_config('rand_seed', $this->config['rand_seed'], true);
+			$seed = $this->config['rand_seed'];
+		}
+		$val = hash('sha1', mt_rand() . $seed . microtime());
+		$seed = hash('sha1', $seed . $val . $extra);
+
+		if (!$dss_seeded && $this->config['rand_seed_last_update'] < time())
+		{
+			$this->set_config('rand_seed_last_update', time() + mt_rand(1, 100), false);
+			$this->set_config('rand_seed', $seed);
+			$seed = hash('sha1', mt_rand() . $seed);
 			$dss_seeded = true;
 		}
 
@@ -6198,13 +6203,13 @@ class Wacko
 	}
 
 	// set config value
-	function set_config($config_name, $config_value, $is_dynamic = false, $delete_cache = false)
+	function set_config($config_name, $config_value, $delete_cache = true)
 	{
 		$config[$config_name] = $config_value;
-		$this->_set_config($config, $is_dynamic, $delete_cache);
+		$this->_set_config($config, $delete_cache);
 	}
 
-	function _set_config($config, $is_dynamic = false, $delete_cache = false)
+	function _set_config($config, $delete_cache = true)
 	{
 		$values = [];
 		foreach ($config as $name => $value)
@@ -6228,8 +6233,9 @@ class Wacko
 						config_name		= VALUES(config_name),
 						config_value	= VALUES(config_value)");
 
-			if (!$is_dynamic && $delete_cache)
+			if ($delete_cache)
 			{
+				// TODO: pace purging cache files so not to opendir/.... on every set
 				$this->cache->destroy_config_cache();
 			}
 		}
@@ -6240,10 +6246,10 @@ class Wacko
 	function purge_cache_directory($directory, $ttl)
 	{
 		$n = 0;
-		clearstatcache();
-
-		if (($handle = opendir(rtrim($this->config['cache_dir'].$directory, '/'))))
+		$directory = $this->config['cache_dir'] . $directory;
+		if (($handle = opendir(rtrim($directory, '/'))))
 		{
+			clearstatcache();
 			$now = time();
 
 			while (false !== ($file = readdir($handle)))
@@ -6272,7 +6278,7 @@ class Wacko
 				"DELETE FROM ".$this->config['table_prefix']."referrer ".
 				"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->set_config('maint_last_refs', $now, '', true);
+			$this->set_config('maint_last_refs', $now);
 			$this->log(7, 'Maintenance: referrers purged');
 		}
 
@@ -6284,7 +6290,7 @@ class Wacko
 				"DELETE FROM ".$this->config['table_prefix']."revision ".
 				"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->set_config('maint_last_oldpages', $now, '', true);
+			$this->set_config('maint_last_oldpages', $now);
 			$this->log(7, 'Maintenance: outdated pages revisions purged');
 		}
 
@@ -6309,7 +6315,7 @@ class Wacko
 				$this->delete_pages($remove);
 				$this->log(7, 'Maintenance: deleted pages purged');
 			}
-			$this->set_config('maint_last_delpages', $now, '', true);
+			$this->set_config('maint_last_delpages', $now);
 		}
 
 		// purge system log entries (once per 3 days)
@@ -6320,7 +6326,7 @@ class Wacko
 				"DELETE FROM {$this->config['table_prefix']}log ".
 				"WHERE log_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
 
-			$this->set_config('maint_last_log', $now, '', true);
+			$this->set_config('maint_last_log', $now);
 
 			$this->log(7, 'Maintenance: system log purged');
 		}
@@ -6351,7 +6357,7 @@ class Wacko
 				}
 			}
 
-			$this->set_config('maint_last_cache', $now, '', true);
+			$this->set_config('maint_last_cache', $now);
 		}
 
 		// purge expired cookie_tokens (once per 3 days)
@@ -6360,7 +6366,7 @@ class Wacko
 		{
 			$this->delete_cookie_token('', true, $days);
 
-			$this->set_config('maint_last_session', $now, '', true);
+			$this->set_config('maint_last_session', $now);
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
 		}
 	}
@@ -7416,33 +7422,33 @@ class Wacko
 
 			for ($i = 0; $i < $length; $i++)
 			{
-				$k = rand(0, $pwd_complexity); //randomly choose what's next
+				$k = mt_rand(0, $pwd_complexity); //randomly choose what's next
 
 				if ($k == 0)
 				{
 					//uppercase
-					$password .= substr(str_shuffle($chars_uc), rand(0, count($chars_uc) - 2), 1);
+					$password .= substr(str_shuffle($chars_uc), mt_rand(0, count($chars_uc) - 2), 1);
 					$uc++;
 				}
 
 				if ($k == 1)
 				{
 					//lowercase
-					$password .= substr(str_shuffle($chars_lc), rand(0, count($chars_lc) - 2), 1);
+					$password .= substr(str_shuffle($chars_lc), mt_rand(0, count($chars_lc) - 2), 1);
 					$lc++;
 				}
 
 				if ($k == 2)
 				{
 					//digits
-					$password .= substr(str_shuffle($digits), rand(0, count($digits) - 2), 1);
+					$password .= substr(str_shuffle($digits), mt_rand(0, count($digits) - 2), 1);
 					$di++;
 				}
 
 				if ($k == 3)
 				{
 					//symbols
-					$password .= substr(str_shuffle($symbols), rand(0, count($symbols) - 2), 1);
+					$password .= substr(str_shuffle($symbols), mt_rand(0, count($symbols) - 2), 1);
 					$sy++;
 				}
 			}

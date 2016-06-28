@@ -508,7 +508,7 @@ function bb2_options(&$engine)
 		$config['reverse_proxy_header']			= (int)$_POST['reverse_proxy_header'];
 		$config['reverse_proxy_addresses']		= (string)$_POST['reverse_proxy_addresses'];
 
-		$engine->_set_config($config, '', true);
+		$engine->_set_config($config);
 
 		$engine->log(1, '!!Updated email settings!!');
 		$engine->set_message('Updated Bad Behavior settings');
@@ -854,7 +854,7 @@ function bb2_options(&$engine)
 	{
 		$config['ext_bad_behavior'] = (int)$_POST['ext_bad_behavior'];
 
-		$engine->_set_config($config, '', true);
+		$engine->_set_config($config);
 
 		$engine->log(1, '!!Updated Bad Behavior settings!!');
 		$engine->set_message('Updated Bad Behavior settings');

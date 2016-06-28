@@ -54,7 +54,7 @@ function admin_config_upload(&$engine, &$module)
 			$config['img_create_thumbnail']		= (int)$_POST['img_create_thumbnail'];
 			$config['img_max_thumb_width']		= (int)$_POST['img_max_thumb_width'];
 
-			$engine->_set_config($config, '', true);
+			$engine->_set_config($config);
 
 			$engine->log(1, 'Updated upload settings');
 			$engine->set_message('Updated upload settings');
