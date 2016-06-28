@@ -30,7 +30,7 @@ if (!empty($this->config['news_cluster']))
 	$news_levels		= $this->config['news_levels'];
 
 	// hide article H1 header
-	$this->config['hide_article_header'] = true;
+	$this->hide_article_header = true;
 
 	// check privilege
 	if ($this->has_access('create') === true)

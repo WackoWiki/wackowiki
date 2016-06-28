@@ -16,7 +16,7 @@ if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTT
 }
 
 // hide article H1 header
-$this->config['hide_article_header'] = true;
+$this->hide_article_header = true;
 
 // email confirmation
 if (isset($_GET['confirm']))

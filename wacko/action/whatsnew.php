@@ -117,7 +117,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					echo "</ul>\n<br /></li>\n";
 				}
 
-				echo '<li><strong>'.date($this->config['date_format'],strtotime($day))."</strong>\n<ul>\n";
+				echo '<li><strong>'.$day."</strong>\n<ul>\n";
 				$curday = $day;
 			}
 

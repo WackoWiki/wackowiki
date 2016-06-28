@@ -1,12 +1,11 @@
 <?php
-
 /*
  * miscellaneous utility functions used throughout wackowiki
  */
 
 /*
  * str_replace('%1', ...) replacer:
- * i.e. perc_replace('one = %1, three = %3, two = %2', 11, 22, 33)
+ * e.g. perc_replace('one = %1, three = %3, two = %2', 11, 22, 33)
  */
 function perc_replace()
 {
@@ -129,7 +128,7 @@ function debug_print_r($array)
 	echo '</pre>';
 }
 
-function dbg($msg)
+function dbg()
 {
 	static $running = 1;
 

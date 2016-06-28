@@ -176,7 +176,7 @@ if ($this->has_access('read'))
 		$data = $this->numerate_toc($data); //  numerate toc if needed
 
 		// display page title
-		if (!@$this->config['hide_article_header'])
+		if (!$this->hide_article_header)
 		{
 			echo "<header>\n".
 				 '<h1>';
