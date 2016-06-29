@@ -8,14 +8,20 @@ if (!defined('IN_WACKO'))
 echo '<div id="page">';
 $include_tail = '</div>';
 
-if (!isset($_GET['a']) || !isset($_GET['b']) || !isset($_GET['diffmode']))
+if (!isset($_GET['a']) || !isset($_GET['b']))
 {
 	$this->redirect($this->href());
 }
 
 $a			= (int)$_GET['a'];
 $b			= (int)$_GET['b'];
-$diff_mode	= $_GET['diffmode'];
+$diffmode	= (int)@$_GET['diffmode'];
+
+if ($a == $b)
+{
+	echo "<br />\n" . $this->get_translation('NoDifferences');
+	return;
+}
 
 $load_diff_page = function ($id)
 {
@@ -58,24 +64,25 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 
 	// print navigation
 	$params = 'a=' .$a . '&amp;b=' .$b . '&amp;diffmode=';
+
+	$show_mode = function($mode, $text) use ($diffmode, $params)
+	{
+		return ($diffmode != $mode
+			?	'<li><a href="' . $this->href('diff', '', $params . $mode) . '">' . $this->get_translation($text) . '</a>'
+			:	'<li class="active">' . $this->get_translation($text)) . '</li>';
+	};
+
 	echo '<!--nomail-->'.
 	'<ul class="menu">'.
-		($diff_mode != 0
-			?	'<li><a href="' . $this->href('diff', '', $params . '0') . '">' . $this->get_translation('FullDiff') . '</a>'
-			:	'<li class="active">' . $this->get_translation('FullDiff')) . '</li>'.
-		($diff_mode != 1
-			?	'<li><a href="' . $this->href('diff', '', $params . '1') . '">' . $this->get_translation('SimpleDiff') . '</a>'
-			:	'<li class="active">' . $this->get_translation('SimpleDiff')) . '</li>'.
-		($diff_mode != 2
-			?	'<li><a href="' . $this->href('diff', '', $params . '2') . '">' . $this->get_translation('SourceDiff') . '</a>'
-			:	'<li class="active">' . $this->get_translation('SourceDiff')) . '</li>'.
+		$show_mode(0, 'FullDiff').
+		$show_mode(1, 'SimpleDiff').
+		$show_mode(2, 'SourceDiff').
 	'</ul>'.
 	'<!--/nomail-->';
 
-	$output = '';
-	if ($diff_mode >= 1)
+	if ($diffmode >= 1)
 	{
-		$source = ($diff_mode == 2);
+		$source = ($diffmode == 2);
 
 		// This is a really cheap way to do it.
 		// prepare bodies
@@ -88,30 +95,28 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 		if ($added)
 		{
 			// remove blank lines
-			$output .= "<br />\n" . $this->get_translation('SimpleDiffAdditions') . "<br />\n\n";
-			$output .= '<div class="additions">';
-			$output .= $source
+			echo "<br />\n" . $this->get_translation('SimpleDiffAdditions') . "<br />\n\n";
+			echo '<div class="additions">';
+			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $added), 'wiki', array('diff' => true));
-			$output .= "</div>\n";
+			echo "</div>\n";
 		}
 
 		if ($deleted)
 		{
-			$output .= "<br />\n\n" . $this->get_translation('SimpleDiffDeletions') . "<br />\n\n";
-			$output .= '<div class="deletions">';
-			$output .= $source
+			echo "<br />\n\n" . $this->get_translation('SimpleDiffDeletions') . "<br />\n\n";
+			echo '<div class="deletions">';
+			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $deleted), 'wiki', array('diff' => true));
-			$output .= "</div>\n";
+			echo "</div>\n";
 		}
 
 		if (!$added && !$deleted)
 		{
-			$output .= "<br />\n" . $this->get_translation('NoDifferences');
+			echo "<br />\n" . $this->get_translation('NoDifferences');
 		}
-
-		echo $output;
 	}
 	else
 	{
@@ -135,9 +140,9 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 		$diff		= new Diff(explode("\n", $body_a), explode("\n", $body_b));
 
 		// format output
-		$fmt = new DiffFormatter();
+		$fmt		= new DiffFormatter();
 
-		$side_o = new Side($fmt->format($diff));
+		$side_o		= new Side($fmt->format($diff));
 
 		$resync_left	= 0;
 		$resync_right	= 0;

@@ -45,7 +45,7 @@ if ($this->has_access('read') && $this->hide_revisions === false )
 				$etag = str_replace('%2F', '/', rawurlencode($page['tag']));
 				$_GET['d'] = $page['modified'];
 				$_GET['a'] = $_GET['b'];
-				$_GET['b'] = $page['revision_m_id'];
+				$_GET['b'] = $page['revision_id'];
 				$_GET['c'] = ($_GET['d'] == '' ? $this->page['modified'] : $_GET['d']);
 
 
@@ -79,5 +79,3 @@ $xml .= "</channel>\n";
 $xml .= "</rss>\n";
 
 echo $xml;
-
-?>

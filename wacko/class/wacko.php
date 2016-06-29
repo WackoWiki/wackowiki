@@ -1071,13 +1071,22 @@ class Wacko
 		// load page
 		if ($metadata_only)
 		{
-			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, '.
+						'p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
+						'p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
+						'p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
+						'p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
 		}
 		else
 		{
 			$what_p = 'p.*, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, u.user_name, o.user_name AS owner_name';
+			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
+						'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, '.
+						'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, '.
+						'p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, '.
+						's.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, '.
+						'u.user_name, o.user_name AS owner_name';
 		}
 
 		if (!$page)
@@ -1099,7 +1108,7 @@ class Wacko
 
 				$owner_id = $page['owner_id'];
 
-				if ($revision_id && $revision_id != $page['page_id'])
+				if ($revision_id)
 				{
 					$this->cache_page($page, $page_id, $metadata_only);
 
@@ -1136,7 +1145,7 @@ class Wacko
 
 				$owner_id = $page['owner_id'];
 
-				if ($revision_id && $revision_id != $page['page_id'])
+				if ($revision_id)
 				{
 					$this->cache_page($page, $page_id, $metadata_only);
 
@@ -1419,9 +1428,9 @@ class Wacko
 
 	function set_page($page)
 	{
-		$lang_list	= $this->available_languages();
+		$lang_list = $this->available_languages();
 
-		if ($page['deleted'] == true && $this->is_admin() == false)
+		if ($page['deleted'] && !$this->is_admin())
 		{
 			$page['body']			= '';
 			$page['body_r']			= '';
@@ -1429,13 +1438,9 @@ class Wacko
 			$page['description']	= '';
 			$page['keywords']		= '';
 			$page['noindex']		= 1;
+		}
 
-			$this->page	= $page;
-		}
-		else
-		{
-			$this->page	= $page;
-		}
+		$this->page	= $page;
 
 		if ($this->page['tag'])
 		{
@@ -1446,11 +1451,11 @@ class Wacko
 		{
 			$this->page_lang = $page['page_lang'];
 		}
-		else if (((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1)) && isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
+		else if (@$_REQUEST['add'] && in_array(@$_REQUEST['lang'], $lang_list))
 		{
 			$this->page_lang = $_REQUEST['lang'];
 		}
-		else if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
+		else if (@$_REQUEST['add'])
 		{
 			$this->page_lang = $this->user_lang;
 		}
@@ -1463,10 +1468,11 @@ class Wacko
 	// STANDARD QUERIES
 	function load_revisions($page_id, $minor_edit = '', $deleted = 0)
 	{
-		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
+		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, '.
+					 'p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$revisions = $this->load_all(
-			"SELECT p.revision_id AS revision_m_id, ".$page_meta." ".
+			"SELECT p.revision_id, ".$page_meta." ".
 			"FROM ".$this->config['table_prefix']."revision p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
@@ -1479,10 +1485,10 @@ class Wacko
 					: "").
 			"ORDER BY p.modified DESC");
 
-		if ($revisions == true)
+		if ($revisions)
 		{
-			if ($cur = $this->load_single(
-				"SELECT p.page_id AS revision_m_id, ".$page_meta." ".
+			if (($cur = $this->load_single(
+				"SELECT 0 AS revision_id, ".$page_meta." ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
@@ -1494,7 +1500,7 @@ class Wacko
 						? "AND p.deleted <> '1' "
 						: "").
 				"ORDER BY p.modified DESC ".
-				"LIMIT 1"))
+				"LIMIT 1")))
 			{
 				array_unshift($revisions, $cur);
 			}
@@ -1502,7 +1508,7 @@ class Wacko
 		else
 		{
 			$revisions = $this->load_all(
-				"SELECT p.page_id AS revision_m_id, ".$page_meta." ".
+				"SELECT 0 AS revision_id, ".$page_meta." ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
@@ -6474,13 +6480,20 @@ class Wacko
 		{
 			$method = '';
 			$ids = explode('x', $tag);
-			$page = $this->load_page('', (int)$ids[0], (int)$ids[1], '', '', $this->is_admin());
+			$revision_id = $this->load_single(
+				"SELECT revision_id ".
+				"FROM {$this->config['table_prefix']}revision ".
+				"WHERE page_id = '".$ids[0]."' ".
+					"AND version_id = '".$ids[1]."' ".
+				"LIMIT 1");
+			$revision_id = $revision_id?  $revision_id['revision_id'] : 0;
+			$page = $this->load_page('', $ids[0], $revision_id, '', '', $this->is_admin());
 			if ($page)
 			{
 				$this->method = 'show';
 				$this->tag = $page['tag'];
 				$this->supertag = $page['supertag'];
-				$_GET['revision_id'] = $ids[1];
+				$_GET['revision_id'] = $revision_id;
 			}
 		}
 
