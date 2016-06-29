@@ -53,7 +53,7 @@ class Email
 
 				#$mail->SMTPDebug	= false;	// enables SMTP debug information (for testing)
 
-				if ( !$this->engine->is_blank( $this->engine->config['smtp_username'] ) )
+				if ( !$this->is_blank( $this->engine->config['smtp_username'] ) )
 				{
 					// Use SMTP Authentication
 					$mail->SMTPAuth = true;
@@ -61,7 +61,7 @@ class Email
 					$mail->Password = $this->engine->config['smtp_password'];
 				}
 
-				if ( !$this->engine->is_blank( $this->engine->config['smtp_connection_mode'] ) )
+				if ( !$this->is_blank( $this->engine->config['smtp_connection_mode'] ) )
 				{
 					$mail->SMTPSecure = $this->engine->config['smtp_connection_mode'];
 				}
@@ -126,6 +126,12 @@ class Email
 		// end
 
 		return $send_ok;
+	}
+
+	// checks if the parameter is an empty string or a string containing only whitespace
+	function is_blank($str)
+	{
+		return ctype_space($str) || $str === '';
 	}
 
 }
