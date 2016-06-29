@@ -9,7 +9,7 @@ if (!isset($page))		$page = '';
 if (!isset($nomark))	$nomark = '';
 if (!isset($title))		$title = '';
 
-$tag = $page?  $this->unwrap_link($page) : $tag = $this->tag;
+$tag = $page?  $this->unwrap_link($page) : $this->tag;
 
 if (($pages = $this->load_pages_linking_to($tag)))
 {

@@ -5,9 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-<?php
+echo '<div id="page">';
+$include_tail = '</div>';
 
 $max			= '';
 $output			= '';
@@ -15,7 +14,7 @@ $deleted		= 1;
 $place_holder	= '&nbsp;&nbsp;&nbsp;';
 
 // redirect to show method if hide_revisions is true
-if ($this->hide_revisions === true)
+if ($this->hide_revisions)
 {
 	$this->redirect($this->href());
 }
@@ -42,10 +41,10 @@ if ($this->is_admin())
 }
 
 // get page_id for deleted but stored page
-if ($this->page['deleted'] == 1)
+if ($this->page['deleted'])
 {
 	$this->show_message(
-			#$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
+			// $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
 			'BACKUP of deleted page!' // TODO: localize and add description: to restore the page you ...
 			);
 }
@@ -113,12 +112,12 @@ if ($this->has_access('read'))
 			{
 				$output .= '<li>';
 				$output .= '<span style="display: inline-block; width:40px;">'.($t--).'.</span>';
-				$output .= '<input type="radio" name="a" value="'.($c == 1 ? '-1' : $page['revision_m_id']).'" '.($c == 1 ? 'checked="checked"' : '').' />';
+				$output .= '<input type="radio" name="a" value="'.($c == 1 ? '-1' : $page['revision_id']).'" '.($c == 1 ? 'checked="checked"' : '').' />';
 				$output .= $place_holder.
-							'<input type="radio" name="b" value="'.($c == 1 ? '-1' : $page['revision_m_id']).'" '.($c == 2 ? 'checked="checked"' : '').' />';
+							'<input type="radio" name="b" value="'.($c == 1 ? '-1' : $page['revision_id']).'" '.($c == 2 ? 'checked="checked"' : '').' />';
 				$output .= $place_holder.'&nbsp;
-							<a href="'.$this->href('show', '', 'revision_id='.$page['revision_m_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
-				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_m_id']."</span> ";
+							<a href="'.$this->href('show', '', 'revision_id='.$page['revision_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
+				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_id']."</span> ";
 				$output .= $place_holder."&nbsp;".$this->get_translation('By')." ".
 							$this->user_link($page['user_name'], '', true, false);
 				$output .= ''.$edit_note.'';
@@ -127,16 +126,16 @@ if ($this->has_access('read'))
 				// review
 				if ($this->config['review'])
 				{
-					if ($page['reviewed'] == 0 &&  $this->is_reviewer())
+					if ($page['reviewed'])
 					{
-						if ($num == 0)
+						$output .= '<span class="review">['.$this->get_translation('ReviewedBy').' '.$this->user_link($page['reviewer'], '', true, false).']</span>';
+					}
+					else if ($this->is_reviewer())
+					{
+						if (!$num)
 						{
 							$output .= ' <span class="review">['.$this->get_translation('Review').']</span>';
 						}
-					}
-					else if ($page['reviewed'] == 1)
-					{
-						$output .= '<span class="review">['.$this->get_translation('ReviewedBy').' '.$this->user_link($page['reviewer'], '', true, false).']</span>';
 					}
 				}
 
@@ -165,6 +164,3 @@ else
 	$message = $this->get_translation('ReadAccessDenied');
 	$this->show_message($message, 'info');
 }
-
-?>
-</div>
