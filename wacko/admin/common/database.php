@@ -471,7 +471,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	"SELECT * FROM $table ".
 	( $where ? $where : "" ).
 	$order.
-	str_replace('%1', $r, $limit)))
+	perc_replace($limit, $r)))
 	{
 		foreach ($data as $row)
 		{
