@@ -570,20 +570,41 @@ class Wacko
 		return $list;
 	}
 
+	// negotiate language with user's browser
 	function user_agent_language()
 	{
 		$lang = $this->config['language'];
 
 		if ($this->config['multilanguage'] && isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 		{
-			// TODO: http://stackoverflow.com/questions/6038236/using-the-php-http-accept-language-server-variable
-			$want = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+			$can = $this->available_languages();
 
-			// Check whether we have language files for this language
-			if (in_array($want, $this->available_languages()))
-			{
-				$lang = $want;
-			}
+			// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+			preg_match_all("/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" . 
+					"(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/", 
+					strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']),
+					$matches, PREG_SET_ORDER); 
+
+			$best = 0; 
+			foreach ($matches as $i)
+			{ 
+				$want1 = $want2 = $i[1]; 
+				if ($i[3]) { 
+					$want2 = $want1 . '-' . $i[3]; 
+				} 
+				$q = ($i[5] !== '')? (float)$i[5] : 1;
+
+				if (in_array($want2, $can) && $q > $best)
+				{ 
+					$lang = $want2;
+					$best = $q; 
+				} 
+				else if (in_array($want1, $can) && $q * 0.9 > $best)
+				{ 
+					$lang = $want1; 
+					$best = $q * 0.9; 
+				} 
+			} 
 		}
 
 		return $lang;
@@ -6717,54 +6738,33 @@ class Wacko
 		// adds home page in front of breadcrumbs or current page is home page
 		if ($_root_page || $root_page)
 		{
-			$result .= $this->compose_link_to_page($this->config['root_page']) . ($_root_page? '' : ' '.$separator.' ');
+			$result .= $this->compose_link_to_page($this->config['root_page']);
 		}
 
 		if (!$_root_page)
 		{
-			$steps		= explode('/', $this->tag);
-			$links		= array();
-
-			for ($i = 0; $i < count($steps) -1; $i++)
+			$link = '';
+			foreach (explode('/', $this->tag) as $step)
 			{
-				if ($i == 0)
+				if ($link)
 				{
-					$prev = '';
+					$link .= '/';
+				}
+				$link .= $step;
+
+				if ($result)
+				{
+					$result .= $separator;
+				}
+
+				if ($linking)
+				{
+					$result .= $this->link($link, '', ($titles? $this->get_page_title($link) : $step));
 				}
 				else
 				{
-					$prev = $links[$i - 1].'/';
+					$result .= $titles? $this->get_page_title($link) : $step;
 				}
-
-				$links[] = $prev.$steps[$i];
-			}
-
-			// camel case'ing
-			#$linktext = preg_replace('([A-Z][a-z])', ' ${0}', $steps[$i]);
-
-			for ($i = 0; $i < count($steps) -1; $i++)
-			{
-				if ($titles == false)
-				{
-					$result .= $this->link($links[$i], '', $steps[$i]).$separator;
-				}
-				else if ($linking == true)
-				{
-					$result .= $this->link($links[$i], '', $this->get_page_title($steps[$i])).$separator;
-				}
-				else
-				{
-					$result .= $this->get_page_title($links[$i]).' '.$separator.' ';
-				}
-			}
-
-			if ($titles == false)
-			{
-				$result .= $steps[count($steps) - 1];
-			}
-			else
-			{
-				$result .=  $this->page['title'];
 			}
 		}
 
