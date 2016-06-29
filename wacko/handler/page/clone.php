@@ -41,7 +41,7 @@ else
 	$user_name		= GUEST;
 }
 
-$edit_note = str_replace('%1', $this->tag, $this->get_translation('ClonedFrom'));
+$edit_note = perc_replace($this->get_translation('ClonedFrom'), $this->tag);
 
 if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
@@ -80,13 +80,13 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				// if ($this->supertag == $super_new_name)
 				else if ($this->tag == $new_name)
 				{
-					$message .= str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n";
+					$message .= perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($new_name, '', '', 0))."<br />\n";
 				}
 				else
 				{
 					if ($this->supertag != $super_new_name && $page = $this->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 					{
-						$message .= str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n";
+						$message .= perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($new_name, '', '', 0))."<br />\n";
 					}
 					else
 					{
@@ -95,7 +95,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 							$need_redirect = '';
 
 							// log event
-							$this->log(4, str_replace('%2', $new_name, str_replace('%1', $this->tag, $this->get_translation('LogClonedPage', $this->config['language']))) );
+							$this->log(4, perc_replace($this->get_translation('LogClonedPage', $this->config['language']), $this->tag, $new_name));
 
 							if (isset($_POST['redirect']) && $_POST['redirect'] == 'on')
 							{
@@ -110,7 +110,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 							}
 							else
 							{
-								$message .= str_replace('%1', $this->link('/'.$new_name), $this->get_translation('PageCloned'))."<br />\n";
+								$message .= perc_replace($this->get_translation('PageCloned'), $this->link('/'.$new_name))."<br />\n";
 							}
 						}
 					}
@@ -218,7 +218,7 @@ function recursive_clone(&$parent, $root, $edit_note)
 		$parent->clear_cache_wanted_page($new_name);
 		$parent->clear_cache_wanted_page($super_new_name);
 
-		$message .= "<li>".str_replace('%1', $parent->link('/'.$new_name), $parent->get_translation('PageCloned'))."</li>\n";
+		$message .= "<li>".perc_replace($parent->get_translation('PageCloned'), $parent->link('/'.$new_name))."</li>\n";
 	}
 
 	$message .= "</ol>\n";

@@ -98,7 +98,7 @@ if ($this->is_owner() || $this->is_admin())
 				}
 
 				// log event
-				$this->log(2, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
+				$this->log(2, perc_replace($this->get_translation('LogACLUpdated', $this->config['language']), $this->page['tag']." ".$this->page['title']));
 
 				// Change permissions for all comments on this page
 				$comments = $this->load_all(
@@ -164,8 +164,8 @@ if ($this->is_owner() || $this->is_admin())
 							$save = $this->set_language($user['user_lang'], true);
 
 							$subject	= $this->get_translation('NewPageOwnership');
-							$body		.= str_replace('%2', $this->config['site_name'],
-										   str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
+							$body		.= perc_replace($this->get_translation('YouAreNewOwner'),
+										   $this->get_user_name(), $this->config['site_name'])."\n";
 							$body		.= $this->href('', $this->tag, '')."\n\n";
 							$body		.= $this->get_translation('PageOwnershipInfo')."\n";
 
@@ -174,14 +174,15 @@ if ($this->is_owner() || $this->is_admin())
 						}
 
 						// log event
-						$this->log(2, str_replace('%2', $new_owner, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
+						$this->log(2, perc_replace($this->get_translation('LogOwnershipChanged', $this->config['language']),
+								$this->page['tag']." ".$this->page['title'], $new_owner));
 
 						$message .= $this->get_translation('ACLGaveOwnership').'<code>'.$new_owner.'</code>';
 					}
 					else
 					{
 						// new owner doesn't exists
-						$message .= str_replace('%1', $new_owner, $this->get_translation('ACLNoNewOwner'));
+						$message .= perc_replace($this->get_translation('ACLNoNewOwner'), $new_owner);
 						$this->set_message($message);
 						$this->redirect($this->href('permissions'));
 					}
@@ -215,7 +216,7 @@ if ($this->is_owner() || $this->is_admin())
 					}
 
 					// log event
-					$this->log(2, str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
+					$this->log(2, perc_replace($this->get_translation('LogACLUpdated', $this->config['language']), $page['tag']." ".$page['title']));
 
 					// Change permissions for all comments on this page
 					$comments = $this->load_all(
@@ -246,7 +247,9 @@ if ($this->is_owner() || $this->is_admin())
 						$ownedpages .= $this->href('', $page['tag'])."\n";
 
 						// log event
-						$this->log(2, str_replace('%2', $user['user_name'], str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
+						$this->log(2, perc_replace($this->get_translation('LogOwnershipChanged', $this->config['language']),
+								$page['tag']." ".$page['title'],
+								$user['user_name']));
 					}
 				}
 
@@ -264,8 +267,8 @@ if ($this->is_owner() || $this->is_admin())
 					if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 					{
 						$subject	= $this->get_translation('NewPageOwnership');
-						$body		.= str_replace('%2', $this->config['site_name'],
-									   str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
+						$body		.= perc_replace($this->get_translation('YouAreNewOwner'),
+									   $this->get_user_name(), $this->config['site_name'])."\n";
 						$body		.= $this->href('', $this->tag, '')."\n\n";
 						$body		.= $this->get_translation('PageOwnershipInfo')."\n";
 
@@ -303,7 +306,7 @@ if ($this->is_owner() || $this->is_admin())
 
 		// show form
 ?>
-<h3><?php echo str_replace('%1', $this->compose_link_to_page($this->tag, '', '', 0), $this->get_translation('ACLFor')); ?></h3>
+<h3><?php echo perc_replace($this->get_translation('ACLFor'), $this->compose_link_to_page($this->tag, '', '', 0)); ?></h3>
 <?php
 echo $this->form_open('set_permissions', 'permissions', '', true);
 

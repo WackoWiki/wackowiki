@@ -29,7 +29,7 @@ $load_diff_page = function ($id)
 	if ($id > 0)
 	{
 		return $this->load_single(
-			"SELECT r.page_id, r.revision_id, r.modified, r.body, u.user_name ".
+			"SELECT r.page_id, r.revision_id, r.modified, r.body, r.page_lang, u.user_name ".
 			"FROM ".$this->config['table_prefix']."revision r ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
 			"WHERE r.revision_id = '".(int)$id."' ".
@@ -38,7 +38,7 @@ $load_diff_page = function ($id)
 	else
 	{
 		return $this->load_single(
-			"SELECT p.page_id, 0 AS revision_id, p.modified, p.body, u.user_name ".
+			"SELECT p.page_id, 0 AS revision_id, p.modified, p.body, p.page_lang, u.user_name ".
 			"FROM ".$this->config['table_prefix']."page p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 			"WHERE p.page_id = '".$this->get_page_id()."' ".
@@ -97,6 +97,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 
 		$added		= array_diff($body_a, $body_b);
 		$deleted	= array_diff($body_b, $body_a);
+		$charset	= $this->get_charset($page_a['page_lang']);
 
 		if ($added)
 		{
@@ -104,7 +105,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 			echo "<br />\n" . $this->get_translation('SimpleDiffAdditions') . "<br />\n\n";
 			echo '<div class="additions">';
 			echo $source
-					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, $this->language['charset']), 70, "\n", 1) . '</pre>'
+					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $added), 'wiki', array('diff' => true));
 			echo "</div>\n";
 		}
@@ -114,7 +115,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 			echo "<br />\n\n" . $this->get_translation('SimpleDiffDeletions') . "<br />\n\n";
 			echo '<div class="deletions">';
 			echo $source
-					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, $this->language['charset']), 70, "\n", 1) . '</pre>'
+					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $deleted), 'wiki', array('diff' => true));
 			echo "</div>\n";
 		}
@@ -239,6 +240,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 			break;
 		}
 
+		// html generator code inlined from php-diff library which copyrights can be found in lib/php-diff folder
 		if ($diffmode == 3)
 		{
 			echo '<table class="Differences DifferencesSideBySide">';

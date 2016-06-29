@@ -97,14 +97,14 @@ if ($this->is_admin())
 				$this->current_context--;
 
 				// log import
-				$this->log(4, str_replace('%1', $tag, $this->get_translation('LogPageImported', $this->config['language'])));
+				$this->log(4, perc_replace($this->get_translation('LogPageImported', $this->config['language']), $tag));
 
 				// count page
 				$t++;
 				$pages[] = $tag;
 			}
 
-			echo '<em>'.str_replace('%1', $t, $this->get_translation('ImportSuccess')).'</em><br />';
+			echo '<em>'.perc_replace($this->get_translation('ImportSuccess'), $t).'</em><br />';
 
 			foreach ($pages as $page)
 			{
