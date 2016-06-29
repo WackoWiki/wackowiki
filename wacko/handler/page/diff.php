@@ -67,9 +67,11 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 
 	$show_mode = function($mode, $text) use ($diffmode, $params)
 	{
+		if (($text1 = $this->get_translation($text))) // STS
+			$text = $text1;
 		return ($diffmode != $mode
-			?	'<li><a href="' . $this->href('diff', '', $params . $mode) . '">' . $this->get_translation($text) . '</a>'
-			:	'<li class="active">' . $this->get_translation($text)) . '</li>';
+			?	'<li><a href="' . $this->href('diff', '', $params . $mode) . '">' . $text . '</a>'
+			:	'<li class="active">' . $text) . '</li>';
 	};
 
 	echo '<!--nomail-->'.
@@ -77,11 +79,15 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 		$show_mode(0, 'FullDiff').
 		$show_mode(1, 'SimpleDiff').
 		$show_mode(2, 'SourceDiff').
+		$show_mode(3, 'side by side').
+		$show_mode(4, 'inline').
 	'</ul>'.
 	'<!--/nomail-->';
 
-	if ($diffmode >= 1)
+	switch ($diffmode)
 	{
+	case 1:
+	case 2:
 		$source = ($diffmode == 2);
 
 		// This is a really cheap way to do it.
@@ -98,7 +104,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 			echo "<br />\n" . $this->get_translation('SimpleDiffAdditions') . "<br />\n\n";
 			echo '<div class="additions">';
 			echo $source
-					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1) . '</pre>'
+					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, $this->language['charset']), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $added), 'wiki', array('diff' => true));
 			echo "</div>\n";
 		}
@@ -108,7 +114,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 			echo "<br />\n\n" . $this->get_translation('SimpleDiffDeletions') . "<br />\n\n";
 			echo '<div class="deletions">';
 			echo $source
-					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), 70, "\n", 1) . '</pre>'
+					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, $this->language['charset']), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $deleted), 'wiki', array('diff' => true));
 			echo "</div>\n";
 		}
@@ -117,9 +123,9 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 		{
 			echo "<br />\n" . $this->get_translation('NoDifferences');
 		}
-	}
-	else
-	{
+		break;
+
+	case 0:
 		require_once($this->config['handler_path'] . '/page/_diff.php');
 		// load pages
 
@@ -214,6 +220,241 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 
 		echo '<br /><br />';
 		echo $this->format($output, 'wiki', array('diff' => true));
+		break;
+
+	case 3:
+	case 4:
+		$this->add_html_head('<link rel="stylesheet" href="' . $this->config['theme_url'] . 'css/diff.css" type="text/css"/>'); // STS
+
+		require_once 'lib/php-diff/Diff.php';
+		$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
+
+		require_once 'lib/php-diff/Diff/Renderer/Html/Array.php';
+		$changes = $diff->render(new Diff_Renderer_Html_Array);
+
+		echo '<br /><br />';
+
+		if (empty($changes)) {
+			echo $this->get_translation('NoDifferences');
+			break;
+		}
+
+		if ($diffmode == 3)
+		{
+			echo '<table class="Differences DifferencesSideBySide">';
+			/*echo '<thead>';
+			echo '<tr>';
+			echo '<th colspan="2">' . $this->get_time_formatted($page_a['modified']) . '</th>';
+			echo '<th colspan="2">' . $this->get_time_formatted($page_b['modified']) . '</th>';
+			echo '</tr>';
+			echo '</thead>';*/
+			foreach ($changes as $i => $blocks)
+			{
+				if ($i > 0)
+				{
+					echo '<tbody class="Skipped">';
+					echo '<th>&hellip;</th><td>&nbsp;</td>';
+					echo '<th>&hellip;</th><td>&nbsp;</td>';
+					echo '</tbody>';
+				}
+
+				foreach ($blocks as $change)
+				{
+					echo '<tbody class="Change'.ucfirst($change['tag']).'">';
+					// Equal changes should be shown on both sides of the diff
+					if ($change['tag'] == 'equal')
+					{
+						foreach ($change['base']['lines'] as $no => $line)
+						{
+							$fromLine = $change['base']['offset'] + $no + 1;
+							$toLine = $change['changed']['offset'] + $no + 1;
+							echo '<tr>';
+							echo '<th>'.$fromLine.'</th>';
+							echo '<td class="Left"><span>'.$line.'</span>&nbsp;</span></td>';
+							echo '<th>'.$toLine.'</th>';
+							echo '<td class="Right"><span>'.$line.'</span>&nbsp;</span></td>';
+							echo '</tr>';
+						}
+					}
+					// Added lines only on the right side
+					else if ($change['tag'] == 'insert')
+					{
+						foreach ($change['changed']['lines'] as $no => $line)
+						{
+							$toLine = $change['changed']['offset'] + $no + 1;
+							echo '<tr>';
+							echo '<th>&nbsp;</th>';
+							echo '<td class="Left">&nbsp;</td>';
+							echo '<th>'.$toLine.'</th>';
+							echo '<td class="Right"><ins>'.$line.'</ins>&nbsp;</td>';
+							echo '</tr>';
+						}
+					}
+					// Show deleted lines only on the left side
+					else if ($change['tag'] == 'delete')
+					{
+						foreach ($change['base']['lines'] as $no => $line)
+						{
+							$fromLine = $change['base']['offset'] + $no + 1;
+							echo '<tr>';
+							echo '<th>'.$fromLine.'</th>';
+							echo '<td class="Left"><del>'.$line.'</del>&nbsp;</td>';
+							echo '<th>&nbsp;</th>';
+							echo '<td class="Right">&nbsp;</td>';
+							echo '</tr>';
+						}
+					}
+					// Show modified lines on both sides
+					else if ($change['tag'] == 'replace')
+					{
+						if (count($change['base']['lines']) >= count($change['changed']['lines']))
+						{
+							foreach ($change['base']['lines'] as $no => $line)
+							{
+								$fromLine = $change['base']['offset'] + $no + 1;
+								echo '<tr>';
+								echo '<th>'.$fromLine.'</th>';
+								echo '<td class="Left"><span>'.$line.'</span>&nbsp;</td>';
+								if (!isset($change['changed']['lines'][$no]))
+								{
+									$toLine = '&nbsp;';
+									$changedLine = '&nbsp;';
+								}
+								else
+								{
+									$toLine = $change['base']['offset'] + $no + 1;
+									$changedLine = '<span>'.$change['changed']['lines'][$no].'</span>';
+								}
+								echo '<th>'.$toLine.'</th>';
+								echo '<td class="Right">'.$changedLine.'</td>';
+								echo '</tr>';
+							}
+						}
+						else
+						{
+							foreach ($change['changed']['lines'] as $no => $changedLine)
+							{
+								if (!isset($change['base']['lines'][$no]))
+								{
+									$fromLine = '&nbsp;';
+									$line = '&nbsp;';
+								}
+								else
+								{
+									$fromLine = $change['base']['offset'] + $no + 1;
+									$line = '<span>'.$change['base']['lines'][$no].'</span>';
+								}
+								echo '<tr>';
+								echo '<th>'.$fromLine.'</th>';
+								echo '<td class="Left"><span>'.$line.'</span>&nbsp;</td>';
+								$toLine = $change['changed']['offset'] + $no + 1;
+								echo '<th>'.$toLine.'</th>';
+								echo '<td class="Right">'.$changedLine.'</td>';
+								echo '</tr>';
+							}
+						}
+					}
+					echo '</tbody>';
+				}
+			}
+			echo '</table>';
+		}
+		else
+		{
+			echo '<table class="Differences DifferencesInline">';
+			/*echo '<thead>';
+			echo '<tr>';
+			echo '<th>Old</th>';
+			echo '<th>New</th>';
+			echo '<th>Differences</th>';
+			echo '</tr>';
+			echo '</thead>';*/
+			foreach ($changes as $i => $blocks)
+			{
+				// If this is a separate block, we're condensing code so output ...,
+				// indicating a significant portion of the code has been collapsed as
+				// it is the same
+				if ($i > 0)
+				{
+					echo '<tbody class="Skipped">';
+					echo '<th>&hellip;</th>';
+					echo '<th>&hellip;</th>';
+					echo '<td>&nbsp;</td>';
+					echo '</tbody>';
+				}
+
+				foreach ($blocks as $change)
+				{
+					echo '<tbody class="Change'.ucfirst($change['tag']).'">';
+					// Equal changes should be shown on both sides of the diff
+					if ($change['tag'] == 'equal')
+					{
+						foreach ($change['base']['lines'] as $no => $line)
+						{
+							$fromLine = $change['base']['offset'] + $no + 1;
+							$toLine = $change['changed']['offset'] + $no + 1;
+							echo '<tr>';
+							echo '<th>'.$fromLine.'</th>';
+							echo '<th>'.$toLine.'</th>';
+							echo '<td class="Left">'.$line.'</td>';
+							echo '</tr>';
+						}
+					}
+					// Added lines only on the right side
+					else if ($change['tag'] == 'insert')
+					{
+						foreach ($change['changed']['lines'] as $no => $line)
+						{
+							$toLine = $change['changed']['offset'] + $no + 1;
+							echo '<tr>';
+							echo '<th>&nbsp;</th>';
+							echo '<th>'.$toLine.'</th>';
+							echo '<td class="Right"><ins>'.$line.'</ins>&nbsp;</td>';
+							echo '</tr>';
+						}
+					}
+					// Show deleted lines only on the left side
+					else if ($change['tag'] == 'delete')
+					{
+						foreach ($change['base']['lines'] as $no => $line)
+						{
+							$fromLine = $change['base']['offset'] + $no + 1;
+							echo '<tr>';
+							echo '<th>'.$fromLine.'</th>';
+							echo '<th>&nbsp;</th>';
+							echo '<td class="Left"><del>'.$line.'</del>&nbsp;</td>';
+							echo '</tr>';
+						}
+					}
+					// Show modified lines on both sides
+					else if ($change['tag'] == 'replace')
+					{
+						foreach ($change['base']['lines'] as $no => $line)
+						{
+							$fromLine = $change['base']['offset'] + $no + 1;
+							echo '<tr>';
+							echo '<th>'.$fromLine.'</th>';
+							echo '<th>&nbsp;</th>';
+							echo '<td class="Left"><span>'.$line.'</span></td>';
+							echo '</tr>';
+						}
+
+						foreach ($change['changed']['lines'] as $no => $line)
+						{
+							$toLine = $change['changed']['offset'] + $no + 1;
+							echo '<tr>';
+							echo '<th>&nbsp;</th>';
+							echo '<th>'.$toLine.'</th>';
+							echo '<td class="Right"><span>'.$line.'</span></td>';
+							echo '</tr>';
+						}
+					}
+					echo '</tbody>';
+				}
+			}
+			echo '</table>';
+		}
+		break;
 	}
 }
 else

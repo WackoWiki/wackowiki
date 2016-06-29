@@ -1,0 +1,25 @@
+diff -ur ./Diff/Renderer/Html/Array.php /home/sts/ww/main/wacko/lib/php-diff/Diff/Renderer/Html/Array.php
+--- ./Diff/Renderer/Html/Array.php	2015-05-26 12:03:16.000000000 +0600
++++ /home/sts/ww/main/wacko/lib/php-diff/Diff/Renderer/Html/Array.php	2016-06-29 17:13:56.168334000 +0600
+@@ -177,7 +177,9 @@
+ 		$lines = array_map(array($this, 'ExpandTabs'), $lines);
+ 		$lines = array_map(array($this, 'HtmlSafe'), $lines);
+ 		foreach($lines as &$line) {
+-			$line = preg_replace('# ( +)|^ #e', "\$this->fixSpaces('\\1')", $line);
++			$line = preg_replace_callback('# ( +)|^ #',
++				function ($x) { return $this->fixSpaces($x[1]); }, $line);
++
+ 		}
+ 		return $lines;
+ 	}
+@@ -219,6 +221,6 @@
+ 	 */
+ 	private function htmlSafe($string)
+ 	{
+-		return htmlspecialchars($string, ENT_NOQUOTES, 'UTF-8');
++		return htmlspecialchars($string, ENT_NOQUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET);
+ 	}
+ }
+Only in ./Diff/Renderer/Html: Inline.php
+Only in ./Diff/Renderer/Html: SideBySide.php
+Only in ./Diff/Renderer: Text

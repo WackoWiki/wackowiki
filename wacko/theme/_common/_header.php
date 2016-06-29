@@ -97,6 +97,7 @@ if ($doubleclick == true)
 	</script>
 <?php
 }
+echo $this->html_head;
 ?>
 
 </head>
