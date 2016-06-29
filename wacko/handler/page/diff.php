@@ -79,8 +79,9 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 		$show_mode(0, 'FullDiff').
 		$show_mode(1, 'SimpleDiff').
 		$show_mode(2, 'SourceDiff').
-		$show_mode(3, 'side by side').
+		$show_mode(3, 'side by side'). // TODO: texts
 		$show_mode(4, 'inline').
+		$show_mode(5, 'unified').
 	'</ul>'.
 	'<!--/nomail-->';
 
@@ -225,6 +226,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 
 	case 3:
 	case 4:
+	case 5:
 		$this->add_html_head('<link rel="stylesheet" href="' . $this->config['theme_url'] . 'css/diff.css" type="text/css"/>'); // STS
 
 		require_once 'lib/php-diff/Diff.php';
@@ -361,7 +363,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 			}
 			echo '</table>';
 		}
-		else
+		else if ($diffmode == 4)
 		{
 			echo '<table class="Differences DifferencesInline">';
 			/*echo '<thead>';
@@ -455,6 +457,48 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 				}
 			}
 			echo '</table>';
+		}
+		else
+		{
+			// standard unified diff, useful for sending in emails or what
+			echo '<pre>';
+			foreach ($diff->getGroupedOpcodes() as $group)
+			{
+				$lastItem = count($group)-1;
+				$i1 = $group[0][1];
+				$i2 = $group[$lastItem][2];
+				$j1 = $group[0][3];
+				$j2 = $group[$lastItem][4];
+
+				if ($i1 == 0 && $i2 == 0)
+				{
+					$i1 = -1;
+					$i2 = -1;
+				}
+
+				echo '@@ -' . ($i1 + 1) . ',' . ($i2 - $i1) . ' +' . ($j1 + 1) . ',' . ($j2 - $j1) . " @@\n";
+				foreach ($group as $code)
+				{
+					list($tag, $i1, $i2, $j1, $j2) = $code;
+					if ($tag == 'equal')
+					{
+						echo ' ' . implode("\n ", $diff->GetA($i1, $i2)) . "\n";
+					}
+					else
+					{
+						if ($tag == 'replace' || $tag == 'delete')
+						{
+							echo '-' . implode("\n-", $diff->GetA($i1, $i2)) . "\n";
+						}
+
+						if ($tag == 'replace' || $tag == 'insert')
+						{
+							echo '+' . implode("\n+", $diff->GetB($j1, $j2)) . "\n";
+						}
+					}
+				}
+			}
+			echo '</pre>';
 		}
 		break;
 	}
