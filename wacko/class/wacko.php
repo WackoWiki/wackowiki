@@ -6757,7 +6757,7 @@ class Wacko
 					$result .= $separator;
 				}
 
-				if ($linking)
+				if ($linking && $link != $this->tag)
 				{
 					$result .= $this->link($link, '', ($titles? $this->get_page_title($link) : $step));
 				}
