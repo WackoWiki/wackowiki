@@ -43,6 +43,7 @@ class Wacko
 	var $numerate_links			= null;
 	var $post_wacko_action		= null;
 	var $_userhost				= null;
+	var $html_head				= '';
 	var $hide_article_header	= false;
 	var $paragrafica_styles		= array(
 		'before'	=> array(
@@ -7884,5 +7885,11 @@ class Wacko
 		}
 
 		return $x;
+	}
+
+	// to use by actions to add some inside <head> e.g. to adding custom css
+	function add_html_head($text)
+	{
+		$this->html_head .= $text;
 	}
 }
