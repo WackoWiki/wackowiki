@@ -77,7 +77,7 @@ function stringify($x, $compact = 0, $full = 1)
 			{
 				return false;
 			}
-			// in php array keys can be integer or string
+			// BTW in php array keys can be of integer or string type ONLY
 			if (is_int($k))
 			{
 				if ($i == $k)
@@ -91,13 +91,9 @@ function stringify($x, $compact = 0, $full = 1)
 					$i = $k + 1;
 				}
 			}
-			else if (is_string($k))
-			{
-				$k = stringify($k);
-			}
 			else
 			{
-				die('stringify(): impossible key ' . stringify($k));
+				$k = stringify($k);
 			}
 			$array[] = $k . ($compact? '=>' : ' => ') . $v;
 		}
@@ -124,7 +120,7 @@ function stringify($x, $compact = 0, $full = 1)
 function debug_print_r($array)
 {
 	echo '<pre>';
-	echo stringify($array);
+	print_r($array);
 	echo '</pre>';
 }
 

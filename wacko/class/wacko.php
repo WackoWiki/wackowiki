@@ -251,12 +251,6 @@ class Wacko
 		return WACKO_VERSION;
 	}
 
-	// checks if the parameter is an empty string or a string containing only whitespace
-	function is_blank($str)
-	{
-		return ctype_space($str) || $str === '';
-	}
-
 	/**
 	* Check if file with filename exists. Check only DB entry,
 	* not file in FS
@@ -501,14 +495,7 @@ class Wacko
 		{
 			$lang_file = 'lang/lang.' . $lang . '.php';
 			$wacko_language = [];
-			if (@file_exists($lang_file))
-			{
-				include($lang_file);
-			}
-			else
-			{
-				die("language file $lang_file not found");
-			}
+			require($lang_file);
 
 			$wacko_language['LANG']			= $lang;
 			$wacko_language['UPPER']		= '[' . $wacko_language['UPPER_P'] . ']';
@@ -2475,7 +2462,7 @@ class Wacko
 			$_GET['a']			= -1;
 			$_GET['b']			= $page['revision_id'];
 			$_GET['diffmode']	= 2; // 2 - source diff
-			$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops', array('source' => 1));
+			$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops');
 		}
 
 		// get watchers
@@ -2629,15 +2616,8 @@ class Wacko
 
 	function delete_cookie($name, $prefix = true, $postfix = false)
 	{
-		($prefix == true
-			? $prefix	= $this->config['cookie_prefix']
-			: $prefix	= ''
-		);
-
-		($postfix == true
-			? $cookie_hash	= '_'.$this->config['cookie_hash']
-			: $cookie_hash	= ''
-		);
+		$prefix	= $prefix?  $this->config['cookie_prefix'] : '';
+		$cookie_hash = $postfix? '_'.$this->config['cookie_hash'] : '';
 
 		$cookie_path	= $this->config['cookie_path'];
 		$cookie_name	= $prefix.$name.$cookie_hash;
@@ -2928,40 +2908,43 @@ class Wacko
 	*
 	* @param string $method Optional Wakka method (default 'show' method added in Run() function)
 	* @param string $tag Optional tag. Returns current-page tag if empty
-	* @param string $params Optional URL parameters in HTTP name=value[&name=value][...] format
+	* @param string $params Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'])
 	* @param boolean $addpage Optional
 	* @param string $anchor Optional HTTP anchor-fragment
 	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wakka 'rewrite_method' config-parameter)
 	*/
 	function href($method = '', $tag = '', $params = '', $addpage = false, $anchor = '')
 	{
-		$_rewrite_mode = '';
-
-		if ($this->config['ap_mode'])
+		if (!is_array($params))
 		{
-			// enable rewrite_mode to avoid href() appends '?page='
-			$_rewrite_mode = 1;
+			$params = $params? [$params] : [];
+		}
+
+		$href = $this->config['base_url'];
+
+		// enable rewrite_mode in ap_mode to avoid href() appends '?page=' (why?)
+		if ($this->config['rewrite_mode'] || $this->config['ap_mode'])
+		{
+			$href .= $this->mini_href($method, $tag, $addpage);
 		}
 		else
 		{
-			$_rewrite_mode = $this->config['rewrite_mode'];
+			array_unshift($params, 'page=' . $this->mini_href($method, $tag, $addpage));
 		}
-
-		$href = $this->config['base_url'].( $_rewrite_mode ? '' : '?page=' ).$this->mini_href($method, $tag, $addpage);
 
 		if ($addpage)
 		{
-			$params = 'add=1'.($params ? '&amp;'.$params : '');
+			$params[] = 'add=1';
 		}
 
 		if ($params)
 		{
-			$href .= ($_rewrite_mode ? '?' : '&amp;').$params;
+			$href .= '?' . implode('&amp;', $params);
 		}
 
 		if ($anchor)
 		{
-			$href .= '#'.$anchor;
+			$href .= '#' . $anchor;
 		}
 
 		return $href;
@@ -2975,7 +2958,7 @@ class Wacko
 	* @param boolean $addpage Optional
 	* @return string String tag[/method]
 	*/
-	function mini_href($method = '', $tag = '', $addpage = 0)
+	function mini_href($method = '', $tag = '', $addpage = false)
 	{
 		if (!($tag = trim($tag)))
 		{
@@ -3867,10 +3850,6 @@ class Wacko
 	}
 
 	// creates a link to the user profile
-	//		$user_name		=
-	//		$account_lang	=
-	//		$linking		=
-	//		$add_icon		=
 	function user_link($user_name, $account_lang = '', $linking = true, $add_icon = true)
 	{
 		if (!$user_name)
@@ -3880,39 +3859,21 @@ class Wacko
 		}
 
 		// check current page lang for different charset to do_unicode_entities()
-		if ($this->page['page_lang'] != $account_lang)
-		{
-			$text = $this->do_unicode_entities($user_name, $account_lang);
-		}
-		else
-		{
-			$text = $user_name;
-		}
+		$text = ($this->page['page_lang'] != $account_lang)?  $this->do_unicode_entities($user_name, $account_lang) : $user_name;
 
-		if ($add_icon)
-		{
-			$icon = '<span class="icon"></span>';
-		}
-		else
-		{
-			$icon = '';
-		}
+		$icon = $add_icon?  '<span class="icon"></span>' : '';
 
 		if ($linking)
 		{
-			return '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'" class="user-link">'.$icon.$text.'</a>';
+			return '<a href="' . $this->href('', $this->config['users_page'], 'profile=' . $user_name) . '" class="user-link">' . $icon . $text . '</a>';
 		}
 		else
 		{
-			return '<span class="user-link">'.$icon.$text.'</span>';
+			return '<span class="user-link">' . $icon . $text . '</span>';
 		}
 	}
 
 	// creates a link to the group profile
-	//		$group_name		=
-	//		$group_lang	=
-	//		$linking		=
-	//		$add_icon		=
 	function group_link($group_name, $group_lang = '', $linking = true, $add_icon = true)
 	{
 		if (!$group_name)
@@ -3921,23 +3882,9 @@ class Wacko
 		}
 
 		// check current page lang for different charset to do_unicode_entities()
-		if ($this->page['page_lang'] != $group_lang)
-		{
-			$text = $this->do_unicode_entities($group_name, $group_lang);
-		}
-		else
-		{
-			$text = $group_name;
-		}
+		$text = ($this->page['page_lang'] != $group_lang)?  $this->do_unicode_entities($group_name, $group_lang) : $group_name;
 
-		if ($add_icon)
-		{
-			$icon = '<span class="icon"></span>';
-		}
-		else
-		{
-			$icon = '';
-		}
+		$icon = $add_icon?  '<span class="icon"></span>' : '';
 
 		#$this->is_admin() ? ' title="'.$comment['ip'].'"' : '' (a | span)
 		# $this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'')
@@ -3961,51 +3908,28 @@ class Wacko
 	*/
 	function add_spaces($text)
 	{
-		$show = 1;
-
-		if ($user = $this->get_user())
+		if (($user = $this->get_user())?  $user['show_spaces'] : $this->config['show_spaces'])
 		{
-			$show = (isset($user['show_spaces']) ? $user['show_spaces'] : null);
+			$text = $this->add_nbsps($text);
 		}
 
-		if (!$show)
+		if (!strncmp($text, '/', 1))
 		{
-			$show = $this->config['show_spaces'];
+			$text = $this->get_translation('RootLinkIcon') . substr($text, 1);
 		}
-
-		if ($show != 0)
+		else if (!strncmp($text, '!/', 2))
 		{
-			$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
-			$text = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
-			$text = preg_replace('/('.$this->language['ALPHANUM'].')\//', '\\1&nbsp;/', $text);
-			$text = preg_replace('/('.$this->language['UPPER'].')&nbsp;(?='.$this->language['UPPER'].'&nbsp;'.$this->language['UPPERNUM'].')/', '\\1', $text);
-			$text = preg_replace('/('.$this->language['UPPER'].')&nbsp;(?='.$this->language['UPPER'].'&nbsp;\/)/', '\\1', $text);
-			$text = preg_replace('/\/('.$this->language['ALPHANUM'].')/', '/&nbsp;\\1', $text);
-			$text = preg_replace('/('.$this->language['UPPERNUM'].')&nbsp;('.$this->language['UPPERNUM'].')($|\b)/', '\\1\\2', $text);
-			$text = preg_replace('/([0-9])('.$this->language['ALPHA'].')/', '\\1&nbsp;\\2', $text);
-			$text = preg_replace('/('.$this->language['ALPHA'].')([0-9])/', '\\1&nbsp;\\2', $text);
-			$text = preg_replace('/([0-9])&nbsp;(?=[0-9])/', '\\1', $text);
+			$text = $this->get_translation('SubLinkIcon') . substr($text, 2);
 		}
-
-		if (strpos($text, '/')   === 0)
+		else if (!strncmp($text, '../', 3))
 		{
-			$text = $this->get_translation('RootLinkIcon').substr($text, 1);
-		}
-
-		if (strpos($text, '!/')  === 0)
-		{
-			$text = $this->get_translation('SubLinkIcon').substr($text, 2);
-		}
-
-		if (strpos($text, '../') === 0)
-		{
-			$text = $this->get_translation('UpLinkIcon').substr($text, 3);
+			$text = $this->get_translation('UpLinkIcon') . substr($text, 3);
 		}
 
 		return $text;
 	}
 
-	function add_spaces_title($text)
+	function add_nbsps($text)
 	{
 		$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
 		$text = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
@@ -4016,26 +3940,14 @@ class Wacko
 		$text = preg_replace('/('.$this->language['UPPERNUM'].')&nbsp;('.$this->language['UPPERNUM'].')($|\b)/', '\\1\\2', $text);
 		$text = preg_replace('/([0-9])('.$this->language['ALPHA'].')/', '\\1&nbsp;\\2', $text);
 		$text = preg_replace('/('.$this->language['ALPHA'].')([0-9])/', '\\1&nbsp;\\2', $text);
-		#$text = preg_replace('/([0-9])&nbsp;(?=[0-9])/', '\\1', $text);
+		// $text = preg_replace('/([0-9])&nbsp;(?=[0-9])/', '\\1', $text);
 		$text = preg_replace('/([0-9])&nbsp;(?!'.$this->language['ALPHA'].')/', '\\1', $text);
-		$text = preg_replace('/&nbsp;/', ' ', $text);
-
-		if (strpos($text, '/')   === 0)
-		{
-			$text = $this->get_translation('RootLinkIcon').substr($text, 1);
-		}
-
-		if (strpos($text, '!/')  === 0)
-		{
-			$text = $this->get_translation('SubLinkIcon').substr($text, 2);
-		}
-
-		if (strpos($text, '../') === 0)
-		{
-			$text = $this->get_translation('UpLinkIcon').substr($text, 3);
-		}
-
 		return $text;
+	}
+
+	function add_spaces_title($text)
+	{
+		return preg_replace('/&nbsp;/', ' ', $this->add_nbsps($text));
 	}
 
 	function validate_reserved_words( $data )
@@ -4251,24 +4163,26 @@ class Wacko
 	}
 
 	// FORMS
-	function form_open($form_name = '', $page_method = '', $form_method = 'post', $form_token = false, $tag = '', $form_more = '', $href_param = '')
+	function form_open($form_name = '', $page_method = '', $form_method = '', $form_token = false, $tag = '', $form_more = '', $href_param = '')
 	{
 		if (!$form_method)
 		{
 			$form_method = 'post';
 		}
 
-		$add	= ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1)) ? true : '';
+		$add = (@$_GET['add'] || @$_POST['add']);
 
-		$result	= '<form action="'.$this->href($page_method, $tag, $href_param, $add).'" '.$form_more.' method="'.$form_method.'" '.($form_name ? 'name="'.$form_name.'" ' : '').">\n";
+		$result	= '<form action="' .
+			$this->href($page_method, $tag, $href_param, $add) . '" ' .
+			$form_more . ' method="' . $form_method . '" ' . ($form_name ? 'name="' . $form_name . '" ' : '') . ">\n";
 
-		if (!$this->config['rewrite_mode']  && !$this->config['ap_mode'])
+		if (!($this->config['rewrite_mode'] || $this->config['ap_mode']))
 		{
-			$result .= '<input type="hidden" name="page" value="'.$this->mini_href($page_method, $tag, $add)."\" />\n";
+			$result .= '<input type="hidden" name="page" value="' . $this->mini_href($page_method, $tag, $add) . "\" />\n";
 		}
 
 		// add form token
-		if ($form_token == true)
+		if ($form_token)
 		{
 			$result .= $this->form_token($form_name);
 		}
@@ -5303,7 +5217,7 @@ class Wacko
 			$alias = $this->config['aliases'];
 			$admin = explode("\\n", $alias['Admins']);
 
-			if ($admin == true && in_array($this->get_user_name(), $admin))
+			if ($admin && in_array($this->get_user_name(), $admin))
 			{
 				return true;
 			}
@@ -5323,11 +5237,11 @@ class Wacko
 		{
 			$alias = $this->config['aliases'];
 
-			if(isset($alias['Moderator']))
+			if (isset($alias['Moderator']))
 			{
 				$moderator = explode("\\n", $alias['Moderator']);
 
-				if ($moderator == true && in_array($this->get_user_name(), $moderator))
+				if ($moderator && in_array($this->get_user_name(), $moderator))
 				{
 					return true;
 				}
@@ -5352,7 +5266,7 @@ class Wacko
 			{
 				$reviewer = explode("\\n", $alias['Reviewer']);
 
-				if ($reviewer == true && in_array($this->get_user_name(), $reviewer))
+				if ($reviewer && in_array($this->get_user_name(), $reviewer))
 				{
 					return true;
 				}
@@ -5378,10 +5292,7 @@ class Wacko
 		}
 
 		// check if user is owner
-		if ($this->get_page_owner_id($page_id) == $this->get_user_id())
-		{
-			return true;
-		}
+		return ($this->get_page_owner_id($page_id) == $this->get_user_id());
 	}
 
 	function get_page_owner($tag = '', $page_id = 0, $revision_id = '')
@@ -5390,7 +5301,7 @@ class Wacko
 		{
 			if (!$revision_id)
 			{
-				if(isset($this->page['owner_name']))
+				if (isset($this->page['owner_name']))
 				{
 					return $this->page['owner_name'];
 				}
@@ -5405,7 +5316,7 @@ class Wacko
 			}
 		}
 
-		if ($page = $this->load_page($tag, $page_id, $revision_id, LOAD_CACHE, LOAD_META))
+		if (($page = $this->load_page($tag, $page_id, $revision_id, LOAD_CACHE, LOAD_META)))
 		{
 			return $page['owner_name'];
 		}
@@ -5429,7 +5340,7 @@ class Wacko
 			}
 		}
 
-		if ($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META))
+		if (($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META)))
 		{
 			return $page['owner_id'];
 		}
@@ -6798,22 +6709,18 @@ class Wacko
 	// BREADCRUMBS -- navigation inside WackoClusters
 	function get_page_path($titles = false, $separator = '/', $linking = true, $root_page = false)
 	{
-		$result		= '';
-		$_root_page	= '';
+		$result = '';
 
 		// check if current page is home page
-		if (strtolower($this->config['root_page']) == strtolower($this->tag))
-		{
-			$_root_page = true;
-		}
+		$_root_page	= !strcasecmp($this->config['root_page'], $this->tag);
 
 		// adds home page in front of breadcrumbs or current page is home page
-		if ($_root_page == true || $root_page == true)
+		if ($_root_page || $root_page)
 		{
-			$result .= $this->compose_link_to_page($this->config['root_page']).($_root_page == true ? '' : ' '.$separator.' ');
+			$result .= $this->compose_link_to_page($this->config['root_page']) . ($_root_page? '' : ' '.$separator.' ');
 		}
 
-		if ($_root_page == false)
+		if (!$_root_page)
 		{
 			$steps		= explode('/', $this->tag);
 			$links		= array();
