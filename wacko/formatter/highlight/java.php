@@ -1,7 +1,5 @@
 <?php
 
-$this->use_class('javahighlighter', $this->config['formatter_path'].'/class/');
-
 $dh = new JavaHighlighter();
 echo '<!--notypo-->';
 echo '<pre class="code">';

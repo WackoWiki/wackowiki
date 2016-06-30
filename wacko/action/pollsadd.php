@@ -22,7 +22,6 @@ $plural		= '';
 $startmod	= '';
 
 // create polls object
-$this->use_class('polls');
 $polls_obj = new Polls($this);
 
 // define context
@@ -155,8 +154,7 @@ if (isset($_POST['submit_poll']))
 		// update news RSS feed
 		if ($startmod == 1)
 		{
-			#$this->use_class('feed');
-			#$xml = new feed($this);
+			#$xml = new Feed($this);
 			#$xml->feed();
 			unset($xml);
 		}

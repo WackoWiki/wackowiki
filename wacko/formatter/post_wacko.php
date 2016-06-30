@@ -5,8 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$this->use_class('post_wacko', $this->config['formatter_path'].'/class/');
-
 $parser = new post_wacko($this, $options);
 
 $text = preg_replace_callback('/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--link:end-->|'.

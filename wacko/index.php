@@ -2,9 +2,11 @@
 
 define('IN_WACKO', true);
 
+require_once('lib/utility.php');
+class_autoloader('config/autoload.conf');
+
 // initialize engine api
-require('class/init.php');
-$init = new init();
+$init = new Init();
 
 // define settings
 if ($cached_config = $init->load_cached_settings('config'))

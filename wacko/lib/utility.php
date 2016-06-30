@@ -141,3 +141,35 @@ function dbg()
 		$running = @file_put_contents('DEBUG', date('ymdHis ') . implode(' ', $args) . "\n", FILE_APPEND);
 	}
 }
+
+
+function class_autoloader($config)
+{
+	spl_autoload_register(function($name) use ($config)
+	{
+		static $map;
+		if (!isset($map))
+		{
+			foreach (file($config) as $line)
+			{
+				if (($line = trim($line)) && ctype_alpha($line[0]))
+				{
+					$line = preg_split('/\s+/', $line);
+					$file = array_shift($line);
+					if (@file_exists($file))
+					{
+						foreach ($line as $class)
+						{
+							$map[$class] = $file;
+						}
+					}
+				}
+			}
+		}
+		if (array_key_exists($name, $map))
+		{
+			require_once($map[$name]);
+		}
+	});
+}
+

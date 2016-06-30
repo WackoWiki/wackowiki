@@ -188,12 +188,6 @@ class Wacko
 	*/
 	function load_single($query, $docache = false)
 	{
-		// STS: future idea
-		//if (substr_compare($query, "LIMIT 1", -7, 7, true))
-		//{
-		//	$query .= " LIMIT 1";
-		//}
-
 		if (($data = $this->load_all($query, $docache)))
 		{
 			return $data[0];
@@ -650,7 +644,7 @@ class Wacko
 			return $this->resource[$name];
 		}
 
-		$this->log(3, "translation $lang/$name not found");
+		// $this->log(3, "translation $lang/$name not found");
 	}
 
 	function format_translation($name, $lang = '')
@@ -1794,8 +1788,7 @@ class Wacko
 		if ($this->config['phpmailer'] == true)
 		{
 			// $this->config['phpMailer_method']
-			$this->use_class('email');
-			$email = new email($this);
+			$email = new Email($this);
 			$email->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset, $xtra_headers);
 		}
 		else
@@ -2217,8 +2210,7 @@ class Wacko
 			{
 				if ($this->config['enable_feeds'])
 				{
-					$this->use_class('feed');
-					$xml = new feed($this);
+					$xml = new Feed($this);
 					$xml->changes();
 					$xml->comments();
 
@@ -2320,8 +2312,7 @@ class Wacko
 				return;
 			}
 
-			$this->use_class('feed');
-			$xml = new feed($this);
+			$xml = new Feed($this);
 			$xml->site_map();
 			$this->log(7, 'XML Sitemap generated');
 			$_SESSION['xml_sitemap_update'] = 0;
@@ -4415,34 +4406,6 @@ class Wacko
 		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
 
 		return $this->include_buffered('footer'.$mod.'.php', $error_message, '', $theme_path);
-	}
-
-	function use_class($class_name, $class_dir = '', $file_name = '')
-	{
-		if (!class_exists($class_name))
-		{
-			if ($file_name == '')
-			{
-				$file_name = strtolower($class_name);
-			}
-
-			if ($class_dir == '')
-			{
-				$class_dir = $this->config['class_path'];
-			}
-
-			$class_file = $class_dir.'/'.$file_name.'.php';
-			$class_file = trim($class_file, './');
-
-			if (!@is_readable($class_file))
-			{
-				die( perc_replace($this->get_translation('CantLoadClass'), $class_name).' '. $class_file. ' ('.$class_dir.')' );
-			}
-			else
-			{
-				require_once($class_file);
-			}
-		}
 	}
 
 	/**
@@ -7561,7 +7524,7 @@ class Wacko
 		}
 
 		$html		= $this->config['allow_rawhtml'];
-		$this->config['allow_rawhtml'] = 0;
+		$this->config['allow_rawhtml'] = 0;			// STS: touching config considered a hack
 		$message	= ( isset($this->language) ? $this->format($message, 'wacko') : $message );
 		$user_id	= $this->get_user_id();
 		$this->config['allow_rawhtml'] = $html;

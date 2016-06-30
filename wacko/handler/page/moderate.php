@@ -385,8 +385,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	unset($n, $page_id);
 
 	// creting rss object
-	$this->use_class('feed');
-	$xml = new feed($this);
+	$xml = new Feed($this);
 
 ////// BEGIN SUBFORUM MODERATION //////
 	if ($this->forum !== true && $forum_cluster === true)

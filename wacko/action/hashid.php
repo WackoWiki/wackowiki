@@ -7,7 +7,6 @@ if (!defined('IN_WACKO'))
 
 // {{hashid}}
 
-require_once('lib/hashids/Hashids.php');
 $hashids = new Hashids($this->config['system_seed']);
 
 if (isset($this->page['version_id']))
