@@ -116,7 +116,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 	}
 	else
 	{
-		echo $this->set_message($this->get_translation('WrongCode'));
+		echo $this->set_message($this->get_translation('WrongCode'), 'error');
 	}
 }
 else if (!isset($forgot) && $user = $this->get_user())
@@ -180,7 +180,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			$this->log(3, perc_replace($this->get_translation('LogUserPasswordChanged', $this->config['language']), $user['user_name']));
 
 			// forward
-			$this->set_message($this->get_translation('PasswordChanged')); // // TODO: message is reset with session before it it can display the message set after the redirect
+			$this->set_message($this->get_translation('PasswordChanged'), 'success'); // // TODO: message is reset with session before it it can display the message set after the redirect
 			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.mt_rand(0, 1000)));
 		}
 	}

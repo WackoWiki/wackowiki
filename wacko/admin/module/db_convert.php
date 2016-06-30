@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   DB Engine Convertion                             ##
+##   DB Engine Conversion                             ##
 ########################################################
 
 $module['db_convert'] = array(
@@ -79,7 +79,7 @@ function admin_db_convert(&$engine, &$module)
 			$engine->log(1, 'Convertion database');
 
 			$message = 'Convertion of the selected tables successfully.';
-			$engine->show_message($message);
+			$engine->show_message($message, 'success');
 ?>
 			<br />
 			<div class="code" style="padding:3px;">
@@ -145,7 +145,7 @@ function admin_db_convert(&$engine, &$module)
 ?>
 					<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 						<tr>
-							<th style="width:50px;" colspan="2"><a href="?mode=dbconvert<?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
+							<th style="width:50px;" colspan="2"><a href="?mode=db_convert<?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
 							<th style="text-align:left;">Typ</th>
 						</tr>
 <?php
