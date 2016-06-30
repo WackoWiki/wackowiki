@@ -30,7 +30,6 @@ function admin_content_polls(&$engine, &$module)
 	<br />
 <?php
 	// create polls object
-	$engine->use_class('polls');
 	$polls_obj = new Polls($engine);
 
 	// define context
@@ -42,8 +41,7 @@ function admin_content_polls(&$engine, &$module)
 	// processing input
 	if ($admin === true)
 	{
-		#$engine->use_class('feed');
-		#$xml = new feed($engine);
+		#$xml = new Feed($engine);
 
 		// selected year for archived polls
 		if (!isset($_GET['year']))	$year	= date('Y');

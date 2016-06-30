@@ -72,7 +72,6 @@ if ($this->is_admin())
 
 			fclose($fd);
 
-			$this->use_class('utility');
 			$items = explode('<item>', $contents);
 
 			array_shift($items);

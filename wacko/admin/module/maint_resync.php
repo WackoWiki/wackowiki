@@ -173,8 +173,7 @@ $engine->debug_print_r($users);
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
 		{
-			$engine->use_class('feed');
-			$xml = new feed($engine);
+			$xml = new Feed($engine);
 			$xml->changes();
 			$xml->comments();
 

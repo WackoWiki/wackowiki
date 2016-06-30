@@ -141,8 +141,7 @@ if ($this->is_admin()
 		{
 			if ($this->config['enable_feeds'])
 			{
-				$this->use_class('feed');
-				$xml = new feed($this);
+				$xml = new Feed($this);
 				$xml->comments();
 
 				if (!$comment_on_id)

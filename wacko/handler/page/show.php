@@ -9,11 +9,6 @@ if (!defined('IN_WACKO'))
 <article id="page-show" class="page" data-dbclick1="page">
 <?php
 
-if (!isset ($this->config['comments_count']))
-{
-	$this->config['comments_count'] = 15;
-}
-
 // redirect from comment page to the commented one
 if ($this->page['comment_on_id'] && $this->page['deleted'] == 0)
 {

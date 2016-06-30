@@ -36,7 +36,7 @@ if (!defined('IN_WACKO'))
 
 // mandatory includes
 require_once('config/constants.php');
-require_once('lib/utility.php');
+// require_once('lib/utility.php');
 
 // Compatibility with the password_* functions that ship with PHP 5.5
 if (version_compare(PHP_VERSION, '5.5.0') < 0)
@@ -326,7 +326,6 @@ class Init
 		$request = ltrim($request, '/');
 
 		// check for permalink
-		require_once('lib/hashids/Hashids.php');
 		$hashids = new Hashids($this->config['system_seed']);
 		$ids = $hashids->decode((($p = strpos($request, '/')) === false)? $request : substr($request, 0, $p));
 		if (count($ids) == 3)
@@ -511,9 +510,7 @@ class Init
 
 		if (!$this->cache || !$op)
 		{
-			require_once($this->config['class_path'].'/cache.php');
-
-			$this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
+			$this->cache = new Cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
 		}
 
 		if ($op == 'check')
@@ -577,7 +574,7 @@ class Init
 				die("Error starting WackoWiki engine: no database connection established.");
 			}
 
-			require($this->config['class_path'].'/wacko.php');
+			//require($this->config['class_path'].'/wacko.php');
 			$this->engine = new Wacko($this->config, $this->dblink);
 			$this->engine->header_count = 0;
 

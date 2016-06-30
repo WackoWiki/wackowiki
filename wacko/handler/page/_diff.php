@@ -768,7 +768,7 @@ class _DiffEngine
 /**
  * Class representing a 'diff' between two sequences of strings.
  */
-class Diff
+class Diff2
 {
 	var $edits;
 

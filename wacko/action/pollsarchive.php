@@ -12,7 +12,6 @@ if (!defined('IN_WACKO'))
 //						Default: "ul"
 
 // create polls object
-$this->use_class('polls');
 $polls_obj = new Polls($this);
 
 // parameters

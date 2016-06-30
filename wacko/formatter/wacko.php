@@ -5,8 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$this->use_class('wackoformatter', $this->config['formatter_path'].'/class/');
-
 $text	= str_replace("\r", '', $text);
 $text	= "\177\n".$text."\n";
 

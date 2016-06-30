@@ -145,7 +145,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 		$side_b->split_file_into_words($body_b);
 
 		// diff on these two file
-		$diff		= new Diff(explode("\n", $body_a), explode("\n", $body_b));
+		$diff		= new Diff2(explode("\n", $body_a), explode("\n", $body_b));
 
 		// format output
 		$fmt		= new DiffFormatter();
@@ -229,10 +229,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 	case 5:
 		$this->add_html_head('<link rel="stylesheet" href="' . $this->config['theme_url'] . 'css/diff.css" type="text/css"/>'); // STS
 
-		require_once 'lib/php-diff/Diff.php';
 		$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
-
-		require_once 'lib/php-diff/Diff/Renderer/Html/Array.php';
 		$changes = $diff->render(new Diff_Renderer_Html_Array);
 
 		echo '<br /><br />';

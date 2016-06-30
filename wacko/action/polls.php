@@ -19,7 +19,6 @@ $results	= '';
 $vote		= '';
 
 // create polls object
-$this->use_class('polls');
 $polls_obj = new Polls($this);
 
 // processing input
