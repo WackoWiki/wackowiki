@@ -54,7 +54,7 @@ function admin_config_permissions(&$engine, &$module)
 			$config['owners_can_change_categories']	= (int)$_POST['owners_can_change_categories'];
 			$config['moders_can_edit']				= (int)$_POST['moders_can_edit'];
 
-			$engine->_set_config($config);
+			$engine->config->_set($config);
 
 			$engine->log(1, '!!Updated security settings!!');
 			$engine->set_message('Updated security settings');

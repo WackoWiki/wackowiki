@@ -65,7 +65,7 @@ function admin_config_formatter(&$engine, &$module)
 			$config['youarehere_text']			= (string)$_POST['youarehere_text'];
 			$config['numerate_links']			= (int)$_POST['numerate_links'];
 
-			$engine->_set_config($config);
+			$engine->config->_set($config);
 
 			$engine->log(1, 'Updated formatting settings');
 			$engine->set_message('Updated formatting settings');

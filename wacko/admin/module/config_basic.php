@@ -85,7 +85,7 @@ function admin_config_basic(&$engine, &$module)
 			$config['enable_comments']			= (int)$_POST['enable_comments'];
 			$config['sorting_comments']			= (int)$_POST['sorting_comments'];
 
-			$engine->_set_config($config);
+			$engine->config->_set($config);
 
 			$engine->log(1, 'Updated basic settings');
 			$engine->set_message('Updated basic settings');

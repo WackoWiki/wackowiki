@@ -61,7 +61,7 @@ function admin_lock(&$engine, &$module)
 		$engine->cache->invalidate_sql_cache();
 
 		// config
-		$engine->cache->destroy_config_cache();
+		$engine->config->invalidate_cache();
 
 		// feeds
 		$directory	= $engine->config['cache_dir'].CACHE_FEED_DIR;

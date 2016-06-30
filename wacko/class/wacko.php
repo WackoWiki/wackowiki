@@ -91,11 +91,11 @@ class Wacko
 	* @param array $config Current configuration as map key=value
 	* @return Wacko
 	*/
-	function __construct($config, $dblink)
+	function __construct(&$config)
 	{
 		$this->timer	= microtime(1);
-		$this->config	= $config;
-		$this->dblink	= $dblink;
+		$this->config	= & $config;
+		$this->dblink	= & $config->dblink;
 	}
 
 	// DATABASE
@@ -2303,12 +2303,12 @@ class Wacko
 			}
 			else if (time() > @$this->config['maint_last_xml_sitemap'])
 			{
-				$this->set_config('xml_sitemap_update', 0, false);
-				$this->set_config('maint_last_xml_sitemap', time() + $days * 86400);
+				$this->config->set('xml_sitemap_update', 0, false);
+				$this->config->set('maint_last_xml_sitemap', time() + $days * 86400);
 			}
 			else
 			{
-				$this->set_config('xml_sitemap_update', 1);
+				$this->config->set('xml_sitemap_update', 1);
 				return;
 			}
 
@@ -4856,8 +4856,8 @@ class Wacko
 
 		if (!$dss_seeded && $this->config['rand_seed_last_update'] < time())
 		{
-			$this->set_config('rand_seed_last_update', time() + mt_rand(1, 100), false);
-			$this->set_config('rand_seed', $seed);
+			$this->config->set('rand_seed_last_update', time() + mt_rand(1, 100), false);
+			$this->config->set('rand_seed', $seed);
 			$seed = hash('sha1', mt_rand() . $seed);
 			$dss_seeded = true;
 		}
@@ -6078,45 +6078,6 @@ class Wacko
 		}
 	}
 
-	// set config value
-	function set_config($config_name, $config_value, $delete_cache = true)
-	{
-		$config[$config_name] = $config_value;
-		$this->_set_config($config, $delete_cache);
-	}
-
-	function _set_config($config, $delete_cache = true)
-	{
-		$values = [];
-		foreach ($config as $name => $value)
-		{
-			if (!isset($this->config[$name]) || $this->config[$name] != $value)
-			{
-				$values[] = "(0, '$name', '" . quote($this->dblink, $value) . "')";
-				$this->config[$name] = $value;
-			}
-		}
-
-		// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
-		// http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
-
-		if ($values)
-		{
-			$this->sql_query(
-				"INSERT INTO {$this->config['table_prefix']}config (config_id, config_name, config_value)
-					VALUES ".implode(', ', $values)." ".
-					"ON DUPLICATE KEY UPDATE
-						config_name		= VALUES(config_name),
-						config_value	= VALUES(config_value)");
-
-			if ($delete_cache)
-			{
-				// TODO: pace purging cache files so not to opendir/.... on every set
-				$this->cache->destroy_config_cache();
-			}
-		}
-	}
-
 	// MAINTENANCE
 
 	function purge_cache_directory($directory, $ttl)
@@ -6154,7 +6115,7 @@ class Wacko
 				"DELETE FROM ".$this->config['table_prefix']."referrer ".
 				"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->set_config('maint_last_refs', $now);
+			$this->config->set('maint_last_refs', $now);
 			$this->log(7, 'Maintenance: referrers purged');
 		}
 
@@ -6166,7 +6127,7 @@ class Wacko
 				"DELETE FROM ".$this->config['table_prefix']."revision ".
 				"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->set_config('maint_last_oldpages', $now);
+			$this->config->set('maint_last_oldpages', $now);
 			$this->log(7, 'Maintenance: outdated pages revisions purged');
 		}
 
@@ -6191,7 +6152,7 @@ class Wacko
 				$this->delete_pages($remove);
 				$this->log(7, 'Maintenance: deleted pages purged');
 			}
-			$this->set_config('maint_last_delpages', $now);
+			$this->config->set('maint_last_delpages', $now);
 		}
 
 		// purge system log entries (once per 3 days)
@@ -6202,7 +6163,7 @@ class Wacko
 				"DELETE FROM {$this->config['table_prefix']}log ".
 				"WHERE log_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
 
-			$this->set_config('maint_last_log', $now);
+			$this->config->set('maint_last_log', $now);
 
 			$this->log(7, 'Maintenance: system log purged');
 		}
@@ -6233,7 +6194,7 @@ class Wacko
 				}
 			}
 
-			$this->set_config('maint_last_cache', $now);
+			$this->config->set('maint_last_cache', $now);
 		}
 
 		// purge expired cookie_tokens (once per 3 days)
@@ -6242,7 +6203,7 @@ class Wacko
 		{
 			$this->delete_cookie_token('', true, $days);
 
-			$this->set_config('maint_last_session', $now);
+			$this->config->set('maint_last_session', $now);
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
 		}
 	}

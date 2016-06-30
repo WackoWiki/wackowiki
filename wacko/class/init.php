@@ -36,7 +36,6 @@ if (!defined('IN_WACKO'))
 
 // mandatory includes
 require_once('config/constants.php');
-// require_once('lib/utility.php');
 
 // Compatibility with the password_* functions that ship with PHP 5.5
 if (version_compare(PHP_VERSION, '5.5.0') < 0)
@@ -47,8 +46,7 @@ if (version_compare(PHP_VERSION, '5.5.0') < 0)
 class Init
 {
 	// WRAPPER VARIABLES
-	var $config		= array();
-	var $dblink		= null;
+	var $config;
 	var $cacheval	= null;
 	var $cache;
 	var $engine;
@@ -58,8 +56,10 @@ class Init
 
 	// CONSTRUCTOR
 	// Mandatory runs and checks.
-	function __construct()
+	function __construct(&$config)
 	{
+		$this->config = & $config;
+
 		// setting PHP error reporting
 		switch (PHP_ERROR_REPORTING)
 		{
@@ -105,205 +105,6 @@ class Init
 		{
 			$_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
 		}
-	}
-
-	// DEFINE WACKO SETTINGS
-	// First must be called without parameters to initialize default
-	// settings. Additional settings can be added afterwards.
-	function settings($config_name = '', $config_value = '', $override = 0)
-	{
-		// specific definition
-		if ($config_name == true)
-		{
-			if (!isset($this->config[$config_name]) || $override == 1)
-			{
-				return $this->config[$config_name] = $config_value;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			// primary settings
-			if ($this->config == false && !isset($this->dblink))
-			{
-				$found_rewrite_extension = function_exists('apache_get_modules') ? in_array('mod_rewrite', apache_get_modules()) : false;
-
-				// load default configuration values
-				if ( @file_exists('config/config_defaults.php') )
-				{
-					require_once('config/config_defaults.php');
-				}
-				else
-				{
-					die("Error loading WackoWiki default config data: file `config/config_defaults.php` is missing.");
-				}
-
-				// load primary config
-				if ( @file_exists('config/config.php') )
-				{
-					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R5.0 or higher
-					if (@filesize('config/config.php') > 0)
-					{
-						require('config/config.php');
-
-						// merge with config defaults
-						$_wacko_config	= array_merge($wacko_config_defaults, (array)$wacko_config);
-						$this->config	= $_wacko_config;
-
-						if ($wacko_config['wacko_version'] != WACKO_VERSION && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
-						{
-							die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
-						}
-
-						$wacko_config['system_seed']	= hash('sha1', $wacko_config['system_seed']);
-					}
-					else
-					{
-						// Else it's an empty file so use the default settings.  This is typical on a fresh install.
-						$this->config = $wacko_config_defaults;
-					}
-				}
-				else
-				{
-					$this->config = $wacko_config_defaults;
-				}
-			}
-			// secondary settings
-			else if ($this->config == true && !isset($this->dblink))
-			{
-				// connecting to db
-				$this->dbal();
-
-				// retrieving configuration data from db
-				$wacko_db_query = "SELECT config_name, config_value FROM {$this->config['table_prefix']}config";
-
-				if ($result = sql_query($this->dblink, $wacko_db_query, 0))
-				{
-					while ($row = fetch_assoc($result))
-					{
-						$this->config[$row['config_name']] = $row['config_value'];
-					}
-
-					free_result($result);
-				}
-				else
-				{
-					die("Error loading WackoWiki config data: database `config` table is empty.");
-				}
-
-				// retrieving usergroups data from db
-				$wacko_db_query = "SELECT
-										g.group_name,
-										u.user_name
-									FROM
-										{$this->config['table_prefix']}usergroup_member gm
-											INNER JOIN {$this->config['table_prefix']}user u ON (gm.user_id = u.user_id)
-											INNER JOIN {$this->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)";
-
-				$groups_array = array();
-
-				if ($result = sql_query($this->dblink, $wacko_db_query, 0))
-				{
-					while ($row = fetch_assoc($result))
-					{
-						// Here we join our stuff in a single array
-						array_push($groups_array, $row);
-					}
-
-					free_result($result);
-
-					if (!empty($groups_array))
-					{
-						$_usergroups = array();
-
-						foreach ($groups_array as $user_group_pairs)
-						{
-							if (!isset($_usergroups[$user_group_pairs['group_name']]))
-							{
-								$_usergroups[$user_group_pairs['group_name']] = '';
-							}
-
-							// Then we make old fashioned UserName1\nUserName2\n lines for each group
-							$_usergroups[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
-						}
-					}
-
-					if (!empty($_usergroups))
-					{
-						foreach ($_usergroups as $group => $users)
-						{
-							// Finally we put the proper Group => UserName1\nUserName2\n to the config
-							// when we make trim($users, '\n') we get UserName1\nUserName2 without trailing '\n'
-							// Made so to prevent system from trimming 'n\n' (like TestMan\n ->  TestMa)
-							$trimone							= rtrim($users, 'n');
-							$this->config['aliases'][$group]	= trim($trimone, '\\');
-						}
-					}
-				}
-				else
-				{
-					die("Error loading WackoWiki usergroups data: database `group` table is empty.");
-				}
-
-				// saving to cache
-				if ($this->config['wacko_version'] == WACKO_VERSION)
-				{
-					$this->cache_settings('config', $this->config);
-				}
-
-				return $this->config;
-			}
-		}
-	}
-
-	// save serialized settings results
-	function cache_settings($file_name, $data)
-	{
-		$file_path	= $this->settings_cache_id($file_name);
-		$sql_data	= serialize($data);
-
-		if (is_writable('_cache/'.CACHE_CONFIG_DIR))
-		{
-			file_put_contents($file_path, $sql_data);
-			chmod($file_path, 0644);
-
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	// retrieve and unserialize cached settings data
-	function load_cached_settings($file_name)
-	{
-		$file_path	= $this->settings_cache_id($file_name);
-
-		if (!@file_exists($file_path))
-		{
-			return false;
-		}
-
-		$fp			= fopen($file_path, 'r');
-
-		// check for false and empty strings
-		if(($data	= fread($fp, filesize($file_path))) === '')
-		{
-			return false;
-		}
-
-		fclose($fp);
-
-		return unserialize($data);
-	}
-
-	function settings_cache_id($file_name)
-	{
-		return '_cache/'.CACHE_CONFIG_DIR.$file_name.'.php';
 	}
 
 	// REQUEST HANDLING
@@ -391,51 +192,6 @@ class Init
 		return session_id();
 	}
 
-	// DATABASE ABSTRACT LAYER
-	// Initialize DBAL for basic DB operations and connect to selected DB.
-	// Default DB is 'database_database' config value, however any other value may
-	// be passed. All DBs must be on the server specified in the config file.
-	function dbal($db_name = '')
-	{
-		if (isset($this->dblink))
-		{
-			return;
-		}
-
-		switch (@$this->config['database_driver'])
-		{
-			case 'mysql_pdo':
-				$db_file = 'db/pdo.php';
-				break;
-			default:
-				$this->settings('database_driver', 'mysqli_legacy');
-				// FALLTHRU
-			case 'mysqli_legacy':
-				$db_file = 'db/mysqli.php';
-				break;
-		}
-
-		// load DBAL
-		require($db_file);
-
-		// connect to DB
-		if (!$db_name)
-		{
-			$db_name = $this->config['database_database'];
-		}
-
-		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'],
-				$this->config['database_database'], $this->config['database_charset'], $this->config['database_driver'],
-				$this->config['database_port'], $this->config['sql_mode_strict']);
-
-		if (!$this->dblink)
-		{
-			die("Error loading WackoWiki DBAL: could not establish database connection.");
-		}
-
-		return $this->dblink;
-	}
-
 	// CHECK WEBSITE LOCKING
 	function is_locked($file = 'lock')
 	{
@@ -469,7 +225,7 @@ class Init
 
 			// start installer
 			global $config;
-			$config = $this->config;
+			$config = & $this->config;
 
 			if (!$install_action = (isset($_REQUEST['installAction']) ? trim($_REQUEST['installAction']) : ''))
 			{
@@ -568,14 +324,8 @@ class Init
 
 		if ($this->engine == false || $op == false)
 		{
-			// check DB connection
-			if ($this->dblink == false)
-			{
-				die("Error starting WackoWiki engine: no database connection established.");
-			}
 
-			//require($this->config['class_path'].'/wacko.php');
-			$this->engine = new Wacko($this->config, $this->dblink);
+			$this->engine = new Wacko($this->config);
 			$this->engine->header_count = 0;
 
 			// FIXME: add description

@@ -35,7 +35,7 @@ function admin_messages(&$engine, &$module)
 
 		$config['system_message_type']		= (string)$_POST['system_message_type'];
 
-		$engine->_set_config($config);
+		$engine->config->_set($config);
 
 		$engine->log(1, 'Updated system message');
 		$engine->set_message('Updated system message');
