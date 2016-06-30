@@ -100,7 +100,7 @@ function admin_db_optimize(&$engine, &$module)
 ?>
 			<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
-					<th style="width:50px;" colspan="2"><a href="?mode=dboptimize<?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
+					<th style="width:50px;" colspan="2"><a href="?mode=db_optimize<?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
 					<th style="text-align:left;">Fragmentation</th>
 				</tr>
 <?php
