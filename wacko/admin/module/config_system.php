@@ -55,7 +55,7 @@ function admin_config_system(&$engine, &$module)
 			$config['reverse_proxy_header']		= (int)$_POST['reverse_proxy_header'];
 			$config['reverse_proxy_addresses']	= (int)$_POST['reverse_proxy_addresses'];
 
-			$engine->_set_config($config);
+			$engine->config->_set($config);
 
 			$engine->log(1, 'Updated system settings');
 			$engine->set_message('Updated system settings');

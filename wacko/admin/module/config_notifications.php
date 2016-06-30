@@ -47,7 +47,7 @@ function admin_config_notifications(&$engine, &$module)
 			$config['notify_comment']				= (int)$_POST['notify_comment'];
 			$config['notify_new_user_account']		= (int)$_POST['notify_new_user_account'];
 
-			$engine->_set_config($config);
+			$engine->config->_set($config);
 
 			$engine->log(1, '!!Updated security settings!!');
 			$engine->set_message('Updated security settings');

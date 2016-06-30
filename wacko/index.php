@@ -5,46 +5,13 @@ define('IN_WACKO', true);
 require_once('lib/utility.php');
 class_autoloader('config/autoload.conf');
 
-// initialize engine api
-$init = new Init();
+$config = new Settings;
 
-// define settings
-if ($cached_config = $init->load_cached_settings('config'))
-{
-	$init->config = $cached_config;	// retrieving from cache
-}
-else
-{
-	$init->settings();	// populate from config.php
+$init = new Init($config);
 
-	if (!isset($init->config['wacko_version']))
-	{
-		$init->installer(); // install
-	}
+$init->installer(); // install
 
-	$init->settings();	// initialize DBAL and populate from config table.
-
-	if (!empty($init->config['wacko_version']))
-	{
-		$init->installer(); // upgrade R5 and on or show reminder to upgrade to 5.0.x first
-	}
-}
-
-$init->dbal();
-$init->settings('theme_url',	$init->config['base_url'].$init->config['theme_path'].'/'.$init->config['theme'].'/');
-$init->settings('user_table',	$init->config['table_prefix'].'user');
-$init->settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
-$init->settings('ap_mode',		false);
-
-// run in tls mode?
-if ($init->config['tls'] == true && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') && !empty($init->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ) ))
-{
-	$init->settings('base_url',	str_replace('http://', 'https://'.($init->config['tls_proxy'] ? $init->config['tls_proxy'].'/' : ''), $init->config['base_url']));
-}
-
-$init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
-
-if ($init->is_locked() === true || RECOVERY_MODE)
+if ($init->is_locked() || RECOVERY_MODE)
 {
 	if (!headers_sent())
 	{
@@ -55,6 +22,15 @@ if ($init->is_locked() === true || RECOVERY_MODE)
 	exit;
 }
 
+$config->ap_mode = false;
+
+// run in tls mode?
+if ($config->tls && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') && !empty($config->tls_proxy)) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ) ))
+{
+	$config->base_url = str_replace('http://', 'https://' . ($config->tls_proxy ? $config->tls_proxy . '/' : ''), $config->base_url);
+	$config->theme_url = str_replace('http://', 'https://' . ($config->tls_proxy ? $config->tls_proxy . '/' : ''), $config->theme_url);
+}
+
 // misc
 $init->request();
 $init->session();
@@ -63,10 +39,10 @@ $init->http_security_headers();
 // engine start
 $init->cache();
 $init->cache('check');
-$engine	= $init->engine();
+$init->engine();
 $init->cache('log');
 
-if (!empty($init->config['ext_bad_behavior']))
+if (!empty($config->ext_bad_behavior))
 {
 	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 }
@@ -90,5 +66,3 @@ if ( !headers_sent() )
 }
 
 ob_end_flush();
-
-?>

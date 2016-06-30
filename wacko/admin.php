@@ -19,30 +19,11 @@ define('IN_WACKO', true);
 require_once('lib/utility.php');
 class_autoloader('config/autoload.conf');
 
-// initialize engine api
-$init = new Init();
-
 // define settings
-if ($cached_config = $init->load_cached_settings('config'))
-{
-	$init->config = $cached_config;	// retrieving from cache
-}
-else
-{
-	$init->settings();	// populate from config.php
+$config = new Settings(!RECOVERY_MODE);
 
-	if (!RECOVERY_MODE)
-	{
-		$init->settings();	// initialize DBAL and populate from config table. [disabled for recovery mode!]
-	}
-}
-
-$init->dbal();
-$init->settings('theme_url',	$init->config['base_url'].$init->config['theme_path'].'/'.$init->config['theme'].'/');
-$init->settings('user_table',	$init->config['table_prefix'].'user');
-$init->settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
-$init->settings('ap_mode',		true);
-$init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
+// initialize engine api
+$init = new Init($config);
 
 if ($init->is_locked('lock_ap'))
 {
@@ -55,6 +36,8 @@ if ($init->is_locked('lock_ap'))
 	exit;
 }
 
+$config->ap_mode = true;
+
 // misc
 $init->session();
 $init->http_security_headers();
@@ -63,7 +46,7 @@ $init->http_security_headers();
 $init->cache();
 $engine	= $init->engine();
 
-if (!empty($init->config['ext_bad_behavior']))
+if (!empty($config->ext_bad_behavior))
 {
 	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 }
@@ -79,18 +62,18 @@ if ((!$engine->is_admin()
 		header('HTTP/1.1 404 Not Found');
 	}
 
-	$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
+	$engine->redirect(( $config->tls ? str_replace('http://', 'https://'.($config->tls_proxy ? $config->tls_proxy.'/' : ''), $engine->href()) : $engine->href() ));
 }
 
 // register locale resources
 $init->engine('lang');
 
 // reconnect securely in tls mode
-if ($engine->config['tls'] == true)
+if ($config->tls)
 {
-	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($engine->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
+	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($config->tls_proxy)) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
 	{
-		$engine->redirect(str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->config['base_url']).'admin.php');
+		$engine->redirect(str_replace('http://', 'https://'.($config->tls_proxy ? $config->tls_proxy.'/' : ''), $config->base_url).'admin.php');
 	}
 	else
 	{
@@ -116,17 +99,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 ########################################################
 
 // recovery password
-if ($engine->config['recovery_password'] == false)
+if (!$engine->config['recovery_password'])
 {
 	echo '<strong>'.$engine->get_translation('NoRecoceryPassword').'</strong><br />';
 	echo $engine->get_translation('NoRecoceryPasswordTip');
 
 	die();
 }
-else
-{
-	$_processed_password = $engine->config['recovery_password'];
-}
+
+$_processed_password = $engine->config['recovery_password'];
 
 // recovery preauthorization
 if (isset($_POST['ap_password']))
@@ -161,7 +142,7 @@ if (isset($_POST['ap_password']))
 
 		if ($engine->config['ap_failed_login_count'] > 0)
 		{
-			$engine->set_config('ap_failed_login_count', 0);
+			$engine->config->set('ap_failed_login_count', 0);
 		}
 
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
@@ -174,7 +155,7 @@ if (isset($_POST['ap_password']))
 			$_SESSION['failed_login_count'] = 0;
 		}
 
-		$engine->set_config('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1);
+		$engine->config->set('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1);
 		$engine->log(1, $engine->get_translation('LogAdminLoginFailed', $engine->config['language']));
 
 		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
@@ -509,5 +490,3 @@ $init->debug();
 
 // getting out of temp context
 #$engine->set_user($_user, 0);
-
-?>

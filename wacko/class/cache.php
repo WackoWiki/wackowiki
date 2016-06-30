@@ -92,7 +92,15 @@ class Cache
 	function sql_cache_id($query)
 	{
 		// Remove extra spaces and tabs
-		$query		= preg_replace('/[\n\r\s\t]+/', ' ', $query);
+		$query = preg_replace_callback('/(\s+)|(^[\s;]+|[\s;]+$)|\'(\\\\\'|\\\\\\\\|[^\'])*\'|"(\\\\"|\\\\\\\\|[^"])*"/',
+			function ($x)
+			{
+				if (!empty($x[1]))
+					return ' ';
+				if (!empty($x[2]))
+					return '';
+				return $x[0];
+			}, $query);
 
 		return $this->cache_dir.CACHE_SQL_DIR.hash('sha1', $query);
 	}
@@ -213,30 +221,6 @@ class Cache
 		{
 			return false;
 		}
-	}
-
-	// destroy cache data #$cache->destroy('config');
-	function destroy_config_cache()
-	{
-		// delete from fs
-		clearstatcache();
-
-		$directory	= $this->wacko->config['cache_dir'].CACHE_CONFIG_DIR;
-
-		if ($handle = opendir(rtrim($directory, '/')))
-		{
-			while (false !== ($file = readdir($handle)))
-			{
-				if ($file != '.' && $file != '..' && !is_dir($directory.$file)) // if (is_file($directory.$file))
-				{
-					@unlink($directory.$file);
-				}
-			}
-
-			closedir($handle);
-		}
-
-		//$this->wacko->log(7, 'Maintenance: cached config destroyed');
 	}
 
 	function log($msg)

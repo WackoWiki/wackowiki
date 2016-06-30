@@ -73,7 +73,7 @@ function admin_user_groups(&$engine, &$module)
 						"group_id	= '".(int)$_POST['group_id']."', ".
 						"user_id	= '".(int)$_POST['new_member_id']."'");
 
-					$engine->cache->destroy_config_cache();
+					$engine->config->invalidate_cache();
 					$engine->show_message($engine->get_translation('MembersAdded'));
 					$engine->log(4, "Added member //'{$_POST['new_member_id']}'// into group //'{$usergroup['group_name']}'// ");
 					unset($_POST['add_member']);
@@ -87,7 +87,7 @@ function admin_user_groups(&$engine, &$module)
 					"WHERE group_id = '".(int)$_POST['group_id']."' ".
 						"AND user_id = '".(int)$_POST['member_id']."'");
 
-				$engine->cache->destroy_config_cache();
+				$engine->config->invalidate_cache();
 				$engine->show_message($engine->get_translation('MembersRemoved'));
 				$engine->log(4, "Removed member //'{$_POST['member_id']}'// from group //'{$usergroup['group_name']}'// (//'{$_POST['group_id']}'//)");
 			}
@@ -204,7 +204,7 @@ function admin_user_groups(&$engine, &$module)
 						"open			= '".(int)$_POST['open']."', ".
 						"active			= '".(int)$_POST['active']."'");
 
-				$engine->cache->destroy_config_cache();
+				$engine->config->invalidate_cache();
 				$engine->show_message($engine->get_translation('GroupsAdded'));
 				$engine->log(4, "Created a new group //'{$_POST['new_group_name']}'//");
 				unset($_POST['create']);
@@ -255,7 +255,7 @@ function admin_user_groups(&$engine, &$module)
 				"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
 				"WHERE group_id = '".(int)$_POST['group_id']."'");
 
-			$engine->cache->destroy_config_cache();
+			$engine->config->invalidate_cache();
 			$engine->show_message($engine->get_translation('GroupsDeleted'));
 			$engine->log(4, "Removed group //'{$usergroup['group_name']}'//");
 
