@@ -19,7 +19,6 @@ if ($config['language'] == $page_lang)
 	}
 
 	insert_page('Catégories',	'Catégories',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page('Permaliens',	'Liens permanents',	'{{permalinkproxy}}',	$page_lang, 'Admins', false, false);
 	insert_page('Groups',		'Groups',			'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page('Utilisateurs',	'Utilisateurs',		'{{users}}',			$page_lang, 'Admins', false, false);
 }
