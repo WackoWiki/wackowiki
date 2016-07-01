@@ -13,12 +13,12 @@ function perc_replace()
 	return preg_replace_callback('/%[1-9]/', function ($x) use ($args) { return ($i = $x[0][1]) < count($args)? $args[$i] : $x[0]; }, $args[0]);
 }
 
-// Generate random password of defined $length that satisfy the complexity rules:
+// Generate random token of defined $length that satisfy the complexity rules:
 // containing n > 0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
-// The password complexity can be defined in $pwd_complexity :
-//		$pwd_complexity = 2 -- password consists of uppercase, lowercase, digits
-//		$pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
-function random_password($length = 10, $pwd_complexity = 3)
+// The token complexity can be defined in $tok_complexity :
+//		$tok_complexity = 2 -- token consists of uppercase, lowercase, digits
+//		$tok_complexity = 3 -- token consists of uppercase, lowercase, digits and symbols
+function random_token($length = 10, $tok_complexity = 3)
 {
 	static $syms = [
 		'abcdefghijklmnopqrstuvwxyz',
@@ -27,13 +27,13 @@ function random_password($length = 10, $pwd_complexity = 3)
 		'-_!@#%^&*(){}[]|~',
 	];
 
-	if ($pwd_complexity >= ($n = count($syms)))
+	if ($tok_complexity >= ($n = count($syms)))
 	{
-		$pwd_complexity = $n - 1;
+		$tok_complexity = $n - 1;
 	}
-	else if ($pwd_complexity < 0)
+	else if ($tok_complexity < 0)
 	{
-		$pwd_complexity = 0;
+		$tok_complexity = 0;
 	}
 
 	for (;;)
@@ -44,7 +44,7 @@ function random_password($length = 10, $pwd_complexity = 3)
 
 		for ($i = 0; $i < $length; $i++)
 		{
-			$class = mt_rand(0, $pwd_complexity);
+			$class = mt_rand(0, $tok_complexity);
 			$password .= $syms[$class][mt_rand(0, strlen($syms[$class]) - 1)];
 
 			if (!isset($used[$class]))
@@ -54,7 +54,7 @@ function random_password($length = 10, $pwd_complexity = 3)
 			}
 		}
 
-		if ($complexity >= $pwd_complexity)
+		if ($complexity >= $tok_complexity)
 		{
 			return $password;
 		}

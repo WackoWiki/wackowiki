@@ -4226,7 +4226,7 @@ class Wacko
 		{
 			$salt_length			= 10;
 			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = random_password($salt_length);
+			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = random_token($salt_length);
 		}
 
 		$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? session_id() : ''; #$user['cookie_token']
@@ -4881,7 +4881,7 @@ class Wacko
 		$this->cookie_token		= hash('sha1', $login_token);
 
 		$salt_length			= 10;
-		$salt_user_form			= random_password($salt_length);
+		$salt_user_form			= random_token($salt_length);
 
 		$this->time_now			= date('Y-m-d H:i:s');
 		$this->session_time		= date('Y-m-d H:i:s', $session_expire);
