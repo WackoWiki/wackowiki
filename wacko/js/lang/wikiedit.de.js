@@ -30,7 +30,7 @@ lang = {
 	Signature :				"Signature",
 	Quote :					"Zitat",
 	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
+	HighlightText :			"Text hervorheben",
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Tabelle einfügen",
