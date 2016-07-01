@@ -26,6 +26,7 @@ class Wacko
 	var $page_id_cache			= array();
 	var $context				= array();	// Page context. Uses for correct processing of inclusions
 	var $current_context		= 0;		// Current context level
+	var $header_count			= 0;
 	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	var $first_inclusion		= array();	// for backlinks
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link

@@ -40,7 +40,6 @@ $init->http_security_headers();
 $init->cache();
 $init->cache('check');
 $init->engine();
-$init->cache('log');
 
 if (!empty($config->ext_bad_behavior))
 {
