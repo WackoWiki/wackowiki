@@ -70,7 +70,7 @@ if ($this->is_admin())
 			// config cache
 			if (isset($_POST['config_cache']) && $_POST['config_cache'] == 1)
 			{
-				$this->config->invalidate_sql();
+				$this->cache->invalidate_sql();
 			}
 
 			// feeds cache
