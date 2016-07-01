@@ -54,6 +54,7 @@ $config_file['table_prefix']			= $config['table_prefix'];
 // security values
 $config_file['system_seed']				= $config['system_seed'];
 $config_file['recovery_password']		= $config['recovery_password'];
+$config_file['hashid_seed']				= $config['hashid_seed'];
 // paths
 $config_file['cache_dir']				= $config['cache_dir'];
 $config_file['action_path']				= $config['action_path'];

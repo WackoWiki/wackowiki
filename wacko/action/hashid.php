@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // {{hashid}}
 
-$hashids = new Hashids($this->config['system_seed']);
+$hashids = new Hashids($this->config['hashid_seed']);
 
 if (isset($this->page['version_id']))
 {
@@ -25,7 +25,7 @@ else
 }
 
 $ids = [$this->page['page_id'], $version_id];
-sscanf(hash('sha1', $ids[0] . $this->config['system_seed'] . $ids[1]), '%7x', $ids[2]);
+sscanf(hash('sha1', $ids[0] . $this->config['hashid_seed'] . $ids[1]), '%7x', $ids[2]);
 
 $id = $hashids->encode($ids);
 

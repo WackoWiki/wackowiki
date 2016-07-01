@@ -230,6 +230,7 @@ $wacko_config_defaults = array(
 	'max_failed_login_count'		=> 8,
 	'system_message'				=> '',
 
+	'enable_captcha'				=> 1,
 	'captcha_new_comment'			=> 1,
 	'captcha_new_page'				=> 1,
 	'captcha_edit_page'				=> 1,
@@ -258,6 +259,7 @@ $wacko_config_defaults = array(
 	'rand_seed'						=> '',
 
 	'system_seed'					=> '', // installer autogenerates random one
+	'hashid_seed'					=> '', // installer autogenerates random one
 	'recovery_password'				=> '',
 
 	'date_format'					=> 'd.m.Y',

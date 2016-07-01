@@ -7,6 +7,11 @@ if (!$config['system_seed'])
 	$config['system_seed'] = random_password(20);
 }
 
+if (!$config['hashid_seed'])
+{
+	$config['hashid_seed'] = random_password(20);
+}
+
 $salt_user_form			= random_password(10);
 $password_hashed		= $config['admin_name'].$_POST['password'];
 $password_hashed		= password_hash(
