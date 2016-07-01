@@ -5,35 +5,6 @@ if (!defined('IN_WACKO'))
 	exit('No direct script access allowed');
 }
 
-/*
-
-########################################################
-##     Wacko engine initialization API                ##
-########################################################
-
-	Calling order (* - mandatory for engine startup):
-
-	1.  init()*				- constructor, unescape magic quotes, version checks
-	2.  settings()*			- load primary engine config from file: variables and constants
-	3.  settings()*			- load secondary engine config from database (calls dbal())
-	4.  settings($p,$v)		- set additional config parameters if needed
-	5.  request()			- parse request string if needed for wacko pages processing
-	6.  dbal()*				- establish DBAL for database operations and connect to DB (required by engine())
-	7.  session()			- start user session
-	8.  is_locked()			- check website for locking
-	9.  installer()			- start installer if necessary
-	10. get_micro_time()	- return precise timer
-	11. cache()				- initialize caching engine
-	12. cache('check')		- process request for caching purposes (required by cache('store'))
-	13. engine()*			- initialize Wacko engine
-	14. engine('run')		- execute script and open start page (requires engine())
-	15. cache('store')		- cache page (requires engine())
-	16. debug()				- print debugging information
-
-	Additional information can be found in class methods' comments.
-
-*/
-
 // mandatory includes
 require_once('config/constants.php');
 
@@ -229,7 +200,7 @@ class Init
 			global $config;
 			$config = & $this->config;
 
-			if (!$install_action = (isset($_REQUEST['installAction']) ? trim($_REQUEST['installAction']) : ''))
+			if (!($install_action = trim(@$_REQUEST['installAction'])))
 			{
 				$install_action = 'lang';
 			}
@@ -260,12 +231,6 @@ class Init
 	//		store	= store_page_cache
 	function cache($op = '')
 	{
-		// check config data
-		if (!$this->config)
-		{
-			die('Error starting WackoWiki cache engine: config data must be initialized.');
-		}
-
 		if (!$this->cache || !$op)
 		{
 			$this->cache = new Cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
@@ -298,10 +263,6 @@ class Init
 				}
 			}
 		}
-		else if ($this->config['cache'] && $op == 'log')
-		{
-			$this->cache->log('Before Run WackoWiki='.$this->engine->config['wacko_version']);
-		}
 	}
 
 	// WACKOWIKI ENGINE
@@ -312,23 +273,10 @@ class Init
 	//				  only (for $lang or for default language)
 	function engine($op = '', $lang = '')
 	{
-		// check config data
-		if ($this->config == false)
-		{
-			die("Error starting WackoWiki engine: config data must be initialized.");
-		}
-
-		// terminate for banned IPs
-		/* if (in_array($_SERVER['REMOTE_ADDR'], $this->config['bans']))
-		{
-			die();
-		} */
-
 		if ($this->engine == false || $op == false)
 		{
 
 			$this->engine = new Wacko($this->config);
-			$this->engine->header_count = 0;
 
 			// FIXME: add description
 			if ($this->cache == true)

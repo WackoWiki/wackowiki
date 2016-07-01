@@ -135,25 +135,21 @@ class Cache
 					"FROM ".$this->wacko->config->table_prefix."cache ".
 					"WHERE name = ".$this->wacko->q($hash));
 
-			$this->log('invalidate_page_cache page='.$page);
-			$this->log('invalidate_page_cache query='.$sql);
-			$this->log('invalidate_page_cache count params='.count($params));
+			dbg('invalidate_page', $page);
 
 			$past = time() - $this->cache_ttl - 1;
 			foreach ($params as $param)
 			{
 				$file = $this->construct_id($page, $param['method'], $param['query']);
 
-				$this->log('invalidate_page_cache delete='.$file);
+				$x = @touch($file, $past); // touching is faster than unlinking
 
-				@touch($file, $past); // touching is faster than unlinking
+				dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 			}
 
 			$this->wacko->sql_query(
 				"DELETE FROM ".$this->wacko->config->table_prefix."cache ".
 				"WHERE name = ".$this->wacko->q($hash));
-
-			$this->log('invalidate_page_cache end');
 		}
 	}
 
@@ -166,18 +162,6 @@ class Cache
 	function construct_id($page, $method, $query)
 	{
 		return join_path($this->cache_dir, CACHE_PAGE_DIR, hash('sha1', ($page . '_' . $method . '_' . $query)));
-	}
-
-	function log($msg)
-	{
-		// TODO: avoid unnecessary cache log calls
-		// TODO: check if dir is writable
-		// Warning: file_put_contents(_cache/log) [function.file-put-contents]: failed to open stream: Permission denied
-		if ($this->debug > 5)
-		{
-			$file = $this->cache_dir . 'log';
-			@file_put_contents($file, date('ymdHis ') . $msg . "\n", FILE_APPEND);
-		}
 	}
 
 	// Check http-request. May be, output cached version.
@@ -201,12 +185,10 @@ class Cache
 			$query .= urlencode($k) . '=' . urlencode($v) . '&';
 		}
 
-		$this->log('check_http_request query='.$query);
-
 		// check cache
 		if (($cached_page = $this->load_page($page, $method, $query, $mtime)))
 		{
-			$this->log('check_http_request incache mtime='.$mtime);
+			dbg('check_http_request', $page, $method, $query, 'found!');
 
 			$gmt	= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
 			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
@@ -224,16 +206,23 @@ class Cache
 				else if ($etag && $gmt != trim($etag, '\"'));
 				else
 				{
+					dbg('not modified');
 					header('HTTP/1.1 304 Not Modified');
 					die();
 				}
 
 				// HTTP header with right Charset settings
-				// TODO: How to determine the right charset in advance?
-				// header('Content-Type: text/html; charset='.$this->charset);
+				// TODO: other than .html?
+				if (($head = strpos($cached_page, '</head>')) !== false)
+				{
+					$head = substr($cached_page, 0, $head);
+					if (preg_match('#<html[^/>]*>#', $head) &&
+						preg_match('#<meta\s+charset="([^"]+)"\s*/>#', $head, $match))
+					{
+						header('Content-Type: text/html; charset=' . $match[1]);
+					}
+				}
 
-				// making the internal charset declaration the sole source of character encoding information
-				// (e.g. <meta charset="windows-1252" />)
 				ini_set('default_charset', null);
 
 				header('Last-Modified: '.$gmt);
