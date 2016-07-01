@@ -149,9 +149,12 @@ class Wacko
 	function load_all($query, $docache = false)
 	{
 		// retrieving from cache
-		if ($this->config['cache_sql'] && $docache && ($data = $this->cache->load_sql($query)))
+		if ($this->config['cache_sql'] && $docache)
 		{
-			return $data;
+			if (($data = $this->cache->load_sql($query)))
+			{
+				return $data;
+			}
 		}
 
 		$data = array();
@@ -195,7 +198,7 @@ class Wacko
 
 	function q($data)
 	{
-		return quote($this->dblink, $data);
+		return "'". quote($this->dblink, $data) . "'";
 	}
 
 	// MISC
@@ -1876,11 +1879,11 @@ class Wacko
 			// page cache
 			if ($comment_on_id)
 			{
-				$this->cache->invalidate_page_cache($this->get_page_tag($comment_on_id));
+				$this->cache->invalidate_page($this->get_page_tag($comment_on_id));
 			}
 			else
 			{
-				$this->cache->invalidate_page_cache($this->supertag);
+				$this->cache->invalidate_page($this->supertag);
 			}
 
 			$this->cache->invalidate_sql();

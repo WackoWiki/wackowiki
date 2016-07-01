@@ -10,6 +10,11 @@ class Cache
 	var $cache_ttl	= 600;
 	var $cache_dir	= '_cache/';
 	var $debug		= 0;
+	var $page;
+	var $hash;
+	var $method;
+	var $query;
+	var $file;
 
 	// Constructor
 	function __construct($cache_dir, $cache_ttl, $debug)
@@ -20,34 +25,31 @@ class Cache
 		$this->timer		= microtime(1);
 	}
 
-	// save serialized sql results
-	function save_sql($query, $data)
-	{
-		$file_name = $this->sql_cache_id($query);
-
-		file_put_contents($file_name, serialize($data));
-		chmod($file_name, 0644);
-	}
-
 	// retrieve and unserialize cached sql data
 	function load_sql($query)
 	{
-		$file_name = $this->sql_cache_id($query);
+		$this->file = $this->sql_cache_id($query);
 
-		if (($timestamp = @filemtime($file_name)))
+		clearstatcache();
+		if (($timestamp = @filemtime($this->file)))
 		{
 			if (time() - $timestamp <= $this->wacko->config->cache_sql_ttl)
 			{
-				if (($contents = file_get_contents($file_name)))
+				if (($contents = file_get_contents($this->file)))
 				{
-					dbg('sql from cache'); // STS
 					return unserialize($contents);
 				}
 			}
-			@unlink($file_name);
 		}
 
 		return false;
+	}
+
+	// save serialized sql results
+	function save_sql($query, $data)
+	{
+		file_put_contents($this->file, serialize($data));
+		chmod($this->file, 0644);
 	}
 
 	// Invalidate the SQL cache
@@ -56,12 +58,9 @@ class Cache
 		if ($this->wacko->config->cache_sql)
 		{
 			$past = time() - $this->wacko->config->cache_sql_ttl - 1;
-			foreach ((array) glob($this->wacko->config['cache_dir'] . CACHE_SQL_DIR . '*', GLOB_MARK|GLOB_NOSORT) as $file)
+			foreach (file_glob($this->wacko->config->cache_dir, CACHE_SQL_DIR, '*') as $file)
 			{
-				if (substr($file, -1) != '/')
-				{
-					touch($file, $past); // touching is faster than unlinking
-				}
+				touch($file, $past); // touching is faster than unlinking
 			}
 		}
 	}
@@ -79,30 +78,81 @@ class Cache
 				return $x[0];
 			}, $query);
 
-		return $this->cache_dir . CACHE_SQL_DIR . hash('sha1', $query);
+		return join_path($this->cache_dir, CACHE_SQL_DIR, hash('sha1', $query));
 	}
 
 	// http cache =====================================================
 
 	// Get page content from cache
-	function get_page_cached($page, $method, $query)
+	function load_page($page, $method, $query, &$timestamp)
 	{
-		list($page, ) = $this->normalize_page($page);
-		$file_name = $this->construct_id($page, $method, $query);
+		// store data for save_page()
+		list($this->page, $this->hash) = $this->normalize_page($page);
+		$this->method	= $method;
+		$this->query	= $query;
+		$this->file		= $this->construct_id($this->page, $method, $query);
 
-		if (($timestamp = @filemtime($file_name)))
+		clearstatcache();
+		if (($timestamp = @filemtime($this->file)))
 		{
 			if (time() - $timestamp <= $this->cache_ttl)
 			{
-				if (($contents = file_get_contents($file_name)))
+				if (($contents = file_get_contents($this->file)))
 				{
 					return $contents."\n<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp)." -->\n";
 				}
 			}
-			@unlink($file_name);
 		}
 
 		return false;
+	}
+
+	// Store page content to cache
+	function save_page($data)
+	{
+		file_put_contents($this->file, $data);
+		chmod($this->file, 0644);
+
+		$this->wacko->sql_query(
+			"INSERT INTO ".$this->wacko->config->table_prefix."cache SET ".
+			"name	= ".$this->wacko->q($this->hash).", ".
+			"method	= ".$this->wacko->q($this->method).", ".
+			"query	= ".$this->wacko->q($this->query));
+			// TIMESTAMP type is filled automatically by MySQL
+	}
+
+	// Invalidate the page cache
+	function invalidate_page($page)
+	{
+		if ($this->wacko->config->cache)
+		{
+			list($page, $hash) = $this->normalize_page($page);
+
+			$params	= $this->wacko->load_all(
+				"SELECT method, query ".
+					"FROM ".$this->wacko->config->table_prefix."cache ".
+					"WHERE name = ".$this->wacko->q($hash));
+
+			$this->log('invalidate_page_cache page='.$page);
+			$this->log('invalidate_page_cache query='.$sql);
+			$this->log('invalidate_page_cache count params='.count($params));
+
+			$past = time() - $this->cache_ttl - 1;
+			foreach ($params as $param)
+			{
+				$file = $this->construct_id($page, $param['method'], $param['query']);
+
+				$this->log('invalidate_page_cache delete='.$file);
+
+				@touch($file, $past); // touching is faster than unlinking
+			}
+
+			$this->wacko->sql_query(
+				"DELETE FROM ".$this->wacko->config->table_prefix."cache ".
+				"WHERE name = ".$this->wacko->q($hash));
+
+			$this->log('invalidate_page_cache end');
+		}
 	}
 
 	function normalize_page($page)
@@ -113,93 +163,7 @@ class Cache
 
 	function construct_id($page, $method, $query)
 	{
-		return $this->cache_dir . CACHE_PAGE_DIR . hash('sha1', $page.'_'.$method.'_'.$query);
-	}
-
-	// Get timestamp of content from cache
-	function get_cached_time($page, $method, $query)
-	{
-		list($page, ) = $this->normalize_page($page);
-		$file_name = $this->construct_id($page, $method, $query);
-		$time = @filemtime($file_name);
-		$this->log("get_cached_time |$page|$method|$query| >> $time");
-		return ($time && time() - $time < $this->cache_ttl)? $time : false;
-	}
-
-	// Store page content to cache
-	function store_page_cache($data, $page = false, $method = false, $query = false)
-	{
-		if (!$page)
-		{
-			$page	= $this->page;
-		}
-		if (!$method)
-		{
-			$method	= $this->method;
-		}
-		if (!$query)
-		{
-			$query	= $this->query;
-		}
-
-		list($page, $hash) = $this->normalize_page($page);
-		$file_name	= $this->construct_id($page, $method, $query);
-
-		file_put_contents($file_name, $data);
-
-		if ($this->wacko)
-		{
-			$this->wacko->sql_query(
-				"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
-				"name	='".quote($this->wacko->dblink, $hash)."', ".
-				"method	='".quote($this->wacko->dblink, $method)."', ".
-				"query	='".quote($this->wacko->dblink, $query)."'");
-				// TIMESTAMP type is filled automatically by MySQL
-		}
-
-		@chmod($file_name, octdec('0644'));
-
-		$this->log("store_page_cache |$page|$method|$query");
-
-		return true;
-	}
-
-	// Invalidate the page cache
-	function invalidate_page_cache($page)
-	{
-		if ($this->wacko)
-		{
-			list($page, $hash) = $this->normalize_page($page);
-			$sql	= "SELECT method, query ".
-						"FROM ".$this->wacko->config['table_prefix']."cache ".
-						"WHERE name ='".quote($this->wacko->dblink, $hash)."'";
-			$params	= $this->wacko->load_all($sql);
-
-			$this->log('invalidate_page_cache page='.$page);
-			$this->log('invalidate_page_cache query='.$sql);
-			$this->log('invalidate_page_cache count params='.count($params));
-
-			foreach ($params as $param)
-			{
-				$file_name = $this->construct_id($page, $param['method'], $param['query']);
-
-				$this->log('invalidate_page_cache delete='.$file_name);
-
-				@unlink($file_name);
-			}
-
-			$this->wacko->sql_query(
-				"DELETE FROM ".$this->wacko->config['table_prefix']."cache ".
-				"WHERE name ='".quote($this->wacko->dblink, $hash)."'");
-
-			$this->log('invalidate_page_cache end');
-
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return join_path($this->cache_dir, CACHE_PAGE_DIR, hash('sha1', $page.'_'.$method.'_'.$query));
 	}
 
 	function log($msg)
@@ -209,8 +173,8 @@ class Cache
 		// Warning: file_put_contents(_cache/log) [function.file-put-contents]: failed to open stream: Permission denied
 		if ($this->debug > 5)
 		{
-			$file_name = $this->cache_dir . 'log';
-			@file_put_contents($file_name, date('ymdHis ') . $msg . "\n", FILE_APPEND);
+			$file = $this->cache_dir . 'log';
+			@file_put_contents($file, date('ymdHis ') . $msg . "\n", FILE_APPEND);
 		}
 	}
 
@@ -222,7 +186,7 @@ class Cache
 			return false;
 		}
 
-		$_query = '';
+		$_query = [];
 		foreach ($_GET as $k => $v)
 		{
 			$_query[$k] = $v;
@@ -232,23 +196,21 @@ class Cache
 		$query = '';
 		foreach ($_query as $k => $v)
 		{
-			$query .= urlencode($k).'='.urlencode($v).'&';
+			$query .= urlencode($k) . '=' . urlencode($v) . '&';
 		}
 
 		$this->log('check_http_request query='.$query);
 
-		clearstatcache();
-
 		// check cache
-		if (($mtime = $this->get_cached_time($page, $method, $query)))
+		if (($cached_page = $this->load_page($page, $method, $query, $mtime)))
 		{
 			$this->log('check_http_request incache mtime='.$mtime);
 
 			$gmt	= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-			$etag	= (isset($_SERVER['HTTP_IF_NONE_MATCH'])		? $_SERVER['HTTP_IF_NONE_MATCH']		: '');
-			$lastm	= (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])	? $_SERVER['HTTP_IF_MODIFIED_SINCE']	: '');
+			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
+			$lastm	= @$_SERVER['HTTP_IF_MODIFIED_SINCE'];
 
-			if ($p = strpos($lastm, ';'))
+			if (($p = strpos($lastm, ';')))
 			{
 				$lastm = substr($lastm, 0, $p);
 			}
@@ -260,7 +222,7 @@ class Cache
 				else if ($etag && $gmt != trim($etag, '\"'));
 				else
 				{
-					header ('HTTP/1.1 304 Not Modified');
+					header('HTTP/1.1 304 Not Modified');
 					die();
 				}
 
@@ -272,14 +234,12 @@ class Cache
 				// (e.g. <meta charset="windows-1252" />)
 				ini_set('default_charset', null);
 
-				$cached_page = $this->get_page_cached($page, $method, $query);
-
-				header ('Last-Modified: '.$gmt);
-				header ('ETag: "'.$gmt.'"');
-				//header ('Content-Type: text/xml');
-				//header ('Content-Length: '.strlen($cached));
-				//header ('Cache-Control: max-age=0');
-				//header ('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time()));
+				header('Last-Modified: '.$gmt);
+				header('ETag: "'.$gmt.'"');
+				//header('Content-Type: text/xml');
+				//header('Content-Length: '.strlen($cached));
+				//header('Cache-Control: max-age=0');
+				//header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time()));
 
 				echo $cached_page;
 
@@ -300,11 +260,6 @@ class Cache
 			}
 		}
 
-		// We have no valid cached page
-		$this->page		= $page;
-		$this->method	= $method;
-		$this->query	= $query;
-
 		return true;
 	}
 
@@ -314,9 +269,9 @@ class Cache
 		$now = time();
 		clearstatcache();
 
-		foreach ((array) glob($this->wacko->config['cache_dir'] . $directory . '*', GLOB_MARK|GLOB_NOSORT) as $file)
+		foreach (file_glob($this->wacko->config->cache_dir, $directory, '*') as $file)
 		{
-			if (substr($file, -1) != '/' && $now - @filemtime($file) > $ttl && unlink($file))
+			if ($now - filemtime($file) > $ttl && unlink($file))
 			{
 				++$n;
 			}

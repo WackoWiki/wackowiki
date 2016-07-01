@@ -45,10 +45,7 @@ if (isset($_GET['confirm']))
 			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
 
 		// cache handling
-		if ($this->config['cache'])
-		{
-			$this->cache->invalidate_page_cache($this->supertag);
-		}
+		$this->cache->invalidate_page($this->supertag);
 
 		// log event
 		$this->log(4, perc_replace($this->get_translation('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));

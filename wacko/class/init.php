@@ -290,7 +290,7 @@ class Init
 
 				if (!empty($data) && !$this->engine->disable_cache)
 				{
-					return $this->cache->store_page_cache($data);
+					return $this->cache->save_page($data);
 				}
 				else
 				{

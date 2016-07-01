@@ -28,7 +28,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	{
 		if (!$user)
 		{
-			$this->cache->invalidate_page_cache($this->supertag);
+			$this->cache->invalidate_page($this->supertag);
 		}
 
 		$_SESSION['body']		= $body;
@@ -69,7 +69,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	{
 		if (!$user)
 		{
-			$this->cache->invalidate_page_cache($this->supertag);
+			$this->cache->invalidate_page($this->supertag);
 		}
 
 		$this->set_message($this->get_translation('EmptyComment'));
@@ -79,7 +79,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// comment preview
 		if (!$user)
 		{
-			$this->cache->invalidate_page_cache($this->supertag);
+			$this->cache->invalidate_page($this->supertag);
 		}
 
 		$_SESSION['preview']	= $body;
@@ -94,7 +94,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// posting flood protection
 		if (!$user)
 		{
-			$this->cache->invalidate_page_cache($this->supertag);
+			$this->cache->invalidate_page($this->supertag);
 		}
 
 		$_SESSION['body']			= $body;
