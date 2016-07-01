@@ -110,6 +110,9 @@ class Settings implements ArrayAccess
 		$this->cookie_path	= preg_replace('|https?://[^/]+|i', '', $this->base_url);
 	}
 
+	// { $config['ttt'] = 1; } === { $config->ttt = 1; }
+	// furthermore: all [] and -> accesses - get/set/isset/unset - are identical
+
 	public function offsetSet($i, $value)
 	{
 		$this->__set($i, $value);
