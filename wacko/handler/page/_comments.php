@@ -276,7 +276,7 @@ if ($this->has_access('read'))
 			// captcha code starts
 
 			// Only show captcha if the admin enabled it in the config file
-			if ($this->config['captcha_new_comment'])
+			if ($this->config['enable_captcha'] && $this->config['captcha_new_comment'])
 			{
 				$this->show_captcha(false);
 			}

@@ -122,7 +122,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// Start Comment Captcha
 
 		// Only show captcha if enabled
-		if ($this->config['captcha_new_comment'])
+		if ($this->config['enable_captcha'] && $this->config['captcha_new_comment'])
 		{
 			// captcha validation
 			if ($this->validate_captcha() === false)
