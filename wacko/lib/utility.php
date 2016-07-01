@@ -15,10 +15,10 @@ function perc_replace()
 
 // Generate random token of defined $length that satisfy the complexity rules:
 // containing n > 0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
-// The token complexity can be defined in $tok_complexity :
-//		$tok_complexity = 2 -- token consists of uppercase, lowercase, digits
-//		$tok_complexity = 3 -- token consists of uppercase, lowercase, digits and symbols
-function random_token($length = 10, $tok_complexity = 3)
+// The token complexity can be defined in $token_complexity :
+//		$token_complexity = 2 -- token consists of uppercase, lowercase, digits
+//		$token_complexity = 3 -- token consists of uppercase, lowercase, digits and symbols
+function random_token($length = 10, $token_complexity = 3)
 {
 	static $syms = [
 		'abcdefghijklmnopqrstuvwxyz',
@@ -27,25 +27,25 @@ function random_token($length = 10, $tok_complexity = 3)
 		'-_!@#%^&*(){}[]|~',
 	];
 
-	if ($tok_complexity >= ($n = count($syms)))
+	if ($token_complexity >= ($n = count($syms)))
 	{
-		$tok_complexity = $n - 1;
+		$token_complexity = $n - 1;
 	}
-	else if ($tok_complexity < 0)
+	else if ($token_complexity < 0)
 	{
-		$tok_complexity = 0;
+		$token_complexity = 0;
 	}
 
 	for (;;)
 	{
 		$used = [];
-		$password = '';
+		$token = '';
 		$complexity = 0;
 
 		for ($i = 0; $i < $length; $i++)
 		{
-			$class = mt_rand(0, $tok_complexity);
-			$password .= $syms[$class][mt_rand(0, strlen($syms[$class]) - 1)];
+			$class = mt_rand(0, $token_complexity);
+			$token .= $syms[$class][mt_rand(0, strlen($syms[$class]) - 1)];
 
 			if (!isset($used[$class]))
 			{
@@ -54,9 +54,9 @@ function random_token($length = 10, $tok_complexity = 3)
 			}
 		}
 
-		if ($complexity >= $tok_complexity)
+		if ($complexity >= $token_complexity)
 		{
-			return $password;
+			return $token;
 		}
 	}
 }
