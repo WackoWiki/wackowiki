@@ -519,7 +519,7 @@ class Init
 				{
 					debug_print_r($_SESSION);
 					debug_print_r($this->engine->context);
-					debug_print_r($this->config);
+					// debug_print_r($this->config);
 					// debug_print_r($this->engine->page);
 				}
 

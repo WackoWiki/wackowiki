@@ -89,17 +89,17 @@ else if (($user = $this->get_user()))
 
 		// Only allow your session to be used from this IP address.
 		$this->set_message($this->get_translation('BindSessionIp') . ' '.
-		    ($user['validate_ip']? $this->get_translation('BindSessionIpOn') . ' ' : ''));
+				($user['validate_ip']? $this->get_translation('BindSessionIpOn') . ' ' : ''));
 		$this->set_message('<code>', 'add');
 		$this->set_message($user['validate_ip']? $user['ip'] : 'Off', 'add');
 		$this->set_message('</code> ', 'add');
 
 		if ($this->config['tls'] || $this->config['tls_proxy'])
 		{
-		    $this->set_message($this->get_translation('TrafficProtection'));
-		    $this->set_message(' <code>', 'add');
-		    $this->set_message(( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ), 'add');
-		    $this->set_message('</code>', 'add');
+			$this->set_message($this->get_translation('TrafficProtection'));
+			$this->set_message(' <code>', 'add');
+			$this->set_message(( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ), 'add');
+			$this->set_message('</code>', 'add');
 		}
 	}
 
@@ -144,16 +144,23 @@ else
 			{
 				// Start Login Captcha, if there are too much login attempts (max_login_attempts)
 
-				// Only show captcha if the admin enabled it in the config file
 				if($this->config['max_login_attempts'] && $existing_user['failed_login_count'] >= $this->config['max_login_attempts'] + 1)
 				{
-					// captcha validation
-					if ($this->validate_captcha() === false)
+					// show captcha only if the admin enabled it in the config
+					if ($this->config['enable_captcha'])
 					{
-						$error .= $this->get_translation('CaptchaFailed');
+						// captcha validation
+						if ($this->validate_captcha() === false)
+						{
+							$error .= $this->get_translation('CaptchaFailed');
+						}
+					}
+					else
+					{
+						// TODO: other action
 					}
 				}
-				// End Registration Captcha
+				// End Login Captcha
 
 				$_SESSION['failed_login_count'] = $existing_user['failed_login_count'];
 
@@ -313,9 +320,16 @@ else
 	// Only show captcha if the admin enabled it in the config file
 	if($this->config['max_login_attempts'] && $_failed_login_count >= $this->config['max_login_attempts'])
 	{
-		echo '<p>';
-		$this->show_captcha();
-		echo '</p>';
+		if ($this->config['enable_captcha'])
+		{
+			echo '<p>';
+			$this->show_captcha();
+			echo '</p>';
+		}
+		else
+		{
+			// TODO: other action
+		}
 	}
 	// end captcha
 

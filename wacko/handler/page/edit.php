@@ -145,7 +145,9 @@ if ($this->has_access('read')
 			#}
 
 			// captcha code starts
-			if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
+			if ($this->config['enable_captcha']
+				&& (($this->page && $this->config['captcha_edit_page'])
+					|| (!$this->page && $this->config['captcha_new_page'])))
 			{
 				// captcha validation
 				if ($this->validate_captcha() === false)
@@ -438,7 +440,9 @@ if ($this->has_access('read')
 	// captcha code starts
 
 	// show captcha only if the admin enabled it in the config
-	if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
+	if ($this->config['enable_captcha']
+		&& (($this->page && $this->config['captcha_edit_page'])
+			|| (!$this->page && $this->config['captcha_new_page'])))
 	{
 		$this->show_captcha(false);
 	}

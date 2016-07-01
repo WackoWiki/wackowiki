@@ -86,7 +86,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 			// Start Registration Captcha
 
 			// Only show captcha if the admin enabled it in the config
-			if(!$this->is_admin() && $this->config['captcha_registration'])
+			if(!$this->is_admin() && $this->config['enable_captcha'] && $this->config['captcha_registration'])
 			{
 				// captcha validation
 				if ($this->validate_captcha() === false)
@@ -384,7 +384,7 @@ if (!isset($_GET['confirm']))
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
-		if ($this->config['captcha_registration'])
+		if ($this->config['enable_captcha'] && $this->config['captcha_registration'])
 		{
 			echo '<p>';
 			$this->show_captcha();

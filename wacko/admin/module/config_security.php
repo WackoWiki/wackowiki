@@ -43,6 +43,7 @@ function admin_config_security(&$engine, &$module)
 		{
 			$config['allow_registration']			= (int)$_POST['allow_registration'];
 			$config['approve_new_user']				= (int)$_POST['approve_new_user'];
+			$config['enable_captcha']				= (int)$_POST['enable_captcha'];
 			$config['captcha_new_comment']			= (int)$_POST['captcha_new_comment'];
 			$config['captcha_new_page']				= (int)$_POST['captcha_new_page'];
 			$config['captcha_edit_page']			= (int)$_POST['captcha_edit_page'];
@@ -174,6 +175,19 @@ function admin_config_security(&$engine, &$module)
 					<br />
 					CAPTCHA
 				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="enable_captcha"><strong>Enable Captcha:</strong><br />
+					<small>If enabled, Captcha will be shown in the following cases and if a security threshold is reached.</small></label>
+				</td>
+				<td>
+					<input type="radio" id="enable_captcha_on" name="enable_captcha" value="1"<?php echo ( $engine->config['enable_captcha'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_captcha_on">On.</label>
+					<input type="radio" id="enable_captcha_off" name="enable_captcha" value="0"<?php echo ( $engine->config['enable_captcha'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_captcha_off">Off.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
