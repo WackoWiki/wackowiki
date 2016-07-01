@@ -9,19 +9,21 @@ require_once 'config/constants.php';
 
 class Settings implements ArrayAccess
 {
-    private $config = [];
-    public $dblink;
-    private $cachefile;
+	private $config = [];
+	private $changed = [];
+	private $dblink;
+	private $cachefile;
 
-    public function __construct($secondary = true)
+	public function __construct($secondary = true)
 	{
 		$this->cachefile = '_cache/' . CACHE_CONFIG_DIR . 'config.php';
 
 		// retrieve and unserialize cached settings data
 
 		clearstatcache();
-		if (!(@fileperms($this->cachefile) & 0111) || ($data = @file_get_contents($this->cachefile)) === false || ($this->config = unserialize($data)) === false)
+		if (!(@fileperms($this->cachefile) & 0111) || !($data = file_get_contents($this->cachefile)) || !($this->config = unserialize($data)))
 		{
+			// for config_defaults
 			$found_rewrite_extension = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
 
 			require_once('config/config_defaults.php');
@@ -108,49 +110,53 @@ class Settings implements ArrayAccess
 		$this->cookie_path	= preg_replace('|https?://[^/]+|i', '', $this->base_url);
 	}
 
-    public function offsetSet($i, $value)
+	public function offsetSet($i, $value)
 	{
-		$this->config[$i] = $value;
-    }
+		$this->__set($i, $value);
+	}
 
-    public function offsetExists($i)
+	public function offsetExists($i)
 	{
-        //return array_key_exists($i, $this->config);
-        return isset($this->config[$i]);
-    }
+		return $this->__isset($i);
+	}
 
-    public function offsetUnset($i)
+	public function offsetUnset($i)
 	{
-        unset($this->config[$i]);
-    }
+		$this->__unset($i);
+	}
 
-    public function offsetGet($i)
+	public function offsetGet($i)
+	{
+		return $this->__get($i);
+	}
+
+	public function __get($i)
 	{
 		//$trace = debug_backtrace();
 		//echo 'get property: ' . $i .  ' in ' . $trace[0]['file'] . ':' . $trace[0]['line'] . "\n";
+		//return array_key_exists($i, $this->config)?  $this->config[$i] : null;
+		return $this->config[$i];
+	}
 
-        return array_key_exists($i, $this->config)?  $this->config[$i] : null;
-    }
-
-	public function &__get($i)
+	public function __set($i, $value)
 	{
-        return $this->config[$i];
-    }
-
-    public function __set($i, $value)
-	{
+		if (!isset($this->config[$i]) || $this->config[$i] !== $value)
+		{
+			$this->changed[$i] = 1;
+		}
 		$this->config[$i] = $value;
-    }
+	}
 
-    public function __isset($i)
+	public function __isset($i)
 	{
-        return isset($this->config[$i]);
-    }
+		//return array_key_exists($i, $this->config);
+		return isset($this->config[$i]);
+	}
 
-    public function __unset($i)
+	public function __unset($i)
 	{
-        unset($this->config[$i]);
-    }
+		unset($this->config[$i]);
+	}
 
 	function invalidate_cache()
 	{
@@ -204,10 +210,11 @@ class Settings implements ArrayAccess
 		$values = [];
 		foreach ($config as $name => $value)
 		{
-			if (!isset($this->config[$name]) || $this->config[$name] != $value)
+			if (!isset($this->config[$name]) || $this->config[$name] != $value || isset($this->changed[$name]))
 			{
 				$values[] = "(0, '$name', '" . quote($this->dblink, $value) . "')";
 				$this->config[$name] = $value;
+				unset($this->changed[$name]);
 			}
 		}
 

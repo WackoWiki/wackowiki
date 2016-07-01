@@ -77,10 +77,10 @@ class Wacko
 		'вики' => 'wiki', 'вака' => 'wacko', 'веб' => 'web'
 	);
 	var $time_intervals = array(
-		2592000 => 'Month',
-		604800 => 'Week',
-		86400 => 'Day',
-		3600 => 'Hour',
+		30*DAYSECS => 'Month',
+		7*DAYSECS => 'Week',
+		DAYSECS => 'Day',
+		60*60 => 'Hour',
 		60 => 'Minute'
 	);
 
@@ -95,7 +95,7 @@ class Wacko
 	{
 		$this->timer	= microtime(1);
 		$this->config	= & $config;
-		$this->dblink	= & $config->dblink;
+		$this->dblink	= $config->dbal();
 	}
 
 	// DATABASE
@@ -149,20 +149,17 @@ class Wacko
 	function load_all($query, $docache = false)
 	{
 		// retrieving from cache
-		if ($this->config['cache_sql'] && $docache)
+		if ($this->config['cache_sql'] && $docache && ($data = $this->cache->load_sql($query)))
 		{
-			if ($data = $this->cache->load_sql($query))
-			{
-				return $data;
-			}
+			return $data;
 		}
 
 		$data = array();
 
 		// retrieving from db
-		if ($result = $this->sql_query($query))
+		if (($result = $this->sql_query($query)))
 		{
-			while ($row = fetch_assoc($result))
+			while (($row = fetch_assoc($result)))
 			{
 				$data[] = $row;
 			}
@@ -194,6 +191,11 @@ class Wacko
 		}
 
 		return null;
+	}
+
+	function q($data)
+	{
+		return quote($this->dblink, $data);
 	}
 
 	// MISC
@@ -1881,11 +1883,7 @@ class Wacko
 				$this->cache->invalidate_page_cache($this->supertag);
 			}
 
-			// SQL queries cache
-			if ($this->config['cache_sql'])
-			{
-				$this->cache->invalidate_sql_cache();
-			}
+			$this->cache->invalidate_sql();
 		}
 
 		// check privileges
@@ -2304,7 +2302,7 @@ class Wacko
 			else if (time() > @$this->config['maint_last_xml_sitemap'])
 			{
 				$this->config->set('xml_sitemap_update', 0, false);
-				$this->config->set('maint_last_xml_sitemap', time() + $days * 86400);
+				$this->config->set('maint_last_xml_sitemap', time() + $days * DAYSECS);
 			}
 			else
 			{
@@ -6080,65 +6078,43 @@ class Wacko
 
 	// MAINTENANCE
 
-	function purge_cache_directory($directory, $ttl)
-	{
-		$n = 0;
-		$directory = $this->config['cache_dir'] . $directory;
-		if (($handle = opendir(rtrim($directory, '/'))))
-		{
-			clearstatcache();
-			$now = time();
-
-			while (false !== ($file = readdir($handle)))
-			{
-				$file = $directory . $file;
-				if (is_file($file) && $now - @filemtime($file) > $ttl && @unlink($file))
-				{
-					++$n;
-				}
-			}
-
-			closedir($handle);
-		}
-		return $n;
-	}
-
 	function maintenance()
 	{
 		$now = time();
+		$update = [];
 
 		// purge referrers (once a day)
-		if (($days = $this->config['referrers_purge_time'])
-				&& $now > $this->config['maint_last_refs'] + 1 * 86400)
+		if (($days = $this->config->referrers_purge_time) > 0
+				&& $now > $this->config->maint_last_refs)
 		{
 			$this->sql_query(
-				"DELETE FROM ".$this->config['table_prefix']."referrer ".
-				"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+				"DELETE FROM ".$this->config->table_prefix."referrer ".
+				"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".(int)$days."' DAY)");
 
-			$this->config->set('maint_last_refs', $now);
+			$update['maint_last_refs'] = $now + 1 * DAYSECS;
 			$this->log(7, 'Maintenance: referrers purged');
 		}
 
 		// purge outdated pages revisions (once a week)
-		if (($days = $this->config['pages_purge_time'])
-				&& $now > $this->config['maint_last_oldpages'] + 7 * 86400)
+		if (($days = $this->config->pages_purge_time) > 0
+				&& $now > $this->config->maint_last_oldpages)
 		{
 			$this->sql_query(
-				"DELETE FROM ".$this->config['table_prefix']."revision ".
-				"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+				"DELETE FROM ".$this->config->table_prefix."revision ".
+				"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".(int)$days."' DAY)");
 
-			$this->config->set('maint_last_oldpages', $now);
+			$update['maint_last_oldpages'] = $now + 7 * DAYSECS;
 			$this->log(7, 'Maintenance: outdated pages revisions purged');
 		}
 
 		// purge deleted pages (once per 3 days)
-		if (($days = $this->config['keep_deleted_time'])
-				&& $now > $this->config['maint_last_delpages'] + 3 * 86400)
+		if (($days = $this->config->keep_deleted_time) > 0
+				&& $now > $this->config->maint_last_delpages)
 		{
 			list($pages, ) = $this->load_deleted(1000, 0);
 
 			$remove = [];
-			$past = $now - 3600 * 24 * $days;
+			$past = $now - DAYSECS * $days;
 			foreach ($pages as $page)
 			{
 				if (strtotime($page['modified']) < $past)
@@ -6152,60 +6128,62 @@ class Wacko
 				$this->delete_pages($remove);
 				$this->log(7, 'Maintenance: deleted pages purged');
 			}
-			$this->config->set('maint_last_delpages', $now);
+			$update['maint_last_delpages'] = $now + 3 * DAYSECS;
 		}
 
 		// purge system log entries (once per 3 days)
-		if (($days = $this->config['log_purge_time'])
-				&& $now > $this->config['maint_last_log'] + 3 * 86400)
+		if (($days = $this->config->log_purge_time) > 0
+				&& $now > $this->config['maint_last_log'])
 		{
 			$this->sql_query(
-				"DELETE FROM {$this->config['table_prefix']}log ".
-				"WHERE log_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
+				"DELETE FROM {$this->config->table_prefix}log ".
+				"WHERE log_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".(int)$days."' DAY )");
 
-			$this->config->set('maint_last_log', $now);
+			$update['maint_last_log'] = $now + 3 * DAYSECS;
 
 			$this->log(7, 'Maintenance: system log purged');
 		}
 
 		// remove outdated pages cache, purge sql cache (once per hour)
-		if ($now > $this->config['maint_last_cache'] + 3600)
+		if ($now > $this->config->maint_last_cache)
 		{
 			// pages cache
-			if (($ttl = $this->config['cache_ttl']))
+			if (($ttl = $this->config->cache_ttl) > 0)
 			{
 				// clear from db
 				$this->sql_query(
-					"DELETE FROM ".$this->config['table_prefix']."cache ".
-					"WHERE cache_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".quote($this->dblink, $ttl)."' SECOND )");
+					"DELETE FROM ".$this->config->table_prefix."cache ".
+					"WHERE cache_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".(int)$ttl."' SECOND )");
 
-				if ($this->purge_cache_directory(CACHE_PAGE_DIR, $ttl))
+				if ($this->cache->purge(CACHE_PAGE_DIR, $ttl))
 				{
 					$this->log(7, 'Maintenance: cached pages purged');
 				}
 			}
 
 			// sql query cache
-			if (($ttl = $this->config['cache_sql_ttl']))
+			if (($ttl = $this->config->cache_sql_ttl) > 0)
 			{
-				if ($this->purge_cache_directory(CACHE_SQL_DIR, $ttl))
+				if ($this->cache->purge(CACHE_SQL_DIR, $ttl))
 				{
 					$this->log(7, 'Maintenance: cached sql results purged');
 				}
 			}
 
-			$this->config->set('maint_last_cache', $now);
+			$update['maint_last_cache'] = $now + 3600;
 		}
 
 		// purge expired cookie_tokens (once per 3 days)
 		if (($days = 3)
-				&& $now > $this->config['maint_last_session'] + 3 * 86400)
+				&& $now > $this->config->maint_last_session)
 		{
 			$this->delete_cookie_token('', true, $days);
 
-			$this->config->set('maint_last_session', $now);
+			$update['maint_last_session'] = $now + 3 * DAYSECS;
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
 		}
+
+		$this->config->_set($update);
 	}
 
 	// MAIN EXECUTION ROUTINE
@@ -6225,7 +6203,7 @@ class Wacko
 
 		if (!trim($tag))
 		{
-			$tag = $this->config['root_page'];
+			$tag = $this->config->root_page;
 		}
 
 		// autotasks

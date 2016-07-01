@@ -333,7 +333,7 @@ class Feed
 				$xml .= "<loc>".$this->engine->href('', $page['tag'])."</loc>\n";
 				$xml .= "<lastmod>". substr($page['modified'], 0, 10) ."</lastmod>\n";
 
-				$days_since_last_changed = (time() - strtotime($page['modified'])) / 86400;
+				$days_since_last_changed = (time() - strtotime($page['modified'])) / DAYSECS;
 
 				if ($days_since_last_changed < 30)
 				{

@@ -23,13 +23,10 @@ class Cache
 	// save serialized sql results
 	function save_sql($query, $data)
 	{
-		$file_name	= $this->sql_cache_id($query);
-		$sqldata	= serialize($data);
+		$file_name = $this->sql_cache_id($query);
 
-		file_put_contents($file_name, $sqldata);
+		file_put_contents($file_name, serialize($data));
 		chmod($file_name, 0644);
-
-		return true;
 	}
 
 	// retrieve and unserialize cached sql data
@@ -37,61 +34,41 @@ class Cache
 	{
 		$file_name = $this->sql_cache_id($query);
 
-		if (!@file_exists($file_name))
+		if (($timestamp = @filemtime($file_name)))
 		{
-			return false;
+			if (time() - $timestamp <= $this->wacko->config->cache_sql_ttl)
+			{
+				if (($contents = file_get_contents($file_name)))
+				{
+					dbg('sql from cache'); // STS
+					return unserialize($contents);
+				}
+			}
+			@unlink($file_name);
 		}
 
-		if ((time() - @filemtime($file_name)) > $this->wacko->config['cache_sql_ttl'])
-		{
-			return false;
-		}
-
-		$fp		= fopen($file_name, 'r');
-
-		// check for false and empty strings
-		if(($data	= fread($fp, filesize($file_name))) === '')
-		{
-			return false;
-		}
-
-		fclose($fp);
-
-		return unserialize($data);
+		return false;
 	}
 
 	// Invalidate the SQL cache
-	function invalidate_sql_cache($ttl='')
+	function invalidate_sql()
 	{
-		// delete from fs
-		clearstatcache();
-		$directory	= $this->wacko->config['cache_dir'].CACHE_SQL_DIR;
-
-		if ($handle = opendir(rtrim($directory, '/')))
+		if ($this->wacko->config->cache_sql)
 		{
-			while (false !== ($file = readdir($handle)))
+			$past = time() - $this->wacko->config->cache_sql_ttl - 1;
+			foreach ((array) glob($this->wacko->config['cache_dir'] . CACHE_SQL_DIR . '*', GLOB_MARK|GLOB_NOSORT) as $file)
 			{
-				/* if (is_file($directory.$file)
-					&& ((time() - @filemtime($directory.$file)) > $ttl))
+				if (substr($file, -1) != '/')
 				{
-					@unlink($directory.$file);
-				} */
-
-				if ($file != '.' && $file != '..' && !is_dir($directory.$file))
-				{
-					unlink($directory.$file);
+					touch($file, $past); // touching is faster than unlinking
 				}
 			}
-
-			closedir($handle);
 		}
-
-		//$this->wacko->log(7, 'Maintenance: cached sql results purged');
 	}
 
 	function sql_cache_id($query)
 	{
-		// Remove extra spaces and tabs
+		// Remove extra whitespace while protecting quoted data
 		$query = preg_replace_callback('/(\s+)|(^[\s;]+|[\s;]+$)|\'(\\\\\'|\\\\\\\\|[^\'])*\'|"(\\\\"|\\\\\\\\|[^"])*"/',
 			function ($x)
 			{
@@ -102,8 +79,10 @@ class Cache
 				return $x[0];
 			}, $query);
 
-		return $this->cache_dir.CACHE_SQL_DIR.hash('sha1', $query);
+		return $this->cache_dir . CACHE_SQL_DIR . hash('sha1', $query);
 	}
+
+	// http cache =====================================================
 
 	// Get page content from cache
 	function get_page_cached($page, $method, $query)
@@ -329,4 +308,20 @@ class Cache
 		return true;
 	}
 
+	function purge($directory, $ttl)
+	{
+		$n = 0;
+		$now = time();
+		clearstatcache();
+
+		foreach ((array) glob($this->wacko->config['cache_dir'] . $directory . '*', GLOB_MARK|GLOB_NOSORT) as $file)
+		{
+			if (substr($file, -1) != '/' && $now - @filemtime($file) > $ttl && unlink($file))
+			{
+				++$n;
+			}
+		}
+
+		return $n;
+	}
 }

@@ -79,7 +79,7 @@ if (function_exists('generate_calendar') == false)
 
 		$day_names = array(); // generate all the day names according to the current locale
 
-		for ($n = 0, $t = (3 + $first_day) * 86400; $n < 7; $n++, $t+=86400) // January 4, 1970 was a Sunday
+		for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t+=DAYSECS) // January 4, 1970 was a Sunday
 		{
 			$day_names[$n] = ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
 		}
