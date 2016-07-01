@@ -15,6 +15,7 @@ class Cache
 	var $method;
 	var $query;
 	var $file;
+	var $sqlfile;
 
 	// Constructor
 	function __construct($cache_dir, $cache_ttl, $debug)
@@ -29,14 +30,14 @@ class Cache
 	function load_sql($query)
 	{
 		// store data for oncoming save_sql
-		$this->file = $this->sql_cache_id($query);
+		$this->sqlfile = $this->sql_cache_id($query);
 
 		clearstatcache();
-		if (($timestamp = @filemtime($this->file)))
+		if (($timestamp = @filemtime($this->sqlfile)))
 		{
 			if (time() - $timestamp <= $this->wacko->config->cache_sql_ttl)
 			{
-				if (($contents = file_get_contents($this->file)))
+				if (($contents = file_get_contents($this->sqlfile)))
 				{
 					return unserialize($contents);
 				}
@@ -49,8 +50,8 @@ class Cache
 	// save serialized sql results
 	function save_sql($data)
 	{
-		file_put_contents($this->file, serialize($data));
-		chmod($this->file, 0644);
+		file_put_contents($this->sqlfile, serialize($data));
+		chmod($this->sqlfile, 0644);
 	}
 
 	// Invalidate the SQL cache
