@@ -283,10 +283,7 @@ if ($this->is_owner() || $this->is_admin())
 			$this->set_message($message, 'success');
 
 			// purge SQL queries cache
-			if ($this->config['cache_sql'])
-			{
-				$this->cache->invalidate_sql_cache();
-			}
+			$this->cache->invalidate_sql();
 
 			$this->redirect($this->href());
 		}

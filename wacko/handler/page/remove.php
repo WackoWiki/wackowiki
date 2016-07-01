@@ -207,10 +207,7 @@ if ($this->is_admin()
 		}
 
 		// purge SQL queries cache
-		if ($this->config['cache_sql'])
-		{
-			$this->cache->invalidate_sql_cache();
-		}
+		$this->cache->invalidate_sql();
 
 		// update user menu
 		$this->set_menu(MENU_USER, 1);

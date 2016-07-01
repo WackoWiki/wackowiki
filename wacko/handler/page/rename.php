@@ -149,11 +149,7 @@ if ($registered
 				$message .= recursive_move($this, $this->tag, $new_root);
 			}
 
-			// purge SQL queries cache
-			if ($this->config['cache_sql'])
-			{
-				$this->cache->invalidate_sql_cache();
-			}
+			$this->cache->invalidate_sql();
 
 			// update sitemap
 			$this->update_sitemap();
