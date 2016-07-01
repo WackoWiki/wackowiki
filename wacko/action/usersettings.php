@@ -688,7 +688,7 @@ else if ($user = $this->get_user())
 	//  echo $this->format_translation('SeeListOfPages')."<br />";
 	echo $this->form_close();
 
-	$percentage = 0.'%';
+	$percentage = 0 . '%';
 
 	if ($this->config['upload_quota_per_user'])
 	{
