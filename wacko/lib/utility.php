@@ -1,6 +1,6 @@
 <?php
 /*
- * miscellaneous utility functions used throughout wackowiki
+ * assorted utility functions used throughout wackowiki
  */
 
 /*
@@ -154,6 +154,67 @@ function dbg()
 	}
 }
 
+// join_path('/home/sts', 'dev/', './a.c')  ==> '/home/sts/dev/a.c'
+// removes .. from path - if .. is a first element in result - return FALSE
+// never emits trailing /
+function join_path()
+{
+    $args = func_get_args();
+    if (count($args) == 1 && is_array($args[0]))
+    {
+		$args = $args[0];
+    }
+
+    $parts = [];
+    $absolute = -1;
+    foreach ($args as $arg)
+	{
+		if ($absolute === -1 && $arg !== '')
+		{
+			$absolute = ($arg[0] == '/');
+		}
+        $parts = array_merge($parts, explode('/', $arg));
+    }
+
+	$n = count($parts);
+	for ($from = $to = 0; $from < $n; )
+	{
+		if (($part = $parts[$from++]) == '..')
+		{
+			if (--$to < 0)
+			{
+				return false;
+			}
+		}
+		else if (!($part === '' || $part === '.' || $part === null || $part === false))
+		{
+			$parts[$to++] = $part;
+		}
+	}
+
+    $path = implode('/', array_slice($parts, 0, $to));
+
+	if ($absolute === true)
+	{
+		$path = '/' . $path;
+	}
+	else if ($path === '')
+	{
+		$path = '.';
+	}
+
+	return $path;
+}
+
+// file_glob($directory, '*') --> returns list of all files (not directories)
+function file_glob()
+{
+	return array_filter((array) glob(join_path(func_get_args()), GLOB_MARK | GLOB_NOSORT),
+		function ($x)
+		{
+			return substr($x, -1) != '/';
+		});
+}
 function class_autoloader($config)
 {
 	spl_autoload_register(function($name) use ($config)

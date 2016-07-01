@@ -126,11 +126,11 @@ if ($this->is_admin()
 		{
 			if ($comment_on_id)
 			{
-				$this->cache->invalidate_page_cache($this->get_page_tag($comment_on_id));
+				$this->cache->invalidate_page($this->get_page_tag($comment_on_id));
 			}
 			else
 			{
-				$this->cache->invalidate_page_cache($this->supertag);
+				$this->cache->invalidate_page($this->supertag);
 			}
 
 			$message .= '<li>'.$this->get_translation('PageCachePurged')."</li>\n";
