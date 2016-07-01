@@ -173,7 +173,7 @@ class Wacko
 		// saving to cache
 		if ($this->config['cache_sql'] && $docache)
 		{
-			$this->cache->save_sql($query, $data);
+			$this->cache->save_sql($data);
 		}
 
 		return $data;

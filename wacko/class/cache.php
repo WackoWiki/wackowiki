@@ -25,9 +25,10 @@ class Cache
 		$this->timer		= microtime(1);
 	}
 
-	// retrieve and unserialize cached sql data
+	// retrieve and unserialize cached sql data if available
 	function load_sql($query)
 	{
+		// store data for oncoming save_sql
 		$this->file = $this->sql_cache_id($query);
 
 		clearstatcache();
@@ -46,7 +47,7 @@ class Cache
 	}
 
 	// save serialized sql results
-	function save_sql($query, $data)
+	function save_sql($data)
 	{
 		file_put_contents($this->file, serialize($data));
 		chmod($this->file, 0644);
@@ -163,7 +164,7 @@ class Cache
 
 	function construct_id($page, $method, $query)
 	{
-		return join_path($this->cache_dir, CACHE_PAGE_DIR, hash('sha1', $page.'_'.$method.'_'.$query));
+		return join_path($this->cache_dir, CACHE_PAGE_DIR, hash('sha1', ($page . '_' . $method . '_' . $query)));
 	}
 
 	function log($msg)
