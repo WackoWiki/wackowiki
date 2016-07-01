@@ -13,7 +13,6 @@ function perc_replace()
 	return preg_replace_callback('/%[1-9]/', function ($x) use ($args) { return ($i = $x[0][1]) < count($args)? $args[$i] : $x[0]; }, $args[0]);
 }
 
-
 // Generate random password of defined $length that satisfy the complexity rules:
 // containing n > 0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
 // The password complexity can be defined in $pwd_complexity :
@@ -27,10 +26,12 @@ function random_password($length = 10, $pwd_complexity = 3)
 		'0123456789',
 		'-_!@#%^&*(){}[]|~',
 	];
+
 	if ($pwd_complexity >= ($n = count($syms)))
 	{
 		$pwd_complexity = $n - 1;
-	} else if ($pwd_complexity < 0)
+	}
+	else if ($pwd_complexity < 0)
 	{
 		$pwd_complexity = 0;
 	}
@@ -40,16 +41,19 @@ function random_password($length = 10, $pwd_complexity = 3)
 		$used = [];
 		$password = '';
 		$complexity = 0;
+
 		for ($i = 0; $i < $length; $i++)
 		{
 			$class = mt_rand(0, $pwd_complexity);
 			$password .= $syms[$class][mt_rand(0, strlen($syms[$class]) - 1)];
+
 			if (!isset($used[$class]))
 			{
 				$used[$class] = 1;
 				++$complexity;
 			}
 		}
+
 		if ($complexity >= $pwd_complexity)
 		{
 			return $password;
@@ -71,12 +75,14 @@ function stringify($x, $compact = 0, $full = 1)
 	{
 		$array = [];
 		$i = 0;
+
 		foreach ($x as $k => $v)
 		{
 			if (($v = stringify($v, $compact, $full)) === false)
 			{
 				return false;
 			}
+
 			// BTW in php array keys can be of integer or string type ONLY
 			if (is_int($k))
 			{
@@ -86,6 +92,7 @@ function stringify($x, $compact = 0, $full = 1)
 					$array[] = $v;
 					continue;
 				}
+
 				if ($k > $i)
 				{
 					$i = $k + 1;
@@ -95,21 +102,24 @@ function stringify($x, $compact = 0, $full = 1)
 			{
 				$k = stringify($k);
 			}
+
 			$array[] = $k . ($compact? '=>' : ' => ') . $v;
 		}
+
 		return '[' . implode(($compact? ',' : ', '), $array) . ']';
 	}
 	if (is_string($x))
 	{
 		if (preg_match('/[\x00-\x1f\x7f]/', $x))
 		{
-		    return '"' . addcslashes($x, "\0..\37\"\\$") . '"';
+			return '"' . addcslashes($x, "\0..\37\"\\$") . '"';
 		}
 		else
 		{
-		    return "'" . preg_replace('/\\\\(?=[\\\\\'])|\\\\$|\'/', '\\\\\\0', $x) . "'";
+			return "'" . preg_replace('/\\\\(?=[\\\\\'])|\\\\$|\'/', '\\\\\\0', $x) . "'";
 		}
 	}
+
 	if (!$full)						return false;
 	if (is_object($x))				return '*CLASS:' . get_class($x) . '*';
 	if (is_resource($x))			return '*RESOURCE:' . get_resource_type($x) . '*';
@@ -131,6 +141,7 @@ function dbg()
 	if ($running)
 	{
 		$args = func_get_args();
+
 		foreach ($args as &$arg)
 		{
 			if (!is_string($arg) || $arg === '' || preg_match('/[\x00-\x1f\x7f]/', $arg))
@@ -138,16 +149,17 @@ function dbg()
 				$arg = stringify($arg);
 			}
 		}
+
 		$running = @file_put_contents('DEBUG', date('ymdHis ') . implode(' ', $args) . "\n", FILE_APPEND);
 	}
 }
-
 
 function class_autoloader($config)
 {
 	spl_autoload_register(function($name) use ($config)
 	{
 		static $map;
+
 		if (!isset($map))
 		{
 			foreach (file($config) as $line)
@@ -156,6 +168,7 @@ function class_autoloader($config)
 				{
 					$line = preg_split('/\s+/', $line);
 					$file = array_shift($line);
+
 					if (@file_exists($file))
 					{
 						foreach ($line as $class)
@@ -166,10 +179,10 @@ function class_autoloader($config)
 				}
 			}
 		}
+
 		if (array_key_exists($name, $map))
 		{
 			require_once($map[$name]);
 		}
 	});
 }
-

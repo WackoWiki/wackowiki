@@ -127,11 +127,13 @@ class Init
 		$request = ltrim($request, '/');
 
 		// check for permalink
-		$hashids = new Hashids($this->config['system_seed']);
+		$hashids = new Hashids($this->config['hashid_seed']);
 		$ids = $hashids->decode((($p = strpos($request, '/')) === false)? $request : substr($request, 0, $p));
+
 		if (count($ids) == 3)
 		{
-			sscanf(hash('sha1', $ids[0] . $this->config['system_seed'] . $ids[1]), '%7x', $cksum);
+			sscanf(hash('sha1', $ids[0] . $this->config['hashid_seed'] . $ids[1]), '%7x', $cksum);
+
 			if ($ids[2] == $cksum)
 			{
 				$this->page = $ids[0] . 'x' . $ids[1];
@@ -517,7 +519,7 @@ class Init
 				{
 					debug_print_r($_SESSION);
 					debug_print_r($this->engine->context);
-					// debug_print_r($this->config);
+					debug_print_r($this->config);
 					// debug_print_r($this->engine->page);
 				}
 
