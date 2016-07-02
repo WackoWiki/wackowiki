@@ -2,7 +2,7 @@
 $lang = array(
 
 /*
-   Language
+   Language Settings
 */
 'Charset' => 'iso-8859-1',
 'LangISO' => 'es',

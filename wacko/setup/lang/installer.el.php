@@ -175,7 +175,7 @@ $lang = array(
 'DeletingTable' => 'Deleting <code>%1</code> table',
 
 /*
-   Write Config Pageς
+   Write Config Page
 */
 'write-config' => 'Εγγραφή Αρχείου Ρυθμίσεων',
 'FinalStep' => 'Final Step',
