@@ -77,9 +77,9 @@ write_config_hidden_nodes(array('none' => ''));
 	@chmod (CONFIG_FILE, 0777);
 	@chmod (SITE_LOCK, 0660);
 	@chmod (AP_LOCK, 0660);
-	@chmod (UPLOAD_DIR_BACKUP, 0777);
-	@chmod (UPLOAD_DIR_GLOBAL, 0777);
-	@chmod (UPLOAD_DIR_PER_PAGE, 0777);
+	@chmod (UPLOAD_BACKUP_DIR, 0777);
+	@chmod (UPLOAD_GLOBAL_DIR, 0777);
+	@chmod (UPLOAD_PER_PAGE_DIR, 0777);
 	@chmod (XML_DIR, 0777);
 	@chmod (SITEMAP_XML, 0777);
 
@@ -94,9 +94,9 @@ write_config_hidden_nodes(array('none' => ''));
 								&& is_writable(CONFIG_FILE)
 								&& is_writable(SITE_LOCK)
 								&& is_writable(AP_LOCK)
-								&& is_writable(UPLOAD_DIR_BACKUP)
-								&& is_writable(UPLOAD_DIR_GLOBAL)
-								&& is_writable(UPLOAD_DIR_PER_PAGE)
+								&& is_writable(UPLOAD_BACKUP_DIR)
+								&& is_writable(UPLOAD_GLOBAL_DIR)
+								&& is_writable(UPLOAD_PER_PAGE_DIR)
 								&& is_writable(XML_DIR)
 								&& is_writable(SITEMAP_XML);
 	?>
@@ -109,9 +109,9 @@ write_config_hidden_nodes(array('none' => ''));
 	<li>config/config.php   <?php	echo output_image(is_writable(CONFIG_FILE)); ?></li>
 	<li>config/lock   <?php			echo output_image(is_writable(SITE_LOCK)); ?></li>
 	<li>config/lock_ap   <?php		echo output_image(is_writable(AP_LOCK)); ?></li>
-	<li>files/backup   <?php		echo output_image(is_writable(UPLOAD_DIR_BACKUP)); ?></li>
-	<li>files/global   <?php		echo output_image(is_writable(UPLOAD_DIR_GLOBAL)); ?></li>
-	<li>files/perpage   <?php		echo output_image(is_writable(UPLOAD_DIR_PER_PAGE)); ?></li>
+	<li>files/backup   <?php		echo output_image(is_writable(UPLOAD_BACKUP_DIR)); ?></li>
+	<li>files/global   <?php		echo output_image(is_writable(UPLOAD_GLOBAL_DIR)); ?></li>
+	<li>files/perpage   <?php		echo output_image(is_writable(UPLOAD_PER_PAGE_DIR)); ?></li>
 	<li>xml   <?php					echo output_image(is_writable(XML_DIR)); ?></li>
 	<li>sitemap.xml   <?php			echo output_image(is_writable(SITEMAP_XML)); ?></li>
 </ul>

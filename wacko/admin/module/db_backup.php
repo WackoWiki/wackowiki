@@ -169,7 +169,7 @@ function admin_db_backup(&$engine, &$module)
 		// log contents
 		$contents = array(
 			$time,						// 0: backup time (unix format)
-			rtrim(substr($pack, strlen(UPLOAD_DIR_BACKUP) + 18), '/'),	// 1: id
+			rtrim(substr($pack, strlen(UPLOAD_BACKUP_DIR) + 18), '/'),	// 1: id
 			$root,						// 2: cluster root
 			implode(';', $structure),	// 3: structure
 			implode(';', $data),		// 4: table data
@@ -193,9 +193,9 @@ function admin_db_backup(&$engine, &$module)
 	}
 	else
 	{
-		if (!is_writable(UPLOAD_DIR_BACKUP.'/'))
+		if (!is_writable(UPLOAD_BACKUP_DIR.'/'))
 		{
-			echo output_image($engine, false).'<strong class="red">The '.UPLOAD_DIR_BACKUP.'/'.' directory is not writable.</strong>'. "<br />\n";
+			echo output_image($engine, false).'<strong class="red">The '.UPLOAD_BACKUP_DIR.'/'.' directory is not writable.</strong>'. "<br />\n";
 		}
 		else
 		{

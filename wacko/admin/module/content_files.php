@@ -93,7 +93,7 @@ function admin_content_files(&$engine, &$module)
 			$message =  '<em>'.$engine->get_translation('UploadRemovedFromDB').'</em><br />';
 
 			// 3. remove from FS
-			$real_filename = join_path(UPLOAD_DIR_GLOBAL, $file['file_name']);
+			$real_filename = join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 
 			if (@unlink($real_filename))
 			{
@@ -134,7 +134,7 @@ function admin_content_files(&$engine, &$module)
 			// here would be place for translit
 			$name = $engine->format($name, 'translit');
 
-			$dir	= UPLOAD_DIR_GLOBAL.'/';
+			$dir	= UPLOAD_GLOBAL_DIR.'/';
 			$banned	= explode('|', $engine->config['upload_banned_exts']);
 
 			if (in_array(strtolower($ext), $banned))

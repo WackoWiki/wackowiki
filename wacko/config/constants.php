@@ -15,9 +15,9 @@ define('ACTION_DIR',					'action');
 define('FORMATTER_DIR',					'formatter');
 define('HANDLER_DIR',					'handler');
 define('THEME_DIR',						'theme');
-define('UPLOAD_DIR_GLOBAL',				'files/global');
-define('UPLOAD_DIR_PER_PAGE',			'files/perpage');
-define('UPLOAD_DIR_BACKUP',				'files/backup');
+define('UPLOAD_GLOBAL_DIR',				'files/global');
+define('UPLOAD_PER_PAGE_DIR',			'files/perpage');
+define('UPLOAD_BACKUP_DIR',				'files/backup');
 define('XML_DIR',						'xml');
 
 define('CACHE_DIR',						'_cache');

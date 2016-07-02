@@ -3280,7 +3280,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url = $this->config['base_url'].join_path(UPLOAD_DIR_GLOBAL, $file_name);
+					$url = $this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name);
 					$have_global = true;
 
 					// tracking file link
@@ -3297,7 +3297,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url = $this->config['base_url'].join_path(UPLOAD_DIR_GLOBAL, $file_name);
+					$url = $this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
 					// tracking file link
 					if ($track && isset($file_data['upload_id']))
@@ -3402,20 +3402,20 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->config['base_url'].join_path(UPLOAD_DIR_GLOBAL, $file_name).'" '.
+								return '<img src="'.$this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name).'" '.
 										($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').$scale.$resize.' />';
 							}
 							else
 							{
 								// continue
-								#return '<a href="'.$this->config['base_url'].join_path(UPLOAD_DIR_GLOBAL, $file_name).'" title="'.$title.'">'.$text.'</a>';
+								#return '<a href="'.$this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name).'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
 						else
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							#return '<img src="'.$this->config['base_url'].join_path(UPLOAD_DIR_PER_PAGE, '@'.$file_data['page_id'].'@'.$_file).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+							#return '<img src="'.$this->config['base_url'].join_path(UPLOAD_PER_PAGE_DIR, '@'.$file_data['page_id'].'@'.$_file).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
 							if (!$text)
 							{
 								$text = $title;
@@ -3446,7 +3446,7 @@ class Wacko
 
 				if ($_global == true)
 				{
-					$title	= '404: /'.join_path(UPLOAD_DIR_GLOBAL, $file_name);
+					$title	= '404: /'.join_path(UPLOAD_GLOBAL_DIR, $file_name);
 				}
 				else
 				{
@@ -7032,7 +7032,7 @@ class Wacko
 				/*foreach ($files as $file)
 				{
 					// remove from FS
-					$file_name = join_path(UPLOAD_DIR_PER_PAGE, '@'.
+					$file_name = join_path(UPLOAD_PER_PAGE_DIR, '@'.
 							$page['page_id'].'@'.$file['file_name']);
 
 					@unlink($file_name);
@@ -7049,7 +7049,7 @@ class Wacko
 				foreach ($files as $file)
 				{
 					// remove from FS
-					$file_name = join_path(UPLOAD_DIR_PER_PAGE, '@'.
+					$file_name = join_path(UPLOAD_PER_PAGE_DIR, '@'.
 						$page['page_id'].'@'.$file['file_name']);
 
 					@unlink($file_name);

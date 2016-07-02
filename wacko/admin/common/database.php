@@ -144,11 +144,11 @@ if (isset($tables, $directories) !== true)
 
 	// define files dirs
 	$directories = array(
-			#$engine->config['cache_dir'].CACHE_FEED_DIR, // not configurable now!
-			#$engine->config['cache_dir'].CACHE_PAGE_DIR,
-			#$engine->config['cache_dir'].CACHE_SQL_DIR,
-			UPLOAD_DIR_GLOBAL,
-			UPLOAD_DIR_PER_PAGE
+			#CACHE_FEED_DIR, // not configurable now!
+			#CACHE_PAGE_DIR,
+			#CACHE_SQL_DIR,
+			UPLOAD_GLOBAL_DIR,
+			UPLOAD_PER_PAGE_DIR
 		);
 }
 else
@@ -162,7 +162,7 @@ function set_pack_dir(&$engine, $time)
 {
 	// check dir name and create if not exists
 	$pack = date('Ymd_His', $time);
-	$dir = join_path(UPLOAD_DIR_BACKUP, $pack);
+	$dir = join_path(UPLOAD_BACKUP_DIR, $pack);
 
 	clearstatcache();
 	if (is_dir($dir) !== true)
@@ -180,7 +180,7 @@ function remove_pack(&$engine, $pack)
 {
 	$offset = 0;
 	$pathdir = '';
-	$packdir = join_path(UPLOAD_DIR_BACKUP, $pack);
+	$packdir = join_path(UPLOAD_BACKUP_DIR, $pack);
 
 	// read log
 	$log = join_path($packdir, BACKUP_FILE_LOG);
@@ -527,7 +527,7 @@ function get_files(&$engine, $pack, $dir, $root)
 	$matches	= array();
 
 	// set file mask for cluster backup
-	if ($root == true && $dir == UPLOAD_DIR_PER_PAGE)
+	if ($root == true && $dir == UPLOAD_PER_PAGE_DIR)
 	{
 		$cluster = true;
 	}
@@ -625,7 +625,7 @@ function get_files(&$engine, $pack, $dir, $root)
 function put_table(&$engine, $pack)
 {
 	// read sql data
-	$file	= join_path(UPLOAD_DIR_BACKUP, $pack, BACKUP_FILE_STRUCTURE);
+	$file	= join_path(UPLOAD_BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE);
 	$sql	= explode(';', file_get_contents($file));
 
 	array_pop($sql);
@@ -649,7 +649,7 @@ function put_data(&$engine, $pack, $table, $mode)
 	$point		= '';
 
 	// open table dump file with read access
-	$filename	= join_path(UPLOAD_DIR_BACKUP, $pack, $table, BACKUP_FILE_DUMP_SUFFIX);
+	$filename	= join_path(UPLOAD_BACKUP_DIR, $pack, $table, BACKUP_FILE_DUMP_SUFFIX);
 	$file		= gzopen($filename, 'rb');
 
 	// read and process file in iterations to the end
@@ -726,7 +726,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 	$offset	= 0;
 	$total	= array();
 
-	$packdir = join_path(UPLOAD_DIR_BACKUP, $pack, $dir);
+	$packdir = join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
 
 	// restore files subdir or full path recursively if needed
 	if (strpos($dir, '/'))
