@@ -310,7 +310,6 @@ $wacko_translation = array(
 	'DomainsSitesPages'			=> 'Domänen/Seiten verlinkt zu  %1 (%2)  (<a href="%3">zeige URLs</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Domänen/Seiten, die auf dieses WackoWiki verlinkt haben (<a href="%1">zeige URLs</a>):',
 	'ViewReferringSites'		=> '<a href="%1">nur auf %2 verweisende Seiten</a> ',
-	'ViewReferringSitesPerPage'	=> '<a href="%1">nur auf %2 verweisende Seiten</a> ',
 	'ViewReferringSitesGlobal'	=> '<a href="%1">global verweisende Seiten</a>',
 	'ViewReferrersPage'			=> 'zur Seite',
 	'ViewReferrersPerPage'		=> 'nach Seite',
@@ -1123,6 +1122,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 Monaten',
 	'InAYear'		=> 'in einem Jahr',
 	'InYears'		=> 'in %1 Jahren',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Unbekannte Aktion',

@@ -302,16 +302,15 @@ $wacko_translation = array(
 	'NoDifferences'				=> 'No differences.',
 	'History'					=> 'История на промените',
 	'ReEditOldRevision'			=> 'Редактирай старата версия',
+
 	'ExternalPages'				=> 'Външни страници, препращащи на&nbsp;%1<br /> (%2) (<a href="%3">списък на сайтовете</a>):',
 	'ExternalPagesGlobal'		=> 'Външни страници, препращащи (%2)<br /> (<a href="%1">списък на сайтовете</a>):',
-	'DomainsSitesPages'			=> 'Сайтове, на които има препратки&nbsp;%1<br /> (%2)  (<a href="%3">списък на отделните страници</a>):',
-	'DomainsSitesPagesGlobal'	=> 'Сайтове, на които има препратки<br /> (<a href="%1">списък на отделните страници</a>):',
 	'Last24Hours'				=> 'за последното денонощие',
 	'LastDays'					=> 'за последните %1 дни',
+	'DomainsSitesPages'			=> 'Сайтове, на които има препратки&nbsp;%1<br /> (%2)  (<a href="%3">списък на отделните страници</a>):',
+	'DomainsSitesPagesGlobal'	=> 'Сайтове, на които има препратки<br /> (<a href="%1">списък на отделните страници</a>):',
 	'ViewReferringSites'		=> '<a href="%1">Сайтове, препращащи на %2</a>',
-
 	'ViewReferringSitesGlobal'	=> '<a href="%1">Сайтове, препращащи</a>',
-
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'per page',
 	'ViewReferrersByTime'		=> 'от време',
@@ -366,9 +365,6 @@ $wacko_translation = array(
 	'YouDontOwn'				=> 'Вие не сте собственик на страница.',
 	'NotLoggedInThusOwned'		=> 'Вие не сте регистрирани в системата и затова Вашите страници не могат да бъдат намерени.',
 	'NoOrphaned'				=> 'Няма загубени страници. Отлично!',
-	'PagesLinkingTo'			=> 'Страници, препращащи на ',
-	'NoPageLinkingTo'			=> 'Няма препращащи страници',
-	'NoWantedPages'				=> 'Няма незапълнени страници. Отлично!',
 	'NoRecentComments'			=> 'Коментари отдавна не е имало.',
 	'LatestCommentBy'			=> 'последен коментирал',
 	'NoRecentlyCommented'		=> 'Коментари отдавна не е имало.',
@@ -393,8 +389,13 @@ $wacko_translation = array(
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
 
+	'PagesLinkingTo'			=> 'Страници, препращащи на ',
+	'NoPageLinkingTo'			=> 'Няма препращащи страници',
+	'NoWantedPages'				=> 'Няма незапълнени страници. Отлично!',
 	'RemoveWatch'				=> 'Спри огледа',
 	'SetWatch'					=> 'Оглед',
+	'WatchText'					=> 'Watch',
+	'UnWatchText'				=> 'Not follow',
 	'UserSettingsStored'		=> 'Вашите настройки са запазени',
 	'LoggedOut'					=> 'Вие излизате от системата',
 	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
@@ -466,6 +467,10 @@ $wacko_translation = array(
 	'ClonedRedirect'			=> 'Edit after creation',
 	'MassClone'					=> 'Clone entire cluster',
 
+	'SortComment'				=> 'Sort comment by',
+	'SortCommentAsc'			=> 'Most recent on bottom',
+	'SortCommentDesc'			=> 'Most recent on top',
+
 	'RenamePage'				=> 'Rename page',
 	'RenameText'				=> 'Преименувай',
 	'RenameTip'					=> 'Rename page',
@@ -507,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage'				=> 'Create a new page',
 	'CreateNewPageText'			=> 'Create',
 	'CreateNewPageTip'			=> 'Create a new page.',
+
 	'CreateRandomPage'			=> 'Create a random page',
 	'CreatePageButton'			=> 'Create',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
@@ -527,6 +533,7 @@ $wacko_translation = array(
 	'AllowMassemail'			=> 'Искам да получавам информация от администраторите',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
+	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'Преместено на адрес',
 	'CurrentPassword'			=> 'Въведете текущата парола',
 	'NewPassword'				=> 'Нова парола',
@@ -765,8 +772,8 @@ $wacko_translation = array(
 	'RegistrationLang'			=> 'Your language (Език)',
 	'InvalidWikiName'			=> 'Избраното име е неправилно',
 	'InvalidUserName'			=> 'Избраното име е неправилно',
-	'Bookmarks'					=> 'Предпочитано',
 	'PleaseLogin'				=> '((Settings Login Въведете име и парола))',
+	'Bookmarks'					=> 'Предпочитано',
 	'ReallyDeleteComment'		=> 'Наистина  ИЗТРИВАНЕ на комментара? <br />Възстановяването след това е невъзможно.',
 	'ForgotLink'				=> '((/Password Забравена парола?))',
 	'RegistrationClosed'		=> 'Регистрацията на тази страница е невъзможна. Свържете се с администратора.',
@@ -1115,6 +1122,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Unknown action',

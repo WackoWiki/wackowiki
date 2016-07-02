@@ -302,6 +302,7 @@ $wacko_translation = array(
 	'NoDifferences' => 'No differences.',
 	'History' => 'ajalugu',
 	'ReEditOldRevision' => 'Vana redigeeringu ümbermuutmine',
+
 	'ExternalPages' => 'Välised lehed on lingitud %1 (%2) (<a href="%3">vaata domeenide listi</a>):',
 	'ExternalPagesGlobal' => 'Saidid on lingitud Wiki lehele (%2) (<a href="%1">vaata domeenide listi</a>):',
 	'Last24Hours' => 'viimased 24 tundi',
@@ -309,9 +310,7 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Domeenide/saitide lehed on lingitud  %1 (%2)  (<a href="%3">vaata erinevate URL\'ide nimekirja</a>):',
 	'DomainsSitesPagesGlobal' => 'Domeenid/saidid on lingitud Wiki lehele (<a href="%1">vaata erinevate URL\'ide nimekirja</a>):',
 	'ViewReferringSites' => '<a href="%1">Vaata viidatud saite ainult %2 </a> ',
-
 	'ViewReferringSitesGlobal' => '<a href="%1">Vaata globaalselt viidatud saite</a>',
-
 	'ViewReferrersPage' => 'to page',
 	'ViewReferrersPerPage'	=> 'per page',
 	'ViewReferrersByTime'		=> 'by time',
@@ -513,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage' => 'Create a new page',
 	'CreateNewPageText' => 'Create',
 	'CreateNewPageTip' => 'Create a new page.',
+
 	'CreateRandomPage' => 'Create a random page',
 	'CreatePageButton' => 'Create',
 	'CreateSubPage' => 'Create a sub page in the cluster',
@@ -705,6 +705,7 @@ $wacko_translation = array(
 	'SettingsPurge' => 'Purge',
 	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'Kasutaja õiguste loend',
+	'AclForEntireCluster' => 'Kogu grupi kasutaja õiguste loend',
 	'SettingsUpload' => 'Üleslaadimine',
 	'SettingsCategories' => 'Categories',
 	'SettingsReferrers' => 'Viitamine',
@@ -713,7 +714,6 @@ $wacko_translation = array(
 	'SettingsWordprocessor' => 'Tekstitöötlusprogramm versioon',
 	'SettingsLatex' => 'LaTeX versioon',
 	'SettingsXML' => 'Export to XML',
-	'AclForEntireCluster' => 'Kogu grupi kasutaja õiguste loend',
 	'BewareChangeLang' => 'Ära muuda keelt, kui sa ei ole päris kindel selles, mida sa teed. Kogu mitte-inglisekeelne sisu võib muuta loetamatuks. Sa saad seda tegevust tagasi pöörata, kui muudad keeleseadistuse tagasi selle algolekusse. ',
 	'SetLang' => 'Selle lehe keel',
 	'SetMenuLabel' => 'Menu label',
@@ -1122,6 +1122,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Unknown action',

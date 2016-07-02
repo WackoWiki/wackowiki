@@ -302,6 +302,7 @@ $wacko_translation = array(
 	'NoDifferences'				=> 'No differenze.',
 	'History'					=> 'cronistoria',
 	'ReEditOldRevision'			=> 'Ri-edita questa vecchia revisione',
+
 	'ExternalPages'				=> 'Per pagine esterne collegate a %1 (%2) (<a href="%3">vedi la lista dei domini</a>):',
 	'ExternalPagesGlobal'		=> 'Per i siti collegati a WackoWiki (%2) (<a href="%1"> vedi la lista dei domini </a>):',
 	'Last24Hours'				=> 'ultime 24 ore',
@@ -309,9 +310,7 @@ $wacko_translation = array(
 	'DomainsSitesPages'			=> 'Per pagine di domini/siti collegati a %1 (%2)  (<a href="%3"> vedi la lista dei differenti URL </a>):',
 	'DomainsSitesPagesGlobal'	=> 'Per domini/siti collegati a WackoWiki (<a href="%1">vedi la lista di differenti URL</a>):',
 	'ViewReferringSites'		=> '<a href="%1">Osserva i siti di riferimento per %2 soltanto</a> ',
-
 	'ViewReferringSitesGlobal'	=> '<a href="%1">Osserva i siti dei riferimenti globali </a>',
-
 	'ViewReferrersPage'			=> 'alla pagina',
 	'ViewReferrersPerPage'		=> 'per pagina',
 	'ViewReferrersByTime'		=> 'da tempo',
@@ -513,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage'				=> 'Creare una nuova pagina',
 	'CreateNewPageText'			=> 'Create',
 	'CreateNewPageTip'			=> 'Create a new page.',
+
 	'CreateRandomPage'			=> 'Creare una pagina casuale',
 	'CreatePageButton'			=> 'Crea',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
@@ -1121,6 +1121,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Sconosciuto azione',
