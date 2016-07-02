@@ -314,11 +314,15 @@ else
 	</header>
 	<main>
 <?php
+
 // here we show messages
-if (version_compare(PHP_VERSION, PHP_MIN_VERSION) < 0 && !@$_SESSION['version_check'])
+if (!@$_SESSION['MinPHPVersion'])
 {
-	$this->show_message($this->get_translation('ErrorMinPHPVersion'), 'error'); // STS: todo
-	$_SESSION['version_check'] = 1;
+	if (version_compare(PHP_VERSION, PHP_MIN_VERSION) < 0)
+	{
+		$this->show_message($this->get_translation('ErrorMinPHPVersion'), 'error');
+	}
+	$_SESSION['MinPHPVersion'] = 1;
 }
 $this->output_messages();
 ?>
