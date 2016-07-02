@@ -274,8 +274,8 @@ if ($this->can_upload() === true)
 
 					// 3. remove from FS
 					$real_filename = ($page_id
-						? (UPLOAD_DIR_PER_PAGE.'/@'.$page_id.'@')
-						: (UPLOAD_DIR_GLOBAL.'/')).
+						? (UPLOAD_PER_PAGE_DIR.'/@'.$page_id.'@')
+						: (UPLOAD_GLOBAL_DIR.'/')).
 						$file['file_name'];
 
 					if (@unlink($real_filename))
@@ -434,11 +434,11 @@ if ($this->can_upload() === true)
 
 					if ($is_global)
 					{
-						$dir = UPLOAD_DIR_GLOBAL.'/';
+						$dir = UPLOAD_GLOBAL_DIR.'/';
 					}
 					else
 					{
-						$dir = UPLOAD_DIR_PER_PAGE.'/';
+						$dir = UPLOAD_PER_PAGE_DIR.'/';
 					}
 
 					if (is_writable($dir))

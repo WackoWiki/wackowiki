@@ -101,7 +101,7 @@ if ($file)
 		|| ($this->has_access('read')) || ($file['user_id'] == $this->get_user_id()) )
 		{
 			$file_path = join_path(
-				($page_id? UPLOAD_DIR_PER_PAGE : UPLOAD_DIR_GLOBAL),
+				($page_id? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
 				($page_id
 					? '@'.$this->page['page_id'].'@'
 					: '').
