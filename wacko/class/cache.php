@@ -8,8 +8,6 @@ if (!defined('IN_WACKO'))
 class Cache
 {
 	var $cache_ttl	= 600;
-	var $cache_dir	= '_cache/';
-	var $debug		= 0;
 	var $page;
 	var $hash;
 	var $method;
@@ -18,11 +16,9 @@ class Cache
 	var $sqlfile;
 
 	// Constructor
-	function __construct($cache_dir, $cache_ttl, $debug)
+	function __construct($cache_ttl)
 	{
-		$this->cache_dir	= $cache_dir;
 		$this->cache_ttl	= $cache_ttl;
-		$this->debug		= $debug;
 		$this->timer		= microtime(1);
 	}
 
@@ -60,7 +56,7 @@ class Cache
 		if ($this->wacko->config->cache_sql)
 		{
 			$past = time() - $this->wacko->config->cache_sql_ttl - 1;
-			foreach (file_glob($this->wacko->config->cache_dir, CACHE_SQL_DIR, '*') as $file)
+			foreach (file_glob(CACHE_SQL_DIR, '*') as $file)
 			{
 				touch($file, $past); // touching is faster than unlinking
 			}
@@ -80,7 +76,7 @@ class Cache
 				return $x[0];
 			}, $query);
 
-		return join_path($this->cache_dir, CACHE_SQL_DIR, hash('sha1', $query));
+		return join_path(CACHE_SQL_DIR, hash('sha1', $query));
 	}
 
 	// http cache =====================================================
@@ -161,7 +157,7 @@ class Cache
 
 	function construct_id($page, $method, $query)
 	{
-		return join_path($this->cache_dir, CACHE_PAGE_DIR, hash('sha1', ($page . '_' . $method . '_' . $query)));
+		return join_path(CACHE_PAGE_DIR, hash('sha1', ($page . '_' . $method . '_' . $query)));
 	}
 
 	// Check http-request. May be, output cached version.
@@ -260,7 +256,7 @@ class Cache
 		$now = time();
 		clearstatcache();
 
-		foreach (file_glob($this->wacko->config->cache_dir, $directory, '*') as $file)
+		foreach (file_glob($directory, '*') as $file)
 		{
 			if ($now - filemtime($file) > $ttl && unlink($file))
 			{

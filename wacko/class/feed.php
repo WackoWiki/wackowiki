@@ -31,7 +31,7 @@ class Feed
 
 	function write_file($name, $body)
 	{
-		$file_name = 'xml/'.$name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->config['site_name'])).'.xml';
+		$file_name = join_path(XML_DIR, $name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->config['site_name'])).'.xml');
 		@file_put_contents($file_name, $body);
 		@chmod($file_name, 0644);
 	}
@@ -356,11 +356,7 @@ class Feed
 
 		$xml .= "</urlset>\n";
 
-		$filename = 'sitemap.xml';
-
-		file_put_contents($filename, $xml);
-		@chmod($filename, 0644);
+		file_put_contents(SITEMAP_XML, $xml);
+		@chmod(SITEMAP_XML, 0644);
 	}
 }
-
-?>

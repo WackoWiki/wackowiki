@@ -37,6 +37,7 @@ function admin_config_filter(&$engine, &$module)
 	</p>
 	<br />
 <?php
+	$file_name = join_path(CONFIG_DIR, 'antispam.conf');
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
@@ -56,7 +57,6 @@ function admin_config_filter(&$engine, &$module)
 
 			// write antispam.conf file
 			$phrase_list	= (string)$_POST['phrase_list'];
-			$file_name		= 'config/antispam.conf';
 			file_put_contents($file_name, $phrase_list);
 			chmod($file_name, 0644);
 
@@ -66,7 +66,7 @@ function admin_config_filter(&$engine, &$module)
 		}
 	}
 
-	$phrases = implode('', file('config/antispam.conf', 1));
+	$phrases = file_get_contents($file_name);
 
 	echo $engine->form_open('filter', '', 'post', true, '', '');
 ?>

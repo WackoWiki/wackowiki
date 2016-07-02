@@ -5,6 +5,29 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+define('CONFIG_DIR',					'config');			// but look for hardcoded use 'config/constants.php'
+define('CONFIG_FILE',					'config/config.php');
+define('CONFIG_DEFAULTS',				'config/config_defaults.php');
+define('SITE_LOCK',						'config/lock');
+define('AP_LOCK',						'config/lock_ap');
+
+define('ACTION_PATH',					'action');
+define('FORMATTER_DIR',					'formatter');
+define('HANDLER_DIR',					'handler');
+define('THEME_DIR',						'theme');
+define('UPLOAD_DIR_GLOBAL',				'files/global');
+define('UPLOAD_DIR_PER_PAGE',			'files/perpage');
+define('UPLOAD_DIR_BACKUP',				'files/backup');
+define('XML_DIR',						'xml');
+
+define('CACHE_DIR',						'_cache');
+define('CACHE_CONFIG_DIR',				'_cache/config');
+define('CACHE_FEED_DIR',				'_cache/feeds');
+define('CACHE_PAGE_DIR',				'_cache/pages');
+define('CACHE_SQL_DIR',					'_cache/queries');
+
+define('SITEMAP_XML',					'sitemap.xml');
+
 define('DAYSECS',						86400);				// 24 * 60 * 60
 
 define('BACKUP_COMPRESSION_RATE',		9);					// gzip compression rate
@@ -13,11 +36,6 @@ define('BACKUP_FILE_LOG',				'backup.log');		// backup log filename
 define('BACKUP_FILE_STRUCTURE',			'structure.sql');	// tables structure filename
 define('BACKUP_FILE_DUMP_SUFFIX',		'.dat.gz');			// tables dump filename suffix
 define('BACKUP_FILE_GZIP_SUFFIX',		'.gz');				// regular compressed files suffix
-
-define('CACHE_CONFIG_DIR',				'config/');
-define('CACHE_FEED_DIR',				'feeds/');
-define('CACHE_PAGE_DIR',				'pages/');
-define('CACHE_SQL_DIR',					'queries/');
 
 define('GUEST',							'guest@wacko');
 define('INTERCOM_MAX_SIZE',				262144);
@@ -70,4 +88,3 @@ define('ACTION4DIFF',					'anchor, toc'); //allowed actions in DIFF
 define('PHP_MIN_VERSION',				'5.4.0'); //minimum required PHP version
 define('PHP_ERROR_REPORTING',			6); // PHP error reporting: 0 - off, 5 - all
 
-?>

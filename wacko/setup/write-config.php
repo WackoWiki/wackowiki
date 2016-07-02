@@ -6,6 +6,7 @@ if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty
 	$config['database_port'] = $config['database_port'] = '3306';
 }
 
+/* STS:
 if ($config['wacko_version'] == '5.0.0')
 {
 	// reset old default upload path to new location
@@ -28,7 +29,7 @@ if ($config['wacko_version'] == '5.4.0')
 	{
 		$config['handler_path'] = 'handler';
 	}
-}
+} */
 
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
@@ -55,21 +56,8 @@ $config_file['table_prefix']			= $config['table_prefix'];
 $config_file['system_seed']				= $config['system_seed'];
 $config_file['recovery_password']		= $config['recovery_password'];
 $config_file['hashid_seed']				= $config['hashid_seed'];
-// paths
-$config_file['cache_dir']				= $config['cache_dir'];
-$config_file['action_path']				= $config['action_path'];
-$config_file['class_path']				= $config['class_path'];
-$config_file['formatter_path']			= $config['formatter_path'];
-$config_file['handler_path']			= $config['handler_path'];
-$config_file['theme_path']				= $config['theme_path'];
-$config_file['upload_path']				= $config['upload_path'];
-$config_file['upload_path_per_page']	= $config['upload_path_per_page'];
-$config_file['upload_path_backup']		= $config['upload_path_backup'];
-$config_file['header_action']			= $config['header_action'];
-$config_file['footer_action']			= $config['footer_action'];
 // version
 $config_file['wacko_version']			= $config['wacko_version'];
-#$config_file['']						= $config[''];
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	END MANDATORY CONFIGURATION
@@ -85,7 +73,7 @@ echo "         <ul>\n";
 echo "            <li>".$lang['Writing']." - ";
 
 $perm_changed	= true;
-$file_name		= 'config/config.php';
+$file_name		= CONFIG_FILE;
 
 if (is_writable($file_name))
 {

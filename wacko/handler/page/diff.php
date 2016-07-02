@@ -128,7 +128,7 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 		break;
 
 	case 0:
-		require_once($this->config['handler_path'] . '/page/_diff.php');
+		require_once(join_path(HANDLER_DIR, 'page/_diff.php'));
 		// load pages
 
 		// extract text from bodies

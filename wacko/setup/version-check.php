@@ -70,50 +70,50 @@ write_config_hidden_nodes(array('none' => ''));
 	 */
 
 	// Try applying the correct permissions now and then display whether it worked or not, if they fail then the user will have to manually set the permissions
-	@chmod ('_cache/config', 0777);
-	@chmod ('_cache/feeds', 0777);
-	@chmod ('_cache/pages', 0777);
-	@chmod ('_cache/queries', 0777);
-	@chmod ('config/config.php', 0777);
-	@chmod ('config/lock', 0660);
-	@chmod ('config/lock_ap', 0660);
-	@chmod ('files/backup', 0777);
-	@chmod ('files/global', 0777);
-	@chmod ('files/perpage', 0777);
-	@chmod ('xml', 0777);
-	@chmod ('sitemap.xml', 0777);
+	@chmod (CACHE_CONFIG_DIR, 0777);
+	@chmod (CACHE_FEED_DIR, 0777);
+	@chmod (CACHE_PAGE_DIR, 0777);
+	@chmod (CACHE_SQL_DIR, 0777);
+	@chmod (CONFIG_FILE, 0777);
+	@chmod (SITE_LOCK, 0660);
+	@chmod (AP_LOCK, 0660);
+	@chmod (UPLOAD_DIR_BACKUP, 0777);
+	@chmod (UPLOAD_DIR_GLOBAL, 0777);
+	@chmod (UPLOAD_DIR_PER_PAGE, 0777);
+	@chmod (XML_DIR, 0777);
+	@chmod (SITEMAP_XML, 0777);
 
 
 	// If the cache directory is writable then we can enable caching as default
 	echo '            <input type="hidden" name="config[cache]" value="'.(is_writable('_cache/') ? '1' : $config['cache']).'" />'."\n";
 
-	$file_permissions_result =	   is_writable('_cache/config/')
-								&& is_writable('_cache/feeds/')
-								&& is_writable('_cache/pages/')
-								&& is_writable('_cache/queries/')
-								&& is_writable('config/config.php')
-								&& is_writable('config/lock')
-								&& is_writable('config/lock_ap')
-								&& is_writable('files/backup/')
-								&& is_writable('files/global/')
-								&& is_writable('files/perpage/')
-								&& is_writable('xml/')
-								&& is_writable('sitemap.xml');
+	$file_permissions_result =	   is_writable(CACHE_CONFIG_DIR)
+								&& is_writable(CACHE_FEED_DIR)
+								&& is_writable(CACHE_PAGE_DIR)
+								&& is_writable(CACHE_SQL_DIR)
+								&& is_writable(CONFIG_FILE)
+								&& is_writable(SITE_LOCK)
+								&& is_writable(AP_LOCK)
+								&& is_writable(UPLOAD_DIR_BACKUP)
+								&& is_writable(UPLOAD_DIR_GLOBAL)
+								&& is_writable(UPLOAD_DIR_PERPAGE)
+								&& is_writable(XML_DIR)
+								&& is_writable(SITEMAP_XML);
 	?>
 <h2><?php echo $lang['Permissions']; ?></h2>
 <ul>
-	<li>_cache/config   <?php		echo output_image(is_writable('_cache/config/')); ?></li>
-	<li>_cache/feeds   <?php		echo output_image(is_writable('_cache/feeds/')); ?></li>
-	<li>_cache/pages   <?php		echo output_image(is_writable('_cache/pages/')); ?></li>
-	<li>_cache/queries   <?php		echo output_image(is_writable('_cache/queries/')); ?></li>
-	<li>config/config.php   <?php	echo output_image(is_writable('config/config.php')); ?></li>
-	<li>config/lock   <?php			echo output_image(is_writable('config/lock')); ?></li>
-	<li>config/lock_ap   <?php		echo output_image(is_writable('config/lock_ap')); ?></li>
-	<li>files/backup   <?php		echo output_image(is_writable('files/backup/')); ?></li>
-	<li>files/global   <?php		echo output_image(is_writable('files/global/')); ?></li>
-	<li>files/perpage   <?php		echo output_image(is_writable('files/perpage/')); ?></li>
-	<li>xml   <?php					echo output_image(is_writable('xml/')); ?></li>
-	<li>sitemap.xml   <?php			echo output_image(is_writable('sitemap.xml')); ?></li>
+	<li>_cache/config   <?php		echo output_image(is_writable(CACHE_CONFIG_DIR)); ?></li>
+	<li>_cache/feeds   <?php		echo output_image(is_writable(CACHE_FEED_DIR)); ?></li>
+	<li>_cache/pages   <?php		echo output_image(is_writable(CACHE_PAGE_DIR)); ?></li>
+	<li>_cache/queries   <?php		echo output_image(is_writable(CACHE_SQL_DIR)); ?></li>
+	<li>config/config.php   <?php	echo output_image(is_writable(CONFIG_FILE)); ?></li>
+	<li>config/lock   <?php			echo output_image(is_writable(SITE_LOCK)); ?></li>
+	<li>config/lock_ap   <?php		echo output_image(is_writable(AP_LOCK)); ?></li>
+	<li>files/backup   <?php		echo output_image(is_writable(UPLOAD_DIR_BACKUP)); ?></li>
+	<li>files/global   <?php		echo output_image(is_writable(UPLOAD_DIR_GLOBAL)); ?></li>
+	<li>files/perpage   <?php		echo output_image(is_writable(UPLOAD_DIR_PER_PAGE)); ?></li>
+	<li>xml   <?php					echo output_image(is_writable(XML_DIR)); ?></li>
+	<li>sitemap.xml   <?php			echo output_image(is_writable(SITEMAP_XML)); ?></li>
 </ul>
 	<?php
 	/*

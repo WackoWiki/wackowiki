@@ -100,11 +100,12 @@ if ($file)
 		if ($this->is_admin() || (isset($file['upload_id']) && ($this->page['owner_id'] == $this->get_user_id()))
 		|| ($this->has_access('read')) || ($file['user_id'] == $this->get_user_id()) )
 		{
-			$file_path = $this->config['upload_path'.($page_id ? '_per_page' : '')].'/'.
+			$file_path = join_path(
+				($page_id? UPLOAD_DIR_PER_PAGE : UPLOAD_DIR_GLOBAL),
 				($page_id
 					? '@'.$this->page['page_id'].'@'
 					: '').
-				$file['file_name'];
+				$file['file_name']);
 		}
 		else
 		{

@@ -312,11 +312,11 @@ class Wacko
 	{
 		$theme_list	= [];
 
-		if (($handle = opendir($this->config['theme_path'])))
+		if (($handle = opendir(THEME_DIR)))
 		{
 			while (false !== ($file = readdir($handle)))
 			{
-				if ($file != '.' && $file != '..' && is_dir($this->config['theme_path'].'/'.$file) && $file != '_common')
+				if ($file != '.' && $file != '..' && is_dir(join_path(THEME_DIR, $file)) && $file != '_common')
 				{
 					$theme_list[] = $file;
 				}
@@ -458,7 +458,7 @@ class Wacko
 			{
 				// TODO: only FIRST theme's language loaded.... need to fix for multi-themed sites w/ nonempty theme lang files
 				// theme lang files $theme_translation[]
-				$lang_file = $this->config['theme_path'].'/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
+				$lang_file = join_path(THEME_DIR, $this->config['theme'], 'lang/wacko.'.$lang.'.php');
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
@@ -467,7 +467,7 @@ class Wacko
 
 				// wacko.all theme
 				$theme_translation = [];
-				$lang_file = $this->config['theme_path'].'/'.$this->config['theme'].'/lang/wacko.all.php';
+				$lang_file = join_path(THEME_DIR, $this->config['theme'], 'lang/wacko.all.php');
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
@@ -1744,7 +1744,7 @@ class Wacko
 		if ($this->config['spam_filter'])
 		{
 			// TODO: read table word and cache it
-			$this->spam = file('config/antispam.conf', 1);
+			$this->spam = file(join_path(CONFIG_DIF, 'antispam.conf'), 1);
 
 			if (is_array($this->spam))
 			{
@@ -2476,7 +2476,7 @@ class Wacko
 			$_GET['a']			= -1;
 			$_GET['b']			= $page['revision_id'];
 			$_GET['diffmode']	= 2; // 2 - source diff
-			$diff				= $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops');
+			$diff				= $this->include_buffered('page/diff.php', 'oops', '', HANDLER_DIR);
 		}
 
 		// get watchers
@@ -3280,7 +3280,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url = $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+					$url = $this->config['base_url'].join_path(UPLOAD_DIR_GLOBAL, $file_name);
 					$have_global = true;
 
 					// tracking file link
@@ -3297,7 +3297,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url = $this->config['base_url'].$this->config['upload_path'].'/'.$file_name;
+					$url = $this->config['base_url'].join_path(UPLOAD_DIR_GLOBAL, $file_name);
 
 					// tracking file link
 					if ($track && isset($file_data['upload_id']))
@@ -3402,20 +3402,20 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" '.
+								return '<img src="'.$this->config['base_url'].join_path(UPLOAD_DIR_GLOBAL, $file_name).'" '.
 										($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').$scale.$resize.' />';
 							}
 							else
 							{
 								// continue
-								#return '<a href="'.$this->config['base_url'].$this->config['upload_path'].'/'.$file_name.'" title="'.$title.'">'.$text.'</a>';
+								#return '<a href="'.$this->config['base_url'].join_path(UPLOAD_DIR_GLOBAL, $file_name).'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
 						else
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							#return '<img src="'.$this->config['base_url'].$this->config['upload_path_per_page'].'/'.'@'.$file_data['page_id'].'@'.$_file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+							#return '<img src="'.$this->config['base_url'].join_path(UPLOAD_DIR_PER_PAGE, '@'.$file_data['page_id'].'@'.$_file).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
 							if (!$text)
 							{
 								$text = $title;
@@ -3446,7 +3446,7 @@ class Wacko
 
 				if ($_global == true)
 				{
-					$title	= '404: /'.$this->config['upload_path'].'/'.$file_name;
+					$title	= '404: /'.join_path(UPLOAD_DIR_GLOBAL, $file_name);
 				}
 				else
 				{
@@ -4126,7 +4126,7 @@ class Wacko
 	// INTERWIKI STUFF
 	function read_inter_wiki_config()
 	{
-		if ($lines = file('config/interwiki.conf'))
+		if ($lines = file(join_path(CONFIG_DIR, 'interwiki.conf')))
 		{
 			foreach ($lines as $line)
 			{
@@ -4363,7 +4363,7 @@ class Wacko
 	{
 		foreach (($__path? explode(':', $__path) : ['']) as $__dir)
 		{
-			$__pathname = trim($__dir . '/' . $__filename, './');
+			$__pathname = join_path($__dir, $__filename);
 
 			if (@file_exists($__pathname))
 			{
@@ -4396,7 +4396,7 @@ class Wacko
 
 	function theme_header($mod = '')
 	{
-		$theme_path		= $this->config['theme_path'].'/'.$this->config['theme'].'/appearance';
+		$theme_path		= join_path(THEME_DIR, $this->config['theme'], 'appearance');
 		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
 
 		return $this->include_buffered('header'.$mod.'.php', $error_message, '', $theme_path);
@@ -4404,7 +4404,7 @@ class Wacko
 
 	function theme_footer($mod = '')
 	{
-		$theme_path		= $this->config['theme_path'].'/'.$this->config['theme'].'/appearance';
+		$theme_path		= join_path(THEME_DIR, $this->config['theme'], 'appearance');
 		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
 
 		return $this->include_buffered('footer'.$mod.'.php', $error_message, '', $theme_path);
@@ -4429,7 +4429,7 @@ class Wacko
 			$this->stop_link_tracking();
 		}
 
-		$result = $this->include_buffered($action . '.php', $errmsg, $params, $this->config['action_path']);
+		$result = $this->include_buffered($action . '.php', $errmsg, $params, ACTION_PATH);
 
 		$this->start_link_tracking();
 		$this->no_cache();
@@ -4447,7 +4447,7 @@ class Wacko
 		$method_location = $handler.'/'.$method.'.php';
 		$errmsg = '<em>' . $this->get_translation('UnknownMethod') . ' "<code>' . $method_location . '</code>"</em>';
 
-		return $this->include_buffered($method_location, $errmsg, '', $this->config['handler_path']);
+		return $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
 	}
 
 	// wrapper for the next method
@@ -4459,11 +4459,11 @@ class Wacko
 	function _format($text, $formatter, &$options)
 	{
 		$err = '<em>'.perc_replace($this->get_translation('FormatterNotFound'), $formatter).'</em>';
-		$text = $this->include_buffered($this->config['formatter_path'].'/'.$formatter.'.php', $err, compact('text', 'options'));
+		$text = $this->include_buffered(join_path(FORMATTER_DIR, $formatter.'.php'), $err, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
-			$text = $this->include_buffered($this->config['formatter_path'].'/typografica.php', $err, compact('text'));
+			$text = $this->include_buffered(join_path(FORMATTER_DIR, 'typografica.php'), $err, compact('text'));
 		}
 
 		return $text;
@@ -6232,7 +6232,7 @@ class Wacko
 		{
 			$this->config['open_url']		= $this->config['base_url'];
 			$this->config['base_url']		= str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
-			$this->config['theme_url']		= $this->config['base_url'].$this->config['theme_path'].'/'.$this->config['theme'].'/';
+			$this->config['theme_url']		= $this->config['base_url'].join_path(THEME_DIR, $this->config['theme']).'/';
 			$this->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
 		}
 
@@ -6300,7 +6300,7 @@ class Wacko
 		if (isset($user['theme']))
 		{
 			$this->config['theme']		= $user['theme'];
-			$this->config['theme_url']	= $this->config['base_url'].$this->config['theme_path'].'/'.$this->config['theme'].'/';
+			$this->config['theme_url']	= $this->config['base_url'].join_path(THEME_DIR, $this->config['theme']).'/';
 		}
 
 		// SEO
@@ -6386,7 +6386,7 @@ class Wacko
 		$this->set_menu();
 
 		// charset
-		$this->charset	= $this->get_charset();
+		$this->charset = $this->get_charset();
 
 		if ($this->page)
 		{
@@ -6412,7 +6412,7 @@ class Wacko
 				}
 			}
 
-			$this->config['theme_url']	= $this->config['base_url'].$this->config['theme_path'].'/'.$this->config['theme'].'/';
+			$this->config['theme_url'] = $this->config['base_url'].join_path(THEME_DIR, $this->config['theme']).'/';
 
 			// set page categories. this defines $categories (array) object property
 			$categories = $this->load_categories('', $this->page['page_id']);
@@ -7032,8 +7032,8 @@ class Wacko
 				/*foreach ($files as $file)
 				{
 					// remove from FS
-					$file_name = $this->config['upload_path_per_page'].'/@'.
-							$page['page_id'].'@'.$file['file_name'];
+					$file_name = join_path(UPLOAD_DIR_PER_PAGE, '@'.
+							$page['page_id'].'@'.$file['file_name']);
 
 					@unlink($file_name);
 				}*/
@@ -7049,8 +7049,8 @@ class Wacko
 				foreach ($files as $file)
 				{
 					// remove from FS
-					$file_name = $this->config['upload_path_per_page'].'/@'.
-						$page['page_id'].'@'.$file['file_name'];
+					$file_name = join_path(UPLOAD_DIR_PER_PAGE, '@'.
+						$page['page_id'].'@'.$file['file_name']);
 
 					@unlink($file_name);
 				}
