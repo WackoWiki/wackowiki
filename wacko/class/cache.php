@@ -230,14 +230,6 @@ class Cache
 
 				echo $cached_page;
 
-				// how much time script take
-				if ($this->debug >= 1 && strpos($method, '.xml') === false)
-				{
-					$ddd = microtime(1);
-					echo '<div id="debug" class="debug">cache time: '.(number_format(($ddd-$this->timer), 3)).' s<br />';
-					echo '</div>';
-				}
-
 				if (strpos($method, '.xml') === false)
 				{
 					echo '</body></html>';

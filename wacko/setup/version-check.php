@@ -96,7 +96,7 @@ write_config_hidden_nodes(array('none' => ''));
 								&& is_writable(AP_LOCK)
 								&& is_writable(UPLOAD_DIR_BACKUP)
 								&& is_writable(UPLOAD_DIR_GLOBAL)
-								&& is_writable(UPLOAD_DIR_PERPAGE)
+								&& is_writable(UPLOAD_DIR_PER_PAGE)
 								&& is_writable(XML_DIR)
 								&& is_writable(SITEMAP_XML);
 	?>
