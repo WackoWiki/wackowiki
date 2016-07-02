@@ -12,6 +12,7 @@ define('SITE_LOCK',						'config/lock');
 define('AP_LOCK',						'config/lock_ap');
 
 define('ACTION_DIR',					'action');
+define('LANG_DIR',						'lang');
 define('FORMATTER_DIR',					'formatter');
 define('HANDLER_DIR',					'handler');
 define('THEME_DIR',						'theme');

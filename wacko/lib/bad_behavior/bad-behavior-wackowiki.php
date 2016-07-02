@@ -33,8 +33,7 @@ if (!defined('IN_WACKO'))
 	die('I said no cheating!');
 }
 
-$bb2_mtime			= explode(' ', microtime());
-$bb2_timer_start	= $bb2_mtime[1] + $bb2_mtime[0];
+$bb2_timer_start	= microtime(1);
 
 define('BB2_CWD', dirname(__FILE__));
 
@@ -43,7 +42,7 @@ define('BB2_CWD', dirname(__FILE__));
 // DO NOT EDIT HERE; instead make changes in settings.ini.
 // These settings are used when settings.ini is not present.
 $bb2_settings_defaults = array(
-	'log_table' => $init->config['table_prefix'] . 'bad_behavior',
+	'log_table' => $config->table_prefix . 'bad_behavior',
 	'display_stats' => false,
 	'strict' => false,
 	'verbose' => false,
@@ -127,14 +126,14 @@ function bb2_db_date() {
 
 // Return affected rows from most recent query.
 function bb2_db_affected_rows($result) {
-	global $init;
-	return affected_rows($init->dblink, $result);
+	global $config;
+	return affected_rows($config->dbal(), $result);
 }
 
 // Escape a string for database usage
 function bb2_db_escape($string) {
-	global $init;
-	return quote($init->dblink, $string);
+	global $config;
+	return quote($config->dbal(), $string);
 #	return $string;	// No-op when database not in use.
 }
 
@@ -149,8 +148,8 @@ function bb2_db_num_rows($result) {
 // Should return FALSE if an error occurred.
 // Bad Behavior will use the return value here in other callbacks.
 function bb2_db_query($query) {
-	global $init;
-	return sql_query($init->dblink, $query, 0);
+	global $config;
+	return sql_query($config->dbal(), $query, 0);
 }
 
 // Return all rows in a particular query.
@@ -170,8 +169,8 @@ function bb2_db_rows($result) {
 
 // Return emergency contact email address.
 function bb2_email() {
-	global $init;
-	return $init->config['abuse_email'];	// You need to change this.
+	global $config;
+	return $config->abuse_email;	// You need to change this.
 }
 
 // retrieve whitelist
@@ -231,9 +230,9 @@ function bb2_insert_stats($force = false) {
 // Return the top-level relative path of wherever we are (for cookies)
 // You should provide in $url the top-level URL for your site.
 function bb2_relative_path() {
-	global $init;
+	global $config;
 
-	return $init->config['cookie_path'];
+	return $config->cookie_path;
 }
 
 // Calls inward to Bad Behavor itself.
@@ -242,8 +241,6 @@ bb2_install();	// FIXME: see above
 
 bb2_start(bb2_read_settings());
 
-$bb2_mtime			= explode(' ', microtime());
-$bb2_timer_stop		= $bb2_mtime[1]		+ $bb2_mtime[0];
-$bb2_timer_total	= $bb2_timer_stop	- $bb2_timer_start;
+$bb2_timer_total	= microtime(1) - $bb2_timer_start;
 
 ?>
