@@ -312,29 +312,18 @@ class Wacko
 	{
 		$theme_list	= [];
 
-		if (($handle = opendir(THEME_DIR)))
+		foreach (file_glob(THEME_DIR, '*/appearance/header.php') as $file)
 		{
-			while (false !== ($file = readdir($handle)))
-			{
-				if ($file != '.' && $file != '..' && is_dir(join_path(THEME_DIR, $file)) && $file != '_common')
-				{
-					$theme_list[] = $file;
-				}
-			}
-
-			closedir($handle);
+			$theme = substr($file, strlen(THEME_DIR) + 1);
+			$theme = substr($theme, 0, strpos($theme, '/'));
+			$theme_list[] = $theme;
 		}
 
 		sort($theme_list, SORT_STRING);
 
-		if ($allow = trim($this->config['allow_themes']))
+		if (($allow = preg_split('/[\s,]+/', $this->config->allow_themes, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
 		{
-			$ath = explode(',', $allow);
-
-			if (is_array($ath) && $ath[0])
-			{
-				$theme_list = array_intersect ($ath, $theme_list);
-			}
+			$theme_list = array_intersect($theme_list, $allow);
 		}
 
 		return $theme_list;
@@ -421,7 +410,7 @@ class Wacko
 		{
 			// wacko.xy.php $wacko_translation[]
 			$wacko_translation = [];
-			$lang_file = 'lang/wacko.'.$lang.'.php';
+			$lang_file = join_path(LANG_DIR, 'wacko.'.$lang.'.php');
 			if (@file_exists($lang_file))
 			{
 				include($lang_file);
@@ -431,7 +420,7 @@ class Wacko
 			if (!isset($this->translations['all']))
 			{
 				$wacko_all_resource = [];
-				$lang_file = 'lang/wacko.all.php';
+				$lang_file = join_path(LANG_DIR, 'wacko.all.php');
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
@@ -493,7 +482,7 @@ class Wacko
 	{
 		if ($lang && !isset($this->languages[$lang]))
 		{
-			$lang_file = 'lang/lang.' . $lang . '.php';
+			$lang_file = join_path(LANG_DIR, 'lang.' . $lang . '.php');
 			$wacko_language = [];
 			require($lang_file);
 
@@ -528,22 +517,14 @@ class Wacko
 			$cache = &$_SESSION['available_languages'];
 			if (!isset($cache))
 			{
-				$lang_list = array();
+				$lang_list = [];
 
-				if (($handle = opendir('lang')))
+				foreach (file_glob(LANG_DIR, 'wacko.[a-z][a-z].php') as $file)
 				{
-					while (false !== ($file = readdir($handle)))
-					{
-						if (is_file('lang/'.$file) && is_readable('lang/'.$file)
-								&& preg_match('/^wacko\.([a-z][a-z])\.php$/', $file, $match))
-						{
-							$lang_list[] = $match[1];
-						}
-					}
-					closedir($handle);
-					sort($lang_list, SORT_STRING);
+					$lang_list[] = substr($file, -6, 2);
 				}
 
+				sort($lang_list, SORT_STRING);
 				$cache = $lang_list;
 			}
 
@@ -551,20 +532,10 @@ class Wacko
 		}
 
 		// allowed languages
-		if ($subset && $this->config['allowed_languages'])
+		$list = $this->_lang_list;
+		if ($subset && ($allow = preg_split('/[\s,]+/', $this->config->allowed_languages, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
 		{
-			$list = array();
-			foreach (explode(',', $this->config['allowed_languages']) as $lang)
-			{
-				if (in_array($lang, $this->_lang_list))
-				{
-					$list[] = $lang;
-				}
-			}
-		}
-		else
-		{
-			$list = $this->_lang_list;
+			$list = array_intersect($list, $allow);
 		}
 
 		return $list;
@@ -3185,7 +3156,7 @@ class Wacko
 			// this is a valid Email
 			$url	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:'.$tag);
 			$title	= $this->get_translation('EmailLink');
-			$icon	= $this->get_translation('outericon');
+			$icon	= $this->get_translation('OuterIcon');
 			$class	= '';
 			$tpl	= 'email';
 		}
@@ -3194,7 +3165,7 @@ class Wacko
 			// this is a valid XMPP address
 			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:'.$tag);
 			$title	= $this->get_translation('JabberLink');
-			$icon	= $this->get_translation('outericon');
+			$icon	= $this->get_translation('OuterIcon');
 			$class	= '';
 			$tpl	= 'jabber';
 		}
@@ -3217,7 +3188,7 @@ class Wacko
 			{
 				$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 				$title	= $this->get_translation('OuterLink2');
-				$icon	= $this->get_translation('outericon');
+				$icon	= $this->get_translation('OuterIcon');
 				$tpl	= 'outerlink';
 			}
 		}
@@ -3226,7 +3197,7 @@ class Wacko
 			// this is a file link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('FileLink');
-			$icon	= $this->get_translation('outericon');
+			$icon	= $this->get_translation('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3235,7 +3206,7 @@ class Wacko
 			// this is a PDF link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('PDFLink');
-			$icon	= $this->get_translation('outericon');
+			$icon	= $this->get_translation('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3244,7 +3215,7 @@ class Wacko
 			// this is a RDF link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('RDFLink');
-			$icon	= $this->get_translation('outericon');
+			$icon	= $this->get_translation('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3257,7 +3228,7 @@ class Wacko
 			if (!stristr($tag, $this->config['base_url']))
 			{
 				$title	= $this->get_translation('OuterLink2');
-				$icon	= $this->get_translation('outericon');
+				$icon	= $this->get_translation('OuterIcon');
 			}
 		}
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
@@ -3375,7 +3346,7 @@ class Wacko
 					$title		= $file_data['file_description'].' ('.$this->binary_multiples($file_data['file_size'], false, true, true).')';
 					$alt		= $file_data['file_description'];
 					$img_link	= false;
-					$icon		= $this->get_translation('outericon');
+					$icon		= $this->get_translation('OuterIcon');
 					#$class		= '';
 					$tpl		= 'localfile';
 
@@ -3433,7 +3404,7 @@ class Wacko
 				else //403
 				{
 					$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
-					$icon		= $this->get_translation('outericon');
+					$icon		= $this->get_translation('OuterIcon');
 					$img_link	= false;
 					$tpl		= 'localfile';
 					$class		= 'acl-denied';
@@ -3486,7 +3457,7 @@ class Wacko
 			$url	= $this->href('', $this->config['users_page'].'/', 'profile='.implode('/', $parts));
 
 			$class	= 'user-link';
-			$icon	= $this->get_translation('outericon');
+			$icon	= $this->get_translation('OuterIcon');
 			$tpl	= 'userlink';
 		}
 		else if (preg_match('/^(group)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
@@ -3507,7 +3478,7 @@ class Wacko
 			$url	= $this->href('', $this->config['groups_page'].'/', 'profile='.implode('/', $parts));
 
 			$class	= 'group-link';
-			$icon	= $this->get_translation('outericon');
+			$icon	= $this->get_translation('OuterIcon');
 			$tpl	= 'grouplink';
 		}
 		else if (preg_match('/^([[:alnum:]]+)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
@@ -3526,7 +3497,7 @@ class Wacko
 			}
 
 			$url	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
-			$icon	= $this->get_translation('iwicon');
+			$icon	= $this->get_translation('IwIcon');
 			$tpl	= 'interwiki';
 		}
 		else if (preg_match('/^([\!\.\-'.$this->language['ALPHANUM_P'].']+)(\#['.$this->language['ALPHANUM_P'].'\_\-]+)?$/', $tag, $matches))
@@ -3618,28 +3589,28 @@ class Wacko
 
 			if (substr($tag, 0, 2) == '!/')
 			{
-				$icon		= $this->get_translation('childicon');
+				$icon		= $this->get_translation('ChildIcon');
 				$page0		= substr($tag, 2);
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'childpage';
 			}
 			else if (substr($tag, 0, 3) == '../')
 			{
-				$icon		= $this->get_translation('parenticon');
+				$icon		= $this->get_translation('ParentIcon');
 				$page0		= substr($tag, 3);
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'parentpage';
 			}
 			else if (substr($tag, 0, 1) == '/')
 			{
-				$icon		= $this->get_translation('rooticon');
+				$icon		= $this->get_translation('RootIcon');
 				$page0		= substr($tag, 1);
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'rootpage';
 			}
 			else
 			{
-				$icon		= $this->get_translation('equalicon');
+				$icon		= $this->get_translation('EqualIcon');
 				$page0		= $tag;
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'equalpage';
@@ -3705,7 +3676,7 @@ class Wacko
 				if (!$access || $this->_acl['list'] == '')
 				{
 					$class		= 'acl-denied';
-					$accicon	= $this->get_translation('outericon');
+					$accicon	= $this->get_translation('OuterIcon');
 				}
 				else if ($this->_acl['list'] == '*')
 				{
@@ -3715,7 +3686,7 @@ class Wacko
 				else
 				{
 					$class		= 'acl-customsec';
-					$accicon	= $this->get_translation('outericon');
+					$accicon	= $this->get_translation('OuterIcon');
 				}
 
 				if ($text == trim($otag, '/') || $link_lang)
@@ -3734,7 +3705,7 @@ class Wacko
 			{
 				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'wordprocessor') ? 'p' : '') . 'w' . $tpl;
 				$page_link	= $this->href('edit', $tag, $lang ? 'lang='.$lang : '', 1);
-				$accicon	= $this->get_translation('wantedicon');
+				$accicon	= $this->get_translation('WantedIcon');
 				$title		= $this->get_translation('CreatePage');
 
 				if ($link_lang)
@@ -3749,7 +3720,7 @@ class Wacko
 			#$accicon		= str_replace('{theme}', $this->config['theme_url'], $accicon);
 
 			// see lang/wacko.all.php
-			$res			= $this->get_translation('tpl.'.$tpl);
+			$res			= $this->get_translation('Tpl.'.$tpl);
 			$text			= trim($text);
 
 			if ($res)
@@ -3814,7 +3785,7 @@ class Wacko
 
 			// XXX: obsolete -> see wacko.css
 			#$icon			= str_replace('{theme}', $this->config['theme_url'], $icon);
-			$res			= $this->get_translation('tpl.'.$tpl);
+			$res			= $this->get_translation('Tpl.'.$tpl);
 
 			if ($res)
 			{
@@ -6309,7 +6280,7 @@ class Wacko
 			if (stristr($_SERVER['HTTP_USER_AGENT'], $engine))
 			{
 				$this->resource['OuterLink2']	= '';
-				$this->resource['outericon']	= '';
+				$this->resource['OuterIcon']	= '';
 			}
 		}
 
