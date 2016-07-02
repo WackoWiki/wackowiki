@@ -4,7 +4,7 @@ CoolBlue theme.
 
 */
 
-require ($this->config['theme_path'].'/_common/_header.php');
+require (join_path(THEME_DIR, '_common/_header.php'));
 
 ?>
 <body>

@@ -54,7 +54,7 @@ if ($this->has_access('read') && $this->hide_revisions === false )
 				$xml .= "<link>".$this->href('show', '', 'revision_id='.$_GET['a'])."</link>\n";
 				$xml .= "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
 
-				$diff = $this->include_buffered($this->config['handler_path'].'/page/diff.php', 'oops');
+				$diff = $this->include_buffered('page/diff.php', 'oops', '', HANDLER_DIR);
 
 				// remove diff type navigation
 				$diff = preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $diff);

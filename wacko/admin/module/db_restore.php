@@ -50,7 +50,7 @@ function admin_db_restore(&$engine, &$module)
 	$logs			= '';
 	$ikeys			= '';
 	$ifiles			= '';
-	$dir			= $engine->config['upload_path_backup'].'/';
+	$dir			= UPLOAD_DIR_BACKUP.'/';
 
 	// IDs PROCESSING (COMMON PROCEDURES)
 	$set = array();
@@ -233,7 +233,7 @@ function admin_db_restore(&$engine, &$module)
 
 			set_time_limit(3600);
 
-			# $dir	= $engine->config['upload_path_backup'].'/'; // XXX: see above
+			# $dir	= UPLOAD_DIR_BACKUP.'/'; // XXX: see above
 			$pack	= $_POST['backup_id'];
 
 			// set parameters
@@ -420,10 +420,10 @@ function admin_db_restore(&$engine, &$module)
 					<?php echo $engine->get_translation('RestoreInfo'); ?>
 				</p>
 <?php
-		if (!is_executable($engine->config['upload_path_backup'].'/'))
+		if (!is_executable(UPLOAD_DIR_BACKUP.'/'))
 		{
-			echo substr(sprintf('%o', fileperms($engine->config['upload_path_backup'].'/')), -4). "<br />\n";
-			echo output_image($engine, false).'<strong class="red">The '.$engine->config['upload_path_backup'].'/'.' directory is not executable.</strong>'. "<br />\n";
+			echo substr(sprintf('%o', fileperms(UPLOAD_DIR_BACKUP.'/')), -4). "<br />\n";
+			echo output_image($engine, false).'<strong class="red">The '.UPLOAD_DIR_BACKUP.'/'.' directory is not executable.</strong>'. "<br />\n";
 		}
 		else
 		{
@@ -436,7 +436,7 @@ function admin_db_restore(&$engine, &$module)
 				$control_buttons =	'<input type="submit" name="restore" id="submit" value="restore" />'.
 									'<input type="submit" name="remove" id="submit" value="remove" />';
 
-			#$dir = $engine->config['upload_path_backup'].'/';
+			#$dir = UPLOAD_DIR_BACKUP.'/';
 
 			// open backups dir and run through all subdirs
 			if ($dh = opendir(rtrim($dir, '/')))

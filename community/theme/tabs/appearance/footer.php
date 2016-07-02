@@ -183,19 +183,19 @@ if ($this->method == 'show')
 	// files code starts
 	if ($this->has_access('read') && $this->config['footer_files'] == 1 || ($this->config['footer_files'] == 2 && $this->get_user()))
 	{
-		require_once('handler/page/_files.php');
+		require_once('handler/page/_files.php'); // TODO: HANDLER_DIR
 	}
 
 	// comments form output  starts
 	if ($this->has_access('read') && ($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()) ) && $this->user_allowed_comments())
 	{
-		require_once('handler/page/_comments.php');
+		require_once('handler/page/_comments.php'); // TODO
 	}
 
 	// rating form output begins
 	if ($this->has_access('read') && $this->page && $this->config['footer_rating'] == 1 || ($this->config['footer_rating'] == 2 && $this->get_user()))
 	{
-		require_once('handler/page/_rating.php');
+		require_once('handler/page/_rating.php'); // TODO
 	}
 
 } //end of $this->method==show

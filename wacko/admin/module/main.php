@@ -40,15 +40,17 @@ function admin_lock(&$engine, &$module)
 	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
 	{
 		// pages
-		$directory	= $engine->config['cache_dir'].CACHE_PAGE_DIR;
+		// STS: cache method purge
+		$directory	= CACHE_PAGE_DIR;
 
-		if ($handle = opendir(rtrim($directory, '/')))
+		if (($handle = opendir($directory)))
 		{
 			while (false !== ($file = readdir($handle)))
 			{
-				if (!is_dir($directory.$file))
+				$file = join_path($directory, $file);
+				if (!is_dir($file))
 				{
-					unlink($directory.$file);
+					unlink($file);
 				}
 			}
 
@@ -64,15 +66,16 @@ function admin_lock(&$engine, &$module)
 		$engine->config->invalidate_cache();
 
 		// feeds
-		$directory	= $engine->config['cache_dir'].CACHE_FEED_DIR;
+		$directory	= CACHE_FEED_DIR;
 
-		if ($handle = opendir(rtrim($directory, '/')))
+		if (($handle = opendir($directory)))
 		{
 			while (false !== ($file = readdir($handle)))
 			{
-				if (!is_dir($directory.$file))
+				$file = join_path($directory, $file);
+				if ($file && !is_dir($file))
 				{
-					unlink($directory.$file);
+					unlink($file);
 				}
 			}
 

@@ -274,8 +274,8 @@ if ($this->can_upload() === true)
 
 					// 3. remove from FS
 					$real_filename = ($page_id
-						? ($this->config['upload_path_per_page'].'/@'.$page_id.'@')
-						: ($this->config['upload_path'].'/')).
+						? (UPLOAD_DIR_PER_PAGE.'/@'.$page_id.'@')
+						: (UPLOAD_DIR_GLOBAL.'/')).
 						$file['file_name'];
 
 					if (@unlink($real_filename))
@@ -386,13 +386,6 @@ if ($this->can_upload() === true)
 				"LIMIT 1");
 
 			// Checks
-			if (!isset($this->config['upload_path_per_page']))
-			{
-			}
-
-			if (!isset($this->config['upload_path']))
-			{
-			}
 
 			// 1. upload quota
 			if ( (!$this->config['upload_quota_per_user']
@@ -441,11 +434,11 @@ if ($this->can_upload() === true)
 
 					if ($is_global)
 					{
-						$dir = $this->config['upload_path'].'/';
+						$dir = UPLOAD_DIR_GLOBAL.'/';
 					}
 					else
 					{
-						$dir = $this->config['upload_path_per_page'].'/';
+						$dir = UPLOAD_DIR_PER_PAGE.'/';
 					}
 
 					if (is_writable($dir))

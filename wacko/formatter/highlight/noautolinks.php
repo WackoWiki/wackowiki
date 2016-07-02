@@ -6,7 +6,7 @@
 
 $this->_formatter_noautolinks = true;
 //echo $this->format($text, 'wiki');
-include($this->config['formatter_path'].'/wiki.php');
+include(join_path(FORMATTER_DIR, 'wiki.php'));
 $this->_formatter_noautolinks = false;
 
 ?>

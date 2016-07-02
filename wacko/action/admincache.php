@@ -40,17 +40,19 @@ if ($this->is_admin())
 			@set_time_limit(0);
 
 			// pages cache
+			// STS: it's cache method!
 			if (isset($_POST['pages_cache']) && $_POST['pages_cache'] == 1)
 			{
-				$directory	= $this->config['cache_dir'].CACHE_PAGE_DIR;
+				$directory = CACHE_PAGE_DIR;
 
-				if ($handle = opendir(rtrim($directory, '/')))
+				if (($handle = opendir($directory)))
 				{
 					while (false !== ($file = readdir($handle)))
 					{
-						if ($file != '.' && $file != '..' && !is_dir($directory.$file))
+						$fn = join_path($directory, $file);
+						if ($file != '.' && $file != '..' && !is_dir($fn))
 						{
-							unlink($directory.$file);
+							unlink($fn);
 						}
 					}
 
@@ -77,15 +79,16 @@ if ($this->is_admin())
 			if (isset($_POST['config_feed']) && $_POST['config_feed'] == 1)
 			{
 				// feeds
-				$directory	= $this->config['cache_dir'].CACHE_FEED_DIR;
+				$directory	= CACHE_FEED_DIR;
 
-				if ($handle = opendir(rtrim($directory, '/')))
+				if (($handle = opendir($directory)))
 				{
 					while (false !== ($file = readdir($handle)))
 					{
-						if (!is_dir($directory.$file))
+						$fn = join_path($directory, $file);
+						if ($fn && !is_dir($fn))
 						{
-							unlink($directory.$file);
+							unlink($fn);
 						}
 					}
 

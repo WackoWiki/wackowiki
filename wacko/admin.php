@@ -15,9 +15,9 @@
 ########################################################
 
 define('IN_WACKO', true);
-
+require_once('config/constants.php');
 require_once('lib/utility.php');
-class_autoloader('config/autoload.conf');
+class_autoloader(join_path(CONFIG_DIR, 'autoload.conf'));
 
 // define settings
 $config = new Settings(!RECOVERY_MODE);
@@ -25,7 +25,7 @@ $config = new Settings(!RECOVERY_MODE);
 // initialize engine api
 $init = new Init($config);
 
-if ($init->is_locked('lock_ap'))
+if ($init->is_locked(AP_LOCK))
 {
 	if (!headers_sent())
 	{
@@ -163,7 +163,7 @@ if (isset($_POST['ap_password']))
 		// RECOVERY_MODE ON || RECOVERY_MODE OFF
 		if (($_SESSION['failed_login_count'] >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
-			$init->lock('lock_ap');
+			$init->lock(AP_LOCK);
 			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
 
 			$_SESSION['failed_login_count'] = 0;

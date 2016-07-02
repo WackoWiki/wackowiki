@@ -48,12 +48,6 @@ $wacko_config_defaults = array(
 	'reverse_proxy_header'			=> '',
 	'reverse_proxy_addresses'		=> '', // 'a.b.c.d', ...'
 
-	'action_path'					=> 'action',
-	'class_path'					=> 'class',
-	'formatter_path'				=> 'formatter',
-	'handler_path'					=> 'handler',
-	'theme_path'					=> 'theme',
-
 	'phpmailer'						=> 0,
 	'phpmailer_method'				=> 'mail',
 
@@ -88,9 +82,6 @@ $wacko_config_defaults = array(
 	'theme'							=> 'default',
 	'allow_themes'					=> 0,
 	'allow_themes_per_page'			=> 0,
-
-	'header_action'					=> 'header',
-	'footer_action'					=> 'footer',
 
 	'edit_summary'					=> 0,
 	'minor_edit'					=> 0,
@@ -182,11 +173,7 @@ $wacko_config_defaults = array(
 	'upload_max_size'				=> 512000,
 	'upload_quota'					=> 0,
 	'upload_quota_per_user'			=> 104857600,
-	'upload_path'					=> 'files/global',
-	'upload_path_per_page'			=> 'files/perpage',
 	'upload_banned_exts'			=> 'php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|pht|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources',
-
-	'upload_path_backup'			=> 'files/backup',
 
 	'img_create_thumbnail'			=> 0,
 	'img_max_thumb_width'			=> 150,
@@ -211,7 +198,6 @@ $wacko_config_defaults = array(
 	'xml_sitemap_time'				=> 1,
 
 	'cache'							=> 0,
-	'cache_dir'						=> '_cache/',
 	'cache_ttl'						=> 600,
 
 	'cache_sql'						=> 0,

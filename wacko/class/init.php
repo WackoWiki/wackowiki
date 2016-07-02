@@ -5,9 +5,6 @@ if (!defined('IN_WACKO'))
 	exit('No direct script access allowed');
 }
 
-// mandatory includes
-require_once('config/constants.php');
-
 // Compatibility with the password_* functions that ship with PHP 5.5
 if (version_compare(PHP_VERSION, '5.5.0') < 0)
 {
@@ -124,7 +121,7 @@ class Init
 			$this->page = substr($request, 0, $p);
 			$this->method = strtolower(substr($request, $p + 1));
 
-			if (!@file_exists($this->config['handler_path'] . '/page/' . $this->method . '.php'))
+			if (!@file_exists(join_path(HANDLER_DIR, 'page', $this->method . '.php')))
 			{
 				$this->page	= $request;
 				$this->method = '';
@@ -166,17 +163,17 @@ class Init
 	}
 
 	// CHECK WEBSITE LOCKING
-	function is_locked($file = 'lock')
+	function is_locked($file = SITE_LOCK)
 	{
-		return substr(@file_get_contents('config/' . $file), 0, 1) == '1';
+		return substr(@file_get_contents($file), 0, 1) == '1';
 	}
 
 	// lock / unlock
 	// writes value to lock file
 	//		file	= lock file in config folder
-	function lock($file = 'lock')
+	function lock($file = SITE_LOCK)
 	{
-		@file_put_contents('config/' . $file, ($this->is_locked($file)? '0' : '1'));
+		@file_put_contents($file, ($this->is_locked($file)? '0' : '1'));
 	}
 
 	// INSTALLER
@@ -233,7 +230,7 @@ class Init
 	{
 		if (!$this->cache || !$op)
 		{
-			$this->cache = new Cache($this->config['cache_dir'], $this->config['cache_ttl'], $this->config['debug']);
+			$this->cache = new Cache($this->config['cache_ttl']);
 		}
 
 		if ($op == 'check')

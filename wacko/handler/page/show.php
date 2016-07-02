@@ -264,19 +264,19 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 		// files code starts
 		if ($this->config['footer_files'] == 1 || ($this->config['footer_files'] == 2 && $this->get_user()))
 		{
-			require_once($this->config['handler_path'].'/page/_files.php');
+			require_once(join_path(HANDLER_DIR, 'page/_files.php'));
 		}
 
 		// comments form output  starts
 		if (($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()) ) && $this->user_allowed_comments())
 		{
-			require_once($this->config['handler_path'].'/page/_comments.php');
+			require_once(join_path(HANDLER_DIR, 'page/_comments.php'));
 		}
 
 		// rating form output begins
 		if ($this->has_access('read') && $this->page && $this->config['footer_rating'] == 1 || ($this->config['footer_rating'] == 2 && $this->get_user()))
 		{
-			require_once($this->config['handler_path'].'/page/_rating.php');
+			require_once(join_path(HANDLER_DIR, 'page/_rating.php'));
 		}
 	}
 }

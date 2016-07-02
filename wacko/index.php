@@ -1,9 +1,9 @@
 <?php
 
 define('IN_WACKO', true);
-
+require_once('config/constants.php');
 require_once('lib/utility.php');
-class_autoloader('config/autoload.conf');
+class_autoloader(join_path(CONFIG_DIR, 'autoload.conf'));
 
 $config = new Settings;
 

@@ -5,8 +5,6 @@ if (!defined('IN_WACKO'))
 	die('No direct script access allowed');
 }
 
-require_once 'config/constants.php';
-
 class Settings implements ArrayAccess
 {
 	private $config = [];
@@ -26,14 +24,14 @@ class Settings implements ArrayAccess
 			// for config_defaults
 			$found_rewrite_extension = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
 
-			require_once('config/config_defaults.php');
+			require_once(CONFIG_DEFAULTS);
 
-			if (@filesize('config/config.php') <= 0) {
+			if (@filesize(CONFIG_FILE) <= 0) {
 				$this->config = $wacko_config_defaults;
 				return; // ready for installer
 			}
 
-			require('config/config.php');
+			require(CONFIG_FILE);
 			$this->config = array_merge($wacko_config_defaults, $wacko_config);
 
 			if (!isset($this->config['wacko_version']))
@@ -104,7 +102,7 @@ class Settings implements ArrayAccess
 		$this->dbal();
 
 		// convenient config additions
-		$this->theme_url	= $this->base_url . $this->theme_path . '/' . $this->theme . '/';
+		$this->theme_url	= $this->base_url . join_path(THEME_DIR, $this->theme) . '/';
 		$this->user_table	= $this->table_prefix . 'user';
 		$this->cookie_hash	= hash('sha1', $this->base_url . $this->system_seed);
 		$this->cookie_path	= preg_replace('|https?://[^/]+|i', '', $this->base_url);
