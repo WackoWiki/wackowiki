@@ -302,6 +302,7 @@ $wacko_translation = array(
 	'NoDifferences' => 'No differences.',
 	'History' => 'historia',
 	'ReEditOldRevision' => 'Edytuj ponownie poprzedni± wersjê',
+
 	'ExternalPages' => 'Zewnêtrzne dokumenty, zawieraj±ce odno¶nik do strony %1 - %2. (Poka¿ listê <a href="%3"> domen</a>):',
 	'ExternalPagesGlobal' => 'Lista wszystkich witryn zawieraj±cych odno¶nik do naszego systemu Wiki. (%2) (Wy¶wietl tylko  <a href="%1">domeny</a>):',
 	'Last24Hours' => 'dane z ostatnich 24h',
@@ -309,9 +310,7 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Witryny lub domeny zawieraj±ce odno¶nik do strony: %1 (%2)  (<a href="%3">Wy¶wietl listê adresów</a>):',
 	'DomainsSitesPagesGlobal' => 'Lista wszystkich witryn zawieraj±cych odno¶nik do naszego systemu Wiki. (Poka¿ listê <a href="%1">adresów</a>):',
 	'ViewReferringSites' => 'Poka¿ odsy³acze odwo³uj±ce siê do strony %2 z podzia³em na: <a href="%1">domeny</a> ',
-
 	'ViewReferringSitesGlobal' => 'Poka¿ wszystkie odsy³acze z podzia³em na: <a href="%1">domeny</a>',
-
 	'ViewReferrersPage' => 'witryny',
 	'ViewReferrersPerPage'	=> 'na stronie',
 	'ViewReferrersByTime'		=> 'przez czas',
@@ -513,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage' => 'Create a new page',
 	'CreateNewPageText' => 'Create',
 	'CreateNewPageTip' => 'Create a new page.',
+
 	'CreateRandomPage' => 'Create a random page',
 	'CreatePageButton' => 'Create',
 	'CreateSubPage' => 'Create a sub page in the cluster',
@@ -1122,6 +1122,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Unknown action',

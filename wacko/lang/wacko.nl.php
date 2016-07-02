@@ -302,6 +302,7 @@ $wacko_translation = array(
 	'NoDifferences' => 'No differences.',
 	'History' => 'historie',
 	'ReEditOldRevision' => 'Bewerk deze oude revisie nogmaals',
+
 	'ExternalPages' => 'Externe pagina\'s met links naar %1 (%2) (<a href="%3">Bekijk een lijst van domeinen</a>):',
 	'ExternalPagesGlobal' => 'Sites met links naar deze WackoWiki (%2) (<a href="%1">Bekijk een lijst van domeinen</a>):',
 	'Last24Hours' => 'laatste 24 uur',
@@ -309,9 +310,7 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Lokale domeinen/sites met links naar %1 (%2)  (<a href="%3">Bekijk een lijst van verschillende URLs</a>):',
 	'DomainsSitesPagesGlobal' =>'Domeinen/sites met links naar deze WackoWiki (<a href="%1">Bekijk een lijst van verschillende URLs</a>):',
 	'ViewReferringSites' =>'<a href="%1">Bekijk alleen verwijzende sites voor %2</a> ',
-
 	'ViewReferringSitesGlobal' => '<a href="%1">Bekijk globale verwijzende sites</a>',
-
 	'ViewReferrersPage' =>'naar pagina',
 	'ViewReferrersPerPage'	=> 'per pagina',
 	'ViewReferrersByTime'		=> 'door de tijd',
@@ -513,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage' => 'Create a new page',
 	'CreateNewPageText' => 'Create',
 	'CreateNewPageTip' => 'Create a new page.',
+
 	'CreateRandomPage' => 'Create a random page',
 	'CreatePageButton' => 'Create',
 	'CreateSubPage' => 'Create a sub page in the cluster',
@@ -1122,6 +1122,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Unknown action',

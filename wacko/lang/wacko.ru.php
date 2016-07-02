@@ -302,16 +302,15 @@ $wacko_translation = array(
 	'NoDifferences'				=> 'Нет различий.',
 	'History'					=> 'История',
 	'ReEditOldRevision'			=> 'Редактировать эту старую версию',
+
 	'ExternalPages'				=> 'Внешние страницы, ссылающеся на&nbsp;%1<br /> (%2) (<a href="%3">список сайтов</a>):',
 	'ExternalPagesGlobal'		=> 'Внешние страницы, ссылающеся (%2) <br /> (<a href="%1">список сайтов</a>):',
-	'DomainsSitesPages'			=> 'Сайты, на которых есть ссылки на&nbsp;%1<br /> (%2)  (<a href="%3">список отдельных страниц</a>):',
-	'DomainsSitesPagesGlobal'	=> 'Сайты, на которых есть ссылки <br /> (<a href="%1">список отдельных страниц</a>):',
 	'Last24Hours'				=> 'за последние сутки',
 	'LastDays'					=> 'за последние %1 дней',
+	'DomainsSitesPages'			=> 'Сайты, на которых есть ссылки на&nbsp;%1<br /> (%2)  (<a href="%3">список отдельных страниц</a>):',
+	'DomainsSitesPagesGlobal'	=> 'Сайты, на которых есть ссылки <br /> (<a href="%1">список отдельных страниц</a>):',
 	'ViewReferringSites'		=> '<a href="%1">Сайты, ссылающиеся на %2</a>',
-
 	'ViewReferringSitesGlobal'	=> '<a href="%1">Сайты, ссылающиеся</a>',
-
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'на странице',
 	'ViewReferrersByTime'		=> 'по времени',
@@ -366,9 +365,6 @@ $wacko_translation = array(
 	'YouDontOwn'				=> 'Вы не владеете ни одной страницей.',
 	'NotLoggedInThusOwned'		=> 'Вы не зарегистрированы в системе, поэтому принадлежащие вам страницы не могут быть найдены.',
 	'NoOrphaned'				=> 'Нет потерянных страниц. Отлично!',
-	'PagesLinkingTo'			=> 'Страницы, ссылающиеся на ',
-	'NoPageLinkingTo'			=> 'Нет ссылающихся страниц',
-	'NoWantedPages'				=> 'Нет незаполненных страниц. Отлично!',
 	'NoRecentComments'			=> 'Комментариев давно не было.',
 	'LatestCommentBy'			=> 'автор последнего комментария',
 	'NoRecentlyCommented'		=> 'Комментариев давно не было.',
@@ -393,6 +389,9 @@ $wacko_translation = array(
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Возврат к комментируемой странице',
 
+	'PagesLinkingTo'			=> 'Страницы, ссылающиеся на ',
+	'NoPageLinkingTo'			=> 'Нет ссылающихся страниц',
+	'NoWantedPages'				=> 'Нет незаполненных страниц. Отлично!',
 	'RemoveWatch'				=> 'Снять наблюдение',
 	'SetWatch'					=> 'Наблюдать',
 	'WatchText'					=> 'Следить',
@@ -513,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage'				=> 'Создать новую страницу',
 	'CreateNewPageText'			=> 'Создать',
 	'CreateNewPageTip'			=> 'Щёлкните, чтобы создать новую страницу.',
+
 	'CreateRandomPage'			=> 'Создать произвольную страницу',
 	'CreatePageButton'			=> 'Создать',
 	'CreateSubPage'				=> 'Создать вложенную страницу в кластере',
@@ -774,8 +774,8 @@ $wacko_translation = array(
 	'RegistrationLang'			=> 'Your language (ваш язык)',
 	'InvalidWikiName'			=> 'Выбранное вами имя страницы неверно',
 	'InvalidUserName'			=> 'Выбранное вами имя страницы неверно',
-	'Bookmarks'					=> 'Избранное',
 	'PleaseLogin'				=> '((Settings Введите имя пользователя и пароль))',
+	'Bookmarks'					=> 'Избранное',
 	'ReallyDeleteComment'		=> 'Вы действительно хотите УДАЛИТЬ комментарий? <br />Восстановить его потом не удастся.',
 	'ForgotLink'				=> '((/Пароль Забыли пароль?))',
 	'RegistrationClosed'		=> 'Регистрация на данном сайте невозможна. Попробуйте связаться с админом.',
@@ -899,6 +899,7 @@ $wacko_translation = array(
 	'Moderation'				=> 'Модерация',
 	'Topics'					=> 'темы',
 	'ModerateSection'			=> 'раздела/документа  ',
+
 	'NotModerator'				=> 'У вас нет полномочий для модерации данного документа/раздела',
 	'ModerateDelete'			=> 'удалить',
 	'ModerateDeleteTopic'		=> 'удалить тему/страницу',
@@ -937,7 +938,7 @@ $wacko_translation = array(
 	'ModerateSection2'				=> 'модерировать раздел...',
 	'ModerateTopicsDeleted'			=> 'Выбранные темы успешно удалены.',
 	'ModerateTopicsRelocated'		=> 'Выбранные темы успешно перемещены.',
-	'ModerateTopicRenamed'			=> 'Тема успешно переименована.',
+	'ModerateTopicsRenamed'			=> 'Тема успешно переименована.',
 	'ModerateTopicsMerged'			=> 'Выбранные темы успешно склеены.',
 	'ModerateTopicsBlocked'			=> 'Выбранные темы успешно заблокированы.',
 	'ModerateTopicsUnlocked'		=> 'Выбранные темы успешно разблокированы.',
@@ -1123,6 +1124,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Неизвестное действие',

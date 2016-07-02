@@ -163,10 +163,10 @@ $wacko_translation = array(
 	'RevisionTip'				=> 'Clique para ver revisões recentes',
 	'RevisionText'				=> 'Revisões',
 	'RevisionXMLTip'			=> 'Clique para ver revisões recentes em formato XML.',
-	'ReferrersTip'				=> 'Clique para ver uma lista de URLs que referenciam esta página',
 	'RecentCommentsXMLTip'		=> 'Click to view recent comments in XML format.',
 	'RecentChangesXMLTip'		=> 'Click to view recent changes in XML format.',
 	'RecentNewsXMLTip'			=> 'Click to view recent news in XML format.',
+	'ReferrersTip'				=> 'Clique para ver uma lista de URLs que referenciam esta página',
 	'ReferrersText'				=> 'Referenciadores',
 	'ModerateTip'				=> 'Moderation of topics and forum posts',
 	'ModerateText'				=> 'Moderate',
@@ -302,6 +302,7 @@ $wacko_translation = array(
 	'NoDifferences'				=> 'No differences.',
 	'History'					=> 'História',
 	'ReEditOldRevision'			=> 'Re-editar esta revisão antiga',
+
 	'ExternalPages'				=> 'Páginas externas com ligação a  %1 (%2) (<a href="%3">ver lista de domínios</a>):',
 	'ExternalPagesGlobal'		=> 'Sites com links para nós (%2) (<a href="%1">veja lista de domínios</a>):',
 	'Last24Hours'				=> 'Últimas 24 horas',
@@ -309,9 +310,7 @@ $wacko_translation = array(
 	'DomainsSitesPages'			=> 'Domínios/páginas com ligações a   %1 (%2)  (<a href="%3">ver lista de URLs diferentes</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Domínios/páginas com ligações a nós(<a href="%1">ver lista de URLs diferentes</a>):',
 	'ViewReferringSites'		=> '<a href="%1">Ver sites que referenciam  %2 apenas</a> ',
-
 	'ViewReferringSitesGlobal'	=> '<a href="%1">Ver sites referenciadores globais</a>',
-
 	'ViewReferrersPage'			=> 'para a página',
 	'ViewReferrersPerPage'		=> 'por página',
 	'ViewReferrersByTime'		=> 'por hora',
@@ -513,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage'				=> 'Create a new page',
 	'CreateNewPageText'			=> 'Create',
 	'CreateNewPageTip'			=> 'Create a new page.',
+
 	'CreateRandomPage'			=> 'Create a random page',
 	'CreatePageButton'			=> 'Create',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
@@ -705,6 +705,7 @@ $wacko_translation = array(
 	'SettingsPurge'				=> 'Purge',
 	'SettingsModerate'			=> 'Moderate',
 	'SettingsPermissions'		=> 'ACLs',
+	'AclForEntireCluster'		=> 'ACLs para todo cluster',
 	'SettingsUpload'			=> 'Upload',
 	'SettingsCategories'		=> 'Categories',
 	'SettingsReferrers'			=> 'Referrers',
@@ -712,7 +713,6 @@ $wacko_translation = array(
 	'SettingsPrint'				=> 'Versão Impressora',
 	'SettingsWordprocessor'		=> 'versão Processador de texto',
 	'SettingsLatex'				=> 'versão LaTeX',
-	'AclForEntireCluster'		=> 'ACLs para todo cluster',
 	'SettingsXML'				=> 'Export to XML',
 	'BewareChangeLang'			=> 'Não altere de Idioma, se não sabe exactamente o que está a fazer. Alterar o Idioma provocará o renomear da página de acordo com as regras de ortografia de cada idioma. Muito conteúdo poderá tornar-se ilegível. Se isso acontecer reverta a situação voltando a escolher o idioma anterior.',
 	'SetLang'					=> 'Idioma para esta página',
@@ -1114,6 +1114,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Unknown action',

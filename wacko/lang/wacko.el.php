@@ -302,6 +302,7 @@ $wacko_translation = array(
 	'NoDifferences' => 'Καμία διαφορά.',
 	'History' => 'Ιστορικό',
 	'ReEditOldRevision' => 'Επανα-επεξεργασία της παλαιότερης έκδοσης',
+
 	'ExternalPages' => 'Εξωτερικές σελίδες που συνδέουν την %1 (%2) (<a href="%3">δες μία λίστα των domains</a>):',
 	'ExternalPagesGlobal' => 'Sites τα οποία συνδέονται σε αυτό το WackoWiki (%2) (<a href="%1">εμφάνισε λίστα των domains</a>):',
 	'Last24Hours' => 'τελευταίες 24 ώρες',
@@ -309,9 +310,7 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Domains/sites pages linking to  %1 (%2)  (<a href="%3">see list of different URLs</a>):',
 	'DomainsSitesPagesGlobal' => 'Domains/sites linking to this WackoWiki (<a href="%1">see list of different URLs</a>):',
 	'ViewReferringSites' => '<a href="%1">View referring sites for %2 only</a> ',
-
 	'ViewReferringSitesGlobal' => '<a href="%1">View global referring sites</a>',
-
 	'ViewReferrersPage' => 'to page',
 	'ViewReferrersPerPage'	=> 'per page',
 	'ViewReferrersByTime'	=> 'by time',
@@ -513,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage' => 'Δημιουργήστε μια νέα σελίδα',
 	'CreateNewPageText' => 'Create',
 	'CreateNewPageTip' => 'Δημιουργήστε μια νέα σελίδα.',
+
 	'CreateRandomPage' => 'Create a random page',
 	'CreatePageButton' => 'Create',
 	'CreateSubPage' => 'Create a sub page in the cluster',
@@ -801,7 +801,6 @@ $wacko_translation = array(
 	'MassRenaming' => 'Μετονομασία όλου του cluster',
 	'MassNewName' => 'Εισάγεται νέο όνομα για το cluster',
 	'MassNeedRedirect' => 'Δημιουργία ανακατεύθυνσης σε μία νέα σελίδα στις παλιές σελίδες',
-
 
 	// pagination
 	'ToThePage'					=> 'To page',
@@ -1123,6 +1122,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'σε %1 μήνες',
 	'InAYear'		=> 'σ\' ένα χρόνο',
 	'InYears'		=> 'σε %1 χρόνια',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> '¶γνωστη ενέργεια',

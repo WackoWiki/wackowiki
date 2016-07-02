@@ -302,6 +302,7 @@ $wacko_translation = array(
 	'NoDifferences' => 'No hay differencias.',
 	'History' => 'historial',
 	'ReEditOldRevision' => 'Reeditar esta antigua version',
+
 	'ExternalPages' => 'Enlaces externos vinculados con %1 (%2) (<a href="%3">ver lista de dominios</a>):',
 	'ExternalPagesGlobal' => 'Webs vinculados con este Wacko (%2) (<a href="%1">ver lista de dominios</a>):',
 	'Last24Hours' => 'últimas 24 horas',
@@ -309,9 +310,7 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Dominios/páginas vinculadas con  %1 (%2)  (<a href="%3">ver lista de URLs diferentes</a>):',
 	'DomainsSitesPagesGlobal' => 'Dominios/páginas vinculadas con este Wacko (<a href="%1">ver lista de URLs diferentes</a>):',
 	'ViewReferringSites' => '<a href="%1">Ver Webs referenciadas para %2 solo</a> ',
-
 	'ViewReferringSitesGlobal' => '<a href="%1">Ver Webs referenciadas globales</a>',
-
 	'ViewReferrersPage' => 'a la página',
 	'ViewReferrersPerPage'	=> 'por página',
 	'ViewReferrersByTime'	=> 'por el tiempo',
@@ -513,6 +512,7 @@ $wacko_translation = array(
 	'CreateNewPage' => 'Crear página nueva',
 	'CreateNewPageText' => 'Crear',
 	'CreateNewPageTip' => 'Crear página nueva.',
+
 	'CreateRandomPage' => 'Crear página aleatoria',
 	'CreatePageButton' => 'Crear',
 	'CreateSubPage' => 'Create a sub page in the cluster',
@@ -1122,6 +1122,12 @@ $wacko_translation = array(
 	'InMonths'		=> 'in %1 months',
 	'InAYear'		=> 'in a year',
 	'InYears'		=> 'in %1 years',
+
+	// binary multiples
+	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
+	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
+	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
+	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
 
 	// loading error
 	'UnknownAction'				=> 'Acción desconocida',
