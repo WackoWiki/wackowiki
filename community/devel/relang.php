@@ -123,29 +123,32 @@ function parse($fname)
 
 $a1 = parse($argv[1]);
 
+$cache1 = [];
+$a = [];
+
+foreach ($a1 as $key => $data)
+{
+	if ($key[0] == '#')
+	{
+		if (trim($data))
+		{
+			$key = hash('sha1', $data);
+			$cache1[$key] = $data;
+		}
+		else
+		{
+			$key = '';
+		}
+	}
+	$a[] = $key;
+}
+
 for ($arg = 2; isset($argv[$arg]); ++$arg)
 {
 	$b1 = parse($argv[$arg]);
 
-	$cache = [];
-	$a = $b = [];
-
-	foreach ($a1 as $key => $data)
-	{
-		if ($key[0] == '#')
-		{
-			if (trim($data))
-			{
-				$key = hash('sha1', $data);
-				$cache[$key] = $data;
-			}
-			else
-			{
-				$key = '';
-			}
-		}
-		$a[] = $key;
-	}
+	$cache = $cache1;
+	$b = [];
 
 	foreach ($b1 as $key => $data)
 	{
@@ -166,7 +169,7 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 
 
 	$output = '';
-	$diff = new Diff($b, $a, ['context' => 1000000, 'ignoreWhitespace' => true]);
+	$diff = new Diff($b, $a, ['context' => 1000000]);
 
 	foreach ($diff->getGroupedOpcodes() as $group)
 	{
@@ -209,4 +212,5 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 
 	if ($output)
 		file_put_contents($argv[$arg], trim($output));
+	// else - no changes
 }

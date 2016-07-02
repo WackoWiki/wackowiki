@@ -9,6 +9,7 @@ $ap_translation = array(
 	'ApTestText'				=> 'Ap Test Text',
 	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
+	// Admin panel
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Merci d&rsquo;indiquer le mot de passe d&rsquo;administration (assurez-vous également que les cookies soient autorisés par votre navigateur).',
 	'NoRecoceryPassword'		=> 'le mot de passe d&rsquo;administration n&rsquo;est pas spécifié !',

@@ -156,8 +156,6 @@ $lang = array(
 'ErrorInsertingPageCommentPermission' => 'Error setting comment permissions for <code>%1</code> page',
 'ErrorInsertingPageCreatePermission' => 'Error setting create permissions for <code>%1</code> page',
 'ErrorInsertingPageUploadPermission' => 'Error setting upload permissions for <code>%1</code> page',
-'ErrorInsertingPageCreatePermission' => 'Error setting create permissions for <code>%1</code> page',
-'ErrorInsertingPageUploadPermission' => 'Error setting upload permissions for <code>%1</code> page',
 'ErrorInsertingDefaultMenuItem' => 'Error setting page <code>%1</code> as default menu item',
 'ErrorPageAlreadyExists' => 'The <code>%1</code> page already exists',
 'ErrorAlteringTable' => 'Error altering <code>%1</code> table',
@@ -192,4 +190,5 @@ $lang = array(
 'ConfigDescription' => 'detailed description http://wackowiki.sourceforge.net/doc/Doc/English/Configuration',
 'TryAgain' => 'Proovi uuesti',
 
-);?>
+);
+?>

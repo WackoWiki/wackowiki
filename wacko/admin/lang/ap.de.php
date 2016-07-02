@@ -9,6 +9,7 @@ $ap_translation = array(
 	'ApTestText'				=> 'Admin Panel Dummy Test Text',
 	'MainNote'					=> 'Hinweis: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
+	// Admin panel
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von Deinem Browser akzeptiert werden).',
 	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
