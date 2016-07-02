@@ -11,7 +11,7 @@ define('CONFIG_DEFAULTS',				'config/config_defaults.php');
 define('SITE_LOCK',						'config/lock');
 define('AP_LOCK',						'config/lock_ap');
 
-define('ACTION_PATH',					'action');
+define('ACTION_DIR',					'action');
 define('FORMATTER_DIR',					'formatter');
 define('HANDLER_DIR',					'handler');
 define('THEME_DIR',						'theme');

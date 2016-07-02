@@ -6,31 +6,6 @@ if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty
 	$config['database_port'] = $config['database_port'] = '3306';
 }
 
-/* STS:
-if ($config['wacko_version'] == '5.0.0')
-{
-	// reset old default upload path to new location
-	if ($config['upload_path'] == 'files')
-	{
-		$config['upload_path'] = 'files/global';
-	}
-}
-
-if ($config['wacko_version'] == '5.4.0')
-{
-	// reset old default action path to new location
-	if ($config['action_path'] == 'actions')
-	{
-		$config['action_path'] = 'action';
-	}
-
-	// reset old default handler path to new location
-	if ($config['handler_path'] == 'handlers')
-	{
-		$config['handler_path'] = 'handler';
-	}
-} */
-
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
 

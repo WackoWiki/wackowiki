@@ -4429,7 +4429,7 @@ class Wacko
 			$this->stop_link_tracking();
 		}
 
-		$result = $this->include_buffered($action . '.php', $errmsg, $params, ACTION_PATH);
+		$result = $this->include_buffered($action . '.php', $errmsg, $params, ACTION_DIR);
 
 		$this->start_link_tracking();
 		$this->no_cache();
