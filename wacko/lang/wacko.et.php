@@ -413,7 +413,7 @@ $wacko_translation = array(
 	'RealName'					=> 'Real name',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Kirjed lehekülje kohta',
-	'ShowComments?'				=> 'Näita vaikimisi kommentaare',
+	'DoShowComments'				=> 'Näita vaikimisi kommentaare',
 	'DoubleclickEditing'		=> 'Topeltklõps muutmiseks',
 	'UpdateSettingsButton'		=> 'Uuenda seaded',
 
@@ -772,7 +772,7 @@ $wacko_translation = array(
 	'Files_all' => 'Failid',
 	'ShowFiles' => 'Näita faile/vormi',
 	'HideFiles' => 'Varja failid/vorm',
-	'ShowFiles?' => 'Näita vaikimisi failide nimekirja',
+	'DoShowFiles' => 'Näita vaikimisi failide nimekirja',
 
 	'RegistrationLang' => 'Sinu keel',
 	'InvalidWikiName' => 'Valitud nimi ei ole korrektne',
@@ -1138,7 +1138,6 @@ $wacko_translation = array(
 	'UnknownAction'				=> 'Unknown action',
 	'UnknownMethod'				=> 'Unknown method',
 	'FormatterNotFound'			=> 'Formatter %1 not found',
-	'CantLoadClass'				=> 'Cannot load class %1 from ',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',

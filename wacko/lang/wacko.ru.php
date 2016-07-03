@@ -297,7 +297,7 @@ $wacko_translation = array(
 	'DiffMode3'					=> 'В две колонки',
 	'DiffMode4'					=> 'Линейное',
 	'DiffMode5'					=> 'Uni-дифф',
-	'DiffMode6'					=> 'Контtкстное',
+	'DiffMode6'					=> 'Контекстное',
 	'RevisionsShowAll'			=> 'Показать все редакции...',
 	'ShowDifferencesButton'		=> 'Сравнить',
 	'CancelDifferencesButton'	=> 'Вернуться / Отмена',
@@ -414,7 +414,7 @@ $wacko_translation = array(
 	'RealName'					=> 'Настоящее имя',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Эаписей на странице',
-	'ShowComments?'				=> 'Показывать комментарии по умолчанию',
+	'DoShowComments'				=> 'По умолчанию комментарии на страницах показываются',
 	'DoubleclickEditing'		=> 'Редактирование двойным щелчком мыши',
 	'UpdateSettingsButton'		=> 'Сохранить настройки',
 
@@ -471,7 +471,7 @@ $wacko_translation = array(
 	'ClonedFrom'				=> 'Клонировано с %1.',
 	'ClonedRedirect'			=> 'Редактировать после клонирования',
 	'MassClone'					=> 'Клонировать весь кластер',
-	'MassCloning'				=> 'Cloning cluster.',
+	'MassCloning'				=> 'Клонируем кластер.',
 
 	'SortComment'				=> 'Сортировать комментарии',
 	'SortCommentAsc'			=> 'Свежие снизу',
@@ -495,11 +495,11 @@ $wacko_translation = array(
 	'UserSettingsNotifications'	=> 'Уведомления',
 
 	'NotifyMinorEdit'			=> 'Уведомлять о минимальных правках',
-	'NotifyPageEdit'			=> 'Edit',
-	'NotifyComment'				=> 'Comment',
-	'NotifyOff'					=> 'Off',
-	'NotifyAlways'				=> 'Always',
-	'NotifyPending'				=> 'Pending',
+	'NotifyPageEdit'			=> 'Правках',
+	'NotifyComment'				=> 'Комментариях',
+	'NotifyOff'					=> 'Отключено',
+	'NotifyAlways'				=> 'Всегда',
+	'NotifyPending'				=> 'Одноразово',
 	'NotifyDigest'				=> 'Digest',
 	'NotifyPendingPageTip'		=> 'Высылается уведомление лишь о первом изменении страницы.',
 	'NotifyPendingCommentTip'	=> 'Высылается уведомление лишь о первом комментарии к наблюдаемой странице.',
@@ -507,7 +507,7 @@ $wacko_translation = array(
 
 	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
 
-	'UserSettingsEmailMe'		=> 'Email me when ...',
+	'UserSettingsEmailMe'		=> 'Напишите мне о...',
 
 	'UserSettingsExtended'		=> 'Расширенный',
 	'UserSettingsOther'			=> 'Прочие настройки',
@@ -606,9 +606,9 @@ $wacko_translation = array(
 	'UsersFilter'				=> 'поиск',
 	'UsersOpenProfile'			=> 'открыть профиль',
 	'UsersNoMatching'			=> 'Подходящих пользователей не найдено. Попробуйте более мягкий критерий поиска.',
-	'UsersName'					=> 'Имя',
-	'UsersPages'				=> 'Документов',
-	'UsersComments'				=> 'Комментариев',
+	'UsersName'				=> 'Имя',
+	'UsersPages'				=> 'Документы',
+	'UsersComments'				=> 'Комментарии',
 	'UsersUploads'				=> 'Загрузки',
 	'UploadQuota'				=> 'Занято места',
 	'UploadQuotaTip'			=> 'Квота по загрузкам',
@@ -775,7 +775,7 @@ $wacko_translation = array(
 	'Files_all'					=> 'Файлы',
 	'ShowFiles'					=> 'Показать файлы/форму',
 	'HideFiles'					=> 'Скрыть файлы/форму',
-	'ShowFiles?'				=> 'Показывать списки файлов по умолчанию',
+	'DoShowFiles'				=> 'По умолчанию список файлов для страницы отображfется',
 
 	'RegistrationLang'			=> 'Your language (ваш язык)',
 	'InvalidWikiName'			=> 'Выбранное вами имя страницы неверно',
@@ -789,14 +789,14 @@ $wacko_translation = array(
 	'ACLAreYouSure'				=> 'Вы собираетесь сменить права этой страницы и всех подстраниц. Продолжить?',
 
 	'BookmarkDeleteSelected'	=> 'Удалить выбранное',
-	'BookmarkMark'				=> 'Mark',
-	'BookmarkNumber'			=> 'No.',
-	'BookmarkNone'				=> 'You have no bookmarks.',
-	'BookmarkTitle'				=> 'Bookmark Title',
+	'BookmarkMark'				=> 'Выбрать',
+	'BookmarkNumber'			=> 'Номер п/п',
+	'BookmarkNone'				=> 'Закладки отсутствуют.',
+	'BookmarkTitle'				=> 'Заголовок закладки',
 	'BookmarkPage'				=> 'Страница',
 	'BookmarkSaveChanges'		=> 'Сохранить изменения',
-	'BookmarksAddPage'			=> 'Set a bookmark for the following page',
-	'BookmarkAlreadyExists'		=> 'The bookmark already exists.',
+	'BookmarksAddPage'			=> 'Добавить страницу в закладки',
+	'BookmarkAlreadyExists'		=> 'Данная закладка уже имеется.',
 
 	'MeasuredTime'				=> 'Время работы',
 	'MeasuredMemory'			=> 'Использовано памяти',
@@ -1139,9 +1139,8 @@ $wacko_translation = array(
 
 	// loading error
 	'UnknownAction'				=> 'Неизвестное действие',
-	'UnknownMethod'				=> 'Unknown method',
-	'FormatterNotFound'			=> 'Formatter %1 not found',
-	'CantLoadClass'				=> 'Cannot load class %1 from ',
+	'UnknownMethod'				=> 'Неизвестный метод',
+	'FormatterNotFound'			=> 'Форматтер %1 отсутствует',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Успешный вход в административную панель',

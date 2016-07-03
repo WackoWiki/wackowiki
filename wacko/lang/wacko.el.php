@@ -413,7 +413,7 @@ $wacko_translation = array(
 	'RealName'					=> 'Πραγματικό όνομα',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'εγγραφές ανά σελίδα',
-	'ShowComments?'				=> 'Εμφάνιση σχολίων εξ\' ορισμού',
+	'DoShowComments'				=> 'Εμφάνιση σχολίων εξ\' ορισμού',
 	'DoubleclickEditing'		=> 'Επεξεργασία με διπλό click',
 	'UpdateSettingsButton'		=> 'Αποθήκευση Ρυθμίσεων',
 
@@ -772,7 +772,7 @@ $wacko_translation = array(
 	'Files_all' => 'Αρχεία',
 	'ShowFiles' => 'Εμφάνιση Αρχείων',
 	'HideFiles' => 'Απόκρυψη Αρχείων',
-	'ShowFiles?' => 'Εμφάνιση λίστας αρχείων εξ\' ορισμού',
+	'DoShowFiles' => 'Εμφάνιση λίστας αρχείων εξ\' ορισμού',
 
 	'RegistrationLang' => 'Η γλώσσα σας ',
 	'InvalidWikiName' => 'Το επιλεγμένο όνομα είναι άκυρο',
@@ -1138,7 +1138,6 @@ $wacko_translation = array(
 	'UnknownAction'				=> '¶γνωστη ενέργεια',
 	'UnknownMethod'				=> 'Unknown method',
 	'FormatterNotFound'			=> 'Formatter %1 not found',
-	'CantLoadClass'				=> 'Cannot load class %1 from ',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',

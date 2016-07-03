@@ -413,7 +413,7 @@ $wacko_translation = array(
 	'RealName'					=> 'Real name',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Записи на страница',
-	'ShowComments?'				=> 'Покажи коментариите по подразбиране',
+	'DoShowComments'				=> 'Покажи коментариите по подразбиране',
 	'DoubleclickEditing'		=> 'Редактирание с двоен клик на мишката',
 	'UpdateSettingsButton'		=> 'Запази настройките',
 
@@ -772,7 +772,7 @@ $wacko_translation = array(
 	'Files_all'					=> 'Файлове',
 	'ShowFiles'					=> 'Покажи файловете/формата',
 	'HideFiles'					=> 'Скрий файловете/формата',
-	'ShowFiles?'				=> 'Покажи списъка на файловете по подразбиране',
+	'DoShowFiles'				=> 'Покажи списъка на файловете по подразбиране',
 
 	'RegistrationLang'			=> 'Your language (Език)',
 	'InvalidWikiName'			=> 'Избраното име е неправилно',
@@ -1138,7 +1138,6 @@ $wacko_translation = array(
 	'UnknownAction'				=> 'Unknown action',
 	'UnknownMethod'				=> 'Unknown method',
 	'FormatterNotFound'			=> 'Formatter %1 not found',
-	'CantLoadClass'				=> 'Cannot load class %1 from ',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',

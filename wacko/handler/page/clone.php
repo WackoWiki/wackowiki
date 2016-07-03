@@ -123,7 +123,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			if ($need_massclone == 1)
 			{
 				// TODO: clone all sheeps and optional ACLs
-				echo "<p><strong>".$this->get_translation('MassCloning')."</strong><p>";   //!!!
+				echo '<p><strong>' . $this->get_translation('MassCloning') . '</strong><p>';
 				recursive_clone($this, $this->tag, $edit_note);
 			}
 		}

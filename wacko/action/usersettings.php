@@ -382,7 +382,7 @@ else if ($user = $this->get_user())
 				<td class="form_right">
 					<input type="hidden" name="show_comments" value="0" />
 					<input type="checkbox" id="show_comments" name="show_comments" value="1" <?php echo $user['show_comments']? 'checked="checked"' : '' ?> />
-					<label for="show_comments"><?php echo $this->get_translation('ShowComments?');?></label>
+					<label for="show_comments"><?php echo $this->get_translation('DoShowComments');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -390,7 +390,7 @@ else if ($user = $this->get_user())
 				<td class="form_right">
 					<input type="hidden" name="show_files" value="0" />
 					<input type="checkbox" id="show_files" name="show_files" value="1" <?php echo $user['show_files']? 'checked="checked"' : '' ?> />
-					<label for="show_files"><?php echo $this->get_translation('ShowFiles?');?></label>
+					<label for="show_files"><?php echo $this->get_translation('DoShowFiles');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
