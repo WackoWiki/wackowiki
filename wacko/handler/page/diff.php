@@ -5,6 +5,10 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// NB to minimize amount of diff modes provided for user in menus - you
+// can turn off some undesirables by setting text in lang/wacko.??.php
+// files for unwanted DiffMode# to ''
+
 echo '<div id="page">';
 $include_tail = '</div>';
 
@@ -46,16 +50,11 @@ $load_diff_page = function ($id)
 	}
 };
 
-$page_a = $load_diff_page($b); // STS: why page_a <- b ?!
+$page_a = $load_diff_page($b);
 $page_b = $load_diff_page($a);
 
 if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $page_b['page_id']) )
 {
-	// diffmode
-	// 0 - full diff
-	// 1 - simple diff
-	// 2 - source diff
-
 	// print header
 	echo perc_replace('<div class="diffinfo">' . $this->get_translation('Comparison'),
 		'<a href="' . $this->href('', '', ($b > 0 ? 'revision_id=' . $page_a['revision_id'] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
