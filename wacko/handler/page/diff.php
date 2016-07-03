@@ -63,29 +63,24 @@ if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $
 		$this->compose_link_to_page($this->tag, '', '', 0)) . "</div>\n";
 
 	// print navigation
-	$params = 'a=' .$a . '&amp;b=' .$b . '&amp;diffmode=';
-
-	$show_mode = function($mode, $text) use ($diffmode, $params)
-	{
-		if (($text1 = $this->get_translation($text))) // STS
-			$text = $text1;
-		return ($diffmode != $mode
-			?	'<li><a href="' . $this->href('diff', '', $params . $mode) . '">' . $text . '</a>'
-			:	'<li class="active">' . $text) . '</li>';
-	};
-
 	echo '<!--nomail-->'.
-	'<ul class="menu">'.
-		$show_mode(0, 'FullDiff').
-		$show_mode(1, 'SimpleDiff').
-		$show_mode(2, 'SourceDiff').
-		$show_mode(3, 'side by side'). // TODO: texts
-		$show_mode(4, 'inline').
-		$show_mode(5, 'unified').
-		$show_mode(6, 'context').
-	'</ul>'.
-	'<!--/nomail-->';
+		'<ul class="menu">';
 
+	$params = 'a=' .$a . '&amp;b=' .$b . '&amp;diffmode=';
+	for ($mode = 0; ($text = $this->get_translation('DiffMode' . $mode)) !== null; ++$mode)
+	{
+		if ($text)
+		{
+			echo ($diffmode != $mode
+				?	'<li><a href="' . $this->href('diff', '', $params . $mode) . '">' . $text . '</a>'
+				:	'<li class="active">' . $text) . '</li>';
+		}
+	}
+
+	echo '</ul>'.
+		'<!--/nomail-->';
+
+	// do diffs
 	switch ($diffmode)
 	{
 	case 1:

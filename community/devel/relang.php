@@ -16,11 +16,23 @@
  * formatting - be aware: it is better to remove it, resync to other langs, than add new, resync again.
  * translation would be lost, though)
  *
+ * you can massively rename resource names, without losing available localizations:
+ * use meta-comment in parent (first in cmd line) file:
+	// RENAME OldTag NewTag
+	'NewTag' => ...
+ * e.g. resource himself must be manually renamed in parent
+ * after running 'relang wacko.en.php wacko.??.php' then - RENAME comment will be stripped from .en. too
+ *
  * enjoy! /sts
  *
  *//// NB /*...*/ comments in language files not supported!
 
 $wacko = '/home/sts/ww/main/wacko/'; // <---- up yours!
+
+if (count(@$argv) < 3)
+{
+	die("usage: relang.php parent.lang.php other.lang.php [....]\n");
+}
 
 require_once $wacko . 'lib/utility.php';
 function v($x) { echo stringify($x) . "\n"; }
@@ -29,13 +41,18 @@ define('IN_WACKO', 1);
 require_once $wacko . 'config/constants.php';
 require_once $wacko . 'lib/php-diff/Diff.php';
 
+$renames = [];
+
 function parse($fname)
 {
+	global $contents;
 	static $defvar = false;
 
-	if (($file = file_get_contents($fname)) === false) die("no $fname\n");
+	if (($contents = file_get_contents($fname)) === false) die("no $fname\n");
+	$contents = trim($contents);
 
-	if (!preg_match('/\$([\w_]+)\s*=\s*array\s*\(/', $file, $match))
+	$parent = 0;
+	if (!preg_match('/\$([\w_]+)\s*=\s*array\s*\(/', $contents, $match))
 	{
 		if (!$defvar) die("no var in $fname\n");
 		$var = $defvar;
@@ -43,8 +60,15 @@ function parse($fname)
 	else
 	{
 		$var = $match[1];
-		if ($defvar && $defvar != $var) die("invalid var $var in $fname\n");
-		$defvar = $var;
+		if ($defvar)
+		{
+			if ($defvar != $var) die("invalid var $var in $fname\n");
+		}
+		else
+		{
+			$parent = 1;
+			$defvar = $var;
+		}
 	}
 
 	ob_start();
@@ -56,8 +80,15 @@ function parse($fname)
 	$cur = 0;
 	$accum = '';
 	$cmt = 0;
-	foreach (explode("\n", $file) as $line)
+	foreach (explode("\n", $contents) as $line)
 	{
+		if ($parent && preg_match('#^\s*//\s*RENAME\s+(\S+)\s+(\S+)\s*$#', $line, $match))
+		{
+			global $renames;
+			$renames[$match[1]] = $match[2];
+			continue;
+		}
+
 		$block = 0;
 		if (preg_match('/^\s*["\']([^"\']+)[\'"]\s*=>/', $line, $match))
 		{
@@ -121,7 +152,25 @@ function parse($fname)
 	return $data;
 }
 
+function renamer($line, $from, $to)
+{
+	if (!preg_match('/^(\s*["\'])([^"\']+)([\'"]\s*=>.*$)/Ds', $line, $match) || $match[2] !== $from)
+	{
+		die("rename $from line mismatch: $line\n");
+	}
+	return $match[1] . $to . $match[3];
+}
+
 $a1 = parse($argv[1]);
+
+// $renames maps old -> new
+// $rerenames maps new -> old
+$rerenames = array_flip($renames);
+foreach ($renames as $old => $new)
+{
+	if (isset($a1[$old]))		die("renamed $old found in {$argv[1]}\n");
+	if (!isset($a1[$new]))		die("new renamed $new not found in {$argv[1]}\n");
+}
 
 $cache1 = [];
 $a = [];
@@ -164,53 +213,73 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 				$key = '';
 			}
 		}
+		else
+		{
+			if (isset($renames[$key]))
+			{
+				$key = $renames[$key];
+			}
+		}
 		$b[] = $key;
 	}
 
-
-	$output = '';
 	$diff = new Diff($b, $a, ['context' => 1000000]);
 
-	foreach ($diff->getGroupedOpcodes() as $group)
+	if (($edits = $diff->getGroupedOpcodes()))
 	{
-		$lastItem = count($group)-1;
-		$i1 = $group[0][1];
-		$i2 = $group[$lastItem][2];
-		$j1 = $group[0][3];
-		$j2 = $group[$lastItem][4];
-
-		if ($i1 == 0 && $i2 == 0)
+		$output = '';
+		foreach ($edits as $group)
 		{
-			$i1 = -1;
-			$i2 = -1;
-		}
+			$lastItem = count($group)-1;
+			$i1 = $group[0][1];
+			$i2 = $group[$lastItem][2];
+			$j1 = $group[0][3];
+			$j2 = $group[$lastItem][4];
 
-		foreach ($group as $code)
-		{
-			list($tag, $i1, $i2, $j1, $j2) = $code;
-			if ($tag == 'equal')
+			if ($i1 == 0 && $i2 == 0)
 			{
-				foreach ($diff->GetB($j1, $j2) as $line)
+				$i1 = -1;
+				$i2 = -1;
+			}
+
+			foreach ($group as $code)
+			{
+				list($tag, $i1, $i2, $j1, $j2) = $code;
+				if ($tag == 'equal')
 				{
-					$output .= !$line? "\n"
-						: (array_key_exists($line, $cache)? $cache[$line]
-						: $b1[$line]);
+					foreach ($diff->GetB($j1, $j2) as $line)
+					{
+						$output .= !$line? "\n"
+							: (isset($cache[$line])? $cache[$line]
+							: ((($old = @$rerenames[$line]) && isset($b1[$old]))? renamer($b1[$old], $old, $line)
+							: $b1[$line]));
+					}
+				}
+				else if ($tag == 'replace' || $tag == 'insert')
+				{
+					foreach ($diff->GetB($j1, $j2) as $line)
+					{
+						$output .= !$line? "\n"
+							: (isset($cache[$line])? $cache[$line]
+							// : ((($old = @$rerenames[$line]) && isset($b1[$old]))? renamer($b1[$old], $old, $line)
+							: (isset($b1[$line])? $b1[$line]
+							: $a1[$line]));
+					}
 				}
 			}
-			else if ($tag == 'replace' || $tag == 'insert')
-			{
-				foreach ($diff->GetB($j1, $j2) as $line)
-				{
-					$output .= !$line? "\n"
-						: (array_key_exists($line, $cache)? $cache[$line]
-						: (array_key_exists($line, $b1)? $b1[$line]
-						: $a1[$line]));
-				}
-			}
 		}
+
+		$output = trim($output);
+		if (substr($output, -2) == '?>')
+		{
+			$output = trim(substr($output, 0, -2));
+		}
+
+		if ($output != $contents)
+		{
+			@rename($argv[$arg], $argv[$arg] . '.orig');
+			file_put_contents($argv[$arg], $output . "\n");
+		}
+		// else - no changes
 	}
-
-	if ($output)
-		file_put_contents($argv[$arg], trim($output));
-	// else - no changes
 }

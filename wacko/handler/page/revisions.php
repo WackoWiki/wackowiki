@@ -52,23 +52,27 @@ if ($this->page['deleted'])
 if ($this->has_access('read'))
 {
 	// load revisions for this page
-	if ($revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $deleted))
+	if (($revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $deleted)))
 	{
 		$this->context[++$this->current_context] = '';
 
 		$output .= $this->form_open('diff_versions', 'diff', 'get');
 		$output .= "<p>\n";
 		$output .= '<input type="submit" value="'.$this->get_translation('ShowDifferencesButton').'" />';
-		#$output .= '<a href="'.$this->href('').'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
-		$output .= $place_holder.
-					'<input type="radio" id="fulldiff" name="diffmode" value="0" checked="checked" />
-					<label for="fulldiff">'.$this->get_translation('FullDiff').'</label>';
-		$output .= $place_holder.
-					'<input type="radio" id="fastdiff" name="diffmode" value="1" />
-					<label for="fastdiff">'.$this->get_translation('SimpleDiff').'</label>';
-		$output .= $place_holder.
-					'<input type="radio" id="source" name="diffmode" value="2" />
-					<label for="source">'.$this->get_translation('SourceDiff').'</label>';
+		// $output .= '<a href="'.$this->href('').'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
+
+		$default_mode = 0; // TODO: configurable per user
+		for ($mode = 0; ($text = $this->get_translation($id = 'DiffMode' . $mode)) !== null; ++$mode)
+		{
+			if ($text)
+			{
+				$output .= $place_holder .
+							'<input type="radio" id="' . $id . '" name="diffmode" value="' . $mode . '"' .
+							($mode == $default_mode? ' checked="checked"' : '') . ' />' .
+							'<label for="' . $id . '">' . $text . '</label>';
+			}
+		}
+
 		$output .= $place_holder.
 					'<a href="'.$this->href('revisions.xml').'">
 						<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RevisionXMLTip').'" alt="XML" class="btn-feed"/>
@@ -81,11 +85,11 @@ if ($this->has_access('read'))
 
 		$output .= "</p>\n".'<ul class="revisions">'."\n";
 
-		if (isset($_GET['show']) && $_GET['show'] == 'all')
+		if (@$_GET['show'] == 'all')
 		{
 			$max = 0;
 		}
-		else if ($user = $this->get_user())
+		else if (($user = $this->get_user()))
 		{
 			$max = $user['list_count'];
 		}
@@ -95,7 +99,7 @@ if ($this->has_access('read'))
 		}
 
 		$c = 0;
-		$t = $a = count($revisions);
+		$a = count($revisions);
 
 		foreach ($revisions as $num => $page)
 		{
@@ -108,38 +112,40 @@ if ($this->has_access('read'))
 				$edit_note = '';
 			}
 
-			if (++$c <= $max || !$max)
-			{
-				$output .= '<li>';
-				$output .= '<span style="display: inline-block; width:40px;">'.($t--).'.</span>';
-				$output .= '<input type="radio" name="a" value="'.($c == 1 ? '-1' : $page['revision_id']).'" '.($c == 1 ? 'checked="checked"' : '').' />';
-				$output .= $place_holder.
-							'<input type="radio" name="b" value="'.($c == 1 ? '-1' : $page['revision_id']).'" '.($c == 2 ? 'checked="checked"' : '').' />';
-				$output .= $place_holder.'&nbsp;
-							<a href="'.$this->href('show', '', 'revision_id='.$page['revision_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
-				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_id']."</span> ";
-				$output .= $place_holder."&nbsp;".$this->get_translation('By')." ".
-							$this->user_link($page['user_name'], '', true, false);
-				$output .= ''.$edit_note.'';
-				$output .= ' '.($page['minor_edit'] ? 'm' : '');
+			$output .= '<li>';
+			$output .= '<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>';
+			$output .= '<input type="radio" name="a" value="'.(!$c ? '-1' : $page['revision_id']).'" '.($c == 0 ? 'checked="checked"' : '').' />';
+			$output .= $place_holder.
+						'<input type="radio" name="b" value="'.(!$c ? '-1' : $page['revision_id']).'" '.($c == 1 ? 'checked="checked"' : '').' />';
+			$output .= $place_holder.'&nbsp;
+						<a href="'.$this->href('show', '', 'revision_id='.$page['revision_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
+			$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_id']."</span> ";
+			$output .= $place_holder."&nbsp;".$this->get_translation('By')." ".
+						$this->user_link($page['user_name'], '', true, false);
+			$output .= ''.$edit_note.'';
+			$output .= ' '.($page['minor_edit'] ? 'm' : '');
 
-				// review
-				if ($this->config['review'])
+			// review
+			if ($this->config['review'])
+			{
+				if ($page['reviewed'])
 				{
-					if ($page['reviewed'])
+					$output .= '<span class="review">['.$this->get_translation('ReviewedBy').' '.$this->user_link($page['reviewer'], '', true, false).']</span>';
+				}
+				else if ($this->is_reviewer())
+				{
+					if (!$num)
 					{
-						$output .= '<span class="review">['.$this->get_translation('ReviewedBy').' '.$this->user_link($page['reviewer'], '', true, false).']</span>';
-					}
-					else if ($this->is_reviewer())
-					{
-						if (!$num)
-						{
-							$output .= ' <span class="review">['.$this->get_translation('Review').']</span>';
-						}
+						$output .= ' <span class="review">['.$this->get_translation('Review').']</span>';
 					}
 				}
+			}
 
-				$output .= "</li>\n";
+			$output .= "</li>\n";
+
+			if (++$c >= $max && $max)
+			{
+				break;
 			}
 		}
 
