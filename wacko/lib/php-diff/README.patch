@@ -1,6 +1,6 @@
-diff -ur ./Diff/Renderer/Html/Array.php /home/sts/ww/main/wacko/lib/php-diff/Diff/Renderer/Html/Array.php
---- ./Diff/Renderer/Html/Array.php	2015-05-26 12:03:16.000000000 +0600
-+++ /home/sts/ww/main/wacko/lib/php-diff/Diff/Renderer/Html/Array.php	2016-06-29 17:13:56.168334000 +0600
+diff -ur ../../../../can/php-diff-master/lib/Diff/Renderer/Html/Array.php ./Diff/Renderer/Html/Array.php
+--- ../../../../can/php-diff-master/lib/Diff/Renderer/Html/Array.php	2015-05-26 12:03:16.000000000 +0600
++++ ./Diff/Renderer/Html/Array.php	2016-07-03 14:45:59.969815000 +0600
 @@ -177,7 +177,9 @@
  		$lines = array_map(array($this, 'ExpandTabs'), $lines);
  		$lines = array_map(array($this, 'HtmlSafe'), $lines);
@@ -20,6 +20,83 @@ diff -ur ./Diff/Renderer/Html/Array.php /home/sts/ww/main/wacko/lib/php-diff/Dif
 +		return htmlspecialchars($string, ENT_NOQUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET);
  	}
  }
-Only in ./Diff/Renderer/Html: Inline.php
-Only in ./Diff/Renderer/Html: SideBySide.php
-Only in ./Diff/Renderer: Text
+diff -ur ../../../../can/php-diff-master/lib/Diff/Renderer/Html/Inline.php ./Diff/Renderer/Html/Inline.php
+--- ../../../../can/php-diff-master/lib/Diff/Renderer/Html/Inline.php	2015-05-26 12:03:16.000000000 +0600
++++ ./Diff/Renderer/Html/Inline.php	2016-07-03 15:14:26.790372000 +0600
+@@ -44,6 +44,15 @@
+ 
+ class Diff_Renderer_Html_Inline extends Diff_Renderer_Html_Array
+ {
++	public $thead =
++		'<thead>'.
++		'<tr>'.
++		'<th>Old</th>'.
++		'<th>New</th>'.
++		'<th>Differences</th>'.
++		'</tr>'.
++		'</thead>';
++
+ 	/**
+ 	 * Render a and return diff with changes between the two sequences
+ 	 * displayed inline (under each other)
+@@ -59,13 +68,7 @@
+ 		}
+ 
+ 		$html .= '<table class="Differences DifferencesInline">';
+-		$html .= '<thead>';
+-		$html .= '<tr>';
+-		$html .= '<th>Old</th>';
+-		$html .= '<th>New</th>';
+-		$html .= '<th>Differences</th>';
+-		$html .= '</tr>';
+-		$html .= '</thead>';
++		$html .= $this->thead;
+ 		foreach($changes as $i => $blocks) {
+ 			// If this is a separate block, we're condensing code so output ...,
+ 			// indicating a significant portion of the code has been collapsed as
+@@ -140,4 +143,4 @@
+ 		$html .= '</table>';
+ 		return $html;
+ 	}
+-}
+\ No newline at end of file
++}
+diff -ur ../../../../can/php-diff-master/lib/Diff/Renderer/Html/SideBySide.php ./Diff/Renderer/Html/SideBySide.php
+--- ../../../../can/php-diff-master/lib/Diff/Renderer/Html/SideBySide.php	2015-05-26 12:03:16.000000000 +0600
++++ ./Diff/Renderer/Html/SideBySide.php	2016-07-03 15:14:14.143897000 +0600
+@@ -44,6 +44,14 @@
+ 
+ class Diff_Renderer_Html_SideBySide extends Diff_Renderer_Html_Array
+ {
++	public $thead =
++		'<thead>'.
++		'<tr>'.
++		'<th colspan="2">Old Version</th>'.
++		'<th colspan="2">New Version</th>'.
++		'</tr>'.
++		'</thead>';
++
+ 	/**
+ 	 * Render a and return diff with changes between the two sequences
+ 	 * displayed side by side.
+@@ -60,12 +68,7 @@
+ 		}
+ 
+ 		$html .= '<table class="Differences DifferencesSideBySide">';
+-		$html .= '<thead>';
+-		$html .= '<tr>';
+-		$html .= '<th colspan="2">Old Version</th>';
+-		$html .= '<th colspan="2">New Version</th>';
+-		$html .= '</tr>';
+-		$html .= '</thead>';
++		$html .= $this->thead;
+ 		foreach($changes as $i => $blocks) {
+ 			if($i > 0) {
+ 				$html .= '<tbody class="Skipped">';
+@@ -160,4 +163,4 @@
+ 		$html .= '</table>';
+ 		return $html;
+ 	}
+-}
+\ No newline at end of file
++}
