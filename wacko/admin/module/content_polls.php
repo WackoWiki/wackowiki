@@ -105,7 +105,7 @@ function admin_content_polls(&$engine, &$module)
 			$edit_id		= $_POST['id'];
 			$header			= $polls_obj->get_poll_title($edit_id);
 
-			if ($header['start'] == SQL_NULLDATE && $header['end'] == SQL_NULLDATE)
+			if (!$header['start'] && !$header['end'])
 			{
 				$moderation	= true;
 			}

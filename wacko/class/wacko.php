@@ -551,31 +551,31 @@ class Wacko
 			$can = $this->available_languages();
 
 			// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
-			preg_match_all("/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" . 
-					"(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/", 
+			preg_match_all("/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" .
+					"(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/",
 					strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']),
-					$matches, PREG_SET_ORDER); 
+					$matches, PREG_SET_ORDER);
 
-			$best = 0; 
+			$best = 0;
 			foreach ($matches as $i)
-			{ 
-				$want1 = $want2 = $i[1]; 
-				if ($i[3]) { 
-					$want2 = $want1 . '-' . $i[3]; 
-				} 
+			{
+				$want1 = $want2 = $i[1];
+				if ($i[3]) {
+					$want2 = $want1 . '-' . $i[3];
+				}
 				$q = ($i[5] !== '')? (float)$i[5] : 1;
 
 				if (in_array($want2, $can) && $q > $best)
-				{ 
+				{
 					$lang = $want2;
-					$best = $q; 
-				} 
+					$best = $q;
+				}
 				else if (in_array($want1, $can) && $q * 0.9 > $best)
-				{ 
-					$lang = $want1; 
-					$best = $q * 0.9; 
-				} 
-			} 
+				{
+					$lang = $want1;
+					$best = $q * 0.9;
+				}
+			}
 		}
 
 		return $lang;
@@ -4639,7 +4639,7 @@ class Wacko
 				)." ".
 			"LIMIT 1");
 
-		if (@$user['session_time'] == SQL_NULLDATE)
+		if (!$user['session_time'])
 		{
 			$user['session_time'] = '';
 		}
@@ -7300,7 +7300,7 @@ class Wacko
 		// next page shortcut
 		if ($page < $pages)
 		{
-			$navigation .= ' ' . $make_link($page + 1, ($this->get_translation('NextAcr') . ' &raquo;'), 'rel="next"'); 
+			$navigation .= ' ' . $make_link($page + 1, ($this->get_translation('NextAcr') . ' &raquo;'), 'rel="next"');
 		}
 
 		$pagination['text'] = $navigation;

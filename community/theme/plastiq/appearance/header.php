@@ -129,7 +129,7 @@ echo "\n";
 				echo 'By topic: '.$this->user_link($owner, $lang = '', true, false).', ';
 			}
 
-			if ($this->page['created'] != SQL_NULLDATE)
+			if ($this->page['created'])
 			{
 				echo 'Theme open '.$this->get_time_formatted($this->page['created']);
 			}
@@ -148,7 +148,7 @@ echo "\n";
 				);
 			}
 
-			if ($this->page['created'] != SQL_NULLDATE)
+			if ($this->page['created'])
 			{
 				echo '('.$this->get_translation('Created').' '.$this->get_time_formatted($this->page['created']).'), ';
 			}

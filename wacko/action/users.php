@@ -152,7 +152,7 @@ if (($profile = @$_REQUEST['profile']))
 				<td class="userprofil"><?php echo $this->get_translation('UsersLastSession'); ?></td>
 				<td><?php echo $user['hide_lastsession'] == 1
 					? '<em>' . $this->get_translation('UsersSessionHidden') . '</em>'
-					: ( !$user['last_visit'] || $user['last_visit'] == SQL_NULLDATE
+					: ( !$user['last_visit'] || !$user['last_visit']
 						? '<em>' . $this->get_translation('UsersSessionNA') . '</em>'
 						: $this->get_time_formatted($user['last_visit']) )
 					; ?></td>
@@ -607,7 +607,7 @@ else
 					'<td style="text-align:center;">' . $this->get_time_formatted($user['signup_time']) . '</td>'.
 					'<td style="text-align:center;">' . ($user['hide_lastsession']
 					? '<em>' . $this->get_translation('UsersSessionHidden') . '</em>'
-					: (!$user['last_visit'] || $user['last_visit'] == SQL_NULLDATE
+					: (!$user['last_visit'] || !$user['last_visit']
 						? '<em>' . $this->get_translation('UsersSessionNA') . '</em>'
 						: $this->get_time_formatted($user['last_visit']))
 					).'</td>';
