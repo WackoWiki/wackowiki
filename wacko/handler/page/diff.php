@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 echo '<div id="page">';
 $include_tail = '</div>';
 
-if (!isset($_GET['a']) || !isset($_GET['b']))
+if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
 {
 	$this->redirect($this->href());
 }
@@ -20,6 +20,9 @@ if (!isset($_GET['a']) || !isset($_GET['b']))
 $a			= (int)$_GET['a'];
 $b			= (int)$_GET['b'];
 $diffmode	= (int)@$_GET['diffmode'];
+
+if ($a < 0) $a = 0;
+if ($b < 0) $b = 0;
 
 if ($a == $b)
 {
@@ -53,13 +56,53 @@ $load_diff_page = function ($id)
 $page_a = $load_diff_page($b);
 $page_b = $load_diff_page($a);
 
-if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $page_b['page_id']) )
+if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
+		$this->page['page_id'] == $page_b['page_id'] &&
+		$this->has_access('read', $page_a['page_id']) && $this->has_access('read', $page_b['page_id']) )
 {
+	$revisions = $this->load_revisions($this->page['page_id'], 1, $this->is_admin()); // TODO: $hide_minor_edit
+
+	$revisions_menu = function ($rev, $page) use ($revisions, $diffmode, $a, $b)
+	{
+		$out = '<div class="diffdown">'; //<button class="diffbtn">';
+		$out .= '<a href="' . $this->href('', '', ($page['revision_id'] > 0? 'revision_id=' . $page['revision_id'] : '')) . '">' .
+			$this->get_time_formatted($page['modified']) .
+			' <span class="dropdown_arrow">&#9660;</span></a>';
+		//$out .= '</button><div class="diffdown-content">';
+		$out .= '<div class="diffdown-content">';
+
+		$out .= '<!--nomail-->';
+		foreach ($revisions as $r)
+		{
+			$act = ($r['revision_id'] == $a || $r['revision_id'] == $b);
+			if ($act)
+			{
+				$href = '#';
+			}
+			else
+			{
+				$params = ($a != $rev)? 'a=' . $r['revision_id'] . '&amp;b=' . $b : 'a=' . $a . '&amp;b=' . $r['revision_id'];
+				$href = $this->href('diff', '', $params . '&amp;diffmode=' . $diffmode);
+			}
+			$out .= '<a href="' . $href . '">';
+			$out .= '<span style="display: inline-block; width:40px;">' . $r['version_id'] . '.</span>';
+			$out .= $this->get_time_formatted($r['modified']);
+			$out .= '</a>';
+		}
+		$out .= '<!--/nomail-->';
+
+		return $out . '</div></div>';
+	};
+
 	// print header
 	echo perc_replace('<div class="diffinfo">' . $this->get_translation('Comparison'),
-		'<a href="' . $this->href('', '', ($b > 0 ? 'revision_id=' . $page_a['revision_id'] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
-		'<a href="' . $this->href('', '', ($a > 0 ? 'revision_id=' . $page_b['revision_id'] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
+		$revisions_menu($a, $page_a),
+		$revisions_menu($b, $page_b),
+		//'<a href="' . $this->href('', '', ($a > 0 ? 'revision_id=' . $page_a['revision_id'] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
+		//'<a href="' . $this->href('', '', ($b > 0 ? 'revision_id=' . $page_b['revision_id'] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
 		$this->compose_link_to_page($this->tag, '', '', 0)) . "</div>\n";
+	echo "<br />\n";
+
 	echo "<br />\n";
 
 	// print navigation
@@ -271,3 +314,47 @@ else
 {
 	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
 }
+
+$this->add_html_head('
+<style>
+.diffbtn {
+    #background-color: #4CAF50;
+    #color: white;
+    padding: 2px 6px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.diffdown {
+    position: relative;
+    display: inline-block;
+}
+
+.diffdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.diffdown-content a {
+    color: black;
+    padding: 2px 6px;
+    text-decoration: none;
+    display: block;
+}
+
+.diffdown-content a:hover {background-color: #f1f1f1}
+
+.diffdown:hover .diffdown-content {
+    display: block;
+}
+
+.diffdown:hover .diffbtn {
+    #background-color: #3e8e41;
+}
+</style>
+');
+
