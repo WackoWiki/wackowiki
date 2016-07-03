@@ -621,7 +621,7 @@ class Wacko
 			return $this->resource[$name];
 		}
 
-		// $this->log(3, "translation $lang/$name not found");
+		// NB: must return NULL if no translation available, it's API
 	}
 
 	function format_translation($name, $lang = '')
@@ -1452,7 +1452,7 @@ class Wacko
 					 'p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$revisions = $this->load_all(
-			"SELECT p.revision_id, ".$page_meta." ".
+			"SELECT p.version_id, p.revision_id, ".$page_meta." ".
 			"FROM ".$this->config['table_prefix']."revision p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
@@ -1482,13 +1482,14 @@ class Wacko
 				"ORDER BY p.modified DESC ".
 				"LIMIT 1")))
 			{
+				$cur['version_id'] = $revisions[0]['version_id'] + 1;
 				array_unshift($revisions, $cur);
 			}
 		}
 		else
 		{
 			$revisions = $this->load_all(
-				"SELECT 0 AS revision_id, ".$page_meta." ".
+				"SELECT 1 AS version_id, 0 AS revision_id, ".$page_meta." ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
