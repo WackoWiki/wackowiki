@@ -470,6 +470,7 @@ $wacko_translation = array(
 	'ClonedFrom' => 'Clonada de %1.',
 	'ClonedRedirect' => 'Editar luego da la creación',
 	'MassClone'				=> 'Clonar cluster entero',
+	'MassCloning'				=> 'Cloning cluster.',
 
 	'SortComment'				=> 'Sort comment by',
 	'SortCommentAsc'			=> 'Most recent on bottom',
@@ -1195,5 +1196,3 @@ $wacko_translation = array(
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 );
-
-?>

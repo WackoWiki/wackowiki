@@ -470,6 +470,7 @@ $wacko_translation = array(
 	'ClonedFrom'				=> 'Cloned from %1.',
 	'ClonedRedirect'			=> 'Edit after creation',
 	'MassClone'					=> 'Clone entire cluster',
+	'MassCloning'				=> 'Cloning cluster.',
 
 	'SortComment'				=> 'Sort comment by',
 	'SortCommentAsc'			=> 'Most recent on bottom',

@@ -290,14 +290,14 @@ $wacko_translation = array(
 	'CommentAdded'				=> 'Комментарий добавлен.',
 	'YouAreNowTheOwner'			=> 'Теперь вы владелец этой страницы.'  ,
 
-	'DiffMode0'					=> 'Full diff',
-	'DiffMode1'				=> 'Простое сравнение',
-	'DiffMode2'				=> 'исходный текст',
-	'DiffMode3'					=> 'Side by side',
-	'DiffMode4'					=> 'Inline',
-	'DiffMode5'					=> 'Unified',
-	'DiffMode6'					=> 'Context',
-	'RevisionsShowAll'			=> 'Показать все редакции…',
+	'DiffMode0'					=> 'Вики-сравнение',
+	'DiffMode1'				=> 'Простое',
+	'DiffMode2'				=> 'Простое исходное',
+	'DiffMode3'					=> 'В две колонки',
+	'DiffMode4'					=> 'Линейное',
+	'DiffMode5'					=> 'Uni-дифф',
+	'DiffMode6'					=> 'Контtкстное',
+	'RevisionsShowAll'			=> 'Показать все редакции...',
 	'ShowDifferencesButton'		=> 'Сравнить',
 	'CancelDifferencesButton'	=> 'Вернуться / Отмена',
 	'Comparison'				=> 'Сравнение версий %3 от %1 и %2',
@@ -342,8 +342,8 @@ $wacko_translation = array(
 	'ClusterRemoved'			=> 'Все страницы кластера удалены.',
 	'RevisionsRemoved'			=> 'Версии страницы удалены.',
 	'ThisActionHavenotUndo'		=> 'Удаление нельзя отменить.',
-	'PageRestored'				=> 'Page restored.',
-	'LocalFilesRestored'		=> 'Local files restored.',
+	'PageRestored'				=> 'Страница восстановлена.',
+	'LocalFilesRestored'		=> 'Локальные файлы восстановлены.',
 
 	'PrintVersion'				=> 'Версия для печати',
 	'PrintText'					=> 'Печать',
@@ -462,14 +462,15 @@ $wacko_translation = array(
 	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
 
 	// clone handler
-	'ClonePage'					=> 'Клон страницу',
-	'CloneText'					=> 'Клон',
-	'CloneName'					=> 'Enter new name for a clone of this page',
-	'CloneButton'				=> 'Клон',
-	'PageCloned'				=> 'Page %1 cloned.',
-	'ClonedFrom'				=> 'Cloned from %1.',
-	'ClonedRedirect'			=> 'Изменить после создания',
-	'MassClone'					=> 'Клон весь кластер',
+	'ClonePage'					=> 'Клонировать страницу',
+	'CloneText'					=> 'Клонировать',
+	'CloneName'					=> 'Введите имя будущего клона',
+	'CloneButton'				=> 'Клонировать',
+	'PageCloned'				=> 'Страница %1 клонирована.',
+	'ClonedFrom'				=> 'Клонировано с %1.',
+	'ClonedRedirect'			=> 'Редактировать после клонирования',
+	'MassClone'					=> 'Клонировать весь кластер',
+	'MassCloning'				=> 'Cloning cluster.',
 
 	'SortComment'				=> 'Sort comment by',
 	'SortCommentAsc'			=> 'Most recent on bottom',
@@ -585,7 +586,7 @@ $wacko_translation = array(
 	'NotLoggedInWatches'		=> 'Вы не зарегистрированы в системе, поэтому ваши списки наблюдений не могут быть найдены.',
 
 	// mychangeswatches action
-	'MyChangesWatches'			=> 'Ниже — список наблюдаемых вами страниц, которые были отредактированы другими пользователями с тех пор, как вы сами занимались их правкой',
+	'MyChangesWatches'			=> 'Ниже - список наблюдаемых вами страниц, которые были отредактированы другими пользователями с тех пор, как вы сами занимались их правкой',
 	'ResetChangesWatches'		=> 'сбросить список изменений',
 	'NoChangesWatches'			=> 'Среди наблюдаемых страниц нет изменений.',
 
@@ -884,7 +885,7 @@ $wacko_translation = array(
 	'NewsNoName'				=> 'Вы забыли указать заголовок добавляемой новости.',
 	'NewsNotAvailable'			=> 'Новостей нет.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
-	'NewsDiscuss'				=> 'Обсудить новость…',
+	'NewsDiscuss'				=> 'Обсудить новость...',
 
 	// Review
 	'Reviewer'					=> 'Reviewer',
@@ -1192,10 +1193,8 @@ $wacko_translation = array(
 	'LogPageEdited'				=> 'Отредактирован документ [[/%1]]',
 	'LogCommentEdited'			=> 'Отредактирован комментарий [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
-									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
+	'ErrorMinPHPVersion'		=> 'Вакавики ожидает версию php не менее <strong>'.PHP_MIN_VERSION.
+									'</strong>, на вашем же сервере используется <strong>'.PHP_VERSION.'</strong>.'.
+									'  Для корректной работы системы рекомендуется апгрейд php.',
 
 );
-
-?>
