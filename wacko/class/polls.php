@@ -76,7 +76,7 @@ class Polls
 		$list = $this->engine->load_all(
 			"SELECT YEAR(start) AS years ".
 			"FROM {$this->engine->config['table_prefix']}poll ".
-			"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
+			"WHERE v_id = 0 AND start IS NULL ".
 			"GROUP BY years ".
 			"ORDER BY years DESC");
 
@@ -108,7 +108,7 @@ class Polls
 					"SELECT poll_id, text, p.user_id, plural, start, u.user_name ".
 					"FROM {$this->engine->config['table_prefix']}poll p ".
 						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' AND end = '".SQL_NULLDATE."' ".
+					"WHERE v_id = 0 AND start IS NULL AND end = IS NULL ".
 					"ORDER BY start DESC");
 				break;
 
@@ -118,7 +118,7 @@ class Polls
 					"SELECT poll_id, text, p.user_id, plural, u.user_name as user ".
 					"FROM {$this->engine->config['table_prefix']}poll p ".
 						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"WHERE v_id = 0 AND start = '".SQL_NULLDATE."' AND end = '".SQL_NULLDATE."' ".
+					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY poll_id ASC");
 				break;
 
@@ -127,7 +127,7 @@ class Polls
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->config['table_prefix']}poll p ".
 						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' AND end <> '".SQL_NULLDATE."' ".
+					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY end DESC");
 				break;
 
@@ -137,8 +137,8 @@ class Polls
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->config['table_prefix']}poll p ".
 						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
-						"AND end <> '".SQL_NULLDATE."' AND YEAR(start) = '".$year."' ".
+					"WHERE v_id = 0 AND start IS NULL ".
+						"AND end IS NULL AND YEAR(start) = '".$year."' ".
 					"ORDER BY end DESC");
 				break;
 
@@ -148,7 +148,7 @@ class Polls
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->config['table_prefix']}poll p ".
 						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
+					"WHERE v_id = 0 AND start IS NULL ".
 					"ORDER BY start DESC");
 		}
 
@@ -170,7 +170,7 @@ class Polls
 				"text		= '".quote($this->engine->dblink, rtrim($topic, '.'))."', ".
 				"user_id	= '".(int)$user_id."', ".
 				"plural		= '".$plural."', ".
-				"start		= ".($start == 1 ? "UTC_TIMESTAMP()" : "'".SQL_NULLDATE."'"));
+				"start		= ".($start == 1 ? "UTC_TIMESTAMP()" : "NULL"));
 
 		// submitting variants
 		foreach ($answers as $v_id => $v_text)
@@ -205,10 +205,10 @@ class Polls
 		// load poll data
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id);
-		$duration	= $this->poll_time($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
+		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
 		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
 
-		if ($header['start'] == SQL_NULLDATE)
+		if (!$header['start'])
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
 					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
@@ -255,14 +255,14 @@ class Polls
 		// load poll data
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id, 1);
-		$duration	= $this->poll_time($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
+		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
 		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
 		$voters		= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];
 		else foreach ($vars as $var)	$total += $var['votes'];
 
-		if ($header['start'] == SQL_NULLDATE)
+		if (!$header['start'])
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
 					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
@@ -286,7 +286,7 @@ class Polls
 			}
 
 			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->get_translation('PollsTotalVotes').': '.$voters.
-						'<br />'.($header['end'] != SQL_NULLDATE ? $this->engine->get_translation('PollsLasted') :
+						'<br />'.($header['end'] ? $this->engine->get_translation('PollsLasted') :
 							$this->engine->get_translation('PollsLasts')).': '.$duration.
 						'<br />'.$this->engine->get_translation('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'</table>'.

@@ -26,7 +26,7 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 {
 	$header	= $polls_obj->get_poll_title((int)$_POST['poll']);
 
-	if ($header['start'] != SQL_NULLDATE && $header['end'] == SQL_NULLDATE && !$polls_obj->poll_is_voted($header['poll_id']))
+	if ($header['start'] && !$header['end'] && !$polls_obj->poll_is_voted($header['poll_id']))
 	{
 		if ($header['plural'] == 1)
 		{
@@ -61,7 +61,7 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 		$this->set_message($this->get_translation('PollsAlreadyVoted'));
 		$this->cache->invalidate_page($this->supertag);
 	}
-	else if ($header['start'] != SQL_NULLDATE && $header['end'] != SQL_NULLDATE)
+	else if ($header['start'] && $header['end'])
 	{
 		$vote = $header['poll_id'];
 		$this->set_message($this->get_translation('PollsAlreadyEnded'));
@@ -83,7 +83,7 @@ if (isset($id))
 {
 	$header	= $polls_obj->get_poll_title($id);
 
-	if ($results == 1 || $polls_obj->poll_is_voted($id) || $header['end'] != SQL_NULLDATE)
+	if ($results == 1 || $polls_obj->poll_is_voted($id) || $header['end'])
 	{
 		echo $polls_obj->show_poll_results($id);
 	}
