@@ -5,7 +5,5 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$safehtml = new safehtml();
+$safehtml = new SafeHTML;
 echo $safehtml->parse($text);
-
-?>

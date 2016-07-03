@@ -46,7 +46,7 @@ if ($this->has_access('read')) { ?>
 <?php if ($this->config['news_cluster']) {?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('NewsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
 <?php } ?>
-<?php if ( $this->hide_revisions === false || $this->is_admin() ) {?>
+<?php if (!$this->hide_revisions) {?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php } ?>
 <?php } ?>

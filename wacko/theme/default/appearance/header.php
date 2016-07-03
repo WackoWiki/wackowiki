@@ -41,7 +41,7 @@ else
 	echo "<ul>\n";
 	echo "<li>".$this->compose_link_to_page($this->get_translation('LoginPage'), '', $this->get_translation('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
 
-	if ($this->config['allow_registration'] == true)
+	if ($this->config['allow_registration'])
 	{
 		echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), '', $this->get_translation('RegistrationPage'), 0)."</li>\n";
 	}
@@ -166,6 +166,12 @@ else
 				$this->has_access('write')))
 	{
 		$echo_tab('edit', 'EditTip', 'EditText', 1, '', 'e');
+	}
+
+	if ($this->page && !$this->count_revisions($this->page['page_id'], 0, $this->is_admin()))
+	{
+		// no revisions - nothing to show
+		$this->hide_revisions = -1;
 	}
 
 	// revisions tab

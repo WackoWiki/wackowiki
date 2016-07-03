@@ -97,7 +97,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 			// print entry
 			echo '<li class="lined'.$viewed.'"><span class="dt">'.
-			(!$this->hide_revisions || $this->is_admin()
+			(!$this->hide_revisions
 				? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip'))." "
 				: $time
 			).

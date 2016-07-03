@@ -339,7 +339,7 @@ else
 	echo '</p>'."\n";
 	echo '<p>'.$this->format_translation('ForgotLink').'</p>'."\n";
 
-	if ($this->config['allow_registration'] == true)
+	if ($this->config['allow_registration'])
 	{
 		echo '<p>'.$this->format_translation('LoginWelcome2').'</p>'."\n";
 	}

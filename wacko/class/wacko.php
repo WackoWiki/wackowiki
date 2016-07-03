@@ -1446,7 +1446,7 @@ class Wacko
 	}
 
 	// STANDARD QUERIES
-	function load_revisions($page_id, $minor_edit = '', $deleted = 0)
+	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0)
 	{
 		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, '.
 					 'p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
@@ -1457,10 +1457,10 @@ class Wacko
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
 			"WHERE p.page_id = '".(int)$page_id."' ".
-				($minor_edit
+				($hide_minor_edit
 					? "AND p.minor_edit = '0' "
 					: "").
-				($deleted != 1
+				(!$show_deleted
 					? "AND p.deleted <> '1' "
 					: "").
 			"ORDER BY p.modified DESC");
@@ -1473,10 +1473,10 @@ class Wacko
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
 				"WHERE p.page_id = '".(int)$page_id."' ".
-					($minor_edit
+					($hide_minor_edit
 						? "AND p.minor_edit = '0' "
 						: "").
-					($deleted != 1
+					(!$show_deleted
 						? "AND p.deleted <> '1' "
 						: "").
 				"ORDER BY p.modified DESC ".
@@ -1494,7 +1494,7 @@ class Wacko
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
 				"WHERE p.page_id = '".(int)$page_id."' ".
-					($deleted != 1
+					(!$show_deleted
 						? "AND p.deleted <> '1' "
 						: "").
 				"ORDER BY p.modified DESC ".
@@ -1502,6 +1502,23 @@ class Wacko
 		}
 
 		return $revisions;
+	}
+
+	function count_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0)
+	{
+		$count = $this->load_single(
+			"SELECT COUNT(page_id) AS n ".
+			"FROM {$this->config->table_prefix}revision ".
+			"WHERE page_id = '".(int)$page_id."' ".
+				($hide_minor_edit
+					? "AND minor_edit = '0' "
+					: "").
+				(!$show_deleted
+					? "AND deleted <> '1' "
+					: "").
+			"LIMIT 1");
+
+		return $count? $count['n'] : 0;
 	}
 
 	function load_pages_linking_to($tag, $for = '')
@@ -6409,10 +6426,9 @@ class Wacko
 		}
 
 		// check revision hideing (1 - guests, 2 - registered users)
-		$this->hide_revisions = ($this->page && (
-			$this->config['hide_revisions'] === true ||
-			($this->config['hide_revisions'] == 1 && !$this->get_user()) ||
-			($this->config['hide_revisions'] == 2 && !$this->is_owner())));
+		$this->hide_revisions = ($this->page && !$this->is_admin() && (
+			($this->config['hide_revisions'] === 1 && !$this->get_user()) ||
+			($this->config['hide_revisions'] === 2 && !$this->is_owner())));
 
 		// forum page
 		$this->forum = !!(preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->tag) ||

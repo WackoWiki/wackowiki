@@ -242,12 +242,13 @@ $wacko_translation = array(
 	'TagCloud'					=> 'Tag Cloud',
 
 	// source handler
-	'TitleSource'				=> 'source of the page',
+	'TitleSource'				=> 'source of the page', // UNUSED
 	'SourceFrom'				=> 'original is located at: ',
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 	'Source'					=> 'view the source',
-	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
+	'SourceDesc'				=> // UNUSED
+	'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',

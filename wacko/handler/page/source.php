@@ -5,9 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-<?php
+echo '<div id="page">';
+$include_tail = '</div>';
 
 /*
 	the source text will be shown with exception of those fragments which are hidden by formatters %%(comment)..%%
@@ -39,18 +38,9 @@ if ($this->has_access('read'))
 		$this->get_translation('Revision')))).".</div>";
 	}*/
 
-	// build html body
-	$data = $this->page['body'];
-
-	// display page
-	$data = $this->format($data, 'source', array('bad' => 'good'));
-	echo $data;
+	echo $this->format($this->page['body'], 'source', array('bad' => 'good'));
 }
 else
 {
-	$message = $this->get_translation('ReadAccessDenied');
-	$this->show_message($message, 'info');
+	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
 }
-
-?>
-</div>
