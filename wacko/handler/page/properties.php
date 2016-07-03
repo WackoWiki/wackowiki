@@ -245,6 +245,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 						'<td class="form_right">
 							<textarea id="description" name="description" rows="4" cols="51">'.$this->page['description'].'</textarea>
 						</td>'.
+			/*
 					"</tr>\n".
 					'<tr class="lined">'.
 						'<th class="form_left" scope="row">
@@ -254,7 +255,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 							<input type="text" id="menu_tag" name="menu_tag" value="'.(isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '').'" size="60" maxlength="100" />
 						</td>'.
 
-			/*		"</tr>\n".'<tr class="lined">'.
+					"</tr>\n".'<tr class="lined">'.
 						'<th class="form_left" scope="row">
 							<label for="show_menu_tag">'.$this->get_translation('SetShowMenuLabel').'</label>
 						</th>'.

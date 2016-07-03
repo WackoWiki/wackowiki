@@ -14,25 +14,6 @@ $options['no<p>']		= true;
 
 if (empty($options['default'])) $options['default'] = 'wacko';
 
-// -------------------------------------------------------------------------------------
-if (!function_exists('formatter_source_callback'))
-{
-	function formatter_source_callback($matches)
-	{
-		$m		= $matches[1];
-		$nbsp	= '&nbsp;';
-		$result	= '';
-
-		for( $i = strlen($m); $i > 0; $i-- )
-		{
-			$result .= $nbsp;
-		}
-
-		return $result;
-	}
-}
-// -------------------------------------------------------------------------------------
-
 if ($options['default'] == 'wacko')
 {
 	// strip comments
@@ -43,8 +24,15 @@ if ($options['default'] == 'wacko')
 
 	// prepare a text to the conclusion
 	$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	$output = preg_replace_callback('/^( +)/mi', 'formatter_source_callback', $output);
-	$output = $this->format( $output, 'simplebr', null, 0, array('no<p>' => 1) );
+	$output = preg_replace_callback('/^ +/m',
+		function ($matches)
+		{
+			$m = strlen($matches[0]);
+			return str_repeat('&nbsp; ', $m >> 1) . (($m & 1)? '&nbsp;' : '');
+		},
+		$output);
+
+	$output = $this->format($output, 'simplebr', null, 0, array('no<p>' => 1) );
 }
 else
 {
@@ -91,5 +79,3 @@ echo $output;
 echo '</pre>';
 
 echo '<!--/notypo-->';
-
-?>
