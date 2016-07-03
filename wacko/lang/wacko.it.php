@@ -413,7 +413,7 @@ $wacko_translation = array(
 	'RealName'					=> 'Real name',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Record per pagina',
-	'ShowComments?'				=> 'Mostra commenti di default',
+	'DoShowComments'				=> 'Mostra commenti di default',
 	'DoubleclickEditing'		=> 'Edita col doppio clic',
 	'UpdateSettingsButton'		=> 'Immetti le preferenze',
 
@@ -772,7 +772,7 @@ $wacko_translation = array(
 	'Files_all'					=> 'Files',
 	'ShowFiles'					=> 'Visualizzare files/form',
 	'HideFiles'					=> 'Nascondere files/form',
-	'ShowFiles?'				=> 'Show files lists by default',
+	'DoShowFiles'				=> 'Show files lists by default',
 
 	'RegistrationLang'			=> 'La tua lingua',
 	'InvalidWikiName'			=> 'Scelto il nome non è valido',
@@ -1137,7 +1137,6 @@ $wacko_translation = array(
 	'UnknownAction'				=> 'Sconosciuto azione',
 	'UnknownMethod'				=> 'Unknown method',
 	'FormatterNotFound'			=> 'Formatter %1 not found',
-	'CantLoadClass'				=> 'Cannot load class %1 from ',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
