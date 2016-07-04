@@ -108,7 +108,7 @@ class Polls
 					"SELECT poll_id, text, p.user_id, plural, start, u.user_name ".
 					"FROM {$this->engine->config['table_prefix']}poll p ".
 						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"WHERE v_id = 0 AND start IS NULL AND end = IS NULL ".
+					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY start DESC");
 				break;
 

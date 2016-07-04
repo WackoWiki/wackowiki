@@ -38,9 +38,9 @@ function random_token($length = 10, $token_complexity = 3)
 
 	for (;;)
 	{
-		$used = [];
-		$token = '';
-		$complexity = 0;
+		$used		= [];
+		$token		= '';
+		$complexity	= 0;
 
 		for ($i = 0; $i < $length; $i++)
 		{
@@ -108,6 +108,7 @@ function stringify($x, $compact = 0, $full = 1)
 
 		return '[' . implode(($compact? ',' : ', '), $array) . ']';
 	}
+
 	if (is_string($x))
 	{
 		if (preg_match('/[\x00-\x1f\x7f]/', $x))
@@ -123,6 +124,7 @@ function stringify($x, $compact = 0, $full = 1)
 	if (!$full)						return false;
 	if (is_object($x))				return '*CLASS:' . get_class($x) . '*';
 	if (is_resource($x))			return '*RESOURCE:' . get_resource_type($x) . '*';
+
 	return '*UNKNOWN*';
 }
 
@@ -192,24 +194,28 @@ function class_autoloader($config)
 // never emits trailing /
 function join_path()
 {
-    $args = func_get_args();
-    if (count($args) == 1 && is_array($args[0]))
-    {
-		$args = $args[0];
-    }
+	$args = func_get_args();
 
-    $parts = [];
-    $absolute = -1;
-    foreach ($args as $arg)
+	if (count($args) == 1 && is_array($args[0]))
+	{
+		$args = $args[0];
+	}
+
+	$parts		= [];
+	$absolute	= -1;
+
+	foreach ($args as $arg)
 	{
 		if ($absolute === -1 && $arg !== '')
 		{
 			$absolute = ($arg[0] == '/');
 		}
-        $parts = array_merge($parts, explode('/', $arg));
-    }
+
+		$parts = array_merge($parts, explode('/', $arg));
+	}
 
 	$n = count($parts);
+
 	for ($from = $to = 0; $from < $n; )
 	{
 		if (($part = $parts[$from++]) == '..')
@@ -225,7 +231,7 @@ function join_path()
 		}
 	}
 
-    $path = implode('/', array_slice($parts, 0, $to));
+	$path = implode('/', array_slice($parts, 0, $to));
 
 	if ($absolute === true)
 	{
