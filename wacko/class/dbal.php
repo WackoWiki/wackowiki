@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// STS: backward compat
+// STS: backward compat, it's here to be removed sometime
 function quote($dblink, $string)
 {
 	return $dblink->quote($string);
@@ -14,7 +14,7 @@ function quote($dblink, $string)
 
 // DATABASE ABSTRACT LAYER
 
-abstract class Dbal // need to be extended by Config to be workable
+abstract class Dbal // need to be extended by Settings to be usable
 {
 	private $db = null;
 	private $result = null;
@@ -149,7 +149,11 @@ abstract class Dbal // need to be extended by Config to be workable
 			{
 				if (($contents = file_get_contents($this->sqlfile)))
 				{
-					return unserialize($contents);
+					$data = unserialize($contents);
+					// re @: if unserialize fails - it's OK and need not propagate further
+					$this->affected_rows = @$data['affected_rows'];
+					unset($data['affected_rows']);
+					return $data;
 				}
 			}
 		}
@@ -160,6 +164,7 @@ abstract class Dbal // need to be extended by Config to be workable
 	// save serialized sql results
 	private function put_cache($data)
 	{
+		$data['affected_rows'] = $this->affected_rows;
 		file_put_contents($this->sqlfile, serialize($data));
 		chmod($this->sqlfile, 0644);
 	}

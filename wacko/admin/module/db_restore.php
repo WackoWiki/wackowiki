@@ -77,7 +77,7 @@ function admin_db_restore(&$engine, &$module)
 		&&  !isset($_POST['start']))
 		{
 			// read backup log
-			$log = str_replace("\n", '', file($dir.$backup_id.'/'.BACKUP_FILE_LOG));
+			$log = str_replace("\n", '', file($dir.$backup_id.'/'.BACKUP_FILE_LOG)); // TODO: file returns array
 
 			echo $engine->form_open('delete_backup', '', 'post', true, '', '');
 
@@ -241,7 +241,7 @@ function admin_db_restore(&$engine, &$module)
 			if (isset($_POST['ignore_files']) && $_POST['ignore_files']	== 1) $ifiles	= true;
 
 			// read backup log
-			$log = str_replace("\n", '', file($dir.$pack.'/'.BACKUP_FILE_LOG));
+			$log = str_replace("\n", '', file($dir.$pack.'/'.BACKUP_FILE_LOG)); // TODO: file returns array
 
 			// start process logging
 			$results = '<strong>'.date('H:i:s').' - Initiated Backups'."\n".
@@ -448,7 +448,7 @@ function admin_db_restore(&$engine, &$module)
 					if (is_dir($dir.$packname) === true //&& strlen($packname) == 49)
 					&& file_exists($dir.$packname.'/'.BACKUP_FILE_LOG) === true)
 					{
-						$_array1	= str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG));
+						$_array1	= str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG)); // TODO: file returns array
 						$_array2	= array('pack' => $packname);
 						// read log
 						$logs[]		= array_merge($_array1, $_array2);

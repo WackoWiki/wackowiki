@@ -98,23 +98,18 @@ function admin_system_statistics(&$engine, &$module)
 
 	foreach ($directories as $dir)
 	{
-		$dir = rtrim($dir, '/');
+		$files	= 0;
+		$size	= 0;
 
-		if ($handle = @opendir($dir))
+		foreach (file_glob($dir, '*') as $file)
 		{
-			$files	= 0;
-			$size	= 0;
+			$size += filesize($file);
+			$files++;
+		}
 
-			while (false !== ($file = readdir($handle)))
-			{
-				if (is_dir($dir.'/'.$file) === false)
-				{
-					$size += filesize($dir.'/'.$file);
-					$files++;
-					$tfiles++;
-				}
-			}
-
+		if ($files)
+		{
+			$tfiles += $files;
 			$tsize += $size;
 
 			echo '<tr class="lined">'.
@@ -123,8 +118,6 @@ function admin_system_statistics(&$engine, &$module)
 					'<td>'.$engine->binary_multiples($size, false, true, true).'</td>'.
 				'</tr>'."\n";
 		}
-
-		@closedir($handle);
 	}
 ?>
 		<tr class="lined">

@@ -41,46 +41,18 @@ function admin_lock(&$engine, &$module)
 	{
 		// pages
 		// STS: cache method purge
-		$directory	= CACHE_PAGE_DIR;
-
-		if (($handle = opendir($directory)))
-		{
-			while (false !== ($file = readdir($handle)))
-			{
-				$file = join_path($directory, $file);
-				if (!is_dir($file))
-				{
-					unlink($file);
-				}
-			}
-
-			closedir($handle);
-		}
+		purge_directory(CACHE_PAGE_DIR);
 
 		$engine->sql_query("TRUNCATE {$engine->config['table_prefix']}cache");
 
 		// queries
-		$engine->config->invalidate_sql_cache();
+		purge_directory(CACHE_SQL_DIR);
 
 		// config
-		$engine->config->invalidate_config_cache();
+		purge_directory(CACHE_CONFIG_DIR);
 
 		// feeds
-		$directory	= CACHE_FEED_DIR;
-
-		if (($handle = opendir($directory)))
-		{
-			while (false !== ($file = readdir($handle)))
-			{
-				$file = join_path($directory, $file);
-				if ($file && !is_dir($file))
-				{
-					unlink($file);
-				}
-			}
-
-			closedir($handle);
-		}
+		purge_directory(CACHE_FEED_DIR);
 	}
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')

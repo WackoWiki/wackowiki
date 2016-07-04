@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-class DbMysqli
+class DbMysqli implements DbInterface
 {
 	private $dblink;
 	private $config;

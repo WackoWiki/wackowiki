@@ -270,26 +270,11 @@ else if (time() - $_SESSION['created'] > $session_length)
 ##     Include admin modules and common functions     ##
 ########################################################
 
-$dirs = array(
-	'admin/common',
-	'admin/module'
-	);
-
-foreach ($dirs as $dir)
+foreach (file_glob('admin/{common,module}/*.php') as $filename)
 {
-	if ($dh = opendir($dir))
-	{
-		while (false !== ($filename = readdir($dh)))
-		{
-			if (is_dir($dir.'/'.$filename) !== true && substr($filename, -4) == '.php')
-			{
-				include($dir.'/'.$filename);
-			}
-		}
-
-		closedir($dh);
-	}
+	include $filename;
 }
+
 
 ########################################################
 ##     Build menue                                    ##

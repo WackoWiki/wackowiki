@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-class DbPDO
+class DbPDO implements DbInterface
 {
 	private $config;
 	private $dblink;
@@ -70,11 +70,6 @@ class DbPDO
 		}
 
 		return $result;
-	}
-
-	function q($string)
-	{
-		return quote($string);
 	}
 
 	function quote($string)
