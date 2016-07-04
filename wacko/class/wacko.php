@@ -1748,7 +1748,7 @@ class Wacko
 		if ($this->config['spam_filter'])
 		{
 			// TODO: read table word and cache it
-			$this->spam = file(join_path(CONFIG_DIF, 'antispam.conf'), 1);
+			$this->spam = file(join_path(CONFIG_DIR, 'antispam.conf'), 1);
 
 			if (is_array($this->spam))
 			{
