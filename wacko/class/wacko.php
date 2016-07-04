@@ -411,6 +411,7 @@ class Wacko
 			// wacko.xy.php $wacko_translation[]
 			$wacko_translation = [];
 			$lang_file = join_path(LANG_DIR, 'wacko.'.$lang.'.php');
+
 			if (@file_exists($lang_file))
 			{
 				include($lang_file);
@@ -421,6 +422,7 @@ class Wacko
 			{
 				$wacko_all_resource = [];
 				$lang_file = join_path(LANG_DIR, 'wacko.all.php');
+
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
@@ -434,10 +436,12 @@ class Wacko
 			$ap_translation = [];
 			$theme_translation = [];
 			$theme_translation0 = [];
+
 			if ($this->config['ap_mode'])
 			{
 				// ap.xy.php $ap_translation[]
 				$lang_file = 'admin/lang/ap.'.$lang.'.php';
+
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
@@ -448,15 +452,18 @@ class Wacko
 				// TODO: only FIRST theme's language loaded.... need to fix for multi-themed sites w/ nonempty theme lang files
 				// theme lang files $theme_translation[]
 				$lang_file = join_path(THEME_DIR, $this->config['theme'], 'lang/wacko.'.$lang.'.php');
+
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
 				}
+
 				$theme_translation0 = $theme_translation;
 
 				// wacko.all theme
 				$theme_translation = [];
 				$lang_file = join_path(THEME_DIR, $this->config['theme'], 'lang/wacko.all.php');
+
 				if (@file_exists($lang_file))
 				{
 					include($lang_file);
@@ -500,6 +507,7 @@ class Wacko
 			{
 				$this->unicode_entities = array_merge($this->unicode_entities, $ue);
 			}
+
 			unset($this->unicode_entities[0]);
 		}
 	}
@@ -515,6 +523,7 @@ class Wacko
 		if (!$this->_lang_list)
 		{
 			$cache = &$_SESSION['available_languages'];
+
 			if (!isset($cache))
 			{
 				$lang_list = [];
@@ -533,6 +542,7 @@ class Wacko
 
 		// allowed languages
 		$list = $this->_lang_list;
+
 		if ($subset && ($allow = preg_split('/[\s,]+/', $this->config->allowed_languages, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
 		{
 			$list = array_intersect($list, $allow);
@@ -557,12 +567,16 @@ class Wacko
 					$matches, PREG_SET_ORDER);
 
 			$best = 0;
+
 			foreach ($matches as $i)
 			{
 				$want1 = $want2 = $i[1];
-				if ($i[3]) {
+
+				if ($i[3])
+				{
 					$want2 = $want1 . '-' . $i[3];
 				}
+
 				$q = ($i[5] !== '')? (float)$i[5] : 1;
 
 				if (in_array($want2, $can) && $q > $best)
@@ -585,6 +599,7 @@ class Wacko
 	{
 		$user = $this->get_user();
 		$lang = @$user['user_lang'];
+
 		if (!in_array($lang, $this->available_languages()))
 		{
 			$lang = $this->user_agent_language();
@@ -2719,10 +2734,12 @@ class Wacko
 			if ($type == 'add' && isset($_SESSION['messages'][0]))
 			{
 				$last = &$_SESSION['messages'][count($_SESSION['messages']) - 1][0];
+
 				if (!is_array($last))
 				{
 					$last = [$last];
 				}
+
 				$last[] = $message;
 			}
 			else
@@ -2758,21 +2775,25 @@ class Wacko
 			foreach ($messages as $message)
 			{
 				list($_message, $_type) = $message;
+
 				if (is_array($_message))
 				{
-					$list = $_message;
-					$_message = '';
-					$i = 1;
+					$list		= $_message;
+					$_message	= '';
+					$i			= 1;
+
 					foreach ($list as $item)
 					{
 						if ($i)
 						{
 							$item = htmlspecialchars($item, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 						}
+
 						$i = !$i;
 						$_message .= $item;
 					}
 				}
+
 				$this->show_message($_message, $_type);
 			}
 		}
