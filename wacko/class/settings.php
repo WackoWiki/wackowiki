@@ -19,14 +19,14 @@ class Settings implements ArrayAccess
 		// retrieve and unserialize cached settings data
 		clearstatcache();
 
-		if (!(@fileperms($this->cachefile) & 0111) || !($data = file_get_contents($this->cachefile)) || !($this->config = unserialize($data)))
+		if (!(fileperms($this->cachefile) & 0111) || !($data = file_get_contents($this->cachefile)) || !($this->config = unserialize($data)))
 		{
 			// for config_defaults
 			$found_rewrite_extension = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
 
 			require_once(CONFIG_DEFAULTS);
 
-			if (@filesize(CONFIG_FILE) <= 0)
+			if (filesize(CONFIG_FILE) <= 0)
 			{
 				$this->config = $wacko_config_defaults;
 				return; // ready for installer
@@ -97,8 +97,8 @@ class Settings implements ArrayAccess
 				if ($this->wacko_version == WACKO_VERSION)
 				{
 					$data = serialize($this->config);
-					@file_put_contents($this->cachefile, $data);
-					@chmod($this->cachefile, 0755); // mark cache as valid
+					file_put_contents($this->cachefile, $data);
+					chmod($this->cachefile, 0755); // mark cache as valid
 				}
 			}
 		}
@@ -167,7 +167,7 @@ class Settings implements ArrayAccess
 	function invalidate_cache()
 	{
 		// we load cache only if x bits set, so clearing 0111 bits will invalidate
-		@chmod($this->cachefile, 0644);
+		chmod($this->cachefile, 0644);
 	}
 
 	// DATABASE ABSTRACT LAYER

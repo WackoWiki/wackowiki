@@ -29,7 +29,8 @@ class Cache
 		$this->sqlfile = $this->sql_cache_id($query);
 
 		clearstatcache();
-		if (($timestamp = @filemtime($this->sqlfile)))
+
+		if (($timestamp = filemtime($this->sqlfile)))
 		{
 			if (time() - $timestamp <= $this->wacko->config->cache_sql_ttl)
 			{
@@ -56,6 +57,7 @@ class Cache
 		if ($this->wacko->config->cache_sql)
 		{
 			$past = time() - $this->wacko->config->cache_sql_ttl - 1;
+
 			foreach (file_glob(CACHE_SQL_DIR, '*') as $file)
 			{
 				touch($file, $past); // touching is faster than unlinking
@@ -91,7 +93,8 @@ class Cache
 		$this->file		= $this->construct_id($this->page, $method, $query);
 
 		clearstatcache();
-		if (($timestamp = @filemtime($this->file)))
+
+		if (($timestamp = filemtime($this->file)))
 		{
 			if (time() - $timestamp <= $this->cache_ttl)
 			{
@@ -113,10 +116,10 @@ class Cache
 
 		$this->wacko->sql_query(
 			"INSERT INTO ".$this->wacko->config->table_prefix."cache SET ".
-			"name	= ".$this->wacko->q($this->hash).", ".
-			"method	= ".$this->wacko->q($this->method).", ".
-			"query	= ".$this->wacko->q($this->query));
-			// TIMESTAMP type is filled automatically by MySQL
+				"name	= ".$this->wacko->q($this->hash).", ".
+				"method	= ".$this->wacko->q($this->method).", ".
+				"query	= ".$this->wacko->q($this->query));
+				// TIMESTAMP type is filled automatically by MySQL
 	}
 
 	// Invalidate the page cache
@@ -134,11 +137,11 @@ class Cache
 			dbg('invalidate_page', $page);
 
 			$past = time() - $this->cache_ttl - 1;
+
 			foreach ($params as $param)
 			{
-				$file = $this->construct_id($page, $param['method'], $param['query']);
-
-				$x = @touch($file, $past); // touching is faster than unlinking
+				$file	= $this->construct_id($page, $param['method'], $param['query']);
+				$x		= touch($file, $past); // touching is faster than unlinking
 
 				dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 			}
@@ -169,13 +172,16 @@ class Cache
 		}
 
 		$_query = [];
+
 		foreach ($_GET as $k => $v)
 		{
 			$_query[$k] = $v;
 		}
+
 		ksort($_query);
 
 		$query = '';
+
 		foreach ($_query as $k => $v)
 		{
 			$query .= urlencode($k) . '=' . urlencode($v) . '&';
@@ -212,6 +218,7 @@ class Cache
 				if (($head = strpos($cached_page, '</head>')) !== false)
 				{
 					$head = substr($cached_page, 0, $head);
+
 					if (preg_match('#<html[^/>]*>#', $head) &&
 						preg_match('#<meta\s+charset="([^"]+)"\s*/>#', $head, $match))
 					{
@@ -244,8 +251,9 @@ class Cache
 
 	function purge($directory, $ttl)
 	{
-		$n = 0;
-		$now = time();
+		$n		= 0;
+		$now	= time();
+
 		clearstatcache();
 
 		foreach (file_glob($directory, '*') as $file)

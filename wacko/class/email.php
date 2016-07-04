@@ -77,7 +77,7 @@ class Email
 			$mail->AddCustomHeader( "X-Wacko: ".$this->engine->config['base_url']."" );
 
 			#$mail->Sender		= $this->engine->config['abuse_email'];
-			#$mail->AddReplyTo('name@yourdomain.com', 'First Last');
+			#$mail->AddReplyTo('name@example.com', 'First Last');
 			$mail->SetFrom($email_from, $name_from);
 			$mail->AddAddress($email_to, $name_to);
 			#$mail->AddBCC($email_to, $name_to);
