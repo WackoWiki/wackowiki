@@ -58,7 +58,7 @@ $page_b = $load_diff_page($a);
 
 if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		$this->page['page_id'] == $page_b['page_id'] &&
-		$this->has_access('read', $page_a['page_id']) && $this->has_access('read', $page_b['page_id']) )
+		$this->has_access('read', $page_a['page_id']))
 {
 	$revisions = $this->load_revisions($this->page['page_id'], 1, $this->is_admin()); // TODO: $hide_minor_edit
 
