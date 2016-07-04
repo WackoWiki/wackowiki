@@ -60,10 +60,10 @@ function admin_lock(&$engine, &$module)
 		$engine->sql_query("TRUNCATE {$engine->config['table_prefix']}cache");
 
 		// queries
-		$engine->cache->invalidate_sql();
+		$engine->config->invalidate_sql_cache();
 
 		// config
-		$engine->config->invalidate_cache();
+		$engine->config->invalidate_config_cache();
 
 		// feeds
 		$directory	= CACHE_FEED_DIR;
@@ -89,7 +89,7 @@ function admin_lock(&$engine, &$module)
 		#$engine->sql_query($sql);
 		$engine->delete_cookie_token('', false);
 		// queries
-		#$engine->cache->invalidate_sql();
+		#$engine->config->invalidate_sql_cache();
 
 	}
 ?>

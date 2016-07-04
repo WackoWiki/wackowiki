@@ -5,11 +5,10 @@ if (!defined('IN_WACKO'))
 	die('No direct script access allowed');
 }
 
-class Settings implements ArrayAccess
+class Settings extends Dbal implements ArrayAccess
 {
 	private $config = [];
 	private $changed = [];
-	private $dblink;
 	private $cachefile;
 
 	public function __construct($secondary = true)
@@ -54,43 +53,39 @@ class Settings implements ArrayAccess
 			if ($secondary)
 			{
 				// connecting to db
-				$this->dbal();
+				parent::__construct();
 
 				// retrieving configuration data from db
-				if (!($result = sql_query($this->dblink,
-						"SELECT config_name, config_value FROM {$this->table_prefix}config", 0)))
+				if (!($result = $this->load_all(
+						"SELECT config_name, config_value FROM {$this->table_prefix}config")))
 				{
 					die("Error loading WackoWiki config data: database `config` table is empty.");
 				}
 
-				while (($row = fetch_assoc($result)))
+				foreach ($result as $row)
 				{
 					$this->config[$row['config_name']] = $row['config_value'];
 				}
 
-				free_result($result);
-
 				// retrieving usergroups data from db
-				if (!($result = sql_query($this->dblink,
+				if (!($result = $this->load_all(
 						"SELECT
 							g.group_name,
 							u.user_name
 						FROM
 							{$this->table_prefix}usergroup_member gm
 								INNER JOIN {$this->table_prefix}user u ON (gm.user_id = u.user_id)
-								INNER JOIN {$this->table_prefix}usergroup g ON (gm.group_id = g.group_id)", 0)))
+								INNER JOIN {$this->table_prefix}usergroup g ON (gm.group_id = g.group_id)")))
 				{
 					die("Error loading WackoWiki usergroups data: database `group` table is empty.");
 				}
 
 				$ug = [];
 
-				while (($row = fetch_assoc($result)))
+				foreach ($result as $row)
 				{
 					$ug[$row['group_name']][] = $row['user_name'];
 				}
-
-				free_result($result);
 
 				foreach ($ug as $group => $users)
 				{
@@ -108,7 +103,7 @@ class Settings implements ArrayAccess
 			}
 		}
 
-		$this->dbal();
+		parent::__construct();
 
 		// convenient config additions
 		$this->theme_url	= $this->base_url . join_path(THEME_DIR, $this->theme) . '/';
@@ -169,46 +164,11 @@ class Settings implements ArrayAccess
 		unset($this->config[$i]);
 	}
 
-	function invalidate_cache()
+	function invalidate_config_cache()
 	{
 		// we load cache only if x bits set, so clearing 0111 bits will invalidate
 		// cachefile may be missing, it's perfectly normal
 		@chmod($this->cachefile, 0644);
-	}
-
-	// DATABASE ABSTRACT LAYER
-	// Initialize DBAL for basic DB operations and connect to selected DB.
-	function dbal()
-	{
-		if (!$this->dblink)
-		{
-			switch ($this->database_driver)
-			{
-				case 'mysql_pdo':
-					$db_file = 'db/pdo.php';
-					break;
-				default:
-					$this->database_driver = 'mysqli_legacy';
-					// FALLTHRU
-				case 'mysqli_legacy':
-					$db_file = 'db/mysqli.php';
-					break;
-			}
-
-			// load DBAL
-			require($db_file);
-
-			$this->dblink = connect($this->database_host, $this->database_user, $this->database_password,
-					$this->database_database, $this->database_charset, $this->database_driver,
-					$this->database_port, $this->sql_mode_strict);
-
-			if (!$this->dblink)
-			{
-				die("Error loading WackoWiki DBAL: could not establish database connection.");
-			}
-		}
-
-		return $this->dblink;
 	}
 
 	function set($name, $value, $delete_cache = true)
@@ -225,7 +185,7 @@ class Settings implements ArrayAccess
 		{
 			if (!isset($this->config[$name]) || $this->config[$name] != $value || isset($this->changed[$name]))
 			{
-				$values[]				= "(0, '$name', '" . quote($this->dblink, $value) . "')";
+				$values[]				= "(0, '$name', " . $this->q($value) . ")";
 				$this->config[$name]	= $value;
 
 				unset($this->changed[$name]);
@@ -237,16 +197,16 @@ class Settings implements ArrayAccess
 
 		if ($values)
 		{
-			sql_query($this->dblink,
+			$this->sql_query(
 				"INSERT INTO {$this->table_prefix}config (config_id, config_name, config_value)
 					VALUES " . implode(', ', $values) . "
 					ON DUPLICATE KEY UPDATE
 						config_name		= VALUES(config_name),
-						config_value	= VALUES(config_value)", 0);
+						config_value	= VALUES(config_value)");
 
 			if ($delete_cache)
 			{
-				$this->invalidate_cache();
+				$this->invalidate_config_cache();
 			}
 		}
 	}
