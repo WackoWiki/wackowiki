@@ -248,9 +248,28 @@ function join_path()
 // file_glob($directory, '*') --> returns list of all files (not directories)
 function file_glob()
 {
-	return array_filter((array) glob(join_path(func_get_args()), GLOB_MARK | GLOB_NOSORT),
+	return array_filter((array) glob(join_path(func_get_args()), GLOB_MARK | GLOB_NOSORT | GLOB_BRACE),
 		function ($x)
 		{
 			return substr($x, -1) != '/';
 		});
+}
+
+// delete all (or older than $ttl seconds) files in directory
+function purge_directory($directory, $ttl = 0)
+{
+	$n		= 0;
+	$past	= time() - $ttl;
+
+	clearstatcache();
+
+	foreach (file_glob($directory, '*') as $file)
+	{
+		if ((!$ttl || filemtime($file) < $past) && unlink($file))
+		{
+			++$n;
+		}
+	}
+
+	return $n;
 }

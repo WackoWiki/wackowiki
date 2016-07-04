@@ -184,7 +184,7 @@ function remove_pack(&$engine, $pack)
 
 	// read log
 	$log = join_path($packdir, BACKUP_FILE_LOG);
-	$log = str_replace("\n", '', file($log));
+	$log = str_replace("\n", '', file($log)); // TODO: file() return array
 
 	// get subdirs list (in reverse order)
 	$subdirs = explode(';', isset($log[5]) ? $log[5] : null);
@@ -195,20 +195,7 @@ function remove_pack(&$engine, $pack)
 	{
 		foreach ($subdirs as $subdir)
 		{
-			$dir = join_path($packdir, $subdir);
-			if ($dh = opendir($dir))
-			{
-				while (false !== ($file = readdir($dh)))
-				{
-					$file = join_path($dir, $file);
-					if (is_file($file) === true)
-					{
-						unlink($file);
-					}
-				}
-
-				closedir($dh);
-			}
+			purge_directory(join_path($packdir, $subdir));
 
 			// recursively remove subdirs in path
 			if (strpos($subdir, '/'))
@@ -241,20 +228,7 @@ function remove_pack(&$engine, $pack)
 	// remove pack contents and directory
 	if (is_dir($packdir) === true)
 	{
-		if ($dh = opendir($packdir))
-		{
-			while (false !== ($file = readdir($dh)))
-			{
-				$file = join_path($packdir, $file);
-				if (is_file($file) === true)
-				{
-					unlink($file);
-				}
-			}
-
-			closedir($dh);
-		}
-
+		purge_directory($packdir);
 		rmdir($packdir);
 	}
 

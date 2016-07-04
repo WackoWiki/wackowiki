@@ -5,8 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($options)) $options = '';
-
 if ($this->is_admin())
 {
 	if (!isset($_POST['clear_cache']))
@@ -35,71 +33,35 @@ if ($this->is_admin())
 	// clear cache
 	else
 	{
-		if (isset($_POST['clear_cache']))
+		@set_time_limit(0);
+
+		// pages cache
+		if (@$_POST['pages_cache'] == 1)
 		{
-			@set_time_limit(0);
+			purge_directory(CACHE_PAGE_DIR);
 
-			// pages cache
-			// STS: it's cache method!
-			if (isset($_POST['pages_cache']) && $_POST['pages_cache'] == 1)
-			{
-				$directory = CACHE_PAGE_DIR;
-
-				if (($handle = opendir($directory)))
-				{
-					while (false !== ($file = readdir($handle)))
-					{
-						$fn = join_path($directory, $file);
-						if ($file != '.' && $file != '..' && !is_dir($fn))
-						{
-							unlink($fn);
-						}
-					}
-
-					closedir($handle);
-				}
-
-				// empties cache table and reset AUTO_INCREMENT value to its start value
-				$this->sql_query("TRUNCATE ".$this->config['table_prefix']."cache");
-			}
-
-			// SQL cache
-			if (isset($_POST['sql_cache']) && $_POST['sql_cache'] == 1)
-			{
-				$this->config->invalidate_sql_cache();
-			}
-
-			// config cache
-			if (isset($_POST['config_cache']) && $_POST['config_cache'] == 1)
-			{
-				$this->config->invalidate_sql_cache();
-			}
-
-			// feeds cache
-			if (isset($_POST['config_feed']) && $_POST['config_feed'] == 1)
-			{
-				// feeds
-				$directory	= CACHE_FEED_DIR;
-
-				if (($handle = opendir($directory)))
-				{
-					while (false !== ($file = readdir($handle)))
-					{
-						$fn = join_path($directory, $file);
-						if ($fn && !is_dir($fn))
-						{
-							unlink($fn);
-						}
-					}
-
-					closedir($handle);
-				}
-			}
-
-			$message = $this->get_translation('CacheCleared');
-			$this->show_message($message, 'success');
+			// empties cache table and reset AUTO_INCREMENT value to its start value
+			$this->sql_query("TRUNCATE ".$this->config['table_prefix']."cache");
 		}
+
+		// SQL cache
+		if (@$_POST['sql_cache'] == 1)
+		{
+			purge_directory(CACHE_SQL_DIR);
+		}
+
+		// config cache
+		if (@$_POST['config_cache'] == 1)
+		{
+			purge_directory(CACHE_CONFIG_DIR);
+		}
+
+		// feeds cache
+		if (@$_POST['config_feed'] == 1)
+		{
+			purge_directory(CACHE_FEED_DIR);
+		}
+
+		$this->show_message($this->get_translation('CacheCleared'), 'success');
 	}
 }
-
-?>

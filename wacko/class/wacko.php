@@ -17,7 +17,6 @@ class Wacko
 	var $categories;
 	var $is_watched				= false;
 	var $hide_revisions			= false;
-	var $inter_wiki				= array();
 	var $_acl					= array();
 	var $acl_cache				= array();
 	var $page_id_cache			= array();
@@ -1664,17 +1663,13 @@ class Wacko
 		if ($this->config['spam_filter'])
 		{
 			// TODO: read table word and cache it
-			$this->spam = file(join_path(CONFIG_DIR, 'antispam.conf'), 1);
-
-			if (is_array($this->spam))
+			if (($spam = file(join_path(CONFIG_DIR, 'antispam.conf'))))
 			{
-				foreach ($this->spam as $spam)
+				foreach ($spam as $one)
 				{
-					if (stripos($text, trim($spam)) !== false)
+					if (stripos($text, trim($one)) !== false)
 					{
-						$message = $this->get_translation('PotentialSpam').' : <code>'.$spam.'</code>';
-
-						return $message;
+						return $this->get_translation('PotentialSpam') . ' : <code>' . $one . '</code>';
 					}
 				}
 			}
@@ -4050,26 +4045,27 @@ class Wacko
 	}
 
 	// INTERWIKI STUFF
-	function read_inter_wiki_config()
+	function get_inter_wiki_url($name, $tag)
 	{
-		if ($lines = file(join_path(CONFIG_DIR, 'interwiki.conf')))
+		// cache interwiki data in _SESSION
+		$inter_wiki = &$_SESSION['interwiki.conf'];
+		if (!isset($inter_wiki))
 		{
-			foreach ($lines as $line)
+			$inter_wiki = [];
+			if (($lines = file(join_path(CONFIG_DIR, 'interwiki.conf'))))
 			{
-				if ($line = trim($line))
+				foreach ($lines as $line)
 				{
-					list($wiki_name, $wiki_url) = explode(' ', trim($line));
-					$this->inter_wiki[strtolower($wiki_name)] = $wiki_url;
+					if (($line = trim($line)) && !ctype_punct($line[0]))
+					{
+						list($wiki_name, $wiki_url) = preg_split('/\s+/', $line);
+						$inter_wiki[strtolower($wiki_name)] = $wiki_url;
+					}
 				}
 			}
 		}
-	}
 
-	function get_inter_wiki_url($name, $tag)
-	{
-		$url = (isset($this->inter_wiki[strtolower($name)]) ? $this->inter_wiki[strtolower($name)] : '');
-
-		if ($url)
+		if (($url = @$inter_wiki[strtolower($name)]))
 		{
 			// xhtmlisation
 			$url = str_replace('&', '&amp;', $url);
@@ -6085,7 +6081,7 @@ class Wacko
 					"DELETE FROM ".$this->config->table_prefix."cache ".
 					"WHERE cache_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".(int)$ttl."' SECOND )");
 
-				if ($this->cache->purge(CACHE_PAGE_DIR, $ttl))
+				if (purge_directory(CACHE_PAGE_DIR, $ttl))
 				{
 					$this->log(7, 'Maintenance: cached pages purged');
 				}
@@ -6094,7 +6090,7 @@ class Wacko
 			// sql query cache
 			if (($ttl = $this->config->cache_sql_ttl) > 0)
 			{
-				if ($this->cache->purge(CACHE_SQL_DIR, $ttl))
+				if (purge_directory(CACHE_SQL_DIR, $ttl))
 				{
 					$this->log(7, 'Maintenance: cached sql results purged');
 				}
@@ -6141,8 +6137,6 @@ class Wacko
 		{
 			$this->maintenance();
 		}
-
-		$this->read_inter_wiki_config();
 
 		// parse authentication cookie and get user data
 		$auth = $this->decompose_auth_cookie();
