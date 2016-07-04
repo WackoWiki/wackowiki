@@ -171,7 +171,7 @@ function class_autoloader($config)
 					$line = preg_split('/\s+/', $line);
 					$file = array_shift($line);
 
-					if (@file_exists($file))
+					if (file_exists($file))
 					{
 						foreach ($line as $class)
 						{

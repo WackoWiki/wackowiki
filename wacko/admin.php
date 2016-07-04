@@ -25,7 +25,7 @@ $config = new Settings(!RECOVERY_MODE);
 // initialize engine api
 $init = new Init($config);
 
-if ($init->is_locked(AP_LOCK))
+if ($config->is_locked(AP_LOCK))
 {
 	if (!headers_sent())
 	{
@@ -43,8 +43,8 @@ $init->session();
 $init->http_security_headers();
 
 // engine start
-$init->cache();
-$engine	= $init->engine();
+$cache = new Cache($config);
+$engine = new Wacko($config, $cache);
 
 if (!empty($config->ext_bad_behavior))
 {
@@ -53,8 +53,8 @@ if (!empty($config->ext_bad_behavior))
 
 // redirect, send them home [disabled for recovery mode!]
 if ((!$engine->is_admin()
-		#&& (!$init->is_locked() === true && !isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) ) )
-		&& (!$init->is_locked() === true ) )
+		#&& (!$config->is_locked() === true && !isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) ) )
+		&& (!$config->is_locked() === true ) )
 	&& !RECOVERY_MODE)
 {
 	if (!headers_sent())
@@ -66,7 +66,8 @@ if ((!$engine->is_admin()
 }
 
 // register locale resources
-$init->engine('lang');
+$engine->set_language($config->language, true);
+
 
 // reconnect securely in tls mode
 if ($config->tls)
@@ -163,7 +164,7 @@ if (isset($_POST['ap_password']))
 		// RECOVERY_MODE ON || RECOVERY_MODE OFF
 		if (($_SESSION['failed_login_count'] >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
-			$init->lock(AP_LOCK);
+			$config->lock(AP_LOCK);
 			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
 
 			$_SESSION['failed_login_count'] = 0;
@@ -369,7 +370,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
 				&nbsp;&nbsp;
-				<?php echo ($init->is_locked() ? '<strong>site closed</strong>' : 'site opened'); ?>
+				<?php echo ($config->is_locked() ? '<strong>site closed</strong>' : 'site opened'); ?>
 				&nbsp;&nbsp;
 				version <?php echo $engine->config['wacko_version']; ?>
 			</span>
@@ -460,7 +461,7 @@ else if (!($_GET && $_POST))
 <?php
 
 // debugging info on script execution time and memory taken
-$init->debug();
+$init->debug($engine);
 
 ?>
 

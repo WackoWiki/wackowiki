@@ -210,4 +210,19 @@ class Settings extends Dbal implements ArrayAccess
 			}
 		}
 	}
+
+	// CHECK WEBSITE LOCKING
+	function is_locked($file = SITE_LOCK)
+	{
+		return substr(@file_get_contents($file), 0, 1) === '1';
+	}
+
+	// lock / unlock
+	// writes value to lock file
+	//		file	= lock file in config folder
+	function lock($file = SITE_LOCK)
+	{
+		@file_put_contents($file, ($this->is_locked($file)? '0' : '1'));
+	}
+
 }

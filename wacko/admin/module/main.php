@@ -31,7 +31,7 @@ function admin_lock(&$engine, &$module)
 	// (un)lock website
 	if (isset($_POST['action']) && $_POST['action'] == 'lock')
 	{
-		$init->lock();
+		$engine->config->lock();
 
 		// $engine->set_user($_user, 0);
 		$engine->redirect('admin.php');
@@ -39,19 +39,13 @@ function admin_lock(&$engine, &$module)
 	// clear cache
 	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
 	{
-		// pages
-		// STS: cache method purge
 		purge_directory(CACHE_PAGE_DIR);
-
 		$engine->sql_query("TRUNCATE {$engine->config['table_prefix']}cache");
 
-		// queries
 		purge_directory(CACHE_SQL_DIR);
 
-		// config
 		purge_directory(CACHE_CONFIG_DIR);
 
-		// feeds
 		purge_directory(CACHE_FEED_DIR);
 	}
 	// purge sessions

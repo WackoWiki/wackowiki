@@ -11,7 +11,7 @@ $init = new Init($config);
 
 $init->installer(); // install
 
-if ($init->is_locked() || RECOVERY_MODE)
+if ($config->is_locked() || RECOVERY_MODE)
 {
 	if (!headers_sent())
 	{
@@ -31,25 +31,25 @@ if ($config->tls && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') 
 	$config->theme_url = str_replace('http://', 'https://' . ($config->tls_proxy ? $config->tls_proxy . '/' : ''), $config->theme_url);
 }
 
-// misc
 $init->request();
 $init->session();
 $init->http_security_headers();
 
-// engine start
-$init->cache();
-$init->cache('check');
-$init->engine();
+$cache = new Cache($config);
+$cache->check($init->page, $init->method);
+
+$engine = new Wacko($config, $cache);
 
 if (!empty($config->ext_bad_behavior))
 {
 	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 }
 
-// execute and cache
-$init->engine('run');
-$init->cache('store');
-$init->debug();
+$engine->run($init->page, $init->method);
+
+$cache->store();
+
+$init->debug($engine);
 
 // closing tags
 if (strpos($init->method, '.xml') === false)
@@ -65,3 +65,4 @@ if ( !headers_sent() )
 }
 
 ob_end_flush();
+
