@@ -14,12 +14,16 @@ class Settings implements ArrayAccess
 
 	public function __construct($secondary = true)
 	{
-		$this->cachefile = CACHE_CONFIG_DIR . '/' . 'config.php';
+		$this->cachefile = join_path(CACHE_CONFIG_DIR, 'config.php');
 
 		// retrieve and unserialize cached settings data
 		clearstatcache();
 
-		if (!(@fileperms($this->cachefile) & 0111) || !($data = file_get_contents($this->cachefile)) || !($this->config = unserialize($data)))
+		// do not read invalidated (by x-bits) or non-writable cachefile
+		if (!((@fileperms($this->cachefile) & 0111)
+			&& is_writable($this->cachefile)
+			&& ($data = file_get_contents($this->cachefile))
+			&& ($this->config = unserialize($data))))
 		{
 			// for config_defaults
 			$found_rewrite_extension = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
@@ -97,8 +101,9 @@ class Settings implements ArrayAccess
 				if ($this->wacko_version == WACKO_VERSION)
 				{
 					$data = serialize($this->config);
-					file_put_contents($this->cachefile, $data);
-					chmod($this->cachefile, 0755); // mark cache as valid
+					// unable to write cache file considered are 'turn config caching off' feature
+					@file_put_contents($this->cachefile, $data);
+					@chmod($this->cachefile, 0755); // mark cache as valid
 				}
 			}
 		}
@@ -167,7 +172,8 @@ class Settings implements ArrayAccess
 	function invalidate_cache()
 	{
 		// we load cache only if x bits set, so clearing 0111 bits will invalidate
-		chmod($this->cachefile, 0644);
+		// cachefile may be missing, it's perfectly normal
+		@chmod($this->cachefile, 0644);
 	}
 
 	// DATABASE ABSTRACT LAYER
