@@ -149,7 +149,7 @@ if ($registered
 				$message .= recursive_move($this, $this->tag, $new_root);
 			}
 
-			$this->cache->invalidate_sql();
+			$this->config->invalidate_sql_cache();
 
 			// update sitemap
 			$this->update_sitemap();

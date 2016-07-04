@@ -37,7 +37,7 @@ function admin_system_log(&$engine, &$module)
 		$engine->sql_query($sql);
 
 		// queries
-		$engine->cache->invalidate_sql();
+		$engine->config->invalidate_sql_cache();
 
 	}
 

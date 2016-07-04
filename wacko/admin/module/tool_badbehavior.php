@@ -867,7 +867,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 	$engine->sql_query($sql);
 
 	// queries
-	$engine->cache->invalidate_sql();
+	$engine->config->invalidate_sql_cache();
 
 }
 

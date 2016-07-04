@@ -13,7 +13,6 @@ class Cache
 	var $method;
 	var $query;
 	var $file;
-	var $sqlfile;
 
 	// Constructor
 	function __construct($cache_ttl)
@@ -21,67 +20,6 @@ class Cache
 		$this->cache_ttl	= $cache_ttl;
 		$this->timer		= microtime(1);
 	}
-
-	// retrieve and unserialize cached sql data if available
-	function load_sql($query)
-	{
-		// store data for oncoming save_sql
-		$this->sqlfile = $this->sql_cache_id($query);
-
-		clearstatcache();
-
-		if (($timestamp = @filemtime($this->sqlfile)))
-		{
-			if (time() - $timestamp <= $this->wacko->config->cache_sql_ttl)
-			{
-				if (($contents = file_get_contents($this->sqlfile)))
-				{
-					return unserialize($contents);
-				}
-			}
-		}
-
-		return false;
-	}
-
-	// save serialized sql results
-	function save_sql($data)
-	{
-		file_put_contents($this->sqlfile, serialize($data));
-		chmod($this->sqlfile, 0644);
-	}
-
-	// Invalidate the SQL cache
-	function invalidate_sql()
-	{
-		if ($this->wacko->config->cache_sql)
-		{
-			$past = time() - $this->wacko->config->cache_sql_ttl - 1;
-
-			foreach (file_glob(CACHE_SQL_DIR, '*') as $file)
-			{
-				touch($file, $past); // touching is faster than unlinking
-			}
-		}
-	}
-
-	function sql_cache_id($query)
-	{
-		// Remove extra whitespace while protecting quoted data
-		$query = preg_replace_callback('/(\s+)|(^[\s;]+|[\s;]+$)|\'(\\\\\'|\\\\\\\\|[^\'])*\'|"(\\\\"|\\\\\\\\|[^"])*"/',
-			function ($x)
-			{
-				if (!empty($x[1]))
-					return ' ';
-				if (!empty($x[2]))
-					return '';
-				return $x[0];
-			}, $query);
-
-		return join_path(CACHE_SQL_DIR, hash('sha1', $query));
-	}
-
-	// http cache =====================================================
 
 	// Get page content from cache
 	function load_page($page, $method, $query, &$timestamp)

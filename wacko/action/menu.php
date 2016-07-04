@@ -235,7 +235,7 @@ if (isset($_POST['_user_menu']))
 	#$this->set_user($this->load_user('', $_user_id, '', true), 0, 1, true);
 
 	// purge SQL queries cache
-	$this->cache->invalidate_sql();
+	$this->config->invalidate_sql_cache();
 
 	// update user menu
 	$this->set_menu(MENU_USER, 1);

@@ -8,8 +8,7 @@ if (!defined('IN_WACKO'))
 // engine class
 class Wacko
 {
-	// VARIABLES
-	var $config					= array();
+	var $config;
 	var $dblink;
 	var $page;								// Requested page
 	var $tag;
@@ -18,8 +17,6 @@ class Wacko
 	var $categories;
 	var $is_watched				= false;
 	var $hide_revisions			= false;
-	var $query_time;
-	var $query_log				= array();
 	var $inter_wiki				= array();
 	var $_acl					= array();
 	var $acl_cache				= array();
@@ -95,111 +92,30 @@ class Wacko
 	function __construct(&$config)
 	{
 		$this->timer	= microtime(1);
+		$this->dblink	=
 		$this->config	= & $config;
-		$this->dblink	= $config->dbal();
 	}
 
 	// DATABASE
-
-	/**
-	* Make DB SQL-query
-	*
-	* @param string $query SQL query
-	* @param int $debug
-	* @return resource Query result
-	*/
+	// STS: backward compat
 	function sql_query($query, $debug = 0)
 	{
-		if ($debug)
-		{
-			echo "(QUERY: $query)";
-		}
-
-		if ($this->config['debug'] >= 2)
-		{
-			$start = microtime(1);
-		}
-
-		$result = sql_query($this->dblink, $query, $this->config['debug']);
-
-		if ($this->config['debug'] >= 2)
-		{
-			$time = microtime(1) - $start;
-			$this->query_time += $time;
-
-			if ($this->config['debug'] >= 3)
-			{
-				$this->query_log[] = array(
-					'query'		=> $query,
-					'time'		=> $time
-				);
-			}
-		}
-
-		return $result;
+		return $this->dblink->sql_query($query, $debug);
 	}
 
-	/**
-	* Makes DB query and load result in array
-	*
-	* @param string $query SQL query
-	* @param boolean $docache
-	* @return resource Query result
-	* @return array Array of rows
-	*/
 	function load_all($query, $docache = false)
 	{
-		// retrieving from cache
-		if ($this->config['cache_sql'] && $docache)
-		{
-			if (($data = $this->cache->load_sql($query)))
-			{
-				return $data;
-			}
-		}
-
-		$data = array();
-
-		// retrieving from db
-		if (($result = $this->sql_query($query)))
-		{
-			while (($row = fetch_assoc($result)))
-			{
-				$data[] = $row;
-			}
-
-			free_result($result);
-		}
-
-		// saving to cache
-		if ($this->config['cache_sql'] && $docache)
-		{
-			$this->cache->save_sql($data);
-		}
-
-		return $data;
+		return $this->dblink->load_all($query, $docache);
 	}
 
-	/**
-	* Makes DB query and return only first result
-	*
-	* @param string $query SQL query
-	* @param boolean $docache
-	* @return array First returned row
-	*/
 	function load_single($query, $docache = false)
 	{
-		if (($data = $this->load_all($query, $docache)))
-		{
-			return $data[0];
-		}
-
-		return null;
+		return $this->dblink->load_single($query, $docache);
 	}
 
 	function q($data)
 	{
-		return "'". quote($this->dblink, $data) . "'";
+		return $this->dblink->q($data);
 	}
 
 	// MISC
@@ -1891,7 +1807,7 @@ class Wacko
 				$this->cache->invalidate_page($this->supertag);
 			}
 
-			$this->cache->invalidate_sql();
+			$this->config->invalidate_sql_cache();
 		}
 
 		// check privileges
@@ -6448,8 +6364,8 @@ class Wacko
 
 		// check revision hideing (1 - guests, 2 - registered users)
 		$this->hide_revisions = ($this->page && !$this->is_admin() && (
-			($this->config['hide_revisions'] === 1 && !$this->get_user()) ||
-			($this->config['hide_revisions'] === 2 && !$this->is_owner())));
+			($this->config['hide_revisions'] == 1 && !$this->get_user()) ||
+			($this->config['hide_revisions'] == 2 && !$this->is_owner())));
 
 		// forum page
 		$this->forum = !!(preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->tag) ||

@@ -367,20 +367,20 @@ class Init
 
 				if ($this->config['debug'] >= 2)
 				{
-					echo "\t<li>Execution time: ".number_format($overall_time - $this->engine->query_time, 3)." sec.</li>\n";
-					echo "\t<li>SQL time: ".number_format($this->engine->query_time, 3)." sec.</li>\n";
+					echo "\t<li>Execution time: ".number_format($overall_time - $this->config->query_time, 3)." sec.</li>\n";
+					echo "\t<li>SQL time: ".number_format($this->config->query_time, 3)." sec.</li>\n";
 				}
 
 				if ($this->config['debug'] >= 3)
 				{
-					echo "\t<li>SQL queries: ".count($this->engine->query_log)."</li>\n";
+					echo "\t<li>SQL queries: ".count($this->config->query_log)."</li>\n";
 					echo "\t<li>SQL queries dump follows".
 							( $this->config['debug_sql_threshold'] > 0
 								? " (&gt;".$this->config['debug_sql_threshold']." sec.)"
 								: "" ).
 						":\n\t\t<ol>\n";
 
-					foreach ($this->engine->query_log as $query)
+					foreach ($this->config->query_log as $query)
 					{
 						if ($query['time'] < $this->config['debug_sql_threshold'])
 						{

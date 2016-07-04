@@ -66,13 +66,13 @@ if ($this->is_admin())
 			// SQL cache
 			if (isset($_POST['sql_cache']) && $_POST['sql_cache'] == 1)
 			{
-				$this->cache->invalidate_sql();
+				$this->config->invalidate_sql_cache();
 			}
 
 			// config cache
 			if (isset($_POST['config_cache']) && $_POST['config_cache'] == 1)
 			{
-				$this->cache->invalidate_sql();
+				$this->config->invalidate_sql_cache();
 			}
 
 			// feeds cache

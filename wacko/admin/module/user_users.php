@@ -298,7 +298,7 @@ function admin_user_users(&$engine, &$module)
 							#"AND owner_id = '".(int)$_POST['user_id']."'".
 						"");
 
-					$engine->config->invalidate_cache();
+					$engine->config->invalidate_config_cache();
 					$engine->show_message($engine->get_translation('UsersDeleted'));
 					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
 				}
