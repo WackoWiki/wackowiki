@@ -2,27 +2,27 @@
 
 if (!defined('IN_WACKO'))
 {
-	exit('No direct script access allowed');
+	exit;
 }
 
 class Cache
 {
-	var $cache_ttl	= 600;
-	var $page;
-	var $hash;
-	var $method;
-	var $query;
-	var $file;
+	private $db;
+	private $page;
+	private $hash;
+	private $method;
+	private $query;
+	private $file;
+	private $caching;
 
-	// Constructor
-	function __construct($cache_ttl)
+	public function __construct(&$config)
 	{
-		$this->cache_ttl	= $cache_ttl;
+		$this->db			= & $config;
 		$this->timer		= microtime(1);
 	}
 
 	// Get page content from cache
-	function load_page($page, $method, $query, &$timestamp)
+	private function load_page($page, $method, $query, &$timestamp)
 	{
 		// store data for save_page()
 		list($this->page, $this->hash) = $this->normalize_page($page);
@@ -34,7 +34,7 @@ class Cache
 
 		if (($timestamp = @filemtime($this->file)))
 		{
-			if (time() - $timestamp <= $this->cache_ttl)
+			if (time() - $timestamp <= $this->db->cache_ttl)
 			{
 				if (($contents = file_get_contents($this->file)))
 				{
@@ -47,34 +47,34 @@ class Cache
 	}
 
 	// Store page content to cache
-	function save_page($data)
+	private function save_page($data)
 	{
 		file_put_contents($this->file, $data);
 		chmod($this->file, 0644);
 
-		$this->wacko->sql_query(
-			"INSERT INTO ".$this->wacko->config->table_prefix."cache SET ".
-				"name	= ".$this->wacko->q($this->hash).", ".
-				"method	= ".$this->wacko->q($this->method).", ".
-				"query	= ".$this->wacko->q($this->query));
+		$this->db->sql_query(
+			"INSERT INTO ".$this->db->table_prefix."cache SET ".
+				"name	= ".$this->db->q($this->hash).", ".
+				"method	= ".$this->db->q($this->method).", ".
+				"query	= ".$this->db->q($this->query));
 				// TIMESTAMP type is filled automatically by MySQL
 	}
 
 	// Invalidate the page cache
-	function invalidate_page($page)
+	public function invalidate_page($page)
 	{
-		if ($this->wacko->config->cache)
+		if ($this->db->cache)
 		{
 			list($page, $hash) = $this->normalize_page($page);
 
-			$params	= $this->wacko->load_all(
+			$params	= $this->db->load_all(
 				"SELECT method, query ".
-					"FROM ".$this->wacko->config->table_prefix."cache ".
-					"WHERE name = ".$this->wacko->q($hash));
+					"FROM ".$this->db->table_prefix."cache ".
+					"WHERE name = ".$this->db->q($hash));
 
 			dbg('invalidate_page', $page);
 
-			$past = time() - $this->cache_ttl - 1;
+			$past = time() - $this->db->cache_ttl - 1;
 
 			foreach ($params as $param)
 			{
@@ -84,25 +84,25 @@ class Cache
 				dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 			}
 
-			$this->wacko->sql_query(
-				"DELETE FROM ".$this->wacko->config->table_prefix."cache ".
-				"WHERE name = ".$this->wacko->q($hash));
+			$this->db->sql_query(
+				"DELETE FROM ".$this->db->table_prefix."cache ".
+				"WHERE name = ".$this->db->q($hash));
 		}
 	}
 
-	function normalize_page($page)
+	private function normalize_page($page)
 	{
 		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
 		return [$page, hash('sha1', $page)];
 	}
 
-	function construct_id($page, $method, $query)
+	private function construct_id($page, $method, $query)
 	{
 		return join_path(CACHE_PAGE_DIR, hash('sha1', ($page . '_' . $method . '_' . $query)));
 	}
 
 	// Check http-request. May be, output cached version.
-	function check_http_request($page, $method)
+	private function check_http_request($page, $method)
 	{
 		if (!$page)
 		{
@@ -187,21 +187,40 @@ class Cache
 		return true;
 	}
 
-	function purge($directory, $ttl)
+	// allow main engine to disable caching
+	public function disable_cache()
 	{
-		$n		= 0;
-		$now	= time();
+		$this->caching = 0;
+	}
 
-		clearstatcache();
-
-		foreach (file_glob($directory, '*') as $file)
+	public function check($page, $method)
+	{
+		$this->caching = 0;
+		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $method != 'edit' && $method != 'watch')
 		{
-			if ($now - filemtime($file) > $ttl && unlink($file))
+			// cache only for anonymous user
+			if (!isset($_COOKIE[$this->db->cookie_prefix . 'auth' . '_' . $this->db->cookie_hash]))
 			{
-				++$n;
+				$this->caching = $this->check_http_request($page, $method);
 			}
 		}
-
-		return $n;
 	}
+
+	public function store()
+	{
+		if ($this->caching)
+		{
+			$data = ob_get_contents();
+
+			if (!empty($data))
+			{
+				$this->save_page($data);
+			}
+			else
+			{
+				// FALSE, then output buffering is not active
+			}
+		}
+	}
+
 }

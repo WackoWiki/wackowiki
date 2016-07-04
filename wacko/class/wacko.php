@@ -9,6 +9,7 @@ if (!defined('IN_WACKO'))
 class Wacko
 {
 	var $config;
+	var $cache;
 	var $dblink;
 	var $page;								// Requested page
 	var $tag;
@@ -26,7 +27,6 @@ class Wacko
 	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	var $first_inclusion		= array();	// for backlinks
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link
-	var $disable_cache			= false;
 	var $unicode_entities		= array();	// common unicode array
 	var $timer;
 	var $toc_context			= array();
@@ -88,11 +88,12 @@ class Wacko
 	* @param array $config Current configuration as map key=value
 	* @return Wacko
 	*/
-	function __construct(&$config)
+	function __construct(&$config, &$cache)
 	{
 		$this->timer	= microtime(1);
 		$this->dblink	=
 		$this->config	= & $config;
+		$this->cache	= & $cache;
 	}
 
 	// DATABASE
@@ -2773,7 +2774,7 @@ class Wacko
 		// disable server cache for page
 		if ($client_only === false)
 		{
-			$this->disable_cache = true;
+			$this->cache->disable_cache();
 		}
 	}
 

@@ -15,9 +15,6 @@ class Init
 {
 	// WRAPPER VARIABLES
 	var $config;
-	var $cacheval	= null;
-	var $cache;
-	var $engine;
 	var $page;
 	var $method;
 	var $timer;
@@ -162,20 +159,6 @@ class Init
 		return session_id();
 	}
 
-	// CHECK WEBSITE LOCKING
-	function is_locked($file = SITE_LOCK)
-	{
-		return substr(@file_get_contents($file), 0, 1) == '1';
-	}
-
-	// lock / unlock
-	// writes value to lock file
-	//		file	= lock file in config folder
-	function lock($file = SITE_LOCK)
-	{
-		@file_put_contents($file, ($this->is_locked($file)? '0' : '1'));
-	}
-
 	// INSTALLER
 	function installer()
 	{
@@ -194,8 +177,8 @@ class Init
 			}
 
 			// start installer
-			global $config;
-			$config = & $this->config;
+			//global $config;
+			//$config = & $this->config;	// STS: sane $config there already
 
 			if (!($install_action = trim(@$_REQUEST['installAction'])))
 			{
@@ -216,94 +199,6 @@ class Init
 			include('setup/footer.php');
 
 			exit;
-		}
-	}
-
-	// CACHING ENGINE
-	// First must be initialized without parameters. Then
-	// can be used with these values (for corresponding
-	// cache class methods):
-	//		log		= Log
-	//		check	= check_http_request
-	//		store	= store_page_cache
-	function cache($op = '')
-	{
-		if (!$this->cache || !$op)
-		{
-			$this->cache = new Cache($this->config['cache_ttl']);
-		}
-
-		if ($op == 'check')
-		{
-			if ($this->config['cache'] && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
-			{
-				// cache only for anonymous user
-				if (!isset($_COOKIE[$this->config['cookie_prefix'].'auth'.'_'.$this->config['cookie_hash']]))
-				{
-					$this->cacheval = $this->cache->check_http_request($this->page, $this->method);
-				}
-			}
-		}
-		else if ($op == 'store')
-		{
-			if ($this->cacheval)
-			{
-				$data = ob_get_contents();
-
-				if (!empty($data) && !$this->engine->disable_cache)
-				{
-					return $this->cache->save_page($data);
-				}
-				else
-				{
-					// FALSE, then output buffering is not active
-				}
-			}
-		}
-	}
-
-	// WACKOWIKI ENGINE
-	// First must be initialized without parameters. Then
-	// can be used with these values:
-	//		run		= Main execution routine (open start page)
-	//		lang	= Load and register locale string resources
-	//				  only (for $lang or for default language)
-	function engine($op = '', $lang = '')
-	{
-		if ($this->engine == false || $op == false)
-		{
-
-			$this->engine = new Wacko($this->config);
-
-			// FIXME: add description
-			if ($this->cache == true)
-			{
-				$this->cache->wacko		= & $this->engine;
-				$this->engine->cache	= & $this->cache;
-			}
-
-			return $this->engine;
-		}
-		else if ($this->engine == true && $op == 'run')
-		{
-			return $this->engine->run($this->page, $this->method);
-		}
-		else if ($this->engine == true && $op == 'lang')
-		{
-			// registers locale resources for admin panel
-			//		call $init->engine('lang');
-			if (!$lang)
-			{
-				$lang = $this->config['language'];
-			}
-
-			$this->engine->set_language($lang, true);
-
-			return true;
-		}
-		else
-		{
-			return false;
 		}
 	}
 
@@ -340,11 +235,11 @@ class Init
 	}
 
 	// DEBUG INFO
-	function debug()
+	function debug(&$engine)
 	{
 		if ($this->config['debug'] >= 1 && strpos($this->method, '.xml') === false && $this->method != 'print' && $this->method != 'wordprocessor')
 		{
-			if (($this->config['debug_admin_only'] == true && $this->engine->is_admin() === true) || $this->config['debug_admin_only'] == false)
+			if (($this->config['debug_admin_only'] == true && $engine->is_admin() === true) || $this->config['debug_admin_only'] == false)
 			{
 				$overall_time = microtime(1) - $this->timer;
 
@@ -359,7 +254,7 @@ class Init
 
 				if ($execmem)
 				{
-					echo "\t<li>Memory allocated: ".$this->engine->binary_multiples($execmem, false, true, false)."</li>\n";
+					echo "\t<li>Memory allocated: ".$engine->binary_multiples($execmem, false, true, false)."</li>\n";
 				}
 
 				#echo "<li>UTC: ".date('Y-m-d H:i:s', time())."</li>\n";
@@ -399,7 +294,7 @@ class Init
 
 				if ($this->config['debug'] >= 2)
 				{
-					$user = $this->engine->get_user();
+					$user = $engine->get_user();
 					echo '<p class="debug">Language data</p>'."\n<ul>\n";
 					echo "\t<li>Multilanguage: ".($this->config['multilanguage'] == 1 ? 'true' : 'false')."</li>\n";
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
@@ -407,12 +302,12 @@ class Init
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
 					echo "\t<li>User language set: ".(isset($user['user_lang']) ? 'true' : 'false')."</li>\n";
 					echo "\t<li>User language value: ".(isset($user['user_lang']) ? $user['user_lang'] : '')."</li>\n";
-					echo "\t<li>Page language: ".$this->engine->page['page_lang'] ."</li>\n";
+					echo "\t<li>Page language: ".$engine->page['page_lang'] ."</li>\n";
 					echo "\t<li>Config language: ".$this->config['language']."</li>\n";
-					echo "\t<li>User selected language: ".(isset($this->engine->user_lang) ? $this->engine->user_lang : '')."</li>\n";
-					echo "\t<li>Charset: ".$this->engine->get_charset()."</li>\n";
+					echo "\t<li>User selected language: ".(isset($engine->user_lang) ? $engine->user_lang : '')."</li>\n";
+					echo "\t<li>Charset: ".$engine->get_charset()."</li>\n";
 					echo "\t<li>HTML Entities Charset: ".HTML_ENTITIES_CHARSET."</li>\n";
-					echo "\t<li>Disable cache: ".($this->engine->disable_cache === true ? 'true' : 'false')."</li>\n";
+					// echo "\t<li>Disable cache: ".($engine->disable_cache === true ? 'true' : 'false')."</li>\n";
 					echo "</ul>\n";
 				}
 
@@ -420,7 +315,7 @@ class Init
 				{
 					$query = 'SHOW VARIABLES LIKE "%character_set%";';
 
-					if ($r = $this->engine->load_all($query, true))
+					if ($r = $engine->load_all($query, true))
 					{
 						echo "<p class=\"debug\">MySQL character set</p>\n<ul>\n";
 
@@ -434,7 +329,7 @@ class Init
 
 					$query = 'SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode;';
 
-					if ($r = $this->engine->load_single($query, true))
+					if ($r = $engine->load_single($query, true))
 					{
 						echo "<p class=\"debug\">SQL mode set</p>\n<ul>\n";
 						echo "\t<li>".'GLOBAL'.": ".$r['@@GLOBAL.sql_mode']."</li>\n";
@@ -449,7 +344,7 @@ class Init
 					echo "\t<li>session_id(): ".session_id()."</li>\n";
 					echo "\t<li>Base URL: ".$this->config['base_url']."</li>\n";
 					echo "\t<li>HTTPS: ".(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')."</li>\n";
-					echo "\t<li>IP-address: ".$this->engine->get_user_ip()."</li>\n";
+					echo "\t<li>IP-address: ".$engine->get_user_ip()."</li>\n";
 					echo "\t<li>SERVER_PORT: ".$_SERVER['SERVER_PORT']."</li>\n";
 					echo "\t<li>TLS: ".(isset($this->config['tls']) ? 'on' : 'off')."</li>\n";
 					echo "\t<li>TLS Proxy: ".(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'] : "false")."</li>\n";
@@ -463,9 +358,9 @@ class Init
 				if ($this->config['debug'] >= 3)
 				{
 					debug_print_r($_SESSION);
-					debug_print_r($this->engine->context);
+					debug_print_r($engine->context);
 					// debug_print_r($this->config);
-					// debug_print_r($this->engine->page);
+					// debug_print_r($engine->page);
 				}
 
 				echo "</div >\n";
