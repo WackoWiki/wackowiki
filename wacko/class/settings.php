@@ -19,7 +19,7 @@ class Settings implements ArrayAccess
 		// retrieve and unserialize cached settings data
 		clearstatcache();
 
-		if (!(fileperms($this->cachefile) & 0111) || !($data = file_get_contents($this->cachefile)) || !($this->config = unserialize($data)))
+		if (!(@fileperms($this->cachefile) & 0111) || !($data = file_get_contents($this->cachefile)) || !($this->config = unserialize($data)))
 		{
 			// for config_defaults
 			$found_rewrite_extension = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
