@@ -30,7 +30,7 @@ class Cache
 
 		clearstatcache();
 
-		if (($timestamp = filemtime($this->sqlfile)))
+		if (($timestamp = @filemtime($this->sqlfile)))
 		{
 			if (time() - $timestamp <= $this->wacko->config->cache_sql_ttl)
 			{
@@ -94,7 +94,7 @@ class Cache
 
 		clearstatcache();
 
-		if (($timestamp = filemtime($this->file)))
+		if (($timestamp = @filemtime($this->file)))
 		{
 			if (time() - $timestamp <= $this->cache_ttl)
 			{
@@ -141,7 +141,7 @@ class Cache
 			foreach ($params as $param)
 			{
 				$file	= $this->construct_id($page, $param['method'], $param['query']);
-				$x		= touch($file, $past); // touching is faster than unlinking
+				$x		= @touch($file, $past); // touching is faster than unlinking
 
 				dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 			}
