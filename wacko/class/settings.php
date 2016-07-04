@@ -14,11 +14,11 @@ class Settings implements ArrayAccess
 
 	public function __construct($secondary = true)
 	{
-		$this->cachefile = '_cache/' . CACHE_CONFIG_DIR . 'config.php';
+		$this->cachefile = CACHE_CONFIG_DIR . '/' . 'config.php';
 
 		// retrieve and unserialize cached settings data
-
 		clearstatcache();
+
 		if (!(@fileperms($this->cachefile) & 0111) || !($data = file_get_contents($this->cachefile)) || !($this->config = unserialize($data)))
 		{
 			// for config_defaults
@@ -26,7 +26,8 @@ class Settings implements ArrayAccess
 
 			require_once(CONFIG_DEFAULTS);
 
-			if (@filesize(CONFIG_FILE) <= 0) {
+			if (@filesize(CONFIG_FILE) <= 0)
+			{
 				$this->config = $wacko_config_defaults;
 				return; // ready for installer
 			}
@@ -52,7 +53,7 @@ class Settings implements ArrayAccess
 				$this->dbal();
 
 				// retrieving configuration data from db
-				if (!($result = sql_query($this->dblink, 
+				if (!($result = sql_query($this->dblink,
 						"SELECT config_name, config_value FROM {$this->table_prefix}config", 0)))
 				{
 					die("Error loading WackoWiki config data: database `config` table is empty.");
@@ -62,6 +63,7 @@ class Settings implements ArrayAccess
 				{
 					$this->config[$row['config_name']] = $row['config_value'];
 				}
+
 				free_result($result);
 
 				// retrieving usergroups data from db
@@ -78,10 +80,12 @@ class Settings implements ArrayAccess
 				}
 
 				$ug = [];
+
 				while (($row = fetch_assoc($result)))
 				{
 					$ug[$row['group_name']][] = $row['user_name'];
 				}
+
 				free_result($result);
 
 				foreach ($ug as $group => $users)
@@ -145,6 +149,7 @@ class Settings implements ArrayAccess
 		{
 			$this->changed[$i] = 1;
 		}
+
 		$this->config[$i] = $value;
 	}
 
@@ -209,12 +214,14 @@ class Settings implements ArrayAccess
 	function _set($config, $delete_cache = true)
 	{
 		$values = [];
+
 		foreach ($config as $name => $value)
 		{
 			if (!isset($this->config[$name]) || $this->config[$name] != $value || isset($this->changed[$name]))
 			{
-				$values[] = "(0, '$name', '" . quote($this->dblink, $value) . "')";
-				$this->config[$name] = $value;
+				$values[]				= "(0, '$name', '" . quote($this->dblink, $value) . "')";
+				$this->config[$name]	= $value;
+
 				unset($this->changed[$name]);
 			}
 		}
