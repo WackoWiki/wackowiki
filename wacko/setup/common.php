@@ -6,7 +6,7 @@ function my_location()
 	global $config;
 
 	// run in tls mode?
-	if ( ($config['tls'] == true
+	if ( ($config['tls']
 		&& ( ( ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' )
 				&& !empty($config['tls_proxy']) )
 			|| ( isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ) ) )

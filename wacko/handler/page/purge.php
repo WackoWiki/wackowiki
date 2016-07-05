@@ -57,9 +57,8 @@ if ($this->is_owner() || $this->is_admin())
 		}
 
 		// purge related page cache
-		if ($this->config['cache'])
+		if ($this->http->invalidate_page($this->supertag))
 		{
-			$this->cache->invalidate_page($this->supertag);
 			$message .= '<li>'.$this->get_translation('PageCachePurged')."</li>\n";
 		}
 

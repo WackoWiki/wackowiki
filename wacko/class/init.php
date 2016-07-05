@@ -72,93 +72,6 @@ class Init
 		}
 	}
 
-	// REQUEST HANDLING
-	// Process request string, define $page and $method vars
-	function request()
-	{
-		if (isset($_SERVER['PATH_INFO']) && function_exists('virtual'))
-		{
-			$request = $_SERVER['PATH_INFO'];
-		}
-		else if (isset($_GET['page']))
-		{
-			$request = $_GET['page'];
-		}
-		else
-		{
-			$request = '';
-		}
-
-		$request = ltrim($request, '/');
-
-		// check for permalink
-		$hashids = new Hashids($this->config['hashid_seed']);
-		$ids = $hashids->decode((($p = strpos($request, '/')) === false)? $request : substr($request, 0, $p));
-
-		if (count($ids) == 3)
-		{
-			sscanf(hash('sha1', $ids[0] . $this->config['hashid_seed'] . $ids[1]), '%7x', $cksum);
-
-			if ($ids[2] == $cksum)
-			{
-				$this->page = $ids[0] . 'x' . $ids[1];
-				$this->method = 'Hashid';
-				return;
-			}
-		}
-
-		// split into page/method
-		if (($p = strrpos($request, '/')) === false)
-		{
-			$this->page = $request;
-			$this->method = '';
-		}
-		else
-		{
-			$this->page = substr($request, 0, $p);
-			$this->method = strtolower(substr($request, $p + 1));
-
-			if (!@file_exists(join_path(HANDLER_DIR, 'page', $this->method . '.php')))
-			{
-				$this->page	= $request;
-				$this->method = '';
-			}
-			else if (preg_match('#^(.*?)/(' . $this->config['standard_handlers'] . ')(|/(.*))$#i', $this->page, $match))
-			{
-				//translit case
-				$this->page = $match[1];
-				$this->method = strtolower($match[2]);
-			}
-		}
-	}
-
-	// SESSION HANDLING
-	function session()
-	{
-		$_secure = '';
-
-		// run in tls mode?
-		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
-		{
-			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
-			$_secure					= true;
-		}
-
-		$_cookie_path = preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
-
-		($_secure == true ? $secure = true : $secure = false );
-
-		session_set_cookie_params(0, $_cookie_path, '', $secure, true);
-		session_name($this->config['cookie_prefix'].SESSION_HANDLER_ID);
-
-		// Save session information where specified or with PHP's default
-		session_save_path(SESSION_HANDLER_PATH);
-
-		// Initialize the session
-		session_start();
-		return session_id();
-	}
-
 	// INSTALLER
 	function installer()
 	{
@@ -199,38 +112,6 @@ class Init
 			include('setup/footer.php');
 
 			exit;
-		}
-	}
-
-	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
-	//		Content-Security-Policy:
-	//		Strict-Transport-Security:
-	function http_security_headers()
-	{
-		if ($this->config['enable_security_headers'])
-		{
-			if ( !headers_sent() )
-			{
-				if (isset($this->config['csp']))
-				{
-					if ($this->config['csp'] == 1)
-					{
-						// http://www.w3.org/TR/CSP2/
-						header( "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;" );
-					}
-					else if ($this->config['csp'] == 2)
-					{
-						$csp_custom = str_replace(array("\r", "\n", "\t"), '', CSP_CUSTOM);
-
-						header( $csp_custom );
-					}
-				}
-
-				if ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] != 'off' ) )
-				{
-					header( 'Strict-Transport-Security: max-age=7776000' );
-				}
-			}
 		}
 	}
 

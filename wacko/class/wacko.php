@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 class Wacko
 {
 	var $config;
-	var $cache;
+	var $http;
 	var $dblink;
 	var $page;								// Requested page
 	var $tag;
@@ -88,12 +88,12 @@ class Wacko
 	* @param array $config Current configuration as map key=value
 	* @return Wacko
 	*/
-	function __construct(&$config, &$cache)
+	function __construct(&$config, &$http)
 	{
 		$this->timer	= microtime(1);
 		$this->dblink	=
 		$this->config	= & $config;
-		$this->cache	= & $cache;
+		$this->http		= & $http;
 	}
 
 	// DATABASE
@@ -1701,7 +1701,7 @@ class Wacko
 		$name_from		= $this->config['email_from'];
 
 		// in tls mode substitute protocol name in links substrings
-		if ($this->config['tls'] == true && $supress_tls === false)
+		if ($this->config['tls'] && $supress_tls === false)
 		{
 			$body = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $body);
 		}
@@ -1796,11 +1796,11 @@ class Wacko
 			// page cache
 			if ($comment_on_id)
 			{
-				$this->cache->invalidate_page($this->get_page_tag($comment_on_id));
+				$this->http->invalidate_page($this->get_page_tag($comment_on_id));
 			}
 			else
 			{
-				$this->cache->invalidate_page($this->supertag);
+				$this->http->invalidate_page($this->supertag);
 			}
 
 			$this->config->invalidate_sql_cache();
@@ -2774,7 +2774,7 @@ class Wacko
 		// disable server cache for page
 		if ($client_only === false)
 		{
-			$this->cache->disable_cache();
+			$this->http->disable_cache();
 		}
 	}
 
@@ -4072,7 +4072,7 @@ class Wacko
 			$url = str_replace('&', '&amp;', $url);
 
 			// tls'ing internal links
-			if ($this->config['tls'] == true)
+			if ($this->config['tls'])
 			{
 				if (isset($this->config['open_url']) && strpos($url, $this->config['open_url']) !== false)
 				{
@@ -4124,7 +4124,7 @@ class Wacko
 			$result .= $this->form_token($form_name);
 		}
 
-		if ($this->config['tls'] == true)
+		if ($this->config['tls'])
 		{
 			$result = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $result);
 		}
@@ -4843,7 +4843,7 @@ class Wacko
 		$cookie_value	= implode(';', array($login_token, $b64password, $session_expire, $cookie_mac));
 
 		// set auth cookie
-		$this->set_cookie('auth', $cookie_value, $session_length, $persistent, ( $this->config['tls'] == true ? 1 : 0 ));
+		$this->set_cookie('auth', $cookie_value, $session_length, $persistent, ( $this->config['tls'] ? 1 : 0 ));
 
 		// update session expiry, user_form_salt and clear password recovery
 		// code in user data table
@@ -6114,10 +6114,13 @@ class Wacko
 	}
 
 	// MAIN EXECUTION ROUTINE
-	function run($tag, $method = '')
+	function run()
 	{
+		$tag	= $this->http->page;
+		$method	= $this->http->method;
+
 		// mandatory tls?
-		if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+		if ($this->config['tls'] && $this->config['tls_implicit'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 		{
 			$this->redirect(str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->href($method, $tag)));
 		}
@@ -6149,7 +6152,7 @@ class Wacko
 		}
 
 		// run in tls mode?
-		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
+		if ($this->config['tls'] && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
 		{
 			$this->config['open_url']		= $this->config['base_url'];
 			$this->config['base_url']		= str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
