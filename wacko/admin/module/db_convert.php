@@ -26,7 +26,6 @@ function admin_db_convert(&$engine, &$module)
 	// import passed variables and objects
 	$tables	= & $module['vars'][0];
 
-
 	$scheme		= '';
 	$getstr		= '';
 	$elements	= '';
@@ -60,10 +59,6 @@ function admin_db_convert(&$engine, &$module)
 
 	if (isset($_POST['start-convert_tables']))
 	{
-		/* echo '<pre>';
-		 print_r($_POST);
-		 echo '</pre>'; */
-
 		foreach ($_POST as $val => $key)
 		{
 			if ($key == 'table')
@@ -101,13 +96,13 @@ function admin_db_convert(&$engine, &$module)
 			{
 				// setting the SQL Mode, disable possible Strict SQL Mode
 				$engine->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
-				#$engine->sql_query($sql);
+				$engine->sql_query($sql);
 
 				$sql_log[] = $sql;
 			}
 		}
 
-		unset($_SESSION['sql_strict_queries']);
+		$_SESSION['sql_strict_queries'] = null;
 
 		if ($sql)
 		{
@@ -117,11 +112,12 @@ function admin_db_convert(&$engine, &$module)
 
 			$message = 'Convertion of the selected columns successfully.';
 			$engine->show_message($message, 'success');
+
 			?>
-					<br />
-					<div class="code" style="padding: 3px;">
-						<small><pre><?php echo $sql_log; ?></pre></small>
-					</div><br />
+			<br />
+			<div class="code" style="padding: 3px;">
+				<small><pre><?php echo $sql_log; ?></pre></small>
+			</div><br />
 		<?php
 		}
 	}
@@ -139,7 +135,7 @@ function admin_db_convert(&$engine, &$module)
 		// https://dev.mysql.com/doc/refman/5.7/en/engines-table.html
 		// https://dev.mysql.com/doc/refman/5.7/en/information-schema.html
 		// If InnoDB is available, but not the default engine, the result will be YES. If it's not available, the result will obviously be NO.
-		$sql_InnoDB	= "SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE = 'InnoDB'";
+		$sql_InnoDB			= "SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE = 'InnoDB'";
 		$InnoDB_support		= $engine->load_single($sql_InnoDB);
 
 		$_db_version	= $engine->load_single("SELECT version()");
@@ -182,11 +178,11 @@ function admin_db_convert(&$engine, &$module)
 			{
 				echo $engine->form_open('convert', '', 'post', true, '', '');
 ?>
-					<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
-						<tr>
-							<th style="width:50px;" colspan="2"><a href="?mode=<?php echo $module['mode']; ?><?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
-							<th style="text-align:left;">Typ</th>
-						</tr>
+				<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
+					<tr>
+						<th style="width:50px;" colspan="2"><a href="?mode=<?php echo $module['mode']; ?><?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
+						<th style="text-align:left;">Typ</th>
+					</tr>
 <?php
 				foreach ($results as $table)
 				{
@@ -205,8 +201,8 @@ function admin_db_convert(&$engine, &$module)
 
 				}
 ?>
-					</table>
-					<input type="submit" name="start-convert_tables" id="submit" value="convert" />
+				</table>
+				<input type="submit" name="start-convert_tables" id="submit" value="convert" />
 <?php
 				echo $engine->form_close();
 			}
@@ -235,8 +231,14 @@ function admin_db_convert(&$engine, &$module)
 		<br />
 		<?php
 
+		// SQL mode strict
+		// https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html
+		// https://mariadb.com/kb/en/mariadb/sql_mode/
+
+		// case 1 DATETIME
+		// case 2
 		$results = $engine->load_all(
-				"SELECT TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT, DATA_TYPE
+			"SELECT TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT, DATA_TYPE
 			FROM INFORMATION_SCHEMA.columns
 			WHERE DATA_TYPE = 'datetime'
 				AND COLUMN_DEFAULT = '0000-00-00 00:00:00'
@@ -248,61 +250,59 @@ function admin_db_convert(&$engine, &$module)
 		{
 			echo $engine->form_open('sql_mode_strict', '', 'post', true, '', '');
 			?>
-					<table style="max-width:500px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
-						<tr>
-							<th style="width:50px;">Table</th>
-							<th style="text-align:left;">Column</th>
-							<th style="text-align:left;">Typ</th>
-							<th style="text-align:left;">Default</th>
-						</tr>
+			<table style="max-width:500px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
+				<tr>
+					<th style="width:50px;">Table</th>
+					<th style="text-align:left;">Column</th>
+					<th style="text-align:left;">Typ</th>
+					<th style="text-align:left;">Default</th>
+				</tr>
 		<?php
-					foreach ($results as $table)
-					{
-						foreach ($tables as $wtable)
-						{
-							if ($table['TABLE_NAME'] == $wtable['name'])
-							{
-								// case  DATETIME
-								if ($table['DATA_TYPE'] == 'datetime')
-								{
-									echo '<tr class="hl_setting">'.
-											'<td>&nbsp;&nbsp;'.$table['TABLE_NAME'].'&nbsp;&nbsp;</td>'.
-											'<td class="label">&nbsp;&nbsp;<strong>'.$table['COLUMN_NAME'].'&nbsp;&nbsp;</strong></td>'.
-											'<td>&nbsp;&nbsp;'.$table['DATA_TYPE'].'&nbsp;&nbsp;</td>'.
-											'<td>'.( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '<strong class="red">' : '' ).$table['COLUMN_DEFAULT'].( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '</strong>' : '' ).'</td>'.
-										'</tr>'.
-										'<tr class="lined"><td colspan="4"></td></tr>'."\n";
-
-									$sql_log[] = "ALTER TABLE {$table['TABLE_NAME']} CHANGE {$table['COLUMN_NAME']} {$table['COLUMN_NAME']} DATETIME NULL DEFAULT NULL";
-									$sql_log[] = "UPDATE {$table['TABLE_NAME']} SET {$table['COLUMN_NAME']} = NULL WHERE {$table['COLUMN_NAME']} = '0000-00-00 00:00:00'";
-								}
-
-								// other cases?
-
-								#$sql_log[] = $sql;
-							}
-						}
-					}
-		?>
-						</table>
-		<?php
-					if ($sql_log)
-					{
-						$_SESSION['sql_strict_queries'] = $sql_log;
-
-						echo '<input type="submit" name="start-convert_columns" id="submit" value="convert" />';
-					}
-					else
-					{
-						echo 'No columns to convert.';
-					}
-
-					echo $engine->form_close();
-				}
-				else
+			foreach ($results as $table)
+			{
+				foreach ($tables as $wtable)
 				{
-					echo 'No columns to convert.';
+					if ($table['TABLE_NAME'] == $wtable['name'])
+					{
+						// case 1  DATETIME
+						if ($table['DATA_TYPE'] == 'datetime')
+						{
+							echo '<tr class="hl_setting">'.
+									'<td>&nbsp;&nbsp;'.$table['TABLE_NAME'].'&nbsp;&nbsp;</td>'.
+									'<td class="label">&nbsp;&nbsp;<strong>'.$table['COLUMN_NAME'].'&nbsp;&nbsp;</strong></td>'.
+									'<td>&nbsp;&nbsp;'.$table['DATA_TYPE'].'&nbsp;&nbsp;</td>'.
+									'<td>'.( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '<strong class="red">' : '' ).$table['COLUMN_DEFAULT'].( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '</strong>' : '' ).'</td>'.
+								'</tr>'.
+								'<tr class="lined"><td colspan="4"></td></tr>'."\n";
+
+							$sql_log[] = "ALTER TABLE {$table['TABLE_NAME']} CHANGE {$table['COLUMN_NAME']} {$table['COLUMN_NAME']} DATETIME NULL DEFAULT NULL";
+							$sql_log[] = "UPDATE {$table['TABLE_NAME']} SET {$table['COLUMN_NAME']} = NULL WHERE {$table['COLUMN_NAME']} = '0000-00-00 00:00:00'";
+						}
+
+						// other cases?
+					}
 				}
+			}
+		?>
+			</table>
+		<?php
+			if ($sql_log)
+			{
+				$_SESSION['sql_strict_queries'] = $sql_log;
+
+				echo '<input type="submit" name="start-convert_columns" id="submit" value="convert" />';
+			}
+			else
+			{
+				echo 'No columns to convert.';
+			}
+
+			echo $engine->form_close();
+		}
+		else
+		{
+			echo 'No columns to convert.';
+		}
 	}
 	else
 	{
@@ -317,7 +317,8 @@ function admin_db_convert(&$engine, &$module)
 		?>
 			<input type="hidden" name="action" value="convert_tables" />
 			<input type="submit" name="start" id="submit" value="convert" />
-		<?php		echo $engine->form_close();?>
+		<?php
+		echo $engine->form_close();?>
 
 
 		<h2>Converting Columns to SQL strict</h2>
@@ -331,7 +332,6 @@ function admin_db_convert(&$engine, &$module)
 			<input type="submit" name="start" id="submit" value="convert" />
 		<?php
 		echo $engine->form_close();
-
 	}
 }
 

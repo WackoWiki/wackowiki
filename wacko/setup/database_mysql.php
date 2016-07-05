@@ -14,7 +14,7 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"privilege VARCHAR(10) NOT NULL DEFAULT '',".
 					"list TEXT NOT NULL,".
-					// "updated TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,".
+					// "updated TIMESTAMP NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,".
 					"UNIQUE KEY idx_page_id (page_id,privilege)".
 				") {$engine} COMMENT='' {$charset}";
 
@@ -186,7 +186,7 @@ $table_poll = "CREATE TABLE {$pref}poll (".
 					"start DATETIME DEFAULT NULL,".
 					"end DATETIME DEFAULT NULL,".
 					"KEY idx_poll_id (poll_id),".
-					"KEY idx_time_frame (start,end)".
+					"KEY idx_time_frame (start, end)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_rating = "CREATE TABLE {$pref}rating (".
