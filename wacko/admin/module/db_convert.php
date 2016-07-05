@@ -15,7 +15,7 @@ $module['db_convert'] = array(
 		'status'=> true,
 		'mode'	=> 'db_convert',
 		'name'	=> 'Convert',
-		'title'	=> 'Converting Tables from MyISAM to InnoDB/XtraDB',
+		'title'	=> 'Converting Tables or Columns',
 		'vars'	=> array(&$tables),
 );
 
@@ -26,10 +26,12 @@ function admin_db_convert(&$engine, &$module)
 	// import passed variables and objects
 	$tables	= & $module['vars'][0];
 
+
 	$scheme		= '';
 	$getstr		= '';
 	$elements	= '';
 	$sql		= '';
+	$sql_log	= array();
 
 	// optimizatin scheme
 	if (isset($_GET['all']) && $_GET['all'] == 1)
@@ -55,7 +57,8 @@ function admin_db_convert(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
-	if (isset($_POST['start']))
+
+	if (isset($_POST['start-convert_tables']))
 	{
 		/* echo '<pre>';
 		 print_r($_POST);
@@ -88,40 +91,76 @@ function admin_db_convert(&$engine, &$module)
 <?php
 		}
 	}
-	else
+	else if (isset($_POST['start-convert_columns']))
 	{
-?>
+		$engine->config['sql_mode_strict'] = false;
+
+		foreach ($_SESSION['sql_strict_queries'] as $sql)
+		{
+			if ($sql)
+			{
+				// setting the SQL Mode, disable possible Strict SQL Mode
+				$engine->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
+				#$engine->sql_query($sql);
+
+				$sql_log[] = $sql;
+			}
+		}
+
+		unset($_SESSION['sql_strict_queries']);
+
+		if ($sql)
+		{
+			$sql_log = implode(",\n", $sql_log);
+
+			$engine->log(1, 'Converted colums to comply with the SQL strict mode');
+
+			$message = 'Convertion of the selected columns successfully.';
+			$engine->show_message($message, 'success');
+			?>
+					<br />
+					<div class="code" style="padding: 3px;">
+						<small><pre><?php echo $sql_log; ?></pre></small>
+					</div><br />
+		<?php
+		}
+	}
+
+	if (@$_POST['action'] == 'convert_tables')
+	{
+		?>
+		<h2>Converting Tables from MyISAM to InnoDB/XtraDB</h2>
 		<p>
 			If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.
 		</p>
 		<br />
 <?php
 		// Determine whether InnoDB plugin is installed in MySQL
-		// https://dev.mysql.com/doc/refman/5.6/en/engines-table.html
-		// https://dev.mysql.com/doc/refman/5.6/en/information-schema.html
+		// https://dev.mysql.com/doc/refman/5.7/en/engines-table.html
+		// https://dev.mysql.com/doc/refman/5.7/en/information-schema.html
 		// If InnoDB is available, but not the default engine, the result will be YES. If it's not available, the result will obviously be NO.
-		$_InnoDB_support	= "SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE = 'InnoDB'";
-		$InnoDB_support		= $engine->load_all($_InnoDB_support);
+		$sql_InnoDB	= "SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE = 'InnoDB'";
+		$InnoDB_support		= $engine->load_single($sql_InnoDB);
 
-		$_mysql_version		= $engine->load_all("SELECT version()");
-		$mysql_version		= $_mysql_version[0]['version()'];
-		$mysql_version		= preg_replace('#[^0-9\.]#', '', $mysql_version);
+		$_db_version	= $engine->load_single("SELECT version()");
+		$db_version		= $_db_version['version()'];
+		$db_version		= preg_replace('#[^0-9\.]#', '', $db_version);
 
-		if (version_compare($mysql_version, '5.6.4', '>='))
+		if (version_compare($db_version, '5.6.4', '>='))
 		{
 			$required_mysql_version = true;
-			echo output_image($engine, true).'Requires at least MySQL 5.6.4, available version: ' . $mysql_version . "<br />\n";
+			echo output_image($engine, true).'Requires at least MySQL 5.6.4, available version: ' . $db_version . "<br />\n";
 		}
 		else
 		{
 			$required_mysql_version = false;
-			echo output_image($engine, false).'<strong class="red">Requires at least MySQL 5.6.4, available version: </strong> ' . $mysql_version . "<br />\n";
+			echo output_image($engine, false).'<strong class="red">Requires at least MySQL 5.6.4, available version: </strong> ' . $db_version . "<br />\n";
 		}
 
-		if ($InnoDB_support[0]['SUPPORT'] == 'YES' || 'DEFAULT')
+		if ($InnoDB_support['SUPPORT'] == 'YES' || 'DEFAULT')
 		{
 			$required_engine = true;
-			echo output_image($engine, true).'InnoDB/XtraDB is available. '. $InnoDB_support[0]['SUPPORT']. "<br />\n";
+			echo output_image($engine, true).'InnoDB/XtraDB is available. '. $InnoDB_support['SUPPORT']. "<br />\n";
 		}
 		else
 		{
@@ -134,7 +173,7 @@ function admin_db_convert(&$engine, &$module)
 			$results = $engine->load_all(
 				"SELECT TABLE_NAME, ENGINE FROM INFORMATION_SCHEMA.TABLES
 				WHERE TABLE_SCHEMA = '{$engine->config['database_database']}'
-				AND ENGINE = 'MyISAM'
+					AND ENGINE = 'MyISAM'
 				");
 
 			echo '<br />';
@@ -145,7 +184,7 @@ function admin_db_convert(&$engine, &$module)
 ?>
 					<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 						<tr>
-							<th style="width:50px;" colspan="2"><a href="?mode=db_convert<?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
+							<th style="width:50px;" colspan="2"><a href="?mode=<?php echo $module['mode']; ?><?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
 							<th style="text-align:left;">Typ</th>
 						</tr>
 <?php
@@ -167,7 +206,7 @@ function admin_db_convert(&$engine, &$module)
 				}
 ?>
 					</table>
-					<input type="submit" name="start" id="submit" value="convert" />
+					<input type="submit" name="start-convert_tables" id="submit" value="convert" />
 <?php
 				echo $engine->form_close();
 			}
@@ -186,6 +225,113 @@ function admin_db_convert(&$engine, &$module)
 		</small></p>
 		<br />
 <?php
+	}
+	else if (@$_POST['action'] == 'convert_columns')
+	{
+	?>
+		<p>
+		If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.
+		</p>
+		<br />
+		<?php
+
+		$results = $engine->load_all(
+				"SELECT TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT, DATA_TYPE
+			FROM INFORMATION_SCHEMA.columns
+			WHERE DATA_TYPE = 'datetime'
+				AND COLUMN_DEFAULT = '0000-00-00 00:00:00'
+			");
+
+		echo '<br />';
+
+		if ($results)
+		{
+			echo $engine->form_open('sql_mode_strict', '', 'post', true, '', '');
+			?>
+					<table style="max-width:500px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
+						<tr>
+							<th style="width:50px;">Table</th>
+							<th style="text-align:left;">Column</th>
+							<th style="text-align:left;">Typ</th>
+							<th style="text-align:left;">Default</th>
+						</tr>
+		<?php
+					foreach ($results as $table)
+					{
+						foreach ($tables as $wtable)
+						{
+							if ($table['TABLE_NAME'] == $wtable['name'])
+							{
+								// case  DATETIME
+								if ($table['DATA_TYPE'] == 'datetime')
+								{
+									echo '<tr class="hl_setting">'.
+											'<td>&nbsp;&nbsp;'.$table['TABLE_NAME'].'&nbsp;&nbsp;</td>'.
+											'<td class="label">&nbsp;&nbsp;<strong>'.$table['COLUMN_NAME'].'&nbsp;&nbsp;</strong></td>'.
+											'<td>&nbsp;&nbsp;'.$table['DATA_TYPE'].'&nbsp;&nbsp;</td>'.
+											'<td>'.( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '<strong class="red">' : '' ).$table['COLUMN_DEFAULT'].( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '</strong>' : '' ).'</td>'.
+										'</tr>'.
+										'<tr class="lined"><td colspan="4"></td></tr>'."\n";
+
+									$sql_log[] = "ALTER TABLE {$table['TABLE_NAME']} CHANGE {$table['COLUMN_NAME']} {$table['COLUMN_NAME']} DATETIME NULL DEFAULT NULL";
+									$sql_log[] = "UPDATE {$table['TABLE_NAME']} SET {$table['COLUMN_NAME']} = NULL WHERE {$table['COLUMN_NAME']} = '0000-00-00 00:00:00'";
+								}
+
+								// other cases?
+
+								#$sql_log[] = $sql;
+							}
+						}
+					}
+		?>
+						</table>
+		<?php
+					if ($sql_log)
+					{
+						$_SESSION['sql_strict_queries'] = $sql_log;
+
+						echo '<input type="submit" name="start-convert_columns" id="submit" value="convert" />';
+					}
+					else
+					{
+						echo 'No columns to convert.';
+					}
+
+					echo $engine->form_close();
+				}
+				else
+				{
+					echo 'No columns to convert.';
+				}
+	}
+	else
+	{
+	?>
+
+		<h2>Converting Tables from MyISAM to InnoDB/XtraDB</h2>
+		<p>
+		If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.
+		</p>
+		<?php
+		echo $engine->form_open('convert_tables', '', 'post', true, '', '');
+		?>
+			<input type="hidden" name="action" value="convert_tables" />
+			<input type="submit" name="start" id="submit" value="convert" />
+		<?php		echo $engine->form_close();?>
+
+
+		<h2>Converting Columns to SQL strict</h2>
+		<p>
+			If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.
+		</p>
+		<?php
+		echo $engine->form_open('convert_columns', '', 'post', true, '', '');
+		?>
+			<input type="hidden" name="action" value="convert_columns" />
+			<input type="submit" name="start" id="submit" value="convert" />
+		<?php
+		echo $engine->form_close();
+
 	}
 }
 
