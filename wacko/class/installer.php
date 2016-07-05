@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 class Installer
 {
-	function __construct()
+	static function run()
 	{
 		if (!isset($_REQUEST['installAction']) && !strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
 		{
@@ -19,10 +19,6 @@ class Installer
 				exit;
 			}
 		}
-
-		// start installer
-		//global $config;
-		//$config = & $this->config;	// STS: sane $config there already
 
 		if (!($action = trim(@$_REQUEST['installAction'])))
 		{

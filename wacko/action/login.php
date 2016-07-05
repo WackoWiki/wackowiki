@@ -13,15 +13,12 @@ $error		= '';
 $user_name	= '';
 
 // disable server cache for page
-$this->no_cache(false);
+$this->http->no_cache(false);
 
 // reconnect securely in tls mode
-#if ($this->config['tls'] && $this->config['tls_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
-if ($this->config['tls']
-&& ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
-{
-	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'].'/' : ''), $this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )) ));
-}
+$param = isset($_GET['goback'])?  "goback=" . urlencode($_GET['goback']) : '';
+$this->http->ensure_tls($this->href('', $this->get_translation('LoginPage'), $param));
+// was: $this->http->ensure_tls($this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )));
 
 // actions
 if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
@@ -251,7 +248,7 @@ else
 						// run in tls mode?
 						if ($this->config['tls'])
 						{
-							$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
+							$this->http->secure_base_url();
 						}
 
 						if (!empty($_POST['goback']))

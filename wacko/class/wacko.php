@@ -8,7 +8,8 @@ if (!defined('IN_WACKO'))
 // engine class
 class Wacko
 {
-	var $config;
+	var $config;							// @deprecated, but will live for a looong time
+	var $db;								// new config
 	var $http;
 	var $dblink;
 	var $page;								// Requested page
@@ -91,7 +92,8 @@ class Wacko
 	function __construct(&$config, &$http)
 	{
 		$this->timer	= microtime(1);
-		$this->dblink	=
+		$this->dblink	=						// for quote() calls
+		$this->db		=
 		$this->config	= & $config;
 		$this->http		= & $http;
 	}
@@ -1701,9 +1703,9 @@ class Wacko
 		$name_from		= $this->config['email_from'];
 
 		// in tls mode substitute protocol name in links substrings
-		if ($this->config['tls'] && $supress_tls === false)
+		if ($this->db->tls && !$supress_tls)
 		{
-			$body = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $body);
+			$body = str_replace('http://', 'https://' . ($this->db->tls_proxy ? $this->db->tls_proxy . '/' : ''), $body);
 		}
 
 		// use phpmailer class
@@ -2729,53 +2731,11 @@ class Wacko
 	}
 
 	/**
-	* Immediate redirect to the specified URL
-	* note - even though it's output as an HTTP Header, Wacko's output-buffering means that this
-	* function still works anywhere in a page
-	*
-	* @param string $url Target URL
+	* @deprecated: use http->redirect() instead
 	*/
 	function redirect($url, $permanent = false)
 	{
-		if (!headers_sent())
-		{
-			// NB: here you can finalize run() execution when short-circuited by redirect()
-
-			// Make sure no &amp;'s are in, this will break the redirect
-			$url = str_replace('&amp;', '&', $url);
-
-			if ($permanent)
-			{
-				header('HTTP/1.1 301 Moved Permanently');
-			}
-
-			header('Location: ' . $url);
-			exit();
-		}
-	}
-
-	/**
-	 * disable caching
-	 *
-	 * @param boolean $client_only - Disables only client-side caching. Optional, default is TRUE
-	 */
-	function no_cache($client_only = true)
-	{
-		// disable browser cache for page
-		if ( !headers_sent() )
-		{
-			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');				// Date in the past
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');		// always modified
-			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
-			header('Cache-Control: post-check=0, pre-check=0', false);
-			header('Pragma: no-cache');										// HTTP 1.0
-		}
-
-		// disable server cache for page
-		if ($client_only === false)
-		{
-			$this->http->disable_cache();
-		}
+		$this->http->redirect($url, $permanent);
 	}
 
 	function unwrap_link($tag)
@@ -4355,7 +4315,7 @@ class Wacko
 		$result = $this->include_buffered($action . '.php', $errmsg, $params, ACTION_DIR);
 
 		$this->start_link_tracking();
-		$this->no_cache();
+		$this->http->no_cache();
 
 		return $result;
 	}
@@ -6120,9 +6080,9 @@ class Wacko
 		$method	= $this->http->method;
 
 		// mandatory tls?
-		if ($this->config['tls'] && $this->config['tls_implicit'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+		if ($this->db->tls_implicit && !$this->http->tls_session)
 		{
-			$this->redirect(str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->href($method, $tag)));
+			$this->http->ensure_tls($this->href($method, $tag));
 		}
 
 		// url lang selection
@@ -6149,15 +6109,6 @@ class Wacko
 		{
 			$login_token	= hash('sha1', $auth['login_token']);
 			$user			= $this->load_user(false, 0, $auth['password'], true, $login_token );
-		}
-
-		// run in tls mode?
-		if ($this->config['tls'] && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
-		{
-			$this->config['open_url']		= $this->config['base_url'];
-			$this->config['base_url']		= str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
-			$this->config['theme_url']		= $this->config['base_url'].join_path(THEME_DIR, $this->config['theme']).'/';
-			$this->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
 		}
 
 		// check session validity
@@ -7275,7 +7226,7 @@ class Wacko
 			if ($this->get_user_name() == false)
 			{
 				// disable server cache for page
-				$this->no_cache(false);
+				$this->http->no_cache(false);
 
 				echo $inline ? '' : "<br />\n";
 				echo '<label for="captcha">'.$this->get_translation('Captcha').":</label>\n";

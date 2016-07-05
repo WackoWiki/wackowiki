@@ -237,7 +237,7 @@ if ($this->has_access('read')
 		}
 	}
 
-	$this->no_cache();
+	$this->http->no_cache();
 
 	// fetch fields
 	$previous	= isset($_POST['previous'])	? $_POST['previous']	: $this->page['modified'];
