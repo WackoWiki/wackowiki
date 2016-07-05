@@ -10,10 +10,7 @@ if (!defined('IN_WACKO'))
 <?php
 
 // reconnect securely in tls mode
-if ($this->config['tls'] && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
-{
-	$this->redirect(str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->href()));
-}
+$this->http->ensure_tls($this->href());
 
 // hide article H1 header
 $this->hide_article_header = true;

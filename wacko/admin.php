@@ -17,47 +17,29 @@
 define('IN_WACKO', 'admin');
 require_once 'class/init.php';
 
-$config = new Settings;
+$db = $config = new Settings;
 
-$http = new Http($config, false); // false -- do not process wiki request
-
-$engine = new Wacko($config, $http);
-
-if (!empty($config->ext_bad_behavior))
+if ($db->ext_bad_behavior)
 {
-	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
+	require_once('lib/bad_behavior/bad-behavior-wackowiki.php'); // uses $db
 }
 
-// redirect, send them home [disabled for recovery mode!]
-if ((!$engine->is_admin()
-		#&& (!$config->is_locked() === true && !isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) ) )
-		&& (!$config->is_locked() === true ) )
-	&& !RECOVERY_MODE)
-{
-	if (!headers_sent())
-	{
-		header('HTTP/1.1 404 Not Found');
-	}
+$http = new Http($db, false); // false -- do not process wiki request
 
-	$engine->redirect(( $config->tls ? str_replace('http://', 'https://'.($config->tls_proxy ? $config->tls_proxy.'/' : ''), $engine->href()) : $engine->href() ));
+$engine = new Wacko($db, $http);
+
+// redirect, send them home [disabled for recovery mode!]
+if (!$engine->is_admin() && !$db->is_locked() && !RECOVERY_MODE)
+{
+	$http->secure_base_url();
+	$http->redirect($engine->href());
 }
 
 // register locale resources
-$engine->set_language($config->language, true);
-
+$engine->set_language($db->language, true);
 
 // reconnect securely in tls mode
-if ($config->tls)
-{
-	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($config->tls_proxy)) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
-	{
-		$engine->redirect(str_replace('http://', 'https://'.($config->tls_proxy ? $config->tls_proxy.'/' : ''), $config->base_url).'admin.php');
-	}
-	else
-	{
-		$engine->config['base_url'] = str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->config['base_url']);
-	}
-}
+$http->ensure_tls($db->base_url . 'admin.php');
 
 ########################################################
 ##            End admin session and logout            ##
@@ -68,7 +50,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 	$engine->delete_cookie('admin', true, true);
 	$engine->set_user($_user, 0);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
-	$engine->redirect(( $engine->config['tls'] ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
+	$http->secure_base_url();
+	$http->redirect($engine->href());
 	exit;
 }
 
@@ -124,7 +107,8 @@ if (isset($_POST['ap_password']))
 		}
 
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
-		$engine->redirect(( $engine->config['tls'] ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
+		$http->secure_base_url();
+		$http->ensure_tls($db->base_url . 'admin.php');
 	}
 	else
 	{
@@ -141,7 +125,7 @@ if (isset($_POST['ap_password']))
 		// RECOVERY_MODE ON || RECOVERY_MODE OFF
 		if (($_SESSION['failed_login_count'] >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
-			$config->lock(AP_LOCK);
+			$db->lock(AP_LOCK);
 			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
 
 			$_SESSION['failed_login_count'] = 0;
@@ -347,7 +331,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
 				&nbsp;&nbsp;
-				<?php echo ($config->is_locked() ? '<strong>site closed</strong>' : 'site opened'); ?>
+				<?php echo ($db->is_locked() ? '<strong>site closed</strong>' : 'site opened'); ?>
 				&nbsp;&nbsp;
 				version <?php echo $engine->config['wacko_version']; ?>
 			</span>
@@ -438,7 +422,7 @@ else if (!($_GET && $_POST))
 <?php
 
 // debugging info on script execution time and memory taken
-Diag::debug($config, $http, $engine);
+Diag::debug($db, $http, $engine);
 
 
 ?>

@@ -9,6 +9,7 @@ class Http
 {
 	public		$page			= '';
 	public		$method			= '';
+	public		$tls_session	= false;
 	private		$db;
 	private		$hash;
 	private		$query;
@@ -37,6 +38,40 @@ class Http
 		{
 			$this->request();
 			$this->check_cache();
+		}
+
+		// run in tls mode?
+		if (@$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+		{
+			$_SERVER['HTTPS'] = 'on'; 
+		}
+
+		if ((@$_SERVER['HTTPS'] === 'on' && $db->tls_proxy) || (int)@$_SERVER['SERVER_PORT'] === 443) // STS: why && tls_proxy?
+		{
+			$this->tls_session = true;
+		}
+
+		if ($db->tls && $this->tls_session)
+		{
+			$this->secure_base_url();
+		}
+	}
+
+	public function secure_base_url()
+	{
+		if (!isset($this->db->open_url) && $this->db->tls)
+		{
+			$this->db->open_url		= $this->db->base_url;
+			$this->db->base_url		= str_replace('http://', 'https://' . ($this->db->tls_proxy? $this->db->tls_proxy . '/' : ''), $this->db->base_url);
+			$this->db->rebase_url();
+		}
+	}
+
+	public function ensure_tls($url)
+	{
+		if ($this->db->tls && !$this->tls_session)
+		{
+			$this->redirect(str_replace('http://', 'https://' . ($this->db->tls_proxy? $this->db->tls_proxy . '/' : ''), $url));
 		}
 	}
 
@@ -212,12 +247,6 @@ class Http
 		return true;
 	}
 
-	// allow main engine to disable caching
-	public function disable_cache()
-	{
-		$this->caching = 0;
-	}
-
 	private function check_cache()
 	{
 		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
@@ -359,6 +388,54 @@ class Http
 					header('Strict-Transport-Security: max-age=7776000');
 				}
 			}
+		}
+	}
+
+	/**
+	* Immediate redirect to the specified URL
+	* note - even though it's output as an HTTP Header, Wacko's output-buffering means that this
+	* function still works anywhere in a page
+	*
+	* @param string $url Target URL
+	*/
+	function redirect($url, $permanent = false)
+	{
+		if (!headers_sent())
+		{
+			// Make sure no &amp;'s are in, this will break the redirect
+			$url = str_replace('&amp;', '&', $url);
+
+			if ($permanent)
+			{
+				header('HTTP/1.1 301 Moved Permanently');
+			}
+
+			header('Location: ' . $url);
+			exit;
+		}
+	}
+
+	/**
+	 * disable caching
+	 *
+	 * @param boolean $client_only - Disables only client-side caching. Optional, default is TRUE
+	 */
+	function no_cache($client_only = true)
+	{
+		// disable browser cache for page
+		if ( !headers_sent() )
+		{
+			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');				// Date in the past
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');		// always modified
+			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
+			header('Cache-Control: post-check=0, pre-check=0', false);
+			header('Pragma: no-cache');										// HTTP 1.0
+		}
+
+		// disable server cache for page
+		if (!$client_only)
+		{
+			$this->caching = 0;
 		}
 	}
 

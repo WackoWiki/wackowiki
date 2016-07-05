@@ -108,11 +108,16 @@ class Settings extends Dbal implements ArrayAccess
 		parent::__construct();
 
 		// convenient config additions
-		$this->theme_url	= $this->base_url . join_path(THEME_DIR, $this->theme) . '/';
 		$this->user_table	= $this->table_prefix . 'user';
 		$this->cookie_hash	= hash('sha1', $this->base_url . $this->system_seed);
-		$this->cookie_path	= preg_replace('|https?://[^/]+|i', '', $this->base_url);
 		$this->ap_mode		= (IN_WACKO == 'admin');
+		$this->rebase_url();
+	}
+
+	public function rebase_url()
+	{
+		$this->theme_url	= $this->base_url . join_path(THEME_DIR, $this->theme) . '/';
+		$this->cookie_path	= preg_replace('|https?://[^/]+|i', '', $this->base_url);
 	}
 
 	// { $config['ttt'] = 1; } === { $config->ttt = 1; }
