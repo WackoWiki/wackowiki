@@ -1,28 +1,15 @@
 <?php
 
-define('IN_WACKO', true);
-require_once('config/constants.php');
-require_once('lib/utility.php');
-class_autoloader(join_path(CONFIG_DIR, 'autoload.conf'));
+define('IN_WACKO', 'wacko');
+require_once 'class/init.php';
 
 $config = new Settings;
 
-$init = new Init($config);
-
-$init->installer(); // install
-
-if ($config->is_locked() || RECOVERY_MODE)
+if (!isset($config->wacko_version) || version_compare($config->wacko_version, WACKO_VERSION, '<'))
 {
-	if (!headers_sent())
-	{
-		header('HTTP/1.1 503 Service Temporarily Unavailable');
-	}
-
-	echo 'The site is temporarily unavailable due to system maintenance. Please try again later.';
-	exit;
+	new Installer;
+	// NEVER BEEN HERE
 }
-
-$config->ap_mode = false;
 
 // run in tls mode?
 if ($config->tls && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') && !empty($config->tls_proxy)) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ) ))
@@ -43,10 +30,10 @@ $engine->run();
 
 $http->store_cache();
 
-$init->debug($engine);
+Diag::debug($config, $http, $engine);
 
 // closing tags
-if (strpos($init->method, '.xml') === false)
+if (strpos($http->method, '.xml') === false)
 {
 	echo "\n</body>\n</html>";
 }

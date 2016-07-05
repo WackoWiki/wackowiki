@@ -16,7 +16,7 @@ $module['lock'] = array(
 		'mode'	=> 'lock',
 		'name'	=> 'Main Menu',
 		'title'	=> 'WackoWiki Administration',
-		'objs'	=> array(&$init),
+		'objs'	=> array(&$config),
 
 
 	);
@@ -26,7 +26,7 @@ $module['lock'] = array(
 function admin_lock(&$engine, &$module)
 {
 	// import passed variables and objects
-	$init			= & $module['objs'][0];
+	$config			= & $module['objs'][0];
 
 	// (un)lock website
 	if (isset($_POST['action']) && $_POST['action'] == 'lock')
@@ -71,8 +71,8 @@ function admin_lock(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="lock" />
 			<tr class="hl_setting">
-				<td class="label" style="white-space:nowrap"><?php echo ( $init->is_locked() === true ? '<span class="red">The site is closed</span>' : '<span class="green">The site is open</span>' ); ?></td>
-				<td style="text-align:center;"><input type="submit" id="submit" value="<?php echo ( $init->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
+				<td class="label" style="white-space:nowrap"><?php echo ( $config->is_locked() === true ? '<span class="red">The site is closed</span>' : '<span class="green">The site is open</span>' ); ?></td>
+				<td style="text-align:center;"><input type="submit" id="submit" value="<?php echo ( $config->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
 			</tr>
 	<br />
 <?php

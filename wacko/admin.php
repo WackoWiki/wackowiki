@@ -14,32 +14,12 @@
 ##                  Wacko engine init                 ##
 ########################################################
 
-define('IN_WACKO', true);
-require_once('config/constants.php');
-require_once('lib/utility.php');
-class_autoloader(join_path(CONFIG_DIR, 'autoload.conf'));
+define('IN_WACKO', 'admin');
+require_once 'class/init.php';
 
-// define settings
-$config = new Settings(!RECOVERY_MODE);
+$config = new Settings;
 
-// initialize engine api
-$init = new Init($config);
-
-if ($config->is_locked(AP_LOCK))
-{
-	if (!headers_sent())
-	{
-		header('HTTP/1.1 503 Service Temporarily Unavailable');
-	}
-
-	echo 'The site is temporarily unavailable due to system maintenance. Please try again later.';
-	exit;
-}
-
-$config->ap_mode = true;
-
-// engine start
-$http = new Http($config, false); // false -- do not process wiki request & start cache
+$http = new Http($config, false); // false -- do not process wiki request
 
 $engine = new Wacko($config, $http);
 
@@ -458,7 +438,8 @@ else if (!($_GET && $_POST))
 <?php
 
 // debugging info on script execution time and memory taken
-$init->debug($engine);
+Diag::debug($config, $http, $engine);
+
 
 ?>
 
