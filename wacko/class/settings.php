@@ -7,12 +7,14 @@ if (!defined('IN_WACKO'))
 
 class Settings extends Dbal implements ArrayAccess
 {
+	public	$started;			// for Diag
 	private $config = [];
 	private $changed = [];
 	private $cachefile;
 
-	public function __construct($secondary = true)
+	public function __construct()
 	{
+		$this->started = microtime(1);
 		$this->cachefile = join_path(CACHE_CONFIG_DIR, 'config.php');
 
 		// retrieve and unserialize cached settings data
@@ -50,7 +52,7 @@ class Settings extends Dbal implements ArrayAccess
 
 			$this->system_seed = hash('sha1', $this->system_seed);
 
-			if ($secondary)
+			if (!RECOVERY_MODE)
 			{
 				// connecting to db
 				parent::__construct();
@@ -110,6 +112,7 @@ class Settings extends Dbal implements ArrayAccess
 		$this->user_table	= $this->table_prefix . 'user';
 		$this->cookie_hash	= hash('sha1', $this->base_url . $this->system_seed);
 		$this->cookie_path	= preg_replace('|https?://[^/]+|i', '', $this->base_url);
+		$this->ap_mode		= (IN_WACKO == 'admin');
 	}
 
 	// { $config['ttt'] = 1; } === { $config->ttt = 1; }

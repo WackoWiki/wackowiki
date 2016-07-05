@@ -17,8 +17,18 @@ class Http
 
 	public function __construct(&$db, $request = true)
 	{
-		$this->db		= & $db;
-		//$this->timer	= microtime(1);
+		$this->db = & $db;
+
+		if ($db->is_locked($db->ap_mode? AP_LOCK : SITE_LOCK) || (!$db->ap_mode && RECOVERY_MODE))
+		{
+			if (!headers_sent())
+			{
+				header('HTTP/1.1 503 Service Temporarily Unavailable');
+			}
+
+			echo 'The site is temporarily unavailable due to system maintenance. Please try again later.';
+			exit;
+		}
 
 		$this->session();
 		$this->http_security_headers();
