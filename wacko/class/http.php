@@ -5,30 +5,37 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-class Cache
+class Http
 {
-	private $db;
-	private $page;
-	private $hash;
-	private $method;
-	private $query;
-	private $file;
-	private $caching;
+	public		$page			= '';
+	public		$method			= '';
+	private		$db;
+	private		$hash;
+	private		$query;
+	private		$file;
+	private		$caching		= 0;
 
-	public function __construct(&$config)
+	public function __construct(&$db, $request = true)
 	{
-		$this->db			= & $config;
-		$this->timer		= microtime(1);
+		$this->db		= & $db;
+		//$this->timer	= microtime(1);
+
+		$this->session();
+		$this->http_security_headers();
+
+		if ($request)
+		{
+			$this->request();
+			$this->check_cache();
+		}
 	}
 
 	// Get page content from cache
-	private function load_page($page, $method, $query, &$timestamp)
+	private function load_page(&$timestamp)
 	{
 		// store data for save_page()
-		list($this->page, $this->hash) = $this->normalize_page($page);
-		$this->method	= $method;
-		$this->query	= $query;
-		$this->file		= $this->construct_id($this->page, $method, $query);
+		list($this->page, $this->hash) = $this->normalize_page($this->page);
+		$this->file		= $this->construct_id($this->page, $this->method, $this->query);
 
 		clearstatcache();
 
@@ -63,6 +70,7 @@ class Cache
 	// Invalidate the page cache
 	public function invalidate_page($page)
 	{
+		$n = 0;
 		if ($this->db->cache)
 		{
 			list($page, $hash) = $this->normalize_page($page);
@@ -80,6 +88,10 @@ class Cache
 			{
 				$file	= $this->construct_id($page, $param['method'], $param['query']);
 				$x		= @touch($file, $past); // touching is faster than unlinking
+				if ($x)
+				{
+					++$n;
+				}
 
 				dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 			}
@@ -88,6 +100,7 @@ class Cache
 				"DELETE FROM ".$this->db->table_prefix."cache ".
 				"WHERE name = ".$this->db->q($hash));
 		}
+		return $n;
 	}
 
 	private function normalize_page($page)
@@ -102,9 +115,9 @@ class Cache
 	}
 
 	// Check http-request. May be, output cached version.
-	private function check_http_request($page, $method)
+	private function check_http_request()
 	{
-		if (!$page)
+		if (!$this->page)
 		{
 			return false;
 		}
@@ -125,10 +138,12 @@ class Cache
 			$query .= urlencode($k) . '=' . urlencode($v) . '&';
 		}
 
+		$this->query = $query;
+
 		// check cache
-		if (($cached_page = $this->load_page($page, $method, $query, $mtime)))
+		if (($cached_page = $this->load_page($mtime)))
 		{
-			dbg('check_http_request', $page, $method, $query, 'found!');
+			dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
 			$gmt	= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
 			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
@@ -175,7 +190,7 @@ class Cache
 
 				echo $cached_page;
 
-				if (strpos($method, '.xml') === false)
+				if (strpos($this->method, '.xml') === false)
 				{
 					echo '</body></html>';
 				}
@@ -193,20 +208,19 @@ class Cache
 		$this->caching = 0;
 	}
 
-	public function check($page, $method)
+	private function check_cache()
 	{
-		$this->caching = 0;
-		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $method != 'edit' && $method != 'watch')
+		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
 		{
 			// cache only for anonymous user
 			if (!isset($_COOKIE[$this->db->cookie_prefix . 'auth' . '_' . $this->db->cookie_hash]))
 			{
-				$this->caching = $this->check_http_request($page, $method);
+				$this->caching = $this->check_http_request();
 			}
 		}
 	}
 
-	public function store()
+	public function store_cache()
 	{
 		if ($this->caching)
 		{
@@ -219,6 +233,121 @@ class Cache
 			else
 			{
 				// FALSE, then output buffering is not active
+			}
+		}
+	}
+
+	// REQUEST HANDLING
+	// Process request string, define $page and $method vars
+	private function request()
+	{
+		if (isset($_SERVER['PATH_INFO']) && function_exists('virtual'))
+		{
+			$request = $_SERVER['PATH_INFO'];
+		}
+		else if (isset($_GET['page']))
+		{
+			$request = $_GET['page'];
+		}
+		else
+		{
+			$request = '';
+		}
+
+		$request = ltrim($request, '/');
+
+		// check for permalink
+		$hashids = new Hashids($this->db->hashid_seed);
+		$ids = $hashids->decode((($p = strpos($request, '/')) === false)? $request : substr($request, 0, $p));
+
+		if (count($ids) == 3)
+		{
+			sscanf(hash('sha1', $ids[0] . $this->db->hashid_seed . $ids[1]), '%7x', $cksum);
+
+			if ($ids[2] == $cksum)
+			{
+				$this->page = $ids[0] . 'x' . $ids[1];
+				$this->method = 'Hashid';
+				return;
+			}
+		}
+
+		// split into page/method
+		if (($p = strrpos($request, '/')) === false)
+		{
+			$this->page = $request;
+			$this->method = '';
+		}
+		else
+		{
+			$this->page = substr($request, 0, $p);
+			$this->method = strtolower(substr($request, $p + 1));
+
+			if (!@file_exists(join_path(HANDLER_DIR, 'page', $this->method . '.php')))
+			{
+				$this->page	= $request;
+				$this->method = '';
+			}
+			else if (preg_match('#^(.*?)/(' . $this->db->standard_handlers . ')(|/(.*))$#i', $this->page, $match))
+			{
+				//translit case
+				$this->page = $match[1];
+				$this->method = strtolower($match[2]);
+			}
+		}
+	}
+
+	// SESSION HANDLING
+	private function session()
+	{
+		$secure = false;
+
+		// run in tls mode?
+		if ($this->db->tls && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->db->tls_proxy)) || $_SERVER['SERVER_PORT'] == '443' ) ))
+		{
+			$this->db->base_url	= str_replace('http://', 'https://' . ($this->db->tls_proxy ? $this->db->tls_proxy . '/' : ''), $this->db->base_url);
+			$secure					= true;
+		}
+
+		$_cookie_path = preg_replace('|https?://[^/]+|i', '', $this->db->base_url);
+
+		session_set_cookie_params(0, $_cookie_path, '', $secure, true);
+		session_name($this->db->cookie_prefix . SESSION_HANDLER_ID);
+
+		// Save session information where specified or with PHP's default
+		session_save_path(SESSION_HANDLER_PATH);
+
+		// Initialize the session
+		session_start();
+	}
+
+
+	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
+	//		Content-Security-Policy:
+	//		Strict-Transport-Security:
+	private function http_security_headers()
+	{
+		if ($this->db->enable_security_headers)
+		{
+			if (!headers_sent())
+			{
+				switch ($this->db->csp)
+				{
+					case 1:
+						// http://www.w3.org/TR/CSP2/
+						header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;");
+						break;
+
+					case 2:
+						$csp_custom = str_replace(array("\r", "\n", "\t"), '', CSP_CUSTOM);
+						header($csp_custom);
+						break;
+				}
+
+				if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
+				{
+					header('Strict-Transport-Security: max-age=7776000');
+				}
 			}
 		}
 	}

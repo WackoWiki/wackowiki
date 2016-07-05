@@ -122,18 +122,9 @@ if ($this->is_admin()
 		}
 
 		// purge related page cache
-		if ($this->config['cache'])
+		if ($this->http->invalidate_page($comment_on_id?  $this->get_page_tag($comment_on_id) : $this->supertag))
 		{
-			if ($comment_on_id)
-			{
-				$this->cache->invalidate_page($this->get_page_tag($comment_on_id));
-			}
-			else
-			{
-				$this->cache->invalidate_page($this->supertag);
-			}
-
-			$message .= '<li>'.$this->get_translation('PageCachePurged')."</li>\n";
+			$message .= '<li>' . $this->get_translation('PageCachePurged') . "</li>\n";
 		}
 
 

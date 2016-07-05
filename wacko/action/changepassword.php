@@ -12,7 +12,7 @@ $error = '';
 <?php
 
 // reconnect securely in tls mode
-if ($this->config['tls'] == true
+if ($this->config['tls']
 	&& ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on'
 		&& empty($this->config['tls_proxy']))
 		|| $_SERVER['SERVER_PORT'] != '443' ))

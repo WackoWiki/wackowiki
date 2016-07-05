@@ -31,23 +31,17 @@ if ($config->tls && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') 
 	$config->theme_url = str_replace('http://', 'https://' . ($config->tls_proxy ? $config->tls_proxy . '/' : ''), $config->theme_url);
 }
 
-$init->request();
-$init->session();
-$init->http_security_headers();
-
-$cache = new Cache($config);
-$cache->check($init->page, $init->method);
-
-$engine = new Wacko($config, $cache);
+$http = new Http($config);
+$engine = new Wacko($config, $http);
 
 if (!empty($config->ext_bad_behavior))
 {
 	require_once('lib/bad_behavior/bad-behavior-wackowiki.php');
 }
 
-$engine->run($init->page, $init->method);
+$engine->run();
 
-$cache->store();
+$http->store_cache();
 
 $init->debug($engine);
 

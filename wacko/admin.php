@@ -38,13 +38,10 @@ if ($config->is_locked(AP_LOCK))
 
 $config->ap_mode = true;
 
-// misc
-$init->session();
-$init->http_security_headers();
-
 // engine start
-$cache = new Cache($config);
-$engine = new Wacko($config, $cache);
+$http = new Http($config, false); // false -- do not process wiki request & start cache
+
+$engine = new Wacko($config, $http);
 
 if (!empty($config->ext_bad_behavior))
 {
@@ -91,7 +88,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 	$engine->delete_cookie('admin', true, true);
 	$engine->set_user($_user, 0);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
-	$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
+	$engine->redirect(( $engine->config['tls'] ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
 	exit;
 }
 
@@ -135,7 +132,7 @@ if (isset($_POST['ap_password']))
 		)
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
-		$engine->set_cookie('admin', hash('sha256', $_processed_password.$engine->config['base_url']), '', false, ( $engine->config['tls'] == true ? 1 : 0 ));
+		$engine->set_cookie('admin', hash('sha256', $_processed_password.$engine->config['base_url']), '', false, ( $engine->config['tls'] ? 1 : 0 ));
 
 		$_SESSION['created']			= time();
 		$_SESSION['last_activity']		= time();
@@ -147,7 +144,7 @@ if (isset($_POST['ap_password']))
 		}
 
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
-		$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
+		$engine->redirect(( $engine->config['tls'] ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
 	}
 	else
 	{
