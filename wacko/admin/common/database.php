@@ -157,6 +157,15 @@ else
 		'common variables: already defined.');
 }
 
+function ensure_dir($dir)
+{
+	if (!is_dir($dir))
+	{
+		mkdir($dir);
+	}
+	chmod($dir, 0755);
+}
+
 // set backup directory
 function set_pack_dir(&$engine, $time)
 {
@@ -165,12 +174,7 @@ function set_pack_dir(&$engine, $time)
 	$dir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
 
 	clearstatcache();
-	if (is_dir($dir) !== true)
-	{
-		mkdir($dir);
-	}
-
-	chmod($dir, 0755);
+	ensure_dir($dir);
 
 	return $dir.'/';
 }
@@ -226,7 +230,7 @@ function remove_pack(&$engine, $pack)
 	}
 
 	// remove pack contents and directory
-	if (is_dir($packdir) === true)
+	if (is_dir($packdir))
 	{
 		Ut::purge_directory($packdir);
 		rmdir($packdir);
@@ -517,20 +521,12 @@ function get_files(&$engine, $pack, $dir, $root)
 			if ($offlen > 0)	$subdir = substr($dir, 0, $offlen);
 			else				$subdir = $dir;
 
-			if (is_dir($pack.$subdir) === false)
-			{
-				mkdir($pack.$subdir);
-				chmod($pack.$subdir, 0755);
-			}
+			ensure_dir(Ut::join_path($pack, $subdir));
 		}
 	}
 	else
 	{
-		if (is_dir($pack.$dir) === false)
-		{
-			mkdir($pack.$dir);
-			chmod($pack.$dir, 0755);
-		}
+		ensure_dir(Ut::join_path($pack, $dir));
 	}
 
 	// open read (data) dir and run through all files
@@ -550,17 +546,19 @@ function get_files(&$engine, $pack, $dir, $root)
 			}
 
 			// subdirs skipped
-			if (is_dir($dir.'/'.$filename) !== true)
+			$fullname = Ut::join_path($dir, $filename);
+			if (!is_dir($fullname))
 			{
-				if (is_readable($dir.'/'.$filename))
+				if (is_readable($fullname))
 				{
 					// open input and output files
-					$filep	= fopen($dir.'/'.$filename, 'rb');
-					$filez	= gzopen($pack.$dir.'/'.$filename.BACKUP_FILE_GZIP_SUFFIX, 'ab'.BACKUP_COMPRESSION_RATE);
+					$filep	= fopen($fullname, 'rb');
+					$packname= Ut::join_path($pack, $dir, $filename . BACKUP_FILE_GZIP_SUFFIX);
+					$filez	= gzopen($packname, 'ab' . BACKUP_COMPRESSION_RATE);
 					$r		= 0; // round number
 
 					// compress and write data
-					while (true == $data = fread($filep, BACKUP_MEMORY_STEP))
+					while (($data = fread($filep, BACKUP_MEMORY_STEP)))
 					{
 						gzwrite($filez, $data);
 						fseek($filep, (++$r) * BACKUP_MEMORY_STEP);
@@ -569,7 +567,7 @@ function get_files(&$engine, $pack, $dir, $root)
 					// close files
 					gzclose($filez);
 					fclose($filep);
-					chmod($pack.$dir.'/'.$filename.BACKUP_FILE_GZIP_SUFFIX, 0644);
+					chmod($packname, 0644);
 					$t++;	// total files processed
 				}
 				else
@@ -623,7 +621,7 @@ function put_data(&$engine, $pack, $table, $mode)
 	$point		= '';
 
 	// open table dump file with read access
-	$filename	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $table, BACKUP_FILE_DUMP_SUFFIX);
+	$filename	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $table . BACKUP_FILE_DUMP_SUFFIX);
 	$file		= gzopen($filename, 'rb');
 
 	// read and process file in iterations to the end
@@ -713,12 +711,12 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 			if ($offlen > 0)	$subdir = substr($dir, 0, $offlen);
 			else				$subdir = $dir;
 
-			if (is_dir($subdir) === false) mkdir($subdir);
+			ensure_dir($subdir);
 		}
 	}
 	else
 	{
-		if (is_dir($dir) === false) mkdir($dir);
+		ensure_dir($dir);
 	}
 
 	// open backup dir and run through all files
@@ -729,10 +727,11 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 			$plainfile = substr($filename, 0, strpos($filename, BACKUP_FILE_GZIP_SUFFIX));
 
 			// skip subdirs
-			if (is_dir($packdir.'/'.$filename) !== true)
+			if (!is_dir(Ut::join_path($packdir, $filename)))
 			{
+				$fullname = Ut::join_path($dir, $plainfile);
 				// handle duplicates in target dir
-				if (file_exists($dir.'/'.$plainfile) === true)
+				if (file_exists($fullname))
 				{
 					if ($keep == true)
 					{
@@ -743,13 +742,13 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 					else
 					{
 						// replace
-						unlink($dir.'/'.$plainfile);
+						unlink($fullname);
 					}
 				}
 
 				// open input and output files
-				$filez	= gzopen($packdir.'/'.$filename, 'rb');
-				$filep	= fopen($dir.'/'.$plainfile, 'wb');
+				$filez	= gzopen(Ut::join_path($packdir, $filename), 'rb');
+				$filep	= fopen($fullname, 'wb');
 				$r		= 0; // round number
 
 				// decompress and write data
@@ -762,7 +761,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 				// close files
 				fclose($filep);
 				gzclose($filez);
-				chmod($dir.'/'.$plainfile, 0644);
+				chmod($fullname, 0644);
 				$total[0]++;
 			}
 		}
@@ -782,5 +781,3 @@ function output_image(&$engine, $ok)
 {
 	return '<img src="'.$engine->config['base_url'].'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? 'OK' : 'Problem').'" title="'.($ok ? 'OK' : 'Problem').'" class="tickcross '.($ok ? 'tick' : 'cross').'" />'.' ';
 }
-
-?>

@@ -34,7 +34,7 @@ if (@$_GET['action'] === 'clearcookies')
 $this->hide_article_header = true;
 
 // logout
-if (@$_GET['action'] == 'logout')
+if (@$_GET['action'] === 'logout')
 {
 	$this->log(5, Ut::perc_replace($this->get_translation('LogUserLoggedOut', -1), $this->get_user_name()));
 	$this->log_user_out();
@@ -42,8 +42,7 @@ if (@$_GET['action'] == 'logout')
 	$this->set_message($this->get_translation('LoggedOut')); // TODO: message is reset with session before it it can display the message set after the redirect
 	$this->context[++$this->current_context] = '';
 
-	//$this->redirect($this->href('', stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.mt_rand(0, 1000)));
-	$this->redirect($this->href('', rawurlencode(@$_GET['goback']), $uncache));
+	$this->redirect($this->href('', @$_GET['goback'], $uncache));
 }
 
 if (($user = $this->get_user()))
@@ -221,9 +220,7 @@ else // login
 							$session_length = $this->db->session_length;
 						}
 
-						$_persistent = (int) @$_POST['persistent'];
-
-						$this->log_user_in($existing_user, $_persistent, $session_length);
+						$this->log_user_in($existing_user, (int)@$_POST['persistent'], $session_length);
 						$this->set_user($existing_user, 1);
 						$this->set_menu(MENU_USER);
 						$this->context[++$this->current_context] = '';
@@ -240,7 +237,7 @@ else // login
 						{
 							$this->http->secure_base_url();
 						}
-						$this->redirect($this->href('', rawurlencode(@$_GET['goback']), $uncache));
+						$this->redirect($this->href('', @$_GET['goback'], $uncache));
 					}
 					else
 					{
@@ -272,7 +269,7 @@ else // login
 
 	echo $this->form_open('login', '', '', true);
 	echo '<input type="hidden" name="action" value="login" />'."\n";
-	echo '<input type="hidden" name="goback" value="' . rawurlencode(@$_GET['goback']) . '" />' . "\n";
+	echo '<input type="hidden" name="goback" value="' . Ut::html(@$_GET['goback']) . '" />' . "\n";
 
 	echo '<p>';
 	echo '<label for="user_name">'.$this->format_translation('LoginName').':</label>';
