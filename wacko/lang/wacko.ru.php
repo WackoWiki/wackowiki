@@ -73,9 +73,9 @@ $wacko_translation = array(
 	'ClearCookies'				=> 'Удалить все кукезы',
 	'BindSessionIp'				=> 'Привязать сессию к IP-адресу',
 	'BindSessionIpOn'			=> 'enabled (the current IP',
-	'TrafficProtection'			=> 'Traffic Protection',
-	'SessionEnds'				=> 'The current session ends',
-	'LastVisit'					=> 'Last visit was recorded',
+	'TrafficProtection'			=> 'Защищенное соединение:',
+	'SessionEnds'				=> 'Эта сессия закончится в',
+	'LastVisit'					=> 'Последнее посещение',
 
 	'LoginAttemtsExceeded'		=> 'Вы превысили максимально допустимое количество попыток входа.<br />Теперь, кроме имени пользователя и пароля, вы должны ввести код подтверждения, показанный на картинке ниже.',
 

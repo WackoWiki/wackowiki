@@ -527,8 +527,13 @@ class Wacko
 
 	function get_translation($name, $lang = '', $dounicode = true)
 	{
-		if ($this->config['multilanguage'])
+		if ($this->db->multilanguage)
 		{
+			if ($lang === -1) // shortcut for using system language diags
+			{
+				$lang = $this->db->language;
+			}
+
 			if (!$lang && (isset($this->user_lang) && $this->user_lang != $this->page_lang))
 			{
 				$lang = $this->user_lang;
@@ -2645,21 +2650,7 @@ class Wacko
 	{
 		if ($message)
 		{
-			if ($type == 'add' && isset($_SESSION['messages'][0]))
-			{
-				$last = &$_SESSION['messages'][count($_SESSION['messages']) - 1][0];
-
-				if (!is_array($last))
-				{
-					$last = [$last];
-				}
-
-				$last[] = $message;
-			}
-			else
-			{
-				$_SESSION['messages'][] = [$message, $type];
-			}
+			$_SESSION['messages'][] = [$message, $type];
 		}
 	}
 
@@ -2689,24 +2680,6 @@ class Wacko
 			foreach ($messages as $message)
 			{
 				list($_message, $_type) = $message;
-
-				if (is_array($_message))
-				{
-					$list		= $_message;
-					$_message	= '';
-					$i			= 1;
-
-					foreach ($list as $item)
-					{
-						if ($i)
-						{
-							$item = htmlspecialchars($item, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
-						}
-
-						$i = !$i;
-						$_message .= $item;
-					}
-				}
 
 				$this->show_message($_message, $_type);
 			}
@@ -3357,7 +3330,7 @@ class Wacko
 
 			for ($i = 0; $i < count($parts); $i++)
 			{
-				$parts[$i] = str_replace('%23', '#', urlencode($parts[$i]));
+				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
 			}
 
 			if ($link_lang)
@@ -3378,7 +3351,7 @@ class Wacko
 
 			for ($i = 0; $i < count($parts); $i++)
 			{
-				$parts[$i] = str_replace('%23', '#', urlencode($parts[$i]));
+				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
 			}
 
 			if ($link_lang)
@@ -3399,7 +3372,7 @@ class Wacko
 
 			for ($i = 0; $i < count($parts); $i++)
 			{
-				$parts[$i] = str_replace('%23', '#', urlencode($parts[$i]));
+				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
 			}
 
 			if ($link_lang)
