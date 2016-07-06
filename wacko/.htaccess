@@ -1,10 +1,38 @@
 <IfModule mod_rewrite.c>
  RewriteEngine on
- RewriteCond    %{REQUEST_FILENAME}  -d
- RewriteRule ^(.*/[^\./]*[^/])$ $1/
+ # STS: what's that?!
+ #RewriteCond    %{REQUEST_FILENAME}  -d
+ #RewriteRule ^(.*/[^\./]*[^/])$ $1/
+ RewriteRule ^index\.php$ index.php [QSA,L]
+ RewriteRule ^index\.html$ index.php [QSA,L]
  RewriteRule ^admin\.php$ admin.php [L]
- RewriteRule ^(robots\.txt)$ robots.txt [L]
- RewriteRule ^(sitemap\.xml)$ sitemap.xml [L]
+ RewriteRule ^robots\.txt$ robots.txt [L]
+ RewriteRule ^sitemap\.xml$ sitemap.xml [L]
  RewriteRule ^(favicon\.ico)$ favicon.ico [L]
  RewriteRule ^(.*)$ index.php?page=$1 [QSA,L]
 </IfModule>
+
+<FilesMatch \.php$>
+	# Apache 2.4
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+	# Apache 2.2
+	<IfModule !mod_authz_core.c>
+		Order Allow,Deny
+		Deny from all
+	</IfModule>
+</FilesMatch>
+
+<FilesMatch "^(admin|index)\.php$">
+	# Apache 2.4
+	<IfModule mod_authz_core.c>
+		Require all granted
+	</IfModule>
+	# Apache 2.2
+	<IfModule !mod_authz_core.c>
+		Order Allow,Deny
+		Allow from All
+		Deny from None
+	</IfModule>
+</FilesMatch>
