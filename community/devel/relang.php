@@ -27,17 +27,17 @@
  *
  *//// NB /*...*/ comments in language files not supported!
 
-$wacko = '/home/sts/ww/main/wacko/'; // <---- up yours!
+$wacko = '../../wacko/'; // <---- up yours!
 
 if (count(@$argv) < 3)
 {
 	die("usage: relang.php parent.lang.php other.lang.php [....]\n");
 }
 
-require_once $wacko . 'lib/utility.php';
-function v($x) { echo stringify($x) . "\n"; }
-
 define('IN_WACKO', 1);
+require_once $wacko . 'class/ut.php';
+function v($x) { echo Ut::stringify($x) . "\n"; }
+
 require_once $wacko . 'config/constants.php';
 require_once $wacko . 'lib/php-diff/Diff.php';
 
