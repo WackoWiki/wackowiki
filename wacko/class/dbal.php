@@ -176,7 +176,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 		{
 			$past = time() - $this->cache_sql_ttl - 1;
 
-			foreach (file_glob(CACHE_SQL_DIR, '*') as $file)
+			foreach (Ut::file_glob(CACHE_SQL_DIR, '*') as $file)
 			{
 				touch($file, $past); // touching is faster than unlinking
 			}
@@ -196,7 +196,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 				return $x[0];
 			}, $query);
 
-		return join_path(CACHE_SQL_DIR, hash('sha1', $query));
+		return Ut::join_path(CACHE_SQL_DIR, hash('sha1', $query));
 	}
 
 	// low level stuff:

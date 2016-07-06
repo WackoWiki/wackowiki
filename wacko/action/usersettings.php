@@ -34,14 +34,14 @@ if (isset($_GET['confirm']))
 		$this->show_message($this->get_translation('EmailConfirmed'));
 
 		// log event
-		$this->log(4, perc_replace($this->get_translation('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));
+		$this->log(4, Ut::perc_replace($this->get_translation('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));
 
 		// TODO: reset user (session data)
 		// $this->set_user($this->load_user(0, $user['user_id'], 0, true), 1);
 	}
 	else
 	{
-		$this->show_message(perc_replace($this->get_translation('EmailNotConfirmed'), $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0)));
+		$this->show_message(Ut::perc_replace($this->get_translation('EmailNotConfirmed'), $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0)));
 	}
 }
 else if (isset($_GET['action']) && $_GET['action'] == 'logout')
@@ -154,7 +154,7 @@ else if ($user = $this->get_user())
 			"LIMIT 1");
 
 		// log event
-		$this->log(6, perc_replace($this->get_translation('LogUserSettingsUpdate', $this->config['language']), $user['user_name']));
+		$this->log(6, Ut::perc_replace($this->get_translation('LogUserSettingsUpdate', $this->config['language']), $user['user_name']));
 	}
 
 	// (re)send email confirmation code
@@ -177,7 +177,7 @@ else if ($user = $this->get_user())
 
 			$save = $this->set_language($user['user_lang'], true);
 			$subject	=	$this->get_translation('EmailConfirm');
-			$body		=	perc_replace($this->get_translation('EmailVerify'),
+			$body		=	Ut::perc_replace($this->get_translation('EmailVerify'),
 							$this->config['site_name'],
 							$user['user_name'],
 							$this->href('', '', 'confirm='.$confirm))."\n\n";

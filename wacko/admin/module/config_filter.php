@@ -37,7 +37,7 @@ function admin_config_filter(&$engine, &$module)
 	</p>
 	<br />
 <?php
-	$file_name = join_path(CONFIG_DIR, 'antispam.conf');
+	$file_name = Ut::join_path(CONFIG_DIR, 'antispam.conf');
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{

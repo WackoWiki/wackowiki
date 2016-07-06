@@ -125,7 +125,7 @@ class Http
 					"FROM ".$this->db->table_prefix."cache ".
 					"WHERE name = ".$this->db->q($hash));
 
-			dbg('invalidate_page', $page);
+			Ut::dbg('invalidate_page', $page);
 
 			$past = time() - $this->db->cache_ttl - 1;
 
@@ -138,7 +138,7 @@ class Http
 					++$n;
 				}
 
-				dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
+				Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 			}
 
 			$this->db->sql_query(
@@ -156,7 +156,7 @@ class Http
 
 	private function construct_id($page, $method, $query)
 	{
-		return join_path(CACHE_PAGE_DIR, hash('sha1', ($page . '_' . $method . '_' . $query)));
+		return Ut::join_path(CACHE_PAGE_DIR, hash('sha1', ($page . '_' . $method . '_' . $query)));
 	}
 
 	// Check http-request. May be, output cached version.
@@ -188,7 +188,7 @@ class Http
 		// check cache
 		if (($cached_page = $this->load_page($mtime)))
 		{
-			dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
+			Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
 			$gmt	= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
 			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
@@ -206,7 +206,7 @@ class Http
 				else if ($etag && $gmt != trim($etag, '\"'));
 				else
 				{
-					dbg('not modified');
+					Ut::dbg('not modified');
 					header('HTTP/1.1 304 Not Modified');
 					die();
 				}
@@ -322,7 +322,7 @@ class Http
 			$this->page = substr($request, 0, $p);
 			$this->method = strtolower(substr($request, $p + 1));
 
-			if (!@file_exists(join_path(HANDLER_DIR, 'page', $this->method . '.php')))
+			if (!@file_exists(Ut::join_path(HANDLER_DIR, 'page', $this->method . '.php')))
 			{
 				$this->page	= $request;
 				$this->method = '';

@@ -38,7 +38,7 @@ if ($this->is_admin())
 		// pages cache
 		if (@$_POST['pages_cache'] == 1)
 		{
-			purge_directory(CACHE_PAGE_DIR);
+			Ut::purge_directory(CACHE_PAGE_DIR);
 
 			// empties cache table and reset AUTO_INCREMENT value to its start value
 			$this->sql_query("TRUNCATE ".$this->config['table_prefix']."cache");
@@ -47,19 +47,19 @@ if ($this->is_admin())
 		// SQL cache
 		if (@$_POST['sql_cache'] == 1)
 		{
-			purge_directory(CACHE_SQL_DIR);
+			Ut::purge_directory(CACHE_SQL_DIR);
 		}
 
 		// config cache
 		if (@$_POST['config_cache'] == 1)
 		{
-			purge_directory(CACHE_CONFIG_DIR);
+			Ut::purge_directory(CACHE_CONFIG_DIR);
 		}
 
 		// feeds cache
 		if (@$_POST['config_feed'] == 1)
 		{
-			purge_directory(CACHE_FEED_DIR);
+			Ut::purge_directory(CACHE_FEED_DIR);
 		}
 
 		$this->show_message($this->get_translation('CacheCleared'), 'success');

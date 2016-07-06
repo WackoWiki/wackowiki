@@ -34,7 +34,7 @@ if ($this->has_access('read')
 	if (($result = $this->validate_reserved_words($this->tag)))
 	{
 		// $this->tag is reserved word
-		$message = perc_replace($this->get_translation('PageReservedWord'), $result);
+		$message = Ut::perc_replace($this->get_translation('PageReservedWord'), $result);
 		$this->set_message($message);
 		$this->redirect($this->href('new', $this->config['root_page']));
 	}
@@ -51,7 +51,7 @@ if ($this->has_access('read')
 	// TODO: add values to post in show handler
 	/* if ($this->page['latest'] == 0)
 	{
-		$message = perc_replace($this->get_translation('Revision'),
+		$message = Ut::perc_replace($this->get_translation('Revision'),
 			$this->href(),
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),

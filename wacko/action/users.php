@@ -18,7 +18,7 @@ if (($profile = @$_REQUEST['profile']))
 	// does requested user exists?
 	if (!($user = $this->load_user($profile)))
 	{
-		$this->show_message(perc_replace($this->get_translation('UsersNotFound'),
+		$this->show_message(Ut::perc_replace($this->get_translation('UsersNotFound'),
 				$this->supertag, htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)));
 	}
 	else if (!$user['enabled'])
@@ -75,12 +75,12 @@ if (($profile = @$_REQUEST['profile']))
 			// message is too long
 			else if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
 			{
-				$error = perc_replace($this->get_translation('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
+				$error = Ut::perc_replace($this->get_translation('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
 			}
 			// personal messages flood control
 			else if (isset($_SESSION['intercom_delay']) && time() - $_SESSION['intercom_delay'] < $this->config['intercom_delay'])
 			{
-				$error = perc_replace($this->get_translation('UsersPMFlooded'), $this->config['intercom_delay']);
+				$error = Ut::perc_replace($this->get_translation('UsersPMFlooded'), $this->config['intercom_delay']);
 			}
 
 			// proceed if no error encountered
@@ -102,7 +102,7 @@ if (($profile = @$_REQUEST['profile']))
 				{
 					$subject = $prefix1 .  $subject;
 				}
-				$body = perc_replace($this->get_translation('UsersPMBody'),
+				$body = Ut::perc_replace($this->get_translation('UsersPMBody'),
 						$this->get_user_name(),
 						rtrim($this->config['base_url'], '/'),
 						$this->href('', $this->tag, $profile.'&ref='.rawurlencode(base64_encode($msg_id.'@@'.$subject)).'#contacts'),
@@ -123,7 +123,7 @@ if (($profile = @$_REQUEST['profile']))
 				// send email
 				$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
 				$this->set_message($this->get_translation('UsersPMSent'));
-				$this->log(4, perc_replace($this->get_translation('LogPMSent', $this->config['language']), $this->get_user_name(), $user['user_name']));
+				$this->log(4, Ut::perc_replace($this->get_translation('LogPMSent', $this->config['language']), $this->get_user_name(), $user['user_name']));
 
 				$_SESSION['intercom_delay']	= time();
 				$_POST['mail_body']			= '';

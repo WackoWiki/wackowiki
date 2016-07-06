@@ -230,7 +230,7 @@ class Wacko
 	{
 		$theme_list	= [];
 
-		foreach (file_glob(THEME_DIR, '*/appearance/header.php') as $file)
+		foreach (Ut::file_glob(THEME_DIR, '*/appearance/header.php') as $file)
 		{
 			$theme = substr($file, strlen(THEME_DIR) + 1);
 			$theme = substr($theme, 0, strpos($theme, '/'));
@@ -328,7 +328,7 @@ class Wacko
 		{
 			// wacko.xy.php $wacko_translation[]
 			$wacko_translation = [];
-			$lang_file = join_path(LANG_DIR, 'wacko.'.$lang.'.php');
+			$lang_file = Ut::join_path(LANG_DIR, 'wacko.'.$lang.'.php');
 
 			if (@file_exists($lang_file))
 			{
@@ -339,7 +339,7 @@ class Wacko
 			if (!isset($this->translations['all']))
 			{
 				$wacko_all_resource = [];
-				$lang_file = join_path(LANG_DIR, 'wacko.all.php');
+				$lang_file = Ut::join_path(LANG_DIR, 'wacko.all.php');
 
 				if (@file_exists($lang_file))
 				{
@@ -369,7 +369,7 @@ class Wacko
 			{
 				// TODO: only FIRST theme's language loaded.... need to fix for multi-themed sites w/ nonempty theme lang files
 				// theme lang files $theme_translation[]
-				$lang_file = join_path(THEME_DIR, $this->config['theme'], 'lang/wacko.'.$lang.'.php');
+				$lang_file = Ut::join_path(THEME_DIR, $this->config['theme'], 'lang/wacko.'.$lang.'.php');
 
 				if (@file_exists($lang_file))
 				{
@@ -380,7 +380,7 @@ class Wacko
 
 				// wacko.all theme
 				$theme_translation = [];
-				$lang_file = join_path(THEME_DIR, $this->config['theme'], 'lang/wacko.all.php');
+				$lang_file = Ut::join_path(THEME_DIR, $this->config['theme'], 'lang/wacko.all.php');
 
 				if (@file_exists($lang_file))
 				{
@@ -407,7 +407,7 @@ class Wacko
 	{
 		if ($lang && !isset($this->languages[$lang]))
 		{
-			$lang_file = join_path(LANG_DIR, 'lang.' . $lang . '.php');
+			$lang_file = Ut::join_path(LANG_DIR, 'lang.' . $lang . '.php');
 			$wacko_language = [];
 			require($lang_file);
 
@@ -446,7 +446,7 @@ class Wacko
 			{
 				$lang_list = [];
 
-				foreach (file_glob(LANG_DIR, 'wacko.[a-z][a-z].php') as $file)
+				foreach (Ut::file_glob(LANG_DIR, 'wacko.[a-z][a-z].php') as $file)
 				{
 					$lang_list[] = substr($file, -6, 2);
 				}
@@ -1671,7 +1671,7 @@ class Wacko
 		if ($this->config['spam_filter'])
 		{
 			// TODO: read table word and cache it
-			if (($spam = file(join_path(CONFIG_DIR, 'antispam.conf'))))
+			if (($spam = file(Ut::join_path(CONFIG_DIR, 'antispam.conf'))))
 			{
 				foreach ($spam as $one)
 				{
@@ -1997,7 +1997,7 @@ class Wacko
 				else
 				{
 					// added new page
-					$this->log(4, perc_replace($this->get_translation('LogPageCreated', $this->config['language']), $tag.' '.$title));
+					$this->log(4, Ut::perc_replace($this->get_translation('LogPageCreated', $this->config['language']), $tag.' '.$title));
 				}
 
 				// TODO: move to additional function
@@ -2110,12 +2110,12 @@ class Wacko
 					if ($this->page['comment_on_id'] != 0)
 					{
 						// comment modified
-						$this->log(6, perc_replace($this->get_translation('LogCommentEdited', $this->config['language']), $tag.' '.$title));
+						$this->log(6, Ut::perc_replace($this->get_translation('LogCommentEdited', $this->config['language']), $tag.' '.$title));
 					}
 					else
 					{
 						// old page modified
-						$this->log(6, perc_replace($this->get_translation('LogPageEdited', $this->config['language']), $tag.' '.$title));
+						$this->log(6, Ut::perc_replace($this->get_translation('LogPageEdited', $this->config['language']), $tag.' '.$title));
 					}
 
 					// Since there's no revision history for comments it's pointless to do the following for them.
@@ -2298,7 +2298,7 @@ class Wacko
 				$save = $this->set_language($user_lang, true);
 
 				$subject	=	$this->get_translation('RegistrationApproved');
-				$body		=	perc_replace($this->get_translation('UserApprovedInfo'), $this->config['site_name'])."\n\n".
+				$body		=	Ut::perc_replace($this->get_translation('UserApprovedInfo'), $this->config['site_name'])."\n\n".
 								$this->get_translation('EmailRegisteredLogin')."\n\n";
 
 				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
@@ -2355,7 +2355,7 @@ class Wacko
 
 							$subject	=	$this->get_translation('NewPageCreatedSubj')." '$title'";
 							$body		=	$this->get_translation('EmailModerator').".\n\n".
-											perc_replace($this->get_translation('NewPageCreatedBody'), ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ))."\n".
+											Ut::perc_replace($this->get_translation('NewPageCreatedBody'), ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ))."\n".
 											"'$title'\n".
 											$this->href('', $tag)."\n\n";
 
@@ -3135,7 +3135,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url = $this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$url = $this->config['base_url'].Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 					$have_global = true;
 
 					// tracking file link
@@ -3152,7 +3152,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url = $this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$url = $this->config['base_url'].Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
 					// tracking file link
 					if ($track && isset($file_data['upload_id']))
@@ -3257,20 +3257,20 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name).'" '.
+								return '<img src="'.$this->config['base_url'].Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name).'" '.
 										($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').$scale.$resize.' />';
 							}
 							else
 							{
 								// continue
-								#return '<a href="'.$this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name).'" title="'.$title.'">'.$text.'</a>';
+								#return '<a href="'.$this->config['base_url'].Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name).'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
 						else
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							#return '<img src="'.$this->config['base_url'].join_path(UPLOAD_PER_PAGE_DIR, '@'.$file_data['page_id'].'@'.$_file).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+							#return '<img src="'.$this->config['base_url'].Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.$file_data['page_id'].'@'.$_file).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
 							if (!$text)
 							{
 								$text = $title;
@@ -3301,7 +3301,7 @@ class Wacko
 
 				if ($_global == true)
 				{
-					$title	= '404: /'.join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$title	= '404: /'.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 				}
 				else
 				{
@@ -3848,7 +3848,7 @@ class Wacko
 		// TODO: disallow random pages for the first level in the users cluster except the own [UserName].
 		/* if (preg_match( '/\b('.$this->config['users_page'].'\/*\/)\b/i', $_data, $match ))
 		{
-			$this->debug_print_r($match);
+			Ut::debug_print_r($match);
 			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
 		} */
 
@@ -3986,7 +3986,7 @@ class Wacko
 		if (!isset($inter_wiki))
 		{
 			$inter_wiki = [];
-			if (($lines = file(join_path(CONFIG_DIR, 'interwiki.conf'))))
+			if (($lines = file(Ut::join_path(CONFIG_DIR, 'interwiki.conf'))))
 			{
 				foreach ($lines as $line)
 				{
@@ -4082,7 +4082,7 @@ class Wacko
 		{
 			$salt_length			= 10;
 			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = random_token($salt_length);
+			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = Ut::random_token($salt_length);
 		}
 
 		$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? session_id() : ''; #$user['cookie_token']
@@ -4219,7 +4219,7 @@ class Wacko
 	{
 		foreach (($__path? explode(':', $__path) : ['']) as $__dir)
 		{
-			$__pathname = join_path($__dir, $__filename);
+			$__pathname = Ut::join_path($__dir, $__filename);
 
 			if (@file_exists($__pathname))
 			{
@@ -4252,7 +4252,7 @@ class Wacko
 
 	function theme_header($mod = '')
 	{
-		$theme_path		= join_path(THEME_DIR, $this->config['theme'], 'appearance');
+		$theme_path		= Ut::join_path(THEME_DIR, $this->config['theme'], 'appearance');
 		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
 
 		return $this->include_buffered('header'.$mod.'.php', $error_message, '', $theme_path);
@@ -4260,7 +4260,7 @@ class Wacko
 
 	function theme_footer($mod = '')
 	{
-		$theme_path		= join_path(THEME_DIR, $this->config['theme'], 'appearance');
+		$theme_path		= Ut::join_path(THEME_DIR, $this->config['theme'], 'appearance');
 		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
 
 		return $this->include_buffered('footer'.$mod.'.php', $error_message, '', $theme_path);
@@ -4314,12 +4314,12 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
-		$err = '<em>'.perc_replace($this->get_translation('FormatterNotFound'), $formatter).'</em>';
-		$text = $this->include_buffered(join_path(FORMATTER_DIR, $formatter.'.php'), $err, compact('text', 'options'));
+		$err = '<em>'.Ut::perc_replace($this->get_translation('FormatterNotFound'), $formatter).'</em>';
+		$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter.'.php'), $err, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
-			$text = $this->include_buffered(join_path(FORMATTER_DIR, 'typografica.php'), $err, compact('text'));
+			$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, 'typografica.php'), $err, compact('text'));
 		}
 
 		return $text;
@@ -4737,7 +4737,7 @@ class Wacko
 		$this->cookie_token		= hash('sha1', $login_token);
 
 		$salt_length			= 10;
-		$salt_user_form			= random_token($salt_length);
+		$salt_user_form			= Ut::random_token($salt_length);
 
 		$this->time_now			= date('Y-m-d H:i:s');
 		$this->session_time		= date('Y-m-d H:i:s', $session_expire);
@@ -5848,7 +5848,7 @@ class Wacko
 				$count = count($_SESSION['user_trail']);
 				#echo '### @: ['.$count.']';
 
-				#$this->debug_print_r($_SESSION['user_trail']);
+				#Ut::debug_print_r($_SESSION['user_trail']);
 
 				if (isset($_SESSION['user_trail'][$count - 1][0])
 					&&    $_SESSION['user_trail'][$count - 1][0] == $page_id)
@@ -5864,7 +5864,7 @@ class Wacko
 					{
 						#echo '### 4';
 						$_SESSION['user_trail']	= array_slice($_SESSION['user_trail'], -5 );
-						#$this->debug_print_r($_SESSION['user_trail']);
+						#Ut::debug_print_r($_SESSION['user_trail']);
 					}
 
 					#echo '### 5';
@@ -5900,7 +5900,7 @@ class Wacko
 			$size		= (int)$size;
 			$i			= 0;
 
-			#$this->debug_print_r($links);
+			#Ut::debug_print_r($links);
 
 			foreach ($links as $link)
 			{
@@ -6015,7 +6015,7 @@ class Wacko
 					"DELETE FROM ".$this->config->table_prefix."cache ".
 					"WHERE cache_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".(int)$ttl."' SECOND )");
 
-				if (purge_directory(CACHE_PAGE_DIR, $ttl))
+				if (Ut::purge_directory(CACHE_PAGE_DIR, $ttl))
 				{
 					$this->log(7, 'Maintenance: cached pages purged');
 				}
@@ -6024,7 +6024,7 @@ class Wacko
 			// sql query cache
 			if (($ttl = $this->config->cache_sql_ttl) > 0)
 			{
-				if (purge_directory(CACHE_SQL_DIR, $ttl))
+				if (Ut::purge_directory(CACHE_SQL_DIR, $ttl))
 				{
 					$this->log(7, 'Maintenance: cached sql results purged');
 				}
@@ -6148,7 +6148,7 @@ class Wacko
 		if (isset($user['theme']))
 		{
 			$this->config['theme']		= $user['theme'];
-			$this->config['theme_url']	= $this->config['base_url'].join_path(THEME_DIR, $this->config['theme']).'/';
+			$this->config['theme_url']	= $this->config['base_url'].Ut::join_path(THEME_DIR, $this->config['theme']).'/';
 		}
 
 		// SEO
@@ -6260,7 +6260,7 @@ class Wacko
 				}
 			}
 
-			$this->config['theme_url'] = $this->config['base_url'].join_path(THEME_DIR, $this->config['theme']).'/';
+			$this->config['theme_url'] = $this->config['base_url'].Ut::join_path(THEME_DIR, $this->config['theme']).'/';
 
 			// set page categories. this defines $categories (array) object property
 			$categories = $this->load_categories('', $this->page['page_id']);
@@ -6879,7 +6879,7 @@ class Wacko
 				/*foreach ($files as $file)
 				{
 					// remove from FS
-					$file_name = join_path(UPLOAD_PER_PAGE_DIR, '@'.
+					$file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.
 							$page['page_id'].'@'.$file['file_name']);
 
 					@unlink($file_name);
@@ -6896,7 +6896,7 @@ class Wacko
 				foreach ($files as $file)
 				{
 					// remove from FS
-					$file_name = join_path(UPLOAD_PER_PAGE_DIR, '@'.
+					$file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.
 						$page['page_id'].'@'.$file['file_name']);
 
 					@unlink($file_name);
@@ -7052,7 +7052,7 @@ class Wacko
 
 		return '<br /><small>'.
 			$this->get_translation('PwdCplxDesc1').
-			perc_replace($this->get_translation('PwdCplxDesc2'), $this->config['pwd_min_chars']).
+			Ut::perc_replace($this->get_translation('PwdCplxDesc2'), $this->config['pwd_min_chars']).
 			($this->config['pwd_unlike_login'] > 0
 				? ', '.$this->get_translation('PwdCplxDesc3')
 				: '').

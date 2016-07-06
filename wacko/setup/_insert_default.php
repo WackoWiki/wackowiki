@@ -4,15 +4,15 @@
 
 if (!$config['system_seed'])
 {
-	$config['system_seed'] = random_token(20);
+	$config['system_seed'] = Ut::random_token(20);
 }
 
 if (!$config['hashid_seed'])
 {
-	$config['hashid_seed'] = random_token(20);
+	$config['hashid_seed'] = Ut::random_token(20);
 }
 
-$salt_user_form			= random_token(10);
+$salt_user_form			= Ut::random_token(10);
 $password_hashed		= $config['admin_name'].$_POST['password'];
 $password_hashed		= password_hash(
 								base64_encode(

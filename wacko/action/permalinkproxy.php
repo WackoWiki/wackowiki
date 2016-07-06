@@ -44,7 +44,7 @@ if (isset($page_id))
 					if (isset($revision_id))
 					{
 						echo '<div class="revisioninfo">'.
-							perc_replace($this->get_translation('Revision'),
+							Ut::perc_replace($this->get_translation('Revision'),
 								$this->href(),
 								$this->tag,
 								$this->get_time_formatted($_page['modified']),

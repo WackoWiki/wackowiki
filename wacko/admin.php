@@ -232,7 +232,7 @@ else if (time() - $_SESSION['created'] > $session_length)
 ##     Include admin modules and common functions     ##
 ########################################################
 
-foreach (file_glob('admin/{common,module}/*.php') as $filename)
+foreach (Ut::file_glob('admin/{common,module}/*.php') as $filename)
 {
 	include $filename;
 }

@@ -15,7 +15,7 @@ class Settings extends Dbal implements ArrayAccess
 	public function __construct()
 	{
 		$this->started = microtime(1);
-		$this->cachefile = join_path(CACHE_CONFIG_DIR, 'config.php');
+		$this->cachefile = Ut::join_path(CACHE_CONFIG_DIR, 'config.php');
 
 		// retrieve and unserialize cached settings data
 		clearstatcache();
@@ -116,7 +116,7 @@ class Settings extends Dbal implements ArrayAccess
 
 	public function rebase_url()
 	{
-		$this->theme_url	= $this->base_url . join_path(THEME_DIR, $this->theme) . '/';
+		$this->theme_url	= $this->base_url . Ut::join_path(THEME_DIR, $this->theme) . '/';
 		$this->cookie_path	= preg_replace('|https?://[^/]+|i', '', $this->base_url);
 	}
 

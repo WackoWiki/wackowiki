@@ -162,7 +162,7 @@ function set_pack_dir(&$engine, $time)
 {
 	// check dir name and create if not exists
 	$pack = date('Ymd_His', $time);
-	$dir = join_path(UPLOAD_BACKUP_DIR, $pack);
+	$dir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
 
 	clearstatcache();
 	if (is_dir($dir) !== true)
@@ -180,10 +180,10 @@ function remove_pack(&$engine, $pack)
 {
 	$offset = 0;
 	$pathdir = '';
-	$packdir = join_path(UPLOAD_BACKUP_DIR, $pack);
+	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
 
 	// read log
-	$log = join_path($packdir, BACKUP_FILE_LOG);
+	$log = Ut::join_path($packdir, BACKUP_FILE_LOG);
 	$log = str_replace("\n", '', file($log)); // TODO: file() return array
 
 	// get subdirs list (in reverse order)
@@ -195,7 +195,7 @@ function remove_pack(&$engine, $pack)
 	{
 		foreach ($subdirs as $subdir)
 		{
-			purge_directory(join_path($packdir, $subdir));
+			Ut::purge_directory(Ut::join_path($packdir, $subdir));
 
 			// recursively remove subdirs in path
 			if (strpos($subdir, '/'))
@@ -208,7 +208,7 @@ function remove_pack(&$engine, $pack)
 					if ($offlen > 0)	$pathdir = substr($subdir, 0, $offlen);
 					else				$pathdir = $subdir;
 
-					$pathdirs[] = join_path($packdir, $pathdir);
+					$pathdirs[] = Ut::join_path($packdir, $pathdir);
 				}
 
 				rsort($pathdirs);
@@ -220,7 +220,7 @@ function remove_pack(&$engine, $pack)
 			}
 			else
 			{
-				rmdir(join_path($packdir, $subdir));
+				rmdir(Ut::join_path($packdir, $subdir));
 			}
 		}
 	}
@@ -228,7 +228,7 @@ function remove_pack(&$engine, $pack)
 	// remove pack contents and directory
 	if (is_dir($packdir) === true)
 	{
-		purge_directory($packdir);
+		Ut::purge_directory($packdir);
 		rmdir($packdir);
 	}
 
@@ -450,7 +450,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	"SELECT * FROM $table ".
 	( $where ? $where : "" ).
 	$order.
-	perc_replace($limit, $r)))
+	Ut::perc_replace($limit, $r)))
 	{
 		foreach ($data as $row)
 		{
@@ -599,7 +599,7 @@ function get_files(&$engine, $pack, $dir, $root)
 function put_table(&$engine, $pack)
 {
 	// read sql data
-	$file	= join_path(UPLOAD_BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE);
+	$file	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, BACKUP_FILE_STRUCTURE);
 	$sql	= explode(';', file_get_contents($file));
 
 	array_pop($sql);
@@ -623,7 +623,7 @@ function put_data(&$engine, $pack, $table, $mode)
 	$point		= '';
 
 	// open table dump file with read access
-	$filename	= join_path(UPLOAD_BACKUP_DIR, $pack, $table, BACKUP_FILE_DUMP_SUFFIX);
+	$filename	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $table, BACKUP_FILE_DUMP_SUFFIX);
 	$file		= gzopen($filename, 'rb');
 
 	// read and process file in iterations to the end
@@ -700,7 +700,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 	$offset	= 0;
 	$total	= array();
 
-	$packdir = join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
+	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
 
 	// restore files subdir or full path recursively if needed
 	if (strpos($dir, '/'))

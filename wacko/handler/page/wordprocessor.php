@@ -29,7 +29,7 @@ if ($this->has_access('read'))
 
 	if (!$this->page['latest'])
 	{
-		$message = perc_replace($this->get_translation('Revision'),
+		$message = Ut::perc_replace($this->get_translation('Revision'),
 			$this->href(),
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),

@@ -8,7 +8,6 @@ if (!defined('IN_WACKO'))
 }
 
 require_once('config/constants.php');
-require_once('lib/utility.php');
 
 // Compatibility with the password_* functions that ship with PHP 5.5
 if (version_compare(PHP_VERSION, '5.5.0') < 0)
@@ -61,7 +60,7 @@ spl_autoload_register(function($name)
 
 	if (!isset($map))
 	{
-		foreach (file(join_path(CONFIG_DIR, 'autoload.conf')) as $line)
+		foreach (file(CONFIG_DIR . '/autoload.conf') as $line)
 		{
 			if (($line = trim($line)) && ctype_alpha($line[0]))
 			{

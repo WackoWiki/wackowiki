@@ -346,7 +346,7 @@ if ($this->is_admin())
 
 				// get user and usergroup privileges
 				$privileges	= explode("\n", $_acl['list']);
-				debug_print_r($privileges);
+				Ut::debug_print_r($privileges);
 
 				foreach ($privileges as $privilege)
 				{
@@ -420,7 +420,7 @@ if ($this->is_admin())
 								$this->groups = $groups;
 							}
 
-							debug_print_r($groups);
+							Ut::debug_print_r($groups);
 
 							if (in_array($privilege, $this->groups))
 							{
@@ -448,7 +448,7 @@ if ($this->is_admin())
 									$this->users = $users;
 								}
 
-								debug_print_r($users);
+								Ut::debug_print_r($users);
 
 								if (in_array($privilege, $this->users))
 								{
