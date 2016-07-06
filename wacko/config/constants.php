@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-define('CONFIG_DIR',					'config');			// but look for hardcoded use 'config/constants.php'
+define('CONFIG_DIR',					'config');			// NB hardcoded as config/constants.php for bootstrap
 define('CONFIG_FILE',					'config/config.php');
 define('CONFIG_DEFAULTS',				'config/config_defaults.php');
 define('SITE_LOCK',						'config/lock');

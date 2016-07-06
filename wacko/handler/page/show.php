@@ -39,7 +39,7 @@ if ($this->has_access('read'))
 			header('HTTP/1.1 404 Not Found');
 		}
 
-		$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  perc_replace($this->get_translation('PromptCreate'), $this->href('edit', '', '', 1)) : '');
+		$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  Ut::perc_replace($this->get_translation('PromptCreate'), $this->href('edit', '', '', 1)) : '');
 		$this->show_message($message, 'notice');
 	}
 	else
@@ -75,7 +75,7 @@ if ($this->has_access('read'))
 		// revision header
 		if ($this->page['latest'] == 0)
 		{
-			$message = perc_replace($this->get_translation('Revision'),
+			$message = Ut::perc_replace($this->get_translation('Revision'),
 				$this->href(),
 				$this->tag,
 				$this->get_time_formatted($this->page['modified']),
@@ -264,19 +264,19 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 		// files code starts
 		if ($this->config['footer_files'] == 1 || ($this->config['footer_files'] == 2 && $this->get_user()))
 		{
-			require_once(join_path(HANDLER_DIR, 'page/_files.php'));
+			require_once(Ut::join_path(HANDLER_DIR, 'page/_files.php'));
 		}
 
 		// comments form output  starts
 		if (($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()) ) && $this->user_allowed_comments())
 		{
-			require_once(join_path(HANDLER_DIR, 'page/_comments.php'));
+			require_once(Ut::join_path(HANDLER_DIR, 'page/_comments.php'));
 		}
 
 		// rating form output begins
 		if ($this->has_access('read') && $this->page && $this->config['footer_rating'] == 1 || ($this->config['footer_rating'] == 2 && $this->get_user()))
 		{
-			require_once(join_path(HANDLER_DIR, 'page/_rating.php'));
+			require_once(Ut::join_path(HANDLER_DIR, 'page/_rating.php'));
 		}
 	}
 }

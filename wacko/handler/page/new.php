@@ -29,7 +29,7 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 	// check if reserved word
 	if($result = $this->validate_reserved_words($new_tag))
 	{
-		$this->set_message(perc_replace($this->get_translation('PageReservedWord'), $result));
+		$this->set_message(Ut::perc_replace($this->get_translation('PageReservedWord'), $result));
 	}
 	// check target page existance
 	else if ($page = $this->load_page($prefix.$new_tag, 0, '', LOAD_CACHE, LOAD_META))
@@ -39,7 +39,7 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 		// check existing page write access
 		if ($this->has_access('write', $this->get_page_id($prefix.$new_tag)))
 		{
-			$message .= perc_replace($this->get_translation('PageAlreadyExistsEdit'), "<a href=\"".$this->href('edit', $prefix.$new_tag)."\">".$this->get_translation('PageAlreadyExistsEdit2')." </a>?");
+			$message .= Ut::perc_replace($this->get_translation('PageAlreadyExistsEdit'), "<a href=\"".$this->href('edit', $prefix.$new_tag)."\">".$this->get_translation('PageAlreadyExistsEdit2')." </a>?");
 		}
 		else
 		{

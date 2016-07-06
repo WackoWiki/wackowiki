@@ -84,12 +84,12 @@ if (!in_array($mode, $modes))
 $purge_time = (($t = $this->config['referrers_purge_time'])
 	? ($t == 1
 		? $this->get_translation('Last24Hours')
-		: perc_replace($this->get_translation('LastDays'), $t))
+		: Ut::perc_replace($this->get_translation('LastDays'), $t))
 	: '');
 
 if ($mode)
 {
-	$title = perc_replace($this->get_translation('ExternalPagesGlobal'),
+	$title = Ut::perc_replace($this->get_translation('ExternalPagesGlobal'),
 		$this->href('referrers_sites', '', 'o=' . $mode),
 		$purge_time);
 }
@@ -119,7 +119,7 @@ else if ($mode == 'global')
 }
 else
 {
-	$title = perc_replace($this->get_translation('ExternalPages'),
+	$title = Ut::perc_replace($this->get_translation('ExternalPages'),
 		$this->compose_link_to_page($this->tag),
 		$purge_time,
 		$this->href('referrers_sites'));

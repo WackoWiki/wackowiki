@@ -58,16 +58,16 @@ else
 $href = $this->href('referrers', '', 'o=' . $mode);
 if ($mode == 'global')
 {
-	$title		= perc_replace($this->get_translation('DomainsSitesPagesGlobal'), $href);
+	$title		= Ut::perc_replace($this->get_translation('DomainsSitesPagesGlobal'), $href);
 	$referrers	= $this->load_referrers();
 }
 else
 {
-	$title = perc_replace($this->get_translation('DomainsSitesPages'),
+	$title = Ut::perc_replace($this->get_translation('DomainsSitesPages'),
 		$this->compose_link_to_page($this->tag),
 		(($i = $this->config['referrers_purge_time']) == 0? '' :
 			($i == 1? $this->get_translation('Last24Hours') :
-			perc_replace($this->get_translation('LastDays'), $i))),
+			Ut::perc_replace($this->get_translation('LastDays'), $i))),
 		$href);
 	$referrers = $this->load_referrers($this->page['page_id']);
 }

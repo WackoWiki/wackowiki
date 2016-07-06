@@ -86,12 +86,12 @@ function admin_maint_resync(&$engine, &$module)
 					"AND p.deleted <> '1' ))
 
 				");
-#$engine->debug_print_r($users1);
-#$engine->debug_print_r($users2);
+#Ut::debug_print_r($users1);
+#Ut::debug_print_r($users2);
 			#$users = array_merge($users1, $users2);
-#$engine->debug_print_r($users);
+#Ut::debug_print_r($users);
 			$users = array_unique($users);
-$engine->debug_print_r($users);
+Ut::debug_print_r($users);
 
 			foreach ($users as $user)
 			{

@@ -17,7 +17,7 @@ $param = isset($_GET['goback'])?  'goback=' . rawurlencode($_GET['goback']) : ''
 $this->http->ensure_tls($this->href('', '', $param));
 // was: $this->http->ensure_tls($this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )));
 
-$uncache = 'z=' . random_token(5, 2);
+$uncache = 'z=' . Ut::random_token(5, 2);
 
 // actions
 if (@$_GET['action'] === 'clearcookies')
@@ -36,7 +36,7 @@ $this->hide_article_header = true;
 // logout
 if (@$_GET['action'] == 'logout')
 {
-	$this->log(5, perc_replace($this->get_translation('LogUserLoggedOut', -1), $this->get_user_name()));
+	$this->log(5, Ut::perc_replace($this->get_translation('LogUserLoggedOut', -1), $this->get_user_name()));
 	$this->log_user_out();
 	$this->set_menu(MENU_DEFAULT);
 	$this->set_message($this->get_translation('LoggedOut')); // TODO: message is reset with session before it it can display the message set after the redirect
@@ -233,7 +233,7 @@ else // login
 						$this->reset_failed_user_login_count($existing_user['user_id']);
 						$this->reset_lost_password_count($existing_user['user_id']);
 
-						$this->log(3, perc_replace($this->get_translation('LogUserLoginOK', -1), $existing_user['user_name']));
+						$this->log(3, Ut::perc_replace($this->get_translation('LogUserLoginOK', -1), $existing_user['user_name']));
 
 						// run in tls mode?
 						if ($this->db->tls)
@@ -249,7 +249,7 @@ else // login
 						$this->set_failed_user_login_count($existing_user['user_id']);
 
 						// log failed attempt
-						$this->log(2, perc_replace($this->get_translation('LogUserLoginFailed', -1), $_user_name));
+						$this->log(2, Ut::perc_replace($this->get_translation('LogUserLoginFailed', -1), $_user_name));
 					}
 				}
 			}

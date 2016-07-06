@@ -30,7 +30,7 @@ if ($this->is_owner($page_id))
 
 	if ($watchers)
 	{
-		$title = perc_replace($this->get_translation('Watchers'), $this->link('/'.$tag, '', $tag));
+		$title = Ut::perc_replace($this->get_translation('Watchers'), $this->link('/'.$tag, '', $tag));
 
 		if (!$nomark)
 		{
@@ -57,7 +57,7 @@ if ($this->is_owner($page_id))
 	{
 		if (!$nomark)
 		{
-			echo perc_replace($this->get_translation('NoWatchers'), $this->link('/'.$tag, '', $tag));
+			echo Ut::perc_replace($this->get_translation('NoWatchers'), $this->link('/'.$tag, '', $tag));
 		}
 	}
 }
@@ -65,7 +65,7 @@ else
 {
 	if (!$nomark)
 	{
-		echo perc_replace($this->get_translation('NotOwnerAndViewWatchers'), $this->link('/'.$tag, '', $tag));
+		echo Ut::perc_replace($this->get_translation('NotOwnerAndViewWatchers'), $this->link('/'.$tag, '', $tag));
 	}
 }
 

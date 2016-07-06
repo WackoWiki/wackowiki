@@ -100,7 +100,7 @@ if ($file)
 		if ($this->is_admin() || (isset($file['upload_id']) && ($this->page['owner_id'] == $this->get_user_id()))
 		|| ($this->has_access('read')) || ($file['user_id'] == $this->get_user_id()) )
 		{
-			$file_path = join_path(
+			$file_path = Ut::join_path(
 				($page_id? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
 				($page_id
 					? '@'.$this->page['page_id'].'@'
@@ -216,5 +216,3 @@ else
 
 // 4. die
 die();
-
-?>

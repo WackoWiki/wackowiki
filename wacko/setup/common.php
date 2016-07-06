@@ -226,14 +226,14 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 					{
 						if(mysqli_errno($dblink_global) != 0)
 						{
-							output_error(perc_replace($data[1], $tag)." - ".mysqli_error($dblink_global));
+							output_error(Ut::perc_replace($data[1], $tag)." - ".mysqli_error($dblink_global));
 						}
 					}
 				}
 			}
 			else if($critical)
 			{
-				output_error(perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+				output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
 			}
 
 			break;
@@ -246,7 +246,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 				if ($result->fetchColumn() > 0)
 				{
 					$page_exists = true;
-					output_error(perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+					output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
 				}
 
 				$result->closeCursor();
@@ -264,7 +264,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 						if($error[0] != "00000")
 						{
-							output_error(perc_replace($data[1], $tag)." - ".($error[2]));
+							output_error(Ut::perc_replace($data[1], $tag)." - ".($error[2]));
 						}
 					}
 				}

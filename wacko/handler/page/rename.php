@@ -50,7 +50,7 @@ if ($registered
 {
 	if (!$this->page)
 	{
-		$message .= perc_replace($this->get_translation('DoesNotExists'), $this->href('edit'));
+		$message .= Ut::perc_replace($this->get_translation('DoesNotExists'), $this->href('edit'));
 	}
 	else
 	{
@@ -79,7 +79,7 @@ if ($registered
 				// check if reserved word
 				if($result = $this->validate_reserved_words($new_name))
 				{
-					$message .= '<li>'.perc_replace($this->get_translation('PageReservedWord'), $result)."</li>\n";
+					$message .= '<li>'.Ut::perc_replace($this->get_translation('PageReservedWord'), $result)."</li>\n";
 				}
 				else if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 				{
@@ -88,13 +88,13 @@ if ($registered
 				// if ($this->supertag == $super_new_name)
 				else if ($this->tag == $new_name)
 				{
-					$message .= '<li>'.perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($new_name, '', '', 0))."</li>\n";
+					$message .= '<li>'.Ut::perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($new_name, '', '', 0))."</li>\n";
 				}
 				else
 				{
 					if ($this->supertag != $super_new_name && $page=$this->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 					{
-						$message .= '<li>'.perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($new_name, '', '', 0))."</li>\n";
+						$message .= '<li>'.Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($new_name, '', '', 0))."</li>\n";
 					}
 					else
 					{
@@ -124,7 +124,7 @@ if ($registered
 
 							if ($this->save_page($this->tag, '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
 							{
-								$message .= '<li>'.perc_replace($this->get_translation('RedirectCreated'), $this->link($this->tag))."</li>\n";
+								$message .= '<li>'.Ut::perc_replace($this->get_translation('RedirectCreated'), $this->link($this->tag))."</li>\n";
 							}
 
 							$this->clear_cache_wanted_page($this->tag);
@@ -134,7 +134,7 @@ if ($registered
 						$message .= '<li>'.$this->get_translation('NewNameOfPage').$this->link('/'.$new_name)."</li>\n";
 
 						// log event
-						$this->log(3, perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $this->tag, $new_name).
+						$this->log(3, Ut::perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $this->tag, $new_name).
 							($need_redirect? $this->get_translation('LogRenamedPage2', $this->config['language']) : '' ));
 					}
 				}
@@ -272,13 +272,13 @@ function move(&$parent, $old_page, $new_name)
 		// if ($old_page['supertag'] == $super_new_name)
 		else if ($old_page['tag'] == $new_name)
 		{
-			$message .= '<li>'.perc_replace($parent->get_translation('AlreadyNamed'), $parent->link($new_name))."</li>\n";
+			$message .= '<li>'.Ut::perc_replace($parent->get_translation('AlreadyNamed'), $parent->link($new_name))."</li>\n";
 		}
 		else
 		{
 			if ($old_page['supertag'] != $super_new_name && $page = $parent->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$message .= '<li>'.perc_replace($parent->get_translation('AlredyExists'), $parent->link($new_name))."</li>\n";
+				$message .= '<li>'.Ut::perc_replace($parent->get_translation('AlredyExists'), $parent->link($new_name))."</li>\n";
 			}
 			else
 			{
@@ -308,7 +308,7 @@ function move(&$parent, $old_page, $new_name)
 
 					if ($parent->save_page($old_page['tag'], '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.perc_replace($parent->get_translation('RedirectCreated'), $parent->link($old_page['tag']))."</li>\n";
+						$message .= '<li>'.Ut::perc_replace($parent->get_translation('RedirectCreated'), $parent->link($old_page['tag']))."</li>\n";
 					}
 
 					$parent->clear_cache_wanted_page($old_page['tag']);
@@ -318,7 +318,7 @@ function move(&$parent, $old_page, $new_name)
 				$message .= '<li>'.$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name)."</li>\n";
 
 				// log event
-				$parent->log(3, perc_replace($parent->get_translation('LogRenamedPage', $parent->config['language']), $old_page['tag'], $new_name).
+				$parent->log(3, Ut::perc_replace($parent->get_translation('LogRenamedPage', $parent->config['language']), $old_page['tag'], $new_name).
 					($need_redirect? $parent->get_translation('LogRenamedPage2', $parent->config['language']) : '' ));
 			}
 		}

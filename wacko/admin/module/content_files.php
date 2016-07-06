@@ -93,7 +93,7 @@ function admin_content_files(&$engine, &$module)
 			$message =  '<em>'.$engine->get_translation('UploadRemovedFromDB').'</em><br />';
 
 			// 3. remove from FS
-			$real_filename = join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
+			$real_filename = Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 
 			if (@unlink($real_filename))
 			{

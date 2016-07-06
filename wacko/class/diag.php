@@ -135,10 +135,10 @@ class Diag
 
 				if ($config['debug'] >= 3)
 				{
-					debug_print_r($_SESSION);
-					debug_print_r($engine->context);
-					// debug_print_r($config);
-					// debug_print_r($engine->page);
+					Ut::debug_print_r($_SESSION);
+					Ut::debug_print_r($engine->context);
+					// Ut::debug_print_r($config);
+					// Ut::debug_print_r($engine->page);
 				}
 
 				echo "</div >\n";

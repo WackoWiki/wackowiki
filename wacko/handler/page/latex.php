@@ -19,7 +19,7 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		echo perc_replace($this->get_translation('DoesNotExists'), $this->href('edit'));
+		echo Ut::perc_replace($this->get_translation('DoesNotExists'), $this->href('edit'));
 	}
 	else
 	{
@@ -32,7 +32,7 @@ if ($this->has_access('read'))
 		if (!$this->page['latest'])
 		{
 			echo '<div class="revisioninfo">'.
-				perc_replace($this->get_translation('Revision'), $this->href(), $this->tag, $this->page['modified']).
+				Ut::perc_replace($this->get_translation('Revision'), $this->href(), $this->tag, $this->page['modified']).
 				'</div>';
 		}
 

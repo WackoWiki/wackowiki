@@ -39,14 +39,14 @@ function admin_lock(&$engine, &$module)
 	// clear cache
 	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
 	{
-		purge_directory(CACHE_PAGE_DIR);
+		Ut::purge_directory(CACHE_PAGE_DIR);
 		$engine->sql_query("TRUNCATE {$engine->config['table_prefix']}cache");
 
-		purge_directory(CACHE_SQL_DIR);
+		Ut::purge_directory(CACHE_SQL_DIR);
 
-		purge_directory(CACHE_CONFIG_DIR);
+		Ut::purge_directory(CACHE_CONFIG_DIR);
 
-		purge_directory(CACHE_FEED_DIR);
+		Ut::purge_directory(CACHE_FEED_DIR);
 	}
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')

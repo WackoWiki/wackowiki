@@ -406,7 +406,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
-					$this->log(1, perc_replace($this->get_translation('LogRemovedPage', $this->config['language']), $page['tag'], $page['user_id']));
+					$this->log(1, Ut::perc_replace($this->get_translation('LogRemovedPage', $this->config['language']), $page['tag'], $page['user_id']));
 				}
 
 				unset($accept_action);
@@ -445,7 +445,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// in case no errors, move...
 				if ($error == true)
 				{
-					$error = perc_replace($this->get_translation('ModerateMoveExists'), implode(', ', $error));
+					$error = Ut::perc_replace($this->get_translation('ModerateMoveExists'), implode(', ', $error));
 				}
 				else
 				{
@@ -454,7 +454,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					foreach ($set as $page_id)
 					{
 						moderate_rename_topic($this, $old_tags[$i], $new_tags[$i]);
-						$this->log(3, perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $old_tags[$i], $new_tags[$i]));
+						$this->log(3, Ut::perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $old_tags[$i], $new_tags[$i]));
 						$i++;
 					}
 
@@ -496,7 +496,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($tag != '' && $error != true)
 				{
 					moderate_rename_topic($this, $old_tag, $this->tag.'/'.$tag, $title);
-					$this->log(3, perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $old_tag, $this->tag.'/'.$tag.' '.$title));
+					$this->log(3, Ut::perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $old_tag, $this->tag.'/'.$tag.' '.$title));
 					unset($accept_action, $old_tag, $tag, $title);
 
 					if ($this->config['enable_feeds'])
@@ -529,7 +529,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				moderate_merge_topics($this, $_POST['base'], $topics);
-				$this->log(3, perc_replace($this->get_translation('LogMergedPages', $this->config['language']),
+				$this->log(3, Ut::perc_replace($this->get_translation('LogMergedPages', $this->config['language']),
 							'##'.implode('##, ##', $topics).'##', $_POST['base']));
 				
 				unset($accept_action, $topics);
@@ -550,7 +550,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($set as $page_id)
 			{
 				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
-				$this->log(2, perc_replace($this->get_translation('LogTopicLocked', $this->config['language']), $page['tag'].' '.$page['title']));
+				$this->log(2, Ut::perc_replace($this->get_translation('LogTopicLocked', $this->config['language']), $page['tag'].' '.$page['title']));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($page_id, 'comment', '!*');
 			}
@@ -565,7 +565,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($set as $page_id)
 			{
 				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
-				$this->log(2, perc_replace($this->get_translation('LogTopicUnlocked', $this->config['language']), $page['tag'].' '.$page['title']));
+				$this->log(2, Ut::perc_replace($this->get_translation('LogTopicUnlocked', $this->config['language']), $page['tag'].' '.$page['title']));
 				$this->save_acl($page_id, 'comment', '*');
 			}
 
@@ -791,7 +791,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// actually remove topics
 			if (isset($_POST['accept']))
 			{
-				$this->log(1, perc_replace($this->get_translation('LogRemovedPage', $this->config['language']), $this->page['tag'], $this->page['user_id']));
+				$this->log(1, Ut::perc_replace($this->get_translation('LogRemovedPage', $this->config['language']), $this->page['tag'], $this->page['user_id']));
 				moderate_delete_page($this, $this->tag);
 				unset($accept_action);
 
@@ -847,13 +847,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					if ($forum_cluster === true && $_POST['section'])
 					{
-						$error = perc_replace($this->get_translation('ModerateMoveExists'), $error);
+						$error = Ut::perc_replace($this->get_translation('ModerateMoveExists'), $error);
 					}
 				}
 				else
 				{
 					moderate_rename_topic($this, $old_tag, $new_tag);
-					$this->log(3, perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $old_tag, $new_tag));
+					$this->log(3, Ut::perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $old_tag, $new_tag));
 					unset($accept_action);
 
 					if ($this->config['enable_feeds'])
@@ -894,7 +894,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($tag != '' && $error != true)
 				{
 					moderate_rename_topic($this, $old_tag, $new_tag, $title);
-					$this->log(3, perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $old_tag, $new_tag.' '.$title));
+					$this->log(3, Ut::perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $old_tag, $new_tag.' '.$title));
 					unset($accept_action);
 
 					if ($this->config['enable_feeds'])
@@ -912,7 +912,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->save_acl($this->page['page_id'], 'comment', '!*');
-			$this->log(2, perc_replace($this->get_translation('LogTopicLocked', $this->config['language']), $this->page['tag'].' '.$this->page['title']));
+			$this->log(2, Ut::perc_replace($this->get_translation('LogTopicLocked', $this->config['language']), $this->page['tag'].' '.$this->page['title']));
 			$this->set_message($this->get_translation('ModerateTopicBlocked'), 'success');
 			$this->redirect($this->href('moderate'));
 		}
@@ -920,7 +920,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if (isset($_POST['topic_unlock']) && $forum_cluster === true)
 		{
 			$this->save_acl($this->page['page_id'], 'comment', '*');
-			$this->log(2, perc_replace($this->get_translation('LogTopicUnlocked', $this->config['language']), $this->page['tag'].' '.$this->page['title']));
+			$this->log(2, Ut::perc_replace($this->get_translation('LogTopicUnlocked', $this->config['language']), $this->page['tag'].' '.$this->page['title']));
 			$this->set_message($this->get_translation('ModerateTopicUnlocked'), 'success');
 			$this->redirect($this->href('moderate'));
 		}
@@ -943,7 +943,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 						moderate_delete_page($this, $page['tag']);
-						$this->log(1, perc_replace($this->get_translation('LogRemovedComment', $this->config['language']),
+						$this->log(1, Ut::perc_replace($this->get_translation('LogRemovedComment', $this->config['language']),
 								$this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']),
 								$page['user_name'],
 								$this->get_time_formatted($page['created'])));
@@ -1045,7 +1045,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						if (moderate_split_topic($this, $comment_ids, $old_tag, $section.'/'.$tag, $title) === true)
 						{
-							$this->log(3, perc_replace($this->get_translation('LogSplittedPage', $this->config['language']),
+							$this->log(3, Ut::perc_replace($this->get_translation('LogSplittedPage', $this->config['language']),
 									$this->tag.' '.$this->page['title'],
 									$section.'/'.$tag.' '.$title));
 							unset($accept_action);
@@ -1122,7 +1122,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"WHERE page_id = '".(int)$page_id."' ".
 							"LIMIT 1");
 
-						$this->log(3, perc_replace($this->get_translation('LogSplittedPage', $this->config['language']),
+						$this->log(3, Ut::perc_replace($this->get_translation('LogSplittedPage', $this->config['language']),
 								$this->tag.' '.$this->page['title'],
 								$title.' '.$this->get_page_title($title)));
 						unset($accept_action);
@@ -1263,7 +1263,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-					'<tr><th>'.perc_replace($this->get_translation('ModerateComDelConfirm'), count($set), ( count($set) > 1 ? $this->get_translation('ModerateComments') : $this->get_translation('ModerateComment') )).'</th></td>'.
+					'<tr><th>'.Ut::perc_replace($this->get_translation('ModerateComDelConfirm'), count($set), ( count($set) > 1 ? $this->get_translation('ModerateComments') : $this->get_translation('ModerateComment') )).'</th></td>'.
 					'<tr><td>'.
 						($error == true
 							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
@@ -1289,7 +1289,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<br />'.
 						'<small>'.
 						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked="checked" ' : '' ).'/> <label for="after">'.$this->get_translation('ModerateSplitAllAfter').'</label><br />'.
-						'<input type="radio" name="scheme" value="selected" id="selected" '.(isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked="checked" ' : '' ).'/> <label for="selected">'.perc_replace($this->get_translation('ModerateSplitSelected'), count($set)).'</label>'.
+						'<input type="radio" name="scheme" value="selected" id="selected" '.(isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked="checked" ' : '' ).'/> <label for="selected">'.Ut::perc_replace($this->get_translation('ModerateSplitSelected'), count($set)).'</label>'.
 						'</small>'.
 					'</td></tr>'.
 				'</table><br />'."\n";

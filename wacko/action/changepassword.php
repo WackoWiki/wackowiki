@@ -71,7 +71,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 					"LIMIT 1");
 
 				// log event
-				$this->log(3, perc_replace($this->get_translation('LogUserPasswordRecovered', $this->config['language']), $user['user_name']));
+				$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordRecovered', $this->config['language']), $user['user_name']));
 
 				// forward
 				$this->set_message($this->get_translation('PasswordChanged'));
@@ -88,7 +88,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 			?>
 
 			<div class="cssform">
-				<h3><?php echo $this->format(perc_replace($this->get_translation('YouWantChangePasswordForUser'), $user['user_name'])); ?></h3>
+				<h3><?php echo $this->format(Ut::perc_replace($this->get_translation('YouWantChangePasswordForUser'), $user['user_name'])); ?></h3>
 				<p>
 					<label for="new_password"><?php echo $this->get_translation('NewPassword');?>:</label>
 					<input type="password" id="new_password" name="new_password" size="24" />
@@ -136,7 +136,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		{
 			$error = $this->get_translation('WrongPassword');
 			// log event
-			$this->log(3, perc_replace($this->get_translation('LogUserPasswordMismatch', $this->config['language']), $user['user_name']));
+			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordMismatch', $this->config['language']), $user['user_name']));
 		}
 		// confirmed password mismatch
 		else if ($conf_password != $new_password)
@@ -171,7 +171,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			$this->context[++$this->current_context] = '';
 
 			// log event
-			$this->log(3, perc_replace($this->get_translation('LogUserPasswordChanged', $this->config['language']), $user['user_name']));
+			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordChanged', $this->config['language']), $user['user_name']));
 
 			// forward
 			$this->set_message($this->get_translation('PasswordChanged'), 'success'); // // TODO: message is reset with session before it it can display the message set after the redirect
@@ -236,7 +236,7 @@ else
 
 				$save = $this->set_language($user['user_lang'], true);
 				$subject	=	$this->get_translation('EmailForgotSubject') . $this->config['site_name'];
-				$body		=	perc_replace($this->get_translation('EmailForgotMessage'),
+				$body		=	Ut::perc_replace($this->get_translation('EmailForgotMessage'),
 									$this->config['site_name'],
 									$user['user_name'],
 									$this->href('', '', 'secret_code=' . $code)) . "\n\n";

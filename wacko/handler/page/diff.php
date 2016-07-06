@@ -95,7 +95,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 	};
 
 	// print header
-	echo perc_replace('<div class="diffinfo">' . $this->get_translation('Comparison'),
+	echo Ut::perc_replace('<div class="diffinfo">' . $this->get_translation('Comparison'),
 		$revisions_menu($a, $page_a),
 		$revisions_menu($b, $page_b),
 		//'<a href="' . $this->href('', '', ($a > 0 ? 'revision_id=' . $page_a['revision_id'] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
@@ -167,7 +167,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		break;
 
 	case 0:
-		require_once(join_path(HANDLER_DIR, 'page/_diff.php'));
+		require_once(Ut::join_path(HANDLER_DIR, 'page/_diff.php'));
 		// load pages
 
 		// extract text from bodies
