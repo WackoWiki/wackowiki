@@ -29,7 +29,7 @@ $http = new Http($db, false); // false -- do not process wiki request
 $engine = new Wacko($db, $http);
 
 // redirect, send them home [disabled for recovery mode!]
-if (!$engine->is_admin() && !$db->is_locked() && !RECOVERY_MODE)
+if (!($engine->is_admin() || $db->is_locked() || RECOVERY_MODE))
 {
 	$http->secure_base_url();
 	$http->redirect($engine->href());
