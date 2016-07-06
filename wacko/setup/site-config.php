@@ -100,9 +100,9 @@ else
 	$langs[] = $config['language'];
 }
 
-if (isset($this->config['allowed_languages']))
+if (isset($config['allowed_languages']))
 {
-	$lang_list = explode(',', $this->config['allowed_languages']);
+	$lang_list = explode(',', $config['allowed_languages']);
 }
 else
 {

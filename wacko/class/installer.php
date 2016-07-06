@@ -20,12 +20,12 @@ class Installer
 			}
 		}
 
-		if (!($action = trim(@$_REQUEST['installAction'])))
+		if (!($install_action = trim(@$_REQUEST['installAction'])))
 		{
-			$action = 'lang';
+			$install_action = 'lang';
 		}
 
-		$install_module = 'setup/' . $action . '.php';
+		$install_module = 'setup/' . $install_action . '.php';
 
 		global $config;
 		$config = $db->steal_config();
