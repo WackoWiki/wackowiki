@@ -112,7 +112,7 @@ class Ut
 
 			foreach ($x as $k => $v)
 			{
-				if (($v = stringify($v, $compact, $full)) === false)
+				if (($v = Ut::stringify($v, $compact, $full)) === false)
 				{
 					return false;
 				}
@@ -134,7 +134,7 @@ class Ut
 				}
 				else
 				{
-					$k = stringify($k);
+					$k = Ut::stringify($k);
 				}
 
 				$array[] = $k . ($compact? '=>' : ' => ') . $v;
@@ -246,7 +246,7 @@ class Ut
 		return $path;
 	}
 
-	// file_glob($directory, '*') --> returns list of all files (not directories)
+	// file_glob($directory, '{,.}*') --> returns list of all files (not directories)
 	static function file_glob()
 	{
 		return array_filter((array) glob(Ut::join_path(func_get_args()), GLOB_MARK | GLOB_NOSORT | GLOB_BRACE),
@@ -264,7 +264,7 @@ class Ut
 
 		clearstatcache();
 
-		foreach (Ut::file_glob($directory, '*') as $file)
+		foreach (Ut::file_glob($directory, GLOB_ALL) as $file)
 		{
 			if ((!$ttl || filemtime($file) < $past) && unlink($file))
 			{

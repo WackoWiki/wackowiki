@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 
 // define db tables
 // we really want this up to date
-if (isset($tables, $directories) !== true)
+if (!isset($tables, $directories))
 {
 	$tables	= array(
 			$engine->config['table_prefix'].'acl' => array(
@@ -144,9 +144,9 @@ if (isset($tables, $directories) !== true)
 
 	// define files dirs
 	$directories = array(
-			#CACHE_FEED_DIR, // not configurable now!
-			#CACHE_PAGE_DIR,
-			#CACHE_SQL_DIR,
+			// CACHE_FEED_DIR, // not configurable now!
+			// CACHE_PAGE_DIR,
+			// CACHE_SQL_DIR,
 			UPLOAD_GLOBAL_DIR,
 			UPLOAD_PER_PAGE_DIR
 		);
@@ -182,49 +182,29 @@ function set_pack_dir(&$engine, $time)
 // delete backup pack from the server
 function remove_pack(&$engine, $pack)
 {
-	$offset = 0;
-	$pathdir = '';
 	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
 
 	// read log
-	$log = Ut::join_path($packdir, BACKUP_FILE_LOG);
-	$log = str_replace("\n", '', file($log)); // TODO: file() return array
+	$log = file(Ut::join_path($packdir, BACKUP_FILE_LOG), FILE_IGNORE_NEW_LINES);
 
 	// get subdirs list (in reverse order)
-	$subdirs = explode(';', isset($log[5]) ? $log[5] : null);
+	$subdirs = explode(';', @$log[5]);
 	rsort($subdirs);
 
 	// remove subdirs contents
-	if ($subdirs == true)
+	foreach ($subdirs as $subdir)
 	{
-		foreach ($subdirs as $subdir)
+		if ($subdir)
 		{
-			Ut::purge_directory(Ut::join_path($packdir, $subdir));
+			$dir = Ut::join_path($packdir, $subdir);
+			Ut::purge_directory($dir);
+			rmdir($dir);
 
 			// recursively remove subdirs in path
-			if (strpos($subdir, '/'))
+			while (($i = strrpos($subdir, '/')) !== false)
 			{
-				while ($pathdir != $subdir)
-				{
-					$offlen = strpos($subdir, '/', $offset);
-					$offset = $offlen + 1;
-
-					if ($offlen > 0)	$pathdir = substr($subdir, 0, $offlen);
-					else				$pathdir = $subdir;
-
-					$pathdirs[] = Ut::join_path($packdir, $pathdir);
-				}
-
-				rsort($pathdirs);
-
-				foreach ($pathdirs as $pathdir)
-				{
-					@rmdir($pathdir);
-				}
-			}
-			else
-			{
-				rmdir(Ut::join_path($packdir, $subdir));
+				$subdir = substr($subdir, 0, $i);
+				@rmdir(Ut::join_path($packdir, $subdir)); // @ - coz dir can be non-empty
 			}
 		}
 	}
@@ -499,35 +479,23 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 function get_files(&$engine, $pack, $dir, $root)
 {
 	$cluster	= '';
-	$subdir		= '';
-	$offset		= 0;
 	$error		= '';
 	$matches	= array();
 
 	// set file mask for cluster backup
-	if ($root == true && $dir == UPLOAD_PER_PAGE_DIR)
+	if ($root && $dir == UPLOAD_PER_PAGE_DIR)
 	{
 		$cluster = true;
 	}
 
 	// create write (backup) subdir or restore path recursively if needed
-	if (strpos($dir, '/'))
+	$offset = 0;
+	while (($offlen = strpos($dir, '/', $offset)) !== false)
 	{
-		while ($subdir != $dir)
-		{
-			$offlen = strpos($dir, '/', $offset);
-			$offset = $offlen + 1;
-
-			if ($offlen > 0)	$subdir = substr($dir, 0, $offlen);
-			else				$subdir = $dir;
-
-			ensure_dir(Ut::join_path($pack, $subdir));
-		}
+		$offset = $offlen + 1;
+		ensure_dir(Ut::join_path($pack, substr($dir, 0, $offlen)));
 	}
-	else
-	{
-		ensure_dir(Ut::join_path($pack, $dir));
-	}
+	ensure_dir(Ut::join_path($pack, $dir));
 
 	// open read (data) dir and run through all files
 	$t = 0;
@@ -587,10 +555,7 @@ function get_files(&$engine, $pack, $dir, $root)
 
 		return $t;
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 // restore tables structure
@@ -694,30 +659,18 @@ function put_data(&$engine, $pack, $table, $mode)
 // decompress files and restore them into the filesystem
 function put_files(&$engine, $pack, $dir, $keep = false)
 {
-	$subdir	= '';
-	$offset	= 0;
 	$total	= array();
 
 	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
 
 	// restore files subdir or full path recursively if needed
-	if (strpos($dir, '/'))
+	$offset	= 0;
+	while (($offlen = strpos($dir, '/', $offset)) !== false)
 	{
-		while ($subdir != $dir)
-		{
-			$offlen = strpos($dir, '/', $offset);
-			$offset = $offlen + 1;
-
-			if ($offlen > 0)	$subdir = substr($dir, 0, $offlen);
-			else				$subdir = $dir;
-
-			ensure_dir($subdir);
-		}
+		$offset = $offlen + 1;
+		ensure_dir(substr($dir, 0, $offlen));
 	}
-	else
-	{
-		ensure_dir($dir);
-	}
+	ensure_dir($dir);
 
 	// open backup dir and run through all files
 	if ($dh = opendir($packdir))
@@ -733,7 +686,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 				// handle duplicates in target dir
 				if (file_exists($fullname))
 				{
-					if ($keep == true)
+					if ($keep)
 					{
 						// ignore
 						$total[1]++;
@@ -752,7 +705,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 				$r		= 0; // round number
 
 				// decompress and write data
-				while (true == $data = gzread($filez, BACKUP_MEMORY_STEP))
+				while (($data = gzread($filez, BACKUP_MEMORY_STEP)))
 				{
 					fwrite($filep, $data);
 					gzseek($filez, (++$r) * BACKUP_MEMORY_STEP);
@@ -770,10 +723,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 
 		return $total;
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 // Draws a tick or cross next to a result

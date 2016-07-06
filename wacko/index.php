@@ -7,8 +7,7 @@ $db = new Settings;
 
 if (!isset($db->wacko_version) || version_compare($db->wacko_version, WACKO_VERSION, '<'))
 {
-	$config = $db; // backward compat for setup/
-	Installer::run();
+	Installer::run($db);
 	// NEVER BEEN HERE
 }
 
