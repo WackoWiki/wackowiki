@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 class Installer
 {
-	static function run()
+	static function run(&$db)
 	{
 		if (!isset($_REQUEST['installAction']) && !strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
 		{
@@ -26,6 +26,9 @@ class Installer
 		}
 
 		$install_module = 'setup/' . $action . '.php';
+
+		global $config;
+		$config = $db->steal_config();
 
 		include('setup/header.php');
 

@@ -297,8 +297,7 @@ class Http
 
 		// check for permalink
 		$hashids = new Hashids($this->db->hashid_seed);
-		$ids = $hashids->decode((($p = strpos($request, '/')) === false)? $request : substr($request, 0, $p));
-
+		$ids = $hashids->decode(preg_replace('#/.*$|[^a-zA-Z0-9]+#', '', $request));
 		if (count($ids) == 3)
 		{
 			sscanf(hash('sha1', $ids[0] . $this->db->hashid_seed . $ids[1]), '%7x', $cksum);

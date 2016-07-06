@@ -2,7 +2,7 @@
 
 if (!defined('IN_WACKO'))
 {
-	die('No direct script access allowed');
+	exit;
 }
 
 class Settings extends Dbal implements ArrayAccess
@@ -112,6 +112,12 @@ class Settings extends Dbal implements ArrayAccess
 		$this->cookie_hash	= hash('sha1', $this->base_url . $this->system_seed);
 		$this->ap_mode		= (IN_WACKO == 'admin');
 		$this->rebase_url();
+	}
+
+	// for setup/ only
+	public function steal_config()
+	{
+		return $this->config;
 	}
 
 	public function rebase_url()

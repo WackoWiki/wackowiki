@@ -101,7 +101,7 @@ function admin_system_statistics(&$engine, &$module)
 		$files	= 0;
 		$size	= 0;
 
-		foreach (Ut::file_glob($dir, '*') as $file)
+		foreach (Ut::file_glob($dir, GLOB_ALL) as $file)
 		{
 			$size += filesize($file);
 			$files++;
