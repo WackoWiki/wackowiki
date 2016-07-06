@@ -240,3 +240,8 @@ function purge_directory($directory, $ttl = 0)
 
 	return $n;
 }
+
+function htmlq($string)
+{
+	return htmlspecialchars($string, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+}

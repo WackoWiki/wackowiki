@@ -79,13 +79,13 @@ if ($this->is_admin())
 			foreach ($items as $item)
 			{
 				$root_tag	= trim($_POST['_to'], '/ ');
-				$rel_tag	= trim(Utility::untag($item, 'guid'), '/ ');
+				$rel_tag	= trim(Ut::untag($item, 'guid'), '/ ');
 				$tag		= $root_tag.( $root_tag && $rel_tag ? '/' : '' ).$rel_tag;
 				$page_id	= $this->get_page_id($tag);
-				$owner		= Utility::untag($item, 'author');
+				$owner		= Ut::untag($item, 'author');
 				$owner_id	= $this->get_user_id($owner);
-				$body		= str_replace(']]&gt;', ']]>', Utility::untag($item, 'description'));
-				$title		= html_entity_decode(Utility::untag($item, 'title'), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+				$body		= str_replace(']]&gt;', ']]>', Ut::untag($item, 'description'));
+				$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 				$body_r = $this->save_page($tag, $title, $body, '');
 				$this->set_page_owner($page_id, $owner_id);
@@ -119,5 +119,3 @@ if ($this->is_admin())
 		}
 	}
 }
-
-?>

@@ -2,17 +2,11 @@
 
 if (!defined('IN_WACKO'))
 {
-	exit('No direct script access allowed');
+	exit;
 }
 
-class Utility
+class Ut
 {
-	//Constructor
-	function __construct(&$wacko)
-	{
-		$this->wacko = &$wacko;
-	}
-
 	static function untag($xml, $tag)
 	{
 		$z = strpos ($xml, "<$tag>");
@@ -39,5 +33,3 @@ class Utility
 		return '';
 	}
 }
-
-?>
