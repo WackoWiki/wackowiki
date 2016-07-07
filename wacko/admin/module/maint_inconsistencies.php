@@ -521,7 +521,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$engine->log(1, 'Removed inconsistencies');
 
 			$message = 'Data Inconsistencies solved.';
-			$engine->show_message($message);
+			$engine->show_message($message, 'success');
 		}
 
 	}

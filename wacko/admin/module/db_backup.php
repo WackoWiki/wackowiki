@@ -115,7 +115,7 @@ function admin_db_backup(&$engine, &$module)
 
 				// force drop for tables w/o WHERE clause
 				if (in_array($table, $data)
-				&& $tables[$table]['where'] === false)
+					&& $tables[$table]['where'] === false)
 				{
 					$drop = 1;
 				}
@@ -189,7 +189,7 @@ function admin_db_backup(&$engine, &$module)
 
 		$message = '<p>'.$engine->get_translation('BackupCompleted').'</p>';
 
-		$engine->show_message($message);
+		$engine->show_message($message, 'success');
 	}
 	else
 	{

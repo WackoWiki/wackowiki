@@ -66,7 +66,7 @@ function admin_config_pages(&$engine, &$module)
 			$engine->config->_set($config);
 
 			$engine->log(1, 'Updated settings base pages');
-			$engine->set_message('Updated settings base pages');
+			$engine->set_message('Updated settings base pages', 'success');
 			$engine->redirect(rawurldecode($engine->href()));
 		}
 	}

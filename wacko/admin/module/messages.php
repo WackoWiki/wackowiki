@@ -38,7 +38,7 @@ function admin_messages(&$engine, &$module)
 		$engine->config->_set($config);
 
 		$engine->log(1, 'Updated system message');
-		$engine->set_message('Updated system message');
+		$engine->set_message('Updated system message', 'success');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 

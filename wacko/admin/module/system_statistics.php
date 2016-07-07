@@ -76,9 +76,9 @@ function admin_system_statistics(&$engine, &$module)
 		<tr class="lined">
 			<td class="label"><strong>Total:</strong></td>
 			<td></td>
-			<td><strong><?php echo $engine->binary_multiples($tdata, false, true, false); ?></strong></td>
-			<td><strong><?php echo $engine->binary_multiples($tindex, false, true, false); ?></strong></td>
-			<td><strong><?php echo $engine->binary_multiples($tfrag, false, true, false); ?></strong></td>
+			<td><strong><?php echo $engine->binary_multiples($tdata, false, true, true); ?></strong></td>
+			<td><strong><?php echo $engine->binary_multiples($tindex, false, true, true); ?></strong></td>
+			<td><strong><?php echo $engine->binary_multiples($tfrag, false, true, true); ?></strong></td>
 		</tr>
 	</table>
 	<br />
@@ -123,7 +123,7 @@ function admin_system_statistics(&$engine, &$module)
 		<tr class="lined">
 			<td class="label"><strong>Total:</strong></td>
 			<td>&nbsp;&nbsp;&nbsp;<strong><?php echo $tfiles; ?></strong></td>
-			<td><strong><?php echo $engine->binary_multiples($tsize); ?></strong></td>
+			<td><strong><?php echo $engine->binary_multiples($tsize, false, true, true); ?></strong></td>
 		</tr>
 	</table>
 
