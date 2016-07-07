@@ -135,21 +135,27 @@ if ($this->is_admin())
 			{
 				echo "<table><tr><th>page_id</th><th>tag</th><th>new title</th></tr>";
 
+				$lang_list = $this->available_languages();
+
 				foreach ($pages as $page)
 				{
-					$this->load_translation($page['page_lang']);
-					$this->set_translation ($page['page_lang']);
-					$this->set_page_lang($page['page_lang']);
-					// tag to title
-					$title = $this->add_spaces_title(trim(substr($page['tag'], strrpos($page['tag'], '/')), '/'));
+					$lang = $page['page_lang'];
+					if (isset($lang_list[$lang]))
+					{
+						$this->load_translation($lang);
+						$this->set_translation ($lang);
+						$this->set_page_lang($lang);
+						// tag to title
+						$title = $this->add_spaces_title(trim(substr($page['tag'], strrpos($page['tag'], '/')), '/'));
 
-					$this->sql_query(
-						"UPDATE {$this->config['table_prefix']}page ".
-						"SET title = '".quote($this->dblink, $title)."' ".
-						"WHERE page_id = '".$page['page_id']."' ".
-						"LIMIT 1");
+						$this->sql_query(
+							"UPDATE {$this->config['table_prefix']}page ".
+							"SET title = '".quote($this->dblink, $title)."' ".
+							"WHERE page_id = '".$page['page_id']."' ".
+							"LIMIT 1");
 
-					echo "<tr><td>".$page['page_id']."</td><td>".$page['tag']."</td><td>".$title."</td></tr>";
+						echo "<tr><td>".$page['page_id']."</td><td>".$page['tag']."</td><td>".$title."</td></tr>";
+					}
 				}
 
 				$this->load_translation($this->user_lang);

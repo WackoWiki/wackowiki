@@ -32,7 +32,6 @@ class Wacko
 	var $timer;
 	var $toc_context			= array();
 	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
-	var $_lang_list				= null;		// array of all available resource translations
 	var $languages				= null;
 	var $translations			= null;
 	var $wanted_cache			= null;
@@ -304,8 +303,10 @@ class Wacko
 
 	function set_language($lang, $set_translation = false)
 	{
-		$old_lang = @$this->language['LANG'];
-		if ($old_lang != $lang)
+		$old_lang	= @$this->language['LANG'];
+		$lang_list	= $this->available_languages();
+
+		if ($old_lang != $lang && isset($lang_list[$lang]))
 		{
 			$this->load_translation($lang);
 			$this->language = &$this->languages[$lang];
@@ -314,10 +315,12 @@ class Wacko
 
 			$this->language['locale'] = setlocale(LC_CTYPE, 0);
 		}
+
 		if ($set_translation)
 		{
-			$this->set_translation($lang);
+			$this->set_translation($this->language['LANG']);
 		}
+
 		return $old_lang;
 	}
 
@@ -438,35 +441,40 @@ class Wacko
 	*/
 	function available_languages($subset = true)
 	{
-		if (!$this->_lang_list)
+		$lang_list = &$_SESSION['available_languages2'];
+
+		if (!isset($lang_list))
 		{
-			$cache = &$_SESSION['available_languages'];
+			$list = [];
 
-			if (!isset($cache))
+			foreach (Ut::file_glob(LANG_DIR, 'wacko.[a-z][a-z].php') as $file)
 			{
-				$lang_list = [];
-
-				foreach (Ut::file_glob(LANG_DIR, 'wacko.[a-z][a-z].php') as $file)
-				{
-					$lang_list[] = substr($file, -6, 2);
-				}
-
-				sort($lang_list, SORT_STRING);
-				$cache = $lang_list;
+				$lang = substr($file, -6, 2);
+				$list[$lang] = $lang;
 			}
 
-			$this->_lang_list = $cache;
+			ksort($list, SORT_STRING);
+			$lang_list[false] = $list;
+
+			if (($allow = preg_split('/[\s,]+/', $this->db->allowed_languages, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
+			{
+				$list = array_intersect($list, $allow);
+			}
+
+			if (!$list)
+			{
+				die('WackoWiki list of available languages is empty');
+			}
+
+			if (!isset($list[$this->db->language]))
+			{
+				die('WackoWiki system language is unavailable');
+			}
+
+			$lang_list[true] = $list;
 		}
 
-		// allowed languages
-		$list = $this->_lang_list;
-
-		if ($subset && ($allow = preg_split('/[\s,]+/', $this->config->allowed_languages, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
-		{
-			$list = array_intersect($list, $allow);
-		}
-
-		return $list;
+		return $lang_list[!!$subset];
 	}
 
 	// negotiate language with user's browser
@@ -476,7 +484,7 @@ class Wacko
 
 		if ($this->config['multilanguage'] && isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 		{
-			$can = $this->available_languages();
+			$lang_list = $this->available_languages();
 
 			// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
 			preg_match_all("/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" .
@@ -497,12 +505,12 @@ class Wacko
 
 				$q = ($i[5] !== '')? (float)$i[5] : 1;
 
-				if (in_array($want2, $can) && $q > $best)
+				if (isset($lang_list[$want2]) && $q > $best)
 				{
 					$lang = $want2;
 					$best = $q;
 				}
-				else if (in_array($want1, $can) && $q * 0.9 > $best)
+				else if (isset($lang_list[$want1]) && $q * 0.9 > $best)
 				{
 					$lang = $want1;
 					$best = $q * 0.9;
@@ -517,8 +525,9 @@ class Wacko
 	{
 		$user = $this->get_user();
 		$lang = @$user['user_lang'];
+		$lang_list = $this->available_languages();
 
-		if (!in_array($lang, $this->available_languages()))
+		if (!isset($lang_list[$lang]))
 		{
 			$lang = $this->user_agent_language();
 		}
@@ -573,23 +582,20 @@ class Wacko
 
 	function determine_lang()
 	{
-		$lang_list = $this->available_languages();
-
 		//!!!! wrong code, maybe!
-		if ((isset($this->method) && $this->method == 'edit') && (isset($_GET['add']) && $_GET['add'] == 1))
+		if (@$this->method === 'edit' && @$_GET['add'] == 1)
 		{
-			if (isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
-			{
-				$lang = $_REQUEST['lang'];
-			}
-			else
-			{
-				$lang = $this->user_lang;
-			}
+			$lang = @$_REQUEST['lang'];
 		}
 		else
 		{
-			$lang = (isset($this->page_lang) ? $this->page_lang : null);
+			$lang = @$this->page_lang;
+		}
+
+		$lang_list = $this->available_languages();
+		if (!isset($lang_list[$lang]))
+		{
+			$lang = $this->get_user_language();
 		}
 
 		return $lang;
@@ -1365,11 +1371,11 @@ class Wacko
 			$this->tag = $this->page['tag'];
 		}
 
-		if ($page['page_lang'])
+		if ($page['page_lang'] && isset($lang_list[$page['page_lang']]))
 		{
 			$this->page_lang = $page['page_lang'];
 		}
-		else if (@$_REQUEST['add'] && in_array(@$_REQUEST['lang'], $lang_list))
+		else if (@$_REQUEST['add'] && isset($lang_list[@$_REQUEST['lang']]))
 		{
 			$this->page_lang = $_REQUEST['lang'];
 		}
@@ -1853,7 +1859,7 @@ class Wacko
 				{
 					$lang_list = $this->available_languages();
 
-					if (isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
+					if (isset($lang_list[@$_REQUEST['lang']]))
 					{
 						$lang = $_REQUEST['lang'];
 					}
