@@ -9,9 +9,6 @@ if (!defined('IN_WACKO'))
 // can turn off some undesirables by setting text in lang/wacko.??.php
 // files for unwanted DiffMode# to ''
 
-echo '<div id="page">';
-$include_tail = '</div>';
-
 if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
 {
 	$this->redirect($this->href());

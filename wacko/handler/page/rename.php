@@ -11,11 +11,7 @@ if (!$this->page)
 	$this->redirect($this->href());
 }
 
-?>
-<div id="page">
-<h3><?php echo $this->get_translation('RenamePage').' '.$this->compose_link_to_page($this->tag, '', '', 0); ?></h3>
-<br />
-<?php
+echo '<h3>' . $this->get_translation('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
 
 // deny for comment
 if ($this->page['comment_on_id'])
@@ -201,11 +197,8 @@ if ($registered
 }
 else
 {
-	$message = $this->get_translation('NotOwnerAndCantRename');
-	$this->show_message($message, 'info');
+	$this->show_message($this->get_translation('NotOwnerAndCantRename'), 'info');
 }
-?></div>
-<?php
 
 function recursive_move(&$parent, $root, $new_root)
 {
@@ -328,5 +321,3 @@ function move(&$parent, $old_page, $new_name)
 		return $message;
 	}
 }
-
-?>

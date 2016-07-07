@@ -20,7 +20,7 @@ if ($this->config['review'] && $this->is_reviewer() && $this->page)
 	{
 		$message = $this->get_translation('SetAsReviewed');
 	}
-	else if ($this->page['reviewed'] == 1)
+	else
 	{
 		$message = $this->get_translation('SetAsUnreviewed');
 	}
@@ -30,5 +30,3 @@ if ($this->config['review'] && $this->is_reviewer() && $this->page)
 
 // redirect back to page
 $this->redirect($this->href());
-
-?>

@@ -5,9 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo '<div id="page">';
-$include_tail = '</div>';
-
 // redirect to show method if no page exists
 if (!$this->page)
 {

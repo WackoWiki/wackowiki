@@ -719,6 +719,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor' => 'Versión Procesador de texto',
 	'SettingsLatex' => 'Versión LaTeX',
 	'SettingsXML' => 'Export to XML',
+	'NeedToChangeLang'			=> 'Unsupported page language `%1\' needs to be changed.',
 	'BewareChangeLang' => 'No cambies el idioma, si no sabes exactamente lo que haces. El ajuste de cambio de idioma presupone cambiar el nombre de la página en acuerdo con las reglas de transliteración del idioma seleccionado. Todo contenido no-español será ilegible. Podrá anular esos efectos volviendo a ajustar el idioma original.',
 	'SetLang' => 'Idioma de esta página',
 	'SetMenuLabel' => 'Etiqueta del menú',

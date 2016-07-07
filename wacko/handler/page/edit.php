@@ -19,9 +19,8 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 	return;
 }
 
-?>
-<div id="page-edit">
-<?php
+echo ADD_NO_DIV . '<div id="page-edit">';
+$include_tail = '</div>';
 
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
@@ -475,9 +474,5 @@ if ($this->has_access('read')
 }
 else
 {
-	$message = $this->get_translation('WriteAccessDenied');
-	$this->show_message($message, 'info');
+	$this->show_message($this->get_translation('WriteAccessDenied'), 'info');
 }
-
-?>
-</div>

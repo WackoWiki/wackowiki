@@ -5,11 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-<h3><?php echo $this->get_translation('ClonePage') ?> <?php echo $this->compose_link_to_page($this->tag, '', '', 0) ?></h3>
-<br />
-<?php
+echo '<h3>';
+echo $this->get_translation('ClonePage') . $this->compose_link_to_page($this->tag, '', '', 0);
+echo "</h3>\n<br />\n";
 
 $output = '';
 $message = '';
@@ -175,10 +173,6 @@ else
 
 //$this->redirect($this->href());
 
-?>
-</div>
-<?php
-
 function recursive_clone(&$parent, $root, $edit_note)
 {
 	$new_root = trim($_POST['newname'], '/');
@@ -224,4 +218,3 @@ function recursive_clone(&$parent, $root, $edit_note)
 	$message .= "</ol>\n";
 	$parent->show_message($message, 'info');
 }
-?>

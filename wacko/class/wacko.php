@@ -461,11 +461,6 @@ class Wacko
 				$list = array_intersect($list, $allow);
 			}
 
-			if (!$list)
-			{
-				die('WackoWiki list of available languages is empty');
-			}
-
 			if (!isset($list[$this->db->language]))
 			{
 				die('WackoWiki system language is unavailable');
@@ -582,7 +577,6 @@ class Wacko
 
 	function determine_lang()
 	{
-		//!!!! wrong code, maybe!
 		if (@$this->method === 'edit' && @$_GET['add'] == 1)
 		{
 			$lang = @$_REQUEST['lang'];
@@ -2405,7 +2399,7 @@ class Wacko
 			$_GET['a']			= -1;
 			$_GET['b']			= $page['revision_id'];
 			$_GET['diffmode']	= 2; // 2 - source diff
-			$diff				= $this->include_buffered('page/diff.php', 'oops', '', HANDLER_DIR);
+			$diff				= $this->method('diff');
 		}
 
 		// get watchers
@@ -4306,10 +4300,14 @@ class Wacko
 			$handler = 'page';
 		}
 
-		$method_location = $handler.'/'.$method.'.php';
+		$method_location = Ut::join_path($handler, $method . '.php');
 		$errmsg = '<em>' . $this->get_translation('UnknownMethod') . ' "<code>' . $method_location . '</code>"</em>';
 
-		return $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
+		$result = $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
+
+		return (!strncmp($result, ADD_NO_DIV, strlen(ADD_NO_DIV)))
+			?  substr($result, strlen(ADD_NO_DIV))
+			: '<div id="' . $handler . '">' . $result . "</div>\n";
 	}
 
 	// wrapper for the next method
@@ -5642,10 +5640,10 @@ class Wacko
 	function set_review($reviewer_id, $page_id)
 	{
 		// set / unset review
-		$this->page['reviewed'] == 1 ? $reviewed = 0 : $reviewed = 1;
-
 		if ($this->has_access('read', $page_id))
 		{
+			$reviewed = !$this->page['reviewed'];
+
 			return $this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page SET ".
 					"reviewed		= '".(int)$reviewed."', ".

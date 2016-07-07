@@ -39,6 +39,7 @@ define('BACKUP_FILE_DUMP_SUFFIX',		'.dat.gz');			// tables dump filename suffix
 define('BACKUP_FILE_GZIP_SUFFIX',		'.gz');				// regular compressed files suffix
 
 define('GLOB_ALL',						'{,.}*');			// for glob()
+define('ADD_NO_DIV',					'*');				// for Wacko::method()
 
 define('GUEST',							'guest@wacko');
 define('INTERCOM_MAX_SIZE',				262144);

@@ -89,10 +89,5 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 }
 else
 {
-	echo '<div class="page">';
-	$message = $this->get_translation('RatingDenied');
-	$this->show_message($message, 'info');
-	echo '</div>';
+	$this->show_message($this->get_translation('RatingDenied'), 'info');
 }
-
-?>

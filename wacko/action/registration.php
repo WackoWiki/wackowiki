@@ -394,8 +394,7 @@ if (!isset($_GET['confirm']))
 	}
 	else
 	{
-		$message = $this->get_translation('RegistrationClosed');
-		echo $this->show_message($message, 'hint');
+		$this->show_message($this->get_translation('RegistrationClosed'), 'hint');
 	}
 }
 ?>

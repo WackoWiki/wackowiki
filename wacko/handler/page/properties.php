@@ -22,12 +22,7 @@ else if ($this->forum === true && !$this->is_admin())
 	$this->redirect($this->href());
 }
 
-?>
-<div id="page">
-
-<h3><?php echo str_replace('%1', $this->compose_link_to_page($this->tag, '', '', 0), $this->get_translation('PropertiesFor')); ?></h3>
-
-<?php
+echo '<h3>' . Ut::perc_replace($this->get_translation('PropertiesFor'), $this->compose_link_to_page($this->tag, '', '', 0)) . "</h3>\n";
 
 if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
@@ -271,19 +266,18 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 						'<td class="form_right">'.
 							'<select id="page_lang" name="page_lang">';
 
-			if (!($clang = $this->page['page_lang']))
+			$langs = $this->available_languages();
+			if (!($clang = $this->page['page_lang']) || !isset($langs[$clang]))
 			{
+				$this->set_message(Ut::perc_replace($this->get_translation('NeedToChangeLang'), $clang), 'error');
 				$clang = $this->config['language'];
 			}
 
 			$languages = $this->get_translation('LanguageArray');
 
-			if ($langs = $this->available_languages())
+			foreach ($langs as $lang)
 			{
-				foreach ($langs as $lang)
-				{
-					echo '<option value="'.$lang.'" '.($clang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
-				}
+				echo '<option value="'.$lang.'" '.($clang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 			}
 
 			echo "</select>\n";
@@ -444,12 +438,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		"</ul>\n".
 	"</aside>\n";
 }
-
 else
 {
-	$message = $this->get_translation('ReadAccessDenied');
-	$this->show_message($message, 'info');
+	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
 }
-?>
-
-</div>

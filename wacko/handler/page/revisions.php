@@ -5,9 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo '<div id="page">';
-$include_tail = '</div>';
-
 $place_holder	= '&nbsp;&nbsp;&nbsp;';
 
 // redirect to show method if hide_revisions is true

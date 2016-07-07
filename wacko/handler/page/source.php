@@ -5,9 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo '<div id="page">';
-$include_tail = '</div>';
-
 /*
 	the source text will be shown with exception of those fragments which are hidden by formatters %%(comment)..%%
 
