@@ -549,9 +549,19 @@ class Wacko
 
 				if (($text = @$this->translations[$lang][$name]))
 				{
-					if (!is_array($text) && $dounicode)
+					if ($dounicode)
 					{
-						$text = $this->do_unicode_entities($text, $lang);
+						if (is_array($text))
+						{
+							foreach ($text as &$one)
+							{
+								$one = $this->do_unicode_entities($one, $lang);
+							}
+						}
+						else
+						{
+							$text = $this->do_unicode_entities($text, $lang);
+						}
 					}
 					return $text;
 				}
@@ -4318,8 +4328,8 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
-		$err = '<em>'.Ut::perc_replace($this->get_translation('FormatterNotFound'), $formatter).'</em>';
-		$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter.'.php'), $err, compact('text', 'options'));
+		$err = '<em>' . Ut::perc_replace($this->get_translation('FormatterNotFound'), $formatter) . '</em>';
+		$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $err, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
