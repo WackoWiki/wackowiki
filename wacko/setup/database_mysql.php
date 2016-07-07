@@ -239,8 +239,10 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',".
 					"PRIMARY KEY (revision_id),".
-					"KEY idx_user_id (user_id),".
+					"KEY idx_page_id (page_id),".
+					"KEY idx_version_id (version_id),".
 					"KEY idx_owner_id (owner_id),".
+					"KEY idx_user_id (user_id),".
 					"KEY idx_tag (tag),".
 					"KEY idx_supertag (supertag),".
 					"KEY idx_modified (modified),".

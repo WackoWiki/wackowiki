@@ -86,6 +86,8 @@ $alter_referrer_r5_4_0 = "ALTER TABLE {$pref}referrer ADD referrer_id INT(10) UN
 $alter_revision_r5_1_0 = "ALTER TABLE {$pref}revision ADD INDEX idx_deleted (deleted)";
 $alter_revision_r5_4_0 = "ALTER TABLE {$pref}revision CHANGE lang page_lang VARCHAR(2) NOT NULL DEFAULT ''";
 $alter_revision_r5_4_1 = "ALTER TABLE {$pref}revision CHANGE title title VARCHAR(250) NOT NULL DEFAULT ''";
+$alter_revision_r5_4_2 = "ALTER TABLE {$pref}revision ADD INDEX idx_page_id (page_id)";
+$alter_revision_r5_4_3 = "ALTER TABLE {$pref}revision ADD INDEX idx_version_id (version_id, page_id)";
 
 $update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, (SELECT page_id, page_lang FROM {$pref}page) AS p SET r.page_lang = p.page_lang WHERE r.page_id = p.page_id";
 
