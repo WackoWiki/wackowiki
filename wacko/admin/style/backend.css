@@ -52,13 +52,94 @@ sup, sub {
 	float: none;
 }
 
-.info {
-	background:#F4FBFF;
-	border:1px solid #D5D9E6;
-	color:#CC3333;
-	margin:10px;
-	padding:10px 10px 10px 40px;
+/* show message boxes */
+.error {
+	background: #f8d4cc;
+	background-image: url('./../../image/cross.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	color: #CC3333;
+	font-weight: bold;
 }
+
+.message {
+	overflow: hidden;
+	padding: 10px 20px;
+	width: 100%;
+}
+
+.info {
+	background: #F4FBFF;
+	background-image: url('./../../image/info.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border: 1px solid #D5D9E6;
+	color: #CC3333;
+	font-weight: bold;
+}
+
+.notice {
+	background-color: #FFFFEF;
+	border: 1px dotted #DDDDAA;
+	/* font-size: 0.75em; */
+	height: 35px;
+	line-height: 35px;
+	margin: 0 0 10px;
+	overflow: hidden;
+	padding: 0 10px;
+}
+
+.success {
+	background: #e9ffd9 none repeat scroll 0 0;
+	background-image: url('./../../image/tick.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	/* border: 1px solid #adde5c; */
+	color: #008000;
+	font-weight: bold;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+}
+
+.warning {
+	color: red;
+	font-weight: bold;
+	/*background-color: #fbe6f2;*/
+	background-color: #fcfcfc;
+	background-image: url('./../../image/warning.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border-width: 1px;
+	border-top-style: dotted;
+	border-right-style: none;
+	border-bottom-style: dotted;
+	border-left-style: none;
+	border-color: #d893a1;
+}
+
+.hint {
+	border: 1px solid #ffee66;
+	width: auto;
+	background-color: #ffffdd;
+	background-image: url('./../../image/warning.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	position: relative;
+}
+
 
 .active {
 	font-weight: bold;

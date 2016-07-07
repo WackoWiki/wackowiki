@@ -369,7 +369,7 @@ function admin_db_restore(&$engine, &$module)
 
 			$message = $engine->get_translation('BackupRestored').
 					' <a href="'.rawurldecode($engine->href()).'&amp;remove=1&amp;backup_id='.htmlspecialchars($pack, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$engine->get_translation('RemoveButton').'</a>.';
-			$engine->show_message($message);
+			$engine->show_message($message, 'success');
 ?>
 			<div class="code" style="padding:3px;"><small><pre><?php echo $results; ?></pre></small></div><br />
 <?php
@@ -413,7 +413,7 @@ function admin_db_restore(&$engine, &$module)
 			}
 
 			$message = $engine->get_translation('BackupRemoved');
-			$engine->show_message($message);
+			$engine->show_message($message, 'success');
 		}
 ?>
 				<p>
@@ -446,7 +446,7 @@ function admin_db_restore(&$engine, &$module)
 					// we only need subdirs with appropriate name length
 					// and with backup register contained within
 					if (is_dir($dir.$packname) === true //&& strlen($packname) == 49)
-					&& file_exists($dir.$packname.'/'.BACKUP_FILE_LOG) === true)
+						&& file_exists($dir.$packname.'/'.BACKUP_FILE_LOG) === true)
 					{
 						$_array1	= str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG)); // TODO: file returns array
 						$_array2	= array('pack' => $packname);

@@ -138,7 +138,7 @@ Ut::debug_print_r($users);
 			$engine->log(1, 'Synchronized user statistics');
 
 			$message = 'User Statistics synchronized.';
-			$engine->show_message($message);
+			$engine->show_message($message, 'success');
 		}
 		else if ($_REQUEST['action'] == 'pagestats')
 		{
@@ -169,7 +169,7 @@ Ut::debug_print_r($users);
 			$engine->log(1, 'Synchronized page statistics');
 
 			$message = 'Page Statistics synchronized.';
-			$engine->show_message($message);
+			$engine->show_message($message, 'success');
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
 		{
@@ -186,7 +186,7 @@ Ut::debug_print_r($users);
 			unset($xml);
 
 				$message = 'RSS-feeds updated.';
-				$engine->show_message($message);
+				$engine->show_message($message, 'success');
 		}
 		else if ($_REQUEST['action'] == 'xml_sitemap')
 		{
@@ -194,7 +194,7 @@ Ut::debug_print_r($users);
 			$engine->write_sitemap(true, false);
 
 			$message = 'The new version of the site map created successfully.';
-			$engine->show_message($message);
+			$engine->show_message($message, 'success');
 		}
 		else if ($_REQUEST['action'] == 'wikilinks')
 		{
@@ -263,7 +263,7 @@ Ut::debug_print_r($users);
 			else
 			{
 				$message = 'Wiki-links restored.';
-				$engine->show_message($message);
+				$engine->show_message($message, 'success');
 			}
 		}
 	}
@@ -308,17 +308,22 @@ Ut::debug_print_r($users);
 		<input type="submit" name="start" id="submit" value="synchronize" />
 <?php		echo $engine->form_close();?>
 
+<?php
+if ($engine->config['xml_sitemap'])
+{ ?>
 	<h2>XML-Sitemap</h2>
 	<p>
-		This function synchronizes the XML-Sitemap
-		with the current state of the database.
+		This function synchronizes the XML-Sitemap with the current state of the database.<br />
+		Period <strong><?php echo $engine->config['xml_sitemap_time']; ?></strong> days.
+		Last written <?php echo date('Y-m-d H:i:s', $engine->config['maint_last_xml_sitemap']); ?>
 	</p>
 <?php
 	echo $engine->form_open('sitemap_update', '', 'post', true, '', '');
 ?>
 		<input type="hidden" name="action" value="xml_sitemap" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
-<?php		echo $engine->form_close();?>
+<?php		echo $engine->form_close();
+}?>
 
 	<h2>Wiki-links</h2>
 	<p>

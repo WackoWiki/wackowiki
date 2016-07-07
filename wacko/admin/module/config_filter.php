@@ -61,7 +61,7 @@ function admin_config_filter(&$engine, &$module)
 			chmod($file_name, 0644);
 
 			$engine->log(1, '!!Updated spam filter settings!!');
-			$engine->set_message('Updated spam filter settings');
+			$engine->set_message('Updated spam filter settings', 'success');
 			$engine->redirect(rawurldecode($engine->href()));
 		}
 	}

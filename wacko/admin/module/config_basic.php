@@ -88,7 +88,7 @@ function admin_config_basic(&$engine, &$module)
 			$engine->config->_set($config);
 
 			$engine->log(1, 'Updated basic settings');
-			$engine->set_message('Updated basic settings');
+			$engine->set_message('Updated basic settings', 'success');
 			$engine->redirect(rawurldecode($engine->href()));
 		}
 	}

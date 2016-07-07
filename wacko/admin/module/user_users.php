@@ -169,7 +169,7 @@ function admin_user_users(&$engine, &$module)
 			// add user page
 			$engine->add_user_page($_POST['newname'], $_POST['user_lang']);
 
-			$engine->show_message($engine->get_translation('UsersAdded'));
+			$engine->show_message($engine->get_translation('UsersAdded'), 'success');
 			$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
 			unset($_POST['create']);
 		}
@@ -228,7 +228,7 @@ function admin_user_users(&$engine, &$module)
 				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
-			$engine->show_message($engine->get_translation('UsersUpdated'));
+			$engine->show_message($engine->get_translation('UsersUpdated'), 'success');
 			$engine->log(4, "Updated User //'{$user['user_name']}'//");
 		}
 	}
@@ -239,7 +239,7 @@ function admin_user_users(&$engine, &$module)
 		if (array_filter($set) == false && empty($user_id))
 		{
 			$error = 'Please select at least one user via the Set button.';//$this->get_translation('ModerateMoveNotExists');
-			$engine->show_message($error);
+			$engine->show_message($error, 'error');
 		}
 			//(int)$_POST['user_id']
 		if ($error != true || !empty($user_id))
@@ -299,7 +299,7 @@ function admin_user_users(&$engine, &$module)
 						"");
 
 					$engine->config->invalidate_config_cache();
-					$engine->show_message($engine->get_translation('UsersDeleted'));
+					$engine->show_message($engine->get_translation('UsersDeleted'), 'success');
 					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
 				}
 			}
