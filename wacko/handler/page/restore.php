@@ -34,5 +34,3 @@ if ($this->config['store_deleted_pages'] && $this->is_admin() && $this->page['de
 
 // redirect back to page
 $this->redirect($this->href());
-
-?>

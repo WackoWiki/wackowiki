@@ -5,10 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-<?php
-
 // redirect to show method if page don't exists
 if (!$this->page)
 {
@@ -118,5 +114,3 @@ else
 	$message = $this->get_translation('ReadAccessDenied');
 	$this->show_message($message, 'info');
 }
-?>
-</div>

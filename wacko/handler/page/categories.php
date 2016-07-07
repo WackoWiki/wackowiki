@@ -11,11 +11,9 @@ if (!defined('IN_WACKO'))
 //	  find a way to unwrap table-structured SQL data array
 //	  into a tree-structured multilevel array)
 
-?>
-<div id="page">
-<h3><?php echo $this->get_translation('CategoriesFor')." ".$this->compose_link_to_page($this->tag, '', '', 0) ?></h3>
-<br />
-<?php
+echo '<h3>';
+echo $this->get_translation('CategoriesFor') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0);
+echo "</h3>\n<br />\n";
 
 $selected	= '';
 $group		= '';
@@ -420,6 +418,3 @@ else
 	$message = $this->get_translation('ACLAccessDenied');
 	$this->show_message($message, 'info');
 }
-
-?>
-</div>

@@ -7,16 +7,17 @@ if (!defined('IN_WACKO'))
 
 header('Content-type: text/xml');
 
-$xml = "<?xml version=\"1.0\" encoding=\"".$this->get_charset()."\"?>\n";
-$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
-$xml .= "\t<channel>\n";
-$xml .= "\t\t<title>".$this->tag."</title>\n";
-$xml .= "\t\t<link>".$this->config['base_url']."</link>\n";
-$xml .= "\t\t<description>".$this->get_translation('ExportClusterXML').$this->config['site_name']."/".$this->tag."</description>\n";
-$xml .= "\t\t<lastBuildDate>".date('r')."</lastBuildDate>\n";
-$xml .= "\t\t<language></language>\n";//!!!
-$xml .= "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-$xml .= "\t\t<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
+echo ADD_NO_DIV;
+echo "<?xml version=\"1.0\" encoding=\"".$this->get_charset()."\"?>\n";
+echo "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
+echo "\t<channel>\n";
+echo "\t\t<title>".$this->tag."</title>\n";
+echo "\t\t<link>".$this->config['base_url']."</link>\n";
+echo "\t\t<description>".$this->get_translation('ExportClusterXML').$this->config['site_name']."/".$this->tag."</description>\n";
+echo "\t\t<lastBuildDate>".date('r')."</lastBuildDate>\n";
+echo "\t\t<language></language>\n";//!!!
+echo "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
+echo "\t\t<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 if ($this->has_access('read'))
 {
@@ -54,28 +55,24 @@ if ($this->has_access('read'))
 			}
 		}
 
-		$xml .= "\t\t<item>\n";
-		$xml .= "\t\t\t<guid>".rtrim($tag, '/')."</guid>\n";
-		$xml .= "\t\t\t<title>".htmlspecialchars($page['title'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</title>\n";
-		$xml .= "\t\t\t<link>".$this->config['base_url'].$page['supertag']."</link>\n";
-		$xml .= "\t\t\t<description><![CDATA[".str_replace(']]>', ']]&gt;', $page['body'])."]]></description>\n";
-		$xml .= "\t\t\t<author>".$page['owner_id']."</author>\n";
-		$xml .= "\t\t\t<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page['created']))."</pubDate>\n";
-		$xml .= "\t\t</item>\n";
+		echo "\t\t<item>\n";
+		echo "\t\t\t<guid>".rtrim($tag, '/')."</guid>\n";
+		echo "\t\t\t<title>".htmlspecialchars($page['title'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</title>\n";
+		echo "\t\t\t<link>".$this->config['base_url'].$page['supertag']."</link>\n";
+		echo "\t\t\t<description><![CDATA[".str_replace(']]>', ']]&gt;', $page['body'])."]]></description>\n";
+		echo "\t\t\t<author>".$page['owner_id']."</author>\n";
+		echo "\t\t\t<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page['created']))."</pubDate>\n";
+		echo "\t\t</item>\n";
 	}
 }
 else
 {
-	$xml .= "\t\t<item>\n";
-	$xml .= "\t\t\t<title>Error</title>\n";
-	$xml .= "\t\t\t<link>".$this->href('show')."</link>\n";
-	$xml .= "\t\t\t<description>".$this->get_translation('AccessDeniedXML')."</description>\n";
-	$xml .= "\t\t</item>\n";
+	echo "\t\t<item>\n";
+	echo "\t\t\t<title>Error</title>\n";
+	echo "\t\t\t<link>".$this->href('show')."</link>\n";
+	echo "\t\t\t<description>".$this->get_translation('AccessDeniedXML')."</description>\n";
+	echo "\t\t</item>\n";
 }
 
-$xml .= "\t</channel>\n";
-$xml .= "</rss>\n";
-
-echo $xml;
-
-?>
+echo "\t</channel>\n";
+echo "</rss>\n";

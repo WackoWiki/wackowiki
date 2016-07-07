@@ -5,9 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<article id="page-show" class="page" data-dbclick1="page">
-<?php
+echo ADD_NO_DIV . '<article id="page-show" class="page" data-dbclick1="page">' . "\n";
+$include_tail = '</article>';
 
 // redirect from comment page to the commented one
 if ($this->page['comment_on_id'] && $this->page['deleted'] == 0)
@@ -280,6 +279,3 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 		}
 	}
 }
-
-?>
-</article>

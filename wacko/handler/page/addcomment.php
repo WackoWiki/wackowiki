@@ -7,21 +7,10 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('comment') && $this->has_access('read'))
 {
-	$body		= str_replace("\r", '', $_POST['body']);
-	$body		= trim($_POST['body']);
+	$body		= str_replace("\r", '', trim($_POST['body']));
 	$error		= '';
-	$title		= '';
-	$parent_id	= '';
-
-	if(isset($_POST['title']))
-	{
-		$title = trim($_POST['title']);
-	}
-
-	if(isset($_POST['parent_id']))
-	{
-		$parent_id = (int)$_POST['parent_id'];
-	}
+	$title		= trim(@$_POST['title']);
+	$parent_id	= (int)@$_POST['parent_id'];
 
 	// check form token
 	if (!$this->validate_form_token('add_comment'))
@@ -191,9 +180,5 @@ if ($this->has_access('comment') && $this->has_access('read'))
 }
 else
 {
-	$message =  $this->get_translation('CommentAccessDenied');
-
-	echo '<div id="page">'.$this->show_message($message, 'info')."</div>\n";
+	$this->show_message($this->get_translation('CommentAccessDenied'), 'info');
 }
-
-?>

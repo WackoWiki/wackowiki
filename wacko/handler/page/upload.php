@@ -22,11 +22,7 @@ if ($this->page['comment_on_id'])
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
 }
 
-?>
-<div id="page">
-<h3><?php echo $this->get_translation('UploadFiles'); ?></h3>
-<br />
-<?php
+echo '<h3>' . $this->get_translation('UploadFiles') . "</h3>\n<br />\n";
 
 // check who u are, can u upload?
 if ($this->can_upload() === true)
@@ -650,7 +646,3 @@ if ($this->has_access('read'))
 }
 
 echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
-
-
-?>
-</div>

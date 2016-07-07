@@ -5,10 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-<?php
-
 // redirect to show method if page don't exists
 if (!$this->page)
 {
@@ -362,9 +358,5 @@ if ($upload_allowed == true)
 }
 else
 {
-	$message = $this->get_translation('ACLAccessDenied');
-	$this->show_message($message, 'info');
+	$this->show_message($this->get_translation('ACLAccessDenied'), 'info');
 }
-
-?>
-</div>

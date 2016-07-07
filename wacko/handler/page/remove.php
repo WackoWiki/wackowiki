@@ -15,23 +15,8 @@ if (!$this->page)
 	$this->redirect($this->href());
 }
 
-?>
-<div id="page">
-<h3>
-<?php
-
-if ($this->page['comment_on_id'])
-{
-	echo $this->get_translation('RemoveComment').' '.$this->compose_link_to_page($this->tag, '', '', 0);
-}
-else
-{
-	echo $this->get_translation('RemovePage').' '.$this->compose_link_to_page($this->tag, '', '', 0);
-}
-?>
-</h3>
-<br />
-<?php
+$title = $this->page['comment_on_id']?  'RemoveComment' : 'RemovePage';
+echo '<h3>' . $this->get_translation($title) . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
 
 // check user permissions to delete
 if ($this->is_admin()
@@ -294,8 +279,5 @@ if ($this->is_admin()
 }
 else
 {
-	$message = $this->get_translation('NotOwnerAndCanDelete');
-	$this->show_message($message, 'info');
+	$this->show_message($this->get_translation('NotOwnerAndCanDelete'), 'info');
 }
-?>
-</div>

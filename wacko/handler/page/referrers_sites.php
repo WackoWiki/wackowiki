@@ -7,9 +7,6 @@ if (!defined('IN_WACKO'))
 
 // TODO: remove or reuse ?obsolete? message sets: ViewReferringSitesGlobal, ViewReferringSites
 
-echo '<div id="page">';
-$include_tail = '</div>';
-
 // redirect to show method if page don't exists
 if (!$this->page)
 {

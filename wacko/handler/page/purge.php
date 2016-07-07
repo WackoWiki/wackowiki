@@ -5,10 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page">
-<h3><?php echo $this->get_translation('PurgePage').' '.$this->compose_link_to_page($this->tag, '', '', 0); ?></h3>
-<?php
+echo '<h3>' . $this->get_translation('PurgePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n";
 
 // redirect to show method if page don't exists
 if (!$this->page)
@@ -98,8 +95,5 @@ if ($this->is_owner() || $this->is_admin())
 }
 else
 {
-	$message = "<em>".$this->get_translation('NotOwnerAndCantPurge')."</em>";
-	$this->show_message($message, 'info');
+	$this->show_message('<em>' . $this->get_translation('NotOwnerAndCantPurge') . '</em>', 'info');
 }
-?>
-</div>

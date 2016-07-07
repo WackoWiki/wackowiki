@@ -5,9 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<article class="page">
-<?php
+echo ADD_NO_DIV . '<article class="page">';
+$include_tail = '</article>';
 
 // redirect to show method if page don't exists
 if (!$this->page || !$this->has_access('read'))
@@ -118,5 +117,3 @@ else
 	$message = $this->get_translation('ReadAccessDenied');
 	$this->show_message($message, 'info');
 }
-?>
-</article>

@@ -5,11 +5,10 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<div id="page" class="page">
-<h3><?php echo $this->get_translation('CreateNewPage'); ?></h3>
-<br />
-<?php
+echo ADD_NO_DIV . '<div id="page" class="page">' . "\n";
+$include_tail = '</div>';
+
+echo '<h3>' . $this->get_translation('CreateNewPage') . "</h3>\n<br />\n";
 
 // process input
 if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
@@ -124,6 +123,3 @@ echo '<label for="create_randompage">'.$this->get_translation('CreateRandomPage'
 echo '<input type="text" id="create_randompage" name="tag" value="'.( isset($_POST['option']) && $_POST['option'] === 3 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="60" maxlength="255" /> '.
 	 '<input type="submit" id="submit_randompage" value="'.$this->get_translation('CreatePageButton').'" />';
 echo $this->form_close();
-
-?>
-</div>
