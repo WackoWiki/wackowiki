@@ -242,12 +242,11 @@ $wacko_translation = array(
 	'TagCloud'				=> 'Tag Cloud',
 
 	// source handler
-	'TitleSource'			=> 'source of the page',
+	'SourceText'				=> 'Source',
+	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
 	'SourceFrom'			=> 'original is located at: ',
 	'SourceFromLink'		=> 'reference',
 	'SourceCopyToClipboard'	=> 'copy to clipboard',
-	'Source'				=> 'view the source',
-	'SourceDesc'			=> 'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -719,7 +718,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor' => 'Tekstitöötlusprogramm versioon',
 	'SettingsLatex' => 'LaTeX versioon',
 	'SettingsXML' => 'Export to XML',
-	'NeedToChangeLang'			=> 'Unsupported page language `%1\' needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
 	'BewareChangeLang' => 'Ära muuda keelt, kui sa ei ole päris kindel selles, mida sa teed. Kogu mitte-inglisekeelne sisu võib muuta loetamatuks. Sa saad seda tegevust tagasi pöörata, kui muudad keeleseadistuse tagasi selle algolekusse. ',
 	'SetLang' => 'Selle lehe keel',
 	'SetMenuLabel' => 'Menu label',

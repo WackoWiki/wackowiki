@@ -121,7 +121,7 @@ else
 	//		$image - 0 text only, 1 image only, 2 image and text
 	$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = '')
 	{
-		$title = $this->get_translation($title);
+		$title = Ut::html($this->get_translation($title));
 
 		if ($image)
 		{
@@ -137,7 +137,7 @@ else
 		}
 		else
 		{
-			$tab .= '"><a href="' . ($method == 'show'? '.' : $this->href($method)) . '" title="' . $this->get_translation($hint) . '"';
+			$tab .= '"><a href="' . ($method == 'show'? '.' : $this->href($method)) . '" title="' . Ut::html($this->get_translation($hint)) . '"';
 			if ($access_key !== '')
 			{
 				$tab .= ' accesskey="' . $access_key . '"';
@@ -200,6 +200,9 @@ else
 		// print tab
 		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank"');
 
+		// source tab
+		$echo_tab('source', 'SourceTip', 'SourceText', 2, '', '', '');
+
 		// create tab
 		if ((!$this->page && $this->has_access('create')) ||
 				$this->is_admin() ||
@@ -208,6 +211,14 @@ else
 					$this->has_access('write')))
 		{
 			$echo_tab('new', 'CreateNewPageTip', 'CreateNewPageText', 2, '', 'n');
+		}
+
+		// clone tab
+		if ((!$this->page && $this->has_access('create')) ||
+				$this->is_admin() ||
+				(!$this->forum && $this->has_access('write')))
+		{
+			$echo_tab('clone', 'ClonePage', 'CloneText', 2, '', '');
 		}
 
 		// remove tab

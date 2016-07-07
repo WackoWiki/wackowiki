@@ -1753,6 +1753,10 @@ li.m-word img {
 	background-image: url('./../icon/document.svg');
 	background-repeat: no-repeat;
 }
+li.m-source img {
+	background-image: url('./../icon/text.svg');
+	background-repeat: no-repeat;
+}
 
 .desc_rss_feed {
 	float: right;

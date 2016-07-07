@@ -242,12 +242,11 @@ $wacko_translation = array(
 	'TagCloud'				=> 'Woordwolk',
 
 	// source handler
-	'TitleSource'			=> 'source of the page',
+	'SourceText'				=> 'Source',
+	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
 	'SourceFrom'			=> 'original is located at: ',
 	'SourceFromLink'		=> 'reference',
 	'SourceCopyToClipboard'	=> 'copy to clipboard',
-	'Source'				=> 'view the source',
-	'SourceDesc'			=> 'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -719,7 +718,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor' => 'Tekstverwerker-versie',
 	'SettingsLatex' => 'LaTeX-versie',
 	'SettingsXML' => 'Export to XML',
-	'NeedToChangeLang'			=> 'Unsupported page language `%1\' needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
 	'BewareChangeLang' => 'Verander de taal van de pagina niet, tenzij u precies weet wat u aan het doen bent. Het hernoemen van deze pagina leidt ertoe dat links in de oorspronkelijke taal ongeldig worden. U kunt dit terugdraaien door de pagina in te stellen op de oorspronkelijke taal.',
 	'SetLang' => 'Taal van deze pagina',
 	'SetMenuLabel' => 'Menu label',
