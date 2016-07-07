@@ -275,8 +275,8 @@ class Ut
 		return $n;
 	}
 
-	static function html($string)
+	static function html($string, $double_encode = true)
 	{
-		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET, $double_encode);
 	}
 }

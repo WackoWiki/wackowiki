@@ -25,17 +25,18 @@ if ($this->page['comment_on_id'])
 
 if ($this->has_access('read'))
 {
-	/* obsolete code - or do we need an ability to print old revisions?
-	if ($this->page['latest'] == 0)
+	if (!$this->page['latest'])
 	{
-		echo '<div class="revisioninfo">'.
-		str_replace('%1', $this->href(),
-		str_replace('%2', $this->tag,
-		str_replace('%3', $this->page['modified'],
-		$this->get_translation('Revision')))).".</div>";
-	}*/
+		$message = Ut::perc_replace($this->get_translation('Revision'),
+			$this->href(),
+			$this->tag,
+			$this->get_time_formatted($this->page['modified']),
+			$this->user_link($this->page['user_name'], '', true, false));
 
-	echo $this->format($this->page['body'], 'source', array('bad' => 'good'));
+		$this->show_message($message, 'revisioninfo');
+	}
+
+	echo $this->format($this->page['body'], 'source', ['copy_button' => true]);
 }
 else
 {
