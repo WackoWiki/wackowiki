@@ -242,12 +242,11 @@ $wacko_translation = array(
 	'TagCloud'					=> 'Chmura znaczników',
 
 	// source handler
-	'TitleSource'				=> 'source of the page',
+	'SourceText'				=> 'Source',
+	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
 	'SourceFrom'				=> 'original is located at: ',
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
-	'Source'					=> 'view the source',
-	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -719,7 +718,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor' => 'Wersja Procesor tekstu',
 	'SettingsLatex' => 'Wersja LaTeX',
 	'SettingsXML' => 'Export to XML',
-	'NeedToChangeLang'			=> 'Unsupported page language `%1\' needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
 	'BewareChangeLang' => 'Nie zmieniaj jêzyka, je¿eli nie wiesz dok³adnie co robisz. Zmiana ustawieñ jêzykowych prowadzi do zmian nazw stron zgodnie z regu³ami transliteracji wybranego jêzyka. Ponadto ca³a nie-angielska zawarto¶æ stanie siê nieczytelna. Mo¿esz cofn±æ te zmiany powracaj±c do pierwotnych warto¶ci ustawieñ jêzykowych.',
 	'SetLang' => 'Jêzyk tej strony',
 	'SetMenuLabel' => 'Menu label',

@@ -243,12 +243,11 @@ $wacko_translation = array(
 	'TagCloud'					=> 'Облако тегов',
 
 	// source handler
-	'TitleSource'				=> 'source of the page',
+	'SourceText'				=> 'Source',
+	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
 	'SourceFrom'				=> 'адрес оригинала: ',
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
-	'Source'					=> 'view the source',
-	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -722,7 +721,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor'		=> 'Версия для Текстовый процессор',
 	'SettingsLatex'				=> 'Версия для LaTeX',
 	'SettingsXML'				=> 'Экспорт в XML',
-	'NeedToChangeLang'			=> 'Unsupported page language `%1\' needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
 	'BewareChangeLang'			=> 'Не меняйте язык, если вы не понимаете, что делаете. Смена языка приведёт к переименованию страницы согласно правил транслита нового языка и нечитабельности её неанглийского содержимого. Отменить это действие можно при помощи обратной смены языка.',
 	'SetLang'					=> 'Смена языка страницы',
 	'SetMenuLabel'				=> 'Метка для меню',

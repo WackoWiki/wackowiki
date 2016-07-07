@@ -242,12 +242,11 @@ $wacko_translation = array(
 	'TagCloud'					=> 'Nuvola di tag',
 
 	// source handler
-	'TitleSource'				=> 'source of the page',
+	'SourceText'				=> 'Source',
+	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
 	'SourceFrom'				=> 'original is located at: ',
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
-	'Source'					=> 'view the source',
-	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -719,7 +718,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor'		=> 'Versione di Videoscrittura',
 	'SettingsLatex'				=> 'Versione di LaTeX',
 	'SettingsXML'				=> 'Esporta in XML',
-	'NeedToChangeLang'			=> 'Unsupported page language `%1\' needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
 	'BewareChangeLang'			=> 'Don\'t change language, if you don\'t know exactly, what are you doing. Change of language setting will lead to renaming of the page according to transliteration rules of selected language. All non-english content will become unreadable also. You could turn those effects backward by returning language setting to its initial value.',
 	'SetLang'					=> 'Lingua di questa pagina',
 	'SetMenuLabel'				=> 'Menu label',

@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 echo '<h3>';
-echo $this->get_translation('ClonePage') . $this->compose_link_to_page($this->tag, '', '', 0);
+echo $this->get_translation('ClonePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0);
 echo "</h3>\n<br />\n";
 
 $output = '';

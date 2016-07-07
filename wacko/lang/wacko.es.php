@@ -242,12 +242,11 @@ $wacko_translation = array(
 	'TagCloud'					=> 'Nube de palabras',
 
 	// source handler
-	'TitleSource'				=> 'Fuente original de la página',
+	'SourceText'				=> 'Source',
+	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
 	'SourceFrom'				=> 'original está ubicado en: ',
 	'SourceFromLink'			=> 'referencia',
 	'SourceCopyToClipboard'		=> 'copiar a portapapeles',
-	'Source'					=> 'ver código fuente',
-	'SourceDesc'				=> 'se mostrará el código fuente con excepción de las partes ocultos con marcas <span class="nobr"><code>%%(comentarios)..%%</code></span>',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -719,7 +718,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor' => 'Versión Procesador de texto',
 	'SettingsLatex' => 'Versión LaTeX',
 	'SettingsXML' => 'Export to XML',
-	'NeedToChangeLang'			=> 'Unsupported page language `%1\' needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
 	'BewareChangeLang' => 'No cambies el idioma, si no sabes exactamente lo que haces. El ajuste de cambio de idioma presupone cambiar el nombre de la página en acuerdo con las reglas de transliteración del idioma seleccionado. Todo contenido no-español será ilegible. Podrá anular esos efectos volviendo a ajustar el idioma original.',
 	'SetLang' => 'Idioma de esta página',
 	'SetMenuLabel' => 'Etiqueta del menú',

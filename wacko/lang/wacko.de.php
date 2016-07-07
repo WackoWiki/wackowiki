@@ -242,12 +242,11 @@ $wacko_translation = array(
 	'TagCloud'					=> 'Wortwolke',
 
 	// source handler
-	'TitleSource'				=> 'Quelltext der Seite',
+	'SourceText'				=> 'Source',
+	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
 	'SourceFrom'				=> 'Das Original findet sich unter: ',
 	'SourceFromLink'			=> 'Link',
 	'SourceCopyToClipboard'		=> 'In die Zwischenablage speichern',
-	'Source'					=> 'Quelltext anzeigen',
-	'SourceDesc'				=> 'Der Quelltext wird angezeigt werden mit Ausnahme der Fragmente, welche durch den Formatierer nicht ausgegeben werden <span class="nobr"><code>%%(comments)..%%</code></span>',
 
 	// Groups action
 	'GroupsSearch'				=> 'Suche Gruppe',
@@ -719,7 +718,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor'		=> 'Textverarbeitungs-Version',
 	'SettingsLatex'				=> 'LaTeX Version',
 	'SettingsXML'				=> 'Export als XML',
-	'NeedToChangeLang'			=> 'Unsupported page language `%1\' needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
 	'BewareChangeLang'			=> 'Verändere nicht die Spracheinstellungen, wenn du dir nicht sicher bist, was du tust. Eine Änderung der Sprache kann zur Änderung des Namens der Seite führen, in Abhängigkeit von den sprachlichen Besonderheiten der neu gewählten Sprache. Möglicherweise wird der gesamte Inhalt nicht mehr lesbar sein. Du kannst diesen Schritt rückgängig machen, indem du die Spracheinstellungen wieder auf den Ursprungswert zurückstellst.',
 	'SetLang'					=> 'Sprache dieser Seite',
 	'SetMenuLabel'				=> 'Menü-Label',
