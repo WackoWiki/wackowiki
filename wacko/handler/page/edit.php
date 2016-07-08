@@ -338,7 +338,7 @@ if ($this->has_access('read')
 	{
 		$output .= '<br />'."\n";
 		$output .= '<label for="comment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
-		$output .= '<input type="text" id="comment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
+		$output .= '<input type="text" id="comment_title" maxlength="250" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
 		$output .= '<br />'."\n";
 	}
 	else if (!$this->page || $this->is_owner() || $this->is_admin())
@@ -346,7 +346,7 @@ if ($this->has_access('read')
 		// edit page title
 		$output .= '<br />'."\n";
 		$output .= '<label for="page_title">'.$this->get_translation('MetaTitle').':</label><br />';
-		$output .= '<input type="text" id="page_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="100" name="title" />';
+		$output .= '<input type="text" id="page_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="250" name="title" />';
 		$output .= '<br />'."\n";
 	}
 	else
