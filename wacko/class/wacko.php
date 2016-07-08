@@ -6075,10 +6075,10 @@ class Wacko
 		// url lang selection
 		$url	= explode('@@', $tag);
 		$tag	= trim($url[0]);
-		$lang	= (isset($url[1]) ? trim($url[1]) : null);
+		$lang	= trim(@$url[1]); // STS: unused! remove?
 		$user	= '';
 
-		if (!trim($tag))
+		if (!$tag)
 		{
 			$tag = $this->config->root_page;
 		}
@@ -6238,7 +6238,7 @@ class Wacko
 			}
 		}
 
-		$this->set_page($page);
+		$this->set_page($page); // the only call
 
 		if ($this->config['enable_referrers'])
 		{
@@ -6253,28 +6253,28 @@ class Wacko
 		if ($this->page)
 		{
 			// override perpage settings
-			$page_options = array(
-				'footer_comments'	=> $this->page['footer_comments'],
-				'footer_files'		=> $this->page['footer_files'],
-				'footer_rating'		=> $this->page['footer_rating'],
-				'hide_toc'			=> $this->page['hide_toc'],
-				'hide_index'		=> $this->page['hide_index'],
-				'tree_level'		=> $this->page['tree_level'],
-				'allow_rawhtml'		=> $this->page['allow_rawhtml'],
-				'disable_safehtml'	=> $this->page['disable_safehtml'],
-				'theme'				=> $this->page['theme']
-				);
+			$page_options = [
+				'footer_comments',
+				'footer_files',
+				'footer_rating',
+				'hide_toc',
+				'hide_index',
+				'tree_level',
+				'allow_rawhtml',
+				'disable_safehtml',
+				'theme',
+			];
 
-			foreach ($page_options as $key => $val)
+			foreach ($page_options as $key)
 			{
 				// ignore perpage page settings with empty / null as value
-				if ($key && $val != null)
+				if (($val = $this->page[$key]))
 				{
 					$this->config[$key] = $val;
 				}
 			}
 
-			$this->config['theme_url'] = $this->config['base_url'].Ut::join_path(THEME_DIR, $this->config['theme']).'/';
+			$this->config['theme_url'] = $this->config['base_url'] . Ut::join_path(THEME_DIR, $this->config['theme']) . '/';
 
 			// set page categories. this defines $categories (array) object property
 			$categories = $this->load_categories('', $this->page['page_id']);
