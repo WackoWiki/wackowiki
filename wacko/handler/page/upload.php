@@ -123,7 +123,7 @@ if ($this->can_upload() === true)
 			}
 			else
 			{
-				$this->set_message($this->get_translation('UploadRemoveDenied'));
+				$this->set_message($this->get_translation('UploadRemoveDenied'), 'error');
 			}
 		}
 		else
