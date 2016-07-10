@@ -18,8 +18,8 @@ require_once('setup/_insert_config.php');
 /*
  Setup the tables depending on which database we selected
 
- mysqli_legacy
- or pdo which is the default clause
+ mysqli_legacy which is the default clause
+ or pdo
  */
 
 $port			= trim($config['database_port']);

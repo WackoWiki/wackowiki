@@ -3,13 +3,6 @@
 		function check()
 		{
 			var f = document.forms.form1;
-			//var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
-
-			//if (f.elements["config[admin_name]"].value.search(re) == -1)
-			//{
-			//	alert('<?php echo $lang['ErrorAdminName'];?>');
-			//	return false;
-			//}
 
 			if (f.elements['password'].value.length<9)
 			{
