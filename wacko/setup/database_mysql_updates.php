@@ -13,7 +13,7 @@ $engine		= 'ENGINE='.$config['database_engine'];
 // ACL
 $rename_acl_r4_3_1 = "RENAME TABLE {$pref}acls TO {$pref}acl";
 
-$alter_acl_r4_3_0 = "ALTER TABLE {$pref}acl CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+#$alter_acl_r4_3_0 = "ALTER TABLE {$pref}acl CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_acl_r4_3_1 = "ALTER TABLE {$pref}acl ADD page_id INT(10) UNSIGNED NOT NULL AFTER page_tag";
 $alter_acl_r4_3_2 = "ALTER TABLE {$pref}acl CHANGE privilege privilege VARCHAR(10) NOT NULL";
 $alter_acl_r4_3_3 = "ALTER TABLE {$pref}acl DROP PRIMARY KEY";
@@ -25,7 +25,7 @@ $update_acl_r4_3_1 = "UPDATE {$pref}acl AS acl, (SELECT id, tag FROM {$pref}page
 $update_acl_r4_3_2 = "UPDATE {$pref}acl AS acl, (SELECT page_id, comment_on_id FROM {$pref}page) AS pages SET acl.list = '' WHERE acl.page_id = pages.page_id AND (acl.privilege <> 'read' AND pages.comment_on_id  <> '0')";
 
 // CACHE
-$alter_cache_r4_3_0 = "ALTER TABLE {$pref}cache CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+#$alter_cache_r4_3_0 = "ALTER TABLE {$pref}cache CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_cache_r4_3_1 = "ALTER TABLE {$pref}cache ADD cache_time TIMESTAMP NOT NULL, ADD INDEX timestamp (cache_time)";
 $alter_cache_r4_3_2 = "ALTER TABLE {$pref}cache ADD lang VARCHAR(2) NOT NULL AFTER query";
 
@@ -58,10 +58,9 @@ $table_config_r4_3 = "CREATE TABLE {$pref}config (".
 // LINK
 $rename_link_r4_3_1 = "RENAME TABLE {$pref}links TO {$pref}link";
 
-// this is necessary to prevent: #1071 – Specified key was too long; max key length is 1000 bytes
+// this is necessary to prevent: #1071 - Specified key was too long; max key length is 1000 bytes
 $alter_link_r4_3_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag,
-						ADD INDEX `from_tag` ( `from_tag` , `to_tag` ( 78 ) ),
-						CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+						ADD INDEX `from_tag` ( `from_tag` , `to_tag` ( 78 ) )";
 $alter_link_r4_3_1 = "ALTER TABLE {$pref}link ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, ADD PRIMARY KEY (id)";
 $alter_link_r4_3_2 = "ALTER TABLE {$pref}link ADD from_page_id INT(10) UNSIGNED NOT NULL AFTER from_tag";
 $alter_link_r4_3_3 = "ALTER TABLE {$pref}link ADD to_page_id INT(10) UNSIGNED NOT NULL AFTER from_page_id";
@@ -105,8 +104,8 @@ $rename_page_r4_3_1 = "RENAME TABLE {$pref}pages TO {$pref}page";
 $alter_page_r4_2_1 = "ALTER TABLE {$pref}pages MODIFY COLUMN body MEDIUMTEXT NOT NULL";
 $alter_page_r4_2_2 = "ALTER TABLE {$pref}pages MODIFY COLUMN body_r MEDIUMTEXT NOT NULL";
 
-$alter_page_r4_3_0 = "ALTER TABLE {$pref}page CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
-$alter_page_r4_3_3 = "ALTER TABLE {$pref}page ADD created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER supertag, ADD INDEX idx_created (created), DROP INDEX idx_latest";
+#$alter_page_r4_3_0 = "ALTER TABLE {$pref}page CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+$alter_page_r4_3_3 = "ALTER TABLE {$pref}page ADD created DATETIME NULL DEFAULT NULL AFTER supertag, ADD INDEX idx_created (created), DROP INDEX idx_latest";
 $alter_page_r4_3_4 = "ALTER TABLE {$pref}page ADD title VARCHAR(100) NOT NULL DEFAULT '' AFTER supertag, ADD INDEX idx_title (title), ADD edit_note VARCHAR(100) NOT NULL DEFAULT '' AFTER user";
 $alter_page_r4_3_5 = "ALTER TABLE {$pref}page CHANGE hits hits INT(11) UNSIGNED NOT NULL DEFAULT '0'";
 $alter_page_r4_3_6 = "ALTER TABLE {$pref}page ADD owner_id INT(10) UNSIGNED NOT NULL AFTER id, ADD INDEX idx_owner_id (owner_id)";
@@ -122,9 +121,9 @@ $alter_page_r4_3_15 = "ALTER TABLE {$pref}page DROP owner";
 $alter_page_r4_3_16 = "ALTER TABLE {$pref}page DROP user";
 $alter_page_r4_3_17 = "ALTER TABLE {$pref}page ADD ip VARCHAR(15) NOT NULL AFTER minor_edit";
 $alter_page_r4_3_18 = "ALTER TABLE {$pref}page CHANGE id page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
-$alter_page_r4_3_19 = "ALTER TABLE {$pref}page CHANGE time modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_page_r4_3_19 = "ALTER TABLE {$pref}page CHANGE time modified DATETIME NULL DEFAULT NULL";
 $alter_page_r4_3_20 = "ALTER TABLE {$pref}page DROP INDEX idx_time, ADD INDEX idx_modified (modified)";
-$alter_page_r4_3_21 = "ALTER TABLE {$pref}page ADD commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER title, ADD INDEX idx_commented (commented)";
+$alter_page_r4_3_21 = "ALTER TABLE {$pref}page ADD commented DATETIME NULL DEFAULT NULL AFTER title, ADD INDEX idx_commented (commented)";
 $alter_page_r4_3_22 = "ALTER TABLE {$pref}page ADD footer_comments TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_23 = "ALTER TABLE {$pref}page ADD footer_files TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_24 = "ALTER TABLE {$pref}page ADD footer_rating TINYINT(1) UNSIGNED DEFAULT NULL";
@@ -138,7 +137,7 @@ $alter_page_r4_3_31 = "ALTER TABLE {$pref}page ADD noindex TINYINT(1) UNSIGNED D
 $alter_page_r4_3_32 = "ALTER TABLE {$pref}page ADD theme VARCHAR(20) DEFAULT NULL AFTER hits";
 $alter_page_r4_3_33 = "ALTER TABLE {$pref}page ADD formatting VARCHAR(20) NOT NULL DEFAULT 'wacko' AFTER body_r";
 $alter_page_r4_3_34 = "ALTER TABLE {$pref}page ADD reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER reviewed";
-$alter_page_r4_3_35 = "ALTER TABLE {$pref}page ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
+$alter_page_r4_3_35 = "ALTER TABLE {$pref}page ADD reviewed_time DATETIME NULL DEFAULT NULL AFTER reviewed";
 $alter_page_r4_3_36 = "ALTER TABLE {$pref}page ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
 $alter_page_r4_3_37 = "ALTER TABLE {$pref}page ADD depth INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER menu_tag, ADD INDEX idx_depth(depth)";
 $alter_page_r4_3_38 = "ALTER TABLE {$pref}page ADD parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER depth";
@@ -173,8 +172,8 @@ $table_poll_r4_3 = "CREATE TABLE {$pref}poll (".
 					"user_id INT(10) UNSIGNED NOT NULL,".
 					"plural TINYINT(1) NOT NULL,".
 					"votes SMALLINT(5) UNSIGNED NOT NULL,".
-					"start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"start DATETIME NULL DEFAULT NULL,".
+					"end DATETIME NULL DEFAULT NULL,".
 					"KEY idx_poll_id (poll_id),".
 					"KEY idx_time_frame (start,end)".
 				") {$engine} COMMENT='' {$charset}";
@@ -192,9 +191,9 @@ $table_rating_r4_3 = "CREATE TABLE {$pref}rating (".
 // REFERRER
 $rename_referrer_r4_3_1 = "RENAME TABLE {$pref}referrers TO {$pref}referrer";
 
-$alter_referrer_r4_3_0 = "ALTER TABLE {$pref}referrer CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+#$alter_referrer_r4_3_0 = "ALTER TABLE {$pref}referrer CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_referrer_r4_3_1 = "ALTER TABLE {$pref}referrer DROP INDEX idx_page_tag, CHANGE page_tag page_id INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX idx_page_id (page_id)";
-$alter_referrer_r4_3_2 = "ALTER TABLE {$pref}referrer CHANGE time referrer_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_referrer_r4_3_2 = "ALTER TABLE {$pref}referrer CHANGE time referrer_time DATETIME NULL DEFAULT NULL";
 $alter_referrer_r4_3_3 = "ALTER TABLE {$pref}referrer CHANGE referrer referrer VARCHAR(255) NOT NULL DEFAULT ''";
 
 // REVISION
@@ -203,8 +202,8 @@ $rename_revision_r4_3_1 = "RENAME TABLE {$pref}revisions TO {$pref}revision";
 $alter_revision_r4_2_1 = "ALTER TABLE {$pref}revisions MODIFY COLUMN body MEDIUMTEXT NOT NULL";
 $alter_revision_r4_2_2 = "ALTER TABLE {$pref}revisions MODIFY COLUMN body_r MEDIUMTEXT NOT NULL";
 
-$alter_revision_r4_3_0 = "ALTER TABLE {$pref}revision CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
-$alter_revision_r4_3_1 = "ALTER TABLE {$pref}revision ADD created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER supertag, DROP INDEX idx_latest";
+#$alter_revision_r4_3_0 = "ALTER TABLE {$pref}revision CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+$alter_revision_r4_3_1 = "ALTER TABLE {$pref}revision ADD created DATETIME NULL DEFAULT NULL AFTER supertag, DROP INDEX idx_latest";
 $alter_revision_r4_3_2 = "ALTER TABLE {$pref}revision ADD title VARCHAR(100) NOT NULL DEFAULT '' AFTER supertag, ADD edit_note VARCHAR(100) NOT NULL DEFAULT '' AFTER user";
 $alter_revision_r4_3_3 = "ALTER TABLE {$pref}revision ADD owner_id INT(10) UNSIGNED NOT NULL AFTER id, ADD INDEX idx_owner_id (owner_id)";
 $alter_revision_r4_3_4 = "ALTER TABLE {$pref}revision ADD user_id INT(10) UNSIGNED NOT NULL AFTER owner_id, ADD INDEX idx_user_id (user_id)";
@@ -219,12 +218,12 @@ $alter_revision_r4_3_12 = "ALTER TABLE {$pref}revision DROP owner";
 $alter_revision_r4_3_13 = "ALTER TABLE {$pref}revision DROP user";
 $alter_revision_r4_3_14 = "ALTER TABLE {$pref}revision ADD ip VARCHAR(15) NOT NULL AFTER minor_edit";
 $alter_revision_r4_3_15 = "ALTER TABLE {$pref}revision CHANGE id revision_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
-$alter_revision_r4_3_16 = "ALTER TABLE {$pref}revision CHANGE time modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_revision_r4_3_16 = "ALTER TABLE {$pref}revision CHANGE time modified DATETIME NULL DEFAULT NULL";
 $alter_revision_r4_3_17 = "ALTER TABLE {$pref}revision DROP INDEX idx_time , ADD INDEX idx_modified ( modified )";
 $alter_revision_r4_3_18 = "ALTER TABLE {$pref}revision ADD formatting VARCHAR(20) DEFAULT NULL AFTER body_r";
 $alter_revision_r4_3_19 = "ALTER TABLE {$pref}revision ADD reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit, ADD INDEX idx_reviewed (reviewed)";
 $alter_revision_r4_3_20 = "ALTER TABLE {$pref}revision ADD reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER reviewed";
-$alter_revision_r4_3_21 = "ALTER TABLE {$pref}revision ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
+$alter_revision_r4_3_21 = "ALTER TABLE {$pref}revision ADD reviewed_time DATETIME NULL DEFAULT NULL AFTER reviewed";
 $alter_revision_r4_3_22 = "ALTER TABLE {$pref}revision ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
 $alter_revision_r4_3_23 = "ALTER TABLE {$pref}revision ADD version_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
 $alter_revision_r4_3_24 = "ALTER TABLE {$pref}revision ADD deleted TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER keywords";
@@ -243,8 +242,8 @@ $table_tag_r4_3 = "CREATE TABLE {$pref}tag (".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"lang VARCHAR(2) NOT NULL,".
 						"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
-						"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-						"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"date_created DATETIME NULL DEFAULT NULL,".
+						"date_updated DATETIME NULL DEFAULT NULL,".
 						"PRIMARY KEY (tag_id),".
 						"KEY idx_tag_name (tag_name)".
 					") {$engine} COMMENT='' {$charset}";
@@ -253,13 +252,13 @@ $table_tag_page_r4_3 = "CREATE TABLE {$pref}tag_page (".
 						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"tag_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"date_attached DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"date_attached DATETIME NULL DEFAULT NULL,".
 						"PRIMARY KEY (page_id, tag_id),".
 						"KEY idx_tag_id (tag_id)".
 					") {$engine} COMMENT='' {$charset}";
 
 // UPLOAD
-$alter_upload_r4_3_0 = "ALTER TABLE {$pref}upload CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+#$alter_upload_r4_3_0 = "ALTER TABLE {$pref}upload CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_upload_r4_3_1 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 							CHANGE page_id page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 							CHANGE filename file_name VARCHAR(250) NOT NULL DEFAULT '',
@@ -283,7 +282,7 @@ $update_upload_r4_3_3 = "UPDATE {$pref}upload AS upload SET upload.lang = '{$con
 // USER
 $rename_user_r4_3_1 = "RENAME TABLE {$pref}users TO {$pref}user";
 
-$alter_user_r4_3_0 = "ALTER TABLE {$pref}user CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+#$alter_user_r4_3_0 = "ALTER TABLE {$pref}user CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_user_r4_3_1 = "ALTER TABLE {$pref}user ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, DROP PRIMARY KEY, ADD PRIMARY KEY (id)";
 $alter_user_r4_3_2 = "ALTER TABLE {$pref}user CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
 $alter_user_r4_3_3 = "ALTER TABLE {$pref}user CHANGE doubleclickedit doubleclick_edit TINYINT(1) NOT NULL DEFAULT '1'";
@@ -296,18 +295,18 @@ $alter_user_r4_3_9 = "ALTER TABLE {$pref}user ADD total_revisions INT(10) UNSIGN
 $alter_user_r4_3_10 = "ALTER TABLE {$pref}user ADD total_comments INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER total_revisions";
 $alter_user_r4_3_11 = "ALTER TABLE {$pref}user CHANGE name user_name VARCHAR(80) NOT NULL DEFAULT '', DROP INDEX idx_name, ADD UNIQUE idx_user_name (user_name)";
 $alter_user_r4_3_12 = "ALTER TABLE {$pref}user ADD real_name VARCHAR(80) NOT NULL DEFAULT '' AFTER user_name";
-$alter_user_r4_3_13 = "ALTER TABLE {$pref}user ADD session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER email_confirm";
+$alter_user_r4_3_13 = "ALTER TABLE {$pref}user ADD session_time DATETIME NULL DEFAULT NULL AFTER email_confirm";
 $alter_user_r4_3_14 = "ALTER TABLE {$pref}user ADD session_expire INT(10) UNSIGNED NOT NULL AFTER session_time";
 $alter_user_r4_3_15 = "ALTER TABLE {$pref}user CHANGE id user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_user_r4_3_16 = "ALTER TABLE {$pref}user ADD enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER email, ADD INDEX idx_enabled (enabled)";
 $alter_user_r4_3_17 = "ALTER TABLE {$pref}user CHANGE password password VARCHAR(64) NOT NULL DEFAULT ''";
-$alter_user_r4_3_18 = "ALTER TABLE {$pref}user CHANGE signuptime signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_user_r4_3_18 = "ALTER TABLE {$pref}user CHANGE signuptime signup_time DATETIME NULL DEFAULT NULL";
 $alter_user_r4_3_19 = "ALTER TABLE {$pref}user CHANGE changepassword change_password VARCHAR(64) NOT NULL";
 $alter_user_r4_3_20 = "ALTER TABLE {$pref}user CHANGE revisioncount revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '20'";
 $alter_user_r4_3_21 = "ALTER TABLE {$pref}user CHANGE changescount changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50'";
 $alter_user_r4_3_22 = "ALTER TABLE {$pref}user ADD salt VARCHAR(40) NOT NULL DEFAULT '' AFTER password";
 $alter_user_r4_3_23 = "ALTER TABLE {$pref}user ADD account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER email, ADD INDEX idx_account_type (account_type)";
-$alter_user_r4_3_24 = "ALTER TABLE {$pref}user ADD last_mark DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER session_expire";
+$alter_user_r4_3_24 = "ALTER TABLE {$pref}user ADD last_mark DATETIME NULL DEFAULT NULL AFTER session_expire";
 $alter_user_r4_3_25 = "ALTER TABLE {$pref}user CHANGE email_confirm email_confirm VARCHAR(64) NOT NULL DEFAULT ''";
 $alter_user_r4_3_26 = "ALTER TABLE {$pref}user ADD login_count INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER last_mark";
 $alter_user_r4_3_27 = "ALTER TABLE {$pref}user ADD lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' AFTER login_count";
@@ -373,7 +372,7 @@ $table_usergroup_r4_3 = "CREATE TABLE {$pref}usergroup (".
 					"group_name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"created DATETIME NULL DEFAULT NULL,".
 					"is_system TINYINT(1) UNSIGNED NOT NULL,".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
@@ -392,7 +391,7 @@ $table_usergroup_member_r4_3 = "CREATE TABLE {$pref}usergroup_member (".
 // WATCH
 $rename_watch_r4_3_1 = "RENAME TABLE {$pref}pagewatches TO {$pref}watch";
 
-$alter_watch_r4_3_0 = "ALTER TABLE {$pref}watch CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+#$alter_watch_r4_3_0 = "ALTER TABLE {$pref}watch CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_watch_r4_3_1 = "ALTER TABLE {$pref}watch CHANGE id watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_watch_r4_3_2 = "ALTER TABLE {$pref}watch ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
 $alter_watch_r4_3_3 = "ALTER TABLE {$pref}watch ADD page_id INT(10) UNSIGNED NOT NULL AFTER tag";
@@ -404,12 +403,5 @@ $alter_watch_r4_3_8 = "ALTER TABLE {$pref}watch ADD comment_id INT(10) UNSIGNED 
 
 $update_watch_r4_3_1 = "UPDATE {$pref}watch AS watch, (SELECT user_id, user_name FROM {$pref}user) AS user SET watch.user_id = user.user_id WHERE watch.user = user.user_name";
 $update_watch_r4_3_2 = "UPDATE {$pref}watch AS watch, (SELECT page_id, tag FROM {$pref}page) AS page SET watch.page_id = page.page_id WHERE watch.tag = page.tag";
-
-/* $table_word_r4_3 = "CREATE TABLE {$pref}word (".
-					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"word VARCHAR(255) NOT NULL DEFAULT '',".
-					"replacement VARCHAR(255) NOT NULL DEFAULT '',".
-					"PRIMARY KEY (word_id)".
-				") {$engine} COMMENT='' {$charset}"; */
 
 ?>

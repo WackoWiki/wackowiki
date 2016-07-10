@@ -67,7 +67,6 @@ $config_file['header_action']			= $config['header_action'];
 $config_file['footer_action']			= $config['footer_action'];
 // version
 $config_file['wacko_version']			= $config['wacko_version'];
-#$config_file['']						= $config[''];
 
 // convert config array into PHP code
 $config_code = "<?php\n// config.php ".$lang['WrittenAt'].strftime("%c")."\n// ".$lang['ConfigDescription']."\n// ".$lang['DontChange']."\n\n";
@@ -84,7 +83,7 @@ $write_file		= file_put_contents($filename, $config_code);
 
 if ($write_file == true)
 {
-	// Try and make it non-writable
+	// try and make it non-writable
 	@chmod($filename, 0644);
 	$perm_changed = !is__writable($filename);
 
@@ -94,7 +93,7 @@ if ($write_file == true)
 }
 else
 {
-	// Problem saving file
+	// problem saving file
 	print(output_image(false)."</li>\n");
 }
 

@@ -32,4 +32,16 @@ catch(PDOException $e)
 	$fatal_error = true;
 }
 
+// set SESSION sql_mode
+if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
+{
+	$sql_modes = SQL_MODE_STRICT;
+}
+else
+{
+	$sql_modes = SQL_MODE_PERMISSIVE;
+}
+
+#$dblink->query("SET SESSION sql_mode='$sql_modes'");
+
 ?>

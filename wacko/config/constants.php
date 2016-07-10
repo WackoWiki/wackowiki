@@ -28,6 +28,8 @@ define('SESSION_HANDLER_ID',			'sid');
 define('SESSION_HANDLER_PATH',			null);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
 define('SQL_NULLDATE',					'0000-00-00 00:00:00');
 define('SQL_DATE_FORMAT',				'Y-m-d H:i:s');
+define('SQL_MODE_STRICT',				'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY');
+define('SQL_MODE_PERMISSIVE',			'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER');
 define('TRAN_DONTCHANGE',				0);
 define('TRAN_LOWERCASE',				1);
 define('TRAN_LOAD',						0);
@@ -39,6 +41,6 @@ define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 #define('XML_HTMLSAX3',					dirname(__FILE__).'/lib/HTMLSax3/');
 define('ACTIONS4DIFF',					'a, anchor, toc'); //allowed actions in DIFF
 define('PHP_MIN_VERSION',				'5.2.0'); //minimum required PHP version
-define('PHP_ERROR_REPORTING',			0); // PHP error reporting: 0 - off, 5 - all
+define('PHP_ERROR_REPORTING',			5); // PHP error reporting: 0 - off, 5 - all
 
 ?>

@@ -98,8 +98,8 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"depth INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"created DATETIME NULL DEFAULT NULL,".
+					"modified DATETIME NULL DEFAULT NULL,".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"body_toc TEXT NOT NULL,".
@@ -107,7 +107,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
-					"reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"reviewed_time DATETIME NULL DEFAULT NULL,".
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL,".
 					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
@@ -117,7 +117,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"theme VARCHAR(20) DEFAULT NULL,".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
-					"commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"commented DATETIME NULL DEFAULT NULL,".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"footer_comments TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
@@ -154,8 +154,8 @@ $table_poll = "CREATE TABLE {$pref}poll (".
 					"user_id INT(10) UNSIGNED NOT NULL,".
 					"plural TINYINT(1) NOT NULL,".
 					"votes SMALLINT(5) UNSIGNED NOT NULL,".
-					"start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"start DATETIME NULL DEFAULT NULL,".
+					"end DATETIME NULL DEFAULT NULL,".
 					"KEY idx_poll_id (poll_id),".
 					"KEY idx_time_frame (start,end)".
 				") {$engine} COMMENT='' {$charset}";
@@ -172,7 +172,7 @@ $table_rating = "CREATE TABLE {$pref}rating (".
 $table_referrer = "CREATE TABLE {$pref}referrer (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"referrer VARCHAR(255) NOT NULL DEFAULT '',".
-					"referrer_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"referrer_time DATETIME NULL DEFAULT NULL,".
 					"KEY idx_page_id (page_id),".
 					"KEY idx_referrer_time (referrer_time)".
 				") {$engine} COMMENT='' {$charset}";
@@ -187,15 +187,15 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
-					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"created DATETIME NULL DEFAULT NULL,".
+					"modified DATETIME NULL DEFAULT NULL,".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"formatting VARCHAR(20) DEFAULT NULL,".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
-					"reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"reviewed_time DATETIME NULL DEFAULT NULL,".
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"latest TINYINT(1) UNSIGNED DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL,".
@@ -230,8 +230,8 @@ $table_tag = "CREATE TABLE {$pref}tag (".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang VARCHAR(2) NOT NULL,".
 					"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
-					"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"date_created DATETIME NULL DEFAULT NULL,".
+					"date_updated DATETIME NULL DEFAULT NULL,".
 					"PRIMARY KEY (tag_id),".
 					"KEY idx_tag_name (tag_name)".
 				") {$engine} COMMENT='' {$charset}";
@@ -240,7 +240,7 @@ $table_tag_page = "CREATE TABLE {$pref}tag_page (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"tag_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"date_attached DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"date_attached DATETIME NULL DEFAULT NULL,".
 					"PRIMARY KEY (page_id, tag_id),".
 					"KEY idx_tag_id (tag_id)".
 				") {$engine} COMMENT='' {$charset}";
@@ -252,7 +252,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"file_name VARCHAR(250) NOT NULL DEFAULT '',".
 					"lang VARCHAR(2) NOT NULL,".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
-					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"uploaded_dt DATETIME NULL DEFAULT NULL,".
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -274,12 +274,12 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"email VARCHAR(100) NOT NULL DEFAULT '',".
 					"account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"signup_time DATETIME NULL DEFAULT NULL,".
 					"change_password VARCHAR(64) NOT NULL,".
 					"email_confirm VARCHAR(64) NOT NULL DEFAULT '',".
-					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_time DATETIME NULL DEFAULT NULL,".
 					"session_expire INT(10) UNSIGNED NOT NULL,".
-					"last_mark DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"last_mark DATETIME NULL DEFAULT NULL,".
 					"login_count INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
 					"failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
@@ -329,7 +329,7 @@ $table_usergroup = "CREATE TABLE {$pref}usergroup (".
 					"group_name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"created DATETIME NULL DEFAULT NULL,".
 					"is_system TINYINT(1) UNSIGNED NOT NULL,".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
