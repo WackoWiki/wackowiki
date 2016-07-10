@@ -147,9 +147,9 @@ abstract class Dbal // need to be extended by Settings to be usable
 		{
 			if (time() - $timestamp <= $this->cache_sql_ttl)
 			{
-				if (($contents = file_get_contents($this->sqlfile)))
+				if (($text = file_get_contents($this->sqlfile)))
 				{
-					$data = unserialize($contents);
+					$data = Ut::unserialize($text);
 					// re @: if unserialize fails - it's OK and need not propagate further
 					$this->affected_rows = @$data['affected_rows'];
 					unset($data['affected_rows']);
@@ -165,7 +165,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 	private function put_cache($data)
 	{
 		$data['affected_rows'] = $this->affected_rows;
-		file_put_contents($this->sqlfile, serialize($data));
+		file_put_contents($this->sqlfile, Ut::serialize($data, JSON_PRETTY_PRINT));
 		chmod($this->sqlfile, 0644);
 	}
 

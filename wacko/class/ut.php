@@ -279,4 +279,22 @@ class Ut
 	{
 		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET, $double_encode);
 	}
+
+	static function serialize($data, $options = 0)
+	{
+		if (!($text = json_encode($data, $options | JSON_UNESCAPED_SLASHES)))
+		{
+			// json_encode can fail due to utf8 miscoding, so fallback..
+			$text = serialize($data);
+		}
+		return $text;
+	}
+
+	static function unserialize($text)
+	{
+		return 
+			(substr($text, 1, 1) === ':' && ctype_lower($text[0]))
+				? unserialize($text)
+				: json_decode($text, true);
+	}
 }
