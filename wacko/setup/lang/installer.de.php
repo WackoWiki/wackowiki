@@ -70,7 +70,6 @@ $lang = array(
 'Rewrite' => 'Umschreiben',
 'RewriteDesc' => '<a href="http://wackowiki.sourceforge.net/doc/Doc/Deutsch/RewriteModus" target="_blank">Umschreiben</a> sollte aktiviert sein, falls du WackoWiki mit URL-Umschreiben verwenden willst.',
 'Enabled' => 'Aktiviert:',
-'ErrorAdminName' => 'Der Verwalter Name muss ein WikiName sein!',
 'ErrorAdminEmail' => 'Du hast eine ungültige E-Mailadresse angegeben!',
 'ErrorAdminPasswordMismatch' => 'Die Passwörter stimmen nicht überein!',
 'ErrorAdminPasswordShort' => 'Das Verwalter Passwort ist zu kurz, die Mindestlänge ist 9 Zeichen!',

@@ -70,7 +70,6 @@ $lang = array(
 'Rewrite' => 'Herschrijf modus',
 'RewriteDesc' => 'Herschrijven modus moet aan staan als u een WackoWiki met URL rewriting gebruikt.',
 'Enabled' => 'Aan:',
-'ErrorAdminName' => 'U moet een juiste WikiName invullen als gebruikersnaam voor de beheerder!',
 'ErrorAdminEmail' => 'U moet een juist beheerders emailadres invullen!',
 'ErrorAdminPasswordMismatch' => 'Wachtwoorden komen niet overeen, vul het wachtwoord opnieuw in!',
 'ErrorAdminPasswordShort' => 'The admin Wachtwoord is te kort, vul het wachtwoord opnieuw in, the minimum length is 9 characters!',
