@@ -7,6 +7,7 @@ if (!defined('IN_WACKO'))
 
 class Http
 {
+	public		$vars			= [];
 	public		$page			= '';
 	public		$method			= '';
 	public		$tls_session	= false;
@@ -36,7 +37,10 @@ class Http
 
 		if ($request)
 		{
-			$this->request();
+			$router = new UriRouter($db);
+			$this->vars = $router->run();
+			$this->page = $this->vars['page'];
+			$this->method = $this->vars['method'];
 			$this->check_cache();
 		}
 
@@ -272,65 +276,6 @@ class Http
 			else
 			{
 				// FALSE, then output buffering is not active
-			}
-		}
-	}
-
-	// REQUEST HANDLING
-	// Process request string, define $page and $method vars
-	private function request()
-	{
-		if (isset($_SERVER['PATH_INFO']) && function_exists('virtual'))
-		{
-			$request = $_SERVER['PATH_INFO'];
-		}
-		else if (isset($_GET['page']))
-		{
-			$request = $_GET['page'];
-		}
-		else
-		{
-			$request = '';
-		}
-
-		$request = ltrim($request, '/');
-
-		// check for permalink
-		$hashids = new Hashids($this->db->hashid_seed);
-		$ids = $hashids->decode(preg_replace('#/.*$|[^a-zA-Z0-9]+#', '', $request));
-		if (count($ids) == 3)
-		{
-			sscanf(hash('sha1', $ids[0] . $this->db->hashid_seed . $ids[1]), '%7x', $cksum);
-
-			if ($ids[2] == $cksum)
-			{
-				$this->page = $ids[0] . 'x' . $ids[1];
-				$this->method = 'Hashid';
-				return;
-			}
-		}
-
-		// split into page/method
-		if (($p = strrpos($request, '/')) === false)
-		{
-			$this->page = $request;
-			$this->method = '';
-		}
-		else
-		{
-			$this->page = substr($request, 0, $p);
-			$this->method = strtolower(substr($request, $p + 1));
-
-			if (!@file_exists(Ut::join_path(HANDLER_DIR, 'page', $this->method . '.php')))
-			{
-				$this->page	= $request;
-				$this->method = '';
-			}
-			else if (preg_match('#^(.*?)/(' . $this->db->standard_handlers . ')(|/(.*))$#i', $this->page, $match))
-			{
-				//translit case
-				$this->page = $match[1];
-				$this->method = strtolower($match[2]);
 			}
 		}
 	}
