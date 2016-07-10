@@ -7,6 +7,9 @@ if (!defined('IN_WACKO'))
 
 // Default configuration values
 
+// DO NOT EDIT HERE; instead make changes in config.php or config table.
+// These default settings are used when config.php is not present.
+
 $wacko_config_defaults = array(
 	'database_driver' => '',
 	'database_host' => 'localhost',
@@ -15,6 +18,7 @@ $wacko_config_defaults = array(
 	'database_user' => '',
 	'database_password' => '',
 	'database_collation' => 0,
+	'database_charset' => 'latin1',
 
 	'table_prefix' => 'wacko_',
 	'cookie_prefix' => 'wacko_',

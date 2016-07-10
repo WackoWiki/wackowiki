@@ -3,7 +3,6 @@
 		function check()
 		{
 			var f = document.forms.form1;
-			var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
 
 			// Ensure a database driver is selected
 			var db_driver_selected = false;
@@ -48,7 +47,9 @@
 <?php
 
 write_config_hidden_nodes(array(
+	'database_charset'	=> '',
 	'database_driver'	=> '',
+	'database_engine'	=> '',
 	'database_host'		=> '',
 	'database_port'		=> '',
 	'database_database'	=> '',
@@ -96,8 +97,8 @@ echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']
 
 $drivers	= array();
 $drivers[]	= array('mysql',	'mysql_legacy',		'MySQL');
-$drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi');
-$drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL ('.$lang['Recommended'].')');
+$drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi ('.$lang['Recommended'].')');
+$drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL');
 
 $detected = 0;
 
@@ -115,6 +116,47 @@ for($count = 0; $count < count($drivers); $count++)
    <div class="fake_hr_seperator">
       <hr />
    </div>
+   <h2><?php echo $lang['DBCharset'];?></h2>
+   <p class="notop"><?php echo $lang['DBCharsetDesc']; ?></p>
+   <ul>
+<?php
+/*
+ Each time a new database charset is supported it needs to be added to this list
+ https://dev.mysql.com/doc/refman/5.6/en/charset-charsets.html
+
+ [0]   :  database charset name
+ [1]   :  database charset name to be stored in the config file
+ [2]   :  the name to display in the list here
+ */
+
+$charset	= array();
+# $charset[]	= array('utf8', 'utf8', 'UTF-8 Unicode ('.$lang['Recommended'].')'); // requires unicode ready wiki engine! -> Version 5.5
+$charset[]	= array('cp1251',	'cp1251',	'cp1251 Windows Cyrillic');
+$charset[]	= array('latin1',	'latin1',	'cp1252 West European');
+$charset[]	= array('latin2',	'latin2',	'ISO 8859-2 Central European'); // not tested
+$charset[]	= array('greek',	'greek',	'ISO 8859-7 Greek'); // not tested
+
+
+$detected = 0;
+
+echo '    <select id="config[database_charset]" name="config[database_charset]">';
+
+for($count = 0; $count < count($charset); $count++)
+{
+	echo '      <li><option value="'.$charset[$count][1].'" '.($config['database_charset'] == $charset[$count][1] ? 'selected="selected"' : '').'>'.$charset[$count][2]."</option></li>\n";
+	$detected++;
+}
+
+echo "    </select>\n";
+?>
+   </ul>
+   <br />
+   <?php
+if ($config['is_update'] == false)
+{?>
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
    <h2><?php echo $lang['DBEngine'];?></h2>
    <p class="notop"><?php echo $lang['DBEngineDesc']; ?></p>
    <ul>
@@ -128,19 +170,29 @@ for($count = 0; $count < count($drivers); $count++)
  */
 
 $engines	= array();
-$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM ('.$lang['Recommended'].')');
-$engines[]	= array('mysql_innodb', 'InnoDB', 'InnoDB');
+$engines[]	= array('mysql_innodb', 'InnoDB', 'InnoDB ('.$lang['Recommended'].')');
+$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM');
 
 $detected = 0;
 
 for($count = 0; $count < count($engines); $count++)
 {
-	echo "      <li><input type=\"radio\" id=\"db_engine_".$engines[$count][0]."\" name=\"config[database_engine]\" value=\"".$engines[$count][1]."\"".($detected == 0 ? " checked=\"checked\"" : "")."><label for=\"db_engine_".$engines[$count][0]."\">".$engines[$count][2]."</label></li>\n";
+	echo '      <li>
+					<input type="radio" id="db_engine_'.$engines[$count][0].'" name="config[database_engine]" value="'.$engines[$count][1].'" '.($detected == 0 ? 'checked="checked"' : '').'>
+					<label for="db_engine_'.$engines[$count][0].'">'.$engines[$count][2]."</label>
+				</li>\n";
 	$detected++;
 }
 ?>
    </ul>
    <br />
+   <?php
+}
+else
+{
+	echo '<input type="hidden" value="'.$config['database_engine'].'" name="config[database_engine]">';
+}
+?>
    <div class="fake_hr_seperator">
       <hr />
    </div>

@@ -7,7 +7,7 @@
 */
 
 $pref		= $config['table_prefix'];
-$charset	= 'DEFAULT CHARSET=utf8';
+$charset	= 'DEFAULT CHARSET='.$config['database_charset'];
 $engine		= 'ENGINE='.$config['database_engine'];
 
 // ACL
