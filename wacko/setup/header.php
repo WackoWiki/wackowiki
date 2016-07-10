@@ -3,7 +3,21 @@
 function my_location()
 {
 	global $config;
+
+	// run in tls mode?
+	if ( ($config['tls']
+		&& ( ( ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' )
+				&& !empty($config['tls_proxy']) )
+			|| ( isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ) ) )
+		|| ( ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' )
+			|| ( isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ) )
+	)
+	{
+		$config['base_url'] =	str_replace('http://', 'https://'.($config['tls_proxy'] ? $config['tls_proxy'].'/' : ''), $config['base_url']);
+	}
+
 	list($url, ) = explode('?', $config['base_url']);
+
 	return $url;
 }
 
@@ -59,6 +73,11 @@ function write_config_hidden_nodes($skip_values)
 
 	foreach ($config_parameters as $key => $value)
 	{
+		if (is_array($value))
+		{
+			$value = implode(',', $value);
+		}
+
 		echo '   <input type="hidden" name="config['.$key.']" value="'.$value.'" />' . "\n";
 	}
 }
