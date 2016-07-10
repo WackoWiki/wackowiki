@@ -44,6 +44,7 @@ if ($config['upload_path'] == 'files')
 ///////////////////////////////////////////////////////////////////////////////////////////
 $config_file['base_url']				= $config['base_url'];
 // database connection
+$config_file['database_charset']		= $config['database_charset'];
 $config_file['database_collation']		= $config['database_collation'];
 $config_file['database_driver']			= $config['database_driver'];
 $config_file['database_host']			= $config['database_host'];
@@ -132,8 +133,8 @@ if($write_file == false)
 echo "         </ul>\n";
 
 ?>
-<form action="<?php echo my_location() ?>?installAction=write-config"
-	method="post"><?php
+<form action="<?php echo my_location() ?>?installAction=write-config" method="post">
+<?php
 	write_config_hidden_nodes(array('none' => ''));
 
 	// If there was a problem then show the "Try Again" button.
