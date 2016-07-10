@@ -482,15 +482,15 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'watch', $lang['RenameTable']), @mysql_query($rename_watch_r4_3_1, $dblink), str_replace('%1', 'watch', $lang['ErrorRenamingTable']));
 
 					// convert tables to utf8
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_0, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysql_query($alter_cache_r4_3_0, $dblink), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_0, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'cache', $lang['AlterTable']), @mysql_query($alter_cache_r4_3_0, $dblink), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'link', $lang['AlterTable']), @mysql_query($alter_link_r4_3_0, $dblink), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_0, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_0, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_0, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_0, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_0, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_0, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_0, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_0, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_0, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_0, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_0, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_0, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 
 					// ! new user_id first
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_1, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
@@ -819,6 +819,19 @@ switch($config['database_driver'])
 			/*
 			 The connection string and the database name are ok, proceed
 			 */
+
+			// set SESSION sql_mode
+			if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
+			{
+				$sql_modes = SQL_MODE_STRICT;
+			}
+			else
+			{
+				$sql_modes = SQL_MODE_PERMISSIVE;
+			}
+
+			mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
+
 			echo "         </ul>\n";
 			echo "         <br />\n";
 
@@ -940,15 +953,15 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'watch', $lang['RenameTable']), @mysqli_query($dblink, $rename_watch_r4_3_1), str_replace('%1', 'watch', $lang['ErrorRenamingTable']));
 
 					// convert tables to utf8
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_0), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r4_3_0), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_0), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r4_3_0), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_0), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_0), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_0), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_0), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_0), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_0), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_0), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_0), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_0), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_0), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_0), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_0), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					#test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_0), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 
 					// ! new user_id first
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_1), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
@@ -1243,21 +1256,6 @@ switch($config['database_driver'])
 		$dsn = '';
 		switch($config['database_driver'])
 		{
-			/* case 'firebird':
-				$dsn = $config['database_driver'].":dbname=".$config['database_host'].":".$config['database_database'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
-				break;
-			case 'ibm':
-				$dsn = $config['database_driver'].":DATABASE=".$config['database_host'].";HOSTNAME=".$config['database_database'].($config['database_port'] != "" ? ";PORT=".$config['database_port'] : "");
-				break;
-			case 'informix':
-				$dsn = $config['database_driver'].":database=".$config['database_host'].";host=".$config['database_database'].($config['database_port'] != "" ? ";service=".$config['database_port'] : "");
-				break;
-			case 'oci':
-				require_once('setup/database_oracle.php');
-				$dsn = $config['database_driver'].":dbname=".$config['database_database'];
-				break;
-			case 'sqlite':
-			case 'sqlite2': */
 			case 'mysql_pdo':
 				require_once('setup/database_mysql.php');
 				require_once('setup/database_mysql_updates.php'); // mysql only
@@ -1269,15 +1267,6 @@ switch($config['database_driver'])
 
 				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 				break;
-			/* case 'mssql':
-				require_once('setup/database_mysql.php');
-				$dsn = $config['database_driver'].":host=".$config['database_host'].($config['database_port'] != "" ? ",".$config['database_port'] : "").";dbname=".$config['database_database'];
-				print($dsn);
-				break;
-			case 'pgsql':
-				require_once('setup/database_pgsql.php');
-				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
-				break; */
 		}
 
 		echo "         <ul>\n";
@@ -1412,15 +1401,15 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'watch', $lang['RenameTable']), $rename_watch_r4_3_1, str_replace('%1', 'watch', $lang['ErrorRenamingTable']));
 
 					// convert tables to utf8
-					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_0, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r4_3_0, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
+					#test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_0, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
+					#test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r4_3_0, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r4_3_0, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_0, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_0, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_0, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_0, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_0, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_0, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
+					#test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_0, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					#test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_0, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
+					#test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_0, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					#test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_0, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					#test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_0, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					#test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_0, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 
 					// ! new user_id first
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_1, str_replace('%1', 'user', $lang['ErrorAlteringTable']));

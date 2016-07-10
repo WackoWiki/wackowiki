@@ -48,13 +48,13 @@
 <?php
 
 write_config_hidden_nodes(array(
-	'database_driver' => '',
-	'database_host' => '',
-	'database_port' => '',
-	'database_database' => '',
-	'database_user' => '',
-	'database_password' => '',
-	'table_prefix' => '')
+	'database_driver'	=> '',
+	'database_host'		=> '',
+	'database_port'		=> '',
+	'database_database'	=> '',
+	'database_user'		=> '',
+	'database_password'	=> '',
+	'table_prefix'		=> '')
 );
 
 echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']) ? $_POST['password'] : '').'" />' . "\n";
@@ -98,11 +98,6 @@ $drivers	= array();
 $drivers[]	= array('mysql',	'mysql_legacy',		'MySQL');
 $drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi');
 $drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL ('.$lang['Recommended'].')');
-// $drivers[]	= array('pdo',		'mssql',		'PDO MS SQL');
-// $drivers[]	= array('pdo',		'pgsql',		'PDO PostgreSQL');
-// $drivers[]	= array('pdo',		'sqlite',		'PDO SQLite');
-// $drivers[]	= array('pdo',		'sqlite2',		'PDO SQLite2');
-// $drivers[]	= array('pdo',		'oci',			'PDO Oracle');
 
 $detected = 0;
 
@@ -110,7 +105,7 @@ for($count = 0; $count < count($drivers); $count++)
 {
 	if(extension_loaded($drivers[$count][0]))
 	{
-		echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][0]."\">".$drivers[$count][2]."</label></li>\n";
+		echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\"".($detected == 0 ? " checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][0]."\">".$drivers[$count][2]."</label></li>\n";
 		$detected++;
 	}
 }
@@ -140,7 +135,7 @@ $detected = 0;
 
 for($count = 0; $count < count($engines); $count++)
 {
-	echo "      <li><input type=\"radio\" id=\"db_engine_".$engines[$count][0]."\" name=\"config[database_engine]\" value=\"".$engines[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_engine_".$engines[$count][0]."\">".$engines[$count][2]."</label></li>\n";
+	echo "      <li><input type=\"radio\" id=\"db_engine_".$engines[$count][0]."\" name=\"config[database_engine]\" value=\"".$engines[$count][1]."\"".($detected == 0 ? " checked=\"checked\"" : "")."><label for=\"db_engine_".$engines[$count][0]."\">".$engines[$count][2]."</label></li>\n";
 	$detected++;
 }
 ?>
