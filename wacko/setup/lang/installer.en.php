@@ -70,7 +70,6 @@ $lang = array(
 'Rewrite' => 'Rewrite Mode',
 'RewriteDesc' => 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled' => 'Enabled:',
-'ErrorAdminName' => 'The admin name must be a WikiName!',
 'ErrorAdminEmail' => 'You have entered an invalid email address!',
 'ErrorAdminPasswordMismatch' => 'The passwords do not match!.',
 'ErrorAdminPasswordShort' => 'The admin password is too short, the minimum length is 9 characters!',
