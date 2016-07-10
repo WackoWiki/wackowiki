@@ -47,15 +47,15 @@
 <?php
 
 write_config_hidden_nodes(array(
-	'database_charset' => '',
-	'database_driver' => '',
-	'database_engine' => '',
-	'database_host' => '',
-	'database_port' => '',
-	'database_database' => '',
-	'database_user' => '',
-	'database_password' => '',
-	'table_prefix' => '')
+	'database_charset'	=> '',
+	'database_driver'	=> '',
+	'database_engine'	=> '',
+	'database_host'		=> '',
+	'database_port'		=> '',
+	'database_database'	=> '',
+	'database_user'		=> '',
+	'database_password'	=> '',
+	'table_prefix'		=> '')
 );
 
 echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']) ? $_POST['password'] : '').'" />' . "\n";
@@ -87,7 +87,7 @@ $drivers	= array();
 $drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi ('.$lang['Recommended'].')');
 $drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL');
 // $drivers[]	= array('pdo',		'pgsql',		'PDO PostgreSQL');
-// $drivers[]	= array('pdo',		'sqlite2',		'PDO SQLite2');
+// $drivers[]	= array('pdo',		'sqlite3',		'PDO SQLite2');
 
 $detected = 0;
 
