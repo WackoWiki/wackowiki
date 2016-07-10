@@ -23,8 +23,8 @@ class Settings extends Dbal implements ArrayAccess
 		// do not read invalidated (by x-bits) or non-writable cachefile
 		if (!((@fileperms($this->cachefile) & 0111)
 			&& is_writable($this->cachefile)
-			&& ($data = file_get_contents($this->cachefile))
-			&& ($this->config = unserialize($data))))
+			&& ($text = file_get_contents($this->cachefile))
+			&& ($this->config = Ut::unserialize($text))))
 		{
 			// for config_defaults
 			$found_rewrite_extension = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
@@ -97,9 +97,10 @@ class Settings extends Dbal implements ArrayAccess
 				// cache to file
 				if ($this->wacko_version == WACKO_VERSION)
 				{
-					$data = serialize($this->config);
+					ksort($this->config, SORT_STRING);
+					$text = Ut::serialize($this->config, JSON_PRETTY_PRINT);
 					// unable to write cache file considered are 'turn config caching off' feature
-					@file_put_contents($this->cachefile, $data);
+					@file_put_contents($this->cachefile, $text);
 					@chmod($this->cachefile, 0755); // mark cache as valid
 				}
 			}

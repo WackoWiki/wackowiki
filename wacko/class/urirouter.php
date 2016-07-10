@@ -30,8 +30,8 @@ class UriRouter
 		// do not read stale or non-writable cachefile
 		if (!((@filemtime($cachefile) >= $conftime)
 			&& is_writable($cachefile)
-			&& ($data = file_get_contents($cachefile))
-			&& ($this->config = unserialize($data))))
+			&& ($text = file_get_contents($cachefile))
+			&& ($this->config = Ut::unserialize($text))))
 		{
 			// gather all method handlers available for {method} macro
 			$methods = [];
@@ -44,9 +44,9 @@ class UriRouter
 			$this->read_config($conffile, ['method' => implode('|', $methods)]);
 
 			// cache to file
-			$data = serialize($this->config);
+			$text = Ut::serialize($this->config);
 			// unable to write cache file considered are 'turn config caching off' feature
-			@file_put_contents($cachefile, $data);
+			@file_put_contents($cachefile, $text);
 			@chmod($cachefile, 0644);
 		}
 	}
