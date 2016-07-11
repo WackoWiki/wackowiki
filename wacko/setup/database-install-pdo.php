@@ -42,6 +42,6 @@ else
 	$sql_modes = SQL_MODE_PERMISSIVE;
 }
 
-#$dblink->query("SET SESSION sql_mode='$sql_modes'");
+$dblink->query("SET SESSION sql_mode='$sql_modes'");
 
 ?>

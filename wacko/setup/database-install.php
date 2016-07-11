@@ -1262,10 +1262,10 @@ switch($config['database_driver'])
 
 				if ($config['database_driver'] == 'mysql_pdo')
 				{
-					$config['database_driver'] = 'mysql';
+					$pdo_driver = 'mysql';
 				}
 
-				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
+				$dsn = $pdo_driver.":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 				break;
 		}
 
