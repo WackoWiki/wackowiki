@@ -67,7 +67,6 @@ $lang = array(
 'Rewrite' => 'Mode "rewrite"',
 'RewriteDesc' => 'L&rsquo;extension "mod_rewrite" doit être activée pour utiliser WackoWiki avec la réécriture d&rsquo;URL.',
 'Enabled' => 'Activé ',
-'ErrorAdminName' => 'Le nom d&rsquo;administrateur doit être un NomWiki !',
 'ErrorAdminEmail' => 'Vous avez indiqué une adresse de messagerie non conforme !',
 'ErrorAdminPasswordMismatch' => 'Les mots de passe ne coïncident pas !',
 'ErrorAdminPasswordShort' => 'Le mot de passe de l&rsquo;administrateur est trop court, il doit avoir au moins 9 caractères !',
