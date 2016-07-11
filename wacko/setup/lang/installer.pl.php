@@ -67,7 +67,6 @@ $lang = array(
 'Rewrite' => 'Tryb Rewrite',
 'RewriteDesc' => 'Tryb Rewrite powinien by&#263; w&#322;&#261;czony je&#380;eli u&#380;ywasz WackoWiki z nadpisywaniem URLi.',
 'Enabled' => 'W&#322;&#261;czony:',
-'ErrorAdminName' => 'NazwaWiki dla administratora musi byc poprawna!',
 'ErrorAdminEmail' => 'Adres e-mail administratora musi byc poprawny!',
 'ErrorAdminPasswordMismatch' => 'Hasla sie nie zgadzaja, prosze wprowadz je ponownie!',
 'ErrorAdminPasswordShort' => 'The admin Haslo za krotkie, prosze wprowadz je ponownie, the minimum length is 9 characters!',

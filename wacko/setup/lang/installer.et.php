@@ -67,7 +67,6 @@ $lang = array(
 'Rewrite' => 'Ülekirjutamise olek',
 'RewriteDesc' => 'Ümberkirjutamise olek peab olema lubatud, kui sa kasutad WackoWiki\'t URL\'i ülekirjutamisega.',
 'Enabled' => 'Lubama:',
-'ErrorAdminName' => 'Sa peaksid valima korrektse WikiNime administraatori nimeks!',
 'ErrorAdminEmail' => 'Pead sisestama korrektse adminni e-posti aadressi!',
 'ErrorAdminPasswordMismatch' => 'Parool ei kõlba. Sisesta see uuesti!',
 'ErrorAdminPasswordShort' => 'The admin Parool on liiga lühike, sisesta uuesti, the minimum length is 9 characters!',

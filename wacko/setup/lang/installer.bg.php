@@ -67,7 +67,6 @@ $lang = array(
 'Rewrite' => 'Rewrite-режим',
 'RewriteDesc' => 'Rewrite-режим трябва да е включен, ако ползвате mod_rewrite.',
 'Enabled' => 'Включен:',
-'ErrorAdminName' => 'Изберете валидно WackoWiki име!',
 'ErrorAdminEmail' => 'Въведете истински адрес!',
 'ErrorAdminPasswordMismatch' => 'Паролата на администратора не съвпадна нещо!',
 'ErrorAdminPasswordShort' => 'The admin много е кратка, the minimum length is 9 characters!',
