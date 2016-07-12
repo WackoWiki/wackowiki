@@ -110,13 +110,17 @@ class UriRouter
 		{
 			$uri = substr($uri, 0, $i);
 		}
-		$uri = rawurldecode($uri); // %xx not decoded in REQUEST_URI
+		$uri = rawurldecode($uri); // %xx not decoded in REQUEST_URI yet
 
 		if (!strncmp($uri, $script, $base + 1))
 		{
 			$uri = substr($uri, $base);
 		}
 
+		// remove .. path elements
+		$uri = preg_replace('#(^|/)\.\.(/|$)#', '/', $uri);
+
+		// remove starting/trailing slashes, and minimize multi-slashes
 		$uri = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#',
 			function ($x)
 			{

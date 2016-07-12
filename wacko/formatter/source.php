@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 extract(array_merge(['default' => 'wacko', 'source' => $this->tag, 'copy_button' => false], $options));
 
-$div_id = Ut::random_token(13, 2);
+$div_id = Ut::random_token(10);
 echo '<!--notypo-->';
 
 // copy to clipboard is implemented only for MSIE for now

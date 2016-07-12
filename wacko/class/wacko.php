@@ -4092,7 +4092,7 @@ class Wacko
 		{
 			$salt_length			= 10;
 			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = Ut::random_token($salt_length);
+			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = Ut::random_token($salt_length, 3);
 		}
 
 		$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? session_id() : ''; #$user['cookie_token']
@@ -4635,29 +4635,10 @@ class Wacko
 
 	/**
 	 * Return unique id
-	 * @param string $extra additional entropy
 	 */
-	function unique_id($extra = 'c')
+	function unique_id()
 	{
-		static $seed = false;
-		static $dss_seeded = false;
-
-		if (!$seed)
-		{
-			$seed = $this->config['rand_seed'];
-		}
-		$val = hash('sha1', mt_rand() . $seed . microtime());
-		$seed = hash('sha1', $seed . $val . $extra);
-
-		if (!$dss_seeded && $this->config['rand_seed_last_update'] < time())
-		{
-			$this->config->set('rand_seed_last_update', time() + mt_rand(1, 100), false);
-			$this->config->set('rand_seed', $seed);
-			$seed = hash('sha1', mt_rand() . $seed);
-			$dss_seeded = true;
-		}
-
-		return substr($val, 4, 16);
+		return Ut::random_token(16);
 	}
 
 	function log_user_in($user, $persistent = false, $session_length = 0)
@@ -4674,7 +4655,7 @@ class Wacko
 		$this->cookie_token		= hash('sha1', $login_token);
 
 		$salt_length			= 10;
-		$salt_user_form			= Ut::random_token($salt_length);
+		$salt_user_form			= Ut::random_token($salt_length, 3);
 
 		$this->time_now			= date('Y-m-d H:i:s');
 		$this->session_time		= date('Y-m-d H:i:s', $session_expire);
