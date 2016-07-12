@@ -39,7 +39,7 @@ class UriRouter
 			{
 				$methods[] = pathinfo($method, PATHINFO_FILENAME);
 			}
-			Ut::dbg('methods', $methods);
+			// Ut::dbg('methods', $methods);
 
 			$this->read_config($conffile, ['method' => implode('|', $methods)]);
 
@@ -56,7 +56,6 @@ class UriRouter
 		// predefined vars
 		$vars['_uri']		= $this->uri_path();
 		$vars['_method']	= $_SERVER['REQUEST_METHOD'];
-		$vars['_tls']		= (int)((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443);
 		$vars['_rewrite']	= $this->db->rewrite_mode;
 
 		// populate router's environment
@@ -66,9 +65,9 @@ class UriRouter
 			$env[$varname] = $GLOBALS[$varname]; // $$varname don't work for _GET & others...
 		}
 
-		Ut::dbg('router', array_diff_key($env, ['_SERVER'=>0]));
+		Ut::dbg(array_diff_key($env, ['_SERVER'=>0]));
 		$this->route($env);
-		Ut::dbg('routed', array_diff_key($env, ['_SERVER'=>0]));
+		Ut::dbg('->', array_diff_key($env, ['_SERVER'=>0]));
 
 		$vars = $env['vars'];
 

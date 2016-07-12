@@ -505,7 +505,7 @@ function bb2_options(&$engine)
 		$config['offsite_forms']				= (string)$_POST['offsite_forms'];
 		$config['eu_cookie']					= (int)$_POST['eu_cookie'];
 		$config['reverse_proxy']				= (int)$_POST['reverse_proxy'];
-		$config['reverse_proxy_header']			= (int)$_POST['reverse_proxy_header'];
+		$config['reverse_proxy_header']			= $_POST['reverse_proxy_header'];
 		$config['reverse_proxy_addresses']		= (string)$_POST['reverse_proxy_addresses'];
 
 		$engine->config->_set($config);

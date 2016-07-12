@@ -52,8 +52,8 @@ function admin_config_system(&$engine, &$module)
 			$config['cookie_prefix']			= (string)$_POST['cookie_prefix'];
 			$config['rewrite_mode']				= (int)$_POST['rewrite_mode'];
 			$config['reverse_proxy']			= (int)$_POST['reverse_proxy'];
-			$config['reverse_proxy_header']		= (int)$_POST['reverse_proxy_header'];
-			$config['reverse_proxy_addresses']	= (int)$_POST['reverse_proxy_addresses'];
+			$config['reverse_proxy_header']		= $_POST['reverse_proxy_header'];
+			$config['reverse_proxy_addresses']	= $_POST['reverse_proxy_addresses'];
 
 			$engine->config->_set($config);
 
