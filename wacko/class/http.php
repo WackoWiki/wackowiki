@@ -32,32 +32,23 @@ class Http
 			exit;
 		}
 
+		$this->tls_session = $this->tls_session();
+
+		if ($db->tls && $this->tls_session)
+		{
+			$this->secure_base_url();
+		}
+
 		$this->session();
 		$this->http_security_headers();
 
 		if ($request)
 		{
 			$router = new UriRouter($db);
-			$this->vars = $router->run();
+			$this->vars = $router->run(['_tls' => $this->tls_session, '_ip' => $this->real_ip()]);
 			$this->page = $this->vars['page'];
 			$this->method = $this->vars['method'];
 			$this->check_cache();
-		}
-
-		// run in tls mode?
-		if (@$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
-		{
-			$_SERVER['HTTPS'] = 'on'; 
-		}
-
-		if ((@$_SERVER['HTTPS'] === 'on' && $db->tls_proxy) || (int)@$_SERVER['SERVER_PORT'] === 443) // STS: why && tls_proxy?
-		{
-			$this->tls_session = true;
-		}
-
-		if ($db->tls && $this->tls_session)
-		{
-			$this->secure_base_url();
 		}
 	}
 
@@ -381,6 +372,41 @@ class Http
 		{
 			$this->caching = 0;
 		}
+	}
+
+	public function real_ip()
+	{
+		$reverse_proxy_addresses = preg_split('/[\s,]+/', $this->db->reverse_proxy_addresses, -1, PREG_SPLIT_NO_EMPTY);
+
+		$x = trim($this->db->reverse_proxy_header);
+		$x or $x = 'X-Forwarded-For';
+		$reverse_proxy_header = 'HTTP_' . strtoupper(strtr($x, '-', '_'));
+
+		foreach (['HTTP_X_CLUSTER_CLIENT_IP', $reverse_proxy_header, 'HTTP_CLIENT_IP', 'HTTP_X_REMOTE_ADDR', 'REMOTE_ADDR'] as $ip)
+		{
+			if (isset($_SERVER[$ip]))
+			{
+				$ips = preg_split('/[\s,]+/', $_SERVER[$ip], -1, PREG_SPLIT_NO_EMPTY);
+				$ips = array_diff($ips, $reverse_proxy_addresses);
+				$ips = array_filter($ips, function($ip) {
+					return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+				});
+				if ($ips)
+				{
+					return $ips[0];
+				}
+			}
+		}
+
+		return '0.0.0.0';
+	}
+
+	public function tls_session()
+	{
+		return ((@$_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off' && $_SERVER['HTTPS'] != '0')
+			|| $_SERVER['SERVER_PORT'] == 443
+			|| @$_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
+			|| @$_SERVER['HTTP_X_FORWARDED_PORT'] == 443);
 	}
 
 }

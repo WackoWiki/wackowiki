@@ -171,7 +171,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 													),
 											PASSWORD_DEFAULT
 											);
-					$user_ip			= $this->ip_address();
+					$user_ip			= $this->get_user_ip();
 
 					// set new user approval
 					if ($this->config['approve_new_user'] == true)

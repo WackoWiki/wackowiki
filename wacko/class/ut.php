@@ -176,6 +176,11 @@ class Ut
 
 		if ($running)
 		{
+			$trace = debug_backtrace();
+			$callee = (strpos($trace[0]['file'], 'class/ut.php') !== false)? $trace[1] : $trace[0];
+			$dir = dirname(dirname(__FILE__)) . '/';
+			$tag = str_replace($dir, '', $callee['file']) . ':' . $callee['line'] . ': ';
+
 			$args = func_get_args();
 
 			foreach ($args as &$arg)
@@ -186,8 +191,30 @@ class Ut
 				}
 			}
 
-			$running = @file_put_contents('DEBUG', date('ymdHis ') . implode(' ', $args) . "\n", FILE_APPEND);
+			$running = @file_put_contents('DEBUG', date('ymdHis ') . $tag . implode(' ', $args) . "\n", FILE_APPEND);
 		}
+	}
+
+	static function backtrace($trace = null)
+	{
+		$trace or $trace = debug_backtrace();
+
+		$list = [];
+		$dir = dirname(dirname(__FILE__)) . '/';
+		foreach ($trace as $i => $frame)
+		{
+			if (isset($frame['function']) && $i)
+			{
+				$list[] = (isset($frame['class'])? $frame['class'] . '::' : '') . $frame['function'];
+			}
+
+			if (isset($frame['file']))
+			{
+				$list[] = str_replace($dir, '', $frame['file']) . ':' . $frame['line'];
+			}
+		}
+
+		return implode(' -> ', array_reverse($list));
 	}
 
 	// join_path('/home/sts', 'dev/', './a.c')  ==> '/home/sts/dev/a.c'
