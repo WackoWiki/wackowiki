@@ -159,7 +159,7 @@ if ($registered
 
 			?>
 			<input type="hidden" name="rename" value="1" />
-			<input type="text" name="newname" value="<?php echo $this->tag;?>" size="60" />
+			<input type="text" maxlength="250" name="newname" value="<?php echo $this->tag;?>" size="60" />
 <br />
 <br />
 			<?php

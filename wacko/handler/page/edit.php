@@ -346,7 +346,7 @@ if ($this->has_access('read')
 		// edit page title
 		$output .= '<br />'."\n";
 		$output .= '<label for="page_title">'.$this->get_translation('MetaTitle').':</label><br />';
-		$output .= '<input type="text" id="page_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" maxlength="250" name="title" />';
+		$output .= '<input type="text" maxlength="250" id="page_title" name="title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" />';
 		$output .= '<br />'."\n";
 	}
 	else

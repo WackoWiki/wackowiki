@@ -255,7 +255,7 @@ function admin_content_files(&$engine, &$module)
 		</tr>
 		<tr>
 			<td><?php echo $engine->get_translation('UploadDesc');?>:&nbsp;</td>
-			<td><input type="text" name="file_description" size="40" /></td>
+			<td><input type="text" maxlength="250" name="file_description" size="40"/></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>

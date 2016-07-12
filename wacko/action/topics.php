@@ -267,7 +267,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			<tr>
 				<td class="label"><label for="topictitle"><?php echo $this->get_translation('ForumTopicName'); ?>:</label></td>
 				<td>
-					<input type="text" id="topictitle" name="title" size="50" maxlength="100" value="" />
+					<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="" />
 					<input type="submit" id="submit" value="<?php echo $this->get_translation('ForumTopicSubmit'); ?>" />
 				</td>
 			</tr>

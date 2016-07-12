@@ -303,7 +303,7 @@ if ($_user_id)
 				<input type="number" min="0" name="pos_'.$menu_item['menu_id'].'" size="2" style="width: 40px;" value="'.$menu_item['menu_position'].'" />
 			</td>
 			<td>
-				<input type="text" name="title_'.$menu_item['menu_id'].'" size="40" value="'.$menu_item['menu_title'].'" />
+				<input type="text" maxlength="100" name="title_'.$menu_item['menu_id'].'" size="40" value="'.$menu_item['menu_title'].'" />
 			</td>
 			<td>
 				<!--<input type="radio" id="menu_item'.$menu_item['menu_id'].'" name="change" value="'.$menu_item['menu_id'].'" /> -->
