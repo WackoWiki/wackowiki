@@ -291,7 +291,7 @@ else
 		<div class="cssform">
 		<p>
 			<label for="user_name"><?php echo $this->format_translation('UserName'); ?>:</label>
-			<input type="text" id="user_name" name="user_name" size="24" /><br />
+			<input type="text" id="user_name" name="user_name" size="25" maxlength="80" /><br />
 			<label for="email"><?php echo $this->format_translation('Email'); ?>:</label>
 			<input type="text" id="email" name="email" size="24" />
 		</p>

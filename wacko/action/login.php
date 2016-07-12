@@ -273,7 +273,7 @@ else // login
 
 	echo '<p>';
 	echo '<label for="user_name">'.$this->format_translation('LoginName').':</label>';
-	echo '<input type="text" id="user_name" name="user_name" size="25" maxlength="25" value="' . @$_user_name . '" tabindex="1" required autofocus />' . "\n";
+	echo '<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="' . @$_user_name . '" tabindex="1" required autofocus />' . "\n";
 	echo '</p>' . "\n";
 
 	echo '<p>';

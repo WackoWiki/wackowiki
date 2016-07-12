@@ -133,7 +133,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"body_toc TEXT NOT NULL,".
 					"formatting VARCHAR(20) NOT NULL DEFAULT 'wacko',".
-					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
+					"edit_note VARCHAR(200) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"reviewed_time DATETIME NULL DEFAULT NULL,".
@@ -226,7 +226,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"formatting VARCHAR(20) NOT NULL DEFAULT '',".
-					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
+					"edit_note VARCHAR(200) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"reviewed_time DATETIME NULL DEFAULT NULL,".

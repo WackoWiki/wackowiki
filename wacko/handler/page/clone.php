@@ -133,7 +133,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 
 		?>
 		<input type="hidden" name="clone" value="1" />
-		<input type="text" name="clone_name" size="40"/>
+		<input type="text" name="clone_name" size="40" maxlength="250"/>
 		<?php
 		// edit note
 		if ($this->config['edit_summary'] != 0)

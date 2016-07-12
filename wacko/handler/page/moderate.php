@@ -528,7 +528,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				moderate_merge_topics($this, $_POST['base'], $topics);
 				$this->log(3, Ut::perc_replace($this->get_translation('LogMergedPages', $this->config['language']),
 							'##'.implode('##, ##', $topics).'##', $_POST['base']));
-				
+
 				unset($accept_action, $topics);
 
 				if ($this->config['enable_feeds'])
@@ -673,7 +673,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						($error == true
 							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
 							: '').
-						'<input type="text" name="title" size="50" maxlength="100" value="'.$this->get_page_title('', $set[0]).'" /> '.
+						'<input type="text" name="title" size="50" maxlength="250" value="'.$this->get_page_title('', $set[0]).'" /> '.
 						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
 						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 						(count($set) > 1
@@ -1249,7 +1249,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						($error == true
 							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
 							: '' ).
-						'<input type="text" name="title" size="50" maxlength="100" value="'.$this->page['title'].'" /> '.
+						'<input type="text" name="title" size="50" maxlength="250" value="'.$this->page['title'].'" /> '.
 						'<input type="submit" name="accept" id="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
 						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('ModerateDecline').'" /></a>'.
 					'</td></tr>'.

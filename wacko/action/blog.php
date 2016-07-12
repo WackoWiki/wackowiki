@@ -281,7 +281,7 @@ if (!empty($blog_cluster))
 				<td class="label"><label for="posttitle"><?php echo $this->get_translation('ForumTopicName'); ?>:</label></td>
 				<td>
 					<input type="hidden" name="action" value="newsadd" />
-					<input type="text" id="posttitle" name="title" size="50" maxlength="100" value="" />
+					<input type="text" id="posttitle" name="title" size="50" maxlength="250" value="" />
 					<input type="submit" id="submit" value="<?php echo $this->get_translation('ForumTopicSubmit'); ?>" />
 				</td>
 			</tr>

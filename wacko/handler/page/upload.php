@@ -194,7 +194,7 @@ if ($this->can_upload() === true)
 			} ?>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input type="text" name="file_description" id="UploadDesc" size="80" value="<?php echo $file['file_description']; ?>"/></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo $file['file_description']; ?>"/></li>
 			</ul>
 		</li>
 	</ul>

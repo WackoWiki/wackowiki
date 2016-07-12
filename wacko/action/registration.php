@@ -334,7 +334,7 @@ if (!isset($_GET['confirm']))
 		}
 
 		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
-		echo '<input type="text" id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" autocomplete="off" required autofocus />';
+		echo '<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" autocomplete="off" required autofocus />';
 
 		if ($this->config['disable_wikiname'] === false)
 		{

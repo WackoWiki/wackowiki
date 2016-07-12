@@ -70,6 +70,7 @@ $alter_page_r5_1_0 = "ALTER TABLE {$pref}page ADD INDEX idx_deleted (deleted)";
 $alter_page_r5_4_0 = "ALTER TABLE {$pref}page CHANGE lang page_lang VARCHAR(2) NOT NULL DEFAULT ''";
 $alter_page_r5_4_1 = "ALTER TABLE {$pref}page CHANGE title title VARCHAR(250) NOT NULL DEFAULT ''";
 $alter_page_r5_4_2 = "ALTER TABLE {$pref}page ADD version_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
+$alter_page_r5_4_3 = "ALTER TABLE {$pref}page CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
 
 $update_page_r5_1_0 = "UPDATE {$pref}page AS page SET noindex = '0' WHERE page.noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
@@ -89,6 +90,7 @@ $alter_revision_r5_4_0 = "ALTER TABLE {$pref}revision CHANGE lang page_lang VARC
 $alter_revision_r5_4_1 = "ALTER TABLE {$pref}revision CHANGE title title VARCHAR(250) NOT NULL DEFAULT ''";
 $alter_revision_r5_4_2 = "ALTER TABLE {$pref}revision ADD INDEX idx_page_id (page_id)";
 $alter_revision_r5_4_3 = "ALTER TABLE {$pref}revision ADD INDEX idx_version_id (version_id, page_id)";
+$alter_revision_r5_4_4 = "ALTER TABLE {$pref}revision CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
 
 $update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, (SELECT page_id, page_lang FROM {$pref}page) AS p SET r.page_lang = p.page_lang WHERE r.page_id = p.page_id";
 

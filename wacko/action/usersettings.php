@@ -509,7 +509,7 @@ else if ($user = $this->get_user())
 			<label for="real_name"><?php echo $this->get_translation('RealName');?></label>
 		</th>
 		<td>
-			<input type="text" id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />
+			<input type="text" id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" maxlength="80"/>
 		</td>
 	</tr>
 	<tr class="lined">

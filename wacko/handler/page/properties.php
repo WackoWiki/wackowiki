@@ -49,7 +49,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 					"allow_rawhtml		= '".(int)$allow_rawhtml."', ".
 					"disable_safehtml	= '".(int)$disable_safehtml."', ".
 					"noindex			= '".(int)$_POST['noindex']."' "
-				: 	"page_lang			= '".quote($this->dblink, $_POST['page_lang'])."', ".
+				:	"page_lang			= '".quote($this->dblink, $_POST['page_lang'])."', ".
 					"theme				= '".quote($this->dblink, (isset($_POST['theme']) ? $_POST['theme'] : ''))."', ".
 					// menu_tag: unused currently, for use in custom theme menus
 					// "menu_tag			= '".quote($this->dblink, htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
@@ -107,17 +107,17 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->get_translation('MetaComments')."</th>".
 						'<td class="form_right">'.
-							'<input type="radio" id="commentsOn"		name="footer_comments" value="1" '.( $this->config['footer_comments'] == 1 ? 'checked="checked" ' : '' ).'/><label for="commentsOn">'.$this->get_translation('MetaOn')."</label>".
+							'<input type="radio" id="commentsOn"	name="footer_comments" value="1" '.( $this->config['footer_comments'] == 1 ? 'checked="checked" ' : '' ).'/><label for="commentsOn">'.$this->get_translation('MetaOn')."</label>".
 							'<input type="radio" id="commentsGuest"	name="footer_comments" value="2" '.( $this->config['footer_comments'] == 2 ? 'checked="checked" ' : '' ).'/><label for="commentsGuest">'.$this->get_translation('MetaRegistered')."</label>".
-							'<input type="radio" id="commentsOff"		name="footer_comments" value="0" '.( $this->config['footer_comments'] == 0 ? 'checked="checked" ' : '' ).'/><label for="commentsOff">'.$this->get_translation('MetaOff')."</label>".
+							'<input type="radio" id="commentsOff"	name="footer_comments" value="0" '.( $this->config['footer_comments'] == 0 ? 'checked="checked" ' : '' ).'/><label for="commentsOff">'.$this->get_translation('MetaOff')."</label>".
 						"</td>".
 					"</tr>\n".
 					'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->get_translation('MetaFiles')."</th>".
 						'<td class="form_right">'.
-							'<input type="radio" id="filesOn" name="footer_files" value="1" '.( $this->config['footer_files'] == 1 ? 'checked="checked" ' : '' ).'/><label for="filesOn">'.$this->get_translation('MetaOn')."</label>".
-							'<input type="radio" id="filesGuest" name="footer_files" value="2" '.( $this->config['footer_files'] == 2 ? 'checked="checked" ' : '' ).'/><label for="filesGuest">'.$this->get_translation('MetaRegistered')."</label>".
-							'<input type="radio" id="filesOff" name="footer_files" value="0" '.( $this->config['footer_files'] == 0 ? 'checked="checked" ' : '' ).'/><label for="filesOff">'.$this->get_translation('MetaOff')."</label>".
+							'<input type="radio" id="filesOn"		name="footer_files" value="1" '.( $this->config['footer_files'] == 1 ? 'checked="checked" ' : '' ).'/><label for="filesOn">'.$this->get_translation('MetaOn')."</label>".
+							'<input type="radio" id="filesGuest"	name="footer_files" value="2" '.( $this->config['footer_files'] == 2 ? 'checked="checked" ' : '' ).'/><label for="filesGuest">'.$this->get_translation('MetaRegistered')."</label>".
+							'<input type="radio" id="filesOff"		name="footer_files" value="0" '.( $this->config['footer_files'] == 0 ? 'checked="checked" ' : '' ).'/><label for="filesOff">'.$this->get_translation('MetaOff')."</label>".
 						'</td>'.
 					"</tr>\n";
 
@@ -126,25 +126,26 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				echo	'<tr class="lined">'.
 							'<th class="form_left" scope="row">'.$this->get_translation('MetaRating')."</th>".
 							'<td class="form_right">'.
-								'<input type="radio" id="ratingOn" name="footer_rating" value="1" '.( $this->config['footer_rating'] == 1 ? 'checked="checked" ' : '' ).'/><label for="ratingOn">'.$this->get_translation('MetaOn')."</label>".
-								'<input type="radio" id="ratingGuest" name="footer_rating" value="2" '.( $this->config['footer_rating'] == 2 ? 'checked="checked" ' : '' ).'/><label for="ratingGuest">'.$this->get_translation('MetaRegistered')."</label>".
-								'<input type="radio" id="ratingOff" name="footer_rating" value="0" '.( $this->config['footer_rating'] == 0 ? 'checked="checked" ' : '' ).'/><label for="ratingOff">'.$this->get_translation('MetaOff')."</label>".
+								'<input type="radio" id="ratingOn"		name="footer_rating" value="1" '.( $this->config['footer_rating'] == 1 ? 'checked="checked" ' : '' ).'/><label for="ratingOn">'.$this->get_translation('MetaOn')."</label>".
+								'<input type="radio" id="ratingGuest"	name="footer_rating" value="2" '.( $this->config['footer_rating'] == 2 ? 'checked="checked" ' : '' ).'/><label for="ratingGuest">'.$this->get_translation('MetaRegistered')."</label>".
+								'<input type="radio" id="ratingOff"		name="footer_rating" value="0" '.( $this->config['footer_rating'] == 0 ? 'checked="checked" ' : '' ).'/><label for="ratingOff">'.$this->get_translation('MetaOff')."</label>".
 							'</td>'.
 						"</tr>\n";
 			}
 
+			// hide_toc, hide_index, tree_level: used in custom theme menus
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->get_translation('MetaToc')."</th>".
 						'<td class="form_right">'.
-							'<input type="radio" id="tocOn" name="hide_toc" value="0" '.( !$this->config['hide_toc'] ? 'checked="checked" ' : '' ).'/><label for="tocOn">'.$this->get_translation('MetaOn')."</label>".
-							'<input type="radio" id="tocOff" name="hide_toc" value="1" '.( $this->config['hide_toc'] ? 'checked="checked" ' : '' ).'/><label for="tocOff">'.$this->get_translation('MetaOff')."</label>".
+							'<input type="radio" id="tocOn"		name="hide_toc" value="0" '.( !$this->config['hide_toc'] ? 'checked="checked" ' : '' ).'/><label for="tocOn">'.$this->get_translation('MetaOn')."</label>".
+							'<input type="radio" id="tocOff"	name="hide_toc" value="1" '.( $this->config['hide_toc'] ? 'checked="checked" ' : '' ).'/><label for="tocOff">'.$this->get_translation('MetaOff')."</label>".
 						"</td>".
 					"</tr>\n".
-					'<tr class="lined">';
+					'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->get_translation('MetaIndex')."</th>".
-						'<td class="form_right">';
-							'<input type="radio" id="indexOn" name="hide_index" value="0" '.( !$this->config['hide_index'] ? 'checked="checked" ' : '' ).'/><label for="indexOn">'.$this->get_translation('MetaOn')."</label>".
-							'<input type="radio" id="indexOff" name="hide_index" value="1" '.( $this->config['hide_index'] ? 'checked="checked" ' : '' ).'/><label for="indexOff">'.$this->get_translation('MetaOff')."</label>".
+						'<td class="form_right">'.
+							'<input type="radio" id="indexOn"	name="hide_index" value="0" '.( !$this->config['hide_index'] ? 'checked="checked" ' : '' ).'/><label for="indexOn">'.$this->get_translation('MetaOn')."</label>".
+							'<input type="radio" id="indexOff"	name="hide_index" value="1" '.( $this->config['hide_index'] ? 'checked="checked" ' : '' ).'/><label for="indexOff">'.$this->get_translation('MetaOff')."</label>".
 						"</td>".
 					"</tr>\n".
 					'<tr class="lined">'.
@@ -215,7 +216,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 							<label for="title">'.$this->get_translation('MetaTitle').'</label>
 						</th>'.
 						'<td class="form_right">
-							<input type="text" id="title" name="title" value="'.$this->page['title'].'" size="60" maxlength="100" />
+							<input type="text" id="title" name="title" value="'.$this->page['title'].'" size="60" maxlength="250" />
 						</td>'.
 					"</tr>\n".
 					'<tr class="lined">'.
@@ -223,7 +224,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 							<label for="keywords">'.$this->get_translation('MetaKeywords').'</label>
 						</th>'.
 						'<td class="form_right">
-							<textarea id="keywords" name="keywords" rows="4" cols="51">'.$this->page['keywords']."</textarea>\n";
+							<textarea id="keywords" name="keywords" rows="4" cols="51" maxlength="250">'.$this->page['keywords']."</textarea>\n";
 
 							if ($categories = $this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0), 1))
 							{
@@ -238,7 +239,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 							<label for="description">'.$this->get_translation('MetaDescription').'</label>
 						</th>'.
 						'<td class="form_right">
-							<textarea id="description" name="description" rows="4" cols="51">'.$this->page['description'].'</textarea>
+							<textarea id="description" name="description" rows="4" cols="51" maxlength="250">'.$this->page['description'].'</textarea>
 						</td>'.
 			/*
 					"</tr>\n".
