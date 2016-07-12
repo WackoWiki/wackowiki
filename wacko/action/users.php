@@ -78,7 +78,7 @@ if (($profile = @$_REQUEST['profile']))
 				$error = Ut::perc_replace($this->get_translation('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
 			}
 			// personal messages flood control
-			else if (isset($_SESSION['intercom_delay']) && time() - $_SESSION['intercom_delay'] < $this->config['intercom_delay'])
+			else if (isset($this->sess->intercom_delay) && time() - $this->sess->intercom_delay < $this->config['intercom_delay'])
 			{
 				$error = Ut::perc_replace($this->get_translation('UsersPMFlooded'), $this->config['intercom_delay']);
 			}
@@ -125,7 +125,7 @@ if (($profile = @$_REQUEST['profile']))
 				$this->set_message($this->get_translation('UsersPMSent'));
 				$this->log(4, Ut::perc_replace($this->get_translation('LogPMSent', $this->config['language']), $this->get_user_name(), $user['user_name']));
 
-				$_SESSION['intercom_delay']	= time();
+				$this->sess->intercom_delay	= time();
 				$_POST['mail_body']			= '';
 				$_POST['mail_subject']		= '';
 				$_POST['ref']				= '';

@@ -53,7 +53,7 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 		if ($this->has_access('create', $this->get_page_id($prefix.$new_tag)))
 		{
 			// keep the original input for page titel
-			$_SESSION['title'] = $new_tag;
+			$this->sess->title = $new_tag;
 
 			// str_replace: fixes newPage&amp;add=1
 			$this->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix.$new_tag, '', 1))));

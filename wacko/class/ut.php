@@ -443,7 +443,7 @@ class Ut
 		{
 			if ($attempts++ > 128)
 			{
-				throw new Exception('random_int: RNG is broken - too many rejections');
+				throw new Exception('RNG is broken - too many rejections');
 			}
 
 			$randomByteString = Ut::random_bytes($bytes);
@@ -461,6 +461,14 @@ class Ut
 		while (!is_int($val) || $val > $max || $val < $min);
 
 		return $val;
+	}
+
+	// rfc822/rfc1123 UTC date format used everywhere in http
+	// current time by default, or looong ago date for -1
+	static function http_date($time = null)
+	{
+		return gmdate('D, d M Y H:i:s T',
+			Ut::is_empty($time)? time() : ($time < 0? 444444444 : $time));
 	}
 
 }

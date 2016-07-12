@@ -75,12 +75,12 @@ if (!empty($blog_cluster))
 			$template	= '';
 
 			// redirecting to the edit form
-			$_SESSION['body']	= $template;
-			$_SESSION['title']	= $namehead;
+			$this->sess->body	= $template;
+			$this->sess->title	= $namehead;
 
 			if ($this->config['enable_feeds'])
 			{
-				#$_SESSION['feed']	= true;
+				#$this->sess->feed	= true;
 			}
 
 			// needs to be numeric for ordering

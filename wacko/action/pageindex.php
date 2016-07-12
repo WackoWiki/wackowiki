@@ -37,17 +37,17 @@ $get_letter = function ($ch) use (&$_alnum) // hope "it" will cache compiled reg
 $letter = $get_letter(isset($_GET['letter'])? $_GET['letter'] : $letter);
 
 // get letters of alphabet with existing pages, and cache them in _SESSION
-$letters = &$_SESSION['pi_letters'];
+$letters = &$this->sess->pi_letters;
 if (!isset($letters)
-	|| $_SESSION['pi_for'] != $for
-	|| $_SESSION['pi_lang'] != $lang
-	|| $_SESSION['pi_title'] != $title
-	|| time() > $_SESSION['pi_time'])
+	|| $this->sess->pi_for != $for
+	|| $this->sess->pi_lang != $lang
+	|| $this->sess->pi_title != $title
+	|| time() > $this->sess->pi_time)
 {
-	$_SESSION['pi_for'] = $for;
-	$_SESSION['pi_lang'] = $lang;
-	$_SESSION['pi_title'] = $title;
-	$_SESSION['pi_time'] = time() + 600;
+	$this->sess->pi_for = $for;
+	$this->sess->pi_lang = $lang;
+	$this->sess->pi_title = $title;
+	$this->sess->pi_time = time() + 600;
 
 	$pages = $this->load_all(
 		"SELECT tag, title ".
@@ -66,23 +66,21 @@ if (!isset($letters)
 				: "tag ASC ")
 			, true);
 
-	$abc = [];
+	$letters = [];
 	foreach ($pages as $page)
 	{
 		if (($ch = $get_letter(($title)?  $page['title'] : $page['tag'])) !== '')
 		{
-			if (array_key_exists($ch, $abc))
+			if (array_key_exists($ch, $letters))
 			{
-				++$abc[$ch];
+				++$letters[$ch];
 			}
 			else
 			{
-				$abc[$ch] = 1;
+				$letters[$ch] = 1;
 			}
 		}
 	}
-
-	$letters = $abc;
 }
 
 $count = $this->load_single(

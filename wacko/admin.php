@@ -48,7 +48,7 @@ $http->ensure_tls($db->base_url . 'admin.php');
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$engine->delete_cookie('admin', true, true);
-	$engine->set_user($_user, 0);
+	// $engine->set_user($_user, 0);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
 	$http->secure_base_url();
 	$http->redirect($engine->href());
@@ -97,9 +97,9 @@ if (isset($_POST['ap_password']))
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
 		$engine->set_cookie('admin', hash('sha256', $_processed_password.$engine->config['base_url']), '', false, ( $engine->config['tls'] ? 1 : 0 ));
 
-		$_SESSION['created']			= time();
-		$_SESSION['last_activity']		= time();
-		$_SESSION['failed_login_count']	= 0;
+		$engine->sess->created			= time();
+		$engine->sess->last_activity		= time();
+		$engine->sess->failed_login_count	= 0;
 
 		if ($engine->config['ap_failed_login_count'] > 0)
 		{
@@ -112,23 +112,23 @@ if (isset($_POST['ap_password']))
 	}
 	else
 	{
-		if (!isset($_SESSION['failed_login_count']))
+		if (!isset($engine->sess->failed_login_count))
 		{
-			$_SESSION['failed_login_count'] = 0;
+			$engine->sess->failed_login_count = 0;
 		}
 
 		$engine->config->set('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1);
 		$engine->log(1, $engine->get_translation('LogAdminLoginFailed', $engine->config['language']));
 
-		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
+		$engine->sess->failed_login_count = $engine->sess->failed_login_count + 1;
 
 		// RECOVERY_MODE ON || RECOVERY_MODE OFF
-		if (($_SESSION['failed_login_count'] >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
+		if (($engine->sess->failed_login_count >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
 			$db->lock(AP_LOCK);
 			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
 
-			$_SESSION['failed_login_count'] = 0;
+			$engine->sess->failed_login_count = 0;
 		}
 	}
 }
@@ -201,7 +201,7 @@ $session_length = 1800; // 1800 -> 30 minutes
 #$_user = $engine->get_user();
 #$engine->set_user($user, 0);
 
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 900)) //1800
+if (isset($engine->sess->last_activity) && (time() - $engine->sess->last_activity > 900)) //1800
 {
 	// last request was more than 15 minutes ago
 	$engine->delete_cookie('admin', true, true);
@@ -213,19 +213,19 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 	$engine->redirect('admin.php');
 }
 
-$_SESSION['last_activity'] = time(); // update last activity time stamp
+$engine->sess->last_activity = time(); // update last activity time stamp
 
-if (!isset($_SESSION['created']))
+if (!isset($engine->sess->created))
 {
-	$_SESSION['created'] = time();
+	$engine->sess->created = time();
 }
-else if (time() - $_SESSION['created'] > $session_length)
+else if (time() - $engine->sess->created > $session_length)
 {
 	$session_expire			= time() + $session_length;
 	// session started more than 30 minutes(default $session_length) ago  // TODO: $session_time missing!
 	$engine->restart_user_session($user, $session_expire); // TODO: we need extra user session here, hence we need a auth_token table
 	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
-	$_SESSION['created'] = time();  // update creation time
+	$engine->sess->created = time();  // update creation time
 }
 
 ########################################################
@@ -326,7 +326,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 			<span>
 				<?php echo (RECOVERY_MODE === true ? '<strong>RECOVERY_MODE</strong>' : ''); ?>
 				&nbsp;&nbsp;
-				<?php $time_left = round(($session_length - (time() - $_SESSION['created'])) / 60);
+				<?php $time_left = round(($session_length - (time() - $engine->sess->created)) / 60);
 				echo "Time left: ".$time_left." minutes"; ?>
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>

@@ -26,6 +26,8 @@ define('CACHE_CONFIG_DIR',				'_cache/config');
 define('CACHE_FEED_DIR',				'_cache/feeds');
 define('CACHE_PAGE_DIR',				'_cache/pages');
 define('CACHE_SQL_DIR',					'_cache/queries');
+//define('CACHE_SESSION_DIR',				'_cache/sessions');
+define('CACHE_SESSION_DIR',				'/tmp');
 
 define('SITEMAP_XML',					'sitemap.xml');
 

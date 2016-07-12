@@ -61,7 +61,7 @@ if ($this->has_access('read'))
 		echo "\t\t\t<link>".$this->config['base_url'].$page['supertag']."</link>\n";
 		echo "\t\t\t<description><![CDATA[".str_replace(']]>', ']]&gt;', $page['body'])."]]></description>\n";
 		echo "\t\t\t<author>".$page['owner_id']."</author>\n";
-		echo "\t\t\t<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page['created']))."</pubDate>\n";
+		echo "\t\t\t<pubDate>".Ut::http_date(strtotime($page['created']))."</pubDate>\n";
 		echo "\t\t</item>\n";
 	}
 }

@@ -119,7 +119,7 @@ class Diag
 				if ($config['debug'] >= 3)
 				{
 					echo '<p class="debug">Session data</p>'."\n<ul>\n";
-					echo "\t<li>session_id(): ".session_id()."</li>\n";
+					echo "\t<li>session_id(): ".$engine->sess->id()."</li>\n";
 					echo "\t<li>Base URL: ".$config['base_url']."</li>\n";
 					echo "\t<li>HTTPS: ".(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')."</li>\n";
 					echo "\t<li>IP-address: ".$engine->get_user_ip()."</li>\n";

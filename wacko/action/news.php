@@ -71,8 +71,8 @@ if (!empty($this->config['news_cluster']))
 			$template	= '';
 
 			// redirecting to the edit form
-			$_SESSION['body']	= $template;
-			$_SESSION['title']	= $namehead;
+			$this->sess->body	= $template;
+			$this->sess->title	= $namehead;
 
 			// needs to be numeric for ordering
 			// TODO: add this as config option to Admin panel

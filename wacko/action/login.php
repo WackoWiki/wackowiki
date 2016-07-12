@@ -148,7 +148,7 @@ else // login
 				}
 				// End Login Captcha
 
-				$_SESSION['failed_login_count'] = $existing_user['failed_login_count'];
+				$this->sess->failed_login_count = $existing_user['failed_login_count'];
 
 				if (!$error)
 				{
@@ -253,7 +253,7 @@ else // login
 		}
 	}
 
-	$_failed_login_count = isset($_SESSION['failed_login_count']) ? $_SESSION['failed_login_count'] : 0;
+	$_failed_login_count = isset($this->sess->failed_login_count) ? $this->sess->failed_login_count : 0;
 
 	if ($error)
 	{

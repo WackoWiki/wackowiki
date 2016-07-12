@@ -228,32 +228,32 @@ if ($this->forum === true
 if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['comment_on_id'])
 {
 	// revoking payload
-	if (isset($_SESSION['guest']))
+	if (isset($this->sess->guest))
 	{
-		$guest					= $_SESSION['guest'];
-		$_SESSION['guest']		= '';
+		$guest					= $this->sess->guest;
+		$this->sess->guest		= '';
 	}
 	else
 	{
 		$guest					= $this->get_cookie('guest');
 	}
 
-	if (isset($_SESSION['body']))
+	if (isset($this->sess->body))
 	{
-		$payload				= $_SESSION['body'];
-		$_SESSION['body']		= '';
+		$payload				= $this->sess->body;
+		$this->sess->body		= '';
 	}
 
-	if (isset($_SESSION['title']))
+	if (isset($this->sess->title))
 	{
-		$title					= $_SESSION['title'];
-		$_SESSION['title']		= '';
+		$title					= $this->sess->title;
+		$this->sess->title		= '';
 	}
 
-	if (isset($_SESSION['preview']))
+	if (isset($this->sess->preview))
 	{
-		$preview				= $_SESSION['preview'];
-		$_SESSION['preview']	= '';
+		$preview				= $this->sess->preview;
+		$this->sess->preview	= '';
 	}
 
 	// places footer inside, to include the footer in the themes footer
