@@ -50,9 +50,9 @@ if ($this->has_access('read'))
 	$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count'], $sort_comment);
 
 	// store comments display in session
-	if (!isset($_SESSION['show_comments'][$this->page['page_id']]))
+	if (!isset($this->sess->show_comments[$this->page['page_id']]))
 	{
-		$_SESSION['show_comments'][$this->page['page_id']] = ($this->get_user_setting('show_comments') ? '1' : '0');
+		$this->sess->show_comments[$this->page['page_id']] = ($this->get_user_setting('show_comments') ? '1' : '0');
 	}
 
 	if(isset($_GET['show_comments']))
@@ -60,16 +60,16 @@ if ($this->has_access('read'))
 		switch($_GET['show_comments'])
 		{
 			case '0':
-				$_SESSION['show_comments'][$this->page['page_id']] = 0;
+				$this->sess->show_comments[$this->page['page_id']] = 0;
 				break;
 			case '1':
-				$_SESSION['show_comments'][$this->page['page_id']] = 1;
+				$this->sess->show_comments[$this->page['page_id']] = 1;
 				break;
 		}
 	}
 
 	// display comments
-	if ($this->page && $_SESSION['show_comments'][$this->page['page_id']] || $this->forum === true)
+	if ($this->page && $this->sess->show_comments[$this->page['page_id']] || $this->forum === true)
 	{
 		$user			= $this->get_user();
 		$admin			= $this->is_admin();
@@ -247,7 +247,7 @@ if ($this->has_access('read'))
 				<input type="text" id="addcomment_title" name="title" size="60" maxlength="250" value="<?php if (isset($title)) echo $title; ?>" /><br />
 				<br />
 				<label for="addcomment"><?php echo $this->get_translation('AddComment');?></label><br />
-				<textarea id="addcomment" name="body" rows="6" cols="7"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if (isset($payload)) echo htmlspecialchars($payload, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?></textarea>
+				<textarea id="addcomment" name="body" rows="6" cols="7"><?php if (isset($this->sess->freecap_old_comment)) echo $this->sess->freecap_old_comment; ?><?php if (isset($payload)) echo htmlspecialchars($payload, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?></textarea>
 
 			<?php
 			if ($user)

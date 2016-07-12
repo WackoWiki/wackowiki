@@ -90,7 +90,7 @@ function admin_db_convert(&$engine, &$module)
 	{
 		$engine->config['sql_mode_strict'] = false;
 
-		foreach ($_SESSION['sql_strict_queries'] as $sql)
+		foreach ($this->sess->sql_strict_queries as $sql)
 		{
 			if ($sql)
 			{
@@ -102,7 +102,7 @@ function admin_db_convert(&$engine, &$module)
 			}
 		}
 
-		$_SESSION['sql_strict_queries'] = null;
+		$this->sess->sql_strict_queries = null;
 
 		if ($sql)
 		{
@@ -288,7 +288,7 @@ function admin_db_convert(&$engine, &$module)
 		<?php
 			if ($sql_log)
 			{
-				$_SESSION['sql_strict_queries'] = $sql_log;
+				$this->sess->sql_strict_queries = $sql_log;
 
 				echo '<input type="submit" name="start-convert_columns" id="submit" value="convert" />';
 			}

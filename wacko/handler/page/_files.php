@@ -7,14 +7,12 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('read'))
 {
-	// store "show files" status in _SESSION
-	$show_files = &$_SESSION['show_files'][$this->page['page_id']];
-
+	// "show files" status are stored in _SESSION
+	$show_files = &$this->sess->show_files[$this->page['page_id']];
 	if (!isset($show_files))
 	{
 		$show_files = !!$this->get_user_setting('show_files');
 	}
-
 	if (isset($_GET['show_files']))
 	{
 		$show_files = !!$_GET['show_files'];

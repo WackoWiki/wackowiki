@@ -11,6 +11,7 @@ class Wacko
 	var $config;							// @deprecated, but will live for a looong time
 	var $db;								// new config
 	var $http;
+	var $sess;
 	var $dblink;
 	var $page;								// Requested page
 	var $tag;
@@ -95,6 +96,7 @@ class Wacko
 		$this->db		=
 		$this->config	= & $config;
 		$this->http		= & $http;
+		$this->sess		= & $http->session;
 	}
 
 	// DATABASE
@@ -441,7 +443,7 @@ class Wacko
 	*/
 	function available_languages($subset = true)
 	{
-		$lang_list = &$_SESSION['available_languages2'];
+		$lang_list = &$this->sess->available_languages;
 
 		if (!isset($lang_list))
 		{
@@ -2225,12 +2227,12 @@ class Wacko
 
 	function update_sitemap()
 	{
-		$_SESSION['xml_sitemap_update'] = 1;
+		$this->sess->xml_sitemap_update = 1;
 	}
 
 	function write_sitemap()
 	{
-		if ((@$_SESSION['xml_sitemap_update'] || $this->config['xml_sitemap_update']) && $this->config['xml_sitemap'])
+		if ((@$this->sess->xml_sitemap_update || $this->config['xml_sitemap_update']) && $this->config['xml_sitemap'])
 		{
 			if (($days = $this->config['xml_sitemap_time']) <= 0)
 			{
@@ -2250,7 +2252,7 @@ class Wacko
 			$xml = new Feed($this);
 			$xml->site_map();
 			$this->log(7, 'XML Sitemap generated');
-			$_SESSION['xml_sitemap_update'] = 0;
+			$this->sess->xml_sitemap_update = 0;
 		}
 	}
 
@@ -2660,7 +2662,7 @@ class Wacko
 	{
 		if ($message)
 		{
-			$_SESSION['messages'][] = [$message, $type];
+			$this->sess->messages[] = [$message, $type];
 		}
 	}
 
@@ -2669,7 +2671,7 @@ class Wacko
 	{
 		// get system message
 		// TODO: set type also via backend and store it [where?]
-		if (($message = @$this->config['system_message']) && !$this->config['ap_mode'])
+		if (($message = $this->config['system_message']) && !$this->config['ap_mode'])
 		{
 			// check current page lang for different charset to do_unicode_entities()
 			if (isset($this->page['page_lang']) && $this->page['page_lang'] != $this->config['language'])
@@ -2677,13 +2679,13 @@ class Wacko
 				$message = $this->do_unicode_entities($message, $this->config['language']);
 			}
 
-			$this->show_message($message, 'sysmessage ' . @$this->config['system_message_type']);
+			$this->show_message($message, 'sysmessage ' . $this->config['system_message_type']);
 		}
 
-		if (isset($_SESSION['messages']))
+		if (isset($this->sess->messages))
 		{
-			$messages = $_SESSION['messages'];
-			unset($_SESSION['messages']);
+			$messages = $this->sess->messages;
+			unset($this->sess->messages);
 
 			// TODO: maybe filter?
 			// TODO: think about quoting....
@@ -3904,17 +3906,17 @@ class Wacko
 	function start_link_tracking()
 	{
 		// STS: why in SESSION? is tracking between page instances possible?
-		$_SESSION['linktracking'] = 1;
+		$this->sess->linktracking = 1;
 	}
 
 	function stop_link_tracking()
 	{
-		$_SESSION['linktracking'] = 0;
+		$this->sess->linktracking = 0;
 	}
 
 	function link_tracking()
 	{
-		return @$_SESSION['linktracking'];
+		return @$this->sess->linktracking;
 	}
 
 	/**
@@ -3992,7 +3994,7 @@ class Wacko
 	function get_inter_wiki_url($name, $tag)
 	{
 		// cache interwiki data in _SESSION
-		$inter_wiki = &$_SESSION['interwiki.conf'];
+		$inter_wiki = &$this->sess->interwiki_conf;
 		if (!isset($inter_wiki))
 		{
 			$inter_wiki = [];
@@ -4092,14 +4094,14 @@ class Wacko
 		{
 			$salt_length			= 10;
 			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $_SESSION['guest_form_salt'] = Ut::random_token($salt_length, 3);
+			$user['user_form_salt']	= $this->sess->guest_form_salt = Ut::random_token($salt_length, 3);
 		}
 
-		$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? session_id() : ''; #$user['cookie_token']
+		$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? $this->sess->id() : ''; #$user['cookie_token']
 		$token		= sha1($user['user_form_salt'] . $form_name . $token_sid);
 
 		$data = array('creation_time' => $now);
-		$_SESSION['formdata'][$token] = $data;
+		$this->sess->formdata[$token] = $data;
 
 		$fields		= '';
 		$fields		.= '<input type="hidden" name="form_token" value="'.$token.'" />'."\n";
@@ -4117,7 +4119,7 @@ class Wacko
 		if ($user['user_name'] == '')
 		{
 			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $_SESSION['guest_form_salt'];
+			$user['user_form_salt']	= $this->sess->guest_form_salt;
 		}
 
 		if ($timespan === false)
@@ -4129,14 +4131,14 @@ class Wacko
 		if (isset($_POST['form_token']))
 		{
 			$token			= isset($_POST['form_token']) ? $_POST['form_token'] : '';
-			$creation_time	= isset($_SESSION['formdata'][$token]['creation_time']) ? $_SESSION['formdata'][$token]['creation_time'] : '';
+			$creation_time	= isset($this->sess->formdata[$token]['creation_time']) ? $this->sess->formdata[$token]['creation_time'] : '';
 
 			$diff = time() - $creation_time;
 
 			// If creation_time and the time() now is zero we can assume it was not a human doing this (the check for if ($diff)...
 			if ($diff && ($diff <= $timespan || $timespan === -1))
 			{
-				$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? session_id() : ''; #$user['cookie_token']
+				$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? $this->sess->id() : ''; #$user['cookie_token']
 				$key		= sha1($user['user_form_salt'] . $form_name . $token_sid);
 
 				if ($key === $token)
@@ -4546,14 +4548,14 @@ class Wacko
 	function get_user()
 	{
 		$q = $this->config['cookie_hash'] . '_' . 'user';
-		return @$_SESSION[$q];
+		return @$this->sess[$q];
 	}
 
 	// extract specific element from user session array
 	function get_user_setting($setting, $guest = 0)
 	{
 		$q = $this->config['cookie_hash'] . '_'. ($guest? 'guest' : 'user');
-		return @$_SESSION[$q][$setting];
+		return @$this->sess[$q][$setting];
 	}
 
 	// set/update specific element of user session array
@@ -4562,13 +4564,13 @@ class Wacko
 	function set_user_setting($setting, $value, $guest = 0)
 	{
 		$q = $this->config['cookie_hash'] . '_'. ($guest? 'guest' : 'user');
-		$_SESSION[$q][$setting] = $value;
+		$this->sess[$q][$setting] = $value;
 	}
 
 	// insert user data into the session array
 	function set_user($user, $ip = 1)
 	{
-		$_SESSION[$this->config['cookie_hash'] . '_' . 'user'] = $user;
+		$this->sess[$this->config['cookie_hash'] . '_' . 'user'] = $user;
 
 		// define current IP for foregoing checks
 		if ($ip)
@@ -4747,11 +4749,8 @@ class Wacko
 	{
 		$this->delete_cookie('sid', true, false);
 
-		unset($_SESSION[$this->config['cookie_hash'] . '_' . 'user']);
-		session_destroy(); // destroy session data in storage
-
-		session_id(hash('sha1', $this->timer . $this->config['system_seed'] . $session_expire . $user['user_name'] . $user['password']));
-		return session_start();
+		$this->sess->destroy(true);
+		return $this->sess->start();
 	}
 
 	// restore login_token/password/etc from auth cookie
@@ -4795,21 +4794,8 @@ class Wacko
 		$this->delete_cookie('auth', true, true);
 		$this->delete_cookie('sid', true, false);
 
-		unset($_SESSION[$this->config['cookie_hash'].'_'.'user']);
-
-		$session_id = hash('sha1', $this->timer.$this->config['system_seed'].$this->get_user_setting('password').session_id());
-
-		session_destroy(); // destroy session data in storage
-
-		$ok = @session_start();
-
-		if(!$ok)
-		{
-			session_regenerate_id(true); // replace the Session ID
-			session_start(); // restart the session (since previous start failed)
-		}
-
-		session_id($session_id);
+		$this->sess->destroy(true);
+		$this->sess->start();
 	}
 
 	// Increment the number of times the user has logegd in
@@ -5625,11 +5611,8 @@ class Wacko
 
 	function set_menu($set = MENU_AUTO, $update = false)
 	{
-		$menu_default = &$_SESSION['menu_default'];
-		$menu_page_ids = &$_SESSION['menu_page_id'];
-		if (!isset($menu_page_ids)) $menu_page_ids = array();
-		$menu_formatted = &$_SESSION['menu'];
-		if (!isset($menu_formatted)) $menu_formatted = array();
+		$menu_page_ids = @$this->sess->menu_page_id ?: [];
+		$menu_formatted = @$this->sess->menu ?: [];
 
 		$user = $this->get_user();
 
@@ -5640,12 +5623,12 @@ class Wacko
 			if ($set != MENU_DEFAULT)
 			{
 				$menu = $this->get_user_menu($user['user_id']);
-				$menu_default = false;
+				$this->sess->menu_default = false;
 			}
 			if (!$menu)
 			{
 				$menu = $this->get_default_menu();
-				$menu_default = true;
+				$this->sess->menu_default = true;
 			}
 
 			// parsing menu items into link table
@@ -5683,7 +5666,7 @@ class Wacko
 							"menu_lang			= '".$menu_item[3]."', ".
 							"menu_position		= '".++$position."'");
 					}
-					$menu_default = false;
+					$this->sess->menu_default = false;
 				}
 
 				$title = $this->get_page_title();
@@ -5706,7 +5689,7 @@ class Wacko
 		}
 
 		// removing menu item
-		if (@$_GET['removebookmark'] && $user && !$menu_default)
+		if (@$_GET['removebookmark'] && $user && !$this->sess->menu_default)
 		{
 			unset($_GET['removebookmark']);
 			// rewriting menu table except containing current page tag
@@ -5731,21 +5714,24 @@ class Wacko
 				$this->set_menu(MENU_DEFAULT);
 			}
 		}
+
+		$this->sess->menu_page_id = $menu_page_ids;
+		$this->sess->menu = $menu_formatted;
 	}
 
 	function get_menu()
 	{
-		return @$_SESSION['menu'];
+		return @$this->sess->menu;
 	}
 
 	function get_menu_links()
 	{
-		return @$_SESSION['menu_page_id'];
+		return @$this->sess->menu_page_id;
 	}
 
 	function get_menu_default()
 	{
-		return (!isset($_SESSION['menu_default'])) || $_SESSION['menu_default'];
+		return (!isset($this->sess->menu_default)) || $this->sess->menu_default;
 	}
 
 	// TODO: do not add
@@ -5761,15 +5747,15 @@ class Wacko
 		if ( $size )
 		{
 			#echo '### 1';
-			if (isset($_SESSION['user_trail']))
+			if (isset($this->sess->user_trail))
 			{
-				$count = count($_SESSION['user_trail']);
+				$count = count($this->sess->user_trail);
 				#echo '### @: ['.$count.']';
 
-				#Ut::debug_print_r($_SESSION['user_trail']);
+				#Ut::debug_print_r($this->sess->user_trail);
 
-				if (isset($_SESSION['user_trail'][$count - 1][0])
-					&&    $_SESSION['user_trail'][$count - 1][0] == $page_id)
+				if (isset($this->sess->user_trail[$count - 1][0])
+					&&    $this->sess->user_trail[$count - 1][0] == $page_id)
 				{
 					#echo '### 2: ['.$count.']';
 					// nothing
@@ -5778,25 +5764,25 @@ class Wacko
 				{
 					#echo '### 3';
 
-					if (count($_SESSION['user_trail']) > $size)
+					if (count($this->sess->user_trail) > $size)
 					{
 						#echo '### 4';
-						$_SESSION['user_trail']	= array_slice($_SESSION['user_trail'], -5 );
-						#Ut::debug_print_r($_SESSION['user_trail']);
+						$this->sess->user_trail	= array_slice($this->sess->user_trail, -5 );
+						#Ut::debug_print_r($this->sess->user_trail);
 					}
 
 					#echo '### 5';
 					$_user_trail[-1]	= array ($page_id, $this->page['tag'], $this->page['title']);
-					$user_trail			= $_SESSION['user_trail'] + $_user_trail;
+					$user_trail			= $this->sess->user_trail + $_user_trail;
 					$user_trail			= array_values($user_trail);
 
-					$_SESSION['user_trail'] = $user_trail;
+					$this->sess->user_trail = $user_trail;
 				}
 			}
 			else
 			{
 				#echo '### 6';
-				$_SESSION['user_trail'][] = array ($page_id, $this->page['tag'], $this->page['title']);
+				$this->sess->user_trail[] = array ($page_id, $this->page['tag'], $this->page['title']);
 			}
 		}
 	}
@@ -5810,10 +5796,10 @@ class Wacko
 		// in the user trail because the engine parses them before it includes them
 		$this->set_user_trail($size);
 
-		if (isset($_SESSION['user_trail']))
+		if (isset($this->sess->user_trail))
 		{
-			$links		= $_SESSION['user_trail'];
-			#$count		= count($_SESSION['user_trail']);
+			$links		= $this->sess->user_trail;
+			#$count		= count($this->sess->user_trail);
 			$result		= '';
 			$size		= (int)$size;
 			$i			= 0;
@@ -6193,7 +6179,7 @@ class Wacko
 
 		if (!$user && $this->page['modified'])
 		{
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', strtotime($this->page['modified']) + 120).' GMT');
+			header('Last-Modified: ' . Ut::http_date(strtotime($this->page['modified']) + 120));
 		}
 
 		// check page watching
@@ -7122,7 +7108,8 @@ class Wacko
 				echo $inline ? '' : "<br />\n";
 				echo '<label for="captcha">'.$this->get_translation('Captcha').":</label>\n";
 				echo $inline ? '' : "<br />\n";
-				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />'."\n";
+				// STS XXXXXXXXXXXXX broken, for now
+				//echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />'."\n";
 				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
 				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
 				#echo $inline ? '' : "<br />\n";
@@ -7146,15 +7133,15 @@ class Wacko
 			if ($this->get_user_name() == false)
 			{
 				//anonymous user, check the captcha
-				if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['captcha']))
+				if (!empty($this->sess->freecap_word_hash) && !empty($_POST['captcha']))
 				{
-					if ($_SESSION['hash_func'](strtolower($_POST['captcha'])) == $_SESSION['freecap_word_hash'])
+					if ($this->sess->hash_func(strtolower($_POST['captcha'])) == $this->sess->freecap_word_hash)
 					{
 						// reset freecap session vars
 						// cannot stress enough how important it is to do this
 						// defeats re-use of known image with spoofed session id
-						$_SESSION['freecap_attempts'] = 0;
-						$_SESSION['freecap_word_hash'] = false;
+						$this->sess->freecap_attempts = 0;
+						$this->sess->freecap_word_hash = false;
 
 						// now process form
 						$word_ok = true;

@@ -334,12 +334,12 @@ else
 <?php
 
 // here we show messages
-if (!@$_SESSION['MinPHPVersion'])
+if (!@$this->sess->MinPHPVersion)
 {
 	if (version_compare(PHP_VERSION, PHP_MIN_VERSION) < 0)
 	{
 		$this->show_message($this->get_translation('ErrorMinPHPVersion'), 'error');
 	}
-	$_SESSION['MinPHPVersion'] = 1;
+	$this->sess->MinPHPVersion = 1;
 }
 $this->output_messages();

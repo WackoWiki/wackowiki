@@ -36,6 +36,7 @@ class GPG
 	var $sessdir;				// user session dir
 	var $stfile;				// gpg status file
 	var $srfile;				// gpg stderr file
+	var $sid;					// session id
 
 	// CONSTRUCTOR
 	function __construct(&$engine)
@@ -47,7 +48,8 @@ class GPG
 		$this->homedir	= rtrim($this->engine->config['gpg_home'], '/');
 		$this->tempdir	= rtrim($this->engine->config['gpg_temp'], '/');
 		$this->wrapper	= trim($this->engine->config['gpg_wrapper'], '/');
-		$this->sessdir	= $this->tempdir.'/'.session_id();
+		$this->sid		= $engine->sess->id();
+		$this->sessdir	= $this->tempdir.'/'.$this->sid;
 		$this->stfile	= $this->sessdir.'/'.GPG_STATUS_NAME;
 		$this->srfile	= $this->sessdir.'/'.GPG_STDERR_NAME;
 
@@ -184,7 +186,7 @@ class GPG
 		// in the clear part we use value separator for better
 		// handling in the token validation method (see below).
 		// hash context goes as single concatenated string
-		return $token = "$time|$procedure\n".hash('sha1', $this->engine->config['system_seed'].session_id().$time.$procedure);
+		return $token = "$time|$procedure\n".hash('sha1', $this->engine->config['system_seed'].$this->sid.$time.$procedure);
 	}
 
 	// check whether challenge token is correct and did not
@@ -216,7 +218,7 @@ class GPG
 		}
 
 		// recalculating MAC
-		$new_mac = hash('sha1', $this->engine->config['system_seed'].session_id().$token_time.$token_proc);
+		$new_mac = hash('sha1', $this->engine->config['system_seed'].$this->sid.$token_time.$token_proc);
 
 		// validating conditions. exact order is crucial!
 		if ($token_mac !== $new_mac)

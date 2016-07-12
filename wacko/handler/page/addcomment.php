@@ -20,8 +20,8 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->http->invalidate_page($this->supertag);
 		}
 
-		$_SESSION['body']		= $body;
-		$_SESSION['title']		= $title;
+		$this->sess->body		= $body;
+		$this->sess->title		= $title;
 
 		$this->set_message($this->get_translation('FormInvalid'), 'error');
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
@@ -71,14 +71,14 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->http->invalidate_page($this->supertag);
 		}
 
-		$_SESSION['preview']	= $body;
-		$_SESSION['body']		= $body;
-		$_SESSION['title']		= $title;
-		$_SESSION['guest']		= $guest;
+		$this->sess->preview	= $body;
+		$this->sess->body		= $body;
+		$this->sess->title		= $title;
+		$this->sess->guest		= $guest;
 
 		$this->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
 	}
-	else if (isset($_SESSION['comment_delay']) && ((time() - $_SESSION['comment_delay']) < $this->config['comment_delay']))
+	else if (isset($this->sess->comment_delay) && time() - $this->sess->comment_delay < $this->db->comment_delay)
 	{
 		// posting flood protection
 		if (!$user)
@@ -86,9 +86,9 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->http->invalidate_page($this->supertag);
 		}
 
-		$_SESSION['body']			= $body;
-		$_SESSION['title']			= $title;
-		$_SESSION['comment_delay']	= time();
+		$this->sess->body			= $body;
+		$this->sess->title			= $title;
+		$this->sess->comment_delay	= time();
 
 		$message = str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded'));
 		$this->set_message($message, 'error');
@@ -96,9 +96,9 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 	else if ($bad_words = $this->bad_words($body))
 	{
-		$_SESSION['body']			= $body;
-		$_SESSION['title']			= $title;
-		$_SESSION['comment_delay']	= time();
+		$this->sess->body			= $body;
+		$this->sess->title			= $title;
+		$this->sess->comment_delay	= time();
 
 		$message = $bad_words;
 		$this->set_message($message , 'error');
@@ -119,21 +119,21 @@ if ($this->has_access('comment') && $this->has_access('read'))
 				//not the right word
 				$error = $this->get_translation('CaptchaFailed');
 				$this->set_message($error, 'error');
-				$_SESSION['freecap_old_comment'] = $body;
+				$this->sess->freecap_old_comment = $body;
 			}
 			else
 			{
 				// captcha passed, empty session
-				$_SESSION['freecap_old_comment'] = '';
+				$this->sess->freecap_old_comment = '';
 			}
 		}
 
 		// everything's okay
-		$_SESSION['preview']		= '';
-		$_SESSION['body']			= '';
-		$_SESSION['title']			= '';
-		$_SESSION['guest']			= '';
-		$_SESSION['comment_delay']	= time();
+		$this->sess->preview		= '';
+		$this->sess->body			= '';
+		$this->sess->title			= '';
+		$this->sess->guest			= '';
+		$this->sess->comment_delay	= time();
 
 		// publish anonymously
 		if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])

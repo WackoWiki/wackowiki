@@ -215,6 +215,7 @@ $wacko_config_defaults = array(
 
 	'max_failed_login_count'		=> 8,
 	'system_message'				=> '',
+	'system_message_type'			=> '',
 
 	'enable_captcha'				=> 1,
 	'captcha_new_comment'			=> 1,

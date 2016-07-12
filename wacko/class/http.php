@@ -11,6 +11,7 @@ class Http
 	public		$page			= '';
 	public		$method			= '';
 	public		$tls_session	= false;
+	public		$session;						// class Session
 	private		$db;
 	private		$hash;
 	private		$query;
@@ -185,7 +186,7 @@ class Http
 		{
 			Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
-			$gmt	= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
+			$gmt	= Ut::http_date($mtime);
 			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
 			$lastm	= @$_SERVER['HTTP_IF_MODIFIED_SINCE'];
 
@@ -271,30 +272,15 @@ class Http
 		}
 	}
 
-	// SESSION HANDLING
 	private function session()
 	{
-		$secure = false;
-
-		// run in tls mode?
-		if ($this->db->tls && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->db->tls_proxy)) || $_SERVER['SERVER_PORT'] == '443' ) ))
-		{
-			$this->db->base_url	= str_replace('http://', 'https://' . ($this->db->tls_proxy ? $this->db->tls_proxy . '/' : ''), $this->db->base_url);
-			$secure					= true;
-		}
-
-		$_cookie_path = preg_replace('|https?://[^/]+|i', '', $this->db->base_url);
-
-		session_set_cookie_params(0, $_cookie_path, '', $secure, true);
-		session_name($this->db->cookie_prefix . SESSION_HANDLER_ID);
-
-		// Save session information where specified or with PHP's default
-		session_save_path(SESSION_HANDLER_PATH);
-
-		// Initialize the session
-		session_start();
+		$this->session = $sess = new Session;
+		$sess->cookie_path = $this->db->cookie_path;
+		$sess->cookie_secure = ($this->db->tls && $this->tls_session);
+		$sess->cookie_httponly = true;
+		$sess->save_path = CACHE_SESSION_DIR;
+		$sess->start($this->db->cookie_prefix . SESSION_HANDLER_ID);
 	}
-
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
 	//		Content-Security-Policy:
@@ -360,12 +346,13 @@ class Http
 		// disable browser cache for page
 		if ( !headers_sent() )
 		{
-			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');				// Date in the past
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');		// always modified
+			header('Expires: ' . Ut::http_date(-1));				// Date in the past
+			header('Last-Modified: ' . Ut::http_date());						// always modified
 			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
 			header('Cache-Control: post-check=0, pre-check=0', false);
 			header('Pragma: no-cache');										// HTTP 1.0
 		}
+		// STS: check into session nocache code!
 
 		// disable server cache for page
 		if (!$client_only)

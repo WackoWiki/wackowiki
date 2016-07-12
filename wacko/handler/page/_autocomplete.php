@@ -207,12 +207,10 @@ if (!headers_sent())
 {
 	header('HTTP/1.1 200 Ok');
 	//header('Content-type: text/javascript; charset=windows-1251');
-	header('Last-Modified: '.(string)(gmdate('D, d M Y H:i:s \G\M\T', time()) ));
+	header('Last-Modified: ' . Ut::http_date());
 }
 
 echo $ta_id;
 echo '~~~';
 echo implode('~~~', $out);
 die();
-
-?>

@@ -246,10 +246,10 @@ if ($this->has_access('read')
 					? $_POST['title']
 					: isset($this->page['title'])
 						? $this->page['title']
-						: isset($_SESSION['title'])
-							? empty($_SESSION['title'])
+						: isset($this->sess->title)
+							? empty($this->sess->title)
 								? $this->get_page_title($this->tag)
-								: $_SESSION['title']
+								: $this->sess->title
 							: $this->get_page_title($this->tag);
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
@@ -308,16 +308,16 @@ if ($this->has_access('read')
 		#$title	= $_POST['title'];
 	}
 
-	if (isset($_SESSION['body']) && $_SESSION['body'] != '')
+	if (isset($this->sess->body) && $this->sess->body != '')
 	{
-		$body				= $_SESSION['body'];
-		$_SESSION['body']	= '';
+		$body				= $this->sess->body;
+		$this->sess->body	= '';
 	}
 
-	if (isset($_SESSION['title']) && $_SESSION['title'] != '')
+	if (isset($this->sess->title) && $this->sess->title != '')
 	{
-		$title				= $_SESSION['title'];
-		$_SESSION['title']	= '';
+		$title				= $this->sess->title;
+		$this->sess->title	= '';
 	}
 	else if (isset($_POST['title']) && $_POST['title'] == true)
 	{
