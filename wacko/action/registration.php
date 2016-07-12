@@ -56,7 +56,7 @@ if (isset($_GET['confirm']))
 		$this->set_message($message, 'error');
 	}
 
-	$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.mt_rand(0, 1000)));
+	$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
 }
 else if (isset($_POST['action']) && $_POST['action'] == 'register')
 {
@@ -160,9 +160,9 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				else
 				{
 					$salt_length		= 10;
-					$salt_user_form		= Ut::random_token($salt_length);
-					$confirm			= hash('sha256', $password.time().mt_rand().$email.$this->unique_id());
-					$confirm_hash		= hash('sha256', $confirm.hash('sha256', $this->config['system_seed']));
+					$salt_user_form		= Ut::random_token($salt_length, 3);
+					$confirm			= Ut::random_token(21);
+					$confirm_hash		= hash('sha256', $confirm . hash('sha256', $this->config['system_seed']));
 					$password_hashed	= $user_name.$password;
 
 					$password_hashed	= password_hash(
@@ -280,7 +280,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						$this->get_translation('SiteEmailConfirm'));
 
 					$this->context[++$this->current_context] = '';
-					$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.mt_rand(0, 1000)));
+					$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5, 2)));
 				}
 			}
 		}

@@ -17,7 +17,7 @@ $param = isset($_GET['goback'])?  'goback=' . rawurlencode($_GET['goback']) : ''
 $this->http->ensure_tls($this->href('', '', $param));
 // was: $this->http->ensure_tls($this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )));
 
-$uncache = 'z=' . Ut::random_token(5, 2);
+$uncache = 'cache=' . Ut::random_token(5);
 
 // actions
 if (@$_GET['action'] === 'clearcookies')

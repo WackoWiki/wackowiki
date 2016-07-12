@@ -75,7 +75,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 
 				// forward
 				$this->set_message($this->get_translation('PasswordChanged'));
-				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.mt_rand(0, 1000)));
+				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
 			}
 
 			$this->set_message($error, 'error');
@@ -175,7 +175,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 
 			// forward
 			$this->set_message($this->get_translation('PasswordChanged'), 'success'); // // TODO: message is reset with session before it it can display the message set after the redirect
-			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.mt_rand(0, 1000)));
+			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
 		}
 	}
 

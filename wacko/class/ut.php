@@ -52,7 +52,8 @@ class Ut
 	// The token complexity can be defined in $token_complexity :
 	//		$token_complexity = 2 -- token consists of uppercase, lowercase, digits
 	//		$token_complexity = 3 -- token consists of uppercase, lowercase, digits and symbols
-	static function random_token($length = 10, $token_complexity = 3)
+	// default complexity is safe alphanumeric
+	static function random_token($length = 10, $token_complexity = 2)
 	{
 		static $syms = [
 			'abcdefghijklmnopqrstuvwxyz',
@@ -78,8 +79,8 @@ class Ut
 
 			for ($i = 0; $i < $length; $i++)
 			{
-				$class = mt_rand(0, $token_complexity);
-				$token .= $syms[$class][mt_rand(0, strlen($syms[$class]) - 1)];
+				$class = Ut::rand(0, $token_complexity);
+				$token .= $syms[$class][Ut::rand(0, strlen($syms[$class]) - 1)];
 
 				if (!isset($used[$class]))
 				{
@@ -324,4 +325,142 @@ class Ut
 				? unserialize($text)
 				: json_decode($text, true);
 	}
+
+	static function random_bytes($length)
+	{
+		if (function_exists('random_bytes'))
+		{
+			return random_bytes($length);
+		}
+
+		$sha = '';
+
+		if (function_exists('openssl_random_pseudo_bytes'))
+		{
+			$sha = openssl_random_pseudo_bytes($length, $strong);
+			if ($sha && $strong)
+			{
+				return $sha;
+			}
+		}
+
+		if (($fp = @fopen('/dev/urandom', 'rb')))
+		{
+			$sha .= fread($fp, $length);
+			fclose($fp);
+		}
+
+		$sha .= microtime(1);
+
+		if (function_exists('mcrypt_create_iv'))
+		{
+			$sha .= mcrypt_create_iv(21, MCRYPT_DEV_URANDOM);
+		}
+
+		$rnd = '';
+		for ($i = 0; $i < $length; $i++)
+		{
+			$sha  = hash('sha256', $sha . mt_rand());
+			$rnd .= chr(hexdec(substr($sha, mt_rand(0, 62), 2)));
+		}
+
+		return $rnd;
+	}
+
+	static function is_empty($val)
+	{
+		return $val === '' || $val === null || $val === false;
+	}
+
+	static function intval($number, $fail_open = false)
+	{
+		if (is_numeric($number))
+		{
+			$number += 0;
+		}
+
+		if (is_float($number) && $number > ~PHP_INT_MAX && $number < PHP_INT_MAX)
+		{
+			$number = (int) $number;
+		}
+
+		if (is_int($number))
+		{
+			return $number;
+		}
+
+		if ($fail_open)
+		{
+			return (int) $number;
+		}
+
+		throw new TypeError('Expected an integer');
+	}
+
+	// from Random_* Compatibility Library 
+	// Copyright (c) 2015 Paragon Initiative Enterprises
+	static function rand($min, $max)
+	{
+		$min = Ut::intval($min);
+		$max = Ut::intval($max);
+		
+		if ($min > $max)
+		{
+			throw new Error('Minimum value must be less than or equal to the maximum value');
+		}
+
+		$range = $max - $min;
+
+		if ($range == 0)
+		{
+			return $min;
+		}
+
+		if (!is_int($range))
+		{
+			$bytes = PHP_INT_SIZE;
+			$mask = ~0;
+			$valueShift = 0;
+		}
+		else
+		{
+			$bits = $bytes = $mask = 0;
+			while ($range > 0)
+			{
+				if ($bits % 8 === 0)
+				{
+				   ++$bytes;
+				}
+				++$bits;
+				$range >>= 1;
+				$mask = ($mask << 1) | 1;
+			}
+			$valueShift = $min;
+		}
+
+		$attempts = 0;
+		do
+		{
+			if ($attempts++ > 128)
+			{
+				throw new Exception('random_int: RNG is broken - too many rejections');
+			}
+
+			$randomByteString = Ut::random_bytes($bytes);
+
+			$val = 0;
+			for ($i = 0; $i < $bytes; ++$i)
+			{
+				$val |= ($val << 8) ^ ord($randomByteString[$i]);
+			}
+
+			$val &= $mask;
+			$val += $valueShift;
+
+		}
+		while (!is_int($val) || $val > $max || $val < $min);
+
+		return $val;
+	}
+
 }

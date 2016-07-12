@@ -166,7 +166,7 @@ else if ($user = $this->get_user())
 		}
 		if ($email)
 		{
-			$confirm		= hash('sha256', $user['password'] . mt_rand() . time() . mt_rand() . $email . mt_rand());
+			$confirm		= Ut::random_token(21);
 			$confirm_hash	= hash('sha256', $confirm . hash('sha256', $this->config['system_seed']));
 
 			$this->sql_query(

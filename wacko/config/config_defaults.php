@@ -241,9 +241,6 @@ $wacko_config_defaults = array(
 	'form_token_time'				=> 7200,
 	'form_token_sid_guests'			=> 1,
 
-	'rand_seed_last_update'			=> 0,
-	'rand_seed'						=> '',
-
 	'system_seed'					=> '', // installer autogenerates random one
 	'hashid_seed'					=> '', // installer autogenerates random one
 	'recovery_password'				=> '',

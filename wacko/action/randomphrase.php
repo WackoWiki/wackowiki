@@ -36,6 +36,6 @@ else
 		$lines = preg_split($splitexpr, $strings);
 		$lines = array_values(array_filter($lines, 'trim'));
 
-		echo $lines[mt_rand(0, count($lines) - 1)];
+		echo $lines[Ut::rand(0, count($lines) - 1)];
 	}
 }

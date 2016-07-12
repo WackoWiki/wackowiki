@@ -92,7 +92,7 @@ if (($profile = @$_REQUEST['profile']))
 			{
 				// compose message
 				$prefix		= rtrim(str_replace(array('https://www.', 'https://', 'http://www.', 'http://'), '', $this->config['base_url']), '/');
-				$msg_id		= date('ymdHi').'.'.mt_rand(100000, 999999).'@'.$prefix;
+				$msg_id		= date('ymdHi').'.'.Ut::rand(100000, 999999).'@'.$prefix;
 				$subject	= $_POST['mail_subject'];
 				if ($subject === '')
 				{

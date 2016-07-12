@@ -37,7 +37,7 @@ $count = $this->load_single(
 $page = $this->load_single(
 		"SELECT p.supertag, p.tag ".
 		$query.
-		"LIMIT " . mt_rand(0, $count['n'] - 1) . ", 1"
+		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
 		, true);
 
 if (!$page)
