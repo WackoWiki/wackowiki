@@ -6172,7 +6172,7 @@ class Wacko
 			foreach ($page_options as $key)
 			{
 				// ignore perpage page settings with empty / null as value
-				if (($val = $this->page[$key]))
+				if (!Ut::is_empty($val = $this->page[$key]))
 				{
 					$this->config[$key] = $val;
 				}
