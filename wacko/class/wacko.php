@@ -7108,8 +7108,7 @@ class Wacko
 				echo $inline ? '' : "<br />\n";
 				echo '<label for="captcha">'.$this->get_translation('Captcha').":</label>\n";
 				echo $inline ? '' : "<br />\n";
-				// STS XXXXXXXXXXXXX broken, for now
-				//echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />'."\n";
+				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?for=' . $this->db->cookie_prefix.'" id="freecap" alt="'.$this->get_translation('Captcha').'" />'."\n";
 				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
 				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
 				#echo $inline ? '' : "<br />\n";
@@ -7135,7 +7134,7 @@ class Wacko
 				//anonymous user, check the captcha
 				if (!empty($this->sess->freecap_word_hash) && !empty($_POST['captcha']))
 				{
-					if ($this->sess->hash_func(strtolower($_POST['captcha'])) == $this->sess->freecap_word_hash)
+					if ($this->sess['hash_func'](strtolower($_POST['captcha'])) == $this->sess->freecap_word_hash)
 					{
 						// reset freecap session vars
 						// cannot stress enough how important it is to do this

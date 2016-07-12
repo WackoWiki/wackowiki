@@ -279,7 +279,7 @@ class Http
 		$sess->cookie_secure = ($this->db->tls && $this->tls_session);
 		$sess->cookie_httponly = true;
 		$sess->save_path = CACHE_SESSION_DIR;
-		$sess->start($this->db->cookie_prefix . SESSION_HANDLER_ID);
+		$sess->start($this->db->cookie_prefix);
 	}
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)

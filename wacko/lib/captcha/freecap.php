@@ -32,23 +32,14 @@ define('IN_CAPTCHA', true);
 // get absolute path to load config file, because the relative path to the page may vary
 $working_dir = preg_replace('/\/lib\/captcha/', '/', __DIR__);
 
-// load config file containing cookie prefix, session handler id and session handler path
-require_once($working_dir.'config/captcha.php');
+define('IN_WACKO', true);
+require_once $working_dir . 'config/constants.php';
+require_once $working_dir . 'class/ut.php';
+require_once $working_dir . 'class/session.php';
 
-$catch_session_name = COOKIE_PREFIX.SESSION_HANDLER_ID;
-
-if(isset($_GET[$catch_session_name]))
-{
-	session_name($catch_session_name);
-	session_id($_GET[$catch_session_name]);
-
-	// Save session information where specified or with PHP's default
-	session_save_path(SESSION_HANDLER_PATH);
-
-	// we don't actually start a new session - we open the existing one by name & id and add our variables
-	session_start();
-}
-
+$sess = new Session;
+$sess->save_path = CACHE_SESSION_DIR;
+$sess->start(@$_GET['for']);
 
 //////////////////////////////////////////////////////
 ////// User Defined Vars:
@@ -83,7 +74,7 @@ $seed_func = 'mt_srand';
 // crc32 supported by PHP4.0.1+
 $hash_func = 'sha1';
 // store in session so can validate in form processor
-$_SESSION['hash_func'] = $hash_func;
+$sess->hash_func = $hash_func;
 
 // image type:
 // possible values: "jpg", "png", "gif"
@@ -260,13 +251,13 @@ $im2		= ImageCreate($width, $height);
 //////////////////////////////////////////////////////
 ////// Avoid Brute Force Attacks:
 //////////////////////////////////////////////////////
-if(empty($_SESSION['freecap_attempts']))
+if(empty($sess['freecap_attempts']))
 {
-	$_SESSION['freecap_attempts'] = 1;
+	$sess['freecap_attempts'] = 1;
 }
 else
 {
-	$_SESSION['freecap_attempts']++;
+	$sess['freecap_attempts']++;
 
 	// if more than ($max_attempts) refreshes, block further refreshes
 	// can be negated by connecting with new session id
@@ -275,9 +266,9 @@ else
 	// in short, there's little point trying to avoid brute forcing
 	// the best way to protect against BF attacks is to ensure the dictionary is not
 	// accessible via the web or use random string option
-	if($_SESSION['freecap_attempts'] > $max_attempts)
+	if($sess['freecap_attempts'] > $max_attempts)
 	{
-		$_SESSION['freecap_word_hash'] = false;
+		$sess['freecap_word_hash'] = false;
 
 		$bg = ImageColorAllocate($im, 255, 255, 255);
 		ImageColorTransparent($im, $bg);
@@ -444,7 +435,7 @@ else
 // so even if your site is 100% secure, someone else's site on your server might not be
 // hence, even if attackers can read the session file, they can't get the freeCap word
 // (though most hashes are easy to brute force for simple strings)
-$_SESSION['freecap_word_hash'] = $hash_func($word);
+$sess['freecap_word_hash'] = $hash_func($word);
 
 
 
@@ -932,4 +923,3 @@ unset($font_locations);
 // output final image :-)
 send_image($im);
 // (sendImage also destroys all used images)
-?>
