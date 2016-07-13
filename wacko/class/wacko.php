@@ -40,7 +40,6 @@ class Wacko
 	var $_formatter_noautolinks	= null;
 	var $numerate_links			= null;
 	var $post_wacko_action		= null;
-	var $_userhost				= null;
 	var $html_head				= '';
 	var $hide_article_header	= false;
 	var $paragrafica_styles		= array(
@@ -4537,11 +4536,7 @@ class Wacko
 
 	function get_user_ip()
 	{
-		if (!$this->_userhost)
-		{
-			$this->_userhost = $this->http->real_ip();
-		}
-		return $this->_userhost;
+		return $this->http->real_ip;
 	}
 
 	// extract user data from the session array

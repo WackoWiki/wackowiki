@@ -194,7 +194,7 @@ class SessionFileStore extends Session
 					return false;
 				}
 				// destructive fix attempt
-				@unlink($fname) or @rmdir($fname);
+				unlink($fname) or rmdir($fname);
 				clearstatcache();
 				if (@file_exists($fname))
 				{
@@ -205,17 +205,18 @@ class SessionFileStore extends Session
 		}
 		else
 		{
+			if (!$create)
+			{
+				return false;
+			}
+
 			$dir = dirname($fname);
 			if (@file_exists($dir))
 			{
 				if (!is_writeable($dir) || is_link($dir) || !is_dir($dir))
 				{
-					if (!$create)
-					{
-						return false;
-					}
 					// destructive fix attempt
-					@unlink($dir) or @rmdir($dir);
+					unlink($dir) or rmdir($dir);
 					clearstatcache();
 					if (@file_exists($dir))
 					{
@@ -224,7 +225,7 @@ class SessionFileStore extends Session
 				}
 			}
 
-			if (!@file_exists($dir) && $create)
+			if (!@file_exists($dir))
 			{
 				mkdir($dir, ((($this->file_mode >> 2) & 0111) | $this->file_mode), true);
 			}
