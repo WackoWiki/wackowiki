@@ -249,10 +249,10 @@ function admin_db_backup(&$engine, &$module)
 			{
 				$check = false;
 
-				if ($dir != CACHE_DIR)
-				{
+				//if ($dir != (CACHE_FEED_DIR || CACHE_PAGE_DIR || CACHE_SQL_DIR))
+				//{
 					$check = true;
-				}
+				//}
 
 				$dir = rtrim($dir, '/');
 
