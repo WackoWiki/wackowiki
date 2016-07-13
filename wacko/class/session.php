@@ -213,16 +213,27 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	// shutdown-registered worker
 	public function terminator($cwd)
 	{
-		$this->write_close();
-
 		// shutdown run with cwd == /
 		chdir($cwd);
+
+		$this->write_close();
 
 		if (Ut::rand(0, 99) < $this->gc_probability)
 		{
 			$this->store_gc();
 			// "purged $returned expired session objects"
 		}
+	}
+
+	// those two is for possible override in store methods
+	protected function store_generate_id()
+	{
+		return Ut::random_token(21);
+	}
+
+	protected function store_validate_id($id)
+	{
+		return preg_match('/^[0-9a-zA-Z]{4,}$/', $id);
 	}
 
 	private function set_new_id()
