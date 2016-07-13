@@ -135,7 +135,7 @@ class Diag
 
 				if ($config['debug'] >= 3)
 				{
-					Ut::debug_print_r($engine->sess);
+					Ut::debug_print_r($engine->sess->toArray());
 					Ut::debug_print_r($engine->context);
 					// Ut::debug_print_r($config);
 					// Ut::debug_print_r($engine->page);

@@ -274,11 +274,11 @@ class Http
 
 	private function session()
 	{
-		$this->session = $sess = new Session;
+		$this->session = $sess = new SessionFileStore;
 		$sess->cookie_path = $this->db->cookie_path;
 		$sess->cookie_secure = ($this->db->tls && $this->tls_session);
 		$sess->cookie_httponly = true;
-		$sess->save_path = CACHE_SESSION_DIR;
+		$sess->file_path = CACHE_SESSION_DIR;
 		$sess->start($this->db->cookie_prefix);
 	}
 

@@ -29,17 +29,13 @@
 //	$_SESSION = $backup;
 //	$this->regenerationNeeded = FALSE;
 
-
-class Session extends ArrayObject
+abstract class Session extends ArrayObject // for concretization extend by some SessionStoreInterface'd class
 {
 	private $active = false;
 	private $send_cookie = false;
 	private $name = '';				// NB [0-9a-zA-Z]+ -- should be short and descriptive (i.e. for users with enabled cookie warnings)
 	private $id = null;				// NB [0-9a-zA-Z,-]+
 
-	public $save_path = '/tmp';
-	public $save_mode = 0600;
-	public $save_encrypt = 1;
 	public $gc_probability = 2;
 	public $gc_maxlifetime = 1440;
 	public $cookie_lifetime = 0;	// lifetime of the cookie in seconds which is sent to the browser. The value 0 means "until the browser is closed."
@@ -59,12 +55,17 @@ class Session extends ArrayObject
 		parent::__construct([], parent::ARRAY_AS_PROPS);
 	}
 
+	public function toArray()
+	{
+		return $this->getArrayCopy();
+	}
+
 	// finishes session without saving data. Thus the original values in session data are kept. 
 	public function abort()
 	{
 		if ($this->active)
 		{
-			$this->jar_close();
+			$this->store_close();
 			$this->active = false;
 		}
 	}
@@ -93,7 +94,7 @@ class Session extends ArrayObject
 		}
 
 		// close & unlink
-		$this->jar_destroy();
+		$this->store_destroy();
 
 		$this->id = null;
 		$this->active = false;
@@ -108,7 +109,7 @@ class Session extends ArrayObject
 			return false;
 		}
 
-		$this->jar_destroy();
+		$this->store_destroy();
 		$this->id = null;
 		$this->initialize();
 
@@ -127,7 +128,7 @@ class Session extends ArrayObject
 		{
 			if ($delete_old)
 			{
-				$this->jar_destroy();
+				$this->store_destroy();
 			}
 
 			$this->set_new_id();
@@ -156,26 +157,26 @@ class Session extends ArrayObject
 			$this->name = $name;
 		}
 
-		$this->id = $id;
 		$this->send_cookie = 1;
 
-		if (!$this->id && ($this->id = @$_COOKIE[$this->name]))
+		if (!$id && ($id = @$_COOKIE[$this->name]))
 		{
 			$this->send_cookie = 0;
 		}
 
-		if ($this->id && $this->referer_check
+		if ($id && $this->referer_check
 			&& strstr($_SERVER['HTTP_REFERER'], $this->referer_check) === false)
 		{
-			$this->id = null;
+			$id = null;
 		}
 
-		if ($this->id && preg_match('/[\s<>\'"\\\\]/', $this->id))
+		if ($id && !$this->store_validate_id($id))
 		{
-			$this->id = null;
+			$id = null;
 		}
 
-		$this->jar_construct();
+		$this->id = $id;
+		$this->store_open($this->name);
 		$this->initialize();
 		$this->cache_limiter(); // TODO - why it is in the session?
 
@@ -202,9 +203,9 @@ class Session extends ArrayObject
 	{
 		if ($this->active)
 		{
-			$this->jar_write(serialize($this->getArrayCopy()));
+			$this->store_write($this->id, serialize($this->toArray()));
 			// check error!
-			$this->jar_close();
+			$this->store_close();
 			$this->active = false;
 		}
 	}
@@ -219,20 +220,15 @@ class Session extends ArrayObject
 
 		if (Ut::rand(0, 99) < $this->gc_probability)
 		{
-			$this->jar_gc();
+			$this->store_gc();
 			// "purged $returned expired session objects"
 		}
 	}
 
 	private function set_new_id()
 	{
-		$this->id = $this->generate_id();
+		$this->id = $this->store_generate_id();
 		$this->send_cookie();
-	}
-
-	private function generate_id()
-	{
-		return Ut::random_token(21);
 	}
 
 	private function reset_id()
@@ -246,7 +242,7 @@ class Session extends ArrayObject
 
 	private function initialize()
 	{
-		$text = $this->jar_read();
+		$text = $this->store_read($this->id);
 
 		if ($text === false)
 		{
@@ -255,7 +251,7 @@ class Session extends ArrayObject
 			$this->set_new_id();
 
 			// create & lock new jar
-			if ($this->jar_read() !== '')
+			if ($this->store_read($this->id, true) !== '')
 			{
 				// error!
 			}
@@ -412,336 +408,5 @@ class Session extends ArrayObject
 		header($cookie, false); // false -- add, not replace
 
 		return true;
-	}
-
-	// ================================================================
-	// session jar
-
-	private $jar_opened = false;
-	private $jar_id = null;
-	private $jar_fd = null;
-	private $jar_fname;
-	private $jar_size;
-	private $jar_key = null;
-
-	private function jar_construct()
-	{
-		if (!$this->jar_opened)
-		{
-			if ($this->save_encrypt && extension_loaded('openssl') && extension_loaded('mbstring'))
-			{
-				$name = $this->name . 'Rands';
-
-				$data = strtr((string) @$_COOKIE[$name], '-_', '+/');
-				if (($mod4 = strlen($data) & 3))
-				{
-					$data .= substr('====', $mod4);
-				}
-				$key = base64_decode($data);
-
-				if (mb_strlen($key, '8bit') != 64)
-				{
-					$key = Ut::random_bytes(64); // 32 for encryption and 32 for authentication
-					$data = base64_encode($key);
-					$data = strtr($data, ['+' => '-', '/' => '_', '=' => '']);
-					$this->_send_cookie($name, $data);
-				}
-
-				$this->jar_key = $key;
-			}
-
-			$this->jar_opened = 1;
-		}
-	}
-
-	private function jar_close()
-	{
-		if ($this->jar_fd)
-		{
-			flock($this->jar_fd, LOCK_UN);
-			fclose($this->jar_fd);
-			$this->jar_fd = null;
-		}
-	}
-
-	private function jar_open_file()
-	{
-		$id = $this->id;
-		// check for already opened session file
-		if ($this->jar_fd && $this->jar_id === $id)
-		{
-			$stat = fstat($this->jar_fd);
-			$this->jar_size = $stat['size'];
-			rewind($this->jar_fd);
-			return true;
-		}
-
-		$this->jar_close();
-
-		if (strlen($id) < 4)
-		{
-			return false;
-		}
-		$fname = Ut::join_path($this->save_path, $this->name . substr($id, 0, 1), substr($id, 1, 2), substr($id, 3));
-
-		clearstatcache();
-		if (@file_exists($fname))
-		{
-			// we REQUIRE existant session file to be writable usual file and not symlink
-			if (!is_writeable($fname) || is_link($fname) || !is_file($fname))
-			{
-				// destructive fix attempt
-				@unlink($fname) or @rmdir($fname);
-				clearstatcache();
-				if (@file_exists($fname))
-				{
-					// to no avail... it's OK, let's try other session id ;)
-					return false;
-				}
-			}
-		}
-		else
-		{
-			$dir = dirname($fname);
-			if (@file_exists($dir))
-			{
-				if (!is_writeable($dir) || is_link($dir) || !is_dir($dir))
-				{
-					// destructive fix attempt
-					@unlink($dir) or @rmdir($dir);
-					clearstatcache();
-					if (@file_exists($dir))
-					{
-						return false;
-					}
-				}
-			}
-
-			if (!@file_exists($dir))
-			{
-				mkdir($dir, ((($this->save_mode >> 2) & 0111) | $this->save_mode), true);
-			}
-			// delegate all erroring further, to fopen
-		}
-
-		// open & lock jar while trying to avoid race condition
-		for ($try = 0;; ++$try)
-		{
-			if ($try > 10 || !($fd = fopen($fname, 'c+b')))
-			{
-				break;
-			}
-			if (!flock($fd, LOCK_EX))
-			{
-				fclose($fd);
-				break;
-			}
-
-			// we need to be sure to open and lock one and only session jar
-			// this race can be done by unlink/unlock/close in jar_destroy
-			clearstatcache();
-			if (($stat0 = fstat($fd))
-				&& ($stat = stat($fname))
-				&& $stat0['ino'] == $stat['ino'])
-			{
-				$this->jar_fd = $fd;
-				$this->jar_fname = $fname;
-				$this->jar_size = $stat0['size'];
-				$this->jar_id = $this->id;
-				chmod($fname, $this->save_mode);
-				return true;
-			}
-
-			flock($fd, LOCK_UN);
-			fclose($fd);
-		}
-
-		return false;
-	}
-
-	private function jar_destroy()
-	{
-		if ($this->jar_fd)
-		{
-			// ensure no one to use destroyed cache immediately after unlock
-			unlink($this->jar_fname);
-			$this->jar_close();
-		}
-	}
-
-	private function jar_read()
-	{
-		if (($this->jar_open_file()))
-		{
-			if (!$this->jar_size)
-			{
-				return '';
-			}
-
-			if (!Ut::is_empty($text = fread($this->jar_fd, $this->jar_size)))
-			{
-				$text = $this->decrypt($text);
-				$text and $text = gzinflate($text);
-			}
-			return $text;
-		}
-		// error
-
-		return false;
-	}
-
-	private function jar_write($text)
-	{
-		if (($this->jar_open_file()))
-		{
-			$text = gzdeflate($text, 9);
-			$text = $this->encrypt($text);
-
-			$size = strlen($text);
-
-			if (fwrite($this->jar_fd, $text, $size) == $size
-				&& fflush($this->jar_fd)
-				&& ftruncate($this->jar_fd, ftell($this->jar_fd)))
-			{
-				return true;
-			}
-		}
-		// error
-
-		return false;
-	}
-
-	private function jar_gc()
-	{
-		// STS: session files bound to session cookie name, so hope that ONE session name will be used in each run ;)
-		$lvl1 = [];
-		$preflen = strlen($this->name);
-		foreach ((array) scandir($this->save_path, SCANDIR_SORT_NONE) as $file)
-		{
-			if (!strncmp($file, $this->name, $preflen) && strlen($file) == $preflen + 1)
-			{
-				$lvl1[] = $file;
-			}
-		}
-		shuffle($lvl1);
-
-		$lvl2 = [];
-		foreach ($lvl1 as $l1)
-		{
-			$l1p = Ut::join_path($this->save_path, $l1);
-			foreach ((array) scandir($l1p, SCANDIR_SORT_NONE) as $file)
-			{
-				if (fnmatch('[0-9a-zA-Z][0-9a-zA-Z]', $file))
-				{
-					$lvl2[] = $l1p . '/' . $file;
-				}
-			}
-			if (count($lvl2) > 500) break;
-		}
-		shuffle($lvl2);
-
-		$nstats = $ndels = 0;
-		$past = time() - $this->gc_maxlifetime;
-		foreach ($lvl2 as $l2)
-		{
-			$stats = $dels = 0;
-			foreach ((array) scandir($l2, SCANDIR_SORT_NONE) as $file)
-			{
-				if ($file[0] == '.') continue;
-				$full = $l2 . '/' . $file;
-				++$stats;
-				++$nstats;
-				if (filemtime($full) < $past && unlink($full))
-				{
-					++$dels;
-					++$ndels;
-				}
-			}
-			if ($stats == $dels)
-			{
-				rmdir($l2);
-			}
-			if ($nstats > 600 || $ndels > 100) break;
-		}
-		Ut::dbg('gc', $nstats, $ndels);
-
-		return $ndels;
-	}
-
-	// session store encryption	  ====================================================
-	// done by Enrico Zimuel (https://github.com/ezimuel/PHP-Secure-Session)
-	protected function encrypt($data)
-	{
-		if ($this->jar_key)
-		{
-			$iv = Ut::random_bytes(16); // AES block size in CBC mode
-			// Encryption
-			$ciphertext = openssl_encrypt(
-				$data,
-				'AES-256-CBC',
-				mb_substr($this->jar_key, 0, 32, '8bit'),
-				OPENSSL_RAW_DATA,
-				$iv
-			);
-			// Authentication
-			$hmac = hash_hmac(
-				'SHA256',
-				$iv . $ciphertext,
-				mb_substr($this->jar_key, 32, null, '8bit'),
-				true
-			);
-			$data = $hmac . $iv . $ciphertext;
-		}
-		return $data;
-	}
-
-	protected function decrypt($data)
-	{
-		if ($this->jar_key)
-		{
-			$hmac		= mb_substr($data, 0, 32, '8bit');
-			$iv			= mb_substr($data, 32, 16, '8bit');
-			$ciphertext = mb_substr($data, 48, null, '8bit');
-			// Authentication
-			$hmacNew = hash_hmac(
-				'SHA256',
-				$iv . $ciphertext,
-				mb_substr($this->jar_key, 32, null, '8bit'),
-				true
-			);
-			if (!$this->hash_equals($hmac, $hmacNew))
-			{
-				return false; // authentication failed
-			}
-			// Decrypt
-			$data = openssl_decrypt(
-				$ciphertext,
-				'AES-256-CBC',
-				mb_substr($this->jar_key, 0, 32, '8bit'),
-				OPENSSL_RAW_DATA,
-				$iv
-			);
-		}
-		return $data;
-	}
-
-	protected function hash_equals($expected, $actual)
-	{
-		$expected	  = (string) $expected;
-		$actual		  = (string) $actual;
-		if (function_exists('hash_equals'))
-		{
-			return hash_equals($expected, $actual); // since 5.6.0
-		}
-		$lenExpected  = mb_strlen($expected, '8bit');
-		$lenActual	  = mb_strlen($actual, '8bit');
-		$len		  = min($lenExpected, $lenActual);
-		$result = 0;
-		for ($i = 0; $i < $len; $i++)
-		{
-			$result |= ord($expected[$i]) ^ ord($actual[$i]);
-		}
-		$result |= $lenExpected ^ $lenActual;
-		return ($result === 0);
 	}
 }
