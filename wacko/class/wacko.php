@@ -4749,8 +4749,7 @@ class Wacko
 	{
 		$this->delete_cookie('sid', true, false);
 
-		$this->sess->destroy(true);
-		return $this->sess->start();
+		return $this->sess->restart();
 	}
 
 	// restore login_token/password/etc from auth cookie
@@ -4794,8 +4793,7 @@ class Wacko
 		$this->delete_cookie('auth', true, true);
 		$this->delete_cookie('sid', true, false);
 
-		$this->sess->destroy(true);
-		$this->sess->start();
+		$this->sess->restart();
 	}
 
 	// Increment the number of times the user has logegd in

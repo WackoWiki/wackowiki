@@ -19,6 +19,17 @@
 // ! Check your session configuration.
 // - Force users to re-authenticate on any destructive or critical actions.
 
+// if ($_SESSION['SESSION_START_TIME'] < (strtotime("-1 hour"))
+//     || $_SESSION['_USER_LAST_ACTIVITY'] < (strtotime("-20 mins")))
+
+//	session_regenerate_id(TRUE);
+//	session_write_close();
+//	$backup = $_SESSION;
+//	session_start();
+//	$_SESSION = $backup;
+//	$this->regenerationNeeded = FALSE;
+
+
 class Session extends ArrayObject
 {
 	private $active = false;
@@ -86,6 +97,21 @@ class Session extends ArrayObject
 
 		$this->id = null;
 		$this->active = false;
+		return true;
+	}
+
+	// effectively destroy(true) + start()
+	public function restart()
+	{
+		if (!$this->active)
+		{
+			return false;
+		}
+
+		$this->jar_destroy();
+		$this->id = null;
+		$this->initialize();
+
 		return true;
 	}
 
@@ -222,14 +248,29 @@ class Session extends ArrayObject
 	{
 		$text = $this->jar_read();
 
-		if (!$this->active)
+		if ($text === false)
 		{
-			$this->reset_id();
-			$this->active = true;
+			// here we generate new session id for utterly new, or stale/evil id offered by client
+			// (or file error, per se)
+			$this->set_new_id();
+
+			// create & lock new jar
+			if ($this->jar_read() !== '')
+			{
+				// error!
+			}
+		}
+		else if (!$this->active)
+		{
+			$this->reset_id(); // STS lone use
 		}
 
-		$data = unserialize($text);
-		$data or $data = [];
+		$this->active = true;
+
+		if (!$text || !($data = unserialize($text)))
+		{
+			$data = [];
+		}
 		$this->exchangeArray($data);
 	}
 
@@ -379,7 +420,8 @@ class Session extends ArrayObject
 	private $jar_opened = false;
 	private $jar_id = null;
 	private $jar_fd = null;
-	private $jar_stat;
+	private $jar_fname;
+	private $jar_size;
 	private $jar_key = null;
 
 	private function jar_construct()
@@ -389,12 +431,22 @@ class Session extends ArrayObject
 			if ($this->save_encrypt && extension_loaded('openssl') && extension_loaded('mbstring'))
 			{
 				$name = $this->name . 'Rands';
-				$key = base64_decode(@$_COOKIE[$name]);
+
+				$data = strtr((string) @$_COOKIE[$name], '-_', '+/');
+				if (($mod4 = strlen($data) & 3))
+				{
+					$data .= substr('====', $mod4);
+				}
+				$key = base64_decode($data);
+
 				if (mb_strlen($key, '8bit') != 64)
 				{
 					$key = Ut::random_bytes(64); // 32 for encryption and 32 for authentication
-					$this->_send_cookie($name, base64_encode($key));
+					$data = base64_encode($key);
+					$data = strtr($data, ['+' => '-', '/' => '_', '=' => '']);
+					$this->_send_cookie($name, $data);
 				}
+
 				$this->jar_key = $key;
 			}
 
@@ -412,63 +464,96 @@ class Session extends ArrayObject
 		}
 	}
 
-	private function jar_pathname($create = false)
-	{
-		if (strlen($id = $this->id) < 4)
-		{
-			return false;
-		}
-
-		$path = Ut::join_path($this->save_path, $this->name . substr($id, 0, 1), substr($id, 1, 2), substr($id, 3));
-
-		clearstatcache();
-		if (@file_exists($path))
-		{
-			if (@is_writeable($path) && !is_link($path) && is_file($path))
-			{
-				return $path;
-			}
-		}
-		else if ($create)
-		{
-			$dir = dirname($path);
-			if ((@file_exists($dir) && is_writeable($dir) && is_dir($dir))
-				|| mkdir($dir, ((($this->save_mode >> 2) & 0111) | $this->save_mode), true))
-			{
-				return $path;
-			}
-		}
-
-		return false;
-	}
-
 	private function jar_open_file()
 	{
-		if ($this->jar_fd && $this->jar_id === $this->id)
+		$id = $this->id;
+		// check for already opened session file
+		if ($this->jar_fd && $this->jar_id === $id)
 		{
+			$stat = fstat($this->jar_fd);
+			$this->jar_size = $stat['size'];
 			rewind($this->jar_fd);
-			$this->jar_stat = fstat($this->jar_fd);
 			return true;
 		}
 
 		$this->jar_close();
 
-		if (($fname = $this->jar_pathname(true)))
+		if (strlen($id) < 4)
 		{
-			if (($fd = fopen($fname, 'c+b')))
-			{
-				// check for evil symlinks..
-				if (flock($fd, LOCK_EX) && ($this->jar_stat = fstat($fd)))
-				{
-					$this->jar_fd = $fd;
-					$this->jar_id = $this->id;
-					chmod($fname, $this->save_mode);
-					return true;
-				}
+			return false;
+		}
+		$fname = Ut::join_path($this->save_path, $this->name . substr($id, 0, 1), substr($id, 1, 2), substr($id, 3));
 
-				fclose($fd);
-				// unlink?
+		clearstatcache();
+		if (@file_exists($fname))
+		{
+			// we REQUIRE existant session file to be writable usual file and not symlink
+			if (!is_writeable($fname) || is_link($fname) || !is_file($fname))
+			{
+				// destructive fix attempt
+				@unlink($fname) or @rmdir($fname);
+				clearstatcache();
+				if (@file_exists($fname))
+				{
+					// to no avail... it's OK, let's try other session id ;)
+					return false;
+				}
 			}
+		}
+		else
+		{
+			$dir = dirname($fname);
+			if (@file_exists($dir))
+			{
+				if (!is_writeable($dir) || is_link($dir) || !is_dir($dir))
+				{
+					// destructive fix attempt
+					@unlink($dir) or @rmdir($dir);
+					clearstatcache();
+					if (@file_exists($dir))
+					{
+						return false;
+					}
+				}
+			}
+
+			if (!@file_exists($dir))
+			{
+				mkdir($dir, ((($this->save_mode >> 2) & 0111) | $this->save_mode), true);
+			}
+			// delegate all erroring further, to fopen
+		}
+
+		// open & lock jar while trying to avoid race condition
+		for ($try = 0;; ++$try)
+		{
+			if ($try > 10 || !($fd = fopen($fname, 'c+b')))
+			{
+				break;
+			}
+			if (!flock($fd, LOCK_EX))
+			{
+				fclose($fd);
+				break;
+			}
+
+			// we need to be sure to open and lock one and only session jar
+			// this race can be done by unlink/unlock/close in jar_destroy
+			clearstatcache();
+			if (($stat0 = fstat($fd))
+				&& ($stat = stat($fname))
+				&& $stat0['ino'] == $stat['ino'])
+			{
+				$this->jar_fd = $fd;
+				$this->jar_fname = $fname;
+				$this->jar_size = $stat0['size'];
+				$this->jar_id = $this->id;
+				chmod($fname, $this->save_mode);
+				return true;
+			}
+
+			flock($fd, LOCK_UN);
+			fclose($fd);
 		}
 
 		return false;
@@ -476,41 +561,31 @@ class Session extends ArrayObject
 
 	private function jar_destroy()
 	{
-		$this->jar_close();
-		if (($fname = $this->jar_pathname()))
+		if ($this->jar_fd)
 		{
-			unlink($fname);
+			// ensure no one to use destroyed cache immediately after unlock
+			unlink($this->jar_fname);
+			$this->jar_close();
 		}
 	}
 
 	private function jar_read()
 	{
-		if (!$this->jar_pathname())
-		{
-			// here we generate new session id for utterly new, or stale/evil id offered by client
-			$this->set_new_id();
-			$this->active = true;
-		}
-
 		if (($this->jar_open_file()))
 		{
-			if (($size = $this->jar_stat['size']) == 0)
+			if (!$this->jar_size)
 			{
 				return '';
 			}
 
-			if (($text = fread($this->jar_fd, $size)) !== false
-				&& strlen($text) == $size)
+			if (!Ut::is_empty($text = fread($this->jar_fd, $this->jar_size)))
 			{
-				if ($text)
-				{
-					$text = $this->decrypt($text);
-					$text and $text = gzinflate($text);
-				}
-				return $text;
+				$text = $this->decrypt($text);
+				$text and $text = gzinflate($text);
 			}
-			// error
+			return $text;
 		}
+		// error
 
 		return false;
 	}
@@ -524,17 +599,14 @@ class Session extends ArrayObject
 
 			$size = strlen($text);
 
-			if ($size < $this->jar_stat['size'])
-			{
-				ftruncate($this->jar_fd, $size);
-			}
-
-			if (fwrite($this->jar_fd, $text, $size) == $size)
+			if (fwrite($this->jar_fd, $text, $size) == $size
+				&& fflush($this->jar_fd)
+				&& ftruncate($this->jar_fd, ftell($this->jar_fd)))
 			{
 				return true;
 			}
-			// error
 		}
+		// error
 
 		return false;
 	}
