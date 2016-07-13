@@ -1,6 +1,6 @@
 <?php
 
-class SessionFileStore extends Session implements SessionStoreInterface
+class SessionFileStore extends Session
 {
 	// config options:
 	public $file_path = '/tmp';
@@ -18,7 +18,7 @@ class SessionFileStore extends Session implements SessionStoreInterface
 		parent::__construct();
 	}
 
-	public function store_open($prefix)
+	protected function store_open($prefix)
 	{
 		if ($this->prefix === false && $prefix)
 		{
@@ -50,17 +50,7 @@ class SessionFileStore extends Session implements SessionStoreInterface
 		}
 	}
 
-	public function store_generate_id()
-	{
-		return Ut::random_token(21);
-	}
-
-	public function store_validate_id($id)
-	{
-		return preg_match('/^[0-9a-zA-Z]{4,}$/', $id);
-	}
-
-	public function store_close()
+	protected function store_close()
 	{
 		if ($this->fd)
 		{
@@ -70,7 +60,7 @@ class SessionFileStore extends Session implements SessionStoreInterface
 		}
 	}
 
-	public function store_destroy()
+	protected function store_destroy()
 	{
 		if ($this->fd)
 		{
@@ -80,7 +70,7 @@ class SessionFileStore extends Session implements SessionStoreInterface
 		}
 	}
 
-	public function store_read($id, $create = false)
+	protected function store_read($id, $create = false)
 	{
 		if (($this->open_file($id, $create)))
 		{
@@ -102,7 +92,7 @@ class SessionFileStore extends Session implements SessionStoreInterface
 		return false;
 	}
 
-	public function store_write($id, $text)
+	protected function store_write($id, $text)
 	{
 		if (($this->open_file($id, true)))
 		{
@@ -123,7 +113,7 @@ class SessionFileStore extends Session implements SessionStoreInterface
 		return false;
 	}
 
-	public function store_gc()
+	protected function store_gc()
 	{
 		// STS: session files bound to session cookie name, so hope that ONE session name will be used in each run ;)
 		$lvl1 = [];
@@ -242,9 +232,9 @@ class SessionFileStore extends Session implements SessionStoreInterface
 		}
 
 		// open & lock jar while trying to avoid race condition
-		for ($try = 0;; ++$try)
+		for ($try = 0; $try < 8; ++$try)
 		{
-			if ($try > 10 || !($fd = fopen($fname, ($create? 'c+b' : 'r+b'))))
+			if (!($fd = fopen($fname, ($create? 'c+b' : 'r+b'))))
 			{
 				break;
 			}

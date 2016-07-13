@@ -274,11 +274,20 @@ class Http
 
 	private function session()
 	{
-		$this->session = $sess = new SessionFileStore;
-		$sess->cookie_path = $this->db->cookie_path;
-		$sess->cookie_secure = ($this->db->tls && $this->tls_session);
-		$sess->cookie_httponly = true;
-		$sess->file_path = CACHE_SESSION_DIR;
+		if (1) // STS TODO need config'ing
+		{
+			$this->session = $sess = new SessionFileStore;
+			$sess->cookie_path = $this->db->cookie_path;
+			$sess->cookie_secure = ($this->db->tls && $this->tls_session);
+			$sess->cookie_httponly = true;
+			$sess->file_path = CACHE_SESSION_DIR;
+		}
+		else
+		{
+			$this->session = $sess = new SessionDbalStore($this->db);
+			$sess->table_name = $this->db->table_prefix . 'sessions';
+		}
+
 		$sess->start($this->db->cookie_prefix);
 	}
 
