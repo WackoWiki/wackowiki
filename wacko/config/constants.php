@@ -21,7 +21,6 @@ define('UPLOAD_PER_PAGE_DIR',			'files/perpage');
 define('UPLOAD_BACKUP_DIR',				'files/backup');
 define('XML_DIR',						'xml');
 
-define('CACHE_DIR',						'_cache');
 define('CACHE_CONFIG_DIR',				'_cache/config');
 define('CACHE_FEED_DIR',				'_cache/feeds');
 define('CACHE_PAGE_DIR',				'_cache/pages');
