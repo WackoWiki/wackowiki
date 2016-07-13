@@ -48,7 +48,7 @@ else if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$this->log_user_out();
 	$this->set_menu(MENU_DEFAULT);
-	$this->set_message($this->get_translation('LoggedOut')); // // TODO: message is reset with session before it it can display the message set after the redirect
+	$this->set_message($this->get_translation('LoggedOut'), 'success'); // // TODO: message is reset with session before it it can display the message set after the redirect
 	$this->redirect($this->href());
 }
 else if ($user = $this->get_user())
