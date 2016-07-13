@@ -322,7 +322,7 @@ class Feed
 				"AND p.noindex <> '1' ".
 			"ORDER BY p.modified DESC, BINARY p.tag");
 
-		$xml = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n";
+		$xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 		$xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 
 		if ($pages)

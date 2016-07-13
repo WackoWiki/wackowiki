@@ -10,7 +10,8 @@ class Http
 	public		$vars			= [];
 	public		$page			= '';
 	public		$method			= '';
-	public		$tls_session	= false;
+	public		$tls_session;
+	public		$real_ip;
 	public		$session;						// class Session
 	private		$db;
 	private		$hash;
@@ -34,6 +35,7 @@ class Http
 		}
 
 		$this->tls_session = $this->tls_session();
+		$this->real_ip = $this->real_ip();
 
 		if ($db->tls && $this->tls_session)
 		{
@@ -288,6 +290,8 @@ class Http
 			$sess->table_name = $this->db->table_prefix . 'sessions';
 		}
 
+		$sess->real_ip = $this->real_ip; // STS hack. need to decide where real_ip should live
+		$sess->tls_session = $this->tls_session;
 		$sess->start($this->db->cookie_prefix);
 	}
 
@@ -370,7 +374,7 @@ class Http
 		}
 	}
 
-	public function real_ip()
+	private function real_ip()
 	{
 		$reverse_proxy_addresses = preg_split('/[\s,]+/', $this->db->reverse_proxy_addresses, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -397,7 +401,7 @@ class Http
 		return '0.0.0.0';
 	}
 
-	public function tls_session()
+	private function tls_session()
 	{
 		return ((@$_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off' && $_SERVER['HTTPS'] != '0')
 			|| $_SERVER['SERVER_PORT'] == 443
