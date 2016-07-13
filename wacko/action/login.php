@@ -39,7 +39,7 @@ if (@$_GET['action'] === 'logout')
 	$this->log(5, Ut::perc_replace($this->get_translation('LogUserLoggedOut', -1), $this->get_user_name()));
 	$this->log_user_out();
 	$this->set_menu(MENU_DEFAULT);
-	$this->set_message($this->get_translation('LoggedOut')); // TODO: message is reset with session before it it can display the message set after the redirect
+	$this->set_message($this->get_translation('LoggedOut'), 'success');
 	$this->context[++$this->current_context] = '';
 
 	$this->redirect($this->href('', @$_GET['goback'], $uncache));
@@ -65,6 +65,7 @@ if (($user = $this->get_user()))
 		}
 
 		$cookie = explode(';', $this->get_cookie('auth'));
+
 		$this->set_message($this->get_translation('SessionEnds') .
 			' <code>' .
 			$this->get_unix_time_formatted($cookie[2]) .  // session expiry date
@@ -161,7 +162,6 @@ else // login
 						{
 							$_processed_password = hash('md5', $_password);
 						}
-
 						// check for old sha256 password
 						else if (strlen($existing_user['password']) == 64)
 						{
@@ -237,6 +237,7 @@ else // login
 						{
 							$this->http->secure_base_url();
 						}
+
 						$this->redirect($this->href('', @$_GET['goback'], $uncache));
 					}
 					else
