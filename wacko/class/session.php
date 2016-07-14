@@ -6,8 +6,7 @@
 // + flash data
 // ? update cookies seldomly
 // + sticky session variables
-// ? set domain in cookie or not?
-// - move public class vars to namespace to not collide with session vars
+// + move public class vars to namespace to not collide with session vars
 // - log of IP changes
 
 // 10 commands:
@@ -30,24 +29,25 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	private $name = '';				// NB [0-9a-zA-Z]+ -- should be short and descriptive (i.e. for users with enabled cookie warnings)
 	private $id = null;				// NB [0-9a-zA-Z,-]+
 
-	public $real_ip;				// set by http class...
-	public $tls_session;			// if !isset - must not act on this values (i.e. from freecap)
+	public $cf_ip;					// set by http class... STS must decide on bad coupling between session & http class
+	public $cf_tls;					// if !isset - must not act on this values (i.e. from freecap)
 
-	public $gc_probability = 2;
-	public $gc_maxlifetime = 1440;
-	public $max_session = 7200;		// time to unconditionally destroy active session
-	public $regen_session = 333;	// seconds between forced id regen
-	public $regen_percent = 4;		// percentile probability of forced id regen
-	public $cookie_lifetime = 0;	// lifetime of the cookie in seconds which is sent to the browser. The value 0 means "until the browser is closed."
-	public $cookie_path = '/';		// path to set in the session cookie
-	public $cookie_domain = '';		// domain to set in the session cookie. '' for host name of the server which generated the cookie, according to cookies specification
+	public $cf_gc_probability = 2;
+	public $cf_gc_maxlifetime = 1440;
+	public $cf_max_idle = 1440;
+	public $cf_max_session = 7200;		// time to unconditionally destroy active session
+	public $cf_regen_time = 500;	// seconds between forced id regen
+	public $cf_regen_probability = 2;		// percentile probability of forced id regen
+	public $cf_cookie_lifetime = 0;	// lifetime of the cookie in seconds which is sent to the browser. The value 0 means "until the browser is closed."
+	public $cf_cookie_path = '/';		// path to set in the session cookie
+	public $cf_cookie_domain = '';		// domain to set in the session cookie. '' for host name of the server which generated the cookie, according to cookies specification
 									// .php.net - to make cookies visible on all subdomains
-	public $cookie_secure = false;	// cookie should only be sent over secure connections.
-	public $cookie_httponly = true;// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
-	public $referer_check = '';
-	public $cache_limiter = 'nocache';
-	public $cache_expire = 180*60;	// ttl for cached session pages in seconds
-	public $last_modified = 0;		// should be set before start() for cache limiters
+	public $cf_cookie_secure = false;	// cookie should only be sent over secure connections.
+	public $cf_cookie_httponly = true;// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
+	public $cf_referer_check = '';
+	public $cf_cache_limiter = 'nocache';
+	public $cf_cache_expire = 180*60;	// ttl for cached session pages in seconds
+	public $cf_cache_mtime = 0;		// should be set before start() for cache limiters
 
 
 	public function __construct()
@@ -139,7 +139,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			else
 			{
 				// let old page live for some seconds to gather missing requests (ajax etc)
-				$this->__reg_expire = $this->__lastmod = $now;
+				$this->__reg_expire = $this->__updated = $now;
 				$this->store_write($this->id, serialize($this->toArray()));
 				unset($this->__reg_expire);
 			}
@@ -191,8 +191,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$this->send_cookie = 0;
 		}
 
-		if ($id && $this->referer_check
-			&& strstr($_SERVER['HTTP_REFERER'], $this->referer_check) === false)
+		if ($id && $this->cf_referer_check
+			&& strstr($_SERVER['HTTP_REFERER'], $this->cf_referer_check) === false)
 		{
 			$id = null;
 		}
@@ -208,7 +208,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$this->cache_limiter(); // TODO - why it is in the session?
 
 		$now = time();
-		if (isset($this->__created))
+		if (isset($this->__started))
 		{
 			$message = '';
 			if (isset($this->__reg_expire) && $now - $this->__reg_expire > 8)
@@ -217,14 +217,15 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				unset($this->__reg_expire);
 				$destroy = 2;
 			}
-			else if ($now - $this->__created > $this->max_session)
+			else if ($now - $this->__started > $this->cf_max_session)
 			{
+				$this->__started = 0;
 				$message = 'max_session';
 				$destroy = 2;
 			}
-			else if ($now - $this->__lastmod > $this->gc_maxlifetime)
+			else if ($now - $this->__updated > $this->cf_max_idle)
 			{
-				$message = 'maxlifetime';
+				$message = 'max_idle';
 				$destroy = 2;
 			}
 			else if (!similar_text($this->__user_agent, $_SERVER['HTTP_USER_AGENT'], $perc) || $perc < 95)
@@ -232,7 +233,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$message = 'ua';
 				$destroy = 2;
 			}
-			else if (isset($this->tls_session) && isset($this->__user_tls) && $this->tls_session != $this->__user_tls)
+			else if (isset($this->cf_tls) && isset($this->__user_tls) && $this->cf_tls != $this->__user_tls)
 			{
 				$message = 'tls';
 				$destroy = 2;
@@ -252,16 +253,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$message = 'language';
 				$destroy = 2;
 			}
-			else if (isset($this->real_ip) && isset($this->__user_ip) && $this->real_ip != $this->__user_ip)
+			else if (isset($this->cf_ip) && isset($this->__user_ip) && $this->cf_ip != $this->__user_ip)
 			{
 				$message = 'ip';
 				$destroy = 1;
-				if (!isset($this->__ip_list) || !in_array($this->__user_ip, $this->__ip_list))
-				{
-					$this->__ip_list[] = $this->__user_ip;
-				}
+				$this->__ip_list[$this->__user_ip] = 1 + @$this->__ip_list[$this->__user_ip];
 			}
-			else if ($now - $this->__regenerated > $this->regen_session || Ut::rand(0, 99) < $this->regen_percent)
+			else if ($now - $this->__regenerated > $this->cf_regen_time || Ut::rand(0, 99) < $this->cf_regen_probability)
 			{
 				$destroy = 0;
 			}
@@ -307,7 +305,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		if ($this->active)
 		{
-			$this->__lastmod = time();
+			$this->__updated = time();
 			$this->store_write($this->id, serialize($this->toArray()));
 			// check error!
 			$this->store_close();
@@ -349,7 +347,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		$this->write_close();
 
-		if (Ut::rand(0, 99) < $this->gc_probability)
+		if (Ut::rand(0, 99) < $this->cf_gc_probability)
 		{
 			$this->store_gc();
 			// "purged $returned expired session objects"
@@ -371,23 +369,18 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		$now = time();
 
-		if (!isset($this->__created))
-		{
-			$this->__created			=
-			$this->__regenerated		= $now;
-		}
+		if (!isset($this->__created))	$this->__created			= $now;
+		if (!isset($this->__started))	$this->__started			= $now;
+		if (!isset($this->__regenerated)) $this->__regenerated		= $now;
 
-		$this->__lastmod				= $now;
+		$this->__updated				= $now;
 		$this->__user_agent				= $_SERVER['HTTP_USER_AGENT'];
 		$this->__user_accept			= $_SERVER['HTTP_ACCEPT'];
 		$this->__user_accept_encoding	= $_SERVER['HTTP_ACCEPT_ENCODING'];
 		$this->__user_accept_lang		= $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 
-		if (isset($this->tls_session) && isset($this->real_ip))
-		{
-			$this->__user_ip			= $this->real_ip;
-			$this->__user_tls			= $this->tls_session;
-		}
+		if (isset($this->cf_tls))		$this->__user_tls			= $this->cf_tls;
+		if (isset($this->cf_ip))		$this->__user_ip			= $this->cf_ip;
 	}
 
 
@@ -452,9 +445,9 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		if (!headers_sent())
 		{
-			$age = $this->cache_expire;
+			$age = $this->cf_cache_expire;
 
-			switch ($this->cache_limiter)
+			switch ($this->cf_cache_limiter)
 			{
 				case 'public':
 					header('Expires: ' . Ut::http_date(time() + $age));
@@ -477,9 +470,9 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 					return; // suppress last-modified
 			}
 
-			if ($this->last_modified > 0)
+			if ($this->cf_cache_mtime > 0)
 			{
-				header('Last-Modified: ' . Ut::http_date($this->last_modified));
+				header('Last-Modified: ' . Ut::http_date($this->cf_cache_mtime));
 			}
 		}
 	}
@@ -525,8 +518,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$this->remove_cookie($name);
 
 		$this->setcookie($name, $value,
-			($this->cookie_lifetime > 0? time() + $this->cookie_lifetime : 0),
-			$this->cookie_path, $this->cookie_domain, $this->cookie_secure, $this->cookie_httponly);
+			($this->cf_cookie_lifetime > 0? time() + $this->cf_cookie_lifetime : 0),
+			$this->cf_cookie_path, $this->cf_cookie_domain, $this->cf_cookie_secure, $this->cf_cookie_httponly);
 	}
 
 	public function setcookie($name, $value = '', $expires = 0, $path = '', $domain = '', $secure = false, $httponly = false, $url_encode = true)

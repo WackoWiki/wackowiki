@@ -24,7 +24,7 @@ if (@$_GET['action'] === 'clearcookies')
 {
 	foreach ($_COOKIE as $name => $value)
 	{
-		$this->delete_cookie($name, false, false);
+		$this->delete_cookie($name, false);
 	}
 
 	$this->redirect($this->href('', '', $uncache));

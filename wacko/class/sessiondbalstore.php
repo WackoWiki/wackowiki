@@ -3,8 +3,8 @@
 class SessionDbalStore extends Session
 {
 	// config options:
-	public $table_name = 'sessions_pool';
-	public $lock_timeout = 60;
+	public $cf_dbal_table_name = 'sessions_pool';
+	public $cf_dbal_lock_timeout = 60;
 
 	private $db;
 	private $created = false;
@@ -22,7 +22,7 @@ class SessionDbalStore extends Session
 		if (!$this->created)
 		{
 			$this->db->sql_query("
-				CREATE TABLE IF NOT EXISTS `{$this->table_name}` (
+				CREATE TABLE IF NOT EXISTS `{$this->cf_dbal_table_name}` (
 				  `session_id` varchar(32) NOT NULL default '',
 				  `session_data` blob NOT NULL,
 				  `session_expire` int(11) NOT NULL default '0',
@@ -49,7 +49,7 @@ class SessionDbalStore extends Session
 	{
 		if ($this->lock)
 		{
-			$this->db->sql_query('DELETE FROM ' . $this->table_name . ' WHERE session_id = "' . $this->id . '"');
+			$this->db->sql_query('DELETE FROM ' . $this->cf_dbal_table_name . ' WHERE session_id = "' . $this->id . '"');
 			$this->store_close();
 		}
 		return true;
@@ -66,7 +66,7 @@ class SessionDbalStore extends Session
 			SELECT
 				session_data
 			FROM
-				' . $this->table_name . '
+				' . $this->cf_dbal_table_name . '
 			WHERE
 				session_id = "' . $id . '" AND
 				session_expire > "' . time() . '"
@@ -85,7 +85,7 @@ class SessionDbalStore extends Session
 
 		$this->db->sql_query('
 			INSERT INTO
-				' . $this->table_name . ' (
+				' . $this->cf_dbal_table_name . ' (
 					session_id,
 					session_data,
 					session_expire
@@ -93,7 +93,7 @@ class SessionDbalStore extends Session
 			VALUES (
 				"' . $id . '",
 				' . $this->db->q($text) . ',
-				"' . (time() + $this->gc_maxlifetime) . '"
+				"' . (time() + $this->cf_gc_maxlifetime) . '"
 			)
 			ON DUPLICATE KEY UPDATE
 				session_data = VALUES(session_data),
@@ -110,7 +110,7 @@ class SessionDbalStore extends Session
 	{
 		$this->db->sql_query('
 			DELETE FROM
-				' . $this->table_name . '
+				' . $this->cf_dbal_table_name . '
 			WHERE
 				session_expire < "' . time() . '"
 		');
@@ -131,7 +131,7 @@ class SessionDbalStore extends Session
 
 		$lock = '"session_' . $id . '"';
 
-		$res = $this->db->load_single('SELECT GET_LOCK(' . $lock . ', ' . $this->lock_timeout . ') AS q');
+		$res = $this->db->load_single('SELECT GET_LOCK(' . $lock . ', ' . $this->cf_dbal_lock_timeout . ') AS q');
 
 		if (@$res['q'] == 1)
 		{

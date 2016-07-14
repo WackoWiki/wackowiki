@@ -23,8 +23,7 @@ function handler_rate_set_rate_cookie(&$engine, $page_id)
 	$ids	= explode(';', $cookie);
 	$ids[]	= $page_id;
 	$cookie	= implode(';', $ids);
-	$engine->set_cookie('rating', $cookie);
-	$engine->set_cookie('rating', $cookie, 365, $persistent = true);
+	$engine->set_cookie('rating', $cookie, 365);
 	return true;
 }
 

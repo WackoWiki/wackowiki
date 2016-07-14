@@ -47,7 +47,7 @@ $http->ensure_tls($db->base_url . 'admin.php');
 
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
-	$engine->delete_cookie('Admin', true, true);
+	$engine->delete_cookie('Admin');
 	// $engine->set_user($_user, 0);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
 	$http->secure_base_url();
@@ -95,7 +95,7 @@ if (isset($_POST['ap_password']))
 		)
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
-		$engine->set_cookie('Admin', hash('sha256', $_processed_password.$engine->config['base_url']), '', false, ( $engine->config['tls'] ? 1 : 0 ));
+		$engine->set_cookie('Admin', hash('sha256', $_processed_password.$engine->config['base_url']));
 
 		$engine->sess->created			= time();
 		$engine->sess->last_activity		= time();
@@ -203,7 +203,7 @@ $session_length = 1800; // 1800 -> 30 minutes
 if (isset($engine->sess->last_activity) && (time() - $engine->sess->last_activity > 900)) //1800
 {
 	// last request was more than 15 minutes ago
-	$engine->delete_cookie('Admin', true, true);
+	$engine->delete_cookie('Admin');
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
 
 	//session_destroy();   // destroy session data in storage
