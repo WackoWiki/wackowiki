@@ -45,9 +45,9 @@ $http->ensure_tls($db->base_url . 'admin.php');
 ##            End admin session and logout            ##
 ########################################################
 
-if (isset($_GET['action']) && $_GET['action'] == 'logout')
+if (@$_GET['action'] === 'logout')
 {
-	$engine->delete_cookie('Admin');
+	unset($engine->sess->ap_created);
 	// $engine->set_user($_user, 0);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
 	$http->secure_base_url();
@@ -67,8 +67,6 @@ if (!$engine->config['recovery_password'])
 
 	die();
 }
-
-$_processed_password = $engine->config['recovery_password'];
 
 // recovery preauthorization
 if (isset($_POST['ap_password']))
@@ -90,16 +88,15 @@ if (isset($_POST['ap_password']))
 			base64_encode(
 					hash('sha256', $engine->config['system_seed'].$_POST['ap_password'], true)
 					),
-				$_processed_password
+				$engine->db->recovery_password
 			)
 		)
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
-		$engine->set_cookie('Admin', hash('sha256', $_processed_password.$engine->config['base_url']));
 
-		$engine->sess->created			= time();
-		$engine->sess->last_activity		= time();
-		$engine->sess->failed_login_count	= 0;
+		$engine->sess->ap_created			=
+		$engine->sess->ap_last_activity		= time();
+		$engine->sess->ap_failed_login_count	= 0;
 
 		if ($engine->config['ap_failed_login_count'] > 0)
 		{
@@ -112,39 +109,32 @@ if (isset($_POST['ap_password']))
 	}
 	else
 	{
-		if (!isset($engine->sess->failed_login_count))
+		if (!isset($engine->sess->ap_failed_login_count))
 		{
-			$engine->sess->failed_login_count = 0;
+			$engine->sess->ap_failed_login_count = 0;
 		}
 
 		$engine->config->set('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1);
 		$engine->log(1, $engine->get_translation('LogAdminLoginFailed', $engine->config['language']));
 
-		$engine->sess->failed_login_count = $engine->sess->failed_login_count + 1;
+		++$engine->sess->ap_failed_login_count;
 
 		// RECOVERY_MODE ON || RECOVERY_MODE OFF
-		if (($engine->sess->failed_login_count >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
+		if (($engine->sess->ap_failed_login_count >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
 			$db->lock(AP_LOCK);
 			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
 
-			$engine->sess->failed_login_count = 0;
+			$engine->sess->ap_failed_login_count = 0;
 		}
 	}
 }
 
 // check authorization
 $user			= '';
-$authorization	= false;
 $_title			= '';
 
-if ($engine->get_cookie('Admin') == hash('sha256', $_processed_password.$engine->config['base_url']))
-{
-	#$user = array('user_name' => $engine->config['admin_name']);
-	$authorization = true;
-}
-
-if ($authorization == false)
+if (!isset($engine->sess->ap_created))
 {
 	header('Content-Type: text/html; charset='.$engine->get_charset());
 ?>
@@ -192,39 +182,30 @@ if ($authorization == false)
 	exit;
 }
 
-unset($_processed_password);
-
 // setting temporary admin user context
 global $_user;
 $session_length = 1800; // 1800 -> 30 minutes
 #$_user = $engine->get_user();
 #$engine->set_user($user, 0);
 
-if (isset($engine->sess->last_activity) && (time() - $engine->sess->last_activity > 900)) //1800
+if (time() - $engine->sess->ap_last_activity > 900) //1800
 {
 	// last request was more than 15 minutes ago
-	$engine->delete_cookie('Admin');
+	unset($engine->sess->ap_created);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
 
-	//session_destroy();   // destroy session data in storage
-	//session_unset();     // unset $_SESSION variable for the runtime
 	$engine->set_message($engine->get_translation('LoggedOutAuto'));
 	$engine->redirect('admin.php');
 }
 
-$engine->sess->last_activity = time(); // update last activity time stamp
+$engine->sess->ap_last_activity = time(); // update last activity time stamp
 
-if (!isset($engine->sess->created))
-{
-	$engine->sess->created = time();
-}
-else if (time() - $engine->sess->created > $session_length)
+if (time() - $engine->sess->ap_created > $session_length)
 {
 	$session_expire			= time() + $session_length;
 	// session started more than 30 minutes(default $session_length) ago  // TODO: $session_time missing!
 	$engine->restart_user_session($user, $session_expire); // TODO: we need extra user session here, hence we need a auth_token table
-	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
-	$engine->sess->created = time();  // update creation time
+	$engine->sess->ap_created = time();  // update creation time
 }
 
 ########################################################
@@ -325,7 +306,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 			<span>
 				<?php echo (RECOVERY_MODE === true ? '<strong>RECOVERY_MODE</strong>' : ''); ?>
 				&nbsp;&nbsp;
-				<?php $time_left = round(($session_length - (time() - $engine->sess->created)) / 60);
+				<?php $time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
 				echo "Time left: ".$time_left." minutes"; ?>
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
