@@ -42,6 +42,7 @@ define('BACKUP_FILE_GZIP_SUFFIX',		'.gz');				// regular compressed files suffix
 define('GLOB_ALL',						'{,.}*');			// for glob()
 define('ADD_NO_DIV',					'*');				// for Wacko::method()
 
+define('AUTH_TOKEN',					'Auth');
 define('GUEST',							'guest@wacko');
 define('INTERCOM_MAX_SIZE',				262144);
 
@@ -88,4 +89,3 @@ define('ACTION4DIFF',					'anchor, toc'); //allowed actions in DIFF
 
 define('PHP_MIN_VERSION',				'5.4.0'); //minimum required PHP version
 define('PHP_ERROR_REPORTING',			6); // PHP error reporting: 0 - off, 5 - all
-

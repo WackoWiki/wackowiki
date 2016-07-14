@@ -54,7 +54,7 @@ if (($user = $this->get_user()))
 	echo '<div class="cssform">';
 	echo '<h3>'.$this->get_translation('Hello').", ".$this->compose_link_to_page($this->db->users_page.'/'.$user['user_name'], '', $user['user_name']).'!</h3>';
 
-	if ($this->get_cookie('auth'))
+	if ($this->get_cookie(AUTH_TOKEN))
 	{
 		if ($user['last_visit'])
 		{
@@ -64,7 +64,7 @@ if (($user = $this->get_user()))
 				'</code>');
 		}
 
-		$cookie = explode(';', $this->get_cookie('auth'));
+		$cookie = explode(';', $this->get_cookie(AUTH_TOKEN));
 
 		$this->set_message($this->get_translation('SessionEnds') .
 			' <code>' .

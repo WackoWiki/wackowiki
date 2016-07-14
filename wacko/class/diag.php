@@ -127,7 +127,6 @@ class Diag
 					echo "\t<li>TLS: ".(isset($config['tls']) ? 'on' : 'off')."</li>\n";
 					echo "\t<li>TLS Proxy: ".(!empty($config['tls_proxy']) ? $config['tls_proxy'] : "false")."</li>\n";
 					echo "\t<li>TLS implicit: ".(($config['tls_implicit'] == true) ? 'on' : 'off')."</li>\n";
-					echo "\t<li>Cookie hash: ".(isset($config['cookie_hash']) ? $config['cookie_hash'] : '')."</li>\n";
 					echo "\t<li>Cookie path: ".$config['cookie_path']."</li>\n";
 					// echo "\t<li>GZIP: ".(@extension_loaded('zlib') ? 'On' : 'Off')."</li>\n";
 					echo "</ul>\n";

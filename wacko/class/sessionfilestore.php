@@ -32,15 +32,12 @@ class SessionFileStore extends Session
 			{
 				$cookie = $prefix . 'Rands';
 
-				$data = strtr((string) @$_COOKIE[$cookie], '-_', '+/');
-				$key = base64_decode($data);
+				$key = Ut::http64_decode((string) @$_COOKIE[$cookie]);
 
 				if (mb_strlen($key, '8bit') != 64)
 				{
 					$key = Ut::random_bytes(64); // 32 for encryption and 32 for authentication
-					$data = base64_encode($key);
-					$data = strtr($data, ['+' => '-', '/' => '_', '=' => '']);
-					$this->_send_cookie($cookie, $data);
+					$this->_send_cookie($cookie, Ut::http64_encode($key));
 				}
 
 				$this->cryptokey = $key;
@@ -138,7 +135,7 @@ class SessionFileStore extends Session
 					$lvl2[] = $l1p . '/' . $file;
 				}
 			}
-			if (count($lvl2) > 500) break;
+			if (count($lvl2) > 500) break;	// TODO magic number
 		}
 		shuffle($lvl2);
 
@@ -163,7 +160,7 @@ class SessionFileStore extends Session
 			{
 				rmdir($l2);
 			}
-			if ($nstats > 600 || $ndels > 100) break;
+			if ($nstats > 600 || $ndels > 100) break; // TODO magic number
 		}
 		Ut::dbg('gc', $nstats, $ndels);
 
