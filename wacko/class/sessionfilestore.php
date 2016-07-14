@@ -3,9 +3,9 @@
 class SessionFileStore extends Session
 {
 	// config options:
-	public $file_path = '/tmp';
-	public $file_mode = 0600;
-	public $file_encrypt = 1;
+	public $cf_file_path = '/tmp';
+	public $cf_file_mode = 0600;
+	public $cf_file_encrypt = 1;
 
 	private $prefix = false;
 	private $fd = null;
@@ -22,13 +22,13 @@ class SessionFileStore extends Session
 	{
 		if ($this->prefix === false && $prefix)
 		{
-			$dir = $this->file_path;
+			$dir = $this->cf_file_path;
 			if (!is_writeable($dir) || is_link($dir) || !is_dir($dir))
 			{
 				die('SessionFileStore: inaccessible directory "' . $dir . '"');
 			}
 
-			if ($this->file_encrypt && extension_loaded('openssl') && extension_loaded('mbstring'))
+			if ($this->cf_file_encrypt && extension_loaded('openssl') && extension_loaded('mbstring'))
 			{
 				$cookie = $prefix . 'Rands';
 
@@ -115,7 +115,7 @@ class SessionFileStore extends Session
 		// STS: session files bound to session cookie name, so hope that ONE session name will be used in each run ;)
 		$lvl1 = [];
 		$preflen = strlen($this->prefix);
-		foreach ((array) scandir($this->file_path, SCANDIR_SORT_NONE) as $file)
+		foreach ((array) scandir($this->cf_file_path, SCANDIR_SORT_NONE) as $file)
 		{
 			if (!strncmp($file, $this->prefix, $preflen) && strlen($file) == $preflen + 1)
 			{
@@ -127,7 +127,7 @@ class SessionFileStore extends Session
 		$lvl2 = [];
 		foreach ($lvl1 as $l1)
 		{
-			$l1p = Ut::join_path($this->file_path, $l1);
+			$l1p = Ut::join_path($this->cf_file_path, $l1);
 			foreach ((array) scandir($l1p, SCANDIR_SORT_NONE) as $file)
 			{
 				if (fnmatch('[0-9a-zA-Z][0-9a-zA-Z]', $file))
@@ -140,7 +140,7 @@ class SessionFileStore extends Session
 		shuffle($lvl2);
 
 		$nstats = $ndels = 0;
-		$past = time() - $this->gc_maxlifetime;
+		$past = time() - $this->cf_gc_maxlifetime;
 		foreach ($lvl2 as $l2)
 		{
 			$stats = $dels = 0;
@@ -178,7 +178,7 @@ class SessionFileStore extends Session
 
 		$this->store_close();
 
-		$fname = Ut::join_path($this->file_path, $this->prefix . substr($id, 0, 1), substr($id, 1, 2), substr($id, 3));
+		$fname = Ut::join_path($this->cf_file_path, $this->prefix . substr($id, 0, 1), substr($id, 1, 2), substr($id, 3));
 
 		clearstatcache();
 		if (@file_exists($fname))
@@ -224,7 +224,7 @@ class SessionFileStore extends Session
 
 			if (!@file_exists($dir))
 			{
-				mkdir($dir, ((($this->file_mode >> 2) & 0111) | $this->file_mode), true);
+				mkdir($dir, ((($this->cf_file_mode >> 2) & 0111) | $this->cf_file_mode), true);
 			}
 			// delegate all erroring further, to fopen
 		}
@@ -252,7 +252,7 @@ class SessionFileStore extends Session
 				$this->fd = $fd;
 				$this->fd_name = $fname;
 				$this->fd_id = $id;
-				chmod($fname, $this->file_mode);
+				chmod($fname, $this->cf_file_mode);
 				return true;
 			}
 

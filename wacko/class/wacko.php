@@ -2539,45 +2539,32 @@ class Wacko
 	}
 
 	// COOKIES
-	function set_cookie($name, $value, $days = 0, $persistent = false, $secure = 0, $httponly = 1)
+	function get_cookie($name)
 	{
-		if ($persistent && $this->config['allow_persistent_cookie'] == true)
-		{
-			// set to default if no period given
-			if ($days == 0)
-			{
-				$days = $this->config['session_length'];
-			}
-
-			// persistent cookie
-			$expire = time() + $days * 24 * 3600;
-		}
-		else
-		{
-			// session cookie
-			$expire = 0;
-		}
-
-		setcookie($this->config['cookie_prefix'].$name, $value, $expire, $this->config['cookie_path'], '', ( $secure ? true : false ), ( $httponly ? true : false ));
-		$_COOKIE[$this->config['cookie_prefix'].$name] = $value;
+		return @$_COOKIE[$this->db->cookie_prefix . $name];
 	}
 
-	function delete_cookie($name, $prefix = true, $postfix = false)
+	// persistent: false, or number of days (0 for config default's days)
+	function set_cookie($name, $value, $persistent = false)
 	{
-		$prefix	= $prefix?  $this->config['cookie_prefix'] : '';
+		$name = $this->db->cookie_prefix . $name;
 
-		$cookie_path	= $this->config['cookie_path'];
-		$cookie_name	= $prefix.$name;
+		$this->sess->setcookie($name, $value,
+			(($persistent !== false && $this->db->allow_persistent_cookie)? ($persistent ?: $this->db->session_length) * DAYSECS + time() : 0),
+			$this->db->cookie_path, '', ($this->db->tls && $this->http->tls_session), true);
 
-		// ensures that cookie expires in browser
-		setcookie($cookie_name, '', 1, $cookie_path, '');
-		$_COOKIE[$cookie_name] = '';
+		$_COOKIE[$name] = $value;
+	}
 
-		// removing cookie
-		setcookie($cookie_name, false);
+	function delete_cookie($name, $prefix = true)
+	{
+		$prefix and $name = $this->db->cookie_prefix . $name;
 
-		// removes the cookie from script
-		unset($_COOKIE[$cookie_name]);
+		$this->sess->setcookie($name, '',
+			1,
+			$this->db->cookie_path, '', ($this->db->tls && $this->http->tls_session), true);
+
+		unset($_COOKIE[$name]);
 	}
 
 	// purge cockie_tokens
@@ -2617,7 +2604,7 @@ class Wacko
 				$this->sql_query($sql);
 
 				// does the session has been deleted earlier than specified number of days ago?
-				if (strtotime($session['recent_time']) < (time() - (3600 * 24 * $purge_days)) || !$expired )
+				if (strtotime($session['recent_time']) < time() - DAYSECS * $purge_days || !$expired)
 				{
 					$remove[] = "'".(int)$session['user_id']."'";
 				}
@@ -2637,11 +2624,6 @@ class Wacko
 				unset($remove);
 			}
 		}
-	}
-
-	function get_cookie($name)
-	{
-		return @$_COOKIE[$this->config['cookie_prefix'] . $name];
 	}
 
 	// HTTP/REQUEST/LINK RELATED
@@ -4652,7 +4634,7 @@ class Wacko
 		// session length in days
 		$session_length			= ($session_length == 0 ? $this->config['session_length'] : $session_length);
 		$session_length			= ($persistent ? $session_length : 0.25);
-		$session_expire			= time() + $session_length * 24 * 3600;
+		$session_expire			= time() + $session_length * DAYSECS;
 
 		//  generate a string to use as the identifier for the login cookie
 		$login_token			= $this->unique_id(); // TODO:
@@ -4698,7 +4680,7 @@ class Wacko
 		$cookie_value	= implode(';', array($login_token, $b64password, $session_expire, $cookie_mac));
 
 		// set auth cookie
-		$this->set_cookie(AUTH_TOKEN, $cookie_value, $session_length, $persistent, ( $this->config['tls'] ? 1 : 0 ));
+		$this->set_cookie(AUTH_TOKEN, $cookie_value, ($persistent? $session_length : false));
 
 		// update session expiry, user_form_salt and clear password recovery
 		// code in user data table
@@ -4790,7 +4772,7 @@ class Wacko
 			$this->delete_cookie_token($user_id, false);
 		}
 
-		$this->delete_cookie(AUTH_TOKEN, true, true);
+		$this->delete_cookie(AUTH_TOKEN);
 
 		$this->sess->restart();
 	}

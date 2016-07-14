@@ -329,8 +329,7 @@ class Polls
 
 		$ids[]	= $poll_id;
 		$cookie	= implode(';', $ids);
-		$this->engine->set_cookie('poll', $cookie);
-		$this->engine->set_cookie('poll', $cookie, 365, $persistent = true);
+		$this->engine->set_cookie('poll', $cookie, 365);
 		return true;
 	}
 

@@ -278,21 +278,24 @@ class Http
 	{
 		if (1) // STS TODO need config'ing
 		{
-			$this->session = $sess = new SessionFileStore;
-			$sess->cookie_path = $this->db->cookie_path;
-			$sess->cookie_secure = ($this->db->tls && $this->tls_session);
-			$sess->cookie_httponly = true;
-			$sess->file_path = CACHE_SESSION_DIR;
+			$sess = new SessionFileStore;
+			$sess->cf_file_path = CACHE_SESSION_DIR;
 		}
 		else
 		{
-			$this->session = $sess = new SessionDbalStore($this->db);
-			$sess->table_name = $this->db->table_prefix . 'sessions';
+			$sess = new SessionDbalStore($this->db);
+			$sess->cf_dbal_table_name = $this->db->table_prefix . 'sessions';
 		}
 
-		$sess->real_ip = $this->real_ip; // STS hack. need to decide where real_ip should live
-		$sess->tls_session = $this->tls_session;
+		$sess->cf_cookie_path		= $this->db->cookie_path;
+		$sess->cf_cookie_secure		= ($this->db->tls && $this->tls_session);
+		$sess->cf_cookie_httponly	= true;
+
+		$sess->cf_ip				= $this->real_ip; // STS hack. need to decide where real_ip should live
+		$sess->cf_tls				= $this->tls_session;
+
 		$sess->start($this->db->cookie_prefix . 'Session');
+		$this->session = & $sess;
 	}
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
