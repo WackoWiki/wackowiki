@@ -45,7 +45,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public $cf_cookie_secure = false;	// cookie should only be sent over secure connections.
 	public $cf_cookie_httponly = true;// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
 	public $cf_referer_check = '';
-	public $cf_cache_limiter = 'nocache';
+	public $cf_cache_limiter = 'none';
 	public $cf_cache_expire = 180*60;	// ttl for cached session pages in seconds
 	public $cf_cache_mtime = 0;		// should be set before start() for cache limiters
 
@@ -213,13 +213,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$message = '';
 			if (isset($this->__reg_expire) && $now - $this->__reg_expire > 8)
 			{
-				$message = 'reg_expire';
 				unset($this->__reg_expire);
+				$message = 'reg_expire';
 				$destroy = 2;
 			}
 			else if ($now - $this->__started > $this->cf_max_session)
 			{
-				$this->__started = 0;
+				unset($this->__started);
 				$message = 'max_session';
 				$destroy = 2;
 			}
@@ -462,12 +462,15 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 					header("Cache-Control: private, max-age=$age, pre-check=$age");
 					break;
 
-				default:
 				case 'nocache':
 					header('Expires: ' . Ut::http_date(-1));
 					header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 					header('Pragma: no-cache');
 					return; // suppress last-modified
+
+				default:
+				case 'none':
+					return;
 			}
 
 			if ($this->cf_cache_mtime > 0)
