@@ -174,7 +174,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordChanged', $this->config['language']), $user['user_name']));
 
 			// forward
-			$this->set_message($this->get_translation('PasswordChanged'), 'success'); // // TODO: message is reset with session before it it can display the message set after the redirect
+			$this->set_message($this->get_translation('PasswordChanged'), 'success');
 			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
 		}
 	}

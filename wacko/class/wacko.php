@@ -2558,17 +2558,16 @@ class Wacko
 			$expire = 0;
 		}
 
-		setcookie($this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash'], $value, $expire, $this->config['cookie_path'], '', ( $secure ? true : false ), ( $httponly ? true : false ));
-		$_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']] = $value;
+		setcookie($this->config['cookie_prefix'].$name, $value, $expire, $this->config['cookie_path'], '', ( $secure ? true : false ), ( $httponly ? true : false ));
+		$_COOKIE[$this->config['cookie_prefix'].$name] = $value;
 	}
 
 	function delete_cookie($name, $prefix = true, $postfix = false)
 	{
 		$prefix	= $prefix?  $this->config['cookie_prefix'] : '';
-		$cookie_hash = $postfix? '_'.$this->config['cookie_hash'] : '';
 
 		$cookie_path	= $this->config['cookie_path'];
-		$cookie_name	= $prefix.$name.$cookie_hash;
+		$cookie_name	= $prefix.$name;
 
 		// ensures that cookie expires in browser
 		setcookie($cookie_name, '', 1, $cookie_path, '');
@@ -2642,10 +2641,7 @@ class Wacko
 
 	function get_cookie($name)
 	{
-		if (isset($_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']]))
-		{
-			return $_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']];
-		}
+		return @$_COOKIE[$this->config['cookie_prefix'] . $name];
 	}
 
 	// HTTP/REQUEST/LINK RELATED
@@ -2661,7 +2657,7 @@ class Wacko
 	{
 		if ($message)
 		{
-			$this->sess->messages[] = [$message, $type];
+			$this->sess->sticky_messages[] = [$message, $type];
 		}
 	}
 
@@ -2681,10 +2677,10 @@ class Wacko
 			$this->show_message($message, 'sysmessage ' . $this->config['system_message_type']);
 		}
 
-		if (isset($this->sess->messages))
+		if (isset($this->sess->sticky_messages))
 		{
-			$messages = $this->sess->messages;
-			unset($this->sess->messages);
+			$messages = $this->sess->sticky_messages;
+			unset($this->sess->sticky_messages);
 
 			// TODO: maybe filter?
 			// TODO: think about quoting....
@@ -4542,15 +4538,32 @@ class Wacko
 	// extract user data from the session array
 	function get_user()
 	{
-		$q = $this->config['cookie_hash'] . '_' . 'user';
-		return @$this->sess[$q];
+		return @$this->sess->userprofile;
+	}
+
+	// insert user data into the session array
+	function set_user($user, $ip = 1)
+	{
+		$this->sess->userprofile = $user;
+
+		// define current IP for foregoing checks
+		if ($ip)
+		{
+			$this->set_user_setting('ip', $this->get_user_ip());
+		}
 	}
 
 	// extract specific element from user session array
 	function get_user_setting($setting, $guest = 0)
 	{
-		$q = $this->config['cookie_hash'] . '_'. ($guest? 'guest' : 'user');
-		return @$this->sess[$q][$setting];
+		if ($guest)
+		{
+			return @$this->sess->guestprofile[$setting];
+		}
+		else
+		{
+			return @$this->sess->userprofile[$setting];
+		}
 	}
 
 	// set/update specific element of user session array
@@ -4558,19 +4571,13 @@ class Wacko
 	// this poses a potential security threat
 	function set_user_setting($setting, $value, $guest = 0)
 	{
-		$q = $this->config['cookie_hash'] . '_'. ($guest? 'guest' : 'user');
-		$this->sess[$q][$setting] = $value;
-	}
-
-	// insert user data into the session array
-	function set_user($user, $ip = 1)
-	{
-		$this->sess[$this->config['cookie_hash'] . '_' . 'user'] = $user;
-
-		// define current IP for foregoing checks
-		if ($ip)
+		if ($guest)
 		{
-			$this->set_user_setting('ip', $this->get_user_ip());
+			$this->sess->guestprofile[$setting] = $value;
+		}
+		else
+		{
+			$this->sess->userprofile[$setting] = $value;
 		}
 	}
 
@@ -4691,7 +4698,7 @@ class Wacko
 		$cookie_value	= implode(';', array($login_token, $b64password, $session_expire, $cookie_mac));
 
 		// set auth cookie
-		$this->set_cookie('auth', $cookie_value, $session_length, $persistent, ( $this->config['tls'] ? 1 : 0 ));
+		$this->set_cookie(AUTH_TOKEN, $cookie_value, $session_length, $persistent, ( $this->config['tls'] ? 1 : 0 ));
 
 		// update session expiry, user_form_salt and clear password recovery
 		// code in user data table
@@ -4742,19 +4749,17 @@ class Wacko
 	// regenerate session id for registered user
 	function restart_user_session($user, $session_expire)
 	{
-		$this->delete_cookie('sid', true, false);
-
 		return $this->sess->restart();
 	}
 
 	// restore login_token/password/etc from auth cookie
-	function decompose_auth_cookie($name = 'auth')
+	function decompose_auth_cookie($name = AUTH_TOKEN)
 	{
 		$recalc_mac = '';
 		$cookie_mac = '';
 
 		// get cookie value
-		if (true == $cookie = $this->get_cookie($name))
+		if (($cookie = $this->get_cookie($name)))
 		{
 			list($login_token, $b64password, $session_expire, $cookie_mac) = explode(';', $cookie);
 
@@ -4785,8 +4790,7 @@ class Wacko
 			$this->delete_cookie_token($user_id, false);
 		}
 
-		$this->delete_cookie('auth', true, true);
-		$this->delete_cookie('sid', true, false);
+		$this->delete_cookie(AUTH_TOKEN, true, true);
 
 		$this->sess->restart();
 	}
@@ -7101,7 +7105,7 @@ class Wacko
 				echo $inline ? '' : "<br />\n";
 				echo '<label for="captcha">'.$this->get_translation('Captcha').":</label>\n";
 				echo $inline ? '' : "<br />\n";
-				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?for=' . $this->db->cookie_prefix.'" id="freecap" alt="'.$this->get_translation('Captcha').'" />'."\n";
+				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?for=' . $this->sess->name().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />'."\n";
 				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
 				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
 				#echo $inline ? '' : "<br />\n";

@@ -138,6 +138,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 			else
 			{
+				// let old page live for some seconds to gather missing requests (ajax etc)
 				$this->__reg_expire = $this->__lastmod = $now;
 				$this->store_write($this->id, serialize($this->toArray()));
 				unset($this->__reg_expire);
@@ -175,7 +176,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if ($name || !$this->name)
 		{
 			// filter name
-			$name = preg_replace('/[^0-9a-zA-Z]+/', '', $name);
+			$name = preg_replace('/[^0-9a-zA-Z_\-]+/', '', $name);
 			if (!$name || ctype_digit($name))
 			{
 				$name = 'DefaultSessionId';
@@ -291,6 +292,11 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $this->id;
 	}
 
+	public function name()
+	{
+		return $this->name;
+	}
+
 	public function _unset()
 	{
 		$this->exchangeArray([]);
@@ -385,21 +391,15 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	}
 
 
+	// clean vars on quasi-hard reset, leave __ and sticky_ vars in place
 	private function clean_vars()
 	{
-		// transfer sticky and some __ data
-		// XXX all __ vars are safe?
-		$gone = [];
-		foreach ($this as $var => $val)
+		foreach ($this->toArray() as $var => $val) // do not optimize toArray - php likes it this way
 		{
 			if (strncmp($var, 'sticky_', 7) && strncmp($var, '__', 2))
 			{
-				$gone[] = $var;
+				unset($this[$var]);
 			}
-		}
-		foreach ($gone as $var)
-		{
-			unset($this[$var]); // cannot unset in 1st loop - "Array was modified outside object and internal position is no longer valid"
 		}
 	}
 
@@ -514,12 +514,12 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 	}
 
-	private function send_cookie($remove = false)
+	protected function send_cookie($remove = false)
 	{
 		$this->_send_cookie($this->name, ($remove? '' : $this->id));
 	}
 
-	private function _send_cookie($name, $value)
+	protected function _send_cookie($name, $value)
 	{
 		$name = rawurlencode($name);
 		$this->remove_cookie($name);

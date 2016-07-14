@@ -250,7 +250,7 @@ class Http
 		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
 		{
 			// cache only for anonymous user
-			if (!isset($_COOKIE[$this->db->cookie_prefix . 'auth' . '_' . $this->db->cookie_hash]))
+			if (!isset($_COOKIE[$this->db->cookie_prefix . AUTH_TOKEN]))
 			{
 				$this->caching = $this->check_http_request();
 			}
@@ -292,7 +292,7 @@ class Http
 
 		$sess->real_ip = $this->real_ip; // STS hack. need to decide where real_ip should live
 		$sess->tls_session = $this->tls_session;
-		$sess->start($this->db->cookie_prefix);
+		$sess->start($this->db->cookie_prefix . 'Session');
 	}
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)

@@ -49,7 +49,6 @@ function admin_config_system(&$engine, &$module)
 			$config['cache_ttl']				= (int)$_POST['cache_ttl'];
 			$config['cache_sql']				= (int)$_POST['cache_sql'];
 			$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
-			$config['cookie_prefix']			= (string)$_POST['cookie_prefix'];
 			$config['rewrite_mode']				= (int)$_POST['rewrite_mode'];
 			$config['reverse_proxy']			= (int)$_POST['reverse_proxy'];
 			$config['reverse_proxy_header']		= $_POST['reverse_proxy_header'];
@@ -183,14 +182,6 @@ function admin_config_system(&$engine, &$module)
 					<br />
 					Miscellaneous
 				</th>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="cookie_prefix"><strong>The prefix for the names of cookies:</strong><br />
-				<small>Special prefix used for all the cookies platform.</small></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="cookie_prefix" name="cookie_prefix" value="<?php echo htmlspecialchars($engine->config['cookie_prefix'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="rewrite_mode"><strong>Use <code>mod_rewrite</code>:</strong><br />

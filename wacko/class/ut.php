@@ -467,8 +467,17 @@ class Ut
 	// current time by default, or looong ago date for -1
 	static function http_date($time = null)
 	{
-		return gmdate('D, d M Y H:i:s T',
-			Ut::is_empty($time)? time() : ($time < 0? 444444444 : $time));
+		return gmdate('D, d M Y H:i:s',
+			Ut::is_empty($time)? time() : ($time < 0? 444444444 : $time)) . ' GMT';
 	}
 
+	static function http64_encode($data)
+	{
+		return strtr(rtrim(base64_encode($data), '='), '+/', '-_');
+	}
+
+	static function http64_decode($data)
+	{
+		return base64_decode(strtr($data, '-_', '+/'));
+	}
 }

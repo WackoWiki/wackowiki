@@ -49,7 +49,7 @@ if ($this->has_access('read'))
 	echo $data;
 
 	// display comments
-	if ($this->sess->show_comments[$this->page['page_id']] || $this->forum)
+	if (@$this->sess->show_comments[$this->page['page_id']] || $this->forum)
 	{
 		if (($comments = $this->load_comments($this->page['page_id'])))
 		{

@@ -44,7 +44,6 @@ $config_db['captcha_registration']			= $config['captcha_registration'];
 $config_db['category_page']					= $config['category_page'];
 $config_db['comments_count']				= $config['comments_count'];
 $config_db['comment_delay']					= $config['comment_delay'];
-$config_db['cookie_prefix']					= $config['cookie_prefix'];
 $config_db['csp']							= $config['csp'];
 $config_db['date_format']					= $config['date_format'];
 $config_db['date_macro_format']				= $config['date_macro_format'];
