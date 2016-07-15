@@ -23,7 +23,7 @@ $lang = array(
 'PleaseUpgradeToR5' => 'Bei dir läuft eine alte (pre 5.0.0) Version von WackoWiki (<code class="version">%1</code>). Um auf diese neue Version von WackoWiki zu aktualisieren, musst du zuerst deine Installation auf <code class="version">5.0.x</code> updaten.',
 'UpgradeFromWacko' => 'Wilkommen bei WackoWiki, es scheint das du von WackoWiki <strong><code class="version">%1</code></strong> auf <strong><code class="version">%2</code></strong> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
 'FreshInstall' => 'Wilkommen bei WackoWiki, du installierst gerade WackoWiki <code class="version">%1</code>.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
-'PleaseBackup' => 'Bitte erstelle eine Sicherungskopie von deiner Datenbank, der Konfigurationsdatei config.php und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang beginnst. Das kann dir im Problemfall viel Ärger ersparen.',
+'PleaseBackup' => 'Bitte erstelle eine <strong>Sicherungskopie</strong> von deiner Datenbank, der Konfigurationsdatei config.php und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang beginnst. Das kann dir im Problemfall viel Ärger ersparen.',
 'LangDesc' => 'Wähle eine Sprache für die Installation aus. Das wird die Standardsprache für deine WackoWiki Installation.',
 
 /*
