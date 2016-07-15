@@ -19,18 +19,14 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_auth_token = "CREATE TABLE {$pref}auth_token (".
-					"cookie_token CHAR(40) COLLATE utf8_bin NOT NULL DEFAULT '',".
+					"auth_token_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"selector CHAR(12) NOT NULL DEFAULT '',".
+					"token CHAR(64) NOT NULL DEFAULT '',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"session_last_visit DATETIME NULL DEFAULT NULL,".
-					"session_start DATETIME NULL DEFAULT NULL,".
-					"session_time DATETIME NULL DEFAULT NULL,".
-					"session_ip VARCHAR(40) NOT NULL DEFAULT '',".
-					"session_browser VARCHAR(150) NOT NULL DEFAULT '',".
-					"session_forwarded_for VARCHAR(255) NOT NULL  DEFAULT '',".
-					"session_admin TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
-					"PRIMARY KEY (cookie_token),".
-					"KEY session_time (session_time),".
-					"KEY session_user_id (user_id)".
+					"token_expires DATETIME NULL DEFAULT NULL,".
+					"PRIMARY KEY (auth_token_id),".
+					"UNIQUE KEY idx_selector (selector),".
+					"KEY idx_user_id (user_id)".
 					") {$engine} COMMENT='' {$charset}";
 
 $table_cache = "CREATE TABLE {$pref}cache (".
