@@ -56,7 +56,7 @@ function bb2_httpbl_lookup($ip)
 
 	if (!$httpbl_key) return false;
 
-	$r = $this->sess->httpbl[$ip];
+	$r = $engine->sess->httpbl[$ip];
 	$d = '';
 
 	if (!$r)
@@ -67,7 +67,7 @@ function bb2_httpbl_lookup($ip)
 		if (!empty($result))
 		{
 			$r = $result[0];
-			$this->sess->httpbl[$ip] = $r;
+			$engine->sess->httpbl[$ip] = $r;
 		}
 	}
 
