@@ -107,7 +107,9 @@ $upgrade['5.1.0'][]		= array($lang['AlterTable'],	'upload',		$alter_upload_r5_1_
 // 5.4.0 ############
 
 // auth_token
-$upgrade['5.4.0'][]		= array($lang['CreatingTable'],	'auth_token',	$table_auth_token_r5_4_0,	$lang['ErrorCreatingTable']);
+$upgrade['5.5.rc'][]	= array($lang['DeletingTable'],	'auth_token',	$table_auth_token_drop,		$lang['ErrorDeletingTable']);
+
+$upgrade['5.5.rc'][]	= array($lang['CreatingTable'],	'auth_token',	$table_auth_token_r5_4_0,	$lang['ErrorCreatingTable']);
 
 // cache
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'cache',		$alter_cache_r5_4_0,		$lang['ErrorAlteringTable']);

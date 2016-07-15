@@ -398,29 +398,29 @@ $table_word = "CREATE TABLE {$pref}word (".
  Wacko Wiki MySQL Table Deletion Script
 */
 
-$table_acl_drop					= "DROP TABLE {$pref}acl";
-$table_auth_token_drop			= "DROP TABLE {$pref}auth_token";
-$table_menu_drop				= "DROP TABLE {$pref}menu";
-$table_cache_drop				= "DROP TABLE {$pref}cache";
-$table_config_drop				= "DROP TABLE {$pref}config";
-$table_category_drop			= "DROP TABLE {$pref}category";
-$table_category_page_drop		= "DROP TABLE {$pref}category_page";
-$table_file_link_drop			= "DROP TABLE {$pref}file_link";
-$table_link_drop				= "DROP TABLE {$pref}link";
-$table_log_drop					= "DROP TABLE {$pref}log";
-$table_page_drop				= "DROP TABLE {$pref}page";
-$table_poll_drop				= "DROP TABLE {$pref}poll";
-$table_rating_drop				= "DROP TABLE {$pref}rating";
-$table_referrer_drop			= "DROP TABLE {$pref}referrer";
-$table_revision_drop			= "DROP TABLE {$pref}revision";
-$table_tag_drop					= "DROP TABLE {$pref}tag";
-$table_tag_page_drop			= "DROP TABLE {$pref}tag_page";
-$table_upload_drop				= "DROP TABLE {$pref}upload";
-$table_user_drop				= "DROP TABLE {$pref}user";
-$table_user_setting_drop		= "DROP TABLE {$pref}user_setting";
-$table_usergroup_drop			= "DROP TABLE {$pref}usergroup";
-$table_usergroup_member_drop	= "DROP TABLE {$pref}usergroup_member";
-$table_watch_drop				= "DROP TABLE {$pref}watch";
-$table_word_drop				= "DROP TABLE {$pref}word";
+$table_acl_drop					= "DROP TABLE IF EXISTS {$pref}acl";
+$table_auth_token_drop			= "DROP TABLE IF EXISTS {$pref}auth_token";
+$table_menu_drop				= "DROP TABLE IF EXISTS {$pref}menu";
+$table_cache_drop				= "DROP TABLE IF EXISTS {$pref}cache";
+$table_config_drop				= "DROP TABLE IF EXISTS {$pref}config";
+$table_category_drop			= "DROP TABLE IF EXISTS {$pref}category";
+$table_category_page_drop		= "DROP TABLE IF EXISTS {$pref}category_page";
+$table_file_link_drop			= "DROP TABLE IF EXISTS {$pref}file_link";
+$table_link_drop				= "DROP TABLE IF EXISTS {$pref}link";
+$table_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
+$table_page_drop				= "DROP TABLE IF EXISTS {$pref}page";
+$table_poll_drop				= "DROP TABLE IF EXISTS {$pref}poll";
+$table_rating_drop				= "DROP TABLE IF EXISTS {$pref}rating";
+$table_referrer_drop			= "DROP TABLE IF EXISTS {$pref}referrer";
+$table_revision_drop			= "DROP TABLE IF EXISTS {$pref}revision";
+$table_tag_drop					= "DROP TABLE IF EXISTS {$pref}tag";
+$table_tag_page_drop			= "DROP TABLE IF EXISTS {$pref}tag_page";
+$table_upload_drop				= "DROP TABLE IF EXISTS {$pref}upload";
+$table_user_drop				= "DROP TABLE IF EXISTS {$pref}user";
+$table_user_setting_drop		= "DROP TABLE IF EXISTS {$pref}user_setting";
+$table_usergroup_drop			= "DROP TABLE IF EXISTS {$pref}usergroup";
+$table_usergroup_member_drop	= "DROP TABLE IF EXISTS {$pref}usergroup_member";
+$table_watch_drop				= "DROP TABLE IF EXISTS {$pref}watch";
+$table_word_drop				= "DROP TABLE IF EXISTS {$pref}word";
 
 ?>
