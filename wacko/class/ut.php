@@ -277,11 +277,25 @@ class Ut
 	// file_glob($directory, '{,.}*') --> returns list of all files (not directories)
 	static function file_glob()
 	{
-		return array_filter((array) glob(Ut::join_path(func_get_args()), GLOB_MARK | GLOB_NOSORT | GLOB_BRACE),
+		return array_filter(Ut::expand_braces(Ut::join_path(func_get_args())),
 			function ($x)
 			{
 				return substr($x, -1) != '/';
 			});
+	}
+
+	static function expand_braces($text)
+	{
+		if (preg_match('/^(.*?)\{([^{}]*)\}(.*)$/', $text, $match))
+		{
+			$res = [];
+			foreach (explode(',', $match[2]) as $part)
+			{
+				$res = array_merge($res, Ut::expand_braces($match[1] . $part . $match[3]));
+			}
+			return $res;
+		}
+		return (array) glob($text, GLOB_MARK | GLOB_NOSORT);
 	}
 
 	// delete all (or older than $ttl seconds) files in directory
@@ -328,9 +342,18 @@ class Ut
 
 	static function random_bytes($length)
 	{
+		if ($length <= 0)
+		{
+			return '';
+		}
+
 		if (function_exists('random_bytes'))
 		{
-			return random_bytes($length);
+			$bytes = @random_bytes($length); // we can live with bad randomness source exception
+			if ($bytes)
+			{
+				return $bytes;
+			}
 		}
 
 		$sha = '';

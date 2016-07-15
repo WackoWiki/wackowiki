@@ -4,7 +4,7 @@ class SessionFileStore extends Session
 {
 	// config options:
 	public $cf_file_path = '/tmp';
-	public $cf_file_mode = 0600;
+	public $cf_file_mode = 0640;	// STS should be 0600 in production
 	public $cf_file_encrypt = 1;
 
 	private $prefix = false;
@@ -112,7 +112,6 @@ class SessionFileStore extends Session
 
 	protected function store_gc()
 	{
-		// STS: session files bound to session cookie name, so hope that ONE session name will be used in each run ;)
 		$lvl1 = [];
 		$preflen = strlen($this->prefix);
 		foreach ((array) scandir($this->cf_file_path, SCANDIR_SORT_NONE) as $file)
@@ -162,6 +161,7 @@ class SessionFileStore extends Session
 			}
 			if ($nstats > 600 || $ndels > 100) break; // TODO magic number
 		}
+
 		Ut::dbg('gc', $nstats, $ndels);
 
 		return $ndels;
