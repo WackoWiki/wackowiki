@@ -7197,7 +7197,7 @@ class Wacko
 		}
 
 		$html		= $this->config['allow_rawhtml'];
-		$this->config['allow_rawhtml'] = 0;			// STS: touching config considered a hack
+		$this->config['allow_rawhtml'] = 0;
 		$message	= ( isset($this->language) ? $this->format($message, 'wacko') : $message );
 		$user_id	= $this->get_user_id();
 		$this->config['allow_rawhtml'] = $html;

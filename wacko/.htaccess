@@ -5,7 +5,7 @@
  #RewriteRule ^(.*/[^\./]*[^/])$ $1/
  RewriteRule ^index\.php$ index.php [QSA,L]
  RewriteRule ^index\.html$ index.php [QSA,L]
- RewriteRule ^admin\.php$ admin.php [L]
+ RewriteRule ^admin\.php$ admin.php [QSA,L]
  RewriteRule ^robots\.txt$ robots.txt [L]
  RewriteRule ^sitemap\.xml$ sitemap.xml [L]
  RewriteRule ^favicon\.ico$ favicon.ico [L]
