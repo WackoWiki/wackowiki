@@ -34,7 +34,7 @@ label {
 }
 
 /* Textareas */
-select, 
+/* select,  */
 textarea, 
 input:not([type]), 
 input[type="text"], 
