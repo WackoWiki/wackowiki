@@ -54,38 +54,37 @@ if (($user = $this->get_user()))
 	echo '<div class="cssform">';
 	echo '<h3>'.$this->get_translation('Hello').", ".$this->compose_link_to_page($this->db->users_page.'/'.$user['user_name'], '', $user['user_name']).'!</h3>';
 
-	if ($this->get_cookie(AUTH_TOKEN))
+	if ($user['last_visit'])
 	{
-		if ($user['last_visit'])
-		{
-			$this->set_message($this->get_translation('LastVisit') .
-				' <code>' .
-				$this->get_time_formatted($user['last_visit']) .
-				'</code>');
-		}
-
-		$cookie = explode(';', $this->get_cookie(AUTH_TOKEN));
-
-		$this->set_message($this->get_translation('SessionEnds') .
+		$this->set_message($this->get_translation('LastVisit') .
 			' <code>' .
-			$this->get_unix_time_formatted($cookie[2]) .  // session expiry date
-			'</code> ' .
-			'(' . $this->get_time_interval($cookie[2] - time(), true) . ')'); // session time left
-
-		// Only allow your session to be used from this IP address.
-		$this->set_message($this->get_translation('BindSessionIp') . ' '.
-			($user['validate_ip']? $this->get_translation('BindSessionIpOn') . ' ' : '') .
-			'<code>' .
-			($user['validate_ip']? $user['ip'] : 'Off') .
+			$this->get_time_formatted($user['last_visit']) .
 			'</code>');
+	}
 
-		if ($this->db->tls || $this->db->tls_proxy)
-		{
-			$this->set_message($this->get_translation('TrafficProtection') .
-				' <code>' .
-				( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ) .
-				'</code>');
-		}
+	/* STS meaning lost, seems like to be removed
+	$cookie = explode(';', $this->get_cookie(AUTH_TOKEN));
+
+	$this->set_message($this->get_translation('SessionEnds') .
+		' <code>' .
+		$this->get_unix_time_formatted($cookie[2]) .  // session expiry date
+		'</code> ' .
+		'(' . $this->get_time_interval($cookie[2] - time(), true) . ')'); // session time left
+	*/
+
+	// Only allow your session to be used from this IP address.
+	$this->set_message($this->get_translation('BindSessionIp') . ' '.
+		($user['validate_ip']? $this->get_translation('BindSessionIpOn') . ' ' : '') .
+		'<code>' .
+		($user['validate_ip']? $user['ip'] : 'Off') .
+		'</code>');
+
+	if ($this->db->tls || $this->db->tls_proxy)
+	{
+		$this->set_message($this->get_translation('TrafficProtection') .
+			' <code>' .
+			( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ) .
+			'</code>');
 	}
 
 	echo '<p><a href="' . $this->href('', '', 'action=logout') . '" style="text-decoration: none;">';
@@ -210,25 +209,9 @@ else // login
 							)
 						)
 					{
-						// define session duration in days
-						if (!empty($existing_user['session_length']))
-						{
-							$session_length = $existing_user['session_length'];
-						}
-						else
-						{
-							$session_length = $this->db->session_length;
-						}
-
-						$this->log_user_in($existing_user, (int)@$_POST['persistent'], $session_length);
-						$this->set_user($existing_user, 1);
-						$this->set_menu(MENU_USER);
+						$this->log_user_in($existing_user, (int)@$_POST['persistent']);
+						$this->set_user($existing_user);
 						$this->context[++$this->current_context] = '';
-
-						// TODO: merge into one function? 3 updates
-						$this->login_count($existing_user['user_id']);
-						$this->reset_failed_user_login_count($existing_user['user_id']);
-						$this->reset_lost_password_count($existing_user['user_id']);
 
 						$this->log(3, Ut::perc_replace($this->get_translation('LogUserLoginOK', -1), $existing_user['user_name']));
 

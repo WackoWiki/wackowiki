@@ -232,8 +232,6 @@ $wacko_config_defaults = array(
 	'allow_persistent_cookie'		=> 1,
 	'session_match_ip'				=> false,
 	'session_match_useragent'		=> true,
-	'session_use_db'				=> false,
-	'session_time_to_update'		=> 300,
 
 	'enable_security_headers'		=> 1,
 	'csp'							=> 1,

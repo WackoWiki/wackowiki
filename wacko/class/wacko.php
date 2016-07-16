@@ -40,6 +40,7 @@ class Wacko
 	var $_formatter_noautolinks	= null;
 	var $numerate_links			= null;
 	var $post_wacko_action		= null;
+	var $page_lang		 		= null;
 	var $html_head				= '';
 	var $hide_article_header	= false;
 	var $paragrafica_styles		= array(
@@ -254,9 +255,8 @@ class Wacko
 		$timezone		= isset($user['timezone'])	? $user['timezone']	: $this->config['timezone'];
 		$dst			= isset($user['dst'])		? $user['dst']		: $this->config['dst'];
 		$zone_offset	= ($timezone * 3600) + ($dst * 3600);
-		$tz_time		= $time + $zone_offset - date('Z');
 
-		return $tz_time;
+		return $time + $zone_offset;
 	}
 
 	function get_time_formatted($time)
@@ -305,9 +305,8 @@ class Wacko
 	function set_language($lang, $set_translation = false)
 	{
 		$old_lang	= @$this->language['LANG'];
-		$lang_list	= $this->available_languages();
 
-		if ($old_lang != $lang && isset($lang_list[$lang]))
+		if ($old_lang != $lang && $this->known_language($lang))
 		{
 			$this->load_translation($lang);
 			$this->language = &$this->languages[$lang];
@@ -473,6 +472,12 @@ class Wacko
 		return $lang_list[!!$subset];
 	}
 
+	function known_language($lang)
+	{
+		$langs = $this->available_languages();
+		return isset($langs[$lang]);
+	}
+
 	// negotiate language with user's browser
 	function user_agent_language()
 	{
@@ -519,14 +524,13 @@ class Wacko
 
 	function get_user_language()
 	{
-		$user = $this->get_user();
-		$lang = @$user['user_lang'];
-		$lang_list = $this->available_languages();
+		$lang = $this->get_user_setting('user_lang');
 
-		if (!isset($lang_list[$lang]))
+		if (!$this->known_language($lang))
 		{
 			$lang = $this->user_agent_language();
 		}
+
 		return $lang;
 	}
 
@@ -597,8 +601,7 @@ class Wacko
 			$lang = @$this->page_lang;
 		}
 
-		$lang_list = $this->available_languages();
-		if (!isset($lang_list[$lang]))
+		if (!$this->known_language($lang))
 		{
 			$lang = $this->get_user_language();
 		}
@@ -1357,8 +1360,6 @@ class Wacko
 
 	function set_page($page)
 	{
-		$lang_list = $this->available_languages();
-
 		if ($page['deleted'] && !$this->is_admin())
 		{
 			$page['body']			= '';
@@ -1376,11 +1377,11 @@ class Wacko
 			$this->tag = $this->page['tag'];
 		}
 
-		if ($page['page_lang'] && isset($lang_list[$page['page_lang']]))
+		if ($this->known_language($page['page_lang']))
 		{
 			$this->page_lang = $page['page_lang'];
 		}
-		else if (@$_REQUEST['add'] && isset($lang_list[@$_REQUEST['lang']]))
+		else if (@$_REQUEST['add'] && $this->known_language(@$_REQUEST['lang']))
 		{
 			$this->page_lang = $_REQUEST['lang'];
 		}
@@ -1862,13 +1863,9 @@ class Wacko
 			{
 				if (empty($lang))
 				{
-					$lang_list = $this->available_languages();
+					$lang = @$_REQUEST['lang'];
 
-					if (isset($lang_list[@$_REQUEST['lang']]))
-					{
-						$lang = $_REQUEST['lang'];
-					}
-					else
+					if (!$this->known_language($lang))
 					{
 						$lang = $this->user_lang;
 					}
@@ -2565,65 +2562,6 @@ class Wacko
 			$this->db->cookie_path, '', ($this->db->tls && $this->http->tls_session), true);
 
 		unset($_COOKIE[$name]);
-	}
-
-	// purge cockie_tokens
-	//	- user_id
-	//	- expired
-	//	- purge_days
-	function delete_cookie_token($user_id = '', $expired = true, $purge_days = 3)
-	{
-		$sql = "SELECT user_id, MAX(session_time) AS recent_time
-				FROM {$this->config['table_prefix']}auth_token ".
-				($expired
-					? "WHERE session_time < UTC_TIMESTAMP() "
-					: "").
-				($user_id
-					? "WHERE user_id = '".(int)$user_id."' "
-					: "").
-				"GROUP BY user_id";
-
-		$sessions = $this->load_all($sql);
-
-		// composing a list of candidates
-		if (is_array($sessions))
-		{
-			#$del_sessions = 0;
-			$remove = array();
-
-			foreach ($sessions as $session)
-			{
-				$sql = "UPDATE {$this->config['table_prefix']}user SET
-							session_expire	= 0, ".
-							($expired
-								? "last_visit	= '".$session['recent_time']."' "
-								: "last_visit	= UTC_TIMESTAMP() ").
-						"WHERE user_id = '".(int)$session['user_id']."'
-						LIMIT 1";
-
-				$this->sql_query($sql);
-
-				// does the session has been deleted earlier than specified number of days ago?
-				if (strtotime($session['recent_time']) < time() - DAYSECS * $purge_days || !$expired)
-				{
-					$remove[] = "'".(int)$session['user_id']."'";
-				}
-			}
-
-			if (count($remove))
-			{
-				// Delete expired sessions
-				$sql = "DELETE FROM {$this->config['table_prefix']}auth_token
-						WHERE user_id IN ( ".implode(', ', $remove)." ) ".
-						($expired
-							? "AND session_time < UTC_TIMESTAMP()"
-							: "");
-
-				$this->sql_query($sql);
-
-				unset($remove);
-			}
-		}
 	}
 
 	// HTTP/REQUEST/LINK RELATED
@@ -4469,42 +4407,22 @@ class Wacko
 	 *
 	 * @return string
 	 */
-	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false, $login_token = false)
+	function load_user($user_name, $user_id = 0)
 	{
-		$fields_setting	= 's.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica,
-							s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
-							s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
-							s.session_length, s.timezone, s.dst, s.sorting_comments, t.session_time, t.cookie_token ';
-		$fields_default	= 'u.*, '.$fields_setting;
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.enabled, u.user_form_salt, u.email_confirm,
-							t.session_time, u.last_visit, u.session_expire, u.last_mark, '.$fields_setting;
-
-		$user = $this->load_single(
-			"SELECT ".($session_data
-				? $fields_session
-				: $fields_default
-				).
-			"FROM ".$this->config['user_table']." u ".
-				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
-				"LEFT JOIN ".$this->config['table_prefix']."auth_token t ON (u.user_id = t.user_id) ".
+		return $this->load_single(
+			"SELECT ".
+				'u.*, '.
+				's.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica,
+				s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
+				s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
+				s.session_length, s.timezone, s.dst, s.sorting_comments '.
+			"FROM ".$this->db->user_table." u ".
+				"LEFT JOIN ".$this->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id
 					? "u.user_id		= '".(int)$user_id."' "
-					: 	( $login_token !== false
-						? "t.cookie_token	= '".quote($this->dblink, $login_token)."' "
-						: "u.user_name	= '".quote($this->dblink, $user_name)."' ")).
+					: "u.user_name	= ".$this->db->q($user_name)." ").
 					"AND u.account_type = '0' ".
-			($password === 0
-				? ""
-				: "AND u.password = '".quote($this->dblink, $password)."'"
-				)." ".
 			"LIMIT 1");
-
-		if (!$user['session_time'])
-		{
-			$user['session_time'] = '';
-		}
-
-		return $user;
 	}
 
 	function get_user_name()
@@ -4524,15 +4442,16 @@ class Wacko
 	}
 
 	// insert user data into the session array
-	function set_user($user, $ip = 1)
+	function set_user($user)
 	{
 		$this->sess->userprofile = $user;
 
-		// define current IP for foregoing checks
-		if ($ip)
-		{
-			$this->set_user_setting('ip', $this->get_user_ip());
-		}
+		$this->set_user_setting('ip', $this->get_user_ip());
+
+		$this->user_lang = $this->get_user_language();
+		$this->set_language($this->user_lang, true);
+
+		$this->set_menu(MENU_USER);
 	}
 
 	// extract specific element from user session array
@@ -4619,148 +4538,88 @@ class Wacko
 		return $max;
 	}
 
-	/**
-	 * Return unique id
+	/*
+	 * auth token workshop
 	 */
-	function unique_id()
+	function create_auth_token($user, $persistent = false)
 	{
-		return Ut::random_token(16);
+		$session_days = ($user['session_length'] > 0)? $user['session_length'] : $this->db->session_length;
+
+		$selector = Ut::http64_encode(Ut::random_bytes(9));
+		$authenticator = Ut::random_bytes(33);
+
+		$this->set_cookie(AUTH_TOKEN, $selector . Ut::http64_encode($authenticator), ($persistent? $session_days : false));
+
+		$this->sql_query(
+			"INSERT INTO {$this->db->table_prefix}auth_token SET ".
+				"selector			= '" . $selector . "', ".
+				"token				= '" . hash('sha256', $authenticator) . "', ".
+				"user_id			= '" . (int)$user['user_id'] . "', ".
+				"persistent			= '" . (int)$persistent . "', ".
+				"token_expires		= '" . gmdate(SQL_DATE_FORMAT, time() + $session_days * DAYSECS) . "'"
+			);
 	}
 
-	function log_user_in($user, $persistent = false, $session_length = 0)
+	function check_auth_token()
 	{
-		// cookie elements
-
-		// session length in days
-		$session_length			= ($session_length == 0 ? $this->config['session_length'] : $session_length);
-		$session_length			= ($persistent ? $session_length : 0.25);
-		$session_expire			= time() + $session_length * DAYSECS;
-
-		//  generate a string to use as the identifier for the login cookie
-		$login_token			= $this->unique_id(); // TODO:
-		$this->cookie_token		= hash('sha1', $login_token);
-
-		$salt_length			= 10;
-		$salt_user_form			= Ut::random_token($salt_length, 3);
-
-		$this->time_now			= date('Y-m-d H:i:s');
-		$this->session_time		= date('Y-m-d H:i:s', $session_expire);
-
-		if ($user['user_id'])
+		if (($token = $this->get_cookie(AUTH_TOKEN)))
 		{
-			$this->session_last_visit = (!empty($user['session_time']) && $user['session_time'])
-											? $user['session_time']
-											: ($user['last_visit']
-												? $user['last_visit']
-												: $this->time_now );
+			$selector = substr($token, 0, 12);
+			$authenticator = substr($token, 12);
+
+			$token = $this->load_single(
+				"SELECT * ".
+				"FROM {$this->db->table_prefix}auth_token ".
+				"WHERE selector = " . $this->db->q($selector) . " ".
+				"LIMIT 1");
+
+			if ($token && $token['token'] === hash('sha256', Ut::http64_decode($authenticator)))
+			{
+				$this->sql_query("DELETE FROM {$this->db->table_prefix}auth_token WHERE auth_token_id = '" . (int)$token['auth_token_id'] . "'");
+
+				$this->sql_query(
+					"UPDATE {$this->db->user_table} SET ".
+						"last_visit						= UTC_TIMESTAMP() ".
+					"WHERE ".
+						"user_id						= '" . (int)$token['user_id'] . "' ".
+					"LIMIT 1");
+
+				if (($user = $this->load_user(0, $token['user_id'])))
+				{
+					$this->create_auth_token($user, $token['persistent']);
+					return $user;
+				}
+			}
+
+			$this->delete_cookie(AUTH_TOKEN);
 		}
-		else
-		{
-			$this->session_last_visit = $this->time_now;
-		}
 
-		#$this->update_session_page	= $update_session_page;
-		$this->browser				= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
-		#$this->referer				= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
-		$this->forwarded_for		= isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
-		$this->ip					= $this->get_user_ip();
+		return false;
+	}
 
-		// cookie MAC
-		$time_pad		= str_pad($session_expire, 32, '0', STR_PAD_LEFT);
-		$b64password	= base64_encode(hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
-		// authenticating cookie data:
-		// seed | login token | composed pwd | raw session time | raw password
-		$cookie_mac		= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$session_expire.$user['password']);
+	function delete_auth_token($user_id)
+	{
+		$this->sql_query("DELETE FROM {$this->db->table_prefix}auth_token WHERE user_id = '" . (int)$user_id . "'");
+	}
 
-		// TODO: use hash_hmac instead
-		#$hmac_key		= hash("sha256", $password, true);
-		#$cookie_hmac	= hash_hmac('sha256', $login_token|$session_expire, $hmac_key);
+	function log_user_in($user, $persistent = false)
+	{
+		$this->create_auth_token($user, $persistent);
 
-		// construct and set cookie
-		$cookie_value	= implode(';', array($login_token, $b64password, $session_expire, $cookie_mac));
-
-		// set auth cookie
-		$this->set_cookie(AUTH_TOKEN, $cookie_value, ($persistent? $session_length : false));
-
-		// update session expiry, user_form_salt and clear password recovery
-		// code in user data table
 		$this->sql_query(
-			"UPDATE {$this->config['user_table']} SET ".
-				"session_expire		= '".(int) $session_expire."', ".
-				"user_form_salt		= '".quote($this->dblink, $salt_user_form)."', ".
-				"change_password	= '' ".
-			"WHERE user_id		= '".$user['user_id']."' ".
+			"UPDATE {$this->db->user_table} SET ".
+				"last_visit						= UTC_TIMESTAMP(), ".
+				// STS why user_form_salt is in dbase at all? it's place in session!
+				"user_form_salt					= " . $this->db->q(Ut::random_token(10, 3)) . ", ".
+				"change_password				= '', ".
+				"login_count					= login_count + 1, ".
+				"failed_login_count				= 0, ".
+				"lost_password_request_count	= 0 ".
+			"WHERE ".
+				"user_id						= '" . (int)$user['user_id'] . "' ".
 			"LIMIT 1");
 
-		if (empty($user['cookie_token']))
-		{
-			$this->sql_query(
-				"INSERT INTO {$this->config['table_prefix']}auth_token SET ".
-					"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
-					"user_id				= '".(int)$user['user_id']."', ".
-					"session_start			= UTC_TIMESTAMP(), ".
-					"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
-					"session_time			= '".quote($this->dblink, $this->session_time)."', ".
-					"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
-					"session_forwarded_for	= '".quote($this->dblink, (string) $this->forwarded_for)."', ".
-					"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
-					#"session_autologin		= ($session_autologin) ? 1 : 0, ".
-					#"session_admin			= ($set_admin) ? 1 : 0 ".
-				"");
-		}
-		else
-		{
-			$this->sql_query(
-				"UPDATE {$this->config['table_prefix']}auth_token SET ".
-					"cookie_token			= '".quote($this->dblink, $this->cookie_token)."', ".
-					"session_last_visit		= '".quote($this->dblink, $this->session_last_visit)."', ".
-					"session_time			= '".quote($this->dblink, $this->session_time)."', ".
-					"session_browser		= '".quote($this->dblink, (string) trim(substr($this->browser, 0, 149)))."', ".
-					"session_forwarded_for	= '".quote($this->dblink, (string) $this->forwarded_for)."', ".
-					"session_ip				= '".quote($this->dblink, (string) $this->ip)."' ".
-					#"session_autologin		= ($session_autologin) ? 1 : 0, ".
-					#"session_admin			= ($set_admin) ? 1 : 0 ".
-				"WHERE user_id			= '".$user['user_id']."' ".
-				"LIMIT 1");
-		}
-
-		// restart logged in user session with specific session id
-		return $this->restart_user_session($user, $session_expire);
-	}
-
-	// regenerate session id for registered user
-	function restart_user_session($user, $session_expire)
-	{
-		return $this->sess->restart();
-	}
-
-	// restore login_token/password/etc from auth cookie
-	function decompose_auth_cookie($name = AUTH_TOKEN)
-	{
-		$recalc_mac = '';
-		$cookie_mac = '';
-
-		// get cookie value
-		if (($cookie = $this->get_cookie($name)))
-		{
-			list($login_token, $b64password, $session_expire, $cookie_mac) = explode(';', $cookie);
-
-			$time_pad	= str_pad($session_expire, 32, '0', STR_PAD_LEFT);
-			$password	= hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
-			$recalc_mac	= hash('sha1', $this->config['system_seed'].$login_token.$b64password.$session_expire.$password);
-
-			return array(
-				'login_token'		=> $login_token,
-				'password'			=> $password,
-				'session_expire'	=> $session_expire,
-				'cookie_mac'		=> $cookie_mac,
-				'recalc_mac'		=> $recalc_mac
-			);
-		}
-		else
-		{
-			return null;
-		}
+		$this->sess->restart();
 	}
 
 	// end user session and free session vars
@@ -4768,8 +4627,7 @@ class Wacko
 	{
 		if (($user_id = $this->get_user_setting('user_id')))
 		{
-			// clear session expiry in user data table and cookie_token in auth_token table
-			$this->delete_cookie_token($user_id, false);
+			$this->delete_auth_token($user_id);
 		}
 
 		$this->delete_cookie(AUTH_TOKEN);
@@ -5917,10 +5775,9 @@ class Wacko
 		}
 
 		// purge expired cookie_tokens (once per 3 days)
-		if (($days = 3)
-				&& $now > $this->config->maint_last_session)
+		if ($now > $this->config->maint_last_session)
 		{
-			$this->delete_cookie_token('', true, $days);
+			$this->sql_query("DELETE FROM {$this->db->table_prefix}auth_token WHERE token_expires < UTC_TIMESTAMP()");
 
 			$update['maint_last_session'] = $now + 3 * DAYSECS;
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
@@ -5958,71 +5815,23 @@ class Wacko
 			$this->maintenance();
 		}
 
-		// parse authentication cookie and get user data
-		$auth = $this->decompose_auth_cookie();
-
-		if ($auth['login_token'])
-		{
-			$login_token	= hash('sha1', $auth['login_token']);
-			$user			= $this->load_user(false, 0, $auth['password'], true, $login_token );
-		}
-
-		// check session validity
-		if (isset($user['session_expire']) && $user['session_expire'] != 0
-			&& time() < $user['session_expire']
-			&& time() < $auth['session_expire']
-			&& $user['session_expire'] == $auth['session_expire']
-			&& $auth['recalc_mac'] == $auth['cookie_mac'])
-		{
-			$session = true;
-		}
-		else
-		{
-			// log event: invalid auth cookie
-			if ($auth['recalc_mac'] != $auth['cookie_mac'])
-			{
-				$this->log(1, '!!**'.'Malformed/forged user authentication cookie detected. Destroying existing session (if any)'.'!!**');
-			}
-
-			$session = false;
-
-			// terminate expired/invalid session
-			if ($this->get_user())
-			{
-				// log event: session expired
-				if (time() > $auth['session_expire'])
-				{
-					$this->log(2, 'Expired user session terminated');
-				}
-
-				$this->log_user_out();
-				#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag); // TODO: $this->get_translation('LoginPage') and $this->config['login_page'] -> multilanguage: we need encoding related default pages till we use utf-8
-				$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
-			}
-		}
-
 		// check IP validity
 		if ($this->get_user_setting('validate_ip') && $this->get_user_setting('ip') != $this->get_user_ip())
 		{
 			$this->log(1, '<strong><span class="cite">'.'User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->get_user_ip().'</span></strong>');
 			$this->log_user_out();
-			#$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
+			// $this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
 			$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
-			$session = false;
 		}
 
 		// start user session
-		if (!$this->get_user() && $session === true && $user == true)
+		if (!($user = $this->get_user()) && ($user = $this->check_auth_token()))
 		{
-			$this->restart_user_session($user, $auth['session_expire']);
-			$this->set_user($user, 1);
-
-			unset($user);
+			// re-login by auth token
+			$this->set_message('Welcome back, ' . $user['user_name']); // STS translate
+			$this->sess->restart();
+			$this->set_user($user);
 		}
-
-		$user = $this->get_user();
-
-		unset($auth);
 
 		// user settings
 		$this->user_lang = $this->get_user_language();

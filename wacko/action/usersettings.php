@@ -54,7 +54,7 @@ else if (isset($_GET['action']) && $_GET['action'] == 'logout')
 else if ($user = $this->get_user())
 {
 	$email_changed	= false;
-	$user = $this->load_user(0, $user['user_id'], 0, false);
+	$user = $this->load_user(0, $user['user_id']);
 	$this->set_page_lang($this->user_lang);
 	$action = @$_POST['action'];
 	$email = @$_POST['email'];
@@ -197,10 +197,8 @@ else if ($user = $this->get_user())
 	// reload user data
 	if ($sql || $resend_code)
 	{
-		$this->set_user($this->load_user(0, $user['user_id'], 0, false), 1);
-		$this->set_menu(MENU_USER);
-
-		$user = $this->get_user();
+		$user = $this->load_user(0, $user['user_id']);
+		$this->set_user($user);
 
 		$this->set_message($this->get_translation('UserSettingsStored', @$_POST['user_lang']), 'success');
 

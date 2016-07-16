@@ -250,7 +250,7 @@ class Http
 		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
 		{
 			// cache only for anonymous user
-			if (!isset($_COOKIE[$this->db->cookie_prefix . AUTH_TOKEN]))
+			if (!isset($this->session->userprofile))
 			{
 				$this->caching = $this->check_http_request();
 			}

@@ -26,6 +26,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 {
 	private $active = false;
 	private $send_cookie = false;
+	private $regenerated = false;
 	private $name = '';				// NB [0-9a-zA-Z]+ -- should be short and descriptive (i.e. for users with enabled cookie warnings)
 	private $id = null;				// NB [0-9a-zA-Z,-]+
 
@@ -128,6 +129,12 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 		else if ($this->active && !isset($this->__reg_expire))
 		{
+			if ($this->regenerated)
+			{
+				// single regeneration in one session would be enough
+				return true;
+			}
+
 			$now = time();
 
 			$this->__regenerations[] = [$now, $message];		// XXX trim
@@ -158,6 +165,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 
 			$this->__regenerated = $now;
+			$this->regenerated = true;
 
 			return true;
 		}
@@ -203,6 +211,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 
 		$this->id = $id;
+		$this->regenerated = false;
 		$this->store_open($this->name);
 		$this->initialize();
 		$this->cache_limiter(); // TODO - why it is in the session?

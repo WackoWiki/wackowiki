@@ -182,7 +182,7 @@ if (!empty($blog_cluster))
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=week');
 
-		$date	= date("Y-m-d H:i:s", strtotime($date));
+		$date	= date(SQL_DATE_FORMAT, strtotime($date)); // TODO sql date/tz 
 		$pages	= $this->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 			"FROM {$prefix}page p ".

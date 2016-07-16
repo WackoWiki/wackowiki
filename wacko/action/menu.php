@@ -231,9 +231,6 @@ if (isset($_POST['_user_menu']))
 		}
 	}
 
-	// reload user data
-	#$this->set_user($this->load_user('', $_user_id, '', true), 0, 1, true);
-
 	// purge SQL queries cache
 	$this->config->invalidate_sql_cache();
 

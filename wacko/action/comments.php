@@ -102,12 +102,9 @@ if ($this->user_allowed_comments())
 
 			if ($access && $this->user_allowed_comments())
 			{
-				// tz offset
 				$time_tz = $this->get_time_tz( strtotime($page['comment_time']) );
-				$time_tz = date('Y-m-d H:i:s', $time_tz);
-
-				// day header
-				list($day, $time) = explode(' ', $time_tz);
+				$day = date($this->config['date_format'], $time_tz);
+				$time = date($this->config['time_format_seconds'], $time_tz);
 
 				if ($day != $curday)
 				{
@@ -135,7 +132,7 @@ if ($this->user_allowed_comments())
 
 
 				// print entry
-				echo '<li '.$viewed.'><span class="dt">'.date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
+				echo '<li '.$viewed.'><span class="dt">'.$time."</span> &mdash; ".
 				($title == 1
 					? $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
 					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'], 0, 1, $page_lang, 0)
