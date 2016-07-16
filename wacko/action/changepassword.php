@@ -256,7 +256,7 @@ else
 				$this->set_lost_password_count($user['user_id']);
 
 				// log event
-				$this->log(3, str_replace('%2', $user['email'], str_replace('%1', $user['user_name'], $this->get_translation('LogUserPasswordReminded', $this->config['language']))));
+				$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordReminded', SYSTEM_LANG), $user['user_name'], $user['email']));
 
 				$this->set_message($this->get_translation('CodeWasSent'));
 				$this->redirect($this->href('', $this->get_translation('LoginPage')));

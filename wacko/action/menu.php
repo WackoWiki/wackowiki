@@ -58,21 +58,11 @@ if ($this->is_admin() && $system == true)
 	$_user_id		= $this->get_user_id('System');
 	$default_menu	= true;
 
-	if ($this->config['multilanguage'] == false)
+	$menu_lang = ($this->config['multilanguage']? @$_REQUEST['menu_lang'] : '');
+	if (!$this->known_language($menu_lang))
 	{
-		$menu_lang = $this->config['language'];
-	}
-	else
-	{
-		#$menu_lang = isset($_GET['menu_lang']) ? $_GET['menu_lang'] : isset($_POST['menu_lang']) ? $_POST['menu_lang'] : $this->config['language'];
-		$menu_lang = isset($_REQUEST['menu_lang']) ? $_REQUEST['menu_lang'] : $this->config['language'];
-
-		// sanitize in_array ...
-		if(!in_array($menu_lang, $this->available_languages()))
-		{
-			//language doesn't have any language files so use the admin set language instead
-			$menu_lang = $this->config['language'];
-		}
+		//language doesn't have any language files so use the admin set language instead
+		$menu_lang = $this->db->language;
 	}
 
 	#$this->set_menu(MENU_DEFAULT);
@@ -266,15 +256,12 @@ if ($_user_id)
 			}
 			else
 			{
-				$langs[] = $this->config['language'];
+				$langs = [$this->config['language']];
 			}
 
-			if ($langs)
+			foreach ($langs as $lang)
 			{
-				foreach ($langs as $lang)
-				{
-					echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
-				}
+				echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 			}
 
 			echo "</select>\n";
@@ -355,15 +342,12 @@ if ($_user_id)
 		}
 		else
 		{
-			$langs[] = $this->config['language'];
+			$langs = [$this->config['language']];
 		}
 
-		if ($langs)
+		foreach ($langs as $lang)
 		{
-			foreach ($langs as $lang)
-			{
-				echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
-			}
+			echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
 		}
 
 		echo "</select>\n";
@@ -373,5 +357,3 @@ if ($_user_id)
 
 	echo $this->form_close();
 }
-
-?>

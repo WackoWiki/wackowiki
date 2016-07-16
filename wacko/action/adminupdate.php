@@ -135,12 +135,10 @@ if ($this->is_admin())
 			{
 				echo "<table><tr><th>page_id</th><th>tag</th><th>new title</th></tr>";
 
-				$lang_list = $this->available_languages();
-
 				foreach ($pages as $page)
 				{
 					$lang = $page['page_lang'];
-					if (isset($lang_list[$lang]))
+					if ($this->known_language($lang))
 					{
 						$this->load_translation($lang);
 						$this->set_translation ($lang);
