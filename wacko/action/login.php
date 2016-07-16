@@ -36,7 +36,7 @@ $this->hide_article_header = true;
 // logout
 if (@$_GET['action'] === 'logout')
 {
-	$this->log(5, Ut::perc_replace($this->get_translation('LogUserLoggedOut', -1), $this->get_user_name()));
+	$this->log(5, Ut::perc_replace($this->get_translation('LogUserLoggedOut', SYSTEM_LANG), $this->get_user_name()));
 	$this->log_user_out();
 	$this->set_menu(MENU_DEFAULT);
 	$this->set_message($this->get_translation('LoggedOut'), 'success');
@@ -213,7 +213,7 @@ else // login
 						$this->set_user($existing_user);
 						$this->context[++$this->current_context] = '';
 
-						$this->log(3, Ut::perc_replace($this->get_translation('LogUserLoginOK', -1), $existing_user['user_name']));
+						$this->log(3, Ut::perc_replace($this->get_translation('LogUserLoginOK', SYSTEM_LANG), $existing_user['user_name']));
 
 						// run in tls mode?
 						if ($this->db->tls)
@@ -230,7 +230,7 @@ else // login
 						$this->set_failed_user_login_count($existing_user['user_id']);
 
 						// log failed attempt
-						$this->log(2, Ut::perc_replace($this->get_translation('LogUserLoginFailed', -1), $_user_name));
+						$this->log(2, Ut::perc_replace($this->get_translation('LogUserLoginFailed', SYSTEM_LANG), $_user_name));
 					}
 				}
 			}

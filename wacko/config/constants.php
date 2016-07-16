@@ -41,6 +41,7 @@ define('BACKUP_FILE_GZIP_SUFFIX',		'.gz');				// regular compressed files suffix
 
 define('GLOB_ALL',						'{,.}*');			// for glob()
 define('ADD_NO_DIV',					'*');				// for Wacko::method()
+define('SYSTEM_LANG',					-1);				// for Wacko::get_translation()
 
 define('AUTH_TOKEN',					'Auth');
 define('GUEST',							'guest@wacko');

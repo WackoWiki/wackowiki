@@ -474,8 +474,7 @@ class Wacko
 
 	function known_language($lang)
 	{
-		$langs = $this->available_languages();
-		return isset($langs[$lang]);
+		return array_key_exists($lang, $this->available_languages());
 	}
 
 	// negotiate language with user's browser
@@ -538,7 +537,7 @@ class Wacko
 	{
 		if ($this->db->multilanguage)
 		{
-			if ($lang === -1) // shortcut for using system language diags
+			if ($lang === SYSTEM_LANG)
 			{
 				$lang = $this->db->language;
 			}
@@ -2000,12 +1999,12 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// see add_comment handler
-					#$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', $this->config['language']))));
+					// $this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', SYSTEM_LANG))));
 				}
 				else
 				{
 					// added new page
-					$this->log(4, Ut::perc_replace($this->get_translation('LogPageCreated', $this->config['language']), $tag.' '.$title));
+					$this->log(4, Ut::perc_replace($this->get_translation('LogPageCreated', SYSTEM_LANG), $tag.' '.$title));
 				}
 
 				// TODO: move to additional function
@@ -2118,12 +2117,12 @@ class Wacko
 					if ($this->page['comment_on_id'] != 0)
 					{
 						// comment modified
-						$this->log(6, Ut::perc_replace($this->get_translation('LogCommentEdited', $this->config['language']), $tag.' '.$title));
+						$this->log(6, Ut::perc_replace($this->get_translation('LogCommentEdited', SYSTEM_LANG), $tag.' '.$title));
 					}
 					else
 					{
 						// old page modified
-						$this->log(6, Ut::perc_replace($this->get_translation('LogPageEdited', $this->config['language']), $tag.' '.$title));
+						$this->log(6, Ut::perc_replace($this->get_translation('LogPageEdited', SYSTEM_LANG), $tag.' '.$title));
 					}
 
 					// Since there's no revision history for comments it's pointless to do the following for them.
@@ -2306,7 +2305,7 @@ class Wacko
 				$save = $this->set_language($user_lang, true);
 
 				$subject	=	$this->get_translation('RegistrationApproved');
-				$body		=	Ut::perc_replace($this->get_translation('UserApprovedInfo'), $this->config['site_name'])."\n\n".
+				$body		=	Ut::perc_replace($this->get_translation('UserApprovedInfo'), SYSTEM_LANG)."\n\n".
 								$this->get_translation('EmailRegisteredLogin')."\n\n";
 
 				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
@@ -4401,21 +4400,18 @@ class Wacko
 	 *
 	 * @param string $user_name
 	 * @param number $user_id
-	 * @param string $password
-	 * @param string $session_data
-	 * @param string $login_token
 	 *
-	 * @return string
+	 * @return array
 	 */
 	function load_user($user_name, $user_id = 0)
 	{
 		return $this->load_single(
-			"SELECT ".
-				'u.*, '.
-				's.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica,
+			"SELECT
+				u.*,
+				s.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica,
 				s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
 				s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
-				s.session_length, s.timezone, s.dst, s.sorting_comments '.
+				s.session_length, s.timezone, s.dst, s.sorting_comments ".
 			"FROM ".$this->db->user_table." u ".
 				"LEFT JOIN ".$this->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id
@@ -4540,6 +4536,8 @@ class Wacko
 
 	/*
 	 * auth token workshop
+	 * https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence,
+	 * re "Proactively Secure Long-Term User Authentication"
 	 */
 	function create_auth_token($user, $persistent = false)
 	{
@@ -4575,14 +4573,15 @@ class Wacko
 
 			if ($token && $token['token'] === hash('sha256', Ut::http64_decode($authenticator)))
 			{
-				$this->sql_query("DELETE FROM {$this->db->table_prefix}auth_token WHERE auth_token_id = '" . (int)$token['auth_token_id'] . "'");
-
 				$this->sql_query(
 					"UPDATE {$this->db->user_table} SET ".
 						"last_visit						= UTC_TIMESTAMP() ".
 					"WHERE ".
 						"user_id						= '" . (int)$token['user_id'] . "' ".
 					"LIMIT 1");
+
+				// re-create auth token on successful use, effectively prolonging it expiration
+				$this->sql_query("DELETE FROM {$this->db->table_prefix}auth_token WHERE auth_token_id = '" . (int)$token['auth_token_id'] . "'");
 
 				if (($user = $this->load_user(0, $token['user_id'])))
 				{
@@ -4591,6 +4590,7 @@ class Wacko
 				}
 			}
 
+			// just purge stale auth token
 			$this->delete_cookie(AUTH_TOKEN);
 		}
 
@@ -4599,9 +4599,11 @@ class Wacko
 
 	function delete_auth_token($user_id)
 	{
+		// NB there can be many tokens for one user
 		$this->sql_query("DELETE FROM {$this->db->table_prefix}auth_token WHERE user_id = '" . (int)$user_id . "'");
 	}
 
+	// user logs in by explicitly providing password
 	function log_user_in($user, $persistent = false)
 	{
 		$this->create_auth_token($user, $persistent);
@@ -4622,9 +4624,10 @@ class Wacko
 		$this->sess->restart();
 	}
 
-	// end user session and free session vars
+	// explicitly end user session and free session vars
 	function log_user_out()
 	{
+		// we destroy ALL user's auth tokens - effectively enforce user to re-login thru password auth
 		if (($user_id = $this->get_user_setting('user_id')))
 		{
 			$this->delete_auth_token($user_id);
@@ -4634,18 +4637,7 @@ class Wacko
 
 		$this->sess->restart();
 	}
-
-	// Increment the number of times the user has logegd in
-	function login_count($user_id)
-	{
-		$this->sql_query(
-			"UPDATE {$this->config['user_table']} SET ".
-				"login_count = login_count + 1 ".
-			"WHERE user_id = '".(int)$user_id."' ".
-			"LIMIT 1");
-
-		return true;
-	}
+	// end auth token stuff
 
 	// Increment the failed login count by 1
 	function set_failed_user_login_count($user_id)
@@ -4655,20 +4647,6 @@ class Wacko
 				"failed_login_count = failed_login_count + 1 ".
 			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
-
-		return true;
-	}
-
-	// Reset to zero the failed login attempts
-	function reset_failed_user_login_count($user_id)
-	{
-		$this->sql_query(
-			"UPDATE {$this->config['user_table']} SET ".
-				"failed_login_count = 0 ".
-			"WHERE user_id = '".(int)$user_id."' ".
-			"LIMIT 1");
-
-		return true;
 	}
 
 	// Increment the failed login count by 1
@@ -4679,20 +4657,6 @@ class Wacko
 				"lost_password_request_count = lost_password_request_count + 1 ".
 			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
-
-		return true;
-	}
-
-	// Reset to zero the 'lost password' in progress attempts
-	function reset_lost_password_count($user_id)
-	{
-		$this->sql_query(
-			"UPDATE {$this->config['user_table']} SET ".
-				"lost_password_request_count = 0 ".
-			"WHERE user_id = '".(int)$user_id."' ".
-			"LIMIT 1");
-
-		return true;
 	}
 
 	function load_users()
