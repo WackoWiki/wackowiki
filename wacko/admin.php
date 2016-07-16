@@ -48,7 +48,6 @@ $http->ensure_tls($db->base_url . 'admin.php');
 if (@$_GET['action'] === 'logout')
 {
 	unset($engine->sess->ap_created);
-	// $engine->set_user($_user, 0);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
 	$http->secure_base_url();
 	$http->redirect($engine->href());
@@ -183,10 +182,7 @@ if (!isset($engine->sess->ap_created))
 }
 
 // setting temporary admin user context
-global $_user;
 $session_length = 1800; // 1800 -> 30 minutes
-#$_user = $engine->get_user();
-#$engine->set_user($user, 0);
 
 if (time() - $engine->sess->ap_last_activity > 900) //1800
 {
@@ -417,4 +413,3 @@ Diag::debug($db, $http, $engine);
 ########################################################
 
 // getting out of temp context
-#$engine->set_user($_user, 0);

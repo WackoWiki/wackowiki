@@ -193,7 +193,7 @@ function admin_content_files(&$engine, &$module)
 				"picture_h			= '".(int)$size[1]."',".
 				"file_ext			= '".quote($engine->dblink, substr($ext, 0, 10))."',".
 				"user_id			= '".(int)$user['user_id']."',".
-				"uploaded_dt		= '".quote($engine->dblink, date('Y-m-d H:i:s'))."' ");
+				"uploaded_dt		= '".quote($engine->dblink, date(SQL_DATE_FORMAT))."' "); // TODO tz
 
 			// 4. output link to file
 			// !!!!! write after providing filelink syntax

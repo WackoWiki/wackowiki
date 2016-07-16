@@ -231,7 +231,7 @@ else
 		{
 			if ($this->config['enable_email'] && !$user['email_confirm'])
 			{
-				$code		= hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].$this->unique_id());
+				$code		= hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].Ut::random_bytes(21)); // STS todo.....
 				$code_hash	= hash('sha256', $code.hash('sha256', $this->config['system_seed']));
 
 				$save = $this->set_language($user['user_lang'], true);

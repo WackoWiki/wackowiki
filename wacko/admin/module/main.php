@@ -33,7 +33,6 @@ function admin_lock(&$engine, &$module)
 	{
 		$engine->config->lock();
 
-		// $engine->set_user($_user, 0);
 		$engine->redirect('admin.php');
 	}
 	// clear cache

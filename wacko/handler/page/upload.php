@@ -510,7 +510,7 @@ if ($this->can_upload() === true)
 								}
 
 								$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
-								$uploaded_dt	= date('Y-m-d H:i:s');
+								$uploaded_dt	= date(SQL_DATE_FORMAT); // TODO tz problems
 
 								$description	= substr(quote($this->dblink, $_POST['file_description']), 0, 250);
 								$description	= rtrim( $description, '\\' );
