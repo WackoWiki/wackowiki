@@ -335,7 +335,7 @@ class Wacko
 
 			if (@file_exists($lang_file))
 			{
-				include($lang_file);
+				include $lang_file;
 			}
 
 			// wacko.all.php $wacko_all_resource[]
@@ -346,7 +346,7 @@ class Wacko
 
 				if (@file_exists($lang_file))
 				{
-					include($lang_file);
+					include $lang_file;
 				}
 
 				// stored in object required for merge with all language files,
@@ -365,7 +365,7 @@ class Wacko
 
 				if (@file_exists($lang_file))
 				{
-					include($lang_file);
+					include $lang_file;
 				}
 			}
 			else
@@ -376,7 +376,7 @@ class Wacko
 
 				if (@file_exists($lang_file))
 				{
-					include($lang_file);
+					include $lang_file;
 				}
 
 				$theme_translation0 = $theme_translation;
@@ -387,7 +387,7 @@ class Wacko
 
 				if (@file_exists($lang_file))
 				{
-					include($lang_file);
+					include $lang_file;
 				}
 			}
 
@@ -4157,7 +4157,7 @@ class Wacko
 				// include_tail is for extensions to use for closing markup tags, i.e. if return'ing early
 				$include_tail = '';
 				ob_start();
-				include($__pathname);
+				include $__pathname;
 				echo $include_tail;
 				$output = ob_get_contents();
 				ob_end_clean();

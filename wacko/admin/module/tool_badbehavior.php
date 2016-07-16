@@ -28,7 +28,7 @@ function admin_badbehavior(&$engine, &$module)
 
 	if (!empty($engine->config['ext_bad_behavior']))
 	{
-		require_once('lib/bad_behavior/bad-behavior/responses.inc.php');
+		require_once 'lib/bad_behavior/bad-behavior/responses.inc.php';
 	}
 
 	#$engine->debug_print_r($_POST);

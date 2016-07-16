@@ -30,18 +30,18 @@ class Installer
 		global $config;
 		$config = $db->steal_config();
 
-		include('setup/header.php');
+		include 'setup/header.php';
 
 		if (@file_exists($install_module))
 		{
-			include($install_module);
+			include $install_module;
 		}
 		else
 		{
 			echo '<em>Invalid action</em>';
 		}
 
-		include('setup/footer.php');
+		include 'setup/footer.php';
 
 		exit;
 	}

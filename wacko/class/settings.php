@@ -29,7 +29,7 @@ class Settings extends Dbal implements ArrayAccess
 			// for config_defaults
 			$found_rewrite_extension = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
 
-			require_once(CONFIG_DEFAULTS);
+			require_once CONFIG_DEFAULTS;
 
 			if (filesize(CONFIG_FILE) <= 0)
 			{

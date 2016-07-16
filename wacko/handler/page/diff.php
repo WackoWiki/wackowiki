@@ -164,7 +164,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		break;
 
 	case 0:
-		require_once(Ut::join_path(HANDLER_DIR, 'page/_diff.php'));
+		require_once Ut::join_path(HANDLER_DIR, 'page/_diff.php');
 		// load pages
 
 		// extract text from bodies
