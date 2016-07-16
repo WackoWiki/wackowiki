@@ -6,7 +6,7 @@ if ($config['tls'] && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'
 	$config['base_url'] =	str_replace('http://', 'https://'.($config['tls_proxy'] ? $config['tls_proxy'].'/' : ''), $config['base_url']);
 }
 
-require_once('setup/common.php');
+require_once 'setup/common.php';
 global $config;
 
 // If we have any config data in the _POST then it means they have somehow navigated backwards so we should preserve their updated values.
@@ -21,7 +21,7 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config
 }
 
 global $lang;
-require_once('setup/lang/installer.'.$config['language'].'.php');
+require_once 'setup/lang/installer.'.$config['language'].'.php';
 
 // HTTP header with right Charset settings
 header('Content-Type: text/html; charset='.$lang['Charset']);

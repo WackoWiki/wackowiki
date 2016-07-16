@@ -1,5 +1,5 @@
 <?php
-require_once('lib/Text_Highlighter/Highlighter.php');
+require_once 'lib/Text_Highlighter/Highlighter.php';
 
 if ($options['_default'])
 {

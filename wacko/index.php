@@ -13,7 +13,7 @@ if (!isset($db->wacko_version) || version_compare($db->wacko_version, WACKO_VERS
 
 if ($db->ext_bad_behavior)
 {
-	require_once('lib/bad_behavior/bad-behavior-wackowiki.php'); // uses $db
+	require_once 'lib/bad_behavior/bad-behavior-wackowiki.php'; // uses $db
 }
 
 $http = new Http($db);

@@ -21,7 +21,7 @@ $db = $config = new Settings;
 
 if ($db->ext_bad_behavior)
 {
-	require_once('lib/bad_behavior/bad-behavior-wackowiki.php'); // uses $db
+	require_once 'lib/bad_behavior/bad-behavior-wackowiki.php'; // uses $db
 }
 
 $http = new Http($db, false); // false -- do not process wiki request

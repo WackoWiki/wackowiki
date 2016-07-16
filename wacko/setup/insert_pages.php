@@ -46,12 +46,12 @@ if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 	{
 		unset($page_lang);
 		unset($languages);
-		require_once('setup/lang/inserts.'.$_lang.'.php');
+		require_once 'setup/lang/inserts.'.$_lang.'.php';
 	}
 }
 else
 {
-	require_once('setup/lang/inserts.'.$config['language'].'.php');
+	require_once 'setup/lang/inserts.'.$config['language'].'.php';
 }
 
 ?>

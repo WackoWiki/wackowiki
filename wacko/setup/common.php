@@ -284,7 +284,7 @@ function set_language($lang)
 
 		if (@file_exists($lang_file))
 		{
-			include($lang_file);
+			include $lang_file;
 		}
 
 		$languages[$lang] = $wacko_language;

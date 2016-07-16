@@ -21,7 +21,7 @@ if (!$options['no<p>'])
   $text = str_replace ('<br /><br />', '<p>', $text );
 */
 
-include('rawhtml.php');
+include 'rawhtml.php';
 // echo "simplebr: ".$this->format($text, 'rawhtml');
 
 ?>
