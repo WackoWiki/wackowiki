@@ -30,15 +30,15 @@
 define('IN_CAPTCHA', true);
 
 // get absolute path to load config file, because the relative path to the page may vary
-$working_dir = preg_replace('/\/lib\/captcha/', '/', __DIR__);
+chdir(preg_replace('/\/lib\/captcha/', '/', __DIR__));
 
 define('IN_WACKO', true);
-require_once $working_dir . 'config/constants.php';
-require_once $working_dir . 'class/ut.php';
-require_once $working_dir . 'class/session.php';
+require_once 'class/init.php';
 
-$sess = new Session;
-$sess->save_path = CACHE_SESSION_DIR;
+// STS TODO need config'ing
+$sess = new SessionFileStore;
+$sess->cf_file_path = CACHE_SESSION_DIR;
+
 $sess->start(@$_GET['for']);
 
 //////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ $tag_pos = 1;
 // functions to call for random number generation
 // mt_rand produces 'better' random numbers
 // but if your server doesn't support it, it's fine to use rand instead
-$rand_func = 'mt_rand';
+$rand_func = function ($mi, $ma) {return Ut::rand($mi,$ma);};
 $seed_func = 'mt_srand';
 
 // which type of hash to use?
@@ -94,7 +94,7 @@ $use_dict = 1;
 // test your server's config by trying to access the dictionary through a web browser
 // you should NOT be able to view the contents.
 // can leave this blank if not using dictionary
-$dict_location = './.ht_freecap_words';
+$dict_location = __DIR__ . '/.ht_freecap_words';
 
 // used to calculate image width, and for non-dictionary word generation
 $max_word_length = 6;
@@ -143,19 +143,19 @@ if(pack('L', $abyz) == pack('N', $abyz))
 // to increase security, you really should add other fonts
 if($big_endian)
 {
-	$font_locations = array(	'./.ht_freecap_font1_big_e.gdf',
-								'./.ht_freecap_font2_big_e.gdf',
-								'./.ht_freecap_font3_big_e.gdf',
-								'./.ht_freecap_font4_big_e.gdf',
-								'./.ht_freecap_font5_big_e.gdf');
+	$font_locations = array(	'/.ht_freecap_font1_big_e.gdf',
+								'/.ht_freecap_font2_big_e.gdf',
+								'/.ht_freecap_font3_big_e.gdf',
+								'/.ht_freecap_font4_big_e.gdf',
+								'/.ht_freecap_font5_big_e.gdf');
 }
 else
 {
-	$font_locations = array(	'./.ht_freecap_font1.gdf',
-								'./.ht_freecap_font2.gdf',
-								'./.ht_freecap_font3.gdf',
-								'./.ht_freecap_font4.gdf',
-								'./.ht_freecap_font5.gdf');
+	$font_locations = array(	'/.ht_freecap_font1.gdf',
+								'/.ht_freecap_font2.gdf',
+								'/.ht_freecap_font3.gdf',
+								'/.ht_freecap_font4.gdf',
+								'/.ht_freecap_font5.gdf');
 }
 
 // background:
@@ -171,11 +171,11 @@ $bg_type = 1;
 $blur_bg = true;
 // for bg_type 3, which images should we use?
 // if you add your own, make sure they're fairly 'busy' images (ie a lot of shapes in them)
-$bg_images = array(	'./.ht_freecap_im1.jpg',
-					'./.ht_freecap_im2.jpg',
-					'./.ht_freecap_im3.jpg',
-					'./.ht_freecap_im4.jpg',
-					'./.ht_freecap_im5.jpg');
+$bg_images = array(	'/.ht_freecap_im1.jpg',
+					'/.ht_freecap_im2.jpg',
+					'/.ht_freecap_im3.jpg',
+					'/.ht_freecap_im4.jpg',
+					'/.ht_freecap_im5.jpg');
 // for non-transparent backgrounds only:
 	// if 0, merges CAPTCHA with bg
 	// if 1, write CAPTCHA over bg
@@ -224,7 +224,7 @@ $font_widths = array();
 
 for($i = 0; $i < sizeof($font_locations); $i++)
 {
-	$handle = fopen($font_locations[$i], 'r');
+	$handle = fopen(__DIR__ . $font_locations[$i], 'r');
 	// read header of GD font, up to char width
 	$c_wid = fread($handle, $header_length);
 
@@ -562,7 +562,7 @@ if($bg_type != 0)
 		for($i = 0; $i < sizeof($bg_images); $i++)
 		{
 			// read each image and its size
-			$temp_im[$i]		= ImageCreateFromJPEG($bg_images[$i]);
+			$temp_im[$i]		= ImageCreateFromJPEG(__DIR__ . $bg_images[$i]);
 			$temp_width[$i]		= imagesx($temp_im[$i]);
 			$temp_height[$i]	= imagesy($temp_im[$i]);
 		}
@@ -677,7 +677,7 @@ for($i = 0 ; $i < strlen($word); $i++)
 	}
 
 	$j		= $rand_func(0, sizeof($font_locations) - 1);
-	$font	= ImageLoadFont($font_locations[$j]);
+	$font	= ImageLoadFont(__DIR__ . $font_locations[$j]);
 	ImageString($im2, $font, $word_start_x + ($font_widths[$j] * $i), $word_start_y, $word{$i}, $text_colour2);
 }
 // use last pixelwidth

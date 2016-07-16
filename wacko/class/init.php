@@ -80,7 +80,7 @@ spl_autoload_register(function($name)
 
 	if (array_key_exists($name, $map))
 	{
-		require_once($map[$name]);
+		require_once $map[$name];
 	}
 });
 
