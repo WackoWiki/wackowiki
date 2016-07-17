@@ -4388,7 +4388,7 @@ class Wacko
 			"SELECT user_id ".
 			"FROM {$this->db->user_table} ".
 			"WHERE email = ".$this->db->q($email)." ".
-			"LIMIT 1"));
+			"LIMIT 1");
 	}
 
 	/**
