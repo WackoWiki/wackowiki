@@ -104,10 +104,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 		{
 			$printed[$page['tag']] = $page['date'];	// ignore duplicates
 
-			// tz offset
-			$time_tz = $this->get_time_tz(strtotime($page['date']));
-			$day = date($this->config['date_format'], $time_tz);
-			$time = date($this->config['time_format_seconds'], $time_tz);
+			$this->sql2datetime($page['date'], $day, $time);
 
 			// day header
 			if ($day != $curday)

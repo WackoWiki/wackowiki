@@ -50,9 +50,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 	{
 		if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 		{
-			$time_tz = $this->get_time_tz(strtotime($page['modified']));
-			$day = date($this->config['date_format'], $time_tz);
-			$time = date($this->config['time_format_seconds'], $time_tz);
+			$this->sql2datetime($page['modified'], $day, $time);
 
 			if ($day != $curday)
 			{

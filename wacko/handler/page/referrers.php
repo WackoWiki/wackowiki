@@ -246,10 +246,7 @@ else if ($mode == 'bytime')
 	{
 		if (($link = $check_ref($referrer)))
 		{
-			// tz offset
-			$time_tz = $this->get_time_tz(strtotime($referrer['referrer_time']));
-			$day = date($this->config['date_format'], $time_tz);
-			$time = date($this->config['time_format_seconds'], $time_tz);
+			$this->sql2datetime($referrer['referrer_time'], $day, $time);
 
 			if ($day != $curday)
 			{

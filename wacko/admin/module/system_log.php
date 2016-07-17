@@ -198,8 +198,7 @@ function admin_system_log(&$engine, &$module)
 			}
 
 			// tz offset
-			$time_tz = $engine->get_time_tz( strtotime($row['log_time']) );
-			$time_tz = date($engine->config['date_precise_format'], $time_tz);
+			$time_tz = $engine->sql2precisetime($row['log_time']);
 
 			echo '<tr class="lined">'."\n".
 					'<td style="vertical-align:top; text-align:center;">'.$row['log_id'].'</td>'.

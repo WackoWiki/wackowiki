@@ -102,9 +102,7 @@ if ($this->user_allowed_comments())
 
 			if ($access && $this->user_allowed_comments())
 			{
-				$time_tz = $this->get_time_tz( strtotime($page['comment_time']) );
-				$day = date($this->config['date_format'], $time_tz);
-				$time = date($this->config['time_format_seconds'], $time_tz);
+				$this->sql2datetime($page['comment_time'], $day, $time);
 
 				if ($day != $curday)
 				{

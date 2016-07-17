@@ -155,9 +155,9 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				($this->get_user()
 				?
 									'<td style="text-align:center;">'.$this->get_time_formatted($member['signup_time']).'</td>'.
-									'<td style="text-align:center;">'.( $member['hide_lastsession'] == 1
+									'<td style="text-align:center;">'.( $member['hide_lastsession']
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
-					: ( !$member['last_visit'] || !$member['last_visit']
+					: ( $member['last_visit'] === SQL_DATE_NULL
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
 						: $this->get_time_formatted($member['last_visit']) )
 					).'</td>'
@@ -299,5 +299,3 @@ else
 
 	echo "</table>\n";
 }
-
-?>

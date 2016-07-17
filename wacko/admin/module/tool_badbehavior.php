@@ -347,9 +347,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 				$host .= "<br/>\n";
 			}
 
-			// tz offset
-			$time_tz = $engine->get_time_tz( strtotime($result['date']) );
-			$time_tz = date($engine->config['date_precise_format'], $time_tz);
+			$time_tz = $engine->sql2precisetime($result['date']);
 
 			echo "<td>".
 					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;ip='.$result['ip'] . "\">" . $result['ip'] . "</a><br/>".

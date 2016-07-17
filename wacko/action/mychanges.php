@@ -106,9 +106,7 @@ if ($user_id = $this->get_user_id())
 			$cur_day = '';
 			foreach ($pages as $page)
 			{
-				$time_tz = $this->get_time_tz(strtotime($page['modified']));
-				$day = date($this->config['date_format'], $time_tz);
-				$time = date($this->config['time_format_seconds'], $time_tz);
+				$this->sql2datetime($page['modified'], $day, $time);
 
 				if ($day != $cur_day)
 				{

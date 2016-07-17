@@ -24,10 +24,7 @@ if ($this->is_admin())
 		{
 			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 			{
-				// tz offset
-				$time	= $this->get_time_tz(strtotime($page['modified']));
-				$day	= date($this->config['date_format'], $time);
-				$time	= date($this->config['time_format_seconds'], $time);
+				$this->sql2datetime($page['modified'], $day, $time);
 
 				// day header
 				if ($day != $curday)
