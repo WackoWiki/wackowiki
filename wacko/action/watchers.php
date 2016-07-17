@@ -22,7 +22,7 @@ else
 if ($this->is_owner($page_id))
 {
 	$watchers = $this->load_all(
-		"SELECT w.*, u.user_name ".
+		"SELECT u.user_name ".
 		"FROM ".$this->config['table_prefix']."watch w ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".
 		"WHERE w.page_id = '".(int)$page_id."' ".
@@ -41,9 +41,7 @@ if ($this->is_owner($page_id))
 
 		foreach ($watchers as $watcher)
 		{
-			$user_name = $watcher['user_name'];
-			#echo $this->link('user:'.$user_name, '', $user_name)."<br />";
-			echo '<li>'.$this->user_link($user_name, '', true, false)."</li>\n";
+			echo '<li>'.$this->user_link($watcher['user_name'], '', true, false)."</li>\n";
 		}
 
 		echo "</ol>\n";

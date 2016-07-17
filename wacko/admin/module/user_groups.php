@@ -561,13 +561,13 @@ function admin_user_groups(&$engine, &$module)
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=groups'.(!empty($order_pagination) ? '&order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 		$groups = $engine->load_all(
-			"SELECT g.*, u.user_name, COUNT(m.user_id) AS members ".
+			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name, COUNT(m.user_id) AS members ".
 			"FROM {$engine->config['table_prefix']}usergroup g ".
 				"LEFT JOIN {$engine->config['table_prefix']}user u ON (g.moderator_id = u.user_id) ".
 				"LEFT JOIN ".$engine->config['table_prefix']."usergroup_member m ON (m.group_id = g.group_id) ".
-			( $where ? $where : '' ).
-			"GROUP BY g.group_id ".
-			( $order ? $order : 'ORDER BY group_id DESC ' ).
+			($where ? $where : '').
+			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name ".
+			($order ? $order : 'ORDER BY group_id DESC ').
 			"LIMIT {$pagination['offset']}, $limit");
 
 	/////////////////////////////////////////////

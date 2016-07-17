@@ -988,8 +988,8 @@ class Wacko
 
 	function _load_page($tag, $page_id = 0, $revision_id = '', $cache = true, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
-		#echo '## '.$deleted.'<br />';
-		#$deleted = 1;
+		# echo '## '.$deleted.'<br />';
+		# $deleted = 1;
 		$supertag		= '';
 		$cached_page	= '';
 		$page			= null;
@@ -1016,17 +1016,17 @@ class Wacko
 		// load page
 		if ($metadata_only)
 		{
-			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, '.
+			$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, '.
 						'p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
 						'p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
+			$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
 						'p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
 						'p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
 		}
 		else
 		{
-			$what_p = 'p.*, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
+			$what_p =	'p.*, u.user_name, o.user_name AS owner_name';
+			$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
 						'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, '.
 						'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, '.
 						'p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, '.
@@ -4272,7 +4272,7 @@ class Wacko
 	// GROUPS
 	function load_usergroup($group_name, $group_id = 0)
 	{
-		$fiels_default	= 'g.*, u.user_name AS moderator';
+		$fiels_default	= 'g.group_id, g.group_name, g.group_lang, g.description, g.moderator_id, g.created, g.is_system, g.open, g.active, u.user_name AS moderator';
 
 		$usergroup = $this->load_single(
 			"SELECT {$fiels_default} ".
@@ -4421,7 +4421,10 @@ class Wacko
 	{
 		return $this->load_single(
 			"SELECT
-				u.*,
+				u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.account_status, u.account_type,
+				u.enabled, u.signup_time, u.change_password, u.user_ip, u.user_form_salt, u.email_confirm, u.last_visit,
+				u.session_expire, u.last_mark, u.login_count, u.lost_password_request_count, u.failed_login_count, u.total_pages,
+				u.total_revisions, u.total_comments, u.total_uploads, u.fingerprint,
 				s.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica,
 				s.theme, s.autocomplete, s.numerate_links, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
 				s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
@@ -4430,7 +4433,7 @@ class Wacko
 				"LEFT JOIN ".$this->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id
 					? "u.user_id		= '".(int)$user_id."' "
-					: "u.user_name	= ".$this->db->q($user_name)." ").
+					: "u.user_name		= ".$this->db->q($user_name)." ").
 					"AND u.account_type = '0' ".
 			"LIMIT 1");
 	}

@@ -769,7 +769,7 @@ function admin_user_users(&$engine, &$module)
 		$count = $engine->load_single(
 			"SELECT COUNT(user_name) AS n ".
 			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 			( $where ? $where : '' )
 			);
 
@@ -777,13 +777,13 @@ function admin_user_users(&$engine, &$module)
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 		$users = $engine->load_all(
-			"SELECT u.*, p.user_lang ".
+			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang ".
 			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-			( $where ? $where : '' ).
-			( $where ? 'AND ' : "WHERE ").
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+			($where ? $where : '').
+			($where ? 'AND ' : "WHERE ").
 				"u.account_type = '0' ".
-			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
+			($order ? $order : 'ORDER BY u.user_id DESC ').
 			"LIMIT {$pagination['offset']}, $limit");
 
 		// user filter form
