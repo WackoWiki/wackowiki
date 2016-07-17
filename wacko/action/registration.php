@@ -141,7 +141,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 					$error .= $this->get_translation('NotAEmail')." ";
 				}
 				// no email reuse allowed
-				else if ($this->config['allow_email_reuse'] == 0 && $this->email_exists($email) === true)
+				else if (!$this->config['allow_email_reuse'] && $this->email_exists($email))
 				{
 					$error .= $this->get_translation('EmailTaken')." ";
 				}

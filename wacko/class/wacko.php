@@ -270,7 +270,7 @@ class Wacko
 		$time = date($this->config['time_format_seconds'], $local);
 	}
 
-	function sql2precisetime($text, &$date, &$time)
+	function sql2precisetime($text)
 	{
 		$local = $this->sql2localtime($text);
 		return date($this->config['date_precise_format'], $local);
@@ -4381,32 +4381,14 @@ class Wacko
 		}
 	}
 
-	// check whether defined email is already in use.
-	// Allow e-mail address re-use:
-	// Different users can register with the same e-mail address.
+	// check whether email is already registered as one of user's email
 	function email_exists($email)
 	{
-		if ($email == '')
-		{
-			return false;
-		}
-
-		// checking identical name only?
-		#if (!$this->config['allow_email_reuse'])
-		#{
-			if ($this->load_single(
-				"SELECT user_id ".
-				"FROM {$this->config['user_table']} ".
-				"WHERE email = '".quote($this->dblink, $email)."' ".
-				"LIMIT 1"))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		#}
+		return !!$this->load_single(
+			"SELECT user_id ".
+			"FROM {$this->db->user_table} ".
+			"WHERE email = ".$this->db->q($email)." ".
+			"LIMIT 1"));
 	}
 
 	/**
@@ -4634,7 +4616,7 @@ class Wacko
 				"change_password				= '', ".
 				"login_count					= login_count + 1, ".
 				"failed_login_count				= 0, ".
-				"lost_password_request_count	= 0 ".
+				"lost_password_request_count	= 0 ". // STS value unused
 			"WHERE ".
 				"user_id						= '" . (int)$user['user_id'] . "' ".
 			"LIMIT 1");
@@ -4663,16 +4645,6 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} SET ".
 				"failed_login_count = failed_login_count + 1 ".
-			"WHERE user_id = '".(int)$user_id."' ".
-			"LIMIT 1");
-	}
-
-	// Increment the failed login count by 1
-	function set_lost_password_count($user_id)
-	{
-		$this->sql_query(
-			"UPDATE {$this->config['user_table']} SET ".
-				"lost_password_request_count = lost_password_request_count + 1 ".
 			"WHERE user_id = '".(int)$user_id."' ".
 			"LIMIT 1");
 	}

@@ -220,7 +220,7 @@ else
 		$user_name	= str_replace(' ', '', $_POST['user_name']);
 		$email		= str_replace(' ', '', $_POST['email']);
 		$user		= $this->load_single(
-						"SELECT u.user_id, u.user_name, u.email, u.password, u.email_confirm, s.user_lang ".
+						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
 						"FROM ".$this->config['user_table']." u ".
 							"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 						"WHERE u.user_name = '".quote($this->dblink, $user_name)."' ".
@@ -231,8 +231,8 @@ else
 		{
 			if ($this->config['enable_email'] && !$user['email_confirm'])
 			{
-				$code		= hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].Ut::random_bytes(21)); // STS todo.....
-				$code_hash	= hash('sha256', $code.hash('sha256', $this->config['system_seed']));
+				$code		= Ut::random_token(21);
+				$code_hash	= hash('sha256', $code . hash('sha256', $this->db->system_seed));
 
 				$save = $this->set_language($user['user_lang'], true);
 				$subject	=	$this->get_translation('EmailForgotSubject') . $this->config['site_name'];
@@ -243,17 +243,15 @@ else
 
 				// update table
 				$this->sql_query(
-					"UPDATE ".$this->config['user_table']." SET ".
+					"UPDATE {$this->db->user_table} SET ".
+						"lost_password_request_count = lost_password_request_count + 1, ". // value unused
 						"change_password = '".quote($this->dblink, $code_hash)."' ".
-					"WHERE user_id = '".$user['user_id']."' ".
+					"WHERE user_id = '".(int)$user['user_id']."' ".
 					"LIMIT 1");
 
 				// send code
 				$this->send_user_email($user_name, $user['email'], $subject, $body, $user['user_lang']);
 				$this->set_language($save, true);
-
-				// count attempt
-				$this->set_lost_password_count($user['user_id']);
 
 				// log event
 				$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordReminded', SYSTEM_LANG), $user['user_name'], $user['email']));
