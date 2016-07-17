@@ -230,8 +230,7 @@ function admin_content_pages(&$engine, &$module)
 			}
  */
 			// tz offset
-			$time_tz = $engine->get_time_tz( strtotime($row['modified']) );
-			$time_tz = date($engine->config['date_precise_format'], $time_tz);
+			$time_tz = $engine->sql2precisetime($row['modified']);
 
 			echo '<tr class="lined">'."\n".
 					'<td style="vertical-align:top; text-align:center;">'.$row['page_id'].'</td>'.

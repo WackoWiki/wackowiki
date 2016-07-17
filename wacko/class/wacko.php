@@ -249,27 +249,41 @@ class Wacko
 	}
 
 	// TIME FUNCTIONS
-	function get_time_tz($time)
+	function utc2localtime($utc)
 	{
-		$user			= $this->get_user();
-		$timezone		= isset($user['timezone'])	? $user['timezone']	: $this->config['timezone'];
-		$dst			= isset($user['dst'])		? $user['dst']		: $this->config['dst'];
-		$zone_offset	= ($timezone * 3600) + ($dst * 3600);
+		$user = $this->get_user();
 
-		return $time + $zone_offset;
+		$tz = ($user? $user['timezone'] + $user['dst'] : $this->db->timezone + $this->db->dst);
+
+		return $utc + $tz * 3600;
 	}
 
-	function get_time_formatted($time)
+	function sql2localtime($text)
 	{
-		return $this->get_unix_time_formatted(strtotime($time));
+		return ($text === SQL_DATE_NULL)? 0 : $this->utc2localtime(strtotime($text));
 	}
 
-	function get_unix_time_formatted($time)
+	function sql2datetime($text, &$date, &$time)
 	{
-		$tz_time = $this->get_time_tz($time);
+		$local = $this->sql2localtime($text);
+		$date = date($this->config['date_format'], $local);
+		$time = date($this->config['time_format_seconds'], $local);
+	}
 
-		return date($this->config['date_format'].' '.
-			$this->config['time_format_seconds'], $tz_time);
+	function sql2precisetime($text, &$date, &$time)
+	{
+		$local = $this->sql2localtime($text);
+		return date($this->config['date_precise_format'], $local);
+	}
+
+	function get_time_formatted($text) // STS: rename to sql_time_formatted
+	{
+		return $this->get_unix_time_formatted($this->sql2localtime($text));
+	}
+
+	function get_unix_time_formatted($local)
+	{
+		return date($this->config['date_format'] . ' ' . $this->config['time_format_seconds'], $local);
 	}
 
 	function get_time_interval($ago, $strip = false)

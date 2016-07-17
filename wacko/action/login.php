@@ -54,7 +54,7 @@ if (($user = $this->get_user()))
 	echo '<div class="cssform">';
 	echo '<h3>'.$this->get_translation('Hello').", ".$this->compose_link_to_page($this->db->users_page.'/'.$user['user_name'], '', $user['user_name']).'!</h3>';
 
-	if ($user['last_visit'])
+	if ($user['last_visit'] != SQL_DATE_NULL)
 	{
 		$this->set_message($this->get_translation('LastVisit') .
 			' <code>' .

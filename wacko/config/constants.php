@@ -62,6 +62,7 @@ define('LINK_FILE',						1);
 define('RECOVERY_MODE',					0);		// restore database
 
 define('SQL_DATE_FORMAT',				'Y-m-d H:i:s');
+define('SQL_DATE_NULL',					'0000-00-00 00:00:00');
 define('SQL_MODE_STRICT',				'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY');
 define('SQL_MODE_PERMISSIVE',			'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER');
 
