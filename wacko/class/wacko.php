@@ -2305,7 +2305,7 @@ class Wacko
 				$save = $this->set_language($user_lang, true);
 
 				$subject	=	$this->get_translation('RegistrationApproved');
-				$body		=	Ut::perc_replace($this->get_translation('UserApprovedInfo'), SYSTEM_LANG)."\n\n".
+				$body		=	Ut::perc_replace($this->get_translation('UserApprovedInfo'), $this->db->site_name)."\n\n".
 								$this->get_translation('EmailRegisteredLogin')."\n\n";
 
 				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
@@ -4566,11 +4566,12 @@ class Wacko
 			$authenticator = substr($token, 12);
 
 			$token = $this->load_single(
-				"SELECT * ".
+				"SELECT auth_token_id, token, user_id, token_expires, persistent ".
 				"FROM {$this->db->table_prefix}auth_token ".
 				"WHERE selector = " . $this->db->q($selector) . " ".
 				"LIMIT 1");
 
+			// STS check for expires also
 			if ($token && $token['token'] === hash('sha256', Ut::http64_decode($authenticator)))
 			{
 				$this->sql_query(

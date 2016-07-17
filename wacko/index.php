@@ -23,7 +23,7 @@ $engine->run();
 
 $http->store_cache();
 
-Diag::debug($db, $http, $engine);
+Diag::full_disclosure($db, $http, $engine);
 
 // closing tags
 if (strpos($http->method, '.xml') === false)

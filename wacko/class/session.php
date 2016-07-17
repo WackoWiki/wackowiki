@@ -249,6 +249,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 			else if ($this->__user_accept != $_SERVER['HTTP_ACCEPT'])
 			{
+				Ut::dbg('accept', $this->__user_accept, $_SERVER['HTTP_ACCEPT']);
 				$message = 'accept';
 				$destroy = 2;
 			}
@@ -371,7 +372,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	protected function store_validate_id($id)
 	{
-		return preg_match('/^[0-9a-zA-Z]{4,}$/', $id);
+		return preg_match('/^[0-9a-zA-Z]{21}$/', $id);
 	}
 
 	private function fingerprint()
