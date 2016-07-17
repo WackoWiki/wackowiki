@@ -62,49 +62,6 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $this->getArrayCopy();
 	}
 
-	// finishes session without saving data. Thus the original values in session data are kept. 
-	public function abort()
-	{
-		if ($this->active)
-		{
-			$this->store_close();
-			$this->active = false;
-		}
-	}
-
-	// reinitializes a session with original values stored in session storage
-	// this function requires an active session and discards changes in $_session
-	public function reset()
-	{
-		if ($this->active)
-		{
-			$this->initialize();
-			$this->fingerprint();
-		}
-	}
-
-	// deprecated..... use restart() instead
-	public function destroy($completely = false)
-	{
-		if (!$this->active)
-		{
-			return false;
-		}
-
-		if ($completely)
-		{
-			$this->_unset();
-			$this->send_cookie(true); // remove
-		}
-
-		// close & unlink
-		$this->store_destroy();
-
-		$this->id = null;
-		$this->active = false;
-		return true;
-	}
-
 	// effectively destroy(true) + start()
 	// or... regenerate + filter!
 	public function restart()
@@ -217,6 +174,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$this->cache_limiter(); // TODO - why it is in the session?
 
 		$now = time();
+		$user_agent = $_SERVER['HTTP_USER_AGENT'];
+		if (strpos($user_agent, 'Trident') !== false)
+		{
+			// microsoft changing ua string anytime
+			$user_agent = 'IE';
+		}
+
 		if (isset($this->__started))
 		{
 			$message = '';
@@ -237,7 +201,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$message = 'max_idle';
 				$destroy = 2;
 			}
-			else if (!similar_text($this->__user_agent, $_SERVER['HTTP_USER_AGENT'], $perc) || $perc < 95)
+			else if (!similar_text($this->__user_agent, $user_agent, $perc) || $perc < 95)
 			{
 				$message = 'ua';
 				$destroy = 2;
@@ -245,22 +209,6 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			else if (isset($this->cf_tls) && isset($this->__user_tls) && $this->cf_tls != $this->__user_tls)
 			{
 				$message = 'tls';
-				$destroy = 2;
-			}
-			else if ($this->__user_accept != $_SERVER['HTTP_ACCEPT'])
-			{
-				Ut::dbg('accept', $this->__user_accept, $_SERVER['HTTP_ACCEPT']);
-				$message = 'accept';
-				$destroy = 2;
-			}
-			else if ($this->__user_accept_encoding != $_SERVER['HTTP_ACCEPT_ENCODING'])
-			{
-				$message = 'encoding';
-				$destroy = 2;
-			}
-			else if ($this->__user_accept_lang != $_SERVER['HTTP_ACCEPT_LANGUAGE'])
-			{
-				$message = 'language';
 				$destroy = 2;
 			}
 			else if (isset($this->cf_ip) && isset($this->__user_ip) && $this->cf_ip != $this->__user_ip)
@@ -285,7 +233,15 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 		}
 
-		$this->fingerprint();
+		if (!isset($this->__created))	$this->__created			= $now;
+		if (!isset($this->__started))	$this->__started			= $now;
+		if (!isset($this->__regenerated)) $this->__regenerated		= $now;
+
+		$this->__updated				= $now;
+		$this->__user_agent				= $user_agent;
+
+		if (isset($this->cf_tls))		$this->__user_tls			= $this->cf_tls;
+		if (isset($this->cf_ip))		$this->__user_ip			= $this->cf_ip;
 
 		return $this->active;
 	}
@@ -303,11 +259,6 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public function name()
 	{
 		return $this->name;
-	}
-
-	public function _unset()
-	{
-		$this->exchangeArray([]);
 	}
 
 	// write session data, end session
@@ -374,25 +325,6 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		return preg_match('/^[0-9a-zA-Z]{21}$/', $id);
 	}
-
-	private function fingerprint()
-	{
-		$now = time();
-
-		if (!isset($this->__created))	$this->__created			= $now;
-		if (!isset($this->__started))	$this->__started			= $now;
-		if (!isset($this->__regenerated)) $this->__regenerated		= $now;
-
-		$this->__updated				= $now;
-		$this->__user_agent				= $_SERVER['HTTP_USER_AGENT'];
-		$this->__user_accept			= $_SERVER['HTTP_ACCEPT'];
-		$this->__user_accept_encoding	= $_SERVER['HTTP_ACCEPT_ENCODING'];
-		$this->__user_accept_lang		= $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-
-		if (isset($this->cf_tls))		$this->__user_tls			= $this->cf_tls;
-		if (isset($this->cf_ip))		$this->__user_ip			= $this->cf_ip;
-	}
-
 
 	// clean vars on quasi-hard reset, leave __ and sticky_ vars in place
 	private function clean_vars()
