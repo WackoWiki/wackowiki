@@ -7,14 +7,12 @@ if (!defined('IN_WACKO'))
 
 class Settings extends Dbal implements ArrayAccess
 {
-	public	$started;			// for Diag
 	private $config = [];
 	private $changed = [];
 	private $cachefile;
 
 	public function __construct()
 	{
-		$this->started = microtime(1);
 		$this->cachefile = Ut::join_path(CACHE_CONFIG_DIR, 'config.php');
 
 		// retrieve and unserialize cached settings data

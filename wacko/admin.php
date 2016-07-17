@@ -398,7 +398,7 @@ else if (!($_GET && $_POST))
 <?php
 
 // debugging info on script execution time and memory taken
-Diag::debug($db, $http, $engine);
+Diag::full_disclosure($db, $http, $engine);
 
 
 ?>

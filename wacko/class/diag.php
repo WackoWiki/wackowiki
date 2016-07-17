@@ -13,13 +13,13 @@ class Diag
 	}
 
 	// DEBUG INFO
-	static function debug(&$config, &$http, &$engine)
+	static function full_disclosure(&$config, &$http, &$engine)
 	{
 		if ($config['debug'] >= 1 && strpos($http->method, '.xml') === false && $http->method != 'print' && $http->method != 'wordprocessor')
 		{
 			if (($config['debug_admin_only'] == true && $engine->is_admin() === true) || $config['debug_admin_only'] == false)
 			{
-				$overall_time = microtime(1) - $config->started;
+				$overall_time = microtime(1) - WACKO_STARTED;
 
 				echo '<div id="debug">'.
 					 '<p class="debug">Program execution statistics</p>'."\n<ul>\n";
@@ -143,5 +143,90 @@ class Diag
 				echo "</div >\n";
 			}
 		}
+
+		static::dbg_console($config['debug']);
+	}
+
+	// add some debug output to DEBUG file and popup-window in browser
+	static function dbg()
+	{
+		static $log = [];
+		static $code = ['BLACK' => 0, 'BLUE' => 1, 'GOLD' => 2, 'ORANGE' => 3, 'RED' => 4];
+
+		if (($args = func_get_args()))
+		{
+			$trace = debug_backtrace();
+			$callee = ($trace[0]['file'] == __FILE__)? $trace[1] : $trace[0];
+			$dir = dirname(dirname(__FILE__)) . '/';
+
+			$type = (is_string($args[0]) && isset($code[$args[0]]))? $code[array_shift($args)] : 0;
+
+			foreach ($args as &$arg)
+			{
+				if (!is_string($arg) || $arg === '' || preg_match('/[\x00-\x1f\x7f]/', $arg))
+				{
+					$arg = Ut::stringify($arg);
+				}
+			}
+
+			$log[] = [
+				microtime(1),
+				$type,
+				implode(' ', $args),
+				str_replace($dir, '', $callee['file']) . ':' . $callee['line'],
+			];
+		}
+		return $log;
+	}
+
+	private static function dbg_console($debug)
+	{
+		if (!($log = static::dbg()))
+		{
+			return;
+		}
+
+		if ($debug)
+		{
+			echo <<<'EOD'
+	<script type="text/javascript">
+		console = window.open('', 'WackoWikiConsoleWindow', 'height=150,width=450,location=0,menubar=0,status=0,toolbar=0,scrollbars=1');
+		console.document.writeln(
+			'<html><head><style type=text/css>'
+			+ 'body{background-color:#777777}'
+			+ '.logtype0{color:black}'
+			+ '.logtype1{color:blue}'
+			+ '.logtype2{color:gold}'
+			+ '.logtype3{color:orange}'
+			+ '.logtype4{color:red}'
+			+ '</style><title>wackowiki debug console</title>'
+			+ '</head><body onLoad="self.focus()"><table>
+EOD;
+
+			foreach ($log as $one)
+			{
+				echo '<tr class="logtype' . (int)$one[1] . '">';
+				echo '<td>' . number_format($one[0] - WACKO_STARTED, 4) . '</td>';
+				echo '<td><code>' . htmlspecialchars($one[3], ENT_QUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code></td>';
+				echo '<td>' .  htmlspecialchars($one[2], ENT_QUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET) .  '</td>';
+				echo '</tr>';
+			}
+
+			echo <<<'EOD'
+			</table></body></html>');
+		console.document.close();
+		</script>
+EOD;
+		}
+
+		$output = '';
+		foreach ($log as $one)
+		{
+			$time = (int) $one[0];
+			$output .= date('ymdHis', $time) . sprintf(".%04d ", ($one[0] - $time) * 10000)
+				. $one[3] . ': ' . $one[2] . "\n";
+		}
+
+		@file_put_contents('DEBUG', $output, FILE_APPEND);
 	}
 }
