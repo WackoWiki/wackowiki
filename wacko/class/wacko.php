@@ -4006,13 +4006,13 @@ class Wacko
 			// do not cache pages with nonces!
 			$this->http->no_cache(false);
 
-			$token = $this->sess->create_nonce($form_name, 
+			$nonce = $this->sess->create_nonce($form_name, 
 				(($this->db->form_token_time == -1)? 1000000 : max(30, $this->db->form_token_time)));
 				// STS remove -1 from setup
 
 			$result .=
-				'<input type="hidden" name="form_token" value="' . $token . '" />' . "\n" .
-				'<input type="hidden" name="form_name" value="' . $form_name . '" />' . "\n";
+				'<input type="hidden" name="_nonce" value="' . $nonce . '" />' . "\n" .
+				'<input type="hidden" name="_action" value="' . $form_name . '" />' . "\n";
 		}
 
 		/* if ($this->config['tls']) // removed by STS - very bad idea to go from http page into https post page
@@ -4031,7 +4031,7 @@ class Wacko
 	function validate_post_token()
 	{
 		if ($_POST &&
-			!$this->sess->verify_nonce((string) @$_POST['form_name'], (string) @$_POST['form_token']))
+			!$this->sess->verify_nonce((string) @$_POST['_action'], (string) @$_POST['_nonce']))
 		{
 			$_POST = [];
 			$_REQUEST = $_GET;
@@ -4493,21 +4493,20 @@ class Wacko
 	 * https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence,
 	 * re "Proactively Secure Long-Term User Authentication"
 	 */
-	function create_auth_token($user, $persistent = false)
+	function create_auth_token($user)
 	{
 		$session_days = ($user['session_length'] > 0)? $user['session_length'] : $this->db->session_length;
 
 		$selector = Ut::http64_encode(Ut::random_bytes(9));
 		$authenticator = Ut::random_bytes(33);
 
-		$this->set_cookie(AUTH_TOKEN, $selector . Ut::http64_encode($authenticator), ($persistent? $session_days : false));
+		$this->set_cookie(AUTH_TOKEN, $selector . Ut::http64_encode($authenticator), $session_days);
 
 		$this->sql_query(
 			"INSERT INTO {$this->db->table_prefix}auth_token SET ".
 				"selector			= '" . $selector . "', ".
 				"token				= '" . hash('sha256', $authenticator) . "', ".
 				"user_id			= '" . (int)$user['user_id'] . "', ".
-				"persistent			= '" . (int)$persistent . "', ".
 				"token_expires		= '" . gmdate(SQL_DATE_FORMAT, time() + $session_days * DAYSECS) . "'"
 			);
 	}
@@ -4520,7 +4519,7 @@ class Wacko
 			$authenticator = substr($token, 12);
 
 			$token = $this->load_single(
-				"SELECT auth_token_id, token, user_id, token_expires, persistent ".
+				"SELECT auth_token_id, token, user_id, token_expires ".
 				"FROM {$this->db->table_prefix}auth_token ".
 				"WHERE selector = " . $this->db->q($selector) . " ".
 				"LIMIT 1");
@@ -4540,7 +4539,7 @@ class Wacko
 
 				if (($user = $this->load_user(0, $token['user_id'])))
 				{
-					$this->create_auth_token($user, $token['persistent']);
+					$this->create_auth_token($user);
 					return $user;
 				}
 			}
@@ -4559,9 +4558,12 @@ class Wacko
 	}
 
 	// user logs in by explicitly providing password
-	function log_user_in($user, $persistent = false)
+	function log_user_in($user, $remember_me = false)
 	{
-		$this->create_auth_token($user, $persistent);
+		if ($remember_me)
+		{
+			$this->create_auth_token($user);
+		}
 
 		$this->sql_query(
 			"UPDATE {$this->db->user_table} SET ".

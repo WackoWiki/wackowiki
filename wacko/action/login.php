@@ -257,13 +257,10 @@ else // login
 	echo '<input type="password" id="password" name="password" size="25" tabindex="2" autocomplete="off" required />'."\n";
 	echo '</p>';
 
-	if ($this->db->allow_persistent_cookie)
-	{
-		echo '<p>'."\n";
-		echo '<input type="checkbox" id="persistent" name="persistent" value="1" tabindex="3"/>'."\n";
-		echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
-		echo '</p>'."\n";
-	}
+	echo '<p>'."\n";
+	echo '<input type="checkbox" id="persistent" name="persistent" value="1" tabindex="3"/>'."\n";
+	echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
+	echo '</p>'."\n";
 
 	// captcha code starts
 
