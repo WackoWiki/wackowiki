@@ -248,7 +248,7 @@ else
 
 	// usergroup filter form
 	echo '<table class="formation"><tr><td class="label">';
-	echo $this->form_open('search_group', '', 'get');
+	echo $this->form_open('search_group', ['form_method' => 'get']);
 	echo $this->get_translation('GroupsSearch').': </td><td>';
 	echo '<input type="search" name="group" maxchars="40" size="40" value="'.(isset($_GET['group']) ? htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
 	echo '<input type="submit" id="submit" value="'.$this->get_translation('GroupsFilter').'" /> ';

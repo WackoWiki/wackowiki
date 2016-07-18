@@ -79,7 +79,7 @@ function admin_db_restore(&$engine, &$module)
 			// read backup log
 			$log = file(Ut::join_path($dir, $backup_id, BACKUP_FILE_LOG), FILE_IGNORE_NEW_LINES);
 
-			echo $engine->form_open('delete_backup', '', 'post', true, '', '');
+			echo $engine->form_open('delete_backup');
 
 			// check for possible backwards compatibility issues if the version differs
 			if ($log[6] !== WACKO_VERSION)
@@ -384,7 +384,7 @@ function admin_db_restore(&$engine, &$module)
 		if ((isset($_POST['remove']) && isset($_POST['backup_id']))
 		||  (isset($_GET['remove']) && isset($_GET['backup_id'])))
 		{
-			echo $engine->form_open('delete_backup', '', 'post', true, '', '');
+			echo $engine->form_open('delete_backup');
 
 			echo '<input type="hidden" name="backup_id" value="'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
 				'<table class="formation">'.
@@ -431,7 +431,7 @@ function admin_db_restore(&$engine, &$module)
 		?>
 				<br />
 <?php
-				echo $engine->form_open('restore', '', 'post', true, '', '');
+				echo $engine->form_open('restore');
 
 				$control_buttons =	'<input type="submit" name="restore" id="submit" value="restore" />'.
 									'<input type="submit" name="remove" id="submit" value="remove" />';

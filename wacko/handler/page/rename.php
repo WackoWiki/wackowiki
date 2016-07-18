@@ -155,7 +155,7 @@ if ($registered
 		else
 		{
 			echo $this->get_translation('NewName');
-			echo $this->form_open('rename_page', 'rename');
+			echo $this->form_open('rename_page', ['page_method' => 'rename']);
 
 			?>
 			<input type="hidden" name="rename" value="1" />

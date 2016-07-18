@@ -216,7 +216,7 @@ if ($this->has_access('read'))
 			$parent_id = (isset($_GET['parent_id']) && $_GET['parent_id'] ? (int)$_GET['parent_id'] : 0);
 			echo '<div class="commentform" id="commentform">'."\n";
 
-			echo $this->form_open('add_comment', 'addcomment', '', true);
+			echo $this->form_open('add_comment', ['page_method' => 'addcomment']);
 			echo '<input type="hidden" name="parent_id" value="'.$parent_id.'" />'."\n";
 
 			// preview

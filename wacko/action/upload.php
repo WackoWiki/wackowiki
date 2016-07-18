@@ -25,7 +25,7 @@ if ($global) $global = 'global';
 if ($this->can_upload(true) === true)
 {
 	// displaying
-	echo $this->form_open('upload', 'upload', 'post', true, '', ' enctype="multipart/form-data" ');
+	echo $this->form_open('upload', ['page_method' => 'upload', 'form_more' => ' enctype="multipart/form-data" ']);
 
 	if ($maxsize)
 	{

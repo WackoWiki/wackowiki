@@ -217,7 +217,7 @@ class Polls
 		}
 		else
 		{
-			$poll	= $this->engine->form_open('poll', $tag, '', true, '', '', '#poll'.$poll_id.'_form').
+			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll'.$poll_id.'_form']).
 					'<a id="p'.date('dm', strtotime($header['start'])).'"></a>'.
 					'<a id="poll'.$poll_id.'_form"></a>'.
 					'<input type="hidden" name="poll" value="'.$poll_id.'" />'.

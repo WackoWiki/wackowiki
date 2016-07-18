@@ -54,7 +54,7 @@ if ($this->has_access('read'))
 			{
 				$message = $this->get_translation('PageDeletedInfo'); // TODO: add description: to restore the page you ...
 				$message .= '<br /><br />';
-				$message .= $this->form_open('restore_page', 'restore');
+				$message .= $this->form_open('restore_page', ['page_method' => 'restore']);
 				#$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
 				$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
 				#$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
@@ -102,7 +102,7 @@ if ($this->has_access('read'))
 				else
 				{
 					$message .= '<br /><br />';
-					$message .= $this->form_open('edit_revision', 'edit');
+					$message .= $this->form_open('edit_revision', ['page_method' => 'edit']);
 					$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
 					$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
 					$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';

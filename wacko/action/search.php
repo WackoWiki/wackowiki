@@ -324,7 +324,7 @@ else
 
 if ($form)
 {
-	echo $this->form_open('search', '', 'get');
+	echo $this->form_open('search', ['form_method' => 'get']);
 
 	echo '<label for="searchfor">'.$this->get_translation('SearchFor').':</label><br />';
 	echo '<input type="search" name="phrase" id="searchfor" size="40" value="'.(isset($_GET['phrase']) ? htmlspecialchars($_GET['phrase'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" />';

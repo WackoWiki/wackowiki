@@ -81,7 +81,7 @@ function admin_config_security(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('security', '', 'post', true, '', '');
+	echo $engine->form_open('security');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

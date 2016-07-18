@@ -55,7 +55,7 @@ function admin_config_notifications(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('notifications', '', 'post', true, '', '');
+	echo $engine->form_open('notifications');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

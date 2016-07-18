@@ -62,7 +62,7 @@ function admin_config_permissions(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('permissions', '', 'post', true, '', '');
+	echo $engine->form_open('permissions');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

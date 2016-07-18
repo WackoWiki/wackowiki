@@ -100,7 +100,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		if ($this->is_owner() || $this->is_admin())
 		{
 			echo '<div class="page_settings">';
-			echo $this->form_open('extended_properties', 'properties'); // , '', '', '', '', "extended"
+			echo $this->form_open('extended_properties', ['page_method' => 'properties']);
 			echo '<input type="hidden" name="extended" value="yes" />';
 			echo "\n".'<table class="form_tbl">'."\n";
 
@@ -209,7 +209,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		if ($this->is_owner() || $this->is_admin())
 		{
 
-			echo $this->form_open('general_properties', 'properties');
+			echo $this->form_open('general_properties', ['page_method' => 'properties']);
 			echo '<table class="form_tbl">';
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">

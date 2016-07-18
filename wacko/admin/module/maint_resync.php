@@ -276,7 +276,7 @@ Ut::debug_print_r($users);
 	</p>
 
 <?php
-	echo $engine->form_open('usersupdate', '', 'post', true, '', '');
+	echo $engine->form_open('usersupdate');
 ?>
 		<input type="hidden" name="action" value="userstats" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
@@ -289,7 +289,7 @@ Ut::debug_print_r($users);
 		allows updating statistics on current actual data of the database.
 	</p>
 <?php
-	echo $engine->form_open('pageupdate', '', 'post', true, '', '');
+	echo $engine->form_open('pageupdate');
 ?>
 		<input type="hidden" name="action" value="pagestats" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
@@ -302,7 +302,7 @@ Ut::debug_print_r($users);
 		with the current state of the database.
 	</p>
 <?php
-	echo $engine->form_open('feedupdate', '', 'post', true, '', '');
+	echo $engine->form_open('feedupdate');
 ?>
 		<input type="hidden" name="action" value="rssfeeds" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
@@ -318,7 +318,7 @@ if ($engine->config['xml_sitemap'])
 		Last written <?php echo date('Y-m-d H:i:s', $engine->config['maint_last_xml_sitemap']); ?>
 	</p>
 <?php
-	echo $engine->form_open('sitemap_update', '', 'post', true, '', '');
+	echo $engine->form_open('sitemap_update');
 ?>
 		<input type="hidden" name="action" value="xml_sitemap" />
 		<input type="submit" name="start" id="submit" value="synchronize" />
@@ -332,7 +332,7 @@ if ($engine->config['xml_sitemap'])
 		considerable time).
 	</p>
 <?php
-	echo $engine->form_open('linksupdate', '', 'post', true, '', '');
+	echo $engine->form_open('linksupdate');
 ?>
 		<input type="hidden" name="action" value="wikilinks" />
 		<input type="submit" name="start" id="submit" value="synchronize" />

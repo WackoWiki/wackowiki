@@ -192,7 +192,7 @@ if (($profile = @$_REQUEST['profile']))
 				}
 ?>
 				<br />
-				<?php echo $this->form_open('personal_message', '', '', true); ?>
+				<?php echo $this->form_open('personal_message'); ?>
 				<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 				<?php
 				if (isset($ref))
@@ -533,7 +533,7 @@ else
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// user filter form
-	echo $this->form_open('search_user', '', 'get');
+	echo $this->form_open('search_user', ['form_method' => 'get']);
 	echo '<table class="formation"><tr><td class="label">';
 	echo $this->get_translation('UsersSearch') . ': </td><td>';
 	echo '<input type="search" required="required" name="user" maxchars="40" size="40" value="'.

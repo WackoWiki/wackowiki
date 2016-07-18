@@ -176,7 +176,7 @@ function admin_db_convert(&$engine, &$module)
 
 			if ($results)
 			{
-				echo $engine->form_open('convert', '', 'post', true, '', '');
+				echo $engine->form_open('convert');
 ?>
 				<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 					<tr>
@@ -248,7 +248,7 @@ function admin_db_convert(&$engine, &$module)
 
 		if ($results)
 		{
-			echo $engine->form_open('sql_mode_strict', '', 'post', true, '', '');
+			echo $engine->form_open('sql_mode_strict');
 			?>
 			<table style="max-width:500px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
@@ -313,7 +313,7 @@ function admin_db_convert(&$engine, &$module)
 		If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.
 		</p>
 		<?php
-		echo $engine->form_open('convert_tables', '', 'post', true, '', '');
+		echo $engine->form_open('convert_tables');
 		?>
 			<input type="hidden" name="action" value="convert_tables" />
 			<input type="submit" name="start" id="submit" value="convert" />
@@ -326,7 +326,7 @@ function admin_db_convert(&$engine, &$module)
 			If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.
 		</p>
 		<?php
-		echo $engine->form_open('convert_columns', '', 'post', true, '', '');
+		echo $engine->form_open('convert_columns');
 		?>
 			<input type="hidden" name="action" value="convert_columns" />
 			<input type="submit" name="start" id="submit" value="convert" />

@@ -93,7 +93,7 @@ function admin_config_basic(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('basic', '', 'post', true, '', '');
+	echo $engine->form_open('basic');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

@@ -32,7 +32,8 @@ if ($this->is_admin())
 			echo 'Attention: overwrites the same pages in the cluster<br /><br />';
 		}
 		// show FORM
-		echo rawurldecode($this->form_open('import_xml', '', 'post', true, '', ' enctype="multipart/form-data" '));
+		// STS rawurldecode!? good ganja!
+		echo rawurldecode($this->form_open('import_xml', ['form_more' => ' enctype="multipart/form-data" ']));
 		?>
 		<div class="cssform">
 			<p>

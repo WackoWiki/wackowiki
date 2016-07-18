@@ -33,6 +33,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public $cf_ip;					// set by http class... STS must decide on bad coupling between session & http class
 	public $cf_tls;					// if !isset - must not act on this values (i.e. from freecap)
 
+	public $cf_nonce_lifetime = 7200;
 	public $cf_gc_probability = 2;
 	public $cf_gc_maxlifetime = 1440;
 	public $cf_max_idle = 1440;
@@ -313,6 +314,43 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$this->store_gc();
 			// "purged $returned expired session objects"
 		}
+	}
+
+	private static function hash_nonce($code)
+	{
+		return substr(base64_encode(hash('sha1', $code, 1)), 1, 11);
+	}
+
+	public function create_nonce($action, $expires = null)
+	{
+		$code = Ut::random_token(8);
+		$this->nonces_db[$action . static::hash_nonce($code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
+		return $code;
+	}
+
+	public function verify_nonce($action, $code)
+	{
+		$nonces = $this->nonces_db;
+
+		$now = time();
+		foreach ($nonces as $index => $expires)
+		{
+			if ($expires < $now)
+			{
+				unset($nonces[$index]);
+			}
+		}
+
+		$index = $action . static::hash_nonce($code);
+
+		if (($ret = isset($nonces[$index])))
+		{
+			unset($nonces[$index]);
+		}
+
+		$this->nonces_db = $nonces;
+
+		return $ret;
 	}
 
 	// those two is for possible override in store methods

@@ -103,7 +103,7 @@ $mail_body = '';
 
 	#$engine->debug_print_r($available_users);
 
-	echo $engine->form_open('massemail', '', 'post', true, '', '');
+	echo $engine->form_open('massemail');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

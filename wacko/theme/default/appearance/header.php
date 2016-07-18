@@ -305,7 +305,7 @@ else
 				<div id="search_box">
 <?php
 				// opens search form
-				echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage'));
+				echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->get_translation('TextSearchPage')]);
 
 				// searchbar
 ?>

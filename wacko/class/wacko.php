@@ -3973,11 +3973,20 @@ class Wacko
 	}
 
 	// FORMS
-	function form_open($form_name = '', $page_method = '', $form_method = '', $form_token = false, $tag = '', $form_more = '', $href_param = '')
+	// parameter: named parameter array
+	function form_open($form_name = '', $parameter = [])
 	{
-		if (!$form_method)
+		$page_method = '';
+		$form_method = 'post';
+		$form_token = -1;
+		$tag = '';
+		$form_more = '';
+		$href_param = '';
+		extract($parameter, EXTR_IF_EXISTS);
+
+		if ($form_token === -1)
 		{
-			$form_method = 'post';
+			$form_token = ($form_method == 'post');
 		}
 
 		$add = (@$_GET['add'] || @$_POST['add']);
@@ -3997,10 +4006,10 @@ class Wacko
 			$result .= $this->form_token($form_name);
 		}
 
-		if ($this->config['tls'])
+		/* if ($this->config['tls']) // removed by STS - very bad idea to go from http page into https post page
 		{
 			$result = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $result);
-		}
+		} */
 
 		return $result;
 	}

@@ -68,7 +68,7 @@ function admin_config_filter(&$engine, &$module)
 
 	$phrases = file_get_contents($file_name);
 
-	echo $engine->form_open('filter', '', 'post', true, '', '');
+	echo $engine->form_open('filter');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

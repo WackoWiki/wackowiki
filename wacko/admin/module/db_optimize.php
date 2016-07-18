@@ -96,7 +96,7 @@ function admin_db_optimize(&$engine, &$module)
 		</p>
 		<br />
 <?php
-		echo $engine->form_open('optimize', '', 'post', true, '', '');
+		echo $engine->form_open('optimize');
 ?>
 			<table style="max-width: 250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>

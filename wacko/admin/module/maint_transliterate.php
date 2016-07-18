@@ -65,7 +65,7 @@ function admin_maint_transliterate(&$engine, &$module)
 				</ol>
 				<br />
 <?php
-				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+				echo $engine->form_open('sysupdate');
 ?>
 					<input type="hidden" name="step" value="2" />
 					<input type="submit" name="start" id="submit" value="continue" />
@@ -99,7 +99,7 @@ function admin_maint_transliterate(&$engine, &$module)
 				</ol>
 				<br />
 <?php
-				echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+				echo $engine->form_open('sysupdate');
 ?>
 					<input type="hidden" name="step" value="3" />
 					<input type="submit" name="start" id="submit" value="continue" />
@@ -134,7 +134,7 @@ function admin_maint_transliterate(&$engine, &$module)
 				<br />
 				<p>The update procedure is completed.</p>
 <?php
-				#echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+				#echo $engine->form_open('sysupdate');
 				#echo '<input type="hidden" name="step" value="4" />';
 				#echo '<input type="submit" name="start" id="submit" value="continue" />';
 				#echo $engine->form_close();
@@ -151,7 +151,7 @@ function admin_maint_transliterate(&$engine, &$module)
 		</ol>
 		<br />
 <?php
-		echo $engine->form_open('sysupdate', '', 'post', true, '', '');
+		echo $engine->form_open('sysupdate');
 ?>
 			<input type="hidden" name="step" value="1" />
 			<input type="submit" name="start" id="submit" value="Start" />

@@ -144,7 +144,7 @@ function admin_content_pages(&$engine, &$module)
 		( $order ? $order : 'ORDER BY l.page_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");
 
-	echo $engine->form_open('content_pages', '', 'post', true, '', '');
+	echo $engine->form_open('content_pages');
 
 ?>
 		<div>
