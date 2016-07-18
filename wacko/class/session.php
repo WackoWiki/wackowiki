@@ -316,21 +316,24 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 	}
 
-	private static function hash_nonce($code)
+	private static function nonce_index($action, $code)
 	{
-		return substr(base64_encode(hash('sha1', $code, 1)), 1, 11);
+		return $action . '.' . substr(base64_encode(hash('sha1', $code, 1)), 1, 11);
 	}
 
 	public function create_nonce($action, $expires = null)
 	{
-		$code = Ut::random_token(8);
-		$this->nonces_db[$action . static::hash_nonce($code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
+		$code = Ut::random_token(11);
+		$this->nonces_db[static::nonce_index($action, $code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
 		return $code;
 	}
 
 	public function verify_nonce($action, $code)
 	{
-		$nonces = $this->nonces_db;
+		if (!($nonces = @$this->nonces_db))
+		{
+			return false;
+		}
 
 		$now = time();
 		foreach ($nonces as $index => $expires)
@@ -341,7 +344,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 		}
 
-		$index = $action . static::hash_nonce($code);
+		$index = static::nonce_index($action, $code);
 
 		if (($ret = isset($nonces[$index])))
 		{

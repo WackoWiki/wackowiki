@@ -38,28 +38,19 @@ function admin_config_upload(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		// check form token
-		if (!$engine->validate_form_token('upload'))
-		{
-			$message = $engine->get_translation('FormInvalid');
-			$engine->set_message($message, 'error');
-		}
-		else
-		{
-			$config['upload']					= (string)$_POST['upload'];
-			$config['upload_images_only']		= (int)$_POST['upload_images_only'];
-			$config['upload_max_size']			= (int)$_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']];
-			$config['upload_quota']				= (int)$_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']];
-			$config['upload_quota_per_user']	= (int)$_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
-			$config['img_create_thumbnail']		= (int)$_POST['img_create_thumbnail'];
-			$config['img_max_thumb_width']		= (int)$_POST['img_max_thumb_width'];
+		$config['upload']					= (string)$_POST['upload'];
+		$config['upload_images_only']		= (int)$_POST['upload_images_only'];
+		$config['upload_max_size']			= (int)$_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']];
+		$config['upload_quota']				= (int)$_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']];
+		$config['upload_quota_per_user']	= (int)$_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
+		$config['img_create_thumbnail']		= (int)$_POST['img_create_thumbnail'];
+		$config['img_max_thumb_width']		= (int)$_POST['img_max_thumb_width'];
 
-			$engine->config->_set($config);
+		$engine->config->_set($config);
 
-			$engine->log(1, 'Updated upload settings');
-			$engine->set_message('Updated upload settings', 'success');
-			$engine->redirect(rawurldecode($engine->href()));
-		}
+		$engine->log(1, 'Updated upload settings');
+		$engine->set_message('Updated upload settings', 'success');
+		$engine->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('upload');

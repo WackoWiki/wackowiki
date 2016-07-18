@@ -67,13 +67,8 @@ if (($profile = @$_REQUEST['profile']))
 			// check for errors
 			$error = '';
 
-			// check form token
-			if (!$this->validate_form_token('personal_message'))
-			{
-				$error = $this->get_translation('FormInvalid');
-			}
 			// message is too long
-			else if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
+			if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
 			{
 				$error = Ut::perc_replace($this->get_translation('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
 			}

@@ -35,62 +35,53 @@ $mail_body = '';
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		// check form token
-		if (!$engine->validate_form_token('massemail'))
+		$group_id				= (int)$_POST['group_id'];
+		$user_id				= (int)$_POST['user_id'];
+		$mail_subject			= (string)$_POST['mail_subject'];
+		$mail_body				= (string)$_POST['mail_body'];
+		$language				= (string)$_POST['language'];
+
+		#$engine->config->_set($config);
+
+		$members = $engine->load_all(
+			"SELECT DISTINCT
+				gm.user_id,
+				u.user_name,
+				u.email,
+				u.enabled,
+				u.email_confirm,
+				us.allow_massemail
+			FROM
+				{$engine->config['table_prefix']}user u
+					INNER JOIN {$engine->config['table_prefix']}usergroup_member gm
+						ON u.user_id = gm.user_id
+					INNER JOIN {$engine->config['table_prefix']}user_setting us
+						ON u.user_id = us.user_id
+			WHERE
+				gm.group_id = '{$group_id}'
+					OR u.user_id = '{$user_id}' ",
+				true);
+
+		foreach ($members as $user)
 		{
-			$message = $engine->get_translation('FormInvalid');
-			$engine->set_message($message, 'error');
-		}
-		else
-		{
-			$group_id				= (int)$_POST['group_id'];
-			$user_id				= (int)$_POST['user_id'];
-			$mail_subject			= (string)$_POST['mail_subject'];
-			$mail_body				= (string)$_POST['mail_body'];
-			$language				= (string)$_POST['language'];
-
-			#$engine->config->_set($config);
-
-			$members = $engine->load_all(
-				"SELECT DISTINCT
-					gm.user_id,
-					u.user_name,
-					u.email,
-					u.enabled,
-					u.email_confirm,
-					us.allow_massemail
-				FROM
-					{$engine->config['table_prefix']}user u
-						INNER JOIN {$engine->config['table_prefix']}usergroup_member gm
-							ON u.user_id = gm.user_id
-						INNER JOIN {$engine->config['table_prefix']}user_setting us
-							ON u.user_id = us.user_id
-				WHERE
-					gm.group_id = '{$group_id}'
-						OR u.user_id = '{$user_id}' ",
-					true);
-
-			foreach ($members as $user)
+			if ($engine->config['enable_email'] == true && $engine->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
 			{
-				if ($engine->config['enable_email'] == true && $engine->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
-				{
-					$subject	= '['.$engine->config['site_name'].'] '.$mail_subject;
-					$body		= $engine->get_translation('EmailHello').' '.$user['user_name'].",\n\n".
+				$subject	= '['.$engine->config['site_name'].'] '.$mail_subject;
+				$body		= $engine->get_translation('EmailHello').' '.$user['user_name'].",\n\n".
 
-								$mail_body."\n\n\n".
+							$mail_body."\n\n\n".
 
-								$engine->get_translation('EmailDoNotReply')."\n\n".
-								$engine->get_translation('EmailGoodbye')."\n".
-								$engine->config['site_name']."\n".
-								$engine->config['base_url'];
+							$engine->get_translation('EmailDoNotReply')."\n\n".
+							$engine->get_translation('EmailGoodbye')."\n".
+							$engine->config['site_name']."\n".
+							$engine->config['base_url'];
 
-					$engine->send_mail($user['email'], $subject, $body);
-				}
+				$engine->send_mail($user['email'], $subject, $body);
 			}
-
-			$engine->log(1, 'Messemail send: '.$mail_subject.' to group / user '. $group_id);
-			$engine->set_message('Massemail send: '.$mail_subject, 'success');
 		}
+
+		$engine->log(1, 'Messemail send: '.$mail_subject.' to group / user '. $group_id);
+		$engine->set_message('Massemail send: '.$mail_subject, 'success');
 
 		#$engine->redirect(rawurldecode($engine->href()));
 	}

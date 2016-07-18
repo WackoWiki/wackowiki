@@ -4003,7 +4003,16 @@ class Wacko
 		// add form token
 		if ($form_token)
 		{
-			$result .= $this->form_token($form_name);
+			// do not cache pages with nonces!
+			$this->http->no_cache(false);
+
+			$token = $this->sess->create_nonce($form_name, 
+				(($this->db->form_token_time == -1)? 1000000 : max(30, $this->db->form_token_time)));
+				// STS remove -1 from setup
+
+			$result .=
+				'<input type="hidden" name="form_token" value="' . $token . '" />' . "\n" .
+				'<input type="hidden" name="form_name" value="' . $form_name . '" />' . "\n";
 		}
 
 		/* if ($this->config['tls']) // removed by STS - very bad idea to go from http page into https post page
@@ -4019,86 +4028,23 @@ class Wacko
 		return "</form>\n";
 	}
 
-
-	// adds a secret form token
-	//		- string $form_name has to match the name used in validate_form_token function
-	function form_token($form_name)
+	function validate_post_token()
 	{
-		$now		= time();
-		$user		= $this->get_user();
-
-		if ($user['user_name'] == '')
+		if ($_POST &&
+			!$this->sess->verify_nonce((string) @$_POST['form_name'], (string) @$_POST['form_token']))
 		{
-			$salt_length			= 10;
-			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $this->sess->guest_form_salt = Ut::random_token($salt_length, 3);
+			$_POST = [];
+			$_REQUEST = $_GET;
+
+			$this->set_message($this->get_translation('FormInvalid'), 'error');
+
+			// TODO diag or not?
+			// $this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' [[/'.$this->page['tag'].']] '.$form_name); # 'Invalid form token'
+
+			return false;
 		}
 
-		$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? $this->sess->id() : ''; #$user['cookie_token']
-		$token		= sha1($user['user_form_salt'] . $form_name . $token_sid);
-
-		$data = array('creation_time' => $now);
-		$this->sess->formdata[$token] = $data;
-
-		$fields		= '';
-		$fields		.= '<input type="hidden" name="form_token" value="'.$token.'" />'."\n";
-
-		return $fields;
-	}
-
-	// validate the form token. Required for all altering actions not secured by confirm_box
-	//		- string $form_name has to match the name used in form_token function
-	//		- int $timespan The maximum acceptable age for a submitted form in seconds
-	function validate_form_token($form_name, $timespan = false)
-	{
-		$user		= $this->get_user();
-
-		if ($user['user_name'] == '')
-		{
-			$user['user_name']		= GUEST;
-			$user['user_form_salt']	= $this->sess->guest_form_salt;
-		}
-
-		if ($timespan === false)
-		{
-			// we enforce a minimum value of 30 seconds
-			$timespan = ($this->config['form_token_time'] == -1) ? -1 : max(30, $this->config['form_token_time']);
-		}
-
-		if (isset($_POST['form_token']))
-		{
-			$token			= isset($_POST['form_token']) ? $_POST['form_token'] : '';
-			$creation_time	= isset($this->sess->formdata[$token]['creation_time']) ? $this->sess->formdata[$token]['creation_time'] : '';
-
-			$diff = time() - $creation_time;
-
-			// If creation_time and the time() now is zero we can assume it was not a human doing this (the check for if ($diff)...
-			if ($diff && ($diff <= $timespan || $timespan === -1))
-			{
-				$token_sid	= ($user['user_name'] == GUEST && !empty($this->config['form_token_sid_guests'])) ? $this->sess->id() : ''; #$user['cookie_token']
-				$key		= sha1($user['user_form_salt'] . $form_name . $token_sid);
-
-				if ($key === $token)
-				{
-
-					return true;
-				}
-				else
-				{
-					header('HTTP/1.1 400 Bad Request');
-
-					// TODO: token should be reset, generation of per-request tokens as opposed to per-session tokens
-					// TODO: suspiciously repeated form requests/form submissions, using Captchas to prevent automatic requests
-					$this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' [[/'.$this->page['tag'].']] '.$form_name); # 'Invalid form token'
-
-					return false;
-				}
-			}
-
-			// TODO: ? show indication e.g. timeout, pls. resubmit
-		}
-
-		return false;
+		return true;
 	}
 
 	// REFERRERS
@@ -4413,7 +4359,7 @@ class Wacko
 		return $this->load_single(
 			"SELECT
 				u.user_id, u.user_name, u.real_name, u.account_lang, u.password, u.email, u.account_status, u.account_type,
-				u.enabled, u.signup_time, u.change_password, u.user_ip, u.user_form_salt, u.email_confirm, u.last_visit,
+				u.enabled, u.signup_time, u.change_password, u.user_ip, u.email_confirm, u.last_visit,
 				u.session_expire, u.last_mark, u.login_count, u.lost_password_request_count, u.failed_login_count, u.total_pages,
 				u.total_revisions, u.total_comments, u.total_uploads, u.fingerprint,
 				s.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica,
@@ -4620,8 +4566,6 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->db->user_table} SET ".
 				"last_visit						= UTC_TIMESTAMP(), ".
-				// STS why user_form_salt is in dbase at all? it's place in session!
-				"user_form_salt					= " . $this->db->q(Ut::random_token(10, 3)) . ", ".
 				"change_password				= '', ".
 				"login_count					= login_count + 1, ".
 				"failed_login_count				= 0, ".
@@ -5760,6 +5704,9 @@ class Wacko
 		{
 			$this->http->ensure_tls($this->href($method, $tag));
 		}
+
+		// clean _POST if no csrf token
+		$this->validate_post_token();
 
 		// url lang selection
 		$url	= explode('@@', $tag);

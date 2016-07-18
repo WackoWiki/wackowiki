@@ -12,8 +12,8 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	$title		= trim(@$_POST['title']);
 	$parent_id	= (int)@$_POST['parent_id'];
 
-	// check form token
-	if (!$this->validate_form_token('add_comment'))
+	// if form token failed
+	if (!$_POST)
 	{
 		if (!$user)
 		{
@@ -23,7 +23,6 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->body		= $body;
 		$this->sess->title		= $title;
 
-		$this->set_message($this->get_translation('FormInvalid'), 'error');
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
 
