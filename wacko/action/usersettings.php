@@ -44,14 +44,14 @@ if (isset($_GET['confirm']))
 		$this->show_message(Ut::perc_replace($this->get_translation('EmailNotConfirmed'), $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0)));
 	}
 }
-else if (isset($_GET['action']) && $_GET['action'] == 'logout')
+else if (@$_GET['action'] === 'logout')
 {
 	$this->log_user_out();
 	$this->set_menu(MENU_DEFAULT);
 	$this->set_message($this->get_translation('LoggedOut'), 'success');
 	$this->redirect($this->href());
 }
-else if ($user = $this->get_user())
+else if (($user = $this->get_user()))
 {
 	$email_changed	= false;
 	$user = $this->load_user(0, $user['user_id']);
