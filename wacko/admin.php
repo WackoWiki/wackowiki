@@ -41,6 +41,9 @@ $engine->set_language($db->language, true);
 // reconnect securely in tls mode
 $http->ensure_tls($db->base_url . 'admin.php');
 
+// clean _POST if no csrf token
+$engine->validate_post_token();
+
 ########################################################
 ##            End admin session and logout            ##
 ########################################################

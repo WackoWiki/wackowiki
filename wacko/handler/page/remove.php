@@ -36,14 +36,6 @@ if ($this->is_admin()
 
 	if (isset($_POST['delete']) && $_POST['delete'] == 1)
 	{
-		// check form token
-		if (!$this->validate_form_token('remove_page'))
-		{
-			$this->set_message($this->get_translation('FormInvalid'), 'error');
-
-			$this->redirect($this->href());
-		}
-
 		if (isset($_POST['dontkeep']) && $this->is_admin())
 		{
 			$dontkeep = 1;

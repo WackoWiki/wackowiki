@@ -103,13 +103,6 @@ if ($this->has_access('read')
 			}
 
 			// TODO: if captcha .. else
-			// check form token
-			if (!$this->validate_form_token('edit_page'))
-			{
-				$message = $this->get_translation('FormInvalid');
-				$this->set_message($message , 'error');
-				$error = true;
-			}
 
 			// check for overwriting
 			if ($this->page && $this->page['modified'] != $_POST['previous'])
@@ -235,8 +228,6 @@ if ($this->has_access('read')
 			$this->redirect($this->href());
 		}
 	}
-
-	$this->http->no_cache();
 
 	// fetch fields
 	$previous	= isset($_POST['previous'])	? $_POST['previous']	: $this->page['modified'];

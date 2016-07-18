@@ -116,13 +116,6 @@ function admin_user_approve(&$engine, &$module)
 			"LIMIT 1");
 	}
 
-	// check form token
-/* 	if (!$engine->validate_form_token('register'))
-	{
-		$error .= $engine->get_translation('FormInvalid');
-	}
-	else
-	{ */
 	// approve user
 	if (isset($_GET['approve']) && $user_id )
 	{

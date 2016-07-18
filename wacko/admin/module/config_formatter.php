@@ -34,43 +34,34 @@ function admin_config_formatter(&$engine, &$module)
 
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		// check form token
-		if (!$engine->validate_form_token('formatter'))
-		{
-			$message = $engine->get_translation('FormInvalid');
-			$engine->set_message($message, 'error');
-		}
-		else
-		{
-			$config['allow_x11colors']			= (int)$_POST['allow_x11colors'];
-			$config['default_typografica']		= (int)$_POST['default_typografica'];
-			$config['paragrafica']				= (int)$_POST['paragrafica'];
-			$config['allow_rawhtml']			= (int)$_POST['allow_rawhtml'];
-			$config['disable_safehtml']			= (int)$_POST['disable_safehtml'];
-			$config['disable_tikilinks']		= (int)$_POST['disable_tikilinks'];
-			$config['disable_bracketslinks']	= (int)$_POST['disable_bracketslinks'];
-			$config['disable_wikilinks']		= (int)$_POST['disable_wikilinks'];
-			$config['disable_formatters']		= (int)$_POST['disable_formatters'];
-			$config['date_format']				= (string)$_POST['date_format'];
-			$config['time_format']				= (string)$_POST['time_format'];
-			$config['time_format_seconds']		= (string)$_POST['time_format_seconds'];
-			$config['name_date_macro']			= (string)$_POST['name_date_macro'];
-			$config['date_macro_format']		= (string)$_POST['date_macro_format'];
-			$config['date_precise_format']		= (string)$_POST['date_precise_format'];
-			$config['timezone']					= (float)$_POST['timezone'];
-			$config['dst']						= (int)$_POST['dst'];
-			$config['link_target']				= (int)$_POST['link_target'];
-			$config['urls_underscores']			= (int)$_POST['urls_underscores'];
-			$config['show_spaces']				= (int)$_POST['show_spaces'];
-			$config['youarehere_text']			= (string)$_POST['youarehere_text'];
-			$config['numerate_links']			= (int)$_POST['numerate_links'];
+		$config['allow_x11colors']			= (int)$_POST['allow_x11colors'];
+		$config['default_typografica']		= (int)$_POST['default_typografica'];
+		$config['paragrafica']				= (int)$_POST['paragrafica'];
+		$config['allow_rawhtml']			= (int)$_POST['allow_rawhtml'];
+		$config['disable_safehtml']			= (int)$_POST['disable_safehtml'];
+		$config['disable_tikilinks']		= (int)$_POST['disable_tikilinks'];
+		$config['disable_bracketslinks']	= (int)$_POST['disable_bracketslinks'];
+		$config['disable_wikilinks']		= (int)$_POST['disable_wikilinks'];
+		$config['disable_formatters']		= (int)$_POST['disable_formatters'];
+		$config['date_format']				= (string)$_POST['date_format'];
+		$config['time_format']				= (string)$_POST['time_format'];
+		$config['time_format_seconds']		= (string)$_POST['time_format_seconds'];
+		$config['name_date_macro']			= (string)$_POST['name_date_macro'];
+		$config['date_macro_format']		= (string)$_POST['date_macro_format'];
+		$config['date_precise_format']		= (string)$_POST['date_precise_format'];
+		$config['timezone']					= (float)$_POST['timezone'];
+		$config['dst']						= (int)$_POST['dst'];
+		$config['link_target']				= (int)$_POST['link_target'];
+		$config['urls_underscores']			= (int)$_POST['urls_underscores'];
+		$config['show_spaces']				= (int)$_POST['show_spaces'];
+		$config['youarehere_text']			= (string)$_POST['youarehere_text'];
+		$config['numerate_links']			= (int)$_POST['numerate_links'];
 
-			$engine->config->_set($config);
+		$engine->config->_set($config);
 
-			$engine->log(1, 'Updated formatting settings');
-			$engine->set_message('Updated formatting settings', 'success');
-			$engine->redirect(rawurldecode($engine->href()));
-		}
+		$engine->log(1, 'Updated formatting settings');
+		$engine->set_message('Updated formatting settings', 'success');
+		$engine->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('formatter');

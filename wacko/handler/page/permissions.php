@@ -49,65 +49,173 @@ if ($this->is_owner() || $this->is_admin())
 
 	if (!empty($_POST))
 	{
-		// check form token
-		if (!$this->validate_form_token('set_permissions'))
-		{
-			$error = $this->get_translation('FormInvalid');
-			$this->set_message($error, 'error');
+		$_read_acl		= isset($_POST['read_acl'])		? $_POST['read_acl']	: '';
+		$_write_acl		= isset($_POST['write_acl'])	? $_POST['write_acl']	: '';
+		$_comment_acl	= isset($_POST['comment_acl'])	? $_POST['comment_acl']	: '';
+		$_create_acl	= isset($_POST['create_acl'])	? $_POST['create_acl']	: '';
 
-			$this->redirect($this->href('permissions'));
-		}
-		else
+		if ($upload_allowed == true)
 		{
-			$_read_acl		= isset($_POST['read_acl'])		? $_POST['read_acl']	: '';
-			$_write_acl		= isset($_POST['write_acl'])	? $_POST['write_acl']	: '';
-			$_comment_acl	= isset($_POST['comment_acl'])	? $_POST['comment_acl']	: '';
-			$_create_acl	= isset($_POST['create_acl'])	? $_POST['create_acl']	: '';
+			$_upload_acl	= isset($_POST['upload_acl']) ? $_POST['upload_acl'] : '';
+		}
+
+		$_new_owner_id	= isset($_POST['new_owner_id']) ? $_POST['new_owner_id'] : '';
+
+		// acls for page or entire cluster
+		$need_massacls	= 0;
+
+		if (isset($_POST['massacls']) && $_POST['massacls'] == 'on')
+		{
+			$need_massacls = 1;
+		}
+
+		// acls page
+		if ($need_massacls == 0)
+		{
+			// store lists
+			$this->save_acl($this->page['page_id'], 'read',		$_read_acl);
+			$this->save_acl($this->page['page_id'], 'write',	$_write_acl);
+			$this->save_acl($this->page['page_id'], 'comment',	$_comment_acl);
+			$this->save_acl($this->page['page_id'], 'create',	$_create_acl);
 
 			if ($upload_allowed == true)
 			{
-				$_upload_acl	= isset($_POST['upload_acl']) ? $_POST['upload_acl'] : '';
+				$this->save_acl($this->page['page_id'], 'upload', $_upload_acl);
 			}
 
-			$_new_owner_id	= isset($_POST['new_owner_id']) ? $_POST['new_owner_id'] : '';
+			// log event
+			$this->log(2, Ut::perc_replace($this->get_translation('LogACLUpdated', $this->config['language']), $this->page['tag']." ".$this->page['title']));
 
-			// acls for page or entire cluster
-			$need_massacls	= 0;
+			// Change permissions for all comments on this page
+			$comments = $this->load_all(
+				"SELECT page_id ".
+				"FROM ".$this->config['table_prefix']."page ".
+				"WHERE comment_on_id = '".$this->page['page_id']."' ".
+					"AND owner_id='".$this->get_user_id()."'");
 
-			if (isset($_POST['massacls']) && $_POST['massacls'] == 'on')
+			foreach ($comments as $num => $comment)
 			{
-				$need_massacls = 1;
+				$this->save_acl($comment['page_id'], 'read',		$_read_acl);
+				#$this->save_acl($comment['page_id'], 'write',		$_write_acl);
+				#$this->save_acl($comment['page_id'], 'comment',	$_comment_acl);
+
+				// change owner?
+				// TODO: set optional new owner but only if the comment belongs to selected old user
+				#if ($new_owner = $_new_owner)
+				#{
+				#	$new_owner_id = $this->get_user_id($new_owner);
+				#	$this->set_page_owner($comment['page_id'], $new_owner_id);
+				#}
 			}
 
-			// acls page
-			if ($need_massacls == 0)
+			$message = $this->get_translation('ACLUpdated');
+
+			// change owner?
+			if ($new_owner_id = $_new_owner_id)
+			{
+				// check user exists
+				$user = $this->load_single(
+					"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
+					"FROM {$this->config['user_table']} u ".
+						"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+					"WHERE u.user_id = '".(int)$new_owner_id."' ".
+					"LIMIT 1");
+
+				if ($user)
+				{
+					$new_owner		= $user['user_name'];
+
+					// update user statistics
+					if ($owner_id = $this->page['owner_id'])
+					{
+						$this->sql_query(
+							"UPDATE {$this->config['user_table']} SET ".
+								"total_pages	= total_pages - 1 ".
+							"WHERE user_id		= '".(int)$owner_id."' ".
+							"LIMIT 1");
+					}
+
+					$this->sql_query(
+						"UPDATE {$this->config['user_table']} SET ".
+							"total_pages	= total_pages + 1 ".
+						"WHERE user_id		= '".(int)$new_owner_id."' ".
+						"LIMIT 1");
+
+					$this->set_page_owner($this->page['page_id'], $new_owner_id);
+
+					if (   $this->config['enable_email']
+						&& $this->config['enable_email_notification']
+						&& !$user['email_confirm'])
+					{
+						$save = $this->set_language($user['user_lang'], true);
+
+						$subject	= $this->get_translation('NewPageOwnership');
+						$body		.= Ut::perc_replace($this->get_translation('YouAreNewOwner'),
+									   $this->get_user_name(), $this->config['site_name'])."\n";
+						$body		.= $this->href('', $this->tag, '')."\n\n";
+						$body		.= $this->get_translation('PageOwnershipInfo')."\n";
+
+						$this->send_user_email($new_owner, $user['email'], $subject, $body, $user['user_lang']);
+						$this->set_language($save, true);
+					}
+
+					// log event
+					$this->log(2, Ut::perc_replace($this->get_translation('LogOwnershipChanged', $this->config['language']),
+							$this->page['tag']." ".$this->page['title'], $new_owner));
+
+					$message .= $this->get_translation('ACLGaveOwnership').'<code>'.$new_owner.'</code>';
+				}
+				else
+				{
+					// new owner doesn't exists
+					$message .= Ut::perc_replace($this->get_translation('ACLNoNewOwner'), $new_owner);
+					$this->set_message($message);
+					$this->redirect($this->href('permissions'));
+				}
+			}
+		}
+
+		// acls for entire cluster
+		else if ($need_massacls == 1)
+		{
+			$pages = $this->load_all("
+				SELECT p.page_id, p.tag, p.title ".
+				"FROM ".$this->config['table_prefix']."page p ".
+				"WHERE (p.supertag = '".quote($this->dblink, $this->supertag)."'".
+					" OR p.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
+					") ".
+				($this->is_admin()
+					? ""
+					: "AND p.owner_id = '".$this->get_user_id()."'"));
+
+			foreach ($pages as $num => $page)
 			{
 				// store lists
-				$this->save_acl($this->page['page_id'], 'read',		$_read_acl);
-				$this->save_acl($this->page['page_id'], 'write',	$_write_acl);
-				$this->save_acl($this->page['page_id'], 'comment',	$_comment_acl);
-				$this->save_acl($this->page['page_id'], 'create',	$_create_acl);
+				$this->save_acl($page['page_id'], 'read',		$_read_acl);
+				$this->save_acl($page['page_id'], 'write',		$_write_acl);
+				$this->save_acl($page['page_id'], 'comment',	$_comment_acl);
+				$this->save_acl($page['page_id'], 'create',		$_create_acl);
 
 				if ($upload_allowed == true)
 				{
-					$this->save_acl($this->page['page_id'], 'upload', $_upload_acl);
+					$this->save_acl($page['page_id'], 'upload', $_upload_acl);
 				}
 
 				// log event
-				$this->log(2, Ut::perc_replace($this->get_translation('LogACLUpdated', $this->config['language']), $this->page['tag']." ".$this->page['title']));
+				$this->log(2, Ut::perc_replace($this->get_translation('LogACLUpdated', $this->config['language']), $page['tag']." ".$page['title']));
 
 				// Change permissions for all comments on this page
 				$comments = $this->load_all(
 					"SELECT page_id ".
 					"FROM ".$this->config['table_prefix']."page ".
-					"WHERE comment_on_id = '".$this->page['page_id']."' ".
+					"WHERE comment_on_id = '".$page['page_id']."' ".
 						"AND owner_id='".$this->get_user_id()."'");
 
 				foreach ($comments as $num => $comment)
 				{
-					$this->save_acl($comment['page_id'], 'read',		$_read_acl);
-					#$this->save_acl($comment['page_id'], 'write',		$_write_acl);
-					#$this->save_acl($comment['page_id'], 'comment',	$_comment_acl);
+					$this->save_acl($comment['page_id'], 'read', $_read_acl);
+					#$this->save_acl($comment['page_id'], 'write', $_write_acl);
+					#$this->save_acl($comment['page_id'], 'comment', $_comment_acl);
 
 					// change owner?
 					// TODO: set optional new owner but only if the comment belongs to selected old user
@@ -118,171 +226,52 @@ if ($this->is_owner() || $this->is_admin())
 					#}
 				}
 
-				$message = $this->get_translation('ACLUpdated');
-
 				// change owner?
 				if ($new_owner_id = $_new_owner_id)
 				{
-					// check user exists
-					$user = $this->load_single(
-						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
-						"FROM {$this->config['user_table']} u ".
-							"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
-						"WHERE u.user_id = '".(int)$new_owner_id."' ".
-						"LIMIT 1");
-
-					if ($user)
-					{
-						$new_owner		= $user['user_name'];
-
-						// update user statistics
-						if ($owner_id = $this->page['owner_id'])
-						{
-							$this->sql_query(
-								"UPDATE {$this->config['user_table']} SET ".
-									"total_pages	= total_pages - 1 ".
-								"WHERE user_id		= '".(int)$owner_id."' ".
-								"LIMIT 1");
-						}
-
-						$this->sql_query(
-							"UPDATE {$this->config['user_table']} SET ".
-								"total_pages	= total_pages + 1 ".
-							"WHERE user_id		= '".(int)$new_owner_id."' ".
-							"LIMIT 1");
-
-						$this->set_page_owner($this->page['page_id'], $new_owner_id);
-
-						if (   $this->config['enable_email']
-							&& $this->config['enable_email_notification']
-							&& !$user['email_confirm'])
-						{
-							$save = $this->set_language($user['user_lang'], true);
-
-							$subject	= $this->get_translation('NewPageOwnership');
-							$body		.= Ut::perc_replace($this->get_translation('YouAreNewOwner'),
-										   $this->get_user_name(), $this->config['site_name'])."\n";
-							$body		.= $this->href('', $this->tag, '')."\n\n";
-							$body		.= $this->get_translation('PageOwnershipInfo')."\n";
-
-							$this->send_user_email($new_owner, $user['email'], $subject, $body, $user['user_lang']);
-							$this->set_language($save, true);
-						}
-
-						// log event
-						$this->log(2, Ut::perc_replace($this->get_translation('LogOwnershipChanged', $this->config['language']),
-								$this->page['tag']." ".$this->page['title'], $new_owner));
-
-						$message .= $this->get_translation('ACLGaveOwnership').'<code>'.$new_owner.'</code>';
-					}
-					else
-					{
-						// new owner doesn't exists
-						$message .= Ut::perc_replace($this->get_translation('ACLNoNewOwner'), $new_owner);
-						$this->set_message($message);
-						$this->redirect($this->href('permissions'));
-					}
-				}
-			}
-
-			// acls for entire cluster
-			else if ($need_massacls == 1)
-			{
-				$pages = $this->load_all("
-					SELECT p.page_id, p.tag, p.title ".
-					"FROM ".$this->config['table_prefix']."page p ".
-					"WHERE (p.supertag = '".quote($this->dblink, $this->supertag)."'".
-						" OR p.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
-						") ".
-					($this->is_admin()
-						? ""
-						: "AND p.owner_id = '".$this->get_user_id()."'"));
-
-				foreach ($pages as $num => $page)
-				{
-					// store lists
-					$this->save_acl($page['page_id'], 'read',		$_read_acl);
-					$this->save_acl($page['page_id'], 'write',		$_write_acl);
-					$this->save_acl($page['page_id'], 'comment',	$_comment_acl);
-					$this->save_acl($page['page_id'], 'create',		$_create_acl);
-
-					if ($upload_allowed == true)
-					{
-						$this->save_acl($page['page_id'], 'upload', $_upload_acl);
-					}
+					$this->set_page_owner($page['page_id'], $new_owner_id);
+					$ownedpages .= $this->href('', $page['tag'])."\n";
 
 					// log event
-					$this->log(2, Ut::perc_replace($this->get_translation('LogACLUpdated', $this->config['language']), $page['tag']." ".$page['title']));
-
-					// Change permissions for all comments on this page
-					$comments = $this->load_all(
-						"SELECT page_id ".
-						"FROM ".$this->config['table_prefix']."page ".
-						"WHERE comment_on_id = '".$page['page_id']."' ".
-							"AND owner_id='".$this->get_user_id()."'");
-
-					foreach ($comments as $num => $comment)
-					{
-						$this->save_acl($comment['page_id'], 'read', $_read_acl);
-						#$this->save_acl($comment['page_id'], 'write', $_write_acl);
-						#$this->save_acl($comment['page_id'], 'comment', $_comment_acl);
-
-						// change owner?
-						// TODO: set optional new owner but only if the comment belongs to selected old user
-						#if ($new_owner = $_new_owner)
-						#{
-						#	$new_owner_id = $this->get_user_id($new_owner);
-						#	$this->set_page_owner($comment['page_id'], $new_owner_id);
-						#}
-					}
-
-					// change owner?
-					if ($new_owner_id = $_new_owner_id)
-					{
-						$this->set_page_owner($page['page_id'], $new_owner_id);
-						$ownedpages .= $this->href('', $page['tag'])."\n";
-
-						// log event
-						$this->log(2, Ut::perc_replace($this->get_translation('LogOwnershipChanged', $this->config['language']),
-								$page['tag']." ".$page['title'],
-								$user['user_name']));
-					}
-				}
-
-				$message = $this->get_translation('ACLUpdated');
-
-				if ($new_owner_id = $_new_owner_id)
-				{
-					$user = $this->load_single(
-						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
-						"FROM {$this->config['user_table']} u ".
-							"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
-						"WHERE u.user_id = '".(int)$new_owner_id."' ".
-						"LIMIT 1");
-
-					if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
-					{
-						$subject	= $this->get_translation('NewPageOwnership');
-						$body		.= Ut::perc_replace($this->get_translation('YouAreNewOwner'),
-									   $this->get_user_name(), $this->config['site_name'])."\n";
-						$body		.= $this->href('', $this->tag, '')."\n\n";
-						$body		.= $this->get_translation('PageOwnershipInfo')."\n";
-
-						$this->send_user_email($new_owner, $user['email'], $subject, $body, $user['user_lang']);
-					}
-
-					$message .= $this->get_translation('ACLGaveOwnership').$user['user_name'];
+					$this->log(2, Ut::perc_replace($this->get_translation('LogOwnershipChanged', $this->config['language']),
+							$page['tag']." ".$page['title'],
+							$user['user_name']));
 				}
 			}
 
-			// redirect back to page
-			$this->set_message($message, 'success');
+			$message = $this->get_translation('ACLUpdated');
 
-			// purge SQL queries cache
-			$this->config->invalidate_sql_cache();
+			if ($new_owner_id = $_new_owner_id)
+			{
+				$user = $this->load_single(
+					"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
+					"FROM {$this->config['user_table']} u ".
+						"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+					"WHERE u.user_id = '".(int)$new_owner_id."' ".
+					"LIMIT 1");
 
-			$this->redirect($this->href());
+				if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
+				{
+					$subject	= $this->get_translation('NewPageOwnership');
+					$body		.= Ut::perc_replace($this->get_translation('YouAreNewOwner'),
+								   $this->get_user_name(), $this->config['site_name'])."\n";
+					$body		.= $this->href('', $this->tag, '')."\n\n";
+					$body		.= $this->get_translation('PageOwnershipInfo')."\n";
+
+					$this->send_user_email($new_owner, $user['email'], $subject, $body, $user['user_lang']);
+				}
+
+				$message .= $this->get_translation('ACLGaveOwnership').$user['user_name'];
+			}
 		}
+
+		// redirect back to page
+		$this->set_message($message, 'success');
+
+		// purge SQL queries cache
+		$this->config->invalidate_sql_cache();
+
+		$this->redirect($this->href());
 	}
 	else
 	{

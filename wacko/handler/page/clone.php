@@ -45,85 +45,76 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 {
 	if (isset($_POST['clone_name']) && $_POST['clone'] == 1)
 	{
-		// check form token
-		if (!$this->validate_form_token('clone_page'))
+		// clone or massclone
+		$need_massclone = 0;
+
+		if (isset($_POST['massclone']) && $_POST['massclone'] == 'on')
 		{
-			$message = $this->get_translation('FormInvalid');
-			$this->show_message($message, 'error');
+			$need_massclone = 1;
 		}
-		else
+
+		// clone
+		if ($need_massclone == 0)
 		{
-			// clone or massclone
-			$need_massclone = 0;
+			// strip whitespaces
+			$new_name		= preg_replace('/\s+/', '', $_POST['clone_name']);
+			$new_name		= trim($new_name, '/');
+			$super_new_name	= $this->translit($new_name);
+			$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
 
-			if (isset($_POST['massclone']) && $_POST['massclone'] == 'on')
+			if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 			{
-				$need_massclone = 1;
+				$message = $this->get_translation('InvalidWikiName')."<br />\n";
+
 			}
-
-			// clone
-			if ($need_massclone == 0)
+			// if ($this->supertag == $super_new_name)
+			else if ($this->tag == $new_name)
 			{
-				// strip whitespaces
-				$new_name		= preg_replace('/\s+/', '', $_POST['clone_name']);
-				$new_name		= trim($new_name, '/');
-				$super_new_name	= $this->translit($new_name);
-				$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
-
-				if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
+				$message .= Ut::perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($new_name, '', '', 0))."<br />\n";
+			}
+			else
+			{
+				if ($this->supertag != $super_new_name && $page = $this->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 				{
-					$message = $this->get_translation('InvalidWikiName')."<br />\n";
-
-				}
-				// if ($this->supertag == $super_new_name)
-				else if ($this->tag == $new_name)
-				{
-					$message .= Ut::perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($new_name, '', '', 0))."<br />\n";
+					$message .= Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($new_name, '', '', 0))."<br />\n";
 				}
 				else
 				{
-					if ($this->supertag != $super_new_name && $page = $this->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
+					if ($this->clone_page($this->tag, $new_name, $super_new_name, $edit_note))
 					{
-						$message .= Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($new_name, '', '', 0))."<br />\n";
-					}
-					else
-					{
-						if ($this->clone_page($this->tag, $new_name, $super_new_name, $edit_note))
+						$need_redirect = '';
+
+						// log event
+						$this->log(4, Ut::perc_replace($this->get_translation('LogClonedPage', $this->config['language']), $this->tag, $new_name));
+
+						if (isset($_POST['redirect']) && $_POST['redirect'] == 'on')
 						{
-							$need_redirect = '';
+							$need_redirect = 1;
+						}
 
-							// log event
-							$this->log(4, Ut::perc_replace($this->get_translation('LogClonedPage', $this->config['language']), $this->tag, $new_name));
-
-							if (isset($_POST['redirect']) && $_POST['redirect'] == 'on')
-							{
-								$need_redirect = 1;
-							}
-
-							// edit after creation
-							if ($need_redirect == 1)
-							{
-								$this->set_message($edit_note);
-								$this->redirect($this->href('edit', $new_name));
-							}
-							else
-							{
-								$message .= Ut::perc_replace($this->get_translation('PageCloned'), $this->link('/'.$new_name))."<br />\n";
-							}
+						// edit after creation
+						if ($need_redirect == 1)
+						{
+							$this->set_message($edit_note);
+							$this->redirect($this->href('edit', $new_name));
+						}
+						else
+						{
+							$message .= Ut::perc_replace($this->get_translation('PageCloned'), $this->link('/'.$new_name))."<br />\n";
 						}
 					}
 				}
-
-				$this->show_message($message, 'info');
 			}
 
-			//massclone
-			if ($need_massclone == 1)
-			{
-				// TODO: clone all sheeps and optional ACLs
-				echo '<p><strong>' . $this->get_translation('MassCloning') . '</strong><p>';
-				recursive_clone($this, $this->tag, $edit_note);
-			}
+			$this->show_message($message, 'info');
+		}
+
+		//massclone
+		if ($need_massclone == 1)
+		{
+			// TODO: clone all sheeps and optional ACLs
+			echo '<p><strong>' . $this->get_translation('MassCloning') . '</strong><p>';
+			recursive_clone($this, $this->tag, $edit_note);
 		}
 	}
 	else

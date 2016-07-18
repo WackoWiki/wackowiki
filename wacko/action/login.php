@@ -9,9 +9,6 @@ if (!defined('IN_WACKO'))
 <!--notypo-->
 <?php
 
-// disable server cache for page
-$this->http->no_cache(false);
-
 // reconnect securely in tls mode
 $param = isset($_GET['goback'])?  'goback=' . rawurlencode($_GET['goback']) : '';
 $this->http->ensure_tls($this->href('', '', $param));
@@ -103,11 +100,6 @@ else // login
 	// is user trying to log in or register?
 	if (@$_POST['action'] === 'login')
 	{
-		// check form token
-		if (!$this->validate_form_token('login'))
-		{
-			$error .= $this->get_translation('FormInvalid');
-		}
 
 		$_user_name = (string) @$_POST['user_name'];
 

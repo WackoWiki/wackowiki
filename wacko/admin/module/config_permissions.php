@@ -33,33 +33,24 @@ function admin_config_permissions(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		// check form token
-		if (!$engine->validate_form_token('permissions'))
-		{
-			$message = $engine->get_translation('FormInvalid');
-			$engine->set_message($message, 'error');
-		}
-		else
-		{
-			$config['default_read_acl']				= (string)$_POST['default_read_acl'];
-			$config['default_write_acl']			= (string)$_POST['default_write_acl'];
-			$config['default_comment_acl']			= (string)$_POST['default_comment_acl'];
-			$config['default_create_acl']			= (string)$_POST['default_create_acl'];
-			$config['default_upload_acl']			= (string)$_POST['default_upload_acl'];
-			$config['rename_globalacl']				= (string)$_POST['rename_globalacl'];
-			$config['acl_lock']						= (int)$_POST['acl_lock'];
-			$config['hide_locked']					= (int)$_POST['hide_locked'];
-			$config['remove_onlyadmins']			= (int)$_POST['remove_onlyadmins'];
-			$config['owners_can_remove_comments']	= (int)$_POST['owners_can_remove_comments'];
-			$config['owners_can_change_categories']	= (int)$_POST['owners_can_change_categories'];
-			$config['moders_can_edit']				= (int)$_POST['moders_can_edit'];
+		$config['default_read_acl']				= (string)$_POST['default_read_acl'];
+		$config['default_write_acl']			= (string)$_POST['default_write_acl'];
+		$config['default_comment_acl']			= (string)$_POST['default_comment_acl'];
+		$config['default_create_acl']			= (string)$_POST['default_create_acl'];
+		$config['default_upload_acl']			= (string)$_POST['default_upload_acl'];
+		$config['rename_globalacl']				= (string)$_POST['rename_globalacl'];
+		$config['acl_lock']						= (int)$_POST['acl_lock'];
+		$config['hide_locked']					= (int)$_POST['hide_locked'];
+		$config['remove_onlyadmins']			= (int)$_POST['remove_onlyadmins'];
+		$config['owners_can_remove_comments']	= (int)$_POST['owners_can_remove_comments'];
+		$config['owners_can_change_categories']	= (int)$_POST['owners_can_change_categories'];
+		$config['moders_can_edit']				= (int)$_POST['moders_can_edit'];
 
-			$engine->config->_set($config);
+		$engine->config->_set($config);
 
-			$engine->log(1, '!!Updated security settings!!');
-			$engine->set_message('Updated security settings', 'success');
-			$engine->redirect(rawurldecode($engine->href()));
-		}
+		$engine->log(1, '!!Updated security settings!!');
+		$engine->set_message('Updated security settings', 'success');
+		$engine->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('permissions');

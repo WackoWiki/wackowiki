@@ -360,7 +360,7 @@ class Http
 	function no_cache($client_only = true)
 	{
 		// disable browser cache for page
-		if ( !headers_sent() )
+		if (!headers_sent())
 		{
 			header('Expires: ' . Ut::http_date(-1));				// Date in the past
 			header('Last-Modified: ' . Ut::http_date());						// always modified

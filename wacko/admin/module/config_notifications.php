@@ -33,26 +33,17 @@ function admin_config_notifications(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		// check form token
-		if (!$engine->validate_form_token('notifications'))
-		{
-			$message = $engine->get_translation('FormInvalid');
-			$engine->set_message($message, 'error');
-		}
-		else
-		{
-			$config['enable_email_notification']	= (int)$_POST['enable_email_notification'];
-			$config['notify_minor_edit']			= (int)$_POST['notify_minor_edit'];
-			$config['notify_page']					= (int)$_POST['notify_page'];
-			$config['notify_comment']				= (int)$_POST['notify_comment'];
-			$config['notify_new_user_account']		= (int)$_POST['notify_new_user_account'];
+		$config['enable_email_notification']	= (int)$_POST['enable_email_notification'];
+		$config['notify_minor_edit']			= (int)$_POST['notify_minor_edit'];
+		$config['notify_page']					= (int)$_POST['notify_page'];
+		$config['notify_comment']				= (int)$_POST['notify_comment'];
+		$config['notify_new_user_account']		= (int)$_POST['notify_new_user_account'];
 
-			$engine->config->_set($config);
+		$engine->config->_set($config);
 
-			$engine->log(1, '!!Updated security settings!!');
-			$engine->set_message('Updated security settings', 'success');
-			$engine->redirect(rawurldecode($engine->href()));
-		}
+		$engine->log(1, '!!Updated security settings!!');
+		$engine->set_message('Updated security settings', 'success');
+		$engine->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('notifications');
