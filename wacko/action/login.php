@@ -251,7 +251,7 @@ else // login
 	echo '<div class="cssform">'."\n";
 	echo '<h3>'.$this->get_translation('LoginWelcome').'</h3>'."\n";
 
-	echo $this->form_open('login', '', '', true);
+	echo $this->form_open('login');
 	echo '<input type="hidden" name="action" value="login" />'."\n";
 	echo '<input type="hidden" name="goback" value="' . Ut::html(@$_GET['goback']) . '" />' . "\n";
 

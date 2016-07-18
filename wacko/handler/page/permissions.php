@@ -301,7 +301,7 @@ if ($this->is_owner() || $this->is_admin())
 ?>
 <h3><?php echo Ut::perc_replace($this->get_translation('ACLFor'), $this->compose_link_to_page($this->tag, '', '', 0)); ?></h3>
 <?php
-echo $this->form_open('set_permissions', 'permissions', '', true);
+echo $this->form_open('set_permissions', ['page_method' => 'permissions']);
 
 echo '<input type="checkbox" id="massacls" name="massacls" />';
 echo '<label for="massacls">'.$this->get_translation('AclForEntireCluster').'</label>'; ?>

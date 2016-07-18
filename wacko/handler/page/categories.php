@@ -225,7 +225,7 @@ if ($this->is_owner() || $this->is_admin())
 				$group = ( $word['parent_id'] == 0 ? $word['category_id'] : $group = $word['parent_id'] );
 			}
 
-			echo $this->form_open('add_category', 'categories');
+			echo $this->form_open('add_category', ['page_method' => 'categories']);
 			echo '<input type="hidden" name="id" value="'.htmlspecialchars($group, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 			echo '<table class="formation">';
 			echo '<tr><td><label for="">'.
@@ -253,7 +253,7 @@ if ($this->is_owner() || $this->is_admin())
 				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
 				LIMIT 1"))
 			{
-				echo $this->form_open('rename_category', 'categories');
+				echo $this->form_open('rename_category', ['page_method' => 'categories']);
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
@@ -289,7 +289,7 @@ if ($this->is_owner() || $this->is_admin())
 					$options .= '<option value="'.$parent['category_id'].'" '.($word['parent_id'] == $parent['category_id'] ? 'selected="selected"' : '').'>'.htmlspecialchars($parent['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</option>';
 				}
 
-				echo $this->form_open('group_categories', 'categories');
+				echo $this->form_open('group_categories', ['page_method' => 'categories']);
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
@@ -315,7 +315,7 @@ if ($this->is_owner() || $this->is_admin())
 				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
 				LIMIT 1"))
 			{
-				echo $this->form_open('remove_category', 'categories');
+				echo $this->form_open('remove_category', ['page_method' => 'categories']);
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
@@ -334,7 +334,7 @@ if ($this->is_owner() || $this->is_admin())
 	//   print list
 	/////////////////////////////////////////////
 
-	echo $this->form_open('store_categories', 'categories');
+	echo $this->form_open('store_categories', ['page_method' => 'categories']);
 
 	// print categories list
 	if (is_array($categories))

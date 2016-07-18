@@ -131,7 +131,7 @@ function admin_content_polls(&$engine, &$module)
 		// poll remove confirmation dialog
 		if ($confirmation === true)
 		{
-			echo $engine->form_open('polls', '', 'post', true, '', '');
+			echo $engine->form_open('polls');
 
 			echo '<input type="hidden" name="delete" value="'.$remove_id.'" />';
 			echo '<table class="formation">';
@@ -152,7 +152,7 @@ function admin_content_polls(&$engine, &$module)
 		}
 
 		// current active polls
-		echo $engine->form_open('polls', '', 'post', true, '', '');
+		echo $engine->form_open('polls');
 
 		echo '<table class="formation">';
 		$list = $polls_obj->get_polls_list('current');
@@ -191,7 +191,7 @@ function admin_content_polls(&$engine, &$module)
 		echo $engine->form_close();
 
 		// polls for moderation
-			echo $engine->form_open('polls', '', 'post', true, '', '');
+			echo $engine->form_open('polls');
 
 
 		echo '<table class="formation">';
@@ -240,7 +240,7 @@ function admin_content_polls(&$engine, &$module)
 		echo $engine->form_close();
 
 		// ended polls
-		echo $engine->form_open('polls', '', 'post', true, '', '');
+		echo $engine->form_open('polls');
 
 
 		echo '<table class="formation">';

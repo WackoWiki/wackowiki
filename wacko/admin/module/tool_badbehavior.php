@@ -129,7 +129,7 @@ function bb2_summary(&$engine)
 	<h2>Summary</h2>
 
 	<?php
-	echo $engine->form_open('bb2_manage', '', 'post', true, '', 'setting=bb2_manage');
+	echo $engine->form_open('bb2_manage', ['form_more' => 'setting=bb2_manage']);
 	?>
 	<p class="right">See also: <span class="active">Summary</span> | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_manage"; ?>">Log</a> | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_options" ?>">Settings</a> | <a href="<?php echo "?mode=badbehavior&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
 
@@ -275,7 +275,7 @@ function bb2_manage(&$engine)
 
 <h2>Log</h2>
 <?php
-	echo $engine->form_open('bb2_manage', '', 'post', true, '', '');
+	echo $engine->form_open('bb2_manage');
 ?>
 
 	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <span class="active">Log</span> | <a href="<?php echo $engine->href()."&amp;setting=bb2_options" ?>">Settings</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
@@ -430,7 +430,7 @@ function bb2_whitelist(&$engine)
 
 	<h2>Whitelist</h2>
 <?php
-	echo $engine->form_open('bb2_whitelist', '', 'post', true, '', 'setting=bb2_whitelist');
+	echo $engine->form_open('bb2_whitelist', ['form_more' => 'setting=bb2_whitelist']);
 ?>
 	<p>Inappropriate whitelisting WILL expose you to spam, or cause Bad Behavior to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.</p>
 	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_options" ?>">Settings</a> | <span class="active">Whitelist</span></p>
@@ -650,7 +650,7 @@ function bb2_options(&$engine)
 	<h2>Settings</h2>
 
 <?php
-	echo $engine->form_open('bb2_options', '', 'post', true, '', 'setting=bb2_options');
+	echo $engine->form_open('bb2_options', ['form_more' => 'setting=bb2_options']);
 ?>
 	<input type="hidden" name="action" value="bb2_options" />
 	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | <span class="active">Settings</span> | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
@@ -902,7 +902,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 	}
 	else
 	{
-		echo $engine->form_open('bb2_options', '', 'post', true, '', 'setting=bb2_options');
+		echo $engine->form_open('bb2_options', ['form_more' => 'setting=bb2_options']);
 ?>
 		<br />
 		<input type="hidden" name="action" value="bb2_options" />

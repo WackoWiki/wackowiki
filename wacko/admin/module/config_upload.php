@@ -62,7 +62,7 @@ function admin_config_upload(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('upload', '', 'post', true, '', '');
+	echo $engine->form_open('upload');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

@@ -61,7 +61,7 @@ function admin_config_email(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('email', '', 'post', true, '', '');
+	echo $engine->form_open('email');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

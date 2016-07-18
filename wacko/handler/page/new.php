@@ -68,7 +68,7 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 // show form
 
 // create a peer page
-echo $this->form_open('sub_page', 'new');
+echo $this->form_open('sub_page', ['page_method' => 'new']);
 echo '<input type="hidden" name="option" value="1" />';
 echo '<label for="create_subpage">'.$this->get_translation('CreateSubPage').':</label><br />';
 
@@ -97,7 +97,7 @@ if (substr_count($this->tag, '/') > 0)
 		// hide users cluster
 		if ($parent != $this->config['users_page'])
 		{
-			echo $this->form_open('parent_cluster_page', 'new');
+			echo $this->form_open('parent_cluster_page', ['page_method' => 'new']);
 			echo '<input type="hidden" name="option" value="2" />';
 			echo '<label for="create_pageparentcluster">'.$this->get_translation('CreatePageParentCluster').':</label><br />';
 			echo '<code>'.( strlen($parent) > 50 ? '...'.substr($parent, -50) : $parent ).'/</code>'.
@@ -117,7 +117,7 @@ if (substr_count($this->tag, '/') > 0)
 }
 
 //
-echo $this->form_open('random_page', 'new');
+echo $this->form_open('random_page', ['page_method' => 'new']);
 echo '<input type="hidden" name="option" value="3" />';
 echo '<label for="create_randompage">'.$this->get_translation('CreateRandomPage').':</label><br />';
 echo '<input type="text" id="create_randompage" name="tag" value="'.( isset($_POST['option']) && $_POST['option'] === 3 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="60" maxlength="255" /> '.

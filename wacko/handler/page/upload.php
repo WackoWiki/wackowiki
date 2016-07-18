@@ -67,7 +67,7 @@ if ($this->can_upload() === true)
 					$path = 'file:';
 				}
 
-				echo $this->form_open('remove_file', 'upload');
+				echo $this->form_open('remove_file', ['page_method' => 'upload']);
 				// !!!!! place here a reference to delete files
 ?>
 	<ul class="upload">
@@ -174,7 +174,7 @@ if ($this->can_upload() === true)
 					$path = 'file:';
 				}
 
-				echo $this->form_open('upload_file', 'upload');
+				echo $this->form_open('upload_file', ['page_method' => 'upload']);
 				// !!!!! place here a reference to delete files
 ?>
 	<br />

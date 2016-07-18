@@ -42,7 +42,7 @@ function admin_messages(&$engine, &$module)
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 
-	echo $engine->form_open('messages', '', 'post', true, '', '');
+	echo $engine->form_open('messages');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

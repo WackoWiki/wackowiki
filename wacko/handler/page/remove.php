@@ -242,7 +242,7 @@ if ($this->is_admin()
 
 		$this->show_message($message, 'warning');
 
-		echo $this->form_open('remove_page', 'remove', '', true);
+		echo $this->form_open('remove_page', ['page_method' => 'remove']);
 
 		// admin privileged removal options
 		if ($this->is_admin())

@@ -602,7 +602,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$topics	= $this->load_all($sql);
 
 		// display list
-		echo $this->form_open('moderate_subforum', 'moderate');
+		echo $this->form_open('moderate_subforum', ['page_method' => 'moderate']);
 
 		$this->print_pagination($pagination);
 
@@ -1164,7 +1164,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$body = htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 		// display list
-		echo $this->form_open('moderate_topic', 'moderate');
+		echo $this->form_open('moderate_topic', ['page_method' => 'moderate']);
 
 		$this->print_pagination($pagination);
 

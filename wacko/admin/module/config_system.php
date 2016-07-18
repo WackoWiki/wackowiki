@@ -62,7 +62,7 @@ function admin_config_system(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('system', '', 'post', true, '', '');
+	echo $engine->form_open('system');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

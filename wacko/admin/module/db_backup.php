@@ -206,7 +206,7 @@ function admin_db_backup(&$engine, &$module)
 		<br />
 
 <?php
-		echo $engine->form_open('backup', '', 'post', true, '', '');
+		echo $engine->form_open('backup');
 ?>
 			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>

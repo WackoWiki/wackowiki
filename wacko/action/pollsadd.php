@@ -250,7 +250,7 @@ if ($message)
 else if ($stop_mod !== true)
 {
 	// printing form
-	echo $this->form_open('add_poll', $mode_file, 'post', true, '', '', '#pollsadd_form');
+	echo $this->form_open('add_poll', ['page_method' => $mode_file, 'href_param' => '#pollsadd_form']);
 	echo ($moderation === true ? '<input type="hidden" name="mode" value="'.$mode.'" />'.
 		'<input type="hidden" name="moderation" value="'.$edit_id.'" />'.
 		'<input type="hidden" name="user" value="'.$user.'" />' : '');

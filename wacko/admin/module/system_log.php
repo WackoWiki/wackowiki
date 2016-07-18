@@ -132,7 +132,7 @@ function admin_system_log(&$engine, &$module)
 		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");
 
-	echo $engine->form_open('systemlog', '', 'post', true, '', '');
+	echo $engine->form_open('systemlog');
 
 ?>
 		<div>

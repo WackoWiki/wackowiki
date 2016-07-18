@@ -114,7 +114,7 @@ function admin_user_groups(&$engine, &$module)
 
 				#$engine->debug_print_r($available_users);
 
-				echo $engine->form_open('add_group_member', '', 'post', true, '', '');
+				echo $engine->form_open('add_group_member');
 
 				echo '<input type="hidden" name="group_id" value="'.$group_id.'" />'.
 				'<table class="formation">'.
@@ -159,7 +159,7 @@ function admin_user_groups(&$engine, &$module)
 					"WHERE user_id = '".(int)$_POST['change_member']."' ".
 					"LIMIT 1"))
 				{
-					echo $engine->form_open('remove_group_member', '', 'post', true, '', '');
+					echo $engine->form_open('remove_group_member');
 
 					echo '<input type="hidden" name="group_id" value="'.$group_id.'" />'.
 						'<input type="hidden" name="member_id" value="'.htmlspecialchars($_POST['change_member'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
@@ -271,7 +271,7 @@ function admin_user_groups(&$engine, &$module)
 		// add new group
 		if (isset($_POST['create']))
 		{
-			echo $engine->form_open('add_group', '', 'post', true, '', '');
+			echo $engine->form_open('add_group');
 
 			echo '<table class="formation">'.
 					'<tr>
@@ -346,7 +346,7 @@ function admin_user_groups(&$engine, &$module)
 				WHERE group_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
-				echo $engine->form_open('edit_group', '', 'post', true, '', '');
+				echo $engine->form_open('edit_group');
 
 				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
 					'<table class="formation">'.
@@ -411,7 +411,7 @@ function admin_user_groups(&$engine, &$module)
 				WHERE group_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
-				echo $engine->form_open('delete_group', '', 'post', true, '', '');
+				echo $engine->form_open('delete_group');
 
 				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
 					'<table class="formation">'.
@@ -457,7 +457,7 @@ function admin_user_groups(&$engine, &$module)
 				"INNER JOIN {$engine->config['table_prefix']}user u ON (m.user_id = u.user_id) ".
 			"WHERE g.group_id = '".(int)$group_id."' ");
 
-		echo $engine->form_open('get_group', '', 'post', true, '', '');
+		echo $engine->form_open('get_group');
 ?>
 		<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 
@@ -574,7 +574,7 @@ function admin_user_groups(&$engine, &$module)
 	//   print list
 	/////////////////////////////////////////////
 
-		echo $engine->form_open('groups', '', 'post', true, '', '');
+		echo $engine->form_open('groups');
 
 			/////////////////////////////////////////////
 			//   control buttons

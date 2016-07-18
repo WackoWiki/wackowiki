@@ -73,7 +73,7 @@ function admin_config_formatter(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('formatter', '', 'post', true, '', '');
+	echo $engine->form_open('formatter');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

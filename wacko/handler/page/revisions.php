@@ -41,7 +41,7 @@ if ($this->has_access('read'))
 	{
 		$this->context[++$this->current_context] = '';
 
-		echo $this->form_open('diff_versions', 'diff', 'get');
+		echo $this->form_open('diff_versions', ['page_method' => 'diff', 'form_method' => 'get']);
 		echo "<p>\n";
 		echo '<input type="submit" value="' . $this->get_translation('ShowDifferencesButton') . '" />';
 

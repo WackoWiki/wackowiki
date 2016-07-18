@@ -304,7 +304,7 @@ if (!isset($_GET['confirm']))
 			$this->show_message($this->get_translation('UserApprovalInfo'), 'hint');
 		}
 
-		echo $this->form_open('register', '', '', true);
+		echo $this->form_open('register');
 
 		echo '<input type="hidden" name="action" value="register" />';
 

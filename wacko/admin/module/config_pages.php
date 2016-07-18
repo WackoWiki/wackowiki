@@ -71,7 +71,7 @@ function admin_config_pages(&$engine, &$module)
 		}
 	}
 
-	echo $engine->form_open('pages', '', 'post', true, '', '');
+	echo $engine->form_open('pages');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">

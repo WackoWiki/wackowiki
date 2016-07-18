@@ -129,7 +129,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 	else
 	{
 		echo $this->get_translation('CloneName');
-		echo $this->form_open('clone_page', 'clone', '', true);
+		echo $this->form_open('clone_page', ['page_method' => 'clone']);
 
 		?>
 		<input type="hidden" name="clone" value="1" />

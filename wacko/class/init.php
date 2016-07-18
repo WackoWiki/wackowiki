@@ -50,6 +50,7 @@ else if (function_exists('ob_gzhandler'))
 // don't let cookies ever interfere with request vars
 $_REQUEST = array_merge($_GET, $_POST);
 
+// TODO who knows what it is for? maybe oldie to remove?
 if (strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
 {
 	$_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
