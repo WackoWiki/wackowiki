@@ -300,7 +300,7 @@ form input.submitinput {
 
 .sqllog .backtrace {
 	visibility: hidden;
-	width: 50%;
+	width: 30%;
 	background-color: #131313;
 	color: #fff;
 	border-radius: 6px;
