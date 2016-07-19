@@ -13,8 +13,9 @@ class Diag
 	}
 
 	// DEBUG INFO
-	static function full_disclosure(&$config, &$http, &$engine)
+	static function full_disclosure(&$config, &$http, &$engine, $cwd)
 	{
+		chdir($cwd);
 		if ($config['debug'] >= 1 && strpos($http->method, '.xml') === false && $http->method != 'print' && $http->method != 'wordprocessor')
 		{
 			if (($config['debug_admin_only'] == true && $engine->is_admin() === true) || $config['debug_admin_only'] == false)
@@ -62,10 +63,38 @@ class Diag
 							continue;
 						}
 
-						echo "\t<li>";
-						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query)."<br />";
-						echo '[' . number_format($time, 4) . ' sec., ' . $affected_rows . ' rows, ' . $backtrace . ']';
-						echo "</li>\n";
+						$bt = explode(' -> ', $backtrace);
+
+						foreach ($bt as $i => &$one)
+						{
+							if (preg_match('/load_single|load_all|sql_query/', $one))
+							{
+								$bt = array_slice($bt, 0, $i);
+								break;
+							}
+						}
+
+						$bt = array_reverse($bt);
+						if (count($bt) & 1)
+						{
+							$bt[] = '';
+						}
+						Diag::dbg($bt);
+						$btext = '';
+						foreach (array_chunk($bt, 2) as &$one)
+						{
+							list ($fname, $func) = $one;
+							$btext .= '<tr><td>' . $func . '&nbsp;</td><td>&nbsp;' . $fname . '</td></tr>';
+						}
+
+						echo "\t";
+						echo '<li class="sqllog">';
+						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query) . '<br />';
+						echo '[' . number_format($time, 4) . ' sec., ' . $affected_rows . ' rows';
+						echo '<span class="backtrace">';
+						Diag::dbg($btext);
+						echo '<table>' . $btext . '</table>';
+						echo "</span>]</li>\n";
 					}
 
 					echo "\t\t</ol>\n\t</li>\n";
@@ -157,9 +186,18 @@ class Diag
 
 		if (($args = func_get_args()))
 		{
-			$trace = debug_backtrace();
-			$callee = ($trace[0]['file'] == __FILE__)? $trace[1] : $trace[0];
-			$dir = dirname(dirname(__FILE__)) . '/';
+			if (($trace = debug_backtrace())
+				&& ($callee = (@$trace[0]['file'] === __FILE__)? @$trace[1] : @$trace[0])
+				&& @$callee['file'])
+			{
+				$dir = dirname(dirname(__FILE__)) . '/';
+				echo (Ut::stringify($callee));
+				$callee = str_replace($dir, '', $callee['file']) . ':' . $callee['line'];
+			}
+			else
+			{
+				$callee = '';
+			}
 
 			$type = (is_string($args[0]) && isset($code[$args[0]]))? $code[array_shift($args)] : 0;
 
@@ -175,7 +213,7 @@ class Diag
 				microtime(1),
 				$type,
 				implode(' ', $args),
-				str_replace($dir, '', $callee['file']) . ':' . $callee['line'],
+				$callee,
 			];
 		}
 		return $log;
