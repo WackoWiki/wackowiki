@@ -200,7 +200,7 @@ else // login
 							)
 						)
 					{
-						$this->log_user_in($existing_user, (int)@$_POST['persistent']);
+						$this->log_user_in($existing_user, isset($_POST['persistent']));
 						$this->set_user($existing_user);
 						$this->context[++$this->current_context] = '';
 
@@ -257,7 +257,7 @@ else // login
 	echo '</p>';
 
 	echo '<p>'."\n";
-	echo '<input type="checkbox" id="persistent" name="persistent" value="1" tabindex="3"/>'."\n";
+	echo '<input type="checkbox" id="persistent" name="persistent" tabindex="3"/>'."\n";
 	echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
 	echo '</p>'."\n";
 

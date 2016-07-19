@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $comment_on_id	= '';
-$dontkeep		= '';
 $message		= '';
 
 // obviously do not allow to remove non-existent pages
@@ -34,12 +33,9 @@ if ($this->is_admin()
 		$comment_on_id = $this->page['comment_on_id'];
 	}
 
-	if (isset($_POST['delete']) && $_POST['delete'] == 1)
+	if (@$_POST['_action'] === 'remove_page')
 	{
-		if (isset($_POST['dontkeep']) && $this->is_admin())
-		{
-			$dontkeep = 1;
-		}
+		$dontkeep = (isset($_POST['dontkeep']) && $this->is_admin());
 
 		$message .= '<strong><code>'.$this->tag."</code></strong>\n";
 		$message .= "<ol>\n";
@@ -127,8 +123,7 @@ if ($this->is_admin()
 		}
 
 		// remove ENTIRE cluster
-		if ($this->is_admin()
-			&& (isset($_POST['cluster']) && $_POST['cluster'] == 1))
+		if ($this->is_admin() && isset($_POST['cluster']))
 		{
 			$this->remove_referrers		($this->tag, true);
 			$this->remove_links			($this->tag, true);
@@ -186,11 +181,15 @@ if ($this->is_admin()
 		// log event
 		if (!$comment_on_id)
 		{
-			$this->log(1, str_replace('%2', $this->page['user_name'], str_replace('%1', $this->tag, ( isset($_POST['cluster']) && $_POST['cluster'] == 1 ? $this->get_translation('LogRemovedCluster', $this->config['language']) : $this->get_translation('LogRemovedPage', $this->config['language']) ))));
+			$mode = (isset($_POST['cluster'])? 'LogRemovedCluster' : 'LogRemovedPage');
+			$this->log(1, Ut::perc_replace($this->get_translation($mode, SYSTEM_LANG), $this->tag, $this->page['user_name']));
 		}
 		else
 		{
-			$this->log(1, str_replace('%3', $this->get_time_formatted($this->page['created']), str_replace('%2', $this->page['user_name'], str_replace('%1', $this->get_page_tag($comment_on_id)." ".$this->get_page_title('', $comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
+			$this->log(1, Ut::perc_replace($this->get_translation('LogRemovedComment', SYSTEM_LANG),
+				($this->get_page_tag($comment_on_id)." ".$this->get_page_title('', $comment_on_id)),
+				$this->page['user_name'],
+				$this->get_time_formatted($this->page['created'])));
 		}
 
 		$message .= "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
@@ -241,12 +240,12 @@ if ($this->is_admin()
 		{
 			if (!$comment_on_id)
 			{
-				echo '<input type="checkbox" id="removecluster" name="cluster" value="1" />';
+				echo '<input type="checkbox" id="removecluster" name="cluster" />';
 				echo '<label for="removecluster">'.$this->get_translation('RemoveCluster').'</label><br />';
 
 				if ($this->config['store_deleted_pages'])
 				{
-					echo '<input type="checkbox" id="dontkeep" name="dontkeep" value="1" />';
+					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
 					echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeep').'</label><br />';
 				}
 			}
@@ -254,14 +253,13 @@ if ($this->is_admin()
 			{
 				if ($this->config['store_deleted_pages'])
 				{
-					echo '<input type="checkbox" id="dontkeep" name="dontkeep" value="1" />';
+					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
 					echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeepComment').'</label><br />';
 				}
 			}
 		}
 ?>
 		<br />
-		<input type="hidden" name="delete" value="1" />
 		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />&nbsp;
 		<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"/></a>
 		<br />

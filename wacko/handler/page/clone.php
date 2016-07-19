@@ -43,18 +43,13 @@ $edit_note = Ut::perc_replace($this->get_translation('ClonedFrom'), $this->tag);
 
 if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
-	if (isset($_POST['clone_name']) && $_POST['clone'] == 1)
+	if (@$_POST['_action'] === 'clone_page')
 	{
 		// clone or massclone
-		$need_massclone = 0;
-
-		if (isset($_POST['massclone']) && $_POST['massclone'] == 'on')
-		{
-			$need_massclone = 1;
-		}
+		$need_massclone = isset($_POST['massclone']);
 
 		// clone
-		if ($need_massclone == 0)
+		if (!$need_massclone)
 		{
 			// strip whitespaces
 			$new_name		= preg_replace('/\s+/', '', $_POST['clone_name']);
@@ -82,18 +77,11 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 				{
 					if ($this->clone_page($this->tag, $new_name, $super_new_name, $edit_note))
 					{
-						$need_redirect = '';
-
 						// log event
 						$this->log(4, Ut::perc_replace($this->get_translation('LogClonedPage', $this->config['language']), $this->tag, $new_name));
 
-						if (isset($_POST['redirect']) && $_POST['redirect'] == 'on')
-						{
-							$need_redirect = 1;
-						}
-
 						// edit after creation
-						if ($need_redirect == 1)
+						if (isset($_POST['redirect']))
 						{
 							$this->set_message($edit_note);
 							$this->redirect($this->href('edit', $new_name));
@@ -110,7 +98,7 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 		}
 
 		//massclone
-		if ($need_massclone == 1)
+		if ($need_massclone)
 		{
 			// TODO: clone all sheeps and optional ACLs
 			echo '<p><strong>' . $this->get_translation('MassCloning') . '</strong><p>';
@@ -120,10 +108,10 @@ if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->
 	else
 	{
 		echo $this->get_translation('CloneName');
+
 		echo $this->form_open('clone_page', ['page_method' => 'clone']);
 
 		?>
-		<input type="hidden" name="clone" value="1" />
 		<input type="text" name="clone_name" size="40" maxlength="250"/>
 		<?php
 		// edit note
