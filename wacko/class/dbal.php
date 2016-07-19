@@ -71,6 +71,8 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 		$result = $this->db->query($query);
 
+		$this->affected_rows = ($result !== false)? $this->db->affected_rows($result) : -1;
+
 		if ($this->debug >= 2)
 		{
 			$time = microtime(1) - $start;
@@ -78,14 +80,28 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 			if ($this->debug >= 3)
 			{
+				$bt = explode(' -> ', Ut::backtrace());
+
+				foreach ($bt as $i => &$one)
+				{
+					if (preg_match('/load_single|load_all|sql_query/', $one))
+					{
+						$bt = array_slice($bt, 0, $i);
+						break;
+					}
+				}
+
+				// list($file, $func) = array_reverse($bt);
+
 				$this->query_log[] = [
-					'query'		=> $query,
-					'time'		=> $time
+					$query,
+					$time,
+					$this->affected_rows,
+					//$file . ' ' . $func,
+					implode(' ', $bt),
 				];
 			}
 		}
-
-		$this->affected_rows = ($result !== false)? $this->db->affected_rows($result) : -1;
 
 		return $result;
 	}

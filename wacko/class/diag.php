@@ -53,16 +53,18 @@ class Diag
 								: "" ).
 						":\n\t\t<ol>\n";
 
-					foreach ($config->query_log as $query)
+					foreach ($config->query_log as $one)
 					{
-						if ($query['time'] < $config['debug_sql_threshold'])
+						list ($query, $time, $affected_rows, $backtrace) = $one;
+
+						if ($time < $config['debug_sql_threshold'])
 						{
 							continue;
 						}
 
 						echo "\t<li>";
-						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query['query'])."<br />";
-						echo "[".number_format($query['time'], 4)." sec.]";
+						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query)."<br />";
+						echo '[' . number_format($time, 4) . ' sec., ' . $affected_rows . ' rows, ' . $backtrace . ']';
 						echo "</li>\n";
 					}
 
