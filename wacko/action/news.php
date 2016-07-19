@@ -7,8 +7,6 @@ if (!defined('IN_WACKO'))
 
 // {{news [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
-$access = '';
-
 if (!empty($this->config['news_cluster']))
 {
 	if (!isset($max))	$max = '';
@@ -33,12 +31,9 @@ if (!empty($this->config['news_cluster']))
 	$this->hide_article_header = true;
 
 	// check privilege
-	if ($this->has_access('create') === true)
-	{
-		$access = true;
-	}
+	$access = $this->has_access('create');
 
-	if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd' && $access === true)
+	if (@$_POST['_action'] === 'add_topic' && $access)
 	{
 		// checking user input
 		if (isset($_POST['title']))
@@ -247,12 +242,11 @@ if (!empty($this->config['news_cluster']))
 		echo '<br /><br />'.$this->get_translation('NewsNotAvailable');
 	}
 
-	if ($access === true)
+	if ($access)
 	{
 		echo $this->form_open('add_topic');
 		?>
 		<br /><a id="newtopic"></a><br />
-		<input type="hidden" name="action" value="newsadd" />
 		<label for="newstitle"><?php echo $this->get_translation('NewsName'); ?>:</label>
 		<input type="text" id="newstitle" name="title" size="50" maxlength="250" value="" />
 		<input type="submit" id="submit" value="<?php echo $this->get_translation('NewsSubmit'); ?>" />
@@ -266,7 +260,3 @@ else
 {
 	echo $this->get_translation('NewsNoClusterDefined');
 }
-
-// end output
-
-?>

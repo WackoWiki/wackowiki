@@ -48,7 +48,7 @@ class Http
 		if ($request)
 		{
 			$router = new UriRouter($db);
-			$this->vars = $router->run(['_tls' => $this->tls_session, '_ip' => $this->real_ip()]);
+			$this->vars = $router->run(['_tls' => $this->tls_session, '_ip' => $this->real_ip]);
 			$this->page = $this->vars['page'];
 			$this->method = $this->vars['method'];
 			$this->check_cache();

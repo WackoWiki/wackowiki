@@ -56,12 +56,12 @@ else if (($user = $this->get_user()))
 	$email_changed	= false;
 	$user = $this->load_user(0, $user['user_id']);
 	$this->set_page_lang($this->user_lang);
-	$action = @$_POST['action'];
+	$action = @$_POST['_action']; // set by form_open
 	$email = @$_POST['email'];
 	$resend_code = @$_GET['resend_code'];
 
 	// is user trying to update?
-	if ($action == 'update_general')
+	if ($action == 'user_settings_general')
 	{
 		$error = '';
 		// no email given
@@ -102,7 +102,7 @@ else if (($user = $this->get_user()))
 		}
 	}
 
-	if ($action == 'update_extended')
+	if ($action == 'user_settings_extended')
 	{
 		$sql =
 		"doubleclick_edit	= '".(int)$_POST['doubleclick_edit']."', ".
@@ -118,7 +118,7 @@ else if (($user = $this->get_user()))
 		"noid_pubs			= '".(int)$_POST['noid_pubs']."', ".
 		"session_length		= '".(int)$_POST['session_length']."' ";
 	}
-	else if	($action == 'update_notifications')
+	else if	($action == 'user_settings_notifications')
 	{
 		$sql =
 		"send_watchmail		= '".(int)$_POST['send_watchmail']."', ".
@@ -128,7 +128,7 @@ else if (($user = $this->get_user()))
 		"notify_comment		= '".(int)$_POST['notify_comment']."', ".
 		"allow_massemail	= '".(int)$_POST['allow_massemail']."' ";
 	}
-	else if	($action == 'update_general')
+	else if	($action == 'user_settings_general')
 	{
 		$sql =
 		"user_lang			= '".quote($this->dblink, $_POST['user_lang'])."', ".
@@ -203,11 +203,11 @@ else if (($user = $this->get_user()))
 		$this->set_message($this->get_translation('UserSettingsStored', @$_POST['user_lang']), 'success');
 
 		// forward
-		if ($action == 'update_extended')
+		if ($action == 'user_settings_extended')
 		{
 			$tab = 'extended';
 		}
-		else if ($action == 'update_notifications')
+		else if ($action == 'user_settings_notifications')
 		{
 			$tab = 'notification';
 		}
@@ -232,7 +232,7 @@ else if (($user = $this->get_user()))
 		echo $this->action('menu', array('redirect' => 1));
 	}
 	// NOTIFICATIONS
-	else if (isset($_GET['notification']) || $action == 'update_notifications')
+	else if (isset($_GET['notification']) || $action == 'user_settings_notifications')
 	{
 		echo '<h3>'.$this->get_translation('UserSettings').' &raquo; '.$this->get_translation('UserSettingsNotifications').'</h3>';
 		echo '<ul class="menu">
@@ -242,7 +242,6 @@ else if (($user = $this->get_user()))
 				<li><a href="'.$this->href('', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
 			</ul><br /><br />\n";
 		echo $this->form_open('user_settings_notifications');
-		echo '<input type="hidden" name="action" value="update_notifications" />';
 		?>
 		<div class="page_settings">
 		<table class="form_tbl">
@@ -333,7 +332,7 @@ else if (($user = $this->get_user()))
 		echo $this->form_close();
 	}
 	// EXTENDED
-	else if (isset($_GET['extended']) || $action == 'update_extended')
+	else if (isset($_GET['extended']) || $action == 'user_settings_extended')
 	{
 		echo '<h3>'.$this->get_translation('UserSettings').' &raquo; '.$this->get_translation('UserSettingsExtended').'</h3>';
 		echo '<ul class="menu">
@@ -343,7 +342,6 @@ else if (($user = $this->get_user()))
 				<li class="active">'.$this->get_translation('UserSettingsExtended')."</li>
 				</ul><br /><br />\n";
 		echo $this->form_open('user_settings_extended');
-		echo '<input type="hidden" name="action" value="update_extended" />';
 ?>
 		<div class="page_settings">
 		<table class="form_tbl">
@@ -489,7 +487,6 @@ else if (($user = $this->get_user()))
 				<li><a href="'.$this->href('', '', 'extended').'">'.$this->get_translation('UserSettingsExtended')."</a></li>
 				</ul><br /><br />\n";
 ?>
-<input type="hidden" name="action" value="update_general" />
 <div class="page_settings">
 
 <table class="form_tbl">

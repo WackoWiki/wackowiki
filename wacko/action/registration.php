@@ -5,9 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<!--notypo-->
-<?php
+echo "<!--notypo-->\n";
+$include_tail = "<!--/notypo-->\n";
 
 $user_name		= '';
 $real_name		= '';
@@ -55,7 +54,7 @@ if (isset($_GET['confirm']))
 
 	$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
 }
-else if (@$_POST['action'] === 'register')
+else if (@$_POST['_action'] === 'register')
 {
 	// create new account if possible
 	if ($this->config['allow_registration'] || $this->is_admin())
@@ -292,8 +291,6 @@ if (!isset($_GET['confirm']))
 
 		echo $this->form_open('register');
 
-		echo '<input type="hidden" name="action" value="register" />';
-
 		echo '<h3>'.$this->format_translation('RegistrationWelcome').'</h3>';
 
 		if ($this->config['multilanguage'])
@@ -383,5 +380,3 @@ if (!isset($_GET['confirm']))
 		$this->show_message($this->get_translation('RegistrationClosed'), 'hint');
 	}
 }
-?>
-<!--/notypo-->
