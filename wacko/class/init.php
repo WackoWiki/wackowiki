@@ -90,7 +90,7 @@ spl_autoload_register(function($name)
 function finalize(&$db, &$http, &$engine)
 {
 	// so we can dbg other shutdown functions
-	register_shutdown_function(['Diag', 'full_disclosure'], $db, $http, $engine);
+	register_shutdown_function(['Diag', 'full_disclosure'], $db, $http, $engine, getcwd());
 
 	// closing tags
 	if (strpos($http->method, '.xml') === false)

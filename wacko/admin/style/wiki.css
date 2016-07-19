@@ -351,4 +351,34 @@ table.dtable th.userhead, table.dtable td.usercell {
 	padding: 3px;
 }
 
+// Diag
+
+
+.sqllog {
+	position: relative;
+	//display: inline-block;
+}
+
+.sqllog .backtrace {
+	visibility: hidden;
+	width: 50%;
+	background-color: #131313;
+	color: #fff;
+	border-radius: 6px;
+	padding: 7px 7px 7px 7px;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: +30px;
+	left: +100px;
+}
+
+.sqllog:hover {
+	border: 1px solid #93cee9;
+}
+
+.sqllog:hover .backtrace {
+	visibility: visible;
+}
 

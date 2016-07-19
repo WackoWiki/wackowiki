@@ -80,25 +80,11 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 			if ($this->debug >= 3)
 			{
-				$bt = explode(' -> ', Ut::backtrace());
-
-				foreach ($bt as $i => &$one)
-				{
-					if (preg_match('/load_single|load_all|sql_query/', $one))
-					{
-						$bt = array_slice($bt, 0, $i);
-						break;
-					}
-				}
-
-				// list($file, $func) = array_reverse($bt);
-
 				$this->query_log[] = [
 					$query,
 					$time,
 					$this->affected_rows,
-					//$file . ' ' . $func,
-					implode(' ', $bt),
+					Ut::backtrace(),
 				];
 			}
 		}

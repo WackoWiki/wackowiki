@@ -293,6 +293,34 @@ form input.submitinput {
 	/* font-family:"Lucida Console","Courier New",monospace; */
 }
 
+.sqllog {
+	position: relative;
+	//display: inline-block;
+}
+
+.sqllog .backtrace {
+	visibility: hidden;
+	width: 50%;
+	background-color: #131313;
+	color: #fff;
+	border-radius: 6px;
+	padding: 7px 7px 7px 7px;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: +30px;
+	left: +100px;
+}
+
+.sqllog:hover {
+	border: 1px solid #93cee9;
+}
+
+.sqllog:hover .backtrace {
+	visibility: visible;
+}
+
 header {
 	padding: 0px;
 	/* float: left; */
