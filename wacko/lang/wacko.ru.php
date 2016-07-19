@@ -502,7 +502,7 @@ $wacko_translation = array(
 	'NotifyDigest'				=> 'Digest',
 	'NotifyPendingPageTip'		=> '¬ысылаетс€ уведомление лишь о первом изменении страницы.',
 	'NotifyPendingCommentTip'	=> '¬ысылаетс€ уведомление лишь о первом комментарии к наблюдаемой странице.',
-	'NotifyPendingTip'			=> 'Notification is automatically re-enabled when you visit the current version of the page.', // STS: todo?!
+	'NotifyPendingTip'			=> 'Notification is automatically re-enabled when you visit the current version of the page.',
 
 	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
 

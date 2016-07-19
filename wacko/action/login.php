@@ -59,7 +59,7 @@ if (($user = $this->get_user()))
 			'</code>');
 	}
 
-	/* STS meaning lost, seems like to be removed
+	/* STS meaning lost, seems like to be removed -- better add printing of latest security log
 	$cookie = explode(';', $this->get_cookie(AUTH_TOKEN));
 
 	$this->set_message($this->get_translation('SessionEnds') .
@@ -98,7 +98,7 @@ else // login
 	$error = '';
 
 	// is user trying to log in or register?
-	if (@$_POST['action'] === 'login')
+	if (@$_POST['_action'] === 'login')
 	{
 
 		$_user_name = (string) @$_POST['user_name'];
@@ -244,7 +244,6 @@ else // login
 	echo '<h3>'.$this->get_translation('LoginWelcome').'</h3>'."\n";
 
 	echo $this->form_open('login');
-	echo '<input type="hidden" name="action" value="login" />'."\n";
 	echo '<input type="hidden" name="goback" value="' . Ut::html(@$_GET['goback']) . '" />' . "\n";
 
 	echo '<p>';

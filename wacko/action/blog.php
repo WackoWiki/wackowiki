@@ -8,7 +8,6 @@ if (!defined('IN_WACKO'))
 // {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
 if (!isset($page))		$page = $this->unwrap_link(isset($for) ? $for : '');
-$access	= '';
 $error	= '';
 
 $blog_cluster = $page;
@@ -37,12 +36,9 @@ if (!empty($blog_cluster))
 	$this->hide_article_header = true;
 
 	// check privilege
-	if ($this->has_access('create') === true)
-	{
-		$access = true;
-	}
+	$access = $this->has_access('create');
 
-	if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd' && $access === true)
+	if (@$_POST['_action'] === 'add_topic' && $access)
 	{
 		// checking user input
 		if (isset($_POST['title']))
@@ -240,7 +236,7 @@ if (!empty($blog_cluster))
 	}
 
 	echo '<div style="width:100%;">
-			<p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>';
+			<p style="float: left">'.($access? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>';
 	$this->print_pagination($pagination);
 	echo '<br style="clear:both" />
 		</div>'."\n";
@@ -271,7 +267,7 @@ if (!empty($blog_cluster))
 		echo '<br /><br />'.$this->get_translation('NewsNotAvailable');
 	}
 
-	if ($access === true)
+	if ($access)
 	{
 		echo $this->form_open('add_topic');
 		?>
@@ -280,7 +276,6 @@ if (!empty($blog_cluster))
 			<tr>
 				<td class="label"><label for="posttitle"><?php echo $this->get_translation('ForumTopicName'); ?>:</label></td>
 				<td>
-					<input type="hidden" name="action" value="newsadd" />
 					<input type="text" id="posttitle" name="title" size="50" maxlength="250" value="" />
 					<input type="submit" id="submit" value="<?php echo $this->get_translation('ForumTopicSubmit'); ?>" />
 				</td>
@@ -297,7 +292,3 @@ else
 {
 	echo $this->get_translation('NewsNoClusterDefined');
 }
-
-// end output
-
-?>

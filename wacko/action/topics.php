@@ -41,7 +41,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$create_access = $this->has_access('create');
 
 	// checking new topic input if any
-	if (@$_POST['action'] == 'topicadd' && $create_access)
+	if (@$_POST['_action'] === 'add_topic' && $create_access)
 	{
 		if (@$_POST['title'])
 		{
@@ -262,7 +262,6 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		echo $this->form_open('add_topic');
 		?>
 		<a id="newtopic"></a><br />
-		<input type="hidden" name="action" value="topicadd" />
 		<table class="formation">
 			<tr>
 				<td class="label"><label for="topictitle"><?php echo $this->get_translation('ForumTopicName'); ?>:</label></td>

@@ -5,26 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$error = '';
-
-?>
-<!--notypo-->
-<?php
+echo "<!--notypo-->\n";
+$include_tail = "<!--/notypo-->\n";
 
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
-if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
+// get secret_code from _GET from user-supplied link, or from _POST from our reset_password form
+if (($code = @$_REQUEST['secret_code']))
 {
 	// Password forgotten. Provided secret code
-	if (isset($_GET['secret_code']))
-	{
-		$code = $_GET['secret_code'];
-	}
-	elseif (isset($_POST['secret_code']))
-	{
-		$code = $_POST['secret_code'];
-	}
 
 	$user = $this->load_single(
 		"SELECT user_id, user_name ".
@@ -34,7 +24,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 
 	if ($user)
 	{
-		if (isset($_POST['new_password']))
+		if (@$_POST['_action'] === 'reset_password')
 		{
 			// Password forgotten. Provided secret code and new password. Change password.
 			$new_password	= $_POST['new_password'];
@@ -44,14 +34,14 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 			$complexity		= $this->password_complexity($user['user_name'], $new_password);
 
 			// confirmed password mismatch
-			if ($conf_password != $new_password)
+			if ($conf_password !== $new_password)
 			{
 				$error = $this->get_translation('PasswordsDidntMatch');
 			}
 			// password complexity validation
 			else if ($complexity)
 			{
-				$error .= $complexity;
+				$error = $complexity;
 			}
 			else
 			{
@@ -71,11 +61,12 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 					"LIMIT 1");
 
 				// log event
-				$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordRecovered', $this->config['language']), $user['user_name']));
+				$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordRecovered', SYSTEM_LANG), $user['user_name']));
 
 				// forward
-				$this->set_message($this->get_translation('PasswordChanged'));
+				$this->set_message($this->get_translation('PasswordChanged'), 'success');
 				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
+				// NEVER BEEN HERE
 			}
 
 			$this->set_message($error, 'error');
@@ -113,10 +104,10 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 		echo $this->set_message($this->get_translation('WrongCode'), 'error');
 	}
 }
-else if (!isset($forgot) && $user = $this->get_user())
+else if (($user = $this->get_user()))
 {
-	// is user trying to update?
-	if (isset($_POST['action']) && $_POST['action'] == 'change')
+	// user logged in: change password
+	if (@$_POST['_action'] === 'change_password')
 	{
 		// simple change password
 		$password		= $_POST['password'];
@@ -127,16 +118,16 @@ else if (!isset($forgot) && $user = $this->get_user())
 		$complexity		= $this->password_complexity($user['user_name'], $new_password);
 
 		// wrong current password
-		if (password_verify(
+		if (!password_verify(
 				base64_encode(
 						hash('sha256', $user['user_name'].$password, true)
 						),
 				$user['password']
-				) == false)
+				))
 		{
 			$error = $this->get_translation('WrongPassword');
 			// log event
-			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordMismatch', $this->config['language']), $user['user_name']));
+			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordMismatch', SYSTEM_LANG), $user['user_name']));
 		}
 		// confirmed password mismatch
 		else if ($conf_password != $new_password)
@@ -146,7 +137,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		// password complexity validation
 		else if ($complexity)
 		{
-			$error .= $complexity;
+			$error = $complexity;
 		}
 		else
 		{
@@ -171,23 +162,21 @@ else if (!isset($forgot) && $user = $this->get_user())
 			$this->context[++$this->current_context] = '';
 
 			// log event
-			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordChanged', $this->config['language']), $user['user_name']));
+			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordChanged', SYSTEM_LANG), $user['user_name']));
 
 			// forward
 			$this->set_message($this->get_translation('PasswordChanged'), 'success');
 			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
+			// NEVER BEEN HERE
 		}
+
+		$this->set_message($this->format($error), 'error');
 	}
 
 	// print simple change password form
 	echo $this->form_open('change_password');
 
-	if (isset($error))
-	{
-		$this->set_message($this->format($error), 'error');
-	}
 	?>
-	<input type="hidden" name="action" value="change" />
 	<div class="cssform">
 		<h3><?php echo $this->format_translation('YouWantChangePassword'); ?></h3>
 		<p>
@@ -214,8 +203,8 @@ else if (!isset($forgot) && $user = $this->get_user())
 }
 else
 {
-	// password forgotten, send mail
-	if (isset($_POST['action']) && $_POST['action'] == 'send')
+	// guest user, password forgotten, send mail
+	if (@$_POST['_action'] === 'forgot_password')
 	{
 		$user_name	= str_replace(' ', '', $_POST['user_name']);
 		$email		= str_replace(' ', '', $_POST['email']);
@@ -258,6 +247,7 @@ else
 
 				$this->set_message($this->get_translation('CodeWasSent'));
 				$this->redirect($this->href('', $this->get_translation('LoginPage')));
+				// NEVER BEEN HERE
 
 			}
 			else
@@ -269,38 +259,29 @@ else
 		{
 			$error = $this->get_translation('UserNotFound');
 		}
+
+		$this->set_message($error, 'error');
 	}
 
 	// view password forgot form
-	if (isset($error) || (isset($_POST['action']) && $_POST['action'] != 'send') || (!isset($_POST['action'])) )
-	{
-		if (isset($error))
-		{
-			$this->set_message($error, 'error');
-		}
 
-		// view password forgot form
-		echo $this->form_open('forgot_password');
+	// view password forgot form
+	echo $this->form_open('forgot_password');
 ?>
-		<input type="hidden" name="action" value="send" />
 
-		<h3><?php echo $this->format_translation('ForgotPassword'); ?></h3>
-		<p><?php echo $this->format_translation('ForgotPasswordHint'); ?></p>
-		<div class="cssform">
-		<p>
-			<label for="user_name"><?php echo $this->format_translation('UserName'); ?>:</label>
-			<input type="text" id="user_name" name="user_name" size="25" maxlength="80" /><br />
-			<label for="email"><?php echo $this->format_translation('Email'); ?>:</label>
-			<input type="text" id="email" name="email" size="24" />
-		</p>
-		<p>
-			<input type="submit" class="OkBtn" value="<?php echo $this->get_translation('SendButton'); ?>" />
-		</p>
-		</div>
-		<?php
-		echo $this->form_close();
-	}
+	<h3><?php echo $this->format_translation('ForgotPassword'); ?></h3>
+	<p><?php echo $this->format_translation('ForgotPasswordHint'); ?></p>
+	<div class="cssform">
+	<p>
+		<label for="user_name"><?php echo $this->format_translation('UserName'); ?>:</label>
+		<input type="text" id="user_name" name="user_name" size="25" maxlength="80" /><br />
+		<label for="email"><?php echo $this->format_translation('Email'); ?>:</label>
+		<input type="text" id="email" name="email" size="24" />
+	</p>
+	<p>
+		<input type="submit" class="OkBtn" value="<?php echo $this->get_translation('SendButton'); ?>" />
+	</p>
+	</div>
+	<?php
+	echo $this->form_close();
 }
-
-?>
-<!--/notypo-->
