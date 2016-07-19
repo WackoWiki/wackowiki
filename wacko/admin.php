@@ -204,7 +204,8 @@ if (time() - $engine->sess->ap_created > $session_length)
 {
 	$session_expire			= time() + $session_length;
 	// session started more than 30 minutes(default $session_length) ago  // TODO: $session_time missing!
-	$engine->restart_user_session($user, $session_expire); // TODO: we need extra user session here, hence we need a auth_token table
+	// STS no op now.
+	// $engine->restart_user_session($user, $session_expire); // TODO: we need extra user session here, hence we need a auth_token table
 	$engine->sess->ap_created = time();  // update creation time
 }
 

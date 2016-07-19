@@ -79,7 +79,6 @@ class Diag
 						{
 							$bt[] = '';
 						}
-						Diag::dbg($bt);
 						$btext = '';
 						foreach (array_chunk($bt, 2) as &$one)
 						{
@@ -92,7 +91,6 @@ class Diag
 						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query) . '<br />';
 						echo '[' . number_format($time, 4) . ' sec., ' . $affected_rows . ' rows';
 						echo '<span class="backtrace">';
-						Diag::dbg($btext);
 						echo '<table>' . $btext . '</table>';
 						echo "</span>]</li>\n";
 					}
@@ -191,7 +189,6 @@ class Diag
 				&& @$callee['file'])
 			{
 				$dir = dirname(dirname(__FILE__)) . '/';
-				echo (Ut::stringify($callee));
 				$callee = str_replace($dir, '', $callee['file']) . ':' . $callee['line'];
 			}
 			else
