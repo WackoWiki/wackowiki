@@ -23,18 +23,4 @@ $engine->run();
 
 $http->store_cache();
 
-Diag::full_disclosure($db, $http, $engine);
-
-// closing tags
-if (strpos($http->method, '.xml') === false)
-{
-	echo "\n</body>\n</html>";
-}
-
-if (!headers_sent())
-{
-	header('Cache-Control: public');
-	header('Pragma: cache');
-}
-
-ob_end_flush();
+finalize($db, $http, $engine);

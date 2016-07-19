@@ -111,6 +111,7 @@ if (@$_POST['_action'] === 'emergency')
 	}
 	else
 	{
+		$engine->log_user_delay();
 		if (!isset($engine->sess->ap_failed_login_count))
 		{
 			$engine->sess->ap_failed_login_count = 0;
@@ -400,19 +401,4 @@ else if (!($_GET && $_POST))
 
 <?php
 
-// debugging info on script execution time and memory taken
-Diag::full_disclosure($db, $http, $engine);
-
-
-?>
-
-</body>
-</html>
-
-<?php
-
-########################################################
-##             Finishing and cleaning out             ##
-########################################################
-
-// getting out of temp context
+finalize($db, $http, $engine);

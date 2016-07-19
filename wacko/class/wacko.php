@@ -15,6 +15,7 @@ class Wacko
 	var $dblink;
 	var $page;								// Requested page
 	var $tag;
+	var $method					= '';
 	var $supertag;
 	var $forum					= false;
 	var $categories;
@@ -4031,7 +4032,7 @@ class Wacko
 	function validate_post_token()
 	{
 		if ($_POST &&
-			!$this->sess->verify_nonce((string) @$_POST['_action'], (string) @$_POST['_nonce']))
+			!$this->sess->verify_nonce(@$_POST['_action'], @$_POST['_nonce']))
 		{
 			$_POST = [];
 			$_REQUEST = $_GET;
@@ -4591,6 +4592,23 @@ class Wacko
 		$this->delete_cookie(AUTH_TOKEN);
 
 		$this->sess->restart();
+	}
+
+	// here we make all false login attempts last the same amount of time
+	// to avoid timing attacks on valid usernames
+	function log_user_delay($login_delay = 5) // STS TODO configure
+	{
+		$exec_limit = ini_get('max_execution_time');
+		set_time_limit(0);
+
+		while (($sleep = $login_delay - (microtime(1) - WACKO_STARTED)) > 0)
+		{
+			// Stall next login for a bit.
+			// This will considerably slow down brute force attackers.
+			usleep($sleep * 1000000);
+		}
+
+		set_time_limit($exec_limit);
 	}
 	// end auth token stuff
 
