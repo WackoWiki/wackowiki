@@ -71,7 +71,7 @@ if (!$engine->config['recovery_password'])
 }
 
 // recovery preauthorization
-if (isset($_POST['ap_password']))
+if (@$_POST['_action'] === 'emergency')
 {
 	// Start Login Captcha, if there are too much login attempts (max_login_attempts)
 
@@ -157,9 +157,9 @@ if (!isset($engine->sess->ap_created))
 			<?php echo $engine->get_translation('AuthorizationTip'); ?>
 			<br /><?php #echo $engine->charset; // XXX: only for testing ?><br />
 			<?php
-			#$engine->form_open('emergency');
+			echo $engine->form_open('emergency', ['tag' => 'admin.php']);
+			// <form action="admin.php" method="post" name="emergency"> -- by STS
 			?>
-			<form action="admin.php" method="post" name="emergency">
 				<label for="ap_password"><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong></label>
 				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" />
 <?php
