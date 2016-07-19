@@ -125,6 +125,7 @@ else if (($user = $this->get_user()))
 				$user['password']
 				))
 		{
+			$this->log_user_delay();
 			$error = $this->get_translation('WrongPassword');
 			// log event
 			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordMismatch', SYSTEM_LANG), $user['user_name']));

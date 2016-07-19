@@ -52,6 +52,10 @@ class Http
 			$this->page = $this->vars['page'];
 			$this->method = $this->vars['method'];
 			$this->check_cache();
+
+			// to be replaced then by no_cache or what
+			header('Cache-Control: public');
+			header('Pragma: cache');
 		}
 	}
 
@@ -303,28 +307,30 @@ class Http
 	//		Strict-Transport-Security:
 	private function http_security_headers()
 	{
-		if ($this->db->enable_security_headers)
+		if ($this->db->enable_security_headers && !headers_sent())
 		{
-			if (!headers_sent())
+			switch ($this->db->csp)
 			{
-				switch ($this->db->csp)
-				{
-					case 1:
-						// http://www.w3.org/TR/CSP2/
-						header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;");
-						break;
+				case 1:
+					// http://www.w3.org/TR/CSP2/
+					header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;");
+					break;
 
-					case 2:
-						$csp_custom = str_replace(array("\r", "\n", "\t"), '', CSP_CUSTOM);
-						header($csp_custom);
-						break;
-				}
-
-				if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
-				{
-					header('Strict-Transport-Security: max-age=7776000');
-				}
+				case 2:
+					$csp_custom = str_replace(array("\r", "\n", "\t"), '', CSP_CUSTOM);
+					header($csp_custom);
+					break;
 			}
+
+			if ($this->tls_session)
+			{
+				// HSTS
+				header('Strict-Transport-Security: max-age=7776000');
+			}
+
+			// prevent clickjacking
+			// TODO configure?
+			header('X-Frame-Options: SAMEORIGIN');
 		}
 	}
 

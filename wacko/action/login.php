@@ -5,9 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-?>
-<!--notypo-->
-<?php
+echo "<!--notypo-->\n";
+$include_tail = "<!--/notypo-->\n";
 
 // reconnect securely in tls mode
 $param = isset($_GET['goback'])?  'goback=' . rawurlencode($_GET['goback']) : '';
@@ -45,7 +44,7 @@ if (@$_GET['action'] === 'logout')
 if (($user = $this->get_user()))
 {
 	// user is logged in; display logout form
-	echo $this->form_open('logout');
+	echo $this->form_open('logout', ['form_method' => 'get']); // STS TODO refactor
 
 	echo '<input type="hidden" name="action" value="logout" />';
 	echo '<div class="cssform">';
@@ -218,6 +217,7 @@ else // login
 					else
 					{
 						$error .= $this->get_translation('WrongPassword');
+						$this->log_user_delay();
 
 						$this->set_failed_user_login_count($existing_user['user_id']);
 
@@ -293,5 +293,3 @@ else // login
 	echo $this->form_close();
 	echo '</div>'."\n";
 }
-?>
-<!--/notypo-->
