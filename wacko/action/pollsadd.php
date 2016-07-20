@@ -108,18 +108,18 @@ if (isset($_POST['submit_poll']))
 	// missing poll topic
 	if ($topic == '')
 	{
-		$error = $this->get_translation('PollsNeedTopic');
+		$error = $this->_t('PollsNeedTopic');
 	}
 
 	// we need at least two alternate answers
 	if (count($answers) < 2)
 	{
-		$error .= ' '.$this->get_translation('PollsNeedAnswers');
+		$error .= ' '.$this->_t('PollsNeedAnswers');
 	}
 
 	// captcha validation
 	#if (!$this->get_user() && $this->ValidateCAPTCHA() === false)
-	#	$error .= ' '.$this->get_translation('CaptchaFailed');
+	#	$error .= ' '.$this->_t('CaptchaFailed');
 
 	// in case no errors found submit poll or changes to the db
 	if (!$error)
@@ -161,10 +161,10 @@ if (isset($_POST['submit_poll']))
 		// set confirmation message
 		if ($moderation !== true)
 		{
-			$message = $this->get_translation('PollsSubmitted').
+			$message = $this->_t('PollsSubmitted').
 				($startmod == 1 && $admin
 					? ''
-					: ' '.$this->get_translation('PollsSubmittedMod'));
+					: ' '.$this->_t('PollsSubmittedMod'));
 		}
 
 		// stopping moderation
@@ -176,27 +176,27 @@ if (isset($_POST['submit_poll']))
 		// notify wiki owner & log event
 		if ($this->config['enable_email'] == true && $user != $this->config['admin_name'] && $moderation !== true)
 		{
-			$subject = $this->config['site_name'].'. '.$this->get_translation('PollsNotifySubj');
-			$body	 = $this->get_translation('EmailHello').
+			$subject = $this->config['site_name'].'. '.$this->_t('PollsNotifySubj');
+			$body	 = $this->_t('EmailHello').
 					   $this->config['admin_name'].".\n\n".
-					   str_replace('%1', $user, $this->get_translation('PollsNotifyBody'))."\n".
+					   str_replace('%1', $user, $this->_t('PollsNotifyBody'))."\n".
 					   $this->href('', 'admin.php')."\n\n".
-					   $this->get_translation('EmailGoodbye')."\n".
+					   $this->_t('EmailGoodbye')."\n".
 					   $this->config['site_name']."\n".
 					   $this->config['base_url'];
 
 			$this->send_mail($this->config['admin_email'], $subject, $body);
-			$this->log(4, str_replace('%1', $edit_id, $this->get_translation('LogPollCreated', $this->config['language'])));
+			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollCreated', $this->config['language'])));
 		}
 		else if ($moderation === true)
 		{
-			$this->log(4, str_replace('%1', $edit_id, $this->get_translation('LogPollChanged', $this->config['language'])));
+			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollChanged', $this->config['language'])));
 		}
 
 		// log if we started a poll
 		if ($startmod == 1 && $admin)
 		{
-			$this->log(4, str_replace('%1', $edit_id, $this->get_translation('LogPollStarted', $this->config['language'])));
+			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollStarted', $this->config['language'])));
 		}
 	}
 }
@@ -256,7 +256,7 @@ else if ($stop_mod !== true)
 		'<input type="hidden" name="user" value="'.$user.'" />' : '');
 	echo '<a id="pollsadd_form"></a><table class="formation">';
 	echo '<tr>';
-		echo '<th>'.$this->get_translation('PollsTopic').':</th>';
+		echo '<th>'.$this->_t('PollsTopic').':</th>';
 		echo '<th style="text-align:left;"><input type="text" name="topic" size="70" maxlength="250" value="'.$topic.'" style="font-weight:normal;" /></th>';
 	echo '</tr>';
 
@@ -264,7 +264,7 @@ else if ($stop_mod !== true)
 	foreach ($vars as $var)
 	{
 		echo '<tr class="lined">';
-			echo '<td class="label"><label for="pollvariant_'.$var['v_id'].'">'.$this->get_translation('PollsVariant').' '.$var['v_id'].':</label></td>';
+			echo '<td class="label"><label for="pollvariant_'.$var['v_id'].'">'.$this->_t('PollsVariant').' '.$var['v_id'].':</label></td>';
 			echo '<td><input type="text" id="pollvariant_'.$var['v_id'].'" name="'.$var['v_id'].'" size="40" maxlength="250" value="'.htmlspecialchars($var['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></td>';
 		echo '</tr>';
 	}
@@ -275,28 +275,28 @@ else if ($stop_mod !== true)
 
 		if ($total_vars < 20)
 		{
-			echo '<input type="submit" name="addvar" id="submit" value="'.$this->get_translation('PollsAddVariant').'" /> ';
+			echo '<input type="submit" name="addvar" id="submit" value="'.$this->_t('PollsAddVariant').'" /> ';
 		}
 
 		if ($total_vars > 5)
 		{
-			echo '<input type="submit" name="delvar" id="submit" value="'.$this->get_translation('PollsDelVariant').'" />';
+			echo '<input type="submit" name="delvar" id="submit" value="'.$this->_t('PollsDelVariant').'" />';
 		}
 
 		echo '</td>';
 	echo '</tr>';
 	echo '<tr><td colspan="2">'.
 		'<input type="checkbox" name="plural" id="plural" value="1"'.($plural == 1 ? ' checked="checked" ' : ' ').'/> '.
-		'<label for="plural">'.$this->get_translation('PollsPlural').'</label>'.
+		'<label for="plural">'.$this->_t('PollsPlural').'</label>'.
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
 	// begin captcha output
-	echo '<input type="submit" name="submit_poll" id="submit" value="'.$this->get_translation('PollsSubmit').'" /> ',
+	echo '<input type="submit" name="submit_poll" id="submit" value="'.$this->_t('PollsSubmit').'" /> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
-		echo ($moderation === true ? '<a href="'.$this->href('', $mode_file, $mode_http).'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('PollsCancel').'"/></a>' : '').
+		echo ($moderation === true ? '<a href="'.$this->href('', $mode_file, $mode_http).'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('PollsCancel').'"/></a>' : '').
 			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="startmod" id="startmod" value="1"'.($startmod == 1 ? ' checked="checked" ' : ' ').'/> '.
-			'<label for="startmod">'.$this->get_translation('PollsStartMod').'</label>' : '').
+			'<label for="startmod">'.$this->_t('PollsStartMod').'</label>' : '').
 			'</td></tr>';
 	echo '</table>';
 	echo $this->form_close();

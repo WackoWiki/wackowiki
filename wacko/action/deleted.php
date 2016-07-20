@@ -55,7 +55,7 @@ if ($this->is_admin())
 							'<small>' . $time . '</small>  &mdash; ' .
 							// $this->compose_link_to_page($page['tag'], 'revisions', '', 0) .
 							'<img src="' . $this->config['theme_url'] . 'icon/spacer.png' . '" title="' .
-									$this->get_translation('CommentDeleted') . '" alt="[deleted]" class="btn-delete"/> ' .
+									$this->_t('CommentDeleted') . '" alt="[deleted]" class="btn-delete"/> ' .
 							$this->compose_link_to_page($page['tag'], '', '', 0) .
 						'</span>' .
 						' . . . . . . . . . . . . . . . . <small>' .
@@ -72,7 +72,7 @@ if ($this->is_admin())
 	}
 	else
 	{
-		echo $this->get_translation('NoRecentlyDeleted');
+		echo $this->_t('NoRecentlyDeleted');
 	}
 }
 

@@ -21,7 +21,7 @@ if (!$page) {$page = '';}
 
 if (!$text)
 {
-	$output .= $this->get_translation('ShowComments');
+	$output .= $this->_t('ShowComments');
 }
 else
 {

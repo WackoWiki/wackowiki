@@ -33,7 +33,7 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 
 	// display rating header
 	echo '<header id="header-rating">';
-	echo $this->get_translation('RatingHeader').' [<a href="'.$this->href('', '', 'show_rating=1').'#header-rating">'.$this->get_translation('RatingResults').'</a>]';
+	echo $this->_t('RatingHeader').' [<a href="'.$this->href('', '', 'show_rating=1').'#header-rating">'.$this->_t('RatingResults').'</a>]';
 	echo "</header>\n";
 
 	// display rating form
@@ -45,7 +45,7 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 		 '<input type="radio" id="plus1" name="value" value="1" /><label for="plus1">+1</label>'.
 		 '<input type="radio" id="plus2" name="value" value="2" /><label for="plus2">+2</label>'.
 		 '<input type="radio" id="plus3" name="value" value="3" /><label for="plus3">+3</label>'.
-		 '<input type="submit" name="rate" id="submit" value="'.$this->get_translation('RatingSubmit').'" />';
+		 '<input type="submit" name="rate" id="submit" value="'.$this->_t('RatingSubmit').'" />';
 	echo ''.$this->form_close().'</div>';
 
 	echo "</section>\n";
@@ -67,9 +67,9 @@ else
 
 	// display rating header
 	echo '<header id="header-rating">'."\n";
-	echo $this->get_translation('RatingHeaderResults').
+	echo $this->_t('RatingHeaderResults').
 	(handler_show_page_is_rated($this, $this->page['page_id']) === false
-	? ' [<a href="'.$this->href('', '', 'show_rating=0').'#header-rating">'.$this->get_translation('RatingForm').'</a>]'
+	? ' [<a href="'.$this->href('', '', 'show_rating=0').'#header-rating">'.$this->_t('RatingForm').'</a>]'
 	: '');
 	echo "</header>\n";
 
@@ -77,15 +77,15 @@ else
 	if (isset($results['ratio']))
 	{
 		echo '<div class="rating">';
-		echo ''.$this->get_translation('RatingTotal').': <strong>'.$results['ratio'].'</strong>'.
+		echo ''.$this->_t('RatingTotal').': <strong>'.$results['ratio'].'</strong>'.
 					 ' '.
-					 ''.$this->get_translation('RatingVoters').': <strong>'.$results['voters'].'</strong>';
+					 ''.$this->_t('RatingVoters').': <strong>'.$results['voters'].'</strong>';
 		echo '</div>';
 	}
 	else
 	{
 		echo '<div class="rating">';
-		echo '<em>'.$this->get_translation('RatingNotRated').'</em>';
+		echo '<em>'.$this->_t('RatingNotRated').'</em>';
 		echo '</div>';
 	}
 

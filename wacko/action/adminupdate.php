@@ -29,7 +29,7 @@ if ($this->is_admin())
 		{
 			echo $this->form_open();
 			?>
-			<input type="submit" name="build_user_stats" value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+			<input type="submit" name="build_user_stats" value="<?php echo $this->_t('CategoriesSaveButton');?>" />
 			<?php
 			echo $this->form_close();
 		}
@@ -120,7 +120,7 @@ if ($this->is_admin())
 		{
 			echo $this->form_open();
 			?>
-			<input type="submit" name="set_title"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+			<input type="submit" name="set_title"  value="<?php echo $this->_t('CategoriesSaveButton');?>" />
 			<?php
 			echo $this->form_close();
 		}
@@ -182,7 +182,7 @@ if ($this->is_admin())
 		{
 			echo $this->form_open();
 			?>
-			<input type="submit" name="set_depth"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+			<input type="submit" name="set_depth"  value="<?php echo $this->_t('CategoriesSaveButton');?>" />
 			<?php
 			echo $this->form_close();
 		}
@@ -234,7 +234,7 @@ if ($this->is_admin())
 		{
 			echo $this->form_open();
 			?>
-			<input type="submit" name="set_version_id" value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+			<input type="submit" name="set_version_id" value="<?php echo $this->_t('CategoriesSaveButton');?>" />
 			<?php
 			echo $this->form_close();
 		}
@@ -298,7 +298,7 @@ if ($this->is_admin())
 			echo "<h3>7. Migrates acls to new scheme:</h3>";
 			echo $this->form_open();
 			?>
-			<input type="submit" name="migrate_acls" value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+			<input type="submit" name="migrate_acls" value="<?php echo $this->_t('CategoriesSaveButton');?>" />
 			<?php
 			echo $this->form_close();
 		}

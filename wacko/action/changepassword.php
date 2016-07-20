@@ -36,7 +36,7 @@ if (($code = @$_REQUEST['secret_code']))
 			// confirmed password mismatch
 			if ($conf_password !== $new_password)
 			{
-				$error = $this->get_translation('PasswordsDidntMatch');
+				$error = $this->_t('PasswordsDidntMatch');
 			}
 			// password complexity validation
 			else if ($complexity)
@@ -61,11 +61,11 @@ if (($code = @$_REQUEST['secret_code']))
 					"LIMIT 1");
 
 				// log event
-				$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordRecovered', SYSTEM_LANG), $user['user_name']));
+				$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordRecovered', SYSTEM_LANG), $user['user_name']));
 
 				// forward
-				$this->set_message($this->get_translation('PasswordChanged'), 'success');
-				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
+				$this->set_message($this->_t('PasswordChanged'), 'success');
+				$this->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
 				// NEVER BEEN HERE
 			}
 
@@ -79,20 +79,20 @@ if (($code = @$_REQUEST['secret_code']))
 			?>
 
 			<div class="cssform">
-				<h3><?php echo $this->format(Ut::perc_replace($this->get_translation('YouWantChangePasswordForUser'), $user['user_name'])); ?></h3>
+				<h3><?php echo $this->format(Ut::perc_replace($this->_t('YouWantChangePasswordForUser'), $user['user_name'])); ?></h3>
 				<p>
-					<label for="new_password"><?php echo $this->get_translation('NewPassword');?>:</label>
+					<label for="new_password"><?php echo $this->_t('NewPassword');?>:</label>
 					<input type="password" id="new_password" name="new_password" size="24" />
 				</p>
 				<p>
-					<label for="conf_password"><?php echo $this->get_translation('ConfirmPassword');?>:</label>
+					<label for="conf_password"><?php echo $this->_t('ConfirmPassword');?>:</label>
 					<input type="password" id="conf_password" name="conf_password" size="24" />
 					<?php
 					echo $this->show_password_complexity();
 					?>
 				</p>
 				<p>
-				<input type="submit" class="OkBtn" value="<?php echo $this->get_translation('RegistrationButton'); ?>" />
+				<input type="submit" class="OkBtn" value="<?php echo $this->_t('RegistrationButton'); ?>" />
 				</p>
 			</div>
 			<?php
@@ -101,7 +101,7 @@ if (($code = @$_REQUEST['secret_code']))
 	}
 	else
 	{
-		echo $this->set_message($this->get_translation('WrongCode'), 'error');
+		echo $this->set_message($this->_t('WrongCode'), 'error');
 	}
 }
 else if (($user = $this->get_user()))
@@ -126,14 +126,14 @@ else if (($user = $this->get_user()))
 				))
 		{
 			$this->log_user_delay();
-			$error = $this->get_translation('WrongPassword');
+			$error = $this->_t('WrongPassword');
 			// log event
-			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordMismatch', SYSTEM_LANG), $user['user_name']));
+			$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordMismatch', SYSTEM_LANG), $user['user_name']));
 		}
 		// confirmed password mismatch
 		else if ($conf_password != $new_password)
 		{
-			$error = $this->get_translation('PasswordsDidntMatch');
+			$error = $this->_t('PasswordsDidntMatch');
 		}
 		// password complexity validation
 		else if ($complexity)
@@ -163,11 +163,11 @@ else if (($user = $this->get_user()))
 			$this->context[++$this->current_context] = '';
 
 			// log event
-			$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordChanged', SYSTEM_LANG), $user['user_name']));
+			$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordChanged', SYSTEM_LANG), $user['user_name']));
 
 			// forward
-			$this->set_message($this->get_translation('PasswordChanged'), 'success');
-			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
+			$this->set_message($this->_t('PasswordChanged'), 'success');
+			$this->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
 			// NEVER BEEN HERE
 		}
 
@@ -181,22 +181,22 @@ else if (($user = $this->get_user()))
 	<div class="cssform">
 		<h3><?php echo $this->format_translation('YouWantChangePassword'); ?></h3>
 		<p>
-			<label for="password"><?php echo $this->get_translation('CurrentPassword');?>:</label>
+			<label for="password"><?php echo $this->_t('CurrentPassword');?>:</label>
 			<input type="password" id="password" name="password" size="24" />
 		</p>
 		<p>
-			<label for="new_password"><?php echo $this->get_translation('NewPassword');?>:</label>
+			<label for="new_password"><?php echo $this->_t('NewPassword');?>:</label>
 			<input type="password" id="new_password" name="new_password" size="24" />
 			<?php
 			echo $this->show_password_complexity();
 			?>
 		</p>
 		<p>
-			<label for="conf_password"><?php echo $this->get_translation('ConfirmPassword');?>:</label>
+			<label for="conf_password"><?php echo $this->_t('ConfirmPassword');?>:</label>
 			<input type="password" id="conf_password" name="conf_password" size="24" />
 		</p>
 		<p>
-			<input type="submit" class="OkBtn" value="<?php echo $this->get_translation('RegistrationButton'); ?>" />
+			<input type="submit" class="OkBtn" value="<?php echo $this->_t('RegistrationButton'); ?>" />
 		</p>
 	</div>
 <?php
@@ -225,8 +225,8 @@ else
 				$code_hash	= hash('sha256', $code . hash('sha256', $this->db->system_seed));
 
 				$save = $this->set_language($user['user_lang'], true);
-				$subject	=	$this->get_translation('EmailForgotSubject') . $this->config['site_name'];
-				$body		=	Ut::perc_replace($this->get_translation('EmailForgotMessage'),
+				$subject	=	$this->_t('EmailForgotSubject') . $this->config['site_name'];
+				$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
 									$this->config['site_name'],
 									$user['user_name'],
 									$this->href('', '', 'secret_code=' . $code)) . "\n\n";
@@ -244,21 +244,21 @@ else
 				$this->set_language($save, true);
 
 				// log event
-				$this->log(3, Ut::perc_replace($this->get_translation('LogUserPasswordReminded', SYSTEM_LANG), $user['user_name'], $user['email']));
+				$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordReminded', SYSTEM_LANG), $user['user_name'], $user['email']));
 
-				$this->set_message($this->get_translation('CodeWasSent'));
-				$this->redirect($this->href('', $this->get_translation('LoginPage')));
+				$this->set_message($this->_t('CodeWasSent'));
+				$this->redirect($this->href('', $this->_t('LoginPage')));
 				// NEVER BEEN HERE
 
 			}
 			else
 			{
-				$error = $this->get_translation('NotConfirmedEmail');
+				$error = $this->_t('NotConfirmedEmail');
 			}
 		}
 		else
 		{
-			$error = $this->get_translation('UserNotFound');
+			$error = $this->_t('UserNotFound');
 		}
 
 		$this->set_message($error, 'error');
@@ -280,7 +280,7 @@ else
 		<input type="text" id="email" name="email" size="24" />
 	</p>
 	<p>
-		<input type="submit" class="OkBtn" value="<?php echo $this->get_translation('SendButton'); ?>" />
+		<input type="submit" class="OkBtn" value="<?php echo $this->_t('SendButton'); ?>" />
 	</p>
 	</div>
 	<?php

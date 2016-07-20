@@ -32,7 +32,7 @@ function admin_user_approve(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 	<p>
-		<?php echo $engine->get_translation('UserApproveInfo'); ?>
+		<?php echo $engine->_t('UserApproveInfo'); ?>
 	</p>
 	<br />
 <?php
@@ -133,7 +133,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->approve_user($user['user_id'], false, $user['user_name'], $user['email'], $user['user_lang']);
 			$engine->add_user_page($user['user_name'], $user['user_lang']);
 
-			$engine->show_message($engine->get_translation('RegistrationApproved'));
+			$engine->show_message($engine->_t('RegistrationApproved'));
 			$engine->log(4, "User ##{$user['user_name']}## approved");
 		}
 		else if ($_GET['approve'] == 2)
@@ -141,7 +141,7 @@ function admin_user_approve(&$engine, &$module)
 			// Deny registration
 			$engine->set_account_status($user_id, 2);
 
-			$engine->show_message($engine->get_translation('RegistrationDenied'));
+			$engine->show_message($engine->_t('RegistrationDenied'));
 			$engine->log(4, "User ##{$user['user_name']}## blocked");
 		}
 	}
@@ -150,7 +150,7 @@ function admin_user_approve(&$engine, &$module)
 	{
 		if (array_filter($set) == false && empty($user_id))
 		{
-			$error = 'Please select at least one user via the Set button.';//$this->get_translation('ModerateMoveNotExists');
+			$error = 'Please select at least one user via the Set button.';//$this->_t('ModerateMoveNotExists');
 			$engine->show_message($error);
 		}
 			//(int)$_POST['user_id']
@@ -173,7 +173,7 @@ function admin_user_approve(&$engine, &$module)
 							"AND u.account_type = '0' ".
 						"LIMIT 1");
 
-					$engine->show_message($engine->get_translation('UsersDeleted'));
+					$engine->show_message($engine->_t('UsersDeleted'));
 					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
 				}
 			}
@@ -240,7 +240,7 @@ function admin_user_approve(&$engine, &$module)
 		// entries to display
 		$limit = 100;
 
-		$status = $engine->get_translation('AccountStatusArray');
+		$status = $engine->_t('AccountStatusArray');
 
 		// collecting data
 		$count = $engine->load_single(
@@ -290,20 +290,20 @@ function admin_user_approve(&$engine, &$module)
 		// user filter form
 		$search =			$engine->form_open('search_user', ['form_method' => 'get']).
 							'<input type="hidden" name="mode" value="'.$module['mode'].'" />'. // required to pass mode module via GET
-							$engine->get_translation('UsersSearch').': </td><td>'.
+							$engine->_t('UsersSearch').': </td><td>'.
 							'<input type="search" name="user" maxchars="40" size="30" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> '.
-							'<input type="submit" id="submit" value="'.$engine->get_translation('UsersFilter').'" /> '.
+							'<input type="submit" id="submit" value="'.$engine->_t('UsersFilter').'" /> '.
 							$engine->form_close();
 		$filter_status =	'<p class="right">'.
 							(isset($_GET['account_status']) && $_GET['account_status'] == 1 || !isset($_GET['account_status'])
-								? '<span class="active">'.$engine->get_translation('Pending').'</span>'
-								: '<a href="'.$engine->href().'&amp;account_status=1">'.$engine->get_translation('Pending').'</a>' ).' ('.$status_count['1'].')'.
+								? '<span class="active">'.$engine->_t('Pending').'</span>'
+								: '<a href="'.$engine->href().'&amp;account_status=1">'.$engine->_t('Pending').'</a>' ).' ('.$status_count['1'].')'.
 							(isset($_GET['account_status']) && $_GET['account_status'] == 0
-								? ' | <span class="active">'.$engine->get_translation('Approved').'</span>'
-								: ' | <a href="'.$engine->href().'&amp;account_status=0">'.$engine->get_translation('Approved').'</a>').' ('.$status_count['0'].')'.
+								? ' | <span class="active">'.$engine->_t('Approved').'</span>'
+								: ' | <a href="'.$engine->href().'&amp;account_status=0">'.$engine->_t('Approved').'</a>').' ('.$status_count['0'].')'.
 							(isset($_GET['account_status']) && $_GET['account_status'] == 2
-								? ' | <span class="active">'.$engine->get_translation('Denied').'</span>'
-								: ' | <a href="'.$engine->href().'&amp;account_status=2">'.$engine->get_translation('Denied').'</a>').' ('.$status_count['2'].')'.
+								? ' | <span class="active">'.$engine->_t('Denied').'</span>'
+								: ' | <a href="'.$engine->href().'&amp;account_status=2">'.$engine->_t('Denied').'</a>').' ('.$status_count['2'].')'.
 							'</p>';
 
 		echo '<span class="right">'.$search.'</span><br />';
@@ -316,19 +316,19 @@ function admin_user_approve(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		$control_buttons =	'<br />'.
-							'<input type="submit" id="button" name="approve" value="'.$engine->get_translation('Approve').'" /> '.
-							'<input type="submit" id="button" name="remove" value="'.$engine->get_translation('Deny').'" /> '.
+							'<input type="submit" id="button" name="approve" value="'.$engine->_t('Approve').'" /> '.
+							'<input type="submit" id="button" name="remove" value="'.$engine->_t('Deny').'" /> '.
 							'<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
 							'<br />'."\n".
-								'<input type="submit" name="set" id="submit" value="'.$engine->get_translation('ModerateSet').'" /> '.
+								'<input type="submit" name="set" id="submit" value="'.$engine->_t('ModerateSet').'" /> '.
 								($set
-										? '<input type="submit" name="reset" id="submit" value="'.$engine->get_translation('ModerateReset').'" /> '.
+										? '<input type="submit" name="reset" id="submit" value="'.$engine->_t('ModerateReset').'" /> '.
 										'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
 										: ''
 								);
 
-		$approve_icon	= '<img src="'.$engine->config['theme_url'].'icon/spacer.png" title="'.$engine->get_translation('Approve').'" alt="'.$engine->get_translation('Approve').'" class="btn-approve"/>';
-		$deny_icon		= '<img src="'.$engine->config['theme_url'].'icon/spacer.png" title="'.$engine->get_translation('Deny').'" alt="'.$engine->get_translation('Deny').'" class="btn-deny"/>';
+		$approve_icon	= '<img src="'.$engine->config['theme_url'].'icon/spacer.png" title="'.$engine->_t('Approve').'" alt="'.$engine->_t('Approve').'" class="btn-approve"/>';
+		$deny_icon		= '<img src="'.$engine->config['theme_url'].'icon/spacer.png" title="'.$engine->_t('Deny').'" alt="'.$engine->_t('Deny').'" class="btn-deny"/>';
 
 		# echo $control_buttons;
 		echo '<br />';
@@ -340,14 +340,14 @@ function admin_user_approve(&$engine, &$module)
 				<!--<th style="width:5px;"></th>-->
 				<!--<th style="width:5px;"></th>-->
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuser; ?>"><?php echo $engine->get_translation('UserName'); ?></a></th>
-				<th><?php echo $engine->get_translation('UserEmail'); ?></th>
-				<th><?php echo $engine->get_translation('UserIP'); ?></th>
-				<th style="width:20px;"><?php echo $engine->get_translation('UserLanguage'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>"><?php echo $engine->get_translation('UserSignuptime'); ?></a></th>
-				<th style="width:20px;"><?php echo $engine->get_translation('UserEnabled'); ?></th>
-				<th style="width:20px;"><?php echo $engine->get_translation('AccountStatus'); ?></th>
-				<th style="width:200px;"><?php echo $engine->get_translation('UserActions'); ?></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuser; ?>"><?php echo $engine->_t('UserName'); ?></a></th>
+				<th><?php echo $engine->_t('UserEmail'); ?></th>
+				<th><?php echo $engine->_t('UserIP'); ?></th>
+				<th style="width:20px;"><?php echo $engine->_t('UserLanguage'); ?></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
+				<th style="width:20px;"><?php echo $engine->_t('UserEnabled'); ?></th>
+				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
+				<th style="width:200px;"><?php echo $engine->_t('UserActions'); ?></th>
 			</tr>
 <?php
 		if ($users)
@@ -372,10 +372,10 @@ function admin_user_approve(&$engine, &$module)
 						'<td><a href="'.$engine->href().'&amp;account_status='.$row['account_status'].'">'.$status[$row['account_status']].'</a></td>'.
 						'<td>'.
 							((isset($_GET['account_status']) && $_GET['account_status'] > 0) || !isset($_GET['account_status'])
-								? '<a href="'.$engine->href().'&amp;approve=1&amp;user_id='.$row['user_id'].'">'.$approve_icon.''.$engine->get_translation('Approve').'</a>'
+								? '<a href="'.$engine->href().'&amp;approve=1&amp;user_id='.$row['user_id'].'">'.$approve_icon.''.$engine->_t('Approve').'</a>'
 								: '').
 							((isset($_GET['account_status']) && $_GET['account_status'] < 2) || !isset($_GET['account_status'])
-								? '<a href="'.$engine->href().'&amp;approve=2&amp;user_id='.$row['user_id'].'">'.$deny_icon.''.$engine->get_translation('Deny').'</a>'
+								? '<a href="'.$engine->href().'&amp;approve=2&amp;user_id='.$row['user_id'].'">'.$deny_icon.''.$engine->_t('Deny').'</a>'
 								: '').
 						'</td>'.
 					'</tr>';
@@ -383,7 +383,7 @@ function admin_user_approve(&$engine, &$module)
 		}
 		else
 		{
-			echo '<tr><td colspan="5"><br /><em>'.$engine->get_translation('NoMatchingUser').'</em></td></tr>';
+			echo '<tr><td colspan="5"><br /><em>'.$engine->_t('NoMatchingUser').'</em></td></tr>';
 		}
 ?>
 			</table>

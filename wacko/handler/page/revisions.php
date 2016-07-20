@@ -25,7 +25,7 @@ $show_deleted = $this->is_admin();
 if ($this->page['deleted'])
 {
 	$this->show_message(
-			// $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
+			// $this->_t('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->_t('PromptCreate')) : '').
 			'BACKUP of deleted page!' // TODO: localize and add description: to restore the page you ...
 			);
 }
@@ -39,10 +39,10 @@ if ($this->has_access('read'))
 
 		echo $this->form_open('diff_versions', ['page_method' => 'diff', 'form_method' => 'get']);
 		echo "<p>\n";
-		echo '<input type="submit" value="' . $this->get_translation('ShowDifferencesButton') . '" />';
+		echo '<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '" />';
 
 		$default_mode = 0; // TODO: configurable per user
-		for ($mode = 0; ($text = $this->get_translation($id = 'DiffMode' . $mode)) !== null; ++$mode)
+		for ($mode = 0; ($text = $this->_t($id = 'DiffMode' . $mode)) !== null; ++$mode)
 		{
 			if ($text)
 			{
@@ -55,13 +55,13 @@ if ($this->has_access('read'))
 
 		echo $place_holder.
 					'<a href="' . $this->href('revisions.xml') . '"><img src="'.
-					$this->config->theme_url . 'icon/spacer.png' . '" title="' . $this->get_translation('RevisionXMLTip') .
+					$this->config->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') .
 					'" alt="XML" class="btn-feed"/></a>';
 
 		if ($this->config->minor_edit)
 		{
 			// STS: ?!..
-			echo '<br />'.((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? '<a href="'.$this->href('revisions', '', 'minor_edit=1').'">'.$this->get_translation('MinorEditHide').'</a>' : '<a href="'.$this->href('revisions', '', 'minor_edit=0').'">'.$this->get_translation('MinorEditShow').'</a>');
+			echo '<br />'.((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? '<a href="'.$this->href('revisions', '', 'minor_edit=1').'">'.$this->_t('MinorEditHide').'</a>' : '<a href="'.$this->href('revisions', '', 'minor_edit=0').'">'.$this->_t('MinorEditShow').'</a>');
 		}
 
 		echo "</p>\n" . '<ul class="revisions">' . "\n";
@@ -101,7 +101,7 @@ if ($this->has_access('read'))
 			echo $place_holder.'&nbsp;
 						<a href="'.$this->href('show', '', 'revision_id='.$page['revision_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
 			echo '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_id']."</span> ";
-			echo $place_holder."&nbsp;".$this->get_translation('By')." ".
+			echo $place_holder."&nbsp;".$this->_t('By')." ".
 						$this->user_link($page['user_name'], '', true, false);
 			echo $edit_note;
 			echo ' '.($page['minor_edit'] ? 'm' : '');
@@ -111,13 +111,13 @@ if ($this->has_access('read'))
 			{
 				if ($page['reviewed'])
 				{
-					echo '<span class="review">[' . $this->get_translation('ReviewedBy') . ' ' . $this->user_link($page['reviewer'], '', true, false) . ']</span>';
+					echo '<span class="review">[' . $this->_t('ReviewedBy') . ' ' . $this->user_link($page['reviewer'], '', true, false) . ']</span>';
 				}
 				else if ($this->is_reviewer())
 				{
 					if (!$num)
 					{
-						echo ' <span class="review">[' . $this->get_translation('Review') . ']</span>';
+						echo ' <span class="review">[' . $this->_t('Review') . ']</span>';
 					}
 				}
 			}
@@ -134,11 +134,11 @@ if ($this->has_access('read'))
 
 		if ($max && $a > $max)
 		{
-			echo  '<a href="'.$this->href('revisions', '', 'show=all').'">'.$this->get_translation('RevisionsShowAll')."</a><br /><br />\n";
+			echo  '<a href="'.$this->href('revisions', '', 'show=all').'">'.$this->_t('RevisionsShowAll')."</a><br /><br />\n";
 		}
 
 		echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.
-					$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
+					$this->_t('CancelDifferencesButton').'" /></a>'."\n";
 
 		echo $this->form_close()."\n";
 	}
@@ -147,5 +147,5 @@ if ($this->has_access('read'))
 }
 else
 {
-	$this->show_message($this->get_translation('ReadAccessDenied'), 'error');
+	$this->show_message($this->_t('ReadAccessDenied'), 'error');
 }

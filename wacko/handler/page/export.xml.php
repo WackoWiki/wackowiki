@@ -13,7 +13,7 @@ echo "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 echo "\t<channel>\n";
 echo "\t\t<title>".$this->tag."</title>\n";
 echo "\t\t<link>".$this->config['base_url']."</link>\n";
-echo "\t\t<description>".$this->get_translation('ExportClusterXML').$this->config['site_name']."/".$this->tag."</description>\n";
+echo "\t\t<description>".$this->_t('ExportClusterXML').$this->config['site_name']."/".$this->tag."</description>\n";
 echo "\t\t<lastBuildDate>".date('r')."</lastBuildDate>\n";
 echo "\t\t<language></language>\n";//!!!
 echo "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
@@ -70,7 +70,7 @@ else
 	echo "\t\t<item>\n";
 	echo "\t\t\t<title>Error</title>\n";
 	echo "\t\t\t<link>".$this->href('show')."</link>\n";
-	echo "\t\t\t<description>".$this->get_translation('AccessDeniedXML')."</description>\n";
+	echo "\t\t\t<description>".$this->_t('AccessDeniedXML')."</description>\n";
 	echo "\t\t</item>\n";
 }
 

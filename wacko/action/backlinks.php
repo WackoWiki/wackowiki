@@ -15,7 +15,7 @@ if (($pages = $this->load_pages_linking_to($tag)))
 {
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>' . $this->get_translation('ReferringPages') . ":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('ReferringPages') . ":</span></p>\n";
 	}
 
 	foreach ($pages as $page)
@@ -51,5 +51,5 @@ if (($pages = $this->load_pages_linking_to($tag)))
 }
 else
 {
-	echo $this->get_translation('NoReferringPages');
+	echo $this->_t('NoReferringPages');
 }

@@ -149,7 +149,7 @@ if (isset($_POST['_user_menu']))
 							"AND page_id = '".(int)$_page_id."' ".
 						"LIMIT 1"))
 					{
-						$message .= $this->get_translation('BookmarkAlreadyExists');
+						$message .= $this->_t('BookmarkAlreadyExists');
 					}
 					else
 					{
@@ -172,25 +172,25 @@ if (isset($_POST['_user_menu']))
 							"menu_lang			= '".quote($this->dblink, (($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang))."', ".
 							"menu_position		= '".(int)($_menu_item_count + 1)."'");
 
-						#$message .= $this->get_translation('MenuItemAdded'); // TODO: msg set
+						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set
 					}
 				}
 				else
 				{
 					// no access rights
-					$message .= $this->get_translation('ReadAccessDenied');
+					$message .= $this->_t('ReadAccessDenied');
 				}
 			}
 			else
 			{
 				// page does not exits
-				$message .= $this->get_translation('DoesNotExists');
+				$message .= $this->_t('DoesNotExists');
 			}
 		}
 		else
 		{
 			// no page given
-			#$message .= $this->get_translation('PageAlreadyExistsEditDenied');
+			#$message .= $this->_t('PageAlreadyExistsEditDenied');
 		}
 
 		$this->set_message($message);
@@ -235,7 +235,7 @@ if ($_user_id)
 
 	if ($_menu)
 	{
-		// echo "<h4>".$this->get_translation('YourBookmarks')."</h4>";
+		// echo "<h4>".$this->_t('YourBookmarks')."</h4>";
 
 		// user is logged in; display config form
 		echo $this->form_open('edit_bookmarks');
@@ -244,11 +244,11 @@ if ($_user_id)
 
 		if ($default_menu === true)
 		{
-			echo '<label for="menu_lang">'.$this->get_translation('YourLanguage').' </label>';
+			echo '<label for="menu_lang">'.$this->_t('YourLanguage').' </label>';
 			// FIXME: add a common function for this?
 			echo '<select id="menu_lang" name="menu_lang">';
 
-			$languages = $this->get_translation('LanguageArray');
+			$languages = $this->_t('LanguageArray');
 
 			if ($this->config['multilanguage'])
 			{
@@ -271,7 +271,7 @@ if ($_user_id)
 		}
 
 		echo '<table>';
-		echo '<tr><th>'.$this->get_translation('BookmarkNumber').'</th><th>'.$this->get_translation('BookmarkTitle').'</th><th>'.$this->get_translation('BookmarkPage').'</th><th>'.$this->get_translation('BookmarkMark').'</th><!--<th>Display</th>-->';
+		echo '<tr><th>'.$this->_t('BookmarkNumber').'</th><th>'.$this->_t('BookmarkTitle').'</th><th>'.$this->_t('BookmarkPage').'</th><th>'.$this->_t('BookmarkMark').'</th><!--<th>Display</th>-->';
 
 		if ($system)
 		{
@@ -311,22 +311,22 @@ if ($_user_id)
 
 		echo '<tfoot>';
 		echo "<tr>\n".'<td colspan="3">'."\n";
-		echo '<input type="submit" name="update_menu" value="'.$this->get_translation('BookmarkSaveChanges').'" />';
+		echo '<input type="submit" name="update_menu" value="'.$this->_t('BookmarkSaveChanges').'" />';
 		echo '</td><td>';
-		echo '<input type="submit" name="delete_menu_item" value="'.$this->get_translation('BookmarkDeleteSelected').'" />';
+		echo '<input type="submit" name="delete_menu_item" value="'.$this->_t('BookmarkDeleteSelected').'" />';
 		echo "</td>\n</tr>\n";
 		echo '</tfoot>';
 		echo '</table>';
 	}
 	else
 	{
-		echo $this->get_translation('BookmarkNone');
+		echo $this->_t('BookmarkNone');
 	}
 
 	echo $this->form_open('add_bookmark');
 	echo '<input type="hidden" name="_user_menu" value="yes" />';
 	echo '<br /><br />';
-	echo '<label for="add_menu_item">'.$this->get_translation('BookmarksAddPage').':</label><br />'.
+	echo '<label for="add_menu_item">'.$this->_t('BookmarksAddPage').':</label><br />'.
 		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
 
 	if ($default_menu === true)
@@ -334,7 +334,7 @@ if ($_user_id)
 		// FIXME: add a common function for this?
 		echo '<select id="lang_new" name="lang_new">';
 
-		$languages = $this->get_translation('LanguageArray');
+		$languages = $this->_t('LanguageArray');
 
 		if ($this->config['multilanguage'])
 		{
@@ -353,7 +353,7 @@ if ($_user_id)
 		echo "</select>\n";
 	}
 
-	echo  '<input type="submit" name="add_menu_item" value="'.$this->get_translation('CreatePageButton').'" />';
+	echo  '<input type="submit" name="add_menu_item" value="'.$this->_t('CreatePageButton').'" />';
 
 	echo $this->form_close();
 }

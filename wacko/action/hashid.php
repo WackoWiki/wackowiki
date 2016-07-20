@@ -31,4 +31,4 @@ $id = $hashids->encode($ids);
 
 // dbg('hashiding', $ids, '=>', $id);
 
-echo '<a href="' . $this->href('', $id) . '" title="' . $this->get_translation('PermaLinkTip') . '" rel="nofollow">' . $this->get_translation('PermaLink') . '</a>';
+echo '<a href="' . $this->href('', $id) . '" title="' . $this->_t('PermaLinkTip') . '" rel="nofollow">' . $this->_t('PermaLink') . '</a>';

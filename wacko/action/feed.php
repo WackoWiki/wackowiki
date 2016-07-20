@@ -34,12 +34,12 @@ if (!isset($max))		$max	= 5;
 if (!isset($time))		$time	= '';
 
 // Include SimplePie
-#include_once('lib/SimplePie/autoloader.php');
-include_once('lib/SimplePie/simplepie.class.php');
+#include_once 'lib/SimplePie/autoloader.php';
+include_once 'lib/SimplePie/simplepie.class.php';
 
 if (!$url)
 {
-	echo '<p><em>'.$this->get_translation('FeedNoURL')."</em></p>\n";
+	echo '<p><em>'.$this->_t('FeedNoURL')."</em></p>\n";
 }
 else
 {
@@ -82,7 +82,7 @@ else
 
 	if (!$feed->get_title() && $counturlset == 1)
 	{
-		echo '<p><em>'.$this->get_translation('FeedError')."</em></p>\n";
+		echo '<p><em>'.$this->_t('FeedError')."</em></p>\n";
 		#break;
 	}
 	else
@@ -114,7 +114,7 @@ else
 				}
 				else if (!$title && $counturlset > 1)
 				{
-					echo '<'.$header_feed.'>'.$this->get_translation('FeedMulti').'</'.$header_feed.">\n";
+					echo '<'.$header_feed.'>'.$this->_t('FeedMulti').'</'.$header_feed.">\n";
 				}
 
 				echo $lastitems;
@@ -125,20 +125,20 @@ else
 			{
 				if ($title != '' && $counturlset == 1)
 				{
-					echo '<p class="layout-box"><span>'.$this->get_translation('FeedTitle').': <strong>'.$this->link($feed->get_permalink(), '', $title, '', 1, 1).'</strong>'.$lastitems."<span></p>\n";
+					echo '<p class="layout-box"><span>'.$this->_t('FeedTitle').': <strong>'.$this->link($feed->get_permalink(), '', $title, '', 1, 1).'</strong>'.$lastitems."<span></p>\n";
 				}
 
 				if ($title != '' && $counturlset > 1)
 				{
-					echo '<p class="layout-box"><span>'.$this->get_translation('FeedTitle').': <strong>'.$title.'</strong>'.$lastitems."</span></p>\n";
+					echo '<p class="layout-box"><span>'.$this->_t('FeedTitle').': <strong>'.$title.'</strong>'.$lastitems."</span></p>\n";
 				}
 				else if (!$title && $counturlset == 1)
 				{
-					echo '<p class="layout-box"><span>'.$this->get_translation('FeedTitle').': <strong>'.$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1).'</strong>'.$lastitems."</span></p>\n";
+					echo '<p class="layout-box"><span>'.$this->_t('FeedTitle').': <strong>'.$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1).'</strong>'.$lastitems."</span></p>\n";
 				}
 				else if (!$title && $counturlset > 1)
 				{
-					echo '<p class="layout-box"><span><strong>'.$this->get_translation('FeedMulti').'</strong>'.$lastitems."</span></p>\n";
+					echo '<p class="layout-box"><span><strong>'.$this->_t('FeedMulti').'</strong>'.$lastitems."</span></p>\n";
 				}
 			}
 		}
@@ -171,7 +171,7 @@ else
 				}
 
 				echo '>'.$this->link($item->get_permalink(), '', $item->get_title(), '', 1, 1).'</'.$header_item.'>';
-				echo '<p class="note"><span>'.$this->get_translation('FeedSource').' '.$this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 1, 1).' | '.$item->get_date('d.m.Y g:i').' | ';
+				echo '<p class="note"><span>'.$this->_t('FeedSource').' '.$this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 1, 1).' | '.$item->get_date('d.m.Y g:i').' | ';
 
 				if (($time == 1) && ($date != 0))
 				{

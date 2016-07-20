@@ -202,7 +202,7 @@ else if ($error == 404)
 		header('HTTP/1.1 404 Not Found');
 	}
 
-	echo $this->get_translation('UploadFileNotFound');
+	echo $this->_t('UploadFileNotFound');
 }
 else
 {
@@ -211,7 +211,7 @@ else
 		header('HTTP/1.1 403 Forbidden');
 	}
 
-	echo $this->get_translation('UploadFileForbidden');
+	echo $this->_t('UploadFileForbidden');
 }
 
 // 4. die

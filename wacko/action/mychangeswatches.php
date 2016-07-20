@@ -12,9 +12,9 @@ if ($user_id = $this->get_user_id())
 	$limit		= $this->get_list_count($max);
 	$pref		= $this->config['table_prefix'];
 
-	echo $this->get_translation('MyChangesWatches').
+	echo $this->_t('MyChangesWatches').
 		' (<a href="'.$this->href('', '', 'mode=mychangeswatches&amp;reset=1').'#list">'.
-		$this->get_translation('ResetChangesWatches').'</a>).<br /><br />';
+		$this->_t('ResetChangesWatches').'</a>).<br /><br />';
 
 	$pages = $this->load_all(
 			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
@@ -47,18 +47,18 @@ if ($user_id = $this->get_user_id())
 		{
 			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 			{
-				echo '<small>('.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->get_translation('History')).
+				echo '<small>('.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->_t('History')).
 					')</small> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
 			}
 		}
 	}
 	else
 	{
-		echo '<em>'.$this->get_translation('NoChangesWatches').'</em>';
+		echo '<em>'.$this->_t('NoChangesWatches').'</em>';
 	}
 }
 else
 {
-	echo '<em>'.$this->get_translation('NotLoggedInWatches').'</em>';
+	echo '<em>'.$this->_t('NotLoggedInWatches').'</em>';
 }
 ?>

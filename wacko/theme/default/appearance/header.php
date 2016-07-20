@@ -30,23 +30,23 @@ require Ut::join_path(THEME_DIR, '_common/_header.php');
 // if user are logged, shows "You are UserName"
 if (($logged_in = $this->get_user()))
 {
-	echo '<span class="nobr">'.$this->get_translation('YouAre').' '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span>'.
-		 '<small> ( <span class="nobr Tune">'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).
-		' | <a onclick="return confirm(\''.$this->get_translation('LogoutAreYouSure').'\');" href="'.$this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)).'">'.$this->get_translation('LogoutLink').'</a></span> )</small>';
+	echo '<span class="nobr">'.$this->_t('YouAre').' '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span>'.
+		 '<small> ( <span class="nobr Tune">'.$this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0).
+		' | <a onclick="return confirm(\''.$this->_t('LogoutAreYouSure').'\');" href="'.$this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)).'">'.$this->_t('LogoutLink').'</a></span> )</small>';
 }
 // else shows login's controls
 else
 {
 	// show Register / Login link
 	echo "<ul>\n";
-	echo "<li>".$this->compose_link_to_page($this->get_translation('LoginPage'), '', $this->get_translation('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
+	echo "<li>".$this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
 
 	if ($this->db->allow_registration)
 	{
-		echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), '', $this->get_translation('RegistrationPage'), 0)."</li>\n";
+		echo "<li>".$this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'), 0)."</li>\n";
 	}
 	// Show Help link
-	//  echo "<li>".$this->compose_link_to_page($this->get_translation('HelpPage'), "", $this->get_translation('Help'), 0)."</li>\n";
+	//  echo "<li>".$this->compose_link_to_page($this->_t('HelpPage'), "", $this->_t('Help'), 0)."</li>\n";
 	echo "</ul>\n";
 }
 
@@ -73,7 +73,7 @@ else
 			// start dropdown menu for bookmarks over max_items
 			echo '<li class="dropdown"><a href="#" id="more">
 					<img src="'. $this->config['theme_url'].'icon/spacer.png" alt="-" title="'.
-					$this->get_translation('Bookmarks') .'" class="btn-menu"/></a>';
+					$this->_t('Bookmarks') .'" class="btn-menu"/></a>';
 			echo '<ul class="dropdown_menu">'."\n";
 		}
 
@@ -101,14 +101,14 @@ else
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
 				.'icon/spacer.png" alt="+" title="'.
-				$this->get_translation('AddToBookmarks') .'" class="btn-addbookmark"/></a></li>';
+				$this->_t('AddToBookmarks') .'" class="btn-addbookmark"/></a></li>';
 		}
 		else if (!$this->get_menu_default())
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
 				.'icon/spacer.png" alt="-" title="'.
-				$this->get_translation('RemoveFromBookmarks') .'" class="btn-removebookmark"/></a></li>';
+				$this->_t('RemoveFromBookmarks') .'" class="btn-removebookmark"/></a></li>';
 		}
 	}
 ?>
@@ -121,7 +121,7 @@ else
 	//		$image - 0 text only, 1 image only, 2 image and text
 	$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = '')
 	{
-		$title = $this->get_translation($title);
+		$title = $this->_t($title);
 
 		if ($image)
 		{
@@ -137,7 +137,7 @@ else
 		}
 		else
 		{
-			$tab .= '"><a href="' . ($method == 'show'? '.' : $this->href($method)) . '" title="' . $this->get_translation($hint) . '"';
+			$tab .= '"><a href="' . ($method == 'show'? '.' : $this->href($method)) . '" title="' . $this->_t($hint) . '"';
 			if ($access_key !== '')
 			{
 				$tab .= ' accesskey="' . $access_key . '"';
@@ -199,11 +199,11 @@ else
 		// show more tab
 
 		// display more icon and text
-		//  echo '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->config['theme_url'].'icon/more.png" title="'.$this->get_translation('PageHandlerMoreTip').'" alt="'.$this->get_translation('PageHandlerMoreTip').'" /> '.$this->get_translation('PageHandlerMoreTip')."</a> \n";
+		//  echo '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->config['theme_url'].'icon/more.png" title="'.$this->_t('PageHandlerMoreTip').'" alt="'.$this->_t('PageHandlerMoreTip').'" /> '.$this->_t('PageHandlerMoreTip')."</a> \n";
 		// only display 'more' text that shows handler list on hover
 
 		{
-			echo '<li class="dropdown"><a href="#" id="more">' . $this->get_translation('PageHandlerMoreTip') . '<span class="dropdown_arrow">&#9660;</span></a>' . " \n";
+			echo '<li class="dropdown"><a href="#" id="more">' . $this->_t('PageHandlerMoreTip') . '<span class="dropdown_arrow">&#9660;</span></a>' . " \n";
 			echo '<ul class="dropdown_menu">' . "\n";
 
 			// print tab
@@ -261,7 +261,7 @@ else
 			$echo_tab('referrers', 'ReferrersTip', 'ReferrersText', 2, '', 'l');
 
 			// watch tab
-				// ($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+				// ($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnWatchText') : $this->_t('WatchText') ) : '',
 			if ($logged_in)
 			{
 				if ($this->is_watched)
@@ -306,13 +306,13 @@ else
 				<div id="search_box">
 <?php
 				// opens search form
-				echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->get_translation('TextSearchPage')]);
+				echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]);
 
 				// searchbar
 ?>
-				<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
+				<span class="search nobr"><label for="phrase"><?php echo $this->_t('SearchText'); ?></label>
 				<input type="search" name="phrase" id="phrase" size="20" />
-				<input type="submit" class="submitinput" title="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/>
+				<input type="submit" class="submitinput" title="<?php echo $this->_t('SearchButtonText') ?>" value="<?php echo $this->_t('SearchButtonText') ?>"/>
 				</span>
 <?php
 
@@ -339,7 +339,7 @@ if (!@$this->sess->MinPHPVersion)
 {
 	if (version_compare(PHP_VERSION, PHP_MIN_VERSION) < 0)
 	{
-		$this->show_message($this->get_translation('ErrorMinPHPVersion'), 'error');
+		$this->show_message($this->_t('ErrorMinPHPVersion'), 'error');
 	}
 	$this->sess->MinPHPVersion = 1;
 }

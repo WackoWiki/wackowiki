@@ -19,10 +19,10 @@ if ($user_id = $this->get_user_id())
 
 	if ((isset($_GET['bydate']) && $_GET['bydate'] == 1) || $bydate == 1)
 	{
-		echo '<strong>'.$this->get_translation('ListOwnedPages2').'</strong>';
+		echo '<strong>'.$this->_t('ListOwnedPages2').'</strong>';
 		echo "<br />[<a href=\"".$this->href('', '', 'mode=mypages')."#list"."\">".
-		$this->get_translation('OrderABC')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1', '', 'list')."\">".
-		$this->get_translation('OrderChange')."</a>] <br /><br />\n";
+		$this->_t('OrderABC')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1', '', 'list')."\">".
+		$this->_t('OrderChange')."</a>] <br /><br />\n";
 
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
@@ -61,7 +61,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip')).' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
+				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 
 
 			}
@@ -72,7 +72,7 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo $this->get_translation('NoPagesFound');
+			echo $this->_t('NoPagesFound');
 		}
 	}
 	else if ((isset($_GET['bychange']) && $_GET['bychange'] == 1) || $bychange == 1)
@@ -89,11 +89,11 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
 
-		echo '<strong>'.$this->get_translation('ListOwnedPages3').'</strong>';
+		echo '<strong>'.$this->_t('ListOwnedPages3').'</strong>';
 		echo '<br />[<a href="'.
-			$this->href('', '', 'mode=mypages').'#list">'.$this->get_translation('OrderABC').
+			$this->href('', '', 'mode=mypages').'#list">'.$this->_t('OrderABC').
 			'</a>] [<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
-			$this->get_translation('OrderDate')."</a>]<br /><br />\n";
+			$this->_t('OrderDate')."</a>]<br /><br />\n";
 
 		if ($pages = $this->load_all(
 			"SELECT p.tag, p.title, p.modified ".
@@ -127,7 +127,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip')).
+				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).
 					' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 
 			}
@@ -138,7 +138,7 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo $this->get_translation('NoPagesFound');
+			echo $this->_t('NoPagesFound');
 		}
 	}
 	else
@@ -152,10 +152,10 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
 
-		echo '<strong>'.$this->get_translation('ListOwnedPages').'</strong>';
+		echo '<strong>'.$this->_t('ListOwnedPages').'</strong>';
 		echo "<br />[<a href=\"".$this->href('', '', 'mode=mypages&amp;bydate=1')."#list"."\">".
-		$this->get_translation('OrderDate')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1', '', 'list')."\">".
-		$this->get_translation('OrderChange')."</a>] <br /><br />\n";
+		$this->_t('OrderDate')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1', '', 'list')."\">".
+		$this->_t('OrderChange')."</a>] <br /><br />\n";
 
 		if ($pages = $this->load_all(
 			"SELECT tag, title, modified ".
@@ -197,18 +197,18 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo $this->get_translation('NoPagesFound');
+			echo $this->_t('NoPagesFound');
 		}
 	}
 
 	if ($pages == false)
 	{
-		echo $this->get_translation('YouDontOwn');
+		echo $this->_t('YouDontOwn');
 	}
 }
 else
 {
-	echo $this->get_translation('NotLoggedInThusOwned');
+	echo $this->_t('NotLoggedInThusOwned');
 }
 
 ?>

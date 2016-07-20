@@ -51,7 +51,7 @@ $engine->validate_post_token();
 if (@$_GET['action'] === 'logout')
 {
 	unset($engine->sess->ap_created);
-	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
+	$engine->log(1, $engine->_t('LogAdminLogout', $engine->config['language']));
 	$http->secure_base_url();
 	$http->redirect($engine->href());
 	exit;
@@ -64,8 +64,8 @@ if (@$_GET['action'] === 'logout')
 // recovery password
 if (!$engine->config['recovery_password'])
 {
-	echo '<strong>'.$engine->get_translation('NoRecoceryPassword').'</strong><br />';
-	echo $engine->get_translation('NoRecoceryPasswordTip');
+	echo '<strong>'.$engine->_t('NoRecoceryPassword').'</strong><br />';
+	echo $engine->_t('NoRecoceryPasswordTip');
 
 	die();
 }
@@ -81,7 +81,7 @@ if (@$_POST['_action'] === 'emergency')
 		// captcha validation
 		if ($engine->validate_captcha() === false)
 		{
-			$error = $engine->get_translation('CaptchaFailed');
+			$error = $engine->_t('CaptchaFailed');
 		}
 	} */
 	// End Registration Captcha
@@ -105,7 +105,7 @@ if (@$_POST['_action'] === 'emergency')
 			$engine->config->set('ap_failed_login_count', 0);
 		}
 
-		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
+		$engine->log(1, $engine->_t('LogAdminLoginSuccess', $engine->config['language']));
 		$http->secure_base_url();
 		$http->ensure_tls($db->base_url . 'admin.php');
 	}
@@ -118,7 +118,7 @@ if (@$_POST['_action'] === 'emergency')
 		}
 
 		$engine->config->set('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1);
-		$engine->log(1, $engine->get_translation('LogAdminLoginFailed', $engine->config['language']));
+		$engine->log(1, $engine->_t('LogAdminLoginFailed', $engine->config['language']));
 
 		++$engine->sess->ap_failed_login_count;
 
@@ -126,7 +126,7 @@ if (@$_POST['_action'] === 'emergency')
 		if (($engine->sess->ap_failed_login_count >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
 			$db->lock(AP_LOCK);
-			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
+			$engine->log(1, $engine->_t('LogAdminLoginLocked', $engine->config['language']));
 
 			$engine->sess->ap_failed_login_count = 0;
 		}
@@ -154,14 +154,14 @@ if (!isset($engine->sess->ap_created))
 		$engine->output_messages();
 ?>
 		<div id="loginbox">
-			<strong><?php echo $engine->get_translation('Authorization'); ?></strong><br />
-			<?php echo $engine->get_translation('AuthorizationTip'); ?>
+			<strong><?php echo $engine->_t('Authorization'); ?></strong><br />
+			<?php echo $engine->_t('AuthorizationTip'); ?>
 			<br /><?php #echo $engine->charset; // XXX: only for testing ?><br />
 			<?php
 			echo $engine->form_open('emergency', ['tag' => 'admin.php']);
 			// <form action="admin.php" method="post" name="emergency"> -- by STS
 			?>
-				<label for="ap_password"><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong></label>
+				<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
 				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" />
 <?php
 				// captcha code starts
@@ -192,9 +192,9 @@ if (time() - $engine->sess->ap_last_activity > 900) //1800
 {
 	// last request was more than 15 minutes ago
 	unset($engine->sess->ap_created);
-	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
+	$engine->log(1, $engine->_t('LogAdminLogout', $engine->config['language']));
 
-	$engine->set_message($engine->get_translation('LoggedOutAuto'));
+	$engine->set_message($engine->_t('LoggedOutAuto'));
 	$engine->redirect('admin.php');
 }
 

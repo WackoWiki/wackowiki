@@ -326,14 +326,14 @@ if ($form)
 {
 	echo $this->form_open('search', ['form_method' => 'get']);
 
-	echo '<label for="searchfor">'.$this->get_translation('SearchFor').':</label><br />';
+	echo '<label for="searchfor">'.$this->_t('SearchFor').':</label><br />';
 	echo '<input type="search" name="phrase" id="searchfor" size="40" value="'.(isset($_GET['phrase']) ? htmlspecialchars($_GET['phrase'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" />';
-	echo '<input type="submit" value="'.$this->get_translation('SearchButtonText').'" /><br />';
+	echo '<input type="submit" value="'.$this->_t('SearchButtonText').'" /><br />';
 
 	if ($options == 1)
 	{
 		echo '<input type="checkbox" name="topic" '.($mode == 'topic' ? ' checked="checked"' : '' ).' id="checkboxSearch" />';
-		echo '<label for="checkboxSearch">'.$this->get_translation('TopicSearchText').'</label>';
+		echo '<label for="checkboxSearch">'.$this->_t('TopicSearchText').'</label>';
 	}
 
 	echo $this->form_close();
@@ -433,7 +433,7 @@ if ($phrase)
 			if (!$nomark)
 			{
 				echo '<div class="layout-box"><p class="layout-box"><span>'.
-					$this->get_translation(($mode == 'topic' ? 'Topic' : '').'SearchResults').
+					$this->_t(($mode == 'topic' ? 'Topic' : '').'SearchResults').
 					' "'.$phrase.'" (<strong>'.$i.'</strong>):</span></p>';
 			}
 
@@ -449,12 +449,12 @@ if ($phrase)
 		}
 		else if (!$nomark)
 		{
-			echo $this->get_translation('NoResultsFor').' "'.$phrase.'".';
+			echo $this->_t('NoResultsFor').' "'.$phrase.'".';
 		}
 	}
 	else
 	{
-		if (!$nomark) echo $this->get_translation('NoResultsFor').' "'.$phrase.'".';
+		if (!$nomark) echo $this->_t('NoResultsFor').' "'.$phrase.'".';
 	}
 }
 

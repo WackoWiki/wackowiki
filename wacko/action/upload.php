@@ -55,11 +55,11 @@ if ($this->can_upload(true) === true)
 <table >
 	<tr>
 		<td>
-			<label for="file_upload"><?php echo $this->get_translation('UploadFor');?>:&nbsp;</label>
+			<label for="file_upload"><?php echo $this->_t('UploadFor');?>:&nbsp;</label>
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" />
 		</td>
 		<td style="white-space: nowrap;">
-			<input type="file" name="file" id="file_upload" />&nbsp;(<?php echo $this->get_translation('UploadMax').$this->binary_multiples(($this->config['upload_max_size']), false, true, true);?>)
+			<input type="file" name="file" id="file_upload" />&nbsp;(<?php echo $this->_t('UploadMax').$this->binary_multiples(($this->config['upload_max_size']), false, true, true);?>)
 		</td>
 	</tr>
 	<?php
@@ -70,7 +70,7 @@ if ($this->can_upload(true) === true)
 		<td>
 			<div>
 				<input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="upload_global_disabled" />
-				<input type="hidden" name="to" value="global" /> <?php echo $this->get_translation('UploadGlobalText'); ?>
+				<input type="hidden" name="to" value="global" /> <?php echo $this->_t('UploadGlobalText'); ?>
 			</div>
 		</td>
 	</tr>
@@ -83,11 +83,11 @@ if ($this->can_upload(true) === true)
 		<td>
 			<div>
 				<input type="radio" name="to" value="global" id="upload_global" />
-				<label for="upload_global"><?php echo $this->get_translation('UploadGlobalText'); ?></label>
+				<label for="upload_global"><?php echo $this->_t('UploadGlobalText'); ?></label>
 			</div>
 			<div>
 				<input type="radio" name="to" value="here" checked="checked" id="upload_to_page" />
-				<label for="upload_to_page"><?php echo $this->get_translation('UploadHereText'); ?></label>
+				<label for="upload_to_page"><?php echo $this->_t('UploadHereText'); ?></label>
 			</div>
 		</td>
 	</tr>
@@ -97,7 +97,7 @@ if ($this->can_upload(true) === true)
 	{ ?>
 	<tr>
 		<td style="text-align: right">
-			<label for="upload_desc"><?php echo $this->get_translation('UploadDesc');?>:&nbsp;</label>
+			<label for="upload_desc"><?php echo $this->_t('UploadDesc');?>:&nbsp;</label>
 		</td>
 		<td>
 			<input type="text" name="file_description" id="upload_desc" size="60" maxlength="250"/>
@@ -108,7 +108,7 @@ if ($this->can_upload(true) === true)
 		<td>&nbsp;</td>
 		<td>
 			<div style="padding-top: 5px">
-				<input type="submit" value="<?php echo $this->get_translation('UploadButtonText'); ?>" />
+				<input type="submit" value="<?php echo $this->_t('UploadButtonText'); ?>" />
 			</div>
 		</td>
 	</tr>
@@ -119,7 +119,7 @@ if ($this->can_upload(true) === true)
 }
 else
 {
-	echo '<em>'.$this->get_translation('UploadForbidden').'</em>';
+	echo '<em>'.$this->_t('UploadForbidden').'</em>';
 }
 
 ?>

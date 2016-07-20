@@ -45,13 +45,13 @@ class Feed
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->charset."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentChangesTitleXML')."</title>\n";
+		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->_t('RecentChangesTitleXML')."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
-		$xml .= "<description>".$this->engine->get_translation('RecentChangesXML').$this->engine->config['site_name']." </description>\n";
+		$xml .= "<description>".$this->engine->_t('RecentChangesXML').$this->engine->config['site_name']." </description>\n";
 		$xml .= '<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentCommentsTitleXML')."</title>\n";
+		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->_t('RecentCommentsTitleXML')."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
 		$xml .= "<url>".$this->engine->config['base_url']."image/wacko_logo.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -81,10 +81,10 @@ class Feed
 					$xml .= "<link>".$this->engine->href('', $page['tag'], '')."</link>\n";
 					$xml .= "<guid>".$this->engine->href('', $page['tag'], '')."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".
+					$xml .= "<description>".$page['modified']." ".$this->engine->_t('By')." ".
 						($page['user_name']
 							? $page['user_name']
-							: $this->engine->get_translation('Guest')).
+							: $this->engine->_t('Guest')).
 						($page['edit_note']
 							? ' ['.$page['edit_note'].']'
 							: '').
@@ -158,15 +158,15 @@ class Feed
 				// TODO: atom.css
 				'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> '."\n".
 					'<channel>'."\n".
-						'<title>'.$this->engine->config['site_name'].$this->engine->get_translation('RecentNewsTitleXML').'</title>'."\n".
+						'<title>'.$this->engine->config['site_name'].$this->engine->_t('RecentNewsTitleXML').'</title>'."\n".
 						'<link>'.$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($news_cluster)).'</link>'."\n".
-						'<description>'.$this->engine->get_translation('RecentNewsXML').$this->engine->config['site_name'].'</description>'."\n".
+						'<description>'.$this->engine->_t('RecentNewsXML').$this->engine->config['site_name'].'</description>'."\n".
 						'<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n".
 						'<language>'.$this->lang.'</language>'."\n".
 						'<pubDate>'.date('r').'</pubDate>'."\n".
 						'<lastBuildDate>'.date('r').'</lastBuildDate>'."\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentNewsTitleXML')."</title>\n";
+		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->_t('RecentNewsTitleXML')."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($news_cluster))."</link>\n";
 		$xml .= "<url>".$this->engine->config['base_url']."image/wacko_logo.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -240,13 +240,13 @@ class Feed
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config['theme_url']."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentCommentsTitleXML')."</title>\n";
+		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->_t('RecentCommentsTitleXML')."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
-		$xml .= "<description>".$this->engine->get_translation('RecentCommentsXML').$this->engine->config['site_name']." </description>\n";
+		$xml .= "<description>".$this->engine->_t('RecentCommentsXML').$this->engine->config['site_name']." </description>\n";
 		$xml .= '<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentCommentsTitleXML')."</title>\n";
+		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->_t('RecentCommentsTitleXML')."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
 		$xml .= "<url>".$this->engine->config['base_url']."image/wacko_logo.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -284,10 +284,10 @@ class Feed
 					}
 
 					$xml .= "<item>\n";
-					$xml .= "<title>".$comment['title']." ".$this->engine->get_translation('To')." ".$comment['page_title']." ".$this->engine->get_translation('From')." ".
+					$xml .= "<title>".$comment['title']." ".$this->engine->_t('To')." ".$comment['page_title']." ".$this->engine->_t('From')." ".
 						($comment['user_name']
 							? $comment['user_name']
-							: $this->engine->get_translation('Guest')).
+							: $this->engine->_t('Guest')).
 						"</title>\n";
 					$xml .= "<link>".$this->engine->href('', $comment['tag'], '')."</link>\n";
 					$xml .= "<guid>".$this->engine->href('', $comment['tag'], '')."</guid>\n";

@@ -107,7 +107,7 @@ if ($tags)
 
 	if(!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('TagCloud').":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('TagCloud').":</span></p>\n";
 	}
 
 	print_tag_cloud($this, $this->cloud);

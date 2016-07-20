@@ -33,12 +33,12 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	<?php if ($this->config['policy_page']) {?>
 	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
 	<?php } ?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('ChangesFeed');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('CommentsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
 	<?php if ($this->config['news_cluster']) {?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('NewsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('NewsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
 	<?php } ?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -108,10 +108,10 @@ if ($doubleclick == true)
 
 							// compose link with icon to bookmarks list
 							// TODO: add BookmarkTip to translation
-							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"".$this->config['theme_url']."icon/bookmark.png\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a>";
+							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"".$this->config['theme_url']."icon/bookmark.png\" title=\"".$this->_t('ReferrersTip')."\" alt=\"".$this->_t('ReferrersText')."\" /></a>";
 
 							// display bookmarks text
-							# ".$this->get_translation('Bookmarks')."
+							# ".$this->_t('Bookmarks')."
 
 						echo "<ol>\n";
 						// main page
@@ -159,16 +159,16 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icon/spacer.png\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->_t('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icon/spacer.png\" /></a></div>";
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icon/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->_t('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icon/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
+							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('CantAddBookmarks').'" /></div>';
 						}
 						echo "\n";
 
@@ -183,7 +183,7 @@ if ($doubleclick == true)
 					if ($this->get_user())
 					{
 						// compose user identity icon with link to user page
-						echo "<a href=\"".$this->config['base_url'].$this->config['users_page']."/".$this->get_user_name()."\"><img src=\"".$this->config['theme_url']."icon/user_identity_white.png\" title=\"".$this->get_translation('YouAre').$this->get_user_name()."\" alt=\"".$this->get_translation('YouAre').$this->get_user_name()."\" /></a>\n";
+						echo "<a href=\"".$this->config['base_url'].$this->config['users_page']."/".$this->get_user_name()."\"><img src=\"".$this->config['theme_url']."icon/user_identity_white.png\" title=\"".$this->_t('YouAre').$this->get_user_name()."\" alt=\"".$this->_t('YouAre').$this->get_user_name()."\" /></a>\n";
 						?>
 						<span class="nobr">
 						<?php
@@ -196,17 +196,17 @@ if ($doubleclick == true)
 						(
 						<?php
 						// compose user account settings icon with link to account settings page
-						echo "<a href=\"".$this->config['base_url'].$this->get_translation('AccountLink')."\"><img src=\"".$this->config['theme_url']."icon/account_settings_white.png\" title=\"".$this->get_translation('AccountTip')."\" alt=\"".$this->get_translation('AccountTip')."\" /></a>\n";
+						echo "<a href=\"".$this->config['base_url'].$this->_t('AccountLink')."\"><img src=\"".$this->config['theme_url']."icon/account_settings_white.png\" title=\"".$this->_t('AccountTip')."\" alt=\"".$this->_t('AccountTip')."\" /></a>\n";
 						// display link to user settings page
-						echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0);
+						echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0);
 						// display logout icon and link
 						?>
 						 |
-						<a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo "<img src=\"".$this->config['theme_url']."icon/logout.png\" title=\"".$this->get_translation('LogoutButton')."\" alt=\"".$this->get_translation('LogoutButton')."\" />"; ?>
+						<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
+							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo "<img src=\"".$this->config['theme_url']."icon/logout.png\" title=\"".$this->_t('LogoutButton')."\" alt=\"".$this->_t('LogoutButton')."\" />"; ?>
 						</a>
-						<a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?>
+						<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
+							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?>
 						</a>
 						)
 					<?php
@@ -215,9 +215,9 @@ if ($doubleclick == true)
 					else
 					{
 						// show register / login link
-						echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage'), "", $this->get_translation('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
-						echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n";
-						// echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('Help'), 0)."</li>\n";
+						echo "<ul>\n<li>".$this->compose_link_to_page($this->_t('LoginPage'), "", $this->_t('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
+						echo "<li>".$this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('RegistrationPage'), 0)."</li>\n";
+						// echo "<li>".$this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('Help'), 0)."</li>\n";
 						echo "</ul>\n";
 					}
 					// End if
@@ -288,13 +288,13 @@ if ($doubleclick == true)
 		<div id="search">
 		<?php
 		// opens search form
-		echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage'));
+		echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage'));
 
 		// searchbar
 		?>
-		<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
+		<span class="search nobr"><label for="phrase"><?php echo $this->_t('SearchText'); ?></label>
 		<input type="search" name="phrase" id="phrase" size="15" />
-		<input type="submit" id="search-submit-button" class="submitinput" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>" />
+		<input type="submit" id="search-submit-button" class="submitinput" title="<?php echo $this->_t('SearchButtonText') ?>" alt="<?php echo $this->_t('SearchButtonText') ?>" value="<?php echo $this->_t('SearchButtonText') ?>" />
 		</span>
 		<?php
 		// search form close
@@ -341,7 +341,7 @@ if ($doubleclick == true)
 			<div id="sidebar-toc-list-wrapper" class="toc-list-wrapper sidebar-box">
 				<div id="sidebar-toc-list-header" class="toc-list-header sidebar-box-header">
 				<?php
-				echo $this->get_translation('TOCTitle');
+				echo $this->_t('TOCTitle');
 				?>
 				</div>
 				<div id="sidebar-toc-list" class="sidebar-toc-list">
@@ -356,8 +356,8 @@ if ($doubleclick == true)
 			<div id="sidebar-tree-wrapper" class="tree-wrapper sidebar-box">
 				<div id="sidebar-tree-header" class="tree-header sidebar-box-header">
 				<?php
-				// $this->get_translation('TreeClusterTitle');
-				echo $this->get_translation('TreeClusterHeader'); // subpages (de: Unterseiten)
+				// $this->_t('TreeClusterTitle');
+				echo $this->_t('TreeClusterHeader'); // subpages (de: Unterseiten)
 				?>
 				</div>
 
@@ -393,7 +393,7 @@ if ($doubleclick == true)
 				<div id="sidebar-user-bookmarks-header" class="user-bookmarks-header sidebar-box-header">
 				<span>
 				<?php
-				echo $this->get_translation('Bookmarks');
+				echo $this->_t('Bookmarks');
 				?>
 				</span>
 				</div>
@@ -424,16 +424,16 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icon/spacer.png\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->_t('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icon/spacer.png\" /></a></div>";
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icon/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->_t('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icon/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
+							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('CantAddBookmarks').'" /></div>';
 						}
 						echo "\n";
 
@@ -448,7 +448,7 @@ if ($doubleclick == true)
 			<div id="sidebar-page-recent-comments-wrapper" class="page-recent-comments-wrapper sidebar-box">
 				<div id="sidebar-page-recent-comments-header" class="page-recent-comments-header sidebar-box-header">
 				<?php
-				echo $this->get_translation('RecentCommentsThisPage');
+				echo $this->_t('RecentCommentsThisPage');
 				?>
 				</div>
 				<div id="sidebar-page-recent-comments-list" class="sidebar-page-recent-comments-list">
@@ -464,7 +464,7 @@ if ($doubleclick == true)
 			<div id="sidebar-page-categories-wrapper" class="page-categories-wrapper sidebar-box">
 				<div id="sidebar-page-categories-header" class="page-categories-header sidebar-box-header">
 				<?php
-				echo $this->get_translation('Categories');
+				echo $this->_t('Categories');
 				?>
 				</div>
 				<div id="sidebar-page-categories-list" class="sidebar-page-categories-list">
@@ -497,7 +497,7 @@ if ($doubleclick == true)
 						{
 							// TODO: add translation TocTip and TocText
 							// compose image to indicate a toc-list
-							echo "<a class=\"toc-icon\"><img src=\"".$this->config['theme_url']."icon/toc_ordered.png\" title=\"".$this->get_translation('MetaToc')."\" alt=\"".$this->get_translation('MetaToc')."\" /></a>\n";
+							echo "<a class=\"toc-icon\"><img src=\"".$this->config['theme_url']."icon/toc_ordered.png\" title=\"".$this->_t('MetaToc')."\" alt=\"".$this->_t('MetaToc')."\" /></a>\n";
 
 							// display the page toc list, numerated (?), without labels and markup
 							// toc numerated does not work as intended
@@ -526,7 +526,7 @@ if ($doubleclick == true)
 					// display a "back-to-page" button/icon next to the page tag/title
 					if ($this->method !== 'show')
 					{
-						echo "<a href=\"".$this->config['base_url'].$this->tag."\"><img src=\"".$this->config['theme_url']."icon/show_back.png\" title=\"".$this->get_translation('ShowTip')."\" alt=\"".$this->get_translation('ShowText')."\" /></a>";
+						echo "<a href=\"".$this->config['base_url'].$this->tag."\"><img src=\"".$this->config['theme_url']."icon/show_back.png\" title=\"".$this->_t('ShowTip')."\" alt=\"".$this->_t('ShowText')."\" /></a>";
 					}
 					?>
 				</div>
@@ -602,8 +602,8 @@ if ($doubleclick == true)
 					// show tab
 					#echo echo_tab(
 					#	$this->href('show'),
-					#	$this->get_translation('ShowTip'),
-					#	$this->has_access('read') ? $this->get_translation('ShowText') : '',
+					#	$this->_t('ShowTip'),
+					#	$this->has_access('read') ? $this->_t('ShowText') : '',
 					#	$this->method == 'show',
 					#	1,
 					#	'',
@@ -612,11 +612,11 @@ if ($doubleclick == true)
 					// edit tab
 					echo echo_tab(
 						$this->href('edit'),
-						$this->get_translation('EditTip'),
+						$this->_t('EditTip'),
 						((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 							($this->forum === false && $this->has_access('write')) ||
 							($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
-							? $this->get_translation('EditText') : '',
+							? $this->_t('EditText') : '',
 						$this->method == 'edit',
 						1,
 						'',
@@ -625,26 +625,26 @@ if ($doubleclick == true)
 					// revisions tab
 					echo echo_tab(
 						$this->href('revisions'),
-						$this->get_translation('RevisionTip'),
-						($this->forum === false && $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
+						$this->_t('RevisionTip'),
+						($this->forum === false && $this->page && $this->has_access('read')) ? $this->_t('RevisionText') : '',
 						$this->method == 'revisions' || $this->method == 'diff',
 						1,
 						'',
 						'r');
 
 					// show more tab
-					// TODO: add translation to all theme translations ... $this->get_translation('PageHandlerMoreTip')
+					// TODO: add translation to all theme translations ... $this->_t('PageHandlerMoreTip')
 					// display more icon with descriptive text
-					# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icon/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> more</a> \n";
+					# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icon/more.png\" title=\"".$this->_t('PageHandlerMoreTip')."\" alt=\"".$this->_t('PageHandlerMoreTip')."\" /> more</a> \n";
 					// display 'more' text that shows a list with page handlers on hover
-					echo "<li class='sublist'><a href='#' id='more'>".$this->get_translation('PageHandlerMoreTip')."</a> \n\t";
+					echo "<li class='sublist'><a href='#' id='more'>".$this->_t('PageHandlerMoreTip')."</a> \n\t";
 						echo "<ul class='sublist'>\n\t";
 
 						// upload tab
 						echo echo_tab(
 							$this->href('upload'),
-							$this->get_translation('FilesTip'),
-							($this->forum === false && $this->page /*&& $this->has_access('upload')*/) ? $this->get_translation('FilesText') : '',
+							$this->_t('FilesTip'),
+							($this->forum === false && $this->page /*&& $this->has_access('upload')*/) ? $this->_t('FilesText') : '',
 							$this->method == 'upload',
 							1,
 							'',
@@ -653,11 +653,11 @@ if ($doubleclick == true)
 						// create tab
 						echo echo_tab(
 							$this->href('new'),
-							$this->get_translation('CreateNewPageTip'),
+							$this->_t('CreateNewPageTip'),
 							((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 								($this->forum === false && $this->has_access('write')) ||
 								($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
-								? $this->get_translation('CreateNewPageText') : '',
+								? $this->_t('CreateNewPageText') : '',
 							$this->method == 'new',
 							1,
 							'',
@@ -667,8 +667,8 @@ if ($doubleclick == true)
 						// TODO: should add 'PrintTip' to the language file
 						echo echo_tab(
 							$this->href('print'),
-							$this->get_translation('PrintVersion'),
-							$this->has_access('read') ? $this->get_translation('PrintVersion') : '',
+							$this->_t('PrintVersion'),
+							$this->has_access('read') ? $this->_t('PrintVersion') : '',
 							$this->method == 'print',
 							1,
 							'',
@@ -677,11 +677,11 @@ if ($doubleclick == true)
 						// remove tab used to be named delete
 						echo echo_tab(
 							$this->href('remove'),
-							$this->get_translation('DeleteTip'),
+							$this->_t('DeleteTip'),
 							($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
 								($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
 								($this->forum === false && $this->is_owner()))))
-								? $this->get_translation('DeleteText') : '',
+								? $this->_t('DeleteText') : '',
 							$this->method == 'remove',
 							1,
 							'',
@@ -691,11 +691,11 @@ if ($doubleclick == true)
 						// TODO: validate this forum BS, only copy & paste from above
 						echo echo_tab(
 							$this->href('rename'),
-							$this->get_translation('RenameText'),
+							$this->_t('RenameText'),
 							($this->page && (($this->is_admin() || $this->is_owner()) && (
 								($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
 								($this->forum === false && $this->is_owner()))))
-								? $this->get_translation('RenameText') : '',
+								? $this->_t('RenameText') : '',
 							$this->method == 'rename',
 							1,
 							'',
@@ -704,8 +704,8 @@ if ($doubleclick == true)
 						// moderation tab
 						echo echo_tab(
 							$this->href('moderate'),
-							$this->get_translation('ModerateTip'),
-							($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
+							$this->_t('ModerateTip'),
+							($this->is_moderator() && $this->has_access('read')) ? $this->_t('ModerateText') : '',
 							$this->method == 'moderate',
 							1,
 							'',
@@ -714,8 +714,8 @@ if ($doubleclick == true)
 						// permissions tab
 						echo echo_tab(
 							$this->href('permissions'),
-							$this->get_translation('ACLTip'),
-							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('ACLText') : '',
+							$this->_t('ACLTip'),
+							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->_t('ACLText') : '',
 							$this->method == 'permissions',
 							1,
 							'',
@@ -724,8 +724,8 @@ if ($doubleclick == true)
 						// categories tab
 						echo echo_tab(
 							$this->href('categories'),
-							$this->get_translation('CategoriesTip'),
-							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('CategoriesText') : '',
+							$this->_t('CategoriesTip'),
+							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->_t('CategoriesText') : '',
 							$this->method == 'categories',
 							1,
 							'',
@@ -734,8 +734,8 @@ if ($doubleclick == true)
 						// referrers tab
 						echo echo_tab(
 							$this->href('referrers'),
-							$this->get_translation('ReferrersTip'),
-							($this->page && $this->has_access('read')) ? $this->get_translation('ReferrersText') : '',
+							$this->_t('ReferrersTip'),
+							($this->page && $this->has_access('read')) ? $this->_t('ReferrersText') : '',
 							$this->method == 'referrers' || $this->method == 'referrers_sites',
 							1,
 							'',
@@ -744,16 +744,16 @@ if ($doubleclick == true)
 						// watch tab
 						#echo echo_tab(
 						#	$this->href(($this->is_watched === true ? 'watch-on' : 'watch-off')),
-						#	($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
-						#	($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+						#	($this->is_watched === true ? $this->_t('RemoveWatch') : $this->_t('SetWatch')),
+						#	($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnWatchText') : $this->_t('WatchText') ) : '',
 						#	$this->method == 'watch',
 						#	1,
 						#	'a');
 
 						echo echo_tab(
 							$this->href('watch'),
-							($this->is_watched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
-							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ): '',
+							($this->is_watched === true ? $this->_t('RemoveWatch') : $this->_t('SetWatch')),
+							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnWatchText') : $this->_t('WatchText') ): '',
 							$this->method == 'watch',
 							1,
 							($this->is_watched === true ? 'watch-on.png' : 'watch-off.png'),
@@ -762,8 +762,8 @@ if ($doubleclick == true)
 						// review tab
 						echo echo_tab(
 							$this->href('review'),
-							($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview')),
-							($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? ($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview') ) : '',
+							($this->page['reviewed'] == 1 ? $this->_t('RemoveReview') : $this->_t('SetReview')),
+							($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? ($this->page['reviewed'] == 1 ? $this->_t('RemoveReview') : $this->_t('SetReview') ) : '',
 							$this->method == 'review',
 							1,
 							($this->page['reviewed'] == 1 ? 'review-remove.png' : 'review-set.png'),
@@ -772,8 +772,8 @@ if ($doubleclick == true)
 						// properties tab
 						echo echo_tab(
 							$this->href('properties'),
-							$this->get_translation('PropertiesTip'),
-							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('PropertiesText') : '',
+							$this->_t('PropertiesTip'),
+							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->_t('PropertiesText') : '',
 							$this->method == 'properties' || $this->method == 'purge' || $this->method == 'keywords',
 							1,
 							'',
@@ -805,8 +805,8 @@ if ($doubleclick == true)
 						// make sure to escape slashes within the supertag properly: \/
 						preg_match('/^users\/wikiadmin/i', $this->page['supertag']) )
 					{
-						// TODO: add translation for all other languages ... $this->get_translation('ReviewNoticeUserAttention')
-						echo "<a href=\"".$this->config['base_url'].$this->tag."/revisions"."\">".$this->get_translation('ReviewNoticeUserAttention')."</a>";
+						// TODO: add translation for all other languages ... $this->_t('ReviewNoticeUserAttention')
+						echo "<a href=\"".$this->config['base_url'].$this->tag."/revisions"."\">".$this->_t('ReviewNoticeUserAttention')."</a>";
 					}
 					else
 					{

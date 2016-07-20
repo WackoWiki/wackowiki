@@ -17,7 +17,7 @@ if ($this->has_access('read'))
 {
 	if (!$this->page['latest'])
 	{
-		$message = Ut::perc_replace($this->get_translation('Revision'),
+		$message = Ut::perc_replace($this->_t('Revision'),
 			$this->href(),
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),
@@ -30,5 +30,5 @@ if ($this->has_access('read'))
 }
 else
 {
-	$this->show_message($this->get_translation('ReadAccessDenied'), 'error');
+	$this->show_message($this->_t('ReadAccessDenied'), 'error');
 }

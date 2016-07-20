@@ -53,12 +53,12 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			if (!$topic_name)
 			{
-				$error = $this->get_translation('ForumNoTopicName');
+				$error = $this->_t('ForumNoTopicName');
 			}
 		}
 		else
 		{
-			$error = $this->get_translation('ForumNoTopicName');
+			$error = $this->_t('ForumNoTopicName');
 		}
 
 		// display error or continue
@@ -158,17 +158,17 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	{
 		// display list
 		echo '<div style="clear: both;">'.
-				'<p style="float: left">'.($create_access ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>';
+				'<p style="float: left">'.($create_access ? '<strong><small class="cite"><a href="#newtopic">'.$this->_t('ForumNewTopic').'</a></small></strong>' : '').'</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 
 		echo '<table class="forum">'.
 				'<thead><tr>'.
-					'<th>'.$this->get_translation('ForumTopic').'</th>'.
-					'<th>'.$this->get_translation('ForumAuthor').'</th>'.
-					'<th>'.$this->get_translation('ForumReplies').'</th>'.
-					'<th>'.$this->get_translation('ForumViews').'</th>'.
-					'<th colspan="2">'.$this->get_translation('ForumLastComment').'</th>'.
+					'<th>'.$this->_t('ForumTopic').'</th>'.
+					'<th>'.$this->_t('ForumAuthor').'</th>'.
+					'<th>'.$this->_t('ForumReplies').'</th>'.
+					'<th>'.$this->_t('ForumViews').'</th>'.
+					'<th colspan="2">'.$this->_t('ForumLastComment').'</th>'.
 				'</tr></thead>'."\n";
 
 		foreach ($topics as $topic)
@@ -207,16 +207,16 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 				// load related categories
 				$_category = $this->get_categories($topic['page_id']);
-				$_category = !empty($_category) ? '<br />'./* $this->get_translation('Category').': '. */$_category : '';
+				$_category = !empty($_category) ? '<br />'./* $this->_t('Category').': '. */$_category : '';
 
 				// print
 				echo '<tbody class="lined"><tr style="background-color: #f9f9f9;">'.
 						'<td style="text-align:left;">'.
 						( !$this->has_access('comment', $topic['page_id'], GUEST)
-							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>'
+							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" class="btn-locked"/>'
 							: '' ).
 						( $updated
-							? '<strong><span class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
+							? '<strong><span class="cite" title="'.$this->_t('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 							: '<strong>'.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 						).
 						'</td>'.
@@ -251,7 +251,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 		echo '</table>'."\n";
 
-		echo '<div class="clearfix"><p style="float: left">'.( $user ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</p>';
+		echo '<div class="clearfix"><p style="float: left">'.( $user ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>' : '' ).'</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 	}
@@ -264,10 +264,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		<a id="newtopic"></a><br />
 		<table class="formation">
 			<tr>
-				<td class="label"><label for="topictitle"><?php echo $this->get_translation('ForumTopicName'); ?>:</label></td>
+				<td class="label"><label for="topictitle"><?php echo $this->_t('ForumTopicName'); ?>:</label></td>
 				<td>
 					<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="" />
-					<input type="submit" id="submit" value="<?php echo $this->get_translation('ForumTopicSubmit'); ?>" />
+					<input type="submit" id="submit" value="<?php echo $this->_t('ForumTopicSubmit'); ?>" />
 				</td>
 			</tr>
 		</table>

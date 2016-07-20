@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page();
 
-echo '<h3>' . $this->get_translation('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
+echo '<h3>' . $this->_t('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
 
 if ($user = $this->get_user())
 {
@@ -31,7 +31,7 @@ if ($registered
 {
 	if (!$this->page)
 	{
-		$message .= Ut::perc_replace($this->get_translation('DoesNotExists'), $this->href('edit'));
+		$message .= Ut::perc_replace($this->_t('DoesNotExists'), $this->href('edit'));
 	}
 	else
 	{
@@ -59,13 +59,13 @@ if ($registered
 				{
 					if ($this->remove_referrers($this->tag))
 					{
-						$message .= '<li>'.$this->get_translation('ReferrersRemoved')."</li>\n";
+						$message .= '<li>'.$this->_t('ReferrersRemoved')."</li>\n";
 					}
 				}
 
 				if ($this->rename_page($this->tag, $new_name, $super_new_name))
 				{
-					$message .= '<li>'.$this->get_translation('PageRenamed')."</li>\n";
+					$message .= '<li>'.$this->_t('PageRenamed')."</li>\n";
 				}
 
 				$this->clear_cache_wanted_page($new_name);
@@ -78,25 +78,25 @@ if ($registered
 
 					if ($this->save_page($this->tag, '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.Ut::perc_replace($this->get_translation('RedirectCreated'), $this->link($this->tag))."</li>\n";
+						$message .= '<li>'.Ut::perc_replace($this->_t('RedirectCreated'), $this->link($this->tag))."</li>\n";
 					}
 
 					$this->clear_cache_wanted_page($this->tag);
 					$this->clear_cache_wanted_page($this->supertag);
 				}
 
-				$message .= '<li>'.$this->get_translation('NewNameOfPage').$this->link('/'.$new_name)."</li>\n";
+				$message .= '<li>'.$this->_t('NewNameOfPage').$this->link('/'.$new_name)."</li>\n";
 
 				// log event
-				$this->log(3, Ut::perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $this->tag, $new_name).
-					($need_redirect? $this->get_translation('LogRenamedPage2', $this->config['language']) : '' ));
+				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', $this->config['language']), $this->tag, $new_name).
+					($need_redirect? $this->_t('LogRenamedPage2', $this->config['language']) : '' ));
 
 				$message .= "</ol>\n";
 			}
 			else
 			{
 				//massrename
-				$message .= '<p><strong>'.$this->get_translation('MassRenaming').'</strong><p>';   //!!!
+				$message .= '<p><strong>'.$this->_t('MassRenaming').'</strong><p>';   //!!!
 				$message .= recursive_move($this, $this->tag, $new_name);
 			}
 
@@ -111,7 +111,7 @@ if ($registered
 		}
 		else
 		{
-			echo $this->get_translation('NewName');
+			echo $this->_t('NewName');
 			echo $this->form_open('rename_page', ['page_method' => 'rename']);
 
 			?>
@@ -126,13 +126,13 @@ if ($registered
 				echo 'checked="checked"';
 			};
 
-			echo ' /><label for="redirect"> '.$this->get_translation('NeedRedirect').'</label>'; ?>
+			echo ' /><label for="redirect"> '.$this->_t('NeedRedirect').'</label>'; ?>
 <br />
 			<?php
 			if ($this->check_acl($user_name, $this->config['rename_globalacl']))
 			{
 				echo '<input type="checkbox" id="massrename" name="massrename" />';
-				echo '<label for="massrename"> '.$this->get_translation('MassRename').'</label>';
+				echo '<label for="massrename"> '.$this->_t('MassRename').'</label>';
 			}
 			?>
 <br />
@@ -143,8 +143,8 @@ if ($registered
 			?>
 <br />
 <br />
-<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->get_translation('RenameButton'); ?>" /> &nbsp;
-<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
+<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RenameButton'); ?>" /> &nbsp;
+<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
 <br />
 <br />
 			<?php echo $this->form_close();
@@ -153,7 +153,7 @@ if ($registered
 }
 else
 {
-	$this->show_message($this->get_translation('NotOwnerAndCantRename'), 'info');
+	$this->show_message($this->_t('NotOwnerAndCantRename'), 'info');
 }
 
 function recursive_move(&$parent, $root, $new_root)
@@ -216,18 +216,18 @@ function move(&$parent, $old_page, $new_name)
 
 		if (!preg_match('/^([\_\.\-'.$parent->language['ALPHANUM_P'].']+)$/', $new_name))
 		{
-			$message .= '<li>'.$parent->get_translation('InvalidWikiName')."</li>\n";
+			$message .= '<li>'.$parent->_t('InvalidWikiName')."</li>\n";
 		}
 		// if ($old_page['supertag'] == $super_new_name)
 		else if ($old_page['tag'] == $new_name)
 		{
-			$message .= '<li>'.Ut::perc_replace($parent->get_translation('AlreadyNamed'), $parent->link($new_name))."</li>\n";
+			$message .= '<li>'.Ut::perc_replace($parent->_t('AlreadyNamed'), $parent->link($new_name))."</li>\n";
 		}
 		else
 		{
 			if ($old_page['supertag'] != $super_new_name && $page = $parent->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$message .= '<li>'.Ut::perc_replace($parent->get_translation('AlredyExists'), $parent->link($new_name))."</li>\n";
+				$message .= '<li>'.Ut::perc_replace($parent->_t('AlredyExists'), $parent->link($new_name))."</li>\n";
 			}
 			else
 			{
@@ -238,13 +238,13 @@ function move(&$parent, $old_page, $new_name)
 				{
 					if ($parent->remove_referrers($old_page['tag']))
 					{
-						$message .= '<li>'.$parent->get_translation('ReferrersRemoved')."</li>\n";
+						$message .= '<li>'.$parent->_t('ReferrersRemoved')."</li>\n";
 					}
 				}
 
 				if ($parent->rename_page($old_page['tag'], $new_name, $super_new_name))
 				{
-					$message .= '<li>'.$parent->get_translation('PageRenamed')."</li>\n";
+					$message .= '<li>'.$parent->_t('PageRenamed')."</li>\n";
 				}
 
 				$parent->clear_cache_wanted_page($new_name);
@@ -257,18 +257,18 @@ function move(&$parent, $old_page, $new_name)
 
 					if ($parent->save_page($old_page['tag'], '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.Ut::perc_replace($parent->get_translation('RedirectCreated'), $parent->link($old_page['tag']))."</li>\n";
+						$message .= '<li>'.Ut::perc_replace($parent->_t('RedirectCreated'), $parent->link($old_page['tag']))."</li>\n";
 					}
 
 					$parent->clear_cache_wanted_page($old_page['tag']);
 					$parent->clear_cache_wanted_page($old_page['supertag']);
 				}
 
-				$message .= '<li>'.$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name)."</li>\n";
+				$message .= '<li>'.$parent->_t('NewNameOfPage').$parent->link('/'.$new_name)."</li>\n";
 
 				// log event
-				$parent->log(3, Ut::perc_replace($parent->get_translation('LogRenamedPage', $parent->config['language']), $old_page['tag'], $new_name).
-					($need_redirect? $parent->get_translation('LogRenamedPage2', $parent->config['language']) : '' ));
+				$parent->log(3, Ut::perc_replace($parent->_t('LogRenamedPage', $parent->config['language']), $old_page['tag'], $new_name).
+					($need_redirect? $parent->_t('LogRenamedPage2', $parent->config['language']) : '' ));
 			}
 		}
 

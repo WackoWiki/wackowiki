@@ -39,12 +39,12 @@ if (isset($page_id))
 				{
 					// This is the current revision of this page, as edited by [user_name] at [modified]. The present address (URL) is a permanent link to this version.
 					// This is an old revision of this page, as edited by [user_name] at [modified]. It may differ significantly from the current revision.
-					$this->show_message($this->get_translation((isset($revision_id) ? 'PermaLinkRevision' :'PermaLinkRecent'))." ".$this->link('/'.$page_tag));
+					$this->show_message($this->_t((isset($revision_id) ? 'PermaLinkRevision' :'PermaLinkRecent'))." ".$this->link('/'.$page_tag));
 
 					if (isset($revision_id))
 					{
 						echo '<div class="revisioninfo">'.
-							Ut::perc_replace($this->get_translation('Revision'),
+							Ut::perc_replace($this->_t('Revision'),
 								$this->href(),
 								$this->tag,
 								$this->get_time_formatted($_page['modified']),
@@ -56,28 +56,28 @@ if (isset($page_id))
 				}
 				else
 				{
-					$this->set_message($this->get_translation('PermaLinkRedirected').': '.$page_id);
+					$this->set_message($this->_t('PermaLinkRedirected').': '.$page_id);
 					$this->redirect($this->href('', $page_tag, (!empty($revision_id) ? 'revision_id='.$revision_id : '') ));
 				}
 			}
 			else
 			{
-				#$this->set_message($this->get_translation('PermaLinkRedirected').': '.$page_id);
+				#$this->set_message($this->_t('PermaLinkRedirected').': '.$page_id);
 				$this->redirect($this->href('', $page_tag, (!empty($revision_id) ? 'revision_id='.$revision_id : '') ));
 			}
 		}
 		else
 		{
-			$this->show_message('<em>'.$this->get_translation('WrongPage4Redirect').'</em>');
+			$this->show_message('<em>'.$this->_t('WrongPage4Redirect').'</em>');
 		}
 	}
 	else
 	{
-		$this->show_message('<em>'.$this->get_translation('WrongPage4Redirect').'</em>');
+		$this->show_message('<em>'.$this->_t('WrongPage4Redirect').'</em>');
 	}
 }
 else
 {
-	$this->show_message($this->get_translation('PermaLinkEmpty'));
+	$this->show_message($this->_t('PermaLinkEmpty'));
 
 }

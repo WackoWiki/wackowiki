@@ -51,20 +51,20 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 			$vote = $header['poll_id'];
 
 			// update cache
-			$this->set_message($this->get_translation('PollsDone'));
+			$this->set_message($this->_t('PollsDone'));
 			$this->http->invalidate_page($this->supertag);
 		}
 	}
 	else if ($polls_obj->poll_is_voted($header['poll_id']))
 	{
 		$vote = $header['poll_id'];
-		$this->set_message($this->get_translation('PollsAlreadyVoted'));
+		$this->set_message($this->_t('PollsAlreadyVoted'));
 		$this->http->invalidate_page($this->supertag);
 	}
 	else if ($header['start'] && $header['end'])
 	{
 		$vote = $header['poll_id'];
-		$this->set_message($this->get_translation('PollsAlreadyEnded'));
+		$this->set_message($this->_t('PollsAlreadyEnded'));
 		$this->http->invalidate_page($this->supertag);
 	}
 	else
@@ -123,7 +123,7 @@ else
 	else
 	{
 		echo '<table class="formation"><tr><td><em>';
-		echo $this->get_translation('PollsNone');
+		echo $this->_t('PollsNone');
 		echo '</em></td></tr></table>';
 	}
 }

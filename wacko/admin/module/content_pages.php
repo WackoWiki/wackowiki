@@ -139,29 +139,29 @@ function admin_content_pages(&$engine, &$module)
 	$pages = $engine->load_all(
 		"SELECT p.*, length(body) as page_size, u.* ".
 		"FROM {$engine->config['table_prefix']}page p ".
-			"LEFT JOIN {$engine->config['table_prefix']}user u ON (l.user_id = u.user_id) ".
-		( $where ? $where : "WHERE l.comment_on_id = '0' " ).
-		( $order ? $order : 'ORDER BY l.page_id DESC ' ).
+			"LEFT JOIN {$engine->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
+		( $where ? $where : "WHERE p.comment_on_id = '0' " ).
+		( $order ? $order : 'ORDER BY p.page_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");
 
 	echo $engine->form_open('content_pages');
 
 ?>
 		<div>
-			<h4><?php echo $engine->get_translation('LogFilterTip'); ?>:</h4><br />
-			<?php echo $engine->get_translation('LogLevel'); ?>
+			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br />
+			<?php echo $engine->_t('LogLevel'); ?>
 
 			<select name="level_mod">
-				<option value="not_lower"<?php echo ( !isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_lower') ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelNotLower'); ?></option>
-				<option value="not_higher"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_higher' ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelNotHigher'); ?></option>
-				<option value="equal"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'equal' ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelEqual'); ?></option>
+				<option value="not_lower"<?php echo ( !isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_lower') ? ' selected="selected"' : '' ); ?>><?php echo $engine->_t('LogLevelNotLower'); ?></option>
+				<option value="not_higher"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_higher' ? ' selected="selected"' : '' ); ?>><?php echo $engine->_t('LogLevelNotHigher'); ?></option>
+				<option value="equal"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'equal' ? ' selected="selected"' : '' ); ?>><?php echo $engine->_t('LogLevelEqual'); ?></option>
 			</select>
 
 <?php
 		// FIXME: add a common function for this?
 		echo '<select id="level" name="level">';
 
-		$languages = $engine->get_translation('LanguageArray');
+		$languages = $engine->_t('LanguageArray');
 
 		if ($engine->config['multilanguage'])
 		{
@@ -192,11 +192,11 @@ function admin_content_pages(&$engine, &$module)
 		<table style="padding: 3px;" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$ordertime; ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$orderlevel; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
-				<th><?php echo $engine->get_translation('LogEvent'); ?></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$ordersize; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
-				<th style="width:20px;"><?php echo $engine->get_translation('LogUsername'); ?></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$ordertime; ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$orderlevel; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
+				<th><?php echo $engine->_t('LogEvent'); ?></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$ordersize; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
+				<th style="width:20px;"><?php echo $engine->_t('LogUsername'); ?></th>
 			</tr>
 <?php
 	if ($pages)
@@ -206,27 +206,27 @@ function admin_content_pages(&$engine, &$module)
 			// level highlighting
 			/* if ($row['level'] == 1)
 			{
-				$row['level'] = '<strong class="red">'.$engine->get_translation('LogLevel1').'</strong>';
+				$row['level'] = '<strong class="red">'.$engine->_t('LogLevel1').'</strong>';
 			}
 			else if ($row['level'] == 2)
 			{
-				$row['level'] = '<span class="red">'.$engine->get_translation('LogLevel2').'</span>';
+				$row['level'] = '<span class="red">'.$engine->_t('LogLevel2').'</span>';
 			}
 			else if ($row['level'] == 3)
 			{
-				$row['level'] = '<strong>'.$engine->get_translation('LogLevel3').'</strong>';
+				$row['level'] = '<strong>'.$engine->_t('LogLevel3').'</strong>';
 			}
 			else if ($row['level'] == 4)
 			{
-				$row['level'] = $engine->get_translation('LogLevel'.$row['level']);
+				$row['level'] = $engine->_t('LogLevel'.$row['level']);
 			}
 			else if ($row['level'] == 5)
 			{
-				$row['level'] = '<small>'.$engine->get_translation('LogLevel'.$row['level']).'</small>';
+				$row['level'] = '<small>'.$engine->_t('LogLevel'.$row['level']).'</small>';
 			}
 			else if ($row['level'] > 5)
 			{
-				$row['level'] = '<small class="grey">'.$engine->get_translation('LogLevel'.$row['level']).'</small>';
+				$row['level'] = '<small class="grey">'.$engine->_t('LogLevel'.$row['level']).'</small>';
 			}
  */
 			// tz offset
@@ -239,7 +239,7 @@ function admin_content_pages(&$engine, &$module)
 					'<td style="vertical-align:top;">'.$row['title'].'</td>'.
 					'<td style="vertical-align:top;">'.$engine->binary_multiples($row['page_size'], false, true, true).'</td>'.
 					'<td style="vertical-align:top; text-align:center;"><small>'.
-						'<a href="'.$engine->href().'&amp;user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
+						'<a href="'.$engine->href().'&amp;user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->_t('Guest').'</em>' : $row['user_name'] ).'</a>'.
 						'<br />'.'<a href="'.$engine->href().'&amp;ip='.$row['ip'].'">'.$row['ip'].'</a>'.
 					'</small></td>'.
 				'</tr>';
@@ -247,7 +247,7 @@ function admin_content_pages(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>'.$engine->get_translation('LogNoMatch').'</em></td></tr>';
+		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>'.$engine->_t('LogNoMatch').'</em></td></tr>';
 	}
 ?>
 		</table>

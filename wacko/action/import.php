@@ -37,15 +37,15 @@ if ($this->is_admin())
 		?>
 		<div class="cssform">
 			<p>
-				<label for="importto"><?php echo $this->get_translation('ImportTo'); ?>:</label>
+				<label for="importto"><?php echo $this->_t('ImportTo'); ?>:</label>
 				<input type="text" id="importto" name="_to" size="40" value="" />
 			</p>
 			<p>
-				<label for="importwhat"><?php echo $this->get_translation('ImportWhat'); ?>:</label>
+				<label for="importwhat"><?php echo $this->_t('ImportWhat'); ?>:</label>
 				<input type="file" id="importwhat" name="_import" />
 			</p>
 			<p>
-				<input type="submit" value="<?php echo $this->get_translation('ImportButtonText'); ?>" />
+				<input type="submit" value="<?php echo $this->_t('ImportButtonText'); ?>" />
 			</p>
 		</div>
 		<?php
@@ -97,14 +97,14 @@ if ($this->is_admin())
 				$this->current_context--;
 
 				// log import
-				$this->log(4, Ut::perc_replace($this->get_translation('LogPageImported', $this->config['language']), $tag));
+				$this->log(4, Ut::perc_replace($this->_t('LogPageImported', $this->config['language']), $tag));
 
 				// count page
 				$t++;
 				$pages[] = $tag;
 			}
 
-			echo '<em>'.Ut::perc_replace($this->get_translation('ImportSuccess'), $t).'</em><br />';
+			echo '<em>'.Ut::perc_replace($this->_t('ImportSuccess'), $t).'</em><br />';
 
 			foreach ($pages as $page)
 			{

@@ -112,7 +112,7 @@ if ($pages = $this->load_all(
 				}
 				else
 				{
-					$legend = $this->get_translation('TreeClusterTitle');
+					$legend = $this->_t('TreeClusterTitle');
 					$legend = Ut::perc_replace($legend, $this->link('/'.$root, '', rtrim($root, '/'))).':';
 				}
 
@@ -123,14 +123,14 @@ if ($pages = $this->load_all(
 		{
 			if (!$nomark)
 			{
-				echo '<nav class="layout-box"><p class="layout-box"><span>'.$this->get_translation('TreeSiteTitle')."</span></p>\n";
+				echo '<nav class="layout-box"><p class="layout-box"><span>'.$this->_t('TreeSiteTitle')."</span></p>\n";
 			}
 		}
 
 		// tree
 		if (count($pages) > $limit)
 		{
-			echo '<em>'.$this->get_translation('TreeTooBig').'</em><br/>';
+			echo '<em>'.$this->_t('TreeTooBig').'</em><br/>';
 		}
 		else
 		{
@@ -238,7 +238,7 @@ if ($pages = $this->load_all(
 	else
 	{
 		// no results in given level $depth
-		$title_empty_tree = $this->get_translation('TreeEmptyLevels');
+		$title_empty_tree = $this->_t('TreeEmptyLevels');
 		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/'.$root, '', rtrim($root, '/')));
 		echo '<em>'.$title_empty_tree.'</em><br/>';
 	}
@@ -247,7 +247,7 @@ else
 {
 	if (!$nomark)
 	{
-		$title_empty_tree = $this->get_translation('TreeEmpty');
+		$title_empty_tree = $this->_t('TreeEmpty');
 		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/'.$root, '', rtrim($root, '/')));
 		echo '<em>'.$title_empty_tree.'</em><br/>';
 	}

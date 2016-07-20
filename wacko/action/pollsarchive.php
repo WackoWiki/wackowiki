@@ -45,8 +45,8 @@ if(!$nomark)
 {
 	echo '<div class="layout-box"><p class="layout-box"><span>'.
 			($year == 0
-				? $this->get_translation('PollsArchiveAll')
-				: str_replace('%1', $year, $this->get_translation('PollsArchiveYear'))
+				? $this->_t('PollsArchiveAll')
+				: str_replace('%1', $year, $this->_t('PollsArchiveYear'))
 			)."</span></p>\n";
 }
 
@@ -77,19 +77,19 @@ if(!$nomark)
 	}
 	else // empty list
 	{
-		echo '<em>'.$this->get_translation('PollsEmptyList').'</em><br />';
+		echo '<em>'.$this->_t('PollsEmptyList').'</em><br />';
 	}
 
 	// pagination
-	echo '<br /><small><strong>'.$this->get_translation('PollsShow').':</strong> ';
+	echo '<br /><small><strong>'.$this->_t('PollsShow').':</strong> ';
 
 	if ($year == 0)
 	{
-		echo $this->get_translation('PollsAll').' ';
+		echo $this->_t('PollsAll').' ';
 	}
 	else
 	{
-		echo '<a href="'.$this->href('', '', 'year=0').'">'.$this->get_translation('PollsAll').'</a> ';
+		echo '<a href="'.$this->href('', '', 'year=0').'">'.$this->_t('PollsAll').'</a> ';
 	}
 
 	foreach ($years as $item)

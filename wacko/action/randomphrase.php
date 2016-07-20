@@ -14,13 +14,13 @@ $page_id = $this->get_page_id($page);
 
 if (!$this->has_access('read', $page_id))
 {
-	echo $this->get_translation('NoAccessToSourcePage');
+	echo $this->_t('NoAccessToSourcePage');
 }
 else
 {
 	if (!($phrase_page = $this->load_page($page, 0, $revision_id)))
 	{
-		echo '<em> ' . $this->get_translation('SourcePageDoesntExist') . '(' . $page . ')</em>';
+		echo '<em> ' . $this->_t('SourcePageDoesntExist') . '(' . $page . ')</em>';
 	}
 	else
 	{

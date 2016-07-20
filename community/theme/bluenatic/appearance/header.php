@@ -21,9 +21,9 @@ header('Content-Type: text/html; charset='.$this->get_charset());
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/page.css" media="screen" />
 	<link rel="stylesheet" href="<?php echo $this->config['theme_url']; ?>css/wacko.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->config['theme_url']; ?>icon/icon.png" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('ChangesFeed');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('CommentsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 	<?php
 	// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 	if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
@@ -78,8 +78,8 @@ else if($this->has_access('write'))
 	<div id="mainwrapper">
 		<div id="header">
 			<?php // Insert search form ?>
-			<?php echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
-			<input type="search" name="phrase" size="15" value="<?php echo $this->get_translation('SearchButtonText'); ?>" class="search" />
+			<?php echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage')); ?>
+			<input type="search" name="phrase" size="15" value="<?php echo $this->_t('SearchButtonText'); ?>" class="search" />
 			<?php echo $this->form_close(); ?>
 
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
@@ -123,14 +123,14 @@ else if($this->has_access('write'))
 							echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 								.'"><img src="'. $this->config['theme_url']
 								.'icon/bookmark-remove.png" alt="+" title="'.
-								$this->get_translation('AddToBookmarks') .'"/></a></li>';
+								$this->_t('AddToBookmarks') .'"/></a></li>';
 						}
 						else
 						{
 							echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 								.'"><img src="'. $this->config['theme_url']
 								.'icon/bookmark-add.png" alt="-" title="'.
-								$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+								$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 						}
 					}*/
 
@@ -140,8 +140,8 @@ else if($this->has_access('write'))
 			<?php if($user = $this->get_user()) { ?>
 			<div class="user">
 				<?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()); ?>
-				<small>( <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?> |
-				<a href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?></a> )</small>
+				<small>( <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?> |
+				<a href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a> )</small>
 			</div>
 			<?php } ?>
 		</div>
@@ -151,28 +151,28 @@ else if($this->has_access('write'))
 			<?php // Show edit button only if user has privileges ?>
 			<?php if($this->has_access('write')) { ?>
 			<a href="<?php echo $this->href('edit'); ?>" accesskey="E">
-				<img src="<?php echo $this->config['theme_url']; ?>images/qa-edit.png" alt="<?php echo $this->get_translation('EditTip'); ?>" title="<?php echo $this->get_translation('EditTip'); ?>" />
+				<img src="<?php echo $this->config['theme_url']; ?>images/qa-edit.png" alt="<?php echo $this->_t('EditTip'); ?>" title="<?php echo $this->_t('EditTip'); ?>" />
 			</a>&nbsp;&nbsp;&nbsp;
 			<?php } ?>
 			<?php // Show ACL button only if user has privileges (or is admin) and if the page exists ?>
 			<?php if($this->page) if($this->is_owner() || $this->is_admin()) { ?>
 			<a href="<?php echo $this->href('permissions'); ?>">
-				<img src="<?php echo $this->config['theme_url']; ?>images/qa-acl.png" alt="<?php echo $this->get_translation('ACLText'); ?>" title="<?php echo $this->get_translation('ACLText'); ?>" />
+				<img src="<?php echo $this->config['theme_url']; ?>images/qa-acl.png" alt="<?php echo $this->_t('ACLText'); ?>" title="<?php echo $this->_t('ACLText'); ?>" />
 			</a>
 			<?php } ?>
 			<a href="<?php echo $this->href('print'); ?>">
-				<img src="<?php echo $this->config['theme_url']; ?>images/qa-print.png" alt="<?php echo $this->get_translation('PrintVersion'); ?>" title="<?php echo $this->get_translation('PrintVersion'); ?>" />
+				<img src="<?php echo $this->config['theme_url']; ?>images/qa-print.png" alt="<?php echo $this->_t('PrintVersion'); ?>" title="<?php echo $this->_t('PrintVersion'); ?>" />
 			</a>
 			<?php } else { ?>
 			<div class="loginbox">
-				<?php echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage')); ?>
+				<?php echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
 				<input type="hidden" name="action" value="login" />
 				<input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag); ?>" />
-				<?php echo $this->get_translation('LoginWelcome'); ?>
+				<?php echo $this->_t('LoginWelcome'); ?>
 				<input type="text" name="name" size="15" class="login" />
-				<?php echo $this->get_translation('LoginPassword'); ?>
+				<?php echo $this->_t('LoginPassword'); ?>
 				<input type="password" name="password" size="10" class="login" />
-				<input type="image" src="<?php echo $this->config['theme_url']; ?>icon/login.png" alt="<?php echo $this->get_translation('LoginWelcome'); ?>" class="login" />
+				<input type="image" src="<?php echo $this->config['theme_url']; ?>icon/login.png" alt="<?php echo $this->_t('LoginWelcome'); ?>" class="login" />
 				<?php echo $this->form_close(); ?>
 			</div>
 			<?php } ?>

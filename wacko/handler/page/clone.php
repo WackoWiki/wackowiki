@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 echo '<h3>';
-echo $this->get_translation('ClonePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0);
+echo $this->_t('ClonePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0);
 echo "</h3>\n<br />\n";
 
 // ensure that's not forum or comment
@@ -14,13 +14,13 @@ $this->ensure_page();
 
 if (!$this->has_access('read'))
 {
-	$this->set_message($this->get_translation('ReadAccessDenied'), 'error');
+	$this->set_message($this->_t('ReadAccessDenied'), 'error');
 	$this->show_must_go_on();
 }
 
 $from		= $this->tag;
 $superfrom	= $this->supertag;
-$edit_note	= Ut::perc_replace($this->get_translation('ClonedFrom'), $this->tag);
+$edit_note	= Ut::perc_replace($this->_t('ClonedFrom'), $this->tag);
 
 
 if (@$_POST['_action'] === 'clone_page')
@@ -44,14 +44,14 @@ if (@$_POST['_action'] === 'clone_page')
 	{
 		$this->clone_page($from, $to, $superto, $edit_note);
 
-		$this->log(4, Ut::perc_replace($this->get_translation('LogClonedPage', SYSTEM_LANG), $from, $to));
+		$this->log(4, Ut::perc_replace($this->_t('LogClonedPage', SYSTEM_LANG), $from, $to));
 
-		$this->set_message(Ut::perc_replace($this->get_translation('PageCloned'), $this->link('/'.$to)), 'info');
+		$this->set_message(Ut::perc_replace($this->_t('PageCloned'), $this->link('/'.$to)), 'info');
 	}
 	else
 	{
 		//massclone
-		echo '<p><strong>' . $this->get_translation('MassCloning') . '</strong><p>';
+		echo '<p><strong>' . $this->_t('MassCloning') . '</strong><p>';
 
 		$pages = $this->load_all(
 			"SELECT page_id, tag, supertag ".
@@ -73,12 +73,12 @@ if (@$_POST['_action'] === 'clone_page')
 
 			if ($this->load_page($dst, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$alredys[] = Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($dst, '', '', 0));
+				$alredys[] = Ut::perc_replace($this->_t('AlredyExists'), $this->compose_link_to_page($dst, '', '', 0));
 			}
 			else if (!$this->has_access('read', $page['page_id']))
 			{
 				$this->set_message(
-					Ut::perc_replace($this->get_translation('CloneCannotRead'), $this->compose_link_to_page($src, '', '', 0)),
+					Ut::perc_replace($this->_t('CloneCannotRead'), $this->compose_link_to_page($src, '', '', 0)),
 					'error');
 				if ($dst === $to)
 				{
@@ -88,7 +88,7 @@ if (@$_POST['_action'] === 'clone_page')
 			}
 			else if (!$this->has_access('create', '', '', 1, $dst))
 			{
-				$alredys[] = Ut::perc_replace($this->get_translation('CloneCannotCreate'), $this->compose_link_to_page($dst, '', '', 0));
+				$alredys[] = Ut::perc_replace($this->_t('CloneCannotCreate'), $this->compose_link_to_page($dst, '', '', 0));
 			}
 
 			$work[$src] = $dst;
@@ -104,8 +104,8 @@ if (@$_POST['_action'] === 'clone_page')
 		foreach ($work as $src => $dst)
 		{
 			$this->clone_page($src, $dst, '', $edit_note);
-			$this->log(4, Ut::perc_replace($this->get_translation('LogClonedPage', SYSTEM_LANG), $src, $dst));
-			$log[] = Ut::perc_replace($this->get_translation('PageCloned'), $this->link('/'.$dst));
+			$this->log(4, Ut::perc_replace($this->_t('LogClonedPage', SYSTEM_LANG), $src, $dst));
+			$log[] = Ut::perc_replace($this->_t('PageCloned'), $this->link('/'.$dst));
 		}
 
 		if (isset($log))
@@ -137,7 +137,7 @@ else
 	$do_cluster = false;
 }
 
-echo $this->get_translation('CloneName');
+echo $this->_t('CloneName');
 
 echo $this->form_open('clone_page', ['page_method' => 'clone']);
 
@@ -148,7 +148,7 @@ echo $this->form_open('clone_page', ['page_method' => 'clone']);
 if ($this->config['edit_summary'])
 {
 	echo '<br />';
-	echo '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />'."\n";
+	echo '<label for="edit_note">'.$this->_t('EditNote').':</label><br />'."\n";
 	echo '<input type="text" id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>'."\n";
 }
 ?>
@@ -157,12 +157,12 @@ if ($this->config['edit_summary'])
 if ($do_cluster)
 {
 	echo '<input type="checkbox" id="massclone" name="massclone" />'."\n";
-	echo ' <label for="massclone">'.$this->get_translation('MassClone').'</label>'."\n";
+	echo ' <label for="massclone">'.$this->_t('MassClone').'</label>'."\n";
 }
 ?>
 <br /><br />
-<input type="submit" name="submit" value="<?php echo $this->get_translation('CloneButton'); ?>" /> &nbsp;
-<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"/></a>
+<input type="submit" name="submit" value="<?php echo $this->_t('CloneButton'); ?>" /> &nbsp;
+<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
 
 <?php
 

@@ -18,9 +18,9 @@ require (join_path(THEME_DIR, '_common/_header.php'));
 <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
-{ ?> <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
-echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
- | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span>
+{ ?> <span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
+echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
+ | <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span>
 )</small>
 <?php
 // Else Wacko shows login's controls
@@ -28,8 +28,8 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 else
 {
 	// Show Register / Login link
-	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage'), '', $this->get_translation('LoginPage'), 0, '', 'goback='.$this->slim_url($this->tag))."</li>\n";
-	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), '', $this->get_translation('RegistrationPage'), 0)."</li>\n</ul>";
+	echo "<ul>\n<li>".$this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '', 'goback='.$this->slim_url($this->tag))."</li>\n";
+	echo "<li>".$this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'), 0)."</li>\n</ul>";
 }
 
 // End if
@@ -72,14 +72,14 @@ else
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
 				.'icon/bookmark1.png" alt="+" title="'.
-				$this->get_translation('AddToBookmarks') .'"/></a></li>';
+				$this->_t('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
 				.'icon/bookmark2.png" alt="-" title="'.
-				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 		}
 	}
 	echo "\n</ol></div>";
@@ -87,12 +87,12 @@ else
 <div id="search">
 <?php
 // Opens Search form
-echo $this->form_open('search', '', 'get', false, $this->get_translation('TextSearchPage'));
+echo $this->form_open('search', '', 'get', false, $this->_t('TextSearchPage'));
 
 // Searchbar
 ?>
-<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label><input
-	type="search" name="phrase" id="phrase" size="20" /><input type="submit" class="submitinput" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/></span>
+<span class="search nobr"><label for="phrase"><?php echo $this->_t('SearchText'); ?></label><input
+	type="search" name="phrase" id="phrase" size="20" /><input type="submit" class="submitinput" title="<?php echo $this->_t('SearchButtonText') ?>" alt="<?php echo $this->_t('SearchButtonText') ?>" value="<?php echo $this->_t('SearchButtonText') ?>"/></span>
 <?php
 
 // Search form close

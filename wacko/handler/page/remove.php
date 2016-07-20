@@ -15,7 +15,7 @@ if (!$this->page)
 }
 
 $title = $this->page['comment_on_id']?  'RemoveComment' : 'RemovePage';
-echo '<h3>' . $this->get_translation($title) . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
+echo '<h3>' . $this->_t($title) . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
 
 // check user permissions to delete
 if ($this->is_admin()
@@ -43,61 +43,61 @@ if ($this->is_admin()
 		// remove SINGLE page or comment
 		if ($this->remove_referrers($this->tag))
 		{
-			$message .= '<li>'.$this->get_translation('ReferrersRemoved')."</li>\n";
+			$message .= '<li>'.$this->_t('ReferrersRemoved')."</li>\n";
 		}
 
 		if ($this->remove_links($this->tag))
 		{
-			$message .= '<li>'.$this->get_translation('LinksRemoved')."</li>\n";
+			$message .= '<li>'.$this->_t('LinksRemoved')."</li>\n";
 		}
 
 		if ($this->remove_categories($this->tag))
 		{
-			$message .= '<li>'.$this->get_translation('CategoriesRemoved')."</li>\n";
+			$message .= '<li>'.$this->_t('CategoriesRemoved')."</li>\n";
 		}
 
 		if ($this->remove_acls($this->tag))
 		{
-			$message .= '<li>'.$this->get_translation('AclsRemoved')."</li>\n";
+			$message .= '<li>'.$this->_t('AclsRemoved')."</li>\n";
 		}
 
 		if (!$comment_on_id)
 		{
 			if ($this->remove_menu_items($this->tag))
 			{
-				$message .= '<li>'.$this->get_translation('BookmarksRemoved')."</li>\n";
+				$message .= '<li>'.$this->_t('BookmarksRemoved')."</li>\n";
 			}
 
 			if ($this->remove_watches($this->tag))
 			{
-				$message .= '<li>'.$this->get_translation('WatchesRemoved')."</li>\n";
+				$message .= '<li>'.$this->_t('WatchesRemoved')."</li>\n";
 			}
 
 			if ($this->remove_ratings($this->tag))
 			{
-				$message .= '<li>'.$this->get_translation('RatingRemoved')."</li>\n";
+				$message .= '<li>'.$this->_t('RatingRemoved')."</li>\n";
 			}
 
 			if ($this->remove_comments($this->tag, false, $dontkeep))
 			{
-				$message .= '<li>'.$this->get_translation('CommentsRemoved')."</li>\n";
+				$message .= '<li>'.$this->_t('CommentsRemoved')."</li>\n";
 			}
 
 			if ($this->remove_files($this->tag))
 			{
-				$message .= '<li>'.$this->get_translation('FilesRemoved')."</li>\n";
+				$message .= '<li>'.$this->_t('FilesRemoved')."</li>\n";
 			}
 
 			if ($this->remove_revisions($this->tag))
 			{
-				$message .= '<li>'.$this->get_translation('RevisionsRemoved')."</li>\n";
+				$message .= '<li>'.$this->_t('RevisionsRemoved')."</li>\n";
 			}
 		}
 
 		// purge related page cache
 		if ($this->http->invalidate_page($comment_on_id?  $this->get_page_tag($comment_on_id) : $this->supertag))
 		{
-			$message .= '<li>' . $this->get_translation('PageCachePurged') . "</li>\n";
+			$message .= '<li>' . $this->_t('PageCachePurged') . "</li>\n";
 		}
 
 
@@ -119,7 +119,7 @@ if ($this->is_admin()
 				}
 			}
 
-			$message .= '<li>'.$this->get_translation('PageRemoved')."</li>\n";
+			$message .= '<li>'.$this->_t('PageRemoved')."</li>\n";
 		}
 
 		// remove ENTIRE cluster
@@ -151,7 +151,7 @@ if ($this->is_admin()
 				unset($list, $row);
 			}
 
-			$message .= "<li>".$this->get_translation('ClusterRemoved')."</li>\n";
+			$message .= "<li>".$this->_t('ClusterRemoved')."</li>\n";
 		}
 
 		$message .= "</ol>\n";
@@ -182,24 +182,24 @@ if ($this->is_admin()
 		if (!$comment_on_id)
 		{
 			$mode = (isset($_POST['cluster'])? 'LogRemovedCluster' : 'LogRemovedPage');
-			$this->log(1, Ut::perc_replace($this->get_translation($mode, SYSTEM_LANG), $this->tag, $this->page['user_name']));
+			$this->log(1, Ut::perc_replace($this->_t($mode, SYSTEM_LANG), $this->tag, $this->page['user_name']));
 		}
 		else
 		{
-			$this->log(1, Ut::perc_replace($this->get_translation('LogRemovedComment', SYSTEM_LANG),
+			$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
 				($this->get_page_tag($comment_on_id)." ".$this->get_page_title('', $comment_on_id)),
 				$this->page['user_name'],
 				$this->get_time_formatted($this->page['created'])));
 		}
 
-		$message .= "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
+		$message .= "<br />".$this->_t('ThisActionHavenotUndo')."<br />\n";
 
 		$this->show_message($message, 'success');
 
 		// return to commented page
 		if ($comment_on_id)
 		{
-			echo '<br />'.$this->compose_link_to_page($this->get_page_tag($comment_on_id).'#header-comments', '', '&laquo; '.$this->get_translation('ReturnToCommented'), 0);
+			echo '<br />'.$this->compose_link_to_page($this->get_page_tag($comment_on_id).'#header-comments', '', '&laquo; '.$this->_t('ReturnToCommented'), 0);
 		}
 	}
 	else
@@ -210,7 +210,7 @@ if ($this->is_admin()
 			// TODO: add function for
 			echo '<div class="preview">';
 
-			$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->get_translation('PostedBy').' '.$this->user_link($this->page['user_name'], '', true, false).' '.$this->get_translation('At').' '.$this->get_time_formatted($this->page['modified']);
+			$message = $this->_t('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->_t('PostedBy').' '.$this->user_link($this->page['user_name'], '', true, false).' '.$this->_t('At').' '.$this->get_time_formatted($this->page['modified']);
 			$this->show_message($message, 'comment-info');
 
 			$desc = $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');
@@ -220,11 +220,11 @@ if ($this->is_admin()
 			echo htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 			echo '</div><br />';
 
-			$message = $this->get_translation('ReallyDeleteComment');
+			$message = $this->_t('ReallyDeleteComment');
 		}
 		else
 		{
-			$message = $this->get_translation('ReallyDelete');
+			$message = $this->_t('ReallyDelete');
 		}
 
 		// show backlinks
@@ -241,12 +241,12 @@ if ($this->is_admin()
 			if (!$comment_on_id)
 			{
 				echo '<input type="checkbox" id="removecluster" name="cluster" />';
-				echo '<label for="removecluster">'.$this->get_translation('RemoveCluster').'</label><br />';
+				echo '<label for="removecluster">'.$this->_t('RemoveCluster').'</label><br />';
 
 				if ($this->config['store_deleted_pages'])
 				{
 					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
-					echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeep').'</label><br />';
+					echo '<label for="dontkeep">'.$this->_t('RemoveDontKeep').'</label><br />';
 				}
 			}
 			else
@@ -254,14 +254,14 @@ if ($this->is_admin()
 				if ($this->config['store_deleted_pages'])
 				{
 					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
-					echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeepComment').'</label><br />';
+					echo '<label for="dontkeep">'.$this->_t('RemoveDontKeepComment').'</label><br />';
 				}
 			}
 		}
 ?>
 		<br />
-		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />&nbsp;
-		<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"/></a>
+		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>" />&nbsp;
+		<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
 		<br />
 <?php
 		echo $this->form_close();
@@ -269,5 +269,5 @@ if ($this->is_admin()
 }
 else
 {
-	$this->show_message($this->get_translation('NotOwnerAndCanDelete'), 'error');
+	$this->show_message($this->_t('NotOwnerAndCanDelete'), 'error');
 }

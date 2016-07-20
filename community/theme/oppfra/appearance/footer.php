@@ -12,36 +12,36 @@
 <ul>
 <?php
 // If User has rights to edit page, show Edit link
-echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation('EditTip')."\">".$this->get_translation('EditText')."</a></li>\n" : "";
+echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->_t('EditTip')."\">".$this->_t('EditText')."</a></li>\n" : "";
 
 // If this page exists
 if ($this->page)
 {
 	// Revisions link
 	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() )
-			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
+			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
 			: "<li>".$this->get_time_formatted($this->page['modified'])."</li>\n"
 		);
 
 	// If owner is current user
 	if ($this->is_owner())
 	{
-		echo "<li>".$this->get_translation('YouAreOwner')."</li>\n";
+		echo "<li>".$this->_t('YouAreOwner')."</li>\n";
 
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icon/add_page.png\" title=\"".$this->get_translation('CreateNewPageTip')."\" alt=\"".$this->get_translation('CreateNewPage')."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icon/add_page.png\" title=\"".$this->_t('CreateNewPageTip')."\" alt=\"".$this->_t('CreateNewPage')."\" /></a></li>\n")
 		);
 
 		// Rename link
-		print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icon/rename.png\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icon/rename.png\" title=\"".$this->_t('RenameText')."\" alt=\"".$this->_t('RenameText')."\" /></a></li>\n");
 
 		// Remove link (shows only for page owner if allowed)
-		if (!$this->config['remove_onlyadmins']) print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete.png\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n");
+		if (!$this->config['remove_onlyadmins']) print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete.png\" title=\"".$this->_t('DeleteTip')."\" alt=\"".$this->_t('DeleteText')."\" /></a></li>\n");
 
 		// Edit ACLs link
-		print("<li><a href=\"".$this->href('permissions')."\"".(($this->method=='edit') ? " onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"" : "").">".$this->get_translation('ACLText')."</a></li>\n");
+		print("<li><a href=\"".$this->href('permissions')."\"".(($this->method=='edit') ? " onclick=\"return window.confirm('".$this->_t('EditACLConfirm')."');\"" : "").">".$this->_t('ACLText')."</a></li>\n");
 	}
 	// If owner is NOT current user
 	else
@@ -50,59 +50,59 @@ if ($this->page)
 		if ($owner = $this->get_page_owner())
 		{
 			if ($owner == 'System')
-				print("<li>".$this->get_translation('Owner').": ".$owner."</li>\n");
+				print("<li>".$this->_t('Owner').": ".$owner."</li>\n");
 			else
-				print("<li>".$this->get_translation('Owner').": ".$this->link($owner)."</li>\n");
+				print("<li>".$this->_t('Owner').": ".$this->link($owner)."</li>\n");
 		}
 		else if (!$this->page['comment_on_id'])
 		{
-			print("<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a></li>\n)" : ""));
+			print("<li>".$this->_t('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->_t('TakeOwnership')."</a></li>\n)" : ""));
 		}
 
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icon/add_page.png\" title=\"".$this->get_translation('CreateNewPageTip')."\" alt=\"".$this->get_translation('CreateNewPage')."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icon/add_page.png\" title=\"".$this->_t('CreateNewPageTip')."\" alt=\"".$this->_t('CreateNewPage')."\" /></a></li>\n")
 		);
 	}
 
 	// Rename link
 	if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner())
 	{
-		print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icon/rename.png\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icon/rename.png\" title=\"".$this->_t('RenameText')."\" alt=\"".$this->_t('RenameText')."\" /></a></li>\n");
 	}
 	// Remove link (shows only for Admins)
 	if ($this->is_admin() && !$this->is_owner())
 	{
-		print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete.png\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icon/delete.png\" title=\"".$this->_t('DeleteTip')."\" alt=\"".$this->_t('DeleteText')."\" /></a></li>\n");
 
 		// Edit ACLs link (shows also for Admins)
-		print("<li><a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"").">".$this->get_translation('ACLText')."</a></li>\n");
+		print("<li><a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->_t('EditACLConfirm')."');\"":"").">".$this->_t('ACLText')."</a></li>\n");
 	}
 
 	if($this->has_access('write') && $this->get_user() || $this->is_admin())
 	{
 		// Page  settings link
-		print("<li><a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditPropertiesConfirm')."');\"":"").">".$this->get_translation('PropertiesText')."</a></li>\n");
+		print("<li><a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->_t('EditPropertiesConfirm')."');\"":"").">".$this->_t('PropertiesText')."</a></li>\n");
 
 		if ($this->is_owner() || $this->is_admin())
 		{
 			// Add Categories link (shows only for page owner if allowed)
-			print("<li><a href=\"".$this->href('categories')."\"".(($this->method=='categories') ? " onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"" : "")."><img src=\"".$this->config['theme_url']."icon/add_tag.png\" title=\"".$this->get_translation('CategoriesTip')."\" alt=\"".$this->get_translation('CategoriesTip')."\" /></a></li>\n");
+			print("<li><a href=\"".$this->href('categories')."\"".(($this->method=='categories') ? " onclick=\"return window.confirm('".$this->_t('EditACLConfirm')."');\"" : "")."><img src=\"".$this->config['theme_url']."icon/add_tag.png\" title=\"".$this->_t('CategoriesTip')."\" alt=\"".$this->_t('CategoriesTip')."\" /></a></li>\n");
 		}
 
 		// referrers icon
-		print("<li><a href=\"".$this->href('referrers')."\"><img src=\"".$this->config['theme_url']."icon/referrer.png\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href('referrers')."\"><img src=\"".$this->config['theme_url']."icon/referrer.png\" title=\"".$this->_t('ReferrersTip')."\" alt=\"".$this->_t('ReferrersText')."\" /></a></li>\n");
 	}
 
 	if ($this->get_user())
 	{
 		// Watch/Unwatch icon
-		echo ($this->is_watched === true ? "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/unwatch.png\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  /></a></li>\n" : "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/watch.png\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a></li>\n");
+		echo ($this->is_watched === true ? "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/unwatch.png\" title=\"".$this->_t('RemoveWatch')."\" alt=\"".$this->_t('RemoveWatch')."\"  /></a></li>\n" : "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/watch.png\" title=\"".$this->_t('SetWatch')."\" alt=\"".$this->_t('SetWatch')."\" /></a></li>\n");
 	}
 
 	// Print icon
-	echo"<li><a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icon/print.png\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a></li>\n";
+	echo"<li><a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icon/print.png\" title=\"".$this->_t('PrintVersion')."\" alt=\"".$this->_t('PrintVersion')."\" /></a></li>\n";
 }
 
 ?>
@@ -117,12 +117,12 @@ if ($this->page)
 
 <?php
 // Opens Search form
-echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
+echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage')); ?>
 <div>
 <?php
 // Searchbar
 ?>
-  <?php echo $this->get_translation('SearchText') ?><input type="search" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
+  <?php echo $this->_t('SearchText') ?><input type="search" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
 </div>
 <?php
 
@@ -132,7 +132,7 @@ echo $this->form_close();
 
 <?php
 // Begin Login form
-echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage')); ?>
+echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
 	<input type="hidden" name="action" value="login" />
 <?php
 
@@ -140,10 +140,10 @@ echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage'));
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
 { ?>
-	<span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><br /><small>( <span class="nobr Tune">
+	<span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><br /><small>( <span class="nobr Tune">
 <?php
-	echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
-| <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small>
+	echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
+| <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span> )</small>
 <?php
 // Else Wacko shows login's controls
 }
@@ -152,11 +152,11 @@ else
 ?>
 	<span>
 		<input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>"/>
-		<strong><?php echo $this->get_translation('LoginWelcome') ?>:&nbsp;</strong>
+		<strong><?php echo $this->_t('LoginWelcome') ?>:&nbsp;</strong>
 		<input type="text" name="name" size="18" class="login" />
 		&nbsp;
 <?php
-echo $this->get_translation('LoginPassword') ?>
+echo $this->_t('LoginPassword') ?>
 		:&nbsp;
 		<input type="password" name="password" class="login" size="8" />
 		&nbsp;
@@ -205,14 +205,14 @@ echo '<div class="newsNav"><ul class="newsNav">';
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
 				.'icon/bookmark1.png" alt="+" title="'.
-				$this->get_translation('AddToBookmarks') .'"/></a></li>';
+				$this->_t('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
 				.'icon/bookmark2.png" alt="-" title="'.
-				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 		}
 	}
 echo "</ul></div>";
@@ -264,11 +264,11 @@ echo '<br />';
 <div id="credits"><?php
 
 // comment this out for not showing website policy link at the bottom of your pages
-if ($this->config['policy_page']) echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->get_translation('TermsOfUse').'</a><br />';
+if ($this->config['policy_page']) echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->_t('TermsOfUse').'</a><br />';
 
 if ($this->get_user())
 {
-	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki');
+	echo $this->_t('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki');
 }
 ?></div>
 </div>
@@ -278,7 +278,7 @@ if ($this->get_user())
 <?php
 
 // Revisions link
-echo $this->page['modified'] ? $this->get_translation('LastModification') .": <a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->page['modified']."</a> ".$this->get_translation('By')." ".$this->link($this->page['user_name'])."\n" : "";
+echo $this->page['modified'] ? $this->_t('LastModification') .": <a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->page['modified']."</a> ".$this->_t('By')." ".$this->link($this->page['user_name'])."\n" : "";
 
 // Don't place final </body></html> here. Wacko closes HTML automatically.
 ?>

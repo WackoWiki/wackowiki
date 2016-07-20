@@ -23,7 +23,7 @@ if ($b < 0) $b = 0;
 
 if ($a == $b)
 {
-	echo "<br />\n" . $this->get_translation('NoDifferences');
+	echo "<br />\n" . $this->_t('NoDifferences');
 	return;
 }
 
@@ -92,7 +92,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 	};
 
 	// print header
-	echo Ut::perc_replace('<div class="diffinfo">' . $this->get_translation('Comparison'),
+	echo Ut::perc_replace('<div class="diffinfo">' . $this->_t('Comparison'),
 		$revisions_menu($a, $page_a),
 		$revisions_menu($b, $page_b),
 		//'<a href="' . $this->href('', '', ($a > 0 ? 'revision_id=' . $page_a['revision_id'] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
@@ -107,7 +107,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		'<ul class="menu">';
 
 	$params = 'a=' .$a . '&amp;b=' .$b . '&amp;diffmode=';
-	for ($mode = 0; ($text = $this->get_translation('DiffMode' . $mode)) !== null; ++$mode)
+	for ($mode = 0; ($text = $this->_t('DiffMode' . $mode)) !== null; ++$mode)
 	{
 		if ($text)
 		{
@@ -139,7 +139,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		if ($added)
 		{
 			// remove blank lines
-			echo "<br />\n" . $this->get_translation('SimpleDiffAdditions') . "<br />\n\n";
+			echo "<br />\n" . $this->_t('SimpleDiffAdditions') . "<br />\n\n";
 			echo '<div class="additions">';
 			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
@@ -149,7 +149,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 
 		if ($deleted)
 		{
-			echo "<br />\n\n" . $this->get_translation('SimpleDiffDeletions') . "<br />\n\n";
+			echo "<br />\n\n" . $this->_t('SimpleDiffDeletions') . "<br />\n\n";
 			echo '<div class="deletions">';
 			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
@@ -159,7 +159,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 
 		if (!$added && !$deleted)
 		{
-			echo "<br />\n" . $this->get_translation('NoDifferences');
+			echo "<br />\n" . $this->_t('NoDifferences');
 		}
 		break;
 
@@ -273,7 +273,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 
 		if (!$diff->getGroupedOpcodes())
 		{
-			echo $this->get_translation('NoDifferences');
+			echo $this->_t('NoDifferences');
 			break;
 		}
 
@@ -309,7 +309,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 }
 else
 {
-	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
+	$this->show_message($this->_t('ReadAccessDenied'), 'info');
 }
 
 $this->add_html_head('

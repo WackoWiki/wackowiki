@@ -12,7 +12,7 @@ $this->ensure_page();
 
 if (!$this->has_access('read'))
 {
-	$this->set_message($this->get_translation('ReadAccessDenied'), 'error');
+	$this->set_message($this->_t('ReadAccessDenied'), 'error');
 	$this->show_must_go_on();
 }
 
@@ -23,7 +23,7 @@ if ($this->page['latest'] == 0)
 	str_replace('%1',$this->href(),
 	str_replace('%2',$this->tag,
 	str_replace('%3',$this->page['modified'],
-	$this->get_translation('Revision')))).".</div>";
+	$this->_t('Revision')))).".</div>";
 }*/
 
 $_numerate_links = (($user = $this->get_user()))? $user['numerate_links'] : $this->config['numerate_links'];
@@ -50,7 +50,7 @@ if (@$this->sess->show_comments[$this->page['page_id']] || $this->forum)
 		echo '<br /><br />';
 		echo '<section id="comments">';
 		echo '<header class="header-comments">';
-		echo $this->get_translation('Comments_all');
+		echo $this->_t('Comments_all');
 		echo "</header>\n";
 
 		foreach ($comments as $comment)
@@ -64,7 +64,7 @@ if (@$this->sess->show_comments[$this->page['page_id']] || $this->forum)
 					'<span class="comment-info">' .
 						'<strong>&#8212; ' . $this->user_link($comment['user_name']) . '</strong> (' .
 						$this->get_time_formatted($comment['created']) .
-						($comment['modified'] != $comment['created'] ? ', ' . $this->get_translation('CommentEdited') . ' ' .
+						($comment['modified'] != $comment['created'] ? ', ' . $this->_t('CommentEdited') . ' ' .
 						$this->get_time_formatted($comment['modified']) : '') . ')'.
 					'&nbsp;&nbsp;&nbsp;</span><br />' .
 					$this->format($comment['body_r'], 'post_wacko') .
@@ -84,7 +84,7 @@ if ($_numerate_links)
 		echo '<br />';
 		echo '<section id="links">';
 		echo '<header class="linksheader">';
-		echo $this->get_translation('Links');
+		echo $this->_t('Links');
 		echo "</header>\n";
 
 		$i = 0;

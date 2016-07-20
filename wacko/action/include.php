@@ -36,7 +36,7 @@ $page_id = $this->get_page_id($page);
 
 if (!$this->has_access('read', $page_id))
 {
-	if ($nowarning != 1) echo $this->get_translation('NoAccessToSourcePage');
+	if ($nowarning != 1) echo $this->_t('NoAccessToSourcePage');
 }
 else
 {
@@ -48,7 +48,7 @@ else
 
 	if (!$inc_page = $this->load_page($page, 0, $revision_id))
 	{
-		echo '<em> '.$this->get_translation('SourcePageDoesntExist').' ('.$this->link('/'.$page).")</em>\n";
+		echo '<em> '.$this->_t('SourcePageDoesntExist').' ('.$this->link('/'.$page).")</em>\n";
 	}
 	else
 	{
@@ -82,7 +82,7 @@ else
 				// show edit link
 				($this->has_access('write', $page_id)
 					? '&nbsp;&nbsp;::&nbsp;'.
-					  '<a href="'.$this->href('edit', $inc_page['tag']).'">'.$this->get_translation('EditIcon').'</a>'
+					  '<a href="'.$this->href('edit', $inc_page['tag']).'">'.$this->_t('EditIcon').'</a>'
 					: '').
 
 				"</nav>\n";

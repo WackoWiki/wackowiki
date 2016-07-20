@@ -60,7 +60,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->http->invalidate_page($this->supertag);
 		}
 
-		$this->set_message($this->get_translation('EmptyComment'));
+		$this->set_message($this->_t('EmptyComment'));
 	}
 	else if (isset($_POST['preview']))
 	{
@@ -89,7 +89,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->title			= $title;
 		$this->sess->comment_delay	= time();
 
-		$message = str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded'));
+		$message = str_replace('%1', $this->config['comment_delay'], $this->_t('CommentFlooded'));
 		$this->set_message($message, 'error');
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
@@ -116,7 +116,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			if ($this->validate_captcha() === false)
 			{
 				//not the right word
-				$error = $this->get_translation('CaptchaFailed');
+				$error = $this->_t('CaptchaFailed');
 				$this->set_message($error, 'error');
 				$this->sess->freecap_old_comment = $body;
 			}
@@ -151,7 +151,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$body_r	= $this->save_page('Comment'.$num, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id, $parent_id);
 
 			// log event
-			$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', $this->config['language']))));
+			$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->_t('LogCommentPosted', $this->config['language']))));
 
 			// restore username after anonymous publication
 			if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
@@ -168,7 +168,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			// now we render it internally so we can write the updated link table.
 			$this->update_link_table($this->get_page_id('Comment'.$num), $body_r);
 
-			$this->set_message($this->get_translation('CommentAdded'), 'success');
+			$this->set_message($this->_t('CommentAdded'), 'success');
 		}
 
 		// End Comment Captcha
@@ -179,5 +179,5 @@ if ($this->has_access('comment') && $this->has_access('read'))
 }
 else
 {
-	$this->show_message($this->get_translation('CommentAccessDenied'), 'info');
+	$this->show_message($this->_t('CommentAccessDenied'), 'info');
 }

@@ -47,7 +47,7 @@ if (!empty($_category))
 	{
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('Categories').":</span></p>\n";
+			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('Categories').":</span></p>\n";
 		}
 
 		echo '<ol>';
@@ -61,7 +61,7 @@ if (!empty($_category))
 	}
 
 	echo (!empty($_category) && (!$list && $label == true)
-			? $this->get_translation('Categories').': '
+			? $this->_t('Categories').': '
 			: '').
 		$output;
 

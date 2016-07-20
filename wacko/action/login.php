@@ -11,7 +11,7 @@ $include_tail = "<!--/notypo-->\n";
 // reconnect securely in tls mode
 $param = isset($_GET['goback'])?  'goback=' . rawurlencode($_GET['goback']) : '';
 $this->http->ensure_tls($this->href('', '', $param));
-// was: $this->http->ensure_tls($this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )));
+// was: $this->http->ensure_tls($this->href('', $this->_t('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )));
 
 $uncache = 'cache=' . Ut::random_token(5);
 
@@ -32,10 +32,10 @@ $this->hide_article_header = true;
 // logout
 if (@$_GET['action'] === 'logout')
 {
-	$this->log(5, Ut::perc_replace($this->get_translation('LogUserLoggedOut', SYSTEM_LANG), $this->get_user_name()));
+	$this->log(5, Ut::perc_replace($this->_t('LogUserLoggedOut', SYSTEM_LANG), $this->get_user_name()));
 	$this->log_user_out();
 	$this->set_menu(MENU_DEFAULT);
-	$this->set_message($this->get_translation('LoggedOut'), 'success');
+	$this->set_message($this->_t('LoggedOut'), 'success');
 	$this->context[++$this->current_context] = '';
 
 	$this->redirect($this->href('', @$_GET['goback'], $uncache));
@@ -48,11 +48,11 @@ if (($user = $this->get_user()))
 
 	echo '<input type="hidden" name="action" value="logout" />';
 	echo '<div class="cssform">';
-	echo '<h3>'.$this->get_translation('Hello').", ".$this->compose_link_to_page($this->db->users_page.'/'.$user['user_name'], '', $user['user_name']).'!</h3>';
+	echo '<h3>'.$this->_t('Hello').", ".$this->compose_link_to_page($this->db->users_page.'/'.$user['user_name'], '', $user['user_name']).'!</h3>';
 
 	if ($user['last_visit'] != SQL_DATE_NULL)
 	{
-		$this->set_message($this->get_translation('LastVisit') .
+		$this->set_message($this->_t('LastVisit') .
 			' <code>' .
 			$this->get_time_formatted($user['last_visit']) .
 			'</code>');
@@ -61,7 +61,7 @@ if (($user = $this->get_user()))
 	/* STS meaning lost, seems like to be removed -- better add printing of latest security log
 	$cookie = explode(';', $this->get_cookie(AUTH_TOKEN));
 
-	$this->set_message($this->get_translation('SessionEnds') .
+	$this->set_message($this->_t('SessionEnds') .
 		' <code>' .
 		$this->get_unix_time_formatted($cookie[2]) .  // session expiry date
 		'</code> ' .
@@ -69,24 +69,24 @@ if (($user = $this->get_user()))
 	*/
 
 	// Only allow your session to be used from this IP address.
-	$this->set_message($this->get_translation('BindSessionIp') . ' '.
-		($user['validate_ip']? $this->get_translation('BindSessionIpOn') . ' ' : '') .
+	$this->set_message($this->_t('BindSessionIp') . ' '.
+		($user['validate_ip']? $this->_t('BindSessionIpOn') . ' ' : '') .
 		'<code>' .
 		($user['validate_ip']? $user['ip'] : 'Off') .
 		'</code>');
 
 	if ($this->db->tls || $this->db->tls_proxy)
 	{
-		$this->set_message($this->get_translation('TrafficProtection') .
+		$this->set_message($this->_t('TrafficProtection') .
 			' <code>' .
 			( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ) .
 			'</code>');
 	}
 
 	echo '<p><a href="' . $this->href('', '', 'action=logout') . '" style="text-decoration: none;">';
-	echo '<input type="button" class="CancelBtn" value="' . $this->get_translation('LogoutButton') . '"/></a></p>';
-	echo '<p>' . $this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0) .
-		' | <a href="' . $this->href('', '', 'action=clearcookies') . '">' . $this->get_translation('ClearCookies') . '</a></p>';
+	echo '<input type="button" class="CancelBtn" value="' . $this->_t('LogoutButton') . '"/></a></p>';
+	echo '<p>' . $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0) .
+		' | <a href="' . $this->href('', '', 'action=clearcookies') . '">' . $this->_t('ClearCookies') . '</a></p>';
 	echo '</div>';
 
 	echo $this->form_close();
@@ -110,11 +110,11 @@ else // login
 			{
 				if ($existing_user['account_status'] == 1)
 				{
-					$error .= $this->get_translation('UserApprovalPending');
+					$error .= $this->_t('UserApprovalPending');
 				}
 				else
 				{
-					$error .= $this->get_translation('AccountDisabled');
+					$error .= $this->_t('AccountDisabled');
 				}
 			}
 			else
@@ -129,7 +129,7 @@ else // login
 						// captcha validation
 						if ($this->validate_captcha() === false)
 						{
-							$error .= $this->get_translation('CaptchaFailed');
+							$error .= $this->_t('CaptchaFailed');
 						}
 					}
 					else
@@ -204,7 +204,7 @@ else // login
 						$this->set_user($existing_user);
 						$this->context[++$this->current_context] = '';
 
-						$this->log(3, Ut::perc_replace($this->get_translation('LogUserLoginOK', SYSTEM_LANG), $existing_user['user_name']));
+						$this->log(3, Ut::perc_replace($this->_t('LogUserLoginOK', SYSTEM_LANG), $existing_user['user_name']));
 
 						// run in tls mode?
 						if ($this->db->tls)
@@ -216,13 +216,13 @@ else // login
 					}
 					else
 					{
-						$error .= $this->get_translation('WrongPassword');
+						$error .= $this->_t('WrongPassword');
 						$this->log_user_delay();
 
 						$this->set_failed_user_login_count($existing_user['user_id']);
 
 						// log failed attempt
-						$this->log(2, Ut::perc_replace($this->get_translation('LogUserLoginFailed', SYSTEM_LANG), $_user_name));
+						$this->log(2, Ut::perc_replace($this->_t('LogUserLoginFailed', SYSTEM_LANG), $_user_name));
 					}
 				}
 			}
@@ -237,11 +237,11 @@ else // login
 	}
 	else if ($this->db->max_login_attempts && $_failed_login_count >= $this->db->max_login_attempts)
 	{
-		$this->show_message($this->get_translation('LoginAttemtsExceeded'), 'error');
+		$this->show_message($this->_t('LoginAttemtsExceeded'), 'error');
 	}
 
 	echo '<div class="cssform">'."\n";
-	echo '<h3>'.$this->get_translation('LoginWelcome').'</h3>'."\n";
+	echo '<h3>'.$this->_t('LoginWelcome').'</h3>'."\n";
 
 	echo $this->form_open('login');
 	echo '<input type="hidden" name="goback" value="' . Ut::html(@$_GET['goback']) . '" />' . "\n";
@@ -252,13 +252,13 @@ else // login
 	echo '</p>' . "\n";
 
 	echo '<p>';
-	echo '<label for="password">'.$this->get_translation('LoginPassword').':</label>'."\n";
+	echo '<label for="password">'.$this->_t('LoginPassword').':</label>'."\n";
 	echo '<input type="password" id="password" name="password" size="25" tabindex="2" autocomplete="off" required />'."\n";
 	echo '</p>';
 
 	echo '<p>'."\n";
 	echo '<input type="checkbox" id="persistent" name="persistent" tabindex="3"/>'."\n";
-	echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
+	echo '<label for="persistent">'.$this->_t('PersistentCookie').'</label>'."\n";
 	echo '</p>'."\n";
 
 	// captcha code starts
@@ -280,8 +280,8 @@ else // login
 	// end captcha
 
 	echo '<p>'."\n";
-	echo '<input type="submit" class="OkBtn" value="'.$this->get_translation('LoginButton').'" tabindex="4" />'."\n";
-	// echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">'.$this->get_translation('ClearCookies').'</a></small>';
+	echo '<input type="submit" class="OkBtn" value="'.$this->_t('LoginButton').'" tabindex="4" />'."\n";
+	// echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">'.$this->_t('ClearCookies').'</a></small>';
 	echo '</p>'."\n";
 	echo '<p>'.$this->format_translation('ForgotLink').'</p>'."\n";
 

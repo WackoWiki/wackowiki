@@ -47,14 +47,14 @@ $end_depth		= $to[1];
 // 3. output
 if (!$nomark)
 {
-	echo '<nav class="layout-box"><p class="layout-box"><span> '.$this->get_translation('TOCTitle').' '.$this->link($ppage, '', $legend).' </span></p>';
+	echo '<nav class="layout-box"><p class="layout-box"><span> '.$this->_t('TOCTitle').' '.$this->link($ppage, '', $legend).' </span></p>';
 }
 
 if ($_page)
 {
 	if (!$this->has_access('read', $_page['page_id']))
 	{
-		echo $this->get_translation('ReadAccessDenied');
+		echo $this->_t('ReadAccessDenied');
 	}
 	else
 	{
@@ -347,7 +347,7 @@ if ($_page)
 }
 else
 {
-	echo $this->get_translation('DoesNotExists');
+	echo $this->_t('DoesNotExists');
 }
 
 if (!$nomark)

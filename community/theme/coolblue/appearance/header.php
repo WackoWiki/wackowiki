@@ -11,7 +11,7 @@ require (join_path(THEME_DIR, '_common/_header.php'));
 <div id="head">
   <?php
 // Searchbar
-echo $this->form_open('search', '', 'get', $this->get_translation('TextSearchPage')); ?>
+echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage')); ?>
   <input type="search" name="phrase" id="search" />
   <?php
 // Search form close
@@ -55,14 +55,14 @@ echo $this->form_close();
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
 				.'icon/bookmark1.png" alt="+" title="'.
-				$this->get_translation('AddToBookmarks') .'"/></a></li>';
+				$this->_t('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
 				.'icon/bookmark2.png" alt="-" title="'.
-				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 		}
 	}
 	echo "\n</ol></div>";
@@ -71,12 +71,12 @@ echo $this->form_close();
   <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user()) { ?>
-  <?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?><br />
+  <?php echo $this->_t('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?><br />
   <small>
   <?php
-      echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
+      echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
   <br />
-  <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->get_translation('LogoutLink'); ?></a></small>
+  <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></small>
   <?php
 // Else Wacko shows login's controls
 } else {
@@ -84,13 +84,13 @@ if ($this->get_user()) { ?>
   <br />
   <?php
 // Begin Login form
-echo $this->form_open('login', '', 'post', $this->get_translation('LoginPage')); ?>
+echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
   <input type="hidden" name="action" value="login" />
   <input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" />
-  <?php echo $this->get_translation('LoginWelcome') ?>:<br />
+  <?php echo $this->_t('LoginWelcome') ?>:<br />
   <input type="text" name="name" size="12" class="login" alt="username" />
   <br />
-  <?php echo $this->get_translation('LoginPassword') ?>:<br />
+  <?php echo $this->_t('LoginPassword') ?>:<br />
   <input type="password" name="password" class="login" size="8" alt="password" />
   <input type="image" src="<?php echo $this->config['theme_url'] ?>icon/login.png" alt=">>>" align="top" />
   <?php // Closing Login form
@@ -109,13 +109,13 @@ if ($this->page)
  // If owner is current user
  if ($this->is_owner())
  {
-   print($this->get_translation('YouAreOwner')."<br /> \n");
+   print($this->_t('YouAreOwner')."<br /> \n");
 
    // Rename link
-   print(" <a href=\"".$this->href('rename')."\">".$this->get_translation('RenameText')."</a><br /> \n");
+   print(" <a href=\"".$this->href('rename')."\">".$this->_t('RenameText')."</a><br /> \n");
 
    //Edit ACLs link
-   print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"").">".$this->get_translation('ACLText')."</a>");
+   print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->_t('EditACLConfirm')."');\"":"").">".$this->_t('ACLText')."</a>");
  }
  // If owner is NOT current user
  else
@@ -123,38 +123,38 @@ if ($this->page)
    // Show Owner of this page
    if ($owner = $this->get_page_owner())
    {
-     print($this->get_translation('Owner').": ".$this->link($owner));
+     print($this->_t('Owner').": ".$this->link($owner));
    } else if (!$this->page['comment_on']) {
-     print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
+     print($this->_t('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->_t('TakeOwnership')."</a>)" : ""));
    }
  }
 // If User has rights to edit page, show Edit link
-echo $this->has_access('write') ? "<br /><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation('EditTip')."\">".$this->get_translation('EditText')."</a>" : "";
+echo $this->has_access('write') ? "<br /><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->_t('EditTip')."\">".$this->_t('EditText')."</a>" : "";
 ?>
   <br />
   <?php
 // Watch/Unwatch icon
-echo ($this->is_watched === true ? "<a href=\"".$this->href('watch')."\">".$this->get_translation('RemoveWatch')."</a>\n" : "<a href=\"".$this->href('watch')."\">".$this->get_translation('SetWatch')."</a>" );
+echo ($this->is_watched === true ? "<a href=\"".$this->href('watch')."\">".$this->_t('RemoveWatch')."</a>\n" : "<a href=\"".$this->href('watch')."\">".$this->_t('SetWatch')."</a>" );
 ?>
   <br />
   <?php
  // Rename link
  if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner())
  {
-   print("<a href=\"".$this->href('rename')."\">".$this->get_translation('RenameText')."</a><br />");
+   print("<a href=\"".$this->href('rename')."\">".$this->_t('RenameText')."</a><br />");
  }
  // Page  settings link
- print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"").">".$this->get_translation('SettingsText')."</a><br />");
+ print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->_t('EditACLConfirm')."');\"":"").">".$this->_t('SettingsText')."</a><br />");
 }
 // Remove link (shows only for Admins)
 if ($this->is_admin()){
-	print("<a href=\"".$this->href('remove')."\">".$this->get_translation('DeleteTip')."</a>");
+	print("<a href=\"".$this->href('remove')."\">".$this->_t('DeleteTip')."</a>");
 }
 ?><hr noshade="noshade" />
 <?php
 	// Revisions link
 	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() )
-			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
+			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
 			: "<li>".$this->get_time_formatted($this->page['modified'])."</li>\n"
 		);
 		?>

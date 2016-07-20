@@ -61,7 +61,7 @@ function admin_lock(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 	<p>
-		<?php echo $engine->get_translation('MainNote');?>
+		<?php echo $engine->_t('MainNote');?>
 	</p>
 	<br />
 	<table style="max-width:200px" class="formation">
@@ -82,8 +82,8 @@ function admin_lock(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="cache" />
 			<tr class="hl_setting">
-				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('ClearCache');?></td>
-				<td style="text-align:center;"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation('CacheCleared') : '<input type="submit" id="submit" value="clean" />');?></td>
+				<td class="label" style="white-space:nowrap"><?php echo $engine->_t('ClearCache');?></td>
+				<td style="text-align:center;"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->_t('CacheCleared') : '<input type="submit" id="submit" value="clean" />');?></td>
 			</tr>
 <?php
 	echo $engine->form_close();
@@ -94,9 +94,9 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="mode" value="lock" />
 		<input type="hidden" name="action" value="purge_sessions" />
 			<tr class="hl_setting">
-				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('PurgeSessions');?>
-				<br /><?php #echo $engine->get_translation('PurgeSessionsExplain');?></td>
-				<td><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->get_translation('PurgeSessionsDone') : '<input type="submit" id="submit" value="purge" />');?></td>
+				<td class="label" style="white-space:nowrap"><?php echo $engine->_t('PurgeSessions');?>
+				<br /><?php #echo $engine->_t('PurgeSessionsExplain');?></td>
+				<td><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<input type="submit" id="submit" value="purge" />');?></td>
 			</tr>
 		</table>
 <?php

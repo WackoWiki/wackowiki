@@ -12,7 +12,7 @@ $error			= '';
 
 $this->ensure_page(true); // TODO upload for forums?
 
-echo '<h3>' . $this->get_translation('UploadFiles') . "</h3>\n<br />\n";
+echo '<h3>' . $this->_t('UploadFiles') . "</h3>\n<br />\n";
 
 // check who u are, can u upload?
 if ($this->can_upload() === true)
@@ -45,7 +45,7 @@ if ($this->can_upload() === true)
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
-				$message = '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
+				$message = '<strong>'.$this->_t('UploadRemoveConfirm').'</strong>';
 				$this->show_message($message, 'warning');
 
 				if ($file['page_id'])
@@ -65,15 +65,15 @@ if ($this->can_upload() === true)
 			<br /><br />
 			<table>
 				<tr class="lined">
-					<th class="form_left" scope="row"><?php echo $this->get_translation('UploadBy'); ?>:</th>
+					<th class="form_left" scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
 					<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
 				</tr>
 				<tr class="">
-					<th class="form_left" scope="row"><?php echo $this->get_translation('FileAdded'); ?>:</th>
+					<th class="form_left" scope="row"><?php echo $this->_t('FileAdded'); ?>:</th>
 					<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
 				</tr>
 				<tr class="">
-					<th class="form_left" scope="row"><?php echo $this->get_translation('FileSize'); ?>:</th>
+					<th class="form_left" scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
 					<td><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></td>
 				</tr>
 <?php
@@ -81,20 +81,20 @@ if ($this->can_upload() === true)
 			if ($file['picture_w'])
 			{ ?>
 				<tr class="lined">
-					<th class="form_left" scope="row"><?php echo $this->get_translation('FileDimension'); ?>:</th>
+					<th class="form_left" scope="row"><?php echo $this->_t('FileDimension'); ?>:</th>
 					<td><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></td>
 				</tr>
 <?php
 			} ?>
 				<tr class="">
-					<th class="form_left" scope="row"><?php echo $this->get_translation('FileName'); ?>:</th>
+					<th class="form_left" scope="row"><?php echo $this->_t('FileName'); ?>:</th>
 					<td><?php echo $file['file_name']; ?></td>
 				</tr>
 				<tr class="lined">
-					<th class="form_left" scope="row"><?php echo $this->get_translation('UploadDesc'); ?>:</th>
+					<th class="form_left" scope="row"><?php echo $this->_t('UploadDesc'); ?>:</th>
 					<td><?php echo $file['file_description']; ?></td>
 				<tr class="lined">
-					<th class="form_left" scope="row"><?php echo $this->get_translation('FileUsage'); ?>:</th>
+					<th class="form_left" scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
 					<td><?php echo $this->action('fileusage', array('file_id' => $file['upload_id'], 'nomark' => 1)); ?></td>
 				</tr>
 			</table>
@@ -103,9 +103,9 @@ if ($this->can_upload() === true)
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove'];?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id'];?>" />
-	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />
+	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>" />
 	&nbsp;
-	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
 	<br />
 	<br />
 <?php
@@ -113,12 +113,12 @@ if ($this->can_upload() === true)
 			}
 			else
 			{
-				$this->set_message($this->get_translation('UploadRemoveDenied'), 'error');
+				$this->set_message($this->_t('UploadRemoveDenied'), 'error');
 			}
 		}
 		else
 		{
-			$message = $this->get_translation('UploadFileNotFound');
+			$message = $this->_t('UploadFileNotFound');
 			$this->show_message($message, 'info');
 		}
 
@@ -152,7 +152,7 @@ if ($this->can_upload() === true)
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
-				$message = '<strong>'.$this->get_translation('UploadEditConfirm').'</strong>';
+				$message = '<strong>'.$this->_t('UploadEditConfirm').'</strong>';
 				$this->show_message($message, 'info');
 
 				if ($file['page_id'])
@@ -172,19 +172,19 @@ if ($this->can_upload() === true)
 		<li><?php echo $this->link($path.$file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
 <?php
 			// image dimension
 			if ($file['picture_w'])
 			{ ?>
-				<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
 <?php
 			} ?>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo $file['file_description']; ?>"/></li>
+				<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('UploadDesc'); ?>:</span><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo $file['file_description']; ?>"/></li>
 			</ul>
 		</li>
 	</ul>
@@ -192,9 +192,9 @@ if ($this->can_upload() === true)
 
 	<input type="hidden" name="edit" value="<?php echo $_GET['edit']?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
-	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
+	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('EditStoreButton'); ?>" />
 	&nbsp;
-	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"/></a>
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
 	<br />
 	<br />
 <?php
@@ -202,12 +202,12 @@ if ($this->can_upload() === true)
 			}
 			else
 			{
-				$this->set_message($this->get_translation('UploadEditDenied'));
+				$this->set_message($this->_t('UploadEditDenied'));
 			}
 		}
 		else
 		{
-			$message = $this->get_translation('UploadFileNotFound');
+			$message = $this->_t('UploadFileNotFound');
 			$this->show_message($message, 'info');
 		}
 
@@ -256,7 +256,7 @@ if ($this->can_upload() === true)
 						"WHERE user_id = '".$file['user_id']."' ".
 						"LIMIT 1");
 
-					$message .= $this->get_translation('UploadRemovedFromDB').'<br />';
+					$message .= $this->_t('UploadRemovedFromDB').'<br />';
 
 					// 3. remove from FS
 					$real_filename = ($page_id
@@ -266,11 +266,11 @@ if ($this->can_upload() === true)
 
 					if (@unlink($real_filename))
 					{
-						$message .= $this->get_translation('UploadRemovedFromFS');
+						$message .= $this->_t('UploadRemovedFromFS');
 					}
 					else
 					{
-						$this->set_message($this->get_translation('UploadRemovedFromFSError'), 'error');
+						$this->set_message($this->_t('UploadRemovedFromFSError'), 'error');
 					}
 
 					if ($message)
@@ -279,16 +279,16 @@ if ($this->can_upload() === true)
 					}
 
 					// log event
-					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogRemovedFile', $this->config['language']))));
+					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->_t('LogRemovedFile', $this->config['language']))));
 				}
 				else
 				{
-					$this->set_message($this->get_translation('UploadRemoveDenied'));
+					$this->set_message($this->_t('UploadRemoveDenied'));
 				}
 			}
 			else
 			{
-				$this->set_message($this->get_translation('UploadRemoveNotFound'));
+				$this->set_message($this->_t('UploadRemoveNotFound'));
 			}
 		}
 		else if (isset($_POST['edit'])) // edit
@@ -334,7 +334,7 @@ if ($this->can_upload() === true)
 						"WHERE upload_id = '". $file['upload_id']."' ".
 						"LIMIT 1");
 
-					$message .= $this->get_translation('UploadEditedMeta')."<br />";
+					$message .= $this->_t('UploadEditedMeta')."<br />";
 
 					if ($message)
 					{
@@ -342,16 +342,16 @@ if ($this->can_upload() === true)
 					}
 
 					// log event
-					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogUpdatedFileMeta', $this->config['language']))));
+					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->_t('LogUpdatedFileMeta', $this->config['language']))));
 				}
 				else
 				{
-					$this->set_message($this->get_translation('UploadEditDenied'));
+					$this->set_message($this->_t('UploadEditDenied'));
 				}
 			}
 			else
 			{
-				$this->set_message($this->get_translation('UploadRemoveNotFound'));
+				$this->set_message($this->_t('UploadRemoveNotFound'));
 			}
 		}
 		else if (isset($_POST['upload'])) // process upload
@@ -533,16 +533,16 @@ if ($this->can_upload() === true)
 
 								// 4. output link to file
 								// !!!!! write after providing filelink syntax
-								$this->set_message($this->get_translation('UploadDone'), 'success');
+								$this->set_message($this->_t('UploadDone'), 'success');
 
 								// log event
 								if ($is_global)
 								{
-									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, $this->get_translation('LogFileUploadedGlobal', $this->config['language']))));
+									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, $this->_t('LogFileUploadedGlobal', $this->config['language']))));
 								}
 								else
 								{
-									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogFileUploadedLocal', $this->config['language'])))));
+									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->_t('LogFileUploadedLocal', $this->config['language'])))));
 								}
 								?>
 		<br />
@@ -550,19 +550,19 @@ if ($this->can_upload() === true)
 			<li><?php echo $this->link($path.$small_name); ?>
 				<ul>
 					<li><span>&nbsp;</span></li>
-					<li><span class="info_title"><?php echo $this->get_translation('FileSyntax'); ?>:</span><?php echo '<code>'.$syntax_file.'</code>'; ?></li>
-					<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($uploaded_dt); ?></li>
-					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo ''.$file_size_ft.''; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileSyntax'); ?>:</span><?php echo '<code>'.$syntax_file.'</code>'; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($uploaded_dt); ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo ''.$file_size_ft.''; ?></li>
 					<?php
 					// image dimension
 					if (isset($size))
 					{ ?>
-					<li><span class="info_title"><?php echo $this->get_translation('FileDimension'); ?>:</span><?php echo ''.$size[0].' x '.$size[1].'px'; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo ''.$size[0].' x '.$size[1].'px'; ?></li>
 					<?php
 					} ?>
 					<li><span>&nbsp;</span></li>
-					<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $small_name; ?></li>
-					<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $description; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $small_name; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('UploadDesc'); ?>:</span><?php echo $description; ?></li>
 				</ul>
 			</li>
 		</ul>
@@ -571,28 +571,28 @@ if ($this->can_upload() === true)
 							}
 							else //forbid
 							{
-								$error = $this->get_translation('UploadNotAPicture');
+								$error = $this->_t('UploadNotAPicture');
 							}
 						}
 						else //maxsize
 						{
-							$error = $this->get_translation('UploadMaxSizeReached');
+							$error = $this->_t('UploadMaxSizeReached');
 						}
 					}
 					else // is_writable
 					{
-						$error = $this->get_translation('UploadDirNotWritable');
+						$error = $this->_t('UploadDirNotWritable');
 					}
 				} //!is_uploaded_file
 				else
 				{
 					if (isset($_FILES['file']['error']) && ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE))
 					{
-						$error = $this->get_translation('UploadMaxSizeReached');
+						$error = $this->_t('UploadMaxSizeReached');
 					}
 					else if (isset($_FILES['file']['error']) && ($_FILES['file']['error'] == UPLOAD_ERR_PARTIAL || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE))
 					{
-						$error = $this->get_translation('UploadNoFile');
+						$error = $this->_t('UploadNoFile');
 					}
 					else
 					{
@@ -604,13 +604,13 @@ if ($this->can_upload() === true)
 			{
 				if ($this->config['upload_quota_per_user'] > 0)
 				{
-					$error = $this->get_translation('UploadMaxFileQuota').'. <br />'.
+					$error = $this->_t('UploadMaxFileQuota').'. <br />'.
 							 'Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->config['upload_quota_per_user']) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota_per_user']), true, true, true);
 				}
 
 				if ($this->config['upload_quota'] > 0)
 				{
-					$error .= '<br />'.$this->get_translation('UploadMaxFileQuota').'. <br />'.
+					$error .= '<br />'.$this->_t('UploadMaxFileQuota').'. <br />'.
 							  'Storage in use '.$this->binary_multiples($files['used_quota'], false, true, true).' ('.round(($files['used_quota']/($this->config['upload_quota']) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota']), true, true, true);
 				}
 			}
@@ -626,7 +626,7 @@ if ($this->can_upload() === true)
 }
 else
 {
-	$this->set_message($this->get_translation('UploadForbidden'));
+	$this->set_message($this->_t('UploadForbidden'));
 }
 
 // show uploaded files for current page
@@ -635,4 +635,4 @@ if ($this->has_access('read'))
 	echo $this->action('files', array()).'<br />';
 }
 
-echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.$this->get_translation('CancelDifferencesButton').'" /></a>'."\n";
+echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.$this->_t('CancelDifferencesButton').'" /></a>'."\n";

@@ -15,7 +15,7 @@ if ($file_id)
 	{
 		if(!$nomark)
 		{
-			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('FileUsage').': '.''."</span></p>\n";
+			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('FileUsage').': '.''."</span></p>\n";
 		}
 
 		foreach ($pages as $page)
@@ -57,7 +57,7 @@ if ($file_id)
 	}
 	else
 	{
-		echo $this->get_translation('NoFileUsage');
+		echo $this->_t('NoFileUsage');
 	}
 }
 ?>

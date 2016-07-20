@@ -10,7 +10,7 @@ $this->ensure_page();
 
 if (!($this->is_owner() || $this->is_admin()))
 {
-	$this->set_message($this->get_translation('ACLAccessDenied'), 'error');
+	$this->set_message($this->_t('ACLAccessDenied'), 'error');
 	$this->show_must_go_on();
 }
 
@@ -39,7 +39,7 @@ if (@$_POST['_action'] === 'set_permissions')
 
 		if (!$new_owner)
 		{
-			$this->set_message(Ut::perc_replace($this->get_translation('ACLNoNewOwner'), $uid), 'error');
+			$this->set_message(Ut::perc_replace($this->_t('ACLNoNewOwner'), $uid), 'error');
 			$this->reload_me();
 		}
 
@@ -75,7 +75,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		}
 
 		// log event
-		$this->log(2, Ut::perc_replace($this->get_translation('LogACLUpdated', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
+		$this->log(2, Ut::perc_replace($this->_t('LogACLUpdated', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 
 		// Change permissions for all comments on this page
 		// TODO need to rethink/redo
@@ -125,7 +125,7 @@ if (@$_POST['_action'] === 'set_permissions')
 			$new_owner['owned'] .= $this->href('', $page['tag']) . "\n";
 
 			// log event
-			$this->log(2, Ut::perc_replace($this->get_translation('LogOwnershipChanged', SYSTEM_LANG),
+			$this->log(2, Ut::perc_replace($this->_t('LogOwnershipChanged', SYSTEM_LANG),
 					$page['tag'] . ' ' . $page['title'],
 					$new_owner['user_name']));
 		}
@@ -154,7 +154,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		}
 	}
 
-	$message = $this->get_translation('ACLUpdated');
+	$message = $this->_t('ACLUpdated');
 
 	if ($new_owner && $new_owner['owned'])
 	{
@@ -165,17 +165,17 @@ if (@$_POST['_action'] === 'set_permissions')
 		{
 			$save = $this->set_language($new_owner['user_lang'], true);
 
-			$subject	= $this->get_translation('NewPageOwnership');
+			$subject	= $this->_t('NewPageOwnership');
 			$body		=
-				Ut::perc_replace($this->get_translation('YouAreNewOwner'), $this->get_user_name(), $this->config['site_name']) . "\n\n" . // STS TODO ou, pure shit message!
+				Ut::perc_replace($this->_t('YouAreNewOwner'), $this->get_user_name(), $this->config['site_name']) . "\n\n" . // STS TODO ou, pure shit message!
 				$new_owner['owned'] . "\n" .
-				$this->get_translation('PageOwnershipInfo') . "\n";
+				$this->_t('PageOwnershipInfo') . "\n";
 
 			$this->send_user_email($new_owner['user_name'], $new_owner['email'], $subject, $body, $new_owner['user_lang']);
 			$this->set_language($save, true);
 		}
 
-		$message .= $this->get_translation('ACLGaveOwnership') . '<code>' . $new_owner['user_name'] . '</code>';
+		$message .= $this->_t('ACLGaveOwnership') . '<code>' . $new_owner['user_name'] . '</code>';
 	}
 
 	// purge SQL queries cache
@@ -200,28 +200,28 @@ if ($upload_allowed)
 
 // show form
 ?>
-<h3><?php echo Ut::perc_replace($this->get_translation('ACLFor'), $this->compose_link_to_page($this->tag, '', '', 0)); ?></h3>
+<h3><?php echo Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', '', 0)); ?></h3>
 <?php
 echo $this->form_open('set_permissions', ['page_method' => 'permissions']);
 
 echo '<input type="checkbox" id="massacls" name="massacls" />';
-echo '<label for="massacls">'.$this->get_translation('AclForEntireCluster').'</label>'; ?>
+echo '<label for="massacls">'.$this->_t('AclForEntireCluster').'</label>'; ?>
 <br />
 <div class="cssform">
 <p>
-	<label for="read_acl"><strong><?php echo $this->get_translation('ACLRead'); ?></strong></label>
+	<label for="read_acl"><strong><?php echo $this->_t('ACLRead'); ?></strong></label>
 	<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $read_acl['list'] ?></textarea>
 </p>
 <p>
-	<label for="write_acl"><strong><?php echo $this->get_translation('ACLWrite'); ?></strong></label>
+	<label for="write_acl"><strong><?php echo $this->_t('ACLWrite'); ?></strong></label>
 	<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $write_acl['list'] ?></textarea>
 </p>
 <p>
-	<label for="comment_acl"><strong><?php echo $this->get_translation('ACLComment'); ?></strong></label>
+	<label for="comment_acl"><strong><?php echo $this->_t('ACLComment'); ?></strong></label>
 	<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $comment_acl['list'] ?></textarea>
 </p>
 <p>
-	<label for="create_acl"><strong><?php echo $this->get_translation('ACLCreate'); ?></strong></label>
+	<label for="create_acl"><strong><?php echo $this->_t('ACLCreate'); ?></strong></label>
 	<textarea id="create_acl" name="create_acl" rows="4" cols="20"><?php echo $create_acl['list'] ?></textarea>
 </p>
 <?php
@@ -229,14 +229,14 @@ echo '<label for="massacls">'.$this->get_translation('AclForEntireCluster').'</l
 if ($upload_allowed)
 { ?>
 <p>
-	<label for="upload_acl"><strong><?php echo $this->get_translation('ACLUpload'); ?></strong></label>
+	<label for="upload_acl"><strong><?php echo $this->_t('ACLUpload'); ?></strong></label>
 	<textarea id="upload_acl" name="upload_acl" rows="4" cols="20"><?php echo $upload_acl['list'] ?></textarea>
 </p>
 <?php } ?>
 <p>
-	<label for="new_owner_id"><strong><?php echo $this->get_translation('SetOwner'); ?></strong></label>
+	<label for="new_owner_id"><strong><?php echo $this->_t('SetOwner'); ?></strong></label>
 	<select id="new_owner_id" name="new_owner_id">
-		<option value=""><?php echo $this->get_translation('OwnerDontChange'); ?></option>
+		<option value=""><?php echo $this->_t('OwnerDontChange'); ?></option>
 	<?php
 			if (($users = $this->load_users()))
 			{
@@ -250,8 +250,8 @@ if ($upload_allowed)
 	</select>
 </p>
 <p>
-	<input type="submit" class="OkBtn" id="submit" value="<?php echo $this->get_translation('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
-	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo $this->get_translation('ACLCancelButton'); ?>"/></a>
+	<input type="submit" class="OkBtn" id="submit" value="<?php echo $this->_t('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo $this->_t('ACLCancelButton'); ?>"/></a>
 </p>
 </div>
 <?php

@@ -18,11 +18,11 @@ if ($this->config['review'] && $this->is_reviewer() && $this->page)
 	// set message
 	if ($this->page['reviewed'] == 0)
 	{
-		$message = $this->get_translation('SetAsReviewed');
+		$message = $this->_t('SetAsReviewed');
 	}
 	else
 	{
-		$message = $this->get_translation('SetAsUnreviewed');
+		$message = $this->_t('SetAsUnreviewed');
 	}
 
 	$this->set_message($message, 'success');

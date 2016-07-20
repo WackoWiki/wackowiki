@@ -535,7 +535,7 @@ if ($can_view)
 }
 else
 {
-	echo '<em>'.$this->get_translation('ActionDenied').'</em>';
+	echo '<em>'.$this->_t('ActionDenied').'</em>';
 }
 
 ?>
