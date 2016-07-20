@@ -24,7 +24,6 @@ $table_auth_token = "CREATE TABLE {$pref}auth_token (".
 					"token CHAR(64) NOT NULL DEFAULT '',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"token_expires DATETIME NULL DEFAULT NULL,".
-					"persistent TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (auth_token_id),".
 					"UNIQUE KEY idx_selector (selector),".
 					"KEY idx_user_id (user_id)".
@@ -304,7 +303,6 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"signup_time DATETIME NULL DEFAULT NULL,".
 					"change_password VARCHAR(64) NOT NULL DEFAULT '',".
 					"user_ip VARCHAR(40) NOT NULL DEFAULT '',".
-					"user_form_salt VARCHAR(40) NOT NULL DEFAULT '',".
 					"email_confirm VARCHAR(64) NOT NULL DEFAULT '',".
 					"last_visit DATETIME NULL DEFAULT NULL,".
 					"session_expire INT(10) UNSIGNED NOT NULL DEFAULT '0',".
