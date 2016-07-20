@@ -300,6 +300,12 @@ class Http
 
 		$sess->start($this->db->cookie_prefix . 'Session');
 		$this->session = & $sess;
+
+		if (isset($sess->saved_diag_log))
+		{
+			// recover old dbg messages sabed by self::redirect()
+			Diag::$log = array_merge($sess->saved_diag_log, Diag::$log);
+		}
 	}
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
@@ -354,6 +360,13 @@ class Http
 			}
 
 			header('Location: ' . $url);
+
+			if (Diag::$log)
+			{
+				// save dbg messages to show in next session..
+				$this->session->set_flash('saved_diag_log', Diag::$log);
+			}
+
 			exit;
 		}
 	}

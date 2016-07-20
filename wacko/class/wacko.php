@@ -4884,6 +4884,7 @@ class Wacko
 		}
 		else
 		{
+			// STS: maybe simply ON DUPLICATE KEY UPDATE?
 			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."acl SET ".
 					"list		= '".quote($this->dblink, trim(str_replace("\r", '', $list)))."', ".
@@ -5068,6 +5069,11 @@ class Wacko
 		if (is_array($user_name))
 		{
 			$user_name = $user_name['user_name'];
+		}
+
+		if (!$user_name)
+		{
+			$user_name = GUEST;
 		}
 
 		$user_name = strtolower($user_name);
@@ -7174,4 +7180,41 @@ class Wacko
 	{
 		$this->html_head .= $text;
 	}
+
+	// HANDLER HELPERS
+	function ensure_page()
+	{
+		if (!($p = $this->page))
+		{
+			// redirect to show method if page don't exists
+			$go = $this->href();
+		}
+		else if ($p['comment_on_id'])
+		{
+			// deny for comment
+			$go = $this->href('', $this->get_page_tag($p['comment_on_id']), 'show_comments=1', false, $p['tag']);
+		}
+		else if ($this->forum && !$this->is_admin())
+		{
+			// and for forum page
+			$go = $this->href();
+		}
+		else
+		{
+			return; // sane page, proceed
+		}
+
+		$this->redirect($go);
+	}
+
+	function reload_me()
+	{
+		$this->redirect($this->href($this->method));
+	}
+
+	function back_to_show()
+	{
+		$this->redirect($this->href());
+	}
+
 }
