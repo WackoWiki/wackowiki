@@ -164,7 +164,6 @@ $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'upload',		$alter_upload_r5_4_
 
 // user
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']);
-$upgrade['5.4.0'][]		= array($lang['AlterTable'],	'user',			$alter_user_r5_4_1,			$lang['ErrorAlteringTable']);
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'user',			$alter_user_r5_4_2,			$lang['ErrorAlteringTable']);
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'user',			$alter_user_r5_4_3,			$lang['ErrorAlteringTable']);
 
