@@ -116,7 +116,7 @@ else if (($user = $this->get_user()))
 		"hide_lastsession	= '".(int)isset($_POST['hide_lastsession'])."', ".
 		"validate_ip		= '".(int)isset($_POST['validate_ip'])."', ".
 		"noid_pubs			= '".(int)isset($_POST['noid_pubs'])."', ".
-		"session_length		= '".(int)$_POST['session_length']."' ";
+		"session_length		= '".(int)@$_POST['session_length']."' "; // @ to normalize possible discrepancy
 	}
 	else if	($action == 'user_settings_notifications')
 	{
@@ -124,8 +124,8 @@ else if (($user = $this->get_user()))
 		"send_watchmail		= '".(int)isset($_POST['send_watchmail'])."', ".
 		"allow_intercom		= '".(int)isset($_POST['allow_intercom'])."', ".
 		"notify_minor_edit	= '".(int)isset($_POST['notify_minor_edit'])."', ".
-		"notify_page		= '".(int)$_POST['notify_page']."', ".
-		"notify_comment		= '".(int)$_POST['notify_comment']."', ".
+		"notify_page		= '".(int)@$_POST['notify_page']."', ".		// @ to notify possible discrepancy
+		"notify_comment		= '".(int)@$_POST['notify_comment']."', ".	// @ to notify possible discrepancy
 		"allow_massemail	= '".(int)isset($_POST['allow_massemail'])."' ";
 	}
 	else if	($action == 'user_settings_general')
@@ -423,6 +423,7 @@ else if (($user = $this->get_user()))
 				<th class="form_left"><label for="session_length"><?php echo $this->get_translation('SessionDuration');?></label></th>
 				<td class="form_right">
 <?php
+			echo '<input type="radio" id="duration0" name="session_length" value="0" '.( $user['session_length'] == 0 ? 'checked="checked"' : '' ).'/><label for="duration0">'.$this->get_translation('SessionDurationSession').'</label>';
 			echo '<input type="radio" id="duration1" name="session_length" value="1" '.( $user['session_length'] == 1 ? 'checked="checked"' : '' ).'/><label for="duration1">'.$this->get_translation('SessionDurationDay').'</label>';
 			echo '<input type="radio" id="duration7" name="session_length" value="7" '.( $user['session_length'] == 7 ? 'checked="checked"' : '' ).'/><label for="duration7">'.$this->get_translation('SessionDurationWeek').'</label>';
 			echo '<input type="radio" id="duration30" name="session_length" value="30" '.( $user['session_length'] == 30 ? 'checked="checked"' : '' ).'/><label for="duration30">'.$this->get_translation('SessionDurationMonth').'</label>';
