@@ -28,7 +28,7 @@ require Ut::join_path(THEME_DIR, '_common/_header.php');
 			<div id="login-box">
 <?php
 // if user are logged, shows "You are UserName"
-if ($logged_in = $this->get_user())
+if (($logged_in = $this->get_user()))
 {
 	echo '<span class="nobr">'.$this->get_translation('YouAre').' '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span>'.
 		 '<small> ( <span class="nobr Tune">'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).
@@ -41,7 +41,7 @@ else
 	echo "<ul>\n";
 	echo "<li>".$this->compose_link_to_page($this->get_translation('LoginPage'), '', $this->get_translation('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
 
-	if ($this->config['allow_registration'])
+	if ($this->db->allow_registration)
 	{
 		echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), '', $this->get_translation('RegistrationPage'), 0)."</li>\n";
 	}
@@ -63,7 +63,7 @@ else
 	// main page
 	// echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 
-	$max_items = $logged_in? $logged_in['menu_items'] : $this->config['menu_items'];
+	$max_items = $logged_in? $logged_in['menu_items'] : $this->db->menu_items;
 
 	$i = 0;
 	foreach ((array)$this->get_menu() as $menu_item)
@@ -150,155 +150,156 @@ else
 	};
 
 	echo '<ul class="submenu">'."\n";
-	// find order of
 
-	// show tab
-	if ($this->has_access('read'))
+	$echo_tab('show', 'ShowTip', 'ShowText', 1, '', 'v');
+
+	if (!$this->page)
 	{
-		$echo_tab('show', 'ShowTip', 'ShowText', 1, '', 'v');
+		if ($this->has_access('create') || $this->is_admin())
+		{
+			$echo_tab('edit', 'EditTip', 'EditText', 1, '', 'e');
+			$echo_tab('new', 'CreateNewPageTip', 'CreateNewPageText', 1, '', 'n');
+		}
 	}
-
-	// edit or source tab
-	if ((!$this->page && $this->has_access('create')) ||
-			$this->is_admin() ||
-			($this->forum?
-				($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0 :
-				$this->has_access('write')))
+	else
 	{
-		$echo_tab('edit', 'EditTip', 'EditText', 1, '', 'e');
-	}
-	else if ($this->page && $this->has_access('read'))
-	{
-		$echo_tab('source', 'SourceTip', 'SourceText', 1, '', '', 'e');
-	}
+		$readable = $this->has_access('read');
 
-	if ($this->page && !$this->count_revisions($this->page['page_id'], 0, $this->is_admin()))
-	{
-		// no revisions - nothing to show
-		$this->hide_revisions = -1;
-	}
-
-	// revisions tab
-	if (!$this->forum && $this->page && $this->has_access('read') && !$this->hide_revisions)
-	{
-		$echo_tab('revisions', 'RevisionTip', 'RevisionText', 1, '', 'r');
-	}
-
-	// properties tab
-	if (!$this->forum && $this->page && ($this->is_owner()) || $this->is_admin())
-	{
-		$echo_tab('properties', 'PropertiesTip', 'PropertiesText', 1, '', 's');
-	}
-
-	// show more tab
-
-	// display more icon and text
-	//  echo '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->config['theme_url'].'icon/more.png" title="'.$this->get_translation('PageHandlerMoreTip').'" alt="'.$this->get_translation('PageHandlerMoreTip').'" /> '.$this->get_translation('PageHandlerMoreTip')."</a> \n";
-	// only display 'more' text that shows handler list on hover
-
-	if ($this->has_access('read'))
-	{
-		echo '<li class="dropdown"><a href="#" id="more">' . $this->get_translation('PageHandlerMoreTip') . '<span class="dropdown_arrow">&#9660;</span></a>' . " \n";
-		echo '<ul class="dropdown_menu">' . "\n";
-
-		// print tab
-		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank"');
-
-		// create tab
-		if ((!$this->page && $this->has_access('create')) ||
-				$this->is_admin() ||
+		// edit or source tab
+		if ($this->is_admin() ||
 				($this->forum?
 					($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0 :
 					$this->has_access('write')))
 		{
-			$echo_tab('new', 'CreateNewPageTip', 'CreateNewPageText', 2, '', 'n');
+			$echo_tab('edit', 'EditTip', 'EditText', 1, '', 'e');
+		}
+		else if ($readable)
+		{
+			$echo_tab('source', 'SourceTip', 'SourceText', 1, '', '', 'e');
 		}
 
-		// clone tab
-		if ((!$this->page && $this->has_access('create')) ||
-				$this->is_admin() ||
-				(!$this->forum && $this->has_access('write')))
+		if (!$this->count_revisions($this->page['page_id'], 0, $this->is_admin()))
 		{
-			$echo_tab('clone', 'ClonePage', 'CloneText', 2, '', '');
+			// no revisions - nothing to show
+			$this->hide_revisions = -1;
 		}
 
-		// remove tab
-		if ($this->page && ($this->is_admin() ||
-				(!$this->config['remove_onlyadmins'] &&
-					($this->forum?  $this->is_owner() && (int)$this->page['comments'] == 0 : $this->is_owner()))))
+		// revisions tab
+		if (!$this->forum && $readable && !$this->hide_revisions)
 		{
-			$echo_tab('remove', 'DeleteTip', 'DeleteText', 2, '', '');
+			$echo_tab('revisions', 'RevisionTip', 'RevisionText', 1, '', 'r');
 		}
 
-		// rename tab
-		if ($this->page && ($this->is_admin() || ($this->is_owner() &&
-				(!$this->forum || (int)$this->page['comments'] != 0))))
+		// properties tab
+		if (!$this->forum && ($this->is_owner()) || $this->is_admin())
 		{
-			$echo_tab('rename', 'RenameTip', 'RenameText', 2, '', '');
+			$echo_tab('properties', 'PropertiesTip', 'PropertiesText', 1, '', 's');
 		}
 
-		// moderation tab
-		if ($this->is_moderator())
-		{
-			$echo_tab('moderate', 'ModerateTip', 'ModerateText', 2, '', 'm');
-		}
+		// show more tab
 
-		// permissions tab
-		if (!$this->forum && $this->page && ($this->is_admin() || $this->is_owner()))
-		{
-			$echo_tab('permissions', 'ACLTip', 'ACLText', 2, '', 'a');
-		}
+		// display more icon and text
+		//  echo '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->config['theme_url'].'icon/more.png" title="'.$this->get_translation('PageHandlerMoreTip').'" alt="'.$this->get_translation('PageHandlerMoreTip').'" /> '.$this->get_translation('PageHandlerMoreTip')."</a> \n";
+		// only display 'more' text that shows handler list on hover
 
-		// categories tab
-		if ($this->page && ($this->is_admin() || $this->is_owner()))
 		{
-			$echo_tab('categories', 'CategoriesTip', 'CategoriesText', 2, '', 'c');
-		}
+			echo '<li class="dropdown"><a href="#" id="more">' . $this->get_translation('PageHandlerMoreTip') . '<span class="dropdown_arrow">&#9660;</span></a>' . " \n";
+			echo '<ul class="dropdown_menu">' . "\n";
 
-		// referrers tab
-		if ($this->page)
-		{
+			// print tab
+			if ($readable)
+			{
+				$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank"');
+			}
+
+			// create tab
+			if ($this->has_access('create') || $this->is_admin())
+			{
+				$echo_tab('new', 'CreateNewPageTip', 'CreateNewPageText', 2, '', 'n');
+			}
+
+			// clone tab
+			if ($readable)
+			{
+				$echo_tab('clone', 'ClonePage', 'CloneText', 2, '', '');
+			}
+
+			// remove tab
+			if (($this->is_admin() ||
+					(!$this->config['remove_onlyadmins'] &&
+						($this->forum?  $this->is_owner() && (int)$this->page['comments'] == 0 : $this->is_owner()))))
+			{
+				$echo_tab('remove', 'DeleteTip', 'DeleteText', 2, '', '');
+			}
+
+			// rename tab
+			if ($this->is_admin() || ($this->is_owner() &&
+					(!$this->forum || (int)$this->page['comments'] != 0)))
+			{
+				$echo_tab('rename', 'RenameTip', 'RenameText', 2, '', '');
+			}
+
+			// moderation tab
+			if ($readable && $this->is_moderator())
+			{
+				$echo_tab('moderate', 'ModerateTip', 'ModerateText', 2, '', 'm');
+			}
+
+			// permissions tab
+			if (!$this->forum && ($this->is_admin() || $this->is_owner()))
+			{
+				$echo_tab('permissions', 'ACLTip', 'ACLText', 2, '', 'a');
+			}
+
+			// categories tab
+			if ($this->is_admin() || $this->is_owner())
+			{
+				$echo_tab('categories', 'CategoriesTip', 'CategoriesText', 2, '', 'c');
+			}
+
+			// referrers tab
 			$echo_tab('referrers', 'ReferrersTip', 'ReferrersText', 2, '', 'l');
-		}
 
-		// watch tab
-			// ($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
-		if ($this->page && $logged_in)
-		{
-			if ($this->is_watched)
+			// watch tab
+				// ($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
+			if ($logged_in)
 			{
-				$echo_tab('watch', 'RemoveWatch', 'UnWatchText', 2, 'watch-off', 'w');
+				if ($this->is_watched)
+				{
+					$echo_tab('watch', 'RemoveWatch', 'UnWatchText', 2, 'watch-off', 'w');
+				}
+				else
+				{
+					$echo_tab('watch', 'SetWatch', 'WatchText', 2, 'watch-on', 'w');
+				}
 			}
-			else
-			{
-				$echo_tab('watch', 'SetWatch', 'WatchText', 2, 'watch-on', 'w');
-			}
-		}
 
-		// review tab
-		if (!$this->forum && $this->page && $this->config['review'] && $this->is_reviewer())
-		{
-			if ($this->page['reviewed'])
+			// review tab
+			if (!$this->forum && $readable && $this->config['review'] && $this->is_reviewer())
 			{
-				$echo_tab('review', 'RemoveReview', 'Reviewed', 2, 'review2', 'z');
+				if ($this->page['reviewed'])
+				{
+					$echo_tab('review', 'RemoveReview', 'Reviewed', 2, 'review2', 'z');
+				}
+				else
+				{
+					$echo_tab('review', 'SetReview', 'Review', 2, 'review1', 'z');
+				}
 			}
-			else
+
+			// upload tab
+			if (!$this->forum && $this->has_access('upload'))
 			{
-				$echo_tab('review', 'SetReview', 'Review', 2, 'review1', 'z');
+				$echo_tab('upload', 'FilesTip', 'FilesText', 2, '', 'u');
 			}
-		}
 
-		// upload tab
-		if (!$this->forum && $this->page && $this->has_access('upload'))
-		{
-			$echo_tab('upload', 'FilesTip', 'FilesText', 2, '', 'u');
+			// last empty
+			echo "<li></li>\n";
+			echo "</ul>\n";
+			echo "</li>\n";
 		}
-
-		// last empty
-		echo "<li></li>\n";
-		echo "</ul>\n";
-		echo "</li>\n";
 	}
+
 			// echo "</ul>\n"; // list continues with search
 ?>
 			<li class="search">
