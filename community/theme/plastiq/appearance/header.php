@@ -24,17 +24,17 @@ $user = '';
 
 if ($user = $this->get_user())
 {
-	echo 'id: '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).' &nbsp; <a href="'.$this->href('', $this->get_translation('AccountLink')).'" title="'.$this->get_translation('AccountTip').'">'.$this->get_translation('AccountText').'</a> &nbsp; <a href="'.$this->href('', $this->get_translation('LoginPage')).'" title="'.$this->get_translation('SessionTip').'">'.$this->get_translation('Session').'</a> &nbsp; <a onclick="return confirm(\''.$this->get_translation('LogoutAreYouSure').'\');" href="'.$this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)).'" title="'.$this->get_translation('LogoutButton').'">'.$this->get_translation('LogoutLink').'</a><br />';
+	echo 'id: '.$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).' &nbsp; <a href="'.$this->href('', $this->_t('AccountLink')).'" title="'.$this->_t('AccountTip').'">'.$this->_t('AccountText').'</a> &nbsp; <a href="'.$this->href('', $this->_t('LoginPage')).'" title="'.$this->_t('SessionTip').'">'.$this->_t('Session').'</a> &nbsp; <a onclick="return confirm(\''.$this->_t('LogoutAreYouSure').'\');" href="'.$this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)).'" title="'.$this->_t('LogoutButton').'">'.$this->_t('LogoutLink').'</a><br />';
 }
 else
 {
 ?>
-	id: <em><?php echo $this->get_translation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('LoginPage')); ?>" title="log and log in"><?php echo $this->get_translation('LoginPage'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('RegistrationPage')); ?>" title="log in"><?php echo $this->get_translation('RegistrationPage'); ?></a><br />
+	id: <em><?php echo $this->_t('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->_t('LoginPage')); ?>" title="log and log in"><?php echo $this->_t('LoginPage'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->_t('RegistrationPage')); ?>" title="log in"><?php echo $this->_t('RegistrationPage'); ?></a><br />
 <?php
 }
 echo "\n";
 ?>
-							<?php echo $this->get_translation('CurrentTime').' '. date($this->config['time_format_seconds'].' '.$this->config['date_format'], $this->get_time_tz( time() ) ); ?>
+							<?php echo $this->_t('CurrentTime').' '. date($this->config['time_format_seconds'].' '.$this->config['date_format'], $this->get_time_tz( time() ) ); ?>
 						</div>
 					</td>
 				</tr>
@@ -91,16 +91,16 @@ echo "\n";
 	{
 		if (in_array($this->tag, $this->get_menu_links()))
 		{
-			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="'.$this->get_translation('RemoveFromBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.png" /></a></div>';
+			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="'.$this->_t('RemoveFromBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.png" /></a></div>';
 		}
 		else
 		{
-			echo '<div class="bookmark_in"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.png" /></a></div>';
+			echo '<div class="bookmark_in"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->_t('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.png" /></a></div>';
 		}
 	}
 	else
 	{
-		echo '<div class="bookmark_in"><img src="'.$this->config['theme_url'].'images/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
+		echo '<div class="bookmark_in"><img src="'.$this->config['theme_url'].'images/spacer.png" title="'.$this->_t('CantAddBookmarks').'" /></div>';
 	}
 	echo "\n";
 
@@ -138,22 +138,22 @@ echo "\n";
 		{
 			if ($owner = $this->get_page_owner())
 			{
-				echo $this->get_translation('Owner').': '.$this->user_link($owner, $lang = '', true, false).' ';
+				echo $this->_t('Owner').': '.$this->user_link($owner, $lang = '', true, false).' ';
 			}
 			else
 			{
 				echo ( substr($this->tag, 0, strlen($this->config['news_cluster'])) == $this->config['news_cluster']
-					? $this->get_translation('Nobody').' '
-					: '<a href="'.$this->href('claim').'">'.$this->get_translation('TakeOwnership').'</a> '
+					? $this->_t('Nobody').' '
+					: '<a href="'.$this->href('claim').'">'.$this->_t('TakeOwnership').'</a> '
 				);
 			}
 
 			if ($this->page['created'])
 			{
-				echo '('.$this->get_translation('Created').' '.$this->get_time_formatted($this->page['created']).'), ';
+				echo '('.$this->_t('Created').' '.$this->get_time_formatted($this->page['created']).'), ';
 			}
 
-			echo $this->get_translation('Modified').' '.$this->get_time_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.$this->user_link($this->page['user_name'], $lang = '', true, false) .')';
+			echo $this->_t('Modified').' '.$this->get_time_formatted($this->page['modified']).' ('.$this->_t('By').': '.$this->user_link($this->page['user_name'], $lang = '', true, false) .')';
 		}
 	}
 	echo "\n";
@@ -167,14 +167,14 @@ echo "\n";
 		{
 			if ($this->is_watched === true)
 			{
-				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->get_translation('RemoveWatch'); ?>"><?php echo $this->get_translation('UnWatchText'); ?></a> &nbsp;&nbsp; <?php
+				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->_t('RemoveWatch'); ?>"><?php echo $this->_t('UnWatchText'); ?></a> &nbsp;&nbsp; <?php
 			}
 			else
 			{
-				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->get_translation('SetWatch'); ?>"><?php echo $this->get_translation('WatchText'); ?></a> &nbsp;&nbsp; <?php
+				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->_t('SetWatch'); ?>"><?php echo $this->_t('WatchText'); ?></a> &nbsp;&nbsp; <?php
 			}
 		}
-		?><a href="<?php echo $this->href('print') ?>" title="<?php echo $this->get_translation('PrintVersion'); ?>"><?php echo $this->get_translation('PrintText'); ?></a><?php
+		?><a href="<?php echo $this->href('print') ?>" title="<?php echo $this->_t('PrintVersion'); ?>"><?php echo $this->_t('PrintText'); ?></a><?php
 	}
 	echo "\n";
 ?>
@@ -185,12 +185,12 @@ echo "\n";
 	if (isset($this->categories))
 	{
 		$i = '';
-		echo '<div style="white-space:normal;">'.$this->get_translation('Categories').': ';
+		echo '<div style="white-space:normal;">'.$this->_t('Categories').': ';
 
 		foreach ($this->categories as $word)
 		{
 			if ($i++ > 0) echo ", ";
-			echo '<a href="'.$this->href('', $this->get_translation('TextSearchPage'), 'filter=pages&amp;keywords='.rawurlencode($word)).'">'.strtolower($word).'</a>';
+			echo '<a href="'.$this->href('', $this->_t('TextSearchPage'), 'filter=pages&amp;keywords='.rawurlencode($word)).'">'.strtolower($word).'</a>';
 		}
 
 		echo '</div>';
@@ -324,85 +324,85 @@ echo "\n";
 	// create tab
 	echo echo_tab(
 		$this->href('new'),
-		$this->get_translation('CreateNewPageTip'),
-		$this->get_translation('CreatePageButton'),
+		$this->_t('CreateNewPageTip'),
+		$this->_t('CreatePageButton'),
 		$this->method == 'new',
 		'n');
 
 	// show tab
 	echo echo_tab(
 		$this->href('show'),
-		$this->get_translation('ShowTip'),
-		$this->has_access('read') ? $this->get_translation('ShowText') : '',
+		$this->_t('ShowTip'),
+		$this->has_access('read') ? $this->_t('ShowText') : '',
 		$this->method == 'show',
 		'v');
 
 	// edit tab
 	echo echo_tab(
 		$this->href('edit'),
-		$this->get_translation('EditTip'),
+		$this->_t('EditTip'),
 		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 			($this->forum === false && $this->has_access('write')) ||
 			($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
-			? $this->get_translation('EditText') : '',
+			? $this->_t('EditText') : '',
 		$this->method == 'edit',
 		'e');
 
 	// revisions tab
 	echo echo_tab(
 		$this->href('revisions'),
-		$this->get_translation('RevisionTip'),
-		((($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() ) && $this->forum === false && $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
+		$this->_t('RevisionTip'),
+		((($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() ) && $this->forum === false && $this->page && $this->has_access('read')) ? $this->_t('RevisionText') : '',
 		$this->method == 'revisions' || $this->method == 'diff',
 		'r');
 
 	// remove tab
 	echo echo_tab(
 		$this->href('remove'),
-		$this->get_translation('DeleteTip'),
+		$this->_t('DeleteTip'),
 		($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
 			($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
 			($this->forum === false && $this->is_owner()))))
-			? $this->get_translation('DeleteText')  : '',
+			? $this->_t('DeleteText')  : '',
 		$this->method == 'remove');
 
 	// referrers tab
 	echo echo_tab(
 		$this->href('referrers'),
-		$this->get_translation('ReferrersTip'),
-		($this->page && $this->has_access('read')) ? $this->get_translation('ReferrersText') : '',
+		$this->_t('ReferrersTip'),
+		($this->page && $this->has_access('read')) ? $this->_t('ReferrersText') : '',
 		$this->method == 'referrers' || $this->method == 'referrers_sites',
 		'l');
 
 	// moderation tab
 	echo echo_tab(
 		$this->href('moderate'),
-		$this->get_translation('ModerateTip'),
-		($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
+		$this->_t('ModerateTip'),
+		($this->is_moderator() && $this->has_access('read')) ? $this->_t('ModerateText') : '',
 		$this->method == 'moderate',
 		'm');
 
 	// settings tab
 	echo echo_tab(
 		$this->href('properties'),
-		$this->get_translation('PropertiesTip'),
-		(/* $this->forum === false && $this->page && */ ($this->is_admin() /*|| $this->is_moderator() */|| $this->is_owner())) ? $this->get_translation('PropertiesText') : '',
+		$this->_t('PropertiesTip'),
+		(/* $this->forum === false && $this->page && */ ($this->is_admin() /*|| $this->is_moderator() */|| $this->is_owner())) ? $this->_t('PropertiesText') : '',
 		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
 		's');
 
 	// upload tab
 	echo echo_tab(
 		$this->href('upload'),
-		$this->get_translation('FilesTip'),
-		(/* $this->forum === false && */ $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
+		$this->_t('FilesTip'),
+		(/* $this->forum === false && */ $this->page && $this->has_access('upload')) ? $this->_t('FilesText') : '',
 		$this->method == 'upload',
 		'u');
 
 	// acls tab
 	echo echo_tab(
 		$this->href('permissions'),
-		$this->get_translation('ACLTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->get_translation('ACLText') : '',
+		$this->_t('ACLTip'),
+		($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? $this->_t('ACLText') : '',
 		$this->method == 'permissions',
 		'a');
 ?>

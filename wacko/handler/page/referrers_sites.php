@@ -13,7 +13,7 @@ if (($this->config['enable_referrers'] == 0) ||
 	($this->config['enable_referrers'] == 1 && !$this->get_user()) ||
 	($this->config['enable_referrers'] == 2 && !$this->is_admin()))
 {
-	$this->set_message($this->get_translation('ReadAccessDenied'), 'error');
+	$this->set_message($this->_t('ReadAccessDenied'), 'error');
 	$this->show_must_go_on();
 }
 
@@ -26,34 +26,34 @@ if (!ctype_lower($mode))
 // navigation
 if ($mode == 'global')
 {
-	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersGlobal')."</h3>";
+	echo "<h3>".$this->_t('ReferrersText')." &raquo; ".$this->_t('ViewReferrersGlobal')."</h3>";
 	echo '<ul class="menu">
-			<li><a href="'.$this->href('referrers_sites').'">'.$this->get_translation('ViewReferrersPage').'</a></li>
-			<li class="active">'.$this->get_translation('ViewReferrersGlobal')."</li>
+			<li><a href="'.$this->href('referrers_sites').'">'.$this->_t('ViewReferrersPage').'</a></li>
+			<li class="active">'.$this->_t('ViewReferrersGlobal')."</li>
 		</ul><br /><br />\n";
 }
 else
 {
-	echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPage')."</h3>";
+	echo "<h3>".$this->_t('ReferrersText')." &raquo; ".$this->_t('ViewReferrersPage')."</h3>";
 	echo '<ul class="menu">
-			<li class="active">'.$this->get_translation('ViewReferrersPage').'</li>
-			<li><a href="'.$this->href('referrers_sites', '', 'o=global').'">'. $this->get_translation('ViewReferrersGlobal')."</a></li>
+			<li class="active">'.$this->_t('ViewReferrersPage').'</li>
+			<li><a href="'.$this->href('referrers_sites', '', 'o=global').'">'. $this->_t('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 }
 
 $href = $this->href('referrers', '', 'o=' . $mode);
 if ($mode == 'global')
 {
-	$title		= Ut::perc_replace($this->get_translation('DomainsSitesPagesGlobal'), $href);
+	$title		= Ut::perc_replace($this->_t('DomainsSitesPagesGlobal'), $href);
 	$referrers	= $this->load_referrers();
 }
 else
 {
-	$title = Ut::perc_replace($this->get_translation('DomainsSitesPages'),
+	$title = Ut::perc_replace($this->_t('DomainsSitesPages'),
 		$this->compose_link_to_page($this->tag),
 		(($i = $this->config['referrers_purge_time']) == 0? '' :
-			($i == 1? $this->get_translation('Last24Hours') :
-			Ut::perc_replace($this->get_translation('LastDays'), $i))),
+			($i == 1? $this->_t('Last24Hours') :
+			Ut::perc_replace($this->_t('LastDays'), $i))),
 		$href);
 	$referrers = $this->load_referrers($this->page['page_id']);
 }
@@ -99,5 +99,5 @@ if ($referrers)
 }
 else
 {
-	echo $this->get_translation('NoneReferrers')."<br />\n";
+	echo $this->_t('NoneReferrers')."<br />\n";
 }

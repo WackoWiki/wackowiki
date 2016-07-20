@@ -187,7 +187,7 @@ function admin_db_backup(&$engine, &$module)
 
 		$engine->log(1, 'Saved backup database '.trim($pack, '/'));
 
-		$message = '<p>'.$engine->get_translation('BackupCompleted').'</p>';
+		$message = '<p>'.$engine->_t('BackupCompleted').'</p>';
 
 		$engine->show_message($message, 'success');
 	}
@@ -201,7 +201,7 @@ function admin_db_backup(&$engine, &$module)
 		{
 ?>
 		<p>
-			<?php echo $engine->get_translation('BackupSettings'); ?>
+			<?php echo $engine->_t('BackupSettings'); ?>
 		</p>
 		<br />
 
@@ -210,13 +210,13 @@ function admin_db_backup(&$engine, &$module)
 ?>
 			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
-					<th style="text-align:right"><?php echo $engine->get_translation('BackupCluster'); ?>:</th>
+					<th style="text-align:right"><?php echo $engine->_t('BackupCluster'); ?>:</th>
 					<th colspan="2"><input type="text" name="root" size="30" value="" /></th>
 				</tr>
 				<tr>
-					<th><?php echo $engine->get_translation('BackupTable'); ?></th>
-					<th>&nbsp;&nbsp;<a href="?mode=db_backup<?php echo $getstr.( isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1' ); ?>"><?php echo $engine->get_translation('BackupStructure'); ?></a></th>
-					<th><a href="?mode=db_backup<?php echo $getstr.( isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1' ); ?>"><?php echo $engine->get_translation('BackupData'); ?></a></th>
+					<th><?php echo $engine->_t('BackupTable'); ?></th>
+					<th>&nbsp;&nbsp;<a href="?mode=db_backup<?php echo $getstr.( isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1' ); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
+					<th><a href="?mode=db_backup<?php echo $getstr.( isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1' ); ?>"><?php echo $engine->_t('BackupData'); ?></a></th>
 				</tr>
 <?php
 			foreach ($tables as $table)
@@ -241,8 +241,8 @@ function admin_db_backup(&$engine, &$module)
 			}
 ?>
 				<tr>
-					<th colspan="2"><?php echo $engine->get_translation('BackupFolder'); ?></th>
-					<th>&nbsp;&nbsp;<a href="?mode=db_backup<?php echo $getstr.( isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1' ); ?>"><?php echo $engine->get_translation('BackupFiles'); ?></a></th>
+					<th colspan="2"><?php echo $engine->_t('BackupFolder'); ?></th>
+					<th>&nbsp;&nbsp;<a href="?mode=db_backup<?php echo $getstr.( isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1' ); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
 				</tr>
 <?php
 			foreach ($directories as $dir)

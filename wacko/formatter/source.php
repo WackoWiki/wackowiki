@@ -16,7 +16,7 @@ if ($copy_button)
 	$this->add_html_head('<script type="text/javascript" src="' . $this->config['base_url'] . 'js/clipboard.min.js" async onload="new Clipboard(\'.clipb\')"></script>' . "\n");
 
 	echo '<button class="clipb" style="margin:5px" data-clipboard-target="#' . $div_id . '">'.
-		$this->get_translation('SourceCopyToClipboard').
+		$this->_t('SourceCopyToClipboard').
 		'</button>';
 }
 
@@ -31,7 +31,7 @@ switch ($default)
 		$text = Ut::html($text, false);
 
 		// insert about the source
-		$text .= "\n\n----\n" . $this->get_translation('SourceFrom') . '((/' . $source . '))';
+		$text .= "\n\n----\n" . $this->_t('SourceFrom') . '((/' . $source . '))';
 
 		// prepare a text to the conclusion
 		$text = preg_replace_callback('/^ +/m',
@@ -50,8 +50,8 @@ switch ($default)
 
 		// about the source
 		echo "\n\n<br /><br /><hr />\n\n<p>".
-			$this->get_translation('SourceFrom').
-				$this->link($source, '', $this->get_translation('SourceFromLink')).
+			$this->_t('SourceFrom').
+				$this->link($source, '', $this->_t('SourceFromLink')).
 				"</p>";
 		break;
 
@@ -59,7 +59,7 @@ switch ($default)
 		echo Ut::html($text);
 
 		// about the source
-		echo "\n\n<hr />\n" . $this->get_translation('SourceFrom') . $this->href($source);
+		echo "\n\n<hr />\n" . $this->_t('SourceFrom') . $this->href($source);
 		break;
 }
 

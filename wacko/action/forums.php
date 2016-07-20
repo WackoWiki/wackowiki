@@ -72,10 +72,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// display list
 	echo '<table class="forum">'.
 			'<tr>'.
-				'<th>'.$this->get_translation('ForumSubforums').'</th>'.
-				'<th>'.$this->get_translation('ForumTopics').'</th>'.
-				'<th>'.$this->get_translation('ForumPosts').'</th>'.
-				'<th>'.$this->get_translation('ForumLastComment').'</th>'.
+				'<th>'.$this->_t('ForumSubforums').'</th>'.
+				'<th>'.$this->_t('ForumTopics').'</th>'.
+				'<th>'.$this->_t('ForumPosts').'</th>'.
+				'<th>'.$this->_t('ForumLastComment').'</th>'.
 			'</tr>'."\n";
 
 	foreach ($forums as $forum)
@@ -141,10 +141,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			echo '<tr class="lined">'.
 					'<td style="width:60%; vertical-align:top;">'.
 						( $this->has_access('read', $forum['page_id'], GUEST) === false
-							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('DeleteCommentTip').'" alt="'.$this->get_translation('DeleteText').'" class="btn-locked"/>'
+							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" class="btn-locked"/>'
 							: '' ).
 						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
-							? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> '
+							? '<strong class="cite" title="'.$this->_t('ForumNewPosts').'">[updated]</strong> '
 							: '' ).
 						'<strong>'.$this->link('/'.$forum['tag'], '', $forum['title'], '', 0, '', $_lang).'</strong><br />'.
 						'<small>'.$forum['description'].'</small>'.
@@ -182,7 +182,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			else
 			{
 				echo '<td>';
-				echo '<small><em>'.$this->get_translation('ForumNoComments').'</em></small>';
+				echo '<small><em>'.$this->_t('ForumNoComments').'</em></small>';
 			}
 
 			echo	'</td>'.
@@ -196,10 +196,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// mark all forums read
 	if ($user == true)
 	{
-		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
+		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
 	}
 
-	echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br />'."\n";
+	echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br />'."\n";
 }
 
 ?>

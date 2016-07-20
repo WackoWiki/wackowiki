@@ -89,12 +89,12 @@ if ($this->user_allowed_comments())
 		{
 			if ($user == true)
 			{
-				echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
+				echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
 			}
 
 			if ($root == '' && !(int)$noxml)
 			{
-				echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
+				echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
 			}
 
 			$this->print_pagination($pagination);
@@ -143,7 +143,7 @@ if ($this->user_allowed_comments())
 						? $this->link('/'.$page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
 						: $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
 					).
-					' . . . . . . . . . . . . . . . . <small>'.$this->get_translation('LatestCommentBy').' '.
+					' . . . . . . . . . . . . . . . . <small>'.$this->_t('LatestCommentBy').' '.
 					$this->user_link($page['comment_owner_name'], '', true, false).
 					"</small></li>\n";
 				}
@@ -155,13 +155,13 @@ if ($this->user_allowed_comments())
 		}
 		else
 		{
-			echo $this->get_translation('NoRecentlyCommented');
+			echo $this->_t('NoRecentlyCommented');
 		}
 	}
 }
 else
 {
-	echo $this->get_translation('CommentsDisabled');
+	echo $this->_t('CommentsDisabled');
 }
 
 ?>

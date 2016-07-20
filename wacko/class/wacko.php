@@ -289,14 +289,14 @@ class Wacko
 
 	function get_time_interval($ago, $strip = false)
 	{
-		$res = 0 . $this->get_translation('FeedMinutesAgo');
+		$res = 0 . $this->_t('FeedMinutesAgo');
 
 		foreach ($this->time_intervals as $val => $name)
 		{
 			if ($ago >= $val)
 			{
 				$interval = ($ago - $ago % $val) / $val;
-				$res = $interval . $this->get_translation('Feed'.$name.($interval == 1? '' : 's').'Ago');
+				$res = $interval . $this->_t('Feed'.$name.($interval == 1? '' : 's').'Ago');
 				break;
 			}
 		}
@@ -548,7 +548,7 @@ class Wacko
 		return $lang;
 	}
 
-	function get_translation($name, $lang = '', $dounicode = true)
+	function _t($name, $lang = '', $dounicode = true)
 	{
 		if ($this->db->multilanguage)
 		{
@@ -597,7 +597,7 @@ class Wacko
 
 	function format_translation($name, $lang = '')
 	{
-		$string = $this->get_translation($name, $lang, false);
+		$string = $this->_t($name, $lang, false);
 		$this->format_safe = false;
 		$string = $this->format($string);
 		$this->format_safe = true;
@@ -1301,19 +1301,19 @@ class Wacko
 		if(isset($user['user_name']))
 		{
 			$pages[]	= $this->config['users_page'].'/'.$user['user_name'];
-			$pages[]	= $this->get_translation('AccountLink');
+			$pages[]	= $this->_t('AccountLink');
 		}
 		else
 		{
-			$pages[]	= $this->get_translation('RegistrationPage');
+			$pages[]	= $this->_t('RegistrationPage');
 		}
 
 		$pages[]	= $this->config['root_page'];
 		$pages[]	= $this->config['users_page'];
 		$pages[]	= $this->config['policy_page'];
 		$pages[]	= $this->config['permalink_page'];
-		$pages[]	= $this->get_translation('LoginPage');
-		$pages[]	= $this->get_translation('TextSearchPage');
+		$pages[]	= $this->_t('LoginPage');
+		$pages[]	= $this->_t('TextSearchPage');
 		$pages[]	= $this->tag;
 
 		#$pages[]	= $this->tag;
@@ -1703,7 +1703,7 @@ class Wacko
 				{
 					if (stripos($text, trim($one)) !== false)
 					{
-						return $this->get_translation('PotentialSpam') . ' : <code>' . $one . '</code>';
+						return $this->_t('PotentialSpam') . ' : <code>' . $one . '</code>';
 					}
 				}
 			}
@@ -1897,7 +1897,7 @@ class Wacko
 				{
 					if ($comment_on_id)
 					{
-						$title = $this->get_translation('Comment').' '.substr($tag, 7);
+						$title = $this->_t('Comment').' '.substr($tag, 7);
 					}
 					else
 					{
@@ -2014,12 +2014,12 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// see add_comment handler
-					// $this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', SYSTEM_LANG))));
+					// $this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->_t('LogCommentPosted', SYSTEM_LANG))));
 				}
 				else
 				{
 					// added new page
-					$this->log(4, Ut::perc_replace($this->get_translation('LogPageCreated', SYSTEM_LANG), $tag.' '.$title));
+					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag.' '.$title));
 				}
 
 				// TODO: move to additional function
@@ -2083,7 +2083,7 @@ class Wacko
 				{
 					if ($comment_on_id == true)
 					{
-						$title = $this->get_translation('Comment').' '.substr($tag, 7);
+						$title = $this->_t('Comment').' '.substr($tag, 7);
 					}
 					else
 					{
@@ -2132,12 +2132,12 @@ class Wacko
 					if ($this->page['comment_on_id'] != 0)
 					{
 						// comment modified
-						$this->log(6, Ut::perc_replace($this->get_translation('LogCommentEdited', SYSTEM_LANG), $tag.' '.$title));
+						$this->log(6, Ut::perc_replace($this->_t('LogCommentEdited', SYSTEM_LANG), $tag.' '.$title));
 					}
 					else
 					{
 						// old page modified
-						$this->log(6, Ut::perc_replace($this->get_translation('LogPageEdited', SYSTEM_LANG), $tag.' '.$title));
+						$this->log(6, Ut::perc_replace($this->_t('LogPageEdited', SYSTEM_LANG), $tag.' '.$title));
 					}
 
 					// Since there's no revision history for comments it's pointless to do the following for them.
@@ -2276,7 +2276,7 @@ class Wacko
 		$tag				= $this->config['users_page'].'/'.$user_name;
 		// add your user page template here
 		$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
-		$change_summary		= $this->get_translation('NewUserAccount'); //'auto created';
+		$change_summary		= $this->_t('NewUserAccount'); //'auto created';
 
 		// add user page
 		if ($this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META) == false)
@@ -2319,9 +2319,9 @@ class Wacko
 				/* TODO: set user language for email encoding */
 				$save = $this->set_language($user_lang, true);
 
-				$subject	=	$this->get_translation('RegistrationApproved');
-				$body		=	Ut::perc_replace($this->get_translation('UserApprovedInfo'), $this->db->site_name)."\n\n".
-								$this->get_translation('EmailRegisteredLogin')."\n\n";
+				$subject	=	$this->_t('RegistrationApproved');
+				$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name)."\n\n".
+								$this->_t('EmailRegisteredLogin')."\n\n";
 
 				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
 
@@ -2335,10 +2335,10 @@ class Wacko
 		$save = $this->set_language($user_lang, true);
 
 		$subject	=	'['.$this->config['site_name'].'] '.$subject;
-		$body		=	$this->get_translation('EmailHello').' '.$user_name.",\n\n".
+		$body		=	$this->_t('EmailHello').' '.$user_name.",\n\n".
 						$body."\n\n".
-						$this->get_translation('EmailDoNotReply')."\n\n".
-						$this->get_translation('EmailGoodbye')."\n".
+						$this->_t('EmailDoNotReply')."\n\n".
+						$this->_t('EmailGoodbye')."\n".
 						$this->config['site_name']."\n".
 						$this->config['base_url'];
 
@@ -2375,9 +2375,9 @@ class Wacko
 						{
 							$save = $this->set_language($user['user_lang'], true);
 
-							$subject	=	$this->get_translation('NewPageCreatedSubj')." '$title'";
-							$body		=	$this->get_translation('EmailModerator').".\n\n".
-											Ut::perc_replace($this->get_translation('NewPageCreatedBody'), ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ))."\n".
+							$subject	=	$this->_t('NewPageCreatedSubj')." '$title'";
+							$body		=	$this->_t('EmailModerator').".\n\n".
+											Ut::perc_replace($this->_t('NewPageCreatedBody'), ( $user_name == GUEST ? $this->_t('Guest') : $user_name ))."\n".
 											"'$title'\n".
 											$this->href('', $tag)."\n\n";
 
@@ -2504,14 +2504,14 @@ class Wacko
 					$lang = $watcher['user_lang'];
 					$save = $this->set_language($lang, true);
 
-					$body = ($user_name == GUEST ? $this->get_translation('Guest') : $user_name);
+					$body = ($user_name == GUEST ? $this->_t('Guest') : $user_name);
 
 					if ($comment_on_id)
 					{
-						$subject = $this->get_translation('CommentForWatchedPage')."'".$page_title."'";
+						$subject = $this->_t('CommentForWatchedPage')."'".$page_title."'";
 
 						$body .=
-								$this->get_translation('SomeoneCommented')."\n".
+								$this->_t('SomeoneCommented')."\n".
 								$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
 								$title."\n".
 								"----------------------------------------------------------------------\n\n".
@@ -2520,15 +2520,15 @@ class Wacko
 
 						if ($watcher['notify_comment'] == 2)
 						{
-							$body .= $this->get_translation('FurtherPending')."\n\n";
+							$body .= $this->_t('FurtherPending')."\n\n";
 						}
 					}
 					else
 					{
-						$subject = $this->get_translation('WatchedPageChanged')."'".$tag."'";
+						$subject = $this->_t('WatchedPageChanged')."'".$tag."'";
 
 						$body .=
-								$this->get_translation('SomeoneChangedThisPage')."\n".
+								$this->_t('SomeoneChangedThisPage')."\n".
 								$this->href('', $tag)."\n\n".
 								$title."\n".
 								"======================================================================\n\n".
@@ -2537,7 +2537,7 @@ class Wacko
 
 						if ($watcher['notify_page'] == 2)
 						{
-							$body .= $this->get_translation('FurtherPending')."\n\n";
+							$body .= $this->_t('FurtherPending')."\n\n";
 						}
 					}
 
@@ -2980,8 +2980,8 @@ class Wacko
 		{
 			// this is a valid Email
 			$url	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:'.$tag);
-			$title	= $this->get_translation('EmailLink');
-			$icon	= $this->get_translation('OuterIcon');
+			$title	= $this->_t('EmailLink');
+			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'email';
 		}
@@ -2989,8 +2989,8 @@ class Wacko
 		{
 			// this is a valid XMPP address
 			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:'.$tag);
-			$title	= $this->get_translation('JabberLink');
-			$icon	= $this->get_translation('OuterIcon');
+			$title	= $this->_t('JabberLink');
+			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'jabber';
 		}
@@ -3012,8 +3012,8 @@ class Wacko
 			else
 			{
 				$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-				$title	= $this->get_translation('OuterLink2');
-				$icon	= $this->get_translation('OuterIcon');
+				$title	= $this->_t('OuterLink2');
+				$icon	= $this->_t('OuterIcon');
 				$tpl	= 'outerlink';
 			}
 		}
@@ -3021,8 +3021,8 @@ class Wacko
 		{
 			// this is a file link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->get_translation('FileLink');
-			$icon	= $this->get_translation('OuterIcon');
+			$title	= $this->_t('FileLink');
+			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3030,8 +3030,8 @@ class Wacko
 		{
 			// this is a PDF link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->get_translation('PDFLink');
-			$icon	= $this->get_translation('OuterIcon');
+			$title	= $this->_t('PDFLink');
+			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3039,8 +3039,8 @@ class Wacko
 		{
 			// this is a RDF link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
-			$title	= $this->get_translation('RDFLink');
-			$icon	= $this->get_translation('OuterIcon');
+			$title	= $this->_t('RDFLink');
+			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
@@ -3052,8 +3052,8 @@ class Wacko
 
 			if (!stristr($tag, $this->config['base_url']))
 			{
-				$title	= $this->get_translation('OuterLink2');
-				$icon	= $this->get_translation('OuterIcon');
+				$title	= $this->_t('OuterLink2');
+				$icon	= $this->_t('OuterIcon');
 			}
 		}
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
@@ -3171,7 +3171,7 @@ class Wacko
 					$title		= $file_data['file_description'].' ('.$this->binary_multiples($file_data['file_size'], false, true, true).')';
 					$alt		= $file_data['file_description'];
 					$img_link	= false;
-					$icon		= $this->get_translation('OuterIcon');
+					$icon		= $this->_t('OuterIcon');
 					#$class		= '';
 					$tpl		= 'localfile';
 
@@ -3229,7 +3229,7 @@ class Wacko
 				else //403
 				{
 					$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
-					$icon		= $this->get_translation('OuterIcon');
+					$icon		= $this->_t('OuterIcon');
 					$img_link	= false;
 					$tpl		= 'localfile';
 					$class		= 'acl-denied';
@@ -3282,7 +3282,7 @@ class Wacko
 			$url	= $this->href('', $this->config['users_page'].'/', 'profile='.implode('/', $parts));
 
 			$class	= 'user-link';
-			$icon	= $this->get_translation('OuterIcon');
+			$icon	= $this->_t('OuterIcon');
 			$tpl	= 'userlink';
 		}
 		else if (preg_match('/^(group)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
@@ -3303,7 +3303,7 @@ class Wacko
 			$url	= $this->href('', $this->config['groups_page'].'/', 'profile='.implode('/', $parts));
 
 			$class	= 'group-link';
-			$icon	= $this->get_translation('OuterIcon');
+			$icon	= $this->_t('OuterIcon');
 			$tpl	= 'grouplink';
 		}
 		else if (preg_match('/^([[:alnum:]]+)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
@@ -3322,7 +3322,7 @@ class Wacko
 			}
 
 			$url	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
-			$icon	= $this->get_translation('IwIcon');
+			$icon	= $this->_t('IwIcon');
 			$tpl	= 'interwiki';
 		}
 		else if (preg_match('/^([\!\.\-'.$this->language['ALPHANUM_P'].']+)(\#['.$this->language['ALPHANUM_P'].'\_\-]+)?$/', $tag, $matches))
@@ -3414,28 +3414,28 @@ class Wacko
 
 			if (substr($tag, 0, 2) == '!/')
 			{
-				$icon		= $this->get_translation('ChildIcon');
+				$icon		= $this->_t('ChildIcon');
 				$page0		= substr($tag, 2);
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'childpage';
 			}
 			else if (substr($tag, 0, 3) == '../')
 			{
-				$icon		= $this->get_translation('ParentIcon');
+				$icon		= $this->_t('ParentIcon');
 				$page0		= substr($tag, 3);
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'parentpage';
 			}
 			else if (substr($tag, 0, 1) == '/')
 			{
-				$icon		= $this->get_translation('RootIcon');
+				$icon		= $this->_t('RootIcon');
 				$page0		= substr($tag, 1);
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'rootpage';
 			}
 			else
 			{
-				$icon		= $this->get_translation('EqualIcon');
+				$icon		= $this->_t('EqualIcon');
 				$page0		= $tag;
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'equalpage';
@@ -3501,7 +3501,7 @@ class Wacko
 				if (!$access || $this->_acl['list'] == '')
 				{
 					$class		= 'acl-denied';
-					$accicon	= $this->get_translation('OuterIcon');
+					$accicon	= $this->_t('OuterIcon');
 				}
 				else if ($this->_acl['list'] == '*')
 				{
@@ -3511,7 +3511,7 @@ class Wacko
 				else
 				{
 					$class		= 'acl-customsec';
-					$accicon	= $this->get_translation('OuterIcon');
+					$accicon	= $this->_t('OuterIcon');
 				}
 
 				if ($text == trim($otag, '/') || $link_lang)
@@ -3530,8 +3530,8 @@ class Wacko
 			{
 				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'wordprocessor') ? 'p' : '') . 'w' . $tpl;
 				$page_link	= $this->href('edit', $tag, $lang ? 'lang='.$lang : '', 1);
-				$accicon	= $this->get_translation('WantedIcon');
-				$title		= $this->get_translation('CreatePage');
+				$accicon	= $this->_t('WantedIcon');
+				$title		= $this->_t('CreatePage');
 
 				if ($link_lang)
 				{
@@ -3545,7 +3545,7 @@ class Wacko
 			#$accicon		= str_replace('{theme}', $this->config['theme_url'], $accicon);
 
 			// see lang/wacko.all.php
-			$res			= $this->get_translation('Tpl.'.$tpl);
+			$res			= $this->_t('Tpl.'.$tpl);
 			$text			= trim($text);
 
 			if ($res)
@@ -3582,7 +3582,7 @@ class Wacko
 				}
 
 				// numerated wiki-links. initialize property as an array to make it work
-				if (is_array($this->numerate_links) && $page_link != $text && $title != $this->get_translation('CreatePage'))
+				if (is_array($this->numerate_links) && $page_link != $text && $title != $this->_t('CreatePage'))
 				{
 					$refnum = &$this->numerate_links[$page_link];
 					if (!isset($refnum))
@@ -3610,7 +3610,7 @@ class Wacko
 
 			// XXX: obsolete -> see wacko.css
 			#$icon			= str_replace('{theme}', $this->config['theme_url'], $icon);
-			$res			= $this->get_translation('Tpl.'.$tpl);
+			$res			= $this->_t('Tpl.'.$tpl);
 
 			if ($res)
 			{
@@ -3664,7 +3664,7 @@ class Wacko
 	{
 		if (!$user_name)
 		{
-			$user_name	= $this->get_translation('Guest');
+			$user_name	= $this->_t('Guest');
 			$linking	= false;
 		}
 
@@ -3725,15 +3725,15 @@ class Wacko
 
 		if (!strncmp($text, '/', 1))
 		{
-			$text = $this->get_translation('RootLinkIcon') . substr($text, 1);
+			$text = $this->_t('RootLinkIcon') . substr($text, 1);
 		}
 		else if (!strncmp($text, '!/', 2))
 		{
-			$text = $this->get_translation('SubLinkIcon') . substr($text, 2);
+			$text = $this->_t('SubLinkIcon') . substr($text, 2);
 		}
 		else if (!strncmp($text, '../', 3))
 		{
-			$text = $this->get_translation('UpLinkIcon') . substr($text, 3);
+			$text = $this->_t('UpLinkIcon') . substr($text, 3);
 		}
 
 		return $text;
@@ -3821,24 +3821,24 @@ class Wacko
 		// TODO: remove punctuations from language ALPHA* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (!preg_match('#^([-/\'_.' . $this->language['ALPHANUM_P'] . ']+)$#', $tag))
 		{
-			return $this->get_translation('InvalidWikiName');
+			return $this->_t('InvalidWikiName');
 		}
 
 		if (($result = $this->validate_reserved_words($tag)))
 		{
-			return Ut::perc_replace($this->get_translation('PageReservedWord'), $result);
+			return Ut::perc_replace($this->_t('PageReservedWord'), $result);
 		}
 
 		if ($old_tag)
 		{
 			if ($tag === $old_tag)
 			{
-				return Ut::perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($tag, '', '', 0));
+				return Ut::perc_replace($this->_t('AlreadyNamed'), $this->compose_link_to_page($tag, '', '', 0));
 			}
 
 			if ($this->supertag != $supertag && $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				return Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($tag, '', '', 0));
+				return Ut::perc_replace($this->_t('AlredyExists'), $this->compose_link_to_page($tag, '', '', 0));
 			}
 		}
 
@@ -4078,7 +4078,7 @@ class Wacko
 			$_POST = [];
 			$_REQUEST = $_GET;
 
-			$this->set_message($this->get_translation('FormInvalid'), 'error');
+			$this->set_message($this->_t('FormInvalid'), 'error');
 
 			// TODO diag or not?
 			// $this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' [[/'.$this->page['tag'].']] '.$form_name); # 'Invalid form token'
@@ -4190,7 +4190,7 @@ class Wacko
 	function theme_header($mod = '')
 	{
 		$theme_path		= Ut::join_path(THEME_DIR, $this->config['theme'], 'appearance');
-		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
+		$error_message	= $this->_t('ThemeCorrupt').': '.$this->config['theme'];
 
 		return $this->include_buffered('header'.$mod.'.php', $error_message, '', $theme_path);
 	}
@@ -4198,7 +4198,7 @@ class Wacko
 	function theme_footer($mod = '')
 	{
 		$theme_path		= Ut::join_path(THEME_DIR, $this->config['theme'], 'appearance');
-		$error_message	= $this->get_translation('ThemeCorrupt').': '.$this->config['theme'];
+		$error_message	= $this->_t('ThemeCorrupt').': '.$this->config['theme'];
 
 		return $this->include_buffered('footer'.$mod.'.php', $error_message, '', $theme_path);
 	}
@@ -4215,7 +4215,7 @@ class Wacko
 	function action($action, $params = '', $force_link_tracking = 0)
 	{
 		$action = strtolower(trim($action));
-		$errmsg = '<em>' . $this->get_translation('UnknownAction') . ' "<code>' . $action . '</code>"</em>';
+		$errmsg = '<em>' . $this->_t('UnknownAction') . ' "<code>' . $action . '</code>"</em>';
 
 		if (!$force_link_tracking)
 		{
@@ -4238,7 +4238,7 @@ class Wacko
 		}
 
 		$method_location = Ut::join_path($handler, $method . '.php');
-		$errmsg = '<em>' . $this->get_translation('UnknownMethod') . ' "<code>' . $method_location . '</code>"</em>';
+		$errmsg = '<em>' . $this->_t('UnknownMethod') . ' "<code>' . $method_location . '</code>"</em>';
 
 		$result = $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
 
@@ -4255,7 +4255,7 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
-		$err = '<em>' . Ut::perc_replace($this->get_translation('FormatterNotFound'), $formatter) . '</em>';
+		$err = '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), $formatter) . '</em>';
 		$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $err, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
@@ -5794,7 +5794,7 @@ class Wacko
 			$this->log(1, '<strong><span class="cite">'.'User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->get_user_ip().'</span></strong>');
 			$this->log_user_out();
 			// $this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
-			$this->redirect($this->config['base_url'].$this->get_translation('LoginPage').'?goback='.$tag);
+			$this->redirect($this->config['base_url'].$this->_t('LoginPage').'?goback='.$tag);
 		}
 
 		// start user session
@@ -6643,13 +6643,13 @@ class Wacko
 		}
 		if ($error)
 		{
-			$res .= $this->get_translation('PwdCplxEquals') . ' ';
+			$res .= $this->_t('PwdCplxEquals') . ' ';
 		}
 
 		// check password length
 		if ($p < $min_chars)
 		{
-			$res .= $this->get_translation('PwdCplxShort') . ' ';
+			$res .= $this->_t('PwdCplxShort') . ' ';
 		}
 
 		// check character classes requirements
@@ -6685,12 +6685,12 @@ class Wacko
 		}
 		if ($error)
 		{
-			$res .= $this->get_translation('PwdCplxWeak') . ' ';
+			$res .= $this->_t('PwdCplxWeak') . ' ';
 		}
 
 		if (preg_match('/\s/', $pwd))
 		{
-			$res .= $this->get_translation('SpacesArentAllowed') . ' ';
+			$res .= $this->_t('SpacesArentAllowed') . ' ';
 		}
 
 		return $res;
@@ -6700,29 +6700,29 @@ class Wacko
 	{
 		if ($this->config['pwd_char_classes'] > 0)
 		{
-			$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
+			$pwd_cplx_text = $this->_t('PwdCplxDesc4');
 
 			if ($this->config['pwd_char_classes'] == 1)
 			{
-				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
+				$pwd_cplx_text .= $this->_t('PwdCplxDesc41');
 			}
 			else if ($this->config['pwd_char_classes'] == 2)
 			{
-				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
+				$pwd_cplx_text .= $this->_t('PwdCplxDesc42');
 			}
 			else if ($this->config['pwd_char_classes'] == 3)
 			{
-				$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
+				$pwd_cplx_text .= $this->_t('PwdCplxDesc43');
 			}
 
-			$pwd_cplx_text .= '. '.$this->get_translation('PwdCplxDesc5');
+			$pwd_cplx_text .= '. '.$this->_t('PwdCplxDesc5');
 		}
 
 		return '<br /><small>'.
-			$this->get_translation('PwdCplxDesc1').
-			Ut::perc_replace($this->get_translation('PwdCplxDesc2'), $this->config['pwd_min_chars']).
+			$this->_t('PwdCplxDesc1').
+			Ut::perc_replace($this->_t('PwdCplxDesc2'), $this->config['pwd_min_chars']).
 			($this->config['pwd_unlike_login'] > 0
-				? ', '.$this->get_translation('PwdCplxDesc3')
+				? ', '.$this->_t('PwdCplxDesc3')
 				: '').
 			($this->config['pwd_char_classes'] > 0
 				? ', '.$pwd_cplx_text
@@ -6797,11 +6797,11 @@ class Wacko
 
 		$pagination['offset'] = $perpage * ($page - 1);
 
-		$navigation = $this->get_translation('ToThePage') . ': ';
+		$navigation = $this->_t('ToThePage') . ': ';
 
 		if ($page > 1)
 		{
-			$navigation .= $make_link($page - 1, ('&laquo; ' . $this->get_translation('PrevAcr')), ' rel="prev"') . ' ';
+			$navigation .= $make_link($page - 1, ('&laquo; ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
 		}
 
 		// pages range links
@@ -6827,7 +6827,7 @@ class Wacko
 		// next page shortcut
 		if ($page < $pages)
 		{
-			$navigation .= ' ' . $make_link($page + 1, ($this->get_translation('NextAcr') . ' &raquo;'), 'rel="next"');
+			$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' &raquo;'), 'rel="next"');
 		}
 
 		$pagination['text'] = $navigation;
@@ -6870,11 +6870,11 @@ class Wacko
 				$this->http->no_cache(false);
 
 				echo $inline ? '' : "<br />\n";
-				echo '<label for="captcha">'.$this->get_translation('Captcha').":</label>\n";
+				echo '<label for="captcha">'.$this->_t('Captcha').":</label>\n";
 				echo $inline ? '' : "<br />\n";
-				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?for=' . $this->sess->name().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />'."\n";
-				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
-				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->get_translation('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
+				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?for=' . $this->sess->name().'" id="freecap" alt="'.$this->_t('Captcha').'" />'."\n";
+				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->_t('CaptchaReload').'">';
+				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->_t('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
 				#echo $inline ? '' : "<br />\n";
 				echo '<input type="text" id="captcha" name="captcha" maxlength="6" style="width: 273px;" />';
 				echo $inline ? '' : "<br />\n";
@@ -7173,7 +7173,7 @@ class Wacko
 				$x++;
 			}
 
-			// TODO: $this->get_translation($norm[$x])
+			// TODO: $this->_t($norm[$x])
 			if ($rounded === true)
 			{
 				$size = round($size, 0);

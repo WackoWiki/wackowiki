@@ -158,7 +158,7 @@ if ($letters)
 {
 	// all
 	echo '<ul class="ul_letters">' . "\n";
-	echo '<li><a href="' . $this->href() . '">' . $this->get_translation('Any') . "</a></li>\n";
+	echo '<li><a href="' . $this->href() . '">' . $this->_t('Any') . "</a></li>\n";
 
 	foreach ($letters as $ch => $letter_count)
 	{
@@ -177,7 +177,7 @@ if ($letters)
 
 if (!$pages_to_display)
 {
-	echo $this->get_translation('NoPagesFound');
+	echo $this->_t('NoPagesFound');
 	return;
 }
 

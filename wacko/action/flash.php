@@ -46,7 +46,7 @@ if (!$height)	$height	= 100;
 
 if (!$url)
 {
-	echo '<p><em>' . $this->get_translation('FlashNoURL') . "</em></p>\n";
+	echo '<p><em>' . $this->_t('FlashNoURL') . "</em></p>\n";
 }
 else
 {

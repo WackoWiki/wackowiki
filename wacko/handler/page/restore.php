@@ -15,12 +15,12 @@ if ($this->config['store_deleted_pages'] && $this->is_admin() && $this->page['de
 
 	if ($this->restore_page($page_id))
 	{
-		$message .= $this->get_translation('PageRestored');
+		$message .= $this->_t('PageRestored');
 	}
 
 	if ($this->restore_file($page_id))
 	{
-		$message .= $this->get_translation('LocalFilesRestored');
+		$message .= $this->_t('LocalFilesRestored');
 	}
 
 	// set message

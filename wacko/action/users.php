@@ -18,12 +18,12 @@ if (($profile = @$_REQUEST['profile']))
 	// does requested user exists?
 	if (!($user = $this->load_user($profile)))
 	{
-		$this->show_message(Ut::perc_replace($this->get_translation('UsersNotFound'),
+		$this->show_message(Ut::perc_replace($this->_t('UsersNotFound'),
 				$this->supertag, htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)));
 	}
 	else if (!$user['enabled'])
 	{
-		$this->show_message($this->get_translation('AccountDisabled'));
+		$this->show_message($this->_t('AccountDisabled'));
 	}
 	else
 	{
@@ -70,12 +70,12 @@ if (($profile = @$_REQUEST['profile']))
 			// message is too long
 			if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
 			{
-				$error = Ut::perc_replace($this->get_translation('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
+				$error = Ut::perc_replace($this->_t('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
 			}
 			// personal messages flood control
 			else if (isset($this->sess->intercom_delay) && time() - $this->sess->intercom_delay < $this->config['intercom_delay'])
 			{
-				$error = Ut::perc_replace($this->get_translation('UsersPMFlooded'), $this->config['intercom_delay']);
+				$error = Ut::perc_replace($this->_t('UsersPMFlooded'), $this->config['intercom_delay']);
 			}
 
 			// proceed if no error encountered
@@ -97,7 +97,7 @@ if (($profile = @$_REQUEST['profile']))
 				{
 					$subject = $prefix1 .  $subject;
 				}
-				$body = Ut::perc_replace($this->get_translation('UsersPMBody'),
+				$body = Ut::perc_replace($this->_t('UsersPMBody'),
 						$this->get_user_name(),
 						rtrim($this->config['base_url'], '/'),
 						$this->href('', $this->tag, $profile.'&ref='.rawurlencode(base64_encode($msg_id.'@@'.$subject)).'#contacts'),
@@ -113,12 +113,12 @@ if (($profile = @$_REQUEST['profile']))
 					$headers[] = "References: <$ref>";
 				}
 
-				$body .= "\n\n" . $this->get_translation('EmailGoodbye') . "\n" . $this->config['site_name'] . "\n" . $this->config['base_url'];
+				$body .= "\n\n" . $this->_t('EmailGoodbye') . "\n" . $this->config['site_name'] . "\n" . $this->config['base_url'];
 
 				// send email
 				$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
-				$this->set_message($this->get_translation('UsersPMSent'));
-				$this->log(4, Ut::perc_replace($this->get_translation('LogPMSent', $this->config['language']), $this->get_user_name(), $user['user_name']));
+				$this->set_message($this->_t('UsersPMSent'));
+				$this->log(4, Ut::perc_replace($this->_t('LogPMSent', $this->config['language']), $this->get_user_name(), $user['user_name']));
 
 				$this->sess->intercom_delay	= time();
 				$_POST['mail_body']			= '';
@@ -129,37 +129,37 @@ if (($profile = @$_REQUEST['profile']))
 
 		// header and profile data
 		echo '<h1>' . $user['user_name'] . '</h1>';
-		echo '<small><a href="' . $this->href('', $this->tag) . '">&laquo; ' . $this->get_translation('UsersList') . "</a></small>\n";
-		echo '<h2>' . $this->get_translation('UsersProfile') . "</h2>\n";
+		echo '<small><a href="' . $this->href('', $this->tag) . '">&laquo; ' . $this->_t('UsersList') . "</a></small>\n";
+		echo '<h2>' . $this->_t('UsersProfile') . "</h2>\n";
 
 		// basic info
 ?>
 		<table style="border-spacing: 3px; border-collapse: separate;">
 			<tr class="lined">
-				<td class="userprofil"><?php echo $this->get_translation('RealName'); ?></td>
+				<td class="userprofil"><?php echo $this->_t('RealName'); ?></td>
 				<td><?php echo $user['real_name']; ?></td>
 			</tr>
 			<tr class="lined">
-				<td class="userprofil"><?php echo $this->get_translation('UsersSignupDate'); ?></td>
+				<td class="userprofil"><?php echo $this->_t('UsersSignupDate'); ?></td>
 				<td><?php echo $this->get_time_formatted($user['signup_time']); ?></td>
 			</tr>
 			<tr class="lined">
-				<td class="userprofil"><?php echo $this->get_translation('UsersLastSession'); ?></td>
+				<td class="userprofil"><?php echo $this->_t('UsersLastSession'); ?></td>
 				<td><?php echo $user['hide_lastsession']
-					? '<em>' . $this->get_translation('UsersSessionHidden') . '</em>'
+					? '<em>' . $this->_t('UsersSessionHidden') . '</em>'
 					: ( $user['last_visit'] === SQL_DATE_NULL
-						? '<em>' . $this->get_translation('UsersSessionNA') . '</em>'
+						? '<em>' . $this->_t('UsersSessionNA') . '</em>'
 						: $this->get_time_formatted($user['last_visit']) )
 					; ?></td>
 			</tr>
 			<tr class="lined"><?php // Have all user pages as sub pages of the current Users page.
 								?>
-				<td class="userprofil"><?php echo $this->get_translation('UserSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></td>
+				<td class="userprofil"><?php echo $this->_t('UserSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></td>
 				<td><a href="<?php echo $this->href('', ($this->config['users_page'] . '/' . $user['user_name'])); ?>"><?php echo $this->config['users_page'].'/'.$user['user_name']; ?></a></td>
 			</tr>
 			<tr class="lined">
-				<td class="userprofil"><a href="<?php echo $this->href('', $this->config['groups_page']); ?>"><?php echo $this->get_translation('UsersGroupMembership'); ?></a></td>
-				<td><?php echo ( $user_groups ? $user_groups : '<em>'.$this->get_translation('UsersNA2').'</em>' ); ?></td>
+				<td class="userprofil"><a href="<?php echo $this->href('', $this->config['groups_page']); ?>"><?php echo $this->_t('UsersGroupMembership'); ?></a></td>
+				<td><?php echo ( $user_groups ? $user_groups : '<em>'.$this->_t('UsersNA2').'</em>' ); ?></td>
 			</tr>
 		</table>
 <?php
@@ -167,7 +167,7 @@ if (($profile = @$_REQUEST['profile']))
 		if ($user['user_id'] != $this->get_user_id())
 		{
 			// contact form
-			echo '<h2>' . $this->get_translation('UsersContact') . "</h2>\n";
+			echo '<h2>' . $this->_t('UsersContact') . "</h2>\n";
 
 			// only registered users can send PMs
 			if ($logged_in)
@@ -201,13 +201,13 @@ if (($profile = @$_REQUEST['profile']))
 				{
 ?>
 				<tr>
-					<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->get_translation('UsersIntercomSubject'); ?>:</td>
+					<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->_t('UsersIntercomSubject'); ?>:</td>
 					<td>
 						<input type="text" name="mail_subject" value="<?php echo (isset($subject) ? htmlspecialchars($subject, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200" />
 						<?php
 						if (isset($ref))
 						{
-							echo '&nbsp;&nbsp; <a href="'.$this->href('', '', $profile.'#contacts').'">'.$this->get_translation('UsersIntercomSubjectN').'</a>';
+							echo '&nbsp;&nbsp; <a href="'.$this->href('', '', $profile.'#contacts').'">'.$this->_t('UsersIntercomSubjectN').'</a>';
 						} ?>
 					</td>
 				</tr>
@@ -215,11 +215,11 @@ if (($profile = @$_REQUEST['profile']))
 					<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo (isset($_POST['mail_body']) ? htmlspecialchars($_POST['mail_body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ""); ?></textarea></td>
 				</tr>
 				<tr>
-					<td><input type="submit" id="submit" name="send_pm" value="<?php echo $this->get_translation('UsersIntercomSend'); ?>" /></td>
+					<td><input type="submit" id="submit" name="send_pm" value="<?php echo $this->_t('UsersIntercomSend'); ?>" /></td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<small><?php echo $this->get_translation('UsersIntercomDesc');
+						<small><?php echo $this->_t('UsersIntercomDesc');
 						?></small>
 					</td>
 				</tr>
@@ -227,7 +227,7 @@ if (($profile = @$_REQUEST['profile']))
 				}
 				else
 				{
-					echo '<tr><td colspan="2" style="text-align:center;"><strong><em>'.$this->get_translation('UsersIntercomDisabled').'</em></strong></td></tr>';
+					echo '<tr><td colspan="2" style="text-align:center;"><strong><em>'.$this->_t('UsersIntercomDisabled').'</em></strong></td></tr>';
 				}
 ?>
 			</table>
@@ -236,16 +236,16 @@ if (($profile = @$_REQUEST['profile']))
 			}
 			else
 			{
-				echo '<table class="formation"><tr><td colspan="2" style="text-align:center;"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
+				echo '<table class="formation"><tr><td colspan="2" style="text-align:center;"><em>'.$this->_t('UsersPMNotLoggedIn').'</em></td></tr></table>';
 			}
 		}
 
 		// user-owned pages
 		$limit = 10;
 
-		echo '<h2 id="pages">' . $this->get_translation('UsersPages') . "</h2>\n";
-		echo '<div class="indent"><small>' . $this->get_translation('UsersOwnedPages') . ': ' .  $user['total_pages'];
-		echo '&nbsp;&nbsp;&nbsp; ' . $this->get_translation('UsersRevisionsMade') . ': ' . $user['total_revisions'] . "</small></div><br />\n";
+		echo '<h2 id="pages">' . $this->_t('UsersPages') . "</h2>\n";
+		echo '<div class="indent"><small>' . $this->_t('UsersOwnedPages') . ': ' .  $user['total_pages'];
+		echo '&nbsp;&nbsp;&nbsp; ' . $this->_t('UsersRevisionsMade') . ': ' . $user['total_revisions'] . "</small></div><br />\n";
 
 
 		if ($user['total_pages'])
@@ -265,8 +265,8 @@ if (($profile = @$_REQUEST['profile']))
 
 			// sorting and pagination
 			echo '<small><a href="'.
-				($sort_name? $this->href('', '', $profile . '&amp;sort=date') . '#pages">' . $this->get_translation('UsersDocsSortDate')
-						   : $this->href('', '', $profile . '&amp;sort=name') . '#pages">' . $this->get_translation('UsersDocsSortName')
+				($sort_name? $this->href('', '', $profile . '&amp;sort=date') . '#pages">' . $this->_t('UsersDocsSortDate')
+						   : $this->href('', '', $profile . '&amp;sort=name') . '#pages">' . $this->_t('UsersDocsSortName')
 			    ) . '</a></small>';
 
 			$this->print_pagination($pagination);
@@ -292,17 +292,17 @@ if (($profile = @$_REQUEST['profile']))
 		}
 		else
 		{
-			echo '<em>' . $this->get_translation('UsersNA2') . '</em>';
+			echo '<em>' . $this->_t('UsersNA2') . '</em>';
 		}
 
 		// last user comments
 		$limit = 10;
 
-		echo '<h2 id="comments">' . $this->get_translation('UsersComments') . "</h2>\n";
+		echo '<h2 id="comments">' . $this->_t('UsersComments') . "</h2>\n";
 
 		if ($this->user_allowed_comments())
 		{
-			echo '<div class="indent"><small>' . $this->get_translation('UsersCommentsPosted') . ': ' . $user['total_comments'] . "</small></div>\n";
+			echo '<div class="indent"><small>' . $this->_t('UsersCommentsPosted') . ': ' . $user['total_comments'] . "</small></div>\n";
 
 			if ($user['total_comments'])
 			{
@@ -342,12 +342,12 @@ if (($profile = @$_REQUEST['profile']))
 			}
 			else
 			{
-				echo '<em>' . $this->get_translation('UsersNA2') . '</em>';
+				echo '<em>' . $this->_t('UsersNA2') . '</em>';
 			}
 		}
 		else
 		{
-			echo $this->get_translation('CommentsDisabled');
+			echo $this->_t('CommentsDisabled');
 		}
 
 		// last user uploads
@@ -356,11 +356,11 @@ if (($profile = @$_REQUEST['profile']))
 		{
 			$limit = 10;
 
-			echo '<h2 id="uploads">' . $this->get_translation('UsersUploads') . "</h2>\n";
+			echo '<h2 id="uploads">' . $this->_t('UsersUploads') . "</h2>\n";
 
 			if ($this->config['upload'] == 1 || $this->is_admin())
 			{
-				echo '<div class="indent"><small>' . $this->get_translation('UsersFilesUploaded') . ': ' . $user['total_uploads'] . "</small></div>\n";
+				echo '<div class="indent"><small>' . $this->_t('UsersFilesUploaded') . ': ' . $user['total_uploads'] . "</small></div>\n";
 
 				if ($user['total_uploads'])
 				{
@@ -409,9 +409,9 @@ if (($profile = @$_REQUEST['profile']))
 								$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
 
 								$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
-								$on_page	= $this->get_translation('To') . ' '.
+								$on_page	= $this->_t('To') . ' '.
 									$this->link('/'. $upload['file_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang).
-									' &nbsp;&nbsp;<span title="' . $this->get_translation("Cluster") . '">&rarr; ' . $sub_tag[0];
+									' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0];
 							}
 							else
 							{
@@ -429,12 +429,12 @@ if (($profile = @$_REQUEST['profile']))
 				}
 				else
 				{
-					echo '<em>'.$this->get_translation('UsersNA2').'</em>';
+					echo '<em>'.$this->_t('UsersNA2').'</em>';
 				}
 			}
 			else
 			{
-				// echo $this->get_translation('CommentsDisabled');
+				// echo $this->_t('CommentsDisabled');
 			}
 		}
 	}
@@ -530,11 +530,11 @@ else
 	// user filter form
 	echo $this->form_open('search_user', ['form_method' => 'get']);
 	echo '<table class="formation"><tr><td class="label">';
-	echo $this->get_translation('UsersSearch') . ': </td><td>';
+	echo $this->_t('UsersSearch') . ': </td><td>';
 	echo '<input type="search" required="required" name="user" maxchars="40" size="40" value="'.
 			htmlspecialchars($_user0, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET). '" /> ';
-	echo '<input type="submit" id="submit" value="' . $this->get_translation('UsersFilter') . '" /> ';
-	//echo '<input type="submit" id="button" value="' . $this->get_translation('UsersOpenProfile') . '" name="gotoprofile" />';
+	echo '<input type="submit" id="submit" value="' . $this->_t('UsersFilter') . '" /> ';
+	//echo '<input type="submit" id="button" value="' . $this->_t('UsersOpenProfile') . '" name="gotoprofile" />';
 	echo '</td></tr></table><br />'."\n";
 	echo $this->form_close();
 
@@ -561,7 +561,7 @@ else
 			}
 		}
 		echo '<th><a href="' . $this->href('', '', $params($sort, $order)) . '">';
-		echo $this->get_translation($text);
+		echo $this->_t($text);
 		echo $arrow;
 		echo '</a></th>';
 	};
@@ -583,7 +583,7 @@ else
 	if (!$users)
 	{
 		echo '<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>' .
-				$this->get_translation('UsersNoMatching') . "</em></small></td></tr>\n";
+				$this->_t('UsersNoMatching') . "</em></small></td></tr>\n";
 	}
 	else
 	{
@@ -601,9 +601,9 @@ else
 					'<td style="text-align:center;">' . $user['total_uploads'] . '</td>'.
 					'<td style="text-align:center;">' . $this->get_time_formatted($user['signup_time']) . '</td>'.
 					'<td style="text-align:center;">' . ($user['hide_lastsession']
-					? '<em>' . $this->get_translation('UsersSessionHidden') . '</em>'
+					? '<em>' . $this->_t('UsersSessionHidden') . '</em>'
 					: ($user['last_visit'] === SQL_DATE_NULL
-						? '<em>' . $this->get_translation('UsersSessionNA') . '</em>'
+						? '<em>' . $this->_t('UsersSessionNA') . '</em>'
 						: $this->get_time_formatted($user['last_visit']))
 					).'</td>';
 			}

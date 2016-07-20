@@ -77,9 +77,9 @@ function admin_config_notifications(&$engine, &$module)
 					<small>Pending - Sending a email notification only for the first change until the user visits the page again.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="notify_page0" name="notify_page" value="0"<?php echo ( $engine->config['notify_page'] == 0 ? ' checked="checked"' : '' );?> /><label for="notify_page0"><?php echo $engine->get_translation('NotifyOff'); ?></label>
-					<input type="radio" id="notify_page1" name="notify_page" value="1"<?php echo ( $engine->config['notify_page'] == 1 ? ' checked="checked"' : '' );?> /><label for="notify_page1"><?php echo $engine->get_translation('NotifyAlways'); ?></label>
-					<input type="radio" id="notify_page2" name="notify_page" value="2"<?php echo ( $engine->config['notify_page'] == 2 ? ' checked="checked"' : '' );?> /><label for="notify_page2"><?php echo $engine->get_translation('NotifyPending'); ?></label>
+					<input type="radio" id="notify_page0" name="notify_page" value="0"<?php echo ( $engine->config['notify_page'] == 0 ? ' checked="checked"' : '' );?> /><label for="notify_page0"><?php echo $engine->_t('NotifyOff'); ?></label>
+					<input type="radio" id="notify_page1" name="notify_page" value="1"<?php echo ( $engine->config['notify_page'] == 1 ? ' checked="checked"' : '' );?> /><label for="notify_page1"><?php echo $engine->_t('NotifyAlways'); ?></label>
+					<input type="radio" id="notify_page2" name="notify_page" value="2"<?php echo ( $engine->config['notify_page'] == 2 ? ' checked="checked"' : '' );?> /><label for="notify_page2"><?php echo $engine->_t('NotifyPending'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -103,9 +103,9 @@ function admin_config_notifications(&$engine, &$module)
 					<small>Pending - Sending a email notification only for the first comment until the user visits the page again.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="notify_comment0" name="notify_comment" value="0"<?php echo ( $engine->config['notify_comment'] == 0 ? ' checked="checked"' : '' );?> /><label for="notify_comment0"><?php echo $engine->get_translation('NotifyOff'); ?></label>
-					<input type="radio" id="notify_comment1" name="notify_comment" value="1"<?php echo ( $engine->config['notify_comment'] == 1 ? ' checked="checked"' : '' );?> /><label for="notify_comment1"><?php echo $engine->get_translation('NotifyAlways'); ?></label>
-					<input type="radio" id="notify_comment2" name="notify_comment" value="2"<?php echo ( $engine->config['notify_comment'] == 2 ? ' checked="checked"' : '' );?> /><label for="notify_comment2"><?php echo $engine->get_translation('NotifyPending'); ?></label>
+					<input type="radio" id="notify_comment0" name="notify_comment" value="0"<?php echo ( $engine->config['notify_comment'] == 0 ? ' checked="checked"' : '' );?> /><label for="notify_comment0"><?php echo $engine->_t('NotifyOff'); ?></label>
+					<input type="radio" id="notify_comment1" name="notify_comment" value="1"<?php echo ( $engine->config['notify_comment'] == 1 ? ' checked="checked"' : '' );?> /><label for="notify_comment1"><?php echo $engine->_t('NotifyAlways'); ?></label>
+					<input type="radio" id="notify_comment2" name="notify_comment" value="2"<?php echo ( $engine->config['notify_comment'] == 2 ? ' checked="checked"' : '' );?> /><label for="notify_comment2"><?php echo $engine->_t('NotifyPending'); ?></label>
 				</td>
 			</tr>
 			<tr class="hl_setting">

@@ -15,20 +15,20 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		echo Ut::perc_replace($this->get_translation('DoesNotExists'), $this->href('edit'));
+		echo Ut::perc_replace($this->_t('DoesNotExists'), $this->href('edit'));
 	}
 	else
 	{
 		// comment header?
 		if ($this->page['comment_on_id'])
 		{
-			echo '<div class="comment-info">'.$this->get_translation('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), "", "", 0).", ".$this->get_translation('PostedBy')." ".($this->is_wiki_name($this->page['user_name']) ? $this->link($this->page['user_name']) : $this->page['user_name'])." ".$this->get_translation('At')." ".$this->page['modified']."</div>";
+			echo '<div class="comment-info">'.$this->_t('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), "", "", 0).", ".$this->_t('PostedBy')." ".($this->is_wiki_name($this->page['user_name']) ? $this->link($this->page['user_name']) : $this->page['user_name'])." ".$this->_t('At')." ".$this->page['modified']."</div>";
 		}
 
 		if (!$this->page['latest'])
 		{
 			echo '<div class="revisioninfo">'.
-				Ut::perc_replace($this->get_translation('Revision'), $this->href(), $this->tag, $this->page['modified']).
+				Ut::perc_replace($this->_t('Revision'), $this->href(), $this->tag, $this->page['modified']).
 				'</div>';
 		}
 
@@ -111,6 +111,6 @@ if ($this->has_access('read'))
 }
 else
 {
-	$message = $this->get_translation('ReadAccessDenied');
+	$message = $this->_t('ReadAccessDenied');
 	$this->show_message($message, 'info');
 }

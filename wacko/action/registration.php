@@ -39,20 +39,20 @@ if (isset($_GET['confirm']))
 		$this->http->invalidate_page($this->supertag);
 
 		// log event
-		$this->log(4, Ut::perc_replace($this->get_translation('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));
+		$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));
 
 		unset($temp);
 
-		$message = $this->get_translation('EmailConfirmed');
+		$message = $this->_t('EmailConfirmed');
 		$this->set_message($message, 'success');
 	}
 	else
 	{
-		$message = Ut::perc_replace($this->get_translation('EmailNotConfirmed'), $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0));
+		$message = Ut::perc_replace($this->_t('EmailNotConfirmed'), $this->compose_link_to_page('Settings', '', $this->_t('SettingsText'), 0));
 		$this->set_message($message, 'error');
 	}
 
-	$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
+	$this->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
 }
 else if (@$_POST['_action'] === 'register')
 {
@@ -75,7 +75,7 @@ else if (@$_POST['_action'] === 'register')
 			// captcha validation
 			if ($this->validate_captcha() === false)
 			{
-				$error .= $this->get_translation('CaptchaFailed');
+				$error .= $this->_t('CaptchaFailed');
 			}
 		}
 		// End Registration Captcha
@@ -91,53 +91,53 @@ else if (@$_POST['_action'] === 'register')
 			// check if name is WikiName style
 			if (!$this->is_wiki_name($user_name) && $this->config['disable_wikiname'] === false)
 			{
-				$error .= $this->get_translation('MustBeWikiName')." ";
+				$error .= $this->_t('MustBeWikiName')." ";
 			}
 			else if (strlen($user_name) < $this->config['username_chars_min'])
 			{
-				$error .= Ut::perc_replace($this->get_translation('NameTooShort'), 0, $this->config['username_chars_min'])." ";
+				$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->config['username_chars_min'])." ";
 			}
 			else if (strlen($user_name) > $this->config['username_chars_max'])
 			{
-				$error .= Ut::perc_replace($this->get_translation('NameTooLong'), 0, $this->config['username_chars_max'])." ";
+				$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->config['username_chars_max'])." ";
 			}
 			// check if valid user name (and disallow '/')
 			else if (!preg_match('/^(['.$this->language['ALPHANUM_P'].']+)$/', $user_name) || preg_match('/\//', $user_name))
 			{
-				$error .= $this->get_translation('InvalidUserName')." ";
+				$error .= $this->_t('InvalidUserName')." ";
 			}
 			// check if reserved word
 			else if (($result = $this->validate_reserved_words($user_name)))
 			{
-				$error .= Ut::perc_replace($this->get_translation('UserReservedWord'), $result);
+				$error .= Ut::perc_replace($this->_t('UserReservedWord'), $result);
 			}
 			// if user name already exists
 			else if ($this->user_name_exists($user_name) === true)
 			{
-				$error .= $this->get_translation('RegistrationUserNameOwned');
+				$error .= $this->_t('RegistrationUserNameOwned');
 
 				// log event
-				$this->log(2, Ut::perc_replace($this->get_translation('LogUserSimiliarName', $this->config['language']), $user_name));
+				$this->log(2, Ut::perc_replace($this->_t('LogUserSimiliarName', $this->config['language']), $user_name));
 			}
 			// no email given
 			else if ($email == '')
 			{
-				$error .= $this->get_translation('SpecifyEmail')." ";
+				$error .= $this->_t('SpecifyEmail')." ";
 			}
 			// invalid email
 			else if (!$this->validate_email($email))
 			{
-				$error .= $this->get_translation('NotAEmail')." ";
+				$error .= $this->_t('NotAEmail')." ";
 			}
 			// no email reuse allowed
 			else if (!$this->config['allow_email_reuse'] && $this->email_exists($email))
 			{
-				$error .= $this->get_translation('EmailTaken')." ";
+				$error .= $this->_t('EmailTaken')." ";
 			}
 			// confirmed password mismatch
 			else if ($conf_password != $password)
 			{
-				$error .= $this->get_translation('PasswordsDidntMatch')." ";
+				$error .= $this->_t('PasswordsDidntMatch')." ";
 			}
 			// password complexity validation
 			else if ($complexity)
@@ -165,14 +165,14 @@ else if (@$_POST['_action'] === 'register')
 				{
 					$account_status		= 1;
 					$account_enabled	= 0;
-					$waiting_approval	= Ut::perc_replace($this->get_translation('UserWaitingApproval'), $this->config['site_name']);
-					$requires_approval	= Ut::perc_replace($this->get_translation('UserRequiresApproval'), $this->config['site_name']);
+					$waiting_approval	= Ut::perc_replace($this->_t('UserWaitingApproval'), $this->config['site_name']);
+					$requires_approval	= Ut::perc_replace($this->_t('UserRequiresApproval'), $this->config['site_name']);
 				}
 				else
 				{
 					$account_status		= 0;
 					$account_enabled	= 1;
-					$waiting_approval	= $this->get_translation('EmailRegisteredLogin');
+					$waiting_approval	= $this->_t('EmailRegisteredLogin');
 					$requires_approval	= '';
 				}
 
@@ -225,11 +225,11 @@ else if (@$_POST['_action'] === 'register')
 					// TODO: set user language for email encoding
 					$save = $this->set_language($user_lang, true);
 
-					$subject =	$this->get_translation('EmailWelcome').$this->config['site_name'];
-					$body =		Ut::perc_replace($this->get_translation('EmailRegistered'),
+					$subject =	$this->_t('EmailWelcome').$this->config['site_name'];
+					$body =		Ut::perc_replace($this->_t('EmailRegistered'),
 									$this->config['site_name'], $user_name, $this->href('', '', 'confirm='.$confirm))."\n\n".
 								$waiting_approval."\n\n".
-								$this->get_translation('EmailRegisteredIgnore')."\n\n";
+								$this->_t('EmailRegisteredIgnore')."\n\n";
 
 					$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
 					$this->set_language($save, true);
@@ -242,12 +242,12 @@ else if (@$_POST['_action'] === 'register')
 						$lang_admin = $this->config['language'];
 						$save = $this->set_language($lang_admin, true);
 
-						$subject	=	$this->get_translation('NewAccountSubject');
-						$body		=	$this->get_translation('NewAccountSignupInfo')."\n\n".
-										$this->get_translation('NewAccountUsername').' '.$user_name."\n".
-										$this->get_translation('RegistrationLang').' '.$user_lang."\n".
-										$this->get_translation('NewAccountEmail').' '.$email."\n".
-										$this->get_translation('NewAccountIP').' '.$user_ip."\n\n".
+						$subject	=	$this->_t('NewAccountSubject');
+						$body		=	$this->_t('NewAccountSignupInfo')."\n\n".
+										$this->_t('NewAccountUsername').' '.$user_name."\n".
+										$this->_t('RegistrationLang').' '.$user_lang."\n".
+										$this->_t('NewAccountEmail').' '.$email."\n".
+										$this->_t('NewAccountIP').' '.$user_ip."\n\n".
 										$requires_approval."\n\n";
 
 						$this->send_user_email('WikiAdmin' ,$this->config['admin_email'], $subject, $body, $lang_admin);
@@ -257,16 +257,16 @@ else if (@$_POST['_action'] === 'register')
 				}
 
 				// log event
-				$this->log(4, Ut::perc_replace($this->get_translation('LogUserRegistered', SYSTEM_LANG), $user_name, $email));
+				$this->log(4, Ut::perc_replace($this->_t('LogUserRegistered', SYSTEM_LANG), $user_name, $email));
 
 				// forward
 				$this->set_message(
-					$this->get_translation('SiteRegistered').
+					$this->_t('SiteRegistered').
 					'&laquo;'.$this->config['site_name'].'&raquo;. <br /><br />'.
-					$this->get_translation('SiteEmailConfirm'));
+					$this->_t('SiteEmailConfirm'));
 
 				$this->context[++$this->current_context] = '';
-				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.Ut::random_token(5)));
+				$this->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
 			}
 		}
 	}
@@ -286,7 +286,7 @@ if (!isset($_GET['confirm']))
 
 		if ($this->config['approve_new_user'] == true)
 		{
-			$this->show_message($this->get_translation('UserApprovalInfo'), 'hint');
+			$this->show_message($this->_t('UserApprovalInfo'), 'hint');
 		}
 
 		echo $this->form_open('register');
@@ -298,7 +298,7 @@ if (!isset($_GET['confirm']))
 			echo '<p><label for="user_lang">'.$this->format_translation('RegistrationLang').':</label>';
 			echo '<select id="user_lang" name="user_lang">';
 
-			$languages	= $this->get_translation('LanguageArray');
+			$languages	= $this->_t('LanguageArray');
 			$user_lang	= $this->user_agent_language();
 			$langs		= $this->available_languages();
 
@@ -322,7 +322,7 @@ if (!isset($_GET['confirm']))
 		if ($this->config['disable_wikiname'] === false)
 		{
 			echo '<br /><small>'.
-			Ut::perc_replace($this->get_translation('NameCamelCaseOnly'),
+			Ut::perc_replace($this->_t('NameCamelCaseOnly'),
 				$this->config['username_chars_min'],
 				$this->config['username_chars_max']).
 			'</small>';
@@ -331,32 +331,32 @@ if (!isset($_GET['confirm']))
 		else
 		{
 			echo '<br /><small>'.
-			Ut::perc_replace($this->get_translation('NameAlphanumOnly'),
+			Ut::perc_replace($this->_t('NameAlphanumOnly'),
 				$this->config['username_chars_min'],
 				$this->config['username_chars_max']).
 			'</small>';
 			echo "</p>\n";
 		}
 
-		echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
+		echo '<p><label for="password">'.$this->_t('RegistrationPassword').':</label>';
 		echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" autocomplete="off" required />';
 		echo $this->show_password_complexity();
 		echo "</p>\n";
 
-		echo '<p><label for="conf_password">'.$this->get_translation('ConfirmPassword').':</label>';
+		echo '<p><label for="conf_password">'.$this->_t('ConfirmPassword').':</label>';
 		echo '<input type="password" id="conf_password" name="conf_password" size="24" value="'.$conf_password.'" autocomplete="off" /></p>';
 
 		echo '<p>';
-		echo '<label for="email">'.$this->get_translation('Email').':</label>';
+		echo '<label for="email">'.$this->_t('Email').':</label>';
 		echo '<input type="email" id="email" name="email" size="30" value="'.htmlspecialchars($email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" required />';
-		echo '<small> <a title="'.$this->get_translation('RegistrationEmailInfo').'">(?)</a></small></p>';
+		echo '<small> <a title="'.$this->_t('RegistrationEmailInfo').'">(?)</a></small></p>';
 
 		/*if ($this->config['policy_page'])
 		{
 			echo '<p>';
-			echo '<label for="terms_of_use">'.$this->get_translation('TermsOfUse').':</label>';
+			echo '<label for="terms_of_use">'.$this->_t('TermsOfUse').':</label>';
 			echo '<input type="checkbox" id="terms_of_use" name="terms_of_use" value="1" />';
-			echo '<small> '.$this->get_translation('AcceptTermsOfUse').' '.$this->config['site_name'].' <a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->get_translation('TermsOfUse').'</a><br /></small></p>';
+			echo '<small> '.$this->_t('AcceptTermsOfUse').' '.$this->config['site_name'].' <a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->_t('TermsOfUse').'</a><br /></small></p>';
 		}*/
 
 		// captcha code starts
@@ -370,13 +370,13 @@ if (!isset($_GET['confirm']))
 		}
 		// end captcha
 
-		echo '<p><input type="submit" class="OkBtn" value="'.$this->get_translation('RegistrationButton').'" /></p>';
+		echo '<p><input type="submit" class="OkBtn" value="'.$this->_t('RegistrationButton').'" /></p>';
 
 		echo $this->form_close();
 		echo "</div>\n";
 	}
 	else
 	{
-		$this->show_message($this->get_translation('RegistrationClosed'), 'hint');
+		$this->show_message($this->_t('RegistrationClosed'), 'hint');
 	}
 }

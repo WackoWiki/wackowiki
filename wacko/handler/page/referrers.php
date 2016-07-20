@@ -8,11 +8,11 @@ if (!defined('IN_WACKO'))
 $this->endure_page(true); // allow forums
 
 // let's start: print header
-echo '<h3>' . $this->get_translation('ReferrersText') . ' &raquo; ' . $this->get_translation('ViewReferrersGlobal') . '</h3>';
+echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ' . $this->_t('ViewReferrersGlobal') . '</h3>';
 
 $show_backlinks = function ()
 {
-	echo '<strong>' . $this->get_translation('ReferringPages') . ":</strong><br /><br />\n";
+	echo '<strong>' . $this->_t('ReferringPages') . ":</strong><br /><br />\n";
 
 	// show backlinks
 	if (($pages = $this->load_pages_linking_to($this->tag)))
@@ -39,7 +39,7 @@ $show_backlinks = function ()
 	}
 	else
 	{
-		echo $this->get_translation('NoReferringPages');
+		echo $this->_t('NoReferringPages');
 	}
 	echo '<p></p>';
 };
@@ -70,13 +70,13 @@ if (!in_array($mode, $modes))
 // set up for main show
 $purge_time = (($t = $this->config['referrers_purge_time'])
 	? ($t == 1
-		? $this->get_translation('Last24Hours')
-		: Ut::perc_replace($this->get_translation('LastDays'), $t))
+		? $this->_t('Last24Hours')
+		: Ut::perc_replace($this->_t('LastDays'), $t))
 	: '');
 
 if ($mode)
 {
-	$title = Ut::perc_replace($this->get_translation('ExternalPagesGlobal'),
+	$title = Ut::perc_replace($this->_t('ExternalPagesGlobal'),
 		$this->href('referrers_sites', '', 'o=' . $mode),
 		$purge_time);
 }
@@ -106,7 +106,7 @@ else if ($mode == 'global')
 }
 else
 {
-	$title = Ut::perc_replace($this->get_translation('ExternalPages'),
+	$title = Ut::perc_replace($this->_t('ExternalPages'),
 		$this->compose_link_to_page($this->tag),
 		$purge_time,
 		$this->href('referrers_sites'));
@@ -132,7 +132,7 @@ foreach ($modes as $text => $i)
 	{
 		echo '<li class="active">';
 	}
-	echo $this->get_translation($text);
+	echo $this->_t($text);
 	if ($mode != $i)
 	{
 		echo '</a>';
@@ -199,7 +199,7 @@ $check_ref = function ($ref)
 $referrers = $this->load_all($query);
 if (!$referrers)
 {
-	echo $this->get_translation('NoneReferrers') . "<br /><br />\n" ;
+	echo $this->_t('NoneReferrers') . "<br /><br />\n" ;
 	return;
 }
 $pagination = $this->pagination(count($referrers), $max, 'r', ($mode? 'o=' . $mode : ''), 'referrers');

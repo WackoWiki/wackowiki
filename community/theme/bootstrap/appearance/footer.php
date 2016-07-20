@@ -13,7 +13,7 @@
 <ul>
 <?php
 // If User has rights to edit page, show Edit link
-echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation('EditTip')."\">".$this->get_translation('EditText')."</a></li>\n" : "";
+echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->_t('EditTip')."\">".$this->_t('EditText')."</a></li>\n" : "";
 
 // If this page exists
 if ($this->page)
@@ -22,7 +22,7 @@ if ($this->page)
 	{
 		// Revisions link
 		echo (( $this->hide_revisions === false || $this->is_admin() )
-				? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
+				? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
 				: "<li>".$this->get_time_formatted($this->page['modified'])."</li>\n"
 			);
 
@@ -31,16 +31,16 @@ if ($this->page)
 		{
 			if ($owner == 'System')
 			{
-				echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+				echo "<li>".$this->_t('Owner').": ".$owner."</li>\n";
 			}
 			else
 			{
-				echo "<li>".$this->get_translation('Owner').": ".$this->user_link($owner, $lang = '', true, false)."</li>\n";
+				echo "<li>".$this->_t('Owner').": ".$this->user_link($owner, $lang = '', true, false)."</li>\n";
 			}
 		}
 		else if (!$this->page['comment_on_id'])
 		{
-			echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)</li>\n" : "");
+			echo "<li>".$this->_t('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->_t('TakeOwnership')."</a>)</li>\n" : "");
 		}
 
 		// Permalink
@@ -56,13 +56,13 @@ if ($this->page)
 
 if ($this->get_user())
 {
-	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki').'<br />';
+	echo $this->_t('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki').'<br />';
 }
 
 // comment this out for not showing website policy link at the bottom of your pages
 if ($this->config['policy_page'])
 {
-	echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->get_translation('TermsOfUse').'</a><br />';
+	echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->_t('TermsOfUse').'</a><br />';
 }
 
 ?></div>

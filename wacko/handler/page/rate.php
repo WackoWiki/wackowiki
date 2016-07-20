@@ -70,13 +70,13 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 			handler_rate_set_rate_cookie($this, $page_id);
 
 			// rated successfully
-			$this->set_message($this->get_translation('RatingSuccess'));
+			$this->set_message($this->_t('RatingSuccess'));
 			$this->redirect($this->href('', '', 'show_rating=1').'#rating');
 		}
 		else
 		{
 			// already rated
-			$this->set_message($this->get_translation('RatingDuplicate'));
+			$this->set_message($this->_t('RatingDuplicate'));
 			$this->redirect($this->href());
 		}
 	}
@@ -88,5 +88,5 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 }
 else
 {
-	$this->show_message($this->get_translation('RatingDenied'), 'error');
+	$this->show_message($this->_t('RatingDenied'), 'error');
 }

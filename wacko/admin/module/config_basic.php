@@ -178,7 +178,7 @@ function admin_config_basic(&$engine, &$module)
 				<td>
 					<select style="width:200px;" id="language" name="language">
 <?php
-						$languages = $engine->get_translation('LanguageArray');
+						$languages = $engine->_t('LanguageArray');
 						$langs = $engine->available_languages();
 
 						foreach ($langs as $lang)
@@ -228,7 +228,7 @@ function admin_config_basic(&$engine, &$module)
 						$lang_list= array();
 					}
 
-					$languages = $engine->get_translation('LanguageArray');
+					$languages = $engine->_t('LanguageArray');
 					$n = 1;
 
 					echo "<table>\n\t<tr>\n";
@@ -275,8 +275,8 @@ function admin_config_basic(&$engine, &$module)
 					<small>Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.</small></td>
 				<td>
 					<select id="sorting_comments" name="sorting_comments">
-						<option value="0" <?php echo ( $engine->config['sorting_comments']  == 0  ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('SortCommentAsc');?></option>
-						<option value="1" <?php echo ( $engine->config['sorting_comments']  == 1  ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('SortCommentDesc');?></option>
+						<option value="0" <?php echo ( $engine->config['sorting_comments']  == 0  ? ' selected="selected"' : '' ); ?>><?php echo $engine->_t('SortCommentAsc');?></option>
+						<option value="1" <?php echo ( $engine->config['sorting_comments']  == 1  ? ' selected="selected"' : '' ); ?>><?php echo $engine->_t('SortCommentDesc');?></option>
 					</select>
 				</td>
 			</tr>

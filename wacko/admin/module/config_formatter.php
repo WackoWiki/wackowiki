@@ -206,12 +206,12 @@ function admin_config_formatter(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label" scope="row"><label for="timezone"><strong><?php echo $engine->get_translation('Timezone');?></strong><br />
+				<td class="label" scope="row"><label for="timezone"><strong><?php echo $engine->_t('Timezone');?></strong><br />
 				<small>Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.</small></label></td>
 				<td class="form_right"><select id="timezone" name="timezone">
 
 		<?php
-			$timezones = $engine->get_translation('TzZoneArray');
+			$timezones = $engine->_t('TzZoneArray');
 
 			foreach ($timezones as $offset => $timezone)
 			{

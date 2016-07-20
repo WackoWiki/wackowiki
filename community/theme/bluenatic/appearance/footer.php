@@ -10,7 +10,7 @@ if ($this->page)
 {
 	// Revisions link
 	echo (( $this->hide_revisions === false || $this->is_admin() )
-			? "<li>".$this->get_translation('SettingsRevisions').": <a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
+			? "<li>".$this->_t('SettingsRevisions').": <a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
 			: "<li>".$this->get_time_formatted($this->page['modified'])."</li>\n"
 		);
 
@@ -19,43 +19,43 @@ if ($this->page)
 	{
 		if ($owner == 'System')
 		{
-			echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+			echo "<li>".$this->_t('Owner').": ".$owner."</li>\n";
 		}
 		else
 		{
-			echo "<li>".$this->get_translation('Owner').": ".$this->user_link($owner, $lang = '', true, false)."</li>\n";
+			echo "<li>".$this->_t('Owner').": ".$this->user_link($owner, $lang = '', true, false)."</li>\n";
 		}
 	}
 	else if (!$this->page['comment_on_id'])
 	{
-		echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)</li>\n" : "");
+		echo "<li>".$this->_t('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->_t('TakeOwnership')."</a>)</li>\n" : "");
 	}
 
-		?> <li><a href="<?php echo $this->href('properties'); ?>"><?php echo $this->get_translation('PropertiesText'); ?></a>
+		?> <li><a href="<?php echo $this->href('properties'); ?>"><?php echo $this->_t('PropertiesText'); ?></a>
 </li><li> <?php // Watch page ?> <a
 	href="<?php echo $this->href('watch'); ?>"> <?php if($this->is_watched === true) { ?>
 <img
 	src="<?php echo $this->config['theme_url']; ?>images/watch-remove.png"
-	alt="<?php echo $this->get_translation('RemoveWatch'); ?>"
-	title="<?php echo $this->get_translation('RemoveWatch'); ?>"
+	alt="<?php echo $this->_t('RemoveWatch'); ?>"
+	title="<?php echo $this->_t('RemoveWatch'); ?>"
 	width="16" height="16" /> <?php } else { ?> <img
 	src="<?php echo $this->config['theme_url']; ?>images/watch-add.png"
-	alt="<?php echo $this->get_translation('SetWatch'); ?>"
-	title="<?php echo $this->get_translation('SetWatch'); ?>" width="16"
+	alt="<?php echo $this->_t('SetWatch'); ?>"
+	title="<?php echo $this->_t('SetWatch'); ?>" width="16"
 	height="16" /> <?php } ?> </a></li><li><?php // Bookmark page ?> <?php if(in_array($this->page['page_id'], $this->get_menu_links())) { ?>
 <a href="<?php echo $this->href('', '', "removebookmark=yes"); ?>"> <img
 	src="<?php echo $this->config['theme_url']; ?>images/bookmark-remove.png"
-	alt="<?php echo $this->get_translation('RemoveFromBookmarks'); ?>"
-	title="<?php echo $this->get_translation('RemoveFromBookmarks'); ?>"
+	alt="<?php echo $this->_t('RemoveFromBookmarks'); ?>"
+	title="<?php echo $this->_t('RemoveFromBookmarks'); ?>"
 	width="16" height="16" /> <?php } else { ?> <a
 	href="<?php echo $this->href('', '', "addbookmark=yes"); ?>"> <img
 	src="<?php echo $this->config['theme_url']; ?>images/bookmark-add.png"
-	alt="<?php echo $this->get_translation('AddToBookmarks'); ?>"
-	title="<?php echo $this->get_translation('AddToBookmarks'); ?>"
+	alt="<?php echo $this->_t('AddToBookmarks'); ?>"
+	title="<?php echo $this->_t('AddToBookmarks'); ?>"
 	width="16" height="16" /> <?php } ?> </a></li> <?php }
 	// End of "Page exists" ?> <?php
 	if ($this->get_user()){
-		echo "<li>".$this->get_translation('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki')."</li>";
+		echo "<li>".$this->_t('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki')."</li>";
 	}
 	?></ul>
 </div></div>

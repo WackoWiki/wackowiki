@@ -36,9 +36,9 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches&amp;unwatched=1#list');
 
-		echo $this->get_translation('UnwatchedPages').' (<a href="'.
+		echo $this->_t('UnwatchedPages').' (<a href="'.
 			$this->href('', '', 'mode='.htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).'#list">'.
-			$this->get_translation('ViewWatchedPages').'</a>).<br /><br />';
+			$this->_t('ViewWatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
 		if ($pages = $this->load_all(
@@ -76,7 +76,7 @@ if ($user_id = $this->get_user_id())
 					}
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list" class="watch-on">'.
-						'<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('SetWatch').'" alt="'.$this->get_translation('SetWatch').'"  />'.'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
+						'<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('SetWatch').'" alt="'.$this->_t('SetWatch').'"  />'.'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 
@@ -90,7 +90,7 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo '<em>'.$this->get_translation('NoUnwatchedPages').'</em>';
+			echo '<em>'.$this->_t('NoUnwatchedPages').'</em>';
 		}
 	}
 	else
@@ -102,9 +102,9 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
 
-		echo $this->get_translation('WatchedPages').' (<a href="'.
+		echo $this->_t('WatchedPages').' (<a href="'.
 			$this->href('', '', (isset($_GET['mode']) ? 'mode='.htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;unwatched=1' : '')).'#list">'.
-			$this->get_translation('ViewUnwatchedPages').'</a>).<br /><br />';
+			$this->_t('ViewUnwatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
 
@@ -140,7 +140,7 @@ if ($user_id = $this->get_user_id())
 					}
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list" class="watch-off">'.
-						'<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('RemoveWatch').'" alt="'.$this->get_translation('RemoveWatch').'" />'.'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
+						'<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('RemoveWatch').'" alt="'.$this->_t('RemoveWatch').'" />'.'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
 
 					$cnt++;
 				}
@@ -152,13 +152,13 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo '<em>'.$this->get_translation('NoWatchedPages').'</em>';
+			echo '<em>'.$this->_t('NoWatchedPages').'</em>';
 		}
 	}
 }
 else
 {
-	echo '<em>'.$this->get_translation('NotLoggedInWatches').'</em>';
+	echo '<em>'.$this->_t('NotLoggedInWatches').'</em>';
 }
 
 ?>

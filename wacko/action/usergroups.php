@@ -25,7 +25,7 @@ if($user = $this->get_user())
 	{
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('UserGroups').':</span></p>';
+			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('UserGroups').':</span></p>';
 		}
 
 		echo '<table style="border-spacing: 5px; border-collapse: separate; padding: 5px;"><tr>';

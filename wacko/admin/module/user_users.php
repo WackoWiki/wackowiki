@@ -126,13 +126,13 @@ function admin_user_users(&$engine, &$module)
 		"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' ".
 		"LIMIT 1"))
 		{
-			$engine->show_message($engine->get_translation('UsersAlreadyExists'));
+			$engine->show_message($engine->_t('UsersAlreadyExists'));
 			#$_POST['change']	= $_POST['user_id'];
 			$_POST['create']	= 1;
 		}
 		else if (!$engine->validate_email($_POST['email']))
 		{
-			$engine->show_message($engine->get_translation('NotAEmail'));
+			$engine->show_message($engine->_t('NotAEmail'));
 			#$_POST['change']	= $_POST['user_id'];
 			$_POST['create']	= 1;
 		}
@@ -169,7 +169,7 @@ function admin_user_users(&$engine, &$module)
 			// add user page
 			$engine->add_user_page($_POST['newname'], $_POST['user_lang']);
 
-			$engine->show_message($engine->get_translation('UsersAdded'), 'success');
+			$engine->show_message($engine->_t('UsersAdded'), 'success');
 			$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
 			unset($_POST['create']);
 		}
@@ -199,13 +199,13 @@ function admin_user_users(&$engine, &$module)
 			"AND user_id <> '".quote($engine->dblink, $_POST['user_id'])."' ".
 		"LIMIT 1"))
 		{
-			$engine->set_message($engine->get_translation('UsersAlreadyExists'));
+			$engine->set_message($engine->_t('UsersAlreadyExists'));
 			$_POST['change']	= $_POST['user_id'];
 			$_POST['edit']		= 1;
 		}
 		else if (!$engine->validate_email($_POST['newemail']))
 		{
-			$engine->show_message($engine->get_translation('NotAEmail'));
+			$engine->show_message($engine->_t('NotAEmail'));
 			$_POST['change']	= $_POST['user_id'];
 			$_POST['edit'] 		= 1;
 		}
@@ -228,7 +228,7 @@ function admin_user_users(&$engine, &$module)
 				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
-			$engine->show_message($engine->get_translation('UsersUpdated'), 'success');
+			$engine->show_message($engine->_t('UsersUpdated'), 'success');
 			$engine->log(4, "Updated User //'{$user['user_name']}'//");
 		}
 	}
@@ -238,7 +238,7 @@ function admin_user_users(&$engine, &$module)
 	{
 		if (array_filter($set) == false && empty($user_id))
 		{
-			$error = 'Please select at least one user via the Set button.';//$this->get_translation('ModerateMoveNotExists');
+			$error = 'Please select at least one user via the Set button.';//$this->_t('ModerateMoveNotExists');
 			$engine->show_message($error, 'error');
 		}
 			//(int)$_POST['user_id']
@@ -299,7 +299,7 @@ function admin_user_users(&$engine, &$module)
 						"");
 
 					$engine->config->invalidate_config_cache();
-					$engine->show_message($engine->get_translation('UsersDeleted'), 'success');
+					$engine->show_message($engine->_t('UsersDeleted'), 'success');
 					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
 				}
 			}
@@ -318,11 +318,11 @@ function admin_user_users(&$engine, &$module)
 	{
 		echo $engine->form_open('add_user');
 
-		echo '<h2>'.$engine->get_translation('UsersAddNew').'</h2>';
+		echo '<h2>'.$engine->_t('UsersAddNew').'</h2>';
 		echo '<table class="formation">'.
 				'<tr>
 					<td>
-						<label for="newname">'.$engine->get_translation('UserName').'</label>'.
+						<label for="newname">'.$engine->_t('UserName').'</label>'.
 					'</td>
 					<td>
 						<input type="text" id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" />
@@ -330,14 +330,14 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="newrealname">'.$engine->get_translation('RealName').'</label>'.
+						<label for="newrealname">'.$engine->_t('RealName').'</label>'.
 					'<td>
 						<input type="text" id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="100" />
 					</td>
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="email">'.$engine->get_translation('Email').'</label>
+						<label for="email">'.$engine->_t('Email').'</label>
 					</td>'.
 					'<td>
 						<input type="email" id="email" name="email" value="'.( isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="50" maxlength="100" />
@@ -345,13 +345,13 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="user_lang">'.$engine->get_translation('YourLanguage').'</label>
+						<label for="user_lang">'.$engine->_t('YourLanguage').'</label>
 					</td>'.
 					'<td>
 						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
 
-				$languages = $engine->get_translation('LanguageArray');
+				$languages = $engine->_t('LanguageArray');
 
 				if ($langs = $engine->available_languages())
 				{
@@ -366,7 +366,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="enabled">'.$engine->get_translation('UserEnabled').'</label>
+						<label for="enabled">'.$engine->_t('UserEnabled').'</label>
 						</td>'.
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked="checked"' : '' ).' />
@@ -375,8 +375,8 @@ function admin_user_users(&$engine, &$module)
 				'<tr>
 					<td>
 						<br />
-						<input type="submit" id="submit" name="create" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-						'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
+						<input type="submit" id="submit" name="create" value="'.$engine->_t('GroupsSaveButton').'" /> '.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="'.$engine->_t('GroupsCancelButton').'" /></a>'.
 					'</td>
 				</tr>'.
 			'</table><br />';
@@ -400,7 +400,7 @@ function admin_user_users(&$engine, &$module)
 				'<table class="formation">'.
 				'<tr>
 					<td>
-						<label for="newname">'.$engine->get_translation('UsersRename').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in *</label>
+						<label for="newname">'.$engine->_t('UsersRename').' \'<code>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in *</label>
 					</td>'.
 					'<td>
 						<input type="text" id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="20" maxlength="100" />
@@ -408,7 +408,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="newrealname">'.$engine->get_translation('RealName').'</label> '.
+						<label for="newrealname">'.$engine->_t('RealName').'</label> '.
 					'</td>
 					<td>
 						<input type="text" id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" />
@@ -416,7 +416,7 @@ function admin_user_users(&$engine, &$module)
 				'</tr>'.
 				'<tr>
 					<td>
-						<label for="newemail">'.$engine->get_translation('Email').'</label> '.
+						<label for="newemail">'.$engine->_t('Email').'</label> '.
 					'</td>
 					<td>
 						<input type="email" id="newemail" name="newemail" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ).'" size="50" maxlength="100" />
@@ -424,13 +424,13 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="user_lang">'.$engine->get_translation('YourLanguage').'</label>
+						<label for="user_lang">'.$engine->_t('YourLanguage').'</label>
 					</td>
 					<td>
 						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
 
-						$languages = $engine->get_translation('LanguageArray');
+						$languages = $engine->_t('LanguageArray');
 
 						if ($langs = $engine->available_languages())
 						{
@@ -445,7 +445,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="user_lang">'.$engine->get_translation('ChooseTheme').'</label>
+						<label for="user_lang">'.$engine->_t('ChooseTheme').'</label>
 					</td>
 					<td>
 						<select style="width:200px;" id="theme" name="theme">'.
@@ -462,7 +462,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-					<label for="enabled">'.$engine->get_translation('UserEnabled').'</label>
+					<label for="enabled">'.$engine->_t('UserEnabled').'</label>
 					</td>'.
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked="checked"' : '' ).' />
@@ -470,12 +470,12 @@ function admin_user_users(&$engine, &$module)
 				</tr>'.
 				'<tr>
 					<td>
-						<label for="account_status">'.$engine->get_translation('AccountStatus').'</label>
+						<label for="account_status">'.$engine->_t('AccountStatus').'</label>
 					</td>
 					<td>
 						<select id="account_status" name="account_status">';
 
-						$account_status = $engine->get_translation('AccountStatusArray');
+						$account_status = $engine->_t('AccountStatusArray');
 
 						foreach ($account_status as $offset => $status)
 						{
@@ -492,10 +492,10 @@ function admin_user_users(&$engine, &$module)
 				'<tr>
 					<td>
 						<br />
-						<input type="submit" id="submit" name="edit" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-						'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>'.
+						<input type="submit" id="submit" name="edit" value="'.$engine->_t('GroupsSaveButton').'" /> '.
+						'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="'.$engine->_t('GroupsCancelButton').'" /></a>'.
 						'<br />
-						<small>'.$engine->get_translation('UsersRenameInfo').'</small>'.
+						<small>'.$engine->_t('UsersRenameInfo').'</small>'.
 					'</td>
 				</tr>'.
 			'</table>
@@ -546,10 +546,10 @@ function admin_user_users(&$engine, &$module)
 				 '<table class="formation">'.
 					'<tr>
 						<td>
-							<label for="">'.$engine->get_translation('UsersDelete').' '.$users.'?</label> '.
+							<label for="">'.$engine->_t('UsersDelete').' '.$users.'?</label> '.
 							'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
 							'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>'.
-							'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
+							'<br /><small>'.$engine->_t('UsersDeleteInfo').'</small>'.
 						'</td>
 					</tr>'.
 				'</table>
@@ -564,7 +564,7 @@ function admin_user_users(&$engine, &$module)
 		echo "<h2>".$user['user_name']."</h2>";
 
 		// user data
-		$status = $engine->get_translation('AccountStatusArray');
+		$status = $engine->_t('AccountStatusArray');
 
 		echo $engine->form_open('get_user');
 		?>
@@ -574,31 +574,31 @@ function admin_user_users(&$engine, &$module)
 		<?php
 
 			echo '<tr class="lined">'."\n".
-					'<th class="label">'.$engine->get_translation('UserName').'</th>'.
+					'<th class="label">'.$engine->_t('UserName').'</th>'.
 					'<td><strong>'.$user['user_name'].'</strong></td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th  class="label">'.$engine->get_translation('RealName').'</th>'.
+					'<th  class="label">'.$engine->_t('RealName').'</th>'.
 					'<td>'.$user['real_name'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th class="label">'.$engine->get_translation('EmailAddress').'</th>'.
+					'<th class="label">'.$engine->_t('EmailAddress').'</th>'.
 					'<td>'.$user['email'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th class="label">'.$engine->get_translation('YourLanguage').'</th>'.
+					'<th class="label">'.$engine->_t('YourLanguage').'</th>'.
 					'<td>'.$user['user_lang'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th class="label">'.$engine->get_translation('ChooseTheme').'</th>'.
+					'<th class="label">'.$engine->_t('ChooseTheme').'</th>'.
 					'<td>'.$user['theme'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th class="label">'.$engine->get_translation('UserEnabled').'</th>'.
+					'<th class="label">'.$engine->_t('UserEnabled').'</th>'.
 					'<td>'.$user['enabled'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th class="label">'.$engine->get_translation('AccountStatus').'</th>'.
+					'<th class="label">'.$engine->_t('AccountStatus').'</th>'.
 					'<td>'.$status[$user['account_status']].'</td>'.
 				'</tr>';
 ?>
@@ -609,9 +609,9 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		echo '<br /><input type="submit" id="button" name="edit" value="'.$engine->get_translation('UserEditButton').'" /> ';
-		echo '<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		echo '<a href="'.$engine->href().'" class="cancel" ><input type="button" id="button" value="'.$engine->get_translation('GroupsCancelButton').'" /></a>';
+		echo '<br /><input type="submit" id="button" name="edit" value="'.$engine->_t('UserEditButton').'" /> ';
+		echo '<input type="submit" id="button" name="remove" value="'.$engine->_t('GroupsRemoveButton').'" /> ';
+		echo '<a href="'.$engine->href().'" class="cancel" ><input type="button" id="button" value="'.$engine->_t('GroupsCancelButton').'" /></a>';
 		echo $engine->form_close();
 	}
 	else
@@ -763,7 +763,7 @@ function admin_user_users(&$engine, &$module)
 		// entries to display
 		$limit = 100;
 
-		$status = $engine->get_translation('AccountStatusArray');
+		$status = $engine->_t('AccountStatusArray');
 
 		// collecting data
 		$count = $engine->load_single(
@@ -789,9 +789,9 @@ function admin_user_users(&$engine, &$module)
 		// user filter form
 		$search =	$engine->form_open('search_user', ['form_method' => 'get']).
 					'<input type="hidden" name="mode" value="'.$module['mode'].'" />'. // required to pass mode module via GET
-					$engine->get_translation('UsersSearch').': </td><td>'.
+					$engine->_t('UsersSearch').': </td><td>'.
 					'<input type="search" name="user" maxchars="40" size="30" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> '.
-					'<input type="submit" id="submit" value="'.$engine->get_translation('UsersFilter').'" /> '.
+					'<input type="submit" id="submit" value="'.$engine->_t('UsersFilter').'" /> '.
 					$engine->form_close();
 
 		echo '<span style="float: right;">'.$search.'</span>';
@@ -802,15 +802,15 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		$control_buttons =	'<br /><input type="submit" id="button" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> '.
-							'<input type="submit" id="button" name="edit" value="'.$engine->get_translation('UserEditButton').'" /> '.
-							#'<input type="submit" id="button" name="approve" value="'.$engine->get_translation('Approve').'" /> '.
-							'<input type="submit" id="button" name="remove" value="'.$engine->get_translation('GroupsRemoveButton').'" /> '.
+		$control_buttons =	'<br /><input type="submit" id="button" name="create" value="'.$engine->_t('GroupsAddButton').'" /> '.
+							'<input type="submit" id="button" name="edit" value="'.$engine->_t('UserEditButton').'" /> '.
+							#'<input type="submit" id="button" name="approve" value="'.$engine->_t('Approve').'" /> '.
+							'<input type="submit" id="button" name="remove" value="'.$engine->_t('GroupsRemoveButton').'" /> '.
 							'<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
 							'<br />'."\n".
-								'<input type="submit" name="set" id="submit" value="'.$engine->get_translation('ModerateSet').'" /> '.
+								'<input type="submit" name="set" id="submit" value="'.$engine->_t('ModerateSet').'" /> '.
 								($set
-										? '<input type="submit" name="reset" id="submit" value="'.$engine->get_translation('ModerateReset').'" /> '.
+										? '<input type="submit" name="reset" id="submit" value="'.$engine->_t('ModerateReset').'" /> '.
 										'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
 										: ''
 								);
@@ -835,7 +835,7 @@ function admin_user_users(&$engine, &$module)
 				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$orderuploads; ?>">Uploads</a></th>
 				<th style="width:20px;">Language</th>
 				<th style="width:20px;">Enabled</th>
-				<th style="width:20px;"><?php echo $engine->get_translation('AccountStatus'); ?></th>
+				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
 				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$signup_time; ?>">Signuptime</a></th>
 				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order='.$last_visit; ?>">Last active</a></th>
 			</tr>

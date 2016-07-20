@@ -67,12 +67,12 @@ $mail_body = '';
 			if ($engine->config['enable_email'] == true && $engine->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
 			{
 				$subject	= '['.$engine->config['site_name'].'] '.$mail_subject;
-				$body		= $engine->get_translation('EmailHello').' '.$user['user_name'].",\n\n".
+				$body		= $engine->_t('EmailHello').' '.$user['user_name'].",\n\n".
 
 							$mail_body."\n\n\n".
 
-							$engine->get_translation('EmailDoNotReply')."\n\n".
-							$engine->get_translation('EmailGoodbye')."\n".
+							$engine->_t('EmailDoNotReply')."\n\n".
+							$engine->_t('EmailGoodbye')."\n".
 							$engine->config['site_name']."\n".
 							$engine->config['base_url'];
 
@@ -101,7 +101,7 @@ $mail_body = '';
 
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="user_id"><strong><?php echo $engine->get_translation('SendToUser'); ?></strong></label>
+				<label for="user_id"><strong><?php echo $engine->_t('SendToUser'); ?></strong></label>
 			</td>
 			<td>
 				<select id="nuser_id" name="user_id">
@@ -121,7 +121,7 @@ $mail_body = '';
 <?php
 	echo '<tr class="hl_setting">
 			<td class="label">
-				<label for="group_id"><strong>'.$engine->get_translation('SendToGroup').':</strong></label>
+				<label for="group_id"><strong>'.$engine->_t('SendToGroup').':</strong></label>
 			</td>'.
 			'<td>
 				<select id="group_id" name="group_id">
@@ -139,7 +139,7 @@ $mail_body = '';
 			?>
 			</td></tr>
 			<tr class="hl_setting">
-				<td class="label"><strong><?php echo $engine->get_translation('UsersIntercomSubject'); ?>:</strong><br />
+				<td class="label"><strong><?php echo $engine->_t('UsersIntercomSubject'); ?>:</strong><br />
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				</td>
 				<td>
@@ -160,7 +160,7 @@ $mail_body = '';
 				<td>
 					<select style="width:200px;" id="language" name="language">
 <?php
-						$languages	= $engine->get_translation('LanguageArray');
+						$languages	= $engine->_t('LanguageArray');
 						$langs		= $engine->available_languages();
 
 						foreach ($langs as $lang)

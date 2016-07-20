@@ -29,7 +29,7 @@ if ($this->is_admin())
 		// confirmed password mismatch
 		if ($confpassword != $password)
 		{
-			$error .= $this->get_translation('PasswordsDidntMatch').' ';
+			$error .= $this->_t('PasswordsDidntMatch').' ';
 		}
 		// password complexity validation
 		else if ($complexity)
@@ -62,17 +62,17 @@ if ($this->is_admin())
 
 	echo $this->form_open('generate_hash');
 
-	echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
+	echo '<p><label for="password">'.$this->_t('RegistrationPassword').':</label>';
 	echo '<input type="password" id="recovery_password" name="recovery_password" size="24" value="'.$password.'" />';
 
 	echo $this->show_password_complexity();
 	echo '</p>';
 
-	echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';
+	echo '<p><label for="confpassword">'.$this->_t('ConfirmPassword').':</label>';
 	echo '<input type="password" id="confpassword" name="confpassword" size="24" value="'.$confpassword.'" /></p>';
 
 	?>
-	<input type="submit" name="preview" value="<?php echo $this->get_translation('CreatePageButton'); ?>" />
+	<input type="submit" name="preview" value="<?php echo $this->_t('CreatePageButton'); ?>" />
 	<?php
 
 	echo $this->form_close();

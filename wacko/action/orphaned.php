@@ -105,7 +105,7 @@ if (list ($pages, $pagination) = load_orphaned_pages($this, $root, (int)$max))
 }
 else
 {
-	echo $this->get_translation('NoOrphaned');
+	echo $this->_t('NoOrphaned');
 }
 
 ?>

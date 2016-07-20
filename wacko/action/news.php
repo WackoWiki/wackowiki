@@ -46,12 +46,12 @@ if (!empty($this->config['news_cluster']))
 
 			if ($name == '')
 			{
-				$error = $this->get_translation('NewsNoName');
+				$error = $this->_t('NewsNoName');
 			}
 		}
 		else
 		{
-			$error = $this->get_translation('NewsNoName');
+			$error = $this->_t('NewsNoName');
 		}
 
 		// if errors were found - return, else continue
@@ -188,7 +188,7 @@ if (!empty($this->config['news_cluster']))
 	{
 		if (isset($category_title))
 		{
-			$_category_title = ' '.$this->get_translation('For').' '.$this->get_translation('Category').' &laquo;'.$category_title['category'].'&raquo;';
+			$_category_title = ' '.$this->_t('For').' '.$this->_t('Category').' &laquo;'.$category_title['category'].'&raquo;';
 		}
 		else
 		{
@@ -197,11 +197,11 @@ if (!empty($this->config['news_cluster']))
 
 		if ($this->page['tag'] == $this->config['news_cluster'])
 		{
-			$_title = $this->get_translation('News').$_category_title;
+			$_title = $this->_t('News').$_category_title;
 		}
 		else
 		{
-			$_title = $this->compose_link_to_page($this->config['news_cluster'], '', $this->get_translation('News'), 0).$_category_title;
+			$_title = $this->compose_link_to_page($this->config['news_cluster'], '', $this->_t('News'), 0).$_category_title;
 		}
 
 		echo "<h1>".$_title."</h1>";
@@ -210,7 +210,7 @@ if (!empty($this->config['news_cluster']))
 	// displaying XML icon
 	if (!(int)$noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/news_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
+		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/news_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
 	}
 
 	// displaying articles
@@ -221,14 +221,14 @@ if (!empty($this->config['news_cluster']))
 		foreach ($pages as $page)
 		{
 			$_category = $this->get_categories($page['page_id']);
-			$_category = !empty($_category) ? $this->get_translation('Category').': '.$_category.' | ' : '';
+			$_category = !empty($_category) ? $this->_t('Category').': '.$_category.' | ' : '';
 
 			echo '<article class="newsarticle">';
 			echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
-			echo '<div class="newsinfo"><span><time datetime="'.$this->page['created'].'">'.$this->get_time_formatted($page['created']).'</time> '.$this->get_translation('By').' '.$this->user_link($page['owner'], '', true, false)."</span></div>\n";
+			echo '<div class="newsinfo"><span><time datetime="'.$this->page['created'].'">'.$this->get_time_formatted($page['created']).'</time> '.$this->_t('By').' '.$this->user_link($page['owner'], '', true, false)."</span></div>\n";
 			echo '<div class="newscontent">'.$this->action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
-			echo '<footer class="newsmeta">'.$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->get_translation('EditText'), 0)." | " : "")."  ".
-				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#header-comments" title="'.$this->get_translation('NewsDiscuss').' '.$page['title'].'">'.(int)$page['comments']." ".$this->get_translation('Comments_all')." &raquo; "."</a></footer>\n";
+			echo '<footer class="newsmeta">'.$_category." ".($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText'), 0)." | " : "")."  ".
+				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#header-comments" title="'.$this->_t('NewsDiscuss').' '.$page['title'].'">'.(int)$page['comments']." ".$this->_t('Comments_all')." &raquo; "."</a></footer>\n";
 			echo "</article>\n";
 
 			unset ($_category);
@@ -239,7 +239,7 @@ if (!empty($this->config['news_cluster']))
 	}
 	else
 	{
-		echo '<br /><br />'.$this->get_translation('NewsNotAvailable');
+		echo '<br /><br />'.$this->_t('NewsNotAvailable');
 	}
 
 	if ($access)
@@ -247,9 +247,9 @@ if (!empty($this->config['news_cluster']))
 		echo $this->form_open('add_topic');
 		?>
 		<br /><a id="newtopic"></a><br />
-		<label for="newstitle"><?php echo $this->get_translation('NewsName'); ?>:</label>
+		<label for="newstitle"><?php echo $this->_t('NewsName'); ?>:</label>
 		<input type="text" id="newstitle" name="title" size="50" maxlength="250" value="" />
-		<input type="submit" id="submit" value="<?php echo $this->get_translation('NewsSubmit'); ?>" />
+		<input type="submit" id="submit" value="<?php echo $this->_t('NewsSubmit'); ?>" />
 
 		<?php echo $this->form_close();
 	}
@@ -258,5 +258,5 @@ if (!empty($this->config['news_cluster']))
 }
 else
 {
-	echo $this->get_translation('NewsNoClusterDefined');
+	echo $this->_t('NewsNoClusterDefined');
 }

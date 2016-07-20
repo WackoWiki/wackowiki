@@ -38,7 +38,7 @@ if ($this->has_access('read'))
 			header('HTTP/1.1 404 Not Found');
 		}
 
-		$message = $this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  Ut::perc_replace($this->get_translation('PromptCreate'), $this->href('edit', '', '', 1)) : '');
+		$message = $this->_t('DoesNotExists') ." ".( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
 		$this->show_message($message, 'notice');
 	}
 	else
@@ -52,19 +52,19 @@ if ($this->has_access('read'))
 
 			if ($this->is_admin())
 			{
-				$message = $this->get_translation('PageDeletedInfo'); // TODO: add description: to restore the page you ...
+				$message = $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
 				$message .= '<br /><br />';
 				$message .= $this->form_open('restore_page', ['page_method' => 'restore']);
 				#$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
 				$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
 				#$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
-				$message .= '<input type="submit" value="'.$this->get_translation('RestoreButton').'" />';
-				#$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('EditCancelButton').'"/></a>';
+				$message .= '<input type="submit" value="'.$this->_t('RestoreButton').'" />';
+				#$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('EditCancelButton').'"/></a>';
 				$message .= $this->form_close();
 			}
 			else
 			{
-				$message = $this->get_translation('PageDeletedInfo'); // TODO: add description: to restore the page you ...
+				$message = $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
 				$message .= '<br />';
 			}
 
@@ -74,7 +74,7 @@ if ($this->has_access('read'))
 		// revision header
 		if ($this->page['latest'] == 0)
 		{
-			$message = Ut::perc_replace($this->get_translation('Revision'),
+			$message = Ut::perc_replace($this->_t('Revision'),
 				$this->href(),
 				$this->tag,
 				$this->get_time_formatted($this->page['modified']),
@@ -96,7 +96,7 @@ if ($this->has_access('read'))
 
 				if ($latest['deleted'] && $this->is_admin() == false)
 				{
-					$message2 = $this->get_translation('PageDeletedInfo');
+					$message2 = $this->_t('PageDeletedInfo');
 					$this->show_message($message2, 'info');
 				}
 				else
@@ -106,8 +106,8 @@ if ($this->has_access('read'))
 					$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
 					$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
 					$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
-					$message .= '<input type="submit" value="'.$this->get_translation('ReEditOldRevision').'" />';
-					$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->get_translation('EditCancelButton').'"/></a>';
+					$message .= '<input type="submit" value="'.$this->_t('ReEditOldRevision').'" />';
+					$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('EditCancelButton').'"/></a>';
 					$message .= $this->form_close();
 				}
 			}
@@ -203,12 +203,12 @@ else
 		header('HTTP/1.1 403 Forbidden');
 	}
 
-	$message = $this->get_translation('ReadAccessDenied');
+	$message = $this->_t('ReadAccessDenied');
 	$this->show_message($message, 'info');
 
 	if ($this->has_access('read', '', GUEST) === false)
 	{
-		$message = $this->get_translation('ReadAccessDeniedHintGuest');
+		$message = $this->_t('ReadAccessDeniedHintGuest');
 		$this->show_message($message, 'hint');
 	}
 }

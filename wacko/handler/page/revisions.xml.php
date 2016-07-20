@@ -13,10 +13,10 @@ echo "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 echo "<channel>\n";
 echo "<title>".$this->config['site_name']." - ".$this->tag."</title>\n";
 echo "<link>".$this->config['base_url'].$this->tag."</link>\n";
-echo "<description>".$this->get_translation('PageRevisionsXML').$this->config['site_name']."/".$this->tag."</description>\n";
+echo "<description>".$this->_t('PageRevisionsXML').$this->config['site_name']."/".$this->tag."</description>\n";
 echo "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 echo "<image>\n";
-echo "<title>".$this->config['site_name'].$this->get_translation('RecentCommentsTitleXML')."</title>\n";
+echo "<title>".$this->config['site_name'].$this->_t('RecentCommentsTitleXML')."</title>\n";
 echo "<link>".$this->config['base_url']."</link>\n";
 echo "<url>".$this->config['base_url']."image/wacko_logo.png"."</url>\n";
 echo "<width>108</width>\n";
@@ -72,7 +72,7 @@ else
 	echo "<item>\n";
 	echo "<title>Error</title>\n";
 	echo "<link>".$this->href('show')."</link>\n";
-	echo "<description>".$this->get_translation('AccessDeniedXML')."</description>\n";
+	echo "<description>".$this->_t('AccessDeniedXML')."</description>\n";
 	echo "</item>\n";
 }
 

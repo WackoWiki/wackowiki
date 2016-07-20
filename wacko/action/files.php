@@ -121,8 +121,8 @@ if ($can_view)
 
 	// display
 
-	$edit_icon	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('UploadEdit').'" alt="'.$this->get_translation('UploadEdit').'" class="btn-edit"/>';
-	$del_icon	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->get_translation('UploadRemove').'" alt="'.$this->get_translation('UploadRemove').'" class="btn-delete"/>';
+	$edit_icon	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('UploadEdit').'" alt="'.$this->_t('UploadEdit').'" class="btn-edit"/>';
+	$del_icon	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('UploadRemove').'" alt="'.$this->_t('UploadRemove').'" class="btn-delete"/>';
 
 	/* if (!$global)
 	{
@@ -157,7 +157,7 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		$title = $this->get_translation('UploadTitle'.($global ? 'Global' : '') ).' '.($page ? $this->link($ppage, '', $legend) : '');
+		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ).' '.($page ? $this->link($ppage, '', $legend) : '');
 		echo '<div class="layout-box"><p class="layout-box"><span>'.$title.": </span></p>\n";
 	}
 
@@ -192,7 +192,7 @@ if ($can_view)
 
 			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')
 			{
-				$hits	= ', '.$file['hits'].' '.$this->get_translation('SettingsHits');
+				$hits	= ', '.$file['hits'].' '.$this->_t('SettingsHits');
 			}
 			else
 			{
@@ -282,7 +282,7 @@ if ($can_view)
 }
 else
 {
-	echo '<em>'.$this->get_translation('ActionDenied').'</em>';
+	echo '<em>'.$this->_t('ActionDenied').'</em>';
 }
 
 ?>

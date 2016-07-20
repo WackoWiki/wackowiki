@@ -41,7 +41,7 @@ function admin_content_files(&$engine, &$module)
 
 		if (count($file) > 0)
 		{
-			echo '<strong>'.$engine->get_translation('UploadRemoveConfirm').'</strong>';
+			echo '<strong>'.$engine->_t('UploadRemoveConfirm').'</strong>';
 			echo $engine->form_open();
 ?>
 	<br />
@@ -51,15 +51,15 @@ function admin_content_files(&$engine, &$module)
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
-	<input type="submit" id="submit" name="submit" value="<?php echo $engine->get_translation('RemoveButton'); ?>" />
-	<a href="<?php echo rawurldecode($engine->href('upload'));?>" style="text-decoration: none;"><input type="button" id="button" value="<?php echo str_replace("\n", ' ', $engine->get_translation('EditCancelButton')); ?>"/></a>
+	<input type="submit" id="submit" name="submit" value="<?php echo $engine->_t('RemoveButton'); ?>" />
+	<a href="<?php echo rawurldecode($engine->href('upload'));?>" style="text-decoration: none;"><input type="button" id="button" value="<?php echo str_replace("\n", ' ', $engine->_t('EditCancelButton')); ?>"/></a>
 	<br /><br />
 <?php
 			echo $engine->form_close();
 		}
 		else
 		{
-			$engine->show_message($engine->get_translation('UploadFileNotFound'));
+			$engine->show_message($engine->_t('UploadFileNotFound'));
 		}
 
 		echo '</div>';
@@ -90,27 +90,27 @@ function admin_content_files(&$engine, &$module)
 				"LIMIT 1");
 
 			echo '<br />';
-			$message =  '<em>'.$engine->get_translation('UploadRemovedFromDB').'</em><br />';
+			$message =  '<em>'.$engine->_t('UploadRemovedFromDB').'</em><br />';
 
 			// 3. remove from FS
 			$real_filename = Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 
 			if (@unlink($real_filename))
 			{
-				$message .= '<em>'.$engine->get_translation('UploadRemovedFromFS').'</em>';
+				$message .= '<em>'.$engine->_t('UploadRemovedFromFS').'</em>';
 				$engine->show_message($message);
 			}
 			else
 			{
-				$message = $engine->get_translation('UploadRemovedFromFSError');
+				$message = $engine->_t('UploadRemovedFromFSError');
 				$engine->show_message($message, 'error');
 			}
 
-			$engine->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
+			$engine->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->_t('LogRemovedFile', $engine->config['language']))));
 		}
 		else
 		{
-			$message = $engine->get_translation('UploadRemoveNotFound');
+			$message = $engine->_t('UploadRemoveNotFound');
 			$engine->show_message($message);
 		}
 
@@ -197,10 +197,10 @@ function admin_content_files(&$engine, &$module)
 
 			// 4. output link to file
 			// !!!!! write after providing filelink syntax
-			echo '<strong>'.$engine->get_translation('UploadDone').'</strong>';
+			echo '<strong>'.$engine->_t('UploadDone').'</strong>';
 
 			// log event
-			$engine->log(4, str_replace('%3', $engine->binary_multiples($file_size, false, true, true), str_replace('%2', $small_name, $engine->get_translation('LogFileUploadedGlobal', $engine->config['language']))));
+			$engine->log(4, str_replace('%3', $engine->binary_multiples($file_size, false, true, true), str_replace('%2', $small_name, $engine->_t('LogFileUploadedGlobal', $engine->config['language']))));
 ?>
 <br /><ul>
 <li><?php echo $engine->link( 'file:'.$small_name ); ?></li>
@@ -214,11 +214,11 @@ function admin_content_files(&$engine, &$module)
 			{
 				if ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE)
 				{
-					$error = $engine->get_translation('UploadMaxSizeReached');
+					$error = $engine->_t('UploadMaxSizeReached');
 				}
 				else if ($_FILES['file']['error'] == UPLOAD_ERR_PARTIAL || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE)
 				{
-					$error = $engine->get_translation('UploadNoFile');
+					$error = $engine->_t('UploadNoFile');
 				}
 			}
 
@@ -240,7 +240,7 @@ function admin_content_files(&$engine, &$module)
 	<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />
 	<table >
 		<tr>
-			<td><?php echo $engine->get_translation('UploadFor');?>:&nbsp;</td>
+			<td><?php echo $engine->_t('UploadFor');?>:&nbsp;</td>
 			<td nowrap="nowrap"><input type="file" name="file" />&nbsp;(Unlimited)</td>
 		</tr>
 		<tr>
@@ -249,19 +249,19 @@ function admin_content_files(&$engine, &$module)
 				<div>
 				<input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="toUploadGlobalDisabled" />
 				<input type="hidden" name="to" value="global" />
-				<?php echo $engine->get_translation('UploadGlobalText'); ?>
+				<?php echo $engine->_t('UploadGlobalText'); ?>
 				</div>
 			</td>
 		</tr>
 		<tr>
-			<td><?php echo $engine->get_translation('UploadDesc');?>:&nbsp;</td>
+			<td><?php echo $engine->_t('UploadDesc');?>:&nbsp;</td>
 			<td><input type="text" maxlength="250" name="file_description" size="40"/></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>
 				<div style="padding-top:5px">
-				<input type="submit" id="submit" value="<?php echo $engine->get_translation('UploadButtonText'); ?>" />
+				<input type="submit" id="submit" value="<?php echo $engine->_t('UploadButtonText'); ?>" />
 				</div>
 			</td>
 		</tr>
@@ -305,10 +305,10 @@ function admin_content_files(&$engine, &$module)
 		$files = array();
 	}
 
-	echo '<fieldset><legend>'.$engine->get_translation('UploadTitleGlobal').":</legend>\n";
+	echo '<fieldset><legend>'.$engine->_t('UploadTitleGlobal').":</legend>\n";
 
 	// display
-	$del	= $engine->get_translation('UploadRemove');
+	$del	= $engine->_t('UploadRemove');
 	$path	= '';
 	$path2	= 'file:';
 
@@ -345,7 +345,7 @@ function admin_content_files(&$engine, &$module)
 			<td>(<?php echo $file_size; ?>)</td>
 			<td><?php echo $desc ?></td>
 			<td style="white-space:nowrap;"><?php echo $engine->get_time_formatted($dt) ?></td>
-			<td><a href="<?php echo $remove_href; ?>"><?php echo $engine->get_translation('RemoveButton') ?></a></td>
+			<td><a href="<?php echo $remove_href; ?>"><?php echo $engine->_t('RemoveButton') ?></a></td>
 		</tr>
 		<tr class="lined">
 			<td colspan="4"></td>

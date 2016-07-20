@@ -56,7 +56,7 @@ if ($list && ($ids || isset($_GET['category'])))
 			$words = strtolower(implode(', ', $words));
 		}
 
-		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('PagesCategory').( $words ? ' &laquo;<strong>'.$words.'</strong>&raquo;' : '' ).":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('PagesCategory').( $words ? ' &laquo;<strong>'.$words.'</strong>&raquo;' : '' ).":</span></p>\n";
 	}
 
 	if ($sort == 'abc')
@@ -103,12 +103,12 @@ if ($list && ($ids || isset($_GET['category'])))
 		}
 		else
 		{
-			echo '<em>'.$this->get_translation('CategoryNotExists').'</em><br />';
+			echo '<em>'.$this->_t('CategoryNotExists').'</em><br />';
 		}
 	}
 	else
 	{
-		echo '<em>'.$this->get_translation('CategoryEmpty').'</em><br />';
+		echo '<em>'.$this->_t('CategoryEmpty').'</em><br />';
 	}
 
 	if ($nomark != 2)
@@ -122,7 +122,7 @@ if (!$ids)
 	// header
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('Categories').( $root ? " of cluster ".$this->link('/'.$root, '', '', '', 0) : '' ).":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('Categories').( $root ? " of cluster ".$this->link('/'.$root, '', '', '', 0) : '' ).":</span></p>\n";
 	}
 
 	// categories list
@@ -159,7 +159,7 @@ if (!$ids)
 	}
 	else
 	{
-		echo '<em>'.$this->get_translation('NoCategoriesForThisLanguage').'</em>';
+		echo '<em>'.$this->_t('NoCategoriesForThisLanguage').'</em>';
 	}
 
 	if (!$nomark)

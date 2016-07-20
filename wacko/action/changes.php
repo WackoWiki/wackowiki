@@ -30,14 +30,14 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 	if ($user)
 	{
-		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
+		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
 	}
 
 	if (!$root && !(int)$noxml)
 	{
 		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/changes_'.
 			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.
-			$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->get_translation('RecentChangesXMLTip').
+			$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('RecentChangesXMLTip').
 			'" alt="XML" class="btn-feed"/></a></span>'."<br /><br />\n";
 	}
 
@@ -68,7 +68,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			// review
 			if ($this->config['review'] && $this->is_reviewer() && !$page['reviewed'])
 			{
-				$review = '<span class="review">['.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('Review'), 0).']</span>';
+				$review = '<span class="review">['.$this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'), 0).']</span>';
 			}
 
 			// do unicode entities
@@ -96,7 +96,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			// print entry
 			echo '<li class="lined'.$viewed.'"><span class="dt">'.
 			(!$this->hide_revisions
-				? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->get_translation('RevisionTip'))." "
+				? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip'))." "
 				: $time
 			).
 			"</span> &mdash; ".
@@ -118,5 +118,5 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 }
 else
 {
-	echo $this->get_translation('NoPagesFound');
+	echo $this->_t('NoPagesFound');
 }

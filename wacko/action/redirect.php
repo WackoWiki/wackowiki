@@ -25,7 +25,7 @@ if (($page = $this->unwrap_link($to)))
 	{
 		if (($user = $this->get_user()) && ($user['dont_redirect'] || @$_POST['redirect'] == 'no'))
 		{
-			$this->show_message($this->get_translation('PageMoved') . ' ' . $this->link('/' . $page));
+			$this->show_message($this->_t('PageMoved') . ' ' . $this->link('/' . $page));
 		}
 		else
 		{
@@ -35,6 +35,6 @@ if (($page = $this->unwrap_link($to)))
 	}
 	else
 	{
-		$this->show_message('<em>' . $this->get_translation('WrongPage4Redirect') . '</em>');
+		$this->show_message('<em>' . $this->_t('WrongPage4Redirect') . '</em>');
 	}
 }

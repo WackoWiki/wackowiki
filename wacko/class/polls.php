@@ -206,13 +206,13 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->_t('PollsGuest').'</em>' : $header['user_name'] );
 
 		if (!$header['start'])
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
-					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
-					'<tr><td style="text-align:center;"><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
+					'<tr><th>'.$this->engine->_t('PollsError').'</th></tr>'.
+					'<tr><td style="text-align:center;"><em>'.$this->engine->_t('PollsNotExists').'</em></td></tr>'.
 					'</table>';
 		}
 		else
@@ -234,11 +234,11 @@ class Polls
 						'<td style="width:95%;text-align:left;"><label for="'.$var['v_id'].'">'.$var['text'].'</label></td></tr>'."\n";
 			}
 
-			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->get_translation('PollsLasts').': '.$duration.
-						'<br />'.$this->engine->get_translation('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->_t('PollsLasts').': '.$duration.
+						'<br />'.$this->engine->_t('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'<tr><td colspan="2" style="white-space:nowrap;">'.
-					'<input type="submit" name="vote" id="submit" value="'.$this->engine->get_translation('PollsSubmit').'" /> '.
-					'<input type="submit" name="results" id="submit" value="'.$this->engine->get_translation('PollsResults').'" />'.
+					'<input type="submit" name="vote" id="submit" value="'.$this->engine->_t('PollsSubmit').'" /> '.
+					'<input type="submit" name="results" id="submit" value="'.$this->engine->_t('PollsResults').'" />'.
 					'</tr></td>'.
 					'</table>'.
 					$this->engine->form_close();
@@ -256,7 +256,7 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id, 1);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->_t('PollsGuest').'</em>' : $header['user_name'] );
 		$voters		= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];
@@ -265,8 +265,8 @@ class Polls
 		if (!$header['start'])
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
-					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
-					'<tr><td style="text-align:center;"><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
+					'<tr><th>'.$this->engine->_t('PollsError').'</th></tr>'.
+					'<tr><td style="text-align:center;"><em>'.$this->engine->_t('PollsNotExists').'</em></td></tr>'.
 					'</table>';
 		}
 		else
@@ -285,10 +285,10 @@ class Polls
 						'<td>&nbsp;<strong>'.$percent.'%</strong></td></tr>';
 			}
 
-			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->get_translation('PollsTotalVotes').': '.$voters.
-						'<br />'.($header['end'] ? $this->engine->get_translation('PollsLasted') :
-							$this->engine->get_translation('PollsLasts')).': '.$duration.
-						'<br />'.$this->engine->get_translation('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->_t('PollsTotalVotes').': '.$voters.
+						'<br />'.($header['end'] ? $this->engine->_t('PollsLasted') :
+							$this->engine->_t('PollsLasts')).': '.$duration.
+						'<br />'.$this->engine->_t('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'</table>'.
 					$this->engine->form_close();
 		}

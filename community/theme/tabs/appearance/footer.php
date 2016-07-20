@@ -63,21 +63,21 @@ if ($this->page)
 	{
 		echo_tab(
 		$this->href('show'),
-		$this->get_translation('ShowTip'),
-		$this->has_access('read') ? $this->get_translation('ShowText') : "",
+		$this->_t('ShowTip'),
+		$this->has_access('read') ? $this->_t('ShowText') : "",
 		$this->method != 'show'
 		);
 
 		echo_tab(
 		$this->href('edit'),
-		$this->get_translation('EditTip'),
-		$this->has_access('write') ? $this->get_translation('EditText') : "",
+		$this->_t('EditTip'),
+		$this->has_access('write') ? $this->_t('EditText') : "",
 		$this->method != 'edit'
 		);
 
 		echo_tab(
 		$this->href('revisions'),
-		$this->get_translation('RevisionTip'),
+		$this->_t('RevisionTip'),
 		$this->page['modified'] ? $this->get_time_formatted($this->page['modified']) : "",
 		$this->method != 'revisions'
 		);
@@ -86,8 +86,8 @@ if ($this->page)
 		{
 			echo_tab(
 			$this->href('properties'),
-			$this->get_translation('SettingsTip'),
-			$this->get_translation('PropertiesText'),
+			$this->_t('SettingsTip'),
+			$this->_t('PropertiesText'),
 			$this->method != 'properties'
 			);
 		}
@@ -98,9 +98,9 @@ if ($this->page)
 			echo_tab(
 			$this->href('permissions'),
 			(($this->method=='edit')
-				? "' onclick='return window.confirm(\"".$this->get_translation('EditACLConfirm')."\");"
+				? "' onclick='return window.confirm(\"".$this->_t('EditACLConfirm')."\");"
 				: ""),
-			$this->get_translation('ACLText'),
+			$this->_t('ACLText'),
 			$this->method != 'permissions'
 			);
 		}
@@ -109,8 +109,8 @@ if ($this->page)
 		{
 			echo_tab(
 			$this->href('remove'),
-			$this->get_translation('DeleteTip'),
-			'<img src="'.$this->config['theme_url'].'icon/del'.($this->method != 'remove' ? '' : '_').'.png" width="14" height="15" alt="" />'.$this->get_translation('DeleteText'),
+			$this->_t('DeleteTip'),
+			'<img src="'.$this->config['theme_url'].'icon/del'.($this->method != 'remove' ? '' : '_').'.png" width="14" height="15" alt="" />'.$this->_t('DeleteText'),
 			$this->method != 'remove',
 			"2a"
 			);
@@ -121,8 +121,8 @@ if ($this->page)
 	{
 		echo_tab(
 		$this->href('new'),
-		$this->get_translation('CreateNewPage'),
-		$this->has_access('write') ? $this->get_translation('CreateNewPage') : "",
+		$this->_t('CreateNewPage'),
+		$this->has_access('write') ? $this->_t('CreateNewPage') : "",
 		$this->method != 'new',
 		"2"
 		);
@@ -132,8 +132,8 @@ if ($this->page)
 	{
 		echo_tab(
 		$this->href('referrers'),
-		$this->get_translation('ReferrersTip'),
-		$this->get_translation('ReferrersText'),
+		$this->_t('ReferrersTip'),
+		$this->_t('ReferrersText'),
 		$this->method != 'referrers',
 		"2"
 		);
@@ -150,7 +150,7 @@ if ($this->page)
 		// if owner is current user
 		if ($this->is_owner())
 		{
-			echo $this->get_translation('YouAreOwner');
+			echo $this->_t('YouAreOwner');
 		}
 		else
 		{
@@ -158,16 +158,16 @@ if ($this->page)
 			{
 				if ($owner == 'System')
 				{
-					echo $this->get_translation('Owner').": ".$owner."\n";
+					echo $this->_t('Owner').": ".$owner."\n";
 				}
 				else
 				{
-					echo $this->get_translation('Owner').": ".$this->user_link($owner, $lang = '', true, false)."\n";
+					echo $this->_t('Owner').": ".$this->user_link($owner, $lang = '', true, false)."\n";
 				}
 			}
 			else if (!$this->page['comment_on_id'])
 			{
-				print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
+				print($this->_t('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->_t('TakeOwnership')."</a>)" : ""));
 			}
 		}
 	}
@@ -205,7 +205,7 @@ if ($this->method == 'show')
 <div id="credits"><?php
 if ($this->get_user())
 {
-	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki');
+	echo $this->_t('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki');
 }
 ?></div>
 <?php

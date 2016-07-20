@@ -33,7 +33,7 @@ if ($this->has_access('read')
 	if (($result = $this->validate_reserved_words($this->tag)))
 	{
 		// $this->tag is reserved word
-		$message = Ut::perc_replace($this->get_translation('PageReservedWord'), $result);
+		$message = Ut::perc_replace($this->_t('PageReservedWord'), $result);
 		$this->set_message($message);
 		$this->redirect($this->href('new', $this->config['root_page']));
 	}
@@ -43,14 +43,14 @@ if ($this->has_access('read')
 	// comment header?
 	if ($this->page['comment_on_id'])
 	{
-		$message = $this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->get_translation('PostedBy').' '.$this->user_link($this->page['user_name'], '', true, false).' '.$this->get_translation('At').' '.$this->get_time_formatted($this->page['modified']);
+		$message = $this->_t('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', '.$this->_t('PostedBy').' '.$this->user_link($this->page['user_name'], '', true, false).' '.$this->_t('At').' '.$this->get_time_formatted($this->page['modified']);
 		$this->show_message($message, 'comment-info');
 	}
 
 	// TODO: add values to post in show handler
 	/* if ($this->page['latest'] == 0)
 	{
-		$message = Ut::perc_replace($this->get_translation('Revision'),
+		$message = Ut::perc_replace($this->_t('Revision'),
 			$this->href(),
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),
@@ -107,7 +107,7 @@ if ($this->has_access('read')
 			// check for overwriting
 			if ($this->page && $this->page['modified'] != $_POST['previous'])
 			{
-				$message = $this->get_translation('OverwriteAlert');
+				$message = $this->_t('OverwriteAlert');
 				$this->set_message($message , 'error');
 				$error = true;
 			}
@@ -115,7 +115,7 @@ if ($this->has_access('read')
 			// check text length
 			#if ($textchars > $maxchars)
 			#{
-				#$message = str_replace('%1', $textchars - $maxchars, $this->get_translation('TextDBOversize')).' ';
+				#$message = str_replace('%1', $textchars - $maxchars, $this->_t('TextDBOversize')).' ';
 				#$this->set_message($message , 'error');
 			#	$error = true;
 			#}
@@ -123,7 +123,7 @@ if ($this->has_access('read')
 			// check for edit note
 			if (($this->config['edit_summary'] == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
 			{
-				$message = $this->get_translation('EditNoteMissing');
+				$message = $this->_t('EditNoteMissing');
 				$this->set_message($message , 'error');
 				$error = true;
 			}
@@ -144,7 +144,7 @@ if ($this->has_access('read')
 				// captcha validation
 				if ($this->validate_captcha() === false)
 				{
-					$message = $this->get_translation('CaptchaFailed');
+					$message = $this->_t('CaptchaFailed');
 					$this->set_message($message , 'error');
 					$error = true;
 				}
@@ -155,7 +155,7 @@ if ($this->has_access('read')
 			// You're not allowed to have empty comments as they would be kinda pointless.
 			if (!$body && $this->page['comment_on_id'] != 0)
 			{
-				$message = $this->get_translation('EmptyComment');
+				$message = $this->_t('EmptyComment');
 				$this->set_message($message , 'error');
 				$error = true;
 			}
@@ -223,7 +223,7 @@ if ($this->has_access('read')
 		// saving blank document
 		else if (isset($_POST['body']) && $_POST['body'] == '')
 		{
-			$message = $this->get_translation('EmptyPage');
+			$message = $this->_t('EmptyPage');
 			$this->set_message($message, 'error');
 			$this->redirect($this->href());
 		}
@@ -263,9 +263,9 @@ if ($this->has_access('read')
 
 	$output			= '';
 	$preview		= '';
-	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="'.$this->get_translation('EditStoreButton').'" />&nbsp;'.
-						'<input type="submit" class="OkBtn_Top" name="preview" value="'.$this->get_translation('EditPreviewButton').'" />&nbsp;'.
-						'<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" class="CancelBtn_Top" value="'.$this->get_translation('EditCancelButton').'" /></a>'."\n"; // $this->href('', '', '', 1)
+	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="'.$this->_t('EditStoreButton').'" />&nbsp;'.
+						'<input type="submit" class="OkBtn_Top" name="preview" value="'.$this->_t('EditPreviewButton').'" />&nbsp;'.
+						'<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" class="CancelBtn_Top" value="'.$this->_t('EditCancelButton').'" /></a>'."\n"; // $this->href('', '', '', 1)
 
 	// preview?
 	if (isset($_POST['preview']))
@@ -277,7 +277,7 @@ if ($this->has_access('read')
 		$preview	= $this->format($preview,	'wacko');
 		$preview	= $this->format($preview,	'post_wacko');
 
-		$output = '<section class="preview"><p class="preview"><span>'.$this->get_translation('EditPreview').' ('.$text_chars.' '.$this->get_translation('Chars').")</span></p>\n";
+		$output = '<section class="preview"><p class="preview"><span>'.$this->_t('EditPreview').' ('.$text_chars.' '.$this->_t('Chars').")</span></p>\n";
 
 		if ($this->page['comment_on_id'] != 0)
 		{
@@ -322,13 +322,13 @@ if ($this->has_access('read')
 	echo $form_buttons;
 ?>
 	<br />
-	<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
+	<noscript><div class="errorbox_js"><?php echo $this->_t('WikiEditInactiveJs'); ?></div></noscript>
 <?php
 	// comment title
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
 		$output .= '<br />'."\n";
-		$output .= '<label for="comment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
+		$output .= '<label for="comment_title">'.$this->_t('AddCommentTitle').'</label><br />';
 		$output .= '<input type="text" id="comment_title" maxlength="250" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="title" />';
 		$output .= '<br />'."\n";
 	}
@@ -336,7 +336,7 @@ if ($this->has_access('read')
 	{
 		// edit page title
 		$output .= '<br />'."\n";
-		$output .= '<label for="page_title">'.$this->get_translation('MetaTitle').':</label><br />';
+		$output .= '<label for="page_title">'.$this->_t('MetaTitle').':</label><br />';
 		$output .= '<input type="text" maxlength="250" id="page_title" name="title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" />';
 		$output .= '<br />'."\n";
 	}
@@ -358,7 +358,7 @@ if ($this->has_access('read')
 		// edit note
 		if ($this->config['edit_summary'] != 0)
 		{
-			$output .= '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />';
+			$output .= '<label for="edit_note">'.$this->_t('EditNote').':</label><br />';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
 			$output .= '<input type="text" id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>';
 			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
@@ -368,7 +368,7 @@ if ($this->has_access('read')
 		if ($this->page && $this->config['minor_edit'] != 0)
 		{
 			$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit"/>';
-			$output .= '<label for="minor_edit">'.$this->get_translation('EditMinor').'</label>';
+			$output .= '<label for="minor_edit">'.$this->_t('EditMinor').'</label>';
 			$output .= '<br />'."\n";
 		}
 		else
@@ -382,7 +382,7 @@ if ($this->has_access('read')
 			if ($this->page && $this->config['review'] != 0 && $this->is_reviewer())
 			{
 				$output .= '<input type="checkbox" id="reviewed" value="1" name="reviewed"/>';
-				$output .= '<label for="reviewed">'.$this->get_translation('Reviewed').'</label>';
+				$output .= '<label for="reviewed">'.$this->_t('Reviewed').'</label>';
 				$output .= '<br />'."\n";
 			}
 
@@ -390,7 +390,7 @@ if ($this->has_access('read')
 			if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 			{
 				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'"'.( $this->get_user_setting('noid_pubs') == 1 ? ' checked="checked"' : '' ).' />';
-				$output .= '<label for="noid_publication">'.$this->get_translation('PostAnonymously').'</label>';
+				$output .= '<label for="noid_publication">'.$this->_t('PostAnonymously').'</label>';
 				$output .= '<br />'."\n";
 			}
 
@@ -398,7 +398,7 @@ if ($this->has_access('read')
 			if ($this->page && !$this->is_watched)
 			{
 				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? ' checked="checked"' : '' ).' />';
-				$output .= '<label for="watchpage">'.$this->get_translation('NotifyMe').'</label>';
+				$output .= '<label for="watchpage">'.$this->_t('NotifyMe').'</label>';
 				$output .= '<br />'."\n";
 			}
 		}
@@ -421,7 +421,7 @@ if ($this->has_access('read')
 			}
 		}
 
-		$output .= '<br />'.$this->get_translation('Categories').':'."\n".'<div class="setcategory"><br />'."\n".substr(implode(' ', $_words), 6).'</div>'."\n";
+		$output .= '<br />'.$this->_t('Categories').':'."\n".'<div class="setcategory"><br />'."\n".substr(implode(' ', $_words), 6).'</div>'."\n";
 		$output .= '<br />'."\n";
 	}
 
@@ -465,5 +465,5 @@ if ($this->has_access('read')
 }
 else
 {
-	$this->show_message($this->get_translation('WriteAccessDenied'), 'error');
+	$this->show_message($this->_t('WriteAccessDenied'), 'error');
 }
