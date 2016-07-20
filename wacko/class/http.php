@@ -210,7 +210,7 @@ class Http
 				{
 					Ut::dbg('not modified');
 					header('HTTP/1.1 304 Not Modified');
-					die();
+					$this->terminate();
 				}
 
 				// HTTP header with right Charset settings
@@ -242,7 +242,7 @@ class Http
 					echo '</body></html>';
 				}
 
-				die();
+				$this->terminate();
 			}
 		}
 
@@ -361,14 +361,20 @@ class Http
 
 			header('Location: ' . $url);
 
-			if (Diag::$log)
-			{
-				// save dbg messages to show in next session..
-				$this->session->set_flash('saved_diag_log', Diag::$log);
-			}
-
-			exit;
+			$this->terminate();
 		}
+	}
+
+	// safe exit/die for wackowiki
+	function terminate()
+	{
+		if (Diag::$log && isset($this->session))
+		{
+			// save dbg messages to show in next session..
+			$this->session->set_flash('saved_diag_log', Diag::$log);
+		}
+
+		die;
 	}
 
 	/**
