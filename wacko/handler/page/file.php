@@ -215,5 +215,4 @@ else
 }
 
 // 4. die
-// STS save something before die?
-die();
+$this->http->terminate();
