@@ -176,10 +176,12 @@ class Diag
 		static::dbg_console($config['debug']);
 	}
 
+	// NB class http saves/restores log on redirect
+	static $log = [];
+
 	// add some debug output to DEBUG file and popup-window in browser
 	static function dbg()
 	{
-		static $log = [];
 		static $code = ['BLACK' => 0, 'BLUE' => 1, 'GOLD' => 2, 'ORANGE' => 3, 'RED' => 4];
 
 		if (($args = func_get_args()))
@@ -206,19 +208,18 @@ class Diag
 				}
 			}
 
-			$log[] = [
+			static::$log[] = [
 				microtime(1),
 				$type,
 				implode(' ', $args),
 				$callee,
 			];
 		}
-		return $log;
 	}
 
 	private static function dbg_console($debug)
 	{
-		if (!($log = static::dbg()))
+		if (!($log = static::$log))
 		{
 			return;
 		}
