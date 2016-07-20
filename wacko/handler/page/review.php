@@ -28,5 +28,4 @@ if ($this->config['review'] && $this->is_reviewer() && $this->page)
 	$this->set_message($message, 'success');
 }
 
-// redirect back to page
-$this->redirect($this->href());
+$this->show_must_go_on();

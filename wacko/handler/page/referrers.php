@@ -5,17 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// redirect to show method if no page exists
-if (!$this->page)
-{
-	$this->redirect($this->href());
-}
-
-// deny for comment
-if ($this->page['comment_on_id'])
-{
-	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1') . '#' . $this->page['tag']);
-}
+$this->endure_page(true); // allow forums
 
 // let's start: print header
 echo '<h3>' . $this->get_translation('ReferrersText') . ' &raquo; ' . $this->get_translation('ViewReferrersGlobal') . '</h3>';

@@ -465,5 +465,5 @@ if ($this->has_access('read')
 }
 else
 {
-	$this->show_message($this->get_translation('WriteAccessDenied'), 'info');
+	$this->show_message($this->get_translation('WriteAccessDenied'), 'error');
 }

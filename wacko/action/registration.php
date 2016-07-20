@@ -257,7 +257,7 @@ else if (@$_POST['_action'] === 'register')
 				}
 
 				// log event
-				$this->log(4, Ut::perc_replace($this->get_translation('LogUserRegistered', $this->config['language']), $user_name, $email));
+				$this->log(4, Ut::perc_replace($this->get_translation('LogUserRegistered', SYSTEM_LANG), $user_name, $email));
 
 				// forward
 				$this->set_message(

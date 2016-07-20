@@ -269,5 +269,5 @@ if ($this->is_admin()
 }
 else
 {
-	$this->show_message($this->get_translation('NotOwnerAndCanDelete'), 'info');
+	$this->show_message($this->get_translation('NotOwnerAndCanDelete'), 'error');
 }

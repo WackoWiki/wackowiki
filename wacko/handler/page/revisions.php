@@ -13,11 +13,7 @@ if ($this->hide_revisions)
 	$this->redirect($this->href());
 }
 
-// deny for comment
-if ($this->page['comment_on_id'])
-{
-	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
-}
+$this->ensure_page(true);
 
 // show minor edits
 $hide_minor_edit = @$_GET['minor_edit'];
@@ -151,5 +147,5 @@ if ($this->has_access('read'))
 }
 else
 {
-	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
+	$this->show_message($this->get_translation('ReadAccessDenied'), 'error');
 }

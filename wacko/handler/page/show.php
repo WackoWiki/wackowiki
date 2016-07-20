@@ -9,7 +9,7 @@ echo ADD_NO_DIV . '<article id="page-show" class="page" data-dbclick1="page">' .
 $include_tail = '</article>';
 
 // redirect from comment page to the commented one
-if ($this->page['comment_on_id'] && $this->page['deleted'] == 0)
+if ($this->page['comment_on_id'] && !$this->page['deleted'])
 {
 	// count previous comments
 	$count = $this->load_single(
@@ -43,7 +43,7 @@ if ($this->has_access('read'))
 	}
 	else
 	{
-		if ($this->page['deleted'] == 1)
+		if ($this->page['deleted'])
 		{
 			if (!headers_sent())
 			{
@@ -84,7 +84,7 @@ if ($this->has_access('read'))
 			if ($this->has_access('write'))
 			{
 				// check against latest edit for overwrite warning
-				if ($this->page['deleted'] == 1)
+				if ($this->page['deleted'])
 				{
 					$latest['modified'] = date('Y-m-d H:i:s');
 				}
@@ -94,7 +94,7 @@ if ($this->has_access('read'))
 					$latest = $this->load_page($this->tag, '', '', '', '', true);
 				}
 
-				if ($latest['deleted'] == 1 && $this->is_admin() == false)
+				if ($latest['deleted'] && $this->is_admin() == false)
 				{
 					$message2 = $this->get_translation('PageDeletedInfo');
 					$this->show_message($message2, 'info');

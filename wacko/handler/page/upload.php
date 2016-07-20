@@ -10,17 +10,7 @@ $is_image		= '';
 $message		= '';
 $error			= '';
 
-// redirect to show method if page don't exists
-if (!$this->page)
-{
-	$this->redirect($this->href());
-}
-
-// deny for comment
-if ($this->page['comment_on_id'])
-{
-	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
-}
+$this->ensure_page(true); // TODO upload for forums?
 
 echo '<h3>' . $this->get_translation('UploadFiles') . "</h3>\n<br />\n";
 

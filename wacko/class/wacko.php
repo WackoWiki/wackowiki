@@ -7222,7 +7222,7 @@ class Wacko
 	}
 
 	// HANDLER HELPERS
-	function ensure_page()
+	function ensure_page($forums = false)
 	{
 		if (!($p = $this->page))
 		{
@@ -7233,11 +7233,10 @@ class Wacko
 			// show main page for comment
 			$this->redirect($this->href('', $this->get_page_tag($p['comment_on_id']), 'show_comments=1', false, $p['tag']));
 		}
-		else if ($this->forum && !$this->is_admin())
+		else if ($this->forum && !$this->is_admin() && !$forums)
 		{
 			$this->show_must_go_on();
 		}
-
 	}
 
 	function reload_me()
