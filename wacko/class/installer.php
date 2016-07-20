@@ -9,11 +9,12 @@ class Installer
 {
 	static function run(&$db)
 	{
+		// STS what's that? remove?
 		if (!isset($_REQUEST['installAction']) && !strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
 		{
 			$req = $_SERVER['REQUEST_URI'];
 
-			if ($req{strlen($req) - 1} != '/' && strstr($req, '.php') != '.php')
+			if ($req[strlen($req) - 1] != '/' && strstr($req, '.php') != '.php')
 			{
 				header('Location: http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].'/');
 				exit;

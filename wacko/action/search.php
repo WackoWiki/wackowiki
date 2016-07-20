@@ -198,7 +198,7 @@ if (!function_exists('preview_text'))
 
 			for ($i = 0; $i <= strlen($text); $i++)
 			{
-				if ($text{$i} == '<')
+				if ($text[$i] == '<')
 				{
 					$stop = 1;
 				}
@@ -208,14 +208,14 @@ if (!function_exists('preview_text'))
 					$counter++;
 				}
 
-				if ($text{$i} == '>')
+				if ($text[$i] == '>')
 				{
 					$stop = 0;
 				}
 
-				$return .= $text{$i};
+				$return .= $text[$i];
 
-				if ($counter >= $limit && $text{$i} == ' ')
+				if ($counter >= $limit && $text[$i] == ' ')
 				{
 					break;
 				}
