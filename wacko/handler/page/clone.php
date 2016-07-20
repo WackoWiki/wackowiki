@@ -9,191 +9,153 @@ echo '<h3>';
 echo $this->get_translation('ClonePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0);
 echo "</h3>\n<br />\n";
 
-$output = '';
-$message = '';
+// ensure that's not forum or comment
+$this->ensure_page();
 
-// redirect to show method if page don't exists
-if (!$this->page)
+if (!$this->has_access('read'))
 {
-	$this->redirect($this->href());
+	$this->set_message($this->get_translation('ReadAccessDenied'), 'error');
+	$this->show_must_go_on();
 }
 
-// deny for comment
-if ($this->page['comment_on_id'])
-{
-	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
-}
-// and for forum page
-else if ($this->forum === true && !$this->is_admin())
-{
-	$this->redirect($this->href());
-}
+$from		= $this->tag;
+$superfrom	= $this->supertag;
+$edit_note	= Ut::perc_replace($this->get_translation('ClonedFrom'), $this->tag);
 
-if ($user = $this->get_user())
-{
-	$user_name		= strtolower($this->get_user_name());
-	$registered		= true;
-}
-else
-{
-	$user_name		= GUEST;
-}
 
-$edit_note = Ut::perc_replace($this->get_translation('ClonedFrom'), $this->tag);
-
-if ($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
+if (@$_POST['_action'] === 'clone_page')
 {
-	if (@$_POST['_action'] === 'clone_page')
+	$to = $_POST['clone_name'];
+
+	if (($error = $this->sanitize_new_pagename($to, $superto, $from)))
 	{
-		// clone or massclone
-		$need_massclone = isset($_POST['massclone']);
+		$this->set_message($error, 'error');
+		$this->reload_me();
+	}
 
-		// clone
-		if (!$need_massclone)
-		{
-			// strip whitespaces
-			$new_name		= preg_replace('/\s+/', '', $_POST['clone_name']);
-			$new_name		= trim($new_name, '/');
-			$super_new_name	= $this->translit($new_name);
-			$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
+	if (isset($_POST['edit_note']))
+	{
+		$edit_note = $_POST['edit_note'];
+	}
 
-			if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
-			{
-				$message = $this->get_translation('InvalidWikiName')."<br />\n";
+	if (!isset($_POST['massclone']))
+	{
+		$this->clone_page($from, $to, $superto, $edit_note);
 
-			}
-			// if ($this->supertag == $super_new_name)
-			else if ($this->tag == $new_name)
-			{
-				$message .= Ut::perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($new_name, '', '', 0))."<br />\n";
-			}
-			else
-			{
-				if ($this->supertag != $super_new_name && $page = $this->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
-				{
-					$message .= Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($new_name, '', '', 0))."<br />\n";
-				}
-				else
-				{
-					if ($this->clone_page($this->tag, $new_name, $super_new_name, $edit_note))
-					{
-						// log event
-						$this->log(4, Ut::perc_replace($this->get_translation('LogClonedPage', $this->config['language']), $this->tag, $new_name));
+		$this->log(4, Ut::perc_replace($this->get_translation('LogClonedPage', SYSTEM_LANG), $from, $to));
 
-						// edit after creation
-						if (isset($_POST['redirect']))
-						{
-							$this->set_message($edit_note);
-							$this->redirect($this->href('edit', $new_name));
-						}
-						else
-						{
-							$message .= Ut::perc_replace($this->get_translation('PageCloned'), $this->link('/'.$new_name))."<br />\n";
-						}
-					}
-				}
-			}
-
-			$this->show_message($message, 'info');
-		}
-
-		//massclone
-		if ($need_massclone)
-		{
-			// TODO: clone all sheeps and optional ACLs
-			echo '<p><strong>' . $this->get_translation('MassCloning') . '</strong><p>';
-			recursive_clone($this, $this->tag, $edit_note);
-		}
+		$this->set_message(Ut::perc_replace($this->get_translation('PageCloned'), $this->link('/'.$to)), 'info');
 	}
 	else
 	{
-		echo $this->get_translation('CloneName');
+		//massclone
+		echo '<p><strong>' . $this->get_translation('MassCloning') . '</strong><p>';
 
-		echo $this->form_open('clone_page', ['page_method' => 'clone']);
+		$pages = $this->load_all(
+			"SELECT page_id, tag, supertag ".
+			"FROM {$this->db->table_prefix}page ".
+			"WHERE (supertag LIKE ".$this->db->q($superfrom . '/%')." ".
+				"OR tag LIKE ".$this->db->q($from . '/%')." ".
+				"OR tag = ".$this->db->q($from)." ".
+				"OR supertag = ".$this->db->q($superfrom).") ".
+				"AND comment_on_id = '0'");
 
-		?>
-		<input type="text" name="clone_name" size="40" maxlength="250"/>
-		<?php
-		// edit note
-		if ($this->config['edit_summary'] != 0)
+		$slashes = (int) @count_chars($from, 1)['/']; // @ to return 0 when no slashes used
+		$work = [];
+		foreach ($pages as $page)
 		{
-			$output .= '<br />';
-			$output .= '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />'."\n";
-			$output .= '<input type="text" id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>'."\n";
+			// rebase page to cloned root
+			$src = $page['tag'];
+			for ($pos = 0, $i = $slashes; ($pos = strpos($src, '/', $pos)) !== false && $i--; ++$pos);
+			$dst = $to . ($pos? substr($src, $pos) : '');
 
-			echo $output;
+			if ($this->load_page($dst, 0, '', LOAD_CACHE, LOAD_META))
+			{
+				$alredys[] = Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($dst, '', '', 0));
+			}
+			else if (!$this->has_access('read', $page['page_id']))
+			{
+				$alredys[] = Ut::perc_replace($this->get_translation('CloneCannotRead'), $this->compose_link_to_page($src, '', '', 0));
+			}
+			else if (!$this->has_access('create', '', '', 1, $dst))
+			{
+				$alredys[] = Ut::perc_replace($this->get_translation('CloneCannotCreate'), $this->compose_link_to_page($dst, '', '', 0));
+			}
+
+			$work[$src] = $dst;
 		}
-		?>
-		<br /><br />
-		<?php
-			echo '<input type="checkbox" id="redirect" name="redirect" />'."\n";
-			echo ' <label for="redirect">'.$this->get_translation('ClonedRedirect').'</label>'."\n"; ?>
-		<br />
-		<?php
-		if ($this->check_acl($user_name, $this->config['rename_globalacl']))
+
+		if (isset($alredys))
 		{
-			echo '<input type="checkbox" id="massclone" name="massclone" />'."\n";
-			echo ' <label for="massclone">'.$this->get_translation('MassClone').'</label>'."\n";
+			$error = implode("</li>\n<li>", $alredys);
+			$this->set_message('<ol><li>' . $error . '</li></ol>', 'error');
+			$this->reload_me();
 		}
-		?>
-		<br /><br />
-		<input type="submit" name="submit" value="<?php echo $this->get_translation('CloneButton'); ?>" /> &nbsp;
-		<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"/></a>
 
-		<?php
-		echo $this->form_close();
+		foreach ($work as $src => $dst)
+		{
+			$this->clone_page($src, $dst, '', $edit_note);
+			$this->log(4, Ut::perc_replace($this->get_translation('LogClonedPage', SYSTEM_LANG), $src, $dst));
+			$log[] = Ut::perc_replace($this->get_translation('PageCloned'), $this->link('/'.$dst));
+		}
+
+		if (isset($log))
+		{
+			echo "$to: <br />\n";
+
+			$log = implode("</li>\n<li>", $log);
+			$this->set_message('<ol><li>' . $log . '</li></ol>', 'info');
+		}
 	}
+
+	// jump to new clone
+	$this->redirect($this->href('', $to));
+}
+
+if ($this->check_acl($this->get_user_name(), $this->config['rename_globalacl']))
+{
+	$klusterwerks = $this->load_single(
+		"SELECT COUNT(*) AS n ".
+		"FROM {$this->db->table_prefix}page ".
+		"WHERE (supertag LIKE ".$this->db->q($superfrom . '/%')." ".
+			"OR tag LIKE ".$this->db->q($from . '/%').") ".
+			"AND comment_on_id = '0'");
+
+	$do_cluster = (int)$klusterwerks['n'];
 }
 else
 {
-	$message = $this->get_translation('ReadAccessDenied');
-	$this->show_message($message, 'info');
+	$do_cluster = false;
 }
 
-//$this->redirect($this->href());
+echo $this->get_translation('CloneName');
 
-function recursive_clone(&$parent, $root, $edit_note)
+echo $this->form_open('clone_page', ['page_method' => 'clone']);
+
+?>
+<input type="text" name="clone_name" size="40" maxlength="250"/>
+<?php
+// edit note
+if ($this->config['edit_summary'])
 {
-	$new_root = trim($_POST['newname'], '/');
-
-	if($root == '/')
-	{
-		exit; // who and where did intend to move root???
-	}
-
-	// FIXME: missing $owner_id -> rename_globalacl || owner
-	$_root = $parent->translit($root);
-	$pages = $parent->load_all(
-		"SELECT page_id, tag, supertag ".
-		"FROM ".$parent->config['table_prefix']."page ".
-		"WHERE (supertag LIKE '".quote($parent->dblink, $_root)."/%' ".
-			" OR supertag = '".quote($parent->dblink, $_root)."') ".
-		($owner_id
-			? "AND owner_id = '".(int)$owner_id."' "
-			: "").
-			"AND comment_on_id = '0'");
-
-	$message = $new_root.': '.'<br />';
-	$message .= "<ol>\n";
-
-	foreach($pages as $page)
-	{
-		// $new_name = str_replace( $root, $new_root, $page['tag'] );
-		$new_name		= preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
-
-		// FIXME: preg_quote is not universally suitable for escaping the replacement string. A single . will become \. and the preg_replace call will not undo the escaping.
-		$new_name		= stripslashes($new_name);
-		$super_new_name	= $parent->translit($new_name);
-		$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : (isset($edit_note) ? $edit_note : '');
-
-		$parent->clone_page($page['tag'], $new_name, $super_new_name, $edit_note);
-
-		$parent->clear_cache_wanted_page($new_name);
-		$parent->clear_cache_wanted_page($super_new_name);
-
-		$message .= "<li>".Ut::perc_replace($parent->get_translation('PageCloned'), $parent->link('/'.$new_name))."</li>\n";
-	}
-
-	$message .= "</ol>\n";
-	$parent->show_message($message, 'info');
+	echo '<br />';
+	echo '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />'."\n";
+	echo '<input type="text" id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>'."\n";
 }
+?>
+<br /><br />
+<?php
+if ($do_cluster)
+{
+	echo '<input type="checkbox" id="massclone" name="massclone" />'."\n";
+	echo ' <label for="massclone">'.$this->get_translation('MassClone').'</label>'."\n";
+}
+?>
+<br /><br />
+<input type="submit" name="submit" value="<?php echo $this->get_translation('CloneButton'); ?>" /> &nbsp;
+<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"/></a>
+
+<?php
+
+echo $this->form_close();
+

@@ -3804,6 +3804,47 @@ class Wacko
 		return false;
 	}
 
+	// returns error text, or null on OK
+	// if old_tag specified - check also for already-namedness & already-existance
+	function sanitize_new_pagename(&$tag, &$supertag, $old_tag = false)
+	{
+		// remove starting/trailing slashes, spaces, and minimize multi-slashes
+		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#',
+			function ($x)
+			{
+				return @$x[1]? '/' : '';
+			}, $tag);
+
+		$supertag = $this->translit($tag);
+
+		// - / ' _ .
+		// TODO: remove punctuations from language ALPHA* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		if (!preg_match('#^([-/\'_.' . $this->language['ALPHANUM_P'] . ']+)$#', $tag))
+		{
+			return $this->get_translation('InvalidWikiName');
+		}
+
+		if (($result = $this->validate_reserved_words($tag)))
+		{
+			return Ut::perc_replace($this->get_translation('PageReservedWord'), $result);
+		}
+
+		if ($old_tag)
+		{
+			if ($tag === $old_tag)
+			{
+				return Ut::perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($tag, '', '', 0));
+			}
+
+			if ($this->supertag != $supertag && $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
+			{
+				return Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($tag, '', '', 0));
+			}
+		}
+
+		return null; // it's ok :)
+	}
+
 	/**
 	* Check if text is WikiName
 	*
@@ -5006,7 +5047,7 @@ class Wacko
 	}
 
 	// returns true if $user_name (defaults to the current user) has access to $privilege on $page_id (defaults to the current page)
-	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1)
+	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1, $new_tag = '')
 	{
 		if (!$user_name)
 		{
@@ -5015,18 +5056,14 @@ class Wacko
 
 		if (!($page_id = trim($page_id)))
 		{
-			$page_id = $this->page['page_id'];
+			$page_id = @$this->page['page_id'];
 		}
 
 		// if still no page_id, use tag
-		if (empty($page_id))
+		if (empty($page_id) && !$new_tag)
 		{
 			// new page which is to be created
 			$new_tag = $this->tag;
-		}
-		else
-		{
-			$new_tag = '';
 		}
 
 		if ($privilege == 'write')
@@ -6178,7 +6215,7 @@ class Wacko
 
 	// CLONE / RENAMING / MOVING
 
-	function clone_page($tag, $clone_tag, $clone_supertag = '', $edit_note)
+	function clone_page($tag, $clone_tag, $clone_supertag = '', $edit_note = '')
 	{
 		if (!$tag || !$clone_tag)
 		{
@@ -6193,6 +6230,9 @@ class Wacko
 		// load page and site information
 		$page		= $this->load_page($tag);
 		$new_tag	= $clone_tag;
+
+		$this->clear_cache_wanted_page($clone_tag);		// STS what's that wanted stuff?!
+		$this->clear_cache_wanted_page($clone_supertag);
 
 		return
 			// save
@@ -7186,25 +7226,18 @@ class Wacko
 	{
 		if (!($p = $this->page))
 		{
-			// redirect to show method if page don't exists
-			$go = $this->href();
+			$this->show_must_go_on();
 		}
 		else if ($p['comment_on_id'])
 		{
-			// deny for comment
-			$go = $this->href('', $this->get_page_tag($p['comment_on_id']), 'show_comments=1', false, $p['tag']);
+			// show main page for comment
+			$this->redirect($this->href('', $this->get_page_tag($p['comment_on_id']), 'show_comments=1', false, $p['tag']));
 		}
 		else if ($this->forum && !$this->is_admin())
 		{
-			// and for forum page
-			$go = $this->href();
-		}
-		else
-		{
-			return; // sane page, proceed
+			$this->show_must_go_on();
 		}
 
-		$this->redirect($go);
 	}
 
 	function reload_me()
@@ -7212,7 +7245,7 @@ class Wacko
 		$this->redirect($this->href($this->method));
 	}
 
-	function back_to_show()
+	function show_must_go_on()
 	{
 		$this->redirect($this->href());
 	}
