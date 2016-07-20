@@ -5,24 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// redirect to show method if page don't exists
-if (!$this->page)
-{
-	$this->redirect($this->href());
-}
+$this->ensure_page();
 
 echo '<h3>' . $this->get_translation('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
-
-// deny for comment
-if ($this->page['comment_on_id'])
-{
-	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
-}
-// and for forum page
-else if ($this->forum === true && !$this->is_admin())
-{
-	$this->redirect($this->href());
-}
 
 if ($user = $this->get_user())
 {
@@ -50,99 +35,69 @@ if ($registered
 	}
 	else
 	{
-		if (isset($_POST['newname']) && $_POST['rename'] == 1)
+		if (@$_POST['_action'] === 'rename_page')
 		{
-			$new_root		= $_POST['newname'];
-			// rename or massrename
-			$need_massrename = 0;
+			$new_name		= $_POST['newname'];
 
-			if (isset($_POST['massrename']) && $_POST['massrename'] == 'on')
+			if (($error = $this->sanitize_new_pagename($new_name, $super_new_name, $this->tag)))
 			{
-				$need_massrename = 1;
+				$this->set_message($error, 'error');
+				$this->reload_me();
 			}
 
 			// rename
-			if ($need_massrename == 0)
+			if (!isset($_POST['massrename']))
 			{
-				// strip whitespaces
-				$new_name		= preg_replace('/\s+/', '', $new_root);
-				$new_name		= trim($new_name, '/');
-				$super_new_name	= $this->translit($new_name);
 
 				$message .= '<strong><code>'.$this->tag."</code></strong>\n";
 				$message .= '<ol>';
 
-				// check if reserved word
-				if($result = $this->validate_reserved_words($new_name))
+				// Rename page
+				$need_redirect = @$_POST['redirect'] == 'on';
+
+				if (!$need_redirect)
 				{
-					$message .= '<li>'.Ut::perc_replace($this->get_translation('PageReservedWord'), $result)."</li>\n";
-				}
-				else if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
-				{
-					$message .= '<li>'.$this->get_translation('InvalidWikiName')."</li>\n";
-				}
-				// if ($this->supertag == $super_new_name)
-				else if ($this->tag == $new_name)
-				{
-					$message .= '<li>'.Ut::perc_replace($this->get_translation('AlreadyNamed'), $this->compose_link_to_page($new_name, '', '', 0))."</li>\n";
-				}
-				else
-				{
-					if ($this->supertag != $super_new_name && $page=$this->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
+					if ($this->remove_referrers($this->tag))
 					{
-						$message .= '<li>'.Ut::perc_replace($this->get_translation('AlredyExists'), $this->compose_link_to_page($new_name, '', '', 0))."</li>\n";
-					}
-					else
-					{
-						// Rename page
-						$need_redirect = @$_POST['redirect'] == 'on';
-
-						if (!$need_redirect)
-						{
-							if ($this->remove_referrers($this->tag))
-							{
-								$message .= '<li>'.$this->get_translation('ReferrersRemoved')."</li>\n";
-							}
-						}
-
-						if ($this->rename_page($this->tag, $new_name, $super_new_name))
-						{
-							$message .= '<li>'.$this->get_translation('PageRenamed')."</li>\n";
-						}
-
-						$this->clear_cache_wanted_page($new_name);
-						$this->clear_cache_wanted_page($super_new_name);
-
-						if ($need_redirect)
-						{
-							$this->cache_wanted_page($this->tag);
-							$this->cache_wanted_page($this->supertag);
-
-							if ($this->save_page($this->tag, '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
-							{
-								$message .= '<li>'.Ut::perc_replace($this->get_translation('RedirectCreated'), $this->link($this->tag))."</li>\n";
-							}
-
-							$this->clear_cache_wanted_page($this->tag);
-							$this->clear_cache_wanted_page($this->supertag);
-						}
-
-						$message .= '<li>'.$this->get_translation('NewNameOfPage').$this->link('/'.$new_name)."</li>\n";
-
-						// log event
-						$this->log(3, Ut::perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $this->tag, $new_name).
-							($need_redirect? $this->get_translation('LogRenamedPage2', $this->config['language']) : '' ));
+						$message .= '<li>'.$this->get_translation('ReferrersRemoved')."</li>\n";
 					}
 				}
+
+				if ($this->rename_page($this->tag, $new_name, $super_new_name))
+				{
+					$message .= '<li>'.$this->get_translation('PageRenamed')."</li>\n";
+				}
+
+				$this->clear_cache_wanted_page($new_name);
+				$this->clear_cache_wanted_page($super_new_name);
+
+				if ($need_redirect)
+				{
+					$this->cache_wanted_page($this->tag);
+					$this->cache_wanted_page($this->supertag);
+
+					if ($this->save_page($this->tag, '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
+					{
+						$message .= '<li>'.Ut::perc_replace($this->get_translation('RedirectCreated'), $this->link($this->tag))."</li>\n";
+					}
+
+					$this->clear_cache_wanted_page($this->tag);
+					$this->clear_cache_wanted_page($this->supertag);
+				}
+
+				$message .= '<li>'.$this->get_translation('NewNameOfPage').$this->link('/'.$new_name)."</li>\n";
+
+				// log event
+				$this->log(3, Ut::perc_replace($this->get_translation('LogRenamedPage', $this->config['language']), $this->tag, $new_name).
+					($need_redirect? $this->get_translation('LogRenamedPage2', $this->config['language']) : '' ));
 
 				$message .= "</ol>\n";
 			}
-
-			//massrename
-			if ($need_massrename == 1)
+			else
 			{
+				//massrename
 				$message .= '<p><strong>'.$this->get_translation('MassRenaming').'</strong><p>';   //!!!
-				$message .= recursive_move($this, $this->tag, $new_root);
+				$message .= recursive_move($this, $this->tag, $new_name);
 			}
 
 			$this->config->invalidate_sql_cache();
@@ -150,7 +105,9 @@ if ($registered
 			// update sitemap
 			$this->update_sitemap();
 
-			$this->show_message($message, 'success');
+			$this->set_message($message, 'success'); // TODO & error too
+
+			$this->redirect($this->href('', $new_name));
 		}
 		else
 		{
@@ -158,7 +115,6 @@ if ($registered
 			echo $this->form_open('rename_page', ['page_method' => 'rename']);
 
 			?>
-			<input type="hidden" name="rename" value="1" />
 			<input type="text" maxlength="250" name="newname" value="<?php echo $this->tag;?>" size="60" />
 <br />
 <br />

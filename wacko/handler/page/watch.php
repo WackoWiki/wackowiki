@@ -20,7 +20,4 @@ if ($this->get_user() && $this->page)
 	}
 }
 
-// redirect back to page
-$this->redirect($this->href());
-
-?>
+$this->show_must_go_on();

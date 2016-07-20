@@ -11,17 +11,7 @@ if (!defined('IN_WACKO'))
 	TODO: add config option to set an treshhold or to disable the source handler
 */
 
-// redirect to show method if page don't exists
-if (!$this->page)
-{
-	$this->redirect($this->href());
-}
-
-// deny for comment
-if ($this->page['comment_on_id'])
-{
-	$this->redirect($this->href('', $this->page['tag']));
-}
+$this->ensure_page();
 
 if ($this->has_access('read'))
 {
@@ -40,5 +30,5 @@ if ($this->has_access('read'))
 }
 else
 {
-	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
+	$this->show_message($this->get_translation('ReadAccessDenied'), 'error');
 }

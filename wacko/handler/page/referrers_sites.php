@@ -7,25 +7,14 @@ if (!defined('IN_WACKO'))
 
 // TODO: remove or reuse ?obsolete? message sets: ViewReferringSitesGlobal, ViewReferringSites
 
-// redirect to show method if page don't exists
-if (!$this->page)
-{
-	$this->redirect($this->href());
-}
+$this->ensure_page(true); // allow forums
 
 if (($this->config['enable_referrers'] == 0) ||
 	($this->config['enable_referrers'] == 1 && !$this->get_user()) ||
 	($this->config['enable_referrers'] == 2 && !$this->is_admin()))
 {
-	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
-	return;
-}
-
-
-// deny for comment
-if ($this->page['comment_on_id'])
-{
-	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
+	$this->set_message($this->get_translation('ReadAccessDenied'), 'error');
+	$this->show_must_go_on();
 }
 
 $mode = @$_GET['o'];

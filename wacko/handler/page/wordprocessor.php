@@ -9,7 +9,7 @@ echo ADD_NO_DIV . '<article class="page">' . "\n";
 $include_tail = '</article>';
 
 // redirect to show method if page don't exists
-if (!$this->page || !$this->has_access('read'))
+if (!$this->page)
 {
 	$this->redirect($this->href());
 }
@@ -47,5 +47,5 @@ if ($this->has_access('read'))
 }
 else
 {
-	$this->show_message($this->get_translation('ReadAccessDenied'), 'info');
+	$this->show_message($this->get_translation('ReadAccessDenied'), 'error');
 }

@@ -38,6 +38,8 @@ if (@$_POST['_action'] === 'clone_page')
 		$edit_note = $_POST['edit_note'];
 	}
 
+	$jump = $to;
+
 	if (!isset($_POST['massclone']))
 	{
 		$this->clone_page($from, $to, $superto, $edit_note);
@@ -75,7 +77,14 @@ if (@$_POST['_action'] === 'clone_page')
 			}
 			else if (!$this->has_access('read', $page['page_id']))
 			{
-				$alredys[] = Ut::perc_replace($this->get_translation('CloneCannotRead'), $this->compose_link_to_page($src, '', '', 0));
+				$this->set_message(
+					Ut::perc_replace($this->get_translation('CloneCannotRead'), $this->compose_link_to_page($src, '', '', 0)),
+					'error');
+				if ($dst === $to)
+				{
+					$jump = '';
+				}
+				continue;
 			}
 			else if (!$this->has_access('create', '', '', 1, $dst))
 			{
@@ -109,7 +118,7 @@ if (@$_POST['_action'] === 'clone_page')
 	}
 
 	// jump to new clone
-	$this->redirect($this->href('', $to));
+	$this->redirect($this->href('', $jump));
 }
 
 if ($this->check_acl($this->get_user_name(), $this->config['rename_globalacl']))
