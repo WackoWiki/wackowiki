@@ -10,10 +10,7 @@ if ($this->page && !$this->page['owner_id'] && $this->get_user() && !$this->page
 {
 	$this->set_page_owner($this->page['page_id'], $this->get_user_id());
 	$this->set_message($this->get_translation('YouAreNowTheOwner'), 'success');
-	// log event
-	$this->log(4, str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogPageOwnershipClaimed', $this->config['language'])));
+	$this->log(4, Ut::perc_replace($this->get_translation('LogPageOwnershipClaimed', SYSTEM_LANG), $this->tag . ' ' . $this->page['title']));
 }
 
-$this->redirect($this->href());
-
-?>
+$this->show_must_go_on();

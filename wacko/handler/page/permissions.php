@@ -11,7 +11,7 @@ $this->ensure_page();
 if (!($this->is_owner() || $this->is_admin()))
 {
 	$this->set_message($this->get_translation('ACLAccessDenied'), 'error');
-	$this->back_to_show();
+	$this->show_must_go_on();
 }
 
 // check if upload is allowed for user
@@ -182,7 +182,7 @@ if (@$_POST['_action'] === 'set_permissions')
 	$this->db->invalidate_sql_cache();
 
 	$this->set_message($message, 'success');
-	$this->back_to_show();
+	$this->show_must_go_on();
 }
 
 $pid = $this->page['page_id'];
