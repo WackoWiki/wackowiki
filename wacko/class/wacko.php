@@ -2,7 +2,7 @@
 
 if (!defined('IN_WACKO'))
 {
-	exit('No direct script access allowed');
+	exit;
 }
 
 // engine class
@@ -5132,7 +5132,7 @@ class Wacko
 				return false;
 			}
 
-			if ($acls{$pos - 1} != '!')
+			if ($acls[$pos - 1] != '!')
 			{
 				return true;
 			}
@@ -5157,7 +5157,7 @@ class Wacko
 
 		if ($spos !== false)
 		{
-			if ($acls{$spos - 1} == '!')
+			if ($acls[$spos - 1] == '!')
 			{
 				return false;
 			}
@@ -5165,7 +5165,7 @@ class Wacko
 
 		if ($bpos !== false)
 		{
-			if ($acls{$bpos - 1} == '!')
+			if ($acls[$bpos - 1] == '!')
 			{
 				return false;
 			}
@@ -5783,7 +5783,7 @@ class Wacko
 		}
 
 		// autotasks
-		if (!(time() % 3))
+		if (Ut::rand(0, 99) < 5)
 		{
 			$this->maintenance();
 		}

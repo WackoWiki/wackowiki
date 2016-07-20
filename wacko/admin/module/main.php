@@ -52,7 +52,7 @@ function admin_lock(&$engine, &$module)
 	{
 		#$sql = "TRUNCATE {$engine->config['table_prefix']}auth_token";
 		#$engine->sql_query($sql);
-		$engine->delete_cookie_token('', false);
+		$engine->delete_cookie(AUTH_TOKEN);
 		// queries
 		#$engine->config->invalidate_sql_cache();
 
