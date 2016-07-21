@@ -179,7 +179,7 @@ else if (($user = $this->get_user()))
 
 	?>
 	<div class="cssform">
-		<h3><?php echo $this->format_translation('YouWantChangePassword'); ?></h3>
+		<h3><?php echo $this->format_t('YouWantChangePassword'); ?></h3>
 		<p>
 			<label for="password"><?php echo $this->_t('CurrentPassword');?>:</label>
 			<input type="password" id="password" name="password" size="24" />
@@ -270,13 +270,13 @@ else
 	echo $this->form_open('forgot_password');
 ?>
 
-	<h3><?php echo $this->format_translation('ForgotPassword'); ?></h3>
-	<p><?php echo $this->format_translation('ForgotPasswordHint'); ?></p>
+	<h3><?php echo $this->format_t('ForgotPassword'); ?></h3>
+	<p><?php echo $this->format_t('ForgotPasswordHint'); ?></p>
 	<div class="cssform">
 	<p>
-		<label for="user_name"><?php echo $this->format_translation('UserName'); ?>:</label>
+		<label for="user_name"><?php echo $this->format_t('UserName'); ?>:</label>
 		<input type="text" id="user_name" name="user_name" size="25" maxlength="80" /><br />
-		<label for="email"><?php echo $this->format_translation('Email'); ?>:</label>
+		<label for="email"><?php echo $this->format_t('Email'); ?>:</label>
 		<input type="text" id="email" name="email" size="24" />
 	</p>
 	<p>

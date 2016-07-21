@@ -174,6 +174,7 @@ class Wacko
 	/**
 	* Check if file with filename exists. Check only DB entry,
 	* not file in FS
+	*
 	* @param string $file_name Filename
 	* @param string $unwrapped_tag Optional. Unwrapped supertag. If
 	* not set, then check if file exists in global space
@@ -308,7 +309,6 @@ class Wacko
 		}
 
 		return $res;
-
 	}
 
 	// LANG FUNCTIONS
@@ -548,6 +548,14 @@ class Wacko
 		return $lang;
 	}
 
+	/**
+	 * Get translation of available message set
+	 *
+	 * @param string $name Name of message set
+	 * @param string $lang Language code
+	 * @param bool $dounicode
+	 * @return string Message set
+	 */
 	function _t($name, $lang = '', $dounicode = true)
 	{
 		if ($this->db->multilanguage)
@@ -582,6 +590,7 @@ class Wacko
 							$text = $this->do_unicode_entities($text, $lang);
 						}
 					}
+
 					return $text;
 				}
 			}
@@ -595,7 +604,8 @@ class Wacko
 		// NB: must return NULL if no translation available, it's API
 	}
 
-	function format_translation($name, $lang = '')
+	// wrapper for get and format message set translation
+	function format_t($name, $lang = '')
 	{
 		$string = $this->_t($name, $lang, false);
 		$this->format_safe = false;
@@ -937,7 +947,7 @@ class Wacko
 	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
 	{
 		$page = '';
-		#echo '@@ '.$tag.' - '.$deleted.'<br />';
+
 		if ($deleted)
 		{
 			$cache = false;
@@ -989,8 +999,6 @@ class Wacko
 
 	function _load_page($tag, $page_id = 0, $revision_id = '', $cache = true, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
-		# echo '## '.$deleted.'<br />';
-		# $deleted = 1;
 		$supertag		= '';
 		$cached_page	= '';
 		$page			= null;
@@ -1164,7 +1172,7 @@ class Wacko
 	}
 
 	/**
-	* Put page in pageCache.
+	* Put page in page cache.
 	*
 	* @param array $page Page data
 	* @param int $page_id
@@ -2763,6 +2771,7 @@ class Wacko
 	// returns just PageName[/method].
 	/**
 	* Returns value for page 'wakka' parameter, in tag[/method][#anchor] format
+	*
 	* @param string $method Optional Wacko method (default 'show' method added in Run() function)
 	* @param string $tag Optional tag - returns current-page tag if empty
 	* @param boolean $addpage Optional
@@ -4048,7 +4057,7 @@ class Wacko
 			// do not cache pages with nonces!
 			$this->http->no_cache(false);
 
-			$nonce = $this->sess->create_nonce($form_name, 
+			$nonce = $this->sess->create_nonce($form_name,
 				(($this->db->form_token_time == -1)? 1000000 : max(30, $this->db->form_token_time)));
 				// STS remove -1 from setup
 
@@ -4255,8 +4264,8 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
-		$err = '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), $formatter) . '</em>';
-		$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $err, compact('text', 'options'));
+		$err	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), $formatter) . '</em>';
+		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $err, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
@@ -6742,6 +6751,7 @@ class Wacko
 		{
 			$perpage = 10; // no division by zero
 		}
+
 		if ($total <= $perpage) {
 			// single page
 			return ['offset' => 0, 'text' => ''];
@@ -6786,6 +6796,7 @@ class Wacko
 				{
 					$list .= '<strong>' . $p . '</strong>';
 				}
+
 				if ($p != $pages)
 				{
 					$list .= $sep;
@@ -6841,6 +6852,7 @@ class Wacko
 		{
 			$pagination = '<nav class="pagination">'.$pagination."</nav>\n";
 		}
+
 		return $pagination;
 	}
 
