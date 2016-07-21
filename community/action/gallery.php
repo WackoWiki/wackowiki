@@ -255,7 +255,7 @@ if ($can_view)
 			if ($file['page_id'] == '0')
 			{
 				$tnb_path		= $thumb_dir.'/'.$prefix_global.'@'.$tnb_name;
-				$url			= $this->config['base_url'].join_path(UPLOAD_GLOBAL_DIR, $file_name);
+				$url			= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 			}
 			else
 			{
@@ -333,12 +333,12 @@ if ($can_view)
 			{
 				if ($file['page_id'] == 0)
 				{
-					$src_image		= join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 					$thumb_name		= $thumb_dir.'/'.$prefix_global.'@'.$small_id.$file_name;
 				}
 				else
 				{
-					$src_image		= join_path(UPLOAD_PER_PAGE_DIR, '@'.$file_page['page_id'].'@'.$file_name);
+					$src_image		= Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.$file_page['page_id'].'@'.$file_name);
 					$thumb_name		= $thumb_dir.'/@'.$file_page['page_id'].'@'.$small_id.$file_name;
 				}
 

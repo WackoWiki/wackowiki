@@ -227,7 +227,7 @@ function move(&$parent, $old_page, $new_name)
 		{
 			if ($old_page['supertag'] != $super_new_name && $page = $parent->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$message .= '<li>'.Ut::perc_replace($parent->_t('AlredyExists'), $parent->link($new_name))."</li>\n";
+				$message .= '<li>'.Ut::perc_replace($parent->_t('AlreadyExists'), $parent->link($new_name))."</li>\n";
 			}
 			else
 			{

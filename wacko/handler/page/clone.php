@@ -73,7 +73,7 @@ if (@$_POST['_action'] === 'clone_page')
 
 			if ($this->load_page($dst, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$alredys[] = Ut::perc_replace($this->_t('AlredyExists'), $this->compose_link_to_page($dst, '', '', 0));
+				$alreadys[] = Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($dst, '', '', 0));
 			}
 			else if (!$this->has_access('read', $page['page_id']))
 			{
@@ -88,15 +88,15 @@ if (@$_POST['_action'] === 'clone_page')
 			}
 			else if (!$this->has_access('create', '', '', 1, $dst))
 			{
-				$alredys[] = Ut::perc_replace($this->_t('CloneCannotCreate'), $this->compose_link_to_page($dst, '', '', 0));
+				$alreadys[] = Ut::perc_replace($this->_t('CloneCannotCreate'), $this->compose_link_to_page($dst, '', '', 0));
 			}
 
 			$work[$src] = $dst;
 		}
 
-		if (isset($alredys))
+		if (isset($alreadys))
 		{
-			$error = implode("</li>\n<li>", $alredys);
+			$error = implode("</li>\n<li>", $alreadys);
 			$this->set_message('<ol><li>' . $error . '</li></ol>', 'error');
 			$this->reload_me();
 		}
