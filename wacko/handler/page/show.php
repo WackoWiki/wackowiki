@@ -228,16 +228,6 @@ if ($this->forum === true
 if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['comment_on_id'])
 {
 	// revoking payload
-	/* STS seems unused by anyone.... rereview and delete
-	if (isset($this->sess->guest))
-	{
-		$guest					= $this->sess->guest;
-		$this->sess->guest		= '';
-	}
-	else
-	{
-		$guest					= $this->get_cookie('guest'); // no cookie like that in wacko!
-	} */
 
 	if (isset($this->sess->body))
 	{
