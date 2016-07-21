@@ -247,7 +247,7 @@ else // login
 	echo '<input type="hidden" name="goback" value="' . Ut::html(@$_GET['goback']) . '" />' . "\n";
 
 	echo '<p>';
-	echo '<label for="user_name">'.$this->format_translation('LoginName').':</label>';
+	echo '<label for="user_name">'.$this->format_t('LoginName').':</label>';
 	echo '<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="' . @$_user_name . '" tabindex="1" required autofocus />' . "\n";
 	echo '</p>' . "\n";
 
@@ -283,11 +283,11 @@ else // login
 	echo '<input type="submit" class="OkBtn" value="'.$this->_t('LoginButton').'" tabindex="4" />'."\n";
 	// echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">'.$this->_t('ClearCookies').'</a></small>';
 	echo '</p>'."\n";
-	echo '<p>'.$this->format_translation('ForgotLink').'</p>'."\n";
+	echo '<p>'.$this->format_t('ForgotLink').'</p>'."\n";
 
 	if ($this->db->allow_registration)
 	{
-		echo '<p>'.$this->format_translation('LoginWelcome2').'</p>'."\n";
+		echo '<p>'.$this->format_t('LoginWelcome2').'</p>'."\n";
 	}
 
 	echo $this->form_close();

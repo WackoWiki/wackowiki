@@ -664,7 +664,7 @@ else if (($user = $this->get_user()))
 </div>
 <br />
 <?php
-	//  echo $this->format_translation('SeeListOfPages')."<br />";
+	//  echo $this->format_t('SeeListOfPages')."<br />";
 	echo $this->form_close();
 
 	$percentage = 0 . '%';

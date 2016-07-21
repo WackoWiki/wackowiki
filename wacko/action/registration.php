@@ -291,11 +291,11 @@ if (!isset($_GET['confirm']))
 
 		echo $this->form_open('register');
 
-		echo '<h3>'.$this->format_translation('RegistrationWelcome').'</h3>';
+		echo '<h3>'.$this->format_t('RegistrationWelcome').'</h3>';
 
 		if ($this->config['multilanguage'])
 		{
-			echo '<p><label for="user_lang">'.$this->format_translation('RegistrationLang').':</label>';
+			echo '<p><label for="user_lang">'.$this->format_t('RegistrationLang').':</label>';
 			echo '<select id="user_lang" name="user_lang">';
 
 			$languages	= $this->_t('LanguageArray');
@@ -316,7 +316,7 @@ if (!isset($_GET['confirm']))
 			echo '</select></p>';
 		}
 
-		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
+		echo '<p><label for="user_name">'.$this->format_t('UserName').':</label>';
 		echo '<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" autocomplete="off" required autofocus />';
 
 		if ($this->config['disable_wikiname'] === false)
