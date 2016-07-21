@@ -73,7 +73,6 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->preview	= $body;
 		$this->sess->body		= $body;
 		$this->sess->title		= $title;
-		$this->sess->guest		= $guest;
 
 		$this->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
 	}
@@ -131,7 +130,6 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->preview		= '';
 		$this->sess->body			= '';
 		$this->sess->title			= '';
-		$this->sess->guest			= '';
 		$this->sess->comment_delay	= time();
 
 		// publish anonymously

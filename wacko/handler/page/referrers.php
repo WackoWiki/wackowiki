@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$this->endure_page(true); // allow forums
+$this->ensure_page(true); // allow forums
 
 // let's start: print header
 echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ' . $this->_t('ViewReferrersGlobal') . '</h3>';
