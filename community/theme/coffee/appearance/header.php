@@ -4,7 +4,7 @@
  Common header file.
 */
 
-require (join_path(THEME_DIR, '_common/_header.php'));
+require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 ?>
 <body>
