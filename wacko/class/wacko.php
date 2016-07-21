@@ -73,14 +73,16 @@ class Wacko
 		'left'		=> array('_before'),
 	);
 	var $translit_macros = array(
-		'вики' => 'wiki', 'вака' => 'wacko', 'веб' => 'web'
+		'вики'		=> 'wiki',
+		'вака'		=> 'wacko',
+		'веб'		=> 'web'
 	);
 	var $time_intervals = array(
-		30*DAYSECS => 'Month',
-		7*DAYSECS => 'Week',
-		DAYSECS => 'Day',
-		60*60 => 'Hour',
-		60 => 'Minute'
+		30*DAYSECS	=> 'Month',
+		7*DAYSECS	=> 'Week',
+		DAYSECS		=> 'Day',
+		60*60		=> 'Hour',
+		60			=> 'Minute'
 	);
 
 	/**
@@ -101,7 +103,14 @@ class Wacko
 	}
 
 	// DATABASE
-	// STS: backward compat
+
+	/**
+	 * Backward compatibility wrapper for old sql_query
+	 *
+	 * @param mixed $query
+	 * @param number $debug
+	 * @deprecated use dblink->sql_query() instead
+	 */
 	function sql_query($query, $debug = 0)
 	{
 		return $this->dblink->sql_query($query, $debug);
@@ -197,6 +206,7 @@ class Wacko
 		}
 
 		$file = &$this->files_cache[$page_id][$file_name];
+
 		if (empty($file))
 		{
 			$file = $this->load_single(
@@ -235,9 +245,9 @@ class Wacko
 
 		foreach (Ut::file_glob(THEME_DIR, '*/appearance/header.php') as $file)
 		{
-			$theme = substr($file, strlen(THEME_DIR) + 1);
-			$theme = substr($theme, 0, strpos($theme, '/'));
-			$theme_list[] = $theme;
+			$theme			= substr($file, strlen(THEME_DIR) + 1);
+			$theme			= substr($theme, 0, strpos($theme, '/'));
+			$theme_list[]	= $theme;
 		}
 
 		sort($theme_list, SORT_STRING);
@@ -253,28 +263,30 @@ class Wacko
 	// TIME FUNCTIONS
 	function utc2localtime($utc)
 	{
-		$user = $this->get_user();
-
-		$tz = ($user? $user['timezone'] + $user['dst'] : $this->db->timezone + $this->db->dst);
+		$user	= $this->get_user();
+		$tz		= ($user
+					? $user['timezone'] + $user['dst']
+					: $this->db->timezone + $this->db->dst);
 
 		return $utc + $tz * 3600;
 	}
 
 	function sql2localtime($text)
 	{
-		return ($text === SQL_DATE_NULL)? 0 : $this->utc2localtime(strtotime($text));
+		return ($text === SQL_DATE_NULL) ? 0 : $this->utc2localtime(strtotime($text));
 	}
 
 	function sql2datetime($text, &$date, &$time)
 	{
-		$local = $this->sql2localtime($text);
-		$date = date($this->config['date_format'], $local);
-		$time = date($this->config['time_format_seconds'], $local);
+		$local	= $this->sql2localtime($text);
+		$date	= date($this->config['date_format'], $local);
+		$time	= date($this->config['time_format_seconds'], $local);
 	}
 
 	function sql2precisetime($text)
 	{
-		$local = $this->sql2localtime($text);
+		$local	= $this->sql2localtime($text);
+
 		return date($this->config['date_precise_format'], $local);
 	}
 
@@ -296,8 +308,9 @@ class Wacko
 		{
 			if ($ago >= $val)
 			{
-				$interval = ($ago - $ago % $val) / $val;
-				$res = $interval . $this->_t('Feed'.$name.($interval == 1? '' : 's').'Ago');
+				$interval	= ($ago - $ago % $val) / $val;
+				$res		= $interval . $this->_t('Feed'.$name.($interval == 1 ? '' : 's').'Ago');
+
 				break;
 			}
 		}
@@ -369,9 +382,9 @@ class Wacko
 				$this->translations['all'] = & $wacko_all_resource;
 			}
 
-			$ap_translation = [];
-			$theme_translation = [];
-			$theme_translation0 = [];
+			$ap_translation		= [];
+			$theme_translation	= [];
+			$theme_translation0	= [];
 
 			if ($this->config['ap_mode'])
 			{
@@ -611,6 +624,7 @@ class Wacko
 		$this->format_safe = false;
 		$string = $this->format($string);
 		$this->format_safe = true;
+
 		return $string;
 	}
 
@@ -6666,27 +6680,27 @@ class Wacko
 		switch ($char_classes)
 		{
 			case 1:
-				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[a-zA-Zа-яА-Я]+/', $pwd))
+				if (!preg_match('/[0-9]+/',				$pwd) ||
+					!preg_match('/[a-zA-Zа-яА-Я]+/',	$pwd))
 				{
 					++$error;
 				}
 				break;
 
 			case 2:
-				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[A-ZА-Я]+/', $pwd) ||
-					!preg_match('/[a-zа-я]+/', $pwd))
+				if (!preg_match('/[0-9]+/',		$pwd) ||
+					!preg_match('/[A-ZА-Я]+/',	$pwd) ||
+					!preg_match('/[a-zа-я]+/',	$pwd))
 				{
 					++$error;
 				}
 				break;
 
 			case 3:
-				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[A-ZА-Я]+/', $pwd) ||
-					!preg_match('/[a-zа-я]+/', $pwd) ||
-					!preg_match('/[\W]+/', $pwd))
+				if (!preg_match('/[0-9]+/',		$pwd) ||
+					!preg_match('/[A-ZА-Я]+/',	$pwd) ||
+					!preg_match('/[a-zа-я]+/',	$pwd) ||
+					!preg_match('/[\W]+/',		$pwd))
 				{
 					++$error;
 				}
@@ -6778,7 +6792,7 @@ class Wacko
 		$make_link = function ($page, $body = '', $attrs = '') use ($method, $tag, $name, $params)
 		{
 			return '<a href="' . $this->href($method, $tag, $name . '=' . $page . $params) . '"' . $attrs . '>' .
-					($body? $body : $page) . '</a>';
+					($body ? $body : $page) . '</a>';
 		};
 
 		$make_list = function ($from, $to) use ($page, $pages, $make_link, $sep)
@@ -6788,6 +6802,7 @@ class Wacko
 			for ($p = $from; $p <= $to; $p++)
 			{
 				$list .= ' ';
+
 				if ($p != $page)
 				{
 					$list .= $make_link($p);
@@ -6806,9 +6821,8 @@ class Wacko
 			return $list;
 		};
 
-		$pagination['offset'] = $perpage * ($page - 1);
-
-		$navigation = $this->_t('ToThePage') . ': ';
+		$pagination['offset']	= $perpage * ($page - 1);
+		$navigation				= $this->_t('ToThePage') . ': ';
 
 		if ($page > 1)
 		{
@@ -6936,11 +6950,12 @@ class Wacko
 		}
 	}
 
-	// Check for valid email address.
-	//		$email_address = email address to check
-	// returns boolean
-	// true		- valid
-	// false	- invalid
+	/**
+	 * Check for valid email address.
+	 *
+	 * @param string $email_address = email address to check
+	 * @return boolean email valid or invalid
+	 */
 	function validate_email($email_address)
 	{
 		if ($this->config['email_pattern'] == 'html5')
