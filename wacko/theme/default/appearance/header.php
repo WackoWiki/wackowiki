@@ -17,9 +17,9 @@ require Ut::join_path(THEME_DIR, '_common/_header.php');
 					? $this->config['site_name']
 					: '<a href="'.$this->config['base_url'].'" title="'.$this->config['site_desc'].'">'.$this->config['site_name'].'</a>');
 
-				// echo ': '.(isset($this->page['title']) && $this->has_access('read')
-				// 	? $this->page['title']
-				// 	: $this->get_page_path() );
+				/* echo ': '.(isset($this->page['title']) && $this->has_access('read')
+					? $this->page['title']
+					: $this->get_page_path() ); */
 		?>
 				</h1>
 		<?php // echo $this->config['site_desc'];
@@ -39,11 +39,11 @@ else
 {
 	// show Register / Login link
 	echo "<ul>\n";
-	echo "<li>".$this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
+	echo '<li>'.$this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
 
 	if ($this->db->allow_registration)
 	{
-		echo "<li>".$this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'), 0)."</li>\n";
+		echo '<li>'.$this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'), 0)."</li>\n";
 	}
 	// Show Help link
 	//  echo "<li>".$this->compose_link_to_page($this->_t('HelpPage'), "", $this->_t('Help'), 0)."</li>\n";
@@ -63,9 +63,9 @@ else
 	// main page
 	// echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 
-	$max_items = $logged_in? $logged_in['menu_items'] : $this->db->menu_items;
-
+	$max_items = $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
 	$i = 0;
+
 	foreach ((array)$this->get_menu() as $menu_item)
 	{
 		if ($i++ == $max_items)
@@ -118,7 +118,7 @@ else
 
 <?php
 	// defining tabs constructor
-	//		$image - 0 text only, 1 image only, 2 image and text
+	//		$image = 0 text only, 1 image only, 2 image and text
 	$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = '')
 	{
 		$title = $this->_t($title);
@@ -126,7 +126,7 @@ else
 		if ($image)
 		{
 			$title = '<img src="' . $this->config['theme_url'] . 'icon/spacer.png" alt="' . $title . '" />'.
-					($image == 2?  ' ' . $title : '');
+					($image == 2 ?  ' ' . $title : '');
 		}
 
 		$tab = '<li class="' . ($tab_class? $tab_class : 'm-' . $method);
@@ -137,13 +137,16 @@ else
 		}
 		else
 		{
-			$tab .= '"><a href="' . ($method == 'show'? '.' : $this->href($method)) . '" title="' . $this->_t($hint) . '"';
+			$tab .= '"><a href="' . ($method == 'show' ? '.' : $this->href($method)) . '" title="' . $this->_t($hint) . '"';
+
 			if ($access_key !== '')
 			{
 				$tab .= ' accesskey="' . $access_key . '"';
 			}
+
 			$tab .= $params . '>' . $title . '</a>';
 		}
+
 		$tab .= "</li>\n";
 
 		echo $tab;
@@ -166,10 +169,10 @@ else
 		$readable = $this->has_access('read');
 
 		// edit or source tab
-		if ($this->is_admin() ||
-				($this->forum?
-					($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0 :
-					$this->has_access('write')))
+		if ($this->is_admin()
+				|| ($this->forum
+					? ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0
+					: $this->has_access('write')))
 		{
 			$echo_tab('edit', 'EditTip', 'EditText', 1, '', 'e');
 		}
@@ -219,22 +222,22 @@ else
 			}
 
 			// clone tab
-			if ($readable)
+			if ($this->has_access('create') || $this->is_admin())
 			{
 				$echo_tab('clone', 'ClonePage', 'CloneText', 2, '', '');
 			}
 
 			// remove tab
-			if (($this->is_admin() ||
-					(!$this->config['remove_onlyadmins'] &&
-						($this->forum?  $this->is_owner() && (int)$this->page['comments'] == 0 : $this->is_owner()))))
+			if (($this->is_admin()
+					|| (!$this->config['remove_onlyadmins']
+						&& ($this->forum ? $this->is_owner() && (int)$this->page['comments'] == 0 : $this->is_owner()))))
 			{
 				$echo_tab('remove', 'DeleteTip', 'DeleteText', 2, '', '');
 			}
 
 			// rename tab
-			if ($this->is_admin() || ($this->is_owner() &&
-					(!$this->forum || (int)$this->page['comments'] != 0)))
+			if ($this->is_admin() || ($this->is_owner()
+					&& (!$this->forum || (int)$this->page['comments'] != 0)))
 			{
 				$echo_tab('rename', 'RenameTip', 'RenameText', 2, '', '');
 			}
@@ -341,6 +344,8 @@ if (!@$this->sess->MinPHPVersion)
 	{
 		$this->show_message($this->_t('ErrorMinPHPVersion'), 'error');
 	}
+
 	$this->sess->MinPHPVersion = 1;
 }
+
 $this->output_messages();
