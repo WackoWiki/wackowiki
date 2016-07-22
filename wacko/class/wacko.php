@@ -440,7 +440,7 @@ class Wacko
 		{
 			$lang_file = Ut::join_path(LANG_DIR, 'lang.' . $lang . '.php');
 			$wacko_language = [];
-			require($lang_file);
+			require $lang_file;
 
 			$wacko_language['LANG']			= $lang;
 			$wacko_language['UPPER']		= '[' . $wacko_language['UPPER_P'] . ']';
@@ -1279,11 +1279,11 @@ class Wacko
 
 	function cache_links()
 	{
-		$pages	= '';
-		$page_id = array();
-		$acl	= '';
-		$user	= $this->get_user();
-		$lang   = $this->get_user_language();
+		$pages		= '';
+		$page_id	= array();
+		$acl		= '';
+		$user		= $this->get_user();
+		$lang		= $this->get_user_language();
 
 		// get page links
 		if ($links = $this->load_all(
@@ -2518,10 +2518,10 @@ class Wacko
 				}
 
 				if ($this->config['enable_email']
-						&& $this->config['enable_email_notification']
-						&& $watcher['enabled']
-						&& !$watcher['email_confirm']
-						&& $watcher['send_watchmail'])
+					&& $this->config['enable_email_notification']
+					&& $watcher['enabled']
+					&& !$watcher['email_confirm']
+					&& $watcher['send_watchmail'])
 				{
 					$lang = $watcher['user_lang'];
 					$save = $this->set_language($lang, true);
@@ -2564,7 +2564,6 @@ class Wacko
 					}
 
 					$this->send_user_email($watcher['user_name'], $watcher['email'], $subject, $body, $lang);
-
 					$this->set_language($save, true);
 				}
 			}
@@ -2643,7 +2642,6 @@ class Wacko
 			foreach ($messages as $message)
 			{
 				list($_message, $_type) = $message;
-
 				$this->show_message($_message, $_type);
 			}
 		}
@@ -2948,10 +2946,12 @@ class Wacko
 				$trim = 1;
 				return '';
 			}, $text);
+
 		if ($trim)
 		{
 			$text = trim($text);
 		}
+
 		if ($_width || $_height)
 		{
 			if (!$_width) {
@@ -2961,6 +2961,7 @@ class Wacko
 			{
 				$_width .= 'px';
 			}
+
 			if (!$_height)
 			{
 				$_height = 'auto';
@@ -2968,8 +2969,10 @@ class Wacko
 			{
 				$_height .= 'px';
 			}
+
 			$resize = " style=\"width:$_width;height:$_height;\"";
 		}
+
 		if ($_align)
 		{
 			$resize .= " align=$_align"; // XXX: deprecated in HTML 4 & 5 though
@@ -3351,9 +3354,9 @@ class Wacko
 		else if (preg_match('/^([\!\.\-'.$this->language['ALPHANUM_P'].']+)(\#['.$this->language['ALPHANUM_P'].'\_\-]+)?$/', $tag, $matches))
 		{
 			// it's a Wiki link!
-			$match	= '';
-			$tag	= $otag		= $matches[1];
-			$untag	= $unwtag	= $this->unwrap_link($tag);
+			$match			= '';
+			$tag			= $otag		= $matches[1];
+			$untag			= $unwtag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/('.$this->config['standard_handlers'].')\/(.*)$/i';
 			$ptag			= $this->translit($unwtag);
@@ -3775,6 +3778,7 @@ class Wacko
 		$text = preg_replace('/('.$this->language['ALPHA'].')([0-9])/', '\\1&nbsp;\\2', $text);
 		// $text = preg_replace('/([0-9])&nbsp;(?=[0-9])/', '\\1', $text);
 		$text = preg_replace('/([0-9])&nbsp;(?!'.$this->language['ALPHA'].')/', '\\1', $text);
+
 		return $text;
 	}
 
@@ -3921,9 +3925,9 @@ class Wacko
 	{
 		// delete related old links in table
 		$this->sql_query(
-				"DELETE ".
-				"FROM ".$this->config['table_prefix']."link ".
-				"WHERE from_page_id = '".(int)$from_page_id."'");
+			"DELETE ".
+			"FROM ".$this->config['table_prefix']."link ".
+			"WHERE from_page_id = '".(int)$from_page_id."'");
 
 		// page link
 		if ($link_table = @$this->linktable[LINK_PAGE])
@@ -3944,9 +3948,9 @@ class Wacko
 
 		// delete page related old file links in table
 		$this->sql_query(
-				"DELETE ".
-				"FROM ".$this->config['table_prefix']."file_link ".
-				"WHERE page_id = '".(int)$from_page_id."'");
+			"DELETE ".
+			"FROM ".$this->config['table_prefix']."file_link ".
+			"WHERE page_id = '".(int)$from_page_id."'");
 
 		// file link
 		if ($file_table = @$this->linktable[LINK_FILE])
@@ -3959,9 +3963,9 @@ class Wacko
 			}
 
 			$this->sql_query(
-					"INSERT INTO ".$this->config['table_prefix']."file_link ".
-					"(page_id, file_id) ".
-					"VALUES ".rtrim($query, ','));
+				"INSERT INTO ".$this->config['table_prefix']."file_link ".
+				"(page_id, file_id) ".
+				"VALUES ".rtrim($query, ','));
 		}
 	}
 
@@ -3988,9 +3992,11 @@ class Wacko
 	{
 		// cache interwiki data in _SESSION
 		$inter_wiki = &$this->sess->interwiki_conf;
+
 		if (!isset($inter_wiki))
 		{
 			$inter_wiki = [];
+
 			if (($lines = file(Ut::join_path(CONFIG_DIR, 'interwiki.conf'))))
 			{
 				foreach ($lines as $line)
@@ -4041,12 +4047,12 @@ class Wacko
 	// parameter: named parameter array
 	function form_open($form_name = '', $parameter = [])
 	{
-		$page_method = '';
-		$form_method = 'post';
-		$form_token = -1;
-		$tag = '';
-		$form_more = '';
-		$href_param = '';
+		$page_method	= '';
+		$form_method	= 'post';
+		$form_token		= -1;
+		$tag			= '';
+		$form_more		= '';
+		$href_param		= '';
 		extract($parameter, EXTR_IF_EXISTS);
 
 		if ($form_token === -1)
@@ -4095,8 +4101,8 @@ class Wacko
 
 	function validate_post_token()
 	{
-		if ($_POST &&
-			!$this->sess->verify_nonce(@$_POST['_action'], @$_POST['_nonce']))
+		if ($_POST
+			&& !$this->sess->verify_nonce(@$_POST['_action'], @$_POST['_nonce']))
 		{
 			$_POST = [];
 			$_REQUEST = $_GET;
@@ -4126,8 +4132,8 @@ class Wacko
 			$referrer	= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 		}
 
-		#$user_agent	= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
-		#$ip			= $this->get_user_ip();
+		# $user_agent	= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+		# $ip			= $this->get_user_ip();
 
 		// check if it's coming from another site
 		if ($referrer && !preg_match('/^'.preg_quote($this->config['base_url'], '/').'/', $referrer) && isset($_GET['sid']) === false) // TODO: isset($_GET['PHPSESSID']) === false
@@ -4146,8 +4152,8 @@ class Wacko
 				"INSERT INTO ".$this->config['table_prefix']."referrer SET ".
 					"page_id		= '".(int)$page_id."', ".
 					"referrer		= '".quote($this->dblink, $referrer)."', ".
-					#"user_agent		= '".quote($this->dblink, (string) trim(substr($user_agent, 0, 149)))."', ".
-					#"ip				= '".quote($this->dblink, (string) $ip)."', ".
+					# "user_agent		= '".quote($this->dblink, (string) trim(substr($user_agent, 0, 149)))."', ".
+					# "ip				= '".quote($this->dblink, (string) $ip)."', ".
 					"referrer_time	= UTC_TIMESTAMP()");
 		}
 	}
@@ -4531,6 +4537,7 @@ class Wacko
 	function get_list_count($max)
 	{
 		$user_max = $this->get_user_setting('list_count');
+
 		if (!isset($user_max))
 		{
 			$user_max = 50;
@@ -4545,6 +4552,7 @@ class Wacko
 		}
 
 		$max = (int)$max;
+
 		if ($max <= 0 || $max > $user_max)
 		{
 			$max = $user_max;
@@ -4560,10 +4568,9 @@ class Wacko
 	 */
 	function create_auth_token($user)
 	{
-		$session_days = ($user['session_length'] > 0)? $user['session_length'] : $this->db->session_length;
-
-		$selector = Ut::http64_encode(Ut::random_bytes(9));
-		$authenticator = Ut::random_bytes(33);
+		$session_days	= ($user['session_length'] > 0) ? $user['session_length'] : $this->db->session_length;
+		$selector		= Ut::http64_encode(Ut::random_bytes(9));
+		$authenticator	= Ut::random_bytes(33);
 
 		$this->set_cookie(AUTH_TOKEN, $selector . Ut::http64_encode($authenticator), $session_days);
 
@@ -4580,8 +4587,8 @@ class Wacko
 	{
 		if (($token = $this->get_cookie(AUTH_TOKEN)))
 		{
-			$selector = substr($token, 0, 12);
-			$authenticator = substr($token, 12);
+			$selector		= substr($token, 0, 12);
+			$authenticator	= substr($token, 12);
 
 			$token = $this->load_single(
 				"SELECT auth_token_id, token, user_id, token_expires ".
@@ -4594,9 +4601,9 @@ class Wacko
 			{
 				$this->sql_query(
 					"UPDATE {$this->db->user_table} SET ".
-						"last_visit						= UTC_TIMESTAMP() ".
+						"last_visit = UTC_TIMESTAMP() ".
 					"WHERE ".
-						"user_id						= '" . (int)$token['user_id'] . "' ".
+						"user_id = '" . (int)$token['user_id'] . "' ".
 					"LIMIT 1");
 
 				// re-create auth token on successful use, effectively prolonging it expiration
@@ -5436,13 +5443,14 @@ class Wacko
 				);
 			}
 		}
+
 		return $user_menu_formatted;
 	}
 
 	function set_menu($set = MENU_AUTO, $update = false)
 	{
-		$menu_page_ids = @$this->sess->menu_page_id ?: [];
-		$menu_formatted = @$this->sess->menu ?: [];
+		$menu_page_ids	= @$this->sess->menu_page_id ?: [];
+		$menu_formatted	= @$this->sess->menu ?: [];
 
 		$user = $this->get_user();
 
@@ -5464,11 +5472,12 @@ class Wacko
 			// parsing menu items into link table
 			$menu_page_ids = array();
 			$menu_formatted = array();
+
 			foreach ($menu as $menu_item)
 			{
-				$menu_page_ids[] = $menu_item[0];
-				$menu_item[2] = $this->format($menu_item[2], 'wacko');
-				$menu_formatted[] = $menu_item;
+				$menu_page_ids[]	= $menu_item[0];
+				$menu_item[2]		= $this->format($menu_item[2], 'wacko');
+				$menu_formatted[]	= $menu_item;
 			}
 		}
 
@@ -5476,6 +5485,7 @@ class Wacko
 		if (@$_GET['addbookmark'] && $user)
 		{
 			unset($_GET['addbookmark']);
+
 			// writing menu item
 			if (!in_array($this->page['page_id'], $menu_page_ids))
 			{
@@ -5483,7 +5493,9 @@ class Wacko
 					"SELECT MAX(m.menu_position) AS max_position ".
 					"FROM ".$this->config['table_prefix']."menu m ".
 					"WHERE m.user_id = '".$user['user_id']."' ", false);
+
 				$position = (int)$position['max_position'];
+
 				if (!$position)
 				{
 					// prepopulate user menu with default menu items
@@ -5496,11 +5508,12 @@ class Wacko
 							"menu_lang			= '".$menu_item[3]."', ".
 							"menu_position		= '".++$position."'");
 					}
+
 					$this->sess->menu_default = false;
 				}
 
-				$title = $this->get_page_title();
-				$lang = ($user['user_lang'] != $this->page_lang)? $this->page_lang : '';
+				$title	= $this->get_page_title();
+				$lang	= ($user['user_lang'] != $this->page_lang)? $this->page_lang : '';
 				$menu_page_ids[] = $this->page['page_id'];
 				$menu_formatted[] = array(
 					$this->page['page_id'],
@@ -5526,6 +5539,7 @@ class Wacko
 			$prev = $menu_formatted;
 			$menu_page_ids = array();
 			$menu_formatted = array();
+
 			foreach ($prev as $menu_item)
 			{
 				if ($menu_item[0] != $this->page['page_id'])
@@ -5539,14 +5553,15 @@ class Wacko
 				"DELETE FROM ".$this->config['table_prefix']."menu ".
 				"WHERE user_id = '".$user['user_id']."' ".
 					"AND page_id = '".$this->page['page_id']."'");
+
 			if (!$menu_formatted)
 			{
 				$this->set_menu(MENU_DEFAULT);
 			}
 		}
 
-		$this->sess->menu_page_id = $menu_page_ids;
-		$this->sess->menu = $menu_formatted;
+		$this->sess->menu_page_id	= $menu_page_ids;
+		$this->sess->menu			= $menu_formatted;
 	}
 
 	function get_menu()
@@ -5674,8 +5689,8 @@ class Wacko
 
 	function maintenance()
 	{
-		$now = time();
-		$update = [];
+		$now	= time();
+		$update	= [];
 
 		// purge referrers (once a day)
 		if (($days = $this->config->referrers_purge_time) > 0
@@ -5703,12 +5718,13 @@ class Wacko
 
 		// purge deleted pages (once per 3 days)
 		if (($days = $this->config->keep_deleted_time) > 0
-				&& $now > $this->config->maint_last_delpages)
+			&& $now > $this->config->maint_last_delpages)
 		{
 			list($pages, ) = $this->load_deleted(1000, 0);
 
 			$remove = [];
 			$past = $now - DAYSECS * $days;
+
 			foreach ($pages as $page)
 			{
 				if (strtotime($page['modified']) < $past)
@@ -5722,12 +5738,13 @@ class Wacko
 				$this->delete_pages($remove);
 				$this->log(7, 'Maintenance: deleted pages purged');
 			}
+
 			$update['maint_last_delpages'] = $now + 3 * DAYSECS;
 		}
 
 		// purge system log entries (once per 3 days)
 		if (($days = $this->config->log_purge_time) > 0
-				&& $now > $this->config['maint_last_log'])
+			&& $now > $this->config['maint_last_log'])
 		{
 			$this->sql_query(
 				"DELETE FROM {$this->config->table_prefix}log ".
@@ -5770,7 +5787,9 @@ class Wacko
 		// purge expired cookie_tokens (once per 3 days)
 		if ($now > $this->config->maint_last_session)
 		{
-			$this->sql_query("DELETE FROM {$this->db->table_prefix}auth_token WHERE token_expires < UTC_TIMESTAMP()");
+			$this->sql_query(
+				"DELETE FROM {$this->db->table_prefix}auth_token ".
+				"WHERE token_expires < UTC_TIMESTAMP()");
 
 			$update['maint_last_session'] = $now + 3 * DAYSECS;
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
@@ -5853,22 +5872,25 @@ class Wacko
 		$page = 0;
 		if ($method == 'Hashid')
 		{
-			$method = '';
-			$ids = explode('x', $tag);
-			$revision_id = $this->load_single(
+			$method			= '';
+			$ids			= explode('x', $tag);
+
+			$revision_id	= $this->load_single(
 				"SELECT revision_id ".
 				"FROM {$this->config['table_prefix']}revision ".
 				"WHERE page_id = '".$ids[0]."' ".
 					"AND version_id = '".$ids[1]."' ".
 				"LIMIT 1");
-			$revision_id = $revision_id?  $revision_id['revision_id'] : 0;
-			$page = $this->load_page('', $ids[0], $revision_id, '', '', $this->is_admin());
+
+			$revision_id	= $revision_id?  $revision_id['revision_id'] : 0;
+			$page			= $this->load_page('', $ids[0], $revision_id, '', '', $this->is_admin());
+
 			if ($page)
 			{
-				$this->method = 'show';
-				$this->tag = $page['tag'];
-				$this->supertag = $page['supertag'];
-				$_GET['revision_id'] = $revision_id;
+				$this->method			= 'show';
+				$this->tag				= $page['tag'];
+				$this->supertag			= $page['supertag'];
+				$_GET['revision_id']	= $revision_id;
 			}
 		}
 
@@ -5973,9 +5995,9 @@ class Wacko
 		}
 
 		// check revision hideing (1 - guests, 2 - registered users)
-		$this->hide_revisions = ($this->page && !$this->is_admin() && (
-			($this->config['hide_revisions'] == 1 && !$this->get_user()) ||
-			($this->config['hide_revisions'] == 2 && !$this->is_owner())));
+		$this->hide_revisions = ($this->page && !$this->is_admin()
+			&& (($this->config['hide_revisions'] == 1 && !$this->get_user())
+				|| ($this->config['hide_revisions'] == 2 && !$this->is_owner())));
 
 		// forum page
 		$this->forum = !!(preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->tag) ||
@@ -6046,9 +6068,8 @@ class Wacko
 			$_link = $link;
 		}
 
-		$page['body_toc'] = (isset($page['body_toc']) ? $page['body_toc'] : null);
-
-		$toc = explode('<heading,row>', $page['body_toc']);
+		$page['body_toc']	= (isset($page['body_toc']) ? $page['body_toc'] : null);
+		$toc				= explode('<heading,row>', $page['body_toc']);
 
 		foreach ($toc as $k => $toc_item)
 		{
@@ -6185,12 +6206,14 @@ class Wacko
 		if (!$_root_page)
 		{
 			$link = '';
+
 			foreach (explode('/', $this->tag) as $step)
 			{
 				if ($link)
 				{
 					$link .= '/';
 				}
+
 				$link .= $step;
 
 				if ($result)
@@ -6216,6 +6239,7 @@ class Wacko
 	function get_page_title($tag = '', $page_id = 0)
 	{
 		$tag = trim($tag, '/');
+
 		if ($tag || $page_id)
 		{
 			$page = $this->load_single(
@@ -6316,8 +6340,9 @@ class Wacko
 
 	function delete_pages($pages)
 	{
-		$remove = [];
-		$rev = array_flip($this->page_id_cache);
+		$remove	= [];
+		$rev	= array_flip($this->page_id_cache);
+
 		foreach ($pages as $id)
 		{
 			$remove[] = "'" . $id . "'";
@@ -6325,9 +6350,11 @@ class Wacko
 		}
 
 		$remove = implode(', ', $remove);
+
 		$this->sql_query(
 			"DELETE FROM {$this->config['table_prefix']}page ".
 			"WHERE page_id IN ( ".$remove." )");
+
 		$this->sql_query(
 			"DELETE FROM {$this->config['table_prefix']}revision ".
 			"WHERE page_id IN ( ".$remove." )");
@@ -6654,6 +6681,7 @@ class Wacko
 
 		// check if password is like a login or contains login string
 		$error = 0;
+
 		switch ($unlike_login)
 		{
 			case 2:	// don't run this check if login is much shorter than password or vice versa
@@ -6677,6 +6705,7 @@ class Wacko
 
 		// check character classes requirements
 		$error = 0;
+
 		switch ($char_classes)
 		{
 			case 1:
@@ -6766,7 +6795,8 @@ class Wacko
 			$perpage = 10; // no division by zero
 		}
 
-		if ($total <= $perpage) {
+		if ($total <= $perpage)
+		{
 			// single page
 			return ['offset' => 0, 'text' => ''];
 		}
@@ -6878,7 +6908,6 @@ class Wacko
 		}
 	}
 
-
 	// show captcha form on a page. must be incorporated as an input
 	// form component in every page that uses captcha testing
 	//		$inline	= adds <br /> between elements
@@ -6929,8 +6958,8 @@ class Wacko
 						// reset freecap session vars
 						// cannot stress enough how important it is to do this
 						// defeats re-use of known image with spoofed session id
-						$this->sess->freecap_attempts = 0;
-						$this->sess->freecap_word_hash = false;
+						$this->sess->freecap_attempts	= 0;
+						$this->sess->freecap_word_hash	= false;
 
 						// now process form
 						$word_ok = true;
@@ -7001,17 +7030,17 @@ class Wacko
 		}
 
 		// check event level: do we have to log it?
-		if ((int)$this->config['log_level'] === 0 ||
-		((int)$this->config['log_level'] !== 7 &&
-		$level > (int)$this->config['log_level']))
+		if ((int)$this->config['log_level'] === 0
+			|| ((int)$this->config['log_level'] !== 7
+			&& $level > (int)$this->config['log_level']))
 		{
 			return true;
 		}
 
-		$html		= $this->config['allow_rawhtml'];
+		$html			= $this->config['allow_rawhtml'];
 		$this->config['allow_rawhtml'] = 0;
-		$message	= ( isset($this->language) ? $this->format($message, 'wacko') : $message );
-		$user_id	= $this->get_user_id();
+		$message		= ( isset($this->language) ? $this->format($message, 'wacko') : $message );
+		$user_id		= $this->get_user_id();
 		$this->config['allow_rawhtml'] = $html;
 
 		// current timestamp set automatically
@@ -7068,13 +7097,13 @@ class Wacko
 				"SELECT kp.category_id, COUNT( kp.page_id ) AS n ".
 				"FROM {$this->config['table_prefix']}category k , ".
 					"{$this->config['table_prefix']}category_page kp ".
-					( $root != ''
+					($root != ''
 						? "INNER JOIN ".$this->config['table_prefix']."page p ON (kp.page_id = p.page_id) "
 						: '' ).
 				"WHERE k.category_lang = '".quote($this->dblink, $lang)."' AND kp.category_id = k.category_id ".
-					( $root != ''
+					($root != ''
 						? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
-						: '' ).
+						: '').
 				"GROUP BY category_id", true))
 				{
 					foreach ($_counts as $count)
@@ -7117,9 +7146,9 @@ class Wacko
 	//	false	- if list was empty
 	function save_categories_list($page_id, $dryrun = 0)
 	{
-		$set = '';
-		$ids = '';
-		$values = '';
+		$set	= '';
+		$ids	= '';
+		$values	= '';
 
 		// what's selected
 		foreach ($_POST as $key => $val)
