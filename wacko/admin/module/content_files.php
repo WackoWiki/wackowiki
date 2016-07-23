@@ -177,7 +177,7 @@ function admin_content_files(&$engine, &$module)
 			chmod( $dir.$result_name, 0744 );
 
 			$small_name  = $result_name;
-			$description = substr(quote($engine->dblink, $_POST['file_description']), 0, 250);
+			$description = substr($_POST['file_description'], 0, 250);
 			$description = rtrim( $description, '\\' );
 			$description = str_replace(array('"', "'", '<', '>'), '', $description);
 			$description = htmlspecialchars($description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
@@ -185,15 +185,15 @@ function admin_content_files(&$engine, &$module)
 			// 5. insert line into DB
 			$engine->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
 				"page_id			= '".'0'."', ".
-				"file_name			= '".quote($engine->dblink, $small_name)."', ".
-				"upload_lang				= '".quote($engine->dblink, $engine->config['language'])."', ".
-				"file_description	= '".quote($engine->dblink, $description)."', ".
+				"file_name			= ".$engine->db->q($small_name).", ".
+				"upload_lang		= ".$engine->db->q($engine->config['language']).", ".
+				"file_description	= ".$engine->db->q($description).", ".
 				"file_size			= '".(int)$file_size."',".
 				"picture_w			= '".(int)$size[0]."',".
 				"picture_h			= '".(int)$size[1]."',".
-				"file_ext			= '".quote($engine->dblink, substr($ext, 0, 10))."',".
+				"file_ext			= ".$engine->db->q(substr($ext, 0, 10)).",".
 				"user_id			= '".(int)$user['user_id']."',".
-				"uploaded_dt		= '".quote($engine->dblink, date(SQL_DATE_FORMAT))."' "); // TODO tz
+				"uploaded_dt		= ".$engine->db->q(date(SQL_DATE_FORMAT))." "); // TODO tz
 
 			// 4. output link to file
 			// !!!!! write after providing filelink syntax
@@ -286,7 +286,7 @@ function admin_content_files(&$engine, &$module)
 				"INNER JOIN ".$engine->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '". ($global ? 0 : '')."' ".
 	($owner
-	? "AND u.user_name = '".quote($engine->dblink, $owner)."' "
+	? "AND u.user_name = ".$engine->db->q($owner)." "
 	: ''), true);
 
 	$count		= count($count);

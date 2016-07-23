@@ -50,9 +50,9 @@ function admin_maint_transliterate(&$engine, &$module)
 				foreach ($pages as $page)
 				{
 					$engine->sql_query(
-						"UPDATE {$engine->config['table_prefix']}link ".
-						"SET to_supertag = '".quote($engine->dblink, $engine->translit($page['to_tag']))."' ".
-						"WHERE to_tag = '".quote($engine->dblink, $page['to_tag'])."'");
+						"UPDATE {$engine->config['table_prefix']}link SET ".
+							"to_supertag = ".$engine->db->q($engine->translit($page['to_tag']))." ".
+						"WHERE to_tag = ".$engine->db->q($page['to_tag'])." ");
 				}
 
 				$engine->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'].'&amp;start=1&amp;step='.$_REQUEST['step'].'&amp;i='.(++$i))));
@@ -85,7 +85,7 @@ function admin_maint_transliterate(&$engine, &$module)
 				{
 					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}page SET ".
-							"supertag = '".quote($engine->dblink, $engine->translit($page['tag']))."' ".
+							"supertag = ".$engine->db->q($engine->translit($page['tag']))." ".
 						"WHERE page_id = '".$page['page_id'])."'";
 				}
 
@@ -118,8 +118,8 @@ function admin_maint_transliterate(&$engine, &$module)
 				foreach ($pages as $page)
 				{
 					$engine->sql_query(
-						"UPDATE {$engine->config['table_prefix']}revision ".
-						"SET supertag = '".quote($engine->dblink, $engine->translit($page['tag']))."' ".
+						"UPDATE {$engine->config['table_prefix']}revision SET ".
+							"supertag = ".$engine->db->q($engine->translit($page['tag']))." ".
 						"WHERE revision_id = '".$page['revision_id'])."'";
 				}
 

@@ -102,7 +102,7 @@ function admin_system_log(&$engine, &$module)
 	}
 	else if (isset($_GET['ip']))
 	{
-		$where = "WHERE l.ip = '".quote($engine->dblink, $_GET['ip'])."' ";
+		$where = "WHERE l.ip = ".$engine->db->q($_GET['ip'])." ";
 	}
 
 	// entries to display

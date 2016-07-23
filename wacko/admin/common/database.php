@@ -375,8 +375,8 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 			$pages = $engine->load_all(
 				"SELECT page_id ".
 				"FROM ".$engine->config['table_prefix']."page ".
-				"WHERE supertag LIKE  '".quote($engine->dblink, $_root)."/%' ".
-					"OR supertag = '".quote($engine->dblink, $_root)."'");
+				"WHERE supertag LIKE " . $engine->db->q($_root . '/%') . " ".
+					"OR supertag = " . $engine->db->q($_root) . " ");
 
 			foreach ($pages as $page)
 			{
@@ -399,9 +399,9 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		}
 		else
 		{
-			$where = "WHERE tag LIKE '".quote($engine->dblink, $root)."/%' ".
-						"OR tag = '".quote($engine->dblink, $root)."' ".
-						"OR comment_on_id IN (".$cluster_pages[$root].") ";
+			$where = "WHERE tag LIKE " . $engine->db->q($root . '/%') . " ".
+						"OR tag = " . $engine->db->q($root) . " ".
+						"OR comment_on_id IN (" . $cluster_pages[$root] . ") ";
 		}
 	}
 
@@ -634,7 +634,7 @@ function put_data(&$engine, $pack, $table, $mode)
 				}
 				else
 				{
-					$row[$j++] = "'".quote($engine->dblink, $cell)."'"; //( $cell == 'null' ? $cell :  "'".quote($engine->dblink, $cell)."'" );
+					$row[$j++] = $engine->db->q($cell); //( $cell == 'null' ? $cell :  $engine->db->q($cell) );
 				}
 			}
 

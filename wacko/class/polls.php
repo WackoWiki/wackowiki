@@ -158,16 +158,13 @@ class Polls
 	// add a new poll into the database
 	function submit_poll($poll_id, $topic, $plural, $answers, $user_id, $start = 0)
 	{
-		$topic		= quote($this->engine->dblink, $topic);
-		$user_id	= (int)$user_id;
-
 		if ($plural != 1) $plural = 0;
 
 		// submitting title
 		$this->engine->sql_query(
 			"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 				"poll_id	= '".(int)$poll_id."', ".
-				"text		= '".quote($this->engine->dblink, rtrim($topic, '.'))."', ".
+				"text		= ".$engine->db->q(rtrim($topic, '.')).", ".
 				"user_id	= '".(int)$user_id."', ".
 				"plural		= '".$plural."', ".
 				"start		= ".($start == 1 ? "UTC_TIMESTAMP()" : "NULL"));
@@ -176,12 +173,12 @@ class Polls
 		foreach ($answers as $v_id => $v_text)
 		{
 			$v_id	+= 1;
-			$v_text	= quote($this->engine->dblink, $v_text);
+
 			$this->engine->sql_query(
 				"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 					"poll_id	= '".(int)$poll_id."', ".
 					"v_id		= '".(int)$v_id."', ".
-					"text		= '".quote($this->engine->dblink, rtrim($v_text, '.'))."'");
+					"text		= ".$engine->db->q(rtrim($v_text, '.'))." ");
 		}
 
 		return true;

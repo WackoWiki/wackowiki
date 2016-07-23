@@ -55,7 +55,7 @@ function admin_content_pages(&$engine, &$module)
 				break;
 		}
 
-		$where = "WHERE l.page_lang $mod '".quote($engine->dblink, $_level)."'  ";
+		$where = "WHERE l.page_lang $mod ".$engine->db->q($_level)." ";
 	}
 
 	// set time ordering
@@ -113,7 +113,7 @@ function admin_content_pages(&$engine, &$module)
 	}
 	else if (isset($_GET['ip']))
 	{
-		$where = "WHERE l.ip = '".quote($engine->dblink, $_GET['ip'])."' ";
+		$where = "WHERE l.ip = ".$engine->db->q($_GET['ip'])." ";
 	}
 
 	// entries to display
