@@ -24,7 +24,7 @@ if ($user_id = $this->get_user_id())
 		$this->_t('OrderABC')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1', '', 'list')."\">".
 		$this->_t('OrderChange')."</a>] <br /><br />\n";
 
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
@@ -33,7 +33,7 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
 
-		if ($pages = $this->load_all(
+		if ($pages = $this->db->load_all(
 			"SELECT tag, title, created ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
@@ -77,7 +77,7 @@ if ($user_id = $this->get_user_id())
 	}
 	else if ((isset($_GET['bychange']) && $_GET['bychange'] == 1) || $bychange == 1)
 	{
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT( DISTINCT p.tag ) AS n ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}revision AS r ".
@@ -95,7 +95,7 @@ if ($user_id = $this->get_user_id())
 			'</a>] [<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
 			$this->_t('OrderDate')."</a>]<br /><br />\n";
 
-		if ($pages = $this->load_all(
+		if ($pages = $this->db->load_all(
 			"SELECT p.tag, p.title, p.modified ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}revision AS r ".
@@ -143,7 +143,7 @@ if ($user_id = $this->get_user_id())
 	}
 	else
 	{
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
@@ -157,7 +157,7 @@ if ($user_id = $this->get_user_id())
 		$this->_t('OrderDate')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1', '', 'list')."\">".
 		$this->_t('OrderChange')."</a>] <br /><br />\n";
 
-		if ($pages = $this->load_all(
+		if ($pages = $this->db->load_all(
 			"SELECT tag, title, modified ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".

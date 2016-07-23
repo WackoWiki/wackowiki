@@ -49,7 +49,7 @@ if (!isset($letters)
 	$this->sess->pi_title = $title;
 	$this->sess->pi_time = time() + 600;
 
-	$pages = $this->load_all(
+	$pages = $this->db->load_all(
 		"SELECT tag, title ".
 		"FROM {$this->config['table_prefix']}page ".
 		"WHERE comment_on_id = '0' ".
@@ -83,7 +83,7 @@ if (!isset($letters)
 	}
 }
 
-$count = $this->load_single(
+$count = $this->db->load_single(
 	"SELECT COUNT(page_id) AS n ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
@@ -107,7 +107,7 @@ $pagination = $this->pagination($count['n'], $limit, 'p', ($letter !== ''? 'lett
 
 // collect data for index
 $pages_to_display = [];
-if (($pages = $this->load_all(
+if (($pages = $this->db->load_all(
 	"SELECT page_id, tag, title, page_lang ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".

@@ -84,7 +84,7 @@ if ($can_view)
 		return;
 	}
 
-	$count = $this->load_all(
+	$count = $this->db->load_all(
 		"SELECT f.upload_id ".
 		"FROM ".$this->config['table_prefix']."upload f ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -100,7 +100,7 @@ if ($can_view)
 	$pagination = $this->pagination($count, $limit, 'f');
 
 	// load files list
-	$files = $this->load_all(
+	$files = $this->db->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name, f.hits ".
 		"FROM ".$this->config['table_prefix']."upload f ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".

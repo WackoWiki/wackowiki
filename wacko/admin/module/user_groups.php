@@ -59,7 +59,7 @@ function admin_user_groups(&$engine, &$module)
 		if (isset($_GET['group_id']) || isset($_POST['add_member'])|| isset($_POST['remove_member']))
 		{
 			$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
-			$usergroup = $engine->load_single(
+			$usergroup = $engine->db->load_single(
 				"SELECT group_name ".
 				"FROM {$engine->config['table_prefix']}usergroup ".
 				"WHERE group_id = '".(int)$group_id."' ".
@@ -68,7 +68,7 @@ function admin_user_groups(&$engine, &$module)
 			// add member into group
 			if (isset($_POST['add_member']) && isset($_POST['new_member_id']))
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"INSERT INTO {$engine->config['table_prefix']}usergroup_member SET ".
 						"group_id	= '".(int)$_POST['group_id']."', ".
 						"user_id	= '".(int)$_POST['new_member_id']."'");
@@ -82,7 +82,7 @@ function admin_user_groups(&$engine, &$module)
 			// remove member from group
 			else if (isset($_POST['remove_member']) && isset($_POST['member_id']) && isset($_POST['group_id']))
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
 					"WHERE group_id = '".(int)$_POST['group_id']."' ".
 						"AND user_id = '".(int)$_POST['member_id']."'");
@@ -105,7 +105,7 @@ function admin_user_groups(&$engine, &$module)
 						"INNER JOIN {$engine->config['table_prefix']}user u ON (m.user_id = u.user_id) ".
 					"WHERE g.group_id = '".(int)$group_id."' ";
 
-				$available_users = $engine->load_all(
+				$available_users = $engine->db->load_all(
 					"SELECT user_id, user_name ".
 					"FROM ".$engine->config['user_table']." ".
 					"WHERE user_id NOT IN ( ".$subqery_members." ) ".
@@ -153,7 +153,7 @@ function admin_user_groups(&$engine, &$module)
 			// remove member from group
 			if (isset($_POST['remove_member']) && isset($_POST['change_member']))
 			{
-				if ($member = $engine->load_single(
+				if ($member = $engine->db->load_single(
 					"SELECT user_name ".
 					"FROM {$engine->config['table_prefix']}user ".
 					"WHERE user_id = '".(int)$_POST['change_member']."' ".
@@ -184,7 +184,7 @@ function admin_user_groups(&$engine, &$module)
 		if (isset($_POST['create']) && isset($_POST['new_group_name']))
 		{
 			// do we have identical names?
-			if ($engine->load_single(
+			if ($engine->db->load_single(
 			"SELECT group_id FROM {$engine->config['table_prefix']}usergroup ".
 			"WHERE group_name = ".$engine->db->q($_POST['new_group_name'])." ".
 			"LIMIT 1"))
@@ -195,7 +195,7 @@ function admin_user_groups(&$engine, &$module)
 			}
 			else
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"INSERT INTO {$engine->config['table_prefix']}usergroup SET ".
 						"created		= UTC_TIMESTAMP(), ".
 						"description	= ".$engine->db->q($_POST['description']).", ".
@@ -214,7 +214,7 @@ function admin_user_groups(&$engine, &$module)
 		else if (isset($_POST['edit']) && isset($_POST['group_id']) && (isset($_POST['new_group_name']) || isset($_POST['moderator_id'])))
 		{
 			// do we have identical names?
-			if ($engine->load_single(
+			if ($engine->db->load_single(
 			"SELECT group_id FROM {$engine->config['table_prefix']}usergroup ".
 			"WHERE group_name = ".$engine->db->q($_POST['new_group_name'])." AND group_id <> '".(int)$_POST['group_id']."' ".
 			"LIMIT 1"))
@@ -225,7 +225,7 @@ function admin_user_groups(&$engine, &$module)
 			}
 			else
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"UPDATE {$engine->config['table_prefix']}usergroup SET ".
 						"group_name		= ".$engine->db->q($_POST['new_group_name']).", ".
 						"description	= ".$engine->db->q($_POST['new_description']).", ".
@@ -242,16 +242,16 @@ function admin_user_groups(&$engine, &$module)
 		// delete group
 		else if (isset($_POST['delete']) && isset($_POST['group_id']))
 		{
-			$usergroup = $engine->load_single(
+			$usergroup = $engine->db->load_single(
 				"SELECT group_name
 				FROM {$engine->config['table_prefix']}usergroup
 				WHERE group_id = '".(int)$_POST['group_id']."'
 				LIMIT 1");
 
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}usergroup ".
 				"WHERE group_id = '".(int)$_POST['group_id']."'");
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
 				"WHERE group_id = '".(int)$_POST['group_id']."'");
 
@@ -340,7 +340,7 @@ function admin_user_groups(&$engine, &$module)
 		// edit group
 		else if (isset($_POST['edit']) && isset($_POST['change']))
 		{
-			if ($usergroup = $engine->load_single(
+			if ($usergroup = $engine->db->load_single(
 				"SELECT group_name, description, moderator_id, open, active
 				FROM {$engine->config['table_prefix']}usergroup
 				WHERE group_id = '".(int)$_POST['change']."'
@@ -405,7 +405,7 @@ function admin_user_groups(&$engine, &$module)
 		// delete group
 		if (isset($_POST['delete']) && isset($_POST['change']))
 		{
-			if ($usergroup = $engine->load_single(
+			if ($usergroup = $engine->db->load_single(
 				"SELECT group_name
 				FROM {$engine->config['table_prefix']}usergroup
 				WHERE group_id = '".(int)$_POST['change']."'
@@ -442,7 +442,7 @@ function admin_user_groups(&$engine, &$module)
 	if (isset($_GET['group_id']) || isset($_POST['group_id']))
 	{
 		$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
-		$usergroup = $engine->load_single(
+		$usergroup = $engine->db->load_single(
 			"SELECT group_id, moderator_id, group_name ".
 			"FROM {$engine->config['table_prefix']}usergroup ".
 			"WHERE group_id = '".(int)$group_id."' ".
@@ -450,7 +450,7 @@ function admin_user_groups(&$engine, &$module)
 
 		echo "<h2>".$engine->_t('GroupsMembersFor').": ".$usergroup['group_name']."</h2>";
 
-		$members = $engine->load_all(
+		$members = $engine->db->load_all(
 			"SELECT m.user_id, user_name ".
 			"FROM {$engine->config['table_prefix']}usergroup g ".
 				"INNER JOIN {$engine->config['table_prefix']}usergroup_member m ON (g.group_id = m.group_id) ".
@@ -551,7 +551,7 @@ function admin_user_groups(&$engine, &$module)
 		$limit = 100;
 
 		// collecting data
-		$count = $engine->load_single(
+		$count = $engine->db->load_single(
 			"SELECT COUNT(group_name) AS n ".
 			"FROM {$engine->config['table_prefix']}usergroup ".
 			( $where ? $where : '' )
@@ -560,7 +560,7 @@ function admin_user_groups(&$engine, &$module)
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=groups'.(!empty($order_pagination) ? '&order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
-		$groups = $engine->load_all(
+		$groups = $engine->db->load_all(
 			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name, COUNT(m.user_id) AS members ".
 			"FROM {$engine->config['table_prefix']}usergroup g ".
 				"LEFT JOIN {$engine->config['table_prefix']}user u ON (g.moderator_id = u.user_id) ".

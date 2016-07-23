@@ -27,7 +27,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	// find number
-	if ($latest_comment = $this->load_single(
+	if ($latest_comment = $this->db->load_single(
 		"SELECT tag, page_id
 		FROM ".$this->config['table_prefix']."page
 		WHERE comment_on_id <> '0'

@@ -62,7 +62,7 @@ if ($this->has_access('read'))
 	else
 	{
 		// load files for this page
-		$files = $this->load_single(
+		$files = $this->db->load_single(
 			"SELECT COUNT(upload_id) AS count ".
 			"FROM ".$this->config['table_prefix']."upload ".
 			"WHERE page_id = '". $this->page['page_id'] ."' ".

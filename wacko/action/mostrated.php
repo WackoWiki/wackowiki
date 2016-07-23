@@ -17,7 +17,7 @@ $min = 3;
 // max positive rating
 if (isset($top))
 {
-	$pages = $this->load_all(
+	$pages = $this->db->load_all(
 		"SELECT p.tag AS pagetag, p.title AS title, MAX(r.value) AS rate, ".
 			"r.voters AS votes, (r.value / r.voters) AS ratio ".
 		"FROM {$this->config['table_prefix']}page AS p, {$this->config['table_prefix']}rating AS r ".
@@ -53,7 +53,7 @@ if (isset($top, $bottom)) echo '<br />';
 // max negative rating
 if (isset($bottom))
 {
-	$pages = $this->load_all(
+	$pages = $this->db->load_all(
 		"SELECT p.tag AS pagetag, p.title AS title, MAX(r.value) AS rate, ".
 			"r.voters AS votes, (r.value / r.voters) AS ratio ".
 		"FROM {$this->config['table_prefix']}page AS p, {$this->config['table_prefix']}rating AS r ".

@@ -13,7 +13,7 @@ echo "</h3>\n";
 // local functions
 function moderate_page_exists(&$engine, $tag)
 {
-	if ($page = $engine->load_single(
+	if ($page = $engine->db->load_single(
 		"SELECT page_id ".
 		"FROM {$engine->config['table_prefix']}page ".
 		"WHERE tag = ".$engine->db->q($tag)." ".
@@ -103,7 +103,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 			$topic_id = $engine->get_page_id($topic);
 
 			// move comments to the base topic
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"UPDATE {$engine->config['table_prefix']}page SET ".
 					"comment_on_id = '".(int)$base_id."' ".
 				"WHERE comment_on_id = '".(int)$topic_id."'");
@@ -112,7 +112,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 			if ($move_topics === true)
 			{
 				// find latest number
-				$status	= $engine->load_all("SHOW TABLE STATUS");
+				$status	= $engine->db->load_all("SHOW TABLE STATUS");
 
 				foreach ($status as $row)
 				{
@@ -128,7 +128,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 				$engine->save_page('Comment'.$num, false, $page['body'], '', '', '', $base_id, '', '', true);
 
 				// restore creation date
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"UPDATE {$engine->config['table_prefix']}page SET ".
 						"modified		= ".$engine->db->q($page['modified']).", ".
 						"created		= ".$engine->db->q($page['created']).", ".
@@ -154,7 +154,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$upload_acl		= '';
 
 	// update link table
-	$comments = $engine->load_all(
+	$comments = $engine->db->load_all(
 		"SELECT page_id, tag, body_r ".
 		"FROM {$engine->config['table_prefix']}page ".
 		"WHERE comment_on_id = '".(int)$base_id."'");
@@ -174,7 +174,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	}
 
 	// recount comments for the base topic
-	$engine->sql_query(
+	$engine->db->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".$engine->count_comments($base_id)."', ".
 			"commented	= UTC_TIMESTAMP() ".
@@ -234,7 +234,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$upload_acl		= '';
 
 	// restore original metadata
-	$engine->sql_query(
+	$engine->db->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"modified		= ".$engine->db->q($page['modified']).", ".
 			"created		= ".$engine->db->q($page['created']).", ".
@@ -246,7 +246,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	// move remaining comments to the new topic
 	foreach ($comment_ids as $comment_id)
 	{
-		$engine->sql_query(
+		$engine->db->sql_query(
 			"UPDATE {$engine->config['table_prefix']}page SET ".
 				"comment_on_id = '".$new_page_id."' ".
 			"WHERE page_id = '".(int)$comment_id."'");
@@ -270,14 +270,14 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->current_context--;
 
 	// recount comments for old and new topics
-	$engine->sql_query(
+	$engine->db->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".$engine->count_comments($new_page_id)."', ".
 			"commented	= UTC_TIMESTAMP() ".
 		"WHERE page_id = '".$new_page_id."' ".
 		"LIMIT 1");
 
-	$engine->sql_query(
+	$engine->db->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments = '".$engine->count_comments($old_page_id)."' ".
 		"WHERE page_id = '".(int)$old_page_id."' ".
@@ -582,7 +582,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"LIMIT 1";
 
 		// count topics and make pagination
-		$count		= $this->load_single($sql);
+		$count		= $this->db->load_single($sql);
 		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids='.implode('-', $set), 'moderate');
 
 		// make collector query
@@ -600,7 +600,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// FORMS
 
 		// load topics data
-		$topics	= $this->load_all($sql);
+		$topics	= $this->db->load_all($sql);
 
 		// display list
 		echo $this->form_open('moderate_subforum', ['page_method' => 'moderate']);
@@ -633,7 +633,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$accept_text[] = '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
 			}
 
-			$sections = $this->load_all(
+			$sections = $this->db->load_all(
 				"SELECT p.tag, p.title ".
 				"FROM {$this->config['table_prefix']}page AS p, ".
 					"{$this->config['table_prefix']}acl AS a ".
@@ -948,7 +948,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 
 					// recount comments for current topic
-					$this->sql_query(
+					$this->db->sql_query(
 						"UPDATE {$this->config['table_prefix']}page SET ".
 							"comments	= '".$this->count_comments($this->page['page_id'])."', ".
 							"commented	= UTC_TIMESTAMP() ".
@@ -1020,7 +1020,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						sort($_set);
 
 						$first_comment	= $this->load_page('', $_set[0]);
-						$_comments		= $this->load_all(
+						$_comments		= $this->db->load_all(
 							"SELECT page_id ".
 							"FROM {$this->config['table_prefix']}page ".
 							"WHERE comment_on_id = '".$first_comment['comment_on_id']."' ".
@@ -1081,13 +1081,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$upload_acl		= '';
 
 						// move
-						$this->sql_query(
+						$this->db->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
 								"comment_on_id = '".$page_id."' ".
 							"WHERE page_id IN ( $ids_str )");
 
 						// update link table
-						$comments = $this->load_all(
+						$comments = $this->db->load_all(
 							"SELECT page_id, tag, body_r ".
 							"FROM {$this->config['table_prefix']}page ".
 							"WHERE page_id IN ( $ids_str )");
@@ -1107,13 +1107,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						}
 
 						// recount comments for the old and new page
-						$this->sql_query(
+						$this->db->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
 								"comments = '".$this->count_comments($this->page['page_id'])."' ".
 							"WHERE page_id = '".$this->page['page_id']."' ".
 							"LIMIT 1");
 
-						$this->sql_query(
+						$this->db->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
 								"comments	= '".$this->count_comments($page_id)."', ".
 								"commented	= UTC_TIMESTAMP() ".
@@ -1144,7 +1144,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"LIMIT 1";
 
 		// count posts and make pagination
-		$count		= $this->load_single($sql);
+		$count		= $this->db->load_single($sql);
 		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids='.implode('-', $set), 'moderate');
 
 		// make collector query
@@ -1158,7 +1158,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"LIMIT {$pagination['offset']}, $limit";
 
 		// load comments data
-		$comments = $this->load_all($sql);
+		$comments = $this->db->load_all($sql);
 
 		$body = $this->format($this->page['body'], 'cleanwacko');
 		$body = (strlen($body) > 300 ? substr($body, 0, 300).'[..]' : $body.' [..]');
@@ -1191,7 +1191,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			if ($forum_cluster === true)
 			{
-				$sections = $this->load_all(
+				$sections = $this->db->load_all(
 					"SELECT p.tag, p.title ".
 					"FROM {$this->config['table_prefix']}page AS p, ".
 						"{$this->config['table_prefix']}acl AS a ".

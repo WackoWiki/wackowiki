@@ -126,7 +126,7 @@ function admin_content_pages(&$engine, &$module)
 	if (!isset($order)) $order = '';
 
 	// collecting data
-	$count = $engine->load_single(
+	$count = $engine->db->load_single(
 		"SELECT COUNT(page_id) AS n ".
 		"FROM {$engine->config['table_prefix']}page l ".
 		( $where ? $where : "WHERE comment_on_id = '0' " ));
@@ -136,7 +136,7 @@ function admin_content_pages(&$engine, &$module)
 	$level_mod_pagination	= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&amp;level='.htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&amp;level_mod='.htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
-	$pages = $engine->load_all(
+	$pages = $engine->db->load_all(
 		"SELECT p.*, length(body) as page_size, u.* ".
 		"FROM {$engine->config['table_prefix']}page p ".
 			"LEFT JOIN {$engine->config['table_prefix']}user u ON (p.user_id = u.user_id) ".

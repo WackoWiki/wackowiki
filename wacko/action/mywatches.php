@@ -24,7 +24,7 @@ if ($user_id = $this->get_user_id())
 
 	if (isset($_GET['unwatched']) && $_GET['unwatched'] == 1)
 	{
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}watch AS w ".
@@ -41,7 +41,7 @@ if ($user_id = $this->get_user_id())
 			$this->_t('ViewWatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
-		if ($pages = $this->load_all(
+		if ($pages = $this->db->load_all(
 			"SELECT p.tag AS pagetag, p.page_id AS page_id ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}watch AS w ".
@@ -95,7 +95,7 @@ if ($user_id = $this->get_user_id())
 	}
 	else
 	{
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT( DISTINCT page_id ) as n ".
 			"FROM {$prefix}watch ".
 			"WHERE user_id = '".(int)$user_id."'", true);
@@ -108,7 +108,7 @@ if ($user_id = $this->get_user_id())
 
 		$cnt = 0;
 
-		if ($pages = $this->load_all(
+		if ($pages = $this->db->load_all(
 			"SELECT w.page_id, p.tag AS tag ".
 			"FROM {$prefix}watch AS w ".
 			"LEFT JOIN {$prefix}page AS p ".

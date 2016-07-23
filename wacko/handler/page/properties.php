@@ -25,7 +25,7 @@ if ($_POST)
 	}
 
 	// update page metadata
-	$this->sql_query(
+	$this->db->sql_query(
 		"UPDATE ".$this->config['table_prefix']."page SET ".
 			(isset($_POST['extended'])
 			?	"footer_comments	= '".(int)$_POST['footer_comments']."', ".
@@ -60,14 +60,14 @@ if ($_POST)
 }
 
 // load settings
-$revs = $this->load_single(
+$revs = $this->db->load_single(
 	"SELECT COUNT(revision_id) AS total ".
 	"FROM {$this->config['table_prefix']}revision ".
 	"WHERE page_id = '".$this->page['page_id']."' ".
 	"GROUP BY tag ".
 	"LIMIT 1");
 
-$rating = $this->load_single(
+$rating = $this->db->load_single(
 	"SELECT page_id, value, voters ".
 	"FROM {$this->config['table_prefix']}rating ".
 	"WHERE page_id = {$this->page['page_id']} ".

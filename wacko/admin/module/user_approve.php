@@ -107,7 +107,7 @@ function admin_user_approve(&$engine, &$module)
 	// get user
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
-		$user = $engine->load_single(
+		$user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -119,7 +119,7 @@ function admin_user_approve(&$engine, &$module)
 	// approve user
 	if (isset($_GET['approve']) && $user_id )
 	{
-		$user = $engine->load_single(
+		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -166,7 +166,7 @@ function admin_user_approve(&$engine, &$module)
 			{
 				if ((int)$user_id)
 				{
-					$user = $engine->load_single(
+					$user = $engine->db->load_single(
 						"SELECT u.user_name ".
 						"FROM {$engine->config['table_prefix']}user u ".
 						"WHERE u.user_id = '".$user_id."' ".
@@ -243,7 +243,7 @@ function admin_user_approve(&$engine, &$module)
 		$status = $engine->_t('AccountStatusArray');
 
 		// collecting data
-		$count = $engine->load_single(
+		$count = $engine->db->load_single(
 			"SELECT COUNT(user_name) AS n ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -255,7 +255,7 @@ function admin_user_approve(&$engine, &$module)
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
-		$users = $engine->load_all(
+		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -267,7 +267,7 @@ function admin_user_approve(&$engine, &$module)
 			"LIMIT {$pagination['offset']}, $limit");
 
 		// count records by status
-		$account_stati =  $engine->load_all(
+		$account_stati =  $engine->db->load_all(
 				"SELECT account_status, count(account_status) AS n
 				FROM ".$engine->config['table_prefix']."user
 				WHERE account_type = '0'

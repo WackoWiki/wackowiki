@@ -43,7 +43,7 @@ $mail_body = '';
 
 		#$engine->config->_set($config);
 
-		$members = $engine->load_all(
+		$members = $engine->db->load_all(
 			"SELECT DISTINCT
 				gm.user_id,
 				u.user_name,
@@ -86,7 +86,7 @@ $mail_body = '';
 		#$engine->redirect(rawurldecode($engine->href()));
 	}
 
-	$available_groups = $engine->load_all(
+	$available_groups = $engine->db->load_all(
 			"SELECT group_id, group_name ".
 			"FROM {$engine->config['table_prefix']}usergroup ".
 			"WHERE active = '1' ".

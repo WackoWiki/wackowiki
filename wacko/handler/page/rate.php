@@ -49,14 +49,14 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 		if (handler_rate_page_is_rated($this, $page_id) === false)
 		{
 			// try to load current rating entry
-			if ($rating = $this->load_single(
+			if ($rating = $this->db->load_single(
 				"SELECT page_id, value, voters ".
 				"FROM {$this->config['table_prefix']}rating ".
 				"WHERE page_id = $page_id ".
 				"LIMIT 1"))
 			{
 				// update entry
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE {$this->config['table_prefix']}rating SET ".
 						"value		= {$rating['value']} + ".$this->db->q($value).", ".
 						"voters		= {$rating['voters']} + 1 ".
@@ -65,7 +65,7 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 			else
 			{
 				// create entry
-				$this->sql_query(
+				$this->db->sql_query(
 					"INSERT INTO {$this->config['table_prefix']}rating SET ".
 					"page_id		= $page_id, ".
 					"value			= ".$this->db->q($value).", ".

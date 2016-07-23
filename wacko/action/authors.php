@@ -56,7 +56,7 @@ else
 	if ($this->page)
 	{
 		// load overall authors data from revision and page table
-		if ($_authors = $this->load_all(
+		if ($_authors = $this->db->load_all(
 		"(SELECT u.user_name AS name, YEAR(r.modified) AS year ".
 		"FROM {$this->config['table_prefix']}revision r ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (r.user_id = u.user_id) ".

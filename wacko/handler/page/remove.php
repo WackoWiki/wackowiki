@@ -137,7 +137,7 @@ if ($this->is_admin()
 			$this->remove_revisions		($this->tag, true);
 
 			// get list of pages in the cluster
-			if ($list = $this->load_all(
+			if ($list = $this->db->load_all(
 			"SELECT page_id ".
 			"FROM {$this->config['table_prefix']}page ".
 			"WHERE tag LIKE " . $this->db->q($this->tag . '/%') . " "))
@@ -159,7 +159,7 @@ if ($this->is_admin()
 		// update user statistics
 		if ($owner_id = $this->page['owner_id'])
 		{
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				($comment_on_id
 					? "SET total_comments	= total_comments	- 1 "

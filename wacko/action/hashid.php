@@ -15,7 +15,7 @@ if (isset($this->page['version_id']))
 }
 else
 {
-	$_old_version = $this->load_single(
+	$_old_version = $this->db->load_single(
 		"SELECT version_id ".
 		"FROM {$this->config['table_prefix']}revision ".
 		"WHERE page_id = '".$this->page['page_id']."' ".

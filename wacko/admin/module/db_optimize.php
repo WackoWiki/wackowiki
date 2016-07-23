@@ -66,7 +66,7 @@ function admin_db_optimize(&$engine, &$module)
 			$sql = implode(",\n\t", $elements);
 			$sql = "OPTIMIZE TABLE $sql";
 
-			$engine->sql_query($sql);
+			$engine->db->sql_query($sql);
 
 			$engine->log(1, 'Optimize database');
 
@@ -104,7 +104,7 @@ function admin_db_optimize(&$engine, &$module)
 					<th style="text-align:left;">Fragmentation</th>
 				</tr>
 <?php
-		$results = $engine->load_all("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
+		$results = $engine->db->load_all("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
 
 		foreach ($results as $table)
 		{

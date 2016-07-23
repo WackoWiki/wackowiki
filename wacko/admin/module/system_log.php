@@ -34,7 +34,7 @@ function admin_system_log(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'purge_log')
 	{
 		$sql = "TRUNCATE {$engine->config['table_prefix']}log";
-		$engine->sql_query($sql);
+		$engine->db->sql_query($sql);
 
 		// queries
 		$engine->config->invalidate_sql_cache();
@@ -114,7 +114,7 @@ function admin_system_log(&$engine, &$module)
 	if (!isset($order)) $order = '';
 
 	// collecting data
-	$count = $engine->load_single(
+	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n ".
 		"FROM {$engine->config['table_prefix']}log l ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
@@ -124,7 +124,7 @@ function admin_system_log(&$engine, &$module)
 	$level_mod_pagination	= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&amp;level='.htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&amp;level_mod='.htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
-	$log = $engine->load_all(
+	$log = $engine->db->load_all(
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ".
 		"FROM {$engine->config['table_prefix']}log l ".
 			"LEFT JOIN {$engine->config['table_prefix']}user u ON (l.user_id = u.user_id) ".

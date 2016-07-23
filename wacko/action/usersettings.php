@@ -20,13 +20,13 @@ if (isset($_GET['confirm']))
 {
 	$hash = hash('sha256', $_GET['confirm'] . hash('sha256', $this->config['system_seed']));
 
-	if ($temp = $this->load_single(
+	if ($temp = $this->db->load_single(
 			"SELECT user_name, email, email_confirm ".
 			"FROM ".$this->config['user_table']." ".
 			"WHERE email_confirm = ".$this->db->q($hash)." ".
 			"LIMIT 1"))
 	{
-		$this->sql_query(
+		$this->db->sql_query(
 			"UPDATE ".$this->config['user_table']." SET ".
 				"email_confirm = '' ".
 			"WHERE email_confirm = ".$this->db->q($hash)." ");
@@ -89,7 +89,7 @@ else if (($user = $this->get_user()))
 			if ($email_changed || isset($_POST['real_name']))
 			{
 				// update users table
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
 						"real_name		= ".$this->db->q(trim($_POST['real_name'])).", ".
 						"email			= ".$this->db->q($email)." ".
@@ -147,7 +147,7 @@ else if (($user = $this->get_user()))
 	if ($sql)
 	{
 		// update user_setting table
-		$this->sql_query(
+		$this->db->sql_query(
 			"UPDATE ".$this->config['table_prefix']."user_setting SET ".
 				$sql.
 			"WHERE user_id = '".(int)$user['user_id']."' ".
@@ -169,7 +169,7 @@ else if (($user = $this->get_user()))
 			$confirm		= Ut::random_token(21);
 			$confirm_hash	= hash('sha256', $confirm . hash('sha256', $this->config['system_seed']));
 
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->config['user_table']} SET ".
 					"email_confirm = ".$this->db->q($confirm_hash)." ".
 				"WHERE user_id = '".(int)$user['user_id']."' ".
@@ -460,7 +460,7 @@ else if (($user = $this->get_user()))
 		// user is logged in, display config form
 		echo $this->form_open('user_settings_general');
 
-		$code = $this->load_single(
+		$code = $this->db->load_single(
 			"SELECT email_confirm ".
 			"FROM {$this->config['user_table']} ".
 			"WHERE user_id = '".(int)$user['user_id']."' ".

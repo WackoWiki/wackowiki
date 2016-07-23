@@ -93,7 +93,7 @@ $sql = "SELECT
 			c.category
 		ORDER BY {$order}";
 
-$tags = $this->load_all($sql, true);
+$tags = $this->db->load_all($sql, true);
 
 if ($tags)
 {

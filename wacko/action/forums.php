@@ -67,7 +67,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$sql .= "ORDER BY p.created ASC";
 
 	// load subforums data
-	$forums	= $this->load_all($sql, true);
+	$forums	= $this->db->load_all($sql, true);
 
 	// display list
 	echo '<table class="forum">'.
@@ -84,21 +84,21 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		if ($this->has_access('read', $forum['page_id']))
 		{
 			// count total topics
-			$topics = $this->load_single(
+			$topics = $this->db->load_single(
 				"SELECT count(a.page_id) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
 				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " ".
 					"AND a.deleted <> '1' ", true);
 
 			// count total posts
-			$posts = $this->load_single(
+			$posts = $this->db->load_single(
 				"SELECT sum(a.comments) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
 				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " ".
 					"AND a.deleted <> '1' ", true);
 
 			// load latest comment
-			$comments = $this->load_all(
+			$comments = $this->db->load_all(
 				"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name ".
 				"FROM {$this->config['table_prefix']}page a ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".

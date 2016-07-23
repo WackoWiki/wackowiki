@@ -266,7 +266,7 @@ function get_table(&$engine, $table, $drop = true)
 	//
 	// Ok lets grab the fields...
 	//
-	$result = $engine->load_all($field_query);
+	$result = $engine->db->load_all($field_query);
 
 	foreach ($result as $row)
 	{
@@ -304,7 +304,7 @@ function get_table(&$engine, $table, $drop = true)
 	//
 	// Get any Indexed fields from the database...
 	//
-	$result = $engine->load_all($key_query);
+	$result = $engine->db->load_all($key_query);
 
 	foreach ($result as $row)
 	{
@@ -372,7 +372,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		if (!isset($cluster_pages[$root]))
 		{
 			$_root = $engine->translit($root);
-			$pages = $engine->load_all(
+			$pages = $engine->db->load_all(
 				"SELECT page_id ".
 				"FROM ".$engine->config['table_prefix']."page ".
 				"WHERE supertag LIKE " . $engine->db->q($_root . '/%') . " ".
@@ -430,7 +430,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	$r = 0;
 	$t = 0;
 
-	while (true == $data = $engine->load_all(
+	while (true == $data = $engine->db->load_all(
 	"SELECT * FROM $table ".
 	( $where ? $where : "" ).
 	$order.
@@ -572,7 +572,7 @@ function put_table(&$engine, $pack)
 
 	foreach ($sql as $instruction)
 	{
-		$engine->sql_query($instruction);
+		$engine->db->sql_query($instruction);
 		$t++;
 	}
 
@@ -639,10 +639,10 @@ function put_data(&$engine, $pack, $table, $mode)
 			}
 
 			// setting the SQL Mode, disable possible Strict SQL Mode
-			$engine->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
+			$engine->db->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
 
 			// run and count sql query
-			$engine->sql_query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
+			$engine->db->sql_query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
 			$t++;	// rows processed
 		}
 

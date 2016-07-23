@@ -254,7 +254,7 @@ if (($profile = @$_REQUEST['profile']))
 			$pagination = $this->pagination($user['total_pages'], $limit, 'd',
 					$profile .  '&amp;sort=' . ($sort_name? 'name' : 'date') . '#pages');
 
-			$pages = $this->load_all(
+			$pages = $this->db->load_all(
 				"SELECT page_id, tag, title, created, page_lang ".
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE owner_id = '".$user['user_id']."' ".
@@ -309,7 +309,7 @@ if (($profile = @$_REQUEST['profile']))
 				$pagination = $this->pagination($user['total_comments'], $limit, 'c', $profile . '#comments');
 				$this->print_pagination($pagination);
 
-				$comments = $this->load_all(
+				$comments = $this->db->load_all(
 					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang ".
 					"FROM {$this->config['table_prefix']}page c ".
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
@@ -367,7 +367,7 @@ if (($profile = @$_REQUEST['profile']))
 					$pagination = $this->pagination($user['total_uploads'], $limit, 'u', $profile . '#comments');
 					$this->print_pagination($pagination);
 
-					$uploads = $this->load_all(
+					$uploads = $this->db->load_all(
 							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page ".
 							"FROM {$this->config['table_prefix']}upload u ".
 								"LEFT JOIN {$this->config['table_prefix']}page c ON (u.page_id = c.page_id) ".
@@ -511,7 +511,7 @@ else
 			"AND u.enabled = '1' ".
 			$sql_where;
 
-	$count = $this->load_single(
+	$count = $this->db->load_single(
 		"SELECT COUNT(u.user_name) AS n ".
 		"FROM {$this->config['user_table']} u ".
 		$sql_where);
@@ -519,7 +519,7 @@ else
 	$pagination = $this->pagination($count['n'], $limit, 'p', $params($_sort, $_order));
 
 	// collect data
-	$users = $this->load_all(
+	$users = $this->db->load_all(
 		"SELECT u.user_name, u.account_lang, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession ".
 		"FROM {$this->config['user_table']} u ".
 			"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".

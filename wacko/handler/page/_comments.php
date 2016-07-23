@@ -17,7 +17,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 		return $engine->cached_stats[$user_id];
 	}
 
-	$stats = $engine->load_single(
+	$stats = $engine->db->load_single(
 		"SELECT user_name, ".
 			"total_pages AS pages, ".
 			"total_revisions AS revisions, ".
@@ -79,7 +79,7 @@ if ($this->has_access('read'))
 		// clear new comments for watched page
 		if ($user && $comments && !$noid_protect)
 		{
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET comment_id = '0' ".
 				"WHERE page_id = '".$this->page['page_id']."' ".

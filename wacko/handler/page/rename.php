@@ -169,7 +169,7 @@ function recursive_move(&$engine, $root, $new_root)
 	// FIXME: missing $owner_id -> rename_globalacl || owner
 	$owner_id	= '';
 	$_root		= $engine->translit($root);
-	$pages		= $engine->load_all(
+	$pages		= $engine->db->load_all(
 		"SELECT page_id, tag, supertag ".
 		"FROM ".$engine->config['table_prefix']."page ".
 		"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " ".

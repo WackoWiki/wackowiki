@@ -22,7 +22,7 @@ if ($user_id = $this->get_user_id())
 		" [<a href=\"".$this->href('', '', 'mode=mychanges&amp;bydate=1')."#list\">".
 		$this->_t('OrderChange')."</a>].</strong><br /><br />\n";
 
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 				"SELECT COUNT(tag) AS n ".
 				"FROM {$prefix}page ".
 				"WHERE user_id = '".(int)$user_id."' ".
@@ -31,7 +31,7 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;byname=1#list');
 
-		if ($pages = $this->load_all(
+		if ($pages = $this->db->load_all(
 				"SELECT tag, title, modified ".
 				"FROM {$prefix}page ".
 				"WHERE user_id = '".(int)$user_id."' ".
@@ -83,7 +83,7 @@ if ($user_id = $this->get_user_id())
 				'<li>'." [<a href=\"".$this->href('', '', 'mode=mychanges&amp;byname=1', '', 'list')."\">".$this->_t('OrderABC')."</a>]"."</li>\n".
 				"</ul>\n";
 
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 				"SELECT COUNT(tag) AS n ".
 				"FROM {$prefix}page ".
 				"WHERE user_id = '".(int)$user_id."' ".
@@ -92,7 +92,7 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
 
-		if ($pages = $this->load_all(
+		if ($pages = $this->db->load_all(
 				"SELECT tag, title, modified, edit_note ".
 				"FROM {$prefix}page ".
 				"WHERE user_id = '".(int)$user_id."' ".

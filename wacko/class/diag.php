@@ -122,7 +122,7 @@ class Diag
 				{
 					$query = 'SHOW VARIABLES LIKE "%character_set%";';
 
-					if ($r = $engine->load_all($query, true))
+					if ($r = $engine->db->load_all($query, true))
 					{
 						echo "<p class=\"debug\">MySQL character set</p>\n<ul>\n";
 
@@ -136,7 +136,7 @@ class Diag
 
 					$query = 'SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode;';
 
-					if ($r = $engine->load_single($query, true))
+					if ($r = $engine->db->load_single($query, true))
 					{
 						echo "<p class=\"debug\">SQL mode set</p>\n<ul>\n";
 						echo "\t<li>".'GLOBAL'.": ".$r['@@GLOBAL.sql_mode']."</li>\n";

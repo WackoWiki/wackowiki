@@ -196,7 +196,7 @@ $check_ref = function ($ref)
 };
 
 // load data from db
-$referrers = $this->load_all($query);
+$referrers = $this->db->load_all($query);
 if (!$referrers)
 {
 	echo $this->_t('NoneReferrers') . "<br /><br />\n" ;

@@ -158,7 +158,7 @@ function bb2_summary(&$engine)
 		}
 
 		// Query the DB based on variables selected
-		$results = $engine->load_all(
+		$results = $engine->db->load_all(
 			"SELECT {$argument} as group_type, {$additional_fields} COUNT(log_id) AS n ".
 			"FROM {$engine->config['table_prefix']}bad_behavior GROUP BY {$argument} ".
 			"ORDER BY n DESC ".
@@ -235,7 +235,7 @@ function bb2_manage(&$engine)
 	if (isset($_GET['request_uri']) && $_GET['request_uri'])		$where .= "AND `request_uri_hash`	= " . $engine->db->q($_GET['request_uri']) . " ";
 
 	// collecting data
-	$count = $engine->load_single(
+	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n ".
 		"FROM {$engine->config['table_prefix']}bad_behavior l ".
 		"WHERE 1=1 " .( $where ? $where : '' ));
@@ -259,11 +259,11 @@ function bb2_manage(&$engine)
 
 	// Query the DB based on variables selected
 
-	$totalcount		= $engine->load_single(
+	$totalcount		= $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n ".
 		"FROM {$engine->config['table_prefix']}bad_behavior l ");
 
-	$results		= $engine->load_all(
+	$results		= $engine->db->load_all(
 		"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key ".
 		"FROM `" . $bb_table . "` ".
 		"WHERE 1=1 " . $where .
@@ -329,7 +329,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 			if (empty($result['host']))
 			{
 				$host = @gethostbyaddr($result['ip']);
-				$engine->sql_query(
+				$engine->db->sql_query(
 						"UPDATE {$engine->config['table_prefix']}bad_behavior SET ".
 							"host		= ".$engine->db->q($host)." ".
 						"WHERE log_id	= '".(int)$result['log_id']."' ".
@@ -862,7 +862,7 @@ function bb2_options(&$engine)
 if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 {
 	$sql = "TRUNCATE {$engine->config['table_prefix']}badbehavior";
-	$engine->sql_query($sql);
+	$engine->db->sql_query($sql);
 
 	// queries
 	$engine->config->invalidate_sql_cache();

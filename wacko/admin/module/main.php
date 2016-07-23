@@ -39,7 +39,7 @@ function admin_lock(&$engine, &$module)
 	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
 	{
 		Ut::purge_directory(CACHE_PAGE_DIR);
-		$engine->sql_query("TRUNCATE {$engine->config['table_prefix']}cache");
+		$engine->db->sql_query("TRUNCATE {$engine->config['table_prefix']}cache");
 
 		Ut::purge_directory(CACHE_SQL_DIR);
 
@@ -51,7 +51,7 @@ function admin_lock(&$engine, &$module)
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
 	{
 		#$sql = "TRUNCATE {$engine->config['table_prefix']}auth_token";
-		#$engine->sql_query($sql);
+		#$engine->db->sql_query($sql);
 		$engine->delete_cookie(AUTH_TOKEN);
 		// queries
 		#$engine->config->invalidate_sql_cache();

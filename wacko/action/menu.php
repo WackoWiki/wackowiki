@@ -114,7 +114,7 @@ if (isset($_POST['_user_menu']))
 		// save
 		foreach($data as $item)
 		{
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE ".$this->config['table_prefix']."menu SET ".
 					"menu_position	= '".$item['menu_position']."', ".
 					"menu_title		= ".$this->db->q(substr(trim($_POST['title_'.$item['menu_id']]), 0, 250))." ".
@@ -139,7 +139,7 @@ if (isset($_POST['_user_menu']))
 				if ($this->has_access('write', $_page_id)) // TODO: why we need write access here?
 				{
 					// check if menu item already exists
-					if ($this->load_single(
+					if ($this->db->load_single(
 						"SELECT menu_id ".
 						"FROM ".$this->config['table_prefix']."menu ".
 						"WHERE user_id = '".(int)$_user_id."' ".
@@ -154,7 +154,7 @@ if (isset($_POST['_user_menu']))
 					else
 					{
 						// writing new menu item
-						$_menu_position = $this->load_all(
+						$_menu_position = $this->db->load_all(
 							"SELECT menu_id ".
 							"FROM ".$this->config['table_prefix']."menu ".
 							"WHERE user_id = '".(int)$_user_id."' ".
@@ -165,7 +165,7 @@ if (isset($_POST['_user_menu']))
 
 						$_menu_item_count = count($_menu_position);
 
-						$this->sql_query(
+						$this->db->sql_query(
 							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 							"user_id			= '".(int)$_user_id."', ".
 							"page_id			= '".(int)$_page_id."', ".
@@ -213,7 +213,7 @@ if (isset($_POST['_user_menu']))
 
 			if ($deletion != '')
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"DELETE ".
 					"FROM ".$this->config['table_prefix']."menu ".
 					"WHERE menu_id IN (".$deletion.")");

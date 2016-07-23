@@ -178,7 +178,7 @@ if ($can_view)
 	}
 
 	// TODO: we want only image files -> AND f.picture_w <> '0'
-	$count = $this->load_all(
+	$count = $this->db->load_all(
 		"SELECT f.upload_id ".
 		"FROM ".$this->config['table_prefix']."upload f ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -192,7 +192,7 @@ if ($can_view)
 	$pagination = $this->pagination($count, $limit, $param_token);
 
 	// load files list
-	$files = $this->load_all(
+	$files = $this->db->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
 		"FROM ".$this->config['table_prefix']."upload f ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -409,7 +409,7 @@ if ($can_view)
 					}
 
 					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the upload table, remember we can have many derived versions from the original image
-					/* $this->sql_query(
+					/* $this->db->sql_query(
 						"INSERT INTO ".$this->config['table_prefix']."upload SET ".
 						"user_id			= '".(int)$file['user_id']."', ".
 						"page_id			= '".(int)$file_page['page_id']."', ".

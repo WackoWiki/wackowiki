@@ -14,7 +14,7 @@ if (!function_exists('load_orphaned_pages'))
 		$pref		= $engine->config['table_prefix'];
 
 		// count pages
-		if ($count_pages = $engine->load_all(
+		if ($count_pages = $engine->db->load_all(
 			"SELECT DISTINCT page_id ".
 			"FROM ".$pref."page p ".
 				"LEFT JOIN ".$pref."link l ON ".
@@ -37,7 +37,7 @@ if (!function_exists('load_orphaned_pages'))
 			$count		= count($count_pages);
 			$pagination = $engine->pagination($count, $limit);
 
-			$orphaned = $engine->load_all(
+			$orphaned = $engine->db->load_all(
 				"SELECT DISTINCT page_id, tag, title ".
 				"FROM ".$pref."page p ".
 					"LEFT JOIN ".$pref."link l ON ".

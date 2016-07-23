@@ -73,14 +73,14 @@ $supertag2 = $this->translit( $q );
 // 2. going to DB two times
 $limit = 10;
 
-$pages1 = $this->load_all(
+$pages1 = $this->db->load_all(
 	"SELECT page_id, tag, supertag ".
 	"FROM ".$this->config['table_prefix']."page ".
 	"WHERE supertag LIKE " . $this->db->q($supertag1 . '%') . " ".
 		"AND comment_on_id = '0' ".
 	"ORDER BY supertag ASC LIMIT $limit");
 
-$pages2 = $this->load_all(
+$pages2 = $this->db->load_all(
 	"SELECT page_id, tag, supertag ".
 	"FROM ".$this->config['table_prefix']."page ".
 	"WHERE  supertag LIKE " . $this->db->q($supertag2 . '%') . " ".

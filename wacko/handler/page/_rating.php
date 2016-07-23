@@ -52,7 +52,7 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 }
 else
 {
-	$results = $this->load_single(
+	$results = $this->db->load_single(
 				"SELECT page_id, value, voters ".
 				"FROM {$this->config['table_prefix']}rating ".
 				"WHERE page_id = {$this->page['page_id']} ".

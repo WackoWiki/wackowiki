@@ -30,15 +30,15 @@ function admin_content_deleted(&$engine, &$module)
 	if (isset($_GET['remove']))
 	{
 		$id = (int)$_GET['remove'];
-		$engine->sql_query(
+		$engine->db->sql_query(
 			"DELETE FROM {$engine->config['table_prefix']}revision ".
 			"WHERE page_id = '".$id."'");
 
-		$engine->sql_query(
+		$engine->db->sql_query(
 			"DELETE FROM {$engine->config['table_prefix']}page ".
 			"WHERE page_id = '".$id."'");
 
-		$engine->sql_query(
+		$engine->db->sql_query(
 			"DELETE FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = '".$id."'");
 

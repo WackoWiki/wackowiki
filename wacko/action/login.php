@@ -156,7 +156,7 @@ else // login
 						else if (strlen($existing_user['password']) == 64)
 						{
 							// load old salt
-							$password_salt = $this->load_single(
+							$password_salt = $this->db->load_single(
 												"SELECT salt ".
 													"FROM ".$this->db->user_table." ".
 													"WHERE user_name = ".$this->db->q($_user_name)." ".
@@ -176,7 +176,7 @@ else // login
 													);
 
 							// update database with the sha256 password for future logins
-							$this->sql_query(
+							$this->db->sql_query(
 								"UPDATE ".$this->db->table_prefix."user SET ".
 									"password	= ".$this->db->q($password_hash).", ".
 									"salt		= '' ".
