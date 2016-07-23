@@ -195,7 +195,7 @@ else
 		}
 		else
 		{
-			$where = "WHERE group_name LIKE '%".quote($this->dblink, $_GET['group'])."%' ";
+			$where = "WHERE group_name LIKE " . $this->db->q('%' . $_GET['group'] . '%') . " ";
 			$param = "group=".htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 		}
 	}

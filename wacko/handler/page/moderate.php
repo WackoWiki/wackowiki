@@ -44,6 +44,7 @@ function moderate_delete_page(&$engine, $tag)
 	$engine->remove_comments($tag);
 	$engine->remove_files($tag);
 	$engine->remove_page($engine->get_page_id($tag));
+
 	return true;
 }
 
@@ -577,7 +578,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				"AND a.privilege = 'create' AND a.list = '' ".
-				"AND p.tag LIKE '".quote($this->dblink, $this->tag)."/%' ".
+				"AND p.tag LIKE " . $this->db->q($this->tag . '/%') . " ".
 			"LIMIT 1";
 
 		// count topics and make pagination
@@ -592,7 +593,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				"AND a.privilege = 'create' AND a.list = '' ".
-				"AND p.tag LIKE '".quote($this->dblink, $this->tag)."/%' ".
+				"AND p.tag LIKE " . $this->db->q($this->tag . '/%') . " ".
 			"ORDER BY commented DESC ".
 			"LIMIT {$pagination['offset']}, $limit";
 
@@ -638,7 +639,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					"{$this->config['table_prefix']}acl AS a ".
 				"WHERE p.page_id = a.page_id ".
 					"AND a.privilege = 'comment' AND a.list = '' ".
-					"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
+					"AND p.tag LIKE " . $this->db->q($this->config['forum_cluster'] . '/%') . " ".
 				"ORDER BY modified ASC", true);
 
 			foreach ($sections as $section)
@@ -1022,9 +1023,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$_comments		= $this->load_all(
 							"SELECT page_id ".
 							"FROM {$this->config['table_prefix']}page ".
-							"WHERE comment_on_id = '".quote($this->dblink, $first_comment['comment_on_id'])."' ".
+							"WHERE comment_on_id = '".$first_comment['comment_on_id']."' ".
 								"AND comment_on_id <> '0' ".
-								"AND created >= '".quote($this->dblink, $first_comment['created'])."' ".
+								"AND created >= " . $this->db->q($first_comment['created']) . " ".
 							"ORDER BY created ASC");
 
 						// debug Bug #401
@@ -1197,7 +1198,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					"WHERE p.page_id = a.page_id ".
 						"AND a.privilege = 'comment' AND a.list = '' ".
 						"AND ".
-						"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
+						"p.tag LIKE " . $this->db->q($this->config['forum_cluster'] . '/%') . " ".
 					"ORDER BY modified ASC", true);
 
 				foreach ($sections as $section)

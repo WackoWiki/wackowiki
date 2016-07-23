@@ -39,14 +39,14 @@ if ($_POST)
 				"allow_rawhtml		= '".(int)$allow_rawhtml."', ".
 				"disable_safehtml	= '".(int)$disable_safehtml."', ".
 				"noindex			= '".(int)$_POST['noindex']."' "
-			:	"page_lang			= '".quote($this->dblink, $_POST['page_lang'])."', ".
-				"theme				= '".quote($this->dblink, (isset($_POST['theme']) ? $_POST['theme'] : ''))."', ".
+			:	"page_lang			= ".$this->db->q($_POST['page_lang']).", ".
+				"theme				= ".$this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')).", ".
 				// menu_tag: unused currently, for use in custom theme menus
-				// "menu_tag			= '".quote($this->dblink, htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
-				// "show_menu_tag		= '".quote($this->dblink, (int)$_POST['show_menu_tag'])."', ".
-				"title				= '".quote($this->dblink, htmlspecialchars(trim($_POST['title']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
-				"keywords			= '".quote($this->dblink, htmlspecialchars(trim($_POST['keywords']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."', ".
-				"description		= '".quote($this->dblink, htmlspecialchars(trim($_POST['description']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))."' "
+				// "menu_tag			= ".$this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).", ".
+				// "show_menu_tag		= ".$this->db->q((int)$_POST['show_menu_tag']).", ".
+				"title				= ".$this->db->q(htmlspecialchars(trim($_POST['title']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).", ".
+				"keywords			= ".$this->db->q(htmlspecialchars(trim($_POST['keywords']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).", ".
+				"description		= ".$this->db->q(htmlspecialchars(trim($_POST['description']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET))." "
 			).
 		"WHERE page_id = '".$this->page['page_id']."' ".
 		"LIMIT 1");

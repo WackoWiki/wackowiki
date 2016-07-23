@@ -20,6 +20,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 {
 	// count slashes in the tag
 	$i = $off = 0;
+
 	while (($off = strpos($this->tag, '/', $off)) !== false)
 	{
 		++$i;
@@ -82,6 +83,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	if ($pages)
 	{
 		$pages = explode(',', $pages);
+
 		foreach ($pages as &$page)
 		{
 			$page = trim($page, '/ ');
@@ -100,19 +102,19 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
 			"AND a.privilege = 'create' AND a.list = '' ".
-			"AND p.tag LIKE '{$this->tag}/%' ";
+			"AND p.tag LIKE {$this->db->q($this->tag . '/%')} ";
 
 	if ($pages)
 	{
 		foreach ($pages as $page)
 		{
-			$sql .= "AND tag NOT LIKE '".quote($this->dblink, $page)."/%' ";
+			$sql .= "AND tag NOT LIKE " . $this->db->q($page . '/%') . " ";
 		}
 	}
 
 	if ($category)
 	{
-		$sql .= "AND k.category_id IN ( ".quote($this->dblink, $category)." ) AND k.page_id = p.page_id ";
+		$sql .= "AND k.category_id IN ( " . $this->db->q($category) . " ) AND k.page_id = p.page_id ";
 	}
 
 	// count topics and make pagination
@@ -130,19 +132,19 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
 			"AND a.privilege = 'create' AND a.list = '' ".
-			"AND p.tag LIKE '{$this->tag}/%' ";
+			"AND p.tag LIKE {$this->db->q($this->tag . '/%')} ";
 
 	if ($pages)
 	{
 		foreach ($pages as $page)
 		{
-			$sql .= "AND p.tag NOT LIKE '".quote($this->dblink, $page)."/%' ";
+			$sql .= "AND p.tag NOT LIKE " . $this->db->q($page . '/%') . " ";
 		}
 	}
 
 	if ($category)
 	{
-			$sql .= "AND k.category_id IN ( ".quote($this->dblink, $category)." ) AND k.page_id = p.page_id ";
+			$sql .= "AND k.category_id IN ( " . $this->db->q($category) . " ) AND k.page_id = p.page_id ";
 	}
 
 	$sql .= "ORDER BY p.commented DESC ".

@@ -185,7 +185,7 @@ if ($can_view)
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
 			"AND f.picture_w <> '0' ".
 		($owner
-			? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+			? "AND u.user_name = ".$this->db->q($owner)." "
 			: ''), true);
 
 	$count		= count($count);
@@ -199,7 +199,7 @@ if ($can_view)
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
 			"AND f.picture_w <> '0' ".
 		($owner
-			? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+			? "AND u.user_name = ".$this->db->q($owner)." "
 			: '')." ".
 		"ORDER BY f.".$order_by." ".
 		"LIMIT {$pagination['offset']}, {$limit}");
@@ -413,13 +413,13 @@ if ($can_view)
 						"INSERT INTO ".$this->config['table_prefix']."upload SET ".
 						"user_id			= '".(int)$file['user_id']."', ".
 						"page_id			= '".(int)$file_page['page_id']."', ".
-						"file_name			= '".quote($this->dblink, $small_id.$file_name)."', ".
-						"file_description	= '".quote($this->dblink, $file['file_description'])."', ".
-						"uploaded_dt		= '".quote($this->dblink, date("Y-m-d H:i:s"))."', ".
+						"file_name			= ".$this->db->q($small_id.$file_name).", ".
+						"file_description	= ".$this->db->q($file['file_description']).", ".
+						"uploaded_dt		= ".$this->db->q(date("Y-m-d H:i:s")).", ".
 						"file_size			= '".(int)sizeof($newfilename)."', ".
 						"picture_w			= '".(int)$diw."', ".
 						"picture_h			= '".(int)$height."', ".
-						"file_ext			= '".quote($this->dblink, $file_page['file_ext'])."'"); */
+						"file_ext			= ".$this->db->q($file_page['file_ext'])." "); */
 
 					if($table)
 					{

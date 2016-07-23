@@ -318,7 +318,7 @@ if ($this->can_upload() === true)
 						&& ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($file['user_id'] == $this->get_user_id()))
 				{
-					$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
+					$description = substr($_POST['file_description'], 0, 250);
 					$description = rtrim( $description, '\\' );
 
 					// Make HTML in the description redundant
@@ -329,8 +329,8 @@ if ($this->can_upload() === true)
 					// 2. update file metadata
 					$this->sql_query(
 						"UPDATE ".$this->config['table_prefix']."upload SET ".
-							"upload_lang		= '".quote($this->dblink, $this->page['page_lang'])."', ".
-							"file_description	= '".quote($this->dblink, $description)."' ".
+							"upload_lang		= ".$this->db->q($this->page['page_lang']).", ".
+							"file_description	= ".$this->db->q($description)." ".
 						"WHERE upload_id = '". $file['upload_id']."' ".
 						"LIMIT 1");
 
@@ -502,7 +502,7 @@ if ($this->can_upload() === true)
 								$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
 								$uploaded_dt	= date(SQL_DATE_FORMAT); // TODO tz problems
 
-								$description	= substr(quote($this->dblink, $_POST['file_description']), 0, 250);
+								$description	= substr($_POST['file_description'], 0, 250);
 								$description	= rtrim( $description, '\\' );
 
 								// Make HTML in the description redundant
@@ -515,14 +515,14 @@ if ($this->can_upload() === true)
 									"INSERT INTO ".$this->config['table_prefix']."upload SET ".
 										"page_id			= '".($is_global ? "0" : $this->page['page_id'])."', ".
 										"user_id			= '".$user['user_id']."',".
-										"file_name			= '".quote($this->dblink, $small_name)."', ".
-										"upload_lang		= '".quote($this->dblink, $this->page['page_lang'])."', ".
-										"file_description	= '".quote($this->dblink, $description)."', ".
+										"file_name			= ".$this->db->q($small_name).", ".
+										"upload_lang		= ".$this->db->q($this->page['page_lang']).", ".
+										"file_description	= ".$this->db->q($description).", ".
 										"file_size			= '".(int)$file_size."',".
 										"picture_w			= '".(int)$size[0]."',".
 										"picture_h			= '".(int)$size[1]."',".
-										"file_ext			= '".quote($this->dblink, substr($ext, 0, 10))."',".
-										"uploaded_dt		= '".quote($this->dblink, $uploaded_dt)."' ");
+										"file_ext			= ".$this->db->q(substr($ext, 0, 10)).",".
+										"uploaded_dt		= ".$this->db->q($uploaded_dt)." ");
 
 								// update user uploads count
 								$this->sql_query(

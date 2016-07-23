@@ -23,13 +23,13 @@ if (isset($_GET['confirm']))
 	if ($temp = $this->load_single(
 			"SELECT user_name, email, email_confirm ".
 			"FROM ".$this->config['user_table']." ".
-			"WHERE email_confirm = '".quote($this->dblink, $hash)."' ".
+			"WHERE email_confirm = ".$this->db->q($hash)." ".
 			"LIMIT 1"))
 	{
 		$this->sql_query(
 			"UPDATE ".$this->config['user_table']." SET ".
 				"email_confirm = '' ".
-			"WHERE email_confirm = '".quote($this->dblink, $hash)."'");
+			"WHERE email_confirm = ".$this->db->q($hash)." ");
 
 		$this->show_message($this->_t('EmailConfirmed'));
 
@@ -91,8 +91,8 @@ else if (($user = $this->get_user()))
 				// update users table
 				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
-						"real_name			= '".quote($this->dblink, trim($_POST['real_name']))."', ".
-						"email				= '".quote($this->dblink, $email)."' ".
+						"real_name		= ".$this->db->q(trim($_POST['real_name'])).", ".
+						"email			= ".$this->db->q($email)." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 
@@ -131,8 +131,8 @@ else if (($user = $this->get_user()))
 	else if	($action == 'user_settings_general')
 	{
 		$sql =
-		"user_lang			= '".quote($this->dblink, $_POST['user_lang'])."', ".
-		"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
+		"user_lang			= ".$this->db->q($_POST['user_lang']).", ".
+		"theme				= ".$this->db->q($_POST['theme']).", ".
 		"timezone			= '".(float)$_POST['timezone']."', ".
 		"dst				= '".(int)$_POST['dst']."', ".
 		"sorting_comments	= '".(int)$_POST['sorting_comments']."', ".
@@ -171,7 +171,7 @@ else if (($user = $this->get_user()))
 
 			$this->sql_query(
 				"UPDATE {$this->config['user_table']} SET ".
-					"email_confirm = '".quote($this->dblink, $confirm_hash)."' ".
+					"email_confirm = ".$this->db->q($confirm_hash)." ".
 				"WHERE user_id = '".(int)$user['user_id']."' ".
 				"LIMIT 1");
 

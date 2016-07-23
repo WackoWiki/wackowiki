@@ -26,8 +26,8 @@ if ($this->has_access('read'))
 	$pages = $this->load_all(
 		"SELECT page_id, owner_id, tag, supertag, title, created, body ".
 		"FROM ".$this->config['table_prefix']."page ".
-		"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
-		" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
+		"WHERE (supertag = " . $this->db->q($this->supertag) . " ".
+		" OR supertag LIKE " . $this->db->q($this->supertag . '/%') . ")".
 		" AND comment_on_id = '0'");
 
 	foreach ($pages as $num => $page)

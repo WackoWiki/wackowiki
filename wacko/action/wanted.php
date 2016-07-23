@@ -23,7 +23,7 @@ if (!function_exists('load_wanted'))
 						"OR l.to_supertag = p.supertag) ".
 				"WHERE ".
 					($for
-						? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
+						? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
 						: "").
 					"p.tag is NULL GROUP BY wanted_tag "
 			, true));
@@ -42,7 +42,7 @@ if (!function_exists('load_wanted'))
 							"OR l.to_supertag = p.supertag) ".
 					"WHERE ".
 						($for
-							? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
+							? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
 							: "").
 						"p.tag is NULL GROUP BY wanted_tag ".
 					"ORDER BY wanted_tag ASC ".

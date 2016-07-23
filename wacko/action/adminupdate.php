@@ -148,7 +148,7 @@ if ($this->is_admin())
 
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page ".
-							"SET title = '".quote($this->dblink, $title)."' ".
+							"SET title = ".$this->db->q($title)." ".
 							"WHERE page_id = '".$page['page_id']."' ".
 							"LIMIT 1");
 

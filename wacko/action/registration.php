@@ -27,13 +27,13 @@ if (isset($_GET['confirm']))
 	if ($temp = $this->load_single(
 		"SELECT user_name, email, email_confirm ".
 		"FROM ".$this->config['user_table']." ".
-		"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."' ".
+		"WHERE email_confirm = ".$this->db->q(hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))." ".
 		"LIMIT 1"))
 	{
 		$this->sql_query(
 			"UPDATE ".$this->config['user_table']." SET ".
 				"email_confirm = '' ".
-			"WHERE email_confirm = '".quote($this->dblink, hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))."'");
+			"WHERE email_confirm = ".$this->db->q(hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))." ");
 
 		// cache handling
 		$this->http->invalidate_page($this->supertag);
@@ -181,20 +181,20 @@ else if (@$_POST['_action'] === 'register')
 					"INSERT INTO ".$this->config['user_table']." ".
 					"SET ".
 						"signup_time	= UTC_TIMESTAMP(), ".
-						"user_name		= '".quote($this->dblink, $user_name)."', ".
-						"account_lang	= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
-						"email			= '".quote($this->dblink, $email)."', ".
-						"email_confirm	= '".quote($this->dblink, $confirm_hash)."', ".
-						"password		= '".quote($this->dblink, $password_hashed)."', ".
+						"user_name		= ".$this->db->q($user_name).", ".
+						"account_lang	= ".$this->db->q(($user_lang ? $user_lang : $this->config['language'])).", ".
+						"email			= ".$this->db->q($email).", ".
+						"email_confirm	= ".$this->db->q($confirm_hash).", ".
+						"password		= ".$this->db->q($password_hashed).", ".
 						"account_status	= '".(int) $account_status."', ".
 						"enabled		= '".(int) $account_enabled."', ".
-						"user_ip		= '".quote($this->dblink, $user_ip)."'");
+						"user_ip		= ".$this->db->q($user_ip)." ");
 
 				// get new user_id
 				$_user_id = $this->load_single(
 					"SELECT user_id ".
 					"FROM ".$this->config['table_prefix']."user ".
-					"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
+					"WHERE user_name = ".$this->db->q($user_name)." ".
 					"LIMIT 1");
 
 				// INSERT user settings
@@ -203,13 +203,13 @@ else if (@$_POST['_action'] === 'register')
 					"SET ".
 						"user_id			= '".(int)$_user_id['user_id']."', ".
 						"typografica		= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
-						"user_lang			= '".quote($this->dblink, ($user_lang ? $user_lang : $this->config['language']))."', ".
-						"theme				= '".quote($this->dblink, $this->config['theme'])."', ".
+						"user_lang			= ".$this->db->q(($user_lang ? $user_lang : $this->config['language'])).", ".
+						"theme				= ".$this->db->q($this->config['theme']).", ".
 						"notify_minor_edit	= '".(int)$this->config['notify_minor_edit']."', ".
 						"notify_page		= '".(int)$this->config['notify_page']."', ".
 						"notify_comment		= '".(int)$this->config['notify_comment']."', ".
 						"sorting_comments	= '".(int)$this->config['sorting_comments']."', ".
-						"send_watchmail		= '".quote($this->dblink, 1)."'");
+						"send_watchmail		= '1'");
 
 				// INSERT user menu items
 

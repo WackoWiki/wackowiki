@@ -47,7 +47,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	if (!isset($pages))
 	{
-		$sql .= "AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ";
+		$sql .= "AND p.tag LIKE " . $this->db->q($this->config['forum_cluster'] . '/%') . " ";
 	}
 	else
 	{
@@ -58,10 +58,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				$_pages .= "','";
 			}
 
-			$_pages .= quote($this->dblink, $page);
+			$_pages .= $page;
 		}
 
-		$sql .= "AND p.tag IN ('".$_pages."') ";
+		$sql .= "AND p.tag IN (".$this->db->q($_pages).") ";
 	}
 
 	$sql .= "ORDER BY p.created ASC";
@@ -87,14 +87,14 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$topics = $this->load_single(
 				"SELECT count(a.page_id) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
-				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
+				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " ".
 					"AND a.deleted <> '1' ", true);
 
 			// count total posts
 			$posts = $this->load_single(
 				"SELECT sum(a.comments) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
-				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
+				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " ".
 					"AND a.deleted <> '1' ", true);
 
 			// load latest comment
@@ -103,8 +103,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				"FROM {$this->config['table_prefix']}page a ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
-				"WHERE b.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
-					"OR a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
+				"WHERE b.tag LIKE ".$this->db->q($forum['tag'] . '/%')." ".
+					"OR a.tag LIKE ".$this->db->q($forum['tag'] . '/%')." ".
 					"AND a.deleted <> '1' ".
 				"ORDER BY a.created DESC ", true);
 

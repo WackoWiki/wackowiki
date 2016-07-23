@@ -117,7 +117,7 @@ if (isset($_POST['_user_menu']))
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."menu SET ".
 					"menu_position	= '".$item['menu_position']."', ".
-					"menu_title		= '".quote($this->dblink, substr(trim($_POST['title_'.$item['menu_id']]), 0, 250))."' ".
+					"menu_title		= ".$this->db->q(substr(trim($_POST['title_'.$item['menu_id']]), 0, 250))." ".
 				"WHERE menu_id		= '".$item['menu_id']."' ".
 				"LIMIT 1");
 		}
@@ -169,7 +169,7 @@ if (isset($_POST['_user_menu']))
 							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 							"user_id			= '".(int)$_user_id."', ".
 							"page_id			= '".(int)$_page_id."', ".
-							"menu_lang			= '".quote($this->dblink, (($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang))."', ".
+							"menu_lang			= ".$this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)).", ".
 							"menu_position		= '".(int)($_menu_item_count + 1)."'");
 
 						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set

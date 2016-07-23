@@ -42,7 +42,7 @@ if ($pages = $this->load_all(
 	"SELECT page_id, tag, supertag, title ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
-		"AND tag LIKE '".quote($this->dblink, $_root)."/%' ".
+		"AND tag LIKE " . $this->db->q($_root . '/%') . " ".
 		"AND deleted <> '1' ".
 	"ORDER BY tag", true))
 {

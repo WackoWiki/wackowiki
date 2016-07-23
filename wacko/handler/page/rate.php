@@ -13,9 +13,15 @@ function handler_rate_page_is_rated(&$engine, $page_id)
 	$ids	= explode(';', $cookie);
 
 	if (in_array($page_id, $ids) === true || $page_id == $cookie)
+	{
 		return true;
-	else return false;
+	}
+	else
+	{
+		return false;
+	}
 }
+
 // set page rating cookie
 function handler_rate_set_rate_cookie(&$engine, $page_id)
 {
@@ -24,6 +30,7 @@ function handler_rate_set_rate_cookie(&$engine, $page_id)
 	$ids[]	= $page_id;
 	$cookie	= implode(';', $ids);
 	$engine->set_cookie('rating', $cookie, 365);
+
 	return true;
 }
 
@@ -51,8 +58,8 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 				// update entry
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}rating SET ".
-					"value	= {$rating['value']} + '".quote($this->dblink, $value)."', ".
-					"voters	= {$rating['voters']} + 1 ".
+						"value		= {$rating['value']} + ".$this->db->q($value).", ".
+						"voters		= {$rating['voters']} + 1 ".
 					"WHERE page_id = $page_id");
 			}
 			else
@@ -61,8 +68,8 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 				$this->sql_query(
 					"INSERT INTO {$this->config['table_prefix']}rating SET ".
 					"page_id		= $page_id, ".
-					"value	= '".quote($this->dblink, $value)."', ".
-					"voters	= 1");
+					"value			= ".$this->db->q($value).", ".
+					"voters			= 1");
 					// time is set automatically
 			}
 
