@@ -244,8 +244,8 @@ Ut::debug_print_r($users);
 						// store to DB
 						$engine->sql_query(
 							"UPDATE {$engine->config['table_prefix']}page SET ".
-								"body_r		= '".quote($engine->dblink, $page['body_r'])."', ".
-								"body_toc	= '".quote($engine->dblink, $page['body_toc'])."' ".
+								"body_r		= " . $engine->db->q($page['body_r']) . ", ".
+								"body_toc	= " . $engine->db->q($page['body_toc']) . " ".
 							"WHERE page_id = '".$page['page_id']."' ".
 							"LIMIT 1");
 

@@ -186,7 +186,7 @@ function admin_user_groups(&$engine, &$module)
 			// do we have identical names?
 			if ($engine->load_single(
 			"SELECT group_id FROM {$engine->config['table_prefix']}usergroup ".
-			"WHERE group_name = '".quote($engine->dblink, $_POST['new_group_name'])."' ".
+			"WHERE group_name = ".$engine->db->q($_POST['new_group_name'])." ".
 			"LIMIT 1"))
 			{
 				$engine->show_message($engine->_t('GroupsAlreadyExists'));
@@ -198,9 +198,9 @@ function admin_user_groups(&$engine, &$module)
 				$engine->sql_query(
 					"INSERT INTO {$engine->config['table_prefix']}usergroup SET ".
 						"created		= UTC_TIMESTAMP(), ".
-						"description	= '".quote($engine->dblink, $_POST['description'])."', ".
-						"moderator_id		= '".(int)$_POST['moderator_id']."', ".
-						"group_name		= '".quote($engine->dblink, $_POST['new_group_name'])."', ".
+						"description	= ".$engine->db->q($_POST['description']).", ".
+						"moderator_id	= '".(int)$_POST['moderator_id']."', ".
+						"group_name		= ".$engine->db->q($_POST['new_group_name']).", ".
 						"open			= '".(int)$_POST['open']."', ".
 						"active			= '".(int)$_POST['active']."'");
 
@@ -216,7 +216,7 @@ function admin_user_groups(&$engine, &$module)
 			// do we have identical names?
 			if ($engine->load_single(
 			"SELECT group_id FROM {$engine->config['table_prefix']}usergroup ".
-			"WHERE group_name = '".quote($engine->dblink, $_POST['new_group_name'])."' AND group_id <> '".(int)$_POST['group_id']."' ".
+			"WHERE group_name = ".$engine->db->q($_POST['new_group_name'])." AND group_id <> '".(int)$_POST['group_id']."' ".
 			"LIMIT 1"))
 			{
 				$engine->set_message($engine->_t('GroupsAlreadyExists'));
@@ -227,8 +227,8 @@ function admin_user_groups(&$engine, &$module)
 			{
 				$engine->sql_query(
 					"UPDATE {$engine->config['table_prefix']}usergroup SET ".
-						"group_name		= '".quote($engine->dblink, $_POST['new_group_name'])."', ".
-						"description	= '".quote($engine->dblink, $_POST['new_description'])."', ".
+						"group_name		= ".$engine->db->q($_POST['new_group_name']).", ".
+						"description	= ".$engine->db->q($_POST['new_description']).", ".
 						"moderator_id	= '".(int)$_POST['moderator_id']."', ".
 						"open			= '".(int)$_POST['open']."', ".
 						"active			= '".(int)$_POST['active']."' ".

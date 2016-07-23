@@ -123,7 +123,7 @@ function admin_user_users(&$engine, &$module)
 		if ($engine->load_single(
 		"SELECT user_id ".
 		"FROM {$engine->config['table_prefix']}user ".
-		"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' ".
+		"WHERE user_name = ".$engine->db->q($_POST['newname'])." ".
 		"LIMIT 1"))
 		{
 			$engine->show_message($engine->_t('UsersAlreadyExists'));
@@ -141,16 +141,16 @@ function admin_user_users(&$engine, &$module)
 			$engine->sql_query(
 				"INSERT INTO {$engine->config['table_prefix']}user SET ".
 					"signup_time		= UTC_TIMESTAMP(), ".
-					"email			= '".quote($engine->dblink, $_POST['email'])."', ".
-					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
+					"email			= ".$engine->db->q($_POST['email']).", ".
+					"real_name		= ".$engine->db->q($_POST['newrealname']).", ".
 					"enabled		= '".(int)$_POST['enabled']."', ".
-					"user_name		= '".quote($engine->dblink, $_POST['newname'])."'");
+					"user_name		= ".$engine->db->q($_POST['newname'])." ");
 
 			// get new user_id
 			$_user_id = $engine->load_single(
 				"SELECT user_id ".
 				"FROM ".$engine->config['table_prefix']."user ".
-				"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' ".
+				"WHERE user_name = ".$engine->db->q($_POST['newname'])." ".
 				"LIMIT 1");
 
 			// INSERT user settings
@@ -158,8 +158,8 @@ function admin_user_users(&$engine, &$module)
 				"INSERT INTO ".$engine->config['table_prefix']."user_setting SET ".
 					"user_id			= '".(int)$_user_id['user_id']."', ".
 					"typografica		= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
-					"user_lang			= '".quote($engine->dblink, ($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language']))."', ".
-					"theme				= '".quote($engine->dblink, $engine->config['theme'])."', ".
+					"user_lang			= ".$engine->db->q(($_POST['user_lang'] ? $_POST['user_lang'] : $engine->config['language'])).", ".
+					"theme				= ".$engine->db->q($engine->config['theme']).", ".
 					"notify_minor_edit	= '".(int)$engine->config['notify_minor_edit']."', ".
 					"notify_page		= '".(int)$engine->config['notify_page']."', ".
 					"notify_comment		= '".(int)$engine->config['notify_comment']."', ".
@@ -195,8 +195,8 @@ function admin_user_users(&$engine, &$module)
 		if ($engine->load_single(
 		"SELECT user_id ".
 		"FROM {$engine->config['table_prefix']}user ".
-		"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' ".
-			"AND user_id <> '".quote($engine->dblink, $_POST['user_id'])."' ".
+		"WHERE user_name = ".$engine->db->q($_POST['newname'])." ".
+			"AND user_id <> ".$engine->db->q($_POST['user_id'])." ".
 		"LIMIT 1"))
 		{
 			$engine->set_message($engine->_t('UsersAlreadyExists'));
@@ -213,9 +213,9 @@ function admin_user_users(&$engine, &$module)
 		{
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}user SET ".
-					"user_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
-					"email			= '".quote($engine->dblink, $_POST['newemail'])."', ".
-					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
+					"user_name		= ".$engine->db->q($_POST['newname']).", ".
+					"email			= ".$engine->db->q($_POST['newemail']).", ".
+					"real_name		= ".$engine->db->q($_POST['newrealname']).", ".
 					"enabled		= '".(int)$_POST['enabled']."', ".
 					"account_status	= '".(int)$_POST['account_status']."' ".
 				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
@@ -223,8 +223,8 @@ function admin_user_users(&$engine, &$module)
 
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}user_setting SET ".
-					"user_lang		= '".quote($engine->dblink, $_POST['user_lang'])."', ".
-					"theme			= '".quote($engine->dblink, $_POST['theme'])."' ".
+					"user_lang		= ".$engine->db->q($_POST['user_lang']).", ".
+					"theme			= ".$engine->db->q($_POST['theme'])." ".
 				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
@@ -293,8 +293,8 @@ function admin_user_users(&$engine, &$module)
 
 					$engine->sql_query(
 						"DELETE FROM {$engine->config['table_prefix']}page ".
-						"WHERE tag = '".quote($engine->dblink, $user_space)."' ".
-							"OR tag LIKE '".quote($engine->dblink, $user_space)."/%' ".
+						"WHERE tag = " . $engine->db->q($user_space) . " ".
+							"OR tag LIKE " . $engine->db->q($user_space . '/%') . " ".
 							#"AND owner_id = '".(int)$_POST['user_id']."'".
 						"");
 
@@ -619,7 +619,7 @@ function admin_user_users(&$engine, &$module)
 		// defining WHERE and ORDER clauses
 		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
 		{
-			$where			= "WHERE user_name LIKE '%".quote($engine->dblink, $_GET['user'])."%' ";
+			$where			= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 		}
 		// set signuptime ordering
 		else if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
@@ -757,7 +757,7 @@ function admin_user_users(&$engine, &$module)
 		// filter by lang
 		if (isset($_GET['user_lang']))
 		{
-			$where			= "WHERE p.user_lang = '".quote($engine->dblink, $_GET['user_lang'])."' ";
+			$where			= "WHERE p.user_lang = ".$engine->db->q($_GET['user_lang'])." ";
 		}
 
 		// entries to display

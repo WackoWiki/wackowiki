@@ -16,7 +16,7 @@ function moderate_page_exists(&$engine, $tag)
 	if ($page = $engine->load_single(
 		"SELECT page_id ".
 		"FROM {$engine->config['table_prefix']}page ".
-		"WHERE tag = '".quote($engine->dblink, $tag)."' ".
+		"WHERE tag = ".$engine->db->q($tag)." ".
 		"LIMIT 1"))
 	{
 		return true;
@@ -130,13 +130,13 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 				// restore creation date
 				$engine->sql_query(
 					"UPDATE {$engine->config['table_prefix']}page SET ".
-						"modified		= '".quote($engine->dblink, $page['modified'])."', ".
-						"created		= '".quote($engine->dblink, $page['created'])."', ".
-						"commented		= '".quote($engine->dblink, $page['commented'])."', ".
+						"modified		= ".$engine->db->q($page['modified']).", ".
+						"created		= ".$engine->db->q($page['created']).", ".
+						"commented		= ".$engine->db->q($page['commented']).", ".
 						"owner_id		= '".$page['owner_id']."', ".
 						"user_id		= '".$page['user_id']."', ".
-						"ip				= '".quote($engine->dblink, $page['ip'])."' ".
-					"WHERE tag = '".quote($engine->dblink, 'Comment'.$num)."'");
+						"ip				= ".$engine->db->q($page['ip'])." ".
+					"WHERE tag = ".$engine->db->q('Comment'.$num)."");
 
 				// remove old page remnants
 				moderate_delete_page($engine, $topic);
@@ -236,11 +236,11 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	// restore original metadata
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
-			"modified		= '".quote($engine->dblink, $page['modified'])."', ".
-			"created		= '".quote($engine->dblink, $page['created'])."', ".
+			"modified		= ".$engine->db->q($page['modified']).", ".
+			"created		= ".$engine->db->q($page['created']).", ".
 			"owner_id		= '".$page['owner_id']."', ".
 			"user_id		= '".$page['user_id']."', ".
-			"ip				= '".quote($engine->dblink, $page['ip'])."' ".
+			"ip				= ".$engine->db->q($page['ip'])." ".
 		"WHERE page_id = '".$new_page_id."'");
 
 	// move remaining comments to the new topic

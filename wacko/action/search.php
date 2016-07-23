@@ -7,23 +7,23 @@ if (!defined('IN_WACKO'))
 
 if (!function_exists('full_text_search'))
 {
-	function full_text_search(&$wacko, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
+	function full_text_search(&$engine, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
 	{
 		$limit		= (int) $limit;
 		$pagination	= '';
 
-		$count_results = $wacko->load_all(
+		$count_results = $engine->load_all(
 			"SELECT a.page_id ".
-			"FROM ".$wacko->config['table_prefix']."page a ".
+			"FROM ".$engine->config['table_prefix']."page a ".
 			($for
-				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				? "LEFT JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
-			"WHERE (( MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) ".
-				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
-				"OR lower(a.tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
+			"WHERE (( MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) ".
+				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%').") ".
+				"OR lower(a.tag) LIKE lower(".$engine->db->q('%' . $phrase . '%').")) ".
 				($for
-					? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
-					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
+					? "AND (a.supertag LIKE ".$engine->db->q($engine->translit($for) . '/%')." ".
+					  "OR b.supertag LIKE ".$engine->db->q($engine->translit($for) . '/%')." )"
 					: "").
 				($filter
 					? "AND a.comment_on_id = '0' "
@@ -36,23 +36,25 @@ if (!function_exists('full_text_search'))
 				" )", true);
 
 		$count		= count($count_results);
-		$pagination = $wacko->pagination($count, $limit, 'p', 'phrase='.$phrase);
+		$pagination = $engine->pagination($count, $limit, 'p', 'phrase='.$phrase);
 
 		// load search results
-		$results = $wacko->load_all(
-			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score, u.user_name, o.user_name as owner_name ". //
-			"FROM ".$wacko->config['table_prefix']."page a ".
-				"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$wacko->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
+		$results = $engine->load_all(
+			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang,
+				MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) AS score,
+				u.user_name, o.user_name as owner_name ".
+			"FROM ".$engine->config['table_prefix']."page a ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
 			($for
-				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				? "LEFT JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
-			"WHERE (( MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) ".
-				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
-				"OR lower(a.tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
+			"WHERE (( MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) ".
+				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%').") ".
+				"OR lower(a.tag) LIKE lower(".$engine->db->q('%' . $phrase . '%').")) ".
 				($for
-					? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
-					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
+					? "AND (a.supertag LIKE ".$engine->db->q($engine->translit($for) . '/%')." ".
+					  "OR b.supertag LIKE ".$engine->db->q($engine->translit($for) . '/%')." )"
 					: "").
 				($filter
 					? "AND a.comment_on_id = '0' "
@@ -72,22 +74,22 @@ if (!function_exists('full_text_search'))
 
 if (!function_exists('tag_search'))
 {
-	function tag_search(&$wacko, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
+	function tag_search(&$engine, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
 	{
 		$limit		= (int) $limit;
 		$pagination	= '';
 
-		$count_results = $wacko->load_all(
+		$count_results = $engine->load_all(
 			"SELECT a.page_id ".
-			"FROM ".$wacko->config['table_prefix']."page a ".
+			"FROM ".$engine->config['table_prefix']."page a ".
 			($for
-				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				? "LEFT JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
-			"WHERE ( lower(a.tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
-				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
+			"WHERE ( lower(a.tag) LIKE binary lower(".$engine->db->q('%' . $phrase.'%') . ") ".
+				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%') . ")) ".
 			($for
-				? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
-					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
+				? "AND (a.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " ".
+				  "OR b.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " )"
 				: "").
 			($filter
 				? "AND a.comment_on_id = '0' "
@@ -100,22 +102,22 @@ if (!function_exists('tag_search'))
 			, true);
 
 		$count		= count($count_results);
-		$pagination = $wacko->pagination($count, $limit, 'p', 'phrase='.$phrase);
+		$pagination = $engine->pagination($count, $limit, 'p', 'phrase='.$phrase);
 
 		// load search results
-		$results = $wacko->load_all(
+		$results = $engine->load_all(
 			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, u.user_name, o.user_name as owner_name ".
-			"FROM ".$wacko->config['table_prefix']."page a ".
-				"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$wacko->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
+			"FROM ".$engine->config['table_prefix']."page a ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
 			($for
-				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				? "LEFT JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
-			"WHERE (lower(a.tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
-				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
+			"WHERE (lower(a.tag) LIKE binary lower(" . $engine->db->q('%' . $phrase . '%') . ") ".
+				"OR lower(a.title) LIKE lower(" . $engine->db->q('%' . $phrase . '%') . ")) ".
 			($for
-				? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
-					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
+				? "AND (a.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " ".
+					  "OR b.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " )"
 				: "").
 			($filter
 				? "AND a.comment_on_id = '0' "

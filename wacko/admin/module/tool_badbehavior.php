@@ -225,14 +225,14 @@ function bb2_manage(&$engine)
 	$limit = 100;
 
 	// Get query variables desired by the user with input validation
-	if (isset($_GET['status_key']) && $_GET['status_key'])			$where .= "AND `status_key`			= '" . quote($engine->dblink, $_GET['status_key']) . "' ";
+	if (isset($_GET['status_key']) && $_GET['status_key'])			$where .= "AND `status_key`			= " . $engine->db->q($_GET['status_key']) . " ";
 	if (isset($_GET['blocked']) && $_GET['blocked'])				$where .= "AND `status_key` 		!= '00000000' ";
 	else if (isset($_GET['permitted']) && $_GET['permitted'])		$where .= "AND `status_key`			= '00000000' ";
 
-	if (isset($_GET['ip']) && $_GET['ip'])							$where .= "AND `ip` 				= '" . quote($engine->dblink, $_GET['ip']) . "' ";
-	if (isset($_GET['user_agent']) && $_GET['user_agent'])			$where .= "AND `user_agent_hash`	= '" . quote($engine->dblink, $_GET['user_agent']) . "' ";
-	if (isset($_GET['request_method']) && $_GET['request_method'])	$where .= "AND `request_method`		= '" . quote($engine->dblink, $_GET['request_method']) . "' ";
-	if (isset($_GET['request_uri']) && $_GET['request_uri'])		$where .= "AND `request_uri_hash`	= '" . quote($engine->dblink, $_GET['request_uri']) . "' ";
+	if (isset($_GET['ip']) && $_GET['ip'])							$where .= "AND `ip` 				= " . $engine->db->q($_GET['ip']) . " ";
+	if (isset($_GET['user_agent']) && $_GET['user_agent'])			$where .= "AND `user_agent_hash`	= " . $engine->db->q($_GET['user_agent']) . " ";
+	if (isset($_GET['request_method']) && $_GET['request_method'])	$where .= "AND `request_method`		= " . $engine->db->q($_GET['request_method']) . " ";
+	if (isset($_GET['request_uri']) && $_GET['request_uri'])		$where .= "AND `request_uri_hash`	= " . $engine->db->q($_GET['request_uri']) . " ";
 
 	// collecting data
 	$count = $engine->load_single(
@@ -331,7 +331,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 				$host = @gethostbyaddr($result['ip']);
 				$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}bad_behavior SET ".
-						"host			= '".quote($engine->dblink, $host)."' ".
+							"host		= ".$engine->db->q($host)." ".
 						"WHERE log_id	= '".(int)$result['log_id']."' ".
 						"LIMIT 1");
 			}

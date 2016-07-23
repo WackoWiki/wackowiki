@@ -187,7 +187,7 @@ function admin_user_approve(&$engine, &$module)
 		// defining WHERE and ORDER clauses
 		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
 		{
-			$where			= "WHERE user_name LIKE '%".quote($engine->dblink, $_GET['user'])."%' ";
+			$where			= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 		}
 		// set signuptime ordering
 		else if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
@@ -234,7 +234,7 @@ function admin_user_approve(&$engine, &$module)
 		// filter by lang
 		if (isset($_GET['user_lang']))
 		{
-			$where			= "WHERE p.user_lang = '".quote($engine->dblink, $_GET['user_lang'])."' ";
+			$where			= "WHERE p.user_lang = ".$engine->db->q($_GET['user_lang'])." ";
 		}
 
 		// entries to display

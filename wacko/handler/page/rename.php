@@ -156,7 +156,7 @@ else
 	$this->show_message($this->_t('NotOwnerAndCantRename'), 'info');
 }
 
-function recursive_move(&$parent, $root, $new_root)
+function recursive_move(&$engine, $root, $new_root)
 {
 	$message	= '';
 	$new_root	= trim($new_root, '/');
@@ -168,12 +168,12 @@ function recursive_move(&$parent, $root, $new_root)
 
 	// FIXME: missing $owner_id -> rename_globalacl || owner
 	$owner_id	= '';
-	$_root		= $parent->translit($root);
-	$pages		= $parent->load_all(
+	$_root		= $engine->translit($root);
+	$pages		= $engine->load_all(
 		"SELECT page_id, tag, supertag ".
-		"FROM ".$parent->config['table_prefix']."page ".
-		"WHERE (supertag LIKE '".quote($parent->dblink, $_root)."/%' ".
-			" OR supertag = '".quote($parent->dblink, $_root)."') ".
+		"FROM ".$engine->config['table_prefix']."page ".
+		"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " ".
+			" OR supertag = " . $engine->db->q($_root) . ") ".
 		($owner_id
 			? " AND owner_id ='".(int)$owner_id."'"
 			: "").
@@ -191,7 +191,7 @@ function recursive_move(&$parent, $root, $new_root)
 		// FIXME: preg_quote is not universally suitable for escaping the replacement string. A single . will become \. and the preg_replace call will not undo the escaping.
 		$new_name = stripslashes($new_name);
 
-		$message .= move($parent, $page, $new_name);
+		$message .= move($engine, $page, $new_name);
 
 		$message .= "</li>\n";
 	}
@@ -201,33 +201,33 @@ function recursive_move(&$parent, $root, $new_root)
 	return $message;
 }
 
-function move(&$parent, $old_page, $new_name)
+function move(&$engine, $old_page, $new_name)
 {
 	$message	= '';
-	$user		= $parent->get_user();
-	$user_id	= $parent->get_user_id();
+	$user		= $engine->get_user();
+	$user_id	= $engine->get_user_id();
 
-	if (($parent->check_acl($user['user_name'], $parent->config['rename_globalacl'])
-	|| $parent->get_page_owner_id($old_page['page_id']) == $user_id))
+	if (($engine->check_acl($user['user_name'], $engine->config['rename_globalacl'])
+	|| $engine->get_page_owner_id($old_page['page_id']) == $user_id))
 	{
-		$super_new_name = $parent->translit($new_name);
+		$super_new_name = $engine->translit($new_name);
 
 		$message .= "<ul>\n";
 
-		if (!preg_match('/^([\_\.\-'.$parent->language['ALPHANUM_P'].']+)$/', $new_name))
+		if (!preg_match('/^([\_\.\-'.$engine->language['ALPHANUM_P'].']+)$/', $new_name))
 		{
-			$message .= '<li>'.$parent->_t('InvalidWikiName')."</li>\n";
+			$message .= '<li>'.$engine->_t('InvalidWikiName')."</li>\n";
 		}
 		// if ($old_page['supertag'] == $super_new_name)
 		else if ($old_page['tag'] == $new_name)
 		{
-			$message .= '<li>'.Ut::perc_replace($parent->_t('AlreadyNamed'), $parent->link($new_name))."</li>\n";
+			$message .= '<li>'.Ut::perc_replace($engine->_t('AlreadyNamed'), $engine->link($new_name))."</li>\n";
 		}
 		else
 		{
-			if ($old_page['supertag'] != $super_new_name && $page = $parent->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
+			if ($old_page['supertag'] != $super_new_name && $page = $engine->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$message .= '<li>'.Ut::perc_replace($parent->_t('AlreadyExists'), $parent->link($new_name))."</li>\n";
+				$message .= '<li>'.Ut::perc_replace($engine->_t('AlreadyExists'), $engine->link($new_name))."</li>\n";
 			}
 			else
 			{
@@ -236,39 +236,39 @@ function move(&$parent, $old_page, $new_name)
 
 				if (!$need_redirect)
 				{
-					if ($parent->remove_referrers($old_page['tag']))
+					if ($engine->remove_referrers($old_page['tag']))
 					{
-						$message .= '<li>'.$parent->_t('ReferrersRemoved')."</li>\n";
+						$message .= '<li>'.$engine->_t('ReferrersRemoved')."</li>\n";
 					}
 				}
 
-				if ($parent->rename_page($old_page['tag'], $new_name, $super_new_name))
+				if ($engine->rename_page($old_page['tag'], $new_name, $super_new_name))
 				{
-					$message .= '<li>'.$parent->_t('PageRenamed')."</li>\n";
+					$message .= '<li>'.$engine->_t('PageRenamed')."</li>\n";
 				}
 
-				$parent->clear_cache_wanted_page($new_name);
-				$parent->clear_cache_wanted_page($super_new_name);
+				$engine->clear_cache_wanted_page($new_name);
+				$engine->clear_cache_wanted_page($super_new_name);
 
 				if ($need_redirect)
 				{
-					$parent->cache_wanted_page($old_page['tag']);
-					$parent->cache_wanted_page($old_page['supertag']);
+					$engine->cache_wanted_page($old_page['tag']);
+					$engine->cache_wanted_page($old_page['supertag']);
 
-					if ($parent->save_page($old_page['tag'], '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
+					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/'.$new_name.'"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.Ut::perc_replace($parent->_t('RedirectCreated'), $parent->link($old_page['tag']))."</li>\n";
+						$message .= '<li>'.Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link($old_page['tag']))."</li>\n";
 					}
 
-					$parent->clear_cache_wanted_page($old_page['tag']);
-					$parent->clear_cache_wanted_page($old_page['supertag']);
+					$engine->clear_cache_wanted_page($old_page['tag']);
+					$engine->clear_cache_wanted_page($old_page['supertag']);
 				}
 
-				$message .= '<li>'.$parent->_t('NewNameOfPage').$parent->link('/'.$new_name)."</li>\n";
+				$message .= '<li>'.$engine->_t('NewNameOfPage').$engine->link('/'.$new_name)."</li>\n";
 
 				// log event
-				$parent->log(3, Ut::perc_replace($parent->_t('LogRenamedPage', $parent->config['language']), $old_page['tag'], $new_name).
-					($need_redirect? $parent->_t('LogRenamedPage2', $parent->config['language']) : '' ));
+				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', $engine->config['language']), $old_page['tag'], $new_name).
+					($need_redirect? $engine->_t('LogRenamedPage2', $engine->config['language']) : '' ));
 			}
 		}
 

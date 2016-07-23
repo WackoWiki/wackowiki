@@ -23,7 +23,7 @@ if (!function_exists('load_orphaned_pages'))
 					"OR l.to_supertag = p.supertag) ".
 			"WHERE ".
 				($for
-					? "p.tag LIKE '".quote($engine->dblink, $for)."/%' AND "
+					? "p.tag LIKE '" . $engine->db->q($for . '/%') . " AND "
 					: "").
 				"l.to_page_id IS NULL ".
 				($deleted != 1
@@ -46,7 +46,7 @@ if (!function_exists('load_orphaned_pages'))
 						"OR l.to_supertag = p.supertag) ".
 				"WHERE ".
 					($for
-						? "p.tag LIKE '".quote($engine->dblink, $for)."/%' AND "
+						? "p.tag LIKE " . $engine->db->q($for . '/%') . " AND "
 						: "").
 					"l.to_page_id IS NULL ".
 					($deleted != 1
@@ -105,7 +105,7 @@ if (list ($pages, $pagination) = load_orphaned_pages($this, $root, (int)$max))
 }
 else
 {
-	echo $this->_t('NoOrphaned');
+	echo $this->show_message($this->_t('NoOrphaned'));
 }
 
 ?>
