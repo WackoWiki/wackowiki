@@ -16,7 +16,7 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 		"SELECT COUNT(tag) AS n ".
 		"FROM {$this->config['table_prefix']}page ".
 		"WHERE comment_on_id = '".$this->page['comment_on_id']."' ".
-			"AND created <= '".quote($this->dblink, $this->page['created'])."' ".
+			"AND created <= ".$this->db->q($this->page['created'])." ".
 			"AND deleted <> '1' ".
 		"GROUP BY comment_on_id ".
 		"LIMIT 1", true);
@@ -158,8 +158,8 @@ if ($this->has_access('read'))
 			{
 				$this->sql_query(
 					"UPDATE ".$this->config['table_prefix']."page SET ".
-						"body_r		= '".quote($this->dblink, $this->page['body_r'])."', ".
-						"body_toc	= '".quote($this->dblink, $this->page['body_toc'])."' ".
+						"body_r		= ".$this->db->q($this->page['body_r']).", ".
+						"body_toc	= ".$this->db->q($this->page['body_toc'])." ".
 					"WHERE page_id = '".$this->page['page_id']."' ".
 					"LIMIT 1");
 			}

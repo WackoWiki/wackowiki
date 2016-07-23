@@ -460,7 +460,7 @@ else
 		}
 		else
 		{
-			$sql_where = "AND u.user_name LIKE '%" . quote($this->dblink, $_user0) . "%' ";
+			$sql_where = "AND u.user_name LIKE " . $this->db->q('%' . $_user0 . '%') . " ";
 		}
 	}
 

@@ -90,7 +90,7 @@ if ($can_view)
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
 			($owner
-				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+				? "AND u.user_name = ".$this->db->q($owner)." "
 				: '').
 			($deleted != 1
 				? "AND f.deleted <> '1' "
@@ -106,7 +106,7 @@ if ($can_view)
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
 			($owner
-				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+				? "AND u.user_name = ".$this->db->q($owner)." "
 				: '')." ".
 			($deleted != 1
 			? "AND f.deleted <> '1' "

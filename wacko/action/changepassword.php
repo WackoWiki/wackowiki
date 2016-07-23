@@ -19,7 +19,7 @@ if (($code = @$_REQUEST['secret_code']))
 	$user = $this->load_single(
 		"SELECT user_id, user_name ".
 		"FROM ".$this->config['user_table']." ".
-		"WHERE change_password = '".quote($this->dblink, hash('sha256', $code.hash('sha256', $this->config['system_seed'])))."' ".
+		"WHERE change_password = ".$this->db->q(hash('sha256', $code.hash('sha256', $this->config['system_seed'])))." ".
 		"LIMIT 1");
 
 	if ($user)
@@ -55,7 +55,7 @@ if (($code = @$_REQUEST['secret_code']))
 
 				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
-						"password			= '".quote($this->dblink, $password_hashed)."', ".
+						"password			= ".$this->db->q($password_hashed).", ".
 						"change_password	= '' ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
@@ -153,7 +153,7 @@ else if (($user = $this->get_user()))
 			// store new password
 			$this->sql_query(
 				"UPDATE ".$this->config['user_table']." SET ".
-					"password			= '".quote($this->dblink, $password_hashed)."' ".
+					"password = ".$this->db->q($password_hashed)." ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 
@@ -213,8 +213,8 @@ else
 						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
 						"FROM ".$this->config['user_table']." u ".
 							"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
-						"WHERE u.user_name = '".quote($this->dblink, $user_name)."' ".
-							"AND u.email = '".quote($this->dblink, $email)."' ".
+						"WHERE u.user_name = ".$this->db->q($user_name)." ".
+							"AND u.email = ".$this->db->q($email)." ".
 						"LIMIT 1");
 
 		if ($user)
@@ -235,7 +235,7 @@ else
 				$this->sql_query(
 					"UPDATE {$this->db->user_table} SET ".
 						"lost_password_request_count = lost_password_request_count + 1, ". // value unused
-						"change_password = '".quote($this->dblink, $code_hash)."' ".
+						"change_password = ".$this->db->q($code_hash)." ".
 					"WHERE user_id = '".(int)$user['user_id']."' ".
 					"LIMIT 1");
 

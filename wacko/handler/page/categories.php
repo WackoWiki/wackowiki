@@ -63,7 +63,7 @@ if ($this->is_owner() || $this->is_admin())
 			if ($this->load_single(
 				"SELECT category_id ".
 				"FROM {$this->config['table_prefix']}category ".
-				"WHERE category = '".quote($this->dblink, $_POST['newname'])."' ".
+				"WHERE category = " . $this->db->q($_POST['newname']) . " ".
 				"LIMIT 1"))
 			{
 				$this->set_message($this->_t('CategoriesAlreadyExists'));
@@ -80,8 +80,8 @@ if ($this->is_owner() || $this->is_admin())
 								: $word['category_id'] )."', "
 							: ''
 						).
-						"category_lang	= '".quote($this->dblink, $this->page['page_lang'])."', ".
-						"category		= '".quote($this->dblink, $_POST['newname'])."'");
+						"category_lang	= " . $this->db->q($this->page['page_lang']) . ", ".
+						"category		= " . $this->db->q($_POST['newname']) . " ");
 
 				$this->set_message($this->_t('CategoriesAdded'), 'success');
 				$this->log(4, "Created a new category //'{$_POST['newname']}'//");
@@ -95,8 +95,8 @@ if ($this->is_owner() || $this->is_admin())
 			if ($this->load_single(
 				"SELECT category_id ".
 				"FROM {$this->config['table_prefix']}category ".
-				"WHERE category = '".quote($this->dblink, $_POST['newname'])."' ".
-					"AND category_id <> '".quote($this->dblink, $_POST['id'])."' ".
+				"WHERE category = " . $this->db->q($_POST['newname']) . " ".
+					"AND category_id <> '".(int)$_POST['id']."' ".
 				"LIMIT 1"))
 			{
 				$this->set_message($this->_t('CategoriesAlreadyExists'));
@@ -107,7 +107,7 @@ if ($this->is_owner() || $this->is_admin())
 			{
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}category SET ".
-						"category = '".quote($this->dblink, $_POST['newname'])."' ".
+						"category = ".$this->db->q($_POST['newname'])." ".
 					"WHERE category_id = '".(int)$_POST['id']."' ".
 					"LIMIT 1");
 
@@ -250,7 +250,7 @@ if ($this->is_owner() || $this->is_admin())
 			if ($word = $this->load_single(
 				"SELECT category
 				FROM {$this->config['table_prefix']}category
-				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
+				WHERE category_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
 				echo $this->form_open('rename_category', ['page_method' => 'categories']);
@@ -273,14 +273,14 @@ if ($this->is_owner() || $this->is_admin())
 			if ($word = $this->load_single(
 				"SELECT category_id, parent_id, category, category_lang
 				FROM {$this->config['table_prefix']}category
-				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
+				WHERE category_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
 				$parents = $this->load_all(
 					"SELECT category_id, category ".
 					"FROM {$this->config['table_prefix']}category ".
 					"WHERE parent_id = 0 ".
-						"AND category_lang = '".quote($this->dblink, $word['category_lang'])."' ".
+						"AND category_lang = ".$this->db->q($word['category_lang'])." ".
 						"AND category_id <> '".$word['category_id']."' ".
 					"ORDER BY category ASC");
 
@@ -312,7 +312,7 @@ if ($this->is_owner() || $this->is_admin())
 			if ($word = $this->load_single(
 				"SELECT category
 				FROM {$this->config['table_prefix']}category
-				WHERE category_id = '".quote($this->dblink, $_POST['change'])."'
+				WHERE category_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
 				echo $this->form_open('remove_category', ['page_method' => 'categories']);

@@ -55,10 +55,10 @@ if (!isset($letters)
 		"WHERE comment_on_id = '0' ".
 			"AND deleted = '0' ".
 			($for
-				? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
+				? "AND supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
 				: "").
 			($lang
-				? "AND page_lang = '".quote($this->dblink, $lang)."' "
+				? "AND page_lang = " . $this->db->q($lang) . " "
 				: "").
 		"ORDER BY ".
 			($title
@@ -89,17 +89,17 @@ $count = $this->load_single(
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
 		($for
-			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
+			? "AND supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
 			: "").
 		($lang
-			? "AND page_lang = '".quote($this->dblink, $lang)."' "
+			? "AND page_lang = " . $this->db->q($lang) . " "
 			: "").
 		($letter !== ''
 			? "AND ".
 				($title
 					? "title "
 					: "tag ").
-				"LIKE '".$letter."%' "
+				"LIKE ".$this->db->q($letter.'%')." "
 			: "")
 	, true);
 
@@ -113,17 +113,17 @@ if (($pages = $this->load_all(
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
 		($for
-			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
+			? "AND supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
 			: "").
 		($lang
-			? "AND page_lang = '".quote($this->dblink, $lang)."' "
+			? "AND page_lang = " . $this->db->q($lang) . " "
 			: "").
 		($letter !== ''
 			? "AND ".
 				($title
 					? "title "
 					: "tag ").
-				"LIKE '".$letter."%' "
+				"LIKE ".$this->db->q($letter.'%')." "
 			: "").
 	"ORDER BY ".
 		($title
@@ -132,6 +132,7 @@ if (($pages = $this->load_all(
 	"LIMIT {$pagination['offset']}, ".(2 * $limit), true)))
 {
 	$cnt = 0;
+
 	foreach ($pages as $page)
 	{
 		if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
@@ -142,6 +143,7 @@ if (($pages = $this->load_all(
 				{
 					$letters[$ch] = 1;
 				}
+
 				$pages_to_display[$page['page_id']] = $page;
 				if (++$cnt >= $limit) break;
 			}
@@ -185,12 +187,12 @@ echo '<ul class="ul_list">'."\n";
 
 // display collected data
 $cur_char = '';
+
 foreach ($pages_to_display as $page)
 {
 	// do unicode entities
-	$page_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
-
-	$ch = $get_letter($title?  $page['title'] : $page['tag']);
+	$page_lang	= ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
+	$ch			= $get_letter($title?  $page['title'] : $page['tag']);
 
 	if ($ch !== $cur_char)
 	{

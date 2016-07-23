@@ -84,10 +84,10 @@ $sql = "SELECT
 				: '' ).
 		"WHERE c.category_lang = '{$lang}' ".
 			($root
-				? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
+				? "AND ( p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) "
 				: '' ).
 			($owner
-				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+				? "AND u.user_name = ".$this->db->q($owner)." "
 				: '' ).
 		"GROUP BY
 			c.category

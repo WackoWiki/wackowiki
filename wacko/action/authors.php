@@ -60,13 +60,13 @@ else
 		"(SELECT u.user_name AS name, YEAR(r.modified) AS year ".
 		"FROM {$this->config['table_prefix']}revision r ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
-		"WHERE r.supertag = '".quote($this->dblink, $this->supertag)."' ".( $cluster ? "OR r.supertag LIKE '".quote($this->dblink, $this->supertag)."/%' " : '' ).
+		"WHERE r.supertag = ".$this->db->q($this->supertag)." ".( $cluster ? "OR r.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '' ).
 		"GROUP BY u.user_name, year ) ".
 		"UNION ".
 		"( SELECT u.user_name AS name, YEAR(p.modified) AS year ".
 		"FROM {$this->config['table_prefix']}page p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-		"WHERE p.supertag = '".quote($this->dblink, $this->supertag)."' ".( $cluster ? "OR p.supertag LIKE '".quote($this->dblink, $this->supertag)."/%' " : '' ).
+		"WHERE p.supertag = ".$this->db->q($this->supertag)." ".( $cluster ? "OR p.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '' ).
 		"GROUP BY u.user_name, year ) ".
 		"ORDER BY name ASC, year ASC", true))
 		{

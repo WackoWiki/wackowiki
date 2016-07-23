@@ -20,7 +20,7 @@ $query = // "SELECT p.supertag ".
 		"FROM ". $this->config['table_prefix']."page p, ". $this->config['table_prefix']."acl a ".
 		"WHERE p.owner_id != (SELECT user_id FROM ". $this->config['table_prefix']."user WHERE user_name = 'System' LIMIT 1) ".
 			($tag
-				? "AND p.tag LIKE '".quote($this->dblink, $tag."/%")."' "
+				? "AND p.tag LIKE ".$this->db->q($tag.'/%')." "
 				: ""
 			).
 			"AND p.comment_on_id = '0' ".

@@ -140,7 +140,7 @@ if ($this->is_admin()
 			if ($list = $this->load_all(
 			"SELECT page_id ".
 			"FROM {$this->config['table_prefix']}page ".
-			"WHERE tag LIKE '".quote($this->dblink, $this->tag.'/%')."'"))
+			"WHERE tag LIKE " . $this->db->q($this->tag . '/%') . " "))
 			{
 				// remove by one page at a time
 				foreach ($list as $row)

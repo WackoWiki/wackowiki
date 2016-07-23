@@ -88,7 +88,7 @@ $file = $this->load_single(
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".(int)$page_id."'".
-		"AND f.file_name='".quote($this->dblink, $_GET['get'])."' ".
+		"AND f.file_name = " . $this->db->q($_GET['get']) . " ".
 		"AND f.deleted <> '1' ".
 	"LIMIT 1");
 
