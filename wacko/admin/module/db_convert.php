@@ -64,7 +64,7 @@ function admin_db_convert(&$engine, &$module)
 			if ($key == 'table')
 			{
 				$sql = "ALTER TABLE {$val} ENGINE=INNODB";
-				$engine->sql_query($sql);
+				$engine->db->sql_query($sql);
 
 				$sql_log[] = $sql;
 			}
@@ -95,8 +95,8 @@ function admin_db_convert(&$engine, &$module)
 			if ($sql)
 			{
 				// setting the SQL Mode, disable possible Strict SQL Mode
-				$engine->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
-				$engine->sql_query($sql);
+				$engine->db->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
+				$engine->db->sql_query($sql);
 
 				$sql_log[] = $sql;
 			}
@@ -136,9 +136,9 @@ function admin_db_convert(&$engine, &$module)
 		// https://dev.mysql.com/doc/refman/5.7/en/information-schema.html
 		// If InnoDB is available, but not the default engine, the result will be YES. If it's not available, the result will obviously be NO.
 		$sql_InnoDB			= "SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE = 'InnoDB'";
-		$InnoDB_support		= $engine->load_single($sql_InnoDB);
+		$InnoDB_support		= $engine->db->load_single($sql_InnoDB);
 
-		$_db_version	= $engine->load_single("SELECT version()");
+		$_db_version	= $engine->db->load_single("SELECT version()");
 		$db_version		= $_db_version['version()'];
 		$db_version		= preg_replace('#[^0-9\.]#', '', $db_version);
 
@@ -166,7 +166,7 @@ function admin_db_convert(&$engine, &$module)
 
 		if ($required_mysql_version === true && $required_engine = true)
 		{
-			$results = $engine->load_all(
+			$results = $engine->db->load_all(
 				"SELECT TABLE_NAME, ENGINE FROM INFORMATION_SCHEMA.TABLES
 				WHERE TABLE_SCHEMA = '{$engine->config['database_database']}'
 					AND ENGINE = 'MyISAM'
@@ -237,7 +237,7 @@ function admin_db_convert(&$engine, &$module)
 
 		// case 1 DATETIME
 		// case 2
-		$results = $engine->load_all(
+		$results = $engine->db->load_all(
 			"SELECT TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT, DATA_TYPE
 			FROM INFORMATION_SCHEMA.columns
 			WHERE DATA_TYPE = 'datetime'

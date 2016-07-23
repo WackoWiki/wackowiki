@@ -53,7 +53,7 @@ if (@$_POST['_action'] === 'clone_page')
 		//massclone
 		echo '<p><strong>' . $this->_t('MassCloning') . '</strong><p>';
 
-		$pages = $this->load_all(
+		$pages = $this->db->load_all(
 			"SELECT page_id, tag, supertag ".
 			"FROM {$this->db->table_prefix}page ".
 			"WHERE (supertag LIKE ".$this->db->q($superfrom . '/%')." ".
@@ -123,7 +123,7 @@ if (@$_POST['_action'] === 'clone_page')
 
 if ($this->check_acl($this->get_user_name(), $this->config['rename_globalacl']))
 {
-	$klusterwerks = $this->load_single(
+	$klusterwerks = $this->db->load_single(
 		"SELECT COUNT(*) AS n ".
 		"FROM {$this->db->table_prefix}page ".
 		"WHERE (supertag LIKE ".$this->db->q($superfrom . '/%')." ".

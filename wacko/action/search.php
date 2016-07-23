@@ -12,7 +12,7 @@ if (!function_exists('full_text_search'))
 		$limit		= (int) $limit;
 		$pagination	= '';
 
-		$count_results = $engine->load_all(
+		$count_results = $engine->db->load_all(
 			"SELECT a.page_id ".
 			"FROM ".$engine->config['table_prefix']."page a ".
 			($for
@@ -39,7 +39,7 @@ if (!function_exists('full_text_search'))
 		$pagination = $engine->pagination($count, $limit, 'p', 'phrase='.$phrase);
 
 		// load search results
-		$results = $engine->load_all(
+		$results = $engine->db->load_all(
 			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang,
 				MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) AS score,
 				u.user_name, o.user_name as owner_name ".
@@ -79,7 +79,7 @@ if (!function_exists('tag_search'))
 		$limit		= (int) $limit;
 		$pagination	= '';
 
-		$count_results = $engine->load_all(
+		$count_results = $engine->db->load_all(
 			"SELECT a.page_id ".
 			"FROM ".$engine->config['table_prefix']."page a ".
 			($for
@@ -105,7 +105,7 @@ if (!function_exists('tag_search'))
 		$pagination = $engine->pagination($count, $limit, 'p', 'phrase='.$phrase);
 
 		// load search results
-		$results = $engine->load_all(
+		$results = $engine->db->load_all(
 			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, u.user_name, o.user_name as owner_name ".
 			"FROM ".$engine->config['table_prefix']."page a ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user u ON (a.user_id = u.user_id) ".

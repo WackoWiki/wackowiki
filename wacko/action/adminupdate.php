@@ -37,7 +37,7 @@ if ($this->is_admin())
 		else if (isset($_POST['build_user_stats']))
 		{
 			// total pages in ownership
-			$users = $this->load_all(
+			$users = $this->db->load_all(
 				"SELECT p.owner_id, COUNT(p.tag) AS n ".
 				"FROM {$this->config['table_prefix']}page AS p, {$this->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
@@ -45,7 +45,7 @@ if ($this->is_admin())
 
 			foreach ($users as $user)
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE {$this->config['user_table']} ".
 					"SET total_pages = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['owner_id']."' ".
@@ -53,7 +53,7 @@ if ($this->is_admin())
 			}
 
 			// total comments posted
-			$users = $this->load_all(
+			$users = $this->db->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n ".
 				"FROM {$this->config['table_prefix']}page AS p, {$this->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
@@ -61,7 +61,7 @@ if ($this->is_admin())
 
 			foreach ($users as $user)
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE {$this->config['user_table']} ".
 					"SET total_comments = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -69,7 +69,7 @@ if ($this->is_admin())
 			}
 
 			// total revisions made
-			$users = $this->load_all(
+			$users = $this->db->load_all(
 				"SELECT r.user_id, COUNT(r.tag) AS n ".
 				"FROM {$this->config['table_prefix']}revision AS r, {$this->config['user_table']} AS u ".
 				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' ".
@@ -77,7 +77,7 @@ if ($this->is_admin())
 
 			foreach ($users as $user)
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE {$this->config['user_table']} ".
 					"SET total_revisions = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -85,7 +85,7 @@ if ($this->is_admin())
 			}
 
 			// total files uploaded
-			$users = $this->load_all(
+			$users = $this->db->load_all(
 				"SELECT u.user_id, COUNT(f.upload_id) AS n ".
 				"FROM {$this->config['table_prefix']}upload f, {$this->config['user_table']} AS u ".
 				"WHERE f.user_id = u.user_id ".
@@ -93,7 +93,7 @@ if ($this->is_admin())
 
 			foreach ($users as $user)
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE {$this->config['user_table']} ".
 					"SET total_uploads = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -126,7 +126,7 @@ if ($this->is_admin())
 		}
 		else if (isset($_POST['set_title']))
 		{
-			$pages = $this->load_all(
+			$pages = $this->db->load_all(
 				"SELECT page_id, tag, page_lang ".
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE title = ''");
@@ -146,7 +146,7 @@ if ($this->is_admin())
 						// tag to title
 						$title = $this->add_spaces_title(trim(substr($page['tag'], strrpos($page['tag'], '/')), '/'));
 
-						$this->sql_query(
+						$this->db->sql_query(
 							"UPDATE {$this->config['table_prefix']}page ".
 							"SET title = ".$this->db->q($title)." ".
 							"WHERE page_id = '".$page['page_id']."' ".
@@ -188,7 +188,7 @@ if ($this->is_admin())
 		}
 		else if (isset($_POST['set_depth']))
 		{
-			$pages = $this->load_all(
+			$pages = $this->db->load_all(
 				"SELECT page_id, tag ".
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE comment_on_id = '0'");
@@ -203,7 +203,7 @@ if ($this->is_admin())
 					$_depth_array	= explode('/', $page['tag']);
 					$depth			= count( $_depth_array );
 
-					$this->sql_query(
+					$this->db->sql_query(
 						"UPDATE {$this->config['table_prefix']}page ".
 						"SET depth = '".$depth."' ".
 						"WHERE page_id = '".$page['page_id']."' ".
@@ -240,7 +240,7 @@ if ($this->is_admin())
 		}
 		else if (isset($_POST['set_version_id']))
 		{
-			$pages = $this->load_all(
+			$pages = $this->db->load_all(
 				"SELECT page_id ".
 				"FROM {$this->config['table_prefix']}revision ".
 				"GROUP BY page_id");
@@ -251,7 +251,7 @@ if ($this->is_admin())
 
 				foreach ($pages as $page)
 				{
-					$_revisions = $this->load_all(
+					$_revisions = $this->db->load_all(
 						"SELECT revision_id, page_id ".
 						"FROM {$this->config['table_prefix']}revision ".
 						"WHERE page_id = '".$page['page_id']."' ".
@@ -263,7 +263,7 @@ if ($this->is_admin())
 					{
 						$version_id = $t--;
 
-						$this->sql_query(
+						$this->db->sql_query(
 							"UPDATE {$this->config['table_prefix']}revision ".
 							"SET version_id = '".$version_id."' ".
 							"WHERE revision_id = '".$_revision['revision_id']."' ".
@@ -306,7 +306,7 @@ if ($this->is_admin())
 		else if (isset($_POST['migrate_acls']))
 		{
 			// load old ACLs
-			$_acls = $this->load_all(
+			$_acls = $this->db->load_all(
 				"SELECT page_id, privilege, list ".
 				"FROM {$this->config['table_prefix']}acl_old ");
 
@@ -316,7 +316,7 @@ if ($this->is_admin())
 			{
 				echo $_acl['privilege'].'<br />';
 				// get object_right_id (e.g. 'write' -> 1, 'read' -> 2)
-				$_object_right_id = $this->load_single(
+				$_object_right_id = $this->db->load_single(
 					"SELECT object_right_id ".
 					"FROM {$this->config['table_prefix']}acl_right ".
 					"WHERE object_right = '{$_acl['privilege']}'
@@ -324,7 +324,7 @@ if ($this->is_admin())
 				$object_right_id = $_object_right_id['object_right_id'];
 
 				// get object_type_id (e.g. 'page' -> 1) / there is only 'page' so far
-				$_object_type_id = $this->load_single(
+				$_object_type_id = $this->db->load_single(
 					"SELECT object_type_id ".
 					"FROM {$this->config['table_prefix']}acl_type ".
 					"WHERE object_type = 'page'
@@ -336,10 +336,10 @@ if ($this->is_admin())
 						(object_id, object_type_id, object_right_id)
 						VALUES ('{$_acl['page_id']}', '{$object_type_id}', '{$object_right_id}')";
 
-				$this->sql_query($sql);
+				$this->db->sql_query($sql);
 
 				// get new created $acl_id
-				$acl_id = $this->load_single(
+				$acl_id = $this->db->load_single(
 					"SELECT acl_id ".
 					"FROM {$this->config['table_prefix']}acl ".
 					"WHERE object_id = '{$_acl['page_id']}' ".
@@ -378,7 +378,7 @@ if ($this->is_admin())
 						// 1.1 Everybody
 						if ($privilege == '*')
 						{
-							$_grant_id = $this->load_single(
+							$_grant_id = $this->db->load_single(
 								"SELECT group_id ".
 								"FROM {$this->config['table_prefix']}usergroup ".
 								"WHERE group_name = 'Everybody'
@@ -389,7 +389,7 @@ if ($this->is_admin())
 						// 1.2 Registered
 						else if  ($privilege == '$')
 						{
-							$_grant_id = $this->load_single(
+							$_grant_id = $this->db->load_single(
 								"SELECT group_id ".
 								"FROM {$this->config['table_prefix']}usergroup ".
 								"WHERE group_name = 'Registered'
@@ -400,7 +400,7 @@ if ($this->is_admin())
 						// 1.3 Admins
 						else if  ($privilege == 'Admins')
 						{
-							$_grant_id = $this->load_single(
+							$_grant_id = $this->db->load_single(
 								"SELECT group_id ".
 								"FROM {$this->config['table_prefix']}usergroup ".
 								"WHERE group_name = 'Admins'
@@ -413,7 +413,7 @@ if ($this->is_admin())
 							// 2. non default groups
 							if (!isset($this->groups))
 							{
-								$_groups = $this->load_all(
+								$_groups = $this->db->load_all(
 									"SELECT group_name ".
 									"FROM {$this->config['table_prefix']}usergroup ");
 
@@ -428,7 +428,7 @@ if ($this->is_admin())
 
 							if (in_array($privilege, $this->groups))
 							{
-								$grant_id = $this->load_single(
+								$grant_id = $this->db->load_single(
 									"SELECT group_id ".
 									"FROM {$this->config['table_prefix']}usergroup ".
 									"WHERE group_name = '{$privilege}'
@@ -441,7 +441,7 @@ if ($this->is_admin())
 								// 3. users
 								if (!isset($this->users))
 								{
-									$_users = $this->load_all(
+									$_users = $this->db->load_all(
 									"SELECT user_name ".
 									"FROM {$this->config['table_prefix']}user ");
 
@@ -456,7 +456,7 @@ if ($this->is_admin())
 
 								if (in_array($privilege, $this->users))
 								{
-									$_grant_id = $this->load_single(
+									$_grant_id = $this->db->load_single(
 										"SELECT user_id ".
 										"FROM {$this->config['table_prefix']}user ".
 										"WHERE user_name = '{$privilege}'
@@ -472,7 +472,7 @@ if ($this->is_admin())
 								(acl_id, grant_type_id, grant_id, deny)
 								VALUES ('{$acl_id}', '{$grant_type_id}', '{$grant_id}', '{$deny}')";
 
-						$this->sql_query($sql);
+						$this->db->sql_query($sql);
 					}
 				}
 			}

@@ -24,13 +24,13 @@ $this->http->ensure_tls($this->href());
 // is user trying to confirm email, login or register?
 if (isset($_GET['confirm']))
 {
-	if ($temp = $this->load_single(
+	if ($temp = $this->db->load_single(
 		"SELECT user_name, email, email_confirm ".
 		"FROM ".$this->config['user_table']." ".
 		"WHERE email_confirm = ".$this->db->q(hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))." ".
 		"LIMIT 1"))
 	{
-		$this->sql_query(
+		$this->db->sql_query(
 			"UPDATE ".$this->config['user_table']." SET ".
 				"email_confirm = '' ".
 			"WHERE email_confirm = ".$this->db->q(hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))." ");
@@ -177,7 +177,7 @@ else if (@$_POST['_action'] === 'register')
 				}
 
 				// INSERT user
-				$this->sql_query(
+				$this->db->sql_query(
 					"INSERT INTO ".$this->config['user_table']." ".
 					"SET ".
 						"signup_time	= UTC_TIMESTAMP(), ".
@@ -191,14 +191,14 @@ else if (@$_POST['_action'] === 'register')
 						"user_ip		= ".$this->db->q($user_ip)." ");
 
 				// get new user_id
-				$_user_id = $this->load_single(
+				$_user_id = $this->db->load_single(
 					"SELECT user_id ".
 					"FROM ".$this->config['table_prefix']."user ".
 					"WHERE user_name = ".$this->db->q($user_name)." ".
 					"LIMIT 1");
 
 				// INSERT user settings
-				$this->sql_query(
+				$this->db->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."user_setting ".
 					"SET ".
 						"user_id			= '".(int)$_user_id['user_id']."', ".

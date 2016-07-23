@@ -49,7 +49,7 @@ if ($this->is_owner() || $this->is_admin())
 		// get categories
 		if (isset($_POST['id']))
 		{
-			$word = $this->load_single(
+			$word = $this->db->load_single(
 				"SELECT category_id, parent_id, category ".
 				"FROM {$this->config['table_prefix']}category ".
 				"WHERE category_id = '".(int)$_POST['id']."' ".
@@ -60,7 +60,7 @@ if ($this->is_owner() || $this->is_admin())
 		if (isset($_POST['create']) && isset($_POST['newname']))
 		{
 			// do we have identical names?
-			if ($this->load_single(
+			if ($this->db->load_single(
 				"SELECT category_id ".
 				"FROM {$this->config['table_prefix']}category ".
 				"WHERE category = " . $this->db->q($_POST['newname']) . " ".
@@ -72,7 +72,7 @@ if ($this->is_owner() || $this->is_admin())
 			}
 			else
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"INSERT INTO {$this->config['table_prefix']}category SET ".
 						( $_POST['id'] && $_POST['group'] == 1
 							? "parent_id = '". (int)( $word['parent_id'] != 0
@@ -92,7 +92,7 @@ if ($this->is_owner() || $this->is_admin())
 		else if (isset($_POST['rename']) && isset($_POST['newname']) && isset($_POST['id']))
 		{
 			// do we have identical names?
-			if ($this->load_single(
+			if ($this->db->load_single(
 				"SELECT category_id ".
 				"FROM {$this->config['table_prefix']}category ".
 				"WHERE category = " . $this->db->q($_POST['newname']) . " ".
@@ -105,7 +105,7 @@ if ($this->is_owner() || $this->is_admin())
 			}
 			else
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE {$this->config['table_prefix']}category SET ".
 						"category = ".$this->db->q($_POST['newname'])." ".
 					"WHERE category_id = '".(int)$_POST['id']."' ".
@@ -121,7 +121,7 @@ if ($this->is_owner() || $this->is_admin())
 			// in or out?
 			if ($_POST['parent_id'] == 0)
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE {$this->config['table_prefix']}category SET ".
 						"parent_id = 0 ".
 					"WHERE category_id = '".(int)$_POST['id']."' ".
@@ -132,7 +132,7 @@ if ($this->is_owner() || $this->is_admin())
 			}
 			else
 			{
-				$parent = $this->load_single(
+				$parent = $this->db->load_single(
 					"SELECT parent_id, category ".
 					"FROM {$this->config['table_prefix']}category ".
 					"WHERE category_id = '".(int)$_POST['parent_id']."' ".
@@ -140,13 +140,13 @@ if ($this->is_owner() || $this->is_admin())
 
 				if ($parent['parent_id'] == 0)
 				{
-					$this->sql_query(
+					$this->db->sql_query(
 						"UPDATE {$this->config['table_prefix']}category SET ".
 							"parent_id = '".(int)$_POST['parent_id']."' ".
 						"WHERE category_id = '".(int)$_POST['id']."' ".
 						"LIMIT 1");
 
-					$this->sql_query(
+					$this->db->sql_query(
 						"UPDATE {$this->config['table_prefix']}category SET ".
 							"parent_id = 0 ".
 						"WHERE parent_id = '".(int)$_POST['id']."'");
@@ -163,15 +163,15 @@ if ($this->is_owner() || $this->is_admin())
 		// delete item
 		else if (isset($_POST['delete']) && isset($_POST['id']))
 		{
-			$this->sql_query(
+			$this->db->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}category ".
 				"WHERE category_id = '".(int)$_POST['id']."'");
 
-			$this->sql_query(
+			$this->db->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}category_page ".
 				"WHERE category_id = '".(int)$_POST['id']."'");
 
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->config['table_prefix']}category SET ".
 					"parent_id = 0 ".
 				"WHERE parent_id = '".(int)$_POST['id']."'");
@@ -189,7 +189,7 @@ if ($this->is_owner() || $this->is_admin())
 	$categories = $this->get_categories_list($this->page['page_lang'], 0);
 
 	// get currently selected category_ids
-	$_selected = $this->load_all(
+	$_selected = $this->db->load_all(
 		"SELECT category_id ".
 		"FROM {$this->config['table_prefix']}category_page ".
 		"WHERE page_id = '".$this->page['page_id']."'");
@@ -217,7 +217,7 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			if (isset($_POST['change']) || isset($_POST['id']))
 			{
-				$word = $this->load_single(
+				$word = $this->db->load_single(
 					"SELECT category_id, parent_id, category ".
 					"FROM {$this->config['table_prefix']}category ".
 					"WHERE category_id = '".(int)$_POST['change']."' ".
@@ -247,7 +247,7 @@ if ($this->is_owner() || $this->is_admin())
 		// rename item
 		else if (isset($_POST['rename']) && isset($_POST['change']))
 		{
-			if ($word = $this->load_single(
+			if ($word = $this->db->load_single(
 				"SELECT category
 				FROM {$this->config['table_prefix']}category
 				WHERE category_id = '".(int)$_POST['change']."'
@@ -270,13 +270,13 @@ if ($this->is_owner() || $this->is_admin())
 		// (un)group item
 		else if (isset($_POST['ugroup']) && isset($_POST['change']))
 		{
-			if ($word = $this->load_single(
+			if ($word = $this->db->load_single(
 				"SELECT category_id, parent_id, category, category_lang
 				FROM {$this->config['table_prefix']}category
 				WHERE category_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
-				$parents = $this->load_all(
+				$parents = $this->db->load_all(
 					"SELECT category_id, category ".
 					"FROM {$this->config['table_prefix']}category ".
 					"WHERE parent_id = 0 ".
@@ -309,7 +309,7 @@ if ($this->is_owner() || $this->is_admin())
 		// delete item
 		if (isset($_POST['delete']) && isset($_POST['change']) && $_POST['change'])
 		{
-			if ($word = $this->load_single(
+			if ($word = $this->db->load_single(
 				"SELECT category
 				FROM {$this->config['table_prefix']}category
 				WHERE category_id = '".(int)$_POST['change']."'

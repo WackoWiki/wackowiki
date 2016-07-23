@@ -83,7 +83,7 @@ else
 	$page_id = $this->page['page_id'];
 }
 
-$file = $this->load_single(
+$file = $this->db->load_single(
 	"SELECT u.user_name AS user, f.user_id, f.upload_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits ".
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -185,7 +185,7 @@ if ($file_path)
 	if ($extension_map[$extension][0] != 'image')
 	{
 		// count file download
-		$this->sql_query(
+		$this->db->sql_query(
 			"UPDATE {$this->config['table_prefix']}upload SET ".
 				"hits = '".($file['hits'] + 1)."' ".
 			"WHERE upload_id = '".$file['upload_id']."' ".

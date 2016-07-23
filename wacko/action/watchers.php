@@ -21,7 +21,7 @@ else
 
 if ($this->is_owner($page_id))
 {
-	$watchers = $this->load_all(
+	$watchers = $this->db->load_all(
 		"SELECT u.user_name ".
 		"FROM ".$this->config['table_prefix']."watch w ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (w.user_id = u.user_id) ".

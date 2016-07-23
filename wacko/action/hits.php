@@ -12,7 +12,7 @@ if (isset($for))
 {
 	$tag = $this->unwrap_link($for);
 
-	$rs = $this->load_single(
+	$rs = $this->db->load_single(
 		"SELECT hits ".
 		"FROM ".$this->config['table_prefix']."page ".
 		"WHERE tag = ".$this->db->q($tag)." LIMIT 1"

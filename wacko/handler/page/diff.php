@@ -32,7 +32,7 @@ $load_diff_page = function ($id)
 	// extracting
 	if ($id > 0)
 	{
-		return $this->load_single(
+		return $this->db->load_single(
 			"SELECT r.page_id, r.revision_id, r.modified, r.body, r.page_lang, u.user_name ".
 			"FROM ".$this->config['table_prefix']."revision r ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
@@ -41,7 +41,7 @@ $load_diff_page = function ($id)
 	}
 	else
 	{
-		return $this->load_single(
+		return $this->db->load_single(
 			"SELECT p.page_id, 0 AS revision_id, p.modified, p.body, p.page_lang, u.user_name ".
 			"FROM ".$this->config['table_prefix']."page p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".

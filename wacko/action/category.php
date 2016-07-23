@@ -40,7 +40,7 @@ if ($list && ($ids || isset($_GET['category'])))
 		$category = (int)$_GET['category'];
 	}
 
-	if ($_words = $this->load_all(
+	if ($_words = $this->db->load_all(
 	"SELECT category FROM {$this->config['table_prefix']}category ".
 	"WHERE category_id IN ( ".$this->db->q($category)." )", true));
 
@@ -68,7 +68,7 @@ if ($list && ($ids || isset($_GET['category'])))
 		$order = 'created DESC';
 	}
 
-	if ($pages = $this->load_all(
+	if ($pages = $this->db->load_all(
 	"SELECT p.page_id, p.tag, p.title, p.created ".
 	"FROM {$this->config['table_prefix']}category_page AS k ".
 		"INNER JOIN {$this->config['table_prefix']}page AS p ON (k.page_id = p.page_id) ".
@@ -78,7 +78,7 @@ if ($list && ($ids || isset($_GET['category'])))
 			: '' ).
 	"ORDER BY p.$order ", true))
 	{
-		if ($_words = $this->load_all(
+		if ($_words = $this->db->load_all(
 		"SELECT category FROM {$this->config['table_prefix']}category ".
 		"WHERE category_id IN ( ".$this->db->q($category)." )", true))
 		{

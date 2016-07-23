@@ -118,7 +118,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	}
 
 	// count topics and make pagination
-	$count		= $this->load_single($sql);
+	$count		= $this->db->load_single($sql);
 	$pagination	= $this->pagination($count['n'], $this->config['forum_topics']);
 
 	// make collector query
@@ -151,7 +151,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		"LIMIT {$pagination['offset']}, {$this->config['forum_topics']}";
 
 	// load topics data
-	$topics	= $this->load_all($sql);
+	$topics	= $this->db->load_all($sql);
 
 	//  display search
 	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">'.$this->action('search', array('for' => $this->tag, 'nomark' => 1, 'options' => 0)).'</div>'."\n";
@@ -180,7 +180,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				// load latest comment
 				if ($topic['comments'] > 0)
 				{
-					$comment = $this->load_single(
+					$comment = $this->db->load_single(
 						"SELECT p.tag, p.ip, p.created, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name ".
 						"FROM {$this->config['table_prefix']}page p ".
 						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".

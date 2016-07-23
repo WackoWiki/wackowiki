@@ -84,7 +84,7 @@ if (!empty($this->config['news_cluster']))
 	// heavy lifting here (watch out for REGEXPs!)
 	if ($mode == 'latest')
 	{
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' ".
@@ -93,7 +93,7 @@ if (!empty($this->config['news_cluster']))
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=latest');
 
-		$pages	= $this->load_all(
+		$pages	= $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
@@ -105,7 +105,7 @@ if (!empty($this->config['news_cluster']))
 	}
 	else if ($mode == 'category')
 	{
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}category_page c ".
 			"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
@@ -116,12 +116,12 @@ if (!empty($this->config['news_cluster']))
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'category='.$category_id);
 
-		$category_title	= $this->load_single(
+		$category_title	= $this->db->load_single(
 			"SELECT category ".
 			"FROM {$prefix}category ".
 			"WHERE category_id = '$category_id' ", false);
 
-		$pages	= $this->load_all(
+		$pages	= $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
@@ -135,7 +135,7 @@ if (!empty($this->config['news_cluster']))
 	}
 	else if ($mode == 'week')
 	{
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' ".
@@ -145,7 +145,7 @@ if (!empty($this->config['news_cluster']))
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=week');
 
-		$pages	= $this->load_all(
+		$pages	= $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
@@ -158,7 +158,7 @@ if (!empty($this->config['news_cluster']))
 	}
 	else if ($mode == 'from' && $date)
 	{
-		$count	= $this->load_single(
+		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' ".
@@ -169,7 +169,7 @@ if (!empty($this->config['news_cluster']))
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=week');
 
 		$date	= date(SQL_DATE_FORMAT, strtotime($date)); // TODO TZ issue
-		$pages	= $this->load_all(
+		$pages	= $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 			"FROM {$prefix}page p ".
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".

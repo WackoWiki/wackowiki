@@ -38,7 +38,7 @@ if (!isset($nomark)) $nomark = '';
 if (!isset($legend)) $legend = '';
 
 // collect pages
-if ($pages = $this->load_all(
+if ($pages = $this->db->load_all(
 	"SELECT page_id, tag, supertag, title ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
@@ -75,7 +75,7 @@ if ($pages = $this->load_all(
 	if (!empty($pages))
 	{
 		// cache links
-		if ($links = $this->load_all(
+		if ($links = $this->db->load_all(
 			"SELECT {$this->page_meta} ".
 			"FROM {$this->config['table_prefix']}page ".
 			"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", true))
@@ -90,7 +90,7 @@ if ($pages = $this->load_all(
 		}
 
 		// cache acls
-		if ($acls = $this->load_all(
+		if ($acls = $this->db->load_all(
 			"SELECT page_id, privilege, list FROM {$this->config['table_prefix']}acl ".
 			"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) ".
 				"AND privilege = 'read'", true))

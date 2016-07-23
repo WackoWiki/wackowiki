@@ -16,7 +16,7 @@ if (!function_exists('load_commented'))
 
 		// going around the limitations of GROUP BY when used along with ORDER BY
 		// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
-		if ($ids = $engine->load_all(
+		if ($ids = $engine->db->load_all(
 			"SELECT a.page_id ".
 			"FROM ".$engine->config['table_prefix']."page a ".
 				"LEFT JOIN ".$engine->config['table_prefix']."page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
@@ -49,7 +49,7 @@ if (!function_exists('load_commented'))
 					}
 
 					// load complete comments
-					$comments = $engine->load_all(
+					$comments = $engine->db->load_all(
 						"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
 						"FROM ".$engine->config['table_prefix']."page a ".
 							"INNER JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".

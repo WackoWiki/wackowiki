@@ -13,7 +13,7 @@ if (!function_exists('load_recent_comments'))
 		$pagination	= '';
 
 		// count pages
-		if ($count_pages = $engine->load_all(
+		if ($count_pages = $engine->db->load_all(
 			"SELECT a.page_id ".
 			"FROM ".$engine->config['table_prefix']."page a ".
 				"INNER JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
@@ -31,7 +31,7 @@ if (!function_exists('load_recent_comments'))
 			$count		= count($count_pages);
 			$pagination = $engine->pagination($count, $limit);
 
-			$comments = $engine->load_all(
+			$comments = $engine->db->load_all(
 				"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
 				"FROM ".$engine->config['table_prefix']."page a ".
 					"INNER JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".

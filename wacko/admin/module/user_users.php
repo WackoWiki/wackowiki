@@ -107,7 +107,7 @@ function admin_user_users(&$engine, &$module)
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
 
-		$user = $engine->load_single(
+		$user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -120,7 +120,7 @@ function admin_user_users(&$engine, &$module)
 	if (isset($_POST['create']) && isset($_POST['newname']))
 	{
 		// do we have identical names?
-		if ($engine->load_single(
+		if ($engine->db->load_single(
 		"SELECT user_id ".
 		"FROM {$engine->config['table_prefix']}user ".
 		"WHERE user_name = ".$engine->db->q($_POST['newname'])." ".
@@ -138,7 +138,7 @@ function admin_user_users(&$engine, &$module)
 		}
 		else
 		{
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"INSERT INTO {$engine->config['table_prefix']}user SET ".
 					"signup_time		= UTC_TIMESTAMP(), ".
 					"email			= ".$engine->db->q($_POST['email']).", ".
@@ -147,14 +147,14 @@ function admin_user_users(&$engine, &$module)
 					"user_name		= ".$engine->db->q($_POST['newname'])." ");
 
 			// get new user_id
-			$_user_id = $engine->load_single(
+			$_user_id = $engine->db->load_single(
 				"SELECT user_id ".
 				"FROM ".$engine->config['table_prefix']."user ".
 				"WHERE user_name = ".$engine->db->q($_POST['newname'])." ".
 				"LIMIT 1");
 
 			// INSERT user settings
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"INSERT INTO ".$engine->config['table_prefix']."user_setting SET ".
 					"user_id			= '".(int)$_user_id['user_id']."', ".
 					"typografica		= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
@@ -177,7 +177,7 @@ function admin_user_users(&$engine, &$module)
 	// approve user
 	else if (isset($_POST['approve']) && $user_id )
 	{
-		$user = $engine->load_single(
+		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -192,7 +192,7 @@ function admin_user_users(&$engine, &$module)
 	else if (isset($_POST['edit']) && $user_id && (isset($_POST['newname']) || isset($_POST['moderator_id'])))
 	{
 		// do we have identical names?
-		if ($engine->load_single(
+		if ($engine->db->load_single(
 		"SELECT user_id ".
 		"FROM {$engine->config['table_prefix']}user ".
 		"WHERE user_name = ".$engine->db->q($_POST['newname'])." ".
@@ -211,7 +211,7 @@ function admin_user_users(&$engine, &$module)
 		}
 		else
 		{
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"UPDATE {$engine->config['table_prefix']}user SET ".
 					"user_name		= ".$engine->db->q($_POST['newname']).", ".
 					"email			= ".$engine->db->q($_POST['newemail']).", ".
@@ -221,7 +221,7 @@ function admin_user_users(&$engine, &$module)
 				"WHERE user_id		= '".(int)$_POST['user_id']."' ".
 				"LIMIT 1");
 
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"UPDATE {$engine->config['table_prefix']}user_setting SET ".
 					"user_lang		= ".$engine->db->q($_POST['user_lang']).", ".
 					"theme			= ".$engine->db->q($_POST['theme'])." ".
@@ -254,26 +254,26 @@ function admin_user_users(&$engine, &$module)
 			{
 				if ((int)$user_id)
 				{
-					$user = $engine->load_single(
+					$user = $engine->db->load_single(
 						"SELECT u.user_name ".
 						"FROM {$engine->config['table_prefix']}user u ".
 						"WHERE u.user_id = '".$user_id."' ".
 							"AND u.account_type = '0' ".
 						"LIMIT 1");
 
-					$engine->sql_query(
+					$engine->db->sql_query(
 						"DELETE FROM {$engine->config['table_prefix']}user ".
 						"WHERE user_id = '".$user_id."'");
-					$engine->sql_query(
+					$engine->db->sql_query(
 						"DELETE FROM {$engine->config['table_prefix']}user_setting ".
 						"WHERE user_id = '".$user_id."'");
-					$engine->sql_query(
+					$engine->db->sql_query(
 						"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
 						"WHERE user_id = '".$user_id."'");
-					$engine->sql_query(
+					$engine->db->sql_query(
 						"DELETE FROM {$engine->config['table_prefix']}menu ".
 						"WHERE user_id = '".$user_id."'");
-					$engine->sql_query(
+					$engine->db->sql_query(
 						"DELETE FROM {$engine->config['table_prefix']}watch ".
 						"WHERE user_id = '".$user_id."'");
 
@@ -291,7 +291,7 @@ function admin_user_users(&$engine, &$module)
 					$engine->remove_files		($user_space, true);
 					$engine->remove_revisions	($user_space, true);
 
-					$engine->sql_query(
+					$engine->db->sql_query(
 						"DELETE FROM {$engine->config['table_prefix']}page ".
 						"WHERE tag = " . $engine->db->q($user_space) . " ".
 							"OR tag LIKE " . $engine->db->q($user_space . '/%') . " ".
@@ -386,7 +386,7 @@ function admin_user_users(&$engine, &$module)
 	// edit user
 	else if (isset($_POST['edit']) && $user_id)
 	{
-		if ($user = $engine->load_single(
+		if ($user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.user_lang, s.theme, u.enabled, u.account_status ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -527,7 +527,7 @@ function admin_user_users(&$engine, &$module)
 					$users	.= ', ';
 				}
 
-				if ($user = $engine->load_single(
+				if ($user = $engine->db->load_single(
 					"SELECT user_name
 					FROM {$engine->config['table_prefix']}user
 					WHERE user_id = '".(int) $user_id."'
@@ -766,7 +766,7 @@ function admin_user_users(&$engine, &$module)
 		$status = $engine->_t('AccountStatusArray');
 
 		// collecting data
-		$count = $engine->load_single(
+		$count = $engine->db->load_single(
 			"SELECT COUNT(user_name) AS n ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -776,7 +776,7 @@ function admin_user_users(&$engine, &$module)
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
-		$users = $engine->load_all(
+		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang ".
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".

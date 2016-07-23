@@ -16,7 +16,7 @@ if ($user_id = $this->get_user_id())
 		' (<a href="'.$this->href('', '', 'mode=mychangeswatches&amp;reset=1').'#list">'.
 		$this->_t('ResetChangesWatches').'</a>).<br /><br />';
 
-	$pages = $this->load_all(
+	$pages = $this->db->load_all(
 			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
 			"FROM {$pref}page AS p, {$pref}watch AS w ".
 			"WHERE p.page_id = w.page_id ".
@@ -31,7 +31,7 @@ if ($user_id = $this->get_user_id())
 	{
 		foreach ($pages as $page)
 		{
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET watch_time = UTC_TIMESTAMP() ".
 				"WHERE page_id = '".$page['page_id']."' ".

@@ -29,7 +29,7 @@ if ($this->can_upload() === true)
 			$page_id = $this->page['page_id'];
 		}
 
-		$file = $this->load_single(
+		$file = $this->db->load_single(
 			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -136,7 +136,7 @@ if ($this->can_upload() === true)
 			$page_id = $this->page['page_id'];
 		}
 
-		$file = $this->load_single(
+		$file = $this->db->load_single(
 			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -229,7 +229,7 @@ if ($this->can_upload() === true)
 				$page_id = $this->page['page_id'];
 			}
 
-			$file = $this->load_single(
+			$file = $this->db->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -245,12 +245,12 @@ if ($this->can_upload() === true)
 					|| ($file['user_id'] == $this->get_user_id()))
 				{
 					// 2. remove from DB
-					$this->sql_query(
+					$this->db->sql_query(
 						"DELETE FROM ".$this->config['table_prefix']."upload ".
 						"WHERE upload_id = '".$file['upload_id']."'" );
 
 					// update user uploads count
-					$this->sql_query(
+					$this->db->sql_query(
 						"UPDATE {$this->config['user_table']} SET ".
 							"total_uploads = total_uploads - 1 ".
 						"WHERE user_id = '".$file['user_id']."' ".
@@ -303,7 +303,7 @@ if ($this->can_upload() === true)
 				$page_id = $this->page['page_id'];
 			}
 
-			$file = $this->load_single(
+			$file = $this->db->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -327,7 +327,7 @@ if ($this->can_upload() === true)
 					$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
 
 					// 2. update file metadata
-					$this->sql_query(
+					$this->db->sql_query(
 						"UPDATE ".$this->config['table_prefix']."upload SET ".
 							"upload_lang		= ".$this->db->q($this->page['page_lang']).", ".
 							"file_description	= ".$this->db->q($description)." ".
@@ -359,14 +359,14 @@ if ($this->can_upload() === true)
 			$user		= $this->get_user();
 
 			// TODO: Set user used_quota in user table (?)
-			$user_files	= $this->load_single(
+			$user_files	= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_user_quota ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 
 			// TODO: Set used_quota in config table (?)
-			$files		= $this->load_single(
+			$files		= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_quota ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"LIMIT 1");
@@ -511,7 +511,7 @@ if ($this->can_upload() === true)
 								$description	= htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
 
 								// 5. insert line into DB
-								$this->sql_query(
+								$this->db->sql_query(
 									"INSERT INTO ".$this->config['table_prefix']."upload SET ".
 										"page_id			= '".($is_global ? "0" : $this->page['page_id'])."', ".
 										"user_id			= '".$user['user_id']."',".
@@ -525,7 +525,7 @@ if ($this->can_upload() === true)
 										"uploaded_dt		= ".$this->db->q($uploaded_dt)." ");
 
 								// update user uploads count
-								$this->sql_query(
+								$this->db->sql_query(
 									"UPDATE {$this->config['user_table']} SET ".
 										"total_uploads = total_uploads + 1 ".
 									"WHERE user_id = '".$user['user_id']."' ".

@@ -32,7 +32,7 @@ function admin_content_files(&$engine, &$module)
 
 	if (isset($_GET['remove'])) // show the form
 	{
-		$file = $engine->load_single(
+		$file = $engine->db->load_single(
 			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
@@ -68,7 +68,7 @@ function admin_content_files(&$engine, &$module)
 	else if (isset($_POST['remove'])) // delete
 	{
 		// 1. where, existence
-		$file = $engine->load_single(
+		$file = $engine->db->load_single(
 			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
@@ -78,12 +78,12 @@ function admin_content_files(&$engine, &$module)
 		if (count($file) > 0)
 		{
 			// 2. remove from DB
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"DELETE FROM ".$engine->config['table_prefix']."upload ".
 				"WHERE upload_id = '". $file['upload_id']."'");
 
 			// update user uploads count
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"UPDATE {$engine->config['user_table']} ".
 				"SET total_uploads = total_uploads - 1 ".
 				"WHERE user_id = '".$file['user_id']."' ".
@@ -118,7 +118,7 @@ function admin_content_files(&$engine, &$module)
 	else // process upload
 	{
 		$user	= $engine->get_user();
-		$files	= $engine->load_all(
+		$files	= $engine->db->load_all(
 			"SELECT upload_id ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE user_id = '".$user['user_id']."'");
@@ -183,7 +183,7 @@ function admin_content_files(&$engine, &$module)
 			$description = htmlspecialchars($description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 			// 5. insert line into DB
-			$engine->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
+			$engine->db->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
 				"page_id			= '".'0'."', ".
 				"file_name			= ".$engine->db->q($small_name).", ".
 				"upload_lang		= ".$engine->db->q($engine->config['language']).", ".
@@ -280,7 +280,7 @@ function admin_content_files(&$engine, &$module)
 	$owner = ''; // TODO: show owner in list and add filter
 	$global = true;
 
-	$count = $engine->load_all(
+	$count = $engine->db->load_all(
 			"SELECT f.upload_id ".
 			"FROM ".$engine->config['table_prefix']."upload f ".
 				"INNER JOIN ".$engine->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -293,7 +293,7 @@ function admin_content_files(&$engine, &$module)
 	$pagination = $engine->pagination($count, $limit, 'f','mode='.$module['mode'], '', 'admin.php');
 
 	// load files list
-	$files = $engine->load_all(
+	$files = $engine->db->load_all(
 		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, file_description, uploaded_dt ".
 		"FROM {$engine->config['table_prefix']}upload ".
 		"WHERE page_id = 0 ".

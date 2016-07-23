@@ -23,7 +23,7 @@ if ($this->has_access('read'))
 {
 	$num_slashes = substr_count($this->tag, '/');
 
-	$pages = $this->load_all(
+	$pages = $this->db->load_all(
 		"SELECT page_id, owner_id, tag, supertag, title, created, body ".
 		"FROM ".$this->config['table_prefix']."page ".
 		"WHERE (supertag = " . $this->db->q($this->supertag) . " ".

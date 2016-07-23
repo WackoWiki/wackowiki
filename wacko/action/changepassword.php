@@ -16,7 +16,7 @@ if (($code = @$_REQUEST['secret_code']))
 {
 	// Password forgotten. Provided secret code
 
-	$user = $this->load_single(
+	$user = $this->db->load_single(
 		"SELECT user_id, user_name ".
 		"FROM ".$this->config['user_table']." ".
 		"WHERE change_password = ".$this->db->q(hash('sha256', $code.hash('sha256', $this->config['system_seed'])))." ".
@@ -53,7 +53,7 @@ if (($code = @$_REQUEST['secret_code']))
 											PASSWORD_DEFAULT
 											);
 
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
 						"password			= ".$this->db->q($password_hashed).", ".
 						"change_password	= '' ".
@@ -151,7 +151,7 @@ else if (($user = $this->get_user()))
 										);
 
 			// store new password
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE ".$this->config['user_table']." SET ".
 					"password = ".$this->db->q($password_hashed)." ".
 				"WHERE user_id = '".$user['user_id']."' ".
@@ -209,7 +209,7 @@ else
 	{
 		$user_name	= str_replace(' ', '', $_POST['user_name']);
 		$email		= str_replace(' ', '', $_POST['email']);
-		$user		= $this->load_single(
+		$user		= $this->db->load_single(
 						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
 						"FROM ".$this->config['user_table']." u ".
 							"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
@@ -232,7 +232,7 @@ else
 									$this->href('', '', 'secret_code=' . $code)) . "\n\n";
 
 				// update table
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} SET ".
 						"lost_password_request_count = lost_password_request_count + 1, ". // value unused
 						"change_password = ".$this->db->q($code_hash)." ".

@@ -12,7 +12,7 @@ $include_tail = '</article>';
 if ($this->page['comment_on_id'] && !$this->page['deleted'])
 {
 	// count previous comments
-	$count = $this->load_single(
+	$count = $this->db->load_single(
 		"SELECT COUNT(tag) AS n ".
 		"FROM {$this->config['table_prefix']}page ".
 		"WHERE comment_on_id = '".$this->page['comment_on_id']."' ".
@@ -118,7 +118,7 @@ if ($this->has_access('read'))
 		// count page hit (we don't count for page owner)
 		if ($this->get_user_id() != $this->page['owner_id'])
 		{
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page SET ".
 					"hits = hits + 1 ".
 				"WHERE page_id = '".$this->page['page_id']."'");
@@ -130,7 +130,7 @@ if ($this->has_access('read'))
 		// clear new edits for watched page
 		if ($user && $this->page['latest'] != 0 && !$noid_protect)
 		{
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch SET ".
 					"pending = '0' ".
 				"WHERE page_id = '".$this->page['page_id']."' ".
@@ -156,7 +156,7 @@ if ($this->has_access('read'))
 			// store to DB
 			if ($this->page['latest'] != 0)
 			{
-				$this->sql_query(
+				$this->db->sql_query(
 					"UPDATE ".$this->config['table_prefix']."page SET ".
 						"body_r		= ".$this->db->q($this->page['body_r']).", ".
 						"body_toc	= ".$this->db->q($this->page['body_toc'])." ".

@@ -31,7 +31,7 @@ function admin_maint_resync(&$engine, &$module)
 		if ($_REQUEST['action'] == 'userstats')
 		{
 			// total pages in ownership
-			$users1 = $engine->load_all(
+			$users1 = $engine->db->load_all(
 				"SELECT u.user_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
@@ -39,7 +39,7 @@ function admin_maint_resync(&$engine, &$module)
 				"GROUP BY p.owner_id");
 
 			// missing pages
-			$users2 =  $engine->load_all(
+			$users2 =  $engine->db->load_all(
 				"SELECT
 					u.user_id, '0' as n
 				FROM
@@ -54,7 +54,7 @@ function admin_maint_resync(&$engine, &$module)
 
 			foreach ($users as $user)
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_pages = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -62,7 +62,7 @@ function admin_maint_resync(&$engine, &$module)
 			}
 
 			// total comments posted
-			$users1 = $engine->load_all(
+			$users1 = $engine->db->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
@@ -95,7 +95,7 @@ Ut::debug_print_r($users);
 
 			foreach ($users as $user)
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_comments = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -103,7 +103,7 @@ Ut::debug_print_r($users);
 			}
 
 			// total revisions made
-			$users = $engine->load_all(
+			$users = $engine->db->load_all(
 				"SELECT r.user_id, COUNT(r.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}revision AS r, {$engine->config['user_table']} AS u ".
 				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' ".
@@ -111,7 +111,7 @@ Ut::debug_print_r($users);
 
 			foreach ($users as $user)
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_revisions = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -119,7 +119,7 @@ Ut::debug_print_r($users);
 			}
 
 			// total files uploaded
-			$users = $engine->load_all(
+			$users = $engine->db->load_all(
 					"SELECT u.user_id, COUNT(f.upload_id) AS n ".
 					"FROM {$engine->config['table_prefix']}upload f, {$engine->config['user_table']} AS u ".
 					"WHERE f.user_id = u.user_id ".
@@ -128,7 +128,7 @@ Ut::debug_print_r($users);
 
 			foreach ($users as $user)
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_uploads = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -142,7 +142,7 @@ Ut::debug_print_r($users);
 		}
 		else if ($_REQUEST['action'] == 'pagestats')
 		{
-			$comments = $engine->load_all(
+			$comments = $engine->db->load_all(
 					"SELECT p.page_id, COUNT( c.page_id ) AS n
 					FROM {$engine->config['table_prefix']}page AS c
 					RIGHT JOIN {$engine->config['table_prefix']}page AS p ON c.comment_on_id = p.page_id
@@ -159,7 +159,7 @@ Ut::debug_print_r($users);
 
 			foreach ($comments as $comment)
 			{
-				$engine->sql_query(
+				$engine->db->sql_query(
 					"UPDATE {$engine->config['table_prefix']}page ".
 					"SET comments = ".(int)$comment['n']." ".
 					"WHERE page_id = '".$comment['page_id']."' ".
@@ -212,13 +212,13 @@ Ut::debug_print_r($users);
 			{
 				// truncate table
 				$i = 0;
-				$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}link");
-				$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}file_link");
+				$engine->db->sql_query("DELETE FROM {$engine->config['table_prefix']}link");
+				$engine->db->sql_query("DELETE FROM {$engine->config['table_prefix']}file_link");
 			}
 
 			$engine->set_user_setting('dont_redirect', '1');
 
-			if ($pages = $engine->load_all(
+			if ($pages = $engine->db->load_all(
 			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id
 			FROM {$engine->config['table_prefix']}page
 			LIMIT ".($i * $limit).", $limit"))
@@ -242,7 +242,7 @@ Ut::debug_print_r($users);
 						}
 
 						// store to DB
-						$engine->sql_query(
+						$engine->db->sql_query(
 							"UPDATE {$engine->config['table_prefix']}page SET ".
 								"body_r		= " . $engine->db->q($page['body_r']) . ", ".
 								"body_toc	= " . $engine->db->q($page['body_toc']) . " ".

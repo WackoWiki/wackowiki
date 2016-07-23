@@ -61,7 +61,7 @@ if(!$nomark)
 
 if(!$for)
 {
-	$pages = $this->load_all(
+	$pages = $this->db->load_all(
 		"SELECT page_id, tag, title, hits ".
 		"FROM ".$this->config['table_prefix']."page ".
 		"ORDER BY hits DESC ".
@@ -74,7 +74,7 @@ else
 	if(!$dontrecurse || strtolower($dontrecurse) == 'false')
 	{
 		// We want to recurse and include all the sub pages of sub pages (and so on) in the listing
-		$pages = $this->load_all(
+		$pages = $this->db->load_all(
 			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits ".
 			"FROM ".$this->config['table_prefix']."page a, ".$this->config['table_prefix']."link l ".
 			"INNER JOIN ".$this->config['table_prefix']."page b ON (l.from_page_id = b.page_id) ".
@@ -89,7 +89,7 @@ else
 	else
 	{
 		// The only pages we want to display are those directly under the selected page, not their kids and grandkids
-		$pages = $this->load_all(
+		$pages = $this->db->load_all(
 			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits ".
 			"FROM ".$this->config['table_prefix']."page a, ".$this->config['table_prefix']."link l ".
 				"INNER JOIN ".$this->config['table_prefix']."page b ON (l.from_page_id = b.page_id) ".

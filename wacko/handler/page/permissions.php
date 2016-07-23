@@ -25,7 +25,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		if ($this->is_admin())
 		{
 			// admin can benefit to any possible user
-			$new_owner = $this->load_single(
+			$new_owner = $this->db->load_single(
 				"SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang ".
 				"FROM {$this->db->user_table} u ".
 					"LEFT JOIN {$this->db->table_prefix}user_setting s ON (u.user_id = s.user_id) ".
@@ -79,7 +79,7 @@ if (@$_POST['_action'] === 'set_permissions')
 
 		// Change permissions for all comments on this page
 		// TODO need to rethink/redo
-		$comments = $this->load_all(
+		$comments = $this->db->load_all(
 			"SELECT page_id ".
 			"FROM {$this->db->table_prefix}page ".
 			"WHERE comment_on_id = '".(int)$pid."' ".
@@ -104,19 +104,19 @@ if (@$_POST['_action'] === 'set_permissions')
 		if ($new_owner && ($new_id = (int)$new_owner['user_id']) != ($former_id = (int)$page['owner_id']))
 		{
 			// update user statistics
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->db->user_table} SET ".
 					"total_pages	= total_pages - 1 ".
 				"WHERE user_id		= '".$former_id."' ".
 				"LIMIT 1");
 
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->db->user_table} SET ".
 					"total_pages	= total_pages + 1 ".
 				"WHERE user_id		= '".$new_id."' ".
 				"LIMIT 1");
 
-			$this->sql_query(
+			$this->db->sql_query(
 				"UPDATE {$this->db->table_prefix}page SET ".
 					"owner_id = '".(int)$new_id."' ".
 				"WHERE page_id = '".(int)$pid."' ".
@@ -138,7 +138,7 @@ if (@$_POST['_action'] === 'set_permissions')
 	}
 	else
 	{
-		$pages = $this->load_all(
+		$pages = $this->db->load_all(
 			"SELECT page_id, tag, title, owner_id ".
 			"FROM {$this->db->table_prefix}page ".
 			"WHERE (supertag = ".$this->db->q($this->supertag).

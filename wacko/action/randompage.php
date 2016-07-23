@@ -30,11 +30,11 @@ $query = // "SELECT p.supertag ".
 			"AND p.page_id = a.`page_id` ";
 			// "AND p.body != '{{randompage}}' ". // very expensive
 
-$count = $this->load_single(
+$count = $this->db->load_single(
 		"SELECT COUNT(p.supertag) AS n ".
 		$query, true);
 
-$page = $this->load_single(
+$page = $this->db->load_single(
 		"SELECT p.supertag, p.tag ".
 		$query.
 		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"

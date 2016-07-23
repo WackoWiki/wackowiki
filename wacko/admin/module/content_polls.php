@@ -64,7 +64,7 @@ function admin_content_polls(&$engine, &$module)
 		// stop current survey
 		else if (isset($_POST['stop']) && $_POST['id'])
 		{
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"end = UTC_TIMESTAMP() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0 ".
@@ -75,11 +75,11 @@ function admin_content_polls(&$engine, &$module)
 		// reset current survey
 		else if (isset($_POST['reset']) && $_POST['id'])
 		{
-			$engine->sql_query(	// reset start date
+			$engine->db->sql_query(	// reset start date
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"start	= UTC_TIMESTAMP() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
-			$engine->sql_query(	// reset votes and update servey id
+			$engine->db->sql_query(	// reset votes and update servey id
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"poll_id		= ".($polls_obj->get_last_poll_id() + 1).", ".
 					"votes	= 0 ".
@@ -91,7 +91,7 @@ function admin_content_polls(&$engine, &$module)
 		// activate new survey
 		else if (isset($_POST['activate']) && $_POST['id'])
 		{
-			$engine->sql_query(
+			$engine->db->sql_query(
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"start = UTC_TIMESTAMP() ".
 				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");

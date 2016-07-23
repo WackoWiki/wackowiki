@@ -52,7 +52,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 		// usergroup members
 		$limit = 20;
-		$count = $this->load_single(
+		$count = $this->db->load_single(
 			"SELECT COUNT(m.user_id) AS total_members ".
 			"FROM {$this->config['table_prefix']}usergroup g ".
 				"LEFT JOIN ".$this->config['table_prefix']."usergroup_member m ON (m.group_id = g.group_id) ".
@@ -114,7 +114,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				$param .= "&amp;order=desc";
 			}
 
-			$members = $this->load_all(
+			$members = $this->db->load_all(
 				"SELECT u.user_id, u.user_name, u.signup_time, u.total_pages, u.total_revisions, u.total_comments, u.last_visit, s.hide_lastsession ".
 				"FROM {$this->config['table_prefix']}user u ".
 					"LEFT JOIN {$this->config['table_prefix']}usergroup_member m ON (u.user_id = m.user_id) ".
@@ -226,7 +226,7 @@ else
 		$param .= "&amp;order=desc";
 	}
 
-	$count = $this->load_single(
+	$count = $this->db->load_single(
 		"SELECT COUNT(group_name) AS n ".
 		"FROM {$this->config['table_prefix']}usergroup ".
 		( $where == true ? $where : '' ));
@@ -234,7 +234,7 @@ else
 	$pagination = $this->pagination($count['n'], $limit, 'p', $param);
 
 	// collect data
-	$groups = $this->load_all(
+	$groups = $this->db->load_all(
 		"SELECT g.group_name, g.description, g.created, u.user_name AS moderator, COUNT(m.user_id) AS members ".
 		"FROM {$this->config['table_prefix']}usergroup g ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator_id = u.user_id) ".
