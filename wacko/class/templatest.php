@@ -341,6 +341,11 @@ class Templatest
 
 	public static function set(&$tpl, $sub, $text, $prefix0 = null, $static = false)
 	{
+		if ($text === false || $text === null)
+		{
+			return;
+		}
+
 		list ($place, $loc, $block, $pipe) = $sub;
 
 		$filter = -1;
@@ -362,6 +367,10 @@ class Templatest
 			{
 				array_unshift($act, $text, $block !== false, $loc);
 				$text = call_user_func_array(TemplatestFilters::$filters[$filter], $act);
+				if ($text === false || $text === null)
+				{
+					return;
+				}
 			}
 			else
 			{
@@ -370,7 +379,7 @@ class Templatest
 		}
 
 		// if last filter is not escape and we set data (not subpattern) - do default escaping
-		if ($filter != 'escape' && !isset($prefix0))
+		if ($filter != 'escape' && $filter != 'e' && !isset($prefix0))
 		{
 			$text = call_user_func(TemplatestFilters::$filters['escape'], $text, $block !== false, $loc, @$tpl['escape'] ?: 'html');
 		}

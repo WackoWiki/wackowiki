@@ -5,78 +5,66 @@
  Common footer file.
  */
 
-?>
-</main>
-<footer>
-<nav class="footer">
-<div class="footerlist">
-<ul>
-<?php
 // If User has rights to edit page, show Edit link
-echo ($this->has_access('write') && ($this->method != 'edit')) ? '<li><a href="'.$this->href('edit').'" accesskey="E" title="'.$this->_t('EditTip').'">'.$this->_t('EditText')."</a></li>\n" : '';
-
-// If this page exists
-if ($this->page)
+if ($this->has_access('write') && $this->method != 'edit')
 {
-	if ($this->has_access('read'))
-	{
-		if (($mtime = $this->page['modified']))
-		{
-			// Revisions link
-			$formatted = $this->get_time_formatted($mtime);
-			echo !$this->hide_revisions
-					? '<li><a href="'.$this->href('revisions').'" title="'.$this->_t('RevisionTip').'">'.
-					    '<time datetime="'.$mtime.'">'.$formatted."</time></a></li>\n"
-					: '<li><time datetime="'.$mtime.'">'.$formatted."</time></li>\n";
-		}
-
-		// Show Owner of this page
-		if (($owner = $this->get_page_owner()))
-		{
-			if ($owner == 'System')
-			{
-				echo '<li>'.$this->_t('Owner').": ".$owner."</li>\n";
-			}
-			else
-			{
-				echo '<li>'.$this->_t('Owner').': '.$this->user_link($owner, '', true, false)."</li>\n";
-			}
-		}
-		else if (!$this->page['comment_on_id'])
-		{
-			echo '<li>'.$this->_t('Nobody').
-				($this->get_user() ? ' (<a href="'.$this->href('claim').'">'.$this->_t('TakeOwnership')."</a>)</li>\n" : '');
-		}
-
-		// Permalink
-		echo '<li>'.$this->action('hashid')."</li>\n";
-	}
+	$tpl->edit_href = $this->href('edit');
 }
 
-?>
-</ul>
-</div>
-</nav>
-<div id="credits"><?php
+if ($this->page && $this->has_access('read'))
+{
+	if (($mtime = $this->page['modified']))
+	{
+		// Revisions link
+		if ($this->hide_revisions)
+		{
+			$tpl->modHide_time = $mtime;
+		}
+		else
+		{
+			$tpl->mod_time = $mtime;
+			$tpl->mod_revisions = $this->href('revisions');
+		}
+	}
+
+	// Show Owner of this page
+	if (($owner = $this->get_page_owner()))
+	{
+		if ($owner == 'System')
+		{
+			$tpl->owner_name = $owner;
+		}
+		else
+		{
+			$tpl->owner_link = $this->user_link($owner, '', true, false);
+		}
+	}
+	else if (!$this->page['comment_on_id'])
+	{
+		if ($this->get_user())
+		{
+			$tpl->claim_take_href = $this->href('claim');
+		}
+		else
+		{
+			$tpl->claim = true;
+		}
+	}
+
+	// Permalink
+	$tpl->perma_link = $this->action('hashid');
+}
 
 if ($this->get_user())
 {
-	echo $this->_t('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki').
-		// STS: no need to add to config_default, it's private -dev feature
-		' '.$this->get_wacko_version().(@$this->config['wacko_patchlevel']).'<br />';
+	$tpl->by_home = $this->link('WackoWiki:HomePage', '', 'WackoWiki');
+	// STS: no need to add to config_default, it's private -dev feature
+	$tpl->by_version = $this->get_wacko_version();
+	$tpl->by_patchlevel = @$this->db->wacko_patchlevel;
 }
 
 // comment this out for not showing website policy link at the bottom of your pages
-if ($this->config['policy_page'])
+if ($this->db->policy_page)
 {
-	echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.
-		$this->_t('TermsOfUse').'</a><br />';
+	$tpl->policy_url = $this->href('', $this->config['policy_page']);
 }
-
-?></div>
-</footer>
-</div>
-<?php
-
-// Don't place final </body></html> here. Wacko closes HTML automatically.
-?>

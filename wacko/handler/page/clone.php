@@ -5,9 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo '<h3>';
-echo $this->_t('ClonePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0);
-echo "</h3>\n<br />\n";
+$tpl->headLink = $this->compose_link_to_page($this->tag, '', '', 0);
 
 // ensure that's not forum or comment
 $this->ensure_page();
@@ -44,12 +42,12 @@ if (@$_POST['_action'] === 'clone_page')
 	{
 		$this->clone_page($from, $to, $superto, $edit_note);
 		$this->log(4, Ut::perc_replace($this->_t('LogClonedPage', SYSTEM_LANG), $from, $to));
-		$this->set_message(Ut::perc_replace($this->_t('PageCloned'), $this->link('/'.$to)), 'info');
+		$log = Ut::perc_replace($this->_t('PageCloned'), $this->link('/'.$to));
 	}
 	else
 	{
 		//massclone
-		echo '<p><strong>' . $this->_t('MassCloning') . '</strong><p>';
+		$log = $tpl->massLog();
 
 		$pages = $this->db->load_all(
 			"SELECT page_id, tag, supertag ".
@@ -73,7 +71,7 @@ if (@$_POST['_action'] === 'clone_page')
 
 			if ($this->load_page($dst, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$alreadys[] = Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($dst, '', '', 0));
+				$log->err_a_error = Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($dst, '', '', 0));
 			}
 			else if (!$this->has_access('read', $page['page_id']))
 			{
@@ -90,16 +88,15 @@ if (@$_POST['_action'] === 'clone_page')
 			}
 			else if (!$this->has_access('create', '', '', 1, $dst))
 			{
-				$alreadys[] = Ut::perc_replace($this->_t('CloneCannotCreate'), $this->compose_link_to_page($dst, '', '', 0));
+				$log->err_a_error = Ut::perc_replace($this->_t('CloneCannotCreate'), $this->compose_link_to_page($dst, '', '', 0));
 			}
 
 			$work[$src] = $dst;
 		}
 
-		if (isset($alreadys))
+		if ($log->err_a)
 		{
-			$error = implode("</li>\n<li>", $alreadys);
-			$this->set_message('<ol><li>' . $error . '</li></ol>', 'error');
+			$this->set_message($log, 'error');
 			$this->reload_me();
 		}
 
@@ -107,17 +104,16 @@ if (@$_POST['_action'] === 'clone_page')
 		{
 			$this->clone_page($src, $dst, '', $edit_note);
 			$this->log(4, Ut::perc_replace($this->_t('LogClonedPage', SYSTEM_LANG), $src, $dst));
-			$log[] = Ut::perc_replace($this->_t('PageCloned'), $this->link('/'.$dst));
+			$log->log_l_message = Ut::perc_replace($this->_t('PageCloned'), $this->link('/'.$dst));
 		}
 
-		if (isset($log))
+		if ($log->log_l)
 		{
-			echo "$to: <br />\n";
-
-			$log = implode("</li>\n<li>", $log);
-			$this->set_message('<ol><li>' . $log . '</li></ol>', 'info');
+			$log->log_h_to = $to;
 		}
 	}
+
+	$this->set_message($log, 'info');
 
 	// jump to new clone
 	$this->redirect($this->href('', $jump));
@@ -132,39 +128,24 @@ if ($this->check_acl($this->get_user_name(), $this->config['rename_globalacl']))
 			"OR tag LIKE ".$this->db->q($from . '/%').") ".
 			"AND comment_on_id = '0'");
 
-	$do_cluster = (int)$klusterwerks['n'];
+	if ((int)$klusterwerks['n'])
+	{
+		$tpl->form_doCluster = true;
+	}
 }
-else
+
+// STS $add = (@$_GET['add'] || @$_POST['add']);
+$tpl->form_href = $this->href('clone');
+
+if (!($this->config['rewrite_mode'] || $this->config['ap_mode']))
 {
-	$do_cluster = false;
+	$tpl->form_h_mini = $this->mini_href('clone');
 }
 
-echo $this->_t('CloneName');
-echo $this->form_open('clone_page', ['page_method' => 'clone']);
-
-?>
-<input type="text" name="clone_name" size="40" maxlength="250"/>
-<?php
 // edit note
-if ($this->config['edit_summary'])
+if ($this->db->edit_summary)
 {
-	echo '<br />';
-	echo '<label for="edit_note">'.$this->_t('EditNote').':</label><br />'."\n";
-	echo '<input type="text" id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>'."\n";
+	$tpl->form_e_note = $edit_note;
 }
 
-if ($do_cluster)
-{
-	echo '<br /><br />';
-	echo '<input type="checkbox" id="massclone" name="massclone" />'."\n";
-	echo ' <label for="massclone">'.$this->_t('MassClone').'</label>'."\n";
-}
-?>
-<br /><br />
-<input type="submit" name="submit" value="<?php echo $this->_t('CloneButton'); ?>" /> &nbsp;
-<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
-
-<?php
-
-echo $this->form_close();
-
+$tpl->form_show = $this->href();
