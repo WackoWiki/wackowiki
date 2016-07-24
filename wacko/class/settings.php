@@ -108,14 +108,16 @@ class Settings extends Dbal implements ArrayAccess
 
 		// convenient config additions
 		$prefix = '';
+
 		foreach (explode('.', parse_url($this->base_url, PHP_URL_HOST)) as $part)
 		{
 			$prefix .= ucfirst(strtolower($part));
 		}
-		$hash				= hash('sha1', $this->base_url . $this->system_seed, true);
-		$this->cookie_prefix = $prefix . substr(Ut::http64_encode($hash), 1, 5);
-		$this->user_table	= $this->table_prefix . 'user';
-		$this->ap_mode		= (IN_WACKO == 'admin');
+
+		$hash					= hash('sha1', $this->base_url . $this->system_seed, true);
+		$this->cookie_prefix	= $prefix . substr(Ut::http64_encode($hash), 1, 5);
+		$this->user_table		= $this->table_prefix . 'user';
+		$this->ap_mode			= (IN_WACKO == 'admin');
 		$this->rebase_url();
 	}
 

@@ -130,14 +130,6 @@ class Wacko
 		return $this->dblink->load_single($query, $docache);
 	}
 
-	/**
-	 * @deprecated use db->q() instead
-	 */
-	function q($data)
-	{
-		return $this->dblink->q($data);
-	}
-
 	// MISC
 	function get_page_tag($page_id = 0)
 	{
@@ -1356,7 +1348,7 @@ class Wacko
 			{
 				$_spages	= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
 				$spages[]	= $_spages;
-				$spages_str	.= "'".$_spages."', ";
+				$spages_str	.= $this->db->q($_spages).", ";
 			}
 		}
 
@@ -1365,7 +1357,7 @@ class Wacko
 		if ($links = $this->db->load_all(
 		"SELECT ".$this->page_meta." ".
 		"FROM ".$this->config['table_prefix']."page ".
-		"WHERE supertag IN (" . $this->db->q($spages_str) . ")", true))
+		"WHERE supertag IN (" . $spages_str . ")", true))
 		{
 			foreach ($links as $link)
 			{

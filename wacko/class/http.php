@@ -34,8 +34,8 @@ class Http
 			exit;
 		}
 
-		$this->tls_session = $this->tls_session();
-		$this->real_ip = $this->real_ip();
+		$this->tls_session	= $this->tls_session();
+		$this->real_ip		= $this->real_ip();
 
 		if ($db->tls && $this->tls_session)
 		{
@@ -47,10 +47,10 @@ class Http
 
 		if ($request)
 		{
-			$router = new UriRouter($db);
-			$this->vars = $router->run(['_tls' => $this->tls_session, '_ip' => $this->real_ip]);
-			$this->page = $this->vars['page'];
-			$this->method = $this->vars['method'];
+			$router			= new UriRouter($db);
+			$this->vars		= $router->run(['_tls' => $this->tls_session, '_ip' => $this->real_ip]);
+			$this->page		= $this->vars['page'];
+			$this->method	= $this->vars['method'];
 			$this->check_cache();
 
 			// to be replaced then by no_cache or what
@@ -118,14 +118,15 @@ class Http
 	public function invalidate_page($page)
 	{
 		$n = 0;
+
 		if ($this->db->cache)
 		{
 			list($page, $hash) = $this->normalize_page($page);
 
 			$params	= $this->db->load_all(
 				"SELECT method, query ".
-					"FROM ".$this->db->table_prefix."cache ".
-					"WHERE name = ".$this->db->q($hash));
+				"FROM ".$this->db->table_prefix."cache ".
+				"WHERE name = ".$this->db->q($hash));
 
 			Ut::dbg('invalidate_page', $page);
 
@@ -135,6 +136,7 @@ class Http
 			{
 				$file	= $this->construct_id($page, $param['method'], $param['query']);
 				$x		= @touch($file, $past); // touching is faster than unlinking
+
 				if ($x)
 				{
 					++$n;
@@ -147,6 +149,7 @@ class Http
 				"DELETE FROM ".$this->db->table_prefix."cache ".
 				"WHERE name = ".$this->db->q($hash));
 		}
+
 		return $n;
 	}
 
@@ -387,8 +390,8 @@ class Http
 		// disable browser cache for page
 		if (!headers_sent())
 		{
-			header('Expires: ' . Ut::http_date(-1));				// Date in the past
-			header('Last-Modified: ' . Ut::http_date());						// always modified
+			header('Expires: ' . Ut::http_date(-1));						// Date in the past
+			header('Last-Modified: ' . Ut::http_date());					// always modified
 			header('Cache-Control: no-store, no-cache, must-revalidate');	// HTTP 1.1
 			header('Cache-Control: post-check=0, pre-check=0', false);
 			header('Pragma: no-cache');										// HTTP 1.0
@@ -416,9 +419,10 @@ class Http
 			{
 				$ips = preg_split('/[\s,]+/', $_SERVER[$ip], -1, PREG_SPLIT_NO_EMPTY);
 				$ips = array_diff($ips, $reverse_proxy_addresses);
-				$ips = array_filter($ips, function($ip) {
+				$ips = array_filter($ips, function($ip){
 					return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
 				});
+
 				if ($ips)
 				{
 					return $ips[0];

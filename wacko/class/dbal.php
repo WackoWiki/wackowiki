@@ -5,7 +5,11 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// STS: backward compat, it's here to be removed sometime
+/**
+ * backward compat, it's here to be removed sometime
+ *
+ * @deprecated use dblink->q() instead
+ */
 function quote($dblink, $string)
 {
 	return $dblink->quote($string);
@@ -42,7 +46,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 			}
 
 			// Change the current SQL mode at runtime
-			$sql_modes = $this->sql_mode_strict?  SQL_MODE_STRICT : SQL_MODE_PERMISSIVE;
+			$sql_modes = $this->sql_mode_strict ? SQL_MODE_STRICT : SQL_MODE_PERMISSIVE;
 			$this->db->query("SET SESSION sql_mode='$sql_modes'");
 		}
 	}
