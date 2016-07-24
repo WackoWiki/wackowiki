@@ -4188,6 +4188,30 @@ class Wacko
 
 			if (@file_exists($__pathname))
 			{
+				$__i = (int) strrpos($__pathname, '/'); // 0 if no / abnormality
+				$__tpl = Ut::join_path(substr($__pathname, 0, $__i), 'templates', substr($__pathname, $__i)); // STS magic
+				if (@file_exists($__tpl))
+				{
+					$tpl = Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
+					$tpl->pull('_t', function ($block, $loc, $str) { return $this->_t($str); });
+					$tpl->pull('csrf', function ($block, $loc, $action)
+						{
+							// do not cache pages with nonces!
+							$this->http->no_cache(false);
+
+							$nonce = $this->sess->create_nonce($action,
+								(($this->db->form_token_time == -1)? 1000000 : max(30, $this->db->form_token_time)));
+								// STS remove -1 from setup
+
+							return
+								'<input type="hidden" name="_nonce" value="' . $nonce . '" />' . "\n" .
+								'<input type="hidden" name="_action" value="' . $action . '" />' . "\n";
+						});
+					TemplatestEscaper::setEncoding($this->charset); // STS TODO charset must be not static, tied into User instance
+
+					// STS lotta goodies must go there..
+				}
+
 				if (is_array($__vars))
 				{
 					extract($__vars, EXTR_SKIP);
@@ -4198,6 +4222,11 @@ class Wacko
 				ob_start();
 				include $__pathname;
 				echo $include_tail;
+				if (isset($tpl))
+				{
+					// NB if tpl is active - there're ERROR if ob_get_contents != ''
+					echo $tpl;
+				}
 				$output = ob_get_contents();
 				ob_end_clean();
 

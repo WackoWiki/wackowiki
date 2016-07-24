@@ -1,6 +1,8 @@
 <?php
 
-// - patch in .tpl
+// push-style (with pull methods for e.g. csrf & i18n) lazy incremental built template engine for WackoWiki
+
+// TODO:
 
 if (!defined('IN_WACKO'))
 {
@@ -15,7 +17,7 @@ class Templatest
 	private static $filetimes;
 	private static $error;
 
-	static function read($filename)
+	static function read($filename, $cache_dir = null)
 	{
 		$cache = &static::$store[$filename];
 
@@ -23,22 +25,25 @@ class Templatest
 
 		if (!isset($cache))
 		{
-			$cachefile = strtr($filename, '/', ':') . '.cache'; // TODO path
-
-			clearstatcache();
-
-			// do not read stale or non-writable cachefile
-			if (($cachetime = @filemtime($cachefile))
-				&& (fileperms($cachefile) & 0222)
-				&& ($text = file_get_contents($cachefile))
-				&& ($cache = Ut::unserialize($text)))
+			if ($cache_dir)
 			{
-				foreach ($cache[2] as $fname => $ftim)
+				$cachefile = Ut::join_path($cache_dir, strtr($filename, '/', ':'));
+
+				clearstatcache();
+
+				// read cache file only if w-bits set - 'turn cache off' feature
+				if (($cachetime = @filemtime($cachefile))
+					&& (fileperms($cachefile) & 0222)
+					&& ($text = file_get_contents($cachefile))
+					&& ($cache = Ut::unserialize($text)))
 				{
-					if (@filemtime($fname) >= $cachetime)
+					foreach ($cache[2] as $fname => $ftim)
 					{
-						$cache = null;
-						break;
+						if (!($mtime = @filemtime($fname)) || $mtime >= $cachetime)
+						{
+							$cache = null;
+							break;
+						}
 					}
 				}
 			}
@@ -88,26 +93,7 @@ class Templatest
 
 							case 'patch':
 								list ($_dummy, $loc, $patname, $varname, $value) = $one;
-								if (!isset($store[$patname]['chunks']))
-								{
-									trigger_error('unknown pattern ' . $patname . ' at ' . $loc, E_USER_WARNING);
-								}
-								else
-								{
-									$pat = &$store[$patname];
-
-									if (!isset($pat['var'][$varname]))
-									{
-										trigger_error('unknown variable ' . $varname . ' at ' . $loc, E_USER_WARNING);
-									}
-									else
-									{
-										foreach ($pat['var'][$varname] as &$var)
-										{
-											Templatest::set($pat, $var, $value, null, 1);
-										}
-									}
-								}
+								static::patch($store, $patname, $varname, $value, $loc);
 								break;
 						}
 					}
@@ -123,12 +109,12 @@ class Templatest
 				$store[2] = static::$filetimes;
 
 				// cache to file
-				if (!@file_exists($cachefile) || (@fileperms($cachefile) & 0222))
+				// we won't write cache if w-bits is off, per-file 'turn cache off' feature
+				if (isset($cachefile) && (!@file_exists($cachefile) || (@fileperms($cachefile) & 0222)))
 				{
 					$text = Ut::serialize($store);
-					// unable to write cache file considered are 'turn config caching off' feature
-					@file_put_contents($cachefile, $text);
-					@chmod($cachefile, 0640);
+					file_put_contents($cachefile, $text);
+					chmod($cachefile, 0640);
 				}
 
 				// cache to factory
@@ -499,6 +485,30 @@ class Templatest
 							}
 						}
 					}
+				}
+			}
+		}
+	}
+
+	static function patch(&$store, $patname, $varname, $value, $loc)
+	{
+		if (!isset($store[$patname]['chunks']))
+		{
+			trigger_error('unknown pattern ' . $patname . ' at ' . $loc, E_USER_WARNING);
+		}
+		else
+		{
+			$pat = &$store[$patname];
+
+			if (!isset($pat['var'][$varname]))
+			{
+				trigger_error('unknown variable ' . $varname . ' at ' . $loc, E_USER_WARNING);
+			}
+			else
+			{
+				foreach ($pat['var'][$varname] as &$var)
+				{
+					Templatest::set($pat, $var, $value, null, 1);
 				}
 			}
 		}
