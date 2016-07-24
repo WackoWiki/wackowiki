@@ -43,9 +43,7 @@ if (@$_POST['_action'] === 'clone_page')
 	if (!isset($_POST['massclone']))
 	{
 		$this->clone_page($from, $to, $superto, $edit_note);
-
 		$this->log(4, Ut::perc_replace($this->_t('LogClonedPage', SYSTEM_LANG), $from, $to));
-
 		$this->set_message(Ut::perc_replace($this->_t('PageCloned'), $this->link('/'.$to)), 'info');
 	}
 	else
@@ -62,12 +60,14 @@ if (@$_POST['_action'] === 'clone_page')
 				"OR supertag = ".$this->db->q($superfrom).") ".
 				"AND comment_on_id = '0'");
 
-		$slashes = (int) @count_chars($from, 1)['/']; // @ to return 0 when no slashes used
-		$work = [];
+		$slashes	= (int) @count_chars($from, 1)['/']; // @ to return 0 when no slashes used
+		$work		= [];
+
 		foreach ($pages as $page)
 		{
 			// rebase page to cloned root
 			$src = $page['tag'];
+
 			for ($pos = 0, $i = $slashes; ($pos = strpos($src, '/', $pos)) !== false && $i--; ++$pos);
 			$dst = $to . ($pos? substr($src, $pos) : '');
 
@@ -80,10 +80,12 @@ if (@$_POST['_action'] === 'clone_page')
 				$this->set_message(
 					Ut::perc_replace($this->_t('CloneCannotRead'), $this->compose_link_to_page($src, '', '', 0)),
 					'error');
+
 				if ($dst === $to)
 				{
 					$jump = '';
 				}
+
 				continue;
 			}
 			else if (!$this->has_access('create', '', '', 1, $dst))
@@ -138,7 +140,6 @@ else
 }
 
 echo $this->_t('CloneName');
-
 echo $this->form_open('clone_page', ['page_method' => 'clone']);
 
 ?>
@@ -151,11 +152,10 @@ if ($this->config['edit_summary'])
 	echo '<label for="edit_note">'.$this->_t('EditNote').':</label><br />'."\n";
 	echo '<input type="text" id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" size="60" name="edit_note"/>'."\n";
 }
-?>
-<br /><br />
-<?php
+
 if ($do_cluster)
 {
+	echo '<br /><br />';
 	echo '<input type="checkbox" id="massclone" name="massclone" />'."\n";
 	echo ' <label for="massclone">'.$this->_t('MassClone').'</label>'."\n";
 }
