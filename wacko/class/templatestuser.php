@@ -1,5 +1,8 @@
 <?php
 
+// TODO:
+// - error diags: find $loc from debug_backtrace
+
 if (!defined('IN_WACKO'))
 {
 	exit;
@@ -224,25 +227,6 @@ class TemplatestUser
 	// patch static pattern base
 	function patch($patname, $varname, $value)
 	{
-		if (!isset($this->store[$patname]))
-		{
-			trigger_error('patch for unknown pattern ' . $patname . ' from file ' . $this->store[1], E_USER_WARNING);
-		}
-		else
-		{
-			$pat = &$this->store[$patname];
-
-			if (!isset($pat['var'][$varname]))
-			{
-				trigger_error('variable ' . $varname . ' not known in pattern ' . $patname . ' from file ' . $this->store[1], E_USER_WARNING);
-			}
-			else
-			{
-				foreach ($pat['var'][$varname] as &$var)
-				{
-					Templatest::set($pat, $var, $value, null, 1);
-				}
-			}
-		}
+		Templatest::patch($this->store, $patname, $varname, $value, $this->store[1]);
 	}
 }
