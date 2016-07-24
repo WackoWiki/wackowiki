@@ -89,7 +89,8 @@ class TemplatestEscaper
 				 * Check if the current character to escape has a name entity we should
 				 * replace it with while grabbing the integer value of the character.
 				 */
-				if (strlen($chr) > 1) {
+				if (strlen($chr) > 1)
+				{
 					$chr = static::convertEncoding($chr, 'UTF-32BE', 'UTF-8');
 				}
 

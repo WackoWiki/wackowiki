@@ -2,6 +2,8 @@
 
 // TODO:
 // - error diags: find $loc from debug_backtrace
+// - if not sets in instantiated subpat - do not emit it
+// + __get to return how many times IT was set
 
 if (!defined('IN_WACKO'))
 {
@@ -13,6 +15,7 @@ class TemplatestUser
 	private $store;
 	private $main;
 	private $pulls = [];
+	private $sets = [];
 	private $root;
 
 	function __construct($template, $main)
@@ -33,7 +36,7 @@ class TemplatestUser
 		else
 		{
 			$root['chunks'][0] = '';
-			$root['sub'][''][0] = [0, 'ROOT', false, [], $main, $tpl]; // TODO ROOT?
+			$root['sub'][''][0] = [0, 'ROOT', false, [], $main, null]; // TODO ROOT?
 		}
 
 		$this->root = $root;
@@ -104,6 +107,11 @@ class TemplatestUser
 		$this->set(func_get_args());
 	}
 
+	function __get($name)
+	{
+		return (int) @$this->sets[$name];
+	}
+
 	function __set($name, $value)
 	{
 		$path = explode('_', $name);
@@ -150,6 +158,11 @@ class TemplatestUser
 		}
 
 		$value = $args[$nargs - 1];
+		if ($value === false || $value === null)
+		{
+			return;
+		}
+
 		if ($nargs == 2)
 		{
 			$path = is_array($args[0])? $args[0] : explode('.', $args[0]);
@@ -161,28 +174,30 @@ class TemplatestUser
 
 		$rec = function (&$super, &$sub, $i) use (&$rec, $value, $path)
 		{
-			$name = $path[$i++];
-			if (!is_string($name))
-			{
-				return 'template set needs string as name';
-			}
-
 			if (!($pat = &$sub[5]))
 			{
 				// instantiate pattern
 				$pat = $this->store[$sub[4]];
+				$this->increment_sets($path, $i);
+			}
+
+			if (!isset($path[$i]))
+			{
+				// $tpl->sub = true; -- just to instantiate subpattern
+				return ($value === true)? null : 'template set ' . implode('.', $path) . ' do not reference variable';
+			}
+
+			$name = $path[$i];
+			if (!is_string($name))
+			{
+				return 'template set name ' . Ut::stringify($name) . ' must be string';
 			}
 
 			if (isset($pat['sub'][$name]))
 			{
-				if (!isset($path[$i]))
-				{
-					return 'template set subpattern ' . $name . ' last in path';
-				}
-
 				foreach ($pat['sub'][$name] as &$sub)
 				{
-					if (($err = $rec($pat, $sub, $i)))
+					if (($err = $rec($pat, $sub, $i + 1)))
 					{
 						return $err;
 					}
@@ -190,9 +205,9 @@ class TemplatestUser
 			}
 			else if (isset($pat['var'][$name]))
 			{
-				if (isset($path[$i]))
+				if (isset($path[$i + 1]))
 				{
-					return 'template set variable ' . $name . ' not last in path';
+					return 'template set variable ' . $name . ' not last in path ' . implode('.', $path);
 				}
 
 				if (isset($pat['set'][$name]))
@@ -202,6 +217,7 @@ class TemplatestUser
 
 					// re-instantiate pattern
 					$pat = $this->store[$sub[4]];
+					$this->increment_sets($path, $i);
 				}
 
 				$pat['set'][$name] = 1;
@@ -222,6 +238,29 @@ class TemplatestUser
 		{
 			trigger_error($err, E_USER_WARNING);
 		}
+	}
+
+	private function increment_sets($path, $i)
+	{
+		$var = implode('_', array_slice($path, 0, $i));
+		$n = (int) @$this->sets[$var];
+
+		if (($lvar = strlen($var)))
+		{
+			foreach ($this->sets as $svar => $scnt)
+			{
+				if (!strncmp($var . '_', $svar, $lvar + 1))
+				{
+					unset($this->sets[$svar]);
+				}
+			}
+		}
+		else
+		{
+			$this->sets = [];
+		}
+
+		$this->sets[$var] = $n + 1;
 	}
 
 	// patch static pattern base

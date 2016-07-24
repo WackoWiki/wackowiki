@@ -7,59 +7,46 @@ if (!defined('IN_WACKO'))
 
 if ($this->is_admin())
 {
+	$me = $this->href();
+
 	if (@$_POST['_action'] === 'purge_cache')
 	{
 		@set_time_limit(0);
 
-		$done = '';
+		$done = $tpl->post();
 
 		if (isset($_POST['pages_cache']) && ($n = Ut::purge_directory(CACHE_PAGE_DIR)))
 		{
 			// empties cache table and reset AUTO_INCREMENT value to its start value
 			$this->db->sql_query("TRUNCATE {$this->db->table_prefix}cache");
-
-			$done .= $this->_t('PageCache') . ' (' . $n . ') ... ';
+			$done->page_n = $n;
 		}
 
 		if (isset($_POST['sql_cache']) && ($n = Ut::purge_directory(CACHE_SQL_DIR)))
 		{
-			$done .= $this->_t('SQLCache') . ' (' . $n . ') ... ';
+			$done->sql_n = $n;
 		}
 
 		if (isset($_POST['config_cache']) && ($n = Ut::purge_directory(CACHE_CONFIG_DIR)))
 		{
-			$done .= $this->_t('ConfigCache') . ' (' . $n . ') ... ';
+			$done->config_n = $n;
 		}
 
-		if (isset($_POST['config_feed']) && ($n = Ut::purge_directory(CACHE_FEED_DIR)))
+		if (isset($_POST['feed_cache']) && ($n = Ut::purge_directory(CACHE_FEED_DIR)))
 		{
-			$done .= $this->_t('FeedCache') . ' (' . $n . ') ... ';
+			$done->feed_n = $n;
 		}
 
-		$this->set_message($done . $this->_t('CacheCleared'), 'success');
+		$this->set_message($done, 'success');
 
-		$this->redirect($this->href());
+		$this->http->redirect($me);
 	}
 
-	echo $this->form_open('purge_cache');
+	// STS $add = (@$_GET['add'] || @$_POST['add']);
+	$tpl->href = $me;
 
-	echo '<div class="layout-box">';
-
-	echo '<input type="checkbox" id="purgeconfig_cache" name="config_cache" />';
-	echo '<label for="purgeconfig_cache">'.$this->_t('ConfigCache').'</label><br />';
-
-	echo '<input type="checkbox" id="purgefiles_cache" name="pages_cache" />';
-	echo '<label for="purgefiles_cache">'.$this->_t('PageCache').'</label><br />';
-
-	echo '<input type="checkbox" id="purgesql_cache" name="sql_cache" />';
-	echo '<label for="purgesql_cache">'.$this->_t('SQLCache').'</label><br />';
-
-	echo '<input type="checkbox" id="purgefeeds_cache" name="feed_cache" />';
-	echo '<label for="purgefeeds_cache">'.$this->_t('FeedCache').'</label><br /><br />';
-
-	echo '<input type="submit" name="clear_cache" value="'. $this->_t('ClearCache').'" />';
-	echo '</div>';
-
-	echo $this->form_close();
-
+	if (!($this->db->rewrite_mode || $this->db->ap_mode))
+	{
+		$tpl->h_mini = $this->mini_href();
+	}
 }

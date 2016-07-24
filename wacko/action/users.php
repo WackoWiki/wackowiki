@@ -615,5 +615,3 @@ else
 
 	$this->print_pagination($pagination);
 }
-
-?>

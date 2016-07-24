@@ -2611,7 +2611,7 @@ class Wacko
 	{
 		if ($message)
 		{
-			$this->sess->sticky_messages[] = [$message, $type];
+			$this->sess->sticky_messages[] = [(string) $message, $type];
 		}
 	}
 
@@ -4189,12 +4189,13 @@ class Wacko
 			if (@file_exists($__pathname))
 			{
 				$__i = (int) strrpos($__pathname, '/'); // 0 if no / abnormality
-				$__tpl = Ut::join_path(substr($__pathname, 0, $__i), 'templates', substr($__pathname, $__i)); // STS magic
+				$__tpl = Ut::join_path(substr($__pathname, 0, $__i), 'templates', str_replace('.php', '.tpl', substr($__pathname, $__i))); // STS magic string
 				if (@file_exists($__tpl))
 				{
 					$tpl = Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
 					$tpl->pull('_t', function ($block, $loc, $str) { return $this->_t($str); });
-					$tpl->pull('csrf', function ($block, $loc, $action)
+					$tpl->pull('csrf',
+						function ($block, $loc, $action)
 						{
 							// do not cache pages with nonces!
 							$this->http->no_cache(false);
@@ -4208,6 +4209,18 @@ class Wacko
 								'<input type="hidden" name="_action" value="' . $action . '" />' . "\n";
 						});
 					TemplatestEscaper::setEncoding($this->charset); // STS TODO charset must be not static, tied into User instance
+					TemplatestFilters::filter('set_message',
+						function ($value, $block, $loc, $mode = 'info')
+						{
+							$this->set_message($value, $mode);
+							return null;
+						});
+					TemplatestFilters::filter('time_formatted',
+						function ($value, $block, $loc)
+						{
+							return $this->get_time_formatted($value);
+						});
+
 
 					// STS lotta goodies must go there..
 				}

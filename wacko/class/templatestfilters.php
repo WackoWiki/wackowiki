@@ -58,6 +58,7 @@ class TemplatestFilters
 				break;
 
 			case 'html_attr':
+			case 'attr':
 				$value = TemplatestEscaper::escapeHtmlAttr($value);
 				break;
 
