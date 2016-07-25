@@ -74,6 +74,7 @@ write_config_hidden_nodes(array('none' => ''));
 	@chmod (CACHE_FEED_DIR, 0777);
 	@chmod (CACHE_PAGE_DIR, 0777);
 	@chmod (CACHE_SQL_DIR, 0777);
+	@chmod (CACHE_TEMPLATE_DIR, 0777);
 	@chmod (CONFIG_FILE, 0777);
 	@chmod (SITE_LOCK, 0660);
 	@chmod (AP_LOCK, 0660);
@@ -91,6 +92,7 @@ write_config_hidden_nodes(array('none' => ''));
 								&& is_writable(CACHE_FEED_DIR)
 								&& is_writable(CACHE_PAGE_DIR)
 								&& is_writable(CACHE_SQL_DIR)
+								&& is_writable(CACHE_TEMPLATE_DIR)
 								&& is_writable(CONFIG_FILE)
 								&& is_writable(SITE_LOCK)
 								&& is_writable(AP_LOCK)
@@ -102,18 +104,19 @@ write_config_hidden_nodes(array('none' => ''));
 	?>
 <h2><?php echo $lang['Permissions']; ?></h2>
 <ul>
-	<li>_cache/config   <?php		echo output_image(is_writable(CACHE_CONFIG_DIR)); ?></li>
-	<li>_cache/feeds   <?php		echo output_image(is_writable(CACHE_FEED_DIR)); ?></li>
-	<li>_cache/pages   <?php		echo output_image(is_writable(CACHE_PAGE_DIR)); ?></li>
-	<li>_cache/queries   <?php		echo output_image(is_writable(CACHE_SQL_DIR)); ?></li>
-	<li>config/config.php   <?php	echo output_image(is_writable(CONFIG_FILE)); ?></li>
-	<li>config/lock   <?php			echo output_image(is_writable(SITE_LOCK)); ?></li>
-	<li>config/lock_ap   <?php		echo output_image(is_writable(AP_LOCK)); ?></li>
-	<li>files/backup   <?php		echo output_image(is_writable(UPLOAD_BACKUP_DIR)); ?></li>
-	<li>files/global   <?php		echo output_image(is_writable(UPLOAD_GLOBAL_DIR)); ?></li>
-	<li>files/perpage   <?php		echo output_image(is_writable(UPLOAD_PER_PAGE_DIR)); ?></li>
-	<li>xml   <?php					echo output_image(is_writable(XML_DIR)); ?></li>
-	<li>sitemap.xml   <?php			echo output_image(is_writable(SITEMAP_XML)); ?></li>
+	<li><?php echo CACHE_CONFIG_DIR		.'   '. output_image(is_writable(CACHE_CONFIG_DIR)); ?></li>
+	<li><?php echo CACHE_FEED_DIR		.'   '. output_image(is_writable(CACHE_FEED_DIR)); ?></li>
+	<li><?php echo CACHE_PAGE_DIR		.'   '. output_image(is_writable(CACHE_PAGE_DIR)); ?></li>
+	<li><?php echo CACHE_SQL_DIR		.'   '. output_image(is_writable(CACHE_SQL_DIR)); ?></li>
+	<li><?php echo CACHE_TEMPLATE_DIR	.'   '. output_image(is_writable(CACHE_TEMPLATE_DIR)); ?></li>
+	<li><?php echo CONFIG_FILE			.'   '. output_image(is_writable(CONFIG_FILE)); ?></li>
+	<li><?php echo SITE_LOCK			.'   '. output_image(is_writable(SITE_LOCK)); ?></li>
+	<li><?php echo AP_LOCK				.'   '. output_image(is_writable(AP_LOCK)); ?></li>
+	<li><?php echo UPLOAD_BACKUP_DIR	.'   '. output_image(is_writable(UPLOAD_BACKUP_DIR)); ?></li>
+	<li><?php echo UPLOAD_GLOBAL_DIR	.'   '. output_image(is_writable(UPLOAD_GLOBAL_DIR)); ?></li>
+	<li><?php echo UPLOAD_PER_PAGE_DIR	.'   '. output_image(is_writable(UPLOAD_PER_PAGE_DIR)); ?></li>
+	<li><?php echo XML_DIR				.'   '. output_image(is_writable(XML_DIR)); ?></li>
+	<li><?php echo SITEMAP_XML			.'   '. output_image(is_writable(SITEMAP_XML)); ?></li>
 </ul>
 	<?php
 	/*
