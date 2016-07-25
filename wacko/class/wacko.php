@@ -2012,7 +2012,7 @@ class Wacko
 						"body_r			= ".$this->db->q($body_r).", ".
 						"body_toc		= ".$this->db->q($body_toc).", ".
 						"edit_note		= ".$this->db->q($edit_note).", ".
-						"minor_edit		= ".(int)$minor_edit."', ".
+						"minor_edit		= '".(int)$minor_edit."', ".
 						(isset($reviewed)
 							?	"reviewed		= '".(int)$reviewed."', ".
 								"reviewed_time	= UTC_TIMESTAMP(), ".
