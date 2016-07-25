@@ -1,9 +1,8 @@
 <?php
 
-// push-style (with pull methods for e.g. csrf & i18n) lazy incremental built template engine for WackoWiki
+// push-style (with pull methods for e.g. csrf & i18n) lazy topo-ordered incremental building template engine for WackoWiki
 
 // TODO:
-// change loc in actions to lineno only, file is in pat
 
 if (!defined('IN_WACKO'))
 {
@@ -14,8 +13,11 @@ if (!defined('IN_WACKO'))
 
 class Templatest
 {
+	const CODE_VERSION = 2; // to not read incompatible cached data
 	private static $store = [];
 	private static $filetimes;
+	private static $filecount;
+	private static $fileidx;
 	private static $error;
 
 	static function read($filename, $cache_dir = null)
@@ -33,17 +35,24 @@ class Templatest
 				clearstatcache();
 
 				// read cache file only if w-bits set - 'turn cache off' feature
-				if (($cachetime = @filemtime($cachefile))
-					&& (fileperms($cachefile) & 0222)
+				if ((@fileperms($cachefile) & 0222)
 					&& ($text = file_get_contents($cachefile))
 					&& ($cache = Ut::unserialize($text)))
 				{
-					foreach ($cache[2] as $fname => $ftim)
+					if (@$cache[3] != static::CODE_VERSION)
 					{
-						if (!($mtime = @filemtime($fname)) || $mtime >= $cachetime)
+						$cache = null;
+					}
+					else
+					{
+						foreach ($cache[2] as $one)
 						{
-							$cache = null;
-							break;
+							list ($fname, $ftime) = $one;
+							if (!($mtime = @filemtime($fname)) || $mtime != $ftime)
+							{
+								$cache = null;
+								break;
+							}
 						}
 					}
 				}
@@ -51,7 +60,9 @@ class Templatest
 
 			if (!isset($cache))
 			{
+				static::$filecount = 0;
 				static::$error = 
+				static::$fileidx =
 				static::$filetimes = [];
 
 				$store = static::parse_file($filename);
@@ -60,6 +71,13 @@ class Templatest
 				{
 					static::$error[] = 'no main template found';
 				}
+
+				// store file meta-info
+				$store[1] = $filename;
+				$store[2] = static::$filetimes;
+				$store[3] = static::CODE_VERSION;
+
+				static::inline_definitions($store);
 
 				foreach ($store as &$meta)
 				{
@@ -105,10 +123,6 @@ class Templatest
 				static::inline_static_subs($store);
 				static::inline_defaults($store);
 
-				// store file meta-info
-				$store[1] = $filename;
-				$store[2] = static::$filetimes;
-
 				// cache to file
 				// we won't write cache if w-bits is off, per-file 'turn cache off' feature
 				if (isset($cachefile) && (!@file_exists($cachefile) || (@fileperms($cachefile) & 0222)))
@@ -140,7 +154,15 @@ class Templatest
 			return [];
 		}
 
-		static::$filetimes[$file] = filemtime($file);
+		if (isset(static::$fileidx[$file]))
+		{
+			$fileidx = static::$fileidx[$file];
+		}
+		else
+		{
+			$fileidx = static::$fileidx[$file] = static::$filecount++;
+			static::$filetimes[$fileidx] = [$file, filemtime($file)];
+		}
 
 		$part = '';
 		$store['setup'] = [];
@@ -153,14 +175,13 @@ class Templatest
 					$store[0] = $match[1]; // save first ("main") pattern name in [0]
 				}
 				$part = $match[1];
-				$store[$part]['text'] = '';
-				$store[$part]['file'] = $file;
+				$store[$part]['text'] = [];
+				$store[$part]['file'] = $fileidx;
 				$store[$part]['line'] = $lineno + 1;
 			}
 			else if ($part)
 			{
-				$store[$part]['text'] .= str_replace("\r", '', $line);
-				$store[$part]['pos'][$lineno + 1] = strlen($store[$part]['text']);
+				$store[$part]['text'][] = [$lineno + 1, str_replace("\r", '', $line)];
 			}
 			else
 			{
@@ -199,9 +220,63 @@ class Templatest
 		return $store;
 	}
 
+	private static function inline_definitions(&$store)
+	{
+		// [ ==== abc def
+		//   ....
+		// ===== ]
+		while (!isset($stable))
+		{
+			$stable = 0;
+			foreach ($store as &$meta)
+			{
+				if (isset($meta['text']))
+				{
+					foreach ($meta['text'] as $i => &$numline)
+					{
+						list ($lineno, $line) = $numline;
+						if (preg_match('/^(\h*)\[\h*=+\h*(([a-z][a-z0-9]*)(\h+([a-z][a-z0-9]*))?\b.*?)\h*=+\h*$/i', $line, $match))
+						{
+							$patname = (isset($match[5]) && $match[5])? $match[5] : $match[3];
+							if (isset($store[$patname]))
+							{
+								static::$error[] = 'double-defined pattern ' . $patname . ' at ' . $store[2][$meta['file']][0] . ':' . $lineno;
+							}
+							else
+							{
+								$first = $match;
+								$firstline = $i;
+								$firstlineno = $lineno;
+							}
+						}
+						else if (preg_match('/^\h*=+\h*\]\h*$/i', $line, $match) && isset($first))
+						{
+							$replace = $first[1] . "[ '''''' " . $first[2] . " '''''' ]\n";
+							$piece = array_splice($meta['text'], $firstline, $i + 1 - $firstline, [[$firstlineno, $replace]]);
+							$store[$patname]['text'] = array_slice($piece, 1, -1);
+							$store[$patname]['file'] = $meta['file'];
+							$store[$patname]['line'] = $firstlineno;
+							unset($first);
+							unset($stable);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	private static function compile(&$meta, &$store)
 	{
-		$text = $meta['text'];
+		$text = '';
+		$eolpos = 0;
+		foreach ($meta['text'] as $numline)
+		{
+			list ($lineno, $line) = $numline;
+			$text .= $line;
+			$linepos[$lineno] = ($eolpos += strlen($line));
+		}
+		unset($meta['text']);
 
 		// pre-compile common \h prefix
 		$meta['prefix'] = static::compute_prefix($text);
@@ -263,7 +338,7 @@ class Templatest
 				$chunks[$placement = $chunk++] = '';
 
 				// find out line number of tag for diags
-				foreach ($meta['pos'] as $lineno => $offs)
+				foreach ($linepos as $lineno => $offs)
 				{
 					if ($until < $offs)
 					{
@@ -271,7 +346,7 @@ class Templatest
 					}
 				}
 
-				$loc = $meta['file'] . ':' . $lineno;
+				$loc = static::$filetimes[$meta['file']][0] . ':' . $lineno;
 
 				$arg = (array) array_shift($pipe);
 				$arg0 = (string) $arg[0];
@@ -285,7 +360,7 @@ class Templatest
 				}
 
 				// common prefix for all actions
-				$set = [$placement, $loc, $block, $pipe];
+				$set = [$placement, $lineno, $block, $pipe];
 
 				$static = 0;
 				if ($narg >= 1 && preg_match('/^(\w+):$/', $arg0, $match))
@@ -335,19 +410,17 @@ class Templatest
 
 		$meta['chunks'] = $chunks;
 		$static and $meta['static'] = 1;
-
-		unset($meta['text']);
-		unset($meta['pos']);
 	}
 
-	public static function set(&$tpl, $sub, $text, $prefix0 = null, $static = false)
+	public static function set(&$store, &$tpl, $sub, $text, $prefix0 = null, $static = false)
 	{
 		if ($text === false || $text === null)
 		{
 			return;
 		}
 
-		list ($place, $loc, $block, $pipe) = $sub;
+		list ($place, $lineno, $block, $pipe) = $sub;
+		$loc = $store[2][$tpl['file']][0] . ':' . $lineno;
 
 		$filter = -1;
 		foreach ($pipe as $act)
@@ -435,13 +508,13 @@ class Templatest
 		}
 	}
 
-	private static function inline_static_subs(&$tpl)
+	private static function inline_static_subs(&$store)
 	{
 		// inline static subpatterns
 		while (!isset($stable))
 		{
 			$stable = 0;
-			foreach ($tpl as $name => &$pat)
+			foreach ($store as $name => &$pat)
 			{
 				if (isset($pat['sub']))
 				{
@@ -449,11 +522,11 @@ class Templatest
 					{
 						foreach ($sublist as $i => &$sub)
 						{
-							$incl = $tpl[$sub[4]];
+							$incl = $store[$sub[4]];
 
 							if (isset($incl['static']))
 							{
-								static::set($pat, $sub, implode('', $incl['chunks']), $incl['prefix'], 1);
+								static::set($store, $pat, $sub, implode('', $incl['chunks']), $incl['prefix'], 1);
 
 								unset($sublist[$i]);
 								if (!$sublist)
@@ -478,9 +551,9 @@ class Templatest
 		}
 	}
 
-	private static function inline_defaults(&$tpl)
+	private static function inline_defaults(&$store)
 	{
-		foreach ($tpl as $name => &$pat)
+		foreach ($store as $name => &$pat)
 		{
 			foreach (['sub', 'var'] as $what)
 			{
@@ -494,7 +567,7 @@ class Templatest
 							{
 								if (count($act) == 2 && $act[0] === 'default')
 								{
-									static::set($pat, $sub, $act[1], null, 1);
+									static::set($store, $pat, $sub, $act[1], null, 1);
 								}
 							}
 						}
@@ -522,7 +595,7 @@ class Templatest
 			{
 				foreach ($pat['var'][$varname] as &$var)
 				{
-					Templatest::set($pat, $var, $value, null, 1);
+					Templatest::set($store, $pat, $var, $value, null, 1);
 				}
 			}
 		}

@@ -36,8 +36,9 @@ class TemplatestUser
 		else
 		{
 			$root['chunks'][0] = '';
-			$root['sub'][''][0] = [0, 'ROOT', false, [], $main, null]; // TODO ROOT?
+			$root['sub'][''][0] = [0, 0, false, [], $main, null];
 		}
+		$root['file'] = 0;
 
 		$this->root = $root;
 	}
@@ -68,15 +69,17 @@ class TemplatestUser
 		{
 			foreach ($pat['pull'] as $pull)
 			{
-				list ($_place, $loc, $block, $_pipe, $id, $args) = $pull;
+				list ($_place, $lineno, $block, $_pipe, $id, $args) = $pull;
+				$loc = $this->store[2][$pat['file']][0] . ':' . $lineno;
 
 				if (!isset($this->pulls[$id]))
 				{
 					die('using unknown pull ' . $id . ': at ' . $loc);
 				}
 
+				// single place from where pull: handlers called
 				array_unshift($args, $block !== false, $loc);
-				Templatest::set($pat, $pull, call_user_func_array($this->pulls[$id], $args));
+				Templatest::set($this->store, $pat, $pull, call_user_func_array($this->pulls[$id], $args));
 			}
 		}
 
@@ -88,7 +91,7 @@ class TemplatestUser
 				{
 					if (($data = $sub[5]))
 					{
-						Templatest::set($pat, $sub, $this->commit($data), $data['prefix']);
+						Templatest::set($this->store, $pat, $sub, $this->commit($data), $data['prefix']);
 					}
 				}
 			}
@@ -213,7 +216,7 @@ class TemplatestUser
 				if (isset($pat['set'][$name]))
 				{
 					// auto-commit on repeated setting
-					Templatest::set($super, $sub, $this->commit($pat), $pat['prefix']);
+					Templatest::set($this->store, $super, $sub, $this->commit($pat), $pat['prefix']);
 
 					// re-instantiate pattern
 					$pat = $this->store[$sub[4]];
@@ -224,7 +227,7 @@ class TemplatestUser
 
 				foreach ($pat['var'][$name] as &$var)
 				{
-					Templatest::set($pat, $var, $value);
+					Templatest::set($this->store, $pat, $var, $value);
 				}
 			}
 			else
