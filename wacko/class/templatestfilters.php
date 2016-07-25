@@ -280,6 +280,12 @@ class TemplatestFilters
 		return Ut::isempty($delimiter)? str_split($value, $limit) : explode($delimiter, $value, $limit);
 	}
 
+	static function filter_dbg($value, $block, $loc)
+	{
+		Diag::dbg($loc, $value);
+		return $value;
+	}
+
 	// add user filter function
 	static function filter($id, $func)
 	{
