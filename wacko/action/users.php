@@ -18,24 +18,23 @@ if (($profile = @$_REQUEST['profile']))
 	// does requested user exists?
 	if (!($user = $this->load_user($profile)))
 	{
-		$this->show_message(Ut::perc_replace($this->_t('UsersNotFound'),
-				$this->supertag, htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)));
+		$tpl->notFound_diag = Ut::perc_replace($this->_t('UsersNotFound'),
+				$this->supertag, htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET));
 	}
 	else if (!$user['enabled'])
 	{
-		$this->show_message($this->_t('AccountDisabled'));
+		$tpl->Disabled = true;
 	}
 	else
 	{
 		$profile = 'profile=' . rawurlencode($user['user_name']);
 
 		// usergroups
-		$user_groups = '';
-		if (is_array($this->config['aliases']))
+		if (is_array($this->db->aliases))
 		{
 			// collecting usergroup names where user takes membership
 			$groups = [];
-			foreach ($this->config['aliases'] as $group_name => $group_str)
+			foreach ($this->db->aliases as $group_name => $group_str)
 			{
 				$group_users = explode('\n', $group_str);
 
@@ -45,7 +44,11 @@ if (($profile = @$_REQUEST['profile']))
 				}
 			}
 
-			$user_groups = implode(', ', $groups);
+			$tpl->u_userGroups_list = implode(', ', $groups);
+		}
+		else
+		{
+			$tpl->u_userGroups_na = true;
 		}
 
 		if ($this->page['page_lang'] != $user['account_lang'])
@@ -121,54 +124,37 @@ if (($profile = @$_REQUEST['profile']))
 				$this->log(4, Ut::perc_replace($this->_t('LogPMSent', $this->config['language']), $this->get_user_name(), $user['user_name']));
 
 				$this->sess->intercom_delay	= time();
-				$_POST['mail_body']			= '';
-				$_POST['mail_subject']		= '';
+				$_POST['mail_body']			=
+				$_POST['mail_subject']		=
 				$_POST['ref']				= '';
 			}
 		}
 
 		// header and profile data
-		echo '<h1>' . $user['user_name'] . '</h1>';
-		echo '<small><a href="' . $this->href('', $this->tag) . '">&laquo; ' . $this->_t('UsersList') . "</a></small>\n";
-		echo '<h2>' . $this->_t('UsersProfile') . "</h2>\n";
+		$tpl->u_user = $user;
+		//$tpl->u_href = $this->href('', $this->tag);
+		$tpl->u_href = $this->href(); // STS let's test - tag here is by default
 
 		// basic info
-?>
-		<table style="border-spacing: 3px; border-collapse: separate;">
-			<tr class="lined">
-				<td class="userprofil"><?php echo $this->_t('RealName'); ?></td>
-				<td><?php echo $user['real_name']; ?></td>
-			</tr>
-			<tr class="lined">
-				<td class="userprofil"><?php echo $this->_t('UsersSignupDate'); ?></td>
-				<td><?php echo $this->get_time_formatted($user['signup_time']); ?></td>
-			</tr>
-			<tr class="lined">
-				<td class="userprofil"><?php echo $this->_t('UsersLastSession'); ?></td>
-				<td><?php echo $user['hide_lastsession']
-					? '<em>' . $this->_t('UsersSessionHidden') . '</em>'
-					: ( $user['last_visit'] === SQL_DATE_NULL
-						? '<em>' . $this->_t('UsersSessionNA') . '</em>'
-						: $this->get_time_formatted($user['last_visit']) )
-					; ?></td>
-			</tr>
-			<tr class="lined"><?php // Have all user pages as sub pages of the current Users page.
-								?>
-				<td class="userprofil"><?php echo $this->_t('UserSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></td>
-				<td><a href="<?php echo $this->href('', ($this->config['users_page'] . '/' . $user['user_name'])); ?>"><?php echo $this->config['users_page'].'/'.$user['user_name']; ?></a></td>
-			</tr>
-			<tr class="lined">
-				<td class="userprofil"><a href="<?php echo $this->href('', $this->config['groups_page']); ?>"><?php echo $this->_t('UsersGroupMembership'); ?></a></td>
-				<td><?php echo ( $user_groups ? $user_groups : '<em>'.$this->_t('UsersNA2').'</em>' ); ?></td>
-			</tr>
-		</table>
-<?php
+		if ($user['hide_lastsession'])
+		{
+			$tpl->u_last_hidden = true;
+		}
+		else if ($user['last_visit'] === SQL_DATE_NULL)
+		{
+			$tpl->u_last_na = true;
+		}
+		else
+		{
+			$tpl->u_last_last_visit = $user['last_visit'];
+		}
+
+		$tpl->u_userPage_href = $this->href('', ($this->config['users_page'] . '/' . $user['user_name']));
+		$tpl->u_userPage_text = $this->config['users_page'].'/'.$user['user_name'];
+
 		// hide contact form if profile is equal with current user
 		if ($user['user_id'] != $this->get_user_id())
 		{
-			// contact form
-			echo '<h2>' . $this->_t('UsersContact') . "</h2>\n";
-
 			// only registered users can send PMs
 			if ($logged_in)
 			{
@@ -185,68 +171,40 @@ if (($profile = @$_REQUEST['profile']))
 						$subject = 'Re: ' . $subject;
 					}
 				}
-?>
-				<br />
-				<?php echo $this->form_open('personal_message'); ?>
-				<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
-				<?php
+				// $tpl->u_pm
+
+				$tpl->u_pm_pm_href = $this->href();
+				// STS hidden
+				$tpl->u_pm_pm_username = $user['user_name'];
 				if (isset($ref))
 				{
-					echo '<input type="hidden" name="ref" value="'.htmlspecialchars($ref, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
-				}?>
-				<table class="formation">
-<?php
+					$tpl->u_pm_pm_ref_ref = $ref;
+				}
+
 				// user must allow incoming messages, and needs confirmed email address set
 				if ($this->config['enable_email'] && $user['allow_intercom'] && $user['email'] && !$user['email_confirm'])
 				{
-?>
-				<tr>
-					<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->_t('UsersIntercomSubject'); ?>:</td>
-					<td>
-						<input type="text" name="mail_subject" value="<?php echo (isset($subject) ? htmlspecialchars($subject, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200" />
-						<?php
-						if (isset($ref))
-						{
-							echo '&nbsp;&nbsp; <a href="'.$this->href('', '', $profile.'#contacts').'">'.$this->_t('UsersIntercomSubjectN').'</a>';
-						} ?>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo (isset($_POST['mail_body']) ? htmlspecialchars($_POST['mail_body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ""); ?></textarea></td>
-				</tr>
-				<tr>
-					<td><input type="submit" id="submit" name="send_pm" value="<?php echo $this->_t('UsersIntercomSend'); ?>" /></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<small><?php echo $this->_t('UsersIntercomDesc');
-						?></small>
-					</td>
-				</tr>
-<?php
+					// $tpl->u_pm_pm_ic_ = 
+					$tpl->u_pm_pm_ic_subj = isset($subject)? $subject : '';
+					if (isset($ref))
+					{
+						$tpl->u_pm_pm_ic_ref_href = $this->href('', '', $profile.'#contacts');
+					}
+					$tpl->u_pm_pm_ic_body = isset($_POST['mail_body'])? $_POST['mail_body'] : '';
 				}
 				else
 				{
-					echo '<tr><td colspan="2" style="text-align:center;"><strong><em>'.$this->_t('UsersIntercomDisabled').'</em></strong></td></tr>';
+					$tpl->u_pm_pm_userContactDisabled = true;
 				}
-?>
-			</table>
-			<?php echo $this->form_close(); ?>
-<?php
 			}
 			else
 			{
-				echo '<table class="formation"><tr><td colspan="2" style="text-align:center;"><em>'.$this->_t('UsersPMNotLoggedIn').'</em></td></tr></table>';
+				$tpl->u_pm_not = true;
 			}
 		}
 
 		// user-owned pages
 		$limit = 10;
-
-		echo '<h2 id="pages">' . $this->_t('UsersPages') . "</h2>\n";
-		echo '<div class="indent"><small>' . $this->_t('UsersOwnedPages') . ': ' .  $user['total_pages'];
-		echo '&nbsp;&nbsp;&nbsp; ' . $this->_t('UsersRevisionsMade') . ': ' . $user['total_revisions'] . "</small></div><br />\n";
-
 
 		if ($user['total_pages'])
 		{
@@ -264,16 +222,18 @@ if (($profile = @$_REQUEST['profile']))
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// sorting and pagination
-			echo '<small><a href="'.
-				($sort_name? $this->href('', '', $profile . '&amp;sort=date') . '#pages">' . $this->_t('UsersDocsSortDate')
-						   : $this->href('', '', $profile . '&amp;sort=name') . '#pages">' . $this->_t('UsersDocsSortName')
-			    ) . '</a></small>';
+			if ($sort_name)
+			{
+				$tpl->u_pages_date_href = $this->href('', '', $profile . '&amp;sort=date');
+			}
+			else
+			{
+				$tpl->u_pages_name_href = $this->href('', '', $profile . '&amp;sort=name');
+			}
 
-			$this->print_pagination($pagination);
+			$tpl->u_pages_pagination_text = $pagination['text'];
 
 			// pages list itself
-			echo '<ul class="ul_list">'."\n";
-
 			foreach ($pages as $page)
 			{
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id'], $this->get_user_name()))
@@ -284,30 +244,27 @@ if (($profile = @$_REQUEST['profile']))
 					// cache page_id for for has_access validation in link function
 					$this->page_id_cache[$page['tag']] = $page['page_id'];
 
-					echo '<li class="lined"><small>' . $this->get_time_formatted($page['created']) . '</small>  &mdash; ';
-					echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang) . "</li>\n";
+					$tpl->u_pages_li_created = $page['created'];
+					$tpl->u_pages_li_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
 				}
 			}
-			echo "</ul>\n";
 		}
 		else
 		{
-			echo '<em>' . $this->_t('UsersNA2') . '</em>';
+			$tpl->u_userPagesNA = true;
 		}
 
 		// last user comments
 		$limit = 10;
 
-		echo '<h2 id="comments">' . $this->_t('UsersComments') . "</h2>\n";
-
 		if ($this->user_allowed_comments())
 		{
-			echo '<div class="indent"><small>' . $this->_t('UsersCommentsPosted') . ': ' . $user['total_comments'] . "</small></div>\n";
+			$tpl->u_cmt_n = $user['total_comments'];
 
 			if ($user['total_comments'])
 			{
 				$pagination = $this->pagination($user['total_comments'], $limit, 'c', $profile . '#comments');
-				$this->print_pagination($pagination);
+				$tpl->u_cmt_c_pagination_text = $pagination['text'];
 
 				$comments = $this->db->load_all(
 					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang ".
@@ -321,8 +278,6 @@ if (($profile = @$_REQUEST['profile']))
 					"LIMIT {$pagination['offset']}, $limit");
 
 				// comments list itself
-				echo '<ul class="ul_list">' . "\n";
-
 				foreach ($comments as $comment)
 				{
 					if (!$this->config['hide_locked'] || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
@@ -333,21 +288,19 @@ if (($profile = @$_REQUEST['profile']))
 						// cache page_id for for has_access validation in link function
 						$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 
-						echo '<li class="lined"><small>' . $this->get_time_formatted($comment['created']);
-						echo '</small>  &mdash; ' . $this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang) . "</li>\n";
+						$tpl->u_cmt_c_li_created = $comment['created'];
+						$tpl->u_cmt_c_li_link = $this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
 					}
 				}
-
-				echo "</ul>\n";
 			}
 			else
 			{
-				echo '<em>' . $this->_t('UsersNA2') . '</em>';
+				$tpl->u_cmt_none = true;
 			}
 		}
 		else
 		{
-			echo $this->_t('CommentsDisabled');
+			$tpl->u_CommentsDisabled = true;
 		}
 
 		// last user uploads
@@ -356,16 +309,15 @@ if (($profile = @$_REQUEST['profile']))
 		{
 			$limit = 10;
 
-			echo '<h2 id="uploads">' . $this->_t('UsersUploads') . "</h2>\n";
-
 			if ($this->config['upload'] == 1 || $this->is_admin())
 			{
-				echo '<div class="indent"><small>' . $this->_t('UsersFilesUploaded') . ': ' . $user['total_uploads'] . "</small></div>\n";
+				$tpl->u_up_u_n = $user['total_uploads'];
 
 				if ($user['total_uploads'])
 				{
 					$pagination = $this->pagination($user['total_uploads'], $limit, 'u', $profile . '#comments');
-					$this->print_pagination($pagination);
+
+					$tpl->u_up_u_u2_pagination_text = $pagination['text'];
 
 					$uploads = $this->db->load_all(
 							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page ".
@@ -378,10 +330,6 @@ if (($profile = @$_REQUEST['profile']))
 							"LIMIT {$pagination['offset']}, $limit");
 
 					// uploads list itself
-					echo '<ul class="ul_list">'."\n";
-
-					$separator	= ' . . . . . . . . . . . . . . . . ';
-
 					foreach ($uploads as $upload)
 					{
 						if (!$this->config['hide_locked']
@@ -403,6 +351,7 @@ if (($profile = @$_REQUEST['profile']))
 
 							preg_match('/^[^\/]+/', $upload['file_on_page'], $sub_tag);
 
+							// TODO need to be redone, moving to tpl
 							if ($upload['page_id']) // !$global
 							{
 								// cache page_id for for has_access validation in link function
@@ -419,22 +368,22 @@ if (($profile = @$_REQUEST['profile']))
 								$on_page	= '<span title="">&rarr; global';
 							}
 
-							echo '<li class="lined"><small>' . $this->get_time_formatted($upload['uploaded_dt']);
-							echo '</small>  &mdash; ' . $this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang);
-							echo $separator . ' ' . $on_page . '</span>' . $file_description . "</li>\n";
+							$tpl->u_up_u_u2_li_t = $upload['uploaded_dt'];
+							$tpl->u_up_u_u2_li_link = $this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang);
+							$tpl->u_up_u_u2_li_onpage = $on_page;
+							$tpl->u_up_u_u2_li_descr = $file_description;
 						}
 					}
-
-					echo "</ul>\n";
 				}
 				else
 				{
-					echo '<em>'.$this->_t('UsersNA2').'</em>';
+					$tpl->u_up_u_none = true;
 				}
 			}
 			else
 			{
-				// echo $this->_t('CommentsDisabled');
+				$tpl->u_up = true;
+				// $this->_t('CommentsDisabled');
 			}
 		}
 	}
@@ -528,45 +477,28 @@ else
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// user filter form
-	echo $this->form_open('search_user', ['form_method' => 'get']);
-	echo '<table class="formation"><tr><td class="label">';
-	echo $this->_t('UsersSearch') . ': </td><td>';
-	echo '<input type="search" required="required" name="user" maxchars="40" size="40" value="'.
-			htmlspecialchars($_user0, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET). '" /> ';
-	echo '<input type="submit" id="submit" value="' . $this->_t('UsersFilter') . '" /> ';
-	//echo '<input type="submit" id="button" value="' . $this->_t('UsersOpenProfile') . '" name="gotoprofile" />';
-	echo '</td></tr></table><br />'."\n";
-	echo $this->form_close();
+	$tpl->l_href = $this->href();
+	// STS h hidden
+	$tpl->l_user0 = $_user0;
 
-	$this->print_pagination($pagination);
-
-	// print list
-	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;\">\n";
+	$tpl->l_pagination_text = $pagination['text'];
 
 	// change sorting order navigation bar
-	$sort_link = function ($sort, $text) use ($_sort, $_order, $params)
+	$sort_link = function ($sort, $text) use ($_sort, $_order, $params, &$tpl)
 	{
+		$tpl->l_s_what = $this->_t($text);
 		$order = 'asc';
-		$arrow = '';
 		if ($_sort == $sort)
 		{
 			if ($_order == 'asc')
 			{
 				$order = 'desc';
-				$arrow = '&nbsp;&uarr;';
 			}
-			else
-			{
-				$arrow = '&nbsp;&darr;';
-			}
+			$tpl->l_s_arrow_a = $order;
 		}
-		echo '<th><a href="' . $this->href('', '', $params($sort, $order)) . '">';
-		echo $this->_t($text);
-		echo $arrow;
-		echo '</a></th>';
+		$tpl->l_s_link = $this->href('', '', $params($sort, $order));
 	};
 
-	echo '<tr>';
 	$sort_link('name', 'UsersName');
 	$sort_link('pages', 'UsersPages');
 	$sort_link('comments', 'UsersComments');
@@ -577,41 +509,34 @@ else
 		$sort_link('signup', 'UsersSignup');
 		$sort_link('last_visit', 'UsersLastSession');
 	}
-	echo "</tr>\n";
 
 	// list entries
 	if (!$users)
 	{
-		echo '<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>' .
-				$this->_t('UsersNoMatching') . "</em></small></td></tr>\n";
+		$tpl->l_none = true;
 	}
 	else
 	{
 		foreach ($users as $user)
 		{
-			echo '<tr class="lined">';
-
-			echo	'<td style="padding-left:5px;">' . $this->user_link($user['user_name'], $user['account_lang'], true, false) . '</td>'.
-					'<td style="text-align:center;">' . $user['total_pages'] . '</td>'.
-					'<td style="text-align:center;">' . $user['total_comments'] . '</td>'.
-					'<td style="text-align:center;">' . $user['total_revisions'] . '</td>';
+			$tpl->l_u_user = $user;
+			$tpl->l_u_link = $this->user_link($user['user_name'], $user['account_lang'], true, false);
 			if ($logged_in)
 			{
-				echo
-					'<td style="text-align:center;">' . $user['total_uploads'] . '</td>'.
-					'<td style="text-align:center;">' . $this->get_time_formatted($user['signup_time']) . '</td>'.
-					'<td style="text-align:center;">' . ($user['hide_lastsession']
-					? '<em>' . $this->_t('UsersSessionHidden') . '</em>'
-					: ($user['last_visit'] === SQL_DATE_NULL
-						? '<em>' . $this->_t('UsersSessionNA') . '</em>'
-						: $this->get_time_formatted($user['last_visit']))
-					).'</td>';
+				$tpl->l_u_reg_user = $user;
+				if ($user['hide_lastsession'])
+				{
+					$tpl->l_u_reg_sess_hidden = true;
+				}
+				else if ($user['last_visit'] === SQL_DATE_NULL)
+				{
+					$tpl->l_u_reg_sess_na = true;
+				}
+				else
+				{
+					$tpl->l_u_reg_sess_last_visit = $user['last_visit'];
+				}
 			}
-			echo "</tr>\n";
 		}
 	}
-
-	echo "</table>\n";
-
-	$this->print_pagination($pagination);
 }

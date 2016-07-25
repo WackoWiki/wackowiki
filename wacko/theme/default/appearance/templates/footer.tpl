@@ -8,18 +8,18 @@
 <nav class="footer">
 <div class="footerlist">
 <ul>
-['' edit '']
-['' modHide '']
-['' mod '']
-['' owner '']
-['' claim '']
-['' perma permalink '']
+	['' edit '']
+	['' modHide '']
+	['' mod '']
+	['' owner '']
+	['' claim '']
+	['' perma permalink '']
 </ul>
 </div>
 </nav>
 <div id="credits">
-['' by '']
-['' policy '']
+	['' by '']
+	['' policy '']
 </div>
 </footer>
 </div>

@@ -11,71 +11,47 @@ if (!defined('IN_WACKO'))
 
 if ($this->is_admin())
 {
-	$output			= '';
 	$error			= '';
-	$password		= '';
-	$confpassword	= '';
 
-	if (isset($_POST['recovery_password']) && !empty($_POST['recovery_password']))
+	if (@$_POST['_action'] === 'generate_hash')
 	{
 		// passing vars from user input
 		$user_name		= $this->get_user_name();
+		$tpl->password =
 		$password		= $_POST['recovery_password'];
+		$tpl->confpassword =
 		$confpassword	= $_POST['confpassword'];
-		#$lang			= (isset($_POST['user_lang']) ? $_POST['user_lang'] : '');
-		#$timezone		= trim($_POST['timezone']);
 		$complexity		= $this->password_complexity($user_name, $password);
 
 		// confirmed password mismatch
 		if ($confpassword != $password)
 		{
-			$error .= $this->_t('PasswordsDidntMatch').' ';
+			$error = $this->_t('PasswordsDidntMatch');
 		}
 		// password complexity validation
 		else if ($complexity)
 		{
-			$error .= $complexity;
+			$error = $complexity;
 		}
 		else
 		{
-			$password_hashed	= $this->config['system_seed'].$password;
-			$password_hashed	= password_hash(
+			$password_hashed	= $this->config['system_seed'] . $password;
+
+			$tpl->generated_passwd = password_hash(
 					base64_encode(
 							hash('sha256', $password_hashed, true)
 							),
 					PASSWORD_DEFAULT
 					);
-
-			echo '<div class="notice">';
-			echo '\'recovery_password\' => \''.$password_hashed.'\','.'<br /><br />';
-			echo '</div>';
 		}
 	}
 
 	if ($error)
 	{
-		$message = $this->format($error);
-		$this->set_message($message, 'error');
+		$this->set_message($this->format($error), 'error');
 	}
 
-	echo '<h2>Generate the password hash for your recovery_password</h2>';
+	$tpl->href = $this->href();
 
-	echo $this->form_open('generate_hash');
-
-	echo '<p><label for="password">'.$this->_t('RegistrationPassword').':</label>';
-	echo '<input type="password" id="recovery_password" name="recovery_password" size="24" value="'.$password.'" />';
-
-	echo $this->show_password_complexity();
-	echo '</p>';
-
-	echo '<p><label for="confpassword">'.$this->_t('ConfirmPassword').':</label>';
-	echo '<input type="password" id="confpassword" name="confpassword" size="24" value="'.$confpassword.'" /></p>';
-
-	?>
-	<input type="submit" name="preview" value="<?php echo $this->_t('CreatePageButton'); ?>" />
-	<?php
-
-	echo $this->form_close();
+	$tpl->complexity = $this->show_password_complexity();
 }
-
-?>

@@ -4208,6 +4208,15 @@ class Wacko
 								'<input type="hidden" name="_nonce" value="' . $nonce . '" />' . "\n" .
 								'<input type="hidden" name="_action" value="' . $action . '" />' . "\n";
 						});
+					$tpl->pull('hide_page',
+						function ($block, $loc, $method = '', $tag = '', $add = false)
+						{
+							// form GET method will trash query from action URL. need to set page= for no-mod_rewrite mode
+							if (!($this->db->rewrite_mode || $this->db->ap_mode))
+							{
+								return '<input type="hidden" name="page" value="' . $this->mini_href($method, $tag, $add) . "\" />\n";
+							}
+						});
 					TemplatestEscaper::setEncoding($this->charset); // STS TODO charset must be not static, tied into User instance
 					TemplatestFilters::filter('set_message',
 						function ($value, $block, $loc, $mode = 'info')

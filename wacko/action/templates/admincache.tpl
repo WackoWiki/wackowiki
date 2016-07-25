@@ -1,7 +1,7 @@
 
 [ === main === ]
 <form action="[' href | e html_attr']" method="post" name="purge_cache">
-	[' h hidden ']
+	[' // hide_page: | ']
 	[' csrf: purge_cache | ']
 	<div class="layout-box">
 		<input type="checkbox" id="purgeconfig_cache" name="config_cache" />
@@ -19,9 +19,6 @@
 		<input type="submit" name="clear_cache" value="['' _t: ClearCache '']" />
 	</div>
 </form>
-
-[ ====================================== hidden =================================== ]
-<input type="hidden" name="page" value="[' mini | e html_attr ']" />
 
 [ === post === ]
 ['' page '']['' sql '']['' config '']['' feed '']['' _t: CacheCleared '']
