@@ -1995,9 +1995,9 @@ class Wacko
 
 				$this->db->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."page SET ".
-						"comment_on_id 	= '".(int)$comment_on_id."', ".
+						"comment_on_id	= '".(int)$comment_on_id."', ".
 						(!$comment_on_id ? "description = ".$this->db->q($desc).", " : "").
-						"parent_id 		= '".(int)$parent_id."', ".
+						"parent_id		= '".(int)$parent_id."', ".
 						"created		= UTC_TIMESTAMP(), ".
 						"modified		= UTC_TIMESTAMP(), ".
 						"commented		= UTC_TIMESTAMP(), ".
