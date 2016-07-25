@@ -65,7 +65,7 @@ if (($code = @$_REQUEST['secret_code']))
 
 				// forward
 				$this->set_message($this->_t('PasswordChanged'), 'success');
-				$this->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
+				$this->http->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
 				// NEVER BEEN HERE
 			}
 
@@ -167,7 +167,7 @@ else if (($user = $this->get_user()))
 
 			// forward
 			$this->set_message($this->_t('PasswordChanged'), 'success');
-			$this->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
+			$this->http->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
 			// NEVER BEEN HERE
 		}
 
@@ -247,7 +247,7 @@ else
 				$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordReminded', SYSTEM_LANG), $user['user_name'], $user['email']));
 
 				$this->set_message($this->_t('CodeWasSent'));
-				$this->redirect($this->href('', $this->_t('LoginPage')));
+				$this->http->redirect($this->href('', $this->_t('LoginPage')));
 				// NEVER BEEN HERE
 
 			}

@@ -66,13 +66,13 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		if ($error)
 		{
 			$this->set_message($error, 'error');
-			$this->redirect($this->href());
+			$this->http->redirect($this->href());
 		}
 		else
 		{
 			// redirecting to the edit form
 			$this->sess->title	= $page_title;
-			$this->redirect($this->href('edit', $this->tag.'/'.$topic_name, '', 1));
+			$this->http->redirect($this->href('edit', $this->tag.'/'.$topic_name, '', 1));
 		}
 	}
 

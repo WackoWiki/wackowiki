@@ -107,7 +107,7 @@ if ($registered
 
 			$this->set_message($message, 'success'); // TODO & error too
 
-			$this->redirect($this->href('', $new_name));
+			$this->http->redirect($this->href('', $new_name));
 		}
 		else
 		{

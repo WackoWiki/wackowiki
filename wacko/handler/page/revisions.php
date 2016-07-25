@@ -10,7 +10,7 @@ $place_holder	= '&nbsp;&nbsp;&nbsp;';
 // redirect to show method if hide_revisions is true
 if ($this->hide_revisions)
 {
-	$this->redirect($this->href());
+	$this->http->redirect($this->href());
 }
 
 $this->ensure_page(true);

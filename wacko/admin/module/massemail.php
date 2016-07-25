@@ -83,7 +83,7 @@ $mail_body = '';
 		$engine->log(1, 'Messemail send: '.$mail_subject.' to group / user '. $group_id);
 		$engine->set_message('Massemail send: '.$mail_subject, 'success');
 
-		#$engine->redirect(rawurldecode($engine->href()));
+		#$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	$available_groups = $engine->db->load_all(

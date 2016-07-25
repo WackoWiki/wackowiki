@@ -258,7 +258,7 @@ Ut::debug_print_r($users);
 					$engine->current_context--;
 				}
 
-				$engine->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'].'&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
+				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'].'&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
 			}
 			else
 			{

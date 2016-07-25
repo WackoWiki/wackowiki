@@ -56,7 +56,7 @@ if ($_POST)
 
 	// reload page
 	$this->set_message($this->_t('MetaUpdated'), 'success');
-	$this->redirect((isset($_POST['extended']) ? $this->href('properties', '', 'extended') : $this->href('properties')));
+	$this->http->redirect((isset($_POST['extended']) ? $this->href('properties', '', 'extended') : $this->href('properties')));
 }
 
 // load settings

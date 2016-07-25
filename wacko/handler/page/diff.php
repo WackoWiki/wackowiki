@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 
 if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
 {
-	$this->redirect($this->href());
+	$this->http->redirect($this->href());
 }
 
 $a			= (int)$_GET['a'];

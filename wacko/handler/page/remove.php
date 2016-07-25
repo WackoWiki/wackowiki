@@ -11,7 +11,7 @@ $message		= '';
 // obviously do not allow to remove non-existent pages
 if (!$this->page)
 {
-	$this->redirect($this->href());
+	$this->http->redirect($this->href());
 }
 
 $title = $this->page['comment_on_id']?  'RemoveComment' : 'RemovePage';

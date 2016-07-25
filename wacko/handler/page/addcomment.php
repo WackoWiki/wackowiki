@@ -23,7 +23,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->body		= $body;
 		$this->sess->title		= $title;
 
-		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
+		$this->http->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
 
 	// find number
@@ -74,7 +74,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->body		= $body;
 		$this->sess->title		= $title;
 
-		$this->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
+		$this->http->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
 	}
 	else if (isset($this->sess->comment_delay) && time() - $this->sess->comment_delay < $this->db->comment_delay)
 	{
@@ -90,7 +90,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 		$message = str_replace('%1', $this->config['comment_delay'], $this->_t('CommentFlooded'));
 		$this->set_message($message, 'error');
-		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
+		$this->http->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
 	else if ($bad_words = $this->bad_words($body))
 	{
@@ -102,7 +102,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->set_message($message , 'error');
 		#$error = true;
 
-		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
+		$this->http->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
 	else
 	{
@@ -173,7 +173,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	// redirect to page
-	$this->redirect($this->href('', '', 'show_comments=1&p=last').'#Comment'.$num);
+	$this->http->redirect($this->href('', '', 'show_comments=1&p=last').'#Comment'.$num);
 }
 else
 {

@@ -456,7 +456,7 @@ else
 		// goto user profile directly if so desired
 		if (isset($_GET['gotoprofile']) && $this->load_user($_user0))
 		{
-			$this->redirect($this->href('', '', 'profile=' . $_user));
+			$this->http->redirect($this->href('', '', 'profile=' . $_user));
 		}
 		else
 		{

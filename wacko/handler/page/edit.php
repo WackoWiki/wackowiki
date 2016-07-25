@@ -35,7 +35,7 @@ if ($this->has_access('read')
 		// $this->tag is reserved word
 		$message = Ut::perc_replace($this->_t('PageReservedWord'), $result);
 		$this->set_message($message);
-		$this->redirect($this->href('new', $this->config['root_page']));
+		$this->http->redirect($this->href('new', $this->config['root_page']));
 	}
 
 	$user	= $this->get_user();
@@ -217,7 +217,7 @@ if ($this->has_access('read')
 				$this->page_cache['supertag'][$this->supertag]			= '';
 				$this->page_cache['page_id'][$this->page['page_id']]	= '';
 
-				$this->redirect($this->href());
+				$this->http->redirect($this->href());
 			}
 		}
 		// saving blank document
@@ -225,7 +225,7 @@ if ($this->has_access('read')
 		{
 			$message = $this->_t('EmptyPage');
 			$this->set_message($message, 'error');
-			$this->redirect($this->href());
+			$this->http->redirect($this->href());
 		}
 	}
 

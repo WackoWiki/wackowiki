@@ -51,5 +51,5 @@ if (isset($test) || $this->get_user_setting('dont_redirect') || @$_POST['redirec
 }
 else
 {
-	$this->redirect($this->href('', $page['supertag']));
+	$this->http->redirect($this->href('', $page['supertag']));
 }
