@@ -3,6 +3,7 @@
 // push-style (with pull methods for e.g. csrf & i18n) lazy incremental built template engine for WackoWiki
 
 // TODO:
+// change loc in actions to lineno only, file is in pat
 
 if (!defined('IN_WACKO'))
 {
@@ -411,6 +412,10 @@ class Templatest
 		{
 			// TODO STS how to trim non-blocks or not?
 			// $text = str_replace([\r"\n", '', $text);
+			if (substr($text, -1) === "\n")
+			{
+				$text = substr($text, 0, -1);
+			}
 		}
 
 		if (isset($prefix0) && isset($tpl['sets'][$place]))

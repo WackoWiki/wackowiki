@@ -137,11 +137,6 @@ if ($this->check_acl($this->get_user_name(), $this->config['rename_globalacl']))
 // STS $add = (@$_GET['add'] || @$_POST['add']);
 $tpl->form_href = $this->href('clone');
 
-if (!($this->config['rewrite_mode'] || $this->config['ap_mode']))
-{
-	$tpl->form_h_mini = $this->mini_href('clone');
-}
-
 // edit note
 if ($this->db->edit_summary)
 {

@@ -33,7 +33,7 @@ FIRST EVER html template for WackoWiki!
 [' _t: CloneName ']
 
 <form action="[' href | e html_attr']" method="post" name="clone_page" >
-	[' h hidden ']
+	[' // hide_page: clone ']
 	[' csrf: clone_page | ']
 	<input type="text" name="clone_name" size="40" maxlength="250"/>
 	[' e editNote ']
@@ -43,8 +43,6 @@ FIRST EVER html template for WackoWiki!
 	&nbsp;
 	<a href="[' show | ']" style="text-decoration: none;"><input type="button" value="[' _t: EditCancelButton | replace "\n" " " ']"/></a>
 </form>
-[ ====================================== hidden =================================== ]
-<input type="hidden" name="page" value="[' mini | e html_attr ']" />
 [ ====================================== editNote =================================== ]
 <br />
 <label for="edit_note">[' _t: EditNote ']</label><br />
