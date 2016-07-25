@@ -116,7 +116,7 @@ if (@$_POST['_action'] === 'clone_page')
 	$this->set_message($log, 'info');
 
 	// jump to new clone
-	$this->redirect($this->href('', $jump));
+	$this->http->redirect($this->href('', $jump));
 }
 
 if ($this->check_acl($this->get_user_name(), $this->config['rename_globalacl']))

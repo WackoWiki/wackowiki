@@ -38,7 +38,7 @@ if ($user_id = $this->get_user_id())
 					"AND user_id = '".(int)$user_id."'");
 		}
 
-		$this->redirect($this->href('', '', 'mode=mychangeswatches').'#list');
+		$this->http->redirect($this->href('', '', 'mode=mychangeswatches').'#list');
 	}
 
 	if ($pages == true)

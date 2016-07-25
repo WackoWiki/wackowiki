@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 // redirect to show method if page don't exists
 if (!$this->page)
 {
-	$this->redirect($this->href());
+	$this->http->redirect($this->href());
 }
 
 if ($this->has_access('read'))

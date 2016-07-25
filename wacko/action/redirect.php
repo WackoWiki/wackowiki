@@ -29,7 +29,7 @@ if (($page = $this->unwrap_link($to)))
 		}
 		else
 		{
-			$this->redirect($this->href('', $page));
+			$this->http->redirect($this->href('', $page));
 			// NEVER BEEN HERE
 		}
 	}

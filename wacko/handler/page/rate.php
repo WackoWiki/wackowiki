@@ -78,19 +78,19 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 
 			// rated successfully
 			$this->set_message($this->_t('RatingSuccess'));
-			$this->redirect($this->href('', '', 'show_rating=1').'#rating');
+			$this->http->redirect($this->href('', '', 'show_rating=1').'#rating');
 		}
 		else
 		{
 			// already rated
 			$this->set_message($this->_t('RatingDuplicate'));
-			$this->redirect($this->href());
+			$this->http->redirect($this->href());
 		}
 	}
 	else
 	{
 		// rating value hasn't been given
-		$this->redirect($this->href());
+		$this->http->redirect($this->href());
 	}
 }
 else

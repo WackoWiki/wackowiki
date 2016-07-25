@@ -23,7 +23,7 @@ if (@$_GET['action'] === 'clearcookies')
 		$this->delete_cookie($name, false);
 	}
 
-	$this->redirect($this->href('', '', $uncache));
+	$this->http->redirect($this->href('', '', $uncache));
 }
 
 // hide article H1 header
@@ -38,7 +38,7 @@ if (@$_GET['action'] === 'logout')
 	$this->set_message($this->_t('LoggedOut'), 'success');
 	$this->context[++$this->current_context] = '';
 
-	$this->redirect($this->href('', @$_GET['goback'], $uncache));
+	$this->http->redirect($this->href('', @$_GET['goback'], $uncache));
 }
 
 if (($user = $this->get_user()))
@@ -212,7 +212,7 @@ else // login
 							$this->http->secure_base_url();
 						}
 
-						$this->redirect($this->href('', @$_GET['goback'], $uncache));
+						$this->http->redirect($this->href('', @$_GET['goback'], $uncache));
 					}
 					else
 					{

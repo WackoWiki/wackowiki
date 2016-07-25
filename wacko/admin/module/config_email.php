@@ -49,7 +49,7 @@ function admin_config_email(&$engine, &$module)
 
 		$engine->log(1, '!!Updated email settings!!');
 		$engine->set_message('Updated email settings', 'success');
-		$engine->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('email');

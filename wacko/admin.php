@@ -195,7 +195,7 @@ if (time() - $engine->sess->ap_last_activity > 900) //1800
 	$engine->log(1, $engine->_t('LogAdminLogout', $engine->config['language']));
 
 	$engine->set_message($engine->_t('LoggedOutAuto'));
-	$engine->redirect('admin.php');
+	$engine->http->redirect('admin.php');
 }
 
 $engine->sess->ap_last_activity = time(); // update last activity time stamp

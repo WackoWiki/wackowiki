@@ -54,7 +54,7 @@ function admin_config_filter(&$engine, &$module)
 
 		$engine->log(1, '!!Updated spam filter settings!!');
 		$engine->set_message('Updated spam filter settings', 'success');
-		$engine->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	$phrases = file_get_contents($file_name);

@@ -25,7 +25,7 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 	$p = ceil($count['n'] / $this->config['comments_count']);
 
 	// forcibly open page
-	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
+	$this->http->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
 }
 
 // display page body

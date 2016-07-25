@@ -58,7 +58,7 @@ if (!empty($this->config['news_cluster']))
 		if ($error)
 		{
 			$this->set_message($error, 'error');
-			$this->redirect($this->href());
+			$this->http->redirect($this->href());
 		}
 		else
 		{
@@ -77,7 +77,7 @@ if (!empty($this->config['news_cluster']))
 			// .date('Y/').date('W/')				- 2011/29
 			$blog_cluster_structure = date('Y/').date('m/');
 
-			$this->redirect($this->href('edit', $news_cluster.'/'.$blog_cluster_structure.$name, '', 1));
+			$this->http->redirect($this->href('edit', $news_cluster.'/'.$blog_cluster_structure.$name, '', 1));
 		}
 	}
 	// collect data

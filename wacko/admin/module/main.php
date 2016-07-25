@@ -33,7 +33,7 @@ function admin_lock(&$engine, &$module)
 	{
 		$engine->config->lock();
 
-		$engine->redirect('admin.php');
+		$engine->http->redirect('admin.php');
 	}
 	// clear cache
 	else if (isset($_POST['action']) && $_POST['action'] == 'cache')

@@ -52,7 +52,7 @@ if (isset($_GET['confirm']))
 		$this->set_message($message, 'error');
 	}
 
-	$this->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
+	$this->http->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
 }
 else if (@$_POST['_action'] === 'register')
 {
@@ -266,7 +266,7 @@ else if (@$_POST['_action'] === 'register')
 					$this->_t('SiteEmailConfirm'));
 
 				$this->context[++$this->current_context] = '';
-				$this->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
+				$this->http->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
 			}
 		}
 	}

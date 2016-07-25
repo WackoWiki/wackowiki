@@ -5876,8 +5876,8 @@ class Wacko
 		{
 			$this->log(1, '<strong><span class="cite">'.'User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->get_user_ip().'</span></strong>');
 			$this->log_user_out();
-			// $this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
-			$this->redirect($this->config['base_url'].$this->_t('LoginPage').'?goback='.$tag);
+			// $this->http->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
+			$this->http->redirect($this->config['base_url'].$this->_t('LoginPage').'?goback='.$tag);
 		}
 
 		// start user session
@@ -7328,7 +7328,7 @@ class Wacko
 		else if ($p['comment_on_id'])
 		{
 			// show main page for comment
-			$this->redirect($this->href('', $this->get_page_tag($p['comment_on_id']), 'show_comments=1', false, $p['tag']));
+			$this->http->redirect($this->href('', $this->get_page_tag($p['comment_on_id']), 'show_comments=1', false, $p['tag']));
 		}
 		else if ($this->forum && !$this->is_admin() && !$forums)
 		{
@@ -7338,12 +7338,12 @@ class Wacko
 
 	function reload_me()
 	{
-		$this->redirect($this->href($this->method));
+		$this->http->redirect($this->href($this->method));
 	}
 
 	function show_must_go_on()
 	{
-		$this->redirect($this->href());
+		$this->http->redirect($this->href());
 	}
 
 }

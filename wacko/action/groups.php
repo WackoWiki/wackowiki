@@ -191,7 +191,7 @@ else
 		// goto usergroup profile directly if so desired
 		if (isset($_GET['gotoprofile']) && $this->load_usergroup($_GET['group']) == true)
 		{
-			$this->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)));
+			$this->http->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)));
 		}
 		else
 		{

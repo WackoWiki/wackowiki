@@ -33,7 +33,7 @@ function admin_content_pages(&$engine, &$module)
 <?php
 	if (isset($_POST['reset']))
 	{
-		$engine->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'])));
+		$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'])));
 	}
 
 	if (isset($_POST['update']) || isset($_GET['level_mod']))

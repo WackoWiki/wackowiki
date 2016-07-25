@@ -22,7 +22,7 @@ $options	= '';
 // redirect to show method if page don't exists
 if (!$this->page)
 {
-	$this->redirect($this->href());
+	$this->http->redirect($this->href());
 }
 
 if ($this->is_owner() || $this->is_admin())
@@ -42,7 +42,7 @@ if ($this->is_owner() || $this->is_admin())
 
 		$this->log(4, "Updated page categories [[/{$this->tag} {$this->page['title']}]]");
 		$this->set_message($this->_t('CategoriesUpdated'), 'success');
-		$this->redirect($this->href('properties'));
+		$this->http->redirect($this->href('properties'));
 	}
 	else if ($this->is_admin() || $this->config['owners_can_change_categories'] == true)
 	{

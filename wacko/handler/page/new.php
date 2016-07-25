@@ -56,7 +56,7 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 			$this->sess->title = $new_tag;
 
 			// str_replace: fixes newPage&amp;add=1
-			$this->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix.$new_tag, '', 1))));
+			$this->http->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix.$new_tag, '', 1))));
 		}
 		else
 		{

@@ -57,13 +57,13 @@ if (isset($page_id))
 				else
 				{
 					$this->set_message($this->_t('PermaLinkRedirected').': '.$page_id);
-					$this->redirect($this->href('', $page_tag, (!empty($revision_id) ? 'revision_id='.$revision_id : '') ));
+					$this->http->redirect($this->href('', $page_tag, (!empty($revision_id) ? 'revision_id='.$revision_id : '') ));
 				}
 			}
 			else
 			{
 				#$this->set_message($this->_t('PermaLinkRedirected').': '.$page_id);
-				$this->redirect($this->href('', $page_tag, (!empty($revision_id) ? 'revision_id='.$revision_id : '') ));
+				$this->http->redirect($this->href('', $page_tag, (!empty($revision_id) ? 'revision_id='.$revision_id : '') ));
 			}
 		}
 		else

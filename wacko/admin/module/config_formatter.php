@@ -61,7 +61,7 @@ function admin_config_formatter(&$engine, &$module)
 
 		$engine->log(1, 'Updated formatting settings');
 		$engine->set_message('Updated formatting settings', 'success');
-		$engine->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('formatter');

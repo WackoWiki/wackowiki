@@ -510,7 +510,7 @@ function bb2_options(&$engine)
 
 		$engine->log(1, '!!Updated email settings!!');
 		$engine->set_message('Updated Bad Behavior settings');
-		$engine->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	if ($_POST)
@@ -856,7 +856,7 @@ function bb2_options(&$engine)
 
 		$engine->log(1, '!!Updated Bad Behavior settings!!');
 		$engine->set_message('Updated Bad Behavior settings');
-		$engine->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
