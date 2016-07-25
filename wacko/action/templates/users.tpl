@@ -1,28 +1,27 @@
 first really BIG template written
 
 [ === main === ]
-[ ''' notFound ''' ]
-[ ''' Disabled ''' ]
+[ = notFound =
+	<div class="error">['' diag | '']</div>
+=]
+[ = Disabled =
+	<div class="info">['' _t: AccountDisabled '']</div>
+=]
 [ ''' u Profile ''' ]
 [ ''' l UserList ''' ]
 
-[ === notFound === ]
-<div class="error">['' diag | '']</div>
-[ === Disabled === ]
-<div class="info">['' _t: AccountDisabled '']</div>
-
 [ === lastSession === ]
 <td>
-	[ ''' hidden sessionHidden ''' ]
-	[ ''' na sessionNA ''' ]
-	[ ''' last sessionTime ''' ]
+	[= hidden sessionHidden =
+		<em>['' _t: UsersSessionHidden '']</em>
+	=]
+	[= na sessionNA =
+		<em>['' _t: UsersSessionNA '']</em>
+	=]
+	[= last sessionTime =
+		['' visit | time_formatted '']
+	=]
 </td>
-[ === sessionHidden === ]
-<em>['' _t: UsersSessionHidden '']</em>
-[ === sessionNA === ]
-<em>['' _t: UsersSessionNA '']</em>
-[ === sessionTime === ]
-['' visit | time_formatted '']
 
 [ === userPage === ]
 <td><a href="['' href | e attr '']">['' text '']</a></td>
@@ -185,28 +184,12 @@ first really BIG template written
 [ ''' up uploads ''' ]
 
 [ ''' # USERLIST then ------------------------------------------------------------------------------------- ''' ]
-[ === Sorts === ]
-<th><a href="['' link | '']">['' what '']['' arrow sortsArr '']</a></th>
 [ === sortsArr === ]
 &nbsp;&['' a | replace desc uarr asc darr ''];
-[ === usersNone === ]
-<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>['' _t: UsersNoMatching '']</em></small></td></tr>
 [ === lastSessionReuse === ]
 [ ''' hidden sessionHidden ''' ]
 [ ''' na sessionNA ''' ]
 [ ''' last sessionTime ''' ]
-[ === usersOneRegistered === ]
-<td style="text-align:center;">['' user.total_uploads '']</td>
-<td style="text-align:center;">['' user.signup_time | time_formatted '']</td>
-<td style="text-align:center;">['' sess lastSessionReuse '']</td>
-[ === usersOne === ]
-<tr class="lined">
-	<td style="padding-left:5px;">['' link | '']</td>
-	<td style="text-align:center;">['' user.total_pages '']</td>
-	<td style="text-align:center;">['' user.total_comments '']</td>
-	<td style="text-align:center;">['' user.total_revisions '']</td>
-	[ ''' reg usersOneRegistered ''' ]
-</tr>
 
 [ === UserList === ]
 ['' // user filter form '']
@@ -223,10 +206,26 @@ first really BIG template written
 ['' pagination '']
 <table style="width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
 	<tr>
-		['' s Sorts '']
+		[= s Sorts =
+			<th><a href="['' link | '']">['' what '']['' arrow sortsArr '']</a></th>
+		=]
 	</tr>
 
-	[ ''' none usersNone ''' ] 
-	[ ''' u usersOne ''' ] 
+	[= none usersNone =
+		<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>['' _t: UsersNoMatching '']</em></small></td></tr>
+	=]
+	[= u usersOne =
+		<tr class="lined">
+			<td style="padding-left:5px;">['' link | '']</td>
+			<td style="text-align:center;">['' user.total_pages '']</td>
+			<td style="text-align:center;">['' user.total_comments '']</td>
+			<td style="text-align:center;">['' user.total_revisions '']</td>
+			[= reg usersOneRegistered =
+				<td style="text-align:center;">['' user.total_uploads '']</td>
+				<td style="text-align:center;">['' user.signup_time | time_formatted '']</td>
+				<td style="text-align:center;">['' sess lastSessionReuse '']</td>
+			=]
+		</tr>
+	=]
 </table>
 ['' pagination '']

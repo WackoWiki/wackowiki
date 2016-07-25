@@ -277,6 +277,7 @@ class Templatest
 			$linepos[$lineno] = ($eolpos += strlen($line));
 		}
 		unset($meta['text']);
+		$text = rtrim($text, "\n");
 
 		// pre-compile common \h prefix
 		$meta['prefix'] = static::compute_prefix($text);
@@ -465,7 +466,12 @@ class Templatest
 			$lines = explode("\n", $text);
 			foreach ($lines as &$line)
 			{
-				if (strlen($line) > $prefix)
+				if (!ctype_space(substr($line, 0, $prefix)))
+				{
+					// maybe some stray \n came in prefix pre-computed block. better safe than nice
+					$line = $block . $line;
+				}
+				else if (strlen($line) > $prefix)
 				{
 					$line = $block . substr($line, $prefix);
 				}
