@@ -13,7 +13,7 @@ if (!defined('IN_WACKO'))
 
 class Templatest
 {
-	const CODE_VERSION = 5; // to not read incompatible cached data
+	const CODE_VERSION = 6; // to not read incompatible cached data
 	private static $store = [];
 	private static $filetimes;
 	private static $filecount;
@@ -628,27 +628,35 @@ class Templatest
 		}
 	}
 
-	// find largest common whitespace prefix of pattern, for auto-indent
+	// find largest common whitespace prefix of non-empty lines in pattern, for auto-indent
 	private static function compute_prefix($text)
 	{
-		if (!preg_match_all('/^\h*/m', $text, $prefixes)) // always match at least one time, btw
-		{
-			return 0;
-		}
+		$result = 0;
+		$len = strlen($text);
 
-		$prefixes = $prefixes[0];
-		$base = array_shift($prefixes);
-		$prefix = strlen($base);
-		foreach ($prefixes as $one)
+		for ($i = 0; $i < $len; $i = $eol + 1)
 		{
-			// nice hack to find index of first differing char in two strings
-			if (($diff = strspn($base ^ $one, "\0")) < $prefix)
+			$eol = strpos($text, "\n", $i);
+			$eol !== false or $eol = $len;
+
+			// we have no interest in empty or all-whitespace lines
+			if ($i + ($ws = strspn($text, " \t", $i)) < $eol)
 			{
-				$prefix = $diff;
+				$prefix = substr($text, $i, $ws);
+				if (!isset($base))
+				{
+					$base = $prefix;
+					$result = $ws;
+				}
+				// bithack to find index of first differing char in two strings
+				else if (($diff = strspn($base ^ $prefix, "\0")) < $result)
+				{
+					$result = $diff;
+				}
 			}
 		}
 
-		return $prefix;
+		return $result;
 	}
 
 	// split tag - var | join ", " | raw | - into arg pipe list
