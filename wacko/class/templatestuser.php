@@ -36,7 +36,7 @@ class TemplatestUser
 		else
 		{
 			$root['chunks'][0] = '';
-			$root['sub'][''][0] = [0, 0, false, [], $main, null];
+			$root['sub'][''][0] = [0, 0, '', [], $main, null];
 		}
 		$root['file'] = 0;
 

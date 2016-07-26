@@ -358,8 +358,14 @@ class TemplatestFilters
 
 	static function filter_dbg($value, $block, $loc)
 	{
-		Diag::dbg($loc, $value);
+		// suppress ANY errors. templatest is meant to be used standalone, and this is LONE dependency on wacko
+		@Diag::dbg($loc, $value);
 		return $value;
+	}
+
+	static function filter_enclose($value, $block, $loc, $pref = '', $post = '')
+	{
+		return $pref . $value . $post;
 	}
 
 	// add user filter function
