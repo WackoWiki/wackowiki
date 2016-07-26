@@ -18,12 +18,12 @@ if (($profile = @$_REQUEST['profile']))
 	// does requested user exists?
 	if (!($user = $this->load_user($profile)))
 	{
-		$tpl->notFound_diag = Ut::perc_replace($this->_t('UsersNotFound'),
-				$this->supertag, htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET));
+		$tpl->not_found = Ut::perc_replace($this->_t('UsersNotFound'),
+				$this->href(), htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET));
 	}
 	else if (!$user['enabled'])
 	{
-		$tpl->Disabled = true;
+		$tpl->disabled = true;
 	}
 	else
 	{
@@ -194,7 +194,7 @@ if (($profile = @$_REQUEST['profile']))
 				}
 				else
 				{
-					$tpl->u_pm_pm_userContactDisabled = true;
+					$tpl->u_pm_pm_disabled = true;
 				}
 			}
 			else
@@ -251,7 +251,7 @@ if (($profile = @$_REQUEST['profile']))
 		}
 		else
 		{
-			$tpl->u_userPagesNA = true;
+			$tpl->u_nopages = true;
 		}
 
 		// last user comments
@@ -300,7 +300,7 @@ if (($profile = @$_REQUEST['profile']))
 		}
 		else
 		{
-			$tpl->u_CommentsDisabled = true;
+			$tpl->u_cmtdisabled = true;
 		}
 
 		// last user uploads
