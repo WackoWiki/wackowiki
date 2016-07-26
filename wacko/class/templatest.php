@@ -13,7 +13,7 @@ if (!defined('IN_WACKO'))
 
 class Templatest
 {
-	const CODE_VERSION = 2; // to not read incompatible cached data
+	const CODE_VERSION = 5; // to not read incompatible cached data
 	private static $store = [];
 	private static $filetimes;
 	private static $filecount;
@@ -168,7 +168,11 @@ class Templatest
 		$store['setup'] = [];
 		foreach (file($file) as $lineno => $line)
 		{
-			if (preg_match('/^\h*\[\h*=+\h*([a-z][a-z0-9]*)\h*=+\h*\]\h*$/i', $line, $match))
+			if (preg_match('@^\h*\[\h*=+\h*(?://|#).*=+\h*\]\h*$@i', $line))
+			{
+				// [ ==== // some text === ] comment
+			}
+			else if (preg_match('/^\h*\[\h*=+\h*([a-z][a-z0-9]*)\h*=+\h*\]\h*$/i', $line, $match))
 			{
 				if (!$part && !$level)
 				{
@@ -222,12 +226,12 @@ class Templatest
 
 	private static function inline_definitions(&$store)
 	{
-		// [ ==== abc def
+		// [ ==== abc def ==
 		//   ....
 		// ===== ]
 		while (!isset($stable))
 		{
-			$stable = 0;
+			$stable = true;
 			foreach ($store as &$meta)
 			{
 				if (isset($meta['text']))
@@ -235,30 +239,49 @@ class Templatest
 					foreach ($meta['text'] as $i => &$numline)
 					{
 						list ($lineno, $line) = $numline;
-						if (preg_match('/^(\h*)\[\h*=+\h*(([a-z][a-z0-9]*)(\h+([a-z][a-z0-9]*))?\b.*?)\h*=+\h*$/i', $line, $match))
+
+						if (preg_match('/^(\h*)\[\h*=+\h*([a-z][a-z0-9]*)(\h+(_|[a-z][a-z0-9]*))?\b(.*?)\h*=+\h*$/i', $line, $match))
 						{
-							$patname = (isset($match[5]) && $match[5])? $match[5] : $match[3];
-							if (isset($store[$patname]))
+							if (isset($match[4]) && ($patname = $match[4]))
 							{
-								static::$error[] = 'double-defined pattern ' . $patname . ' at ' . $store[2][$meta['file']][0] . ':' . $lineno;
+								if ($patname === '_')
+								{
+									// name anonymous one-off pattern to be unique in global space
+									$patname = 'f' . $meta['file'] . ':' . $lineno;
+								}
+								$recall = $match[2] . ' ';
 							}
 							else
 							{
-								$first = $match;
-								$firstline = $i;
-								$firstlineno = $lineno;
+								$patname = $match[2];
+								$recall = '';
+							}
+
+							$recall = "{$match[1]}[ '''''' {$recall}{$patname}{$match[5]} '''''' ]\n";
+
+							if (isset($store[$patname]))
+							{
+								static::$error[] = 'attempt of redefining pattern ' . $patname . ' at ' . $store[2][$meta['file']][0] . ':' . $lineno;
+							}
+							else
+							{
+								$i0 = $i;
+								$lineno0 = $lineno;
 							}
 						}
-						else if (preg_match('/^\h*=+\h*\]\h*$/i', $line, $match) && isset($first))
+						else if (preg_match('/^\h*=+\h*\]\h*$/i', $line, $match) && isset($i0))
 						{
-							$replace = $first[1] . "[ '''''' " . $first[2] . " '''''' ]\n";
-							$piece = array_splice($meta['text'], $firstline, $i + 1 - $firstline, [[$firstlineno, $replace]]);
-							$store[$patname]['text'] = array_slice($piece, 1, -1);
+							// cut off old [= ... =] block, and replace it with lone recall line
+							$cut = array_splice($meta['text'], $i0, $i + 1 - $i0, [[$lineno0, $recall]]);
+
+							// define new pattern, it will be globally recallable from now on
+							$store[$patname]['text'] = array_slice($cut, 1, -1);
 							$store[$patname]['file'] = $meta['file'];
-							$store[$patname]['line'] = $firstlineno;
-							unset($first);
+							$store[$patname]['line'] = $lineno0;
+
+							unset($i0);
 							unset($stable);
-							break;
+							break 2; // force full rescan - compilation phase not meant to be optimal ;)
 						}
 					}
 				}
@@ -468,7 +491,8 @@ class Templatest
 			{
 				if (!ctype_space(substr($line, 0, $prefix)))
 				{
-					// maybe some stray \n came in prefix pre-computed block. better safe than nice
+					// maybe some stray \n came in prefix-precomputed block
+					// so do not cut off non-space prefix!
 					$line = $block . $line;
 				}
 				else if (strlen($line) > $prefix)
@@ -491,10 +515,7 @@ class Templatest
 		{
 			// TODO STS how to trim non-blocks or not?
 			// $text = str_replace([\r"\n", '', $text);
-			if (substr($text, -1) === "\n")
-			{
-				$text = substr($text, 0, -1);
-			}
+			$text = trim($text, "\r\n");
 		}
 
 		if (isset($prefix0) && isset($tpl['sets'][$place]))

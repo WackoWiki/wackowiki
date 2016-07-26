@@ -202,12 +202,88 @@ class TemplatestFilters
 			}, $value);
 	}
 
-	static function filter_spaceless($value, $block, $loc)
+	/*static function filter_spaceless($value, $block, $loc)
 	{
 		return preg_replace_callback('/>\s+</', function ($m)
 			{
 				return strpos($m[0], "\n")? '><' : '> <';
 			}, $value);
+	}*/
+
+	static function filter_spaceless($value, $block, $loc)
+	{
+		if (preg_match_all(
+			'@
+				<(?<script>script).*?<\/script\s*>|
+				<(?<style>style).*?<\/style\s*>|
+				<!(?<comment>--).*?-->|
+				<(?<tag>[\/\w.:-]*)(?:".*?"|\'.*?\'|[^\'">]+)*>|
+				(?<text>((<[^!\/\w.:-])?[^<]*)+)|@xsi',
+			$value, $matches, PREG_SET_ORDER) === false)
+		{
+			return $value;
+		}
+		
+		$raw_tag = false;
+		$html = '';
+		
+		foreach ($matches as $token)
+		{
+			$tag = (isset($token['tag'])) ? strtolower($token['tag']) : null;
+			
+			$content = $token[0];
+			
+			$strip = false;
+			
+			if (is_null($tag))
+			{
+				if (!empty($token['style']))
+				{
+					$strip = true;
+				}
+			}
+			else
+			{
+				if ($tag === 'pre' || $tag === 'textarea')
+				{
+					$raw_tag = $tag;
+				}
+				else if ($tag === '/pre' || $tag === '/textarea')
+				{
+					$raw_tag = false;
+				}
+				else if (!$raw_tag)
+				{
+					if ($tag !== '')
+					{
+						$content = preg_replace('#\s+(/?>)#', '$1', $content);
+					}
+					else
+					{
+						if (substr($html, -1) === ' ' && ($spaces = strspn($content, " \t\r\n\x0b")) > 0)
+						{
+							$content = substr($content, $spaces);
+						}
+					}
+					
+					$strip = true;
+				}
+			}
+			
+			if ($strip)
+			{
+				$content = strtr($content, "\t\r\n\x0b", '    ');
+				
+				while (($lesser = str_replace('  ', ' ', $content)) != $content)
+				{
+					$content = $lesser;
+				}
+			}
+			
+			$html .= $content;
+		}
+		
+		return $html;
 	}
 
 	static function filter_regex($value, $block, $loc, $re, $to, $limit = -1)
