@@ -8,8 +8,7 @@
 
 	<h2>Generate the password hash for your recovery_password</h2>
 
-	<form action="[ ' href | e html_attr ' ]" method="post" name="generate_hash">
-		['' // hide_page: | '']
+	<form action="[ ' href | ' ]" method="post" name="generate_hash">
 		['' csrf: generate_hash | '']
 
 		<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>

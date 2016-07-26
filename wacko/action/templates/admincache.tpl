@@ -1,7 +1,6 @@
 
 [ === main === ]
-	<form action="[ ' href | e html_attr ' ]" method="post" name="purge_cache">
-		['' // hide_page: | '']
+	<form action="[ ' href | ' ]" method="post" name="purge_cache">
 		['' csrf: purge_cache | '']
 		<div class="layout-box">
 			<input type="checkbox" id="purgeconfig_cache" name="config_cache" />

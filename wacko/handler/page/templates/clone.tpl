@@ -34,8 +34,7 @@ leave it as is for the memories
 [ ====================================== form =================================== ]
 [' _t: CloneName ']
 
-<form action="[' href | e html_attr']" method="post" name="clone_page" >
-	[' // hide_page: clone ']
+<form action="[' href | ']" method="post" name="clone_page" >
 	[' csrf: clone_page | ']
 	<input type="text" name="clone_name" size="40" maxlength="250"/>
 	[' e editNote ']
