@@ -2616,26 +2616,34 @@ class Wacko
 	}
 
 	// output all messages stored in session array
-	function output_messages()
+	// NB actual output is in theme/default due to templatest
+	function output_messages($show = true)
 	{
-		// get system message
-		// TODO: set type also via backend and store it [where?]
-		if (($message = $this->config['system_message']) && !$this->config['ap_mode'])
-		{
-			// check current page lang for different charset to do_unicode_entities()
-			if (isset($this->page['page_lang']) && $this->page['page_lang'] != $this->config['language'])
-			{
-				$message = $this->do_unicode_entities($message, $this->config['language']);
-			}
-
-			$this->show_message($message, 'sysmessage ' . $this->config['system_message_type']);
-		}
-
 		if (isset($this->sess->sticky_messages))
 		{
 			$messages = $this->sess->sticky_messages;
 			unset($this->sess->sticky_messages);
+		}
+		else
+		{
+			$messages = [];
+		}
 
+		// get system message
+		// TODO: set type also via backend and store it [where?]
+		if (($message = $this->db->system_message) && !$this->db->ap_mode)
+		{
+			// check current page lang for different charset to do_unicode_entities()
+			if (isset($this->page['page_lang']) && $this->page['page_lang'] != $this->db->language)
+			{
+				$message = $this->do_unicode_entities($message, $this->db->language);
+			}
+
+			array_unshift($messages, [$message, 'sysmessage ' . $this->db->system_message_type]);
+		}
+
+		if ($show)
+		{
 			// TODO: maybe filter?
 			// TODO: think about quoting....
 			foreach ($messages as $message)
@@ -2643,6 +2651,10 @@ class Wacko
 				list($_message, $_type) = $message;
 				$this->show_message($_message, $_type);
 			}
+		}
+		else
+		{
+			return $messages;
 		}
 	}
 
@@ -4188,12 +4200,13 @@ class Wacko
 
 			if (@file_exists($__pathname))
 			{
-				$__i = (int) strrpos($__pathname, '/'); // 0 if no / abnormality
+				$__i = (int) strrpos($__pathname, '/'); // false -> 0 for no / abnormality
 				$__tpl = Ut::join_path(substr($__pathname, 0, $__i), 'templates', str_replace('.php', '.tpl', substr($__pathname, $__i))); // STS magic string
 				if (@file_exists($__tpl))
 				{
 					$tpl = Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
 					$tpl->pull('_t', function ($block, $loc, $str) { return $this->_t($str); });
+					$tpl->pull('db', function ($block, $loc, $str) { return $this->db[$str]; });
 					$tpl->pull('csrf',
 						function ($block, $loc, $action)
 						{
@@ -4208,28 +4221,21 @@ class Wacko
 								'<input type="hidden" name="_nonce" value="' . $nonce . '" />' . "\n" .
 								'<input type="hidden" name="_action" value="' . $action . '" />' . "\n";
 						});
-					$tpl->pull('hide_page',
-						function ($block, $loc, $method = '', $tag = '', $add = false)
-						{
-							// form GET method will trash query from action URL. need to set page= for no-mod_rewrite mode
-							if (!($this->db->rewrite_mode || $this->db->ap_mode))
-							{
-								return '<input type="hidden" name="page" value="' . $this->mini_href($method, $tag, $add) . "\" />\n";
-							}
-						});
 					TemplatestEscaper::setEncoding($this->charset); // STS TODO charset must be not static, tied into User instance
-					TemplatestFilters::filter('set_message',
-						function ($value, $block, $loc, $mode = 'info')
-						{
-							$this->set_message($value, $mode);
-							return null;
-						});
 					TemplatestFilters::filter('time_formatted',
 						function ($value, $block, $loc)
 						{
 							return $this->get_time_formatted($value);
 						});
-
+					TemplatestFilters::filter('hide_page',
+						function ($value, $block, $loc)
+						{
+							// for generating method GET forms
+							if (preg_match('#\?page=([^&]+)#', $value, $match))
+							{
+								return '<input type="hidden" name="page" value="' . $match[1] . '" />';
+							}
+						});
 
 					// STS lotta goodies must go there..
 				}

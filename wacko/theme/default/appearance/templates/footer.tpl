@@ -8,7 +8,7 @@
 <div class="footerlist">
 <ul>
 	[= edit =
-		<li><a href="['' href | e attr '']" accesskey="E" title="['' _t: EditTip '']">['' _t: EditText'']</a></li>
+		<li><a href="['' href | '']" accesskey="E" title="['' _t: EditTip '']">['' _t: EditText'']</a></li>
 	=]
 	[= modHide =
 		<li><time datetime="['' time '']">['' time | time_formatted '']</time></li>
@@ -34,7 +34,7 @@
 		['' _t: PoweredBy ''] ['' home | ''] ['' version '']['' patchlevel '']<br />
 	=]
 	[= policy =
-		<a href="['' url | e attr '']">['' _t: TermsOfUse '']</a><br />'
+		<a href="['' url | '']">['' _t: TermsOfUse '']</a><br />'
 	=]
 </div>
 </footer>
@@ -44,4 +44,4 @@
 '']
 
 [ === Take === ]
- (<a href="['' href | e attr '']">['' _t: TakeOwnership '']</a>)
+ (<a href="['' href | '']">['' _t: TakeOwnership '']</a>)

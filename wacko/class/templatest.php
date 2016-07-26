@@ -142,16 +142,18 @@ class Templatest
 
 	private static function parse_file($file, $level = 0)
 	{
+		$store['setup'] = [];
+
 		if ($level > 4)
 		{
 			static::$error[] = 'too deep template inclusion';
-			return [];
+			return $store;
 		}
 
 		if (!(@is_file($file) && @is_readable($file)))
 		{
 			static::$error[] = 'template file ' . $file . ' not found';
-			return [];
+			return $store;
 		}
 
 		if (isset(static::$fileidx[$file]))
@@ -165,7 +167,6 @@ class Templatest
 		}
 
 		$part = '';
-		$store['setup'] = [];
 		foreach (file($file) as $lineno => $line)
 		{
 			if (preg_match('@^\h*\[\h*=+\h*(?://|#).*=+\h*\]\h*$@i', $line))

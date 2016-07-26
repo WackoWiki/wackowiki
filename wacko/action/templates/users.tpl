@@ -14,7 +14,7 @@ first really BIG template written
 
 [= Profile =]
 	<h1>[ ' user.user_name ' ]</h1>
-	<small><a href="[ ' href | e attr ' ]">&laquo; [ ' _t: UsersList ' ]</a></small>
+	<small><a href="[ ' href | ' ]">&laquo; [ ' _t: UsersList ' ]</a></small>
 	<h2>[ ' _t: UsersProfile ' ]</h2>
 
 	<table style="border-spacing: 3px; border-collapse: separate;">
@@ -33,11 +33,11 @@ first really BIG template written
 		<tr class="lined">
 			<td class="userprofil">[ ' _t: UserSpace ' ]</td>
 			[= userPage =
-				<td><a href="[ ' href | e attr ' ]">[ ' text ' ]</a></td>
+				<td><a href="[ ' href | ' ]">[ ' text ' ]</a></td>
 			=]
 		</tr>
 		<tr class="lined">
-			<td class="userprofil"><a href="[ ' groupsPage | e attr ' ]">[ ' _t: UsersGroupMembership ' ]</a></td>
+			<td class="userprofil"><a href="[ ' groupsPage | ' ]">[ ' _t: UsersGroupMembership ' ]</a></td>
 			[= userGroups =
 				<td>[ ' list | ' ][ ' na UsersNA2 ' ]</td>
 			=]
@@ -52,8 +52,7 @@ first really BIG template written
 		[= pm _ =
 			[ ' // contact form ' ]
 			<br />
-			<form action="[' href | e html_attr']" method="post" name="personal_message">
-				[' // hide_page: | ']
+			<form action="[ ' href | ' ]" method="post" name="personal_message">
 				[' csrf: personal_message | ']
 				<input type="hidden" name="profile" value="[ ' username ' ]" />
 				[= ref _ =
@@ -69,7 +68,7 @@ first really BIG template written
 							<td>
 								<input type="text" name="mail_subject" value="[ ' subj ' ]" size="60" maxlength="200" />
 								[= ref _ =
-									&nbsp;&nbsp; <a href="[ ' href | e attr ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
+									&nbsp;&nbsp; <a href="[ ' href | ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
 								=]
 							</td>
 						</tr>
@@ -145,9 +144,9 @@ first really BIG template written
 	=]
 
 [ === userPagesByDate === ]
-<a href="[ ' href | e attr ' ]#pages">[ ' _t: UsersDocsSortDate ' ]</a>
+<a href="[ ' href | ' ]#pages">[ ' _t: UsersDocsSortDate ' ]</a>
 [ === userPagesByName === ]
-<a href="[ ' href | e attr ' ]#pages">[ ' _t: UsersDocsSortName ' ]</a>
+<a href="[ ' href | ' ]#pages">[ ' _t: UsersDocsSortName ' ]</a>
 
 
 
@@ -155,8 +154,8 @@ first really BIG template written
 
 [= UserList =]
 	['' // user filter form '']
-	<form action="[ ' href | e html_attr ' ]" method="get" name="search_user">
-		[ ' hide_page: | ' ]
+	<form action="[ ' href | ' ]" method="get" name="search_user">
+		[ ' href | hide_page | ' ]
 		<table class="formation"><tr><td class="label">
 		[ ' _t: UsersSearch ' ]: </td><td>
 		<input type="search" required="required" name="user" maxchars="40" size="40" value="[ ' user0 ' ]" /> ['' '']

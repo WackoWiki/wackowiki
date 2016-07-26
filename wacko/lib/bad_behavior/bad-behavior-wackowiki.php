@@ -208,8 +208,7 @@ function bb2_install() {
 function bb2_insert_head() {
 	global $bb2_timer_total;
 	global $bb2_javascript;
-	echo "\n<!-- Bad Behavior " . BB2_VERSION . " run time: " . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n";
-	echo $bb2_javascript;
+	return "<!-- Bad Behavior " . BB2_VERSION . " run time: " . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n" . $bb2_javascript;
 }
 
 // Display stats? This is optional.

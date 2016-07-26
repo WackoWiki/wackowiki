@@ -1,103 +1,81 @@
 <?php
 
 // HTTP header with right Charset settings
-header('Content-Type: text/html; charset='.$this->get_charset());
-?>
-<!DOCTYPE html>
-<html lang="<?php echo $this->page['page_lang'] ?>">
-<head>
-	<meta charset="<?php echo $this->get_charset(); ?>" />
-<?php
-// create meta title
-$site_name	= htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-$page_title	= (isset($this->page['title'])
-				? $this->page['title']
-				: $this->add_spaces($this->tag)).($this->method != 'show'
-						? ' ('.$this->method.')'
-						: '');
-?>
-	<title><?php echo $page_title.' - '.$site_name;?></title>
-<?php
+header('Content-Type: text/html; charset=' . $this->get_charset());
+
+$tpl->h_lang = $this->page['page_lang'];
+$tpl->h_charset = $this->get_charset();
+
+$tpl->h_title = @$this->page['title'] ?: $this->add_spaces($this->tag);
+$this->method == 'show' or $tpl->h_method = $this->method;
+
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
-if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
+if ($this->method != 'show' || !$this->page['latest'] || $this->db->noindex || $this->page['noindex'])
 {
-	echo '	<meta name="robots" content="noindex, nofollow" />'."\n";
+	$tpl->h_norobots = true;
 }
 
-if ($this->has_access('read')) { ?>
-	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
-	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
-<?php } ?>
-	<meta name="language" content="<?php echo $this->page['page_lang'] ?>" />
-
-	<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
-<?php if ($this->config['allow_x11colors']) {?>
-	<link rel="stylesheet" href="<?php echo $this->config['base_url'].Ut::join_path(THEME_DIR, "_common/X11colors.css"); ?>" />
-<?php } ?>
-	<link media="print" rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
-	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icon/favicon.ico" type="image/x-icon" />
-	<link rel="start" title="<?php echo $this->config['root_page'];?>" href="<?php echo $this->config['base_url'];?>"/>
-<?php if ($this->config['policy_page']) {?>
-	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
-<?php } ?>
-<?php if ($this->config['enable_feeds']) {?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
-<?php if ($this->config['news_cluster']) {?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('NewsFeed');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
-<?php } ?>
-<?php if (!$this->hide_revisions) {?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
-<?php } ?>
-<?php } ?>
-
-<?php
-// set Bad Behavior "screener" cookie for advanced protection
-if (!empty($this->config['ext_bad_behavior']))
+if ($this->has_access('read'))
 {
-	bb2_insert_head();
-} ?>
+	$tpl->h_page_keywords = $this->get_keywords();
+	$tpl->h_page_description = $this->get_description();
+}
 
-<?php
-// JS files.
-// default.js contains common procedures and should be included everywhere
-?>
-	<script src="<?php echo $this->config['base_url'];?>js/default.js"></script>
-<?php
-// autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
+if ($this->config['allow_x11colors'])
+{
+	$tpl_h_x11_colors = $this->db->base_url . Ut::join_path(THEME_DIR, "_common/X11colors.css");
+}
+
+if ($this->db->policy_page)
+{
+	$tpl->h_policy_href = $this->href('', $this->db->policy_page);
+}
+
+if ($this->db->enable_feeds)
+{
+	$tpl->h_rss_url = $url =
+		[
+			$this->db->base_url . 'xml/',
+			'_' . preg_replace('/[^0-9a-z]/', '', strtolower($this->db->site_name)) . '.xml'
+		];
+
+	if ($this->db->news_cluster)
+	{
+		$tpl->h_rss_news_url = $url;
+	}
+
+	if (!$this->hide_revisions)
+	{
+		$tpl->h_rss_revisions_tag = $this->tag;
+		$tpl->h_rss_revisions_href = $this->href('revisions.xml');
+	}
+}
+
+// set Bad Behavior "screener" cookie for advanced protection
+if (!empty($this->db->ext_bad_behavior))
+{
+	$tpl->h_bb2 = bb2_insert_head();
+}
+
 if ($this->method == 'edit')
 {
-	echo '<script src="'.$this->config['base_url'].'js/protoedit.js"></script>'."\n";
-	echo '<script src="'.$this->config['base_url'].'js/lang/wikiedit.'.$this->user_lang.'.js"></script>'."\n";
-	echo '<script src="'.$this->config['base_url'].'js/wikiedit.js"></script>'."\n";
-	echo '<script src="'.$this->config['base_url'].'js/autocomplete.js"></script>'."\n";
+	$tpl->h_edit_lang = $this->user_lang;
 }
 
 // Doubleclick edit feature.
 // Enabled only for registered users who don't switch it off (requires class=page in show handler).
-$doubleclick = '';
-
-if ($user = $this->get_user())
+if (($user = $this->get_user()))
 {
-	if (isset($user['doubleclick_edit']) && $user['doubleclick_edit'] == 1)
-	{
-		$doubleclick = true;
-	}
+	$doubleclick = @$user['doubleclick_edit'];
 }
-else if ($this->has_access('write'))
+else
 {
-	$doubleclick = true;
+	$doubleclick = $this->has_access('write');
 }
 
-if ($doubleclick == true)
+if ($doubleclick)
 {
-?>
-	<script>
-	var edit = "<?php echo $this->href('edit');?>";
-	</script>
-<?php
+	$tpl->h_doubleclick_href = $this->href('edit');
 }
-echo $this->html_head;
-?>
 
-</head>
+$tpl->h_additions = $this->html_head;
