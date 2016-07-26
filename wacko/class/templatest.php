@@ -489,11 +489,11 @@ class Templatest
 			$lines = explode("\n", $text);
 			foreach ($lines as &$line)
 			{
-				if (!ctype_space(substr($line, 0, $prefix)))
+				// protect non-whitespace prefix
+				if (($ws = strspn($line, " \t\r\n\x0b")) < $prefix)
 				{
-					// maybe some stray \n came in prefix-precomputed block
-					// so do not cut off non-space prefix!
-					$line = $block . $line;
+					// maybe some stray \n came in prefix-precomputed block..
+					$line = $block . substr($line, $ws);
 				}
 				else if (strlen($line) > $prefix)
 				{
