@@ -1,4 +1,6 @@
 FIRST EVER html template for WackoWiki!
+please do not reformat!
+leave it as is for the memories
 
 
 [ ====================================== main =================================== ]

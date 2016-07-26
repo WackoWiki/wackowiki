@@ -7,8 +7,6 @@ if (!defined('IN_WACKO'))
 
 if ($this->is_admin())
 {
-	$me = $this->href();
-
 	if (@$_POST['_action'] === 'purge_cache')
 	{
 		@set_time_limit(0);
@@ -37,16 +35,16 @@ if ($this->is_admin())
 			$done->feed_n = $n;
 		}
 
+		if (isset($_POST['template_cache']) && ($n = Ut::purge_directory(CACHE_TEMPLATE_DIR)))
+		{
+			$done->template_n = $n;
+		}
+
 		$this->set_message($done, 'success');
 
-		$this->http->redirect($me);
+		$this->show_must_go_on();
 	}
 
 	// STS $add = (@$_GET['add'] || @$_POST['add']);
-	$tpl->href = $me;
-
-	if (!($this->db->rewrite_mode || $this->db->ap_mode))
-	{
-		$tpl->h_mini = $this->mini_href();
-	}
+	$tpl->href = $this->href();
 }
