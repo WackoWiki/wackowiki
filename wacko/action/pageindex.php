@@ -153,40 +153,39 @@ if (($pages = $this->db->load_all(
 }
 
 // display navigation
-$this->print_pagination($pagination);
+$tpl->pagination_text = $pagination['text'];
 
 // create the top links menu
 if ($letters)
 {
-	// all
-	echo '<ul class="ul_letters">' . "\n";
-	echo '<li><a href="' . $this->href() . '">' . $this->_t('Any') . "</a></li>\n";
+	// 'Any' menu item
+	$tpl->letter_l_commit = true;
+	$tpl->letter_l_item_link = $this->href();
+	$tpl->letter_l_item_ch = $this->_t('Any');
 
 	foreach ($letters as $ch => $letter_count)
 	{
+		$tpl->letter_l_commit = true;
 		if ($ch === $letter)
 		{
-			echo '<li class="active"><strong>' . $ch . "</strong></li>\n";
+			$tpl->letter_l_active_ch = $ch;
 		}
 		else
 		{
-			echo '<li><a href="' . $this->href('', '', 'letter=') . $ch . '">' . $ch . "</a></li>\n";
+			$tpl->letter_l_item_ch = $ch;
+			$tpl->letter_l_item_link = $this->href('', '', 'letter=') . $ch;
 		}
 	}
-
-	echo "</ul><br /><br />\n";
 }
 
 if (!$pages_to_display)
 {
-	echo $this->_t('NoPagesFound');
+	$tpl->nopages = true;
 	return;
 }
 
-echo '<ul class="ul_list">'."\n";
-
 // display collected data
-$cur_char = '';
+$cur_char = false;
 
 foreach ($pages_to_display as $page)
 {
@@ -196,32 +195,15 @@ foreach ($pages_to_display as $page)
 
 	if ($ch !== $cur_char)
 	{
-		if ($cur_char !== '')
-		{
-			echo "</ul></li>\n";
-		}
-
-		echo "\n<li><strong>" . $ch . "</strong>\n<ul>\n";
-
-		$cur_char = $ch;
+		$tpl->page_ch = $cur_char = $ch;
 	}
-
-	echo "<li>";
 
 	if ($title)
 	{
-		echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
+		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
 	}
 	else
 	{
-		echo $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
+		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
 	}
-
-	echo "</li>\n";
 }
-
-// close list
-echo "</ul>\n</li>\n";
-echo "</ul>\n";
-
-$this->print_pagination($pagination);
