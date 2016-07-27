@@ -38,13 +38,9 @@ if (function_exists('date_default_timezone_set') && function_exists('date_defaul
 }
 
 // gzip_compression
-if (ini_get('zlib.output_compression'))
+if (!ini_get('zlib.output_compression') && function_exists('ob_gzhandler') && !ob_start('ob_gzhandler'))
 {
 	ob_start();
-}
-else if (function_exists('ob_gzhandler'))
-{
-	ob_start('ob_gzhandler');
 }
 
 // don't let cookies ever interfere with request vars

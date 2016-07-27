@@ -69,7 +69,7 @@ class TemplatestUser extends TemplatestSetter
 				list ($_place, $lineno, $block, $_pipe, $id, $args) = $pull;
 				$loc = $this->store[2][$pat['file']][0] . ':' . $lineno;
 
-				if (!isset($this->pulls[$id]))
+				if (!(isset($this->pulls[$id]) && is_callable($this->pulls[$id])))
 				{
 					die('using unknown pull ' . $id . ': at ' . $loc);
 				}

@@ -6938,7 +6938,7 @@ class Wacko
 		// next page shortcut
 		if ($page < $pages)
 		{
-			$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' &raquo;'), 'rel="next"');
+			$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' &raquo;'), ' rel="next"');
 		}
 
 		$pagination['text'] = $navigation;
