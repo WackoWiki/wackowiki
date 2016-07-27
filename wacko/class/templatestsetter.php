@@ -40,26 +40,21 @@ class TemplatestSetter extends TemplatestFilters
 				array_unshift($act, 'raw');
 			}
 
-			if (isset($this->filters[$filter]))
+			$text = $this->call_filter($filter, $text, $block !== false, $loc, $act);
+			if ($text === false || $text === null)
 			{
-				array_unshift($act, $text, $block !== false, $loc);
-				$text = call_user_func_array($this->filters[$filter], $act);
-				if ($text === false || $text === null)
-				{
-					return;
-				}
-			}
-			else
-			{
-				trigger_error('unknown filter ' . $filter . ' at ' . $loc, E_USER_WARNING);
+				return;
 			}
 		}
 
-		// if last filter is not escape and we set data (not subpattern) - do default escaping
+		// if last filter is not escape and we setting data (not subpattern) - do default escaping
 		if ($filter != 'escape' && $filter != 'e' && !isset($prefix0))
 		{
-			$text = call_user_func($this->filters['escape'], $text, $block !== false, $loc, @$tpl['escape'] ?: 'html');
+			$text = $this->call_filter('escape', $text, $block !== false, $loc, [@$tpl['escape'] ?: 'html']);
 		}
+
+		// remove \0 \r \v
+		$text = Templatest::sanitize($text);
 
 		if ($block !== false)
 		{
@@ -73,7 +68,7 @@ class TemplatestSetter extends TemplatestFilters
 				foreach ($lines as &$line)
 				{
 					// all-whitespace lines are converted to empty lines
-					if (($ws = strspn($line, " \t\r\n\x0b")) >= ($strlen = strlen($line)))
+					if (($ws = strspn($line, " \t")) >= ($strlen = strlen($line)))
 					{
 						$line = '';
 					}
@@ -103,13 +98,13 @@ class TemplatestSetter extends TemplatestFilters
 		else
 		{
 			// when doing inline substitution - all of \n is removed from the subject
-			$text = trim($text, "\r\n");
+			$text = trim($text, "\n");
 
 			// all of whitespace spans with \n in them replaced by single space
 			for ($i = 0; ($nl = strpos($text, "\n", $i)) !== false; $i = $pre)
 			{
 				for ($pre = $nl; $pre > 0 && ctype_space($text[$pre - 1]); --$pre);
-				$post = $nl + strspn($text, " \t\r\n\x0b", $nl);
+				$post = $nl + strspn($text, " \t\n", $nl);
 				$text = substr_replace($text, ' ', $pre, $post - $pre);
 			}
 		}
