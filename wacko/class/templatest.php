@@ -485,38 +485,55 @@ class Templatest
 
 		if ($block !== false)
 		{
+			// auto-indenting..
 			$prefix = !Ut::is_empty($prefix0)? $prefix0 : static::compute_prefix($text);
 
-			$lines = explode("\n", $text);
-			foreach ($lines as &$line)
+			if ($prefix || $block)
 			{
-				// protect non-whitespace prefix
-				if (($ws = strspn($line, " \t\r\n\x0b")) < $prefix)
-				{
-					// maybe some stray \n came in prefix-precomputed block..
-					$line = $block . substr($line, $ws);
-				}
-				else if (strlen($line) > $prefix)
-				{
-					$line = $block . substr($line, $prefix);
-				}
-				else
-				{
-					$line = '';
-				}
-			}
-			$text = implode("\n", $lines);
+				$lines = explode("\n", $text);
 
-			if (substr($text, -1) !== "\n")
+				foreach ($lines as &$line)
+				{
+					// all-whitespace lines are converted to empty lines
+					if (($ws = strspn($line, " \t\r\n\x0b")) >= ($strlen = strlen($line)))
+					{
+						$line = '';
+					}
+					else if (!$prefix || !$ws)
+					{
+						$line = $block . $line;
+					}
+					else if ($ws <= $prefix)
+					{
+						// protect non-whitespace prefix - this CAN happen for precomputed prefixes
+						$line = $block . substr($line, $ws);
+					}
+					else
+					{
+						$line = $block . substr($line, $prefix);
+					}
+				}
+
+				$text = implode("\n", $lines);
+			}
+
+			if ($text && substr($text, -1) !== "\n")
 			{
 				$text .= "\n";
 			}
 		}
 		else
 		{
-			// TODO STS how to trim non-blocks or not?
-			// $text = str_replace([\r"\n", '', $text);
+			// when doing inline substitution - all of \n is removed from the subject
 			$text = trim($text, "\r\n");
+
+			// all of whitespace spans with \n in them replaced by single space
+			for ($i = 0; ($nl = strpos($text, "\n", $i)) !== false; $i = $pre)
+			{
+				for ($pre = $nl; $pre > 0 && ctype_space($text[$pre - 1]); --$pre);
+				$post = $nl + strspn($text, " \t\r\n\x0b", $nl);
+				$text = substr_replace($text, ' ', $pre, $post - $pre);
+			}
 		}
 
 		if (isset($prefix0) && isset($tpl['sets'][$place]))
@@ -647,12 +664,18 @@ class Templatest
 				if (!isset($base))
 				{
 					$base = $prefix;
-					$result = $ws;
+					if (($result = $ws) == 0)
+					{
+						break;
+					}
 				}
 				// bithack to find index of first differing char in two strings
 				else if (($diff = strspn($base ^ $prefix, "\0")) < $result)
 				{
-					$result = $diff;
+					if (($result = $diff) == 0)
+					{
+						break;
+					}
 				}
 			}
 		}
