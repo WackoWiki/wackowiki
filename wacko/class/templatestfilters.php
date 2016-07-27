@@ -57,6 +57,21 @@ class TemplatestFilters extends TemplatestEscaper
 		}
 	}
 
+	private function call_filter($name, $value, $block, $loc, $args)
+	{
+		if (isset($this->filters[$name]))
+		{
+			array_unshift($args, $value, $block, $loc);
+			$value = call_user_func_array($this->filters[$name], $args);
+		}
+		else
+		{
+			trigger_error('unknown filter ' . $name . ' at ' . $loc, E_USER_WARNING);
+		}
+
+		return $value;
+	}
+
 	function filter_escape_also_e($value, $block, $loc, $mode = 'html')
 	{
 		switch ($mode)

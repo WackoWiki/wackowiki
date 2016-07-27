@@ -188,7 +188,12 @@ class Templatest
 			}
 			else if ($part)
 			{
-				$store[$part]['text'][] = [$lineno + 1, str_replace("\r", '', $line)];
+				$line = static::sanitize($line);
+				if (substr($line, -1) !== "\n")
+				{
+					$line .= "\n";
+				}
+				$store[$part]['text'][] = [$lineno + 1, $line];
 			}
 			else
 			{
@@ -586,6 +591,12 @@ class Templatest
 		$args[] = array_slice($split, $start, $n - $start);
 
 		return $args;
+	}
+
+	// we live in the world without \r \v \0 -- they are stripped off on arrival from files of from user data
+	static function sanitize($line)
+	{
+		return str_replace(["\r", "\x0b", "\0"], '', $line);
 	}
 
 	private static function aband($str)
