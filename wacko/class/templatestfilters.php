@@ -57,7 +57,7 @@ class TemplatestFilters extends TemplatestEscaper
 		}
 	}
 
-	private function call_filter($name, $value, $block, $loc, $args)
+	function call_filter($name, $value, $block, $loc, $args)
 	{
 		if (isset($this->filters[$name]))
 		{
