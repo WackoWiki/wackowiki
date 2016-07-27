@@ -2,6 +2,7 @@
 
 // HTTP header with right Charset settings
 header('Content-Type: text/html; charset=' . $this->get_charset());
+header_remove('X-Powered-By');
 
 $tpl->h_lang = $this->page['page_lang'];
 $tpl->h_charset = $this->get_charset();

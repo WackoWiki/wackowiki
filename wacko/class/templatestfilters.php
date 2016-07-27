@@ -59,7 +59,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function call_filter($name, $value, $block, $loc, $args)
 	{
-		if (isset($this->filters[$name]))
+		if (isset($this->filters[$name]) && is_callable($this->filters[$name]))
 		{
 			array_unshift($args, $value, $block, $loc);
 			$value = call_user_func_array($this->filters[$name], $args);
