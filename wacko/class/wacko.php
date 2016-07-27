@@ -6854,7 +6854,7 @@ class Wacko
 		if ($total <= $perpage)
 		{
 			// single page
-			return ['offset' => 0, 'text' => ''];
+			return ['offset' => 0, 'text' => false];
 		}
 
 		// multipage with navigation

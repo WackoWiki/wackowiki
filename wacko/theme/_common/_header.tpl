@@ -49,5 +49,5 @@ _common include file for themes
 			var edit = "[ ' href | e js ' ]";
 		</script>
 	=]
-	['' additions '']
+	['' additions | '']
 </head>
