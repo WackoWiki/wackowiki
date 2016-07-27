@@ -10,9 +10,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-class TemplatestUser 
+class TemplatestUser extends TemplatestSetter
 {
-	private $store;
 	private $main;
 	private $pulls = [];
 	private $sets = [];
@@ -25,7 +24,8 @@ class TemplatestUser
 			die('instantiating unknown pattern ' . $main . ' from file ' . $template[1]);
 		}
 
-		$this->store = $template;
+		parent::__construct($template);
+
 		$this->main = $main;
 
 		$tpl = $this->store[$main];
@@ -53,13 +53,10 @@ class TemplatestUser
 	// clone by pattern name
 	function __call($name, $args)
 	{
-		if (!isset($this->store[$name]['chunks']))
-		{
-			die('instantiating unknown pattern ' . $name . ' in file ' . $this->store[1]);
-		}
-
 		$clone = new TemplatestUser($this->store, $name);
 		$clone->pulls = $this->pulls;
+		$clone->setEncoding($this->getEncoding());
+		$clone->setFilters($this->getFilters());
 		return $clone;
 	}
 
@@ -79,7 +76,7 @@ class TemplatestUser
 
 				// single place from where pull: handlers called
 				array_unshift($args, $block !== false, $loc);
-				Templatest::set($this->store, $pat, $pull, call_user_func_array($this->pulls[$id], $args));
+				$this->assign($pat, $pull, call_user_func_array($this->pulls[$id], $args));
 			}
 		}
 
@@ -91,7 +88,7 @@ class TemplatestUser
 				{
 					if (($data = $sub[5]))
 					{
-						Templatest::set($this->store, $pat, $sub, $this->commit($data), $data['prefix']);
+						$this->assign($pat, $sub, $this->commit($data), $data['prefix']);
 					}
 				}
 			}
@@ -216,7 +213,7 @@ class TemplatestUser
 				if (isset($pat['set'][$name]))
 				{
 					// auto-commit on repeated setting
-					Templatest::set($this->store, $super, $sub, $this->commit($pat), $pat['prefix']);
+					$this->assign($super, $sub, $this->commit($pat), $pat['prefix']);
 
 					// re-instantiate pattern
 					$pat = $this->store[$sub[4]];
@@ -227,7 +224,7 @@ class TemplatestUser
 
 				foreach ($pat['var'][$name] as &$var)
 				{
-					Templatest::set($this->store, $pat, $var, $value);
+					$this->assign($pat, $var, $value);
 				}
 			}
 			else
@@ -264,11 +261,5 @@ class TemplatestUser
 		}
 
 		$this->sets[$var] = $n + 1;
-	}
-
-	// patch static pattern base
-	function patch($patname, $varname, $value)
-	{
-		Templatest::patch($this->store, $patname, $varname, $value, $this->store[1]);
 	}
 }

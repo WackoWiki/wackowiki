@@ -4221,13 +4221,13 @@ class Wacko
 								'<input type="hidden" name="_nonce" value="' . $nonce . '" />' . "\n" .
 								'<input type="hidden" name="_action" value="' . $action . '" />' . "\n";
 						});
-					TemplatestEscaper::setEncoding($this->charset); // STS TODO charset must be not static, tied into User instance
-					TemplatestFilters::filter('time_formatted',
+					$tpl->setEncoding($this->charset); // STS TODO charset must be not static, tied into User instance
+					$tpl->filter('time_formatted',
 						function ($value, $block, $loc)
 						{
 							return $this->get_time_formatted($value);
 						});
-					TemplatestFilters::filter('hide_page',
+					$tpl->filter('hide_page',
 						function ($value, $block, $loc)
 						{
 							// for generating method GET forms
