@@ -286,17 +286,17 @@ class TemplatestFilters
 		return $html;
 	}
 
-	static function filter_regex($value, $block, $loc, $re, $to, $limit = -1)
+	static function filter_regex($value, $block, $loc, $re, $to, $limit = -1, $strict = false)
 	{
-		$new = preg_replace($re, $to, $value, $limit);
+		$value = preg_replace($re, $to, $value, $limit, $count);
 
-		if ($new === null)
+		if ($value === null)
 		{
 			trigger_error('regex ' . $re . ' failed at ' . $loc, E_USER_WARNING);
 		}
-		else
+		else if ($strict && !$count)
 		{
-			$value = $new;
+			$value = null;
 		}
 
 		return $value;
