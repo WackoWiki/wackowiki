@@ -4,9 +4,7 @@
 .include ../../../_common/_header.tpl
 
 [ === main === ]
-
 [''' h HtmlHead ''']
-
 <body>
 <div id="mainwrapper">
 <header>
@@ -46,7 +44,6 @@
 			=]
 	</div>
 </div>
-
 <nav class="menu-main">
 <div id="menu-user">
 <ol>
@@ -83,7 +80,6 @@
 	=]
 </ol>
 </div>
-
 [ === // control tabs menu === ]
 <div id="handler">
 <ul class="submenu">
@@ -125,13 +121,13 @@
 </ul>
 </div>
 </nav>
-
+[ === #------------------------------ === ]
 <nav class="breadcrumb">
 	['' breadcrumbs | '']
 	['' // echo '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8); '']
 </nav>
 </header>
-
+[ === #------------------------------ === ]
 <main>
 [= msg _ =
 	<div class="[ ' data.1 | e attr ' ]">[ ' data.0 | ' ]</div>
