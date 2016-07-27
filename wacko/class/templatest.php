@@ -19,12 +19,11 @@ class Templatest
 	private static $filecount;
 	private static $fileidx;
 	private static $error;
+	private static $setter;
 
 	static function read($filename, $cache_dir = null)
 	{
 		$cache = &static::$store[$filename];
-
-		TemplatestFilters::init();
 
 		if (!isset($cache))
 		{
@@ -92,6 +91,9 @@ class Templatest
 					static::aband(implode(', ', static::$error) . ' in ' . $filename);
 				}
 
+				static::$setter = new TemplatestSetter($store);
+				// TODO set encoding
+
 				// patches & default encodings
 				if (isset($store['setup']))
 				{
@@ -112,7 +114,7 @@ class Templatest
 
 							case 'patch':
 								list ($_dummy, $loc, $patname, $varname, $value) = $one;
-								static::patch($store, $patname, $varname, $value, $loc);
+								static::$setter->patch($patname, $varname, $value, $loc);
 								break;
 						}
 					}
@@ -437,122 +439,6 @@ class Templatest
 		$static and $meta['static'] = 1;
 	}
 
-	public static function set(&$store, &$tpl, $sub, $text, $prefix0 = null, $static = false)
-	{
-		if ($text === false || $text === null)
-		{
-			return;
-		}
-
-		list ($place, $lineno, $block, $pipe) = $sub;
-		$loc = $store[2][$tpl['file']][0] . ':' . $lineno;
-
-		$filter = -1;
-		foreach ($pipe as $act)
-		{
-			$filter = array_shift($act) ?: '';
-			if (strpos($filter, '.') !== false)
-			{
-				array_unshift($act, $filter);
-				$filter = 'index';
-			}
-			else if (!$filter || $filter == 'raw')
-			{
-				$filter = 'escape';
-				array_unshift($act, 'raw');
-			}
-
-			if (isset(TemplatestFilters::$filters[$filter]))
-			{
-				array_unshift($act, $text, $block !== false, $loc);
-				$text = call_user_func_array(TemplatestFilters::$filters[$filter], $act);
-				if ($text === false || $text === null)
-				{
-					return;
-				}
-			}
-			else
-			{
-				trigger_error('unknown filter ' . $filter . ' at ' . $loc, E_USER_WARNING);
-			}
-		}
-
-		// if last filter is not escape and we set data (not subpattern) - do default escaping
-		if ($filter != 'escape' && $filter != 'e' && !isset($prefix0))
-		{
-			$text = call_user_func(TemplatestFilters::$filters['escape'], $text, $block !== false, $loc, @$tpl['escape'] ?: 'html');
-		}
-
-		if ($block !== false)
-		{
-			// auto-indenting..
-			$prefix = !Ut::is_empty($prefix0)? $prefix0 : static::compute_prefix($text);
-
-			if ($prefix || $block)
-			{
-				$lines = explode("\n", $text);
-
-				foreach ($lines as &$line)
-				{
-					// all-whitespace lines are converted to empty lines
-					if (($ws = strspn($line, " \t\r\n\x0b")) >= ($strlen = strlen($line)))
-					{
-						$line = '';
-					}
-					else if (!$prefix || !$ws)
-					{
-						$line = $block . $line;
-					}
-					else if ($ws <= $prefix)
-					{
-						// protect non-whitespace prefix - this CAN happen for precomputed prefixes
-						$line = $block . substr($line, $ws);
-					}
-					else
-					{
-						$line = $block . substr($line, $prefix);
-					}
-				}
-
-				$text = implode("\n", $lines);
-			}
-
-			if ($text && substr($text, -1) !== "\n")
-			{
-				$text .= "\n";
-			}
-		}
-		else
-		{
-			// when doing inline substitution - all of \n is removed from the subject
-			$text = trim($text, "\r\n");
-
-			// all of whitespace spans with \n in them replaced by single space
-			for ($i = 0; ($nl = strpos($text, "\n", $i)) !== false; $i = $pre)
-			{
-				for ($pre = $nl; $pre > 0 && ctype_space($text[$pre - 1]); --$pre);
-				$post = $nl + strspn($text, " \t\r\n\x0b", $nl);
-				$text = substr_replace($text, ' ', $pre, $post - $pre);
-			}
-		}
-
-		if (isset($prefix0) && isset($tpl['sets'][$place]))
-		{
-			// precomputed prefix is known for patterns only. so append, for auto-commit
-			$tpl['chunks'][$place] .= $text;
-		}
-		else
-		{
-			// vars & pulls
-			$tpl['chunks'][$place] = $text;
-		}
-
-		if (!$static)
-		{
-			$tpl['sets'][$place] = 1;
-		}
-	}
-
 	private static function inline_static_subs(&$store)
 	{
 		// inline static subpatterns
@@ -571,7 +457,7 @@ class Templatest
 
 							if (isset($incl['static']))
 							{
-								static::set($store, $pat, $sub, implode('', $incl['chunks']), $incl['prefix'], 1);
+								static::$setter->assign($pat, $sub, implode('', $incl['chunks']), $incl['prefix'], 1);
 
 								unset($sublist[$i]);
 								if (!$sublist)
@@ -612,7 +498,8 @@ class Templatest
 							{
 								if (count($act) == 2 && $act[0] === 'default')
 								{
-									static::set($store, $pat, $sub, $act[1], null, 1);
+									// 2 is to not set if already patched in
+									static::$setter->assign($pat, $sub, $act[1], null, 2);
 								}
 							}
 						}
@@ -622,32 +509,9 @@ class Templatest
 		}
 	}
 
-	static function patch(&$store, $patname, $varname, $value, $loc)
-	{
-		if (!isset($store[$patname]['chunks']))
-		{
-			trigger_error('unknown pattern ' . $patname . ' at ' . $loc, E_USER_WARNING);
-		}
-		else
-		{
-			$pat = &$store[$patname];
-
-			if (!isset($pat['var'][$varname]))
-			{
-				trigger_error('unknown variable ' . $varname . ' at ' . $loc, E_USER_WARNING);
-			}
-			else
-			{
-				foreach ($pat['var'][$varname] as &$var)
-				{
-					Templatest::set($store, $pat, $var, $value, null, 1);
-				}
-			}
-		}
-	}
-
 	// find largest common whitespace prefix of non-empty lines in pattern, for auto-indent
-	private static function compute_prefix($text)
+	// NB also used by TemplatestSetter class
+	static function compute_prefix($text)
 	{
 		$result = 0;
 		$len = strlen($text);

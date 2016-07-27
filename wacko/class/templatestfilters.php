@@ -6,35 +6,58 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-	- cycle VAL.... -- $value[$VAL % count($value)]
 	- bytes -- 1.2MB
 */
 
 
-class TemplatestFilters
+class TemplatestFilters extends TemplatestEscaper
 {
-	static $filters;
+	protected $filters;
 
-	static function init()
+	function __construct()
 	{
-		if (!isset(static::$filters))
+		$this->filters = [];
+		foreach (get_class_methods(__CLASS__) as $meth)
 		{
-			static::$filters = [];
-			foreach (get_class_methods(__CLASS__) as $meth)
+			if (preg_match('/^filter_(\w+?)(_also_(\w+?))?$/', $meth, $match))
 			{
-				if (preg_match('/^filter_(\w+?)(_also_(\w+?))?$/', $meth, $match))
+				$this->filters[$match[1]] = [$this, $meth];
+				if (isset($match[3]))
 				{
-					static::$filters[$match[1]] = [__CLASS__, $meth];
-					if (isset($match[3]))
-					{
-						static::$filters[$match[3]] = [__CLASS__, $meth];
-					}
+					$this->filters[$match[3]] = [$this, $meth];
 				}
 			}
 		}
 	}
 
-	static function filter_escape_also_e($value, $block, $loc, $mode = 'html')
+	// add user filter function
+	function filter($id, $func)
+	{
+		$this->filters[$id] = $func;
+	}
+
+	function getFilters()
+	{
+		$list = [];
+		foreach ($this->filters as $id => $func)
+		{
+			if (!(is_array($func) && $func[0] === $this))
+			{
+				$list[$id] = $func;
+			}
+		}
+		return $list;
+	}
+
+	function setFilters($list)
+	{
+		foreach ($list as $id => $func)
+		{
+			$this->filters[$id] = $func;
+		}
+	}
+
+	function filter_escape_also_e($value, $block, $loc, $mode = 'html')
 	{
 		switch ($mode)
 		{
@@ -42,24 +65,24 @@ class TemplatestFilters
 				break;
 
 			case 'html':
-				$value = TemplatestEscaper::escapeHtml($value);
+				$value = $this->escapeHtml($value);
 				break;
 
 			case 'js':
-				$value = TemplatestEscaper::escapeJs($value);
+				$value = $this->escapeJs($value);
 				break;
 
 			case 'css':
-				$value = TemplatestEscaper::escapeCss($value);
+				$value = $this->escapeCss($value);
 				break;
 
 			case 'url':
-				$value = TemplatestEscaper::escapeUrl($value);
+				$value = $this->escapeUrl($value);
 				break;
 
 			case 'html_attr':
 			case 'attr':
-				$value = TemplatestEscaper::escapeHtmlAttr($value);
+				$value = $this->escapeHtmlAttr($value);
 				break;
 
 			default:
@@ -69,53 +92,53 @@ class TemplatestFilters
 		return $value;
 	}
 
-	static function filter_default($value, $block, $loc, $default)
+	function filter_default($value, $block, $loc, $default)
 	{
 		($value === null || $value === false) and $value = $default;
 		return $value;
 	}
 
-	static function filter_format($value, $block, $loc, $fmt)
+	function filter_format($value, $block, $loc, $fmt)
 	{
 		return sprintf($fmt, $value);
 	}
 
-	static function filter_stringify($value, $block, $loc)
+	function filter_stringify($value, $block, $loc)
 	{
 		return Ut::stringify($value);
 	}
 
-	static function filter_date($value, $block, $loc, $fmt)
+	function filter_date($value, $block, $loc, $fmt)
 	{
 		return date($fmt, $value);
 	}
 
-	static function filter_join($value, $block, $loc, $glue = '')
+	function filter_join($value, $block, $loc, $glue = '')
 	{
 		return implode($glue, $value);
 	}
 
-	static function filter_lower($value, $block, $loc)
+	function filter_lower($value, $block, $loc)
 	{
 		return strtolower($value);
 	}
 
-	static function filter_upper($value, $block, $loc)
+	function filter_upper($value, $block, $loc)
 	{
 		return strtoupper($value);
 	}
 
-	static function filter_number($value, $block, $loc, $decimals = 0, $dec_point = '.', $thousands_sep = ',')
+	function filter_number($value, $block, $loc, $decimals = 0, $dec_point = '.', $thousands_sep = ',')
 	{
 		return number_format($value, $decimals, $dec_point, $thousands_sep);
 	}
 
-	static function filter_void($value, $block, $loc)
+	function filter_void($value, $block, $loc)
 	{
 		return null;
 	}
 
-	static function filter_index($value, $block, $loc, $path)
+	function filter_index($value, $block, $loc, $path)
 	{
 		if (substr($path, 0, 1) == '.')
 		{
@@ -137,7 +160,7 @@ class TemplatestFilters
 		return $value;
 	}
 
-	static function filter_replace()
+	function filter_replace()
 	{
 		$args = func_get_args();
 		$value = array_shift($args);
@@ -160,7 +183,7 @@ class TemplatestFilters
 		return str_replace($search, $replace, $value);
 	}
 
-	static function filter_json_encode()
+	function filter_json_encode()
 	{
 		$args = func_get_args();
 		$value = array_shift($args);
@@ -187,12 +210,12 @@ class TemplatestFilters
 		return json_encode($value, $options);
 	}
 
-	static function filter_json_decode($value, $block, $loc)
+	function filter_json_decode($value, $block, $loc)
 	{
 		return json_decode($value, 1);
 	}
 
-	static function filter_sp2nbsp($value, $block, $loc)
+	function filter_sp2nbsp($value, $block, $loc)
 	{
 		return preg_replace_callback('# ( +)|^ #',
 			function ($x)
@@ -202,7 +225,7 @@ class TemplatestFilters
 			}, $value);
 	}
 
-	/*static function filter_spaceless($value, $block, $loc)
+	/*function filter_spaceless($value, $block, $loc)
 	{
 		return preg_replace_callback('/>\s+</', function ($m)
 			{
@@ -210,7 +233,7 @@ class TemplatestFilters
 			}, $value);
 	}*/
 
-	static function filter_spaceless($value, $block, $loc)
+	function filter_spaceless($value, $block, $loc)
 	{
 		if (preg_match_all(
 			'@
@@ -286,7 +309,7 @@ class TemplatestFilters
 		return $html;
 	}
 
-	static function filter_regex($value, $block, $loc, $re, $to, $limit = -1, $strict = false)
+	function filter_regex($value, $block, $loc, $re, $to, $limit = -1, $strict = false)
 	{
 		$value = preg_replace($re, $to, $value, $limit, $count);
 
@@ -302,12 +325,12 @@ class TemplatestFilters
 		return $value;
 	}
 
-	static function filter_trim($value, $block, $loc, $character_mask = " \t\n\r\0\x0B")
+	function filter_trim($value, $block, $loc, $character_mask = " \t\n\r\0\x0B")
 	{
 		return trim($value, $character_mask);
 	}
 
-	static function filter_url_encode($value, $block, $loc)
+	function filter_url_encode($value, $block, $loc)
 	{
 		if (!is_array($value))
 		{
@@ -323,12 +346,12 @@ class TemplatestFilters
 		return implode('&', $list);
 	}
 
-	static function filter_striptags($value, $block, $loc, $allowable_tags = '')
+	function filter_striptags($value, $block, $loc, $allowable_tags = '')
 	{
 		return strip_tags($value, $allowable_tags);
 	}
 
-	static function filter_nl2br($value, $block, $loc)
+	function filter_nl2br($value, $block, $loc)
 	{
 		$list = preg_split('/(?:\r\n|\r|\n){2,}/', $value, -1, PREG_SPLIT_NO_EMPTY);
 		foreach ($list as &$p)
@@ -339,7 +362,7 @@ class TemplatestFilters
 		return implode("\n\n", $list);
 	}
 
-	static function filter_truncate($value, $block, $loc, $limit, $ellipsis = '...')
+	function filter_truncate($value, $block, $loc, $limit, $ellipsis = '...')
 	{
 		if (strlen($value) > $limit)
 		{
@@ -351,26 +374,20 @@ class TemplatestFilters
 		return $value;
 	}
 
-	static function filter_split($value, $block, $loc, $delimiter, $limit = PHP_INT_MAX)
+	function filter_split($value, $block, $loc, $delimiter, $limit = PHP_INT_MAX)
 	{
 		return Ut::isempty($delimiter)? str_split($value, $limit) : explode($delimiter, $value, $limit);
 	}
 
-	static function filter_dbg($value, $block, $loc)
+	function filter_dbg($value, $block, $loc)
 	{
 		// suppress ANY errors. templatest is meant to be used standalone, and this is LONE dependency on wacko
 		@Diag::dbg($loc, $value);
 		return $value;
 	}
 
-	static function filter_enclose($value, $block, $loc, $pref = '', $post = '')
+	function filter_enclose($value, $block, $loc, $pref = '', $post = '')
 	{
 		return $pref . $value . $post;
-	}
-
-	// add user filter function
-	static function filter($id, $func)
-	{
-		static::$filters[$id] = $func;
 	}
 }
