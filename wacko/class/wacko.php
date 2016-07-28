@@ -4718,7 +4718,7 @@ class Wacko
 	// user logs in by explicitly providing password
 	function log_user_in($user, $remember_me = false)
 	{
-		$this->set_message(Ut::perc_replace($this->_t(WelcomeBack), $user['user_name']), 'success');
+		$this->soft_login($user);
 
 		if ($remember_me)
 		{
@@ -4735,8 +4735,13 @@ class Wacko
 			"WHERE ".
 				"user_id						= '" . (int)$user['user_id'] . "' ".
 			"LIMIT 1");
+	}
 
+	function soft_login($user)
+	{
 		$this->sess->restart();
+		$this->set_message(Ut::perc_replace($this->_t('WelcomeBack'), $user['user_name']), 'success');
+		$this->set_user($user);
 	}
 
 	// explicitly end user session and free session vars
@@ -5931,9 +5936,7 @@ class Wacko
 		if (!($user = $this->get_user()) && ($user = $this->check_auth_token()))
 		{
 			// re-login by auth token
-			$this->set_message(Ut::perc_replace($this->_t(WelcomeBack), $user['user_name']), 'success');
-			$this->sess->restart();
-			$this->set_user($user);
+			$this->soft_login($user);
 		}
 
 		// user settings

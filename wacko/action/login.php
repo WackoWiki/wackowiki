@@ -159,7 +159,6 @@ else // login
 					else
 					{
 						$this->log_user_in($user, isset($_POST['persistent']));
-						$this->set_user($user);
 						$this->context[++$this->current_context] = '';
 
 						$this->log(3, Ut::perc_replace($this->_t('LogUserLoginOK', SYSTEM_LANG), $user['user_name']));

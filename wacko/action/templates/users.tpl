@@ -153,16 +153,25 @@ first really BIG template written
 [ === // USERLIST ------------------------------------------------------------------------------------- === ]
 
 [= UserList =]
-	['' // user filter form '']
-	<form action="[ ' href | ' ]" method="get" name="search_user">
-		[ ' href | hide_page | ' ]
-		<table class="formation"><tr><td class="label">
-		[ ' _t: UsersSearch ' ]: </td><td>
-		<input type="search" required="required" name="user" maxchars="40" size="40" value="[ ' user ' ]" /> ['' '']
-		<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]" /> ['' '']
-		['' // echo <input type="submit" id="button" value="_t('UsersOpenProfile') . '" name="gotoprofile" /> '']
-		</td></tr></table><br />
-	</form>
+	[= groups _ =
+		<h2 id="pages">[ ' members ' ] [ ' _t: GroupsMembers ' ]</h2>
+		<br />
+	=]
+	[= form _ =
+		['' // user filter form '']
+		<form action="[ ' href | ' ]" method="get" name="search_user">
+			[ ' href | hide_page | ' ]
+			[= hid _ =
+				<input type="hidden" name="[ ' param ' ]" value="[ ' value ' ]" />
+			=]
+			<table class="formation"><tr><td class="label">
+			[ ' _t: UsersSearch ' ]: </td><td>
+			<input type="search" name="user" maxchars="40" size="40" value="[ ' user ' ]" /> ['' '']
+			<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]" /> ['' '']
+			['' // echo <input type="submit" id="button" value="_t('UsersOpenProfile') . '" name="gotoprofile" /> '']
+			</td></tr></table><br />
+		</form>
+	=]
 	['' pagination '']
 	<table style="width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
 		<tr>

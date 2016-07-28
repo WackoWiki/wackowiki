@@ -5,12 +5,14 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($max)) $max = 0;
+// action args:
+$max = (int) @$max;
+$group_id = (int) @$group_id;
 
 $logged_in = $this->get_user();
 
 // display user profile
-if (($profile = @$_REQUEST['profile']))
+if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private message can POST here
 {
 	// hide article H1 header
 	$this->hide_article_header = true;
@@ -402,26 +404,22 @@ else
 	$params = [];
 	if ($_user !== '')
 	{
-		$params['profile'] = $_user;
-
-		// goto user profile directly if so desired
-		if (isset($_GET['gotoprofile']) && $this->load_user($_user))
+		// goto user profile directly if exact user name specified
+		if (!$group_id && $this->load_user($_user))
 		{
+			$params['profile'] = $_user;
 			$this->http->redirect($this->href('', '', $params));
 			// NEVER BEEN HERE
 		}
+		$params['user'] = $_user;
 		$sql_where = "AND u.user_name LIKE " . $this->db->q('%' . $_user . '%') . " ";
 	}
 
-	$params = function ($sort, $order) use ($params)
+	if (isset($_GET['profile']))
 	{
-		if ($sort)
-		{
-			$params['sort'] = $sort;
-			$params['order'] = $order;
-		}
-		return $params;
-	};
+		// it's for Groups
+		$params['profile'] = $_GET['profile'];
+	}
 
 	$_sort = @$_GET['sort'];
 	$sort_modes =
@@ -446,26 +444,47 @@ else
 		{
 			$_order = 'asc';
 		}
+		$params['sort'] = $_sort;
+		$params['order'] = $_order;
 
 		$sql_order = 'ORDER BY u.' . $sort_modes[$_sort] . ' ' . $order_modes[$_order] . ' ';
 	}
 	else
 	{
-		$_sort = $_order = '';
 		$sql_order = 'ORDER BY u.total_pages DESC ';
 	}
 
 	$sql_where =
+			($group_id? "LEFT JOIN {$this->db->table_prefix}usergroup_member m ON (u.user_id = m.user_id) " : "").
 		"WHERE u.account_type = '0' ".
 			"AND u.enabled = '1' ".
+			($group_id? "AND m.group_id = '$group_id' " : "").
 			$sql_where;
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(u.user_name) AS n ".
 		"FROM {$this->config['user_table']} u ".
-		$sql_where);
+		$sql_where, true);
 
-	$pagination = $this->pagination($count['n'], $limit, 'p', $params($_sort, $_order));
+	if ($group_id)
+	{
+		$tpl->l_groups_members = $count['n'];
+	}
+	else
+	{
+		// user filter form
+		$tpl->l_form_href = $this->href();
+		$tpl->l_form_user = $_user;
+
+		// hide params into search form fields
+		foreach ($params as $param => $value)
+		{
+			$tpl->l_form_hid_param = $param;
+			$tpl->l_form_hid_value = $value;
+		}
+	}
+
+	$pagination = $this->pagination($count['n'], $limit, 'p', $params);
 
 	// collect data
 	$users = $this->db->load_all(
@@ -474,28 +493,30 @@ else
 			"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 		$sql_where.
 		$sql_order.
-		"LIMIT {$pagination['offset']}, $limit");
-
-	// user filter form
-	$tpl->l_href = $this->href();
-	$tpl->l_user = $_user;
+		"LIMIT {$pagination['offset']}, $limit", true);
 
 	$tpl->l_pagination_text = $pagination['text'];
 
 	// change sorting order navigation bar
-	$sort_link = function ($sort, $text) use ($_sort, $_order, $params, &$tpl)
+	$sort_link = function ($sort, $text) use ($params, &$tpl)
 	{
 		$tpl->l_s_what = $this->_t($text);
 		$order = 'asc';
-		if ($_sort == $sort)
+		if (@$params['sort'] == $sort)
 		{
-			if ($_order == 'asc')
+			if ($params['order'] == 'asc')
 			{
 				$order = 'desc';
 			}
 			$tpl->l_s_arrow_a = $order;
 		}
-		$tpl->l_s_link = $this->href('', '', $params($sort, $order));
+		else
+		{
+			$params['sort'] = $sort;
+		}
+		$params['order'] = $order;
+
+		$tpl->l_s_link = $this->href('', '', $params);
 	};
 
 	$sort_link('name', 'UsersName');
