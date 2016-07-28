@@ -51,7 +51,7 @@ if (!isset($letters)
 
 	$pages = $this->db->load_all(
 		"SELECT tag, title ".
-		"FROM {$this->config['table_prefix']}page ".
+		"FROM {$this->db->table_prefix}page ".
 		"WHERE comment_on_id = '0' ".
 			"AND deleted = '0' ".
 			($for
@@ -85,7 +85,7 @@ if (!isset($letters)
 
 $count = $this->db->load_single(
 	"SELECT COUNT(page_id) AS n ".
-	"FROM {$this->config['table_prefix']}page ".
+	"FROM {$this->db->table_prefix}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
 		($for
@@ -109,7 +109,7 @@ $pagination = $this->pagination($count['n'], $limit, 'p', ($letter !== ''? ['let
 $pages_to_display = [];
 if (($pages = $this->db->load_all(
 	"SELECT page_id, tag, title, page_lang ".
-	"FROM {$this->config['table_prefix']}page ".
+	"FROM {$this->db->table_prefix}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
 		($for
@@ -135,7 +135,7 @@ if (($pages = $this->db->load_all(
 
 	foreach ($pages as $page)
 	{
-		if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+		if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 		{
 			if (($ch = $get_letter($title?  $page['title'] : $page['tag'])) !== '')
 			{

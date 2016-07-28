@@ -20,7 +20,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 </div></div>
 <!--ENDE: KOPF-->
 <!--BEGINN: MENUE-->
-<div class="cap" id="menu"><img src="<?php echo $this->config['theme_url'] ?>icon/logo.png" alt="alternativ Text" align="middle" />
+<div class="cap" id="menu"><img src="<?php echo $this->db->theme_url ?>icon/logo.png" alt="alternativ Text" align="middle" />
 
 </div>
 <!--ENDE: MENUE-->

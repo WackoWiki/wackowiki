@@ -48,7 +48,7 @@ if (($code = @$_REQUEST['secret_code']))
 			else
 			{
 				$this->db->sql_query(
-					"UPDATE ".$this->config['user_table']." SET ".
+					"UPDATE ".$this->db->user_table." SET ".
 						"password			= ".$this->db->q($this->password_hash($user, $new_password)).", ".
 						"change_password	= '' ".
 					"WHERE user_id = '".$user['user_id']."' ".
@@ -133,7 +133,7 @@ else if (($user = $this->get_user()))
 		{
 			// store new password
 			$this->db->sql_query(
-				"UPDATE ".$this->config['user_table']." SET ".
+				"UPDATE ".$this->db->user_table." SET ".
 					"change_password	= '', ".
 					"password = ".$this->db->q($this->password_hash($user, $new_password))." ".
 				"WHERE user_id = '".$user['user_id']."' ".
@@ -193,8 +193,8 @@ else
 		$email		= Ut::strip_spaces($_POST['email']);
 		$user		= $this->db->load_single(
 						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
-						"FROM ".$this->config['user_table']." u ".
-							"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+						"FROM ".$this->db->user_table." u ".
+							"LEFT JOIN ".$this->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 						"WHERE u.user_name = ".$this->db->q($user_name)." ".
 							"AND u.email = ".$this->db->q($email)." ".
 						"LIMIT 1");
@@ -207,9 +207,9 @@ else
 				$code_hash	= hash_hmac('sha256', $code, $this->db->system_seed);
 
 				$save = $this->set_language($user['user_lang'], true);
-				$subject	=	$this->_t('EmailForgotSubject') . $this->config['site_name'];
+				$subject	=	$this->_t('EmailForgotSubject') . $this->db->site_name;
 				$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
-									$this->config['site_name'],
+									$this->db->site_name,
 									$user['user_name'],
 									$this->href('', '', 'secret_code=' . $code)) . "\n\n";
 

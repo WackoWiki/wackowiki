@@ -10,7 +10,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 <body>
 <table style="width:100%;">
 	<tr>
-		<td style="width:100%; vertical-align:bottom; white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>
+		<td style="width:100%; vertical-align:bottom; white-space: nowrap;"><span class="main"><a href="<?php echo $this->db->base_url?>"class="main"><?php echo $this->db->site_name ?></a></span></td>
 		<td style="width:100%;"><div style="text-align:right;"><?php
 // Opens Search form
 echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage'));
@@ -26,7 +26,7 @@ echo $this->form_close();
 ?></div></td>
 	</tr>
 	<tr>
-		<td style="vertical-align:top;"><div class="tagline"><?php echo $this->config['site_desc']; ?></div></td>
+		<td style="vertical-align:top;"><div class="tagline"><?php echo $this->db->site_desc; ?></div></td>
 		<td style="width:100%">&nbsp;</td>
 	</tr>
 	<tr>
@@ -49,7 +49,7 @@ echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = tru
 if ($this->get_user())
 {
 ?>
-	<div class="navText"><span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+	<div class="navText"><span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->db->users_page.'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
 <?php
 	echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
 		| <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span> )</small></div>
@@ -113,14 +113,14 @@ if ($this->get_user())
 	if (!in_array($this->page['page_id'], $this->get_menu_links()))
 	{
 		echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-			.'"><img src="'. $this->config['theme_url']
+			.'"><img src="'. $this->db->theme_url
 			.'icon/bookmark1.png" alt="+" title="'.
 			$this->_t('AddToBookmarks') .'"/></a></li>';
 	}
 	else
 	{
 		echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-			.'"><img src="'. $this->config['theme_url']
+			.'"><img src="'. $this->db->theme_url
 			.'icon/bookmark2.png" alt="-" title="'.
 			$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 	}

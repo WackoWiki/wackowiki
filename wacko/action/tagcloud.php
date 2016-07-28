@@ -7,10 +7,10 @@ if (!defined('IN_WACKO'))
 
 if (!function_exists('print_tag_cloud'))
 {
-	function print_tag_cloud(&$wacko, $tags)
+	function print_tag_cloud(&$engine, $tags)
 	{
 		// TODO: add name space 'category'
-		$tag_path = $wacko->config['base_url'].$wacko->config['category_page'].'?category=';
+		$tag_path = $engine->db->base_url.$engine->db->category_page.'?category=';
 
 		$max_size = 32; // max font size in pixels
 		$min_size = 12; // min font size in pixels
@@ -76,11 +76,11 @@ $sql = "SELECT
 			c.category,
 			COUNT(category) AS number
 		FROM
-			{$this->config['table_prefix']}category c
-			INNER JOIN {$this->config['table_prefix']}category_page cp ON (c.category_id = cp.category_id)
-			INNER JOIN {$this->config['table_prefix']}page p ON (cp.page_id = p.page_id) ".
+			{$this->db->table_prefix}category c
+			INNER JOIN {$this->db->table_prefix}category_page cp ON (c.category_id = cp.category_id)
+			INNER JOIN {$this->db->table_prefix}page p ON (cp.page_id = p.page_id) ".
 			($owner
-				? "INNER JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) "
+				? "INNER JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) "
 				: '' ).
 		"WHERE c.category_lang = '{$lang}' ".
 			($root

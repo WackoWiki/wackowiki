@@ -13,7 +13,7 @@ echo '<!--notypo-->';
 // copy to clipboard is implemented only for MSIE for now
 if ($copy_button)
 {
-	$this->add_html_head('<script type="text/javascript" src="' . $this->config['base_url'] . 'js/clipboard.min.js" async onload="new Clipboard(\'.clipb\')"></script>' . "\n");
+	$this->add_html_head('<script type="text/javascript" src="' . $this->db->base_url . 'js/clipboard.min.js" async onload="new Clipboard(\'.clipb\')"></script>' . "\n");
 
 	echo '<button class="clipb" style="margin:5px" data-clipboard-target="#' . $div_id . '">'.
 		$this->_t('SourceCopyToClipboard').

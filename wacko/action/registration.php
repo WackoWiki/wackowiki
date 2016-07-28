@@ -75,7 +75,7 @@ else if (@$_POST['_action'] === 'register')
 			$error .= $this->_t('CaptchaFailed');
 		}
 
-		if ((!$error) || $this->is_admin() || !$this->config['captcha_registration'])
+		if ((!$error) || $this->is_admin() || !$this->db->captcha_registration)
 		{
 			// strip \-\_\'\.\/\\
 			$user_name	= str_replace('-',	'',		$user_name);
@@ -84,17 +84,17 @@ else if (@$_POST['_action'] === 'register')
 			$user_name	= str_replace("'",	'',		str_replace('\\', '', str_replace('_', '', $user_name)));
 
 			// check if name is WikiName style
-			if (!$this->is_wiki_name($user_name) && $this->config['disable_wikiname'] === false)
+			if (!$this->is_wiki_name($user_name) && $this->db->disable_wikiname === false)
 			{
 				$error .= $this->_t('MustBeWikiName')." ";
 			}
-			else if (strlen($user_name) < $this->config['username_chars_min'])
+			else if (strlen($user_name) < $this->db->username_chars_min)
 			{
-				$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->config['username_chars_min'])." ";
+				$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min)." ";
 			}
-			else if (strlen($user_name) > $this->config['username_chars_max'])
+			else if (strlen($user_name) > $this->db->username_chars_max)
 			{
-				$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->config['username_chars_max'])." ";
+				$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max)." ";
 			}
 			// check if valid user name (and disallow '/')
 			else if (!preg_match('/^(['.$this->language['ALPHANUM_P'].']+)$/', $user_name) || preg_match('/\//', $user_name))
@@ -112,7 +112,7 @@ else if (@$_POST['_action'] === 'register')
 				$error .= $this->_t('RegistrationUserNameOwned');
 
 				// log event
-				$this->log(2, Ut::perc_replace($this->_t('LogUserSimiliarName', $this->config['language']), $user_name));
+				$this->log(2, Ut::perc_replace($this->_t('LogUserSimiliarName', $this->db->language), $user_name));
 			}
 			// no email given
 			else if ($email == '')
@@ -125,7 +125,7 @@ else if (@$_POST['_action'] === 'register')
 				$error .= $this->_t('NotAEmail')." ";
 			}
 			// no email reuse allowed
-			else if (!$this->config['allow_email_reuse'] && $this->email_exists($email))
+			else if (!$this->db->allow_email_reuse && $this->email_exists($email))
 			{
 				$error .= $this->_t('EmailTaken')." ";
 			}
@@ -163,7 +163,7 @@ else if (@$_POST['_action'] === 'register')
 
 				// INSERT user
 				$this->db->sql_query(
-					"INSERT INTO ".$this->config['user_table']." ".
+					"INSERT INTO ".$this->db->user_table." ".
 					"SET ".
 						"signup_time	= UTC_TIMESTAMP(), ".
 						"user_name		= ".$this->db->q($user_name).", ".
@@ -184,16 +184,16 @@ else if (@$_POST['_action'] === 'register')
 
 				// INSERT user settings
 				$this->db->sql_query(
-					"INSERT INTO ".$this->config['table_prefix']."user_setting ".
+					"INSERT INTO ".$this->db->table_prefix."user_setting ".
 					"SET ".
 						"user_id			= '".(int)$user_id."', ".
-						"typografica		= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
-						"user_lang			= ".$this->db->q(($user_lang ? $user_lang : $this->config['language'])).", ".
-						"theme				= ".$this->db->q($this->config['theme']).", ".
-						"notify_minor_edit	= '".(int)$this->config['notify_minor_edit']."', ".
-						"notify_page		= '".(int)$this->config['notify_page']."', ".
-						"notify_comment		= '".(int)$this->config['notify_comment']."', ".
-						"sorting_comments	= '".(int)$this->config['sorting_comments']."', ".
+						"typografica		= '".(($this->db->default_typografica == 1) ? 1 : 0)."', ".
+						"user_lang			= ".$this->db->q(($user_lang ? $user_lang : $this->db->language)).", ".
+						"theme				= ".$this->db->q($this->db->theme).", ".
+						"notify_minor_edit	= '".(int)$this->db->notify_minor_edit."', ".
+						"notify_page		= '".(int)$this->db->notify_page."', ".
+						"notify_comment		= '".(int)$this->db->notify_comment."', ".
+						"sorting_comments	= '".(int)$this->db->sorting_comments."', ".
 						"send_watchmail		= '1'");
 
 				// INSERT user menu items
@@ -219,10 +219,10 @@ else if (@$_POST['_action'] === 'register')
 					$this->set_language($save, true);
 
 					// 2. notify admin a new user has signed-up
-					if ($this->config['notify_new_user_account'])
+					if ($this->db->notify_new_user_account)
 					{
 						/* TODO: set user language for email encoding */
-						$lang_admin = $this->config['language'];
+						$lang_admin = $this->db->language;
 						$save = $this->set_language($lang_admin, true);
 
 						$subject	=	$this->_t('NewAccountSubject');
@@ -244,7 +244,7 @@ else if (@$_POST['_action'] === 'register')
 				// forward
 				$this->set_message(
 					$this->_t('SiteRegistered').
-					'&laquo;'.$this->config['site_name'].'&raquo;. <br /><br />'.
+					'&laquo;'.$this->db->site_name.'&raquo;. <br /><br />'.
 					$this->_t('SiteEmailConfirm'));
 
 				$this->context[++$this->current_context] = '';
@@ -256,7 +256,7 @@ else if (@$_POST['_action'] === 'register')
 
 if (!isset($_GET['confirm']))
 {
-	if ( ($this->config['allow_registration'] && !$this->get_user())
+	if ( ($this->db->allow_registration && !$this->get_user())
 		|| $this->is_admin() )
 	{
 		if ($error)
@@ -275,7 +275,7 @@ if (!isset($_GET['confirm']))
 
 		echo '<h3>'.$this->format_t('RegistrationWelcome').'</h3>';
 
-		if ($this->config['multilanguage'])
+		if ($this->db->multilanguage)
 		{
 			echo '<p><label for="user_lang">'.$this->format_t('RegistrationLang').':</label>';
 			echo '<select id="user_lang" name="user_lang">';
@@ -289,7 +289,7 @@ if (!isset($_GET['confirm']))
 				echo '<option value="'.$lang.'"'.
 					($user_lang == $lang
 						? 'selected="selected"'
-						: (!isset($user_lang) && $this->config['language'] == $lang
+						: (!isset($user_lang) && $this->db->language == $lang
 							? 'selected="selected"'
 							: '')
 					).'>'.$languages[$lang].' ('.$lang.")</option>\n";
@@ -301,12 +301,12 @@ if (!isset($_GET['confirm']))
 		echo '<p><label for="user_name">'.$this->format_t('UserName').':</label>';
 		echo '<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" autocomplete="off" required autofocus />';
 
-		if ($this->config['disable_wikiname'] === false)
+		if ($this->db->disable_wikiname === false)
 		{
 			echo '<br /><small>'.
 			Ut::perc_replace($this->_t('NameCamelCaseOnly'),
-				$this->config['username_chars_min'],
-				$this->config['username_chars_max']).
+				$this->db->username_chars_min,
+				$this->db->username_chars_max).
 			'</small>';
 			echo "</p>\n";
 		}
@@ -314,8 +314,8 @@ if (!isset($_GET['confirm']))
 		{
 			echo '<br /><small>'.
 			Ut::perc_replace($this->_t('NameAlphanumOnly'),
-				$this->config['username_chars_min'],
-				$this->config['username_chars_max']).
+				$this->db->username_chars_min,
+				$this->db->username_chars_max).
 			'</small>';
 			echo "</p>\n";
 		}
@@ -333,12 +333,12 @@ if (!isset($_GET['confirm']))
 		echo '<input type="email" id="email" name="email" size="30" value="'.htmlspecialchars($email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" required />';
 		echo '<small> <a title="'.$this->_t('RegistrationEmailInfo').'">(?)</a></small></p>';
 
-		/*if ($this->config['policy_page'])
+		/*if ($this->db->policy_page)
 		{
 			echo '<p>';
 			echo '<label for="terms_of_use">'.$this->_t('TermsOfUse').':</label>';
 			echo '<input type="checkbox" id="terms_of_use" name="terms_of_use" value="1" />';
-			echo '<small> '.$this->_t('AcceptTermsOfUse').' '.$this->config['site_name'].' <a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->_t('TermsOfUse').'</a><br /></small></p>';
+			echo '<small> '.$this->_t('AcceptTermsOfUse').' '.$this->db->site_name.' <a href="'.htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->_t('TermsOfUse').'</a><br /></small></p>';
 		}*/
 
 		if ($this->db->captcha_registration)

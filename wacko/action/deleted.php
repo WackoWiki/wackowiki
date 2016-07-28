@@ -22,7 +22,7 @@ if ($this->is_admin())
 
 		foreach ($pages as $page)
 		{
-			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
 				$this->sql2datetime($page['modified'], $day, $time);
 
@@ -54,7 +54,7 @@ if ($this->is_admin())
 						'<span style="text-align:left">' .
 							'<small>' . $time . '</small>  &mdash; ' .
 							// $this->compose_link_to_page($page['tag'], 'revisions', '', 0) .
-							'<img src="' . $this->config['theme_url'] . 'icon/spacer.png' . '" title="' .
+							'<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' .
 									$this->_t('CommentDeleted') . '" alt="[deleted]" class="btn-delete"/> ' .
 							$this->compose_link_to_page($page['tag'], '', '', 0) .
 						'</span>' .

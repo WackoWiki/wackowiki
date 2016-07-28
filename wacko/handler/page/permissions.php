@@ -167,7 +167,7 @@ if (@$_POST['_action'] === 'set_permissions')
 
 			$subject	= $this->_t('NewPageOwnership');
 			$body		=
-				Ut::perc_replace($this->_t('YouAreNewOwner'), $this->get_user_name(), $this->config['site_name']) . "\n\n" . // STS TODO ou, pure shit message!
+				Ut::perc_replace($this->_t('YouAreNewOwner'), $this->get_user_name(), $this->db->site_name) . "\n\n" . // STS TODO ou, pure shit message!
 				$new_owner['owned'] . "\n" .
 				$this->_t('PageOwnershipInfo') . "\n";
 

@@ -24,7 +24,7 @@ $module['db_restore'] = array(
 function admin_db_restore(&$engine, &$module)
 {
 
-//$dir = $engine->config['upload_path_backup'].'/2007_06_27_20_53_bd57f009381325efff2d684d4c2fbd54';
+//$dir = $engine->db->upload_path_backup.'/2007_06_27_20_53_bd57f009381325efff2d684d4c2fbd54';
 //if ($dh = opendir($dir))
 //{
 //	while (false !== ($file = readdir($dh)))
@@ -107,7 +107,7 @@ function admin_db_restore(&$engine, &$module)
 									#	'<input type="radio" name="backup_id" value="'.$log['pack'].'" />'.
 									'</td>
 									<th style="text-align:left;white-space:nowrap;">'.
-										date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).
+										date($engine->db->date_format.' '.$engine->db->time_format_seconds, $log[0]).
 									'</th>
 								</tr>
 								<tr>
@@ -294,9 +294,9 @@ function admin_db_restore(&$engine, &$module)
 				foreach ($list as $table)
 				{
 					// force sql mode for some tables
-					if (($table == $tables[$engine->config['table_prefix'].'acl']['name']
-					||   $table == $tables[$engine->config['table_prefix'].'file_link']['name']
-					||   $table == $tables[$engine->config['table_prefix'].'link']['name'])
+					if (($table == $tables[$engine->db->table_prefix.'acl']['name']
+					||   $table == $tables[$engine->db->table_prefix.'file_link']['name']
+					||   $table == $tables[$engine->db->table_prefix.'link']['name'])
 					&& $ikeys == false)
 					{
 						$mode = 'REPLACE';
@@ -486,7 +486,7 @@ function admin_db_restore(&$engine, &$module)
 											'<input type="radio" name="backup_id" value="'.$log['pack'].'" />'.
 										'</td>
 										<th style="text-align:left;white-space:nowrap;">'.
-											date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).
+											date($engine->db->date_format.' '.$engine->db->time_format_seconds, $log[0]).
 										'</th>
 									</tr>
 									<tr>

@@ -120,7 +120,7 @@ function admin_content_pages(&$engine, &$module)
 	$limit = 100;
 
 	// set default level
-	if (!isset($level)) $level = $engine->config['log_default_show'];
+	if (!isset($level)) $level = $engine->db->log_default_show;
 	if (!isset($where)) $where = '';
 	else  $where .= "AND l.comment_on_id = '0' ";
 	if (!isset($order)) $order = '';
@@ -128,7 +128,7 @@ function admin_content_pages(&$engine, &$module)
 	// collecting data
 	$count = $engine->db->load_single(
 		"SELECT COUNT(page_id) AS n ".
-		"FROM {$engine->config['table_prefix']}page l ".
+		"FROM {$engine->db->table_prefix}page l ".
 		( $where ? $where : "WHERE comment_on_id = '0' " ));
 
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
@@ -138,8 +138,8 @@ function admin_content_pages(&$engine, &$module)
 
 	$pages = $engine->db->load_all(
 		"SELECT p.*, length(body) as page_size, u.* ".
-		"FROM {$engine->config['table_prefix']}page p ".
-			"LEFT JOIN {$engine->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
+		"FROM {$engine->db->table_prefix}page p ".
+			"LEFT JOIN {$engine->db->table_prefix}user u ON (p.user_id = u.user_id) ".
 		( $where ? $where : "WHERE p.comment_on_id = '0' " ).
 		( $order ? $order : 'ORDER BY p.page_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");
@@ -163,13 +163,13 @@ function admin_content_pages(&$engine, &$module)
 
 		$languages = $engine->_t('LanguageArray');
 
-		if ($engine->config['multilanguage'])
+		if ($engine->db->multilanguage)
 		{
 			$langs = $engine->available_languages();
 		}
 		else
 		{
-			$langs[] = $engine->config['language'];
+			$langs[] = $engine->db->language;
 		}
 
 		if ($langs)

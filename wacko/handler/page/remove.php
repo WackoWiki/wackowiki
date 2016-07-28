@@ -19,9 +19,9 @@ echo '<h3>' . $this->_t($title) . ' ' . $this->compose_link_to_page($this->tag, 
 
 // check user permissions to delete
 if ($this->is_admin()
-	|| (!$this->config['remove_onlyadmins']
+	|| (!$this->db->remove_onlyadmins
 		&& (($this->get_page_owner_id($this->page['page_id']) == $this->get_user_id())
-		|| ($this->config['owners_can_remove_comments']
+		|| ($this->db->owners_can_remove_comments
 			&& $this->page['comment_on_id']
 			&& $this->get_page_owner_id($this->page['comment_on_id']) == $this->get_user_id())
 		)
@@ -103,7 +103,7 @@ if ($this->is_admin()
 
 		if ($this->remove_page($this->page['page_id'], $comment_on_id, $dontkeep))
 		{
-			if ($this->config['enable_feeds'])
+			if ($this->db->enable_feeds)
 			{
 				$xml = new Feed($this);
 				$xml->comments();
@@ -113,7 +113,7 @@ if ($this->is_admin()
 					$xml->changes();
 				}
 
-				if (preg_match('/'.$this->config['news_cluster'].'\/.+?\/.+/', $this->tag))
+				if (preg_match('/'.$this->db->news_cluster.'\/.+?\/.+/', $this->tag))
 				{
 					$xml->feed();
 				}
@@ -139,7 +139,7 @@ if ($this->is_admin()
 			// get list of pages in the cluster
 			if ($list = $this->db->load_all(
 			"SELECT page_id ".
-			"FROM {$this->config['table_prefix']}page ".
+			"FROM {$this->db->table_prefix}page ".
 			"WHERE tag LIKE " . $this->db->q($this->tag . '/%') . " "))
 			{
 				// remove by one page at a time
@@ -160,7 +160,7 @@ if ($this->is_admin()
 		if ($owner_id = $this->page['owner_id'])
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->config['user_table']} ".
+				"UPDATE {$this->db->user_table} ".
 				($comment_on_id
 					? "SET total_comments	= total_comments	- 1 "
 					: "SET total_pages		= total_pages		- 1 "
@@ -243,7 +243,7 @@ if ($this->is_admin()
 				echo '<input type="checkbox" id="removecluster" name="cluster" />';
 				echo '<label for="removecluster">'.$this->_t('RemoveCluster').'</label><br />';
 
-				if ($this->config['store_deleted_pages'])
+				if ($this->db->store_deleted_pages)
 				{
 					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
 					echo '<label for="dontkeep">'.$this->_t('RemoveDontKeep').'</label><br />';
@@ -251,7 +251,7 @@ if ($this->is_admin()
 			}
 			else
 			{
-				if ($this->config['store_deleted_pages'])
+				if ($this->db->store_deleted_pages)
 				{
 					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
 					echo '<label for="dontkeep">'.$this->_t('RemoveDontKeepComment').'</label><br />';

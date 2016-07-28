@@ -46,9 +46,9 @@ if ($this->has_access('read'))
 
 		// display form
 		if (isset($registered)
-			&& (   $this->config['upload'] === true
-				|| $this->config['upload'] == 1
-				|| $this->check_acl($user_name, $this->config['upload'])
+			&& (   $this->db->upload === true
+				|| $this->db->upload == 1
+				|| $this->check_acl($user_name, $this->db->upload)
 				)
 			)
 		{
@@ -64,7 +64,7 @@ if ($this->has_access('read'))
 		// load files for this page
 		$files = $this->db->load_single(
 			"SELECT COUNT(upload_id) AS count ".
-			"FROM ".$this->config['table_prefix']."upload ".
+			"FROM ".$this->db->table_prefix."upload ".
 			"WHERE page_id = '". $this->page['page_id'] ."' ".
 				"AND deleted <> '1' LIMIT 1");
 
@@ -73,9 +73,9 @@ if ($this->has_access('read'))
 		{
 			case 0:
 				if ($this->get_user()
-					&& (   $this->config['upload'] === true
-						|| $this->config['upload'] == 1
-						|| $this->check_acl($user_name, $this->config['upload'])
+					&& (   $this->db->upload === true
+						|| $this->db->upload == 1
+						|| $this->check_acl($user_name, $this->db->upload)
 						)
 				)
 				{

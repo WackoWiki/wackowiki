@@ -18,23 +18,23 @@ $this->hide_article_header = true;
 // email confirmation
 if (isset($_GET['confirm']))
 {
-	$hash = hash('sha256', $_GET['confirm'] . hash('sha256', $this->config['system_seed']));
+	$hash = hash('sha256', $_GET['confirm'] . hash('sha256', $this->db->system_seed));
 
 	if ($temp = $this->db->load_single(
 			"SELECT user_name, email, email_confirm ".
-			"FROM ".$this->config['user_table']." ".
+			"FROM ".$this->db->user_table." ".
 			"WHERE email_confirm = ".$this->db->q($hash)." ".
 			"LIMIT 1"))
 	{
 		$this->db->sql_query(
-			"UPDATE ".$this->config['user_table']." SET ".
+			"UPDATE ".$this->db->user_table." SET ".
 				"email_confirm = '' ".
 			"WHERE email_confirm = ".$this->db->q($hash)." ");
 
 		$this->show_message($this->_t('EmailConfirmed'));
 
 		// log event
-		$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));
+		$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', $this->db->language), $temp['email'], $temp['user_name']));
 
 		// TODO: reset user (session data)
 		// $this->set_user($this->load_user(0, $user['user_id'], 0, true), 1);
@@ -90,14 +90,14 @@ else if (($user = $this->get_user()))
 			{
 				// update users table
 				$this->db->sql_query(
-					"UPDATE ".$this->config['user_table']." SET ".
+					"UPDATE ".$this->db->user_table." SET ".
 						"real_name		= ".$this->db->q(trim($_POST['real_name'])).", ".
 						"email			= ".$this->db->q($email)." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 
 				// log event
-				// $this->log(6, str_replace('%1', $user['user_name'], $this->_t('LogUserSettingsUpdate', $this->config['language'])));
+				// $this->log(6, str_replace('%1', $user['user_name'], $this->_t('LogUserSettingsUpdate', $this->db->language)));
 			}
 		}
 	}
@@ -148,17 +148,17 @@ else if (($user = $this->get_user()))
 	{
 		// update user_setting table
 		$this->db->sql_query(
-			"UPDATE ".$this->config['table_prefix']."user_setting SET ".
+			"UPDATE ".$this->db->table_prefix."user_setting SET ".
 				$sql.
 			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
 		// log event
-		$this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', $this->config['language']), $user['user_name']));
+		$this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', $this->db->language), $user['user_name']));
 	}
 
 	// (re)send email confirmation code
-	if ($this->config['enable_email'] && ($resend_code || $email_changed))
+	if ($this->db->enable_email && ($resend_code || $email_changed))
 	{
 		if ($resend_code)
 		{
@@ -170,7 +170,7 @@ else if (($user = $this->get_user()))
 			$save = $this->set_language($user['user_lang'], true);
 			$subject	=	$this->_t('EmailConfirm');
 			$body		=	Ut::perc_replace($this->_t('EmailVerify'),
-								$this->config['site_name'],
+								$this->db->site_name,
 								$user['user_name'],
 								$this->user_email_confirm($user['user_id']))."\n\n";
 
@@ -239,7 +239,7 @@ else if (($user = $this->get_user()))
 		<table class="form_tbl">
 		<tbody>
 		<?php
-		if ($this->config['enable_email'] && $this->config['enable_email_notification'])
+		if ($this->db->enable_email && $this->db->enable_email_notification)
 		{
 	?>
 			<tr class="lined">
@@ -280,7 +280,7 @@ else if (($user = $this->get_user()))
 		</tr>
 <?php
 			// minor edit
-			if ($this->page && $this->config['minor_edit'] != 0)
+			if ($this->page && $this->db->minor_edit != 0)
 			{
 	?>
 		<tr class="lined">
@@ -398,7 +398,7 @@ else if (($user = $this->get_user()))
 				</td>
 			</tr>
 <?php
-		if ($this->config['publish_anonymously'])
+		if ($this->db->publish_anonymously)
 		{
 ?>
 			<tr class="lined">
@@ -454,7 +454,7 @@ else if (($user = $this->get_user()))
 
 		$code = $this->db->load_single(
 			"SELECT email_confirm ".
-			"FROM {$this->config['user_table']} ".
+			"FROM {$this->db->user_table} ".
 			"WHERE user_id = '".(int)$user['user_id']."' ".
 			"LIMIT 1");
 
@@ -501,8 +501,8 @@ else if (($user = $this->get_user()))
 		<td>
 			<input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;
 <?php echo !$user['email_confirm']
-		? '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->_t('EmailConfirmed').'" title="'.$this->_t('EmailConfirmed').'" class="btn-tick"/>'
-		: '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->_t('EmailConfirm').'" title="'.$this->_t('EmailConfirm').'" class="btn-warning"/>' ?>
+		? '<img src="'.$this->db->base_url.'image/spacer.png" alt="'.$this->_t('EmailConfirmed').'" title="'.$this->_t('EmailConfirmed').'" class="btn-tick"/>'
+		: '<img src="'.$this->db->base_url.'image/spacer.png" alt="'.$this->_t('EmailConfirm').'" title="'.$this->_t('EmailConfirm').'" class="btn-warning"/>' ?>
 <?php
 		if (!$user['email'] || $code['email_confirm'])
 			echo '<div class="hint"><strong class="cite">'.
@@ -526,13 +526,13 @@ else if (($user = $this->get_user()))
 
 	$languages = $this->_t('LanguageArray');
 
-	if ($this->config['multilanguage'])
+	if ($this->db->multilanguage)
 	{
 		$langs = $this->available_languages();
 	}
 	else
 	{
-		$langs = [$this->config['language']];
+		$langs = [$this->db->language];
 	}
 
 	foreach ($langs as $lang)
@@ -540,7 +540,7 @@ else if (($user = $this->get_user()))
 		echo '<option value="'.$lang.'" '.
 			($user['user_lang'] == $lang
 				? ' selected="selected" '
-				: (!isset($user['user_lang']) && $this->config['language'] == $lang
+				: (!isset($user['user_lang']) && $this->db->language == $lang
 					? 'selected="selected"'
 					: '')
 			).'>'.$languages[$lang].' ('.$lang.")</option>\n";
@@ -563,7 +563,7 @@ else if (($user = $this->get_user()))
 		echo '<option value="'.$theme.'" '.
 			(isset($user['theme']) && $user['theme'] == $theme
 				? 'selected="selected" '
-				: ($this->config['theme'] == $theme
+				: ($this->db->theme == $theme
 					? 'selected="selected" '
 					: '')
 			).'>'.$theme."</option>\n";
@@ -591,7 +591,7 @@ else if (($user = $this->get_user()))
 		echo '<option value="'.$offset.'" '.
 			(isset($user['timezone']) && $user['timezone'] == $offset
 				? 'selected="selected" '
-				: ($this->config['timezone'] == $offset && !isset($user['timezone'])
+				: ($this->db->timezone == $offset && !isset($user['timezone'])
 					? 'selected="selected" '
 					: '')
 			).'>'.$timezone."</option>\n";
@@ -661,16 +661,16 @@ else if (($user = $this->get_user()))
 
 	$percentage = 0 . '%';
 
-	if ($this->config['upload_quota_per_user'])
+	if ($this->db->upload_quota_per_user)
 	{
-		$percentage =  round( ($this->upload_quota($user['user_id']) / (($this->config['upload_quota_per_user']) / 100)) ).'%';
+		$percentage =  round( ($this->upload_quota($user['user_id']) / (($this->db->upload_quota_per_user) / 100)) ).'%';
 	}
 
 	echo '<aside class="page_tools">'.
 			'<table class="form_tbl">'.
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('UserSpace')."</th>".
-					'<td class="form_right">'."<a href=\"".$this->href('', ($this->config['users_page'].'/'.$user['user_name']))."\">".$this->config['users_page'].'/'.$user['user_name']."</a>"."</td>".
+					'<td class="form_right">'."<a href=\"".$this->href('', ($this->db->users_page.'/'.$user['user_name']))."\">".$this->db->users_page.'/'.$user['user_name']."</a>"."</td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('UsersSignup')."</th>".
 					'<td class="form_right">'.$this->get_time_formatted($user['signup_time'])."</td>".
@@ -683,16 +683,16 @@ else if (($user = $this->get_user()))
 					'<td class="form_right" title="'.$this->_t('UploadQuotaTip').'"><div class="meter"><span style="width: 25%">'.$this->binary_multiples($this->upload_quota($user['user_id']), false, true, true).' ('.$percentage.")</span></div></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('UsersPages')."</th>".
-					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name'], '', 'pages').'" title="'.$this->_t('RevisionTip').'">'.(int)$user['total_pages']."</a></td>".
+					'<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name'], '', 'pages').'" title="'.$this->_t('RevisionTip').'">'.(int)$user['total_pages']."</a></td>".
 				// "</tr>\n".'<tr class="lined">'.
 					// '<th class="form_left" scope="row">'.$this->_t('UsersRevisions')."</th>".
-					// '<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name']).'" title="'.$this->_t('RevisionTip').'">'.(int)$user['total_revisions']."</a></td>".
+					// '<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name']).'" title="'.$this->_t('RevisionTip').'">'.(int)$user['total_revisions']."</a></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('UsersComments')."</th>".
-					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name'], '', 'comments').'" title="'.$this->_t('ShowComments').'">'.$user['total_comments'].'</a></td>'.
+					'<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name'], '', 'comments').'" title="'.$this->_t('ShowComments').'">'.$user['total_comments'].'</a></td>'.
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('UsersUploads')."</th>".
-					'<td class="form_right"><a href="'.$this->href('', $this->config['users_page'], 'profile='.$user['user_name'], '', 'uploads').'" title="'.$this->_t('ShowComments').'">'.number_format($user['total_uploads'], 0, ',', '.').'</a></td>'.
+					'<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name'], '', 'uploads').'" title="'.$this->_t('ShowComments').'">'.number_format($user['total_uploads'], 0, ',', '.').'</a></td>'.
 				// "</tr>\n".'<tr class="lined">'.
 				// 	'<th class="form_left" scope="row">'.$this->_t('UsersLogins')."</th>".
 				// 	'<td class="form_right">'.number_format($user['login_count'], 0, ',', '.')."</td>".

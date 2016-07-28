@@ -13,7 +13,7 @@ if (isset($this->user_lang))
 else
 {
 	#$this->set_language($this->page_lang);
-	$this->set_language($this->config['language']);
+	$this->set_language($this->db->language);
 }
 
 $TranslitLettersFrom	= $this->language['TranslitLettersFrom'];

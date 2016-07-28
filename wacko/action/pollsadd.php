@@ -174,29 +174,29 @@ if (isset($_POST['submit_poll']))
 		}
 
 		// notify wiki owner & log event
-		if ($this->config['enable_email'] == true && $user != $this->config['admin_name'] && $moderation !== true)
+		if ($this->db->enable_email == true && $user != $this->db->admin_name && $moderation !== true)
 		{
-			$subject = $this->config['site_name'].'. '.$this->_t('PollsNotifySubj');
+			$subject = $this->db->site_name.'. '.$this->_t('PollsNotifySubj');
 			$body	 = $this->_t('EmailHello').
-					   $this->config['admin_name'].".\n\n".
+					   $this->db->admin_name.".\n\n".
 					   str_replace('%1', $user, $this->_t('PollsNotifyBody'))."\n".
 					   $this->href('', 'admin.php')."\n\n".
 					   $this->_t('EmailGoodbye')."\n".
-					   $this->config['site_name']."\n".
-					   $this->config['base_url'];
+					   $this->db->site_name."\n".
+					   $this->db->base_url;
 
-			$this->send_mail($this->config['admin_email'], $subject, $body);
-			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollCreated', $this->config['language'])));
+			$this->send_mail($this->db->admin_email, $subject, $body);
+			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollCreated', $this->db->language)));
 		}
 		else if ($moderation === true)
 		{
-			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollChanged', $this->config['language'])));
+			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollChanged', $this->db->language)));
 		}
 
 		// log if we started a poll
 		if ($startmod == 1 && $admin)
 		{
-			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollStarted', $this->config['language'])));
+			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollStarted', $this->db->language)));
 		}
 	}
 }

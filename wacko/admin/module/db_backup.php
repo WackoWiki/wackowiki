@@ -121,9 +121,9 @@ function admin_db_backup(&$engine, &$module)
 				}
 
 				// ...and for these specific tables
-				if ($table == $engine->config['table_prefix'].'cache'
-				||  $table == $engine->config['table_prefix'].'referrer'
-				||  $table == $engine->config['table_prefix'].'log')
+				if ($table == $engine->db->table_prefix.'cache'
+				||  $table == $engine->db->table_prefix.'referrer'
+				||  $table == $engine->db->table_prefix.'log')
 				{
 					$drop = 1;
 				}

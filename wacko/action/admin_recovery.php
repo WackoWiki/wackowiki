@@ -35,7 +35,7 @@ if ($this->is_admin())
 		}
 		else
 		{
-			$password_hashed	= $this->config['system_seed'] . $password;
+			$password_hashed	= $this->db->system_seed . $password;
 
 			$tpl->generated_hash = password_hash(
 					base64_encode(

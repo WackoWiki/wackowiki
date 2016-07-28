@@ -109,8 +109,8 @@ function admin_user_approve(&$engine, &$module)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
-			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+			"FROM {$engine->db->table_prefix}user u ".
+				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1");
@@ -121,8 +121,8 @@ function admin_user_approve(&$engine, &$module)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
-			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+			"FROM {$engine->db->table_prefix}user u ".
+				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE u.user_id = '".(int)$user_id."' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1");
@@ -168,7 +168,7 @@ function admin_user_approve(&$engine, &$module)
 				{
 					$user = $engine->db->load_single(
 						"SELECT u.user_name ".
-						"FROM {$engine->config['table_prefix']}user u ".
+						"FROM {$engine->db->table_prefix}user u ".
 						"WHERE u.user_id = '".$user_id."' ".
 							"AND u.account_type = '0' ".
 						"LIMIT 1");
@@ -245,11 +245,11 @@ function admin_user_approve(&$engine, &$module)
 		// collecting data
 		$count = $engine->db->load_single(
 			"SELECT COUNT(user_name) AS n ".
-			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+			"FROM {$engine->db->table_prefix}user u ".
+				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			( $where ? $where : '' ).
 			( $where ? 'AND ' : "WHERE ").
-				"u.user_name <> '".$engine->config['admin_name']."' "
+				"u.user_name <> '".$engine->db->admin_name."' "
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
@@ -257,21 +257,21 @@ function admin_user_approve(&$engine, &$module)
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang ".
-			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+			"FROM {$engine->db->table_prefix}user u ".
+				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			( $where ? $where : '' ).
 			( $where ? 'AND ' : "WHERE ").
 				"u.account_type = '0' ".
-				"AND u.user_name <> '".$engine->config['admin_name']."' ".
+				"AND u.user_name <> '".$engine->db->admin_name."' ".
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");
 
 		// count records by status
 		$account_stati =  $engine->db->load_all(
 				"SELECT account_status, count(account_status) AS n
-				FROM ".$engine->config['table_prefix']."user
+				FROM ".$engine->db->table_prefix."user
 				WHERE account_type = '0'
-					AND user_name <> '".$engine->config['admin_name']."'
+					AND user_name <> '".$engine->db->admin_name."'
 				GROUP BY account_status");
 
 		// set default status count
@@ -327,8 +327,8 @@ function admin_user_approve(&$engine, &$module)
 										: ''
 								);
 
-		$approve_icon	= '<img src="'.$engine->config['theme_url'].'icon/spacer.png" title="'.$engine->_t('Approve').'" alt="'.$engine->_t('Approve').'" class="btn-approve"/>';
-		$deny_icon		= '<img src="'.$engine->config['theme_url'].'icon/spacer.png" title="'.$engine->_t('Deny').'" alt="'.$engine->_t('Deny').'" class="btn-deny"/>';
+		$approve_icon	= '<img src="'.$engine->db->theme_url.'icon/spacer.png" title="'.$engine->_t('Approve').'" alt="'.$engine->_t('Approve').'" class="btn-approve"/>';
+		$deny_icon		= '<img src="'.$engine->db->theme_url.'icon/spacer.png" title="'.$engine->_t('Deny').'" alt="'.$engine->_t('Deny').'" class="btn-deny"/>';
 
 		# echo $control_buttons;
 		echo '<br />';
@@ -367,7 +367,7 @@ function admin_user_approve(&$engine, &$module)
 						'<td>'.$row['email'].'</td>'.
 						'<td>'.$row['user_ip'].'</td>'.
 						'<td><small><a href="'.$engine->href().'&amp;user_lang='.$row['user_lang'].'">'.$row['user_lang'].'</a></small></td>'.
-						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
+						'<td><small>'.date($engine->db->date_precise_format, strtotime($row['signup_time'])).'</small></td>'.
 						'<td>'.$row['enabled'].'</td>'.
 						'<td><a href="'.$engine->href().'&amp;account_status='.$row['account_status'].'">'.$status[$row['account_status']].'</a></td>'.
 						'<td>'.

@@ -69,8 +69,8 @@ function admin_system_info(&$engine, &$module)
 	$_php_ram = $memory;
 
 	// Sysinfo in array
-	$sysinfo['app_version']			= array('Wacko version', $engine->config['wacko_version']);
-	$sysinfo['app_updated']			= array('Last update', $engine->config['maint_last_update']);
+	$sysinfo['app_version']			= array('Wacko version', $engine->db->wacko_version);
+	$sysinfo['app_updated']			= array('Last update', $engine->db->maint_last_update);
 	$sysinfo['os']					= array('OS', PHP_OS.' ('.@php_uname().')');
 	$sysinfo['server_name']			= array('Server name', $_SERVER['SERVER_NAME']);
 	$sysinfo['server_software']		= array('Web server', $_SERVER['SERVER_SOFTWARE']);

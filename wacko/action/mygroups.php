@@ -33,7 +33,7 @@ if (!function_exists('MyGroups'))
 
 if($user = $this->get_user())
 {
-	$alias = $this->config['aliases'];
+	$alias = $this->db->aliases;
 
 	if (!$nomark)
 	{

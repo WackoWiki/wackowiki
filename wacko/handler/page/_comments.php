@@ -22,7 +22,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 			"total_pages AS pages, ".
 			"total_revisions AS revisions, ".
 			"total_comments AS comments ".
-		"FROM {$engine->config['user_table']} ".
+		"FROM {$engine->db->user_table} ".
 		"WHERE user_id = '".(int)$user_id."' ".
 		"LIMIT 1");
 
@@ -32,7 +32,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 }
 
 // pagination
-$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#header-comments');
+$pagination = $this->pagination($this->get_comments_count(), $this->db->comments_count, 'p', 'show_comments=1#header-comments');
 
 // comments form output begins
 if ($this->has_access('read'))
@@ -43,11 +43,11 @@ if ($this->has_access('read'))
 
 	if (!isset($sort_comment))
 	{
-		$sort_comment	= $this->config['sorting_comments'];
+		$sort_comment	= $this->db->sorting_comments;
 	}
 
 	// load comments for this page
-	$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count'], $sort_comment);
+	$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->db->comments_count, $sort_comment);
 
 	// store comments display in session
 	if (!isset($this->sess->show_comments[$this->page['page_id']]))
@@ -80,7 +80,7 @@ if ($this->has_access('read'))
 		if ($user && $comments && !$noid_protect)
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->config['table_prefix']}watch ".
+				"UPDATE {$this->db->table_prefix}watch ".
 				"SET comment_id = '0' ".
 				"WHERE page_id = '".$this->page['page_id']."' ".
 					"AND user_id = '".$user['user_id']."'");
@@ -124,18 +124,18 @@ if ($this->has_access('read'))
 
 				// show remove comment button
 				if ($this->is_admin() ||
-				(!$this->config['remove_onlyadmins']
+				(!$this->db->remove_onlyadmins
 					&& ($this->is_owner($comment['page_id'])
-					|| ($this->config['owners_can_remove_comments'] && $this->is_owner($this->page['page_id']))
+					|| ($this->db->owners_can_remove_comments && $this->is_owner($this->page['page_id']))
 				)))
 				{
-					$handler_button .= '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" style="float: right; padding: 2px;" class="btn-delete"/></a>';
+					$handler_button .= '<a href="'.$this->href('remove', $comment['tag']).'"><img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" style="float: right; padding: 2px;" class="btn-delete"/></a>';
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->is_owner($comment['page_id']))
 				{
-					$handler_button .= '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('EditCommentTip').'" alt="'.$this->_t('EditComment').'" style="float: right; padding: 2px;" class="btn-edit"/></a>';
+					$handler_button .= '<a href="'.$this->href('edit', $comment['tag']).'"><img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('EditCommentTip').'" alt="'.$this->_t('EditComment').'" style="float: right; padding: 2px;" class="btn-edit"/></a>';
 				}
 
 				if (!empty($handler_button))
@@ -236,10 +236,10 @@ if ($this->has_access('read'))
 			}
 
 			// load WikiEdit
-			echo '<script src="'.$this->config['base_url'].'js/protoedit.js"></script>'."\n";
-			echo '<script src="'.$this->config['base_url'].'js/lang/wikiedit.'.$this->user_lang.'.js"></script>'."\n";
-			echo '<script src="'.$this->config['base_url'].'js/wikiedit.js"></script>'."\n";
-			echo '<script src="'.$this->config['base_url'].'js/autocomplete.js"></script>'."\n";
+			echo '<script src="'.$this->db->base_url.'js/protoedit.js"></script>'."\n";
+			echo '<script src="'.$this->db->base_url.'js/lang/wikiedit.'.$this->user_lang.'.js"></script>'."\n";
+			echo '<script src="'.$this->db->base_url.'js/wikiedit.js"></script>'."\n";
+			echo '<script src="'.$this->db->base_url.'js/autocomplete.js"></script>'."\n";
 			?>
 				<noscript><div class="errorbox_js"><?php echo $this->_t('WikiEditInactiveJs'); ?></div></noscript>
 
@@ -255,7 +255,7 @@ if ($this->has_access('read'))
 				$output		= '';
 
 				// publish anonymously
-				if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
+				if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
 					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'" '.( $this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' )."/>\n";
 					$output .= '<label for="noid_publication">'.$this->_t('PostAnonymously')."</label>\n";
@@ -294,7 +294,7 @@ if ($this->has_access('read'))
 			}
 			?>
 
-			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>image/wikiedit/');
+			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->db->base_url;?>image/wikiedit/');
 			</script>
 
 			<br />

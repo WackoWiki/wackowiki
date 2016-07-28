@@ -12,7 +12,7 @@ if (isset($_GET['revision_id']))
 	$revision_id = (int)$_GET['revision_id'];
 }
 
-echo '<a href="'.$this->href('', $this->config['permalink_page'], 'page_id='.$this->page['page_id'].
+echo '<a href="'.$this->href('', $this->db->permalink_page, 'page_id='.$this->page['page_id'].
 		(isset($revision_id)
 			? '&amp;rev_id='.$revision_id
 			: '')

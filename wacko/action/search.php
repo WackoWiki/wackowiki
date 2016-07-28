@@ -13,9 +13,9 @@ if (!function_exists('full_text_search'))
 
 		$count_results = $engine->db->load_all(
 			"SELECT a.page_id ".
-			"FROM ".$engine->config['table_prefix']."page a ".
+			"FROM ".$engine->db->table_prefix."page a ".
 			($for
-				? "LEFT JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				? "LEFT JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
 				: "").
 			"WHERE (( MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) ".
 				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%').") ".
@@ -42,11 +42,11 @@ if (!function_exists('full_text_search'))
 			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang,
 				MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) AS score,
 				u.user_name, o.user_name as owner_name ".
-			"FROM ".$engine->config['table_prefix']."page a ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
+			"FROM ".$engine->db->table_prefix."page a ".
+				"LEFT JOIN ".$engine->db->table_prefix."user u ON (a.user_id = u.user_id) ".
+				"LEFT JOIN ".$engine->db->table_prefix."user o ON (a.owner_id = o.user_id) ".
 			($for
-				? "LEFT JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				? "LEFT JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
 				: "").
 			"WHERE (( MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) ".
 				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%').") ".
@@ -79,9 +79,9 @@ if (!function_exists('tag_search'))
 
 		$count_results = $engine->db->load_all(
 			"SELECT a.page_id ".
-			"FROM ".$engine->config['table_prefix']."page a ".
+			"FROM ".$engine->db->table_prefix."page a ".
 			($for
-				? "LEFT JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				? "LEFT JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
 				: "").
 			"WHERE ( lower(a.tag) LIKE binary lower(".$engine->db->q('%' . $phrase.'%') . ") ".
 				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%') . ")) ".
@@ -105,11 +105,11 @@ if (!function_exists('tag_search'))
 		// load search results
 		$results = $engine->db->load_all(
 			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, u.user_name, o.user_name as owner_name ".
-			"FROM ".$engine->config['table_prefix']."page a ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$engine->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
+			"FROM ".$engine->db->table_prefix."page a ".
+				"LEFT JOIN ".$engine->db->table_prefix."user u ON (a.user_id = u.user_id) ".
+				"LEFT JOIN ".$engine->db->table_prefix."user o ON (a.owner_id = o.user_id) ".
 			($for
-				? "LEFT JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				? "LEFT JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
 				: "").
 			"WHERE (lower(a.tag) LIKE binary lower(" . $engine->db->q('%' . $phrase . '%') . ") ".
 				"OR lower(a.title) LIKE lower(" . $engine->db->q('%' . $phrase . '%') . ")) ".
@@ -373,7 +373,7 @@ if ($phrase)
 
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']) )
+				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']) )
 				{
 					// Don't show it if it's a comment and we're hiding comments from this user
 					if($page['comment_on_id'] == 0 || ($page['comment_on_id'] != 0 && $this->user_allowed_comments()))

@@ -26,7 +26,7 @@ if ($this->page['latest'] == 0)
 	$this->_t('Revision')))).".</div>";
 }*/
 
-$_numerate_links = (($user = $this->get_user()))? $user['numerate_links'] : $this->config['numerate_links'];
+$_numerate_links = (($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate_links;
 
 if ($_numerate_links)
 {

@@ -12,8 +12,8 @@ echo "<?xml version=\"1.0\" encoding=\"".$this->get_charset()."\"?>\n";
 echo "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 echo "\t<channel>\n";
 echo "\t\t<title>".$this->tag."</title>\n";
-echo "\t\t<link>".$this->config['base_url']."</link>\n";
-echo "\t\t<description>".$this->_t('ExportClusterXML').$this->config['site_name']."/".$this->tag."</description>\n";
+echo "\t\t<link>".$this->db->base_url."</link>\n";
+echo "\t\t<description>".$this->_t('ExportClusterXML').$this->db->site_name."/".$this->tag."</description>\n";
 echo "\t\t<lastBuildDate>".date('r')."</lastBuildDate>\n";
 echo "\t\t<language></language>\n";//!!!
 echo "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
@@ -25,7 +25,7 @@ if ($this->has_access('read'))
 
 	$pages = $this->db->load_all(
 		"SELECT page_id, owner_id, tag, supertag, title, created, body ".
-		"FROM ".$this->config['table_prefix']."page ".
+		"FROM ".$this->db->table_prefix."page ".
 		"WHERE (supertag = " . $this->db->q($this->supertag) . " ".
 		" OR supertag LIKE " . $this->db->q($this->supertag . '/%') . ")".
 		" AND comment_on_id = '0'");
@@ -58,7 +58,7 @@ if ($this->has_access('read'))
 		echo "\t\t<item>\n";
 		echo "\t\t\t<guid>".rtrim($tag, '/')."</guid>\n";
 		echo "\t\t\t<title>".htmlspecialchars($page['title'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</title>\n";
-		echo "\t\t\t<link>".$this->config['base_url'].$page['supertag']."</link>\n";
+		echo "\t\t\t<link>".$this->db->base_url.$page['supertag']."</link>\n";
 		echo "\t\t\t<description><![CDATA[".str_replace(']]>', ']]&gt;', $page['body'])."]]></description>\n";
 		echo "\t\t\t<author>".$page['owner_id']."</author>\n";
 		echo "\t\t\t<pubDate>".Ut::http_date(strtotime($page['created']))."</pubDate>\n";

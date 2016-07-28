@@ -34,7 +34,7 @@ function admin_content_files(&$engine, &$module)
 	{
 		$file = $engine->db->load_single(
 			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
-			"FROM {$engine->config['table_prefix']}upload ".
+			"FROM {$engine->db->table_prefix}upload ".
 			"WHERE page_id = 0 ".
 				"AND upload_id = '".(int)$_GET['file_id']."' ".
 			"LIMIT 1");
@@ -70,7 +70,7 @@ function admin_content_files(&$engine, &$module)
 		// 1. where, existence
 		$file = $engine->db->load_single(
 			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
-			"FROM {$engine->config['table_prefix']}upload ".
+			"FROM {$engine->db->table_prefix}upload ".
 			"WHERE page_id = 0 ".
 				"AND upload_id = '".(int)$_POST['file_id']."' ".
 			"LIMIT 1");
@@ -79,12 +79,12 @@ function admin_content_files(&$engine, &$module)
 		{
 			// 2. remove from DB
 			$engine->db->sql_query(
-				"DELETE FROM ".$engine->config['table_prefix']."upload ".
+				"DELETE FROM ".$engine->db->table_prefix."upload ".
 				"WHERE upload_id = '". $file['upload_id']."'");
 
 			// update user uploads count
 			$engine->db->sql_query(
-				"UPDATE {$engine->config['user_table']} ".
+				"UPDATE {$engine->db->user_table} ".
 				"SET total_uploads = total_uploads - 1 ".
 				"WHERE user_id = '".$file['user_id']."' ".
 				"LIMIT 1");
@@ -106,7 +106,7 @@ function admin_content_files(&$engine, &$module)
 				$engine->show_message($message, 'error');
 			}
 
-			$engine->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->_t('LogRemovedFile', $engine->config['language']))));
+			$engine->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->_t('LogRemovedFile', $engine->db->language))));
 		}
 		else
 		{
@@ -120,7 +120,7 @@ function admin_content_files(&$engine, &$module)
 		$user	= $engine->get_user();
 		$files	= $engine->db->load_all(
 			"SELECT upload_id ".
-			"FROM {$engine->config['table_prefix']}upload ".
+			"FROM {$engine->db->table_prefix}upload ".
 			"WHERE user_id = '".$user['user_id']."'");
 
 		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
@@ -135,7 +135,7 @@ function admin_content_files(&$engine, &$module)
 			$name = $engine->format($name, 'translit');
 
 			$dir	= UPLOAD_GLOBAL_DIR.'/';
-			$banned	= explode('|', $engine->config['upload_banned_exts']);
+			$banned	= explode('|', $engine->db->upload_banned_exts);
 
 			if (in_array(strtolower($ext), $banned))
 			{
@@ -161,7 +161,7 @@ function admin_content_files(&$engine, &$module)
 			$file_size		= $_FILES['file']['size'];
 
 			// 1.6. check filesize, if asked
-			$maxfilesize	= $engine->config['upload_max_size'];
+			$maxfilesize	= $engine->db->upload_max_size;
 
 			if (isset($_POST['maxsize']))
 				if ($maxfilesize > 1 * $_POST['maxsize'])
@@ -183,10 +183,10 @@ function admin_content_files(&$engine, &$module)
 			$description = htmlspecialchars($description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 			// 5. insert line into DB
-			$engine->db->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
+			$engine->db->sql_query("INSERT INTO {$engine->db->table_prefix}upload SET ".
 				"page_id			= '".'0'."', ".
 				"file_name			= ".$engine->db->q($small_name).", ".
-				"upload_lang		= ".$engine->db->q($engine->config['language']).", ".
+				"upload_lang		= ".$engine->db->q($engine->db->language).", ".
 				"file_description	= ".$engine->db->q($description).", ".
 				"file_size			= '".(int)$file_size."',".
 				"picture_w			= '".(int)$size[0]."',".
@@ -200,7 +200,7 @@ function admin_content_files(&$engine, &$module)
 			echo '<strong>'.$engine->_t('UploadDone').'</strong>';
 
 			// log event
-			$engine->log(4, str_replace('%3', $engine->binary_multiples($file_size, false, true, true), str_replace('%2', $small_name, $engine->_t('LogFileUploadedGlobal', $engine->config['language']))));
+			$engine->log(4, str_replace('%3', $engine->binary_multiples($file_size, false, true, true), str_replace('%2', $small_name, $engine->_t('LogFileUploadedGlobal', $engine->db->language))));
 ?>
 <br /><ul>
 <li><?php echo $engine->link( 'file:'.$small_name ); ?></li>
@@ -282,8 +282,8 @@ function admin_content_files(&$engine, &$module)
 
 	$count = $engine->db->load_all(
 			"SELECT f.upload_id ".
-			"FROM ".$engine->config['table_prefix']."upload f ".
-				"INNER JOIN ".$engine->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+			"FROM ".$engine->db->table_prefix."upload f ".
+				"INNER JOIN ".$engine->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '". ($global ? 0 : '')."' ".
 	($owner
 	? "AND u.user_name = ".$engine->db->q($owner)." "
@@ -295,7 +295,7 @@ function admin_content_files(&$engine, &$module)
 	// load files list
 	$files = $engine->db->load_all(
 		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, file_description, uploaded_dt ".
-		"FROM {$engine->config['table_prefix']}upload ".
+		"FROM {$engine->db->table_prefix}upload ".
 		"WHERE page_id = 0 ".
 		"ORDER BY ".$order_by." ".
 		"LIMIT {$pagination['offset']}, {$limit}");

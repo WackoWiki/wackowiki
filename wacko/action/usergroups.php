@@ -21,7 +21,7 @@ if($user = $this->get_user())
 		$cols = intval($cols);
 	}
 
-	if (is_array($this->config['aliases']))
+	if (is_array($this->db->aliases))
 	{
 		if (!$nomark)
 		{
@@ -32,7 +32,7 @@ if($user = $this->get_user())
 
 		$i = 1;
 
-		foreach($this->config['aliases'] as $group_name => $group_members)
+		foreach($this->db->aliases as $group_name => $group_members)
 		{
 			if ($i == $cols + 1)
 			{

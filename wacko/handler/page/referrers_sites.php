@@ -9,9 +9,9 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page(true); // allow forums
 
-if (($this->config['enable_referrers'] == 0) ||
-	($this->config['enable_referrers'] == 1 && !$this->get_user()) ||
-	($this->config['enable_referrers'] == 2 && !$this->is_admin()))
+if (($this->db->enable_referrers == 0) ||
+	($this->db->enable_referrers == 1 && !$this->get_user()) ||
+	($this->db->enable_referrers == 2 && !$this->is_admin()))
 {
 	$this->set_message($this->_t('ReadAccessDenied'), 'error');
 	$this->show_must_go_on();
@@ -51,7 +51,7 @@ else
 {
 	$title = Ut::perc_replace($this->_t('DomainsSitesPages'),
 		$this->compose_link_to_page($this->tag),
-		(($i = $this->config['referrers_purge_time']) == 0? '' :
+		(($i = $this->db->referrers_purge_time) == 0? '' :
 			($i == 1? $this->_t('Last24Hours') :
 			Ut::perc_replace($this->_t('LastDays'), $i))),
 		$href);

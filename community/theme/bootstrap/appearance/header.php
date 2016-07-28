@@ -9,8 +9,8 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 ?>
 <!-- load bootstrap css -->
-<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>./css/bootstrap.css" />
-<link rel="stylesheet" href="<?php echo $this->config['theme_url'] ?>./css/bootstrap.min.css" />
+<link rel="stylesheet" href="<?php echo $this->db->theme_url ?>./css/bootstrap.css" />
+<link rel="stylesheet" href="<?php echo $this->db->theme_url ?>./css/bootstrap.min.css" />
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="./js/jquery-2.1.3.min.js"></script>
@@ -32,7 +32,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 
 <span class="navbar-brand">
-<?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>:
+<?php echo ($this->page['tag'] == $this->db->root_page ? $this->db->site_name : "<a href=\"".$this->db->base_url."\">".$this->db->site_name."</a>") ?>:
 
 
 <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?></span>
@@ -90,7 +90,7 @@ echo $this->form_close();
 	echo '<ul class="nav navbar-nav">';
 	// echo "<ol>\n"; //
 	// main page
-	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+	#echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
 
 	// menu
 	if ($menu = $this->get_menu())
@@ -118,14 +118,14 @@ echo $this->form_close();
 		if (!in_array($this->page['page_id'], (array)$this->get_menu_links()))
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-				.'"><img src="'. $this->config['theme_url']
+				.'"><img src="'. $this->db->theme_url
 				.'icon/bookmark1.png" alt="+" title="'.
 				$this->_t('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-				.'"><img src="'. $this->config['theme_url']
+				.'"><img src="'. $this->db->theme_url
 				.'icon/bookmark2.png" alt="-" title="'.
 				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 		}
@@ -179,7 +179,7 @@ echo $this->form_close();
 					$_title = $title;
 				}
 
-				$tab = "<li class=\"$method active\"><span><img src=\"".$engine->config['theme_url']."icon/$_image\" alt=\"$title\" />"." ".$_title."</span></li>\n";
+				$tab = "<li class=\"$method active\"><span><img src=\"".$engine->db->theme_url."icon/$_image\" alt=\"$title\" />"." ".$_title."</span></li>\n";
 			}
 			else
 			{
@@ -197,7 +197,7 @@ echo $this->form_close();
 					$_title = ' '.$title;
 				}
 
-				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icon/$_image\" alt=\"$title\" />".$_title."</a></li>\n";
+				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->db->theme_url."icon/$_image\" alt=\"$title\" />".$_title."</a></li>\n";
 			}
 			else
 			{
@@ -253,7 +253,7 @@ echo $this->form_close();
 	// show more tab
 
 	// display more icon and text
-	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icon/more.png\" title=\"".$this->_t('PageHandlerMoreTip')."\" alt=\"".$this->_t('PageHandlerMoreTip')."\" /> ".$this->_t('PageHandlerMoreTip')."</a> \n";
+	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->db->theme_url."icon/more.png\" title=\"".$this->_t('PageHandlerMoreTip')."\" alt=\"".$this->_t('PageHandlerMoreTip')."\" /> ".$this->_t('PageHandlerMoreTip')."</a> \n";
 	// only display 'more' text that shows handler list on hover
 
 	if ($this->has_access('read'))
@@ -287,7 +287,7 @@ echo $this->form_close();
 		echo echo_tab(
 			$this->href('remove'),
 			$this->_t('DeleteTip'),
-			($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
+			($this->page && ($this->is_admin() || !$this->db->remove_onlyadmins && (
 				($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
 				($this->forum === false && $this->is_owner()))))
 				? $this->_t('DeleteText') : '',
@@ -357,7 +357,7 @@ echo $this->form_close();
 		echo echo_tab(
 			$this->href('review'),
 			($this->page['reviewed'] == 1 ? $this->_t('RemoveReview') : $this->_t('SetReview')),
-			($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? $this->_t('Review') : '',
+			($this->forum === false && $this->page && ($this->db->review && $this->is_reviewer())) ? $this->_t('Review') : '',
 			$this->method == 'review',
 			($this->page['reviewed'] == 1 ? 'review2.png' : 'review1.png'),
 			'z');

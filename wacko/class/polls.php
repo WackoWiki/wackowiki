@@ -29,7 +29,7 @@ class Polls
 	{
 		$poll_id = $this->engine->load_single(
 			'SELECT poll_id '.
-			'FROM '.$this->engine->config['table_prefix'].'poll '.
+			'FROM '.$this->engine->db->table_prefix.'poll '.
 			'ORDER BY poll_id DESC '.
 			'LIMIT 1');
 
@@ -48,8 +48,8 @@ class Polls
 	{
 		$title = $this->engine->load_single(
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name ".
-			"FROM {$this->engine->config['table_prefix']}poll p ".
-				"LEFT JOIN {$this->engine->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
+			"FROM {$this->engine->db->table_prefix}poll p ".
+				"LEFT JOIN {$this->engine->db->table_prefix}user u ON (p.user_id = u.user_id) ".
 			"WHERE p.poll_id = '".$poll_id."' AND p.v_id = 0");
 
 		return $title;
@@ -61,7 +61,7 @@ class Polls
 	{
 		$vars = $this->engine->load_all(
 			"SELECT poll_id, v_id, text, votes ".
-			"FROM {$this->engine->config['table_prefix']}poll ".
+			"FROM {$this->engine->db->table_prefix}poll ".
 			"WHERE poll_id = '".$poll_id."' AND v_id <> 0 ".
 			"ORDER BY ".($votes == 1 ? "votes DESC, " : "")."v_id ASC");
 
@@ -75,7 +75,7 @@ class Polls
 
 		$list = $this->engine->load_all(
 			"SELECT YEAR(start) AS years ".
-			"FROM {$this->engine->config['table_prefix']}poll ".
+			"FROM {$this->engine->db->table_prefix}poll ".
 			"WHERE v_id = 0 AND start IS NULL ".
 			"GROUP BY years ".
 			"ORDER BY years DESC");
@@ -106,8 +106,8 @@ class Polls
 			case 'current':
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, u.user_name ".
-					"FROM {$this->engine->config['table_prefix']}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"FROM {$this->engine->db->table_prefix}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY start DESC");
 				break;
@@ -116,8 +116,8 @@ class Polls
 			case 'moderation':
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, u.user_name as user ".
-					"FROM {$this->engine->config['table_prefix']}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"FROM {$this->engine->db->table_prefix}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY poll_id ASC");
 				break;
@@ -125,8 +125,8 @@ class Polls
 			case 'ended':
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
-					"FROM {$this->engine->config['table_prefix']}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"FROM {$this->engine->db->table_prefix}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY end DESC");
 				break;
@@ -135,8 +135,8 @@ class Polls
 				if ($year == 0) $year = date('Y');
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
-					"FROM {$this->engine->config['table_prefix']}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"FROM {$this->engine->db->table_prefix}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL ".
 						"AND end IS NULL AND YEAR(start) = '".$year."' ".
 					"ORDER BY end DESC");
@@ -146,8 +146,8 @@ class Polls
 			case 'all':
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
-					"FROM {$this->engine->config['table_prefix']}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"FROM {$this->engine->db->table_prefix}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL ".
 					"ORDER BY start DESC");
 		}
@@ -162,7 +162,7 @@ class Polls
 
 		// submitting title
 		$this->engine->sql_query(
-			"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
+			"INSERT INTO {$this->engine->db->table_prefix}poll SET ".
 				"poll_id	= '".(int)$poll_id."', ".
 				"text		= ".$engine->db->q(rtrim($topic, '.')).", ".
 				"user_id	= '".(int)$user_id."', ".
@@ -175,7 +175,7 @@ class Polls
 			$v_id	+= 1;
 
 			$this->engine->sql_query(
-				"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
+				"INSERT INTO {$this->engine->db->table_prefix}poll SET ".
 					"poll_id	= '".(int)$poll_id."', ".
 					"v_id		= '".(int)$v_id."', ".
 					"text		= ".$engine->db->q(rtrim($v_text, '.'))." ");
@@ -188,7 +188,7 @@ class Polls
 	function remove_poll($poll_id)
 	{
 		return $this->engine->sql_query(
-			"DELETE FROM {$this->engine->config['table_prefix']}poll ".
+			"DELETE FROM {$this->engine->db->table_prefix}poll ".
 			"WHERE poll_id = '".$poll_id."'");
 	}
 
@@ -232,7 +232,7 @@ class Polls
 			}
 
 			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->_t('PollsLasts').': '.$duration.
-						'<br />'.$this->engine->_t('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+						'<br />'.$this->engine->_t('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->db->users_page, 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'<tr><td colspan="2" style="white-space:nowrap;">'.
 					'<input type="submit" name="vote" id="submit" value="'.$this->engine->_t('PollsSubmit').'" /> '.
 					'<input type="submit" name="results" id="submit" value="'.$this->engine->_t('PollsResults').'" />'.
@@ -285,7 +285,7 @@ class Polls
 			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->_t('PollsTotalVotes').': '.$voters.
 						'<br />'.($header['end'] ? $this->engine->_t('PollsLasted') :
 							$this->engine->_t('PollsLasts')).': '.$duration.
-						'<br />'.$this->engine->_t('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+						'<br />'.$this->engine->_t('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->db->users_page, 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'</table>'.
 					$this->engine->form_close();
 		}
@@ -351,7 +351,7 @@ class Polls
 				{
 					$new_votes = $var['votes'] + 1;
 					$this->engine->sql_query(
-						"UPDATE {$this->engine->config['table_prefix']}poll ".
+						"UPDATE {$this->engine->db->table_prefix}poll ".
 						"SET votes = '".(int) $new_votes."' ".
 						"WHERE poll_id = '".(int)$poll_id."' ".
 							"AND v_id = '".(int)$vote_id."'");
@@ -363,7 +363,7 @@ class Polls
 		$new_votes = $header['votes'] + 1; //$total;
 
 		$this->engine->sql_query(
-			"UPDATE {$this->engine->config['table_prefix']}poll ".
+			"UPDATE {$this->engine->db->table_prefix}poll ".
 			"SET votes = '".(int)$new_votes."' ".
 			"WHERE poll_id = '".(int)$poll_id."' ".
 				"AND v_id = '0'");

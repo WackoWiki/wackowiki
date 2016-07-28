@@ -86,8 +86,8 @@ if ($can_view)
 
 	$count = $this->db->load_all(
 		"SELECT f.upload_id ".
-		"FROM ".$this->config['table_prefix']."upload f ".
-			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+		"FROM ".$this->db->table_prefix."upload f ".
+			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
 			($owner
 				? "AND u.user_name = ".$this->db->q($owner)." "
@@ -102,8 +102,8 @@ if ($can_view)
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name, f.hits ".
-		"FROM ".$this->config['table_prefix']."upload f ".
-			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+		"FROM ".$this->db->table_prefix."upload f ".
+			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
 			($owner
 				? "AND u.user_name = ".$this->db->q($owner)." "
@@ -121,8 +121,8 @@ if ($can_view)
 
 	// display
 
-	$edit_icon	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('UploadEdit').'" alt="'.$this->_t('UploadEdit').'" class="btn-edit"/>';
-	$del_icon	= '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('UploadRemove').'" alt="'.$this->_t('UploadRemove').'" class="btn-delete"/>';
+	$edit_icon	= '<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('UploadEdit').'" alt="'.$this->_t('UploadEdit').'" class="btn-edit"/>';
+	$del_icon	= '<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('UploadRemove').'" alt="'.$this->_t('UploadRemove').'" class="btn-delete"/>';
 
 	/* if (!$global)
 	{

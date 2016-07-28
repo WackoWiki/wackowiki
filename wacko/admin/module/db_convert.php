@@ -88,7 +88,7 @@ function admin_db_convert(&$engine, &$module)
 	}
 	else if (isset($_POST['start-convert_columns']))
 	{
-		$engine->config['sql_mode_strict'] = false;
+		$engine->db->sql_mode_strict = false;
 
 		foreach ($engine->sess->sql_strict_queries as $sql)
 		{
@@ -168,7 +168,7 @@ function admin_db_convert(&$engine, &$module)
 		{
 			$results = $engine->db->load_all(
 				"SELECT TABLE_NAME, ENGINE FROM INFORMATION_SCHEMA.TABLES
-				WHERE TABLE_SCHEMA = '{$engine->config['database_database']}'
+				WHERE TABLE_SCHEMA = '{$engine->db->database_database}'
 					AND ENGINE = 'MyISAM'
 				");
 

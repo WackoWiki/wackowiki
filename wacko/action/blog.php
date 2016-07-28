@@ -28,9 +28,9 @@ if (!empty($blog_cluster))
 	else				$limit = (int)$limit;
 
 	$pages			= '';
-	$prefix			= $this->config['table_prefix'];
+	$prefix			= $this->db->table_prefix;
 	#$blog_cluster		= $blog_cluster;
-	$blog_levels		= $this->config['news_levels'];
+	$blog_levels		= $this->db->news_levels;
 
 	// hide article H1 header
 	$this->hide_article_header = true;
@@ -74,7 +74,7 @@ if (!empty($blog_cluster))
 			$this->sess->body	= $template;
 			$this->sess->title	= $namehead;
 
-			if ($this->config['enable_feeds'])
+			if ($this->db->enable_feeds)
 			{
 				#$this->sess->feed	= true;
 			}
@@ -220,9 +220,9 @@ if (!empty($blog_cluster))
 	// displaying XML icon
 	if (!(int)$noxml)
 	{
-		if ($this->config['news_cluster'])
+		if ($this->db->news_cluster)
 		{
-			if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
+			if (substr($this->tag, 0, strlen($this->db->news_cluster.'/')) == $this->db->news_cluster.'/')
 			{
 				$feed_tag = 'news';
 			}
@@ -232,7 +232,7 @@ if (!empty($blog_cluster))
 			$feed_tag = 'blog'.$this->page['page_id'];
 		}
 
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/'.$feed_tag.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
+		echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/'.$feed_tag.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
 	}
 
 	echo '<div style="width:100%;">

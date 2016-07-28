@@ -26,11 +26,11 @@ if ($_POST)
 
 	// update page metadata
 	$this->db->sql_query(
-		"UPDATE ".$this->config['table_prefix']."page SET ".
+		"UPDATE ".$this->db->table_prefix."page SET ".
 			(isset($_POST['extended'])
 			?	"footer_comments	= '".(int)$_POST['footer_comments']."', ".
 				"footer_files		= '".(int)$_POST['footer_files']."', ".
-				($this->config['footer_rating'] != 0
+				($this->db->footer_rating != 0
 					? "footer_rating	= '".(int)$_POST['footer_rating']."', "
 					: "").
 				"hide_toc			= '".(int)$_POST['hide_toc']."', ".
@@ -52,7 +52,7 @@ if ($_POST)
 		"LIMIT 1");
 
 	// log event
-	$this->log(4, str_replace('%1', $this->tag.' '.(isset($_POST['title']) ? $_POST['title'] : ''), $this->_t('LogPageMetaUpdated', $this->config['language'])));
+	$this->log(4, str_replace('%1', $this->tag.' '.(isset($_POST['title']) ? $_POST['title'] : ''), $this->_t('LogPageMetaUpdated', $this->db->language)));
 
 	// reload page
 	$this->set_message($this->_t('MetaUpdated'), 'success');
@@ -62,14 +62,14 @@ if ($_POST)
 // load settings
 $revs = $this->db->load_single(
 	"SELECT COUNT(revision_id) AS total ".
-	"FROM {$this->config['table_prefix']}revision ".
+	"FROM {$this->db->table_prefix}revision ".
 	"WHERE page_id = '".$this->page['page_id']."' ".
 	"GROUP BY tag ".
 	"LIMIT 1");
 
 $rating = $this->db->load_single(
 	"SELECT page_id, value, voters ".
-	"FROM {$this->config['table_prefix']}rating ".
+	"FROM {$this->db->table_prefix}rating ".
 	"WHERE page_id = {$this->page['page_id']} ".
 	"LIMIT 1");
 
@@ -97,28 +97,28 @@ if (isset($_GET['extended']) || isset($_POST['extended']))
 		echo	'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('MetaComments')."</th>".
 					'<td class="form_right">'.
-						'<input type="radio" id="commentsOn"	name="footer_comments" value="1" '.( $this->config['footer_comments'] == 1 ? 'checked="checked" ' : '' ).'/><label for="commentsOn">'.$this->_t('MetaOn')."</label>".
-						'<input type="radio" id="commentsGuest"	name="footer_comments" value="2" '.( $this->config['footer_comments'] == 2 ? 'checked="checked" ' : '' ).'/><label for="commentsGuest">'.$this->_t('MetaRegistered')."</label>".
-						'<input type="radio" id="commentsOff"	name="footer_comments" value="0" '.( $this->config['footer_comments'] == 0 ? 'checked="checked" ' : '' ).'/><label for="commentsOff">'.$this->_t('MetaOff')."</label>".
+						'<input type="radio" id="commentsOn"	name="footer_comments" value="1" '.( $this->db->footer_comments == 1 ? 'checked="checked" ' : '' ).'/><label for="commentsOn">'.$this->_t('MetaOn')."</label>".
+						'<input type="radio" id="commentsGuest"	name="footer_comments" value="2" '.( $this->db->footer_comments == 2 ? 'checked="checked" ' : '' ).'/><label for="commentsGuest">'.$this->_t('MetaRegistered')."</label>".
+						'<input type="radio" id="commentsOff"	name="footer_comments" value="0" '.( $this->db->footer_comments == 0 ? 'checked="checked" ' : '' ).'/><label for="commentsOff">'.$this->_t('MetaOff')."</label>".
 					"</td>".
 				"</tr>\n".
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('MetaFiles')."</th>".
 					'<td class="form_right">'.
-						'<input type="radio" id="filesOn"		name="footer_files" value="1" '.( $this->config['footer_files'] == 1 ? 'checked="checked" ' : '' ).'/><label for="filesOn">'.$this->_t('MetaOn')."</label>".
-						'<input type="radio" id="filesGuest"	name="footer_files" value="2" '.( $this->config['footer_files'] == 2 ? 'checked="checked" ' : '' ).'/><label for="filesGuest">'.$this->_t('MetaRegistered')."</label>".
-						'<input type="radio" id="filesOff"		name="footer_files" value="0" '.( $this->config['footer_files'] == 0 ? 'checked="checked" ' : '' ).'/><label for="filesOff">'.$this->_t('MetaOff')."</label>".
+						'<input type="radio" id="filesOn"		name="footer_files" value="1" '.( $this->db->footer_files == 1 ? 'checked="checked" ' : '' ).'/><label for="filesOn">'.$this->_t('MetaOn')."</label>".
+						'<input type="radio" id="filesGuest"	name="footer_files" value="2" '.( $this->db->footer_files == 2 ? 'checked="checked" ' : '' ).'/><label for="filesGuest">'.$this->_t('MetaRegistered')."</label>".
+						'<input type="radio" id="filesOff"		name="footer_files" value="0" '.( $this->db->footer_files == 0 ? 'checked="checked" ' : '' ).'/><label for="filesOff">'.$this->_t('MetaOff')."</label>".
 					'</td>'.
 				"</tr>\n";
 
-		if ($this->config['footer_rating'] != 0)
+		if ($this->db->footer_rating != 0)
 		{
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->_t('MetaRating')."</th>".
 						'<td class="form_right">'.
-							'<input type="radio" id="ratingOn"		name="footer_rating" value="1" '.( $this->config['footer_rating'] == 1 ? 'checked="checked" ' : '' ).'/><label for="ratingOn">'.$this->_t('MetaOn')."</label>".
-							'<input type="radio" id="ratingGuest"	name="footer_rating" value="2" '.( $this->config['footer_rating'] == 2 ? 'checked="checked" ' : '' ).'/><label for="ratingGuest">'.$this->_t('MetaRegistered')."</label>".
-							'<input type="radio" id="ratingOff"		name="footer_rating" value="0" '.( $this->config['footer_rating'] == 0 ? 'checked="checked" ' : '' ).'/><label for="ratingOff">'.$this->_t('MetaOff')."</label>".
+							'<input type="radio" id="ratingOn"		name="footer_rating" value="1" '.( $this->db->footer_rating == 1 ? 'checked="checked" ' : '' ).'/><label for="ratingOn">'.$this->_t('MetaOn')."</label>".
+							'<input type="radio" id="ratingGuest"	name="footer_rating" value="2" '.( $this->db->footer_rating == 2 ? 'checked="checked" ' : '' ).'/><label for="ratingGuest">'.$this->_t('MetaRegistered')."</label>".
+							'<input type="radio" id="ratingOff"		name="footer_rating" value="0" '.( $this->db->footer_rating == 0 ? 'checked="checked" ' : '' ).'/><label for="ratingOff">'.$this->_t('MetaOff')."</label>".
 						'</td>'.
 					"</tr>\n";
 		}
@@ -127,23 +127,23 @@ if (isset($_GET['extended']) || isset($_POST['extended']))
 		echo	'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('MetaToc')."</th>".
 					'<td class="form_right">'.
-						'<input type="radio" id="tocOn"		name="hide_toc" value="0" '.( !$this->config['hide_toc'] ? 'checked="checked" ' : '' ).'/><label for="tocOn">'.$this->_t('MetaOn')."</label>".
-						'<input type="radio" id="tocOff"	name="hide_toc" value="1" '.( $this->config['hide_toc'] ? 'checked="checked" ' : '' ).'/><label for="tocOff">'.$this->_t('MetaOff')."</label>".
+						'<input type="radio" id="tocOn"		name="hide_toc" value="0" '.( !$this->db->hide_toc ? 'checked="checked" ' : '' ).'/><label for="tocOn">'.$this->_t('MetaOn')."</label>".
+						'<input type="radio" id="tocOff"	name="hide_toc" value="1" '.( $this->db->hide_toc ? 'checked="checked" ' : '' ).'/><label for="tocOff">'.$this->_t('MetaOff')."</label>".
 					"</td>".
 				"</tr>\n".
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('MetaIndex')."</th>".
 					'<td class="form_right">'.
-						'<input type="radio" id="indexOn"	name="hide_index" value="0" '.( !$this->config['hide_index'] ? 'checked="checked" ' : '' ).'/><label for="indexOn">'.$this->_t('MetaOn')."</label>".
-						'<input type="radio" id="indexOff"	name="hide_index" value="1" '.( $this->config['hide_index'] ? 'checked="checked" ' : '' ).'/><label for="indexOff">'.$this->_t('MetaOff')."</label>".
+						'<input type="radio" id="indexOn"	name="hide_index" value="0" '.( !$this->db->hide_index ? 'checked="checked" ' : '' ).'/><label for="indexOn">'.$this->_t('MetaOn')."</label>".
+						'<input type="radio" id="indexOff"	name="hide_index" value="1" '.( $this->db->hide_index ? 'checked="checked" ' : '' ).'/><label for="indexOff">'.$this->_t('MetaOff')."</label>".
 					"</td>".
 				"</tr>\n".
 				'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('MetaIndexMode')."</th>".
 					'<td class="form_right">'.
-						'<input type="radio" id="indexmodeF" name="tree_level" value="0" '.( $this->config['tree_level'] == 0 ? 'checked="checked" ' : '' ).'/><label for="indexmodeF">'.$this->_t('MetaIndexFull')."</label>".
-						'<input type="radio" id="indexmodeL" name="tree_level" value="1" '.( $this->config['tree_level'] == 1 ? 'checked="checked" ' : '' ).'/><label for="indexmodeL">'.$this->_t('MetaIndexLower')."</label>".
-						'<input type="radio" id="indexmodeU" name="tree_level" value="2" '.( $this->config['tree_level'] == 2 ? 'checked="checked" ' : '' ).'/><label for="indexmodeU">'.$this->_t('MetaIndexUpper')."</label>".
+						'<input type="radio" id="indexmodeF" name="tree_level" value="0" '.( $this->db->tree_level == 0 ? 'checked="checked" ' : '' ).'/><label for="indexmodeF">'.$this->_t('MetaIndexFull')."</label>".
+						'<input type="radio" id="indexmodeL" name="tree_level" value="1" '.( $this->db->tree_level == 1 ? 'checked="checked" ' : '' ).'/><label for="indexmodeL">'.$this->_t('MetaIndexLower')."</label>".
+						'<input type="radio" id="indexmodeU" name="tree_level" value="2" '.( $this->db->tree_level == 2 ? 'checked="checked" ' : '' ).'/><label for="indexmodeU">'.$this->_t('MetaIndexUpper')."</label>".
 					"</td>".
 				"</tr>\n";
 
@@ -152,15 +152,15 @@ if (isset($_GET['extended']) || isset($_POST['extended']))
 			echo	'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->_t('MetaHtml')."</th>".
 						'<td class="form_right">'.
-							'<input type="radio" id="htmlOn" name="allow_rawhtml" value="1" '.( $this->config['allow_rawhtml'] ? 'checked="checked" ' : '' ).'/><label for="htmlOn">'.$this->_t('MetaOn')."</label>".
-							'<input type="radio" id="htmlOff" name="allow_rawhtml" value="0" '.( !$this->config['allow_rawhtml'] ? 'checked="checked" ' : '' ).'/><label for="htmlOff">'.$this->_t('MetaOff')."</label>".
+							'<input type="radio" id="htmlOn" name="allow_rawhtml" value="1" '.( $this->db->allow_rawhtml ? 'checked="checked" ' : '' ).'/><label for="htmlOn">'.$this->_t('MetaOn')."</label>".
+							'<input type="radio" id="htmlOff" name="allow_rawhtml" value="0" '.( !$this->db->allow_rawhtml ? 'checked="checked" ' : '' ).'/><label for="htmlOff">'.$this->_t('MetaOff')."</label>".
 						"</td>".
 					"</tr>\n".
 					'<tr class="lined">'.
 						'<th class="form_left" scope="row">'.$this->_t('MetaSafeHtml')."</th>".
 						'<td class="form_right">'.
-							'<input type="radio" id="safehtmlOn" name="disable_safehtml" value="0" '.( !$this->config['disable_safehtml'] ? 'checked="checked" ' : '' ).'/><label for="safehtmlOn">'.$this->_t('MetaOn')."</label>".
-							'<input type="radio" id="safehtmlOff" name="disable_safehtml" value="1" '.( $this->config['disable_safehtml'] ? 'checked="checked" ' : '' ).'/><label for="safehtmlOff">'.$this->_t('MetaOff')."</label>".
+							'<input type="radio" id="safehtmlOn" name="disable_safehtml" value="0" '.( !$this->db->disable_safehtml ? 'checked="checked" ' : '' ).'/><label for="safehtmlOn">'.$this->_t('MetaOn')."</label>".
+							'<input type="radio" id="safehtmlOff" name="disable_safehtml" value="1" '.( $this->db->disable_safehtml ? 'checked="checked" ' : '' ).'/><label for="safehtmlOff">'.$this->_t('MetaOff')."</label>".
 						"</td>".
 					"</tr>\n";
 		}
@@ -261,7 +261,7 @@ else
 		if (!($clang = $this->page['page_lang']) || !isset($langs[$clang]))
 		{
 			$this->set_message(Ut::perc_replace($this->_t('NeedToChangeLang'), $clang), 'error');
-			$clang = $this->config['language'];
+			$clang = $this->db->language;
 		}
 
 		$languages = $this->_t('LanguageArray');
@@ -277,7 +277,7 @@ else
 		echo "</td>\n";
 		echo "</tr>\n";
 
-		if ($this->config['allow_themes_per_page'] == true)
+		if ($this->db->allow_themes_per_page == true)
 		{
 			echo	'<tr class="lined">'."\n".
 						'<th class="form_left" scope="row">'.
@@ -373,7 +373,7 @@ echo '<aside class="page_tools">'."\n".
 
 unset($revs);
 
-if ($this->config['footer_rating'] != 0)
+if ($this->db->footer_rating != 0)
 {
 	echo	'<tr class="lined">'.
 				'<th class="form_left" scope="row">'.$this->_t('SettingsRating')."'</th>\n".
@@ -386,7 +386,7 @@ echo "</table>\n";
 
 echo "<br />\n";
 
-$icon ='<img src="'. $this->config['theme_url'].'icon/spacer.png"/>';
+$icon ='<img src="'. $this->db->theme_url.'icon/spacer.png"/>';
 
 echo '<ul class="page_handler">'."\n".
 		'<li class="m-edit"><a href="'.$this->href('edit').'">'.$icon.$this->_t('SettingsEdit')."</a></li>\n".
@@ -400,7 +400,7 @@ if ($this->is_owner() || $this->is_admin())
 }
 
 // Remove link (shows only for page owner if allowed)
-if ($this->is_owner() && !$this->config['remove_onlyadmins'] || $this->is_admin())
+if ($this->is_owner() && !$this->db->remove_onlyadmins || $this->is_admin())
 {
 	echo '<li class="m-remove"><a href="'.$this->href('remove').'">'.$icon.$this->_t('SettingsRemove')."</a></li>\n";
 	echo '<li class="m-purge"><a href="'.$this->href('purge').'">'.$icon.$this->_t('SettingsPurge')."</a></li>\n";
