@@ -65,8 +65,8 @@ function admin_config_email(&$engine, &$module)
 					<small>Enabling email</small></label>
 				</td>
 				<td style="width:40%;">
-					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ( $engine->config['enable_email'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_on">Enabled.</label>
-					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ( $engine->config['enable_email'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_off">Disabled.</label>
+					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ( $engine->db->enable_email == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_on">Enabled.</label>
+					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ( $engine->db->enable_email == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_off">Disabled.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -78,8 +78,8 @@ function admin_config_email(&$engine, &$module)
 					<small>Use the PHPMailer class. Enabling this option ...</small></label>
 				</td>
 				<td style="width:40%;">
-					<input type="radio" id="phpmailer_on" name="phpmailer" value="1"<?php echo ( $engine->config['phpmailer'] == 1 ? ' checked="checked"' : '' );?> /><label for="phpmailer_on">Enabled.</label>
-					<input type="radio" id="phpmailer_off" name="phpmailer" value="0"<?php echo ( $engine->config['phpmailer'] == 0 ? ' checked="checked"' : '' );?> /><label for="phpmailer_off">Disabled.</label>
+					<input type="radio" id="phpmailer_on" name="phpmailer" value="1"<?php echo ( $engine->db->phpmailer == 1 ? ' checked="checked"' : '' );?> /><label for="phpmailer_on">Enabled.</label>
+					<input type="radio" id="phpmailer_off" name="phpmailer" value="0"<?php echo ( $engine->db->phpmailer == 0 ? ' checked="checked"' : '' );?> /><label for="phpmailer_off">Disabled.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -91,10 +91,10 @@ function admin_config_email(&$engine, &$module)
 					<small>The e-mail function used to send mails through PHP.</small></label></td>
 				<td>
 					<select style="width:200px;" id="phpmailer_method" name="phpmailer_method">
-						<option value=""<?php echo ( (string)$engine->config['phpmailer_method'] === '' ? ' selected="selected"' : '' );?>>default</option>
-						<option value="mail"<?php echo ( (string)$engine->config['phpmailer_method'] === 'mail' ? ' selected="selected"' : '' );?>>mail</option>
-						<option value="sendmail"<?php echo ( (string)$engine->config['phpmailer_method'] === 'sendmail' ? ' selected="selected"' : '' );?>>sendmail</option>
-						<option value="smtp"<?php echo ( (string)$engine->config['phpmailer_method'] === 'smtp' ? ' selected="selected"' : '' );?>>SMTP</option>
+						<option value=""<?php echo ( (string)$engine->db->phpmailer_method === '' ? ' selected="selected"' : '' );?>>default</option>
+						<option value="mail"<?php echo ( (string)$engine->db->phpmailer_method === 'mail' ? ' selected="selected"' : '' );?>>mail</option>
+						<option value="sendmail"<?php echo ( (string)$engine->db->phpmailer_method === 'sendmail' ? ' selected="selected"' : '' );?>>sendmail</option>
+						<option value="smtp"<?php echo ( (string)$engine->db->phpmailer_method === 'smtp' ? ' selected="selected"' : '' );?>>SMTP</option>
 					</select>
 				</td>
 			</tr>
@@ -107,7 +107,7 @@ function admin_config_email(&$engine, &$module)
 					<small>The sender name, part of <code>'From:'</code> header in emails for all the email-notification site.</small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->config['email_from'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->db->email_from, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -116,7 +116,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
 				<small>This address will appear as the<code>'From:'</code> all the email-notification site.</small></label></td>
-				<td><input type="email" maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->db->admin_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -124,7 +124,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="abuse_email"><strong>Email service abuse:</strong><br />
 				<small>Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.</small></label></td>
-				<td><input type="email" maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->config['abuse_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->db->abuse_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -134,7 +134,7 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_host"><strong>SMTP server address:</strong></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->config['smtp_host'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" style="width:200px;" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->db->smtp_host, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -142,7 +142,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_port"><strong>SMTP server port:</strong><br />
 				<small>Only change this if you know your SMTP server is on a different port. (default 25 or 587)</small></label></td>
-				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->config['smtp_port'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->db->smtp_port, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -151,9 +151,9 @@ function admin_config_email(&$engine, &$module)
 				<td class="label"><label for="smtp_connection_mode"><strong>Connection mode for SMTP:</strong><br />
 				<small>Only used if a username/password is set, ask your provider if you are unsure which method to use.</small></label></td>
 				<td><select style="width:200px;" id="smtp_connection_mode" name="smtp_connection_mode">
-						<option value=""<?php echo ( (string)$engine->config['smtp_connection_mode'] === '' ? ' selected="selected"' : '' );?>>none</option>
-						<option value="ssl"<?php echo ( (string)$engine->config['smtp_connection_mode'] === 'ssl' ? ' selected="selected"' : '' );?>>SSL</option>
-						<option value="tls"<?php echo ( (string)$engine->config['smtp_connection_mode'] === 'tls' ? ' selected="selected"' : '' );?>>TLS</option>
+						<option value=""<?php echo ( (string)$engine->db->smtp_connection_mode === '' ? ' selected="selected"' : '' );?>>none</option>
+						<option value="ssl"<?php echo ( (string)$engine->db->smtp_connection_mode === 'ssl' ? ' selected="selected"' : '' );?>>SSL</option>
+						<option value="tls"<?php echo ( (string)$engine->db->smtp_connection_mode === 'tls' ? ' selected="selected"' : '' );?>>TLS</option>
 					</select>
 				</td>
 			</tr>
@@ -164,7 +164,7 @@ function admin_config_email(&$engine, &$module)
 				<td class="label"><label for="smtp_username"><strong>SMTP username:</strong><br />
 				<small>Only enter a username if your SMTP server requires it.</small></label></td>
 				<td>
-					<input type="text" maxlength="255" style="width:200px;" id="smtp_username" name="smtp_username" value="<?php echo htmlspecialchars($engine->config['smtp_username'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="255" style="width:200px;" id="smtp_username" name="smtp_username" value="<?php echo htmlspecialchars($engine->db->smtp_username, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -175,7 +175,7 @@ function admin_config_email(&$engine, &$module)
 				<small>Only enter a password if your SMTP server requires it.<br />
 				<strong>Warning:</strong> <em>This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em></small></label></td>
 				<td>
-					<input type="password" maxlength="255" style="width:200px;" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->config['smtp_password'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="password" maxlength="255" style="width:200px;" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->db->smtp_password, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 

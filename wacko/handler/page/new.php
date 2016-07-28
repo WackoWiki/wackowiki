@@ -95,7 +95,7 @@ if (substr_count($this->tag, '/') > 0)
 	if ($this->has_access('create', $this->get_page_id($parent)))
 	{
 		// hide users cluster
-		if ($parent != $this->config['users_page'])
+		if ($parent != $this->db->users_page)
 		{
 			echo $this->form_open('parent_cluster_page', ['page_method' => 'new']);
 			echo '<input type="hidden" name="option" value="2" />';

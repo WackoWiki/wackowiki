@@ -3,14 +3,14 @@
 require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 ?>
-<script src="<?php echo $this->config['theme_url'] ?>js/leftframe.js"></script>
+<script src="<?php echo $this->db->theme_url ?>js/leftframe.js"></script>
 
 <body>
 
 <table class="topbody" style="text-align:center; width:100%;">
 	<tr>
 		<td>
-			<?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
+			<?php echo $this->db->site_name ?>: <?php echo $this->get_page_path(); ?>
 		</td>
 		<td class="searchArea" style="text-align:right; vertical-align:bottom;">
 			<?php echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage')); ?>
@@ -29,12 +29,12 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 					<th onclick="opentree('sw_n0')" style="vertical-align:top;">
 						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" style="width:100%;">
 							<tr>
-								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="14"/></td>
+								<td class="titleLeft"><img src="<?php echo $this->db->theme_url ?>images/1x1.png" alt="" height="1" width="14"/></td>
 								<td class="titleText" style="width:100%">
 									<?php echo $this->_t('YourBookmarks'); ?>
 								</td>
-								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="20"/></td>
-								<td class="titleRight"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="3"/></td>
+								<td class="titleHandle"><img src="<?php echo $this->db->theme_url ?>images/1x1.png" alt="" height="1" width="20"/></td>
+								<td class="titleRight"><img src="<?php echo $this->db->theme_url ?>images/1x1.png" alt="" height="1" width="3"/></td>
 							</tr>
 						</table>
 					</th>
@@ -47,7 +47,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	echo '<div id="menu-user">';
 	echo "<ol>\n";
 	// main page
-	echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+	echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
 
 	// menu
 	if ($menu = $this->get_menu())
@@ -75,14 +75,14 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		if (!in_array($this->page['page_id'], $this->get_menu_links()))
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-				.'"><img src="'. $this->config['theme_url']
+				.'"><img src="'. $this->db->theme_url
 				.'icon/bookmark1.png" alt="+" title="'.
 				$this->_t('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-				.'"><img src="'. $this->config['theme_url']
+				.'"><img src="'. $this->db->theme_url
 				.'icon/bookmark2.png" alt="-" title="'.
 				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 		}
@@ -99,10 +99,10 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 					<th onclick="opentree('sw_n1')" style="vertical-align:top;">
 						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" style="width:100%;">
 							<tr>
-								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="14"/></td>
+								<td class="titleLeft"><img src="<?php echo $this->db->theme_url ?>images/1x1.png" alt="" height="1" width="14"/></td>
 								<td class="titleText" style="width:100%;">This Page</td>
-								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="20"/></td>
-								<td class="titleRight"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.png" alt="" height="1" width="3"/></td>
+								<td class="titleHandle"><img src="<?php echo $this->db->theme_url ?>images/1x1.png" alt="" height="1" width="20"/></td>
+								<td class="titleRight"><img src="<?php echo $this->db->theme_url ?>images/1x1.png" alt="" height="1" width="3"/></td>
 							</tr>
 						</table>
 					</th>
@@ -112,7 +112,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 						<div class="modulecontent">
 						<?php
 	// Revisions link
-	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() )
+	echo (( $this->db->hide_revisions == false || ($this->db->hide_revisions == 1 && $this->get_user()) || ($this->db->hide_revisions == 2 && $this->is_owner()) || $this->is_admin() )
 			? "<a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a>\n"
 			: "".$this->get_time_formatted($this->page['modified'])."\n"
 		);
@@ -139,7 +139,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 									print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->_t('EditACLConfirm')."');\"":"").">".$this->_t('ACLText')."</a>");
 								}
 
-								if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner())
+								if ($this->check_acl($this->get_user_name(),$this->db->rename_globalacl) && !$this->is_owner())
 								{
 									echo '<br />';
 									print(" <a href=\"".$this->href('rename')."\">".$this->_t('RenameText')."</a>");
@@ -191,15 +191,15 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 <div class="header">
 	<?php echo ($this->is_watched === true
-			? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/unwatch.png\" title=\"".$this->_t('RemoveWatch')."\" alt=\"".$this->_t('RemoveWatch')."\" /></a>"
-			: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icon/watch.png\" title=\"".$this->_t('SetWatch')."\" alt=\"".$this->_t('SetWatch')."\" /></a>" ) ?> |
-	<?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icon/print.png\" title=\"".$this->_t('PrintVersion')."\" alt=\"".$this->_t('PrintVersion')."\" /></a>";?> |
+			? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->db->theme_url."icon/unwatch.png\" title=\"".$this->_t('RemoveWatch')."\" alt=\"".$this->_t('RemoveWatch')."\" /></a>"
+			: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->db->theme_url."icon/watch.png\" title=\"".$this->_t('SetWatch')."\" alt=\"".$this->_t('SetWatch')."\" /></a>" ) ?> |
+	<?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->db->theme_url."icon/print.png\" title=\"".$this->_t('PrintVersion')."\" alt=\"".$this->_t('PrintVersion')."\" /></a>";?> |
 	<?php
 		if ($this->get_user()) { ?>
 		<span class="nobr">
 				<?php echo $this->_t('YouAre'); ?>
-				<img src="<?php echo $this->config['theme_url'] ?>icon/user.png" width="12" height="12" style="vertical-align: baseline; " alt=""/>
-				<?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
+				<img src="<?php echo $this->db->theme_url ?>icon/user.png" width="12" height="12" style="vertical-align: baseline; " alt=""/>
+				<?php echo $this->link($this->db->users_page.'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 			</span>
 			<small>
 				(

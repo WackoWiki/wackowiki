@@ -41,7 +41,7 @@ if ($this->can_upload(true) === true)
 		}
 	}
 
-	$maxfilesize = $this->config['upload_max_size'];
+	$maxfilesize = $this->db->upload_max_size;
 
 	if ($maxsize)
 	{
@@ -59,7 +59,7 @@ if ($this->can_upload(true) === true)
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" />
 		</td>
 		<td style="white-space: nowrap;">
-			<input type="file" name="file" id="file_upload" />&nbsp;(<?php echo $this->_t('UploadMax').$this->binary_multiples(($this->config['upload_max_size']), false, true, true);?>)
+			<input type="file" name="file" id="file_upload" />&nbsp;(<?php echo $this->_t('UploadMax').$this->binary_multiples(($this->db->upload_max_size), false, true, true);?>)
 		</td>
 	</tr>
 	<?php

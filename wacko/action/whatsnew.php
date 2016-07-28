@@ -27,9 +27,9 @@ if (isset($_GET['markread']) && $user == true)
 // loading new pages/comments
 $pages1 = $this->db->load_all(
 	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag as comment_on_page, user_name, 1 AS ctype, p.deleted ".
-	"FROM {$this->config['table_prefix']}page p ".
-		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
-		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
+	"FROM {$this->db->table_prefix}page p ".
+		"LEFT JOIN {$this->db->table_prefix}page c ON (p.comment_on_id = c.page_id) ".
+		"LEFT JOIN {$this->db->table_prefix}user u ON (p.user_id = u.user_id) ".
 	"WHERE (u.account_type = '0' OR p.user_id = '0') ".
 	"ORDER BY p.created DESC ".
 	"LIMIT ".($max * 2), true);
@@ -37,9 +37,9 @@ $pages1 = $this->db->load_all(
 // loading revisions
 $pages2 = $this->db->load_all(
 	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag as comment_on_page, user_name, 1 AS ctype, p.deleted ".
-	"FROM {$this->config['table_prefix']}page p ".
-		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
-		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
+	"FROM {$this->db->table_prefix}page p ".
+		"LEFT JOIN {$this->db->table_prefix}page c ON (p.comment_on_id = c.page_id) ".
+		"LEFT JOIN {$this->db->table_prefix}user u ON (p.user_id = u.user_id) ".
 	"WHERE p.comment_on_id = '0' ".
 		"AND p.deleted = '0' ".
 		"AND (u.account_type = '0' OR p.user_id = '0') ".
@@ -49,9 +49,9 @@ $pages2 = $this->db->load_all(
 // loading uloads
 $files = $this->db->load_all(
 	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, 0 as comment_on_id, f.hits as ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.upload_lang AS cf_lang, c.tag as comment_on_page, user_name, 2 AS ctype, f.deleted ".
-	"FROM {$this->config['table_prefix']}upload f ".
-		"LEFT JOIN {$this->config['table_prefix']}page c ON (f.page_id = c.page_id) ".
-		"LEFT JOIN {$this->config['table_prefix']}user u ON (f.user_id = u.user_id) ".
+	"FROM {$this->db->table_prefix}upload f ".
+		"LEFT JOIN {$this->db->table_prefix}page c ON (f.page_id = c.page_id) ".
+		"LEFT JOIN {$this->db->table_prefix}user u ON (f.user_id = u.user_id) ".
 	"WHERE u.account_type = '0' ".
 		"AND f.deleted = '0' ".
 	"ORDER BY f.uploaded_dt DESC ".
@@ -76,14 +76,14 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 	if (!(int)$noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/changes_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('RecentChangesXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
+		echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/changes_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('RecentChangesXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
 	}
 	echo '<ul class="ul_list">'."\n";
 
 	$curday = '';
 	foreach ($pages as $page)
 	{
-		if ($this->config['hide_locked'])
+		if ($this->db->hide_locked)
 		{
 			$access = ( $page['comment_on_id'] ? $this->has_access('read', $page['comment_on_id']) : $this->has_access('read', $page['page_id']) );
 		}
@@ -182,7 +182,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					$on_page	= '<span title="">&rarr; '.'global';
 				}
 
-				echo '<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('NewFileAdded').
+				echo '<img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('NewFileAdded').
 					'" alt="[file]" class="btn-attachment"/> '.''.$this->link($path2.$page['title'], '', $page['title'], '', 0, 1, $_lang).
 					' '.$on_page.$separator.$author.'</span>'.$edit_note;
 			}
@@ -198,25 +198,25 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
 				}
 
-				echo '<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('NewCommentAdded').'" alt="[deleted]" class="btn-delete"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_cf_lang).' '.$this->_t('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1, $_cf_lang).' &nbsp;&nbsp;<span title="'.$this->_t("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
+				echo '<img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('NewCommentAdded').'" alt="[deleted]" class="btn-delete"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_cf_lang).' '.$this->_t('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1, $_cf_lang).' &nbsp;&nbsp;<span title="'.$this->_t("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
 			}
 			// new comment
 			else if ($page['comment_on_id'])
 			{
 				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
-				echo '<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('NewCommentAdded').'" alt="[comment]" class="btn-comment"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_cf_lang).' '.$this->_t('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1, $_cf_lang).' &nbsp;&nbsp;<span title="'.$this->_t("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
+				echo '<img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('NewCommentAdded').'" alt="[comment]" class="btn-comment"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_cf_lang).' '.$this->_t('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1, $_cf_lang).' &nbsp;&nbsp;<span title="'.$this->_t("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
 			}
 			// new page
 			else if ($page['created'] == $page['modified'])
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo '<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('NewPageCreated').'" alt="[new]" class="btn-add_page"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->_t("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
+				echo '<img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('NewPageCreated').'" alt="[new]" class="btn-add_page"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->_t("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
 			}
 			// new revision
 			else
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo '<img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('NewRevisionAdded').'" alt="[changed]" class="btn-edit"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->_t("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
+				echo '<img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('NewRevisionAdded').'" alt="[changed]" class="btn-edit"/> '.''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $_lang).' &nbsp;&nbsp;<span title="'.$this->_t("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
 			}
 
 			echo "</li>\n";

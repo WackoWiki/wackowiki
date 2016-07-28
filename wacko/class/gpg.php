@@ -43,11 +43,11 @@ class GPG
 	{
 		// defining main object properties
 		$this->engine	= & $engine;
-		$this->secret	= hash('sha1', $this->engine->config['system_seed'].'GPG_SECRET');
+		$this->secret	= hash('sha1', $this->engine->db->system_seed.'GPG_SECRET');
 		$this->baseurl	= "http://{$_SERVER['SERVER_NAME']}/";
-		$this->homedir	= rtrim($this->engine->config['gpg_home'], '/');
-		$this->tempdir	= rtrim($this->engine->config['gpg_temp'], '/');
-		$this->wrapper	= trim($this->engine->config['gpg_wrapper'], '/');
+		$this->homedir	= rtrim($this->engine->db->gpg_home, '/');
+		$this->tempdir	= rtrim($this->engine->db->gpg_temp, '/');
+		$this->wrapper	= trim($this->engine->db->gpg_wrapper, '/');
 		$this->sid		= $engine->sess->id();
 		$this->sessdir	= $this->tempdir.'/'.$this->sid;
 		$this->stfile	= $this->sessdir.'/'.GPG_STATUS_NAME;
@@ -186,7 +186,7 @@ class GPG
 		// in the clear part we use value separator for better
 		// handling in the token validation method (see below).
 		// hash context goes as single concatenated string
-		return $token = "$time|$procedure\n".hash('sha1', $this->engine->config['system_seed'].$this->sid.$time.$procedure);
+		return $token = "$time|$procedure\n".hash('sha1', $this->engine->db->system_seed.$this->sid.$time.$procedure);
 	}
 
 	// check whether challenge token is correct and did not
@@ -218,7 +218,7 @@ class GPG
 		}
 
 		// recalculating MAC
-		$new_mac = hash('sha1', $this->engine->config['system_seed'].$this->sid.$token_time.$token_proc);
+		$new_mac = hash('sha1', $this->engine->db->system_seed.$this->sid.$token_time.$token_proc);
 
 		// validating conditions. exact order is crucial!
 		if ($token_mac !== $new_mac)
@@ -307,7 +307,7 @@ class GPG
 
 		if ($errorcodes)
 		{
-			if ($this->engine->config['gpg_debug'] == true)
+			if ($this->engine->db->gpg_debug == true)
 			{
 				return nl2br("WackoWiki-GPG terminated, error output follows:\n------\n".
 				str_replace("\r", '', $errorcodes));
@@ -543,7 +543,7 @@ class GPG
 		// sanitizing user input
 		if (!$keyserver = $this->prepare_input($keyserver))
 		{
-			$keyserver = $this->engine->config['gpg_server'];
+			$keyserver = $this->engine->db->gpg_server;
 		}
 
 		$key_id = $this->prepare_input($key_id, 42);
@@ -772,7 +772,7 @@ class GPG
 		// defining keyserver
 		if (!$keyserver)
 		{
-			$keyserver = $this->engine->config['gpg_server'];
+			$keyserver = $this->engine->db->gpg_server;
 		}
 		else
 		{
@@ -803,7 +803,7 @@ class GPG
 		// defining keyserver
 		if (!$keyserver = $this->prepare_input($keyserver))
 		{
-			$keyserver = $this->engine->config['gpg_server'];
+			$keyserver = $this->engine->db->gpg_server;
 		}
 
 		// correcting search string

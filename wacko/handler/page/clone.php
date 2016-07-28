@@ -119,7 +119,7 @@ if (@$_POST['_action'] === 'clone_page')
 	$this->http->redirect($this->href('', $jump));
 }
 
-if ($this->check_acl($this->get_user_name(), $this->config['rename_globalacl']))
+if ($this->check_acl($this->get_user_name(), $this->db->rename_globalacl))
 {
 	$klusterwerks = $this->db->load_single(
 		"SELECT COUNT(*) AS n ".

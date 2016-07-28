@@ -22,7 +22,7 @@ if ($this->has_access('read'))
 	$tpl->h_page_description = $this->get_description();
 }
 
-if ($this->config['allow_x11colors'])
+if ($this->db->allow_x11colors)
 {
 	$tpl_h_x11_colors = $this->db->base_url . Ut::join_path(THEME_DIR, "_common/X11colors.css");
 }

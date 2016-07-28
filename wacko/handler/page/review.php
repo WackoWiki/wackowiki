@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 // Approval feature
 // TODO: delete sql cache ?
 
-if ($this->config['review'] && $this->is_reviewer() && $this->page)
+if ($this->db->review && $this->is_reviewer() && $this->page)
 {
 	$page_id = $this->page['page_id'];
 	$user_id = $this->get_user_id();

@@ -60,7 +60,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		}
 
 		// prepare and send personal message
-		if ($this->config['enable_email']
+		if ($this->db->enable_email
 			&& isset($_POST['send_pm'])
 			&& @$_POST['mail_body']
 			&& isset($_POST['mail_subject'])
@@ -78,9 +78,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$error = Ut::perc_replace($this->_t('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
 			}
 			// personal messages flood control
-			else if (isset($this->sess->intercom_delay) && time() - $this->sess->intercom_delay < $this->config['intercom_delay'])
+			else if (isset($this->sess->intercom_delay) && time() - $this->sess->intercom_delay < $this->db->intercom_delay)
 			{
-				$error = Ut::perc_replace($this->_t('UsersPMFlooded'), $this->config['intercom_delay']);
+				$error = Ut::perc_replace($this->_t('UsersPMFlooded'), $this->db->intercom_delay);
 			}
 
 			// proceed if no error encountered
@@ -91,7 +91,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			else
 			{
 				// compose message
-				$prefix		= rtrim(str_replace(array('https://www.', 'https://', 'http://www.', 'http://'), '', $this->config['base_url']), '/');
+				$prefix		= rtrim(str_replace(array('https://www.', 'https://', 'http://www.', 'http://'), '', $this->db->base_url), '/');
 				$msg_id		= date('ymdHi').'.'.Ut::rand(100000, 999999).'@'.$prefix;
 				$subject	= $_POST['mail_subject'];
 				if ($subject === '')
@@ -104,9 +104,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				}
 				$body = Ut::perc_replace($this->_t('UsersPMBody'),
 						$this->get_user_name(),
-						rtrim($this->config['base_url'], '/'),
+						rtrim($this->db->base_url, '/'),
 						$this->href('', $this->tag, $profile.'&ref='.rawurlencode(base64_encode($msg_id.'@@'.$subject)).'#contacts'),
-						$this->config['abuse_email'],
+						$this->db->abuse_email,
 						$_POST['mail_body']);
 
 				// compose headers
@@ -118,12 +118,12 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					$headers[] = "References: <$ref>";
 				}
 
-				$body .= "\n\n" . $this->_t('EmailGoodbye') . "\n" . $this->config['site_name'] . "\n" . $this->config['base_url'];
+				$body .= "\n\n" . $this->_t('EmailGoodbye') . "\n" . $this->db->site_name . "\n" . $this->db->base_url;
 
 				// send email
 				$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
 				$this->set_message($this->_t('UsersPMSent'));
-				$this->log(4, Ut::perc_replace($this->_t('LogPMSent', $this->config['language']), $this->get_user_name(), $user['user_name']));
+				$this->log(4, Ut::perc_replace($this->_t('LogPMSent', $this->db->language), $this->get_user_name(), $user['user_name']));
 
 				$this->sess->intercom_delay	= time();
 				$_POST['mail_body']			=
@@ -151,8 +151,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			$tpl->u_last_last_visit = $user['last_visit'];
 		}
 
-		$tpl->u_userPage_href = $this->href('', ($this->config['users_page'] . '/' . $user['user_name']));
-		$tpl->u_userPage_text = $this->config['users_page'].'/'.$user['user_name'];
+		$tpl->u_userPage_href = $this->href('', ($this->db->users_page . '/' . $user['user_name']));
+		$tpl->u_userPage_text = $this->db->users_page.'/'.$user['user_name'];
 
 		// hide contact form if profile is equal with current user
 		if ($user['user_id'] != $this->get_user_id())
@@ -184,9 +184,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				}
 
 				// user must allow incoming messages, and needs confirmed email address set
-				if ($this->config['enable_email'] && $user['allow_intercom'] && $user['email'] && !$user['email_confirm'])
+				if ($this->db->enable_email && $user['allow_intercom'] && $user['email'] && !$user['email_confirm'])
 				{
-					// $tpl->u_pm_pm_ic_ = 
+					// $tpl->u_pm_pm_ic_ =
 					$tpl->u_pm_pm_ic_subj = isset($subject)? $subject : '';
 					if (isset($ref))
 					{
@@ -216,7 +216,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 			$pages = $this->db->load_all(
 				"SELECT page_id, tag, title, created, page_lang ".
-				"FROM {$this->config['table_prefix']}page ".
+				"FROM {$this->db->table_prefix}page ".
 				"WHERE owner_id = '".$user['user_id']."' ".
 					"AND comment_on_id = '0' ".
 					"AND deleted <> '1' ".
@@ -238,7 +238,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// pages list itself
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id'], $this->get_user_name()))
+				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
 				{
 					// check current page lang for different charset to do_unicode_entities() against
 					$_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
@@ -270,8 +270,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 				$comments = $this->db->load_all(
 					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang ".
-					"FROM {$this->config['table_prefix']}page c ".
-						"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
+					"FROM {$this->db->table_prefix}page c ".
+						"LEFT JOIN ".$this->db->table_prefix."page p ON (c.comment_on_id = p.page_id) ".
 					"WHERE c.owner_id = '".$user['user_id']."' ".
 						"AND c.comment_on_id <> '0' ".
 						"AND c.deleted <> '1' ".
@@ -282,7 +282,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				// comments list itself
 				foreach ($comments as $comment)
 				{
-					if (!$this->config['hide_locked'] || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
+					if (!$this->db->hide_locked || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
 					{
 						// check current page lang for different charset to do_unicode_entities() against
 						$_lang = ($this->page['page_lang'] != $comment['page_lang'])?  $comment['page_lang'] : '';
@@ -311,7 +311,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		{
 			$limit = 10;
 
-			if ($this->config['upload'] == 1 || $this->is_admin())
+			if ($this->db->upload == 1 || $this->is_admin())
 			{
 				$tpl->u_up_u_n = $user['total_uploads'];
 
@@ -323,8 +323,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 					$uploads = $this->db->load_all(
 							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page ".
-							"FROM {$this->config['table_prefix']}upload u ".
-								"LEFT JOIN {$this->config['table_prefix']}page c ON (u.page_id = c.page_id) ".
+							"FROM {$this->db->table_prefix}upload u ".
+								"LEFT JOIN {$this->db->table_prefix}page c ON (u.page_id = c.page_id) ".
 							"WHERE u.user_id = '".$user['user_id']."' ".
 							"AND u.deleted <> '1' ".
 							// "AND p.deleted <> '1' ".
@@ -334,7 +334,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					// uploads list itself
 					foreach ($uploads as $upload)
 					{
-						if (!$this->config['hide_locked']
+						if (!$this->db->hide_locked
 							|| !$upload['page_id']
 							|| $this->has_access('read', $upload['page_id'], $this->get_user_name()))
 						{
@@ -463,7 +463,7 @@ else
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(u.user_name) AS n ".
-		"FROM {$this->config['user_table']} u ".
+		"FROM {$this->db->user_table} u ".
 		$sql_where, true);
 
 	if ($group_id)
@@ -489,8 +489,8 @@ else
 	// collect data
 	$users = $this->db->load_all(
 		"SELECT u.user_name, u.account_lang, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession ".
-		"FROM {$this->config['user_table']} u ".
-			"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
+		"FROM {$this->db->user_table} u ".
+			"LEFT JOIN ".$this->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 		$sql_where.
 		$sql_order.
 		"LIMIT {$pagination['offset']}, $limit", true);

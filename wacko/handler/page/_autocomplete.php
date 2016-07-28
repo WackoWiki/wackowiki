@@ -75,14 +75,14 @@ $limit = 10;
 
 $pages1 = $this->db->load_all(
 	"SELECT page_id, tag, supertag ".
-	"FROM ".$this->config['table_prefix']."page ".
+	"FROM ".$this->db->table_prefix."page ".
 	"WHERE supertag LIKE " . $this->db->q($supertag1 . '%') . " ".
 		"AND comment_on_id = '0' ".
 	"ORDER BY supertag ASC LIMIT $limit");
 
 $pages2 = $this->db->load_all(
 	"SELECT page_id, tag, supertag ".
-	"FROM ".$this->config['table_prefix']."page ".
+	"FROM ".$this->db->table_prefix."page ".
 	"WHERE  supertag LIKE " . $this->db->q($supertag2 . '%') . " ".
 		"AND comment_on_id = '0' ".
 	"ORDER BY supertag ASC LIMIT $limit");
@@ -95,7 +95,7 @@ if ($pages1)
 {
 	foreach ($pages1 as $page)
 	{
-		if ($this->config['hide_locked'])
+		if ($this->db->hide_locked)
 		{
 			$access = $this->has_access('read', $page['page_id']);
 		}
@@ -119,7 +119,7 @@ if ($pages2)
 {
 	foreach ($pages2 as $page)
 	{
-		if ($this->config['hide_locked'])
+		if ($this->db->hide_locked)
 		{
 			$access = $this->has_access('read', $page['page_id']);
 		}

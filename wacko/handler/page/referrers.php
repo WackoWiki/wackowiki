@@ -25,7 +25,7 @@ $show_backlinks = function ()
 		{
 			if ($page['tag'])
 			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 				{
 					// cache page_id for for has_access validation in link function
 					$this->page_id_cache[$page['tag']] = $page['page_id'];
@@ -47,9 +47,9 @@ $show_backlinks = function ()
 // fast lane: show backlinks for those who don't deserve further service ;)
 // enable_referrers == 1 for all logged-in users, == 2 for admins only
 if (
-	($this->config['enable_referrers'] == 0) ||
-	($this->config['enable_referrers'] == 1 && !$this->get_user()) ||
-	($this->config['enable_referrers'] == 2 && !$this->is_admin()))
+	($this->db->enable_referrers == 0) ||
+	($this->db->enable_referrers == 1 && !$this->get_user()) ||
+	($this->db->enable_referrers == 2 && !$this->is_admin()))
 {
 	echo "<br /><br />\n";
 	$show_backlinks();
@@ -68,7 +68,7 @@ if (!in_array($mode, $modes))
 }
 
 // set up for main show
-$purge_time = (($t = $this->config['referrers_purge_time'])
+$purge_time = (($t = $this->db->referrers_purge_time)
 	? ($t == 1
 		? $this->_t('Last24Hours')
 		: Ut::perc_replace($this->_t('LastDays'), $t))
@@ -81,7 +81,7 @@ if ($mode)
 		$purge_time);
 }
 
-$px = $this->config['table_prefix'];
+$px = $this->db->table_prefix;
 if ($mode == 'perpage')
 {
 	$query = "SELECT r.page_id, COUNT(r.referrer) AS num, p.tag, p.title, p.page_lang ".
@@ -175,7 +175,7 @@ $check_ref = function ($ref)
 	{
 		$link = '404';
 	}
-	else if ($this->config['hide_locked'] && !$this->has_access('read', $id))
+	else if ($this->db->hide_locked && !$this->has_access('read', $id))
 	{
 		$link = '';
 	}

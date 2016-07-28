@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 // path -
 // label -
 
-$path = $this->config['category_page'];
+$path = $this->db->category_page;
 if (!isset($list))		$list		= 0;
 if (!isset($label))		$label		= true;
 if (empty($path))		$path		= 'Category';

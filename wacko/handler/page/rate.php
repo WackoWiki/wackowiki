@@ -35,7 +35,7 @@ function handler_rate_set_rate_cookie(&$engine, $page_id)
 }
 
 // update page rating
-if ($this->has_access('read') && $this->page && $this->config['footer_rating'] != 0 && ($this->config['footer_rating'] != 2 || $this->get_user()))
+if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 && ($this->db->footer_rating != 2 || $this->get_user()))
 {
 	if (isset($_POST['value']))
 	{
@@ -51,13 +51,13 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 			// try to load current rating entry
 			if ($rating = $this->db->load_single(
 				"SELECT page_id, value, voters ".
-				"FROM {$this->config['table_prefix']}rating ".
+				"FROM {$this->db->table_prefix}rating ".
 				"WHERE page_id = $page_id ".
 				"LIMIT 1"))
 			{
 				// update entry
 				$this->db->sql_query(
-					"UPDATE {$this->config['table_prefix']}rating SET ".
+					"UPDATE {$this->db->table_prefix}rating SET ".
 						"value		= {$rating['value']} + ".$this->db->q($value).", ".
 						"voters		= {$rating['voters']} + 1 ".
 					"WHERE page_id = $page_id");
@@ -66,7 +66,7 @@ if ($this->has_access('read') && $this->page && $this->config['footer_rating'] !
 			{
 				// create entry
 				$this->db->sql_query(
-					"INSERT INTO {$this->config['table_prefix']}rating SET ".
+					"INSERT INTO {$this->db->table_prefix}rating SET ".
 					"page_id		= $page_id, ".
 					"value			= ".$this->db->q($value).", ".
 					"voters			= 1");

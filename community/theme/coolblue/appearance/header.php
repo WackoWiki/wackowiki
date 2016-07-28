@@ -25,7 +25,7 @@ echo $this->form_close();
 	echo '<div id="menu-user">';
 	echo "<ol>\n";
 	// main page
-	echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+	echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
 
 	// menu
 	if ($menu = $this->get_menu())
@@ -53,14 +53,14 @@ echo $this->form_close();
 		if (!in_array($this->page['page_id'], $this->get_menu_links()))
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-				.'"><img src="'. $this->config['theme_url']
+				.'"><img src="'. $this->db->theme_url
 				.'icon/bookmark1.png" alt="+" title="'.
 				$this->_t('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-				.'"><img src="'. $this->config['theme_url']
+				.'"><img src="'. $this->db->theme_url
 				.'icon/bookmark2.png" alt="-" title="'.
 				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 		}
@@ -71,7 +71,7 @@ echo $this->form_close();
   <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user()) { ?>
-  <?php echo $this->_t('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?><br />
+  <?php echo $this->_t('YouAre')." ".$this->link($this->db->users_page.'/'.$this->get_user_name(), '', $this->get_user_name()) ?><br />
   <small>
   <?php
       echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
@@ -92,7 +92,7 @@ echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
   <br />
   <?php echo $this->_t('LoginPassword') ?>:<br />
   <input type="password" name="password" class="login" size="8" alt="password" />
-  <input type="image" src="<?php echo $this->config['theme_url'] ?>icon/login.png" alt=">>>" align="top" />
+  <input type="image" src="<?php echo $this->db->theme_url ?>icon/login.png" alt=">>>" align="top" />
   <?php // Closing Login form
 echo $this->form_close();
 ?>
@@ -139,7 +139,7 @@ echo ($this->is_watched === true ? "<a href=\"".$this->href('watch')."\">".$this
   <br />
   <?php
  // Rename link
- if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->is_owner())
+ if ($this->check_acl($this->get_user_name(),$this->db->rename_globalacl) && !$this->is_owner())
  {
    print("<a href=\"".$this->href('rename')."\">".$this->_t('RenameText')."</a><br />");
  }
@@ -153,7 +153,7 @@ if ($this->is_admin()){
 ?><hr noshade="noshade" />
 <?php
 	// Revisions link
-	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->is_owner()) || $this->is_admin() )
+	echo (( $this->db->hide_revisions == false || ($this->db->hide_revisions == 1 && $this->get_user()) || ($this->db->hide_revisions == 2 && $this->is_owner()) || $this->is_admin() )
 			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
 			: "<li>".$this->get_time_formatted($this->page['modified'])."</li>\n"
 		);
@@ -164,4 +164,4 @@ if ($this->is_admin()){
 // here we show messages
 $this->output_messages();
 ?>
-<loc><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?></loc>
+<loc><?php echo $this->db->site_name ?>: <?php echo $this->get_page_path(); ?></loc>

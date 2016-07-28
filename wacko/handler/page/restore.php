@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 // restore
 // TODO: delete sql cache ?
 
-if ($this->config['store_deleted_pages'] && $this->is_admin() && $this->page['deleted'])
+if ($this->db->store_deleted_pages && $this->is_admin() && $this->page['deleted'])
 {
 	$page_id = $this->page['page_id'];
 	$message = '';

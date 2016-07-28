@@ -14,7 +14,7 @@ if (isset($for))
 
 	$rs = $this->db->load_single(
 		"SELECT hits ".
-		"FROM ".$this->config['table_prefix']."page ".
+		"FROM ".$this->db->table_prefix."page ".
 		"WHERE tag = ".$this->db->q($tag)." LIMIT 1"
 	);
 

@@ -14,128 +14,128 @@ if (!defined('IN_WACKO'))
 if (!isset($tables, $directories))
 {
 	$tables	= array(
-			$engine->config['table_prefix'].'acl' => array(
-				'name'	=> $engine->config['table_prefix'].'acl',
+			$engine->db->table_prefix.'acl' => array(
+				'name'	=> $engine->db->table_prefix.'acl',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'auth_token' => array(
-					'name'	=> $engine->config['table_prefix'].'auth_token',
+			$engine->db->table_prefix.'auth_token' => array(
+					'name'	=> $engine->db->table_prefix.'auth_token',
 					'where'	=> false,
 					'order'	=> 'user_id',
 					'limit' => 1000
 			),
-			$engine->config['table_prefix'].'cache' => array(
-				'name'	=> $engine->config['table_prefix'].'cache',
+			$engine->db->table_prefix.'cache' => array(
+				'name'	=> $engine->db->table_prefix.'cache',
 				'where'	=> false,
 				'order'	=> 'cache_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'config' => array(
-				'name'	=> $engine->config['table_prefix'].'config',
+			$engine->db->table_prefix.'config' => array(
+				'name'	=> $engine->db->table_prefix.'config',
 				'where'	=> false,
 				'order'	=> 'config_id',
 				'limit' => 500
 			),
-			$engine->config['table_prefix'].'category' => array(
-				'name'	=> $engine->config['table_prefix'].'category',
+			$engine->db->table_prefix.'category' => array(
+				'name'	=> $engine->db->table_prefix.'category',
 				'where'	=> false,
 				'order'	=> 'category_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'category_page' => array(
-				'name'	=> $engine->config['table_prefix'].'category_page',
+			$engine->db->table_prefix.'category_page' => array(
+				'name'	=> $engine->db->table_prefix.'category_page',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'file_link' => array(
-					'name'	=> $engine->config['table_prefix'].'file_link',
+			$engine->db->table_prefix.'file_link' => array(
+					'name'	=> $engine->db->table_prefix.'file_link',
 					'where'	=> 'page_id',
 					'order'	=> 'page_id',
 					'limit' => 1000
 			),
-			$engine->config['table_prefix'].'link' => array(
-				'name'	=> $engine->config['table_prefix'].'link',
+			$engine->db->table_prefix.'link' => array(
+				'name'	=> $engine->db->table_prefix.'link',
 				'where'	=> 'from_page_id',
 				'order'	=> 'from_page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'log' => array(
-				'name'	=> $engine->config['table_prefix'].'log',
+			$engine->db->table_prefix.'log' => array(
+				'name'	=> $engine->db->table_prefix.'log',
 				'where'	=> false,
 				'order'	=> 'log_time',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'menu' => array(
-				'name'	=> $engine->config['table_prefix'].'menu',
+			$engine->db->table_prefix.'menu' => array(
+				'name'	=> $engine->db->table_prefix.'menu',
 				'where'	=> false,
 				'order'	=> 'menu_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'page' => array(
-				'name'	=> $engine->config['table_prefix'].'page',
+			$engine->db->table_prefix.'page' => array(
+				'name'	=> $engine->db->table_prefix.'page',
 				'where'	=> true,
 				'order'	=> 'tag',
 				'limit' => 500
 			),
-			$engine->config['table_prefix'].'poll' => array(
-				'name'	=> $engine->config['table_prefix'].'poll',
+			$engine->db->table_prefix.'poll' => array(
+				'name'	=> $engine->db->table_prefix.'poll',
 				'where'	=> false,
 				'order'	=> 'poll_id, v_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'rating' => array(
-				'name'	=> $engine->config['table_prefix'].'rating',
+			$engine->db->table_prefix.'rating' => array(
+				'name'	=> $engine->db->table_prefix.'rating',
 				'where'	=> false,
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'referrer' => array(
-				'name'	=> $engine->config['table_prefix'].'referrer',
+			$engine->db->table_prefix.'referrer' => array(
+				'name'	=> $engine->db->table_prefix.'referrer',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'revision' => array(
-				'name'	=> $engine->config['table_prefix'].'revision',
+			$engine->db->table_prefix.'revision' => array(
+				'name'	=> $engine->db->table_prefix.'revision',
 				'where'	=> 'revision_id',
 				'order'	=> 'revision_id',
 				'limit' => 500
 			),
-			$engine->config['table_prefix'].'upload' => array(
-				'name'	=> $engine->config['table_prefix'].'upload',
+			$engine->db->table_prefix.'upload' => array(
+				'name'	=> $engine->db->table_prefix.'upload',
 				'where'	=> false,
 				'order'	=> 'upload_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'user' => array(
-				'name'	=> $engine->config['table_prefix'].'user',
+			$engine->db->table_prefix.'user' => array(
+				'name'	=> $engine->db->table_prefix.'user',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'user_setting' => array(
-				'name'	=> $engine->config['table_prefix'].'user_setting',
+			$engine->db->table_prefix.'user_setting' => array(
+				'name'	=> $engine->db->table_prefix.'user_setting',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'usergroup' => array(
-				'name'	=> $engine->config['table_prefix'].'usergroup',
+			$engine->db->table_prefix.'usergroup' => array(
+				'name'	=> $engine->db->table_prefix.'usergroup',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'usergroup_member' => array(
-				'name'	=> $engine->config['table_prefix'].'usergroup_member',
+			$engine->db->table_prefix.'usergroup_member' => array(
+				'name'	=> $engine->db->table_prefix.'usergroup_member',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'watch' => array(
-				'name'	=> $engine->config['table_prefix'].'watch',
+			$engine->db->table_prefix.'watch' => array(
+				'name'	=> $engine->db->table_prefix.'watch',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
@@ -349,7 +349,7 @@ function get_table(&$engine, $table, $drop = true)
 		}
 	}
 
-	$schema_create .= "\n) ENGINE={$engine->config['database_engine']} CHARSET={$engine->config['database_charset']};"; // TODO: CHARSET per table
+	$schema_create .= "\n) ENGINE={$engine->db->database_engine} CHARSET={$engine->db->database_charset};"; // TODO: CHARSET per table
 
 	return ($schema_create);
 }
@@ -374,7 +374,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 			$_root = $engine->translit($root);
 			$pages = $engine->db->load_all(
 				"SELECT page_id ".
-				"FROM ".$engine->config['table_prefix']."page ".
+				"FROM ".$engine->db->table_prefix."page ".
 				"WHERE supertag LIKE " . $engine->db->q($_root . '/%') . " ".
 					"OR supertag = " . $engine->db->q($_root) . " ");
 
@@ -393,7 +393,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 			$cluster_pages[$root]	= $result;
 		}
 
-		if ($table != $engine->config['table_prefix'].'page')	// not page table
+		if ($table != $engine->db->table_prefix.'page')	// not page table
 		{
 			$where = "WHERE {$tables[$table]['where']} IN (".$cluster_pages[$root].") ";
 		}
@@ -409,7 +409,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	$limit = "LIMIT %1, {$tables[$table]['limit']} ";
 
 	// tweak
-	if ($table == $engine->config['table_prefix'].'page')
+	if ($table == $engine->db->table_prefix.'page')
 	{
 		$tweak = true;
 	}
@@ -729,5 +729,5 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 // Draws a tick or cross next to a result
 function output_image(&$engine, $ok)
 {
-	return '<img src="'.$engine->config['base_url'].'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? 'OK' : 'Problem').'" title="'.($ok ? 'OK' : 'Problem').'" class="tickcross '.($ok ? 'tick' : 'cross').'" />'.' ';
+	return '<img src="'.$engine->db->base_url.'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? 'OK' : 'Problem').'" title="'.($ok ? 'OK' : 'Problem').'" class="tickcross '.($ok ? 'tick' : 'cross').'" />'.' ';
 }

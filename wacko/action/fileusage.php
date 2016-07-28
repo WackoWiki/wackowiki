@@ -22,7 +22,7 @@ if ($file_id)
 		{
 			if ($page['tag'])
 			{
-				if ($this->config['hide_locked'])
+				if ($this->db->hide_locked)
 				{
 					$access = $this->has_access('read', $page['page_id']);
 				}

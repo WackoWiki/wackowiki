@@ -25,7 +25,7 @@ $message = '';
 
 if ($registered
 &&
-($this->check_acl($user_name, $this->config['rename_globalacl'])
+($this->check_acl($user_name, $this->db->rename_globalacl)
 	|| $this->get_page_owner_id($this->page['page_id']) == $user_id)
 )
 {
@@ -88,8 +88,8 @@ if ($registered
 				$message .= '<li>'.$this->_t('NewNameOfPage').$this->link('/'.$new_name)."</li>\n";
 
 				// log event
-				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', $this->config['language']), $this->tag, $new_name).
-					($need_redirect? $this->_t('LogRenamedPage2', $this->config['language']) : '' ));
+				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', $this->db->language), $this->tag, $new_name).
+					($need_redirect? $this->_t('LogRenamedPage2', $this->db->language) : '' ));
 
 				$message .= "</ol>\n";
 			}
@@ -121,7 +121,7 @@ if ($registered
 			<?php
 			echo '<input type="checkbox" id="redirect" name="redirect" ';
 
-			if ($this->config['default_rename_redirect'] == 1)
+			if ($this->db->default_rename_redirect == 1)
 			{
 				echo 'checked="checked"';
 			};
@@ -129,7 +129,7 @@ if ($registered
 			echo ' /><label for="redirect"> '.$this->_t('NeedRedirect').'</label>'; ?>
 <br />
 			<?php
-			if ($this->check_acl($user_name, $this->config['rename_globalacl']))
+			if ($this->check_acl($user_name, $this->db->rename_globalacl))
 			{
 				echo '<input type="checkbox" id="massrename" name="massrename" />';
 				echo '<label for="massrename"> '.$this->_t('MassRename').'</label>';
@@ -171,7 +171,7 @@ function recursive_move(&$engine, $root, $new_root)
 	$_root		= $engine->translit($root);
 	$pages		= $engine->db->load_all(
 		"SELECT page_id, tag, supertag ".
-		"FROM ".$engine->config['table_prefix']."page ".
+		"FROM ".$engine->db->table_prefix."page ".
 		"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " ".
 			" OR supertag = " . $engine->db->q($_root) . ") ".
 		($owner_id
@@ -207,7 +207,7 @@ function move(&$engine, $old_page, $new_name)
 	$user		= $engine->get_user();
 	$user_id	= $engine->get_user_id();
 
-	if (($engine->check_acl($user['user_name'], $engine->config['rename_globalacl'])
+	if (($engine->check_acl($user['user_name'], $engine->db->rename_globalacl)
 	|| $engine->get_page_owner_id($old_page['page_id']) == $user_id))
 	{
 		$super_new_name = $engine->translit($new_name);
@@ -267,8 +267,8 @@ function move(&$engine, $old_page, $new_name)
 				$message .= '<li>'.$engine->_t('NewNameOfPage').$engine->link('/'.$new_name)."</li>\n";
 
 				// log event
-				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', $engine->config['language']), $old_page['tag'], $new_name).
-					($need_redirect? $engine->_t('LogRenamedPage2', $engine->config['language']) : '' ));
+				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', $engine->db->language), $old_page['tag'], $new_name).
+					($need_redirect? $engine->_t('LogRenamedPage2', $engine->db->language) : '' ));
 			}
 		}
 

@@ -66,7 +66,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload"><strong>Right to the upload files:</strong><br />
 					<small><code>'admins'</code> means that only users belongig to admins group can upload the files. <code>'1'</code> means that uploading is opened to everybody. <code>'0'</code> means that upload disabled</small></label></td>
-				<td style="width:40%;"><input type="text" maxlength="7" style="width:200px;" id="upload" name="upload" value="<?php echo htmlspecialchars($engine->config['upload'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td style="width:40%;"><input type="text" maxlength="7" style="width:200px;" id="upload" name="upload" value="<?php echo htmlspecialchars($engine->db->upload, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -74,7 +74,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_images_only"><strong>Allow only upload of images:</strong><br />
 					<small>Allow only uploading of image files on the page.</small></label></td>
-				<td><input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ( $engine->config['upload_images_only'] ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ( $engine->db->upload_images_only ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -82,8 +82,8 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_max_size"><strong>Maximum file size:</strong><br />
 					<small>Maximum size of each file.</small></label></td>
-				<td><input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_max_size'], false, true, true, false);?>" />
-					<?php $x = $engine->binary_multiples_factor($engine->config['upload_max_size'], false); ?>
+				<td><input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_max_size, false, true, true, false);?>" />
+					<?php $x = $engine->binary_multiples_factor($engine->db->upload_max_size, false); ?>
 					<select name="upload_max_size_factor">
 						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
 						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
@@ -97,8 +97,8 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota"><strong>Total upload quota:</strong><br />
 					<small>Maximum drive space available for attachments for the whole engine, with 0 being unlimited. <strong><?php echo $engine->binary_multiples($engine->upload_quota(), false, true, true);?></strong> used.</small></label></td>
-				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_quota'], false, true, true, false);?>" />
-				<?php $x = $engine->binary_multiples_factor($engine->config['upload_quota'], false); ?>
+				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota, false, true, true, false);?>" />
+				<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota, false); ?>
 				<select name="upload_quota_factor">
 						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
 						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
@@ -113,8 +113,8 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage per user:</strong><br />
 					<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
-				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples($engine->config['upload_quota_per_user'], false, true, true, false);?>" />
-					<?php $x = $engine->binary_multiples_factor($engine->config['upload_quota_per_user'], false); ?>
+				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota_per_user, false, true, true, false);?>" />
+					<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota_per_user, false); ?>
 					<select name="upload_quota_per_user_factor">
 						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
 						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
@@ -133,8 +133,8 @@ function admin_config_upload(&$engine, &$module)
 				<td class="label"><strong>Create thumbnail:</strong><br />
 					<small>Create a thumbnail in all possible situations.</small></td>
 				<td>
-					<input type="radio" id="img_create_thumbnail_on" name="img_create_thumbnail" value="1"<?php echo ( $engine->config['img_create_thumbnail'] == 1 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_on">On.</label>
-					<input type="radio" id="img_create_thumbnail_off" name="img_create_thumbnail" value="0"<?php echo ( $engine->config['img_create_thumbnail'] == 0 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_off">Off.</label>
+					<input type="radio" id="img_create_thumbnail_on" name="img_create_thumbnail" value="1"<?php echo ( $engine->db->img_create_thumbnail == 1 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_on">On.</label>
+					<input type="radio" id="img_create_thumbnail_off" name="img_create_thumbnail" value="0"<?php echo ( $engine->db->img_create_thumbnail == 0 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -143,7 +143,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><strong>Maximum thumbnail width in pixel:</strong><br />
 					<small>A generated thumbnail will not exceed the width set here.</small></td>
-				<td><input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int)$engine->config['img_max_thumb_width'];?>" />px</td>
+				<td><input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int)$engine->db->img_max_thumb_width;?>" />px</td>
 			</tr>
 
 		</table>

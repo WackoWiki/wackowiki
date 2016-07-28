@@ -33,7 +33,7 @@ function admin_maint_resync(&$engine, &$module)
 			// total pages in ownership
 			$users1 = $engine->db->load_all(
 				"SELECT u.user_id, COUNT(p.tag) AS n ".
-				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
+				"FROM {$engine->db->table_prefix}page AS p, {$engine->db->user_table} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
 				"AND p.deleted <> '1' ".
 				"GROUP BY p.owner_id");
@@ -43,8 +43,8 @@ function admin_maint_resync(&$engine, &$module)
 				"SELECT
 					u.user_id, '0' as n
 				FROM
-					{$engine->config['table_prefix']}user u
-					LEFT JOIN {$engine->config['table_prefix']}page p ON (u.user_id = p.owner_id)
+					{$engine->db->table_prefix}user u
+					LEFT JOIN {$engine->db->table_prefix}page p ON (u.user_id = p.owner_id)
 				WHERE
 					u.total_pages <> '0'
 				AND
@@ -55,7 +55,7 @@ function admin_maint_resync(&$engine, &$module)
 			foreach ($users as $user)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->config['user_table']} ".
+					"UPDATE {$engine->db->user_table} ".
 					"SET total_pages = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
@@ -64,7 +64,7 @@ function admin_maint_resync(&$engine, &$module)
 			// total comments posted
 			$users1 = $engine->db->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n ".
-				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
+				"FROM {$engine->db->table_prefix}page AS p, {$engine->db->user_table} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
 				"AND p.deleted <> '1' ".
 				"GROUP BY p.user_id ".
@@ -75,8 +75,8 @@ function admin_maint_resync(&$engine, &$module)
 				"SELECT
 					u.user_id, '0' as n
 				FROM
-					{$engine->config['table_prefix']}user u
-					LEFT JOIN {$engine->config['table_prefix']}page p ON (u.user_id = p.owner_id)
+					{$engine->db->table_prefix}user u
+					LEFT JOIN {$engine->db->table_prefix}page p ON (u.user_id = p.owner_id)
 				WHERE
 					(u.total_comments <> '0'
 					AND
@@ -96,7 +96,7 @@ Ut::debug_print_r($users);
 			foreach ($users as $user)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->config['user_table']} ".
+					"UPDATE {$engine->db->user_table} ".
 					"SET total_comments = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
@@ -105,14 +105,14 @@ Ut::debug_print_r($users);
 			// total revisions made
 			$users = $engine->db->load_all(
 				"SELECT r.user_id, COUNT(r.tag) AS n ".
-				"FROM {$engine->config['table_prefix']}revision AS r, {$engine->config['user_table']} AS u ".
+				"FROM {$engine->db->table_prefix}revision AS r, {$engine->db->user_table} AS u ".
 				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' ".
 				"GROUP BY r.user_id");
 
 			foreach ($users as $user)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->config['user_table']} ".
+					"UPDATE {$engine->db->user_table} ".
 					"SET total_revisions = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
@@ -121,7 +121,7 @@ Ut::debug_print_r($users);
 			// total files uploaded
 			$users = $engine->db->load_all(
 					"SELECT u.user_id, COUNT(f.upload_id) AS n ".
-					"FROM {$engine->config['table_prefix']}upload f, {$engine->config['user_table']} AS u ".
+					"FROM {$engine->db->table_prefix}upload f, {$engine->db->user_table} AS u ".
 					"WHERE f.user_id = u.user_id ".
 					"AND f.deleted <> '1' ".
 					"GROUP BY f.user_id");
@@ -129,7 +129,7 @@ Ut::debug_print_r($users);
 			foreach ($users as $user)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->config['user_table']} ".
+					"UPDATE {$engine->db->user_table} ".
 					"SET total_uploads = ".(int)$user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
@@ -144,23 +144,23 @@ Ut::debug_print_r($users);
 		{
 			$comments = $engine->db->load_all(
 					"SELECT p.page_id, COUNT( c.page_id ) AS n
-					FROM {$engine->config['table_prefix']}page AS c
-					RIGHT JOIN {$engine->config['table_prefix']}page AS p ON c.comment_on_id = p.page_id
+					FROM {$engine->db->table_prefix}page AS c
+					RIGHT JOIN {$engine->db->table_prefix}page AS p ON c.comment_on_id = p.page_id
 					WHERE c.deleted <> '1'
 					GROUP BY p.page_id
 
 					UNION ALL
 
 					SELECT p.page_id, '0' AS n
-					FROM {$engine->config['table_prefix']}page AS c
-					RIGHT JOIN {$engine->config['table_prefix']}page AS p ON c.comment_on_id = p.page_id
+					FROM {$engine->db->table_prefix}page AS c
+					RIGHT JOIN {$engine->db->table_prefix}page AS p ON c.comment_on_id = p.page_id
 					WHERE c.comment_on_id IS NULL
 					");
 
 			foreach ($comments as $comment)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->config['table_prefix']}page ".
+					"UPDATE {$engine->db->table_prefix}page ".
 					"SET comments = ".(int)$comment['n']." ".
 					"WHERE page_id = '".$comment['page_id']."' ".
 					"LIMIT 1");
@@ -177,7 +177,7 @@ Ut::debug_print_r($users);
 			$xml->changes();
 			$xml->comments();
 
-			if ($engine->config['news_cluster'])
+			if ($engine->db->news_cluster)
 			{
 				$xml->feed();
 			}
@@ -212,15 +212,15 @@ Ut::debug_print_r($users);
 			{
 				// truncate table
 				$i = 0;
-				$engine->db->sql_query("DELETE FROM {$engine->config['table_prefix']}link");
-				$engine->db->sql_query("DELETE FROM {$engine->config['table_prefix']}file_link");
+				$engine->db->sql_query("DELETE FROM {$engine->db->table_prefix}link");
+				$engine->db->sql_query("DELETE FROM {$engine->db->table_prefix}file_link");
 			}
 
 			$engine->set_user_setting('dont_redirect', '1');
 
 			if ($pages = $engine->db->load_all(
 			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id
-			FROM {$engine->config['table_prefix']}page
+			FROM {$engine->db->table_prefix}page
 			LIMIT ".($i * $limit).", $limit"))
 			{
 				foreach ($pages as $n => $page)
@@ -235,7 +235,7 @@ Ut::debug_print_r($users);
 						$page['body_r'] = $engine->format($page['body'], 'wacko');
 
 						// build toc
-						if ($engine->config['paragrafica'] && $page['comment_on_id'] == 0 && $page['body_toc'] == '')
+						if ($engine->db->paragrafica && $page['comment_on_id'] == 0 && $page['body_toc'] == '')
 						{
 							$page['body_r']		= $engine->format($page['body_r'], 'paragrafica');
 							$page['body_toc']	= $engine->body_toc;
@@ -243,7 +243,7 @@ Ut::debug_print_r($users);
 
 						// store to DB
 						$engine->db->sql_query(
-							"UPDATE {$engine->config['table_prefix']}page SET ".
+							"UPDATE {$engine->db->table_prefix}page SET ".
 								"body_r		= " . $engine->db->q($page['body_r']) . ", ".
 								"body_toc	= " . $engine->db->q($page['body_toc']) . " ".
 							"WHERE page_id = '".$page['page_id']."' ".
@@ -309,13 +309,13 @@ Ut::debug_print_r($users);
 <?php		echo $engine->form_close();?>
 
 <?php
-if ($engine->config['xml_sitemap'])
+if ($engine->db->xml_sitemap)
 { ?>
 	<h2>XML-Sitemap</h2>
 	<p>
 		This function synchronizes the XML-Sitemap with the current state of the database.<br />
-		Period <strong><?php echo $engine->config['xml_sitemap_time']; ?></strong> days.
-		Last written <?php echo date('Y-m-d H:i:s', $engine->config['maint_last_xml_sitemap']); ?>
+		Period <strong><?php echo $engine->db->xml_sitemap_time; ?></strong> days.
+		Last written <?php echo date('Y-m-d H:i:s', $engine->db->maint_last_xml_sitemap); ?>
 	</p>
 <?php
 	echo $engine->form_open('sitemap_update');

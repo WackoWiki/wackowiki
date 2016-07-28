@@ -44,14 +44,14 @@ if ($this->is_owner() || $this->is_admin())
 		$this->set_message($this->_t('CategoriesUpdated'), 'success');
 		$this->http->redirect($this->href('properties'));
 	}
-	else if ($this->is_admin() || $this->config['owners_can_change_categories'] == true)
+	else if ($this->is_admin() || $this->db->owners_can_change_categories == true)
 	{
 		// get categories
 		if (isset($_POST['id']))
 		{
 			$word = $this->db->load_single(
 				"SELECT category_id, parent_id, category ".
-				"FROM {$this->config['table_prefix']}category ".
+				"FROM {$this->db->table_prefix}category ".
 				"WHERE category_id = '".(int)$_POST['id']."' ".
 				"LIMIT 1");
 		}
@@ -62,7 +62,7 @@ if ($this->is_owner() || $this->is_admin())
 			// do we have identical names?
 			if ($this->db->load_single(
 				"SELECT category_id ".
-				"FROM {$this->config['table_prefix']}category ".
+				"FROM {$this->db->table_prefix}category ".
 				"WHERE category = " . $this->db->q($_POST['newname']) . " ".
 				"LIMIT 1"))
 			{
@@ -73,7 +73,7 @@ if ($this->is_owner() || $this->is_admin())
 			else
 			{
 				$this->db->sql_query(
-					"INSERT INTO {$this->config['table_prefix']}category SET ".
+					"INSERT INTO {$this->db->table_prefix}category SET ".
 						( $_POST['id'] && $_POST['group'] == 1
 							? "parent_id = '". (int)( $word['parent_id'] != 0
 								? $word['parent_id']
@@ -94,7 +94,7 @@ if ($this->is_owner() || $this->is_admin())
 			// do we have identical names?
 			if ($this->db->load_single(
 				"SELECT category_id ".
-				"FROM {$this->config['table_prefix']}category ".
+				"FROM {$this->db->table_prefix}category ".
 				"WHERE category = " . $this->db->q($_POST['newname']) . " ".
 					"AND category_id <> '".(int)$_POST['id']."' ".
 				"LIMIT 1"))
@@ -106,7 +106,7 @@ if ($this->is_owner() || $this->is_admin())
 			else
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->config['table_prefix']}category SET ".
+					"UPDATE {$this->db->table_prefix}category SET ".
 						"category = ".$this->db->q($_POST['newname'])." ".
 					"WHERE category_id = '".(int)$_POST['id']."' ".
 					"LIMIT 1");
@@ -122,7 +122,7 @@ if ($this->is_owner() || $this->is_admin())
 			if ($_POST['parent_id'] == 0)
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->config['table_prefix']}category SET ".
+					"UPDATE {$this->db->table_prefix}category SET ".
 						"parent_id = 0 ".
 					"WHERE category_id = '".(int)$_POST['id']."' ".
 					"LIMIT 1");
@@ -134,20 +134,20 @@ if ($this->is_owner() || $this->is_admin())
 			{
 				$parent = $this->db->load_single(
 					"SELECT parent_id, category ".
-					"FROM {$this->config['table_prefix']}category ".
+					"FROM {$this->db->table_prefix}category ".
 					"WHERE category_id = '".(int)$_POST['parent_id']."' ".
 					"LIMIT 1");
 
 				if ($parent['parent_id'] == 0)
 				{
 					$this->db->sql_query(
-						"UPDATE {$this->config['table_prefix']}category SET ".
+						"UPDATE {$this->db->table_prefix}category SET ".
 							"parent_id = '".(int)$_POST['parent_id']."' ".
 						"WHERE category_id = '".(int)$_POST['id']."' ".
 						"LIMIT 1");
 
 					$this->db->sql_query(
-						"UPDATE {$this->config['table_prefix']}category SET ".
+						"UPDATE {$this->db->table_prefix}category SET ".
 							"parent_id = 0 ".
 						"WHERE parent_id = '".(int)$_POST['id']."'");
 
@@ -164,15 +164,15 @@ if ($this->is_owner() || $this->is_admin())
 		else if (isset($_POST['delete']) && isset($_POST['id']))
 		{
 			$this->db->sql_query(
-				"DELETE FROM {$this->config['table_prefix']}category ".
+				"DELETE FROM {$this->db->table_prefix}category ".
 				"WHERE category_id = '".(int)$_POST['id']."'");
 
 			$this->db->sql_query(
-				"DELETE FROM {$this->config['table_prefix']}category_page ".
+				"DELETE FROM {$this->db->table_prefix}category_page ".
 				"WHERE category_id = '".(int)$_POST['id']."'");
 
 			$this->db->sql_query(
-				"UPDATE {$this->config['table_prefix']}category SET ".
+				"UPDATE {$this->db->table_prefix}category SET ".
 					"parent_id = 0 ".
 				"WHERE parent_id = '".(int)$_POST['id']."'");
 
@@ -191,7 +191,7 @@ if ($this->is_owner() || $this->is_admin())
 	// get currently selected category_ids
 	$_selected = $this->db->load_all(
 		"SELECT category_id ".
-		"FROM {$this->config['table_prefix']}category_page ".
+		"FROM {$this->db->table_prefix}category_page ".
 		"WHERE page_id = '".$this->page['page_id']."'");
 
 	// exploding categories into array
@@ -210,7 +210,7 @@ if ($this->is_owner() || $this->is_admin())
 	//   edit forms
 	/////////////////////////////////////////////
 
-	if ($this->is_admin() || $this->config['owners_can_change_categories'] == true)
+	if ($this->is_admin() || $this->db->owners_can_change_categories == true)
 	{
 		// add new item
 		if (isset($_POST['create']))
@@ -219,7 +219,7 @@ if ($this->is_owner() || $this->is_admin())
 			{
 				$word = $this->db->load_single(
 					"SELECT category_id, parent_id, category ".
-					"FROM {$this->config['table_prefix']}category ".
+					"FROM {$this->db->table_prefix}category ".
 					"WHERE category_id = '".(int)$_POST['change']."' ".
 					"LIMIT 1");
 				$group = ( $word['parent_id'] == 0 ? $word['category_id'] : $group = $word['parent_id'] );
@@ -249,7 +249,7 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			if ($word = $this->db->load_single(
 				"SELECT category
-				FROM {$this->config['table_prefix']}category
+				FROM {$this->db->table_prefix}category
 				WHERE category_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
@@ -272,13 +272,13 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			if ($word = $this->db->load_single(
 				"SELECT category_id, parent_id, category, category_lang
-				FROM {$this->config['table_prefix']}category
+				FROM {$this->db->table_prefix}category
 				WHERE category_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
 				$parents = $this->db->load_all(
 					"SELECT category_id, category ".
-					"FROM {$this->config['table_prefix']}category ".
+					"FROM {$this->db->table_prefix}category ".
 					"WHERE parent_id = 0 ".
 						"AND category_lang = ".$this->db->q($word['category_lang'])." ".
 						"AND category_id <> '".$word['category_id']."' ".
@@ -311,7 +311,7 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			if ($word = $this->db->load_single(
 				"SELECT category
-				FROM {$this->config['table_prefix']}category
+				FROM {$this->db->table_prefix}category
 				WHERE category_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
@@ -347,7 +347,7 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			# if ($n++ > 0) echo '<hr />';
 			echo '<li class="lined"><span class="">'."\n\t";
-			echo ($this->is_admin() || $this->config['owners_can_change_categories'] == true
+			echo ($this->is_admin() || $this->db->owners_can_change_categories == true
 					? '<input type="radio" name="change" value="'.$id.'" />'
 					: '').
 				'<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /> '."\n\t".
@@ -363,7 +363,7 @@ if ($this->is_owner() || $this->is_admin())
 					}
 
 					echo "\t\t".'<li><span class="nobr">'."\n\t\t\t".
-							($this->is_admin() || $this->config['owners_can_change_categories'] == true
+							($this->is_admin() || $this->db->owners_can_change_categories == true
 								? '<input type="radio" name="change" value="'.$id.'" />'."\n\t\t\t"
 								: '').
 							'<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent_id'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' />'."\n\t\t\t".
@@ -401,7 +401,7 @@ if ($this->is_owner() || $this->is_admin())
 		echo '<a href="'.$this->href('').'" style="text-decoration: none;"><input type="button" id="button" value="'.$this->_t('CategoriesCancelButton').'" /></a><br /><br /> ';
 	}
 
-	if ($this->is_admin() || $this->config['owners_can_change_categories'] == true)
+	if ($this->is_admin() || $this->db->owners_can_change_categories == true)
 	{
 		echo '<input type="submit" id="button" name="create" value="'.$this->_t('CategoriesAddButton').'" /> ';
 		echo '<input type="submit" id="button" name="rename" value="'.$this->_t('CategoriesRenameButton').'" /> ';

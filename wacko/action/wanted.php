@@ -7,14 +7,14 @@ if (!defined('IN_WACKO'))
 
 if (!function_exists('load_wanted'))
 {
-	function load_wanted(&$wacko, $for = '', $limit = 50, $deleted = 0)
+	function load_wanted(&$engine, $for = '', $limit = 50, $deleted = 0)
 	{
 		$limit		= (int) $limit;
 		$pagination	= '';
-		$pref		= $wacko->config['table_prefix'];
+		$pref		= $engine->db->table_prefix;
 
 		// count pages
-		if ($count_pages = $wacko->load_all(
+		if ($count_pages = $engine->load_all(
 				"SELECT DISTINCT l.to_tag AS wanted_tag ".
 				"FROM ".$pref."link l ".
 					"LEFT JOIN ".$pref."page p ON ".
@@ -31,9 +31,9 @@ if (!function_exists('load_wanted'))
 		if ($count_pages)
 		{
 			$count		= count($count_pages);
-			$pagination = $wacko->pagination($count, $limit);
+			$pagination = $engine->pagination($count, $limit);
 
-			$wanted = $wacko->load_all(
+			$wanted = $engine->load_all(
 					"SELECT DISTINCT l.to_tag AS wanted_tag ".
 					"FROM ".$pref."link l ".
 						"LEFT JOIN ".$pref."page p ON ".
@@ -72,7 +72,7 @@ if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
 
 		foreach ($pages as $page)
 		{
-			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
 				echo "<li>".$this->link('/'.$page['tag'], '', '/'.$page['tag'])."</li>\n";
 			}
@@ -106,7 +106,7 @@ else
 			{
 				$page_parent = substr($page['wanted_tag'], 0, strrpos($page['wanted_tag'], '/'));
 
-				if(!$this->config['hide_locked'] || $this->has_access('read', $page_parent))
+				if(!$this->db->hide_locked || $this->has_access('read', $page_parent))
 				{
 					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
@@ -115,7 +115,7 @@ else
 					{
 						foreach ($referring_pages as $referrer_page)
 						{
-							if(!$this->config['hide_locked'] || $this->has_access('read', $referrer_page['tag']))
+							if(!$this->db->hide_locked || $this->has_access('read', $referrer_page['tag']))
 							{
 								$count++;
 							}

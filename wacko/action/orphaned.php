@@ -11,7 +11,7 @@ if (!function_exists('load_orphaned_pages'))
 	{
 		$limit		= (int) $limit;
 		$pagination	= '';
-		$pref		= $engine->config['table_prefix'];
+		$pref		= $engine->db->table_prefix;
 
 		// count pages
 		if ($count_pages = $engine->db->load_all(
@@ -88,7 +88,7 @@ if (list ($pages, $pagination) = load_orphaned_pages($this, $root, (int)$max))
 		{
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 				{
 					// cache page_id for for has_access validation in link function
 					$this->page_id_cache[$page['tag']] = $page['page_id'];

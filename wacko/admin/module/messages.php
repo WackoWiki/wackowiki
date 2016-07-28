@@ -52,7 +52,7 @@ function admin_messages(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"  style="vertical-align:top;"><label for="system_message"><strong>System message:</strong><br />
 					<small>Your text here</small></label></td>
-				<td  style="width:40%;"><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->config['system_message'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td  style="width:40%;"><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -67,7 +67,7 @@ function admin_messages(&$engine, &$module)
 
 						foreach ($typs as $type)
 						{
-							echo '<option value="'.$type.'" '.($engine->config['system_message_type'] == $type ? 'selected="selected"' : '').'>'.$type.'</option>';
+							echo '<option value="'.$type.'" '.($engine->db->system_message_type == $type ? 'selected="selected"' : '').'>'.$type.'</option>';
 						}
 ?>
 					</select>
@@ -80,8 +80,8 @@ function admin_messages(&$engine, &$module)
 				<td class="label"><strong>Themes per page:</strong><br />
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				<td>
-					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ( $engine->config['allow_themes_per_page'] == 1 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_on">On.</label>
-					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ( $engine->config['allow_themes_per_page'] == 0 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_off">Off.</label>
+					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ( $engine->db->allow_themes_per_page == 1 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_on">On.</label>
+					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ( $engine->db->allow_themes_per_page == 0 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_off">Off.</label>
 				</td>
 			</tr>
 

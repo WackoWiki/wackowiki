@@ -35,7 +35,7 @@ if ($this->has_access('read')
 		// $this->tag is reserved word
 		$message = Ut::perc_replace($this->_t('PageReservedWord'), $result);
 		$this->set_message($message);
-		$this->http->redirect($this->href('new', $this->config['root_page']));
+		$this->http->redirect($this->href('new', $this->db->root_page));
 	}
 
 	$user	= $this->get_user();
@@ -121,7 +121,7 @@ if ($this->has_access('read')
 			#}
 
 			// check for edit note
-			if (($this->config['edit_summary'] == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
+			if (($this->db->edit_summary == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
 			{
 				$message = $this->_t('EditNoteMissing');
 				$this->set_message($message , 'error');
@@ -350,7 +350,7 @@ if ($this->has_access('read')
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
 	{
 		// edit note
-		if ($this->config['edit_summary'] != 0)
+		if ($this->db->edit_summary != 0)
 		{
 			$output .= '<label for="edit_note">'.$this->_t('EditNote').':</label><br />';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
@@ -359,7 +359,7 @@ if ($this->has_access('read')
 		}
 
 		// minor edit
-		if ($this->page && $this->config['minor_edit'] != 0)
+		if ($this->page && $this->db->minor_edit != 0)
 		{
 			$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit"/>';
 			$output .= '<label for="minor_edit">'.$this->_t('EditMinor').'</label>';
@@ -373,7 +373,7 @@ if ($this->has_access('read')
 		if ($user)
 		{
 			// reviewed
-			if ($this->page && $this->config['review'] != 0 && $this->is_reviewer())
+			if ($this->page && $this->db->review != 0 && $this->is_reviewer())
 			{
 				$output .= '<input type="checkbox" id="reviewed" value="1" name="reviewed"/>';
 				$output .= '<label for="reviewed">'.$this->_t('Reviewed').'</label>';
@@ -381,7 +381,7 @@ if ($this->has_access('read')
 			}
 
 			// publish anonymously
-			if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
+			if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 			{
 				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'"'.( $this->get_user_setting('noid_pubs') == 1 ? ' checked="checked"' : '' ).' />';
 				$output .= '<label for="noid_publication">'.$this->_t('PostAnonymously').'</label>';
@@ -443,7 +443,7 @@ if ($this->has_access('read')
 		}
 	}
 ?>
-		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>image/wikiedit/');
+		wE.init('postText','WikiEdit','edname-w','<?php echo $this->db->base_url;?>image/wikiedit/');
 	</script>
 	<br />
 

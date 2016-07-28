@@ -22,17 +22,17 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	if (!$selected)
 	{
-		echo "<div class='TabSelected$bonus' style='background-image:url(".$engine->config['theme_url']."icon/tabbg.png);' >";
+		echo "<div class='TabSelected$bonus' style='background-image:url(".$engine->db->theme_url."icon/tabbg.png);' >";
 	}
 	else
 	{
-		echo "<div class='Tab$bonus' style='background-image:url(".$engine->config['theme_url']."icon/tabbg".($bonus=="2a" ? "del" : "1").".png);'>";
+		echo "<div class='Tab$bonus' style='background-image:url(".$engine->db->theme_url."icon/tabbg".($bonus=="2a" ? "del" : "1").".png);'>";
 	}
 
 	$bonus2 = $bonus=="2a"?"del":"";
 
 	echo '<table ><tr>';
-	echo "<td><img src='".$engine->config['theme_url']."icon/tabr$selected".$bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
+	echo "<td><img src='".$engine->db->theme_url."icon/tabr$selected".$bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
 
 	if (!$selected)
 	{
@@ -45,15 +45,15 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	echo "<div class='TabText'>".$text."</div>";
 	echo "</td>";
-	echo "<td><img src='".$engine->config['theme_url']."icon/tabl$selected".$bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
+	echo "<td><img src='".$engine->db->theme_url."icon/tabl$selected".$bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
 	echo '</tr></table>';
 	echo "</div>";
 }
 
 ?>
 <div class="Footer">
-<img src="<?php echo $this->config['base_url'];?>image/spacer.png" width="5" height="1" alt="" align="left" />
-<img src="<?php echo $this->config['base_url'];?>image/spacer.png" width="5" height="1" alt="" align="right" />
+<img src="<?php echo $this->db->base_url;?>image/spacer.png" width="5" height="1" alt="" align="left" />
+<img src="<?php echo $this->db->base_url;?>image/spacer.png" width="5" height="1" alt="" align="right" />
 <?php
 
 // if this page exists
@@ -105,12 +105,12 @@ if ($this->page)
 			);
 		}
 
-		if ($this->is_admin() || (!$this->config['remove_onlyadmins'] && $this->is_owner()))
+		if ($this->is_admin() || (!$this->db->remove_onlyadmins && $this->is_owner()))
 		{
 			echo_tab(
 			$this->href('remove'),
 			$this->_t('DeleteTip'),
-			'<img src="'.$this->config['theme_url'].'icon/del'.($this->method != 'remove' ? '' : '_').'.png" width="14" height="15" alt="" />'.$this->_t('DeleteText'),
+			'<img src="'.$this->db->theme_url.'icon/del'.($this->method != 'remove' ? '' : '_').'.png" width="14" height="15" alt="" />'.$this->_t('DeleteText'),
 			$this->method != 'remove',
 			"2a"
 			);
@@ -181,19 +181,19 @@ if ($this->page)
 if ($this->method == 'show')
 {
 	// files code starts
-	if ($this->has_access('read') && $this->config['footer_files'] == 1 || ($this->config['footer_files'] == 2 && $this->get_user()))
+	if ($this->has_access('read') && $this->db->footer_files == 1 || ($this->db->footer_files == 2 && $this->get_user()))
 	{
 		require_once('handler/page/_files.php'); // TODO: HANDLER_DIR
 	}
 
 	// comments form output  starts
-	if ($this->has_access('read') && ($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()) ) && $this->user_allowed_comments())
+	if ($this->has_access('read') && ($this->db->footer_comments == 1 || ($this->db->footer_comments == 2 && $this->get_user()) ) && $this->user_allowed_comments())
 	{
 		require_once('handler/page/_comments.php'); // TODO
 	}
 
 	// rating form output begins
-	if ($this->has_access('read') && $this->page && $this->config['footer_rating'] == 1 || ($this->config['footer_rating'] == 2 && $this->get_user()))
+	if ($this->has_access('read') && $this->page && $this->db->footer_rating == 1 || ($this->db->footer_rating == 2 && $this->get_user()))
 	{
 		require_once('handler/page/_rating.php'); // TODO
 	}

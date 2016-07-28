@@ -35,9 +35,9 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 	if (!$root && !(int)$noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/changes_'.
-			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.
-			$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('RecentChangesXMLTip').
+		echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/changes_'.
+			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.
+			$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('RecentChangesXMLTip').
 			'" alt="XML" class="btn-feed"/></a></span>'."<br /><br />\n";
 	}
 
@@ -48,7 +48,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 	$curday = '';
 	foreach ($pages as $i => $page)
 	{
-		if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+		if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 		{
 			$this->sql2datetime($page['modified'], $day, $time);
 
@@ -66,7 +66,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			$review = $viewed = '';
 
 			// review
-			if ($this->config['review'] && $this->is_reviewer() && !$page['reviewed'])
+			if ($this->db->review && $this->is_reviewer() && !$page['reviewed'])
 			{
 				$review = '<span class="review">['.$this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'), 0).']</span>';
 			}

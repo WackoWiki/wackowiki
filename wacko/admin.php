@@ -51,7 +51,7 @@ $engine->validate_post_token();
 if (@$_GET['action'] === 'logout')
 {
 	unset($engine->sess->ap_created);
-	$engine->log(1, $engine->_t('LogAdminLogout', $engine->config['language']));
+	$engine->log(1, $engine->_t('LogAdminLogout', $engine->db->language));
 	$http->secure_base_url();
 	$http->redirect($engine->href());
 	exit;
@@ -62,7 +62,7 @@ if (@$_GET['action'] === 'logout')
 ########################################################
 
 // recovery password
-if (!$engine->config['recovery_password'])
+if (!$engine->db->recovery_password)
 {
 	echo '<strong>'.$engine->_t('NoRecoceryPassword').'</strong><br />';
 	echo $engine->_t('NoRecoceryPasswordTip');
@@ -75,24 +75,24 @@ if (@$_POST['_action'] === 'emergency')
 {
 	if (password_verify(
 			base64_encode(
-					hash('sha256', $engine->config['system_seed'].$_POST['ap_password'], true)
+					hash('sha256', $engine->db->system_seed.$_POST['ap_password'], true)
 					),
 				$engine->db->recovery_password
 			)
 		)
 	{
-		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
+		$engine->db->cookie_path	= preg_replace('|https?://[^/]+|i', '', $engine->db->base_url.'');
 
 		$engine->sess->ap_created			=
 		$engine->sess->ap_last_activity		= time();
 		$engine->sess->ap_failed_login_count	= 0;
 
-		if ($engine->config['ap_failed_login_count'] > 0)
+		if ($engine->db->ap_failed_login_count > 0)
 		{
 			$engine->config->set('ap_failed_login_count', 0);
 		}
 
-		$engine->log(1, $engine->_t('LogAdminLoginSuccess', $engine->config['language']));
+		$engine->log(1, $engine->_t('LogAdminLoginSuccess', $engine->db->language));
 		$http->secure_base_url();
 		$http->ensure_tls($db->base_url . 'admin.php');
 	}
@@ -104,16 +104,16 @@ if (@$_POST['_action'] === 'emergency')
 			$engine->sess->ap_failed_login_count = 0;
 		}
 
-		$engine->config->set('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1);
-		$engine->log(1, $engine->_t('LogAdminLoginFailed', $engine->config['language']));
+		$engine->config->set('ap_failed_login_count', $engine->db->ap_failed_login_count + 1);
+		$engine->log(1, $engine->_t('LogAdminLoginFailed', $engine->db->language));
 
 		++$engine->sess->ap_failed_login_count;
 
 		// RECOVERY_MODE ON || RECOVERY_MODE OFF
-		if (($engine->sess->ap_failed_login_count >= 4) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
+		if (($engine->sess->ap_failed_login_count >= 4) || ($engine->db->ap_failed_login_count >= $engine->db->ap_max_login_attempts))
 		{
 			$db->lock(AP_LOCK);
-			$engine->log(1, $engine->_t('LogAdminLoginLocked', $engine->config['language']));
+			$engine->log(1, $engine->_t('LogAdminLoginLocked', $engine->db->language));
 
 			$engine->sess->ap_failed_login_count = 0;
 		}
@@ -133,7 +133,7 @@ if (!isset($engine->sess->ap_created))
 	<head>
 	<title>Authorization Admin</title>
 	<meta name="robots" content="noindex, nofollow, noarchive" />
-	<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
+	<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
 	</head>
 	<body>
 <?php
@@ -166,7 +166,7 @@ if (time() - $engine->sess->ap_last_activity > 900) //1800
 {
 	// last request was more than 15 minutes ago
 	unset($engine->sess->ap_created);
-	$engine->log(1, $engine->_t('LogAdminLogout', $engine->config['language']));
+	$engine->log(1, $engine->_t('LogAdminLogout', $engine->db->language));
 
 	$engine->set_message($engine->_t('LoggedOutAuto'));
 	$engine->http->redirect('admin.php');
@@ -265,9 +265,9 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 <title>WackoWiki Management System <?php echo ': '.$_title; ?></title>
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta http-equiv="Content-Type" content="text/html; "/>
-<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/style/atom.css" rel="stylesheet" media="screen" />
-<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/style/wiki.css" rel="stylesheet" media="screen" />
-<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
+<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/atom.css" rel="stylesheet" media="screen" />
+<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" rel="stylesheet" media="screen" />
+<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
 
 </head>
 <body>
@@ -275,7 +275,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 	<div id="pane">
 		<div class="left"></div>
 		<div class="middle">
-			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']).'image/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
+			<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php"><img src="<?php echo rtrim($engine->db->base_url).'image/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
 		</div>
 		<div id="tools">
 			<span>
@@ -284,17 +284,17 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 				<?php $time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
 				echo "Time left: ".$time_left." minutes"; ?>
 				&nbsp;&nbsp;
-				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
+				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')); ?>
 				&nbsp;&nbsp;
 				<?php echo ($db->is_locked() ? '<strong>site closed</strong>' : 'site opened'); ?>
 				&nbsp;&nbsp;
-				version <?php echo $engine->config['wacko_version']; ?>
+				version <?php echo $engine->db->wacko_version; ?>
 			</span>
 		</div>
 		<br style="clear: right" />
 		<div id="sections">
-			<a href="<?php echo rtrim($engine->config['base_url']); ?>" title="open the home page, you do not quit administration">Home Page</a>
-			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php?action=logout" title="quit system administration">Log out</a>
+			<a href="<?php echo rtrim($engine->db->base_url); ?>" title="open the home page, you do not quit administration">Home Page</a>
+			<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php?action=logout" title="quit system administration">Log out</a>
 		</div>
 	</div>
 </header>

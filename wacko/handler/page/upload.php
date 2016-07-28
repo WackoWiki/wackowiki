@@ -31,9 +31,9 @@ if ($this->can_upload() === true)
 
 		$file = $this->db->load_single(
 			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
-			"FROM ".$this->config['table_prefix']."upload f ".
-				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->config['table_prefix']."page p ON (f.page_id = p.page_id) ".
+			"FROM ".$this->db->table_prefix."upload f ".
+				"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->db->table_prefix."page p ON (f.page_id = p.page_id) ".
 			"WHERE f.page_id = '". $page_id."' ".
 				"AND f.upload_id ='".(int)$_GET['file_id']."' ".
 			"LIMIT 1");
@@ -138,9 +138,9 @@ if ($this->can_upload() === true)
 
 		$file = $this->db->load_single(
 			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
-			"FROM ".$this->config['table_prefix']."upload f ".
-				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->config['table_prefix']."page p ON (f.page_id = p.page_id) ".
+			"FROM ".$this->db->table_prefix."upload f ".
+				"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->db->table_prefix."page p ON (f.page_id = p.page_id) ".
 			"WHERE f.page_id = '".$page_id."' ".
 				"AND f.upload_id ='".(int)$_GET['file_id']."' ".
 			"LIMIT 1");
@@ -231,8 +231,8 @@ if ($this->can_upload() === true)
 
 			$file = $this->db->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
-				"FROM ".$this->config['table_prefix']."upload f ".
-					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+				"FROM ".$this->db->table_prefix."upload f ".
+					"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".$page_id."' ".
 					"AND f.upload_id ='".(int)$_POST['file_id']."' ".
 				"LIMIT 1");
@@ -246,12 +246,12 @@ if ($this->can_upload() === true)
 				{
 					// 2. remove from DB
 					$this->db->sql_query(
-						"DELETE FROM ".$this->config['table_prefix']."upload ".
+						"DELETE FROM ".$this->db->table_prefix."upload ".
 						"WHERE upload_id = '".$file['upload_id']."'" );
 
 					// update user uploads count
 					$this->db->sql_query(
-						"UPDATE {$this->config['user_table']} SET ".
+						"UPDATE {$this->db->user_table} SET ".
 							"total_uploads = total_uploads - 1 ".
 						"WHERE user_id = '".$file['user_id']."' ".
 						"LIMIT 1");
@@ -279,7 +279,7 @@ if ($this->can_upload() === true)
 					}
 
 					// log event
-					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->_t('LogRemovedFile', $this->config['language']))));
+					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->_t('LogRemovedFile', $this->db->language))));
 				}
 				else
 				{
@@ -305,8 +305,8 @@ if ($this->can_upload() === true)
 
 			$file = $this->db->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
-				"FROM ".$this->config['table_prefix']."upload f ".
-					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+				"FROM ".$this->db->table_prefix."upload f ".
+					"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".$page_id."' ".
 					"AND f.upload_id ='".(int)$_POST['file_id']."' ".
 				"LIMIT 1");
@@ -328,7 +328,7 @@ if ($this->can_upload() === true)
 
 					// 2. update file metadata
 					$this->db->sql_query(
-						"UPDATE ".$this->config['table_prefix']."upload SET ".
+						"UPDATE ".$this->db->table_prefix."upload SET ".
 							"upload_lang		= ".$this->db->q($this->page['page_lang']).", ".
 							"file_description	= ".$this->db->q($description)." ".
 						"WHERE upload_id = '". $file['upload_id']."' ".
@@ -342,7 +342,7 @@ if ($this->can_upload() === true)
 					}
 
 					// log event
-					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->_t('LogUpdatedFileMeta', $this->config['language']))));
+					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->_t('LogUpdatedFileMeta', $this->db->language))));
 				}
 				else
 				{
@@ -361,23 +361,23 @@ if ($this->can_upload() === true)
 			// TODO: Set user used_quota in user table (?)
 			$user_files	= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_user_quota ".
-				"FROM ".$this->config['table_prefix']."upload ".
+				"FROM ".$this->db->table_prefix."upload ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 
 			// TODO: Set used_quota in config table (?)
 			$files		= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_quota ".
-				"FROM ".$this->config['table_prefix']."upload ".
+				"FROM ".$this->db->table_prefix."upload ".
 				"LIMIT 1");
 
 			// Checks
 
 			// 1. upload quota
-			if ( (!$this->config['upload_quota_per_user']
-					|| ($user_files['used_user_quota'] < $this->config['upload_quota_per_user']))
-				 && (!$this->config['upload_quota']
-					|| ($files['used_quota'] < $this->config['upload_quota'])) )
+			if ( (!$this->db->upload_quota_per_user
+					|| ($user_files['used_user_quota'] < $this->db->upload_quota_per_user))
+				 && (!$this->db->upload_quota
+					|| ($files['used_quota'] < $this->db->upload_quota)) )
 			{
 				if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
 				{
@@ -388,7 +388,7 @@ if ($this->can_upload() === true)
 
 					// 3. extensions
 					$ext	= strtolower($ext);
-					$banned	= explode('|', $this->config['upload_banned_exts']);
+					$banned	= explode('|', $this->db->upload_banned_exts);
 
 					if (in_array($ext, $banned))
 					{
@@ -448,7 +448,7 @@ if ($this->can_upload() === true)
 						$file_size		= $_FILES['file']['size'];
 
 						// 1.6. check filesize, if asked
-						$max_filesize	= $this->config['upload_max_size'];
+						$max_filesize	= $this->db->upload_max_size;
 
 						if (isset($_POST['maxsize']))
 						{
@@ -471,7 +471,7 @@ if ($this->can_upload() === true)
 								$size	= @getimagesize($src);
 							}
 
-							if ($this->config['upload_images_only'])
+							if ($this->db->upload_images_only)
 							{
 								if ($size[0] == 0)
 								{
@@ -512,7 +512,7 @@ if ($this->can_upload() === true)
 
 								// 5. insert line into DB
 								$this->db->sql_query(
-									"INSERT INTO ".$this->config['table_prefix']."upload SET ".
+									"INSERT INTO ".$this->db->table_prefix."upload SET ".
 										"page_id			= '".($is_global ? "0" : $this->page['page_id'])."', ".
 										"user_id			= '".$user['user_id']."',".
 										"file_name			= ".$this->db->q($small_name).", ".
@@ -526,7 +526,7 @@ if ($this->can_upload() === true)
 
 								// update user uploads count
 								$this->db->sql_query(
-									"UPDATE {$this->config['user_table']} SET ".
+									"UPDATE {$this->db->user_table} SET ".
 										"total_uploads = total_uploads + 1 ".
 									"WHERE user_id = '".$user['user_id']."' ".
 									"LIMIT 1");
@@ -538,11 +538,11 @@ if ($this->can_upload() === true)
 								// log event
 								if ($is_global)
 								{
-									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, $this->_t('LogFileUploadedGlobal', $this->config['language']))));
+									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, $this->_t('LogFileUploadedGlobal', $this->db->language))));
 								}
 								else
 								{
-									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->_t('LogFileUploadedLocal', $this->config['language'])))));
+									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->_t('LogFileUploadedLocal', $this->db->language)))));
 								}
 								?>
 		<br />
@@ -602,16 +602,16 @@ if ($this->can_upload() === true)
 			}
 			else
 			{
-				if ($this->config['upload_quota_per_user'] > 0)
+				if ($this->db->upload_quota_per_user > 0)
 				{
 					$error = $this->_t('UploadMaxFileQuota').'. <br />'.
-							 'Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->config['upload_quota_per_user']) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota_per_user']), true, true, true);
+							 'Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->db->upload_quota_per_user) * 100), 2).'%) of '.$this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
 				}
 
-				if ($this->config['upload_quota'] > 0)
+				if ($this->db->upload_quota > 0)
 				{
 					$error .= '<br />'.$this->_t('UploadMaxFileQuota').'. <br />'.
-							  'Storage in use '.$this->binary_multiples($files['used_quota'], false, true, true).' ('.round(($files['used_quota']/($this->config['upload_quota']) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota']), true, true, true);
+							  'Storage in use '.$this->binary_multiples($files['used_quota'], false, true, true).' ('.round(($files['used_quota']/($this->db->upload_quota) * 100), 2).'%) of '.$this->binary_multiples(($this->db->upload_quota), true, true, true);
 				}
 			}
 		}

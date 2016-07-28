@@ -16,7 +16,7 @@ if (!defined('IN_WACKO'))
 $_pages = '';
 
 // make sure that we're executing inside the forum cluster
-if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
+if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 {
 	$this->forum = false;
 
@@ -40,14 +40,14 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	// make query
 	$sql =	"SELECT p.page_id, p.tag, p.title, p.description, p.page_lang ".
-			"FROM {$this->config['table_prefix']}page AS p, ".
-				"{$this->config['table_prefix']}acl AS a ".
+			"FROM {$this->db->table_prefix}page AS p, ".
+				"{$this->db->table_prefix}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				"AND a.privilege = 'comment' AND a.list = '' ";
 
 	if (!isset($pages))
 	{
-		$sql .= "AND p.tag LIKE " . $this->db->q($this->config['forum_cluster'] . '/%') . " ";
+		$sql .= "AND p.tag LIKE " . $this->db->q($this->db->forum_cluster . '/%') . " ";
 	}
 	else
 	{
@@ -86,23 +86,23 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			// count total topics
 			$topics = $this->db->load_single(
 				"SELECT count(a.page_id) as total ".
-				"FROM {$this->config['table_prefix']}page a ".
+				"FROM {$this->db->table_prefix}page a ".
 				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " ".
 					"AND a.deleted <> '1' ", true);
 
 			// count total posts
 			$posts = $this->db->load_single(
 				"SELECT sum(a.comments) as total ".
-				"FROM {$this->config['table_prefix']}page a ".
+				"FROM {$this->db->table_prefix}page a ".
 				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " ".
 					"AND a.deleted <> '1' ", true);
 
 			// load latest comment
 			$comments = $this->db->load_all(
 				"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name ".
-				"FROM {$this->config['table_prefix']}page a ".
-					"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
-					"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
+				"FROM {$this->db->table_prefix}page a ".
+					"LEFT JOIN ".$this->db->table_prefix."user u ON (a.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
 				"WHERE b.tag LIKE ".$this->db->q($forum['tag'] . '/%')." ".
 					"OR a.tag LIKE ".$this->db->q($forum['tag'] . '/%')." ".
 					"AND a.deleted <> '1' ".
@@ -110,7 +110,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			foreach ($comments as $_comment)
 			{
-				if ($this->config['hide_locked'])
+				if ($this->db->hide_locked)
 				{
 					if ($this->has_access('read', $_comment['page_id']))
 					{
@@ -141,7 +141,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			echo '<tr class="lined">'.
 					'<td style="width:60%; vertical-align:top;">'.
 						( $this->has_access('read', $forum['page_id'], GUEST) === false
-							? '<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" class="btn-locked"/>'
+							? '<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" class="btn-locked"/>'
 							: '' ).
 						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
 							? '<strong class="cite" title="'.$this->_t('ForumNewPosts').'">[updated]</strong> '
@@ -199,7 +199,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
 	}
 
-	echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br />'."\n";
+	echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br />'."\n";
 }
 
 ?>

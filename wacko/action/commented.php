@@ -18,10 +18,10 @@ if (!function_exists('load_commented'))
 		// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
 		if ($ids = $engine->db->load_all(
 			"SELECT a.page_id ".
-			"FROM ".$engine->config['table_prefix']."page a ".
-				"LEFT JOIN ".$engine->config['table_prefix']."page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
+			"FROM ".$engine->db->table_prefix."page a ".
+				"LEFT JOIN ".$engine->db->table_prefix."page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
 			($for
-				?	"INNER JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				?	"INNER JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
 				:	"").
 			"WHERE ".
 			($for
@@ -51,10 +51,10 @@ if (!function_exists('load_commented'))
 					// load complete comments
 					$comments = $engine->db->load_all(
 						"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
-						"FROM ".$engine->config['table_prefix']."page a ".
-							"INNER JOIN ".$engine->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
-							"LEFT JOIN ".$engine->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
-							"LEFT JOIN ".$engine->config['table_prefix']."user o ON (a.owner_id = o.user_id) ".
+						"FROM ".$engine->db->table_prefix."page a ".
+							"INNER JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
+							"LEFT JOIN ".$engine->db->table_prefix."user u ON (a.user_id = u.user_id) ".
+							"LEFT JOIN ".$engine->db->table_prefix."user o ON (a.owner_id = o.user_id) ".
 						"WHERE a.page_id IN ( ".$_ids." ) ".
 						"ORDER BY comment_time DESC ".
 						"LIMIT {$pagination['offset']}, {$limit}");
@@ -94,7 +94,7 @@ if ($this->user_allowed_comments())
 
 			if ($root == '' && !(int)$noxml)
 			{
-				echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
+				echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
 			}
 
 			$this->print_pagination($pagination);
@@ -104,7 +104,7 @@ if ($this->user_allowed_comments())
 			$curday = '';
 			foreach ($pages as $page)
 			{
-				if ($this->config['hide_locked'])
+				if ($this->db->hide_locked)
 				{
 					$access = $this->has_access('read', $page['comment_on_id']);
 				}

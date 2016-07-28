@@ -14,7 +14,7 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 	// count previous comments
 	$count = $this->db->load_single(
 		"SELECT COUNT(tag) AS n ".
-		"FROM {$this->config['table_prefix']}page ".
+		"FROM {$this->db->table_prefix}page ".
 		"WHERE comment_on_id = '".$this->page['comment_on_id']."' ".
 			"AND created <= ".$this->db->q($this->page['created'])." ".
 			"AND deleted <> '1' ".
@@ -22,7 +22,7 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 		"LIMIT 1", true);
 
 	// determine comments page number where this comment is located
-	$p = ceil($count['n'] / $this->config['comments_count']);
+	$p = ceil($count['n'] / $this->db->comments_count);
 
 	// forcibly open page
 	$this->http->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
@@ -119,7 +119,7 @@ if ($this->has_access('read'))
 		if ($this->get_user_id() != $this->page['owner_id'])
 		{
 			$this->db->sql_query(
-				"UPDATE ".$this->config['table_prefix']."page SET ".
+				"UPDATE ".$this->db->table_prefix."page SET ".
 					"hits = hits + 1 ".
 				"WHERE page_id = '".$this->page['page_id']."'");
 		}
@@ -131,7 +131,7 @@ if ($this->has_access('read'))
 		if ($user && $this->page['latest'] != 0 && !$noid_protect)
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->config['table_prefix']}watch SET ".
+				"UPDATE {$this->db->table_prefix}watch SET ".
 					"pending = '0' ".
 				"WHERE page_id = '".$this->page['page_id']."' ".
 					"AND user_id = '".$user['user_id']."'");
@@ -141,13 +141,13 @@ if ($this->has_access('read'))
 
 		// recompile if necessary
 		if (($this->page['body_r'] == '')
-			|| (($this->page['body_toc'] == '') && $this->config['paragrafica']))
+			|| (($this->page['body_toc'] == '') && $this->db->paragrafica))
 		{
 			// build html body
 			$this->page['body_r'] = $this->format($this->page['body'], 'wacko');
 
 			// build toc
-			if ($this->config['paragrafica'])
+			if ($this->db->paragrafica)
 			{
 				$this->page['body_r']	= $this->format($this->page['body_r'], 'paragrafica');
 				$this->page['body_toc']	= $this->body_toc;
@@ -157,7 +157,7 @@ if ($this->has_access('read'))
 			if ($this->page['latest'] != 0)
 			{
 				$this->db->sql_query(
-					"UPDATE ".$this->config['table_prefix']."page SET ".
+					"UPDATE ".$this->db->table_prefix."page SET ".
 						"body_r		= ".$this->db->q($this->page['body_r']).", ".
 						"body_toc	= ".$this->db->q($this->page['body_toc'])." ".
 					"WHERE page_id = '".$this->page['page_id']."' ".
@@ -215,8 +215,8 @@ else
 
 // show category tags
 if ($this->forum === true
-	|| ($this->has_access('read') && $this->page && $this->config['footer_tags'] == 1
-	|| ($this->config['footer_tags'] == 2 && $this->get_user())))
+	|| ($this->has_access('read') && $this->page && $this->db->footer_tags == 1
+	|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
 	if ($categories = $this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1))
 	{
@@ -248,23 +248,23 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 	}
 
 	// places footer inside, to include the footer in the themes footer
-	// set $this->config['footer_inside'] = 0; in theme/lang/wacko.all.php
-	if (!isset($this->config['footer_inside']))
+	// set $this->db->footer_inside = 0; in theme/lang/wacko.all.php
+	if (!isset($this->db->footer_inside))
 	{
 		// files code starts
-		if ($this->config['footer_files'] == 1 || ($this->config['footer_files'] == 2 && $this->get_user()))
+		if ($this->db->footer_files == 1 || ($this->db->footer_files == 2 && $this->get_user()))
 		{
 			require_once Ut::join_path(HANDLER_DIR, 'page/_files.php');
 		}
 
 		// comments form output  starts
-		if (($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()) ) && $this->user_allowed_comments())
+		if (($this->db->footer_comments == 1 || ($this->db->footer_comments == 2 && $this->get_user()) ) && $this->user_allowed_comments())
 		{
 			require_once Ut::join_path(HANDLER_DIR, 'page/_comments.php');
 		}
 
 		// rating form output begins
-		if ($this->has_access('read') && $this->page && $this->config['footer_rating'] == 1 || ($this->config['footer_rating'] == 2 && $this->get_user()))
+		if ($this->has_access('read') && $this->page && $this->db->footer_rating == 1 || ($this->db->footer_rating == 2 && $this->get_user()))
 		{
 			require_once Ut::join_path(HANDLER_DIR, 'page/_rating.php');
 		}

@@ -40,7 +40,7 @@ if (!isset($legend)) $legend = '';
 // collect pages
 if ($pages = $this->db->load_all(
 	"SELECT page_id, tag, supertag, title ".
-	"FROM {$this->config['table_prefix']}page ".
+	"FROM {$this->db->table_prefix}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND tag LIKE " . $this->db->q($_root . '/%') . " ".
 		"AND deleted <> '1' ".
@@ -77,7 +77,7 @@ if ($pages = $this->db->load_all(
 		// cache links
 		if ($links = $this->db->load_all(
 			"SELECT {$this->page_meta} ".
-			"FROM {$this->config['table_prefix']}page ".
+			"FROM {$this->db->table_prefix}page ".
 			"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", true))
 		{
 			foreach ($links as $link)
@@ -91,7 +91,7 @@ if ($pages = $this->db->load_all(
 
 		// cache acls
 		if ($acls = $this->db->load_all(
-			"SELECT page_id, privilege, list FROM {$this->config['table_prefix']}acl ".
+			"SELECT page_id, privilege, list FROM {$this->db->table_prefix}acl ".
 			"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) ".
 				"AND privilege = 'read'", true))
 		{
@@ -147,7 +147,7 @@ if ($pages = $this->db->load_all(
 			{
 				// check read privilege and current page tag
 				if ($page['tag'] == $root
-					|| ($this->config['hide_locked'] && !$this->has_access('read', $page['page_id'])))
+					|| ($this->db->hide_locked && !$this->has_access('read', $page['page_id'])))
 				{
 					continue;
 				}

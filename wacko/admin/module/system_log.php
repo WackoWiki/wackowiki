@@ -33,7 +33,7 @@ function admin_system_log(&$engine, &$module)
 
 	if (isset($_POST['action']) && $_POST['action'] == 'purge_log')
 	{
-		$sql = "TRUNCATE {$engine->config['table_prefix']}log";
+		$sql = "TRUNCATE {$engine->db->table_prefix}log";
 		$engine->db->sql_query($sql);
 
 		// queries
@@ -109,14 +109,14 @@ function admin_system_log(&$engine, &$module)
 	$limit = 100;
 
 	// set default level
-	if (!isset($level)) $level = $engine->config['log_default_show'];
+	if (!isset($level)) $level = $engine->db->log_default_show;
 	if (!isset($where)) $where = '';
 	if (!isset($order)) $order = '';
 
 	// collecting data
 	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n ".
-		"FROM {$engine->config['table_prefix']}log l ".
+		"FROM {$engine->db->table_prefix}log l ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
 
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
@@ -126,8 +126,8 @@ function admin_system_log(&$engine, &$module)
 
 	$log = $engine->db->load_all(
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ".
-		"FROM {$engine->config['table_prefix']}log l ".
-			"LEFT JOIN {$engine->config['table_prefix']}user u ON (l.user_id = u.user_id) ".
+		"FROM {$engine->db->table_prefix}log l ".
+			"LEFT JOIN {$engine->db->table_prefix}user u ON (l.user_id = u.user_id) ".
 		( $where ? $where : 'WHERE l.level <= '.(int)$level.' ' ).
 		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");

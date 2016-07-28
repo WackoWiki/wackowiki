@@ -45,20 +45,20 @@ require_once 'lib/phpthumb/GD.php';
 ?>
 
 <!-- Add jQuery library -->
-<script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery-1.9.0.min.js"></script>
+<script src="<?php echo $this->db->base_url;?>js/fancybox/jquery-1.9.0.min.js"></script>
 <!-- Add mousewheel plugin (this is optional) -->
-<script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+<script src="<?php echo $this->db->base_url;?>js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
 <!-- Add fancyBox -->
-<script src="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox.pack.js"></script>
-<link rel="stylesheet" href="<?php echo $this->config['base_url'];?>js/fancybox/jquery.fancybox.css?v=2.1.4" media="screen" />
+<script src="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.css?v=2.1.4" media="screen" />
 
 <!-- Add Button helper (this is optional) -->
-<link rel="stylesheet" href="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
-<script src="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<link rel="stylesheet" href="<?php echo $this->db->base_url;?>js/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+<script src="<?php echo $this->db->base_url;?>js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
 
 <!-- Add Thumbnail helper (this is optional) -->
-<link rel="stylesheet" href="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
-<script src="<?php echo $this->config['base_url'];?>js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<link rel="stylesheet" href="<?php echo $this->db->base_url;?>js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+<script src="<?php echo $this->db->base_url;?>js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
 
 <script>
 
@@ -87,7 +87,7 @@ $thumb_dir		= 'files/thumbs';
 $small_id		= 'tn_';
 $imgclass		= '';
 $img_spacer		= '';
-$height			= 150; // $this->config['img_max_thumb_width']
+$height			= 150; // $this->db->img_max_thumb_width
 
 if (!isset($page))		$page		= '';
 if (!isset($title))		/*$title="Gallery";*/ $nomark = 1;
@@ -180,8 +180,8 @@ if ($can_view)
 	// TODO: we want only image files -> AND f.picture_w <> '0'
 	$count = $this->db->load_all(
 		"SELECT f.upload_id ".
-		"FROM ".$this->config['table_prefix']."upload f ".
-			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+		"FROM ".$this->db->table_prefix."upload f ".
+			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
 			"AND f.picture_w <> '0' ".
 		($owner
@@ -194,8 +194,8 @@ if ($can_view)
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
-		"FROM ".$this->config['table_prefix']."upload f ".
-			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+		"FROM ".$this->db->table_prefix."upload f ".
+			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
 			"AND f.picture_w <> '0' ".
 		($owner
@@ -263,7 +263,7 @@ if ($can_view)
 				$url			= $this->href('file', $source_page_tag, 'get='.$file_name);
 			}
 
-			$img	= '<img src="'.$this->config['base_url'].$tnb_path.'" '.($file['file_description'] ? 'alt="'.$file_description.'" title="'.$file_description.'"' : '').' width="'.$file_width.'" height="'.$file_height.'" '.($imgclass ? 'class="'.$imgclass.'"' : '').'/>';
+			$img	= '<img src="'.$this->db->base_url.$tnb_path.'" '.($file['file_description'] ? 'alt="'.$file_description.'" title="'.$file_description.'"' : '').' width="'.$file_width.'" height="'.$file_height.'" '.($imgclass ? 'class="'.$imgclass.'"' : '').'/>';
 
 			$caption = '<br><figcaption>'.
 					'<span>'.$file_description.'</span> '.'<br />'.
@@ -410,7 +410,7 @@ if ($can_view)
 
 					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the upload table, remember we can have many derived versions from the original image
 					/* $this->db->sql_query(
-						"INSERT INTO ".$this->config['table_prefix']."upload SET ".
+						"INSERT INTO ".$this->db->table_prefix."upload SET ".
 						"user_id			= '".(int)$file['user_id']."', ".
 						"page_id			= '".(int)$file_page['page_id']."', ".
 						"file_name			= ".$this->db->q($small_id.$file_name).", ".

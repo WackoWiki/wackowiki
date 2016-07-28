@@ -15,7 +15,7 @@ $cur_char		= '';
 if ($user_id = $this->get_user_id())
 {
 	$limit		= $this->get_list_count($max);
-	$prefix		= $this->config['table_prefix'];
+	$prefix		= $this->db->table_prefix;
 
 	if ((isset($_GET['bydate']) && $_GET['bydate'] == 1) || $bydate == 1)
 	{

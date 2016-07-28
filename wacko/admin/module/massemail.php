@@ -52,10 +52,10 @@ $mail_body = '';
 				u.email_confirm,
 				us.allow_massemail
 			FROM
-				{$engine->config['table_prefix']}user u
-					INNER JOIN {$engine->config['table_prefix']}usergroup_member gm
+				{$engine->db->table_prefix}user u
+					INNER JOIN {$engine->db->table_prefix}usergroup_member gm
 						ON u.user_id = gm.user_id
-					INNER JOIN {$engine->config['table_prefix']}user_setting us
+					INNER JOIN {$engine->db->table_prefix}user_setting us
 						ON u.user_id = us.user_id
 			WHERE
 				gm.group_id = '{$group_id}'
@@ -64,17 +64,17 @@ $mail_body = '';
 
 		foreach ($members as $user)
 		{
-			if ($engine->config['enable_email'] == true && $engine->config['enable_email_notification'] == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
+			if ($engine->db->enable_email == true && $engine->db->enable_email_notification == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
 			{
-				$subject	= '['.$engine->config['site_name'].'] '.$mail_subject;
+				$subject	= '['.$engine->db->site_name.'] '.$mail_subject;
 				$body		= $engine->_t('EmailHello').' '.$user['user_name'].",\n\n".
 
 							$mail_body."\n\n\n".
 
 							$engine->_t('EmailDoNotReply')."\n\n".
 							$engine->_t('EmailGoodbye')."\n".
-							$engine->config['site_name']."\n".
-							$engine->config['base_url'];
+							$engine->db->site_name."\n".
+							$engine->db->base_url;
 
 				$engine->send_mail($user['email'], $subject, $body);
 			}
@@ -88,7 +88,7 @@ $mail_body = '';
 
 	$available_groups = $engine->db->load_all(
 			"SELECT group_id, group_name ".
-			"FROM {$engine->config['table_prefix']}usergroup ".
+			"FROM {$engine->db->table_prefix}usergroup ".
 			"WHERE active = '1' ".
 			"ORDER BY BINARY group_name", true);
 
@@ -165,7 +165,7 @@ $mail_body = '';
 
 						foreach ($langs as $lang)
 						{
-							echo '<option value="'.$lang.'" '.($engine->config['language'] == $lang ? 'selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.')</option>';
+							echo '<option value="'.$lang.'" '.($engine->db->language == $lang ? 'selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.')</option>';
 						}
 ?>
 					</select>

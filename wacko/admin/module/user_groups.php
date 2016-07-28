@@ -61,7 +61,7 @@ function admin_user_groups(&$engine, &$module)
 			$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
 			$usergroup = $engine->db->load_single(
 				"SELECT group_name ".
-				"FROM {$engine->config['table_prefix']}usergroup ".
+				"FROM {$engine->db->table_prefix}usergroup ".
 				"WHERE group_id = '".(int)$group_id."' ".
 				"LIMIT 1");
 
@@ -69,7 +69,7 @@ function admin_user_groups(&$engine, &$module)
 			if (isset($_POST['add_member']) && isset($_POST['new_member_id']))
 			{
 				$engine->db->sql_query(
-					"INSERT INTO {$engine->config['table_prefix']}usergroup_member SET ".
+					"INSERT INTO {$engine->db->table_prefix}usergroup_member SET ".
 						"group_id	= '".(int)$_POST['group_id']."', ".
 						"user_id	= '".(int)$_POST['new_member_id']."'");
 
@@ -83,7 +83,7 @@ function admin_user_groups(&$engine, &$module)
 			else if (isset($_POST['remove_member']) && isset($_POST['member_id']) && isset($_POST['group_id']))
 			{
 				$engine->db->sql_query(
-					"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
+					"DELETE FROM {$engine->db->table_prefix}usergroup_member ".
 					"WHERE group_id = '".(int)$_POST['group_id']."' ".
 						"AND user_id = '".(int)$_POST['member_id']."'");
 
@@ -100,14 +100,14 @@ function admin_user_groups(&$engine, &$module)
 			if (isset($_POST['add_member']))
 			{
 				$subqery_members = "SELECT m.user_id ".
-					"FROM {$engine->config['table_prefix']}usergroup g ".
-						"INNER JOIN {$engine->config['table_prefix']}usergroup_member m ON (g.group_id = m.group_id) ".
-						"INNER JOIN {$engine->config['table_prefix']}user u ON (m.user_id = u.user_id) ".
+					"FROM {$engine->db->table_prefix}usergroup g ".
+						"INNER JOIN {$engine->db->table_prefix}usergroup_member m ON (g.group_id = m.group_id) ".
+						"INNER JOIN {$engine->db->table_prefix}user u ON (m.user_id = u.user_id) ".
 					"WHERE g.group_id = '".(int)$group_id."' ";
 
 				$available_users = $engine->db->load_all(
 					"SELECT user_id, user_name ".
-					"FROM ".$engine->config['user_table']." ".
+					"FROM ".$engine->db->user_table." ".
 					"WHERE user_id NOT IN ( ".$subqery_members." ) ".
 						"AND account_type = '0' ".
 					"ORDER BY BINARY user_name");
@@ -155,7 +155,7 @@ function admin_user_groups(&$engine, &$module)
 			{
 				if ($member = $engine->db->load_single(
 					"SELECT user_name ".
-					"FROM {$engine->config['table_prefix']}user ".
+					"FROM {$engine->db->table_prefix}user ".
 					"WHERE user_id = '".(int)$_POST['change_member']."' ".
 					"LIMIT 1"))
 				{
@@ -185,7 +185,7 @@ function admin_user_groups(&$engine, &$module)
 		{
 			// do we have identical names?
 			if ($engine->db->load_single(
-			"SELECT group_id FROM {$engine->config['table_prefix']}usergroup ".
+			"SELECT group_id FROM {$engine->db->table_prefix}usergroup ".
 			"WHERE group_name = ".$engine->db->q($_POST['new_group_name'])." ".
 			"LIMIT 1"))
 			{
@@ -196,7 +196,7 @@ function admin_user_groups(&$engine, &$module)
 			else
 			{
 				$engine->db->sql_query(
-					"INSERT INTO {$engine->config['table_prefix']}usergroup SET ".
+					"INSERT INTO {$engine->db->table_prefix}usergroup SET ".
 						"created		= UTC_TIMESTAMP(), ".
 						"description	= ".$engine->db->q($_POST['description']).", ".
 						"moderator_id	= '".(int)$_POST['moderator_id']."', ".
@@ -215,7 +215,7 @@ function admin_user_groups(&$engine, &$module)
 		{
 			// do we have identical names?
 			if ($engine->db->load_single(
-			"SELECT group_id FROM {$engine->config['table_prefix']}usergroup ".
+			"SELECT group_id FROM {$engine->db->table_prefix}usergroup ".
 			"WHERE group_name = ".$engine->db->q($_POST['new_group_name'])." AND group_id <> '".(int)$_POST['group_id']."' ".
 			"LIMIT 1"))
 			{
@@ -226,7 +226,7 @@ function admin_user_groups(&$engine, &$module)
 			else
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->config['table_prefix']}usergroup SET ".
+					"UPDATE {$engine->db->table_prefix}usergroup SET ".
 						"group_name		= ".$engine->db->q($_POST['new_group_name']).", ".
 						"description	= ".$engine->db->q($_POST['new_description']).", ".
 						"moderator_id	= '".(int)$_POST['moderator_id']."', ".
@@ -244,15 +244,15 @@ function admin_user_groups(&$engine, &$module)
 		{
 			$usergroup = $engine->db->load_single(
 				"SELECT group_name
-				FROM {$engine->config['table_prefix']}usergroup
+				FROM {$engine->db->table_prefix}usergroup
 				WHERE group_id = '".(int)$_POST['group_id']."'
 				LIMIT 1");
 
 			$engine->db->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}usergroup ".
+				"DELETE FROM {$engine->db->table_prefix}usergroup ".
 				"WHERE group_id = '".(int)$_POST['group_id']."'");
 			$engine->db->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
+				"DELETE FROM {$engine->db->table_prefix}usergroup_member ".
 				"WHERE group_id = '".(int)$_POST['group_id']."'");
 
 			$engine->config->invalidate_config_cache();
@@ -342,7 +342,7 @@ function admin_user_groups(&$engine, &$module)
 		{
 			if ($usergroup = $engine->db->load_single(
 				"SELECT group_name, description, moderator_id, open, active
-				FROM {$engine->config['table_prefix']}usergroup
+				FROM {$engine->db->table_prefix}usergroup
 				WHERE group_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
@@ -407,7 +407,7 @@ function admin_user_groups(&$engine, &$module)
 		{
 			if ($usergroup = $engine->db->load_single(
 				"SELECT group_name
-				FROM {$engine->config['table_prefix']}usergroup
+				FROM {$engine->db->table_prefix}usergroup
 				WHERE group_id = '".(int)$_POST['change']."'
 				LIMIT 1"))
 			{
@@ -444,7 +444,7 @@ function admin_user_groups(&$engine, &$module)
 		$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
 		$usergroup = $engine->db->load_single(
 			"SELECT group_id, moderator_id, group_name ".
-			"FROM {$engine->config['table_prefix']}usergroup ".
+			"FROM {$engine->db->table_prefix}usergroup ".
 			"WHERE group_id = '".(int)$group_id."' ".
 			"LIMIT 1");
 
@@ -452,9 +452,9 @@ function admin_user_groups(&$engine, &$module)
 
 		$members = $engine->db->load_all(
 			"SELECT m.user_id, user_name ".
-			"FROM {$engine->config['table_prefix']}usergroup g ".
-				"INNER JOIN {$engine->config['table_prefix']}usergroup_member m ON (g.group_id = m.group_id) ".
-				"INNER JOIN {$engine->config['table_prefix']}user u ON (m.user_id = u.user_id) ".
+			"FROM {$engine->db->table_prefix}usergroup g ".
+				"INNER JOIN {$engine->db->table_prefix}usergroup_member m ON (g.group_id = m.group_id) ".
+				"INNER JOIN {$engine->db->table_prefix}user u ON (m.user_id = u.user_id) ".
 			"WHERE g.group_id = '".(int)$group_id."' ");
 
 		echo $engine->form_open('get_group');
@@ -553,7 +553,7 @@ function admin_user_groups(&$engine, &$module)
 		// collecting data
 		$count = $engine->db->load_single(
 			"SELECT COUNT(group_name) AS n ".
-			"FROM {$engine->config['table_prefix']}usergroup ".
+			"FROM {$engine->db->table_prefix}usergroup ".
 			( $where ? $where : '' )
 			);
 
@@ -562,9 +562,9 @@ function admin_user_groups(&$engine, &$module)
 
 		$groups = $engine->db->load_all(
 			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name, COUNT(m.user_id) AS members ".
-			"FROM {$engine->config['table_prefix']}usergroup g ".
-				"LEFT JOIN {$engine->config['table_prefix']}user u ON (g.moderator_id = u.user_id) ".
-				"LEFT JOIN ".$engine->config['table_prefix']."usergroup_member m ON (m.group_id = g.group_id) ".
+			"FROM {$engine->db->table_prefix}usergroup g ".
+				"LEFT JOIN {$engine->db->table_prefix}user u ON (g.moderator_id = u.user_id) ".
+				"LEFT JOIN ".$engine->db->table_prefix."usergroup_member m ON (m.group_id = g.group_id) ".
 			($where ? $where : '').
 			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name ".
 			($order ? $order : 'ORDER BY group_id DESC ').
@@ -615,7 +615,7 @@ function admin_user_groups(&$engine, &$module)
 						'<td>'.$row['members'].'</td>'.
 						'<td>'.$row['open'].'</td>'.
 						'<td>'.$row['active'].'</td>'.
-						'<td><small>'.date($engine->config['date_precise_format'], strtotime($row['created'])).'</small></td>'.
+						'<td><small>'.date($engine->db->date_precise_format, strtotime($row['created'])).'</small></td>'.
 					'</tr>';
 			}
 		}

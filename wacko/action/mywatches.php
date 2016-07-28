@@ -20,7 +20,7 @@ if ($user_id = $this->get_user_id())
 	}
 
 	$limit		= $this->get_list_count($max);
-	$prefix		= $this->config['table_prefix'];
+	$prefix		= $this->db->table_prefix;
 
 	if (isset($_GET['unwatched']) && $_GET['unwatched'] == 1)
 	{
@@ -55,7 +55,7 @@ if ($user_id = $this->get_user_id())
 		{
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 				{
 					$first_char = strtoupper($page['pagetag'][0]);
 
@@ -76,7 +76,7 @@ if ($user_id = $this->get_user_id())
 					}
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list" class="watch-on">'.
-						'<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('SetWatch').'" alt="'.$this->_t('SetWatch').'"  />'.'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
+						'<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('SetWatch').'" alt="'.$this->_t('SetWatch').'"  />'.'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 
@@ -119,7 +119,7 @@ if ($user_id = $this->get_user_id())
 		{
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 				{
 					$first_char = strtoupper($page['tag'][0]);
 
@@ -140,7 +140,7 @@ if ($user_id = $this->get_user_id())
 					}
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list" class="watch-off">'.
-						'<img src="'.$this->config['theme_url'].'icon/spacer.png" title="'.$this->_t('RemoveWatch').'" alt="'.$this->_t('RemoveWatch').'" />'.'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
+						'<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('RemoveWatch').'" alt="'.$this->_t('RemoveWatch').'" />'.'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
 
 					$cnt++;
 				}

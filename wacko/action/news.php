@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // {{news [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
-if (!empty($this->config['news_cluster']))
+if (!empty($this->db->news_cluster))
 {
 	if (!isset($max))	$max = '';
 	if (isset($_GET['category']))
@@ -23,9 +23,9 @@ if (!empty($this->config['news_cluster']))
 	else				$limit = (int)$limit;
 
 	$pages				= '';
-	$prefix				= $this->config['table_prefix'];
-	$news_cluster		= $this->config['news_cluster'];
-	$news_levels		= $this->config['news_levels'];
+	$prefix				= $this->db->table_prefix;
+	$news_cluster		= $this->db->news_cluster;
+	$news_levels		= $this->db->news_levels;
 
 	// hide article H1 header
 	$this->hide_article_header = true;
@@ -195,13 +195,13 @@ if (!empty($this->config['news_cluster']))
 			$_category_title = '';
 		}
 
-		if ($this->page['tag'] == $this->config['news_cluster'])
+		if ($this->page['tag'] == $this->db->news_cluster)
 		{
 			$_title = $this->_t('News').$_category_title;
 		}
 		else
 		{
-			$_title = $this->compose_link_to_page($this->config['news_cluster'], '', $this->_t('News'), 0).$_category_title;
+			$_title = $this->compose_link_to_page($this->db->news_cluster, '', $this->_t('News'), 0).$_category_title;
 		}
 
 		echo "<h1>".$_title."</h1>";
@@ -210,7 +210,7 @@ if (!empty($this->config['news_cluster']))
 	// displaying XML icon
 	if (!(int)$noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->config['base_url'].'xml/news_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).'.xml"><img src="'.$this->config['theme_url'].'icon/spacer.png'.'" title="'.$this->_t('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
+		echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/news_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('RecentNewsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."\n";
 	}
 
 	// displaying articles

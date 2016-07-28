@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if ($this->config['footer_rating'] != 0 && ($this->config['footer_rating'] != 2 || $this->get_user()))
+if ($this->db->footer_rating != 0 && ($this->db->footer_rating != 2 || $this->get_user()))
 {
 	// registering local functions
 	// determine if user has rated a given page
@@ -54,7 +54,7 @@ else
 {
 	$results = $this->db->load_single(
 				"SELECT page_id, value, voters ".
-				"FROM {$this->config['table_prefix']}rating ".
+				"FROM {$this->db->table_prefix}rating ".
 				"WHERE page_id = {$this->page['page_id']} ".
 				"LIMIT 1");
 

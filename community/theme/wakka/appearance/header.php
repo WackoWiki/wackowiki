@@ -12,13 +12,13 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	<div id="header">
 		<div id="header-main">
 			<div id="header-top">
-			<strong><?php echo $this->config['site_name'] ?>: </strong><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?>
+			<strong><?php echo $this->db->site_name ?>: </strong><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?>
 		</div>
 		<div id="login">
 <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
-{ ?> <span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
+{ ?> <span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->db->users_page.'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
 echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
  | <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span>
 )</small>
@@ -41,7 +41,7 @@ else
 	echo '<div id="menu-user">';
 	echo "<ol>\n";
 	// Main page
-	echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+	echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
 	echo "<li>";
 
 	// menu
@@ -70,14 +70,14 @@ else
 		if (!in_array($this->page['page_id'], $this->get_menu_links()))
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-				.'"><img src="'. $this->config['theme_url']
+				.'"><img src="'. $this->db->theme_url
 				.'icon/bookmark1.png" alt="+" title="'.
 				$this->_t('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-				.'"><img src="'. $this->config['theme_url']
+				.'"><img src="'. $this->db->theme_url
 				.'icon/bookmark2.png" alt="-" title="'.
 				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
 		}

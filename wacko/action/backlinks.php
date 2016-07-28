@@ -22,7 +22,7 @@ if (($pages = $this->load_pages_linking_to($tag)))
 	{
 		if ($page['tag'])
 		{
-			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
 				// cache page_id for for has_access validation in link function
 				$this->page_id_cache[$page['tag']] = $page['page_id'];

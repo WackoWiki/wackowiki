@@ -34,8 +34,8 @@ $load_diff_page = function ($id)
 	{
 		return $this->db->load_single(
 			"SELECT r.page_id, r.revision_id, r.modified, r.body, r.page_lang, u.user_name ".
-			"FROM ".$this->config['table_prefix']."revision r ".
-				"LEFT JOIN ".$this->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
+			"FROM ".$this->db->table_prefix."revision r ".
+				"LEFT JOIN ".$this->db->table_prefix."user u ON (r.user_id = u.user_id) ".
 			"WHERE r.revision_id = '".(int)$id."' ".
 			"LIMIT 1");
 	}
@@ -43,8 +43,8 @@ $load_diff_page = function ($id)
 	{
 		return $this->db->load_single(
 			"SELECT p.page_id, 0 AS revision_id, p.modified, p.body, p.page_lang, u.user_name ".
-			"FROM ".$this->config['table_prefix']."page p ".
-				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+			"FROM ".$this->db->table_prefix."page p ".
+				"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 			"WHERE p.page_id = '".$this->get_page_id()."' ".
 			"LIMIT 1");
 	}
@@ -264,7 +264,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 	case 4:
 	case 5:
 	case 6:
-		$this->add_html_head('<link rel="stylesheet" href="' . $this->config['theme_url'] . 'css/diff.css" type="text/css"/>'); // STS
+		$this->add_html_head('<link rel="stylesheet" href="' . $this->db->theme_url . 'css/diff.css" type="text/css"/>'); // STS
 
 		// using nice lib/php-diff library..
 		$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));

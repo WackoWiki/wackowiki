@@ -66,5 +66,5 @@ if ($this->get_user())
 // comment this out for not showing website policy link at the bottom of your pages
 if ($this->db->policy_page)
 {
-	$tpl->policy_url = $this->href('', $this->config['policy_page']);
+	$tpl->policy_url = $this->href('', $this->db->policy_page);
 }

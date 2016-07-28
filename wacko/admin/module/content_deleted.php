@@ -31,15 +31,15 @@ function admin_content_deleted(&$engine, &$module)
 	{
 		$id = (int)$_GET['remove'];
 		$engine->db->sql_query(
-			"DELETE FROM {$engine->config['table_prefix']}revision ".
+			"DELETE FROM {$engine->db->table_prefix}revision ".
 			"WHERE page_id = '".$id."'");
 
 		$engine->db->sql_query(
-			"DELETE FROM {$engine->config['table_prefix']}page ".
+			"DELETE FROM {$engine->db->table_prefix}page ".
 			"WHERE page_id = '".$id."'");
 
 		$engine->db->sql_query(
-			"DELETE FROM {$engine->config['table_prefix']}upload ".
+			"DELETE FROM {$engine->db->table_prefix}upload ".
 			"WHERE page_id = '".$id."'");
 
 	}
@@ -81,14 +81,14 @@ function admin_content_deleted(&$engine, &$module)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br /><strong>'.date($engine->config['date_format'],strtotime($day)).":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br /><strong>'.date($engine->db->date_format, strtotime($day)).":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
 			// print entry
 			echo '<tr>'.
 					'<td class="lined" style="text-align:left">'.
-						'<small>'.date($engine->config['time_format_seconds'], strtotime($time)).' - '.
+						'<small>'.date($engine->db->time_format_seconds, strtotime($time)).' - '.
 						' [ <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->_t('RemoveButton').'</a> ]'.
 						' [ <a href="'.rawurldecode($engine->href()).'&amp;restore='.$page['page_id'].'">'.$engine->_t('RestoreButton').'</a> ]</small> '.
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0, $page['title']).

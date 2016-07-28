@@ -38,7 +38,7 @@ else
 
 // outputs bookmarks menu
 // main page
-// "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+// "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
 
 $max_items = $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
 $i = 0;
@@ -154,7 +154,7 @@ else
 	$into = 'droptab_tab';
 
 	// display more icon and text
-	//  '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->config['theme_url'].'icon/more.png" title="'.$this->_t('PageHandlerMoreTip').'" alt="'.$this->_t('PageHandlerMoreTip').'" /> '.$this->_t('PageHandlerMoreTip')."</a> \n";
+	//  '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->db->theme_url.'icon/more.png" title="'.$this->_t('PageHandlerMoreTip').'" alt="'.$this->_t('PageHandlerMoreTip').'" /> '.$this->_t('PageHandlerMoreTip')."</a> \n";
 	// only display 'more' text that shows handler list on hover
 
 	// print tab
@@ -177,7 +177,7 @@ else
 
 	// remove tab
 	if (($this->is_admin()
-			|| (!$this->config['remove_onlyadmins']
+			|| (!$this->db->remove_onlyadmins
 				&& ($this->forum ? $this->is_owner() && (int)$this->page['comments'] == 0 : $this->is_owner()))))
 	{
 		$echo_tab('remove', 'DeleteTip', 'DeleteText', 2, '', '');
@@ -226,7 +226,7 @@ else
 	}
 
 	// review tab
-	if (!$this->forum && $readable && $this->config['review'] && $this->is_reviewer())
+	if (!$this->forum && $readable && $this->db->review && $this->is_reviewer())
 	{
 		if ($this->page['reviewed'])
 		{

@@ -184,7 +184,7 @@ class WackoFormatter
 			// escaped text
 			"<!--escaped-->.*?<!--escaped-->|".
 			// escaped html <#...#>
-			($this->object->config['allow_rawhtml'] == 1
+			($this->object->db->allow_rawhtml == 1
 				? '\<\#.*?\#\>|'
 				: '').
 			// html comments
@@ -192,7 +192,7 @@ class WackoFormatter
 			//? (?...?)
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|".
 			// bracket links [[Tag Description]] or ((Tag Description))
-			($this->object->config['disable_bracketslinks'] == 1
+			($this->object->db->disable_bracketslinks == 1
 				? ''
 				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|".
 				  "\(\((\S+?)([ \t]+([^\n]+?))?\)\)|".
@@ -266,21 +266,21 @@ class WackoFormatter
 			// disabled WikiNames
 			"~([^ \t\n]+)|".
 			// tikiwiki links
-			($this->object->config['disable_tikilinks'] == 1
+			($this->object->db->disable_tikilinks == 1
 				? ''
 				: "\b(".$object->language['UPPER'].$object->language['LOWER'].$object->language['ALPHANUM']."*\.".$object->language['ALPHA'].$object->language['ALPHANUM']."+)\b|").
 			// wiki links (beside actions)
-			($this->object->config['disable_wikilinks'] == 1
+			($this->object->db->disable_wikilinks == 1
 				? ''
 				: "(~?)(?<=[^\.".$object->language['ALPHANUM_P']."]|^)(((\.\.|!)?\/)?".$object->language['UPPER'].$object->language['LOWER']."+".$object->language['UPPERNUM'].$object->language['ALPHANUM']."*)\b|").
 			// npj links
-			($this->object->config['disable_npjlinks'] == 1
+			($this->object->db->disable_npjlinks == 1
 				? ''
 				: "(~?)".$object->language['ALPHANUM']."+\@".$object->language['ALPHA']."*(?!".$object->language['ALPHANUM']."*\.".$object->language['ALPHANUM']."+)(\:".$object->language['ALPHANUM']."*)?|".$object->language['ALPHANUM']."+\:\:".$object->language['ALPHANUM']."+|").
 			"\n)/sm";
 
 		$this->NOTLONGREGEXP =
-			"/(".($this->object->config['disable_formatters'] == 1
+			"/(".($this->object->db->disable_formatters == 1
 				? ''
 				: "\%\%.*?\%\%|").
 			"~([^ \t\n]+)|".
@@ -501,7 +501,7 @@ class WackoFormatter
 		// escaped html
 		else if (preg_match('/^\<\#(.*)\#\>$/s', $thing, $matches))
 		{
-			if ($this->object->config['disable_safehtml'])
+			if ($this->object->db->disable_safehtml)
 			{
 				return '<!--notypo-->'.$matches[1].'<!--/notypo-->';
 			}
@@ -719,7 +719,7 @@ class WackoFormatter
 		{
 			$this->br = 1;
 
-			if (isset($matches[3]) && $color = (isset($this->object->config['allow_x11colors']) && $this->object->config['allow_x11colors'] == 1 ? (isset($this->x11_colors[$matches[3]]) ? $this->x11_colors[$matches[3]] : '') : isset($this->colors[$matches[3]]) ? $this->colors[$matches[3]] : ''))
+			if (isset($matches[3]) && $color = (isset($this->object->db->allow_x11colors) && $this->object->db->allow_x11colors == 1 ? (isset($this->x11_colors[$matches[3]]) ? $this->x11_colors[$matches[3]] : '') : isset($this->colors[$matches[3]]) ? $this->colors[$matches[3]] : ''))
 			{
 				return '<span class="cl-'.$color.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]).'</span>';
 			}
@@ -731,7 +731,7 @@ class WackoFormatter
 		{
 			$this->br = 1;
 
-			if ($matches[3] && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
+			if ($matches[3] && $color = ($this->object->db->allow_x11colors == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
 			{
 				return '<mark class="mark-'.$color.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]).'</mark>';
 			}
@@ -1179,7 +1179,7 @@ class WackoFormatter
 		}
 		// tikiwiki links
 		else if (!$wacko->_formatter_noautolinks &&
-				 $wacko->config['disable_tikilinks'] != 1 &&
+				 $wacko->db->disable_tikilinks != 1 &&
 				 preg_match('/^('.$wacko->language['UPPER'].$wacko->language['LOWER'].$wacko->language['ALPHANUM'].'*\.'.$wacko->language['ALPHA'].$wacko->language['ALPHANUM'].'+)$/s', $thing, $matches))
 		{
 			return $wacko->pre_link($thing);
