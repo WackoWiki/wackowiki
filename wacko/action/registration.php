@@ -21,6 +21,8 @@ $word_ok		= '';
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
+$this->no_way_back = true; // prevent goback'ing that page
+
 // is user trying to confirm email, login or register?
 if (isset($_GET['confirm']))
 {
@@ -53,7 +55,7 @@ if (isset($_GET['confirm']))
 		$this->set_message($message, 'error');
 	}
 
-	$this->http->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
+	$this->login_page();
 }
 else if (@$_POST['_action'] === 'register')
 {
@@ -141,7 +143,6 @@ else if (@$_POST['_action'] === 'register')
 			// submitting input to DB
 			else
 			{
-				$confirm			= Ut::random_token(21);
 				$user_ip			= $this->get_user_ip();
 
 				// set new user approval
@@ -168,7 +169,6 @@ else if (@$_POST['_action'] === 'register')
 						"user_name		= ".$this->db->q($user_name).", ".
 						"account_lang	= ".$this->db->q($user_lang? $user_lang : $this->db->language).", ".
 						"email			= ".$this->db->q($email).", ".
-						"email_confirm	= ".$this->db->q(hash_hmac('sha256', $confirm, $this->db->system_seed)).", ".
 						"password		= ".$this->db->q($this->password_hash(['user_name' => $user_name], $password)).", ".
 						"account_status	= '".(int) $account_status."', ".
 						"enabled		= '".(int) $account_enabled."', ".
@@ -180,12 +180,13 @@ else if (@$_POST['_action'] === 'register')
 					"FROM ".$this->db->table_prefix."user ".
 					"WHERE user_name = ".$this->db->q($user_name)." ".
 					"LIMIT 1");
+				$user_id = $_user_id['user_id'];
 
 				// INSERT user settings
 				$this->db->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."user_setting ".
 					"SET ".
-						"user_id			= '".(int)$_user_id['user_id']."', ".
+						"user_id			= '".(int)$user_id."', ".
 						"typografica		= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
 						"user_lang			= ".$this->db->q(($user_lang ? $user_lang : $this->config['language'])).", ".
 						"theme				= ".$this->db->q($this->config['theme']).", ".
@@ -210,7 +211,7 @@ else if (@$_POST['_action'] === 'register')
 
 					$subject =	$this->_t('EmailWelcome') . $this->db->site_name;
 					$body =		Ut::perc_replace($this->_t('EmailRegistered'),
-									$this->db->site_name, $user_name, $this->href('', '', 'confirm=' . $confirm)) . "\n\n".
+									$this->db->site_name, $user_name, $this->user_email_confirm($user_id)) . "\n\n".
 								$waiting_approval . "\n\n".
 								$this->_t('EmailRegisteredIgnore') . "\n\n";
 
@@ -247,7 +248,7 @@ else if (@$_POST['_action'] === 'register')
 					$this->_t('SiteEmailConfirm'));
 
 				$this->context[++$this->current_context] = '';
-				$this->http->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
+				$this->login_page();
 			}
 		}
 	}

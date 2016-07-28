@@ -212,7 +212,6 @@ $wacko_config_defaults = array(
 	'pwd_char_classes'				=> 0,
 	'pwd_min_chars'					=> 9,
 
-	'max_failed_login_count'		=> 8,
 	'system_message'				=> '',
 	'system_message_type'			=> '',
 

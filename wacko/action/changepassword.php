@@ -8,6 +8,8 @@ if (!defined('IN_WACKO'))
 echo "<!--notypo-->\n";
 $include_tail = "<!--/notypo-->\n";
 
+$this->no_way_back = true; // prevent goback'ing that page
+
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
@@ -57,7 +59,7 @@ if (($code = @$_REQUEST['secret_code']))
 
 				// forward
 				$this->set_message($this->_t('PasswordChanged'), 'success');
-				$this->http->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
+				$this->login_page();
 				// NEVER BEEN HERE
 			}
 
@@ -147,7 +149,7 @@ else if (($user = $this->get_user()))
 
 			// forward
 			$this->set_message($this->_t('PasswordChanged'), 'success');
-			$this->http->redirect($this->href('', $this->_t('LoginPage'), 'cache='.Ut::random_token(5)));
+			$this->login_page();
 			// NEVER BEEN HERE
 		}
 
