@@ -528,6 +528,6 @@ class Ut
 
 	static function strip_spaces($text)
 	{
-		return str_replace([' ', "\t", "\r", "\n", "\x0b", "\0"], '', $text);
+		return str_replace([' ', "\t", "\r", "\n", "\x0b", "\0"], '', (string) $text);
 	}
 }

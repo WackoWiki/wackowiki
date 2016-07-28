@@ -103,7 +103,7 @@ $count = $this->db->load_single(
 			: "")
 	, true);
 
-$pagination = $this->pagination($count['n'], $limit, 'p', ($letter !== ''? 'letter=' . $letter : ''));
+$pagination = $this->pagination($count['n'], $limit, 'p', ($letter !== ''? ['letter' => $letter] : []));
 
 // collect data for index
 $pages_to_display = [];
@@ -173,7 +173,7 @@ if ($letters)
 		else
 		{
 			$tpl->letter_l_item_ch = $ch;
-			$tpl->letter_l_item_link = $this->href('', '', 'letter=') . $ch;
+			$tpl->letter_l_item_link = $this->href('', '', ['letter' => $ch]);
 		}
 	}
 }
