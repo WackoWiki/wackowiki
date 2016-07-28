@@ -166,7 +166,7 @@ if (($profile = @$_REQUEST['profile']))
 				{
 					list($ref, $subject) = explode('@@', base64_decode(rawurldecode($_GET['ref'])), 2);
 
-					if (substr($subject, 0, 3) != 'Re:')
+					if (strncmp($subject, 'Re:', 3))
 					{
 						$subject = 'Re: ' . $subject;
 					}
@@ -398,29 +398,29 @@ else
 	// $param is passed to the pagination links
 	$sql_where = '';
 	$sql_order = '';
-	$_user0 = trim((string) @$_GET['user']);
-	$_user = rawurlencode($_user0);
+	$_user = Ut::strip_spaces((string) @$_GET['user']);
+	$params = [];
 	if ($_user !== '')
 	{
+		$params['profile'] = $_user;
+
 		// goto user profile directly if so desired
-		if (isset($_GET['gotoprofile']) && $this->load_user($_user0))
+		if (isset($_GET['gotoprofile']) && $this->load_user($_user))
 		{
-			$this->http->redirect($this->href('', '', 'profile=' . $_user));
+			$this->http->redirect($this->href('', '', $params));
+			// NEVER BEEN HERE
 		}
-		else
-		{
-			$sql_where = "AND u.user_name LIKE " . $this->db->q('%' . $_user0 . '%') . " ";
-		}
+		$sql_where = "AND u.user_name LIKE " . $this->db->q('%' . $_user . '%') . " ";
 	}
 
-	$params = function ($sort, $order) use ($_user)
+	$params = function ($sort, $order) use ($params)
 	{
-		$res = $sort? ("sort=" . $sort . '&amp;order=' . $order . ($_user !== ''? '&amp;' : '')) : '';
-		if ($_user !== '')
+		if ($sort)
 		{
-			$res .= "user=" . $_user;
+			$params['sort'] = $sort;
+			$params['order'] = $order;
 		}
-		return $res;
+		return $params;
 	};
 
 	$_sort = @$_GET['sort'];
@@ -478,8 +478,7 @@ else
 
 	// user filter form
 	$tpl->l_href = $this->href();
-	// STS h hidden
-	$tpl->l_user0 = $_user0;
+	$tpl->l_user = $_user;
 
 	$tpl->l_pagination_text = $pagination['text'];
 

@@ -158,7 +158,7 @@ first really BIG template written
 		[ ' href | hide_page | ' ]
 		<table class="formation"><tr><td class="label">
 		[ ' _t: UsersSearch ' ]: </td><td>
-		<input type="search" required="required" name="user" maxchars="40" size="40" value="[ ' user0 ' ]" /> ['' '']
+		<input type="search" required="required" name="user" maxchars="40" size="40" value="[ ' user ' ]" /> ['' '']
 		<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]" /> ['' '']
 		['' // echo <input type="submit" id="button" value="_t('UsersOpenProfile') . '" name="gotoprofile" /> '']
 		</td></tr></table><br />

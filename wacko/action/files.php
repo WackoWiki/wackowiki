@@ -284,5 +284,3 @@ else
 {
 	echo '<em>'.$this->_t('ActionDenied').'</em>';
 }
-
-?>

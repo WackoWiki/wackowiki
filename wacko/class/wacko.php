@@ -2764,7 +2764,7 @@ class Wacko
 	*
 	* @param string $method Optional Wakka method (default 'show' method added in Run() function)
 	* @param string $tag Optional tag. Returns current-page tag if empty
-	* @param string $params Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'])
+	* @param mixed $params Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
 	* @param boolean $addpage Optional
 	* @param string $anchor Optional HTTP anchor-fragment
 	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wakka 'rewrite_method' config-parameter)
@@ -2785,16 +2785,30 @@ class Wacko
 		}
 		else
 		{
-			array_unshift($params, 'page=' . $this->mini_href($method, $tag, $addpage));
+			$params['page'] = $this->mini_href($method, $tag, $addpage);
 		}
 
 		if ($addpage)
 		{
-			$params[] = 'add=1';
+			$params['add'] = 1;
 		}
 
 		if ($params)
 		{
+			foreach ($params as $i => &$param)
+			{
+				if (is_string($i))
+				{
+					$param = rawurlencode($i) . '=' . rawurlencode($param);
+				}
+				else if (($j = strpos($param, '#')) !== false)
+				{
+					// for some it is easier to bring in anchor in params
+					$anchor = substr($param, $j + 1);
+					$param = substr($param, 0, $j);
+				}
+			}
+
 			$href .= '?' . implode('&amp;', $params);
 		}
 
@@ -6872,11 +6886,24 @@ class Wacko
 	//		$total		= total elements in the list
 	//		$perpage	= total elements on a page
 	//		$name		= page number variable in $_GET
-	//		$params		= $_GET parameters to be passed with the page link
+	//		$params		= $_GET parameters to be passed with the page link (as href-formatted array or string)
 	// returns an array with 'text' (navigation) and 'offset' (offset value
 	// for SQL queries) elements.
-	function pagination($total, $perpage = 100, $name = 'p', $params = '', $method = '', $tag = '')
+	function pagination($total, $perpage = 100, $_name = 'p', $params = '', $method = '', $tag = '')
 	{
+		$name = 'p';
+		$anchor = '';
+
+		// allow array parameter expansion
+		if (is_array($_name))
+		{
+			extract($parameter, EXTR_IF_EXISTS);
+		}
+		else
+		{
+			$name = $_name;
+		}
+
 		if ($perpage < 1)
 		{
 			$perpage = 10; // no division by zero
@@ -6888,6 +6915,11 @@ class Wacko
 			return ['offset' => 0, 'text' => false];
 		}
 
+		if (!is_array($params))
+		{
+			$params = $params? [$params] : [];
+		}
+
 		// multipage with navigation
 		$sep		= ', ';
 		$span		= ' ... ' . $sep;
@@ -6896,19 +6928,15 @@ class Wacko
 		$page		= @$_GET[$name];
 		$page		= ($page == 'last')? $pages : (int)$page;
 
-		if ($params)
-		{
-			$params = '&amp;' . $params;
-		}
-
 		if ($page <= 0 || $page > $pages)
 		{
 			$page = 1;
 		}
 
-		$make_link = function ($page, $body = '', $attrs = '') use ($method, $tag, $name, $params)
+		$make_link = function ($page, $body = '', $attrs = '') use ($method, $tag, $name, $params, $anchor)
 		{
-			return '<a href="' . $this->href($method, $tag, $name . '=' . $page . $params) . '"' . $attrs . '>' .
+			$params[$name] = $page;
+			return '<a href="' . $this->href($method, $tag, $params, false, $anchor) . '"' . $attrs . '>' .
 					($body ? $body : $page) . '</a>';
 		};
 

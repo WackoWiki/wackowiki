@@ -10,7 +10,6 @@ if (!function_exists('full_text_search'))
 	function full_text_search(&$engine, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
 	{
 		$limit		= (int) $limit;
-		$pagination	= '';
 
 		$count_results = $engine->db->load_all(
 			"SELECT a.page_id ".
@@ -36,7 +35,7 @@ if (!function_exists('full_text_search'))
 				" )", true);
 
 		$count		= count($count_results);
-		$pagination = $engine->pagination($count, $limit, 'p', 'phrase='.$phrase);
+		$pagination = $engine->pagination($count, $limit, 'p', ['phrase' => $phrase]);
 
 		// load search results
 		$results = $engine->db->load_all(
@@ -77,7 +76,6 @@ if (!function_exists('tag_search'))
 	function tag_search(&$engine, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
 	{
 		$limit		= (int) $limit;
-		$pagination	= '';
 
 		$count_results = $engine->db->load_all(
 			"SELECT a.page_id ".
@@ -102,7 +100,7 @@ if (!function_exists('tag_search'))
 			, true);
 
 		$count		= count($count_results);
-		$pagination = $engine->pagination($count, $limit, 'p', 'phrase='.$phrase);
+		$pagination = $engine->pagination($count, $limit, 'p', ['phrase' => $phrase]);
 
 		// load search results
 		$results = $engine->db->load_all(
@@ -459,5 +457,3 @@ if ($phrase)
 		if (!$nomark) echo $this->_t('NoResultsFor').' "'.$phrase.'".';
 	}
 }
-
-?>
