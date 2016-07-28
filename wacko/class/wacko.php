@@ -2335,7 +2335,7 @@ class Wacko
 			#$this->add_user_page($user_name, $user_lang);
 
 			// send email
-			if ($this->config['enable_email'])
+			if ($this->db->enable_email)
 			{
 				/* TODO: set user language for email encoding */
 				$save = $this->set_language($user_lang, true);
@@ -2355,13 +2355,13 @@ class Wacko
 	{
 		$save = $this->set_language($user_lang, true);
 
-		$subject	=	'['.$this->config['site_name'].'] '.$subject;
-		$body		=	$this->_t('EmailHello').' '.$user_name.",\n\n".
-						$body."\n\n".
-						$this->_t('EmailDoNotReply')."\n\n".
-						$this->_t('EmailGoodbye')."\n".
-						$this->config['site_name']."\n".
-						$this->config['base_url'];
+		$subject	=	'[' . $this->db->site_name . '] ' . $subject;
+		$body		=	$this->_t('EmailHello') . $user_name . ",\n\n".
+						Ut::amp_decode($body) . "\n\n".
+						$this->_t('EmailDoNotReply') . "\n\n".
+						$this->_t('EmailGoodbye') . "\n".
+						$this->db->site_name . "\n".
+						$this->db->base_url;
 
 		$this->send_mail($email, $subject, $body, null, $this->get_charset($user_lang));
 
@@ -6713,6 +6713,15 @@ class Wacko
 	}
 
 	// ADDITIONAL METHODS
+	function password_hash($user, $password)
+	{
+		return password_hash(base64_encode(hash('sha256', $user['user_name'] . $password, true)), PASSWORD_DEFAULT);
+	}
+
+	function password_verify($user, $password)
+	{
+		return password_verify(base64_encode(hash('sha256', $user['user_name'] . $password, true)), $user['password']);
+	}
 
 	// run checks of password complexity under current
 	// config settings; returned error diag, or '' if good
@@ -6969,28 +6978,25 @@ class Wacko
 	//		$inline	= adds <br /> between elements
 	function show_captcha($inline = true)
 	{
-		// Don't load the captcha at all if the GD extension isn't enabled
-		if (extension_loaded('gd'))
+		$out = '';
+		// captcha is for guests only and if gd available
+		if ($this->db->enable_captcha && !$this->get_user() && extension_loaded('gd'))
 		{
-			// check whether anonymous user
-			// anonymous user has no name
-			// if false, we assume it's anonymous
-			if ($this->get_user_name() == false)
-			{
-				// disable server cache for page
-				$this->http->no_cache(false);
+			// disable server cache for page
+			$this->http->no_cache(false);
 
-				echo $inline ? '' : "<br />\n";
-				echo '<label for="captcha">'.$this->_t('Captcha').":</label>\n";
-				echo $inline ? '' : "<br />\n";
-				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?for=' . $this->sess->name().'" id="freecap" alt="'.$this->_t('Captcha').'" />'."\n";
-				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->_t('CaptchaReload').'">';
-				echo '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->_t('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
-				#echo $inline ? '' : "<br />\n";
-				echo '<input type="text" id="captcha" name="captcha" maxlength="6" style="width: 273px;" />';
-				echo $inline ? '' : "<br />\n";
-			}
+			$out .= $inline ? '' : "<br />\n";
+			$out .= '<label for="captcha">'.$this->_t('Captcha').":</label>\n";
+			$out .= $inline ? '' : "<br />\n";
+			$out .= '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?for=' . $this->sess->name().'" id="freecap" alt="'.$this->_t('Captcha').'" />'."\n";
+			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->_t('CaptchaReload').'">';
+			$out .= '<img src="'.$this->config['base_url'].'image/spacer.png" alt="'.$this->_t('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
+			// $out .= $inline ? '' : "<br />\n";
+			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6" style="width: 273px;" />';
+			$out .= $inline ? '' : "<br />\n";
 		}
+
+		return $out;
 	}
 
 	// checks whether user's captcha solution was right. function
@@ -6998,41 +7004,28 @@ class Wacko
 	// HTTP-POST variable 'captcha', submitted through webform.
 	function validate_captcha()
 	{
-		// Don't load the captcha at all if the GD extension isn't enabled
-		if (extension_loaded('gd'))
+		$word_ok = true;
+		// we will check captcha for anonymous only
+		if ($this->db->enable_captcha && !$this->get_user() && extension_loaded('gd'))
 		{
-			// check whether anonymous user
-			// anonymous user has no name
-			// if false, we assume it's anonymous
-			if ($this->get_user_name() == false)
+			$word_ok = false;
+			if (!empty($this->sess->freecap_word_hash) && !empty($_POST['captcha']))
 			{
-				//anonymous user, check the captcha
-				if (!empty($this->sess->freecap_word_hash) && !empty($_POST['captcha']))
+				if ($this->sess['hash_func'](strtolower($_POST['captcha'])) == $this->sess->freecap_word_hash)
 				{
-					if ($this->sess['hash_func'](strtolower($_POST['captcha'])) == $this->sess->freecap_word_hash)
-					{
-						// reset freecap session vars
-						// cannot stress enough how important it is to do this
-						// defeats re-use of known image with spoofed session id
-						$this->sess->freecap_attempts	= 0;
-						$this->sess->freecap_word_hash	= false;
+					// reset freecap session vars
+					// cannot stress enough how important it is to do this
+					// defeats re-use of known image with spoofed session id
+					$this->sess->freecap_attempts	= 0;
+					$this->sess->freecap_word_hash	= false;
 
-						// now process form
-						$word_ok = true;
-					}
-					else
-					{
-						$word_ok = false;
-					}
+					// now process form
+					$word_ok = true;
 				}
-				else
-				{
-					$word_ok = false;
-				}
-
-				return $word_ok;
 			}
 		}
+
+		return $word_ok;
 	}
 
 	/**

@@ -73,19 +73,6 @@ if (!$engine->config['recovery_password'])
 // recovery preauthorization
 if (@$_POST['_action'] === 'emergency')
 {
-	// Start Login Captcha, if there are too much login attempts (max_login_attempts)
-
-	// Only show captcha if the admin enabled it in the config file
-	/* if($engine->config['ap_max_login_attempts'] && $engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts'] + 1)
-	{
-		// captcha validation
-		if ($engine->validate_captcha() === false)
-		{
-			$error = $engine->_t('CaptchaFailed');
-		}
-	} */
-	// End Registration Captcha
-
 	if (password_verify(
 			base64_encode(
 					hash('sha256', $engine->config['system_seed'].$_POST['ap_password'], true)
@@ -163,19 +150,6 @@ if (!isset($engine->sess->ap_created))
 			?>
 				<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
 				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" />
-<?php
-				// captcha code starts
-
-				// Only show captcha if the admin enabled it in the config file
-				/* if($engine->config['ap_max_login_attempts'] && $engine->config['ap_failed_login_count'] >= $engine->config['max_login_attempts'])
-				{
-					echo '<p>';
-					echo '<br />';
-					$engine->show_captcha(false);
-					echo '</p>';
-				} */
-				// end captcha
-?>
 				<input type="submit" id="submit" value="ok" />
 			</form>
 		</div>

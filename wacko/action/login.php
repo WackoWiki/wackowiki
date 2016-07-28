@@ -99,8 +99,7 @@ else // login
 	// is user trying to log in or register?
 	if (@$_POST['_action'] === 'login')
 	{
-
-		$_user_name = (string) @$_POST['user_name'];
+		$_user_name = Ut::strip_spaces($_POST['user_name']);
 
 		// if user name already exists, check password
 		if (($existing_user = $this->load_user($_user_name)))
@@ -120,40 +119,30 @@ else // login
 			else
 			{
 				// Start Login Captcha, if there are too much login attempts (max_login_attempts)
-
 				if ($this->db->max_login_attempts && $existing_user['failed_login_count'] >= $this->db->max_login_attempts + 1)
 				{
-					// show captcha only if the admin enabled it in the config
-					if ($this->db->enable_captcha)
+					if (!$this->validate_captcha())
 					{
-						// captcha validation
-						if ($this->validate_captcha() === false)
-						{
-							$error .= $this->_t('CaptchaFailed');
-						}
-					}
-					else
-					{
-						// TODO: other action
+						$error .= $this->_t('CaptchaFailed');
 					}
 				}
-				// End Login Captcha
 
 				$this->sess->failed_login_count = $existing_user['failed_login_count'];
 
 				if (!$error)
 				{
-					$_password = (string) @$_POST['password'];
+					$_password = $_POST['password'];
 
-					// check for old md5 password
-					if (strlen($existing_user['password']) == 32 || strlen($existing_user['password']) == 64)
+					// check for old password formats
+					$oldlen = strlen($existing_user['password']);
+					if ($oldlen == 32 || $oldlen == 64)
 					{
-						if (strlen($existing_user['password']) == 32)
+						if ($oldlen == 32)
 						{
-							$_processed_password = hash('md5', $_password);
+							$hash = hash('md5', $_password);
 						}
 						// check for old sha256 password
-						else if (strlen($existing_user['password']) == 64)
+						else
 						{
 							// load old salt
 							$password_salt = $this->db->load_single(
@@ -161,44 +150,27 @@ else // login
 													"FROM ".$this->db->user_table." ".
 													"WHERE user_name = ".$this->db->q($_user_name)." ".
 													"LIMIT 1");
-							$_processed_password = hash('sha256', $_user_name.$password_salt['salt'].$_password);
+							$hash = hash('sha256', $_user_name.$password_salt['salt'].$_password);
 						}
 
 						// rehash password
-						if ($existing_user['password'] == $_processed_password)
+						if ($existing_user['password'] == $hash)
 						{
-							$_processed_password	= $_user_name.$_password;
-							$password_hash	= password_hash(
-													base64_encode(
-															hash('sha256', $_processed_password, true)
-															),
-													PASSWORD_DEFAULT
-													);
+							$hash = $this->password_hash($existing_user, $_password);
 
 							// update database with the sha256 password for future logins
 							$this->db->sql_query(
 								"UPDATE ".$this->db->table_prefix."user SET ".
-									"password	= ".$this->db->q($password_hash).", ".
+									"password	= ".$this->db->q($hash).", ".
 									"salt		= '' ".
 								"WHERE user_name = ".$this->db->q($_user_name));
 
-							// reload user with updated user password hash
-							$existing_user = $this->load_user($_user_name);
+							$existing_user['password'] = $hash;
 						}
-					}
-					else
-					{
-						$_processed_password = $_user_name.$_password;
 					}
 
 					// check password
-					if (password_verify(
-							base64_encode(
-									hash('sha256', $_processed_password, true)
-									),
-								$existing_user['password']
-							)
-						)
+					if ($this->password_verify($existing_user, $_password))
 					{
 						$this->log_user_in($existing_user, isset($_POST['persistent']));
 						$this->set_user($existing_user);
@@ -261,23 +233,12 @@ else // login
 	echo '<label for="persistent">'.$this->_t('PersistentCookie').'</label>'."\n";
 	echo '</p>'."\n";
 
-	// captcha code starts
-
-	// Only show captcha if the admin enabled it in the config file
 	if ($this->db->max_login_attempts && $_failed_login_count >= $this->db->max_login_attempts)
 	{
-		if ($this->db->enable_captcha)
-		{
-			echo '<p>';
-			$this->show_captcha();
-			echo '</p>';
-		}
-		else
-		{
-			// TODO: other action
-		}
+		echo '<p>';
+		echo $this->show_captcha();
+		echo '</p>';
 	}
-	// end captcha
 
 	echo '<p>'."\n";
 	echo '<input type="submit" class="OkBtn" value="'.$this->_t('LoginButton').'" tabindex="4" />'."\n";

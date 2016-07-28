@@ -136,18 +136,12 @@ if ($this->has_access('read')
 			#	$error = true;
 			#}
 
-			// captcha code starts
-			if ($this->config['enable_captcha']
-				&& (($this->page && $this->config['captcha_edit_page'])
-					|| (!$this->page && $this->config['captcha_new_page'])))
+			// captcha validation
+			if (($this->page? $this->db->captcha_edit_page : $this->db->captcha_new_page)
+				&& !$this->validate_captcha())
 			{
-				// captcha validation
-				if ($this->validate_captcha() === false)
-				{
-					$message = $this->_t('CaptchaFailed');
-					$this->set_message($message , 'error');
-					$error = true;
-				}
+				$this->set_message($this->_t('CaptchaFailed'), 'error');
+				$error = true;
 			}
 
 			$body = str_replace("\r", '', $_POST['body']);
@@ -427,16 +421,10 @@ if ($this->has_access('read')
 
 	echo $output;
 
-	// captcha code starts
-
-	// show captcha only if the admin enabled it in the config
-	if ($this->config['enable_captcha']
-		&& (($this->page && $this->config['captcha_edit_page'])
-			|| (!$this->page && $this->config['captcha_new_page'])))
+	if ($this->page? $this->db->captcha_edit_page : $this->db->captcha_new_page)
 	{
-		$this->show_captcha(false);
+		echo $this->show_captcha(false);
 	}
-	// end captcha
 
 ?>
 	<script>

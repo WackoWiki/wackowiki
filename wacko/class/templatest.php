@@ -1,6 +1,8 @@
 <?php
 
-// push-style (with pull methods for e.g. csrf & i18n) lazy topo-ordered incremental building template engine for WackoWiki
+// push-style (with pull methods for e.g. csrf & i18n) lazy topo-ordered
+// incremental building liberated from von neumann style applicative
+// transition template engine for WackoWiki ;)
 
 // TODO:
 

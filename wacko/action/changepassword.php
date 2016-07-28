@@ -18,8 +18,8 @@ if (($code = @$_REQUEST['secret_code']))
 
 	$user = $this->db->load_single(
 		"SELECT user_id, user_name ".
-		"FROM ".$this->config['user_table']." ".
-		"WHERE change_password = ".$this->db->q(hash('sha256', $code.hash('sha256', $this->config['system_seed'])))." ".
+		"FROM ".$this->db->user_table." ".
+		"WHERE change_password = ".$this->db->q(hash_hmac('sha256', $code, $this->db->system_seed))." ".
 		"LIMIT 1");
 
 	if ($user)
@@ -45,17 +45,9 @@ if (($code = @$_REQUEST['secret_code']))
 			}
 			else
 			{
-				$password_hashed	= $user['user_name'].$new_password;
-				$password_hashed	= password_hash(
-											base64_encode(
-													hash('sha256', $password_hashed, true)
-													),
-											PASSWORD_DEFAULT
-											);
-
 				$this->db->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
-						"password			= ".$this->db->q($password_hashed).", ".
+						"password			= ".$this->db->q($this->password_hash($user, $new_password)).", ".
 						"change_password	= '' ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
@@ -118,12 +110,7 @@ else if (($user = $this->get_user()))
 		$complexity		= $this->password_complexity($user['user_name'], $new_password);
 
 		// wrong current password
-		if (!password_verify(
-				base64_encode(
-						hash('sha256', $user['user_name'].$password, true)
-						),
-				$user['password']
-				))
+		if (!$this->password_verify($user, $password))
 		{
 			$this->log_user_delay();
 			$error = $this->_t('WrongPassword');
@@ -142,18 +129,11 @@ else if (($user = $this->get_user()))
 		}
 		else
 		{
-			$password_hashed	= $user['user_name'].$new_password;
-			$password_hashed	= password_hash(
-										base64_encode(
-												hash('sha256', $password_hashed, true)
-												),
-										PASSWORD_DEFAULT
-										);
-
 			// store new password
 			$this->db->sql_query(
 				"UPDATE ".$this->config['user_table']." SET ".
-					"password = ".$this->db->q($password_hashed)." ".
+					"change_password	= '', ".
+					"password = ".$this->db->q($this->password_hash($user, $new_password))." ".
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 
@@ -207,8 +187,8 @@ else
 	// guest user, password forgotten, send mail
 	if (@$_POST['_action'] === 'forgot_password')
 	{
-		$user_name	= str_replace(' ', '', $_POST['user_name']);
-		$email		= str_replace(' ', '', $_POST['email']);
+		$user_name	= Ut::strip_spaces($_POST['user_name']);
+		$email		= Ut::strip_spaces($_POST['email']);
 		$user		= $this->db->load_single(
 						"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
 						"FROM ".$this->config['user_table']." u ".
@@ -219,10 +199,10 @@ else
 
 		if ($user)
 		{
-			if ($this->config['enable_email'] && !$user['email_confirm'])
+			if ($this->db->enable_email && !$user['email_confirm'])
 			{
 				$code		= Ut::random_token(21);
-				$code_hash	= hash('sha256', $code . hash('sha256', $this->db->system_seed));
+				$code_hash	= hash_hmac('sha256', $code, $this->db->system_seed);
 
 				$save = $this->set_language($user['user_lang'], true);
 				$subject	=	$this->_t('EmailForgotSubject') . $this->config['site_name'];
@@ -246,10 +226,9 @@ else
 				// log event
 				$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordReminded', SYSTEM_LANG), $user['user_name'], $user['email']));
 
-				$this->set_message($this->_t('CodeWasSent'));
+				$this->set_message($this->_t('CodeWasSent'), 'success');
 				$this->http->redirect($this->href('', $this->_t('LoginPage')));
 				// NEVER BEEN HERE
-
 			}
 			else
 			{

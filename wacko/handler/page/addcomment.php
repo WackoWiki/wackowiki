@@ -106,24 +106,13 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 	else
 	{
-		// Start Comment Captcha
-
-		// Only show captcha if enabled
-		if ($this->config['enable_captcha'] && $this->config['captcha_new_comment'])
+		// captcha validation
+		unset($this->sess->freecap_old_comment);
+		if ($this->db->captcha_new_comment && !$this->validate_captcha())
 		{
-			// captcha validation
-			if ($this->validate_captcha() === false)
-			{
-				//not the right word
-				$error = $this->_t('CaptchaFailed');
-				$this->set_message($error, 'error');
-				$this->sess->freecap_old_comment = $body;
-			}
-			else
-			{
-				// captcha passed, empty session
-				$this->sess->freecap_old_comment = '';
-			}
+			$error = $this->_t('CaptchaFailed');
+			$this->set_message($error, 'error');
+			$this->sess->freecap_old_comment = $body;
 		}
 
 		// everything's okay
@@ -168,8 +157,6 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 			$this->set_message($this->_t('CommentAdded'), 'success');
 		}
-
-		// End Comment Captcha
 	}
 
 	// redirect to page

@@ -24,24 +24,25 @@ $this->http->ensure_tls($this->href());
 // is user trying to confirm email, login or register?
 if (isset($_GET['confirm']))
 {
-	if ($temp = $this->db->load_single(
-		"SELECT user_name, email, email_confirm ".
-		"FROM ".$this->config['user_table']." ".
-		"WHERE email_confirm = ".$this->db->q(hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))." ".
-		"LIMIT 1"))
+	$confirm_hash = $this->db->q(hash_hmac('sha256', $_GET['confirm'], $this->db->system_seed));
+
+	if (($temp = $this->db->load_single(
+		"SELECT user_name, email ".
+		"FROM ".$this->db->user_table." ".
+		"WHERE email_confirm = ".$confirm_hash." ".
+		"LIMIT 1")))
 	{
 		$this->db->sql_query(
-			"UPDATE ".$this->config['user_table']." SET ".
+			"UPDATE ".$this->db->user_table." SET ".
 				"email_confirm = '' ".
-			"WHERE email_confirm = ".$this->db->q(hash('sha256', $_GET['confirm'].hash('sha256', $this->config['system_seed'])))." ");
+			"WHERE email_confirm = ".$confirm_hash." ".
+			"LIMIT 1");
 
 		// cache handling
 		$this->http->invalidate_page($this->supertag);
 
 		// log event
-		$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', $this->config['language']), $temp['email'], $temp['user_name']));
-
-		unset($temp);
+		$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', SYSTEM_LANG), $temp['email'], $temp['user_name']));
 
 		$message = $this->_t('EmailConfirmed');
 		$this->set_message($message, 'success');
@@ -57,28 +58,20 @@ if (isset($_GET['confirm']))
 else if (@$_POST['_action'] === 'register')
 {
 	// create new account if possible
-	if ($this->config['allow_registration'] || $this->is_admin())
+	if ($this->db->allow_registration || $this->is_admin())
 	{
 		// passing vars from user input
-		$user_name		= trim($_POST['user_name']);
-		$email			= trim($_POST['email']);
+		$user_name		= Ut::strip_spaces($_POST['user_name']);
+		$email			= Ut::strip_spaces($_POST['email']);
 		$password		= $_POST['password'];
 		$conf_password	= $_POST['conf_password'];
-		$user_lang		= (isset($_POST['user_lang']) ? $_POST['user_lang'] : $this->config['language']);
+		$user_lang		= (isset($_POST['user_lang']) ? $_POST['user_lang'] : $this->db->language);
 		$complexity		= $this->password_complexity($user_name, $password);
 
-		// Start Registration Captcha
-
-		// Only show captcha if the admin enabled it in the config
-		if(!$this->is_admin() && $this->config['enable_captcha'] && $this->config['captcha_registration'])
+		if (!$this->is_admin() && $this->db->captcha_registration && !$this->validate_captcha())
 		{
-			// captcha validation
-			if ($this->validate_captcha() === false)
-			{
-				$error .= $this->_t('CaptchaFailed');
-			}
+			$error .= $this->_t('CaptchaFailed');
 		}
-		// End Registration Captcha
 
 		if ((!$error) || $this->is_admin() || !$this->config['captcha_registration'])
 		{
@@ -149,24 +142,15 @@ else if (@$_POST['_action'] === 'register')
 			else
 			{
 				$confirm			= Ut::random_token(21);
-				$confirm_hash		= hash('sha256', $confirm . hash('sha256', $this->config['system_seed']));
-				$password_hashed	= $user_name.$password;
-
-				$password_hashed	= password_hash(
-										base64_encode(
-												hash('sha256', $password_hashed, true)
-												),
-										PASSWORD_DEFAULT
-										);
 				$user_ip			= $this->get_user_ip();
 
 				// set new user approval
-				if ($this->config['approve_new_user'] == true)
+				if ($this->db->approve_new_user)
 				{
 					$account_status		= 1;
 					$account_enabled	= 0;
-					$waiting_approval	= Ut::perc_replace($this->_t('UserWaitingApproval'), $this->config['site_name']);
-					$requires_approval	= Ut::perc_replace($this->_t('UserRequiresApproval'), $this->config['site_name']);
+					$waiting_approval	= Ut::perc_replace($this->_t('UserWaitingApproval'), SYSTEM_LANG);
+					$requires_approval	= Ut::perc_replace($this->_t('UserRequiresApproval'), SYSTEM_LANG);
 				}
 				else
 				{
@@ -182,10 +166,10 @@ else if (@$_POST['_action'] === 'register')
 					"SET ".
 						"signup_time	= UTC_TIMESTAMP(), ".
 						"user_name		= ".$this->db->q($user_name).", ".
-						"account_lang	= ".$this->db->q(($user_lang ? $user_lang : $this->config['language'])).", ".
+						"account_lang	= ".$this->db->q($user_lang? $user_lang : $this->db->language).", ".
 						"email			= ".$this->db->q($email).", ".
-						"email_confirm	= ".$this->db->q($confirm_hash).", ".
-						"password		= ".$this->db->q($password_hashed).", ".
+						"email_confirm	= ".$this->db->q(hash_hmac('sha256', $confirm, $this->db->system_seed)).", ".
+						"password		= ".$this->db->q($this->password_hash(['user_name' => $user_name], $password)).", ".
 						"account_status	= '".(int) $account_status."', ".
 						"enabled		= '".(int) $account_enabled."', ".
 						"user_ip		= ".$this->db->q($user_ip)." ");
@@ -193,7 +177,7 @@ else if (@$_POST['_action'] === 'register')
 				// get new user_id
 				$_user_id = $this->db->load_single(
 					"SELECT user_id ".
-					"FROM ".$this->config['table_prefix']."user ".
+					"FROM ".$this->db->table_prefix."user ".
 					"WHERE user_name = ".$this->db->q($user_name)." ".
 					"LIMIT 1");
 
@@ -213,27 +197,25 @@ else if (@$_POST['_action'] === 'register')
 
 				// INSERT user menu items
 
-				if ($this->config['approve_new_user'] == false)
+				if (!$this->db->approve_new_user)
 				{
 					$this->add_user_page($user_name, $user_lang);
 				}
 
 				// send email
-				if ($this->config['enable_email'] == true)
+				if ($this->db->enable_email)
 				{
 					// 1. Send signup email to new user
-					// TODO: set user language for email encoding
 					$save = $this->set_language($user_lang, true);
 
-					$subject =	$this->_t('EmailWelcome').$this->config['site_name'];
+					$subject =	$this->_t('EmailWelcome') . $this->db->site_name;
 					$body =		Ut::perc_replace($this->_t('EmailRegistered'),
-									$this->config['site_name'], $user_name, $this->href('', '', 'confirm='.$confirm))."\n\n".
-								$waiting_approval."\n\n".
-								$this->_t('EmailRegisteredIgnore')."\n\n";
+									$this->db->site_name, $user_name, $this->href('', '', 'confirm=' . $confirm)) . "\n\n".
+								$waiting_approval . "\n\n".
+								$this->_t('EmailRegisteredIgnore') . "\n\n";
 
 					$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
 					$this->set_language($save, true);
-					unset($subject, $body);
 
 					// 2. notify admin a new user has signed-up
 					if ($this->config['notify_new_user_account'])
@@ -243,17 +225,16 @@ else if (@$_POST['_action'] === 'register')
 						$save = $this->set_language($lang_admin, true);
 
 						$subject	=	$this->_t('NewAccountSubject');
-						$body		=	$this->_t('NewAccountSignupInfo')."\n\n".
-										$this->_t('NewAccountUsername').' '.$user_name."\n".
-										$this->_t('RegistrationLang').' '.$user_lang."\n".
-										$this->_t('NewAccountEmail').' '.$email."\n".
-										$this->_t('NewAccountIP').' '.$user_ip."\n\n".
-										$requires_approval."\n\n";
+						$body		=	$this->_t('NewAccountSignupInfo') . "\n\n".
+										$this->_t('NewAccountUsername') . ' ' .	$user_name . "\n".
+										$this->_t('RegistrationLang') . ' ' .	$user_lang . "\n".
+										$this->_t('NewAccountEmail') . ' ' .	$email . "\n".
+										$this->_t('NewAccountIP') . ' ' .		$user_ip . "\n\n".
+										$requires_approval . "\n\n";
 
-						$this->send_user_email('WikiAdmin' ,$this->config['admin_email'], $subject, $body, $lang_admin);
+						$this->send_user_email('WikiAdmin' ,$this->db->admin_email, $subject, $body, $lang_admin);
 						$this->set_language($save, true);
 					}
-
 				}
 
 				// log event
@@ -284,7 +265,7 @@ if (!isset($_GET['confirm']))
 
 		echo '<div class="cssform">';
 
-		if ($this->config['approve_new_user'] == true)
+		if ($this->db->approve_new_user)
 		{
 			$this->show_message($this->_t('UserApprovalInfo'), 'hint');
 		}
@@ -359,16 +340,12 @@ if (!isset($_GET['confirm']))
 			echo '<small> '.$this->_t('AcceptTermsOfUse').' '.$this->config['site_name'].' <a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->_t('TermsOfUse').'</a><br /></small></p>';
 		}*/
 
-		// captcha code starts
-
-		// Only show captcha if the admin enabled it in the config file
-		if ($this->config['enable_captcha'] && $this->config['captcha_registration'])
+		if ($this->db->captcha_registration)
 		{
 			echo '<p>';
-			$this->show_captcha();
+			echo $this->show_captcha();
 			echo "</p>\n";
 		}
-		// end captcha
 
 		echo '<p><input type="submit" class="OkBtn" value="'.$this->_t('RegistrationButton').'" /></p>';
 
