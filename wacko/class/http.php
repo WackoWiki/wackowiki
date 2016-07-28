@@ -128,7 +128,7 @@ class Http
 				"FROM ".$this->db->table_prefix."cache ".
 				"WHERE name = ".$this->db->q($hash));
 
-			Ut::dbg('invalidate_page', $page);
+			// Ut::dbg('invalidate_page', $page);
 
 			$past = time() - $this->db->cache_ttl - 1;
 
@@ -142,7 +142,7 @@ class Http
 					++$n;
 				}
 
-				Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
+				// Ut::dbg('invalidate_page', $page, $param['method'], $param['query'], '=>', $x);
 			}
 
 			$this->db->sql_query(
@@ -193,7 +193,7 @@ class Http
 		// check cache
 		if (($cached_page = $this->load_page($mtime)))
 		{
-			Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
+			// Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
 			$gmt	= Ut::http_date($mtime);
 			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
@@ -211,7 +211,7 @@ class Http
 				else if ($etag && $gmt != trim($etag, '\"'));
 				else
 				{
-					Ut::dbg('not modified');
+					// Ut::dbg('not modified');
 					header('HTTP/1.1 304 Not Modified');
 					$this->terminate();
 				}

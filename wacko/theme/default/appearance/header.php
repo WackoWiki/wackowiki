@@ -15,12 +15,6 @@ else
 	$tpl->other = true;
 }
 
-// goback feature
-if ($this->page && !$this->no_way_back)
-{
-	$this->sess->sticky_goback = $this->slim_url($this->tag);
-}
-
 // if user are logged, shows "You are UserName"
 if (($logged_in = $this->get_user()))
 {
