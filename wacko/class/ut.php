@@ -218,6 +218,22 @@ class Ut
 		return implode(' -> ', array_reverse($list));
 	}
 
+	// helper for error diags in classes: return file:line from where class method called from out of class
+	static function callee($class_filter)
+	{
+		$bt = debug_backtrace();
+		$dir = dirname(dirname(__FILE__)) . '/';
+		$res = '?';
+		foreach ($bt as $frame)
+		{
+			if (fnmatch($class_filter, (string) @$frame['class']) && isset($frame['file']))
+			{
+				$res = str_replace($dir, '', $frame['file']) . ':' . $frame['line'];
+			}
+		}
+		return $res;
+	}
+
 	// join_path('/home/sts', 'dev/', './a.c')  ==> '/home/sts/dev/a.c'
 	// removes .. from path - if .. is a first element in result - return FALSE
 	// never emits trailing /
