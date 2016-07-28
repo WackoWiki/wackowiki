@@ -355,7 +355,7 @@ class Http
 		if (!headers_sent())
 		{
 			// Make sure no &amp;'s are in, this will break the redirect
-			$url = str_replace('&amp;', '&', $url);
+			$url = Ut::amp_decode($url);
 
 			if ($permanent)
 			{

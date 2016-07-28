@@ -273,14 +273,10 @@ if ($this->has_access('read'))
 				echo '<br />'.$output;
 			}
 
-			// captcha code starts
-
-			// Only show captcha if the admin enabled it in the config file
-			if ($this->config['enable_captcha'] && $this->config['captcha_new_comment'])
+			if ($this->db->captcha_new_comment)
 			{
-				$this->show_captcha(false);
+				echo $this->show_captcha(false);
 			}
-			// end captcha
 			?>
 
 			<script>

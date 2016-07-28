@@ -503,4 +503,15 @@ class Ut
 	{
 		return base64_decode(strtr($data, '-_', '+/'));
 	}
+
+	// used to demange href()-built links for use out of html context (e.g. plain text emails)
+	static function amp_decode($text)
+	{
+		return str_replace('&amp;', '&', $text);
+	}
+
+	static function strip_spaces($text)
+	{
+		return str_replace([' ', "\t", "\r", "\n", "\x0b", "\0"], '', $text);
+	}
 }
