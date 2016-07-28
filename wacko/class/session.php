@@ -19,7 +19,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public $cf_tls;					// if !isset - must not act on this values (i.e. from freecap)
 
 	public $cf_nonce_lifetime = 7200;
-	public $cf_prevent_replay = 1;
+	public $cf_prevent_replay = 0;	// STS XXX some bug to be fixed
 	public $cf_gc_probability = 2;
 	public $cf_gc_maxlifetime = 1440;
 	public $cf_max_idle = 1440;

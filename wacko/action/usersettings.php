@@ -167,21 +167,12 @@ else if (($user = $this->get_user()))
 
 		if ($email)
 		{
-			$confirm		= Ut::random_token(21);
-			$confirm_hash	= hash_hmac('sha256', $confirm, $this->db->system_seed);
-
-			$this->db->sql_query(
-				"UPDATE {$this->config['user_table']} SET ".
-					"email_confirm = ".$this->db->q($confirm_hash)." ".
-				"WHERE user_id = '".(int)$user['user_id']."' ".
-				"LIMIT 1");
-
 			$save = $this->set_language($user['user_lang'], true);
 			$subject	=	$this->_t('EmailConfirm');
 			$body		=	Ut::perc_replace($this->_t('EmailVerify'),
 								$this->config['site_name'],
 								$user['user_name'],
-								$this->href('', '', 'confirm='.$confirm))."\n\n";
+								$this->user_email_confirm($user['user_id']))."\n\n";
 
 			$this->send_user_email($user['user_name'], $email, $subject, $body, $user['user_lang']);
 			$this->set_language($save, true);

@@ -15,19 +15,24 @@ else
 	$tpl->other = true;
 }
 
+// goback feature
+if ($this->page && !$this->no_way_back)
+{
+	$this->sess->sticky_goback = $this->slim_url($this->tag);
+}
+
 // if user are logged, shows "You are UserName"
-// TODO remake this goback= stuff thru sessions sticky vars!
 if (($logged_in = $this->get_user()))
 {
 	$tpl->uare_link = $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
 	$tpl->uare_account = $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0);
-	$tpl->uare_logout = $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag)); // STS check if & is not double-escaped
+	$tpl->uare_logout = $this->href('', $this->_t('LoginPage'), 'action=logout');
 }
 // else shows login's controls
 else
 {
 	// show Register / Login link
-	$tpl->login_link = $this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag));
+	$tpl->login_link = $this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '');
 
 	if ($this->db->allow_registration)
 	{

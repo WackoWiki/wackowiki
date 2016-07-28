@@ -44,6 +44,7 @@ class Wacko
 	var $page_lang		 		= null;
 	var $html_head				= '';
 	var $hide_article_header	= false;
+	var $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
 	var $paragrafica_styles		= array(
 		'before'	=> array(
 						'_before'	=> '',
@@ -2569,6 +2570,20 @@ class Wacko
 		}
 	}
 
+	// generate url for email confirmation. used for registration and email change
+	function user_email_confirm($user_id)
+	{
+		$confirm = Ut::random_token(21);
+
+		$this->db->sql_query(
+			"UPDATE {$this->db->user_table} SET ".
+				"email_confirm = ".$this->db->q(hash_hmac('sha256', $confirm, $this->db->system_seed))." ".
+			"WHERE user_id = '".(int)$user_id."' ".
+			"LIMIT 1");
+
+		return $this->href('', '', 'confirm=' . $confirm);
+	}
+
 	// COOKIES
 	function get_cookie($name)
 	{
@@ -2592,7 +2607,7 @@ class Wacko
 		$prefix and $name = $this->db->cookie_prefix . $name;
 
 		$this->sess->setcookie($name, '',
-			1,
+			1, // waaay in the past timestamp
 			$this->db->cookie_path, '', ($this->db->tls && $this->http->tls_session), true);
 
 		unset($_COOKIE[$name]);
@@ -4206,6 +4221,7 @@ class Wacko
 				{
 					$tpl = Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
 					$tpl->pull('_t', function ($block, $loc, $str) { return $this->_t($str); });
+					$tpl->pull('format_t', function ($block, $loc, $str) { return $this->format_t($str); });
 					$tpl->pull('db', function ($block, $loc, $str) { return $this->db[$str]; });
 					$tpl->pull('csrf',
 						function ($block, $loc, $action)
@@ -4688,6 +4704,8 @@ class Wacko
 	// user logs in by explicitly providing password
 	function log_user_in($user, $remember_me = false)
 	{
+		$this->set_message(Ut::perc_replace($this->_t(WelcomeBack), $user['user_name']), 'success');
+
 		if ($remember_me)
 		{
 			$this->create_auth_token($user);
@@ -5899,7 +5917,7 @@ class Wacko
 		if (!($user = $this->get_user()) && ($user = $this->check_auth_token()))
 		{
 			// re-login by auth token
-			$this->set_message('Welcome back, ' . $user['user_name']); // STS translate
+			$this->set_message(Ut::perc_replace($this->_t(WelcomeBack), $user['user_name']), 'success');
 			$this->sess->restart();
 			$this->set_user($user);
 		}
@@ -7354,4 +7372,8 @@ class Wacko
 		$this->http->redirect($this->href());
 	}
 
+	function login_page()
+	{
+		$this->http->redirect($this->href('', $this->_t('LoginPage'), Ut::random_token(5)));
+	}
 }

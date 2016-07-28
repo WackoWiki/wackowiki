@@ -77,6 +77,8 @@ $wacko_translation = array(
 	'SessionEnds'				=> 'Die aktuelle Sitzung endet',
 	'LastVisit'					=> 'Dein letzter Besuch',
 
+	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
+	'WelcomeBack'				=> 'Welcome back, %1',
 	'LoginAttemtsExceeded'		=> 'Du hast die maximal zulässige Zahl von Anmeldeversuchen überschritten.<br />Du musst nun deinen Benutzernamen und dein Passwort erneut eingeben sowie eine Sicherheitsabfrage beantworten.',
 
 	// other

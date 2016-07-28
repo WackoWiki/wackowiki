@@ -5,15 +5,21 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo "<!--notypo-->\n";
-$include_tail = "<!--/notypo-->\n";
-
 // reconnect securely in tls mode
-$param = isset($_GET['goback'])?  'goback=' . rawurlencode($_GET['goback']) : '';
-$this->http->ensure_tls($this->href('', '', $param));
-// was: $this->http->ensure_tls($this->href('', $this->_t('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )));
+$this->http->ensure_tls($this->href());
 
-$uncache = 'cache=' . Ut::random_token(5);
+$this->no_way_back = true; // prevent goback'ing that page
+
+$redirect = function ($to)
+{
+	if (($back = @$this->sess->sticky_goback))
+	{
+		$to = $back;
+		unset($this->sess->sticky_goback);
+	}
+	$this->http->redirect($this->href('', $to, Ut::random_token(5)));
+	// NEVER BEEN HERE
+};
 
 // actions
 if (@$_GET['action'] === 'clearcookies')
@@ -23,7 +29,7 @@ if (@$_GET['action'] === 'clearcookies')
 		$this->delete_cookie($name, false);
 	}
 
-	$this->http->redirect($this->href('', '', $uncache));
+	$this->login_page();
 }
 
 // hide article H1 header
@@ -37,18 +43,14 @@ if (@$_GET['action'] === 'logout')
 	$this->set_menu(MENU_DEFAULT);
 	$this->set_message($this->_t('LoggedOut'), 'success');
 	$this->context[++$this->current_context] = '';
-
-	$this->http->redirect($this->href('', @$_GET['goback'], $uncache));
+	$redirect($this->db->root_page);
 }
 
 if (($user = $this->get_user()))
 {
 	// user is logged in; display logout form
-	echo $this->form_open('logout', ['form_method' => 'get']); // STS TODO refactor
-
-	echo '<input type="hidden" name="action" value="logout" />';
-	echo '<div class="cssform">';
-	echo '<h3>'.$this->_t('Hello').", ".$this->compose_link_to_page($this->db->users_page.'/'.$user['user_name'], '', $user['user_name']).'!</h3>';
+	$tpl->u_href = $this->href();
+	$tpl->u_link = $this->compose_link_to_page($this->db->users_page.'/'.$user['user_name'], '', $user['user_name']);
 
 	if ($user['last_visit'] != SQL_DATE_NULL)
 	{
@@ -57,16 +59,6 @@ if (($user = $this->get_user()))
 			$this->get_time_formatted($user['last_visit']) .
 			'</code>');
 	}
-
-	/* STS meaning lost, seems like to be removed -- better add printing of latest security log
-	$cookie = explode(';', $this->get_cookie(AUTH_TOKEN));
-
-	$this->set_message($this->_t('SessionEnds') .
-		' <code>' .
-		$this->get_unix_time_formatted($cookie[2]) .  // session expiry date
-		'</code> ' .
-		'(' . $this->get_time_interval($cookie[2] - time(), true) . ')'); // session time left
-	*/
 
 	// Only allow your session to be used from this IP address.
 	$this->set_message($this->_t('BindSessionIp') . ' '.
@@ -83,174 +75,124 @@ if (($user = $this->get_user()))
 			'</code>');
 	}
 
-	echo '<p><a href="' . $this->href('', '', 'action=logout') . '" style="text-decoration: none;">';
-	echo '<input type="button" class="CancelBtn" value="' . $this->_t('LogoutButton') . '"/></a></p>';
-	echo '<p>' . $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0) .
-		' | <a href="' . $this->href('', '', 'action=clearcookies') . '">' . $this->_t('ClearCookies') . '</a></p>';
-	echo '</div>';
-
-	echo $this->form_close();
+	$tpl->u_logout = $this->href('', '', 'action=logout');
+	$tpl->u_account = $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0);
+	$tpl->u_cookies = $this->href('', '', 'action=clearcookies');
 }
 else // login
 {
 	// user is not logged in
-	$error = '';
+	$logins = &$this->sess->sticky_login_count;
+	isset($logins) or $logins = 0;
 
-	// is user trying to log in or register?
 	if (@$_POST['_action'] === 'login')
 	{
-		$_user_name = Ut::strip_spaces($_POST['user_name']);
+		++$logins;
 
-		// if user name already exists, check password
-		if (($existing_user = $this->load_user($_user_name)))
+		$user_name = Ut::strip_spaces($_POST['user_name']);
+		$password = $_POST['password'];
+
+		if ($this->sess->login_captcha && !$this->validate_captcha())
 		{
-			// check for disabled account
-			if (!$existing_user['enabled'] || $existing_user['account_type'])
+			$error = $this->_t('CaptchaFailed');
+		}
+		else
+		{
+			// let's begin pessimistically ;)
+			$error = $this->_t('LoginIncorrect');
+
+			// if user name already exists, check password
+			if (($user = $this->load_user($user_name)))
 			{
-				if ($existing_user['account_status'] == 1)
+				if (($n = $user['failed_login_count']) > $logins)
 				{
-					$error .= $this->_t('UserApprovalPending');
+					$logins = $n;
+				}
+
+				// check for old password formats
+				if (($n = strlen($user['password'])) == 32 || $n == 64)
+				{
+					if ($n == 32)
+					{
+						$hash = hash('md5', $password);
+					}
+					// check for old sha256 password
+					else
+					{
+						// load old salt
+						$salt = $this->db->load_single(
+											"SELECT salt ".
+												"FROM ".$this->db->user_table." ".
+												"WHERE user_name = ".$this->db->q($user_name)." ".
+												"LIMIT 1");
+						$hash = hash('sha256', $user_name . $salt['salt'] . $password);
+					}
+
+					// rehash password
+					if ($user['password'] == $hash)
+					{
+						$user['password'] = $hash = $this->password_hash($user, $password);
+
+						// update database with the sha256 password for future logins
+						$this->db->sql_query(
+							"UPDATE ".$this->db->table_prefix."user SET ".
+								"password	= ".$this->db->q($hash).", ".
+								"salt		= '' ".
+							"WHERE user_name = ".$this->db->q($user_name));
+					}
+				}
+
+				// check password
+				if (!$this->password_verify($user, $password))
+				{
+					$this->set_failed_user_login_count($user['user_id']);
 				}
 				else
 				{
-					$error .= $this->_t('AccountDisabled');
-				}
-			}
-			else
-			{
-				// Start Login Captcha, if there are too much login attempts (max_login_attempts)
-				if ($this->db->max_login_attempts && $existing_user['failed_login_count'] >= $this->db->max_login_attempts + 1)
-				{
-					if (!$this->validate_captcha())
+					$logins = 0;
+
+					// check for disabled account
+					if (!$user['enabled'] || $user['account_type'])
 					{
-						$error .= $this->_t('CaptchaFailed');
-					}
-				}
-
-				$this->sess->failed_login_count = $existing_user['failed_login_count'];
-
-				if (!$error)
-				{
-					$_password = $_POST['password'];
-
-					// check for old password formats
-					$oldlen = strlen($existing_user['password']);
-					if ($oldlen == 32 || $oldlen == 64)
-					{
-						if ($oldlen == 32)
-						{
-							$hash = hash('md5', $_password);
-						}
-						// check for old sha256 password
-						else
-						{
-							// load old salt
-							$password_salt = $this->db->load_single(
-												"SELECT salt ".
-													"FROM ".$this->db->user_table." ".
-													"WHERE user_name = ".$this->db->q($_user_name)." ".
-													"LIMIT 1");
-							$hash = hash('sha256', $_user_name.$password_salt['salt'].$_password);
-						}
-
-						// rehash password
-						if ($existing_user['password'] == $hash)
-						{
-							$hash = $this->password_hash($existing_user, $_password);
-
-							// update database with the sha256 password for future logins
-							$this->db->sql_query(
-								"UPDATE ".$this->db->table_prefix."user SET ".
-									"password	= ".$this->db->q($hash).", ".
-									"salt		= '' ".
-								"WHERE user_name = ".$this->db->q($_user_name));
-
-							$existing_user['password'] = $hash;
-						}
-					}
-
-					// check password
-					if ($this->password_verify($existing_user, $_password))
-					{
-						$this->log_user_in($existing_user, isset($_POST['persistent']));
-						$this->set_user($existing_user);
-						$this->context[++$this->current_context] = '';
-
-						$this->log(3, Ut::perc_replace($this->_t('LogUserLoginOK', SYSTEM_LANG), $existing_user['user_name']));
-
-						// run in tls mode?
-						if ($this->db->tls)
-						{
-							$this->http->secure_base_url();
-						}
-
-						$this->http->redirect($this->href('', @$_GET['goback'], $uncache));
+						$error = $this->_t(($user['account_status'] == 1)? 'UserApprovalPending' : 'AccountDisabled');
 					}
 					else
 					{
-						$error .= $this->_t('WrongPassword');
-						$this->log_user_delay();
+						$this->log_user_in($user, isset($_POST['persistent']));
+						$this->set_user($user);
+						$this->context[++$this->current_context] = '';
 
-						$this->set_failed_user_login_count($existing_user['user_id']);
+						$this->log(3, Ut::perc_replace($this->_t('LogUserLoginOK', SYSTEM_LANG), $user['user_name']));
 
-						// log failed attempt
-						$this->log(2, Ut::perc_replace($this->_t('LogUserLoginFailed', SYSTEM_LANG), $_user_name));
+						$redirect($this->href('', ($this->db->users_page . '/' . $user['user_name'])));
 					}
 				}
 			}
 		}
+
+		$this->sess->login_username = $user_name;
+		$this->log(2, Ut::perc_replace($this->_t('LogUserLoginFailed', SYSTEM_LANG), $user_name));
+		$this->set_message($error, 'error');
+		$this->login_page();
 	}
 
-	$_failed_login_count = isset($this->sess->failed_login_count) ? $this->sess->failed_login_count : 0;
-
-	if ($error)
+	$this->sess->login_captcha = 0;
+	if ($logins)
 	{
-		$this->show_message($this->format($error), 'error');
-	}
-	else if ($this->db->max_login_attempts && $_failed_login_count >= $this->db->max_login_attempts)
-	{
-		$this->show_message($this->_t('LoginAttemtsExceeded'), 'error');
-	}
-
-	echo '<div class="cssform">'."\n";
-	echo '<h3>'.$this->_t('LoginWelcome').'</h3>'."\n";
-
-	echo $this->form_open('login');
-	echo '<input type="hidden" name="goback" value="' . Ut::html(@$_GET['goback']) . '" />' . "\n";
-
-	echo '<p>';
-	echo '<label for="user_name">'.$this->format_t('LoginName').':</label>';
-	echo '<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="' . @$_user_name . '" tabindex="1" required autofocus />' . "\n";
-	echo '</p>' . "\n";
-
-	echo '<p>';
-	echo '<label for="password">'.$this->_t('LoginPassword').':</label>'."\n";
-	echo '<input type="password" id="password" name="password" size="25" tabindex="2" autocomplete="off" required />'."\n";
-	echo '</p>';
-
-	echo '<p>'."\n";
-	echo '<input type="checkbox" id="persistent" name="persistent" tabindex="3"/>'."\n";
-	echo '<label for="persistent">'.$this->_t('PersistentCookie').'</label>'."\n";
-	echo '</p>'."\n";
-
-	if ($this->db->max_login_attempts && $_failed_login_count >= $this->db->max_login_attempts)
-	{
-		echo '<p>';
-		echo $this->show_captcha();
-		echo '</p>';
+		$this->log_user_delay();
+		if ($this->db->max_login_attempts && $logins > $this->db->max_login_attempts && ($cap = $this->show_captcha()))
+		{
+			$tpl->l_toomuch = true;
+			$tpl->l_show_captcha = $cap;
+			$this->sess->login_captcha = 1;
+		}
 	}
 
-	echo '<p>'."\n";
-	echo '<input type="submit" class="OkBtn" value="'.$this->_t('LoginButton').'" tabindex="4" />'."\n";
-	// echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">'.$this->_t('ClearCookies').'</a></small>';
-	echo '</p>'."\n";
-	echo '<p>'.$this->format_t('ForgotLink').'</p>'."\n";
+	$tpl->l_href = $this->href();
+	$tpl->l_username = @$this->sess->login_username;
 
 	if ($this->db->allow_registration)
 	{
-		echo '<p>'.$this->format_t('LoginWelcome2').'</p>'."\n";
+		$tpl->l_welcome = true;
 	}
-
-	echo $this->form_close();
-	echo '</div>'."\n";
 }
