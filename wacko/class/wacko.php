@@ -6105,10 +6105,14 @@ class Wacko
 			echo $this->theme_header($mod).$data.$this->theme_footer($mod);
 		}
 
+		// goback feature
+		if ($this->page && !$this->no_way_back && $this->tag != $this->db->root_page)
+		{
+			$this->sess->sticky_goback = $this->slim_url($this->tag);
+		}
+
 		// NB: never been here if redirect() called!
 		$this->write_sitemap();
-
-		return $this->tag;
 	}
 
 	// TOC MANIPULATIONS
