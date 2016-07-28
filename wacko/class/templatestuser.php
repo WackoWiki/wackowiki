@@ -1,9 +1,7 @@
 <?php
 
 // TODO:
-// - error diags: find $loc from debug_backtrace
-// - if not sets in instantiated subpat - do not emit it
-// + __get to return how many times IT was set
+// ? if not sets in instantiated subpat - do not emit it
 
 if (!defined('IN_WACKO'))
 {
@@ -126,8 +124,7 @@ class TemplatestUser extends TemplatestSetter
 
 		if (($n = count($path)) < 1)
 		{
-			trigger_error('invalid template variable ' . $name, E_USER_WARNING);
-			return;
+			return $this->error('invalid template variable ', $name);
 		}
 
 		$this->set($path, $value);
@@ -141,8 +138,7 @@ class TemplatestUser extends TemplatestSetter
 	{
 		if (!isset($this->root['sub']))
 		{
-			trigger_error('nothing to set in pattern ' . $this->main, E_USER_WARNING);
-			return;
+			return $this->error('nothing to set in pattern ', $this->main);
 		}
 
 		$args = func_get_args();
@@ -153,14 +149,13 @@ class TemplatestUser extends TemplatestSetter
 
 		if (($nargs = count($args)) < 2)
 		{
-			trigger_error('template set need > 1 args', E_USER_WARNING);
-			return;
+			return $this->error('template set need > 1 args');
 		}
 
 		$value = $args[$nargs - 1];
 		if ($value === false || $value === null)
 		{
-			return;
+			return; // skip if value is empty
 		}
 
 		if ($nargs == 2)
@@ -236,7 +231,7 @@ class TemplatestUser extends TemplatestSetter
 		// main show
 		if (($err = $rec($this->root, $this->root['sub'][''][0], 0)))
 		{
-			trigger_error($err, E_USER_WARNING);
+			$this->error($err);
 		}
 	}
 
@@ -261,5 +256,10 @@ class TemplatestUser extends TemplatestSetter
 		}
 
 		$this->sets[$var] = $n + 1;
+	}
+
+	private function error()
+	{
+		trigger_error(implode('', func_get_args()) . ' at ' . Ut::callee('Templatest*'), E_USER_WARNING);
 	}
 }
