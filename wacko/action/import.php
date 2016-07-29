@@ -97,7 +97,7 @@ if ($this->is_admin())
 				$this->current_context--;
 
 				// log import
-				$this->log(4, Ut::perc_replace($this->_t('LogPageImported', $this->db->language), $tag));
+				$this->log(4, Ut::perc_replace($this->_t('LogPageImported', SYSTEM_LANG), $tag));
 
 				// count page
 				$t++;

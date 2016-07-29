@@ -34,7 +34,7 @@ if (isset($_GET['confirm']))
 		$this->show_message($this->_t('EmailConfirmed'));
 
 		// log event
-		$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', $this->db->language), $temp['email'], $temp['user_name']));
+		$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', SYSTEM_LANG), $temp['email'], $temp['user_name']));
 
 		// TODO: reset user (session data)
 		// $this->set_user($this->load_user(0, $user['user_id'], 0, true), 1);
@@ -97,7 +97,7 @@ else if (($user = $this->get_user()))
 					"LIMIT 1");
 
 				// log event
-				// $this->log(6, str_replace('%1', $user['user_name'], $this->_t('LogUserSettingsUpdate', $this->db->language)));
+				// $this->log(6, str_replace('%1', $user['user_name'], $this->_t('LogUserSettingsUpdate', SYSTEM_LANG)));
 			}
 		}
 	}
@@ -154,7 +154,7 @@ else if (($user = $this->get_user()))
 			"LIMIT 1");
 
 		// log event
-		$this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', $this->db->language), $user['user_name']));
+		$this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', SYSTEM_LANG), $user['user_name']));
 	}
 
 	// (re)send email confirmation code

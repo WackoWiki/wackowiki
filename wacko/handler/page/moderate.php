@@ -404,7 +404,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
-					$this->log(1, Ut::perc_replace($this->_t('LogRemovedPage', $this->db->language), $page['tag'], $page['user_id']));
+					$this->log(1, Ut::perc_replace($this->_t('LogRemovedPage', SYSTEM_LANG), $page['tag'], $page['user_id']));
 				}
 
 				unset($accept_action);
@@ -452,7 +452,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					foreach ($set as $page_id)
 					{
 						moderate_rename_topic($this, $old_tags[$i], $new_tags[$i]);
-						$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', $this->db->language), $old_tags[$i], $new_tags[$i]));
+						$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tags[$i], $new_tags[$i]));
 						$i++;
 					}
 
@@ -494,7 +494,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($tag != '' && $error != true)
 				{
 					moderate_rename_topic($this, $old_tag, $this->tag.'/'.$tag, $title);
-					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', $this->db->language), $old_tag, $this->tag.'/'.$tag.' '.$title));
+					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $this->tag.'/'.$tag.' '.$title));
 					unset($accept_action, $old_tag, $tag, $title);
 
 					if ($this->db->enable_feeds)
@@ -527,7 +527,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				moderate_merge_topics($this, $_POST['base'], $topics);
-				$this->log(3, Ut::perc_replace($this->_t('LogMergedPages', $this->db->language),
+				$this->log(3, Ut::perc_replace($this->_t('LogMergedPages', SYSTEM_LANG),
 							'##'.implode('##, ##', $topics).'##', $_POST['base']));
 
 				unset($accept_action, $topics);
@@ -548,7 +548,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($set as $page_id)
 			{
 				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
-				$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', $this->db->language), $page['tag'].' '.$page['title']));
+				$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $page['tag'].' '.$page['title']));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($page_id, 'comment', '!*');
 			}
@@ -563,7 +563,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($set as $page_id)
 			{
 				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
-				$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', $this->db->language), $page['tag'].' '.$page['title']));
+				$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $page['tag'].' '.$page['title']));
 				$this->save_acl($page_id, 'comment', '*');
 			}
 
@@ -789,7 +789,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// actually remove topics
 			if (isset($_POST['accept']))
 			{
-				$this->log(1, Ut::perc_replace($this->_t('LogRemovedPage', $this->db->language), $this->page['tag'], $this->page['user_id']));
+				$this->log(1, Ut::perc_replace($this->_t('LogRemovedPage', SYSTEM_LANG), $this->page['tag'], $this->page['user_id']));
 				moderate_delete_page($this, $this->tag);
 				unset($accept_action);
 
@@ -851,7 +851,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				else
 				{
 					moderate_rename_topic($this, $old_tag, $new_tag);
-					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', $this->db->language), $old_tag, $new_tag));
+					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $new_tag));
 					unset($accept_action);
 
 					if ($this->db->enable_feeds)
@@ -892,7 +892,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($tag != '' && $error != true)
 				{
 					moderate_rename_topic($this, $old_tag, $new_tag, $title);
-					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', $this->db->language), $old_tag, $new_tag.' '.$title));
+					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $new_tag.' '.$title));
 					unset($accept_action);
 
 					if ($this->db->enable_feeds)
@@ -910,7 +910,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->save_acl($this->page['page_id'], 'comment', '!*');
-			$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', $this->db->language), $this->page['tag'].' '.$this->page['title']));
+			$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $this->page['tag'].' '.$this->page['title']));
 			$this->set_message($this->_t('ModerateTopicBlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
 		}
@@ -918,7 +918,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if (isset($_POST['topic_unlock']) && $forum_cluster === true)
 		{
 			$this->save_acl($this->page['page_id'], 'comment', '*');
-			$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', $this->db->language), $this->page['tag'].' '.$this->page['title']));
+			$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $this->page['tag'].' '.$this->page['title']));
 			$this->set_message($this->_t('ModerateTopicUnlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
 		}
@@ -941,7 +941,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 						moderate_delete_page($this, $page['tag']);
-						$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', $this->db->language),
+						$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
 								$this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']),
 								$page['user_name'],
 								$this->get_time_formatted($page['created'])));
@@ -1043,7 +1043,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						if (moderate_split_topic($this, $comment_ids, $old_tag, $section.'/'.$tag, $title) === true)
 						{
-							$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', $this->db->language),
+							$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', SYSTEM_LANG),
 									$this->tag.' '.$this->page['title'],
 									$section.'/'.$tag.' '.$title));
 							unset($accept_action);
@@ -1120,7 +1120,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"WHERE page_id = '".(int)$page_id."' ".
 							"LIMIT 1");
 
-						$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', $this->db->language),
+						$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', SYSTEM_LANG),
 								$this->tag.' '.$this->page['title'],
 								$title.' '.$this->get_page_title($title)));
 						unset($accept_action);
