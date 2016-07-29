@@ -253,6 +253,7 @@ $wacko_translation = array(
 
 	// Groups action
 	'GroupsSearch'				=> 'Suche Gruppe',
+	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
 	'GroupsFilter'				=> 'Suche',
 	'GroupsOpenProfile'			=> 'Profil anzeigen',
 	'GroupsName'				=> 'Gruppe',

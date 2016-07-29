@@ -171,7 +171,7 @@ if (@$_POST['_action'] === 'set_permissions')
 				$new_owner['owned'] . "\n" .
 				$this->_t('PageOwnershipInfo') . "\n";
 
-			$this->send_user_email($new_owner['user_name'], $new_owner['email'], $subject, $body, $new_owner['user_lang']);
+			$this->send_user_email($new_owner, $subject, $body);
 			$this->set_language($save, true);
 		}
 

@@ -49,7 +49,7 @@
 				=]
 			</tr>
 			[= none _ =
-				<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
+				<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>[ ' _t: GroupsNoMatching ' ]</em></small></td></tr>
 			=]
 			[= line _ =
 				<tr class="lined">

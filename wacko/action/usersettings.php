@@ -174,7 +174,8 @@ else if (($user = $this->get_user()))
 								$user['user_name'],
 								$this->user_email_confirm($user['user_id']))."\n\n";
 
-			$this->send_user_email($user['user_name'], $email, $subject, $body, $user['user_lang']);
+			$user['email'] = $email;
+			$this->send_user_email($user, $subject, $body);
 			$this->set_language($save, true);
 
 			$message = $this->_t('SettingsCodeResent');

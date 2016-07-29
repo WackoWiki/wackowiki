@@ -1739,7 +1739,7 @@ class Wacko
 	// $charset				- send message in specific charset (w/o actual re-encoding)
 	// $xtra_headers		- (array) insert additional mail headers
 	// $supress_tls			- don't change all http links to https links in the message body
-	function send_mail($email_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = '', $supress_tls = false)
+	function send_mail($email_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = [], $supress_tls = false)
 	{
 		if (!$this->db->enable_email || ( !$email_to || !$subject || !$body) )
 		{
@@ -1752,7 +1752,16 @@ class Wacko
 		}
 
 		$name_to		= '';
-		$email_from		= $this->db->admin_email;
+		if (preg_match('/^([^<>]*)<([^<>]*)>$/', $email_to, $match))
+		{
+			$email_to = trim($match[2]);
+			$name_to = trim($match[1]);
+		}
+
+		if (!$email_from)
+		{
+			$email_from = $this->db->admin_email;
+		}
 		$name_from		= $this->db->email_from;
 
 		// in tls mode substitute protocol name in links substrings
@@ -1762,7 +1771,7 @@ class Wacko
 		}
 
 		// use phpmailer class
-		if ($this->db->phpmailer == true)
+		if ($this->db->phpmailer)
 		{
 			// $this->db->phpMailer_method
 			$email = new Email($this);
@@ -1776,7 +1785,10 @@ class Wacko
 			$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
 			$headers .= "X-Wacko: ".$this->db->base_url."\r\n";
 			$headers .= "Content-Type: text/plain; charset=".$charset."\r\n";
-			$headers .= ( is_array($xtra_headers) ? implode("\n", $xtra_headers)."\n" : '' );	// additional headers
+			foreach ($xtra_headers as $name => $value)
+			{
+				$headers .= $name . ': ' . $value . "\n";
+			}
 			$subject = ($subject ? "=?".$charset."?B?" . base64_encode($subject) . "?=" : '');
 
 			$body = wordwrap($body, 74, "\n", 0);
@@ -2327,44 +2339,49 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function approve_user($user_id, $account_status, $user_name, $email, $user_lang)
+	function approve_user($user, $account_status)
 	{
-		$this->set_account_status($user_id, $account_status);
+		$this->set_account_status($user['user_id'], $account_status);
 
 		if ($account_status === false)
 		{
-			#$this->add_user_page($user_name, $user_lang);
+			// $this->add_user_page($user['user_name'], $user['user_lang']);
 
 			// send email
 			if ($this->db->enable_email)
 			{
-				/* TODO: set user language for email encoding */
-				$save = $this->set_language($user_lang, true);
+				$save = $this->set_language($user['user_lang'], true);
 
 				$subject	=	$this->_t('RegistrationApproved');
 				$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name)."\n\n".
 								$this->_t('EmailRegisteredLogin')."\n\n";
 
-				$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
+				$this->send_user_email($user, $subject, $body);
 
 				$this->set_language($save, true);
 			}
 		}
 	}
 
-	function send_user_email($user_name, $email, $subject, $body, $user_lang)
+	function send_user_email($user, $subject, $body)
 	{
-		$save = $this->set_language($user_lang, true);
+		if ($user === 'System')
+		{
+			$user = ['user_name' => $this->db->email_from, 'email' => $this->db->admin_email, 'user_lang' => $this->db->language];
+		}
 
+		$save = $this->set_language($user['user_lang'], true);
+
+		$to			=	$user['user_name'] . ' <' . $user['email'] . '>';
 		$subject	=	'[' . $this->db->site_name . '] ' . $subject;
-		$body		=	$this->_t('EmailHello') . $user_name . ",\n\n".
+		$body		=	$this->_t('EmailHello') . $user['user_name'] . ",\n\n".
 						Ut::amp_decode($body) . "\n\n".
 						$this->_t('EmailDoNotReply') . "\n\n".
 						$this->_t('EmailGoodbye') . "\n".
 						$this->db->site_name . "\n".
 						$this->db->base_url;
 
-		$this->send_mail($email, $subject, $body, null, $this->get_charset($user_lang));
+		$this->send_mail($to, $subject, $body, null, $this->get_charset($user['user_lang']));
 
 		$this->set_language($save, true);
 	}
@@ -2403,7 +2420,7 @@ class Wacko
 											"'$title'\n".
 											$this->href('', $tag)."\n\n";
 
-							$this->send_user_email($user['user_name'], $user['email'], $subject, $body, $user['user_lang']);
+							$this->send_user_email($user, $subject, $body);
 
 							$this->set_watch($moderator_id, $page_id);
 							$this->set_language($save, true);
@@ -2563,7 +2580,7 @@ class Wacko
 						}
 					}
 
-					$this->send_user_email($watcher['user_name'], $watcher['email'], $subject, $body, $lang);
+					$this->send_user_email($watcher, $subject, $body);
 					$this->set_language($save, true);
 				}
 			}
@@ -2795,6 +2812,12 @@ class Wacko
 
 		if ($params)
 		{
+			if (isset($params['#']))
+			{
+				$anchor = $params['#'];
+				unset($params['#']);
+			}
+
 			foreach ($params as $i => &$param)
 			{
 				if (is_string($i))
@@ -4881,23 +4904,22 @@ class Wacko
 	// ACCESS CONTROL
 	function is_admin()
 	{
-		if (!$this->get_user())
+		if (isset($this->sess->admin_it_is))
 		{
-			return false;
+			return $this->sess->admin_it_is;
 		}
 
-		if (isset($this->db->aliases) && is_array($this->db->aliases))
+		if (($name = $this->get_user_name()) && isset($this->db->aliases))
 		{
-			$alias = $this->db->aliases;
-			$admin = explode("\\n", $alias['Admins']);
+			$admins = explode('\n', $this->db->aliases['Admins']);
 
-			if ($admin && in_array($this->get_user_name(), $admin))
+			if ($admins && in_array($name, $admins))
 			{
-				return true;
+				return $this->sess->admin_it_is = 1;
 			}
 		}
 
-		return false;
+		return $this->sess->admin_it_is = 0;
 	}
 
 	function is_moderator()

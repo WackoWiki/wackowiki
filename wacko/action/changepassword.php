@@ -222,7 +222,7 @@ else
 					"LIMIT 1");
 
 				// send code
-				$this->send_user_email($user_name, $user['email'], $subject, $body, $user['user_lang']);
+				$this->send_user_email($user, $subject, $body);
 				$this->set_language($save, true);
 
 				// log event

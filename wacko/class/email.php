@@ -82,7 +82,7 @@ class Email
 			$mail->AddAddress($email_to, $name_to);
 			#$mail->AddBCC($email_to, $name_to);
 
-			$mail->IsHTML(false);		// set email format to HTML
+			$mail->IsHTML(false);		// set email format to plain
 			$mail->ContentType	= 'text/plain';
 			$mail->WordWrap		= 80;
 			$mail->Priority		= $this->engine->db->email_priority;	// Urgent = 1, Not Urgent = 5, Disable = 0
@@ -95,7 +95,14 @@ class Email
 			{
 				foreach( $xtra_headers as $key => $value )
 				{
-					$mail->AddCustomHeader( "$key: $value" );
+					if (!strcasecmp($key, 'Message-ID'))
+					{
+						$mail->MessageID = $value;
+					}
+					else
+					{
+						$mail->AddCustomHeader( "$key: $value" );
+					}
 				}
 			}
 
@@ -134,5 +141,3 @@ class Email
 	}
 
 }
-
-?>
