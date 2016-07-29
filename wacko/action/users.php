@@ -29,7 +29,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 	}
 	else
 	{
-		$profile = 'profile=' . rawurlencode($user['user_name']);
+		$profile = ['profile' => $user['user_name']];
 
 		// usergroups
 		if (is_array($this->db->aliases))
@@ -59,15 +59,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// $user['real_name'] = $this->do_unicode_entities($user['real_name'], $user['account_lang']);
 		}
 
+		$allow_intercom = ($this->db->enable_email && $logged_in && $user['email'] && ($this->is_admin() || ($user['allow_intercom'] && !$user['email_confirm'])));
+
 		// prepare and send personal message
-		if ($this->db->enable_email
-			&& isset($_POST['send_pm'])
-			&& @$_POST['mail_body']
-			&& isset($_POST['mail_subject'])
-			&& $logged_in
-			&& $user['allow_intercom']
-			&& $user['email']
-			&& !$user['email_confirm'])
+		if (@$_POST['_action'] === 'personal_message' && $allow_intercom && $_POST['mail_body'])
 		{
 			// check for errors
 			$error = '';
@@ -78,7 +73,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$error = Ut::perc_replace($this->_t('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
 			}
 			// personal messages flood control
-			else if (isset($this->sess->intercom_delay) && time() - $this->sess->intercom_delay < $this->db->intercom_delay)
+			else if (time() - @$this->sess->intercom_delay < $this->db->intercom_delay)
 			{
 				$error = Ut::perc_replace($this->_t('UsersPMFlooded'), $this->db->intercom_delay);
 			}
@@ -91,44 +86,52 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			else
 			{
 				// compose message
-				$prefix		= rtrim(str_replace(array('https://www.', 'https://', 'http://www.', 'http://'), '', $this->db->base_url), '/');
-				$msg_id		= date('ymdHi').'.'.Ut::rand(100000, 999999).'@'.$prefix;
+				$prefix		= rtrim(str_replace(['https://www.', 'https://', 'http://www.', 'http://'], '', $this->db->base_url), '/');
+				$msg_id		= date('ymdHi') . '.' . Ut::rand(100000, 999999) . '@' . $prefix;
 				$subject	= $_POST['mail_subject'];
 				if ($subject === '')
 				{
 					$subject = '(no subject)';
 				}
-				if (strpos($subject, $prefix1 = '[' . $prefix . '] ') === false)
+				if (strpos($subject, $prefix1 = '[' . $prefix . ']') === false)
 				{
-					$subject = $prefix1 .  $subject;
+					$subject = $prefix1 . ' ' . $subject;
 				}
-				$body = Ut::perc_replace($this->_t('UsersPMBody'),
-						$this->get_user_name(),
-						rtrim($this->db->base_url, '/'),
-						$this->href('', $this->tag, $profile.'&ref='.rawurlencode(base64_encode($msg_id.'@@'.$subject)).'#contacts'),
-						$this->db->abuse_email,
-						$_POST['mail_body']);
+
+				$save = $this->set_language($user['user_lang'], true);
+
+				$body =
+					$this->_t('EmailHello') . $user['user_name'] . ",\n\n".
+					Ut::perc_replace($this->_t('UsersPMBody'),
+							$this->get_user_name(),
+							rtrim($this->db->base_url, '/'),
+							Ut::amp_decode($this->href('', '',
+								['profile' => $this->get_user_name(),
+								'ref' => Ut::http64_encode(gzdeflate($msg_id.'@@'.$subject, 9)),
+								'#' => 'contacts'])),
+							$this->db->abuse_email,
+							$_POST['mail_body']);
 
 				// compose headers
-				$headers	= [];
-				$headers[] = "Message-ID: <$msg_id>";
-				if (isset($_POST['ref']) && ($ref = $_POST['ref']))
+				$headers = [];
+				$headers['Message-ID'] = "<$msg_id>";
+				if (($ref = @$_POST['ref']))
 				{
-					$headers[] = "In-Reply-To: <$ref>";
-					$headers[] = "References: <$ref>";
+					$headers['In-Reply-To'] = "<$ref>";
+					$headers['References'] = "<$ref>";
 				}
 
 				$body .= "\n\n" . $this->_t('EmailGoodbye') . "\n" . $this->db->site_name . "\n" . $this->db->base_url;
 
 				// send email
-				$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
+				$this->send_mail($user['user_name'] . ' <' . $user['email'] . '>', $subject, $body, 'no-reply@' . $prefix, '', $headers, true);
+				$this->set_language($save, true);
+
 				$this->set_message($this->_t('UsersPMSent'));
-				$this->log(4, Ut::perc_replace($this->_t('LogPMSent', $this->db->language), $this->get_user_name(), $user['user_name']));
+				$this->log(4, Ut::perc_replace($this->_t('LogPMSent', SYSTEM_LANG), $this->get_user_name(), $user['user_name']));
 
 				$this->sess->intercom_delay	= time();
-				$_POST['mail_body']			=
-				$_POST['mail_subject']		=
-				$_POST['ref']				= '';
+				$this->http->redirect($this->href('', '', $profile + ['#' => 'contacts']));
 			}
 		}
 
@@ -160,39 +163,42 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// only registered users can send PMs
 			if ($logged_in)
 			{
-				$subject = &$_POST['mail_subject'];
-				$ref = &$_POST['ref'];
+				$subject = (string) @$_POST['mail_subject'];
+				$ref = (string) @$_POST['ref'];
+				$body = (string) @$_POST['mail_body'];
 
 				// decompose reply referrer
-				if (isset($_GET['ref']) && $_GET['ref'])
+				if (($ref0 = @$_GET['ref']))
 				{
-					list($ref, $subject) = explode('@@', base64_decode(rawurldecode($_GET['ref'])), 2);
-
-					if (strncmp($subject, 'Re:', 3))
+					$ref0 = @gzinflate(Ut::http64_decode($ref0)); // suppress ALL errors on parsing user supplied data!
+					if ($ref0 && strpos($ref0, '@@') !== false)
 					{
-						$subject = 'Re: ' . $subject;
+						// TODO sanitize? someone can inject something into
+						list($ref, $subject) = explode('@@', Ut::strip_controls($ref0), 2);
+
+						if (strncmp($subject, 'Re:', 3))
+						{
+							$subject = 'Re: ' . $subject;
+						}
 					}
 				}
-				// $tpl->u_pm
 
 				$tpl->u_pm_pm_href = $this->href();
-				// STS hidden
 				$tpl->u_pm_pm_username = $user['user_name'];
-				if (isset($ref))
+				if ($ref)
 				{
 					$tpl->u_pm_pm_ref_ref = $ref;
 				}
 
 				// user must allow incoming messages, and needs confirmed email address set
-				if ($this->db->enable_email && $user['allow_intercom'] && $user['email'] && !$user['email_confirm'])
+				if ($allow_intercom)
 				{
-					// $tpl->u_pm_pm_ic_ =
-					$tpl->u_pm_pm_ic_subj = isset($subject)? $subject : '';
-					if (isset($ref))
+					$tpl->u_pm_pm_ic_subj = $subject;
+					if ($ref)
 					{
-						$tpl->u_pm_pm_ic_ref_href = $this->href('', '', $profile.'#contacts');
+						$tpl->u_pm_pm_ic_ref_href = $this->href('', '', $profile + ['#' => 'contacts']);
 					}
-					$tpl->u_pm_pm_ic_body = isset($_POST['mail_body'])? $_POST['mail_body'] : '';
+					$tpl->u_pm_pm_ic_body = $body;
 				}
 				else
 				{
@@ -212,7 +218,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		{
 			$sort_name = (isset($_GET['sort']) && $_GET['sort'] == 'name');
 			$pagination = $this->pagination($user['total_pages'], $limit, 'd',
-					$profile .  '&amp;sort=' . ($sort_name? 'name' : 'date') . '#pages');
+					$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
 
 			$pages = $this->db->load_all(
 				"SELECT page_id, tag, title, created, page_lang ".
@@ -226,11 +232,11 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// sorting and pagination
 			if ($sort_name)
 			{
-				$tpl->u_pages_date_href = $this->href('', '', $profile . '&amp;sort=date');
+				$tpl->u_pages_date_href = $this->href('', '', $profile + ['sort' => 'date']);
 			}
 			else
 			{
-				$tpl->u_pages_name_href = $this->href('', '', $profile . '&amp;sort=name');
+				$tpl->u_pages_name_href = $this->href('', '', $profile + ['sort' => 'name']);
 			}
 
 			$tpl->u_pages_pagination_text = $pagination['text'];
@@ -265,7 +271,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 			if ($user['total_comments'])
 			{
-				$pagination = $this->pagination($user['total_comments'], $limit, 'c', $profile . '#comments');
+				$pagination = $this->pagination($user['total_comments'], $limit, 'c', $profile + ['#' => 'comments']);
 				$tpl->u_cmt_c_pagination_text = $pagination['text'];
 
 				$comments = $this->db->load_all(
@@ -317,7 +323,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 				if ($user['total_uploads'])
 				{
-					$pagination = $this->pagination($user['total_uploads'], $limit, 'u', $profile . '#comments');
+					$pagination = $this->pagination($user['total_uploads'], $limit, 'u', $profile + ['#' => 'comments']);
 
 					$tpl->u_up_u_u2_pagination_text = $pagination['text'];
 

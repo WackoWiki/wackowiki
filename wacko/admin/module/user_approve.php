@@ -130,7 +130,7 @@ function admin_user_approve(&$engine, &$module)
 		if ($_GET['approve'] == 1)
 		{
 			// Approved registration
-			$engine->approve_user($user['user_id'], false, $user['user_name'], $user['email'], $user['user_lang']);
+			$engine->approve_user($user, false);
 			$engine->add_user_page($user['user_name'], $user['user_lang']);
 
 			$engine->show_message($engine->_t('RegistrationApproved'));

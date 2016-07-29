@@ -47,6 +47,14 @@ class TemplatestSetter extends TemplatestFilters
 			}
 		}
 
+		// check if the value can be converted to string
+		if (is_array($text)
+			|| !(is_object($text)? method_exists($text, '__toString') : settype($text, 'string')))
+		{
+			$text = Ut::stringify($text);
+			$this->error('value expected to be string, not ', $text);
+		}
+
 		// if last filter is not escape and we setting data (not subpattern) - do default escaping
 		if ($filter != 'escape' && $filter != 'e' && !isset($prefix0))
 		{
@@ -148,5 +156,10 @@ class TemplatestSetter extends TemplatestFilters
 				}
 			}
 		}
+	}
+
+	protected function error()
+	{
+		trigger_error(implode('', func_get_args()) . ' at ' . Ut::callee('Templatest*'), E_USER_WARNING);
 	}
 }

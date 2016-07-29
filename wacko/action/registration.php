@@ -215,7 +215,7 @@ else if (@$_POST['_action'] === 'register')
 								$waiting_approval . "\n\n".
 								$this->_t('EmailRegisteredIgnore') . "\n\n";
 
-					$this->send_user_email($user_name, $email, $subject, $body, $user_lang);
+					$this->send_user_email(['user_name' => $user_name, 'email' => $email, 'user_lang' => $user_lang], $subject, $body);
 					$this->set_language($save, true);
 
 					// 2. notify admin a new user has signed-up
@@ -233,7 +233,7 @@ else if (@$_POST['_action'] === 'register')
 										$this->_t('NewAccountIP') . ' ' .		$user_ip . "\n\n".
 										$requires_approval . "\n\n";
 
-						$this->send_user_email('WikiAdmin' ,$this->db->admin_email, $subject, $body, $lang_admin);
+						$this->send_user_email('System', $subject, $body);
 						$this->set_language($save, true);
 					}
 				}

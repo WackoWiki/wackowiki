@@ -157,6 +157,7 @@ class TemplatestUser extends TemplatestSetter
 				$name = array_shift($args);
 				if (!$args)
 				{
+					// path exhaused, only value remains, so we instructed to assign into sub!
 					$err = null;
 					if (is_array($name))
 					{
@@ -274,10 +275,5 @@ class TemplatestUser extends TemplatestSetter
 		}
 
 		$this->sets[$var] = $n + 1;
-	}
-
-	private function error()
-	{
-		trigger_error(implode('', func_get_args()) . ' at ' . Ut::callee('Templatest*'), E_USER_WARNING);
 	}
 }

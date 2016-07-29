@@ -186,7 +186,7 @@ function admin_user_users(&$engine, &$module)
 			"LIMIT 1");
 
 		#$engine->add_user_page($user['user_name'], $user['user_lang']);
-		$engine->approve_user($user['user_id'], $user['account_status'], $user['user_name'], $user['email'], $user['user_lang']);
+		$engine->approve_user($user, $user['account_status']);
 	}
 	// edit user
 	else if (isset($_POST['edit']) && $user_id && (isset($_POST['newname']) || isset($_POST['moderator_id'])))

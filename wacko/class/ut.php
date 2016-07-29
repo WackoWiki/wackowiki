@@ -530,4 +530,9 @@ class Ut
 	{
 		return str_replace([' ', "\t", "\r", "\n", "\x0b", "\0"], '', (string) $text);
 	}
+
+	static function strip_controls($text)
+	{
+		return preg_replace('/[\x00-\x1F\x7F]/', '', str_replace("\t", ' ', (string) $text));
+	}
 }
