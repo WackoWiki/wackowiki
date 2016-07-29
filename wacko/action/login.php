@@ -10,17 +10,6 @@ $this->http->ensure_tls($this->href());
 
 $this->no_way_back = true; // prevent goback'ing that page
 
-$redirect = function ($to)
-{
-	if (($back = @$this->sess->sticky_goback))
-	{
-		$to = $back;
-		unset($this->sess->sticky_goback);
-	}
-	$this->http->redirect($this->href('', $to, Ut::random_token(5)));
-	// NEVER BEEN HERE
-};
-
 // actions
 if (@$_GET['action'] === 'clearcookies')
 {
@@ -38,12 +27,9 @@ $this->hide_article_header = true;
 // logout
 if (@$_GET['action'] === 'logout')
 {
-	$this->log(5, Ut::perc_replace($this->_t('LogUserLoggedOut', SYSTEM_LANG), $this->get_user_name()));
+	$this->context[++$this->current_context] = ''; // TODO ?!
 	$this->log_user_out();
-	$this->set_menu(MENU_DEFAULT);
-	$this->set_message($this->_t('LoggedOut'), 'success');
-	$this->context[++$this->current_context] = '';
-	$redirect($this->db->root_page);
+	$this->go_back($this->db->root_page);
 }
 
 if (($user = $this->get_user()))
@@ -163,7 +149,7 @@ else // login
 
 						$this->log(3, Ut::perc_replace($this->_t('LogUserLoginOK', SYSTEM_LANG), $user['user_name']));
 
-						$redirect($this->href('', ($this->db->users_page . '/' . $user['user_name'])));
+						$this->go_back($this->href('', ($this->db->users_page . '/' . $user['user_name'])));
 					}
 				}
 			}

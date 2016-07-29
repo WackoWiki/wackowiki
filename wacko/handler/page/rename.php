@@ -100,7 +100,7 @@ if ($registered
 				$message .= recursive_move($this, $this->tag, $new_name);
 			}
 
-			$this->config->invalidate_sql_cache();
+			$this->db->invalidate_sql_cache();
 
 			// update sitemap
 			$this->update_sitemap();

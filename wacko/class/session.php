@@ -1,7 +1,7 @@
 <?php
 
 // TODO:
-// - do not store session id in filename or db index - store hash instead!
+// + do not store session id in filename or db index - store hash instead!
 // - log of IP changes and other possible security alerts
 // - allocate internal unique session which lives thru lifetime of uber-session
 // - do not delete old sessions, but use them as hijack pointers
@@ -10,16 +10,19 @@
 abstract class Session extends ArrayObject // for concretization extend by some SessionStoreInterface'd class
 {
 	private $active = false;
-	private $send_cookie = false;
 	private $regenerated = false;
 	private $name = '';				// NB [0-9a-zA-Z]+ -- should be short and descriptive (i.e. for users with enabled cookie warnings)
 	private $id = null;				// NB [0-9a-zA-Z,-]+
+	private $user_agent;
+	private $message = null;
 
 	public $cf_ip;					// set by http class... STS must decide on bad coupling between session & http class
 	public $cf_tls;					// if !isset - must not act on this values (i.e. from freecap)
 
+	public $cf_static = 0;			// for use in e.g. captcha: do no regenerationss
+	public $cf_secret = 'adyaiD9+255JeiskPybgisby'; // just for lulz. supply from above!
 	public $cf_nonce_lifetime = 7200;
-	public $cf_prevent_replay = 0;	// STS XXX some bug to be fixed
+	public $cf_prevent_replay = 1;
 	public $cf_gc_probability = 2;
 	public $cf_gc_maxlifetime = 1440;
 	public $cf_max_idle = 1440;
@@ -42,6 +45,14 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		register_shutdown_function([$this, 'terminator'], getcwd());
 		parent::__construct([], parent::ARRAY_AS_PROPS);
+
+		$ua = $_SERVER['HTTP_USER_AGENT'];
+		if (strpos($ua, 'Trident') !== false)
+		{
+			// microsoft changing ua string anytime
+			$ua = 'IE';
+		}
+		$this->user_agent = $ua;
 	}
 
 	public function toArray()
@@ -59,19 +70,21 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 
 		$this->clean_vars();
+		$this->populate();
 
 		return true;
 	}
 
 	// replace the current session id with a newly generated
 	// one, create and lock new file, and keep the current session information
-	public function regenerate_id($delete_old = false, $message = '')
+	protected function regenerate_id($delete_old = false, $message = '')
 	{
-		if (headers_sent())
+		if (headers_sent($file, $line))
 		{
-			//ERROR "Cannot regenerate session id - headers already sent"
+			trigger_error("id regeneration requested after headers flushed at $file:$line", E_USER_WARNING);
+			Diag::dbg("regeneration failed by flush at $file:$line");
 		}
-		else if ($this->active && !isset($this->__reg_expire))
+		else if ($this->active)
 		{
 			if ($this->regenerated)
 			{
@@ -81,19 +94,15 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 			$now = time();
 
-			$this->__regenerations[] = [$now, $message];		// XXX trim
+			$this->sticky__regenerations[] = [$now, $message];		// XXX trim
 
-			if ($delete_old)
+			// let old page live for some seconds to gather missing requests (ajax etc)
+			if (!isset($this->__expire))
 			{
-				$this->store_destroy();
+				$this->__expire = ($delete_old? 0 : $now + 5); // STS magic number
 			}
-			else
-			{
-				// let old page live for some seconds to gather missing requests (ajax etc)
-				$this->__reg_expire = $now;
-				$this->write_session();
-				unset($this->__reg_expire);
-			}
+			$this->write_session();
+			unset($this->__expire);
 
 			// and pray so it will stop.. ;)
 			do
@@ -131,16 +140,16 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$name = preg_replace('/[^0-9a-zA-Z_\-]+/', '', $name);
 			if (!$name || ctype_digit($name))
 			{
-				$name = 'DefaultSessionId';
+				$name = 'sesid';
 			}
 			$this->name = $name;
 		}
 
-		$this->send_cookie = 1;
+		$send_cookie = 1;
 
 		if (!$id && ($id = @$_COOKIE[$this->name]))
 		{
-			$this->send_cookie = 0;
+			$send_cookie = 0;
 		}
 
 		if ($id && $this->cf_referer_check
@@ -154,32 +163,54 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$id = null;
 		}
 
-		$this->id = $id;
 		$this->regenerated = false;
 		$this->store_open($this->name);
-		$this->initialize();
+
+		if (!$id || ($text = $this->store_read($id)) === false || !($data = Ut::unserialize($text)))
+		{
+			// here we generate new session id for utterly new, or stale/evil id offered by client
+			// (or file error, per se)
+			$this->set_new_id();
+
+			// create & lock new jar
+			if ($this->store_read($this->id, true) !== '')
+			{
+				// error!
+			}
+			$data = [];
+		}
+		else
+		{
+			// we obtained (from the user or from the cookie) perfectly valid session id..
+			$this->id = $id;
+			if ($send_cookie)
+			{
+				$this->send_cookie();
+			}
+		}
+
+		$this->exchangeArray($data);
+		$this->active = true;
+
 		$this->cache_limiter(); // TODO - why it is in the session?
 
 		$now = time();
-		$user_agent = $_SERVER['HTTP_USER_AGENT'];
-		if (strpos($user_agent, 'Trident') !== false)
-		{
-			// microsoft changing ua string anytime
-			$user_agent = 'IE';
-		}
 
-		if (isset($this->__started))
+		if (isset($this->__started) && !$this->cf_static)
 		{
 			$message = '';
-			if (isset($this->__reg_expire) && $now - $this->__reg_expire > 8)
+			if (isset($this->__expire) && !$this->__expire)
 			{
-				unset($this->__reg_expire);
+				$message = 'obsolete';
+				$destroy = 2;
+			}
+			else if (isset($this->__expire) && $now > $this->__expire)
+			{
 				$message = 'reg_expire';
 				$destroy = 2;
 			}
 			else if ($now - $this->__started > $this->cf_max_session)
 			{
-				unset($this->__started);
 				$message = 'max_session';
 				$destroy = 2;
 			}
@@ -188,12 +219,12 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$message = 'max_idle';
 				$destroy = 2;
 			}
-			else if ($this->cf_prevent_replay && !$this->verify_nonce('NoReplay', @$_COOKIE[$this->name . 'NoReplay']))
+			else if ($this->cf_prevent_replay && !$this->verify_nonce('NoReplay', @$_COOKIE[$this->name . 'NoReplay'], 3))
 			{
 				$message = 'replay';
 				$destroy = 2;
 			}
-			else if (!similar_text($this->__user_agent, $user_agent, $perc) || $perc < 95)
+			else if (!similar_text($this->__user_agent, $this->user_agent, $perc) || $perc < 95)
 			{
 				$message = 'ua';
 				$destroy = 2;
@@ -216,26 +247,42 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 			if (isset($destroy))
 			{
+				$this->message = $message;
 				Diag::dbg($destroy, $message);
 				$this->regenerate_id($destroy, $message);
 
 				if ($destroy == 2)
 				{
-					$this->clean_vars();
+					$this->clean_vars(); // full reset
 				}
 			}
 		}
 
-		if (!isset($this->__created))	$this->__created			= $now;
-		if (!isset($this->__started))	$this->__started			= $now;
-		if (!isset($this->__regenerated)) $this->__regenerated		= $now;
-
-		$this->__user_agent				= $user_agent;
-
-		if (isset($this->cf_tls))		$this->__user_tls			= $this->cf_tls;
-		if (isset($this->cf_ip))		$this->__user_ip			= $this->cf_ip;
+		$this->populate();
 
 		return $this->active;
+	}
+
+	private function populate()
+	{
+		$this->prevent_replay();
+
+		if (!isset($this->__started))
+		{
+			$now = time();
+			isset($this->sticky__created)  or  $this->sticky__created = $now;
+
+			$this->__started = $now;
+			$this->__regenerated = $now;
+			$this->__user_agent = $this->user_agent;
+			isset($this->cf_tls)  and  $this->__user_tls = $this->cf_tls;
+			isset($this->cf_ip)  and  $this->__user_ip = $this->cf_ip;
+		}
+	}
+
+	public function message()
+	{
+		return $this->message;
 	}
 
 	public function active()
@@ -271,25 +318,28 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public function set_flash($name, $value, $lifetime = 2)
 	{
 		$this[$name] = $value;
-		$this->__flashdata[$name] = $lifetime;
+		$this->sticky__flash[$name] = $lifetime;
 	}
 
 	// shutdown-registered worker
 	public function terminator($cwd)
 	{
 		// expire flashdata
-		if (isset($this->__flashdata))
+		if (isset($this->sticky__flash))
 		{
-			foreach ($this->__flashdata as $var => $age)
+			foreach ($this->sticky__flash as $var => $age)
 			{
 				if (--$age <= 0 || !isset($this[$var]))
 				{
-					unset($this[$var]);
-					unset($this->__flashdata[$var]);
+					if (isset($this[$var]))
+					{
+						unset($this[$var]);
+					}
+					unset($this->sticky__flash[$var]);
 				}
 				else
 				{
-					$this->__flashdata[$var] = $age;
+					$this->sticky__flash[$var] = $age;
 				}
 			}
 		}
@@ -306,6 +356,15 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 	}
 
+	private function prevent_replay()
+	{
+		if ($this->cf_prevent_replay)
+		{
+			$this->_send_cookie($this->name . 'NoReplay', 
+				$this->create_nonce('NoReplay', $this->cf_max_session));
+		}
+	}
+
 	private static function nonce_index($action, $code)
 	{
 		return (string)$action . '.' . substr(base64_encode(hash('sha1', (string)$code, 1)), 1, 11);
@@ -318,7 +377,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $code;
 	}
 
-	public function verify_nonce($action, $code)
+	public function verify_nonce($action, $code, $protect = 0)
 	{
 		if (!($nonces = @$this->nonces_db))
 		{
@@ -338,7 +397,17 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		if (($ret = isset($nonces[$index])))
 		{
-			unset($nonces[$index]);
+			if ($protect)
+			{
+				if ((int)$nonces[$index] == $nonces[$index])
+				{
+					$nonces[$index] = time() + $protect + 0.01;
+				}
+			}
+			else
+			{
+				unset($nonces[$index]);
+			}
 		}
 
 		$this->nonces_db = $nonces;
@@ -359,70 +428,20 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	private function write_session()
 	{
-		if ($this->cf_prevent_replay)
-		{
-			$this->_send_cookie($this->name . 'NoReplay', 
-				$id = $this->create_nonce('NoReplay', $this->cf_max_session));
-		}
 		$this->__updated = time();
-		$this->store_write($this->id, serialize($this->toArray()));
+		$this->store_write($this->id, Ut::serialize($this->toArray()));
 	}
 
-	// clean vars on quasi-hard reset, leave __ and sticky_ vars in place
+	// clean vars on hard reset, leave sticky_ vars in place
 	private function clean_vars()
 	{
 		foreach ($this->toArray() as $var => $val) // do not optimize toArray - php likes it this way
 		{
-			if (strncmp($var, 'sticky_', 7) && strncmp($var, '__', 2))
+			if (strncmp($var, 'sticky_', 7))
 			{
 				unset($this[$var]);
 			}
 		}
-	}
-
-	private function set_new_id()
-	{
-		$this->id = $this->store_generate_id();
-		$this->send_cookie();
-	}
-
-	private function reset_id()
-	{
-		if ($this->send_cookie && $this->id)
-		{
-			$this->send_cookie();
-			$this->send_cookie = 0;
-		}
-	}
-
-	private function initialize()
-	{
-		$text = $this->store_read($this->id);
-
-		if ($text === false)
-		{
-			// here we generate new session id for utterly new, or stale/evil id offered by client
-			// (or file error, per se)
-			$this->set_new_id();
-
-			// create & lock new jar
-			if ($this->store_read($this->id, true) !== '')
-			{
-				// error!
-			}
-		}
-		else if (!$this->active)
-		{
-			$this->reset_id(); // STS lone use
-		}
-
-		$this->active = true;
-
-		if (!$text || !($data = unserialize($text)))
-		{
-			$data = [];
-		}
-		$this->exchangeArray($data);
 	}
 
 	private function cache_limiter()
@@ -464,34 +483,10 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 	}
 
-	private function remove_cookie($cookie)
+	private function set_new_id()
 	{
-		$set = 'Set-Cookie';
-		$clen = strlen($cookie);
-		$found = 0;
-		$readd = [];
-		foreach (headers_list() as $name => $value)
-		{
-			if (!strcasecmp($name, $set))
-			{
-				if (!strncmp($value, $cookie, $clen) && substr($value, $clen, 1) == '=')
-				{
-					++$found;
-				}
-				else
-				{
-					$readd[] = $value;
-				}
-			}
-		}
-		if ($found)
-		{
-			header_remove($set);
-			foreach ($readd as $value)
-			{
-				header($set . ': ' . $value);
-			}
-		}
+		$this->id = $this->store_generate_id();
+		$this->send_cookie();
 	}
 
 	protected function send_cookie($remove = false)
@@ -511,9 +506,10 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	public function setcookie($name, $value = '', $expires = 0, $path = '', $domain = '', $secure = false, $httponly = false, $url_encode = true)
 	{
-		if (headers_sent($filename, $linenum))
+		if (headers_sent($file, $line))
 		{
-			// ERROR "Headers already sent in $filename on line $linenum\n";
+			trigger_error("cannot place session cookie $name=$value due to $file:$line", E_USER_WARNING);
+			Diag::dbg("session setcookie failed by $file:$line");
 			return;
 		}
 
@@ -566,5 +562,40 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		header($cookie, false); // false -- add, not replace
 
 		return true;
+	}
+
+	private function remove_cookie($cookie)
+	{
+		if (headers_sent())
+		{
+			return;
+		}
+
+		$set = 'Set-Cookie';
+		$clen = strlen($cookie);
+		$found = 0;
+		$readd = [];
+		foreach (headers_list() as $name => $value)
+		{
+			if (!strcasecmp($name, $set))
+			{
+				if (!strncmp($value, $cookie, $clen) && substr($value, $clen, 1) == '=')
+				{
+					++$found;
+				}
+				else
+				{
+					$readd[] = $value;
+				}
+			}
+		}
+		if ($found)
+		{
+			header_remove($set);
+			foreach ($readd as $value)
+			{
+				header($set . ': ' . $value);
+			}
+		}
 	}
 }

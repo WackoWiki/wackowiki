@@ -236,7 +236,6 @@ $wacko_config_defaults = array(
 	'csp'							=> 1,
 
 	'form_token_time'				=> 7200,
-	'form_token_sid_guests'			=> 1,
 
 	'system_seed'					=> '', // installer autogenerates random one
 	'hashid_seed'					=> '', // installer autogenerates random one

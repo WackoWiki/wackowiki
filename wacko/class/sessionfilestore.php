@@ -178,7 +178,8 @@ class SessionFileStore extends Session
 
 		$this->store_close();
 
-		$fname = Ut::join_path($this->cf_file_path, $this->prefix . substr($id, 0, 1), substr($id, 1, 2), substr($id, 3));
+		$id1 = Ut::http64_encode(hash_hmac('sha1', $id, $this->cf_secret, true));
+		$fname = Ut::join_path($this->cf_file_path, $this->prefix . substr($id1, 0, 1), substr($id1, 1, 2), substr($id1, 3));
 
 		clearstatcache();
 		if (@file_exists($fname))

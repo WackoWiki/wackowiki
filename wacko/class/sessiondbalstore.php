@@ -120,7 +120,7 @@ class SessionDbalStore extends Session
 		return $this->db->affected_rows;
 	}
 
-	private function lock($id)
+	private function lock(&$id)
 	{
 		if ($this->lock && $this->id == $id)
 		{
@@ -128,6 +128,8 @@ class SessionDbalStore extends Session
 		}
 
 		$this->store_close();
+
+		$id = Ut::http64_encode(hash_hmac('sha1', $id, $this->cf_secret, true));
 
 		$lock = '"session_' . $id . '"';
 

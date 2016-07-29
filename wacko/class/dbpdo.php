@@ -58,7 +58,7 @@ class DbPDO implements DbInterface
 			{
 				ob_end_clean();
 
-				if ($this->config->debug > 2)
+				if ($this->db->debug > 2)
 				{
 					die('Query failed: '.$query.' ('.$result->errorCode().': '.$result->errorInfo().')');
 				}

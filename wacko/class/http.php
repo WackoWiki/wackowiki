@@ -294,6 +294,7 @@ class Http
 			$sess->cf_dbal_table_name = $this->db->table_prefix . 'sessions';
 		}
 
+		$sess->cf_secret			= $this->db->system_seed;
 		$sess->cf_cookie_path		= $this->db->cookie_path;
 		$sess->cf_cookie_secure		= ($this->db->tls && $this->tls_session);
 		$sess->cf_cookie_httponly	= true;

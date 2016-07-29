@@ -55,10 +55,10 @@ if ($this->has_access('read'))
 
 		echo $place_holder.
 					'<a href="' . $this->href('revisions.xml') . '"><img src="'.
-					$this->config->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') .
+					$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') .
 					'" alt="XML" class="btn-feed"/></a>';
 
-		if ($this->config->minor_edit)
+		if ($this->db->minor_edit)
 		{
 			// STS: ?!..
 			echo '<br />'.((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? '<a href="'.$this->href('revisions', '', 'minor_edit=1').'">'.$this->_t('MinorEditHide').'</a>' : '<a href="'.$this->href('revisions', '', 'minor_edit=0').'">'.$this->_t('MinorEditShow').'</a>');
@@ -107,7 +107,7 @@ if ($this->has_access('read'))
 			echo ' '.($page['minor_edit'] ? 'm' : '');
 
 			// review
-			if ($this->config->review)
+			if ($this->db->review)
 			{
 				if ($page['reviewed'])
 				{
