@@ -4763,8 +4763,8 @@ class Wacko
 	function soft_login($user)
 	{
 		$this->sess->restart();
-		$this->set_message(Ut::perc_replace($this->_t('WelcomeBack'), $user['user_name']), 'success');
 		$this->set_user($user);
+		$this->set_message(Ut::perc_replace($this->_t('WelcomeBack'), $user['user_name']), 'success');
 	}
 
 	// explicitly end user session and free session vars

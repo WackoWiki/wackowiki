@@ -106,7 +106,7 @@ function admin_content_files(&$engine, &$module)
 				$engine->show_message($message, 'error');
 			}
 
-			$engine->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->_t('LogRemovedFile', $engine->db->language))));
+			$engine->log(1, Ut::perc_replace($engine->_t('LogRemovedFile', SYSTEM_LANG), $engine->tag.' global storage', $file['file_name']));
 		}
 		else
 		{
@@ -200,7 +200,7 @@ function admin_content_files(&$engine, &$module)
 			echo '<strong>'.$engine->_t('UploadDone').'</strong>';
 
 			// log event
-			$engine->log(4, str_replace('%3', $engine->binary_multiples($file_size, false, true, true), str_replace('%2', $small_name, $engine->_t('LogFileUploadedGlobal', $engine->db->language))));
+			$engine->log(4, Ut::perc_replace($engine->_t('LogFileUploadedGlobal', SYSTEM_LANG), '', $small_name, $engine->binary_multiples($file_size, false, true, true)));
 ?>
 <br /><ul>
 <li><?php echo $engine->link( 'file:'.$small_name ); ?></li>

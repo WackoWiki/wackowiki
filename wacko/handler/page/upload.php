@@ -279,7 +279,7 @@ if ($this->can_upload() === true)
 					}
 
 					// log event
-					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->_t('LogRemovedFile', $this->db->language))));
+					$this->log(1, Ut::perc_replace($this->_t('LogRemovedFile', SYSTEM_LANG), $this->tag.' '.$this->page['title'], $file['file_name']));
 				}
 				else
 				{
@@ -342,7 +342,7 @@ if ($this->can_upload() === true)
 					}
 
 					// log event
-					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->_t('LogUpdatedFileMeta', $this->db->language))));
+					$this->log(1, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag.' '.$this->page['title'], $file['file_name']));
 				}
 				else
 				{
@@ -538,11 +538,11 @@ if ($this->can_upload() === true)
 								// log event
 								if ($is_global)
 								{
-									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, $this->_t('LogFileUploadedGlobal', $this->db->language))));
+									$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedGlobal', SYSTEM_LANG), '', $small_name, $file_size_ft));
 								}
 								else
 								{
-									$this->log(4, str_replace('%3', $file_size_ft, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->_t('LogFileUploadedLocal', $this->db->language)))));
+									$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag']." ".$this->page['title'], $small_name, $file_size_ft));
 								}
 								?>
 		<br />

@@ -112,7 +112,7 @@ else if (@$_POST['_action'] === 'register')
 				$error .= $this->_t('RegistrationUserNameOwned');
 
 				// log event
-				$this->log(2, Ut::perc_replace($this->_t('LogUserSimiliarName', $this->db->language), $user_name));
+				$this->log(2, Ut::perc_replace($this->_t('LogUserSimiliarName', SYSTEM_LANG), $user_name));
 			}
 			// no email given
 			else if ($email == '')
@@ -150,14 +150,14 @@ else if (@$_POST['_action'] === 'register')
 				{
 					$account_status		= 1;
 					$account_enabled	= 0;
-					$waiting_approval	= Ut::perc_replace($this->_t('UserWaitingApproval'), SYSTEM_LANG);
-					$requires_approval	= Ut::perc_replace($this->_t('UserRequiresApproval'), SYSTEM_LANG);
+					$waiting_approval	= 'UserWaitingApproval';
+					$requires_approval	= 'UserRequiresApproval';
 				}
 				else
 				{
 					$account_status		= 0;
 					$account_enabled	= 1;
-					$waiting_approval	= $this->_t('EmailRegisteredLogin');
+					$waiting_approval	= 'EmailRegisteredLogin';
 					$requires_approval	= '';
 				}
 
@@ -212,7 +212,7 @@ else if (@$_POST['_action'] === 'register')
 					$subject =	$this->_t('EmailWelcome') . $this->db->site_name;
 					$body =		Ut::perc_replace($this->_t('EmailRegistered'),
 									$this->db->site_name, $user_name, $this->user_email_confirm($user_id)) . "\n\n".
-								$waiting_approval . "\n\n".
+								$this->_t($waiting_approval) . "\n\n".
 								$this->_t('EmailRegisteredIgnore') . "\n\n";
 
 					$this->send_user_email(['user_name' => $user_name, 'email' => $email, 'user_lang' => $user_lang], $subject, $body);
@@ -230,8 +230,12 @@ else if (@$_POST['_action'] === 'register')
 										$this->_t('NewAccountUsername') . ' ' .	$user_name . "\n".
 										$this->_t('RegistrationLang') . ' ' .	$user_lang . "\n".
 										$this->_t('NewAccountEmail') . ' ' .	$email . "\n".
-										$this->_t('NewAccountIP') . ' ' .		$user_ip . "\n\n".
-										$requires_approval . "\n\n";
+										$this->_t('NewAccountIP') . ' ' .		$user_ip . "\n\n";
+
+						if ($requires_approval)
+						{
+							$body .= Ut::perc_replace($this->_t($requires_approval), $this->db->site_name);
+						}
 
 						$this->send_user_email('System', $subject, $body);
 						$this->set_language($save, true);

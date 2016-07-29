@@ -51,7 +51,7 @@ $engine->validate_post_token();
 if (@$_GET['action'] === 'logout')
 {
 	unset($engine->sess->ap_created);
-	$engine->log(1, $engine->_t('LogAdminLogout', $engine->db->language));
+	$engine->log(1, $engine->_t('LogAdminLogout', SYSTEM_LANG));
 	$http->secure_base_url();
 	$http->redirect($engine->href());
 	exit;
@@ -92,7 +92,7 @@ if (@$_POST['_action'] === 'emergency')
 			$engine->config->set('ap_failed_login_count', 0);
 		}
 
-		$engine->log(1, $engine->_t('LogAdminLoginSuccess', $engine->db->language));
+		$engine->log(1, $engine->_t('LogAdminLoginSuccess', SYSTEM_LANG));
 		$http->secure_base_url();
 		$http->ensure_tls($db->base_url . 'admin.php');
 	}
@@ -105,7 +105,7 @@ if (@$_POST['_action'] === 'emergency')
 		}
 
 		$engine->config->set('ap_failed_login_count', $engine->db->ap_failed_login_count + 1);
-		$engine->log(1, $engine->_t('LogAdminLoginFailed', $engine->db->language));
+		$engine->log(1, $engine->_t('LogAdminLoginFailed', SYSTEM_LANG));
 
 		++$engine->sess->ap_failed_login_count;
 
@@ -113,7 +113,7 @@ if (@$_POST['_action'] === 'emergency')
 		if (($engine->sess->ap_failed_login_count >= 4) || ($engine->db->ap_failed_login_count >= $engine->db->ap_max_login_attempts))
 		{
 			$db->lock(AP_LOCK);
-			$engine->log(1, $engine->_t('LogAdminLoginLocked', $engine->db->language));
+			$engine->log(1, $engine->_t('LogAdminLoginLocked', SYSTEM_LANG));
 
 			$engine->sess->ap_failed_login_count = 0;
 		}
@@ -166,7 +166,7 @@ if (time() - $engine->sess->ap_last_activity > 900) //1800
 {
 	// last request was more than 15 minutes ago
 	unset($engine->sess->ap_created);
-	$engine->log(1, $engine->_t('LogAdminLogout', $engine->db->language));
+	$engine->log(1, $engine->_t('LogAdminLogout', SYSTEM_LANG));
 
 	$engine->set_message($engine->_t('LoggedOutAuto'));
 	$engine->http->redirect('admin.php');

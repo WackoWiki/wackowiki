@@ -52,7 +52,7 @@ if ($_POST)
 		"LIMIT 1");
 
 	// log event
-	$this->log(4, str_replace('%1', $this->tag.' '.(isset($_POST['title']) ? $_POST['title'] : ''), $this->_t('LogPageMetaUpdated', $this->db->language)));
+	$this->log(4, Ut::perc_replace($this->_t('LogPageMetaUpdated', SYSTEM_LANG), $this->tag.' '.(isset($_POST['title']) ? $_POST['title'] : '')));
 
 	// reload page
 	$this->set_message($this->_t('MetaUpdated'), 'success');

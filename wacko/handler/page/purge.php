@@ -21,24 +21,26 @@ if (@$_POST['_action'] === 'purge_data')
 	// purge page
 	$message = "<ol><em>";
 
+	$title = $this->tag . ' ' . $this->page['title'];
+
 	if (isset($_POST['comments']))
 	{
 		$this->remove_comments($this->tag);
-		$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->_t('LogRemovedAllComments', $this->db->language)));
+		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllComments', SYSTEM_LANG), $title));
 		$message .= "<li>".$this->_t('CommentsPurged')."</li>\n";
 	}
 
 	if (isset($_POST['files']))
 	{
 		$this->remove_files($this->tag);
-		$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->_t('LogRemovedAllFiles', $this->db->language)));
+		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllFiles', SYSTEM_LANG), $title));
 		$message .= "<li>".$this->_t('FilesPurged')."</li>\n";
 	}
 
 	if (isset($_POST['revisions']) && $this->is_admin())
 	{
 		$this->remove_revisions($this->tag);
-		$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->_t('LogRemovedAllRevisions', $this->db->language)));
+		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllRevisions', SYSTEM_LANG), $title));
 		$message .= "<li>".$this->_t('RevisionsPurged')."</li>\n";
 	}
 
