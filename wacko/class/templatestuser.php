@@ -102,7 +102,7 @@ class TemplatestUser extends TemplatestSetter
 
 	function __invoke()
 	{
-		$this->set(func_get_args());
+		$this->__set(func_get_args());
 	}
 
 	function __get($name)
@@ -112,28 +112,12 @@ class TemplatestUser extends TemplatestSetter
 
 	function __set($name, $value)
 	{
-		$path = explode('_', $name);
-		foreach ($path as $part)
-		{
-			if (!$part || !ctype_alpha($part[0]))
-			{
-				$path = [];
-				break;
-			}
-		}
-
-		if (($n = count($path)) < 1)
-		{
-			return $this->error('invalid template variable ', $name);
-		}
-
-		$this->set($path, $value);
-
+		$this->set($name, $value);
 	}
 
 	// set(['a', 'b'], 'text')
-	// set('a', 'b', 'text')
-	// set('a.b', 'text')
+	// set('a', 'b_b2', 'text')
+	// set('a_b', 'text')
 	function set()
 	{
 		if (!isset($this->root['sub']))
@@ -142,14 +126,15 @@ class TemplatestUser extends TemplatestSetter
 		}
 
 		$args = func_get_args();
-		if (count($args) == 1 && is_array($args[0]))
+		if (($nargs = count($args)) == 1 && is_array($args[0]))
 		{
 			$args = $args[0];
+			$nargs = count($args);
 		}
 
-		if (($nargs = count($args)) < 2)
+		if (!$nargs)
 		{
-			return $this->error('template set need > 1 args');
+			return;
 		}
 
 		$value = $args[$nargs - 1];
@@ -158,41 +143,75 @@ class TemplatestUser extends TemplatestSetter
 			return; // skip if value is empty
 		}
 
-		if ($nargs == 2)
-		{
-			$path = is_array($args[0])? $args[0] : explode('.', $args[0]);
-		}
-		else
-		{
-			$path = array_slice($args, 0, $nargs - 1);
-		}
-
-		$rec = function (&$super, &$sub, $i) use (&$rec, $value, $path)
+		$rec = function (&$super, &$sub, $args, $path = '') use (&$rec)
 		{
 			if (!($pat = &$sub[5]))
 			{
 				// instantiate pattern
 				$pat = $this->store[$sub[4]];
-				$this->increment_sets($path, $i);
+				$this->increment_sets($path);
 			}
 
-			if (!isset($path[$i]))
+			for (;;)
 			{
-				// $tpl->sub = true; -- just to instantiate subpattern
-				return ($value === true)? null : 'template set ' . implode('.', $path) . ' do not reference variable';
+				$name = array_shift($args);
+				if (!$args)
+				{
+					$err = null;
+					if (is_array($name))
+					{
+						foreach ($name as $i => $value)
+						{
+							if (is_string($i))
+							{
+								$err = $rec($super, $sub, [$i, $value], $path);
+							}
+							else
+							{
+								$err = $rec($super, $sub, [$value], $path);
+							}
+							if ($err)
+							{
+								break;
+							}
+						}
+					}
+					// $tpl->sub = true; -- just to instantiate subpattern
+					else if ($name !== true)
+					{
+						$err = "`$path' do not reference variable";
+					}
+					return $err;
+				}
+
+				if (is_array($name))
+				{
+					$args = array_merge($name, $args);
+				}
+				else if (is_string($name))
+				{
+					if (strpos($name, '_') !== false)
+					{
+						$args = array_merge(explode('_', $name), $args);
+					}
+					else if ($name)
+					{
+						break;
+					}
+				}
+				else
+				{
+					return "`$path' variable " . Ut::stringify($name) . ' must be string';
+				}
 			}
 
-			$name = $path[$i];
-			if (!is_string($name))
-			{
-				return 'template set name ' . Ut::stringify($name) . ' must be string';
-			}
+			$path1 = ($path? $path . '_' : '') . $name;
 
 			if (isset($pat['sub'][$name]))
 			{
-				foreach ($pat['sub'][$name] as &$sub)
+				foreach ($pat['sub'][$name] as &$child)
 				{
-					if (($err = $rec($pat, $sub, $i + 1)))
+					if (($err = $rec($pat, $child, $args, $path1)))
 					{
 						return $err;
 					}
@@ -200,9 +219,9 @@ class TemplatestUser extends TemplatestSetter
 			}
 			else if (isset($pat['var'][$name]))
 			{
-				if (isset($path[$i + 1]))
+				if (isset($args[1]))
 				{
-					return 'template set variable ' . $name . ' not last in path ' . implode('.', $path);
+					return "`$path1' variable trailed by " . Ut::stringify(array_slice($args, 0, -1));
 				}
 
 				if (isset($pat['set'][$name]))
@@ -212,32 +231,31 @@ class TemplatestUser extends TemplatestSetter
 
 					// re-instantiate pattern
 					$pat = $this->store[$sub[4]];
-					$this->increment_sets($path, $i);
+					$this->increment_sets($path);
 				}
 
 				$pat['set'][$name] = 1;
 
 				foreach ($pat['var'][$name] as &$var)
 				{
-					$this->assign($pat, $var, $value);
+					$this->assign($pat, $var, $args[0]);
 				}
 			}
 			else
 			{
-				return 'template set unknown variable ' . $name;
+				return "`$path1' variable undeclared";
 			}
 		};
 
 		// main show
-		if (($err = $rec($this->root, $this->root['sub'][''][0], 0)))
+		if (($err = $rec($this->root, $this->root['sub'][''][0], $args)))
 		{
-			$this->error($err);
+			$this->error('template set: ', $err);
 		}
 	}
 
-	private function increment_sets($path, $i)
+	private function increment_sets($var)
 	{
-		$var = implode('_', array_slice($path, 0, $i));
 		$n = (int) @$this->sets[$var];
 
 		if (($lvar = strlen($var)))
