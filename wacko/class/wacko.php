@@ -2601,6 +2601,37 @@ class Wacko
 		return $this->href('', '', 'confirm=' . $confirm);
 	}
 
+	function user_email_confirm_check($code)
+	{
+		$hash = $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed));
+
+		if (($user = $this->db->load_single(
+			"SELECT user_name, email ".
+			"FROM {$this->db->user_table} ".
+			"WHERE email_confirm = $hash ".
+			"LIMIT 1")))
+		{
+			$this->db->sql_query(
+				"UPDATE {$this->db->user_table} SET ".
+					"email_confirm = '' ".
+				"WHERE email_confirm = $hash ".
+				"LIMIT 1");
+
+			if ($this->get_user_name() == $user['user_name'])
+			{
+				$this->set_user_setting('email_confirm', '');
+			}
+
+			$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', SYSTEM_LANG), $user['email'], $user['user_name']));
+			$this->set_message($this->_t('EmailConfirmed'), 'success');
+		}
+		else
+		{
+			$this->set_message(Ut::perc_replace($this->_t('EmailNotConfirmed'),
+				$this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0)), 'error');
+		}
+	}
+
 	// COOKIES
 	function get_cookie($name)
 	{
@@ -4606,7 +4637,7 @@ class Wacko
 		{
 			$this->sess->guestprofile[$setting] = $value;
 		}
-		else
+		else if (@$this->sess->userprofile)
 		{
 			$this->sess->userprofile[$setting] = $value;
 		}
