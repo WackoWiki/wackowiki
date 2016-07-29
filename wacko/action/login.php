@@ -145,11 +145,11 @@ else // login
 					else
 					{
 						$this->log_user_in($user, isset($_POST['persistent']));
-						$this->context[++$this->current_context] = '';
+						$this->context[++$this->current_context] = ''; // STS what for?
 
 						$this->log(3, Ut::perc_replace($this->_t('LogUserLoginOK', SYSTEM_LANG), $user['user_name']));
 
-						$this->go_back($this->href('', ($this->db->users_page . '/' . $user['user_name'])));
+						$this->go_back($this->db->users_page . '/' . $user['user_name']);
 					}
 				}
 			}

@@ -82,7 +82,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if (headers_sent($file, $line))
 		{
 			trigger_error("id regeneration requested after headers flushed at $file:$line", E_USER_WARNING);
-			Diag::dbg("regeneration failed by flush at $file:$line");
+			Ut::dbg("regeneration failed by flush at $file:$line");
 		}
 		else if ($this->active)
 		{
@@ -248,7 +248,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			if (isset($destroy))
 			{
 				$this->message = $message;
-				Diag::dbg($destroy, $message);
+				Ut::dbg($destroy, $message);
 				$this->regenerate_id($destroy, $message);
 
 				if ($destroy == 2)
@@ -509,7 +509,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if (headers_sent($file, $line))
 		{
 			trigger_error("cannot place session cookie $name=$value due to $file:$line", E_USER_WARNING);
-			Diag::dbg("session setcookie failed by $file:$line");
+			Ut::dbg("session setcookie failed by $file:$line");
 			return;
 		}
 

@@ -26,35 +26,8 @@ $this->no_way_back = true; // prevent goback'ing that page
 // is user trying to confirm email, login or register?
 if (isset($_GET['confirm']))
 {
-	$confirm_hash = $this->db->q(hash_hmac('sha256', $_GET['confirm'], $this->db->system_seed));
-
-	if (($temp = $this->db->load_single(
-		"SELECT user_name, email ".
-		"FROM ".$this->db->user_table." ".
-		"WHERE email_confirm = ".$confirm_hash." ".
-		"LIMIT 1")))
-	{
-		$this->db->sql_query(
-			"UPDATE ".$this->db->user_table." SET ".
-				"email_confirm = '' ".
-			"WHERE email_confirm = ".$confirm_hash." ".
-			"LIMIT 1");
-
-		// cache handling
-		$this->http->invalidate_page($this->supertag);
-
-		// log event
-		$this->log(4, Ut::perc_replace($this->_t('LogUserEmailActivated', SYSTEM_LANG), $temp['email'], $temp['user_name']));
-
-		$message = $this->_t('EmailConfirmed');
-		$this->set_message($message, 'success');
-	}
-	else
-	{
-		$message = Ut::perc_replace($this->_t('EmailNotConfirmed'), $this->compose_link_to_page('Settings', '', $this->_t('SettingsText'), 0));
-		$this->set_message($message, 'error');
-	}
-
+	$this->user_email_confirm_check($_GET['confirm']);
+	$this->http->invalidate_page($this->supertag);
 	$this->login_page();
 }
 else if (@$_POST['_action'] === 'register')
