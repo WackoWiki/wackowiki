@@ -6057,7 +6057,7 @@ class Wacko
 				// ignore perpage page settings with empty / null as value
 				if (!Ut::is_empty($val = $this->page[$key]))
 				{
-					$this->config[$key] = $val;
+					$this->db[$key] = $val;
 				}
 			}
 

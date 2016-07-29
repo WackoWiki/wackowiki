@@ -17,6 +17,9 @@ $error			= '';
 // display usergroup profile
 if (($group = @$_GET['profile']))
 {
+	// hide article H1 header
+	$this->hide_article_header = true;
+
 	if (!($usergroup = $this->load_usergroup($group)))
 	{
 		$tpl->error_message = Ut::perc_replace($this->_t('GroupsNotFound'),
