@@ -252,7 +252,7 @@ class Wacko
 
 		sort($theme_list, SORT_STRING);
 
-		if (($allow = preg_split('/[\s,]+/', $this->config->allow_themes, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
+		if (($allow = preg_split('/[\s,]+/', $this->db->allow_themes, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
 		{
 			$theme_list = array_intersect($theme_list, $allow);
 		}
@@ -1494,7 +1494,7 @@ class Wacko
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n ".
-			"FROM {$this->config->table_prefix}revision ".
+			"FROM {$this->db->table_prefix}revision ".
 			"WHERE page_id = '".(int)$page_id."' ".
 				($hide_minor_edit
 					? "AND minor_edit = '0' "
@@ -1870,7 +1870,7 @@ class Wacko
 				$this->http->invalidate_page($this->supertag);
 			}
 
-			$this->config->invalidate_sql_cache();
+			$this->db->invalidate_sql_cache();
 		}
 
 		// check privileges
@@ -2284,12 +2284,12 @@ class Wacko
 			}
 			else if (time() > @$this->db->maint_last_xml_sitemap)
 			{
-				$this->config->set('xml_sitemap_update', 0, false);
-				$this->config->set('maint_last_xml_sitemap', time() + $days * DAYSECS);
+				$this->db->set('xml_sitemap_update', 0, false);
+				$this->db->set('maint_last_xml_sitemap', time() + $days * DAYSECS);
 			}
 			else
 			{
-				$this->config->set('xml_sitemap_update', 1);
+				$this->db->set('xml_sitemap_update', 1);
 				return;
 			}
 
@@ -4770,15 +4770,20 @@ class Wacko
 	// explicitly end user session and free session vars
 	function log_user_out()
 	{
-		// we destroy ALL user's auth tokens - effectively enforce user to re-login thru password auth
-		if (($user_id = $this->get_user_setting('user_id')))
+		if (($user = $this->get_user()))
 		{
-			$this->delete_auth_token($user_id);
+			// we destroy ALL user's auth tokens - effectively enforce user to re-login thru password auth
+			$this->delete_auth_token($user['user_id']);
+
+			$this->delete_cookie(AUTH_TOKEN);
+
+			$this->sess->restart();
+
+			$this->set_menu(MENU_DEFAULT);
+			$this->set_message($this->_t('LoggedOut'), 'success');
+			$this->log(5, Ut::perc_replace($this->_t('LogUserLoggedOut', SYSTEM_LANG), $user['user_name']));
+			// $this->context[++$this->current_context] = '';   <<=== what's that?!
 		}
-
-		$this->delete_cookie(AUTH_TOKEN);
-
-		$this->sess->restart();
 	}
 
 	// here we make all false login attempts last the same amount of time
@@ -5808,11 +5813,11 @@ class Wacko
 		$update	= [];
 
 		// purge referrers (once a day)
-		if (($days = $this->config->referrers_purge_time) > 0
-				&& $now > $this->config->maint_last_refs)
+		if (($days = $this->db->referrers_purge_time) > 0
+				&& $now > $this->db->maint_last_refs)
 		{
 			$this->db->sql_query(
-				"DELETE FROM ".$this->config->table_prefix."referrer ".
+				"DELETE FROM ".$this->db->table_prefix."referrer ".
 				"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".(int)$days."' DAY)");
 
 			$update['maint_last_refs'] = $now + 1 * DAYSECS;
@@ -5820,11 +5825,11 @@ class Wacko
 		}
 
 		// purge outdated pages revisions (once a week)
-		if (($days = $this->config->pages_purge_time) > 0
-				&& $now > $this->config->maint_last_oldpages)
+		if (($days = $this->db->pages_purge_time) > 0
+				&& $now > $this->db->maint_last_oldpages)
 		{
 			$this->db->sql_query(
-				"DELETE FROM ".$this->config->table_prefix."revision ".
+				"DELETE FROM ".$this->db->table_prefix."revision ".
 				"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL '".(int)$days."' DAY)");
 
 			$update['maint_last_oldpages'] = $now + 7 * DAYSECS;
@@ -5832,8 +5837,8 @@ class Wacko
 		}
 
 		// purge deleted pages (once per 3 days)
-		if (($days = $this->config->keep_deleted_time) > 0
-			&& $now > $this->config->maint_last_delpages)
+		if (($days = $this->db->keep_deleted_time) > 0
+			&& $now > $this->db->maint_last_delpages)
 		{
 			list($pages, ) = $this->load_deleted(1000, 0);
 
@@ -5858,11 +5863,11 @@ class Wacko
 		}
 
 		// purge system log entries (once per 3 days)
-		if (($days = $this->config->log_purge_time) > 0
+		if (($days = $this->db->log_purge_time) > 0
 			&& $now > $this->db->maint_last_log)
 		{
 			$this->db->sql_query(
-				"DELETE FROM {$this->config->table_prefix}log ".
+				"DELETE FROM {$this->db->table_prefix}log ".
 				"WHERE log_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".(int)$days."' DAY )");
 
 			$update['maint_last_log'] = $now + 3 * DAYSECS;
@@ -5871,14 +5876,14 @@ class Wacko
 		}
 
 		// remove outdated pages cache, purge sql cache (once per hour)
-		if ($now > $this->config->maint_last_cache)
+		if ($now > $this->db->maint_last_cache)
 		{
 			// pages cache
-			if (($ttl = $this->config->cache_ttl) > 0)
+			if (($ttl = $this->db->cache_ttl) > 0)
 			{
 				// clear from db
 				$this->db->sql_query(
-					"DELETE FROM ".$this->config->table_prefix."cache ".
+					"DELETE FROM ".$this->db->table_prefix."cache ".
 					"WHERE cache_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '".(int)$ttl."' SECOND )");
 
 				if (Ut::purge_directory(CACHE_PAGE_DIR, $ttl))
@@ -5888,7 +5893,7 @@ class Wacko
 			}
 
 			// sql query cache
-			if (($ttl = $this->config->cache_sql_ttl) > 0)
+			if (($ttl = $this->db->cache_sql_ttl) > 0)
 			{
 				if (Ut::purge_directory(CACHE_SQL_DIR, $ttl))
 				{
@@ -5900,7 +5905,7 @@ class Wacko
 		}
 
 		// purge expired cookie_tokens (once per 3 days)
-		if ($now > $this->config->maint_last_session)
+		if ($now > $this->db->maint_last_session)
 		{
 			$this->db->sql_query(
 				"DELETE FROM {$this->db->table_prefix}auth_token ".
@@ -5910,7 +5915,7 @@ class Wacko
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
 		}
 
-		$this->config->_set($update);
+		$this->db->_set($update);
 	}
 
 	// MAIN EXECUTION ROUTINE
@@ -5936,7 +5941,7 @@ class Wacko
 
 		if (!$tag)
 		{
-			$tag = $this->config->root_page;
+			$tag = $this->db->root_page;
 		}
 
 		// autotasks
@@ -5950,8 +5955,7 @@ class Wacko
 		{
 			$this->log(1, '<strong><span class="cite">'.'User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->get_user_ip().'</span></strong>');
 			$this->log_user_out();
-			// $this->http->redirect($this->db->base_url.$this->db->login_page.'?goback='.$tag);
-			$this->http->redirect($this->db->base_url.$this->_t('LoginPage').'?goback='.$tag);
+			$this->login_page();
 		}
 
 		// start user session
@@ -7431,6 +7435,17 @@ class Wacko
 
 	function login_page()
 	{
-		$this->http->redirect($this->href('', $this->_t('LoginPage'), Ut::random_token(5)));
+		$this->http->redirect($this->href('', $this->_t('LoginPage'), Ut::random_token(4)));
+	}
+
+	function go_back($to)
+	{
+		if (($back = @$this->sess->sticky_goback))
+		{
+			$to = $back;
+			unset($this->sess->sticky_goback);
+		}
+		$this->http->redirect($this->href('', $to, Ut::random_token(4)));
+		// NEVER BEEN HERE
 	}
 }

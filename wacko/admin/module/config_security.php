@@ -63,7 +63,6 @@ function admin_config_security(&$engine, &$module)
 		$config['username_chars_min']			= (int)$_POST['username_chars_min'];
 		$config['username_chars_max']			= (int)$_POST['username_chars_max'];
 		$config['form_token_time']				= (int)$_POST['form_token_time'];
-		$config['form_token_sid_guests']		= (int)$_POST['form_token_sid_guests'];
 
 		$engine->config->_set($config);
 
@@ -442,16 +441,6 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="form_token_sid_guests"><strong>Tie forms to guest sessions:</strong><br />
-					<small>If enabled, the form token issued to guests will be session-exclusive. This can cause problems with some ISPs.</small></label>
-				</td>
-				<td>
-					<input type="radio" id="form_token_sid_guests_on" name="form_token_sid_guests" value="1"<?php echo ( $engine->db->form_token_sid_guests == 1 ? ' checked="checked"' : '' );?> /><label for="form_token_sid_guests_on">On.</label>
-					<input type="radio" id="form_token_sid_guests_off" name="form_token_sid_guests" value="0"<?php echo ( $engine->db->form_token_sid_guests == 0 ? ' checked="checked"' : '' );?> /><label for="form_token_sid_guests_off">Off.</label>
-				</td>
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">

@@ -139,16 +139,15 @@ else if (($user = $this->get_user()))
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 
-			// reinitialize user session
-			$this->log_user_out();
-			$this->set_menu(MENU_DEFAULT);
-			$this->context[++$this->current_context] = '';
-
 			// log event
 			$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordChanged', SYSTEM_LANG), $user['user_name']));
+			$this->set_message($this->_t('PasswordChanged'), 'success');
+
+			// reinitialize user session
+			$this->log_user_out();
+			$this->context[++$this->current_context] = '';
 
 			// forward
-			$this->set_message($this->_t('PasswordChanged'), 'success');
 			$this->login_page();
 			// NEVER BEEN HERE
 		}

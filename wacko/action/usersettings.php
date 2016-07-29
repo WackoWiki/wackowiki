@@ -47,9 +47,7 @@ if (isset($_GET['confirm']))
 else if (@$_GET['action'] === 'logout')
 {
 	$this->log_user_out();
-	$this->set_menu(MENU_DEFAULT);
-	$this->set_message($this->_t('LoggedOut'), 'success');
-	$this->http->redirect($this->href());
+	$this->show_must_go_on();
 }
 else if (($user = $this->get_user()))
 {

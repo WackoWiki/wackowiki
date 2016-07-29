@@ -34,10 +34,13 @@ chdir(preg_replace('/\/lib\/captcha/', '/', __DIR__));
 
 define('IN_WACKO', true);
 require_once 'class/init.php';
+require_once 'config/config.php';
 
 // STS TODO need config'ing
 $sess = new SessionFileStore;
 $sess->cf_file_path = CACHE_SESSION_DIR;
+$sess->cf_secret = $wacko_config['system_seed'];
+$sess->cf_static = 1;
 
 $sess->start(@$_GET['for']);
 
