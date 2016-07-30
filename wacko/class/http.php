@@ -497,27 +497,47 @@ class Http
 		return isset($types[$ext])? $types[$ext] : 'application/octet-stream';
 	}
 
-	function sendfile($path)
+	function sendfile($path, $rec = 0, $text = '')
 	{
-		header_remove();
-		set_time_limit(0);
-		isset($this->session)  and  $this->session->write_close();
+		if ($rec)
+		{
+			$this->status($rec);
+		}
+		else
+		{
+			header_remove();
+			set_time_limit(0);
+			isset($this->session)  and  $this->session->write_close();
+		}
 
 		clearstatcache();
 		$path = realpath($path);
-		if (!is_file($path) || is_link($path))
+		if (!@file_exists($path))
 		{
-			$this->status(404);
-			echo 'File not found';
+			if (!$rec)
+			{
+				// STS refactor..
+				$this->sendfile(HTTP_404, 404, 'File not found');
+			}
+			else
+			{
+				echo $text;
+			}
 			return;
 		}
 
 		$size = @filesize($path);
 		$mtime = @filemtime($path);
-		if (!$size || !$mtime || !@is_readable($path))
+		if (!$size || !$mtime || !@is_readable($path) || !is_file($path) || is_link($path))
 		{
-			$this->status(403);
-			echo 'File access prohibited';
+			if (!$rec)
+			{
+				$this->sendfile(HTTP_403, 403, 'File access prohibited');
+			}
+			else
+			{
+				echo $text;
+			}
 			return;
 		}
 
@@ -534,7 +554,8 @@ class Http
 		$from = 0;
 		$to = $size;
 
-		if (isset($_SERVER['HTTP_RANGE'])) {
+		if (isset($_SERVER['HTTP_RANGE']) && !$rec)
+		{
 			if (!preg_match('@^bytes=(\d*)-(\d*)(,\d*-\d*)*$@', $_SERVER['HTTP_RANGE'], $m)
 				|| ($m[1] === '' && $m[2] === '')
 				|| ($m[1] !== '' && $m[2] !== '' && (int)$m[1] > (int)$m[2])
