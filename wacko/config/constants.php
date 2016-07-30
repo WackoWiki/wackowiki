@@ -31,6 +31,9 @@ define('CACHE_SESSION_DIR',				'/tmp');
 
 define('SITEMAP_XML',					'sitemap.xml');
 
+define('HTTP_403',						'image/upload403.svg');
+define('HTTP_404',						'image/upload404.svg');
+
 define('DAYSECS',						86400);				// 24 * 60 * 60
 
 define('BACKUP_COMPRESSION_RATE',		9);					// gzip compression rate

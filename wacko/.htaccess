@@ -3,6 +3,7 @@
  RewriteRule ^ index.php [QSA,L]
 </IfModule>
 
+<IfModule !mod_rewrite.c>
 <FilesMatch \.php$>
 	# Apache 2.4
 	<IfModule mod_authz_core.c>
@@ -27,3 +28,4 @@
 		Deny from None
 	</IfModule>
 </FilesMatch>
+</IfModule>
