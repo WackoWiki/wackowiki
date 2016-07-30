@@ -27,7 +27,7 @@ $file = $this->db->load_single(
 
 if (!$file)
 {
-	$this->http->sendfile(HTTP_404, 404);
+	$this->http->sendfile(404);
 	$this->http->terminate();
 }
 
@@ -45,7 +45,7 @@ if ($this->is_admin() || (isset($file['upload_id']) && ($this->page['owner_id'] 
 else
 {
 	// no access rights
-	$this->http->sendfile(HTTP_403, 403);
+	$this->http->sendfile(403);
 	$this->http->terminate();
 }
 
@@ -62,5 +62,5 @@ if (strncmp($type, 'image/', 6)) // do not count images
 		"LIMIT 1");
 }
 
-$this->http->sendfile($file_path);
+$this->http->sendfile($file_path, $file['file_name']);
 $this->http->terminate();

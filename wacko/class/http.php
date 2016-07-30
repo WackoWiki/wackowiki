@@ -497,59 +497,49 @@ class Http
 		return isset($types[$ext])? $types[$ext] : 'application/octet-stream';
 	}
 
-	function sendfile($path, $rec = 0, $text = '')
+	public function sendfile($path, $filename = null)
 	{
-		if ($rec)
-		{
-			$this->status($rec);
-		}
-		else
-		{
-			header_remove();
-			set_time_limit(0);
-			isset($this->session)  and  $this->session->write_close();
-		}
+		header_remove();
+		set_time_limit(0);
+		isset($this->session)  and  $this->session->write_close();
 
+		// allow to be called sendfile(404)
+		if (($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename))))
+		{
+			$this->status($code);
+			if (defined('HTTP_' . $code) && $this->sendfile0(constant('HTTP_' . $code)))
+			{
+				echo ($code == 404)? 'File not found' : 'File access prohibited';
+			}
+		}
+	}
+
+	private function sendfile0($path, $filename = null)
+	{
 		clearstatcache();
 		$path = realpath($path);
 		if (!@file_exists($path))
 		{
-			if (!$rec)
-			{
-				// STS refactor..
-				$this->sendfile(HTTP_404, 404, 'File not found');
-			}
-			else
-			{
-				echo $text;
-			}
-			return;
+			return 404;
 		}
 
-		$size = @filesize($path);
-		$mtime = @filemtime($path);
-		if (!$size || !$mtime || !@is_readable($path) || !is_file($path) || is_link($path))
+		if (!($size = @filesize($path))
+			|| !($mtime = @filemtime($path))
+			|| !@is_readable($path)
+			|| !is_file($path)
+			|| is_link($path))
 		{
-			if (!$rec)
-			{
-				$this->sendfile(HTTP_403, 403, 'File access prohibited');
-			}
-			else
-			{
-				echo $text;
-			}
-			return;
+			return 403;
 		}
 
 		if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
 		{ 
 			// Ut::dbg('not modified');
-			return $this->status(304);
+			$this->status(304);
+			return;
 		}
 
 		header('Last-Modified: ' . Ut::http_date($mtime));
-
-		$type = $this->mime_type($path);
 
 		$from = 0;
 		$to = $size;
@@ -587,6 +577,8 @@ class Http
 		header('Accept-Ranges: bytes');
 		header('Content-Length: ' . $to - $from + 1);
 		header('X-Served-By: sendfile');
+
+		$type = $this->mime_type($path);
 		header('Content-Type: ' . $type);
 		$type = explode('/', $type, 2);
 		$inline = ($type[0] == 'image' || $type[0] == 'text' || $type[0] == 'video' || $type[0] == 'audio');
@@ -603,7 +595,8 @@ class Http
 			header('Cache-Control: public, max-age=' . $age);
 			header('Expires: ' . Ut::http_date(time() + $age));
 		}
-		header('Content-Disposition: ' . ($inline? 'inline' : 'attachment') . '; filename="' . basename($path) . '"');
+
+		header('Content-Disposition: ' . ($inline? 'inline' : 'attachment') . '; filename="' . ($filename ?: basename($path)) . '"');
 		header('Content-Transfer-Encoding: binary');
 		header('Date: ' . Ut::http_date());
 

@@ -5,17 +5,10 @@
 class TemplatestEscaper
 {
     private $encoding = 'utf-8';
+    private $sc_encoding = 'utf-8';
 
     function setEncoding($encoding)
     {
-		$encoding = (string) $encoding;
-		if ($encoding === '')
-		{
-			throw new Exception\InvalidArgumentException(
-				__CLASS__ . ' constructor parameter does not allow a blank value'
-			);
-		}
-
 		$encoding = strtolower($encoding);
 
 		// List of all encoding supported by htmlspecialchars
@@ -32,15 +25,17 @@ class TemplatestEscaper
 			'eucjp-win',    'macroman'
 		];
 
+		$this->encoding =
+		$this->sc_encoding = $encoding;
+
 		if (!in_array($encoding, $supportedEncodings))
 		{
-			throw new Exception\InvalidArgumentException(
+			$this->sc_encoding = HTML_ENTITIES_CHARSET;
+			/* throw new Exception\InvalidArgumentException(
 				'Value of \'' . $encoding . '\' passed to ' . __CLASS__
 				. ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
-			);
+			); */
 		}
-
-		$this->encoding = $encoding;
     }
 
     function getEncoding()
@@ -50,7 +45,7 @@ class TemplatestEscaper
 
     function escapeHtml($string)
     {
-        return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE, $this->encoding);
+        return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE, $this->sc_encoding);
     }
 
     function escapeHtmlAttr($string)
