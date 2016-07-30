@@ -109,7 +109,6 @@ $config_db['maint_last_oldpages']			= 1;
 $config_db['maint_last_refs']				= 1;
 $config_db['maint_last_session']			= 1;
 $config_db['maint_last_xml_sitemap']		= 1;
-$config_db['maint_last_freecap']			= 1;
 $config_db['max_login_attempts']			= $config['max_login_attempts'];
 $config_db['menu_items']					= $config['menu_items'];
 $config_db['meta_description']				= $config['meta_description'];

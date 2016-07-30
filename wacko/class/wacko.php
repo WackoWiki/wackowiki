@@ -5943,16 +5943,6 @@ class Wacko
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
 		}
 
-		// purge expired freecap session (once per day)
-		if ($now > $this->db->maint_last_freecap)
-		{
-			if (Ut::purge_directory(CACHE_SESSION_DIR, 3600, $this->db->cookie_prefix . 'cap*'))
-			{
-				$this->log(7, 'Maintenance: stale freecaps purged');
-			}
-			$update['maint_last_freecap'] = $now + 1 * DAYSECS;
-		}
-
 		$this->db->_set($update);
 	}
 
@@ -7097,16 +7087,11 @@ class Wacko
 			$this->http->no_cache(false);
 
 			$this->sess->freecap_shown = 1;
-			if (!isset($this->sess->freecap_id))
-			{
-				// we supply filename for captcha to fill
-				$this->sess->freecap_id = $this->db->cookie_prefix . 'cap' . Ut::random_token(13);
-			}
 
 			$out .= $inline ? '' : "<br />\n";
 			$out .= '<label for="captcha">'.$this->_t('Captcha').":</label>\n";
 			$out .= $inline ? '' : "<br />\n";
-			$out .= '<img src="'.$this->db->base_url.'lib/captcha/freecap.php?for=' . $this->sess->freecap_id . '" id="freecap" alt="'.$this->_t('Captcha').'" />'."\n";
+			$out .= '<img src="'.$this->db->base_url.'.freecap" id="freecap" alt="'.$this->_t('Captcha').'" />'."\n";
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->_t('CaptchaReload').'">';
 			$out .= '<img src="'.$this->db->base_url.'image/spacer.png" alt="'.$this->_t('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
 			// $out .= $inline ? '' : "<br />\n";
@@ -7127,13 +7112,11 @@ class Wacko
 		{
 			$word_ok = false;
 			unset($this->sess->freecap_shown);
-			$sessfile = Ut::join_path(CACHE_SESSION_DIR, $this->sess->freecap_id);
-			$sess = (array) @json_decode(file_get_contents($sessfile));
 
-			if (!empty($sess['freecap_word_hash']) && !empty($_POST['captcha'])
-				&& $sess['hash_func'](strtolower($_POST['captcha']) . $sessfile) === $sess['freecap_word_hash'])
+			if (!empty($this->sess->freecap_word_hash) && !empty($_POST['captcha'])
+				&& $this->sess['hash_func'](strtolower($_POST['captcha'])) === $this->sess->freecap_word_hash)
 			{
-				unlink($sessfile);
+				unset($this->sess->freecap_attempts);
 				$word_ok = true;
 			}
 		}

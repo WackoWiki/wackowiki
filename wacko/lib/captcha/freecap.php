@@ -23,21 +23,6 @@
 *
 \************************************************************/
 
-//////////////////////////////////////////////////////
-////// Associate related session
-//////////////////////////////////////////////////////
-
-define('IN_CAPTCHA', true);
-
-// get absolute path to load file, because the relative path to the page may vary
-chdir(preg_replace('@/lib/captcha@', '/', __DIR__));
-
-define('IN_WACKO', true);
-require_once 'class/init.php';
-
-// sessions-lite mech :)
-$sessfile = (($for = @$_GET['for']) && ctype_alnum($for))? Ut::join_path(CACHE_SESSION_DIR, $for) : '/dev/null';
-$sess = (array) @json_decode(file_get_contents($sessfile));
 
 //////////////////////////////////////////////////////
 ////// User Defined Vars:
@@ -433,10 +418,9 @@ else
 // so even if your site is 100% secure, someone else's site on your server might not be
 // hence, even if attackers can read the session file, they can't get the freeCap word
 // (though most hashes are easy to brute force for simple strings)
-$sess['freecap_word_hash'] = $hash_func($word . $sessfile);
+$sess['freecap_word_hash'] = $hash_func($word);
 
-file_put_contents($sessfile, json_encode($sess));
-chmod($sessfile, 0640);
+$sess->write_close();
 
 
 //////////////////////////////////////////////////////
