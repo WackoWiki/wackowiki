@@ -123,7 +123,6 @@ $wacko_config_defaults = array(
 	'users_page'					=> 'Users',
 	'category_page'					=> 'Category',
 	'tag_page'						=> 'Tag',
-	'permalink_page'				=> 'Permalink',
 	'policy_page'					=> '',
 	'license'						=> '',
 

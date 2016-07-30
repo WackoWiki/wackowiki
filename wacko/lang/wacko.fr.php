@@ -104,10 +104,6 @@ $wacko_translation = array(
 	'JabberLink'				=> 'Discussion via XMPP (lancement du client Jabber)',
 	'PermaLink'					=> 'Lien permanent vers cette page ou permalien',
 	'PermaLinkTip'				=> 'Lien permanent de la page',
-	'PermaLinkRedirected'		=> 'Redirigé par un lien permanent',
-	'PermaLinkEmpty'			=> 'Pas  de référence fournie pour la redirection (p.ex. ?page_id=506).',
-	'PermaLinkRecent'			=> 'Lien permanent vers ',
-	'PermaLinkRevision'			=> 'Lien permanent vers la révision de ',
 
 	'ShowTip'					=> 'Cliquez pour revenir au mode vue',
 	'ShowText'					=> 'Voir',
