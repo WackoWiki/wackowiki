@@ -30,10 +30,9 @@ function admin_messages(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['system_message']			= (string)$_POST['system_message'];
-
-		$config['system_message'] = $engine->format($config['system_message'], 'wiki');
-
+		$config['system_message']			= $engine->format($config['system_message'], 'wiki');
 		$config['system_message_type']		= (string)$_POST['system_message_type'];
+		$config['enable_system_message']	= (int)$_POST['enable_system_message'];
 
 		$engine->config->_set($config);
 
@@ -77,11 +76,11 @@ function admin_messages(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>Themes per page:</strong><br />
-					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
+				<td class="label"><strong>Enable system message:</strong><br />
+					<small>Show system message.</small></td>
 				<td>
-					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ( $engine->db->allow_themes_per_page == 1 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_on">On.</label>
-					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ( $engine->db->allow_themes_per_page == 0 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_off">Off.</label>
+					<input type="radio" id="sys_message_on" name="enable_system_message" value="1"<?php echo ( $engine->db->enable_system_message == 1 ? ' checked="checked"' : '' );?> /><label for="sys_message_on">On.</label>
+					<input type="radio" id="sys_message_off" name="enable_system_message" value="0"<?php echo ( $engine->db->enable_system_message == 0 ? ' checked="checked"' : '' );?> /><label for="sys_message_off">Off.</label>
 				</td>
 			</tr>
 

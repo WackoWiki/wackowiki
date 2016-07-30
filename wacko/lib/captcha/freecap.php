@@ -29,7 +29,7 @@
 
 define('IN_CAPTCHA', true);
 
-// get absolute path to load config file, because the relative path to the page may vary
+// get absolute path to load file, because the relative path to the page may vary
 chdir(preg_replace('@/lib/captcha@', '/', __DIR__));
 
 define('IN_WACKO', true);

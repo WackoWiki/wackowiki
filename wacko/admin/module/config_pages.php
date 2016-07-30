@@ -42,7 +42,6 @@ function admin_config_pages(&$engine, &$module)
 		$config['settings_page']		= trim((string)$_POST['settings_page'], '/');
 		$config['password_page']		= trim((string)$_POST['password_page'], '/');
 		$config['users_page']			= trim((string)$_POST['users_page'], '/');
-		$config['permalink_page']		= trim((string)$_POST['permalink_page'], '/');
 		$config['category_page']		= trim((string)$_POST['category_page'], '/');
 		$config['tag_page']				= trim((string)$_POST['tag_page'], '/');
 		$config['groups_page']			= trim((string)$_POST['groups_page'], '/');
@@ -175,14 +174,6 @@ function admin_config_pages(&$engine, &$module)
 				<td class="label"><label for="users_page"><strong>User list:</strong><br />
 				<small>Page with a list of registered users (action <code>{{users}}</code>).</small></label></td>
 				<td><input type="text" maxlength="255" style="width:200px;" id="users_page" name="users_page" value="<?php echo htmlspecialchars($engine->db->users_page, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="permalink_page"><strong>Permalink:</strong><br />
-				<small>Page with a list of registered users (action <code>{{permalinkproxy}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" style="width:200px;" id="permalink_page" name="permalink_page" value="<?php echo htmlspecialchars($engine->db->permalink_page, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
