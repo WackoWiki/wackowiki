@@ -12,7 +12,7 @@
 				<li>
 				<?php
 				// show permalink
-				echo $this->action('permalink');
+				echo $this->action('hashid');
 				?>
 				</li>
 				</ul>
