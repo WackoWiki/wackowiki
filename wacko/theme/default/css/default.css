@@ -247,7 +247,7 @@ form input.submitinput {
 	font-weight: bold;
 	/*background-color: #fbe6f2;*/
 	background-color: #fcfcfc;
-	background-image: url('./../icon/warning.svg');
+	background-image: url('./../icon/attention.svg');
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: 10px 10px;
@@ -1449,6 +1449,7 @@ article.newsarticle:hover {
 
 .newstitle {
 	font-size: 13px;
+	font-weight: bold;
 	border: none;
 	border-color: red;
 	border-style: solid;
