@@ -30,19 +30,14 @@
 define('IN_CAPTCHA', true);
 
 // get absolute path to load config file, because the relative path to the page may vary
-chdir(preg_replace('/\/lib\/captcha/', '/', __DIR__));
+chdir(preg_replace('@/lib/captcha@', '/', __DIR__));
 
 define('IN_WACKO', true);
 require_once 'class/init.php';
-require_once 'config/config.php';
 
-// STS TODO need config'ing
-$sess = new SessionFileStore;
-$sess->cf_file_path = CACHE_SESSION_DIR;
-$sess->cf_secret = $wacko_config['system_seed'];
-$sess->cf_static = 1;
-
-$sess->start(@$_GET['for']);
+// sessions-lite mech :)
+$sessfile = (($for = @$_GET['for']) && ctype_alnum($for))? Ut::join_path(CACHE_SESSION_DIR, $for) : '/dev/null';
+$sess = (array) @json_decode(file_get_contents($sessfile));
 
 //////////////////////////////////////////////////////
 ////// User Defined Vars:
@@ -77,7 +72,7 @@ $seed_func = 'mt_srand';
 // crc32 supported by PHP4.0.1+
 $hash_func = 'sha1';
 // store in session so can validate in form processor
-$sess->hash_func = $hash_func;
+$sess['hash_func'] = $hash_func;
 
 // image type:
 // possible values: "jpg", "png", "gif"
@@ -438,9 +433,10 @@ else
 // so even if your site is 100% secure, someone else's site on your server might not be
 // hence, even if attackers can read the session file, they can't get the freeCap word
 // (though most hashes are easy to brute force for simple strings)
-$sess['freecap_word_hash'] = $hash_func($word);
+$sess['freecap_word_hash'] = $hash_func($word . $sessfile);
 
-
+file_put_contents($sessfile, json_encode($sess));
+chmod($sessfile, 0640);
 
 
 //////////////////////////////////////////////////////
