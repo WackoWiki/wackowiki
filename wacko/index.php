@@ -47,6 +47,11 @@ case 'static':
 	$http->sendfile($route['static']);
 	$http->terminate();
 
+case 'freecap':
+	$sess = & $http->session;
+	include 'lib/captcha/freecap.php';
+	$http->terminate();
+
 case 'admin':
 	$config = & $db;
 	include 'admin/admin.php';
