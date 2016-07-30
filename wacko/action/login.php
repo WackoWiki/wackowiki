@@ -88,7 +88,8 @@ else // login
 			$error = $this->_t('LoginIncorrect');
 
 			// if user name already exists, check password
-			if (($user = $this->load_user($user_name)))
+			// check email dummy field in search for bots
+			if (!$_POST['email'] && ($user = $this->load_user($user_name)))
 			{
 				if (($n = $user['failed_login_count']) > $logins)
 				{

@@ -1,5 +1,11 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
+
 // WackoWiki ADMINISTRATION SUBSYSTEM
 
 // TODO:
