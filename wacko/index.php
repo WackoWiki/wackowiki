@@ -48,6 +48,7 @@ case 'static':
 	$http->terminate();
 
 case 'freecap':
+	$http->no_cache();
 	$sess = & $http->session;
 	include 'lib/captcha/freecap.php';
 	$http->terminate();
