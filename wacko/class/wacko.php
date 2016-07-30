@@ -31,7 +31,6 @@ class Wacko
 	var $first_inclusion		= array();	// for backlinks
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link
 	var $unicode_entities		= array();	// common unicode array
-	var $timer;
 	var $toc_context			= array();
 	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
 	var $languages				= null;
@@ -95,7 +94,6 @@ class Wacko
 	*/
 	function __construct(&$config, &$http)
 	{
-		$this->timer	= microtime(1);
 		$this->dblink	=						// for quote() calls
 		$this->db		=
 		$this->config	= & $config;
@@ -5959,10 +5957,9 @@ class Wacko
 	}
 
 	// MAIN EXECUTION ROUTINE
-	function run()
+	function run($tag, $method)
 	{
-		$tag	= $this->http->page;
-		$method	= $this->http->method;
+		$this->http->cache_promisc();
 
 		// mandatory tls?
 		if ($this->db->tls_implicit && !$this->http->tls_session)

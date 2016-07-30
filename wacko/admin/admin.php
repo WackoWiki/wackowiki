@@ -14,20 +14,6 @@
 ##                  Wacko engine init                 ##
 ########################################################
 
-define('IN_WACKO', 'admin');
-require_once 'class/init.php';
-
-$db = $config = new Settings;
-
-if ($db->ext_bad_behavior)
-{
-	require_once 'lib/bad_behavior/bad-behavior-wackowiki.php'; // uses $db
-}
-
-$http = new Http($db, false); // false -- do not process wiki request
-
-$engine = new Wacko($db, $http);
-
 // redirect, send them home [disabled for recovery mode!]
 if (!($engine->is_admin() || $db->is_locked() || RECOVERY_MODE))
 {
@@ -376,4 +362,4 @@ else if (!($_GET && $_POST))
 
 <?php
 
-finalize($db, $http, $engine);
+// that's all

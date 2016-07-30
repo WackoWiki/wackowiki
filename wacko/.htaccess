@@ -1,14 +1,5 @@
 <IfModule mod_rewrite.c>
  RewriteEngine on
- # STS: what's that?!
- #RewriteCond    %{REQUEST_FILENAME}  -d
- #RewriteRule ^(.*/[^\./]*[^/])$ $1/
- RewriteRule ^index\.php$ index.php [QSA,L]
- RewriteRule ^index\.html$ index.php [QSA,L]
- RewriteRule ^admin\.php$ admin.php [QSA,L]
- RewriteRule ^robots\.txt$ robots.txt [L]
- RewriteRule ^sitemap\.xml$ sitemap.xml [L]
- RewriteRule ^favicon\.ico$ favicon.ico [L]
  RewriteRule ^ index.php [QSA,L]
 </IfModule>
 
@@ -36,26 +27,3 @@
 		Deny from None
 	</IfModule>
 </FilesMatch>
-
-<IfModule mod_deflate.c>
-	# ? needed?
-	AddOutputFilterByType DEFLATE text/html
-	AddOutputFilterByType DEFLATE text/css
-	AddOutputFilterByType DEFLATE text/javascript
-	AddOutputFilterByType DEFLATE text/xml
-	AddOutputFilterByType DEFLATE text/plain
-	AddOutputFilterByType DEFLATE image/x-icon
-	AddOutputFilterByType DEFLATE image/svg+xml
-	AddOutputFilterByType DEFLATE application/rss+xml
-	AddOutputFilterByType DEFLATE application/javascript
-	AddOutputFilterByType DEFLATE application/x-javascript
-	AddOutputFilterByType DEFLATE application/xml
-	AddOutputFilterByType DEFLATE application/xhtml+xml
-</IfModule>
-
-<IfModule mod_expires.c>
-	<Filesmatch "\.(jpg|jpeg|png|gif|js|gdf|css|ico|svg)$">
-		ExpiresActive on
-		ExpiresDefault "access plus 14 days"
-	</Filesmatch>
-</ifmodule>

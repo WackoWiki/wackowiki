@@ -117,7 +117,6 @@ class Settings extends Dbal implements ArrayAccess
 
 		parent::__construct(); // open db
 
-		$this->ap_mode			= (IN_WACKO == 'admin');
 		$this->rebase_url();
 	}
 

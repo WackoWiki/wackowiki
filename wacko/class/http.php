@@ -7,32 +7,20 @@ if (!defined('IN_WACKO'))
 
 class Http
 {
-	public		$vars			= [];
-	public		$page			= '';
-	public		$method			= '';
 	public		$tls_session;
 	public		$real_ip;
 	public		$session;						// class Session
 	private		$db;
+	private		$page;
+	public		$method;						// for finalize & diag..
 	private		$hash;
 	private		$query;
 	private		$file;
 	private		$caching		= 0;
 
-	public function __construct(&$db, $request = true)
+	public function __construct(&$db)
 	{
 		$this->db = & $db;
-
-		if ($db->is_locked($db->ap_mode? AP_LOCK : SITE_LOCK) || (!$db->ap_mode && RECOVERY_MODE))
-		{
-			if (!headers_sent())
-			{
-				header('HTTP/1.1 503 Service Temporarily Unavailable');
-			}
-
-			echo 'The site is temporarily unavailable due to system maintenance. Please try again later.';
-			exit;
-		}
 
 		$this->tls_session	= $this->tls_session();
 		$this->real_ip		= $this->real_ip();
@@ -40,22 +28,6 @@ class Http
 		if ($db->tls && $this->tls_session)
 		{
 			$this->secure_base_url();
-		}
-
-		$this->session();
-		$this->http_security_headers();
-
-		if ($request)
-		{
-			$router			= new UriRouter($db);
-			$this->vars		= $router->run(['_tls' => $this->tls_session, '_ip' => $this->real_ip]);
-			$this->page		= $this->vars['page'];
-			$this->method	= $this->vars['method'];
-			$this->check_cache();
-
-			// to be replaced then by no_cache or what
-			header('Cache-Control: public');
-			header('Pragma: cache');
 		}
 	}
 
@@ -212,7 +184,7 @@ class Http
 				else
 				{
 					// Ut::dbg('not modified');
-					header('HTTP/1.1 304 Not Modified');
+					$this->status(304);
 					$this->terminate();
 				}
 
@@ -252,13 +224,15 @@ class Http
 		return true;
 	}
 
-	private function check_cache()
+	public function check_cache($page, $method)
 	{
-		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
+		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $method != 'edit' && $method != 'watch')
 		{
 			// cache only for anonymous user
 			if (!isset($this->session->userprofile))
 			{
+				$this->page = $page;
+				$this->method = $method;
 				$this->caching = $this->check_http_request();
 			}
 		}
@@ -281,7 +255,7 @@ class Http
 		}
 	}
 
-	private function session()
+	public function session()
 	{
 		if (1) // STS TODO need config'ing
 		{
@@ -315,7 +289,7 @@ class Http
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
 	//		Content-Security-Policy:
 	//		Strict-Transport-Security:
-	private function http_security_headers()
+	public function http_security_headers()
 	{
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
@@ -358,11 +332,7 @@ class Http
 			// Make sure no &amp;'s are in, this will break the redirect
 			$url = Ut::amp_decode($url);
 
-			if ($permanent)
-			{
-				header('HTTP/1.1 301 Moved Permanently');
-			}
-
+			$this->status($permanent? 301 : 302);
 			header('Location: ' . $url);
 
 			$this->terminate();
@@ -406,6 +376,13 @@ class Http
 		}
 	}
 
+	function cache_promisc()
+	{
+		// to be replaced then by no_cache or what
+		header('Cache-Control: public');
+		header('Pragma: cache');
+	}
+
 	private function real_ip()
 	{
 		$reverse_proxy_addresses = preg_split('/[\s,]+/', $this->db->reverse_proxy_addresses, -1, PREG_SPLIT_NO_EMPTY);
@@ -442,4 +419,205 @@ class Http
 			|| @$_SERVER['HTTP_X_FORWARDED_PORT'] == 443);
 	}
 
+	function status($code)
+	{
+		static $text = [
+			200 => 'OK',
+			206 => 'Partial Content',
+			301 => 'Moved Permanently',
+			302 => 'Moved Temporarily',
+			304 => 'Not Modified',
+			400 => 'Bad Request',
+			401 => 'Unauthorized',
+			403 => 'Forbidden',
+			404 => 'Not Found',
+			405 => 'Method Not Allowed',
+			416 => 'Requested Range Not Satisfiable',
+			500 => 'Internal Server Error',
+			501 => 'Not Implemented',
+			503 => 'Service Unavailable',
+		];
+
+		if (!isset($text[$code]))
+		{
+			die('unknown http status code "' . Ut::html($code) . '"');
+		}
+
+		if (!headers_sent())
+		{
+			header((@$_SERVER['SERVER_PROTOCOL'] ?: 'HTTP/1.0') . ' ' . $code . ' ' . $text[$code], true, $code);
+		}
+	}
+
+	function mime_type($path)
+	{
+		static $types;
+
+		if (!isset($types))
+		{
+			$conffile = Ut::join_path(CONFIG_DIR, 'mime.types');
+			$cachefile = Ut::join_path(CACHE_CONFIG_DIR, 'mime.types');
+
+			clearstatcache();
+
+			if (!($conftime = @filemtime($conffile)))
+			{
+				die($conffile . ' not found');
+			}
+
+			// do not read stale or non-writable cachefile
+			if (!((@filemtime($cachefile) >= $conftime)
+				&& is_writable($cachefile)
+				&& ($text = file_get_contents($cachefile))
+				&& ($types = Ut::unserialize($text))))
+			{
+				$types = [];
+				foreach (file($conffile) as $line)
+				{
+					$line = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
+					if (count($line) > 1 && $line[0][0] !== '#')
+					{
+						$type = array_shift($line);
+						foreach ($line as $ext)
+						{
+							$types[$ext] = $type;
+						}
+					}
+				}
+
+				// cache to file
+				$text = Ut::serialize($types);
+				// unable to write cache file considered are 'turn config caching off' feature
+				@file_put_contents($cachefile, $text);
+				@chmod($cachefile, 0644);
+			}
+		}
+
+		$ext = pathinfo($path, PATHINFO_EXTENSION);
+		return isset($types[$ext])? $types[$ext] : 'application/octet-stream';
+	}
+
+	function sendfile($path)
+	{
+		header_remove();
+		set_time_limit(0);
+		isset($this->session)  and  $this->session->write_close();
+
+		clearstatcache();
+		$path = realpath($path);
+		if (!is_file($path) || is_link($path))
+		{
+			$this->status(404);
+			echo 'File not found';
+			return;
+		}
+
+		$size = @filesize($path);
+		$mtime = @filemtime($path);
+		if (!$size || !$mtime || !@is_readable($path))
+		{
+			$this->status(403);
+			echo 'File access prohibited';
+			return;
+		}
+
+		if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
+		{ 
+			// Ut::dbg('not modified');
+			return $this->status(304);
+		}
+
+		header('Last-Modified: ' . Ut::http_date($mtime));
+
+		$type = $this->mime_type($path);
+
+		$from = 0;
+		$to = $size;
+
+		if (isset($_SERVER['HTTP_RANGE'])) {
+			if (!preg_match('@^bytes=(\d*)-(\d*)(,\d*-\d*)*$@', $_SERVER['HTTP_RANGE'], $m)
+				|| ($m[1] === '' && $m[2] === '')
+				|| ($m[1] !== '' && $m[2] !== '' && (int)$m[1] > (int)$m[2])
+				|| ($m[1] !== '' && $m[1] > $size)
+				|| ($m[2] !== '' && $m[2] > $size))
+			{
+				$this->status(416);
+				header("Content-Range: bytes */$size"); // Required in 416.
+				return;
+			}
+
+			if ($m[1] === '')
+			{
+				$from = $size - (int)$m[2];
+			}
+			else
+			{
+				$from = (int)$m[1];
+				$m[2] === ''  or  $to = (int)$m[2] + 1;
+			}
+		}
+
+		if ($from > 0 || $to < $size)
+		{
+			$this->status(206);
+			header('Content-Range: bytes ' . $from . '-' . ($to - 1) . '/' . $size);
+		}
+
+		header('Accept-Ranges: bytes');
+		header('Content-Length: ' . $to - $from + 1);
+		header('X-Served-By: sendfile');
+		header('Content-Type: ' . $type);
+		$type = explode('/', $type, 2);
+		$inline = ($type[0] == 'image' || $type[0] == 'text' || $type[0] == 'video' || $type[0] == 'audio');
+
+		if ($type[0] == 'application' && $type[1] != 'javascript')
+		{
+			header('Expires: ' . Ut::http_date(-1));
+			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+			header('Pragma: no-cache');
+		}
+		else
+		{
+			$age = 30 * DAYSECS;
+			header('Cache-Control: public, max-age=' . $age);
+			header('Expires: ' . Ut::http_date(time() + $age));
+		}
+		header('Content-Disposition: ' . ($inline? 'inline' : 'attachment') . '; filename="' . basename($path) . '"');
+		header('Content-Transfer-Encoding: binary');
+		header('Date: ' . Ut::http_date());
+
+		ob_implicit_flush(true);
+
+		if ($from == 0 && $to == $size)
+		{
+			readfile($path);
+		}
+		else
+		{
+			$fp = fopen($path, 'rb');
+			fseek($fp, $from);
+
+			if ($to == $size)
+			{
+				@fpassthru($fp);
+			}
+			else
+			{
+				$size = $to - $from;
+				$piece = 1 << 16;
+				while ($size > 0 && !feof($fp) && !connection_status())
+				{
+					$part = fread($fp, (($size < $piece)? $size : $piece));
+					if (!($len = strlen($part)))
+					{
+						break; // error
+					}
+					echo $part;
+					$size -= $len;
+				}
+			}
+
+			fclose($fp);
+		}
+	}
 }
