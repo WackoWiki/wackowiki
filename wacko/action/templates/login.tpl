@@ -32,6 +32,8 @@
 			<p>
 				<label for="password">[ ' _t: LoginPassword ' ]:</label>
 				<input type="password" id="password" name="password" size="25" tabindex="2" autocomplete="off" required />
+				[== // input.verify -> display: none --- anti-bot dummy field feature ==]
+				<input type="text" id="email" name="email" class="verify" />
 			</p>
 			<p>
 				<input type="checkbox" id="persistent" name="persistent" tabindex="3"/>

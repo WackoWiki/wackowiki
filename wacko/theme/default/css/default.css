@@ -2153,3 +2153,5 @@ table.forum td {
 .gallery figure:hover {
 	background-color: #CCFFCC;
 }
+
+input.verify { display:none; }
