@@ -94,7 +94,11 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 			$now = time();
 
-			$this->sticky__regenerations[] = [$now, $message];		// XXX trim
+			$this->sticky__log[] = [$now, $message];
+			if (count($this->sticky__log) > 15)
+			{
+				$this->sticky__log = array_slice($this->sticky__log, 0, 1) + ['...'] + array_slice($this->sticky__log, -10, null);
+			}
 
 			// let old page live for some seconds to gather missing requests (ajax etc)
 			if (!isset($this->__expire))
@@ -300,6 +304,12 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		return $this->name;
 	}
 
+	private function write_session()
+	{
+		$this->__updated = time();
+		$this->store_write($this->id, Ut::serialize($this->toArray()));
+	}
+
 	// write session data, end session
 	public function write_close()
 	{
@@ -329,12 +339,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		{
 			foreach ($this->sticky__flash as $var => $age)
 			{
-				if (--$age <= 0 || !isset($this[$var]))
+				if (!isset($this[$var]))
 				{
-					if (isset($this[$var]))
-					{
-						unset($this[$var]);
-					}
+					unset($this->sticky__flash[$var]);
+				}
+				else if (--$age <= 0)
+				{
+					unset($this[$var]);
 					unset($this->sticky__flash[$var]);
 				}
 				else
@@ -344,7 +355,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 		}
 
-		// shutdown run with cwd == /
+		// shutdown functions called with cwd == /
+		// this is for Ut::dbg etc.
 		chdir($cwd);
 
 		$this->write_close();
@@ -373,13 +385,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public function create_nonce($action, $expires = null)
 	{
 		$code = Ut::random_token(11);
-		$this->nonces_db[static::nonce_index($action, $code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
+		$this->__nonces[static::nonce_index($action, $code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
 		return $code;
 	}
 
 	public function verify_nonce($action, $code, $protect = 0)
 	{
-		if (!($nonces = @$this->nonces_db))
+		if (!($nonces = @$this->__nonces))
 		{
 			return false;
 		}
@@ -410,7 +422,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 		}
 
-		$this->nonces_db = $nonces;
+		$this->__nonces = $nonces;
 
 		return $ret;
 	}
@@ -424,12 +436,6 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	protected function store_validate_id($id)
 	{
 		return preg_match('/^[0-9a-zA-Z]{21}$/', $id);
-	}
-
-	private function write_session()
-	{
-		$this->__updated = time();
-		$this->store_write($this->id, Ut::serialize($this->toArray()));
 	}
 
 	// clean vars on hard reset, leave sticky_ vars in place

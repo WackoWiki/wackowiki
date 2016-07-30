@@ -6901,11 +6901,6 @@ class Wacko
 			$res .= $this->_t('PwdCplxWeak') . ' ';
 		}
 
-		if (preg_match('/\s/', $pwd))
-		{
-			$res .= $this->_t('SpacesArentAllowed') . ' ';
-		}
-
 		return $res;
 	}
 
@@ -7095,10 +7090,16 @@ class Wacko
 			// disable server cache for page
 			$this->http->no_cache(false);
 
+			$this->sess->freecap_shown = 1;
+			if (!isset($this->sess->freecap_id))
+			{
+				$this->sess->freecap_id = 'freecap' . Ut::random_token(13);
+			}
+
 			$out .= $inline ? '' : "<br />\n";
 			$out .= '<label for="captcha">'.$this->_t('Captcha').":</label>\n";
 			$out .= $inline ? '' : "<br />\n";
-			$out .= '<img src="'.$this->db->base_url.'lib/captcha/freecap.php?for=' . $this->sess->name().'" id="freecap" alt="'.$this->_t('Captcha').'" />'."\n";
+			$out .= '<img src="'.$this->db->base_url.'lib/captcha/freecap.php?for=' . $this->sess->freecap_id . '" id="freecap" alt="'.$this->_t('Captcha').'" />'."\n";
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->_t('CaptchaReload').'">';
 			$out .= '<img src="'.$this->db->base_url.'image/spacer.png" alt="'.$this->_t('CaptchaReload').'" class="btn-reload"/></a>'."<br />\n";
 			// $out .= $inline ? '' : "<br />\n";
@@ -7116,22 +7117,18 @@ class Wacko
 	{
 		$word_ok = true;
 		// we will check captcha for anonymous only
-		if ($this->db->enable_captcha && !$this->get_user() && extension_loaded('gd'))
+		if (isset($this->sess->freecap_shown) && $this->db->enable_captcha && !$this->get_user() && extension_loaded('gd'))
 		{
 			$word_ok = false;
-			if (!empty($this->sess->freecap_word_hash) && !empty($_POST['captcha']))
-			{
-				if ($this->sess['hash_func'](strtolower($_POST['captcha'])) == $this->sess->freecap_word_hash)
-				{
-					// reset freecap session vars
-					// cannot stress enough how important it is to do this
-					// defeats re-use of known image with spoofed session id
-					$this->sess->freecap_attempts	= 0;
-					$this->sess->freecap_word_hash	= false;
+			unset($this->sess->freecap_shown);
+			$sessfile = Ut::join_path(CACHE_SESSION_DIR, $this->sess->freecap_id);
+			$sess = (array) @json_decode(file_get_contents($sessfile));
 
-					// now process form
-					$word_ok = true;
-				}
+			if (!empty($sess['freecap_word_hash']) && !empty($_POST['captcha'])
+				&& $sess['hash_func'](strtolower($_POST['captcha']) . $sessfile) === $sess['freecap_word_hash'])
+			{
+				unlink($sessfile);
+				$word_ok = true;
 			}
 		}
 
