@@ -247,7 +247,7 @@ form input.submitinput {
 	font-weight: bold;
 	/*background-color: #fbe6f2;*/
 	background-color: #fcfcfc;
-	background-image: url('./../icon/attention.svg');
+	background-image: url('./../icon/important.svg');
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: 10px 10px;
