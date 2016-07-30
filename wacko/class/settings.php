@@ -87,10 +87,21 @@ class Settings extends Dbal implements ArrayAccess
 					$ug[$row['group_name']][] = $row['user_name'];
 				}
 
+				$this->aliases = [];
 				foreach ($ug as $group => $users)
 				{
 					$this->config['aliases'][$group] = implode('\n', $users);
 				}
+
+				$prefix = '';
+				foreach (explode('.', parse_url($this->base_url, PHP_URL_HOST)) as $part)
+				{
+					$prefix .= ucfirst(strtolower($part));
+				}
+				$prefix .= substr(base64_encode(hash('sha1', $this->base_url . $this->system_seed, true)), 1, 6);
+
+				$this->cookie_prefix	= preg_replace('/[^0-9a-z]+/i', '', $prefix);
+				$this->user_table		= $this->table_prefix . 'user';
 
 				// cache to file
 				if ($this->wacko_version == WACKO_VERSION)
@@ -99,24 +110,13 @@ class Settings extends Dbal implements ArrayAccess
 					$text = Ut::serialize($this->config, JSON_PRETTY_PRINT);
 					// unable to write cache file considered are 'turn config caching off' feature
 					@file_put_contents($this->cachefile, $text);
-					@chmod($this->cachefile, 0755); // mark cache as valid
+					@chmod($this->cachefile, 0750); // mark cache as valid
 				}
 			}
 		}
 
 		parent::__construct(); // open db
 
-		// convenient config additions
-		$prefix = '';
-
-		foreach (explode('.', parse_url($this->base_url, PHP_URL_HOST)) as $part)
-		{
-			$prefix .= ucfirst(strtolower($part));
-		}
-
-		$hash					= hash('sha1', $this->base_url . $this->system_seed, true);
-		$this->cookie_prefix	= $prefix . substr(Ut::http64_encode($hash), 1, 5);
-		$this->user_table		= $this->table_prefix . 'user';
 		$this->ap_mode			= (IN_WACKO == 'admin');
 		$this->rebase_url();
 	}
@@ -158,8 +158,6 @@ class Settings extends Dbal implements ArrayAccess
 
 	public function __get($i)
 	{
-		//$trace = debug_backtrace();
-		//echo 'get property: ' . $i .  ' in ' . $trace[0]['file'] . ':' . $trace[0]['line'] . "\n";
 		//return array_key_exists($i, $this->config)?  $this->config[$i] : null;
 		return $this->config[$i];
 	}

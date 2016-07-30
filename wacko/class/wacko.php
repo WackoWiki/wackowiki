@@ -5946,6 +5946,16 @@ class Wacko
 			$this->log(7, 'Maintenance: expired cookie_tokens purged');
 		}
 
+		// purge expired freecap session (once per day)
+		if ($now > $this->db->maint_last_freecap)
+		{
+			if (Ut::purge_directory(CACHE_SESSION_DIR, 3600, $this->db->cookie_prefix . 'cap*'))
+			{
+				$this->log(7, 'Maintenance: stale freecaps purged');
+			}
+			$update['maint_last_freecap'] = $now + 1 * DAYSECS;
+		}
+
 		$this->db->_set($update);
 	}
 
@@ -7093,7 +7103,8 @@ class Wacko
 			$this->sess->freecap_shown = 1;
 			if (!isset($this->sess->freecap_id))
 			{
-				$this->sess->freecap_id = 'freecap' . Ut::random_token(13);
+				// we supply filename for captcha to fill
+				$this->sess->freecap_id = $this->db->cookie_prefix . 'cap' . Ut::random_token(13);
 			}
 
 			$out .= $inline ? '' : "<br />\n";
@@ -7116,8 +7127,7 @@ class Wacko
 	function validate_captcha()
 	{
 		$word_ok = true;
-		// we will check captcha for anonymous only
-		if (isset($this->sess->freecap_shown) && $this->db->enable_captcha && !$this->get_user() && extension_loaded('gd'))
+		if (isset($this->sess->freecap_shown))
 		{
 			$word_ok = false;
 			unset($this->sess->freecap_shown);
