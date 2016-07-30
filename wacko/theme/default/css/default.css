@@ -247,7 +247,7 @@ form input.submitinput {
 	font-weight: bold;
 	/*background-color: #fbe6f2;*/
 	background-color: #fcfcfc;
-	background-image: url('./../icon/important.svg');
+	background-image: url('./../icon/warning.svg');
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: 10px 10px;
@@ -265,7 +265,7 @@ form input.submitinput {
 	border: 1px solid #ffee66;
 	width: auto;
 	background-color: #ffffdd;
-	background-image: url('./../icon/warning.svg');
+	background-image: url('./../icon/important.svg');
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: 10px 10px;
