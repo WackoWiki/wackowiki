@@ -205,7 +205,7 @@ class UriRouter
 					{
 						if ($varname == 'vars' && $varidx == 'dbg')
 						{
-							Ut::dbg('urirouter:', $lineno, $val);
+							Diag::dbg('urirouter:', $lineno, $val);
 							continue;
 						}
 						switch ($func)

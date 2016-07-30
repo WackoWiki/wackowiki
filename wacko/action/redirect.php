@@ -13,14 +13,6 @@ if (!isset($permanent))	$permanent = 0;
 
 if (($page = $this->unwrap_link($to)))
 {
-	if ($permanent)
-	{
-		if (!headers_sent())
-		{
-			header('HTTP/1.1 301 Moved Permanently');
-		}
-	}
-
 	if ($this->load_page($page, 0, '', LOAD_CACHE, LOAD_META))
 	{
 		if (($user = $this->get_user()) && ($user['dont_redirect'] || @$_POST['redirect'] == 'no'))
@@ -29,7 +21,7 @@ if (($page = $this->unwrap_link($to)))
 		}
 		else
 		{
-			$this->http->redirect($this->href('', $page));
+			$this->http->redirect($this->href('', $page), $permanent);
 			// NEVER BEEN HERE
 		}
 	}

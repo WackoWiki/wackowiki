@@ -33,10 +33,7 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		if (!headers_sent())
-		{
-			header('HTTP/1.1 404 Not Found');
-		}
+		$this->http->status(404);
 
 		$message = $this->_t('DoesNotExists') ." ".( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
 		$this->show_message($message, 'notice');
@@ -45,10 +42,7 @@ if ($this->has_access('read'))
 	{
 		if ($this->page['deleted'])
 		{
-			if (!headers_sent())
-			{
-				header('HTTP/1.1 404 Not Found');
-			}
+			$this->http->status(404);
 
 			if ($this->is_admin())
 			{
@@ -198,10 +192,7 @@ if ($this->has_access('read'))
 }
 else
 {
-	if (!headers_sent())
-	{
-		header('HTTP/1.1 403 Forbidden');
-	}
+	$this->http->status(403);
 
 	$message = $this->_t('ReadAccessDenied');
 	$this->show_message($message, 'info');

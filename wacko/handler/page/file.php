@@ -143,11 +143,7 @@ else
 {
 	// file is not in upload table
 	$error = 404;
-
-	if (!headers_sent())
-	{
-		header('HTTP/1.1 404 Not Found');
-	}
+	$this->http->status(404);
 }
 
 // file not available in file system
@@ -170,10 +166,7 @@ if ($error)
 	header('Content-Type: image/svg+xml');
 	$file_path		= 'image/upload'.$error.'.svg';
 
-	if (!headers_sent())
-	{
-		header('HTTP/1.1 404 Not Found'); // 403
-	}
+	$this->http->status(404); // 403
 }
 #########################################################
 
@@ -197,20 +190,12 @@ if ($file_path)
 }
 else if ($error == 404)
 {
-	if (!headers_sent())
-	{
-		header('HTTP/1.1 404 Not Found');
-	}
-
+	$this->http->status(404);
 	echo $this->_t('UploadFileNotFound');
 }
 else
 {
-	if (!headers_sent())
-	{
-		header('HTTP/1.1 403 Forbidden');
-	}
-
+	$this->http->status(403);
 	echo $this->_t('UploadFileForbidden');
 }
 
