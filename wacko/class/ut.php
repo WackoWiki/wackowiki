@@ -315,14 +315,14 @@ class Ut
 	}
 
 	// delete all (or older than $ttl seconds) files in directory
-	static function purge_directory($directory, $ttl = 0)
+	static function purge_directory($directory, $ttl = 0, $mask = GLOB_ALL)
 	{
 		$n		= 0;
 		$past	= time() - $ttl;
 
 		clearstatcache();
 
-		foreach (Ut::file_glob($directory, GLOB_ALL) as $file)
+		foreach (Ut::file_glob($directory, $mask) as $file)
 		{
 			if ((!$ttl || filemtime($file) < $past) && unlink($file))
 			{

@@ -101,13 +101,14 @@ $config_db['link_target']					= $config['link_target'];
 $config_db['log_default_show']				= $config['log_default_show'];
 $config_db['log_level']						= $config['log_level'];
 $config_db['log_purge_time']				= $config['log_purge_time'];
-$config_db['maint_last_cache']				= NULL; // $config['maint_last_cache'];
-$config_db['maint_last_delpages']			= NULL; // $config['maint_last_delpages'];
-$config_db['maint_last_log']				= NULL; // $config['maint_last_log'];
-$config_db['maint_last_oldpages']			= NULL; // $config['maint_last_oldpages'];
-$config_db['maint_last_refs']				= NULL; // $config['maint_last_refs'];
-$config_db['maint_last_session']			= NULL; // $config['maint_last_session'];
-$config_db['maint_last_xml_sitemap']		= NULL; // $config['maint_last_xml_sitemap'];
+$config_db['maint_last_cache']				= 1;
+$config_db['maint_last_delpages']			= 1;
+$config_db['maint_last_log']				= 1;
+$config_db['maint_last_oldpages']			= 1;
+$config_db['maint_last_refs']				= 1;
+$config_db['maint_last_session']			= 1;
+$config_db['maint_last_xml_sitemap']		= 1;
+$config_db['maint_last_freecap']			= 1;
 $config_db['max_login_attempts']			= $config['max_login_attempts'];
 $config_db['menu_items']					= $config['menu_items'];
 $config_db['meta_description']				= $config['meta_description'];
@@ -200,5 +201,3 @@ $insert_config =	"INSERT INTO ".$config['table_prefix']."config (config_id, conf
 							config_name		= VALUES(config_name),
 							config_value	= VALUES(config_value);";
 
-
-?>
