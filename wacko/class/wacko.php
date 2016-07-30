@@ -1333,7 +1333,6 @@ class Wacko
 		$pages[]	= $this->db->root_page;
 		$pages[]	= $this->db->users_page;
 		$pages[]	= $this->db->policy_page;
-		$pages[]	= $this->db->permalink_page;
 		$pages[]	= $this->_t('LoginPage');
 		$pages[]	= $this->_t('TextSearchPage');
 		$pages[]	= $this->tag;

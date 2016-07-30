@@ -328,7 +328,6 @@ if ($doubleclick == true)
 		// TODO: some js onclick dispay/hide for each box and sidebar
 		if ($this->page &&
 			$this->method == 'show' &&
-			$this->page['tag'] != $this->db->permalink_page &&
 			$this->page['tag'] != 'Category')
 		{
 		?>
