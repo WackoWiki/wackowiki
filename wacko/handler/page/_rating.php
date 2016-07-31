@@ -11,7 +11,7 @@ if ($this->db->footer_rating != 0 && ($this->db->footer_rating != 2 || $this->ge
 	// determine if user has rated a given page
 	function handler_show_page_is_rated(&$engine, $page_id)
 	{
-		$cookie	= $engine->get_cookie('rating');
+		$cookie	= $engine->sess->get_cookie('rating');
 		$ids	= explode(';', $cookie);
 
 		if ($page_id = array_search($page_id, $ids))

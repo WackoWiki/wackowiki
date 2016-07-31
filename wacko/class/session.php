@@ -29,6 +29,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public $cf_max_session = 7200;		// time to unconditionally destroy active session
 	public $cf_regen_time = 500;	// seconds between forced id regen
 	public $cf_regen_probability = 2;		// percentile probability of forced id regen
+	public $cf_cookie_prefix = '';
+	public $cf_cookie_persistent = false;
 	public $cf_cookie_lifetime = 0;	// lifetime of the cookie in seconds which is sent to the browser. The value 0 means "until the browser is closed."
 	public $cf_cookie_path = '/';		// path to set in the session cookie
 	public $cf_cookie_domain = '';		// domain to set in the session cookie. '' for host name of the server which generated the cookie, according to cookies specification
@@ -151,7 +153,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		$send_cookie = 1;
 
-		if (!$id && ($id = @$_COOKIE[$this->name]))
+		if (!$id && ($id = $this->get_cookie($this->name)))
 		{
 			$send_cookie = 0;
 		}
@@ -223,7 +225,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$message = 'max_idle';
 				$destroy = 2;
 			}
-			else if ($this->cf_prevent_replay && !$this->verify_nonce('NoReplay', @$_COOKIE[$this->name . 'NoReplay'], 3))
+			else if ($this->cf_prevent_replay && !$this->verify_nonce('NoReplay', $this->get_cookie($this->name . 'NoReplay'), 3))
 			{
 				$message = 'replay';
 				$destroy = 2;
@@ -502,24 +504,49 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$this->_send_cookie($this->name, ($remove? '' : $this->id));
 	}
 
-	protected function _send_cookie($name, $value)
+	// legacy get/set/delete from engine
+	function get_cookie($name)
 	{
-		$name = rawurlencode($name);
-		$this->remove_cookie($name);
-
-		$this->setcookie($name, $value,
-			($this->cf_cookie_lifetime > 0? time() + $this->cf_cookie_lifetime : 0),
-			$this->cf_cookie_path, $this->cf_cookie_domain, $this->cf_cookie_secure, $this->cf_cookie_httponly);
+		return @$_COOKIE[$this->cf_cookie_prefix . $name];
 	}
 
-	public function setcookie($name, $value = '', $expires = 0, $path = '', $domain = '', $secure = false, $httponly = false, $url_encode = true)
+	// persistent: false, or number of days (0 for config default's days)
+	function set_cookie($name, $value, $persistent = false)
+	{
+		$name = $this->cf_cookie_prefix . $name;
+		$this->setcookie($name, $value,
+			(($persistent !== false && $this->cf_cookie_persistent !== false)? ($persistent ?: $this->cf_cookie_persistent) * DAYSECS + time() : 0));
+		$_COOKIE[$name] = $value;
+	}
+
+	function delete_cookie($name)
+	{
+		$name = $this->cf_cookie_prefix . $name;
+		$this->setcookie($name);
+		unset($_COOKIE[$name]);
+	}
+
+	protected function _send_cookie($name, $value)
+	{
+		$this->setcookie($this->cf_cookie_prefix . $name, $value, ($this->cf_cookie_lifetime > 0? time() + $this->cf_cookie_lifetime : 0));
+	}
+
+	public function setcookie($name, $value = null, $expires = 0, $path = null, $domain = null, $secure = null, $httponly = null, $url_encode = true)
 	{
 		if (headers_sent($file, $line))
 		{
 			trigger_error("cannot place session cookie $name=$value due to $file:$line", E_USER_WARNING);
-			Ut::dbg("session setcookie failed by $file:$line");
+			Ut::dbg("session setcookie $name failed by $file:$line");
 			return;
 		}
+
+		isset($path) or $path = $this->cf_cookie_path;
+		isset($domain) or $domain = $this->cf_cookie_domain;
+		isset($secure) or $secure = $this->cf_cookie_secure;
+		isset($httponly) or $httponly = $this->cf_cookie_httponly;
+
+		// $name = rawurlencode($name);
+		$this->remove_cookie($name);
 
 		if (Ut::is_empty($value))
 		{
@@ -527,45 +554,23 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$value = 'deleted';
 		}
 
-		if ($url_encode)
-		{
-			$value = rawurlencode($value);
-		}
-
-		if (preg_match('/[=,;\s]/', $name) || preg_match('/[,;\s]/', $value))
-		{
-			return false;
-		}
+		$url_encode and $value = rawurlencode($value);
 
 		$cookie = 'Set-Cookie: '. $name . '=' . $value;
 
 		if ($expires > 0)
 		{
+			$expires = (int)$expires;
 			$cookie .= '; expires=' . Ut::http_date($expires);
 
-			if (($expires -= time()) < 0)
-			{
-				$expires = 0;
-			}
+			($expires -= time()) > 0 or $expires = 0;
 			$cookie .= '; Max-Age=' . $expires;
 		}
 
-		if ($path)
-		{
-			$cookie .= '; path=' . $path;
-		}
-		if ($domain)
-		{
-			$cookie .= '; domain=' . $domain;
-		}
-		if ($secure)
-		{
-			$cookie .= '; secure';
-		}
-		if ($httponly)
-		{
-			$cookie .= '; httponly';
-		}
+		$path		and $cookie .= '; path=' . $path;
+		$domain		and $cookie .= '; domain=' . $domain;
+		$secure		and $cookie .= '; secure';
+		$httponly	and $cookie .= '; httponly';
 
 		header($cookie, false); // false -- add, not replace
 

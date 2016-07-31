@@ -303,7 +303,7 @@ class Polls
 	// determine if user has voted a given poll
 	function poll_is_voted($poll_id)
 	{
-		$cookie	= $this->engine->get_cookie('poll');
+		$cookie	= $this->engine->sess->get_cookie('poll');
 		$ids	= explode(';', $cookie);
 
 		if (in_array($poll_id, $ids) === true || $poll_id == $cookie)
@@ -319,14 +319,14 @@ class Polls
 	// set poll cookie
 	function set_poll_cookie($poll_id)
 	{
-		if ($cookie = $this->engine->get_cookie('poll'))
+		if ($cookie = $this->engine->sess->get_cookie('poll'))
 		{
 			$ids = explode(';', $cookie);
 		}
 
 		$ids[]	= $poll_id;
 		$cookie	= implode(';', $ids);
-		$this->engine->set_cookie('poll', $cookie, 365);
+		$this->engine->sess->set_cookie('poll', $cookie, 365);
 		return true;
 	}
 

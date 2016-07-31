@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 // determine if user has rated a given page
 function handler_rate_page_is_rated(&$engine, $page_id)
 {
-	$cookie	= $engine->get_cookie('rating');
+	$cookie	= $engine->sess->get_cookie('rating');
 	$ids	= explode(';', $cookie);
 
 	if (in_array($page_id, $ids) === true || $page_id == $cookie)
@@ -25,11 +25,11 @@ function handler_rate_page_is_rated(&$engine, $page_id)
 // set page rating cookie
 function handler_rate_set_rate_cookie(&$engine, $page_id)
 {
-	$cookie	= $engine->get_cookie('rating');
+	$cookie	= $engine->sess->get_cookie('rating');
 	$ids	= explode(';', $cookie);
 	$ids[]	= $page_id;
 	$cookie	= implode(';', $ids);
-	$engine->set_cookie('rating', $cookie, 365);
+	$engine->sess->set_cookie('rating', $cookie, 365);
 
 	return true;
 }

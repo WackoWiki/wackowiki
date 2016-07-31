@@ -269,6 +269,8 @@ class Http
 		}
 
 		$sess->cf_secret			= $this->db->system_seed;
+		$sess->cf_cookie_prefix		= $this->db->cookie_prefix;
+		$sess->cf_cookie_persistent	= ($this->db->allow_persistent_cookie? $this->db->session_length : false);
 		$sess->cf_cookie_path		= $this->db->cookie_path;
 		$sess->cf_cookie_secure		= ($this->db->tls && $this->tls_session);
 		$sess->cf_cookie_httponly	= true;
@@ -276,7 +278,7 @@ class Http
 		$sess->cf_ip				= $this->real_ip; // STS hack. need to decide where real_ip should live
 		$sess->cf_tls				= $this->tls_session;
 
-		$sess->start($this->db->cookie_prefix . 'Session');
+		$sess->start('Session');
 		$this->session = & $sess;
 
 		if (isset($sess->saved_diag_log))
