@@ -171,8 +171,8 @@ abstract class Dbal // need to be extended by Settings to be usable
 	private function put_cache($data)
 	{
 		$data['affected_rows'] = $this->affected_rows;
-		file_put_contents($this->sqlfile, Ut::serialize($data, JSON_PRETTY_PRINT));
-		chmod($this->sqlfile, 0644);
+		file_put_contents($this->sqlfile, Ut::serialize($data));
+		chmod($this->sqlfile, SAFE_CHMOD);
 	}
 
 	// Invalidate the SQL cache
@@ -202,7 +202,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 				return $x[0];
 			}, $query);
 
-		return Ut::join_path(CACHE_SQL_DIR, hash('sha1', $query));
+		return Ut::join_path(CACHE_SQL_DIR, Ut::http64_encode(hash('sha1', $query, 1)));
 	}
 
 	// low level stuff:

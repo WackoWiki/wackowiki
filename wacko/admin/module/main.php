@@ -42,10 +42,9 @@ function admin_lock(&$engine, &$module)
 		$engine->db->sql_query("TRUNCATE {$engine->db->table_prefix}cache");
 
 		Ut::purge_directory(CACHE_SQL_DIR);
-
 		Ut::purge_directory(CACHE_CONFIG_DIR);
-
 		Ut::purge_directory(CACHE_FEED_DIR);
+		Ut::purge_directory(CACHE_TEMPLATE_DIR);
 	}
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')

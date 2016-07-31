@@ -76,7 +76,7 @@ class Http
 	private function save_page($data)
 	{
 		file_put_contents($this->file, $data);
-		chmod($this->file, 0644);
+		chmod($this->file, SAFE_CHMOD);
 
 		$this->db->sql_query(
 			"INSERT INTO ".$this->db->table_prefix."cache SET ".
@@ -133,7 +133,7 @@ class Http
 
 	private function construct_id($page, $method, $query)
 	{
-		return Ut::join_path(CACHE_PAGE_DIR, hash('sha1', ($page . '_' . $method . '_' . $query)));
+		return Ut::join_path(CACHE_PAGE_DIR, Ut::http64_encode(hash('sha1', ($page . '_' . $method . '_' . $query), 1)));
 	}
 
 	// Check http-request. May be, output cached version.
@@ -153,7 +153,7 @@ class Http
 
 		ksort($_query);
 
-		$query = '';
+		$query = ($this->tls_session? 'TLS&' : '');
 
 		foreach ($_query as $k => $v)
 		{

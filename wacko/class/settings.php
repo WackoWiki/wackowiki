@@ -110,7 +110,8 @@ class Settings extends Dbal implements ArrayAccess
 					$text = Ut::serialize($this->config, JSON_PRETTY_PRINT);
 					// unable to write cache file considered are 'turn config caching off' feature
 					@file_put_contents($this->cachefile, $text);
-					@chmod($this->cachefile, 0750); // mark cache as valid
+					// mark cache as valid - set x-bits by copying r-bits in them, see fileperms() above
+					@chmod($this->cachefile, SAFE_CHMOD | ((SAFE_CHMOD >> 2) & 0111));
 				}
 			}
 		}
@@ -186,7 +187,7 @@ class Settings extends Dbal implements ArrayAccess
 	{
 		// we load cache only if x bits set, so clearing 0111 bits will invalidate
 		// cachefile may be missing, it's perfectly normal
-		@chmod($this->cachefile, 0644);
+		@chmod($this->cachefile, SAFE_CHMOD);
 	}
 
 	function set($name, $value, $delete_cache = true)

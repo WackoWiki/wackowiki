@@ -4210,42 +4210,30 @@ class Wacko
 	}
 
 	// REFERRERS
-	function log_referrer($page_id = '', $referrer = '')
+	function log_referrer()
 	{
-		// fill values
-		if (!($page_id = trim($page_id)))
+		if ($this->page
+			&& ($ref = @$_SERVER['HTTP_REFERER'])
+			&& !$this->bad_words($ref)
+			&& filter_var($ref, FILTER_VALIDATE_URL))
 		{
-			$page_id = $this->page['page_id'];
-		}
+			$heads = ['https://' . $this->db->tls_proxy . '/', 'https://', 'http://'];
+			$headless = str_replace($heads, '', $ref);
 
-		if (!($referrer = trim($referrer)))
-		{
-			$referrer	= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-		}
-
-		# $user_agent	= isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
-		# $ip			= $this->get_user_ip();
-
-		// check if it's coming from another site
-		if ($referrer && !preg_match('/^'.preg_quote($this->db->base_url, '/').'/', $referrer) && isset($_GET['sid']) === false) // TODO: isset($_GET['PHPSESSID']) === false
-		{
-			if (!preg_match('`^https?://`', $referrer))
+			if ($ref !== $headless) // if protocol known..
 			{
-				return;
-			}
+				$we = rtrim(str_replace($heads, '', $this->db->base_url), '/');
 
-			if ($this->bad_words($referrer))
-			{
-				return;
+				if (strncasecmp($headless, $we, strlen($we))) // if not from ourselves..
+				{
+					$this->db->sql_query(
+						"INSERT INTO {$this->db->table_prefix}referrer SET ".
+							"page_id		= '" . (int)$this->page['page_id'] . "', ".
+							"referrer		= " . $this->db->q($ref) . ", ".
+							"ip				= " . $this->db->q($this->http->real_ip) . ", ".
+							"referrer_time	= UTC_TIMESTAMP()");
+				}
 			}
-
-			$this->db->sql_query(
-				"INSERT INTO ".$this->db->table_prefix."referrer SET ".
-					"page_id		= '".(int)$page_id."', ".
-					"referrer		= ".$this->db->q($referrer).", ".
-					# "user_agent		= ".$this->db->q((string) trim(substr($user_agent, 0, 149))).", ".
-					# "ip				= ".$this->db->q((string) $ip).", ".
-					"referrer_time	= UTC_TIMESTAMP()");
 		}
 	}
 
