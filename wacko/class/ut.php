@@ -315,7 +315,7 @@ class Ut
 	}
 
 	// delete all (or older than $ttl seconds) files in directory
-	static function purge_directory($directory, $ttl = 0, $mask = GLOB_ALL)
+	static function purge_directory($directory, $ttl = 0, $mask = '*')
 	{
 		$n		= 0;
 		$past	= time() - $ttl;

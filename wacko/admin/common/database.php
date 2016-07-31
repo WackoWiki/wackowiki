@@ -197,7 +197,7 @@ function remove_pack(&$engine, $pack)
 		if ($subdir)
 		{
 			$dir = Ut::join_path($packdir, $subdir);
-			Ut::purge_directory($dir);
+			Ut::purge_directory($dir, 0, GLOB_ALL);
 			rmdir($dir);
 
 			// recursively remove subdirs in path
@@ -212,7 +212,7 @@ function remove_pack(&$engine, $pack)
 	// remove pack contents and directory
 	if (is_dir($packdir))
 	{
-		Ut::purge_directory($packdir);
+		Ut::purge_directory($packdir, 0, GLOB_ALL);
 		rmdir($packdir);
 	}
 

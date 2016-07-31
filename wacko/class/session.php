@@ -386,11 +386,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		$code = Ut::random_token(11);
 		$this->__nonces[static::nonce_index($action, $code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
+		Ut::dbg('+++', $action, $code);
 		return $code;
 	}
 
 	public function verify_nonce($action, $code, $protect = 0)
 	{
+		Ut::dbg('???', $action, $code);
 		if (!($nonces = @$this->__nonces))
 		{
 			return false;
