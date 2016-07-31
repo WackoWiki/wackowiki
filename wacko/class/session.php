@@ -151,12 +151,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$this->name = $name;
 		}
 
-		$send_cookie = 1;
-
-		if (!$id && ($id = $this->get_cookie($this->name)))
-		{
-			$send_cookie = 0;
-		}
+		$id_from_cookie = (!$id && ($id = $this->get_cookie($this->name)));
 
 		if ($id && $this->cf_referer_check
 			&& strstr($_SERVER['HTTP_REFERER'], $this->cf_referer_check) === false)
@@ -189,9 +184,9 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		{
 			// we obtained (from the user or from the cookie) perfectly valid session id..
 			$this->id = $id;
-			if ($send_cookie)
+			if (!$id_from_cookie)
 			{
-				$this->send_cookie();
+				$this->send_cookie($this->name, $this->id);
 			}
 		}
 
@@ -374,7 +369,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		if ($this->cf_prevent_replay)
 		{
-			$this->_send_cookie($this->name . 'NoReplay', 
+			$this->send_cookie($this->name . 'NoReplay', 
 				$this->create_nonce('NoReplay', $this->cf_max_session));
 		}
 	}
@@ -496,12 +491,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	private function set_new_id()
 	{
 		$this->id = $this->store_generate_id();
-		$this->send_cookie();
-	}
-
-	protected function send_cookie($remove = false)
-	{
-		$this->_send_cookie($this->name, ($remove? '' : $this->id));
+		$this->send_cookie($this->name, $this->id);
 	}
 
 	// legacy get/set/delete from engine
@@ -522,13 +512,19 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	function delete_cookie($name)
 	{
 		$name = $this->cf_cookie_prefix . $name;
-		$this->setcookie($name);
+		$this->unsetcookie($name);
 		unset($_COOKIE[$name]);
 	}
 
-	protected function _send_cookie($name, $value)
+	protected function send_cookie($name, $value)
 	{
 		$this->setcookie($this->cf_cookie_prefix . $name, $value, ($this->cf_cookie_lifetime > 0? time() + $this->cf_cookie_lifetime : 0));
+	}
+
+	// just sugar
+	public function unsetcookie($name)
+	{
+		$this->setcookie($name);
 	}
 
 	public function setcookie($name, $value = null, $expires = 0, $path = null, $domain = null, $secure = null, $httponly = null, $url_encode = true)

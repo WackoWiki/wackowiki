@@ -37,7 +37,7 @@ class SessionFileStore extends Session
 				if (mb_strlen($key, '8bit') != 64)
 				{
 					$key = Ut::random_bytes(64); // 32 for encryption and 32 for authentication
-					$this->_send_cookie($cookie, Ut::http64_encode($key));
+					$this->send_cookie($cookie, Ut::http64_encode($key));
 				}
 
 				$this->cryptokey = $key;
