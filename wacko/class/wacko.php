@@ -2629,35 +2629,6 @@ class Wacko
 		}
 	}
 
-	// COOKIES
-	function get_cookie($name)
-	{
-		return @$_COOKIE[$this->db->cookie_prefix . $name];
-	}
-
-	// persistent: false, or number of days (0 for config default's days)
-	function set_cookie($name, $value, $persistent = false)
-	{
-		$name = $this->db->cookie_prefix . $name;
-
-		$this->sess->setcookie($name, $value,
-			(($persistent !== false && $this->db->allow_persistent_cookie)? ($persistent ?: $this->db->session_length) * DAYSECS + time() : 0),
-			$this->db->cookie_path, '', ($this->db->tls && $this->http->tls_session), true);
-
-		$_COOKIE[$name] = $value;
-	}
-
-	function delete_cookie($name, $prefix = true)
-	{
-		$prefix and $name = $this->db->cookie_prefix . $name;
-
-		$this->sess->setcookie($name, '',
-			1, // waaay in the past timestamp
-			$this->db->cookie_path, '', ($this->db->tls && $this->http->tls_session), true);
-
-		unset($_COOKIE[$name]);
-	}
-
 	// HTTP/REQUEST/LINK RELATED
 
 	/**
@@ -4697,7 +4668,7 @@ class Wacko
 		$selector		= Ut::http64_encode(Ut::random_bytes(9));
 		$authenticator	= Ut::random_bytes(33);
 
-		$this->set_cookie(AUTH_TOKEN, $selector . Ut::http64_encode($authenticator), $session_days);
+		$this->sess->set_cookie(AUTH_TOKEN, $selector . Ut::http64_encode($authenticator), $session_days);
 
 		$this->db->sql_query(
 			"INSERT INTO {$this->db->table_prefix}auth_token SET ".
@@ -4710,7 +4681,7 @@ class Wacko
 
 	function check_auth_token()
 	{
-		if (($token = $this->get_cookie(AUTH_TOKEN)))
+		if (($token = $this->sess->get_cookie(AUTH_TOKEN)))
 		{
 			$selector		= substr($token, 0, 12);
 			$authenticator	= substr($token, 12);
@@ -4742,7 +4713,7 @@ class Wacko
 			}
 
 			// just purge stale auth token
-			$this->delete_cookie(AUTH_TOKEN);
+			$this->sess->delete_cookie(AUTH_TOKEN);
 		}
 
 		return false;
@@ -4791,7 +4762,7 @@ class Wacko
 			// we destroy ALL user's auth tokens - effectively enforce user to re-login thru password auth
 			$this->delete_auth_token($user['user_id']);
 
-			$this->delete_cookie(AUTH_TOKEN);
+			$this->sess->delete_cookie(AUTH_TOKEN);
 
 			$this->sess->restart();
 

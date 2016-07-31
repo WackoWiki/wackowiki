@@ -32,7 +32,7 @@ class SessionFileStore extends Session
 			{
 				$cookie = $prefix . 'Rands';
 
-				$key = Ut::http64_decode((string) @$_COOKIE[$cookie]);
+				$key = Ut::http64_decode((string) $this->get_cookie($cookie));
 
 				if (mb_strlen($key, '8bit') != 64)
 				{
