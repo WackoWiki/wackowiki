@@ -13,9 +13,9 @@ $this->no_way_back = true; // prevent goback'ing that page
 // actions
 if (@$_GET['action'] === 'clearcookies')
 {
-	foreach ($_COOKIE as $name => $value)
+	foreach ($_COOKIE as $name => $dummy)
 	{
-		$this->sess->setcookie($name);
+		$this->sess->unsetcookie($name);
 	}
 
 	$this->login_page();
