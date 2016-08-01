@@ -10,9 +10,8 @@ $this->no_way_back = true; // prevent goback'ing that page
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
-if (($code = @$_REQUEST['secret_code']))
+if (($code = (string) @$_REQUEST['secret_code']))
 {
-	$recover = 1;
 	$user = $this->db->load_single(
 		"SELECT user_id, user_name ".
 		"FROM ".$this->db->user_table." ".
@@ -26,14 +25,13 @@ if (($code = @$_REQUEST['secret_code']))
 }
 else
 {
-	$recover = 0;
 	$user = $this->get_user();
 }
 
 // both change password forms processed here: usual password change, and forgotten password reset
 if (@$_POST['_action'] === 'change_password' && $user)
 {
-	if (!$recover && !$this->password_verify($user, $_POST['password']))
+	if (!$code && !$this->password_verify($user, $_POST['password']))
 	{
 		// wrong current password
 		$error = $this->_t('WrongPassword');
@@ -63,7 +61,7 @@ if (@$_POST['_action'] === 'change_password' && $user)
 				"WHERE user_id = '".$user['user_id']."' ".
 				"LIMIT 1");
 
-			$diag = $recover? 'LogUserPasswordRecovered' : 'LogUserPasswordChanged';
+			$diag = $code? 'LogUserPasswordRecovered' : 'LogUserPasswordChanged';
 			$this->log(3, Ut::perc_replace($this->_t($diag, SYSTEM_LANG), $user['user_name']));
 			$this->set_message($this->_t('PasswordChanged'), 'success');
 
@@ -139,7 +137,7 @@ $_POST and $this->show_must_go_on($code? ['secret_code' => $code] : []);
 
 if ($user)
 {
-	if ($recover)
+	if ($code)
 	{
 		$tpl->c_title = $this->format(Ut::perc_replace($this->_t('YouWantChangePasswordForUser'), $user['user_name']));
 		$tpl->c_secret_code = $code;
