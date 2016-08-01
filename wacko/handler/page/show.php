@@ -25,7 +25,7 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 	$p = ceil($count['n'] / $this->db->comments_count);
 
 	// forcibly open page
-	$this->http->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
+	$this->http->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), ['show_comments' => 1, 'p' => $p, '#' => $this->page['tag']]));
 }
 
 // display page body
@@ -90,8 +90,7 @@ if ($this->has_access('read'))
 
 				if ($latest['deleted'] && $this->is_admin() == false)
 				{
-					$message2 = $this->_t('PageDeletedInfo');
-					$this->show_message($message2, 'info');
+					$this->show_message($this->_t('PageDeletedInfo'), 'info');
 				}
 				else
 				{
@@ -205,7 +204,7 @@ else
 }
 
 // show category tags
-if ($this->forum === true
+if ($this->forum
 	|| ($this->has_access('read') && $this->page && $this->db->footer_tags == 1
 	|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
