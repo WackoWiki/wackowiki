@@ -7411,9 +7411,9 @@ class Wacko
 		$this->http->redirect($this->href($this->method));
 	}
 
-	function show_must_go_on()
+	function show_must_go_on($param = [])
 	{
-		$this->http->redirect($this->href());
+		$this->http->redirect($this->href('', '', $param));
 	}
 
 	function login_page()
