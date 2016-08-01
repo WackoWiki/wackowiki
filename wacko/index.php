@@ -18,8 +18,8 @@ if ($db->ext_bad_behavior)
 
 $http = new Http($db);
 
-$router = new UriRouter($db);
-$route = $router->run(['_tls' => $http->tls_session, '_ip' => $http->real_ip]);
+$router = new UriRouter($db, $http);
+$route = $router->run();
 
 $db->ap_mode = ($route['route'] === 'admin');
 
@@ -44,12 +44,12 @@ if (isset($route['engine']))
 switch ($route['route'])
 {
 case 'static':
-	$http->sendfile($route['static']);
+	$http->sendfile($route['static'], null, $route['age']);
 	$http->terminate();
 
 case 'freecap':
 	$http->no_cache();
-	$sess = & $http->session;
+	$sess = & $http->sess;
 	include 'lib/captcha/freecap.php';
 	$http->terminate();
 

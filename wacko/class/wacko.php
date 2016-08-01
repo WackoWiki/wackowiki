@@ -98,7 +98,7 @@ class Wacko
 		$this->db		=
 		$this->config	= & $config;
 		$this->http		= & $http;
-		$this->sess		= & $http->session;
+		$this->sess		= & $http->sess;
 	}
 
 	// DATABASE
@@ -4239,8 +4239,8 @@ class Wacko
 
 			if (@file_exists($__pathname))
 			{
-				$__i = (int) strrpos($__pathname, '/'); // false -> 0 for no / abnormality
-				$__tpl = Ut::join_path(substr($__pathname, 0, $__i), 'templates', str_replace('.php', '.tpl', substr($__pathname, $__i))); // STS magic string
+				$__tpl = pathinfo($__pathname);
+				$__tpl = Ut::join_path($__tpl['dirname'], 'templates', $__tpl['filename'] . '.tpl'); // STS magic string
 				if (@file_exists($__tpl))
 				{
 					$tpl = Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
@@ -4289,13 +4289,20 @@ class Wacko
 				$include_tail = '';
 				ob_start();
 				include $__pathname;
-				echo $include_tail;
 				if (isset($tpl))
 				{
-					// NB if tpl is active - there're ERROR if ob_get_contents != ''
-					echo $tpl;
+					$output = (string) $tpl;
+					if (($spare = ob_get_contents()))
+					{
+						trigger_error('templated ' . $__pathname . ' also produce echo-output', E_USER_WARNING);
+						$output .= $spare;
+					}
 				}
-				$output = ob_get_contents();
+				else
+				{
+					echo $include_tail;
+					$output = ob_get_contents();
+				}
 				ob_end_clean();
 
 				return $output;

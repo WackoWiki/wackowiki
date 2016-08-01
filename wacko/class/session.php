@@ -527,7 +527,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$this->setcookie($name);
 	}
 
-	public function setcookie($name, $value = null, $expires = 0, $path = null, $domain = null, $secure = null, $httponly = null, $url_encode = true)
+	public function setcookie($name, $value = null, $expires = 0, $path = null, $domain = null, $secure = null, $httponly = null)
 	{
 		if (headers_sent($file, $line))
 		{
@@ -541,7 +541,10 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		isset($secure) or $secure = $this->cf_cookie_secure;
 		isset($httponly) or $httponly = $this->cf_cookie_httponly;
 
-		// $name = rawurlencode($name);
+		// cookie name must be rfc2616 2.2 token:
+		$name = preg_replace_callback('/[\x7F\x00-\x1F\s()<>@,;:\\\\"\/\[\]?={}%]/',
+			function ($ch) { if (strlen($ch) == 1) return '%' . bin2hex($ch); }, $name);
+
 		$this->remove_cookie($name);
 
 		if (Ut::is_empty($value))
@@ -550,7 +553,9 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$value = 'deleted';
 		}
 
-		$url_encode and $value = rawurlencode($value);
+		// rfc6265 4.1.1 cookie-octet
+		$value = preg_replace_callback('/[\x7F-\xFF\x00-\x1F\s",;%\\\\]/',
+			function ($ch) { if (strlen($ch) == 1) return '%' . bin2hex($ch); }, $value);
 
 		$cookie = 'Set-Cookie: '. $name . '=' . $value;
 
@@ -559,8 +564,11 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$expires = (int)$expires;
 			$cookie .= '; expires=' . Ut::http_date($expires);
 
-			($expires -= time()) > 0 or $expires = 0;
-			$cookie .= '; Max-Age=' . $expires;
+			// max-age cannot start with 0, as per rfc6265 4.1.1
+			if (($expires -= time()) > 0)
+			{
+				$cookie .= '; Max-Age=' . $expires;
+			}
 		}
 
 		$path		and $cookie .= '; path=' . $path;

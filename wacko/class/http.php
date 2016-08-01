@@ -8,11 +8,13 @@ if (!defined('IN_WACKO'))
 class Http
 {
 	public		$tls_session;
+	public		$request_uri;				// normalized REQUEST_URI - e.g. 'PageOfNoReturn/show?a=1'
 	public		$real_ip;
-	public		$session;						// class Session
+	public		$sess;						// class Session
 	private		$db;
+	private		$tls_mark;					// tls mark cookie name
 	private		$page;
-	public		$method;						// for finalize & diag..
+	public		$method;					// for finalize & diag..
 	private		$hash;
 	private		$query;
 	private		$file;
@@ -20,10 +22,18 @@ class Http
 
 	public function __construct(&$db)
 	{
-		$this->db = & $db;
-
+		$this->db			= & $db;
+		$this->request_uri	= $this->request_uri();
 		$this->tls_session	= $this->tls_session();
 		$this->real_ip		= $this->real_ip();
+		$this->tls_mark		= $this->db->cookie_prefix . 'TLS';
+
+		// if we have used tls already - do secure session!
+		if ($db->tls && !$this->tls_session && @$_COOKIE[$this->tls_mark])
+		{
+			$this->secure_base_url();
+			$this->redirect($this->db->base_url . $this->request_uri, true);
+		}
 
 		if ($db->tls && $this->tls_session)
 		{
@@ -229,7 +239,7 @@ class Http
 		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $method != 'edit' && $method != 'watch')
 		{
 			// cache only for anonymous user
-			if (!isset($this->session->userprofile))
+			if (!isset($this->sess->userprofile))
 			{
 				$this->page = $page;
 				$this->method = $method;
@@ -279,12 +289,19 @@ class Http
 		$sess->cf_tls				= $this->tls_session;
 
 		$sess->start('Session');
-		$this->session = & $sess;
+		$this->sess = & $sess;
 
 		if (isset($sess->saved_diag_log))
 		{
 			// recover old dbg messages sabed by self::redirect()
 			Diag::$log = array_merge($sess->saved_diag_log, Diag::$log);
+		}
+
+		// if we are in tls-secured session - leave a mark so unsecure sessions do upgrade and find our session!
+		if ($this->db->tls && $this->tls_session && !@$_COOKIE[$this->tls_mark])
+		{
+			// we need to set custom NOT SECURE cookie for tls upgrade mark
+			$sess->setcookie($this->tls_mark, 'on', 0, null, null, false);
 		}
 	}
 
@@ -344,10 +361,10 @@ class Http
 	// safe exit/die for wackowiki
 	function terminate()
 	{
-		if (Diag::$log && isset($this->session))
+		if (Diag::$log && isset($this->sess))
 		{
 			// save dbg messages to show in next session..
-			$this->session->set_flash('saved_diag_log', Diag::$log);
+			$this->sess->set_flash('saved_diag_log', Diag::$log);
 		}
 
 		die;
@@ -418,6 +435,7 @@ class Http
 		return ((@$_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off' && $_SERVER['HTTPS'] != '0')
 			|| $_SERVER['SERVER_PORT'] == 443
 			|| @$_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
+			|| @$_SERVER['HTTP_X_FORWARDED_SSL'] == 'on'
 			|| @$_SERVER['HTTP_X_FORWARDED_PORT'] == 443);
 	}
 
@@ -477,7 +495,7 @@ class Http
 				foreach (file($conffile) as $line)
 				{
 					$line = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
-					if (count($line) > 1 && $line[0][0] !== '#')
+					if (count($line) > 1 && ctype_alpha($line[0][0]))
 					{
 						$type = array_shift($line);
 						foreach ($line as $ext)
@@ -503,7 +521,7 @@ class Http
 	{
 		header_remove();
 		set_time_limit(0);
-		isset($this->session)  and  $this->session->write_close();
+		isset($this->sess)  and  $this->sess->write_close();
 
 		// allow to be called sendfile(404)
 		if (($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename))))
@@ -516,7 +534,7 @@ class Http
 		}
 	}
 
-	private function sendfile0($path, $filename = null)
+	private function sendfile0($path, $filename = null, $age = 31)
 	{
 		clearstatcache();
 		$path = realpath($path);
@@ -580,25 +598,22 @@ class Http
 		header('Content-Length: ' . $to - $from + 1);
 		header('X-Served-By: sendfile');
 
-		$type = $this->mime_type($path);
-		header('Content-Type: ' . $type);
-		$type = explode('/', $type, 2);
-		$inline = ($type[0] == 'image' || $type[0] == 'text' || $type[0] == 'video' || $type[0] == 'audio');
+		header('Content-Type: ' . $this->mime_type($path));
 
-		if ($type[0] == 'application' && $type[1] != 'javascript')
+		if ($age > 0)
+		{
+			$age = (int)($age * DAYSECS);
+			header('Cache-Control: public, max-age=' . $age);
+			header('Expires: ' . Ut::http_date(time() + $age));
+		}
+		else
 		{
 			header('Expires: ' . Ut::http_date(-1));
 			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 			header('Pragma: no-cache');
 		}
-		else
-		{
-			$age = 30 * DAYSECS;
-			header('Cache-Control: public, max-age=' . $age);
-			header('Expires: ' . Ut::http_date(time() + $age));
-		}
 
-		header('Content-Disposition: ' . ($inline? 'inline' : 'attachment') . '; filename="' . ($filename ?: basename($path)) . '"');
+		header('Content-Disposition: inline; filename="' . ($filename ?: basename($path)) . '"');
 		header('Content-Transfer-Encoding: binary');
 		header('Date: ' . Ut::http_date());
 
@@ -635,5 +650,55 @@ class Http
 
 			fclose($fp);
 		}
+	}
+
+	// saved snippet from stackoverflow, to clean up names from php "translations"
+	// $_POST   = parse_str(file_get_contents('php://input'));
+	// $_GET    = parse_str($_SERVER['QUERY_STRING']);
+	// $_COOKIE = parse_str($_SERVER['HTTP_COOKIE']);
+	function parse_str($str)
+	{
+		$str = preg_replace_callback('/(^|(?<=&))[^=[&]+/', function($key) { return bin2hex(urldecode($key[0])); }, $str);
+		parse_str($str, $post);
+		return array_combine(array_map('hex2bin', array_keys($post)), $post);
+	}
+
+	// remove base_url's base from REQUEST_URI
+	private function request_uri()
+	{
+		$tls = $this->db->tls? $this->db->tls_proxy : '';
+
+		$base = parse_url($this->db->base_url);
+		$base = trim($base['path'], '/');
+		$base = $this->cut_prefix($tls, $base);
+
+		$uri = explode('?', $_SERVER['REQUEST_URI'], 2);
+		$path = rawurldecode($uri[0]); // %xx not yet decoded in REQUEST_URI
+
+		// sanitize uri wacko-style:
+		// remove spaces, multiple slashes, .. path parts, and leading/trailing slashes
+		$path = Ut::strip_spaces($path);
+		$path .= '/';
+		while (($x = str_replace(['/../', '/./', '//'], '/', $path)) !== $path)
+		{
+			$path = $x;
+		}
+		$path = trim($path, '/');
+
+		$path = $this->cut_prefix($tls, $path);
+		$path = $this->cut_prefix($base, $path);
+
+		isset($uri[1])  and  $path .= '?' . $uri[1];
+
+		return $path;
+	}
+
+	private function cut_prefix($prefix, $path)
+	{
+		if (($n = strlen($prefix)) && !strncasecmp($path, $prefix, $n) && (!isset($path[$n]) || $path[$n] == '/'))
+		{
+			$path = (string) substr($path, $n + 1);
+		}
+		return $path;
 	}
 }

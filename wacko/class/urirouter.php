@@ -9,13 +9,16 @@ if (!defined('IN_WACKO'))
 
 class UriRouter
 {
+	const CODE_VERSION = 1; // to not read incompatible cached data
 	const GLOBALS = ['G' => '_GET', 'P' => '_POST', 'S' => '_SERVER'];
 	private $config = [];
 	private $db;
+	private $http;
 
-	public function __construct(&$db)
+	public function __construct(&$db, &$http)
 	{
 		$this->db = & $db;
+		$this->http = & $http;
 
 		$conffile = Ut::join_path(CONFIG_DIR, 'router.conf');
 		$cachefile = Ut::join_path(CACHE_CONFIG_DIR, 'router.conf');
@@ -31,7 +34,8 @@ class UriRouter
 		if (!((@filemtime($cachefile) >= $conftime)
 			&& is_writable($cachefile)
 			&& ($text = file_get_contents($cachefile))
-			&& ($this->config = Ut::unserialize($text))))
+			&& ($this->config = Ut::unserialize($text))
+			&& array_shift($this->config) == self::CODE_VERSION))
 		{
 			// gather all method handlers available for {method} macro
 			$methods = [];
@@ -44,7 +48,7 @@ class UriRouter
 			$this->read_config($conffile, ['method' => implode('|', $methods)]);
 
 			// cache to file
-			$text = Ut::serialize($this->config);
+			$text = Ut::serialize([self::CODE_VERSION] + $this->config);
 			// unable to write cache file considered are 'turn config caching off' feature
 			@file_put_contents($cachefile, $text);
 			@chmod($cachefile, SAFE_CHMOD);
@@ -54,9 +58,11 @@ class UriRouter
 	public function run($vars = [])
 	{
 		// predefined vars
-		$vars['_uri']		= $this->uri_path();
+		$vars['_uri']		= explode('?', $this->http->request_uri)[0];
 		$vars['_method']	= $_SERVER['REQUEST_METHOD'];
 		$vars['_rewrite']	= $this->db->rewrite_mode;
+		$vars['_tls']		= $this->http->tls_session;
+		$vars['_ip']		= $this->http->real_ip;
 
 		// populate router's environment
 		$env = ['vars' => $vars, 'changed' => []];
@@ -95,39 +101,6 @@ class UriRouter
 		}
 
 		return $vars;
-	}
-
-	private function uri_path()
-	{
-		$script = $_SERVER['SCRIPT_NAME'];
-		if (($base = strrpos($script, '/')) === false)
-		{
-			$this->aband('invalid _SERVER[SCRIPT_NAME]: ' . $script);
-		}
-
-		$uri = $_SERVER['REQUEST_URI'];
-		if (($i = strpos($uri, '?')) !== false)
-		{
-			$uri = substr($uri, 0, $i);
-		}
-		$uri = rawurldecode($uri); // %xx not decoded in REQUEST_URI yet
-
-		if (!strncmp($uri, $script, $base + 1))
-		{
-			$uri = substr($uri, $base);
-		}
-
-		// remove .. path elements
-		$uri = preg_replace('#(^|/)\.\.(/|$)#', '/', $uri);
-
-		// remove starting/trailing slashes, and minimize multi-slashes
-		$uri = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#',
-			function ($x)
-			{
-				return @$x[1]? '/' : '';
-			}, $uri);
-
-		return $uri;
 	}
 
 	private function route(&$env)
