@@ -42,6 +42,7 @@ $wacko_config_defaults = array(
 	'tls'							=> 0,
 	'tls_implicit'					=> 0,
 	'tls_proxy'						=> '',
+	'cookie_prefix'					=> '',
 
 	'reverse_proxy'					=> 0,
 	'reverse_proxy_header'			=> '',
@@ -265,5 +266,3 @@ $wacko_config_defaults = array(
 	// enable extensions
 	'ext_bad_behavior'				=> 0,
 );
-
-?>
