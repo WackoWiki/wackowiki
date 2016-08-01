@@ -5,12 +5,6 @@ require_once 'class/init.php';
 
 $db = new Settings;
 
-if (!isset($db->wacko_version) || version_compare($db->wacko_version, WACKO_VERSION, '<'))
-{
-	Installer::run($db);
-	// NEVER BEEN HERE
-}
-
 if ($db->ext_bad_behavior)
 {
 	require_once 'lib/bad_behavior/bad-behavior-wackowiki.php'; // uses $db
@@ -19,11 +13,11 @@ if ($db->ext_bad_behavior)
 $http = new Http($db);
 
 $router = new UriRouter($db, $http);
-$route = $router->run();
+$route = $router->run(['_install' => (int)(!isset($db->wacko_version) || version_compare($db->wacko_version, WACKO_VERSION, '<'))]);
 
 $db->ap_mode = ($route['route'] === 'admin');
 
-if ($db->is_locked($db->ap_mode? AP_LOCK : SITE_LOCK) || (!$db->ap_mode && RECOVERY_MODE))
+if (($db->is_locked($db->ap_mode? AP_LOCK : SITE_LOCK) && !isset($route['unlock'])) || (!$db->ap_mode && RECOVERY_MODE))
 {
 	$http->status(503);
 	echo 'The site is temporarily unavailable due to system maintenance. Please try again later.';
@@ -43,6 +37,10 @@ if (isset($route['engine']))
 
 switch ($route['route'])
 {
+case 'install':
+	Installer::run($db);
+	// NEVER BEEN HERE
+
 case 'static':
 	$http->sendfile($route['static'], null, $route['age']);
 	$http->terminate();
