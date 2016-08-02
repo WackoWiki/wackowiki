@@ -25,13 +25,10 @@ $module['db_repair'] = array(
 
 function admin_db_repair(&$engine, &$module)
 {
-	$order = '';
-	$error = '';
 	$check = '';
 
 	// import passed variables and objects
 	$tables			= & $module['vars'][0];
-	$directories	= & $module['vars'][1];
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />

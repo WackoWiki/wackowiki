@@ -183,6 +183,7 @@ $wacko_config_defaults = array(
 	'forum_cluster'					=> 'Forum',
 	'forum_topics'					=> 10,
 	'comments_count'				=> 10,
+	'list_count'					=> 50,
 	'menu_items'					=> 5,
 
 	'news_cluster'					=> '',

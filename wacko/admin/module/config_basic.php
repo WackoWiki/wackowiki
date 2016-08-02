@@ -288,7 +288,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><strong>Comments panel:</strong><br />
-					<small>The default display  of comments in the bottom of the page.</small></td>
+					<small>The default display of comments in the bottom of the page.</small></td>
 				<td>
 					<input type="radio" id="footer_comments_on" name="footer_comments" value="1"<?php echo ( $engine->db->footer_comments == 1 ? ' checked="checked"' : '' );?> /><label for="footer_comments_on">On.</label>
 					<input type="radio" id="footer_comments_guest" name="footer_comments" value="2"<?php echo ( $engine->db->footer_comments == 2 ? ' checked="checked"' : '' );?> /><label for="footer_comments_guest">Registered.</label>

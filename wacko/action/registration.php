@@ -155,6 +155,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 					"user_id			= '".(int)$user_id."', ".
 					"typografica		= '".(($this->db->default_typografica == 1) ? 1 : 0)."', ".
 					"user_lang			= ".$this->db->q(($user_lang ? $user_lang : $this->db->language)).", ".
+					"list_count			= '".(int)$this->db->list_count."', ".
 					"theme				= ".$this->db->q($this->db->theme).", ".
 					"notify_minor_edit	= '".(int)$this->db->notify_minor_edit."', ".
 					"notify_page		= '".(int)$this->db->notify_page."', ".
@@ -255,7 +256,7 @@ else
 	$tpl->r_username = $user_name;
 	$tpl->r_password = $password;
 	$tpl->r_confpassword = $conf_password;
-	$tpl->r_only = 
+	$tpl->r_only =
 		Ut::perc_replace($this->_t($this->db->disable_wikiname? 'NameAlphanumOnly' : 'NameCamelCaseOnly'),
 			$this->db->username_chars_min,
 			$this->db->username_chars_max);
