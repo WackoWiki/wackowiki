@@ -158,7 +158,7 @@ function admin_user_users(&$engine, &$module)
 					"user_id			= '".(int)$_user_id['user_id']."', ".
 					"typografica		= '".(($engine->db->default_typografica == 1) ? 1 : 0)."', ".
 					"user_lang			= ".$engine->db->q(($_POST['user_lang'] ? $_POST['user_lang'] : $engine->db->language)).", ".
-					"list_count			= '".(int)$this->db->list_count."', ".
+					"list_count			= '".(int)$engine->db->list_count."', ".
 					"theme				= ".$engine->db->q($engine->db->theme).", ".
 					"notify_minor_edit	= '".(int)$engine->db->notify_minor_edit."', ".
 					"notify_page		= '".(int)$engine->db->notify_page."', ".

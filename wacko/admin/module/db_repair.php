@@ -139,7 +139,7 @@ function admin_db_repair(&$engine, &$module)
 
 		echo '<p>' . 'This script can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.' . '</p>';
 
-		echo $engine->form_open('repair', '', 'post', true, '', '');
+		echo $engine->form_open('repair');
 		?>
 		<br />
 		<input type="hidden" name="action" value="1" />
@@ -151,7 +151,7 @@ function admin_db_repair(&$engine, &$module)
 		<p><?php echo 'This script can also attempt to optimize the database. This improves performance in some situations. Repairing and optimizing the database can take a long time and the database will be locked while optimizing.' ; ?></p>
 		<br />
 		<?php
-		echo $engine->form_open('repair', '', 'post', true, '', '');
+		echo $engine->form_open('repair');
 		?>
 		<input type="hidden" name="action" value="2" />
 		<input type="submit" name="repair" id="submit" value="Repair and Optimize Database" />
