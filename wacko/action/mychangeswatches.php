@@ -60,4 +60,3 @@ else
 {
 	echo '<em>'.$this->_t('NotLoggedInWatches').'</em>';
 }
-?>
