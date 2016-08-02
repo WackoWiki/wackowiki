@@ -13,6 +13,7 @@ class TemplatestUser extends TemplatestSetter
 	private $main;
 	private $pulls = [];
 	private $sets = [];
+	private $chroot = '';
 	private $root;
 
 	function __construct($template, $main)
@@ -105,14 +106,22 @@ class TemplatestUser extends TemplatestSetter
 		$this->__set(func_get_args());
 	}
 
+	// __get/__set helper for generation internal tags
+	// base must be well-formed (e.g. 'a_b_c_')
+	// do not forget to reset to '' when leaving context (if further usage required)
+	function chroot($base = '')
+	{
+		$this->chroot = $base;
+	}
+
 	function __get($name)
 	{
-		return (int) @$this->sets[$name];
+		return (int) @$this->sets[$this->chroot . $name];
 	}
 
 	function __set($name, $value)
 	{
-		$this->set($name, $value);
+		$this->set($this->chroot . $name, $value);
 	}
 
 	// set(['a', 'b'], 'text')

@@ -1,271 +1,224 @@
 <?php
 
+// TODO:
+// - too much loose ends, read thoroughly and refactor
+
 if (!defined('IN_WACKO'))
 {
 	exit;
 }
 
-if (!function_exists('full_text_search'))
+$full_text_search = function ($phrase, $for, $limit, $filter, $deleted = 0)
 {
-	function full_text_search(&$engine, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
-	{
-		$limit		= (int) $limit;
-
-		$count_results = $engine->db->load_all(
-			"SELECT a.page_id ".
-			"FROM ".$engine->db->table_prefix."page a ".
+	$selector =
+		($for
+			? "LEFT JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
+			: "").
+		"WHERE (( MATCH(a.body) AGAINST(".$this->db->q($phrase)." IN BOOLEAN MODE) ".
+			"OR lower(a.title) LIKE lower(".$this->db->q('%' . $phrase . '%').") ".
+			"OR lower(a.tag) LIKE lower(".$this->db->q('%' . $phrase . '%').")) ".
 			($for
-				? "LEFT JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
-				: "").
-			"WHERE (( MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) ".
-				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%').") ".
-				"OR lower(a.tag) LIKE lower(".$engine->db->q('%' . $phrase . '%').")) ".
-				($for
-					? "AND (a.supertag LIKE ".$engine->db->q($engine->translit($for) . '/%')." ".
-					  "OR b.supertag LIKE ".$engine->db->q($engine->translit($for) . '/%')." )"
-					: "").
-				($filter
-					? "AND a.comment_on_id = '0' "
-					: "").
-				($deleted != 1
-					? ($for
-							? "AND (a.deleted <> '1' OR b.deleted <> '1') "
-							: "AND a.deleted <> '1' ")
-					: "").
-				" )", true);
-
-		$count		= count($count_results);
-		$pagination = $engine->pagination($count, $limit, 'p', ['phrase' => $phrase]);
-
-		// load search results
-		$results = $engine->db->load_all(
-			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang,
-				MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) AS score,
-				u.user_name, o.user_name as owner_name ".
-			"FROM ".$engine->db->table_prefix."page a ".
-				"LEFT JOIN ".$engine->db->table_prefix."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$engine->db->table_prefix."user o ON (a.owner_id = o.user_id) ".
-			($for
-				? "LEFT JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
-				: "").
-			"WHERE (( MATCH(a.body) AGAINST(".$engine->db->q($phrase)." IN BOOLEAN MODE) ".
-				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%').") ".
-				"OR lower(a.tag) LIKE lower(".$engine->db->q('%' . $phrase . '%').")) ".
-				($for
-					? "AND (a.supertag LIKE ".$engine->db->q($engine->translit($for) . '/%')." ".
-					  "OR b.supertag LIKE ".$engine->db->q($engine->translit($for) . '/%')." )"
-					: "").
-				($filter
-					? "AND a.comment_on_id = '0' "
-					: "").
-				($deleted != 1
-					? ($for
-							? "AND (a.deleted <> '1' OR b.deleted <> '1') "
-							: "AND a.deleted <> '1' ")
-					: "").
-				" ) ".
-			"ORDER BY score DESC ".
-			"LIMIT {$pagination['offset']}, $limit");
-
-		return array($results, $pagination);
-	}
-}
-
-if (!function_exists('tag_search'))
-{
-	function tag_search(&$engine, $phrase, $for, $limit = 50, $filter, $lang, $deleted = 0)
-	{
-		$limit		= (int) $limit;
-
-		$count_results = $engine->db->load_all(
-			"SELECT a.page_id ".
-			"FROM ".$engine->db->table_prefix."page a ".
-			($for
-				? "LEFT JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
-				: "").
-			"WHERE ( lower(a.tag) LIKE binary lower(".$engine->db->q('%' . $phrase.'%') . ") ".
-				"OR lower(a.title) LIKE lower(".$engine->db->q('%' . $phrase . '%') . ")) ".
-			($for
-				? "AND (a.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " ".
-				  "OR b.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " )"
+				? "AND (a.supertag LIKE ".$this->db->q($this->translit($for) . '/%')." ".
+				  "OR b.supertag LIKE ".$this->db->q($this->translit($for) . '/%')." )"
 				: "").
 			($filter
 				? "AND a.comment_on_id = '0' "
 				: "").
-			($deleted != 1
+			(!$deleted
 				? ($for
-					? "AND (a.deleted <> '1' OR b.deleted <> '1') "
-					: "AND a.deleted <> '1' ")
-				: "")
-			, true);
-
-		$count		= count($count_results);
-		$pagination = $engine->pagination($count, $limit, 'p', ['phrase' => $phrase]);
-
-		// load search results
-		$results = $engine->db->load_all(
-			"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, u.user_name, o.user_name as owner_name ".
-			"FROM ".$engine->db->table_prefix."page a ".
-				"LEFT JOIN ".$engine->db->table_prefix."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$engine->db->table_prefix."user o ON (a.owner_id = o.user_id) ".
-			($for
-				? "LEFT JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
+						? "AND (a.deleted <> '1' OR b.deleted <> '1') "
+						: "AND a.deleted <> '1' ")
 				: "").
-			"WHERE (lower(a.tag) LIKE binary lower(" . $engine->db->q('%' . $phrase . '%') . ") ".
-				"OR lower(a.title) LIKE lower(" . $engine->db->q('%' . $phrase . '%') . ")) ".
-			($for
-				? "AND (a.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " ".
-					  "OR b.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " )"
-				: "").
-			($filter
-				? "AND a.comment_on_id = '0' "
-				: "").
-			($deleted != 1
-				? ($for
-					? "AND (a.deleted <> '1' OR b.deleted <> '1') "
-					: "AND a.deleted <> '1' ")
-				: "").
-			"ORDER BY a.supertag ".
-			"LIMIT {$pagination['offset']}, $limit");
+			" )";
 
-		return array($results, $pagination);
-	}
-}
+	$count = $this->db->load_single(
+		"SELECT COUNT(a.page_id) AS n ".
+		"FROM ".$this->db->table_prefix."page a ".
+		$selector, true);
 
-if (!function_exists('get_line_with_phrase'))
+	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]);
+
+	// load search results
+	$results = $this->db->load_all(
+		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang,
+			MATCH(a.body) AGAINST(".$this->db->q($phrase)." IN BOOLEAN MODE) AS score,
+			u.user_name, o.user_name as owner_name ".
+		"FROM ".$this->db->table_prefix."page a ".
+			"LEFT JOIN ".$this->db->user_table." u ON (a.user_id = u.user_id) ".
+			"LEFT JOIN ".$this->db->user_table." o ON (a.owner_id = o.user_id) ".
+		$selector.
+		"ORDER BY score DESC ".
+		$pagination['limit']);
+
+	return [$results, $pagination];
+};
+
+$tag_search = function ($phrase, $for, $limit, $filter, $deleted = 0)
 {
-	function get_line_with_phrase($phrase, $string, $insensitive = true, $cleanup = '')
-	{
-		$lines	= explode("\n", $string);
-		$result	= '';
+	$selector =
+		($for
+			? "LEFT JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
+			: "").
+		"WHERE ( lower(a.tag) LIKE binary lower(".$this->db->q('%' . $phrase.'%') . ") ".
+			"OR lower(a.title) LIKE lower(".$this->db->q('%' . $phrase . '%') . ")) ".
+		($for
+			? "AND (a.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " ".
+			  "OR b.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " )"
+			: "").
+		($filter
+			? "AND a.comment_on_id = '0' "
+			: "").
+		(!$deleted
+			? ($for
+				? "AND (a.deleted <> '1' OR b.deleted <> '1') "
+				: "AND a.deleted <> '1' ")
+			: "");
 
-		foreach ($lines as $line)
+	$count = $this->db->load_single(
+		"SELECT COUNT(a.page_id) AS n ".
+		"FROM ".$this->db->table_prefix."page a ".
+		$selector, true);
+
+	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]);
+
+	// load search results
+	$results = $this->db->load_all(
+		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, u.user_name, o.user_name as owner_name ".
+		"FROM ".$this->db->table_prefix."page a ".
+			"LEFT JOIN ".$this->db->user_table." u ON (a.user_id = u.user_id) ".
+			"LEFT JOIN ".$this->db->user_table." o ON (a.owner_id = o.user_id) ".
+		$selector.
+		"ORDER BY a.supertag ".
+		$pagination['limit']);
+
+	return [$results, $pagination];
+};
+
+$get_line_with_phrase = function ($phrase, $string, $insensitive = true, $cleanup = '')
+{
+	$lines	= explode("\n", $string);
+	$result	= '';
+
+	foreach ($lines as $line)
+	{
+		if ($insensitive == true)
 		{
-			if ($insensitive == true)
+			if (stripos($line, $phrase))
 			{
-				if (stripos($line, $phrase))
+				if ($result)
 				{
-					if ($result)
-					{
-						$result .= "<br/>\n";
-					}
+					$result .= "<br/>\n";
 				}
 			}
-			else
-			{
-				if (strpos($line, $phrase))
-				{
-					if ($result)
-					{
-						$result .= "<br/>\n";
-					}
-				}
-
-				$result .= $cleanup ? str_replace('$phrase', '', $line) : $line;
-			}
-		}
-
-		return $result;
-	}
-}
-
-if (!function_exists('preview_text'))
-{
-	function preview_text($text, $limit, $tags = 0)
-	{
-		// trim text
-		$text = trim($text);
-
-		// strip tags if preview is without HTML
-		if ($tags == 0)
-		{
-			$text = preg_replace('/\s\s+/', ' ', strip_tags($text));
-		}
-
-		// if strlen is smaller than limit return
-		if (strlen($text) < $limit)
-		{
-			return $text;
-		}
-
-		if ($tags == 0)
-		{
-			return substr($text, 0, $limit) . " [..]";
 		}
 		else
 		{
-			$counter = 0;
-
-			for ($i = 0; $i <= strlen($text); $i++)
+			if (strpos($line, $phrase))
 			{
-				if ($text[$i] == '<')
+				if ($result)
 				{
-					$stop = 1;
-				}
-
-				if ($stop != 1)
-				{
-					$counter++;
-				}
-
-				if ($text[$i] == '>')
-				{
-					$stop = 0;
-				}
-
-				$return .= $text[$i];
-
-				if ($counter >= $limit && $text[$i] == ' ')
-				{
-					break;
+					$result .= "<br/>\n";
 				}
 			}
 
-			return $return . "[..]";
+			$result .= $cleanup ? str_replace('$phrase', '', $line) : $line;
 		}
 	}
-}
 
-if (!function_exists('highlight_this'))
+	return $result;
+};
+
+$preview_text = function ($text, $limit, $tags = 0)
 {
-	function highlight_this($text, $words, $the_place)
+	// trim text
+	$text = trim($text);
+
+	// strip tags if preview is without HTML
+	if ($tags == 0)
 	{
-		$words			= trim($words);
-		$the_count		= 0;
-		$words_array	= explode(' ', $words);
+		$text = preg_replace('/\s\s+/', ' ', strip_tags($text));
+	}
 
-		foreach($words_array as $word)
+	// if strlen is smaller than limit return
+	if (strlen($text) < $limit)
+	{
+		return $text;
+	}
+
+	if ($tags == 0)
+	{
+		return substr($text, 0, $limit) . " [..]";
+	}
+	else
+	{
+		$counter = 0;
+
+		for ($i = 0; $i <= strlen($text); $i++)
 		{
-			if(strlen(trim($word)) != 0)
+			if ($text[$i] == '<')
 			{
-				//exclude these words from being replaced
-				$exclude_list = array('word1', 'word2', 'word3');
+				$stop = 1;
 			}
 
-			// Check if it's excluded
-			if ( in_array( strtolower($word), $exclude_list ) )
+			if ($stop != 1)
 			{
+				$counter++;
+			}
 
-			}
-			else
+			if ($text[$i] == '>')
 			{
-				#$text = str_ireplace($word, "<span class=\"highlight\">".$word."</span>", $text, $count); // XXX: replaced with preg_replace()
-				// escape bad regex characters
-				$word = preg_quote($word);
-				// highlight uppercase and lowercase correctly
-				$text = preg_replace('/('.$word.')/i','<span class="highlight">$1</span>' , $text, -1 , $count);
-				$the_count = $count + $the_count;
+				$stop = 0;
 			}
+
+			$return .= $text[$i];
+
+			if ($counter >= $limit && $text[$i] == ' ')
+			{
+				break;
+			}
+		}
+
+		return $return . "[..]";
+	}
+};
+
+$highlight_this = function ($text, $words, $the_place)
+{
+	$words			= trim($words);
+	$the_count		= 0;
+	$words_array	= explode(' ', $words);
+
+	foreach($words_array as $word)
+	{
+		if(strlen(trim($word)) != 0)
+		{
+			//exclude these words from being replaced
+			$exclude_list = array('word1', 'word2', 'word3');
+		}
+
+		// Check if it's excluded
+		if ( in_array( strtolower($word), $exclude_list ) )
+		{
 
 		}
-		//added to show how many keywords were found
-		#echo '<br /><div class="emphasis">A search for <strong>' . $words. '</strong> found <strong>' . $the_count . '</strong> matches within the ' . $the_place. '.</div><br />';
+		else
+		{
+			#$text = str_ireplace($word, "<span class=\"highlight\">".$word."</span>", $text, $count); // XXX: replaced with preg_replace()
+			// escape bad regex characters
+			$word = preg_quote($word);
+			// highlight uppercase and lowercase correctly
+			$text = preg_replace('/('.$word.')/i','<span class="highlight">$1</span>' , $text, -1 , $count);
+			$the_count = $count + $the_count;
+		}
 
-		return array($text, $the_count);
 	}
-}
+	//added to show how many keywords were found
+	#echo '<br /><div class="emphasis">A search for <strong>' . $words. '</strong> found <strong>' . $the_count . '</strong> matches within the ' . $the_place. '.</div><br />';
 
-// end functions
+	return array($text, $the_count);
+};
+
+// --------------------------------------------------------------------------------
 
 $output = '';
 
@@ -275,46 +228,29 @@ if (!isset($filter))	$filter		= '';
 if (!isset($style))		$style		= '';
 if (!isset($nomark))	$nomark		= '';
 if (!isset($for))		$for		= '';
-if (!isset($lang))		$lang		= '';
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
 if (!isset($max))		$max		= null;
+if (!isset($clean))		$clean		= false;
 
 $user	= $this->get_user();
-$max	= $this->get_list_count($max);
 
-if ($topic == 1)
-{
-	$mode = 'topic';
-}
-else
-{
-	$mode = 'full';
-}
+$mode = ($topic || isset($_GET['topic']))? 'topic' : 'full';
 
-if (isset($_GET['topic']) && $_GET['topic'] == 'on')
-{
-	$mode = 'topic';
-}
-
-//if (!$delim) $delim="---";
-if (!in_array($style, array('br', 'ul', 'ol', 'comma')))
+if (!in_array($style, ['br', 'ul', 'ol', 'comma']))
 {
 	$style = 'ol';
 }
-
-$i = 0;
 
 if ($filter != 'pages')
 {
 	$filter = 'all';
 }
 
-if (!isset($clean)) $clean = false;
-
-if (isset($vars[$term])) // TODO: some historical junk, $vars currently not available
+if (isset($$term)) // TODO: some historical junk, $vars currently not available
 {
-	$phrase = $vars[$term];
+	$phrase = $$term;
+	$form	= 0;
 }
 else
 {
@@ -322,138 +258,95 @@ else
 	$form	= 1;
 }
 
+$phrase or $phrase = @$_GET['phrase'];
+
 if ($form)
 {
-	echo $this->form_open('search', ['form_method' => 'get']);
-
-	echo '<label for="searchfor">'.$this->_t('SearchFor').':</label><br />';
-	echo '<input type="search" name="phrase" id="searchfor" size="40" value="'.(isset($_GET['phrase']) ? htmlspecialchars($_GET['phrase'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" />';
-	echo '<input type="submit" value="'.$this->_t('SearchButtonText').'" /><br />';
-
-	if ($options == 1)
+	$tpl->form_href = $this->href();
+	$tpl->form_phrase = $phrase;
+	if ($options)
 	{
-		echo '<input type="checkbox" name="topic" '.($mode == 'topic' ? ' checked="checked"' : '' ).' id="checkboxSearch" />';
-		echo '<label for="checkboxSearch">'.$this->_t('TopicSearchText').'</label>';
+		$tpl->form_options = true;
+		$tpl->form_options_topic = ($mode == 'topic');
 	}
-
-	echo $this->form_close();
 }
 
-if ($phrase == '')
+$n = 0;
+
+if (strlen($phrase) >= 3)
 {
-	$phrase = (isset($_GET['phrase']) ? $_GET['phrase'] : null);
-}
-
-if ($phrase)
-{
-	if ($form)
+	if ($mode == 'topic')
 	{
-		echo "<br />";
-	}
-
-	if (strlen($phrase) >= 3)
-	{
-		if ($mode == 'topic')
-		{
-			$results = tag_search($this, $phrase, $for, (int)$max, ($filter == 'all' ? 0 : 1), $lang);
-		}
-		else
-		{
-			$results = full_text_search($this, $phrase, $for, (int)$max ,($filter == 'all' ? 0 : 1), $lang);
-		}
-
-		$phrase = htmlspecialchars($phrase, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-
-		// make and display results
-		if (list ($pages, $pagination) = $results)
-		{
-			// open list
-			if ($style == 'ul') $output .= "<ul id=\"search_results\">\n";
-			if ($style == 'ol') $output .= "<ol id=\"search_results\">\n";
-
-			foreach ($pages as $page)
-			{
-				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']) )
-				{
-					// Don't show it if it's a comment and we're hiding comments from this user
-					if($page['comment_on_id'] == 0 || ($page['comment_on_id'] != 0 && $this->user_allowed_comments()))
-					{
-						// open item
-						if ($style == 'ul' || $style == 'ol')	$output .= "<li>";
-						if ($style == 'comma' && $i > 0)		$output .= ",\n";
-
-						$_lang		= '';
-						$preview	= '';
-
-						// generate preview
-						if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
-						{
-							$body		= $this->format($page['body'], 'cleanwacko');
-							$context	= get_line_with_phrase($phrase, $body, $clean);
-							$context	= preview_text($text = $context, $limit = 500, $tags = 0);
-							$context	= highlight_this($text = $context, $words = $phrase, $the_place = 0);
-							list($context, $count) = $context;
-							$preview	= "<div>".str_replace("\n", '<br />', $context)."</div>";
-						}
-
-						// check current page lang for different charset to do_unicode_entities() against
-						if ($this->page['page_lang'] != $page['page_lang'])
-						{
-							#$page['title'] = $this->do_unicode_entities($page['title'], $page['page_lang']);
-							$_lang		= $page['page_lang'];
-							$preview	= $this->do_unicode_entities($preview, $_lang);
-						}
-
-						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>". ($mode != 'topic' ? ' ('.$count.')' : '');
-						$output .= '<br /><span style="color: #808080; line-height: 1.24; white-space: nowrap;">'.$this->user_link($page['user_name'], '', false, false).' '.$this->get_time_formatted($page['modified']).'</span>';
-
-						if ($mode != 'topic')
-						{
-							$output .= $preview;
-						}
-
-						// close item
-						if ($style == 'br')
-						{
-							$output .= "<br />\n";
-						}
-
-						if ($style == 'ul' || $style == 'ol')
-						{
-							$output .= "</li>\n";
-						}
-
-						$i++;
-					}
-				}
-			}
-
-			$this->print_pagination($pagination);
-
-			if (!$nomark)
-			{
-				echo '<div class="layout-box"><p class="layout-box"><span>'.
-					$this->_t(($mode == 'topic' ? 'Topic' : '').'SearchResults').
-					' "'.$phrase.'" (<strong>'.$i.'</strong>):</span></p>';
-			}
-
-			//show results
-			echo $output;
-
-			// close list
-			if ($style == 'ul')		echo "</ul>\n";
-			if ($style == 'ol')		echo "</ol>\n";
-			if (!$nomark)			echo "</div>\n";
-
-			$this->print_pagination($pagination);
-		}
-		else if (!$nomark)
-		{
-			echo $this->_t('NoResultsFor').' "'.$phrase.'".';
-		}
+		$results = $tag_search($phrase, $for, $max, ($filter != 'all'));
 	}
 	else
 	{
-		if (!$nomark) echo $this->_t('NoResultsFor').' "'.$phrase.'".';
+		$results = $full_text_search($phrase, $for, $max, ($filter != 'all'));
+	}
+
+	list ($pages, $pagination) = $results;
+
+	if ($pages)
+	{
+		$tpl->s_pagination_text = $pagination['text'];
+
+		$tpl->chroot('s_' . $style . '_l_');
+
+		foreach ($pages as $page)
+		{
+			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
+			{
+				// Don't show it if it's a comment and we're hiding comments from this user
+				if ($page['comment_on_id'] == 0 || ($page['comment_on_id'] != 0 && $this->user_allowed_comments()))
+				{
+					$tpl->delim = $n++;
+
+					$_lang		= '';
+					$preview	= '';
+					$count	= false;
+
+					// generate preview
+					if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
+					{
+						$body		= $this->format($page['body'], 'cleanwacko');
+						$context	= $get_line_with_phrase($phrase, $body, $clean);
+						$context	= $preview_text($text = $context, $limit = 500, $tags = 0);
+						$context	= $highlight_this($text = $context, $words = $phrase, $the_place = 0);
+						list($context, $count) = $context;
+						$preview	= "<div>".str_replace("\n", '<br />', $context)."</div>";
+					}
+
+					// check current page lang for different charset to do_unicode_entities() against
+					if ($this->page['page_lang'] != $page['page_lang'])
+					{
+						#$page['title'] = $this->do_unicode_entities($page['title'], $page['page_lang']);
+						$_lang		= $page['page_lang'];
+						$preview	= $this->do_unicode_entities($preview, $_lang);
+					}
+
+					$tpl->l_link = $this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang);
+					$tpl->l_userlink = $this->user_link($page['user_name'], '', false, false);
+					$tpl->l_mtime = $page['modified'];
+
+					if ($mode != 'topic')
+					{
+						$tpl->l_count = $count;
+						$tpl->l_preview = $preview;
+					}
+				}
+			}
+		}
+
+		$tpl->chroot();
+
+		if (!$nomark)
+		{
+			$tpl->s_mark_diag = $this->_t(($mode == 'topic' ? 'Topic' : '') . 'SearchResults');
+			$tpl->s_mark_phrase = $phrase;
+			$tpl->s_mark_count = $n;
+			$tpl->s_emark = true;
+		}
 	}
 }
+
+if (!$nomark && !$n) $tpl->none_phrase = $phrase;
