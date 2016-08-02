@@ -12,16 +12,18 @@ if (!isset($max))		$max = null;
 if (!isset($bychange))	$bychange = '';
 $cur_char		= '';
 
-if ($user_id = $this->get_user_id())
+$by = function ($by) { return ['mode' => 'mypages', 'by' . $by => 1, '#' => 'list']; };
+
+if (($user_id = $this->get_user_id()))
 {
 	$prefix		= $this->db->table_prefix;
 
-	if ((isset($_GET['bydate']) && $_GET['bydate'] == 1) || $bydate == 1)
+	if (@$_GET['bydate'] || $bydate)
 	{
 		echo '<strong>'.$this->_t('ListOwnedPages2').'</strong>';
-		echo "<br />[<a href=\"".$this->href('', '', 'mode=mypages')."#list"."\">".
-		$this->_t('OrderABC')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1', '', 'list')."\">".
-		$this->_t('OrderChange')."</a>] <br /><br />\n";
+		echo '<br />[<a href="' . $this->href('', '', $by('')) . '">'.
+			$this->_t('OrderABC') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">'.
+			$this->_t('OrderChange') . "</a>] <br /><br />\n";
 
 		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n ".
@@ -30,7 +32,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'mypages', 'bydate' => 1, '#' => 'list']);
+		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
 		if ($pages = $this->db->load_all(
 			"SELECT tag, title, created ".
@@ -86,12 +88,12 @@ if ($user_id = $this->get_user_id())
 				"AND p.deleted <> '1' ".
 				"AND r.comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'mypages', 'bychange' => 1, '#' => 'list']);
+		$pagination = $this->pagination($count['n'], $max, 'p', $by('change'));
 
 		echo '<strong>'.$this->_t('ListOwnedPages3').'</strong>';
 		echo '<br />[<a href="'.
-			$this->href('', '', 'mode=mypages').'#list">'.$this->_t('OrderABC').
-			'</a>] [<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
+			$this->href('', '', $by('')).'">'.$this->_t('OrderABC').
+			'</a>] [<a href="'.$this->href('', '', $by('date')).'">'.
 			$this->_t('OrderDate')."</a>]<br /><br />\n";
 
 		if ($pages = $this->db->load_all(
@@ -149,21 +151,21 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'mypages', '#' => 'list']);
+		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
 		echo '<strong>'.$this->_t('ListOwnedPages').'</strong>';
-		echo "<br />[<a href=\"".$this->href('', '', 'mode=mypages&amp;bydate=1')."#list"."\">".
-		$this->_t('OrderDate')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1', '', 'list')."\">".
+		echo "<br />[<a href=\"".$this->href('', '', $by('date'))."\">".
+		$this->_t('OrderDate')."</a>] [<a href=\"".$this->href('', '', $by('change'))."\">".
 		$this->_t('OrderChange')."</a>] <br /><br />\n";
 
-		if ($pages = $this->db->load_all(
+		if (($pages = $this->db->load_all(
 			"SELECT tag, title, modified ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".(int)$user_id."' ".
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC ".
-			$pagination['limit'], true))
+			$pagination['limit'], true)))
 		{
 			echo '<ul class="ul_list">'."\n";
 

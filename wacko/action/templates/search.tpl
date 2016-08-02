@@ -32,7 +32,7 @@
 						<h3 style="display: inline;">[ ' link | ' ]</h3>[ ' count | enclose " (" ")" ' ]
 						<br />
 						<span style="color: #808080; line-height: 1.24; white-space: nowrap;">[ ' userlink | ' ] [ ' mtime | time_formatted ' ]</span>
-						[ ' preview | ' ]
+						[ ' preview | nl2br | ' ]
 					=]
 				</li>
 			=]

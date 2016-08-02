@@ -215,7 +215,7 @@ $highlight_this = function ($text, $words, $the_place)
 	//added to show how many keywords were found
 	#echo '<br /><div class="emphasis">A search for <strong>' . $words. '</strong> found <strong>' . $the_count . '</strong> matches within the ' . $the_place. '.</div><br />';
 
-	return array($text, $the_count);
+	return [$text, $the_count];
 };
 
 // --------------------------------------------------------------------------------
@@ -297,7 +297,7 @@ if (strlen($phrase) >= 3)
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
 				// Don't show it if it's a comment and we're hiding comments from this user
-				if ($page['comment_on_id'] == 0 || ($page['comment_on_id'] != 0 && $this->user_allowed_comments()))
+				if (!$page['comment_on_id'] || $this->user_allowed_comments())
 				{
 					$tpl->delim = $n++;
 
@@ -310,10 +310,10 @@ if (strlen($phrase) >= 3)
 					{
 						$body		= $this->format($page['body'], 'cleanwacko');
 						$context	= $get_line_with_phrase($phrase, $body, $clean);
-						$context	= $preview_text($text = $context, $limit = 500, $tags = 0);
-						$context	= $highlight_this($text = $context, $words = $phrase, $the_place = 0);
+						$context	= $preview_text($context, 500, 0);
+						$context	= $highlight_this($context, $phrase, 0);
 						list($context, $count) = $context;
-						$preview	= "<div>".str_replace("\n", '<br />', $context)."</div>";
+						$preview	= $context;
 					}
 
 					// check current page lang for different charset to do_unicode_entities() against
@@ -349,4 +349,4 @@ if (strlen($phrase) >= 3)
 	}
 }
 
-if (!$nomark && !$n) $tpl->none_phrase = $phrase;
+$nomark or $n or $tpl->none_phrase = $phrase;
