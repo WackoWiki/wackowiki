@@ -290,7 +290,7 @@ if (strlen($phrase) >= 3)
 	{
 		$tpl->s_pagination_text = $pagination['text'];
 
-		$tpl->chroot('s_' . $style . '_l_');
+		$tpl->enter('s_' . $style . '_l_');
 
 		foreach ($pages as $page)
 		{
@@ -337,7 +337,7 @@ if (strlen($phrase) >= 3)
 			}
 		}
 
-		$tpl->chroot();
+		$tpl->leave();
 
 		if (!$nomark)
 		{

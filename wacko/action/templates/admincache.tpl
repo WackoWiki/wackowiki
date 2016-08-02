@@ -1,7 +1,7 @@
 
 [ === main === ]
-	<form action="[ ' href | ' ]" method="post" name="purge_cache">
-		['' csrf: purge_cache | '']
+	<form action="[ ' href ' ]" method="post" name="purge_cache">
+		['' csrf: purge_cache '']
 		<div class="layout-box">
 			<input type="checkbox" id="purgeconfig_cache" name="config_cache" />
 			<label for="purgeconfig_cache">[ ' _t: ConfigCache ' ]</label><br />
@@ -26,16 +26,16 @@
 ['' page '']['' sql '']['' config '']['' feed '']['' template '']['' _t: CacheCleared '']
 
 [ === page === ]
-['' _t: PageCache ''] (['' n '']) ... ['' '']
+['' _t: PageCache ''] (['' n |e '']) ... ['' '']
 
 [ === sql === ]
-['' _t: SQLCache ''] (['' n '']) ... ['' '']
+['' _t: SQLCache ''] (['' n |e '']) ... ['' '']
 
 [ === config === ]
-['' _t: ConfigCache ''] (['' n '']) ... ['' '']
+['' _t: ConfigCache ''] (['' n |e '']) ... ['' '']
 
 [ === feed === ]
-['' _t: FeedCache ''] (['' n '']) ... ['' '']
+['' _t: FeedCache ''] (['' n |e '']) ... ['' '']
 
 [ === template === ]
-['' _t: TemplateCache ''] (['' n '']) ... ['' '']
+['' _t: TemplateCache ''] (['' n |e '']) ... ['' '']

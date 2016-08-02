@@ -7,7 +7,10 @@ if (!defined('IN_WACKO'))
 
 class TemplatestSetter extends TemplatestFilters
 {
+	const ESCAPER = 'raw'; // default escaper
 	protected $store;
+	protected $block;
+	protected $loc;
 
 	function __construct(&$store)
 	{
@@ -23,7 +26,10 @@ class TemplatestSetter extends TemplatestFilters
 		}
 
 		list ($place, $lineno, $block, $pipe) = $sub;
-		$loc = $this->store[2][$tpl['file']][0] . ':' . $lineno;
+
+		// set for
+		$this->loc = $this->store[2][$tpl['file']][0] . ':' . $lineno;
+		$this->block = ($block !== false);
 
 		$filter = -1;
 		foreach ($pipe as $act)
@@ -40,7 +46,7 @@ class TemplatestSetter extends TemplatestFilters
 				array_unshift($act, 'raw');
 			}
 
-			$text = $this->call_filter($filter, $text, $block !== false, $loc, $act);
+			$text = $this->call_filter($filter, $text, $act);
 			if ($text === false || $text === null)
 			{
 				return;
@@ -56,15 +62,15 @@ class TemplatestSetter extends TemplatestFilters
 		}
 
 		// if last filter is not escape and we setting data (not subpattern) - do default escaping
-		if ($filter != 'escape' && $filter != 'e' && !isset($prefix0))
+		if ($filter != 'escape' && $filter != 'e' && !isset($prefix0) && ($e = @$tpl['escape'] ?: self::ESCAPER) !== 'raw')
 		{
-			$text = $this->call_filter('escape', $text, $block !== false, $loc, [@$tpl['escape'] ?: 'html']);
+			$text = $this->call_filter('escape', $text, [$e]);
 		}
 
 		// remove \0 \r \v
 		$text = Templatest::sanitize($text);
 
-		if ($block !== false)
+		if ($this->block)
 		{
 			// auto-indenting..
 			$prefix = !Ut::is_empty($prefix0)? $prefix0 : Templatest::compute_prefix($text);

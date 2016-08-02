@@ -42,26 +42,28 @@ else
 
 $max_items = $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
 $i = 0;
-$into = 'menu';
+$tpl->enter('menu_');
 foreach ((array)$this->get_menu() as $menu_item)
 {
 	if ($i++ == $max_items)
 	{
 		// start dropdown menu for bookmarks over max_items
-		$into = 'dropmenu_menu';
+		$tpl->leave();
+		$tpl->enter('dropmenu_menu_');
 	}
 
-	$tpl->{$into . '_commit'} = true;
+	$tpl->commit = true;
 
 	if ($this->page['page_id'] == $menu_item[0])
 	{
-		$tpl->{$into . '_active_item'} = $menu_item[1];
+		$tpl->active_item = $menu_item[1];
 	}
 	else
 	{
-		$tpl->{$into . '_item_link'} = $this->format($menu_item[2], 'post_wacko');
+		$tpl->item_link = $this->format($menu_item[2], 'post_wacko');
 	}
 }
+$tpl->leave();
 
 if ($logged_in)
 {
@@ -78,32 +80,33 @@ if ($logged_in)
 
 // defining tabs constructor
 //		$image = 0 text only, 1 image only, 2 image and text
-$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = '') use (&$into, &$tpl)
+$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = '') use (&$tpl)
 {
-	$tpl->{$into . '_class'} = $tab_class ?: ('m-' . $method);
+	$tpl->class = $tab_class ?: ('m-' . $method);
 
 	if (!strncmp($this->method, $method, strlen($method))) // STS why?!
 	{
-		$tpl->{$into . '_active'} = ' active';
-		$t = $into . '_in';
+		$tpl->active = ' active';
+		$tpl->enter('in_');
 	}
 	else
 	{
-		$t = $into . '_out';
-		$tpl->{$t . '_method'} = ($method == 'show' ? '.' : $this->href($method));
-		$tpl->{$t . '_hint'} = $this->_t($hint);
+		$tpl->enter('out_');
+		$tpl->method = ($method == 'show' ? '.' : $this->href($method));
+		$tpl->hint = $this->_t($hint);
 
 		if ($access_key !== '')
 		{
-			$tpl->{$t . '_key'} = $access_key;
+			$tpl->key = $access_key;
 		}
 	}
 
-	$image == 1 or $tpl->{$t . '_t_title'} = $this->_t($title);
-	$image == 0 or $tpl->{$t . '_t_im_title'} = $this->_t($title);
+	$image == 1 or $tpl->t_title = $this->_t($title);
+	$image == 0 or $tpl->t_im_title = $this->_t($title);
+	$tpl->leave();
 };
 
-$into = 'tab';
+$tpl->enter('tab_');
 
 $echo_tab('show', 'ShowTip', 'ShowText', 1, '', 'v');
 
@@ -151,7 +154,8 @@ else
 	}
 
 	// show more tab
-	$into = 'droptab_tab';
+	$tpl->leave();
+	$tpl->enter('droptab_tab_');
 
 	// display more icon and text
 	//  '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->db->theme_url.'icon/more.png" title="'.$this->_t('PageHandlerMoreTip').'" alt="'.$this->_t('PageHandlerMoreTip').'" /> '.$this->_t('PageHandlerMoreTip')."</a> \n";
@@ -244,6 +248,7 @@ else
 		$echo_tab('upload', 'FilesTip', 'FilesText', 2, '', 'u');
 	}
 }
+$tpl->leave();
 
 $tpl->search = $this->href('', $this->_t('TextSearchPage'));
 $tpl->breadcrumbs = $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);

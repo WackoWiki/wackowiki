@@ -14,6 +14,7 @@ class TemplatestUser extends TemplatestSetter
 	private $pulls = [];
 	private $sets = [];
 	private $chroot = '';
+	private $stack = [];
 	private $root;
 
 	function __construct($template, $main)
@@ -106,12 +107,23 @@ class TemplatestUser extends TemplatestSetter
 		$this->__set(func_get_args());
 	}
 
-	// __get/__set helper for generation internal tags
-	// base must be well-formed (e.g. 'a_b_c_')
-	// do not forget to reset to '' when leaving context (if further usage required)
-	function chroot($base = '')
+	// __get/__set helper for generation internal tags:
+	// keeping stack of simple context name prefixes
+	function enter($base)
 	{
-		$this->chroot = $base;
+		$i = count($this->stack);
+		$this->stack[] = $this->chroot;
+		$this->chroot .= $base;
+		return $i;
+	}
+
+	function leave($to = null)
+	{
+		do
+		{
+			$this->chroot = array_pop($this->stack);
+		}
+		while ($this->stack && isset($to) && count($this->stack) > $to);
 	}
 
 	function __get($name)
