@@ -5,52 +5,48 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!function_exists('load_recent_comments'))
+$load_recent_comments = function ($for, $limit, $deleted = 0)
 {
-	function load_recent_comments(&$engine, $for = '', $limit = 50, $deleted = 0)
-	{
-		$limit		= (int) $limit;
-		$pagination	= '';
+	$pagination	= '';
 
-		// count pages
-		if ($count_pages = $engine->db->load_all(
-			"SELECT a.page_id ".
-			"FROM ".$engine->db->table_prefix."page a ".
-				"INNER JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
+	// count pages
+	if ($count_pages = $this->db->load_all(
+		"SELECT a.page_id ".
+		"FROM ".$this->db->table_prefix."page a ".
+			"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
+		"WHERE ".
+		($for
+			? "b.supertag LIKE '" . $this->db->q($this->translit($for) . '/%') . " "
+			: "a.comment_on_id <> '0' ").
+		($deleted != 1
+			? "AND a.deleted <> '1' "
+			: "")
+		, true));
+
+	if ($count_pages)
+	{
+		$count		= count($count_pages);
+		$pagination = $this->pagination($count, $limit);
+
+		$comments = $this->db->load_all(
+			"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
+			"FROM ".$this->db->table_prefix."page a ".
+				"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
+				"LEFT JOIN ".$this->db->table_prefix."user u ON (a.user_id = u.user_id) ".
 			"WHERE ".
 			($for
-				? "b.supertag LIKE '" . $engine->db->q($engine->translit($for) . '/%') . " "
+				? "b.supertag LIKE '" . $this->db->q($this->translit($for) . '/%') . " "
 				: "a.comment_on_id <> '0' ").
 			($deleted != 1
 				? "AND a.deleted <> '1' "
-				: "")
-			, true));
+				: "").
+			"ORDER BY a.modified DESC ".
+			$pagination['limit']);
 
-		if ($count_pages)
-		{
-			$count		= count($count_pages);
-			$pagination = $engine->pagination($count, $limit);
-
-			$comments = $engine->db->load_all(
-				"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
-				"FROM ".$engine->db->table_prefix."page a ".
-					"INNER JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
-					"LEFT JOIN ".$engine->db->table_prefix."user u ON (a.user_id = u.user_id) ".
-				"WHERE ".
-				($for
-					? "b.supertag LIKE '" . $engine->db->q($engine->translit($for) . '/%') . " "
-					: "a.comment_on_id <> '0' ").
-				($deleted != 1
-					? "AND a.deleted <> '1' "
-					: "").
-				"ORDER BY a.modified DESC ".
-				"LIMIT {$pagination['offset']}, {$limit}");
-
-			return array($comments, $pagination);
-		}
-
+		return [$comments, $pagination];
 	}
-}
+
+};
 
 if (!isset($root) && isset($for)) $root = $this->unwrap_link($for);
 if (!isset($root))		$root = '';
@@ -59,11 +55,10 @@ if (!isset($noxml)) 	$noxml	= 0;
 if (!isset($max))		$max = null;
 
 $user	= $this->get_user();
-$max	= $this->get_list_count($max);
 
 if ($this->user_allowed_comments())
 {
-	if (list ($comments, $pagination) = load_recent_comments($this, $root, (int)$max))
+	if (list ($comments, $pagination) = $load_recent_comments($root, $max))
 	{
 		// process 'mark read' - reset session time
 		if (isset($_GET['markread']) && $user == true)
@@ -154,5 +149,3 @@ else
 {
 	echo $this->_t('CommentsDisabled');
 }
-
-?>

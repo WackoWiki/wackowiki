@@ -298,7 +298,7 @@ function admin_content_files(&$engine, &$module)
 		"FROM {$engine->db->table_prefix}upload ".
 		"WHERE page_id = 0 ".
 		"ORDER BY ".$order_by." ".
-		"LIMIT {$pagination['offset']}, {$limit}");
+		$pagination['limit']);
 
 	if (!is_array($files))
 	{

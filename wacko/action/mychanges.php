@@ -13,7 +13,6 @@ if (!isset($max))		$max = null;
 
 if ($user_id = $this->get_user_id())
 {
-	$limit		= $this->get_list_count($max);
 	$prefix		= $this->db->table_prefix;
 
 	if(isset($_GET['byname']) && $_GET['byname'] == 1)
@@ -29,7 +28,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;byname=1#list');
+		$pagination = $this->pagination($count['n'], $max, 'p', 'mode=mychanges&amp;byname=1#list');
 
 		if ($pages = $this->db->load_all(
 				"SELECT tag, title, modified ".
@@ -38,7 +37,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0' ".
 				"ORDER BY tag ASC, modified DESC ".
-				"LIMIT {$pagination['offset']}, $limit", true))
+				$pagination['limit'], true))
 		{
 			echo '<ul class="ul_list">'."\n";
 
@@ -90,7 +89,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
+		$pagination = $this->pagination($count['n'], $max, 'p', 'mode=mychanges&amp;bydate=1#list');
 
 		if ($pages = $this->db->load_all(
 				"SELECT tag, title, modified, edit_note ".
@@ -99,7 +98,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0' ".
 				"ORDER BY modified DESC, tag ASC ".
-				"LIMIT {$pagination['offset']}, $limit", true))
+				$pagination['limit'], true))
 		{
 			echo '<ul class="ul_list">'."\n";
 
@@ -143,5 +142,3 @@ else
 {
 	echo $this->_t('NotLoggedInThusEdited');
 }
-
-?>

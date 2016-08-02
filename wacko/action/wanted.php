@@ -5,16 +5,32 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!function_exists('load_wanted'))
+$load_wanted = function ($for, $limit, $deleted = 0)
 {
-	function load_wanted(&$engine, $for = '', $limit = 50, $deleted = 0)
-	{
-		$limit		= (int) $limit;
-		$pagination	= '';
-		$pref		= $engine->db->table_prefix;
+	$pagination	= '';
+	$pref		= $engine->db->table_prefix;
 
-		// count pages
-		if ($count_pages = $engine->load_all(
+	// count pages
+	if ($count_pages = $engine->load_all(
+			"SELECT DISTINCT l.to_tag AS wanted_tag ".
+			"FROM ".$pref."link l ".
+				"LEFT JOIN ".$pref."page p ON ".
+				"((l.to_tag = p.tag ".
+					"AND l.to_supertag = '') ".
+					"OR l.to_supertag = p.supertag) ".
+			"WHERE ".
+				($for
+					? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
+					: "").
+				"p.tag is NULL GROUP BY wanted_tag "
+		, true));
+
+	if ($count_pages)
+	{
+		$count		= count($count_pages);
+		$pagination = $engine->pagination($count, $limit);
+
+		$wanted = $engine->load_all(
 				"SELECT DISTINCT l.to_tag AS wanted_tag ".
 				"FROM ".$pref."link l ".
 					"LEFT JOIN ".$pref."page p ON ".
@@ -25,34 +41,14 @@ if (!function_exists('load_wanted'))
 					($for
 						? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
 						: "").
-					"p.tag is NULL GROUP BY wanted_tag "
-			, true));
+					"p.tag is NULL GROUP BY wanted_tag ".
+				"ORDER BY wanted_tag ASC ".
+				$pagination['limit']);
 
-		if ($count_pages)
-		{
-			$count		= count($count_pages);
-			$pagination = $engine->pagination($count, $limit);
-
-			$wanted = $engine->load_all(
-					"SELECT DISTINCT l.to_tag AS wanted_tag ".
-					"FROM ".$pref."link l ".
-						"LEFT JOIN ".$pref."page p ON ".
-						"((l.to_tag = p.tag ".
-							"AND l.to_supertag = '') ".
-							"OR l.to_supertag = p.supertag) ".
-					"WHERE ".
-						($for
-							? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
-							: "").
-						"p.tag is NULL GROUP BY wanted_tag ".
-					"ORDER BY wanted_tag ASC ".
-					"LIMIT {$pagination['offset']}, {$limit}");
-
-			return array($wanted, $pagination);
-		}
-
+		return array($wanted, $pagination);
 	}
-}
+
+};
 
 if (!isset($root))
 {
@@ -92,9 +88,8 @@ else
 	if (!isset($max))		$max = null;
 
 	$user	= $this->get_user();
-	$max	= $this->get_list_count($max);
 
-	if (list ($pages, $pagination) = load_wanted($this, $root, (int)$max))
+	if (list ($pages, $pagination) = $load_wanted($root, $max))
 	{
 		if (is_array($pages))
 		{
@@ -140,5 +135,3 @@ else
 		echo $this->_t('NoWantedPages');
 	}
 }
-
-?>

@@ -142,7 +142,7 @@ function admin_content_pages(&$engine, &$module)
 			"LEFT JOIN {$engine->db->table_prefix}user u ON (p.user_id = u.user_id) ".
 		( $where ? $where : "WHERE p.comment_on_id = '0' " ).
 		( $order ? $order : 'ORDER BY p.page_id DESC ' ).
-		"LIMIT {$pagination['offset']}, $limit");
+		$pagination['limit']);
 
 	echo $engine->form_open('content_pages');
 

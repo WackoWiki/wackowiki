@@ -130,7 +130,7 @@ function admin_system_log(&$engine, &$module)
 			"LEFT JOIN {$engine->db->table_prefix}user u ON (l.user_id = u.user_id) ".
 		( $where ? $where : 'WHERE l.level <= '.(int)$level.' ' ).
 		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
-		"LIMIT {$pagination['offset']}, $limit");
+		$pagination['limit']);
 
 	echo $engine->form_open('systemlog');
 

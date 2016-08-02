@@ -1533,8 +1533,6 @@ class Wacko
 
 	function load_changed($limit = 100, $for = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
 	{
-		$limit = (int)$limit;
-
 		// count pages
 		$count_pages = $this->db->load_single(
 			"SELECT COUNT(p.page_id) AS n ".
@@ -1581,7 +1579,7 @@ class Wacko
 				? "AND (u.account_type = '0' OR p.user_id = '0') "
 				: "").
 		"ORDER BY p.modified DESC ".
-		"LIMIT {$pagination['offset']}, {$limit}", true)))
+		$pagination['limit'], true)))
 		{
 			foreach ($pages as $page)
 			{
@@ -1599,7 +1597,7 @@ class Wacko
 					: '').
 				"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
-			"LIMIT {$limit}", true)))
+			"LIMIT {$pagination['perpage']}", true)))
 			{
 				foreach ($read_acls as $read_acl)
 				{
@@ -1613,7 +1611,7 @@ class Wacko
 
 	function load_comment($limit = 100, $for = '', $deleted = 0)
 	{
-		$limit = (int) $limit;
+		$limit = $this->get_list_count($limit);
 
 		if ($pages = $this->db->load_all(
 		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag ".
@@ -1684,7 +1682,7 @@ class Wacko
 					"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 				"WHERE p.deleted = '1' ".
 				"ORDER BY p.modified DESC, p.tag ASC ".
-				"LIMIT {$pagination['offset']}, {$limit}", $cache);
+				$pagination['limit'], $cache);
 		}
 
 		return [$deleted, $pagination];
@@ -6922,11 +6920,12 @@ class Wacko
 			$name = $_name;
 		}
 
+		$perpage = $this->get_list_count($perpage);
+
 		$pagination['offset'] = 0;
 		$pagination['text'] = false;
 		$pagination['limit'] = '';
-
-		$perpage = $this->get_list_count($perpage);
+		$pagination['perpage'] = $perpage;
 
 		if ($total > $perpage)
 		{

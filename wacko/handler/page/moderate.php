@@ -595,7 +595,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"AND a.privilege = 'create' AND a.list = '' ".
 				"AND p.tag LIKE " . $this->db->q($this->tag . '/%') . " ".
 			"ORDER BY commented DESC ".
-			"LIMIT {$pagination['offset']}, $limit";
+			$pagination['limit'];
 
 		// FORMS
 
@@ -1155,7 +1155,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"WHERE comment_on_id = '{$this->page['page_id']}' ".
 				"AND p.deleted <> '1' ".
 			"ORDER BY created ASC ".
-			"LIMIT {$pagination['offset']}, $limit";
+			$pagination['limit'];
 
 		// load comments data
 		$comments = $this->db->load_all($sql);

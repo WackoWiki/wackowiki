@@ -20,7 +20,7 @@ if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
 if (!isset($lang))		$lang = '';
 if (!isset($for))		$for = '';
-$limit = $this->get_list_count(@$max);
+if (!isset($max))		$max = null;
 $title = (int)$title;
 
 $_alnum = '/'.$this->language['ALPHANUM'].'/S';
@@ -103,7 +103,7 @@ $count = $this->db->load_single(
 			: "")
 	, true);
 
-$pagination = $this->pagination($count['n'], $limit, 'p', ($letter !== ''? ['letter' => $letter] : []));
+$pagination = $this->pagination($count['n'], $max, 'p', ($letter !== ''? ['letter' => $letter] : []));
 
 // collect data for index
 $pages_to_display = [];
@@ -129,10 +129,8 @@ if (($pages = $this->db->load_all(
 		($title
 			? "title ASC "
 			: "tag ASC ").
-	"LIMIT {$pagination['offset']}, ".(2 * $limit), true)))
+	$pagination['limit'], true)))
 {
-	$cnt = 0;
-
 	foreach ($pages as $page)
 	{
 		if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
@@ -145,7 +143,6 @@ if (($pages = $this->db->load_all(
 				}
 
 				$pages_to_display[$page['page_id']] = $page;
-				if (++$cnt >= $limit) break;
 			}
 		}
 

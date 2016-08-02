@@ -14,7 +14,6 @@ $cur_char		= '';
 
 if ($user_id = $this->get_user_id())
 {
-	$limit		= $this->get_list_count($max);
 	$prefix		= $this->db->table_prefix;
 
 	if ((isset($_GET['bydate']) && $_GET['bydate'] == 1) || $bydate == 1)
@@ -31,7 +30,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
+		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'mypages', 'bydate' => 1, '#' => 'list']);
 
 		if ($pages = $this->db->load_all(
 			"SELECT tag, title, created ".
@@ -40,7 +39,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY created DESC, tag ASC ".
-			"LIMIT {$pagination['offset']}, $limit", true))
+			$pagination['limit'], true))
 		{
 			echo '<ul class="ul_list">'."\n";
 
@@ -87,7 +86,7 @@ if ($user_id = $this->get_user_id())
 				"AND p.deleted <> '1' ".
 				"AND r.comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
+		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'mypages', 'bychange' => 1, '#' => 'list']);
 
 		echo '<strong>'.$this->_t('ListOwnedPages3').'</strong>';
 		echo '<br />[<a href="'.
@@ -106,7 +105,7 @@ if ($user_id = $this->get_user_id())
 				"AND r.comment_on_id = '0' ".
 			"GROUP BY tag ".
 			"ORDER BY modified DESC, tag ASC ".
-			"LIMIT {$pagination['offset']}, $limit", true))
+			$pagination['limit'], true))
 		{
 			echo '<ul class="ul_list">'."\n";
 
@@ -150,7 +149,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
+		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'mypages', '#' => 'list']);
 
 		echo '<strong>'.$this->_t('ListOwnedPages').'</strong>';
 		echo "<br />[<a href=\"".$this->href('', '', 'mode=mypages&amp;bydate=1')."#list"."\">".
@@ -164,7 +163,7 @@ if ($user_id = $this->get_user_id())
 				"AND deleted <> '1' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC ".
-			"LIMIT {$pagination['offset']}, $limit", true))
+			$pagination['limit'], true))
 		{
 			echo '<ul class="ul_list">'."\n";
 
@@ -210,5 +209,3 @@ else
 {
 	echo $this->_t('NotLoggedInThusOwned');
 }
-
-?>

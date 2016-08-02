@@ -32,7 +32,6 @@ if (!isset($track))		$track = 0;
 if (!isset($picture))	$picture = null;
 if (!isset($max))		$max = null;
 
-$limit		= $this->get_list_count($max);
 $order_by	= "file_name ASC";
 
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
@@ -84,8 +83,8 @@ if ($can_view)
 		return;
 	}
 
-	$count = $this->db->load_all(
-		"SELECT f.upload_id ".
+	$count = $this->db->load_single(
+		"SELECT COUNT(f.upload_id) AS n ".
 		"FROM ".$this->db->table_prefix."upload f ".
 			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
@@ -96,8 +95,7 @@ if ($can_view)
 				? "AND f.deleted <> '1' "
 				: ""), true);
 
-	$count		= count($count);
-	$pagination = $this->pagination($count, $limit, 'f');
+	$pagination = $this->pagination($count['n'], $max, 'f');
 
 	// load files list
 	$files = $this->db->load_all(
@@ -112,7 +110,7 @@ if ($can_view)
 			? "AND f.deleted <> '1' "
 					: "").
 		"ORDER BY f.".$order_by." ".
-		"LIMIT {$pagination['offset']}, {$limit}");
+		$pagination['limit']);
 
 	if (!is_array($files))
 	{

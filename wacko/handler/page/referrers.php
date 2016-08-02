@@ -60,7 +60,6 @@ if (
 $url_maxlen = 80;
 $spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . . '
 $modes		= ['ViewReferrersPage' => '', 'ViewReferrersPerPage' => 'perpage', 'ViewReferrersByTime' => 'bytime', 'ViewReferrersGlobal' => 'global'];
-$max		= $this->get_list_count(@$max);
 $mode		= @$_GET['o'];
 if (!in_array($mode, $modes))
 {
@@ -202,8 +201,8 @@ if (!$referrers)
 	echo $this->_t('NoneReferrers') . "<br /><br />\n" ;
 	return;
 }
-$pagination = $this->pagination(count($referrers), $max, 'r', ($mode? 'o=' . $mode : ''), 'referrers');
-$referrers = array_slice($referrers, $pagination['offset'], $max);
+$pagination = $this->pagination(count($referrers), @$max, 'r', ($mode? 'o=' . $mode : ''), 'referrers');
+$referrers = array_slice($referrers, $pagination['offset'], $pagination['perpage']);
 
 // main show!
 

@@ -148,7 +148,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	$sql .= "ORDER BY p.commented DESC ".
-		"LIMIT {$pagination['offset']}, {$this->db->forum_topics}";
+		$pagination['limit'];
 
 	// load topics data
 	$topics	= $this->db->load_all($sql);

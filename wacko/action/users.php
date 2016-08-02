@@ -212,12 +212,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		}
 
 		// user-owned pages
-		$limit = 10;
-
 		if ($user['total_pages'])
 		{
 			$sort_name = (isset($_GET['sort']) && $_GET['sort'] == 'name');
-			$pagination = $this->pagination($user['total_pages'], $limit, 'd',
+			$pagination = $this->pagination($user['total_pages'], 10, 'd',
 					$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
 
 			$pages = $this->db->load_all(
@@ -227,7 +225,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					"AND comment_on_id = '0' ".
 					"AND deleted <> '1' ".
 				"ORDER BY ".($sort_name? 'tag ASC' : 'created DESC')." ".
-				"LIMIT {$pagination['offset']}, $limit");
+				$pagination['limit']);
 
 			// sorting and pagination
 			if ($sort_name)
@@ -263,15 +261,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		}
 
 		// last user comments
-		$limit = 10;
-
 		if ($this->user_allowed_comments())
 		{
 			$tpl->u_cmt_n = $user['total_comments'];
 
 			if ($user['total_comments'])
 			{
-				$pagination = $this->pagination($user['total_comments'], $limit, 'c', $profile + ['#' => 'comments']);
+				$pagination = $this->pagination($user['total_comments'], 10, 'c', $profile + ['#' => 'comments']);
 				$tpl->u_cmt_c_pagination_text = $pagination['text'];
 
 				$comments = $this->db->load_all(
@@ -283,7 +279,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						"AND c.deleted <> '1' ".
 						"AND p.deleted <> '1' ".
 					"ORDER BY c.created DESC ".
-					"LIMIT {$pagination['offset']}, $limit");
+					$pagination['limit']);
 
 				// comments list itself
 				foreach ($comments as $comment)
@@ -315,15 +311,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		// show files only for registered users
 		if ($logged_in)
 		{
-			$limit = 10;
-
 			if ($this->db->upload == 1 || $this->is_admin())
 			{
 				$tpl->u_up_u_n = $user['total_uploads'];
 
 				if ($user['total_uploads'])
 				{
-					$pagination = $this->pagination($user['total_uploads'], $limit, 'u', $profile + ['#' => 'comments']);
+					$pagination = $this->pagination($user['total_uploads'], 10, 'u', $profile + ['#' => 'comments']);
 
 					$tpl->u_up_u_u2_pagination_text = $pagination['text'];
 
@@ -335,7 +329,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							"AND u.deleted <> '1' ".
 							// "AND p.deleted <> '1' ".
 							"ORDER BY u.uploaded_dt DESC ".
-							"LIMIT {$pagination['offset']}, $limit");
+							$pagination['limit']);
 
 					// uploads list itself
 					foreach ($uploads as $upload)
@@ -400,8 +394,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 // display whole userlist instead of the particular profile
 else
 {
-	$limit = $this->get_list_count($max);
-
 	// defining WHERE and ORDER clauses
 	// $param is passed to the pagination links
 	$sql_where = '';
@@ -490,7 +482,7 @@ else
 		}
 	}
 
-	$pagination = $this->pagination($count['n'], $limit, 'p', $params);
+	$pagination = $this->pagination($count['n'], $max, 'p', $params);
 
 	// collect data
 	$users = $this->db->load_all(
@@ -499,7 +491,7 @@ else
 			"LEFT JOIN ".$this->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 		$sql_where.
 		$sql_order.
-		"LIMIT {$pagination['offset']}, $limit", true);
+		$pagination['limit'], true);
 
 	$tpl->l_pagination_text = $pagination['text'];
 
