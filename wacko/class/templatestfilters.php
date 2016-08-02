@@ -57,22 +57,22 @@ class TemplatestFilters extends TemplatestEscaper
 		}
 	}
 
-	function call_filter($name, $value, $block, $loc, $args)
+	function call_filter($name, $value, $args)
 	{
 		if (isset($this->filters[$name]) && is_callable($this->filters[$name]))
 		{
-			array_unshift($args, $value, $block, $loc);
+			array_unshift($args, $value);
 			$value = call_user_func_array($this->filters[$name], $args);
 		}
 		else
 		{
-			trigger_error('unknown filter ' . $name . ' at ' . $loc, E_USER_WARNING);
+			trigger_error('unknown filter ' . $name . ' at ' . $this->loc, E_USER_WARNING);
 		}
 
 		return $value;
 	}
 
-	function filter_escape_also_e($value, $block, $loc, $mode = 'html')
+	function filter_escape_also_e($value, $mode = 'html')
 	{
 		switch ($mode)
 		{
@@ -101,59 +101,59 @@ class TemplatestFilters extends TemplatestEscaper
 				break;
 
 			default:
-				trigger_error('invalid escape mode ' . $mode . ' at ' . $loc, E_USER_WARNING);
+				trigger_error('invalid escape mode ' . $mode . ' at ' . $this->loc, E_USER_WARNING);
 		}
 
 		return $value;
 	}
 
-	function filter_default($value, $block, $loc, $default)
+	function filter_default($value, $default)
 	{
 		($value === null || $value === false) and $value = $default;
 		return $value;
 	}
 
-	function filter_format($value, $block, $loc, $fmt)
+	function filter_format($value, $fmt)
 	{
 		return sprintf($fmt, $value);
 	}
 
-	function filter_stringify($value, $block, $loc)
+	function filter_stringify($value)
 	{
 		return Ut::stringify($value);
 	}
 
-	function filter_date($value, $block, $loc, $fmt)
+	function filter_date($value, $fmt)
 	{
 		return date($fmt, $value);
 	}
 
-	function filter_join($value, $block, $loc, $glue = '')
+	function filter_join($value, $glue = '')
 	{
 		return implode($glue, $value);
 	}
 
-	function filter_lower($value, $block, $loc)
+	function filter_lower($value)
 	{
 		return strtolower($value);
 	}
 
-	function filter_upper($value, $block, $loc)
+	function filter_upper($value)
 	{
 		return strtoupper($value);
 	}
 
-	function filter_number($value, $block, $loc, $decimals = 0, $dec_point = '.', $thousands_sep = ',')
+	function filter_number($value, $decimals = 0, $dec_point = '.', $thousands_sep = ',')
 	{
 		return number_format($value, $decimals, $dec_point, $thousands_sep);
 	}
 
-	function filter_void($value, $block, $loc)
+	function filter_void($value)
 	{
 		return null;
 	}
 
-	function filter_index($value, $block, $loc, $path)
+	function filter_index($value, $path)
 	{
 		if (substr($path, 0, 1) == '.')
 		{
@@ -179,8 +179,6 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		$args = func_get_args();
 		$value = array_shift($args);
-		$block = array_shift($args);
-		$loc = array_shift($args);
 
 		$search = $replace = [];
 		foreach ($args as $i => $str)
@@ -202,8 +200,6 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		$args = func_get_args();
 		$value = array_shift($args);
-		$block = array_shift($args);
-		$loc = array_shift($args);
 
 		$options = 0;
 		foreach ($args as $option)
@@ -218,19 +214,19 @@ class TemplatestFilters extends TemplatestEscaper
 			}
 			else
 			{
-				trigger_error('invalid json_encode option ' . $option . ' at ' . $loc, E_USER_WARNING);
+				trigger_error('invalid json_encode option ' . $option . ' at ' . $this->loc, E_USER_WARNING);
 			}
 		}
 
 		return json_encode($value, $options);
 	}
 
-	function filter_json_decode($value, $block, $loc)
+	function filter_json_decode($value)
 	{
 		return json_decode($value, 1);
 	}
 
-	function filter_sp2nbsp($value, $block, $loc)
+	function filter_sp2nbsp($value)
 	{
 		return preg_replace_callback('# ( +)|^ #',
 			function ($x)
@@ -240,7 +236,7 @@ class TemplatestFilters extends TemplatestEscaper
 			}, $value);
 	}
 
-	/*function filter_spaceless($value, $block, $loc)
+	/*function filter_spaceless($value)
 	{
 		return preg_replace_callback('/>\s+</', function ($m)
 			{
@@ -248,7 +244,7 @@ class TemplatestFilters extends TemplatestEscaper
 			}, $value);
 	}*/
 
-	function filter_spaceless($value, $block, $loc)
+	function filter_spaceless($value)
 	{
 		if (preg_match_all(
 			'@
@@ -324,13 +320,13 @@ class TemplatestFilters extends TemplatestEscaper
 		return $html;
 	}
 
-	function filter_regex($value, $block, $loc, $re, $to, $limit = -1, $strict = false)
+	function filter_regex($value, $re, $to, $limit = -1, $strict = false)
 	{
 		$value = preg_replace($re, $to, $value, $limit, $count);
 
 		if ($value === null)
 		{
-			trigger_error('regex ' . $re . ' failed at ' . $loc, E_USER_WARNING);
+			trigger_error('regex ' . $re . ' failed at ' . $this->loc, E_USER_WARNING);
 		}
 		else if ($strict && !$count)
 		{
@@ -340,12 +336,12 @@ class TemplatestFilters extends TemplatestEscaper
 		return $value;
 	}
 
-	function filter_trim($value, $block, $loc, $character_mask = " \t\n\r\0\x0B")
+	function filter_trim($value, $character_mask = " \t\n\r\0\x0B")
 	{
 		return trim($value, $character_mask);
 	}
 
-	function filter_url_encode($value, $block, $loc)
+	function filter_url_encode($value)
 	{
 		if (!is_array($value))
 		{
@@ -361,12 +357,12 @@ class TemplatestFilters extends TemplatestEscaper
 		return implode('&', $list);
 	}
 
-	function filter_striptags($value, $block, $loc, $allowable_tags = '')
+	function filter_striptags($value, $allowable_tags = '')
 	{
 		return strip_tags($value, $allowable_tags);
 	}
 
-	function filter_nl2br($value, $block, $loc)
+	function filter_nl2br($value)
 	{
 		$list = preg_split('/(?:\r\n|\r|\n){2,}/', $value, -1, PREG_SPLIT_NO_EMPTY);
 		foreach ($list as &$p)
@@ -377,7 +373,7 @@ class TemplatestFilters extends TemplatestEscaper
 		return implode("\n\n", $list);
 	}
 
-	function filter_truncate($value, $block, $loc, $limit, $ellipsis = '...')
+	function filter_truncate($value, $limit, $ellipsis = '...')
 	{
 		if (strlen($value) > $limit)
 		{
@@ -389,7 +385,7 @@ class TemplatestFilters extends TemplatestEscaper
 		return $value;
 	}
 
-	function filter_split($value, $block, $loc, $delimiter, $limit = PHP_INT_MAX)
+	function filter_split($value, $delimiter, $limit = PHP_INT_MAX)
 	{
 		return Ut::isempty($delimiter)? str_split($value, $limit) : explode($delimiter, $value, $limit);
 	}
@@ -398,19 +394,17 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		$args = func_get_args();
 		$value = (int)array_shift($args);
-		$block = array_shift($args);
-		$loc = array_shift($args);
 		return ($value >= 0 && $value < count($args))? $args[$value] : array_pop($args);
 	}
 
-	function filter_dbg($value, $block, $loc)
+	function filter_dbg($value)
 	{
-		// suppress ANY errors. templatest is meant to be used standalone, and this is LONE dependency on wacko
-		@Diag::dbg($loc, $value);
+		// suppress ALL errors. templatest is meant to be used standalone, and this is LONE dependency on wacko
+		@Diag::dbg($this->loc, $value);
 		return $value;
 	}
 
-	function filter_enclose($value, $block, $loc, $pref = '', $post = '')
+	function filter_enclose($value, $pref = '', $post = '')
 	{
 		return $pref . $value . $post;
 	}

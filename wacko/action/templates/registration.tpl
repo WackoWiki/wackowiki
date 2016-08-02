@@ -8,24 +8,24 @@
 		[= approve _ =
 			<div class="hint">[ ' _t: UserApprovalInfo ' ]</div>
 		=]
-		<form action="[ ' form | ' ]" method="post" name="register">
-			['' csrf:  register | '']
+		<form action="[ ' form ' ]" method="post" name="register">
+			['' csrf:  register '']
 			<h3>[ ' _t: RegistrationWelcome ' ]</h3>
 			[= multi _ =
 				<p><label for="user_lang">[ ' _t: RegistrationLang ' ]:</label>
 				<select id="user_lang" name="user_lang">
 				[= l _ =
-					<option value="[ ' lang | ' ]"[ ' selected | format ' selected="selected"' ' ]>[ ' name | ' ] ([ ' lang | ' ])</option>
+					<option value="[ ' lang |e attr ' ]"[ ' selected | format ' selected="selected"' ' ]>[ ' name ' ] ([ ' lang |e ' ])</option>
 				=]
 				</select></p>
 			=]
 			<p><label for="user_name">[ ' _t: UserName ' ]:</label>
 			<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="[ ' username | e attr ' ]" autocomplete="off" required autofocus />
-			<br /><small>[ ' only | ' ]</small></p>
+			<br /><small>[ ' only ' ]</small></p>
 
 			<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>
 			<input type="password" id="password" name="password" size="24" value="[ ' password | e attr ' ]" autocomplete="off" required />
-			[''' complexity | ''']
+			[''' complexity ''']
 			"</p>
 
 			<p><label for="conf_password">[ ' _t:'ConfirmPassword ' ]:</label>
@@ -40,10 +40,10 @@
 				<p>
 				<label for="terms_of_use">[ ' _t: TermsOfUse ' ]:</label>
 				<input type="checkbox" id="terms_of_use" name="terms_of_use" value="1" />
-				<small> [ ' _t: AcceptTermsOfUse | ' ] [ ' db: site_name ' ] <a href="[ ' href | ' ]">[ ' _t: TermsOfUse ' ]</a><br /></small></p>
+				<small> [ ' _t: AcceptTermsOfUse ' ] [ ' db: site_name |e ' ] <a href="[ ' href ' ]">[ ' _t: TermsOfUse ' ]</a><br /></small></p>
 			=]
 			[= captcha _ =
-				<p>[ ' show | ' ]</p>
+				<p>[ ' show ' ]</p>
 			=]
 			<p><input type="submit" class="OkBtn" value="[ ' _t: RegistrationButton ' ]" /></p>
 		</form>
