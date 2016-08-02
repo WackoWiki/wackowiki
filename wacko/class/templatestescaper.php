@@ -4,11 +4,11 @@
 
 class TemplatestEscaper
 {
-    private $encoding = 'utf-8';
-    private $sc_encoding = 'utf-8';
+	private $encoding = 'utf-8';
+	private $sc_encoding = 'utf-8';
 
-    function setEncoding($encoding)
-    {
+	function setEncoding($encoding)
+	{
 		$encoding = strtolower($encoding);
 
 		// List of all encoding supported by htmlspecialchars
@@ -36,26 +36,27 @@ class TemplatestEscaper
 				. ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
 			); */
 		}
-    }
+	}
 
-    function getEncoding()
-    {
-        return $this->encoding;
-    }
+	function getEncoding()
+	{
+		return $this->encoding;
+	}
 
-    function escapeHtml($string)
-    {
-        return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE, $this->sc_encoding);
-    }
+	function escapeHtml($string)
+	{
+		return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE, $this->sc_encoding);
+	}
 
-    function escapeHtmlAttr($string)
-    {
-        $string = $this->toUtf8($string);
-        if ($string === '' || ctype_digit($string)) {
-            return $string;
-        }
+	function escapeHtmlAttr($string)
+	{
+		$string = $this->toUtf8($string);
+		if ($string === '' || ctype_digit($string))
+		{
+			return $string;
+		}
 
-        $result = preg_replace_callback('/[^a-z0-9,\.\-_]/iSu',
+		$result = preg_replace_callback('/[^a-z0-9,\.\-_]/iSu',
 			function ($matches)
 			{
 				$chr = $matches[0];
@@ -67,7 +68,8 @@ class TemplatestEscaper
 				 */
 				if (($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
 					|| ($ord >= 0x7f && $ord <= 0x9f)
-				) {
+				)
+				{
 					return '&#xFFFD;';
 				}
 
@@ -83,13 +85,13 @@ class TemplatestEscaper
 				$hex = bin2hex($chr);
 				$ord = hexdec($hex);
 
-				// lowest common denominator as of HTML5's XML Serialisation 
+				// lowest common denominator as of HTML5's XML Serialisation
 				static $htmlNamedEntityMap =
 				[
-					34 => 'quot',         // quotation mark
-					38 => 'amp',          // ampersand
-					60 => 'lt',           // less-than sign
-					62 => 'gt',           // greater-than sign
+					34 => 'quot',			// quotation mark
+					38 => 'amp',			// ampersand
+					60 => 'lt',				// less-than sign
+					62 => 'gt',				// greater-than sign
 				];
 
 				if (isset($htmlNamedEntityMap[$ord]))
@@ -101,24 +103,26 @@ class TemplatestEscaper
 				 * Per OWASP recommendations, we'll use upper hex entities
 				 * for any other characters where a named entity does not exist.
 				 */
-				if ($ord > 255) {
+				if ($ord > 255)
+				{
 					return sprintf('&#x%04X;', $ord);
 				}
 
 				return sprintf('&#x%02X;', $ord);
 			}, $string);
 
-        return $this->fromUtf8($result);
-    }
+		return $this->fromUtf8($result);
+	}
 
-    function escapeJs($string)
-    {
-        $string = $this->toUtf8($string);
-        if ($string === '' || ctype_digit($string)) {
-            return $string;
-        }
+	function escapeJs($string)
+	{
+		$string = $this->toUtf8($string);
+		if ($string === '' || ctype_digit($string))
+		{
+			return $string;
+		}
 
-        $result = preg_replace_callback('/[^a-z0-9,\._]/iSu',
+		$result = preg_replace_callback('/[^a-z0-9,\._]/iSu',
 			function ($matches)
 			{
 				$chr = $matches[0];
@@ -126,33 +130,37 @@ class TemplatestEscaper
 				{
 					return sprintf('\\x%02X', ord($chr));
 				}
+
 				$chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
 				$hex = strtoupper(bin2hex($chr));
 				if (strlen($hex) <= 4)
 				{
 					return sprintf('\\u%04s', $hex);
 				}
-				$highSurrogate = substr($hex, 0, 4);
-				$lowSurrogate = substr($hex, 4, 4);
+
+				$highSurrogate	= substr($hex, 0, 4);
+				$lowSurrogate	= substr($hex, 4, 4);
+
 				return sprintf('\\u%04s\\u%04s', $highSurrogate, $lowSurrogate);
 			}, $string);
 
-        return $this->fromUtf8($result);
-    }
+		return $this->fromUtf8($result);
+	}
 
-    function escapeUrl($string)
-    {
-        return rawurlencode($string);
-    }
+	function escapeUrl($string)
+	{
+		return rawurlencode($string);
+	}
 
-    function escapeCss($string)
-    {
-        $string = $this->toUtf8($string);
-        if ($string === '' || ctype_digit($string)) {
-            return $string;
-        }
+	function escapeCss($string)
+	{
+		$string = $this->toUtf8($string);
+		if ($string === '' || ctype_digit($string))
+		{
+			return $string;
+		}
 
-        $result = preg_replace_callback('/[^a-z0-9]/iSu',
+		$result = preg_replace_callback('/[^a-z0-9]/iSu',
 			function ($matches)
 			{
 				$chr = $matches[0];
@@ -165,71 +173,73 @@ class TemplatestEscaper
 					$chr = $this->convertEncoding($chr, 'UTF-32BE', 'UTF-8');
 					$ord = hexdec(bin2hex($chr));
 				}
+
 				return sprintf('\\%X ', $ord);
 			}, $string);
 
-        return $this->fromUtf8($result);
-    }
+		return $this->fromUtf8($result);
+	}
 
-    protected function toUtf8($string)
-    {
-        if ($this->getEncoding() === 'utf-8')
+	protected function toUtf8($string)
+	{
+		if ($this->getEncoding() === 'utf-8')
 		{
-            $result = $string;
-        }
+			$result = $string;
+		}
 		else
 		{
-            $result = $this->convertEncoding($string, 'UTF-8', $this->getEncoding());
-        }
+			$result = $this->convertEncoding($string, 'UTF-8', $this->getEncoding());
+		}
 
-        if (!$this->isUtf8($result))
+		if (!$this->isUtf8($result))
 		{
-            throw new Exception\RuntimeException(
-                sprintf('String to be escaped was not valid UTF-8 or could not be converted: %s', $result)
-            );
-        }
+			throw new Exception\RuntimeException(
+				sprintf('String to be escaped was not valid UTF-8 or could not be converted: %s', $result)
+			);
+		}
 
-        return $result;
-    }
+		return $result;
+	}
 
-    protected function fromUtf8($string)
-    {
-        if ($this->getEncoding() === 'utf-8')
+	protected function fromUtf8($string)
+	{
+		if ($this->getEncoding() === 'utf-8')
 		{
-            return $string;
-        }
+			return $string;
+		}
 
-        return $this->convertEncoding($string, $this->getEncoding(), 'UTF-8');
-    }
+		return $this->convertEncoding($string, $this->getEncoding(), 'UTF-8');
+	}
 
-    protected function isUtf8($string)
-    {
-        return ($string === '' || preg_match('/^./su', $string));
-    }
+	protected function isUtf8($string)
+	{
+		return ($string === '' || preg_match('/^./su', $string));
+	}
 
-    protected function convertEncoding($string, $to, $from)
-    {
-        if (function_exists('iconv'))
+	protected function convertEncoding($string, $to, $from)
+	{
+		if (function_exists('iconv'))
 		{
-            $result = iconv($from, $to, $string);
-        }
+			$result = iconv($from, $to, $string);
+		}
 		else if (function_exists('mb_convert_encoding'))
 		{
-            $result = mb_convert_encoding($string, $to, $from);
-        }
+			$result = mb_convert_encoding($string, $to, $from);
+		}
 		else
 		{
-            throw new Exception\RuntimeException(
-                __CLASS__
-                . ' requires either the iconv or mbstring extension to be installed'
-                . ' when escaping for non UTF-8 strings.'
-            );
-        }
+			throw new Exception\RuntimeException(
+				__CLASS__
+				. ' requires either the iconv or mbstring extension to be installed'
+				. ' when escaping for non UTF-8 strings.'
+			);
+		}
 
-        if ($result === false) {
-            return ''; // return non-fatal blank string on encoding errors from users
-        }
+		if ($result === false)
+		{
+			return ''; // return non-fatal blank string on encoding errors from users
+		}
 
-        return $result;
-    }
+		return $result;
+	}
 }
