@@ -99,6 +99,7 @@ $config_db['keep_deleted_time']				= $config['keep_deleted_time'];
 $config_db['language']						= $config['language'];
 $config_db['license']						= $config['license'];
 $config_db['link_target']					= $config['link_target'];
+$config_db['list_count']					= $config['list_count'];
 $config_db['log_default_show']				= $config['log_default_show'];
 $config_db['log_level']						= $config['log_level'];
 $config_db['log_purge_time']				= $config['log_purge_time'];

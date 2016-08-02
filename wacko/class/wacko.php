@@ -4641,7 +4641,8 @@ class Wacko
 
 		if (!isset($user_max))
 		{
-			$user_max = 50;
+			// use default as fallback
+			$user_max = $this->db->list_count;
 		}
 		else if ($user_max <= 0)
 		{

@@ -29,6 +29,7 @@ function admin_config_pages(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
+		$config['list_count']			= (int)$_POST['list_count'];
 		$config['forum_cluster']		= trim((string)$_POST['forum_cluster'], '/');
 		$config['forum_topics']			= (int)$_POST['forum_topics'];
 		$config['comments_count']		= (int)$_POST['comments_count'];
@@ -65,6 +66,17 @@ function admin_config_pages(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<tr>
+				<th colspan="2">General Options</th>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="list_count"><strong>Number of items per list:</strong><br />
+				<small>Number of items displayed on each list for guest or as default value for new users.</small></label></td>
+				<td><input type="number" min="0" maxlength="3" style="width:200px;" id="list_count" name="list_count" value="<?php echo htmlspecialchars($engine->db->list_count, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+			</tr>
 			<tr>
 				<th colspan="2">Options Forum</th>
 			</tr>

@@ -106,7 +106,6 @@ function admin_user_users(&$engine, &$module)
 	// get user
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
-
 		$user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->db->table_prefix}user u ".
@@ -159,6 +158,7 @@ function admin_user_users(&$engine, &$module)
 					"user_id			= '".(int)$_user_id['user_id']."', ".
 					"typografica		= '".(($engine->db->default_typografica == 1) ? 1 : 0)."', ".
 					"user_lang			= ".$engine->db->q(($_POST['user_lang'] ? $_POST['user_lang'] : $engine->db->language)).", ".
+					"list_count			= '".(int)$this->db->list_count."', ".
 					"theme				= ".$engine->db->q($engine->db->theme).", ".
 					"notify_minor_edit	= '".(int)$engine->db->notify_minor_edit."', ".
 					"notify_page		= '".(int)$engine->db->notify_page."', ".
