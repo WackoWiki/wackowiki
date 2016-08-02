@@ -38,7 +38,6 @@ if (($group = @$_GET['profile']))
 else
 {
 	$where			= '';
-	$limit = $this->get_list_count($max);
 
 	// defining WHERE and ORDER clauses
 	// $param is passed to the pagination links
@@ -95,7 +94,7 @@ else
 		"FROM {$this->db->table_prefix}usergroup ".
 		$where);
 
-	$pagination = $this->pagination($count['n'], $limit, 'p', $param);
+	$pagination = $this->pagination($count['n'], $max, 'p', $param);
 
 	// collect data
 	$groups = $this->db->load_all(
@@ -108,7 +107,7 @@ else
 			"g.active = '1' ".
 		"GROUP BY g.group_id ".
 		( $order ? $order : "ORDER BY members DESC " ).
-		"LIMIT {$pagination['offset']}, $limit");
+		$pagination['limit']);
 
 	// usergroup filter form
 	$tpl->l_href = $this->href();

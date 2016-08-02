@@ -9,7 +9,6 @@ if (!isset($max))		$max = null;
 
 if ($user_id = $this->get_user_id())
 {
-	$limit		= $this->get_list_count($max);
 	$pref		= $this->db->table_prefix;
 
 	echo $this->_t('MyChangesWatches').
@@ -24,8 +23,8 @@ if ($user_id = $this->get_user_id())
 				"AND w.user_id = '".(int)$user_id."' ".
 				"AND p.user_id <> '".(int)$user_id."' ".
 			"GROUP BY p.tag ".
-			"ORDER BY p.modified DESC, p.tag ASC ".
-			"LIMIT $limit");
+			"ORDER BY p.modified DESC, p.tag ASC "/*.		TODO pagination
+			"LIMIT $limit"*/);
 
 	if ((isset($_GET['reset']) && $_GET['reset'] == 1) && $pages == true)
 	{

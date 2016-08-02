@@ -19,7 +19,6 @@ if ($user_id = $this->get_user_id())
 		$this->set_watch($user_id, $_GET['setwatch']);
 	}
 
-	$limit		= $this->get_list_count($max);
 	$prefix		= $this->db->table_prefix;
 
 	if (isset($_GET['unwatched']) && $_GET['unwatched'] == 1)
@@ -34,7 +33,7 @@ if ($user_id = $this->get_user_id())
 				"AND p.deleted <> '1' ".
 				"AND w.user_id IS NULL", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches&amp;unwatched=1#list');
+		$pagination = $this->pagination($count['n'], $max, 'p', 'mode=mywatches&amp;unwatched=1#list');
 
 		echo $this->_t('UnwatchedPages').' (<a href="'.
 			$this->href('', '', 'mode='.htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).'#list">'.
@@ -51,7 +50,7 @@ if ($user_id = $this->get_user_id())
 				"AND p.deleted <> '1' ".
 				"AND w.user_id IS NULL ".
 			"ORDER BY pagetag ASC ".
-			"LIMIT {$pagination['offset']}, ".($limit * 2)))
+			$pagination['limit']))
 		{
 			foreach ($pages as $page)
 			{
@@ -79,11 +78,6 @@ if ($user_id = $this->get_user_id())
 						'<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('SetWatch').'" alt="'.$this->_t('SetWatch').'"  />'.'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
-
-				if ($cnt >= $limit)
-				{
-					break;
-				}
 			}
 
 			$this->print_pagination($pagination);
@@ -100,7 +94,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}watch ".
 			"WHERE user_id = '".(int)$user_id."'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
+		$pagination = $this->pagination($count['n'], $max, 'p', 'mode=mywatches#list');
 
 		echo $this->_t('WatchedPages').' (<a href="'.
 			$this->href('', '', (isset($_GET['mode']) ? 'mode='.htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;unwatched=1' : '')).'#list">'.
@@ -115,7 +109,7 @@ if ($user_id = $this->get_user_id())
 				"ON (p.page_id = w.page_id) ".
 			"WHERE w.user_id = '".(int)$user_id."' ".
 			"GROUP BY tag ".
-			"LIMIT {$pagination['offset']}, $limit"))
+			$pagination['limit']))
 		{
 			foreach ($pages as $page)
 			{
@@ -144,8 +138,6 @@ if ($user_id = $this->get_user_id())
 
 					$cnt++;
 				}
-
-				if ($cnt >= $limit) break;
 			}
 
 			$this->print_pagination($pagination);
@@ -160,5 +152,3 @@ else
 {
 	echo '<em>'.$this->_t('NotLoggedInWatches').'</em>';
 }
-
-?>

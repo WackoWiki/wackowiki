@@ -784,7 +784,7 @@ function admin_user_users(&$engine, &$module)
 			($where ? 'AND ' : "WHERE ").
 				"u.account_type = '0' ".
 			($order ? $order : 'ORDER BY u.user_id DESC ').
-			"LIMIT {$pagination['offset']}, $limit");
+			$pagination['limit']);
 
 		// user filter form
 		$search =	$engine->form_open('search_user', ['form_method' => 'get']).

@@ -5,65 +5,61 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!function_exists('load_commented'))
+$load_commented = function ($for, $limit, $deleted = 0)
 {
-	function load_commented(&$engine, $for = '', $limit = 50, $deleted = 0)
+	$_ids		= '';
+	$comments	= '';
+	$pagination	= '';
+
+	// going around the limitations of GROUP BY when used along with ORDER BY
+	// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
+	if ($ids = $this->db->load_all(
+		"SELECT a.page_id ".
+		"FROM ".$this->db->table_prefix."page a ".
+			"LEFT JOIN ".$this->db->table_prefix."page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
+		($for
+			?	"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
+			:	"").
+		"WHERE ".
+		($for
+			?	"a2.page_id IS NULL AND b.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+			:	"a2.page_id IS NULL AND a.comment_on_id <> '0' ").
+		($deleted != 1
+			? "AND a.deleted <> '1' "
+			: "").
+		"ORDER BY a.created DESC"
+		, true));
 	{
-		$_ids		= '';
-		$limit		= (int) $limit;
-		$comments	= '';
-		$pagination	= '';
+			if ($ids)
+			{
+				$count		= count($ids);
+				$pagination = $this->pagination($count, $limit);
 
-		// going around the limitations of GROUP BY when used along with ORDER BY
-		// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
-		if ($ids = $engine->db->load_all(
-			"SELECT a.page_id ".
-			"FROM ".$engine->db->table_prefix."page a ".
-				"LEFT JOIN ".$engine->db->table_prefix."page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
-			($for
-				?	"INNER JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
-				:	"").
-			"WHERE ".
-			($for
-				?	"a2.page_id IS NULL AND b.supertag LIKE " . $engine->db->q($engine->translit($for) . '/%') . " "
-				:	"a2.page_id IS NULL AND a.comment_on_id <> '0' ").
-			($deleted != 1
-				? "AND a.deleted <> '1' "
-				: "").
-			"ORDER BY a.created DESC"
-			, true));
-		{
-				if ($ids)
+				foreach ($ids as $key => $id)
 				{
-					$count		= count($ids);
-					$pagination = $engine->pagination($count, $limit);
-
-					foreach ($ids as $key => $id)
+					if ($key > 0)
 					{
-						if ($key > 0)
-						{
-							$_ids .= ", ";
-						}
-
-						$_ids .= "'".$id['page_id']."'";
+						$_ids .= ", ";
 					}
 
-					// load complete comments
-					$comments = $engine->db->load_all(
-						"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
-						"FROM ".$engine->db->table_prefix."page a ".
-							"INNER JOIN ".$engine->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
-							"LEFT JOIN ".$engine->db->table_prefix."user u ON (a.user_id = u.user_id) ".
-							"LEFT JOIN ".$engine->db->table_prefix."user o ON (a.owner_id = o.user_id) ".
-						"WHERE a.page_id IN ( ".$_ids." ) ".
-						"ORDER BY comment_time DESC ".
-						"LIMIT {$pagination['offset']}, {$limit}");
+					$_ids .= "'".$id['page_id']."'";
 				}
-		}
 
-		return array($comments, $pagination);
+				// load complete comments
+				$comments = $this->db->load_all(
+					"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
+					"FROM ".$this->db->table_prefix."page a ".
+						"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
+						"LEFT JOIN ".$this->db->table_prefix."user u ON (a.user_id = u.user_id) ".
+						"LEFT JOIN ".$this->db->table_prefix."user o ON (a.owner_id = o.user_id) ".
+					"WHERE a.page_id IN ( ".$_ids." ) ".
+					"ORDER BY comment_time DESC ".
+					$pagination['limit']);
+			}
 	}
-}
+
+	return array($comments, $pagination);
+};
 
 if (!isset($root))	$root	= $this->unwrap_link(isset($for) ? $for : '');
 if (!isset($title)) $title	= 0;
@@ -71,7 +67,6 @@ if (!isset($noxml)) $noxml	= 0;
 if (!isset($max))		$max = null;
 
 $user	= $this->get_user();
-$max	= $this->get_list_count($max);
 
 if ($this->user_allowed_comments())
 {
@@ -83,7 +78,7 @@ if ($this->user_allowed_comments())
 		$user = $this->get_user();
 	}
 
-	if (list ($pages, $pagination) = load_commented($this, $root, (int)$max))
+	if (list ($pages, $pagination) = $load_commented($root, $max))
 	{
 		if ($pages)
 		{
@@ -163,5 +158,3 @@ else
 {
 	echo $this->_t('CommentsDisabled');
 }
-
-?>

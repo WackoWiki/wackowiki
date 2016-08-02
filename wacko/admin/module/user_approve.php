@@ -264,7 +264,7 @@ function admin_user_approve(&$engine, &$module)
 				"u.account_type = '0' ".
 				"AND u.user_name <> '".$engine->db->admin_name."' ".
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
-			"LIMIT {$pagination['offset']}, $limit");
+			$pagination['limit']);
 
 		// count records by status
 		$account_stati =  $engine->db->load_all(

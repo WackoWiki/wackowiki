@@ -13,10 +13,9 @@ if (!isset($date))		$date = @$_GET['date'];
 if (!isset($hide_minor_edit)) $hide_minor_edit = @$_GET['minor_edit'];
 if (!isset($noxml))		$noxml = 0;
 if (!isset($title))		$title = '';
-if (!isset($max))		$max = '';
+if (!isset($max))		$max = null;
 
 $user	= $this->get_user();
-$max	= $this->get_list_count($max);
 
 // process 'mark read' - reset session time
 if (isset($_GET['markread']) && $user)

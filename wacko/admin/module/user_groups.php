@@ -568,7 +568,7 @@ function admin_user_groups(&$engine, &$module)
 			($where ? $where : '').
 			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name ".
 			($order ? $order : 'ORDER BY group_id DESC ').
-			"LIMIT {$pagination['offset']}, $limit");
+			$pagination['limit']);
 
 	/////////////////////////////////////////////
 	//   print list

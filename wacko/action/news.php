@@ -18,9 +18,6 @@ if (!empty($this->db->news_cluster))
 	if (!isset($mode))	$mode = 'latest';
 	if (!isset($title))	$title = 1;
 	if (!isset($noxml))	$noxml = 0;
-	if ($max)			$limit = $max;
-	if (!isset($limit))	$limit = 10;
-	else				$limit = (int)$limit;
 
 	$pages				= '';
 	$prefix				= $this->db->table_prefix;
@@ -91,7 +88,7 @@ if (!empty($this->db->news_cluster))
 				"AND comment_on_id = '0'".
 				"AND deleted <> '1' ", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=latest');
+		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'latest']);
 
 		$pages	= $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
@@ -101,7 +98,7 @@ if (!empty($this->db->news_cluster))
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
 				"AND p.deleted <> '1' ".
 			"ORDER BY p.created DESC ".
-			"LIMIT {$pagination['offset']}, $limit", true);
+			$pagination['limit'], true);
 	}
 	else if ($mode == 'category')
 	{
@@ -114,7 +111,7 @@ if (!empty($this->db->news_cluster))
 				"AND p.deleted <> '1' ".
 				"AND p.comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'category='.$category_id);
+		$pagination = $this->pagination($count['n'], $max, 'p', ['category' => $category_id]);
 
 		$category_title	= $this->db->load_single(
 			"SELECT category ".
@@ -131,7 +128,7 @@ if (!empty($this->db->news_cluster))
 				"AND p.deleted <> '1' ".
 				"AND c.category_id = '$category_id' ".
 			"ORDER BY p.created DESC ".
-			"LIMIT {$pagination['offset']}, $limit", true);
+			$pagination['limit'], true);
 	}
 	else if ($mode == 'week')
 	{
@@ -143,7 +140,7 @@ if (!empty($this->db->news_cluster))
 				"AND created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ".
 				"AND comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=week');
+		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'week']);
 
 		$pages	= $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
@@ -154,7 +151,7 @@ if (!empty($this->db->news_cluster))
 				"AND p.deleted <> '1' ".
 				"AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ".
 			"ORDER BY p.created DESC ".
-			"LIMIT {$pagination['offset']}, $limit", true);
+			$pagination['limit'], true);
 	}
 	else if ($mode == 'from' && $date)
 	{
@@ -166,7 +163,7 @@ if (!empty($this->db->news_cluster))
 				"AND created > '$date' ".
 				"AND comment_on_id = '0'", true);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=week');
+		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'week']);
 
 		$date	= date(SQL_DATE_FORMAT, strtotime($date)); // TODO TZ issue
 		$pages	= $this->db->load_all(
@@ -178,7 +175,7 @@ if (!empty($this->db->news_cluster))
 				"AND p.deleted <> '1' ".
 				"AND p.created > '$date' ".
 			"ORDER BY p.created DESC ".
-			"LIMIT {$pagination['offset']}, $limit", true);
+			$pagination['limit'], true);
 	}
 
 	// start output

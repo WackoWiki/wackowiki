@@ -5,17 +5,37 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!function_exists('load_orphaned_pages'))
+$load_orphaned_pages = function ($for, $limit, $deleted = 0)
 {
-	function load_orphaned_pages(&$engine, $for = '', $limit = 50, $deleted = 0)
-	{
-		$limit		= (int) $limit;
-		$pagination	= '';
-		$pref		= $engine->db->table_prefix;
+	$pagination	= '';
+	$pref		= $this->db->table_prefix;
 
-		// count pages
-		if ($count_pages = $engine->db->load_all(
-			"SELECT DISTINCT page_id ".
+	// count pages
+	if ($count_pages = $this->db->load_all(
+		"SELECT DISTINCT page_id ".
+		"FROM ".$pref."page p ".
+			"LEFT JOIN ".$pref."link l ON ".
+			"((l.to_tag = p.tag ".
+				"AND l.to_supertag = '') ".
+				"OR l.to_supertag = p.supertag) ".
+		"WHERE ".
+			($for
+				? "p.tag LIKE '" . $this->db->q($for . '/%') . " AND "
+				: "").
+			"l.to_page_id IS NULL ".
+			($deleted != 1
+				? "AND p.deleted <> '1' "
+				: "").
+			"AND p.comment_on_id = '0' "
+		, true));
+
+	if ($count_pages)
+	{
+		$count		= count($count_pages);
+		$pagination = $this->pagination($count, $limit);
+
+		$orphaned = $this->db->load_all(
+			"SELECT DISTINCT page_id, tag, title ".
 			"FROM ".$pref."page p ".
 				"LEFT JOIN ".$pref."link l ON ".
 				"((l.to_tag = p.tag ".
@@ -23,43 +43,19 @@ if (!function_exists('load_orphaned_pages'))
 					"OR l.to_supertag = p.supertag) ".
 			"WHERE ".
 				($for
-					? "p.tag LIKE '" . $engine->db->q($for . '/%') . " AND "
+					? "p.tag LIKE " . $this->db->q($for . '/%') . " AND "
 					: "").
 				"l.to_page_id IS NULL ".
 				($deleted != 1
 					? "AND p.deleted <> '1' "
 					: "").
-				"AND p.comment_on_id = '0' "
-			, true));
+				"AND p.comment_on_id = '0' ".
+			"ORDER BY tag ".
+			$pagination['limit']);
 
-		if ($count_pages)
-		{
-			$count		= count($count_pages);
-			$pagination = $engine->pagination($count, $limit);
-
-			$orphaned = $engine->db->load_all(
-				"SELECT DISTINCT page_id, tag, title ".
-				"FROM ".$pref."page p ".
-					"LEFT JOIN ".$pref."link l ON ".
-					"((l.to_tag = p.tag ".
-						"AND l.to_supertag = '') ".
-						"OR l.to_supertag = p.supertag) ".
-				"WHERE ".
-					($for
-						? "p.tag LIKE " . $engine->db->q($for . '/%') . " AND "
-						: "").
-					"l.to_page_id IS NULL ".
-					($deleted != 1
-						? "AND p.deleted <> '1' "
-						: "").
-					"AND p.comment_on_id = '0' ".
-				"ORDER BY tag ".
-				"LIMIT {$pagination['offset']}, {$limit}");
-
-			return array($orphaned, $pagination);
-		}
+		return [$orphaned, $pagination];
 	}
-}
+};
 
 if (!isset($root))
 {
@@ -73,9 +69,8 @@ else
 if (!isset($max))		$max = null;
 
 $user	= $this->get_user();
-$max	= $this->get_list_count($max);
 
-if (list ($pages, $pagination) = load_orphaned_pages($this, $root, (int)$max))
+if (list ($pages, $pagination) = $load_orphaned_pages($root, $max))
 {
 	if (is_array($pages))
 	{
@@ -107,5 +102,3 @@ else
 {
 	echo $this->show_message($this->_t('NoOrphaned'));
 }
-
-?>

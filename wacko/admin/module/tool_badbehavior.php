@@ -268,7 +268,7 @@ function bb2_manage(&$engine)
 		"FROM `" . $bb_table . "` ".
 		"WHERE 1=1 " . $where .
 		"ORDER BY `log_id` DESC ".
-		"LIMIT {$pagination['offset']}, $limit");
+		$pagination['limit']);
 
 	// Display rows to the user
 	?>
