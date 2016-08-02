@@ -394,6 +394,15 @@ class TemplatestFilters extends TemplatestEscaper
 		return Ut::isempty($delimiter)? str_split($value, $limit) : explode($delimiter, $value, $limit);
 	}
 
+	function filter_list()
+	{
+		$args = func_get_args();
+		$value = (int)array_shift($args);
+		$block = array_shift($args);
+		$loc = array_shift($args);
+		return ($value >= 0 && $value < count($args))? $args[$value] : array_pop($args);
+	}
+
 	function filter_dbg($value, $block, $loc)
 	{
 		// suppress ANY errors. templatest is meant to be used standalone, and this is LONE dependency on wacko

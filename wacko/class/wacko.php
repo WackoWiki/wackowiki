@@ -6906,8 +6906,9 @@ class Wacko
 	//		$params		= $_GET parameters to be passed with the page link (as href-formatted array or string)
 	// returns an array with 'text' (navigation) and 'offset' (offset value
 	// for SQL queries) elements.
-	function pagination($total, $perpage = 100, $_name = 'p', $params = '', $method = '', $tag = '')
+	function pagination($total, $perpage = null, $_name = 'p', $params = '', $method = '', $tag = '')
 	{
+		$total = (int) $total;
 		$name = 'p';
 		$anchor = '';
 
@@ -6921,103 +6922,103 @@ class Wacko
 			$name = $_name;
 		}
 
-		if ($perpage < 1)
+		$pagination['offset'] = 0;
+		$pagination['text'] = false;
+		$pagination['limit'] = '';
+
+		$perpage = $this->get_list_count($perpage);
+
+		if ($total > $perpage)
 		{
-			$perpage = 10; // no division by zero
-		}
-
-		if ($total <= $perpage)
-		{
-			// single page
-			return ['offset' => 0, 'text' => false];
-		}
-
-		if (!is_array($params))
-		{
-			$params = $params? [$params] : [];
-		}
-
-		// multipage with navigation
-		$sep		= ', ';
-		$span		= ' ... ' . $sep;
-		$total		-= 1;
-		$pages		= ($total - $total % $perpage) / $perpage + 1;
-		$page		= @$_GET[$name];
-		$page		= ($page == 'last')? $pages : (int)$page;
-
-		if ($page <= 0 || $page > $pages)
-		{
-			$page = 1;
-		}
-
-		$make_link = function ($page, $body = '', $attrs = '') use ($method, $tag, $name, $params, $anchor)
-		{
-			$params[$name] = $page;
-			return '<a href="' . $this->href($method, $tag, $params, false, $anchor) . '"' . $attrs . '>' .
-					($body ? $body : $page) . '</a>';
-		};
-
-		$make_list = function ($from, $to) use ($page, $pages, $make_link, $sep)
-		{
-			$list = '';
-
-			for ($p = $from; $p <= $to; $p++)
+			if (!is_array($params))
 			{
-				$list .= ' ';
-
-				if ($p != $page)
-				{
-					$list .= $make_link($p);
-				}
-				else // don't make link for the current page
-				{
-					$list .= '<strong>' . $p . '</strong>';
-				}
-
-				if ($p != $pages)
-				{
-					$list .= $sep;
-				}
+				$params = $params? [$params] : [];
 			}
 
-			return $list;
-		};
+			// multipage with navigation
+			$sep		= ', ';
+			$span		= ' ... ' . $sep;
+			$total		-= 1;
+			$pages		= ($total - $total % $perpage) / $perpage + 1;
+			$page		= @$_GET[$name];
+			$page		= ($page == 'last')? $pages : (int)$page;
 
-		$pagination['offset']	= $perpage * ($page - 1);
-		$navigation				= $this->_t('ToThePage') . ': ';
+			if ($page <= 0 || $page > $pages)
+			{
+				$page = 1;
+			}
 
-		if ($page > 1)
-		{
-			$navigation .= $make_link($page - 1, ('&laquo; ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
+			$make_link = function ($page, $body = '', $attrs = '') use ($method, $tag, $name, $params, $anchor)
+			{
+				$params[$name] = $page;
+				return '<a href="' . $this->href($method, $tag, $params, false, $anchor) . '"' . $attrs . '>' .
+						($body ? $body : $page) . '</a>';
+			};
+
+			$make_list = function ($from, $to) use ($page, $pages, $make_link, $sep)
+			{
+				$list = '';
+
+				for ($p = $from; $p <= $to; $p++)
+				{
+					$list .= ' ';
+
+					if ($p != $page)
+					{
+						$list .= $make_link($p);
+					}
+					else // don't make link for the current page
+					{
+						$list .= '<strong>' . $p . '</strong>';
+					}
+
+					if ($p != $pages)
+					{
+						$list .= $sep;
+					}
+				}
+
+				return $list;
+			};
+
+			$pagination['offset']	= $perpage * ($page - 1);
+			$navigation				= $this->_t('ToThePage') . ': ';
+
+			if ($page > 1)
+			{
+				$navigation .= $make_link($page - 1, ('&laquo; ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
+			}
+
+			// pages range links
+			if ($pages <= 10)	// not so many pages, list all
+			{
+				$navigation .= $make_list(1, $pages);
+			}
+			else if ($page <= 4 || $page > $pages - 4)	// current page is near the beginning or the end
+			{
+				$navigation .= $make_list(1, 5);
+				$navigation .= $span;
+				$navigation .= $make_list($pages - 4, $pages);
+			}
+			else	// current page is in the middle of the list
+			{
+				$navigation .= $make_list(1, 1);
+				$navigation .= $span;
+				$navigation .= $make_list($page - 2, $page + 2);
+				$navigation .= $span;
+				$navigation .= $make_list($pages, $pages);
+			}
+
+			// next page shortcut
+			if ($page < $pages)
+			{
+				$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' &raquo;'), ' rel="next"');
+			}
+
+			$pagination['text'] = $navigation;
+			$pagination['limit'] = "LIMIT {$pagination['offset']}, $perpage";
 		}
 
-		// pages range links
-		if ($pages <= 10)	// not so many pages, list all
-		{
-			$navigation .= $make_list(1, $pages);
-		}
-		else if ($page <= 4 || $page > $pages - 4)	// current page is near the beginning or the end
-		{
-			$navigation .= $make_list(1, 5);
-			$navigation .= $span;
-			$navigation .= $make_list($pages - 4, $pages);
-		}
-		else	// current page is in the middle of the list
-		{
-			$navigation .= $make_list(1, 1);
-			$navigation .= $span;
-			$navigation .= $make_list($page - 2, $page + 2);
-			$navigation .= $span;
-			$navigation .= $make_list($pages, $pages);
-		}
-
-		// next page shortcut
-		if ($page < $pages)
-		{
-			$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' &raquo;'), ' rel="next"');
-		}
-
-		$pagination['text'] = $navigation;
 		return $pagination;
 	}
 
