@@ -26,12 +26,10 @@ if ($this->page['latest'] == 0)
 	$this->_t('Revision')))).".</div>";
 }*/
 
-$_numerate_links = (($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate_links;
-
-if ($_numerate_links)
+if ((($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate_links)
 {
 	// start enumerating links
-	$this->numerate_links = array();
+	$this->numerate_links = [];
 }
 
 // build html body
@@ -74,34 +72,31 @@ if (@$this->sess->show_comments[$this->page['page_id']] || $this->forum)
 	}
 }
 
-if ($_numerate_links)
+// numerated links
+if ($this->numerate_links)
 {
-	// numerated links
-	if ($this->numerate_links)
+	if (!isset($comments)) echo '<br />';
+
+	echo '<br />';
+	echo '<section id="links">';
+	echo '<header class="linksheader">';
+	echo $this->_t('Links');
+	echo "</header>\n";
+
+	$i = 0;
+
+	foreach ($this->numerate_links as $l => $n)
 	{
-		if (!isset($comments)) echo '<br />';
-
-		echo '<br />';
-		echo '<section id="links">';
-		echo '<header class="linksheader">';
-		echo $this->_t('Links');
-		echo "</header>\n";
-
-		$i = 0;
-
-		foreach ($this->numerate_links as $l => $n)
+		if ($i++)
 		{
-			if ($i++)
-			{
-				echo "<br /><br />\n";
-			}
-
-			echo '<span class="reflink"><sup>' . $n. '</sup> ' . $l . "</span>\n";
+			echo "<br /><br />\n";
 		}
 
-		echo "</section>\n";
+		echo '<span class="reflink"><sup>' . $n. '</sup> ' . $l . "</span>\n";
 	}
 
-	// stop enumerating links
-	$this->numerate_links = null;
+	echo "</section>\n";
 }
+
+// stop enumerating links
+$this->numerate_links = null;

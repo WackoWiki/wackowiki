@@ -80,7 +80,7 @@ if ($logged_in)
 
 // defining tabs constructor
 //		$image = 0 text only, 1 image only, 2 image and text
-$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = '') use (&$tpl)
+$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = null) use (&$tpl)
 {
 	$tpl->class = $tab_class ?: ('m-' . $method);
 
@@ -94,6 +94,7 @@ $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_k
 		$tpl->enter('out_');
 		$tpl->method = ($method == 'show' ? '.' : $this->href($method));
 		$tpl->hint = $this->_t($hint);
+		$tpl->params = $params;
 
 		if ($access_key !== '')
 		{
