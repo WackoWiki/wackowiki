@@ -3667,16 +3667,10 @@ class Wacko
 					}
 				}
 
-				// numerated wiki-links. initialize property as an array to make it work
-				if (is_array($this->numerate_links) && $page_link != $text && $title != $this->_t('CreatePage'))
+				// numerated wiki-links
+				if ($page_link != $text && $title != $this->_t('CreatePage'))
 				{
-					$refnum = &$this->numerate_links[$page_link];
-					if (!isset($refnum))
-					{
-						$refnum = '[link' . count($this->numerate_links) . ']';
-					}
-
-					$res .= '<sup class="refnum">' . $refnum . '</sup>';
+					$res .= $this->numerate_link($page_link);
 				}
 
 				return $res;
@@ -3726,16 +3720,10 @@ class Wacko
 				$res		= str_replace('{url}',		$url,		$res);
 				$res		= str_replace('{text}',		$text,		$res);
 
-				// numerated outer links and file links. initialize property as an array to make it work
-				if (is_array($this->numerate_links) && $url != $text && $url != '404' && $url != '403')
+				// numerated outer links and file links
+				if ($url != $text && $url != '404' && $url != '403')
 				{
-					if (!($refnum = (isset($this->numerate_links[$url]) ? $this->numerate_links[$url] : '')))
-					{
-						$refnum = '[link'.((string)count($this->numerate_links) + 1).']';
-						$this->numerate_links[$url] = $refnum;
-					}
-
-					$res .= '<sup class="refnum">'.$refnum.'</sup>';
+					$res .= $this->numerate_link($url);
 				}
 
 				return $res;
@@ -3743,6 +3731,21 @@ class Wacko
 		}
 
 		return $text;
+	}
+
+	private function numerate_link($url)
+	{
+		// numerated wiki-links. initialize property as an array to make it work
+		if (is_array($this->numerate_links))
+		{
+			$refnum = &$this->numerate_links[$url];
+			if (!isset($refnum))
+			{
+				$refnum = '[link' . count($this->numerate_links) . ']';
+			}
+
+			return '<sup class="refnum">' . $refnum . '</sup>';
+		}
 	}
 
 	// creates a link to the user profile
