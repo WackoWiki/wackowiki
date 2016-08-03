@@ -90,7 +90,7 @@
 				<span>[ '' t TabTitle | trim '' ]</span>
 			=]
 			[= out _ =
-				<a href="[ ' method ' ]" title="[ ' hint |e ' ]"
+				<a href="[ ' method ' ]" title="[ ' hint ' ]"
 					[ ' key | e attr | enclose ' accesskey="' '"' ' ][ ' params ' ]>[ '' t TabTitle | trim '' ]</a>
 			=]
 		</li>
@@ -134,6 +134,6 @@
 =]
 
 [ === TabTitle === ]
-['' im TabImage ''] ['' title |e '']
+['' im TabImage ''] ['' title '']
 [ === TabImage === ]
-<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title |e ' ]" />
+<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title ' ]" />
