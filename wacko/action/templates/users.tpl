@@ -176,7 +176,7 @@ first really BIG template written
 	<table style="width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
 		<tr>
 			[= s _ =
-				<th><a href="[ ' link ' ]">[ ' what |e ' ][''' arrow sortsArr ''']</a></th>
+				<th><a href="[ ' link ' ]">[ ' what ' ][''' arrow sortsArr ''']</a></th>
 			=]
 		</tr>
 

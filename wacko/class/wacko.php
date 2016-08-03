@@ -925,7 +925,7 @@ class Wacko
 			$meta_keywords .= strtolower(implode(', ', $this->categories));
 		}
 
-		return htmlspecialchars($meta_keywords, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+		return $meta_keywords;
 	}
 
 	function get_description()
@@ -941,7 +941,7 @@ class Wacko
 			$meta_description = $this->db->meta_description;
 		}
 
-		return htmlspecialchars($meta_description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+		return $meta_description;
 	}
 
 	// wrapper for _load_page
