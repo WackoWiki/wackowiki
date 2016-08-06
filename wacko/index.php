@@ -1,13 +1,13 @@
 <?php
 
 define('IN_WACKO', 'wacko');
-require_once 'class/init.php';
+include 'class/init.php';
 
 $db = new Settings;
 
 if ($db->ext_bad_behavior)
 {
-	require_once 'lib/bad_behavior/bad-behavior-wackowiki.php'; // uses $db
+	include 'lib/bad_behavior/bad-behavior-wackowiki.php'; // uses $db
 }
 
 $http = new Http($db);
@@ -63,4 +63,4 @@ case 'wacko':
 	break;
 }
 
-finalize($db, $http, $engine);
+include 'class/final.php';

@@ -227,6 +227,7 @@ class Http
 					echo '</body></html>';
 				}
 
+				$this->gzip();
 				$this->terminate();
 			}
 		}
@@ -599,10 +600,11 @@ class Http
 			}
 		}
 
-		header('Content-Length: ' . ($to - $from + 1));
 		header('X-Served-By: sendfile');
-
+		header('Content-Length: ' . ($to - $from));
 		header('Content-Type: ' . $this->mime_type($path));
+		header('Content-Disposition: inline; filename="' . ($filename ?: basename($path)) . '"');
+		header('Date: ' . Ut::http_date());
 
 		if ($age > 0)
 		{
@@ -617,15 +619,12 @@ class Http
 			header('Pragma: no-cache');
 		}
 
-		header('Content-Disposition: inline; filename="' . ($filename ?: basename($path)) . '"');
-		header('Content-Transfer-Encoding: binary');
-		header('Date: ' . Ut::http_date());
-
 		ob_implicit_flush(true);
 
 		if ($from == 0 && $to == $size)
 		{
 			readfile($path);
+			$this->gzip();
 		}
 		else
 		{
@@ -705,4 +704,38 @@ class Http
 		}
 		return $path;
 	}
+
+	// gzip http stream ourselves (not by zlib output compression or ob_gzhandler), to produce Content-Length header
+	function gzip()
+	{
+		if (headers_sent() || connection_aborted())
+		{
+			return;
+		}
+
+		header('Content-Length: ' . ($len = ob_get_length()));
+
+		if ($len < 860 || $len > (1 << 20))
+		{
+			return; // do not compress small or too big data
+		}
+
+		header('Vary: Accept-Encoding');
+
+		foreach (['x-gzip', 'gzip'] as $x)
+		{
+			if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], $x) !== false)
+			{
+				$text = gzencode(ob_get_contents(), 9);
+				ob_end_clean();
+
+				header('Content-Encoding: ' . $x);
+				header('Content-Length: ' . strlen($text));
+
+				echo $text;
+				break;
+			}
+		}
+	}
+
 }
