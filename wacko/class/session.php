@@ -10,7 +10,7 @@
 abstract class Session extends ArrayObject // for concretization extend by some SessionStoreInterface'd class
 {
 	private $active = false;
-	private $regenerated = false;
+	private $regenerated = 0;
 	private $name = '';				// NB [0-9a-zA-Z]+ -- should be short and descriptive (i.e. for users with enabled cookie warnings)
 	private $id = null;				// NB [0-9a-zA-Z,-]+
 	private $user_agent;
@@ -124,7 +124,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 
 			$this->__regenerated = $now;
-			$this->regenerated = true;
+			$this->regenerated = 1;
 
 			return true;
 		}
@@ -164,14 +164,14 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$id = null;
 		}
 
-		$this->regenerated = false;
-		$this->store_open($this->name);
+		$this->store_open($this->cf_cookie_prefix . $this->name);
 
 		if (!$id || ($text = $this->store_read($id)) === false || !($data = Ut::unserialize($text)))
 		{
 			// here we generate new session id for utterly new, or stale/evil id offered by client
 			// (or file error, per se)
 			$this->set_new_id();
+			$this->regenerated = 2;
 
 			// create & lock new jar
 			if ($this->store_read($this->id, true) !== '')
@@ -184,6 +184,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		{
 			// we obtained (from the user or from the cookie) perfectly valid session id..
 			$this->id = $id;
+			$this->regenerated = 0;
 			if (!$id_from_cookie)
 			{
 				$this->send_cookie($this->name, $this->id);
@@ -273,7 +274,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$now = time();
 			isset($this->sticky__created)  or  $this->sticky__created = $now;
 
-			$this->__started = $now;
+			$this->__started =
 			$this->__regenerated = $now;
 			$this->__user_agent = $this->user_agent;
 			isset($this->cf_tls)  and  $this->__user_tls = $this->cf_tls;

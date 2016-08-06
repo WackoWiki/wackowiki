@@ -1,6 +1,6 @@
 <?php
 
-// not a class, just bootstrap code for index.php and admin.php
+// not a class, just bootstrap code for index.php
 
 if (!defined('IN_WACKO'))
 {
@@ -37,11 +37,9 @@ if (function_exists('date_default_timezone_set') && function_exists('date_defaul
 	date_default_timezone_set(@date_default_timezone_get());
 }
 
-// gzip_compression
-if (!ini_get('zlib.output_compression') && function_exists('ob_gzhandler') && !ob_start('ob_gzhandler'))
-{
-	ob_start();
-}
+// will compress manually to produce correct Content-Length header
+ini_set("zlib.output_compression", "Off");
+ob_start();
 
 // don't let cookies ever interfere with request vars
 $_REQUEST = array_merge($_GET, $_POST);
@@ -82,20 +80,3 @@ spl_autoload_register(function($name)
 		require_once $map[$name];
 	}
 });
-
-function finalize(&$db, &$http, &$engine)
-{
-	// so we can dbg other shutdown functions
-	$cwd = getcwd();
-	register_shutdown_function(function () use (&$db, &$http, &$engine, $cwd)
-	{
-		Diag::full_disclosure($db, $http, $engine, $cwd);
-	});
-	//register_shutdown_function(['Diag', 'full_disclosure'], $db, $http, $engine, getcwd());
-
-	// closing tags
-	if (strpos($http->method, '.xml') === false)
-	{
-		register_shutdown_function(function () { echo "\n</body>\n</html>"; });
-	}
-}
