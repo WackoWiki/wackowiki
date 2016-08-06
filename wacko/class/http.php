@@ -602,7 +602,7 @@ class Http
 
 		header('X-Served-By: sendfile');
 		header('Content-Length: ' . ($to - $from));
-		header('Content-Type: ' . $this->mime_type($path));
+		header('Content-Type: ' . ($type = $this->mime_type($path)));
 		header('Content-Disposition: inline; filename="' . ($filename ?: basename($path)) . '"');
 		header('Date: ' . Ut::http_date());
 
@@ -624,7 +624,8 @@ class Http
 		if ($from == 0 && $to == $size)
 		{
 			readfile($path);
-			$this->gzip();
+			// gzip only text files
+			preg_match('/^text|xml|javascript/i', $type) and $this->gzip();
 		}
 		else
 		{
@@ -726,7 +727,7 @@ class Http
 		{
 			if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], $x) !== false)
 			{
-				$text = gzencode(ob_get_contents(), 9);
+				$text = gzencode(ob_get_contents(), 4);
 				ob_end_clean();
 
 				header('Content-Encoding: ' . $x);
