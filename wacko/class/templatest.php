@@ -15,7 +15,7 @@ if (!defined('IN_WACKO'))
 
 class Templatest
 {
-	const CODE_VERSION = 6; // to not read incompatible cached data
+	const CODE_VERSION = 7; // to not read incompatible cached data
 	private static $store = [];
 	private static $filetimes;
 	private static $filecount;
@@ -254,10 +254,10 @@ class Templatest
 						{
 							if (isset($match[4]) && ($patname = $match[4]))
 							{
-								if ($patname === '_')
+								if (ctype_punct($patname))
 								{
 									// name anonymous one-off pattern to be unique in global space
-									$patname = 'f' . $meta['file'] . ':' . $lineno;
+									$patname = pathinfo($store[2][$meta['file']][0], PATHINFO_FILENAME) . ':' . $lineno;
 								}
 								$recall = $match[2] . ' ';
 							}

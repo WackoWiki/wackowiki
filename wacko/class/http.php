@@ -527,7 +527,7 @@ class Http
 		if (($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename))))
 		{
 			$this->status($code);
-			if (defined('HTTP_' . $code) && $this->sendfile0(constant('HTTP_' . $code)))
+			if (defined('HTTP_' . $code) && $this->sendfile0(constant('HTTP_' . $code), null, -1))
 			{
 				echo ($code == 404)? 'File not found' : 'File access prohibited';
 			}
@@ -552,50 +552,54 @@ class Http
 			return 403;
 		}
 
-		if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
-		{ 
-			// Ut::dbg('not modified');
-			$this->status(304);
-			return;
-		}
-
-		header('Last-Modified: ' . Ut::http_date($mtime));
-
 		$from = 0;
 		$to = $size;
 
-		if (isset($_SERVER['HTTP_RANGE']) && !$rec)
+		if ($age >= 0)
 		{
-			if (!preg_match('@^bytes=(\d*)-(\d*)(,\d*-\d*)*$@', $_SERVER['HTTP_RANGE'], $m)
-				|| ($m[1] === '' && $m[2] === '')
-				|| ($m[1] !== '' && $m[2] !== '' && (int)$m[1] > (int)$m[2])
-				|| ($m[1] !== '' && $m[1] > $size)
-				|| ($m[2] !== '' && $m[2] > $size))
-			{
-				$this->status(416);
-				header("Content-Range: bytes */$size"); // Required in 416.
+			if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
+			{ 
+				// Ut::dbg('not modified');
+				$this->status(304);
 				return;
 			}
 
-			if ($m[1] === '')
+			header('Last-Modified: ' . Ut::http_date($mtime));
+
+			if (isset($_SERVER['HTTP_RANGE']))
 			{
-				$from = $size - (int)$m[2];
+				if (!preg_match('@^bytes=(\d*)-(\d*)(,\d*-\d*)*$@', $_SERVER['HTTP_RANGE'], $m)
+					|| ($m[1] === '' && $m[2] === '')
+					|| ($m[1] !== '' && $m[2] !== '' && (int)$m[1] > (int)$m[2])
+					|| ($m[1] !== '' && $m[1] > $size)
+					|| ($m[2] !== '' && $m[2] > $size))
+				{
+					$this->status(416);
+					header("Content-Range: bytes */$size"); // Required in 416.
+					return;
+				}
+
+				if ($m[1] === '')
+				{
+					$from = $size - (int)$m[2];
+				}
+				else
+				{
+					$from = (int)$m[1];
+					$m[2] === ''  or  $to = (int)$m[2] + 1;
+				}
 			}
-			else
+
+			header('Accept-Ranges: bytes');
+
+			if ($from > 0 || $to < $size)
 			{
-				$from = (int)$m[1];
-				$m[2] === ''  or  $to = (int)$m[2] + 1;
+				$this->status(206);
+				header('Content-Range: bytes ' . $from . '-' . ($to - 1) . '/' . $size);
 			}
 		}
 
-		if ($from > 0 || $to < $size)
-		{
-			$this->status(206);
-			header('Content-Range: bytes ' . $from . '-' . ($to - 1) . '/' . $size);
-		}
-
-		header('Accept-Ranges: bytes');
-		header('Content-Length: ' . $to - $from + 1);
+		header('Content-Length: ' . ($to - $from + 1));
 		header('X-Served-By: sendfile');
 
 		header('Content-Type: ' . $this->mime_type($path));
