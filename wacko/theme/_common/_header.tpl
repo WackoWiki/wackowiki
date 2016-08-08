@@ -11,8 +11,8 @@ _common include file for themes
 		<meta name="robots" content="noindex, nofollow" />
 	=]
 	[= page _ =
-		<meta name="keywords" content="[ ' keywords |e attr ' ]" />
-		<meta name="description" content="[ ' description |e attr ' ]" />
+		<meta name="keywords" content="[ ' keywords |e ' ]" />
+		<meta name="description" content="[ ' description |e ' ]" />
 	=]
 	<meta name="language" content="[ ' lang ' ]" />
 	<link rel="stylesheet" href="[ ' db: theme_url ' ]css/default.css" />
@@ -40,7 +40,7 @@ _common include file for themes
 	[= edit _ =
 		['' // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages. '']
 		<script src="[ ' db: base_url ' ]js/protoedit.js"></script>
-		<script src="[ ' db: base_url ' ]js/lang/wikiedit.[ ' lang | e attr ' ].js"></script>
+		<script src="[ ' db: base_url ' ]js/lang/wikiedit.[ ' lang |e ' ].js"></script>
 		<script src="[ ' db: base_url ' ]js/wikiedit.js"></script>
 		<script src="[ ' db: base_url ' ]js/autocomplete.js"></script>
 	=]
