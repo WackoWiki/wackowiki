@@ -164,7 +164,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$id = null;
 		}
 
-		$this->store_open($this->cf_cookie_prefix . $this->name);
+		$this->store_open($this->name);
 
 		if (!$id || ($text = $this->store_read($id)) === false || !($data = Ut::unserialize($text)))
 		{

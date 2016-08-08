@@ -43,7 +43,7 @@ class SessionFileStore extends Session
 				$this->cryptokey = $key;
 			}
 
-			$this->prefix = $prefix;
+			$this->prefix = $this->cf_cookie_prefix . $prefix;
 		}
 	}
 

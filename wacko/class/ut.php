@@ -507,7 +507,7 @@ class Ut
 	static function http_date($time = null)
 	{
 		return gmdate('D, d M Y H:i:s',
-			Ut::is_empty($time)? time() : ($time < 0? 444444444 : $time)) . ' GMT';
+			Ut::is_empty($time)? time() : ($time < 0? 444444444 : (int) $time)) . ' GMT';
 	}
 
 	static function http64_encode($data)
@@ -520,7 +520,7 @@ class Ut
 		return base64_decode(strtr($data, '-_', '+/'));
 	}
 
-	// used to demange href()-built links for use out of html context (e.g. plain text emails)
+	// demangle href()-built links for use out of html context (e.g. plain text emails)
 	static function amp_decode($text)
 	{
 		return str_replace('&amp;', '&', $text);
