@@ -2783,7 +2783,7 @@ class Wacko
 	* @param string $anchor Optional HTTP anchor-fragment
 	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wakka 'rewrite_method' config-parameter)
 	*/
-	function href($method = '', $tag = '', $params = '', $addpage = false, $anchor = '')
+	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '')
 	{
 		if (!is_array($params))
 		{
@@ -4248,6 +4248,7 @@ class Wacko
 					$tpl->pull('_t', function ($block, $loc, $str) { return $this->_t($str); });
 					$tpl->pull('format_t', function ($block, $loc, $str) { return $this->format_t($str); });
 					$tpl->pull('db', function ($block, $loc, $str) { return $this->db[$str]; });
+					$tpl->pull('href', function ($block, $loc, $method = '', $param = '') { return $this->href($method, '', $param); });
 					$tpl->pull('csrf',
 						function ($block, $loc, $action)
 						{
@@ -4262,7 +4263,7 @@ class Wacko
 								'<input type="hidden" name="_nonce" value="' . $nonce . '" />' . "\n" .
 								'<input type="hidden" name="_action" value="' . $action . '" />' . "\n";
 						});
-					$tpl->setEncoding($this->charset); // STS TODO charset must be not static, tied into User instance
+					$tpl->setEncoding($this->charset);
 					$tpl->filter('time_formatted',
 						function ($value)
 						{
@@ -4277,6 +4278,7 @@ class Wacko
 								return '<input type="hidden" name="page" value="' . $match[1] . '" />';
 							}
 						});
+					$tpl->filter('_t', function ($str) { return $this->_t($str); });
 
 					// STS lotta goodies must go there..
 				}

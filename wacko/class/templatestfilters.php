@@ -408,4 +408,9 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		return $pref . $value . $post;
 	}
+
+	function filter_check($value, $on)
+	{
+		return ' value="' . (int)$on . '" ' . (((int)$value == (int)$on)? 'checked="checked" ' : '');
+	}
 }
