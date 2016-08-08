@@ -11,17 +11,22 @@
  * all reordering will be made (but values remain localized if already was)
  * incl. comments! :)
  *
- * no need to sync ALL languages manually - just edit english and push changes to other langs
- * (new messages will be english, though, and if translation is available but you change %1 or other
- * formatting - be aware: it is better to remove it, resync to other langs, than add new, resync again.
- * translation would be lost, though)
+ * no need to sync ALL languages manually - just edit english and push
+ * changes to other langs (new messages will be english, though, and if
+ * translation is available but you change %1 or other formatting - be
+ * aware: it is better to remove it, resync to other langs, than add
+ * new, resync again. translation would be lost, though)
  *
  * you can massively rename resource names, without losing available localizations:
  * use meta-comment in parent (first in cmd line) file:
 	// RENAME OldTag NewTag
 	'NewTag' => ...
- * e.g. resource himself must be manually renamed in parent
+ * note that resource himself must be manually renamed in parent.
  * after running 'relang wacko.en.php wacko.??.php' then - RENAME comment will be stripped from .en. too
+ * NB sorry "feature": if RENAMEs is the only change requested - nothing
+ * will be done except cutting it from parent file. just make one spare
+ * change (insert empty line) - run relang - than remove empty line -
+ * re-run relang :)
  *
  * enjoy! /sts
  *

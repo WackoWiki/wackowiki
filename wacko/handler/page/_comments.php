@@ -100,7 +100,7 @@ if ($this->has_access('read'))
 
 		$this->print_pagination($pagination);
 
-		echo '<h1><a href="'.$this->href('', '', 'show_comments=0').'" title="'.$this->_t('HideComments').'">'.$this->_t('Comments_all').'</a></h1>';
+		echo '<h1><a href="'.$this->href('', '', 'show_comments=0').'" title="'.$this->_t('HideComments').'">'.$this->_t('Comments').'</a></h1>';
 		echo "</header>\n";
 
 		// display comments themselves
@@ -312,20 +312,20 @@ if ($this->has_access('read'))
 	{
 		$c = $this->page['comments'];
 
-		if		($c  <  1)
+		if ($c < 1)
 		{
 			if ($this->has_access('comment'))
 			{
-				$show_comments = $this->_t('Comments_0');
+				$show_comments = $this->_t('Comments0');
 			}
 		}
 		else if	($c == 1)
 		{
-			$show_comments = $this->_t('Comments_1');
+			$show_comments = $this->_t('Comments1');
 		}
-		else if	($c  >  1)
+		else
 		{
-			$show_comments = str_replace('%1', $c, $this->_t('Comments_n'));
+			$show_comments = Ut::perc_replace($this->_t('CommentsN'), $c);
 		}
 
 		// show link to show comment only if there is one or/and user has the right to add a new one
