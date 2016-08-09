@@ -4,6 +4,11 @@
  Common header file.
 */
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 require Ut::join_path(THEME_DIR, '_common/_header.php');
 
 if (@$this->page['tag'] == $this->db->root_page)

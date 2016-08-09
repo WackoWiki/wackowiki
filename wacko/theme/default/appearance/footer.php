@@ -1,9 +1,13 @@
 <?php
-
 /*
  Default theme.
  Common footer file.
  */
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
 
 // If User has rights to edit page, show Edit link
 if ($this->has_access('write') && $this->method != 'edit')

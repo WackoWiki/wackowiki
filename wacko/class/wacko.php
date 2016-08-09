@@ -6103,10 +6103,7 @@ class Wacko
 		}
 
 		// check page watching
-		if ($user && $this->page && $this->is_watched($user['user_id'], $this->page['page_id']))
-		{
-			$this->is_watched = true;
-		}
+		$this->is_watched = ($user && $this->page && $this->is_watched($user['user_id'], $this->page['page_id']));
 
 		// check revision hideing (1 - guests, 2 - registered users)
 		$this->hide_revisions = ($this->page && !$this->is_admin()

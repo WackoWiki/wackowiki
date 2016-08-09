@@ -1,7 +1,7 @@
  Default theme.
  Common footer file.
 
-[ === main === ]
+[ === DefaultFoot === ]
 </main>
 <footer>
 <nav class="footer">
