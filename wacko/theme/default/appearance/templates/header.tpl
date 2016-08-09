@@ -3,7 +3,7 @@
 
 .include ../../../_common/_header.tpl
 
-[ === main === ]
+[ === DefaultHead === ]
 [''' h HtmlHead ''']
 <body>
 <div id="mainwrapper">

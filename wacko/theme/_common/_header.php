@@ -1,20 +1,22 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // HTTP header with right Charset settings
 header('Content-Type: text/html; charset=' . $this->get_charset());
 header_remove('X-Powered-By');
 
-$tpl->h_lang = $this->page['page_lang'];
+$tpl->h_lang = $this->page_lang;
 $tpl->h_charset = $this->get_charset();
 
-$tpl->h_title = @$this->page['title'] ?: $this->add_spaces($this->tag);
+!Ut::is_empty($tpl->h_title = @$this->page['title']) or $tpl->h_tag = $this->add_spaces($this->tag);
 $this->method == 'show' or $tpl->h_method = $this->method;
 
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
-if ($this->method != 'show' || !$this->page['latest'] || $this->db->noindex || $this->page['noindex'])
-{
-	$tpl->h_norobots = true;
-}
+$tpl->h_norobots = ($this->method != 'show' || $this->db->noindex || !$this->page || !$this->page['latest'] || $this->page['noindex']);
 
 if ($this->has_access('read'))
 {

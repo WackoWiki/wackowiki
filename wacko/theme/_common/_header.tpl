@@ -5,7 +5,7 @@ _common include file for themes
 <html lang="[ ' lang ' ]">
 <head>
 	<meta charset="[ ' charset ' ]" />
-	<title>[ ' title ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name |e ' ]</title>
+	<title>[ ' title |e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name |e ' ]</title>
 	[= norobots _ =
 		['' nonstatic // dummy to make pattern non-static '']
 		<meta name="robots" content="noindex, nofollow" />
