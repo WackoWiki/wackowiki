@@ -565,7 +565,7 @@ $wacko_translation = array(
 	'EmailForgotMessage'		=> 'Kto¶ (prawdopodobnie Ty) zapomnia³ swojego has³a do %1'."\n".'Twój login: %2'."\n\n".'Kliknij na '."\n".'%3'."\n".' albo skopiuj adres do przegl±darki, aby zmieniæ swoje has³o.'."\n\n".'',
 	'CodeWasSent'				=> 'Instrukcje odzyskiwania has³a zosta³y wys³ane do ciebie przez e-mail',
 	'WrongCode'					=> 'Z³y kod',
-	'YouWantChangePasswordForUser' => 'Zmiana has³a %1',
+	'ChangePasswordForUser'		=> 'Zmiana has³a %1',
 
 	'Watchers'					=> 'Lista obserwatorów na %1',
 	'NoWatchers'				=> 'Nie ma obserwatorów na %1',

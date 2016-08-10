@@ -565,7 +565,7 @@ $wacko_translation = array(
 	'EmailForgotMessage'		=> 'Iemand (vermoedelijk uzelf) heeft om een nieuw wachtwoord voor %1 gevraagd.'."\n".'Uw gebruikersnaam: %2'."\n\n".'Klik op onderstaande link of kopieer het adres naar uw internetbrowser om uw wachtwoord te wijzigen.'."\n".'%3'."\n\n".'',
 	'CodeWasSent'				=> 'Er is een instructie om uw wachtwoord te resetten naar uw emailadres verstuurd.',
 	'WrongCode'					=> 'Verkeerde code',
-	'YouWantChangePasswordForUser' => 'Wachtwoord veranderen voor %1',
+	'ChangePasswordForUser'		=> 'Wachtwoord veranderen voor %1',
 
 	'Watchers' => 'Watchers voor %1',
 	'NoWatchers' => 'Er zijn geen mensen die %1 in de gaten houden.',
