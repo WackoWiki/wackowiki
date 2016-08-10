@@ -266,7 +266,7 @@ class Http
 		}
 	}
 
-	public function session()
+	public function session($route)
 	{
 		if (1) // STS TODO need config'ing
 		{
@@ -288,6 +288,13 @@ class Http
 
 		$sess->cf_ip				= $this->real_ip; // STS hack. need to decide where real_ip should live
 		$sess->cf_tls				= $this->tls_session;
+
+		// for freecap, /file method and alike - do not play in NoReplay & do no simple id regen
+		if ($route & 2)
+		{
+			$sess->cf_static = 1;
+			$sess->cf_prevent_replay = 0;
+		}
 
 		$sess->start('Session');
 		$this->sess = & $sess;

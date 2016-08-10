@@ -27,12 +27,13 @@ if (($db->is_locked($db->ap_mode? AP_LOCK : SITE_LOCK) && !isset($route['unlock'
 if (isset($route['session']))
 {
 	$http->http_security_headers();
-	$http->session();
+	$http->session($route['session']);
 }
 
 if (isset($route['engine']))
 {
 	$engine = new Wacko($db, $http);
+	$http->sess and $engine->session_notice($http->sess->message());
 }
 
 switch ($route['route'])

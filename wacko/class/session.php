@@ -19,7 +19,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	public $cf_ip;					// set by http class... STS must decide on bad coupling between session & http class
 	public $cf_tls;					// if !isset - must not act on this values (i.e. from freecap)
 
-	public $cf_static = 0;			// for use in e.g. captcha: do no regenerationss
+	public $cf_static = 0;			// for use in e.g. captcha: do no regenerations
 	public $cf_secret = 'adyaiD9+255JeiskPybgisby'; // just for lulz. supply from above!
 	public $cf_nonce_lifetime = 7200;
 	public $cf_prevent_replay = 1;
@@ -201,7 +201,14 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if (isset($this->__started) && !$this->cf_static)
 		{
 			$message = '';
-			if (isset($this->__expire) && !$this->__expire)
+			$noreplay = null;
+
+			if ($this->cf_prevent_replay && !($noreplay = $this->verify_nonce('NoReplay', $this->get_cookie($this->name . 'NoReplay'), 3)))
+			{
+				$message = 'replay';
+				$destroy = 2;
+			}
+			else if (isset($this->__expire) && !$this->__expire)
 			{
 				$message = 'obsolete';
 				$destroy = 2;
@@ -219,11 +226,6 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			else if ($now - $this->__updated > $this->cf_max_idle)
 			{
 				$message = 'max_idle';
-				$destroy = 2;
-			}
-			else if ($this->cf_prevent_replay && !$this->verify_nonce('NoReplay', $this->get_cookie($this->name . 'NoReplay'), 3))
-			{
-				$message = 'replay';
 				$destroy = 2;
 			}
 			else if (!similar_text($this->__user_agent, $this->user_agent, $perc) || $perc < 95)
@@ -247,7 +249,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				$destroy = 0;
 			}
 
-			if (isset($destroy))
+			// if noreplay nonce was used 2nd time - it is ajax'y fast replay, so leave all active regen stuff till more consistent time
+			if ($noreplay === -1)
+			{
+				$this->cf_prevent_replay = 0;
+				$this->regenerated = 3;
+			}
+			else if (isset($destroy))
 			{
 				$this->message = $message;
 				Ut::dbg($destroy, $message);
@@ -414,6 +422,10 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				if ((int)$nonces[$index] == $nonces[$index])
 				{
 					$nonces[$index] = time() + $protect + 0.01;
+				}
+				else
+				{
+					$ret = -1; // repeated usage of protected nonce
 				}
 			}
 			else

@@ -21,18 +21,18 @@ class Wacko
 	var $categories;
 	var $is_watched				= false;
 	var $hide_revisions			= false;
-	var $_acl					= array();
-	var $acl_cache				= array();
-	var $page_id_cache			= array();
-	var $context				= array();	// Page context. Uses for correct processing of inclusions
+	var $_acl					= [];
+	var $acl_cache				= [];
+	var $page_id_cache			= [];
+	var $context				= [];	// Page context. Uses for correct processing of inclusions
 	var $current_context		= 0;		// Current context level
 	var $header_count			= 0;
 	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
-	var $first_inclusion		= array();	// for backlinks
+	var $first_inclusion		= [];	// for backlinks
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link
-	var $unicode_entities		= array();	// common unicode array
-	var $toc_context			= array();
-	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
+	var $unicode_entities		= [];	// common unicode array
+	var $toc_context			= [];
+	var $search_engines			= ['bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', ];
 	var $languages				= null;
 	var $translations			= null;
 	var $wanted_cache			= null;
@@ -44,46 +44,46 @@ class Wacko
 	var $html_head				= '';
 	var $hide_article_header	= false;
 	var $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
-	var $paragrafica_styles		= array(
-		'before'	=> array(
+	var $paragrafica_styles		= [
+		'before'	=> [
 						'_before'	=> '',
 						'_after'	=> '',
 						'before'	=> '<span class="pmark">[##]</span><br />',
-						'after'		=> ''),
-		'after'		=> array(
+						'after'		=> ''],
+		'after'		=> [
 						'_before'	=> '',
 						'_after'	=> '',
 						'before'	=> '',
-						'after'		=> '<span class="pmark">[##]</span>'),
-		'right'		=> array(
+						'after'		=> '<span class="pmark">[##]</span>'],
+		'right'		=> [
 						'_before'	=> '<div class="pright"><div class="p-">&nbsp;<span class="pmark">[##]</span></div><div class="pbody-">',
 						'_after'	=> '</div></div>',
 						'before'	=> '',
-						'after'		=> ''),
-		'left'		=> array(
+						'after'		=> ''],
+		'left'		=> [
 						'_before'	=> '<div class="pleft"><div class="p-"><span class="pmark">[##]</span>&nbsp;</div><div class="pbody-">',
 						'_after'	=> '</div></div>',
 						'before'	=> '',
-						'after'		=> ''),
-	);
-	var $paragrafica_patches = array(
-		'before'	=> array('before'),
-		'after'		=> array('after'),
-		'right'		=> array('_before'),
-		'left'		=> array('_before'),
-	);
-	var $translit_macros = array(
+						'after'		=> ''],
+	];
+	var $paragrafica_patches = [
+		'before'	=> ['before'],
+		'after'		=> ['after'],
+		'right'		=> ['_before'],
+		'left'		=> ['_before'],
+	];
+	var $translit_macros = [
 		'âèêè'		=> 'wiki',
 		'âàêà'		=> 'wacko',
-		'âåá'		=> 'web'
-	);
-	var $time_intervals = array(
+		'âåá'		=> 'web',
+	];
+	var $time_intervals = [
 		30*DAYSECS	=> 'Month',
 		7*DAYSECS	=> 'Week',
 		DAYSECS		=> 'Day',
 		60*60		=> 'Hour',
-		60			=> 'Minute'
-	);
+		60			=> 'Minute',
+	];
 
 	/**
 	* CONSTRUCTOR
@@ -717,8 +717,8 @@ class Wacko
 
 	function utf8_to_unicode_entities($source)
 	{
-		$decrement	= array();
-		$shift		= array();
+		$decrement	= [];
+		$shift		= [];
 
 		// array used to figure what number to decrement from character order value
 		// according to number of characters used to map unicode to ascii by utf-8
@@ -1278,7 +1278,7 @@ class Wacko
 	function cache_links()
 	{
 		$pages		= '';
-		$page_id	= array();
+		$page_id	= [];
 		$acl		= '';
 		$user		= $this->get_user();
 		$lang		= $this->get_user_language();
@@ -1605,7 +1605,7 @@ class Wacko
 				}
 			}
 
-			return array($pages, $pagination);
+			return [$pages, $pagination];
 		}
 	}
 
@@ -2863,7 +2863,7 @@ class Wacko
 		// if (!$addpage)		$tag = $this->translit($tag);
 
 		$tag = trim($tag, '/.');
-		// $tag = str_replace(array('%2F', '%3F', '%3D'), array('/', '?', '='), rawurlencode($tag));
+		// $tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
 
 		return $tag.($method ? '/'.$method : '');
 	}
@@ -2981,7 +2981,7 @@ class Wacko
 		$icon		= '';
 		$img_link	= false;
 		$lang		= '';
-		$matches	= array();
+		$matches	= [];
 		$url		= '';
 		$text		= str_replace('"', '&quot;', $text);
 
@@ -4041,7 +4041,7 @@ class Wacko
 		}
 		else
 		{
-			$this->linktable = array();
+			$this->linktable = [];
 			$this->start_link_tracking();
 			$this->format($body_r, 'post_wacko');
 			$this->stop_link_tracking();
@@ -4447,10 +4447,10 @@ class Wacko
 		}
 
 		// substitutions table
-		$table = array(
+		$table = [
 			'cyr' => 'ÀÂÑÄÅÍÊÌÎÐÒÕÓàñåêìïîðãèòõó0áI1',
-			'lat' => 'ABCDEHKMOPTXYacekmnoprutxyÎ6ll'
-		);
+			'lat' => 'ABCDEHKMOPTXYacekmnoprutxyÎ6ll',
+		];
 
 		// splitting input name into array
 		$user_name = preg_split('//', $user_name, -1, PREG_SPLIT_NO_EMPTY);
@@ -4459,7 +4459,7 @@ class Wacko
 		// so we're constructing $p array with username chars needing
 		// substitution positions as keys, and corresponding table positions
 		// as array values
-		$p = array();
+		$p = [];
 
 		foreach ($user_name as $pos => &$char)
 		{
@@ -4762,8 +4762,31 @@ class Wacko
 	function soft_login($user)
 	{
 		$this->sess->restart();
+		$this->sess->sticky_login = 1;
 		$this->set_user($user);
 		$this->set_message(Ut::perc_replace($this->_t('WelcomeBack'), $user['user_name']), 'success');
+	}
+
+	function session_notice($message)
+	{
+		if ($message && @$this->sess->sticky_login)
+		{
+			// TODO make message readable
+			/*$tr = [
+				'replay' => 'replay',
+				'obsolete' => 'obsolete',
+				'reg_expire' => 'reg_expire',
+				'max_session' => 'max_session',
+				'max_idle' => 'max_idle',
+				'ua' => 'ua',
+				'tls' => 'tls',
+				'ip' => 'ip',
+			];*/
+
+			$this->set_message('Session terminated due to ' . $message);
+			$this->sess->sticky_login = 0;
+			$this->set_menu(MENU_DEFAULT);
+		}
 	}
 
 	// explicitly end user session and free session vars
@@ -4777,7 +4800,7 @@ class Wacko
 			$this->sess->delete_cookie(AUTH_TOKEN);
 
 			$this->sess->restart();
-
+			$this->sess->sticky_login = 0;
 			$this->set_menu(MENU_DEFAULT);
 			$this->set_message($this->_t('LoggedOut'), 'success');
 			$this->log(5, Ut::perc_replace($this->_t('LogUserLoggedOut', SYSTEM_LANG), $user['user_name']));
@@ -5178,13 +5201,13 @@ class Wacko
 					// if still no acl, use config defaults
 					if (!$acl)
 					{
-						$acl = array(
+						$acl = [
 							'page_id' => $page_id,
 							'privilege' => $privilege,
 							'list' => $this->db->{'default_'.$privilege.'_acl'},
 							'time' => date('YmdHis'),
-							'default' => 1
-						);
+							'default' => 1,
+						];
 					}
 				}
 
@@ -5343,7 +5366,7 @@ class Wacko
 	// aliases stuff
 	function replace_aliases($acl)
 	{
-		$aliases = array();
+		$aliases = [];
 
 		if (!isset($this->db->aliases) || !is_array($this->db->aliases))
 		{
@@ -5357,7 +5380,7 @@ class Wacko
 
 		do
 		{
-			$list		= array();
+			$list		= [];
 			$lines		= explode("\n", $acl);
 			$replaced	= 0;
 
@@ -5529,7 +5552,7 @@ class Wacko
 
 	function get_user_menu($user_id, $lang = '')
 	{
-		$user_menu_formatted = array();
+		$user_menu_formatted = [];
 
 		// avoid results if $user_id is 0 (user does not exists)
 		if ($user_id)
@@ -5551,15 +5574,15 @@ class Wacko
 				{
 					$title = $menu_item['title'];
 				}
-				$user_menu_formatted[] = array(
+				$user_menu_formatted[] = [
 					$menu_item['page_id'],
 					(($title !== '')? $title : $menu_item['tag']),
 					'(('.$menu_item['tag'].
 						(($title !== '')? ' '.$title : '').
 						($menu_item['menu_lang']? ' @@'.$menu_item['menu_lang'] : '').
 					'))',
-					$menu_item['menu_lang']
-				);
+					$menu_item['menu_lang'],
+				];
 			}
 		}
 
@@ -5589,8 +5612,8 @@ class Wacko
 			}
 
 			// parsing menu items into link table
-			$menu_page_ids = array();
-			$menu_formatted = array();
+			$menu_page_ids = [];
+			$menu_formatted = [];
 
 			foreach ($menu as $menu_item)
 			{
@@ -5634,12 +5657,12 @@ class Wacko
 				$title	= $this->get_page_title();
 				$lang	= ($user['user_lang'] != $this->page_lang)? $this->page_lang : '';
 				$menu_page_ids[] = $this->page['page_id'];
-				$menu_formatted[] = array(
+				$menu_formatted[] = [
 					$this->page['page_id'],
 					($title? $title : $this->tag),
 					$this->format('(('.$this->tag.($title? ' '.$title : '').($lang? ' @@'.$lang : '').'))', 'wacko'),
-					$lang
-				);
+					$lang,
+				];
 
 				$this->db->sql_query(
 					"INSERT INTO ".$this->db->table_prefix."menu SET ".
@@ -5656,8 +5679,8 @@ class Wacko
 			unset($_GET['removebookmark']);
 			// rewriting menu table except containing current page tag
 			$prev = $menu_formatted;
-			$menu_page_ids = array();
-			$menu_formatted = array();
+			$menu_page_ids = [];
+			$menu_formatted = [];
 
 			foreach ($prev as $menu_item)
 			{
@@ -5736,7 +5759,7 @@ class Wacko
 					}
 
 					#echo '### 5';
-					$_user_trail[-1]	= array ($page_id, $this->page['tag'], $this->page['title']);
+					$_user_trail[-1]	= [$page_id, $this->page['tag'], $this->page['title']];
 					$user_trail			= $this->sess->user_trail + $_user_trail;
 					$user_trail			= array_values($user_trail);
 
@@ -5746,7 +5769,7 @@ class Wacko
 			else
 			{
 				#echo '### 6';
-				$this->sess->user_trail[] = array ($page_id, $this->page['tag'], $this->page['title']);
+				$this->sess->user_trail[] = [$page_id, $this->page['tag'], $this->page['title']];
 			}
 		}
 	}
@@ -6192,7 +6215,7 @@ class Wacko
 			$toc[$k] = explode('<heading,col>', $toc_item);
 		}
 
-		$_toc = array();
+		$_toc = [];
 
 		foreach ($toc as $k => $toc_item)
 		{
@@ -6245,7 +6268,7 @@ class Wacko
 		}
 
 		// #1. hash toc
-		$hash = array();
+		$hash = [];
 
 		foreach ($this->post_wacko_toc as $v)
 		{
@@ -6259,7 +6282,7 @@ class Wacko
 			// #2. find all <hX></hX> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
 			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)!i",
-				array(&$this, 'numerate_toc_callback_toc'), $what);
+				[&$this, 'numerate_toc_callback_toc'], $what);
 		}
 
 		if (isset($this->post_wacko_action['p']))
@@ -6267,7 +6290,7 @@ class Wacko
 			// #2. find all <p class="auto"> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
 			$what = preg_replace_callback("!(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">(.+?)</p>)!is",
-				array(&$this, 'numerate_toc_callback_p'), $what);
+				[&$this, 'numerate_toc_callback_p'], $what);
 		}
 
 		return $what;
@@ -7197,7 +7220,7 @@ class Wacko
 	// page
 	function get_categories_list($lang, $cache = true, $root = false)
 	{
-		$categories = array();
+		$categories = [];
 
 		if ($_categories = $this->db->load_all(
 		"SELECT category_id, parent_id, category ".
@@ -7231,11 +7254,11 @@ class Wacko
 			// process categories names
 			foreach ($_categories as $word)
 			{
-				$categories[$word['category_id']] = array(
+				$categories[$word['category_id']] = [
 					'parent_id'	=> $word['parent_id'],
 					'category'	=> $word['category'],
-					'n'			=> (isset($counts[$word['category_id']]) ? $counts[$word['category_id']] : '')
-				);
+					'n'			=> (isset($counts[$word['category_id']]) ? $counts[$word['category_id']] : ''),
+				];
 			}
 
 			foreach ($categories as $id => $word)
@@ -7311,11 +7334,11 @@ class Wacko
 				// Decimal prefix
 				if($short === true)
 				{
-					$norm = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+					$norm = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 				}
 				else
 				{
-					$norm = array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte');
+					$norm = ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'];
 				}
 
 				$factor = 1000;
@@ -7325,11 +7348,11 @@ class Wacko
 				// Binary prefix
 				if($short === true)
 				{
-					$norm = array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB');
+					$norm = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
 				}
 				else
 				{
-					$norm = array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte');
+					$norm = ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'];
 				}
 
 				$factor = 1024;
