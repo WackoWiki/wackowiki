@@ -145,7 +145,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		{
 			$tpl->u_last_hidden = true;
 		}
-		else if ($user['last_visit'] === SQL_DATE_NULL)
+		else if ($this->db->is_null_date($user['last_visit']))
 		{
 			$tpl->u_last_na = true;
 		}
@@ -546,7 +546,7 @@ else
 				{
 					$tpl->l_u_reg_sess_hidden = true;
 				}
-				else if ($user['last_visit'] === SQL_DATE_NULL)
+				else if ($this->db->is_null_date($user['last_visit']))
 				{
 					$tpl->l_u_reg_sess_na = true;
 				}
