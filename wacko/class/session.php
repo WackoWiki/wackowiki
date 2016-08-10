@@ -84,7 +84,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if (headers_sent($file, $line))
 		{
 			trigger_error("id regeneration requested after headers flushed at $file:$line", E_USER_WARNING);
-			Ut::dbg("regeneration failed by flush at $file:$line");
+			# Ut::dbg("regeneration failed by flush at $file:$line");
 		}
 		else if ($this->active)
 		{
@@ -258,7 +258,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			else if (isset($destroy))
 			{
 				$this->message = $message;
-				Ut::dbg($destroy, $message);
+				# Ut::dbg($destroy, $message);
 				$this->regenerate_id($destroy, $message);
 
 				if ($destroy == 2)
@@ -378,7 +378,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		if ($this->cf_prevent_replay)
 		{
-			$this->send_cookie($this->name . 'NoReplay', 
+			$this->send_cookie($this->name . 'NoReplay',
 				$this->create_nonce('NoReplay', $this->cf_max_session));
 		}
 	}
@@ -392,13 +392,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 	{
 		$code = Ut::random_token(11);
 		$this->__nonces[static::nonce_index($action, $code)] = time() + ($expires ?: $this->cf_nonce_lifetime);
-		Ut::dbg('+++', $action, $code);
+		# Ut::dbg('+++', $action, $code);
 		return $code;
 	}
 
 	public function verify_nonce($action, $code, $protect = 0)
 	{
-		Ut::dbg('???', $action, $code);
+		# Ut::dbg('???', $action, $code);
 		if (!($nonces = @$this->__nonces))
 		{
 			return false;
@@ -545,7 +545,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if (headers_sent($file, $line))
 		{
 			trigger_error("cannot place session cookie $name=$value due to $file:$line", E_USER_WARNING);
-			Ut::dbg("session setcookie $name failed by $file:$line");
+			# Ut::dbg("session setcookie $name failed by $file:$line");
 			return;
 		}
 
