@@ -115,7 +115,7 @@ class SessionDbalStore extends Session
 				session_expire < "' . time() . '"
 		');
 
-		Ut::dbg('gc', $this->db->affected_rows);
+		# Ut::dbg('gc', $this->db->affected_rows);
 
 		return $this->db->affected_rows;
 	}

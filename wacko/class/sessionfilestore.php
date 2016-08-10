@@ -162,7 +162,7 @@ class SessionFileStore extends Session
 			if ($nstats > 600 || $ndels > 100) break; // TODO magic number
 		}
 
-		Ut::dbg('gc', $nstats, $ndels);
+		# Ut::dbg('gc', $nstats, $ndels);
 
 		return $ndels;
 	}
