@@ -565,7 +565,7 @@ $wacko_translation = array(
 	'EmailForgotMessage'		=> 'Alguém (talvez voçê) esqueceu-se da password para  %1.'."\n".'O seu login: %2'."\n\n".'Clique no link ou copie para a linha de endereço do seu browser para mudar a sua password.'."\n".'%3'."\n\n".'',
 	'CodeWasSent'				=> 'Instruções para recuperação de Password foram-lhe enviadas por e-mail.',
 	'WrongCode'					=> 'Wrong code',
-	'YouWantChangePasswordForUser'	=> '%1 viu a sua password alterada',
+	'ChangePasswordForUser'		=> '%1 viu a sua password alterada',
 
 	'Watchers'					=> 'Lista de quem acompanha %1',
 	'NoWatchers'				=> 'Não ninguém a acompanhar %1',

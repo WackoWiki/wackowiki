@@ -565,7 +565,7 @@ $wacko_translation = array(
 	'EmailForgotMessage'		=> 'Quelqu&rsquo;un (peut-être vous) a perdu son mot de passe pour %1.'."\n".'Votre nom d&rsquo;utilisateur ou NomWiki&nbsp;: %2'."\n\n".'Cliquez sur le lien ou copiez-le dans votre navigateur pour changer votre mot de passe.'."\n".'%3'."\n\n".'',
 	'CodeWasSent'				=> 'Les instructions pour obtenir un nouveau mot de passe vous ont été envoyées par courriel.',
 	'WrongCode'					=> 'Code erroné',
-	'YouWantChangePasswordForUser'	=> 'Changement de mot de passe pour %1',
+	'ChangePasswordForUser'		=> 'Changement de mot de passe pour %1',
 
 	'Watchers'					=> 'Liste des utilisateurs qui surveillent %1',
 	'NoWatchers'				=> 'Personne ne surveille %1',

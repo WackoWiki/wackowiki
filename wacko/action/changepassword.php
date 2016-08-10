@@ -139,7 +139,7 @@ if ($user)
 {
 	if ($code)
 	{
-		$tpl->c_title = $this->format(Ut::perc_replace($this->_t('YouWantChangePasswordForUser'), $user['user_name']));
+		$tpl->c_title = $this->format(Ut::perc_replace($this->_t('ChangePasswordForUser'), $user['user_name']));
 		$tpl->c_secret_code = $code;
 	}
 	else

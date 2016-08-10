@@ -565,7 +565,7 @@ $wacko_translation = array(
 	'EmailForgotMessage'		=> 'Dette er en reminder om password for %1.'."\n".'Dit brugerlogin: %2'."\n\n".'Følg dette link: '."\n".'%3'."\n\n".'',
 	'CodeWasSent'				=> 'Password instruktioner sendt til din mail.',
 	'WrongCode'					=> 'Forkert kode',
-	'YouWantChangePasswordForUser'	=> '%1\'s password opdatering',
+	'ChangePasswordForUser'		=> '%1\'s password opdatering',
 
 	'Watchers'					=> 'Abonnenter til %1',
 	'NoWatchers'				=> 'Ingen abonnenter til %1',

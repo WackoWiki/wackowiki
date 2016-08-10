@@ -565,7 +565,7 @@ $wacko_translation = array(
 	'EmailForgotMessage'		=> 'Keegi (võib-olla sa ise) on unustanud su parooli %1.'."\n".'Kasutajanimi: %2'."\n\n".'Vajuta lingil, või kopeeri see brauseri aadressi väljale - et muuta oma parool.'."\n".'%3'."\n\n".'',
 	'CodeWasSent'				=> 'Parooli muutmise instruktsioonid saadeti sulle e-postile.',
 	'WrongCode'					=> 'Vale kood',
-	'YouWantChangePasswordForUser' => '%1\'s parooli muutmine',
+	'ChangePasswordForUser'		=> '%1\'s parooli muutmine',
 
 	'Watchers' => '%1 vaatajate nimekiri ',
 	'NoWatchers' => 'Keegi ei jälgi %1',

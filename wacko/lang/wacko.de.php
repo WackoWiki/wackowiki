@@ -77,7 +77,7 @@ $wacko_translation = array(
 	'SessionEnds'				=> 'Die aktuelle Sitzung endet',
 	'LastVisit'					=> 'Dein letzter Besuch',
 
-	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
+	'LoginIncorrect'			=> 'Der Benutzername oder das eingegebene Passwort ist ungültig.',
 	'WelcomeBack'				=> 'Welcome back, %1',
 	'LoginAttemtsExceeded'		=> 'Du hast die maximal zulässige Zahl von Anmeldeversuchen überschritten.<br />Du musst nun deinen Benutzernamen und dein Passwort erneut eingeben sowie eine Sicherheitsabfrage beantworten.',
 
@@ -112,10 +112,10 @@ $wacko_translation = array(
 	'NumerateLinks'				=> 'Links in der Druckansicht extra ausweisen',
 	'Typografica'				=> 'Autokorrektur im Ansichtsmodus',
 	'Comment'					=> 'Kommentar',
-	'Comments0'				=> 'Kommentieren',
-	'Comments1'				=> 'Kommentare lesen (1 Beitrag)',
-	'CommentsN'				=> 'Kommentare lesen (%1 Beiträge)',
-	'Comments'				=> 'Kommentare',
+	'Comments0'					=> 'Kommentieren',
+	'Comments1'					=> 'Kommentare lesen (1 Beitrag)',
+	'CommentsN'					=> 'Kommentare lesen (%1 Beiträge)',
+	'Comments'					=> 'Kommentare',
 	'CommentEdited'				=> 'bearbeitet',
 	'Links'						=> 'Links',
 	'Version'					=> 'Version',
@@ -241,8 +241,8 @@ $wacko_translation = array(
 	'TagCloud'					=> 'Wortwolke',
 
 	// source handler
-	'SourceText'				=> 'Source',
-	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
+	'SourceText'				=> 'Quelltext',
+	'SourceTip'					=> 'Zeige den Wiki-Quelltext (no %%-formatters shown)',
 	'SourceFrom'				=> 'Das Original findet sich unter: ',
 	'SourceFromLink'			=> 'Link',
 	'SourceCopyToClipboard'		=> 'In die Zwischenablage speichern',
@@ -287,8 +287,8 @@ $wacko_translation = array(
 	'YouAreNowTheOwner'			=> 'Du bist nicht der Besitzer dieser Seite.',
 
 	'DiffMode0'					=> 'vollständiger Vergleich',
-	'DiffMode1'				=> 'einfacher Vergleich',
-	'DiffMode2'				=> 'Quelltext',
+	'DiffMode1'					=> 'einfacher Vergleich',
+	'DiffMode2'					=> 'Quelltext',
 	'DiffMode3'					=> 'Side by side',
 	'DiffMode4'					=> 'Inline',
 	'DiffMode5'					=> 'Unified',
@@ -409,7 +409,7 @@ $wacko_translation = array(
 	'RealName'					=> 'Vollständiger Name',
 	'MenuItemsShown'			=> 'Gezeigte Menüpunkte',
 	'RecordsPerPage'			=> 'Datensätze pro Seite',
-	'DoShowComments'				=> 'Zeige Kommentare',
+	'DoShowComments'			=> 'Zeige Kommentare',
 	'DoubleclickEditing'		=> 'Editieren durch Doppelklick',
 	'UpdateSettingsButton'		=> 'Speichere Einstellungen',
 
@@ -465,9 +465,9 @@ $wacko_translation = array(
 	'PageCloned'				=> 'Seite %1 geklont.',
 	'ClonedFrom'				=> 'Geklont von %1.',
 	'MassClone'					=> 'Klone gesamten Cluster',
-	'MassCloning'				=> 'Cloning cluster.',
-	'CloneCannotRead'			=> 'Unreadable page <strong>%1</strong>.',
-	'CloneCannotCreate'			=> 'Uncreatable page <strong>%1</strong>.',
+	'MassCloning'				=> 'Klone Cluster.',
+	'CloneCannotRead'			=> 'Seite <strong>%1</strong> lässt sich nicht lesen.',
+	'CloneCannotCreate'			=> 'Seite <strong>%1</strong> lässt sich nicht erstellen.',
 
 	'SortComment'				=> 'Kommentare sortieren',
 	'SortCommentAsc'			=> 'Neueste unten',
@@ -565,7 +565,7 @@ $wacko_translation = array(
 	'EmailForgotMessage'		=> 'Jemand (vielleicht du) hat sein Passwort für %1 vergessen.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um dein Passwort zu ändern, folge diesem Link oder kopiere ihn in die Adresszeile deines Browsers.'."\n".'%3'."\n\n".'',
 	'CodeWasSent'				=> 'Eine E-Mail mit Informationen zu deinem Passwort wurde versandt.',
 	'WrongCode'					=> 'Falscher Code',
-	'YouWantChangePasswordForUser'	=> '%1\'s Passwort Änderung',
+	'ChangePasswordForUser'		=> '%1\'s Passwort Änderung',
 
 	'Watchers'					=> 'Beobachter für %1',
 	'NoWatchers'				=> 'Keine Beobachter für %1',
@@ -604,9 +604,9 @@ $wacko_translation = array(
 	'UsersPages'				=> 'Seiten',
 	'UsersComments'				=> 'Kommentare',
 	'UsersUploads'				=> 'Uploads',
-	'UploadQuota'				=> 'Used space',
-	'UploadQuotaTip'			=> 'Upload Space Quota',
-	'UsersLogins'				=> 'Logins',
+	'UploadQuota'				=> 'Kontingent belegt',
+	'UploadQuotaTip'			=> 'Upload Kontingent',
+	'UsersLogins'				=> 'Anmeldungen',
 	'UsersRevisions'			=> 'Revisionen',
 	'UsersSignup'				=> 'Anmeldung',
 	'UsersLastSession'			=> 'Letzter Besuch',
@@ -716,7 +716,7 @@ $wacko_translation = array(
 	'SettingsWordprocessor'		=> 'Textverarbeitungs-Version',
 	'SettingsLatex'				=> 'LaTeX Version',
 	'SettingsXML'				=> 'Export als XML',
-	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
+	'NeedToChangeLang'			=> 'Die gewählte Seitengprache "<code>%1</code>" wird nicht unterstützt und muss geändert werden.',
 	'BewareChangeLang'			=> 'Verändere nicht die Spracheinstellungen, wenn du dir nicht sicher bist, was du tust. Eine Änderung der Sprache kann zur Änderung des Namens der Seite führen, in Abhängigkeit von den sprachlichen Besonderheiten der neu gewählten Sprache. Möglicherweise wird der gesamte Inhalt nicht mehr lesbar sein. Du kannst diesen Schritt rückgängig machen, indem du die Spracheinstellungen wieder auf den Ursprungswert zurückstellst.',
 	'SetLang'					=> 'Sprache dieser Seite',
 	'SetMenuLabel'				=> 'Menü-Label',
@@ -767,7 +767,7 @@ $wacko_translation = array(
 	'Files0'					=> 'Dateien (0)',
 	'Files1'					=> 'Dateien (1)',
 	'FilesN'					=> 'Dateien (%1)',
-	'Files'					=> 'Dateien',
+	'Files'						=> 'Dateien',
 	'ShowFiles'					=> 'Zeige Dateien',
 	'HideFiles'					=> 'Verberge Dateien',
 	'DoShowFiles'				=> 'Zeige Dateiliste',
@@ -1189,8 +1189,8 @@ $wacko_translation = array(
 	'LogPageEdited'				=> 'Seite bearbeitet [[/%1]]',
 	'LogCommentEdited'			=> 'Kommentar bearbeitet [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Datei Metadaten für ##%2## von Seite [[/%1]] aktualisiert',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
-									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
+	'ErrorMinPHPVersion'		=> 'Die PHP Version muss größer sein als <strong>'.PHP_MIN_VERSION.
+									'</strong>, der Server scheint die Version <strong>'.PHP_VERSION.'</strong> zu nutzen.'.
+									'  Aktualisiere bitte PHP auf eine neuere Version, damit  WackoWiki ordnungsgemäß funtioniert.',
 
 );
