@@ -4785,7 +4785,6 @@ class Wacko
 
 			$this->set_message('Session terminated due to ' . $message);
 			$this->sess->sticky_login = 0;
-			$this->set_menu(MENU_DEFAULT);
 		}
 	}
 
