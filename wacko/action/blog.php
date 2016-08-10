@@ -165,6 +165,8 @@ if (!empty($blog_cluster))
 	}
 	else if ($mode == 'from' && $date)
 	{
+		$date	= $this->db->date($date);
+
 		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
@@ -175,7 +177,6 @@ if (!empty($blog_cluster))
 
 		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'week']);
 
-		$date	= date(SQL_DATE_FORMAT, strtotime($date)); // TODO sql date/tz 
 		$pages	= $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 			"FROM {$prefix}page p ".

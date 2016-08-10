@@ -500,7 +500,7 @@ if ($this->can_upload() === true)
 								}
 
 								$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
-								$uploaded_dt	= date(SQL_DATE_FORMAT); // TODO tz problems
+								$uploaded_dt	= $this->db->date();
 
 								$description	= substr($_POST['file_description'], 0, 250);
 								$description	= rtrim( $description, '\\' );

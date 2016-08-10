@@ -20,6 +20,8 @@ function quote($dblink, $string)
 
 abstract class Dbal // need to be extended by Settings to be usable
 {
+	const SQL_DATE_FORMAT = 'Y-m-d H:i:s';
+	const SQL_DATE_NULL = '0000-00-00 00:00:00';
 	private $db = null;
 	private $result = null;
 	private $sqlfile;
@@ -59,6 +61,18 @@ abstract class Dbal // need to be extended by Settings to be usable
 	function q($data)
 	{
 		return "'" . $this->quote($data) . "'";
+	}
+
+	function date($t = null)
+	{
+		Ut::is_empty($t) and $t = time();
+		is_string($t) and $t = strtotime($t);
+		return gmdate(self::SQL_DATE_FORMAT, (int) $t);
+	}
+
+	function is_null_date($t)
+	{
+		return Ut::is_empty($t) || !$t || $t === self::SQL_DATE_NULL;
 	}
 
 	function sql_query($query, $debug = 0)

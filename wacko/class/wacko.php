@@ -271,7 +271,7 @@ class Wacko
 
 	function sql2localtime($text)
 	{
-		return ($text === SQL_DATE_NULL) ? 0 : $this->utc2localtime(strtotime($text));
+		return $this->db->is_null_date($text)? 0 : $this->utc2localtime(strtotime($text));
 	}
 
 	function sql2datetime($text, &$date, &$time)
@@ -4686,7 +4686,7 @@ class Wacko
 				"selector			= '" . $selector . "', ".
 				"token				= '" . hash('sha256', $authenticator) . "', ".
 				"user_id			= '" . (int)$user['user_id'] . "', ".
-				"token_expires		= '" . gmdate(SQL_DATE_FORMAT, time() + $session_days * DAYSECS) . "'"
+				"token_expires		= '" . $this->db->date(time() + $session_days * DAYSECS) . "'"
 			);
 	}
 
@@ -4698,9 +4698,10 @@ class Wacko
 			$authenticator	= substr($token, 12);
 
 			$token = $this->db->load_single(
-				"SELECT auth_token_id, token, user_id, token_expires ".
+				"SELECT auth_token_id, token, user_id ".
 				"FROM {$this->db->table_prefix}auth_token ".
 				"WHERE selector = " . $this->db->q($selector) . " ".
+					"AND token_expires > UTC_TIMESTAMP() " .
 				"LIMIT 1");
 
 			// STS check for expires also
