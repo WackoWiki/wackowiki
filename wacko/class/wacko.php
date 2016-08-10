@@ -4202,7 +4202,7 @@ class Wacko
 						"INSERT INTO {$this->db->table_prefix}referrer SET ".
 							"page_id		= '" . (int)$this->page['page_id'] . "', ".
 							"referrer		= " . $this->db->q($ref) . ", ".
-							"ip				= " . $this->db->q($this->http->real_ip) . ", ".
+							"ip				= " . $this->db->q($this->http->ip) . ", ".
 							"referrer_time	= UTC_TIMESTAMP()");
 				}
 			}
@@ -4559,7 +4559,7 @@ class Wacko
 
 	function get_user_ip()
 	{
-		return $this->http->real_ip;
+		return $this->http->ip;
 	}
 
 	// extract user data from the session array
@@ -4769,7 +4769,12 @@ class Wacko
 
 	function session_notice($message)
 	{
-		if ($message && @$this->sess->sticky_login)
+		if ($message == 'ip')
+		{
+			$this->set_message('IP address changed to ' . $this->http->ip .
+				' (was ' . implode(', ', array_keys($this->sess->sticky__ip)) . ')');
+		}
+		else if ($message && @$this->sess->sticky_login)
 		{
 			// TODO make message readable
 			/*$tr = [

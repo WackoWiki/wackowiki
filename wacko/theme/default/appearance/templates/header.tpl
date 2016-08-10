@@ -130,7 +130,11 @@
 [ === #------------------------------ === ]
 <main>
 [= msg _ =
-	<div class="[ ' data.1 | e attr ' ]">[ ' data.0 ' ]</div>
+	<div id="output_messages">
+		[= one _ =
+			<div class="[ ' data.1 | e attr ' ]">[ ' data.0 ' ]</div>
+		=]
+	</div>
 =]
 
 [ === TabTitle === ]

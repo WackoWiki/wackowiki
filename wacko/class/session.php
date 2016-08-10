@@ -242,7 +242,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			{
 				$message = 'ip';
 				$destroy = 1;
-				$this->__ip_list[$this->__user_ip] = 1 + @$this->__ip_list[$this->__user_ip];
+				@++$this->sticky__ip[$this->__user_ip]; // strangely it works as intended :)
 			}
 			else if ($now - $this->__regenerated > $this->cf_regen_time || Ut::rand(0, 99) < $this->cf_regen_probability)
 			{
@@ -619,12 +619,13 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 				}
 			}
 		}
+
 		if ($found)
 		{
 			header_remove($set);
 			foreach ($readd as $value)
 			{
-				header($set . ': ' . $value);
+				header($set . ': ' . $value, false);
 			}
 		}
 	}

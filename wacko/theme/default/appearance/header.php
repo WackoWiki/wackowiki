@@ -260,19 +260,17 @@ $tpl->search = $this->href('', $this->_t('TextSearchPage'));
 $tpl->breadcrumbs = $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
 // '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8);
 
-// here we show messages
-$messages = $this->output_messages(false);
-
-if (!@$this->sess->MinPHPVersion)
+if (!isset($this->sess->php_version))
 {
 	if (version_compare(PHP_VERSION, PHP_MIN_VERSION) < 0)
 	{
-		$messages[] = [$this->_t('ErrorMinPHPVersion'), 'error'];
+		$this->set_message($this->_t('ErrorMinPHPVersion'), 'error');
 	}
-	$this->sess->MinPHPVersion = 1;
+	$this->sess->php_version = 1;
 }
 
-foreach ($messages as $message)
+// here we show messages
+foreach ($this->output_messages(false) as $message)
 {
-	$tpl->msg_data = $message;
+	$tpl->msg_one_data = $message;
 }
