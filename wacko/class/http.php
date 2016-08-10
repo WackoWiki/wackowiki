@@ -9,7 +9,7 @@ class Http
 {
 	public		$tls_session;
 	public		$request_uri;				// normalized REQUEST_URI - e.g. 'PageOfNoReturn/show?a=1'
-	public		$real_ip;
+	public		$ip;
 	public		$sess;						// class Session
 	private		$db;
 	private		$tls_mark;					// tls mark cookie name
@@ -25,7 +25,7 @@ class Http
 		$this->db			= & $db;
 		$this->request_uri	= $this->request_uri();
 		$this->tls_session	= $this->tls_session();
-		$this->real_ip		= $this->real_ip();
+		$this->ip			= $this->real_ip();
 		$this->tls_mark		= $this->db->cookie_prefix . 'TLS';
 
 		// if we have used tls already - do secure session!
@@ -286,7 +286,7 @@ class Http
 		$sess->cf_cookie_secure		= ($this->db->tls && $this->tls_session);
 		$sess->cf_cookie_httponly	= true;
 
-		$sess->cf_ip				= $this->real_ip; // STS hack. need to decide where real_ip should live
+		$sess->cf_ip				= $this->ip;
 		$sess->cf_tls				= $this->tls_session;
 
 		// for freecap, /file method and alike - do not play in NoReplay & do no simple id regen

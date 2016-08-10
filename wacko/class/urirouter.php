@@ -62,7 +62,7 @@ class UriRouter
 		$vars['_method']	= $_SERVER['REQUEST_METHOD'];
 		$vars['_rewrite']	= $this->db->rewrite_mode;
 		$vars['_tls']		= $this->http->tls_session;
-		$vars['_ip']		= $this->http->real_ip;
+		$vars['_ip']		= $this->http->ip;
 
 		// populate router's environment
 		$env = ['vars' => $vars, 'changed' => []];
