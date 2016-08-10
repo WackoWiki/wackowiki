@@ -1067,7 +1067,7 @@ class Wacko
 					"WHERE ".( $page_id != 0
 						? "page_id  = '".(int)$page_id."' "
 						: "supertag = ".$this->db->q($supertag)." " ).
-						( $deleted != 1
+						($deleted != 1
 							? "AND p.deleted <> '1' "
 							: "").
 					"LIMIT 1");
@@ -1087,7 +1087,7 @@ class Wacko
 						"WHERE ".( $page_id != 0
 							? "p.page_id  = '".(int)$page_id."' "
 							: "p.supertag = ".$this->db->q($supertag)." " ).
-							( $deleted != 1
+							($deleted != 1
 								? "AND p.deleted <> '1' "
 								: "").
 							"AND revision_id = '".(int)$revision_id."' ".
@@ -1104,7 +1104,7 @@ class Wacko
 						"LEFT JOIN ".$this->db->table_prefix."user o ON (p.owner_id = o.user_id) ".
 						"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE tag = ".$this->db->q($tag)." ".
-						( $deleted != 1
+						($deleted != 1
 							? "AND p.deleted <> '1' "
 							: "").
 					"LIMIT 1");
@@ -1122,7 +1122,7 @@ class Wacko
 							"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 							"LEFT JOIN ".$this->db->table_prefix."page s ON (p.page_id = s.page_id) ".
 						"WHERE p.tag = ".$this->db->q($tag)." ".
-							( $deleted != 1
+							($deleted != 1
 								? "AND p.deleted <> '1' "
 								: "").
 							"AND revision_id = '".(int)$revision_id."' ".
@@ -4840,11 +4840,14 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function load_users()
+	function load_users($enabled = 1)
 	{
 		return $this->db->load_all(
 			"SELECT user_id, user_name ".
 			"FROM ".$this->db->user_table." ".
+				($enabled
+					? "WHERE enabled = '1' "
+					: "").
 			"ORDER BY BINARY user_name");
 	}
 
