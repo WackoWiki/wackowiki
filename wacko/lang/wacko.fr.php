@@ -1128,10 +1128,10 @@ $wacko_translation = array(
 	'InYears'		=> 'in %1 years',
 
 	// binary multiples
-	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
-	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
-	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
-	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
+	'DecimalPrefixShort'		=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+	'DecimalPrefixLong'			=> ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
+	'BinaryPrefixShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
 
 	// loading error
 	'UnknownAction'				=> 'Action inconnue',

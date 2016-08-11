@@ -63,8 +63,8 @@ if ($this->get_user())
 {
 	$tpl->by_home = $this->link('WackoWiki:HomePage', '', 'WackoWiki');
 	// STS: no need to add to config_default, it's private -dev feature
-	$tpl->by_version = $this->get_wacko_version();
-	$tpl->by_patchlevel = @$this->db->wacko_patchlevel;
+	# $tpl->by_version = $this->get_wacko_version();
+	# $tpl->by_patchlevel = @$this->db->wacko_patchlevel;
 }
 
 // comment this out for not showing website policy link at the bottom of your pages

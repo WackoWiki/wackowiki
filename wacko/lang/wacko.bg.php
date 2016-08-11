@@ -565,7 +565,7 @@ $wacko_translation = array(
 	'EmailForgotMessage'		=> 'Някой е забравил Вашата парола за %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на нова  парола, моля адресирайте следния линк: '."\n".'%3'."\n\n".'',
 	'CodeWasSent'				=> 'Инструкцията за паролата е изпратена на email.',
 	'WrongCode'					=> 'Неверен код',
-	'ChangePasswordForUser' => 'Промяна на парола за %1',
+	'ChangePasswordForUser'		=> 'Промяна на парола за %1',
 
 	'Watchers'					=> 'Списък на следящите %1',
 	'NoWatchers'				=> 'Страница %1 не е следена',
@@ -1128,10 +1128,10 @@ $wacko_translation = array(
 	'InYears'		=> 'in %1 years',
 
 	// binary multiples
-	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
-	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
-	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
-	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
+	'DecimalPrefixShort'		=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+	'DecimalPrefixLong'			=> ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
+	'BinaryPrefixShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
 
 	// loading error
 	'UnknownAction'				=> 'Unknown action',
