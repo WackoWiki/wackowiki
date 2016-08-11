@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 
 class UriRouter
 {
-	const CODE_VERSION = 1; // to not read incompatible cached data
+	const CODE_VERSION = 2; // to not read incompatible cached data
 	const GLOBALS = ['G' => '_GET', 'P' => '_POST', 'S' => '_SERVER'];
 	private $config = [];
 	private $db;
@@ -45,10 +45,10 @@ class UriRouter
 			}
 			// Ut::dbg('methods', $methods);
 
-			$this->read_config($conffile, ['method' => implode('|', $methods)]);
+			$this->config = $this->read_config($conffile, ['method' => implode('|', $methods)]);
 
 			// cache to file
-			$text = Ut::serialize([self::CODE_VERSION] + $this->config);
+			$text = Ut::serialize(array_merge([self::CODE_VERSION], $this->config));
 			// unable to write cache file considered are 'turn config caching off' feature
 			@file_put_contents($cachefile, $text);
 			@chmod($cachefile, SAFE_CHMOD);
@@ -399,19 +399,21 @@ class UriRouter
 					$actions[] = [$varname, $varidx, $func, $op, $val];
 				}
 
-				$this->config[] = [$regex, $actions, $lineno];
+				$config[] = [$regex, $actions, $lineno];
 			}
 		}
 
-		if (!$this->config)
+		if (!isset($config))
 		{
 			$this->aband($file . ': empty config');
 		}
 
-		if (!$this->config[0][0])
+		if (!$config[0][0])
 		{
-			$this->aband($file . ':' . $this->config[0][2] . ': first rule must have regex');
+			$this->aband($file . ':' . $config[0][2] . ': first rule must have regex');
 		}
+
+		return $config;
 	}
 
 	private function parse_var($var)
