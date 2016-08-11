@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = array(
-	'ApTestText'				=> 'Ap Test Text',
 	'MainNote'					=> '¬нимание: перед проведением технических административных меропри€тий <span class="underline">насто€тельно</span> рекомендуетс€ закрыть доступ к сайту!',
 
 	// Admin panel
@@ -27,7 +26,7 @@ $ap_translation = array(
 
 	'PurgeSessions'				=> 'ѕрочистить все сессии',
 	'PurgeSessionsConfirm'		=> '”вереный в прочистке сессий? Ёто прекратит сессии всех текущих пользователей.',
-	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
+	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> '—ессии прочищены.',
 
 	// log

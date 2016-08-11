@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = array(
-	'ApTestText'			=> 'Ap Test Text',
 	'MainNote'				=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	// Admin panel
@@ -27,7 +26,7 @@ $ap_translation = array(
 
 	'PurgeSessions'				=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
-	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
+	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
 
 	// log

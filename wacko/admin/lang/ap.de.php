@@ -6,8 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = array(
-	'ApTestText'				=> 'Admin Panel Dummy Test Text',
-	'MainNote'					=> 'Hinweis: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'MainNote'					=> 'Hinweis: Es wird empfolen den Zugang zur Site für administrative Wartungsarbeiten zu sperren.',
 
 	// Admin panel
 	'Authorization'				=> 'Autorisation',
@@ -26,8 +25,8 @@ $ap_translation = array(
 	'LogUsername'				=> 'Benutzername',
 
 	'PurgeSessions'				=> 'Entferne alle Sitzungen',
-	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
-	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the session table.',
+	'PurgeSessionsConfirm'		=> 'Bist du dir sicher, daß du alle Sitzungen entfernen willst? Dies wird alle Nuzer abmelden.',
+	'PurgeSessionsExplain'		=> 'Entferne alle Sitzungen. Dies wird alle Nuzer abmelden in dem es die auth_token Tabelle leert.',
 	'PurgeSessionsDone'			=> 'Sitzungen erfolgreich enfernt.',
 
 	// log
@@ -40,11 +39,11 @@ $ap_translation = array(
 	'LogLevel7'					=> 'debugging',
 
 	// Massemail
-	'SendToGroup'				=> 'Send to group',
-	'SendToUser'				=> 'Send to user',
+	'SendToGroup'				=> 'Sende an Nutzergruppe',
+	'SendToUser'				=> 'Sende an Nutzer',
 
 	// User approval module
-	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
+	'UserApproveInfo'			=> 'Schalte neue Benutzer frei, damit sie sich auf der Seite anmelden können.',
 	'Approve'					=> 'Zulassen',
 	'Deny'						=> 'Ablehnen',
 	'Pending'					=> 'Ausstehend',

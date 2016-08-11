@@ -43,8 +43,8 @@ $wacko_translation = array(
 	'UserRequiresApproval'		=> 'Um den Benutzer für %1 zuzulassen oder abzulehnen gehe ins Admin-Panel.',
 	'UserApprovalInfo'			=> 'Nachdem du dich registriert hast, wird deine Registrierung zur Freischaltung an den Administrator der Seite geschickt. Du erhältst dann eine E-Mail mit weiteren Anweisungen.',
 
-	'UserApprovalPending'		=> 'Your account is still pending approval.',
-	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
+	'UserApprovalPending'		=> 'Dein Konto ist noch nicht freigeschaltet.',
+	'UserApprovalDenied'		=> 'Dein Konto wurde der Zugriff auf diese Seite verweigert.',
 
 	'RegistrationApproved'		=> 'Registrierung wurde freigeschalten',
 	'RegistrationDenied'		=> 'Registrierung abgelehnt',
@@ -78,7 +78,7 @@ $wacko_translation = array(
 	'LastVisit'					=> 'Dein letzter Besuch',
 
 	'LoginIncorrect'			=> 'Der Benutzername oder das eingegebene Passwort ist ungültig.',
-	'WelcomeBack'				=> 'Welcome back, %1',
+	'WelcomeBack'				=> 'Willkommen zurück, %1',
 	'LoginAttemtsExceeded'		=> 'Du hast die maximal zulässige Zahl von Anmeldeversuchen überschritten.<br />Du musst nun deinen Benutzernamen und dein Passwort erneut eingeben sowie eine Sicherheitsabfrage beantworten.',
 
 	// other
@@ -824,11 +824,11 @@ $wacko_translation = array(
 	// Cache
 	'ClearCache'				=> 'Zwischenspeicher leeren',
 	'CacheCleared'				=> 'Zwischenspeicher geleert.',
-	'ConfigCache'				=> 'Config cache',
+	'ConfigCache'				=> 'Config Zwischenspeicher',
 	'FeedCache'					=> 'Feed Zwischenspeicher',
 	'PageCache'					=> 'Page Zwischenspeicher',
 	'SQLCache'					=> 'SQL Zwischenspeicher',
-	'TemplateCache'				=> 'Template cache',
+	'TemplateCache'				=> 'Template Zwischenspeicher',
 
 	// Flash
 	'FlashNoURL'				=> 'Bitte gib eine Flashdatei mit dem Parameter url an. (z.B. {{flash url="file:the_movie.swf"}} )',
@@ -881,7 +881,7 @@ $wacko_translation = array(
 	'NewsSubmit'				=> 'hinzufügen',
 	'NewsNoName'				=> 'Du habst vergessen eine Schlagzeile hinzuzufügen.',
 	'NewsNotAvailable'			=> 'Keine Nachrichten verfügbar.',
-	'NewsNoClusterDefined'		=> 'Kein News-Cluster definiert.',
+	'NewsNoClusterDefined'		=> 'Kein Nachrichten-Cluster definiert.',
 	'NewsDiscuss'				=> 'Diskutiere diesen Artikel...',
 
 	// Review
@@ -919,7 +919,7 @@ $wacko_translation = array(
 	'ModerateDeleteConfirm'		=> 'Bist du dir sicher das du folgende Themen <span class="underline">löschen</span> willst?',
 	'ModerateRenameConfirm'		=> 'Gib einen neuen Namen für die gewählte Seite an',
 	'ModerateRenameExists'		=> 'Es gibt bereits eine Seite mit dem gleichen Namen! Wähle einen anderen Seiten-Namen.',
-	'ModerateRename1Only'		=> 'Hinweise: renamed to be only the first page you chose!',
+	'ModerateRename1Only'		=> 'Hinweise: Es wird nur die erste gewählte Seite umgenannt!',
 	'ModerateMovesConfirm'		=> 'Wähle den Ziel-Cluster in welchen das Forum verschoben werden soll',
 	'ModerateMoveConfirm'		=> 'Wähle ein Forum oder gib einen Cluster an in welchen du die Themen verschieben willst. Um die Seite in die Root zu verschieben, schreibe &quot;/&quot;',
 	'ModeratePgMoveConfirm'		=> 'Gib den Namen des Clusters an, in welchen du die Seite verschieben willst. Um die Seite in die Root zu verschieben, schreibe &quot;/&quot;',
@@ -1128,10 +1128,10 @@ $wacko_translation = array(
 	'InYears'		=> 'in %1 Jahren',
 
 	// binary multiples
-	'DecimalPrefixShort'	=> array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'),
-	'DecimalPrefixLong'		=> array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'),
-	'BinaryPrefixShort'		=> array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'),
-	'BinaryPrefixLong'		=> array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'),
+	'DecimalPrefixShort'		=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+	'DecimalPrefixLong'			=> ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
+	'BinaryPrefixShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
 
 	// loading error
 	'UnknownAction'				=> 'Unbekannte Aktion',
