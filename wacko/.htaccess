@@ -1,6 +1,16 @@
+# No user serviceable parts inside
+# If you want to fix anything by tuning htaccess - you're possibly on the wrong path
+
+<IfModule mod_env.c>
+	SetEnv HTTP_MOD_ENV on
+</IfModule>
+
 <IfModule mod_rewrite.c>
- RewriteEngine on
- RewriteRule ^ index.php [QSA,L]
+	<IfModule mod_env.c>
+		SetEnv HTTP_MOD_REWRITE on
+	</IfModule>
+	RewriteEngine on
+	RewriteRule ^ index.php [QSA,L]
 </IfModule>
 
 <IfModule !mod_rewrite.c>

@@ -555,8 +555,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		isset($httponly) or $httponly = $this->cf_cookie_httponly;
 
 		// cookie name must be rfc2616 2.2 token:
-		$name = preg_replace_callback('/[\x7F\x00-\x1F\s()<>@,;:\\\\"\/\[\]?={}%]/',
-			function ($ch) { if (strlen($ch) == 1) return '%' . bin2hex($ch); }, $name);
+		$name = Ut::urlencode('/[\x7F\x00-\x1F\s()<>@,;:\\\\"\/\[\]?={}%]/', $name);
 
 		$this->remove_cookie($name);
 
@@ -567,8 +566,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		}
 
 		// rfc6265 4.1.1 cookie-octet
-		$value = preg_replace_callback('/[\x7F-\xFF\x00-\x1F\s",;%\\\\]/',
-			function ($ch) { if (strlen($ch) == 1) return '%' . bin2hex($ch); }, $value);
+		$value = Ut::urlencode('/[\x7F-\xFF\x00-\x1F\s",;%\\\\]/', $value);
 
 		$cookie = 'Set-Cookie: '. $name . '=' . $value;
 

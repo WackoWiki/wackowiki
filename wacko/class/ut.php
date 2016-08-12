@@ -535,4 +535,19 @@ class Ut
 	{
 		return preg_replace('/[\x00-\x1F\x7F]/', '', str_replace("\t", ' ', (string) $text));
 	}
+
+	// TODO not utf8 compatible! :)
+	static function urlencode($regex, $text)
+	{
+		// is_array() hack is for some strange php behaviour calling callback
+		// with ['x'] instead of 'x' when matching single non-ascii char, i.e. russian letter
+		return preg_replace_callback($regex, function ($ch) { if (is_array($ch)) $ch = $ch[0]; if (strlen($ch) == 1) return '%' . bin2hex($ch); }, $text);
+	}
+
+	// query uri part assignment encoder, strictly on rfc3986 3.4 charset, without = and & and + (possible space) and ' (possible quote:)
+	static function qencode($name, $value)
+	{
+		static $rfc3986 = '#[^a-zA-Z0-9._~/?:@!$()*,;-]#';
+		return static::urlencode($rfc3986, $name) . '=' . static::urlencode($rfc3986, $value);
+	}
 }
