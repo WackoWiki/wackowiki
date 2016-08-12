@@ -6398,12 +6398,17 @@ class Wacko
 
 			$title = $page['title'];
 		}
-		else
+		else if ($this->page)
 		{
 			$title = @$this->page['title'];
 		}
+
 		// default page title is just page's WikiName
-		return $title? $title : $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
+		return $title
+				? $title
+				: $tag
+					? $this->add_spaces_title(trim(substr($tag, strrpos($tag, '/')), '/'))
+					: $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
 	}
 
 	// CLONE / RENAMING / MOVING
