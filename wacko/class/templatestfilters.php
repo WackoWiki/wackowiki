@@ -351,7 +351,7 @@ class TemplatestFilters extends TemplatestEscaper
 		$list = [];
 		foreach ($value as $id => $val)
 		{
-			$list[] = rawurlencode($id) . '=' . rawurlencode($val);
+			$list[] = Ut::qencode($id, $val);
 		}
 
 		return implode('&', $list);

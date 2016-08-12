@@ -2819,7 +2819,7 @@ class Wacko
 			{
 				if (is_string($i))
 				{
-					$param = rawurlencode($i) . '=' . rawurlencode($param);
+					$param = Ut::qencode($i, $param);
 				}
 				else if (($j = strpos($param, '#')) !== false)
 				{
