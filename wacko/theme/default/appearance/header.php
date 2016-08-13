@@ -138,7 +138,7 @@ else
 	}
 	else if ($readable)
 	{
-		$echo_tab('source', 'SourceTip', 'SourceText', 1, '', '', 'e');
+		$echo_tab('source', 'SourceTip', 'SourceText', 1, '', 'e');
 	}
 
 	if (!$this->count_revisions($this->page['page_id'], 0, $this->is_admin()))
