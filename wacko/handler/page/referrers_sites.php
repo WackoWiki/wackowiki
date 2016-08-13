@@ -9,9 +9,9 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page(true); // allow forums
 
-if (($this->db->enable_referrers == 0) ||
-	($this->db->enable_referrers == 1 && !$this->get_user()) ||
-	($this->db->enable_referrers == 2 && !$this->is_admin()))
+if ((  $this->db->enable_referrers == 0)
+	||($this->db->enable_referrers == 1 && !$this->get_user())
+	||($this->db->enable_referrers == 2 && !$this->is_admin()))
 {
 	$this->set_message($this->_t('ReadAccessDenied'), 'error');
 	$this->show_must_go_on();

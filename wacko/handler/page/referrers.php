@@ -7,9 +7,6 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page(true); // allow forums
 
-// let's start: print header
-echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ' . $this->_t('ViewReferrersGlobal') . '</h3>';
-
 $show_backlinks = function ()
 {
 	echo '<strong>' . $this->_t('ReferringPages') . ":</strong><br /><br />\n";
@@ -47,9 +44,9 @@ $show_backlinks = function ()
 // fast lane: show backlinks for those who don't deserve further service ;)
 // enable_referrers == 1 for all logged-in users, == 2 for admins only
 if (
-	($this->db->enable_referrers == 0) ||
-	($this->db->enable_referrers == 1 && !$this->get_user()) ||
-	($this->db->enable_referrers == 2 && !$this->is_admin()))
+	(   $this->db->enable_referrers == 0)
+	|| ($this->db->enable_referrers == 1 && !$this->get_user())
+	|| ($this->db->enable_referrers == 2 && !$this->is_admin()))
 {
 	echo "<br /><br />\n";
 	$show_backlinks();
@@ -59,8 +56,12 @@ if (
 // set up for main show
 $url_maxlen = 80;
 $spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . . '
-$modes		= ['ViewReferrersPage' => '', 'ViewReferrersPerPage' => 'perpage', 'ViewReferrersByTime' => 'bytime', 'ViewReferrersGlobal' => 'global'];
+$modes		=  ['ViewReferrersPage'		=> '',
+				'ViewReferrersPerPage'	=> 'perpage',
+				'ViewReferrersByTime'	=> 'bytime',
+				'ViewReferrersGlobal'	=> 'global'];
 $mode		= @$_GET['o'];
+
 if (!in_array($mode, $modes))
 {
 	$mode = '';
@@ -118,6 +119,20 @@ else
 		"ORDER BY num DESC";
 }
 
+// let's start: print header
+// TODO: rewrite with template
+echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ';
+
+foreach ($modes as $text => $i)
+{
+	if ($mode == $i)
+	{
+		echo $this->_t($text);
+	}
+}
+
+echo "</h3>\n";
+
 // print navigation
 echo '<ul class="menu">';
 
@@ -131,11 +146,14 @@ foreach ($modes as $text => $i)
 	{
 		echo '<li class="active">';
 	}
+
 	echo $this->_t($text);
+
 	if ($mode != $i)
 	{
 		echo '</a>';
 	}
+
 	echo '</li>';
 }
 
@@ -170,11 +188,11 @@ $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $space
 // check referrer permissions, and return link to referal wikipage, or '' if none available/accessible
 $check_ref = function ($ref)
 {
-	if (!($id = (int)$ref['page_id']))
+	if (!($page_id = (int)$ref['page_id']))
 	{
 		$link = '404';
 	}
-	else if ($this->db->hide_locked && !$this->has_access('read', $id))
+	else if ($this->db->hide_locked && !$this->has_access('read', $page_id))
 	{
 		$link = '';
 	}
@@ -185,7 +203,7 @@ $check_ref = function ($ref)
 		$lang = ($this->page['page_lang'] != $ref['page_lang'])?  $ref['page_lang'] : '';
 
 		// cache page_id for for has_access validation in link function
-		$this->page_id_cache[$ref['tag']] = $id;
+		$this->page_id_cache[$ref['tag']] = $page_id;
 
 		//$page_link = $this->compose_link_to_page($referrer['tag']);
 		$link = $this->link('/' . $ref['tag'], '', $ref['title'], '', '', '', $lang, 0);
@@ -196,13 +214,15 @@ $check_ref = function ($ref)
 
 // load data from db
 $referrers = $this->db->load_all($query);
+
 if (!$referrers)
 {
 	echo $this->_t('NoneReferrers') . "<br /><br />\n" ;
 	return;
 }
-$pagination = $this->pagination(count($referrers), @$max, 'r', ($mode? 'o=' . $mode : ''), 'referrers');
-$referrers = array_slice($referrers, $pagination['offset'], $pagination['perpage']);
+
+$pagination	= $this->pagination(count($referrers), @$max, 'r', ($mode? 'o=' . $mode : ''), 'referrers');
+$referrers	= array_slice($referrers, $pagination['offset'], $pagination['perpage']);
 
 // main show!
 
@@ -216,7 +236,6 @@ if ($mode == 'perpage')
 		if (($link = $check_ref($referrer)))
 		{
 			echo '<li><strong>' . $link . '</strong> (' . $referrer['num'] . ')';
-
 			echo "<ul>\n";
 
 			foreach ($this->load_referrers($referrer['page_id']) as $ref2)
