@@ -144,6 +144,9 @@ $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_1,	
 $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_2,			$lang['ErrorAlteringTable']);
 $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_3,			$lang['ErrorAlteringTable']);
 
+$upgrade['5.5.rc2'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_4,			$lang['ErrorAlteringTable']);
+$upgrade['5.5.rc2'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_3,		$lang['ErrorUpdatingTable']);
+
 // referrer
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_0,		$lang['ErrorAlteringTable']);
 
@@ -155,6 +158,9 @@ $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'revision',		$alter_revision_r
 $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_2,		$lang['ErrorAlteringTable']);
 $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_3,		$lang['ErrorAlteringTable']);
 $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_4,		$lang['ErrorAlteringTable']);
+
+$upgrade['5.5.rc2'][]	= array($lang['AlterTable'],	'revision',		$alter_revision_r5_4_5,		$lang['ErrorAlteringTable']);
+$upgrade['5.5.rc2'][]	= array($lang['UpdateTable'],	'revision',		$update_revision_r5_4_1,	$lang['ErrorUpdatingTable']);
 
 // tag
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'tag',			$alter_tag_r5_4_0,			$lang['ErrorAlteringTable']);
