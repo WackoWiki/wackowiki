@@ -40,7 +40,7 @@ $full_text_search = function ($phrase, $for, $limit, $filter, $deleted = 0)
 
 	// load search results
 	$results = $this->db->load_all(
-		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang,
+		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size,
 			MATCH(a.body) AGAINST(".$this->db->q($phrase)." IN BOOLEAN MODE) AS score,
 			u.user_name, o.user_name as owner_name ".
 		"FROM ".$this->db->table_prefix."page a ".
@@ -83,7 +83,8 @@ $tag_search = function ($phrase, $for, $limit, $filter, $deleted = 0)
 
 	// load search results
 	$results = $this->db->load_all(
-		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, u.user_name, o.user_name as owner_name ".
+		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, a.page_size,
+			u.user_name, o.user_name as owner_name ".
 		"FROM ".$this->db->table_prefix."page a ".
 			"LEFT JOIN ".$this->db->user_table." u ON (a.user_id = u.user_id) ".
 			"LEFT JOIN ".$this->db->user_table." o ON (a.owner_id = o.user_id) ".
@@ -205,10 +206,10 @@ $highlight_this = function ($text, $words, $the_place)
 		{
 			#$text = str_ireplace($word, "<span class=\"highlight\">".$word."</span>", $text, $count); // XXX: replaced with preg_replace()
 			// escape bad regex characters
-			$word = preg_quote($word);
+			$word		= preg_quote($word);
 			// highlight uppercase and lowercase correctly
-			$text = preg_replace('/('.$word.')/i','<span class="highlight">$1</span>' , $text, -1 , $count);
-			$the_count = $count + $the_count;
+			$text		= preg_replace('/('.$word.')/i','<span class="highlight">$1</span>' , $text, -1 , $count);
+			$the_count	= $count + $the_count;
 		}
 
 	}
@@ -262,12 +263,13 @@ $phrase or $phrase = @$_GET['phrase'];
 
 if ($form)
 {
-	$tpl->form_href = $this->href();
-	$tpl->form_phrase = $phrase;
+	$tpl->form_href		= $this->href();
+	$tpl->form_phrase	= $phrase;
+
 	if ($options)
 	{
-		$tpl->form_options = true;
-		$tpl->form_options_topic = ($mode == 'topic');
+		$tpl->form_options			= true;
+		$tpl->form_options_topic	= ($mode == 'topic');
 	}
 }
 
@@ -303,7 +305,7 @@ if (strlen($phrase) >= 3)
 
 					$_lang		= '';
 					$preview	= '';
-					$count	= false;
+					$count		= false;
 
 					// generate preview
 					if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
@@ -324,14 +326,15 @@ if (strlen($phrase) >= 3)
 						$preview	= $this->do_unicode_entities($preview, $_lang);
 					}
 
-					$tpl->l_link = $this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang);
-					$tpl->l_userlink = $this->user_link($page['user_name'], '', false, false);
-					$tpl->l_mtime = $page['modified'];
+					$tpl->l_link		= $this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang);
+					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
+					$tpl->l_mtime		= $page['modified'];
+					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);
 
 					if ($mode != 'topic')
 					{
-						$tpl->l_count = $count;
-						$tpl->l_preview = $preview;
+						$tpl->l_count	= $count;
+						$tpl->l_preview	= $preview;
 					}
 				}
 			}
@@ -341,10 +344,10 @@ if (strlen($phrase) >= 3)
 
 		if (!$nomark)
 		{
-			$tpl->s_mark_diag = $this->_t(($mode == 'topic' ? 'Topic' : '') . 'SearchResults');
-			$tpl->s_mark_phrase = $phrase;
-			$tpl->s_mark_count = $n;
-			$tpl->s_emark = true;
+			$tpl->s_mark_diag	= $this->_t(($mode == 'topic' ? 'Topic' : '') . 'SearchResults');
+			$tpl->s_mark_phrase	= $phrase;
+			$tpl->s_mark_count	= $n;
+			$tpl->s_emark		= true;
 		}
 	}
 }

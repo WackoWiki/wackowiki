@@ -1038,17 +1038,17 @@ class Wacko
 		if ($metadata_only)
 		{
 			$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, '.
-						'p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
+						'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
 						'p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
 			$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
-						'p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
+						'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
 						'p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
 		}
 		else
 		{
 			$what_p =	'p.*, u.user_name, o.user_name AS owner_name';
 			$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
-						'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, '.
+						'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.reviewed_time, '.
 						'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, '.
 						'p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, '.
 						's.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, '.
@@ -1432,7 +1432,7 @@ class Wacko
 	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0)
 	{
 		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, '.
-					 'p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
+					 'p.page_size, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$revisions = $this->db->load_all(
 			"SELECT p.version_id, p.revision_id, ".$page_meta." ".
@@ -2021,6 +2021,7 @@ class Wacko
 						"body_toc		= ".$this->db->q($body_toc).", ".
 						"edit_note		= ".$this->db->q($edit_note).", ".
 						"minor_edit		= '".(int)$minor_edit."', ".
+						"page_size		= '".(int)strlen($body)."', ".
 						(isset($reviewed)
 							?	"reviewed		= '".(int)$reviewed."', ".
 								"reviewed_time	= UTC_TIMESTAMP(), ".
@@ -2148,6 +2149,7 @@ class Wacko
 							"body_toc		= ".$this->db->q($body_toc).", ".
 							"edit_note		= ".$this->db->q($edit_note).", ".
 							"minor_edit		= '".(int)$minor_edit."', ".
+							"page_size		= '".(int)strlen($body)."', ".
 							(isset($reviewed)
 								?	"reviewed		= '".(int)$reviewed."', ".
 									"reviewed_time	= UTC_TIMESTAMP(), ".
@@ -2238,6 +2240,7 @@ class Wacko
 				"formatting		= '{$old_page['formatting']}', ".
 				"edit_note		= '{$old_page['edit_note']}', ".
 				"minor_edit		= '{$old_page['minor_edit']}', ".
+				"page_size		= '{$old_page['page_size']}', ".
 				"reviewed		= '{$old_page['reviewed']}', ".
 				"reviewed_time	= '{$old_page['reviewed_time']}', ".
 				"reviewer_id	= '{$old_page['reviewer_id']}', ".
@@ -4242,6 +4245,7 @@ class Wacko
 			{
 				$__tpl = pathinfo($__pathname);
 				$__tpl = Ut::join_path($__tpl['dirname'], 'templates', $__tpl['filename'] . '.tpl'); // STS magic string
+
 				if (@file_exists($__tpl))
 				{
 					$tpl = Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
@@ -4292,6 +4296,7 @@ class Wacko
 				$include_tail = '';
 				ob_start();
 				include $__pathname;
+
 				if (isset($tpl))
 				{
 					$output = (string) $tpl;
@@ -4306,6 +4311,7 @@ class Wacko
 					echo $include_tail;
 					$output = ob_get_contents();
 				}
+
 				ob_end_clean();
 
 				return $output;

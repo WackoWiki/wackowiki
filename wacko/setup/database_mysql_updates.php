@@ -67,11 +67,13 @@ $alter_page_r5_4_0 = "ALTER TABLE {$pref}page CHANGE lang page_lang VARCHAR(2) N
 $alter_page_r5_4_1 = "ALTER TABLE {$pref}page CHANGE title title VARCHAR(250) NOT NULL DEFAULT ''";
 $alter_page_r5_4_2 = "ALTER TABLE {$pref}page ADD version_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
 $alter_page_r5_4_3 = "ALTER TABLE {$pref}page CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
+$alter_page_r5_4_4 = "ALTER TABLE {$pref}page ADD page_size INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit";
 
 $update_page_r5_1_0 = "UPDATE {$pref}page AS page SET noindex = '0' WHERE page.noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
 $update_page_r5_4_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r5_4_2 = "UPDATE {$pref}page AS p, (SELECT user_id FROM {$pref}user WHERE user_name = 'System') AS u SET p.noindex = '1' WHERE p.owner_id = u.user_id";
+$update_page_r5_4_3 = "UPDATE {$pref}page SET page_size = LENGTH(body)";
 
 // POLL
 
@@ -87,8 +89,10 @@ $alter_revision_r5_4_1 = "ALTER TABLE {$pref}revision CHANGE title title VARCHAR
 $alter_revision_r5_4_2 = "ALTER TABLE {$pref}revision ADD INDEX idx_page_id (page_id)";
 $alter_revision_r5_4_3 = "ALTER TABLE {$pref}revision ADD INDEX idx_version_id (version_id, page_id)";
 $alter_revision_r5_4_4 = "ALTER TABLE {$pref}revision CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
+$alter_revision_r5_4_5 = "ALTER TABLE {$pref}revision ADD page_size INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit";
 
 $update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, (SELECT page_id, page_lang FROM {$pref}page) AS p SET r.page_lang = p.page_lang WHERE r.page_id = p.page_id";
+$update_revision_r5_4_1 = "UPDATE {$pref}revision SET page_size = LENGTH(body)";
 
 // TAG
 $alter_tag_r5_4_0 = "ALTER TABLE {$pref}tag CHANGE lang tag_lang VARCHAR(2) NOT NULL";
