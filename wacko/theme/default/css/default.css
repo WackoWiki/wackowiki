@@ -1158,6 +1158,13 @@ th.form_left {
 	border-bottom: none;
 }
 
+/* search action */
+.search_meta {
+	color: #808080; 
+	line-height: 1.24; 
+	white-space: nowrap;
+}
+
 /*Handlers --------------------------------------------------*/
 
 
