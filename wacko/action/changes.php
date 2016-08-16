@@ -7,7 +7,11 @@ if (!defined('IN_WACKO'))
 
 $viewed = '';
 
-if (!isset($root) && isset($for))	$root = $this->unwrap_link($for);
+if (!isset($for))		$for	= ''; // depreciated
+if ($for)				$page = $for;
+
+if (!isset($page))		$page = '';
+if (!isset($root) && isset($page))	$root = $this->unwrap_link($page);
 if (!isset($root))		$root = '';
 if (!isset($date))		$date = @$_GET['date'];
 if (!isset($hide_minor_edit)) $hide_minor_edit = @$_GET['minor_edit'];

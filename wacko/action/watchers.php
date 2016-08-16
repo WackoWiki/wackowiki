@@ -5,12 +5,15 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($nomark))	$nomark = false;
-if (!isset($for))		$for = '';
+if (!isset($for))		$for = ''; // depreciated
+if ($for)				$page = $for;
 
-if ($for)
+if (!isset($page))		$page = '';
+if (!isset($nomark))	$nomark = false;
+
+if ($page)
 {
-	$tag		= $this->unwrap_link($for);
+	$tag		= $this->unwrap_link($page);
 	$page_id	= $this->get_page_id($tag);
 }
 else

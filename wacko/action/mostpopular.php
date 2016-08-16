@@ -18,9 +18,9 @@ if (!defined('IN_WACKO'))
  }}
  */
 
-// TODO: should also work with parameter 'page', but didn't
+if (!isset($for))			$for = ''; // depreciated
+if ($for)					$page = $for;
 
-if (!isset($for))			$for = '';
 if (!isset($page))			$page = '';
 if (!isset($nomark))		$nomark = '';
 if (!isset($max))			$max = '';
@@ -32,8 +32,6 @@ if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;
 
 // check for first param (for what mostpopular is built)
-if ($for)				$page = $for;
-
 if (!empty($page))
 {
 	$page		= $this->unwrap_link($page);
@@ -59,7 +57,7 @@ if(!$nomark)
 	echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('MostPopularPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
 }
 
-if(!$for)
+if(!$page)
 {
 	$pages = $this->db->load_all(
 		"SELECT page_id, tag, title, hits ".
@@ -69,7 +67,7 @@ if(!$for)
 }
 else
 {
-	$for = $this->unwrap_link($for);
+	$page = $this->unwrap_link($page);
 
 	if(!$dontrecurse || strtolower($dontrecurse) == 'false')
 	{
@@ -79,10 +77,10 @@ else
 			"FROM ".$this->db->table_prefix."page a, ".$this->db->table_prefix."link l ".
 			"INNER JOIN ".$this->db->table_prefix."page b ON (l.from_page_id = b.page_id) ".
 			"INNER JOIN ".$this->db->table_prefix."page c ON (l.to_page_id = c.page_id) ".
-			"WHERE a.tag <> '".$for."' ".
+			"WHERE a.tag <> '".$page."' ".
 				"AND a.tag = c.tag ".
-				"AND INSTR(b.tag, '".$for."') = 1 ".
-				"AND INSTR(c.tag, '".$for."') = 1 ".
+				"AND INSTR(b.tag, '".$page."') = 1 ".
+				"AND INSTR(c.tag, '".$page."') = 1 ".
 			"ORDER BY a.hits DESC ".
 			"LIMIT {$max}");
 	}
@@ -94,10 +92,10 @@ else
 			"FROM ".$this->db->table_prefix."page a, ".$this->db->table_prefix."link l ".
 				"INNER JOIN ".$this->db->table_prefix."page b ON (l.from_page_id = b.page_id) ".
 				"INNER JOIN ".$this->db->table_prefix."page c ON (l.to_page_id = c.page_id) ".
-			"WHERE a.tag <> '".$for."' ".
+			"WHERE a.tag <> '".$page."' ".
 				"AND a.tag = c.tag ".
-				"AND b.tag = ".$this->db->q($for)." ".
-				"AND INSTR(c.tag, ".$this->db->q($for).") = 1 ".
+				"AND b.tag = ".$this->db->q($page)." ".
+				"AND INSTR(c.tag, ".$this->db->q($page).") = 1 ".
 			"ORDER BY a.hits DESC ".
 			"LIMIT {$max}");
 	}
