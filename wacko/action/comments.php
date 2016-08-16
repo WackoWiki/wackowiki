@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_recent_comments = function ($for, $limit, $deleted = 0)
+$load_recent_comments = function ($tag, $limit, $deleted = 0)
 {
 	$pagination	= '';
 
@@ -15,8 +15,8 @@ $load_recent_comments = function ($for, $limit, $deleted = 0)
 		"FROM ".$this->db->table_prefix."page a ".
 			"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
 		"WHERE ".
-		($for
-			? "b.supertag LIKE '" . $this->db->q($this->translit($for) . '/%') . " "
+		($tag
+			? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
 			: "a.comment_on_id <> '0' ").
 		(!$deleted
 			? "AND a.deleted <> '1' "
@@ -28,13 +28,14 @@ $load_recent_comments = function ($for, $limit, $deleted = 0)
 		$pagination = $this->pagination($count['n'], $limit);
 
 		$comments = $this->db->load_all(
-			"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
+			"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.tag AS comment_tag,
+				a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
 			"FROM ".$this->db->table_prefix."page a ".
 				"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
 				"LEFT JOIN ".$this->db->table_prefix."user u ON (a.user_id = u.user_id) ".
 			"WHERE ".
-			($for
-				? "b.supertag LIKE '" . $this->db->q($this->translit($for) . '/%') . " "
+			($tag
+				? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
 				: "a.comment_on_id <> '0' ").
 			($deleted != 1
 				? "AND a.deleted <> '1' "
@@ -47,11 +48,15 @@ $load_recent_comments = function ($for, $limit, $deleted = 0)
 
 };
 
-if (!isset($root) && isset($for)) $root = $this->unwrap_link($for);
-if (!isset($root))		$root = '';
+if (!isset($for))		$for	= ''; // depreciated
+if ($for)				$page	= $for;
+
+if (!isset($page))		$page	= '';
+if (!isset($root) && isset($page)) $root = $this->unwrap_link($page);
+if (!isset($root))		$root	= '';
 if (!isset($title))		$title	= 0;
-if (!isset($noxml)) 	$noxml	= 0;
-if (!isset($max))		$max = null;
+if (!isset($noxml))		$noxml	= 0;
+if (!isset($max))		$max	= null;
 
 $user	= $this->get_user();
 

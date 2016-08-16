@@ -9,12 +9,12 @@ if (!defined('IN_WACKO'))
 Random Page Action
 
  {{randompage
-  [for|page="PageName"] // page name to start from in the page hierarchy
+  [page="PageName"] // page name to start from in the page hierarchy
   [test]				// show, don't redirect
  }}
  */
 
-$tag = isset($for)? $for : (isset($page)? $page : '');
+$tag = isset($page)? $page : '';
 
 $query = // "SELECT p.supertag ".
 		"FROM ". $this->db->table_prefix."page p, ". $this->db->table_prefix."acl a ".

@@ -8,9 +8,14 @@ if (!defined('IN_WACKO'))
 // {{hits}}
 // take $this->page['hits'] in the first place
 
-if (isset($for))
+if (!isset($for))			$for	= ''; // depreciated
+if ($for)					$page	= $for;
+
+if (!isset($page))			$page	= '';
+
+if (isset($page))
 {
-	$tag = $this->unwrap_link($for);
+	$tag = $this->unwrap_link($page);
 
 	$rs = $this->db->load_single(
 		"SELECT hits ".

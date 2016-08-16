@@ -10,15 +10,16 @@ if (!defined('IN_WACKO'))
 */
 // 1. check for first param (for what table of content is built)
 
-if (!isset($nomark))	$nomark = '';
-if (!isset($for))		$for = '';
+if (!isset($for))		$for = ''; // depreciated
+if ($for)				$page = $for;
+
 if (!isset($page))		$page = '';
+if (!isset($nomark))	$nomark = '';
 if (!isset($numerate))	$numerate = '';
 if (!isset($from))		$from = '';
 if (!isset($to))		$to = '';
 if (!isset($legend))	$legend = '';
 
-if ($for)				$page = $for;
 if ($page)
 {
 	$page		= $this->unwrap_link($page);

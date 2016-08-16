@@ -8,29 +8,34 @@ if (!defined('IN_WACKO'))
 /*
  Page Index Action
  {{pageindex
-	[for="Cluster"]		// show page index only for a certain cluster
+	[page="Cluster"]		// show page index only for a certain cluster
 	[max=50]			// number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
 	[letter="a"]		// only display pages whose name starts with this letter
 	[title=1]			// takes title inplace of tag
 	[lang="ru"]			// show pages only in specified language
  }}
  */
+if (!isset($for))		$for = ''; // depreciated
+if ($for)				$page = $for;
 
+if (!isset($page))		$page = '';
 if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
 if (!isset($lang))		$lang = '';
-if (!isset($for))		$for = '';
 if (!isset($max))		$max = null;
-$title = (int)$title;
 
-$_alnum = '/'.$this->language['ALPHANUM'].'/S';
+$title		= (int)$title;
+$_alnum		= '/'.$this->language['ALPHANUM'].'/S';
+
 $get_letter = function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
 {
 	$ch = strtoupper(substr($ch, 0, 1));
+
 	if ($ch !== '' && !preg_match($_alnum, $ch))
 	{
 		$ch = '#';
 	}
+
 	return $ch;
 };
 
@@ -39,23 +44,23 @@ $letter = $get_letter(isset($_GET['letter'])? $_GET['letter'] : $letter);
 // get letters of alphabet with existing pages, and cache them in _SESSION
 $letters = &$this->sess->pi_letters;
 if (!isset($letters)
-	|| $this->sess->pi_for != $for
+	|| $this->sess->pi_for != $page
 	|| $this->sess->pi_lang != $lang
 	|| $this->sess->pi_title != $title
 	|| time() > $this->sess->pi_time)
 {
-	$this->sess->pi_for = $for;
-	$this->sess->pi_lang = $lang;
-	$this->sess->pi_title = $title;
-	$this->sess->pi_time = time() + 600;
+	$this->sess->pi_for		= $page;
+	$this->sess->pi_lang	= $lang;
+	$this->sess->pi_title	= $title;
+	$this->sess->pi_time	= time() + 600;
 
 	$pages = $this->db->load_all(
 		"SELECT tag, title ".
 		"FROM {$this->db->table_prefix}page ".
 		"WHERE comment_on_id = '0' ".
 			"AND deleted = '0' ".
-			($for
-				? "AND supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+			($page
+				? "AND supertag LIKE " . $this->db->q($this->translit($page) . '/%') . " "
 				: "").
 			($lang
 				? "AND page_lang = " . $this->db->q($lang) . " "
@@ -67,6 +72,7 @@ if (!isset($letters)
 			, true);
 
 	$letters = [];
+
 	foreach ($pages as $page)
 	{
 		if (($ch = $get_letter(($title)?  $page['title'] : $page['tag'])) !== '')
@@ -88,8 +94,8 @@ $count = $this->db->load_single(
 	"FROM {$this->db->table_prefix}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
-		($for
-			? "AND supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+		($page
+			? "AND supertag LIKE " . $this->db->q($this->translit($page) . '/%') . " "
 			: "").
 		($lang
 			? "AND page_lang = " . $this->db->q($lang) . " "
@@ -107,13 +113,14 @@ $pagination = $this->pagination($count['n'], $max, 'p', ($letter !== ''? ['lette
 
 // collect data for index
 $pages_to_display = [];
+
 if (($pages = $this->db->load_all(
 	"SELECT page_id, tag, title, page_lang ".
 	"FROM {$this->db->table_prefix}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
-		($for
-			? "AND supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+		($page
+			? "AND supertag LIKE " . $this->db->q($this->translit($page) . '/%') . " "
 			: "").
 		($lang
 			? "AND page_lang = " . $this->db->q($lang) . " "
@@ -156,9 +163,9 @@ $tpl->pagination_text = $pagination['text'];
 if ($letters)
 {
 	// 'Any' menu item
-	$tpl->letter_l_commit = true;
-	$tpl->letter_l_item_link = $this->href();
-	$tpl->letter_l_item_ch = $this->_t('Any');
+	$tpl->letter_l_commit		= true;
+	$tpl->letter_l_item_link	= $this->href();
+	$tpl->letter_l_item_ch		= $this->_t('Any');
 
 	foreach ($letters as $ch => $letter_count)
 	{
@@ -169,8 +176,8 @@ if ($letters)
 		}
 		else
 		{
-			$tpl->letter_l_item_ch = $ch;
-			$tpl->letter_l_item_link = $this->href('', '', ['letter' => $ch]);
+			$tpl->letter_l_item_ch		= $ch;
+			$tpl->letter_l_item_link	= $this->href('', '', ['letter' => $ch]);
 		}
 	}
 }

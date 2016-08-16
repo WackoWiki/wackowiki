@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_orphaned_pages = function ($for, $limit, $deleted = 0)
+$load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 {
 	$pagination	= '';
 	$pref		= $this->db->table_prefix;
@@ -19,8 +19,8 @@ $load_orphaned_pages = function ($for, $limit, $deleted = 0)
 				"AND l.to_supertag = '') ".
 				"OR l.to_supertag = p.supertag) ".
 		"WHERE ".
-			($for
-				? "p.tag LIKE '" . $this->db->q($for . '/%') . " AND "
+			($tag
+				? "p.tag LIKE '" . $this->db->q($tag . '/%') . " AND "
 				: "").
 			"l.to_page_id IS NULL ".
 			($deleted != 1
@@ -42,8 +42,8 @@ $load_orphaned_pages = function ($for, $limit, $deleted = 0)
 					"AND l.to_supertag = '') ".
 					"OR l.to_supertag = p.supertag) ".
 			"WHERE ".
-				($for
-					? "p.tag LIKE " . $this->db->q($for . '/%') . " AND "
+				($tag
+					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 					: "").
 				"l.to_page_id IS NULL ".
 				($deleted != 1

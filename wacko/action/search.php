@@ -8,24 +8,24 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$full_text_search = function ($phrase, $for, $limit, $filter, $deleted = 0)
+$full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 {
 	$selector =
-		($for
+		($tag
 			? "LEFT JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
 			: "").
 		"WHERE (( MATCH(a.body) AGAINST(".$this->db->q($phrase)." IN BOOLEAN MODE) ".
 			"OR lower(a.title) LIKE lower(".$this->db->q('%' . $phrase . '%').") ".
 			"OR lower(a.tag) LIKE lower(".$this->db->q('%' . $phrase . '%').")) ".
-			($for
-				? "AND (a.supertag LIKE ".$this->db->q($this->translit($for) . '/%')." ".
-				  "OR b.supertag LIKE ".$this->db->q($this->translit($for) . '/%')." )"
+			($tag
+				? "AND (a.supertag LIKE ".$this->db->q($this->translit($tag) . '/%')." ".
+				  "OR b.supertag LIKE ".$this->db->q($this->translit($tag) . '/%')." )"
 				: "").
 			($filter
 				? "AND a.comment_on_id = '0' "
 				: "").
 			(!$deleted
-				? ($for
+				? ($tag
 						? "AND (a.deleted <> '1' OR b.deleted <> '1') "
 						: "AND a.deleted <> '1' ")
 				: "").
@@ -53,23 +53,23 @@ $full_text_search = function ($phrase, $for, $limit, $filter, $deleted = 0)
 	return [$results, $pagination];
 };
 
-$tag_search = function ($phrase, $for, $limit, $filter, $deleted = 0)
+$tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 {
 	$selector =
-		($for
+		($tag
 			? "LEFT JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
 			: "").
 		"WHERE ( lower(a.tag) LIKE binary lower(".$this->db->q('%' . $phrase.'%') . ") ".
 			"OR lower(a.title) LIKE lower(".$this->db->q('%' . $phrase . '%') . ")) ".
-		($for
-			? "AND (a.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " ".
-			  "OR b.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " )"
+		($tag
+			? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " ".
+			  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " )"
 			: "").
 		($filter
 			? "AND a.comment_on_id = '0' "
 			: "").
 		(!$deleted
-			? ($for
+			? ($tag
 				? "AND (a.deleted <> '1' OR b.deleted <> '1') "
 				: "AND a.deleted <> '1' ")
 			: "");
@@ -223,12 +223,15 @@ $highlight_this = function ($text, $words, $the_place)
 
 $output = '';
 
+if (!isset($for))		$for		= ''; // depreciated
+if ($for)				$page		= $for;
+
+if (!isset($page))		$page		= '';
 if (!isset($topic))		$topic		= '';
 if (!isset($title))		$title		= '';
 if (!isset($filter))	$filter		= '';
 if (!isset($style))		$style		= '';
 if (!isset($nomark))	$nomark		= '';
-if (!isset($for))		$for		= '';
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
 if (!isset($max))		$max		= null;
@@ -279,11 +282,11 @@ if (strlen($phrase) >= 3)
 {
 	if ($mode == 'topic')
 	{
-		$results = $tag_search($phrase, $for, $max, ($filter != 'all'));
+		$results = $tag_search($phrase, $page, $max, ($filter != 'all'));
 	}
 	else
 	{
-		$results = $full_text_search($phrase, $for, $max, ($filter != 'all'));
+		$results = $full_text_search($phrase, $page, $max, ($filter != 'all'));
 	}
 
 	list ($pages, $pagination) = $results;
