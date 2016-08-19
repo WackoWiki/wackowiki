@@ -843,6 +843,8 @@ $wacko_translation = array(
 	'FeedError'					=> 'Ќевозможно загрузить или распознать новости',
 	'FeedSource'				=> '»сточник:',
 
+	'FeedYearAgo'				=> ' year ago',
+	'FeedYearsAgo'				=> ' years ago',
 	'FeedMonthAgo'				=> ' мес€ц назад',
 	'FeedMonthsAgo'				=> ' мес€цев назад',
 	'FeedWeekAgo'				=> ' неделю назад',

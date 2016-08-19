@@ -840,6 +840,8 @@ $wacko_translation = array(
 	'FeedError'					=> 'Impossible de charger ou d&rsquo;analyser le flux',
 	'FeedSource'				=> 'Source:',
 
+	'FeedYearAgo'				=> ' year ago',
+	'FeedYearsAgo'				=> ' years ago',
 	'FeedMonthAgo'				=> ' mois passé',
 	'FeedMonthsAgo'				=> ' mois passés',
 	'FeedWeekAgo'				=> ' semaine passée',

@@ -78,6 +78,7 @@ class Wacko
 		'веб'		=> 'web',
 	];
 	var $time_intervals = [
+		365*DAYSECS	=> 'Year',
 		30*DAYSECS	=> 'Month',
 		7*DAYSECS	=> 'Week',
 		DAYSECS		=> 'Day',
@@ -290,7 +291,15 @@ class Wacko
 
 	function get_time_formatted($text) // STS: rename to sql_time_formatted
 	{
-		return $this->get_unix_time_formatted($this->sql2localtime($text));
+		$local_time = $this->sql2localtime($text);
+
+		// TODO: made format depended from localization and user preferences?
+		// default: d.m.Y H:i
+		return date($this->db->date_format . ' ' . $this->db->time_format, $local_time);
+
+		// TODO: add options for ..
+		# return $this->get_unix_time_formatted($this->sql2localtime($text));
+		# return $this->get_time_interval($local_time, false);
 	}
 
 	function get_unix_time_formatted($local)
