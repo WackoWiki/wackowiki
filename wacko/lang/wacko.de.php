@@ -840,6 +840,8 @@ $wacko_translation = array(
 	'FeedError'					=> 'Kann Feed nicht laden oder parsen',
 	'FeedSource'				=> 'Quelle:',
 
+	'FeedYearAgo'				=> ' year ago',
+	'FeedYearsAgo'				=> ' years ago',
 	'FeedMonthAgo'				=> ' month ago',
 	'FeedMonthsAgo'				=> ' months ago',
 	'FeedWeekAgo'				=> ' week ago',
