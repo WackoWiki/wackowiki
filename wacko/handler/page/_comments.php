@@ -154,7 +154,6 @@ if ($this->has_access('read'))
 
 				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
 
-
 				echo '<header class="comment-title">'."\n".
 						'<h2><a href="'.$this->href('', $comment['tag']).'">'.$comment['title']."</a></h2>\n".
 					 "</header>\n";
@@ -229,8 +228,8 @@ if ($this->has_access('read'))
 				echo '<div id="preview" class="preview"><p class="preview"><span>'.$this->_t('EditPreviewSlim').'</span></p>'."\n".
 						'<div class="comment-preview">'."\n".
 						'<header class="comment-title">'.
-							'<h2>'.$title."</h2>'.
-						'</header>\n".
+							'<h2>'.$title.'</h2>'.
+						'</header>'."\n".
 						'<p>'.$preview.'</p>'.
 						"</div>\n</div><br />\n";
 			}
