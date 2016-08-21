@@ -31,7 +31,7 @@ if (!defined('IN_WACKO'))
 if (!isset($nomark))	$nomark	= '';
 if (!isset($title))		$title	= '';
 if (!isset($max))		$max	= 5;
-if (!isset($time))		$time	= '';
+if (!isset($time))		$time	= 0;
 
 // Include SimplePie
 #include_once 'lib/SimplePie/autoloader.php';
