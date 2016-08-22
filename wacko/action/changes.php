@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 $viewed = '';
 
 if (!isset($for))		$for	= ''; // depreciated
-if ($for)				$page = $for;
+if ($for)				$page	= $for;
 
 if (!isset($page))		$page = '';
 if (!isset($root) && isset($page))	$root = $this->unwrap_link($page);
