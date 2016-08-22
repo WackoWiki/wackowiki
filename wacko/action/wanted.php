@@ -8,10 +8,10 @@ if (!defined('IN_WACKO'))
 $load_wanted = function ($for, $limit, $deleted = 0)
 {
 	$pagination	= '';
-	$pref		= $engine->db->table_prefix;
+	$pref		= $this->db->table_prefix;
 
 	// count pages
-	if ($count_pages = $engine->load_all(
+	if ($count_pages = $this->db->load_all(
 			"SELECT DISTINCT l.to_tag AS wanted_tag ".
 			"FROM ".$pref."link l ".
 				"LEFT JOIN ".$pref."page p ON ".
@@ -28,9 +28,9 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 	if ($count_pages)
 	{
 		$count		= count($count_pages);
-		$pagination = $engine->pagination($count, $limit);
+		$pagination = $this->pagination($count, $limit);
 
-		$wanted = $engine->load_all(
+		$wanted = $this->db->load_all(
 				"SELECT DISTINCT l.to_tag AS wanted_tag ".
 				"FROM ".$pref."link l ".
 					"LEFT JOIN ".$pref."page p ON ".
@@ -49,6 +49,9 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 	}
 
 };
+
+if (!isset($root))		$root	= ''; // depreciated
+if ($root)				$page	= $root;
 
 if (!isset($root))
 {

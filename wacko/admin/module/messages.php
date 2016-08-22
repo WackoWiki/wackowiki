@@ -68,6 +68,9 @@ function admin_messages(&$engine, &$module)
 						{
 							echo '<option value="'.$type.'" '.($engine->db->system_message_type == $type ? 'selected="selected"' : '').'>'.$type.'</option>';
 						}
+
+						// add option: Position (header, footer, ..)
+						// add option: allow users to dissmis the message
 ?>
 					</select>
 				</td>
