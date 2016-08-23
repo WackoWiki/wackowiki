@@ -1559,6 +1559,24 @@ table.formation td {
 	border-color: #BABFC7;
 }
 
+.diff-zero {
+	background-color: #eee;
+	color: #777;
+	font-style: italic;
+}
+
+.diff-pos {
+	background-color: #efe;
+	color: #008800;
+
+}
+
+.diff-neg {
+	background-color: #fee;
+	color: #c00;
+	font-style: italic;
+}
+
 #handler {
 	/* clear:both; */
 	float: right;

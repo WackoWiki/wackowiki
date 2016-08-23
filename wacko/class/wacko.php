@@ -295,6 +295,12 @@ class Wacko
 
 		// TODO: made format depended from localization and user preferences?
 		// default: d.m.Y H:i
+
+		// XXX: testing strftime(), charset issue with CP1251
+		#setlocale(LC_ALL, $this->language['locale']);
+		#setlocale(LC_ALL, 'ru_RU.UTF-8');
+		#return $this->try_utf_decode(strftime('%d. %B %Y' . ' ' . '%H.%M', $local_time));
+
 		return date($this->db->date_format . ' ' . $this->db->time_format, $local_time);
 
 		// TODO: add options for ..
@@ -711,7 +717,7 @@ class Wacko
 		}
 	}
 
-	function try_utf_decode ($string)
+	function try_utf_decode($string)
 	{
 		$t1 = $this->utf8_to_unicode_entities($string);
 		$t2 = @strtr($t1, $this->unicode_entities);
@@ -2012,6 +2018,7 @@ class Wacko
 
 				$this->db->sql_query(
 					"INSERT INTO ".$this->db->table_prefix."page SET ".
+						"version_id		= '1', ".
 						"comment_on_id	= '".(int)$comment_on_id."', ".
 						(!$comment_on_id ? "description = ".$this->db->q($desc).", " : "").
 						"parent_id		= '".(int)$parent_id."', ".
@@ -2145,6 +2152,7 @@ class Wacko
 					// update current page copy
 					$this->db->sql_query(
 						"UPDATE ".$this->db->table_prefix."page SET ".
+							"version_id		= '".(int)($old_page['version_id'] + 1)."', ".
 							"comment_on_id	= '".(int)$comment_on_id."', ".
 							"modified		= UTC_TIMESTAMP(), ".
 							"created		= ".$this->db->q($old_page['created']).", ".
@@ -2227,21 +2235,11 @@ class Wacko
 			$val = $this->db->quote($val);
 		}
 
-		// get new version_id
-		$_old_version = $this->db->load_single(
-			"SELECT version_id ".
-			"FROM {$this->db->table_prefix}revision ".
-			"WHERE page_id = '".$old_page['page_id']."' ".
-			"ORDER BY version_id DESC ".
-			"LIMIT 1");
-
-		$version_id = $_old_version['version_id'] + 1;
-
 		// move revision
 		$this->db->sql_query(
 			"INSERT INTO {$this->db->table_prefix}revision SET ".
 				"page_id		= '{$old_page['page_id']}', ".
-				"version_id		= '{$version_id}', ".
+				"version_id		= '{$old_page['version_id']}', ".
 				"tag			= '{$old_page['tag']}', ".
 				"modified		= '{$old_page['modified']}', ".
 				"body			= '{$old_page['body']}', ".

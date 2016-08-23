@@ -42,6 +42,7 @@ if ($this->has_access('read'))
 		echo '<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '" />';
 
 		$default_mode = 0; // TODO: configurable per user
+
 		for ($mode = 0; ($text = $this->_t($id = 'DiffMode' . $mode)) !== null; ++$mode)
 		{
 			if ($text)
@@ -76,11 +77,25 @@ if ($this->has_access('read'))
 		}
 		else
 		{
-			$max = 20;
+			$max = $this->db->list_count;
 		}
 
 		$c = 0;
 		$a = count($revisions);
+		$diff_class = '';
+		$this->parent_size = 0;
+
+		// get size diff to parent version
+		$r_revisions = array_reverse($revisions);
+
+		foreach ($r_revisions as $r)
+		{
+			// page_size change
+			$size_delta			= $r['page_size'] - $this->parent_size;
+			$this->parent_size	= $r['page_size'];
+
+			$this->rev_delta[$r['revision_id']] = $size_delta;
+		}
 
 		foreach ($revisions as $num => $page)
 		{
@@ -93,6 +108,24 @@ if ($this->has_access('read'))
 				$edit_note = '';
 			}
 
+			// page_size change
+			$size_delta = $this->rev_delta[$page['revision_id']];
+
+			if ($size_delta > 0)
+			{
+				$diff_class = 'diff-pos';
+				$size_delta = '+' . $size_delta;
+			}
+			else if($size_delta < 0)
+			{
+				$diff_class = 'diff-neg';
+			}
+			else
+			{
+				$diff_class = 'diff-zero';
+				$size_delta = '±' . $size_delta;
+			}
+
 			echo '<li>';
 			echo '<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>';
 			echo '<input type="radio" name="a" value="'.(!$c ? '-1' : $page['revision_id']).'" '.($c == 0 ? 'checked="checked"' : '').' />';
@@ -100,7 +133,7 @@ if ($this->has_access('read'))
 						'<input type="radio" name="b" value="'.(!$c ? '-1' : $page['revision_id']).'" '.($c == 1 ? 'checked="checked"' : '').' />';
 			echo $place_holder.'&nbsp;
 						<a href="'.$this->href('show', '', 'revision_id='.$page['revision_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
-			echo '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_id']."</span> ";
+			echo '<span style="display: inline-block; width:120px;">'."&nbsp; — (".$this->binary_multiples($page['page_size'], false, true, true).') <span class="'.$diff_class.'">'.$size_delta."</span></span> ";
 			echo $place_holder."&nbsp;".$this->_t('By')." ".
 						$this->user_link($page['user_name'], '', true, false);
 			echo $edit_note;
