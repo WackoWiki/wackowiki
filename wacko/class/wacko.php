@@ -1446,11 +1446,11 @@ class Wacko
 	// STANDARD QUERIES
 	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0)
 	{
-		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, '.
+		$page_meta = 'p.page_id, p.version_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, '.
 					 'p.page_size, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$revisions = $this->db->load_all(
-			"SELECT p.version_id, p.revision_id, ".$page_meta." ".
+			"SELECT p.revision_id, ".$page_meta." ".
 			"FROM ".$this->db->table_prefix."revision p ".
 				"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->db->table_prefix."user o ON (p.reviewer_id = o.user_id) ".
@@ -1480,14 +1480,13 @@ class Wacko
 				"ORDER BY p.modified DESC ".
 				"LIMIT 1")))
 			{
-				$cur['version_id'] = $revisions[0]['version_id'] + 1;
 				array_unshift($revisions, $cur);
 			}
 		}
 		else
 		{
 			$revisions = $this->db->load_all(
-				"SELECT 1 AS version_id, 0 AS revision_id, ".$page_meta." ".
+				"SELECT 0 AS revision_id, ".$page_meta." ".
 				"FROM ".$this->db->table_prefix."page p ".
 					"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->db->table_prefix."user o ON (p.reviewer_id = o.user_id) ".

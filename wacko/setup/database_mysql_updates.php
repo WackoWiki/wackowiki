@@ -65,7 +65,7 @@ $alter_menu_r5_4_1 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE
 $alter_page_r5_1_0 = "ALTER TABLE {$pref}page ADD INDEX idx_deleted (deleted)";
 $alter_page_r5_4_0 = "ALTER TABLE {$pref}page CHANGE lang page_lang VARCHAR(2) NOT NULL DEFAULT ''";
 $alter_page_r5_4_1 = "ALTER TABLE {$pref}page CHANGE title title VARCHAR(250) NOT NULL DEFAULT ''";
-$alter_page_r5_4_2 = "ALTER TABLE {$pref}page ADD version_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
+$alter_page_r5_4_2 = "ALTER TABLE {$pref}page ADD version_id INT(10) UNSIGNED NOT NULL DEFAULT '1' AFTER page_id";
 $alter_page_r5_4_3 = "ALTER TABLE {$pref}page CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
 $alter_page_r5_4_4 = "ALTER TABLE {$pref}page ADD page_size INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit";
 
@@ -74,6 +74,7 @@ $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
 $update_page_r5_4_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r5_4_2 = "UPDATE {$pref}page AS p, (SELECT user_id FROM {$pref}user WHERE user_name = 'System') AS u SET p.noindex = '1' WHERE p.owner_id = u.user_id";
 $update_page_r5_4_3 = "UPDATE {$pref}page SET page_size = LENGTH(body)";
+$update_page_r5_4_4 = "UPDATE {$pref}page AS p, (SELECT page_id, MAX(version_id) AS version_id FROM {$pref}revision GROUP BY page_id) AS r SET p.version_id = r.version_id + 1 WHERE p.page_id = r.page_id";
 
 // POLL
 

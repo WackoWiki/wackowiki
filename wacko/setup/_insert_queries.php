@@ -146,6 +146,7 @@ $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_3,	
 
 $upgrade['5.5.rc2'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_4,			$lang['ErrorAlteringTable']);
 $upgrade['5.5.rc2'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_3,		$lang['ErrorUpdatingTable']);
+$upgrade['5.5.rc2'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_4,		$lang['ErrorUpdatingTable']);
 
 // referrer
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_0,		$lang['ErrorAlteringTable']);
