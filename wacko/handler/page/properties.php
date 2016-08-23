@@ -23,19 +23,19 @@ if (@$_POST['_action'] === 'extended_properties')
 	$mode = 'extended';
 	$this->db->sql_query(
 		"UPDATE {$this->db->table_prefix}page SET ".
-				"footer_comments	= '".(int)$_POST['footer_comments']."', ".
-				"footer_files		= '".(int)$_POST['footer_files']."', ".
-				($this->db->footer_rating
-					? "footer_rating	= '".(int)$_POST['footer_rating']."', "
-					: "").
-				"hide_toc			= '".(int)$_POST['hide_toc']."', ".
-				"hide_index			= '".(int)$_POST['hide_index']."', ".
-				"tree_level			= '".(int)$_POST['tree_level']."', ".
-				($this->is_admin()
-					?	"allow_rawhtml		= '".(int)$_POST['allow_rawhtml']."', ".
-						"disable_safehtml	= '".(int)$_POST['disable_safehtml']."', "
-					: "").
-				"noindex			= '".(int)$_POST['noindex']."' ".
+			"footer_comments	= '".(int)$_POST['footer_comments']."', ".
+			"footer_files		= '".(int)$_POST['footer_files']."', ".
+			($this->db->footer_rating
+				? "footer_rating	= '".(int)$_POST['footer_rating']."', "
+				: "").
+			"hide_toc			= '".(int)$_POST['hide_toc']."', ".
+			"hide_index			= '".(int)$_POST['hide_index']."', ".
+			"tree_level			= '".(int)$_POST['tree_level']."', ".
+			($this->is_admin()
+				?	"allow_rawhtml		= '".(int)$_POST['allow_rawhtml']."', ".
+					"disable_safehtml	= '".(int)$_POST['disable_safehtml']."', "
+				: "").
+			"noindex			= '".(int)$_POST['noindex']."' ".
 		"WHERE page_id = '".$this->page['page_id']."' ".
 		"LIMIT 1");
 }
@@ -44,14 +44,14 @@ if (@$_POST['_action'] === 'general_properties')
 {
 	$this->db->sql_query(
 		"UPDATE {$this->db->table_prefix}page SET ".
-				"page_lang			= ".$this->db->q($_POST['page_lang']).", ".
-				"theme				= ".$this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')).", ".
-				// menu_tag: unused currently, for use in custom theme menus
-				// "menu_tag			= ".$this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).", ".
-				// "show_menu_tag		= ".$this->db->q((int)$_POST['show_menu_tag']).", ".
-				"title				= ".$this->db->q(trim($_POST['title'])).", ".
-				"keywords			= ".$this->db->q(trim($_POST['keywords'])).", ".
-				"description		= ".$this->db->q(trim($_POST['description']))." ".
+			"page_lang			= ".$this->db->q($_POST['page_lang']).", ".
+			"theme				= ".$this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')).", ".
+			// menu_tag: unused currently, for use in custom theme menus
+			// "menu_tag			= ".$this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).", ".
+			// "show_menu_tag		= ".$this->db->q((int)$_POST['show_menu_tag']).", ".
+			"title				= ".$this->db->q(trim($_POST['title'])).", ".
+			"keywords			= ".$this->db->q(trim($_POST['keywords'])).", ".
+			"description		= ".$this->db->q(trim($_POST['description']))." ".
 		"WHERE page_id = '".$this->page['page_id']."' ".
 		"LIMIT 1");
 }
@@ -92,24 +92,26 @@ if (isset($_GET['extended']))
 	if ($this->is_owner() || $this->is_admin())
 	{
 		$tpl->enter('e_x_');
-		$tpl->comments = (int) $this->db->footer_comments;
-		$tpl->files = (int) $this->db->footer_files;
+		$tpl->comments	= (int) $this->db->footer_comments;
+		$tpl->files		= (int) $this->db->footer_files;
+
 		if ($this->db->footer_rating)
 		{
 			$tpl->r_rating = (int) $this->db->footer_rating;
 		}
 
 		// hide_toc, hide_index, tree_level: used in custom theme menus
-		$tpl->hidetoc = (int) $this->db->hide_toc;
-		$tpl->hideindex = (int) $this->db->hide_index;
-		$tpl->treelevel = (int) $this->db->tree_level;
-		$tpl->noindex = (int) $this->page['noindex'];
+		$tpl->hidetoc	= (int) $this->db->hide_toc;
+		$tpl->hideindex	= (int) $this->db->hide_index;
+		$tpl->treelevel	= (int) $this->db->tree_level;
+		$tpl->noindex	= (int) $this->page['noindex'];
 
 		if ($this->is_admin())
 		{
-			$tpl->html_raw = (int) $this->db->allow_rawhtml;
-			$tpl->html_safe = (int) $this->db->disable_safehtml;
+			$tpl->html_raw	= (int) $this->db->allow_rawhtml;
+			$tpl->html_safe	= (int) $this->db->disable_safehtml;
 		}
+
 		$tpl->leave();
 	}
 	else
@@ -126,6 +128,7 @@ else
 	{
 		$tpl->enter('g_f_');
 		$tpl->page = $this->page;
+
 		if (($categories = $this->action('categories', ['page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0], 1)))
 		{
 			$tpl->categories_html = $categories;
@@ -138,6 +141,7 @@ else
 		 */
 
 		$langs = $this->available_languages();
+
 		if (!($clang = $this->page['page_lang']) || !isset($langs[$clang]))
 		{
 			$this->set_message(Ut::perc_replace($this->_t('NeedToChangeLang'), $clang), 'error');
@@ -148,17 +152,17 @@ else
 
 		foreach ($langs as $lang)
 		{
-			$tpl->o_lang = $lang;
-			$tpl->o_name = $languages[$lang];
-			$tpl->o_sel = (int) ($clang == $lang);
+			$tpl->o_lang	= $lang;
+			$tpl->o_name	= $languages[$lang];
+			$tpl->o_sel		= (int) ($clang == $lang);
 		}
 
 		if ($this->db->allow_themes_per_page)
 		{
 			foreach ($this->available_themes() as $theme)
 			{
-				$tpl->themes_o_theme = $theme;
-				$tpl->themes_o_sel = (int) (isset($this->page['theme']) && $this->page['theme'] == $theme);
+				$tpl->themes_o_theme	= $theme;
+				$tpl->themes_o_sel		= (int) (isset($this->page['theme']) && $this->page['theme'] == $theme);
 			}
 		}
 
@@ -170,16 +174,16 @@ else
 	}
 }
 
-$tpl->page = $this->page;
-$tpl->owner = $this->user_link($this->page['owner_name'], '', true, false);
-$tpl->bodylen = $this->binary_multiples($this->page['page_size'], false, true, true);
-$tpl->bodyrlen = $this->binary_multiples(strlen($this->page['body_r']), false, true, true);
-$tpl->revs = (int) $revs['total'];
+$tpl->page		= $this->page;
+$tpl->owner		= $this->user_link($this->page['owner_name'], '', true, false);
+$tpl->bodylen	= $this->binary_multiples($this->page['page_size'], false, true, true);
+$tpl->bodyrlen	= $this->binary_multiples(strlen($this->page['body_r']), false, true, true);
+$tpl->revs		= (int) $revs['total'];
 
 if ($this->db->footer_rating)
 {
-	$tpl->rat_ratio = $rating['ratio'];
-	$tpl->rat_voters = (int) $rating['voters'];
+	$tpl->rat_ratio		= $rating['ratio'];
+	$tpl->rat_voters	= (int) $rating['voters'];
 }
 
 $tpl->i = true; // turn on icon
@@ -188,8 +192,8 @@ $tpl->i = true; // turn on icon
 // ACL link (shows only if owner is current user or Admin)
 if ($this->is_owner() || $this->is_admin())
 {
-	$tpl->rename_i = true;
-	$tpl->perm_i = true;
+	$tpl->rename_i	= true;
+	$tpl->perm_i	= true;
 }
 
 // Remove link (shows only for page owner if allowed)

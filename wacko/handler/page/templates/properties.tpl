@@ -2,8 +2,8 @@
 	<h3>[ ' head ' ]</h3>
 	[= e Extended =
 		<ul class="menu">
-				<li><a href="[ ' href: properties ' ]">[ ' _t: UserSettingsGeneral ' ]</a></li>
-				<li class="active">[ ' _t: UserSettingsExtended ' ]</li>
+			<li><a href="[ ' href: properties ' ]">[ ' _t: UserSettingsGeneral ' ]</a></li>
+			<li class="active">[ ' _t: UserSettingsExtended ' ]</li>
 		</ul>
 		<br /><br />
 		[= x _ =

@@ -114,7 +114,7 @@ $table_menu = "CREATE TABLE {$pref}menu (".
 
 $table_page = "CREATE TABLE {$pref}page (".
 					"page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"version_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"version_id INT(10) UNSIGNED NOT NULL DEFAULT '1',".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"title VARCHAR(250) NOT NULL DEFAULT '',".
