@@ -17,11 +17,13 @@ class TemplatestFilters extends TemplatestEscaper
 	function __construct()
 	{
 		$this->filters = [];
+
 		foreach (get_class_methods(__CLASS__) as $meth)
 		{
 			if (preg_match('/^filter_(\w+?)(_also_(\w+?))?$/', $meth, $match))
 			{
 				$this->filters[$match[1]] = [$this, $meth];
+
 				if (isset($match[3]))
 				{
 					$this->filters[$match[3]] = [$this, $meth];
@@ -39,6 +41,7 @@ class TemplatestFilters extends TemplatestEscaper
 	function getFilters()
 	{
 		$list = [];
+
 		foreach ($this->filters as $id => $func)
 		{
 			if (!(is_array($func) && $func[0] === $this))
@@ -46,6 +49,7 @@ class TemplatestFilters extends TemplatestEscaper
 				$list[$id] = $func;
 			}
 		}
+
 		return $list;
 	}
 
@@ -143,7 +147,8 @@ class TemplatestFilters extends TemplatestEscaper
 		return strtoupper($value);
 	}
 
-	function filter_number($value, $decimals = 0, $dec_point = '.', $thousands_sep = ',')
+	// TODO: localize formatting
+	function filter_number($value, $decimals = 0, $dec_point = ',', $thousands_sep = '.')
 	{
 		return number_format($value, $decimals, $dec_point, $thousands_sep);
 	}
@@ -177,10 +182,10 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_replace()
 	{
-		$args = func_get_args();
-		$value = array_shift($args);
+		$args	= func_get_args();
+		$value	= array_shift($args);
+		$search	= $replace = [];
 
-		$search = $replace = [];
 		foreach ($args as $i => $str)
 		{
 			if ($i & 1)
@@ -198,10 +203,10 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_json_encode()
 	{
-		$args = func_get_args();
-		$value = array_shift($args);
+		$args		= func_get_args();
+		$value		= array_shift($args);
+		$options	= 0;
 
-		$options = 0;
 		foreach ($args as $option)
 		{
 			$option = strtoupper($option);
@@ -257,18 +262,17 @@ class TemplatestFilters extends TemplatestEscaper
 		{
 			return $value;
 		}
-		
+
 		$raw_tag = false;
 		$html = '';
-		
+
 		foreach ($matches as $token)
 		{
 			$tag = (isset($token['tag'])) ? strtolower($token['tag']) : null;
-			
-			$content = $token[0];
-			
-			$strip = false;
-			
+
+			$content	= $token[0];
+			$strip		= false;
+
 			if (is_null($tag))
 			{
 				if (!empty($token['style']))
@@ -299,24 +303,24 @@ class TemplatestFilters extends TemplatestEscaper
 							$content = substr($content, $spaces);
 						}
 					}
-					
+
 					$strip = true;
 				}
 			}
-			
+
 			if ($strip)
 			{
 				$content = strtr($content, "\t\r\n\x0b", '    ');
-				
+
 				while (($lesser = str_replace('  ', ' ', $content)) != $content)
 				{
 					$content = $lesser;
 				}
 			}
-			
+
 			$html .= $content;
 		}
-		
+
 		return $html;
 	}
 
@@ -349,6 +353,7 @@ class TemplatestFilters extends TemplatestEscaper
 		}
 
 		$list = [];
+
 		foreach ($value as $id => $val)
 		{
 			$list[] = Ut::qencode($id, $val);
@@ -365,6 +370,7 @@ class TemplatestFilters extends TemplatestEscaper
 	function filter_nl2br($value)
 	{
 		$list = preg_split('/(?:\r\n|\r|\n){2,}/', $value, -1, PREG_SPLIT_NO_EMPTY);
+
 		foreach ($list as &$p)
 		{
 			$p = '<p>' . str_replace("\n", "<br />\n", $p) . '</p>';
@@ -377,9 +383,9 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		if (strlen($value) > $limit)
 		{
-			$split = explode(' ', substr($value, 0, $limit));
-			$split1 = array_slice($split, 0, -1);
-			$value = implode(' ', $split1 ?: $split) . $ellipsis;
+			$split	= explode(' ', substr($value, 0, $limit));
+			$split1	= array_slice($split, 0, -1);
+			$value	= implode(' ', $split1 ?: $split) . $ellipsis;
 		}
 
 		return $value;
@@ -392,8 +398,9 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_list()
 	{
-		$args = func_get_args();
-		$value = (int)array_shift($args);
+		$args	= func_get_args();
+		$value	= (int)array_shift($args);
+
 		return ($value >= 0 && $value < count($args))? $args[$value] : array_pop($args);
 	}
 

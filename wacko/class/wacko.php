@@ -24,13 +24,13 @@ class Wacko
 	var $_acl					= [];
 	var $acl_cache				= [];
 	var $page_id_cache			= [];
-	var $context				= [];	// Page context. Uses for correct processing of inclusions
+	var $context				= [];		// Page context. Uses for correct processing of inclusions
 	var $current_context		= 0;		// Current context level
 	var $header_count			= 0;
 	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
-	var $first_inclusion		= [];	// for backlinks
+	var $first_inclusion		= [];		// for backlinks
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link
-	var $unicode_entities		= [];	// common unicode array
+	var $unicode_entities		= [];		// common unicode array
 	var $toc_context			= [];
 	var $search_engines			= ['bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', ];
 	var $languages				= null;
@@ -149,18 +149,18 @@ class Wacko
 			return $this->page['page_id'];
 		}
 		else
-		//Soon we'll need to have page_id when saving a new page to continue working with $page_id instead of $tag
 		{
+			// soon we'll need to have page_id when saving a new page to continue working with $page_id instead of $tag
 			if (!isset($this->page_id_cache[$tag]))
 			{
-				// Returns Array ( [id] => Value )
+				// returns array ( [id] => value )
 				$get_page_id = $this->db->load_single(
 					"SELECT page_id ".
 					"FROM ".$this->db->table_prefix."page ".
 					"WHERE tag = ".$this->db->q($tag)." ".
 					"LIMIT 1");
 
-				// Get page_ID value
+				// get page_ID value
 				$new_page_id = $get_page_id['page_id'];
 
 				$this->page_id_cache[$tag] = $new_page_id;
@@ -967,7 +967,7 @@ class Wacko
 	* @param int $page_id
 	* @param int $revision_id
 	* @param int $cache If LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
-	* @param int $metadataonly If LOAD_ALL loads all page fields, if LOAD_META - only  pages_meta fields.
+	* @param int $metadataonly If LOAD_ALL loads all page fields including page body, if LOAD_META - only pages_meta fields.
 	* @param boolean $deleted
 	* @return array Loaded page
 	*/
@@ -1207,21 +1207,17 @@ class Wacko
 	*/
 	function cache_page($page, $page_id = 0, $metadata_only = 0)
 	{
-		#if ($page_id != 0) // cache for both cases to avoid roundtrips
-		#{
-			$this->page_cache['page_id'][$page['page_id']]				= $page;
-			$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
-		#}
-		#else
-		#{
-			if (!$page['supertag'])
-			{
-				$page['supertag'] = $this->translit($page['tag'], TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
-			}
+		// cache for both cases (id + tag) to avoid roundtrips
+		$this->page_cache['page_id'][$page['page_id']]				= $page;
+		$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
 
-			$this->page_cache['supertag'][$page['supertag']]			= $page;
-			$this->page_cache['supertag'][$page['supertag']]['mdonly']	= $metadata_only;
-		#}
+		if (!$page['supertag'])
+		{
+			$page['supertag'] = $this->translit($page['tag'], TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
+		}
+
+		$this->page_cache['supertag'][$page['supertag']]			= $page;
+		$this->page_cache['supertag'][$page['supertag']]['mdonly']	= $metadata_only;
 	}
 
 	function cache_wanted_page($tag, $page_id = 0, $check = 0)
@@ -3748,6 +3744,7 @@ class Wacko
 		if (is_array($this->numerate_links))
 		{
 			$refnum = &$this->numerate_links[$url];
+
 			if (!isset($refnum))
 			{
 				$refnum = '[link' . count($this->numerate_links) . ']';
@@ -3768,7 +3765,6 @@ class Wacko
 
 		// check current page lang for different charset to do_unicode_entities()
 		$text = ($this->page['page_lang'] != $account_lang)?  $this->do_unicode_entities($user_name, $account_lang) : $user_name;
-
 		$icon = $add_icon?  '<span class="icon"></span>' : '';
 
 		if ($linking)
@@ -3791,11 +3787,7 @@ class Wacko
 
 		// check current page lang for different charset to do_unicode_entities()
 		$text = ($this->page['page_lang'] != $group_lang)?  $this->do_unicode_entities($group_name, $group_lang) : $group_name;
-
 		$icon = $add_icon?  '<span class="icon"></span>' : '';
-
-		#$this->is_admin() ? ' title="'.$comment['ip'].'"' : '' (a | span)
-		# $this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'')
 
 		if ($linking)
 		{
@@ -4176,8 +4168,8 @@ class Wacko
 		if ($_POST
 			&& !$this->sess->verify_nonce(@$_POST['_action'], @$_POST['_nonce']))
 		{
-			$_POST = [];
-			$_REQUEST = $_GET;
+			$_POST		= [];
+			$_REQUEST	= $_GET;
 
 			$this->set_message($this->_t('FormInvalid'), 'error');
 
@@ -4198,8 +4190,8 @@ class Wacko
 			&& !$this->bad_words($ref)
 			&& filter_var($ref, FILTER_VALIDATE_URL))
 		{
-			$heads = ['https://' . $this->db->tls_proxy . '/', 'https://', 'http://'];
-			$headless = str_replace($heads, '', $ref);
+			$heads		= ['https://' . $this->db->tls_proxy . '/', 'https://', 'http://'];
+			$headless	= str_replace($heads, '', $ref);
 
 			if ($ref !== $headless) // if protocol known..
 			{
@@ -5589,10 +5581,12 @@ class Wacko
 			foreach ($user_menu as $menu_item)
 			{
 				$title = $menu_item['menu_title'];
+
 				if ($title === '')
 				{
 					$title = $menu_item['title'];
 				}
+
 				$user_menu_formatted[] = [
 					$menu_item['page_id'],
 					(($title !== '')? $title : $menu_item['tag']),
@@ -5624,6 +5618,7 @@ class Wacko
 				$menu = $this->get_user_menu($user['user_id']);
 				$this->sess->menu_default = false;
 			}
+
 			if (!$menu)
 			{
 				$menu = $this->get_default_menu();
@@ -5698,15 +5693,15 @@ class Wacko
 			unset($_GET['removebookmark']);
 			// rewriting menu table except containing current page tag
 			$prev = $menu_formatted;
-			$menu_page_ids = [];
-			$menu_formatted = [];
+			$menu_page_ids	= [];
+			$menu_formatted	= [];
 
 			foreach ($prev as $menu_item)
 			{
 				if ($menu_item[0] != $this->page['page_id'])
 				{
-					$menu_page_ids[] = $menu_item[0];
-					$menu_formatted[] = $menu_item;
+					$menu_page_ids[]	= $menu_item[0];
+					$menu_formatted[]	= $menu_item;
 				}
 			}
 
@@ -6973,10 +6968,10 @@ class Wacko
 
 		$perpage = $this->get_list_count($perpage);
 
-		$pagination['offset'] = 0;
-		$pagination['text'] = false;
-		$pagination['limit'] = '';
-		$pagination['perpage'] = $perpage;
+		$pagination['offset']	= 0;
+		$pagination['text']		= false;
+		$pagination['limit']	= '';
+		$pagination['perpage']	= $perpage;
 
 		if ($total > $perpage)
 		{
@@ -7065,8 +7060,8 @@ class Wacko
 				$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' &raquo;'), ' rel="next"');
 			}
 
-			$pagination['text'] = $navigation;
-			$pagination['limit'] = "LIMIT {$pagination['offset']}, $perpage";
+			$pagination['text']		= $navigation;
+			$pagination['limit']	= "LIMIT {$pagination['offset']}, $perpage";
 		}
 
 		return $pagination;
