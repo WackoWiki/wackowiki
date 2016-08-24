@@ -62,7 +62,7 @@ class Templatest
 			if (!isset($cache))
 			{
 				static::$filecount = 0;
-				static::$error = 
+				static::$error =
 				static::$fileidx =
 				static::$filetimes = [];
 
@@ -183,6 +183,7 @@ class Templatest
 				{
 					$store[0] = $match[1]; // save first ("main") pattern name in [0]
 				}
+
 				$part = $match[1];
 				$store[$part]['text'] = [];
 				$store[$part]['file'] = $fileidx;
@@ -195,12 +196,13 @@ class Templatest
 				{
 					$line .= "\n";
 				}
+
 				$store[$part]['text'][] = [$lineno + 1, $line];
 			}
 			else
 			{
-				$act = static::split_tag($line, false);
-				$n = count($act);
+				$act	= static::split_tag($line, false);
+				$n		= count($act);
 				// TODO err diags?
 				switch ((string) @$act[0])
 				{
@@ -259,12 +261,13 @@ class Templatest
 									// name anonymous one-off pattern to be unique in global space
 									$patname = pathinfo($store[2][$meta['file']][0], PATHINFO_FILENAME) . ':' . $lineno;
 								}
-								$recall = $match[2] . ' ';
+
+								$recall		= $match[2] . ' ';
 							}
 							else
 							{
-								$patname = $match[2];
-								$recall = '';
+								$patname	= $match[2];
+								$recall		= '';
 							}
 
 							$recall = "{$match[1]}[ '''''' {$recall}{$patname}{$match[5]} '''''' ]\n";
@@ -275,8 +278,8 @@ class Templatest
 							}
 							else
 							{
-								$i0 = $i;
-								$lineno0 = $lineno;
+								$i0			= $i;
+								$lineno0	= $lineno;
 							}
 						}
 						else if (preg_match('/^\h*=+\h*\]\h*$/i', $line, $match) && isset($i0))
@@ -301,24 +304,26 @@ class Templatest
 
 	private static function compile(&$meta, &$store)
 	{
-		$text = '';
-		$eolpos = 0;
+		$text	= '';
+		$eolpos	= 0;
+
 		foreach ($meta['text'] as $numline)
 		{
 			list ($lineno, $line) = $numline;
 			$text .= $line;
 			$linepos[$lineno] = ($eolpos += strlen($line));
 		}
+
 		unset($meta['text']);
 		$text = rtrim($text, "\n");
 
 		// pre-compile common \h prefix
 		$meta['prefix'] = static::compute_prefix($text);
 
-		$chunks = [];
-		$static = 1;
-		$offset = 0;
-		$chunk = 0; // sorry php, we need to track index instead of using [] appendage
+		$chunks	= [];
+		$static	= 1;
+		$offset	= 0;
+		$chunk	= 0; // sorry php, we need to track index instead of using [] appendage
 
 		// if no matches - page is static
 		if (preg_match_all('/\[\h*(\'+)(.+?)(\'+)\h*\]/s', $text, $matches, PREG_OFFSET_CAPTURE|PREG_SET_ORDER))
@@ -332,8 +337,8 @@ class Templatest
 				}
 
 				// offset before and after tag
-				$until = $m[0][1];
-				$next = $m[0][1] + strlen($m[0][0]);
+				$until	= $m[0][1];
+				$next	= $m[0][1] + strlen($m[0][0]);
 
 				// span horizontal spaces around ['...'] tag to find out block or inline usage
 				for ($beg = $until; $beg > $offset && ($text[$beg - 1] === ' ' || $text[$beg - 1] === "\t"); --$beg);
@@ -342,9 +347,9 @@ class Templatest
 				if ((!$beg || $text[$beg - 1] === "\n") && (!isset($text[$end]) || $text[$end] === "\n"))
 				{
 					// block usage - single tag on line with possible whitespace prefix
-					$block = substr($text, $beg, $until - $beg);
-					$until = $beg;
-					$next = $end + 1;
+					$block	= substr($text, $beg, $until - $beg);
+					$until	= $beg;
+					$next	= $end + 1;
 				}
 				else
 				{
@@ -359,8 +364,8 @@ class Templatest
 				}
 				$offset = $next;
 
-				$tag = trim($m[2][0]);
-				$pipe = static::split_tag($tag);
+				$tag	= trim($m[2][0]);
+				$pipe	= static::split_tag($tag);
 
 				// skip comments and empty tags
 				if (!$pipe || !$pipe[0])
@@ -382,9 +387,9 @@ class Templatest
 
 				$loc = static::$filetimes[$meta['file']][0] . ':' . $lineno;
 
-				$arg = (array) array_shift($pipe);
-				$arg0 = (string) $arg[0];
-				$narg = count($arg);
+				$arg	= (array) array_shift($pipe);
+				$arg0	= (string) $arg[0];
+				$narg	= count($arg);
 
 				// sugar: var.idx  became  var | .idx
 				if ($narg == 1 && ($i = strpos($arg0, '.')) > 0)
@@ -407,8 +412,8 @@ class Templatest
 				else if (($narg == 1 && isset($store[$arg0])) || ($narg == 2 && isset($store[$arg[1]])))
 				{
 					// pattern call, named or not
-					$name = $arg0;
-					$pat = $arg[$narg - 1];
+					$name	= $arg0;
+					$pat	= $arg[$narg - 1];
 
 					if (isset($meta['var'][$name]))
 					{
@@ -520,8 +525,8 @@ class Templatest
 	// NB also used by TemplatestSetter class
 	static function compute_prefix($text)
 	{
-		$result = 0;
-		$len = strlen($text);
+		$result	= 0;
+		$len	= strlen($text);
 
 		for ($i = 0; $i < $len; $i = $eol + 1)
 		{
@@ -580,16 +585,18 @@ class Templatest
 			return $split;
 		}
 
-		$start = 0;
-		$n = count($split);
+		$start	= 0;
+		$n		= count($split);
+
 		for ($i = 0; $i < $n; ++$i)
 		{
 			if ($split[$i] === '|')
 			{
-				$args[] = array_slice($split, $start, $i - $start);
-				$start = $i + 1;
+				$args[]	= array_slice($split, $start, $i - $start);
+				$start	= $i + 1;
 			}
 		}
+
 		$args[] = array_slice($split, $start, $n - $start);
 
 		return $args;
