@@ -696,6 +696,8 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting_r4_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
+					test(str_replace('%1', 'user_setting', $lang['UpdateTable']), @mysql_query($update_user_setting_r4_3_1, $dblink), str_replace('%1', 'user_setting', $lang['ErrorUpdatingTable']));
+
 					test($lang['InstallingSystemAccount'], @mysql_query($insert_system, $dblink), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
 
 					#test($lang['InstallingAdmin'], @mysql_query($insert_admin, $dblink), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
@@ -1166,6 +1168,8 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
+					test(str_replace('%1', 'user_setting', $lang['UpdateTable']), @mysqli_query($dblink, $update_user_setting_r4_3_1), str_replace('%1', 'user_setting', $lang['ErrorUpdatingTable']));
+
 					test($lang['InstallingSystemAccount'], @mysqli_query($dblink, $insert_system), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
 
 					#test($lang['InstallingAdmin'], @mysqli_query($dblink, $insert_admin), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
@@ -1613,6 +1617,8 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_3, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
 					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+
+					test_pdo(str_replace('%1', 'user_setting', $lang['UpdateTable']), $update_user_setting_r4_3_1, str_replace('%1', 'user_setting', $lang['ErrorUpdatingTable']));
 
 					test_pdo($lang['InstallingSystemAccount'], $insert_system, str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
 

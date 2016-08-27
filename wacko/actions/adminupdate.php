@@ -271,7 +271,9 @@ if ($this->is_admin())
 				"lang				= '".quote($this->dblink, isset($_user['lang']) ? $_user['lang'] : '')."', ".
 				"show_spaces		= '".quote($this->dblink, isset($_user['show_spaces']) ? $_user['show_spaces'] : '')."', ".
 				"typografica		= '".quote($this->dblink, isset($_user['typografica']) ? $_user['typografica'] : '')."', ".
-				"theme				= '".quote($this->dblink, isset($_user['options']['theme']) ? $_user['options']['theme'] : 'default')."', ".
+				# "theme				= '".quote($this->dblink, isset($_user['options']['theme']) ? $_user['options']['theme'] : 'default')."', ".
+				// set back theme to default, just a precaution
+				"theme				= '".quote($this->dblink, 'default')."', ".
 				"autocomplete		= '".quote($this->dblink, isset($_user['options']['autocomplete']) ? $_user['options']['autocomplete'] : '')."', ".
 				"dont_redirect		= '".quote($this->dblink, isset($_user['options']['dont_redirect']) ? $_user['options']['dont_redirect'] : '')."', ".
 				"send_watchmail		= '".quote($this->dblink, isset($_user['options']['send_watchmail']) ? $_user['options']['send_watchmail'] : '')."', ".
