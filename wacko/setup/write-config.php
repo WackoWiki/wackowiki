@@ -86,7 +86,7 @@ if ($write_file == true)
 {
 	// try and make it non-writable
 	@chmod($filename, 0644);
-	$perm_changed = !is__writable($filename);
+	$perm_changed = !is_writable($filename);
 
 	echo output_image(true)."</li>\n";
 
