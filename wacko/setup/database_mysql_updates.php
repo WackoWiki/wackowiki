@@ -364,6 +364,8 @@ $alter_user_setting_r4_3_1 = "ALTER TABLE {$pref}user_setting ADD allow_massemai
 $alter_user_setting_r4_3_2 = "ALTER TABLE {$pref}user_setting CHANGE timezone timezone DECIMAL(5,2) NOT NULL DEFAULT '0.00'";
 $alter_user_setting_r4_3_3 = "ALTER TABLE {$pref}user_setting ADD dst TINYINT(1) UNSIGNED DEFAULT '0' NOT NULL  AFTER timezone";
 
+$update_user_setting_r4_3_1 = "UPDATE {$pref}user_setting SET theme = 'default'";
+
 // USERGROUP
 $rename_usergroup_r4_3_1 = "RENAME TABLE {$pref}group TO {$pref}usergroup";
 
