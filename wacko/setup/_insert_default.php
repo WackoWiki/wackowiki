@@ -25,9 +25,6 @@ $insert_system				= "INSERT INTO ".$config['table_prefix']."user (user_name, acc
 $insert_admin				= "INSERT INTO ".$config['table_prefix']."user (user_name, account_lang, password, email, signup_time) VALUES ('".$config['admin_name']."', '".$config['language']."', '".$password_hashed."', '".$config['admin_email']."', UTC_TIMESTAMP() )";
 $insert_admin_setting		= "INSERT INTO ".$config['table_prefix']."user_setting (user_id, theme, user_lang) VALUES ((SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), '".$config['theme']."', '".$config['language']."')";
 
-// TODO: for Upgrade insert other aliases also in usergroup table
-// $config['aliases'] = array('Admins' => $config['admin_name']);
-
 // default groups
 $insert_admin_group			= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator_id, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), UTC_TIMESTAMP())";
 $insert_admin_group_member	= "INSERT INTO ".$config['table_prefix']."usergroup_member (group_id, user_id) VALUES ((SELECT group_id FROM ".$config['table_prefix']."usergroup WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1))";
