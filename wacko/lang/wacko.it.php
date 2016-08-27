@@ -725,7 +725,7 @@ $wacko_translation = array(
 	// upload
 	'UploadFiles'				=> 'Upload files',
 	'UploadFor'					=> 'Caricare file',
-	'UploadButtonText'			=> 'Proceed',
+	'UploadButtonText'			=> 'Caricare',
 	'UploadGlobalText'			=> 'for public access',
 	'UploadHereText'			=> 'only for users allowed to view current page',
 	'UploadDesc'				=> 'descrizione',
