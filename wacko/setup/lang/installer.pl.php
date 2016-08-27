@@ -19,7 +19,7 @@ $lang = array(
 /*
    Language Selection Page
 */
-'Lang' => 'Konfiguracja J&#281;zyka',
+'lang' => 'Konfiguracja J&#281;zyka',
 'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt class="version">%1</tt> to <tt class="version">%2</tt>.  The next few pages will guide you through the upgrade process.',
 'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <tt class="version">%1</tt>.  The next few pages will guide you through the installation process.',
 'PleaseBackup' => 'Please, backup your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
