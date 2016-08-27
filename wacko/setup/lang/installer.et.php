@@ -19,7 +19,7 @@ $lang = array(
 /*
    Language Selection Page
 */
-'Lang' => 'Keele konfigureerimine',
+'lang' => 'Keele konfigureerimine',
 'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt class="version">%1</tt> to <tt class="version">%2</tt>.  The next few pages will guide you through the upgrade process.',
 'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <tt class="version">%1</tt>.  The next few pages will guide you through the installation process.',
 'PleaseBackup' => 'Enne, kui alustad versioonit‰ienduse sisseviimist, tee tagavarakoopia oma andmebaasist, konfiguratsioonidefailist ja kıikidest muudetud failidest. See vıib sind s‰‰sta suurest peavalust!',
