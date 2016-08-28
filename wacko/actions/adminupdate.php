@@ -14,7 +14,7 @@ echo '<h2>Upgrade Utilities</h2>';
 if ($this->is_admin())
 {
 	echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_version'].'!!**', 'wacko');
-	echo '<h3>Migration Routines for R4.3 to R5.0.rc2 Upgrade</h3>';
+	echo '<h3>Migration Routines for R4.3 to R5.0 Upgrade</h3>';
 
 	########################################################
 	##            RENAME files to @page_id@file_name      ##
@@ -271,7 +271,6 @@ if ($this->is_admin())
 				"lang				= '".quote($this->dblink, isset($_user['lang']) ? $_user['lang'] : '')."', ".
 				"show_spaces		= '".quote($this->dblink, isset($_user['show_spaces']) ? $_user['show_spaces'] : '')."', ".
 				"typografica		= '".quote($this->dblink, isset($_user['typografica']) ? $_user['typografica'] : '')."', ".
-				# "theme				= '".quote($this->dblink, isset($_user['options']['theme']) ? $_user['options']['theme'] : 'default')."', ".
 				// set back theme to default, just a precaution
 				"theme				= '".quote($this->dblink, 'default')."', ".
 				"autocomplete		= '".quote($this->dblink, isset($_user['options']['autocomplete']) ? $_user['options']['autocomplete'] : '')."', ".
