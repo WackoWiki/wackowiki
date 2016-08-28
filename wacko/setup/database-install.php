@@ -123,13 +123,13 @@ $insert_admin_setting		= "INSERT INTO ".$config['table_prefix']."user_setting (u
 // $config['aliases'] = array('Admins' => $config['admin_name']);
 
 // default groups
-$insert_admin_group			= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_admin_group			= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created, active) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW(), '1')";
 $insert_admin_group_member	= "INSERT INTO ".$config['table_prefix']."usergroup_member (group_id, user_id) VALUES ((SELECT group_id FROM ".$config['table_prefix']."usergroup WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1))";
 
-$insert_everybody_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Everybody', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_registered_group	= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Registered', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_moderator_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Moderator', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Reviewer', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_everybody_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created, active) VALUES ('Everybody', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW(), '1')";
+$insert_registered_group	= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created, active) VALUES ('Registered', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW(), '1')";
+$insert_moderator_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created, active) VALUES ('Moderator', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW(), '1')";
+$insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created, active) VALUES ('Reviewer', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW(), '1')";
 
 $insert_logo_image			= "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko_logo.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
