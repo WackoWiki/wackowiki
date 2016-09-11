@@ -36,6 +36,7 @@ function admin_config_email(&$engine, &$module)
 		$config['email_from']					= (string)$_POST['email_from'];
 		$config['admin_email']					= (string)$_POST['admin_email'];
 		$config['abuse_email']					= (string)$_POST['abuse_email'];
+		$config['noreply_email']				= (string)$_POST['noreply_email'];
 		$config['smtp_connection_mode']			= (string)$_POST['smtp_connection_mode'];
 		$config['smtp_host']					= (string)$_POST['smtp_host'];
 		$config['smtp_password']				= (string)$_POST['smtp_password'];
@@ -103,8 +104,8 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="email_from"><strong>Sender name of the site owner:</strong><br />
-					<small>The sender name, part of <code>'From:'</code> header in emails for all the email-notification site.</small></label>
+					<label for="email_from"><strong>From Name:</strong><br />
+					<small>The sender name, part of <code>'From:'</code> header in emails for all the email-notification sent from the site.</small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->db->email_from, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
@@ -114,8 +115,16 @@ function admin_config_email(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
+				<td class="label"><label for="noreply_email"><strong>No-reply address:</strong><br />
+				<small>This address, e.g. <code>noreply@example.com</code>, will appear in the <code>'From:'</code> email address field of all your email-notifications sent from the site.</small></label></td>
+				<td><input type="email" maxlength="100" style="width:200px;" id="noreply_email" name="noreply_email" value="<?php echo htmlspecialchars($engine->db->noreply_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
-				<small>This address will appear as the<code>'From:'</code> all the email-notification site.</small></label></td>
+				<small>This address is used for admin purposes, like new user notification.</small></label></td>
 				<td><input type="email" maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->db->admin_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">

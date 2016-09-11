@@ -28,10 +28,10 @@ if (($group = @$_GET['profile']))
 	}
 	else
 	{
-		$tpl->p_group = $usergroup;
-		$tpl->p_link = $this->href();
-		$tpl->p_groupspace = $this->href('', $this->db->groups_page . '/' . $usergroup['group_name']);
-		$tpl->p_include = $this->action('users', ['max' => $max, 'group_id' => $usergroup['group_id']]);
+		$tpl->p_group		= $usergroup;
+		$tpl->p_link		= $this->href();
+		$tpl->p_groupspace	= $this->href('', $this->db->groups_page . '/' . $usergroup['group_name']);
+		$tpl->p_include		= $this->action('users', ['max' => $max, 'group_id' => $usergroup['group_id']]);
 	}
 }
 // display whole usergroup list instead of the particular profile

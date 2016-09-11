@@ -1765,8 +1765,9 @@ class Wacko
 
 		if (!$email_from)
 		{
-			$email_from = $this->db->admin_email;
+			$email_from = $this->db->noreply_email;
 		}
+
 		$name_from		= $this->db->email_from;
 
 		// in tls mode substitute protocol name in links substrings
@@ -1785,7 +1786,7 @@ class Wacko
 		else
 		{
 			// use mail() function
-			$headers = 'From: =?'. $charset ."?B?". base64_encode($this->db->site_name) ."?= <".$this->db->admin_email.">\r\n";
+			$headers = 'From: =?'. $charset ."?B?". base64_encode($this->db->site_name) ."?= <".$this->db->noreply_email.">\r\n";
 			$headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
 			$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
 			$headers .= "X-Wacko: ".$this->db->base_url."\r\n";
@@ -2367,7 +2368,7 @@ class Wacko
 	{
 		if ($user === 'System')
 		{
-			$user = ['user_name' => $this->db->email_from, 'email' => $this->db->admin_email, 'user_lang' => $this->db->language];
+			$user = ['user_name' => $this->db->email_from, 'email' => $this->db->noreply_email, 'user_lang' => $this->db->language];
 		}
 
 		$save = $this->set_language($user['user_lang'], true);

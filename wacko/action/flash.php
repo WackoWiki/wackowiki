@@ -11,15 +11,15 @@ if (!defined('IN_WACKO'))
 	The first five arguments here are required.  The rest are optional.
 
 	{{flash
-	[url="file:the_movie.swf"]
-	[width="100"]
-	[height="100"]
+		[url="file:the_movie.swf"]
+		[width="100"]
+		[height="100"]
 
-	// Params
-	play
-	loop
-	menu
-	quality
+		// Params
+		play
+		loop
+		menu
+		quality
 
 	}}
 */
