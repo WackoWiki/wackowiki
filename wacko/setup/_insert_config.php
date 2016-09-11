@@ -120,6 +120,7 @@ $config_db['name_date_macro']				= $config['name_date_macro'];
 $config_db['news_cluster']					= $config['news_cluster'];
 $config_db['news_levels']					= $config['news_levels'];
 $config_db['noindex']						= $config['noindex'];
+$config_db['noreply_email']					= !empty($config['noreply_email'])? $config['noreply_email'] : $config['admin_email'];
 $config_db['notify_comment']				= $config['notify_comment'];
 $config_db['notify_minor_edit']				= $config['notify_minor_edit'];
 $config_db['notify_new_user_account']		= $config['notify_new_user_account'];

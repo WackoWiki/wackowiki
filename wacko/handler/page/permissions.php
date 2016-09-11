@@ -45,8 +45,8 @@ if (@$_POST['_action'] === 'set_permissions')
 
 		if ($new_owner['user_name'] === 'System')
 		{
-			$new_owner['email'] = $this->db->admin_email;
-			$new_owner['user_lang'] = $this->db->language;
+			$new_owner['email']		= $this->db->admin_email;
+			$new_owner['user_lang']	= $this->db->language;
 		}
 
 		// where we collect new pages for emailing to user
