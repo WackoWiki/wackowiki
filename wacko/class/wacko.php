@@ -3714,12 +3714,34 @@ class Wacko
 					$target = '';
 				}
 
+				// TODO: refactor, static?
+				if ($this->db->noreferrer || $this->db->nofollow)
+				{
+					if ($this->db->noreferrer)
+					{
+						$_rel[] = 'noreferrer';
+					}
+
+					if ($this->db->nofollow)
+					{
+						$_rel[] = 'nofollow';
+					}
+
+					$rel_separated	= implode(' ', $_rel);
+					$rel			= 'rel="'.$rel_separated.'"';
+				}
+				else
+				{
+					$rel = '';
+				}
+
 				if (isset($this->method) && $this->method == 'print')
 				{
 					$icon	= '';
 				}
 
 				$res		= str_replace('{target}',	$target,	$res);
+				$res		= str_replace('{rel}',		$rel,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
 				$res		= str_replace('{class}',	$class,		$res);
 				$res		= str_replace('{title}',	$title,		$res);

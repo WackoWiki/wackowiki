@@ -52,6 +52,8 @@ function admin_config_formatter(&$engine, &$module)
 		$config['timezone']					= (float)$_POST['timezone'];
 		$config['dst']						= (int)$_POST['dst'];
 		$config['link_target']				= (int)$_POST['link_target'];
+		$config['noreferrer']				= (int)$_POST['noreferrer'];
+		$config['nofollow']					= (int)$_POST['nofollow'];
 		$config['urls_underscores']			= (int)$_POST['urls_underscores'];
 		$config['show_spaces']				= (int)$_POST['show_spaces'];
 		$config['youarehere_text']			= (string)$_POST['youarehere_text'];
@@ -251,6 +253,22 @@ function admin_config_formatter(&$engine, &$module)
 				<td class="label"><label for="enable_link_target"><strong>Where external links open:</strong><br />
 				<small>Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.</small></label></td>
 				<td><input type="checkbox" id="enable_link_target" name="link_target" value="1"<?php echo ( $engine->db->link_target ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="enable_noreferrer"><strong>noreferrer:</strong><br />
+				<small>Requires that the browser should not send an HTTP referer header if the user follows the hyperlink. Adds <code>rel="noreferrer"</code> to the link syntax.</small></label></td>
+				<td><input type="checkbox" id="enable_noreferrer" name="noreferrer" value="1"<?php echo ( $engine->db->noreferrer ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="enable_nofollow"><strong>nofollow:</strong><br />
+				<small>Instruct some search engines that the hyperlink should not influence the ranking of the link's target in the search engine's index. Adds <code>rel="nofollow"</code> to the link syntax.</small></label></td>
+				<td><input type="checkbox" id="enable_nofollow" name="nofollow" value="1"<?php echo ( $engine->db->nofollow ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
