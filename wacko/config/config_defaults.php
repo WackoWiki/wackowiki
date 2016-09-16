@@ -118,6 +118,9 @@ $wacko_config_defaults = array(
 	'disable_safehtml'				=> 0,
 	'urls_underscores'				=> 0,
 	'link_target'					=> 0,
+	'noreferrer'					=> 0,
+	'nofollow'						=> 0,
+
 
 	// TODO: uniform use of term 'page' and 'cluster' ('groups_page' but 'news_cluster')
 	'groups_page'					=> 'Groups',

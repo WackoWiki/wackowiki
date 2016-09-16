@@ -214,7 +214,6 @@ else
 				echo '<article class="feed">'."\n";
 
 				// headline
-				#echo '<a target="_blank" href="'.$href.'" class="outerlink">'.$title.'</a>';
 				echo '<'.$header_item.'>'.$this->link($href, '', $title, '', 1, 1).'</'.$header_item.">\n";
 
 				if (($time == 1) && ($date != 0))
