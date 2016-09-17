@@ -20,7 +20,7 @@ if ($this->is_admin())
 	##            RENAME files to @page_id@file_name      ##
 	########################################################
 
-	echo "<h4>1. Renames files in \\files\perpage folder to @page_id@file_name:</h4>";
+	echo "<h4>1. Renames files in /files/perpage folder to @[page_id]@file_name:</h4>";
 
 	if (!isset($_POST['rename']))
 	{
@@ -81,7 +81,7 @@ if ($this->is_admin())
 
 if ($this->is_admin())
 {
-	echo "<h4>2. Move global files from \\files to \\files\global folder:</h4>";
+	echo "<h4>2. Move global files from /files to /files/global folder:</h4>";
 
 	if (!isset($_POST['move']))
 	{
@@ -320,7 +320,7 @@ if ($this->is_admin())
 
 if ($this->is_admin())
 {
-	echo "<h4>4. Update User statistics:</h4>";
+	echo "<h4>4. Update user statistics:</h4>";
 
 	if (!isset($_POST['build_user_stats']))
 	{
