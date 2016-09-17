@@ -49,7 +49,7 @@ if ($pages = $this->db->load_all(
 	// pick all subpages up to the desired depth level
 	if ($depth > 0)
 	{
-		$maxlevel = substr_count($root, '/') + $depth;
+		$max_level = substr_count($root, '/') + $depth;
 		reset($pages);
 		$_pages = '';
 
@@ -57,7 +57,7 @@ if ($pages = $this->db->load_all(
 		{
 			$k = key($pages);
 
-			if (substr_count($pages[$k]['tag'], '/') < $maxlevel)
+			if (substr_count($pages[$k]['tag'], '/') < $max_level)
 			{
 				$_pages[]	= $pages[$k];
 				$acl_str[]	= $pages[$k]['page_id'];
@@ -91,7 +91,8 @@ if ($pages = $this->db->load_all(
 
 		// cache acls
 		if ($acls = $this->db->load_all(
-			"SELECT page_id, privilege, list FROM {$this->db->table_prefix}acl ".
+			"SELECT page_id, privilege, list ".
+			"FROM {$this->db->table_prefix}acl ".
 			"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) ".
 				"AND privilege = 'read'", true))
 		{
@@ -135,7 +136,7 @@ if ($pages = $this->db->load_all(
 		else
 		{
 			// cluster root level
-			$rootlevel = substr_count($root, '/');
+			$root_level = substr_count($root, '/');
 
 			// begin list
 			echo '<ul class="tree">'."\n";
@@ -153,13 +154,13 @@ if ($pages = $this->db->load_all(
 				}
 
 				// check page level
-				$curlevel	= substr_count($page['tag'], '/');
+				$cur_level	= substr_count($page['tag'], '/');
 
 				// indents (sublevels)
 				if ($i > 0)
 				{
 					// levels difference
-					$diff = $curlevel - $prevlevel;
+					$diff = $cur_level - $prev_level;
 
 					if ($diff > 0)
 					{
@@ -188,7 +189,7 @@ if ($pages = $this->db->load_all(
 				// begin element
 				echo '<li>';
 
-				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
+				# if ($cur_level == $root_level && $cur_level < 2)	echo '<strong>';
 
 				if ($title == 0) $page['title'] = null;
 
@@ -203,11 +204,10 @@ if ($pages = $this->db->load_all(
 					echo $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0);
 				}
 
-				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
-
+				# if ($cur_level == $root_level && $cur_level < 2)	echo '</strong>';
 
 				// recheck page level
-				$prevlevel	= substr_count($page['tag'], '/');
+				$prev_level	= substr_count($page['tag'], '/');
 
 				$i++;
 			}
@@ -229,6 +229,7 @@ if ($pages = $this->db->load_all(
 			// end list
 			echo "</ul>\n";
 		}
+
 		// footer
 		if (!$nomark)
 		{
