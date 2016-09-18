@@ -140,7 +140,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					l.link_id
 				FROM
-					{$engine->db->table_prefix}link l
+					{$engine->db->table_prefix}page_link l
 					LEFT JOIN {$engine->db->table_prefix}page p ON (l.from_page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
@@ -402,7 +402,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						l.*
 					FROM
-			{$engine->db->table_prefix}link l
+			{$engine->db->table_prefix}page_link l
 						LEFT JOIN {$engine->db->table_prefix}page p ON (l.from_page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");

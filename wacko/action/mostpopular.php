@@ -74,7 +74,7 @@ else
 		// We want to recurse and include all the sub pages of sub pages (and so on) in the listing
 		$pages = $this->db->load_all(
 			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits ".
-			"FROM ".$this->db->table_prefix."page a, ".$this->db->table_prefix."link l ".
+			"FROM ".$this->db->table_prefix."page a, ".$this->db->table_prefix."page_link l ".
 			"INNER JOIN ".$this->db->table_prefix."page b ON (l.from_page_id = b.page_id) ".
 			"INNER JOIN ".$this->db->table_prefix."page c ON (l.to_page_id = c.page_id) ".
 			"WHERE a.tag <> '".$page."' ".
@@ -89,7 +89,7 @@ else
 		// The only pages we want to display are those directly under the selected page, not their kids and grandkids
 		$pages = $this->db->load_all(
 			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits ".
-			"FROM ".$this->db->table_prefix."page a, ".$this->db->table_prefix."link l ".
+			"FROM ".$this->db->table_prefix."page a, ".$this->db->table_prefix."page_link l ".
 				"INNER JOIN ".$this->db->table_prefix."page b ON (l.from_page_id = b.page_id) ".
 				"INNER JOIN ".$this->db->table_prefix."page c ON (l.to_page_id = c.page_id) ".
 			"WHERE a.tag <> '".$page."' ".

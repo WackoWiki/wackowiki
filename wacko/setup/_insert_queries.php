@@ -17,9 +17,9 @@ $delete_table[]			= array('usergroup_member',	$table_usergroup_member_drop);
 $delete_table[]			= array('category',			$table_category_drop);
 $delete_table[]			= array('category_page',	$table_category_page_drop);
 $delete_table[]			= array('file_link',		$table_file_link_drop);
-$delete_table[]			= array('link',				$table_link_drop);
 $delete_table[]			= array('log',				$table_log_drop);
 $delete_table[]			= array('page',				$table_page_drop);
+$delete_table[]			= array('page_link',		$table_page_link_drop);
 $delete_table[]			= array('poll',				$table_poll_drop);
 $delete_table[]			= array('rating',			$table_rating_drop);
 $delete_table[]			= array('referrer',			$table_referrer_drop);
@@ -46,9 +46,9 @@ $create_table[]			= array('usergroup_member',	$table_usergroup_member);
 $create_table[]			= array('category',			$table_category);
 $create_table[]			= array('category_page',	$table_category_page);
 $create_table[]			= array('file_link',		$table_file_link);
-$create_table[]			= array('link',				$table_link);
 $create_table[]			= array('log',				$table_log);
 $create_table[]			= array('page',				$table_page);
+$create_table[]			= array('page_link',		$table_page_link);
 $create_table[]			= array('poll',				$table_poll);
 $create_table[]			= array('rating',			$table_rating);
 $create_table[]			= array('referrer',			$table_referrer);
@@ -87,13 +87,13 @@ $insert_records[]		= array($lang['InstallingReviewerGroup'],	$insert_reviewer_gr
 $upgrade['5.1.0'][]		= array($lang['AlterTable'],	'cache',		$alter_cache_r5_1_0,		$lang['ErrorAlteringTable']);
 $upgrade['5.1.0'][]		= array($lang['AlterTable'],	'cache',		$alter_cache_r5_1_1,		$lang['ErrorAlteringTable']);
 
-// link
-$upgrade['5.1.0'][]		= array($lang['AlterTable'],	'link',			$alter_link_r5_1_0,			$lang['ErrorAlteringTable']);
-
 // page
 $upgrade['5.1.0'][]		= array($lang['AlterTable'],	'page',			$alter_page_r5_1_0,			$lang['ErrorAlteringTable']);
 
 $upgrade['5.1.0'][]		= array($lang['UpdateTable'],	'page',			$update_page_r5_1_0,		$lang['ErrorUpdatingTable']);
+
+// page link
+$upgrade['5.1.0'][]		= array($lang['AlterTable'],	'link',			$alter_page_link_r5_1_0,	$lang['ErrorAlteringTable']);
 
 // revision
 $upgrade['5.1.0'][]		= array($lang['AlterTable'],	'revision',		$alter_revision_r5_1_0,		$lang['ErrorAlteringTable']);
@@ -147,6 +147,10 @@ $upgrade['5.5.rc'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_3,	
 $upgrade['5.5.rc2'][]	= array($lang['AlterTable'],	'page',			$alter_page_r5_4_4,			$lang['ErrorAlteringTable']);
 $upgrade['5.5.rc2'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_3,		$lang['ErrorUpdatingTable']);
 $upgrade['5.5.rc2'][]	= array($lang['UpdateTable'],	'page',			$update_page_r5_4_4,		$lang['ErrorUpdatingTable']);
+
+// page link
+$upgrade['5.5.rc2'][]	= array($lang['RenameTable'],	'page_link',	$rename_page_link_r5_4_0,	$lang['ErrorRenamingTable']);
+
 
 // referrer
 $upgrade['5.4.0'][]		= array($lang['AlterTable'],	'referrer',		$alter_referrer_r5_4_0,		$lang['ErrorAlteringTable']);
