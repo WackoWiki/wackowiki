@@ -14,7 +14,7 @@ echo '<h2>Upgrade Utilities</h2>';
 if ($this->is_admin())
 {
 	echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->db->wacko_version.'!!**', 'wacko');
-	echo '<h3>Routines for R5.0</h3>';
+	echo '<h3>Routines for R5.x</h3>';
 
 
 	########################################################

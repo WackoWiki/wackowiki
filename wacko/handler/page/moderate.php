@@ -62,7 +62,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	$engine->clear_cache_wanted_page($new_tag);
 	$engine->clear_cache_wanted_page($supertag);
 
-	// rerender page and update link table in new context
+	// rerender page and update page_link table in new context
 	$page = $engine->load_page($new_tag);
 	$engine->current_context++;
 	$engine->context[$engine->current_context] = $new_tag;
@@ -153,7 +153,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$create_acl		= '';
 	$upload_acl		= '';
 
-	// update link table
+	// update page_link table
 	$comments = $engine->db->load_all(
 		"SELECT page_id, tag, body_r ".
 		"FROM {$engine->db->table_prefix}page ".
@@ -262,7 +262,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	// remove old first comment
 	moderate_delete_page($engine, $first_tag);
 
-	// update link table
+	// update page_link table
 	$page = $engine->load_page('', $new_page_id);
 	$engine->current_context++;
 	$engine->context[$engine->current_context] = $new_tag;
@@ -1086,7 +1086,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 								"comment_on_id = '".$page_id."' ".
 							"WHERE page_id IN ( $ids_str )");
 
-						// update link table
+						// update page_link table
 						$comments = $this->db->load_all(
 							"SELECT page_id, tag, body_r ".
 							"FROM {$this->db->table_prefix}page ".

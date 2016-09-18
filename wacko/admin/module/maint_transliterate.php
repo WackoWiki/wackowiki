@@ -50,7 +50,7 @@ function admin_maint_transliterate(&$engine, &$module)
 				foreach ($pages as $page)
 				{
 					$engine->db->sql_query(
-						"UPDATE {$engine->db->table_prefix}link SET ".
+						"UPDATE {$engine->db->table_prefix}page_link SET ".
 							"to_supertag = ".$engine->db->q($engine->translit($page['to_tag']))." ".
 						"WHERE to_tag = ".$engine->db->q($page['to_tag'])." ");
 				}

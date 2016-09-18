@@ -1297,7 +1297,7 @@ class Wacko
 		// get page links
 		if ($links = $this->db->load_all(
 			"SELECT to_tag ".
-			"FROM ".$this->db->table_prefix."link ".
+			"FROM ".$this->db->table_prefix."page_link ".
 			"WHERE from_page_id = '".$this->page['page_id']."'"))
 		{
 			foreach ($links as $link)
@@ -1518,7 +1518,7 @@ class Wacko
 	{
 		return $this->db->load_all(
 			"SELECT p.page_id, p.tag AS tag, p.title ".
-			"FROM ".$this->db->table_prefix."link l ".
+			"FROM ".$this->db->table_prefix."page_link l ".
 				"INNER JOIN ".$this->db->table_prefix."page p ON (p.page_id = l.from_page_id) ".
 			"WHERE ".($for
 				? "p.tag LIKE " . $this->db->q($for . '/%') . " AND "
@@ -2966,7 +2966,7 @@ class Wacko
 	}
 
 	/**
-	* Returns full <A HREF=".."> or <IMG ...> HTML for Tag
+	* Returns full <a href=".."> or <img ...> HTML for Tag
 	*
 	* @param string $tag Link content - may be Wacko tag, interwiki wikiname:page tag,
 	* http/file/ftp/https/mailto/xmpp URL, [=] local or remote image-file for <img> link, or local or
@@ -3002,13 +3002,22 @@ class Wacko
 			function ($mat) use (&$_align, &$_height, &$_width, &$trim)
 			{
 				if ($mat[1] == 'height')
+				{
 					$_height = $mat[2];
+				}
 				else if ($mat[1] == 'width')
+				{
 					$_width = $mat[2];
+				}
 				else if ($mat[1] == 'align')
+				{
 					$_align = $mat[2];
+				}
 				else
+				{
 					return $mat[0];
+				}
+
 				$trim = 1;
 				return '';
 			}, $text);
@@ -3020,7 +3029,8 @@ class Wacko
 
 		if ($_width || $_height)
 		{
-			if (!$_width) {
+			if (!$_width)
+			{
 				$_width = 'auto';
 			}
 			else if (preg_match('/^[0-9]+$/', $_width))
@@ -3031,17 +3041,22 @@ class Wacko
 			if (!$_height)
 			{
 				$_height = 'auto';
-			} else if (preg_match('/^[0-9]+$/', $_height))
+			}
+			else if (preg_match('/^[0-9]+$/', $_height))
 			{
 				$_height .= 'px';
 			}
 
-			$resize = " style=\"width:$_width;height:$_height;\"";
+			$resize = ' style="width:'.$_width.';height:'.$_height;
 		}
 
 		if ($_align)
 		{
-			$resize .= " align=$_align"; // XXX: deprecated in HTML 4 & 5 though
+			$resize .= ' vertical-align:'.$_align.';"';
+		}
+		else
+		{
+			$resize .= ';"';
 		}
 
 		if ($track)
@@ -3061,6 +3076,8 @@ class Wacko
 
 		if (preg_match('/^[\.\-'.$this->language['ALPHANUM_P'].']+\.(gif|jpg|jpe|jpeg|png|svg)$/i', $text))
 		{
+			// ((image.png)) - loads only images from image/ folder
+			// XXX: odd behavior, user can't check or upload to image/ folder - how useful is this?
 			$img_link = $this->db->base_url.'/image/'.$text;
 		}
 		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg)$/i', preg_replace('/<\/?nobr>/', '', $text)))
@@ -4004,7 +4021,7 @@ class Wacko
 	}
 
 	/**
-	* Write linktable for //$from_page_id// to database
+	* Write link tables for //$from_page_id// to database
 	*
 	* @param int $from_page_id
 	*/
@@ -4013,7 +4030,7 @@ class Wacko
 		// delete related old links in table
 		$this->db->sql_query(
 			"DELETE ".
-			"FROM ".$this->db->table_prefix."link ".
+			"FROM ".$this->db->table_prefix."page_link ".
 			"WHERE from_page_id = '".(int)$from_page_id."'");
 
 		// page link
@@ -4028,7 +4045,7 @@ class Wacko
 			}
 
 			$this->db->sql_query(
-				"INSERT INTO ".$this->db->table_prefix."link ".
+				"INSERT INTO ".$this->db->table_prefix."page_link ".
 					"(from_page_id, to_page_id, to_tag, to_supertag) ".
 				"VALUES ".rtrim($query, ','));
 		}
@@ -4058,7 +4075,7 @@ class Wacko
 
 	function update_link_table($page_id, $body_r)
 	{
-		// now we render it internally so we can write the updated link table.
+		// now we render it internally so we can write the updated link tables.
 		if (isset($this->linktable))
 		{
 			$this->format($body_r, 'post_wacko');
@@ -5648,7 +5665,7 @@ class Wacko
 				$this->sess->menu_default = true;
 			}
 
-			// parsing menu items into link table
+			// parsing menu items into page_link table
 			$menu_page_ids = [];
 			$menu_formatted = [];
 
@@ -6701,7 +6718,7 @@ class Wacko
 
 		return $this->db->sql_query(
 			"DELETE l.* ".
-			"FROM ".$this->db->table_prefix."link l ".
+			"FROM ".$this->db->table_prefix."page_link l ".
 				"LEFT JOIN ".$this->db->table_prefix."page p ".
 					"ON (l.from_page_id = p.page_id) ".
 			"WHERE p.tag = " . $this->db->q($tag) . " ".

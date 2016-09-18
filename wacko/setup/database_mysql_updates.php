@@ -52,9 +52,6 @@ $table_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (".
 							"KEY idx_file_id (file_id)".
 						") {$engine} COMMENT='' {$charset}";
 
-// LINK
-$alter_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx_from_tag (from_page_id, to_tag(78))";
-
 // LOG
 
 // MENU
@@ -75,6 +72,11 @@ $update_page_r5_4_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r5_4_2 = "UPDATE {$pref}page AS p, (SELECT user_id FROM {$pref}user WHERE user_name = 'System') AS u SET p.noindex = '1' WHERE p.owner_id = u.user_id";
 $update_page_r5_4_3 = "UPDATE {$pref}page SET page_size = LENGTH(body)";
 $update_page_r5_4_4 = "UPDATE {$pref}page AS p, (SELECT page_id, MAX(version_id) AS version_id FROM {$pref}revision GROUP BY page_id) AS r SET p.version_id = r.version_id + 1 WHERE p.page_id = r.page_id";
+
+// PAGE LINK
+$alter_page_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx_from_tag (from_page_id, to_tag(78))";
+
+$rename_page_link_r5_4_0 = "RENAME TABLE {$pref}link TO {$pref}page_link";
 
 // POLL
 

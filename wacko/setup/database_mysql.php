@@ -75,18 +75,6 @@ $table_file_link = "CREATE TABLE {$pref}file_link (".
 					"KEY idx_file_id (file_id)".
 					") {$engine} COMMENT='' {$charset}";
 
-$table_link = "CREATE TABLE {$pref}link (".
-					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
-					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-					"to_supertag VARCHAR(250) NOT NULL DEFAULT '',".
-					"PRIMARY KEY (link_id),".
-					"KEY idx_from_tag (from_page_id, to_tag(78)),".
-					"KEY idx_from_page_id (from_page_id),".
-					"KEY idx_to (to_tag)".
-				") {$engine} COMMENT='' {$charset}";
-
 $table_log = "CREATE TABLE {$pref}log (".
 					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"log_time TIMESTAMP NOT NULL,".
@@ -173,6 +161,18 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"KEY idx_commented (commented),".
 					"KEY idx_title (title)".
 				") {$engine} COMMENT='' {$charset}";
+
+$table_page_link = "CREATE TABLE {$pref}page_link (".
+		"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
+		"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+		"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+		"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+		"to_supertag VARCHAR(250) NOT NULL DEFAULT '',".
+		"PRIMARY KEY (link_id),".
+		"KEY idx_from_tag (from_page_id, to_tag(78)),".
+		"KEY idx_from_page_id (from_page_id),".
+		"KEY idx_to (to_tag)".
+		") {$engine} COMMENT='' {$charset}";
 
 $table_poll = "CREATE TABLE {$pref}poll (".
 					"poll_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -406,9 +406,9 @@ $table_config_drop				= "DROP TABLE IF EXISTS {$pref}config";
 $table_category_drop			= "DROP TABLE IF EXISTS {$pref}category";
 $table_category_page_drop		= "DROP TABLE IF EXISTS {$pref}category_page";
 $table_file_link_drop			= "DROP TABLE IF EXISTS {$pref}file_link";
-$table_link_drop				= "DROP TABLE IF EXISTS {$pref}link";
 $table_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
 $table_page_drop				= "DROP TABLE IF EXISTS {$pref}page";
+$table_page_link_drop			= "DROP TABLE IF EXISTS {$pref}page_link";
 $table_poll_drop				= "DROP TABLE IF EXISTS {$pref}poll";
 $table_rating_drop				= "DROP TABLE IF EXISTS {$pref}rating";
 $table_referrer_drop			= "DROP TABLE IF EXISTS {$pref}referrer";
