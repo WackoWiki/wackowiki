@@ -15,6 +15,7 @@ $lang = array(
 'Continue' => 'Jätka',
 'Back' => 'Back',
 'Recommended' => 'soovitatav',
+'InvalidAction' => 'Invalid action',
 
 /*
    Language Selection Page
