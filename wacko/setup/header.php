@@ -23,36 +23,36 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config
 global $lang;
 require_once 'setup/lang/installer.'.$config['language'].'.php';
 
+if (!isset($lang[$install_action])) $lang[$install_action] = '';
+
 // HTTP header with right Charset settings
 header('Content-Type: text/html; charset='.$lang['Charset']);
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
-   <head>
-      <meta charset="<?php echo $lang['Charset']; ?>" />
-      <title><?php echo $lang['Title'].': '.WACKO_VERSION.' - '.$lang[$install_action]; ?></title>
-      <meta name="robots" content="noindex, nofollow, noarchive" />
-      <link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css" />
-      <link rel="shortcut icon" href="<?php echo my_location() ?>setup/images/favicon.ico" type="image/x-icon" />
-   </head>
-   <body>
-      <div class="installer">
-         <h1><?php echo $lang['Title'];?></h1>
-         <h1 class="white">&nbsp;:&nbsp;</h1>
-         <h1><?php echo $install_action == 'lang' ? $lang['lang'] : $lang[$install_action]; ?></h1>
-         <ul class="menu">
-            <li class="<?php echo $install_action == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang['lang']; ?></li>
-            <li>&gt;</li>
-            <li class="<?php echo $install_action == 'version-check' ? 'current' : 'item'; ?>"><?php echo $lang['version-check']; ?></li>
-            <li>&gt;</li>
-            <li class="<?php echo $install_action == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang['site-config']; ?></li>
-            <li>&gt;</li>
-            <li class="<?php echo $install_action == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang['database-config']; ?></li>
-            <li>&gt;</li>
-            <li class="<?php echo $install_action == 'database-install' ? 'current' : 'item'; ?>"><?php echo $lang['database-install']; ?></li>
-            <li>&gt;</li>
-            <li class="<?php echo $install_action == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang['write-config']; ?></li>
-         </ul>
-         <div class="fake_hr">
-            <hr />
-         </div>
+	<head>
+		<meta charset="<?php echo $lang['Charset']; ?>" />
+		<title><?php echo $lang['Title'].': '.WACKO_VERSION.' - '.$lang[$install_action]; ?></title>
+		<meta name="robots" content="noindex, nofollow, noarchive" />
+		<link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css" />
+		<link rel="shortcut icon" href="<?php echo my_location() ?>setup/images/favicon.ico" type="image/x-icon" />
+	</head>
+	<body>
+		<div class="installer">
+			<h1><?php echo $lang['Title'];?><span class="white">&nbsp;:&nbsp;</span><?php echo $install_action == 'lang' ? $lang['lang'] : $lang[$install_action]; ?></h1>
+			<ul class="menu">
+				<li class="<?php echo $install_action == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang['lang']; ?></li>
+				<li>&gt;</li>
+				<li class="<?php echo $install_action == 'version-check' ? 'current' : 'item'; ?>"><?php echo $lang['version-check']; ?></li>
+				<li>&gt;</li>
+				<li class="<?php echo $install_action == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang['site-config']; ?></li>
+				<li>&gt;</li>
+				<li class="<?php echo $install_action == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang['database-config']; ?></li>
+				<li>&gt;</li>
+				<li class="<?php echo $install_action == 'database-install' ? 'current' : 'item'; ?>"><?php echo $lang['database-install']; ?></li>
+				<li>&gt;</li>
+				<li class="<?php echo $install_action == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang['write-config']; ?></li>
+			</ul>
+			<div class="fake_hr">
+			<hr />
+		</div>

@@ -15,6 +15,7 @@ $lang = array(
 'Continue' => 'Συνέχεια',
 'Back' => 'Επιστροφή',
 'Recommended' => 'Συνιστάται',
+'InvalidAction' => 'Invalid action',
 
 /*
    Language Selection Page
