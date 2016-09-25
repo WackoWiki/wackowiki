@@ -2110,6 +2110,13 @@ table.forum td {
 	height:	22px;
 	width:	22px;
 }
+.license-CC-ZERO {
+	background-image:	url('../../../image/cc-zero.svg');
+	background-repeat:	no-repeat;
+	background-position:	0;
+	height:	22px;
+	width:	22px;
+}
 .license-PD {
 	background-image:	url('../../../image/cc-pd.svg');
 	background-repeat:	no-repeat;
