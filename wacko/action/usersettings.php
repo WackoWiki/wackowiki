@@ -27,11 +27,11 @@ else if (@$_GET['action'] === 'logout')
 else if (($user = $this->get_user()))
 {
 	$email_changed	= false;
-	$user = $this->load_user(0, $user['user_id']);
+	$user			= $this->load_user(0, $user['user_id']);
 	$this->set_page_lang($this->user_lang);
-	$action = @$_POST['_action']; // set by form_open
-	$email = @$_POST['email'];
-	$resend_code = @$_GET['resend_code'];
+	$action			= @$_POST['_action']; // set by form_open
+	$email			= @$_POST['email'];
+	$resend_code	= @$_GET['resend_code'];
 
 	// is user trying to update?
 	if ($action == 'user_settings_general')
@@ -140,7 +140,7 @@ else if (($user = $this->get_user()))
 
 		if ($email)
 		{
-			$save = $this->set_language($user['user_lang'], true);
+			$save		= $this->set_language($user['user_lang'], true);
 			$subject	=	$this->_t('EmailConfirm');
 			$body		=	Ut::perc_replace($this->_t('EmailVerify'),
 								$this->db->site_name,
@@ -157,6 +157,7 @@ else if (($user = $this->get_user()))
 		{
 			$message = $this->_t('SettingsCodeNotSent');
 		}
+
 		$this->set_message($message, 'success');
 	}
 
@@ -195,7 +196,7 @@ else if (($user = $this->get_user()))
 				<li><a href="'.$this->href('', '', 'notification').'">'.$this->_t('UserSettingsNotifications').'</a></li>
 				<li><a href="'.$this->href('', '', 'extended').'">'.$this->_t('UserSettingsExtended')."</a></li>
 				</ul><br /><br />\n";
-		echo $this->action('menu', array('redirect' => 1));
+		echo $this->action('menu', ['redirect' => 1]);
 	}
 	// NOTIFICATIONS
 	else if (isset($_GET['notification']) || $action == 'user_settings_notifications')
