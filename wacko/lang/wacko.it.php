@@ -832,7 +832,7 @@ $wacko_translation = [
 			'CC-BY-SA'		=> 'Creative Commons Attribution-ShareAlike',
 			'CC-BY-NC'		=> 'Creative Commons Attribution-NonCommercial',
 			'CC-BY'			=> 'Creative Commons Attribution',
-			'CC-ZERO'		=> 'Creative Commons CC0 1.0 Universal International License',
+			'CC-ZERO'		=> 'Creative Commons CC0 1.0 Universal',
 			'GNU-FDL'		=> 'GNU Free Documentation License',
 			'PD'			=> 'Public Domain / Free Use',
 	],
