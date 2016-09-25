@@ -44,7 +44,7 @@ function admin_db_backup(&$engine, &$module)
 
 	$getstr = '';
 
-	if (is_[$scheme))
+	if (is_array($scheme))
 	{
 		foreach ($scheme as $key => $val)
 		{
