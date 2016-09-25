@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Polls Moderation                                 ##
 ########################################################
 
-$module['content_polls'] = array(
+$module['content_polls'] = [
 		'order'	=> 330,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_polls',
 		'name'	=> 'Polls',
 		'title'	=> 'Editing, start and stop polls',
-	);
+	];
 
 ########################################################
 
@@ -148,7 +148,7 @@ function admin_content_polls(&$engine, &$module)
 		else if ($moderation === true)
 		{
 			// TODO: broken redirect #pollsadd_form with embedded action
-			echo $engine->action('pollsadd', array('moderation' => true, 'edit_id' => $edit_id, 'mode' => $mode));
+			echo $engine->action('pollsadd', ['moderation' => true, 'edit_id' => $edit_id, 'mode' => $mode]);
 		}
 
 		// current active polls

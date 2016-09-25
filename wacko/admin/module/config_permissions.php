@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Permissions settings                             ##
 ########################################################
 
-$module['config_permissions'] = array(
+$module['config_permissions'] = [
 		'order'	=> 220,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_permissions',
 		'name'	=> 'Permissions',
 		'title'	=> 'Permissions settings',
-	);
+	];
 
 ########################################################
 

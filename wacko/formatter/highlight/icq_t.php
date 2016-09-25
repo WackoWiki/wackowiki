@@ -11,7 +11,7 @@ preg_match_all( "/".
 			"(?=^(\[[0-9]{1,2}:[0-9]{1,2}\]))/ims",
 $text,
 $matches, PREG_SET_ORDER);
-$names = array();
+$names = [];
 
 foreach($matches as $m)
 {
@@ -28,7 +28,7 @@ $text = preg_replace( "/".
 			"<tr style='$2'><td class='micq1'>$2</td><td class='micq3'>$4</td><td class='micq2'>$1</td></tr>", $text );
 $text = str_replace( "\n", "<br />", $text );
 
-$colors = array('#eeffee', '#eeeeff', '#ffffee', '#ff9999');
+$colors = ['#eeffee', '#eeeeff', '#ffffee', '#ff9999'];
 
 $c=0;
 

@@ -38,11 +38,11 @@ if (!$month)
 
 if ($highlight == 'today')
 {
-	$days = array($current_day => array(NULL, NULL, '<span style="color: red; font-weight: bold;">'.$current_day.'</span>'));
+	$days = [$current_day => [NULL, NULL, '<span style="color: red; font-weight: bold;">'.$current_day.'</span>']];
 }
 else if ($highlight)
 {
-	$days = array($highlight => array(NULL, NULL, '<span style="color: red; font-weight: bold;">'.$highlight.'</span>'));
+	$days = [$highlight => [NULL, NULL, '<span style="color: red; font-weight: bold;">'.$highlight.'</span>']];
 }
 
 if (!$daywidth)
@@ -70,14 +70,14 @@ else
 
 if (function_exists('generate_calendar') == false)
 {
-	function generate_calendar($year, $month, $days = array(), $day_name_length = 3, $month_href = NULL, $first_day = 0, $pn = array())
+	function generate_calendar($year, $month, $days = [], $day_name_length = 3, $month_href = NULL, $first_day = 0, $pn = [])
 	{
 		$first_of_month = gmmktime(0, 0, 0, $month, 1, $year);
 		// remember that mktime will automatically correct if invalid dates are entered
 		// for instance, mktime(0,0,0,12,32,1997) will be the date for Jan 1, 1998
 		// this provides a built in "rounding" feature to generate_calendar()
 
-		$day_names = array(); // generate all the day names according to the current locale
+		$day_names = []; // generate all the day names according to the current locale
 
 		for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t+=DAYSECS) // January 4, 1970 was a Sunday
 		{
@@ -163,7 +163,7 @@ if (function_exists('generate_calendar') == false)
 }
 
 $oldlocale = setlocale(LC_TIME, NULL); // save current locale
-setlocale(LC_TIME, array('de_DE@euro', 'de_DE', 'deu_deu'));
+setlocale(LC_TIME, ['de_DE@euro', 'de_DE', 'deu_deu']);
 
 echo '<table style="margin: auto">';
 echo "<tr>";

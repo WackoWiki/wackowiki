@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Approve Users                                    ##
 ########################################################
 
-$module['user_approve'] = array(
+$module['user_approve'] = [
 		'order'	=> 400,
 		'cat'	=> 'Users',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'user_approve',
 		'name'	=> 'Approve',
 		'title'	=> 'User registration approval',
-	);
+	];
 
 ########################################################
 
@@ -45,7 +45,7 @@ function admin_user_approve(&$engine, &$module)
 	}
 
 	// IDs PROCESSING (COMMON PROCEDURES)
-	$set = array();
+	$set = [];
 
 	// pass previously selected items
 	if (isset($_REQUEST['ids']))
@@ -77,7 +77,7 @@ function admin_user_approve(&$engine, &$module)
 	// save user ids for later operations (correct if needed)
 	if (isset($_POST['set']))
 	{
-		$set = array();
+		$set = [];
 
 		foreach ($_POST as $val => $key)
 		{
@@ -92,7 +92,7 @@ function admin_user_approve(&$engine, &$module)
 	// reset user ids
 	else if (isset($_POST['reset']))
 	{
-		$set = array();
+		$set = [];
 	}
 
 	reset($set);
@@ -178,7 +178,7 @@ function admin_user_approve(&$engine, &$module)
 				}
 			}
 
-			$set = array();
+			$set = [];
 		}
 	}
 #}

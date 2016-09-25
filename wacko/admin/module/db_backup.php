@@ -9,15 +9,15 @@ if (!defined('IN_WACKO'))
 ##   DB Backup                                        ##
 ########################################################
 
-$module['db_backup'] = array(
+$module['db_backup'] = [
 		'order'	=> 500,
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_backup',
 		'name'	=> 'Backup',
 		'title'	=> 'Backing up data',
-		'vars'	=> array(&$tables, &$directories),
-	);
+		'vars'	=> [&$tables, &$directories],
+	];
 
 ########################################################
 
@@ -27,7 +27,7 @@ function admin_db_backup(&$engine, &$module)
 	$tables			= & $module['vars'][0];
 	$directories	= & $module['vars'][1];
 
-	$scheme			= array();
+	$scheme			= [];
 
 	// backup scheme
 	if (!isset($_GET['structure']) &&
@@ -44,7 +44,7 @@ function admin_db_backup(&$engine, &$module)
 
 	$getstr = '';
 
-	if (is_array($scheme))
+	if (is_[$scheme))
 	{
 		foreach ($scheme as $key => $val)
 		{
@@ -69,9 +69,9 @@ function admin_db_backup(&$engine, &$module)
 		$time		= time();
 		$pack		= set_pack_dir($engine, $time);	// backup directory
 		$root		= $_POST['root'];
-		$data		= array();
-		$structure	= array();
-		$files		= array();
+		$data		= [];
+		$structure	= [];
+		$files		= [];
 		$sql		= '';
 
 		foreach ($_POST as $val => $key)
@@ -167,7 +167,7 @@ function admin_db_backup(&$engine, &$module)
 		$file	= fopen($filename, 'w');
 
 		// log contents
-		$contents = array(
+		$contents = [
 			$time,						// 0: backup time (unix format)
 			rtrim(substr($pack, strlen(UPLOAD_BACKUP_DIR) + 18), '/'),	// 1: id
 			$root,						// 2: cluster root
@@ -178,7 +178,7 @@ function admin_db_backup(&$engine, &$module)
 			// TODO: add metadata to avoid conflicts
 			// 7: unique_instance_key	-> warn / show user if he restores data from another deployment or
 
-		);
+		];
 
 		// write log file
 		fwrite($file, implode("\n", $contents));

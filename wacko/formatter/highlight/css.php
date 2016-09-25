@@ -17,7 +17,7 @@ $options['line_numbers']				= false;
 if (isset($options['notypo']) && $options['notypo'] !== false) $options['notypo'] = true;
 
 $css = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-$keywords = array(
+$keywords = [
 	'azimuth',
 	'background-attachment',
 	'background-color',
@@ -118,10 +118,10 @@ $keywords = array(
 	'widows',
 	'word-spacing',
 	'z-index',
-);
+];
 
 // These should NOT be followed by a -
-$special_keywords = array(
+$special_keywords = [
 	'color',
 	'background',
 	'border',
@@ -137,10 +137,10 @@ $special_keywords = array(
 	'border-bottom',
 	'border-right',
 	'border-left'
-	);
+];
 
 // These should NOT be preceeded by a -
-$special_keyword2 = array(
+$special_keyword2 = [
 	'height',
 	'left',
 	'bottom',
@@ -148,7 +148,7 @@ $special_keyword2 = array(
 	'right',
 	'size',
 	'width'
-	);
+];
 
 	$css = str_replace(":", "\:", $css);
 

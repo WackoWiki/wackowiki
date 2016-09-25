@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$wacko_translation = array(
+$wacko_translation = [
 	'FormInvalid'				=> 'Le formulaire que vous avez envoyé est incorrect. Veuillez essayer de le renvoyer.',
 	// logged in panel
 	'YouAre'					=> 'Vous êtes ',
@@ -351,7 +351,7 @@ $wacko_translation = array(
 	'MostCommentedPages'		=> 'Pages les plus commentées',
 	'NoAccessToSourcePage'		=> 'Vous n&rsquo;êtes pas autorisé(e) à voir la source des actions.',
 	'SourcePageDoesntExist'		=> 'La page à laquelle se réfère cette fonction n&rsquo;existe pas encore',
-	'NotLoggedInThusEdited'		=> 'Vous n&rsquo;êtes pas connecté(e), nous ne savons donc pas quelles pages vous avez modifiées.',
+	'NotLoggedInThusEdited'		=> 'Vous n&rsquo;êtes pas connecté(e], nous ne savons donc pas quelles pages vous avez modifiées.',
 	'DidntEditAnyPage'			=> 'Vous n&rsquo;avez encore édité aucune page.',
 	'NoPagesFound'				=> 'Aucune page n&rsquo;a été trouvée.',
 	'MyChangesTitle1'			=> 'Ceci est la liste des pages que vous avez éditées, ordonnée selon la date de votre dernière modification',
@@ -363,7 +363,7 @@ $wacko_translation = array(
 	'ListOwnedPages2'			=> 'Ceci est la liste des pages dont vous êtes le propriétaire, dans l&rsquo;ordre chronologique',
 	'ListOwnedPages3'			=> 'Ceci est la liste des pages dont vous êtes le propriétaire, dans l&rsquo;ordre des modifications effectuées',
 	'YouDontOwn'				=> 'Vous n&rsquo;êtes propriétaire d&rsquo;aucune page.',
-	'NotLoggedInThusOwned'		=> 'Vous n&rsquo;êtes pas connecté(e), nous ne savons donc pas quelles sont vos pages !',
+	'NotLoggedInThusOwned'		=> 'Vous n&rsquo;êtes pas connecté(e], nous ne savons donc pas quelles sont vos pages !',
 	'NoOrphaned'				=> 'Aucune pages orpheline. Bien !',
 	'NoRecentComments'			=> 'Aucun commentaire récent.',
 	'LatestCommentBy'			=> 'Dernier commentaire par',
@@ -415,7 +415,7 @@ $wacko_translation = array(
 
 	'AccountDisabled'			=> 'Votre compte est peut être désactivé.',
 	'WrongPassword'				=> 'Mot de passe incorrect !',
-	'AlreadyRegistered'			=> 'Si vous vous êtes déjà enregistré(e), connectez-vous ici !',
+	'AlreadyRegistered'			=> 'Si vous vous êtes déjà enregistré(e], connectez-vous ici !',
 	'YourLogin'					=> 'Votre NomWiki',
 	'StuffYouNeed'				=> 'Information à indiquer seulement pour votre première connexion (devenant ainsi un nouvel utilisateur de ce site).',
 	'ConfirmPassword'			=> 'Confirmez votre mot de passe ',
@@ -578,7 +578,7 @@ $wacko_translation = array(
 	'NoUnwatchedPages'			=> 'Vous surveillez toutes les pages.',
 	'ViewWatchedPages'			=> 'Montrer les pages surveillées',
 	'ViewUnwatchedPages'		=> 'Montrer les pages non surveillées',
-	'NotLoggedInWatches'		=> 'Vous n&rsquo;êtes pas connecté(e), nous ne savons donc pas quelles pages vous surveillez.',
+	'NotLoggedInWatches'		=> 'Vous n&rsquo;êtes pas connecté(e], nous ne savons donc pas quelles pages vous surveillez.',
 
 	// mychangeswatches action
 	'MyChangesWatches'			=> 'Liste de toutes les pages que vous surveillez, modifiées par d&rsquo;autres depuis votre dernière modification',
@@ -1033,7 +1033,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Fuseau horaire',
 	'DST'						=> 'Heure d&rsquo;été',
-	'TzZoneArray'	=> array(
+	'TzZoneArray'	=> [
 		'-12'	=> '[UTC - 12] Île Baker',
 		'-11'	=> '[UTC - 11] Niue, Samoa',
 		'-10'	=> '[UTC - 10] Hawaii-Aleutian, Île Cook',
@@ -1074,9 +1074,9 @@ $wacko_translation = array(
 		'12.75'	=> '[UTC + 12:45] Îles Chatham',
 		'13'	=> '[UTC + 13] Tongo, Îles Phoenix',
 		'14'	=> '[UTC + 14] Île de Wight',
-	),
+	],
 
-	'LanguageArray'	=>  array(
+	'LanguageArray'	=>  [
 		'bg' => 'Bulgare',
 		'da' => 'Danois',
 		'nl' => 'Néerlandais',
@@ -1091,15 +1091,15 @@ $wacko_translation = array(
 		'pt' => 'Portuguese',
 		'ru' => 'Russe',
 		'es' => 'Espagnol',
-	),
+	],
 
 	'AccountStatus'				=> 'Account status',
-	'AccountStatusArray' => array(
+	'AccountStatusArray' => [
 		'0' => 'active',
 		'1' => 'pending',
 		'2' => 'blocked',
 		'3' => 'inactive',
-	),
+	],
 
 	'JustNow'		=> 'just now',
 	'MinuteAgo'		=> 'a minute ago',
@@ -1195,4 +1195,4 @@ $wacko_translation = array(
 									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
-);
+];

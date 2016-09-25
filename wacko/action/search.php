@@ -194,7 +194,7 @@ $highlight_this = function ($text, $words, $the_place)
 		if(strlen(trim($word)) != 0)
 		{
 			//exclude these words from being replaced
-			$exclude_list = array('word1', 'word2', 'word3');
+			$exclude_list = ['word1', 'word2', 'word3'];
 		}
 
 		// Check if it's excluded

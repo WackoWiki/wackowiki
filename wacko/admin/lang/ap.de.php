@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$ap_translation = array(
+$ap_translation = [
 	'MainNote'					=> 'Hinweis: Es wird empfolen den Zugang zur Site für administrative Wartungsarbeiten zu sperren.',
 
 	// Admin panel
@@ -146,6 +146,6 @@ $ap_translation = array(
 	'MembersRemoved'			=> 'Das Mitglied wurde aus der Gruppe entfernt.',
 	'MembersDeleteInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
 
-);
+];
 
 ?>

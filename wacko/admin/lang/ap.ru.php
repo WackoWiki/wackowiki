@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$ap_translation = array(
+$ap_translation = [
 	'MainNote'					=> 'Внимание: перед проведением технических административных мероприятий <span class="underline">настоятельно</span> рекомендуется закрыть доступ к сайту!',
 
 	// Admin panel
@@ -145,6 +145,6 @@ $ap_translation = array(
 	'MembersRemoved'			=> 'Участник из группы удален.',
 	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 
-);
+];
 
 ?>

@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$wacko_translation = array(
+$wacko_translation = [
 	'FormInvalid'				=> 'Campo inválido. Tente submeter novamente.',
 	// logged in panel
 	'YouAre'					=> 'Voçê é ',
@@ -1033,7 +1033,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Fuso Horário',
 	'DST'						=> 'Horário de verão',
-	'TzZoneArray'	=> array(
+	'TzZoneArray'	=> [
 		'-12'	=> '[TMG-12] Eniwetok, Kwajalein',
 		'-11'	=> '[TMG-11] Atol de Midway, Samoa',
 		'-10'	=> '[TMG-10] Havai, Honolulu',
@@ -1066,9 +1066,9 @@ $wacko_translation = array(
 		'10'	=> '[TMG+10] Brisbane, Camberra, Guam, Hobart, Melbourne, Porto Moresby, Sydney, Vertaal',
 		'11'	=> '[TMG+11] Magadan, Nova Caledónia, Ilhas Salomão',
 		'12'	=> '[TMG+12] Auckland, Gemak, Fiji, Kamchatka, Ilhas Marshall, Suva, Wellington',
-	),
+	],
 
-	'LanguageArray'	=>  array(
+	'LanguageArray'	=>  [
 		'bg' => 'búlgaro',
 		'da' => 'dinamarquês',
 		'nl' => 'holandês',
@@ -1083,15 +1083,15 @@ $wacko_translation = array(
 		'pt' => 'português',
 		'ru' => 'russo',
 		'es' => 'espanhol',
-	),
+	],
 
 	'AccountStatus'				=> 'Account status',
-	'AccountStatusArray' => array(
+	'AccountStatusArray' => [
 		'0' => 'active',
 		'1' => 'pending',
 		'2' => 'blocked',
 		'3' => 'inactive',
-	),
+	],
 
 	'JustNow'		=> 'just now',
 	'MinuteAgo'		=> 'a minute ago',
@@ -1187,4 +1187,4 @@ $wacko_translation = array(
 									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
-);
+];

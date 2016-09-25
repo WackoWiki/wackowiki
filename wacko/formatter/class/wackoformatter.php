@@ -12,22 +12,22 @@ class WackoFormatter
 	var $page_id;
 	var $table_scope;
 	var $old_indent_level	= 0;
-	var $indent_closers		= array();
+	var $indent_closers		= [];
 	var $tdold_indent_level	= 0;
-	var $auto_fn			= array();
-	var $tdindent_closers	= array();
+	var $auto_fn			= [];
+	var $tdindent_closers	= [];
 	var $br					= 1;
 	var $intable			= 0;
 	var $intablebr			= 0;
 	var $cols				= 0;
 	var $z_gif				= '&nbsp;';
-	var $colors				= array(
+	var $colors				= [
 								'red' => 'red',
 								'green' => 'green',
 								'blue' => 'blue',
 								'yellow' => 'yellow',
-								);
-	var $x11_colors			= array(
+								];
+	var $x11_colors			= [
 								'indianred' => 'indianred',
 								'lightcoral' => 'lightcoral',
 								'orangered' => 'orangered',
@@ -173,7 +173,7 @@ class WackoFormatter
 								'sienna' => 'sienna',
 								'burlywood' => 'burlywood',
 								'rosybrown' => 'rosybrown',
-								);
+								];
 
 	function __construct( &$object )
 	{
@@ -334,7 +334,7 @@ class WackoFormatter
 		$output		= '';
 		$thing		= $things[1];
 		$wacko		= &$this->object;
-		$callback	= array(&$this, 'wacko_preprocess');
+		$callback	= [&$this, 'wacko_preprocess'];
 
 		if ($thing[0] == '~')
 		{
@@ -372,14 +372,14 @@ class WackoFormatter
 					if ($sep === false)
 					{
 						$formatter	= $matches[1];
-						$params		= array();
+						$params		= [];
 					}
 					else
 					{
 						$formatter	= substr($matches[1], 0, $sep);
 						$p			= ' '.substr($matches[1], $sep).' ';
 						$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER);
-						$params		= array();
+						$params		= [];
 						$c			= 0;
 
 						foreach($matches as $m)
@@ -444,12 +444,12 @@ class WackoFormatter
 	{
 		$thing		= $things[1];
 		$wacko		= &$this->object;
-		$callback	= array( &$this, 'wacko_callback');
+		$callback	= [&$this, 'wacko_callback'];
 
 		if ($thing[0] == '~')
 		if ($thing[1] == '~')
 		{
-			return '~~'.$this->wacko_middleprocess( array(0, substr($thing, 2)) );
+			return '~~'.$this->wacko_middleprocess( [0, substr($thing, 2)] );
 		}
 
 		// escaped text
@@ -472,7 +472,7 @@ class WackoFormatter
 		$li			= '';
 		$thing		= $things[1];
 		$wacko		= & $this->object;
-		$callback	= array(&$this, 'wacko_callback');
+		$callback	= [&$this, 'wacko_callback'];
 
 		if (isset($wacko->page['page_id']))
 		{
@@ -553,7 +553,7 @@ class WackoFormatter
 			for ($i = 0; $i < $count; $i++)
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= array();
+				$this->tdindent_closers		= [];
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -567,7 +567,7 @@ class WackoFormatter
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= array();
+				$this->tdindent_closers		= [];
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -581,7 +581,7 @@ class WackoFormatter
 			else
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers		= array();
+				$this->tdindent_closers		= [];
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -620,7 +620,7 @@ class WackoFormatter
 			for ($i = 0; $i < $count; $i++)
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= array();
+				$this->tdindent_closers	= [];
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -635,7 +635,7 @@ class WackoFormatter
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= array();
+				$this->tdindent_closers	= [];
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -649,7 +649,7 @@ class WackoFormatter
 			else
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= array();
+				$this->tdindent_closers	= [];
 
 				if ($cells[$i][0] == "\n")
 				{

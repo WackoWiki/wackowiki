@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Maintaince setting                               ##
 ########################################################
 
-$module['config_system'] = array(
+$module['config_system'] = [
 		'order'	=> 210,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_system',
 		'name'	=> 'System',
 		'title'	=> 'System options',
-	);
+	];
 
 ########################################################
 

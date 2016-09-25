@@ -36,7 +36,7 @@ write_config_hidden_nodes(array('none' => ''));
 		This is a copy of the array from database-config.php
 	*/
 
-	$accepted_pdo_drivers	= array();
+	$accepted_pdo_drivers	= [];
 	$accepted_pdo_drivers[]	= 'mysql';
 
 	$detected = 0;

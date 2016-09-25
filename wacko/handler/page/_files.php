@@ -41,7 +41,7 @@ if ($this->has_access('read'))
 
 		<?php
 		echo '<div class="files">'."\n";
-		echo $this->action('files', array('nomark' => 1));
+		echo $this->action('files', ['nomark' => 1]);
 		echo '</div>';
 
 		// display form
@@ -53,7 +53,7 @@ if ($this->has_access('read'))
 			)
 		{
 			echo '<div class="filesform">'."\n";
-			echo $this->action('upload', array('nomark' => 1));
+			echo $this->action('upload', ['nomark' => 1]);
 			echo '</div>'."\n";
 		}
 

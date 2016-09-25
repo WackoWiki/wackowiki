@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   System Log                                       ##
 ########################################################
 
-$module['system_log'] = array(
+$module['system_log'] = [
 		'order'	=> 140,
 		'cat'	=> 'Basic functions',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'system_log',
 		'name'	=> 'System log',
 		'title'	=> 'Log system events',
-	);
+	];
 
 ########################################################
 

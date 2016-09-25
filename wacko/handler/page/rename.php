@@ -139,7 +139,7 @@ if ($registered
 <br />
 			<?php
 			// show backlinks
-			echo $this->action('backlinks', array('nomark' => 0));
+			echo $this->action('backlinks', ['nomark' => 0]);
 			?>
 <br />
 <br />

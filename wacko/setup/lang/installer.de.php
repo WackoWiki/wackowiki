@@ -1,5 +1,5 @@
 <?php
-$lang = array(
+$lang = [
 
 /*
    Language Settings
@@ -77,7 +77,7 @@ $lang = array(
 'WarningRewriteMode' => 'ACHTUNG!\nDeine Basis-URL & die Umschreib-Rechte (rewrite-mode settings) schauen ungewöhnlich aus. Normalerweise ist da kein ? in der URL wenn Umschreibe-Rechte aktiviert sind - in deinem Fall ist da aber ein Fragezeichen.\n\nUm dennoch mit diesen Einstellungen fortzufahren drücke OK.\nZurück zu den Einstellungen (form & change settings) drücke ABBRECHEN.\n\nFalls du mit den Einstellungen fortfährst, kann diese Software-Installation zu unerwarteten Fehlern führen.',
 'ModRewriteStatusUnknown' => 'Der Installer kann nicht ermitteln ob mod_rewrite aktiviert ist, dies bedeutet jedoch nicht das es deaktiviert ist.',
 
-'LanguageArray'	=>  array(
+'LanguageArray'	=>  [
 	'bg' => 'bulgarian',
 	'da' => 'danish',
 	'nl' => 'dutch',
@@ -92,7 +92,7 @@ $lang = array(
 	'pt' => 'portuguese',
 	'ru' => 'russian',
 	'es' => 'spanish',
-),
+],
 
 /*
    Database Config Page
@@ -190,5 +190,5 @@ $lang = array(
 'ConfigDescription' => 'http://wackowiki.sourceforge.net/doc/Doc/Deutsch/Konfiguration',
 'TryAgain' => 'Versuche es erneut',
 
-);
+];
 ?>

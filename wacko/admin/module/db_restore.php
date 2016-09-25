@@ -9,15 +9,15 @@ if (!defined('IN_WACKO'))
 ##   DB Restore                                       ##
 ########################################################
 
-$module['db_restore'] = array(
+$module['db_restore'] = [
 		'order'	=> 510,
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_restore',
 		'name'	=> 'Restore',
 		'title'	=> 'Restoring backup data',
-		'vars'	=> array(&$tables, &$directories),
-	);
+		'vars'	=> [&$tables, &$directories],
+	];
 
 ########################################################
 
@@ -53,7 +53,7 @@ function admin_db_restore(&$engine, &$module)
 	$dir			= UPLOAD_BACKUP_DIR.'/';
 
 	// IDs PROCESSING (COMMON PROCEDURES)
-	$set = array();
+	$set = [];
 
 	if (isset($_POST['backup_id']) && $_POST['backup_id'] == true)
 	{
@@ -333,7 +333,7 @@ function admin_db_restore(&$engine, &$module)
 					'(homonymic files '.( $ifiles === true ? 'skip' : 'substitute' ).'):</strong>'."\n\n";
 
 				// run
-				$overall = array();
+				$overall = [];
 
 				foreach ($list as $dir)
 				{
@@ -449,7 +449,7 @@ function admin_db_restore(&$engine, &$module)
 						&& file_exists($dir.$packname.'/'.BACKUP_FILE_LOG) === true)
 					{
 						$_array1	= str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG)); // TODO: file returns array
-						$_array2	= array('pack' => $packname);
+						$_array2	= ['pack' => $packname];
 						// read log
 						$logs[]		= array_merge($_array1, $_array2);
 					} // end dir check
@@ -457,7 +457,7 @@ function admin_db_restore(&$engine, &$module)
 
 				#$engine->debug_print_r($logs);
 
-				if (is_array($logs))
+				if (is_[$logs))
 				{
 					echo $control_buttons;
 	?>

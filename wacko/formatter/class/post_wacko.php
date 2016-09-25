@@ -18,7 +18,7 @@ class post_wacko
 	function postcallback($things)
 	{
 		$lang		= '';
-		$matches	= array();
+		$matches	= [];
 		$thing		= $things[1];
 
 		$wacko		= &$this->object;
@@ -82,14 +82,14 @@ class post_wacko
 			if ($sep === false)
 			{
 				$action	= $matches[1];
-				$params	= array();
+				$params	= [];
 			}
 			else
 			{
 				$action		= substr($matches[1], 0, $sep);
 				$p			= ' '.substr($matches[1], $sep).' ';
 				$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $_matches, PREG_SET_ORDER);
-				$params		= array();
+				$params		= [];
 				$c			= 0;
 
 				foreach($_matches as $m)

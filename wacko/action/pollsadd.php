@@ -78,7 +78,7 @@ foreach ($_POST as $key => $value)
 {
 	if (preg_match('/^[0-9]{1,2}$/', $key))
 	{
-		$vars[] = array('v_id' => $i, 'text' => htmlspecialchars($value, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET));
+		$vars[] =['v_id' => $i, 'text' => htmlspecialchars($value, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)];
 		$i++;
 	}
 
@@ -91,7 +91,7 @@ foreach ($_POST as $key => $value)
 if (isset($_POST['submit_poll']))
 {
 	//parsing input
-	$strip = array('<', '>', '[', ']', '\\', "'", '"');
+	$strip = ['<', '>', '[', ']', '\\', "'", '"'];
 
 	foreach ($_POST as $key => $value)
 	{
@@ -208,7 +208,7 @@ if ($stop_mod !== true)
 
 	if (isset($_POST['addvar']) && $total_vars < 20)
 	{
-		$vars[] = array('v_id' => $total_vars + 1, 'text' => '');
+		$vars[] = ['v_id' => $total_vars + 1, 'text' => ''];
 		$total_vars++;
 	}
 
@@ -227,7 +227,7 @@ if ($stop_mod !== true)
 
 		while ($i < 6)
 		{
-			$vars[] = array('v_id' => $i, 'text' => '');
+			$vars[] = ['v_id' => $i, 'text' => ''];
 			$i++;
 		}
 

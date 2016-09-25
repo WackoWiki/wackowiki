@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Basic settings                                   ##
 ########################################################
 
-$module['config_basic'] = array(
+$module['config_basic'] = [
 		'order'	=> 200,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_basic',
 		'name'	=> 'Basic',
 		'title'	=> 'Basic parameters',
-	);
+	];
 
 ########################################################
 
@@ -41,7 +41,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['language']					= (string)$_POST['language'];
 		$config['multilanguage']			= (int)$_POST['multilanguage'];
 
-		if (is_array($_POST['allowed_languages']))
+		if (is_[$_POST['allowed_languages']))
 		{
 			$config['allowed_languages'] = (string) implode(',', $_POST['allowed_languages']);
 		}
@@ -225,7 +225,7 @@ function admin_config_basic(&$engine, &$module)
 					}
 					else
 					{
-						$lang_list= array();
+						$lang_list= [];
 					}
 
 					$languages = $engine->_t('LanguageArray');

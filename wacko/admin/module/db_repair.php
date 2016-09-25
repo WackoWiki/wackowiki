@@ -9,15 +9,15 @@ if (!defined('IN_WACKO'))
 ##   Database Repair and Optimization Script          ##
 ########################################################
 
-$module['db_repair'] = array(
+$module['db_repair'] = [
 		'order'	=> 540,
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_repair',
 		'name'	=> 'Repair',
 		'title'	=> 'Repair and Optimize Database',
-		'vars'	=> array(&$tables, &$directories),
-	);
+		'vars'	=> [&$tables, &$directories],
+	];
 
 // TODO: to merge with db_optimize module
 
@@ -37,7 +37,7 @@ function admin_db_repair(&$engine, &$module)
 	{
 		$optimize = 2 == $_POST['action'];
 		$okay		= true;
-		$problems	= array();
+		$problems	= [];
 
 		echo '<ol>';
 

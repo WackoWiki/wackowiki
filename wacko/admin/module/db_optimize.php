@@ -9,15 +9,15 @@ if (!defined('IN_WACKO'))
 ##   DB Optimization                                  ##
 ########################################################
 
-$module['db_optimize'] = array(
+$module['db_optimize'] = [
 		'order'	=> 530,
 		'cat'	=> 'Database',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'db_optimize',
 		'name'	=> 'Optimization',
 		'title'	=> 'Optimizing the database',
-		'vars'	=> array(&$tables),
-	);
+		'vars'	=> [&$tables],
+	];
 
 ########################################################
 
@@ -36,7 +36,7 @@ function admin_db_optimize(&$engine, &$module)
 		$scheme['all'] = 1;
 	}
 
-	if (is_array($scheme))
+	if (is_[$scheme))
 	{
 		foreach ($scheme as $key => $val)
 		{

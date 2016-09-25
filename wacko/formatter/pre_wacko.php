@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $parser	= new preformatter($this);
-$text	= preg_replace_callback($parser->PREREGEXP, array(&$parser, 'precallback'), $text);
+$text	= preg_replace_callback($parser->PREREGEXP, [&$parser, 'precallback'], $text);
 
 echo $text;
 

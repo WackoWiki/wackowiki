@@ -13,7 +13,7 @@ $options['color']['attributevalues']	= 'blue';
 $options['color']['entities']			= 'orange';
 $options['line_numbers']				= false;
 
-$xhtml_tags = array(
+$xhtml_tags = [
 	'!DOCTYPE',
 	'a',
 	'abbr',
@@ -153,7 +153,7 @@ $xhtml_tags = array(
 	'video', // HTML5
 	'wbr',
 	'xmp'
-	);
+	];
 
 	$source = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
@@ -176,7 +176,7 @@ $xhtml_tags = array(
 			{
 				return
 				$matches[1].
-				$this->format($matches[2], 'highlight/css', array('nopre' => true, 'notypo' => false)).
+				$this->format($matches[2], 'highlight/css', ['nopre' => true, 'notypo' => false]).
 				'&lt;/style&gt;';
 			},
 		$source);

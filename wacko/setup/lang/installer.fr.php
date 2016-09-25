@@ -1,5 +1,5 @@
 <?php
-$lang = array(
+$lang = [
 
 /*
    Language Settings
@@ -77,7 +77,7 @@ $lang = array(
 'WarningRewriteMode' => 'ATTENTION!\nVotre URL de base comporte un point d&rsquo;interrogation alors que l&rsquo;extension "mod_rewrite") est activée, ceci nous semble incohérent.\n\nPour confirmer néanmoins ce réglage cliquez sur OK.\nPour revenir au formulaire et changer vos réglages cliquez sur CANCEL.\n\nSi vous vous apprêtez à confirmer ces réglages, veuillez noter que cela pourrait rendre problématique votre installation de WackoWiki.',
 'ModRewriteStatusUnknown' => 'L&rsquo;installeur ne peut pas confirmer que "mod_rewrite" soit activé, il est cependant possible qu&rsquo;il le soit.',
 
-'LanguageArray'	=>  array(
+'LanguageArray'	=>  [
 	'bg' => 'bulgarian',
 	'da' => 'danish',
 	'nl' => 'dutch',
@@ -92,7 +92,7 @@ $lang = array(
 	'pt' => 'portuguese',
 	'ru' => 'russian',
 	'es' => 'spanish',
-),
+],
 
 /*
    Database Config Page
@@ -190,5 +190,5 @@ $lang = array(
 'ConfigDescription' => 'pour une description détaillée de la configuration voir http://wackowiki.sourceforge.net/doc/Doc/Francophone/Configuration',
 'TryAgain' => 'Essayez encore',
 
-);
+];
 ?>

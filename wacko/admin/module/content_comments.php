@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Comments                                         ##
 ########################################################
 
-$module['content_comments'] = array(
+$module['content_comments'] = [
 		'order'	=> 310,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_comments',
 		'name'	=> 'Comments',
 		'title'	=> 'Manage comments',
-	);
+	];
 
 ########################################################
 

@@ -5,12 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$wacko_language = array(
+$wacko_language = [
 	'name'					=> "Hungarian",
 	'code'					=> "hu",
 	'charset'				=> "iso-8859-2",
 	'locale'				=> "hu_HU",
-	'utfdecode'				=> array(),
+	'utfdecode'				=> [],
 	'UPPER_P'				=> "A-Z\xa1\xa3\xa5\xa6\xa9-\xac\xae\xaf\xc0-\xd6\xd8-\xde",
 	'LOWER_P'				=> "a-z\xb1\xb3\xb5\xb6\xb9-\xbc\xbe\xbf\xdf-\xf6\xf8-\xfe\/'",
 	'ALPHA_P'				=> "A-Za-z\xa1\xa3\xa5\xa6\xa9-\xac\xae\xaf\xb1\xb3\xb5\xb6\xb9-\xbc\xbe-\xd6\xd8-\xf6\xf8-\xfe\_\-\/'",
@@ -18,11 +18,11 @@ $wacko_language = array(
 	'TranslitLettersTo'		=> "AACEEIIOOUYaaceeiioouyAaAaCcCcDdDdEeEeLlLlLlNnNnOoRrRrSsSsSsTtTtUuUuZzZzZz",
 	'TranslitCaps'			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
 	'TranslitSmall'			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
-	'TranslitBiLetters'		=> array(
+	'TranslitBiLetters'		=> [
 								"ä"=>"ae", "ö"=>"oe", "ü"=>"ue", "Ä"=>"Ae",
 								"Ö"=>"Oe", "Ü"=>"Ue", "ß"=>"ss",
-								),
-	'unicode_entities'		=> array(
+								],
+	'unicode_entities'		=> [
 								"Á"=>"&#193;", "Â"=>"&#194;", "Ä"=>"&#196;", "Ç"=>"&#199;", "É"=>"&#201;", "Ë"=>"&#203;",
 								"Í"=>"&#205;", "Î"=>"&#206;", "Ó"=>"&#211;", "Ô"=>"&#212;", "Ö"=>"&#214;", "Ú"=>"&#218;",
 								"Ü"=>"&#220;", "Ý"=>"&#221;", "ß"=>"&#223;", "á"=>"&#225;", "â"=>"&#226;", "ä"=>"&#228;",
@@ -37,7 +37,7 @@ $wacko_language = array(
 								"¹"=>"&#353;", "Þ"=>"&#354;", "þ"=>"&#355;", "«"=>"&#356;", "»"=>"&#357;", "Ù"=>"&#366;",
 								"ù"=>"&#367;", "Û"=>"&#368;", "û"=>"&#369;", "¬"=>"&#377;", "¼"=>"&#378;", "¯"=>"&#379;",
 								"¿"=>"&#380;", "®"=>"&#381;", "¾"=>"&#382;",
-								),
-);
+								],
+];
 
 ?>

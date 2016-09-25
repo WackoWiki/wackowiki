@@ -159,7 +159,7 @@ if ($this->has_access('read'))
 		}
 
 		// parse page body
-		$data = $this->format($this->page['body_r'], 'post_wacko', array('bad' => 'good'));
+		$data = $this->format($this->page['body_r'], 'post_wacko', ['bad' => 'good']);
 		$data = $this->numerate_toc($data); //  numerate toc if needed
 
 		// display page title
@@ -208,7 +208,7 @@ if ($this->forum
 	|| ($this->has_access('read') && $this->page && $this->db->footer_tags == 1
 	|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
-	if ($categories = $this->action('categories', array('page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1), 1))
+	if ($categories = $this->action('categories', ['page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1], 1))
 	{
 		echo '<nav class="category">'.$categories."</nav>\n";
 	}

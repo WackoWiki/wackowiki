@@ -41,21 +41,21 @@ define('BB2_CWD', dirname(__FILE__));
 // Most of these are unused in non-database mode.
 // DO NOT EDIT HERE; instead make changes in settings.ini.
 // These settings are used when settings.ini is not present.
-$bb2_settings_defaults = array(
-	'log_table' => $db->table_prefix . 'bad_behavior',
-	'display_stats' => false,
-	'strict' => false,
-	'verbose' => false,
-	'logging' => true,
-	'httpbl_key' => '',
-	'httpbl_threat' => '25',
-	'httpbl_maxage' => '30',
-	'offsite_forms' => false,
-	'eu_cookie' => false,
-	'reverse_proxy' => false,
-	'reverse_proxy_header' => 'X-Forwarded-For',
-	'reverse_proxy_addresses' => array(),
-);
+$bb2_settings_defaults = [
+	'log_table'					=> $db->table_prefix . 'bad_behavior',
+	'display_stats'				=> false,
+	'strict'					=> false,
+	'verbose'					=> false,
+	'logging'					=> true,
+	'httpbl_key'				=> '',
+	'httpbl_threat'				=> '25',
+	'httpbl_maxage'				=> '30',
+	'offsite_forms'				=> false,
+	'eu_cookie'					=> false,
+	'reverse_proxy'				=> false,
+	'reverse_proxy_header'		=> 'X-Forwarded-For',
+	'reverse_proxy_addresses'	=> [],
+];
 
 // Bad Behavior callback functions.
 // Our log table structure
@@ -157,7 +157,7 @@ function bb2_db_query($query) {
 // or equivalent and appending the result of each call to an array.
 function bb2_db_rows($result) {
 	global $db;
-	$data = array();
+	$data = [];
 
 	while ($row = $db->fetch_assoc($result))
 	{
@@ -184,7 +184,7 @@ function bb2_read_whitelist() {
 function bb2_read_settings() {
 	global $bb2_settings_defaults;
 	$settings = @parse_ini_file('config/bb_settings.conf'); // dirname(__FILE__) . 'settings.ini'
-	if (!$settings) $settings = array();
+	if (!$settings) $settings = [];
 	return @array_merge($bb2_settings_defaults, $settings);
 }
 

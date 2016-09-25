@@ -340,7 +340,7 @@ class Polls
 
 		if (!is_array($ballot))
 		{
-			$ballot = array($ballot);
+			$ballot = [$ballot];
 		}
 
 		foreach ($vars as $var)

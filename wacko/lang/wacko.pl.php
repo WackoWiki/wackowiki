@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$wacko_translation = array(
+$wacko_translation = [
 	'FormInvalid'				=> 'Wys³any formularz by³ nieprawid³owy. Spróbuj wys³aæ ponownie.',
 	// logged in panel
 	'YouAre' => '',
@@ -1033,7 +1033,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Strefa czasowa',
 	'DST'						=> 'Czas letni',
-	'TzZoneArray'	=> array(
+	'TzZoneArray'	=> [
 		'-12'	=> '[UTC - 12] Czas Wysp Baker',
 		'-11'	=> '[UTC - 11] Czas Niue, Czas Standardowy Samoa',
 		'-10'	=> '[UTC - 10] Hawajski Czas Standardowy, Czas Wysp Cooka',
@@ -1049,9 +1049,9 @@ $wacko_translation = array(
 		'-3'	=> '[UTC - 3] Amazoñski Czas Standardowy, Czas ¦rodkowej Grendlandii',
 		'-2'	=> '[UTC - 2] Czas Fernando de Noronha, Czas Georgii Po³udniowej i Wysp Sandwich Po³udniowy',
 		'-1'	=> '[UTC - 1] Azorski Czas Standardowy, Czas Zielonego Przyl±dka, Czas Wschodniej Grendlandii',
-		'0'		=> '[UTC] Czas Zachodnioeuropejski (WET), Czas Greenwich (GMT)',
-		'1'		=> '[UTC + 1] Czas ¦rodkowoeuropejski (CET), Czas Zachodnioafrykañski',
-		'2'		=> '[UTC + 2] Czas Wschodnioeuropejski (EET), Czas ¦rodkowoafrykañski',
+		'0'		=> '[UTC] Czas Zachodnioeuropejski (WET], Czas Greenwich (GMT)',
+		'1'		=> '[UTC + 1] Czas ¦rodkowoeuropejski (CET], Czas Zachodnioafrykañski',
+		'2'		=> '[UTC + 2] Czas Wschodnioeuropejski (EET], Czas ¦rodkowoafrykañski',
 		'3'		=> '[UTC + 3] Moskiewski Czas Standardowy, Czas Wschodnioafrykañski',
 		'3.5'   => '[UTC + 3:30] Irañski Czas Standardowy',
 		'4'		=> '[UTC + 4] Gulfijski Czas Standardowy, Samarski Czas Standardowy',
@@ -1074,9 +1074,9 @@ $wacko_translation = array(
 		'12.75'	=> '[UTC + 12:45] Czas Wysp Chatam',
 		'13'	=> '[UTC + 13] Czas Tongijski, Czas Wysp Feniks',
 		'14'	=> '[UTC + 14] Czas Wysp Line',
-	),
+	],
 
-	'LanguageArray'	=>  array(
+	'LanguageArray'	=>  [
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',
@@ -1091,15 +1091,15 @@ $wacko_translation = array(
 		'pt' => 'portuguese',
 		'ru' => 'russian',
 		'es' => 'spanish',
-	),
+	],
 
 	'AccountStatus'				=> 'Account status',
-	'AccountStatusArray' => array(
+	'AccountStatusArray' => [
 		'0' => 'active',
 		'1' => 'pending',
 		'2' => 'blocked',
 		'3' => 'inactive',
-	),
+	],
 
 	'JustNow'		=> 'just now',
 	'MinuteAgo'		=> 'a minute ago',
@@ -1195,4 +1195,4 @@ $wacko_translation = array(
 									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
-);
+];

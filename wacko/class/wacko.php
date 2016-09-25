@@ -5777,7 +5777,7 @@ class Wacko
 
 	// TODO: do not add
 	// - comments, system pages, methodes,
-	// - url arguments ?profile= array('page_id', 'arguments')
+	// - url arguments ?profile= ['page_id', 'arguments']
 	// - add parameter for trail size in user settings ?
 	// parse only once, without included pages (avoid call in run function!)
 	//		$size	=

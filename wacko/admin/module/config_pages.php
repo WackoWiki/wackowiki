@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Pages settings                                   ##
 ########################################################
 
-$module['config_pages'] = array(
+$module['config_pages'] = [
 		'order'	=> 280,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_pages',
 		'name'	=> 'Pages',
 		'title'	=> 'Pages and site parameters',
-	);
+	];
 
 ########################################################
 

@@ -130,19 +130,21 @@ if(pack('L', $abyz) == pack('N', $abyz))
 // to increase security, you really should add other fonts
 if($big_endian)
 {
-	$font_locations = array(	'/.ht_freecap_font1_big_e.gdf',
-								'/.ht_freecap_font2_big_e.gdf',
-								'/.ht_freecap_font3_big_e.gdf',
-								'/.ht_freecap_font4_big_e.gdf',
-								'/.ht_freecap_font5_big_e.gdf');
+	$font_locations = [	'/.ht_freecap_font1_big_e.gdf',
+						'/.ht_freecap_font2_big_e.gdf',
+						'/.ht_freecap_font3_big_e.gdf',
+						'/.ht_freecap_font4_big_e.gdf',
+						'/.ht_freecap_font5_big_e.gdf'
+	];
 }
 else
 {
-	$font_locations = array(	'/.ht_freecap_font1.gdf',
-								'/.ht_freecap_font2.gdf',
-								'/.ht_freecap_font3.gdf',
-								'/.ht_freecap_font4.gdf',
-								'/.ht_freecap_font5.gdf');
+	$font_locations = [	'/.ht_freecap_font1.gdf',
+						'/.ht_freecap_font2.gdf',
+						'/.ht_freecap_font3.gdf',
+						'/.ht_freecap_font4.gdf',
+						'/.ht_freecap_font5.gdf'
+	];
 }
 
 // background:
@@ -158,11 +160,12 @@ $bg_type = 1;
 $blur_bg = true;
 // for bg_type 3, which images should we use?
 // if you add your own, make sure they're fairly 'busy' images (ie a lot of shapes in them)
-$bg_images = array(	'/.ht_freecap_im1.jpg',
-					'/.ht_freecap_im2.jpg',
-					'/.ht_freecap_im3.jpg',
-					'/.ht_freecap_im4.jpg',
-					'/.ht_freecap_im5.jpg');
+$bg_images = [	'/.ht_freecap_im1.jpg',
+				'/.ht_freecap_im2.jpg',
+				'/.ht_freecap_im3.jpg',
+				'/.ht_freecap_im4.jpg',
+				'/.ht_freecap_im5.jpg'
+];
 // for non-transparent backgrounds only:
 	// if 0, merges CAPTCHA with bg
 	// if 1, write CAPTCHA over bg
@@ -207,7 +210,7 @@ $bg_fade_pct += $rand_func(-2, 2);
 $header_length = $big_endian ? 12 : 11;
 
 // read each font and get font character widths
-$font_widths = array();
+$font_widths = [];
 
 for($i = 0; $i < sizeof($font_locations); $i++)
 {

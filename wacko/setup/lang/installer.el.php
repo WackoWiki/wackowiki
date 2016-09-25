@@ -1,5 +1,5 @@
 <?php
-$lang = array(
+$lang = [
 
 /*
    Language Settings
@@ -34,7 +34,7 @@ $lang = array(
 'PHPVersion' => 'Έκδοση PHP',
 'PHPDetected' => 'Εντοπίστηκε PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Προαιρετικό)',
-'ModRewriteInstalled' => 'Εγκατεστημένο Rewrite Extension (mod_rewrite);',
+'ModRewriteInstalled' => 'Εγκατεστημένο Rewrite Extension (mod_rewrite];',
 'Database' => 'Βάση Δεδομένων',
 'Permissions' => 'Δικαιώματα',
 'ReadyToInstall' => 'Έτοιμοι για εγκατάσταση;',
@@ -79,7 +79,7 @@ $lang = array(
 'WarningRewriteMode' => 'ΠΡΟΣΟΧΗ!\nΤο βασικό σας URL και η ρύθμιση της κατάστασης επανεγγραφής φαίνονται ύποπτα. Συνήθως ΔΕΝ υπάρχει σημάδι ? στο βασικό URL όταν η κατάσταση επανεγγραφής έχει τεθεί - αλλά στην περίπτωσή σας υπάρχει.\n\nΓια να συνεχίσετε με αυτές τις ρυθμίσεις πατήστε το OK.\nΓια να επιστρέψετε στην φόρμα και να αλλάξετε τις ρυθμίσεις σας πατήστε το CANCEL(ακύρωση).\n\nΑν είστε έτοιμοι να προχωρήσετε με αυτές τις ρυθμίσεις, παρακαλώ να σημειωθεί ότι ΜΠΟΡΕΙ να δημιουργηθούν προβλήματα με την εγκατάσταση του WackoWiki.',
 'ModRewriteStatusUnknown' => 'Το πρόγραμμα εγκατάστασης δεν μπορεί να επιβεβαιώσει ότι το mod_rewrite είναι ενεργοποιημένο, παρόλα αυτά αυτό δεν σημαίνει ότι είναι απενεργοποιημένο',
 
-'LanguageArray'	=>  array(
+'LanguageArray'	=>  [
 	'bg' => 'bulgarian',
 	'da' => 'danish',
 	'nl' => 'dutch',
@@ -94,7 +94,7 @@ $lang = array(
 	'pt' => 'portuguese',
 	'ru' => 'russian',
 	'es' => 'spanish',
-),
+],
 
 /*
    Database Config Page
@@ -195,5 +195,5 @@ $lang = array(
 'ConfigDescription' => 'detailed description http://wackowiki.sourceforge.net/doc/Doc/English/Configuration',
 'TryAgain' => 'Δοκιμάστε Πάλι',
 
-);
+];
 ?>

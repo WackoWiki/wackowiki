@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Uploaded Files                                   ##
 ########################################################
 
-$module['content_files'] = array(
+$module['content_files'] = [
 		'order'	=> 360,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_files',
 		'name'	=> 'Files',
 		'title'	=> 'Manage uploaded files',
-	);
+	];
 
 ########################################################
 
@@ -168,7 +168,7 @@ function admin_content_files(&$engine, &$module)
 					$maxfilesize = 1 * $_POST['maxsize'];
 
 			// 1.7. check is image, if asked
-			$size	= array(0, 0);
+			$size	= [0, 0];
 			$src	= $_FILES['file']['tmp_name'];
 			$size	= @getimagesize($src);
 
@@ -179,7 +179,7 @@ function admin_content_files(&$engine, &$module)
 			$small_name  = $result_name;
 			$description = substr($_POST['file_description'], 0, 250);
 			$description = rtrim( $description, '\\' );
-			$description = str_replace(array('"', "'", '<', '>'), '', $description);
+			$description = str_replace(['"', "'", '<', '>'), '', $description);
 			$description = htmlspecialchars($description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 			// 5. insert line into DB
@@ -300,9 +300,9 @@ function admin_content_files(&$engine, &$module)
 		"ORDER BY ".$order_by." ".
 		$pagination['limit']);
 
-	if (!is_array($files))
+	if (!is_[$files))
 	{
-		$files = array();
+		$files = [];
 	}
 
 	echo '<fieldset><legend>'.$engine->_t('UploadTitleGlobal').":</legend>\n";

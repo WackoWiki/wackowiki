@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Pages                                            ##
 ########################################################
 
-$module['content_pages'] = array(
+$module['content_pages'] = [
 		'order'	=> 300,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_pages',
 		'name'	=> 'Pages',
 		'title'	=> 'Manage pages',
-	);
+	];
 
 ########################################################
 

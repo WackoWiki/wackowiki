@@ -1,6 +1,6 @@
 <?php
 
-$config_db		= array();
+$config_db		= [];
 $config_insert	= '';
 
 // set back theme to default, just a precaution

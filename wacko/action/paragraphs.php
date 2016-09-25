@@ -42,7 +42,7 @@ if (!$style) $style = 'before';
 	{ // ---------------------- p numeration ------------------------
 		// clarifying, what numbers where is placed
 		$toc_len	= count($toc);
-		$numbers	= array();
+		$numbers	= [];
 		$depth		= 0;
 		$p_num		= 0;
 

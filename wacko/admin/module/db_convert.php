@@ -9,15 +9,15 @@ if (!defined('IN_WACKO'))
 ##   DB Engine Conversion                             ##
 ########################################################
 
-$module['db_convert'] = array(
+$module['db_convert'] = [
 		'order'	=> 520,
 		'cat'	=> 'Database',
 		'status'=> true,
 		'mode'	=> 'db_convert',
 		'name'	=> 'Convert',
 		'title'	=> 'Converting Tables or Columns',
-		'vars'	=> array(&$tables),
-);
+		'vars'	=> [&$tables],
+];
 
 ########################################################
 
@@ -30,7 +30,7 @@ function admin_db_convert(&$engine, &$module)
 	$getstr		= '';
 	$elements	= '';
 	$sql		= '';
-	$sql_log	= array();
+	$sql_log	= [];
 
 	// optimizatin scheme
 	if (isset($_GET['all']) && $_GET['all'] == 1)
@@ -38,7 +38,7 @@ function admin_db_convert(&$engine, &$module)
 		$scheme['all'] = 1;
 	}
 
-	if (is_array($scheme))
+	if (is_[$scheme))
 	{
 		foreach ($scheme as $key => $val)
 		{

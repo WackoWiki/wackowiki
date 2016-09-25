@@ -228,7 +228,7 @@ if ($this->is_admin()
 		}
 
 		// show backlinks
-		echo $this->action('backlinks', array('nomark' => 0));
+		echo $this->action('backlinks', ['nomark' => 0]);
 		echo '<br />';
 
 		$this->show_message($message, 'warning');

@@ -13,143 +13,143 @@ if (!defined('IN_WACKO'))
 // we really want this up to date
 if (!isset($tables, $directories))
 {
-	$tables	= array(
-			$engine->db->table_prefix.'acl' => array(
+	$tables	= [
+			$engine->db->table_prefix.'acl' => [
 				'name'	=> $engine->db->table_prefix.'acl',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'auth_token' => array(
+			],
+			$engine->db->table_prefix.'auth_token' => [
 					'name'	=> $engine->db->table_prefix.'auth_token',
 					'where'	=> false,
 					'order'	=> 'user_id',
 					'limit' => 1000
-			),
-			$engine->db->table_prefix.'cache' => array(
+			],
+			$engine->db->table_prefix.'cache' => [
 				'name'	=> $engine->db->table_prefix.'cache',
 				'where'	=> false,
 				'order'	=> 'cache_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'config' => array(
+			],
+			$engine->db->table_prefix.'config' => [
 				'name'	=> $engine->db->table_prefix.'config',
 				'where'	=> false,
 				'order'	=> 'config_id',
 				'limit' => 500
-			),
-			$engine->db->table_prefix.'category' => array(
+			],
+			$engine->db->table_prefix.'category' => [
 				'name'	=> $engine->db->table_prefix.'category',
 				'where'	=> false,
 				'order'	=> 'category_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'category_page' => array(
+			],
+			$engine->db->table_prefix.'category_page' => [
 				'name'	=> $engine->db->table_prefix.'category_page',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'file_link' => array(
+			],
+			$engine->db->table_prefix.'file_link' => [
 					'name'	=> $engine->db->table_prefix.'file_link',
 					'where'	=> 'page_id',
 					'order'	=> 'page_id',
 					'limit' => 1000
-			),
-			$engine->db->table_prefix.'link' => array(
+			],
+			$engine->db->table_prefix.'link' => [
 				'name'	=> $engine->db->table_prefix.'link',
 				'where'	=> 'from_page_id',
 				'order'	=> 'from_page_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'log' => array(
+			],
+			$engine->db->table_prefix.'log' => [
 				'name'	=> $engine->db->table_prefix.'log',
 				'where'	=> false,
 				'order'	=> 'log_time',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'menu' => array(
+			],
+			$engine->db->table_prefix.'menu' => [
 				'name'	=> $engine->db->table_prefix.'menu',
 				'where'	=> false,
 				'order'	=> 'menu_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'page' => array(
+			],
+			$engine->db->table_prefix.'page' => [
 				'name'	=> $engine->db->table_prefix.'page',
 				'where'	=> true,
 				'order'	=> 'tag',
 				'limit' => 500
-			),
-			$engine->db->table_prefix.'poll' => array(
+			],
+			$engine->db->table_prefix.'poll' => [
 				'name'	=> $engine->db->table_prefix.'poll',
 				'where'	=> false,
 				'order'	=> 'poll_id, v_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'rating' => array(
+			],
+			$engine->db->table_prefix.'rating' => [
 				'name'	=> $engine->db->table_prefix.'rating',
 				'where'	=> false,
 				'order'	=> 'page_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'referrer' => array(
+			],
+			$engine->db->table_prefix.'referrer' => [
 				'name'	=> $engine->db->table_prefix.'referrer',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'revision' => array(
+			],
+			$engine->db->table_prefix.'revision' => [
 				'name'	=> $engine->db->table_prefix.'revision',
 				'where'	=> 'revision_id',
 				'order'	=> 'revision_id',
 				'limit' => 500
-			),
-			$engine->db->table_prefix.'upload' => array(
+			],
+			$engine->db->table_prefix.'upload' => [
 				'name'	=> $engine->db->table_prefix.'upload',
 				'where'	=> false,
 				'order'	=> 'upload_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'user' => array(
+			],
+			$engine->db->table_prefix.'user' => [
 				'name'	=> $engine->db->table_prefix.'user',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'user_setting' => array(
+			],
+			$engine->db->table_prefix.'user_setting' => [
 				'name'	=> $engine->db->table_prefix.'user_setting',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'usergroup' => array(
+			],
+			$engine->db->table_prefix.'usergroup' => [
 				'name'	=> $engine->db->table_prefix.'usergroup',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'usergroup_member' => array(
+			],
+			$engine->db->table_prefix.'usergroup_member' => [
 				'name'	=> $engine->db->table_prefix.'usergroup_member',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit' => 1000
-			),
-			$engine->db->table_prefix.'watch' => array(
+			],
+			$engine->db->table_prefix.'watch' => [
 				'name'	=> $engine->db->table_prefix.'watch',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
-			)
-		);
+			]
+		];
 
 	// define files dirs
-	$directories = array(
+	$directories = [
 			// CACHE_FEED_DIR, // not configurable now!
 			// CACHE_PAGE_DIR,
 			// CACHE_SQL_DIR,
 			UPLOAD_GLOBAL_DIR,
 			UPLOAD_PER_PAGE_DIR
-		);
+		];
 }
 else
 {
@@ -251,7 +251,7 @@ function get_table(&$engine, $table, $drop = true)
 	*	adapted from the unoficial phpMyAdmin 2.2.0.
 	***************************************************************************/
 
-	$index			= array();
+	$index			= [];
 	$schema_create	= "";
 	$field_query	= "SHOW FIELDS FROM $table";
 	$key_query		= "SHOW KEYS FROM $table";
@@ -321,7 +321,7 @@ function get_table(&$engine, $table, $drop = true)
 
 		if(!is_array(isset($index[$kname]) ? $index[$kname] : null))
 		{
-			$index[$kname] = array();
+			$index[$kname] = [];
 		}
 
 		$index[$kname][] = '`'.$row['Column_name'].'`'.( $row['Sub_part'] ? '('.$row['Sub_part'].')' : '' );
@@ -480,7 +480,7 @@ function get_files(&$engine, $pack, $dir, $root)
 {
 	$cluster	= '';
 	$error		= '';
-	$matches	= array();
+	$matches	= [];
 
 	// set file mask for cluster backup
 	if ($root && $dir == UPLOAD_PER_PAGE_DIR)
@@ -615,11 +615,11 @@ function put_data(&$engine, $pack, $table, $mode)
 			// unescape divider chars
 			foreach($row as &$rstr)
 			{
-				$rstr = strtr($rstr, array(
+				$rstr = strtr($rstr, [
 					"\\\\" => "\\",
 					'\\n' => "\n",
 					'\\t' => "\t"
-					));
+					]);
 			}
 
 			// prepare data
@@ -659,7 +659,7 @@ function put_data(&$engine, $pack, $table, $mode)
 // decompress files and restore them into the filesystem
 function put_files(&$engine, $pack, $dir, $keep = false)
 {
-	$total	= array();
+	$total	= [];
 
 	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
 

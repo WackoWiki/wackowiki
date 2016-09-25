@@ -61,7 +61,7 @@ if (!isset($root))			$root	= '/';
 if (!isset($nomark))		$nomark = '';
 if (!isset($lang))			$lang	= $this->page['page_lang'];
 if (!isset($owner))			$owner = '';
-if (!isset($sort) || !in_array($sort, array('abc', 'number')))
+if (!isset($sort) || !in_array($sort, ['abc', 'number']))
 {
 	$sort = 'abc';
 }
@@ -99,10 +99,10 @@ if ($tags)
 {
 	foreach ($tags as $key => $tag)
 	{
-		$this->cloud[$tag['category_id']] = array(
+		$this->cloud[$tag['category_id']] = [
 						'category'	=> $tag['category'],
 						'number'	=> $tag['number']
-		);
+		];
 	}
 
 	if(!$nomark)

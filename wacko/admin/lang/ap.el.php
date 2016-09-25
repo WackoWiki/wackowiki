@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$ap_translation = array(
+$ap_translation = [
 	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	// Admin panel
@@ -146,6 +146,6 @@ $ap_translation = array(
 	'MembersRemoved'			=> 'The member was removed from the group.',
 	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 
-);
+];
 
 ?>

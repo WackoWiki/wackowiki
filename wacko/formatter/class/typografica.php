@@ -26,8 +26,8 @@ class typografica
 	var $ignore		= "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
 	var $de_nobr	= true;
 
-	var $phonemasks	= array(
-						array(
+	var $phonemasks	= [
+							[
 								"/([0-9]{4})\-([0-9]{2})\-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})/",
 								"/([0-9]{4})\-([0-9]{2})\-([0-9]{2})/",
 								"/(\([0-9\+\-]+\)) ?([0-9]{3})\-([0-9]{2})\-([0-9]{2})/",
@@ -39,8 +39,8 @@ class typografica
 								"/([0-9]{1})\-([0-9]{2})\-([0-9]{2})/",
 								"/([0-9]{2})\-([0-9]{3})/",
 								"/([0-9]+)\-([0-9]+)/",
-							),
-						array(
+							],
+							[
 								"<nobr>\\1&ndash;\\2&ndash;\\3&nbsp;\\4:\\5:\\6</nobr>",
 								"<nobr>\\1&ndash;\\2&ndash;\\3</nobr>",
 								"<nobr>\\1&nbsp;\\2&ndash;\\3&ndash;\\4</nobr>",
@@ -52,13 +52,13 @@ class typografica
 								"<nobr>\\1&ndash;\\2&ndash;\\3</nobr>",
 								"<nobr>\\1&ndash;\\2</nobr>",
 								"<nobr>\\1&ndash;\\2</nobr>",
-							)
-						);
+							]
+						];
 
-	var $glueleft	= array( "рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\." ); // contains some Russian abberviations, also see below
-	var $glueright	= array( "руб\.", "коп\.", "у\.е\.", "мин\." );
+	var $glueleft	= ["рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\."]; // contains some Russian abberviations, also see below
+	var $glueright	= ["руб\.", "коп\.", "у\.е\.", "мин\."];
 
-	var $settings	= array ( 'inches'	=> 1, // convert inches into &quot;
+	var $settings	= [ 'inches'	=> 1, // convert inches into &quot;
 							'apostroph'	=> 1, // apostroph convertor
 							'laquo'		=> 0, // angle quotes
 							'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
@@ -78,7 +78,7 @@ class typografica
 							'phones'	=> 0, // phone number processing
 							'fixed'		=> 0, // fit to fixed width
 							'html'		=> 0  // HTML tags ban
-	);
+	];
 
 	function __construct( &$wacko )
 	{
@@ -92,7 +92,7 @@ class typografica
 	function correct($data, $noParagraph = false)
 	{
 		// -2. ignoring a (or next?) regexp
-		$ignored = array();
+		$ignored = [];
 		{
 			$total	= preg_match_all($this->ignore, $data, $matches);
 			$data	= preg_replace($this->ignore, "{:typo:markup:2:}", $data);
@@ -122,7 +122,7 @@ class typografica
 		//    it would be stick (?like bee or mosquito?) within us =)
 		//  will change all tags with special character, simultaneously store them into an array.
 		//  and then beleive, there are no special characters in the wild world (unexplored wilderness?).
-		$tags = array();
+		$tags = [];
 
 		if ($this->skip_tags)
 		{

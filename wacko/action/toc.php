@@ -8,17 +8,16 @@ if (!defined('IN_WACKO'))
 /*
 	{{toc page|for="!/SubTag" from="h2" to="h4" numerate=[0|1] legend="alternate legend" nomark=[0|1] }}
 */
-// 1. check for first param (for what table of content is built)
 
-if (!isset($for))		$for = ''; // depreciated
-if ($for)				$page = $for;
+if (!isset($for))		$for		= ''; // depreciated
+if ($for)				$page		= $for;
 
-if (!isset($page))		$page = '';
-if (!isset($nomark))	$nomark = '';
-if (!isset($numerate))	$numerate = '';
-if (!isset($from))		$from = '';
-if (!isset($to))		$to = '';
-if (!isset($legend))	$legend = '';
+if (!isset($page))		$page		= '';
+if (!isset($nomark))	$nomark		= 0;
+if (!isset($numerate))	$numerate	= 0;
+if (!isset($from))		$from		= '';
+if (!isset($to))		$to			= '';
+if (!isset($legend))	$legend		= '';
 
 if ($page)
 {
@@ -64,7 +63,7 @@ if ($_page)
 			// ---------------------- toc numeration ------------------------
 			// identify what size where faces
 			$toc_len	= count($toc);
-			$numbers	= array();
+			$numbers	= [];
 			$depth		= 0;
 
 			for($i = 0; $i < $toc_len; $i++)
@@ -82,7 +81,7 @@ if ($_page)
 						// if dive deeper, reset the meter for new depths
 						while ($_level > $depth)
 						{
-							$numbers[ $_level] = 0;
+							$numbers[$_level] = 0;
 
 							$_level--;
 						}
@@ -137,11 +136,10 @@ if ($_page)
 				}
 			}
 
-			// not bad in a cache write similar version
+			// cache similar version
 			$this->tocs[$context] = &$toc;
 
-			// it is now necessary to place flag about the fact that good to in post_wacko
-			// the source page, adding there
+			// it is now necessary to set flag about the fact that good to in post_wacko
 			if (!$ppage)
 			{
 				$this->post_wacko_toc			= &$toc;
@@ -153,25 +151,24 @@ if ($_page)
 		// begin list
 		echo "\n".'<ul id="toc">'."\n";
 
-		$i			= 0;
-		$ul			= 1;
-		$li			= 0;
-		$tabs		= '';
-		$_tabs		= "\t";
-		$_array_debug = '';
+		$i				= 0;
+		$ul				= 1;
+		$tabs			= '';
+		$_tabs			= "\t";
+		$ident_level	= [];
 
 		// TODO: properly indent list elements
-		$tabs[0]	= "";
-		$tabs[1]	= "";
-		$tabs[2]	= "\t";
-		$tabs[3]	= "\t\t";
-		$tabs[4]	= "\t\t\t";
-		$tabs[5]	= "\t\t\t\t";
-		$tabs[6]	= "\t\t\t\t\t";
-		$tabs[7]	= "\t\t\t\t\t\t";
-		$tabs[8]	= "\t\t\t\t\t\t\t";
-		$tabs[9]	= "\t\t\t\t\t\t\t\t";
-		$tabs[10]	= "\t\t\t\t\t\t\t\t\t";
+		$tabs[0]		= "";
+		$tabs[1]		= "";
+		$tabs[2]		= "\t";
+		$tabs[3]		= "\t\t";
+		$tabs[4]		= "\t\t\t";
+		$tabs[5]		= "\t\t\t\t";
+		$tabs[6]		= "\t\t\t\t\t";
+		$tabs[7]		= "\t\t\t\t\t\t";
+		$tabs[8]		= "\t\t\t\t\t\t\t";
+		$tabs[9]		= "\t\t\t\t\t\t\t\t";
+		$tabs[10]		= "\t\t\t\t\t\t\t\t\t";
 
 		$ident_level['li'] = 1;
 		$ident_level['ul'] = 1;

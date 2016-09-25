@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $parser = new RawHtmlFormatter( $this );
 
-$text = preg_replace_callback('/(<format [^>]*?>.*?<\/format>|<a [^>]*>)/ism', array( &$parser, 'process'), $text);
+$text = preg_replace_callback('/(<format [^>]*?>.*?<\/format>|<a [^>]*>)/ism', [&$parser, 'process'], $text);
 
 //$text = $this->format($text, 'safehtml');
 //echo 'rawhtml: '.$text;

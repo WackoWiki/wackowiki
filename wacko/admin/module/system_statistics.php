@@ -9,16 +9,15 @@ if (!defined('IN_WACKO'))
 ##   System Statistics                                ##
 ########################################################
 
-$module['system_statistics'] = array(
+$module['system_statistics'] = [
 		'order'	=> 120,
 		'cat'	=> 'Basic functions',
 		'status'=> true,
 		'mode'	=> 'system_statistics',
 		'name'	=> 'Statistics',
 		'title'	=> 'Show statistics',
-		'vars'	=> array(&$tables, &$directories),
-
-	);
+		'vars'	=> [&$tables, &$directories],
+	];
 
 ########################################################
 

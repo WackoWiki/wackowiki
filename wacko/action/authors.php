@@ -77,10 +77,11 @@ else
 				if (!isset($authors[$author['name']]))
 				{
 					// new entry
-					$authors[$author['name']] = array(
+					$authors[$author['name']] = [
 							'name' => $author['name'],
 							'years' => $author['year'],
-							'total' => 1);
+							'total' => 1
+					];
 				}
 				else
 				{
@@ -157,16 +158,16 @@ else
 	if ($license)
 	{
 		// license names and links to texts
-		$licenses = array(
-			'CC-BY-ND'		=> array('http://creativecommons.org/licenses/by-nd/4.0/',		'CreativeCommons-Attribution-NoDerivatives'),
-			'CC-BY-NC-SA'	=> array('http://creativecommons.org/licenses/by-nc-sa/4.0/',	'CreativeCommons-Attribution-NonCommercial-ShareAlike'),
-			'CC-BY-NC-ND'	=> array('http://creativecommons.org/licenses/by-nc-nd/4.0/',	'CreativeCommons-Attribution-Non-Commercial No Derivatives'),
-			'CC-BY-SA'		=> array('http://creativecommons.org/licenses/by-sa/4.0/',		'CreativeCommons-Attribution-ShareAlike'),
-			'CC-BY-NC'		=> array('http://creativecommons.org/licenses/by-nc/4.0/',		'CreativeCommons-Attribution-Non-Commercial'),
-			'CC-BY'			=> array('http://creativecommons.org/licenses/by/4.0/',			'Creative Commons Attribution License'),
-			'GNU-FDL'		=> array('http://www.gnu.org/licenses/fdl.html',				'GNU Free Documentation License'),
-			'PD'			=> array('http://creativecommons.org/publicdomain/mark/1.0/',	'Public Domain / Free Use'),
-		);
+		$licenses = [
+			'CC-BY-ND'		=> ['http://creativecommons.org/licenses/by-nd/4.0/',		'CreativeCommons-Attribution-NoDerivatives'],
+			'CC-BY-NC-SA'	=> ['http://creativecommons.org/licenses/by-nc-sa/4.0/',	'CreativeCommons-Attribution-NonCommercial-ShareAlike'],
+			'CC-BY-NC-ND'	=> ['http://creativecommons.org/licenses/by-nc-nd/4.0/',	'CreativeCommons-Attribution-Non-Commercial No Derivatives'],
+			'CC-BY-SA'		=> ['http://creativecommons.org/licenses/by-sa/4.0/',		'CreativeCommons-Attribution-ShareAlike'],
+			'CC-BY-NC'		=> ['http://creativecommons.org/licenses/by-nc/4.0/',		'CreativeCommons-Attribution-Non-Commercial'],
+			'CC-BY'			=> ['http://creativecommons.org/licenses/by/4.0/',			'Creative Commons Attribution License'],
+			'GNU-FDL'		=> ['http://www.gnu.org/licenses/fdl.html',				'GNU Free Documentation License'],
+			'PD'			=> ['http://creativecommons.org/publicdomain/mark/1.0/',	'Public Domain / Free Use'],
+		];
 
 		if (isset($licenses[$license]))
 		{
