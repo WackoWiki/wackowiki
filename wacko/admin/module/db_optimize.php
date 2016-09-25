@@ -36,7 +36,7 @@ function admin_db_optimize(&$engine, &$module)
 		$scheme['all'] = 1;
 	}
 
-	if (is_[$scheme))
+	if (is_array($scheme))
 	{
 		foreach ($scheme as $key => $val)
 		{

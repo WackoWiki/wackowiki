@@ -16,7 +16,7 @@ $module['content_files'] = [
 		'mode'	=> 'content_files',
 		'name'	=> 'Files',
 		'title'	=> 'Manage uploaded files',
-	];
+];
 
 ########################################################
 
@@ -179,7 +179,7 @@ function admin_content_files(&$engine, &$module)
 			$small_name  = $result_name;
 			$description = substr($_POST['file_description'], 0, 250);
 			$description = rtrim( $description, '\\' );
-			$description = str_replace(['"', "'", '<', '>'), '', $description);
+			$description = str_replace(['"', "'", '<', '>'], '', $description);
 			$description = htmlspecialchars($description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 			// 5. insert line into DB
@@ -300,7 +300,7 @@ function admin_content_files(&$engine, &$module)
 		"ORDER BY ".$order_by." ".
 		$pagination['limit']);
 
-	if (!is_[$files))
+	if (!is_array($files))
 	{
 		$files = [];
 	}
