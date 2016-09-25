@@ -1,11 +1,11 @@
 <?php
-$theme_translation = array(
-  'ACLStoreButton'  => 'сохранить',
-  'ACLCancelButton' => 'отмена',
-  'EditStoreButton' => 'сохранить',
-  'EditRe-EditButton' => 'продолжить правку',
-  'EditCancelButton'  => 'отмена',
-  'EditPreviewButton' => 'предпросмотр',
+$theme_translation = [
+	'ACLStoreButton' => 'сохранить',
+	'ACLCancelButton' => 'отмена',
+	'EditStoreButton' => 'сохранить',
+	'EditRe-EditButton' => 'продолжить правку',
+	'EditCancelButton' => 'отмена',
+	'EditPreviewButton' => 'предпросмотр',
 
-);
+];
 ?>

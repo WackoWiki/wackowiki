@@ -41,7 +41,7 @@ if($user = $this->get_user())
 			}
 
 			$arr			= explode("\\n", $group_members);
-			$allowed_groups	= array();
+			$allowed_groups	= [];
 
 			sort($arr);
 

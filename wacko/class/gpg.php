@@ -532,9 +532,9 @@ class GPG
 	// name may be passed along the key ID. returns one of the
 	// following:
 	//	true	- defined key (and defined key *only*) was
-	// 			  downloaded successfully.
+	//			  downloaded successfully.
 	//	false	- defined key wasn't found on server.
-	//	array()	- indexed array (if more than one key was
+	//	[]		- indexed array (if more than one key was
 	//			  found; of no use currently :-(
 	//			[0] - username
 	//			[1] - fingerprint
