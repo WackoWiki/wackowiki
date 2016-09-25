@@ -3,7 +3,7 @@ require_once 'lib/Text_Highlighter/Highlighter.php';
 
 if ($options['_default'])
 {
-	$hl =& Text_Highlighter::factory(strtoupper($options['_default']), array('numbers' => false));
+	$hl =& Text_Highlighter::factory(strtoupper($options['_default']), ['numbers' => false]);
 
 	if (!is_object($hl))
 	{

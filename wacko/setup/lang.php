@@ -12,14 +12,14 @@ if(array_key_exists('wacko_version', $config))
 	if ($config['wacko_version'][0] < 5)
 	{
 		$config['is_update'] = null;
-		echo '<ul class="security"><li>'.preg_replace(array('/%1/', '/%2/'), array($config['wacko_version'], WACKO_VERSION), $lang['PleaseUpgradeToR5'])."</li></ul>\n";
+		echo '<ul class="security"><li>'.preg_replace(array('/%1/', '/%2/'), [$config['wacko_version'], WACKO_VERSION], $lang['PleaseUpgradeToR5'])."</li></ul>\n";
 		// http://sourceforge.net/projects/wackowiki/files/
 		// http://wackowiki.sourceforge.net/doc/Dev/Release/R55/Upgrade
 	}
 	else
 	{
 		$config['is_update'] = '1';
-		echo '<p>'.preg_replace(array('/%1/', '/%2/'), array($config['wacko_version'], WACKO_VERSION), $lang['UpgradeFromWacko'])."</p>\n";
+		echo '<p>'.preg_replace(array('/%1/', '/%2/'), [$config['wacko_version'], WACKO_VERSION], $lang['UpgradeFromWacko'])."</p>\n";
 		echo '<p>'.$lang['PleaseBackup']."</p>\n";
 	}
 }
@@ -35,7 +35,7 @@ echo '<input type="hidden" value="'.$config['is_update'].'" name="config[is_upda
 	<p><?php echo $lang['LangDesc'];?></p>
 <?php
 // http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
-$lang_codes = array();
+$lang_codes = [];
 $lang_codes['bg'] = '&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;';
 $lang_codes['da'] = 'Dansk';
 $lang_codes['de'] = 'Deutsch';

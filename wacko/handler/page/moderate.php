@@ -320,7 +320,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	}
 
 	// IDs PROCESSING (COMMON PROCEDURES)
-	$set = array();
+	$set = [];
 
 	// pass previously selected items
 	if (isset($_REQUEST['ids']))
@@ -352,7 +352,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	// save page ids for later operations (correct if needed)
 	if (isset($_POST['set']))
 	{
-		$set = array();
+		$set = [];
 
 		foreach ($_POST as $val => $key)
 		{
@@ -367,7 +367,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	// reset page ids
 	else if (isset($_POST['reset']))
 	{
-		$set = array();
+		$set = [];
 	}
 
 	// check moderator read access on passed ids
@@ -414,7 +414,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$xml->comments();
 				}
 
-				$set = array();
+				$set = [];
 				$this->set_message($this->_t('ModerateTopicsDeleted'), 'success');
 				$this->http->redirect($this->href('moderate'));
 			}
@@ -463,7 +463,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$xml->comments();
 					}
 
-					$set = array();
+					$set = [];
 					$this->set_message($this->_t('ModerateTopicsRelocated'), 'success');
 					$this->http->redirect($this->href('moderate'));
 				}
@@ -502,7 +502,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$xml->comments();
 					}
 
-					$set = array();
+					$set = [];
 					$this->set_message($this->_t('ModerateTopicsRenamed'), 'success');
 					$this->http->redirect($this->href('moderate'));
 				}
@@ -537,7 +537,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$xml->comments();
 				}
 
-				$set = array();
+				$set = [];
 				$this->set_message($this->_t('ModerateTopicsMerged'), 'success');
 				$this->http->redirect($this->href('moderate'));
 			}
@@ -553,7 +553,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$this->save_acl($page_id, 'comment', '!*');
 			}
 
-			$set = array();
+			$set = [];
 			$this->set_message($this->_t('ModerateTopicsBlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
 		}
@@ -567,7 +567,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$this->save_acl($page_id, 'comment', '*');
 			}
 
-			$set = array();
+			$set = [];
 			$this->set_message($this->_t('ModerateTopicsUnlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
 		}
@@ -962,7 +962,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$xml->comments();
 					}
 
-					$set = array();
+					$set = [];
 					$this->set_message($this->_t('ModerateCommentsDeleted'), 'succcess');
 					$this->http->redirect($this->href('moderate'));
 				}

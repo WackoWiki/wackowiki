@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Upload settings                                  ##
 ########################################################
 
-$module['config_upload'] = array(
+$module['config_upload'] = [
 		'order'	=> 250,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_upload',
 		'name'	=> 'Upload',
 		'title'	=> 'Attachment settings',
-	);
+	];
 
 ########################################################
 
@@ -31,7 +31,7 @@ function admin_config_upload(&$engine, &$module)
 	<br />
 <?php
 
-	$binary_factor = array('0' => 1, '1' => 1024, '2' => (1024 * 1024));
+	$binary_factor = ['0' => 1, '1' => 1024, '2' => (1024 * 1024)];
 	#echo $_POST['upload_quota_factor'].' - '.$binary_factor[$_POST['upload_quota_factor']];
 	#$engine->debug_print_r($_POST);
 

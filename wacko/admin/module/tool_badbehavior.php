@@ -9,15 +9,15 @@ if (!defined('IN_WACKO'))
 ##   Bad Behavior                                     ##
 ########################################################
 
-$module['badbehavior'] = array(
+$module['badbehavior'] = [
 		'order'	=> 800,
 		'cat'	=> 'Extension',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'badbehavior',
 		'name'	=> 'Bad Behavior',
 		'title'	=> 'Bad Behavior',
-		'vars'	=> array(&$tables, &$directories),
-	);
+		'vars'	=> [&$tables, &$directories],
+	];
 
 ########################################################
 function admin_badbehavior(&$engine, &$module)
@@ -36,7 +36,7 @@ function admin_badbehavior(&$engine, &$module)
 function bb2_httpbl_lookup($ip)
 {
 	// NB: Many of these are defunct
-	$engines = array(
+	$engines = [
 			1 => 'AltaVista',
 			2 => 'Teoma/Ask Crawler',
 			3 => 'Baidu Spide',
@@ -49,7 +49,7 @@ function bb2_httpbl_lookup($ip)
 			10 => 'Twiceler',
 			11 => 'Infoseek',
 			12 => 'Minor Search Engine',
-	);
+	];
 
 	$settings		= bb2_read_settings();
 	$httpbl_key		= $settings['httpbl_key'];
@@ -139,12 +139,13 @@ function bb2_summary(&$engine)
 	</div>
 <?php
 	// select arguments
-	$arguments = array(
+	$arguments = [
 			'status_key',
 			'request_method',
 			#'ip',
 			#'user_agent',
-			'request_uri');
+			'request_uri'
+		];
 
 	foreach ($arguments as $argument)
 	{
@@ -395,10 +396,10 @@ function bb2_whitelist(&$engine)
 
 	if (empty($whitelists))
 	{
-		$whitelists					= array();
-		$whitelists['ip']			= array();
-		$whitelists['url']			= array();
-		$whitelists['useragent']	= array();
+		$whitelists					= [];
+		$whitelists['ip']			= [];
+		$whitelists['url']			= [];
+		$whitelists['useragent']	= [];
 	}
 
 	if ($_POST)
@@ -408,17 +409,17 @@ function bb2_whitelist(&$engine)
 		if ($_POST['ip']) {
 			$whitelists['ip'] = array_filter(preg_split("/\s+/m", $_POST['ip']));
 		} else {
-			$whitelists['ip'] = array();
+			$whitelists['ip'] = [];
 		}
 		if ($_POST['url']) {
 			$whitelists['url'] = array_filter(preg_split("/\s+/m", $_POST['url']));
 		} else {
-			$whitelists['url'] = array();
+			$whitelists['url'] = [];
 		}
 		if ($_POST['useragent']) {
 			$whitelists['useragent'] = array_filter(preg_split("/[\r\n]+/m", $_POST['useragent']));
 		} else {
-			$whitelists['useragent'] = array();
+			$whitelists['useragent'] = [];
 		}
 
 		update_option('bad_behavior_whitelist', $whitelists);
@@ -636,7 +637,7 @@ function bb2_options(&$engine)
 		}
 		else
 		{
-			$settings['reverse_proxy_addresses'] = array();
+			$settings['reverse_proxy_addresses'] = [];
 		}
 
 		bb2_write_settings($settings);

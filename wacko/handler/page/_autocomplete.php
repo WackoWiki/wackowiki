@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 // Parse & decode QUERY_STRING.
 function _parse_query_string()
 {
-	$get = array();
+	$get = [];
 
 	foreach ($_GET as $k=>$v)
 	{
@@ -88,7 +88,7 @@ $pages2 = $this->db->load_all(
 	"ORDER BY supertag ASC LIMIT $limit");
 
 // 3. stripping by rights
-$pages = array();
+$pages = [];
 $cnt = 0;
 
 if ($pages1)
@@ -150,7 +150,7 @@ $local_context_sliced	= array_slice( $local_supertag_sliced, 0, count($local_sup
 $local_context			= implode('/', $local_context_sliced ).'/';
 
 // preparing to output
-$out = array();
+$out = [];
 
 foreach( $pages as $page )
 {

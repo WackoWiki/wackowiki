@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Data Inconsistencies                             ##
 ########################################################
 
-$module['maint_inconsistencies'] = array(
+$module['maint_inconsistencies'] = [
 		'order'	=> 600,
 		'cat'	=> 'Maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'maint_inconsistencies',
 		'name'	=> 'Inconsistencies',
 		'title'	=> 'Fixing Data Inconsistencies',
-	);
+	];
 
 ########################################################
 
@@ -52,7 +52,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			$inconsistencies['1.1'] = array('usergroup_member without user', count($usergroup_member));
+			$inconsistencies['1.1'] = ['usergroup_member without user', count($usergroup_member)];
 			// -> DELETE
 
 			// 1.2. menu without user
@@ -65,7 +65,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			$inconsistencies['1.2'] = array('menu without user', count($menu));
+			$inconsistencies['1.2'] = ['menu without user', count($menu)];
 				// -> DELETE
 
 			// 1.3. upload without user
@@ -78,7 +78,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			$inconsistencies['1.3'] = array('upload without user', count($upload));
+			$inconsistencies['1.3'] = ['upload without user', count($upload)];
 				// -> DELETE / assign to new user
 
 			// 1.4. user_settings without user
@@ -91,7 +91,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			$inconsistencies['1.4'] = array('user_settings without user', count($user_settings));
+			$inconsistencies['1.4'] = ['user_settings without user', count($user_settings)];
 				// -> DELETE
 
 
@@ -105,7 +105,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id is NULL");
 
-			$inconsistencies['1.5'] = array('watches without user', count($watches));
+			$inconsistencies['1.5'] = ['watches without user', count($watches)];
 				// -> DELETE
 
 			// 2. without page
@@ -119,7 +119,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$inconsistencies['2.1'] = array('acl without page', count($acl));
+			$inconsistencies['2.1'] = ['acl without page', count($acl)];
 				// -> DELETE
 
 			// 2.2. category_page without page
@@ -132,7 +132,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$inconsistencies['2.2'] = array('category_page without page', count($category_page));
+			$inconsistencies['2.2'] = ['category_page without page', count($category_page)];
 				// -> DELETE
 
 			// 2.3. link without page
@@ -145,7 +145,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$inconsistencies['2.3'] = array('link without page', count($link));
+			$inconsistencies['2.3'] = ['link without page', count($link)];
 				// -> DELETE
 
 			// 2.4. menu without page
@@ -158,7 +158,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$inconsistencies['2.4'] = array('menu without page', count($menu2));
+			$inconsistencies['2.4'] = ['menu without page', count($menu2)];
 				// -> DELETE
 
 			// 2.5. rating without page
@@ -171,7 +171,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 				p.page_id IS NULL");
 
-			$inconsistencies['2.5'] = array('rating without page', count($rating));
+			$inconsistencies['2.5'] = ['rating without page', count($rating)];
 				// -> DELETE
 
 			// 2.6. referrer without page
@@ -184,7 +184,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$inconsistencies['2.6'] = array('referrer without page', count($referrer));
+			$inconsistencies['2.6'] = ['referrer without page', count($referrer)];
 				// -> DELETE
 
 			// 2.7. upload without page and not global
@@ -198,7 +198,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					p.page_id IS NULL AND
 					u.page_id NOT LIKE 0");
 
-			$inconsistencies['2.7'] = array('upload without page and not global', count($upload2));
+			$inconsistencies['2.7'] = ['upload without page and not global', count($upload2)];
 				// -> DELETE
 
 			// 2.8. watch without page
@@ -211,7 +211,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$inconsistencies['2.8'] = array('watch without page', count($watch2));
+			$inconsistencies['2.8'] = ['watch without page', count($watch2)];
 				// -> DELETE
 
 			// 2.9. revision without page
@@ -224,7 +224,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$inconsistencies['2.9'] = array('revision without page', count($revision));
+			$inconsistencies['2.9'] = ['revision without page', count($revision)];
 			// -> DELETE
 
 			// 3.1. usergroup_member without group
@@ -237,7 +237,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					g.group_id IS NULL");
 
-			$inconsistencies['3.1'] = array('usergroup_member without usergroup', count($usergroup_member2));
+			$inconsistencies['3.1'] = ['usergroup_member without usergroup', count($usergroup_member2)];
 			// -> DELETE
 
 			// 3.2. page without valid user_id (e.g. deleted user)
@@ -250,7 +250,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id IS NULL");
 
-			$inconsistencies['3.2'] = array('page without valid user_id', count($page_user));
+			$inconsistencies['3.2'] = ['page without valid user_id', count($page_user)];
 
 			// -> DELETE
 
@@ -316,9 +316,9 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			// STS: pattern like it was
 			// $count			= $engine->db->sql_query("SELECT ROW_COUNT();");
 			// $_count			= fetch_assoc($count);
-			// $_solved['1.1'] = array('usergroup_member without user', $_count['ROW_COUNT()']);
+			// $_solved['1.1'] = ['usergroup_member without user', $_count['ROW_COUNT()']);
 
-			$_solved['1.1'] = array('usergroup_member without user', $engine->config->affected_rows);
+			$_solved['1.1'] = ['usergroup_member without user', $engine->config->affected_rows];
 
 			// 1.2. menu without user
 			$menu = $engine->db->sql_query(
@@ -330,7 +330,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						u.user_id IS NULL");
 
-			$_solved['1.2'] = array('menu without user', $engine->config->affected_rows);
+			$_solved['1.2'] = ['menu without user', $engine->config->affected_rows];
 
 			// 1.3. upload without user
 			$admin_id = $engine->db->load_single(
@@ -346,7 +346,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"WHERE
 					u.user_id IS NULL");
 
-			$_solved['1.3'] = array('upload without user', $engine->config->affected_rows);
+			$_solved['1.3'] = ['upload without user', $engine->config->affected_rows];
 
 			// 1.4. user_settings without user
 			$user_settings = $engine->db->sql_query(
@@ -358,7 +358,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						u.user_id IS NULL");
 
-			$_solved['1.4'] = array('user_settings without user', $engine->config->affected_rows);
+			$_solved['1.4'] = ['user_settings without user', $engine->config->affected_rows];
 
 			// 1.5. watches without user
 			$watches = $engine->db->sql_query(
@@ -370,7 +370,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						u.user_id is NULL");
 
-			$_solved['1.5'] = array('watches without user', $engine->config->affected_rows);
+			$_solved['1.5'] = ['watches without user', $engine->config->affected_rows];
 
 			// 2. without page
 			// 2.1. acl without page
@@ -383,7 +383,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			$_solved['2.1'] = array('acl without page', $engine->config->affected_rows);
+			$_solved['2.1'] = ['acl without page', $engine->config->affected_rows];
 
 			// 2.2. category_page without page
 			$category_page = $engine->db->sql_query(
@@ -395,7 +395,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			$_solved['2.2'] = array('category_page without page', $engine->config->affected_rows);
+			$_solved['2.2'] = ['category_page without page', $engine->config->affected_rows];
 
 			// 2.3. link without page
 			$link = $engine->db->sql_query(
@@ -407,7 +407,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			$_solved['2.3'] = array('link without page', $engine->config->affected_rows);
+			$_solved['2.3'] = ['link without page', $engine->config->affected_rows];
 
 			// 2.4. menu without page
 			$menu2 = $engine->db->sql_query(
@@ -419,7 +419,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			$_solved['2.4'] = array('menu without page', $engine->config->affected_rows);
+			$_solved['2.4'] = ['menu without page', $engine->config->affected_rows];
 
 			// 2.5. rating without page
 			$rating = $engine->db->sql_query(
@@ -431,7 +431,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 					p.page_id IS NULL");
 
-			$_solved['2.5'] = array('rating without page', $engine->config->affected_rows);
+			$_solved['2.5'] = ['rating without page', $engine->config->affected_rows];
 
 			// 2.6. referrer without page
 			$referrer = $engine->db->sql_query(
@@ -443,7 +443,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			$_solved['2.6'] = array('referrer without page', $engine->config->affected_rows);
+			$_solved['2.6'] = ['referrer without page', $engine->config->affected_rows];
 
 			// 2.7. upload without page and not global
 			$upload2 = $engine->db->sql_query(
@@ -456,7 +456,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 						p.page_id IS NULL AND
 						u.page_id NOT LIKE 0");
 
-			$_solved['2.7']	= array('upload without page and not global', $engine->config->affected_rows);
+			$_solved['2.7']	= ['upload without page and not global', $engine->config->affected_rows];
 
 			// 2.8. watch without page
 			$watch2 = $engine->db->sql_query(
@@ -468,7 +468,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			$_solved['2.8'] = array('watch without page', $engine->config->affected_rows);
+			$_solved['2.8'] = ['watch without page', $engine->config->affected_rows];
 
 			// 2.9. revision without page
 			$revision = $engine->db->sql_query(
@@ -480,7 +480,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$_solved['2.9'] = array('revision without page', $engine->config->affected_rows);
+			$_solved['2.9'] = ['revision without page', $engine->config->affected_rows];
 
 			// 3.1. usergroup_member without group
 			$usergroup_member2 = $engine->db->sql_query(
@@ -492,7 +492,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					g.group_id IS NULL");
 
-			$_solved['3.1'] = array('usergroup_member without usergroup', $engine->config->affected_rows);
+			$_solved['3.1'] = ['usergroup_member without usergroup', $engine->config->affected_rows];
 
 			// TODO: // 3.2. page without valid user_id (e.g. deleted user)
 

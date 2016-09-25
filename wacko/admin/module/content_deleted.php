@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Recently deleted pages controls                  ##
 ########################################################
 
-$module['content_deleted'] = array(
+$module['content_deleted'] = [
 		'order'	=> 340,
 		'cat'	=> 'Content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'content_deleted',
 		'name'	=> 'Deleted',
 		'title'	=> 'Newly deleted content',
-	);
+	];
 
 ########################################################
 

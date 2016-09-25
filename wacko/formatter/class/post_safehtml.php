@@ -17,7 +17,7 @@ class post_safehtml
 
 	function postcallback($things)
 	{
-		$matches	= array();
+		$matches	= [];
 		$thing		= $things[1];
 		$wacko		= &$this->object;
 
@@ -46,7 +46,7 @@ class post_safehtml
 			// disassembly of the parameters
 			$p			= ' '.$matches[1].' ';
 			$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER);
-			$params		= array();
+			$params		= [];
 			$c			= 0;
 
 			foreach($matches as $m)

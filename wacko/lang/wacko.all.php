@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$wacko_all_resource = array(
+$wacko_all_resource = [
 	// link templates
 	'Tpl.childpage'		=> '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
 	'Tpl.parentpage'	=> '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
@@ -51,4 +51,4 @@ $wacko_all_resource = array(
 
 	// see wacko.css in theme folder, e.g. a.fileicon .icon {
 	'OuterIcon'			=> '<span class="icon"></span>',
-);
+];

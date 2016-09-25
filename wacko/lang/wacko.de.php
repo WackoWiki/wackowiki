@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$wacko_translation = array(
+$wacko_translation = [
 	'FormInvalid'				=> 'Das ¸bermittelte Formular war ung¸ltig. Versuche erneut, das Formular abzusenden.',
 	// logged in panel
 	'YouAre'					=> 'Du bist ',
@@ -1033,7 +1033,7 @@ $wacko_translation = array(
 
 	'Timezone'					=> 'Zeitzone',
 	'DST'						=> 'Sommerzeit',
-	'TzZoneArray'	=> array(
+	'TzZoneArray'	=> [
 		'-12'	=> '[UTC - 12] Baker Island Time',
 		'-11'	=> '[UTC - 11] Niue Time, Samoa Standard Time',
 		'-10'	=> '[UTC - 10] Hawaii-Aleutian Standard Time, Cook Island Time',
@@ -1074,9 +1074,9 @@ $wacko_translation = array(
 		'12.75'	=> '[UTC + 12:45] Chatham Islands Time',
 		'13'	=> '[UTC + 13] Tonga Time, Phoenix Islands Time',
 		'14'	=> '[UTC + 14] Line Island Time',
-		),
+		],
 
-	'LanguageArray'	=>  array(
+	'LanguageArray'	=>  [
 		'bg' => 'Bulgarisch',
 		'da' => 'D‰nisch',
 		'nl' => 'Niederl‰ndisch',
@@ -1091,15 +1091,15 @@ $wacko_translation = array(
 		'pt' => 'Portugiesisch',
 		'ru' => 'Russisch',
 		'es' => 'Spanisch',
-	),
+	],
 
 	'AccountStatus'				=> 'Kontostatus',
-	'AccountStatusArray' => array(
+	'AccountStatusArray' => [
 		'0' => 'aktiv',
 		'1' => 'ausstehend',
 		'2' => 'gesperrt',
 		'3' => 'inaktiv',
-	),
+	],
 
 	'JustNow'		=> 'gerade eben',
 	'MinuteAgo'		=> 'vor einer Minute',
@@ -1195,4 +1195,4 @@ $wacko_translation = array(
 									'</strong>, der Server scheint die Version <strong>'.PHP_VERSION.'</strong> zu nutzen.'.
 									'  Aktualisiere bitte PHP auf eine neuere Version, damit  WackoWiki ordnungsgem‰ﬂ funtioniert.',
 
-);
+];

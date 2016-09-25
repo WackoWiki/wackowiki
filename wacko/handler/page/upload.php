@@ -95,7 +95,7 @@ if ($this->can_upload() === true)
 					<td><?php echo $file['file_description']; ?></td>
 				<tr class="lined">
 					<th class="form_left" scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
-					<td><?php echo $this->action('fileusage', array('file_id' => $file['upload_id'], 'nomark' => 1)); ?></td>
+					<td><?php echo $this->action('fileusage', ['file_id' => $file['upload_id'], 'nomark' => 1]); ?></td>
 				</tr>
 			</table>
 		</li>
@@ -395,7 +395,7 @@ if ($this->can_upload() === true)
 						$ext = $ext.'.txt';
 					}
 
-					$image = array('gif', 'jpeg', 'jpg', 'png');
+					$image = ['gif', 'jpeg', 'jpg', 'png'];
 
 					if (in_array($ext, $image))
 					{
@@ -463,7 +463,7 @@ if ($this->can_upload() === true)
 						{
 							// 1.7. check is image, if asked
 							$forbid		= 0;
-							$size		= array(0, 0);
+							$size		= [0, 0];
 							$src		= $_FILES['file']['tmp_name'];
 
 							if ($is_image === true)
@@ -621,7 +621,7 @@ if ($this->can_upload() === true)
 			$this->set_message($error, 'error');
 		}
 
-		echo $this->action('upload', array()).'<br />';
+		echo $this->action('upload', []).'<br />';
 	}
 }
 else
@@ -632,7 +632,7 @@ else
 // show uploaded files for current page
 if ($this->has_access('read'))
 {
-	echo $this->action('files', array()).'<br />';
+	echo $this->action('files', []).'<br />';
 }
 
 echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.$this->_t('CancelDifferencesButton').'" /></a>'."\n";

@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Formatter setting                                ##
 ########################################################
 
-$module['config_formatter'] = array(
+$module['config_formatter'] = [
 		'order'	=> 230,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_formatter',
 		'name'	=> 'Formatter',
 		'title'	=> 'Formatting options',
-	);
+	];
 
 ########################################################
 

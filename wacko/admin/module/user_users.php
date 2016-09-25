@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Users                                            ##
 ########################################################
 
-$module['user_users'] = array(
+$module['user_users'] = [
 		'order'	=> 410,
 		'cat'	=> 'Users',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'user_users',
 		'name'	=> 'Users',
 		'title'	=> 'User management',
-	);
+	];
 
 ########################################################
 
@@ -44,7 +44,7 @@ function admin_user_users(&$engine, &$module)
 	}
 
 	// IDs PROCESSING (COMMON PROCEDURES)
-	$set = array();
+	$set = [];
 
 	// pass previously selected items
 	if (isset($_REQUEST['ids']))
@@ -76,7 +76,7 @@ function admin_user_users(&$engine, &$module)
 	// save user ids for later operations (correct if needed)
 	if (isset($_POST['set']))
 	{
-		$set = array();
+		$set = [];
 
 		foreach ($_POST as $val => $key)
 		{
@@ -91,7 +91,7 @@ function admin_user_users(&$engine, &$module)
 	// reset user ids
 	else if (isset($_POST['reset']))
 	{
-		$set = array();
+		$set = [];
 	}
 
 	reset($set);
@@ -304,7 +304,7 @@ function admin_user_users(&$engine, &$module)
 				}
 			}
 
-			$set = array();
+			$set = [];
 		}
 	}
 

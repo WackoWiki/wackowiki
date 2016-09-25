@@ -10,7 +10,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 {
 	if ($user_id == 0)
 	{
-		return array();
+		return [];
 	}
 	else if (isset($engine->cached_stats[$user_id]))
 	{

@@ -114,7 +114,7 @@ if ($can_view)
 
 	if (!is_array($files))
 	{
-		$files = array();
+		$files = [];
 	}
 
 	// display

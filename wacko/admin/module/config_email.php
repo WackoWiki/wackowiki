@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Email settings                                   ##
 ########################################################
 
-$module['config_email'] = array(
+$module['config_email'] = [
 		'order'	=> 270,
 		'cat'	=> 'Preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'config_email',
 		'name'	=> 'Email',
 		'title'	=> 'Email settings',
-	);
+	];
 
 ########################################################
 

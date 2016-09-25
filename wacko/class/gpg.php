@@ -99,20 +99,20 @@ class GPG
 		}
 
 		// preparing http request
-		$request = array(
-			'http' => array(
+		$request = [
+			'http' => [
 				'method'	=> $method,
 				'header'	=> ( $method == 'post' ? 'Content-type: application/x-www-form-urlencoded' : '' ),
-				'content'	=> http_build_query(array(
+				'content'	=> http_build_query([
 					'pv' => $this->secret,		// protection value
 					'hd' => $this->homedir,		// homedir
 					'sf' => $this->stfile,		// status-file
 					'sr' => $this->srfile,		// stderr
 					'cl' => $this->override.' '.$request,	// command line params
 					'st' => $input)				// stdin data
-				) // end of content array
-			) // end of http array
-		); // end of request array
+				] // end of content array
+			] // end of http array
+		]; // end of request array
 
 		$context	= stream_context_create($request);
 		$script		= fopen("{$this->baseurl}{$this->wrapper}", 'r', false, $context);
@@ -687,14 +687,14 @@ class GPG
 		// after signature verification is complete
 		$body = $this->call("{$this->context} -v -d", 'post', $data);
 
-		$results = array(
+		$results = [
 			false,	// [0]
 			null,	// [1]
 			null,	// [2]
 			null,	// [3]
 			$body,	// [4], always defined
 			0,		// [5]
-		);
+		];
 
 		// checking status codes of the verification operation
 		if (false === $status = $this->get_status())
@@ -816,7 +816,7 @@ class GPG
 		if ($list = $this->call("--keyserver $keyserver --search-key $string"))
 		{
 			$n = 0;
-			$results = array();
+			$results = [];
 
 			// filling results array
 			if ($rows = explode("\n", $list)) foreach ($rows as $row)
@@ -836,13 +836,13 @@ class GPG
 						default:	$type = 'Undefined';
 					}
 
-					$results[$key_id = $cells[1]] = array(
+					$results[$key_id = $cells[1]] = [
 						0 => $type,
 						1 => (int)$cells[3],
 						2 => (int)$cells[4],
 						3 => trim($cells[6]),
-						4 => array()
-					);
+						4 => []
+					];
 				}
 				// uid for the current pubkey element
 				else if ($cells[0] == 'uid')

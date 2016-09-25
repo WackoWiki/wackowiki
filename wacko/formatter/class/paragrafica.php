@@ -15,12 +15,12 @@ class paragrafica
 	var $ignore			= "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
 	// paragpaph is a chicken-feed like this: <t->text, text, just text<-t>
 	var $wacko;
-	var $t0 			= array( // terminators like <-t>$1<t->
+	var $t0 			= [ // terminators like <-t>$1<t->
 		"/(<br[^>]*>)(\s*<br[^>]*>)+/si",
 		"/(<hr[^>]*>)/si",
-	);
-	var $t1				= array( // terminators like <-t>$1
-		array( // rightinators
+	];
+	var $t1				= [ // terminators like <-t>$1
+		[ // rightinators
 			"!(<table)!si",
 			"!(<h[1-9][^>]*>)!si",
 			"!(<dl)!si",
@@ -39,19 +39,19 @@ class paragrafica
 			"!(<form)!si",
 			"!(<textarea)!si",
 			"!(<blockquote)!si",
-		),
-		array( // wronginators
+		],
+		[ // wronginators
 			"!(</td>)!si",
-		),
-		array( // wronginators-2
+		],
+		[ // wronginators-2
 			"!(</li>)!si",
-		),
-		array( // wronginators-3
-		"!(</pre>)!si",
-		),
-	);
-	var $t2				= array( // terminators like $1<t->
-		array( // rightinators
+		],
+		[ // wronginators-3
+			"!(</pre>)!si",
+		],
+	];
+	var $t2				= [ // terminators like $1<t->
+		[ // rightinators
 			"!(</table>)!si",
 			"!(</h[1-9]>)!si",
 			"!(</dl>)!si",
@@ -70,17 +70,17 @@ class paragrafica
 			"!(</form>)!si",
 			"!(</textarea>)!si",
 			"!(</blockquote>)!si",
-		),
-		array( // wronginators
+		],
+		[ // wronginators
 			"!(<td[^>]*>)!si",
-		),
-		array( // wronginators-2
+		],
+		[ // wronginators-2
 			"!(<li[^>]*>)!is",
-		),
-		array( // wronginators-3
+		],
+		[ // wronginators-3
 			"!(<pre[^>]*>)!is",
-		),
-	);
+		],
+	];
 
 	var $mark_prefix	= '{:typo:markup:1:}';
 	var $mark1			= '{:typo:markup:1:}<:-t>'; // <-t>
@@ -105,7 +105,7 @@ class paragrafica
 	function correct( $what )
 	{
 		// -2. ignoring a regexp (or ignoring next regexp)
-		$ignored = array();
+		$ignored = [];
 		{
 			$total	= preg_match_all($this->ignore, $what, $matches);
 			$what	= preg_replace($this->ignore, '{:typo:markup:3:}', $what);
@@ -272,7 +272,7 @@ class paragrafica
 		//  * in wacko formatter we have done "#h1249_1"
 		//  * right here we have done         "#p1249_1"
 		// 1. get all ^^ of this
-		$this->toc = array();
+		$this->toc = [];
 		$what = preg_replace_callback( '!'.
 				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)".		// 2=depth, 3=id, 4=name
 									"|".
@@ -280,7 +280,7 @@ class paragrafica
 									"|".
 				"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
 				// {{include page="TAG" notoc=1}}
-				"!i", array( &$this, 'add_toc_entry' ), $what );
+				"!i", [&$this, 'add_toc_entry'], $what );
 
 		return $what;
 	}
@@ -295,7 +295,7 @@ class paragrafica
 		{
 			if ($matches[8] == '')
 			{
-				$this->toc[] = array($this->wacko->unwrap_link(trim($matches[7], '"')), '(include)', 99999);
+				$this->toc[] = [$this->wacko->unwrap_link(trim($matches[7], '"')), '(include)', 99999];
 			}
 		}
 		else
@@ -303,11 +303,11 @@ class paragrafica
 			// id, text, depth
 			if ($matches[6] != '')
 			{
-				$this->toc[] = array($matches[6], '(p)', 77777);
+				$this->toc[] = [$matches[6], '(p)', 77777];
 			}
 			else
 			{
-				$this->toc[] = array($matches[3], $matches[4], $matches[2]);
+				$this->toc[] = [$matches[3], $matches[4], $matches[2]];
 			}
 		}
 

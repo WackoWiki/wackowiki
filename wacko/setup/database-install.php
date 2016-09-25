@@ -5,10 +5,10 @@
 // test configuration
 echo "         <h2>".$lang['TestingConfiguration']."</h2>\n";
 
-$delete_table			= array();
-$create_table			= array();
-$insert_records			= array();
-$upgrade				= array();
+$delete_table			= [];
+$create_table			= [];
+$insert_records			= [];
+$upgrade				= [];
 
 $db_version				= "SELECT VERSION() as mysql_version";
 

@@ -78,7 +78,7 @@ if (isset($_POST['_user_menu']))
 {
 	$_menu		= load_user_menu($this, $_user_id, $menu_lang);
 	$a			= $_menu;
-	$b			= array();
+	$b			= [];
 
 	foreach($a as $k => $v)
 	{
@@ -94,14 +94,14 @@ if (isset($_POST['_user_menu']))
 	if (isset($_POST['update_menu']))
 	{
 		// reposition
-		$data = array();
+		$data = [];
 
 		foreach($object->data['user_menu'] as $k => $item)
 		{
-			$data[] = array(
+			$data[] = [
 				'menu_id'		=> $item['menu_id'],
 				'menu_position'	=> 1 * $_POST['pos_'.$item['menu_id']]
-			);
+			];
 		}
 
 		usort ($data, "menu_sorting");

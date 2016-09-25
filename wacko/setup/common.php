@@ -27,7 +27,7 @@ function write_config_hidden_nodes($skip_values)
 {
 	global $config;
 
-	$config_parameters = array_diff_key($config, $skip_values, array('aliases' => ''));
+	$config_parameters = array_diff_key($config, $skip_values, ['aliases' => '']);
 
 	if (is_array($config_parameters))
 	{
@@ -141,7 +141,7 @@ function array_to_str ($arr, $name = '')
 	$entries	= '';
 	$arrays		= '';
 
-	$str = "\$wacko_config".($name ? "[\"".$name."\"]" : "")." = array(\n";
+	$str = "\$wacko_config".($name ? "[\"".$name."\"]" : "")." = [\n";
 
 	foreach ($arr as $k => $v)
 	{
@@ -155,7 +155,7 @@ function array_to_str ($arr, $name = '')
 		}
 	}
 
-	$str .= $entries.");\n";
+	$str .= $entries."];\n";
 	$str .= $arrays;
 
 	return $str;
@@ -197,16 +197,16 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$default_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 	#$site_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, menu_lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lang."', '".$menu_title."')";
 
-	$insert_data[]			= array($page_insert,			$lang_global['ErrorInsertingPage']);
-	$insert_data[]			= array($perm_read_insert,		$lang_global['ErrorInsertingPageReadPermission']);
-	$insert_data[]			= array($perm_write_insert,		$lang_global['ErrorInsertingPageWritePermission']);
-	$insert_data[]			= array($perm_comment_insert,	$lang_global['ErrorInsertingPageCommentPermission']);
-	$insert_data[]			= array($perm_create_insert,	$lang_global['ErrorInsertingPageCreatePermission']);
-	$insert_data[]			= array($perm_upload_insert,	$lang_global['ErrorInsertingPageUploadPermission']);
+	$insert_data[]			= [$page_insert,			$lang_global['ErrorInsertingPage']];
+	$insert_data[]			= [$perm_read_insert,		$lang_global['ErrorInsertingPageReadPermission']];
+	$insert_data[]			= [$perm_write_insert,		$lang_global['ErrorInsertingPageWritePermission']];
+	$insert_data[]			= [$perm_comment_insert,	$lang_global['ErrorInsertingPageCommentPermission']];
+	$insert_data[]			= [$perm_create_insert,	$lang_global['ErrorInsertingPageCreatePermission']];
+	$insert_data[]			= [$perm_upload_insert,	$lang_global['ErrorInsertingPageUploadPermission']];
 
 	if($is_menu)
 	{
-		$insert_data[]		= array($default_menu_item,		$lang_global['ErrorInsertingDefaultMenuItem']);
+		$insert_data[]		= [$default_menu_item,		$lang_global['ErrorInsertingDefaultMenuItem']];
 	}
 
 	switch($config_global['database_driver'])

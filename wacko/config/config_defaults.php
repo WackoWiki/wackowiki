@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 // DO NOT EDIT HERE; instead make changes in config.php or config table.
 // These default settings are used when config.php is not present.
 
-$wacko_config_defaults = array(
+$wacko_config_defaults = [
 	'database_driver'				=> '',
 	'database_host'					=> 'localhost',
 	'database_port'					=> '',
@@ -269,4 +269,4 @@ $wacko_config_defaults = array(
 
 	// enable extensions
 	'ext_bad_behavior'				=> 0,
-);
+];

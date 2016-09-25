@@ -143,7 +143,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 			echo '<div class="additions">';
 			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
-					: $this->format(implode("\n", $added), 'wiki', array('diff' => true));
+					: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
 			echo "</div>\n";
 		}
 
@@ -153,7 +153,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 			echo '<div class="deletions">';
 			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
-					: $this->format(implode("\n", $deleted), 'wiki', array('diff' => true));
+					: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
 			echo "</div>\n";
 		}
 
@@ -257,7 +257,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		$side_b->copy_whitespace($output);
 
 		echo '<br /><br />';
-		echo $this->format($output, 'wiki', array('diff' => true));
+		echo $this->format($output, 'wiki', ['diff' => true]);
 		break;
 
 	case 3:

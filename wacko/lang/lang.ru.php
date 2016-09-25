@@ -5,12 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$wacko_language = array(
+$wacko_language = [
 	'name'					=> "Russian",
 	'code'					=> "ru",
 	'charset'				=> "windows-1251",
-	'locale'				=> array("ru_RU.CP1251","ru_RU.KOI8-r","ru_RU","russian","ru_SU","ru"),
-	'utfdecode'				=> array(),
+	'locale'				=> ["ru_RU.CP1251","ru_RU.KOI8-r","ru_RU","russian","ru_SU","ru"],
+	'utfdecode'				=> [],
 	'UPPER_P'				=> "A-Z\xc0-\xdf\xa8",
 	'LOWER_P'				=> "a-z\xe0-\xff\xb8\/\'",
 	'ALPHA_P'				=> "A-Za-z\xc0-\xff\xa8\xb8\_\/\'",
@@ -18,13 +18,13 @@ $wacko_language = array(
 	'TranslitLettersTo'		=> "abvgdeziklmnoprstufx__cyABVGDEZIKLMNOPRSTUFX__CY",
 	'TranslitCaps'			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
 	'TranslitSmall'			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
-	'TranslitBiLetters'		=> array(
+	'TranslitBiLetters'		=> [
 								"é" => "jj", "¸" => "jo", "æ" => "zh", "÷" => "ch",
 								"ø" => "sh", "ù" => "shh", "ý" => "je", "þ" => "ju", "ÿ" => "ja",
 								"É" => "Jj", "¨" => "Jo", "Æ" => "Zh", "×" => "Ch",
 								"Ø" => "Sh", "Ù" => "Shh", "Ý" => "Je", "Þ" => "Ju", "ß" => "Ja",
-								),
-	'unicode_entities'		=> array(
+								],
+	'unicode_entities'		=> [
 								"À"=>"&#1040;", "Á"=>"&#1041;", "Â"=>"&#1042;", "Ã"=>"&#1043;", "Ä"=>"&#1044;", "Å"=>"&#1045;",
 								"Æ"=>"&#1046;", "Ç"=>"&#1047;", "È"=>"&#1048;", "É"=>"&#1049;", "Ê"=>"&#1050;", "Ë"=>"&#1051;",
 								"Ì"=>"&#1052;", "Í"=>"&#1053;", "Î"=>"&#1054;", "Ï"=>"&#1055;", "Ð"=>"&#1056;", "Ñ"=>"&#1057;",
@@ -36,7 +36,7 @@ $wacko_language = array(
 								"ð"=>"&#1088;", "ñ"=>"&#1089;", "ò"=>"&#1090;", "ó"=>"&#1091;", "ô"=>"&#1092;", "õ"=>"&#1093;",
 								"ö"=>"&#1094;", "÷"=>"&#1095;", "ø"=>"&#1096;", "ù"=>"&#1097;", "ú"=>"&#1098;", "û"=>"&#1099;",
 								"ü"=>"&#1100;", "ý"=>"&#1101;", "þ"=>"&#1102;", "ÿ"=>"&#1103;", "¸"=>"&#1105;", "¨"=>"&#1025;",
-								),
-);
+								],
+];
 
 ?>

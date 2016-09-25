@@ -154,7 +154,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$topics	= $this->db->load_all($sql);
 
 	//  display search
-	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">'.$this->action('search', array('for' => $this->tag, 'nomark' => 1, 'options' => 0)).'</div>'."\n";
+	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">'.$this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]).'</div>'."\n";
 
 	if (!isset($_GET['phrase']))
 	{

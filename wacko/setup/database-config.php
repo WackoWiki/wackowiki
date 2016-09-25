@@ -83,11 +83,11 @@ echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']
  [2]   :  the name to display in the list here
  */
 
-$drivers	= array();
-$drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi ('.$lang['Recommended'].')');
-$drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL');
-// $drivers[]	= array('pdo',		'pgsql',		'PDO PostgreSQL');
-// $drivers[]	= array('pdo',		'sqlite3',		'PDO SQLite2');
+$drivers	= [];
+$drivers[]	= ['mysqli',	'mysqli_legacy',	'MySQLi ('.$lang['Recommended'].')'];
+$drivers[]	= ['pdo',		'mysql_pdo',		'PDO MySQL'];
+// $drivers[]	= ['pdo',		'pgsql',		'PDO PostgreSQL'];
+// $drivers[]	= ['pdo',		'sqlite3',		'PDO SQLite2'];
 
 $detected = 0;
 
@@ -132,12 +132,12 @@ for($count = 0; $count < count($drivers); $count++)
  [2]   :  the name to display in the list here
  */
 
-$charset	= array();
-# $charset[]	= array('utf8', 'utf8', 'UTF-8 Unicode ('.$lang['Recommended'].')'); // requires unicode ready wiki engine! -> Version 5.5
-$charset[]	= array('cp1251',	'cp1251',	'cp1251 Windows Cyrillic');
-$charset[]	= array('latin1',	'latin1',	'cp1252 West European');
-$charset[]	= array('latin2',	'latin2',	'ISO 8859-2 Central European'); // not tested
-$charset[]	= array('greek',	'greek',	'ISO 8859-7 Greek'); // not tested
+$charset	= [];
+# $charset[]	= ['utf8', 'utf8', 'UTF-8 Unicode ('.$lang['Recommended'].')']; // requires unicode ready wiki engine! -> Version 5.5
+$charset[]	= ['cp1251',	'cp1251',	'cp1251 Windows Cyrillic'];
+$charset[]	= ['latin1',	'latin1',	'cp1252 West European'];
+$charset[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European']; // not tested
+$charset[]	= ['greek',		'greek',	'ISO 8859-7 Greek']; // not tested
 
 
 $detected = 0;
@@ -172,9 +172,9 @@ if ($config['is_update'] == false)
  [2]   :  the name to display in the list here
  */
 
-$engines	= array();
-$engines[]	= array('mysql_innodb', 'InnoDB', 'InnoDB ('.$lang['Recommended'].')');
-$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM');
+$engines	= [];
+$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB ('.$lang['Recommended'].')'];
+$engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];
 
 $detected = 0;
 

@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   DB Update                                        ##
 ########################################################
 
-$module['maint_transliterate'] = array(
+$module['maint_transliterate'] = [
 		'order'	=> 610,
 		'cat'	=> 'Maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'maint_transliterate',
 		'name'	=> 'Transliterate',
 		'title'	=> 'Update the supertag in the database records',
-	);
+	];
 
 ########################################################
 

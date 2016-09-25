@@ -29,7 +29,7 @@ class bbcode
 	function wrapper($input)
 	{
 		$engine		= &$this->object;
-		$rewrite	= array(&$this, 'wrapper');
+		$rewrite	= [&$this, 'wrapper'];
 		$string		= $input[1];
 
 		// ignore

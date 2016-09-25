@@ -177,12 +177,12 @@ class Ut
 
 		if ($running)
 		{
-			$trace = debug_backtrace();
-			$callee = (strpos($trace[0]['file'], 'class/ut.php') !== false)? $trace[1] : $trace[0];
-			$dir = dirname(dirname(__FILE__)) . '/';
-			$tag = str_replace($dir, '', $callee['file']) . ':' . $callee['line'] . ': ';
+			$trace	= debug_backtrace();
+			$callee	= (strpos($trace[0]['file'], 'class/ut.php') !== false)? $trace[1] : $trace[0];
+			$dir	= dirname(dirname(__FILE__)) . '/';
+			$tag	= str_replace($dir, '', $callee['file']) . ':' . $callee['line'] . ': ';
 
-			$args = func_get_args();
+			$args	= func_get_args();
 
 			foreach ($args as &$arg)
 			{
@@ -202,6 +202,7 @@ class Ut
 
 		$list = [];
 		$dir = dirname(dirname(__FILE__)) . '/';
+
 		foreach ($trace as $i => $frame)
 		{
 			if (isset($frame['function']) && $i)
@@ -224,6 +225,7 @@ class Ut
 		$bt = debug_backtrace();
 		$dir = dirname(dirname(__FILE__)) . '/';
 		$res = '?';
+
 		foreach ($bt as $frame)
 		{
 			if (fnmatch($class_filter, (string) @$frame['class']) && isset($frame['file']))
@@ -231,6 +233,7 @@ class Ut
 				$res = str_replace($dir, '', $frame['file']) . ':' . $frame['line'];
 			}
 		}
+
 		return $res;
 	}
 
@@ -305,12 +308,15 @@ class Ut
 		if (preg_match('/^(.*?)\{([^{}]*)\}(.*)$/', $text, $match))
 		{
 			$res = [];
+
 			foreach (explode(',', $match[2]) as $part)
 			{
 				$res = array_merge($res, Ut::expand_braces($match[1] . $part . $match[3]));
 			}
+
 			return $res;
 		}
+
 		return (array) glob($text, GLOB_MARK | GLOB_NOSORT);
 	}
 
@@ -345,12 +351,13 @@ class Ut
 			// json_encode can fail due to utf8 miscoding, so fallback..
 			$text = serialize($data);
 		}
+
 		return $text;
 	}
 
 	static function unserialize($text)
 	{
-		return 
+		return
 			(substr($text, 1, 1) === ':' && ctype_lower($text[0]))
 				? unserialize($text)
 				: json_decode($text, true);
@@ -366,6 +373,7 @@ class Ut
 		if (function_exists('random_bytes'))
 		{
 			$bytes = @random_bytes($length); // we can live with bad randomness source exception
+
 			if ($bytes)
 			{
 				return $bytes;
@@ -377,6 +385,7 @@ class Ut
 		if (function_exists('openssl_random_pseudo_bytes'))
 		{
 			$sha = openssl_random_pseudo_bytes($length, $strong);
+
 			if ($sha && $strong)
 			{
 				return $sha;
@@ -436,13 +445,13 @@ class Ut
 		throw new TypeError('Expected an integer');
 	}
 
-	// from Random_* Compatibility Library 
+	// from Random_* Compatibility Library
 	// Copyright (c) 2015 Paragon Initiative Enterprises
 	static function rand($min, $max)
 	{
 		$min = Ut::intval($min);
 		$max = Ut::intval($max);
-		
+
 		if ($min > $max)
 		{
 			throw new Error('Minimum value must be less than or equal to the maximum value');
@@ -464,20 +473,24 @@ class Ut
 		else
 		{
 			$bits = $bytes = $mask = 0;
+
 			while ($range > 0)
 			{
 				if ($bits % 8 === 0)
 				{
-				   ++$bytes;
+					++$bytes;
 				}
+
 				++$bits;
 				$range >>= 1;
 				$mask = ($mask << 1) | 1;
 			}
+
 			$valueShift = $min;
 		}
 
 		$attempts = 0;
+
 		do
 		{
 			if ($attempts++ > 128)
@@ -488,6 +501,7 @@ class Ut
 			$randomByteString = Ut::random_bytes($bytes);
 
 			$val = 0;
+
 			for ($i = 0; $i < $bytes; ++$i)
 			{
 				$val |= ($val << 8) ^ ord($randomByteString[$i]);

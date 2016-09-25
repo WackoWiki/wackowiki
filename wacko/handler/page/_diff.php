@@ -46,7 +46,7 @@ class Side
 		$this->position		= 0;
 		$this->cursor		= 0;
 		$this->directive	= '';
-		$this->argument		= array();
+		$this->argument		= [];
 		$this->length		= strlen($this->content);
 		$this->character	= substr($this->content, 0, 1);
 	}
@@ -113,7 +113,7 @@ class Side
 		$this->position		= 0;
 		$this->cursor		= 0;
 		$this->directive	= '';
-		$this->argument		= array();
+		$this->argument		= [];
 		$this->character	= substr($this->content, 0, 1);
 	}
 
@@ -356,9 +356,9 @@ class _DiffEngine
 		$n_from = sizeof($from_lines);
 		$n_to = sizeof($to_lines);
 
-		$this->xchanged = $this->ychanged = array();
-		$this->xv = $this->yv = array();
-		$this->xind = $this->yind = array();
+		$this->xchanged = $this->ychanged = [];
+		$this->xv = $this->yv = [];
+		$this->xind = $this->yind = [];
 		unset($this->seq);
 		unset($this->in_seq);
 		unset($this->lcs);
@@ -408,7 +408,7 @@ class _DiffEngine
 		$this->_shift_boundaries($to_lines, $this->ychanged, $this->xchanged);
 
 		// Compute the edit operations.
-		$edits = array();
+		$edits = [];
 		$xi = $yi = 0;
 
 		while ($xi < $n_from || $yi < $n_to)
@@ -417,7 +417,7 @@ class _DiffEngine
 			USE_ASSERTS && assert($xi < $n_from || $this->ychanged[$yi]);
 
 			// Skip matching "snake".
-			$copy = array();
+			$copy = [];
 			while ( $xi < $n_from && $yi < $n_to
 			&& !$this->xchanged[$xi] && !$this->ychanged[$yi])
 			{
@@ -428,11 +428,11 @@ class _DiffEngine
 			$edits[] = new _DiffOp_Copy($copy);
 
 			// Find deletes & adds.
-			$delete = array();
+			$delete = [];
 			while ($xi < $n_from && $this->xchanged[$xi])
 			$delete[] = $from_lines[$xi++];
 
-			$add = array();
+			$add = [];
 			while ($yi < $n_to && $this->ychanged[$yi])
 			$add[] = $to_lines[$yi++];
 
@@ -484,8 +484,8 @@ class _DiffEngine
 
 		$this->lcs = 0;
 		$this->seq[0]= $yoff - 1;
-		$this->in_seq = array();
-		$ymids[0] = array();
+		$this->in_seq = [];
+		$ymids[0] = [];
 
 		$numer = $xlim - $xoff + $nchunks - 1;
 		$x = $xoff;
@@ -808,7 +808,7 @@ class DiffFormatter
 
 		$xi = $yi = 1;
 		$block = false;
-		$context = array();
+		$context = [];
 
 		$this->_start_diff();
 
@@ -837,7 +837,7 @@ class DiffFormatter
 				{
 					$x0 = $xi;
 					$y0 = $yi;
-					$block = array();
+					$block = [];
 				}
 				$block[] = $edit;
 			}

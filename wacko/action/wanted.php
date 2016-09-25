@@ -45,7 +45,7 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 				"ORDER BY wanted_tag ASC ".
 				$pagination['limit']);
 
-		return array($wanted, $pagination);
+		return [$wanted, $pagination];
 	}
 
 };

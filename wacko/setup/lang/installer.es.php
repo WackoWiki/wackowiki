@@ -1,5 +1,5 @@
 <?php
-$lang = array(
+$lang = [
 
 /*
    Language Settings
@@ -77,7 +77,7 @@ $lang = array(
 'WarningRewriteMode' => 'ATENCION!\nLa URL base se ve extraña considerando la configuración de modo rewrite. Generalmente no hay el signo ? en la URL base si el modo rewrite está activado - pero actualmente está presente.\n\nPara continuar usando la configuración actual presione OK.\nPara volver al formulario y modificar los datos de configuraciíon presione CANCEL.\n\nSi tiene la intención de continuar con la configuración actual puede tener problemas con la instalación de WackoWiki.',
 'ModRewriteStatusUnknown' => 'El instalador no puede verificar si el modo mod_rewrite está habilitado, sin embargo no quiere decir que está deshabilitado',
 
-'LanguageArray'	=>  array(
+'LanguageArray'	=>  [
 	'bg' => 'bulgarian',
 	'da' => 'danish',
 	'nl' => 'dutch',
@@ -92,7 +92,7 @@ $lang = array(
 	'pt' => 'portuguese',
 	'ru' => 'russian',
 	'es' => 'spanish',
-),
+],
 
 /*
    Database Config Page
@@ -190,5 +190,5 @@ $lang = array(
 'ConfigDescription' => 'detailed description http://wackowiki.sourceforge.net/doc/Doc/English/Configuration',
 'TryAgain' => 'Intente de Nuevo',
 
-);
+];
 ?>

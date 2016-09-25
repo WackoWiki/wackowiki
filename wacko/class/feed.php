@@ -106,7 +106,7 @@ class Feed
 		$name			= 'news';
 		$news_cluster	= empty($feed_cluster) ? $this->engine->db->news_cluster : $feed_cluster;
 		$news_levels	= $this->engine->db->news_levels;
-		$feed_pages		= array();
+		$feed_pages		= [];
 		$prefix			= $this->engine->db->table_prefix;
 
 		//  collect data
@@ -129,7 +129,7 @@ class Feed
 
 				#if ($access === true)
 				#{
-					$feed_pages[]	= array(
+					$feed_pages[]	= [
 										'page_id'	=> $page['page_id'],
 										'tag'		=> $page['tag'],
 										'title'		=> $page['title'],
@@ -137,7 +137,9 @@ class Feed
 										'body_r'	=> $page['body_r'],
 										'comments'	=> $page['comments'],
 										'page_lang'	=> $page['page_lang'],
-										'date'		=> date('Y/m-d', strtotime($page['created'])));
+										'date'		=> date('Y/m-d', strtotime($page['created']))
+
+					];
 				#}
 			}
 
@@ -189,7 +191,7 @@ class Feed
 				$pdate	= date('r', strtotime($page['modified']));
 				$coms	= $this->engine->href('', $page['tag'], 'show_comments=1#header-comments');
 				// TODO: might fail if body_r is empty,
-				// TODO: format -> add array('feed' => true)
+				// TODO: format -> add ['feed' => true]
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
 
 				// check current page lang for different charset to do_unicode_entities() against

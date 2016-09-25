@@ -9,14 +9,14 @@ if (!defined('IN_WACKO'))
 ##   Messages settings                                ##
 ########################################################
 
-$module['messages'] = array(
+$module['messages'] = [
 		'order'	=> 710,
 		'cat'	=> 'Messages',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> 'messages',
 		'name'	=> 'System message',
 		'title'	=> 'System messages',
-	);
+	];
 
 ########################################################
 
@@ -62,7 +62,7 @@ function admin_messages(&$engine, &$module)
 				<td>
 					<select style="width:200px;" id="system_message_type" name="system_message_type">
 <?php
-						$typs = array('info', 'warning', 'marquee');
+						$typs = ['info', 'warning', 'marquee'];
 
 						foreach ($typs as $type)
 						{

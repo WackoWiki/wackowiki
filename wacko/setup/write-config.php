@@ -9,7 +9,7 @@ if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
 
-$config_file = array();
+$config_file = [];
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	BEGIN MANDATORY CONFIGURATION

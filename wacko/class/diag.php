@@ -88,7 +88,7 @@ class Diag
 
 						echo "\t";
 						echo '<li class="sqllog">';
-						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query) . '<br />';
+						echo str_replace(['<', '>'], ['&lt;', '&gt;'], $query) . '<br />';
 						echo '[' . number_format($time, 4) . ' sec., ' . $affected_rows . ' rows';
 						echo '<span class="backtrace">';
 						echo '<table>' . $btext . '</table>';

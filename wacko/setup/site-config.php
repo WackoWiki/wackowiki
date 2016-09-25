@@ -99,7 +99,7 @@ if (isset($config['allowed_languages']))
 }
 else
 {
-	$lang_list= array();
+	$lang_list= [];
 }
 
 $_languages = $lang['LanguageArray'];

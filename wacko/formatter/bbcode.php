@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $parser = new bbcode($this);
 
-$text	= preg_replace_callback($parser->template, array(&$parser, 'wrapper'), $text);
+$text	= preg_replace_callback($parser->template, [&$parser, 'wrapper'], $text);
 
 echo $text;
 
