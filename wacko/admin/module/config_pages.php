@@ -35,6 +35,7 @@ function admin_config_pages(&$engine, &$module)
 		$config['comments_count']		= (int)$_POST['comments_count'];
 		$config['news_cluster']			= trim((string)$_POST['news_cluster'], '/');
 		$config['news_levels']			= (string)$_POST['news_levels'];
+		$config['license']				= (string)$_POST['license'];
 		$config['root_page']			= trim((string)$_POST['root_page'], '/');
 		$config['policy_page']			= trim((string)$_POST['policy_page'], '/');
 		$config['search_page']			= trim((string)$_POST['search_page'], '/');
@@ -119,6 +120,37 @@ function admin_config_pages(&$engine, &$module)
 				<td class="label"><label for="news_levels"><strong>Depth of news pages from the root cluster:</strong><br />
 				<small>Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)</small></label></td>
 				<td><input type="text" maxlength="255" style="width:200px;" id="news_levels" name="news_levels" value="<?php echo htmlspecialchars($engine->db->news_levels, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br />
+					License
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="license"><strong>Default license:</strong><br />
+				<small>Under which license should your content be released.</small></label></td>
+				<td>
+					<select id="license" name="license">
+<?php
+					$licenses = $engine->_t('License');
+
+					foreach ($licenses as $offset => $license)
+					{
+						if (strlen($license) > 50)
+						{
+							$license = substr($license, 0, 45 ).'...';
+						}
+
+						echo '<option value="'.$offset.'" '.
+							($engine->db->license == $offset
+								? 'selected="selected" '
+								: '')
+							.'>'.$license."</option>\n";
+					}
+?>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<th colspan="2">

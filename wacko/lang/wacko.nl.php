@@ -821,6 +821,22 @@ $wacko_translation = [
 	'Group'						=> 'group',
 	'Groups'					=> 'groups',
 
+	// license action
+	'DistributedUnder'			=> 'Material is distributed under',
+	'AuthorsDisplayHint'		=> 'The list of authors will be displayed when saving the page.',
+	'AnonymousUsers'			=> 'Anonymous users',
+	'License'					=> [
+			'CC-BY-ND'		=> 'Creative Commons Attribution-NoDerivatives.',
+			'CC-BY-NC-SA'	=> 'Creative Commons Attribution-NonCommercial-ShareAlike',
+			'CC-BY-NC-ND'	=> 'Creative Commons Attribution-NonCommercial-NoDerivatives',
+			'CC-BY-SA'		=> 'Creative Commons Attribution-ShareAlike',
+			'CC-BY-NC'		=> 'Creative Commons Attribution-NonCommercial',
+			'CC-BY'			=> 'Creative Commons Attribution',
+			'CC-ZERO'		=> 'Creative Commons CC0 1.0 Universal International License',
+			'GNU-FDL'		=> 'GNU Free Documentation License',
+			'PD'			=> 'Public Domain / Free Use',
+	],
+
 	// Cache
 	'ClearCache'					=> 'Clear cache',
 	'CacheCleared'					=> 'Cache cleared.',

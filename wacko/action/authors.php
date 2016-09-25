@@ -6,22 +6,25 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-print document and revisions' authors.
+print page and revisions' authors.
 	{{authors [add="(c) 2009 Ivan Ivanov[;(c) 2010 John Smith[;...]]"] [license="CC-BY-NC-SA"] [cluster=0]}}
 	add		= semicolon-separated list of original authors (for reprinted work or such),
 			  or any appropriate text. wiki-formatting applies.
 			  note: every semicolon-separated block is printed on the new line
 	license	= some free-form text (wiki-formatting applies) or one of predefined constants:
-				- CC-BY-ND         (CreativeCommons-Attribution-NoDerivatives)
-				- CC-BY-NC-SA      (CreativeCommons-Attribution-NonCommercial-ShareAlike)
-				- CC-BY-NC-ND      (CreativeCommons-Attribution-Non-Commercial No Derivatives)
-				- CC-BY-SA         (CreativeCommons-Attribution-ShareAlike)
-				- CC-BY-NC         (CreativeCommons-Attribution Non-Commercial)
-				- CC-BY            (CreativeCommons-Attribution)
-				- GNU-FDL          (GNU Free Documentation License)
-				- PD               (Public Domain)
+				- CC-BY-ND			(CreativeCommons-Attribution-NoDerivatives)
+				- CC-BY-NC-SA		(CreativeCommons-Attribution-NonCommercial-ShareAlike)
+				- CC-BY-NC-ND		(CreativeCommons-Attribution-Non-Commercial No Derivatives)
+				- CC-BY-SA			(CreativeCommons-Attribution-ShareAlike)
+				- CC-BY-NC			(CreativeCommons-Attribution Non-Commercial)
+				- CC-BY				(CreativeCommons-Attribution)
+				- CC-Zero			(CreativeCommons-Zero / public domain)
+				- GNU-FDL			(GNU Free Documentation License)
+				- PD				(Public Domain)
 	cluster	= consider all cluster subpages (if = 1) or current page only (0, default)
 
+	https://creativecommons.org/choose/
+	https://en.wikipedia.org/wiki/Creative_Commons_license
 	https://licensebuttons.net/
 */
 
@@ -34,7 +37,7 @@ echo '<small>';
 if (!$this->page && !$add && !$license)
 {
 	// we don't have any input, displaying stub instead until the page is saved for the first time
-	echo '<em>(The list of authors will be displayed when saving a document.)</em>'; // ru: —писок авторов будет отображен при сохранении документа.
+	echo '<em>'.$this->_t('AuthorsDisplayHint').'</em>';
 }
 else
 {
@@ -60,13 +63,13 @@ else
 		"(SELECT u.user_name AS name, YEAR(r.modified) AS year ".
 		"FROM {$this->db->table_prefix}revision r ".
 			"INNER JOIN ".$this->db->table_prefix."user u ON (r.user_id = u.user_id) ".
-		"WHERE r.supertag = ".$this->db->q($this->supertag)." ".( $cluster ? "OR r.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '' ).
+		"WHERE r.supertag = ".$this->db->q($this->supertag)." ".($cluster ? "OR r.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '').
 		"GROUP BY u.user_name, year ) ".
 		"UNION ".
 		"( SELECT u.user_name AS name, YEAR(p.modified) AS year ".
 		"FROM {$this->db->table_prefix}page p ".
 			"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
-		"WHERE p.supertag = ".$this->db->q($this->supertag)." ".( $cluster ? "OR p.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '' ).
+		"WHERE p.supertag = ".$this->db->q($this->supertag)." ".($cluster ? "OR p.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '').
 		"GROUP BY u.user_name, year ) ".
 		"ORDER BY name ASC, year ASC", true))
 		{
@@ -87,7 +90,7 @@ else
 				{
 					// existing entry
 					// are revision years consequent?..
-					if ((int)substr($authors[$author['name']]['years'], -4) === $author['year']-1)
+					if ((int)substr($authors[$author['name']]['years'], -4) === $author['year'] - 1)
 					{
 						// ...consequent, this will be a years range
 						if (substr($authors[$author['name']]['years'], -5, 1) != '-')
@@ -98,7 +101,7 @@ else
 						else
 						{
 							// we already have years range, let's rewrite a second year in the range
-							$authors[$author['name']]['years'] = substr($authors[$author['name']]['years'], 0, -4).$author['year'];
+							$authors[$author['name']]['years'] = substr($authors[$author['name']]['years'], 0, -4) . $author['year'];
 						}
 					}
 					else
@@ -141,7 +144,7 @@ else
 				}
 				else
 				{
-					$guest_authors = '&copy; '.$author['years'].' Anonymous users'; // ru: јнонимные пользователи
+					$guest_authors = '&copy; '.$author['years'].' '.$this->_t('AnonymousUsers');
 					unset($authors[$i]);
 				}
 			}
@@ -159,24 +162,26 @@ else
 	{
 		// license names and links to texts
 		$licenses = [
-			'CC-BY-ND'		=> ['http://creativecommons.org/licenses/by-nd/4.0/',		'CreativeCommons-Attribution-NoDerivatives'],
-			'CC-BY-NC-SA'	=> ['http://creativecommons.org/licenses/by-nc-sa/4.0/',	'CreativeCommons-Attribution-NonCommercial-ShareAlike'],
-			'CC-BY-NC-ND'	=> ['http://creativecommons.org/licenses/by-nc-nd/4.0/',	'CreativeCommons-Attribution-Non-Commercial No Derivatives'],
-			'CC-BY-SA'		=> ['http://creativecommons.org/licenses/by-sa/4.0/',		'CreativeCommons-Attribution-ShareAlike'],
-			'CC-BY-NC'		=> ['http://creativecommons.org/licenses/by-nc/4.0/',		'CreativeCommons-Attribution-Non-Commercial'],
-			'CC-BY'			=> ['http://creativecommons.org/licenses/by/4.0/',			'Creative Commons Attribution License'],
-			'GNU-FDL'		=> ['http://www.gnu.org/licenses/fdl.html',				'GNU Free Documentation License'],
-			'PD'			=> ['http://creativecommons.org/publicdomain/mark/1.0/',	'Public Domain / Free Use'],
+			'CC-BY-ND'		=> ['https://creativecommons.org/licenses/by-nd/4.0/',		$this->_t('License')['CC-BY-ND']],
+			'CC-BY-NC-SA'	=> ['https://creativecommons.org/licenses/by-nc-sa/4.0/',	$this->_t('License')['CC-BY-NC-SA']],
+			'CC-BY-NC-ND'	=> ['https://creativecommons.org/licenses/by-nc-nd/4.0/',	$this->_t('License')['CC-BY-NC-ND']],
+			'CC-BY-SA'		=> ['https://creativecommons.org/licenses/by-sa/4.0/',		$this->_t('License')['CC-BY-SA']],
+			'CC-BY-NC'		=> ['https://creativecommons.org/licenses/by-nc/4.0/',		$this->_t('License')['CC-BY-NC']],
+			'CC-BY'			=> ['https://creativecommons.org/licenses/by/4.0/',			$this->_t('License')['CC-BY']],
+			'CC-ZERO'		=> ['https://creativecommons.org/publicdomain/zero/1.0/',	$this->_t('License')['CC-ZERO']],
+			'GNU-FDL'		=> ['https://www.gnu.org/licenses/fdl.html',				$this->_t('License')['GNU-FDL']],
+			'PD'			=> ['https://creativecommons.org/publicdomain/mark/1.0/',	$this->_t('License')['PD']],
 		];
 
 		if (isset($licenses[$license]))
 		{
+			$icons = '<img src="'.$this->db->base_url.'image/spacer.png" alt="'.$licenses[$license][1].'" title="'.$licenses[$license][1].'" class="license-'.$license.'">';
 			// constant license
-			$license = '<br />Material is distributed under<br />'. // ru]: ћатериал распростран€етс€ на услови€х
+			$license = '<br />'.$this->_t('DistributedUnder').'<br />'.
 
 			// TODO: rel="license"
 			$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
-			'<img src="'.$this->db->base_url.'image/spacer.png" alt="'.$licenses[$license][1].'" class="license-'.$license.'">';
+			'<a rel="license" href="'.$licenses[$license][0].'">'.$icons.'</a>';
 		}
 		else
 		{
