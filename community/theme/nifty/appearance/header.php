@@ -31,7 +31,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 	<link rel="shortcut icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
 	<link  rel="start" title="<?php echo $this->db->root_page;?>" href="<?php echo $this->db->base_url;?>"/>
 	<?php if ($this->db->policy_page) {?>
-	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
+	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
 	<?php } ?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url;?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url;?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
