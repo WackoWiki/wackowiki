@@ -23,7 +23,7 @@ _common include file for themes
 	<link rel="shortcut icon" href="[ ' db: theme_url ' ]icon/favicon.ico" type="image/x-icon" />
 	<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_url ' ]" />
 	[= policy _ =
-		<link rel="copyright" href="[ ' href ' ]" title="Copyright" />
+		<link rel="license" href="[ ' href ' ]" />
 	=]
 	[= rss _ =
 		<link rel="alternate" type="application/rss+xml" title="[ ' _t: ChangesFeed ' ]" href="[ ' url.0 ' ]changes[ ' url.1 ' ]" />
