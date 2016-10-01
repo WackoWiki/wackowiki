@@ -10,7 +10,7 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 <link rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css" />
 
 <link rel="start" href="/" />
-<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
+<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 <link rel="prev" href="<?php echo $this->href() ?>" />
 </head>
 <body id="print">

@@ -11,7 +11,7 @@
 		<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_url ' ]" />
 		<link rel="shortcut icon" href="[ ' db: theme_url ' ]icon/favicon.ico" type="image/x-icon" />
 		[= policy _ =
-			<link rel="copyright" href="[ ' url ' ]" />
+			<link rel="license" href="[ ' url ' ]" />
 		=]
 		<link rel="prev" href="[ ' href: ' ]" />
 	</head>
