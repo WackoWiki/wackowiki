@@ -1092,7 +1092,7 @@ $wacko_translation = [
 		'14'	=> '[UTC + 14] Horario Islas Line',
 	],
 
-	'LanguageArray'	=>  [
+	'LanguageArray'	=> [
 		'bg' => 'búlgaro',
 		'da' => 'dandanés',
 		'nl' => 'holandés',

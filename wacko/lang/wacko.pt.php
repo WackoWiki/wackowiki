@@ -1084,7 +1084,7 @@ $wacko_translation = [
 		'12'	=> '[TMG+12] Auckland, Gemak, Fiji, Kamchatka, Ilhas Marshall, Suva, Wellington',
 	],
 
-	'LanguageArray'	=>  [
+	'LanguageArray'	=> [
 		'bg' => 'búlgaro',
 		'da' => 'dinamarquês',
 		'nl' => 'holandês',

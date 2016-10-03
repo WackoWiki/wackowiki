@@ -1092,7 +1092,7 @@ $wacko_translation = [
 		'14'	=> '[UTC + 14] Czas Wysp Line',
 	],
 
-	'LanguageArray'	=>  [
+	'LanguageArray'	=> [
 		'bg' => 'bulgarian',
 		'da' => 'danish',
 		'nl' => 'dutch',

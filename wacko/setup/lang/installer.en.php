@@ -77,7 +77,7 @@ $lang = [
 'WarningRewriteMode' => 'ATTENTION!\nYour base URL and rewrite-mode settings looks suspicious. Usually there is no ? mark in the base URL if rewrite-mode is set - but in your case there is one.\n\nTo continue with these settings click OK.\nTo return to the form and change your settings click CANCEL.\n\nIf you are about to proceed with these settings, please note that they COULD cause problems with your WackoWiki installation.',
 'ModRewriteStatusUnknown' => 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
-'LanguageArray'	=>  [
+'LanguageArray'	=> [
 	'bg' => 'bulgarian',
 	'da' => 'danish',
 	'nl' => 'dutch',
