@@ -13,9 +13,9 @@ $lang = [
 */
 'Title' => 'WackoWiki Installatie',
 'Continue' => 'Verder gaan',
-'Back' => 'Back',
+'Back' => 'Terug',
 'Recommended' => 'aanbevolen',
-'InvalidAction' => 'Invalid action',
+'InvalidAction' => 'Ongeldige actie',
 
 /*
    Language Selection Page
@@ -30,14 +30,14 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check' => 'System Requirements',
+'version-check' => 'Systeem Vereisten',
 'PHPVersion' => 'PHP Version',
-'PHPDetected' => 'Detected PHP',
+'PHPDetected' => 'Gedetecteerd PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled' => 'Rewrite Extension (mod_rewrite) Installed?',
 'Database' => 'Database',
 'Permissions' => 'Permissions',
-'ReadyToInstall' => 'Ready to Install?',
+'ReadyToInstall' => 'Klaar om te installeren?',
 'Requirements' => 'Your server must meet the requirements listed below.',
 'OK' => 'OK',
 'Problem' => 'Problem',
@@ -77,21 +77,21 @@ $lang = [
 'WarningRewriteMode' => 'LET OP!\nMogelijk zit er een fout in uw basis-URL en instellingen van de rewrite-modus. In een basis-URL hoort geen vraagteken te staan als de rewrite-modus is ingeschakeld. In uw instellingen is dat wel het geval.\n\nKlik OK om met deze instellingen door te gaan.\nKlik Annuleren om terug te gaan en de instellingen te veranderen.\n\nU kunt doorgaan met deze instellingen, maar het is mogelijk dat er dan problemen ontstaan.',
 'ModRewriteStatusUnknown' => 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
 
-'LanguageArray'	=>  [
-	'bg' => 'bulgarian',
-	'da' => 'danish',
-	'nl' => 'dutch',
-	'el' => 'greek',
-	'en' => 'english',
-	'et' => 'estonian',
-	'fr' => 'french',
-	'de' => 'german',
-	'hu' => 'hungarian',
-	'it' => 'italian',
-	'pl' => 'polish',
-	'pt' => 'portuguese',
-	'ru' => 'russian',
-	'es' => 'spanish',
+'LanguageArray'	=> [
+	'bg' => 'Bulgaars',
+	'da' => 'Deens',
+	'nl' => 'Nederlands',
+	'el' => 'Grieks',
+	'en' => 'Engels',
+	'et' => 'Estlands',
+	'fr' => 'Frans',
+	'de' => 'Duits',
+	'hu' => 'Hongaars',
+	'it' => 'Italiaans',
+	'pl' => 'Pools',
+	'pt' => 'Portugees',
+	'ru' => 'Russisch',
+	'es' => 'Spaans',
 ],
 
 /*
@@ -180,7 +180,7 @@ $lang = [
 'RemovingWritePrivilege' => 'Removing Write Privilege',
 'InstallationComplete' => 'Installatie is voltooid',
 'ThatsAll' => 'Dat is alles! U kunt nu <a href="%1">view your WackoWiki site</a>.',
-'SecurityConsiderations' => 'Security Considerations',
+'SecurityConsiderations' => 'Beveiligingsoverwegingen',
 'SecurityRisk' => 'Echter, u wordt geadviseerd om schrijfrechten op <code>config.php</code> te verwijderen nu het is weggeschreven. Door de schrijfrechten te handhaven creert u een veiligheidsrisico!',
 'RemoveSetupDirectory' => 'You should delete the "setup" directory now that the installation process has been completed.',
 'ErrorGivePrivileges' => 'Het configuratie bestand <code>config.php</code> Geen schrijf rechten. U dient uw webserver tijdelijk schrijfrechten te geven op uw WackoWiki directory, of een lege bestand met de naam <code>config.php</code> (<code>touch config.php ; chmod 666 config.php</code>; vergeet niet om de schrijfrechten later te verwijderen, ie <code>chmod 644 config.php</code>). Als, voor welke reden dan ook,for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as <code>config.php</code> into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="http://wackowiki.sourceforge.net/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
