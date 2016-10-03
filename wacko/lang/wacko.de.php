@@ -1092,7 +1092,7 @@ $wacko_translation = [
 		'14'	=> '[UTC + 14] Line Island Time',
 		],
 
-	'LanguageArray'	=>  [
+	'LanguageArray'	=> [
 		'bg' => 'Bulgarisch',
 		'da' => 'Dänisch',
 		'nl' => 'Niederländisch',

@@ -1095,7 +1095,7 @@ $wacko_translation = [
 		'14'	=> '[UTC + 14] Остров Лайн',
 	],
 
-	'LanguageArray'	=>  [
+	'LanguageArray'	=> [
 		'bg' => 'болгарский',
 		'da' => 'датский',
 		'nl' => 'нидерландский',

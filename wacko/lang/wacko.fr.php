@@ -112,10 +112,10 @@ $wacko_translation = [
 	'NumerateLinks'				=> 'Numérotation des liens en vue d&rsquo;impression',
 	'Typografica'				=> 'Correction automatique de la typographie lors de l&rsquo;affichage',
 	'Comment'					=> 'Commentaire',
-	'Comments0'				=> 'Cette page n&rsquo;a pas été commentée.',
-	'Comments1'				=> 'Cette page a suscité un commentaire.',
-	'CommentsN'				=> 'Cette page a suscité %1 commentaires.',
-	'Comments'				=> 'Commentaires',
+	'Comments0'					=> 'Cette page n&rsquo;a pas été commentée.',
+	'Comments1'					=> 'Cette page a suscité un commentaire.',
+	'CommentsN'					=> 'Cette page a suscité %1 commentaires.',
+	'Comments'					=> 'Commentaires',
 	'CommentEdited'				=> 'édité',
 	'Links'						=> 'Liens',
 	'Version'					=> 'Version',
@@ -1092,7 +1092,7 @@ $wacko_translation = [
 		'14'	=> '[UTC + 14] Île de Wight',
 	],
 
-	'LanguageArray'	=>  [
+	'LanguageArray'	=> [
 		'bg' => 'Bulgare',
 		'da' => 'Danois',
 		'nl' => 'Néerlandais',

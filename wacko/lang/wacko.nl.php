@@ -1092,7 +1092,7 @@ $wacko_translation = [
 		'14'	=> '[GMT + 14] Line Eilanden tijd',
 	],
 
-	'LanguageArray'	=>  [
+	'LanguageArray'	=> [
 		'bg' => 'Bulgaars',
 		'da' => 'Deens',
 		'nl' => 'Nederlands',
