@@ -25,6 +25,8 @@ $_root		= $root; // without slash -> LIKE /%
 $root		= $root.'/';
 
 if (!isset($depth)) $depth = '';
+// TODO: set default depth level via config
+// TODO: show missing sublevels 
 if (!$depth || $depth < 1)
 {
 	$depth	= 1;
@@ -60,8 +62,7 @@ if ($pages = $this->db->load_all(
 			if (substr_count($pages[$k]['tag'], '/') < $max_level)
 			{
 				$_pages[]	= $pages[$k];
-				$acl_str[]	= $pages[$k]['page_id'];
-				$sup_str[]	= $pages[$k]['supertag'];
+				$page_ids[]	= $pages[$k]['page_id'];
 			}
 		}
 
@@ -78,7 +79,7 @@ if ($pages = $this->db->load_all(
 		if ($links = $this->db->load_all(
 			"SELECT {$this->page_meta} ".
 			"FROM {$this->db->table_prefix}page ".
-			"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", true))
+			"WHERE page_id IN ('".implode("', '", $page_ids)."')", true))
 		{
 			foreach ($links as $link)
 			{
@@ -93,7 +94,7 @@ if ($pages = $this->db->load_all(
 		if ($acls = $this->db->load_all(
 			"SELECT page_id, privilege, list ".
 			"FROM {$this->db->table_prefix}acl ".
-			"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) ".
+			"WHERE page_id IN ( '".implode("', '", $page_ids)."' ) ".
 				"AND privilege = 'read'", true))
 		{
 			foreach ($acls as $acl)
@@ -143,6 +144,8 @@ if ($pages = $this->db->load_all(
 
 			$i	= 0;
 			$ul	= 0;
+
+			# Ut::debug_print_r($pages);
 
 			foreach ($pages as $page)
 			{
