@@ -38,30 +38,30 @@ if (isset($route['engine']))
 
 switch ($route['route'])
 {
-case 'install':
-	Installer::run($db);
-	// NEVER BEEN HERE
+	case 'install':
+		Installer::run($db);
+		// NEVER BEEN HERE
 
-case 'static':
-	$http->sendfile($route['static'], null, $route['age']);
-	$http->terminate();
+	case 'static':
+		$http->sendfile($route['static'], null, $route['age']);
+		$http->terminate();
 
-case 'freecap':
-	$http->no_cache();
-	$sess = & $http->sess;
-	include 'lib/captcha/freecap.php';
-	$http->terminate();
+	case 'freecap':
+		$http->no_cache();
+		$sess = & $http->sess;
+		include 'lib/captcha/freecap.php';
+		$http->terminate();
 
-case 'admin':
-	$config = & $db;
-	include 'admin/admin.php';
-	break;
+	case 'admin':
+		$config = & $db;
+		include 'admin/admin.php';
+		break;
 
-case 'wacko':
-	$http->check_cache($route['page'], $route['method']);
-	$engine->run($route['page'], $route['method']);
-	$http->store_cache();
-	break;
+	case 'wacko':
+		$http->check_cache($route['page'], $route['method']);
+		$engine->run($route['page'], $route['method']);
+		$http->store_cache();
+		break;
 }
 
 include 'class/final.php';
