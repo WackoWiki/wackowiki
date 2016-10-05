@@ -24,6 +24,7 @@ if (!isset($letter))	$letter = '';
 if (!isset($lang))		$lang = '';
 if (!isset($max))		$max = null;
 
+$tag		= $page; // use tag from here on
 $title		= (int)$title;
 $_alnum		= '/'.$this->language['ALPHANUM'].'/S';
 
@@ -60,7 +61,7 @@ if (!isset($letters)
 		"WHERE comment_on_id = '0' ".
 			"AND deleted = '0' ".
 			($page
-				? "AND supertag LIKE " . $this->db->q($this->translit($page) . '/%') . " "
+				? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 				: "").
 			($lang
 				? "AND page_lang = " . $this->db->q($lang) . " "
@@ -73,9 +74,9 @@ if (!isset($letters)
 
 	$letters = [];
 
-	foreach ($pages as $page)
+	foreach ($pages as $_page)
 	{
-		if (($ch = $get_letter(($title)?  $page['title'] : $page['tag'])) !== '')
+		if (($ch = $get_letter(($title)?  $_page['title'] : $_page['tag'])) !== '')
 		{
 			if (array_key_exists($ch, $letters))
 			{
@@ -95,7 +96,7 @@ $count = $this->db->load_single(
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
 		($page
-			? "AND supertag LIKE " . $this->db->q($this->translit($page) . '/%') . " "
+			? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 			: "").
 		($lang
 			? "AND page_lang = " . $this->db->q($lang) . " "
@@ -120,7 +121,7 @@ if (($pages = $this->db->load_all(
 	"WHERE comment_on_id = '0' ".
 		"AND deleted = '0' ".
 		($page
-			? "AND supertag LIKE " . $this->db->q($this->translit($page) . '/%') . " "
+			? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 			: "").
 		($lang
 			? "AND page_lang = " . $this->db->q($lang) . " "
