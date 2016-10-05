@@ -168,7 +168,7 @@ class Ut
 	{
 		echo '<pre>';
 		print_r($array);
-		echo '</pre>';
+		echo '</pre>' . "\n";
 	}
 
 	static function dbg()
