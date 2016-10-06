@@ -81,9 +81,9 @@ if ($this->has_access('read'))
 		}
 
 		$c = 0;
-		$a = count($revisions);
-		$diff_class = '';
-		$this->parent_size = 0;
+		$revision_count		= count($revisions);
+		$diff_class			= '';
+		$this->parent_size	= 0;
 
 		// get size diff to parent version
 		$r_revisions = array_reverse($revisions);
@@ -111,22 +111,6 @@ if ($this->has_access('read'))
 			// page_size change
 			$size_delta = $this->rev_delta[$page['revision_id']];
 
-			if ($size_delta > 0)
-			{
-				$diff_class = 'diff-pos';
-				$size_delta = '+' . number_format($size_delta, 0, ',', '.');
-			}
-			else if($size_delta < 0)
-			{
-				$diff_class = 'diff-neg';
-				$size_delta = number_format($size_delta, 0, ',', '.');
-			}
-			else
-			{
-				$diff_class = 'diff-zero';
-				$size_delta = '±' . $size_delta;
-			}
-
 			echo '<li>';
 			echo '<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>';
 			echo '<input type="radio" name="a" value="'.(!$c ? '-1' : $page['revision_id']).'" '.($c == 0 ? 'checked="checked"' : '').' />';
@@ -134,7 +118,7 @@ if ($this->has_access('read'))
 						'<input type="radio" name="b" value="'.(!$c ? '-1' : $page['revision_id']).'" '.($c == 1 ? 'checked="checked"' : '').' />';
 			echo $place_holder.'&nbsp;
 						<a href="'.$this->href('show', '', 'revision_id='.$page['revision_id']).'">'.$this->get_time_formatted($page['modified']).'</a>';
-			echo '<span style="display: inline-block; width:130px;">'."&nbsp; — (".$this->binary_multiples($page['page_size'], false, true, true).') <span class="'.$diff_class.'">'.$size_delta."</span></span> ";
+			echo '<span style="display: inline-block; width:130px;">'."&nbsp; — (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
 			echo $place_holder."&nbsp;".$this->_t('By')." ".
 						$this->user_link($page['user_name'], '', true, false);
 			echo $edit_note;
@@ -166,7 +150,7 @@ if ($this->has_access('read'))
 
 		echo "</ul>\n<br />\n";
 
-		if ($max && $a > $max)
+		if ($max && $revision_count > $max)
 		{
 			echo  '<a href="'.$this->href('revisions', '', 'show=all').'">'.$this->_t('RevisionsShowAll')."</a><br /><br />\n";
 		}

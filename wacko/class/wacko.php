@@ -1514,34 +1514,34 @@ class Wacko
 		return $count? $count['n'] : 0;
 	}
 
-	function load_pages_linking_to($tag, $for = '')
+	function load_pages_linking_to($to_tag, $tag = '')
 	{
 		return $this->db->load_all(
 			"SELECT p.page_id, p.tag AS tag, p.title ".
 			"FROM ".$this->db->table_prefix."page_link l ".
 				"INNER JOIN ".$this->db->table_prefix."page p ON (p.page_id = l.from_page_id) ".
-			"WHERE ".($for
-				? "p.tag LIKE " . $this->db->q($for . '/%') . " AND "
+			"WHERE ".($tag
+				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 				: "").
-				"(l.to_supertag = " . $this->db->q($this->translit($tag)) . ") ".
+				"(l.to_supertag = " . $this->db->q($this->translit($to_tag)) . ") ".
 			"ORDER BY tag", true);
 	}
 
-	function load_file_usage($file_id, $for = '')
+	function load_file_usage($file_id, $tag = '')
 	{
 		return $this->db->load_all(
 			"SELECT p.page_id, p.tag AS tag, p.title ".
 			"FROM ".$this->db->table_prefix."file_link l ".
 				"INNER JOIN ".$this->db->table_prefix."page p ON (p.page_id = l.page_id) ".
 				"INNER JOIN ".$this->db->table_prefix."upload u ON (u.upload_id = l.file_id) ".
-			"WHERE ".($for
-					? "p.tag LIKE " . $this->db->q($for . '/%') . " AND "
+			"WHERE ".($tag
+					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 					: "").
 				"l.file_id = '".(int) $file_id."' ".
 			"ORDER BY tag", true);
 	}
 
-	function load_changed($limit = 100, $for = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
+	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
 	{
 		// count pages
 		$count_pages = $this->db->load_single(
@@ -1552,8 +1552,8 @@ class Wacko
 				($from
 					? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
 					: "").
-				($for
-					? "AND p.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+				($tag
+					? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 					: "").
 				($minor_edit
 					? "AND p.minor_edit = '0' "
@@ -1569,15 +1569,17 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if (($pages = $this->db->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, u.user_name ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name ".
 		"FROM ".$this->db->table_prefix."page p ".
 			"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+			"INNER JOIN ".$this->db->table_prefix."revision r1 ON (p.page_id = r1.page_id) ".
+			"LEFT JOIN ".$this->db->table_prefix."revision r2 ON (p.page_id = r2.page_id AND r1.revision_id < r2.revision_id) ".
 		"WHERE p.comment_on_id = '0' ".
 			($from
 				? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
 				: "").
-			($for
-				? "AND p.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+			($tag
+				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 				: "").
 			($minor_edit
 				? "AND p.minor_edit = '0' "
@@ -1588,6 +1590,7 @@ class Wacko
 			(!$default_pages
 				? "AND (u.account_type = '0' OR p.user_id = '0') "
 				: "").
+			"AND r2.revision_id IS NULL ".
 		"ORDER BY p.modified DESC ".
 		$pagination['limit'], true)))
 		{
@@ -1602,8 +1605,8 @@ class Wacko
 				"INNER JOIN ".$this->db->table_prefix."page p ON (a.page_id = p.page_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND a.page_id = p.page_id ".
-				($for
-					? "AND p.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+				($tag
+					? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 					: '').
 				"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
@@ -1619,7 +1622,7 @@ class Wacko
 		}
 	}
 
-	function load_comment($limit = 100, $for = '', $deleted = 0)
+	function load_comment($limit = 100, $tag = '', $deleted = 0)
 	{
 		$limit = $this->get_list_count($limit);
 
@@ -1629,8 +1632,8 @@ class Wacko
 			"LEFT JOIN ".$this->db->table_prefix."user u ON (c.user_id = u.user_id) ".
 			"LEFT JOIN ".$this->db->table_prefix."page p ON (c.comment_on_id = p.page_id) ".
 		"WHERE c.comment_on_id <> '0' ".
-			($for
-				? "AND p.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+			($tag
+				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 				: "").
 			($deleted != 1
 				? "AND p.deleted <> '1' AND c.deleted <> '1' "
@@ -1652,8 +1655,8 @@ class Wacko
 				"INNER JOIN ".$this->db->table_prefix."page p ON (a.page_id = p.page_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND a.page_id = p.page_id ".
-					($for
-						? "AND p.supertag LIKE " . $this->db->q($this->translit($for) . '/%') . " "
+					($tag
+						? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 						: "").
 				"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
@@ -7466,6 +7469,27 @@ class Wacko
 		}
 
 		return $x;
+	}
+
+	function delta_formatted($size_delta)
+	{
+		if ($size_delta > 0)
+		{
+			$diff_class = 'diff-pos';
+			$size_delta = '+' . number_format($size_delta, 0, ',', '.');
+		}
+		else if($size_delta < 0)
+		{
+			$diff_class = 'diff-neg';
+			$size_delta = number_format($size_delta, 0, ',', '.');
+		}
+		else
+		{
+			$diff_class = 'diff-zero';
+			$size_delta = '±' . $size_delta;
+		}
+
+		return '<span class="' . $diff_class . '">' . $size_delta . '</span>';
 	}
 
 	// to use by actions to add some inside <head> e.g. to adding custom css
