@@ -49,6 +49,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 	echo '<ul class="ul_list">'."\n";
 
 	$curday = '';
+
 	foreach ($pages as $i => $page)
 	{
 		if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
@@ -96,6 +97,9 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
 
+			// page_size change
+			$size_delta			= $page['page_size'] - $page['parent_size'];
+
 			// print entry
 			echo '<li class="lined'.$viewed.'"><span class="dt">'.
 			(!$this->hide_revisions
@@ -107,10 +111,12 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 				? $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
 				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
 			).
+
 			" . . . . . . . . . . . . . . . . <small>".
 			$this->user_link($page['user_name'], '', true, false).' '.
 			$review.' '.
 			$edit_note.
+			# ' ' . $this->delta_formatted($size_delta) . // TODO: look odd here
 			"</small></li>\n";
 		}
 	}
