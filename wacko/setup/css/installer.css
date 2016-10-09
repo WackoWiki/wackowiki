@@ -159,6 +159,19 @@ hr {
 	margin: 10px 0px 0px 5px;
 }
 
+.warning {
+	border: 1px solid #ffee66;
+	width: auto;
+	background-color: #ffffdd;
+	background-image: url('../image/important.svg');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px 43px;
+	padding: 10px 10px 10px 40px;
+	position: relative;
+}
+
 /*
    Version Check Specific
 */
