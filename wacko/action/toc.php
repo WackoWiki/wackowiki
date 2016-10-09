@@ -86,7 +86,7 @@ if ($_page)
 							$_level--;
 						}
 
-						// if left lower level, nothing else to do.
+						// if left lower level, nothing else to do
 						// store and increase the depth meter item
 						$depth = $toc[$i][4];
 
@@ -122,7 +122,7 @@ if ($_page)
 							}
 						}
 
-						// Human content TOC
+						// human content TOC
 						$toc[$i][5] = $num;					// toc number, e.g. 2.4.1
 						$toc[$i][6] = $toc[$i][1];			// toc title
 
@@ -199,7 +199,7 @@ if ($_page)
 							if (($diff !== 1 && $j !== 0) || ($j == 0 && $i == 0) || $j > 0)
 							{
 								// open nested <li> tag
-								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs.
+								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $_tabs.
 									"<li>".
 									#"<!--ONE: [".$ul."]: (".$j.") open nested list item-->".
 									"\n";
@@ -207,7 +207,7 @@ if ($_page)
 									$ident_level['li']++;
 							}
 
-							echo $tabs[($ident_level['ul'] + $ul - 1)].$_tabs."\t".
+							echo $tabs[($ident_level['ul'] + $ul - 1)] . $_tabs . "\t".
 								"<ul>".
 								#"<!--ONE: [".$ul.']: '.$diff.'->('.$j.") open nested list-->".
 								"\n";
@@ -270,11 +270,11 @@ if ($_page)
 
 				# FOUR
 				// open list item element
-				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs.
+				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $_tabs.
 					"<li>".
 					#"<!--FOUR: [".$ul."]: (".$i.")".$ident_level['li']." begin element-->".
 					"\n";
-				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].$_tabs."\t".
+				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $_tabs . "\t".
 					'<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
 						(!empty($numerate)
 							?	'<span class="tocnumber">'.$toc_item[5].'</span>'
