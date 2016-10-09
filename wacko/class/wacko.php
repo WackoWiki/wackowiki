@@ -499,6 +499,12 @@ class Wacko
 
 			if (($allow = preg_split('/[\s,]+/', $this->db->allowed_languages, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
 			{
+				// system language is always allowed
+				if (!in_array($this->db->language, $allow))
+				{
+					$allow[] = $this->db->language;
+				}
+
 				$list = array_intersect($list, $allow);
 			}
 

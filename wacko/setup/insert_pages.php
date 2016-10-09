@@ -25,6 +25,12 @@ if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 	if ($config['allowed_languages'])
 	{
 		$lang_list = explode(',', $config['allowed_languages']);
+
+		// system language is always allowed
+		if (!in_array($config['language'], $lang_list))
+		{
+			$lang_list[] = $config['language'];
+		}
 	}
 	else
 	{
