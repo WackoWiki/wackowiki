@@ -39,7 +39,7 @@ $wacko_translation = [
 	'NewAccountIP'				=> 'Von IP-Adresse:',
 	'NewAccountSignupInfo'		=> 'Das folgende Konto wurde angelegt:',
 
-	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
+	'UserWaitingApproval'		=> 'Eine E-Mail wurde an den Administrator gesendet. Der Administrator wird die angegebenen Informationen überprüfen, und die Anfrage für ein neues Konto zulassen oder ablehnen.',
 	'UserRequiresApproval'		=> 'Um den Benutzer für %1 zuzulassen oder abzulehnen gehe ins Admin-Panel.',
 	'UserApprovalInfo'			=> 'Nachdem du dich registriert hast, wird deine Registrierung zur Freischaltung an den Administrator der Seite geschickt. Du erhältst dann eine E-Mail mit weiteren Anweisungen.',
 
@@ -64,7 +64,7 @@ $wacko_translation = [
 	'Session'					=> 'Sitzung',
 	'SessionTip'				=> 'Parameter der aktuellen Sitzung',
 	'SessionDuration'			=> 'Sitzungsdauer',
-	'SessionDurationSession'	=> 'browser session',
+	'SessionDurationSession'	=> 'Browser-Sitzung',
 	'SessionDurationDay'		=> '1 Tag',
 	'SessionDurationWeek'		=> '1 Woche',
 	'SessionDurationMonth'		=> '1 Monat',
@@ -249,7 +249,7 @@ $wacko_translation = [
 
 	// Groups action
 	'GroupsSearch'				=> 'Suche Gruppe',
-	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
+	'GroupsNoMatching'			=> 'Keine passenden Gruppen gefunden. Try a softer search criteria.',
 	'GroupsFilter'				=> 'Suche',
 	'GroupsOpenProfile'			=> 'Profil anzeigen',
 	'GroupsName'				=> 'Gruppe',
@@ -289,16 +289,16 @@ $wacko_translation = [
 	'DiffMode0'					=> 'vollständiger Vergleich',
 	'DiffMode1'					=> 'einfacher Vergleich',
 	'DiffMode2'					=> 'Quelltext',
-	'DiffMode3'					=> 'Side by side',
+	'DiffMode3'					=> 'Nebeneinander',
 	'DiffMode4'					=> 'Inline',
 	'DiffMode5'					=> 'Unified',
-	'DiffMode6'					=> 'Context',
+	'DiffMode6'					=> 'Kontext',
 	'RevisionsShowAll'			=> 'Alle Revisionen anzeigen...',
 	'ShowDifferencesButton'		=> 'Zeige Unterschiede',
 	'CancelDifferencesButton'	=> 'Abbrechen und zurück zur Seite',
 	'Comparison'				=> 'Vergleich von %3 vom %1 und %2',
-	'SimpleDiffAdditions'		=> '<strong>hinzugefügt:</strong>',
-	'SimpleDiffDeletions'		=> '<strong>entfernt:</strong>',
+	'SimpleDiffAdditions'		=> 'hinzugefügt:',
+	'SimpleDiffDeletions'		=> 'entfernt:',
 	'NoDifferences'				=> 'Keine Unterschiede.',
 	'History'					=> 'Historie',
 	'ReEditOldRevision'			=> 'Editiere diese alte Version erneut',
@@ -497,11 +497,11 @@ $wacko_translation = [
 	'NotifyAlways'				=> 'Immer',
 	'NotifyPending'				=> 'Ausstehend',
 	'NotifyDigest'				=> 'Sammeln',
-	'NotifyPendingPageTip'		=> 'Only one notification is sent for the first page change of a page you are watching.',
-	'NotifyPendingCommentTip'	=> 'Only one notification is sent for the first comment to a page you are watching.',
-	'NotifyPendingTip'			=> 'Notification is automatically re-enabled when you visit the current version of the page.',
+	'NotifyPendingPageTip'		=> 'Es wird nur für die erste Änderung einer beobachteten Seite eine Benachrichtigung gesendet.',
+	'NotifyPendingCommentTip'	=> 'Es wird nur für den ersten Kommentar einer beobachteten Seite eine Benachrichtigung gesendet.',
+	'NotifyPendingTip'			=> 'Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
 
-	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
+	'FurtherPending'			=> 'Es wird keine weitere Benachrichtigungen für den Fall weiterer Änderungen geben, es sei denn, die Seite wird wieder besucht.',
 
 	'UserSettingsEmailMe'		=> 'Sende E-Mail wenn ...',
 
@@ -605,7 +605,7 @@ $wacko_translation = [
 	'UsersComments'				=> 'Kommentare',
 	'UsersUploads'				=> 'Uploads',
 	'UploadQuota'				=> 'Kontingent belegt',
-	'UploadQuotaTip'			=> 'Upload Kontingent',
+	'UploadQuotaTip'			=> 'Upload-Kontingent',
 	'UsersLogins'				=> 'Anmeldungen',
 	'UsersRevisions'			=> 'Revisionen',
 	'UsersSignup'				=> 'Anmeldung',
@@ -823,8 +823,8 @@ $wacko_translation = [
 
 	// license action
 	'DistributedUnder'			=> 'Dieses Werk ist lizenziert unter einer ',
-	'AuthorsDisplayHint'		=> 'The list of authors will be displayed when saving the page.',
-	'AnonymousUsers'			=> 'Anonymous users',
+	'AuthorsDisplayHint'		=> 'Die Liste der Autoren wird angezeigt, wenn die Seite gespeichert wurde.',
+	'AnonymousUsers'			=> 'Anonyme Benutzer',
 	'License'					=> [
 		'CC-BY-ND'		=> 'Creative Commons Namensnennung - Keine Bearbeitungen',
 		'CC-BY-NC-SA'	=> 'Creative Commons Namensnennung - Nicht kommerziell - Weitergabe unter gleichen Bedingungen',
