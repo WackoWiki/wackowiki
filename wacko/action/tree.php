@@ -26,7 +26,7 @@ $root		= $root.'/';
 
 if (!isset($depth)) $depth = '';
 // TODO: set default depth level via config
-// TODO: show missing sublevels 
+// TODO: show missing sublevels
 if (!$depth || $depth < 1)
 {
 	$depth	= 1;
@@ -79,7 +79,7 @@ if ($pages = $this->db->load_all(
 		if ($links = $this->db->load_all(
 			"SELECT {$this->page_meta} ".
 			"FROM {$this->db->table_prefix}page ".
-			"WHERE page_id IN ('".implode("', '", $page_ids)."')", true))
+			"WHERE page_id IN ('" . implode("', '", $page_ids) . "')", true))
 		{
 			foreach ($links as $link)
 			{
@@ -94,7 +94,7 @@ if ($pages = $this->db->load_all(
 		if ($acls = $this->db->load_all(
 			"SELECT page_id, privilege, list ".
 			"FROM {$this->db->table_prefix}acl ".
-			"WHERE page_id IN ( '".implode("', '", $page_ids)."' ) ".
+			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) ".
 				"AND privilege = 'read'", true))
 		{
 			foreach ($acls as $acl)
@@ -115,7 +115,7 @@ if ($pages = $this->db->load_all(
 				else
 				{
 					$legend = $this->_t('TreeClusterTitle');
-					$legend = Ut::perc_replace($legend, $this->link('/'.$root, '', rtrim($root, '/'))).':';
+					$legend = Ut::perc_replace($legend, $this->link('/' . $root, '', rtrim($root, '/'))).':';
 				}
 
 				echo '<nav class="layout-box"><p class="layout-box"><span>'.$legend."</span></p>\n";
@@ -125,14 +125,14 @@ if ($pages = $this->db->load_all(
 		{
 			if (!$nomark)
 			{
-				echo '<nav class="layout-box"><p class="layout-box"><span>'.$this->_t('TreeSiteTitle')."</span></p>\n";
+				echo '<nav class="layout-box"><p class="layout-box"><span>' . $this->_t('TreeSiteTitle') . "</span></p>\n";
 			}
 		}
 
 		// tree
 		if (count($pages) > $limit)
 		{
-			echo '<em>'.$this->_t('TreeTooBig').'</em><br/>';
+			echo '<em>' . $this->_t('TreeTooBig') . '</em><br/>';
 		}
 		else
 		{
@@ -140,7 +140,7 @@ if ($pages = $this->db->load_all(
 			$root_level = substr_count($root, '/');
 
 			// begin list
-			echo '<ul class="tree">'."\n";
+			echo '<ul class="tree">' . "\n";
 
 			$i	= 0;
 			$ul	= 0;
@@ -158,6 +158,7 @@ if ($pages = $this->db->load_all(
 
 				// check page level
 				$cur_level	= substr_count($page['tag'], '/');
+				if (!isset($prev_level)) $prev_level	= 0;
 
 				// indents (sublevels)
 				if ($i > 0)
@@ -204,7 +205,7 @@ if ($pages = $this->db->load_all(
 				}
 				else
 				{
-					echo $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0);
+					echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, '', 0);
 				}
 
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '</strong>';
@@ -243,7 +244,7 @@ if ($pages = $this->db->load_all(
 	{
 		// no results in given level $depth
 		$title_empty_tree = $this->_t('TreeEmptyLevels');
-		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/'.$root, '', rtrim($root, '/')));
+		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/' . $root, '', rtrim($root, '/')));
 		echo '<em>'.$title_empty_tree.'</em><br/>';
 	}
 }
@@ -252,7 +253,7 @@ else
 	if (!$nomark)
 	{
 		$title_empty_tree = $this->_t('TreeEmpty');
-		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/'.$root, '', rtrim($root, '/')));
+		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/' . $root, '', rtrim($root, '/')));
 		echo '<em>'.$title_empty_tree.'</em><br/>';
 	}
 }
