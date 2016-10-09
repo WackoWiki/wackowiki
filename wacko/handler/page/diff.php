@@ -139,7 +139,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		if ($added)
 		{
 			// remove blank lines
-			echo "<br />\n" . $this->_t('SimpleDiffAdditions') . "<br />\n\n";
+			echo "<br />\n" . '<strong>' . $this->_t('SimpleDiffAdditions') . '</strong>' . "<br />\n\n";
 			echo '<div class="additions">';
 			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
@@ -149,7 +149,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 
 		if ($deleted)
 		{
-			echo "<br />\n\n" . $this->_t('SimpleDiffDeletions') . "<br />\n\n";
+			echo "<br />\n\n" . '<strong>' . $this->_t('SimpleDiffDeletions') . '</strong>' . "<br />\n\n";
 			echo '<div class="deletions">';
 			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
