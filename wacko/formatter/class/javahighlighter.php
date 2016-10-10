@@ -116,7 +116,7 @@ class JavaHighlighter{
 		if (!is_array($array)) return FALSE;
 		if (empty($array)) return FALSE;
 
-		foreach($array as $index=>$string)
+		foreach ($array as $index=>$string)
 		if (strcasecmp($needle, $string) == 0) return intval($index);
 		return FALSE;
 	}
@@ -153,7 +153,7 @@ class JavaHighlighter{
 
 		// On va essayer de comparer le caractere courrant avec le 1ø
 		// caractere de chaque premier delimiteur
-		foreach($array as $delimiterarray) {
+		foreach ($array as $delimiterarray) {
 			$delimiter1 = $delimiterarray[0];
 
 			// Si le 1ø char correspond

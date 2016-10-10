@@ -80,7 +80,7 @@ if (isset($_POST['_user_menu']))
 	$a			= $_menu;
 	$b			= [];
 
-	foreach($a as $k => $v)
+	foreach ($a as $k => $v)
 	{
 		$b[$k]['user_id']		= $v['user_id'];
 		$b[$k]['menu_id']		= $v['menu_id'];
@@ -96,7 +96,7 @@ if (isset($_POST['_user_menu']))
 		// reposition
 		$data = [];
 
-		foreach($object->data['user_menu'] as $k => $item)
+		foreach ($object->data['user_menu'] as $k => $item)
 		{
 			$data[] = [
 				'menu_id'		=> $item['menu_id'],
@@ -106,13 +106,13 @@ if (isset($_POST['_user_menu']))
 
 		usort ($data, "menu_sorting");
 
-		foreach($data as $k => $item)
+		foreach ($data as $k => $item)
 		{
 			$data[$k]['menu_position'] = $k + 1;
 		}
 
 		// save
-		foreach($data as $item)
+		foreach ($data as $item)
 		{
 			$this->db->sql_query(
 				"UPDATE ".$this->db->table_prefix."menu SET ".
@@ -199,7 +199,7 @@ if (isset($_POST['_user_menu']))
 	{
 		$deletion = '';
 
-		foreach($object->data['user_menu'] as $item)
+		foreach ($object->data['user_menu'] as $item)
 		{
 			if (isset($_POST['delete_'.$item['menu_id']]))
 			{
@@ -280,7 +280,7 @@ if ($_user_id)
 
 		echo '</tr>';
 
-		foreach($_menu as $menu_item)
+		foreach ($_menu as $menu_item)
 		{
 			echo '<tr class="lined">
 			<td class="">

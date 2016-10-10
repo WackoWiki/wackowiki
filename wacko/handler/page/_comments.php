@@ -55,9 +55,9 @@ if ($this->has_access('read'))
 		$this->sess->show_comments[$this->page['page_id']] = ($this->get_user_setting('show_comments') ? '1' : '0');
 	}
 
-	if(isset($_GET['show_comments']))
+	if (isset($_GET['show_comments']))
 	{
-		switch($_GET['show_comments'])
+		switch ($_GET['show_comments'])
 		{
 			case '0':
 				$this->sess->show_comments[$this->page['page_id']] = 0;

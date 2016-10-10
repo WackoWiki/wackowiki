@@ -158,7 +158,7 @@ class Side
 		{
 			while (!$this->isend() && $this->character != "\n")
 			$this->nextchar();
-			if($this->character=="\n")
+			if ($this->character=="\n")
 			$this->nextchar();
 		}
 	}

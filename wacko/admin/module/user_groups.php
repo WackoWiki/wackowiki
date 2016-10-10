@@ -128,7 +128,7 @@ function admin_user_groups(&$engine, &$module)
 
 						if ($available_users)
 						{
-							foreach($available_users as $user)
+							foreach ($available_users as $user)
 							{
 								echo '<option value="'.$user['user_id'].'">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
 							}
@@ -300,7 +300,7 @@ function admin_user_groups(&$engine, &$module)
 
 					if ($users = $engine->load_users())
 					{
-						foreach($users as $user)
+						foreach ($users as $user)
 						{
 							echo '<option value="'.$user['user_id'].'">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
 						}
@@ -371,7 +371,7 @@ function admin_user_groups(&$engine, &$module)
 
 					if ($users = $engine->load_users())
 					{
-						foreach($users as $user)
+						foreach ($users as $user)
 						{
 							echo '<option value="'.$user['user_id'].'" '.($usergroup['moderator_id'] == $user['user_id'] ? ' selected="selected"' : '').'>'.$user['user_name']."</option>\n";
 						}

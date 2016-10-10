@@ -15,11 +15,11 @@ if (!function_exists('MyGroups'))
 	{
 		$my_groups_count = 0;
 
-		foreach($alias as $group_name => $members)
+		foreach ($alias as $group_name => $members)
 		{
 			$group_members = explode("\\n", $members);
 
-			if(in_array ($user_name, $group_members))
+			if (in_array ($user_name, $group_members))
 			{
 				echo $wacko->group_link($group_name, '', true, false).'<br />';
 
@@ -31,7 +31,7 @@ if (!function_exists('MyGroups'))
 	}
 }
 
-if($user = $this->get_user())
+if ($user = $this->get_user())
 {
 	$alias = $this->db->aliases;
 

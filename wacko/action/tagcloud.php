@@ -105,14 +105,14 @@ if ($tags)
 		];
 	}
 
-	if(!$nomark)
+	if (!$nomark)
 	{
 		echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('TagCloud').":</span></p>\n";
 	}
 
 	print_tag_cloud($this, $this->cloud);
 
-	if(!$nomark)
+	if (!$nomark)
 	{
 		echo "</div>\n";
 	}

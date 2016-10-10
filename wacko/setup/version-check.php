@@ -20,7 +20,7 @@ write_config_hidden_nodes(array('none' => ''));
 	*/
 	?>
 <h2><?php echo $lang['ModRewrite']; ?></h2>
-<p class="notop"><?php echo $lang['ModRewriteInstalled']; ?>   <?php if(function_exists('apache_get_modules')) { echo output_image(in_array('mod_rewrite', apache_get_modules())); } else { echo $lang['ModRewriteStatusUnknown']; } ?></p>
+<p class="notop"><?php echo $lang['ModRewriteInstalled']; ?>   <?php if (function_exists('apache_get_modules')) { echo output_image(in_array('mod_rewrite', apache_get_modules())); } else { echo $lang['ModRewriteStatusUnknown']; } ?></p>
 	<?php
 	/*
 	 Check which database extensions are installed and what versions of the db are there
@@ -41,17 +41,17 @@ write_config_hidden_nodes(array('none' => ''));
 
 	$detected = 0;
 
-	if(extension_loaded('pdo'))
+	if (extension_loaded('pdo'))
 	{
 		// mssql mysql sqlite
 		$drivers = PDO::getAvailableDrivers();
 
-		for($count = 0; $count < count($drivers); $count++)
+		for ($count = 0; $count < count($drivers); $count++)
 		{
 			// If you want to find the name out
 			// print $drivers[$count];
 
-			if(in_array($drivers[$count], $accepted_pdo_drivers))
+			if (in_array($drivers[$count], $accepted_pdo_drivers))
 			{
 				$detected++;
 				break;
@@ -125,7 +125,7 @@ write_config_hidden_nodes(array('none' => ''));
 	?>
 <h2><?php echo $lang['ReadyToInstall']; ?></h2>
 	<?php
-	if($php_version_result && $database_result && $file_permissions_result)
+	if ($php_version_result && $database_result && $file_permissions_result)
 	{
 		?>
 <p><?php echo $lang['Ready'];?></p>
@@ -133,21 +133,21 @@ write_config_hidden_nodes(array('none' => ''));
 <input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
 <?php
 	}
-	else if(!$php_version_result)
+	else if (!$php_version_result)
 	{
 ?>
 <p><?php echo $lang['ErrorMinPHPVersion']; ?></p>
 <input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
 <?php
 	}
-	else if(!$database_result)
+	else if (!$database_result)
 	{
 ?>
 <p><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
 <input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
 <?php
 	}
-	else if(!$file_permissions_result)
+	else if (!$file_permissions_result)
 	{
 ?>
 <p><?php echo $lang['NotePermissions']; ?></p>

@@ -66,7 +66,7 @@ if ($_page)
 			$numbers	= [];
 			$depth		= 0;
 
-			for($i = 0; $i < $toc_len; $i++)
+			for ($i = 0; $i < $toc_len; $i++)
 			{
 				// neither '(p)' nor '(include)'
 				if ($toc[$i][2] < 66666)
@@ -114,7 +114,7 @@ if ($_page)
 						// collect numbering on the array of $ numbers from start to the current depth, allowing zero
 						$num = '';
 
-						for($j = 1; $j <= $depth; $j++)
+						for ($j = 1; $j <= $depth; $j++)
 						{
 							if (isset($numbers[$j]) && $numbers[$j] > 0)
 							{

@@ -191,7 +191,7 @@ $config_db['xml_sitemap_update']			= null;
 $config_db['youarehere_text']				= $config['youarehere_text'];
 #$config_db[''] = $config[''];
 
-foreach($config_db as $key => $value)
+foreach ($config_db as $key => $value)
 {
 	$config_insert .= "(0, '$key', '$value'),";
 }

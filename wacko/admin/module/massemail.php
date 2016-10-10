@@ -109,7 +109,7 @@ $mail_body = '';
 <?php
 			if ($users = $engine->load_users())
 			{
-				foreach($users as $user)
+				foreach ($users as $user)
 				{
 					echo '<option value="'.$user['user_id'].'">'.htmlspecialchars($user['user_name'])."</option>\n";
 				}
@@ -129,7 +129,7 @@ $mail_body = '';
 
 			if ($available_groups)
 			{
-				foreach($available_groups as $group)
+				foreach ($available_groups as $group)
 				{
 					echo '<option value="'.$group['group_id'].'">'.htmlspecialchars($group['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
 				}

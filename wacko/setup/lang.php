@@ -2,12 +2,12 @@
 <?php
 
 write_config_hidden_nodes(array(
-	'language' => 0,
-	'is_update' => '')
+	'language'		=> 0,
+	'is_update'		=> '')
 );
 
 // Check if Upgrade or Fresh Install
-if(array_key_exists('wacko_version', $config))
+if (array_key_exists('wacko_version', $config))
 {
 	if ($config['wacko_version'][0] < 5)
 	{
@@ -20,13 +20,13 @@ if(array_key_exists('wacko_version', $config))
 	{
 		$config['is_update'] = '1';
 		echo '<p>'.preg_replace(array('/%1/', '/%2/'), [$config['wacko_version'], WACKO_VERSION], $lang['UpgradeFromWacko'])."</p>\n";
-		echo '<p class="warning">'.$lang['PleaseBackup']."</p>\n";
+		echo '<p class="warning">' . $lang['PleaseBackup'] . "</p>\n";
 	}
 }
 else
 {
 	$config['is_update'] = '0';
-	echo '<p>'.str_replace('%1', WACKO_VERSION, $lang['FreshInstall'])."</p>\n";
+	echo '<p>' . str_replace('%1', WACKO_VERSION, $lang['FreshInstall']) . "</p>\n";
 }
 
 echo '<input type="hidden" value="'.$config['is_update'].'" name="config[is_update]">';
@@ -54,14 +54,14 @@ foreach($lang_codes as $key => $value)
 	echo '   <input type="radio" id="lang_'.$key.'" name="config[language]" value="'.$key.'"';
 
 	// Default or Selected Language
-	if ( isset ( $_POST['config']['language'] ) )
+	if (isset($_POST['config']['language']))
 	{
-		if ( $_POST['config']['language'] == $key )
+		if ($_POST['config']['language'] == $key)
 		{
 			echo ' checked="checked" ';
 		}
 	}
-	else if ( $config['language'] == $key )
+	else if ($config['language'] == $key)
 	{
 		echo ' checked="checked" ';
 	}

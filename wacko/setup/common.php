@@ -6,12 +6,12 @@ function my_location()
 	global $config;
 
 	// run in tls mode?
-	if ( ($config['tls']
-		&& ( ( ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' )
+	if (($config['tls']
+		&& (((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
 				&& !empty($config['tls_proxy']) )
-			|| ( isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ) ) )
-		|| ( ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' )
-			|| ( isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ) )
+			|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443')))
+		|| ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
+			|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443'))
 	)
 	{
 		$config['base_url'] =	str_replace('http://', 'https://'.($config['tls_proxy'] ? $config['tls_proxy'].'/' : ''), $config['base_url']);
@@ -69,7 +69,7 @@ function available_languages()
 			if ($file != '.'
 			&& $file != '..'
 			&& $file != 'wacko.all.php'
-			&& !is_dir('lang/'.$file)
+			&& !is_dir('lang/' . $file)
 			&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
 			{
 				$lang_list[] = $match[1];
@@ -93,11 +93,11 @@ function test($text, $condition, $error_text = '', $dblink = '')
 
 	echo "            <li>".$text."   ".output_image($condition);
 
-	if(!$condition)
+	if (!$condition)
 	{
-		if($error_text)
+		if ($error_text)
 		{
-			$error_output = "\n".'<ul class="install_error"><li>'.$error_text." <br />";
+			$error_output = "\n" . '<ul class="install_error"><li>' . $error_text . " <br />";
 
 			if ($config['database_driver'] == 'mysqli_legacy')
 			{
@@ -125,11 +125,11 @@ function test_pdo($text, $query, $errorText = '')
 	{
 		test($text, $dblink->query($query), $errorText);
 	}
-	catch(PDOException $e)
+	catch (PDOException $e)
 	{
 		test($text, false, $errorText);
 	}
-	catch(Exception $e)
+	catch (Exception $e)
 	{
 		test($text, false, $errorText);
 	}
@@ -145,7 +145,7 @@ function array_to_str ($arr, $name = '')
 
 	foreach ($arr as $k => $v)
 	{
-		if(is_array($v))
+		if (is_array($v))
 		{
 			$arrays .= array_to_str($v, $k);
 		}
@@ -201,17 +201,17 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$insert_data[]			= [$perm_read_insert,		$lang_global['ErrorInsertingPageReadPermission']];
 	$insert_data[]			= [$perm_write_insert,		$lang_global['ErrorInsertingPageWritePermission']];
 	$insert_data[]			= [$perm_comment_insert,	$lang_global['ErrorInsertingPageCommentPermission']];
-	$insert_data[]			= [$perm_create_insert,	$lang_global['ErrorInsertingPageCreatePermission']];
-	$insert_data[]			= [$perm_upload_insert,	$lang_global['ErrorInsertingPageUploadPermission']];
+	$insert_data[]			= [$perm_create_insert,		$lang_global['ErrorInsertingPageCreatePermission']];
+	$insert_data[]			= [$perm_upload_insert,		$lang_global['ErrorInsertingPageUploadPermission']];
 
-	if($is_menu)
+	if ($is_menu)
 	{
 		$insert_data[]		= [$default_menu_item,		$lang_global['ErrorInsertingDefaultMenuItem']];
 	}
 
-	switch($config_global['database_driver'])
+	switch ($config_global['database_driver'])
 	{
-		case "mysqli_legacy":
+		case 'mysqli_legacy':
 			if (0 == mysqli_num_rows(mysqli_query($dblink_global, $page_select)))
 			{
 				foreach ($insert_data as $data)
@@ -222,16 +222,16 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 						We flag some pages as critical in the insert.**.php file, if these don't get inserted then we have a
 						serious problem and should indicate that to the user.
 					*/
-					if($critical)
+					if ($critical)
 					{
-						if(mysqli_errno($dblink_global) != 0)
+						if (mysqli_errno($dblink_global) != 0)
 						{
-							output_error(Ut::perc_replace($data[1], $tag)." - ".mysqli_error($dblink_global));
+							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . mysqli_error($dblink_global));
 						}
 					}
 				}
 			}
-			else if($critical)
+			else if ($critical)
 			{
 				output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
 			}
@@ -241,7 +241,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 		default:
 			$page_exists = false;
 
-			if($result = @$dblink_global->query($page_select))
+			if ($result = @$dblink_global->query($page_select))
 			{
 				if ($result->fetchColumn() > 0)
 				{
@@ -252,19 +252,19 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 				$result->closeCursor();
 			}
 
-			if(!$page_exists)
+			if (!$page_exists)
 			{
 				foreach ($insert_data as $data)
 				{
 					@$dblink_global->query($data[0]);
 
-					if($critical)
+					if ($critical)
 					{
 						$error = $dblink_global->errorInfo();
 
-						if($error[0] != "00000")
+						if ($error[0] != '00000')
 						{
-							output_error(Ut::perc_replace($data[1], $tag)." - ".($error[2]));
+							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . ($error[2]));
 						}
 					}
 				}
@@ -278,9 +278,9 @@ function set_language($lang)
 {
 	global $config, $language, $languages;
 
-	if ( !isset($languages[$lang]) )
+	if (!isset($languages[$lang]))
 	{
-		$lang_file = 'lang/lang.'.$lang.'.php';
+		$lang_file = 'lang/lang.' . $lang . '.php';
 
 		if (@file_exists($lang_file))
 		{
@@ -291,8 +291,8 @@ function set_language($lang)
 	}
 
 	$language = &$languages[$lang];
-	setlocale(LC_CTYPE,$language['locale']);
-	$language['locale'] = setlocale(LC_CTYPE,0);
+	setlocale(LC_CTYPE, $language['locale']);
+	$language['locale'] = setlocale(LC_CTYPE, 0);
 
 	return $language;
 }
@@ -302,14 +302,14 @@ function translit($tag, $lang)
 {
 	$language = set_language($lang);
 
-	$tag = str_replace( '//', '/', $tag );
-	$tag = str_replace( '-', '', $tag );
-	$tag = str_replace( ' ', '', $tag );
-	$tag = str_replace( "'", '_', $tag );
+	$tag = str_replace('//', '/', $tag);
+	$tag = str_replace('-', '', $tag);
+	$tag = str_replace(' ', '', $tag);
+	$tag = str_replace("'", '_', $tag);
 
-	$tag = @strtr( $tag, $language['TranslitLettersFrom'], $language['TranslitLettersTo'] );
-	$tag = @strtr( $tag, $language['TranslitBiLetters'] );
-	$tag = strtolower( $tag );
+	$tag = @strtr($tag, $language['TranslitLettersFrom'], $language['TranslitLettersTo']);
+	$tag = @strtr($tag, $language['TranslitBiLetters']);
+	$tag = strtolower($tag);
 
 	return rtrim($tag, '/');
 }

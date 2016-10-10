@@ -41,7 +41,7 @@ $years	= $polls_obj->poll_years();
 
 
 // print list
-if(!$nomark)
+if (!$nomark)
 {
 	echo '<div class="layout-box"><p class="layout-box"><span>'.
 			($year == 0
@@ -106,7 +106,7 @@ if(!$nomark)
 
 	echo '</small>';
 
-if(!$nomark)
+if (!$nomark)
 {
 	echo "</div>\n";
 }

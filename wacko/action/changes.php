@@ -116,7 +116,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			$this->user_link($page['user_name'], '', true, false).' '.
 			$review.' '.
 			$edit_note.
-			# ' ' . $this->delta_formatted($size_delta) . // TODO: look odd here
+			# ' ' . $this->delta_formatted($size_delta) . // TODO: looks odd here
 			"</small></li>\n";
 		}
 	}

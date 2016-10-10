@@ -152,17 +152,17 @@ $special_keyword2 = [
 
 	$css = str_replace(":", "\:", $css);
 
-	foreach($keywords as $i)
+	foreach ($keywords as $i)
 	{
 		$css = str_replace($i, '<span style="color: ##oct##;">' .$i. '</span>', $css);
 	}
 
-	foreach($special_keywords as $i)
+	foreach ($special_keywords as $i)
 	{
 		$css = str_replace($i . '\:', '<span style="color: ##oct##;">' .$i. '</span>\:', $css);
 	}
 
-	foreach($special_keyword2 as $i)
+	foreach ($special_keyword2 as $i)
 	{
 		$css = preg_replace('/[^-y]' . $i . '/', '<span style="color: ##oct##;">' .$i. '</span>', $css);
 	}

@@ -10,7 +10,7 @@ $lang_global	= $lang;
 
 // TODO: mysqli / mysql pdo PDO: Add charset to the connection string, such as charset=utf8
 // indicate what character set the client will use to send SQL statements to the server
-switch($config_global['database_driver'])
+switch ($config_global['database_driver'])
 {
 	case 'mysqli_legacy':
 		mysqli_set_charset($dblink, $config['database_charset']);
@@ -20,7 +20,7 @@ switch($config_global['database_driver'])
 // Inserting default pages
 $error_inserting_pages = false;
 
-if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
+if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 {
 	if ($config['allowed_languages'])
 	{
@@ -38,7 +38,7 @@ if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 		{
 			while (false !== ($file = readdir($handle)))
 			{
-				if(1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
+				if (1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
 				{
 					$lang_list[] = $match[1];
 				}
@@ -52,12 +52,12 @@ if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 	{
 		unset($page_lang);
 		unset($languages);
-		require_once 'setup/lang/inserts.'.$_lang.'.php';
+		require_once 'setup/lang/inserts.' . $_lang . '.php';
 	}
 }
 else
 {
-	require_once 'setup/lang/inserts.'.$config['language'].'.php';
+	require_once 'setup/lang/inserts.' . $config['language'] . '.php';
 }
 
 ?>

@@ -96,7 +96,7 @@ if (!isset($table))		$table		= 1;
 if (!isset($nodesc))	$nodesc		= '';
 if (!isset($nomark))	$nomark		= '';
 
-if(!isset($group_id))	$group_id	= 'fancybox-thumb';
+if (!isset($group_id))	$group_id	= 'fancybox-thumb';
 
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= '';
@@ -113,7 +113,7 @@ else
 	$limit	= 50;
 }
 
-if(!isset($perrow))
+if (!isset($perrow))
 {
 	$images_row = 5;
 }
@@ -276,7 +276,7 @@ if ($can_view)
 			{
 				if ($table)
 				{
-					if($cur == 0)
+					if ($cur == 0)
 					{
 						echo '<tr>';
 					}
@@ -421,7 +421,7 @@ if ($can_view)
 						"picture_h			= '".(int)$height."', ".
 						"file_ext			= ".$this->db->q($file_page['file_ext'])." "); */
 
-					if($table)
+					if ($table)
 					{
 						if ($cur == 0)
 						{
@@ -437,7 +437,7 @@ if ($can_view)
 
 					echo '<figure class="zoom">';
 
-					if(!$toblank)
+					if (!$toblank)
 					{
 						echo '<a href="'.$this->href('', $this->tag, 'photo='.$linkto.'&amp;token='.$param_token).'">'.$img."</a>\n";
 					}
@@ -452,14 +452,14 @@ if ($can_view)
 							echo '<a href="'.$url.'">'.$img."</a>\n";
 						}
 
-						if(!$nodesc)
+						if (!$nodesc)
 						{
 							echo $caption;
 						}
 
 						echo "</figure>\n";
 
-						if($table)
+						if ($table)
 						{
 							echo("</td>\n");
 						}

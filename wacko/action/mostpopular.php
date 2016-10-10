@@ -52,12 +52,12 @@ else
 	$link		= '';
 }
 
-if(!$nomark)
+if (!$nomark)
 {
 	echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('MostPopularPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
 }
 
-if(!$page)
+if (!$page)
 {
 	$pages = $this->db->load_all(
 		"SELECT page_id, tag, title, hits ".
@@ -69,7 +69,7 @@ else
 {
 	$page = $this->unwrap_link($page);
 
-	if(!$dontrecurse || strtolower($dontrecurse) == 'false')
+	if (!$dontrecurse || strtolower($dontrecurse) == 'false')
 	{
 		// We want to recurse and include all the sub pages of sub pages (and so on) in the listing
 		$pages = $this->db->load_all(
@@ -141,7 +141,7 @@ foreach ($pages as $page)
 
 echo "</table>\n";
 
-if(!$nomark)
+if (!$nomark)
 {
 	echo "</div>\n";
 }

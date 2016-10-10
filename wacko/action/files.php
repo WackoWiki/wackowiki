@@ -164,7 +164,7 @@ if ($can_view)
 		echo '<table class="'.$style.'" >';
 
 
-		foreach($files as $file)
+		foreach ($files as $file)
 		{
 			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 

@@ -21,7 +21,7 @@ $i			= '';
 
 if (isset($this->categories))
 {
-	foreach($this->categories as $id => $category)
+	foreach ($this->categories as $id => $category)
 	{
 		$_category = '<a href="'.$this->href('', $path, 'category='.$id).'" class="tag" rel="tag">'.htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>';
 

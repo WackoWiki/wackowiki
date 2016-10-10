@@ -66,7 +66,7 @@ if ($this->is_admin())
 			}
 
 			// check for false and empty strings
-			if(($contents = fread($fd, filesize($_FILES['_import']['tmp_name']))) === '')
+			if (($contents = fread($fd, filesize($_FILES['_import']['tmp_name']))) === '')
 			{
 				return false;
 			}

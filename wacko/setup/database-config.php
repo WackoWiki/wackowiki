@@ -61,7 +61,7 @@ write_config_hidden_nodes(array(
 echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']) ? $_POST['password'] : '').'" />' . "\n";
 
 	// If none of the PHP SQL extensions are loaded then let the user know there is a problem
-	if(!extension_loaded('mysqli') && !extension_loaded('pdo'))
+	if (!extension_loaded('mysqli') && !extension_loaded('pdo'))
 	{
 ?>
    <p class="notop"><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
@@ -91,9 +91,9 @@ $drivers[]	= ['pdo',		'mysql_pdo',		'PDO MySQL'];
 
 $detected = 0;
 
-for($count = 0; $count < count($drivers); $count++)
+for ($count = 0; $count < count($drivers); $count++)
 {
-	if(extension_loaded($drivers[$count][0]))
+	if (extension_loaded($drivers[$count][0]))
 	{
 		if ($config['is_update'] == false)
 		{
@@ -144,7 +144,7 @@ $detected = 0;
 
 echo '    <select id="config[database_charset]" name="config[database_charset]">';
 
-for($count = 0; $count < count($charset); $count++)
+for ($count = 0; $count < count($charset); $count++)
 {
 	echo '      <li><option value="'.$charset[$count][1].'" '.($config['database_charset'] == $charset[$count][1] ? 'selected="selected"' : '').'>'.$charset[$count][2]."</option></li>\n";
 	$detected++;
@@ -178,7 +178,7 @@ $engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];
 
 $detected = 0;
 
-for($count = 0; $count < count($engines); $count++)
+for ($count = 0; $count < count($engines); $count++)
 {
 	echo '      <li>
 					<input type="radio" id="db_engine_'.$engines[$count][0].'" name="config[database_engine]" value="'.$engines[$count][1].'" '.($detected == 0 ? 'checked="checked"' : '').'>

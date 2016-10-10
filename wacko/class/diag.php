@@ -27,7 +27,7 @@ class Diag
 					 '<p class="debug">Program execution statistics</p>' . "\n<ul>\n";
 
 				// get memory usage
-				if(function_exists('memory_get_peak_usage'))
+				if (function_exists('memory_get_peak_usage'))
 				{
 					$execmem = memory_get_peak_usage(true);
 				}

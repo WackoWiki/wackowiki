@@ -92,7 +92,7 @@ class post_wacko
 				$params		= [];
 				$c			= 0;
 
-				foreach($_matches as $m)
+				foreach ($_matches as $m)
 				{
 					$value			= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : '1';
 					$params[$c]		= $value;

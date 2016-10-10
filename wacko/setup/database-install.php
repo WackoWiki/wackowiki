@@ -44,7 +44,7 @@ if (isset($config['wacko_version']))
 	}
 }
 
-switch($config['database_driver'])
+switch ($config['database_driver'])
 {
 	case 'mysqli_legacy':
 
@@ -53,7 +53,7 @@ switch($config['database_driver'])
 
 		echo "         <ul>\n";
 
-		if(!test($lang['TestConnectionString'], $dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port), $lang['ErrorDBConnection']))
+		if (!test($lang['TestConnectionString'], $dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port), $lang['ErrorDBConnection']))
 		{
 			/*
 			 There was a problem with the connection string
@@ -64,7 +64,7 @@ switch($config['database_driver'])
 
 			$fatal_error = true;
 		}
-		else if(!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['database_database']), $lang['ErrorDBExists']))
+		else if (!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['database_database']), $lang['ErrorDBExists']))
 		{
 			/*
 			 There was a problem with the specified database name
@@ -196,7 +196,7 @@ switch($config['database_driver'])
 
 	default:
 		$dsn = '';
-		switch($config['database_driver'])
+		switch ($config['database_driver'])
 		{
 			/* case 'sqlite3': */
 
@@ -225,7 +225,7 @@ switch($config['database_driver'])
 			test($lang['TestConnectionString'], $dblink = @new PDO($dsn, $config['database_user'], $config['database_password']), $lang['ErrorDBConnection']);
 			$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
-		catch(PDOException $e)
+		catch (PDOException $e)
 		{
 			test($lang['TestConnectionString'], false, "PDO Error: ".$e->getMessage());
 			$fatal_error = true;
@@ -246,7 +246,7 @@ switch($config['database_driver'])
 		echo "         </ul>\n";
 		echo "         <br />\n";
 
-		if(!$fatal_error)
+		if (!$fatal_error)
 		{
 			// Check if database version matches engine and switch to MyISAM if necessary
 			if ($result	= $dblink->query($db_version))
@@ -333,7 +333,7 @@ switch($config['database_driver'])
 				test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
 				echo "            <li>".$lang['InstallingPagesBegin'];
-				require_once('setup/insert_pages.php');
+				require_once 'setup/insert_pages.php';
 				echo "</li>\n";
 				echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
 				echo "         </ul>\n";
@@ -343,7 +343,7 @@ switch($config['database_driver'])
 		break;
 }
 
-if(!$fatal_error)
+if (!$fatal_error)
 {
 ?>
 <p><?php echo $lang['NextStep'];?></p>
