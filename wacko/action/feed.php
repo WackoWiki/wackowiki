@@ -165,7 +165,7 @@ else
 				echo '<article class="feed">';
 				echo '<'.$header_item;
 
-				if($nomark)
+				if ($nomark)
 				{
 					echo ' class="feed_element_title"';
 				}

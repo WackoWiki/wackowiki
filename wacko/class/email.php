@@ -34,7 +34,7 @@ class Email
 		$mail->SetLanguage($this->engine->db->language, 'language/');
 
 		// Select the method to send mail
-		switch( $this->engine->db->phpmailer_method )
+		switch ($this->engine->db->phpmailer_method)
 		{
 			case 'mail':
 				$mail->IsMail();
@@ -52,7 +52,7 @@ class Email
 
 				#$mail->SMTPDebug	= false;	// enables SMTP debug information (for testing)
 
-				if ( !$this->is_blank( $this->engine->db->smtp_username ) )
+				if (!$this->is_blank($this->engine->db->smtp_username))
 				{
 					// Use SMTP Authentication
 					$mail->SMTPAuth = true;
@@ -60,7 +60,7 @@ class Email
 					$mail->Password = $this->engine->db->smtp_password;
 				}
 
-				if ( !$this->is_blank( $this->engine->db->smtp_connection_mode ) )
+				if (!$this->is_blank($this->engine->db->smtp_connection_mode))
 				{
 					$mail->SMTPSecure = $this->engine->db->smtp_connection_mode;
 				}
@@ -74,7 +74,7 @@ class Email
 		{
 			$mail->Host			= $this->engine->db->smtp_host;		// SMTP server
 
-			$mail->AddCustomHeader( "X-Wacko: ".$this->engine->db->base_url."" );
+			$mail->AddCustomHeader('X-Wacko: '.$this->engine->db->base_url.'');
 
 			#$mail->Sender		= $this->engine->db->abuse_email;
 			#$mail->AddReplyTo('name@example.com', 'First Last');
@@ -91,9 +91,9 @@ class Email
 			$mail->Subject		= $subject;
 			$mail->Body			= $body;
 
-			if( isset( $xtra_headers ) && is_array( $xtra_headers ) )
+			if (isset($xtra_headers) && is_array($xtra_headers))
 			{
-				foreach( $xtra_headers as $key => $value )
+				foreach ($xtra_headers as $key => $value)
 				{
 					if (!strcasecmp($key, 'Message-ID'))
 					{
@@ -108,7 +108,7 @@ class Email
 
 			$mail->Send();
 
-			/*if(!$mail->Send())
+			/*if (!$mail->Send())
 			{
 				$message = "Mailer Error: " . $mail->ErrorInfo;
 				$this->log(1, $message);

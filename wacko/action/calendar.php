@@ -110,7 +110,7 @@ if (function_exists('generate_calendar') == false)
 		{
 			// if the day names should be shown ($day_name_length > 0)
 			// if day_name_length is >3, the full name of the day will be printed
-			foreach($day_names as $d)
+			foreach ($day_names as $d)
 			{
 				$calendar .= '<th abbr="'.htmlentities($d, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.htmlentities(($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</th>';
 			}
@@ -131,11 +131,11 @@ if (function_exists('generate_calendar') == false)
 				$calendar .= "</tr>\n<tr>";
 			}
 
-			if(isset($days[$day]) and is_array($days[$day]))
+			if (isset($days[$day]) and is_array($days[$day]))
 			{
 				@list($link, $classes, $content) = $days[$day];
 
-				if(is_null($content))
+				if (is_null($content))
 				{
 					$content  = $day;
 				}
@@ -151,7 +151,7 @@ if (function_exists('generate_calendar') == false)
 			}
 		}
 
-		if($weekday != 7)
+		if ($weekday != 7)
 		{
 			$calendar .= '<td colspan="'.(7-$weekday).'">&nbsp;</td>'; // remaining "empty" days
 		}
@@ -173,14 +173,14 @@ echo "<tr>";
 #echo "_range:".$_range."<br />";
 #echo "month:".$month;
 
-for($month; $month <= $_range; $month++)
+for ($month; $month <= $_range; $month++)
 {
 		echo '<td style="vertical-align: top">';
 		echo generate_calendar($year, $month, $days, $daywidth);
 
 		echo "</td>";
 
-		if($month%3 == 0 and $month < $_range)
+		if ($month%3 == 0 and $month < $_range)
 		{
 			echo "</tr>\n<tr>";
 		}

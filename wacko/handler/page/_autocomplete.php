@@ -152,7 +152,7 @@ $local_context			= implode('/', $local_context_sliced ).'/';
 // preparing to output
 $out = [];
 
-foreach( $pages as $page )
+foreach ($pages as $page)
 {
 	if ($page['>local'])
 	{

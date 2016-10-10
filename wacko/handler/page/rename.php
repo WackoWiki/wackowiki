@@ -161,7 +161,7 @@ function recursive_move(&$engine, $root, $new_root)
 	$message	= '';
 	$new_root	= trim($new_root, '/');
 
-	if($root == '/')
+	if ($root == '/')
 	{
 		exit; // who and where did intend to move root???
 	}
@@ -181,7 +181,7 @@ function recursive_move(&$engine, $root, $new_root)
 
 	$message .= "<ol>\n";
 
-	foreach($pages as $page)
+	foreach ($pages as $page)
 	{
 		$message .= '<li><strong>'.$page['tag']."</strong>\n";
 

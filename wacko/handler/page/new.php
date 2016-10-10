@@ -26,7 +26,7 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 	}
 
 	// check if reserved word
-	if($result = $this->validate_reserved_words($new_tag))
+	if ($result = $this->validate_reserved_words($new_tag))
 	{
 		$this->set_message(Ut::perc_replace($this->_t('PageReservedWord'), $result));
 	}

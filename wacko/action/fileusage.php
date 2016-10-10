@@ -13,7 +13,7 @@ if ($file_id)
 {
 	if ($pages = $this->load_file_usage($file_id))
 	{
-		if(!$nomark)
+		if (!$nomark)
 		{
 			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('FileUsage').': '.''."</span></p>\n";
 		}
@@ -50,7 +50,7 @@ if ($file_id)
 			}
 		}
 
-		if(!$nomark)
+		if (!$nomark)
 		{
 			echo "</div>\n";
 		}

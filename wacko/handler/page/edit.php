@@ -72,24 +72,24 @@ if ($this->has_access('read')
 		// only if saving:
 		if (isset($_POST['save']) && (isset($_POST['body']) && $_POST['body'] != ''))
 		{
-			if(isset($_POST['edit_note']))
+			if (isset($_POST['edit_note']))
 			{
 				$edit_note = trim($_POST['edit_note']);
 			}
 
-			if(isset($_POST['minor_edit']))
+			if (isset($_POST['minor_edit']))
 			{
 				$minor_edit = (int)$_POST['minor_edit'];
 			}
 
-			if(isset($_POST['reviewed']))
+			if (isset($_POST['reviewed']))
 			{
 				$reviewed = (int)$_POST['reviewed'];
 			}
 
 			$title = $this->page['title'];
 
-			if(isset($_POST['title']))
+			if (isset($_POST['title']))
 			{
 				$title = trim($_POST['title']);
 			}

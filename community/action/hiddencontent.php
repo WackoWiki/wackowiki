@@ -24,17 +24,17 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if(!isset($usergroup)) $usergroup = '';
-if(!isset($username)) $username = '';
-if(!isset($text)) $text = '';
-if(!isset($alt)) $alt = '';
+if (!isset($usergroup)) $usergroup = '';
+if (!isset($username)) $username = '';
+if (!isset($text)) $text = '';
+if (!isset($alt)) $alt = '';
 
-if($usergroup !== '' || $username !== '')
+if ($usergroup !== '' || $username !== '')
 {
 	$show_content = false;
 
 	// Check if user is the named user
-	if(in_array($this->get_user_name(), explode(',', $username)))
+	if (in_array($this->get_user_name(), explode(',', $username)))
 	{
 		$show_content = true;
 	}
@@ -44,9 +44,9 @@ if($usergroup !== '' || $username !== '')
 		// don't bother if we already identified the user as having access
 		foreach ($this->db->aliases as $gname => $gusers)
 		{
-			if($gname === $usergroup)
+			if ($gname === $usergroup)
 			{
-				if(in_array($this->get_user_name(), explode(',', $gusers)))
+				if (in_array($this->get_user_name(), explode(',', $gusers)))
 				{
 					$show_content = true;
 					break;
@@ -55,12 +55,12 @@ if($usergroup !== '' || $username !== '')
 		}
 	}
 
-	if($show_content)
+	if ($show_content)
 	{
 		echo $this->format($text);
 	}
 }
-else if($alt !== '')
+else if ($alt !== '')
 {
 	echo $this->format($alt);
 }

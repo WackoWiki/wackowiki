@@ -119,7 +119,7 @@ class paragrafica
 		// -1. remove t-prefix;
 		$what = str_replace( $this->mark_prefix, '', $what );
 
-		if(isset($this->wacko->data))
+		if (isset($this->wacko->data))
 		{
 			if (is_array($this->wacko->data) && isset($this->wacko->data['record_id']))
 			{
@@ -197,7 +197,7 @@ class paragrafica
 			$sizeof_mark1 = null;
 		}
 
-		foreach( $pieces as $k => $v )
+		foreach ($pieces as $k => $v)
 		{
 			if ($k > 0)
 			{

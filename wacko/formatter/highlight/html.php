@@ -181,7 +181,7 @@ $xhtml_tags = [
 			},
 		$source);
 
-	foreach($xhtml_tags as $i)
+	foreach ($xhtml_tags as $i)
 	{
 		$source = preg_replace(
 				'/&lt;' . $i . '(&gt;|[[:space:]])/',

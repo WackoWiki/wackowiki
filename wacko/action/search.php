@@ -189,9 +189,9 @@ $highlight_this = function ($text, $words, $the_place)
 	$the_count		= 0;
 	$words_array	= explode(' ', $words);
 
-	foreach($words_array as $word)
+	foreach ($words_array as $word)
 	{
-		if(strlen(trim($word)) != 0)
+		if (strlen(trim($word)) != 0)
 		{
 			//exclude these words from being replaced
 			$exclude_list = ['word1', 'word2', 'word3'];

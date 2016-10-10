@@ -15,13 +15,13 @@ if (isset($_POST['config']))
 	$config = $_POST['config'];
 }
 
-if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config['language'].'.php'))
+if (!isset($config['language']) || !@file_exists('setup/lang/installer.' . $config['language'] . '.php'))
 {
 	$config['language'] = 'en';
 }
 
 global $lang;
-require_once 'setup/lang/installer.'.$config['language'].'.php';
+require_once 'setup/lang/installer.' . $config['language'] . '.php';
 
 if (!isset($lang[$install_action])) $lang[$install_action] = '';
 
@@ -32,7 +32,7 @@ header('Content-Type: text/html; charset='.$lang['Charset']);
 <html lang="<?php echo $config['language']; ?>">
 	<head>
 		<meta charset="<?php echo $lang['Charset']; ?>" />
-		<title><?php echo $lang['Title'].': '.WACKO_VERSION.' - '.$lang[$install_action]; ?></title>
+		<title><?php echo $lang['Title'] . ': ' . WACKO_VERSION . ' - ' . $lang[$install_action]; ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive" />
 		<link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css" />
 		<link rel="shortcut icon" href="<?php echo my_location() ?>setup/images/favicon.ico" type="image/x-icon" />

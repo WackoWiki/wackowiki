@@ -100,20 +100,20 @@ else
 
 			echo "<ol>\n";
 
-			foreach($pages as $page)
+			foreach ($pages as $page)
 			{
 				$page_parent = substr($page['wanted_tag'], 0, strrpos($page['wanted_tag'], '/'));
 
-				if(!$this->db->hide_locked || $this->has_access('read', $page_parent))
+				if (!$this->db->hide_locked || $this->has_access('read', $page_parent))
 				{
 					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
 
-					if($referring_pages = $this->load_pages_linking_to($page['wanted_tag'], $root))
+					if ($referring_pages = $this->load_pages_linking_to($page['wanted_tag'], $root))
 					{
 						foreach ($referring_pages as $referrer_page)
 						{
-							if(!$this->db->hide_locked || $this->has_access('read', $referrer_page['tag']))
+							if (!$this->db->hide_locked || $this->has_access('read', $referrer_page['tag']))
 							{
 								$count++;
 							}
@@ -121,7 +121,7 @@ else
 					}
 
 					// If no pages are referring to the WantedPage it means the referrers are all locked so don't show the link at all
-					if($count > 0)
+					if ($count > 0)
 					{
 						echo '<li>'.$this->link('/'.$page['wanted_tag']).' (<a href="'.$this->href('', '', 'linking_to='.$page['wanted_tag']).'">'.$count."</a>)</li>\n";
 					}

@@ -92,14 +92,14 @@ if ($config['is_update'])
 echo "         <h2>".$lang['SecurityConsiderations']."</h2>\n";
 echo "         <ul class=\"security\">\n";
 
-if(!$perm_changed)
+if (!$perm_changed)
 {
 	echo "            <li>".$lang['SecurityRisk']."</li>\n";
 }
 
 echo "            <li>".$lang['RemoveSetupDirectory']."</li>\n";
 
-if($write_file == false)
+if ($write_file == false)
 {
 	echo "            <li>".$lang['ErrorGivePrivileges']."</li>\n";
 }
@@ -112,7 +112,7 @@ echo "         </ul>\n";
 	write_config_hidden_nodes(array('none' => ''));
 
 	// If there was a problem then show the "Try Again" button.
-	if($write_file == true)
+	if ($write_file == true)
 	{
 		echo "         <h2>".$lang['InstallationComplete']."</h2>\n";
 		echo "         <p>".str_replace('%1', $config['base_url'], $lang['ThatsAll'])."</p>\n";
@@ -124,7 +124,7 @@ echo "         </ul>\n";
 	}
 	?></form>
 	<?php
-	if($write_file == false)
+	if ($write_file == false)
 	{
 		echo '         <div id="config_code" class="config_code"><pre>'.htmlentities($config_code, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</pre></div>\n";
 	}

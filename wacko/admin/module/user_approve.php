@@ -279,7 +279,7 @@ function admin_user_approve(&$engine, &$module)
 		$status_count['1'] = 0; // pending
 		$status_count['2'] = 0; // denied
 
-		foreach($account_stati as $account_status)
+		foreach ($account_stati as $account_status)
 		{
 			if ($account_status['account_status'] < 3)
 			{

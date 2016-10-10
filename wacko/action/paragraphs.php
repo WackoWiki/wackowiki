@@ -46,7 +46,7 @@ if (!$style) $style = 'before';
 		$depth		= 0;
 		$p_num		= 0;
 
-		for($i = 0; $i < $toc_len; $i++)
+		for ($i = 0; $i < $toc_len; $i++)
 
 		if ($toc[$i][2] > 66666)
 		{

@@ -891,7 +891,7 @@ class Wacko
 		}
 		else
 		{
-			foreach($this->translit_macros as $macro => $value)
+			foreach ($this->translit_macros as $macro => $value)
 			{
 				while (($pos = strpos($_tag, $macro)) !== false)
 				{
@@ -1335,7 +1335,7 @@ class Wacko
 		}
 
 		// get default links
-		if(isset($user['user_name']))
+		if (isset($user['user_name']))
 		{
 			$pages[]	= $this->db->users_page.'/'.$user['user_name'];
 			$pages[]	= $this->_t('AccountLink');
@@ -1861,7 +1861,7 @@ class Wacko
 		$page_id = $this->get_page_id($tag);
 
 		// write tag
-		if(isset($_POST['tag']))
+		if (isset($_POST['tag']))
 		{
 			$this->tag		= $tag = $_POST['tag'];
 			$this->supertag	= $this->translit($tag);
@@ -7395,12 +7395,12 @@ class Wacko
 
 	function binary_multiples($size, $prefix = true, $short = true, $rounded = false, $suffix = true)
 	{
-		if(is_numeric($size))
+		if (is_numeric($size))
 		{
-			if($prefix === true)
+			if ($prefix === true)
 			{
 				// Decimal prefix
-				if($short === true)
+				if ($short === true)
 				{
 					$norm = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 				}
@@ -7414,7 +7414,7 @@ class Wacko
 			else
 			{
 				// Binary prefix
-				if($short === true)
+				if ($short === true)
 				{
 					$norm = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
 				}
@@ -7445,7 +7445,7 @@ class Wacko
 				$size = sprintf('%01.2f', $size);
 			}
 
-			if($suffix === true)
+			if ($suffix === true)
 			{
 				$size= $size . '&nbsp;' . $norm[$x];
 			}
@@ -7459,7 +7459,7 @@ class Wacko
 		$count	= 9; #count($norm) -1;
 		$x		= 0;
 
-		if($prefix === true)
+		if ($prefix === true)
 		{
 			$factor = 1000;
 		}
@@ -7484,7 +7484,7 @@ class Wacko
 			$diff_class = 'diff-pos';
 			$size_delta = '+' . number_format($size_delta, 0, ',', '.');
 		}
-		else if($size_delta < 0)
+		else if ($size_delta < 0)
 		{
 			$diff_class = 'diff-neg';
 			$size_delta = number_format($size_delta, 0, ',', '.');

@@ -324,7 +324,7 @@ function admin_content_files(&$engine, &$module)
 <?php
 	}
 
-	foreach($files as $file)
+	foreach ($files as $file)
 	{
 		$engine->files_cache[$file['page_id']][$file['file_name']] = $file;
 
