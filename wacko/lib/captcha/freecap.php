@@ -112,7 +112,7 @@ $abyz		= 0x6162797A;
 // Convert $abyz to a binary string containing 32 bits
 // Do the conversion the way that the system architecture wants to
 // Then compare that to the Big-Endian version
-if(pack('L', $abyz) == pack('N', $abyz))
+if (pack('L', $abyz) == pack('N', $abyz))
 {
 	$big_endian = true;
 }
@@ -128,7 +128,7 @@ if(pack('L', $abyz) == pack('N', $abyz))
 // the fonts included with freeCap *only* include lowercase alphabetic characters
 // so are not suitable for most other uses
 // to increase security, you really should add other fonts
-if($big_endian)
+if ($big_endian)
 {
 	$font_locations = [	'/.ht_freecap_font1_big_e.gdf',
 						'/.ht_freecap_font2_big_e.gdf',
@@ -191,7 +191,7 @@ $seed_func(make_seed());
 // to test how much protection the bg noise gives, take a screenshot of the freeCap image
 // and take it into a photo editor. play with contrast and brightness.
 // If you can remove most of the bg, then it's not a good enough percentage
-switch($bg_type)
+switch ($bg_type)
 {
 	case 0:
 		break;
@@ -212,7 +212,7 @@ $header_length = $big_endian ? 12 : 11;
 // read each font and get font character widths
 $font_widths = [];
 
-for($i = 0; $i < sizeof($font_locations); $i++)
+for ($i = 0; $i < sizeof($font_locations); $i++)
 {
 	$handle = fopen(__DIR__ . $font_locations[$i], 'r');
 	// read header of GD font, up to char width
@@ -220,7 +220,7 @@ for($i = 0; $i < sizeof($font_locations); $i++)
 
 	$font_widths[$i] = ord($c_wid{8}) + ord($c_wid{9}) + ord($c_wid{10});
 
-	if($big_endian)
+	if ($big_endian)
 	{
 		$font_widths[$i] += ord($c_wid{11});
 	}
@@ -241,7 +241,7 @@ $im2		= ImageCreate($width, $height);
 //////////////////////////////////////////////////////
 ////// Avoid Brute Force Attacks:
 //////////////////////////////////////////////////////
-if(empty($sess['freecap_attempts']))
+if (empty($sess['freecap_attempts']))
 {
 	$sess['freecap_attempts'] = 1;
 }
@@ -256,7 +256,7 @@ else
 	// in short, there's little point trying to avoid brute forcing
 	// the best way to protect against BF attacks is to ensure the dictionary is not
 	// accessible via the web or use random string option
-	if($sess['freecap_attempts'] > $max_attempts)
+	if ($sess['freecap_attempts'] > $max_attempts)
 	{
 		$sess['freecap_word_hash'] = false;
 
@@ -290,7 +290,7 @@ function rand_color()
 {
 	global $bg_type,$rand_func;
 
-	if($bg_type == 3)
+	if ($bg_type == 3)
 	{
 		// needs darker colour..
 		return $rand_func(10, 100);
@@ -363,7 +363,7 @@ function send_image($pic)
 	ImageDestroy($im2);
 	ImageDestroy($pic);
 
-	if(!empty($im3))
+	if (!empty($im3))
 	{
 		ImageDestroy($im3);
 	}
@@ -377,7 +377,7 @@ function send_image($pic)
 //////////////////////////////////////////////////////
 ////// Choose Word:
 //////////////////////////////////////////////////////
-if($use_dict == 1)
+if ($use_dict == 1)
 {
 	// load dictionary and choose random word
 	$words	= @file($dict_location);
@@ -403,10 +403,10 @@ else
 
 	$wordlen	= $rand_func(5, $max_word_length);
 
-	for($i = 0 ; $i < $wordlen ; $i++)
+	for ($i = 0 ; $i < $wordlen ; $i++)
 	{
 		// don't allow to start with 'vowel'
-		if($rand_func(0, 4) >= 2 && $i != 0)
+		if ($rand_func(0, 4) >= 2 && $i != 0)
 		{
 			$word .= $vowels{$rand_func(0, strlen($vowels) - 1)};
 		}
@@ -460,7 +460,7 @@ ImageColorTransparent($im2, $bg2);
 ImageFill($im, 0, 0, $bg);
 ImageFill($im2, 0, 0, $bg2);
 
-if($bg_type != 0)
+if ($bg_type != 0)
 {
 	// generate noisy background, to be merged with CAPTCHA later
 	// any suggestions on how best to do this much appreciated
@@ -485,7 +485,7 @@ if($bg_type != 0)
 	// or if not, just copy a $widthx$height portion of $temp_bg to $im3
 	// temp_bg is much larger so that when morphing, the edges retain the noise.
 
-	if($bg_type == 1)
+	if ($bg_type == 1)
 	{
 		// grid bg:
 
@@ -513,7 +513,7 @@ if($bg_type != 0)
 			ImageLine($temp_bg, 0, $i, $width*2, $i ,$text_colour3);
 		}
 	}
-	else if($bg_type == 2)
+	else if ($bg_type == 2)
 	{
 		// draw squiggles!
 
@@ -522,21 +522,21 @@ if($bg_type != 0)
 		ImageFill($im3, 0, 0, $bg3);
 		ImageSetThickness($temp_bg, 4);
 
-		for($i = 0; $i < strlen($word) + 1; $i++)
+		for ($i = 0; $i < strlen($word) + 1; $i++)
 		{
 			$text_r			= $rand_func(100, 150);
 			$text_g			= $rand_func(100, 150);
 			$text_b			= $rand_func(100, 150);
 			$text_colour3	= ImageColorAllocate($temp_bg, $text_r, $text_g, $text_b);
 
-			$points = Array();
+			$points = [];
 
 			// draw random squiggle for each character
 			// the longer the loop, the more complex the squiggle
 			// keep random so OCR can't say "if found shape has 10 points, ignore it"
 			// each squiggle will, however, be a closed shape, so OCR could try to find
 			// line terminations and start from there. (I don't think they're that advanced yet..)
-			for($j = 1; $j < $rand_func(5, 10); $j++)
+			for ($j = 1; $j < $rand_func(5, 10); $j++)
 			{
 				$points[] = $rand_func(1* (20 * ($i + 1)), 1 * (50 * ($i + 1)));
 				$points[] = $rand_func(30, $height + 30);
@@ -545,11 +545,11 @@ if($bg_type != 0)
 			ImagePolygon($temp_bg, $points, intval(sizeof($points) / 2), $text_colour3);
 		}
 	}
-	else if($bg_type == 3)
+	else if ($bg_type == 3)
 	{
 		// take random chunks of $bg_images and paste them onto the background
 
-		for($i = 0; $i < sizeof($bg_images); $i++)
+		for ($i = 0; $i < sizeof($bg_images); $i++)
 		{
 			// read each image and its size
 			$temp_im[$i]		= ImageCreateFromJPEG(__DIR__ . $bg_images[$i]);
@@ -559,10 +559,10 @@ if($bg_type != 0)
 
 		$blocksize = $rand_func(20, 60);
 
-		for($i = 0; $i < $width * 2; $i += $blocksize)
+		for ($i = 0; $i < $width * 2; $i += $blocksize)
 		{
 			// could randomise blocksize here... hardly matters
-			for($j = 0; $j < $height * 2; $j += $blocksize)
+			for ($j = 0; $j < $height * 2; $j += $blocksize)
 			{
 				$image_index	= $rand_func(0, sizeof($temp_im) - 1);
 				$cut_x			= $rand_func(0, $temp_width[$image_index] - $blocksize);
@@ -572,7 +572,7 @@ if($bg_type != 0)
 			}
 		}
 
-		for($i = 0; $i < sizeof($temp_im); $i++)
+		for ($i = 0; $i < sizeof($temp_im); $i++)
 		{
 			// remove bgs from memory
 			ImageDestroy($temp_im[$i]);
@@ -585,7 +585,7 @@ if($bg_type != 0)
 	// for debug:
 	//send_image($im3);
 
-	if($morph_bg)
+	if ($morph_bg)
 	{
 		// morph background
 		// we do this separately to the main text morph because:
@@ -601,7 +601,7 @@ if($bg_type != 0)
 		$morph_chunk	= $rand_func(1, 5);
 		$morph_y		= 0;
 
-		for($x = 0; $x < $width; $x += $morph_chunk)
+		for ($x = 0; $x < $width; $x += $morph_chunk)
 		{
 			$morph_chunk = $rand_func(1, 5);
 			$morph_y += $rand_func(-1, 1);
@@ -612,7 +612,7 @@ if($bg_type != 0)
 
 		$morph_x = 0;
 
-		for($y = 0; $y <= $height; $y += $morph_chunk)
+		for ($y = 0; $y <= $height; $y += $morph_chunk)
 		{
 			$morph_chunk = $rand_func(1, 5);
 			$morph_x    += $rand_func(-1, 1);
@@ -627,7 +627,7 @@ if($bg_type != 0)
 
 	ImageDestroy($temp_bg);
 
-	if($blur_bg)
+	if ($blur_bg)
 	{
 		my_image_blur($im3);
 	}
@@ -647,7 +647,7 @@ $word_start_x = $rand_func(5, 32);
 // y positions jiggled about later
 $word_start_y = 15;
 
-if($col_type == 0)
+if ($col_type == 0)
 {
 	$text_r			= rand_color();
 	$text_g			= rand_color();
@@ -658,7 +658,7 @@ if($col_type == 0)
 // write each char in different font
 for($i = 0 ; $i < strlen($word); $i++)
 {
-	if($col_type == 1)
+	if ($col_type == 1)
 	{
 		$text_r			= rand_color();
 		$text_g			= rand_color();
@@ -689,7 +689,7 @@ $font_pixelwidth = $font_widths[$j];
 $word_pix_size	= $word_start_x + (strlen($word) * $font_pixelwidth);
 $y_pos			= 0;
 // firstly move each character up or down a bit:
-for($i = $word_start_x; $i < $word_pix_size; $i += $font_pixelwidth)
+for ($i = $word_start_x; $i < $word_pix_size; $i += $font_pixelwidth)
 {
 	// move on Y axis
 	// deviates at least 4 pixels between each letter
@@ -699,7 +699,7 @@ for($i = $word_start_x; $i < $word_pix_size; $i += $font_pixelwidth)
 	{
 		$y_pos = $rand_func(-5, 5);
 	}
-	while($y_pos < $prev_y + 2 && $y_pos > $prev_y - 2);
+	while ($y_pos < $prev_y + 2 && $y_pos > $prev_y - 2);
 
 	ImageCopy($im, $im2, $i, $y_pos, $i, 0, $font_pixelwidth, $height);
 
@@ -719,11 +719,11 @@ $y_chunk		= 1;
 $morph_factor	= 1;
 $morph_x		= 0;
 
-for($j = 0; $j < strlen($word); $j++)
+for ($j = 0; $j < strlen($word); $j++)
 {
 	$y_pos = 0;
 
-	for($i = 0; $i <= $height; $i += $y_chunk)
+	for ($i = 0; $i <= $height; $i += $y_chunk)
 	{
 		$orig_x = $word_start_x + ($j * $font_pixelwidth);
 		// morph x += so that instead of deviating from orig x each time, we deviate from where we last deviated to
@@ -750,7 +750,7 @@ ImageFilledRectangle($im, 0, 0, $width, $height, $bg);
 $y_pos		= 0;
 $x_chunk	= 1;
 
-for($i = 0; $i <= $width; $i += $x_chunk)
+for ($i = 0; $i <= $width; $i += $x_chunk)
 {
 	// can result in image going too far off on Y-axis;
 	// not much I can do about that, apart from make image bigger
@@ -775,7 +775,7 @@ my_image_blur($im);
 // for debug:
 //send_image($im);
 
-if($output != 'jpg' && $bg_type == 0)
+if ($output != 'jpg' && $bg_type == 0)
 {
 	// make background transparent
 	ImageColorTransparent($im, $bg);
@@ -795,7 +795,7 @@ if($output != 'jpg' && $bg_type == 0)
 // write site tags 'shining through' the morphed image
 ImageFilledRectangle($im2, 0, 0, $width, $height, $bg2);
 
-if(is_array($site_tags))
+if (is_array($site_tags))
 {
 	for($i = 0; $i < sizeof($site_tags); $i++)
 	{
@@ -803,13 +803,13 @@ if(is_array($site_tags))
 		$tag_width = strlen($site_tags[$i]) * 6;
 
 		// write tag is chosen position
-		if($tag_pos == 0 || $tag_pos == 2)
+		if ($tag_pos == 0 || $tag_pos == 2)
 		{
 			// write at top
 			ImageString($im2, 2, intval($width / 2) - intval($tag_width / 2), (10 * $i), $site_tags[$i], $site_tag_col2);
 		}
 
-		if($tag_pos==1 || $tag_pos==2)
+		if ($tag_pos==1 || $tag_pos==2)
 		{
 			// write at bottom
 			ImageString($im2, 2, intval($width / 2) - intval($tag_width / 2), ($height - 34 + ($i * 10)), $site_tags[$i], $site_tag_col2);
@@ -829,12 +829,12 @@ ImageCopy($im, $im2, 0, 0, 0, 0, $width, $height);
 ////// Merge with obfuscated background
 //////////////////////////////////////////////////////
 
-if($bg_type != 0)
+if ($bg_type != 0)
 {
 	// merge bg image with CAPTCHA image to create smooth background
 
 	// fade bg:
-	if($bg_type != 3)
+	if ($bg_type != 3)
 	{
 		$temp_im	= ImageCreateTrueColor($width, $height);
 		$white		= ImageColorAllocate($temp_im, 255, 255, 255);
@@ -853,7 +853,7 @@ if($bg_type != 0)
 	// captcha over bg:
 	// might want to not blur if using this method
 	// otherwise leaves white-ish border around each letter
-	if($merge_type == 1)
+	if ($merge_type == 1)
 	{
 		ImageCopyMerge($im3, $im, 0, 0, 0, 0, $width, $height, 100);
 		ImageCopy($im, $im3, 0, 0, 0, 0, $width, $height);
