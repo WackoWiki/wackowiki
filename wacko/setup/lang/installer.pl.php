@@ -13,9 +13,9 @@ $lang = [
 */
 'Title' => 'Instalacja WackoWiki',
 'Continue' => 'Kontynuuj',
-'Back' => 'Back',
+'Back' => 'Plecy',
 'Recommended' => 'zalecane',
-'InvalidAction' => 'Invalid action',
+'InvalidAction' => 'Nieprawid³owe dzia³anie',
 
 /*
    Language Selection Page
@@ -30,14 +30,14 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check' => 'System Requirements',
+'version-check' => 'Wymagania systemowe',
 'PHPVersion' => 'PHP Version',
 'PHPDetected' => 'Detected PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled' => 'Rewrite Extension (mod_rewrite) Installed?',
-'Database' => 'Database',
+'Database' => 'Baza danych',
 'Permissions' => 'Permissions',
-'ReadyToInstall' => 'Ready to Install?',
+'ReadyToInstall' => 'Gotowy do instalacji?',
 'Requirements' => 'Your server must meet the requirements listed below.',
 'OK' => 'OK',
 'Problem' => 'Problem',
@@ -65,7 +65,7 @@ $lang = [
 'PasswordDesc' => 'Wpisz has&#322;o dla administratora (min. 9 znak&#243;w).',
 'Password2' => 'Powt&#243;rz has&#322;o:',
 'Mail' => 'Adres e-mail administratora',
-'MailDesc' => 'Enter the admins email address.',
+'MailDesc' => 'Wpisz adres e-mail administratora.',
 'Base' => 'Podstawowy URL',
 'BaseDesc' => 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><em>http://example.com/</em></strong></li><li><strong><em>http://example.com/wiki/</em></strong></li></ul>',
 'Rewrite' => 'Tryb Rewrite',
@@ -118,14 +118,14 @@ $lang = [
 'Prefix' => 'Przedrostek tabeli',
 'ErrorNoDbDriverDetected' => 'No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.',
 'ErrorNoDbDriverSelected' => 'No database driver has been selected, please pick one from the list.',
-'DeleteTables' => 'Delete Existing Tables?',
+'DeleteTables' => 'Usuwanie istniej±cych tabel?',
 'DeleteTablesDesc' => 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
 'ConfirmTableDeletion' => 'Are you sure you want to delete all current wiki tables?',
 
 /*
    Database Installation Page
 */
-'database-install' => 'Database Installation',
+'database-install' => 'Instalacja bazy danych',
 'TestingConfiguration' => 'Testuj&#281; Konfiguracj&#281;',
 'TestConnectionString' => 'Testuj&#281; ustawienia po&#322;&#261;cze&#324; z database',
 'TestDatabaseExists' => 'Checking if the database you specified exists',
@@ -142,7 +142,7 @@ $lang = [
 'InstallingSystemAccount' => 'Adding System User',
 'InstallingAdmin' => 'Dodaj&#281; konto administratora',
 'InstallingAdminSetting' => 'Dodaj&#281; konto administratora',
-'InstallingAdminGroup' => 'Adding Admins Group',
+'InstallingAdminGroup' => 'Dodanie grupy Administratorzy',
 'InstallingAdminGroupMember' => 'Adding Admins Group Member',
 'InstallingEverybodyGroup' => 'Adding Everybody Group',
 'InstallingRegisteredGroup' => 'Adding Registered Group',
@@ -174,11 +174,11 @@ $lang = [
 /*
    Write Config Page
 */
-'write-config' => 'Write Config File',
-'FinalStep' => 'Final Step',
+'write-config' => 'Napisz plik konfiguracyjny',
+'FinalStep' => 'Ostatnim krokiem',
 'Writing' => 'Zapisywanie pliku konfiguracyjnego',
 'RemovingWritePrivilege' => 'Removing Write Privilege',
-'InstallationComplete' => 'Installation Complete',
+'InstallationComplete' => 'Instalacja zakoñczona',
 'ThatsAll' => 'To wszystko! Mo&#380;esz teraz <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'Jednak, doradzamy usuni&#281;cie praw zapisu do pliku <code>config.php</code> po tym jak zosta&#322; on zapisany. Zagro&#380;eniem dla bezpiecze&#324;stwa jest pozostawienie pliku z prawem do zapisu!',
