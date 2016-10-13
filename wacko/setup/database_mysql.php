@@ -46,7 +46,7 @@ $table_category = "CREATE TABLE {$pref}category (".
 					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT 0,".
 					"category_lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"category VARCHAR(100) NOT NULL DEFAULT '',".
-					"description VARCHAR(255) NOT NULL DEFAULT '',".
+					"category_description VARCHAR(255) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (category_id),".
 					"UNIQUE KEY idx_category (category_lang, category)".
 				") {$engine} COMMENT='' {$charset}";
