@@ -34,6 +34,7 @@ $alter_cache_r5_4_1 = "ALTER TABLE {$pref}cache CHANGE lang cache_lang VARCHAR(2
 $alter_category_r5_4_0 = "ALTER TABLE {$pref}category CHANGE parent parent_id INT(10) UNSIGNED NOT NULL";
 $alter_category_r5_4_1 = "ALTER TABLE {$pref}category ADD description VARCHAR(255) NOT NULL DEFAULT '' AFTER category";
 $alter_category_r5_4_2 = "ALTER TABLE {$pref}category CHANGE lang category_lang VARCHAR(2) NOT NULL";
+$alter_category_r5_4_3 = "ALTER TABLE {$pref}category CHANGE description category_description VARCHAR(255) NOT NULL DEFAULT ''";
 
 // CONFIG
 $update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|wordprocessor' WHERE config_name = 'standard_handlers'";

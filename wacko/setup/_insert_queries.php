@@ -120,6 +120,8 @@ $upgrade['5.4.0'][]		= [$lang['AlterTable'],		'category',		$alter_category_r5_4_
 $upgrade['5.4.0'][]		= [$lang['AlterTable'],		'category',		$alter_category_r5_4_1,		$lang['ErrorAlteringTable']];
 $upgrade['5.4.0'][]		= [$lang['AlterTable'],		'category',		$alter_category_r5_4_2,		$lang['ErrorAlteringTable']];
 
+$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category',		$alter_category_r5_4_3,		$lang['ErrorAlteringTable']];
+
 // config
 $upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',		$update_config_r5_4_0,		$lang['ErrorUpdatingTable']];
 $upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',		$update_config_r5_4_1,		$lang['ErrorUpdatingTable']];
