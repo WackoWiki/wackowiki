@@ -1,9 +1,9 @@
 <?php
 
 // config values
-if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty( $config['database_port'] ) )
+if (($config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo')) && empty($config['database_port']))
 {
-	$config['database_port'] = $config['database_port'] = '3306';
+	$config['database_port'] = '3306';
 }
 
 // set version to current version, yay!
