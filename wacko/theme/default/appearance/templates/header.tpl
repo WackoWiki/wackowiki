@@ -58,7 +58,7 @@
 	=]
 	[= dropmenu _ =
 		<li class="dropdown">
-			<a href="#" id="more"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-menu"/></a>
+			<a href="#" id="menu-more"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-menu"/></a>
 			<ul class="dropdown_menu">
 				['' menu menuList '']
 			</ul>
@@ -96,7 +96,7 @@
 		</li>
 	=]
 	[= droptab _ =
-		<li class="dropdown"><a href="#" id="more">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown_arrow">&#9660;</span></a>
+		<li class="dropdown"><a href="#" id="handler-more">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown_arrow">&#9660;</span></a>
 			<ul class="dropdown_menu">
 				['' tab TabList '']
 				['' // last empty '']

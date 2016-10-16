@@ -94,9 +94,9 @@ class Diag
 						echo '<li class="sqllog">';
 						echo str_replace(['<', '>'], ['&lt;', '&gt;'], $query) . '<br />';
 						echo '[' . number_format($time, 4) . ' sec., ' . $affected_rows . ' rows';
-						echo '<span class="backtrace">';
+						echo '<div class="backtrace">';
 						echo '<table>' . $btext . '</table>';
-						echo "</span>]</li>\n";
+						echo "</div>]</li>\n";
 					}
 
 					echo "\t\t</ol>\n\t</li>\n";
