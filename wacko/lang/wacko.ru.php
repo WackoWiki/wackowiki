@@ -218,6 +218,7 @@ $wacko_translation = [
 	'NoMultilevelGrouping'		=> 'Многоуровневая группировка ключевых слов невозможна.',
 	'CategoriesDeleted'			=> 'Ключевое слово удалено из базы данных и из всех документов.',
 	'CategoriesAdd'				=> 'Добавить новое ключевое слово',
+	'CategoryDescription'		=> 'Description',
 	'CategoriesAddGrouped'		=> 'Сгруппировать с ключевым словом',
 	'CategoriesAddGroupedNo'	=> 'Не группировать.',
 	'CategoriesRename'			=> 'Переименовать ключевое слово',
