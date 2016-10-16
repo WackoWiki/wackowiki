@@ -217,6 +217,7 @@ $wacko_translation = [
 	'NoMultilevelGrouping'		=> 'Le regroupement de mots clefs sur plusieurs niveaux n&rsquo;est pas possible.',
 	'CategoriesDeleted'			=> 'Le mot clef a été effacé de la base de données et de toutes les pages.',
 	'CategoriesAdd'				=> 'Ajouter un nouveau mot clef',
+	'CategoryDescription'		=> 'Description',
 	'CategoriesAddGrouped'		=> 'Groupé avec le mot clef',
 	'CategoriesAddGroupedNo'	=> 'Pas de groupe.',
 	'CategoriesRename'			=> 'Renommer le mot clef',

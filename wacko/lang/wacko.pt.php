@@ -217,6 +217,7 @@ $wacko_translation = [
 	'NoMultilevelGrouping'		=> 'Multilevel grouping categories is not possible.',
 	'CategoriesDeleted'			=> 'The category was deleted from the database and all pages.',
 	'CategoriesAdd'				=> 'Add a new category',
+	'CategoryDescription'		=> 'Description',
 	'CategoriesAddGrouped'		=> 'Grouped with the category',
 	'CategoriesAddGroupedNo'	=> 'No group.',
 	'CategoriesRename'			=> 'Rename the category',

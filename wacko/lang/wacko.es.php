@@ -217,6 +217,7 @@ $wacko_translation = [
 	'NoMultilevelGrouping'		=> 'No es posible agrupar categorías en multiples niveles.',
 	'CategoriesDeleted'			=> 'Eliminada la categoría de la base de datos y todas las páginas.',
 	'CategoriesAdd'				=> 'Agregar nueva categoría',
+	'CategoryDescription'		=> 'Description',
 	'CategoriesAddGrouped'		=> 'Agrupar con categoría',
 	'CategoriesAddGroupedNo'	=> 'Sin grupo.',
 	'CategoriesRename'			=> 'Renombrar categoría',
