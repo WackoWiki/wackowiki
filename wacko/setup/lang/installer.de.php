@@ -57,7 +57,7 @@ $lang = [
 'HomeDefault' => 'StartSeite',
 'MultiLang' => 'Mehrsprachen-Modus',
 'MultiLangDesc' => 'Der Mehrsprachen-Modus ermöglicht Seiten mit unterschiedlichen Spracheinstellungen innerhalb einer Installation. Wenn dieser Modus aktiviert ist, wird die Installations-Routine die Grundseiten für allen Sprachen erstellen, die in dieser Version verfügbar sind.',
-'AllowedLang' => 'Allowed Languages',
+'AllowedLang' => 'Erlaubte Sprachen',
 'AllowedLangDesc' => 'Es wird empfohlen, nur die Sprachen auszuwählen, die verwendet werden sollen, anderenfalls werden alle Sprachen ausgewählt.',
 'Admin' => 'Verwalter Name',
 'AdminDesc' => 'Gib den Benutzernamen des Verwalters an. Sollte ein <a href="http://wackowiki.sourceforge.net/doc/Doc/Deutsch/WikiName" title="Hilfe lesen" target="_blank">WikiName</a> sein (z.B. WikiAdmin).',
