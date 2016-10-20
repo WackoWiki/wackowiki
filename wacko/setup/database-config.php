@@ -173,7 +173,7 @@ if ($config['is_update'] == false)
  */
 
 $engines	= [];
-$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB ('.$lang['Recommended'].')'];
+$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB / XtraDB ('.$lang['Recommended'].')'];
 $engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];
 
 $detected = 0;
