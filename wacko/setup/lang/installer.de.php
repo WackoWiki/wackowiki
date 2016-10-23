@@ -54,7 +54,7 @@ $lang = [
 'NameDesc' => 'Der Name deines WackoWikis. Normalerweise ist das ein <a href="http://wackowiki.sourceforge.net/doc/Doc/Deutsch/WikiName" title="Hilfe lesen" target="_blank">WikiName</a> und sieht EtwaSoAus (z.B. MeinWackoWiki).',
 'Home' => 'Startseite',
 'HomeDesc' => 'Der Name der Startseite deines WackoWikis. Sollte ein WikiName sein (z.B. StartSeite)., dies wird die Startseite sein deines Wikis und sollte ein <a href="http://wackowiki.sourceforge.net/doc/Doc/Deutsch/WikiName" title="Hilfe lesen" target="_blank">WikiName</a> sein.',
-'HomeDefault' => 'StartSeite',
+'HomeDefault' => 'Startseite',
 'MultiLang' => 'Mehrsprachen-Modus',
 'MultiLangDesc' => 'Der Mehrsprachen-Modus ermöglicht Seiten mit unterschiedlichen Spracheinstellungen innerhalb einer Installation. Wenn dieser Modus aktiviert ist, wird die Installations-Routine die Grundseiten für allen Sprachen erstellen, die in dieser Version verfügbar sind.',
 'AllowedLang' => 'Erlaubte Sprachen',

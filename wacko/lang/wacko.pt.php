@@ -79,7 +79,11 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
 	'WelcomeBack'				=> 'Welcome back, %1',
-	'LoginAttemtsExceeded'			=> 'Excedeu o número máximo de tentativas de login.<br />Além do seu nome de Utilizador e Senha deverá confirmar adicionalmente o código indicado na imagem abaixo.',
+	'LoginAttemtsExceeded'		=> 'Excedeu o número máximo de tentativas de login.<br />Além do seu nome de Utilizador e Senha deverá confirmar adicionalmente o código indicado na imagem abaixo.',
+
+	// session notice
+	'SessionTerminatedDue'		=> 'Session terminated due to %1',
+	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
 
 	// other
 	'Guest'						=> 'Clientes',

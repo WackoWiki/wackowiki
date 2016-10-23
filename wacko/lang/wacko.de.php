@@ -81,6 +81,10 @@ $wacko_translation = [
 	'WelcomeBack'				=> 'Willkommen zurück, %1',
 	'LoginAttemtsExceeded'		=> 'Du hast die maximal zulässige Zahl von Anmeldeversuchen überschritten.<br />Du musst nun deinen Benutzernamen und dein Passwort erneut eingeben sowie eine Sicherheitsabfrage beantworten.',
 
+	// session notice
+	'SessionTerminatedDue'		=> 'Sitzung ist wegen %1 abgelaufen.',
+	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+
 	// other
 	'Guest'						=> 'Gast',
 	'Help'						=> 'Hilfe',

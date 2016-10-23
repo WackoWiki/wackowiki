@@ -81,6 +81,10 @@ $wacko_translation = [
 	'WelcomeBack'				=> 'Welcome back, %1',
 	'LoginAttemtsExceeded'		=> 'You exceeded the maximum allowed number of login attempts.<br />In addition to your username and password you now also have to solve the CAPTCHA below.',
 
+	// session notice
+	'SessionTerminatedDue'		=> 'Session terminated due to %1',
+	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+
 	// other
 	'Guest'						=> 'Guest',
 	'Help'						=> 'Help',

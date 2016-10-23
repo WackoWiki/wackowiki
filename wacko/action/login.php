@@ -103,15 +103,15 @@ else // login
 					{
 						$hash = hash('md5', $password);
 					}
-					// check for old sha256 password
 					else
 					{
+						// check for old sha256 password
 						// load old salt
 						$salt = $this->db->load_single(
-											"SELECT salt ".
-												"FROM ".$this->db->user_table." ".
-												"WHERE user_name = ".$this->db->q($user_name)." ".
-												"LIMIT 1");
+							"SELECT salt ".
+							"FROM ".$this->db->user_table." ".
+							"WHERE user_name = ".$this->db->q($user_name)." ".
+							"LIMIT 1");
 						$hash = hash('sha256', $user_name . $salt['salt'] . $password);
 					}
 
@@ -163,9 +163,11 @@ else // login
 	}
 
 	$this->sess->login_captcha = 0;
+
 	if ($logins)
 	{
 		$this->log_user_delay();
+
 		if ($this->db->max_login_attempts && $logins > $this->db->max_login_attempts && ($cap = $this->show_captcha()))
 		{
 			$tpl->l_toomuch = true;
