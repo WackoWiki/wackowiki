@@ -225,7 +225,7 @@ class WackoFormatter
 			"\!\!(\S.*?\S)\!\!|".
 			// __...__
 			"__[^\n]*?__|".
-			//upper and lower indexes ^^...^^ and vv...vv
+			// upper and lower indexes ^^...^^ and vv...vv
 			"\^\^\S*?\^\^|".
 			"vv\S*?vv|".
 			// deleted text for diff
@@ -510,7 +510,7 @@ class WackoFormatter
 				return '<!--notypo-->'.$wacko->format($matches[1], 'safehtml').'<!--/notypo-->';
 			}
 		}
-		//table begin
+		// table begin
 		else if ($thing == '#||')
 		{
 			$this->br			= 0;
@@ -529,7 +529,7 @@ class WackoFormatter
 
 			return '<table class="usertable">';
 		}
-		//table end
+		// table end
 		else if (($thing == '|#' || $thing == '||#') && $this->table_scope)
 		{
 			$this->br			= 0;
@@ -538,7 +538,7 @@ class WackoFormatter
 
 			return '</table>';
 		}
-		//table head
+		// table head
 		else if (preg_match('/^\*\|(.*?)\|\*$/s', $thing, $matches) && $this->table_scope)
 		{
 			$this->br			= 1;
@@ -605,7 +605,7 @@ class WackoFormatter
 
 			return $output;
 		}
-		//table row and cells
+		// table row and cells
 		else if (preg_match('/^\|\|(.*?)\|\|$/s', $thing, $matches) && $this->table_scope)
 		{
 			$this->br			= 1;
