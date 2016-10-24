@@ -320,6 +320,7 @@ class Http
 	{
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
+			// TODO: move CSP settings to csp.conf and csp_custom.conf file
 			switch ($this->db->csp)
 			{
 				case 1:
@@ -566,7 +567,7 @@ class Http
 		if ($age >= 0)
 		{
 			if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $mtime)
-			{ 
+			{
 				// Ut::dbg('not modified');
 				$this->status(304);
 				return;
