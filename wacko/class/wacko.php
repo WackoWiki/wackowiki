@@ -4347,6 +4347,7 @@ class Wacko
 				if (isset($tpl))
 				{
 					$output = (string) $tpl;
+
 					if (($spare = ob_get_contents()))
 					{
 						trigger_error('templated ' . $__pathname . ' also produce echo-output', E_USER_WARNING);
@@ -4822,10 +4823,10 @@ class Wacko
 
 	function session_notice($message)
 	{
+		// TODO: pass and use user_lang
 		if ($message == 'ip')
 		{
-			$this->set_message('IP address changed to ' . $this->http->ip .
-				' (was ' . implode(', ', array_keys($this->sess->sticky__ip)) . ')');
+			$this->set_message(Ut::perc_replace($this->_t('IPAddressChanged', SYSTEM_LANG), $this->http->ip, implode(', ', array_keys($this->sess->sticky__ip))));
 		}
 		else if ($message && @$this->sess->sticky_login)
 		{
@@ -4841,7 +4842,7 @@ class Wacko
 				'ip' => 'ip',
 			];*/
 
-			$this->set_message('Session terminated due to ' . $message);
+			$this->set_message(Ut::perc_replace($this->_t('SessionTerminatedDue', SYSTEM_LANG), $message));
 			$this->sess->sticky_login = 0;
 		}
 	}
@@ -7300,7 +7301,7 @@ class Wacko
 			if ($root !== false)
 			{
 				if ($_counts = $this->db->load_all(
-				"SELECT kp.category_id, COUNT( kp.page_id ) AS n ".
+				"SELECT kp.category_id, COUNT(kp.page_id) AS n ".
 				"FROM {$this->db->table_prefix}category k , ".
 					"{$this->db->table_prefix}category_page kp ".
 					($root != ''
