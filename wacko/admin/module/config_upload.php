@@ -85,9 +85,9 @@ function admin_config_upload(&$engine, &$module)
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_max_size, false, true, true, false);?>" />
 					<?php $x = $engine->binary_multiples_factor($engine->db->upload_max_size, false); ?>
 					<select name="upload_max_size_factor">
-						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
-						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
-						<option value="2" <?php echo ( $x == 2 ? ' selected="selected"' : '' );?> >MiB</option>
+						<option value="0" <?php echo ($x == 0 ? ' selected="selected"' : '');?> >Bytes</option>
+						<option value="1" <?php echo ($x == 1 ? ' selected="selected"' : '');?> >KiB</option>
+						<option value="2" <?php echo ($x == 2 ? ' selected="selected"' : '');?> >MiB</option>
 					</select>
 				</td>
 			</tr>
@@ -100,10 +100,10 @@ function admin_config_upload(&$engine, &$module)
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota, false, true, true, false);?>" />
 				<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota, false); ?>
 				<select name="upload_quota_factor">
-						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
-						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
-						<option value="2" <?php echo ( $x == 2 ? ' selected="selected"' : '' );?> >MiB</option>
-						<option value="3" <?php echo ( $x == 3 ? ' selected="selected"' : '' );?> >GiB</option>
+						<option value="0" <?php echo ($x == 0 ? ' selected="selected"' : '');?> >Bytes</option>
+						<option value="1" <?php echo ($x == 1 ? ' selected="selected"' : '');?> >KiB</option>
+						<option value="2" <?php echo ($x == 2 ? ' selected="selected"' : '');?> >MiB</option>
+						<option value="3" <?php echo ($x == 3 ? ' selected="selected"' : '');?> >GiB</option>
 					</select>
 				</td>
 			</tr>
@@ -116,10 +116,10 @@ function admin_config_upload(&$engine, &$module)
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota_per_user, false, true, true, false);?>" />
 					<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota_per_user, false); ?>
 					<select name="upload_quota_per_user_factor">
-						<option value="0" <?php echo ( $x == 0 ? ' selected="selected"' : '' );?> >Bytes</option>
-						<option value="1" <?php echo ( $x == 1 ? ' selected="selected"' : '' );?> >KiB</option>
-						<option value="2" <?php echo ( $x == 2 ? ' selected="selected"' : '' );?> >MiB</option>
-						<option value="3" <?php echo ( $x == 3 ? ' selected="selected"' : '' );?> >GiB</option>
+						<option value="0" <?php echo ($x == 0 ? ' selected="selected"' : '');?> >Bytes</option>
+						<option value="1" <?php echo ($x == 1 ? ' selected="selected"' : '');?> >KiB</option>
+						<option value="2" <?php echo ($x == 2 ? ' selected="selected"' : '');?> >MiB</option>
+						<option value="3" <?php echo ($x == 3 ? ' selected="selected"' : '');?> >GiB</option>
 					</select>
 				</td>
 			</tr>

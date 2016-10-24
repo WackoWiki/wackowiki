@@ -387,16 +387,12 @@ function admin_db_restore(&$engine, &$module)
 			echo $engine->form_open('delete_backup');
 
 			echo '<input type="hidden" name="backup_id" value="'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />'."\n".
-				'<table class="formation">'.
-					'<tr>
-						<td>
-							<label for="">'.$engine->_t('BackupDelete').' \'<code>'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
-							'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-							'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>'.
-							'<br /><small>'.$engine->_t('BackupDeleteInfo').'</small>'.
-						'</td>
-					</tr>'.
-				'</table>
+				'<div class="warning">'.
+					'<label for="">'.$engine->_t('BackupDelete').' \'<code>'.htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
+					'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
+					'<a href="'.$engine->href().'" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>'.
+					'<br /><small>'.$engine->_t('BackupDeleteInfo').'</small>'.
+				'</div>
 				<br />';
 
 			echo $engine->form_close();
@@ -404,12 +400,12 @@ function admin_db_restore(&$engine, &$module)
 
 		// delete backup
 		if ((isset($_POST['delete']) && $_POST['backup_id'] == true)
-		||  (isset($_GET['delete']) && $_GET['backup_id'] == true))
+		||  (isset($_GET['delete'])  && $_GET['backup_id']  == true))
 		{
 			if ($backup_id)
 			{
 				remove_pack($engine, $backup_id);
-				$engine->log(1, 'Removed database backup '.$backup_id);
+				$engine->log(1, Ut::perc_replace($engine->_t('LogRemovedBackup', SYSTEM_LANG), $backup_id));
 			}
 
 			$message = $engine->_t('BackupRemoved');
