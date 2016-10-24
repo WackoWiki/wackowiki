@@ -67,6 +67,7 @@ $ap_translation = [
 									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" benannten Unterverzeichnis unter <code>files/backup</code> directory.<br />'.
 									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br />'.
 									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="?mode=db_restore">Restore database</a>.',
+	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Du kannst jedes gefundene Sicherungsspaket wiederherstellen oder vom Server entfernen.',
@@ -93,6 +94,7 @@ $ap_translation = [
 	'BackupEntireSite'			=> 'Gesamte Website',
 	'BackupRestored'			=> 'Die Datensicherung wurde wiederhergestellt, ein zusammenfassender Bericht ist angefügt. Um die Dateien zu dieser Datensicherung zu löschen, klicke bitte',
 	'BackupRemoved'				=> 'Die ausgewählte Datensicherung wurde erfolgreich entfernt.',
+	'LogRemovedBackup'			=> 'Sicherungskopie gelöscht ##%1##',
 
 	// User module
 	'UsersAdded'				=> 'Benutzer hinzugefügt',

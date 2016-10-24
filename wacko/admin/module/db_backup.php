@@ -185,7 +185,7 @@ function admin_db_backup(&$engine, &$module)
 		fclose($file);
 		chmod($filename, 0644);
 
-		$engine->log(1, 'Saved backup database '.trim($pack, '/'));
+		$engine->log(1, Ut::perc_replace($engine->_t('LogSavedBackup', SYSTEM_LANG), trim($pack, '/')));
 
 		$message = '<p>'.$engine->_t('BackupCompleted').'</p>';
 

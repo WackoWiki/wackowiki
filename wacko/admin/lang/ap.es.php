@@ -67,6 +67,7 @@ $ap_translation = [
 									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" named sub-directory of <code>files/backup</code> directory.<br />'.
 									'To download it use FTP (maintain the directory structure and file names when copying).<br />'.
 									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
+	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
@@ -93,6 +94,7 @@ $ap_translation = [
 	'BackupEntireSite'			=> 'Entire site',
 	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
+	'LogRemovedBackup'			=> 'Removed database backup ##%1##',
 
 	// User module
 	'UsersAdded'				=> 'User added',
