@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Comments                                         ##
 ########################################################
+$_module = 'content_comments';
 
-$module['content_comments'] = [
+$module[$_module] = [
 		'order'	=> 310,
-		'cat'	=> 'Content',
+		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'content_comments',
+		'mode'	=> $_module,
 		'name'	=> 'Comments',
 		'title'	=> 'Manage comments',
 	];

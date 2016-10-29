@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Approve Users                                    ##
 ########################################################
+$_module = 'user_approve';
 
-$module['user_approve'] = [
+$module[$_module] = [
 		'order'	=> 400,
-		'cat'	=> 'Users',
+		'cat'	=> 'users',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'user_approve',
+		'mode'	=> $_module,
 		'name'	=> 'Approve',
 		'title'	=> 'User registration approval',
 	];

@@ -186,10 +186,10 @@ foreach (Ut::file_glob('admin/{common,module}/*.php') as $filename)
 
 
 ########################################################
-##     Build menue                                    ##
+##     Build menu                                     ##
 ########################################################
 
-$menue = '<ul><li class="text submenu">'.$module['lock']['cat'].
+$menu = '<ul><li class="text submenu">'.$engine->_t('CategoryArray')[$module['lock']['cat']].
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
 				? "\n<ul>\n".'<li class="active">'
 				: "\n<ul>\n<li>").
@@ -215,22 +215,22 @@ foreach ($module as $row)
 	{
 		if ($row['mode'] != 'lock')
 		{
-			$menue .= ($row['cat'] != $category
-						? "</ul>\n</li>\n".'<li class="text submenu2">'.$row['cat']."<ul>\n"
+			$menu .= ($row['cat'] != $category
+						? "</ul>\n</li>\n".'<li class="text submenu2">'.$engine->_t('CategoryArray')[$row['cat']]."<ul>\n"
 						: '');
 
 			if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
 			{
-				$menue .= '<li class="active">';
+				$menu .= '<li class="active">';
 				$_title = $row['cat'].' &gt; '.$row['name'];
 			}
 			else
 			{
-				$menue .= '<li>';
+				$menu .= '<li>';
 			}
 
-			$menue .= '<a href="?mode='.$row['mode'].'" title="'.$row['title'].'">'.$row['name'].'</a>';
-			$menue .= "</li>\n";
+			$menu .= '<a href="?mode='.$row['mode'].'" title="'.$row['title'].'">'.$row['name'].'</a>';
+			$menu .= "</li>\n";
 		}
 		else
 		{
@@ -241,7 +241,7 @@ foreach ($module as $row)
 	$category = $row['cat'];
 }
 
-$menue .= "</ul>\n</li>\n</ul>";
+$menu .= "</ul>\n</li>\n</ul>";
 
 unset($category);
 
@@ -301,7 +301,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 	<nav id="menu" class="menu">
 		<div class="sub">
 <?php
-			echo $menue;
+			echo $menu;
 ?>
 		</div>
 	</nav>

@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Security settings                                ##
 ########################################################
+$_module = 'config_security';
 
-$module['config_security'] = [
+$module[$_module] = [
 		'order'	=> 221,
-		'cat'	=> 'Preferences',
+		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'config_security',
+		'mode'	=> $_module,
 		'name'	=> 'Security',
 		'title'	=> 'Security subsystems settings',
 	];

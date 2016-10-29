@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Messages settings                                ##
 ########################################################
+$_module = 'massemail';
 
-$module['massemail'] = [
+$module[$_module] = [
 		'order'	=> 700,
-		'cat'	=> 'Messages',
+		'cat'	=> 'messages',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'massemail',
+		'mode'	=> $_module,
 		'name'	=> 'Mass email',
 		'title'	=> 'Mass email',
 	];

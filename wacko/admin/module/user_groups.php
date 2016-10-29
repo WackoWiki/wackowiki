@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   User Groups                                      ##
 ########################################################
+$_module = 'user_groups';
 
-$module['user_groups'] = [
+$module[$_module] = [
 		'order'	=> 420,
-		'cat'	=> 'Users',
+		'cat'	=> 'users',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'user_groups',
+		'mode'	=> $_module,
 		'name'	=> 'Groups',
 		'title'	=> 'Group management',
 	];

@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Polls Moderation                                 ##
 ########################################################
+$_module = 'content_polls';
 
-$module['content_polls'] = [
+$module[$_module] = [
 		'order'	=> 330,
-		'cat'	=> 'Content',
+		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'content_polls',
+		'mode'	=> $_module,
 		'name'	=> 'Polls',
 		'title'	=> 'Editing, start and stop polls',
 	];

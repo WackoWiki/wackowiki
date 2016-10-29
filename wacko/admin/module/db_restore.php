@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Restore                                       ##
 ########################################################
+$_module = 'db_restore';
 
-$module['db_restore'] = [
+$module[$_module] = [
 		'order'	=> 510,
-		'cat'	=> 'Database',
+		'cat'	=> 'database',
 		'status'=> true,
-		'mode'	=> 'db_restore',
+		'mode'	=> $_module,
 		'name'	=> 'Restore',
 		'title'	=> 'Restoring backup data',
 		'vars'	=> [&$tables, &$directories],

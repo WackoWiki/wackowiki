@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Permissions settings                             ##
 ########################################################
+$_module = 'config_permissions';
 
-$module['config_permissions'] = [
+$module[$_module] = [
 		'order'	=> 220,
-		'cat'	=> 'Preferences',
+		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'config_permissions',
+		'mode'	=> $_module,
 		'name'	=> 'Permissions',
 		'title'	=> 'Permissions settings',
 	];

@@ -8,14 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Backup                                        ##
 ########################################################
+$_module = 'db_backup';
 
-$module['db_backup'] = [
+$module[$_module] = [
 		'order'	=> 500,
-		'cat'	=> 'Database',
+		'cat'	=> 'database',
 		'status'=> true,
-		'mode'	=> 'db_backup',
-		'name'	=> 'Backup',
-		'title'	=> 'Backing up data',
+		'mode'	=> $_module,
+		'name'	=> $engine->_t($_module)['name'],	// Backup
+		'title'	=> $engine->_t($_module)['title'],	// Backing up data
 		'vars'	=> [&$tables, &$directories],
 	];
 
@@ -30,17 +31,17 @@ function admin_db_backup(&$engine, &$module)
 	$scheme			= [];
 
 	// backup scheme
-	if (!isset($_GET['structure']) &&
-		!isset($_GET['data'])  &&
-		!isset($_GET['files']) )
+	if (   !isset($_GET['structure'])
+		&& !isset($_GET['data'])
+		&& !isset($_GET['files']))
 	{
 		$scheme['structure']	= 1;
 		$scheme['data']			= 1;
 	}
 
 	if (isset($_GET['structure'])	&& $_GET['structure']	== 1)	$scheme['structure']	= 1;
-	if (isset($_GET['data']) 		&& $_GET['data']		== 1)	$scheme['data']			= 1;
-	if (isset($_GET['files']) 		&& $_GET['files']		== 1)	$scheme['files']		= 1;
+	if (isset($_GET['data'])		&& $_GET['data']		== 1)	$scheme['data']			= 1;
+	if (isset($_GET['files'])		&& $_GET['files']		== 1)	$scheme['files']		= 1;
 
 	$getstr = '';
 
@@ -145,7 +146,7 @@ function admin_db_backup(&$engine, &$module)
 			}
 
 			// open file with writa access
-			$file	= fopen($filename, 'w');
+			$file = fopen($filename, 'w');
 
 			// write data (strip last semicolon
 			// off the sql) and close file
@@ -177,7 +178,8 @@ function admin_db_backup(&$engine, &$module)
 			WACKO_VERSION				// 6. wacko_version
 			// TODO: add metadata to avoid conflicts
 			// 7: unique_instance_key	-> warn / show user if he restores data from another deployment or
-
+			// 8: size
+			// 9: hash
 		];
 
 		// write log file

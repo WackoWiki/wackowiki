@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Uploaded Files                                   ##
 ########################################################
+$_module = 'content_files';
 
-$module['content_files'] = [
+$module[$_module] = [
 		'order'	=> 360,
-		'cat'	=> 'Content',
+		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'content_files',
+		'mode'	=> $_module,
 		'name'	=> 'Files',
 		'title'	=> 'Manage uploaded files',
 ];

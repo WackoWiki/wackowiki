@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   System Log                                       ##
 ########################################################
+$_module = 'system_log';
 
-$module['system_log'] = [
+$module[$_module] = [
 		'order'	=> 140,
-		'cat'	=> 'Basic functions',
+		'cat'	=> 'basics',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'system_log',
+		'mode'	=> $_module,
 		'name'	=> 'System log',
 		'title'	=> 'Log system events',
 	];

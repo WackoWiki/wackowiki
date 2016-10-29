@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Synchronization                               ##
 ########################################################
+$_module = 'maint_resync';
 
-$module['maint_resync'] = [
+$module[$_module] = [
 		'order'	=> 620,
-		'cat'	=> 'Maintenance',
+		'cat'	=> 'maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'maint_resync',
+		'mode'	=> $_module,
 		'name'	=> 'Data Synchronization',
 		'title'	=> 'Synchronizing data',
 	];
