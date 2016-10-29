@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   System Statistics                                ##
 ########################################################
+$_module = 'system_statistics';
 
-$module['system_statistics'] = [
+$module[$_module] = [
 		'order'	=> 120,
-		'cat'	=> 'Basic functions',
+		'cat'	=> 'basics',
 		'status'=> true,
-		'mode'	=> 'system_statistics',
+		'mode'	=> $_module,
 		'name'	=> 'Statistics',
 		'title'	=> 'Show statistics',
 		'vars'	=> [&$tables, &$directories],

@@ -8,6 +8,17 @@ if (!defined('IN_WACKO'))
 $ap_translation = [
 	'MainNote'					=> 'Hinweis: Es wird empfolen den Zugang zur Site für administrative Wartungsarbeiten zu sperren.',
 
+	'CategoryArray'		=> [
+		'basics'		=> 'Basisfunktion',
+		'preferences'	=> 'Einstellungen',
+		'content'		=> 'Inhalt',
+		'users'			=> 'Nutzer',
+		'maintenance'	=> 'Wartung',
+		'messages'		=> 'Mitteilung',
+		'extension'		=> 'Erweiterung',
+		'database'		=> 'Datenbank',
+	],
+
 	// Admin panel
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von Deinem Browser akzeptiert werden).',
@@ -51,6 +62,11 @@ $ap_translation = [
 	'Denied'					=> 'Abgelehnt',
 
 	// DB Backup module
+	'db_backup'		=> [
+		'name'		=> 'Datensicherung',
+		'title'		=> 'Daten sichern',
+	],
+
 	'BackupStructure'			=> 'Struktur',
 	'BackupData'				=> 'Daten',
 	'BackupFolder'				=> 'Ordner',

@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   System Informations                              ##
 ########################################################
+$_module = 'system_info';
 
-$module['system_info'] = [
+$module[$_module] = [
 		'order'	=> 130,
-		'cat'	=> 'Basic functions',
+		'cat'	=> 'basics',
 		'status'=> true,
-		'mode'	=> 'system_info',
+		'mode'	=> $_module,
 		'name'	=> 'System Info',
 		'title'	=> 'System Informations',
 	];

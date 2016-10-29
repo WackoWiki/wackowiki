@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Filter settings                                  ##
 ########################################################
+$_module = 'config_filter';
 
-$module['config_filter'] = [
+$module[$_module] = [
 		'order'	=> 250,
-		'cat'	=> 'Preferences',
+		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'config_filter',
+		'mode'	=> $_module,
 		'name'	=> 'Filter',
 		'title'	=> 'Filter settings',
 	];

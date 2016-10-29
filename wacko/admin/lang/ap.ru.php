@@ -8,6 +8,17 @@ if (!defined('IN_WACKO'))
 $ap_translation = [
 	'MainNote'					=> 'Внимание: перед проведением технических административных мероприятий <span class="underline">настоятельно</span> рекомендуется закрыть доступ к сайту!',
 
+	'CategoryArray'		=> [
+		'basics'		=> 'Basic functions',
+		'preferences'	=> 'Preferences',
+		'content'		=> 'Content',
+		'users'			=> 'Users',
+		'maintenance'	=> 'Maintenance',
+		'messages'		=> 'Messages',
+		'extension'		=> 'Extension',
+		'database'		=> 'Database',
+	],
+
 	// Admin panel
 	'Authorization'				=> 'Авторизация',
 	'AuthorizationTip'			=> 'Пожалуйста, укажите административный пароль (убедитесь также, что cookies в вашем браузере разрешены).',
@@ -51,6 +62,11 @@ $ap_translation = [
 	'Denied'					=> 'Отказано',
 
 	// DB Backup module
+	'db_backup'		=> [
+		'name'		=> 'Backup',
+		'title'		=> 'Backing up data',
+	],
+
 	'BackupStructure'			=> 'Структура',
 	'BackupData'				=> 'Данные',
 	'BackupFolder'				=> 'Каталог',

@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Database Repair and Optimization Script          ##
 ########################################################
+$_module = 'db_repair';
 
-$module['db_repair'] = [
+$module[$_module] = [
 		'order'	=> 540,
-		'cat'	=> 'Database',
+		'cat'	=> 'database',
 		'status'=> true,
-		'mode'	=> 'db_repair',
+		'mode'	=> $_module,
 		'name'	=> 'Repair',
 		'title'	=> 'Repair and Optimize Database',
 		'vars'	=> [&$tables, &$directories],

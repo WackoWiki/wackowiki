@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Pages                                            ##
 ########################################################
+$_module = 'content_pages';
 
-$module['content_pages'] = [
+$module[$_module] = [
 		'order'	=> 300,
-		'cat'	=> 'Content',
+		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'content_pages',
+		'mode'	=> $_module,
 		'name'	=> 'Pages',
 		'title'	=> 'Manage pages',
 	];

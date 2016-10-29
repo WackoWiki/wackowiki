@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Menu                                             ##
 ########################################################
+$_module = 'content_menu';
 
-$module['content_menu'] = [
+$module[$_module] = [
 		'order'	=> 320,
-		'cat'	=> 'Content',
+		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'content_menu',
+		'mode'	=> $_module,
 		'name'	=> 'Menu',
 		'title'	=> 'Add, edit or remove default menu items',
 	];

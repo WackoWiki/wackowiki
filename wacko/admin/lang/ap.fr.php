@@ -8,6 +8,17 @@ if (!defined('IN_WACKO'))
 $ap_translation = [
 	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
+	'CategoryArray'		=> [
+		'basics'		=> 'Basic functions',
+		'preferences'	=> 'Preferences',
+		'content'		=> 'Content',
+		'users'			=> 'Users',
+		'maintenance'	=> 'Maintenance',
+		'messages'		=> 'Messages',
+		'extension'		=> 'Extension',
+		'database'		=> 'Database',
+	],
+
 	// Admin panel
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Merci d&rsquo;indiquer le mot de passe d&rsquo;administration (assurez-vous également que les cookies soient autorisés par votre navigateur).',
@@ -51,6 +62,11 @@ $ap_translation = [
 	'Denied'					=> 'Denied',
 
 	// DB Backup module
+	'db_backup'		=> [
+		'name'		=> 'Backup',
+		'title'		=> 'Backing up data',
+	],
+
 	'BackupStructure'			=> 'Structure',
 	'BackupData'				=> 'Data',
 	'BackupFolder'				=> 'Folder',

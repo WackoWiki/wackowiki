@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Email settings                                   ##
 ########################################################
+$_module = 'config_email';
 
-$module['config_email'] = [
+$module[$_module] = [
 		'order'	=> 270,
-		'cat'	=> 'Preferences',
+		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'config_email',
+		'mode'	=> $_module,
 		'name'	=> 'Email',
 		'title'	=> 'Email settings',
 	];

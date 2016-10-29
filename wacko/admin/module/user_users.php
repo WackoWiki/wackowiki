@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Users                                            ##
 ########################################################
+$_module = 'user_users';
 
-$module['user_users'] = [
+$module[$_module] = [
 		'order'	=> 410,
-		'cat'	=> 'Users',
+		'cat'	=> 'users',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'user_users',
+		'mode'	=> $_module,
 		'name'	=> 'Users',
 		'title'	=> 'User management',
 	];

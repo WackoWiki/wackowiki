@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Upload settings                                  ##
 ########################################################
+$_module = 'config_upload';
 
-$module['config_upload'] = [
+$module[$_module] = [
 		'order'	=> 250,
-		'cat'	=> 'Preferences',
+		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'config_upload',
+		'mode'	=> $_module,
 		'name'	=> 'Upload',
 		'title'	=> 'Attachment settings',
 	];

@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Messages settings                                ##
 ########################################################
+$_module = 'messages';
 
-$module['messages'] = [
+$module[$_module] = [
 		'order'	=> 710,
-		'cat'	=> 'Messages',
+		'cat'	=> 'messages',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> 'messages',
+		'mode'	=> $_module,
 		'name'	=> 'System message',
 		'title'	=> 'System messages',
 	];
