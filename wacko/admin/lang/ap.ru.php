@@ -9,11 +9,11 @@ $ap_translation = [
 	'MainNote'					=> 'Внимание: перед проведением технических административных мероприятий <span class="underline">настоятельно</span> рекомендуется закрыть доступ к сайту!',
 
 	'CategoryArray'		=> [
-		'basics'		=> 'Basic functions',
-		'preferences'	=> 'Preferences',
-		'content'		=> 'Content',
-		'users'			=> 'Users',
-		'maintenance'	=> 'Maintenance',
+		'basics'		=> 'Базовые функции',
+		'preferences'	=> 'Настройки',
+		'content'		=> 'Контент',
+		'users'			=> 'Пользователей',
+		'maintenance'	=> 'Обслуживание',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
 		'database'		=> 'База данных',
@@ -24,6 +24,217 @@ $ap_translation = [
 	'AuthorizationTip'			=> 'Пожалуйста, укажите административный пароль (убедитесь также, что cookies в вашем браузере разрешены).',
 	'NoRecoceryPassword'		=> 'Административный пароль не задан!',
 	'NoRecoceryPasswordTip'		=> 'Внимание: отсутствие административного пароля представляет угрозу для безопасности! Укажите пароль в файле настроек и запустите программу повторно.',
+
+	// MENU
+	// Config Basic module
+	'config_basic'		=> [
+		'name'		=> 'Базовые',
+		'title'		=> 'Основные параметры',
+	],
+
+	// Config Email module
+	'config_email'		=> [
+		'name'		=> 'Email',
+		'title'		=> 'Email settings',
+	],
+
+	// Config Filter module
+	'config_filter'		=> [
+		'name'		=> 'Filter',
+		'title'		=> 'Filter settings',
+	],
+
+	// Config Formatter module
+	'config_formatter'		=> [
+		'name'		=> 'Formatter',
+		'title'		=> 'Formatting options',
+	],
+
+	// Config Notifications module
+	'config_notifications'		=> [
+		'name'		=> 'Notifications',
+		'title'		=> 'Notifications settings',
+	],
+
+	// Config Pages module
+	'config_pages'		=> [
+		'name'		=> 'Страницы',
+		'title'		=> 'Адреса и параметры служебных страниц',
+	],
+
+	// Config Permissions module
+	'config_permissions'		=> [
+		'name'		=> 'Permissions',
+		'title'		=> 'Permissions settings',
+	],
+
+	// Config Security module
+	'config_security'		=> [
+		'name'		=> 'Безопасность',
+		'title'		=> 'Настройка подсистем безопасности',
+	],
+
+	// Config System module
+	'config_system'		=> [
+		'name'		=> 'Служебные',
+		'title'		=> 'Служебные параметры',
+	],
+
+	// Config Upload module
+	'config_upload'		=> [
+		'name'		=> 'Upload',
+		'title'		=> 'Attachment settings',
+	],
+
+	// Categories module
+	'content_categories'		=> [
+		'name'		=> 'Categories',
+		'title'		=> 'Manage categories',
+	],
+
+	// Comments module
+	'content_comments'		=> [
+		'name'		=> 'Comments',
+		'title'		=> 'Manage comments',
+	],
+
+	// Deleted module
+	'content_deleted'		=> [
+		'name'		=> 'Удаленные документы',
+		'title'		=> 'Управление копиями недавно удаленных документов',
+	],
+
+	// Files module
+	'content_files'		=> [
+		'name'		=> 'Глобальные файлы',
+		'title'		=> 'Управление глобальными файлами',
+	],
+
+	// Menu module
+	'content_menu'		=> [
+		'name'		=> 'Меню',
+		'title'		=> 'Add, edit or remove default menu items',
+	],
+
+	// Pages module
+	'content_pages'		=> [
+		'name'		=> 'Страницы',
+		'title'		=> 'Manage pages',
+	],
+
+	// Polls module
+	'content_polls'		=> [
+		'name'		=> 'Управление опросами',
+		'title'		=> 'Редактирование, запуск и остановка опросов',
+	],
+
+	// DB Backup module
+	'db_backup'		=> [
+		'name'		=> 'Резервное копирование',
+		'title'		=> 'Резервное копирование данных',
+	],
+
+	// DB Convert module
+	'db_convert'		=> [
+		'name'		=> 'Convert',
+		'title'		=> 'Converting Tables or Columns',
+	],
+
+	// DB optimize module
+	'db_optimize'		=> [
+		'name'		=> 'Оптимизация базы',
+		'title'		=> 'Оптимизация базы данных',
+	],
+
+	// DB Repair module
+	'db_repair'		=> [
+		'name'		=> 'Repair',
+		'title'		=> 'Repair and Optimize Database',
+	],
+
+	// DB Restore module
+	'db_restore'		=> [
+		'name'		=> 'Восстановление базы',
+		'title'		=> 'Восстановление резервных данных',
+	],
+
+	// Dashboard module
+	'lock'		=> [
+		'name'		=> 'Главное меню',
+		'title'		=> 'Управление WackoWiki',
+	],
+
+	// Inconsistencies module
+	'maint_inconsistencies'		=> [
+		'name'		=> 'Inconsistencies',
+		'title'		=> 'Fixing Data Inconsistencies',
+	],
+
+	// Data Synchronization module
+	'maint_resync'		=> [
+		'name'		=> 'Синхронизация данных',
+		'title'		=> 'Синхронизация базы данных',
+	],
+
+	// Transliterate module
+	'maint_transliterate'		=> [
+		'name'		=> 'Transliterate',
+		'title'		=> 'Update the supertag in the database records',
+	],
+
+	// Mass email module
+	'massemail'		=> [
+		'name'		=> 'Mass email',
+		'title'		=> 'Mass email',
+	],
+
+	// System message module
+	'messages'		=> [
+		'name'		=> 'System message',
+		'title'		=> 'System messages',
+	],
+
+	// System Info module
+	'system_info'		=> [
+		'name'		=> 'System Info',
+		'title'		=> 'System Informations',
+	],
+
+	// System log module
+	'system_log'		=> [
+		'name'		=> 'Системный журнал',
+		'title'		=> 'Журнал системных событий',
+	],
+
+	// Statistics module
+	'system_statistics'		=> [
+		'name'		=> 'Statistics',
+		'title'		=> 'Show statistics',
+	],
+
+	// Bad Behavior module
+	'badbehavior'		=> [
+		'name'		=> 'Bad Behavior',
+		'title'		=> 'Bad Behavior',
+	],
+
+	// Registration Approval module
+	'user_approve'		=> [
+		'name'		=> 'Approve',
+		'title'		=> 'User registration approval',
+	],
+
+	// Groups module
+	'user_groups'		=> [
+		'name'		=> 'Групп',
+		'title'		=> 'Group management',
+	],
+
+	// User module
+	'user_users'		=> [
+		'name'		=> 'Пользователей',
+		'title'		=> 'User management',
+	],
 
 	'LogFilterTip'				=> 'Отфильтровать события по критериям',
 	'LogLevel'					=> 'Уровень',
@@ -62,11 +273,6 @@ $ap_translation = [
 	'Denied'					=> 'Отказано',
 
 	// DB Backup module
-	'db_backup'		=> [
-		'name'		=> 'Резервное копирование',
-		'title'		=> 'Резервное копирование данных',
-	],
-
 	'BackupStructure'			=> 'Структура',
 	'BackupData'				=> 'Данные',
 	'BackupFolder'				=> 'Каталог',

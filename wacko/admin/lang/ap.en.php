@@ -128,6 +128,12 @@ $ap_translation = [
 		'title'		=> 'Editing, start and stop polls',
 	],
 
+	// DB Backup module
+	'db_backup'		=> [
+		'name'		=> 'Backup',
+		'title'		=> 'Backing up data',
+	],
+
 	// DB Convert module
 	'db_convert'		=> [
 		'name'		=> 'Convert',
@@ -267,11 +273,6 @@ $ap_translation = [
 	'Denied'					=> 'Denied',
 
 	// DB Backup module
-	'db_backup'		=> [
-		'name'		=> 'Backup',
-		'title'		=> 'Backing up data',
-	],
-
 	'BackupStructure'			=> 'Structure',
 	'BackupData'				=> 'Data',
 	'BackupFolder'				=> 'Folder',

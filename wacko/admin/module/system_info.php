@@ -28,7 +28,7 @@ function admin_system_info(&$engine, &$module)
 	<br />
 	Version informations:<br />
 	<br />
-	<table style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
+	<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 		<tr>
 			<th style="width:120px;">Parameter</th>
 			<th style="text-align:left;"></th>
