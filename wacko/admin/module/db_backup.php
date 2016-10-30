@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Backup                                        ##
 ########################################################
-$_module = 'db_backup';
+$_mode = 'db_backup';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 500,
 		'cat'	=> 'database',
 		'status'=> true,
-		'mode'	=> $_module,
-		'name'	=> $engine->_t($_module)['name'],	// Backup
-		'title'	=> $engine->_t($_module)['title'],	// Backing up data
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Backup
+		'title'	=> $engine->_t($_mode)['title'],	// Backing up data
 		'vars'	=> [&$tables, &$directories],
 	];
 

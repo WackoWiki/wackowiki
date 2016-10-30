@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Messages settings                                ##
 ########################################################
-$_module = 'massemail';
+$_mode = 'massemail';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 700,
 		'cat'	=> 'messages',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Mass email',
-		'title'	=> 'Mass email',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Mass email
+		'title'	=> $engine->_t($_mode)['title'],	// Mass email
 	];
 
 ########################################################

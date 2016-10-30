@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Security settings                                ##
 ########################################################
-$_module = 'config_security';
+$_mode = 'config_security';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 221,
 		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Security',
-		'title'	=> 'Security subsystems settings',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Security
+		'title'	=> $engine->_t($_mode)['title'],	// Security subsystems settings
 	];
 
 ########################################################

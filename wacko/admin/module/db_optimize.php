@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Optimization                                  ##
 ########################################################
-$_module = 'db_optimize';
+$_mode = 'db_optimize';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 530,
 		'cat'	=> 'database',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Optimization',
-		'title'	=> 'Optimizing the database',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Optimization
+		'title'	=> $engine->_t($_mode)['title'],	// Optimizing the database
 		'vars'	=> [&$tables],
 	];
 

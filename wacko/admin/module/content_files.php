@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Uploaded Files                                   ##
 ########################################################
-$_module = 'content_files';
+$_mode = 'content_files';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 360,
 		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Files',
-		'title'	=> 'Manage uploaded files',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Files
+		'title'	=> $engine->_t($_mode)['title'],	// Manage uploaded files
 ];
 
 ########################################################

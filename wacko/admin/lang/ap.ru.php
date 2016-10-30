@@ -16,7 +16,7 @@ $ap_translation = [
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'database'		=> 'База данных',
 	],
 
 	// Admin panel
@@ -63,8 +63,8 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
-		'title'		=> 'Backing up data',
+		'name'		=> 'Резервное копирование',
+		'title'		=> 'Резервное копирование данных',
 	],
 
 	'BackupStructure'			=> 'Структура',

@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Engine Conversion                             ##
 ########################################################
-$_module = 'db_convert';
+$_mode = 'db_convert';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 520,
 		'cat'	=> 'database',
 		'status'=> true,
-		'mode'	=> $_module,
-		'name'	=> 'Convert',
-		'title'	=> 'Converting Tables or Columns',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Convert
+		'title'	=> $engine->_t($_mode)['title'],	// Converting Tables or Columns
 		'vars'	=> [&$tables],
 ];
 

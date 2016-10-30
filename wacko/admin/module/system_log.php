@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   System Log                                       ##
 ########################################################
-$_module = 'system_log';
+$_mode = 'system_log';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 140,
 		'cat'	=> 'basics',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'System log',
-		'title'	=> 'Log system events',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// System log
+		'title'	=> $engine->_t($_mode)['title'],	// Log system events
 	];
 
 ########################################################

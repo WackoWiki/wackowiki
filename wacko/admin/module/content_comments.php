@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Comments                                         ##
 ########################################################
-$_module = 'content_comments';
+$_mode = 'content_comments';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 310,
 		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Comments',
-		'title'	=> 'Manage comments',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Comments
+		'title'	=> $engine->_t($_mode)['title'],	// Manage comments
 	];
 
 ########################################################

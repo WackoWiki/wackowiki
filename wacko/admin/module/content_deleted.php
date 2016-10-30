@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Recently deleted pages controls                  ##
 ########################################################
-$_module = 'content_deleted';
+$_mode = 'content_deleted';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 340,
 		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Deleted',
-		'title'	=> 'Newly deleted content',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Deleted
+		'title'	=> $engine->_t($_mode)['title'],	// Newly deleted content
 	];
 
 ########################################################
