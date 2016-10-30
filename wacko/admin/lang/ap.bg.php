@@ -25,6 +25,217 @@ $ap_translation = [
 	'NoRecoceryPassword'	=> 'The administrative password is not specified!',
 	'NoRecoceryPasswordTip'	=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
 
+	// MENU
+	// Config Basic module
+	'config_basic'		=> [
+		'name'		=> 'Basic',
+		'title'		=> 'Basic parameters',
+	],
+
+	// Config Email module
+	'config_email'		=> [
+		'name'		=> 'Email',
+		'title'		=> 'Email settings',
+	],
+
+	// Config Filter module
+	'config_filter'		=> [
+		'name'		=> 'Filter',
+		'title'		=> 'Filter settings',
+	],
+
+	// Config Formatter module
+	'config_formatter'		=> [
+		'name'		=> 'Formatter',
+		'title'		=> 'Formatting options',
+	],
+
+	// Config Notifications module
+	'config_notifications'		=> [
+		'name'		=> 'Notifications',
+		'title'		=> 'Notifications settings',
+	],
+
+	// Config Pages module
+	'config_pages'		=> [
+		'name'		=> 'Pages',
+		'title'		=> 'Pages and site parameters',
+	],
+
+	// Config Permissions module
+	'config_permissions'		=> [
+		'name'		=> 'Permissions',
+		'title'		=> 'Permissions settings',
+	],
+
+	// Config Security module
+	'config_security'		=> [
+		'name'		=> 'Security',
+		'title'		=> 'Security subsystems settings',
+	],
+
+	// Config System module
+	'config_system'		=> [
+		'name'		=> 'System',
+		'title'		=> 'System options',
+	],
+
+	// Config Upload module
+	'config_upload'		=> [
+		'name'		=> 'Upload',
+		'title'		=> 'Attachment settings',
+	],
+
+	// Categories module
+	'content_categories'		=> [
+		'name'		=> 'Categories',
+		'title'		=> 'Manage categories',
+	],
+
+	// Comments module
+	'content_comments'		=> [
+		'name'		=> 'Comments',
+		'title'		=> 'Manage comments',
+	],
+
+	// Deleted module
+	'content_deleted'		=> [
+		'name'		=> 'Deleted',
+		'title'		=> 'Newly deleted content',
+	],
+
+	// Files module
+	'content_files'		=> [
+		'name'		=> 'Files',
+		'title'		=> 'Manage uploaded files',
+	],
+
+	// Menu module
+	'content_menu'		=> [
+		'name'		=> 'Menu',
+		'title'		=> 'Add, edit or remove default menu items',
+	],
+
+	// Pages module
+	'content_pages'		=> [
+		'name'		=> 'Pages',
+		'title'		=> 'Manage pages',
+	],
+
+	// Polls module
+	'content_polls'		=> [
+		'name'		=> 'Polls',
+		'title'		=> 'Editing, start and stop polls',
+	],
+
+	// DB Backup module
+	'db_backup'		=> [
+		'name'		=> 'Backup',
+		'title'		=> 'Backing up data',
+	],
+
+	// DB Convert module
+	'db_convert'		=> [
+		'name'		=> 'Convert',
+		'title'		=> 'Converting Tables or Columns',
+	],
+
+	// DB optimize module
+	'db_optimize'		=> [
+		'name'		=> 'Optimization',
+		'title'		=> 'Optimizing the database',
+	],
+
+	// DB Repair module
+	'db_repair'		=> [
+		'name'		=> 'Repair',
+		'title'		=> 'Repair and Optimize Database',
+	],
+
+	// DB Restore module
+	'db_restore'		=> [
+		'name'		=> 'Restore',
+		'title'		=> 'Restoring backup data',
+	],
+
+	// Dashboard module
+	'lock'		=> [
+		'name'		=> 'Main Menu',
+		'title'		=> 'WackoWiki Administration',
+	],
+
+	// Inconsistencies module
+	'maint_inconsistencies'		=> [
+		'name'		=> 'Inconsistencies',
+		'title'		=> 'Fixing Data Inconsistencies',
+	],
+
+	// Data Synchronization module
+	'maint_resync'		=> [
+		'name'		=> 'Data Synchronization',
+		'title'		=> 'Synchronizing data',
+	],
+
+	// Transliterate module
+	'maint_transliterate'		=> [
+		'name'		=> 'Transliterate',
+		'title'		=> 'Update the supertag in the database records',
+	],
+
+	// Mass email module
+	'massemail'		=> [
+		'name'		=> 'Mass email',
+		'title'		=> 'Mass email',
+	],
+
+	// System message module
+	'messages'		=> [
+		'name'		=> 'System message',
+		'title'		=> 'System messages',
+	],
+
+	// System Info module
+	'system_info'		=> [
+		'name'		=> 'System Info',
+		'title'		=> 'System Informations',
+	],
+
+	// System log module
+	'system_log'		=> [
+		'name'		=> 'System log',
+		'title'		=> 'Log of system events',
+	],
+
+	// Statistics module
+	'system_statistics'		=> [
+		'name'		=> 'Statistics',
+		'title'		=> 'Show statistics',
+	],
+
+	// Bad Behavior module
+	'badbehavior'		=> [
+		'name'		=> 'Bad Behavior',
+		'title'		=> 'Bad Behavior',
+	],
+
+	// Registration Approval module
+	'user_approve'		=> [
+		'name'		=> 'Approve',
+		'title'		=> 'User registration approval',
+	],
+
+	// Groups module
+	'user_groups'		=> [
+		'name'		=> 'Groups',
+		'title'		=> 'Group management',
+	],
+
+	// User module
+	'user_users'		=> [
+		'name'		=> 'Users',
+		'title'		=> 'User management',
+	],
+
 	'LogFilterTip'			=> 'Filter events by criteria',
 	'LogLevel'				=> 'Level',
 	'LogLevelNotLower'		=> 'not less than',
@@ -62,11 +273,6 @@ $ap_translation = [
 	'Denied'					=> 'Denied',
 
 	// DB Backup module
-	'db_backup'		=> [
-		'name'		=> 'Backup',
-		'title'		=> 'Backing up data',
-	],
-
 	'BackupStructure'			=> 'Structure',
 	'BackupData'				=> 'Data',
 	'BackupFolder'				=> 'Folder',

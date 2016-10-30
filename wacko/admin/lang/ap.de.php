@@ -25,6 +25,217 @@ $ap_translation = [
 	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
 	'NoRecoceryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
 
+	// MENU
+	// Config Basic module
+	'config_basic'		=> [
+		'name'		=> 'Allgemein',
+		'title'		=> 'Basic parameters',
+	],
+
+	// Config Email module
+	'config_email'		=> [
+		'name'		=> 'E-Mail',
+		'title'		=> 'Email settings',
+	],
+
+	// Config Filter module
+	'config_filter'		=> [
+		'name'		=> 'Filter',
+		'title'		=> 'Filter settings',
+	],
+
+	// Config Formatter module
+	'config_formatter'		=> [
+		'name'		=> 'Formatierer',
+		'title'		=> 'Formatting options',
+	],
+
+	// Config Notifications module
+	'config_notifications'		=> [
+		'name'		=> 'Mitteilungen',
+		'title'		=> 'Notifications settings',
+	],
+
+	// Config Pages module
+	'config_pages'		=> [
+		'name'		=> 'Seiten',
+		'title'		=> 'Pages and site parameters',
+	],
+
+	// Config Permissions module
+	'config_permissions'		=> [
+		'name'		=> 'Berechtigungen',
+		'title'		=> 'Permissions settings',
+	],
+
+	// Config Security module
+	'config_security'		=> [
+		'name'		=> 'Sicherheit',
+		'title'		=> 'Security subsystems settings',
+	],
+
+	// Config System module
+	'config_system'		=> [
+		'name'		=> 'System',
+		'title'		=> 'System options',
+	],
+
+	// Config Upload module
+	'config_upload'		=> [
+		'name'		=> 'Hochladen',
+		'title'		=> 'Attachment settings',
+	],
+
+	// Categories module
+	'content_categories'		=> [
+		'name'		=> 'Kategorien',
+		'title'		=> 'Manage categories',
+	],
+
+	// Comments module
+	'content_comments'		=> [
+		'name'		=> 'Kommentare',
+		'title'		=> 'Manage comments',
+	],
+
+	// Deleted module
+	'content_deleted'		=> [
+		'name'		=> 'Gelöscht',
+		'title'		=> 'Newly deleted content',
+	],
+
+	// Files module
+	'content_files'		=> [
+		'name'		=> 'Dateien',
+		'title'		=> 'Manage uploaded files',
+	],
+
+	// Menu module
+	'content_menu'		=> [
+		'name'		=> 'Menü',
+		'title'		=> 'Add, edit or remove default menu items',
+	],
+
+	// Pages module
+	'content_pages'		=> [
+		'name'		=> 'Seiten',
+		'title'		=> 'Manage pages',
+	],
+
+	// Polls module
+	'content_polls'		=> [
+		'name'		=> 'Umfragen',
+		'title'		=> 'Editing, start and stop polls',
+	],
+
+	// DB Backup module
+	'db_backup'		=> [
+		'name'		=> 'Datensicherung',
+		'title'		=> 'Daten sichern',
+	],
+
+	// DB Convert module
+	'db_convert'		=> [
+		'name'		=> 'Konvertieren',
+		'title'		=> 'Converting Tables or Columns',
+	],
+
+	// DB optimize module
+	'db_optimize'		=> [
+		'name'		=> 'Optimierung',
+		'title'		=> 'Optimizing the database',
+	],
+
+	// DB Repair module
+	'db_repair'		=> [
+		'name'		=> 'Reperatur',
+		'title'		=> 'Repair and Optimize Database',
+	],
+
+	// DB Restore module
+	'db_restore'		=> [
+		'name'		=> 'Wiederherstellung',
+		'title'		=> 'Restoring backup data',
+	],
+
+	// Dashboard module
+	'lock'		=> [
+		'name'		=> 'Haupt-Menü',
+		'title'		=> 'WackoWiki Administration',
+	],
+
+	// Inconsistencies module
+	'maint_inconsistencies'		=> [
+		'name'		=> 'Inkonsistenzen',
+		'title'		=> 'Fixing Data Inconsistencies',
+	],
+
+	// Data Synchronization module
+	'maint_resync'		=> [
+		'name'		=> 'Daten-Synchronisation',
+		'title'		=> 'Synchronizing data',
+	],
+
+	// Transliterate module
+	'maint_transliterate'		=> [
+		'name'		=> 'Transliteration',
+		'title'		=> 'Update the supertag in the database records',
+	],
+
+	// Mass email module
+	'massemail'		=> [
+		'name'		=> 'Mass-E-Mail',
+		'title'		=> 'Mass email',
+	],
+
+	// System message module
+	'messages'		=> [
+		'name'		=> 'System-Nachrichten',
+		'title'		=> 'System messages',
+	],
+
+	// System Info module
+	'system_info'		=> [
+		'name'		=> 'System Info',
+		'title'		=> 'System Informations',
+	],
+
+	// System log module
+	'system_log'		=> [
+		'name'		=> 'System-Log',
+		'title'		=> 'Log of system events',
+	],
+
+	// Statistics module
+	'system_statistics'		=> [
+		'name'		=> 'Statistik',
+		'title'		=> 'Show statistics',
+	],
+
+	// Bad Behavior module
+	'badbehavior'		=> [
+		'name'		=> 'Bad Behavior',
+		'title'		=> 'Bad Behavior',
+	],
+
+	// Registration Approval module
+	'user_approve'		=> [
+		'name'		=> 'Approve',
+		'title'		=> 'User registration approval',
+	],
+
+	// Groups module
+	'user_groups'		=> [
+		'name'		=> 'Gruppen',
+		'title'		=> 'Gruppen-Verwaltung',
+	],
+
+	// User module
+	'user_users'		=> [
+		'name'		=> 'Nutzer',
+		'title'		=> 'Nutzer-Verwaltung',
+	],
+
 	'LogFilterTip'				=> 'Filtere Ereignisse nach Kriterien',
 	'LogLevel'					=> 'Stufe',
 	'LogLevelNotLower'			=> 'nicht weniger als',
@@ -62,11 +273,6 @@ $ap_translation = [
 	'Denied'					=> 'Abgelehnt',
 
 	// DB Backup module
-	'db_backup'		=> [
-		'name'		=> 'Datensicherung',
-		'title'		=> 'Daten sichern',
-	],
-
 	'BackupStructure'			=> 'Struktur',
 	'BackupData'				=> 'Daten',
 	'BackupFolder'				=> 'Ordner',
