@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Maintaince setting                               ##
 ########################################################
-$_module = 'config_system';
+$_mode = 'config_system';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 210,
 		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'System',
-		'title'	=> 'System options',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// System
+		'title'	=> $engine->_t($_mode)['title'],	// System options
 	];
 
 ########################################################

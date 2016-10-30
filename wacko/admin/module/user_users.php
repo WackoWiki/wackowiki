@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Users                                            ##
 ########################################################
-$_module = 'user_users';
+$_mode = 'user_users';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 410,
 		'cat'	=> 'users',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Users',
-		'title'	=> 'User management',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Users
+		'title'	=> $engine->_t($_mode)['title'],	// User management
 	];
 
 ########################################################

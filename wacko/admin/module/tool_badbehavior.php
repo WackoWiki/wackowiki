@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Bad Behavior                                     ##
 ########################################################
-$_module = 'badbehavior';
+$_mode = 'badbehavior';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 800,
 		'cat'	=> 'extension',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Bad Behavior',
-		'title'	=> 'Bad Behavior',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Bad Behavior
+		'title'	=> $engine->_t($_mode)['title'],	// Bad Behavior
 		'vars'	=> [&$tables, &$directories],
 	];
 

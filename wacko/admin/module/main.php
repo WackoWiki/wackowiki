@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Welcome screen and site locking                  ##
 ########################################################
-$_module = 'lock';
+$_mode = 'lock';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 100,
 		'cat'	=> 'basics',
 		'status'=> true,
-		'mode'	=> $_module,
-		'name'	=> 'Main Menu',
-		'title'	=> 'WackoWiki Administration',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Main Menu
+		'title'	=> $engine->_t($_mode)['title'],	// WackoWiki Administration
 		'objs'	=> [&$config],
 	];
 

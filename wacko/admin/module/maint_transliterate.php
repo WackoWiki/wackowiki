@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Update                                        ##
 ########################################################
-$_module = 'maint_transliterate';
+$_mode = 'maint_transliterate';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 610,
 		'cat'	=> 'maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Transliterate',
-		'title'	=> 'Update the supertag in the database records',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Transliterate
+		'title'	=> $engine->_t($_mode)['title'],	// Update the supertag in the database records
 	];
 
 ########################################################

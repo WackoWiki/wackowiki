@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Synchronization                               ##
 ########################################################
-$_module = 'maint_resync';
+$_mode = 'maint_resync';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 620,
 		'cat'	=> 'maintenance',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Data Synchronization',
-		'title'	=> 'Synchronizing data',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Data Synchronization
+		'title'	=> $engine->_t($_mode)['title'],	// Synchronizing data
 	];
 
 ########################################################

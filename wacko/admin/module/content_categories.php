@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Pages                                            ##
 ########################################################
-$_module = 'content_categories';
+$_mode = 'content_categories';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 350,
 		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Categories',
-		'title'	=> 'Manage categories',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Categories
+		'title'	=> $engine->_t($_mode)['title'],	// Manage categories
 	];
 
 ########################################################

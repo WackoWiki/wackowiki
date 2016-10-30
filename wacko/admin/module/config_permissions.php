@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Permissions settings                             ##
 ########################################################
-$_module = 'config_permissions';
+$_mode = 'config_permissions';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 220,
 		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Permissions',
-		'title'	=> 'Permissions settings',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Permissions
+		'title'	=> $engine->_t($_mode)['title'],	// Permissions settings
 	];
 
 ########################################################

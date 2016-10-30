@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Formatter setting                                ##
 ########################################################
-$_module = 'config_formatter';
+$_mode = 'config_formatter';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 230,
 		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Formatter',
-		'title'	=> 'Formatting options',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Formatter
+		'title'	=> $engine->_t($_mode)['title'],	// Formatting options
 	];
 
 ########################################################

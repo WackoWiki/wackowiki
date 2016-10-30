@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Basic settings                                   ##
 ########################################################
-$_module = 'config_basic';
+$_mode = 'config_basic';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 200,
 		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Basic',
-		'title'	=> 'Basic parameters',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Basic
+		'title'	=> $engine->_t($_mode)['title'],	// Basic parameters
 	];
 
 ########################################################

@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Notifications settings                           ##
 ########################################################
-$_module = 'config_notifications';
+$_mode = 'config_notifications';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 271,
 		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Notifications',
-		'title'	=> 'Notifications settings',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Notifications
+		'title'	=> $engine->_t($_mode)['title'],	// Notifications settings
 	];
 
 ########################################################

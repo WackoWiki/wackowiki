@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Upload settings                                  ##
 ########################################################
-$_module = 'config_upload';
+$_mode = 'config_upload';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 250,
 		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Upload',
-		'title'	=> 'Attachment settings',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Upload
+		'title'	=> $engine->_t($_mode)['title'],	// Attachment settings
 	];
 
 ########################################################

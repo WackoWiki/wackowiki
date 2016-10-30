@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   System Informations                              ##
 ########################################################
-$_module = 'system_info';
+$_mode = 'system_info';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 130,
 		'cat'	=> 'basics',
 		'status'=> true,
-		'mode'	=> $_module,
-		'name'	=> 'System Info',
-		'title'	=> 'System Informations',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// System Info
+		'title'	=> $engine->_t($_mode)['title'],	// System Informations
 	];
 
 ########################################################
@@ -76,8 +76,8 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['server_name']			= ['Server name', $_SERVER['SERVER_NAME']];
 	$sysinfo['server_software']		= ['Web server', $_SERVER['SERVER_SOFTWARE']];
 	$sysinfo['db_version']			= ['MariaDB / MySQL version', $db_version];
-	$sysinfo['sql_mode_global']		= ['SQL Modes Global', $sql_mode_global];
-	$sysinfo['sql_mode_session']	= ['SQL Modes Session', $sql_mode_session];
+	$sysinfo['sql_mode_global']		= ['SQL Modes Global', wordwrap($sql_mode_global, 80, "\n", true)];
+	$sysinfo['sql_mode_session']	= ['SQL Modes Session', wordwrap($sql_mode_session, 80, "\n", true)];
 	$sysinfo['php_version']			= ['PHP Version', PHP_VERSION];
 	$sysinfo['memory']				= ['Memory', $engine->binary_multiples($_php_ram * 1024 * 1024, false, true, true)];
 	$sysinfo['upload_max_filesize']	= ['Upload max filesize', $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];

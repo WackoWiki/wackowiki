@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   User Groups                                      ##
 ########################################################
-$_module = 'user_groups';
+$_mode = 'user_groups';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 420,
 		'cat'	=> 'users',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Groups',
-		'title'	=> 'Group management',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Groups
+		'title'	=> $engine->_t($_mode)['title'],	// Group management
 	];
 
 ########################################################

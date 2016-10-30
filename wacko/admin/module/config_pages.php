@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Pages settings                                   ##
 ########################################################
-$_module = 'config_pages';
+$_mode = 'config_pages';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 280,
 		'cat'	=> 'preferences',
 		'status'=> (RECOVERY_MODE ? false : true),
-		'mode'	=> $_module,
-		'name'	=> 'Pages',
-		'title'	=> 'Pages and site parameters',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Pages
+		'title'	=> $engine->_t($_mode)['title'],	// Pages and site parameters
 	];
 
 ########################################################

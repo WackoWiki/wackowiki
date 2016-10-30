@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   System Statistics                                ##
 ########################################################
-$_module = 'system_statistics';
+$_mode = 'system_statistics';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 120,
 		'cat'	=> 'basics',
 		'status'=> true,
-		'mode'	=> $_module,
-		'name'	=> 'Statistics',
-		'title'	=> 'Show statistics',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Statistics
+		'title'	=> $engine->_t($_mode)['title'],	// Show statistics
 		'vars'	=> [&$tables, &$directories],
 	];
 

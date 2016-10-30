@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   DB Restore                                       ##
 ########################################################
-$_module = 'db_restore';
+$_mode = 'db_restore';
 
-$module[$_module] = [
+$module[$_mode] = [
 		'order'	=> 510,
 		'cat'	=> 'database',
 		'status'=> true,
-		'mode'	=> $_module,
-		'name'	=> 'Restore',
-		'title'	=> 'Restoring backup data',
+		'mode'	=> $_mode,
+		'name'	=> $engine->_t($_mode)['name'],		// Restore
+		'title'	=> $engine->_t($_mode)['title'],	// Restoring backup data
 		'vars'	=> [&$tables, &$directories],
 	];
 
