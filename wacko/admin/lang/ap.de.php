@@ -29,13 +29,13 @@ $ap_translation = [
 	// Config Basic module
 	'config_basic'		=> [
 		'name'		=> 'Allgemein',
-		'title'		=> 'Basic parameters',
+		'title'		=> 'Grundeinstellungen',
 	],
 
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'E-Mail',
-		'title'		=> 'Email settings',
+		'title'		=> 'E-Mail-Einstellungen',
 	],
 
 	// Config Filter module
@@ -77,7 +77,7 @@ $ap_translation = [
 	// Config System module
 	'config_system'		=> [
 		'name'		=> 'System',
-		'title'		=> 'System options',
+		'title'		=> 'System-Einstellungen',
 	],
 
 	// Config Upload module
@@ -101,31 +101,31 @@ $ap_translation = [
 	// Deleted module
 	'content_deleted'		=> [
 		'name'		=> 'Gelöscht',
-		'title'		=> 'Newly deleted content',
+		'title'		=> 'Neu gelöschte Inhalte',
 	],
 
 	// Files module
 	'content_files'		=> [
 		'name'		=> 'Dateien',
-		'title'		=> 'Manage uploaded files',
+		'title'		=> 'Verwalte hochgeladene Dateien',
 	],
 
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Menü',
-		'title'		=> 'Add, edit or remove default menu items',
+		'title'		=> 'Hinzufügen, Bearbeiten oder Entfernen von Standard-Menüpunkten',
 	],
 
 	// Pages module
 	'content_pages'		=> [
 		'name'		=> 'Seiten',
-		'title'		=> 'Manage pages',
+		'title'		=> 'Seiten verwalten',
 	],
 
 	// Polls module
 	'content_polls'		=> [
 		'name'		=> 'Umfragen',
-		'title'		=> 'Editing, start and stop polls',
+		'title'		=> 'Bearbeiten, Starten und Stoppen von Abstimmungen',
 	],
 
 	// DB Backup module
@@ -155,7 +155,7 @@ $ap_translation = [
 	// DB Restore module
 	'db_restore'		=> [
 		'name'		=> 'Wiederherstellung',
-		'title'		=> 'Restoring backup data',
+		'title'		=> 'Wiederherstellen von Sicherungsdaten',
 	],
 
 	// Dashboard module
@@ -167,13 +167,13 @@ $ap_translation = [
 	// Inconsistencies module
 	'maint_inconsistencies'		=> [
 		'name'		=> 'Inkonsistenzen',
-		'title'		=> 'Fixing Data Inconsistencies',
+		'title'		=> 'Inkonsistenzen beheben',
 	],
 
 	// Data Synchronization module
 	'maint_resync'		=> [
 		'name'		=> 'Daten-Synchronisation',
-		'title'		=> 'Synchronizing data',
+		'title'		=> 'Daten synchronisieren',
 	],
 
 	// Transliterate module
@@ -185,31 +185,31 @@ $ap_translation = [
 	// Mass email module
 	'massemail'		=> [
 		'name'		=> 'Mass-E-Mail',
-		'title'		=> 'Mass email',
+		'title'		=> 'Mass-E-Mail',
 	],
 
 	// System message module
 	'messages'		=> [
 		'name'		=> 'System-Nachrichten',
-		'title'		=> 'System messages',
+		'title'		=> 'System-Nachrichten',
 	],
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
-		'title'		=> 'System Informations',
+		'name'		=> 'System-Info',
+		'title'		=> 'Systeminformationen',
 	],
 
 	// System log module
 	'system_log'		=> [
 		'name'		=> 'System-Log',
-		'title'		=> 'Log of system events',
+		'title'		=> 'Protokoll der Systemereignisse',
 	],
 
 	// Statistics module
 	'system_statistics'		=> [
 		'name'		=> 'Statistik',
-		'title'		=> 'Show statistics',
+		'title'		=> 'Zeige Statistiken',
 	],
 
 	// Bad Behavior module
@@ -220,8 +220,8 @@ $ap_translation = [
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
-		'title'		=> 'User registration approval',
+		'name'		=> 'Freischaltung',
+		'title'		=> 'Neu registrierte Benutzer zulassen',
 	],
 
 	// Groups module
@@ -310,8 +310,8 @@ $ap_translation = [
 									'** If the backup contains the user files (global and perpage, cache files, etc.), '.
 									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. '.
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
-	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated table keys (not replace)',
-	'IgnoreSameFiles'			=> 'Ignore the same files (not overwrite)',
+	'IgnoreDuplicatedKeys'		=> 'Ignoriere doppelte Tabellenschlüssel (nicht ersetzen)',
+	'IgnoreSameFiles'			=> 'Ignoriere die gleichen Dateien (nicht überschreiben)',
 	'NoBackupsAvailable'		=> 'Keien Datensicherung verfügbar.',
 	'BackupEntireSite'			=> 'Gesamte Website',
 	'BackupRestored'			=> 'Die Datensicherung wurde wiederhergestellt, ein zusammenfassender Bericht ist angefügt. Um die Dateien zu dieser Datensicherung zu löschen, klicke bitte',
