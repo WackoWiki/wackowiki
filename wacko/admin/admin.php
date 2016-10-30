@@ -193,7 +193,7 @@ $menu = '<ul><li class="text submenu">'.$engine->_t('CategoryArray')[$module['lo
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
 				? "\n<ul>\n".'<li class="active">'
 				: "\n<ul>\n<li>").
-			'<a href="admin.php">'.$module['lock']['name'].'</a>'.
+			'<a href="admin.php" title="'.$module['lock']['title'].'">'.$module['lock']['name'].'</a>'.
 			"</li>\n";
 
 $category = $module['lock']['cat'];
