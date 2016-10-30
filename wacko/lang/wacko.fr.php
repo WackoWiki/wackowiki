@@ -292,8 +292,8 @@ $wacko_translation = [
 	'YouAreNowTheOwner'			=> 'Vous n&rsquo;êtes pas le propriétaire de cette page.',
 
 	'DiffMode0'					=> 'Différence complète',
-	'DiffMode1'				=> 'Simple différence entre les deux versions',
-	'DiffMode2'				=> 'Source',
+	'DiffMode1'					=> 'Simple différence entre les deux versions',
+	'DiffMode2'					=> 'Source',
 	'DiffMode3'					=> 'Side by side',
 	'DiffMode4'					=> 'Inline',
 	'DiffMode5'					=> 'Unified',
@@ -475,8 +475,8 @@ $wacko_translation = [
 	'CloneCannotCreate'			=> 'Uncreatable page <strong>%1</strong>.',
 
 	'SortComment'				=> 'Sort comment by',
-	'SortCommentAsc'			=> 'Most recent on bottom',
-	'SortCommentDesc'			=> 'Most recent on top',
+	'SortCommentAsc'			=> 'Le plus récent sur le fond',
+	'SortCommentDesc'			=> 'Le plus récent sur le dessus',
 
 	'RenamePage'				=> 'Renommer cette page',
 	'RenameText'				=> 'Renommer',
@@ -496,11 +496,11 @@ $wacko_translation = [
 	'UserSettingsNotifications'	=> 'Notifications',
 
 	'NotifyMinorEdit'			=> 'Notify also minor edit',
-	'NotifyPageEdit'			=> 'Edit',
+	'NotifyPageEdit'			=> 'Modifier',
 	'NotifyComment'				=> 'Comment',
 	'NotifyOff'					=> 'Off',
-	'NotifyAlways'				=> 'Always',
-	'NotifyPending'				=> 'Pending',
+	'NotifyAlways'				=> 'Toujours',
+	'NotifyPending'				=> 'En attendant',
 	'NotifyDigest'				=> 'Digest',
 	'NotifyPendingPageTip'		=> 'Only one notification is sent for the first page change of a page you are watching.',
 	'NotifyPendingCommentTip'	=> 'Only one notification is sent for the first comment to a page you are watching.',
@@ -574,7 +574,7 @@ $wacko_translation = [
 
 	'Watchers'					=> 'Liste des utilisateurs qui surveillent %1',
 	'NoWatchers'				=> 'Personne ne surveille %1',
-	'NotOwnerAndViewWatchers'	=>'N&rsquo;étant pas le propriétaire de cette page, vous ne pouvez pas voir la liste des utilisateurs qui la surveillent.',
+	'NotOwnerAndViewWatchers'	=> 'N&rsquo;étant pas le propriétaire de cette page, vous ne pouvez pas voir la liste des utilisateurs qui la surveillent.',
 
 	// mywatches action
 	'WatchedPages'				=> 'Liste de toutes les pages que vous surveillez',
@@ -598,7 +598,7 @@ $wacko_translation = [
 	'Cluster'					=> 'Groupe',
 	'PageDeleted'				=> 'Page deleted',
 	'CommentDeleted'			=> 'Comment deleted',
-	'FileDeleted'				=> 'File deleted',
+	'FileDeleted'				=> 'Fichier supprimé',
 
 	// users action
 	'UsersSearch'				=> 'Trouver des utilisateurs',
@@ -626,7 +626,7 @@ $wacko_translation = [
 	'UsersPersonalInfo'			=> 'Informations personnelles',
 	'UsersOwnedPages'			=> 'Pages dont l&rsquo;utilisateur est propriétaire',
 	'UsersCommentsPosted'		=> 'Commentaires postés',
-	'UsersFilesUploaded'		=> 'Files uploaded',
+	'UsersFilesUploaded'		=> 'Fichiers téléchargés',
 	'UsersRevisionsMade'		=> 'Révisions effectuées',
 	'UsersDocsSortName'			=> '[Trier par nom]',
 	'UsersDocsSortDate'			=> '[Trier par date de création]',
@@ -728,7 +728,7 @@ $wacko_translation = [
 	'SetShowMenuLabel'			=> 'Montrer en navigation',
 
 	// upload
-	'UploadFiles'				=> 'Upload files',
+	'UploadFiles'				=> 'Télécharger des fichiers',
 	'UploadFor'					=> 'Déposer un fichier ',
 	'UploadButtonText'			=> 'Effectuer le dépôt',
 	'UploadGlobalText'			=> 'pour accès public',
@@ -755,7 +755,7 @@ $wacko_translation = [
 	'UploadRemovedFromFSError'	=> 'Il semble impossible d&rsquo;effacer le fichier !',
 	'UploadRemoveConfirm'		=> '&Ecirc;tes-vous certain(e) de vouloir enlever ce fichier ?',
 	'UploadRemoveDenied'		=> 'Vous n&rsquo;êtes pas autorisé à enlever ce fichier',
-	'UploadRemoveNotFound'		=> 'File not found.',
+	'UploadRemoveNotFound'		=> 'Fichier non trouvé.',
 	'UploadMax'					=> 'Pas plus de ',
 	'UploadUsedStorage'			=> 'Espace de stockage utilisé pour le dépôt ',
 
@@ -772,7 +772,7 @@ $wacko_translation = [
 	'Files0'					=> 'Aucun fichier n&rsquo;est joint à cette page. ',
 	'Files1'					=> 'Un seul fichier est joint à cette page.',
 	'FilesN'					=> '%1 fichiers sont joints à cette page.',
-	'Files'					=> 'Fichiers',
+	'Files'						=> 'Fichiers',
 	'ShowFiles'					=> 'Montrer les fichiers joints/le formulaire pour en joindre',
 	'HideFiles'					=> 'Cacher les fichiers/le formulaire',
 	'DoShowFiles'				=> 'Montrer la liste des fichiers par défaut',
@@ -885,10 +885,10 @@ $wacko_translation = [
 	'ExportClusterXML'			=> 'Export du groupe entier de ',
 	'AccessDeniedXML'			=> 'Vous n&rsquo;êtes pas autorisé(e) à accéder à cette information.',
 
-	'ChangesFeed'			=> 'Changements récents',
-	'CommentsFeed'			=> 'Commentaires récents',
-	'NewsFeed'				=> 'Nouvelles récents',
-	'RevisionsFeed'		=> 'Historique/révisions de ',
+	'ChangesFeed'				=> 'Changements récents',
+	'CommentsFeed'				=> 'Commentaires récents',
+	'NewsFeed'					=> 'Nouvelles récents',
+	'RevisionsFeed'				=> 'Historique/révisions de ',
 
 	'LastModification'			=> 'Dernière modification',
 
@@ -1114,12 +1114,12 @@ $wacko_translation = [
 		'es' => 'Espagnol',
 	],
 
-	'AccountStatus'				=> 'Account status',
+	'AccountStatus'				=> 'Statut du compte',
 	'AccountStatusArray' => [
-		'0' => 'active',
-		'1' => 'pending',
-		'2' => 'blocked',
-		'3' => 'inactive',
+		'0' => 'actif',
+		'1' => 'en attendant',
+		'2' => 'bloqué',
+		'3' => 'inactif',
 	],
 
 	'JustNow'		=> 'just now',
@@ -1158,8 +1158,8 @@ $wacko_translation = [
 
 	// loading error
 	'UnknownAction'				=> 'Action inconnue',
-	'UnknownMethod'				=> 'Unknown method',
-	'FormatterNotFound'			=> 'Formatter %1 not found',
+	'UnknownMethod'				=> 'Méthode inconnue',
+	'FormatterNotFound'			=> 'Formatter %1 n\'a pas trouvé',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Connexion réussie au panneau d&rsquo;administration',
