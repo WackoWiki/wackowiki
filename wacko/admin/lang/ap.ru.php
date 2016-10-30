@@ -25,6 +25,22 @@ $ap_translation = [
 	'NoRecoceryPassword'		=> 'Административный пароль не задан!',
 	'NoRecoceryPasswordTip'		=> 'Внимание: отсутствие административного пароля представляет угрозу для безопасности! Укажите пароль в файле настроек и запустите программу повторно.',
 
+	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
+
+	'ApHomePage'				=> 'Home Page',
+	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
+	'ApLogOut'					=> 'Log out',
+	'ApLogOutTip'				=> 'quit system administration',
+
+	'TimeLeft'					=> 'Time left:  %1 minutes',
+
+	'SiteOpen'					=> 'open',
+	'SiteOpened'				=> 'site opened',
+	'SiteOpenedTip'				=> 'The site is open',
+	'SiteClose'					=> 'close',
+	'SiteClosed'				=> 'site closed',
+	'SiteClosedTip'				=> 'The site is closed',
+
 	// MENU
 	// Config Basic module
 	'config_basic'		=> [
@@ -246,7 +262,8 @@ $ap_translation = [
 	'LogEvent'					=> 'Событие',
 	'LogUsername'				=> 'Пользователь',
 
-	'PurgeSessions'				=> 'Прочистить все сессии',
+	'PurgeSessions'				=> 'purge',
+	'PurgeSessionsTip'			=> 'Прочистить все сессии',
 	'PurgeSessionsConfirm'		=> 'Увереный в прочистке сессий? Это прекратит сессии всех текущих пользователей.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Сессии прочищены.',

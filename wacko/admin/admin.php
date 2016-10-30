@@ -56,7 +56,7 @@ if (@$_GET['action'] === 'logout')
 // recovery password
 if (!$engine->db->recovery_password)
 {
-	echo '<strong>'.$engine->_t('NoRecoceryPassword').'</strong><br />';
+	echo '<strong>' . $engine->_t('NoRecoceryPassword') . '</strong><br />';
 	echo $engine->_t('NoRecoceryPasswordTip');
 
 	die();
@@ -73,10 +73,10 @@ if (@$_POST['_action'] === 'emergency')
 			)
 		)
 	{
-		$engine->db->cookie_path	= preg_replace('|https?://[^/]+|i', '', $engine->db->base_url.'');
+		$engine->db->cookie_path				= preg_replace('|https?://[^/]+|i', '', $engine->db->base_url.'');
 
-		$engine->sess->ap_created			=
-		$engine->sess->ap_last_activity		= time();
+		$engine->sess->ap_created				=
+		$engine->sess->ap_last_activity			= time();
 		$engine->sess->ap_failed_login_count	= 0;
 
 		if ($engine->db->ap_failed_login_count > 0)
@@ -113,12 +113,12 @@ if (@$_POST['_action'] === 'emergency')
 }
 
 // check authorization
-$user			= '';
-$_title			= '';
+$user		= '';
+$_title		= '';
 
 if (!isset($engine->sess->ap_created))
 {
-	header('Content-Type: text/html; charset='.$engine->get_charset());
+	header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 	<!DOCTYPE html>
 	<html>
@@ -135,7 +135,7 @@ if (!isset($engine->sess->ap_created))
 		<div id="loginbox">
 			<strong><?php echo $engine->_t('Authorization'); ?></strong><br />
 			<?php echo $engine->_t('AuthorizationTip'); ?>
-			<br /><?php #echo $engine->charset; // XXX: only for testing ?><br />
+			<br /><br />
 			<?php
 			echo $engine->form_open('emergency', ['tag' => 'admin.php']);
 			// <form action="admin.php" method="post" name="emergency"> -- by STS
@@ -193,7 +193,7 @@ $menu = '<ul><li class="text submenu">'.$engine->_t('CategoryArray')[$module['lo
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
 				? "\n<ul>\n".'<li class="active">'
 				: "\n<ul>\n<li>").
-			'<a href="admin.php" title="'.$module['lock']['title'].'">'.$module['lock']['name'].'</a>'.
+			'<a href="admin.php" title="' . $module['lock']['title'] . '">' . $module['lock']['name'] . '</a>'.
 			"</li>\n";
 
 $category = $module['lock']['cat'];
@@ -216,20 +216,20 @@ foreach ($module as $row)
 		if ($row['mode'] != 'lock')
 		{
 			$menu .= ($row['cat'] != $category
-						? "</ul>\n</li>\n".'<li class="text submenu2">'.$engine->_t('CategoryArray')[$row['cat']]."<ul>\n"
+						? "</ul>\n</li>\n" . '<li class="text submenu2">' . $engine->_t('CategoryArray')[$row['cat']] . "<ul>\n"
 						: '');
 
 			if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
 			{
 				$menu .= '<li class="active">';
-				$_title = $row['cat'].' &gt; '.$row['name'];
+				$_title = $row['cat'] . ' &gt; ' . $row['name'];
 			}
 			else
 			{
 				$menu .= '<li>';
 			}
 
-			$menu .= '<a href="?mode='.$row['mode'].'" title="'.$row['title'].'">'.$row['name'].'</a>';
+			$menu .= '<a href="?mode=' . $row['mode'] . '" title="' . $row['title'] . '">' . $row['name'] . '</a>';
 			$menu .= "</li>\n";
 		}
 		else
@@ -249,12 +249,12 @@ unset($category);
 ##                     Page header                    ##
 ########################################################
 
-header('Content-Type: text/html; charset='.$engine->get_charset());
+header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>WackoWiki Management System <?php echo ': '.$_title; ?></title>
+<title>WackoWiki Management System <?php echo ': ' . $_title; ?></title>
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta http-equiv="Content-Type" content="text/html; "/>
 <link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/atom.css" rel="stylesheet" media="screen" />
@@ -267,26 +267,26 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 	<div id="pane">
 		<div class="left"></div>
 		<div class="middle">
-			<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php"><img src="<?php echo rtrim($engine->db->base_url).'image/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
+			<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php"><img src="<?php echo rtrim($engine->db->base_url) . 'image/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
 		</div>
 		<div id="tools">
 			<span>
 				<?php echo (RECOVERY_MODE === true ? '<strong>RECOVERY_MODE</strong>' : ''); ?>
 				&nbsp;&nbsp;
 				<?php $time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
-				echo "Time left: ".$time_left." minutes"; ?>
+				echo Ut::perc_replace($engine->_t('TimeLeft'), $time_left); ?>
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')); ?>
 				&nbsp;&nbsp;
-				<?php echo ($db->is_locked() ? '<strong>site closed</strong>' : 'site opened'); ?>
+				<?php echo ($db->is_locked() ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')); ?>
 				&nbsp;&nbsp;
 				version <?php echo $engine->db->wacko_version; ?>
 			</span>
 		</div>
 		<br style="clear: right" />
 		<div id="sections">
-			<a href="<?php echo rtrim($engine->db->base_url); ?>" title="open the home page, you do not quit administration">Home Page</a>
-			<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php?action=logout" title="quit system administration">Log out</a>
+			<a href="<?php echo rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>'; ?>
+			<a href="<?php echo rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' .$engine->_t('ApLogOutTip') .'">' . $engine->_t('ApLogOut') .'</a>'; ?>
 		</div>
 	</div>
 </header>
@@ -326,21 +326,21 @@ $engine->output_messages();
 
 if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
 {
-	if (function_exists('admin_'.$_REQUEST['mode']) === true)
+	if (function_exists('admin_' . $_REQUEST['mode']) === true)
 	{
 		// page context
-		$engine->tag = $engine->supertag = 'admin.php?mode='.$_REQUEST['mode'];
+		$engine->tag = $engine->supertag = 'admin.php?mode=' . $_REQUEST['mode'];
 		$engine->context[++$engine->current_context] = $engine->tag;
 
 		// module run
-		$exec = 'admin_'.$_REQUEST['mode'];
+		$exec = 'admin_' . $_REQUEST['mode'];
 		$exec($engine, $module[$_REQUEST['mode']]);
 
 		$engine->current_context--;
 	}
 	else
 	{
-		echo '<em><br /><br />Error loading admin module "'.$_REQUEST['mode'].'.php": does not exists.</em>';
+		echo '<br /><br /><em>' . Ut::perc_replace($engine->_t('ErrorLoadingModule'), '<code>' . $_REQUEST['mode'] . '.php</code>') . '</em>';
 	}
 }
 else if (!($_GET && $_POST))

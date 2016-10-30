@@ -25,6 +25,22 @@ $ap_translation = [
 	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
 	'NoRecoceryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
 
+	'ErrorLoadingModule'		=> 'Fehler beim Laden des Admin-Moduls %1: existiert nicht.',
+
+	'ApHomePage'				=> 'Startseite',
+	'ApHomePageTip'				=> 'Öffne die Startseite, beende nicht die Verwaltung ',
+	'ApLogOut'					=> 'Abmelden',
+	'ApLogOutTip'				=> 'Beende die Systemverwaltung',
+
+	'TimeLeft'					=> 'Restzeit:  %1 Minuten',
+
+	'SiteOpen'					=> 'offen',
+	'SiteOpened'				=> 'Website geöffnet',
+	'SiteOpenedTip'				=> 'Die Website ist offen',
+	'SiteClose'					=> 'geschlossen',
+	'SiteClosed'				=> 'Website geschlossen',
+	'SiteClosedTip'				=> 'Die Website ist geschlossen',
+
 	// MENU
 	// Config Basic module
 	'config_basic'		=> [
@@ -246,7 +262,8 @@ $ap_translation = [
 	'LogEvent'					=> 'Ereignis',
 	'LogUsername'				=> 'Benutzername',
 
-	'PurgeSessions'				=> 'Entferne alle Sitzungen',
+	'PurgeSessions'				=> 'entfernen',
+	'PurgeSessionsTip'			=> 'Entferne alle Sitzungen',
 	'PurgeSessionsConfirm'		=> 'Bist du dir sicher, daß du alle Sitzungen entfernen willst? Dies wird alle Nuzer abmelden.',
 	'PurgeSessionsExplain'		=> 'Entferne alle Sitzungen. Dies wird alle Nuzer abmelden in dem es die auth_token Tabelle leert.',
 	'PurgeSessionsDone'			=> 'Sitzungen erfolgreich enfernt.',

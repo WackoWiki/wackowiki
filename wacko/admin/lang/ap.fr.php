@@ -25,6 +25,22 @@ $ap_translation = [
 	'NoRecoceryPassword'		=> 'le mot de passe d&rsquo;administration n&rsquo;est pas spécifié !',
 	'NoRecoceryPasswordTip'		=> 'Note&nbsp;: l&rsquo; absence de mot de passe d&rsquo;administration constitue une menace pour la sécurité ! Saisissez votre mot de passe dans le fichier de configuration et exécutez le programme de nouveau.',
 
+	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
+
+	'ApHomePage'				=> 'Home Page',
+	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
+	'ApLogOut'					=> 'Log out',
+	'ApLogOutTip'				=> 'quit system administration',
+
+	'TimeLeft'					=> 'Time left:  %1 minutes',
+
+	'SiteOpen'					=> 'open',
+	'SiteOpened'				=> 'site opened',
+	'SiteOpenedTip'				=> 'The site is open',
+	'SiteClose'					=> 'close',
+	'SiteClosed'				=> 'site closed',
+	'SiteClosedTip'				=> 'The site is closed',
+
 	// MENU
 	// Config Basic module
 	'config_basic'		=> [
@@ -246,7 +262,8 @@ $ap_translation = [
 	'LogEvent'					=> 'Événement',
 	'LogUsername'				=> 'Nom d&rsquo;utilisateur',
 
-	'PurgeSessions'				=> 'Purge all sessions',
+	'PurgeSessions'				=> 'purge',
+	'PurgeSessionsTip'			=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
