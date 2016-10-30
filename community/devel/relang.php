@@ -57,7 +57,7 @@ function parse($fname)
 	$contents = trim($contents);
 
 	$parent = 0;
-	if (!preg_match('/\$([\w_]+)\s*=\s*array\s*\(/', $contents, $match))
+	if (!preg_match('/\$([\w_]+)\s*=\s*\[/', $contents, $match))
 	{
 		if (!$defvar) die("no var in $fname\n");
 		$var = $defvar;
