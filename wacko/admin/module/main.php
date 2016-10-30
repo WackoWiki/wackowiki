@@ -48,11 +48,11 @@ function admin_lock(&$engine, &$module)
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
 	{
-		#$sql = "TRUNCATE {$engine->db->table_prefix}auth_token";
-		#$engine->db->sql_query($sql);
+		# $sql = "TRUNCATE {$engine->db->table_prefix}auth_token";
+		# $engine->db->sql_query($sql);
 		$engine->sess->delete_cookie(AUTH_TOKEN);
 		// queries
-		#$engine->config->invalidate_sql_cache();
+		# $engine->config->invalidate_sql_cache();
 
 	}
 ?>
@@ -68,8 +68,8 @@ function admin_lock(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="lock" />
 			<tr class="hl_setting">
-				<td class="label" style="white-space:nowrap"><?php echo ( $config->is_locked() === true ? '<span class="red">The site is closed</span>' : '<span class="green">The site is open</span>' ); ?></td>
-				<td style="text-align:center;"><input type="submit" id="submit" value="<?php echo ( $config->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
+				<td class="label" style="white-space:nowrap"><?php echo ($config->is_locked() === true ? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>' : '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?></td>
+				<td style="text-align:center;"><input type="submit" id="submit" value="<?php echo ($config->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>" /></td>
 			</tr>
 	<br />
 <?php
@@ -81,7 +81,7 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="action" value="cache" />
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap"><?php echo $engine->_t('ClearCache');?></td>
-				<td style="text-align:center;"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->_t('CacheCleared') : '<input type="submit" id="submit" value="clean" />');?></td>
+				<td style="text-align:center;"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->_t('CacheCleared') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '" />');?></td>
 			</tr>
 <?php
 	echo $engine->form_close();
@@ -92,9 +92,9 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="mode" value="lock" />
 		<input type="hidden" name="action" value="purge_sessions" />
 			<tr class="hl_setting">
-				<td class="label" style="white-space:nowrap"><?php echo $engine->_t('PurgeSessions');?>
+				<td class="label" style="white-space:nowrap"><?php echo $engine->_t('PurgeSessionsTip');?>
 				<br /><?php #echo $engine->_t('PurgeSessionsExplain');?></td>
-				<td><?php  echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<input type="submit" id="submit" value="purge" />');?></td>
+				<td style="text-align:center;"><?php echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '" />');?></td>
 			</tr>
 		</table>
 <?php
