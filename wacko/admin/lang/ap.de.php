@@ -41,37 +41,37 @@ $ap_translation = [
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'title'		=> 'Filter-Einstellungen',
 	],
 
 	// Config Formatter module
 	'config_formatter'		=> [
 		'name'		=> 'Formatierer',
-		'title'		=> 'Formatting options',
+		'title'		=> 'Formatierungseinstellungen',
 	],
 
 	// Config Notifications module
 	'config_notifications'		=> [
 		'name'		=> 'Mitteilungen',
-		'title'		=> 'Notifications settings',
+		'title'		=> 'Einstellungen für Benachrichtigungen',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
 		'name'		=> 'Seiten',
-		'title'		=> 'Pages and site parameters',
+		'title'		=> 'Seiten und Website-Einstellungen',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
 		'name'		=> 'Berechtigungen',
-		'title'		=> 'Permissions settings',
+		'title'		=> 'Einstellungen für Berechtigungen',
 	],
 
 	// Config Security module
 	'config_security'		=> [
 		'name'		=> 'Sicherheit',
-		'title'		=> 'Security subsystems settings',
+		'title'		=> 'Sicherheits-Untersysteme-Einstellungen',
 	],
 
 	// Config System module
@@ -83,19 +83,19 @@ $ap_translation = [
 	// Config Upload module
 	'config_upload'		=> [
 		'name'		=> 'Hochladen',
-		'title'		=> 'Attachment settings',
+		'title'		=> 'Anhang-Einstellungen',
 	],
 
 	// Categories module
 	'content_categories'		=> [
 		'name'		=> 'Kategorien',
-		'title'		=> 'Manage categories',
+		'title'		=> 'Kategorien verwalten',
 	],
 
 	// Comments module
 	'content_comments'		=> [
 		'name'		=> 'Kommentare',
-		'title'		=> 'Manage comments',
+		'title'		=> 'Kommentare verwalten',
 	],
 
 	// Deleted module
@@ -137,19 +137,19 @@ $ap_translation = [
 	// DB Convert module
 	'db_convert'		=> [
 		'name'		=> 'Konvertieren',
-		'title'		=> 'Converting Tables or Columns',
+		'title'		=> 'Konvertieren von Tabellen oder Spalten',
 	],
 
 	// DB optimize module
 	'db_optimize'		=> [
 		'name'		=> 'Optimierung',
-		'title'		=> 'Optimizing the database',
+		'title'		=> 'Optimierung der Datenbank',
 	],
 
 	// DB Repair module
 	'db_repair'		=> [
 		'name'		=> 'Reperatur',
-		'title'		=> 'Repair and Optimize Database',
+		'title'		=> 'Datenbank reparieren und optimieren',
 	],
 
 	// DB Restore module
@@ -179,7 +179,7 @@ $ap_translation = [
 	// Transliterate module
 	'maint_transliterate'		=> [
 		'name'		=> 'Transliteration',
-		'title'		=> 'Update the supertag in the database records',
+		'title'		=> 'Aktualisiere den Supertag in den Datenbankdatensätzen',
 	],
 
 	// Mass email module
