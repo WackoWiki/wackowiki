@@ -163,6 +163,7 @@ function ensure_dir($dir)
 	{
 		mkdir($dir);
 	}
+
 	chmod($dir, 0755);
 }
 
@@ -176,7 +177,7 @@ function set_pack_dir(&$engine, $time)
 	clearstatcache();
 	ensure_dir($dir);
 
-	return $dir.'/';
+	return $dir . '/';
 }
 
 // delete backup pack from the server
@@ -220,7 +221,7 @@ function remove_pack(&$engine, $pack)
 }
 
 // adapted and updated from phpBB 2.x
-// construct sql for table recreataion
+// construct sql for table restoration
 function get_table(&$engine, $table, $drop = true)
 {
 	/***************************************************************************
@@ -395,7 +396,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 
 		if ($table != $engine->db->table_prefix.'page')	// not page table
 		{
-			$where = "WHERE {$tables[$table]['where']} IN (".$cluster_pages[$root].") ";
+			$where = "WHERE {$tables[$table]['where']} IN (" . $cluster_pages[$root] . ") ";
 		}
 		else
 		{
@@ -409,14 +410,14 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	$limit = "LIMIT %1, {$tables[$table]['limit']} ";
 
 	// tweak
-	if ($table == $engine->db->table_prefix.'page')
+	if ($table == $engine->db->table_prefix . 'page')
 	{
 		$tweak = true;
 	}
 
 	// check file existance
 	clearstatcache();
-	$filename = $pack.$table.BACKUP_FILE_DUMP_SUFFIX;
+	$filename = $pack . $table . BACKUP_FILE_DUMP_SUFFIX;
 
 	if (file_exists($filename) === true)
 	{
@@ -424,7 +425,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	}
 
 	// open file with write access
-	$file = gzopen($filename, 'ab'.BACKUP_COMPRESSION_RATE);
+	$file = gzopen($filename, 'ab' . BACKUP_COMPRESSION_RATE);
 
 	// read table data until it's exhausted
 	$r = 0;
@@ -490,11 +491,13 @@ function get_files(&$engine, $pack, $dir, $root)
 
 	// create write (backup) subdir or restore path recursively if needed
 	$offset = 0;
+
 	while (($offlen = strpos($dir, '/', $offset)) !== false)
 	{
 		$offset = $offlen + 1;
 		ensure_dir(Ut::join_path($pack, substr($dir, 0, $offlen)));
 	}
+
 	ensure_dir(Ut::join_path($pack, $dir));
 
 	// open read (data) dir and run through all files
@@ -687,6 +690,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 			if (!is_dir(Ut::join_path($packdir, $filename)))
 			{
 				$fullname = Ut::join_path($dir, $plainfile);
+
 				// handle duplicates in target dir
 				if (file_exists($fullname))
 				{
@@ -731,8 +735,8 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 	return false;
 }
 
-// Draws a tick or cross next to a result
+// draws a tick or cross next to a result
 function output_image(&$engine, $ok)
 {
-	return '<img src="'.$engine->db->base_url.'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? 'OK' : 'Problem').'" title="'.($ok ? 'OK' : 'Problem').'" class="tickcross '.($ok ? 'tick' : 'cross').'" />'.' ';
+	return '<img src="'.$engine->db->base_url . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? 'OK' : 'Problem') . '" title="' . ($ok ? 'OK' : 'Problem') . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '" />'.' ';
 }
