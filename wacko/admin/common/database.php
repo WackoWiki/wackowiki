@@ -14,128 +14,128 @@ if (!defined('IN_WACKO'))
 if (!isset($tables, $directories))
 {
 	$tables	= [
-			$engine->db->table_prefix.'acl' => [
-				'name'	=> $engine->db->table_prefix.'acl',
+			$engine->db->table_prefix . 'acl' => [
+				'name'	=> $engine->db->table_prefix . 'acl',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'auth_token' => [
-					'name'	=> $engine->db->table_prefix.'auth_token',
+			$engine->db->table_prefix . 'auth_token' => [
+					'name'	=> $engine->db->table_prefix . 'auth_token',
 					'where'	=> false,
 					'order'	=> 'user_id',
 					'limit' => 1000
 			],
-			$engine->db->table_prefix.'cache' => [
-				'name'	=> $engine->db->table_prefix.'cache',
+			$engine->db->table_prefix . 'cache' => [
+				'name'	=> $engine->db->table_prefix . 'cache',
 				'where'	=> false,
 				'order'	=> 'cache_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'config' => [
-				'name'	=> $engine->db->table_prefix.'config',
+			$engine->db->table_prefix . 'config' => [
+				'name'	=> $engine->db->table_prefix . 'config',
 				'where'	=> false,
 				'order'	=> 'config_id',
 				'limit' => 500
 			],
-			$engine->db->table_prefix.'category' => [
-				'name'	=> $engine->db->table_prefix.'category',
+			$engine->db->table_prefix . 'category' => [
+				'name'	=> $engine->db->table_prefix . 'category',
 				'where'	=> false,
 				'order'	=> 'category_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'category_page' => [
-				'name'	=> $engine->db->table_prefix.'category_page',
+			$engine->db->table_prefix . 'category_page' => [
+				'name'	=> $engine->db->table_prefix . 'category_page',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'file_link' => [
-					'name'	=> $engine->db->table_prefix.'file_link',
+			$engine->db->table_prefix . 'file_link' => [
+					'name'	=> $engine->db->table_prefix . 'file_link',
 					'where'	=> 'page_id',
 					'order'	=> 'page_id',
 					'limit' => 1000
 			],
-			$engine->db->table_prefix.'link' => [
-				'name'	=> $engine->db->table_prefix.'link',
-				'where'	=> 'from_page_id',
-				'order'	=> 'from_page_id',
-				'limit' => 1000
-			],
-			$engine->db->table_prefix.'log' => [
-				'name'	=> $engine->db->table_prefix.'log',
+			$engine->db->table_prefix . 'log' => [
+				'name'	=> $engine->db->table_prefix . 'log',
 				'where'	=> false,
 				'order'	=> 'log_time',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'menu' => [
-				'name'	=> $engine->db->table_prefix.'menu',
+			$engine->db->table_prefix . 'menu' => [
+				'name'	=> $engine->db->table_prefix . 'menu',
 				'where'	=> false,
 				'order'	=> 'menu_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'page' => [
-				'name'	=> $engine->db->table_prefix.'page',
+			$engine->db->table_prefix . 'page' => [
+				'name'	=> $engine->db->table_prefix . 'page',
 				'where'	=> true,
 				'order'	=> 'tag',
 				'limit' => 500
 			],
-			$engine->db->table_prefix.'poll' => [
-				'name'	=> $engine->db->table_prefix.'poll',
+			$engine->db->table_prefix . 'page_link' => [
+				'name'	=> $engine->db->table_prefix . 'page_link',
+				'where'	=> 'from_page_id',
+				'order'	=> 'from_page_id',
+				'limit' => 1000
+			],
+			$engine->db->table_prefix . 'poll' => [
+				'name'	=> $engine->db->table_prefix . 'poll',
 				'where'	=> false,
 				'order'	=> 'poll_id, v_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'rating' => [
-				'name'	=> $engine->db->table_prefix.'rating',
+			$engine->db->table_prefix . 'rating' => [
+				'name'	=> $engine->db->table_prefix . 'rating',
 				'where'	=> false,
 				'order'	=> 'page_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'referrer' => [
-				'name'	=> $engine->db->table_prefix.'referrer',
+			$engine->db->table_prefix . 'referrer' => [
+				'name'	=> $engine->db->table_prefix . 'referrer',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'revision' => [
-				'name'	=> $engine->db->table_prefix.'revision',
+			$engine->db->table_prefix . 'revision' => [
+				'name'	=> $engine->db->table_prefix . 'revision',
 				'where'	=> 'revision_id',
 				'order'	=> 'revision_id',
 				'limit' => 500
 			],
-			$engine->db->table_prefix.'upload' => [
-				'name'	=> $engine->db->table_prefix.'upload',
+			$engine->db->table_prefix . 'upload' => [
+				'name'	=> $engine->db->table_prefix . 'upload',
 				'where'	=> false,
 				'order'	=> 'upload_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'user' => [
-				'name'	=> $engine->db->table_prefix.'user',
+			$engine->db->table_prefix . 'user' => [
+				'name'	=> $engine->db->table_prefix . 'user',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'user_setting' => [
-				'name'	=> $engine->db->table_prefix.'user_setting',
+			$engine->db->table_prefix . 'user_setting' => [
+				'name'	=> $engine->db->table_prefix . 'user_setting',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'usergroup' => [
-				'name'	=> $engine->db->table_prefix.'usergroup',
+			$engine->db->table_prefix . 'usergroup' => [
+				'name'	=> $engine->db->table_prefix . 'usergroup',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'usergroup_member' => [
-				'name'	=> $engine->db->table_prefix.'usergroup_member',
+			$engine->db->table_prefix . 'usergroup_member' => [
+				'name'	=> $engine->db->table_prefix . 'usergroup_member',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix.'watch' => [
-				'name'	=> $engine->db->table_prefix.'watch',
+			$engine->db->table_prefix . 'watch' => [
+				'name'	=> $engine->db->table_prefix . 'watch',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
@@ -507,7 +507,7 @@ function get_files(&$engine, $pack, $dir, $root)
 			// for cluster backup process only affected cluster files
 			if ($root == true && $cluster == true
 				&& (preg_match('/@{1}((d*[0-9])+)@{1}/sm', $filename, $matches)
-						&& !in_array($matches[1], $engine->cluster_pages[$root]))
+					&& !in_array($matches[1], $engine->cluster_pages[$root]))
 			)
 			{
 				continue;
@@ -515,15 +515,16 @@ function get_files(&$engine, $pack, $dir, $root)
 
 			// subdirs skipped
 			$fullname = Ut::join_path($dir, $filename);
+
 			if (!is_dir($fullname))
 			{
 				if (is_readable($fullname))
 				{
 					// open input and output files
-					$filep	= fopen($fullname, 'rb');
-					$packname= Ut::join_path($pack, $dir, $filename . BACKUP_FILE_GZIP_SUFFIX);
-					$filez	= gzopen($packname, 'ab' . BACKUP_COMPRESSION_RATE);
-					$r		= 0; // round number
+					$filep		= fopen($fullname, 'rb');
+					$packname	= Ut::join_path($pack, $dir, $filename . BACKUP_FILE_GZIP_SUFFIX);
+					$filez		= gzopen($packname, 'ab' . BACKUP_COMPRESSION_RATE);
+					$r			= 0; // round number
 
 					// compress and write data
 					while (($data = fread($filep, BACKUP_MEMORY_STEP)))
@@ -555,6 +556,7 @@ function get_files(&$engine, $pack, $dir, $root)
 
 		return $t;
 	}
+
 	return false;
 }
 
@@ -665,11 +667,13 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 
 	// restore files subdir or full path recursively if needed
 	$offset	= 0;
+
 	while (($offlen = strpos($dir, '/', $offset)) !== false)
 	{
 		$offset = $offlen + 1;
 		ensure_dir(substr($dir, 0, $offlen));
 	}
+
 	ensure_dir($dir);
 
 	// open backup dir and run through all files
@@ -723,6 +727,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 
 		return $total;
 	}
+
 	return false;
 }
 
