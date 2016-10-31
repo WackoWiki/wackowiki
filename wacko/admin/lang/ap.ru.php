@@ -27,19 +27,20 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'ApHomePage'				=> 'Home Page',
-	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Log out',
-	'ApLogOutTip'				=> 'quit system administration',
+	'ApHomePage'				=> 'главна€ страница сайта',
+	'ApHomePageTip'				=> 'открыть главную страницу сайта, не заверша€ сеанс администрировани€',
+	'ApLogOut'					=> 'выход',
+	'ApLogOutTip'				=> 'завершить администрирование системы',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'TimeLeft'					=> 'ќсталось времени:  %1 минут',
+	'ApVersion'					=> 'верси€',
 
-	'SiteOpen'					=> 'open',
-	'SiteOpened'				=> 'site opened',
-	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'close',
-	'SiteClosed'				=> 'site closed',
-	'SiteClosedTip'				=> 'The site is closed',
+	'SiteOpen'					=> 'открыть',
+	'SiteOpened'				=> 'сайт открыт',
+	'SiteOpenedTip'				=> '—айт открыт',
+	'SiteClose'					=> 'закрыть',
+	'SiteClosed'				=> 'сайт закрыт',
+	'SiteClosedTip'				=> '—айт закрыт',
 
 	// MENU
 	// Config Basic module
@@ -262,7 +263,7 @@ $ap_translation = [
 	'LogEvent'					=> '—обытие',
 	'LogUsername'				=> 'ѕользователь',
 
-	'PurgeSessions'				=> 'purge',
+	'PurgeSessions'				=> 'очистить',
 	'PurgeSessionsTip'			=> 'ѕрочистить все сессии',
 	'PurgeSessionsConfirm'		=> '”вереный в прочистке сессий? Ёто прекратит сессии всех текущих пользователей.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',

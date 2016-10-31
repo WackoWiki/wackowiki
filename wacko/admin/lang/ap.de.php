@@ -21,7 +21,7 @@ $ap_translation = [
 
 	// Admin panel
 	'Authorization'				=> 'Autorisation',
-	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von Deinem Browser akzeptiert werden).',
+	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von deinem Browser akzeptiert werden).',
 	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
 	'NoRecoceryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
 
@@ -33,11 +33,12 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'Beende die Systemverwaltung',
 
 	'TimeLeft'					=> 'Restzeit:  %1 Minuten',
+	'ApVersion'					=> 'Version',
 
-	'SiteOpen'					=> 'offen',
+	'SiteOpen'					=> 'öffnen',
 	'SiteOpened'				=> 'Website geöffnet',
 	'SiteOpenedTip'				=> 'Die Website ist offen',
-	'SiteClose'					=> 'geschlossen',
+	'SiteClose'					=> 'schließen',
 	'SiteClosed'				=> 'Website geschlossen',
 	'SiteClosedTip'				=> 'Die Website ist geschlossen',
 
@@ -63,7 +64,7 @@ $ap_translation = [
 	// Config Formatter module
 	'config_formatter'		=> [
 		'name'		=> 'Formatierer',
-		'title'		=> 'Formatierungseinstellungen',
+		'title'		=> 'Formatierungs-Einstellungen',
 	],
 
 	// Config Notifications module
@@ -297,15 +298,15 @@ $ap_translation = [
 	'BackupCluster'				=> 'Cluster',
 	'BackupFiles'				=> 'Dateien',
 	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br />'.
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br />'.
+									'Der Stammcluster wirkt sich nicht auf die Sicherung der globalen Dateisicherung und der Cache-Dateien aus (die Auswahl wird immer vollständig gespeichert).<br />'.
 									'<br />'.
-									'<span class="underline">Attention</span>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
-									'same when backing up only table structure without saving the data. '.
-									'To make a complete conversion of the tables to the backup format you must make eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em>.',
+									'<span class="underline">Achtung</span>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, '.
+									'auch wenn nur die Tabellenstruktur gesichert wird, ohne die Daten zu speichern. '.
+									'Um eine vollständige Konvertierung der Tabellen in das Backup-Format vorzunehmen, muss eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em> gemacht werden.',
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br />'.
-									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" benannten Unterverzeichnis unter <code>files/backup</code> directory.<br />'.
+									'Die Sicherungspaketdateien wurden im "(date)YYYYMMDD_(time)HHMMSS" benannten Unterverzeichnis unter <code>files/backup</code> abgelegt.<br />'.
 									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br />'.
-									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="?mode=db_restore">Restore database</a>.',
+									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="?mode=db_restore">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 
 	// DB Restore module
@@ -316,17 +317,17 @@ $ap_translation = [
 	'BackupDelete'				=> 'Willst du die Datensicherung wirklich entfernen',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Zusätzliche Otionen zur Daten-Wiederherstellung',
-	'RestoreOptionsInfo'		=> '* Before restoring the <span class="underline">cluster backup</span>, '.
-									'the target tables are not destroyed (to prevent loss of information from the clusters that have not been backed up). '.
-									'Thus, during the recovery process duplicate records will occur. '.
-									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), '.
-									'but if this checkbox is checked, all duplicates are skipped (the current values of records will be kept), '.
-									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br />'.
-									'<span class="underline">Notice</span>: When restore complete backup of the site, this option has no value.<br />'.
+	'RestoreOptionsInfo'		=> '* Vor dem Wiederherstellen der <span class="underline">Cluster-Sicherung</span>, '.
+									'werden die Zieltabellen nicht zerstört (um den Verlust von Informationen aus den Clustern, die nicht gesichert wurden, zu verhindern).. '.
+									'Somit werden während des Wiederherstellungsvorgangs doppelte Datensätze auftreten. '.
+									'Im normalen Modus werden alle Dateien durch die Datensätze ersetzt (mit SQL-Anweisung <code>REPLACE</code>), '.
+									'aber wenn dieses Kontrollkästchen aktiviert ist, werden alle Duplikate übersprungen (die aktuellen Werte der Datensätze werden beibehalten), '.
+									'und nur die Datensätze mit neuem Schlüssel werden in die Tabelle aufgenommen (SQL-Anweisung <code>INSERT IGNORE</code>).<br />'.
+									'<span class="underline">Hinweis</span>: Wenn Sie eine vollständige Sicherung der Site wiederherstellen, hat diese Option keinen Zweck.<br />'.
 									'<br />'.
-									'** If the backup contains the user files (global and perpage, cache files, etc.), '.
-									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. '.
-									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
+									'** Wenn die Sicherung die Benutzerdateien (global und perpage, Cache-Dateien usw.) enthält, '.
+									'ersetzen sie im normalen Modus die vorhandenen Dateien mit denselben Namen und werden beim Wiederherstellen in demselben Verzeichnis abgelegt. '.
+									'Mit dieser Option kann man die aktuellen Kopien der Dateien speichern und aus einer Sicherung nur neue Dateien (fehlt auf dem Server) wiederherstellen.',
 	'IgnoreDuplicatedKeys'		=> 'Ignoriere doppelte Tabellenschlüssel (nicht ersetzen)',
 	'IgnoreSameFiles'			=> 'Ignoriere die gleichen Dateien (nicht überschreiben)',
 	'NoBackupsAvailable'		=> 'Keien Datensicherung verfügbar.',

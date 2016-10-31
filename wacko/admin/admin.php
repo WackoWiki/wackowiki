@@ -280,7 +280,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 				&nbsp;&nbsp;
 				<?php echo ($db->is_locked() ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')); ?>
 				&nbsp;&nbsp;
-				version <?php echo $engine->db->wacko_version; ?>
+				<?php echo $engine->_t('ApVersion') . ' ' . $engine->db->wacko_version; ?>
 			</span>
 		</div>
 		<br style="clear: right" />
