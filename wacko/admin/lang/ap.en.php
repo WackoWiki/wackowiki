@@ -33,6 +33,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'ApVersion'					=> 'version',
 
 	'SiteOpen'					=> 'open',
 	'SiteOpened'				=> 'site opened',
