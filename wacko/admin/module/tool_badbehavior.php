@@ -922,7 +922,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 			</tr>
 		</table>
 		<br />
-		<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
+		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?> &raquo;" /></div>
 <?php
 		echo $engine->form_close();
 	}

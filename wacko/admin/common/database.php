@@ -298,12 +298,12 @@ function get_table(&$engine, $table, $drop = true)
 		$schema_create .= ",\n";
 	}
 	//
-	// Drop the last ',\n' off ;)
+	// drop the last ',\n' off ;)
 	//
 	$schema_create = preg_replace('/,'."\n".'$/', '', $schema_create);
 
 	//
-	// Get any Indexed fields from the database...
+	// get any Indexed fields from the database...
 	//
 	$result = $engine->db->load_all($key_query);
 

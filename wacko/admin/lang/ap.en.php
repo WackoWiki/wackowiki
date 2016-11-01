@@ -27,6 +27,10 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
+	'FormSave'					=> 'Save',
+	'FormReset'					=> 'Reset',
+	'FormUpdate'				=> 'Update',
+
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Log out',
