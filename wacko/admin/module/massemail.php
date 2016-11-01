@@ -176,7 +176,7 @@ $mail_body = '';
 		<br />
 		<div class="center">
 			<input type="submit" id="submit" value="send" />
-			<input type="reset" id="button" value="reset" />
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
 		</div>
 <?php
 	echo $engine->form_close();
