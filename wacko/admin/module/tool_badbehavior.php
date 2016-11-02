@@ -666,8 +666,8 @@ function bb2_options(&$engine)
 			<td class="label"><strong>Enable Bad Behavior:</strong><br />
 				<small>All other settings can be changed in the config folder <code>bb_settings.conf</code>.</small></td>
 			<td>
-				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ( $engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on">On.</label>
-				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off">Off.</label>
+				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ( $engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('MetaOn');?></label>
+				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('MetaOff');?></label>
 			</td>
 		</tr>
 
@@ -916,8 +916,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 					<small>All other settings can be changed in the config folder.</small>
 				</td>
 				<td style="width:50%;">
-					<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ( $engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on">On.</label>
-					<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo ( !$engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off">Off.</label>
+					<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ( $engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo ( !$engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('MetaOff');?></label>
 				</td>
 			</tr>
 		</table>

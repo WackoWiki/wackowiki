@@ -621,9 +621,9 @@ function put_data(&$engine, $pack, $table, $mode)
 			foreach($row as &$rstr)
 			{
 				$rstr = strtr($rstr, [
-					"\\\\" => "\\",
-					'\\n' => "\n",
-					'\\t' => "\t"
+					"\\\\"	=> "\\",
+					'\\n'	=> "\n",
+					'\\t'	=> "\t"
 					]);
 			}
 
