@@ -257,7 +257,6 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 <title>WackoWiki Management System <?php echo ': ' . $_title; ?></title>
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta http-equiv="Content-Type" content="text/html; "/>
-<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/atom.css" rel="stylesheet" media="screen" />
 <link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" rel="stylesheet" media="screen" />
 <link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
 
