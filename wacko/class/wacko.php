@@ -3063,7 +3063,7 @@ class Wacko
 		{
 			$resize .= ' vertical-align:'.$_align.';"';
 		}
-		else
+		else if ($resize != '')
 		{
 			$resize .= ';"';
 		}
