@@ -74,15 +74,6 @@ define('TRANSLIT_LOWERCASE',			1);
 define('TRANSLIT_LOAD',					0);
 define('TRANSLIT_DONTLOAD',				1);
 
-define('CSP_CUSTOM',					"Content-Security-Policy:
-											default-src 'self';
-											script-src 'self' 'unsafe-inline';
-											style-src 'self' 'unsafe-inline';
-											img-src * data:;
-											media-src 'self' archive.org youtube.com youtube-nocookie.com;
-											object-src 'self' archive.org youtube.com youtube-nocookie.com;
-											child-src 'self' archive.org *.youtube.com *.youtube-nocookie.com;"); // Content-Security-Policy "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;"
-
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 define('WACKO_VERSION',					'5.5.rc3');
 define('HTML_ENTITIES_CHARSET',			'ISO-8859-1'); // ISO-8859-1, cp1251

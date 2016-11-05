@@ -320,16 +320,18 @@ class Http
 	{
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
-			// TODO: move CSP settings to csp.conf and csp_custom.conf file
+			// http://www.w3.org/TR/CSP2/
 			switch ($this->db->csp)
 			{
+				// default
 				case 1:
-					// http://www.w3.org/TR/CSP2/
 					header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;");
 					break;
 
+				// custom
 				case 2:
-					$csp_custom = str_replace(array("\r", "\n", "\t"), '', CSP_CUSTOM);
+					$csp_config = file_get_contents(CONFIG_DIR . '/csp_custom.conf');
+					$csp_custom = str_replace(array("\r", "\n", "\t"), '', $csp_config);
 					header($csp_custom);
 					break;
 			}
