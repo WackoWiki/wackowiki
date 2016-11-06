@@ -122,7 +122,6 @@ if ($this->can_upload() === true)
 			$this->show_message($message, 'info');
 		}
 
-		echo '</div>'; // ???
 		return true;
 	}
 	else if (isset($_GET['edit'])) // show the form
@@ -211,7 +210,6 @@ if ($this->can_upload() === true)
 			$this->show_message($message, 'info');
 		}
 
-		echo '</div>';
 		return true;
 	}
 	else
