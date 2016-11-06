@@ -22,7 +22,7 @@ if (!isset($legend))	$legend		= '';
 if ($page)
 {
 	$page		= $this->unwrap_link($page);
-	$ppage		= '/'.$page;
+	$ppage		= '/' . $page;
 	$context	= $page;
 	$_page		= $this->load_page($page);
 
@@ -47,7 +47,7 @@ $end_depth		= $to[1];
 // 3. output
 if (!$nomark)
 {
-	echo '<nav class="layout-box"><p class="layout-box"><span> '.$this->_t('TOCTitle').' '.$this->link($ppage, '', $legend).' </span></p>';
+	echo '<nav class="layout-box"><p class="layout-box"><span> ' . $this->_t('TOCTitle') . ' '.$this->link($ppage, '', $legend) . ' </span></p>';
 }
 
 if ($_page)
@@ -118,7 +118,7 @@ if ($_page)
 						{
 							if (isset($numbers[$j]) && $numbers[$j] > 0)
 							{
-								$num .= $numbers[$j].'.';
+								$num .= $numbers[$j] . '.';
 							}
 						}
 
@@ -126,7 +126,7 @@ if ($_page)
 						$toc[$i][5] = $num;					// toc number, e.g. 2.4.1
 						$toc[$i][6] = $toc[$i][1];			// toc title
 
-						$toc[$i][1] = $num.' '.$toc[$i][1]; // toc number + toc title
+						$toc[$i][1] = $num . ' ' . $toc[$i][1]; // toc number + toc title
 
 					}
 					else
@@ -149,7 +149,7 @@ if ($_page)
 
 		// display!
 		// begin list
-		echo "\n".'<ul id="toc">'."\n";
+		echo "\n" . '<ul id="toc">' . "\n";
 
 		$i				= 0;
 		$ul				= 1;
@@ -227,7 +227,7 @@ if ($_page)
 						{
 							# TWO
 							// close nested list
-							if (($diff < 0 || $ul != 1) && $k == 0 )
+							if (($diff < 0 || $ul != 1) && $k == 0)
 							{
 								// close nested <li> tag
 								echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)].
@@ -275,11 +275,11 @@ if ($_page)
 					#"<!--FOUR: [".$ul."]: (".$i.")".$ident_level['li']." begin element-->".
 					"\n";
 				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $_tabs . "\t".
-					'<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
+					'<a href="' . $toc_item[3] . '#' . $toc_item[0] . '">'.
 						(!empty($numerate)
-							?	'<span class="tocnumber">'.$toc_item[5].'</span>'
+							?	'<span class="tocnumber">' . $toc_item[5] . '</span>'
 							:	'').
-						'<span class="toctext">'.strip_tags($toc_item[6]).'</span></a>'."\n";
+						'<span class="toctext">' . strip_tags($toc_item[6]) . '</span></a>' . "\n";
 
 					$ident_level['li']++;
 

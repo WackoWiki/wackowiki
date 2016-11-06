@@ -34,12 +34,13 @@ if (!isset($max))		$max	= 5;
 if (!isset($time))		$time	= 0;
 
 // Include SimplePie
-#include_once 'lib/SimplePie/autoloader.php';
-include_once 'lib/SimplePie/simplepie.class.php';
+include_once 'lib/SimplePie/autoloader.php';
+// see autoload.conf
+#include_once 'lib/SimplePie/simplepie.class.php';
 
 if (!$url)
 {
-	echo '<p><em>'.$this->_t('FeedNoURL')."</em></p>\n";
+	echo '<p><em>' . $this->_t('FeedNoURL') . "</em></p>\n";
 }
 else
 {
@@ -55,7 +56,7 @@ else
 	$feed = new SimplePie();
 	$feed->set_feed_url($urlset);
 	// Set where the cache files should be stored.
-	$feed->set_cache_location('./'.CACHE_FEED_DIR);
+	$feed->set_cache_location('./' . CACHE_FEED_DIR);
 
 	// Make sure that we're sending the right character set headers, etc.
 	$feed->set_output_encoding($this->get_charset($this->db->language));
@@ -75,14 +76,14 @@ else
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box">'."\n";
+		echo '<div class="layout-box">' . "\n";
 	}
 
 	$counturlset = count($urlset);
 
 	if (!$feed->get_title() && $counturlset == 1)
 	{
-		echo '<p><em>'.$this->_t('FeedError')."</em></p>\n";
+		echo '<p><em>' . $this->_t('FeedError') . "</em></p>\n";
 		#break;
 	}
 	else
@@ -94,51 +95,51 @@ else
 		{
 			if (($max) && ($max > 0))
 			{
-				$lastitems = ' (last '.$max.' items)';
+				$lastitems = ' (last ' . $max . ' items)';
 			}
 
-			// Make nice if $nomark == 1
+			// make nice if $nomark == 1
 			if ($nomark)
 			{
 				if ($title != '' && $counturlset == 1)
 				{
-					echo '<'.$header_feed.' class="feed_element_title">'.$this->link($feed->get_permalink(), '', $title, '', 1, 1).'</'.$header_feed.">\n";
+					echo '<' . $header_feed . ' class="feed_element_title">' . $this->link($feed->get_permalink(), '', $title, '', 1, 1) . '</' . $header_feed . ">\n";
 				}
 				if ($title != '' && $counturlset > 1)
 				{
-					echo '<'.$header_feed.'>'.$title.'</'.$header_feed.">\n";
+					echo '<' . $header_feed . '>' . $title . '</' . $header_feed . ">\n";
 				}
 				else if (!$title && $counturlset == 1)
 				{
-					echo '<'.$header_feed.' class="feed_element_title">'.$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1).'</'.$header_feed.">\n";
+					echo '<' . $header_feed . ' class="feed_element_title">' . $this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1) . '</' . $header_feed . ">\n";
 				}
 				else if (!$title && $counturlset > 1)
 				{
-					echo '<'.$header_feed.'>'.$this->_t('FeedMulti').'</'.$header_feed.">\n";
+					echo '<' . $header_feed . '>' . $this->_t('FeedMulti') . '</' . $header_feed . ">\n";
 				}
 
 				echo $lastitems;
 			}
 
-			// Default
+			// default
 			else
 			{
 				if ($title != '' && $counturlset == 1)
 				{
-					echo '<p class="layout-box"><span>'.$this->_t('FeedTitle').': <strong>'.$this->link($feed->get_permalink(), '', $title, '', 1, 1).'</strong>'.$lastitems."<span></p>\n";
+					echo '<p class="layout-box"><span>' . $this->_t('FeedTitle') . ': <strong>' . $this->link($feed->get_permalink(), '', $title, '', 1, 1) . '</strong>' . $lastitems . "<span></p>\n";
 				}
 
 				if ($title != '' && $counturlset > 1)
 				{
-					echo '<p class="layout-box"><span>'.$this->_t('FeedTitle').': <strong>'.$title.'</strong>'.$lastitems."</span></p>\n";
+					echo '<p class="layout-box"><span>' . $this->_t('FeedTitle') . ': <strong>' . $title . '</strong>' . $lastitems . "</span></p>\n";
 				}
 				else if (!$title && $counturlset == 1)
 				{
-					echo '<p class="layout-box"><span>'.$this->_t('FeedTitle').': <strong>'.$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1).'</strong>'.$lastitems."</span></p>\n";
+					echo '<p class="layout-box"><span>' . $this->_t('FeedTitle') . ': <strong>' . $this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1) . '</strong>' . $lastitems . "</span></p>\n";
 				}
 				else if (!$title && $counturlset > 1)
 				{
-					echo '<p class="layout-box"><span><strong>'.$this->_t('FeedMulti').'</strong>'.$lastitems."</span></p>\n";
+					echo '<p class="layout-box"><span><strong>' . $this->_t('FeedMulti') . '</strong>' . $lastitems . "</span></p>\n";
 				}
 			}
 		}
@@ -163,15 +164,15 @@ else
 				}
 
 				echo '<article class="feed">';
-				echo '<'.$header_item;
+				echo '<' . $header_item;
 
 				if ($nomark)
 				{
 					echo ' class="feed_element_title"';
 				}
 
-				echo '>'.$this->link($item->get_permalink(), '', $item->get_title(), '', 1, 1).'</'.$header_item.'>';
-				echo '<p class="note"><span>'.$this->_t('FeedSource').' '.$this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 1, 1).' | '.$item->get_date('d.m.Y g:i').' | ';
+				echo '>' . $this->link($item->get_permalink(), '', $item->get_title(), '', 1, 1) . '</' . $header_item . '>';
+				echo '<p class="note"><span>' . $this->_t('FeedSource') . ' ' . $this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 1, 1) . ' | ' . $item->get_date('d.m.Y g:i') . ' | ';
 
 				if (($time == 1) && ($date != 0))
 				{
@@ -179,7 +180,7 @@ else
 				}
 
 				echo "</span></p>\n";
-				echo '<div class="feed-content">'.$item->get_content()."</div>\n";
+				echo '<div class="feed-content">' . $item->get_content() . "</div>\n";
 				echo "</article>\n";
 
 				if (($max) && ($current == $max))
@@ -211,23 +212,23 @@ else
 					$date = 0;
 				}
 
-				echo '<article class="feed">'."\n";
+				echo '<article class="feed">' . "\n";
 
 				// headline
-				echo '<'.$header_item.'>'.$this->link($href, '', $title, '', 1, 1).'</'.$header_item.">\n";
+				echo '<' . $header_item . '>' . $this->link($href, '', $title, '', 1, 1) . '</' . $header_item . ">\n";
 
 				if (($time == 1) && ($date != 0))
 				{
-					echo '<p class="note"><span>'.$this->get_time_interval(time() - $date)."</span></p>\n";
+					echo '<p class="note"><span>' . $this->get_time_interval(time() - $date) . "</span></p>\n";
 				}
 
-				echo '<div class="feed-content">'.$item->get_content()."</div>\n";
+				echo '<div class="feed-content">' . $item->get_content() . "</div>\n";
 
 				if ($enclosure = $item->get_enclosure())
 				{
 					if (!empty($enclosure->get_link()))
 					{
-						echo '<img src="' . $enclosure->get_link() . '">'."\n";
+						echo '<img src="' . $enclosure->get_link() . '">' . "\n";
 					}
 				}
 
