@@ -71,9 +71,6 @@ function admin_config_pages(&$engine, &$module)
 			<tr>
 				<th colspan="2">General Options</th>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="list_count"><strong>Number of items per list:</strong><br />
 				<small>Number of items displayed on each list for guest or as default value for new users.</small></label></td>
@@ -143,11 +140,11 @@ function admin_config_pages(&$engine, &$module)
 							$license = substr($license, 0, 45 ).'...';
 						}
 
-						echo '<option value="'.$offset.'" '.
+						echo '<option value="' . $offset . '" '.
 							($engine->db->license == $offset
 								? 'selected="selected" '
 								: '')
-							.'>'.$license."</option>\n";
+							.'>' . '[ ' . $offset . ' ] ' . $license . "</option>\n";
 					}
 ?>
 					</select>

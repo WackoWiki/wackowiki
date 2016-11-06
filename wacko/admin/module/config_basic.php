@@ -125,6 +125,17 @@ function admin_config_basic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
+				<td class="label"><label for="admin_name"><strong>Admin of Site:</strong><br />
+					<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label></td>
+				<td><input type="text" maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->db->admin_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br />
+					<h2>Layout settings</h2>
+				</th>
+			</tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="theme"><strong>Theme:</strong><br />
 					<small>Template design the site uses by default.</small></label></td>
 				<td>
@@ -158,14 +169,6 @@ function admin_config_basic(&$engine, &$module)
 					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ( $engine->db->allow_themes_per_page == 1 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_on"><?php echo $engine->_t('MetaOn');?></label>
 					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ( $engine->db->allow_themes_per_page == 0 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_off"><?php echo $engine->_t('MetaOff');?></label>
 				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="admin_name"><strong>Admin of Site:</strong><br />
-					<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label></td>
-				<td><input type="text" maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->db->admin_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
