@@ -87,9 +87,9 @@ if ($can_view)
 		"SELECT COUNT(f.upload_id) AS n ".
 		"FROM ".$this->db->table_prefix."upload f ".
 			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
+		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id']) . "' ".
 			($owner
-				? "AND u.user_name = ".$this->db->q($owner)." "
+				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '').
 			($deleted != 1
 				? "AND f.deleted <> '1' "
@@ -102,14 +102,14 @@ if ($can_view)
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name, f.hits ".
 		"FROM ".$this->db->table_prefix."upload f ".
 			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
+		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' ".
 			($owner
-				? "AND u.user_name = ".$this->db->q($owner)." "
+				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '')." ".
 			($deleted != 1
 			? "AND f.deleted <> '1' "
 					: "").
-		"ORDER BY f.".$order_by." ".
+		"ORDER BY f." . $order_by . " ".
 		$pagination['limit']);
 
 	if (!is_array($files))
@@ -119,8 +119,8 @@ if ($can_view)
 
 	// display
 
-	$edit_icon	= '<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('UploadEdit').'" alt="'.$this->_t('UploadEdit').'" class="btn-edit"/>';
-	$del_icon	= '<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('UploadRemove').'" alt="'.$this->_t('UploadRemove').'" class="btn-delete"/>';
+	$edit_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadEdit') . '" alt="' . $this->_t('UploadEdit') . '" class="btn-edit"/>';
+	$del_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadRemove') . '" alt="' . $this->_t('UploadRemove') . '" class="btn-delete"/>';
 
 	/* if (!$global)
 	{
@@ -133,7 +133,7 @@ if ($can_view)
 
 	if (!$global)
 	{
-		$path2 = 'file:/'.($this->slim_url($page)).'/';
+		$path2 = 'file:/' . ($this->slim_url($page)) . '/';
 	}
 	else
 	{
@@ -155,13 +155,13 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ).' '.($page ? $this->link($ppage, '', $legend) : '');
-		echo '<div class="layout-box"><p class="layout-box"><span>'.$title.": </span></p>\n";
+		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
+		echo '<div class="layout-box"><p class="layout-box"><span>' . $title . ": </span></p>\n";
 	}
 
 	if (count($files))
 	{
-		echo '<table class="'.$style.'" >';
+		echo '<table class="' . $style . '" >';
 
 
 		foreach ($files as $file)
@@ -186,11 +186,11 @@ if ($can_view)
 			$text		= ($picture == false) ? $file_name : '';
 			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
 			$file_ext	= substr($file_name, strrpos($file_name, ".") + 1);
-			$link		= $this->link($path2.$file_name, '', $text, '', $track);
+			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
 			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')
 			{
-				$hits	= ', '.$file['hits'].' '.$this->_t('SettingsHits');
+				$hits	= ', ' . $file['hits'] . ' ' . $this->_t('SettingsHits');
 			}
 			else
 			{
@@ -209,35 +209,35 @@ if ($can_view)
 				$remove_mode = 0;
 			}
 
-			$href_remove	= $this->href('upload', $page, 'remove='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
-			$href_edit		= $this->href('upload', $page, 'edit='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
+			$href_remove	= $this->href('upload', $page, 'remove=' . ($global ? 'global' : 'local') . "&amp;file_id=" . $file_id);
+			$href_edit		= $this->href('upload', $page, 'edit=' . ($global ? 'global' : 'local') . "&amp;file_id=" . $file_id);
 
 			echo '<tr>'.
-					'<td class="file-">'.$link.'</td>';
+					'<td class="file-">' . $link . '</td>';
 
 			if ($picture == false)
 			{
-				echo '<td class="desc-">'.$desc.'</td>'.
+				echo '<td class="desc-">' . $desc . '</td>'.
 					'<td class="size-">
-						<span class="size2-">'.$file_size.$hits.'</span>&nbsp;'.
+						<span class="size2-">' . $file_size . $hits . '</span>&nbsp;'.
 					'</td>'.
 					'<td class="dt-">'.
-						'<span class="dt2-">'.$this->get_time_formatted($dt).'</span>&nbsp;'.
+						'<span class="dt2-">' . $this->get_time_formatted($dt) . '</span>&nbsp;'.
 					'</td>';
 			}
 			else
 			{
 				echo '<td class="desc-">'.
-					'<strong>'.$file['file_name'].'</strong><br /><br />'.
-					$desc.'<br /><br />'.
+					'<strong>' . $file['file_name'] . '</strong><br /><br />'.
+					$desc . '<br /><br />'.
 
 					($file['picture_w']
-						? $file['picture_w'].' x '.$file['picture_h'].'px<br />'
+						? $file['picture_w'] . ' × ' . $file['picture_h'] . 'px<br />'
 						: $hits.'<br />'
 					).
 
-					$file_size.'<br /><br />'.
-					$this->user_link($file['user_name'], '', true, false).'<br />'.
+					$file_size . '<br /><br />'.
+					$this->user_link($file['user_name'], '', true, false) . '<br />'.
 					$this->get_time_formatted($dt).
 				'</td>';
 			}
@@ -246,15 +246,15 @@ if ($can_view)
 			{
 				echo '<td class="tool-">'.
 						'<span class="dt2-">'.
-							'<a href="'.$href_edit.'" class="tool2-">'.$edit_icon.'</a>'. # &nbsp;
-							'<a href="'.$href_remove.'" class="tool2-">'.$del_icon.'</a>'.
+							'<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>'. # &nbsp;
+							'<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>'.
 						'</span>'.
-					 '</td>'."\n";
+					 '</td>' . "\n";
 			}
 			else
 			{
-				#echo '<td class="tool-">&nbsp;</td>'."\n";
-				#echo '<td class="tool-">&nbsp;</td>'."\n";
+				#echo '<td class="tool-">&nbsp;</td>' . "\n";
+				#echo '<td class="tool-">&nbsp;</td>' . "\n";
 			}
 	?>
 
@@ -280,5 +280,5 @@ if ($can_view)
 }
 else
 {
-	echo '<em>'.$this->_t('ActionDenied').'</em>';
+	echo '<em>' . $this->_t('ActionDenied') . '</em>';
 }
