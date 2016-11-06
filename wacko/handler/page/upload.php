@@ -31,11 +31,11 @@ if ($this->can_upload() === true)
 
 		$file = $this->db->load_single(
 			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
-			"FROM ".$this->db->table_prefix."upload f ".
-				"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->db->table_prefix."page p ON (f.page_id = p.page_id) ".
-			"WHERE f.page_id = '". $page_id."' ".
-				"AND f.upload_id ='".(int)$_GET['file_id']."' ".
+			"FROM " . $this->db->table_prefix . "upload f ".
+				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
+				"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) ".
+			"WHERE f.page_id = '" . $page_id . "' ".
+				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' ".
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -45,12 +45,12 @@ if ($this->can_upload() === true)
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
-				$message = '<strong>'.$this->_t('UploadRemoveConfirm').'</strong>';
+				$message = '<strong>' . $this->_t('UploadRemoveConfirm') . '</strong>';
 				$this->show_message($message, 'warning');
 
 				if ($file['page_id'])
 				{
-					$path = 'file:/'.$file['supertag'].'/';
+					$path = 'file:/' . $file['supertag'] . '/';
 				}
 				else
 				{
@@ -61,7 +61,7 @@ if ($this->can_upload() === true)
 				// !!!!! place here a reference to delete files
 ?>
 	<ul class="upload">
-		<li><?php echo $this->link($path.$file['file_name'] ); ?>
+		<li><?php echo $this->link($path . $file['file_name']); ?>
 			<br /><br />
 			<table>
 				<tr class="lined">
@@ -74,7 +74,7 @@ if ($this->can_upload() === true)
 				</tr>
 				<tr class="">
 					<th class="form_left" scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
-					<td><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></td>
+					<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
 				</tr>
 <?php
 			// image dimension
@@ -82,7 +82,7 @@ if ($this->can_upload() === true)
 			{ ?>
 				<tr class="lined">
 					<th class="form_left" scope="row"><?php echo $this->_t('FileDimension'); ?>:</th>
-					<td><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></td>
+					<td><?php echo '' . $file['picture_w'] . ' × ' . $file['picture_h'] . 'px'; ?></td>
 				</tr>
 <?php
 			} ?>
@@ -138,26 +138,26 @@ if ($this->can_upload() === true)
 
 		$file = $this->db->load_single(
 			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
-			"FROM ".$this->db->table_prefix."upload f ".
-				"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->db->table_prefix."page p ON (f.page_id = p.page_id) ".
-			"WHERE f.page_id = '".$page_id."' ".
-				"AND f.upload_id ='".(int)$_GET['file_id']."' ".
+			"FROM " . $this->db->table_prefix . "upload f ".
+				"INNER JOIN " . $this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+				"LEFT JOIN " . $this->db->table_prefix."page p ON (f.page_id = p.page_id) ".
+			"WHERE f.page_id = '" . $page_id . "' ".
+				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' ".
 			"LIMIT 1");
 
 		if (count($file) > 0)
 		{
-			if ($this->is_admin()
+			if (   $this->is_admin()
 				|| ($page_id
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
-				$message = '<strong>'.$this->_t('UploadEditConfirm').'</strong>';
+				$message = '<strong>' . $this->_t('UploadEditConfirm') . '</strong>';
 				$this->show_message($message, 'info');
 
 				if ($file['page_id'])
 				{
-					$path = 'file:/'.$file['supertag'].'/';
+					$path = 'file:/' . $file['supertag'] . '/';
 				}
 				else
 				{
@@ -174,12 +174,12 @@ if ($this->can_upload() === true)
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo ''.$this->binary_multiples($file['file_size'], false, true, true).''; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></li>
 <?php
 			// image dimension
 			if ($file['picture_w'])
 			{ ?>
-				<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo ''.$file['picture_w'].' x '.$file['picture_h'].'px'; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo '' . $file['picture_w'] . ' × ' . $file['picture_h'] . 'px'; ?></li>
 <?php
 			} ?>
 				<li><span>&nbsp;</span></li>
@@ -194,7 +194,7 @@ if ($this->can_upload() === true)
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
 	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('EditStoreButton'); ?>" />
 	&nbsp;
-	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
 	<br />
 	<br />
 <?php
@@ -231,10 +231,10 @@ if ($this->can_upload() === true)
 
 			$file = $this->db->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
-				"FROM ".$this->db->table_prefix."upload f ".
+				"FROM " . $this->db->table_prefix . "upload f ".
 					"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-				"WHERE f.page_id = '".$page_id."' ".
-					"AND f.upload_id ='".(int)$_POST['file_id']."' ".
+				"WHERE f.page_id = '" . $page_id . "' ".
+					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' ".
 				"LIMIT 1");
 
 			if (count($file) > 0)
@@ -247,21 +247,21 @@ if ($this->can_upload() === true)
 					// 2. remove from DB
 					$this->db->sql_query(
 						"DELETE FROM ".$this->db->table_prefix."upload ".
-						"WHERE upload_id = '".$file['upload_id']."'" );
+						"WHERE upload_id = '" . $file['upload_id'] . "'" );
 
 					// update user uploads count
 					$this->db->sql_query(
 						"UPDATE {$this->db->user_table} SET ".
 							"total_uploads = total_uploads - 1 ".
-						"WHERE user_id = '".$file['user_id']."' ".
+						"WHERE user_id = '" . $file['user_id'] . "' ".
 						"LIMIT 1");
 
-					$message .= $this->_t('UploadRemovedFromDB').'<br />';
+					$message .= $this->_t('UploadRemovedFromDB') . '<br />';
 
 					// 3. remove from FS
 					$real_filename = ($page_id
-						? (UPLOAD_PER_PAGE_DIR.'/@'.$page_id.'@')
-						: (UPLOAD_GLOBAL_DIR.'/')).
+						? (UPLOAD_PER_PAGE_DIR . '/@' . $page_id . '@')
+						: (UPLOAD_GLOBAL_DIR . '/')).
 						$file['file_name'];
 
 					if (@unlink($real_filename))
@@ -279,7 +279,7 @@ if ($this->can_upload() === true)
 					}
 
 					// log event
-					$this->log(1, Ut::perc_replace($this->_t('LogRemovedFile', SYSTEM_LANG), $this->tag.' '.$this->page['title'], $file['file_name']));
+					$this->log(1, Ut::perc_replace($this->_t('LogRemovedFile', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
 				}
 				else
 				{
@@ -305,10 +305,10 @@ if ($this->can_upload() === true)
 
 			$file = $this->db->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
-				"FROM ".$this->db->table_prefix."upload f ".
-					"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-				"WHERE f.page_id = '".$page_id."' ".
-					"AND f.upload_id ='".(int)$_POST['file_id']."' ".
+				"FROM " . $this->db->table_prefix . "upload f ".
+					"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
+				"WHERE f.page_id = '" . $page_id . "' ".
+					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' ".
 				"LIMIT 1");
 
 			if (count($file) > 0)
@@ -329,12 +329,12 @@ if ($this->can_upload() === true)
 					// 2. update file metadata
 					$this->db->sql_query(
 						"UPDATE ".$this->db->table_prefix."upload SET ".
-							"upload_lang		= ".$this->db->q($this->page['page_lang']).", ".
-							"file_description	= ".$this->db->q($description)." ".
-						"WHERE upload_id = '". $file['upload_id']."' ".
+							"upload_lang		= " . $this->db->q($this->page['page_lang']) . ", ".
+							"file_description	= " . $this->db->q($description) . " ".
+						"WHERE upload_id = '" . $file['upload_id'] . "' ".
 						"LIMIT 1");
 
-					$message .= $this->_t('UploadEditedMeta')."<br />";
+					$message .= $this->_t('UploadEditedMeta') . "<br />";
 
 					if ($message)
 					{
@@ -342,7 +342,7 @@ if ($this->can_upload() === true)
 					}
 
 					// log event
-					$this->log(1, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag.' '.$this->page['title'], $file['file_name']));
+					$this->log(1, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
 				}
 				else
 				{
@@ -361,14 +361,14 @@ if ($this->can_upload() === true)
 			// TODO: Set user used_quota in user table (?)
 			$user_files	= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_user_quota ".
-				"FROM ".$this->db->table_prefix."upload ".
-				"WHERE user_id = '".$user['user_id']."' ".
+				"FROM " . $this->db->table_prefix . "upload ".
+				"WHERE user_id = '" . $user['user_id'] . "' ".
 				"LIMIT 1");
 
 			// TODO: Set used_quota in config table (?)
 			$files		= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_quota ".
-				"FROM ".$this->db->table_prefix."upload ".
+				"FROM " . $this->db->table_prefix . "upload ".
 				"LIMIT 1");
 
 			// Checks
@@ -392,7 +392,7 @@ if ($this->can_upload() === true)
 
 					if (in_array($ext, $banned))
 					{
-						$ext = $ext.'.txt';
+						$ext = $ext . '.txt';
 					}
 
 					$image = ['gif', 'jpeg', 'jpg', 'png'];
@@ -411,7 +411,7 @@ if ($this->can_upload() === true)
 					// 1.5. +write @page_id@ to name
 					if (isset($_POST['to']) && $_POST['to'] != 'global')
 					{
-						$name = '@'.$this->page['page_id'].'@'.$name;
+						$name = '@' . $this->page['page_id'] . '@' . $name;
 					}
 					else
 					{
@@ -420,11 +420,11 @@ if ($this->can_upload() === true)
 
 					if ($is_global)
 					{
-						$dir = UPLOAD_GLOBAL_DIR.'/';
+						$dir = UPLOAD_GLOBAL_DIR . '/';
 					}
 					else
 					{
-						$dir = UPLOAD_PER_PAGE_DIR.'/';
+						$dir = UPLOAD_PER_PAGE_DIR . '/';
 					}
 
 					if (is_writable($dir))
@@ -432,19 +432,19 @@ if ($this->can_upload() === true)
 						$_name	= $name;
 						$count	= 1;
 
-						while (file_exists($dir.$name.'.'.$ext))
+						while (file_exists($dir . $name . '.' . $ext))
 						{
 							if ($name === $_name)
 							{
-								$name = $_name.$count;
+								$name = $_name . $count;
 							}
 							else
 							{
-								$name = $_name.(++$count);
+								$name = $_name . (++$count);
 							}
 						}
 
-						$result_name	= $name.'.'.$ext;
+						$result_name	= $name . '.' . $ext;
 						$file_size		= $_FILES['file']['size'];
 
 						// 1.6. check filesize, if asked
@@ -482,21 +482,21 @@ if ($this->can_upload() === true)
 							if (!$forbid)
 							{
 								// 3. save to permanent location
-								move_uploaded_file($_FILES['file']['tmp_name'], $dir.$result_name);
-								chmod($dir.$result_name, 0644);
+								move_uploaded_file($_FILES['file']['tmp_name'], $dir . $result_name);
+								chmod($dir . $result_name, 0644);
 
 								if ($is_global)
 								{
 									$small_name		= $result_name;
 									$path			= 'file:/';
-									$syntax_file	= 'file:/'.$small_name;
+									$syntax_file	= 'file:/' . $small_name;
 								}
 								else
 								{
 									$small_name		= explode('@', $result_name);
-									$small_name		= $small_name[ count($small_name) -1 ];
-									$path			= 'file:/'.$this->page['supertag'].'/';
-									$syntax_file	= 'file:'.$small_name;
+									$small_name		= $small_name[count($small_name) - 1];
+									$path			= 'file:/' . $this->page['supertag'] . '/';
+									$syntax_file	= 'file:' . $small_name;
 								}
 
 								$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
@@ -513,22 +513,22 @@ if ($this->can_upload() === true)
 								// 5. insert line into DB
 								$this->db->sql_query(
 									"INSERT INTO ".$this->db->table_prefix."upload SET ".
-										"page_id			= '".($is_global ? "0" : $this->page['page_id'])."', ".
-										"user_id			= '".$user['user_id']."',".
-										"file_name			= ".$this->db->q($small_name).", ".
-										"upload_lang		= ".$this->db->q($this->page['page_lang']).", ".
-										"file_description	= ".$this->db->q($description).", ".
-										"file_size			= '".(int)$file_size."',".
-										"picture_w			= '".(int)$size[0]."',".
-										"picture_h			= '".(int)$size[1]."',".
-										"file_ext			= ".$this->db->q(substr($ext, 0, 10)).",".
-										"uploaded_dt		= ".$this->db->q($uploaded_dt)." ");
+										"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', ".
+										"user_id			= '" . $user['user_id'] . "',".
+										"file_name			= " . $this->db->q($small_name) . ", ".
+										"upload_lang		= " . $this->db->q($this->page['page_lang']) . ", ".
+										"file_description	= " . $this->db->q($description) . ", ".
+										"file_size			= '" . (int) $file_size . "',".
+										"picture_w			= '" . (int) $size[0] . "',".
+										"picture_h			= '" . (int) $size[1] . "',".
+										"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . ",".
+										"uploaded_dt		= " . $this->db->q($uploaded_dt) . " ");
 
 								// update user uploads count
 								$this->db->sql_query(
 									"UPDATE {$this->db->user_table} SET ".
 										"total_uploads = total_uploads + 1 ".
-									"WHERE user_id = '".$user['user_id']."' ".
+									"WHERE user_id = '" . $user['user_id'] . "' ".
 									"LIMIT 1");
 
 								// 4. output link to file
@@ -542,22 +542,22 @@ if ($this->can_upload() === true)
 								}
 								else
 								{
-									$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag']." ".$this->page['title'], $small_name, $file_size_ft));
+									$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $small_name, $file_size_ft));
 								}
 								?>
 		<br />
 		<ul class="upload">
-			<li><?php echo $this->link($path.$small_name); ?>
+			<li><?php echo $this->link($path . $small_name); ?>
 				<ul>
 					<li><span>&nbsp;</span></li>
-					<li><span class="info_title"><?php echo $this->_t('FileSyntax'); ?>:</span><?php echo '<code>'.$syntax_file.'</code>'; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileSyntax'); ?>:</span><?php echo '<code>' . $syntax_file . '</code>'; ?></li>
 					<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($uploaded_dt); ?></li>
-					<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo ''.$file_size_ft.''; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo '' . $file_size_ft . ''; ?></li>
 					<?php
 					// image dimension
 					if (isset($size))
 					{ ?>
-					<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo ''.$size[0].' x '.$size[1].'px'; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo '' . $size[0] . ' × ' . $size[1] . 'px'; ?></li>
 					<?php
 					} ?>
 					<li><span>&nbsp;</span></li>
@@ -605,13 +605,13 @@ if ($this->can_upload() === true)
 				if ($this->db->upload_quota_per_user > 0)
 				{
 					$error = $this->_t('UploadMaxFileQuota').'. <br />'.
-							 'Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->db->upload_quota_per_user) * 100), 2).'%) of '.$this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
+							 'Storage in use ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) . ' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
 				}
 
 				if ($this->db->upload_quota > 0)
 				{
-					$error .= '<br />'.$this->_t('UploadMaxFileQuota').'. <br />'.
-							  'Storage in use '.$this->binary_multiples($files['used_quota'], false, true, true).' ('.round(($files['used_quota']/($this->db->upload_quota) * 100), 2).'%) of '.$this->binary_multiples(($this->db->upload_quota), true, true, true);
+					$error .= '<br />' . $this->_t('UploadMaxFileQuota') . '. <br />'.
+							  'Storage in use ' . $this->binary_multiples($files['used_quota'], false, true, true) . ' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota), true, true, true);
 				}
 			}
 		}
@@ -621,7 +621,7 @@ if ($this->can_upload() === true)
 			$this->set_message($error, 'error');
 		}
 
-		echo $this->action('upload', []).'<br />';
+		echo $this->action('upload', []) . '<br />';
 	}
 }
 else
@@ -632,7 +632,7 @@ else
 // show uploaded files for current page
 if ($this->has_access('read'))
 {
-	echo $this->action('files', []).'<br />';
+	echo $this->action('files', []) . '<br />';
 }
 
-echo '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" value="'.$this->_t('CancelDifferencesButton').'" /></a>'."\n";
+echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>'."\n";
