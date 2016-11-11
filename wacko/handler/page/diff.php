@@ -14,8 +14,8 @@ if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
 	$this->http->redirect($this->href());
 }
 
-$a			= (int)$_GET['a'];
-$b			= (int)$_GET['b'];
+$a			= (string) $_GET['a'];
+$b			= (string) $_GET['b'];
 $diffmode	= (int)@$_GET['diffmode'];
 
 if ($a < 0) $a = 0;
@@ -36,7 +36,7 @@ $load_diff_page = function ($id)
 			"SELECT r.page_id, r.revision_id, r.modified, r.body, r.page_lang, u.user_name ".
 			"FROM ".$this->db->table_prefix."revision r ".
 				"LEFT JOIN ".$this->db->table_prefix."user u ON (r.user_id = u.user_id) ".
-			"WHERE r.revision_id = '".(int)$id."' ".
+			"WHERE r.revision_id = '".(string) $id."' ".
 			"LIMIT 1");
 	}
 	else

@@ -30,7 +30,7 @@ function admin_content_deleted(&$engine, &$module)
 	// clear specific page revisions
 	if (isset($_GET['remove']))
 	{
-		$id = (int)$_GET['remove'];
+		$id = (int) $_GET['remove'];
 		$engine->db->sql_query(
 			"DELETE FROM {$engine->db->table_prefix}revision ".
 			"WHERE page_id = '".$id."'");
@@ -48,7 +48,7 @@ function admin_content_deleted(&$engine, &$module)
 	// restore specific page revisions
 	if (isset($_GET['restore']))
 	{
-		$id = (int)$_GET['restore'];
+		$id = (int) $_GET['restore'];
 		$engine->restore_page($id);
 		$engine->restore_file($id);
 	}

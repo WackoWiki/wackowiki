@@ -41,7 +41,7 @@ function admin_maint_transliterate(&$engine, &$module)
 		}
 
 		// links
-		if ((int)$_REQUEST['step'] === 1)
+		if ((int) $_REQUEST['step'] === 1)
 		{
 			if ($pages = $engine->db->load_all(
 				"SELECT to_tag
@@ -75,7 +75,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			}
 		}
 		// pages
-		else if ((int)$_REQUEST['step'] === 2)
+		else if ((int) $_REQUEST['step'] === 2)
 		{
 			if ($pages = $engine->db->load_all(
 				"SELECT page_id, tag
@@ -109,7 +109,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			}
 		}
 		// revisions
-		else if ((int)$_REQUEST['step'] === 3)
+		else if ((int) $_REQUEST['step'] === 3)
 		{
 			if ($pages = $engine->db->load_all(
 					"SELECT revision_id, tag

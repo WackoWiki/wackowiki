@@ -37,7 +37,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 	}
 	else
 	{
-		$category = (int)$_GET['category_id'];
+		$category = (int) $_GET['category_id'];
 	}
 
 	if ($_words = $this->db->load_all(
@@ -136,7 +136,7 @@ if (!$ids)
 
 			# if (!$inline && $i++ > 0) echo '<br />';
 
-			echo '<li class="' . (!$inline ? 'inline' : '') . '"> ' . ($list ? '<a href="' . $this->href('', '', 'category_id=' . $category_id) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> × </span><span class="item-multiplier-count">' . (int)$word['n'] . '</span>' : '');
+			echo '<li class="' . (!$inline ? 'inline' : '') . '"> ' . ($list ? '<a href="' . $this->href('', '', 'category_id=' . $category_id) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> × </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '');
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
@@ -144,7 +144,7 @@ if (!$ids)
 
 				foreach ($word['childs'] as $category_id => $word)
 				{
-					echo '<li class="' . (!$inline ? 'inline' : '') . '"> ' . ($list ? '<a href="' . $this->href('', '', 'category_id=' . $category_id) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> × </span><span class="item-multiplier-count">' . (int)$word['n'] . '</span>' : '') . "</li>\n";
+					echo '<li class="' . (!$inline ? 'inline' : '') . '"> ' . ($list ? '<a href="' . $this->href('', '', 'category_id=' . $category_id) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> × </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '') . "</li>\n";
 				}
 
 				echo "</ul>\n</li>\n";

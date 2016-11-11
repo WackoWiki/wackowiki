@@ -79,12 +79,12 @@ if ($this->has_access('read')
 
 			if (isset($_POST['minor_edit']))
 			{
-				$minor_edit = (int)$_POST['minor_edit'];
+				$minor_edit = (string) $_POST['minor_edit'];
 			}
 
 			if (isset($_POST['reviewed']))
 			{
-				$reviewed = (int)$_POST['reviewed'];
+				$reviewed = (string) $_POST['reviewed'];
 			}
 
 			$title = $this->page['title'];

@@ -67,7 +67,7 @@ $mail_body = '';
 		{
 			if ($engine->db->enable_email == true && $engine->db->enable_email_notification == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
 			{
-				$subject	= '[' . $engine->db->site_name.'] ' . $mail_subject;
+				$subject	= '[' . $engine->db->site_name . '] ' . $mail_subject;
 				$body		= $engine->_t('EmailHello') . ' ' . $user['user_name'] . ",\n\n".
 
 							$mail_body."\n\n\n".

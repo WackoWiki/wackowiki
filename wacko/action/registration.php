@@ -152,15 +152,15 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			$this->db->sql_query(
 				"INSERT INTO ".$this->db->table_prefix."user_setting ".
 				"SET ".
-					"user_id			= '".(int)$user_id."', ".
+					"user_id			= '".(int) $user_id."', ".
 					"typografica		= '".(($this->db->default_typografica == 1) ? 1 : 0)."', ".
 					"user_lang			= ".$this->db->q(($user_lang ? $user_lang : $this->db->language)).", ".
-					"list_count			= '".(int)$this->db->list_count."', ".
+					"list_count			= '".(int) $this->db->list_count."', ".
 					"theme				= ".$this->db->q($this->db->theme).", ".
-					"notify_minor_edit	= '".(int)$this->db->notify_minor_edit."', ".
-					"notify_page		= '".(int)$this->db->notify_page."', ".
-					"notify_comment		= '".(int)$this->db->notify_comment."', ".
-					"sorting_comments	= '".(int)$this->db->sorting_comments."', ".
+					"notify_minor_edit	= '".(int) $this->db->notify_minor_edit."', ".
+					"notify_page		= '".(int) $this->db->notify_page."', ".
+					"notify_comment		= '".(int) $this->db->notify_comment."', ".
+					"sorting_comments	= '".(int) $this->db->sorting_comments."', ".
 					"send_watchmail		= '1'");
 
 			// INSERT user menu items

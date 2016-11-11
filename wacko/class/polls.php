@@ -163,9 +163,9 @@ class Polls
 		// submitting title
 		$this->engine->sql_query(
 			"INSERT INTO {$this->engine->db->table_prefix}poll SET ".
-				"poll_id	= '".(int)$poll_id."', ".
+				"poll_id	= '".(int) $poll_id."', ".
 				"text		= ".$engine->db->q(rtrim($topic, '.')).", ".
-				"user_id	= '".(int)$user_id."', ".
+				"user_id	= '".(int) $user_id."', ".
 				"plural		= '".$plural."', ".
 				"start		= ".($start == 1 ? "UTC_TIMESTAMP()" : "NULL"));
 
@@ -176,8 +176,8 @@ class Polls
 
 			$this->engine->sql_query(
 				"INSERT INTO {$this->engine->db->table_prefix}poll SET ".
-					"poll_id	= '".(int)$poll_id."', ".
-					"v_id		= '".(int)$v_id."', ".
+					"poll_id	= '".(int) $poll_id."', ".
+					"v_id		= '".(int) $v_id."', ".
 					"text		= ".$engine->db->q(rtrim($v_text, '.'))." ");
 		}
 
@@ -219,7 +219,7 @@ class Polls
 					'<a id="poll'.$poll_id.'_form"></a>'.
 					'<input type="hidden" name="poll" value="'.$poll_id.'" />'.
 					'<table class="formation">'."\n".
-					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$poll_id).'): '.$header['text'].'</th></tr>'."\n";
+					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int) $poll_id).'): '.$header['text'].'</th></tr>'."\n";
 
 			foreach ($vars as $var)
 			{
@@ -272,7 +272,7 @@ class Polls
 					'<a id="p'.date('dm', strtotime($header['start'])).'"></a>'.
 					'<a id="poll'.$poll_id.'_form"></a>'.
 					'<table class="formation">'.
-					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$poll_id).'): '.$header['text'].'</th></tr>';
+					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int) $poll_id).'): '.$header['text'].'</th></tr>';
 
 			foreach ($vars as $var)
 			{
@@ -353,8 +353,8 @@ class Polls
 					$this->engine->sql_query(
 						"UPDATE {$this->engine->db->table_prefix}poll ".
 						"SET votes = '".(int) $new_votes."' ".
-						"WHERE poll_id = '".(int)$poll_id."' ".
-							"AND v_id = '".(int)$vote_id."'");
+						"WHERE poll_id = '".(int) $poll_id."' ".
+							"AND v_id = '".(int) $vote_id."'");
 //					$total++;
 				}
 			}
@@ -364,8 +364,8 @@ class Polls
 
 		$this->engine->sql_query(
 			"UPDATE {$this->engine->db->table_prefix}poll ".
-			"SET votes = '".(int)$new_votes."' ".
-			"WHERE poll_id = '".(int)$poll_id."' ".
+			"SET votes = '".(int) $new_votes."' ".
+			"WHERE poll_id = '".(int) $poll_id."' ".
 				"AND v_id = '0'");
 
 		return true;

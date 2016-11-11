@@ -30,10 +30,10 @@ function admin_messages(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['system_message']			= (string)$_POST['system_message'];
+		$config['system_message']			= (string) $_POST['system_message'];
 		$config['system_message']			= $engine->format($config['system_message'], 'wiki');
-		$config['system_message_type']		= (string)$_POST['system_message_type'];
-		$config['enable_system_message']	= (int)$_POST['enable_system_message'];
+		$config['system_message_type']		= (string) $_POST['system_message_type'];
+		$config['enable_system_message']	= (int) $_POST['enable_system_message'];
 
 		$engine->config->_set($config);
 

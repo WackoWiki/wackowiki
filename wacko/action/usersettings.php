@@ -107,10 +107,10 @@ else if (($user = $this->get_user()))
 		"user_lang			= ".$this->db->q($_POST['user_lang']).", ".
 		"theme				= ".$this->db->q($_POST['theme']).", ".
 		"timezone			= '".(float)$_POST['timezone']."', ".
-		"dst				= '".(int)$_POST['dst']."', ".
-		"sorting_comments	= '".(int)$_POST['sorting_comments']."', ".
-		"menu_items			= '".(int)$_POST['menu_items']."', ".
-		"list_count			= '".(int)$_POST['list_count']."' " ;
+		"dst				= '".(int) $_POST['dst']."', ".
+		"sorting_comments	= '".(int) $_POST['sorting_comments']."', ".
+		"menu_items			= '".(int) $_POST['menu_items']."', ".
+		"list_count			= '".(int) $_POST['list_count']."' " ;
 	}
 	else
 	{
@@ -123,7 +123,7 @@ else if (($user = $this->get_user()))
 		$this->db->sql_query(
 			"UPDATE ".$this->db->table_prefix."user_setting SET ".
 				$sql.
-			"WHERE user_id = '".(int)$user['user_id']."' ".
+			"WHERE user_id = '".(int) $user['user_id']."' ".
 			"LIMIT 1");
 
 		// log event
@@ -430,7 +430,7 @@ else if (($user = $this->get_user()))
 		$code = $this->db->load_single(
 			"SELECT email_confirm ".
 			"FROM {$this->db->user_table} ".
-			"WHERE user_id = '".(int)$user['user_id']."' ".
+			"WHERE user_id = '".(int) $user['user_id']."' ".
 			"LIMIT 1");
 
 		echo '<h3>'.$this->_t('UserSettings').' &raquo; '.$this->_t('UserSettingsGeneral').'</h3>';
@@ -658,10 +658,10 @@ else if (($user = $this->get_user()))
 					'<td class="form_right" title="'.$this->_t('UploadQuotaTip').'"><div class="meter"><span style="width: 25%">'.$this->binary_multiples($this->upload_quota($user['user_id']), false, true, true).' ('.$percentage.")</span></div></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('UsersPages')."</th>".
-					'<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name'], '', 'pages').'" title="'.$this->_t('RevisionTip').'">'.(int)$user['total_pages']."</a></td>".
+					'<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name'], '', 'pages').'" title="'.$this->_t('RevisionTip').'">'.(int) $user['total_pages']."</a></td>".
 				// "</tr>\n".'<tr class="lined">'.
 					// '<th class="form_left" scope="row">'.$this->_t('UsersRevisions')."</th>".
-					// '<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name']).'" title="'.$this->_t('RevisionTip').'">'.(int)$user['total_revisions']."</a></td>".
+					// '<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name']).'" title="'.$this->_t('RevisionTip').'">'.(int) $user['total_revisions']."</a></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">'.$this->_t('UsersComments')."</th>".
 					'<td class="form_right"><a href="'.$this->href('', $this->db->users_page, 'profile='.$user['user_name'], '', 'comments').'" title="'.$this->_t('ShowComments').'">'.$user['total_comments'].'</a></td>'.

@@ -43,13 +43,13 @@ function admin_config_filter(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		// update secondary config
-		$config['spam_filter']					= (string)$_POST['spam_filter'];
-		#$config['spam_action']					= (string)$_POST['spam_action'];
+		$config['spam_filter']					= (string) $_POST['spam_filter'];
+		#$config['spam_action']					= (string) $_POST['spam_action'];
 
 		$engine->config->_set($config);
 
 		// write antispam.conf file
-		$phrase_list	= (string)$_POST['phrase_list'];
+		$phrase_list	= (string) $_POST['phrase_list'];
 		file_put_contents($file_name, $phrase_list);
 		chmod($file_name, 0644);
 

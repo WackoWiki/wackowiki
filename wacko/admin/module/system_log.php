@@ -45,7 +45,7 @@ function admin_system_log(&$engine, &$module)
 	if (isset($_POST['update']) || isset($_GET['level_mod']))
 	{
 		$_level_mod	= isset($_POST['level_mod'])	? $_POST['level_mod']	: (isset($_GET['level_mod'])	? $_GET['level_mod'] : '');
-		$_level		= isset($_POST['level'])		? (int)$_POST['level']	: (isset($_GET['level'])		? (int)$_GET['level'] : '');
+		$_level		= isset($_POST['level'])		? (int) $_POST['level']	: (isset($_GET['level'])		? (int) $_GET['level'] : '');
 
 		// level filtering
 		switch ($_level_mod)
@@ -99,7 +99,7 @@ function admin_system_log(&$engine, &$module)
 	// filter by username or user ip
 	if (isset($_GET['user_id']))
 	{
-		$where = "WHERE l.user_id = '".(int)$_GET['user_id']."' ";
+		$where = "WHERE l.user_id = '".(int) $_GET['user_id']."' ";
 	}
 	else if (isset($_GET['ip']))
 	{
@@ -118,7 +118,7 @@ function admin_system_log(&$engine, &$module)
 	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n ".
 		"FROM {$engine->db->table_prefix}log l ".
-		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
+		( $where ? $where : 'WHERE level <= '.(int) $level.' ' ));
 
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
 	$level_pagination		= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
@@ -129,7 +129,7 @@ function admin_system_log(&$engine, &$module)
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ".
 		"FROM {$engine->db->table_prefix}log l ".
 			"LEFT JOIN {$engine->db->table_prefix}user u ON (l.user_id = u.user_id) ".
-		( $where ? $where : 'WHERE l.level <= '.(int)$level.' ' ).
+		( $where ? $where : 'WHERE l.level <= '.(int) $level.' ' ).
 		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
 		$pagination['limit']);
 

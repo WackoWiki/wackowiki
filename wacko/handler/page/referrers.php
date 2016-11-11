@@ -114,7 +114,7 @@ else
 	$query =
 		"SELECT referrer, COUNT(referrer) AS num ".
 		"FROM ".$px."referrer ".
-			"WHERE page_id = '".(int)$this->page['page_id']."' ".
+			"WHERE page_id = '".(string) $this->page['page_id']."' ".
 		"GROUP BY referrer ".
 		"ORDER BY num DESC";
 }
@@ -188,7 +188,7 @@ $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $space
 // check referrer permissions, and return link to referal wikipage, or '' if none available/accessible
 $check_ref = function ($ref)
 {
-	if (!($page_id = (int)$ref['page_id']))
+	if (!($page_id = (string) $ref['page_id']))
 	{
 		$link = '404';
 	}

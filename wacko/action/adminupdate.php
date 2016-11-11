@@ -47,7 +47,7 @@ if ($this->is_admin())
 			{
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
-					"SET total_pages = ".(int)$user['n']." ".
+					"SET total_pages = ".(int) $user['n']." ".
 					"WHERE user_id = '".$user['owner_id']."' ".
 					"LIMIT 1");
 			}
@@ -63,7 +63,7 @@ if ($this->is_admin())
 			{
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
-					"SET total_comments = ".(int)$user['n']." ".
+					"SET total_comments = ".(int) $user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
@@ -79,7 +79,7 @@ if ($this->is_admin())
 			{
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
-					"SET total_revisions = ".(int)$user['n']." ".
+					"SET total_revisions = ".(int) $user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
@@ -95,7 +95,7 @@ if ($this->is_admin())
 			{
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
-					"SET total_uploads = ".(int)$user['n']." ".
+					"SET total_uploads = ".(int) $user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
@@ -360,7 +360,7 @@ if ($this->is_admin())
 						$grant_type_id	= '';
 						$deny			= '';
 
-						#$privilege = (string)$privilege;
+						#$privilege = (string) $privilege;
 						// look for '!' prefix, if true set $deny to true and remove it
 						if ($privilege[0] == '!')
 						{

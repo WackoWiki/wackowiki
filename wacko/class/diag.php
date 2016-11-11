@@ -247,7 +247,7 @@ EOD;
 
 			foreach ($log as $one)
 			{
-				echo '<tr class="logtype' . (int)$one[1] . '">';
+				echo '<tr class="logtype' . (int) $one[1] . '">';
 				echo '<td>' . number_format($one[0] - WACKO_STARTED, 4) . '</td>';
 				echo '<td><code>' . htmlspecialchars($one[3], ENT_QUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code></td>';
 				echo '<td>' .  htmlspecialchars($one[2], ENT_QUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET) .  '</td>';

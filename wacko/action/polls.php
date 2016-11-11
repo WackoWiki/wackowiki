@@ -24,7 +24,7 @@ $polls_obj = new Polls($this);
 // processing input
 if (isset($_POST['vote']) && isset($_POST['poll']))
 {
-	$header	= $polls_obj->get_poll_title((int)$_POST['poll']);
+	$header	= $polls_obj->get_poll_title((int) $_POST['poll']);
 
 	if ($header['start'] && !$header['end'] && !$polls_obj->poll_is_voted($header['poll_id']))
 	{
@@ -33,13 +33,13 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 			// making plural ballot
 			foreach ($_POST as $key => $value)
 			{
-				if (preg_match('/^[0-9]{1,2}$/', $key) && $value === '1') $ballot[] = (int)$key;
+				if (preg_match('/^[0-9]{1,2}$/', $key) && $value === '1') $ballot[] = (int) $key;
 			}
 		}
 		else
 		{
 			// making singular ballot
-			$ballot = (int)$_POST['id'];
+			$ballot = (int) $_POST['id'];
 		}
 
 		// checking ballot: we need at least one vote
@@ -74,7 +74,7 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 }
 else if (isset($_POST['results']) && isset($_POST['poll']))
 {
-	$vote = (int)$_POST['poll'];
+	$vote = (int) $_POST['poll'];
 	$results = 1;
 }
 

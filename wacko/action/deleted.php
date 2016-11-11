@@ -10,7 +10,7 @@ if ($this->is_admin())
 {
 	if (!isset($max) || $max > 1000) $max = 1000;
 
-	list($pages, $pagination) = $this->load_deleted((int)$max, false);
+	list($pages, $pagination) = $this->load_deleted((int) $max, false);
 
 	if ($pages)
 	{

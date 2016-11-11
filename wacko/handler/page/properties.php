@@ -23,19 +23,19 @@ if (@$_POST['_action'] === 'extended_properties')
 	$mode = 'extended';
 	$this->db->sql_query(
 		"UPDATE {$this->db->table_prefix}page SET ".
-			"footer_comments	= '".(int)$_POST['footer_comments']."', ".
-			"footer_files		= '".(int)$_POST['footer_files']."', ".
+			"footer_comments	= '".(string) $_POST['footer_comments']."', ".
+			"footer_files		= '".(string) $_POST['footer_files']."', ".
 			($this->db->footer_rating
-				? "footer_rating	= '".(int)$_POST['footer_rating']."', "
+				? "footer_rating	= '".(string) $_POST['footer_rating']."', "
 				: "").
-			"hide_toc			= '".(int)$_POST['hide_toc']."', ".
-			"hide_index			= '".(int)$_POST['hide_index']."', ".
-			"tree_level			= '".(int)$_POST['tree_level']."', ".
+			"hide_toc			= '".(string) $_POST['hide_toc']."', ".
+			"hide_index			= '".(string) $_POST['hide_index']."', ".
+			"tree_level			= '".(string) $_POST['tree_level']."', ".
 			($this->is_admin()
-				?	"allow_rawhtml		= '".(int)$_POST['allow_rawhtml']."', ".
-					"disable_safehtml	= '".(int)$_POST['disable_safehtml']."', "
+				?	"allow_rawhtml		= '".(string) $_POST['allow_rawhtml']."', ".
+					"disable_safehtml	= '".(string) $_POST['disable_safehtml']."', "
 				: "").
-			"noindex			= '".(int)$_POST['noindex']."' ".
+			"noindex			= '".(string) $_POST['noindex']."' ".
 		"WHERE page_id = '".$this->page['page_id']."' ".
 		"LIMIT 1");
 }
@@ -48,7 +48,7 @@ if (@$_POST['_action'] === 'general_properties')
 			"theme				= ".$this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')).", ".
 			// menu_tag: unused currently, for use in custom theme menus
 			// "menu_tag			= ".$this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).", ".
-			// "show_menu_tag		= ".$this->db->q((int)$_POST['show_menu_tag']).", ".
+			// "show_menu_tag		= ".$this->db->q((string) $_POST['show_menu_tag']).", ".
 			"title				= ".$this->db->q(trim($_POST['title'])).", ".
 			"keywords			= ".$this->db->q(trim($_POST['keywords'])).", ".
 			"description		= ".$this->db->q(trim($_POST['description']))." ".

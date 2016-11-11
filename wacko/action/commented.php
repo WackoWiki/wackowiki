@@ -35,7 +35,7 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 
 		foreach ($ids as &$id)
 		{
-			$id = "'" . (int)$id['page_id'] . "'";
+			$id = "'" . (int) $id['page_id'] . "'";
 		}
 
 		// load complete comments
@@ -85,7 +85,7 @@ if ($this->user_allowed_comments())
 				echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
 			}
 
-			if ($root == '' && !(int)$noxml)
+			if ($root == '' && !(int) $noxml)
 			{
 				echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
 			}

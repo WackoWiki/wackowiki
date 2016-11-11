@@ -348,15 +348,15 @@ function admin_db_restore(&$engine, &$module)
 
 					$results .=
 						"\t\t".'File:    '.(int)array_sum($total)."\n".
-						"\t\t".'recorded:  '.(int)$total[0]."\n".
-						"\t\t".'skipped: '.(int)$total[1]."\n\n";
+						"\t\t".'recorded:  '.(int) $total[0]."\n".
+						"\t\t".'skipped: '.(int) $total[1]."\n\n";
 
 				}
 
 				$results .= '<strong>'.date('H:i:s').' - Completed. Total files:'."\n".
 					"\t".'all:     '.(int)array_sum($overall)."\n".
-					"\t".'recorded:  '.(int)$overall[0]."\n".
-					"\t".'skipped: '.(int)$overall[1]."\n".
+					"\t".'recorded:  '.(int) $overall[0]."\n".
+					"\t".'skipped: '.(int) $overall[1]."\n".
 					'</strong>'."\n\n";
 			}
 			else

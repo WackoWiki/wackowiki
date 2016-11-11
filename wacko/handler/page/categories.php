@@ -52,7 +52,7 @@ if ($this->is_owner() || $this->is_admin())
 			$word = $this->db->load_single(
 				"SELECT category_id, parent_id, category ".
 				"FROM {$this->db->table_prefix}category ".
-				"WHERE category_id = '" . (int)$_POST['category_id'] . "' ".
+				"WHERE category_id = '" . (string) $_POST['category_id'] . "' ".
 				"LIMIT 1");
 		}
 
@@ -97,7 +97,7 @@ if ($this->is_owner() || $this->is_admin())
 				"SELECT category_id ".
 				"FROM {$this->db->table_prefix}category ".
 				"WHERE category = " . $this->db->q($_POST['category']) . " ".
-					"AND category_id <> '" . (int)$_POST['category_id'] . "' ".
+					"AND category_id <> '" . (string) $_POST['category_id'] . "' ".
 				"LIMIT 1"))
 			{
 				$this->set_message($this->_t('CategoriesAlreadyExists'));
@@ -109,7 +109,7 @@ if ($this->is_owner() || $this->is_admin())
 				$this->db->sql_query(
 					"UPDATE {$this->db->table_prefix}category SET ".
 						"category = " . $this->db->q($_POST['category']) . " ".
-					"WHERE category_id = '" . (int)$_POST['category_id'] . "' ".
+					"WHERE category_id = '" . (string) $_POST['category_id'] . "' ".
 					"LIMIT 1");
 
 				$this->set_message($this->_t('CategoriesRenamed'));
@@ -125,7 +125,7 @@ if ($this->is_owner() || $this->is_admin())
 				$this->db->sql_query(
 					"UPDATE {$this->db->table_prefix}category SET ".
 						"parent_id = 0 ".
-					"WHERE category_id = '" . (int)$_POST['category_id'] . "' ".
+					"WHERE category_id = '" . (string) $_POST['category_id'] . "' ".
 					"LIMIT 1");
 
 				$this->set_message($this->_t('CategoriesUngrouped'));
@@ -136,21 +136,21 @@ if ($this->is_owner() || $this->is_admin())
 				$parent = $this->db->load_single(
 					"SELECT parent_id, category ".
 					"FROM {$this->db->table_prefix}category ".
-					"WHERE category_id = '" . (int)$_POST['parent_id'] . "' ".
+					"WHERE category_id = '" . (string) $_POST['parent_id'] . "' ".
 					"LIMIT 1");
 
 				if ($parent['parent_id'] == 0)
 				{
 					$this->db->sql_query(
 						"UPDATE {$this->db->table_prefix}category SET ".
-							"parent_id = '" . (int)$_POST['parent_id'] . "' ".
-						"WHERE category_id = '" . (int)$_POST['category_id'] . "' ".
+							"parent_id = '" . (string) $_POST['parent_id'] . "' ".
+						"WHERE category_id = '" . (string) $_POST['category_id'] . "' ".
 						"LIMIT 1");
 
 					$this->db->sql_query(
 						"UPDATE {$this->db->table_prefix}category SET ".
 							"parent_id = 0 ".
-						"WHERE parent_id = '" . (int)$_POST['category_id'] . "'");
+						"WHERE parent_id = '" . (string) $_POST['category_id'] . "'");
 
 					$this->set_message($this->_t('CategoriesGrouped'));
 					$this->log(4, 'Category //' . $word['category'] . '// grouped with the word //' . $parent['category'] . '//');
@@ -166,16 +166,16 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			$this->db->sql_query(
 				"DELETE FROM {$this->db->table_prefix}category ".
-				"WHERE category_id = '" . (int)$_POST['category_id'] . "'");
+				"WHERE category_id = '" . (string) $_POST['category_id'] . "'");
 
 			$this->db->sql_query(
 				"DELETE FROM {$this->db->table_prefix}category_page ".
-				"WHERE category_id = '" . (int)$_POST['category_id'] . "'");
+				"WHERE category_id = '" . (string) $_POST['category_id'] . "'");
 
 			$this->db->sql_query(
 				"UPDATE {$this->db->table_prefix}category SET ".
 					"parent_id = 0 ".
-				"WHERE parent_id = '" . (int)$_POST['category_id'] . "'");
+				"WHERE parent_id = '" . (string) $_POST['category_id'] . "'");
 
 			$this->set_message($this->_t('CategoriesDeleted'));
 			$this->log(4, 'Category //' . $word['category'] . '// removed from the database');
@@ -219,7 +219,7 @@ if ($this->is_owner() || $this->is_admin())
 				$word = $this->db->load_single(
 					"SELECT category_id, parent_id, category ".
 					"FROM {$this->db->table_prefix}category ".
-					"WHERE category_id = '" . (int)$_POST['change'] . "' ".
+					"WHERE category_id = '" . (string) $_POST['change'] . "' ".
 					"LIMIT 1");
 
 				$parent_id = ($word['parent_id'] == 0 ? $word['category_id'] : $parent_id = $word['parent_id']);
@@ -253,7 +253,7 @@ if ($this->is_owner() || $this->is_admin())
 			if ($word = $this->db->load_single(
 				"SELECT category
 				FROM {$this->db->table_prefix}category
-				WHERE category_id = '" . (int)$_POST['change'] . "'
+				WHERE category_id = '" . (string) $_POST['change'] . "'
 				LIMIT 1"))
 			{
 				echo $this->form_open('rename_category', ['page_method' => 'categories']);
@@ -276,7 +276,7 @@ if ($this->is_owner() || $this->is_admin())
 			if ($word = $this->db->load_single(
 				"SELECT category_id, parent_id, category, category_lang
 				FROM {$this->db->table_prefix}category
-				WHERE category_id = '" . (int)$_POST['change'] . "'
+				WHERE category_id = '" . (string) $_POST['change'] . "'
 				LIMIT 1"))
 			{
 				$parents = $this->db->load_all(
@@ -316,7 +316,7 @@ if ($this->is_owner() || $this->is_admin())
 			if ($word = $this->db->load_single(
 				"SELECT category
 				FROM {$this->db->table_prefix}category
-				WHERE category_id = '" . (int)$_POST['change'] . "'
+				WHERE category_id = '" . (string) $_POST['change'] . "'
 				LIMIT 1"))
 			{
 				echo $this->form_open('remove_category', ['page_method' => 'categories']);

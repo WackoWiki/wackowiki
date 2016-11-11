@@ -585,9 +585,9 @@ class GPG
 			{
 				// check how many keys was imported to determine
 				// function's resulting output
-				if		((int)$status[$index][1] === 0)	$result = false;
-				else if	((int)$status[$index][1] === 1)	$result = true;
-				else if	((int)$status[$index][1]  >  1)	$result = $output;
+				if		((int) $status[$index][1] === 0)	$result = false;
+				else if	((int) $status[$index][1] === 1)	$result = true;
+				else if	((int) $status[$index][1]  >  1)	$result = $output;
 			}
 		}
 
@@ -838,8 +838,8 @@ class GPG
 
 					$results[$key_id = $cells[1]] = [
 						0 => $type,
-						1 => (int)$cells[3],
-						2 => (int)$cells[4],
+						1 => (int) $cells[3],
+						2 => (int) $cells[4],
 						3 => trim($cells[6]),
 						4 => []
 					];
@@ -847,7 +847,7 @@ class GPG
 				// uid for the current pubkey element
 				else if ($cells[0] == 'uid')
 				{
-					$results[$key_id][4][$cells[1]] = (int)$cells[2];
+					$results[$key_id][4][$cells[1]] = (int) $cells[2];
 				}
 			}
 			return $results;

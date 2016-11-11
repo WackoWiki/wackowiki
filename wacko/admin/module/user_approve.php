@@ -112,7 +112,7 @@ function admin_user_approve(&$engine, &$module)
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->db->table_prefix}user u ".
 				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
-			"WHERE u.user_id = '".(int)$user_id."' ".
+			"WHERE u.user_id = '".(int) $user_id."' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1");
 	}
@@ -124,7 +124,7 @@ function admin_user_approve(&$engine, &$module)
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->db->table_prefix}user u ".
 				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
-			"WHERE u.user_id = '".(int)$user_id."' ".
+			"WHERE u.user_id = '".(int) $user_id."' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1");
 
@@ -154,18 +154,18 @@ function admin_user_approve(&$engine, &$module)
 			$error = 'Please select at least one user via the Set button.';//$this->_t('ModerateMoveNotExists');
 			$engine->show_message($error);
 		}
-			//(int)$_POST['user_id']
+			//(int) $_POST['user_id']
 		if ($error != true || !empty($user_id))
 		{
 			if (!empty($user_id))
 			{
-				$set[]	= (int)$user_id;
+				$set[]	= (int) $user_id;
 				$set	= array_unique($set);
 			}
 
 			foreach ($set as $user_id)
 			{
-				if ((int)$user_id)
+				if ((int) $user_id)
 				{
 					$user = $engine->db->load_single(
 						"SELECT u.user_name ".

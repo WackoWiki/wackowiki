@@ -13,7 +13,7 @@ echo '<h3>' . $this->_t('CreateNewPage') . "</h3>\n<br />\n";
 // process input
 if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 {
-	switch ((int)$_POST['option'])
+	switch ((string) $_POST['option'])
 	{
 		case 1:
 			$prefix = $this->tag.'/';
