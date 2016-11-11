@@ -39,13 +39,13 @@ function admin_config_upload(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['upload']					= (string)$_POST['upload'];
-		$config['upload_images_only']		= (int)$_POST['upload_images_only'];
-		$config['upload_max_size']			= (int)$_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']];
-		$config['upload_quota']				= (int)$_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']];
-		$config['upload_quota_per_user']	= (int)$_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
-		$config['img_create_thumbnail']		= (int)$_POST['img_create_thumbnail'];
-		$config['img_max_thumb_width']		= (int)$_POST['img_max_thumb_width'];
+		$config['upload']					= (string) $_POST['upload'];
+		$config['upload_images_only']		= (int) $_POST['upload_images_only'];
+		$config['upload_max_size']			= (int) $_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']];
+		$config['upload_quota']				= (int) $_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']];
+		$config['upload_quota_per_user']	= (int) $_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
+		$config['img_create_thumbnail']		= (int) $_POST['img_create_thumbnail'];
+		$config['img_max_thumb_width']		= (int) $_POST['img_max_thumb_width'];
 
 		$engine->config->_set($config);
 
@@ -144,7 +144,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><strong>Maximum thumbnail width in pixel:</strong><br />
 					<small>A generated thumbnail will not exceed the width set here.</small></td>
-				<td><input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int)$engine->db->img_max_thumb_width;?>" />px</td>
+				<td><input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int) $engine->db->img_max_thumb_width;?>" />px</td>
 			</tr>
 
 		</table>

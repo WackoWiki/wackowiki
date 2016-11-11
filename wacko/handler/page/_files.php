@@ -9,10 +9,12 @@ if ($this->has_access('read'))
 {
 	// "show files" status are stored in _SESSION
 	$show_files = &$this->sess->show_files[$this->page['page_id']];
+
 	if (!isset($show_files))
 	{
 		$show_files = !!$this->get_user_setting('show_files');
 	}
+	
 	if (isset($_GET['show_files']))
 	{
 		$show_files = !!$_GET['show_files'];
@@ -31,16 +33,16 @@ if ($this->has_access('read'))
 	if ($show_files)
 	{
 		// display files section
-		echo '<section id="section-files">'."\n";
+		echo '<section id="section-files">' . "\n";
 
 		// display files header
 		?>
 		<header id="header-files">
-		<?php echo '<h1><a href="'.$this->href('', '', 'show_files=0').'" title="'.$this->_t('HideFiles').'">'.$this->_t('Files').'</a></h1>'; ?>
+		<?php echo '<h1><a href="'.$this->href('', '', 'show_files=0').'" title="' . $this->_t('HideFiles') . '">' . $this->_t('Files') . '</a></h1>'; ?>
 		</header>
 
 		<?php
-		echo '<div class="files">'."\n";
+		echo '<div class="files">' . "\n";
 		echo $this->action('files', ['nomark' => 1]);
 		echo '</div>';
 
@@ -52,9 +54,9 @@ if ($this->has_access('read'))
 				)
 			)
 		{
-			echo '<div class="filesform">'."\n";
+			echo '<div class="filesform">' . "\n";
 			echo $this->action('upload', ['nomark' => 1]);
-			echo '</div>'."\n";
+			echo '</div>' . "\n";
 		}
 
 		echo "</section>\n";
@@ -64,11 +66,12 @@ if ($this->has_access('read'))
 		// load files for this page
 		$files = $this->db->load_single(
 			"SELECT COUNT(upload_id) AS count ".
-			"FROM ".$this->db->table_prefix."upload ".
-			"WHERE page_id = '". $this->page['page_id'] ."' ".
+			"FROM " . $this->db->table_prefix."upload ".
+			"WHERE page_id = '" . $this->page['page_id'] . "' ".
 				"AND deleted <> '1' LIMIT 1");
 
 		$have_files = '';
+		
 		switch ($c = $files['count'])
 		{
 			case 0:
@@ -92,10 +95,10 @@ if ($this->has_access('read'))
 		if ($have_files)
 		{
 			// display files section
-			echo '<section id="section-files">'."\n";
-			echo '<header id="header-files">'."\n";
-			echo '<h1><a href="'.$this->href('', '', 'show_files=1#header-files').'" title="'.$this->_t('ShowFiles').'">'.$have_files.'</a></h1>';
-			echo '</header>'."\n";
+			echo '<section id="section-files">' . "\n";
+			echo '<header id="header-files">' . "\n";
+			echo '<h1><a href="' . $this->href('', '', 'show_files=1#header-files') . '" title="' . $this->_t('ShowFiles') . '">' . $have_files . '</a></h1>';
+			echo '</header>' . "\n";
 			echo "</section>\n";
 		}
 		else

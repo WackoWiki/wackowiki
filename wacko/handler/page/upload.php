@@ -124,9 +124,9 @@ if ($this->can_upload() === true)
 
 		return true;
 	}
-	else if (isset($_GET['edit'])) // show the form
+	else if (isset($_GET['edit']) || isset($_GET['show'])) // show the form
 	{
-		if ($_GET['edit'] == 'global')
+		if (@$_GET['edit'] == 'global' || @$_GET['show'] == 'global')
 		{
 			$page_id = 0;
 		}
@@ -151,8 +151,7 @@ if ($this->can_upload() === true)
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
-				$message = '<strong>' . $this->_t('UploadEditConfirm') . '</strong>';
-				$this->show_message($message, 'info');
+
 
 				if ($file['page_id'])
 				{
@@ -165,10 +164,50 @@ if ($this->can_upload() === true)
 
 				echo $this->form_open('upload_file', ['page_method' => 'upload']);
 				// !!!!! place here a reference to delete files
+
+				if (isset($_GET['show']))
+				{
+					?>
+	<br />
+	<ul class="upload">
+		<li><?php echo $this->link($path . $file['file_name'] ); ?>
+			<ul>
+				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></li>
+<?php
+			// image dimension
+			if ($file['picture_w'])
+			{ ?>
+				<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo '' . $file['picture_w'] . ' × ' . $file['picture_h'] . 'px'; ?></li>
+<?php
+			} ?>
+				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('UploadDesc'); ?>:</span><?php echo $file['file_description']; ?></li>
+			</ul>
+		</li>
+	</ul>
+	<br />
+
+	<input type="hidden" name="edit" value="<?php echo $_GET['edit']?>" />
+	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
+	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('EditStoreButton'); ?>" />
+	&nbsp;
+	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
+	<br />
+	<br />
+<?php
+				}
+				else if (isset($_GET['edit']))
+				{
+					$message = '<strong>' . $this->_t('UploadEditConfirm') . '</strong>';
+					$this->show_message($message, 'info');
 ?>
 	<br />
 	<ul class="upload">
-		<li><?php echo $this->link($path.$file['file_name'] ); ?>
+		<li><?php echo $this->link($path . $file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
@@ -197,6 +236,8 @@ if ($this->can_upload() === true)
 	<br />
 	<br />
 <?php
+				}
+
 				echo $this->form_close();
 			}
 			else

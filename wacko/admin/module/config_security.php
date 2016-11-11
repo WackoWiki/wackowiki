@@ -34,36 +34,36 @@ function admin_config_security(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['allow_registration']			= (int)$_POST['allow_registration'];
-		$config['approve_new_user']				= (int)$_POST['approve_new_user'];
-		$config['enable_captcha']				= (int)$_POST['enable_captcha'];
-		$config['captcha_new_comment']			= (int)$_POST['captcha_new_comment'];
-		$config['captcha_new_page']				= (int)$_POST['captcha_new_page'];
-		$config['captcha_edit_page']			= (int)$_POST['captcha_edit_page'];
-		$config['captcha_registration']			= (int)$_POST['captcha_registration'];
-		$config['allow_persistent_cookie']		= (int)$_POST['allow_persistent_cookie'];
-		$config['antidupe']						= (int)$_POST['antidupe'];
-		$config['disable_wikiname']				= (int)$_POST['disable_wikiname'];
-		$config['allow_email_reuse']			= (int)$_POST['allow_email_reuse'];
-		$config['tls']							= (int)$_POST['tls'];
-		$config['tls_implicit']					= (int)$_POST['tls_implicit'];
-		$config['tls_proxy']					= trim((string)$_POST['tls_proxy']);
-		$config['pwd_min_chars']				= (int)$_POST['pwd_min_chars'];
-		$config['pwd_char_classes']				= (int)$_POST['pwd_char_classes'];
-		$config['pwd_unlike_login']				= (int)$_POST['pwd_unlike_login'];
-		$config['log_level']					= (int)$_POST['log_level'];
-		$config['log_default_show']				= (int)$_POST['log_default_show'];
-		$config['log_purge_time']				= (int)$_POST['log_purge_time'];
-		$config['session_length']				= (int)$_POST['session_length'];
-		$config['comment_delay']				= (int)$_POST['comment_delay'];
-		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
-		$config['enable_security_headers']		= (int)$_POST['enable_security_headers'];
-		$config['csp']							= (int)$_POST['csp'];
-		$config['max_login_attempts']			= (int)$_POST['max_login_attempts'];
-		$config['ip_login_limit_max']			= (int)$_POST['ip_login_limit_max'];
-		$config['username_chars_min']			= (int)$_POST['username_chars_min'];
-		$config['username_chars_max']			= (int)$_POST['username_chars_max'];
-		$config['form_token_time']				= (int)$_POST['form_token_time'];
+		$config['allow_registration']			= (int) $_POST['allow_registration'];
+		$config['approve_new_user']				= (int) $_POST['approve_new_user'];
+		$config['enable_captcha']				= (int) $_POST['enable_captcha'];
+		$config['captcha_new_comment']			= (int) $_POST['captcha_new_comment'];
+		$config['captcha_new_page']				= (int) $_POST['captcha_new_page'];
+		$config['captcha_edit_page']			= (int) $_POST['captcha_edit_page'];
+		$config['captcha_registration']			= (int) $_POST['captcha_registration'];
+		$config['allow_persistent_cookie']		= (int) $_POST['allow_persistent_cookie'];
+		$config['antidupe']						= (int) $_POST['antidupe'];
+		$config['disable_wikiname']				= (int) $_POST['disable_wikiname'];
+		$config['allow_email_reuse']			= (int) $_POST['allow_email_reuse'];
+		$config['tls']							= (int) $_POST['tls'];
+		$config['tls_implicit']					= (int) $_POST['tls_implicit'];
+		$config['tls_proxy']					= trim((string) $_POST['tls_proxy']);
+		$config['pwd_min_chars']				= (int) $_POST['pwd_min_chars'];
+		$config['pwd_char_classes']				= (int) $_POST['pwd_char_classes'];
+		$config['pwd_unlike_login']				= (int) $_POST['pwd_unlike_login'];
+		$config['log_level']					= (int) $_POST['log_level'];
+		$config['log_default_show']				= (int) $_POST['log_default_show'];
+		$config['log_purge_time']				= (int) $_POST['log_purge_time'];
+		$config['session_length']				= (int) $_POST['session_length'];
+		$config['comment_delay']				= (int) $_POST['comment_delay'];
+		$config['intercom_delay']				= (int) $_POST['intercom_delay'];
+		$config['enable_security_headers']		= (int) $_POST['enable_security_headers'];
+		$config['csp']							= (int) $_POST['csp'];
+		$config['max_login_attempts']			= (int) $_POST['max_login_attempts'];
+		$config['ip_login_limit_max']			= (int) $_POST['ip_login_limit_max'];
+		$config['username_chars_min']			= (int) $_POST['username_chars_min'];
+		$config['username_chars_max']			= (int) $_POST['username_chars_max'];
+		$config['form_token_time']				= (int) $_POST['form_token_time'];
 
 		$engine->config->_set($config);
 
@@ -290,9 +290,9 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<select style="width:200px;" id="csp" name="csp">
-						<option value="0"<?php echo ( (int)$engine->db->csp === 0 ? ' selected="selected"' : '' );?>>disabled</option>
-						<option value="1"<?php echo ( (int)$engine->db->csp === 1 ? ' selected="selected"' : '' );?>>strict</option>
-						<option value="2"<?php echo ( (int)$engine->db->csp === 2 ? ' selected="selected"' : '' );?>>custom</option>
+						<option value="0"<?php echo ( (int) $engine->db->csp === 0 ? ' selected="selected"' : '' );?>>disabled</option>
+						<option value="1"<?php echo ( (int) $engine->db->csp === 1 ? ' selected="selected"' : '' );?>>strict</option>
+						<option value="2"<?php echo ( (int) $engine->db->csp === 2 ? ' selected="selected"' : '' );?>>custom</option>
 					</select>
 				</td>
 			</tr>
@@ -320,10 +320,10 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<select style="width:200px;" id="pwd_char_classes" name="pwd_char_classes">
-						<option value="0"<?php echo ( (int)$engine->db->pwd_char_classes === 0 ? ' selected="selected"' : '' );?>>not tested</option>
-						<option value="1"<?php echo ( (int)$engine->db->pwd_char_classes === 1 ? ' selected="selected"' : '' );?>>any letters + numbers</option>
-						<option value="2"<?php echo ( (int)$engine->db->pwd_char_classes === 2 ? ' selected="selected"' : '' );?>>uppercase and lowercase + numbers</option>
-						<option value="3"<?php echo ( (int)$engine->db->pwd_char_classes === 3 ? ' selected="selected"' : '' );?>>uppercase and lowercase + numbers + characters</option>
+						<option value="0"<?php echo ( (int) $engine->db->pwd_char_classes === 0 ? ' selected="selected"' : '' );?>>not tested</option>
+						<option value="1"<?php echo ( (int) $engine->db->pwd_char_classes === 1 ? ' selected="selected"' : '' );?>>any letters + numbers</option>
+						<option value="2"<?php echo ( (int) $engine->db->pwd_char_classes === 2 ? ' selected="selected"' : '' );?>>uppercase and lowercase + numbers</option>
+						<option value="3"<?php echo ( (int) $engine->db->pwd_char_classes === 3 ? ' selected="selected"' : '' );?>>uppercase and lowercase + numbers + characters</option>
 					</select>
 				</td>
 			</tr>
@@ -336,9 +336,9 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<select style="width:200px;" id="pwd_unlike_login" name="pwd_unlike_login">
-						<option value="0"<?php echo ( (int)$engine->db->pwd_unlike_login === 0 ? ' selected="selected"' : '' );?>>not tested</option>
-						<option value="1"<?php echo ( (int)$engine->db->pwd_unlike_login === 1 ? ' selected="selected"' : '' );?>>password is not identical to the login</option>
-						<option value="2"<?php echo ( (int)$engine->db->pwd_unlike_login === 2 ? ' selected="selected"' : '' );?>>password does not contain username</option>
+						<option value="0"<?php echo ( (int) $engine->db->pwd_unlike_login === 0 ? ' selected="selected"' : '' );?>>not tested</option>
+						<option value="1"<?php echo ( (int) $engine->db->pwd_unlike_login === 1 ? ' selected="selected"' : '' );?>>password is not identical to the login</option>
+						<option value="2"<?php echo ( (int) $engine->db->pwd_unlike_login === 2 ? ' selected="selected"' : '' );?>>password does not contain username</option>
 					</select>
 				</td>
 			</tr>
@@ -382,14 +382,14 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<select style="width:200px;" id="log_level" name="log_level">
-						<option value="0"<?php echo ( (int)$engine->db->log_level === 0 ? ' selected="selected"' : '' );?>>0: not keep a journal</option>
-						<option value="7"<?php echo ( (int)$engine->db->log_level === 7 ? ' selected="selected"' : '' );?>>7: record all</option>
-						<option value="6"<?php echo ( (int)$engine->db->log_level === 6 ? ' selected="selected"' : '' );?>>6: the minimum level</option>
-						<option value="5"<?php echo ( (int)$engine->db->log_level === 5 ? ' selected="selected"' : '' );?>>5: from low</option>
-						<option value="4"<?php echo ( (int)$engine->db->log_level === 4 ? ' selected="selected"' : '' );?>>4: on average</option>
-						<option value="3"<?php echo ( (int)$engine->db->log_level === 3 ? ' selected="selected"' : '' );?>>3: from high</option>
-						<option value="2"<?php echo ( (int)$engine->db->log_level === 2 ? ' selected="selected"' : '' );?>>2: from the highest level</option>
-						<option value="1"<?php echo ( (int)$engine->db->log_level === 1 ? ' selected="selected"' : '' );?>>1: only the critical level</option>
+						<option value="0"<?php echo ( (int) $engine->db->log_level === 0 ? ' selected="selected"' : '' );?>>0: not keep a journal</option>
+						<option value="7"<?php echo ( (int) $engine->db->log_level === 7 ? ' selected="selected"' : '' );?>>7: record all</option>
+						<option value="6"<?php echo ( (int) $engine->db->log_level === 6 ? ' selected="selected"' : '' );?>>6: the minimum level</option>
+						<option value="5"<?php echo ( (int) $engine->db->log_level === 5 ? ' selected="selected"' : '' );?>>5: from low</option>
+						<option value="4"<?php echo ( (int) $engine->db->log_level === 4 ? ' selected="selected"' : '' );?>>4: on average</option>
+						<option value="3"<?php echo ( (int) $engine->db->log_level === 3 ? ' selected="selected"' : '' );?>>3: from high</option>
+						<option value="2"<?php echo ( (int) $engine->db->log_level === 2 ? ' selected="selected"' : '' );?>>2: from the highest level</option>
+						<option value="1"<?php echo ( (int) $engine->db->log_level === 1 ? ' selected="selected"' : '' );?>>1: only the critical level</option>
 					</select>
 				</td>
 			</tr>
@@ -403,13 +403,13 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<select style="width:200px;" id="log_default_show" name="log_default_show">
-						<option value="7"<?php echo ( (int)$engine->db->log_default_show === 7 ? ' selected="selected"' : '' );?>>show all</option>
-						<option value="6"<?php echo ( (int)$engine->db->log_default_show === 6 ? ' selected="selected"' : '' );?>>from the minimum level</option>
-						<option value="5"<?php echo ( (int)$engine->db->log_default_show === 5 ? ' selected="selected"' : '' );?>>from a low</option>
-						<option value="4"<?php echo ( (int)$engine->db->log_default_show === 4 ? ' selected="selected"' : '' );?>>the average</option>
-						<option value="3"<?php echo ( (int)$engine->db->log_default_show === 3 ? ' selected="selected"' : '' );?>>from high-level</option>
-						<option value="2"<?php echo ( (int)$engine->db->log_default_show === 2 ? ' selected="selected"' : '' );?>>from the highest level</option>
-						<option value="1"<?php echo ( (int)$engine->db->log_default_show === 1 ? ' selected="selected"' : '' );?>>only the critical level</option>
+						<option value="7"<?php echo ( (int) $engine->db->log_default_show === 7 ? ' selected="selected"' : '' );?>>show all</option>
+						<option value="6"<?php echo ( (int) $engine->db->log_default_show === 6 ? ' selected="selected"' : '' );?>>from the minimum level</option>
+						<option value="5"<?php echo ( (int) $engine->db->log_default_show === 5 ? ' selected="selected"' : '' );?>>from a low</option>
+						<option value="4"<?php echo ( (int) $engine->db->log_default_show === 4 ? ' selected="selected"' : '' );?>>the average</option>
+						<option value="3"<?php echo ( (int) $engine->db->log_default_show === 3 ? ' selected="selected"' : '' );?>>from high-level</option>
+						<option value="2"<?php echo ( (int) $engine->db->log_default_show === 2 ? ' selected="selected"' : '' );?>>from the highest level</option>
+						<option value="1"<?php echo ( (int) $engine->db->log_default_show === 1 ? ' selected="selected"' : '' );?>>only the critical level</option>
 					</select>
 				</td>
 			</tr>

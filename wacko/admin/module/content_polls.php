@@ -60,7 +60,7 @@ function admin_content_polls(&$engine, &$module)
 		else if (isset($_POST['delete']) && $_POST['yes'])
 		{
 			$polls_obj->remove_poll($_POST['delete']);
-			$engine->log(1, str_replace('%1', (int)$_POST['delete'], $engine->_t('LogRemovedPoll', $engine->db->language)));
+			$engine->log(1, str_replace('%1', (int) $_POST['delete'], $engine->_t('LogRemovedPoll', $engine->db->language)));
 		}
 		// stop current survey
 		else if (isset($_POST['stop']) && $_POST['id'])
@@ -68,10 +68,10 @@ function admin_content_polls(&$engine, &$module)
 			$engine->db->sql_query(
 				"UPDATE {$engine->db->table_prefix}poll SET ".
 					"end = UTC_TIMESTAMP() ".
-				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0 ".
+				"WHERE poll_id = ".(int) $_POST['id']." AND v_id = 0 ".
 				"LIMIT 1");
 
-			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->_t('LogPollStopped', $engine->db->language)));
+			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollStopped', $engine->db->language)));
 		}
 		// reset current survey
 		else if (isset($_POST['reset']) && $_POST['id'])
@@ -79,15 +79,15 @@ function admin_content_polls(&$engine, &$module)
 			$engine->db->sql_query(	// reset start date
 				"UPDATE {$engine->db->table_prefix}poll SET ".
 					"start	= UTC_TIMESTAMP() ".
-				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
+				"WHERE poll_id = ".(int) $_POST['id']." AND v_id = 0");
 			$engine->db->sql_query(	// reset votes and update servey id
 				"UPDATE {$engine->db->table_prefix}poll SET ".
 					"poll_id		= ".($polls_obj->get_last_poll_id() + 1).", ".
 					"votes	= 0 ".
-				"WHERE poll_id = ".(int)$_POST['id']);
+				"WHERE poll_id = ".(int) $_POST['id']);
 
 			#$xml->feed(); // update news feed
-			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->_t('LogPollReset', $engine->db->language)));
+			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollReset', $engine->db->language)));
 		}
 		// activate new survey
 		else if (isset($_POST['activate']) && $_POST['id'])
@@ -95,10 +95,10 @@ function admin_content_polls(&$engine, &$module)
 			$engine->db->sql_query(
 				"UPDATE {$engine->db->table_prefix}poll SET ".
 					"start = UTC_TIMESTAMP() ".
-				"WHERE poll_id = ".(int)$_POST['id']." AND v_id = 0");
+				"WHERE poll_id = ".(int) $_POST['id']." AND v_id = 0");
 
 			#$engine->$xml->feed(); // update news feed
-			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->_t('LogPollStarted', $engine->db->language)));
+			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollStarted', $engine->db->language)));
 		}
 		// edit/moderate new survey
 		else if (isset($_POST['edit']) && $_POST['id'])

@@ -18,12 +18,12 @@ $polls_obj = new Polls($this);
 if (!isset($nomark))		$nomark	= 0;
 if (!isset($style))			$style	= 'ul';
 if (!isset($_GET['year']))	$year	= date('Y');
-else						$year	= (int)$_GET['year'];
+else						$year	= (int) $_GET['year'];
 
 // print results
 if (isset($_GET['poll']) && (isset($_GET['results']) && $_GET['results'] == 1))
 {
-	echo $polls_obj->show_poll_results((int)$_GET['poll']);
+	echo $polls_obj->show_poll_results((int) $_GET['poll']);
 	echo '<br />';
 }
 

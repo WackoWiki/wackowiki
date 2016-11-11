@@ -35,15 +35,15 @@ function admin_config_system(&$engine, &$module)
 
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['debug']					= (int)$_POST['debug'];
+		$config['debug']					= (int) $_POST['debug'];
 		$config['debug_sql_threshold']		= (float)$_POST['debug_sql_threshold'];
-		$config['debug_admin_only']			= (int)$_POST['debug_admin_only'];
-		$config['cache']					= (int)$_POST['cache'];
-		$config['cache_ttl']				= (int)$_POST['cache_ttl'];
-		$config['cache_sql']				= (int)$_POST['cache_sql'];
-		$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
-		$config['rewrite_mode']				= (int)$_POST['rewrite_mode'];
-		$config['reverse_proxy']			= (int)$_POST['reverse_proxy'];
+		$config['debug_admin_only']			= (int) $_POST['debug_admin_only'];
+		$config['cache']					= (int) $_POST['cache'];
+		$config['cache_ttl']				= (int) $_POST['cache_ttl'];
+		$config['cache_sql']				= (int) $_POST['cache_sql'];
+		$config['cache_sql_ttl']			= (int) $_POST['cache_sql_ttl'];
+		$config['rewrite_mode']				= (int) $_POST['rewrite_mode'];
+		$config['reverse_proxy']			= (int) $_POST['reverse_proxy'];
 		$config['reverse_proxy_header']		= $_POST['reverse_proxy_header'];
 		$config['reverse_proxy_addresses']	= $_POST['reverse_proxy_addresses'];
 
@@ -66,10 +66,10 @@ function admin_config_system(&$engine, &$module)
 				<small>Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.</small></label></td>
 				<td style="width:40%;">
 					<select style="width:200px;" id="debug_mode" name="debug">
-						<option value="0"<?php echo ( (int)$engine->db->debug === 0 ? ' selected="selected"' : '' );?>>0: debugging is off</option>
-						<option value="1"<?php echo ( (int)$engine->db->debug === 1 ? ' selected="selected"' : '' );?>>1: only the total execution time</option>
-						<option value="2"<?php echo ( (int)$engine->db->debug === 2 ? ' selected="selected"' : '' );?>>2: full-time</option>
-						<option value="3"<?php echo ( (int)$engine->db->debug === 3 ? ' selected="selected"' : '' );?>>3: full detail (DBMS, cache, etc.)</option>
+						<option value="0"<?php echo ( (int) $engine->db->debug === 0 ? ' selected="selected"' : '' );?>>0: debugging is off</option>
+						<option value="1"<?php echo ( (int) $engine->db->debug === 1 ? ' selected="selected"' : '' );?>>1: only the total execution time</option>
+						<option value="2"<?php echo ( (int) $engine->db->debug === 2 ? ' selected="selected"' : '' );?>>2: full-time</option>
+						<option value="3"<?php echo ( (int) $engine->db->debug === 3 ? ' selected="selected"' : '' );?>>3: full detail (DBMS, cache, etc.)</option>
 					</select>
 				</td>
 			</tr>

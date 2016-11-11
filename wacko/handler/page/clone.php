@@ -128,7 +128,7 @@ if ($this->check_acl($this->get_user_name(), $this->db->rename_globalacl))
 			"OR tag LIKE ".$this->db->q($from . '/%').") ".
 			"AND comment_on_id = '0'");
 
-	if ((int)$klusterwerks['n'])
+	if ((string) $klusterwerks['n'])
 	{
 		$tpl->form_doCluster = true;
 	}

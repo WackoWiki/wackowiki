@@ -334,7 +334,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 				$engine->db->sql_query(
 						"UPDATE {$engine->db->table_prefix}bad_behavior SET ".
 							"host		= ".$engine->db->q($host)." ".
-						"WHERE log_id	= '".(int)$result['log_id']."' ".
+						"WHERE log_id	= '".(int) $result['log_id']."' ".
 						"LIMIT 1");
 			}
 
@@ -494,19 +494,19 @@ function bb2_options(&$engine)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		#$config['display_stats']				= (string)$_POST['display_stats'];
-		$config['ext_bad_behavior']				= (int)$_POST['ext_bad_behavior'];
-		$config['strict']						= (string)$_POST['strict'];
-		$config['verbose']						= (string)$_POST['verbose'];
-		$config['logging']						= (string)$_POST['logging'];
-		$config['httpbl_key']					= (string)$_POST['httpbl_key'];
-		$config['httpbl_threat']				= (string)$_POST['httpbl_threat'];
-		$config['httpbl_maxage']				= (int)$_POST['httpbl_maxage'];
-		$config['offsite_forms']				= (string)$_POST['offsite_forms'];
-		$config['eu_cookie']					= (int)$_POST['eu_cookie'];
-		$config['reverse_proxy']				= (int)$_POST['reverse_proxy'];
+		#$config['display_stats']				= (string) $_POST['display_stats'];
+		$config['ext_bad_behavior']				= (int) $_POST['ext_bad_behavior'];
+		$config['strict']						= (string) $_POST['strict'];
+		$config['verbose']						= (string) $_POST['verbose'];
+		$config['logging']						= (string) $_POST['logging'];
+		$config['httpbl_key']					= (string) $_POST['httpbl_key'];
+		$config['httpbl_threat']				= (string) $_POST['httpbl_threat'];
+		$config['httpbl_maxage']				= (int) $_POST['httpbl_maxage'];
+		$config['offsite_forms']				= (string) $_POST['offsite_forms'];
+		$config['eu_cookie']					= (int) $_POST['eu_cookie'];
+		$config['reverse_proxy']				= (int) $_POST['reverse_proxy'];
 		$config['reverse_proxy_header']			= $_POST['reverse_proxy_header'];
-		$config['reverse_proxy_addresses']		= (string)$_POST['reverse_proxy_addresses'];
+		$config['reverse_proxy_addresses']		= (string) $_POST['reverse_proxy_addresses'];
 
 		$engine->config->_set($config);
 
@@ -852,7 +852,7 @@ function bb2_options(&$engine)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'bb2_options')
 	{
-		$config['ext_bad_behavior'] = (int)$_POST['ext_bad_behavior'];
+		$config['ext_bad_behavior'] = (int) $_POST['ext_bad_behavior'];
 
 		$engine->config->_set($config);
 

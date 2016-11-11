@@ -175,7 +175,7 @@ function recursive_move(&$engine, $root, $new_root)
 		"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " ".
 			" OR supertag = " . $engine->db->q($_root) . ") ".
 		($owner_id
-			? " AND owner_id ='".(int)$owner_id."'"
+			? " AND owner_id ='".(string) $owner_id."'"
 			: "").
 		" AND comment_on_id = '0'");
 

@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 if (!isset($nomark)) $nomark = '';
 if (!isset($cols)) $cols = '';
 
-if($user = $this->get_user())
+if ($user = $this->get_user())
 {
 	if (!$cols)
 	{
@@ -32,7 +32,7 @@ if($user = $this->get_user())
 
 		$i = 1;
 
-		foreach($this->db->aliases as $group_name => $group_members)
+		foreach ($this->db->aliases as $group_name => $group_members)
 		{
 			if ($i == $cols + 1)
 			{
@@ -49,7 +49,7 @@ if($user = $this->get_user())
 			 If they are an Admin show them all users in all groups
 			 Else they are a normal logged in user so just show them groups they belong to
 			 */
-			if($this->is_admin() || in_array($user['user_name'], $arr))
+			if ($this->is_admin() || in_array($user['user_name'], $arr))
 			{
 				echo '<td style="vertical-align:top;">';
 
@@ -72,7 +72,7 @@ if($user = $this->get_user())
 
 		echo '</tr></table>';
 
-		if(!$nomark)
+		if (!$nomark)
 		{
 			echo '</div>';
 		}

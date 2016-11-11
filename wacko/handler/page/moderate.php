@@ -105,8 +105,8 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 			// move comments to the base topic
 			$engine->db->sql_query(
 				"UPDATE {$engine->db->table_prefix}page SET ".
-					"comment_on_id = '".(int)$base_id."' ".
-				"WHERE comment_on_id = '".(int)$topic_id."'");
+					"comment_on_id = '".(string) $base_id."' ".
+				"WHERE comment_on_id = '".(string) $topic_id."'");
 
 			// for the forum moderation only
 			if ($move_topics === true)
@@ -157,7 +157,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$comments = $engine->db->load_all(
 		"SELECT page_id, tag, body_r ".
 		"FROM {$engine->db->table_prefix}page ".
-		"WHERE comment_on_id = '".(int)$base_id."'");
+		"WHERE comment_on_id = '".(string) $base_id."'");
 
 	foreach ($comments as $comment)
 	{
@@ -178,7 +178,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 		"UPDATE {$engine->db->table_prefix}page SET ".
 			"comments	= '".$engine->count_comments($base_id)."', ".
 			"commented	= UTC_TIMESTAMP() ".
-		"WHERE page_id = '".(int)$base_id."' ".
+		"WHERE page_id = '".(string) $base_id."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -249,7 +249,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		$engine->db->sql_query(
 			"UPDATE {$engine->db->table_prefix}page SET ".
 				"comment_on_id = '".$new_page_id."' ".
-			"WHERE page_id = '".(int)$comment_id."'");
+			"WHERE page_id = '".(string) $comment_id."'");
 
 		// saving acls
 		$engine->save_acl($comment_id, 'write',		$write_acl);
@@ -280,7 +280,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->db->sql_query(
 		"UPDATE {$engine->db->table_prefix}page SET ".
 			"comments = '".$engine->count_comments($old_page_id)."' ".
-		"WHERE page_id = '".(int)$old_page_id."' ".
+		"WHERE page_id = '".(string) $old_page_id."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -723,7 +723,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// print moderation controls...
 		echo '<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
-			'<input type="hidden" name="p" value="'.(isset($_GET['p']) ? ((int)$_GET['p']) : '').'" />'."\n";
+			'<input type="hidden" name="p" value="'.(isset($_GET['p']) ? ((string) $_GET['p']) : '').'" />'."\n";
 		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="5">'.
@@ -1117,7 +1117,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"UPDATE {$this->db->table_prefix}page SET ".
 								"comments	= '".$this->count_comments($page_id)."', ".
 								"commented	= UTC_TIMESTAMP() ".
-							"WHERE page_id = '".(int)$page_id."' ".
+							"WHERE page_id = '".(string) $page_id."' ".
 							"LIMIT 1");
 
 						$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', SYSTEM_LANG),
@@ -1295,7 +1295,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// print moderation controls...
 		echo '<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
-			'<input type="hidden" name="p" value="'.(isset($_GET['p']) ? ((int)$_GET['p']) : '').'" />'."\n";
+			'<input type="hidden" name="p" value="'.(isset($_GET['p']) ? ((string) $_GET['p']) : '').'" />'."\n";
 		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="2">'.

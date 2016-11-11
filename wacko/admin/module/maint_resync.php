@@ -57,7 +57,7 @@ function admin_maint_resync(&$engine, &$module)
 			{
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->user_table} ".
-					"SET total_pages = ".(int)$user['n']." ".
+					"SET total_pages = ".(int) $user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
@@ -98,7 +98,7 @@ Ut::debug_print_r($users);
 			{
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->user_table} ".
-					"SET total_comments = ".(int)$user['n']." ".
+					"SET total_comments = ".(int) $user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
@@ -114,7 +114,7 @@ Ut::debug_print_r($users);
 			{
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->user_table} ".
-					"SET total_revisions = ".(int)$user['n']." ".
+					"SET total_revisions = ".(int) $user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
@@ -131,7 +131,7 @@ Ut::debug_print_r($users);
 			{
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->user_table} ".
-					"SET total_uploads = ".(int)$user['n']." ".
+					"SET total_uploads = ".(int) $user['n']." ".
 					"WHERE user_id = '".$user['user_id']."' ".
 					"LIMIT 1");
 			}
@@ -162,7 +162,7 @@ Ut::debug_print_r($users);
 			{
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->table_prefix}page ".
-					"SET comments = ".(int)$comment['n']." ".
+					"SET comments = ".(int) $comment['n']." ".
 					"WHERE page_id = '".$comment['page_id']."' ".
 					"LIMIT 1");
 			}

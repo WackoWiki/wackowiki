@@ -37,7 +37,7 @@ function admin_content_files(&$engine, &$module)
 			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
 			"FROM {$engine->db->table_prefix}upload ".
 			"WHERE page_id = 0 ".
-				"AND upload_id = '".(int)$_GET['file_id']."' ".
+				"AND upload_id = '".(int) $_GET['file_id']."' ".
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -73,7 +73,7 @@ function admin_content_files(&$engine, &$module)
 			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
 			"FROM {$engine->db->table_prefix}upload ".
 			"WHERE page_id = 0 ".
-				"AND upload_id = '".(int)$_POST['file_id']."' ".
+				"AND upload_id = '".(int) $_POST['file_id']."' ".
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -189,11 +189,11 @@ function admin_content_files(&$engine, &$module)
 				"file_name			= ".$engine->db->q($small_name).", ".
 				"upload_lang		= ".$engine->db->q($engine->db->language).", ".
 				"file_description	= ".$engine->db->q($description).", ".
-				"file_size			= '".(int)$file_size."',".
-				"picture_w			= '".(int)$size[0]."',".
-				"picture_h			= '".(int)$size[1]."',".
+				"file_size			= '".(int) $file_size."',".
+				"picture_w			= '".(int) $size[0]."',".
+				"picture_h			= '".(int) $size[1]."',".
 				"file_ext			= ".$engine->db->q(substr($ext, 0, 10)).",".
-				"user_id			= '".(int)$user['user_id']."',".
+				"user_id			= '".(int) $user['user_id']."',".
 				"uploaded_dt		= UTC_TIMESTAMP()");
 
 			// 4. output link to file

@@ -30,32 +30,32 @@ function admin_config_pages(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['list_count']			= (int)$_POST['list_count'];
-		$config['forum_cluster']		= trim((string)$_POST['forum_cluster'], '/');
-		$config['forum_topics']			= (int)$_POST['forum_topics'];
-		$config['comments_count']		= (int)$_POST['comments_count'];
-		$config['news_cluster']			= trim((string)$_POST['news_cluster'], '/');
-		$config['news_levels']			= (string)$_POST['news_levels'];
-		$config['license']				= (string)$_POST['license'];
-		$config['root_page']			= trim((string)$_POST['root_page'], '/');
-		$config['policy_page']			= trim((string)$_POST['policy_page'], '/');
-		$config['search_page']			= trim((string)$_POST['search_page'], '/');
-		$config['registration_page']	= trim((string)$_POST['registration_page'], '/');
-		$config['login_page']			= trim((string)$_POST['login_page'], '/');
-		$config['settings_page']		= trim((string)$_POST['settings_page'], '/');
-		$config['password_page']		= trim((string)$_POST['password_page'], '/');
-		$config['users_page']			= trim((string)$_POST['users_page'], '/');
-		$config['category_page']		= trim((string)$_POST['category_page'], '/');
-		$config['tag_page']				= trim((string)$_POST['tag_page'], '/');
-		$config['groups_page']			= trim((string)$_POST['groups_page'], '/');
-		$config['changes_page']			= trim((string)$_POST['changes_page'], '/');
-		$config['comments_page']		= trim((string)$_POST['comments_page'], '/');
-		$config['removals_page']		= trim((string)$_POST['removals_page'], '/');
-		$config['wanted_page']			= trim((string)$_POST['wanted_page'], '/');
-		$config['orphaned_page']		= trim((string)$_POST['orphaned_page'], '/');
-		$config['todo_page']			= trim((string)$_POST['todo_page'], '/');
-		$config['sandbox']				= trim((string)$_POST['sandbox'], '/');
-		$config['wiki_docs']			= trim((string)$_POST['wiki_docs'], '/');
+		$config['list_count']			= (int) $_POST['list_count'];
+		$config['forum_cluster']		= trim((string) $_POST['forum_cluster'], '/');
+		$config['forum_topics']			= (int) $_POST['forum_topics'];
+		$config['comments_count']		= (int) $_POST['comments_count'];
+		$config['news_cluster']			= trim((string) $_POST['news_cluster'], '/');
+		$config['news_levels']			= (string) $_POST['news_levels'];
+		$config['license']				= (string) $_POST['license'];
+		$config['root_page']			= trim((string) $_POST['root_page'], '/');
+		$config['policy_page']			= trim((string) $_POST['policy_page'], '/');
+		$config['search_page']			= trim((string) $_POST['search_page'], '/');
+		$config['registration_page']	= trim((string) $_POST['registration_page'], '/');
+		$config['login_page']			= trim((string) $_POST['login_page'], '/');
+		$config['settings_page']		= trim((string) $_POST['settings_page'], '/');
+		$config['password_page']		= trim((string) $_POST['password_page'], '/');
+		$config['users_page']			= trim((string) $_POST['users_page'], '/');
+		$config['category_page']		= trim((string) $_POST['category_page'], '/');
+		$config['tag_page']				= trim((string) $_POST['tag_page'], '/');
+		$config['groups_page']			= trim((string) $_POST['groups_page'], '/');
+		$config['changes_page']			= trim((string) $_POST['changes_page'], '/');
+		$config['comments_page']		= trim((string) $_POST['comments_page'], '/');
+		$config['removals_page']		= trim((string) $_POST['removals_page'], '/');
+		$config['wanted_page']			= trim((string) $_POST['wanted_page'], '/');
+		$config['orphaned_page']		= trim((string) $_POST['orphaned_page'], '/');
+		$config['todo_page']			= trim((string) $_POST['todo_page'], '/');
+		$config['sandbox']				= trim((string) $_POST['sandbox'], '/');
+		$config['wiki_docs']			= trim((string) $_POST['wiki_docs'], '/');
 
 		$engine->config->_set($config);
 

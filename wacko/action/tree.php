@@ -33,7 +33,7 @@ if (!$depth || $depth < 1)
 }
 else
 {
-	$depth	= (int)$depth;
+	$depth	= (int) $depth;
 }
 
 if (!isset($nomark)) $nomark = '';

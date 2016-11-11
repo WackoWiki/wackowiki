@@ -50,7 +50,7 @@ if (!$global)
 	else
 	{
 		$page	= $this->unwrap_link($page);
-		$ppage	= '/'.$page;
+		$ppage	= '/' . $page;
 
 		if ($_page_id = $this->get_page_id($page))
 		{
@@ -85,9 +85,9 @@ if ($can_view)
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.upload_id) AS n ".
-		"FROM ".$this->db->table_prefix."upload f ".
-			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id']) . "' ".
+		"FROM " . $this->db->table_prefix . "upload f ".
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
+		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' ".
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '').
@@ -100,7 +100,7 @@ if ($can_view)
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name, f.hits ".
-		"FROM ".$this->db->table_prefix."upload f ".
+		"FROM " . $this->db->table_prefix . "upload f ".
 			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' ".
 			($owner
@@ -185,7 +185,7 @@ if ($can_view)
 			$file_name	= $file['file_name'];
 			$text		= ($picture == false) ? $file_name : '';
 			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
-			$file_ext	= substr($file_name, strrpos($file_name, ".") + 1);
+			$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
 			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')

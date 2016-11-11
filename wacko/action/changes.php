@@ -36,7 +36,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
 	}
 
-	if (!$root && !(int)$noxml)
+	if (!$root && !(int) $noxml)
 	{
 		echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/changes_'.
 			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.
