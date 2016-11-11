@@ -1746,76 +1746,6 @@ class Wacko
 		}
 	}
 
-	// MAILER
-	// $email_to			- recipient address
-	// $subject, $message	- self-explaining
-	// $email_from			- place specific address into the 'From:' field
-	// $charset				- send message in specific charset (w/o actual re-encoding)
-	// $xtra_headers		- (array) insert additional mail headers
-	// $supress_tls			- don't change all http links to https links in the message body
-	function send_mail($email_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = [], $supress_tls = false)
-	{
-		if (!$this->db->enable_email || ( !$email_to || !$subject || !$body) )
-		{
-			return;
-		}
-
-		if (empty($charset))
-		{
-			$charset = $this->get_charset();
-		}
-
-		$name_to		= '';
-
-		if (preg_match('/^([^<>]*)<([^<>]*)>$/', $email_to, $match))
-		{
-			$email_to	= trim($match[2]);
-			$name_to	= trim($match[1]);
-		}
-
-		if (!$email_from)
-		{
-			$email_from = $this->db->noreply_email;
-		}
-
-		$name_from		= $this->db->email_from;
-
-		// in tls mode substitute protocol name in links substrings
-		if ($this->db->tls && !$supress_tls)
-		{
-			$body = str_replace('http://', 'https://' . ($this->db->tls_proxy ? $this->db->tls_proxy . '/' : ''), $body);
-		}
-
-		// use PHPMailer class
-		if ($this->db->phpmailer)
-		{
-			// $this->db->phpMailer_method
-			$email = new Email($this);
-			$email->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset, $xtra_headers);
-		}
-		else
-		{
-			// use PHP mail() function
-			$header = [];
-			$header[] = 'From: =?' . $charset . "?B?" . base64_encode($this->db->site_name) . "?= <" . $this->db->noreply_email;
-			$header[] = 'X-Mailer: PHP/' . phpversion(); // mailer
-			$header[] = 'X-Priority: 3'; // 1 urgent, 3 normal
-			$header[] = 'X-Wacko: ' . $this->db->base_url;
-			$header[] = 'Content-Type: text/plain; charset=' . $charset;
-
-			foreach ($xtra_headers as $name => $value)
-			{
-				$header[] = $name . ': ' . $value;
-			}
-
-			$headers	= implode("\r\n", $header);
-			$subject	= ($subject ? "=?".$charset . "?B?" . base64_encode($subject) . "?=" : '');
-			$body		= wordwrap($body, 74, "\n", 0);
-
-			@mail($email_to, $subject, $body, $headers);
-		}
-	}
-
 	// PAGE SAVING ROUTINE
 	// $tag				- page address
 	// $title			- page name (metadata)
@@ -2396,7 +2326,8 @@ class Wacko
 						$this->db->site_name . "\n".
 						$this->db->base_url;
 
-		$this->send_mail($to, $subject, $body, null, $this->get_charset($user['user_lang']));
+		$email = new Email($this);
+		$email->send_mail($to, $subject, $body, null, $this->get_charset($user['user_lang']));
 
 		$this->set_language($save, true);
 	}
