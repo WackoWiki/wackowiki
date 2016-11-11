@@ -122,7 +122,7 @@ function admin_content_files(&$engine, &$module)
 		$files	= $engine->db->load_all(
 			"SELECT upload_id ".
 			"FROM {$engine->db->table_prefix}upload ".
-			"WHERE user_id = '".$user['user_id']."'");
+			"WHERE user_id = '" . $user['user_id'] . "'");
 
 		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
 		{

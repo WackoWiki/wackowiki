@@ -14,10 +14,10 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 	// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
 	$ids = $this->db->load_all(
 		"SELECT a.page_id ".
-		"FROM ".$this->db->table_prefix."page a ".
-			"LEFT JOIN ".$this->db->table_prefix."page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
+		"FROM " . $this->db->table_prefix . "page a ".
+			"LEFT JOIN " . $this->db->table_prefix . "page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
 		($tag
-			?	"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) "
+			?	"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
 			:	"").
 		"WHERE ".
 		($tag
@@ -43,10 +43,10 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 			"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id, b.supertag,
 				a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id,
 				u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
-			"FROM ".$this->db->table_prefix."page a ".
-				"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
-				"LEFT JOIN ".$this->db->table_prefix."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->db->table_prefix."user o ON (a.owner_id = o.user_id) ".
+			"FROM " . $this->db->table_prefix . "page a ".
+				"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) ".
+				"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) ".
+				"LEFT JOIN " . $this->db->table_prefix . "user o ON (a.owner_id = o.user_id) ".
 			"WHERE a.page_id IN ( ".implode(', ', $ids) ." ) ".
 			"ORDER BY comment_time DESC ".
 			$pagination['limit']);

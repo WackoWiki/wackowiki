@@ -64,7 +64,7 @@ if ($this->is_admin())
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
 					"SET total_comments = ".(int) $user['n']." ".
-					"WHERE user_id = '".$user['user_id']."' ".
+					"WHERE user_id = '" . $user['user_id'] . "' ".
 					"LIMIT 1");
 			}
 
@@ -80,7 +80,7 @@ if ($this->is_admin())
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
 					"SET total_revisions = ".(int) $user['n']." ".
-					"WHERE user_id = '".$user['user_id']."' ".
+					"WHERE user_id = '" . $user['user_id'] . "' ".
 					"LIMIT 1");
 			}
 
@@ -96,7 +96,7 @@ if ($this->is_admin())
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
 					"SET total_uploads = ".(int) $user['n']." ".
-					"WHERE user_id = '".$user['user_id']."' ".
+					"WHERE user_id = '" . $user['user_id'] . "' ".
 					"LIMIT 1");
 			}
 
@@ -149,10 +149,10 @@ if ($this->is_admin())
 						$this->db->sql_query(
 							"UPDATE {$this->db->table_prefix}page ".
 							"SET title = ".$this->db->q($title)." ".
-							"WHERE page_id = '".$page['page_id']."' ".
+							"WHERE page_id = '" . $page['page_id'] . "' ".
 							"LIMIT 1");
 
-						echo "<tr><td>".$page['page_id']."</td><td>".$page['tag']."</td><td>".$title."</td></tr>";
+						echo "<tr><td>" . $page['page_id'] . "</td><td>".$page['tag']."</td><td>".$title."</td></tr>";
 					}
 				}
 
@@ -206,10 +206,10 @@ if ($this->is_admin())
 					$this->db->sql_query(
 						"UPDATE {$this->db->table_prefix}page ".
 						"SET depth = '".$depth."' ".
-						"WHERE page_id = '".$page['page_id']."' ".
+						"WHERE page_id = '" . $page['page_id'] . "' ".
 						"LIMIT 1");
 
-					echo "<tr><td>".$page['page_id']."</td><td>".$page['tag']."</td><td>".$depth."</td></tr>";
+					echo "<tr><td>" . $page['page_id'] . "</td><td>".$page['tag']."</td><td>".$depth."</td></tr>";
 				}
 
 				echo "</table>";
@@ -254,7 +254,7 @@ if ($this->is_admin())
 					$_revisions = $this->db->load_all(
 						"SELECT revision_id, page_id ".
 						"FROM {$this->db->table_prefix}revision ".
-						"WHERE page_id = '".$page['page_id']."' ".
+						"WHERE page_id = '" . $page['page_id'] . "' ".
 						"ORDER BY modified DESC");
 
 					$t = count($_revisions);

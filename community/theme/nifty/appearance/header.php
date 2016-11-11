@@ -614,7 +614,7 @@ if ($doubleclick == true)
 						$this->_t('EditTip'),
 						((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 							($this->forum === false && $this->has_access('write')) ||
-							($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+							($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int) $this->page['comments'] == 0))
 							? $this->_t('EditText') : '',
 						$this->method == 'edit',
 						1,
@@ -655,7 +655,7 @@ if ($doubleclick == true)
 							$this->_t('CreateNewPageTip'),
 							((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 								($this->forum === false && $this->has_access('write')) ||
-								($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+								($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int) $this->page['comments'] == 0))
 								? $this->_t('CreateNewPageText') : '',
 							$this->method == 'new',
 							1,
@@ -678,7 +678,7 @@ if ($doubleclick == true)
 							$this->href('remove'),
 							$this->_t('DeleteTip'),
 							($this->page && ($this->is_admin() || !$this->db->remove_onlyadmins && (
-								($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
+								($this->forum === true && $this->is_owner() && (int) $this->page['comments'] == 0) ||
 								($this->forum === false && $this->is_owner()))))
 								? $this->_t('DeleteText') : '',
 							$this->method == 'remove',
@@ -692,7 +692,7 @@ if ($doubleclick == true)
 							$this->href('rename'),
 							$this->_t('RenameText'),
 							($this->page && (($this->is_admin() || $this->is_owner()) && (
-								($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
+								($this->forum === true && $this->is_owner() && (int) $this->page['comments'] == 0) ||
 								($this->forum === false && $this->is_owner()))))
 								? $this->_t('RenameText') : '',
 							$this->method == 'rename',

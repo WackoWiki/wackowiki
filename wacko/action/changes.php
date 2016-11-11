@@ -33,20 +33,20 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 	if ($user)
 	{
-		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
+		echo '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead') . '</a></small>';
 	}
 
 	if (!$root && !(int) $noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/changes_'.
-			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.
-			$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('RecentChangesXMLTip').
-			'" alt="XML" class="btn-feed"/></a></span>'."<br /><br />\n";
+		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . 'xml/changes_' .
+			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' .
+			$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentChangesXMLTip') .
+			'" alt="XML" class="btn-feed"/></a></span>' . "<br /><br />\n";
 	}
 
 	$this->print_pagination($pagination);
 
-	echo '<ul class="ul_list">'."\n";
+	echo '<ul class="ul_list">' . "\n";
 
 	$curday = '';
 
@@ -72,7 +72,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			// review
 			if ($this->db->review && $this->is_reviewer() && !$page['reviewed'])
 			{
-				$review = '<span class="review">['.$this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'), 0).']</span>';
+				$review = '<span class="review">[' . $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'), 0) . ']</span>';
 			}
 
 			// do unicode entities
@@ -101,21 +101,21 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			$size_delta			= $page['page_size'] - $page['parent_size'];
 
 			// print entry
-			echo '<li class="lined'.$viewed.'"><span class="dt">'.
+			echo '<li class="lined' . $viewed . '"><span class="dt">' .
 			(!$this->hide_revisions
-				? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip'))." "
+				? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')) . ' '
 				: $time
 			).
-			"</span> &mdash; ".
+			'</span> &mdash; '.
 			($title == 1
 				? $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
 				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
 			).
 
-			" . . . . . . . . . . . . . . . . <small>".
-			$this->user_link($page['user_name'], '', true, false).' '.
-			$review.' '.
-			$edit_note.
+			' . . . . . . . . . . . . . . . . <small>' .
+			$this->user_link($page['user_name'], '', true, false) . ' ' .
+			$review . ' ' .
+			$edit_note .
 			# ' ' . $this->delta_formatted($size_delta) . // TODO: looks odd here
 			"</small></li>\n";
 		}

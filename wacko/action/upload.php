@@ -29,7 +29,7 @@ if ($this->can_upload(true) === true)
 
 	if ($maxsize)
 	{
-		echo '<input type="hidden" name="maxsize" value="'.floor(1 * $maxsize).'" />';
+		echo '<input type="hidden" name="maxsize" value="' . floor(1 * $maxsize) . '" />';
 	}
 
 	// if you have no write access and you are not admin, you can upload only "global" file

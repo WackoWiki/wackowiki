@@ -101,7 +101,7 @@ if ($can_view)
 	$files = $this->db->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name, f.hits ".
 		"FROM " . $this->db->table_prefix . "upload f ".
-			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' ".
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "

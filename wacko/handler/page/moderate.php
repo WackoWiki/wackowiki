@@ -588,8 +588,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name, o.user_name as owner_name ".
 			"FROM {$this->db->table_prefix}page AS p ".
-				"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->db->table_prefix."user o ON (p.owner_id = o.user_id), ".
+				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), ".
 				"{$this->db->table_prefix}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				"AND a.privilege = 'create' AND a.list = '' ".
@@ -952,7 +952,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						"UPDATE {$this->db->table_prefix}page SET ".
 							"comments	= '".$this->count_comments($this->page['page_id'])."', ".
 							"commented	= UTC_TIMESTAMP() ".
-						"WHERE page_id = '".$this->page['page_id']."' ".
+						"WHERE page_id = '" . $this->page['page_id'] . "' ".
 						"LIMIT 1");
 
 					unset($accept_action);
@@ -1110,7 +1110,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$this->db->sql_query(
 							"UPDATE {$this->db->table_prefix}page SET ".
 								"comments = '".$this->count_comments($this->page['page_id'])."' ".
-							"WHERE page_id = '".$this->page['page_id']."' ".
+							"WHERE page_id = '" . $this->page['page_id'] . "' ".
 							"LIMIT 1");
 
 						$this->db->sql_query(
@@ -1150,8 +1150,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name ".
 			"FROM {$this->db->table_prefix}page p ".
-				"LEFT JOIN ".$this->db->table_prefix."user u ON (p.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->db->table_prefix."user o ON (p.owner_id = o.user_id) ".
+				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
 			"WHERE comment_on_id = '{$this->page['page_id']}' ".
 				"AND p.deleted <> '1' ".
 			"ORDER BY created ASC ".

@@ -165,7 +165,7 @@ class Polls
 			"INSERT INTO {$this->engine->db->table_prefix}poll SET ".
 				"poll_id	= '".(int) $poll_id."', ".
 				"text		= ".$engine->db->q(rtrim($topic, '.')).", ".
-				"user_id	= '".(int) $user_id."', ".
+				"user_id	= '" . (int) $user_id . "', ".
 				"plural		= '".$plural."', ".
 				"start		= ".($start == 1 ? "UTC_TIMESTAMP()" : "NULL"));
 

@@ -271,7 +271,7 @@ if ($this->can_upload() === true)
 			$file = $this->db->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM " . $this->db->table_prefix . "upload f ".
-					"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+					"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '" . $page_id . "' ".
 					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' ".
 				"LIMIT 1");
@@ -285,7 +285,7 @@ if ($this->can_upload() === true)
 				{
 					// 2. remove from DB
 					$this->db->sql_query(
-						"DELETE FROM ".$this->db->table_prefix."upload ".
+						"DELETE FROM " . $this->db->table_prefix . "upload ".
 						"WHERE upload_id = '" . $file['upload_id'] . "'" );
 
 					// update user uploads count
@@ -367,7 +367,7 @@ if ($this->can_upload() === true)
 
 					// 2. update file metadata
 					$this->db->sql_query(
-						"UPDATE ".$this->db->table_prefix."upload SET ".
+						"UPDATE " . $this->db->table_prefix . "upload SET ".
 							"upload_lang		= " . $this->db->q($this->page['page_lang']) . ", ".
 							"file_description	= " . $this->db->q($description) . " ".
 						"WHERE upload_id = '" . $file['upload_id'] . "' ".
@@ -551,7 +551,7 @@ if ($this->can_upload() === true)
 
 								// 5. insert line into DB
 								$this->db->sql_query(
-									"INSERT INTO ".$this->db->table_prefix."upload SET ".
+									"INSERT INTO " . $this->db->table_prefix . "upload SET ".
 										"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', ".
 										"user_id			= '" . $user['user_id'] . "',".
 										"file_name			= " . $this->db->q($small_name) . ", ".
