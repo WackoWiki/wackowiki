@@ -383,7 +383,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 			{
 				if ($page != '')
 				{
-					$result	.= "'".$page['page_id']."', ";
+					$result	.= "'" . $page['page_id'] . "', ";
 
 					// we'll need this for backing up the related cluster files
 					$engine->cluster_pages[$root][]	= $page['page_id'];

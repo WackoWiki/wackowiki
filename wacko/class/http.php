@@ -89,7 +89,7 @@ class Http
 		chmod($this->file, SAFE_CHMOD);
 
 		$this->db->sql_query(
-			"INSERT INTO ".$this->db->table_prefix."cache SET ".
+			"INSERT INTO " . $this->db->table_prefix . "cache SET ".
 				"name	= ".$this->db->q($this->hash).", ".
 				"method	= ".$this->db->q($this->method).", ".
 				"query	= ".$this->db->q($this->query));
@@ -107,7 +107,7 @@ class Http
 
 			$params	= $this->db->load_all(
 				"SELECT method, query ".
-				"FROM ".$this->db->table_prefix."cache ".
+				"FROM " . $this->db->table_prefix . "cache ".
 				"WHERE name = ".$this->db->q($hash));
 
 			// Ut::dbg('invalidate_page', $page);
@@ -128,7 +128,7 @@ class Http
 			}
 
 			$this->db->sql_query(
-				"DELETE FROM ".$this->db->table_prefix."cache ".
+				"DELETE FROM " . $this->db->table_prefix . "cache ".
 				"WHERE name = ".$this->db->q($hash));
 		}
 
@@ -581,7 +581,7 @@ class Http
 			{
 				if (!preg_match('@^bytes=(\d*)-(\d*)(,\d*-\d*)*$@', $_SERVER['HTTP_RANGE'], $m)
 					|| ($m[1] === '' && $m[2] === '')
-					|| ($m[1] !== '' && $m[2] !== '' && (int)$m[1] > (int)$m[2])
+					|| ($m[1] !== '' && $m[2] !== '' && (int) $m[1] > (int) $m[2])
 					|| ($m[1] !== '' && $m[1] > $size)
 					|| ($m[2] !== '' && $m[2] > $size))
 				{
@@ -592,12 +592,12 @@ class Http
 
 				if ($m[1] === '')
 				{
-					$from = $size - (int)$m[2];
+					$from = $size - (int) $m[2];
 				}
 				else
 				{
-					$from = (int)$m[1];
-					$m[2] === ''  or  $to = (int)$m[2] + 1;
+					$from = (int) $m[1];
+					$m[2] === ''  or  $to = (int) $m[2] + 1;
 				}
 			}
 

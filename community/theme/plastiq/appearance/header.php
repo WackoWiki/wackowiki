@@ -1,6 +1,6 @@
 <?php
 
-require (Ut::join_path(THEME_DIR, '_common/_header.php'));
+#require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 ?>
 </head>
@@ -34,7 +34,7 @@ else
 }
 echo "\n";
 ?>
-							<?php echo $this->_t('CurrentTime').' '. date($this->db->time_format_seconds.' '.$this->db->date_format, $this->get_time_tz( time() ) ); ?>
+							<?php echo $this->_t('CurrentTime').' '. $this->get_time_formatted( time() ); ?>
 						</div>
 					</td>
 				</tr>
@@ -343,7 +343,7 @@ echo "\n";
 		$this->_t('EditTip'),
 		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 			($this->forum === false && $this->has_access('write')) ||
-			($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+			($this->forum === true && ($this->is_owner() || $this->is_moderator()) && (int) $this->page['comments'] == 0))
 			? $this->_t('EditText') : '',
 		$this->method == 'edit',
 		'e');
@@ -361,7 +361,7 @@ echo "\n";
 		$this->href('remove'),
 		$this->_t('DeleteTip'),
 		($this->page && ($this->is_admin() || !$this->db->remove_onlyadmins && (
-			($this->forum === true && $this->is_owner() && (int)$this->page['comments'] == 0) ||
+			($this->forum === true && $this->is_owner() && (int) $this->page['comments'] == 0) ||
 			($this->forum === false && $this->is_owner()))))
 			? $this->_t('DeleteText')  : '',
 		$this->method == 'remove');

@@ -129,12 +129,12 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// INSERT user
 			$this->db->sql_query(
-				"INSERT INTO ".$this->db->user_table." ".
+				"INSERT INTO " . $this->db->user_table . " ".
 				"SET ".
 					"signup_time	= UTC_TIMESTAMP(), ".
-					"user_name		= ".$this->db->q($user_name).", ".
+					"user_name		= " . $this->db->q($user_name) . ", ".
 					"account_lang	= ".$this->db->q($user_lang? $user_lang : $this->db->language).", ".
-					"email			= ".$this->db->q($email).", ".
+					"email			= " . $this->db->q($email) . ", ".
 					"password		= ".$this->db->q($this->password_hash(['user_name' => $user_name], $password)).", ".
 					"account_status	= '".(int) $account_status."', ".
 					"enabled		= '".(int) $account_enabled."', ".
@@ -143,16 +143,16 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			// get new user_id
 			$_user_id = $this->db->load_single(
 				"SELECT user_id ".
-				"FROM ".$this->db->table_prefix."user ".
-				"WHERE user_name = ".$this->db->q($user_name)." ".
+				"FROM " . $this->db->table_prefix . "user ".
+				"WHERE user_name = " . $this->db->q($user_name) . " ".
 				"LIMIT 1");
 			$user_id = $_user_id['user_id'];
 
 			// INSERT user settings
 			$this->db->sql_query(
-				"INSERT INTO ".$this->db->table_prefix."user_setting ".
+				"INSERT INTO " . $this->db->table_prefix . "user_setting ".
 				"SET ".
-					"user_id			= '".(int) $user_id."', ".
+					"user_id			= '" . (int) $user_id . "', ".
 					"typografica		= '".(($this->db->default_typografica == 1) ? 1 : 0)."', ".
 					"user_lang			= ".$this->db->q(($user_lang ? $user_lang : $this->db->language)).", ".
 					"list_count			= '".(int) $this->db->list_count."', ".

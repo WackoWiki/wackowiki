@@ -12,8 +12,8 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 	// count pages
 	$count = $this->db->load_single(
 		"SELECT COUNT(a.page_id) AS n ".
-		"FROM ".$this->db->table_prefix."page a ".
-			"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
+		"FROM " . $this->db->table_prefix . "page a ".
+			"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) ".
 		"WHERE ".
 		($tag
 			? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
@@ -30,9 +30,9 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 		$comments = $this->db->load_all(
 			"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.tag AS comment_tag,
 				a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
-			"FROM ".$this->db->table_prefix."page a ".
-				"INNER JOIN ".$this->db->table_prefix."page b ON (a.comment_on_id = b.page_id) ".
-				"LEFT JOIN ".$this->db->table_prefix."user u ON (a.user_id = u.user_id) ".
+			"FROM " . $this->db->table_prefix . "page a ".
+				"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) ".
+				"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) ".
 			"WHERE ".
 			($tag
 				? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "

@@ -36,7 +36,7 @@ if (@$_POST['_action'] === 'extended_properties')
 					"disable_safehtml	= '".(string) $_POST['disable_safehtml']."', "
 				: "").
 			"noindex			= '".(string) $_POST['noindex']."' ".
-		"WHERE page_id = '".$this->page['page_id']."' ".
+		"WHERE page_id = '" . $this->page['page_id'] . "' ".
 		"LIMIT 1");
 }
 
@@ -52,7 +52,7 @@ if (@$_POST['_action'] === 'general_properties')
 			"title				= ".$this->db->q(trim($_POST['title'])).", ".
 			"keywords			= ".$this->db->q(trim($_POST['keywords'])).", ".
 			"description		= ".$this->db->q(trim($_POST['description']))." ".
-		"WHERE page_id = '".$this->page['page_id']."' ".
+		"WHERE page_id = '" . $this->page['page_id'] . "' ".
 		"LIMIT 1");
 }
 
@@ -70,7 +70,7 @@ if ($_POST)
 $revs = $this->db->load_single(
 	"SELECT COUNT(revision_id) AS total ".
 	"FROM {$this->db->table_prefix}revision ".
-	"WHERE page_id = '".$this->page['page_id']."' ".
+	"WHERE page_id = '" . $this->page['page_id'] . "' ".
 	"GROUP BY tag ".
 	"LIMIT 1");
 

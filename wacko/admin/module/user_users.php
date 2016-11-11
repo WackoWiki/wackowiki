@@ -111,7 +111,7 @@ function admin_user_users(&$engine, &$module)
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->db->table_prefix}user u ".
 				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
-			"WHERE u.user_id = '".(int) $user_id."' ".
+			"WHERE u.user_id = '" . (int) $user_id . "' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1");
 	}
@@ -182,7 +182,7 @@ function admin_user_users(&$engine, &$module)
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->db->table_prefix}user u ".
 				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
-			"WHERE u.user_id = '".(int) $user_id."' ".
+			"WHERE u.user_id = '" . (int) $user_id . "' ".
 			"AND u.account_type = '0' ".
 			"LIMIT 1");
 
@@ -391,7 +391,7 @@ function admin_user_users(&$engine, &$module)
 			"SELECT u.user_name, u.real_name, u.email, s.user_lang, s.theme, u.enabled, u.account_status ".
 			"FROM {$engine->db->table_prefix}user u ".
 				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
-			"WHERE u.user_id = '".(int) $user_id."' ".
+			"WHERE u.user_id = '" . (int) $user_id . "' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1"))
 		{
@@ -531,7 +531,7 @@ function admin_user_users(&$engine, &$module)
 				if ($user = $engine->db->load_single(
 					"SELECT user_name
 					FROM {$engine->db->table_prefix}user
-					WHERE user_id = '".(int) $user_id."'
+					WHERE user_id = '" . (int) $user_id . "'
 					LIMIT 1"))
 				{
 

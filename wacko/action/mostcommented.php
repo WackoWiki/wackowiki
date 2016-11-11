@@ -61,7 +61,7 @@ if (!$page)
 {
 	$pages = $this->db->load_all(
 		"SELECT page_id, tag, title, comments ".
-		"FROM ".$this->db->table_prefix."page ".
+		"FROM " . $this->db->table_prefix . "page ".
 		"WHERE comments >= 1 ".
 		"ORDER BY comments DESC ".
 		"LIMIT {$max}");
@@ -75,9 +75,9 @@ else
 		// We want to recurse and include all the sub pages of sub pages (and so on) in the listing
 		$pages = $this->db->load_all(
 			"SELECT DISTINCT a.page_id, a.tag, a.title, a.comments ".
-			"FROM ".$this->db->table_prefix."page a, ".$this->db->table_prefix."page_link l ".
-			"INNER JOIN ".$this->db->table_prefix."page b ON (l.from_page_id = b.page_id) ".
-			"INNER JOIN ".$this->db->table_prefix."page c ON (l.to_page_id = c.page_id) ".
+			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l ".
+			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) ".
+			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) ".
 			"WHERE a.tag <> '".$page."' ".
 				"AND a.tag = c.tag ".
 				"AND INSTR(b.tag, '".$page."') = 1 ".
@@ -91,9 +91,9 @@ else
 		// The only pages we want to display are those directly under the selected page, not their kids and grandkids
 		$pages = $this->db->load_all(
 			"SELECT DISTINCT a.page_id, a.tag, a.title, a.comments ".
-			"FROM ".$this->db->table_prefix."page a, ".$this->db->table_prefix."page_link l ".
-				"INNER JOIN ".$this->db->table_prefix."page b ON (l.from_page_id = b.page_id) ".
-				"INNER JOIN ".$this->db->table_prefix."page c ON (l.to_page_id = c.page_id) ".
+			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l ".
+				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) ".
+				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) ".
 			"WHERE a.tag <> '".$page."' ".
 				"AND a.tag = c.tag ".
 				"AND b.tag = ".$this->db->q($page)." ".

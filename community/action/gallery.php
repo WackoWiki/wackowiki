@@ -180,8 +180,8 @@ if ($can_view)
 	// TODO: we want only image files -> AND f.picture_w <> '0'
 	$count = $this->db->load_all(
 		"SELECT f.upload_id ".
-		"FROM ".$this->db->table_prefix."upload f ".
-			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+		"FROM " . $this->db->table_prefix . "upload f ".
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
 			"AND f.picture_w <> '0' ".
 		($owner
@@ -194,8 +194,8 @@ if ($can_view)
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
-		"FROM ".$this->db->table_prefix."upload f ".
-			"INNER JOIN ".$this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+		"FROM " . $this->db->table_prefix . "upload f ".
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
 			"AND f.picture_w <> '0' ".
 		($owner
@@ -410,15 +410,15 @@ if ($can_view)
 
 					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the upload table, remember we can have many derived versions from the original image
 					/* $this->db->sql_query(
-						"INSERT INTO ".$this->db->table_prefix."upload SET ".
-						"user_id			= '".(int)$file['user_id']."', ".
-						"page_id			= '".(int)$file_page['page_id']."', ".
+						"INSERT INTO " . $this->db->table_prefix . "upload SET ".
+						"user_id			= '".(int) $file['user_id']."', ".
+						"page_id			= '".(int) $file_page['page_id']."', ".
 						"file_name			= ".$this->db->q($small_id.$file_name).", ".
 						"file_description	= ".$this->db->q($file['file_description']).", ".
 						"uploaded_dt		= ".$this->db->q(date("Y-m-d H:i:s")).", ".
 						"file_size			= '".(int)sizeof($newfilename)."', ".
-						"picture_w			= '".(int)$diw."', ".
-						"picture_h			= '".(int)$height."', ".
+						"picture_w			= '".(int) $diw."', ".
+						"picture_h			= '".(int) $height."', ".
 						"file_ext			= ".$this->db->q($file_page['file_ext'])." "); */
 
 					if ($table)

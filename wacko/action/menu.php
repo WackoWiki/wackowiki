@@ -30,7 +30,7 @@ if (!function_exists('load_user_menu'))
 			"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position ".
 			"FROM ".$engine->db->table_prefix."menu m ".
 				"LEFT JOIN ".$engine->db->table_prefix."page p ON (m.page_id = p.page_id) ".
-			"WHERE m.user_id = '".(int) $user_id."' ".
+			"WHERE m.user_id = '" . (int) $user_id . "' ".
 				($lang
 					? "AND m.menu_lang =  '".$lang."' "
 					: "").
@@ -115,7 +115,7 @@ if (isset($_POST['_user_menu']))
 		foreach ($data as $item)
 		{
 			$this->db->sql_query(
-				"UPDATE ".$this->db->table_prefix."menu SET ".
+				"UPDATE " . $this->db->table_prefix . "menu SET ".
 					"menu_position	= '".$item['menu_position']."', ".
 					"menu_title		= ".$this->db->q(substr(trim($_POST['title_'.$item['menu_id']]), 0, 250))." ".
 				"WHERE menu_id		= '".$item['menu_id']."' ".
@@ -141,7 +141,7 @@ if (isset($_POST['_user_menu']))
 					// check if menu item already exists
 					if ($this->db->load_single(
 						"SELECT menu_id ".
-						"FROM ".$this->db->table_prefix."menu ".
+						"FROM " . $this->db->table_prefix . "menu ".
 						"WHERE user_id = '".(int) $_user_id."' ".
 							($default_menu === true
 									? "AND menu_lang = '".$_user_lang."' "
@@ -156,7 +156,7 @@ if (isset($_POST['_user_menu']))
 						// writing new menu item
 						$_menu_position = $this->db->load_all(
 							"SELECT menu_id ".
-							"FROM ".$this->db->table_prefix."menu ".
+							"FROM " . $this->db->table_prefix . "menu ".
 							"WHERE user_id = '".(int) $_user_id."' ".
 								($default_menu === true
 									? "AND menu_lang = '".$_user_lang."' "
@@ -166,7 +166,7 @@ if (isset($_POST['_user_menu']))
 						$_menu_item_count = count($_menu_position);
 
 						$this->db->sql_query(
-							"INSERT INTO ".$this->db->table_prefix."menu SET ".
+							"INSERT INTO " . $this->db->table_prefix . "menu SET ".
 							"user_id			= '".(int) $_user_id."', ".
 							"page_id			= '".(int) $_page_id."', ".
 							"menu_lang			= ".$this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)).", ".
@@ -215,7 +215,7 @@ if (isset($_POST['_user_menu']))
 			{
 				$this->db->sql_query(
 					"DELETE ".
-					"FROM ".$this->db->table_prefix."menu ".
+					"FROM " . $this->db->table_prefix . "menu ".
 					"WHERE menu_id IN (".$deletion.")");
 			}
 		}

@@ -112,9 +112,9 @@ if ($this->has_access('read'))
 		if ($this->get_user_id() != $this->page['owner_id'])
 		{
 			$this->db->sql_query(
-				"UPDATE ".$this->db->table_prefix."page SET ".
+				"UPDATE " . $this->db->table_prefix . "page SET ".
 					"hits = hits + 1 ".
-				"WHERE page_id = '".$this->page['page_id']."'");
+				"WHERE page_id = '" . $this->page['page_id'] . "'");
 		}
 
 		$user			= $this->get_user();
@@ -126,8 +126,8 @@ if ($this->has_access('read'))
 			$this->db->sql_query(
 				"UPDATE {$this->db->table_prefix}watch SET ".
 					"pending = '0' ".
-				"WHERE page_id = '".$this->page['page_id']."' ".
-					"AND user_id = '".$user['user_id']."'");
+				"WHERE page_id = '" . $this->page['page_id'] . "' ".
+					"AND user_id = '" . $user['user_id'] . "'");
 		}
 
 		$this->set_language($this->page_lang);
@@ -150,10 +150,10 @@ if ($this->has_access('read'))
 			if ($this->page['latest'] != 0)
 			{
 				$this->db->sql_query(
-					"UPDATE ".$this->db->table_prefix."page SET ".
+					"UPDATE " . $this->db->table_prefix . "page SET ".
 						"body_r		= ".$this->db->q($this->page['body_r']).", ".
 						"body_toc	= ".$this->db->q($this->page['body_toc'])." ".
-					"WHERE page_id = '".$this->page['page_id']."' ".
+					"WHERE page_id = '" . $this->page['page_id'] . "' ".
 					"LIMIT 1");
 			}
 		}

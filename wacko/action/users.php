@@ -6,10 +6,9 @@ if (!defined('IN_WACKO'))
 }
 
 // action args:
-$max = (int) @$max;
-$group_id = (int) @$group_id;
-
-$logged_in = $this->get_user();
+$max		= (int) @$max;
+$group_id	= (int) @$group_id;
+$logged_in	= $this->get_user();
 
 // display user profile
 if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private message can POST here
@@ -45,12 +44,12 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			if (isset($_GET['mode']) && $_GET['mode'] == 'mypages')
 			{
 				echo	$output1 .
-				'<li class="active">'.$this->_t('ListMyPages')."</a></li>\n". #$output2 .
+				'<li class="active">' . $this->_t('ListMyPages') . "</a></li>\n". #$output2 .
 				$output3 .
 				$output4 .
 				$output5 .
 				$output6;
-				echo	'<h3>'.$this->_t('ListMyPages')."</h3>";
+				echo	'<h3>' . $this->_t('ListMyPages') . "</h3>";
 				echo	$this->action('mypages');
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
@@ -58,10 +57,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				echo	$output1 .
 				$output2 .
 				$output3 .
-				'<li class="active">'.$this->_t('ListMyWatches')."</a></li>\n". #$output4 .
+				'<li class="active">' . $this->_t('ListMyWatches') . "</a></li>\n". #$output4 .
 				$output5 .
 				$output6;
-				echo	'<h3>'.$this->_t('ListMyWatches')."</h3>";
+				echo	'<h3>' . $this->_t('ListMyWatches') . "</h3>";
 				echo	$this->action('mywatches');
 			}
 			else if (!isset($_GET['mode']) || $_GET['mode'] == 'mychangeswatches')
@@ -70,20 +69,20 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$output2 .
 				$output3 .
 				$output4 .
-				'<li class="active">'.$this->_t('ListMyChangesWatches')."</a></li>\n". #$output5 .
+				'<li class="active">' . $this->_t('ListMyChangesWatches') . "</a></li>\n". #$output5 .
 				$output6;
-				echo	'<h3>'.$this->_t('ListMyChangesWatches')."</h3>";
+				echo	'<h3>' . $this->_t('ListMyChangesWatches') . "</h3>";
 				echo	$this->action('mychangeswatches');
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
 			{
 				echo	$output1 .
 				$output2 .
-				'<li class="active">'.$this->_t('ListMyChanges')."</a></li>\n". #$output3 .
+				'<li class="active">' . $this->_t('ListMyChanges') . "</a></li>\n". #$output3 .
 				$output4 .
 				$output5 .
 				$output6;
-				echo	'<h3>'.$this->_t('ListMyChanges')."</h3>";
+				echo	'<h3>' . $this->_t('ListMyChanges') . "</h3>";
 				echo	$this->action('mychanges');
 			}
 		}
@@ -93,6 +92,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		{
 			// collecting usergroup names where user takes membership
 			$groups = [];
+
 			foreach ($this->db->aliases as $group_name => $group_str)
 			{
 				$group_users = explode('\n', $group_str);
@@ -286,7 +286,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			$pages = $this->db->load_all(
 				"SELECT page_id, tag, title, created, page_lang ".
 				"FROM {$this->db->table_prefix}page ".
-				"WHERE owner_id = '".$user['user_id']."' ".
+				"WHERE owner_id = '" . $user['user_id'] . "' ".
 					"AND comment_on_id = '0' ".
 					"AND deleted <> '1' ".
 				"ORDER BY ".($sort_name? 'tag ASC' : 'created DESC')." ".
@@ -336,14 +336,14 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$tpl->u_cmt_c_pagination_text = $pagination['text'];
 
 				$comments = $this->db->load_all(
-					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang ".
-					"FROM {$this->db->table_prefix}page c ".
-						"LEFT JOIN ".$this->db->table_prefix."page p ON (c.comment_on_id = p.page_id) ".
-					"WHERE c.owner_id = '".$user['user_id']."' ".
-						"AND c.comment_on_id <> '0' ".
-						"AND c.deleted <> '1' ".
-						"AND p.deleted <> '1' ".
-					"ORDER BY c.created DESC ".
+					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang " .
+					"FROM {$this->db->table_prefix}page c " .
+						"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
+					"WHERE c.owner_id = '" . $user['user_id'] . "' " .
+						"AND c.comment_on_id <> '0' " .
+						"AND c.deleted <> '1' " .
+						"AND p.deleted <> '1' " .
+					"ORDER BY c.created DESC " .
 					$pagination['limit']);
 
 				// comments list itself
@@ -387,13 +387,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					$tpl->u_up_u_u2_pagination_text = $pagination['text'];
 
 					$uploads = $this->db->load_all(
-							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page ".
-							"FROM {$this->db->table_prefix}upload u ".
-								"LEFT JOIN {$this->db->table_prefix}page c ON (u.page_id = c.page_id) ".
-							"WHERE u.user_id = '".$user['user_id']."' ".
-							"AND u.deleted <> '1' ".
-							// "AND p.deleted <> '1' ".
-							"ORDER BY u.uploaded_dt DESC ".
+							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page " .
+							"FROM {$this->db->table_prefix}upload u " .
+								"LEFT JOIN {$this->db->table_prefix}page c ON (u.page_id = c.page_id) " .
+							"WHERE u.user_id = '" . $user['user_id'] . "' " .
+							"AND u.deleted <> '1' " .
+							// "AND p.deleted <> '1' " .
+							"ORDER BY u.uploaded_dt DESC " .
 							$pagination['limit']);
 
 					// uploads list itself
@@ -426,8 +426,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 								$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
 								$on_page	= $this->_t('To') . ' '.
-									$this->link('/'. $upload['file_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang).
-									' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0];
+									$this->link('/' . $upload['file_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang).
+									' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
 							}
 							else
 							{
@@ -436,7 +436,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							}
 
 							$tpl->u_up_u_u2_li_t		= $upload['uploaded_dt'];
-							$tpl->u_up_u_u2_li_link		= $this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang);
+							$tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang);
 							$tpl->u_up_u_u2_li_onpage	= $on_page;
 							$tpl->u_up_u_u2_li_descr	= $file_description;
 						}
@@ -520,15 +520,15 @@ else
 	}
 
 	$sql_where =
-			($group_id? "LEFT JOIN {$this->db->table_prefix}usergroup_member m ON (u.user_id = m.user_id) " : "").
-		"WHERE u.account_type = '0' ".
-			"AND u.enabled = '1' ".
-			($group_id? "AND m.group_id = '$group_id' " : "").
+			($group_id? "LEFT JOIN {$this->db->table_prefix}usergroup_member m ON (u.user_id = m.user_id) " : "") .
+		"WHERE u.account_type = '0' " .
+			"AND u.enabled = '1' " .
+			($group_id? "AND m.group_id = '$group_id' " : "") .
 			$sql_where;
 
 	$count = $this->db->load_single(
-		"SELECT COUNT(u.user_name) AS n ".
-		"FROM {$this->db->user_table} u ".
+		"SELECT COUNT(u.user_name) AS n " .
+		"FROM {$this->db->user_table} u " .
 		$sql_where, true);
 
 	if ($group_id)
@@ -553,11 +553,11 @@ else
 
 	// collect data
 	$users = $this->db->load_all(
-		"SELECT u.user_name, u.account_lang, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession ".
-		"FROM {$this->db->user_table} u ".
-			"LEFT JOIN ".$this->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
-		$sql_where.
-		$sql_order.
+		"SELECT u.user_name, u.account_lang, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession " .
+		"FROM {$this->db->user_table} u " .
+			"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+		$sql_where .
+		$sql_order .
 		$pagination['limit'], true);
 
 	$tpl->l_pagination_text = $pagination['text'];

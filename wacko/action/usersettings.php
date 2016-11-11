@@ -63,10 +63,10 @@ else if (($user = $this->get_user()))
 			{
 				// update users table
 				$this->db->sql_query(
-					"UPDATE ".$this->db->user_table." SET ".
+					"UPDATE " . $this->db->user_table . " SET ".
 						"real_name		= ".$this->db->q(trim($_POST['real_name'])).", ".
-						"email			= ".$this->db->q($email)." ".
-					"WHERE user_id = '".$user['user_id']."' ".
+						"email			= " . $this->db->q($email) . " ".
+					"WHERE user_id = '" . $user['user_id'] . "' ".
 					"LIMIT 1");
 
 				// log event
@@ -121,7 +121,7 @@ else if (($user = $this->get_user()))
 	{
 		// update user_setting table
 		$this->db->sql_query(
-			"UPDATE ".$this->db->table_prefix."user_setting SET ".
+			"UPDATE " . $this->db->table_prefix . "user_setting SET ".
 				$sql.
 			"WHERE user_id = '".(int) $user['user_id']."' ".
 			"LIMIT 1");

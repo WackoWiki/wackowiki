@@ -123,7 +123,7 @@ class Email
 				// 0 = off (for production use)
 				// 1 = client messages
 				// 2 = client and server messages
-				 $mail->SMTPDebug	= 2;	// enables SMTP debug information (for testing)
+				# $mail->SMTPDebug	= 2;	// enables SMTP debug information (for testing)
 
 				if (!$this->is_blank($this->engine->db->smtp_username))
 				{

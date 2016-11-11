@@ -56,17 +56,17 @@ if (!isset($letters)
 	$this->sess->pi_time	= time() + 600;
 
 	$pages = $this->db->load_all(
-		"SELECT tag, title ".
-		"FROM {$this->db->table_prefix}page ".
-		"WHERE comment_on_id = '0' ".
-			"AND deleted = '0' ".
+		"SELECT tag, title " .
+		"FROM {$this->db->table_prefix}page " .
+		"WHERE comment_on_id = '0' " .
+			"AND deleted = '0' " .
 			($page
 				? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-				: "").
+				: "") .
 			($lang
 				? "AND page_lang = " . $this->db->q($lang) . " "
-				: "").
-		"ORDER BY ".
+				: "") .
+		"ORDER BY " .
 			($title
 				? "title ASC "
 				: "tag ASC ")
@@ -116,27 +116,27 @@ $pagination = $this->pagination($count['n'], $max, 'p', ($letter !== ''? ['lette
 $pages_to_display = [];
 
 if (($pages = $this->db->load_all(
-	"SELECT page_id, tag, title, page_lang ".
-	"FROM {$this->db->table_prefix}page ".
-	"WHERE comment_on_id = '0' ".
-		"AND deleted = '0' ".
+	"SELECT page_id, tag, title, page_lang " .
+	"FROM {$this->db->table_prefix}page " .
+	"WHERE comment_on_id = '0' " .
+		"AND deleted = '0' " .
 		($page
 			? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-			: "").
+			: "") .
 		($lang
 			? "AND page_lang = " . $this->db->q($lang) . " "
-			: "").
+			: "") .
 		($letter !== ''
-			? "AND ".
+			? "AND " .
 				($title
 					? "title "
-					: "tag ").
+					: "tag ") .
 				"LIKE " . $this->db->q($letter.'%') . " "
-			: "").
-	"ORDER BY ".
+			: "") .
+	"ORDER BY " .
 		($title
 			? "title ASC "
-			: "tag ASC ").
+			: "tag ASC ") .
 	$pagination['limit'], true)))
 {
 	foreach ($pages as $page)

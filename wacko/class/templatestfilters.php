@@ -418,6 +418,6 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_check($value, $on)
 	{
-		return ' value="' . (int)$on . '" ' . (((int)$value == (int)$on)? 'checked="checked" ' : '');
+		return ' value="' . (int) $on . '" ' . (((int) $value == (int) $on)? 'checked="checked" ' : '');
 	}
 }
