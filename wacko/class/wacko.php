@@ -1766,10 +1766,11 @@ class Wacko
 		}
 
 		$name_to		= '';
+
 		if (preg_match('/^([^<>]*)<([^<>]*)>$/', $email_to, $match))
 		{
-			$email_to = trim($match[2]);
-			$name_to = trim($match[1]);
+			$email_to	= trim($match[2]);
+			$name_to	= trim($match[1]);
 		}
 
 		if (!$email_from)
@@ -1785,7 +1786,7 @@ class Wacko
 			$body = str_replace('http://', 'https://' . ($this->db->tls_proxy ? $this->db->tls_proxy . '/' : ''), $body);
 		}
 
-		// use phpmailer class
+		// use PHPMailer class
 		if ($this->db->phpmailer)
 		{
 			// $this->db->phpMailer_method
@@ -1794,19 +1795,23 @@ class Wacko
 		}
 		else
 		{
-			// use mail() function
-			$headers = 'From: =?'. $charset ."?B?". base64_encode($this->db->site_name) ."?= <".$this->db->noreply_email.">\r\n";
-			$headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
-			$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
-			$headers .= "X-Wacko: ".$this->db->base_url."\r\n";
-			$headers .= "Content-Type: text/plain; charset=".$charset."\r\n";
+			// use PHP mail() function
+			$header = [];
+			$header[] = 'From: =?' . $charset . "?B?" . base64_encode($this->db->site_name) . "?= <" . $this->db->noreply_email;
+			$header[] = 'X-Mailer: PHP/' . phpversion(); // mailer
+			$header[] = 'X-Priority: 3'; // 1 urgent, 3 normal
+			$header[] = 'X-Wacko: ' . $this->db->base_url;
+			$header[] = 'Content-Type: text/plain; charset=' . $charset;
+
 			foreach ($xtra_headers as $name => $value)
 			{
-				$headers .= $name . ': ' . $value . "\n";
+				$header[] = $name . ': ' . $value;
 			}
-			$subject = ($subject ? "=?".$charset."?B?" . base64_encode($subject) . "?=" : '');
 
-			$body = wordwrap($body, 74, "\n", 0);
+			$headers	= implode("\r\n", $header);
+			$subject	= ($subject ? "=?".$charset . "?B?" . base64_encode($subject) . "?=" : '');
+			$body		= wordwrap($body, 74, "\n", 0);
+
 			@mail($email_to, $subject, $body, $headers);
 		}
 	}
