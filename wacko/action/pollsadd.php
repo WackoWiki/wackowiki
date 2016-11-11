@@ -176,16 +176,17 @@ if (isset($_POST['submit_poll']))
 		// notify wiki owner & log event
 		if ($this->db->enable_email == true && $user != $this->db->admin_name && $moderation !== true)
 		{
-			$subject = $this->db->site_name.'. '.$this->_t('PollsNotifySubj');
-			$body	 = $this->_t('EmailHello').
-					   $this->db->admin_name.".\n\n".
-					   str_replace('%1', $user, $this->_t('PollsNotifyBody'))."\n".
-					   $this->href('', 'admin.php')."\n\n".
-					   $this->_t('EmailGoodbye')."\n".
-					   $this->db->site_name."\n".
-					   $this->db->base_url;
+			$subject =	$this->db->site_name.'. '.$this->_t('PollsNotifySubj');
+			$body	 =	$this->_t('EmailHello').
+						$this->db->admin_name.".\n\n".
+						str_replace('%1', $user, $this->_t('PollsNotifyBody'))."\n".
+						$this->href('', 'admin.php')."\n\n".
+						$this->_t('EmailGoodbye')."\n".
+						$this->db->site_name."\n".
+						$this->db->base_url;
 
-			$this->send_mail($this->db->admin_email, $subject, $body);
+			$email = new Email($this);
+			$email->send_mail($this->db->admin_email, $subject, $body);
 			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollCreated', $this->db->language)));
 		}
 		else if ($moderation === true)

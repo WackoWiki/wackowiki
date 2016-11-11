@@ -36,11 +36,11 @@ $mail_body = '';
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$group_id				= (int)$_POST['group_id'];
-		$user_id				= (int)$_POST['user_id'];
-		$mail_subject			= (string)$_POST['mail_subject'];
-		$mail_body				= (string)$_POST['mail_body'];
-		$language				= (string)$_POST['language'];
+		$group_id		= (int) $_POST['group_id'];
+		$user_id		= (int) $_POST['user_id'];
+		$mail_subject	= (string) $_POST['mail_subject'];
+		$mail_body		= (string) $_POST['mail_body'];
+		$language		= (string) $_POST['language'];
 
 		#$engine->config->_set($config);
 
@@ -67,31 +67,32 @@ $mail_body = '';
 		{
 			if ($engine->db->enable_email == true && $engine->db->enable_email_notification == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
 			{
-				$subject	= '['.$engine->db->site_name.'] '.$mail_subject;
-				$body		= $engine->_t('EmailHello').' '.$user['user_name'].",\n\n".
+				$subject	= '[' . $engine->db->site_name.'] ' . $mail_subject;
+				$body		= $engine->_t('EmailHello') . ' ' . $user['user_name'] . ",\n\n".
 
 							$mail_body."\n\n\n".
 
-							$engine->_t('EmailDoNotReply')."\n\n".
-							$engine->_t('EmailGoodbye')."\n".
-							$engine->db->site_name."\n".
+							$engine->_t('EmailDoNotReply') . "\n\n".
+							$engine->_t('EmailGoodbye') . "\n".
+							$engine->db->site_name . "\n".
 							$engine->db->base_url;
 
-				$engine->send_mail($user['email'], $subject, $body);
+				$email = new Email($engine);
+				$email->send_mail($user['email'], $subject, $body);
 			}
 		}
 
-		$engine->log(1, 'Messemail send: '.$mail_subject.' to group / user '. $group_id);
-		$engine->set_message('Massemail send: '.$mail_subject, 'success');
+		$engine->log(1, 'Messemail send: ' . $mail_subject . ' to group / user ' . $group_id);
+		$engine->set_message('Massemail send: ' . $mail_subject, 'success');
 
 		#$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	$available_groups = $engine->db->load_all(
-			"SELECT group_id, group_name ".
-			"FROM {$engine->db->table_prefix}usergroup ".
-			"WHERE active = '1' ".
-			"ORDER BY BINARY group_name", true);
+		"SELECT group_id, group_name ".
+		"FROM {$engine->db->table_prefix}usergroup ".
+		"WHERE active = '1' ".
+		"ORDER BY BINARY group_name", true);
 
 	#$engine->debug_print_r($available_users);
 
@@ -112,7 +113,7 @@ $mail_body = '';
 			{
 				foreach ($users as $user)
 				{
-					echo '<option value="'.$user['user_id'].'">'.htmlspecialchars($user['user_name'])."</option>\n";
+					echo '<option value="' . $user['user_id'] . '">' . htmlspecialchars($user['user_name']) . "</option>\n";
 				}
 			}
 ?>
@@ -122,7 +123,7 @@ $mail_body = '';
 <?php
 	echo '<tr class="hl_setting">
 			<td class="label">
-				<label for="group_id"><strong>'.$engine->_t('SendToGroup').':</strong></label>
+				<label for="group_id"><strong>' . $engine->_t('SendToGroup') . ':</strong></label>
 			</td>'.
 			'<td>
 				<select id="group_id" name="group_id">
@@ -132,7 +133,7 @@ $mail_body = '';
 			{
 				foreach ($available_groups as $group)
 				{
-					echo '<option value="'.$group['group_id'].'">'.htmlspecialchars($group['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
+					echo '<option value="' . $group['group_id'] . '">' . htmlspecialchars($group['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
 				}
 			}
 
@@ -166,7 +167,7 @@ $mail_body = '';
 
 						foreach ($langs as $lang)
 						{
-							echo '<option value="'.$lang.'" '.($engine->db->language == $lang ? 'selected="selected"' : '').'>'.$languages[$lang].' ('.$lang.')</option>';
+							echo '<option value="' . $lang . '" ' . ($engine->db->language == $lang ? 'selected="selected"' : '').'>' . $languages[$lang] . ' (' . $lang . ')</option>';
 						}
 ?>
 					</select>

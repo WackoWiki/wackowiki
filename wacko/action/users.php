@@ -31,6 +31,63 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 	{
 		$profile = ['profile' => $user['user_name']];
 
+		// profile navigation
+		if ($user['user_id'] === $this->get_user_id())
+		{
+			$output1 = #'<h3>'.$this->_t('UserPages')."</h3>".
+			'<ul class="menu" id="list">' . "\n";
+			$output2 = '<li><a href="' . $this->href('', '', 'mode=mypages') . '#list">' . $this->_t('ListMyPages') . "</a></li>\n";
+			$output3 = '<li><a href="' . $this->href('', '', 'mode=mychanges') . '#list">' . $this->_t('ListMyChanges') . "</a></li>\n";
+			$output4 = '<li><a href="' . $this->href('', '', 'mode=mywatches') . '#list">' . $this->_t('ListMyWatches') . "</a></li>\n";
+			$output5 = '<li><a href="' . $this->href('', '', 'mode=mychangeswatches') . '#list">' . $this->_t('ListMyChangesWatches') . "</a></li>\n";
+			$output6 = "</ul>\n";
+
+			if (isset($_GET['mode']) && $_GET['mode'] == 'mypages')
+			{
+				echo	$output1 .
+				'<li class="active">'.$this->_t('ListMyPages')."</a></li>\n". #$output2 .
+				$output3 .
+				$output4 .
+				$output5 .
+				$output6;
+				echo	'<h3>'.$this->_t('ListMyPages')."</h3>";
+				echo	$this->action('mypages');
+			}
+			else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
+			{
+				echo	$output1 .
+				$output2 .
+				$output3 .
+				'<li class="active">'.$this->_t('ListMyWatches')."</a></li>\n". #$output4 .
+				$output5 .
+				$output6;
+				echo	'<h3>'.$this->_t('ListMyWatches')."</h3>";
+				echo	$this->action('mywatches');
+			}
+			else if (!isset($_GET['mode']) || $_GET['mode'] == 'mychangeswatches')
+			{
+				echo	$output1 .
+				$output2 .
+				$output3 .
+				$output4 .
+				'<li class="active">'.$this->_t('ListMyChangesWatches')."</a></li>\n". #$output5 .
+				$output6;
+				echo	'<h3>'.$this->_t('ListMyChangesWatches')."</h3>";
+				echo	$this->action('mychangeswatches');
+			}
+			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
+			{
+				echo	$output1 .
+				$output2 .
+				'<li class="active">'.$this->_t('ListMyChanges')."</a></li>\n". #$output3 .
+				$output4 .
+				$output5 .
+				$output6;
+				echo	'<h3>'.$this->_t('ListMyChanges')."</h3>";
+				echo	$this->action('mychanges');
+			}
+		}
+
 		// usergroups
 		if (is_array($this->db->aliases))
 		{
@@ -89,10 +146,12 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$prefix		= rtrim(str_replace(['https://www.', 'https://', 'http://www.', 'http://'], '', $this->db->base_url), '/');
 				$msg_id		= date('ymdHi') . '.' . Ut::rand(100000, 999999) . '@' . $prefix;
 				$subject	= $_POST['mail_subject'];
+
 				if ($subject === '')
 				{
 					$subject = '(no subject)';
 				}
+
 				if (strpos($subject, $prefix1 = '[' . $prefix . ']') === false)
 				{
 					$subject = $prefix1 . ' ' . $subject;
@@ -115,16 +174,18 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				// compose headers
 				$headers = [];
 				$headers['Message-ID'] = "<$msg_id>";
+
 				if (($ref = @$_POST['ref']))
 				{
-					$headers['In-Reply-To'] = "<$ref>";
-					$headers['References'] = "<$ref>";
+					$headers['In-Reply-To']	= "<$ref>";
+					$headers['References']	= "<$ref>";
 				}
 
 				$body .= "\n\n" . $this->_t('EmailGoodbye') . "\n" . $this->db->site_name . "\n" . $this->db->base_url;
 
 				// send email
-				$this->send_mail($user['user_name'] . ' <' . $user['email'] . '>', $subject, $body, 'no-reply@' . $prefix, '', $headers, true);
+				$email = new Email($this);
+				$email->send_mail($user['user_name'] . ' <' . $user['email'] . '>', $subject, $body, 'no-reply@' . $prefix, '', $headers, true);
 				$this->set_language($save, true);
 
 				$this->set_message($this->_t('UsersPMSent'));
@@ -163,14 +224,15 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// only registered users can send PMs
 			if ($logged_in)
 			{
-				$subject = (string) @$_POST['mail_subject'];
-				$ref = (string) @$_POST['ref'];
-				$body = (string) @$_POST['mail_body'];
+				$subject	= (string) @$_POST['mail_subject'];
+				$ref		= (string) @$_POST['ref'];
+				$body		= (string) @$_POST['mail_body'];
 
 				// decompose reply referrer
 				if (($ref0 = @$_GET['ref']))
 				{
 					$ref0 = @gzinflate(Ut::http64_decode($ref0)); // suppress ALL errors on parsing user supplied data!
+
 					if ($ref0 && strpos($ref0, '@@') !== false)
 					{
 						// TODO sanitize? someone can inject something into
@@ -183,8 +245,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					}
 				}
 
-				$tpl->u_pm_pm_href = $this->href();
-				$tpl->u_pm_pm_username = $user['user_name'];
+				$tpl->u_pm_pm_href		= $this->href();
+				$tpl->u_pm_pm_username	= $user['user_name'];
+
 				if ($ref)
 				{
 					$tpl->u_pm_pm_ref_ref = $ref;
@@ -194,10 +257,12 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				if ($allow_intercom)
 				{
 					$tpl->u_pm_pm_ic_subj = $subject;
+
 					if ($ref)
 					{
 						$tpl->u_pm_pm_ic_ref_href = $this->href('', '', $profile + ['#' => 'contacts']);
 					}
+
 					$tpl->u_pm_pm_ic_body = $body;
 				}
 				else
@@ -250,8 +315,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					// cache page_id for for has_access validation in link function
 					$this->page_id_cache[$page['tag']] = $page['page_id'];
 
-					$tpl->u_pages_li_created = $page['created'];
-					$tpl->u_pages_li_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
+					$tpl->u_pages_li_created	= $page['created'];
+					$tpl->u_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
 				}
 			}
 		}
@@ -292,8 +357,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						// cache page_id for for has_access validation in link function
 						$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 
-						$tpl->u_cmt_c_li_created = $comment['created'];
-						$tpl->u_cmt_c_li_link = $this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
+						$tpl->u_cmt_c_li_created	= $comment['created'];
+						$tpl->u_cmt_c_li_link		= $this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
 					}
 				}
 			}
@@ -370,10 +435,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 								$on_page	= '<span title="">&rarr; global';
 							}
 
-							$tpl->u_up_u_u2_li_t = $upload['uploaded_dt'];
-							$tpl->u_up_u_u2_li_link = $this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang);
-							$tpl->u_up_u_u2_li_onpage = $on_page;
-							$tpl->u_up_u_u2_li_descr = $file_description;
+							$tpl->u_up_u_u2_li_t		= $upload['uploaded_dt'];
+							$tpl->u_up_u_u2_li_link		= $this->link($path2.$upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang);
+							$tpl->u_up_u_u2_li_onpage	= $on_page;
+							$tpl->u_up_u_u2_li_descr	= $file_description;
 						}
 					}
 				}
@@ -396,10 +461,11 @@ else
 {
 	// defining WHERE and ORDER clauses
 	// $param is passed to the pagination links
-	$sql_where = '';
-	$sql_order = '';
-	$_user = Ut::strip_spaces((string) @$_GET['user']);
-	$params = [];
+	$sql_where	= '';
+	$sql_order	= '';
+	$_user		= Ut::strip_spaces((string) @$_GET['user']);
+	$params		= [];
+
 	if ($_user !== '')
 	{
 		// goto user profile directly if exact user name specified
@@ -409,6 +475,7 @@ else
 			$this->http->redirect($this->href('', '', $params));
 			// NEVER BEEN HERE
 		}
+
 		$params['user'] = $_user;
 		$sql_where = "AND u.user_name LIKE " . $this->db->q('%' . $_user . '%') . " ";
 	}
@@ -419,31 +486,31 @@ else
 		$params['profile'] = $_GET['profile'];
 	}
 
-	$_sort = @$_GET['sort'];
-	$sort_modes =
+	$_sort		= @$_GET['sort'];
+	$sort_modes	=
 	[
-		'name' => 'user_name',
-		'pages' => 'total_pages',
-		'comments' => 'total_comments',
-		'uploads' => 'total_uploads',
-		'revisions' => 'total_revisions',
-		'signup' => 'signup_time',
-		'last_visit' => 'last_visit'
+		'name'			=> 'user_name',
+		'pages'			=> 'total_pages',
+		'comments'		=> 'total_comments',
+		'uploads'		=> 'total_uploads',
+		'revisions'		=> 'total_revisions',
+		'signup'		=> 'signup_time',
+		'last_visit'	=> 'last_visit'
 	];
 	if (isset($sort_modes[$_sort]))
 	{
-		$_order = @$_GET['order'];
-		$order_modes =
+		$_order			= @$_GET['order'];
+		$order_modes	=
 		[
-			'asc' => 'ASC',
-			'desc' => 'DESC'
+			'asc'	=> 'ASC',
+			'desc'	=> 'DESC'
 		];
 		if (!isset($order_modes[$_order]))
 		{
 			$_order = 'asc';
 		}
-		$params['sort'] = $_sort;
-		$params['order'] = $_order;
+		$params['sort']		= $_sort;
+		$params['order']	= $_order;
 
 		$sql_order = 'ORDER BY u.' . $sort_modes[$_sort] . ' ' . $order_modes[$_order] . ' ';
 	}
@@ -500,6 +567,7 @@ else
 	{
 		$tpl->l_s_what = $this->_t($text);
 		$order = 'asc';
+
 		if (@$params['sort'] == $sort)
 		{
 			if ($params['order'] == 'asc')
@@ -521,6 +589,7 @@ else
 	$sort_link('pages', 'UsersPages');
 	$sort_link('comments', 'UsersComments');
 	$sort_link('revisions', 'UsersRevisions');
+
 	if ($logged_in)
 	{
 		$sort_link('uploads', 'UsersUploads');
@@ -539,9 +608,11 @@ else
 		{
 			$tpl->l_u_user = $user;
 			$tpl->l_u_link = $this->user_link($user['user_name'], $user['account_lang'], true, false);
+
 			if ($logged_in)
 			{
 				$tpl->l_u_reg_user = $user;
+
 				if ($user['hide_lastsession'])
 				{
 					$tpl->l_u_reg_sess_hidden = true;
