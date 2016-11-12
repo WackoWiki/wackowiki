@@ -105,7 +105,7 @@ if ($can_view)
 		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' ".
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
-				: '')." ".
+				: '') . " ".
 			($deleted != 1
 			? "AND f.deleted <> '1' "
 					: "").

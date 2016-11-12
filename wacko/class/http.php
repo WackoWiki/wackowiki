@@ -74,7 +74,7 @@ class Http
 			{
 				if (($contents = file_get_contents($this->file)))
 				{
-					return $contents."\n<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp)." -->\n";
+					return $contents."\n<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp) . " -->\n";
 				}
 			}
 		}
@@ -90,9 +90,9 @@ class Http
 
 		$this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "cache SET ".
-				"name	= ".$this->db->q($this->hash).", ".
-				"method	= ".$this->db->q($this->method).", ".
-				"query	= ".$this->db->q($this->query));
+				"name	= " . $this->db->q($this->hash) . ", ".
+				"method	= " . $this->db->q($this->method) . ", ".
+				"query	= " . $this->db->q($this->query));
 				// TIMESTAMP type is filled automatically by MySQL
 	}
 
@@ -108,7 +108,7 @@ class Http
 			$params	= $this->db->load_all(
 				"SELECT method, query ".
 				"FROM " . $this->db->table_prefix . "cache ".
-				"WHERE name = ".$this->db->q($hash));
+				"WHERE name = " . $this->db->q($hash));
 
 			// Ut::dbg('invalidate_page', $page);
 
@@ -129,7 +129,7 @@ class Http
 
 			$this->db->sql_query(
 				"DELETE FROM " . $this->db->table_prefix . "cache ".
-				"WHERE name = ".$this->db->q($hash));
+				"WHERE name = " . $this->db->q($hash));
 		}
 
 		return $n;
@@ -213,8 +213,8 @@ class Http
 
 				ini_set('default_charset', null);
 
-				header('Last-Modified: '.$gmt);
-				header('ETag: "'.$gmt.'"');
+				header('Last-Modified: ' . $gmt);
+				header('ETag: "' . $gmt . '"');
 				//header('Content-Type: text/xml');
 				//header('Content-Length: '.strlen($cached));
 				//header('Cache-Control: max-age=0');

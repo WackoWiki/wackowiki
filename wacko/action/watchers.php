@@ -44,7 +44,7 @@ if ($this->is_owner($page_id))
 
 		foreach ($watchers as $watcher)
 		{
-			echo '<li>' . $this->user_link($watcher['user_name'], '', true, false)."</li>\n";
+			echo '<li>' . $this->user_link($watcher['user_name'], '', true, false) . "</li>\n";
 		}
 
 		echo "</ol>\n";

@@ -52,20 +52,20 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		// check if name is WikiName style
 		if (!$this->is_wiki_name($user_name) && $this->db->disable_wikiname === false)
 		{
-			$error .= $this->_t('MustBeWikiName')." ";
+			$error .= $this->_t('MustBeWikiName') . " ";
 		}
 		else if (strlen($user_name) < $this->db->username_chars_min)
 		{
-			$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min)." ";
+			$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min) . " ";
 		}
 		else if (strlen($user_name) > $this->db->username_chars_max)
 		{
-			$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max)." ";
+			$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . " ";
 		}
 		// check if valid user name (and disallow '/')
 		else if (!preg_match('/^([' . $this->language['ALPHANUM_P'] . ']+)$/', $user_name) || preg_match('/\//', $user_name))
 		{
-			$error .= $this->_t('InvalidUserName')." ";
+			$error .= $this->_t('InvalidUserName') . " ";
 		}
 		// check if reserved word
 		else if (($result = $this->validate_reserved_words($user_name)))
@@ -83,22 +83,22 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		// no email given
 		else if ($email == '')
 		{
-			$error .= $this->_t('SpecifyEmail')." ";
+			$error .= $this->_t('SpecifyEmail') . " ";
 		}
 		// invalid email
 		else if (!$this->validate_email($email))
 		{
-			$error .= $this->_t('NotAEmail')." ";
+			$error .= $this->_t('NotAEmail') . " ";
 		}
 		// no email reuse allowed
 		else if (!$this->db->allow_email_reuse && $this->email_exists($email))
 		{
-			$error .= $this->_t('EmailTaken')." ";
+			$error .= $this->_t('EmailTaken') . " ";
 		}
 		// confirmed password mismatch
 		else if ($conf_password != $password)
 		{
-			$error .= $this->_t('PasswordsDidntMatch')." ";
+			$error .= $this->_t('PasswordsDidntMatch') . " ";
 		}
 		// password complexity validation
 		else if ($complexity)
@@ -133,12 +133,12 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 				"SET ".
 					"signup_time	= UTC_TIMESTAMP(), ".
 					"user_name		= " . $this->db->q($user_name) . ", ".
-					"account_lang	= ".$this->db->q($user_lang? $user_lang : $this->db->language).", ".
+					"account_lang	= " . $this->db->q($user_lang? $user_lang : $this->db->language) . ", ".
 					"email			= " . $this->db->q($email) . ", ".
-					"password		= ".$this->db->q($this->password_hash(['user_name' => $user_name], $password)).", ".
-					"account_status	= '".(int) $account_status."', ".
-					"enabled		= '".(int) $account_enabled."', ".
-					"user_ip		= ".$this->db->q($user_ip)." ");
+					"password		= " . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ", ".
+					"account_status	= '" . (int) $account_status."', ".
+					"enabled		= '" . (int) $account_enabled."', ".
+					"user_ip		= " . $this->db->q($user_ip) . " ");
 
 			// get new user_id
 			$_user_id = $this->db->load_single(
@@ -153,14 +153,14 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 				"INSERT INTO " . $this->db->table_prefix . "user_setting ".
 				"SET ".
 					"user_id			= '" . (int) $user_id . "', ".
-					"typografica		= '".(($this->db->default_typografica == 1) ? 1 : 0)."', ".
-					"user_lang			= ".$this->db->q(($user_lang ? $user_lang : $this->db->language)).", ".
-					"list_count			= '".(int) $this->db->list_count."', ".
-					"theme				= ".$this->db->q($this->db->theme).", ".
-					"notify_minor_edit	= '".(int) $this->db->notify_minor_edit."', ".
-					"notify_page		= '".(int) $this->db->notify_page."', ".
-					"notify_comment		= '".(int) $this->db->notify_comment."', ".
-					"sorting_comments	= '".(int) $this->db->sorting_comments."', ".
+					"typografica		= '" . (($this->db->default_typografica == 1) ? 1 : 0) . "', ".
+					"user_lang			= " . $this->db->q(($user_lang ? $user_lang : $this->db->language)) . ", ".
+					"list_count			= '" . (int) $this->db->list_count."', ".
+					"theme				= " . $this->db->q($this->db->theme) . ", ".
+					"notify_minor_edit	= '" . (int) $this->db->notify_minor_edit."', ".
+					"notify_page		= '" . (int) $this->db->notify_page."', ".
+					"notify_comment		= '" . (int) $this->db->notify_comment."', ".
+					"sorting_comments	= '" . (int) $this->db->sorting_comments."', ".
 					"send_watchmail		= '1'");
 
 			// INSERT user menu items

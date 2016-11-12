@@ -21,7 +21,7 @@ if (!function_exists('MyGroups'))
 
 			if (in_array ($user_name, $group_members))
 			{
-				echo $wacko->group_link($group_name, '', true, false).'<br />';
+				echo $wacko->group_link($group_name, '', true, false) . '<br />';
 
 				$my_groups_count++;
 			}
@@ -37,7 +37,7 @@ if ($user = $this->get_user())
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>' . $user['user_name'].": ".$this->_t('MyGroups')."</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>' . $user['user_name'] . ": " . $this->_t('MyGroups') . "</span></p>\n";
 	}
 
 	$groups_count = my_groups($this, $user['user_name'], $alias);

@@ -13,8 +13,8 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 	// count pages
 	if ($count_pages = $this->db->load_all(
 			"SELECT DISTINCT l.to_tag AS wanted_tag ".
-			"FROM ".$pref."page_link l ".
-				"LEFT JOIN ".$pref."page p ON ".
+			"FROM " . $pref."page_link l ".
+				"LEFT JOIN " . $pref."page p ON ".
 				"((l.to_tag = p.tag ".
 					"AND l.to_supertag = '') ".
 					"OR l.to_supertag = p.supertag) ".
@@ -32,8 +32,8 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 
 		$wanted = $this->db->load_all(
 				"SELECT DISTINCT l.to_tag AS wanted_tag ".
-				"FROM ".$pref."page_link l ".
-					"LEFT JOIN ".$pref."page p ON ".
+				"FROM " . $pref."page_link l ".
+					"LEFT JOIN " . $pref."page p ON ".
 					"((l.to_tag = p.tag ".
 						"AND l.to_supertag = '') ".
 						"OR l.to_supertag = p.supertag) ".
@@ -66,14 +66,14 @@ if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
 {
 	if ($pages = $this->load_pages_linking_to($linking_to, $root))
 	{
-		echo $this->_t('PagesLinkingTo')." ".$this->link($linking_to).":<br />\n";
+		echo $this->_t('PagesLinkingTo') . " " . $this->link($linking_to) . ":<br />\n";
 		echo "<ul>\n";
 
 		foreach ($pages as $page)
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				echo "<li>".$this->link('/' . $page['tag'], '', '/' . $page['tag'])."</li>\n";
+				echo "<li>" . $this->link('/' . $page['tag'], '', '/' . $page['tag']) . "</li>\n";
 			}
 		}
 
@@ -81,7 +81,7 @@ if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
 	}
 	else
 	{
-		echo "<em>".$this->_t('NoPageLinkingTo')." ".$this->link($linking_to).".</em>";
+		echo "<em>" . $this->_t('NoPageLinkingTo') . " " . $this->link($linking_to) . ".</em>";
 	}
 }
 else
@@ -123,7 +123,7 @@ else
 					// If no pages are referring to the WantedPage it means the referrers are all locked so don't show the link at all
 					if ($count > 0)
 					{
-						echo '<li>' . $this->link('/' . $page['wanted_tag']).' (<a href="' . $this->href('', '', 'linking_to=' . $page['wanted_tag']) . '">' . $count."</a>)</li>\n";
+						echo '<li>' . $this->link('/' . $page['wanted_tag']) . ' (<a href="' . $this->href('', '', 'linking_to=' . $page['wanted_tag']) . '">' . $count . "</a>)</li>\n";
 					}
 				}
 			}

@@ -37,12 +37,12 @@ function admin_content_files(&$engine, &$module)
 			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
 			"FROM {$engine->db->table_prefix}upload ".
 			"WHERE page_id = 0 ".
-				"AND upload_id = '".(int) $_GET['file_id']."' ".
+				"AND upload_id = '" . (int) $_GET['file_id'] . "' ".
 			"LIMIT 1");
 
 		if (count($file) > 0)
 		{
-			echo '<strong>' . $engine->_t('UploadRemoveConfirm').'</strong>';
+			echo '<strong>' . $engine->_t('UploadRemoveConfirm') . '</strong>';
 			echo $engine->form_open();
 ?>
 	<br />
@@ -73,32 +73,32 @@ function admin_content_files(&$engine, &$module)
 			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description ".
 			"FROM {$engine->db->table_prefix}upload ".
 			"WHERE page_id = 0 ".
-				"AND upload_id = '".(int) $_POST['file_id']."' ".
+				"AND upload_id = '" . (int) $_POST['file_id'] . "' ".
 			"LIMIT 1");
 
 		if (count($file) > 0)
 		{
 			// 2. remove from DB
 			$engine->db->sql_query(
-				"DELETE FROM ".$engine->db->table_prefix."upload ".
-				"WHERE upload_id = '". $file['upload_id']."'");
+				"DELETE FROM " . $engine->db->table_prefix."upload ".
+				"WHERE upload_id = '". $file['upload_id'] . "'");
 
 			// update user uploads count
 			$engine->db->sql_query(
 				"UPDATE {$engine->db->user_table} ".
 				"SET total_uploads = total_uploads - 1 ".
-				"WHERE user_id = '".$file['user_id']."' ".
+				"WHERE user_id = '" . $file['user_id'] . "' ".
 				"LIMIT 1");
 
 			echo '<br />';
-			$message =  '<em>' . $engine->_t('UploadRemovedFromDB').'</em><br />';
+			$message =  '<em>' . $engine->_t('UploadRemovedFromDB') . '</em><br />';
 
 			// 3. remove from FS
 			$real_filename = Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 
 			if (@unlink($real_filename))
 			{
-				$message .= '<em>' . $engine->_t('UploadRemovedFromFS').'</em>';
+				$message .= '<em>' . $engine->_t('UploadRemovedFromFS') . '</em>';
 				$engine->show_message($message);
 			}
 			else
@@ -186,19 +186,19 @@ function admin_content_files(&$engine, &$module)
 			// 5. insert line into DB
 			$engine->db->sql_query("INSERT INTO {$engine->db->table_prefix}upload SET ".
 				"page_id			= '".'0'."', ".
-				"file_name			= ".$engine->db->q($small_name).", ".
-				"upload_lang		= ".$engine->db->q($engine->db->language).", ".
-				"file_description	= ".$engine->db->q($description).", ".
-				"file_size			= '".(int) $file_size."',".
-				"picture_w			= '".(int) $size[0]."',".
-				"picture_h			= '".(int) $size[1]."',".
-				"file_ext			= ".$engine->db->q(substr($ext, 0, 10)).",".
-				"user_id			= '".(int) $user['user_id']."',".
+				"file_name			= " . $engine->db->q($small_name) . ", ".
+				"upload_lang		= " . $engine->db->q($engine->db->language) . ", ".
+				"file_description	= " . $engine->db->q($description) . ", ".
+				"file_size			= '" . (int) $file_size."',".
+				"picture_w			= '" . (int) $size[0] . "',".
+				"picture_h			= '" . (int) $size[1] . "',".
+				"file_ext			= " . $engine->db->q(substr($ext, 0, 10)) . ",".
+				"user_id			= '" . (int) $user['user_id'] . "',".
 				"uploaded_dt		= UTC_TIMESTAMP()");
 
 			// 4. output link to file
 			// !!!!! write after providing filelink syntax
-			echo '<strong>' . $engine->_t('UploadDone').'</strong>';
+			echo '<strong>' . $engine->_t('UploadDone') . '</strong>';
 
 			// log event
 			$engine->log(4, Ut::perc_replace($engine->_t('LogFileUploadedGlobal', SYSTEM_LANG), '', $small_name, $engine->binary_multiples($file_size, false, true, true)));
@@ -283,11 +283,11 @@ function admin_content_files(&$engine, &$module)
 
 	$count = $engine->db->load_all(
 			"SELECT f.upload_id ".
-			"FROM ".$engine->db->table_prefix."upload f ".
-				"INNER JOIN ".$engine->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '". ($global ? 0 : '')."' ".
+			"FROM " . $engine->db->table_prefix."upload f ".
+				"INNER JOIN " . $engine->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+			"WHERE f.page_id = '". ($global ? 0 : '') . "' ".
 	($owner
-	? "AND u.user_name = ".$engine->db->q($owner)." "
+	? "AND u.user_name = " . $engine->db->q($owner) . " "
 	: ''), true);
 
 	$count		= count($count);
@@ -298,7 +298,7 @@ function admin_content_files(&$engine, &$module)
 		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, file_description, uploaded_dt ".
 		"FROM {$engine->db->table_prefix}upload ".
 		"WHERE page_id = 0 ".
-		"ORDER BY ".$order_by." ".
+		"ORDER BY " . $order_by." ".
 		$pagination['limit']);
 
 	if (!is_array($files))
@@ -306,7 +306,7 @@ function admin_content_files(&$engine, &$module)
 		$files = [];
 	}
 
-	echo '<fieldset><legend>' . $engine->_t('UploadTitleGlobal').":</legend>\n";
+	echo '<fieldset><legend>' . $engine->_t('UploadTitleGlobal') . ":</legend>\n";
 
 	// display
 	$del	= $engine->_t('UploadRemove');

@@ -49,7 +49,7 @@ if ($registered
 			if (!isset($_POST['massrename']))
 			{
 
-				$message .= '<strong><code>' . $this->tag."</code></strong>\n";
+				$message .= '<strong><code>' . $this->tag . "</code></strong>\n";
 				$message .= '<ol>';
 
 				// Rename page
@@ -59,13 +59,13 @@ if ($registered
 				{
 					if ($this->remove_referrers($this->tag))
 					{
-						$message .= '<li>' . $this->_t('ReferrersRemoved')."</li>\n";
+						$message .= '<li>' . $this->_t('ReferrersRemoved') . "</li>\n";
 					}
 				}
 
 				if ($this->rename_page($this->tag, $new_name, $super_new_name))
 				{
-					$message .= '<li>' . $this->_t('PageRenamed')."</li>\n";
+					$message .= '<li>' . $this->_t('PageRenamed') . "</li>\n";
 				}
 
 				$this->clear_cache_wanted_page($new_name);
@@ -78,14 +78,14 @@ if ($registered
 
 					if ($this->save_page($this->tag, '', '{{redirect page="/' . $new_name . '"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.Ut::perc_replace($this->_t('RedirectCreated'), $this->link($this->tag))."</li>\n";
+						$message .= '<li>'.Ut::perc_replace($this->_t('RedirectCreated'), $this->link($this->tag)) . "</li>\n";
 					}
 
 					$this->clear_cache_wanted_page($this->tag);
 					$this->clear_cache_wanted_page($this->supertag);
 				}
 
-				$message .= '<li>' . $this->_t('NewNameOfPage').$this->link('/' . $new_name)."</li>\n";
+				$message .= '<li>' . $this->_t('NewNameOfPage').$this->link('/' . $new_name) . "</li>\n";
 
 				// log event
 				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $this->tag, $new_name).
@@ -96,7 +96,7 @@ if ($registered
 			else
 			{
 				//massrename
-				$message .= '<p><strong>' . $this->_t('MassRenaming').'</strong><p>';   //!!!
+				$message .= '<p><strong>' . $this->_t('MassRenaming') . '</strong><p>';   //!!!
 				$message .= recursive_move($this, $this->tag, $new_name);
 			}
 
@@ -126,13 +126,13 @@ if ($registered
 				echo 'checked="checked"';
 			};
 
-			echo ' /><label for="redirect"> ' . $this->_t('NeedRedirect').'</label>'; ?>
+			echo ' /><label for="redirect"> ' . $this->_t('NeedRedirect') . '</label>'; ?>
 <br />
 			<?php
 			if ($this->check_acl($user_name, $this->db->rename_globalacl))
 			{
 				echo '<input type="checkbox" id="massrename" name="massrename" />';
-				echo '<label for="massrename"> ' . $this->_t('MassRename').'</label>';
+				echo '<label for="massrename"> ' . $this->_t('MassRename') . '</label>';
 			}
 			?>
 <br />
@@ -171,11 +171,11 @@ function recursive_move(&$engine, $root, $new_root)
 	$_root		= $engine->translit($root);
 	$pages		= $engine->db->load_all(
 		"SELECT page_id, tag, supertag ".
-		"FROM ".$engine->db->table_prefix."page ".
+		"FROM " . $engine->db->table_prefix."page ".
 		"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " ".
 			" OR supertag = " . $engine->db->q($_root) . ") ".
 		($owner_id
-			? " AND owner_id ='".(string) $owner_id."'"
+			? " AND owner_id ='" . (string) $owner_id."'"
 			: "").
 		" AND comment_on_id = '0'");
 
@@ -183,10 +183,10 @@ function recursive_move(&$engine, $root, $new_root)
 
 	foreach ($pages as $page)
 	{
-		$message .= '<li><strong>' . $page['tag']."</strong>\n";
+		$message .= '<li><strong>' . $page['tag'] . "</strong>\n";
 
 		// $new_name = str_replace( $root, $new_root, $page['tag'] );
-		$new_name = preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
+		$new_name = preg_replace('/'.preg_quote($root, '/') . '/', preg_quote($new_root), $page['tag'], 1);
 
 		// FIXME: preg_quote is not universally suitable for escaping the replacement string. A single . will become \. and the preg_replace call will not undo the escaping.
 		$new_name = stripslashes($new_name);
@@ -216,18 +216,18 @@ function move(&$engine, $old_page, $new_name)
 
 		if (!preg_match('/^([\_\.\-' . $engine->language['ALPHANUM_P'] . ']+)$/', $new_name))
 		{
-			$message .= '<li>' . $engine->_t('InvalidWikiName')."</li>\n";
+			$message .= '<li>' . $engine->_t('InvalidWikiName') . "</li>\n";
 		}
 		// if ($old_page['supertag'] == $super_new_name)
 		else if ($old_page['tag'] == $new_name)
 		{
-			$message .= '<li>'.Ut::perc_replace($engine->_t('AlreadyNamed'), $engine->link($new_name))."</li>\n";
+			$message .= '<li>'.Ut::perc_replace($engine->_t('AlreadyNamed'), $engine->link($new_name)) . "</li>\n";
 		}
 		else
 		{
 			if ($old_page['supertag'] != $super_new_name && $page = $engine->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$message .= '<li>'.Ut::perc_replace($engine->_t('AlreadyExists'), $engine->link($new_name))."</li>\n";
+				$message .= '<li>'.Ut::perc_replace($engine->_t('AlreadyExists'), $engine->link($new_name)) . "</li>\n";
 			}
 			else
 			{
@@ -238,13 +238,13 @@ function move(&$engine, $old_page, $new_name)
 				{
 					if ($engine->remove_referrers($old_page['tag']))
 					{
-						$message .= '<li>' . $engine->_t('ReferrersRemoved')."</li>\n";
+						$message .= '<li>' . $engine->_t('ReferrersRemoved') . "</li>\n";
 					}
 				}
 
 				if ($engine->rename_page($old_page['tag'], $new_name, $super_new_name))
 				{
-					$message .= '<li>' . $engine->_t('PageRenamed')."</li>\n";
+					$message .= '<li>' . $engine->_t('PageRenamed') . "</li>\n";
 				}
 
 				$engine->clear_cache_wanted_page($new_name);
@@ -257,14 +257,14 @@ function move(&$engine, $old_page, $new_name)
 
 					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/' . $new_name . '"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link($old_page['tag']))."</li>\n";
+						$message .= '<li>'.Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link($old_page['tag'])) . "</li>\n";
 					}
 
 					$engine->clear_cache_wanted_page($old_page['tag']);
 					$engine->clear_cache_wanted_page($old_page['supertag']);
 				}
 
-				$message .= '<li>' . $engine->_t('NewNameOfPage').$engine->link('/' . $new_name)."</li>\n";
+				$message .= '<li>' . $engine->_t('NewNameOfPage').$engine->link('/' . $new_name) . "</li>\n";
 
 				// log event
 				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', SYSTEM_LANG), $old_page['tag'], $new_name).

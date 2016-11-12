@@ -27,37 +27,37 @@ if (@$_POST['_action'] === 'purge_data')
 	{
 		$this->remove_comments($this->tag);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllComments', SYSTEM_LANG), $title));
-		$message .= "<li>".$this->_t('CommentsPurged')."</li>\n";
+		$message .= "<li>" . $this->_t('CommentsPurged') . "</li>\n";
 	}
 
 	if (isset($_POST['files']))
 	{
 		$this->remove_files($this->tag);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllFiles', SYSTEM_LANG), $title));
-		$message .= "<li>".$this->_t('FilesPurged')."</li>\n";
+		$message .= "<li>" . $this->_t('FilesPurged') . "</li>\n";
 	}
 
 	if (isset($_POST['revisions']) && $this->is_admin())
 	{
 		$this->remove_revisions($this->tag);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllRevisions', SYSTEM_LANG), $title));
-		$message .= "<li>".$this->_t('RevisionsPurged')."</li>\n";
+		$message .= "<li>" . $this->_t('RevisionsPurged') . "</li>\n";
 	}
 
 	// purge related page cache
 	if ($this->http->invalidate_page($this->supertag))
 	{
-		$message .= '<li>' . $this->_t('PageCachePurged')."</li>\n";
+		$message .= '<li>' . $this->_t('PageCachePurged') . "</li>\n";
 	}
 
 	$message .= '</em></ol><br />';
-	$message .= $this->_t('ThisActionHavenotUndo')."\n";
+	$message .= $this->_t('ThisActionHavenotUndo') . "\n";
 
 	$this->show_message($message, 'success');
 }
 else
 {
-	echo '<div class="warning">' . $this->_t('ReallyPurge').'</div><br />';
+	echo '<div class="warning">' . $this->_t('ReallyPurge') . '</div><br />';
 	echo $this->form_open('purge_data', ['page_method' => 'purge']);
 ?>
 

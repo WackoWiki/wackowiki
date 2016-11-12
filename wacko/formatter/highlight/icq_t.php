@@ -34,8 +34,8 @@ $c=0;
 
 foreach($names as $k => $n)
 {
-	$text = str_replace( "<tr style='".$k."'>",
-						"<tr style='background:".$colors[$c++]."'>",
+	$text = str_replace( "<tr style='" . $k."'>",
+						"<tr style='background:" . $colors[$c++] . "'>",
 	$text );
 }
 
@@ -43,7 +43,7 @@ $people = '';
 
 foreach($names as $name => $v)
 {
-	$people .= "<li>".$name."</li>";
+	$people .= "<li>" . $name . "</li>";
 }
 
 $text = str_replace($endstr, '', $text);

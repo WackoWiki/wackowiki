@@ -46,14 +46,14 @@ function admin_maint_transliterate(&$engine, &$module)
 			if ($pages = $engine->db->load_all(
 				"SELECT to_tag
 				FROM {$engine->db->table_prefix}link
-				LIMIT ".($i * $limit).", $limit"))
+				LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				foreach ($pages as $page)
 				{
 					$engine->db->sql_query(
 						"UPDATE {$engine->db->table_prefix}page_link SET ".
-							"to_supertag = ".$engine->db->q($engine->translit($page['to_tag']))." ".
-						"WHERE to_tag = ".$engine->db->q($page['to_tag'])." ");
+							"to_supertag = " . $engine->db->q($engine->translit($page['to_tag'])) . " ".
+						"WHERE to_tag = " . $engine->db->q($page['to_tag']) . " ");
 				}
 
 				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i='.(++$i))));
@@ -80,14 +80,14 @@ function admin_maint_transliterate(&$engine, &$module)
 			if ($pages = $engine->db->load_all(
 				"SELECT page_id, tag
 				FROM {$engine->db->table_prefix}page
-				LIMIT ".($i * $limit).", $limit"))
+				LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				foreach ($pages as $page)
 				{
 					$engine->db->sql_query(
 						"UPDATE {$engine->db->table_prefix}page SET ".
-							"supertag = ".$engine->db->q($engine->translit($page['tag']))." ".
-						"WHERE page_id = '".$page['page_id'])."'";
+							"supertag = " . $engine->db->q($engine->translit($page['tag'])) . " ".
+						"WHERE page_id = '" . $page['page_id']) . "'";
 				}
 
 				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i='.(++$i))));
@@ -114,14 +114,14 @@ function admin_maint_transliterate(&$engine, &$module)
 			if ($pages = $engine->db->load_all(
 					"SELECT revision_id, tag
 					FROM {$engine->db->table_prefix}revision
-					LIMIT ".($i * $limit).", $limit"))
+					LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				foreach ($pages as $page)
 				{
 					$engine->db->sql_query(
 						"UPDATE {$engine->db->table_prefix}revision SET ".
-							"supertag = ".$engine->db->q($engine->translit($page['tag']))." ".
-						"WHERE revision_id = '".$page['revision_id'])."'";
+							"supertag = " . $engine->db->q($engine->translit($page['tag'])) . " ".
+						"WHERE revision_id = '" . $page['revision_id']) . "'";
 				}
 
 				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i='.(++$i))));

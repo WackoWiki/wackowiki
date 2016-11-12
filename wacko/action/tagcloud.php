@@ -87,7 +87,7 @@ $sql = "SELECT
 				? "AND ( p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) "
 				: '' ).
 			($owner
-				? "AND u.user_name = ".$this->db->q($owner)." "
+				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '' ).
 		"GROUP BY
 			c.category
@@ -107,7 +107,7 @@ if ($tags)
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('TagCloud').":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('TagCloud') . ":</span></p>\n";
 	}
 
 	print_tag_cloud($this, $this->cloud);

@@ -31,7 +31,7 @@ header('Content-Type: text/html; charset=' . $this->get_charset());
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 	}
 	?>
-	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : ''); ?></title>
+	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . " : " . (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : ''); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
 // JS files.
@@ -42,9 +42,9 @@ header('Content-Type: text/html; charset=' . $this->get_charset());
 // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
 if ($this->method == 'edit')
 {
-	echo "  <script src=\"".$this->db->base_url."js/protoedit.js\"></script>\n";
-	echo "  <script src=\"".$this->db->base_url."js/wikiedit.js\"></script>\n";
-	echo "  <script src=\"".$this->db->base_url."js/autocomplete.js\"></script>\n";
+	echo "  <script src=\"" . $this->db->base_url."js/protoedit.js\"></script>\n";
+	echo "  <script src=\"" . $this->db->base_url."js/wikiedit.js\"></script>\n";
+	echo "  <script src=\"" . $this->db->base_url."js/autocomplete.js\"></script>\n";
 }
 ?>
 	<script src="<?php echo $this->db->base_url;?>js/captcha.js"></script>
@@ -83,7 +83,7 @@ else if($this->has_access('write'))
 			<?php echo $this->form_close(); ?>
 
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
-			<strong><?php echo ($this->page['tag'] == $this->db->root_page ? $this->db->site_name : "<a href=\"".$this->db->base_url."\">".$this->db->site_name."</a>") ?>:</strong>
+			<strong><?php echo ($this->page['tag'] == $this->db->root_page ? $this->db->site_name : "<a href=\"" . $this->db->base_url."\">" . $this->db->site_name . "</a>") ?>:</strong>
 			<?php echo $this->get_page_path(); ?>
 			</div>
 		<div id="quicklinks">
@@ -93,7 +93,7 @@ else if($this->has_access('write'))
 					echo '<div id="menu-user">';
 					echo "<ol>\n";
 					// main page
-					#echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
+					#echo "<li>" . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
 
 						// menu
 						if ($menu = $this->get_menu())
@@ -111,7 +111,7 @@ else if($this->has_access('write'))
 									echo '<li>';
 								}
 
-								echo $formatted_menu."</li>\n";
+								echo $formatted_menu . "</li>\n";
 							}
 						}
 

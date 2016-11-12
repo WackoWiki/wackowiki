@@ -24,7 +24,7 @@ $user = '';
 
 if ($user = $this->get_user())
 {
-	echo 'id: ' . $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()).' &nbsp; <a href="' . $this->href('', $this->_t('AccountLink')) . '" title="' . $this->_t('AccountTip') . '">' . $this->_t('AccountText').'</a> &nbsp; <a href="' . $this->href('', $this->_t('LoginPage')) . '" title="' . $this->_t('SessionTip') . '">' . $this->_t('Session').'</a> &nbsp; <a onclick="return confirm(\'' . $this->_t('LogoutAreYouSure').'\');" href="' . $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag)) . '" title="' . $this->_t('LogoutButton') . '">' . $this->_t('LogoutLink').'</a><br />';
+	echo 'id: ' . $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) . ' &nbsp; <a href="' . $this->href('', $this->_t('AccountLink')) . '" title="' . $this->_t('AccountTip') . '">' . $this->_t('AccountText') . '</a> &nbsp; <a href="' . $this->href('', $this->_t('LoginPage')) . '" title="' . $this->_t('SessionTip') . '">' . $this->_t('Session') . '</a> &nbsp; <a onclick="return confirm(\'' . $this->_t('LogoutAreYouSure') . '\');" href="' . $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag)) . '" title="' . $this->_t('LogoutButton') . '">' . $this->_t('LogoutLink') . '</a><br />';
 }
 else
 {
@@ -34,7 +34,7 @@ else
 }
 echo "\n";
 ?>
-							<?php echo $this->_t('CurrentTime').' '. $this->get_time_formatted( time() ); ?>
+							<?php echo $this->_t('CurrentTime') . ' '. $this->get_time_formatted( time() ); ?>
 						</div>
 					</td>
 				</tr>
@@ -74,7 +74,7 @@ echo "\n";
 				echo '<span>';
 			}
 
-			echo $formatted_menu."</span>\n";
+			echo $formatted_menu . "</span>\n";
 		}
 	}
 
@@ -126,7 +126,7 @@ echo "\n";
 		{
 			if ($owner = $this->get_page_owner())
 			{
-				echo 'By topic: ' . $this->user_link($owner, $lang = '', true, false).', ';
+				echo 'By topic: ' . $this->user_link($owner, $lang = '', true, false) . ', ';
 			}
 
 			if ($this->page['created'])
@@ -138,22 +138,22 @@ echo "\n";
 		{
 			if ($owner = $this->get_page_owner())
 			{
-				echo $this->_t('Owner').': ' . $this->user_link($owner, $lang = '', true, false).' ';
+				echo $this->_t('Owner') . ': ' . $this->user_link($owner, $lang = '', true, false) . ' ';
 			}
 			else
 			{
 				echo ( substr($this->tag, 0, strlen($this->db->news_cluster)) == $this->db->news_cluster
-					? $this->_t('Nobody').' '
-					: '<a href="' . $this->href('claim') . '">' . $this->_t('TakeOwnership').'</a> '
+					? $this->_t('Nobody') . ' '
+					: '<a href="' . $this->href('claim') . '">' . $this->_t('TakeOwnership') . '</a> '
 				);
 			}
 
 			if ($this->page['created'])
 			{
-				echo '(' . $this->_t('Created').' ' . $this->get_time_formatted($this->page['created']).'), ';
+				echo '(' . $this->_t('Created') . ' ' . $this->get_time_formatted($this->page['created']) . '), ';
 			}
 
-			echo $this->_t('Modified').' ' . $this->get_time_formatted($this->page['modified']).' (' . $this->_t('By').': ' . $this->user_link($this->page['user_name'], $lang = '', true, false) .')';
+			echo $this->_t('Modified') . ' ' . $this->get_time_formatted($this->page['modified']) . ' (' . $this->_t('By') . ': ' . $this->user_link($this->page['user_name'], $lang = '', true, false) .')';
 		}
 	}
 	echo "\n";
@@ -185,12 +185,12 @@ echo "\n";
 	if (isset($this->categories))
 	{
 		$i = '';
-		echo '<div style="white-space:normal;">' . $this->_t('Categories').': ';
+		echo '<div style="white-space:normal;">' . $this->_t('Categories') . ': ';
 
 		foreach ($this->categories as $word)
 		{
 			if ($i++ > 0) echo ", ";
-			echo '<a href="' . $this->href('', $this->_t('TextSearchPage'), 'filter=pages&amp;keywords='.rawurlencode($word)) . '">'.strtolower($word).'</a>';
+			echo '<a href="' . $this->href('', $this->_t('TextSearchPage'), 'filter=pages&amp;keywords='.rawurlencode($word)) . '">'.strtolower($word) . '</a>';
 		}
 
 		echo '</div>';
@@ -229,7 +229,7 @@ echo "\n";
 														echo '<li>';
 													}
 
-													echo $formatted_menu."</li>\n";
+													echo $formatted_menu . "</li>\n";
 												}
 											}
 
@@ -238,7 +238,7 @@ echo "\n";
 										?>
 										</div>
 <?php
-	if (preg_match('/^' . $this->db->news_cluster.str_replace('/.+', '\/.+?', $this->db->news_levels).'/', $this->tag))
+	if (preg_match('/^' . $this->db->news_cluster.str_replace('/.+', '\/.+?', $this->db->news_levels) . '/', $this->tag))
 	{
 		$this->db->hide_index = 1;
 	}
@@ -311,11 +311,11 @@ echo "\n";
 
 		if ($active)
 		{
-			$tab = "<div class=\"$method\"><img src=\"".$engine->db->theme_url."images/spacer.png\" alt=\"$title\" /></div>\n";
+			$tab = "<div class=\"$method\"><img src=\"" . $engine->db->theme_url."images/spacer.png\" alt=\"$title\" /></div>\n";
 		}
 		else
 		{
-			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"".$engine->db->theme_url."images/spacer.png\" alt=\"$title\" /></a></div>\n";
+			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"" . $engine->db->theme_url."images/spacer.png\" alt=\"$title\" /></a></div>\n";
 		}
 
 		return $tab;

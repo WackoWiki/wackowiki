@@ -137,7 +137,7 @@ function admin_config_pages(&$engine, &$module)
 					{
 						if (strlen($license) > 50)
 						{
-							$license = substr($license, 0, 45 ).'...';
+							$license = substr($license, 0, 45 ) . '...';
 						}
 
 						echo '<option value="' . $offset . '" '.

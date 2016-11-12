@@ -182,10 +182,10 @@ if ($can_view)
 		"SELECT f.upload_id ".
 		"FROM " . $this->db->table_prefix . "upload f ".
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
-		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
+		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' ".
 			"AND f.picture_w <> '0' ".
 		($owner
-			? "AND u.user_name = ".$this->db->q($owner)." "
+			? "AND u.user_name = " . $this->db->q($owner) . " "
 			: ''), true);
 
 	$count		= count($count);
@@ -196,12 +196,12 @@ if ($can_view)
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits ".
 		"FROM " . $this->db->table_prefix . "upload f ".
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
-		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id'])."' ".
+		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' ".
 			"AND f.picture_w <> '0' ".
 		($owner
-			? "AND u.user_name = ".$this->db->q($owner)." "
-			: '')." ".
-		"ORDER BY f.".$order_by." ".
+			? "AND u.user_name = " . $this->db->q($owner) . " "
+			: '') . " ".
+		"ORDER BY f." . $order_by." ".
 		"LIMIT {$pagination['offset']}, {$limit}");
 
 	if (!is_array($files))
@@ -219,7 +219,7 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>'.htmlspecialchars($title, null, '').":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>'.htmlspecialchars($title, null, '') . ":</span></p>\n";
 	}
 
 	if (!isset($_GET['photo']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
@@ -263,7 +263,7 @@ if ($can_view)
 				$url			= $this->href('file', $source_page_tag, 'get=' . $file_name);
 			}
 
-			$img	= '<img src="' . $this->db->base_url.$tnb_path . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '').' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '').'/>';
+			$img	= '<img src="' . $this->db->base_url.$tnb_path . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '/>';
 
 			$caption = '<br><figcaption>'.
 					'<span>' . $file_description.'</span> '.'<br />'.
@@ -292,17 +292,17 @@ if ($can_view)
 
 				if (!$toblank)
 				{
-					echo '<a href="' . $this->href('', $this->tag, 'photo=' . $linkto.'&amp;token=' . $param_token.'#' . $param_token) . '">' . $img."</a>\n";
+					echo '<a href="' . $this->href('', $this->tag, 'photo=' . $linkto.'&amp;token=' . $param_token.'#' . $param_token) . '">' . $img . "</a>\n";
 				}
 				else
 				{
 					if ($toblank == 'new')
 					{
-						echo '<a href="' . $url . '" class="fancybox-thumb" '.($group_id ? 'rel="' . $group_id . '"' : '').' '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '').'>' . $img."</a>\n";
+						echo '<a href="' . $url . '" class="fancybox-thumb" '.($group_id ? 'rel="' . $group_id . '"' : '') . ' '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
 					}
 					else
 					{
-						echo '<a href="' . $url . '">' . $img."</a>\n";
+						echo '<a href="' . $url . '">' . $img . "</a>\n";
 					}
 				}
 
@@ -411,15 +411,15 @@ if ($can_view)
 					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the upload table, remember we can have many derived versions from the original image
 					/* $this->db->sql_query(
 						"INSERT INTO " . $this->db->table_prefix . "upload SET ".
-						"user_id			= '".(int) $file['user_id']."', ".
-						"page_id			= '".(int) $file_page['page_id']."', ".
-						"file_name			= ".$this->db->q($small_id.$file_name).", ".
-						"file_description	= ".$this->db->q($file['file_description']).", ".
-						"uploaded_dt		= ".$this->db->q(date("Y-m-d H:i:s")).", ".
-						"file_size			= '".(int)sizeof($newfilename)."', ".
-						"picture_w			= '".(int) $diw."', ".
-						"picture_h			= '".(int) $height."', ".
-						"file_ext			= ".$this->db->q($file_page['file_ext'])." "); */
+						"user_id			= '" . (int) $file['user_id'] . "', ".
+						"page_id			= '" . (int) $file_page['page_id'] . "', ".
+						"file_name			= " . $this->db->q($small_id.$file_name) . ", ".
+						"file_description	= " . $this->db->q($file['file_description']) . ", ".
+						"uploaded_dt		= " . $this->db->q(date("Y-m-d H:i:s")) . ", ".
+						"file_size			= '" . (int)sizeof($newfilename) . "', ".
+						"picture_w			= '" . (int) $diw."', ".
+						"picture_h			= '" . (int) $height."', ".
+						"file_ext			= " . $this->db->q($file_page['file_ext']) . " "); */
 
 					if ($table)
 					{
@@ -439,17 +439,17 @@ if ($can_view)
 
 					if (!$toblank)
 					{
-						echo '<a href="' . $this->href('', $this->tag, 'photo=' . $linkto.'&amp;token=' . $param_token) . '">' . $img."</a>\n";
+						echo '<a href="' . $this->href('', $this->tag, 'photo=' . $linkto.'&amp;token=' . $param_token) . '">' . $img . "</a>\n";
 					}
 					else
 					{
 						if ($toblank == 'new')
 						{
-							echo '<a href="' . $url . '" class="fancybox-thumb" '.($group_id ? 'rel="lightbox[' . $group_id.']"' : 'rel="lightbox"').' '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '').'>' . $img."</a>\n";
+							echo '<a href="' . $url . '" class="fancybox-thumb" '.($group_id ? 'rel="lightbox[' . $group_id.']"' : 'rel="lightbox"') . ' '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
 						}
 						else
 						{
-							echo '<a href="' . $url . '">' . $img."</a>\n";
+							echo '<a href="' . $url . '">' . $img . "</a>\n";
 						}
 
 						if (!$nodesc)
@@ -535,7 +535,7 @@ if ($can_view)
 }
 else
 {
-	echo '<em>' . $this->_t('ActionDenied').'</em>';
+	echo '<em>' . $this->_t('ActionDenied') . '</em>';
 }
 
 ?>

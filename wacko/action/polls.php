@@ -103,7 +103,7 @@ else
 
 		foreach ($polls as $poll)
 		{
-			echo ($align == 'v' ? '<tr>' : '').'<td>';
+			echo ($align == 'v' ? '<tr>' : '') . '<td>';
 
 			if ($results == 1 || $vote == $poll['poll_id'] || $polls_obj->poll_is_voted($poll['poll_id']))
 			{

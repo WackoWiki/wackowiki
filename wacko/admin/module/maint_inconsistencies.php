@@ -336,14 +336,14 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			// 1.3. upload without user
 			$admin_id = $engine->db->load_single(
 				"SELECT user_id
-				FROM ".$engine->db->table_prefix."user
+				FROM " . $engine->db->table_prefix."user
 				WHERE user_name = " . $engine->db->q($engine->db->admin_name) . "
 				LIMIT 1");
 
 			$upload = $engine->db->sql_query(
 				"UPDATE {$engine->db->table_prefix}upload ul ".
 					"LEFT JOIN {$engine->db->table_prefix}user u ON (ul.user_id = u.user_id) ".
-				"SET ul.user_id		= '".(int) $admin_id['user_id']."' ".
+				"SET ul.user_id		= '" . (int) $admin_id['user_id'] . "' ".
 				"WHERE
 					u.user_id IS NULL");
 

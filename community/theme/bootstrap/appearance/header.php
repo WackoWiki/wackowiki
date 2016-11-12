@@ -32,7 +32,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 
 <span class="navbar-brand">
-<?php echo ($this->page['tag'] == $this->db->root_page ? $this->db->site_name : "<a href=\"".$this->db->base_url."\">".$this->db->site_name."</a>") ?>:
+<?php echo ($this->page['tag'] == $this->db->root_page ? $this->db->site_name : "<a href=\"" . $this->db->base_url."\">" . $this->db->site_name . "</a>") ?>:
 
 
 <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?></span>
@@ -90,7 +90,7 @@ echo $this->form_close();
 	echo '<ul class="nav navbar-nav">';
 	// echo "<ol>\n"; //
 	// main page
-	#echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
+	#echo "<li>" . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
 
 	// menu
 	if ($menu = $this->get_menu())
@@ -108,7 +108,7 @@ echo $this->form_close();
 				echo '<li>';
 			}
 
-			echo $formatted_menu."</li>\n";
+			echo $formatted_menu . "</li>\n";
 		}
 	}
 
@@ -179,11 +179,11 @@ echo $this->form_close();
 					$_title = $title;
 				}
 
-				$tab = "<li class=\"$method active\"><span><img src=\"".$engine->db->theme_url."icon/$_image\" alt=\"$title\" />"." ".$_title."</span></li>\n";
+				$tab = "<li class=\"$method active\"><span><img src=\"" . $engine->db->theme_url."icon/$_image\" alt=\"$title\" />"." " . $_title . "</span></li>\n";
 			}
 			else
 			{
-				$tab = "<li class=\"$method active\"><span>"." ".$title."</span></li>\n";
+				$tab = "<li class=\"$method active\"><span>"." " . $title . "</span></li>\n";
 			}
 		}
 		else
@@ -197,7 +197,7 @@ echo $this->form_close();
 					$_title = ' ' . $title;
 				}
 
-				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->db->theme_url."icon/$_image\" alt=\"$title\" />".$_title."</a></li>\n";
+				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"" . $engine->db->theme_url."icon/$_image\" alt=\"$title\" />" . $_title . "</a></li>\n";
 			}
 			else
 			{
@@ -253,12 +253,12 @@ echo $this->form_close();
 	// show more tab
 
 	// display more icon and text
-	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->db->theme_url."icon/more.png\" title=\"".$this->_t('PageHandlerMoreTip')."\" alt=\"".$this->_t('PageHandlerMoreTip')."\" /> ".$this->_t('PageHandlerMoreTip')."</a> \n";
+	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"" . $this->db->theme_url."icon/more.png\" title=\"" . $this->_t('PageHandlerMoreTip') . "\" alt=\"" . $this->_t('PageHandlerMoreTip') . "\" /> " . $this->_t('PageHandlerMoreTip') . "</a> \n";
 	// only display 'more' text that shows handler list on hover
 
 	if ($this->has_access('read'))
 	{
-		echo '<li class="dropdown"><a href="#" id="more">' . $this->_t('PageHandlerMoreTip').'<span class="dropdown_arrow">&#9660;</span></a>'." \n";
+		echo '<li class="dropdown"><a href="#" id="more">' . $this->_t('PageHandlerMoreTip') . '<span class="dropdown_arrow">&#9660;</span></a>'." \n";
 		echo '<ul class="dropdown_menu">'."\n";
 
 		// print tab

@@ -15,7 +15,7 @@ if ($file_id)
 	{
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('FileUsage').': '.''."</span></p>\n";
+			echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('FileUsage') . ': '.'' . "</span></p>\n";
 		}
 
 		foreach ($pages as $page)
@@ -44,7 +44,7 @@ if ($file_id)
 
 					if (strpos($_link, 'span class="missingpage"') === false)
 					{
-						echo ($_link."<br />\n");
+						echo ($_link . "<br />\n");
 					}
 				}
 			}

@@ -111,7 +111,7 @@ function admin_user_approve(&$engine, &$module)
 		$user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->db->table_prefix}user u ".
-				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
+				"LEFT JOIN " . $engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE u.user_id = '" . (int) $user_id . "' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1");
@@ -123,7 +123,7 @@ function admin_user_approve(&$engine, &$module)
 		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
 			"FROM {$engine->db->table_prefix}user u ".
-				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
+				"LEFT JOIN " . $engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE u.user_id = '" . (int) $user_id . "' ".
 				"AND u.account_type = '0' ".
 			"LIMIT 1");
@@ -170,7 +170,7 @@ function admin_user_approve(&$engine, &$module)
 					$user = $engine->db->load_single(
 						"SELECT u.user_name ".
 						"FROM {$engine->db->table_prefix}user u ".
-						"WHERE u.user_id = '".$user_id."' ".
+						"WHERE u.user_id = '" . $user_id."' ".
 							"AND u.account_type = '0' ".
 						"LIMIT 1");
 
@@ -209,7 +209,7 @@ function admin_user_approve(&$engine, &$module)
 		// filter by account_status
 		if (isset($_GET['account_status']))
 		{
-			$where	= "WHERE u.account_status = '".(int) $_GET['account_status']."' ";
+			$where	= "WHERE u.account_status = '" . (int) $_GET['account_status'] . "' ";
 		}
 		else
 		{
@@ -235,7 +235,7 @@ function admin_user_approve(&$engine, &$module)
 		// filter by lang
 		if (isset($_GET['user_lang']))
 		{
-			$where			= "WHERE p.user_lang = ".$engine->db->q($_GET['user_lang'])." ";
+			$where			= "WHERE p.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
 		}
 
 		// entries to display
@@ -247,10 +247,10 @@ function admin_user_approve(&$engine, &$module)
 		$count = $engine->db->load_single(
 			"SELECT COUNT(user_name) AS n ".
 			"FROM {$engine->db->table_prefix}user u ".
-				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
+				"LEFT JOIN " . $engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			( $where ? $where : '' ).
 			( $where ? 'AND ' : "WHERE ").
-				"u.user_name <> '".$engine->db->admin_name."' "
+				"u.user_name <> '" . $engine->db->admin_name."' "
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
@@ -259,20 +259,20 @@ function admin_user_approve(&$engine, &$module)
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang ".
 			"FROM {$engine->db->table_prefix}user u ".
-				"LEFT JOIN ".$engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
+				"LEFT JOIN " . $engine->db->table_prefix."user_setting s ON (u.user_id = s.user_id) ".
 			( $where ? $where : '' ).
 			( $where ? 'AND ' : "WHERE ").
 				"u.account_type = '0' ".
-				"AND u.user_name <> '".$engine->db->admin_name."' ".
+				"AND u.user_name <> '" . $engine->db->admin_name."' ".
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			$pagination['limit']);
 
 		// count records by status
 		$account_stati =  $engine->db->load_all(
 				"SELECT account_status, count(account_status) AS n
-				FROM ".$engine->db->table_prefix."user
+				FROM " . $engine->db->table_prefix."user
 				WHERE account_type = '0'
-					AND user_name <> '".$engine->db->admin_name."'
+					AND user_name <> '" . $engine->db->admin_name."'
 				GROUP BY account_status");
 
 		// set default status count
@@ -291,20 +291,20 @@ function admin_user_approve(&$engine, &$module)
 		// user filter form
 		$search =			$engine->form_open('search_user', ['form_method' => 'get']).
 							'<input type="hidden" name="mode" value="' . $module['mode'] . '" />'. // required to pass mode module via GET
-							$engine->_t('UsersSearch').': </td><td>'.
+							$engine->_t('UsersSearch') . ': </td><td>'.
 							'<input type="search" name="user" maxchars="40" size="30" value="' . (isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') . '" /> '.
 							'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '" /> '.
 							$engine->form_close();
 		$filter_status =	'<p class="right">'.
 							(isset($_GET['account_status']) && $_GET['account_status'] == 1 || !isset($_GET['account_status'])
-								? '<span class="active">' . $engine->_t('Pending').'</span>'
-								: '<a href="' . $engine->href().'&amp;account_status=1">' . $engine->_t('Pending').'</a>' ).' (' . $status_count['1'] . ')'.
+								? '<span class="active">' . $engine->_t('Pending') . '</span>'
+								: '<a href="' . $engine->href() . '&amp;account_status=1">' . $engine->_t('Pending') . '</a>' ) . ' (' . $status_count['1'] . ')'.
 							(isset($_GET['account_status']) && $_GET['account_status'] == 0
-								? ' | <span class="active">' . $engine->_t('Approved').'</span>'
-								: ' | <a href="' . $engine->href().'&amp;account_status=0">' . $engine->_t('Approved').'</a>').' (' . $status_count['0'] . ')'.
+								? ' | <span class="active">' . $engine->_t('Approved') . '</span>'
+								: ' | <a href="' . $engine->href() . '&amp;account_status=0">' . $engine->_t('Approved') . '</a>') . ' (' . $status_count['0'] . ')'.
 							(isset($_GET['account_status']) && $_GET['account_status'] == 2
-								? ' | <span class="active">' . $engine->_t('Denied').'</span>'
-								: ' | <a href="' . $engine->href().'&amp;account_status=2">' . $engine->_t('Denied').'</a>').' (' . $status_count['2'] . ')'.
+								? ' | <span class="active">' . $engine->_t('Denied') . '</span>'
+								: ' | <a href="' . $engine->href() . '&amp;account_status=2">' . $engine->_t('Denied') . '</a>') . ' (' . $status_count['2'] . ')'.
 							'</p>';
 
 		echo '<span class="right">' . $search.'</span><br />';
@@ -324,7 +324,7 @@ function admin_user_approve(&$engine, &$module)
 								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '" /> '.
 								($set
 										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '" /> '.
-										'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
+										'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set) . '</small>'
 										: ''
 								);
 
@@ -341,11 +341,11 @@ function admin_user_approve(&$engine, &$module)
 				<!--<th style="width:5px;"></th>-->
 				<!--<th style="width:5px;"></th>-->
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order=' . $orderuser; ?>"><?php echo $engine->_t('UserName'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $orderuser; ?>"><?php echo $engine->_t('UserName'); ?></a></th>
 				<th><?php echo $engine->_t('UserEmail'); ?></th>
 				<th><?php echo $engine->_t('UserIP'); ?></th>
 				<th style="width:20px;"><?php echo $engine->_t('UserLanguage'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order=' . $signup_time; ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $signup_time; ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
 				<th style="width:20px;"><?php echo $engine->_t('UserEnabled'); ?></th>
 				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
 				<th style="width:200px;"><?php echo $engine->_t('UserActions'); ?></th>
@@ -358,7 +358,7 @@ function admin_user_approve(&$engine, &$module)
 				echo '<tr class="lined">'."\n".
 						'<input type="hidden" name="user_id" value="' . $row['user_id'] . '" />'.
 						#'<td style="vertical-align:middle; width:10px;" class="label">'.
-						#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ).'/>'.
+						#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ) . '/>'.
 						#'</td>'.
 						#'<td>'.
 						#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '" />'.
@@ -367,16 +367,16 @@ function admin_user_approve(&$engine, &$module)
 						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_users'.'&amp;user_id=' . $row['user_id'] . '">' . $row['user_name'] . '</a></strong></td>'.
 						'<td>' . $row['email'] . '</td>'.
 						'<td>' . $row['user_ip'] . '</td>'.
-						'<td><small><a href="' . $engine->href().'&amp;user_lang=' . $row['user_lang'] . '">' . $row['user_lang'] . '</a></small></td>'.
-						'<td><small>'.date($engine->db->date_precise_format, strtotime($row['signup_time'])).'</small></td>'.
+						'<td><small><a href="' . $engine->href() . '&amp;user_lang=' . $row['user_lang'] . '">' . $row['user_lang'] . '</a></small></td>'.
+						'<td><small>'.date($engine->db->date_precise_format, strtotime($row['signup_time'])) . '</small></td>'.
 						'<td>' . $row['enabled'] . '</td>'.
-						'<td><a href="' . $engine->href().'&amp;account_status=' . $row['account_status'] . '">' . $status[$row['account_status']] . '</a></td>'.
+						'<td><a href="' . $engine->href() . '&amp;account_status=' . $row['account_status'] . '">' . $status[$row['account_status']] . '</a></td>'.
 						'<td>'.
 							((isset($_GET['account_status']) && $_GET['account_status'] > 0) || !isset($_GET['account_status'])
-								? '<a href="' . $engine->href().'&amp;approve=1&amp;user_id=' . $row['user_id'] . '">' . $approve_icon.'' . $engine->_t('Approve').'</a>'
+								? '<a href="' . $engine->href() . '&amp;approve=1&amp;user_id=' . $row['user_id'] . '">' . $approve_icon.'' . $engine->_t('Approve') . '</a>'
 								: '').
 							((isset($_GET['account_status']) && $_GET['account_status'] < 2) || !isset($_GET['account_status'])
-								? '<a href="' . $engine->href().'&amp;approve=2&amp;user_id=' . $row['user_id'] . '">' . $deny_icon.'' . $engine->_t('Deny').'</a>'
+								? '<a href="' . $engine->href() . '&amp;approve=2&amp;user_id=' . $row['user_id'] . '">' . $deny_icon.'' . $engine->_t('Deny') . '</a>'
 								: '').
 						'</td>'.
 					'</tr>';
@@ -384,7 +384,7 @@ function admin_user_approve(&$engine, &$module)
 		}
 		else
 		{
-			echo '<tr><td colspan="5"><br /><em>' . $engine->_t('NoMatchingUser').'</em></td></tr>';
+			echo '<tr><td colspan="5"><br /><em>' . $engine->_t('NoMatchingUser') . '</em></td></tr>';
 		}
 ?>
 			</table>

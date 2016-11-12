@@ -87,7 +87,7 @@ class Email
 			}
 
 			$headers	= implode("\r\n", $header);
-			$subject	= ($subject ? "=?".$charset . "?B?" . base64_encode($subject) . "?=" : '');
+			$subject	= ($subject ? "=?" . $charset . "?B?" . base64_encode($subject) . "?=" : '');
 			$body		= wordwrap($body, 74, "\n", 0);
 
 			@mail($email_to, $subject, $body, $headers);

@@ -186,7 +186,7 @@ function bb2_summary(&$engine)
 			foreach ($results as $result)
 			{
 				echo '<tr id="request-' . '' . '"  style="vertical-align:top;" class="lined">'."\n";
-				echo '<td class="label" style="width:5%;">' . $result['n']."</td>\n";
+				echo '<td class="label" style="width:5%;">' . $result['n'] . "</td>\n";
 				#echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . "</td>\n";
 
 				if ($argument == 'status_key')
@@ -280,7 +280,7 @@ function bb2_manage(&$engine)
 	echo $engine->form_open('bb2_manage');
 ?>
 
-	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <span class="active">Log</span> | <a href="<?php echo $engine->href()."&amp;setting=bb2_options" ?>">Settings</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
+	<p class="right">See also: <a href="<?php echo $engine->href() . "&amp;setting=bb2_summary" ?>">Summary</a> | <span class="active">Log</span> | <a href="<?php echo $engine->href() . "&amp;setting=bb2_options" ?>">Settings</a> | <a href="<?php echo $engine->href() . "&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
 
 
 <div class="alignleft">
@@ -295,8 +295,8 @@ Displaying <strong><?php echo $count['n']; ?></strong> of <strong><?php echo $to
 <?php else: ?>
 Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 <?php endif; ?>
-<?php if (!isset($_GET['status_key']) && !isset($_GET['blocked'])) { ?><a href="<?php echo $engine->href().'&amp;setting=bb2_manage&amp;blocked=true'; ?>">Show Blocked</a> <?php } ?>
-<?php if (!isset($_GET['status_key']) && !isset($_GET['permitted'])) { ?><a href="<?php echo $engine->href().'&amp;setting=bb2_manage&amp;permitted=true'; ?>">Show Permitted</a> <?php } ?>
+<?php if (!isset($_GET['status_key']) && !isset($_GET['blocked'])) { ?><a href="<?php echo $engine->href() . '&amp;setting=bb2_manage&amp;blocked=true'; ?>">Show Blocked</a> <?php } ?>
+<?php if (!isset($_GET['status_key']) && !isset($_GET['permitted'])) { ?><a href="<?php echo $engine->href() . '&amp;setting=bb2_manage&amp;permitted=true'; ?>">Show Permitted</a> <?php } ?>
 </div>
 
 <?php
@@ -333,8 +333,8 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 				$host = @gethostbyaddr($result['ip']);
 				$engine->db->sql_query(
 						"UPDATE {$engine->db->table_prefix}bad_behavior SET ".
-							"host		= ".$engine->db->q($host)." ".
-						"WHERE log_id	= '".(int) $result['log_id']."' ".
+							"host		= " . $engine->db->q($host) . " ".
+						"WHERE log_id	= '" . (int) $result['log_id'] . "' ".
 						"LIMIT 1");
 			}
 
@@ -376,7 +376,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 				$headers = substr_replace($headers, "<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;request_method='.rawurlencode($result['request_method']) . "\">" . $result['request_method'] . "</a>", strpos($headers, $result['request_method']), strlen($result['request_method']));
 			}
 
-			echo "<td>".$headers."</td>\n";
+			echo "<td>" . $headers . "</td>\n";
 			echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . "</td>\n";
 			echo "</tr>\n";
 		}
@@ -435,7 +435,7 @@ function bb2_whitelist(&$engine)
 	echo $engine->form_open('bb2_whitelist', ['form_more' => 'setting=bb2_whitelist']);
 ?>
 	<p>Inappropriate whitelisting WILL expose you to spam, or cause Bad Behavior to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.</p>
-	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_options" ?>">Settings</a> | <span class="active">Whitelist</span></p>
+	<p class="right">See also: <a href="<?php echo $engine->href() . "&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href() . "&amp;setting=bb2_manage"; ?>">Log</a> | <a href="<?php echo $engine->href() . "&amp;setting=bb2_options" ?>">Settings</a> | <span class="active">Whitelist</span></p>
 
 
 	<table class="formation">
@@ -655,7 +655,7 @@ function bb2_options(&$engine)
 	echo $engine->form_open('bb2_options', ['form_more' => 'setting=bb2_options']);
 ?>
 	<input type="hidden" name="action" value="bb2_options" />
-	<p class="right">See also: <a href="<?php echo $engine->href()."&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href()."&amp;setting=bb2_manage"; ?>">Log</a> | <span class="active">Settings</span> | <a href="<?php echo $engine->href()."&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
+	<p class="right">See also: <a href="<?php echo $engine->href() . "&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href() . "&amp;setting=bb2_manage"; ?>">Log</a> | <span class="active">Settings</span> | <a href="<?php echo $engine->href() . "&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
 
 	<table class="formation">
 

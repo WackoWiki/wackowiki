@@ -157,7 +157,7 @@ class GPG
 	{
 		if		($new == '')		return $this->context = '';
 		else if	($new == 'temp')	return $this->context = "--no-default-keyring --keyring {$this->sessdir}/".GPG_TEMP_RING_NAME;
-		else						return $this->context = "--no-default-keyring --keyring {$this->homedir}/".$new;
+		else						return $this->context = "--no-default-keyring --keyring {$this->homedir}/" . $new;
 	}
 
 	// generate an unique challenge token C as follows:
@@ -515,7 +515,7 @@ class GPG
 	{
 		// import key
 		$_context = $this->context;
-		$this->call($this->set_context('temp')." --import", 'post', $keyblock);
+		$this->call($this->set_context('temp') . " --import", 'post', $keyblock);
 		$this->context = $_context;
 
 		if (false === $error = $this->get_error())
@@ -550,7 +550,7 @@ class GPG
 
 		// requesting key from the keyserver
 		$_context = $this->context;
-		$this->call($this->set_context('temp')." --keyserver $keyserver --recv-key $key_id");
+		$this->call($this->set_context('temp') . " --keyserver $keyserver --recv-key $key_id");
 		$this->context = $_context;
 
 		// loading gpg status codes
@@ -601,7 +601,7 @@ class GPG
 	{
 		$_context		= $this->context;
 		$key_id			= $this->prepare_input($key_id, 42);
-		$pack			= $this->call($this->set_context('temp')." --export $key_id");
+		$pack			= $this->call($this->set_context('temp') . " --export $key_id");
 		$this->context	= $_context;
 		$this->call("{$this->context} --import", 'post', $pack);
 

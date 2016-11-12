@@ -15,8 +15,8 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 	$count = $this->db->load_single(
 		"SELECT COUNT(tag) AS n ".
 		"FROM {$this->db->table_prefix}page ".
-		"WHERE comment_on_id = '".$this->page['comment_on_id']."' ".
-			"AND created <= ".$this->db->q($this->page['created'])." ".
+		"WHERE comment_on_id = '" . $this->page['comment_on_id'] . "' ".
+			"AND created <= " . $this->db->q($this->page['created']) . " ".
 			"AND deleted <> '1' ".
 		"GROUP BY comment_on_id ".
 		"LIMIT 1", true);
@@ -35,7 +35,7 @@ if ($this->has_access('read'))
 	{
 		$this->http->status(404);
 
-		$message = $this->_t('DoesNotExists') ." ".( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
+		$message = $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
 		$this->show_message($message, 'notice');
 	}
 	else
@@ -151,8 +151,8 @@ if ($this->has_access('read'))
 			{
 				$this->db->sql_query(
 					"UPDATE " . $this->db->table_prefix . "page SET ".
-						"body_r		= ".$this->db->q($this->page['body_r']).", ".
-						"body_toc	= ".$this->db->q($this->page['body_toc'])." ".
+						"body_r		= " . $this->db->q($this->page['body_r']) . ", ".
+						"body_toc	= " . $this->db->q($this->page['body_toc']) . " ".
 					"WHERE page_id = '" . $this->page['page_id'] . "' ".
 					"LIMIT 1");
 			}
@@ -210,7 +210,7 @@ if ($this->forum
 {
 	if ($categories = $this->action('categories', ['page' => '/' . $this->page['tag'], 'list' => 0, 'nomark' => 1], 1))
 	{
-		echo '<nav class="category">' . $categories."</nav>\n";
+		echo '<nav class="category">' . $categories . "</nav>\n";
 	}
 }
 

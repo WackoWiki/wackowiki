@@ -37,7 +37,7 @@ echo '<small>';
 if (!$this->page && !$add && !$license)
 {
 	// we don't have any input, displaying stub instead until the page is saved for the first time
-	echo '<em>' . $this->_t('AuthorsDisplayHint').'</em>';
+	echo '<em>' . $this->_t('AuthorsDisplayHint') . '</em>';
 }
 else
 {

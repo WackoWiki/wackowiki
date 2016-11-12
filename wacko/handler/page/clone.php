@@ -52,10 +52,10 @@ if (@$_POST['_action'] === 'clone_page')
 		$pages = $this->db->load_all(
 			"SELECT page_id, tag, supertag ".
 			"FROM {$this->db->table_prefix}page ".
-			"WHERE (supertag LIKE ".$this->db->q($superfrom . '/%')." ".
-				"OR tag LIKE ".$this->db->q($from . '/%')." ".
-				"OR tag = ".$this->db->q($from)." ".
-				"OR supertag = ".$this->db->q($superfrom).") ".
+			"WHERE (supertag LIKE " . $this->db->q($superfrom . '/%') . " ".
+				"OR tag LIKE " . $this->db->q($from . '/%') . " ".
+				"OR tag = " . $this->db->q($from) . " ".
+				"OR supertag = " . $this->db->q($superfrom) . ") ".
 				"AND comment_on_id = '0'");
 
 		$slashes	= (int) @count_chars($from, 1)['/']; // @ to return 0 when no slashes used
@@ -124,8 +124,8 @@ if ($this->check_acl($this->get_user_name(), $this->db->rename_globalacl))
 	$klusterwerks = $this->db->load_single(
 		"SELECT COUNT(*) AS n ".
 		"FROM {$this->db->table_prefix}page ".
-		"WHERE (supertag LIKE ".$this->db->q($superfrom . '/%')." ".
-			"OR tag LIKE ".$this->db->q($from . '/%').") ".
+		"WHERE (supertag LIKE " . $this->db->q($superfrom . '/%') . " ".
+			"OR tag LIKE " . $this->db->q($from . '/%') . ") ".
 			"AND comment_on_id = '0'");
 
 	if ((string) $klusterwerks['n'])

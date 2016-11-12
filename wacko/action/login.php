@@ -123,9 +123,9 @@ else // login
 						// update database with the sha256 password for future logins
 						$this->db->sql_query(
 							"UPDATE " . $this->db->table_prefix . "user SET ".
-								"password	= ".$this->db->q($hash).", ".
+								"password	= " . $this->db->q($hash) . ", ".
 								"salt		= '' ".
-							"WHERE user_name = ".$this->db->q($user_name));
+							"WHERE user_name = " . $this->db->q($user_name));
 					}
 				}
 

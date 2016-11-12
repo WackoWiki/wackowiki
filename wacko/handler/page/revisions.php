@@ -25,7 +25,7 @@ $show_deleted = $this->is_admin();
 if ($this->page['deleted'])
 {
 	$this->show_message(
-			// $this->_t('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->_t('PromptCreate')) : '').
+			// $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->_t('PromptCreate')) : '').
 			'BACKUP of deleted page!' // TODO: localize and add description: to restore the page you ...
 			);
 }
@@ -55,14 +55,14 @@ if ($this->has_access('read'))
 		}
 
 		echo $place_holder.
-					'<a href="' . $this->href('revisions.xml') . '"><img src="' . 
+					'<a href="' . $this->href('revisions.xml') . '"><img src="' .
 					$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') .
 					'" alt="XML" class="btn-feed"/></a>';
 
 		if ($this->db->minor_edit)
 		{
 			// STS: ?!..
-			echo '<br />'.((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? '<a href="' . $this->href('revisions', '', 'minor_edit=1') . '">' . $this->_t('MinorEditHide').'</a>' : '<a href="' . $this->href('revisions', '', 'minor_edit=0') . '">' . $this->_t('MinorEditShow').'</a>');
+			echo '<br />'.((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? '<a href="' . $this->href('revisions', '', 'minor_edit=1') . '">' . $this->_t('MinorEditHide') . '</a>' : '<a href="' . $this->href('revisions', '', 'minor_edit=0') . '">' . $this->_t('MinorEditShow') . '</a>');
 		}
 
 		echo "</p>\n" . '<ul class="revisions">' . "\n";
@@ -113,13 +113,13 @@ if ($this->has_access('read'))
 
 			echo '<li>';
 			echo '<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>';
-			echo '<input type="radio" name="a" value="' . (!$c ? '-1' : $page['revision_id']) . '" '.($c == 0 ? 'checked="checked"' : '').' />';
+			echo '<input type="radio" name="a" value="' . (!$c ? '-1' : $page['revision_id']) . '" '.($c == 0 ? 'checked="checked"' : '') . ' />';
 			echo $place_holder.
-						'<input type="radio" name="b" value="' . (!$c ? '-1' : $page['revision_id']) . '" '.($c == 1 ? 'checked="checked"' : '').' />';
+						'<input type="radio" name="b" value="' . (!$c ? '-1' : $page['revision_id']) . '" '.($c == 1 ? 'checked="checked"' : '') . ' />';
 			echo $place_holder.'&nbsp;
-						<a href="' . $this->href('show', '', 'revision_id=' . $page['revision_id']) . '">' . $this->get_time_formatted($page['modified']).'</a>';
+						<a href="' . $this->href('show', '', 'revision_id=' . $page['revision_id']) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
 			echo '<span style="display: inline-block; width:130px;">'."&nbsp; — (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
-			echo $place_holder."&nbsp;".$this->_t('By')." ".
+			echo $place_holder."&nbsp;" . $this->_t('By') . " ".
 						$this->user_link($page['user_name'], '', true, false);
 			echo $edit_note;
 			echo ' '.($page['minor_edit'] ? 'm' : '');
@@ -152,13 +152,13 @@ if ($this->has_access('read'))
 
 		if ($max && $revision_count > $max)
 		{
-			echo  '<a href="' . $this->href('revisions', '', 'show=all') . '">' . $this->_t('RevisionsShowAll')."</a><br /><br />\n";
+			echo  '<a href="' . $this->href('revisions', '', 'show=all') . '">' . $this->_t('RevisionsShowAll') . "</a><br /><br />\n";
 		}
 
-		echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . 
+		echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' .
 					$this->_t('CancelDifferencesButton') . '" /></a>'."\n";
 
-		echo $this->form_close()."\n";
+		echo $this->form_close() . "\n";
 	}
 
 	$this->current_context--;

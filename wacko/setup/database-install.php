@@ -3,7 +3,7 @@
 @ignore_user_abort(true);
 
 // test configuration
-echo "         <h2>".$lang['TestingConfiguration']."</h2>\n";
+echo "         <h2>" . $lang['TestingConfiguration'] . "</h2>\n";
 
 $delete_table			= [];
 $create_table			= [];
@@ -116,7 +116,7 @@ switch ($config['database_driver'])
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				echo "<h2>".$lang['DeletingTables']."</h2>\n";
+				echo "<h2>" . $lang['DeletingTables'] . "</h2>\n";
 				echo "            <ol>\n";
 
 				foreach ($delete_table as $value)
@@ -128,7 +128,7 @@ switch ($config['database_driver'])
 					echo '</pre>'; */
 				}
 
-				echo "            <li>".$lang['DeletingTablesEnd']."</li>\n";
+				echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
 				echo "         </ol>\n";
 				echo "         <br />\n";
 
@@ -140,7 +140,7 @@ switch ($config['database_driver'])
 				// new installation
 				if ($version == '0')
 				{
-					echo "         <h2>".$lang['InstallingTables']."</h2>\n";
+					echo "         <h2>" . $lang['InstallingTables'] . "</h2>\n";
 					echo "         <ol>\n";
 
 					foreach ($create_table as $value)
@@ -164,7 +164,7 @@ switch ($config['database_driver'])
 					{
 						if (version_compare($version, $to_version, '<='))
 						{
-							echo "         <h2>Wacko ".$to_version." ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+							echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " ".WACKO_VERSION . "</h2>\n";
 							echo "         <ol>\n";
 
 							foreach ($upgrade[$to_version] as $value)
@@ -178,16 +178,16 @@ switch ($config['database_driver'])
 				}
 
 				echo "         <br />\n";
-				echo "         <h2>".$lang['InstallingDefaultData']."</h2>\n";
+				echo "         <h2>" . $lang['InstallingDefaultData'] . "</h2>\n";
 				echo "         <ul>\n";
 
 				// inserting config values
 				test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
-				echo "            <li>".$lang['InstallingPagesBegin'];
+				echo "            <li>" . $lang['InstallingPagesBegin'];
 				require_once 'setup/insert_pages.php';
 				echo "</li>\n";
-				echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
+				echo "            <li>" . $lang['InstallingPagesEnd'] . "</li>\n";
 				echo "         </ul>\n";
 			}
 		}
@@ -207,11 +207,11 @@ switch ($config['database_driver'])
 					#$config['database_driver'] = 'mysql';
 				}
 
-				$dsn = "mysql:host=".$config['database_host'].($config['database_port'] != '' ? ";port=".$config['database_port'] : '').";dbname=".$config['database_database'].($config['database_charset'] != '' ? ";charset=".$config['database_charset'] : '');
+				$dsn = "mysql:host=" . $config['database_host'].($config['database_port'] != '' ? ";port=" . $config['database_port'] : '') . ";dbname=" . $config['database_database'].($config['database_charset'] != '' ? ";charset=" . $config['database_charset'] : '');
 				break;
 
 			/* case 'pgsql':
-				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
+				$dsn = $config['database_driver'] . ":dbname=" . $config['database_database'] . ";host=" . $config['database_host'].($config['database_port'] != "" ? ";port=" . $config['database_port'] : "");
 				break; */
 		}
 
@@ -227,7 +227,7 @@ switch ($config['database_driver'])
 		}
 		catch (PDOException $e)
 		{
-			test($lang['TestConnectionString'], false, "PDO Error: ".$e->getMessage());
+			test($lang['TestConnectionString'], false, "PDO Error: " . $e->getMessage());
 			$fatal_error = true;
 		}
 
@@ -268,7 +268,7 @@ switch ($config['database_driver'])
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				echo "<h2>".$lang['DeletingTables']."</h2>\n";
+				echo "<h2>" . $lang['DeletingTables'] . "</h2>\n";
 				echo "            <ol>\n";
 
 				foreach ($delete_table as $value)
@@ -276,7 +276,7 @@ switch ($config['database_driver'])
 					test_pdo(str_replace('%1', $value[0], $lang['DeletingTable']), $value[1], str_replace('%1', $value[0], $lang['ErrorDeletingTable']));
 				}
 
-				echo "            <li>".$lang['DeletingTablesEnd']."</li>\n";
+				echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
 				echo "         </ol>\n";
 				echo "         <br />\n";
 
@@ -288,7 +288,7 @@ switch ($config['database_driver'])
 				// new installation
 				if ($version == '0')
 				{
-					echo "         <h2>".$lang['InstallingTables']."</h2>\n";
+					echo "         <h2>" . $lang['InstallingTables'] . "</h2>\n";
 					echo "         <ol>\n";
 
 					foreach ($create_table as $value)
@@ -312,7 +312,7 @@ switch ($config['database_driver'])
 					{
 						if (version_compare($version, $to_version, '<='))
 						{
-							echo "         <h2>Wacko ".$to_version." ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+							echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " ".WACKO_VERSION . "</h2>\n";
 							echo "         <ol>\n";
 
 							foreach ($upgrade[$to_version] as $value)
@@ -326,16 +326,16 @@ switch ($config['database_driver'])
 				}
 
 				echo "         <br />\n";
-				echo "         <h2>".$lang['InstallingDefaultData']."</h2>\n";
+				echo "         <h2>" . $lang['InstallingDefaultData'] . "</h2>\n";
 				echo "         <ul>\n";
 
 				// inserting config values
 				test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
-				echo "            <li>".$lang['InstallingPagesBegin'];
+				echo "            <li>" . $lang['InstallingPagesBegin'];
 				require_once 'setup/insert_pages.php';
 				echo "</li>\n";
-				echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
+				echo "            <li>" . $lang['InstallingPagesEnd'] . "</li>\n";
 				echo "         </ul>\n";
 			}
 		}

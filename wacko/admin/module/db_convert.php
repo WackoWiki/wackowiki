@@ -146,23 +146,23 @@ function admin_db_convert(&$engine, &$module)
 		if (version_compare($db_version, '5.6.4', '>='))
 		{
 			$required_mysql_version = true;
-			echo output_image($engine, true).'Requires at least MySQL 5.6.4, available version: ' . $db_version . "<br />\n";
+			echo output_image($engine, true) . 'Requires at least MySQL 5.6.4, available version: ' . $db_version . "<br />\n";
 		}
 		else
 		{
 			$required_mysql_version = false;
-			echo output_image($engine, false).'<strong class="red">Requires at least MySQL 5.6.4, available version: </strong> ' . $db_version . "<br />\n";
+			echo output_image($engine, false) . '<strong class="red">Requires at least MySQL 5.6.4, available version: </strong> ' . $db_version . "<br />\n";
 		}
 
 		if ($InnoDB_support['SUPPORT'] == 'YES' || 'DEFAULT')
 		{
 			$required_engine = true;
-			echo output_image($engine, true).'InnoDB/XtraDB is available. '. $InnoDB_support['SUPPORT']. "<br />\n";
+			echo output_image($engine, true) . 'InnoDB/XtraDB is available. '. $InnoDB_support['SUPPORT']. "<br />\n";
 		}
 		else
 		{
 			$required_engine = false;
-			echo output_image($engine, false).'<strong class="red">InnoDB / XtraDB is not available.</strong>'. "<br />\n";
+			echo output_image($engine, false) . '<strong class="red">InnoDB / XtraDB is not available.</strong>'. "<br />\n";
 		}
 
 		if ($required_mysql_version === true && $required_engine = true)
@@ -194,7 +194,7 @@ function admin_db_convert(&$engine, &$module)
 							echo '<tr class="hl_setting">'.
 									'<td class="label"><input type="checkbox" name="' . $table['TABLE_NAME'] . '" value="table" checked="checked" /></td>'.
 									'<td>&nbsp;&nbsp;<strong>' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</strong></td>'.
-									'<td>'.( $table['ENGINE'] == 'MyISAM' ? '<strong class="red">' : '' ).$table['ENGINE'].( $table['ENGINE'] == 'MyISAM' ? '</strong>' : '' ).'</td>'.
+									'<td>'.( $table['ENGINE'] == 'MyISAM' ? '<strong class="red">' : '' ).$table['ENGINE'].( $table['ENGINE'] == 'MyISAM' ? '</strong>' : '' ) . '</td>' .
 								'</tr>'.
 								'<tr class="lined"><td colspan="3"></td></tr>'."\n";
 						}
@@ -272,7 +272,7 @@ function admin_db_convert(&$engine, &$module)
 									'<td>&nbsp;&nbsp;' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</td>'.
 									'<td class="label">&nbsp;&nbsp;<strong>' . $table['COLUMN_NAME'] . '&nbsp;&nbsp;</strong></td>'.
 									'<td>&nbsp;&nbsp;' . $table['DATA_TYPE'] . '&nbsp;&nbsp;</td>'.
-									'<td>'.( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '<strong class="red">' : '' ).$table['COLUMN_DEFAULT'].( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '</strong>' : '' ).'</td>'.
+									'<td>'.( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '<strong class="red">' : '' ).$table['COLUMN_DEFAULT'].( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '</strong>' : '' ) . '</td>' .
 								'</tr>'.
 								'<tr class="lined"><td colspan="4"></td></tr>'."\n";
 

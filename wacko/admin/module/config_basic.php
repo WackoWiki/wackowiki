@@ -145,7 +145,7 @@ function admin_config_basic(&$engine, &$module)
 
 						foreach ($themes as $theme)
 						{
-							echo '<option value="' . $theme . '" '.($engine->db->theme == $theme ? 'selected="selected"' : '').'>' . $theme.'</option>';
+							echo '<option value="' . $theme . '" '.($engine->db->theme == $theme ? 'selected="selected"' : '') . '>' . $theme.'</option>';
 						}
 ?>
 					</select>
@@ -187,7 +187,7 @@ function admin_config_basic(&$engine, &$module)
 
 						foreach ($langs as $lang)
 						{
-							echo '<option value="' . $lang . '" '.($engine->db->language == $lang ? 'selected="selected"' : '').'>' . $languages[$lang] . ' (' . $lang.')</option>';
+							echo '<option value="' . $lang . '" '.($engine->db->language == $lang ? 'selected="selected"' : '') . '>' . $languages[$lang] . ' (' . $lang.')</option>';
 						}
 ?>
 					</select>

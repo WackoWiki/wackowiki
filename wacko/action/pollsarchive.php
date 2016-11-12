@@ -47,7 +47,7 @@ if (!$nomark)
 			($year == 0
 				? $this->_t('PollsArchiveAll')
 				: str_replace('%1', $year, $this->_t('PollsArchiveYear'))
-			)."</span></p>\n";
+			) . "</span></p>\n";
 }
 
 	if ($list) // normal list
@@ -77,19 +77,19 @@ if (!$nomark)
 	}
 	else // empty list
 	{
-		echo '<em>' . $this->_t('PollsEmptyList').'</em><br />';
+		echo '<em>' . $this->_t('PollsEmptyList') . '</em><br />';
 	}
 
 	// pagination
-	echo '<br /><small><strong>' . $this->_t('PollsShow').':</strong> ';
+	echo '<br /><small><strong>' . $this->_t('PollsShow') . ':</strong> ';
 
 	if ($year == 0)
 	{
-		echo $this->_t('PollsAll').' ';
+		echo $this->_t('PollsAll') . ' ';
 	}
 	else
 	{
-		echo '<a href="' . $this->href('', '', 'year=0') . '">' . $this->_t('PollsAll').'</a> ';
+		echo '<a href="' . $this->href('', '', 'year=0') . '">' . $this->_t('PollsAll') . '</a> ';
 	}
 
 	foreach ($years as $item)

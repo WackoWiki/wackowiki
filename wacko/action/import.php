@@ -104,11 +104,11 @@ if ($this->is_admin())
 				$pages[] = $tag;
 			}
 
-			echo '<em>'.Ut::perc_replace($this->_t('ImportSuccess'), $t).'</em><br />';
+			echo '<em>'.Ut::perc_replace($this->_t('ImportSuccess'), $t) . '</em><br />';
 
 			foreach ($pages as $page)
 			{
-				echo $this->link('/' . $page, '', '', '', 0).'<br />';
+				echo $this->link('/' . $page, '', '', '', 0) . '<br />';
 			}
 		}
 		else

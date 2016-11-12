@@ -164,8 +164,8 @@ class typografica
 		// 4. Short words and &nbsp;
 		if ($this->settings['wordglue'])
 		{
-			$data	= " ".$data." ";
-			$_data	= " ".$data." ";
+			$data	= " " . $data." ";
+			$_data	= " " . $data." ";
 
 			while ($_data != $data)
 			{
@@ -176,12 +176,12 @@ class typografica
 
 			foreach ($this->glueleft as $i)
 			{
-				$data = preg_replace('/([\\s]+)(".$i.")(\s+)/i', "\\1\\2&nbsp;", $data );
+				$data = preg_replace('/([\\s]+)(" . $i.")(\s+)/i', "\\1\\2&nbsp;", $data );
 			}
 
 			foreach ($this->glueright as $i)
 			{
-				$data = preg_replace('/([\\s]+)(".$i.")(\s+)/i', "&nbsp;\\2\\3", $data );
+				$data = preg_replace('/([\\s]+)(" . $i.")(\s+)/i', "&nbsp;\\2\\3", $data );
 			}
 		}
 

@@ -147,7 +147,7 @@ if ($pages2)
 $local_supertag_sliced	= explode('/', $this->page['supertag']);
 $local_supertag			= $this->page['supertag'] . '/';
 $local_context_sliced	= array_slice( $local_supertag_sliced, 0, count($local_supertag_sliced)-1 );
-$local_context			= implode('/', $local_context_sliced ).'/';
+$local_context			= implode('/', $local_context_sliced ) . '/';
 
 // preparing to output
 $out = [];

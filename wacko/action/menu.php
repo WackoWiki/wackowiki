@@ -28,11 +28,11 @@ if (!function_exists('load_user_menu'))
 	{
 		$_menu = $engine->load_all(
 			"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position ".
-			"FROM ".$engine->db->table_prefix."menu m ".
-				"LEFT JOIN ".$engine->db->table_prefix."page p ON (m.page_id = p.page_id) ".
+			"FROM " . $engine->db->table_prefix."menu m ".
+				"LEFT JOIN " . $engine->db->table_prefix."page p ON (m.page_id = p.page_id) ".
 			"WHERE m.user_id = '" . (int) $user_id . "' ".
 				($lang
-					? "AND m.menu_lang =  '".$lang."' "
+					? "AND m.menu_lang =  '" . $lang."' "
 					: "").
 			"ORDER BY m.menu_position", false);
 
@@ -116,9 +116,9 @@ if (isset($_POST['_user_menu']))
 		{
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "menu SET ".
-					"menu_position	= '".$item['menu_position']."', ".
-					"menu_title		= ".$this->db->q(substr(trim($_POST['title_' . $item['menu_id']]), 0, 250))." ".
-				"WHERE menu_id		= '".$item['menu_id']."' ".
+					"menu_position	= '" . $item['menu_position'] . "', ".
+					"menu_title		= " . $this->db->q(substr(trim($_POST['title_' . $item['menu_id']]), 0, 250)) . " ".
+				"WHERE menu_id		= '" . $item['menu_id'] . "' ".
 				"LIMIT 1");
 		}
 	}
@@ -142,11 +142,11 @@ if (isset($_POST['_user_menu']))
 					if ($this->db->load_single(
 						"SELECT menu_id ".
 						"FROM " . $this->db->table_prefix . "menu ".
-						"WHERE user_id = '".(int) $_user_id."' ".
+						"WHERE user_id = '" . (int) $_user_id."' ".
 							($default_menu === true
-									? "AND menu_lang = '".$_user_lang."' "
+									? "AND menu_lang = '" . $_user_lang."' "
 									: "").
-							"AND page_id = '".(int) $_page_id."' ".
+							"AND page_id = '" . (int) $_page_id."' ".
 						"LIMIT 1"))
 					{
 						$message .= $this->_t('BookmarkAlreadyExists');
@@ -157,9 +157,9 @@ if (isset($_POST['_user_menu']))
 						$_menu_position = $this->db->load_all(
 							"SELECT menu_id ".
 							"FROM " . $this->db->table_prefix . "menu ".
-							"WHERE user_id = '".(int) $_user_id."' ".
+							"WHERE user_id = '" . (int) $_user_id."' ".
 								($default_menu === true
-									? "AND menu_lang = '".$_user_lang."' "
+									? "AND menu_lang = '" . $_user_lang."' "
 									: "")
 								, false);
 
@@ -167,10 +167,10 @@ if (isset($_POST['_user_menu']))
 
 						$this->db->sql_query(
 							"INSERT INTO " . $this->db->table_prefix . "menu SET ".
-							"user_id			= '".(int) $_user_id."', ".
-							"page_id			= '".(int) $_page_id."', ".
-							"menu_lang			= ".$this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)).", ".
-							"menu_position		= '".(int)($_menu_item_count + 1)."'");
+							"user_id			= '" . (int) $_user_id."', ".
+							"page_id			= '" . (int) $_page_id."', ".
+							"menu_lang			= " . $this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)) . ", ".
+							"menu_position		= '" . (int)($_menu_item_count + 1) . "'");
 
 						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set
 					}
@@ -216,7 +216,7 @@ if (isset($_POST['_user_menu']))
 				$this->db->sql_query(
 					"DELETE ".
 					"FROM " . $this->db->table_prefix . "menu ".
-					"WHERE menu_id IN (".$deletion.")");
+					"WHERE menu_id IN (" . $deletion.")");
 			}
 		}
 	}
@@ -235,7 +235,7 @@ if ($_user_id)
 
 	if ($_menu)
 	{
-		// echo "<h4>".$this->_t('YourBookmarks')."</h4>";
+		// echo "<h4>" . $this->_t('YourBookmarks') . "</h4>";
 
 		// user is logged in; display config form
 		echo $this->form_open('edit_bookmarks');
@@ -244,7 +244,7 @@ if ($_user_id)
 
 		if ($default_menu === true)
 		{
-			echo '<label for="menu_lang">' . $this->_t('YourLanguage').' </label>';
+			echo '<label for="menu_lang">' . $this->_t('YourLanguage') . ' </label>';
 			// FIXME: add a common function for this?
 			echo '<select id="menu_lang" name="menu_lang">';
 
@@ -261,7 +261,7 @@ if ($_user_id)
 
 			foreach ($langs as $lang)
 			{
-				echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+				echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected="selected" ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 			}
 
 			echo "</select>\n";
@@ -271,7 +271,7 @@ if ($_user_id)
 		}
 
 		echo '<table>';
-		echo '<tr><th>' . $this->_t('BookmarkNumber').'</th><th>' . $this->_t('BookmarkTitle').'</th><th>' . $this->_t('BookmarkPage').'</th><th>' . $this->_t('BookmarkMark').'</th><!--<th>Display</th>-->';
+		echo '<tr><th>' . $this->_t('BookmarkNumber') . '</th><th>' . $this->_t('BookmarkTitle') . '</th><th>' . $this->_t('BookmarkPage') . '</th><th>' . $this->_t('BookmarkMark') . '</th><!--<th>Display</th>-->';
 
 		if ($system)
 		{
@@ -298,12 +298,12 @@ if ($_user_id)
 			</td>
 			<!--<td>
 
-			'.(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title']).'
+			'.(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title']) . '
 			</td>-->';
 
 			if ($system)
 			{
-				echo '<td>'.(!empty($menu_item['menu_lang']) ? $menu_item['menu_lang'] : '')."</td>\n";
+				echo '<td>'.(!empty($menu_item['menu_lang']) ? $menu_item['menu_lang'] : '') . "</td>\n";
 			}
 
 			echo "</tr>\n";
@@ -326,7 +326,7 @@ if ($_user_id)
 	echo $this->form_open('add_bookmark');
 	echo '<input type="hidden" name="_user_menu" value="yes" />';
 	echo '<br /><br />';
-	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage').':</label><br />'.
+	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage') . ':</label><br />'.
 		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
 
 	if ($default_menu === true)
@@ -347,7 +347,7 @@ if ($_user_id)
 
 		foreach ($langs as $lang)
 		{
-			echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+			echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected="selected" ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 		}
 
 		echo "</select>\n";
