@@ -134,12 +134,12 @@ class paragrafica
 		// 1. insert terminators appropriately
 		foreach ($this->t0 as $t)
 		{
-			$what = preg_replace( $t, $this->mark1.'$1' . $this->mark2, $what );
+			$what = preg_replace( $t, $this->mark1 . '$1' . $this->mark2, $what );
 		}
 
 		foreach ($this->t1[0] as $t)
 		{
-			$what = preg_replace( $t, $this->mark1.'$1', $what );
+			$what = preg_replace( $t, $this->mark1 . '$1', $what );
 		}
 
 		foreach ($this->t2[0] as $t)
@@ -149,31 +149,31 @@ class paragrafica
 
 		foreach ($this->t1[1] as $t)
 		{
-			$what = preg_replace( $t, $this->mark3.$this->mark1.'$1', $what );
+			$what = preg_replace( $t, $this->mark3 . $this->mark1 . '$1', $what );
 		}
 
 		foreach ($this->t2[1] as $t)
 		{
-			$what = preg_replace( $t, '$1' . $this->mark2.$this->mark3, $what );
+			$what = preg_replace( $t, '$1' . $this->mark2 . $this->mark3, $what );
 		}
 
 		foreach ($this->t1[2] as $t)
 		{
-			$what = preg_replace( $t, $this->mark4.$this->mark1.'$1', $what );
+			$what = preg_replace( $t, $this->mark4 . $this->mark1 . '$1', $what );
 		}
 
 		foreach ($this->t2[2] as $t)
 		{
-			$what = preg_replace( $t, '$1' . $this->mark2.$this->mark4, $what );
+			$what = preg_replace( $t, '$1' . $this->mark2 . $this->mark4, $what );
 		}
 
 		// wrap whole text in terminator pair
-		$what = $this->mark2.$what.$this->mark1;
+		$what = $this->mark2 . $what . $this->mark1;
 
 		// 2bis. swap <t-><br /> -> <br /><t->
-		$what = preg_replace( "!(" . $this->mark2.")((\s*<br[^>]*>)+)!si", '$2$1', $what );
+		$what = preg_replace( "!(" . $this->mark2 . ")((\s*<br[^>]*>)+)!si", '$2$1', $what );
 		// noneedin: > eliminating multiple breaks
-		$what = preg_replace( "!((<br[^>]*>\s*)+)(" . $this->mark1.")!s", '$3', $what );
+		$what = preg_replace( "!((<br[^>]*>\s*)+)(" . $this->mark1 . ")!s", '$3', $what );
 
 		// 2. cleanup <t->\s<-t>
 		do
@@ -262,7 +262,7 @@ class paragrafica
 
 				for ($i = 1; $i < $size; $i++)
 				{
-					$what = $what.$ignored[$i - 1].$a[$i];
+					$what = $what . $ignored[$i - 1] . $a[$i];
 				}
 			}
 		}

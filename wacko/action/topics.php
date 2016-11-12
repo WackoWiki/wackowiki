@@ -154,7 +154,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$topics	= $this->db->load_all($sql);
 
 	//  display search
-	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">' . $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]) . '</div>'."\n";
+	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">' . $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]) . '</div>' . "\n";
 
 	if (!isset($_GET['phrase']))
 	{
@@ -171,7 +171,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					'<th>' . $this->_t('ForumReplies') . '</th>'.
 					'<th>' . $this->_t('ForumViews') . '</th>'.
 					'<th colspan="2">' . $this->_t('ForumLastComment') . '</th>'.
-				'</tr></thead>'."\n";
+				'</tr></thead>' . "\n";
 
 		foreach ($topics as $topic)
 		{
@@ -233,7 +233,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 				if ($comment)
 				{
-					echo '<small'.( $updated ? ' style="font-weight:600;"' : '' ) . ' title="' . ( $admin ? $comment['ip'] : '' ) . '">'.
+					echo '<small' . ($updated ? ' style="font-weight:600;"' : '' ) . ' title="' . ( $admin ? $comment['ip'] : '' ) . '">'.
 						$this->user_link($comment['user_name']) . '<br />'.
 						'<a href="' . $this->href('', $topic['tag'], 'p=last') . '#' . $comment['tag'] . '">' . $this->get_time_formatted($comment['created']) . '</a></small>';
 				}
@@ -247,13 +247,13 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					'<tr>'.
 						'<td colspan="6" class="description">' . $topic['description'] . ''.
 						$_category . '</td>' .
-					'</tr></tbody>'."\n";
+					'</tr></tbody>' . "\n";
 			}
 		}
 
-		echo '</table>'."\n";
+		echo '</table>' . "\n";
 
-		echo '<div class="clearfix"><p style="float: left">'.( $user ? '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead') . '</a></small>' : '' ) . '</p>';
+		echo '<div class="clearfix"><p style="float: left">' . ($user ? '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead') . '</a></small>' : '' ) . '</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 	}

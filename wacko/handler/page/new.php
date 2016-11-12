@@ -31,14 +31,14 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 		$this->set_message(Ut::perc_replace($this->_t('PageReservedWord'), $result));
 	}
 	// check target page existance
-	else if ($page = $this->load_page($prefix.$new_tag, 0, '', LOAD_CACHE, LOAD_META))
+	else if ($page = $this->load_page($prefix . $new_tag, 0, '', LOAD_CACHE, LOAD_META))
 	{
 		$message = $this->_t('PageAlreadyExists') . " &laquo;" . $page['tag'] . "&raquo;. ";
 
 		// check existing page write access
-		if ($this->has_access('write', $this->get_page_id($prefix.$new_tag)))
+		if ($this->has_access('write', $this->get_page_id($prefix . $new_tag)))
 		{
-			$message .= Ut::perc_replace($this->_t('PageAlreadyExistsEdit'), "<a href=\"" . $this->href('edit', $prefix.$new_tag) . "\">" . $this->_t('PageAlreadyExistsEdit2') . " </a>?");
+			$message .= Ut::perc_replace($this->_t('PageAlreadyExistsEdit'), "<a href=\"" . $this->href('edit', $prefix . $new_tag) . "\">" . $this->_t('PageAlreadyExistsEdit2') . " </a>?");
 		}
 		else
 		{
@@ -50,13 +50,13 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 	else
 	{
 		// check new page write access
-		if ($this->has_access('create', $this->get_page_id($prefix.$new_tag)))
+		if ($this->has_access('create', $this->get_page_id($prefix . $new_tag)))
 		{
 			// keep the original input for page titel
 			$this->sess->title = $new_tag;
 
 			// str_replace: fixes newPage&amp;add=1
-			$this->http->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix.$new_tag, '', 1))));
+			$this->http->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix . $new_tag, '', 1))));
 		}
 		else
 		{
@@ -74,7 +74,7 @@ echo '<label for="create_subpage">' . $this->_t('CreateSubPage') . ':</label><br
 
 if ($this->has_access('create', $this->get_page_id($this->tag)))
 {
-	echo '<code>'.( strlen($this->tag) > 50 ? '...'.substr($this->tag, -50) : $this->tag ) . '/</code>'.
+	echo '<code>'.( strlen($this->tag) > 50 ? '...' . substr($this->tag, -50) : $this->tag ) . '/</code>'.
 		'<input type="text" id="create_subpage" name="tag" value="' . ( isset($_POST['option']) && $_POST['option'] === 1 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="255" /> '.
 		'<input type="submit" id="submit_subpage" value="' . $this->_t('CreatePageButton') . '" />';
 }
@@ -100,7 +100,7 @@ if (substr_count($this->tag, '/') > 0)
 			echo $this->form_open('parent_cluster_page', ['page_method' => 'new']);
 			echo '<input type="hidden" name="option" value="2" />';
 			echo '<label for="create_pageparentcluster">' . $this->_t('CreatePageParentCluster') . ':</label><br />';
-			echo '<code>'.( strlen($parent) > 50 ? '...'.substr($parent, -50) : $parent ) . '/</code>'.
+			echo '<code>'.( strlen($parent) > 50 ? '...' . substr($parent, -50) : $parent ) . '/</code>'.
 				 '<input type="text" id="create_pageparentcluster" name="tag" value="' . ( isset($_POST['option']) && $_POST['option'] === 2 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="255" /> '.
 				 '<input type="submit" id="submit_pageparentcluster" value="' . $this->_t('CreatePageButton') . '" />';
 			echo $this->form_close();

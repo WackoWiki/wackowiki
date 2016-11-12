@@ -23,19 +23,19 @@ if (@$_POST['_action'] === 'extended_properties')
 	$mode = 'extended';
 	$this->db->sql_query(
 		"UPDATE {$this->db->table_prefix}page SET ".
-			"footer_comments	= '" . (string) $_POST['footer_comments'] . "', ".
-			"footer_files		= '" . (string) $_POST['footer_files'] . "', ".
+			"footer_comments	= '" . (int) $_POST['footer_comments'] . "', ".
+			"footer_files		= '" . (int) $_POST['footer_files'] . "', ".
 			($this->db->footer_rating
-				? "footer_rating	= '" . (string) $_POST['footer_rating'] . "', "
+				? "footer_rating	= '" . (int) $_POST['footer_rating'] . "', "
 				: "").
-			"hide_toc			= '" . (string) $_POST['hide_toc'] . "', ".
-			"hide_index			= '" . (string) $_POST['hide_index'] . "', ".
-			"tree_level			= '" . (string) $_POST['tree_level'] . "', ".
+			"hide_toc			= '" . (int) $_POST['hide_toc'] . "', ".
+			"hide_index			= '" . (int) $_POST['hide_index'] . "', ".
+			"tree_level			= '" . (int) $_POST['tree_level'] . "', ".
 			($this->is_admin()
-				?	"allow_rawhtml		= '" . (string) $_POST['allow_rawhtml'] . "', ".
-					"disable_safehtml	= '" . (string) $_POST['disable_safehtml'] . "', "
+				?	"allow_rawhtml		= '" . (int) $_POST['allow_rawhtml'] . "', ".
+					"disable_safehtml	= '" . (int) $_POST['disable_safehtml'] . "', "
 				: "").
-			"noindex			= '" . (string) $_POST['noindex'] . "' ".
+			"noindex			= '" . (int) $_POST['noindex'] . "' ".
 		"WHERE page_id = '" . $this->page['page_id'] . "' ".
 		"LIMIT 1");
 }
@@ -136,7 +136,7 @@ else
 
 		/*
 			<input type="text" id="menu_tag" name="menu_tag" value="' . (isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '') . '" size="60" maxlength="100" />
-			'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" '.( $this->page['show_menu_tag'] ? 'checked="checked" ' : '' ) . '/><label for="menu_tag_on">' . $this->_t('MetaOn') . "</label>".
+			'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" ' . ($this->page['show_menu_tag'] ? 'checked="checked" ' : '' ) . '/><label for="menu_tag_on">' . $this->_t('MetaOn') . "</label>".
 			'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" '.( !$this->page['show_menu_tag'] ? 'checked="checked" ' : '' ) . '/><label for="menu_tag_off">' . $this->_t('MetaOff') . "</label>".
 		 */
 

@@ -30,19 +30,19 @@ if (isset($top))
 
 	if ($pages)
 	{
-		echo '<table>'."\n";
+		echo '<table>' . "\n";
 
 		foreach ($pages as $page)
 		{
 			echo '<tr class="lined"><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title'], 0) . '</td>' .
-				 '<td style="width:10px; white-space:nowrap;">&nbsp;<strong>+'.round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>'."\n";
+				 '<td style="width:10px; white-space:nowrap;">&nbsp;<strong>+'.round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
 		}
 
-		echo '</table>'."\n";
+		echo '</table>' . "\n";
 	}
 	else
 	{
-		echo '<em>' . $this->_t('RatingNoPagesRated') . '</em>'."\n";
+		echo '<em>' . $this->_t('RatingNoPagesRated') . '</em>' . "\n";
 	}
 
 	echo "</div>\n";
@@ -66,19 +66,19 @@ if (isset($bottom))
 
 	if ($pages)
 	{
-		echo '<table>'."\n";
+		echo '<table>' . "\n";
 
 		foreach ($pages as $page)
 		{
 			echo '<tr class="lined"><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title'], 0) . '</td>' .
-				 '<td style="width:10px; white-space:nowrap">&nbsp;<strong>'.round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>'."\n";
+				 '<td style="width:10px; white-space:nowrap">&nbsp;<strong>'.round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
 		}
 
-		echo '</table>'."\n";
+		echo '</table>' . "\n";
 	}
 	else
 	{
-		echo '<em>' . $this->_t('RatingNoPagesRated') . '</em>'."\n";
+		echo '<em>' . $this->_t('RatingNoPagesRated') . '</em>' . "\n";
 	}
 
 	echo "</div>\n";

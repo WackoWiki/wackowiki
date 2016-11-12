@@ -85,7 +85,7 @@ else
 		<tr style="text-align:left;">
 			<td><div>
 <?php
-echo '<div class="leftNav"><ul class="leftNav">'."\n";
+echo '<div class="leftNav"><ul class="leftNav">' . "\n";
 
 // menu
 if ($menu = $this->get_menu())

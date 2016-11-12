@@ -40,7 +40,7 @@ if ($this->is_owner($page_id))
 			echo '<div class="layout-box"><p class="layout-box"><span>' . $title.":</span></p>\n";
 		}
 
-		echo '<ol class="">'."\n";
+		echo '<ol class="">' . "\n";
 
 		foreach ($watchers as $watcher)
 		{

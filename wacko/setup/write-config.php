@@ -115,7 +115,7 @@ echo "         </ul>\n";
 	if ($write_file == true)
 	{
 		echo "         <h2>" . $lang['InstallationComplete'] . "</h2>\n";
-		echo "         <p>".str_replace('%1', $config['base_url'], $lang['ThatsAll']) . "</p>\n";
+		echo "         <p>" . str_replace('%1', $config['base_url'], $lang['ThatsAll']) . "</p>\n";
 	}
 	else
 	{

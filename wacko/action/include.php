@@ -87,7 +87,7 @@ else
 
 				"</nav>\n";
 
-			echo "\n".'<section class="include-page">'."\n" . $edit_link;
+			echo "\n".'<section class="include-page">' . "\n" . $edit_link;
 		}
 
 		// body

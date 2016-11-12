@@ -156,7 +156,7 @@ if ($this->has_access('read'))
 		}
 
 		echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' .
-					$this->_t('CancelDifferencesButton') . '" /></a>'."\n";
+					$this->_t('CancelDifferencesButton') . '" /></a>' . "\n";
 
 		echo $this->form_close() . "\n";
 	}

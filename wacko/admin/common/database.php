@@ -300,7 +300,7 @@ function get_table(&$engine, $table, $drop = true)
 	//
 	// drop the last ',\n' off ;)
 	//
-	$schema_create = preg_replace('/,'."\n".'$/', '', $schema_create);
+	$schema_create = preg_replace('/,' . "\n".'$/', '', $schema_create);
 
 	//
 	// get any Indexed fields from the database...
@@ -325,7 +325,7 @@ function get_table(&$engine, $table, $drop = true)
 			$index[$kname] = [];
 		}
 
-		$index[$kname][] = '`' . $row['Column_name'] . '`'.( $row['Sub_part'] ? '(' . $row['Sub_part'] . ')' : '' );
+		$index[$kname][] = '`' . $row['Column_name'] . '`' . ($row['Sub_part'] ? '(' . $row['Sub_part'] . ')' : '' );
 	}
 
 	while (list($x, $columns) = @each($index))
@@ -375,7 +375,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 			$_root = $engine->translit($root);
 			$pages = $engine->db->load_all(
 				"SELECT page_id ".
-				"FROM " . $engine->db->table_prefix."page ".
+				"FROM " . $engine->db->table_prefix . "page ".
 				"WHERE supertag LIKE " . $engine->db->q($_root . '/%') . " ".
 					"OR supertag = " . $engine->db->q($_root) . " ");
 

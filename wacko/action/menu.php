@@ -28,8 +28,8 @@ if (!function_exists('load_user_menu'))
 	{
 		$_menu = $engine->load_all(
 			"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position ".
-			"FROM " . $engine->db->table_prefix."menu m ".
-				"LEFT JOIN " . $engine->db->table_prefix."page p ON (m.page_id = p.page_id) ".
+			"FROM " . $engine->db->table_prefix . "menu m ".
+				"LEFT JOIN " . $engine->db->table_prefix . "page p ON (m.page_id = p.page_id) ".
 			"WHERE m.user_id = '" . (int) $user_id . "' ".
 				($lang
 					? "AND m.menu_lang =  '" . $lang."' "
@@ -310,7 +310,7 @@ if ($_user_id)
 		}
 
 		echo '<tfoot>';
-		echo "<tr>\n".'<td colspan="3">'."\n";
+		echo "<tr>\n".'<td colspan="3">' . "\n";
 		echo '<input type="submit" name="update_menu" value="' . $this->_t('BookmarkSaveChanges') . '" />';
 		echo '</td><td>';
 		echo '<input type="submit" name="delete_menu_item" value="' . $this->_t('BookmarkDeleteSelected') . '" />';

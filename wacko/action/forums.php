@@ -76,7 +76,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				'<th>' . $this->_t('ForumTopics') . '</th>'.
 				'<th>' . $this->_t('ForumPosts') . '</th>'.
 				'<th>' . $this->_t('ForumLastComment') . '</th>'.
-			'</tr>'."\n";
+			'</tr>' . "\n";
 
 	foreach ($forums as $forum)
 	{
@@ -186,12 +186,12 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			}
 
 			echo	'</td>'.
-				'</tr>'."\n";
+				'</tr>' . "\n";
 		}
 	}
 
-	echo '</table>'."\n";
-	echo '<br />'."\n";
+	echo '</table>' . "\n";
+	echo '<br />' . "\n";
 
 	// mark all forums read
 	if ($user == true)
@@ -199,7 +199,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		echo '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead') . '</a></small>';
 	}
 
-	echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url.'icon/spacer.png' . '" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"/></a></span><br />'."\n";
+	echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url.'icon/spacer.png' . '" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"/></a></span><br />' . "\n";
 }
 
 ?>

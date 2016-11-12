@@ -84,7 +84,7 @@ if ($this->user_allowed_comments())
 
 		$this->print_pagination($pagination);
 
-		echo '<ul class="ul_list">'."\n";
+		echo '<ul class="ul_list">' . "\n";
 
 		$curday = '';
 

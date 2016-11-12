@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 if ($this->get_user_name())
 {
 	$output1 = #'<h3>' . $this->_t('UserPages') . "</h3>".
-				'<ul class="menu" id="list">'."\n";
+				'<ul class="menu" id="list">' . "\n";
 	$output2 = '<li><a href="' . $this->href('', '', 'mode=mypages') . '#list">' . $this->_t('ListMyPages') . "</a></li>\n";
 	$output3 = '<li><a href="' . $this->href('', '', 'mode=mychanges') . '#list">' . $this->_t('ListMyChanges') . "</a></li>\n";
 	$output4 = '<li><a href="' . $this->href('', '', 'mode=mywatches') . '#list">' . $this->_t('ListMyWatches') . "</a></li>";

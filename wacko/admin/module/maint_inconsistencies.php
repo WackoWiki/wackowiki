@@ -273,7 +273,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 								? '<strong>' . $value[1] . '</strong>'
 								: '<em class="grey">' . $value[1] . '</em>').
 						'</td>'.
-						'<tr class="lined"><td colspan="5"></td></tr>'."\n";
+						'<tr class="lined"><td colspan="5"></td></tr>' . "\n";
 				}
 			}
 
@@ -336,7 +336,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			// 1.3. upload without user
 			$admin_id = $engine->db->load_single(
 				"SELECT user_id
-				FROM " . $engine->db->table_prefix."user
+				FROM " . $engine->db->table_prefix . "user
 				WHERE user_name = " . $engine->db->q($engine->db->admin_name) . "
 				LIMIT 1");
 
@@ -513,7 +513,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 											? '<strong>' . $value[1] . '</strong>'
 											: '<em class="grey">' . $value[1] . '</em>').
 											'</td>'.
-											'<tr class="lined"><td colspan="5"></td></tr>'."\n";
+											'<tr class="lined"><td colspan="5"></td></tr>' . "\n";
 				}
 			}
 

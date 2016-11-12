@@ -43,7 +43,7 @@ if (($user_id = $this->get_user_id()))
 			"ORDER BY created DESC, tag ASC ".
 			$pagination['limit'], true))
 		{
-			echo '<ul class="ul_list">'."\n";
+			echo '<ul class="ul_list">' . "\n";
 
 			$current_day = '';
 			foreach ($pages as $page)
@@ -109,7 +109,7 @@ if (($user_id = $this->get_user_id()))
 			"ORDER BY modified DESC, tag ASC ".
 			$pagination['limit'], true))
 		{
-			echo '<ul class="ul_list">'."\n";
+			echo '<ul class="ul_list">' . "\n";
 
 			$current_day = '';
 			foreach ($pages as $page)
@@ -167,7 +167,7 @@ if (($user_id = $this->get_user_id()))
 			"ORDER BY tag ASC ".
 			$pagination['limit'], true)))
 		{
-			echo '<ul class="ul_list">'."\n";
+			echo '<ul class="ul_list">' . "\n";
 
 			foreach ($pages as $page)
 			{

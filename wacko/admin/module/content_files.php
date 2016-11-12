@@ -80,7 +80,7 @@ function admin_content_files(&$engine, &$module)
 		{
 			// 2. remove from DB
 			$engine->db->sql_query(
-				"DELETE FROM " . $engine->db->table_prefix."upload ".
+				"DELETE FROM " . $engine->db->table_prefix . "upload ".
 				"WHERE upload_id = '". $file['upload_id'] . "'");
 
 			// update user uploads count
@@ -146,19 +146,19 @@ function admin_content_files(&$engine, &$module)
 			$_name	= $name;
 			$count	= 1;
 
-			while (file_exists($dir.$name.'.' . $ext))
+			while (file_exists($dir . $name . '.' . $ext))
 			{
 				if ($name === $_name)
 				{
-					$name	= $_name.$count;
+					$name	= $_name . $count;
 				}
 				else
 				{
-					$name	= $_name.(++$count);
+					$name	= $_name . (++$count);
 				}
 			}
 
-			$result_name	= $name.'.' . $ext;
+			$result_name	= $name . '.' . $ext;
 			$file_size		= $_FILES['file']['size'];
 
 			// 1.6. check filesize, if asked
@@ -174,8 +174,8 @@ function admin_content_files(&$engine, &$module)
 			$size	= @getimagesize($src);
 
 			// 3. save to permanent location
-			move_uploaded_file($_FILES['file']['tmp_name'], $dir.$result_name);
-			chmod( $dir.$result_name, 0744 );
+			move_uploaded_file($_FILES['file']['tmp_name'], $dir . $result_name);
+			chmod( $dir . $result_name, 0744 );
 
 			$small_name  = $result_name;
 			$description = substr($_POST['file_description'], 0, 250);
@@ -283,8 +283,8 @@ function admin_content_files(&$engine, &$module)
 
 	$count = $engine->db->load_all(
 			"SELECT f.upload_id ".
-			"FROM " . $engine->db->table_prefix."upload f ".
-				"INNER JOIN " . $engine->db->table_prefix."user u ON (f.user_id = u.user_id) ".
+			"FROM " . $engine->db->table_prefix . "upload f ".
+				"INNER JOIN " . $engine->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '". ($global ? 0 : '') . "' ".
 	($owner
 	? "AND u.user_name = " . $engine->db->q($owner) . " "
@@ -338,7 +338,7 @@ function admin_content_files(&$engine, &$module)
 		$file_name	= $file['file_name'];
 		$file_size	= $engine->binary_multiples($file['file_size'], false, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
-		$link		= $engine->link($path2.$file_name, '', $file_name);
+		$link		= $engine->link($path2 . $file_name, '', $file_name);
 		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id=' . $file['upload_id'];
 ?>
 		<tr class="hl_setting">

@@ -186,7 +186,7 @@ class GPG
 		// in the clear part we use value separator for better
 		// handling in the token validation method (see below).
 		// hash context goes as single concatenated string
-		return $token = "$time|$procedure\n".hash('sha1', $this->engine->db->system_seed.$this->sid.$time.$procedure);
+		return $token = "$time|$procedure\n".hash('sha1', $this->engine->db->system_seed . $this->sid . $time . $procedure);
 	}
 
 	// check whether challenge token is correct and did not
@@ -218,7 +218,7 @@ class GPG
 		}
 
 		// recalculating MAC
-		$new_mac = hash('sha1', $this->engine->db->system_seed.$this->sid.$token_time.$token_proc);
+		$new_mac = hash('sha1', $this->engine->db->system_seed . $this->sid . $token_time . $token_proc);
 
 		// validating conditions. exact order is crucial!
 		if ($token_mac !== $new_mac)
@@ -377,7 +377,7 @@ class GPG
 				}
 				else if ($code[0] == 'IMPORT_OK')
 				{
-					$this->key_id	= '0x'.substr($code[2], -16);
+					$this->key_id	= '0x' . substr($code[2], -16);
 					$this->finger	= $code[2];
 				}
 			}

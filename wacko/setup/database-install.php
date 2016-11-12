@@ -164,7 +164,7 @@ switch ($config['database_driver'])
 					{
 						if (version_compare($version, $to_version, '<='))
 						{
-							echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " ".WACKO_VERSION . "</h2>\n";
+							echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " " . WACKO_VERSION . "</h2>\n";
 							echo "         <ol>\n";
 
 							foreach ($upgrade[$to_version] as $value)
@@ -312,7 +312,7 @@ switch ($config['database_driver'])
 					{
 						if (version_compare($version, $to_version, '<='))
 						{
-							echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " ".WACKO_VERSION . "</h2>\n";
+							echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " " . WACKO_VERSION . "</h2>\n";
 							echo "         <ol>\n";
 
 							foreach ($upgrade[$to_version] as $value)

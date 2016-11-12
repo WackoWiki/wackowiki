@@ -81,7 +81,7 @@ if ($referrers)
 
 	array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 
-	echo '<ul class="ul_list">'."\n";
+	echo '<ul class="ul_list">' . "\n";
 
 	foreach ($referrer_sites as $site => $site_count)
 	{

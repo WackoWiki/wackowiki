@@ -846,7 +846,7 @@ class Wacko
 	{
 		// Lookup transliteration result in the cache and return it if found
 		static $translit_cache;
-		$cach_key = $tag.$strtolow.$donotload;
+		$cach_key = $tag . $strtolow . $donotload;
 
 		if (isset($translit_cache[$cach_key]))
 		{
@@ -1081,7 +1081,7 @@ class Wacko
 			if ($supertagged || $page_id)
 			{
 				$page = $this->db->load_single(
-					"SELECT " . $what_p." ".
+					"SELECT " . $what_p . " ".
 					"FROM " . $this->db->table_prefix . "page p ".
 						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
 						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
@@ -1100,7 +1100,7 @@ class Wacko
 					$this->cache_page($page, $page_id, $metadata_only);
 
 					$page = $this->db->load_single(
-						"SELECT p.revision_id, " . $what_r." ".
+						"SELECT p.revision_id, " . $what_r . " ".
 						"FROM " . $this->db->table_prefix . "revision p ".
 							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
 							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
@@ -1138,7 +1138,7 @@ class Wacko
 
 					$page = $this->db->load_single(
 						"SELECT " . $what_r . " ".
-						"FROM " . $this->db->table_prefix."revision p ".
+						"FROM " . $this->db->table_prefix . "revision p ".
 							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
 							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
 							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) ".
@@ -1370,7 +1370,7 @@ class Wacko
 		$spages_str	= substr($spages_str, 0, strlen($spages_str) - 2);
 
 		if ($links = $this->db->load_all(
-		"SELECT " . $this->page_meta." ".
+		"SELECT " . $this->page_meta . " ".
 		"FROM " . $this->db->table_prefix . "page ".
 		"WHERE supertag IN (" . $spages_str . ")", true))
 		{
@@ -1452,7 +1452,7 @@ class Wacko
 					 'p.page_size, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$revisions = $this->db->load_all(
-			"SELECT p.revision_id, " . $page_meta." " .
+			"SELECT p.revision_id, " . $page_meta . " " .
 			"FROM " . $this->db->table_prefix . "revision p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
@@ -1713,7 +1713,7 @@ class Wacko
 			"SELECT c.category_id, c.category ".
 			"FROM {$this->db->table_prefix}category c ".
 				"INNER JOIN {$this->db->table_prefix}category_page cp ON (c.category_id = cp.category_id) ".
-			"WHERE " . ( $page_id != 0
+			"WHERE " . ($page_id != 0
 				? "cp.page_id  = '" . (int) $page_id . "' "
 				: "cp.supertag = " . $this->db->q($this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD)) . " " )
 			, $cache);
@@ -2069,7 +2069,7 @@ class Wacko
 				{
 					if ($comment_on_id == true)
 					{
-						$title = $this->_t('Comment') . ' '.substr($tag, 7);
+						$title = $this->_t('Comment') . ' ' . substr($tag, 7);
 					}
 					else
 					{
@@ -2351,7 +2351,7 @@ class Wacko
 
 						$user = $this->db->load_single(
 							"SELECT u.user_name, u.email, s.user_lang, u.email_confirm, u.enabled, s.send_watchmail " .
-							"FROM " .$this->db->user_table." u " .
+							"FROM " . $this->db->user_table." u " .
 								"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = p.user_id) " .
 							"WHERE u.user_id = '" . $moderator_id . "' " .
 							"LIMIT 1");
@@ -2718,7 +2718,7 @@ class Wacko
 			$new_tag = '/' . $new_tag;
 		}
 
-		$tag = $root.$new_tag;
+		$tag = $root . $new_tag;
 		$tag = str_replace('//', '/', $tag);
 
 		return $tag;
@@ -3061,7 +3061,7 @@ class Wacko
 
 			if ($text == $tag)
 			{
-				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" '.($text ? 'alt="' . $text . '" title="' . $text . '"' : '').$resize.' />';
+				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" '.($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $resize.' />';
 			}
 			else
 			{
@@ -3253,7 +3253,7 @@ class Wacko
 							{
 								$text = $title;
 								return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
-										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '').$scale.$resize.' />';
+										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize.' />';
 							}
 							else
 							{
@@ -3270,7 +3270,7 @@ class Wacko
 							{
 								$text = $title;
 								return '<img src="' . $this->href('file', trim($page_tag, '/'), 'get=' . $file_name) . '" '.
-										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '').$scale.$resize.' />';
+										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize.' />';
 							}
 							else
 							{
@@ -3300,13 +3300,13 @@ class Wacko
 				}
 				else
 				{
-					$title	= '404: /' . trim($page_tag, '/') . '/file'.($this->db->rewrite_mode ? '?' : '&amp;') . 'get=' . $file_name;
+					$title	= '404: /' . trim($page_tag, '/') . '/file' . ($this->db->rewrite_mode ? '?' : '&amp;') . 'get=' . $file_name;
 				}
 			} //forgot 'bout 403
 
 			unset($file_data);
 		}
-		else if ($this->db->disable_tikilinks != 1 && preg_match('/^(' . $this->language['UPPER'].$this->language['LOWER'].$this->language['ALPHANUM'] . '*)\.(' . $this->language['ALPHA'].$this->language['ALPHANUM'] . '+)$/s', $tag, $matches))
+		else if ($this->db->disable_tikilinks != 1 && preg_match('/^(' . $this->language['UPPER'] . $this->language['LOWER'] . $this->language['ALPHANUM'] . '*)\.(' . $this->language['ALPHA'] . $this->language['ALPHANUM'] . '+)$/s', $tag, $matches))
 		{
 			// it`s a Tiki link! (Tiki.Link -> /Tiki/Link)
 			$tag	= '/' . $matches[1] . '/' . $matches[2];
@@ -3776,11 +3776,11 @@ class Wacko
 
 		if ($linking)
 		{
-			return '<a href="' . $this->href('', $this->db->groups_page, 'profile=' . $group_name) . '" class="group-link">' . $icon.$text.'</a>';
+			return '<a href="' . $this->href('', $this->db->groups_page, 'profile=' . $group_name) . '" class="group-link">' . $icon . $text.'</a>';
 		}
 		else
 		{
-			return '<span class="group-link">' . $icon.$group_name.'</span>';
+			return '<span class="group-link">' . $icon . $group_name.'</span>';
 		}
 	}
 
@@ -3929,7 +3929,7 @@ class Wacko
 	*/
 	function is_wiki_name($text)
 	{
-		return preg_match('/^' . $this->language['UPPER'].$this->language['LOWER'] . '+' . $this->language['UPPERNUM'].$this->language['ALPHANUM'] . '*$/', $text);
+		return preg_match('/^' . $this->language['UPPER'] . $this->language['LOWER'] . '+' . $this->language['UPPERNUM'] . $this->language['ALPHANUM'] . '*$/', $text);
 	}
 
 	// TRACK LINKS
@@ -3976,7 +3976,7 @@ class Wacko
 		$this->db->sql_query(
 			"DELETE ".
 			"FROM " . $this->db->table_prefix . "page_link ".
-			"WHERE from_page_id = '" . (int) $from_page_id."'");
+			"WHERE from_page_id = '" . (int) $from_page_id . "'");
 
 		// page link
 		if ($link_table = @$this->linktable[LINK_PAGE])
@@ -3985,21 +3985,21 @@ class Wacko
 
 			foreach ($link_table as $dummy => $to_tag) // discard strtolowered index
 			{
-				$query .= "('" . (int) $from_page_id."', '" . $this->get_page_id($to_tag) . "', ".
+				$query .= "('" . (int) $from_page_id . "', '" . $this->get_page_id($to_tag) . "', ".
 							$this->db->q($to_tag) . ", " . $this->db->q($this->translit($to_tag)) . "),";
 			}
 
 			$this->db->sql_query(
 				"INSERT INTO " . $this->db->table_prefix . "page_link ".
 					"(from_page_id, to_page_id, to_tag, to_supertag) ".
-				"VALUES ".rtrim($query, ','));
+				"VALUES " . rtrim($query, ','));
 		}
 
 		// delete page related old file links in table
 		$this->db->sql_query(
 			"DELETE ".
 			"FROM " . $this->db->table_prefix . "file_link ".
-			"WHERE page_id = '" . (int) $from_page_id."'");
+			"WHERE page_id = '" . (int) $from_page_id . "'");
 
 		// file link
 		if ($file_table = @$this->linktable[LINK_FILE])
@@ -4008,13 +4008,13 @@ class Wacko
 
 			foreach ($file_table as $upload_id => $dummy) // index == value, BTW
 			{
-				$query .= "('" . (int) $from_page_id."', '" . (int) $upload_id."'),";
+				$query .= "('" . (int) $from_page_id . "', '" . (int) $upload_id . "'),";
 			}
 
 			$this->db->sql_query(
 				"INSERT INTO " . $this->db->table_prefix . "file_link ".
 				"(page_id, file_id) ".
-				"VALUES ".rtrim($query, ','));
+				"VALUES " . rtrim($query, ','));
 		}
 	}
 
@@ -4077,7 +4077,7 @@ class Wacko
 			if (strpos($url, $this->db->base_url) !== false)
 			{
 				$sub = substr($url, strlen($this->db->base_url));
-				$url = $this->db->base_url.$this->translit($sub);
+				$url = $this->db->base_url . $this->translit($sub);
 			}
 
 			// tagging
@@ -4087,7 +4087,7 @@ class Wacko
 			}
 			else
 			{
-				return $url.$tag;
+				return $url . $tag;
 			}
 		}
 	}
@@ -4479,12 +4479,12 @@ class Wacko
 			if ($user_name[$pos] != $table['cyr'][$sub])
 			{
 				// constructing cyrillic regexp addition
-				$user_name[$pos] = '[' . $user_name[$pos].$table['cyr'][$sub] . ']';
+				$user_name[$pos] = '[' . $user_name[$pos] . $table['cyr'][$sub] . ']';
 			}
 			else if ($user_name[$pos] != $table['lat'][$sub])
 			{
 				// constructing latin regexp addition
-				$user_name[$pos] = '[' . $user_name[$pos].$table['lat'][$sub] . ']';
+				$user_name[$pos] = '[' . $user_name[$pos] . $table['lat'][$sub] . ']';
 			}
 		}
 
@@ -6170,7 +6170,7 @@ class Wacko
 			$this->context[$this->current_context] = $this->tag;
 			$data = $this->method($this->method);
 			$this->current_context--;
-			echo $this->theme_header($mod).$data.$this->theme_footer($mod);
+			echo $this->theme_header($mod) . $data . $this->theme_footer($mod);
 		}
 
 		// goback feature

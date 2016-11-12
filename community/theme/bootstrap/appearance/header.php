@@ -208,7 +208,7 @@ echo $this->form_close();
 		return $tab;
 	}
 
-	echo '<ul class="submenu">'."\n";
+	echo '<ul class="submenu">' . "\n";
 	// find order of
 
 	// show tab
@@ -259,7 +259,7 @@ echo $this->form_close();
 	if ($this->has_access('read'))
 	{
 		echo '<li class="dropdown"><a href="#" id="more">' . $this->_t('PageHandlerMoreTip') . '<span class="dropdown_arrow">&#9660;</span></a>'." \n";
-		echo '<ul class="dropdown_menu">'."\n";
+		echo '<ul class="dropdown_menu">' . "\n";
 
 		// print tab
 		// TODO: should add 'PrintTip' to the language file

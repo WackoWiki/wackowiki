@@ -74,7 +74,7 @@ class Http
 			{
 				if (($contents = file_get_contents($this->file)))
 				{
-					return $contents."\n<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp) . " -->\n";
+					return $contents."\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $timestamp) . " -->\n";
 				}
 			}
 		}

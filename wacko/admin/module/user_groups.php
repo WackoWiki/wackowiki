@@ -131,7 +131,7 @@ function admin_user_groups(&$engine, &$module)
 						{
 							foreach ($available_users as $user)
 							{
-								echo '<option value="' . $user['user_id'] . '">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
+								echo '<option value="' . $user['user_id'] . '">' . htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
 							}
 						}
 
@@ -163,11 +163,11 @@ function admin_user_groups(&$engine, &$module)
 					echo $engine->form_open('remove_group_member');
 
 					echo '<input type="hidden" name="group_id" value="' . $group_id . '" />'.
-						'<input type="hidden" name="member_id" value="' . htmlspecialchars($_POST['change_member'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />'."\n".
+						'<input type="hidden" name="member_id" value="' . htmlspecialchars($_POST['change_member'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />' . "\n".
 					'<table class="formation">'.
 						'<tr>
 							<td>
-								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
+								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>' . htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 								'<input type="submit" id="submit" name="remove_member" value="yes" style="width:40px;" /> '.
 								'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width: 40px;" /></a>'.
 								'<br /><small>' . $engine->_t('MembersDeleteInfo') . '</small>'.
@@ -303,7 +303,7 @@ function admin_user_groups(&$engine, &$module)
 					{
 						foreach ($users as $user)
 						{
-							echo '<option value="' . $user['user_id'] . '">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
+							echo '<option value="' . $user['user_id'] . '">' . htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
 						}
 					}
 
@@ -349,10 +349,10 @@ function admin_user_groups(&$engine, &$module)
 			{
 				echo $engine->form_open('edit_group');
 
-				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />'."\n".
+				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />' . "\n".
 					'<table class="formation">'.
 					'<tr><td>
-						<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\' in</label>
+						<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\' in</label>
 					</td>'.
 					'<td>
 						<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100" />
@@ -414,11 +414,11 @@ function admin_user_groups(&$engine, &$module)
 			{
 				echo $engine->form_open('delete_group');
 
-				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />'."\n".
+				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />' . "\n".
 					'<table class="formation">'.
 						'<tr>
 							<td>
-								<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
+								<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 								'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
 								'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>'.
 								'<br /><small>' . $engine->_t('GroupsDeleteInfo') . '</small>'.
@@ -471,7 +471,7 @@ function admin_user_groups(&$engine, &$module)
 <?php
 		foreach ($members as $member)
 		{
-			echo '<tr class="lined">'."\n".
+			echo '<tr class="lined">' . "\n".
 					'<td>
 						<input type="radio" name="change_member" value="' . $member['user_id'] . '" /></td>'.
 					'<td>' . $member['user_id'] . '</td>'.
@@ -559,13 +559,13 @@ function admin_user_groups(&$engine, &$module)
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=groups'.(!empty($order_pagination) ? '&order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=groups'.(!empty($order_pagination) ? '&order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 		$groups = $engine->db->load_all(
 			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name, COUNT(m.user_id) AS members ".
 			"FROM {$engine->db->table_prefix}usergroup g ".
 				"LEFT JOIN {$engine->db->table_prefix}user u ON (g.moderator_id = u.user_id) ".
-				"LEFT JOIN " . $engine->db->table_prefix."usergroup_member m ON (m.group_id = g.group_id) ".
+				"LEFT JOIN " . $engine->db->table_prefix . "usergroup_member m ON (m.group_id = g.group_id) ".
 			($where ? $where : '').
 			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name ".
 			($order ? $order : 'ORDER BY group_id DESC ').
@@ -606,7 +606,7 @@ function admin_user_groups(&$engine, &$module)
 		{
 			foreach ($groups as $row)
 			{
-				echo '<tr class="lined">'."\n".
+				echo '<tr class="lined">' . "\n".
 						'<td>
 							<input type="radio" name="change" value="' . $row['group_id'] . '" /></td>'.
 						'<td>' . $row['group_id'] . '</td>'.
@@ -616,7 +616,7 @@ function admin_user_groups(&$engine, &$module)
 						'<td>' . $row['members'] . '</td>'.
 						'<td>' . $row['open'] . '</td>'.
 						'<td>' . $row['active'] . '</td>'.
-						'<td><small>'.date($engine->db->date_precise_format, strtotime($row['created'])) . '</small></td>'.
+						'<td><small>' . date($engine->db->date_precise_format, strtotime($row['created'])) . '</small></td>'.
 					'</tr>';
 			}
 		}

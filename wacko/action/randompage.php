@@ -17,8 +17,8 @@ Random Page Action
 $tag = isset($page)? $page : '';
 
 $query = // "SELECT p.supertag ".
-		"FROM ". $this->db->table_prefix."page p, ". $this->db->table_prefix."acl a ".
-		"WHERE p.owner_id != (SELECT user_id FROM ". $this->db->table_prefix."user WHERE user_name = 'System' LIMIT 1) ".
+		"FROM ". $this->db->table_prefix . "page p, ". $this->db->table_prefix . "acl a ".
+		"WHERE p.owner_id != (SELECT user_id FROM ". $this->db->table_prefix . "user WHERE user_name = 'System' LIMIT 1) ".
 			($tag
 				? "AND p.tag LIKE " . $this->db->q($tag.'/%') . " "
 				: ""

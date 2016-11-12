@@ -11,20 +11,20 @@ echo ADD_NO_DIV;
 echo "<?xml version=\"1.0\" encoding=\"" . $this->get_charset() . "\"?>\n";
 echo "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 echo "<channel>\n";
-echo "<title>" . $this->db->site_name." - " . $this->tag . "</title>\n";
-echo "<link>" . $this->db->base_url.$this->tag . "</link>\n";
-echo "<description>" . $this->_t('PageRevisionsXML').$this->db->site_name."/" . $this->tag . "</description>\n";
-echo "<lastBuildDate>".date('r') . "</lastBuildDate>\n";
+echo "<title>" . $this->db->site_name . " - " . $this->tag . "</title>\n";
+echo "<link>" . $this->db->base_url . $this->tag . "</link>\n";
+echo "<description>" . $this->_t('PageRevisionsXML') . $this->db->site_name . "/" . $this->tag . "</description>\n";
+echo "<lastBuildDate>" . date('r') . "</lastBuildDate>\n";
 echo "<image>\n";
-echo "<title>" . $this->db->site_name.$this->_t('RecentCommentsTitleXML') . "</title>\n";
+echo "<title>" . $this->db->site_name . $this->_t('RecentCommentsTitleXML') . "</title>\n";
 echo "<link>" . $this->db->base_url . "</link>\n";
-echo "<url>" . $this->db->base_url."image/wacko_logo.png" . "</url>\n";
+echo "<url>" . $this->db->base_url . "image/wacko_logo.png" . "</url>\n";
 echo "<width>108</width>\n";
 echo "<height>50</height>\n";
 echo "</image>\n";
 echo "<language>en-us</language>\n";
 echo "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-// echo "<generator>WackoWiki ".WACKO_VERSION . "</generator>\n";//!!!
+// echo "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
 
 if ($this->has_access('read') && !$this->hide_revisions)
 {
@@ -60,8 +60,8 @@ if ($this->has_access('read') && !$this->hide_revisions)
 				// remove diff type navigation
 				$diff = preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $diff);
 
-				echo "<description>".str_replace('<', "&lt;", str_replace('&', '&amp;', $diff)) . "</description>\n";
-				echo "<pubDate>".date ('r', strtotime ($_GET['c'])) . "</pubDate>\n";
+				echo "<description>" . str_replace('<', "&lt;", str_replace('&', '&amp;', $diff)) . "</description>\n";
+				echo "<pubDate>" . date ('r', strtotime ($_GET['c'])) . "</pubDate>\n";
 				echo "</item>\n";
 			}
 		}

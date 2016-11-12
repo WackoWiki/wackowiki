@@ -230,7 +230,7 @@ if ($can_view)
 		}
 		else
 		{
-			echo '<div class="gallery" style="text-align:center;">'."\n";
+			echo '<div class="gallery" style="text-align:center;">' . "\n";
 		}
 
 		foreach ($files as $file)

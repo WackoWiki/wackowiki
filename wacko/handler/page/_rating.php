@@ -63,10 +63,10 @@ else
 	if ($results['ratio'] > 0)			$results['ratio'] = '+' . $results['ratio'];
 
 	// display rating section
-	echo '<section id="section-rating">'."\n";
+	echo '<section id="section-rating">' . "\n";
 
 	// display rating header
-	echo '<header id="header-rating">'."\n";
+	echo '<header id="header-rating">' . "\n";
 	echo $this->_t('RatingHeaderResults').
 	(handler_show_page_is_rated($this, $this->page['page_id']) === false
 	? ' [<a href="' . $this->href('', '', 'show_rating=0') . '#header-rating">' . $this->_t('RatingForm') . '</a>]'

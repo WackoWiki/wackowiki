@@ -239,7 +239,7 @@ function admin_db_backup(&$engine, &$module)
 							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked="checked"' : '' ) . ' />
 						</td>'.
 					'</tr>'.
-					'<tr class="lined"><td colspan="3"></td></tr>'."\n";
+					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
 			}
 ?>
 				<tr>
@@ -264,7 +264,7 @@ function admin_db_backup(&$engine, &$module)
 							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked="checked"' : '' ) . ' />
 						</td>'.
 					'</tr>'.
-					'<tr class="lined"><td colspan="3"></td></tr>'."\n";
+					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
 			}
 ?>
 				</table>

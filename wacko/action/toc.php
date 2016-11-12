@@ -272,7 +272,7 @@ if ($_page)
 				// open list item element
 				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $_tabs.
 					"<li>".
-					#"<!--FOUR: [" . $ul."]: (" . $i.")" . $ident_level['li'] . " begin element-->".
+					#"<!--FOUR: [" . $ul."]: (" . $i . ")" . $ident_level['li'] . " begin element-->".
 					"\n";
 				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $_tabs . "\t".
 					'<a href="' . $toc_item[3] . '#' . $toc_item[0] . '">'.

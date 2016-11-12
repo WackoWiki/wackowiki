@@ -116,7 +116,7 @@ function admin_system_statistics(&$engine, &$module)
 					'<td class="label"><strong>' . $dir.'</strong></td>'.
 					'<td>&nbsp;&nbsp;&nbsp;' . $files . '</td>' .
 					'<td>' . $engine->binary_multiples($size, false, true, true) . '</td>' .
-				'</tr>'."\n";
+				'</tr>' . "\n";
 		}
 	}
 ?>
