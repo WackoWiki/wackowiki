@@ -74,7 +74,7 @@ if (!empty($this->db->news_cluster))
 			// .date('Y/').date('W/')				- 2011/29
 			$blog_cluster_structure = date('Y/').date('m/');
 
-			$this->http->redirect($this->href('edit', $news_cluster.'/' . $blog_cluster_structure.$name, '', 1));
+			$this->http->redirect($this->href('edit', $news_cluster . '/' . $blog_cluster_structure . $name, '', 1));
 		}
 	}
 	// collect data
@@ -195,11 +195,11 @@ if (!empty($this->db->news_cluster))
 
 		if ($this->page['tag'] == $this->db->news_cluster)
 		{
-			$_title = $this->_t('News').$_category_title;
+			$_title = $this->_t('News') . $_category_title;
 		}
 		else
 		{
-			$_title = $this->compose_link_to_page($this->db->news_cluster, '', $this->_t('News'), 0).$_category_title;
+			$_title = $this->compose_link_to_page($this->db->news_cluster, '', $this->_t('News'), 0) . $_category_title;
 		}
 
 		echo "<h1>" . $_title . "</h1>";
@@ -208,7 +208,7 @@ if (!empty($this->db->news_cluster))
 	// displaying XML icon
 	if (!(int) $noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url.'xml/news_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url.'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>'."\n";
+		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . 'xml/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "\n";
 	}
 
 	// displaying articles
@@ -226,7 +226,7 @@ if (!empty($this->db->news_cluster))
 			echo '<div class="newsinfo"><span><time datetime="' . $this->page['created'] . '">' . $this->get_time_formatted($page['created']) . '</time> ' . $this->_t('By') . ' ' . $this->user_link($page['owner'], '', true, false) . "</span></div>\n";
 			echo '<div class="newscontent">' . $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1) . "</div>\n";
 			echo '<footer class="newsmeta">' . $_category." " . ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText'), 0) . " | " : "") . "  ".
-				'<a href="' . $this->href('', $page['tag'], 'show_comments=1') . '#header-comments" title="' . $this->_t('NewsDiscuss') . ' ' . $page['title'] . '">'.(int) $page['comments'] . " " . $this->_t('Comments') . " &raquo; " . "</a></footer>\n";
+				'<a href="' . $this->href('', $page['tag'], 'show_comments=1') . '#header-comments" title="' . $this->_t('NewsDiscuss') . ' ' . $page['title'] . '">' . (int) $page['comments'] . " " . $this->_t('Comments') . " &raquo; " . "</a></footer>\n";
 			echo "</article>\n";
 
 			unset ($_category);

@@ -231,11 +231,11 @@ else if (($user = $this->get_user()))
 			</th>
 			<td class="form_right">
 		<?php
-				echo '<input type="radio" id="notify_page0" name="notify_page" value="0" '.( $user['notify_page'] == 0 ? 'checked="checked"' : '' ) . '/><label for="notify_page0">' . $this->_t('NotifyOff') . '</label>';
-				echo '<input type="radio" id="notify_page1" name="notify_page" value="1" '.( $user['notify_page'] == 1 ? 'checked="checked"' : '' ) . '/><label for="notify_page1">' . $this->_t('NotifyAlways') . '</label>';
-				echo '<input type="radio" id="notify_page2" name="notify_page" value="2" '.( $user['notify_page'] == 2 ? 'checked="checked"' : '' ) . '/><label for="notify_page2" title="' . $this->_t('NotifyPendingPageTip').
+				echo '<input type="radio" id="notify_page0" name="notify_page" value="0" ' . ($user['notify_page'] == 0 ? 'checked="checked"' : '' ) . '/><label for="notify_page0">' . $this->_t('NotifyOff') . '</label>';
+				echo '<input type="radio" id="notify_page1" name="notify_page" value="1" ' . ($user['notify_page'] == 1 ? 'checked="checked"' : '' ) . '/><label for="notify_page1">' . $this->_t('NotifyAlways') . '</label>';
+				echo '<input type="radio" id="notify_page2" name="notify_page" value="2" ' . ($user['notify_page'] == 2 ? 'checked="checked"' : '' ) . '/><label for="notify_page2" title="' . $this->_t('NotifyPendingPageTip').
 					' ' . $this->_t('NotifyPendingTip') . '">' . $this->_t('NotifyPending') . '</label>';
-				// echo '<input type="radio" id="notify_page3" name="notify_page" value="3" '.( $user['notify_page'] == 3 ? 'checked="checked"' : '' ) . '/><label for="notify_page3">' . $this->_t('NotifyDigest') . '</label>';
+				// echo '<input type="radio" id="notify_page3" name="notify_page" value="3" ' . ($user['notify_page'] == 3 ? 'checked="checked"' : '' ) . '/><label for="notify_page3">' . $this->_t('NotifyDigest') . '</label>';
 		?>
 			</td>
 		</tr>
@@ -245,11 +245,11 @@ else if (($user = $this->get_user()))
 			</th>
 			<td class="form_right">
 <?php
-				echo '<input type="radio" id="notify_comment0" name="notify_comment" value="0" '.( $user['notify_comment'] == 0 ? 'checked="checked"' : '' ) . '/><label for="notify_comment0">' . $this->_t('NotifyOff') . '</label>';
-				echo '<input type="radio" id="notify_comment1" name="notify_comment" value="1" '.( $user['notify_comment'] == 1 ? 'checked="checked"' : '' ) . '/><label for="notify_comment1">' . $this->_t('NotifyAlways') . '</label>';
-				echo '<input type="radio" id="notify_comment2" name="notify_comment" value="2" '.( $user['notify_comment'] == 2 ? 'checked="checked"' : '' ) . '/><label for="notify_comment2" title="' . $this->_t('NotifyPendingCommentTip').
+				echo '<input type="radio" id="notify_comment0" name="notify_comment" value="0" ' . ($user['notify_comment'] == 0 ? 'checked="checked"' : '' ) . '/><label for="notify_comment0">' . $this->_t('NotifyOff') . '</label>';
+				echo '<input type="radio" id="notify_comment1" name="notify_comment" value="1" ' . ($user['notify_comment'] == 1 ? 'checked="checked"' : '' ) . '/><label for="notify_comment1">' . $this->_t('NotifyAlways') . '</label>';
+				echo '<input type="radio" id="notify_comment2" name="notify_comment" value="2" ' . ($user['notify_comment'] == 2 ? 'checked="checked"' : '' ) . '/><label for="notify_comment2" title="' . $this->_t('NotifyPendingCommentTip').
 					' ' . $this->_t('NotifyPendingTip') . '">' . $this->_t('NotifyPending') . '</label>';
-				// echo '<input type="radio" id="notify_comment3" name="notify_comment" value="3" '.( $user['notify_comment'] == 3 ? 'checked="checked"' : '' ) . '/><label for="notify_comment3">' . $this->_t('NotifyDigest') . '</label>';
+				// echo '<input type="radio" id="notify_comment3" name="notify_comment" value="3" ' . ($user['notify_comment'] == 3 ? 'checked="checked"' : '' ) . '/><label for="notify_comment3">' . $this->_t('NotifyDigest') . '</label>';
 ?>
 			</td>
 		</tr>
@@ -390,10 +390,10 @@ else if (($user = $this->get_user()))
 				<th class="form_left"><label for="session_length"><?php echo $this->_t('SessionDuration');?></label></th>
 				<td class="form_right">
 <?php
-			echo '<input type="radio" id="duration0" name="session_length" value="0" '.( $user['session_length'] == 0 ? 'checked="checked"' : '' ) . '/><label for="duration0">' . $this->_t('SessionDurationSession') . '</label>';
-			echo '<input type="radio" id="duration1" name="session_length" value="1" '.( $user['session_length'] == 1 ? 'checked="checked"' : '' ) . '/><label for="duration1">' . $this->_t('SessionDurationDay') . '</label>';
-			echo '<input type="radio" id="duration7" name="session_length" value="7" '.( $user['session_length'] == 7 ? 'checked="checked"' : '' ) . '/><label for="duration7">' . $this->_t('SessionDurationWeek') . '</label>';
-			echo '<input type="radio" id="duration30" name="session_length" value="30" '.( $user['session_length'] == 30 ? 'checked="checked"' : '' ) . '/><label for="duration30">' . $this->_t('SessionDurationMonth') . '</label>';
+			echo '<input type="radio" id="duration0" name="session_length" value="0" ' . ($user['session_length'] == 0 ? 'checked="checked"' : '' ) . '/><label for="duration0">' . $this->_t('SessionDurationSession') . '</label>';
+			echo '<input type="radio" id="duration1" name="session_length" value="1" ' . ($user['session_length'] == 1 ? 'checked="checked"' : '' ) . '/><label for="duration1">' . $this->_t('SessionDurationDay') . '</label>';
+			echo '<input type="radio" id="duration7" name="session_length" value="7" ' . ($user['session_length'] == 7 ? 'checked="checked"' : '' ) . '/><label for="duration7">' . $this->_t('SessionDurationWeek') . '</label>';
+			echo '<input type="radio" id="duration30" name="session_length" value="30" ' . ($user['session_length'] == 30 ? 'checked="checked"' : '' ) . '/><label for="duration30">' . $this->_t('SessionDurationMonth') . '</label>';
 ?>
 				</td>
 			</tr>
@@ -580,8 +580,8 @@ else if (($user = $this->get_user()))
 		</th>
 		<td class="form_right">
 <?php
-			echo '<input type="radio" id="dst0" name="dst" value="0" '.( $user['dst'] == 0 ? 'checked="checked"' : '' ) . '/><label for="dst0">' . $this->_t('MetaOff') . '</label>';
-			echo '<input type="radio" id="dst1" name="dst" value="1" '.( $user['dst'] == 1 ? 'checked="checked"' : '' ) . '/><label for="dst1">' . $this->_t('MetaOn') . '</label>';
+			echo '<input type="radio" id="dst0" name="dst" value="0" ' . ($user['dst'] == 0 ? 'checked="checked"' : '' ) . '/><label for="dst0">' . $this->_t('MetaOff') . '</label>';
+			echo '<input type="radio" id="dst1" name="dst" value="1" ' . ($user['dst'] == 1 ? 'checked="checked"' : '' ) . '/><label for="dst1">' . $this->_t('MetaOn') . '</label>';
 ?>
 		</td>
 	</tr>
@@ -658,10 +658,10 @@ else if (($user = $this->get_user()))
 					'<td class="form_right" title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage.")</span></div></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">' . $this->_t('UsersPages') . "</th>".
-					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">'.(int) $user['total_pages'] . "</a></td>".
+					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_pages'] . "</a></td>".
 				// "</tr>\n".'<tr class="lined">'.
 					// '<th class="form_left" scope="row">' . $this->_t('UsersRevisions') . "</th>".
-					// '<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name']) . '" title="' . $this->_t('RevisionTip') . '">'.(int) $user['total_revisions'] . "</a></td>".
+					// '<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name']) . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_revisions'] . "</a></td>".
 				"</tr>\n".'<tr class="lined">'.
 					'<th class="form_left" scope="row">' . $this->_t('UsersComments') . "</th>".
 					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments') . '" title="' . $this->_t('ShowComments') . '">' . $user['total_comments'] . '</a></td>'.

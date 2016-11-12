@@ -103,8 +103,8 @@ if (function_exists('generate_calendar') == false)
 			$n = '&nbsp;<span class="calendar-next">'.($nl ? '<a href="' . htmlspecialchars($nl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $n.'</a>' : $n) . '</span>';
 		}
 
-		$calendar = '<table class="calendar">'."\n".
-			'<caption class="calendar-month">' . $p.($month_href ? '<a href="' . htmlspecialchars($month_href, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $title.'</a>' : $title).$n . "</caption>\n<tr>";
+		$calendar = '<table class="calendar">' . "\n".
+			'<caption class="calendar-month">' . $p.($month_href ? '<a href="' . htmlspecialchars($month_href, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $title.'</a>' : $title) . $n . "</caption>\n<tr>";
 
 		if ($day_name_length)
 		{

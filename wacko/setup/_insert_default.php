@@ -12,7 +12,7 @@ if (!$config['hashid_seed'])
 	$config['hashid_seed'] = Ut::random_token(20, 3);
 }
 
-$password_hashed		= $config['admin_name'].$_POST['password'];
+$password_hashed		= $config['admin_name'] . $_POST['password'];
 $password_hashed		= password_hash(
 								base64_encode(
 										hash('sha256', $password_hashed, true)

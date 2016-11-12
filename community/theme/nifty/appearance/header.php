@@ -48,9 +48,9 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We include them only for pages in edit mode.
 if ($this->method == 'edit')
 {
-	echo "<script src=\"" . $this->db->base_url."js/protoedit.js\"></script>\n";
-	echo "<script src=\"" . $this->db->base_url."js/wikiedit.js\"></script>\n";
-	echo "<script src=\"" . $this->db->base_url."js/autocomplete.js\"></script>\n";
+	echo "<script src=\"" . $this->db->base_url . "js/protoedit.js\"></script>\n";
+	echo "<script src=\"" . $this->db->base_url . "js/wikiedit.js\"></script>\n";
+	echo "<script src=\"" . $this->db->base_url . "js/autocomplete.js\"></script>\n";
 }
 ?>
 	<script src="<?php echo $this->db->base_url;?>js/captcha.js"></script>

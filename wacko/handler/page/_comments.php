@@ -23,7 +23,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 			"total_revisions AS revisions, ".
 			"total_comments AS comments ".
 		"FROM {$engine->db->user_table} ".
-		"WHERE user_id = '" . (string) $user_id."' ".
+		"WHERE user_id = '" . (int) $user_id . "' ".
 		"LIMIT 1");
 
 	$engine->cached_stats[$user_id] = $stats;
@@ -93,10 +93,10 @@ if ($this->has_access('read'))
 		}
 
 		// display comments section
-		echo '<section id="section-comments">'."\n";
+		echo '<section id="section-comments">' . "\n";
 
 		// display comments header
-		echo '<header id="header-comments">'."\n";
+		echo '<header id="header-comments">' . "\n";
 
 		$this->print_pagination($pagination);
 
@@ -109,18 +109,18 @@ if ($this->has_access('read'))
 			// TODO: evaluate -> option / array to handle nested comments
 			// display relation as @link to an extra handler which filters / shows only the current tree
 
-			echo '<ol id="comments">'."\n";
+			echo '<ol id="comments">' . "\n";
 
 			foreach ($comments as $comment)
 			{
 				#$i ++;
 				$handler_button = '';
 
-				echo '<li id="' . $comment['tag'] . '" class="comment">'."\n";
+				echo '<li id="' . $comment['tag'] . '" class="comment">' . "\n";
 
 				// print comment
 				// header
-				echo '<article class="comment-text">'."\n";
+				echo '<article class="comment-text">' . "\n";
 
 				// show remove comment button
 				if ($this->is_admin() ||
@@ -154,14 +154,14 @@ if ($this->has_access('read'))
 
 				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
 
-				echo '<header class="comment-title">'."\n".
+				echo '<header class="comment-title">' . "\n".
 						'<h2><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . "</a></h2>\n".
 					 "</header>\n";
 
 				echo '<p>' . $this->format($pre_body, 'post_wacko') . "</p>\n";
 
 				echo '<footer>'.
-						'<ul class="comment-info">'."\n".
+						'<ul class="comment-info">' . "\n".
 						"<li>".
 							$this->user_link($comment['owner_name']).
 						"</li>\n".
@@ -177,8 +177,8 @@ if ($this->has_access('read'))
 				echo "</article>\n";
 
 				// comment footer
-				/* echo '<div class="comment-tool">'."\n";
-				echo '<ul class="" style="padding-left: 0px;">'."\n".
+				/* echo '<div class="comment-tool">' . "\n";
+				echo '<ul class="" style="padding-left: 0px;">' . "\n".
 						"".
 						'<li class="voting">
 							<a title="Vote up" class="vote-up  count-0" href="' . $this->href('rate', '', 'vote=1') . '">
@@ -212,11 +212,11 @@ if ($this->has_access('read'))
 		// display comment form
 		if ($this->has_access('comment'))
 		{
-			$parent_id = (isset($_GET['parent_id']) && $_GET['parent_id'] ? (string) $_GET['parent_id'] : 0);
-			echo '<div class="commentform" id="commentform">'."\n";
+			$parent_id = (isset($_GET['parent_id']) && $_GET['parent_id'] ? (int) $_GET['parent_id'] : 0);
+			echo '<div class="commentform" id="commentform">' . "\n";
 
 			echo $this->form_open('add_comment', ['page_method' => 'addcomment']);
-			echo '<input type="hidden" name="parent_id" value="' . $parent_id . '" />'."\n";
+			echo '<input type="hidden" name="parent_id" value="' . $parent_id . '" />' . "\n";
 
 			// preview
 			if (!empty($preview))
@@ -225,20 +225,20 @@ if ($this->has_access('read'))
 				$preview = $this->format($preview, 'wacko');
 				$preview = $this->format($preview, 'post_wacko');
 
-				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim') . '</span></p>'."\n".
-						'<div class="comment-preview">'."\n".
+				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim') . '</span></p>' . "\n".
+						'<div class="comment-preview">' . "\n".
 						'<header class="comment-title">'.
 							'<h2>' . $title.'</h2>'.
-						'</header>'."\n".
+						'</header>' . "\n".
 						'<p>' . $preview.'</p>'.
 						"</div>\n</div><br />\n";
 			}
 
 			// load WikiEdit
-			echo '<script src="' . $this->db->base_url.'js/protoedit.js"></script>'."\n";
-			echo '<script src="' . $this->db->base_url.'js/lang/wikiedit.' . $this->user_lang.'.js"></script>'."\n";
-			echo '<script src="' . $this->db->base_url.'js/wikiedit.js"></script>'."\n";
-			echo '<script src="' . $this->db->base_url.'js/autocomplete.js"></script>'."\n";
+			echo '<script src="' . $this->db->base_url.'js/protoedit.js"></script>' . "\n";
+			echo '<script src="' . $this->db->base_url.'js/lang/wikiedit.' . $this->user_lang.'.js"></script>' . "\n";
+			echo '<script src="' . $this->db->base_url.'js/wikiedit.js"></script>' . "\n";
+			echo '<script src="' . $this->db->base_url.'js/autocomplete.js"></script>' . "\n";
 			?>
 				<noscript><div class="errorbox_js"><?php echo $this->_t('WikiEditInactiveJs'); ?></div></noscript>
 
@@ -256,7 +256,7 @@ if ($this->has_access('read'))
 				// publish anonymously
 				if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
-					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" '.( $this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' ) . "/>\n";
+					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" ' . ($this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' ) . "/>\n";
 					$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . "</label>\n";
 					$output .= '<br />';
 				}
@@ -334,7 +334,7 @@ if ($this->has_access('read'))
 			echo '<section id="section-comments">';
 			echo '<header id="header-comments">';
 			echo '<h1><a href="' . $this->href('', '', 'show_comments=1#header-comments') . '" title="' . $this->_t('ShowComments') . '">' . $show_comments.'</a></h1>';
-			echo '</header>'."\n";
+			echo '</header>' . "\n";
 			echo "</section>\n";
 		}
 		else

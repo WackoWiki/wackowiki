@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 echo '<h3>';
-echo $this->_t('Moderation') . ' '.( $this->forum === true ? $this->_t('Topics') : $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title'], 0);
+echo $this->_t('Moderation') . ' ' . ($this->forum === true ? $this->_t('Topics') : $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title'], 0);
 echo ($this->forum === true ? '<br />[' . $this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->_t('ModerateSection2'), 0) . ']' : '');
 echo "</h3>\n";
 
@@ -105,8 +105,8 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 			// move comments to the base topic
 			$engine->db->sql_query(
 				"UPDATE {$engine->db->table_prefix}page SET ".
-					"comment_on_id = '" . (string) $base_id."' ".
-				"WHERE comment_on_id = '" . (string) $topic_id."'");
+					"comment_on_id = '" . (int) $base_id."' ".
+				"WHERE comment_on_id = '" . (int) $topic_id."'");
 
 			// for the forum moderation only
 			if ($move_topics === true)
@@ -157,7 +157,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$comments = $engine->db->load_all(
 		"SELECT page_id, tag, body_r ".
 		"FROM {$engine->db->table_prefix}page ".
-		"WHERE comment_on_id = '" . (string) $base_id."'");
+		"WHERE comment_on_id = '" . (int) $base_id."'");
 
 	foreach ($comments as $comment)
 	{
@@ -178,7 +178,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 		"UPDATE {$engine->db->table_prefix}page SET ".
 			"comments	= '" . $engine->count_comments($base_id) . "', ".
 			"commented	= UTC_TIMESTAMP() ".
-		"WHERE page_id = '" . (string) $base_id."' ".
+		"WHERE page_id = '" . (int) $base_id."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -249,7 +249,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		$engine->db->sql_query(
 			"UPDATE {$engine->db->table_prefix}page SET ".
 				"comment_on_id = '" . $new_page_id."' ".
-			"WHERE page_id = '" . (string) $comment_id."'");
+			"WHERE page_id = '" . (int) $comment_id."'");
 
 		// saving acls
 		$engine->save_acl($comment_id, 'write',		$write_acl);
@@ -280,7 +280,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->db->sql_query(
 		"UPDATE {$engine->db->table_prefix}page SET ".
 			"comments = '" . $engine->count_comments($old_page_id) . "' ".
-		"WHERE page_id = '" . (string) $old_page_id."' ".
+		"WHERE page_id = '" . (int) $old_page_id."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -623,7 +623,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
 						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
-				'</table><br />'."\n";
+				'</table><br />' . "\n";
 		}
 		// select target forum section
 		else if ($accept_action == 'move')
@@ -662,7 +662,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
 						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
-				'</table><br />'."\n";
+				'</table><br />' . "\n";
 		}
 		// enter a new name for the renamed topic
 		else if ($accept_action == 'rename')
@@ -681,7 +681,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							? '<br /><small>' . $this->_t('ModerateRename1Only') . '</small>'
 							: '').
 					'</td></tr>'.
-				'</table><br />'."\n";
+				'</table><br />' . "\n";
 		}
 		// select base for merging topics
 		else if ($accept_action == 'merge')
@@ -710,7 +710,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						($error == true
 							? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 							: '' ).
-						'<em>'.implode('<br />', $accept_text) . '</em><br />'."\n".
+						'<em>'.implode('<br />', $accept_text) . '</em><br />' . "\n".
 						'<select name="base">'.
 							'<option selected="selected"></option>'.
 							$list.
@@ -718,12 +718,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
 						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
-				'</table><br />'."\n";
+				'</table><br />' . "\n";
 		}
 
 		// print moderation controls...
 		echo '<input type="hidden" name="ids" value="' . implode('-', $set) . '" />'.
-			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((string) $_GET['p']) : '') . '" />'."\n";
+			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((string) $_GET['p']) : '') . '" />' . "\n";
 		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="5">'.
@@ -736,7 +736,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						(isset($this->db->moders_docs)
 							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>'
 							: '').
-						'<br />'."\n".
+						'<br />' . "\n".
 						'<input type="submit" name="set" id="submit" value="' . $this->_t('ModerateSet') . '" /> '.
 						($set
 							? '<input type="submit" name="reset" id="submit" value="' . $this->_t('ModerateReset') . '" /> '.
@@ -744,13 +744,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: ''
 						).
 					'</td>'.
-				'</tr>'."\n".
+				'</tr>' . "\n".
 				'<tr class="formation">'.
 					'<th colspan="2">' . $this->_t('ForumTopic') . '</th>'.
 					'<th>' . $this->_t('ForumAuthor') . '</th>'.
 					'<th>' . $this->_t('ForumReplies') . '</th>'.
 					'<th>' . $this->_t('ForumCreated') . '</th>'.
-				'</tr>'."\n";
+				'</tr>' . "\n";
 
 		// ...and topics list itself
 		foreach ($topics as $topic)
@@ -759,15 +759,15 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				echo '<tr class="lined">'.
 						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="' . $topic['page_id'] . '" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ) . '/></td>'.
-						'<td style="text-align:left; padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? '<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>' : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']) . ' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0) . '</strong></td>'.
-						'<td style="text-align:center;" '.( $this->is_admin() ? ' title="' . $topic['ip'] . '"' : '' ) . '><small>&nbsp;&nbsp;' . $this->user_link($topic['owner_name'], '', true, false) . '&nbsp;&nbsp;</small></td>'.
+						'<td style="text-align:left; padding-left:5px;">' . ($this->has_access('comment', $topic['page_id'], GUEST) === false ? '<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>' : '' ) . $this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']) . ' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0) . '</strong></td>'.
+						'<td style="text-align:center;" ' . ($this->is_admin() ? ' title="' . $topic['ip'] . '"' : '' ) . '><small>&nbsp;&nbsp;' . $this->user_link($topic['owner_name'], '', true, false) . '&nbsp;&nbsp;</small></td>'.
 						'<td style="text-align:center;"><small>' . $topic['comments'] . '</small></td>'.
 						'<td style="text-align:center; white-space:nowrap"><small>&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '</small></td>'.
-					'</tr>'."\n";
+					'</tr>' . "\n";
 			}
 		}
 
-		echo '</table>'."\n";
+		echo '</table>' . "\n";
 
 		$this->print_pagination($pagination);
 
@@ -813,7 +813,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$pos		= strrpos($this->tag, '/');
 				$sub_tag	= substr($this->tag, ( $pos ? $pos + 1 : 0 ));
 				$old_tag	= $this->tag;
-				$new_tag	= ($_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/') . '/' ) : $_POST['section'] . '/').$sub_tag;
+				$new_tag	= ($_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/') . '/' ) : $_POST['section'] . '/') . $sub_tag;
 
 				if ($forum_cluster === true)
 				{
@@ -821,7 +821,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						if (moderate_page_exists($this, $_POST['cluster']) === false)
 						{
-							$error = $this->_t('ModerateMoveNotExists') . ' <code>'.htmlspecialchars($_POST['cluster'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>';
+							$error = $this->_t('ModerateMoveNotExists') . ' <code>' . htmlspecialchars($_POST['cluster'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>';
 						}
 					}
 					else if (!empty($_POST['section']))
@@ -880,7 +880,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= preg_replace('/[^- \\w]/', '', $tag);
 				$tag		= str_replace(array(' ', "\t"), '', $tag);
 				$old_tag	= $this->tag;
-				$new_tag	= ($section ? $section.'/' : '').$tag;
+				$new_tag	= ($section ? $section.'/' : '') . $tag;
 
 				// check new tag existance
 				if ($old_tag == $new_tag || moderate_page_exists($this, $new_tag) === true)
@@ -1117,7 +1117,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"UPDATE {$this->db->table_prefix}page SET ".
 								"comments	= '" . $this->count_comments($page_id) . "', ".
 								"commented	= UTC_TIMESTAMP() ".
-							"WHERE page_id = '" . (string) $page_id."' ".
+							"WHERE page_id = '" . (int) $page_id."' ".
 							"LIMIT 1");
 
 						$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', SYSTEM_LANG),
@@ -1182,7 +1182,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
 						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
-				'</table><br />'."\n";
+				'</table><br />' . "\n";
 		}
 		// select target forum section / cluster for topic/page moving
 		else if ($accept_action == 'topic_move')
@@ -1221,7 +1221,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
 							'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 						'</td></tr>'.
-					'</table><br />'."\n";
+					'</table><br />' . "\n";
 			}
 			else
 			{
@@ -1237,7 +1237,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
 							'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 						'</td></tr>'.
-					'</table><br />'."\n";
+					'</table><br />' . "\n";
 			}
 		}
 		// enter a new name for topic renaming
@@ -1254,7 +1254,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
 						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
-				'</table><br />'."\n";
+				'</table><br />' . "\n";
 		}
 		// confirm comments deletion
 		else if ($accept_action == 'posts_delete')
@@ -1269,7 +1269,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
 						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
-				'</table><br />'."\n";
+				'</table><br />' . "\n";
 		}
 		// enter a new name for the detached topic
 		else if ($accept_action == 'posts_split')
@@ -1290,12 +1290,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="radio" name="scheme" value="selected" id="selected" '.(isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked="checked" ' : '' ) . '/> <label for="selected">'.Ut::perc_replace($this->_t('ModerateSplitSelected'), count($set)) . '</label>'.
 						'</small>'.
 					'</td></tr>'.
-				'</table><br />'."\n";
+				'</table><br />' . "\n";
 		}
 
 		// print moderation controls...
 		echo '<input type="hidden" name="ids" value="' . implode('-', $set) . '" />'.
-			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((string) $_GET['p']) : '') . '" />'."\n";
+			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((string) $_GET['p']) : '') . '" />' . "\n";
 		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="2">'.
@@ -1314,16 +1314,16 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						).
 						(isset($this->db->moders_docs) ? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>' : '').
 					'</td>'.
-				'</tr>'."\n".
+				'</tr>' . "\n".
 				'<tr class="formation">'.
-					'<th colspan="2">'.($this->has_access('comment', $this->page['page_id'], GUEST) === false ? '<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>' : '' ).$this->_t('ForumTopic') . '</th>'.
-				'</tr>'."\n".
+					'<th colspan="2">'.($this->has_access('comment', $this->page['page_id'], GUEST) === false ? '<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>' : '' ) . $this->_t('ForumTopic') . '</th>'.
+				'</tr>' . "\n".
 				'<tr class="lined">'.
 					'<td colspan="2" style="padding-bottom:30px;">'.
 						'<strong><small>'.($forum_cluster === false ? $this->user_link($this->page['owner_name'], '', true, false) : $this->user_link($this->page['user_name'], '', true, false)) . ' (' . $this->get_time_formatted($this->page['created']) . ')</small></strong>'.
 						'<br />' . $body.
 					'</td>'.
-				'</tr>'."\n";
+				'</tr>' . "\n";
 
 		if ($comments)
 		{
@@ -1334,7 +1334,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						(isset($this->db->moders_docs)
 							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>'
 							: '').
-						'<br />'."\n".
+						'<br />' . "\n".
 						'<input type="submit" name="set" id="submit" value="' . $this->_t('ModerateSet') . '" /> '.
 						($set
 							? '<input type="submit" name="reset" id="submit" value="' . $this->_t('ModerateReset') . '" /> '.
@@ -1342,10 +1342,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: ''
 						).
 					'</td>'.
-				'</tr>'."\n".
+				'</tr>' . "\n".
 				'<tr class="formation">'.
 					'<th colspan="2">' . $this->_t('ForumComments') . '</th>'.
-				'</tr>'."\n";
+				'</tr>' . "\n";
 
 			// ...and comments list
 			foreach ($comments as $comment)
@@ -1358,11 +1358,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="' . $comment['page_id'] . '" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ) . '/></td>'.
 						'<td style="text-align:left; padding-left:5px;"><strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . $this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="' . $this->href('', $this->db->users_page, 'profile=' . $comment['owner_name']) . '">' . $this->_t('ModerateUserProfile') . '</a>' : '' ) . '</small></strong>'.
 							'<br />' . $desc . '</td>' .
-					'</tr>'."\n";
+					'</tr>' . "\n";
 			}
 		}
 
-		echo '</table>'."\n";
+		echo '</table>' . "\n";
 
 		$this->print_pagination($pagination);
 

@@ -83,8 +83,8 @@ class typografica
 	function __construct( &$wacko )
 	{
 		$this->wacko	= &$wacko;
-		$this->indent1	= '<img src="' . $wacko->db->base_url.$this->indent1;
-		$this->indent2	= '<img src="' . $wacko->db->base_url.$this->indent2;
+		$this->indent1	= '<img src="' . $wacko->db->base_url . $this->indent1;
+		$this->indent2	= '<img src="' . $wacko->db->base_url . $this->indent2;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,12 +176,12 @@ class typografica
 
 			foreach ($this->glueleft as $i)
 			{
-				$data = preg_replace('/([\\s]+)(" . $i.")(\s+)/i', "\\1\\2&nbsp;", $data );
+				$data = preg_replace('/([\\s]+)(" . $i . ")(\s+)/i', "\\1\\2&nbsp;", $data );
 			}
 
 			foreach ($this->glueright as $i)
 			{
-				$data = preg_replace('/([\\s]+)(" . $i.")(\s+)/i', "&nbsp;\\2\\3", $data );
+				$data = preg_replace('/([\\s]+)(" . $i . ")(\s+)/i', "&nbsp;\\2\\3", $data );
 			}
 		}
 
@@ -211,7 +211,7 @@ class typografica
 
 				for ($i = 1; $i < $size; $i++)
 				{
-					$data= $data.$tags[$i-1].$a[$i];
+					$data= $data . $tags[$i-1] . $a[$i];
 				}
 			}
 		}
@@ -228,7 +228,7 @@ class typografica
 
 				for ($i = 1; $i < $size; $i++)
 				{
-					$data= $data.$ignored[$i-1].$a[$i];
+					$data= $data . $ignored[$i-1] . $a[$i];
 				}
 			}
 		}

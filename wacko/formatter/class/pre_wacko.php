@@ -56,7 +56,7 @@ class preformatter
 
 			if (preg_match('/\&\#\d+;/', $cont, $matches))
 			{
-				$thing = $b1.@strtr($cont, $this->object->unicode_entities) . ' @@' . $this->object->user_lang.$b2;
+				$thing = $b1 . @strtr($cont, $this->object->unicode_entities) . ' @@' . $this->object->user_lang . $b2;
 			}
 
 			return $thing;

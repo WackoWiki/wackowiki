@@ -165,7 +165,7 @@ if ($this->is_admin()
 					? "SET total_comments	= total_comments	- 1 "
 					: "SET total_pages		= total_pages		- 1 "
 				).
-				"WHERE user_id = '" . (string) $owner_id."' ".
+				"WHERE user_id = '" . (int) $owner_id."' ".
 				"LIMIT 1");
 		}
 

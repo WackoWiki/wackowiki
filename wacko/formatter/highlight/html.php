@@ -185,29 +185,29 @@ $xhtml_tags = [
 	{
 		$source = preg_replace(
 				'/&lt;' . $i . '(&gt;|[[:space:]])/',
-				'<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&lt;' .$i. '\\1</span>',
+				'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;' . $i . '\\1</span>',
 				$source);
 
 		$source = str_replace(
-				'&lt;/' .$i. '&gt;',
-				'<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&lt;/' .$i. '&gt;</span>',
+				'&lt;/' . $i . '&gt;',
+				'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;/' . $i . '&gt;</span>',
 				$source);
 	}
 
 	$source = str_replace(
 			'/&gt;',
-			'<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">/&gt;</span>',
+			'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">/&gt;</span>',
 			$source);
 
 	$source = preg_replace(
 			'/([[:space:]]|&quot;|\'|\?)&gt;/',
-			'\\1<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&gt;</span>',
+			'\\1<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&gt;</span>',
 			$source);
 
 	$source = preg_replace( "/([a-z-]+)=(&quot;|\')(.*?)\\2/i",
-			'<span style="color: ' .$options['color']['attributes']. ';font-weight:bold;">$1=</span><span style="color: '
-			.$options['color']['attributevalues']. ';">$2$3$2</span>', $source);
-			$source = preg_replace("/&amp;([a-z0-9]*?;)/i", '&amp;<span style="color: ' .$options['color']['entities']. ';">$1</span>', $source);
+			'<span style="color: ' . $options['color']['attributes'] . ';font-weight:bold;">$1=</span><span style="color: '
+			.$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
+			$source = preg_replace("/&amp;([a-z0-9]*?;)/i", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
 
 	if ($options['line_numbers'] == true)
 	{
@@ -218,7 +218,7 @@ $xhtml_tags = [
 		foreach ($lines as $line)
 		{
 			$i += 1;
-			$source .= '<li id="l' .$i. '">' .rtrim($line). "</li>";
+			$source .= '<li id="l' . $i . '">' .rtrim($line). "</li>";
 		}
 
 		$source .= '</ol>';

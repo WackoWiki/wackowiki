@@ -137,7 +137,7 @@ foreach ($pages as $page)
 
 			echo "<tr><td>&nbsp;&nbsp;" . $num.".&nbsp;" . $_link . "</td><td>".
 				$this->_t('Shown') . "</td><td>".
-				'<a href="' . $this->href('', $page['tag'], 'show_comments=1') . '#header-comments">' . $page['comments'] . '</a></td></tr>'."\n";
+				'<a href="' . $this->href('', $page['tag'], 'show_comments=1') . '#header-comments">' . $page['comments'] . '</a></td></tr>' . "\n";
 		}
 	}
 }

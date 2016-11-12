@@ -23,7 +23,7 @@ else
 
 	foreach ($list as $row)
 	{
-		$user = ( strpos($row['user_name'], '.') ? '<em>' . $this->_t('PollsGuest') . '</em>' : '<a href="' . $this->href('', $this->db->users_page, 'profile=' . $row['user_name']) . '">' . $row['user_name'] . '</a>' );
+		$user = (strpos($row['user_name'], '.') ? '<em>' . $this->_t('PollsGuest') . '</em>' : '<a href="' . $this->href('', $this->db->users_page, 'profile=' . $row['user_name']) . '">' . $row['user_name'] . '</a>');
 		echo '<tr>';
 			echo '<td class="label"></td>';
 			echo '<td style="text-align:left;width:80%;">' . $row['text'] . '</td>';

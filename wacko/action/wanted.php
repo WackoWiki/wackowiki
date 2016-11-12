@@ -13,8 +13,8 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 	// count pages
 	if ($count_pages = $this->db->load_all(
 			"SELECT DISTINCT l.to_tag AS wanted_tag ".
-			"FROM " . $pref."page_link l ".
-				"LEFT JOIN " . $pref."page p ON ".
+			"FROM " . $pref . "page_link l ".
+				"LEFT JOIN " . $pref . "page p ON ".
 				"((l.to_tag = p.tag ".
 					"AND l.to_supertag = '') ".
 					"OR l.to_supertag = p.supertag) ".
@@ -32,8 +32,8 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 
 		$wanted = $this->db->load_all(
 				"SELECT DISTINCT l.to_tag AS wanted_tag ".
-				"FROM " . $pref."page_link l ".
-					"LEFT JOIN " . $pref."page p ON ".
+				"FROM " . $pref . "page_link l ".
+					"LEFT JOIN " . $pref . "page p ON ".
 					"((l.to_tag = p.tag ".
 						"AND l.to_supertag = '') ".
 						"OR l.to_supertag = p.supertag) ".

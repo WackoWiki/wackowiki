@@ -67,7 +67,7 @@ if (@$_POST['_action'] === 'emergency')
 {
 	if (password_verify(
 			base64_encode(
-					hash('sha256', $engine->db->system_seed.$_POST['ap_password'], true)
+					hash('sha256', $engine->db->system_seed . $_POST['ap_password'], true)
 					),
 				$engine->db->recovery_password
 			)
@@ -285,7 +285,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		<br style="clear: right" />
 		<div id="sections">
 			<a href="<?php echo rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>'; ?>
-			<a href="<?php echo rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' .$engine->_t('ApLogOutTip')  . '">' . $engine->_t('ApLogOut') .'</a>'; ?>
+			<a href="<?php echo rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' . $engine->_t('ApLogOutTip')  . '">' . $engine->_t('ApLogOut') .'</a>'; ?>
 		</div>
 	</div>
 </header>

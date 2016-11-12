@@ -12,8 +12,8 @@ else
 	$align_style = 'float: ' . $options['wrapper_align'] . ';';
 }
 
-echo	'<aside class="action" style="' . $align_style.' width: ' . $options['wrapper_width'] . 'px;">'."\n".
-			'<div class="action-content">'."\n".
+echo	'<aside class="action" style="' . $align_style.' width: ' . $options['wrapper_width'] . 'px;">' . "\n".
+			'<div class="action-content">' . "\n".
 				$text.
 			"</div>\n".
 		"</aside>\n";

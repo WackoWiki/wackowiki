@@ -29,7 +29,7 @@ if (@$_POST['_action'] === 'set_permissions')
 				"SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang ".
 				"FROM {$this->db->user_table} u ".
 					"LEFT JOIN {$this->db->table_prefix}user_setting s ON (u.user_id = s.user_id) ".
-				"WHERE u.user_id = '" . (string) $uid."' ".
+				"WHERE u.user_id = '" . (int) $uid."' ".
 				"LIMIT 1");
 		}
 		else
@@ -82,8 +82,8 @@ if (@$_POST['_action'] === 'set_permissions')
 		$comments = $this->db->load_all(
 			"SELECT page_id ".
 			"FROM {$this->db->table_prefix}page ".
-			"WHERE comment_on_id = '" . (string) $pid."' ".
-				"AND owner_id='" . (string) $uid."'"); // STS ?? for admin too?
+			"WHERE comment_on_id = '" . (int) $pid."' ".
+				"AND owner_id='" . (int) $uid."'"); // STS ?? for admin too?
 
 		foreach ($comments as $comment)
 		{
@@ -101,7 +101,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		}
 
 		// change owner?
-		if ($new_owner && ($new_id = (string) $new_owner['user_id']) != ($former_id = (string) $page['owner_id']))
+		if ($new_owner && ($new_id = (int) $new_owner['user_id']) != ($former_id = (int) $page['owner_id']))
 		{
 			// update user statistics
 			$this->db->sql_query(
@@ -118,8 +118,8 @@ if (@$_POST['_action'] === 'set_permissions')
 
 			$this->db->sql_query(
 				"UPDATE {$this->db->table_prefix}page SET ".
-					"owner_id = '" . (string) $new_id."' ".
-				"WHERE page_id = '" . (string) $pid."' ".
+					"owner_id = '" . (int) $new_id."' ".
+				"WHERE page_id = '" . (int) $pid."' ".
 				"LIMIT 1");
 
 			$new_owner['owned'] .= $this->href('', $page['tag']) . "\n";
@@ -146,7 +146,7 @@ if (@$_POST['_action'] === 'set_permissions')
 				") ".
 			($this->is_admin()
 				? ""
-				: "AND owner_id = '" . (string) $uid . "'"));
+				: "AND owner_id = '" . (int) $uid . "'"));
 
 		foreach ($pages as $page)
 		{

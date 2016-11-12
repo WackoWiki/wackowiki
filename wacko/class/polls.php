@@ -107,7 +107,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, u.user_name ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY start DESC");
 				break;
@@ -117,7 +117,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, u.user_name as user ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY poll_id ASC");
 				break;
@@ -126,7 +126,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY end DESC");
 				break;
@@ -136,7 +136,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL ".
 						"AND end IS NULL AND YEAR(start) = '" . $year."' ".
 					"ORDER BY end DESC");
@@ -147,7 +147,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL ".
 					"ORDER BY start DESC");
 		}
@@ -203,7 +203,7 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest') . '</em>' : $header['user_name'] );
+		$user		= (strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest') . '</em>' : $header['user_name']);
 
 		if (!$header['start'])
 		{	// non-existent or not moderated poll
@@ -218,8 +218,8 @@ class Polls
 					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>'.
 					'<a id="poll' . $poll_id.'_form"></a>'.
 					'<input type="hidden" name="poll" value="' . $poll_id . '" />'.
-					'<table class="formation">'."\n".
-					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>'."\n";
+					'<table class="formation">' . "\n".
+					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
 
 			foreach ($vars as $var)
 			{
@@ -228,11 +228,11 @@ class Polls
 								? '<input type="checkbox" id="' . $var['v_id'] . '" name="' . $var['v_id'] . '" value="1" />'
 								: '<input type="radio" id="' . $var['v_id'] . '" name="id" value="' . $var['v_id'] . '" />').
 							'</td>'.
-						'<td style="width:95%;text-align:left;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>'."\n";
+						'<td style="width:95%;text-align:left;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>' . "\n";
 			}
 
 			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts') . ': ' . $duration.
-						'<br />' . $this->engine->_t('PollsAdded') . ': '.( strpos($header['user_id'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user.'</a>' ) . '</small></td></tr>'.
+						'<br />' . $this->engine->_t('PollsAdded') . ': ' . (strpos($header['user_id'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user . '</a>') . '</small></td></tr>'.
 					'<tr><td colspan="2" style="white-space:nowrap;">'.
 					'<input type="submit" name="vote" id="submit" value="' . $this->engine->_t('PollsSubmit') . '" /> '.
 					'<input type="submit" name="results" id="submit" value="' . $this->engine->_t('PollsResults') . '" />'.

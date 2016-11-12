@@ -185,7 +185,7 @@ function bb2_summary(&$engine)
 		{
 			foreach ($results as $result)
 			{
-				echo '<tr id="request-' . '' . '"  style="vertical-align:top;" class="lined">'."\n";
+				echo '<tr id="request-' . '' . '"  style="vertical-align:top;" class="lined">' . "\n";
 				echo '<td class="label" style="width:5%;">' . $result['n'] . "</td>\n";
 				#echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . "</td>\n";
 
@@ -252,12 +252,12 @@ function bb2_manage(&$engine)
 	#$level_mod_pagination		= isset($_GET['level_mod'])			? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode=badbehavior&amp;setting=bb2_manage'.
-								(!empty($blocked_pagination)			? '&amp;blocked='.htmlspecialchars($blocked_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($permitted_pagination)			? '&amp;permitted='.htmlspecialchars($permitted_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($key_pagination)				? '&amp;status_key='.htmlspecialchars($key_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($ip_pagination)					? '&amp;ip='.htmlspecialchars($ip_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($request_method_pagination)		? '&amp;request_method='.htmlspecialchars($request_method_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($user_agent_pagination)			? '&amp;user_agent='.htmlspecialchars($user_agent_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+								(!empty($blocked_pagination)			? '&amp;blocked=' . htmlspecialchars($blocked_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
+								(!empty($permitted_pagination)			? '&amp;permitted=' . htmlspecialchars($permitted_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
+								(!empty($key_pagination)				? '&amp;status_key=' . htmlspecialchars($key_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
+								(!empty($ip_pagination)					? '&amp;ip=' . htmlspecialchars($ip_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
+								(!empty($request_method_pagination)		? '&amp;request_method=' . htmlspecialchars($request_method_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
+								(!empty($user_agent_pagination)			? '&amp;user_agent=' . htmlspecialchars($user_agent_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 	// Query the DB based on variables selected
 
@@ -321,9 +321,9 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 		{
 			$status_key = bb2_get_response($result['status_key']);
 
-			echo '<tr id="request-' . $result['log_id'] . '"  style="vertical-align:top;" class="lined">'."\n";
+			echo '<tr id="request-' . $result['log_id'] . '"  style="vertical-align:top;" class="lined">' . "\n";
 
-			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '" /></td>'."\n";
+			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '" /></td>' . "\n";
 
 			$httpbl	= bb2_httpbl_lookup($result['ip']);
 

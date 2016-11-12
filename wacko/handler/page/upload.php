@@ -138,8 +138,8 @@ if ($this->can_upload() === true)
 		$file = $this->db->load_single(
 			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
 			"FROM " . $this->db->table_prefix . "upload f ".
-				"INNER JOIN " . $this->db->table_prefix."user u ON (f.user_id = u.user_id) ".
-				"LEFT JOIN " . $this->db->table_prefix."page p ON (f.page_id = p.page_id) ".
+				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
+				"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) ".
 			"WHERE f.page_id = '" . $page_id . "' ".
 				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' ".
 			"LIMIT 1");
@@ -674,4 +674,4 @@ if ($this->has_access('read'))
 	echo $this->action('files', []) . '<br />';
 }
 
-echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>'."\n";
+echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";

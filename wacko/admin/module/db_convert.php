@@ -194,9 +194,9 @@ function admin_db_convert(&$engine, &$module)
 							echo '<tr class="hl_setting">'.
 									'<td class="label"><input type="checkbox" name="' . $table['TABLE_NAME'] . '" value="table" checked="checked" /></td>'.
 									'<td>&nbsp;&nbsp;<strong>' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</strong></td>'.
-									'<td>'.( $table['ENGINE'] == 'MyISAM' ? '<strong class="red">' : '' ).$table['ENGINE'].( $table['ENGINE'] == 'MyISAM' ? '</strong>' : '' ) . '</td>' .
+									'<td>' . ($table['ENGINE'] == 'MyISAM' ? '<strong class="red">' : '' ) . $table['ENGINE'] . ($table['ENGINE'] == 'MyISAM' ? '</strong>' : '') . '</td>' .
 								'</tr>'.
-								'<tr class="lined"><td colspan="3"></td></tr>'."\n";
+								'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
 						}
 					}
 
@@ -272,9 +272,9 @@ function admin_db_convert(&$engine, &$module)
 									'<td>&nbsp;&nbsp;' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</td>'.
 									'<td class="label">&nbsp;&nbsp;<strong>' . $table['COLUMN_NAME'] . '&nbsp;&nbsp;</strong></td>'.
 									'<td>&nbsp;&nbsp;' . $table['DATA_TYPE'] . '&nbsp;&nbsp;</td>'.
-									'<td>'.( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '<strong class="red">' : '' ).$table['COLUMN_DEFAULT'].( $table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '</strong>' : '' ) . '</td>' .
+									'<td>' . ($table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '<strong class="red">' : '' ) . $table['COLUMN_DEFAULT'] . ($table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '</strong>' : '') . '</td>' .
 								'</tr>'.
-								'<tr class="lined"><td colspan="4"></td></tr>'."\n";
+								'<tr class="lined"><td colspan="4"></td></tr>' . "\n";
 
 							$sql_log[] = "ALTER TABLE {$table['TABLE_NAME']} CHANGE {$table['COLUMN_NAME']} {$table['COLUMN_NAME']} DATETIME NULL DEFAULT NULL";
 							$sql_log[] = "UPDATE {$table['TABLE_NAME']} SET {$table['COLUMN_NAME']} = NULL WHERE {$table['COLUMN_NAME']} = '0000-00-00 00:00:00'";

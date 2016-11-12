@@ -18,7 +18,7 @@ if ($this->is_admin())
 
 		$curday = '';
 
-		echo '<ul class="ul_list">'."\n";
+		echo '<ul class="ul_list">' . "\n";
 
 		foreach ($pages as $page)
 		{

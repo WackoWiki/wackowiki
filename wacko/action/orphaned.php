@@ -13,8 +13,8 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 	// count pages
 	if ($count_pages = $this->db->load_all(
 		"SELECT DISTINCT page_id ".
-		"FROM " . $pref."page p ".
-			"LEFT JOIN " . $pref."page_link l ON ".
+		"FROM " . $pref . "page p ".
+			"LEFT JOIN " . $pref . "page_link l ON ".
 			"((l.to_tag = p.tag ".
 				"AND l.to_supertag = '') ".
 				"OR l.to_supertag = p.supertag) ".
@@ -36,8 +36,8 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 
 		$orphaned = $this->db->load_all(
 			"SELECT DISTINCT page_id, tag, title ".
-			"FROM " . $pref."page p ".
-				"LEFT JOIN " . $pref."page_link l ON ".
+			"FROM " . $pref . "page p ".
+				"LEFT JOIN " . $pref . "page_link l ON ".
 				"((l.to_tag = p.tag ".
 					"AND l.to_supertag = '') ".
 					"OR l.to_supertag = p.supertag) ".

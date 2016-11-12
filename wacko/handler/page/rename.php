@@ -85,7 +85,7 @@ if ($registered
 					$this->clear_cache_wanted_page($this->supertag);
 				}
 
-				$message .= '<li>' . $this->_t('NewNameOfPage').$this->link('/' . $new_name) . "</li>\n";
+				$message .= '<li>' . $this->_t('NewNameOfPage') . $this->link('/' . $new_name) . "</li>\n";
 
 				// log event
 				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $this->tag, $new_name).
@@ -171,11 +171,11 @@ function recursive_move(&$engine, $root, $new_root)
 	$_root		= $engine->translit($root);
 	$pages		= $engine->db->load_all(
 		"SELECT page_id, tag, supertag ".
-		"FROM " . $engine->db->table_prefix."page ".
+		"FROM " . $engine->db->table_prefix . "page ".
 		"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " ".
 			" OR supertag = " . $engine->db->q($_root) . ") ".
 		($owner_id
-			? " AND owner_id ='" . (string) $owner_id."'"
+			? " AND owner_id ='" . (int) $owner_id."'"
 			: "").
 		" AND comment_on_id = '0'");
 
@@ -264,7 +264,7 @@ function move(&$engine, $old_page, $new_name)
 					$engine->clear_cache_wanted_page($old_page['supertag']);
 				}
 
-				$message .= '<li>' . $engine->_t('NewNameOfPage').$engine->link('/' . $new_name) . "</li>\n";
+				$message .= '<li>' . $engine->_t('NewNameOfPage') . $engine->link('/' . $new_name) . "</li>\n";
 
 				// log event
 				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', SYSTEM_LANG), $old_page['tag'], $new_name).

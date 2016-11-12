@@ -183,7 +183,7 @@ if ($this->has_access('read'))
 		$this->set_language($this->user_lang);
 
 		// edit via double click
-		echo '<script>var dbclick = "page";</script>'."\n";
+		echo '<script>var dbclick = "page";</script>' . "\n";
 
 		// end section-content
 		echo "</section>\n";

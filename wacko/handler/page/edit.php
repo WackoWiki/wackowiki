@@ -79,12 +79,12 @@ if ($this->has_access('read')
 
 			if (isset($_POST['minor_edit']))
 			{
-				$minor_edit = (string) $_POST['minor_edit'];
+				$minor_edit = (int) $_POST['minor_edit'];
 			}
 
 			if (isset($_POST['reviewed']))
 			{
-				$reviewed = (string) $_POST['reviewed'];
+				$reviewed = (int) $_POST['reviewed'];
 			}
 
 			$title = $this->page['title'];
@@ -248,9 +248,9 @@ if ($this->has_access('read')
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
-		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '" />'."\n".
-					'<input type="hidden" name="tag"		value="' . $this->tag . '" />'."\n".
-					'<input type="hidden" name="add"		value="1" />'."\n";
+		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '" />' . "\n".
+					'<input type="hidden" name="tag"		value="' . $this->tag . '" />' . "\n".
+					'<input type="hidden" name="add"		value="1" />' . "\n";
 	}
 
 	echo $output;
@@ -259,7 +259,7 @@ if ($this->has_access('read')
 	$preview		= '';
 	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="' . $this->_t('EditStoreButton') . '" />&nbsp;'.
 						'<input type="submit" class="OkBtn_Top" name="preview" value="' . $this->_t('EditPreviewButton') . '" />&nbsp;'.
-						'<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '" /></a>'."\n"; // $this->href('', '', '', 1)
+						'<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '" /></a>' . "\n"; // $this->href('', '', '', 1)
 
 	// preview?
 	if (isset($_POST['preview']))
@@ -275,7 +275,7 @@ if ($this->has_access('read')
 
 		if ($this->page['comment_on_id'] != 0)
 		{
-			$output .= '<header class="comment-title">'."\n".'<h2><a href="#">' . $title . "</a></h2>\n</header>\n";
+			$output .= '<header class="comment-title">' . "\n".'<h2><a href="#">' . $title . "</a></h2>\n</header>\n";
 		}
 		else
 		{
@@ -321,31 +321,31 @@ if ($this->has_access('read')
 	// comment title
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
-		$output .= '<br />'."\n";
+		$output .= '<br />' . "\n";
 		$output .= '<label for="comment_title">' . $this->_t('AddCommentTitle') . '</label><br />';
 		$output .= '<input type="text" id="comment_title" maxlength="250" value="' . htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" size="60" name="title" />';
-		$output .= '<br />'."\n";
+		$output .= '<br />' . "\n";
 	}
 	else if (!$this->page || $this->is_owner() || $this->is_admin())
 	{
 		// edit page title
-		$output .= '<br />'."\n";
+		$output .= '<br />' . "\n";
 		$output .= '<label for="page_title">' . $this->_t('MetaTitle') . ':</label><br />';
 		$output .= '<input type="text" maxlength="250" id="page_title" name="title" value="' . htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" size="60" />';
-		$output .= '<br />'."\n";
+		$output .= '<br />' . "\n";
 	}
 	else
 	{
 		// show page title
-		$output .= '<br />'."\n";
+		$output .= '<br />' . "\n";
 		$output .= '<h1>' . $this->page['title'] . '</h1>';
-		#$output .= '<br />'."\n";
+		#$output .= '<br />' . "\n";
 	}
 
-	$output .= '<input type="hidden" name="previous" value="' . htmlspecialchars($previous, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" /><br />'."\n";
+	$output .= '<input type="hidden" name="previous" value="' . htmlspecialchars($previous, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" /><br />' . "\n";
 	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
 	$output .= htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</textarea>\n";
-	$output .= '<br />'."\n";
+	$output .= '<br />' . "\n";
 
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
 	{
@@ -363,11 +363,11 @@ if ($this->has_access('read')
 		{
 			$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit"/>';
 			$output .= '<label for="minor_edit">' . $this->_t('EditMinor') . '</label>';
-			$output .= '<br />'."\n";
+			$output .= '<br />' . "\n";
 		}
 		else
 		{
-			$output .= '<br />'."\n";
+			$output .= '<br />' . "\n";
 		}
 
 		if ($user)
@@ -377,7 +377,7 @@ if ($this->has_access('read')
 			{
 				$output .= '<input type="checkbox" id="reviewed" value="1" name="reviewed"/>';
 				$output .= '<label for="reviewed">' . $this->_t('Reviewed') . '</label>';
-				$output .= '<br />'."\n";
+				$output .= '<br />' . "\n";
 			}
 
 			// publish anonymously
@@ -385,7 +385,7 @@ if ($this->has_access('read')
 			{
 				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '"' . ( $this->get_user_setting('noid_pubs') == 1 ? ' checked="checked"' : '' ) . ' />';
 				$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . '</label>';
-				$output .= '<br />'."\n";
+				$output .= '<br />' . "\n";
 			}
 
 			// watch a page
@@ -393,7 +393,7 @@ if ($this->has_access('read')
 			{
 				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? ' checked="checked"' : '' ) . ' />';
 				$output .= '<label for="watchpage">' . $this->_t('NotifyMe') . '</label>';
-				$output .= '<br />'."\n";
+				$output .= '<br />' . "\n";
 			}
 		}
 	}
@@ -403,20 +403,20 @@ if ($this->has_access('read')
 		foreach ($words as $id => $word)
 		{
 			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id.'|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id.'|' . $word['parent_id']]) && $_POST['category' . $id.'|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />'.
-						'<label for="category' . $id . '"><strong>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>'."\n";
+						'<label for="category' . $id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
 					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id.'|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id.'|' . $word['parent_id']]) && $_POST['category' . $id.'|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />'.
-								'<label for="category' . $id . '">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>'."\n";
+								'<label for="category' . $id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n";
 				}
 			}
 		}
 
-		$output .= '<br />' . $this->_t('Categories') . ':'."\n".'<div class="setcategory"><br />'."\n".substr(implode(' ', $_words), 6) . '</div>'."\n";
-		$output .= '<br />'."\n";
+		$output .= '<br />' . $this->_t('Categories') . ':' . "\n".'<div class="setcategory"><br />' . "\n".substr(implode(' ', $_words), 6) . '</div>' . "\n";
+		$output .= '<br />' . "\n";
 	}
 
 	echo $output;

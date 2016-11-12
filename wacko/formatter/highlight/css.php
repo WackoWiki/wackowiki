@@ -154,17 +154,17 @@ $special_keyword2 = [
 
 	foreach ($keywords as $i)
 	{
-		$css = str_replace($i, '<span style="color: ##oct##;">' .$i. '</span>', $css);
+		$css = str_replace($i, '<span style="color: ##oct##;">' . $i . '</span>', $css);
 	}
 
 	foreach ($special_keywords as $i)
 	{
-		$css = str_replace($i . '\:', '<span style="color: ##oct##;">' .$i. '</span>\:', $css);
+		$css = str_replace($i . '\:', '<span style="color: ##oct##;">' . $i . '</span>\:', $css);
 	}
 
 	foreach ($special_keyword2 as $i)
 	{
-		$css = preg_replace('/[^-y]' . $i . '/', '<span style="color: ##oct##;">' .$i. '</span>', $css);
+		$css = preg_replace('/[^-y]' . $i . '/', '<span style="color: ##oct##;">' . $i . '</span>', $css);
 	}
 
 	$css = preg_replace('/(\.?)(.*)(\s?\{?)/s', "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3", $css);
@@ -198,7 +198,7 @@ $special_keyword2 = [
 		foreach ($lines as $line)
 		{
 			$i += 1;
-			$source .= '<li id="l' .$i. '">' .trim($line). "</li>";
+			$source .= '<li id="l' . $i . '">' .trim($line). "</li>";
 		}
 
 		$source .= '</ol>';
