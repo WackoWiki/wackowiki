@@ -35,7 +35,7 @@ if ($max > 500)			$max = 500;
 if (!empty($page))
 {
 	$page		= $this->unwrap_link($page);
-	$ppage		= '/'.$page;
+	$ppage		= '/' . $page;
 	$context	= $page;
 	$_page		= $this->load_page($page);
 	if (!$legend)
@@ -54,7 +54,7 @@ else
 
 if (!$nomark)
 {
-	echo '<div class="layout-box"><p class="layout-box"><span>'.$this->_t('MostCommentedPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
+	echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('MostCommentedPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
 }
 
 if (!$page)
@@ -128,16 +128,16 @@ foreach ($pages as $page)
 
 			if ($title == 1)
 			{
-				$_link = $this->link('/'.$page['tag'], '', $page['title']);
+				$_link = $this->link('/' . $page['tag'], '', $page['title']);
 			}
 			else
 			{
-				$_link = $this->link('/'.$page['tag'], '', $page['tag']);
+				$_link = $this->link('/' . $page['tag'], '', $page['tag']);
 			}
 
 			echo "<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$_link."</td><td>".
 				$this->_t('Shown')."</td><td>".
-				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#header-comments">'.$page['comments'].'</a></td></tr>'."\n";
+				'<a href="' . $this->href('', $page['tag'], 'show_comments=1').'#header-comments">' . $page['comments'] . '</a></td></tr>'."\n";
 		}
 	}
 }

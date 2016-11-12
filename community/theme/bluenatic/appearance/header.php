@@ -8,7 +8,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 -->
 <?php
 // HTTP header with right Charset settings
-header('Content-Type: text/html; charset='.$this->get_charset());
+header('Content-Type: text/html; charset=' . $this->get_charset());
 ?>
 <html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
@@ -31,7 +31,7 @@ header('Content-Type: text/html; charset='.$this->get_charset());
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 	}
 	?>
-	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : ''); ?></title>
+	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : ''); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
 // JS files.
@@ -120,17 +120,17 @@ else if($this->has_access('write'))
 						// determines what it should show: "add to bookmarks" or "remove from bookmarks" icon
 						if (!in_array($this->page['page_id'], $this->get_menu_links()))
 						{
-							echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-								.'"><img src="'. $this->db->theme_url
-								.'icon/bookmark-remove.png" alt="+" title="'.
-								$this->_t('AddToBookmarks') .'"/></a></li>';
+							echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
+								 . '"><img src="' .  $this->db->theme_url
+								.'icon/bookmark-remove.png" alt="+" title="' . 
+								$this->_t('AddToBookmarks')  . '"/></a></li>';
 						}
 						else
 						{
-							echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-								.'"><img src="'. $this->db->theme_url
-								.'icon/bookmark-add.png" alt="-" title="'.
-								$this->_t('RemoveFromBookmarks') .'"/></a></li>';
+							echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
+								 . '"><img src="' .  $this->db->theme_url
+								.'icon/bookmark-add.png" alt="-" title="' . 
+								$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 						}
 					}*/
 
@@ -139,9 +139,9 @@ else if($this->has_access('write'))
 			<?php // If logged in, show username, settings and logout ?>
 			<?php if($user = $this->get_user()) { ?>
 			<div class="user">
-				<?php echo $this->link($this->db->users_page.'/'.$this->get_user_name(), '', $this->get_user_name()); ?>
+				<?php echo $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()); ?>
 				<small>( <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?> |
-				<a href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a> )</small>
+				<a href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a> )</small>
 			</div>
 			<?php } ?>
 		</div>

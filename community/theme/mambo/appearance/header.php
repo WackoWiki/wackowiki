@@ -74,17 +74,17 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		// determines what it should show: "add to bookmarks" or "remove from bookmarks" icon
 		if (!in_array($this->page['page_id'], $this->get_menu_links()))
 		{
-			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-				.'"><img src="'. $this->db->theme_url
-				.'icon/bookmark1.png" alt="+" title="'.
-				$this->_t('AddToBookmarks') .'"/></a></li>';
+			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
+				 . '"><img src="' .  $this->db->theme_url
+				.'icon/bookmark1.png" alt="+" title="' . 
+				$this->_t('AddToBookmarks')  . '"/></a></li>';
 		}
 		else
 		{
-			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-				.'"><img src="'. $this->db->theme_url
-				.'icon/bookmark2.png" alt="-" title="'.
-				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
+			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
+				 . '"><img src="' .  $this->db->theme_url
+				.'icon/bookmark2.png" alt="-" title="' . 
+				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 		}
 	}
 	echo "\n</ol></div>";
@@ -199,13 +199,13 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		<span class="nobr">
 				<?php echo $this->_t('YouAre'); ?>
 				<img src="<?php echo $this->db->theme_url ?>icon/user.png" width="12" height="12" style="vertical-align: baseline; " alt=""/>
-				<?php echo $this->link($this->db->users_page.'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
+				<?php echo $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?>
 			</span>
 			<small>
 				(
 				<span class="nobr Tune">
 					<?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?> |
-					<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>">
+					<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>">
 						<?php echo $this->_t('LogoutLink'); ?>
 					</a>
 				</span>

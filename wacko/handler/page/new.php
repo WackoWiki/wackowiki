@@ -70,17 +70,17 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 // create a peer page
 echo $this->form_open('sub_page', ['page_method' => 'new']);
 echo '<input type="hidden" name="option" value="1" />';
-echo '<label for="create_subpage">'.$this->_t('CreateSubPage').':</label><br />';
+echo '<label for="create_subpage">' . $this->_t('CreateSubPage').':</label><br />';
 
 if ($this->has_access('create', $this->get_page_id($this->tag)))
 {
 	echo '<code>'.( strlen($this->tag) > 50 ? '...'.substr($this->tag, -50) : $this->tag ).'/</code>'.
-		'<input type="text" id="create_subpage" name="tag" value="'.( isset($_POST['option']) && $_POST['option'] === 1 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="255" /> '.
-		'<input type="submit" id="submit_subpage" value="'.$this->_t('CreatePageButton').'" />';
+		'<input type="text" id="create_subpage" name="tag" value="' . ( isset($_POST['option']) && $_POST['option'] === 1 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="255" /> '.
+		'<input type="submit" id="submit_subpage" value="' . $this->_t('CreatePageButton') . '" />';
 }
 else
 {
-	$message = '<em>'.$this->_t('CreatePageDenied').'</em>';
+	$message = '<em>' . $this->_t('CreatePageDenied').'</em>';
 	$this->show_message($message, 'info');
 }
 
@@ -99,16 +99,16 @@ if (substr_count($this->tag, '/') > 0)
 		{
 			echo $this->form_open('parent_cluster_page', ['page_method' => 'new']);
 			echo '<input type="hidden" name="option" value="2" />';
-			echo '<label for="create_pageparentcluster">'.$this->_t('CreatePageParentCluster').':</label><br />';
+			echo '<label for="create_pageparentcluster">' . $this->_t('CreatePageParentCluster').':</label><br />';
 			echo '<code>'.( strlen($parent) > 50 ? '...'.substr($parent, -50) : $parent ).'/</code>'.
-				 '<input type="text" id="create_pageparentcluster" name="tag" value="'.( isset($_POST['option']) && $_POST['option'] === 2 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="20" maxlength="255" /> '.
-				 '<input type="submit" id="submit_pageparentcluster" value="'.$this->_t('CreatePageButton').'" />';
+				 '<input type="text" id="create_pageparentcluster" name="tag" value="' . ( isset($_POST['option']) && $_POST['option'] === 2 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="255" /> '.
+				 '<input type="submit" id="submit_pageparentcluster" value="' . $this->_t('CreatePageButton') . '" />';
 			echo $this->form_close();
 		}
 	}
 	else
 	{
-		$message = '<em>'.$this->_t('CreatePageDenied').'</em>';
+		$message = '<em>' . $this->_t('CreatePageDenied').'</em>';
 		$this->show_message($message, 'info');
 	}
 
@@ -119,7 +119,7 @@ if (substr_count($this->tag, '/') > 0)
 //
 echo $this->form_open('random_page', ['page_method' => 'new']);
 echo '<input type="hidden" name="option" value="3" />';
-echo '<label for="create_randompage">'.$this->_t('CreateRandomPage').':</label><br />';
-echo '<input type="text" id="create_randompage" name="tag" value="'.( isset($_POST['option']) && $_POST['option'] === 3 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ).'" size="60" maxlength="255" /> '.
-	 '<input type="submit" id="submit_randompage" value="'.$this->_t('CreatePageButton').'" />';
+echo '<label for="create_randompage">' . $this->_t('CreateRandomPage').':</label><br />';
+echo '<input type="text" id="create_randompage" name="tag" value="' . ( isset($_POST['option']) && $_POST['option'] === 3 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="60" maxlength="255" /> '.
+	 '<input type="submit" id="submit_randompage" value="' . $this->_t('CreatePageButton') . '" />';
 echo $this->form_close();

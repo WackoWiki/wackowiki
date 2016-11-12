@@ -226,7 +226,7 @@ Ut::debug_print_r($users);
 			{
 				foreach ($pages as $n => $page)
 				{
-					echo (($i * $limit) + $n + 1).'. '.$page['tag']."<br />\n";
+					echo (($i * $limit) + $n + 1).'. ' . $page['tag']."<br />\n";
 
 					// recompile if necessary
 					if ($page['body_r'] == '')
@@ -259,7 +259,7 @@ Ut::debug_print_r($users);
 					$engine->current_context--;
 				}
 
-				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'].'&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
+				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
 			}
 			else
 			{

@@ -52,7 +52,7 @@ if ($this->has_access('read') && !$this->hide_revisions)
 
 				echo "<item>\n";
 				echo "<title>".$this->get_time_formatted($_GET['c'])."</title>\n";
-				echo "<link>".$this->href('show', '', 'revision_id='.$_GET['a'])."</link>\n";
+				echo "<link>".$this->href('show', '', 'revision_id=' . $_GET['a'])."</link>\n";
 				echo "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
 
 				$diff = $this->include_buffered('page/diff.php', 'oops', '', HANDLER_DIR);

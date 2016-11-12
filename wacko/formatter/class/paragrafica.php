@@ -134,7 +134,7 @@ class paragrafica
 		// 1. insert terminators appropriately
 		foreach ($this->t0 as $t)
 		{
-			$what = preg_replace( $t, $this->mark1.'$1'.$this->mark2, $what );
+			$what = preg_replace( $t, $this->mark1.'$1' . $this->mark2, $what );
 		}
 
 		foreach ($this->t1[0] as $t)
@@ -144,7 +144,7 @@ class paragrafica
 
 		foreach ($this->t2[0] as $t)
 		{
-			$what = preg_replace( $t, '$1'.$this->mark2, $what );
+			$what = preg_replace( $t, '$1' . $this->mark2, $what );
 		}
 
 		foreach ($this->t1[1] as $t)
@@ -154,7 +154,7 @@ class paragrafica
 
 		foreach ($this->t2[1] as $t)
 		{
-			$what = preg_replace( $t, '$1'.$this->mark2.$this->mark3, $what );
+			$what = preg_replace( $t, '$1' . $this->mark2.$this->mark3, $what );
 		}
 
 		foreach ($this->t1[2] as $t)
@@ -164,7 +164,7 @@ class paragrafica
 
 		foreach ($this->t2[2] as $t)
 		{
-			$what = preg_replace( $t, '$1'.$this->mark2.$this->mark4, $what );
+			$what = preg_replace( $t, '$1' . $this->mark2.$this->mark4, $what );
 		}
 
 		// wrap whole text in terminator pair
@@ -232,7 +232,7 @@ class paragrafica
 						{
 							$pcount++;
 							$pieces[$k] = $this->prefix1.
-										  $page_id.'-'.$pcount.
+										  $page_id.'-' . $pcount.
 										  $this->prefix2.
 										  $inside.
 										  $this->postfix.substr($v, $pos + $sizeof_mark1);

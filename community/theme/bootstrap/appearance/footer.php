@@ -56,13 +56,13 @@ if ($this->page)
 
 if ($this->get_user())
 {
-	echo $this->_t('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki').'<br />';
+	echo $this->_t('PoweredBy').' ' . $this->link('WackoWiki:HomePage', '', 'WackoWiki').'<br />';
 }
 
 // comment this out for not showing website policy link at the bottom of your pages
 if ($this->db->policy_page)
 {
-	echo '<a href="'.htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$this->_t('TermsOfUse').'</a><br />';
+	echo '<a href="' . htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $this->_t('TermsOfUse').'</a><br />';
 }
 
 ?></div>

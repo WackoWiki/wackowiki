@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 echo '<h3>';
-echo $this->_t('Moderation').' '.( $this->forum === true ? $this->_t('Topics') : $this->_t('ModerateSection') ).' '.$this->compose_link_to_page($this->tag, '', $this->page['title'], 0);
-echo ($this->forum === true ? '<br />['.$this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->_t('ModerateSection2'), 0).']' : '');
+echo $this->_t('Moderation').' '.( $this->forum === true ? $this->_t('Topics') : $this->_t('ModerateSection') ).' ' . $this->compose_link_to_page($this->tag, '', $this->page['title'], 0);
+echo ($this->forum === true ? '<br />[' . $this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->_t('ModerateSection2'), 0) . ']' : '');
 echo "</h3>\n";
 
 // local functions
@@ -125,7 +125,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 				// resave topic body as comment
 				$page = $engine->load_page($topic);
 
-				$engine->save_page('Comment'.$num, false, $page['body'], '', '', '', $base_id, '', '', true);
+				$engine->save_page('Comment' . $num, false, $page['body'], '', '', '', $base_id, '', '', true);
 
 				// restore creation date
 				$engine->db->sql_query(
@@ -136,7 +136,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 						"owner_id		= '".$page['owner_id']."', ".
 						"user_id		= '".$page['user_id']."', ".
 						"ip				= ".$engine->db->q($page['ip'])." ".
-					"WHERE tag = ".$engine->db->q('Comment'.$num)."");
+					"WHERE tag = ".$engine->db->q('Comment' . $num)."");
 
 				// remove old page remnants
 				moderate_delete_page($engine, $topic);
@@ -209,7 +209,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	unset($engine->page);
 
 	// resave modified body
-	$page['body']	= '=='.$title."==\n\n".$page['body'];
+	$page['body']	= '==' . $title . "==\n\n" . $page['body'];
 	$engine->save_page($new_tag, $title, $page['body'], '', '', '', 0, '', '', true);
 
 	// set page context back
@@ -436,7 +436,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					if (moderate_page_exists($this, $new_tags[$i++]) === true)
 					{
-						$error[] = '<span class="underline">&laquo;'.$this->get_page_title('', $page_id).'&raquo;</span>';
+						$error[] = '<span class="underline">&laquo;' . $this->get_page_title('', $page_id).'&raquo;</span>';
 					}
 				}
 
@@ -485,7 +485,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= str_replace(array(' ', "\t"), '', $tag);
 
 				// check new tag existance
-				if ($old_tag != $this->tag.'/'.$tag && moderate_page_exists($this, $this->tag.'/'.$tag) === true)
+				if ($old_tag != $this->tag.'/' . $tag && moderate_page_exists($this, $this->tag.'/' . $tag) === true)
 				{
 					$error = $this->_t('ModerateRenameExists');
 				}
@@ -493,8 +493,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// ok, then rename page
 				if ($tag != '' && $error != true)
 				{
-					moderate_rename_topic($this, $old_tag, $this->tag.'/'.$tag, $title);
-					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $this->tag.'/'.$tag.' '.$title));
+					moderate_rename_topic($this, $old_tag, $this->tag.'/' . $tag, $title);
+					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $this->tag.'/' . $tag.' ' . $title));
 					unset($accept_action, $old_tag, $tag, $title);
 
 					if ($this->db->enable_feeds)
@@ -548,7 +548,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($set as $page_id)
 			{
 				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
-				$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $page['tag'].' '.$page['title']));
+				$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($page_id, 'comment', '!*');
 			}
@@ -563,7 +563,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($set as $page_id)
 			{
 				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
-				$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $page['tag'].' '.$page['title']));
+				$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 				$this->save_acl($page_id, 'comment', '*');
 			}
 
@@ -612,16 +612,16 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $page_id)
 			{
-				$accept_text[] = '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
+				$accept_text[] = '&laquo;' . $this->get_page_title('', $page_id).'&raquo;';
 			}
 
-			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+			echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-					'<tr><th>'.$this->_t('ModerateDeleteConfirm').'</th></td>'.
+					'<tr><th>' . $this->_t('ModerateDeleteConfirm').'</th></td>'.
 					'<tr><td>'.
 						'<em>'.implode('<br />', $accept_text).'</em><br />'.
-						'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
@@ -630,7 +630,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $page_id)
 			{
-				$accept_text[] = '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
+				$accept_text[] = '&laquo;' . $this->get_page_title('', $page_id).'&raquo;';
 			}
 
 			$sections = $this->db->load_all(
@@ -647,38 +647,38 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$list .= "<option value=\"{$section['tag']}\">{$section['title']}</option>\n";
 			}
 
-			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+			echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-					'<tr><th>'.$this->_t('ModerateMovesConfirm').'</th></td>'.
+					'<tr><th>' . $this->_t('ModerateMovesConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
-							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
+							? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 							: '').
 						'<em>'.implode('<br />', $accept_text).'</em><br />'.
 						'<select name="section">'.
 							'<option selected="selected"></option>'.
 							$list.
 						'</select> '.
-						'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// enter a new name for the renamed topic
 		else if ($accept_action == 'rename')
 		{
-			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+			echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-					'<tr><th>'.$this->_t('ModerateRenameConfirm').'</th></td>'.
+					'<tr><th>' . $this->_t('ModerateRenameConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
-							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
+							? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 							: '').
-						'<input type="text" name="title" size="50" maxlength="250" value="'.$this->get_page_title('', $set[0]).'" /> '.
-						'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+						'<input type="text" name="title" size="50" maxlength="250" value="' . $this->get_page_title('', $set[0]) . '" /> '.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 						(count($set) > 1
-							? '<br /><small>'.$this->_t('ModerateRename1Only').'</small>'
+							? '<br /><small>' . $this->_t('ModerateRename1Only').'</small>'
 							: '').
 					'</td></tr>'.
 				'</table><br />'."\n";
@@ -690,7 +690,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			foreach ($set as $page_id)
 			{
-				$options[$i]['accept_text']	= '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
+				$options[$i]['accept_text']	= '&laquo;' . $this->get_page_title('', $page_id).'&raquo;';
 				$options[$i]['topic']		= $this->get_page_tag($page_id);
 				$i++;
 			}
@@ -703,53 +703,53 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$accept_text[] = $option['accept_text'];
 			}
 
-			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+			echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-					'<tr><th>'.$this->_t('ModerateMergeConfirm').'</th></td>'.
+					'<tr><th>' . $this->_t('ModerateMergeConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
-							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
+							? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 							: '' ).
 						'<em>'.implode('<br />', $accept_text).'</em><br />'."\n".
 						'<select name="base">'.
 							'<option selected="selected"></option>'.
 							$list.
 						'</select> '.
-						'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 
 		// print moderation controls...
-		echo '<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
-			'<input type="hidden" name="p" value="'.(isset($_GET['p']) ? ((string) $_GET['p']) : '').'" />'."\n";
+		echo '<input type="hidden" name="ids" value="' . implode('-', $set) . '" />'.
+			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((string) $_GET['p']) : '') . '" />'."\n";
 		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="5">'.
-						'<input type="submit" name="delete" id="submit" value="'.$this->_t('ModerateDelete').'" /> '.
-						'<input type="submit" name="move" id="submit" value="'.$this->_t('ModerateMove').'" /> '.
-						'<input type="submit" name="rename" id="submit" value="'.$this->_t('ModerateRename').'" /> '.
-						'<input type="submit" name="merge" id="submit" value="'.$this->_t('ModerateMerge').'" /> '.
-						'<input type="submit" name="lock" id="submit" value="'.$this->_t('ModerateLock').'" /> '.
-						'<input type="submit" name="unlock" id="submit" value="'.$this->_t('ModerateUnlock').'" /> '.
+						'<input type="submit" name="delete" id="submit" value="' . $this->_t('ModerateDelete') . '" /> '.
+						'<input type="submit" name="move" id="submit" value="' . $this->_t('ModerateMove') . '" /> '.
+						'<input type="submit" name="rename" id="submit" value="' . $this->_t('ModerateRename') . '" /> '.
+						'<input type="submit" name="merge" id="submit" value="' . $this->_t('ModerateMerge') . '" /> '.
+						'<input type="submit" name="lock" id="submit" value="' . $this->_t('ModerateLock') . '" /> '.
+						'<input type="submit" name="unlock" id="submit" value="' . $this->_t('ModerateUnlock') . '" /> '.
 						(isset($this->db->moders_docs)
-							? '&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->db->moders_docs).'">'.$this->_t('Help').'...</a>'
+							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help').'...</a>'
 							: '').
 						'<br />'."\n".
-						'<input type="submit" name="set" id="submit" value="'.$this->_t('ModerateSet').'" /> '.
+						'<input type="submit" name="set" id="submit" value="' . $this->_t('ModerateSet') . '" /> '.
 						($set
-							? '<input type="submit" name="reset" id="submit" value="'.$this->_t('ModerateReset').'" /> '.
+							? '<input type="submit" name="reset" id="submit" value="' . $this->_t('ModerateReset') . '" /> '.
 							  '&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
 							: ''
 						).
 					'</td>'.
 				'</tr>'."\n".
 				'<tr class="formation">'.
-					'<th colspan="2">'.$this->_t('ForumTopic').'</th>'.
-					'<th>'.$this->_t('ForumAuthor').'</th>'.
-					'<th>'.$this->_t('ForumReplies').'</th>'.
-					'<th>'.$this->_t('ForumCreated').'</th>'.
+					'<th colspan="2">' . $this->_t('ForumTopic').'</th>'.
+					'<th>' . $this->_t('ForumAuthor').'</th>'.
+					'<th>' . $this->_t('ForumReplies').'</th>'.
+					'<th>' . $this->_t('ForumCreated').'</th>'.
 				'</tr>'."\n";
 
 		// ...and topics list itself
@@ -758,11 +758,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if ($this->has_access('read', $topic['page_id']))
 			{
 				echo '<tr class="lined">'.
-						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="'.$topic['page_id'].'" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-						'<td style="text-align:left; padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? '<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" class="btn-locked"/>' : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
-						'<td style="text-align:center;" '.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.$this->user_link($topic['owner_name'], '', true, false).'&nbsp;&nbsp;</small></td>'.
-						'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
-						'<td style="text-align:center; white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_formatted($topic['created']).'</small></td>'.
+						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="' . $topic['page_id'] . '" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
+						'<td style="text-align:left; padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? '<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>' : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
+						'<td style="text-align:center;" '.( $this->is_admin() ? ' title="' . $topic['ip'] . '"' : '' ).'><small>&nbsp;&nbsp;' . $this->user_link($topic['owner_name'], '', true, false).'&nbsp;&nbsp;</small></td>'.
+						'<td style="text-align:center;"><small>' . $topic['comments'] . '</small></td>'.
+						'<td style="text-align:center; white-space:nowrap"><small>&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']).'</small></td>'.
 					'</tr>'."\n";
 			}
 		}
@@ -813,7 +813,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$pos		= strrpos($this->tag, '/');
 				$sub_tag	= substr($this->tag, ( $pos ? $pos + 1 : 0 ));
 				$old_tag	= $this->tag;
-				$new_tag	= ($_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/').'/' ) : $_POST['section'].'/').$sub_tag;
+				$new_tag	= ($_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/').'/' ) : $_POST['section'] . '/').$sub_tag;
 
 				if ($forum_cluster === true)
 				{
@@ -828,7 +828,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						if (moderate_page_exists($this, $new_tag) === true)
 						{
-							$error = '<span class="underline">&laquo;'.$this->page['title'].'&raquo;</span>';
+							$error = '<span class="underline">&laquo;' . $this->page['title'] . '&raquo;</span>';
 						}
 					}
 				}
@@ -892,7 +892,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($tag != '' && $error != true)
 				{
 					moderate_rename_topic($this, $old_tag, $new_tag, $title);
-					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $new_tag.' '.$title));
+					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $new_tag.' ' . $title));
 					unset($accept_action);
 
 					if ($this->db->enable_feeds)
@@ -910,7 +910,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->save_acl($this->page['page_id'], 'comment', '!*');
-			$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $this->page['tag'].' '.$this->page['title']));
+			$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title']));
 			$this->set_message($this->_t('ModerateTopicBlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
 		}
@@ -918,7 +918,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if (isset($_POST['topic_unlock']) && $forum_cluster === true)
 		{
 			$this->save_acl($this->page['page_id'], 'comment', '*');
-			$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $this->page['tag'].' '.$this->page['title']));
+			$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title']));
 			$this->set_message($this->_t('ModerateTopicUnlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
 		}
@@ -942,7 +942,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 						moderate_delete_page($this, $page['tag']);
 						$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
-								$this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']),
+								$this->get_page_tag($page['comment_on_id']).' ' . $this->get_page_title('', $page['comment_on_id']),
 								$page['user_name'],
 								$this->get_time_formatted($page['created'])));
 					}
@@ -988,7 +988,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($forum_cluster === true)
 				{
 					// check new tag existance
-					if ($old_tag != $section.'/'.$tag && moderate_page_exists($this, $section.'/'.$tag) === true)
+					if ($old_tag != $section.'/' . $tag && moderate_page_exists($this, $section.'/' . $tag) === true)
 					{
 						$error = $this->_t('ModerateRenameExists');
 					}
@@ -1041,11 +1041,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					if ($forum_cluster === true)
 					{
-						if (moderate_split_topic($this, $comment_ids, $old_tag, $section.'/'.$tag, $title) === true)
+						if (moderate_split_topic($this, $comment_ids, $old_tag, $section.'/' . $tag, $title) === true)
 						{
 							$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', SYSTEM_LANG),
-									$this->tag.' '.$this->page['title'],
-									$section.'/'.$tag.' '.$title));
+									$this->tag.' ' . $this->page['title'],
+									$section.'/' . $tag.' ' . $title));
 							unset($accept_action);
 
 							if ($this->db->enable_feeds)
@@ -1054,12 +1054,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							}
 
 							$this->set_message($this->_t('ModerateCommentsSplited'), 'success');
-							$this->http->redirect($this->href('moderate', $section.'/'.$tag));
+							$this->http->redirect($this->href('moderate', $section.'/' . $tag));
 						}
 						else
 						{
 							$this->set_message($this->_t('ModerateCommentsSplitFailed'), 'error');
-							$this->log(2, 'Error when separating comments from the topic ((/'.$this->tag.')) a new topic '.$section.'/'.$tag.': page was not created');
+							$this->log(2, 'Error when separating comments from the topic ((/' . $this->tag.')) a new topic ' . $section.'/' . $tag.': page was not created');
 						}
 					}
 					else
@@ -1121,8 +1121,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"LIMIT 1");
 
 						$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', SYSTEM_LANG),
-								$this->tag.' '.$this->page['title'],
-								$title.' '.$this->get_page_title($title)));
+								$this->tag.' ' . $this->page['title'],
+								$title.' ' . $this->get_page_title($title)));
 						unset($accept_action);
 
 						if ($this->db->enable_feeds)
@@ -1172,22 +1172,22 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// confirm topic deletion
 		if ($accept_action == 'topic_delete')
 		{
-			$accept_text = '&laquo;'.$this->page['title'].'&raquo;';
+			$accept_text = '&laquo;' . $this->page['title'] . '&raquo;';
 
-			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+			echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-					'<tr><th>'.$this->_t('ModerateDeleteConfirm').'</th></td>'.
+					'<tr><th>' . $this->_t('ModerateDeleteConfirm').'</th></td>'.
 					'<tr><td>'.
-						'<em>'.$accept_text.'</em><br />'.
-						'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+						'<em>' . $accept_text.'</em><br />'.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// select target forum section / cluster for topic/page moving
 		else if ($accept_action == 'topic_move')
 		{
-			$accept_text = '&laquo;'.$this->page['title'].'&raquo;';
+			$accept_text = '&laquo;' . $this->page['title'] . '&raquo;';
 
 			if ($forum_cluster === true)
 			{
@@ -1206,36 +1206,36 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$list .= "<option value=\"{$section['tag']}\">{$section['title']}</option>\n";
 				}
 
-				echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+				echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 					'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-						'<tr><th>'.$this->_t('ModerateMoveConfirm').'</th></td>'.
+						'<tr><th>' . $this->_t('ModerateMoveConfirm').'</th></td>'.
 						'<tr><td>'.
 							($error == true
-							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
+							? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 							: '' ).
-							'<em>'.$accept_text.'</em><br />'.
+							'<em>' . $accept_text.'</em><br />'.
 							'<select name="section">'.
 								'<option selected="selected"></option>'.
 								$list.
 							'</select> or <input type="text" name="cluster" size="50" maxlength="250" /><br />'.
-							'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-							'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+							'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 						'</td></tr>'.
 					'</table><br />'."\n";
 			}
 			else
 			{
-				echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+				echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 					'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-						'<tr><th>'.$this->_t('ModeratePgMoveConfirm').'</th></td>'.
+						'<tr><th>' . $this->_t('ModeratePgMoveConfirm').'</th></td>'.
 						'<tr><td>'.
 							($error == true
-								? '<span class="cite"><strong>'.$error.'</strong></span><br />'
+								? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 								: '' ).
-							'<em>'.$accept_text.'</em><br />'.
+							'<em>' . $accept_text.'</em><br />'.
 							'<input type="text" name="cluster" size="50" maxlength="250" /> '.
-							'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-							'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+							'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 						'</td></tr>'.
 					'</table><br />'."\n";
 			}
@@ -1243,50 +1243,50 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// enter a new name for topic renaming
 		else if ($accept_action == 'topic_rename')
 		{
-			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+			echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
-					'<tr><th>'.$this->_t('ModerateRenameConfirm').'</th></td>'.
+					'<tr><th>' . $this->_t('ModerateRenameConfirm').'</th></td>'.
 					'<tr><td>'.
 						($error == true
-							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
+							? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 							: '' ).
-						'<input type="text" name="title" size="50" maxlength="250" value="'.$this->page['title'].'" /> '.
-						'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+						'<input type="text" name="title" size="50" maxlength="250" value="' . $this->page['title'] . '" /> '.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// confirm comments deletion
 		else if ($accept_action == 'posts_delete')
 		{
-			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+			echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.Ut::perc_replace($this->_t('ModerateComDelConfirm'), count($set), ( count($set) > 1 ? $this->_t('ModerateComments') : $this->_t('ModerateComment') )).'</th></td>'.
 					'<tr><td>'.
 						($error == true
-							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
+							? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 							: '' ).
-						'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// enter a new name for the detached topic
 		else if ($accept_action == 'posts_split')
 		{
-			echo '<input type="hidden" name="'.$accept_action.'" value="1" />'.
+			echo '<input type="hidden" name="' . $accept_action . '" value="1" />'.
 				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">'.
 					'<tr><th>'.($forum_cluster === true ? $this->_t('ModerateSplitNewName') : $this->_t('ModerateSplitPageName') ).'</th></td>'.
 					'<tr><td>'.
 						($error == true
-							? '<span class="cite"><strong>'.$error.'</strong></span><br />'
+							? '<span class="cite"><strong>' . $error.'</strong></span><br />'
 							: '').
 						'<input type="text" name="title" size="50" maxlength="250" value="" /> '.
-						'<input type="submit" name="accept" id="submit" value="'.$this->_t('ModerateAccept').'" /> '.
-						'<a href="'.$this->href('moderate').'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('ModerateDecline').'" /></a>'.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
+						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>'.
 						'<br />'.
 						'<small>'.
-						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked="checked" ' : '' ).'/> <label for="after">'.$this->_t('ModerateSplitAllAfter').'</label><br />'.
+						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked="checked" ' : '' ).'/> <label for="after">' . $this->_t('ModerateSplitAllAfter').'</label><br />'.
 						'<input type="radio" name="scheme" value="selected" id="selected" '.(isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked="checked" ' : '' ).'/> <label for="selected">'.Ut::perc_replace($this->_t('ModerateSplitSelected'), count($set)).'</label>'.
 						'</small>'.
 					'</td></tr>'.
@@ -1294,34 +1294,34 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		// print moderation controls...
-		echo '<input type="hidden" name="ids" value="'.implode('-', $set).'" />'.
-			'<input type="hidden" name="p" value="'.(isset($_GET['p']) ? ((string) $_GET['p']) : '').'" />'."\n";
+		echo '<input type="hidden" name="ids" value="' . implode('-', $set) . '" />'.
+			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((string) $_GET['p']) : '') . '" />'."\n";
 		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">'.
 				'<tr class="lined">'.
 					'<td colspan="2">'.
-						'<input type="submit" name="topic_delete" id="submit" value="'.$this->_t('ModerateDeleteTopic').'" /> '.
-						'<input type="submit" name="topic_move" id="submit" value="'.$this->_t('ModerateMove').'" /> '.
+						'<input type="submit" name="topic_delete" id="submit" value="' . $this->_t('ModerateDeleteTopic') . '" /> '.
+						'<input type="submit" name="topic_move" id="submit" value="' . $this->_t('ModerateMove') . '" /> '.
 						($forum_cluster === true
-							? '<input type="submit" name="topic_rename" id="submit" value="'.$this->_t('ModerateRename').'" /> '
+							? '<input type="submit" name="topic_rename" id="submit" value="' . $this->_t('ModerateRename') . '" /> '
 							: ''
 						).
 						($forum_cluster === true
 							? ($this->has_access('comment', $this->page['page_id'], GUEST) === true
-								? '<input type="submit" name="topic_lock" id="submit" value="'.$this->_t('ModerateLock').'" /> '
-								: '<input type="submit" name="topic_unlock" id="submit" value="'.$this->_t('ModerateUnlock').'" /> '
+								? '<input type="submit" name="topic_lock" id="submit" value="' . $this->_t('ModerateLock') . '" /> '
+								: '<input type="submit" name="topic_unlock" id="submit" value="' . $this->_t('ModerateUnlock') . '" /> '
 							)
 							: ''
 						).
-						(isset($this->db->moders_docs) ? '&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->db->moders_docs).'">'.$this->_t('Help').'...</a>' : '').
+						(isset($this->db->moders_docs) ? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help').'...</a>' : '').
 					'</td>'.
 				'</tr>'."\n".
 				'<tr class="formation">'.
-					'<th colspan="2">'.($this->has_access('comment', $this->page['page_id'], GUEST) === false ? '<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" class="btn-locked"/>' : '' ).$this->_t('ForumTopic').'</th>'.
+					'<th colspan="2">'.($this->has_access('comment', $this->page['page_id'], GUEST) === false ? '<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>' : '' ).$this->_t('ForumTopic').'</th>'.
 				'</tr>'."\n".
 				'<tr class="lined">'.
 					'<td colspan="2" style="padding-bottom:30px;">'.
-						'<strong><small>'.($forum_cluster === false ? $this->user_link($this->page['owner_name'], '', true, false) : $this->user_link($this->page['user_name'], '', true, false)).' ('.$this->get_time_formatted($this->page['created']).')</small></strong>'.
-						'<br />'.$body.
+						'<strong><small>'.($forum_cluster === false ? $this->user_link($this->page['owner_name'], '', true, false) : $this->user_link($this->page['user_name'], '', true, false)).' (' . $this->get_time_formatted($this->page['created']).')</small></strong>'.
+						'<br />' . $body.
 					'</td>'.
 				'</tr>'."\n";
 
@@ -1329,22 +1329,22 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			echo '<tr class="lined">'.
 					'<td colspan="2">'.
-						'<input type="submit" name="posts_delete" id="submit" value="'.$this->_t('ModerateDeletePosts').'" /> '.
-						'<input type="submit" name="posts_split" id="submit" value="'.$this->_t('ModerateSplit').'" /> '.
+						'<input type="submit" name="posts_delete" id="submit" value="' . $this->_t('ModerateDeletePosts') . '" /> '.
+						'<input type="submit" name="posts_split" id="submit" value="' . $this->_t('ModerateSplit') . '" /> '.
 						(isset($this->db->moders_docs)
-							? '&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->db->moders_docs).'">'.$this->_t('Help').'...</a>'
+							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help').'...</a>'
 							: '').
 						'<br />'."\n".
-						'<input type="submit" name="set" id="submit" value="'.$this->_t('ModerateSet').'" /> '.
+						'<input type="submit" name="set" id="submit" value="' . $this->_t('ModerateSet') . '" /> '.
 						($set
-							? '<input type="submit" name="reset" id="submit" value="'.$this->_t('ModerateReset').'" /> '.
+							? '<input type="submit" name="reset" id="submit" value="' . $this->_t('ModerateReset') . '" /> '.
 							  '&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set).'</small>'
 							: ''
 						).
 					'</td>'.
 				'</tr>'."\n".
 				'<tr class="formation">'.
-					'<th colspan="2">'.$this->_t('ForumComments').'</th>'.
+					'<th colspan="2">' . $this->_t('ForumComments').'</th>'.
 				'</tr>'."\n";
 
 			// ...and comments list
@@ -1355,9 +1355,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$desc = htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 				echo '<tr class="lined">'.
-						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="'.$comment['page_id'].'" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-						'<td style="text-align:left; padding-left:5px;"><strong><small>'.$this->user_link($comment['user_name'], '', true, false).' ('.$this->get_time_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->db->users_page, 'profile='.$comment['owner_name']).'">'.$this->_t('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
-							'<br />'.$desc.'</td>'.
+						'<td style="vertical-align:middle; width:10px;" class="label"><input type="checkbox" name="' . $comment['page_id'] . '" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
+						'<td style="text-align:left; padding-left:5px;"><strong><small>' . $this->user_link($comment['user_name'], '', true, false).' (' . $this->get_time_formatted($comment['created']).') &nbsp;&nbsp; ' . $this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="' . $this->href('', $this->db->users_page, 'profile=' . $comment['owner_name']) . '">' . $this->_t('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
+							'<br />' . $desc.'</td>'.
 					'</tr>'."\n";
 			}
 		}

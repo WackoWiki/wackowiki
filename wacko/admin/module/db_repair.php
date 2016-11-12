@@ -51,14 +51,14 @@ function admin_db_repair(&$engine, &$module)
 			if ('OK' == $check['Msg_text'])
 			{
 				$message = '<li>' . 'The %1 table is okay.';
-				echo str_replace('%1', '<code>'.$table['name'].'</code>', $message);
+				echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
 			}
 			else
 			{
 				$message = '<li>' . 'The %1 table is not okay. It is reporting the following error: %2. WackoWiki will attempt to repair this table&hellip;';
 
-				echo str_replace('%1', '<code>'.$table['name'].'</code>',
-						str_replace('%2', '<code>'.$check['Msg_text'].'</code>',
+				echo str_replace('%1', '<code>' . $table['name'] . '</code>',
+						str_replace('%2', '<code>' . $check['Msg_text'] . '</code>',
 								$message));
 
 				$check = $engine->db->load_single("REPAIR TABLE {$table['name']}");
@@ -67,14 +67,14 @@ function admin_db_repair(&$engine, &$module)
 				if ('OK' == $check['Msg_text'])
 				{
 					$message =  '<li>' . 'Successfully repaired the %1 table.';
-					echo str_replace('%1', '<code>'.$table['name'].'</code>', $message);
+					echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
 				}
 				else
 				{
 					$message = '<li>' . 'Failed to repair the %1 table. <br />Error: %2';
 
-					echo str_replace('%1', '<code>'.$table['name'].'</code>',
-							str_replace('%2', '<code>'.$check['Msg_text'].'</code>',
+					echo str_replace('%1', '<code>' . $table['name'] . '</code>',
+							str_replace('%2', '<code>' . $check['Msg_text'] . '</code>',
 									$message));
 
 					$problems[$table]	= $check['Msg_text'];
@@ -92,7 +92,7 @@ function admin_db_repair(&$engine, &$module)
 				if ('Table is already up to date' == $check['Msg_text'])
 				{
 					$message = '<li>' . 'The %1 table is already optimized.' . '</li>';
-					echo str_replace('%1', '<code>'.$table['name'].'</code>', $message);
+					echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
 				}
 				else
 				{
@@ -102,12 +102,12 @@ function admin_db_repair(&$engine, &$module)
 					if ('OK' == $check['Msg_text'] || 'Table is already up to date' == $check['Msg_text'])
 					{
 						$message = '<li>' . 'Successfully optimized the %1 table.' . '</li>';
-						echo str_replace('%1', '<code>'.$table['name'].'</code>', $message);
+						echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
 					}
 					else
 					{
-						$message = '<li>' . 'Failed to optimize the %1 table. <br />Error: ' . '<code>'.$check['Msg_text'].'</code>' . '</li>';
-						echo str_replace('%1', '<code>'.$table['name'].'</code>', $message);
+						$message = '<li>' . 'Failed to optimize the %1 table. <br />Error: ' . '<code>' . $check['Msg_text'] . '</code>' . '</li>';
+						echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
 					}
 				}
 

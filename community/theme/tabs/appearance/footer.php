@@ -110,7 +110,7 @@ if ($this->page)
 			echo_tab(
 			$this->href('remove'),
 			$this->_t('DeleteTip'),
-			'<img src="'.$this->db->theme_url.'icon/del'.($this->method != 'remove' ? '' : '_').'.png" width="14" height="15" alt="" />'.$this->_t('DeleteText'),
+			'<img src="' . $this->db->theme_url.'icon/del'.($this->method != 'remove' ? '' : '_').'.png" width="14" height="15" alt="" />' . $this->_t('DeleteText'),
 			$this->method != 'remove',
 			"2a"
 			);
@@ -205,7 +205,7 @@ if ($this->method == 'show')
 <div id="credits"><?php
 if ($this->get_user())
 {
-	echo $this->_t('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki');
+	echo $this->_t('PoweredBy').' ' . $this->link('WackoWiki:HomePage', '', 'WackoWiki');
 }
 ?></div>
 <?php

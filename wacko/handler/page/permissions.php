@@ -205,7 +205,7 @@ if ($upload_allowed)
 echo $this->form_open('set_permissions', ['page_method' => 'permissions']);
 
 echo '<input type="checkbox" id="massacls" name="massacls" />';
-echo '<label for="massacls">'.$this->_t('AclForEntireCluster').'</label>'; ?>
+echo '<label for="massacls">' . $this->_t('AclForEntireCluster').'</label>'; ?>
 <br />
 <div class="cssform">
 <p>
@@ -243,7 +243,7 @@ if ($upload_allowed)
 				// TODO and if there're TONS of users? maybe simple text entry, not menu?
 				foreach ($users as $user)
 				{
-					echo '<option value="'.$user['user_id'].'">'.Ut::html($user['user_name'])."</option>\n";
+					echo '<option value="' . $user['user_id'] . '">'.Ut::html($user['user_name'])."</option>\n";
 				}
 			}
 	?>

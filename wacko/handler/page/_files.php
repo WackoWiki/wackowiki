@@ -38,7 +38,7 @@ if ($this->has_access('read'))
 		// display files header
 		?>
 		<header id="header-files">
-		<?php echo '<h1><a href="'.$this->href('', '', 'show_files=0').'" title="' . $this->_t('HideFiles') . '">' . $this->_t('Files') . '</a></h1>'; ?>
+		<?php echo '<h1><a href="' . $this->href('', '', 'show_files=0') . '" title="' . $this->_t('HideFiles') . '">' . $this->_t('Files') . '</a></h1>'; ?>
 		</header>
 
 		<?php

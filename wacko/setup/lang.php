@@ -29,7 +29,7 @@ else
 	echo '<p>' . str_replace('%1', WACKO_VERSION, $lang['FreshInstall']) . "</p>\n";
 }
 
-echo '<input type="hidden" value="'.$config['is_update'].'" name="config[is_update]">';
+echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_update]">';
 
 ?>
 	<p><?php echo $lang['LangDesc'];?></p>
@@ -51,7 +51,7 @@ $lang_codes['ru'] = '&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;';
 
 foreach($lang_codes as $key => $value)
 {
-	echo '   <input type="radio" id="lang_'.$key.'" name="config[language]" value="'.$key.'"';
+	echo '   <input type="radio" id="lang_' . $key . '" name="config[language]" value="' . $key . '"';
 
 	// Default or Selected Language
 	if (isset($_POST['config']['language']))
@@ -67,7 +67,7 @@ foreach($lang_codes as $key => $value)
 	}
 
 	echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
-	echo ' class="input_lang"><label for="lang_'.$key.'" class="label_lang">'.$value.' ('.$key.")</label><br />\n";
+	echo ' class="input_lang"><label for="lang_' . $key . '" class="label_lang">' . $value.' (' . $key.")</label><br />\n";
 }
 
 if (isset($config['is_update']))

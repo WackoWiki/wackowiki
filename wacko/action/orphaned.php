@@ -88,7 +88,7 @@ if (list ($pages, $pagination) = $load_orphaned_pages($root, $max))
 					// cache page_id for for has_access validation in link function
 					$this->page_id_cache[$page['tag']] = $page['page_id'];
 
-					echo '<li>'.$this->link('/'.$page['tag'], '', '', '', 0)."</li>\n";
+					echo '<li>' . $this->link('/' . $page['tag'], '', '', '', 0)."</li>\n";
 				}
 			}
 		}

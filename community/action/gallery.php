@@ -254,21 +254,21 @@ if ($can_view)
 			// check for upload location: global / per page
 			if ($file['page_id'] == '0')
 			{
-				$tnb_path		= $thumb_dir.'/'.$prefix_global.'@'.$tnb_name;
+				$tnb_path		= $thumb_dir.'/' . $prefix_global.'@' . $tnb_name;
 				$url			= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 			}
 			else
 			{
-				$tnb_path		= $thumb_dir.'/@'.$file_page['page_id'].'@'.$tnb_name;
-				$url			= $this->href('file', $source_page_tag, 'get='.$file_name);
+				$tnb_path		= $thumb_dir.'/@' . $file_page['page_id'].'@' . $tnb_name;
+				$url			= $this->href('file', $source_page_tag, 'get=' . $file_name);
 			}
 
-			$img	= '<img src="'.$this->db->base_url.$tnb_path.'" '.($file['file_description'] ? 'alt="'.$file_description.'" title="'.$file_description.'"' : '').' width="'.$file_width.'" height="'.$file_height.'" '.($imgclass ? 'class="'.$imgclass.'"' : '').'/>';
+			$img	= '<img src="' . $this->db->base_url.$tnb_path . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '').' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '').'/>';
 
 			$caption = '<br><figcaption>'.
-					'<span>'.$file_description.'</span> '.'<br />'.
+					'<span>' . $file_description.'</span> '.'<br />'.
 					#$file['user'].'<br />'.
-					#$file['picture_w'].'x'.$file['picture_h'].'<br />'.
+					#$file['picture_w'].'x' . $file['picture_h'].'<br />'.
 					#$file['hits'].'<br />'. // we do exclude images from hit cout atm -> see file handler
 				"</figcaption>\n";
 
@@ -292,17 +292,17 @@ if ($can_view)
 
 				if (!$toblank)
 				{
-					echo '<a href="'.$this->href('', $this->tag, 'photo='.$linkto.'&amp;token='.$param_token.'#'.$param_token).'">'.$img."</a>\n";
+					echo '<a href="' . $this->href('', $this->tag, 'photo=' . $linkto.'&amp;token=' . $param_token.'#' . $param_token) . '">' . $img."</a>\n";
 				}
 				else
 				{
 					if ($toblank == 'new')
 					{
-						echo '<a href="'.$url.'" class="fancybox-thumb" '.($group_id ? 'rel="'.$group_id.'"' : '').' '.($file['file_description'] ? 'alt="'.$file_description.'" title="'.$file_description.'"' : '').'>'.$img."</a>\n";
+						echo '<a href="' . $url . '" class="fancybox-thumb" '.($group_id ? 'rel="' . $group_id . '"' : '').' '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '').'>' . $img."</a>\n";
 					}
 					else
 					{
-						echo '<a href="'.$url.'">'.$img."</a>\n";
+						echo '<a href="' . $url . '">' . $img."</a>\n";
 					}
 				}
 
@@ -334,12 +334,12 @@ if ($can_view)
 				if ($file['page_id'] == 0)
 				{
 					$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-					$thumb_name		= $thumb_dir.'/'.$prefix_global.'@'.$small_id.$file_name;
+					$thumb_name		= $thumb_dir.'/' . $prefix_global.'@' . $small_id.$file_name;
 				}
 				else
 				{
-					$src_image		= Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.$file_page['page_id'].'@'.$file_name);
-					$thumb_name		= $thumb_dir.'/@'.$file_page['page_id'].'@'.$small_id.$file_name;
+					$src_image		= Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_page['page_id'].'@' . $file_name);
+					$thumb_name		= $thumb_dir.'/@' . $file_page['page_id'].'@' . $small_id.$file_name;
 				}
 
 				if (file_exists($src_image))
@@ -439,17 +439,17 @@ if ($can_view)
 
 					if (!$toblank)
 					{
-						echo '<a href="'.$this->href('', $this->tag, 'photo='.$linkto.'&amp;token='.$param_token).'">'.$img."</a>\n";
+						echo '<a href="' . $this->href('', $this->tag, 'photo=' . $linkto.'&amp;token=' . $param_token) . '">' . $img."</a>\n";
 					}
 					else
 					{
 						if ($toblank == 'new')
 						{
-							echo '<a href="'.$url.'" class="fancybox-thumb" '.($group_id ? 'rel="lightbox['.$group_id.']"' : 'rel="lightbox"').' '.($file['file_description'] ? 'alt="'.$file_description.'" title="'.$file_description.'"' : '').'>'.$img."</a>\n";
+							echo '<a href="' . $url . '" class="fancybox-thumb" '.($group_id ? 'rel="lightbox[' . $group_id.']"' : 'rel="lightbox"').' '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '').'>' . $img."</a>\n";
 						}
 						else
 						{
-							echo '<a href="'.$url.'">'.$img."</a>\n";
+							echo '<a href="' . $url . '">' . $img."</a>\n";
 						}
 
 						if (!$nodesc)
@@ -506,11 +506,11 @@ if ($can_view)
 			</figcaption>
 		</figure> */
 
-		echo '<div id="'.$param_token.'" style="text-align:center;">';
+		echo '<div id="' . $param_token . '" style="text-align:center;">';
 
 		if (!$global)
 		{
-			$path2	= 'file:/'.$source_page_tag.'/';
+			$path2	= 'file:/' . $source_page_tag.'/';
 		}
 		else
 		{
@@ -521,7 +521,7 @@ if ($can_view)
 
 		echo $link;
 		echo '<br /><br />';
-		echo '<a href="'.$this->href('', $this->tag, '').'">&lt; Back</a>';
+		echo '<a href="' . $this->href('', $this->tag, '') . '">&lt; Back</a>';
 		echo "</div>\n";
 	}
 
@@ -535,7 +535,7 @@ if ($can_view)
 }
 else
 {
-	echo '<em>'.$this->_t('ActionDenied').'</em>';
+	echo '<em>' . $this->_t('ActionDenied').'</em>';
 }
 
 ?>

@@ -72,7 +72,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		{
 			// redirecting to the edit form
 			$this->sess->title	= $page_title;
-			$this->http->redirect($this->href('edit', $this->tag.'/'.$topic_name, '', 1));
+			$this->http->redirect($this->href('edit', $this->tag.'/' . $topic_name, '', 1));
 		}
 	}
 
@@ -154,23 +154,23 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$topics	= $this->db->load_all($sql);
 
 	//  display search
-	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">'.$this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]).'</div>'."\n";
+	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">' . $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]).'</div>'."\n";
 
 	if (!isset($_GET['phrase']))
 	{
 		// display list
 		echo '<div style="clear: both;">'.
-				'<p style="float: left">'.($create_access ? '<strong><small class="cite"><a href="#newtopic">'.$this->_t('ForumNewTopic').'</a></small></strong>' : '').'</p>';
+				'<p style="float: left">'.($create_access ? '<strong><small class="cite"><a href="#newtopic">' . $this->_t('ForumNewTopic').'</a></small></strong>' : '').'</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 
 		echo '<table class="forum">'.
 				'<thead><tr>'.
-					'<th>'.$this->_t('ForumTopic').'</th>'.
-					'<th>'.$this->_t('ForumAuthor').'</th>'.
-					'<th>'.$this->_t('ForumReplies').'</th>'.
-					'<th>'.$this->_t('ForumViews').'</th>'.
-					'<th colspan="2">'.$this->_t('ForumLastComment').'</th>'.
+					'<th>' . $this->_t('ForumTopic').'</th>'.
+					'<th>' . $this->_t('ForumAuthor').'</th>'.
+					'<th>' . $this->_t('ForumReplies').'</th>'.
+					'<th>' . $this->_t('ForumViews').'</th>'.
+					'<th colspan="2">' . $this->_t('ForumLastComment').'</th>'.
 				'</tr></thead>'."\n";
 
 		foreach ($topics as $topic)
@@ -215,37 +215,37 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				echo '<tbody class="lined"><tr style="background-color: #f9f9f9;">'.
 						'<td style="text-align:left;">'.
 						( !$this->has_access('comment', $topic['page_id'], GUEST)
-							? '<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('DeleteCommentTip').'" alt="'.$this->_t('DeleteText').'" class="btn-locked"/>'
+							? '<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
 							: '' ).
 						( $updated
-							? '<strong><span class="cite" title="'.$this->_t('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
-							: '<strong>'.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
+							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[updated]</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
+							: '<strong>' . $this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
 						).
 						'</td>'.
-						'<td style="text-align:center; white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
-							'&nbsp;&nbsp;'.$this->user_link($topic['owner_name']).'&nbsp;&nbsp;<br />'.
-							'&nbsp;&nbsp;'.$this->get_time_formatted($topic['created']).'&nbsp;&nbsp;'.
+						'<td style="text-align:center; white-space: nowrap;"><small title="' . ( $admin ? $topic['ip'] : '' ) . '">'.
+							'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']).'&nbsp;&nbsp;<br />'.
+							'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']).'&nbsp;&nbsp;'.
 						'</small></td>'.
-						'<td style="text-align:center;"><small>'.$topic['comments'].'</small></td>'.
-						'<td style="text-align:center;"><small>'.$topic['hits'].'</small></td>'.
+						'<td style="text-align:center;"><small>' . $topic['comments'] . '</small></td>'.
+						'<td style="text-align:center;"><small>' . $topic['hits'] . '</small></td>'.
 						'<td>&nbsp;&nbsp;&nbsp;</td>'.
 						'<td style="text-align:center;">';
 
 				if ($comment)
 				{
-					echo '<small'.( $updated ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
+					echo '<small'.( $updated ? ' style="font-weight:600;"' : '' ).' title="' . ( $admin ? $comment['ip'] : '' ) . '">'.
 						$this->user_link($comment['user_name']).'<br />'.
-						'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_formatted($comment['created']).'</a></small>';
+						'<a href="' . $this->href('', $topic['tag'], 'p=last').'#' . $comment['tag'] . '">' . $this->get_time_formatted($comment['created']).'</a></small>';
 				}
 				else
 				{
-					echo '<small><em>('.$this->get_time_formatted($topic['created']).')</em></small>';
+					echo '<small><em>(' . $this->get_time_formatted($topic['created']).')</em></small>';
 				}
 
 				echo	'</td>'.
 					'</tr>'.
 					'<tr>'.
-						'<td colspan="6" class="description">'.$topic['description'].''.
+						'<td colspan="6" class="description">' . $topic['description'] . ''.
 						$_category.'</td>'.
 					'</tr></tbody>'."\n";
 			}
@@ -253,7 +253,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 		echo '</table>'."\n";
 
-		echo '<div class="clearfix"><p style="float: left">'.( $user ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>' : '' ).'</p>';
+		echo '<div class="clearfix"><p style="float: left">'.( $user ? '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead').'</a></small>' : '' ).'</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 	}

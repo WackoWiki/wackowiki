@@ -11,7 +11,7 @@ $text = preg_replace('/([^\d\w#;:>])([;#].+)$/m',	'<span style="color:#226622">\
 $text = preg_replace('/^(\[.*\])/m',				'<strong style="color:#AA0000;background:#EEE0CC">\\1</strong>', $text);
 
 echo '<!--notypo-->';
-echo '<pre class="code">'.$text.'</pre>';
+echo '<pre class="code">' . $text.'</pre>';
 echo '<!--/notypo-->';
 
 ?>

@@ -34,7 +34,7 @@ function admin_content_pages(&$engine, &$module)
 <?php
 	if (isset($_POST['reset']))
 	{
-		$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode='.$module['mode'])));
+		$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'])));
 	}
 
 	if (isset($_POST['update']) || isset($_GET['level_mod']))
@@ -135,7 +135,7 @@ function admin_content_pages(&$engine, &$module)
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
 	$level_pagination		= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
 	$level_mod_pagination	= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
-	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode='.$module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&amp;level='.htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&amp;level_mod='.htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order='.htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&amp;level='.htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&amp;level_mod='.htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 	$pages = $engine->db->load_all(
 		"SELECT p.*, length(body) as page_size, u.* ".
@@ -177,7 +177,7 @@ function admin_content_pages(&$engine, &$module)
 		{
 			foreach ($langs as $lang)
 			{
-				echo '<option value="'.$lang.'" '.($_level == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
+				echo '<option value="' . $lang . '" '.($_level == $lang ? 'selected="selected" ' : '').'>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 			}
 		}
 
@@ -193,10 +193,10 @@ function admin_content_pages(&$engine, &$module)
 		<table style="padding: 3px;" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$ordertime; ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$orderlevel; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'] . '&amp;order=' . $ordertime; ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'] . '&amp;order=' . $orderlevel; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
 				<th><?php echo $engine->_t('LogEvent'); ?></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'].'&amp;order='.$ordersize; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'] . '&amp;order=' . $ordersize; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
 				<th style="width:20px;"><?php echo $engine->_t('LogUsername'); ?></th>
 			</tr>
 <?php
@@ -207,48 +207,48 @@ function admin_content_pages(&$engine, &$module)
 			// level highlighting
 			/* if ($row['level'] == 1)
 			{
-				$row['level'] = '<strong class="red">'.$engine->_t('LogLevel1').'</strong>';
+				$row['level'] = '<strong class="red">' . $engine->_t('LogLevel1').'</strong>';
 			}
 			else if ($row['level'] == 2)
 			{
-				$row['level'] = '<span class="red">'.$engine->_t('LogLevel2').'</span>';
+				$row['level'] = '<span class="red">' . $engine->_t('LogLevel2').'</span>';
 			}
 			else if ($row['level'] == 3)
 			{
-				$row['level'] = '<strong>'.$engine->_t('LogLevel3').'</strong>';
+				$row['level'] = '<strong>' . $engine->_t('LogLevel3').'</strong>';
 			}
 			else if ($row['level'] == 4)
 			{
-				$row['level'] = $engine->_t('LogLevel'.$row['level']);
+				$row['level'] = $engine->_t('LogLevel' . $row['level']);
 			}
 			else if ($row['level'] == 5)
 			{
-				$row['level'] = '<small>'.$engine->_t('LogLevel'.$row['level']).'</small>';
+				$row['level'] = '<small>' . $engine->_t('LogLevel' . $row['level']).'</small>';
 			}
 			else if ($row['level'] > 5)
 			{
-				$row['level'] = '<small class="grey">'.$engine->_t('LogLevel'.$row['level']).'</small>';
+				$row['level'] = '<small class="grey">' . $engine->_t('LogLevel' . $row['level']).'</small>';
 			}
  */
 			// tz offset
 			$time_tz = $engine->sql2precisetime($row['modified']);
 
 			echo '<tr class="lined">'."\n".
-					'<td style="vertical-align:top; text-align:center;">'.$row['page_id'].'</td>'.
-					'<td style="vertical-align:top; text-align:center;"><small>'.$time_tz.'</small></td>'.
-					'<td style="vertical-align:top; padding-left:5px; padding-right:5px;">'.$row['tag'].'</td>'.
-					'<td style="vertical-align:top;">'.$row['title'].'</td>'.
-					'<td style="vertical-align:top;">'.$engine->binary_multiples($row['page_size'], false, true, true).'</td>'.
+					'<td style="vertical-align:top; text-align:center;">' . $row['page_id'] . '</td>'.
+					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz.'</small></td>'.
+					'<td style="vertical-align:top; padding-left:5px; padding-right:5px;">' . $row['tag'] . '</td>'.
+					'<td style="vertical-align:top;">' . $row['title'] . '</td>'.
+					'<td style="vertical-align:top;">' . $engine->binary_multiples($row['page_size'], false, true, true).'</td>'.
 					'<td style="vertical-align:top; text-align:center;"><small>'.
-						'<a href="'.$engine->href().'&amp;user_id='.$row['user_id'].'">'.( $row['user_id'] == 0 ? '<em>'.$engine->_t('Guest').'</em>' : $row['user_name'] ).'</a>'.
-						'<br />'.'<a href="'.$engine->href().'&amp;ip='.$row['ip'].'">'.$row['ip'].'</a>'.
+						'<a href="' . $engine->href().'&amp;user_id=' . $row['user_id'] . '">'.( $row['user_id'] == 0 ? '<em>' . $engine->_t('Guest').'</em>' : $row['user_name'] ).'</a>'.
+						'<br />'.'<a href="' . $engine->href().'&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>'.
 					'</small></td>'.
 				'</tr>';
 		}
 	}
 	else
 	{
-		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>'.$engine->_t('LogNoMatch').'</em></td></tr>';
+		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>' . $engine->_t('LogNoMatch').'</em></td></tr>';
 	}
 ?>
 		</table>

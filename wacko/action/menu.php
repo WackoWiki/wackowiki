@@ -100,7 +100,7 @@ if (isset($_POST['_user_menu']))
 		{
 			$data[] = [
 				'menu_id'		=> $item['menu_id'],
-				'menu_position'	=> 1 * $_POST['pos_'.$item['menu_id']]
+				'menu_position'	=> 1 * $_POST['pos_' . $item['menu_id']]
 			];
 		}
 
@@ -117,7 +117,7 @@ if (isset($_POST['_user_menu']))
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "menu SET ".
 					"menu_position	= '".$item['menu_position']."', ".
-					"menu_title		= ".$this->db->q(substr(trim($_POST['title_'.$item['menu_id']]), 0, 250))." ".
+					"menu_title		= ".$this->db->q(substr(trim($_POST['title_' . $item['menu_id']]), 0, 250))." ".
 				"WHERE menu_id		= '".$item['menu_id']."' ".
 				"LIMIT 1");
 		}
@@ -201,7 +201,7 @@ if (isset($_POST['_user_menu']))
 
 		foreach ($object->data['user_menu'] as $item)
 		{
-			if (isset($_POST['delete_'.$item['menu_id']]))
+			if (isset($_POST['delete_' . $item['menu_id']]))
 			{
 				if ($deletion != '')
 				{
@@ -244,7 +244,7 @@ if ($_user_id)
 
 		if ($default_menu === true)
 		{
-			echo '<label for="menu_lang">'.$this->_t('YourLanguage').' </label>';
+			echo '<label for="menu_lang">' . $this->_t('YourLanguage').' </label>';
 			// FIXME: add a common function for this?
 			echo '<select id="menu_lang" name="menu_lang">';
 
@@ -261,7 +261,7 @@ if ($_user_id)
 
 			foreach ($langs as $lang)
 			{
-				echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
+				echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 			}
 
 			echo "</select>\n";
@@ -271,7 +271,7 @@ if ($_user_id)
 		}
 
 		echo '<table>';
-		echo '<tr><th>'.$this->_t('BookmarkNumber').'</th><th>'.$this->_t('BookmarkTitle').'</th><th>'.$this->_t('BookmarkPage').'</th><th>'.$this->_t('BookmarkMark').'</th><!--<th>Display</th>-->';
+		echo '<tr><th>' . $this->_t('BookmarkNumber').'</th><th>' . $this->_t('BookmarkTitle').'</th><th>' . $this->_t('BookmarkPage').'</th><th>' . $this->_t('BookmarkMark').'</th><!--<th>Display</th>-->';
 
 		if ($system)
 		{
@@ -284,17 +284,17 @@ if ($_user_id)
 		{
 			echo '<tr class="lined">
 			<td class="">
-				<input type="number" min="0" name="pos_'.$menu_item['menu_id'].'" size="2" style="width: 40px;" value="'.$menu_item['menu_position'].'" />
+				<input type="number" min="0" name="pos_' . $menu_item['menu_id'] . '" size="2" style="width: 40px;" value="' . $menu_item['menu_position'] . '" />
 			</td>
 			<td>
-				<input type="text" maxlength="100" name="title_'.$menu_item['menu_id'].'" size="40" value="'.$menu_item['menu_title'].'" />
+				<input type="text" maxlength="100" name="title_' . $menu_item['menu_id'] . '" size="40" value="' . $menu_item['menu_title'] . '" />
 			</td>
 			<td>
-				<!--<input type="radio" id="menu_item'.$menu_item['menu_id'].'" name="change" value="'.$menu_item['menu_id'].'" /> -->
-				<label for="menu_item'.$menu_item['menu_id'].'" title="'.$menu_item['title'].'">&raquo; '.$menu_item['tag'].'</label>
+				<!--<input type="radio" id="menu_item' . $menu_item['menu_id'] . '" name="change" value="' . $menu_item['menu_id'] . '" /> -->
+				<label for="menu_item' . $menu_item['menu_id'] . '" title="' . $menu_item['title'] . '">&raquo; ' . $menu_item['tag'] . '</label>
 			</td>
 			<td style="text-align:center;" >
-				<input type="checkbox" id="menu_item'.$menu_item['menu_id'].'" name="delete_'.$menu_item['menu_id'].'" />
+				<input type="checkbox" id="menu_item' . $menu_item['menu_id'] . '" name="delete_' . $menu_item['menu_id'] . '" />
 			</td>
 			<!--<td>
 
@@ -311,9 +311,9 @@ if ($_user_id)
 
 		echo '<tfoot>';
 		echo "<tr>\n".'<td colspan="3">'."\n";
-		echo '<input type="submit" name="update_menu" value="'.$this->_t('BookmarkSaveChanges').'" />';
+		echo '<input type="submit" name="update_menu" value="' . $this->_t('BookmarkSaveChanges') . '" />';
 		echo '</td><td>';
-		echo '<input type="submit" name="delete_menu_item" value="'.$this->_t('BookmarkDeleteSelected').'" />';
+		echo '<input type="submit" name="delete_menu_item" value="' . $this->_t('BookmarkDeleteSelected') . '" />';
 		echo "</td>\n</tr>\n";
 		echo '</tfoot>';
 		echo '</table>';
@@ -326,7 +326,7 @@ if ($_user_id)
 	echo $this->form_open('add_bookmark');
 	echo '<input type="hidden" name="_user_menu" value="yes" />';
 	echo '<br /><br />';
-	echo '<label for="add_menu_item">'.$this->_t('BookmarksAddPage').':</label><br />'.
+	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage').':</label><br />'.
 		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
 
 	if ($default_menu === true)
@@ -347,13 +347,13 @@ if ($_user_id)
 
 		foreach ($langs as $lang)
 		{
-			echo '<option value="'.$lang.'" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>'.$languages[$lang].' ('.$lang.")</option>\n";
+			echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected="selected" ' : '').'>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 		}
 
 		echo "</select>\n";
 	}
 
-	echo  '<input type="submit" name="add_menu_item" value="'.$this->_t('CreatePageButton').'" />';
+	echo  '<input type="submit" name="add_menu_item" value="' . $this->_t('CreatePageButton') . '" />';
 
 	echo $this->form_close();
 }

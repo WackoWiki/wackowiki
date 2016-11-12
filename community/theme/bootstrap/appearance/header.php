@@ -117,17 +117,17 @@ echo $this->form_close();
 		// determines what it should show: "add to menu" or "remove from menu" icon
 		if (!in_array($this->page['page_id'], (array)$this->get_menu_links()))
 		{
-			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-				.'"><img src="'. $this->db->theme_url
-				.'icon/bookmark1.png" alt="+" title="'.
-				$this->_t('AddToBookmarks') .'"/></a></li>';
+			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
+				 . '"><img src="' .  $this->db->theme_url
+				.'icon/bookmark1.png" alt="+" title="' . 
+				$this->_t('AddToBookmarks')  . '"/></a></li>';
 		}
 		else
 		{
-			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-				.'"><img src="'. $this->db->theme_url
-				.'icon/bookmark2.png" alt="-" title="'.
-				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
+			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
+				 . '"><img src="' .  $this->db->theme_url
+				.'icon/bookmark2.png" alt="-" title="' . 
+				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 		}
 	}
 	//echo "\n</ol></div>";//
@@ -194,7 +194,7 @@ echo $this->form_close();
 			{
 				if ($image != 1)
 				{
-					$_title = ' '.$title;
+					$_title = ' ' . $title;
 				}
 
 				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->db->theme_url."icon/$_image\" alt=\"$title\" />".$_title."</a></li>\n";
@@ -258,7 +258,7 @@ echo $this->form_close();
 
 	if ($this->has_access('read'))
 	{
-		echo '<li class="dropdown"><a href="#" id="more">'.$this->_t('PageHandlerMoreTip').'<span class="dropdown_arrow">&#9660;</span></a>'." \n";
+		echo '<li class="dropdown"><a href="#" id="more">' . $this->_t('PageHandlerMoreTip').'<span class="dropdown_arrow">&#9660;</span></a>'." \n";
 		echo '<ul class="dropdown_menu">'."\n";
 
 		// print tab

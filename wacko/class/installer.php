@@ -27,7 +27,7 @@ class Installer
 		}
 		else
 		{
-			echo '<p><em>'.$lang['InvalidAction'].'</em></p>';
+			echo '<p><em>' . $lang['InvalidAction'] . '</em></p>';
 		}
 
 		include 'setup/footer.php';

@@ -13,7 +13,7 @@ echo '<h2>Upgrade Utilities</h2>';
 
 if ($this->is_admin())
 {
-	echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->db->wacko_version.'!!**', 'wacko');
+	echo 'Recent Wacko version ' . $this->format('**!!(green)' . $this->db->wacko_version.'!!**', 'wacko');
 	echo '<h3>Routines for R5.x</h3>';
 
 
@@ -314,7 +314,7 @@ if ($this->is_admin())
 
 			foreach ($_acls as $_acl)
 			{
-				echo $_acl['privilege'].'<br />';
+				echo $_acl['privilege'] . '<br />';
 				// get object_right_id (e.g. 'write' -> 1, 'read' -> 2)
 				$_object_right_id = $this->db->load_single(
 					"SELECT object_right_id ".
@@ -477,7 +477,7 @@ if ($this->is_admin())
 				}
 			}
 
-			echo '<br />'.$old_acl_count.' acl and '.$privilege_count.' privilege settings inserted.';
+			echo '<br />' . $old_acl_count.' acl and ' . $privilege_count.' privilege settings inserted.';
 		}
 	*/
 }

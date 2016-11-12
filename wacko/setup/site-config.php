@@ -62,7 +62,7 @@ if ($config['is_update'] == false)
 }
 else
 {
-	echo '<input type="hidden" value="'.$config['root_page'].'" name="config[root_page]">';
+	echo '<input type="hidden" value="' . $config['root_page'] . '" name="config[root_page]">';
 }
 ?>
    <div class="fake_hr_seperator">
@@ -110,8 +110,8 @@ echo '<table  class="checkbox_input">'."\n\t<tr>\n";
 foreach ($langs as $_lang)
 {
 	echo	"\t\t<td>\n\t\t\t".
-				'<input type="checkbox" name="config[allowed_languages]['.$n.']" id="lang_'.$_lang.'" value="'.$_lang.'" '. (in_array($_lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n\t\t\t".
-				'<label for="lang_'.$_lang.'">'.$_languages[$_lang].' ('.$_lang.')</label>'.
+				'<input type="checkbox" name="config[allowed_languages][' . $n.']" id="lang_' . $_lang . '" value="' . $_lang . '" '. (in_array($_lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n\t\t\t".
+				'<label for="lang_' . $_lang . '">' . $_languages[$_lang] . ' (' . $_lang.')</label>'.
 			"\n\t\t</td>\n";
 
 	// modulus operator: every third loop add a break
@@ -155,8 +155,8 @@ if ($config['is_update'] == false)
 }
 else
 {
-	echo '<input type="hidden" value="'.$config['admin_name'].'" name="config[admin_name]">';
-	echo '<input type="hidden" value="'.$config['admin_email'].'" name="config[admin_email]">';
+	echo '<input type="hidden" value="' . $config['admin_name'] . '" name="config[admin_name]">';
+	echo '<input type="hidden" value="' . $config['admin_email'] . '" name="config[admin_email]">';
 }
 ?>
    <div class="fake_hr_seperator">

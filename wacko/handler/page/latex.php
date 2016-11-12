@@ -22,7 +22,7 @@ if ($this->has_access('read'))
 		// comment header?
 		if ($this->page['comment_on_id'])
 		{
-			echo '<div class="comment-info">'.$this->_t('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), "", "", 0).", ".$this->_t('PostedBy')." ".($this->is_wiki_name($this->page['user_name']) ? $this->link($this->page['user_name']) : $this->page['user_name'])." ".$this->_t('At')." ".$this->page['modified']."</div>";
+			echo '<div class="comment-info">' . $this->_t('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), "", "", 0).", ".$this->_t('PostedBy')." ".($this->is_wiki_name($this->page['user_name']) ? $this->link($this->page['user_name']) : $this->page['user_name'])." ".$this->_t('At')." ".$this->page['modified']."</div>";
 		}
 
 		if (!$this->page['latest'])

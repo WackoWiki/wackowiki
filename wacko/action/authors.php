@@ -37,7 +37,7 @@ echo '<small>';
 if (!$this->page && !$add && !$license)
 {
 	// we don't have any input, displaying stub instead until the page is saved for the first time
-	echo '<em>'.$this->_t('AuthorsDisplayHint').'</em>';
+	echo '<em>' . $this->_t('AuthorsDisplayHint').'</em>';
 }
 else
 {
@@ -60,17 +60,17 @@ else
 	{
 		// load overall authors data from revision and page table
 		if ($_authors = $this->db->load_all(
-		"(SELECT u.user_name AS name, YEAR(r.modified) AS year ".
-		"FROM {$this->db->table_prefix}revision r ".
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) ".
-		"WHERE r.supertag = ".$this->db->q($this->supertag)." ".($cluster ? "OR r.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '').
+		"(SELECT u.user_name AS name, YEAR(r.modified) AS year " .
+		"FROM {$this->db->table_prefix}revision r " .
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) " .
+		"WHERE r.supertag = " . $this->db->q($this->supertag) . " " . ($cluster ? "OR r.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '') .
 		"GROUP BY u.user_name, year ) ".
 		"UNION ".
 		"( SELECT u.user_name AS name, YEAR(p.modified) AS year ".
 		"FROM {$this->db->table_prefix}page p ".
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
-		"WHERE p.supertag = ".$this->db->q($this->supertag)." ".($cluster ? "OR p.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '').
-		"GROUP BY u.user_name, year ) ".
+		"WHERE p.supertag = " . $this->db->q($this->supertag) . " " . ($cluster ? "OR p.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '') .
+		"GROUP BY u.user_name, year ) " .
 		"ORDER BY name ASC, year ASC", true))
 		{
 			// rewriting results
@@ -96,7 +96,7 @@ else
 						if (substr($authors[$author['name']]['years'], -5, 1) != '-')
 						{
 							// print range for the first time
-							$authors[$author['name']]['years'] .= '-'.$author['year'];
+							$authors[$author['name']]['years'] .= '-' . $author['year'];
 						}
 						else
 						{
@@ -107,7 +107,7 @@ else
 					else
 					{
 						// ...not consequent, this will be a list of years instead of a range
-						$authors[$author['name']]['years'] .= ', '.$author['year'];
+						$authors[$author['name']]['years'] .= ', ' . $author['year'];
 					}
 
 					$authors[$author['name']]['total']++;
@@ -144,7 +144,7 @@ else
 				}
 				else
 				{
-					$guest_authors = '&copy; '.$author['years'].' '.$this->_t('AnonymousUsers');
+					$guest_authors = '&copy; ' . $author['years'] . ' ' . $this->_t('AnonymousUsers');
 					unset($authors[$i]);
 				}
 			}
@@ -175,13 +175,13 @@ else
 
 		if (isset($licenses[$license]))
 		{
-			$icons = '<img src="'.$this->db->base_url.'image/spacer.png" alt="'.$licenses[$license][1].'" title="'.$licenses[$license][1].'" class="license-'.$license.'">';
+			$icons = '<img src="' . $this->db->base_url . 'image/spacer.png" alt="' . $licenses[$license][1] . '" title="' . $licenses[$license][1] . '" class="license-' . $license . '">';
 			// constant license
-			$license = '<br />'.$this->_t('DistributedUnder').'<br />'.
+			$license = '<br />' . $this->_t('DistributedUnder') . '<br />' .
 
 			// TODO: rel="license"
-			$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
-			'<a rel="license" href="'.$licenses[$license][0].'">'.$icons.'</a>';
+			$this->link($licenses[$license][0], '', $licenses[$license][1]) . '<br />' .
+			'<a rel="license" href="' . $licenses[$license][0] . '">' . $icons . '</a>';
 		}
 		else
 		{

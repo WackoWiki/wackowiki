@@ -55,7 +55,7 @@ if ($this->page)
 	width="16" height="16" /> <?php } ?> </a></li> <?php }
 	// End of "Page exists" ?> <?php
 	if ($this->get_user()){
-		echo "<li>".$this->_t('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki')."</li>";
+		echo "<li>".$this->_t('PoweredBy').' ' . $this->link('WackoWiki:WackoWiki', '', 'WackoWiki')."</li>";
 	}
 	?></ul>
 </div></div>

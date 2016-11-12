@@ -17,7 +17,7 @@ class RawHtmlFormatter
 		if (preg_match('/^<format ([^>]*?)>(.*?)<\/format>$/s', $thing, $matches))
 		{
 			$code		= preg_replace('/<br *\/?>/', "\n", $matches[2]);
-			$p			= ' '.$matches[1].' ';
+			$p			= ' ' . $matches[1] . ' ';
 			$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER);
 			$params		= [];
 			$c			= 0;

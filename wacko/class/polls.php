@@ -29,7 +29,7 @@ class Polls
 	{
 		$poll_id = $this->engine->load_single(
 			'SELECT poll_id '.
-			'FROM '.$this->engine->db->table_prefix.'poll '.
+			'FROM ' . $this->engine->db->table_prefix.'poll '.
 			'ORDER BY poll_id DESC '.
 			'LIMIT 1');
 
@@ -203,39 +203,39 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->_t('PollsGuest').'</em>' : $header['user_name'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest').'</em>' : $header['user_name'] );
 
 		if (!$header['start'])
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
-					'<tr><th>'.$this->engine->_t('PollsError').'</th></tr>'.
-					'<tr><td style="text-align:center;"><em>'.$this->engine->_t('PollsNotExists').'</em></td></tr>'.
+					'<tr><th>' . $this->engine->_t('PollsError').'</th></tr>'.
+					'<tr><td style="text-align:center;"><em>' . $this->engine->_t('PollsNotExists').'</em></td></tr>'.
 					'</table>';
 		}
 		else
 		{
-			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll'.$poll_id.'_form']).
-					'<a id="p'.date('dm', strtotime($header['start'])).'"></a>'.
-					'<a id="poll'.$poll_id.'_form"></a>'.
-					'<input type="hidden" name="poll" value="'.$poll_id.'" />'.
+			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll' . $poll_id.'_form']).
+					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>'.
+					'<a id="poll' . $poll_id.'_form"></a>'.
+					'<input type="hidden" name="poll" value="' . $poll_id . '" />'.
 					'<table class="formation">'."\n".
-					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int) $poll_id).'): '.$header['text'].'</th></tr>'."\n";
+					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int) $poll_id).'): ' . $header['text'] . '</th></tr>'."\n";
 
 			foreach ($vars as $var)
 			{
 				$poll	.= '<tr class="lined"><td class="label">'.
 							($header['plural'] == 1
-								? '<input type="checkbox" id="'.$var['v_id'].'" name="'.$var['v_id'].'" value="1" />'
-								: '<input type="radio" id="'.$var['v_id'].'" name="id" value="'.$var['v_id'].'" />').
+								? '<input type="checkbox" id="' . $var['v_id'] . '" name="' . $var['v_id'] . '" value="1" />'
+								: '<input type="radio" id="' . $var['v_id'] . '" name="id" value="' . $var['v_id'] . '" />').
 							'</td>'.
-						'<td style="width:95%;text-align:left;"><label for="'.$var['v_id'].'">'.$var['text'].'</label></td></tr>'."\n";
+						'<td style="width:95%;text-align:left;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>'."\n";
 			}
 
-			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->_t('PollsLasts').': '.$duration.
-						'<br />'.$this->engine->_t('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->db->users_page, 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts').': ' . $duration.
+						'<br />' . $this->engine->_t('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user.'</a>' ).'</small></td></tr>'.
 					'<tr><td colspan="2" style="white-space:nowrap;">'.
-					'<input type="submit" name="vote" id="submit" value="'.$this->engine->_t('PollsSubmit').'" /> '.
-					'<input type="submit" name="results" id="submit" value="'.$this->engine->_t('PollsResults').'" />'.
+					'<input type="submit" name="vote" id="submit" value="' . $this->engine->_t('PollsSubmit') . '" /> '.
+					'<input type="submit" name="results" id="submit" value="' . $this->engine->_t('PollsResults') . '" />'.
 					'</tr></td>'.
 					'</table>'.
 					$this->engine->form_close();
@@ -253,7 +253,7 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id, 1);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->_t('PollsGuest').'</em>' : $header['user_name'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest').'</em>' : $header['user_name'] );
 		$voters		= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];
@@ -262,30 +262,30 @@ class Polls
 		if (!$header['start'])
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
-					'<tr><th>'.$this->engine->_t('PollsError').'</th></tr>'.
-					'<tr><td style="text-align:center;"><em>'.$this->engine->_t('PollsNotExists').'</em></td></tr>'.
+					'<tr><th>' . $this->engine->_t('PollsError').'</th></tr>'.
+					'<tr><td style="text-align:center;"><em>' . $this->engine->_t('PollsNotExists').'</em></td></tr>'.
 					'</table>';
 		}
 		else
 		{
 			$poll	= $this->engine->form_open().
-					'<a id="p'.date('dm', strtotime($header['start'])).'"></a>'.
-					'<a id="poll'.$poll_id.'_form"></a>'.
+					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>'.
+					'<a id="poll' . $poll_id.'_form"></a>'.
 					'<table class="formation">'.
-					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int) $poll_id).'): '.$header['text'].'</th></tr>';
+					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int) $poll_id).'): ' . $header['text'] . '</th></tr>';
 
 			foreach ($vars as $var)
 			{
 				$percent = ($total == 0 ? 0 : round($var['votes'] / $total * 100, 1));
-				$poll	.= '<tr class="lined"><td style="width:95%;text-align:left;">'.$var['text'].'</td>'.
-						'<td>&nbsp;<strong>'.$var['votes'].'</strong>&nbsp;</td>'.
-						'<td>&nbsp;<strong>'.$percent.'%</strong></td></tr>';
+				$poll	.= '<tr class="lined"><td style="width:95%;text-align:left;">' . $var['text'] . '</td>'.
+						'<td>&nbsp;<strong>' . $var['votes'] . '</strong>&nbsp;</td>'.
+						'<td>&nbsp;<strong>' . $percent.'%</strong></td></tr>';
 			}
 
-			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->_t('PollsTotalVotes').': '.$voters.
+			$poll	.= '<tr><td colspan="3"><small>' . $this->engine->_t('PollsTotalVotes').': ' . $voters.
 						'<br />'.($header['end'] ? $this->engine->_t('PollsLasted') :
-							$this->engine->_t('PollsLasts')).': '.$duration.
-						'<br />'.$this->engine->_t('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->db->users_page, 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+							$this->engine->_t('PollsLasts')).': ' . $duration.
+						'<br />' . $this->engine->_t('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user.'</a>' ).'</small></td></tr>'.
 					'</table>'.
 					$this->engine->form_close();
 		}

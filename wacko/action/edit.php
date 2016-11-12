@@ -27,7 +27,7 @@ if (!$text)
 	$text = $this->_t('EditText');
 }
 
-$output .= $this->has_access('write') ? '<a href="'.$editpage.'" accesskey="E" title="'.$this->_t('EditTip').'">'.$text."</a>\n" : '';
+$output .= $this->has_access('write') ? '<a href="' . $editpage . '" accesskey="E" title="' . $this->_t('EditTip') . '">' . $text."</a>\n" : '';
 
 echo $output;
 

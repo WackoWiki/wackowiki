@@ -58,7 +58,7 @@ write_config_hidden_nodes(array(
 	'table_prefix'		=> '')
 );
 
-echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']) ? $_POST['password'] : '').'" />' . "\n";
+echo '   <input type="hidden" name="password" value="' . (isset($_POST['password']) ? $_POST['password'] : '') . '" />' . "\n";
 
 	// If none of the PHP SQL extensions are loaded then let the user know there is a problem
 	if (!extension_loaded('mysqli') && !extension_loaded('pdo'))
@@ -84,7 +84,7 @@ echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']
  */
 
 $drivers	= [];
-$drivers[]	= ['mysqli',	'mysqli_legacy',	'MySQLi ('.$lang['Recommended'].')'];
+$drivers[]	= ['mysqli',	'mysqli_legacy',	'MySQLi (' . $lang['Recommended'] . ')'];
 $drivers[]	= ['pdo',		'mysql_pdo',		'PDO MySQL'];
 // $drivers[]	= ['pdo',		'pgsql',		'PDO PostgreSQL'];
 // $drivers[]	= ['pdo',		'sqlite3',		'PDO SQLite2'];
@@ -98,15 +98,15 @@ for ($count = 0; $count < count($drivers); $count++)
 		if ($config['is_update'] == false)
 		{
 			echo '      <li>
-							<input type="radio" id="db_driver_'.$drivers[$count][0].'" name="config[database_driver]" value="'.$drivers[$count][1].'" '.($detected == 0 ? 'checked="checked"' : '').'>
-							<label for="db_driver_'.$drivers[$count][0].'">'.$drivers[$count][2]."</label>
+							<input type="radio" id="db_driver_' . $drivers[$count][0] . '" name="config[database_driver]" value="' . $drivers[$count][1] . '" '.($detected == 0 ? 'checked="checked"' : '').'>
+							<label for="db_driver_' . $drivers[$count][0] . '">' . $drivers[$count][2]."</label>
 						</li>\n";
 		}
 		else
 		{
 			echo '      <li>
-							<input type="radio" id="db_driver_'.$drivers[$count][0].'" name="config[database_driver]" value="'.$drivers[$count][1].'" '.($config['database_driver'] == $drivers[$count][1] ? 'checked="checked"' : '').'>
-							<label for="db_driver_'.$drivers[$count][0].'">'.$drivers[$count][2]."</label>
+							<input type="radio" id="db_driver_' . $drivers[$count][0] . '" name="config[database_driver]" value="' . $drivers[$count][1] . '" '.($config['database_driver'] == $drivers[$count][1] ? 'checked="checked"' : '').'>
+							<label for="db_driver_' . $drivers[$count][0] . '">' . $drivers[$count][2]."</label>
 						</li>\n";
 		}
 
@@ -133,7 +133,7 @@ for ($count = 0; $count < count($drivers); $count++)
  */
 
 $charset	= [];
-# $charset[]	= ['utf8', 'utf8', 'UTF-8 Unicode ('.$lang['Recommended'].')']; // requires unicode ready wiki engine! -> Version 5.5
+# $charset[]	= ['utf8', 'utf8', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 5.5
 $charset[]	= ['cp1251',	'cp1251',	'cp1251 Windows Cyrillic'];
 $charset[]	= ['latin1',	'latin1',	'cp1252 West European'];
 $charset[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European']; // not tested
@@ -146,7 +146,7 @@ echo '    <select id="config[database_charset]" name="config[database_charset]">
 
 for ($count = 0; $count < count($charset); $count++)
 {
-	echo '      <li><option value="'.$charset[$count][1].'" '.($config['database_charset'] == $charset[$count][1] ? 'selected="selected"' : '').'>'.$charset[$count][2]."</option></li>\n";
+	echo '      <li><option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected="selected"' : '').'>' . $charset[$count][2]."</option></li>\n";
 	$detected++;
 }
 
@@ -173,7 +173,7 @@ if ($config['is_update'] == false)
  */
 
 $engines	= [];
-$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB / XtraDB ('.$lang['Recommended'].')'];
+$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB / XtraDB (' . $lang['Recommended'] . ')'];
 $engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];
 
 $detected = 0;
@@ -181,8 +181,8 @@ $detected = 0;
 for ($count = 0; $count < count($engines); $count++)
 {
 	echo '      <li>
-					<input type="radio" id="db_engine_'.$engines[$count][0].'" name="config[database_engine]" value="'.$engines[$count][1].'" '.($detected == 0 ? 'checked="checked"' : '').'>
-					<label for="db_engine_'.$engines[$count][0].'">'.$engines[$count][2]."</label>
+					<input type="radio" id="db_engine_' . $engines[$count][0] . '" name="config[database_engine]" value="' . $engines[$count][1] . '" '.($detected == 0 ? 'checked="checked"' : '').'>
+					<label for="db_engine_' . $engines[$count][0] . '">' . $engines[$count][2]."</label>
 				</li>\n";
 	$detected++;
 }
@@ -193,7 +193,7 @@ for ($count = 0; $count < count($engines); $count++)
 }
 else
 {
-	echo '<input type="hidden" value="'.$config['database_engine'].'" name="config[database_engine]">';
+	echo '<input type="hidden" value="' . $config['database_engine'] . '" name="config[database_engine]">';
 }
 ?>
    <div class="fake_hr_seperator">

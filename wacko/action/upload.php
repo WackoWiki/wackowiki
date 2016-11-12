@@ -119,7 +119,7 @@ if ($this->can_upload(true) === true)
 }
 else
 {
-	echo '<em>'.$this->_t('UploadForbidden').'</em>';
+	echo '<em>' . $this->_t('UploadForbidden').'</em>';
 }
 
 ?>

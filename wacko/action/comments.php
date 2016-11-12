@@ -74,12 +74,12 @@ if ($this->user_allowed_comments())
 
 		if ($user)
 		{
-			echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
+			echo '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead').'</a></small>';
 		}
 
 		if ($root == '' && !(int) $noxml)
 		{
-			echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.$this->db->theme_url.'icon/spacer.png'.'" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span>'."<br /><br />\n";
+			echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="' . $this->db->theme_url.'icon/spacer.png' . '" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>'."<br /><br />\n";
 		}
 
 		$this->print_pagination($pagination);
@@ -112,10 +112,10 @@ if ($this->user_allowed_comments())
 				$page_lang = ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 
 				// print entry
-				echo '<li '.$viewed.'><span class="dt">'.$time."</span> &mdash; ".
+				echo '<li ' . $viewed.'><span class="dt">' . $time."</span> &mdash; ".
 				($title == 1
-					? $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
-					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'], 0, 1, $page_lang, 0)
+					? $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
+					: $this->link('/' . $page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'], 0, 1, $page_lang, 0)
 				).
 				" . . . . . . . . . . . . . . . . <small>"./*$this->_t('LatestCommentBy').*/" ".
 				$this->user_link($page['comment_user'], '', true, false).

@@ -28,16 +28,16 @@ if ($mode == 'global')
 {
 	echo "<h3>".$this->_t('ReferrersText')." &raquo; ".$this->_t('ViewReferrersGlobal')."</h3>";
 	echo '<ul class="menu">
-			<li><a href="'.$this->href('referrers_sites').'">'.$this->_t('ViewReferrersPage').'</a></li>
-			<li class="active">'.$this->_t('ViewReferrersGlobal')."</li>
+			<li><a href="' . $this->href('referrers_sites') . '">' . $this->_t('ViewReferrersPage').'</a></li>
+			<li class="active">' . $this->_t('ViewReferrersGlobal')."</li>
 		</ul><br /><br />\n";
 }
 else
 {
 	echo "<h3>".$this->_t('ReferrersText')." &raquo; ".$this->_t('ViewReferrersPage')."</h3>";
 	echo '<ul class="menu">
-			<li class="active">'.$this->_t('ViewReferrersPage').'</li>
-			<li><a href="'.$this->href('referrers_sites', '', 'o=global').'">'. $this->_t('ViewReferrersGlobal')."</a></li>
+			<li class="active">' . $this->_t('ViewReferrersPage').'</li>
+			<li><a href="' . $this->href('referrers_sites', '', 'o=global') . '">'. $this->_t('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
 }
 

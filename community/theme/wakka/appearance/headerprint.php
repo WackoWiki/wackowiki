@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset='.$this->get_charset());
+header('Content-Type: text/html; charset=' . $this->get_charset());
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['page_lang'] ?>" lang="<?php echo $this->page['page_lang'] ?>">

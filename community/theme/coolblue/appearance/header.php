@@ -52,17 +52,17 @@ echo $this->form_close();
 		// determines what it should show: "add to bookmarks" or "remove from bookmarks" icon
 		if (!in_array($this->page['page_id'], $this->get_menu_links()))
 		{
-			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-				.'"><img src="'. $this->db->theme_url
-				.'icon/bookmark1.png" alt="+" title="'.
-				$this->_t('AddToBookmarks') .'"/></a></li>';
+			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
+				 . '"><img src="' .  $this->db->theme_url
+				.'icon/bookmark1.png" alt="+" title="' . 
+				$this->_t('AddToBookmarks')  . '"/></a></li>';
 		}
 		else
 		{
-			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-				.'"><img src="'. $this->db->theme_url
-				.'icon/bookmark2.png" alt="-" title="'.
-				$this->_t('RemoveFromBookmarks') .'"/></a></li>';
+			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
+				 . '"><img src="' .  $this->db->theme_url
+				.'icon/bookmark2.png" alt="-" title="' . 
+				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 		}
 	}
 	echo "\n</ol></div>";
@@ -71,12 +71,12 @@ echo $this->form_close();
   <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user()) { ?>
-  <?php echo $this->_t('YouAre')." ".$this->link($this->db->users_page.'/'.$this->get_user_name(), '', $this->get_user_name()) ?><br />
+  <?php echo $this->_t('YouAre')." ".$this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?><br />
   <small>
   <?php
       echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
   <br />
-  <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></small>
+  <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></small>
   <?php
 // Else Wacko shows login's controls
 } else {

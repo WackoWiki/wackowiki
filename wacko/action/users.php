@@ -33,7 +33,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		// profile navigation
 		if ($user['user_id'] === $this->get_user_id())
 		{
-			$output1 = #'<h3>'.$this->_t('UserPages')."</h3>".
+			$output1 = #'<h3>' . $this->_t('UserPages')."</h3>".
 			'<ul class="menu" id="list">' . "\n";
 			$output2 = '<li><a href="' . $this->href('', '', 'mode=mypages') . '#list">' . $this->_t('ListMyPages') . "</a></li>\n";
 			$output3 = '<li><a href="' . $this->href('', '', 'mode=mychanges') . '#list">' . $this->_t('ListMyChanges') . "</a></li>\n";
@@ -166,7 +166,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							rtrim($this->db->base_url, '/'),
 							Ut::amp_decode($this->href('', '',
 								['profile' => $this->get_user_name(),
-								'ref' => Ut::http64_encode(gzdeflate($msg_id.'@@'.$subject, 9)),
+								'ref' => Ut::http64_encode(gzdeflate($msg_id.'@@' . $subject, 9)),
 								'#' => 'contacts'])),
 							$this->db->abuse_email,
 							$_POST['mail_body']);
@@ -358,7 +358,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 
 						$tpl->u_cmt_c_li_created	= $comment['created'];
-						$tpl->u_cmt_c_li_link		= $this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
+						$tpl->u_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
 					}
 				}
 			}

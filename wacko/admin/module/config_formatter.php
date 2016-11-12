@@ -223,7 +223,7 @@ function admin_config_formatter(&$engine, &$module)
 					$timezone = substr($timezone, 0, 45 ).'...';
 				}
 
-				echo '<option value="'.$offset.'" '.
+				echo '<option value="' . $offset . '" '.
 					($engine->db->timezone == $offset
 						? "selected=\"selected\""
 						: ""

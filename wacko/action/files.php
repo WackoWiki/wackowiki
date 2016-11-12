@@ -124,7 +124,7 @@ if ($can_view)
 
 	/* if (!$global)
 	{
-		$path = '@'.$filepage['page_id'].'@';
+		$path = '@' . $filepage['page_id'] . '@';
 	}
 	else
 	{

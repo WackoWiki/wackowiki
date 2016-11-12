@@ -135,10 +135,10 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$comment_on_id = $this->page['page_id'];
 
 			// store new comment
-			$body_r	= $this->save_page('Comment'.$num, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id, $parent_id);
+			$body_r	= $this->save_page('Comment' . $num, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id, $parent_id);
 
 			// log event
-			$this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment'.$num, $this->tag.' '.$this->page['title']));
+			$this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag.' ' . $this->page['title']));
 
 			// restore username after anonymous publication
 			if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
@@ -153,14 +153,14 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			}
 
 			// now we render it internally so we can write the updated page_link table.
-			$this->update_link_table($this->get_page_id('Comment'.$num), $body_r);
+			$this->update_link_table($this->get_page_id('Comment' . $num), $body_r);
 
 			$this->set_message($this->_t('CommentAdded'), 'success');
 		}
 	}
 
 	// redirect to page
-	$this->http->redirect($this->href('', '', 'show_comments=1&p=last').'#Comment'.$num);
+	$this->http->redirect($this->href('', '', 'show_comments=1&p=last').'#Comment' . $num);
 }
 else
 {

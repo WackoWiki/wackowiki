@@ -20,7 +20,7 @@ if (($user_id = $this->get_user_id()))
 
 	if (@$_GET['bydate'] || $bydate)
 	{
-		echo '<strong>'.$this->_t('ListOwnedPages2').'</strong>';
+		echo '<strong>' . $this->_t('ListOwnedPages2').'</strong>';
 		echo '<br />[<a href="' . $this->href('', '', $by('')) . '">'.
 			$this->_t('OrderABC') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">'.
 			$this->_t('OrderChange') . "</a>] <br /><br />\n";
@@ -62,7 +62,7 @@ if (($user_id = $this->get_user_id()))
 				}
 
 				// print entry
-				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
+				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 
 
 			}
@@ -90,10 +90,10 @@ if (($user_id = $this->get_user_id()))
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('change'));
 
-		echo '<strong>'.$this->_t('ListOwnedPages3').'</strong>';
-		echo '<br />[<a href="'.
-			$this->href('', '', $by('')).'">'.$this->_t('OrderABC').
-			'</a>] [<a href="'.$this->href('', '', $by('date')).'">'.
+		echo '<strong>' . $this->_t('ListOwnedPages3').'</strong>';
+		echo '<br />[<a href="' . 
+			$this->href('', '', $by('')) . '">' . $this->_t('OrderABC').
+			'</a>] [<a href="' . $this->href('', '', $by('date')) . '">'.
 			$this->_t('OrderDate')."</a>]<br /><br />\n";
 
 		if ($pages = $this->db->load_all(
@@ -128,8 +128,8 @@ if (($user_id = $this->get_user_id()))
 				}
 
 				// print entry
-				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).
-					' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
+				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).
+					' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 
 			}
 
@@ -153,7 +153,7 @@ if (($user_id = $this->get_user_id()))
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
-		echo '<strong>'.$this->_t('ListOwnedPages').'</strong>';
+		echo '<strong>' . $this->_t('ListOwnedPages').'</strong>';
 		echo "<br />[<a href=\"".$this->href('', '', $by('date'))."\">".
 		$this->_t('OrderDate')."</a>] [<a href=\"".$this->href('', '', $by('change'))."\">".
 		$this->_t('OrderChange')."</a>] <br /><br />\n";
@@ -173,7 +173,7 @@ if (($user_id = $this->get_user_id()))
 			{
 				$first_char = strtoupper($page['tag'][0]);
 
-				if (!preg_match('/'.$this->language['ALPHA'].'/', $first_char))
+				if (!preg_match('/' . $this->language['ALPHA'] . '/', $first_char))
 				{
 					$first_char = '#';
 				}

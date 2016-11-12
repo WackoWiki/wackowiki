@@ -108,7 +108,7 @@ if ($this->is_admin())
 
 			foreach ($pages as $page)
 			{
-				echo $this->link('/'.$page, '', '', '', 0).'<br />';
+				echo $this->link('/' . $page, '', '', '', 0).'<br />';
 			}
 		}
 		else

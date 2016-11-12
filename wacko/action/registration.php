@@ -63,7 +63,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max)." ";
 		}
 		// check if valid user name (and disallow '/')
-		else if (!preg_match('/^(['.$this->language['ALPHANUM_P'].']+)$/', $user_name) || preg_match('/\//', $user_name))
+		else if (!preg_match('/^([' . $this->language['ALPHANUM_P'] . ']+)$/', $user_name) || preg_match('/\//', $user_name))
 		{
 			$error .= $this->_t('InvalidUserName')." ";
 		}
@@ -215,7 +215,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			// forward
 			$this->set_message(
 				$this->_t('SiteRegistered').
-				'&laquo;'.$this->db->site_name.'&raquo;. <br /><br />'.
+				'&laquo;' . $this->db->site_name.'&raquo;. <br /><br />'.
 				$this->_t('SiteEmailConfirm'));
 
 			$this->context[++$this->current_context] = '';

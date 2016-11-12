@@ -35,7 +35,7 @@ class bbcode
 		// ignore
 		if (preg_match('/^\"\"(.*)\"\"$/s', $string, $substring))
 		{
-			return '""'.$substring[1].'""';
+			return '""' . $substring[1] . '""';
 		}
 		// bold
 		if (preg_match('/^\\[b(?:\:[\\w]+?)??\\](.*)\\[\/b(?:\:[\\w]+?)??\\]$/s', $string, $substring))
@@ -70,7 +70,7 @@ class bbcode
 		// open quote
 		else if (preg_match('/\\[quote(?:\:[\\w]+?)??(?:="([\\w]+?)")??\\]/s', $string, $substring))
 		{
-			return '<[ '.($substring[1] ? '**//'.$substring[1]."://**\n" : '');
+			return '<[ '.($substring[1] ? '**//' . $substring[1]."://**\n" : '');
 		}
 		// close quote
 		else if (preg_match('/\\[\/quote(?:\:[\\w]+?)??\\][\n\r]*/s', $string, $substring))
@@ -97,7 +97,7 @@ class bbcode
 		// url with text
 		else if (preg_match('/\\[url=(http:\/\/|https:\/\/|ftp:\/\/|nntp:\/\/)+(.+?)\\](.+?)\\[\/url\\]/s', $string, $substring))
 		{
-			return '[['.$substring[1].$substring[2].' '.$substring[3].']]';
+			return '[[' . $substring[1].$substring[2] . ' ' . $substring[3] . ']]';
 		}
 		// font size
 		else if (preg_match('/\\[size\=([\\d]+?)(?:\:[\\w]+?)??\\](.*?)\\[\/size(?:\:[\\w]+?)??\\]/s', $string, $substring))

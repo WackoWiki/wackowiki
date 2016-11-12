@@ -36,8 +36,8 @@ function admin_content_polls(&$engine, &$module)
 	// define context
 	$admin		= true; #$engine->is_admin();
 	$mode		= $module['mode'];
-	$mode_http	= ''; //'mode='.$mode.'&amp;';
-	$mode_file	= 'admin.php?mode='.$module['mode']; //$_SERVER['PHP_SELF']
+	$mode_http	= ''; //'mode=' . $mode.'&amp;';
+	$mode_file	= 'admin.php?mode=' . $module['mode']; //$_SERVER['PHP_SELF']
 
 	// processing input
 	if ($admin === true)
@@ -134,13 +134,13 @@ function admin_content_polls(&$engine, &$module)
 		{
 			echo $engine->form_open('polls');
 
-			echo '<input type="hidden" name="delete" value="'.$remove_id.'" />';
+			echo '<input type="hidden" name="delete" value="' . $remove_id . '" />';
 			echo '<table class="formation">';
-			echo '<tr><th>'.$engine->_t('PollsConfirmDelete').'</th></tr>';
-			echo '<tr><td><em>&quot;'.$title.'&quot;</em></td></tr>';
+			echo '<tr><th>' . $engine->_t('PollsConfirmDelete').'</th></tr>';
+			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>'.
-					'<input type="submit" name="yes" id="submit" value="'.$engine->_t('PollsSubmit').'" /> '.
-					'<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http)).'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$engine->_t('PollsCancel').'" /></a>'.
+					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '" /> '.
+					'<a href="' . rawurldecode($engine->href('', $mode_file, $mode_http)) . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '" /></a>'.
 				'</td></tr>';
 			echo '</table>';
 			echo $engine->form_close();
@@ -160,31 +160,31 @@ function admin_content_polls(&$engine, &$module)
 
 		if (empty($list))
 		{
-			echo '<tr><th>'.$engine->_t('PollsCurrent').'</th></tr>';
-			echo '<tr><td style="text-align:center;"><em>'.$engine->_t('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>' . $engine->_t('PollsCurrent').'</th></tr>';
+			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="4">'.$engine->_t('PollsCurrent').'</th></tr>';
+			echo '<tr><th colspan="4">' . $engine->_t('PollsCurrent').'</th></tr>';
 
 			foreach ($list as $row)
 			{
 				echo '<tr class="lined">';
 					echo '<td class="label">
-						<input type="radio" name="id" value="'.$row['poll_id'].'" /></td>';
+						<input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
 					echo '<td style="text-align:left;width:95%;">
-							<a href="'.
-							rawurldecode($engine->href('', $mode_file.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
-							date('d/m', strtotime($row['start'])).': '.$row['text'].'</a></td>';
-					echo '<td>'.$row['user_name'].'</td>';
-					echo '<td style="white-space:nowrap;">'.$polls_obj->poll_time($row['start'], time()).'</td>';
+							<a href="' . 
+							rawurldecode($engine->href('', $mode_file.'&amp;poll=' . $row['poll_id'] . '&amp;results=1')) . '">'.
+							date('d/m', strtotime($row['start'])).': ' . $row['text'] . '</a></td>';
+					echo '<td>' . $row['user_name'] . '</td>';
+					echo '<td style="white-space:nowrap;">' . $polls_obj->poll_time($row['start'], time()).'</td>';
 				echo '</tr>';
 			}
 
 			echo '<tr><td colspan="4">'.
-					'<input type="submit" name="stop" id="submit" value="'.$engine->_t('PollsStop').'" /> '.
-					'<input type="submit" name="reset" id="submit" value="'.$engine->_t('PollsReset').'" /> '.
-					'<input type="submit" name="remove" id="submit" value="'.$engine->_t('PollsRemove').'" />'.
+					'<input type="submit" name="stop" id="submit" value="' . $engine->_t('PollsStop') . '" /> '.
+					'<input type="submit" name="reset" id="submit" value="' . $engine->_t('PollsReset') . '" /> '.
+					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '" />'.
 				'</td></tr>';
 		}
 
@@ -200,19 +200,19 @@ function admin_content_polls(&$engine, &$module)
 
 		if (empty($list))
 		{
-			echo '<tr><th>'.$engine->_t('PollsModeration').'</th></tr>';
-			echo '<tr><td style="text-align:center;"><em>'.$engine->_t('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>' . $engine->_t('PollsModeration').'</th></tr>';
+			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="3">'.$engine->_t('PollsModeration').'</th></tr>';
+			echo '<tr><th colspan="3">' . $engine->_t('PollsModeration').'</th></tr>';
 
 			foreach ($list as $row)
 			{
 				echo '<tr>';
-					echo '<td class="label"><input type="radio" name="id" value="'.$row['poll_id'].'" /></td>';
-					echo '<td style="text-align:left;width:80%;">'.$row['text'].'</td>';
-					echo '<td style="vertical-align:top;">'.$row['user_name'].'</td>';
+					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
+					echo '<td style="text-align:left;width:80%;">' . $row['text'] . '</td>';
+					echo '<td style="vertical-align:top;">' . $row['user_name'] . '</td>';
 				echo '</tr>';
 				echo '<tr>';
 					$vars	= $polls_obj->get_poll_vars($row['poll_id']);
@@ -221,7 +221,7 @@ function admin_content_polls(&$engine, &$module)
 
 					foreach ($vars as $var)
 					{
-						echo '<tr class="lined"><td style="text-align:left;">'.$var['text'].'</td></tr>';
+						echo '<tr class="lined"><td style="text-align:left;">' . $var['text'] . '</td></tr>';
 					}
 
 					echo '</table></td>';
@@ -231,9 +231,9 @@ function admin_content_polls(&$engine, &$module)
 			}
 
 			echo '<tr><td colspan="3">'.
-					'<input type="submit" name="activate" id="submit" value="'.$engine->_t('PollsActivate').'" /> '.
-					'<input type="submit" name="edit" id="submit" value="'.$engine->_t('PollsEdit').'" /> '.
-					'<input type="submit" name="remove" id="submit" value="'.$engine->_t('PollsRemove').'" />'.
+					'<input type="submit" name="activate" id="submit" value="' . $engine->_t('PollsActivate') . '" /> '.
+					'<input type="submit" name="edit" id="submit" value="' . $engine->_t('PollsEdit') . '" /> '.
+					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '" />'.
 				'</td></tr>';
 		}
 
@@ -251,29 +251,29 @@ function admin_content_polls(&$engine, &$module)
 						$years	= $polls_obj->poll_years();
 		if (empty($list))
 		{
-			echo '<tr><th>'.$engine->_t('PollsEnded').'</th></tr>';
-			echo '<tr><td style="text-align:center;"><em>'.$engine->_t('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>' . $engine->_t('PollsEnded').'</th></tr>';
+			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="4">'.$engine->_t('PollsEnded').'</th></tr>';
+			echo '<tr><th colspan="4">' . $engine->_t('PollsEnded').'</th></tr>';
 
 			foreach ($list as $row)
 			{
 				echo '<tr class="lined">';
-					echo '<td class="label"><input type="radio" name="id" value="'.$row['poll_id'].'" /></td>';
-					echo '<td style="text-align:left;width:95%;"><a href="'.
-						rawurldecode($engine->href('', $mode_file.'&amp;year='.$year.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
-						date('d/m/y', strtotime($row['start'])).': '.$row['text'].'</a></td>';
-					echo '<td>'.$row['user_name'].'</td>';
-					echo '<td style="white-space:nowrap;">'.$polls_obj->poll_time($row['start'], $row['end']).'</td>';
+					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
+					echo '<td style="text-align:left;width:95%;"><a href="' . 
+						rawurldecode($engine->href('', $mode_file.'&amp;year=' . $year.'&amp;poll=' . $row['poll_id'] . '&amp;results=1')) . '">'.
+						date('d/m/y', strtotime($row['start'])).': ' . $row['text'] . '</a></td>';
+					echo '<td>' . $row['user_name'] . '</td>';
+					echo '<td style="white-space:nowrap;">' . $polls_obj->poll_time($row['start'], $row['end']).'</td>';
 				echo '</tr>';
 			}
 		}
 
 		echo '<tr><td colspan="4">';
 		// pagination
-		echo '<small><strong>'.$engine->_t('PollsShow').':</strong> ';
+		echo '<small><strong>' . $engine->_t('PollsShow').':</strong> ';
 
 		if ($year == 0)
 		{
@@ -281,7 +281,7 @@ function admin_content_polls(&$engine, &$module)
 		}
 		else
 		{
-			echo '<a href="'.rawurldecode($engine->href('', $mode_file.'&amp;year=0')).'">'.$engine->_t('PollsAll').'</a> ';
+			echo '<a href="' . rawurldecode($engine->href('', $mode_file.'&amp;year=0')) . '">' . $engine->_t('PollsAll').'</a> ';
 		}
 
 		if (!empty($years))
@@ -294,7 +294,7 @@ function admin_content_polls(&$engine, &$module)
 				}
 				else
 				{
-					echo '<a href="'.rawurldecode($engine->href('', $mode_file.'&amp;year='.$item)).'">'.$item.'</a> ';
+					echo '<a href="' . rawurldecode($engine->href('', $mode_file.'&amp;year=' . $item)) . '">' . $item.'</a> ';
 				};
 			}
 		}
@@ -305,7 +305,7 @@ function admin_content_polls(&$engine, &$module)
 		if (!empty($list))
 		{
 			echo '<tr><td colspan="4">'.
-					'<input type="submit" name="remove" id="submit" value="'.$engine->_t('PollsRemove').'" />'.
+					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '" />'.
 				'</td></tr>';
 		}
 
