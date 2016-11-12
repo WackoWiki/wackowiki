@@ -117,11 +117,11 @@ else
 
 	// list header
 	// TODO STS refactor, like in users
-	$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=name'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsName').( (isset($_GET['sort']) && $_GET['sort'] == 'name') || (isset($_REQUEST['group']) && $_REQUEST['group'] == true) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a>';
-	$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=members'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsMembers').( (isset($_GET['sort']) && $_GET['sort'] == 'members') || (isset($_GET['sort']) && $_GET['sort'] == false) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a>';
+	$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=name'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsName').( (isset($_GET['sort']) && $_GET['sort'] == 'name') || (isset($_REQUEST['group']) && $_REQUEST['group'] == true) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '') . '</a>';
+	$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=members'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsMembers').( (isset($_GET['sort']) && $_GET['sort'] == 'members') || (isset($_GET['sort']) && $_GET['sort'] == false) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '') . '</a>';
 	if ($this->get_user())
 	{
-		$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=created'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsCreated').( isset($_GET['sort']) && $_GET['sort'] == 'created' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a>';
+		$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=created'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsCreated').( isset($_GET['sort']) && $_GET['sort'] == 'created' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '') . '</a>';
 	}
 
 	// list entries

@@ -58,7 +58,7 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 				// update entry
 				$this->db->sql_query(
 					"UPDATE {$this->db->table_prefix}rating SET ".
-						"value		= {$rating['value']} + ".$this->db->q($value).", ".
+						"value		= {$rating['value']} + " . $this->db->q($value) . ", ".
 						"voters		= {$rating['voters']} + 1 ".
 					"WHERE page_id = $page_id");
 			}
@@ -68,7 +68,7 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 				$this->db->sql_query(
 					"INSERT INTO {$this->db->table_prefix}rating SET ".
 					"page_id		= $page_id, ".
-					"value			= ".$this->db->q($value).", ".
+					"value			= " . $this->db->q($value) . ", ".
 					"voters			= 1");
 					// time is set automatically
 			}
@@ -78,7 +78,7 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 
 			// rated successfully
 			$this->set_message($this->_t('RatingSuccess'));
-			$this->http->redirect($this->href('', '', 'show_rating=1').'#rating');
+			$this->http->redirect($this->href('', '', 'show_rating=1') . '#rating');
 		}
 		else
 		{

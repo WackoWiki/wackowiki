@@ -61,7 +61,7 @@ function admin_system_log(&$engine, &$module)
 				break;
 		}
 
-		$where = "WHERE l.level $mod '".$_level."' ";
+		$where = "WHERE l.level $mod '" . $_level."' ";
 	}
 
 	// set time ordering
@@ -99,11 +99,11 @@ function admin_system_log(&$engine, &$module)
 	// filter by username or user ip
 	if (isset($_GET['user_id']))
 	{
-		$where = "WHERE l.user_id = '".(int) $_GET['user_id']."' ";
+		$where = "WHERE l.user_id = '" . (int) $_GET['user_id'] . "' ";
 	}
 	else if (isset($_GET['ip']))
 	{
-		$where = "WHERE l.ip = ".$engine->db->q($_GET['ip'])." ";
+		$where = "WHERE l.ip = " . $engine->db->q($_GET['ip']) . " ";
 	}
 
 	// entries to display
@@ -148,7 +148,7 @@ function admin_system_log(&$engine, &$module)
 <?php
 	for ($i = 1; $i <= 7; $i++)
 	{
-		echo '<option value="' . $i . '"' . ( (!isset($_POST['level']) && $level == $i) || (isset($_POST['level']) && $_POST['level'] == $i) ? ' selected="selected"' : '' ).'>'.strtolower($engine->_t('LogLevel' . $i)).'</option>'."\n";
+		echo '<option value="' . $i . '"' . ( (!isset($_POST['level']) && $level == $i) || (isset($_POST['level']) && $_POST['level'] == $i) ? ' selected="selected"' : '' ) . '>'.strtolower($engine->_t('LogLevel' . $i)) . '</option>'."\n";
 	}
 ?>
 			</select>
@@ -162,8 +162,8 @@ function admin_system_log(&$engine, &$module)
 		<table style="padding: 3px;" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order=' . $ordertime;  ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order=' . $orderlevel; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordertime;  ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $orderlevel; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
 				<th><?php echo $engine->_t('LogEvent'); ?></th>
 				<th style="width:20px;"><?php echo $engine->_t('LogUsername'); ?></th>
 			</tr>
@@ -175,15 +175,15 @@ function admin_system_log(&$engine, &$module)
 			// level highlighting
 			if ($row['level'] == 1)
 			{
-				$row['level'] = '<strong class="red">' . $engine->_t('LogLevel1').'</strong>';
+				$row['level'] = '<strong class="red">' . $engine->_t('LogLevel1') . '</strong>';
 			}
 			else if ($row['level'] == 2)
 			{
-				$row['level'] = '<span class="red">' . $engine->_t('LogLevel2').'</span>';
+				$row['level'] = '<span class="red">' . $engine->_t('LogLevel2') . '</span>';
 			}
 			else if ($row['level'] == 3)
 			{
-				$row['level'] = '<strong>' . $engine->_t('LogLevel3').'</strong>';
+				$row['level'] = '<strong>' . $engine->_t('LogLevel3') . '</strong>';
 			}
 			else if ($row['level'] == 4)
 			{
@@ -191,11 +191,11 @@ function admin_system_log(&$engine, &$module)
 			}
 			else if ($row['level'] == 5)
 			{
-				$row['level'] = '<small>' . $engine->_t('LogLevel' . $row['level']).'</small>';
+				$row['level'] = '<small>' . $engine->_t('LogLevel' . $row['level']) . '</small>';
 			}
 			else if ($row['level'] > 5)
 			{
-				$row['level'] = '<small class="grey">' . $engine->_t('LogLevel' . $row['level']).'</small>';
+				$row['level'] = '<small class="grey">' . $engine->_t('LogLevel' . $row['level']) . '</small>';
 			}
 
 			// tz offset
@@ -205,9 +205,9 @@ function admin_system_log(&$engine, &$module)
 					'<td style="vertical-align:top; text-align:center;">' . $row['log_id'] . '</td>'.
 					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz.'</small></td>'.
 					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>'.
-					'<td style="vertical-align:top;">' . $engine->format($row['message'], 'post_wacko').'</td>'.
+					'<td style="vertical-align:top;">' . $engine->format($row['message'], 'post_wacko') . '</td>' .
 					'<td style="vertical-align:top; text-align:center;"><small>'.
-						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">'.( $row['user_id'] == 0 ? '<em>' . $engine->_t('Guest').'</em>' : $row['user_name'] ).'</a>'.'<br />'.
+						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">'.( $row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>'.'<br />'.
 						'<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>'.
 					'</small></td>'.
 				'</tr>';
@@ -215,7 +215,7 @@ function admin_system_log(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>' . $engine->_t('LogNoMatch').'</em></td></tr>';
+		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
 	}
 ?>
 		</table>

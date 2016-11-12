@@ -35,7 +35,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	echo '<div id="bookmarks">';
 	echo "<ol>\n";
 	// Main page
-	echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
+	echo "<li>" . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
 	echo "<li>";
 
 	// menu
@@ -54,7 +54,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 				echo '<li>';
 			}
 
-			echo $formatted_menu."</li>\n";
+			echo $formatted_menu . "</li>\n";
 		}
 	}
 

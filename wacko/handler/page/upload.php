@@ -643,7 +643,7 @@ if ($this->can_upload() === true)
 			{
 				if ($this->db->upload_quota_per_user > 0)
 				{
-					$error = $this->_t('UploadMaxFileQuota').'. <br />'.
+					$error = $this->_t('UploadMaxFileQuota') . '. <br />'.
 							 'Storage in use ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) . ' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
 				}
 

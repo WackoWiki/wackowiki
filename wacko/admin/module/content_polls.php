@@ -68,7 +68,7 @@ function admin_content_polls(&$engine, &$module)
 			$engine->db->sql_query(
 				"UPDATE {$engine->db->table_prefix}poll SET ".
 					"end = UTC_TIMESTAMP() ".
-				"WHERE poll_id = ".(int) $_POST['id']." AND v_id = 0 ".
+				"WHERE poll_id = " . (int) $_POST['id'] . " AND v_id = 0 ".
 				"LIMIT 1");
 
 			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollStopped', $engine->db->language)));
@@ -79,12 +79,12 @@ function admin_content_polls(&$engine, &$module)
 			$engine->db->sql_query(	// reset start date
 				"UPDATE {$engine->db->table_prefix}poll SET ".
 					"start	= UTC_TIMESTAMP() ".
-				"WHERE poll_id = ".(int) $_POST['id']." AND v_id = 0");
+				"WHERE poll_id = " . (int) $_POST['id'] . " AND v_id = 0");
 			$engine->db->sql_query(	// reset votes and update servey id
 				"UPDATE {$engine->db->table_prefix}poll SET ".
-					"poll_id		= ".($polls_obj->get_last_poll_id() + 1).", ".
+					"poll_id		= " . ($polls_obj->get_last_poll_id() + 1) . ", ".
 					"votes	= 0 ".
-				"WHERE poll_id = ".(int) $_POST['id']);
+				"WHERE poll_id = " . (int) $_POST['id']);
 
 			#$xml->feed(); // update news feed
 			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollReset', $engine->db->language)));
@@ -95,7 +95,7 @@ function admin_content_polls(&$engine, &$module)
 			$engine->db->sql_query(
 				"UPDATE {$engine->db->table_prefix}poll SET ".
 					"start = UTC_TIMESTAMP() ".
-				"WHERE poll_id = ".(int) $_POST['id']." AND v_id = 0");
+				"WHERE poll_id = " . (int) $_POST['id'] . " AND v_id = 0");
 
 			#$engine->$xml->feed(); // update news feed
 			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollStarted', $engine->db->language)));
@@ -136,7 +136,7 @@ function admin_content_polls(&$engine, &$module)
 
 			echo '<input type="hidden" name="delete" value="' . $remove_id . '" />';
 			echo '<table class="formation">';
-			echo '<tr><th>' . $engine->_t('PollsConfirmDelete').'</th></tr>';
+			echo '<tr><th>' . $engine->_t('PollsConfirmDelete') . '</th></tr>';
 			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>'.
 					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '" /> '.
@@ -160,12 +160,12 @@ function admin_content_polls(&$engine, &$module)
 
 		if (empty($list))
 		{
-			echo '<tr><th>' . $engine->_t('PollsCurrent').'</th></tr>';
-			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>' . $engine->_t('PollsCurrent') . '</th></tr>';
+			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="4">' . $engine->_t('PollsCurrent').'</th></tr>';
+			echo '<tr><th colspan="4">' . $engine->_t('PollsCurrent') . '</th></tr>';
 
 			foreach ($list as $row)
 			{
@@ -175,9 +175,9 @@ function admin_content_polls(&$engine, &$module)
 					echo '<td style="text-align:left;width:95%;">
 							<a href="' . 
 							rawurldecode($engine->href('', $mode_file.'&amp;poll=' . $row['poll_id'] . '&amp;results=1')) . '">'.
-							date('d/m', strtotime($row['start'])).': ' . $row['text'] . '</a></td>';
+							date('d/m', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
-					echo '<td style="white-space:nowrap;">' . $polls_obj->poll_time($row['start'], time()).'</td>';
+					echo '<td style="white-space:nowrap;">' . $polls_obj->poll_time($row['start'], time()) . '</td>';
 				echo '</tr>';
 			}
 
@@ -200,12 +200,12 @@ function admin_content_polls(&$engine, &$module)
 
 		if (empty($list))
 		{
-			echo '<tr><th>' . $engine->_t('PollsModeration').'</th></tr>';
-			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>' . $engine->_t('PollsModeration') . '</th></tr>';
+			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="3">' . $engine->_t('PollsModeration').'</th></tr>';
+			echo '<tr><th colspan="3">' . $engine->_t('PollsModeration') . '</th></tr>';
 
 			foreach ($list as $row)
 			{
@@ -226,7 +226,7 @@ function admin_content_polls(&$engine, &$module)
 
 					echo '</table></td>';
 					echo '<td style="text-align:left; vertical-align:top;">'.
-						($row['plural'] == 1 ? $engine->_t('PollsPlural') : $engine->_t('PollsSingular')).'</td>';
+						($row['plural'] == 1 ? $engine->_t('PollsPlural') : $engine->_t('PollsSingular')) . '</td>';
 				echo '</tr>';
 			}
 
@@ -251,12 +251,12 @@ function admin_content_polls(&$engine, &$module)
 						$years	= $polls_obj->poll_years();
 		if (empty($list))
 		{
-			echo '<tr><th>' . $engine->_t('PollsEnded').'</th></tr>';
-			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>' . $engine->_t('PollsEnded') . '</th></tr>';
+			echo '<tr><td style="text-align:center;"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="4">' . $engine->_t('PollsEnded').'</th></tr>';
+			echo '<tr><th colspan="4">' . $engine->_t('PollsEnded') . '</th></tr>';
 
 			foreach ($list as $row)
 			{
@@ -264,24 +264,24 @@ function admin_content_polls(&$engine, &$module)
 					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
 					echo '<td style="text-align:left;width:95%;"><a href="' . 
 						rawurldecode($engine->href('', $mode_file.'&amp;year=' . $year.'&amp;poll=' . $row['poll_id'] . '&amp;results=1')) . '">'.
-						date('d/m/y', strtotime($row['start'])).': ' . $row['text'] . '</a></td>';
+						date('d/m/y', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
-					echo '<td style="white-space:nowrap;">' . $polls_obj->poll_time($row['start'], $row['end']).'</td>';
+					echo '<td style="white-space:nowrap;">' . $polls_obj->poll_time($row['start'], $row['end']) . '</td>';
 				echo '</tr>';
 			}
 		}
 
 		echo '<tr><td colspan="4">';
 		// pagination
-		echo '<small><strong>' . $engine->_t('PollsShow').':</strong> ';
+		echo '<small><strong>' . $engine->_t('PollsShow') . ':</strong> ';
 
 		if ($year == 0)
 		{
-			echo $engine->_t('PollsAll').' ';
+			echo $engine->_t('PollsAll') . ' ';
 		}
 		else
 		{
-			echo '<a href="' . rawurldecode($engine->href('', $mode_file.'&amp;year=0')) . '">' . $engine->_t('PollsAll').'</a> ';
+			echo '<a href="' . rawurldecode($engine->href('', $mode_file.'&amp;year=0')) . '">' . $engine->_t('PollsAll') . '</a> ';
 		}
 
 		if (!empty($years))

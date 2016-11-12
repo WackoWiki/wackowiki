@@ -1081,7 +1081,7 @@ class Wacko
 			if ($supertagged || $page_id)
 			{
 				$page = $this->db->load_single(
-					"SELECT ".$what_p." ".
+					"SELECT " . $what_p." ".
 					"FROM " . $this->db->table_prefix . "page p ".
 						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
 						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
@@ -1100,12 +1100,12 @@ class Wacko
 					$this->cache_page($page, $page_id, $metadata_only);
 
 					$page = $this->db->load_single(
-						"SELECT p.revision_id, ".$what_r." ".
+						"SELECT p.revision_id, " . $what_r." ".
 						"FROM " . $this->db->table_prefix . "revision p ".
 							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
 							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
 							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) ".
-						"WHERE ".($page_id != 0
+						"WHERE " . ($page_id != 0
 							? "p.page_id  = '" . (int) $page_id . "' "
 							: "p.supertag = " . $this->db->q($supertag) . " " ).
 							($deleted != 1
@@ -1318,7 +1318,7 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "menu b ".
 				"LEFT JOIN " . $this->db->table_prefix . "page p ON (b.page_id = p.page_id) ".
 			// TODO: why IN and not = ??
-			"WHERE (b.user_id IN ( '".$this->get_user_id('System')."' ) ".
+			"WHERE (b.user_id IN ( '" . $this->get_user_id('System') . "' ) ".
 				($lang
 					? "AND b.menu_lang = " . $this->db->q($lang) . " "
 					: "").
@@ -1363,14 +1363,14 @@ class Wacko
 			{
 				$_spages	= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
 				$spages[]	= $_spages;
-				$spages_str	.= $this->db->q($_spages).", ";
+				$spages_str	.= $this->db->q($_spages) . ", ";
 			}
 		}
 
 		$spages_str	= substr($spages_str, 0, strlen($spages_str) - 2);
 
 		if ($links = $this->db->load_all(
-		"SELECT ".$this->page_meta." ".
+		"SELECT " . $this->page_meta." ".
 		"FROM " . $this->db->table_prefix . "page ".
 		"WHERE supertag IN (" . $spages_str . ")", true))
 		{
@@ -1452,7 +1452,7 @@ class Wacko
 					 'p.page_size, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$revisions = $this->db->load_all(
-			"SELECT p.revision_id, ".$page_meta." " .
+			"SELECT p.revision_id, " . $page_meta." " .
 			"FROM " . $this->db->table_prefix . "revision p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
@@ -1526,7 +1526,7 @@ class Wacko
 			"SELECT p.page_id, p.tag AS tag, p.title ".
 			"FROM " . $this->db->table_prefix . "page_link l ".
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.from_page_id) ".
-			"WHERE ".($tag
+			"WHERE " . ($tag
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 				: "").
 				"(l.to_supertag = " . $this->db->q($this->translit($to_tag)) . ") ".
@@ -1540,7 +1540,7 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "file_link l ".
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.page_id) ".
 				"INNER JOIN " . $this->db->table_prefix . "upload u ON (u.upload_id = l.file_id) ".
-			"WHERE ".($tag
+			"WHERE " . ($tag
 					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 					: "").
 				"l.file_id = '" . (int) $file_id . "' ".
@@ -1713,7 +1713,7 @@ class Wacko
 			"SELECT c.category_id, c.category ".
 			"FROM {$this->db->table_prefix}category c ".
 				"INNER JOIN {$this->db->table_prefix}category_page cp ON (c.category_id = cp.category_id) ".
-			"WHERE ".( $page_id != 0
+			"WHERE " . ( $page_id != 0
 				? "cp.page_id  = '" . (int) $page_id . "' "
 				: "cp.supertag = " . $this->db->q($this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD)) . " " )
 			, $cache);
@@ -1834,7 +1834,7 @@ class Wacko
 			if (!$comment_on_id && $this->forum)
 			{
 				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' [..]');
+				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc.' [..]');
 			}
 
 			// preformatter (macros and such)
@@ -2069,7 +2069,7 @@ class Wacko
 				{
 					if ($comment_on_id == true)
 					{
-						$title = $this->_t('Comment').' '.substr($tag, 7);
+						$title = $this->_t('Comment') . ' '.substr($tag, 7);
 					}
 					else
 					{
@@ -2298,8 +2298,8 @@ class Wacko
 				$save = $this->set_language($user['user_lang'], true);
 
 				$subject	=	$this->_t('RegistrationApproved');
-				$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name)."\n\n".
-								$this->_t('EmailRegisteredLogin')."\n\n";
+				$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name) . "\n\n".
+								$this->_t('EmailRegisteredLogin') . "\n\n";
 
 				$this->send_user_email($user, $subject, $body);
 
@@ -2362,7 +2362,7 @@ class Wacko
 
 							$subject	=	$this->_t('NewPageCreatedSubj') . " '$title'";
 							$body		=	$this->_t('EmailModerator') . ".\n\n".
-											Ut::perc_replace($this->_t('NewPageCreatedBody'), ( $user_name == GUEST ? $this->_t('Guest') : $user_name ))."\n".
+											Ut::perc_replace($this->_t('NewPageCreatedBody'), ( $user_name == GUEST ? $this->_t('Guest') : $user_name )) . "\n".
 											"'$title'\n".
 											$this->href('', $tag) . "\n\n";
 
@@ -2517,7 +2517,7 @@ class Wacko
 								$this->href('', $tag) . "\n\n".
 								$title . "\n" .
 								"======================================================================\n\n" .
-								$this->format($diff, 'html2mail')."\n\n".
+								$this->format($diff, 'html2mail') . "\n\n".
 								"======================================================================\n\n";
 
 						if ($watcher['notify_page'] == 2)
@@ -2871,7 +2871,7 @@ class Wacko
 			$this->track_link_to($tag, LINK_PAGE);
 		}
 
-		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '').'>' . $text.'</a>';
+		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text.'</a>';
 	}
 
 	// preparing links to save them to body_r
@@ -2902,11 +2902,11 @@ class Wacko
 
 		if ($img_url == 1)
 		{
-			return '<!--imglink:begin-->'.str_replace(' ', '%20', urldecode($tag)).' ==' . $text.'<!--imglink:end-->';
+			return '<!--imglink:begin-->'.str_replace(' ', '%20', urldecode($tag)) . ' ==' . $text.'<!--imglink:end-->';
 		}
 		else
 		{
-			return '<!--link:begin-->'.str_replace(' ', '%20', urldecode($tag))." ==".($this->format_safe ? str_replace('>', "&gt;", str_replace('<', "&lt;", $text)) : $text).'<!--link:end-->';
+			return '<!--link:begin-->'.str_replace(' ', '%20', urldecode($tag)) . " ==" . ($this->format_safe ? str_replace('>', "&gt;", str_replace('<', "&lt;", $text)) : $text) . '<!--link:end-->';
 		}
 	}
 
@@ -3222,7 +3222,7 @@ class Wacko
 				// check 403 here!
 				if ($_global == true || $file_access == true)
 				{
-					$title		= $file_data['file_description'] . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true).')';
+					$title		= $file_data['file_description'] . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
 					$alt		= $file_data['file_description'];
 					$img_link	= false;
 					$icon		= $this->_t('OuterIcon');
@@ -3265,7 +3265,7 @@ class Wacko
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							#return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '').' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
+							#return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
 							if (!$text)
 							{
 								$text = $title;
@@ -3300,7 +3300,7 @@ class Wacko
 				}
 				else
 				{
-					$title	= '404: /'.trim($page_tag, '/').'/file'.($this->db->rewrite_mode ? '?' : '&amp;').'get=' . $file_name;
+					$title	= '404: /' . trim($page_tag, '/') . '/file'.($this->db->rewrite_mode ? '?' : '&amp;') . 'get=' . $file_name;
 				}
 			} //forgot 'bout 403
 
@@ -3976,7 +3976,7 @@ class Wacko
 		$this->db->sql_query(
 			"DELETE ".
 			"FROM " . $this->db->table_prefix . "page_link ".
-			"WHERE from_page_id = '".(int) $from_page_id."'");
+			"WHERE from_page_id = '" . (int) $from_page_id."'");
 
 		// page link
 		if ($link_table = @$this->linktable[LINK_PAGE])
@@ -3985,8 +3985,8 @@ class Wacko
 
 			foreach ($link_table as $dummy => $to_tag) // discard strtolowered index
 			{
-				$query .= "('".(int) $from_page_id."', '".$this->get_page_id($to_tag)."', ".
-							$this->db->q($to_tag).", ".$this->db->q($this->translit($to_tag))."),";
+				$query .= "('" . (int) $from_page_id."', '" . $this->get_page_id($to_tag) . "', ".
+							$this->db->q($to_tag) . ", " . $this->db->q($this->translit($to_tag)) . "),";
 			}
 
 			$this->db->sql_query(
@@ -3999,7 +3999,7 @@ class Wacko
 		$this->db->sql_query(
 			"DELETE ".
 			"FROM " . $this->db->table_prefix . "file_link ".
-			"WHERE page_id = '".(int) $from_page_id."'");
+			"WHERE page_id = '" . (int) $from_page_id."'");
 
 		// file link
 		if ($file_table = @$this->linktable[LINK_FILE])
@@ -4008,7 +4008,7 @@ class Wacko
 
 			foreach ($file_table as $upload_id => $dummy) // index == value, BTW
 			{
-				$query .= "('".(int) $from_page_id."', '".(int) $upload_id."'),";
+				$query .= "('" . (int) $from_page_id."', '" . (int) $upload_id."'),";
 			}
 
 			$this->db->sql_query(
@@ -4400,7 +4400,7 @@ class Wacko
 			"SELECT {$fiels_default} " .
 			"FROM " . $this->db->table_prefix . "usergroup g " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (g.moderator_id = u.user_id) " .
-			"WHERE ".( $group_id != 0
+			"WHERE " . ( $group_id != 0
 				? "g.group_id		= '" . (int) $group_id . "' "
 				: "g.group_name		= " . $this->db->q($group_name) . " ") .
 			"LIMIT 1");
@@ -6391,7 +6391,7 @@ class Wacko
 			$page = $this->db->load_single(
 				"SELECT title " .
 				"FROM {$this->db->table_prefix}page " .
-				"WHERE ".($page_id
+				"WHERE " . ($page_id
 					? "page_id	= '" . (int) $page_id . "' "
 					: "tag		= " . $this->db->q($tag) . " ") .
 				"LIMIT 1");

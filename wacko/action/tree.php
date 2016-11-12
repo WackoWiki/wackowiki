@@ -115,10 +115,10 @@ if ($pages = $this->db->load_all(
 				else
 				{
 					$legend = $this->_t('TreeClusterTitle');
-					$legend = Ut::perc_replace($legend, $this->link('/' . $root, '', rtrim($root, '/'))).':';
+					$legend = Ut::perc_replace($legend, $this->link('/' . $root, '', rtrim($root, '/'))) . ':';
 				}
 
-				echo '<nav class="layout-box"><p class="layout-box"><span>' . $legend."</span></p>\n";
+				echo '<nav class="layout-box"><p class="layout-box"><span>' . $legend . "</span></p>\n";
 			}
 		}
 		else

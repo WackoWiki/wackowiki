@@ -17,7 +17,7 @@ $functions = '\$[[:alnum:]]+';
 $text = preg_replace("#\t#s","    ", $text );
 
 // lexeme extraction
-$text = "\001".preg_replace("#($delim)+#s","\001$0\001", $text )."\001";
+$text = "\001".preg_replace("#($delim)+#s","\001$0\001", $text ) . "\001";
 
 // html escape
 $text = preg_replace("#&#s","&amp;", $text );

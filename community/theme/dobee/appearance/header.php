@@ -47,7 +47,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 						echo '<div id="menu-user">';
 						echo "<ol>\n";
 						// main page
-						echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
+						echo "<li>" . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
 
 						// menu
 						if ($menu = $this->get_menu())
@@ -65,7 +65,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 									echo '<li>';
 								}
 
-								echo $formatted_menu."</li>\n";
+								echo $formatted_menu . "</li>\n";
 							}
 						}
 
@@ -117,45 +117,45 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 						<div class="modulecontent"><?php
 							// Revisions link
 								echo (( $this->db->hide_revisions == false || ($this->db->hide_revisions == 1 && $this->get_user()) || ($this->db->hide_revisions == 2 && $this->is_owner()) || $this->is_admin() )
-									? "<a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a>\n"
-									: "".$this->get_time_formatted($this->page['modified'])."\n"
+									? "<a href=\"" . $this->href('revisions') . "\" title=\"" . $this->_t('RevisionTip') . "\">" . $this->get_time_formatted($this->page['modified']) . "</a>\n"
+									: "" . $this->get_time_formatted($this->page['modified']) . "\n"
 								);
 
 						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 
 						if ($this->has_access('write')) {
-							echo "<a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->_t('EditTip')."\"><img src=\"".$this->db->theme_url."icon/edit.png\""."style=\"vertical-align: middle\""."\">".$this->_t('EditText')."</a>\n";
+							echo "<a href=\"" . $this->href('edit') . "\" accesskey=\"E\" title=\"" . $this->_t('EditTip') . "\"><img src=\"" . $this->db->theme_url."icon/edit.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('EditText') . "</a>\n";
 
 						}
 						echo '<br />';
 						if ($this->page['modified']) {
-							echo "<a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\"><img src=\"".$this->db->theme_url."icon/vers.png\""."style=\"vertical-align: middle\""."\">".$this->_t('SettingsRevisions')."</a>\n";
+							echo "<a href=\"" . $this->href('revisions') . "\" title=\"" . $this->_t('RevisionTip') . "\"><img src=\"" . $this->db->theme_url."icon/vers.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('SettingsRevisions') . "</a>\n";
 						}
 						// if this page exists
 						if ($this->page) {
 							// if owner is current user
 							if ($this->is_owner()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href('rename')."\"><img src=\"".$this->db->theme_url."icon/ren.png\""."style=\"vertical-align: middle\""."\">".$this->_t('RenameText')."</a>");
+								print(" <a href=\"" . $this->href('rename') . "\"><img src=\"" . $this->db->theme_url."icon/ren.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('RenameText') . "</a>");
 								echo '<br />';
-								print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->_t('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->db->theme_url."icon/access.png\""."style=\"vertical-align: middle\"".">".$this->_t('ACLText')."</a>");
+								print("<a href=\"" . $this->href('permissions') . "\"" . (($this->method=='edit')?" onclick=\"return window.confirm('" . $this->_t('EditACLConfirm') . "');\"":"") . "\"><img src=\"" . $this->db->theme_url."icon/access.png\""."style=\"vertical-align: middle\"".">" . $this->_t('ACLText') . "</a>");
 							}
 
 							if ($this->check_acl($this->get_user_name(),$this->db->rename_globalacl) && !$this->is_owner()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href('rename')."\">".$this->_t('RenameText')."</a>");
+								print(" <a href=\"" . $this->href('rename') . "\">" . $this->_t('RenameText') . "</a>");
 							}
 
 							if ($this->is_admin()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href('remove')."\"><img src=\"".$this->db->theme_url."icon/delete.png\""."style=\"vertical-align: middle\""."\">".$this->_t('DeleteText')."</a>");
+								print(" <a href=\"" . $this->href('remove') . "\"><img src=\"" . $this->db->theme_url."icon/delete.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('DeleteText') . "</a>");
 							}
 
 							echo '<br />';
-							print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->_t('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->db->theme_url."icon/prop.png\""."style=\"vertical-align: middle\"".">".$this->_t('SettingsText')."</a>");
+							print("<a href=\"" . $this->href('properties'). "\"" . (($this->method=='edit')?" onclick=\"return window.confirm('" . $this->_t('EditACLConfirm') . "');\"":"") . "\"><img src=\"" . $this->db->theme_url."icon/prop.png\""."style=\"vertical-align: middle\"".">" . $this->_t('SettingsText') . "</a>");
 
 							echo '<br />';
-							print "<a href=\"".$this->href('export.xml')."\" title=\"".$this->_t('RevisionXMLTip')."\"><img src=\"".$this->db->theme_url."icon/1xml.png\""."style=\"vertical-align: middle\""."\">".$this->_t('ExportToXML')."</a>\n";
+							print "<a href=\"" . $this->href('export.xml') . "\" title=\"" . $this->_t('RevisionXMLTip') . "\"><img src=\"" . $this->db->theme_url."icon/1xml.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('ExportToXML') . "</a>\n";
 
 							//print $this->format( '{{TOC}}' );
 
@@ -165,9 +165,9 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 							} else {
 								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 								if ($owner = $this->get_page_owner()) {
-									print($this->_t('Owner').": ".$this->user_link($owner, $lang = '', true, false));
+									print($this->_t('Owner') . ": " . $this->user_link($owner, $lang = '', true, false));
 								} else if (!$this->page['comment_on_id']) {
-									print($this->_t('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->_t('TakeOwnership')."</a>)" : ""));
+									print($this->_t('Nobody').($this->get_user() ? " (<a href=\"" . $this->href('claim') . "\">" . $this->_t('TakeOwnership') . "</a>)" : ""));
 								}
 							}
 						}
@@ -183,9 +183,9 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->is_watched === true
-		? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->db->theme_url."icon/unwatch.png\" title=\"".$this->_t('RemoveWatch')."\" alt=\"".$this->_t('RemoveWatch')."\" /></a>"
-		: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->db->theme_url."icon/watch.png\" title=\"".$this->_t('SetWatch')."\" alt=\"".$this->_t('SetWatch')."\" /></a>" ) ?>
-		| <?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->db->theme_url."icon/print.png\" title=\"".$this->_t('PrintVersion')."\" alt=\"".$this->_t('PrintVersion')."\" /></a>";?>
+		? "<a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/unwatch.png\" title=\"" . $this->_t('RemoveWatch') . "\" alt=\"" . $this->_t('RemoveWatch') . "\" /></a>"
+		: "<a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/watch.png\" title=\"" . $this->_t('SetWatch') . "\" alt=\"" . $this->_t('SetWatch') . "\" /></a>" ) ?>
+		| <?php echo "<a href=\"" . $this->href('print') . "\"><img src=\"" . $this->db->theme_url."icon/print.png\" title=\"" . $this->_t('PrintVersion') . "\" alt=\"" . $this->_t('PrintVersion') . "\" /></a>";?>
 		| <?php
 		if ($this->get_user()) { ?> <span class="nobr"> <?php echo $this->_t('YouAre'); ?>
 		<img

@@ -15,7 +15,7 @@ if (($code = (string) @$_REQUEST['secret_code']))
 	$user = $this->db->load_single(
 		"SELECT user_id, user_name ".
 		"FROM " . $this->db->user_table . " ".
-		"WHERE change_password = ".$this->db->q(hash_hmac('sha256', $code, $this->db->system_seed))." ".
+		"WHERE change_password = " . $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed)) . " ".
 		"LIMIT 1");
 
 	if (!$user)
@@ -57,7 +57,7 @@ if (@$_POST['_action'] === 'change_password' && $user)
 			$this->db->sql_query(
 				"UPDATE " . $this->db->user_table . " SET ".
 					"change_password	= '', ".
-					"password = ".$this->db->q($this->password_hash($user, $new_password))." ".
+					"password = " . $this->db->q($this->password_hash($user, $new_password)) . " ".
 				"WHERE user_id = '" . $user['user_id'] . "' ".
 				"LIMIT 1");
 
@@ -112,8 +112,8 @@ if (@$_POST['_action'] === 'forgot_password')
 		$this->db->sql_query(
 			"UPDATE {$this->db->user_table} SET ".
 				"lost_password_request_count = lost_password_request_count + 1, ". // value unused
-				"change_password = ".$this->db->q($code_hash)." ".
-			"WHERE user_id = '".(int) $user['user_id']."' ".
+				"change_password = " . $this->db->q($code_hash) . " ".
+			"WHERE user_id = '" . (int) $user['user_id'] . "' ".
 			"LIMIT 1");
 
 		// send code

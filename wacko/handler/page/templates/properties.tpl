@@ -281,8 +281,8 @@
 			<li class="m-print"><a href="[ ' href: print ' ]">[ ' i Icon ' ][ ' _t: SettingsPrint ' ]</a></li>
 			[== CommentedOut _ =
 				<li class="m-word"><a href="[ ' href: wordprocessor ' ]">[ ' i Icon ' ][ ' _t: SettingsWordprocessor ' ]</a></li>
-				<li class="m-latex"><a href="[ ' href: latex ' ]">[ ' i Icon ' ][ ' _t: SettingsLatex ' ]')."</a></li>
-				<li class="m-xml"><a href="[ ' href: export.xml ' ]">[ ' i Icon ' ][ ' _t: SettingsXML ' ]')."</a></li>
+				<li class="m-latex"><a href="[ ' href: latex ' ]">[ ' i Icon ' ][ ' _t: SettingsLatex ' ]') . "</a></li>
+				<li class="m-xml"><a href="[ ' href: export.xml ' ]">[ ' i Icon ' ][ ' _t: SettingsXML ' ]') . "</a></li>
 			==]
 		</ul>
 	</aside>

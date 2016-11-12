@@ -48,7 +48,7 @@ else
 
 	if (!$inc_page = $this->load_page($page, 0, $revision_id))
 	{
-		echo '<em> ' . $this->_t('SourcePageDoesntExist').' (' . $this->link('/' . $page).")</em>\n";
+		echo '<em> ' . $this->_t('SourcePageDoesntExist') . ' (' . $this->link('/' . $page) . ")</em>\n";
 	}
 	else
 	{
@@ -82,12 +82,12 @@ else
 				// show edit link
 				($this->has_access('write', $page_id)
 					? '&nbsp;&nbsp;::&nbsp;'.
-					  '<a href="' . $this->href('edit', $inc_page['tag']) . '">' . $this->_t('EditIcon').'</a>'
+					  '<a href="' . $this->href('edit', $inc_page['tag']) . '">' . $this->_t('EditIcon') . '</a>'
 					: '').
 
 				"</nav>\n";
 
-			echo "\n".'<section class="include-page">'."\n".$edit_link;
+			echo "\n".'<section class="include-page">'."\n" . $edit_link;
 		}
 
 		// body
@@ -105,7 +105,7 @@ else
 			&& ($nomark != 1)
 			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			echo "\n".$edit_link."</section>\n";
+			echo "\n" . $edit_link . "</section>\n";
 		}
 	}
 }

@@ -19,10 +19,10 @@ if ($this->has_access('read'))
 	// comment header?
 	if ($this->page['comment_on_id'])
 	{
-		$message = $this->_t('ThisIsCommentOn').' '.
-			$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', '', 0).', '.
-			$this->_t('PostedBy').' ' . $this->user_link($this->page['user_name'], '', true, false).' '.
-			$this->_t('At').' ' . $this->get_time_formatted($this->page['modified']);
+		$message = $this->_t('ThisIsCommentOn') . ' '.
+			$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', '', 0) . ', '.
+			$this->_t('PostedBy') . ' ' . $this->user_link($this->page['user_name'], '', true, false) . ' '.
+			$this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
 		$this->show_message($message, 'comment-info');
 	}
 

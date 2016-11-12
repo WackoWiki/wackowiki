@@ -37,60 +37,60 @@ if ($this->is_admin()
 	{
 		$dontkeep = (isset($_POST['dontkeep']) && $this->is_admin());
 
-		$message .= '<strong><code>' . $this->tag."</code></strong>\n";
+		$message .= '<strong><code>' . $this->tag . "</code></strong>\n";
 		$message .= "<ol>\n";
 
 		// remove SINGLE page or comment
 		if ($this->remove_referrers($this->tag))
 		{
-			$message .= '<li>' . $this->_t('ReferrersRemoved')."</li>\n";
+			$message .= '<li>' . $this->_t('ReferrersRemoved') . "</li>\n";
 		}
 
 		if ($this->remove_links($this->tag))
 		{
-			$message .= '<li>' . $this->_t('LinksRemoved')."</li>\n";
+			$message .= '<li>' . $this->_t('LinksRemoved') . "</li>\n";
 		}
 
 		if ($this->remove_categories($this->tag))
 		{
-			$message .= '<li>' . $this->_t('CategoriesRemoved')."</li>\n";
+			$message .= '<li>' . $this->_t('CategoriesRemoved') . "</li>\n";
 		}
 
 		if ($this->remove_acls($this->tag))
 		{
-			$message .= '<li>' . $this->_t('AclsRemoved')."</li>\n";
+			$message .= '<li>' . $this->_t('AclsRemoved') . "</li>\n";
 		}
 
 		if (!$comment_on_id)
 		{
 			if ($this->remove_menu_items($this->tag))
 			{
-				$message .= '<li>' . $this->_t('BookmarksRemoved')."</li>\n";
+				$message .= '<li>' . $this->_t('BookmarksRemoved') . "</li>\n";
 			}
 
 			if ($this->remove_watches($this->tag))
 			{
-				$message .= '<li>' . $this->_t('WatchesRemoved')."</li>\n";
+				$message .= '<li>' . $this->_t('WatchesRemoved') . "</li>\n";
 			}
 
 			if ($this->remove_ratings($this->tag))
 			{
-				$message .= '<li>' . $this->_t('RatingRemoved')."</li>\n";
+				$message .= '<li>' . $this->_t('RatingRemoved') . "</li>\n";
 			}
 
 			if ($this->remove_comments($this->tag, false, $dontkeep))
 			{
-				$message .= '<li>' . $this->_t('CommentsRemoved')."</li>\n";
+				$message .= '<li>' . $this->_t('CommentsRemoved') . "</li>\n";
 			}
 
 			if ($this->remove_files($this->tag))
 			{
-				$message .= '<li>' . $this->_t('FilesRemoved')."</li>\n";
+				$message .= '<li>' . $this->_t('FilesRemoved') . "</li>\n";
 			}
 
 			if ($this->remove_revisions($this->tag))
 			{
-				$message .= '<li>' . $this->_t('RevisionsRemoved')."</li>\n";
+				$message .= '<li>' . $this->_t('RevisionsRemoved') . "</li>\n";
 			}
 		}
 
@@ -119,7 +119,7 @@ if ($this->is_admin()
 				}
 			}
 
-			$message .= '<li>' . $this->_t('PageRemoved')."</li>\n";
+			$message .= '<li>' . $this->_t('PageRemoved') . "</li>\n";
 		}
 
 		// remove ENTIRE cluster
@@ -151,7 +151,7 @@ if ($this->is_admin()
 				unset($list, $row);
 			}
 
-			$message .= "<li>".$this->_t('ClusterRemoved')."</li>\n";
+			$message .= "<li>" . $this->_t('ClusterRemoved') . "</li>\n";
 		}
 
 		$message .= "</ol>\n";
@@ -165,7 +165,7 @@ if ($this->is_admin()
 					? "SET total_comments	= total_comments	- 1 "
 					: "SET total_pages		= total_pages		- 1 "
 				).
-				"WHERE user_id = '".(string) $owner_id."' ".
+				"WHERE user_id = '" . (string) $owner_id."' ".
 				"LIMIT 1");
 		}
 
@@ -187,19 +187,19 @@ if ($this->is_admin()
 		else
 		{
 			$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
-				($this->get_page_tag($comment_on_id)." ".$this->get_page_title('', $comment_on_id)),
+				($this->get_page_tag($comment_on_id) . " " . $this->get_page_title('', $comment_on_id)),
 				$this->page['user_name'],
 				$this->get_time_formatted($this->page['created'])));
 		}
 
-		$message .= "<br />".$this->_t('ThisActionHavenotUndo')."<br />\n";
+		$message .= "<br />" . $this->_t('ThisActionHavenotUndo') . "<br />\n";
 
 		$this->show_message($message, 'success');
 
 		// return to commented page
 		if ($comment_on_id)
 		{
-			echo '<br />' . $this->compose_link_to_page($this->get_page_tag($comment_on_id).'#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'), 0);
+			echo '<br />' . $this->compose_link_to_page($this->get_page_tag($comment_on_id) . '#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'), 0);
 		}
 	}
 	else
@@ -210,11 +210,11 @@ if ($this->is_admin()
 			// TODO: add function for
 			echo '<div class="preview">';
 
-			$message = $this->_t('ThisIsCommentOn').' ' . $this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])).', ' . $this->_t('PostedBy').' ' . $this->user_link($this->page['user_name'], '', true, false).' ' . $this->_t('At').' ' . $this->get_time_formatted($this->page['modified']);
+			$message = $this->_t('ThisIsCommentOn') . ' ' . $this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])) . ', ' . $this->_t('PostedBy') . ' ' . $this->user_link($this->page['user_name'], '', true, false) . ' ' . $this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
 			$this->show_message($message, 'comment-info');
 
 			$desc = $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');
-			$desc = (strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' [..]');
+			$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc.' [..]');
 
 			echo '<div class="comment-title"><h2>' . $this->page['title'] . '</h2></div>';
 			echo htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
@@ -241,12 +241,12 @@ if ($this->is_admin()
 			if (!$comment_on_id)
 			{
 				echo '<input type="checkbox" id="removecluster" name="cluster" />';
-				echo '<label for="removecluster">' . $this->_t('RemoveCluster').'</label><br />';
+				echo '<label for="removecluster">' . $this->_t('RemoveCluster') . '</label><br />';
 
 				if ($this->db->store_deleted_pages)
 				{
 					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
-					echo '<label for="dontkeep">' . $this->_t('RemoveDontKeep').'</label><br />';
+					echo '<label for="dontkeep">' . $this->_t('RemoveDontKeep') . '</label><br />';
 				}
 			}
 			else
@@ -254,7 +254,7 @@ if ($this->is_admin()
 				if ($this->db->store_deleted_pages)
 				{
 					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
-					echo '<label for="dontkeep">' . $this->_t('RemoveDontKeepComment').'</label><br />';
+					echo '<label for="dontkeep">' . $this->_t('RemoveDontKeepComment') . '</label><br />';
 				}
 			}
 		}

@@ -40,37 +40,37 @@ class bbcode
 		// bold
 		if (preg_match('/^\\[b(?:\:[\\w]+?)??\\](.*)\\[\/b(?:\:[\\w]+?)??\\]$/s', $string, $substring))
 		{
-			return '**'.str_replace('**', '""**""', preg_replace_callback($this->template, $rewrite, $substring[1])).'**';
+			return '**' . str_replace('**', '""**""', preg_replace_callback($this->template, $rewrite, $substring[1])) . '**';
 		}
 		// italic
 		if (preg_match('/^\\[i(?:\:[\\w]+?)??\\](.*)\\[\/i(?:\:[\\w]+?)??\\]$/s', $string, $substring))
 		{
-			return '//'.str_replace('//', '""//""', preg_replace_callback($this->template, $rewrite, $substring[1])).'//';
+			return '//' . str_replace('//', '""//""', preg_replace_callback($this->template, $rewrite, $substring[1])) . '//';
 		}
 		// underline
 		if (preg_match('/^\\[u(?:\:[\\w]+?)??\\](.*)\\[\/u(?:\:[\\w]+?)??\\]$/s', $string, $substring))
 		{
-			return '__'.str_replace('__', '""__""', preg_replace_callback($this->template, $rewrite, $substring[1])).'__';
+			return '__' . str_replace('__', '""__""', preg_replace_callback($this->template, $rewrite, $substring[1])) . '__';
 		}
 		// superscript
 		if (preg_match('/^\\[sup\\](.*)\\[\/sup\\]$/s', $string, $substring))
 		{
-			return '^^'.str_replace('^^', '""^^""', preg_replace_callback($this->template, $rewrite, $substring[1])).'^^';
+			return '^^' . str_replace('^^', '""^^""', preg_replace_callback($this->template, $rewrite, $substring[1])) . '^^';
 		}
 		// subscript
 		if (preg_match('/^\\[sub\\](.*)\\[\/sub\\]$/s', $string, $substring))
 		{
-			return 'vv'.str_replace('vv', '""vv""', preg_replace_callback($this->template, $rewrite, $substring[1])).'vv';
+			return 'vv' . str_replace('vv', '""vv""', preg_replace_callback($this->template, $rewrite, $substring[1])) . 'vv';
 		}
 		// code
 		if (preg_match('/^\\[code(?:\:[:\\w]+?)??\\](.*)\\[\/code(?:\:[:\\w]+?)??\\]$/s', $string, $substring))
 		{
-			return "%%\n".$substring[1]."\n%%";
+			return "%%\n" . $substring[1] . "\n%%";
 		}
 		// open quote
 		else if (preg_match('/\\[quote(?:\:[\\w]+?)??(?:="([\\w]+?)")??\\]/s', $string, $substring))
 		{
-			return '<[ '.($substring[1] ? '**//' . $substring[1]."://**\n" : '');
+			return '<[ ' . ($substring[1] ? '**//' . $substring[1] . "://**\n" : '');
 		}
 		// close quote
 		else if (preg_match('/\\[\/quote(?:\:[\\w]+?)??\\][\n\r]*/s', $string, $substring))
@@ -87,23 +87,23 @@ class bbcode
 
 			$substring[2] = preg_replace('/\\[\\*(?:\:[\\w]+?)??\\]/', $mark, $substring[2]);
 
-			return preg_replace_callback($this->template, $rewrite, $substring[2])."\n";
+			return preg_replace_callback($this->template, $rewrite, $substring[2]) . "\n";
 		}
 		// simple url or image
 		else if (preg_match('/\\[(?:url|img)(?:\:[\\w]+?)??\\](http:\/\/|https:\/\/|ftp:\/\/|nntp:\/\/)+(.+?)\\[\/(?:url|img)(?:\:[\\w]+?)??\\]/s', $string, $substring))
 		{
-			return $substring[1].$substring[2];
+			return $substring[1] . $substring[2];
 		}
 		// url with text
 		else if (preg_match('/\\[url=(http:\/\/|https:\/\/|ftp:\/\/|nntp:\/\/)+(.+?)\\](.+?)\\[\/url\\]/s', $string, $substring))
 		{
-			return '[[' . $substring[1].$substring[2] . ' ' . $substring[3] . ']]';
+			return '[[' . $substring[1] . $substring[2] . ' ' . $substring[3] . ']]';
 		}
 		// font size
 		else if (preg_match('/\\[size\=([\\d]+?)(?:\:[\\w]+?)??\\](.*?)\\[\/size(?:\:[\\w]+?)??\\]/s', $string, $substring))
 		{
-			if		($substring[1] < 13)	return '++'.str_replace('++', '', preg_replace_callback($this->template, $rewrite, $substring[2])).'++';
-			else if ($substring[1] > 15)	return '**'.str_replace(array('**', '[b]', '[/b]'), '', preg_replace_callback($this->template, $rewrite, $substring[2])).'**';
+			if		($substring[1] < 13)	return '++' . str_replace('++', '', preg_replace_callback($this->template, $rewrite, $substring[2])) . '++';
+			else if ($substring[1] > 15)	return '**' . str_replace(array('**', '[b]', '[/b]'), '', preg_replace_callback($this->template, $rewrite, $substring[2])) . '**';
 			else							return		$substring[2];
 		}
 		// font color
@@ -111,10 +111,10 @@ class bbcode
 		{
 			if (!$substring[1])
 			{
-				if		(stristr($substring[2], 'red')		== true)	return '!!'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
-				else if	(stristr($substring[2], 'green')	== true)	return '!!(green)'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
-				else if	(stristr($substring[2], 'blue')		== true)	return '!!(blue)'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
-				else if	(stristr($substring[2], 'grey')		== true)	return '!!(grey)'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
+				if		(stristr($substring[2], 'red')		== true)	return '!!' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	(stristr($substring[2], 'green')	== true)	return '!!(green)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	(stristr($substring[2], 'blue')		== true)	return '!!(blue)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	(stristr($substring[2], 'grey')		== true)	return '!!(grey)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
 			}
 			else if (preg_match('/^([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/', $substring[2], $color))
 			{
@@ -122,10 +122,10 @@ class bbcode
 				$g = hexdec($color[2]);
 				$b = hexdec($color[3]);
 
-				if		($r == $g && $r == $b)	return '!!(grey)'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
-				else if	($r >= $g && $r >= $b)	return '!!'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
-				else if	($g >= $r && $g >= $b)	return '!!(green)'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
-				else if	($b >= $r && $b >= $g)	return '!!(blue)'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
+				if		($r == $g && $r == $b)	return '!!(grey)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	($r >= $g && $r >= $b)	return '!!' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	($g >= $r && $g >= $b)	return '!!(green)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	($b >= $r && $b >= $g)	return '!!(blue)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
 			}
 
 			return preg_replace_callback($this->template, $rewrite, $substring[3]);

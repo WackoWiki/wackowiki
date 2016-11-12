@@ -63,7 +63,7 @@ function admin_user_groups(&$engine, &$module)
 			$usergroup = $engine->db->load_single(
 				"SELECT group_name ".
 				"FROM {$engine->db->table_prefix}usergroup ".
-				"WHERE group_id = '".(int) $group_id."' ".
+				"WHERE group_id = '" . (int) $group_id."' ".
 				"LIMIT 1");
 
 			// add member into group
@@ -71,8 +71,8 @@ function admin_user_groups(&$engine, &$module)
 			{
 				$engine->db->sql_query(
 					"INSERT INTO {$engine->db->table_prefix}usergroup_member SET ".
-						"group_id	= '".(int) $_POST['group_id']."', ".
-						"user_id	= '".(int) $_POST['new_member_id']."'");
+						"group_id	= '" . (int) $_POST['group_id'] . "', ".
+						"user_id	= '" . (int) $_POST['new_member_id'] . "'");
 
 					$engine->config->invalidate_config_cache();
 					$engine->show_message($engine->_t('MembersAdded'), 'success');
@@ -85,8 +85,8 @@ function admin_user_groups(&$engine, &$module)
 			{
 				$engine->db->sql_query(
 					"DELETE FROM {$engine->db->table_prefix}usergroup_member ".
-					"WHERE group_id = '".(int) $_POST['group_id']."' ".
-						"AND user_id = '".(int) $_POST['member_id']."'");
+					"WHERE group_id = '" . (int) $_POST['group_id'] . "' ".
+						"AND user_id = '" . (int) $_POST['member_id'] . "'");
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('MembersRemoved'), 'success');
@@ -104,12 +104,12 @@ function admin_user_groups(&$engine, &$module)
 					"FROM {$engine->db->table_prefix}usergroup g ".
 						"INNER JOIN {$engine->db->table_prefix}usergroup_member m ON (g.group_id = m.group_id) ".
 						"INNER JOIN {$engine->db->table_prefix}user u ON (m.user_id = u.user_id) ".
-					"WHERE g.group_id = '".(int) $group_id."' ";
+					"WHERE g.group_id = '" . (int) $group_id."' ";
 
 				$available_users = $engine->db->load_all(
 					"SELECT user_id, user_name ".
-					"FROM ".$engine->db->user_table." ".
-					"WHERE user_id NOT IN ( ".$subqery_members." ) ".
+					"FROM " . $engine->db->user_table." ".
+					"WHERE user_id NOT IN ( " . $subqery_members." ) ".
 						"AND account_type = '0' ".
 					"ORDER BY BINARY user_name");
 
@@ -121,7 +121,7 @@ function admin_user_groups(&$engine, &$module)
 				'<table class="formation">'.
 					'<tr>
 						<td>
-							<label for="new_member_id">' . $engine->_t('MembersAddNew').'</label>
+							<label for="new_member_id">' . $engine->_t('MembersAddNew') . '</label>
 						</td>'.
 						'<td>
 							<select id="new_member_id" name="new_member_id">
@@ -131,7 +131,7 @@ function admin_user_groups(&$engine, &$module)
 						{
 							foreach ($available_users as $user)
 							{
-								echo '<option value="' . $user['user_id'] . '">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
+								echo '<option value="' . $user['user_id'] . '">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
 							}
 						}
 
@@ -157,7 +157,7 @@ function admin_user_groups(&$engine, &$module)
 				if ($member = $engine->db->load_single(
 					"SELECT user_name ".
 					"FROM {$engine->db->table_prefix}user ".
-					"WHERE user_id = '".(int) $_POST['change_member']."' ".
+					"WHERE user_id = '" . (int) $_POST['change_member'] . "' ".
 					"LIMIT 1"))
 				{
 					echo $engine->form_open('remove_group_member');
@@ -167,10 +167,10 @@ function admin_user_groups(&$engine, &$module)
 					'<table class="formation">'.
 						'<tr>
 							<td>
-								<label for="">' . $engine->_t('MembersRemove').' \'<code>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
+								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 								'<input type="submit" id="submit" name="remove_member" value="yes" style="width:40px;" /> '.
 								'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width: 40px;" /></a>'.
-								'<br /><small>' . $engine->_t('MembersDeleteInfo').'</small>'.
+								'<br /><small>' . $engine->_t('MembersDeleteInfo') . '</small>'.
 							'</td>
 						</tr>'.
 					'</table><br />';
@@ -187,7 +187,7 @@ function admin_user_groups(&$engine, &$module)
 			// do we have identical names?
 			if ($engine->db->load_single(
 			"SELECT group_id FROM {$engine->db->table_prefix}usergroup ".
-			"WHERE group_name = ".$engine->db->q($_POST['new_group_name'])." ".
+			"WHERE group_name = " . $engine->db->q($_POST['new_group_name']) . " ".
 			"LIMIT 1"))
 			{
 				$engine->show_message($engine->_t('GroupsAlreadyExists'));
@@ -199,11 +199,11 @@ function admin_user_groups(&$engine, &$module)
 				$engine->db->sql_query(
 					"INSERT INTO {$engine->db->table_prefix}usergroup SET ".
 						"created		= UTC_TIMESTAMP(), ".
-						"description	= ".$engine->db->q($_POST['description']).", ".
-						"moderator_id	= '".(int) $_POST['moderator_id']."', ".
-						"group_name		= ".$engine->db->q($_POST['new_group_name']).", ".
-						"open			= '".(int) $_POST['open']."', ".
-						"active			= '".(int) $_POST['active']."'");
+						"description	= " . $engine->db->q($_POST['description']) . ", ".
+						"moderator_id	= '" . (int) $_POST['moderator_id'] . "', ".
+						"group_name		= " . $engine->db->q($_POST['new_group_name']) . ", ".
+						"open			= '" . (int) $_POST['open'] . "', ".
+						"active			= '" . (int) $_POST['active'] . "'");
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('GroupsAdded'), 'success');
@@ -217,7 +217,7 @@ function admin_user_groups(&$engine, &$module)
 			// do we have identical names?
 			if ($engine->db->load_single(
 			"SELECT group_id FROM {$engine->db->table_prefix}usergroup ".
-			"WHERE group_name = ".$engine->db->q($_POST['new_group_name'])." AND group_id <> '".(int) $_POST['group_id']."' ".
+			"WHERE group_name = " . $engine->db->q($_POST['new_group_name']) . " AND group_id <> '" . (int) $_POST['group_id'] . "' ".
 			"LIMIT 1"))
 			{
 				$engine->set_message($engine->_t('GroupsAlreadyExists'));
@@ -228,12 +228,12 @@ function admin_user_groups(&$engine, &$module)
 			{
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->table_prefix}usergroup SET ".
-						"group_name		= ".$engine->db->q($_POST['new_group_name']).", ".
-						"description	= ".$engine->db->q($_POST['new_description']).", ".
-						"moderator_id	= '".(int) $_POST['moderator_id']."', ".
-						"open			= '".(int) $_POST['open']."', ".
-						"active			= '".(int) $_POST['active']."' ".
-					"WHERE group_id = '".(int) $_POST['group_id']."' ".
+						"group_name		= " . $engine->db->q($_POST['new_group_name']) . ", ".
+						"description	= " . $engine->db->q($_POST['new_description']) . ", ".
+						"moderator_id	= '" . (int) $_POST['moderator_id'] . "', ".
+						"open			= '" . (int) $_POST['open'] . "', ".
+						"active			= '" . (int) $_POST['active'] . "' ".
+					"WHERE group_id = '" . (int) $_POST['group_id'] . "' ".
 					"LIMIT 1");
 
 				$engine->show_message($engine->_t('GroupsRenamed'));
@@ -246,15 +246,15 @@ function admin_user_groups(&$engine, &$module)
 			$usergroup = $engine->db->load_single(
 				"SELECT group_name
 				FROM {$engine->db->table_prefix}usergroup
-				WHERE group_id = '".(int) $_POST['group_id']."'
+				WHERE group_id = '" . (int) $_POST['group_id'] . "'
 				LIMIT 1");
 
 			$engine->db->sql_query(
 				"DELETE FROM {$engine->db->table_prefix}usergroup ".
-				"WHERE group_id = '".(int) $_POST['group_id']."'");
+				"WHERE group_id = '" . (int) $_POST['group_id'] . "'");
 			$engine->db->sql_query(
 				"DELETE FROM {$engine->db->table_prefix}usergroup_member ".
-				"WHERE group_id = '".(int) $_POST['group_id']."'");
+				"WHERE group_id = '" . (int) $_POST['group_id'] . "'");
 
 			$engine->config->invalidate_config_cache();
 			$engine->show_message($engine->_t('GroupsDeleted'), 'success');
@@ -277,7 +277,7 @@ function admin_user_groups(&$engine, &$module)
 			echo '<table class="formation">'.
 					'<tr>
 						<td>
-							<label for="new_group_name">' . $engine->_t('GroupsAdd').'</label>
+							<label for="new_group_name">' . $engine->_t('GroupsAdd') . '</label>
 						</td>'.
 						'<td>
 							<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100" />
@@ -285,7 +285,7 @@ function admin_user_groups(&$engine, &$module)
 					</tr>'.
 					'<tr>
 						<td>
-							<label for="description">' . $engine->_t('GroupsDescription').'</label>
+							<label for="description">' . $engine->_t('GroupsDescription') . '</label>
 						</td>'.
 						'<td>
 							<input type="text" id="description" name="description" value="' . ( isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="50" maxlength="100" />
@@ -293,7 +293,7 @@ function admin_user_groups(&$engine, &$module)
 					</tr>'.
 					'<tr>
 						<td>
-							<label for="moderator_id">' . $engine->_t('GroupsModerator').'</label>
+							<label for="moderator_id">' . $engine->_t('GroupsModerator') . '</label>
 						</td>'.
 						'<td>
 							<select id="moderator_id" name="moderator_id">
@@ -303,7 +303,7 @@ function admin_user_groups(&$engine, &$module)
 					{
 						foreach ($users as $user)
 						{
-							echo '<option value="' . $user['user_id'] . '">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</option>\n";
+							echo '<option value="' . $user['user_id'] . '">'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
 						}
 					}
 
@@ -312,18 +312,18 @@ function admin_user_groups(&$engine, &$module)
 					</tr>'.
 					'<tr>
 						<td>
-							<label for="open">' . $engine->_t('GroupsOpen').'</label>
+							<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 						</td>'.
 						'<td>
-							<input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked="checked"' : '' ).' />
+							<input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked="checked"' : '' ) . ' />
 						</td>
 					</tr>'.
 					'<tr>
 						<td>
-							<label for="active">' . $engine->_t('GroupsActive').'</label>
+							<label for="active">' . $engine->_t('GroupsActive') . '</label>
 		 				</td>'.
 						'<td>
-		 					<input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked="checked"' : '' ).' />
+		 					<input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked="checked"' : '' ) . ' />
 		 				</td>
 					</tr>'.
 					'<tr>
@@ -344,7 +344,7 @@ function admin_user_groups(&$engine, &$module)
 			if ($usergroup = $engine->db->load_single(
 				"SELECT group_name, description, moderator_id, open, active
 				FROM {$engine->db->table_prefix}usergroup
-				WHERE group_id = '".(int) $_POST['change']."'
+				WHERE group_id = '" . (int) $_POST['change'] . "'
 				LIMIT 1"))
 			{
 				echo $engine->form_open('edit_group');
@@ -352,19 +352,19 @@ function admin_user_groups(&$engine, &$module)
 				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />'."\n".
 					'<table class="formation">'.
 					'<tr><td>
-						<label for="new_group_name">' . $engine->_t('GroupsRename').' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\' in</label>
+						<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\' in</label>
 					</td>'.
 					'<td>
 						<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100" />
 					</td></tr>'.
 					'<tr><td>
-							<label for="new_description">' . $engine->_t('GroupsDescription').'</label>
+							<label for="new_description">' . $engine->_t('GroupsDescription') . '</label>
 					</td>'.
 					'<td>
 						<input type="text" id="new_description" name="new_description" value="' . ( isset($_POST['new_description']) ? htmlspecialchars($_POST['new_description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ) . '" size="50" maxlength="100" />
 					</td></tr>'.
 					'<tr><td>
-						<label for="moderator_id">' . $engine->_t('GroupsModerator').'</label>
+						<label for="moderator_id">' . $engine->_t('GroupsModerator') . '</label>
 					</td>'.
 					'<td>
 						<select id="moderator_id" name="moderator_id">'.
@@ -374,29 +374,29 @@ function admin_user_groups(&$engine, &$module)
 					{
 						foreach ($users as $user)
 						{
-							echo '<option value="' . $user['user_id'] . '" '.($usergroup['moderator_id'] == $user['user_id'] ? ' selected="selected"' : '').'>' . $user['user_name']."</option>\n";
+							echo '<option value="' . $user['user_id'] . '" '.($usergroup['moderator_id'] == $user['user_id'] ? ' selected="selected"' : '') . '>' . $user['user_name'] . "</option>\n";
 						}
 					}
 
 				echo '</select>
 					</td></tr>'.
 					'<tr><td>
-							<label for="open">' . $engine->_t('GroupsOpen').'</label>
+							<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 					</td>'.
 					'<td>
-							<input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked="checked"' : '' ).' />
+							<input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked="checked"' : '' ) . ' />
 					</td></tr>'.
 					'<tr><td>
-							<label for="active">' . $engine->_t('GroupsActive').'</label>
+							<label for="active">' . $engine->_t('GroupsActive') . '</label>
 					</td>'.
 					'<td>
-							<input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked="checked"' : '' ).' />
+							<input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked="checked"' : '' ) . ' />
 					</td></tr>'.
 					'<tr><td>
 						<br />
 						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
 						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>'.
-						'<br /><small>' . $engine->_t('GroupsRenameInfo').'</small>'.
+						'<br /><small>' . $engine->_t('GroupsRenameInfo') . '</small>'.
 					'</td></tr>'.
 					'</table><br />';
 
@@ -409,7 +409,7 @@ function admin_user_groups(&$engine, &$module)
 			if ($usergroup = $engine->db->load_single(
 				"SELECT group_name
 				FROM {$engine->db->table_prefix}usergroup
-				WHERE group_id = '".(int) $_POST['change']."'
+				WHERE group_id = '" . (int) $_POST['change'] . "'
 				LIMIT 1"))
 			{
 				echo $engine->form_open('delete_group');
@@ -418,10 +418,10 @@ function admin_user_groups(&$engine, &$module)
 					'<table class="formation">'.
 						'<tr>
 							<td>
-								<label for="">' . $engine->_t('GroupsDelete').' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</code>\'?</label> '.
+								<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 								'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
 								'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>'.
-								'<br /><small>' . $engine->_t('GroupsDeleteInfo').'</small>'.
+								'<br /><small>' . $engine->_t('GroupsDeleteInfo') . '</small>'.
 							'</td>
 						</tr>'.
 					'</table>
@@ -446,17 +446,17 @@ function admin_user_groups(&$engine, &$module)
 		$usergroup = $engine->db->load_single(
 			"SELECT group_id, moderator_id, group_name ".
 			"FROM {$engine->db->table_prefix}usergroup ".
-			"WHERE group_id = '".(int) $group_id."' ".
+			"WHERE group_id = '" . (int) $group_id."' ".
 			"LIMIT 1");
 
-		echo "<h2>".$engine->_t('GroupsMembersFor').": ".$usergroup['group_name']."</h2>";
+		echo "<h2>" . $engine->_t('GroupsMembersFor') . ": " . $usergroup['group_name'] . "</h2>";
 
 		$members = $engine->db->load_all(
 			"SELECT m.user_id, user_name ".
 			"FROM {$engine->db->table_prefix}usergroup g ".
 				"INNER JOIN {$engine->db->table_prefix}usergroup_member m ON (g.group_id = m.group_id) ".
 				"INNER JOIN {$engine->db->table_prefix}user u ON (m.user_id = u.user_id) ".
-			"WHERE g.group_id = '".(int) $group_id."' ");
+			"WHERE g.group_id = '" . (int) $group_id."' ");
 
 		echo $engine->form_open('get_group');
 ?>
@@ -545,7 +545,7 @@ function admin_user_groups(&$engine, &$module)
 		// filter by lang
 		if (isset($_GET['moderator_id']))
 		{
-			$where = "WHERE g.moderator_id = '".(int) $_GET['moderator_id']."' ";
+			$where = "WHERE g.moderator_id = '" . (int) $_GET['moderator_id'] . "' ";
 		}
 
 		// entries to display
@@ -565,7 +565,7 @@ function admin_user_groups(&$engine, &$module)
 			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name, COUNT(m.user_id) AS members ".
 			"FROM {$engine->db->table_prefix}usergroup g ".
 				"LEFT JOIN {$engine->db->table_prefix}user u ON (g.moderator_id = u.user_id) ".
-				"LEFT JOIN ".$engine->db->table_prefix."usergroup_member m ON (m.group_id = g.group_id) ".
+				"LEFT JOIN " . $engine->db->table_prefix."usergroup_member m ON (m.group_id = g.group_id) ".
 			($where ? $where : '').
 			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name ".
 			($order ? $order : 'ORDER BY group_id DESC ').
@@ -593,13 +593,13 @@ function admin_user_groups(&$engine, &$module)
 				<tr>
 					<th style="width:5px;"></th>
 					<th style="width:5px;">ID</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order=' . $ordergroup; ?>">Group</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordergroup; ?>">Group</a></th>
 					<th>Description</th>
 					<th style="width:20px;">Moderator</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order=' . $ordermembers; ?>">Members</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordermembers; ?>">Members</a></th>
 					<th style="width:20px;">Open</th>
 					<th style="width:20px;">Active</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href().'&amp;order=' . $created; ?>">Created</a></th>
+					<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $created; ?>">Created</a></th>
 				</tr>
 <?php
 		if ($groups)
@@ -610,13 +610,13 @@ function admin_user_groups(&$engine, &$module)
 						'<td>
 							<input type="radio" name="change" value="' . $row['group_id'] . '" /></td>'.
 						'<td>' . $row['group_id'] . '</td>'.
-						'<td style="text-align:left; padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href().'&amp;group_id=' . $row['group_id'] . '">' . $row['group_name'] . '</a></strong></td>'.
+						'<td style="text-align:left; padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;group_id=' . $row['group_id'] . '">' . $row['group_name'] . '</a></strong></td>'.
 						'<td>' . $row['description'] . '</td>'.
-						'<td><small><a href="' . $engine->href().'&amp;moderator=' . $row['moderator_id'] . '">' . $row['user_name'] . '</a></small></td>'.
+						'<td><small><a href="' . $engine->href() . '&amp;moderator=' . $row['moderator_id'] . '">' . $row['user_name'] . '</a></small></td>'.
 						'<td>' . $row['members'] . '</td>'.
 						'<td>' . $row['open'] . '</td>'.
 						'<td>' . $row['active'] . '</td>'.
-						'<td><small>'.date($engine->db->date_precise_format, strtotime($row['created'])).'</small></td>'.
+						'<td><small>'.date($engine->db->date_precise_format, strtotime($row['created'])) . '</small></td>'.
 					'</tr>';
 			}
 		}

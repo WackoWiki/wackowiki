@@ -29,7 +29,7 @@ if (@$_POST['_action'] === 'set_permissions')
 				"SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang ".
 				"FROM {$this->db->user_table} u ".
 					"LEFT JOIN {$this->db->table_prefix}user_setting s ON (u.user_id = s.user_id) ".
-				"WHERE u.user_id = '".(string) $uid."' ".
+				"WHERE u.user_id = '" . (string) $uid."' ".
 				"LIMIT 1");
 		}
 		else
@@ -82,8 +82,8 @@ if (@$_POST['_action'] === 'set_permissions')
 		$comments = $this->db->load_all(
 			"SELECT page_id ".
 			"FROM {$this->db->table_prefix}page ".
-			"WHERE comment_on_id = '".(string) $pid."' ".
-				"AND owner_id='".(string) $uid."'"); // STS ?? for admin too?
+			"WHERE comment_on_id = '" . (string) $pid."' ".
+				"AND owner_id='" . (string) $uid."'"); // STS ?? for admin too?
 
 		foreach ($comments as $comment)
 		{
@@ -107,19 +107,19 @@ if (@$_POST['_action'] === 'set_permissions')
 			$this->db->sql_query(
 				"UPDATE {$this->db->user_table} SET ".
 					"total_pages	= total_pages - 1 ".
-				"WHERE user_id		= '".$former_id."' ".
+				"WHERE user_id		= '" . $former_id."' ".
 				"LIMIT 1");
 
 			$this->db->sql_query(
 				"UPDATE {$this->db->user_table} SET ".
 					"total_pages	= total_pages + 1 ".
-				"WHERE user_id		= '".$new_id."' ".
+				"WHERE user_id		= '" . $new_id."' ".
 				"LIMIT 1");
 
 			$this->db->sql_query(
 				"UPDATE {$this->db->table_prefix}page SET ".
-					"owner_id = '".(string) $new_id."' ".
-				"WHERE page_id = '".(string) $pid."' ".
+					"owner_id = '" . (string) $new_id."' ".
+				"WHERE page_id = '" . (string) $pid."' ".
 				"LIMIT 1");
 
 			$new_owner['owned'] .= $this->href('', $page['tag']) . "\n";
@@ -141,8 +141,8 @@ if (@$_POST['_action'] === 'set_permissions')
 		$pages = $this->db->load_all(
 			"SELECT page_id, tag, title, owner_id ".
 			"FROM {$this->db->table_prefix}page ".
-			"WHERE (supertag = ".$this->db->q($this->supertag).
-				" OR supertag LIKE ".$this->db->q($this->supertag.'/%').
+			"WHERE (supertag = " . $this->db->q($this->supertag).
+				" OR supertag LIKE " . $this->db->q($this->supertag.'/%').
 				") ".
 			($this->is_admin()
 				? ""
@@ -205,7 +205,7 @@ if ($upload_allowed)
 echo $this->form_open('set_permissions', ['page_method' => 'permissions']);
 
 echo '<input type="checkbox" id="massacls" name="massacls" />';
-echo '<label for="massacls">' . $this->_t('AclForEntireCluster').'</label>'; ?>
+echo '<label for="massacls">' . $this->_t('AclForEntireCluster') . '</label>'; ?>
 <br />
 <div class="cssform">
 <p>
@@ -243,7 +243,7 @@ if ($upload_allowed)
 				// TODO and if there're TONS of users? maybe simple text entry, not menu?
 				foreach ($users as $user)
 				{
-					echo '<option value="' . $user['user_id'] . '">'.Ut::html($user['user_name'])."</option>\n";
+					echo '<option value="' . $user['user_id'] . '">'.Ut::html($user['user_name']) . "</option>\n";
 				}
 			}
 	?>

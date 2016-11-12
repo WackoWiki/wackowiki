@@ -47,8 +47,8 @@ if ($this->is_admin())
 			{
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
-					"SET total_pages = ".(int) $user['n']." ".
-					"WHERE user_id = '".$user['owner_id']."' ".
+					"SET total_pages = " . (int) $user['n'] . " ".
+					"WHERE user_id = '" . $user['owner_id'] . "' ".
 					"LIMIT 1");
 			}
 
@@ -63,7 +63,7 @@ if ($this->is_admin())
 			{
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
-					"SET total_comments = ".(int) $user['n']." ".
+					"SET total_comments = " . (int) $user['n'] . " ".
 					"WHERE user_id = '" . $user['user_id'] . "' ".
 					"LIMIT 1");
 			}
@@ -79,7 +79,7 @@ if ($this->is_admin())
 			{
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
-					"SET total_revisions = ".(int) $user['n']." ".
+					"SET total_revisions = " . (int) $user['n'] . " ".
 					"WHERE user_id = '" . $user['user_id'] . "' ".
 					"LIMIT 1");
 			}
@@ -95,7 +95,7 @@ if ($this->is_admin())
 			{
 				$this->db->sql_query(
 					"UPDATE {$this->db->user_table} ".
-					"SET total_uploads = ".(int) $user['n']." ".
+					"SET total_uploads = " . (int) $user['n'] . " ".
 					"WHERE user_id = '" . $user['user_id'] . "' ".
 					"LIMIT 1");
 			}
@@ -148,11 +148,11 @@ if ($this->is_admin())
 
 						$this->db->sql_query(
 							"UPDATE {$this->db->table_prefix}page ".
-							"SET title = ".$this->db->q($title)." ".
+							"SET title = " . $this->db->q($title) . " ".
 							"WHERE page_id = '" . $page['page_id'] . "' ".
 							"LIMIT 1");
 
-						echo "<tr><td>" . $page['page_id'] . "</td><td>".$page['tag']."</td><td>".$title."</td></tr>";
+						echo "<tr><td>" . $page['page_id'] . "</td><td>" . $page['tag'] . "</td><td>" . $title . "</td></tr>";
 					}
 				}
 
@@ -205,11 +205,11 @@ if ($this->is_admin())
 
 					$this->db->sql_query(
 						"UPDATE {$this->db->table_prefix}page ".
-						"SET depth = '".$depth."' ".
+						"SET depth = '" . $depth."' ".
 						"WHERE page_id = '" . $page['page_id'] . "' ".
 						"LIMIT 1");
 
-					echo "<tr><td>" . $page['page_id'] . "</td><td>".$page['tag']."</td><td>".$depth."</td></tr>";
+					echo "<tr><td>" . $page['page_id'] . "</td><td>" . $page['tag'] . "</td><td>" . $depth . "</td></tr>";
 				}
 
 				echo "</table>";
@@ -265,11 +265,11 @@ if ($this->is_admin())
 
 						$this->db->sql_query(
 							"UPDATE {$this->db->table_prefix}revision ".
-							"SET version_id = '".$version_id."' ".
-							"WHERE revision_id = '".$_revision['revision_id']."' ".
+							"SET version_id = '" . $version_id."' ".
+							"WHERE revision_id = '" . $_revision['revision_id'] . "' ".
 							"LIMIT 1");
 
-						echo "<tr><td>".$_revision['page_id']."</td><td>".$_revision['revision_id']."</td><td>".$version_id."</td></tr>";
+						echo "<tr><td>" . $_revision['page_id'] . "</td><td>" . $_revision['revision_id'] . "</td><td>" . $version_id . "</td></tr>";
 					}
 				}
 

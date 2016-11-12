@@ -37,7 +37,7 @@ class DbMysqli implements DbInterface
 
 			if ($this->db->debug > 2)
 			{
-				die('Query failed: ' . $query.' ('.mysqli_connect_errno().': '.mysqli_connect_error().')');
+				die('Query failed: ' . $query.' ('.mysqli_connect_errno() . ': '.mysqli_connect_error() . ')');
 			}
 			else
 			{

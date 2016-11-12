@@ -20,7 +20,7 @@ if (($user_id = $this->get_user_id()))
 
 	if (@$_GET['bydate'] || $bydate)
 	{
-		echo '<strong>' . $this->_t('ListOwnedPages2').'</strong>';
+		echo '<strong>' . $this->_t('ListOwnedPages2') . '</strong>';
 		echo '<br />[<a href="' . $this->href('', '', $by('')) . '">'.
 			$this->_t('OrderABC') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">'.
 			$this->_t('OrderChange') . "</a>] <br /><br />\n";
@@ -62,7 +62,7 @@ if (($user_id = $this->get_user_id()))
 				}
 
 				// print entry
-				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
+				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')) . ' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "</li>\n";
 
 
 			}
@@ -90,11 +90,11 @@ if (($user_id = $this->get_user_id()))
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('change'));
 
-		echo '<strong>' . $this->_t('ListOwnedPages3').'</strong>';
+		echo '<strong>' . $this->_t('ListOwnedPages3') . '</strong>';
 		echo '<br />[<a href="' . 
 			$this->href('', '', $by('')) . '">' . $this->_t('OrderABC').
 			'</a>] [<a href="' . $this->href('', '', $by('date')) . '">'.
-			$this->_t('OrderDate')."</a>]<br /><br />\n";
+			$this->_t('OrderDate') . "</a>]<br /><br />\n";
 
 		if ($pages = $this->db->load_all(
 			"SELECT p.tag, p.title, p.modified ".
@@ -129,7 +129,7 @@ if (($user_id = $this->get_user_id()))
 
 				// print entry
 				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).
-					' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
+					' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "</li>\n";
 
 			}
 
@@ -153,10 +153,10 @@ if (($user_id = $this->get_user_id()))
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
-		echo '<strong>' . $this->_t('ListOwnedPages').'</strong>';
-		echo "<br />[<a href=\"".$this->href('', '', $by('date'))."\">".
-		$this->_t('OrderDate')."</a>] [<a href=\"".$this->href('', '', $by('change'))."\">".
-		$this->_t('OrderChange')."</a>] <br /><br />\n";
+		echo '<strong>' . $this->_t('ListOwnedPages') . '</strong>';
+		echo "<br />[<a href=\"" . $this->href('', '', $by('date')) . "\">".
+		$this->_t('OrderDate') . "</a>] [<a href=\"" . $this->href('', '', $by('change')) . "\">".
+		$this->_t('OrderChange') . "</a>] <br /><br />\n";
 
 		if (($pages = $this->db->load_all(
 			"SELECT tag, title, modified ".
@@ -189,7 +189,7 @@ if (($user_id = $this->get_user_id()))
 					$cur_char = $first_char;
 				}
 
-				echo "<li>".$this->compose_link_to_page($page['tag'])."</li>\n";
+				echo "<li>" . $this->compose_link_to_page($page['tag']) . "</li>\n";
 			}
 
 			echo "</ul>\n</li>\n</ul>\n";

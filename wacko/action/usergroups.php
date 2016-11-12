@@ -25,7 +25,7 @@ if ($user = $this->get_user())
 	{
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('UserGroups').':</span></p>';
+			echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('UserGroups') . ':</span></p>';
 		}
 
 		echo '<table style="border-spacing: 5px; border-collapse: separate; padding: 5px;"><tr>';
@@ -63,7 +63,7 @@ if ($user = $this->get_user())
 				$group_members = implode('<br />', $allowed_groups);
 
 				// Print out the usergroup name and then a list of the users under it
-				echo '<strong>' . $this->group_link($group_name, '', true, false).'</strong>:<br />'.str_replace("\n","<br />",$group_members).'<br />';
+				echo '<strong>' . $this->group_link($group_name, '', true, false) . '</strong>:<br />'.str_replace("\n","<br />",$group_members) . '<br />';
 				echo '</td>';
 
 				$i++;

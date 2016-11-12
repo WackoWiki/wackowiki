@@ -50,7 +50,7 @@ class Polls
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name ".
 			"FROM {$this->engine->db->table_prefix}poll p ".
 				"LEFT JOIN {$this->engine->db->table_prefix}user u ON (p.user_id = u.user_id) ".
-			"WHERE p.poll_id = '".$poll_id."' AND p.v_id = 0");
+			"WHERE p.poll_id = '" . $poll_id."' AND p.v_id = 0");
 
 		return $title;
 	}
@@ -62,8 +62,8 @@ class Polls
 		$vars = $this->engine->load_all(
 			"SELECT poll_id, v_id, text, votes ".
 			"FROM {$this->engine->db->table_prefix}poll ".
-			"WHERE poll_id = '".$poll_id."' AND v_id <> 0 ".
-			"ORDER BY ".($votes == 1 ? "votes DESC, " : "")."v_id ASC");
+			"WHERE poll_id = '" . $poll_id."' AND v_id <> 0 ".
+			"ORDER BY " . ($votes == 1 ? "votes DESC, " : "") . "v_id ASC");
 
 		return $vars;
 	}
@@ -107,7 +107,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, u.user_name ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY start DESC");
 				break;
@@ -117,7 +117,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, u.user_name as user ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY poll_id ASC");
 				break;
@@ -126,7 +126,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL AND end IS NULL ".
 					"ORDER BY end DESC");
 				break;
@@ -136,9 +136,9 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL ".
-						"AND end IS NULL AND YEAR(start) = '".$year."' ".
+						"AND end IS NULL AND YEAR(start) = '" . $year."' ".
 					"ORDER BY end DESC");
 				break;
 
@@ -147,7 +147,7 @@ class Polls
 				$list = $this->engine->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
 					"FROM {$this->engine->db->table_prefix}poll p ".
-						"LEFT OUTER JOIN ".$this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN " . $this->engine->db->table_prefix."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start IS NULL ".
 					"ORDER BY start DESC");
 		}
@@ -163,11 +163,11 @@ class Polls
 		// submitting title
 		$this->engine->sql_query(
 			"INSERT INTO {$this->engine->db->table_prefix}poll SET ".
-				"poll_id	= '".(int) $poll_id."', ".
-				"text		= ".$engine->db->q(rtrim($topic, '.')).", ".
+				"poll_id	= '" . (int) $poll_id."', ".
+				"text		= " . $engine->db->q(rtrim($topic, '.')) . ", ".
 				"user_id	= '" . (int) $user_id . "', ".
-				"plural		= '".$plural."', ".
-				"start		= ".($start == 1 ? "UTC_TIMESTAMP()" : "NULL"));
+				"plural		= '" . $plural."', ".
+				"start		= " . ($start == 1 ? "UTC_TIMESTAMP()" : "NULL"));
 
 		// submitting variants
 		foreach ($answers as $v_id => $v_text)
@@ -176,9 +176,9 @@ class Polls
 
 			$this->engine->sql_query(
 				"INSERT INTO {$this->engine->db->table_prefix}poll SET ".
-					"poll_id	= '".(int) $poll_id."', ".
-					"v_id		= '".(int) $v_id."', ".
-					"text		= ".$engine->db->q(rtrim($v_text, '.'))." ");
+					"poll_id	= '" . (int) $poll_id."', ".
+					"v_id		= '" . (int) $v_id."', ".
+					"text		= " . $engine->db->q(rtrim($v_text, '.')) . " ");
 		}
 
 		return true;
@@ -189,7 +189,7 @@ class Polls
 	{
 		return $this->engine->sql_query(
 			"DELETE FROM {$this->engine->db->table_prefix}poll ".
-			"WHERE poll_id = '".$poll_id."'");
+			"WHERE poll_id = '" . $poll_id."'");
 	}
 
 	// print voting form
@@ -203,13 +203,13 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest').'</em>' : $header['user_name'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest') . '</em>' : $header['user_name'] );
 
 		if (!$header['start'])
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
-					'<tr><th>' . $this->engine->_t('PollsError').'</th></tr>'.
-					'<tr><td style="text-align:center;"><em>' . $this->engine->_t('PollsNotExists').'</em></td></tr>'.
+					'<tr><th>' . $this->engine->_t('PollsError') . '</th></tr>'.
+					'<tr><td style="text-align:center;"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>'.
 					'</table>';
 		}
 		else
@@ -219,7 +219,7 @@ class Polls
 					'<a id="poll' . $poll_id.'_form"></a>'.
 					'<input type="hidden" name="poll" value="' . $poll_id . '" />'.
 					'<table class="formation">'."\n".
-					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int) $poll_id).'): ' . $header['text'] . '</th></tr>'."\n";
+					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>'."\n";
 
 			foreach ($vars as $var)
 			{
@@ -231,8 +231,8 @@ class Polls
 						'<td style="width:95%;text-align:left;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>'."\n";
 			}
 
-			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts').': ' . $duration.
-						'<br />' . $this->engine->_t('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user.'</a>' ).'</small></td></tr>'.
+			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts') . ': ' . $duration.
+						'<br />' . $this->engine->_t('PollsAdded') . ': '.( strpos($header['user_id'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user.'</a>' ) . '</small></td></tr>'.
 					'<tr><td colspan="2" style="white-space:nowrap;">'.
 					'<input type="submit" name="vote" id="submit" value="' . $this->engine->_t('PollsSubmit') . '" /> '.
 					'<input type="submit" name="results" id="submit" value="' . $this->engine->_t('PollsResults') . '" />'.
@@ -253,7 +253,7 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id, 1);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest').'</em>' : $header['user_name'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest') . '</em>' : $header['user_name'] );
 		$voters		= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];
@@ -262,8 +262,8 @@ class Polls
 		if (!$header['start'])
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">'.
-					'<tr><th>' . $this->engine->_t('PollsError').'</th></tr>'.
-					'<tr><td style="text-align:center;"><em>' . $this->engine->_t('PollsNotExists').'</em></td></tr>'.
+					'<tr><th>' . $this->engine->_t('PollsError') . '</th></tr>'.
+					'<tr><td style="text-align:center;"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>'.
 					'</table>';
 		}
 		else
@@ -272,7 +272,7 @@ class Polls
 					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>'.
 					'<a id="poll' . $poll_id.'_form"></a>'.
 					'<table class="formation">'.
-					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int) $poll_id).'): ' . $header['text'] . '</th></tr>';
+					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>';
 
 			foreach ($vars as $var)
 			{
@@ -282,10 +282,10 @@ class Polls
 						'<td>&nbsp;<strong>' . $percent.'%</strong></td></tr>';
 			}
 
-			$poll	.= '<tr><td colspan="3"><small>' . $this->engine->_t('PollsTotalVotes').': ' . $voters.
+			$poll	.= '<tr><td colspan="3"><small>' . $this->engine->_t('PollsTotalVotes') . ': ' . $voters.
 						'<br />'.($header['end'] ? $this->engine->_t('PollsLasted') :
-							$this->engine->_t('PollsLasts')).': ' . $duration.
-						'<br />' . $this->engine->_t('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user.'</a>' ).'</small></td></tr>'.
+							$this->engine->_t('PollsLasts')) . ': ' . $duration.
+						'<br />' . $this->engine->_t('PollsAdded') . ': '.( strpos($header['user_name'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user.'</a>' ) . '</small></td></tr>'.
 					'</table>'.
 					$this->engine->form_close();
 		}
@@ -352,9 +352,9 @@ class Polls
 					$new_votes = $var['votes'] + 1;
 					$this->engine->sql_query(
 						"UPDATE {$this->engine->db->table_prefix}poll ".
-						"SET votes = '".(int) $new_votes."' ".
-						"WHERE poll_id = '".(int) $poll_id."' ".
-							"AND v_id = '".(int) $vote_id."'");
+						"SET votes = '" . (int) $new_votes."' ".
+						"WHERE poll_id = '" . (int) $poll_id."' ".
+							"AND v_id = '" . (int) $vote_id."'");
 //					$total++;
 				}
 			}
@@ -364,8 +364,8 @@ class Polls
 
 		$this->engine->sql_query(
 			"UPDATE {$this->engine->db->table_prefix}poll ".
-			"SET votes = '".(int) $new_votes."' ".
-			"WHERE poll_id = '".(int) $poll_id."' ".
+			"SET votes = '" . (int) $new_votes."' ".
+			"WHERE poll_id = '" . (int) $poll_id."' ".
 				"AND v_id = '0'");
 
 		return true;

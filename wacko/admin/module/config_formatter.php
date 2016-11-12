@@ -220,14 +220,14 @@ function admin_config_formatter(&$engine, &$module)
 			{
 				if (strlen($timezone) > 50)
 				{
-					$timezone = substr($timezone, 0, 45 ).'...';
+					$timezone = substr($timezone, 0, 45 ) . '...';
 				}
 
 				echo '<option value="' . $offset . '" '.
 					($engine->db->timezone == $offset
 						? "selected=\"selected\""
 						: ""
-					).">".$timezone."</option>\n";
+					) . ">" . $timezone . "</option>\n";
 			}
 			?>
 				</select></td>

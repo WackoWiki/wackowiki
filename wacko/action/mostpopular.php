@@ -54,7 +54,7 @@ else
 
 if (!$nomark)
 {
-	echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('MostPopularPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
+	echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('MostPopularPages') . ": " . $this->link($ppage, '', $legend) . "</span></p>\n";
 }
 
 if (!$page)
@@ -77,10 +77,10 @@ else
 			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l ".
 			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) ".
 			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) ".
-			"WHERE a.tag <> '".$page."' ".
+			"WHERE a.tag <> '" . $page."' ".
 				"AND a.tag = c.tag ".
-				"AND INSTR(b.tag, '".$page."') = 1 ".
-				"AND INSTR(c.tag, '".$page."') = 1 ".
+				"AND INSTR(b.tag, '" . $page."') = 1 ".
+				"AND INSTR(c.tag, '" . $page."') = 1 ".
 			"ORDER BY a.hits DESC ".
 			"LIMIT {$max}");
 	}
@@ -92,10 +92,10 @@ else
 			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l ".
 				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) ".
 				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) ".
-			"WHERE a.tag <> '".$page."' ".
+			"WHERE a.tag <> '" . $page."' ".
 				"AND a.tag = c.tag ".
-				"AND b.tag = ".$this->db->q($page)." ".
-				"AND INSTR(c.tag, ".$this->db->q($page).") = 1 ".
+				"AND b.tag = " . $this->db->q($page) . " ".
+				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 ".
 			"ORDER BY a.hits DESC ".
 			"LIMIT {$max}");
 	}
@@ -132,9 +132,9 @@ foreach ($pages as $page)
 				$_link = $this->link('/' . $page['tag'], '', $page['tag']);
 			}
 
-			echo "<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$_link."</td><td>".
+			echo "<tr><td>&nbsp;&nbsp;" . $num.".&nbsp;" . $_link . "</td><td>".
 				"</td><td>".
-				number_format($page['hits'], 0, ',', '.')."</td></tr>\n";
+				number_format($page['hits'], 0, ',', '.') . "</td></tr>\n";
 		}
 	}
 }

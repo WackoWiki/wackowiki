@@ -74,7 +74,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->body		= $body;
 		$this->sess->title		= $title;
 
-		$this->http->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
+		$this->http->redirect($this->href('', '', 'show_comments=1&p=last') . '#preview');
 	}
 	else if (isset($this->sess->comment_delay) && time() - $this->sess->comment_delay < $this->db->comment_delay)
 	{
@@ -160,7 +160,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	// redirect to page
-	$this->http->redirect($this->href('', '', 'show_comments=1&p=last').'#Comment' . $num);
+	$this->http->redirect($this->href('', '', 'show_comments=1&p=last') . '#Comment' . $num);
 }
 else
 {

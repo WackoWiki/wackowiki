@@ -23,19 +23,19 @@ if (@$_POST['_action'] === 'extended_properties')
 	$mode = 'extended';
 	$this->db->sql_query(
 		"UPDATE {$this->db->table_prefix}page SET ".
-			"footer_comments	= '".(string) $_POST['footer_comments']."', ".
-			"footer_files		= '".(string) $_POST['footer_files']."', ".
+			"footer_comments	= '" . (string) $_POST['footer_comments'] . "', ".
+			"footer_files		= '" . (string) $_POST['footer_files'] . "', ".
 			($this->db->footer_rating
-				? "footer_rating	= '".(string) $_POST['footer_rating']."', "
+				? "footer_rating	= '" . (string) $_POST['footer_rating'] . "', "
 				: "").
-			"hide_toc			= '".(string) $_POST['hide_toc']."', ".
-			"hide_index			= '".(string) $_POST['hide_index']."', ".
-			"tree_level			= '".(string) $_POST['tree_level']."', ".
+			"hide_toc			= '" . (string) $_POST['hide_toc'] . "', ".
+			"hide_index			= '" . (string) $_POST['hide_index'] . "', ".
+			"tree_level			= '" . (string) $_POST['tree_level'] . "', ".
 			($this->is_admin()
-				?	"allow_rawhtml		= '".(string) $_POST['allow_rawhtml']."', ".
-					"disable_safehtml	= '".(string) $_POST['disable_safehtml']."', "
+				?	"allow_rawhtml		= '" . (string) $_POST['allow_rawhtml'] . "', ".
+					"disable_safehtml	= '" . (string) $_POST['disable_safehtml'] . "', "
 				: "").
-			"noindex			= '".(string) $_POST['noindex']."' ".
+			"noindex			= '" . (string) $_POST['noindex'] . "' ".
 		"WHERE page_id = '" . $this->page['page_id'] . "' ".
 		"LIMIT 1");
 }
@@ -44,14 +44,14 @@ if (@$_POST['_action'] === 'general_properties')
 {
 	$this->db->sql_query(
 		"UPDATE {$this->db->table_prefix}page SET ".
-			"page_lang			= ".$this->db->q($_POST['page_lang']).", ".
-			"theme				= ".$this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')).", ".
+			"page_lang			= " . $this->db->q($_POST['page_lang']) . ", ".
+			"theme				= " . $this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')) . ", ".
 			// menu_tag: unused currently, for use in custom theme menus
-			// "menu_tag			= ".$this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).", ".
-			// "show_menu_tag		= ".$this->db->q((string) $_POST['show_menu_tag']).", ".
-			"title				= ".$this->db->q(trim($_POST['title'])).", ".
-			"keywords			= ".$this->db->q(trim($_POST['keywords'])).", ".
-			"description		= ".$this->db->q(trim($_POST['description']))." ".
+			// "menu_tag			= " . $this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . ", ".
+			// "show_menu_tag		= " . $this->db->q((string) $_POST['show_menu_tag']) . ", ".
+			"title				= " . $this->db->q(trim($_POST['title'])) . ", ".
+			"keywords			= " . $this->db->q(trim($_POST['keywords'])) . ", ".
+			"description		= " . $this->db->q(trim($_POST['description'])) . " ".
 		"WHERE page_id = '" . $this->page['page_id'] . "' ".
 		"LIMIT 1");
 }
@@ -136,8 +136,8 @@ else
 
 		/*
 			<input type="text" id="menu_tag" name="menu_tag" value="' . (isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '') . '" size="60" maxlength="100" />
-			'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" '.( $this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_on">' . $this->_t('MetaOn')."</label>".
-			'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" '.( !$this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_off">' . $this->_t('MetaOff')."</label>".
+			'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" '.( $this->page['show_menu_tag'] ? 'checked="checked" ' : '' ) . '/><label for="menu_tag_on">' . $this->_t('MetaOn') . "</label>".
+			'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" '.( !$this->page['show_menu_tag'] ? 'checked="checked" ' : '' ) . '/><label for="menu_tag_off">' . $this->_t('MetaOff') . "</label>".
 		 */
 
 		$langs = $this->available_languages();

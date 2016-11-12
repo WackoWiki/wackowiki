@@ -31,7 +31,7 @@ class Feed
 
 	function write_file($name, $body)
 	{
-		$file_name = Ut::join_path(XML_DIR, $name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->db->site_name)).'.xml');
+		$file_name = Ut::join_path(XML_DIR, $name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->db->site_name)) . '.xml');
 		@file_put_contents($file_name, $body);
 		@chmod($file_name, 0644);
 	}
@@ -42,23 +42,23 @@ class Feed
 		$name	= 'changes';
 		$count	= '';
 
-		$xml = "<?xml version=\"1.0\" encoding=\"".$this->charset."\"?>\n";
+		$xml = "<?xml version=\"1.0\" encoding=\"" . $this->charset."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->engine->db->site_name.$this->engine->_t('RecentChangesTitleXML')."</title>\n";
-		$xml .= "<link>".$this->engine->db->base_url."</link>\n";
-		$xml .= "<description>".$this->engine->_t('RecentChangesXML').$this->engine->db->site_name." </description>\n";
-		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->policy_page).'</copyright>'."\n";
-		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
+		$xml .= "<title>" . $this->engine->db->site_name.$this->engine->_t('RecentChangesTitleXML') . "</title>\n";
+		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
+		$xml .= "<description>" . $this->engine->_t('RecentChangesXML').$this->engine->db->site_name." </description>\n";
+		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->policy_page) . '</copyright>'."\n";
+		$xml .= "<lastBuildDate>".date('r') . "</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->db->site_name.$this->engine->_t('RecentCommentsTitleXML')."</title>\n";
-		$xml .= "<link>".$this->engine->db->base_url."</link>\n";
-		$xml .= "<url>".$this->engine->db->base_url."image/wacko_logo.png"."</url>\n";
+		$xml .= "<title>" . $this->engine->db->site_name.$this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
+		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
+		$xml .= "<url>" . $this->engine->db->base_url."image/wacko_logo.png" . "</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
-		$xml .= "<language>".$this->lang."</language>\n";
-		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
+		$xml .= "<language>" . $this->lang . "</language>\n";
+		#$xml .= "<generator>WackoWiki ".WACKO_VERSION . "</generator>\n";//!!!
 
 		if (list ($pages, $pagination) = $this->engine->load_changed())
 		{
@@ -77,11 +77,11 @@ class Feed
 				{
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page['tag']."</title>\n";
-					$xml .= "<link>".$this->engine->href('', $page['tag'], '')."</link>\n";
-					$xml .= "<guid>".$this->engine->href('', $page['tag'], '')."</guid>\n";
-					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<description>".$page['modified']." ".$this->engine->_t('By')." ".
+					$xml .= "<title>" . $page['tag'] . "</title>\n";
+					$xml .= "<link>" . $this->engine->href('', $page['tag'], '') . "</link>\n";
+					$xml .= "<guid>" . $this->engine->href('', $page['tag'], '') . "</guid>\n";
+					$xml .= "<pubDate>".date('r', strtotime($page['modified'])) . "</pubDate>\n";
+					$xml .= "<description>" . $page['modified'] . " " . $this->engine->_t('By') . " ".
 						($page['user_name']
 							? $page['user_name']
 							: $this->engine->_t('Guest')).
@@ -156,21 +156,21 @@ class Feed
 
 		// build output
 		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>'."\n".
-				"<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->db->theme_url."css/wacko.css\" media=\"screen\"?>\n".
+				"<?xml-stylesheet type=\"text/css\" href=\"" . $this->engine->db->theme_url."css/wacko.css\" media=\"screen\"?>\n".
 				// TODO: atom.css
 				'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> '."\n".
 					'<channel>'."\n".
-						'<title>' . $this->engine->db->site_name.$this->engine->_t('RecentNewsTitleXML').'</title>'."\n".
-						'<link>' . $this->engine->db->base_url.str_replace('%2F', '/', rawurlencode($news_cluster)).'</link>'."\n".
+						'<title>' . $this->engine->db->site_name.$this->engine->_t('RecentNewsTitleXML') . '</title>'."\n".
+						'<link>' . $this->engine->db->base_url.str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>'."\n".
 						'<description>' . $this->engine->_t('RecentNewsXML').$this->engine->db->site_name.'</description>'."\n".
-						'<copyright>' . $this->engine->href('', $this->engine->db->policy_page).'</copyright>'."\n".
+						'<copyright>' . $this->engine->href('', $this->engine->db->policy_page) . '</copyright>'."\n".
 						'<language>' . $this->lang.'</language>'."\n".
-						'<pubDate>'.date('r').'</pubDate>'."\n".
-						'<lastBuildDate>'.date('r').'</lastBuildDate>'."\n";
+						'<pubDate>'.date('r') . '</pubDate>'."\n".
+						'<lastBuildDate>'.date('r') . '</lastBuildDate>'."\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->db->site_name.$this->engine->_t('RecentNewsTitleXML')."</title>\n";
-		$xml .= "<link>".$this->engine->db->base_url.str_replace('%2F', '/', rawurlencode($news_cluster))."</link>\n";
-		$xml .= "<url>".$this->engine->db->base_url."image/wacko_logo.png"."</url>\n";
+		$xml .= "<title>" . $this->engine->db->site_name.$this->engine->_t('RecentNewsTitleXML') . "</title>\n";
+		$xml .= "<link>" . $this->engine->db->base_url.str_replace('%2F', '/', rawurlencode($news_cluster)) . "</link>\n";
+		$xml .= "<url>" . $this->engine->db->base_url."image/wacko_logo.png" . "</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -205,7 +205,7 @@ class Feed
 							'<title>' . $title.'</title>'."\n".
 							'<link>' . $link.'</link>'."\n".
 							'<guid isPermaLink="true">' . $link.'</guid>'."\n".
-							'<description><![CDATA['.str_replace(']]>', ']]&gt;', $text).']]></description>'."\n".
+							'<description><![CDATA['.str_replace(']]>', ']]&gt;', $text) . ']]></description>'."\n".
 							'<pubDate>' . $pdate.'</pubDate>'."\n";
 
 				foreach ($categories as $id => $category)
@@ -238,24 +238,24 @@ class Feed
 		$access	= '';
 
 		// build output
-		$xml = "<?xml version=\"1.0\" encoding=\"".$this->charset."\"?>\n";
-		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->db->theme_url."css/wacko.css\" media=\"screen\"?>\n";
+		$xml = "<?xml version=\"1.0\" encoding=\"" . $this->charset."\"?>\n";
+		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"" . $this->engine->db->theme_url."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->engine->db->site_name.$this->engine->_t('RecentCommentsTitleXML')."</title>\n";
-		$xml .= "<link>".$this->engine->db->base_url."</link>\n";
-		$xml .= "<description>".$this->engine->_t('RecentCommentsXML').$this->engine->db->site_name." </description>\n";
-		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->policy_page).'</copyright>'."\n";
-		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
+		$xml .= "<title>" . $this->engine->db->site_name.$this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
+		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
+		$xml .= "<description>" . $this->engine->_t('RecentCommentsXML').$this->engine->db->site_name." </description>\n";
+		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->policy_page) . '</copyright>'."\n";
+		$xml .= "<lastBuildDate>".date('r') . "</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->db->site_name.$this->engine->_t('RecentCommentsTitleXML')."</title>\n";
-		$xml .= "<link>".$this->engine->db->base_url."</link>\n";
-		$xml .= "<url>".$this->engine->db->base_url."image/wacko_logo.png"."</url>\n";
+		$xml .= "<title>" . $this->engine->db->site_name.$this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
+		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
+		$xml .= "<url>" . $this->engine->db->base_url."image/wacko_logo.png" . "</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
-		$xml .= "<language>".$this->lang."</language>\n";
-		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
+		$xml .= "<language>" . $this->lang . "</language>\n";
+		#$xml .= "<generator>WackoWiki ".WACKO_VERSION . "</generator>\n";//!!!
 
 		if ($comments = $this->engine->load_comment())
 		{
@@ -286,18 +286,18 @@ class Feed
 					}
 
 					$xml .= "<item>\n";
-					$xml .= "<title>".$comment['title']." ".$this->engine->_t('To')." ".$comment['page_title']." ".$this->engine->_t('From')." ".
+					$xml .= "<title>" . $comment['title'] . " " . $this->engine->_t('To') . " " . $comment['page_title'] . " " . $this->engine->_t('From') . " ".
 						($comment['user_name']
 							? $comment['user_name']
 							: $this->engine->_t('Guest')).
 						"</title>\n";
-					$xml .= "<link>".$this->engine->href('', $comment['tag'], '')."</link>\n";
-					$xml .= "<guid>".$this->engine->href('', $comment['tag'], '')."</guid>\n";
-					$xml .= "<pubDate>".date('r', strtotime($comment['modified']))."</pubDate>\n";
-					$xml .= "<dc:creator>".$comment['user_name']."</dc:creator>\n";
+					$xml .= "<link>" . $this->engine->href('', $comment['tag'], '') . "</link>\n";
+					$xml .= "<guid>" . $this->engine->href('', $comment['tag'], '') . "</guid>\n";
+					$xml .= "<pubDate>".date('r', strtotime($comment['modified'])) . "</pubDate>\n";
+					$xml .= "<dc:creator>" . $comment['user_name'] . "</dc:creator>\n";
 
-					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></description>\n";
-					#$xml .= "<content:encoded><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></content:encoded>\n";
+					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text) . "]]></description>\n";
+					#$xml .= "<content:encoded><![CDATA[".str_replace("]]>", "]]&gt;", $text) . "]]></content:encoded>\n";
 					$xml .= "</item>\n";
 				}
 			}
@@ -332,8 +332,8 @@ class Feed
 			foreach ($pages as $page)
 			{
 				$xml .= "<url>\n";
-				$xml .= "<loc>".$this->engine->href('', $page['tag'])."</loc>\n";
-				$xml .= "<lastmod>". substr($page['modified'], 0, 10) ."</lastmod>\n";
+				$xml .= "<loc>" . $this->engine->href('', $page['tag']) . "</loc>\n";
+				$xml .= "<lastmod>". substr($page['modified'], 0, 10)  . "</lastmod>\n";
 
 				$days_since_last_changed = (time() - strtotime($page['modified'])) / DAYSECS;
 

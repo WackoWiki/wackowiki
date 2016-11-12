@@ -18,21 +18,21 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	$ysize = $selected ? 25 : 30;
 
 	if ($text == '') return; // no tab;
-	if ($selected) $text = "<a href=\"$link\" title=\"$hint\">".$text."</a>";
+	if ($selected) $text = "<a href=\"$link\" title=\"$hint\">" . $text . "</a>";
 
 	if (!$selected)
 	{
-		echo "<div class='TabSelected$bonus' style='background-image:url(".$engine->db->theme_url."icon/tabbg.png);' >";
+		echo "<div class='TabSelected$bonus' style='background-image:url(" . $engine->db->theme_url."icon/tabbg.png);' >";
 	}
 	else
 	{
-		echo "<div class='Tab$bonus' style='background-image:url(".$engine->db->theme_url."icon/tabbg".($bonus=="2a" ? "del" : "1").".png);'>";
+		echo "<div class='Tab$bonus' style='background-image:url(" . $engine->db->theme_url."icon/tabbg" . ($bonus=="2a" ? "del" : "1") . ".png);'>";
 	}
 
 	$bonus2 = $bonus=="2a"?"del":"";
 
 	echo '<table ><tr>';
-	echo "<td><img src='".$engine->db->theme_url."icon/tabr$selected".$bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
+	echo "<td><img src='" . $engine->db->theme_url."icon/tabr$selected" . $bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
 
 	if (!$selected)
 	{
@@ -43,9 +43,9 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 		echo '<td style="vertical-align:top;">';
 	}
 
-	echo "<div class='TabText'>".$text."</div>";
+	echo "<div class='TabText'>" . $text . "</div>";
 	echo "</td>";
-	echo "<td><img src='".$engine->db->theme_url."icon/tabl$selected".$bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
+	echo "<td><img src='" . $engine->db->theme_url."icon/tabl$selected" . $bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
 	echo '</tr></table>';
 	echo "</div>";
 }
@@ -98,7 +98,7 @@ if ($this->page)
 			echo_tab(
 			$this->href('permissions'),
 			(($this->method=='edit')
-				? "' onclick='return window.confirm(\"".$this->_t('EditACLConfirm')."\");"
+				? "' onclick='return window.confirm(\"" . $this->_t('EditACLConfirm') . "\");"
 				: ""),
 			$this->_t('ACLText'),
 			$this->method != 'permissions'
@@ -110,7 +110,7 @@ if ($this->page)
 			echo_tab(
 			$this->href('remove'),
 			$this->_t('DeleteTip'),
-			'<img src="' . $this->db->theme_url.'icon/del'.($this->method != 'remove' ? '' : '_').'.png" width="14" height="15" alt="" />' . $this->_t('DeleteText'),
+			'<img src="' . $this->db->theme_url.'icon/del'.($this->method != 'remove' ? '' : '_') . '.png" width="14" height="15" alt="" />' . $this->_t('DeleteText'),
 			$this->method != 'remove',
 			"2a"
 			);
@@ -158,16 +158,16 @@ if ($this->page)
 			{
 				if ($owner == 'System')
 				{
-					echo $this->_t('Owner').": ".$owner."\n";
+					echo $this->_t('Owner') . ": " . $owner."\n";
 				}
 				else
 				{
-					echo $this->_t('Owner').": ".$this->user_link($owner, $lang = '', true, false)."\n";
+					echo $this->_t('Owner') . ": " . $this->user_link($owner, $lang = '', true, false) . "\n";
 				}
 			}
 			else if (!$this->page['comment_on_id'])
 			{
-				print($this->_t('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->_t('TakeOwnership')."</a>)" : ""));
+				print($this->_t('Nobody').($this->get_user() ? " (<a href=\"" . $this->href('claim') . "\">" . $this->_t('TakeOwnership') . "</a>)" : ""));
 			}
 		}
 	}
@@ -205,7 +205,7 @@ if ($this->method == 'show')
 <div id="credits"><?php
 if ($this->get_user())
 {
-	echo $this->_t('PoweredBy').' ' . $this->link('WackoWiki:HomePage', '', 'WackoWiki');
+	echo $this->_t('PoweredBy') . ' ' . $this->link('WackoWiki:HomePage', '', 'WackoWiki');
 }
 ?></div>
 <?php

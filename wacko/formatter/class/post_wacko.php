@@ -87,7 +87,7 @@ class post_wacko
 			else
 			{
 				$action		= substr($matches[1], 0, $sep);
-				$p			= ' '.substr($matches[1], $sep).' ';
+				$p			= ' '.substr($matches[1], $sep) . ' ';
 				$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $_matches, PREG_SET_ORDER);
 				$params		= [];
 				$c			= 0;

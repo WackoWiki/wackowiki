@@ -33,11 +33,11 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 
 	// display rating header
 	echo '<header id="header-rating">';
-	echo $this->_t('RatingHeader').' [<a href="' . $this->href('', '', 'show_rating=1').'#header-rating">' . $this->_t('RatingResults').'</a>]';
+	echo $this->_t('RatingHeader') . ' [<a href="' . $this->href('', '', 'show_rating=1') . '#header-rating">' . $this->_t('RatingResults') . '</a>]';
 	echo "</header>\n";
 
 	// display rating form
-	echo '<div class="rating">' . $this->form_open('rate', ['page_method' => 'rate']).'';
+	echo '<div class="rating">' . $this->form_open('rate', ['page_method' => 'rate']) . '';
 	echo '<input type="radio" id="minus3" name="value" value="-3" /><label for="minus3">-3</label>'.
 		 '<input type="radio" id="minus2" name="value" value="-2" /><label for="minus2">-2</label>'.
 		 '<input type="radio" id="minus1" name="value" value="-1" /><label for="minus1">-1</label>'.
@@ -46,7 +46,7 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 		 '<input type="radio" id="plus2" name="value" value="2" /><label for="plus2">+2</label>'.
 		 '<input type="radio" id="plus3" name="value" value="3" /><label for="plus3">+3</label>'.
 		 '<input type="submit" name="rate" id="submit" value="' . $this->_t('RatingSubmit') . '" />';
-	echo '' . $this->form_close().'</div>';
+	echo '' . $this->form_close() . '</div>';
 
 	echo "</section>\n";
 }
@@ -69,7 +69,7 @@ else
 	echo '<header id="header-rating">'."\n";
 	echo $this->_t('RatingHeaderResults').
 	(handler_show_page_is_rated($this, $this->page['page_id']) === false
-	? ' [<a href="' . $this->href('', '', 'show_rating=0').'#header-rating">' . $this->_t('RatingForm').'</a>]'
+	? ' [<a href="' . $this->href('', '', 'show_rating=0') . '#header-rating">' . $this->_t('RatingForm') . '</a>]'
 	: '');
 	echo "</header>\n";
 
@@ -77,15 +77,15 @@ else
 	if (isset($results['ratio']))
 	{
 		echo '<div class="rating">';
-		echo '' . $this->_t('RatingTotal').': <strong>' . $results['ratio'] . '</strong>'.
+		echo '' . $this->_t('RatingTotal') . ': <strong>' . $results['ratio'] . '</strong>'.
 					 ' '.
-					 '' . $this->_t('RatingVoters').': <strong>' . $results['voters'] . '</strong>';
+					 '' . $this->_t('RatingVoters') . ': <strong>' . $results['voters'] . '</strong>';
 		echo '</div>';
 	}
 	else
 	{
 		echo '<div class="rating">';
-		echo '<em>' . $this->_t('RatingNotRated').'</em>';
+		echo '<em>' . $this->_t('RatingNotRated') . '</em>';
 		echo '</div>';
 	}
 

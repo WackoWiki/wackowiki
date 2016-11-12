@@ -5,12 +5,12 @@
 */
 
 // HTTP header with right charset settings
-header("Content-Type: text/html; charset=".$this->get_charset());
+header("Content-Type: text/html; charset=" . $this->get_charset());
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
-	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : '');?></title>
+	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : '');?></title>
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex == 1 || $this->page['noindex'] == 1)
@@ -48,9 +48,9 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We include them only for pages in edit mode.
 if ($this->method == 'edit')
 {
-	echo "<script src=\"".$this->db->base_url."js/protoedit.js\"></script>\n";
-	echo "<script src=\"".$this->db->base_url."js/wikiedit.js\"></script>\n";
-	echo "<script src=\"".$this->db->base_url."js/autocomplete.js\"></script>\n";
+	echo "<script src=\"" . $this->db->base_url."js/protoedit.js\"></script>\n";
+	echo "<script src=\"" . $this->db->base_url."js/wikiedit.js\"></script>\n";
+	echo "<script src=\"" . $this->db->base_url."js/autocomplete.js\"></script>\n";
 }
 ?>
 	<script src="<?php echo $this->db->base_url;?>js/captcha.js"></script>
@@ -93,7 +93,7 @@ if ($doubleclick == true)
 				<?php
 				// display WackoName and make it clickable if not already at the wiki root
 				// TODO: drop a commented line here for using a logo image instead of the wikis name
-				echo ($this->page['tag'] == $this->db->root_page ? $this->db->site_name : "<a href=\"".$this->db->base_url."\">".$this->db->site_name."</a>")
+				echo ($this->page['tag'] == $this->db->root_page ? $this->db->site_name : "<a href=\"" . $this->db->base_url."\">" . $this->db->site_name . "</a>")
 				?></span>
 				<?php # echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?>
 			</div>
@@ -108,14 +108,14 @@ if ($doubleclick == true)
 
 							// compose link with icon to bookmarks list
 							// TODO: add BookmarkTip to translation
-							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"".$this->db->theme_url."icon/bookmark.png\" title=\"".$this->_t('ReferrersTip')."\" alt=\"".$this->_t('ReferrersText')."\" /></a>";
+							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark.png\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a>";
 
 							// display bookmarks text
-							# ".$this->_t('Bookmarks')."
+							# " . $this->_t('Bookmarks') . "
 
 						echo "<ol>\n";
 						// main page
-						#echo "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
+						#echo "<li>" . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
 						#echo "<li>";
 						// get all bookmarks - old version
 						#$formatedBMs = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
@@ -150,7 +150,7 @@ if ($doubleclick == true)
 								echo '<li>';
 							}
 
-							echo $formatted_user_menu."</li>\n\t\t\t\t\t";
+							echo $formatted_user_menu . "</li>\n\t\t\t\t\t";
 						}
 
 						// now show add or remove bookmark link
@@ -159,7 +159,7 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->_t('RemoveFromBookmarks')."\" src=\"".$this->db->theme_url."icon/spacer.png\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"" . $this->href('', '', 'removebookmark=yes') . "\"><img title=\"" . $this->_t('RemoveFromBookmarks') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\" /></a></div>";
 							}
 							else
 							{
@@ -183,12 +183,12 @@ if ($doubleclick == true)
 					if ($this->get_user())
 					{
 						// compose user identity icon with link to user page
-						echo "<a href=\"".$this->db->base_url.$this->db->users_page."/".$this->get_user_name()."\"><img src=\"".$this->db->theme_url."icon/user_identity_white.png\" title=\"".$this->_t('YouAre').$this->get_user_name()."\" alt=\"".$this->_t('YouAre').$this->get_user_name()."\" /></a>\n";
+						echo "<a href=\"" . $this->db->base_url.$this->db->users_page."/" . $this->get_user_name() . "\"><img src=\"" . $this->db->theme_url."icon/user_identity_white.png\" title=\"" . $this->_t('YouAre').$this->get_user_name() . "\" alt=\"" . $this->_t('YouAre').$this->get_user_name() . "\" /></a>\n";
 						?>
 						<span class="nobr">
 						<?php
 						// display link to user space at UserList cluster (distinct namespace later on)
-						echo $this->compose_link_to_page($this->db->users_page."/".$this->get_user_name(), "", $this->get_user_name(), 0);
+						echo $this->compose_link_to_page($this->db->users_page."/" . $this->get_user_name(), "", $this->get_user_name(), 0);
 
 						// TODO: tag ( | ) properly so we can apply css rules
 						?>
@@ -196,14 +196,14 @@ if ($doubleclick == true)
 						(
 						<?php
 						// compose user account settings icon with link to account settings page
-						echo "<a href=\"".$this->db->base_url.$this->_t('AccountLink')."\"><img src=\"".$this->db->theme_url."icon/account_settings_white.png\" title=\"".$this->_t('AccountTip')."\" alt=\"".$this->_t('AccountTip')."\" /></a>\n";
+						echo "<a href=\"" . $this->db->base_url.$this->_t('AccountLink') . "\"><img src=\"" . $this->db->theme_url."icon/account_settings_white.png\" title=\"" . $this->_t('AccountTip') . "\" alt=\"" . $this->_t('AccountTip') . "\" /></a>\n";
 						// display link to user settings page
 						echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0);
 						// display logout icon and link
 						?>
 						 |
 						<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo "<img src=\"".$this->db->theme_url."icon/logout.png\" title=\"".$this->_t('LogoutButton')."\" alt=\"".$this->_t('LogoutButton')."\" />"; ?>
+							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo "<img src=\"" . $this->db->theme_url."icon/logout.png\" title=\"" . $this->_t('LogoutButton') . "\" alt=\"" . $this->_t('LogoutButton') . "\" />"; ?>
 						</a>
 						<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
 							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?>
@@ -215,9 +215,9 @@ if ($doubleclick == true)
 					else
 					{
 						// show register / login link
-						echo "<ul>\n<li>".$this->compose_link_to_page($this->_t('LoginPage'), "", $this->_t('LoginPage'), 0, '', "goback=".$this->slim_url($this->tag))."</li>\n";
-						echo "<li>".$this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('RegistrationPage'), 0)."</li>\n";
-						// echo "<li>".$this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('Help'), 0)."</li>\n";
+						echo "<ul>\n<li>" . $this->compose_link_to_page($this->_t('LoginPage'), "", $this->_t('LoginPage'), 0, '', "goback=" . $this->slim_url($this->tag)) . "</li>\n";
+						echo "<li>" . $this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('RegistrationPage'), 0) . "</li>\n";
+						// echo "<li>" . $this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('Help'), 0) . "</li>\n";
 						echo "</ul>\n";
 					}
 					// End if
@@ -253,7 +253,7 @@ if ($doubleclick == true)
 							echo '<li>';
 						}
 
-						echo $formatted_menu."</li>\n\t\t\t\t\t";
+						echo $formatted_menu . "</li>\n\t\t\t\t\t";
 					}
 
 					#$this->start_link_tracking();
@@ -271,7 +271,7 @@ if ($doubleclick == true)
 	<div class="breadcrumbs">
 	<?php
 	// display a home icon, clickable if its not the root page
-	echo ($this->page['tag'] == $this->db->root_page ? "<img class=\"home-icon\" src=\"".$this->db->theme_url."icon/home_grey_suse.png\" title=\"".$this->db->root_page."\" alt=\"".$this->db->root_page."\" />\n" : "<a href=\"".$this->db->base_url."\"><img class=\"home-icon\" src=\"".$this->db->theme_url."icon/home_grey_suse.png\" title=\"".$this->db->root_page."\" alt=\"".$this->db->root_page."\" /></a>");
+	echo ($this->page['tag'] == $this->db->root_page ? "<img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home_grey_suse.png\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\" />\n" : "<a href=\"" . $this->db->base_url."\"><img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home_grey_suse.png\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\" /></a>");
 	echo " &gt; ";
 	// show breadcrumbs
 	echo "<span class=\"breadcrumb\">" . $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true) . "</span>";
@@ -414,7 +414,7 @@ if ($doubleclick == true)
 							echo '<li>';
 						}
 
-							echo $formatted_user_menu."</li>\n\t\t\t\t\t";
+							echo $formatted_user_menu . "</li>\n\t\t\t\t\t";
 						}
 
 						// now show add or remove menu link
@@ -423,7 +423,7 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->_t('RemoveFromBookmarks')."\" src=\"".$this->db->theme_url."icon/spacer.png\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"" . $this->href('', '', 'removebookmark=yes') . "\"><img title=\"" . $this->_t('RemoveFromBookmarks') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\" /></a></div>";
 							}
 							else
 							{
@@ -496,7 +496,7 @@ if ($doubleclick == true)
 						{
 							// TODO: add translation TocTip and TocText
 							// compose image to indicate a toc-list
-							echo "<a class=\"toc-icon\"><img src=\"".$this->db->theme_url."icon/toc_ordered.png\" title=\"".$this->_t('MetaToc')."\" alt=\"".$this->_t('MetaToc')."\" /></a>\n";
+							echo "<a class=\"toc-icon\"><img src=\"" . $this->db->theme_url."icon/toc_ordered.png\" title=\"" . $this->_t('MetaToc') . "\" alt=\"" . $this->_t('MetaToc') . "\" /></a>\n";
 
 							// display the page toc list, numerated (?), without labels and markup
 							// toc numerated does not work as intended
@@ -515,7 +515,7 @@ if ($doubleclick == true)
 					<?php
 					// displays the page title or page tag above page content
 					// TODO: might want to make this clickable for any other than the show handler only
-					echo "<a title=\"". $this->page['title'] ."\" href=\"".$this->db->base_url.$this->tag."\">" . (isset($this->page['title']) ? $this->page['title'] : $this->tag) . "</a>";
+					echo "<a title=\"". $this->page['title'] ."\" href=\"" . $this->db->base_url.$this->tag."\">" . (isset($this->page['title']) ? $this->page['title'] : $this->tag) . "</a>";
 					?>
 				</div>
 
@@ -525,7 +525,7 @@ if ($doubleclick == true)
 					// display a "back-to-page" button/icon next to the page tag/title
 					if ($this->method !== 'show')
 					{
-						echo "<a href=\"".$this->db->base_url.$this->tag."\"><img src=\"".$this->db->theme_url."icon/show_back.png\" title=\"".$this->_t('ShowTip')."\" alt=\"".$this->_t('ShowText')."\" /></a>";
+						echo "<a href=\"" . $this->db->base_url.$this->tag."\"><img src=\"" . $this->db->theme_url."icon/show_back.png\" title=\"" . $this->_t('ShowTip') . "\" alt=\"" . $this->_t('ShowText') . "\" /></a>";
 					}
 					?>
 				</div>
@@ -555,12 +555,12 @@ if ($doubleclick == true)
 								if ($display_option == 2)
 									{
 										// img + text
-										$tab = "<li class=\"$method active\"><img src=\"".$engine->db->theme_url."icon/$image_name\" alt=\"$title\" />".$title."</li>\n";
+										$tab = "<li class=\"$method active\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\" />" . $title . "</li>\n";
 									}
 								else if ($display_option == 1)
 								{
 									// img only
-									$tab = "<li class=\"$method active\"><img src=\"".$engine->db->theme_url."icon/$image_name\" alt=\"$title\" /></li>\n";
+									$tab = "<li class=\"$method active\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\" /></li>\n";
 								}
 							}
 							else
@@ -578,12 +578,12 @@ if ($doubleclick == true)
 								if ($display_option == 2)
 								{
 									// img and text
-									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->db->theme_url."icon/$image_name\" alt=\"$title\" />".$title."</a></li>\n";
+									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\" />" . $title . "</a></li>\n";
 								}
 								else if ($display_option == 1)
 								{
 									// img only
-									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->db->theme_url."icon/$image_name\" alt=\"$title\" /></a></li>\n";
+									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\" /></a></li>\n";
 								}
 							}
 							else
@@ -634,9 +634,9 @@ if ($doubleclick == true)
 					// show more tab
 					// TODO: add translation to all theme translations ... $this->_t('PageHandlerMoreTip')
 					// display more icon with descriptive text
-					# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->db->theme_url."icon/more.png\" title=\"".$this->_t('PageHandlerMoreTip')."\" alt=\"".$this->_t('PageHandlerMoreTip')."\" /> more</a> \n";
+					# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"" . $this->db->theme_url."icon/more.png\" title=\"" . $this->_t('PageHandlerMoreTip') . "\" alt=\"" . $this->_t('PageHandlerMoreTip') . "\" /> more</a> \n";
 					// display 'more' text that shows a list with page handlers on hover
-					echo "<li class='sublist'><a href='#' id='more'>".$this->_t('PageHandlerMoreTip')."</a> \n\t";
+					echo "<li class='sublist'><a href='#' id='more'>" . $this->_t('PageHandlerMoreTip') . "</a> \n\t";
 						echo "<ul class='sublist'>\n\t";
 
 						// upload tab
@@ -805,7 +805,7 @@ if ($doubleclick == true)
 						preg_match('/^users\/wikiadmin/i', $this->page['supertag']) )
 					{
 						// TODO: add translation for all other languages ... $this->_t('ReviewNoticeUserAttention')
-						echo "<a href=\"".$this->db->base_url.$this->tag."/revisions"."\">".$this->_t('ReviewNoticeUserAttention')."</a>";
+						echo "<a href=\"" . $this->db->base_url.$this->tag."/revisions"."\">" . $this->_t('ReviewNoticeUserAttention') . "</a>";
 					}
 					else
 					{

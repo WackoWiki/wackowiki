@@ -179,9 +179,9 @@ if (isset($_POST['submit_poll']))
 			$subject =	$this->db->site_name.'. ' . $this->_t('PollsNotifySubj');
 			$body	 =	$this->_t('EmailHello').
 						$this->db->admin_name.".\n\n".
-						str_replace('%1', $user, $this->_t('PollsNotifyBody'))."\n".
-						$this->href('', 'admin.php')."\n\n".
-						$this->_t('EmailGoodbye')."\n".
+						str_replace('%1', $user, $this->_t('PollsNotifyBody')) . "\n".
+						$this->href('', 'admin.php') . "\n\n".
+						$this->_t('EmailGoodbye') . "\n".
 						$this->db->site_name."\n".
 						$this->db->base_url;
 
@@ -257,7 +257,7 @@ else if ($stop_mod !== true)
 		'<input type="hidden" name="user" value="' . $user . '" />' : '');
 	echo '<a id="pollsadd_form"></a><table class="formation">';
 	echo '<tr>';
-		echo '<th>' . $this->_t('PollsTopic').':</th>';
+		echo '<th>' . $this->_t('PollsTopic') . ':</th>';
 		echo '<th style="text-align:left;"><input type="text" name="topic" size="70" maxlength="250" value="' . $topic . '" style="font-weight:normal;" /></th>';
 	echo '</tr>';
 
@@ -265,7 +265,7 @@ else if ($stop_mod !== true)
 	foreach ($vars as $var)
 	{
 		echo '<tr class="lined">';
-			echo '<td class="label"><label for="pollvariant_' . $var['v_id'] . '">' . $this->_t('PollsVariant').' ' . $var['v_id'] . ':</label></td>';
+			echo '<td class="label"><label for="pollvariant_' . $var['v_id'] . '">' . $this->_t('PollsVariant') . ' ' . $var['v_id'] . ':</label></td>';
 			echo '<td><input type="text" id="pollvariant_' . $var['v_id'] . '" name="' . $var['v_id'] . '" size="40" maxlength="250" value="' . htmlspecialchars($var['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" /></td>';
 		echo '</tr>';
 	}
@@ -287,8 +287,8 @@ else if ($stop_mod !== true)
 		echo '</td>';
 	echo '</tr>';
 	echo '<tr><td colspan="2">'.
-		'<input type="checkbox" name="plural" id="plural" value="1"' . ($plural == 1 ? ' checked="checked" ' : ' ').'/> '.
-		'<label for="plural">' . $this->_t('PollsPlural').'</label>'.
+		'<input type="checkbox" name="plural" id="plural" value="1"' . ($plural == 1 ? ' checked="checked" ' : ' ') . '/> '.
+		'<label for="plural">' . $this->_t('PollsPlural') . '</label>'.
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
 	// begin captcha output
@@ -296,8 +296,8 @@ else if ($stop_mod !== true)
 		( $this->get_user() ? false : true );
 	// end captcha output
 		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('PollsCancel') . '"/></a>' : '').
-			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="startmod" id="startmod" value="1"' . ($startmod == 1 ? ' checked="checked" ' : ' ').'/> '.
-			'<label for="startmod">' . $this->_t('PollsStartMod').'</label>' : '').
+			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="startmod" id="startmod" value="1"' . ($startmod == 1 ? ' checked="checked" ' : ' ') . '/> '.
+			'<label for="startmod">' . $this->_t('PollsStartMod') . '</label>' : '').
 			'</td></tr>';
 	echo '</table>';
 	echo $this->form_close();

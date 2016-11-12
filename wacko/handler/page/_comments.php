@@ -23,7 +23,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 			"total_revisions AS revisions, ".
 			"total_comments AS comments ".
 		"FROM {$engine->db->user_table} ".
-		"WHERE user_id = '".(string) $user_id."' ".
+		"WHERE user_id = '" . (string) $user_id."' ".
 		"LIMIT 1");
 
 	$engine->cached_stats[$user_id] = $stats;
@@ -100,7 +100,7 @@ if ($this->has_access('read'))
 
 		$this->print_pagination($pagination);
 
-		echo '<h1><a href="' . $this->href('', '', 'show_comments=0') . '" title="' . $this->_t('HideComments') . '">' . $this->_t('Comments').'</a></h1>';
+		echo '<h1><a href="' . $this->href('', '', 'show_comments=0') . '" title="' . $this->_t('HideComments') . '">' . $this->_t('Comments') . '</a></h1>';
 		echo "</header>\n";
 
 		// display comments themselves
@@ -140,7 +140,7 @@ if ($this->has_access('read'))
 
 				if (!empty($handler_button))
 				{
-					echo '<nav>' . $handler_button."</nav>\n";
+					echo '<nav>' . $handler_button . "</nav>\n";
 				}
 
 				if ($comment['body_r'])
@@ -155,22 +155,22 @@ if ($this->has_access('read'))
 				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
 
 				echo '<header class="comment-title">'."\n".
-						'<h2><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title']."</a></h2>\n".
+						'<h2><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . "</a></h2>\n".
 					 "</header>\n";
 
-				echo '<p>' . $this->format($pre_body, 'post_wacko')."</p>\n";
+				echo '<p>' . $this->format($pre_body, 'post_wacko') . "</p>\n";
 
 				echo '<footer>'.
 						'<ul class="comment-info">'."\n".
 						"<li>".
 							$this->user_link($comment['owner_name']).
 						"</li>\n".
-						'<li><time datetime="' . $comment['created'] . '">' . $this->get_time_formatted($comment['created'])."</time></li>\n".
+						'<li><time datetime="' . $comment['created'] . '">' . $this->get_time_formatted($comment['created']) . "</time></li>\n".
 						($comment['modified'] != $comment['created']
-							? '<li><time datetime="' . $comment['modified'] . '">' . $this->get_time_formatted($comment['modified'])."</time> ".$this->_t('CommentEdited')."</li>\n"
+							? '<li><time datetime="' . $comment['modified'] . '">' . $this->get_time_formatted($comment['modified']) . "</time> " . $this->_t('CommentEdited') . "</li>\n"
 							: '').
 						/*($user_stats == true
-							? "<li>".$this->_t('UsersComments').': ' . $user_stats['comments'] . '&nbsp;&nbsp; ' . $this->_t('UsersPages').': ' . $user_stats['pages'] . '&nbsp;&nbsp; ' . $this->_t('UsersRevisions').': ' . $user_stats['revisions']."</li>\n"
+							? "<li>" . $this->_t('UsersComments') . ': ' . $user_stats['comments'] . '&nbsp;&nbsp; ' . $this->_t('UsersPages') . ': ' . $user_stats['pages'] . '&nbsp;&nbsp; ' . $this->_t('UsersRevisions') . ': ' . $user_stats['revisions'] . "</li>\n"
 							: '').*/
 					"</ul>\n".
 					"</footer>\n";
@@ -195,7 +195,7 @@ if ($this->has_access('read'))
 						// reply button
 						if ($this->is_admin() || $this->is_owner($comment['page_id']))
 						{
-							echo '<a href="' . $this->href('', '', 'parent_id=' . $comment['page_id'] . '#commentform') . '">' . $this->_t('ReplyComment').'</a>';
+							echo '<a href="' . $this->href('', '', 'parent_id=' . $comment['page_id'] . '#commentform') . '">' . $this->_t('ReplyComment') . '</a>';
 						}
 
 						echo '</li>'.
@@ -225,7 +225,7 @@ if ($this->has_access('read'))
 				$preview = $this->format($preview, 'wacko');
 				$preview = $this->format($preview, 'post_wacko');
 
-				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim').'</span></p>'."\n".
+				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim') . '</span></p>'."\n".
 						'<div class="comment-preview">'."\n".
 						'<header class="comment-title">'.
 							'<h2>' . $title.'</h2>'.
@@ -256,16 +256,16 @@ if ($this->has_access('read'))
 				// publish anonymously
 				if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
-					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" '.( $this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' )."/>\n";
-					$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously')."</label>\n";
+					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" '.( $this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' ) . "/>\n";
+					$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . "</label>\n";
 					$output .= '<br />';
 				}
 
 				// watch a page
 				if ($this->page && !$this->is_watched)
 				{
-					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? 'checked="checked"' : '' )." />\n";
-					$output .= '<label for="watchpage">' . $this->_t('NotifyMe')."</label>\n";
+					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? 'checked="checked"' : '' ) . " />\n";
+					$output .= '<label for="watchpage">' . $this->_t('NotifyMe') . "</label>\n";
 					$output .= '<br />';
 				}
 

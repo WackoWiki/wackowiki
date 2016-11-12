@@ -13,7 +13,7 @@ write_config_hidden_nodes(array('none' => ''));
 	$php_version_result = version_compare(PHP_MIN_VERSION, PHP_VERSION, '<');
 	?>
 <h2><?php echo $lang['PHPVersion']; ?></h2>
-<p class="notop"><?php echo $lang['PHPDetected']; ?> <?php echo phpversion().'   '.output_image($php_version_result); ?></p>
+<p class="notop"><?php echo $lang['PHPDetected']; ?> <?php echo phpversion() . '   ' . output_image($php_version_result); ?></p>
 	<?php
 	/*
 		Check if mod_rewrite is installed

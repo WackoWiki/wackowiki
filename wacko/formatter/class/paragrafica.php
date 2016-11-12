@@ -171,15 +171,15 @@ class paragrafica
 		$what = $this->mark2.$what.$this->mark1;
 
 		// 2bis. swap <t-><br /> -> <br /><t->
-		$what = preg_replace( "!(".$this->mark2.")((\s*<br[^>]*>)+)!si", '$2$1', $what );
+		$what = preg_replace( "!(" . $this->mark2.")((\s*<br[^>]*>)+)!si", '$2$1', $what );
 		// noneedin: > eliminating multiple breaks
-		$what = preg_replace( "!((<br[^>]*>\s*)+)(".$this->mark1.")!s", '$3', $what );
+		$what = preg_replace( "!((<br[^>]*>\s*)+)(" . $this->mark1.")!s", '$3', $what );
 
 		// 2. cleanup <t->\s<-t>
 		do
 		{
 			$_w		= $what;
-			$what	= preg_replace( "!(".$this->mark2.")((\s|(<br[^>]*>|".$this->mark3."|".$this->mark4."))*)(".$this->mark1.")!si", '$2', $what );
+			$what	= preg_replace( "!(" . $this->mark2.")((\s|(<br[^>]*>|" . $this->mark3."|" . $this->mark4."))*)(" . $this->mark1.")!si", '$2', $what );
 		}
 
 		while ($_w != $what);

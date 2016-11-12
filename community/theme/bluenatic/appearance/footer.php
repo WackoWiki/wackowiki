@@ -10,8 +10,8 @@ if ($this->page)
 {
 	// Revisions link
 	echo (( $this->hide_revisions === false || $this->is_admin() )
-			? "<li>".$this->_t('SettingsRevisions').": <a href=\"".$this->href('revisions')."\" title=\"".$this->_t('RevisionTip')."\">".$this->get_time_formatted($this->page['modified'])."</a></li>\n"
-			: "<li>".$this->get_time_formatted($this->page['modified'])."</li>\n"
+			? "<li>" . $this->_t('SettingsRevisions') . ": <a href=\"" . $this->href('revisions') . "\" title=\"" . $this->_t('RevisionTip') . "\">" . $this->get_time_formatted($this->page['modified']) . "</a></li>\n"
+			: "<li>" . $this->get_time_formatted($this->page['modified']) . "</li>\n"
 		);
 
 	// Show Owner of this page
@@ -19,16 +19,16 @@ if ($this->page)
 	{
 		if ($owner == 'System')
 		{
-			echo "<li>".$this->_t('Owner').": ".$owner."</li>\n";
+			echo "<li>" . $this->_t('Owner') . ": " . $owner . "</li>\n";
 		}
 		else
 		{
-			echo "<li>".$this->_t('Owner').": ".$this->user_link($owner, $lang = '', true, false)."</li>\n";
+			echo "<li>" . $this->_t('Owner') . ": " . $this->user_link($owner, $lang = '', true, false) . "</li>\n";
 		}
 	}
 	else if (!$this->page['comment_on_id'])
 	{
-		echo "<li>".$this->_t('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->_t('TakeOwnership')."</a>)</li>\n" : "");
+		echo "<li>" . $this->_t('Nobody').($this->get_user() ? " (<a href=\"" . $this->href('claim') . "\">" . $this->_t('TakeOwnership') . "</a>)</li>\n" : "");
 	}
 
 		?> <li><a href="<?php echo $this->href('properties'); ?>"><?php echo $this->_t('PropertiesText'); ?></a>
@@ -55,7 +55,7 @@ if ($this->page)
 	width="16" height="16" /> <?php } ?> </a></li> <?php }
 	// End of "Page exists" ?> <?php
 	if ($this->get_user()){
-		echo "<li>".$this->_t('PoweredBy').' ' . $this->link('WackoWiki:WackoWiki', '', 'WackoWiki')."</li>";
+		echo "<li>" . $this->_t('PoweredBy') . ' ' . $this->link('WackoWiki:WackoWiki', '', 'WackoWiki') . "</li>";
 	}
 	?></ul>
 </div></div>

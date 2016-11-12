@@ -375,7 +375,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 			$_root = $engine->translit($root);
 			$pages = $engine->db->load_all(
 				"SELECT page_id ".
-				"FROM ".$engine->db->table_prefix."page ".
+				"FROM " . $engine->db->table_prefix."page ".
 				"WHERE supertag LIKE " . $engine->db->q($_root . '/%') . " ".
 					"OR supertag = " . $engine->db->q($_root) . " ");
 
@@ -461,7 +461,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 //			}
 
 			// construct output
-			$contents = implode("\t", $row)."\n";
+			$contents = implode("\t", $row) . "\n";
 
 			// write data to the compressed file
 			gzwrite($file, $contents);
@@ -647,7 +647,7 @@ function put_data(&$engine, $pack, $table, $mode)
 			$engine->db->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
 
 			// run and count sql query
-			$engine->db->sql_query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
+			$engine->db->sql_query("$mode INTO $table VALUES ( ".implode(', ', $row) . " )");
 			$t++;	// rows processed
 		}
 

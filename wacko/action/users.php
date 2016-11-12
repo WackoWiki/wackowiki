@@ -33,7 +33,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		// profile navigation
 		if ($user['user_id'] === $this->get_user_id())
 		{
-			$output1 = #'<h3>' . $this->_t('UserPages')."</h3>".
+			$output1 = #'<h3>' . $this->_t('UserPages') . "</h3>".
 			'<ul class="menu" id="list">' . "\n";
 			$output2 = '<li><a href="' . $this->href('', '', 'mode=mypages') . '#list">' . $this->_t('ListMyPages') . "</a></li>\n";
 			$output3 = '<li><a href="' . $this->href('', '', 'mode=mychanges') . '#list">' . $this->_t('ListMyChanges') . "</a></li>\n";
@@ -289,7 +289,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				"WHERE owner_id = '" . $user['user_id'] . "' ".
 					"AND comment_on_id = '0' ".
 					"AND deleted <> '1' ".
-				"ORDER BY ".($sort_name? 'tag ASC' : 'created DESC')." ".
+				"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " ".
 				$pagination['limit']);
 
 			// sorting and pagination

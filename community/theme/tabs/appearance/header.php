@@ -5,7 +5,7 @@
 */
 
 // TODO: isset($meta_title) ... else ... in common _header.php
-#$meta_title = (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : '')." (@".htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).")";
+#$meta_title = (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : '') . " (@".htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ")";
 
 require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
@@ -20,7 +20,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	echo '<div id="menu-user">';
 	echo "<ol>\n";
 
-	echo '<li>' . $this->compose_link_to_page($this->db->root_page)."</li>\n";
+	echo '<li>' . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
 
 	// default menu
 	if ($menu = $this->get_default_menu($user['user_lang']))
@@ -38,7 +38,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 				echo '<li>';
 			}
 
-			echo $formatted_menu."</li>\n";
+			echo $formatted_menu . "</li>\n";
 		}
 	}
 
@@ -52,7 +52,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	</div>
 	<div class="TopLeft">
 		<?php if ($this->get_user()) { ?>
-		<img src="<?php echo $this->db->theme_url ?>icon/role.png" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+		<img src="<?php echo $this->db->theme_url ?>icon/role.png" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->_t('YouAre') . " " . $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
 		<?php
 echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
 		| <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', 'Login', 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span> )</small>
@@ -103,7 +103,7 @@ echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('Accoun
 				echo '<li>';
 			}
 
-			echo $formatted_menu."</li>\n";
+			echo $formatted_menu . "</li>\n";
 		}
 	}
 
@@ -119,8 +119,8 @@ echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('Accoun
 <div class="Print">
 <?php if ($this->get_user()) { ?>
 <?php echo ($this->is_watched === true ?
-			"<a href=\"".$this->href('watch')."\">".$this->_t('RemoveWatch')."</a>" :
-			"<a href=\"".$this->href('watch')."\">".$this->_t('SetWatch')."</a>" ) ?> ::
+			"<a href=\"" . $this->href('watch') . "\">" . $this->_t('RemoveWatch') . "</a>" :
+			"<a href=\"" . $this->href('watch') . "\">" . $this->_t('SetWatch') . "</a>" ) ?> ::
 	<?php if (!in_array($this->page['page_id'], $this->get_menu_links())) {?>
 	<a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->db->theme_url ?>icon/bookmark.png" width="12" height="12" alt="<?php echo $this->_t('AddToBookmarks') ?>" /></a> ::
 <?php } else { ?>
@@ -128,10 +128,10 @@ echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('Accoun
 	<img src="<?php echo $this->db->theme_url ?>icon/unbookmark.png" width="12" height="12" alt="<?php echo $this->_t('RemoveFromBookmarks') ?>" /></a> ::
 <?php } }
 ?>
-<?php echo"<a href=\"".$this->href('print')."\">" ?><img
+<?php echo"<a href=\"" . $this->href('print') . "\">" ?><img
 	src="<?php echo $this->db->theme_url ?>icon/print.png"
 	width="21" height="20"
-	alt="<?php echo $this->_t('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('wordprocessor')."\">" ?><img
+	alt="<?php echo $this->_t('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"" . $this->href('wordprocessor') . "\">" ?><img
 	src="<?php echo $this->db->theme_url ?>icon/wordprocessor.png"
 	width="16" height="16"
 	alt="<?php echo $this->_t('WordprocessorVersion') ?>" /></a></div>

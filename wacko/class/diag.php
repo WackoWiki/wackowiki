@@ -109,12 +109,12 @@ class Diag
 					echo '<p class="debug">Language data</p>'."\n<ul>\n";
 					echo "\t<li>Multilanguage: " . ($config['multilanguage'] == 1 ? 'true' : 'false') . "</li>\n";
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE set: " . (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false') . "</li>\n";
-					echo "\t<li>HTTP_ACCEPT_LANGUAGE value: " . $_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
+					echo "\t<li>HTTP_ACCEPT_LANGUAGE value: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "</li>\n";
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE chopped value: " . strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)) . "</li>\n";
 					echo "\t<li>User language set: " . (isset($user['user_lang']) ? 'true' : 'false') . "</li>\n";
 					echo "\t<li>User language value: " . (isset($user['user_lang']) ? $user['user_lang'] : '') . "</li>\n";
-					echo "\t<li>Page language: " . $engine->page['page_lang'] ."</li>\n";
-					echo "\t<li>Config language: " . $config['language']."</li>\n";
+					echo "\t<li>Page language: " . $engine->page['page_lang']  . "</li>\n";
+					echo "\t<li>Config language: " . $config['language'] . "</li>\n";
 					echo "\t<li>User selected language: " . (isset($engine->user_lang) ? $engine->user_lang : '') . "</li>\n";
 					echo "\t<li>Charset: " . $engine->get_charset() . "</li>\n";
 					echo "\t<li>HTML Entities Charset: " . HTML_ENTITIES_CHARSET . "</li>\n";
@@ -158,7 +158,7 @@ class Diag
 					echo "\t<li>IP-address: " . $engine->get_user_ip() . "</li>\n";
 					echo "\t<li>SERVER_PORT: " . $_SERVER['SERVER_PORT'] . "</li>\n";
 					echo "\t<li>TLS: " . (isset($config['tls']) ? 'on' : 'off') . "</li>\n";
-					echo "\t<li>TLS Proxy: " . (!empty($config['tls_proxy']) ? $config['tls_proxy'] : 'false')."</li>\n";
+					echo "\t<li>TLS Proxy: " . (!empty($config['tls_proxy']) ? $config['tls_proxy'] : 'false') . "</li>\n";
 					echo "\t<li>TLS implicit: " . (($config['tls_implicit'] == true) ? 'on' : 'off') . "</li>\n";
 					echo "\t<li>Cookie path: " . $config['cookie_path'] . "</li>\n";
 					// echo "\t<li>GZIP: " . (@extension_loaded('zlib') ? 'On' : 'Off') . "</li>\n";

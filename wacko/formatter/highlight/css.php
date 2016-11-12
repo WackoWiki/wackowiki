@@ -169,11 +169,11 @@ $special_keyword2 = [
 
 	$css = preg_replace('/(\.?)(.*)(\s?\{?)/s', "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3", $css);
 
-	$css = preg_replace("/(\#[0-9a-fA-F]+|\d+(px))/", "<span style=\"color: ".$options['color']['digits'].";\">$1</span>", $css);
+	$css = preg_replace("/(\#[0-9a-fA-F]+|\d+(px))/", "<span style=\"color: " . $options['color']['digits'] . ";\">$1</span>", $css);
 
-	$css = str_replace("\:", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">:</span>", $css);
-	$css = str_replace("{", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">{</span>", $css);
-	$css = str_replace("}", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">}</span>", $css);
+	$css = str_replace("\:", "<span style=\"color: " . $options['color']['attributes'] . "; font-weight: bold;\">:</span>", $css);
+	$css = str_replace("{", "<span style=\"color: " . $options['color']['attributes'] . "; font-weight: bold;\">{</span>", $css);
+	$css = str_replace("}", "<span style=\"color: " . $options['color']['attributes'] . "; font-weight: bold;\">}</span>", $css);
 
 	$css = preg_replace_callback(
 			'!/\*(.*?)\*/!s',
