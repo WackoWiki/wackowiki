@@ -82,7 +82,7 @@ $rating = $this->db->load_single(
 
 if ($rating['voters'] > 0)			$rating['ratio'] = $rating['value'] / $rating['voters'];
 if (is_float($rating['ratio']))		$rating['ratio'] = round($rating['ratio'], 2);
-if ($rating['ratio'] > 0)			$rating['ratio'] = '+'.$rating['ratio'];
+if ($rating['ratio'] > 0)			$rating['ratio'] = '+' . $rating['ratio'];
 // show form
 
 // EXTENDED
@@ -129,15 +129,15 @@ else
 		$tpl->enter('g_f_');
 		$tpl->page = $this->page;
 
-		if (($categories = $this->action('categories', ['page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0], 1)))
+		if (($categories = $this->action('categories', ['page' => '/' . $this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0], 1)))
 		{
 			$tpl->categories_html = $categories;
 		}
 
 		/*
-			<input type="text" id="menu_tag" name="menu_tag" value="'.(isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '').'" size="60" maxlength="100" />
-			'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" '.( $this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_on">'.$this->_t('MetaOn')."</label>".
-			'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" '.( !$this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_off">'.$this->_t('MetaOff')."</label>".
+			<input type="text" id="menu_tag" name="menu_tag" value="' . (isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '') . '" size="60" maxlength="100" />
+			'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" '.( $this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_on">' . $this->_t('MetaOn')."</label>".
+			'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" '.( !$this->page['show_menu_tag'] ? 'checked="checked" ' : '' ).'/><label for="menu_tag_off">' . $this->_t('MetaOff')."</label>".
 		 */
 
 		$langs = $this->available_languages();

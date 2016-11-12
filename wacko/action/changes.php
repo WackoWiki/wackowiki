@@ -108,8 +108,8 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			).
 			'</span> &mdash; '.
 			($title == 1
-				? $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
-				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
+				? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
+				: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
 			).
 
 			' . . . . . . . . . . . . . . . . <small>' .

@@ -42,12 +42,12 @@ function admin_content_files(&$engine, &$module)
 
 		if (count($file) > 0)
 		{
-			echo '<strong>'.$engine->_t('UploadRemoveConfirm').'</strong>';
+			echo '<strong>' . $engine->_t('UploadRemoveConfirm').'</strong>';
 			echo $engine->form_open();
 ?>
 	<br />
 	<ul>
-		<li><?php echo $engine->link( 'file:'.$file['file_name'] ); ?></li>
+		<li><?php echo $engine->link( 'file:' . $file['file_name'] ); ?></li>
 	</ul>
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
@@ -91,14 +91,14 @@ function admin_content_files(&$engine, &$module)
 				"LIMIT 1");
 
 			echo '<br />';
-			$message =  '<em>'.$engine->_t('UploadRemovedFromDB').'</em><br />';
+			$message =  '<em>' . $engine->_t('UploadRemovedFromDB').'</em><br />';
 
 			// 3. remove from FS
 			$real_filename = Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 
 			if (@unlink($real_filename))
 			{
-				$message .= '<em>'.$engine->_t('UploadRemovedFromFS').'</em>';
+				$message .= '<em>' . $engine->_t('UploadRemovedFromFS').'</em>';
 				$engine->show_message($message);
 			}
 			else
@@ -146,7 +146,7 @@ function admin_content_files(&$engine, &$module)
 			$_name	= $name;
 			$count	= 1;
 
-			while (file_exists($dir.$name.'.'.$ext))
+			while (file_exists($dir.$name.'.' . $ext))
 			{
 				if ($name === $_name)
 				{
@@ -158,7 +158,7 @@ function admin_content_files(&$engine, &$module)
 				}
 			}
 
-			$result_name	= $name.'.'.$ext;
+			$result_name	= $name.'.' . $ext;
 			$file_size		= $_FILES['file']['size'];
 
 			// 1.6. check filesize, if asked
@@ -198,13 +198,13 @@ function admin_content_files(&$engine, &$module)
 
 			// 4. output link to file
 			// !!!!! write after providing filelink syntax
-			echo '<strong>'.$engine->_t('UploadDone').'</strong>';
+			echo '<strong>' . $engine->_t('UploadDone').'</strong>';
 
 			// log event
 			$engine->log(4, Ut::perc_replace($engine->_t('LogFileUploadedGlobal', SYSTEM_LANG), '', $small_name, $engine->binary_multiples($file_size, false, true, true)));
 ?>
 <br /><ul>
-<li><?php echo $engine->link( 'file:'.$small_name ); ?></li>
+<li><?php echo $engine->link( 'file:' . $small_name ); ?></li>
 </ul><br />
 <?php
 
@@ -291,7 +291,7 @@ function admin_content_files(&$engine, &$module)
 	: ''), true);
 
 	$count		= count($count);
-	$pagination = $engine->pagination($count, $limit, 'f','mode='.$module['mode'], '', 'admin.php');
+	$pagination = $engine->pagination($count, $limit, 'f','mode=' . $module['mode'], '', 'admin.php');
 
 	// load files list
 	$files = $engine->db->load_all(
@@ -306,7 +306,7 @@ function admin_content_files(&$engine, &$module)
 		$files = [];
 	}
 
-	echo '<fieldset><legend>'.$engine->_t('UploadTitleGlobal').":</legend>\n";
+	echo '<fieldset><legend>' . $engine->_t('UploadTitleGlobal').":</legend>\n";
 
 	// display
 	$del	= $engine->_t('UploadRemove');
@@ -339,7 +339,7 @@ function admin_content_files(&$engine, &$module)
 		$file_size	= $engine->binary_multiples($file['file_size'], false, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
 		$link		= $engine->link($path2.$file_name, '', $file_name);
-		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id='.$file['upload_id'];
+		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id=' . $file['upload_id'];
 ?>
 		<tr class="hl_setting">
 			<td style=""><?php echo $link; ?></td>

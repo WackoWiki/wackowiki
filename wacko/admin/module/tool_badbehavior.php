@@ -186,21 +186,21 @@ function bb2_summary(&$engine)
 			foreach ($results as $result)
 			{
 				echo '<tr id="request-' . '' . '"  style="vertical-align:top;" class="lined">'."\n";
-				echo '<td class="label" style="width:5%;">'.$result['n']."</td>\n";
+				echo '<td class="label" style="width:5%;">' . $result['n']."</td>\n";
 				#echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . "</td>\n";
 
 				if ($argument == 'status_key')
 				{
 					$status_key	= bb2_get_response($result['group_type']);
-					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;status_key='.$result['group_type'] . '" title="' .'['.$status_key['response'].'] '.$status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
+					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;status_key=' . $result['group_type'] . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
 				}
 				else if ($argument == 'request_uri')
 				{
-					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;'.$argument.'='.$result['request_uri_hash'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;' . $argument.'=' . $result['request_uri_hash'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
 				}
 				else
 				{
-					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;'.$argument.'='.$result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;' . $argument.'=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
 				}
 
 				echo '<td>'.
@@ -352,10 +352,10 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 			$time_tz = $engine->sql2precisetime($result['date']);
 
 			echo "<td>".
-					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;ip='.$result['ip'] . "\">" . $result['ip'] . "</a><br/>".
+					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;ip=' . $result['ip'] . "\">" . $result['ip'] . "</a><br/>".
 					"$host<br/>\n" .
 					$time_tz . "<br/><br/>".
-					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;status_key='.$result['status_key'] . "\" title=\"" .'['.$status_key['response'].'] '.$status_key['explanation']. "\">" . $status_key['log'] . "</a>\n";
+					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;status_key=' . $result['status_key'] . "\" title=\"" .'[' . $status_key['response'] . '] ' . $status_key['explanation']. "\">" . $status_key['log'] . "</a>\n";
 
 			if ($httpbl)
 			{

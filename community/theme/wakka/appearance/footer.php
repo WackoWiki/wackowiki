@@ -13,7 +13,7 @@
 <ul>
 <?php
 // If User has rights to edit page, show Edit link
-echo ($this->has_access('write') && ($this->method != 'edit')) ? '<li><a href="'.$this->href('edit').'" accesskey="E" title="'.$this->_t('EditTip').'">'.$this->_t('EditText')."</a></li>\n" : '';
+echo ($this->has_access('write') && ($this->method != 'edit')) ? '<li><a href="' . $this->href('edit') . '" accesskey="E" title="' . $this->_t('EditTip') . '">' . $this->_t('EditText')."</a></li>\n" : '';
 
 // If this page exists
 if ($this->page)
@@ -113,7 +113,7 @@ if ($this->page)
 <div id="credits"><?php
 if ($this->get_user())
 {
-	echo $this->_t('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki');
+	echo $this->_t('PoweredBy').' ' . $this->link('WackoWiki:HomePage', '', 'WackoWiki');
 }
 ?></div>
 </div>

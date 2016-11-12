@@ -95,9 +95,9 @@ function admin_system_info(&$engine, &$module)
 	foreach ($sysinfo as $param => $value)
 	{
 		echo '<tr class="lined">'.
-				'<td class="label"><strong>'.$value[0].'</strong></td>'.
+				'<td class="label"><strong>' . $value[0] . '</strong></td>'.
 				'<td> </td>'.
-				'<td>'.$value[1].'</td>'.
+				'<td>' . $value[1] . '</td>'.
 			#'<tr class="lined"><td colspan="5"></td></tr>'.
 			"\n";
 	}

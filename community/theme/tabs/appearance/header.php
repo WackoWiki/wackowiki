@@ -5,7 +5,7 @@
 */
 
 // TODO: isset($meta_title) ... else ... in common _header.php
-#$meta_title = (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '')." (@".htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).")";
+#$meta_title = (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : '')." (@".htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).")";
 
 require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
@@ -20,7 +20,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	echo '<div id="menu-user">';
 	echo "<ol>\n";
 
-	echo '<li>'.$this->compose_link_to_page($this->db->root_page)."</li>\n";
+	echo '<li>' . $this->compose_link_to_page($this->db->root_page)."</li>\n";
 
 	// default menu
 	if ($menu = $this->get_default_menu($user['user_lang']))
@@ -52,10 +52,10 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	</div>
 	<div class="TopLeft">
 		<?php if ($this->get_user()) { ?>
-		<img src="<?php echo $this->db->theme_url ?>icon/role.png" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->db->users_page.'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+		<img src="<?php echo $this->db->theme_url ?>icon/role.png" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->_t('YouAre')." ".$this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
 		<?php
 echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
-		| <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', 'Login', 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span> )</small>
+		| <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', 'Login', 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span> )</small>
 		<?php } else { ?>
 		<table >
 			<tr>

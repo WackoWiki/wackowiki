@@ -10,7 +10,7 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 <!DOCTYPE html>
 <html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
-	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');?></title>
+	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : '');?></title>
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex == 1 || $this->page['noindex'] == 1)
@@ -163,12 +163,12 @@ if ($doubleclick == true)
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->_t('AddToBookmarks').'"><img src="'.$this->db->theme_url.'icon/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url.'icon/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('CantAddBookmarks').'" /></div>';
+							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
 						}
 						echo "\n";
 
@@ -203,10 +203,10 @@ if ($doubleclick == true)
 						?>
 						 |
 						<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo "<img src=\"".$this->db->theme_url."icon/logout.png\" title=\"".$this->_t('LogoutButton')."\" alt=\"".$this->_t('LogoutButton')."\" />"; ?>
+							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo "<img src=\"".$this->db->theme_url."icon/logout.png\" title=\"".$this->_t('LogoutButton')."\" alt=\"".$this->_t('LogoutButton')."\" />"; ?>
 						</a>
 						<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?>
+							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?>
 						</a>
 						)
 					<?php
@@ -427,12 +427,12 @@ if ($doubleclick == true)
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->_t('AddToBookmarks').'"><img src="'.$this->db->theme_url.'icon/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url.'icon/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('CantAddBookmarks').'" /></div>';
+							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
 						}
 						echo "\n";
 

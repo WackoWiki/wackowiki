@@ -12,7 +12,7 @@
 	<tr>
 		<td id="credits"><?php
 		if ($this->get_user()){
-			echo $this->_t('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki');
+			echo $this->_t('PoweredBy').' ' . $this->link('WackoWiki:WackoWiki', '', 'WackoWiki');
 		}
 		?></td>
 	</tr>

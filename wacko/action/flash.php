@@ -50,7 +50,7 @@ if (!$url)
 }
 else
 {
-	// echo '<video width="'.$width.'" height="'.$height.'" src="'.$url.'" controls>';
+	// echo '<video width="' . $width . '" height="' . $height . '" src="' . $url . '" controls>';
 	echo '<embed src="' . $url . '" width="' . $width . '" height="' . $height . '">';
 	// echo "</video>\n";
 }

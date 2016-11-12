@@ -14,7 +14,7 @@ $limit	= 500;
 
 // input
 if (!isset($root) && !isset($page))
-					$root	= '/'.$this->page['tag'];
+					$root	= '/' . $this->page['tag'];
 if (!isset($page)) $page = '';
 if (!isset($title)) $title = 1;
 if ($page)			$root	= $page;
@@ -118,7 +118,7 @@ if ($pages = $this->db->load_all(
 					$legend = Ut::perc_replace($legend, $this->link('/' . $root, '', rtrim($root, '/'))).':';
 				}
 
-				echo '<nav class="layout-box"><p class="layout-box"><span>'.$legend."</span></p>\n";
+				echo '<nav class="layout-box"><p class="layout-box"><span>' . $legend."</span></p>\n";
 			}
 		}
 		else
@@ -201,7 +201,7 @@ if ($pages = $this->db->load_all(
 				{
 					// do not link the page to itself
 					echo isset($page['title']) ? $page['title'] : $page['tag'];
-					#echo $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0);
+					#echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, '', 0);
 				}
 				else
 				{
@@ -245,7 +245,7 @@ if ($pages = $this->db->load_all(
 		// no results in given level $depth
 		$title_empty_tree = $this->_t('TreeEmptyLevels');
 		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/' . $root, '', rtrim($root, '/')));
-		echo '<em>'.$title_empty_tree.'</em><br/>';
+		echo '<em>' . $title_empty_tree.'</em><br/>';
 	}
 }
 else
@@ -254,7 +254,7 @@ else
 	{
 		$title_empty_tree = $this->_t('TreeEmpty');
 		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/' . $root, '', rtrim($root, '/')));
-		echo '<em>'.$title_empty_tree.'</em><br/>';
+		echo '<em>' . $title_empty_tree.'</em><br/>';
 	}
 }
 

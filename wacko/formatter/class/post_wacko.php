@@ -66,7 +66,7 @@ class post_wacko
 				$img	= trim(preg_replace('/<!--imgprelink:[\w]+-->|__|\[\*\[|\(\*\(/', '', $img));
 				$img	= $wacko->link($img, '', '', '', 1, 1);
 
-				return '<a href="'.$url.'">'.$img.'</a>';
+				return '<a href="' . $url . '">' . $img.'</a>';
 			}
 			else
 			{
@@ -107,7 +107,7 @@ class post_wacko
 			}
 			else if (isset($this->options['diff']))
 			{
-				return '{{'.$matches[1].'}}';
+				return '{{' . $matches[1] . '}}';
 			}
 			else
 			{

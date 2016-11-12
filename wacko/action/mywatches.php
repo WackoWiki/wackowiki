@@ -35,7 +35,7 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $max, 'p', 'mode=mywatches&amp;unwatched=1#list');
 
-		echo $this->_t('UnwatchedPages').' (<a href="'.
+		echo $this->_t('UnwatchedPages').' (<a href="' . 
 			$this->href('', '', 'mode='.htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)).'#list">'.
 			$this->_t('ViewWatchedPages').'</a>).<br /><br />';
 
@@ -57,7 +57,7 @@ if ($user_id = $this->get_user_id())
 				{
 					$first_char = strtoupper($page['pagetag'][0]);
 
-					if (!preg_match('/'.$this->language['ALPHA'].'/', $first_char))
+					if (!preg_match('/' . $this->language['ALPHA'] . '/', $first_char))
 					{
 						$first_char = '#';
 					}
@@ -73,8 +73,8 @@ if ($user_id = $this->get_user_id())
 						$current_char = $first_char;
 					}
 
-					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list" class="watch-on">'.
-						'<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('SetWatch').'" alt="'.$this->_t('SetWatch').'"  />'.'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
+					echo '<a href="' . $this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch=' . $page['page_id']).'#list" class="watch-on">'.
+						'<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('SetWatch') . '" alt="' . $this->_t('SetWatch') . '"  />'.'</a> ' . $this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
 				}
 			}
 
@@ -82,7 +82,7 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo '<em>'.$this->_t('NoUnwatchedPages').'</em>';
+			echo '<em>' . $this->_t('NoUnwatchedPages').'</em>';
 		}
 	}
 	else
@@ -94,7 +94,7 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $max, 'p', 'mode=mywatches#list');
 
-		echo $this->_t('WatchedPages').' (<a href="'.
+		echo $this->_t('WatchedPages').' (<a href="' . 
 			$this->href('', '', (isset($_GET['mode']) ? 'mode='.htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;unwatched=1' : '')).'#list">'.
 			$this->_t('ViewUnwatchedPages').'</a>).<br /><br />';
 
@@ -113,7 +113,7 @@ if ($user_id = $this->get_user_id())
 				{
 					$first_char = strtoupper($page['tag'][0]);
 
-					if (!preg_match('/'.$this->language['ALPHA'].'/', $first_char))
+					if (!preg_match('/' . $this->language['ALPHA'] . '/', $first_char))
 					{
 						$first_char = '#';
 					}
@@ -129,8 +129,8 @@ if ($user_id = $this->get_user_id())
 						$current_char = $first_char;
 					}
 
-					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list" class="watch-off">'.
-						'<img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('RemoveWatch').'" alt="'.$this->_t('RemoveWatch').'" />'.'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
+					echo '<a href="' . $this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&amp;' : '').'mode=mywatches&amp;unwatch=' . $page['page_id']).'#list" class="watch-off">'.
+						'<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('RemoveWatch') . '" alt="' . $this->_t('RemoveWatch') . '" />'.'</a> ' . $this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
 
 				}
 			}
@@ -139,11 +139,11 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo '<em>'.$this->_t('NoWatchedPages').'</em>';
+			echo '<em>' . $this->_t('NoWatchedPages').'</em>';
 		}
 	}
 }
 else
 {
-	echo '<em>'.$this->_t('NotLoggedInWatches').'</em>';
+	echo '<em>' . $this->_t('NotLoggedInWatches').'</em>';
 }

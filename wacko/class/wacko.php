@@ -1117,7 +1117,7 @@ class Wacko
 					$page['owner_id'] = $owner_id;
 				}
 			}
-			else if (!preg_match('/[^'.$this->language['ALPHANUM_P'].'\_\-]/', $tag))
+			else if (!preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-]/', $tag))
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " ".
@@ -1337,7 +1337,7 @@ class Wacko
 		// get default links
 		if (isset($user['user_name']))
 		{
-			$pages[]	= $this->db->users_page.'/'.$user['user_name'];
+			$pages[]	= $this->db->users_page.'/' . $user['user_name'];
 			$pages[]	= $this->_t('AccountLink');
 		}
 		else
@@ -2000,12 +2000,12 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// see add_comment handler
-					// $this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->_t('LogCommentPosted', SYSTEM_LANG))));
+					// $this->log(5, str_replace('%2', $this->tag.' ' . $this->page['title'], str_replace('%1', 'Comment' . $num, $this->_t('LogCommentPosted', SYSTEM_LANG))));
 				}
 				else
 				{
 					// added new page
-					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag.' '.$title));
+					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag.' ' . $title));
 				}
 
 				// TODO: move to additional function
@@ -2120,12 +2120,12 @@ class Wacko
 					if ($this->page['comment_on_id'] != 0)
 					{
 						// comment modified
-						$this->log(6, Ut::perc_replace($this->_t('LogCommentEdited', SYSTEM_LANG), $tag.' '.$title));
+						$this->log(6, Ut::perc_replace($this->_t('LogCommentEdited', SYSTEM_LANG), $tag.' ' . $title));
 					}
 					else
 					{
 						// old page modified
-						$this->log(6, Ut::perc_replace($this->_t('LogPageEdited', SYSTEM_LANG), $tag.' '.$title));
+						$this->log(6, Ut::perc_replace($this->_t('LogPageEdited', SYSTEM_LANG), $tag.' ' . $title));
 					}
 
 					// Since there's no revision history for comments it's pointless to do the following for them.
@@ -2252,7 +2252,7 @@ class Wacko
 			$user_lang = $this->db->language;
 		}
 
-		$tag				= $this->db->users_page.'/'.$user_name;
+		$tag				= $this->db->users_page.'/' . $user_name;
 		// add your user page template here
 		$user_page_template	= '**((user:' . $user_name . ' ' . $user_name . '))** (' . $this->format('::+::', 'pre_wacko') . ')';
 		$change_summary		= $this->_t('NewUserAccount'); //'auto created';
@@ -2715,7 +2715,7 @@ class Wacko
 
 		if ($root != '')
 		{
-			$new_tag = '/'.$new_tag;
+			$new_tag = '/' . $new_tag;
 		}
 
 		$tag = $root.$new_tag;
@@ -2816,7 +2816,7 @@ class Wacko
 		$tag = trim($tag, '/.');
 		// $tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
 
-		return $tag.($method ? '/'.$method : '');
+		return $tag.($method ? '/' . $method : '');
 	}
 
 	/**
@@ -2835,12 +2835,12 @@ class Wacko
 
 		if ($this->db->urls_underscores == 1)
 		{
-			$tag = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1¶\\2', $tag);
-			$tag = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1¶\\2', $tag);
-			$tag = preg_replace('/('.$this->language['UPPER'].')¶(?='.$this->language['UPPER'].'¶'.$this->language['UPPERNUM'].')/', '\\1', $tag);
-			$tag = preg_replace('/('.$this->language['UPPER'].')¶(?='.$this->language['UPPER'].'¶\/)/', '\\1', $tag);
-			$tag = preg_replace('/('.$this->language['UPPERNUM'].')¶('.$this->language['UPPERNUM'].')($|\b)/', '\\1\\2', $tag);
-			$tag = preg_replace('/\/¶('.$this->language['UPPERNUM'].')/', '/\\1', $tag);
+			$tag = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1¶\\2', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1¶\\2', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶' . $this->language['UPPERNUM'] . ')/', '\\1', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶\/)/', '\\1', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')¶(' . $this->language['UPPERNUM'] . ')($|\b)/', '\\1\\2', $tag);
+			$tag = preg_replace('/\/¶(' . $this->language['UPPERNUM'] . ')/', '/\\1', $tag);
 			$tag = str_replace('¶', '_', $tag);
 		}
 
@@ -2871,7 +2871,7 @@ class Wacko
 			$this->track_link_to($tag, LINK_PAGE);
 		}
 
-		return '<a href="'.$this->href($method, $tag, $params).'"'.($title ? ' title="'.$title.'"' : '').'>'.$text.'</a>';
+		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '').'>' . $text.'</a>';
 	}
 
 	// preparing links to save them to body_r
@@ -2889,7 +2889,7 @@ class Wacko
 	{
 		// if (!$text) $text = $this->add_spaces($tag);
 
-		if (preg_match('/^[\!\.'.$this->language['ALPHANUM_P'].']+$/', $tag))
+		if (preg_match('/^[\!\.' . $this->language['ALPHANUM_P'] . ']+$/', $tag))
 		{
 			if ($track && $this->link_tracking())
 			{
@@ -2902,7 +2902,7 @@ class Wacko
 
 		if ($img_url == 1)
 		{
-			return '<!--imglink:begin-->'.str_replace(' ', '%20', urldecode($tag)).' =='.$text.'<!--imglink:end-->';
+			return '<!--imglink:begin-->'.str_replace(' ', '%20', urldecode($tag)).' ==' . $text.'<!--imglink:end-->';
 		}
 		else
 		{
@@ -2992,12 +2992,12 @@ class Wacko
 				$_height .= 'px';
 			}
 
-			$resize = ' style="width:'.$_width.';height:'.$_height;
+			$resize = ' style="width:' . $_width.';height:' . $_height;
 		}
 
 		if ($_align)
 		{
-			$resize .= ' vertical-align:'.$_align.';"';
+			$resize .= ' vertical-align:' . $_align.';"';
 		}
 		else if ($resize != '')
 		{
@@ -3019,11 +3019,11 @@ class Wacko
 			$this->set_language($link_lang);
 		}
 
-		if (preg_match('/^[\.\-'.$this->language['ALPHANUM_P'].']+\.(gif|jpg|jpe|jpeg|png|svg)$/i', $text))
+		if (preg_match('/^[\.\-' . $this->language['ALPHANUM_P'] . ']+\.(gif|jpg|jpe|jpeg|png|svg)$/i', $text))
 		{
 			// ((image.png)) - loads only images from image/ folder
 			// XXX: odd behavior, user can't check or upload to image/ folder - how useful is this?
-			$img_link = $this->db->base_url.'/image/'.$text;
+			$img_link = $this->db->base_url.'/image/' . $text;
 		}
 		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg)$/i', preg_replace('/<\/?nobr>/', '', $text)))
 		{
@@ -3033,7 +3033,7 @@ class Wacko
 		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
 		{
 			// this is a valid Email
-			$url	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:'.$tag);
+			$url	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:' . $tag);
 			$title	= $this->_t('EmailLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
@@ -3042,7 +3042,7 @@ class Wacko
 		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
 		{
 			// this is a valid XMPP address
-			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:'.$tag);
+			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
 			$title	= $this->_t('JabberLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
@@ -3061,7 +3061,7 @@ class Wacko
 
 			if ($text == $tag)
 			{
-				return '<img src="'.str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)).'" '.($text ? 'alt="'.$text.'" title="'.$text.'"' : '').$resize.' />';
+				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" '.($text ? 'alt="' . $text . '" title="' . $text . '"' : '').$resize.' />';
 			}
 			else
 			{
@@ -3142,7 +3142,7 @@ class Wacko
 			}
 			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - global only file
 			{
-				#echo '####2: file:/some.zip <br />'.$arr[1].'####<br />';
+				#echo '####2: file:/some.zip <br />' . $arr[1] . '####<br />';
 				$file_name = $arr[1];
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
@@ -3186,7 +3186,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_exists($file_name, $page_tag))
 				{
-					$url = $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
+					$url = $this->href('file', trim($page_tag, '/'), 'get=' . $file_name);
 
 					// tracking file link
 					if ($track && isset($file_data['upload_id']))
@@ -3222,7 +3222,7 @@ class Wacko
 				// check 403 here!
 				if ($_global == true || $file_access == true)
 				{
-					$title		= $file_data['file_description'].' ('.$this->binary_multiples($file_data['file_size'], false, true, true).')';
+					$title		= $file_data['file_description'] . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true).')';
 					$alt		= $file_data['file_description'];
 					$img_link	= false;
 					$icon		= $this->_t('OuterIcon');
@@ -3242,7 +3242,7 @@ class Wacko
 						}
 						else
 						{
-							$scale = ' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'"';
+							$scale = ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '"';
 						}
 
 						// direct file access
@@ -3252,37 +3252,37 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name).'" '.
-										($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').$scale.$resize.' />';
+								return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
+										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '').$scale.$resize.' />';
 							}
 							else
 							{
 								// continue
-								#return '<a href="'.$this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name).'" title="'.$title.'">'.$text.'</a>';
+								#return '<a href="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" title="' . $title . '">' . $text.'</a>';
 							}
 						}
 						else
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							#return '<img src="'.$this->db->base_url.Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.$file_data['page_id'].'@'.$_file).'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$file_data['picture_w'].'" height="'.$file_data['picture_h'].'" />';
+							#return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '').' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" '.
-										($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').$scale.$resize.' />';
+								return '<img src="' . $this->href('file', trim($page_tag, '/'), 'get=' . $file_name) . '" '.
+										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '').$scale.$resize.' />';
 							}
 							else
 							{
 								// continue
-								#return '<a href="'.$this->href('file', trim($page_tag, '/'), 'get='.$file_name).'" title="'.$title.'">'.$text.'</a>';
+								#return '<a href="' . $this->href('file', trim($page_tag, '/'), 'get=' . $file_name) . '" title="' . $title . '">' . $text.'</a>';
 							}
 						}
 					}
 				}
 				else //403
 				{
-					$url		= $this->href('file', trim($page_tag, '/'), 'get='.$file_name);
+					$url		= $this->href('file', trim($page_tag, '/'), 'get=' . $file_name);
 					$icon		= $this->_t('OuterIcon');
 					$img_link	= false;
 					$tpl		= 'localfile';
@@ -3300,16 +3300,16 @@ class Wacko
 				}
 				else
 				{
-					$title	= '404: /'.trim($page_tag, '/').'/file'.($this->db->rewrite_mode ? '?' : '&amp;').'get='.$file_name;
+					$title	= '404: /'.trim($page_tag, '/').'/file'.($this->db->rewrite_mode ? '?' : '&amp;').'get=' . $file_name;
 				}
 			} //forgot 'bout 403
 
 			unset($file_data);
 		}
-		else if ($this->db->disable_tikilinks != 1 && preg_match('/^('.$this->language['UPPER'].$this->language['LOWER'].$this->language['ALPHANUM'].'*)\.('.$this->language['ALPHA'].$this->language['ALPHANUM'].'+)$/s', $tag, $matches))
+		else if ($this->db->disable_tikilinks != 1 && preg_match('/^(' . $this->language['UPPER'].$this->language['LOWER'].$this->language['ALPHANUM'] . '*)\.(' . $this->language['ALPHA'].$this->language['ALPHANUM'] . '+)$/s', $tag, $matches))
 		{
 			// it`s a Tiki link! (Tiki.Link -> /Tiki/Link)
-			$tag	= '/'.$matches[1].'/'.$matches[2];
+			$tag	= '/' . $matches[1] . '/' . $matches[2];
 
 			if (!$text)
 			{
@@ -3318,7 +3318,7 @@ class Wacko
 
 			return $this->link($tag, $method, $text, $title, $track, 1);
 		}
-		else if (preg_match('/^(user)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
+		else if (preg_match('/^(user)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/', $tag, $matches))
 		{
 			// user link -> user:UserName
 			$parts	= explode('/', $matches[2]);
@@ -3339,7 +3339,7 @@ class Wacko
 			$icon	= $this->_t('OuterIcon');
 			$tpl	= 'userlink';
 		}
-		else if (preg_match('/^(group)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
+		else if (preg_match('/^(group)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/', $tag, $matches))
 		{
 			// group link -> group:UserGroup
 			$parts	= explode('/', $matches[2]);
@@ -3360,7 +3360,7 @@ class Wacko
 			$icon	= $this->_t('OuterIcon');
 			$tpl	= 'grouplink';
 		}
-		else if (preg_match('/^([[:alnum:]]+)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/', $tag, $matches))
 		{
 			// interwiki
 			$parts	= explode('/', $matches[2]);
@@ -3379,18 +3379,18 @@ class Wacko
 			$icon	= $this->_t('IwIcon');
 			$tpl	= 'interwiki';
 		}
-		else if (preg_match('/^([\!\.\-'.$this->language['ALPHANUM_P'].']+)(\#['.$this->language['ALPHANUM_P'].'\_\-]+)?$/', $tag, $matches))
+		else if (preg_match('/^([\!\.\-' . $this->language['ALPHANUM_P'] . ']+)(\#[' . $this->language['ALPHANUM_P'] . '\_\-]+)?$/', $tag, $matches))
 		{
 			// it's a Wiki link!
 			$match			= '';
 			$tag			= $otag		= $matches[1];
 			$untag			= $unwtag	= $this->unwrap_link($tag);
 
-			$regex_handlers	= '/^(.*?)\/('.$this->db->standard_handlers.')\/(.*)$/i';
+			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers.')\/(.*)$/i';
 			$ptag			= $this->translit($unwtag);
 			$handler		= null;
 
-			if (preg_match( $regex_handlers, '/'.$ptag.'/', $match ))
+			if (preg_match( $regex_handlers, '/' . $ptag.'/', $match ))
 			{
 				$handler	= $match[2];
 
@@ -3400,7 +3400,7 @@ class Wacko
 				}
 
 				$ptag		= $match[1];
-				$unwtag		= '/'.$unwtag.'/';
+				$unwtag		= '/' . $unwtag.'/';
 				$co			= substr_count($_ptag, '/') - substr_count($ptag, '/');
 
 				for ($i = 0; $i < $co; $i++)
@@ -3415,7 +3415,7 @@ class Wacko
 						$data = ''; // XXX: ???
 					}
 
-					$opar	= '/'.$untag.'/';
+					$opar	= '/' . $untag.'/';
 
 					for ($i = 0; $i < substr_count($data, '/') + 2; $i++)
 					{
@@ -3497,7 +3497,7 @@ class Wacko
 
 			if ($img_link)
 			{
-				$text		= '<img src="'.$img_link.'" title="'.$text.'"'.$resize.' />';
+				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize.' />';
 			}
 
 			if ($text)
@@ -3529,7 +3529,7 @@ class Wacko
 			// set a anchor once for link at the first appearance
 			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
 			{
-				$aname = 'id="a-'.$supertag.'"';
+				$aname = 'id="a-' . $supertag . '"';
 				$this->first_inclusion[$supertag] = 1;
 			}
 
@@ -3583,7 +3583,7 @@ class Wacko
 			else
 			{
 				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'wordprocessor') ? 'p' : '') . 'w' . $tpl;
-				$page_link	= $this->href('edit', $tag, $lang ? 'lang='.$lang : '', 1);
+				$page_link	= $this->href('edit', $tag, $lang ? 'lang=' . $lang : '', 1);
 				$accicon	= $this->_t('WantedIcon');
 				$title		= $this->_t('CreatePage');
 
@@ -3599,7 +3599,7 @@ class Wacko
 			#$accicon		= str_replace('{theme}', $this->db->theme_url, $accicon);
 
 			// see lang/wacko.all.php
-			$res			= $this->_t('Tpl.'.$tpl);
+			$res			= $this->_t('Tpl.' . $tpl);
 			$text			= trim($text);
 
 			if ($res)
@@ -3653,12 +3653,12 @@ class Wacko
 		{
 			if ($img_link)
 			{
-				$text		= '<img src="'.$img_link.'" title="'.$text.'"'.$resize.' />';
+				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize.' />';
 			}
 
 			// XXX: obsolete -> see wacko.css
 			#$icon			= str_replace('{theme}', $this->db->theme_url, $icon);
-			$res			= $this->_t('Tpl.'.$tpl);
+			$res			= $this->_t('Tpl.' . $tpl);
 
 			if ($res)
 			{
@@ -3690,7 +3690,7 @@ class Wacko
 					}
 
 					$rel_separated	= implode(' ', $_rel);
-					$rel			= 'rel="'.$rel_separated.'"';
+					$rel			= 'rel="' . $rel_separated . '"';
 				}
 				else
 				{
@@ -3776,11 +3776,11 @@ class Wacko
 
 		if ($linking)
 		{
-			return '<a href="'.$this->href('', $this->db->groups_page, 'profile='.$group_name).'" class="group-link">'.$icon.$text.'</a>';
+			return '<a href="' . $this->href('', $this->db->groups_page, 'profile=' . $group_name) . '" class="group-link">' . $icon.$text.'</a>';
 		}
 		else
 		{
-			return '<span class="group-link">'.$icon.$group_name.'</span>';
+			return '<span class="group-link">' . $icon.$group_name.'</span>';
 		}
 	}
 
@@ -3816,17 +3816,17 @@ class Wacko
 
 	function add_nbsps($text)
 	{
-		$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/('.$this->language['ALPHANUM'].')\//', '\\1&nbsp;/', $text);
-		$text = preg_replace('/('.$this->language['UPPER'].')&nbsp;(?='.$this->language['UPPER'].'&nbsp;'.$this->language['UPPERNUM'].')/', '\\1', $text);
-		$text = preg_replace('/('.$this->language['UPPER'].')&nbsp;(?='.$this->language['UPPER'].'&nbsp;\/)/', '\\1', $text);
-		$text = preg_replace('/\/('.$this->language['ALPHANUM'].')/', '/&nbsp;\\1', $text);
-		$text = preg_replace('/('.$this->language['UPPERNUM'].')&nbsp;('.$this->language['UPPERNUM'].')($|\b)/', '\\1\\2', $text);
-		$text = preg_replace('/([0-9])('.$this->language['ALPHA'].')/', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/('.$this->language['ALPHA'].')([0-9])/', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')\//', '\\1&nbsp;/', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')&nbsp;(?=' . $this->language['UPPER'] . '&nbsp;' . $this->language['UPPERNUM'] . ')/', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')&nbsp;(?=' . $this->language['UPPER'] . '&nbsp;\/)/', '\\1', $text);
+		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/', '/&nbsp;\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')&nbsp;(' . $this->language['UPPERNUM'] . ')($|\b)/', '\\1\\2', $text);
+		$text = preg_replace('/([0-9])(' . $this->language['ALPHA'] . ')/', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/(' . $this->language['ALPHA'] . ')([0-9])/', '\\1&nbsp;\\2', $text);
 		// $text = preg_replace('/([0-9])&nbsp;(?=[0-9])/', '\\1', $text);
-		$text = preg_replace('/([0-9])&nbsp;(?!'.$this->language['ALPHA'].')/', '\\1', $text);
+		$text = preg_replace('/([0-9])&nbsp;(?!' . $this->language['ALPHA'] . ')/', '\\1', $text);
 
 		return $text;
 	}
@@ -3839,13 +3839,13 @@ class Wacko
 	function validate_reserved_words( $data )
 	{
 		$_data = $this->translit( $data );
-		$_data = '/'.$_data.'/';
+		$_data = '/' . $_data.'/';
 
 		// Find the string of text
-		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/'.$this->db->standard_handlers.'\/(.*)$/i';
+		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/' . $this->db->standard_handlers.'\/(.*)$/i';
 
 		// Find the word
-		$this->REGEX_WACKO_HANDLERS = '/\b('.$this->db->standard_handlers.')\b/i';
+		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers.')\b/i';
 
 		if (preg_match( $this->REGEX_WACKO_HANDLERS, $_data, $match ))
 		{
@@ -3863,7 +3863,7 @@ class Wacko
 		}
 
 		// TODO: disallow random pages for the first level in the users cluster except the own [UserName].
-		/* if (preg_match( '/\b('.$this->db->users_page.'\/*\/)\b/i', $_data, $match ))
+		/* if (preg_match( '/\b(' . $this->db->users_page.'\/*\/)\b/i', $_data, $match ))
 		{
 			Ut::debug_print_r($match);
 			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
@@ -3929,7 +3929,7 @@ class Wacko
 	*/
 	function is_wiki_name($text)
 	{
-		return preg_match('/^'.$this->language['UPPER'].$this->language['LOWER'].'+'.$this->language['UPPERNUM'].$this->language['ALPHANUM'].'*$/', $text);
+		return preg_match('/^' . $this->language['UPPER'].$this->language['LOWER'] . '+' . $this->language['UPPERNUM'].$this->language['ALPHANUM'] . '*$/', $text);
 	}
 
 	// TRACK LINKS
@@ -4159,7 +4159,7 @@ class Wacko
 			$this->set_message($this->_t('FormInvalid'), 'error');
 
 			// TODO diag or not?
-			// $this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' [[/'.$this->page['tag'].']] '.$form_name); # 'Invalid form token'
+			// $this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' [[/' . $this->page['tag'] . ']] ' . $form_name); # 'Invalid form token'
 
 			return false;
 		}
@@ -4479,12 +4479,12 @@ class Wacko
 			if ($user_name[$pos] != $table['cyr'][$sub])
 			{
 				// constructing cyrillic regexp addition
-				$user_name[$pos] = '['.$user_name[$pos].$table['cyr'][$sub].']';
+				$user_name[$pos] = '[' . $user_name[$pos].$table['cyr'][$sub] . ']';
 			}
 			else if ($user_name[$pos] != $table['lat'][$sub])
 			{
 				// constructing latin regexp addition
-				$user_name[$pos] = '['.$user_name[$pos].$table['lat'][$sub].']';
+				$user_name[$pos] = '[' . $user_name[$pos].$table['lat'][$sub] . ']';
 			}
 		}
 
@@ -5119,9 +5119,9 @@ class Wacko
 	*/
 	function get_cached_acl($page_id, $privilege, $use_defaults)
 	{
-		if (isset( $this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults] ))
+		if (isset( $this->acl_cache[$page_id.'#' . $privilege.'#' . $use_defaults] ))
 		{
-			return $this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults];
+			return $this->acl_cache[$page_id.'#' . $privilege.'#' . $use_defaults];
 		}
 		else
 		{
@@ -5140,7 +5140,7 @@ class Wacko
 	function cache_acl($page_id, $privilege, $use_defaults, $acl)
 	{
 		// $acl array must reflect acls table row structure
-		$this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults] = $acl;
+		$this->acl_cache[$page_id.'#' . $privilege.'#' . $use_defaults] = $acl;
 	}
 
 	// TODO: add bulk option -> load entire page related priveleges at once in obj-cache
@@ -5582,7 +5582,7 @@ class Wacko
 				$user_menu_formatted[] = [
 					$menu_item['page_id'],
 					(($title !== '')? $title : $menu_item['tag']),
-					'(('.$menu_item['tag'].
+					'((' . $menu_item['tag'].
 						(($title !== '')? ' ' . $title : '').
 						($menu_item['menu_lang']? ' @@' . $menu_item['menu_lang'] : '').
 					'))',
@@ -5743,14 +5743,14 @@ class Wacko
 			if (isset($this->sess->user_trail))
 			{
 				$count = count($this->sess->user_trail);
-				#echo '### @: ['.$count.']';
+				#echo '### @: [' . $count . ']';
 
 				#Ut::debug_print_r($this->sess->user_trail);
 
 				if (isset($this->sess->user_trail[$count - 1][0])
 					&&    $this->sess->user_trail[$count - 1][0] == $page_id)
 				{
-					#echo '### 2: ['.$count.']';
+					#echo '### 2: [' . $count . ']';
 					// nothing
 				}
 				else
@@ -5813,7 +5813,7 @@ class Wacko
 					}
 					else
 					{
-						$result .= $link[2].' ' . $separator . ' ';
+						$result .= $link[2] . ' ' . $separator . ' ';
 					}
 				}
 
@@ -6047,13 +6047,13 @@ class Wacko
 			}
 
 			// normalizing tag name
-			if (!preg_match('/^['.$this->language['ALPHANUM_P'].'\!]+$/', $tag))
+			if (!preg_match('/^[' . $this->language['ALPHANUM_P'] . '\!]+$/', $tag))
 			{
 				$tag = $this->try_utf_decode($tag);
 			}
 
 			$tag = str_replace("'", '_', str_replace('\\', '', str_replace('_', '', $tag)));
-			$tag = preg_replace('/[^'.$this->language['ALPHANUM_P'].'\_\-\.]/', '', $tag);
+			$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/', '', $tag);
 
 			$this->tag		= $tag;
 			$this->supertag	= $this->translit($tag);
@@ -6749,7 +6749,7 @@ class Wacko
 				{
 					// remove from FS
 					$file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.
-							$page['page_id'].'@'.$file['file_name']);
+							$page['page_id'] . '@' . $file['file_name']);
 
 					@unlink($file_name);
 				}*/
@@ -6923,7 +6923,7 @@ class Wacko
 				$pwd_cplx_text .= $this->_t('PwdCplxDesc43');
 			}
 
-			$pwd_cplx_text .= '. '.$this->_t('PwdCplxDesc5');
+			$pwd_cplx_text .= '. ' . $this->_t('PwdCplxDesc5');
 		}
 
 		return '<br /><small>'.

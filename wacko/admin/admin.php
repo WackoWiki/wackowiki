@@ -189,7 +189,7 @@ foreach (Ut::file_glob('admin/{common,module}/*.php') as $filename)
 ##     Build menu                                     ##
 ########################################################
 
-$menu = '<ul><li class="text submenu">'.$engine->_t('CategoryArray')[$module['lock']['cat']].
+$menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['lock']['cat']].
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
 				? "\n<ul>\n".'<li class="active">'
 				: "\n<ul>\n<li>").
@@ -285,7 +285,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		<br style="clear: right" />
 		<div id="sections">
 			<a href="<?php echo rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>'; ?>
-			<a href="<?php echo rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' .$engine->_t('ApLogOutTip') .'">' . $engine->_t('ApLogOut') .'</a>'; ?>
+			<a href="<?php echo rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' .$engine->_t('ApLogOutTip')  . '">' . $engine->_t('ApLogOut') .'</a>'; ?>
 		</div>
 	</div>
 </header>

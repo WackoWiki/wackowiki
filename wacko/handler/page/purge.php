@@ -47,7 +47,7 @@ if (@$_POST['_action'] === 'purge_data')
 	// purge related page cache
 	if ($this->http->invalidate_page($this->supertag))
 	{
-		$message .= '<li>'.$this->_t('PageCachePurged')."</li>\n";
+		$message .= '<li>' . $this->_t('PageCachePurged')."</li>\n";
 	}
 
 	$message .= '</em></ol><br />';
@@ -57,7 +57,7 @@ if (@$_POST['_action'] === 'purge_data')
 }
 else
 {
-	echo '<div class="warning">'.$this->_t('ReallyPurge').'</div><br />';
+	echo '<div class="warning">' . $this->_t('ReallyPurge').'</div><br />';
 	echo $this->form_open('purge_data', ['page_method' => 'purge']);
 ?>
 

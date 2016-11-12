@@ -14,7 +14,7 @@ function my_location()
 			|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443'))
 	)
 	{
-		$config['base_url'] =	str_replace('http://', 'https://'.($config['tls_proxy'] ? $config['tls_proxy'].'/' : ''), $config['base_url']);
+		$config['base_url'] =	str_replace('http://', 'https://'.($config['tls_proxy'] ? $config['tls_proxy'] . '/' : ''), $config['base_url']);
 	}
 
 	list($url, ) = explode('?', $config['base_url']);
@@ -38,14 +38,14 @@ function write_config_hidden_nodes($skip_values)
 				$value = implode(',', $value);
 			}
 
-			echo '   <input type="hidden" name="config['.$key.']" value="'.$value.'" />' . "\n";
+			echo '   <input type="hidden" name="config[' . $key.']" value="' . $value . '" />' . "\n";
 		}
 	}
 }
 
 function output_error($error_text = '')
 {
-	echo '<ul class="install_error"><li>'.$error_text."</li></ul>";
+	echo '<ul class="install_error"><li>' . $error_text."</li></ul>";
 }
 
 // Draws a tick or cross next to a result
@@ -53,7 +53,7 @@ function output_image($ok)
 {
 	global $lang;
 
-	return '<img src="'.my_location().'setup/image/spacer.png" width="20" height="20" alt="'.($ok ? $lang['OK'] : $lang['Problem']).'" title="'.($ok ? $lang['OK'] : $lang['Problem']).'" class="tickcross '.($ok ? 'tick' : 'cross').'" />';
+	return '<img src="' . my_location().'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross '.($ok ? 'tick' : 'cross') . '" />';
 }
 
 // TODO: refactor -> same function as in wacko class

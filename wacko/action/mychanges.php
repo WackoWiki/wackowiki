@@ -20,7 +20,7 @@ if (($user_id = $this->get_user_id()))
 	if (@$_GET['byname'])
 	{
 		echo $this->_t('MyChangesTitle2').
-		' [<a href="'.$this->href('', '', $by('date')).'">'.
+		' [<a href="' . $this->href('', '', $by('date')) . '">'.
 		$this->_t('OrderChange')."</a>].</strong><br /><br />\n";
 
 		$count	= $this->db->load_single(
@@ -48,7 +48,7 @@ if (($user_id = $this->get_user_id()))
 			{
 				$first_char = strtoupper($page['tag'][0]);
 
-				if (!preg_match('/'.$this->language['ALPHA'].'/', $first_char))
+				if (!preg_match('/' . $this->language['ALPHA'] . '/', $first_char))
 				{
 					$first_char = '#';
 				}
@@ -65,8 +65,8 @@ if (($user_id = $this->get_user_id()))
 				}
 
 				// print entry
-				echo '<li>'.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->_t('RevisionTip')).
-					' &mdash; '.$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
+				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->_t('RevisionTip')).
+					' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 			}
 
 			echo "</ul>\n</li>\n</ul>\n";
@@ -81,7 +81,7 @@ if (($user_id = $this->get_user_id()))
 	else
 	{
 		echo '<ul class="menu">'."\n".
-				'<li class="active">'.$this->_t('MyChangesTitle1')."</li>\n".
+				'<li class="active">' . $this->_t('MyChangesTitle1')."</li>\n".
 				'<li>'." [<a href=\"".$this->href('', '', $by('name'))."\">".$this->_t('OrderABC')."</a>]"."</li>\n".
 				"</ul>\n";
 

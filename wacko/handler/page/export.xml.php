@@ -51,7 +51,7 @@ if ($this->has_access('read'))
 
 			for ($i = 0; $i < count($_tag); $i++)
 			{
-				if ($i > $num_slashes) $tag .= $_tag[$i].'/';
+				if ($i > $num_slashes) $tag .= $_tag[$i] . '/';
 			}
 		}
 

@@ -73,7 +73,7 @@ if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				echo "<li>".$this->link('/'.$page['tag'], '', '/'.$page['tag'])."</li>\n";
+				echo "<li>".$this->link('/' . $page['tag'], '', '/' . $page['tag'])."</li>\n";
 			}
 		}
 
@@ -123,7 +123,7 @@ else
 					// If no pages are referring to the WantedPage it means the referrers are all locked so don't show the link at all
 					if ($count > 0)
 					{
-						echo '<li>'.$this->link('/'.$page['wanted_tag']).' (<a href="'.$this->href('', '', 'linking_to='.$page['wanted_tag']).'">'.$count."</a>)</li>\n";
+						echo '<li>' . $this->link('/' . $page['wanted_tag']).' (<a href="' . $this->href('', '', 'linking_to=' . $page['wanted_tag']) . '">' . $count."</a>)</li>\n";
 					}
 				}
 			}

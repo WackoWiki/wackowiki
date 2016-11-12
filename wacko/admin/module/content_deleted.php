@@ -90,8 +90,8 @@ function admin_content_deleted(&$engine, &$module)
 			echo '<tr>'.
 					'<td class="lined" style="text-align:left">'.
 						'<small>'.date($engine->db->time_format_seconds, strtotime($time)).' - '.
-						' [ <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->_t('RemoveButton').'</a> ]'.
-						' [ <a href="'.rawurldecode($engine->href()).'&amp;restore='.$page['page_id'].'">'.$engine->_t('RestoreButton').'</a> ]</small> '.
+						' [ <a href="' . rawurldecode($engine->href()).'&amp;remove=' . $page['page_id'] . '">' . $engine->_t('RemoveButton').'</a> ]'.
+						' [ <a href="' . rawurldecode($engine->href()).'&amp;restore=' . $page['page_id'] . '">' . $engine->_t('RestoreButton').'</a> ]</small> '.
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0, $page['title']).
 					'</td>'.
 				"</tr>\n";

@@ -1,5 +1,5 @@
 <?php
-  header('Content-Type: text/html; charset='.$this->get_charset());
+  header('Content-Type: text/html; charset=' . $this->get_charset());
 ?>
 <!DOCTYPE html>
 

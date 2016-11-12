@@ -37,7 +37,7 @@ if ($user = $this->get_user())
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>'.$user['user_name'].": ".$this->_t('MyGroups')."</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>' . $user['user_name'].": ".$this->_t('MyGroups')."</span></p>\n";
 	}
 
 	$groups_count = my_groups($this, $user['user_name'], $alias);

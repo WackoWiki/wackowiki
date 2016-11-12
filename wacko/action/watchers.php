@@ -33,18 +33,18 @@ if ($this->is_owner($page_id))
 
 	if ($watchers)
 	{
-		$title = Ut::perc_replace($this->_t('Watchers'), $this->link('/'.$tag, '', $tag));
+		$title = Ut::perc_replace($this->_t('Watchers'), $this->link('/' . $tag, '', $tag));
 
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p class="layout-box"><span>'.$title.":</span></p>\n";
+			echo '<div class="layout-box"><p class="layout-box"><span>' . $title.":</span></p>\n";
 		}
 
 		echo '<ol class="">'."\n";
 
 		foreach ($watchers as $watcher)
 		{
-			echo '<li>'.$this->user_link($watcher['user_name'], '', true, false)."</li>\n";
+			echo '<li>' . $this->user_link($watcher['user_name'], '', true, false)."</li>\n";
 		}
 
 		echo "</ol>\n";
@@ -58,7 +58,7 @@ if ($this->is_owner($page_id))
 	{
 		if (!$nomark)
 		{
-			echo Ut::perc_replace($this->_t('NoWatchers'), $this->link('/'.$tag, '', $tag));
+			echo Ut::perc_replace($this->_t('NoWatchers'), $this->link('/' . $tag, '', $tag));
 		}
 	}
 }
@@ -66,7 +66,7 @@ else
 {
 	if (!$nomark)
 	{
-		echo Ut::perc_replace($this->_t('NotOwnerAndViewWatchers'), $this->link('/'.$tag, '', $tag));
+		echo Ut::perc_replace($this->_t('NotOwnerAndViewWatchers'), $this->link('/' . $tag, '', $tag));
 	}
 }
 

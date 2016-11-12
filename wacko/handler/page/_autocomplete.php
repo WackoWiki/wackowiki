@@ -41,7 +41,7 @@ function _unescape_callback($p)
 
 		if (!strlen($c) && $SCRIPT_DECODE_MODE == 'entities')
 		{
-			$c = '&#'.$dec.';';
+			$c = '&#' . $dec.';';
 		}
 	}
 	else
@@ -145,7 +145,7 @@ if ($pages2)
 // counting context
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 $local_supertag_sliced	= explode('/', $this->page['supertag']);
-$local_supertag			= $this->page['supertag'].'/';
+$local_supertag			= $this->page['supertag'] . '/';
 $local_context_sliced	= array_slice( $local_supertag_sliced, 0, count($local_supertag_sliced)-1 );
 $local_context			= implode('/', $local_context_sliced ).'/';
 
@@ -176,7 +176,7 @@ foreach ($pages as $page)
 				}
 				else
 				{
-					$out[] = '/'.$page['tag'];
+					$out[] = '/' . $page['tag'];
 				}
 			}
 		}
@@ -189,7 +189,7 @@ foreach ($pages as $page)
 		}
 		else
 		{
-			$out[] = '/'.$page['tag'];
+			$out[] = '/' . $page['tag'];
 		}
 	}
 }

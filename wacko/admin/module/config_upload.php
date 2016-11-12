@@ -33,7 +33,7 @@ function admin_config_upload(&$engine, &$module)
 <?php
 
 	$binary_factor = ['0' => 1, '1' => 1024, '2' => (1024 * 1024)];
-	#echo $_POST['upload_quota_factor'].' - '.$binary_factor[$_POST['upload_quota_factor']];
+	#echo $_POST['upload_quota_factor'] . ' - ' . $binary_factor[$_POST['upload_quota_factor']];
 	#$engine->debug_print_r($_POST);
 
 	// update settings

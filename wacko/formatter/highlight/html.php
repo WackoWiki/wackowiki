@@ -162,7 +162,7 @@ $xhtml_tags = [
 			function ($matches) use ($options)
 			{
 				return
-				'<span style="color: '.$options['color']['comment'].';">&lt;!--'.
+				'<span style="color: ' . $options['color']['comment'] . ';">&lt;!--'.
 				str_replace('&lt;',	'&lt;<!-- -->',
 				str_replace('=',	'=<!-- -->',
 				$matches[1])).

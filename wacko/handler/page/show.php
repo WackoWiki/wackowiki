@@ -49,11 +49,11 @@ if ($this->has_access('read'))
 				$message = $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
 				$message .= '<br /><br />';
 				$message .= $this->form_open('restore_page', ['page_method' => 'restore']);
-				#$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
-				$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
-				#$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
-				$message .= '<input type="submit" value="'.$this->_t('RestoreButton').'" />';
-				#$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('EditCancelButton').'"/></a>';
+				#$message .= '<input type="hidden" name="previous" value="' . $latest['modified'] . '" />';
+				$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '" />';
+				#$message .= '<input type="hidden" name="body" value="' . htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />';
+				$message .= '<input type="submit" value="' . $this->_t('RestoreButton') . '" />';
+				#$message .= '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"/></a>';
 				$message .= $this->form_close();
 			}
 			else
@@ -96,11 +96,11 @@ if ($this->has_access('read'))
 				{
 					$message .= '<br /><br />';
 					$message .= $this->form_open('edit_revision', ['page_method' => 'edit']);
-					$message .= '<input type="hidden" name="previous" value="'.$latest['modified'].'" />';
-					$message .= '<input type="hidden" name="id" value="'.$this->page['page_id'].'" />';
-					$message .= '<input type="hidden" name="body" value="'.htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" />';
-					$message .= '<input type="submit" value="'.$this->_t('ReEditOldRevision').'" />';
-					$message .= '<a href="'.$this->href().'" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="'.$this->_t('EditCancelButton').'"/></a>';
+					$message .= '<input type="hidden" name="previous" value="' . $latest['modified'] . '" />';
+					$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '" />';
+					$message .= '<input type="hidden" name="body" value="' . htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />';
+					$message .= '<input type="submit" value="' . $this->_t('ReEditOldRevision') . '" />';
+					$message .= '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"/></a>';
 					$message .= $this->form_close();
 				}
 			}
@@ -208,9 +208,9 @@ if ($this->forum
 	|| ($this->has_access('read') && $this->page && $this->db->footer_tags == 1
 	|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
-	if ($categories = $this->action('categories', ['page' => '/'.$this->page['tag'], 'list' => 0, 'nomark' => 1], 1))
+	if ($categories = $this->action('categories', ['page' => '/' . $this->page['tag'], 'list' => 0, 'nomark' => 1], 1))
 	{
-		echo '<nav class="category">'.$categories."</nav>\n";
+		echo '<nav class="category">' . $categories."</nav>\n";
 	}
 }
 

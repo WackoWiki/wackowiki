@@ -49,7 +49,7 @@ class GPG
 		$this->tempdir	= rtrim($this->engine->db->gpg_temp, '/');
 		$this->wrapper	= trim($this->engine->db->gpg_wrapper, '/');
 		$this->sid		= $engine->sess->id();
-		$this->sessdir	= $this->tempdir.'/'.$this->sid;
+		$this->sessdir	= $this->tempdir.'/' . $this->sid;
 		$this->stfile	= $this->sessdir.'/'.GPG_STATUS_NAME;
 		$this->srfile	= $this->sessdir.'/'.GPG_STDERR_NAME;
 
@@ -108,7 +108,7 @@ class GPG
 					'hd' => $this->homedir,		// homedir
 					'sf' => $this->stfile,		// status-file
 					'sr' => $this->srfile,		// stderr
-					'cl' => $this->override.' '.$request,	// command line params
+					'cl' => $this->override.' ' . $request,	// command line params
 					'st' => $input)				// stdin data
 				] // end of content array
 			] // end of http array
@@ -330,7 +330,7 @@ class GPG
 	{
 		$key_id = $this->prepare_input($key_id, 42);
 
-		if (!$key_id) $key_id = '0x'.$this->finger;
+		if (!$key_id) $key_id = '0x' . $this->finger;
 		if (!$key_id) $key_id = $this->key_id;
 		if (!$key_id) return false;
 
@@ -393,7 +393,7 @@ class GPG
 			{
 				if ($row[0] == 'pub')
 				{
-					$this->key_id = '0x'.$row[4];
+					$this->key_id = '0x' . $row[4];
 				}
 				else if ($row[0] == 'fpr')
 				{
@@ -809,7 +809,7 @@ class GPG
 		// correcting search string
 		if (substr($string = trim($string), 0, 2) == '0x')
 		{
-			$string = '='.$string;
+			$string = '=' . $string;
 		}
 
 		// requesting key search
@@ -866,7 +866,7 @@ class GPG
 		{
 			while (false !== ($filename = readdir($dh)))
 			{
-				if (is_dir($file = $this->sessdir.'/'.$filename) !== true)
+				if (is_dir($file = $this->sessdir.'/' . $filename) !== true)
 				{
 					unlink($file);
 				}

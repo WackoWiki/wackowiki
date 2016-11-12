@@ -26,7 +26,7 @@ if (!isset($max))		$max = null;
 
 $tag		= $page; // use tag from here on
 $title		= (int) $title;
-$_alnum		= '/'.$this->language['ALPHANUM'].'/S';
+$_alnum		= '/' . $this->language['ALPHANUM'] . '/S';
 
 $get_letter = function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
 {

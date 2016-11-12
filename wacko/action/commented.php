@@ -82,12 +82,12 @@ if ($this->user_allowed_comments())
 		{
 			if ($user)
 			{
-				echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->_t('MarkRead').'</a></small>';
+				echo '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead').'</a></small>';
 			}
 
 			if ($root == '' && !(int) $noxml)
 			{
-				echo '<span class="desc_rss_feed"><a href="'.$this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="'.$this->db->theme_url.'icon/spacer.png" title="'.$this->_t('RecentCommentsXMLTip').'" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
+				echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url.'xml/comments_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)).'.xml"><img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"/></a></span><br /><br />'."\n";
 			}
 
 			$this->print_pagination($pagination);
@@ -131,12 +131,12 @@ if ($this->user_allowed_comments())
 					$viewed = ( $user['last_mark'] && $page['comment_user_name'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
 
 					// print entry
-					echo '<li '.$viewed.'><span class="dt">'.$time.'</span> &mdash; '.
+					echo '<li ' . $viewed.'><span class="dt">' . $time.'</span> &mdash; '.
 					($title
-						? $this->link('/'.$page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
-						: $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
+						? $this->link('/' . $page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
+						: $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
 					).
-					' . . . . . . . . . . . . . . . . <small>'.$this->_t('LatestCommentBy').' '.
+					' . . . . . . . . . . . . . . . . <small>' . $this->_t('LatestCommentBy').' '.
 					$this->user_link($page['comment_owner_name'], '', true, false).
 					"</small></li>\n";
 				}

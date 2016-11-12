@@ -27,23 +27,23 @@ class preformatter
 
 		if (preg_match('/^\%\%(.*)\%\%$/s', $thing, $matches))
 		{
-			return '%%'.$matches[1].'%%';
+			return '%%' . $matches[1] . '%%';
 		}
 		else if (preg_match('/^\"\"(.*)\"\"$/s', $thing, $matches))
 		{
-			return '""'.$matches[1].'""';
+			return '""' . $matches[1] . '""';
 		}
 		else if ($thing == ':::::')
 		{
-			return '((user:'.$wacko->get_user_name().' '.$wacko->get_user_name().')):';
+			return '((user:' . $wacko->get_user_name().' ' . $wacko->get_user_name().')):';
 		}
 		else if ($thing == '::::')
 		{
-			return '((user:'.$wacko->get_user_name().' '.$wacko->get_user_name().'))';
+			return '((user:' . $wacko->get_user_name().' ' . $wacko->get_user_name().'))';
 		}
 		else if ($thing == '::@::')
 		{
-			return sprintf($wacko->db->name_date_macro, '((user:'.$wacko->get_user_name().' '.$wacko->get_user_name().'))', date($wacko->db->date_macro_format));
+			return sprintf($wacko->db->name_date_macro, '((user:' . $wacko->get_user_name().' ' . $wacko->get_user_name().'))', date($wacko->db->date_macro_format));
 		}
 		else if ($thing == '::+::')
 		{
@@ -56,7 +56,7 @@ class preformatter
 
 			if (preg_match('/\&\#\d+;/', $cont, $matches))
 			{
-				$thing = $b1.@strtr($cont, $this->object->unicode_entities).' @@'.$this->object->user_lang.$b2;
+				$thing = $b1.@strtr($cont, $this->object->unicode_entities).' @@' . $this->object->user_lang.$b2;
 			}
 
 			return $thing;
