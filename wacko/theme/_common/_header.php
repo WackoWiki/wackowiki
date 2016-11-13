@@ -9,8 +9,8 @@ if (!defined('IN_WACKO'))
 header('Content-Type: text/html; charset=' . $this->get_charset());
 header_remove('X-Powered-By');
 
-$tpl->h_lang = $this->page_lang;
-$tpl->h_charset = $this->get_charset();
+$tpl->h_lang	= $this->page_lang;
+$tpl->h_charset	= $this->get_charset();
 
 !Ut::is_empty($tpl->h_title = @$this->page['title']) or $tpl->h_tag = $this->add_spaces($this->tag);
 $this->method == 'show' or $tpl->h_method = $this->method;
@@ -34,11 +34,16 @@ if ($this->db->policy_page)
 	$tpl->h_policy_href = $this->href('', $this->db->policy_page);
 }
 
+if ($this->db->license)
+{
+	# $tpl->h_license_href = $this->href('', $this->db->policy_page);
+}
+
 if ($this->db->enable_feeds)
 {
 	$tpl->h_rss_url = $url =
 		[
-			$this->db->base_url . 'xml/',
+			$this->db->base_url . XML_DIR . '/',
 			'_' . preg_replace('/[^0-9a-z]/', '', strtolower($this->db->site_name)) . '.xml'
 		];
 

@@ -15,6 +15,7 @@ define('ACTION_DIR',					'action');
 define('LANG_DIR',						'lang');
 define('FORMATTER_DIR',					'formatter');
 define('HANDLER_DIR',					'handler');
+define('IMAGE_DIR',						'image');
 define('THEME_DIR',						'theme');
 define('UPLOAD_GLOBAL_DIR',				'files/global');
 define('UPLOAD_PER_PAGE_DIR',			'files/perpage');

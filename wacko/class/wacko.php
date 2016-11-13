@@ -3023,7 +3023,7 @@ class Wacko
 		{
 			// ((image.png)) - loads only images from image/ folder
 			// XXX: odd behavior, user can't check or upload to image/ folder - how useful is this?
-			$img_link = $this->db->base_url . '/image/' . $text;
+			$img_link = $this->db->base_url . Ut::join_path(IMAGE_DIR, $text);
 		}
 		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg)$/i', preg_replace('/<\/?nobr>/', '', $text)))
 		{
@@ -7099,7 +7099,7 @@ class Wacko
 			$out .= $inline ? '' : "<br />\n";
 			$out .= '<img src="' . $this->db->base_url . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '" />' . "\n";
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
-			$out .= '<img src="' . $this->db->base_url . 'image/spacer.png" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"/></a>' . "<br />\n";
+			$out .= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"/></a>' . "<br />\n";
 			// $out .= $inline ? '' : "<br />\n";
 			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6" style="width: 273px;" />';
 			$out .= $inline ? '' : "<br />\n";

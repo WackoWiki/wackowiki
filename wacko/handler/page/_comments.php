@@ -293,7 +293,7 @@ if ($this->has_access('read'))
 			}
 			?>
 
-			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->db->base_url;?>image/wikiedit/');
+			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';?>');
 			</script>
 
 			<br />

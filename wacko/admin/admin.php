@@ -193,7 +193,7 @@ $menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
 				? "\n<ul>\n" . '<li class="active">'
 				: "\n<ul>\n<li>").
-			'<a href="admin.php" title="' . $module['lock']['title'] . '">' . $module['lock']['name'] . '</a>' . 
+			'<a href="admin.php" title="' . $module['lock']['title'] . '">' . $module['lock']['name'] . '</a>' .
 			"</li>\n";
 
 $category = $module['lock']['cat'];
@@ -266,7 +266,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 	<div id="pane">
 		<div class="left"></div>
 		<div class="middle">
-			<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php"><img src="<?php echo rtrim($engine->db->base_url) . 'image/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
+			<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php"><img src="<?php echo rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, 'wacko_logo.png'); ?>" alt="WackoWiki" width="108" height="50"></a>
 		</div>
 		<div id="tools">
 			<span>
