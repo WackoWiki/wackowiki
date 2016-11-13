@@ -15,7 +15,7 @@ if (!isset($page))		$page = '';
 if (!isset($output))	$output = '';
 if (!isset($text))		$text = '';
 
-$editpage = $this->href('', $page.'/edit');
+$editpage = $this->href('', $page . '/edit');
 
 if (!$page)
 {

@@ -104,19 +104,19 @@ write_config_hidden_nodes(array('none' => ''));
 	?>
 <h2><?php echo $lang['Permissions']; ?></h2>
 <ul>
-	<li><?php echo CACHE_CONFIG_DIR		.'   '. output_image(is_writable(CACHE_CONFIG_DIR)); ?></li>
-	<li><?php echo CACHE_FEED_DIR		.'   '. output_image(is_writable(CACHE_FEED_DIR)); ?></li>
-	<li><?php echo CACHE_PAGE_DIR		.'   '. output_image(is_writable(CACHE_PAGE_DIR)); ?></li>
-	<li><?php echo CACHE_SQL_DIR		.'   '. output_image(is_writable(CACHE_SQL_DIR)); ?></li>
-	<li><?php echo CACHE_TEMPLATE_DIR	.'   '. output_image(is_writable(CACHE_TEMPLATE_DIR)); ?></li>
-	<li><?php echo CONFIG_FILE			.'   '. output_image(is_writable(CONFIG_FILE)); ?></li>
-	<li><?php echo SITE_LOCK			.'   '. output_image(is_writable(SITE_LOCK)); ?></li>
-	<li><?php echo AP_LOCK				.'   '. output_image(is_writable(AP_LOCK)); ?></li>
-	<li><?php echo UPLOAD_BACKUP_DIR	.'   '. output_image(is_writable(UPLOAD_BACKUP_DIR)); ?></li>
-	<li><?php echo UPLOAD_GLOBAL_DIR	.'   '. output_image(is_writable(UPLOAD_GLOBAL_DIR)); ?></li>
-	<li><?php echo UPLOAD_PER_PAGE_DIR	.'   '. output_image(is_writable(UPLOAD_PER_PAGE_DIR)); ?></li>
-	<li><?php echo XML_DIR				.'   '. output_image(is_writable(XML_DIR)); ?></li>
-	<li><?php echo SITEMAP_XML			.'   '. output_image(is_writable(SITEMAP_XML)); ?></li>
+	<li><?php echo CACHE_CONFIG_DIR		. '   ' . output_image(is_writable(CACHE_CONFIG_DIR)); ?></li>
+	<li><?php echo CACHE_FEED_DIR		. '   ' . output_image(is_writable(CACHE_FEED_DIR)); ?></li>
+	<li><?php echo CACHE_PAGE_DIR		. '   ' . output_image(is_writable(CACHE_PAGE_DIR)); ?></li>
+	<li><?php echo CACHE_SQL_DIR		. '   ' . output_image(is_writable(CACHE_SQL_DIR)); ?></li>
+	<li><?php echo CACHE_TEMPLATE_DIR	. '   ' . output_image(is_writable(CACHE_TEMPLATE_DIR)); ?></li>
+	<li><?php echo CONFIG_FILE			. '   ' . output_image(is_writable(CONFIG_FILE)); ?></li>
+	<li><?php echo SITE_LOCK			. '   ' . output_image(is_writable(SITE_LOCK)); ?></li>
+	<li><?php echo AP_LOCK				. '   ' . output_image(is_writable(AP_LOCK)); ?></li>
+	<li><?php echo UPLOAD_BACKUP_DIR	. '   ' . output_image(is_writable(UPLOAD_BACKUP_DIR)); ?></li>
+	<li><?php echo UPLOAD_GLOBAL_DIR	. '   ' . output_image(is_writable(UPLOAD_GLOBAL_DIR)); ?></li>
+	<li><?php echo UPLOAD_PER_PAGE_DIR	. '   ' . output_image(is_writable(UPLOAD_PER_PAGE_DIR)); ?></li>
+	<li><?php echo XML_DIR				. '   ' . output_image(is_writable(XML_DIR)); ?></li>
+	<li><?php echo SITEMAP_XML			. '   ' . output_image(is_writable(SITEMAP_XML)); ?></li>
 </ul>
 	<?php
 	/*

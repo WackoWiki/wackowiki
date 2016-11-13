@@ -76,14 +76,14 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 							{
 								echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 									 . '"><img src="' .  $this->db->theme_url
-									.'icon/bookmark1.png" alt="+" title="' . 
+									. 'icon/bookmark1.png" alt="+" title="' . 
 									$this->_t('AddToBookmarks')  . '"/></a></li>';
 							}
 							else
 							{
 								echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 									 . '"><img src="' .  $this->db->theme_url
-									.'icon/bookmark2.png" alt="-" title="' . 
+									. 'icon/bookmark2.png" alt="-" title="' . 
 									$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 							}
 						}
@@ -191,7 +191,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		<img
 			src="<?php echo $this->db->theme_url ?>icon/user.png"
 			alt="" width="16" height="16"
-			style="text-align:middle; vertical-align: baseline;" /> <?php echo $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?>
+			style="text-align:middle; vertical-align: baseline;" /> <?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?>
 		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
 		| <a
 			onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"

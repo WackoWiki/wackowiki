@@ -52,7 +52,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	</div>
 	<div class="TopLeft">
 		<?php if ($this->get_user()) { ?>
-		<img src="<?php echo $this->db->theme_url ?>icon/role.png" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->_t('YouAre') . " " . $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+		<img src="<?php echo $this->db->theme_url ?>icon/role.png" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->_t('YouAre') . " " . $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
 		<?php
 echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
 		| <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', 'Login', 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span> )</small>

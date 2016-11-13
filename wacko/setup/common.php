@@ -38,7 +38,7 @@ function write_config_hidden_nodes($skip_values)
 				$value = implode(',', $value);
 			}
 
-			echo '   <input type="hidden" name="config[' . $key.']" value="' . $value . '" />' . "\n";
+			echo '   <input type="hidden" name="config[' . $key . ']" value="' . $value . '" />' . "\n";
 		}
 	}
 }
@@ -151,7 +151,7 @@ function array_to_str ($arr, $name = '')
 		}
 		else
 		{
-			$entries .= "\t'" . $k.'\' => \''.str_replace("\n", "\\n", $v) . "',\n";
+			$entries .= "\t'" . $k . '\' => \''.str_replace("\n", "\\n", $v) . "',\n";
 		}
 	}
 

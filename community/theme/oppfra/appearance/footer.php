@@ -140,7 +140,7 @@ echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
 { ?>
-	<span class="nobr"><?php echo $this->_t('YouAre') . " " . $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?></span><br /><small>( <span class="nobr Tune">
+	<span class="nobr"><?php echo $this->_t('YouAre') . " " . $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?></span><br /><small>( <span class="nobr Tune">
 <?php
 	echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
 | <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span> )</small>
@@ -204,14 +204,14 @@ echo '<div class="newsNav"><ul class="newsNav">';
 		{
 			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
-				.'icon/bookmark1.png" alt="+" title="' .
+				. 'icon/bookmark1.png" alt="+" title="' .
 				$this->_t('AddToBookmarks')  . '"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
-				.'icon/bookmark2.png" alt="-" title="' .
+				. 'icon/bookmark2.png" alt="-" title="' .
 				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 		}
 	}

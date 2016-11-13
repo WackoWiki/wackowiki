@@ -60,7 +60,7 @@ class DbPDO implements DbInterface
 
 				if ($this->db->debug > 2)
 				{
-					die('Query failed: ' . $query.' (' . $result->errorCode() . ': ' . $result->errorInfo() . ')');
+					die('Query failed: ' . $query . ' (' . $result->errorCode() . ': ' . $result->errorInfo() . ')');
 				}
 				else
 				{

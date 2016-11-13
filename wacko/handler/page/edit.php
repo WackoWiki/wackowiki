@@ -271,7 +271,7 @@ if ($this->has_access('read')
 		$preview	= $this->format($preview,	'wacko');
 		$preview	= $this->format($preview,	'post_wacko');
 
-		$output = '<section class="preview"><p class="preview"><span>' . $this->_t('EditPreview') . ' (' . $text_chars.' ' . $this->_t('Chars') . ")</span></p>\n";
+		$output = '<section class="preview"><p class="preview"><span>' . $this->_t('EditPreview') . ' (' . $text_chars . ' ' . $this->_t('Chars') . ")</span></p>\n";
 
 		if ($this->page['comment_on_id'] != 0)
 		{
@@ -402,14 +402,14 @@ if ($this->has_access('read')
 	{
 		foreach ($words as $id => $word)
 		{
-			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id.'|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id.'|' . $word['parent_id']]) && $_POST['category' . $id.'|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />' . 
+			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />' .
 						'<label for="category' . $id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
-					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id.'|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id.'|' . $word['parent_id']]) && $_POST['category' . $id.'|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />' . 
+					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />' .
 								'<label for="category' . $id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n";
 				}
 			}

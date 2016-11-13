@@ -220,7 +220,7 @@ if (!empty($blog_cluster))
 	{
 		if ($this->db->news_cluster)
 		{
-			if (substr($this->tag, 0, strlen($this->db->news_cluster.'/')) == $this->db->news_cluster.'/')
+			if (substr($this->tag, 0, strlen($this->db->news_cluster . '/')) == $this->db->news_cluster . '/')
 			{
 				$feed_tag = 'news';
 			}
@@ -230,7 +230,7 @@ if (!empty($blog_cluster))
 			$feed_tag = 'blog' . $this->page['page_id'];
 		}
 
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url.'xml/' . $feed_tag.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "\n";
+		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . 'xml/' . $feed_tag . '_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "\n";
 	}
 
 	echo '<div style="width:100%;">
@@ -245,7 +245,7 @@ if (!empty($blog_cluster))
 		foreach ($pages as $page)
 		{
 			$_category = $this->get_categories($page['page_id']);
-			$_category = !empty($_category) ? $this->_t('Category') . ': ' . $_category.' | ' : '';
+			$_category = !empty($_category) ? $this->_t('Category') . ': ' . $_category . ' | ' : '';
 
 			echo '<article class="newsarticle">';
 			echo '<h2 class="newstitle"><a href="' . $this->href('', $page['tag'], '') . '">' . $page['title'] . "</a></h2>\n";

@@ -43,15 +43,15 @@ class GPG
 	{
 		// defining main object properties
 		$this->engine	= & $engine;
-		$this->secret	= hash('sha1', $this->engine->db->system_seed.'GPG_SECRET');
+		$this->secret	= hash('sha1', $this->engine->db->system_seed . 'GPG_SECRET');
 		$this->baseurl	= "http://{$_SERVER['SERVER_NAME']}/";
 		$this->homedir	= rtrim($this->engine->db->gpg_home, '/');
 		$this->tempdir	= rtrim($this->engine->db->gpg_temp, '/');
 		$this->wrapper	= trim($this->engine->db->gpg_wrapper, '/');
 		$this->sid		= $engine->sess->id();
-		$this->sessdir	= $this->tempdir.'/' . $this->sid;
-		$this->stfile	= $this->sessdir.'/'.GPG_STATUS_NAME;
-		$this->srfile	= $this->sessdir.'/'.GPG_STDERR_NAME;
+		$this->sessdir	= $this->tempdir . '/' . $this->sid;
+		$this->stfile	= $this->sessdir . '/'.GPG_STATUS_NAME;
+		$this->srfile	= $this->sessdir . '/'.GPG_STDERR_NAME;
 
 		// creating user session directory
 		if (false === mkdir($this->sessdir))
@@ -108,7 +108,7 @@ class GPG
 					'hd' => $this->homedir,		// homedir
 					'sf' => $this->stfile,		// status-file
 					'sr' => $this->srfile,		// stderr
-					'cl' => $this->override.' ' . $request,	// command line params
+					'cl' => $this->override . ' ' . $request,	// command line params
 					'st' => $input)				// stdin data
 				] // end of content array
 			] // end of http array
@@ -866,7 +866,7 @@ class GPG
 		{
 			while (false !== ($filename = readdir($dh)))
 			{
-				if (is_dir($file = $this->sessdir.'/' . $filename) !== true)
+				if (is_dir($file = $this->sessdir . '/' . $filename) !== true)
 				{
 					unlink($file);
 				}

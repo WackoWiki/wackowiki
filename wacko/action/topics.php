@@ -72,7 +72,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		{
 			// redirecting to the edit form
 			$this->sess->title	= $page_title;
-			$this->http->redirect($this->href('edit', $this->tag.'/' . $topic_name, '', 1));
+			$this->http->redirect($this->href('edit', $this->tag . '/' . $topic_name, '', 1));
 		}
 	}
 
@@ -215,7 +215,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				echo '<tbody class="lined"><tr style="background-color: #f9f9f9;">' . 
 						'<td style="text-align:left;">' . 
 						( !$this->has_access('comment', $topic['page_id'], GUEST)
-							? '<img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
+							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
 							: '' ).
 						( $updated
 							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[updated]</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'

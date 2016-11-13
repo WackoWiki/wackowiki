@@ -300,7 +300,7 @@ function get_table(&$engine, $table, $drop = true)
 	//
 	// drop the last ',\n' off ;)
 	//
-	$schema_create = preg_replace('/,' . "\n".'$/', '', $schema_create);
+	$schema_create = preg_replace('/,' . "\n" . '$/', '', $schema_create);
 
 	//
 	// get any Indexed fields from the database...
@@ -394,7 +394,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 			$cluster_pages[$root]	= $result;
 		}
 
-		if ($table != $engine->db->table_prefix.'page')	// not page table
+		if ($table != $engine->db->table_prefix . 'page')	// not page table
 		{
 			$where = "WHERE {$tables[$table]['where']} IN (" . $cluster_pages[$root] . ") ";
 		}

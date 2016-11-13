@@ -17,6 +17,6 @@
 <body>
 
 <div class="header">
-<h1><?php echo $this->db->site_name.':  '.(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></h1>
+<h1><?php echo $this->db->site_name . ':  '.(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></h1>
 </div>
 

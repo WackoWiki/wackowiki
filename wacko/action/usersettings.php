@@ -476,8 +476,8 @@ else if (($user = $this->get_user()))
 		<td>
 			<input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;
 <?php echo !$user['email_confirm']
-		? '<img src="' . $this->db->base_url.'image/spacer.png" alt="' . $this->_t('EmailConfirmed') . '" title="' . $this->_t('EmailConfirmed') . '" class="btn-tick"/>'
-		: '<img src="' . $this->db->base_url.'image/spacer.png" alt="' . $this->_t('EmailConfirm') . '" title="' . $this->_t('EmailConfirm') . '" class="btn-warning"/>' ?>
+		? '<img src="' . $this->db->base_url . 'image/spacer.png" alt="' . $this->_t('EmailConfirmed') . '" title="' . $this->_t('EmailConfirmed') . '" class="btn-tick"/>'
+		: '<img src="' . $this->db->base_url . 'image/spacer.png" alt="' . $this->_t('EmailConfirm') . '" title="' . $this->_t('EmailConfirm') . '" class="btn-warning"/>' ?>
 <?php
 		if (!$user['email'] || $code['email_confirm'])
 			echo '<div class="hint"><strong class="cite">' . 
@@ -645,7 +645,7 @@ else if (($user = $this->get_user()))
 			'<table class="form_tbl">' . 
 				'<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UserSpace') . "</th>".
-					'<td class="form_right">' . "<a href=\"" . $this->href('', ($this->db->users_page.'/' . $user['user_name'])) . "\">" . $this->db->users_page.'/' . $user['user_name'] . "</a>" . "</td>".
+					'<td class="form_right">' . "<a href=\"" . $this->href('', ($this->db->users_page . '/' . $user['user_name'])) . "\">" . $this->db->users_page . '/' . $user['user_name'] . "</a>" . "</td>".
 				"</tr>\n" . '<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UsersSignup') . "</th>".
 					'<td class="form_right">' . $this->get_time_formatted($user['signup_time']) . "</td>".

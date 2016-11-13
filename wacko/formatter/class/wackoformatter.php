@@ -811,7 +811,7 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			return $result . '<h6 id="h' . $this->page_id.'-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h6>';
+			return $result . '<h6 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h6>';
 		}
 		else if (preg_match('/\n[ \t]*======(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -819,7 +819,7 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			return $result . '<h5 id="h' . $this->page_id.'-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h5>';
+			return $result . '<h5 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h5>';
 		}
 		else if (preg_match('/\n[ \t]*=====(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -827,7 +827,7 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			return $result . '<h4 id="h' . $this->page_id.'-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h4>';
+			return $result . '<h4 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h4>';
 		}
 		else if (preg_match('/\n[ \t]*====(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -835,7 +835,7 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			return $result . '<h3 id="h' . $this->page_id.'-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h3>';
+			return $result . '<h3 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h3>';
 		}
 		else if (preg_match('/\n[ \t]*===(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -843,7 +843,7 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			return $result . '<h2 id="h' . $this->page_id.'-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h2>';
+			return $result . '<h2 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h2>';
 		}
 		else if (preg_match('/\n[ \t]*==(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -851,7 +851,7 @@ class WackoFormatter
 			$this->br	= 0;
 			$wacko->header_count++;
 
-			return $result . '<h1 id="h' . $this->page_id.'-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h1>';
+			return $result . '<h1 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h1>';
 		}
 		// separators
 		else if (preg_match('/^[-]{4,}$/', $thing))
@@ -984,7 +984,7 @@ class WackoFormatter
 
 					$this->auto_fn['content'][$footnote_count] = trim($text);
 
-					return ($sup ? '<sup class="footnote">' : '') . '<a href="#footnote-' . $footnote_count . '" id="footnote-' . $footnote_count.'-ref" title="footnote ' . $footnote_count . '" >[' . $footnote_count.']</a>' . ($sup ? '</sup>' : '');
+					return ($sup ? '<sup class="footnote">' : '') . '<a href="#footnote-' . $footnote_count . '" id="footnote-' . $footnote_count . '-ref" title="footnote ' . $footnote_count . '" >[' . $footnote_count . ']</a>' . ($sup ? '</sup>' : '');
 				}
 				else
 				{
