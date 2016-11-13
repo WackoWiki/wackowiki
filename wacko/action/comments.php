@@ -79,7 +79,7 @@ if ($this->user_allowed_comments())
 
 		if ($root == '' && !(int) $noxml)
 		{
-			echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . 'xml/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br /><br />\n";
+			echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br /><br />\n";
 		}
 
 		$this->print_pagination($pagination);

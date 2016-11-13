@@ -38,7 +38,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 	if (!$root && !(int) $noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . 'xml/changes_' .
+		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/changes_' .
 			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' .
 			$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentChangesXMLTip') .
 			'" alt="XML" class="btn-feed"/></a></span>' . "<br /><br />\n";

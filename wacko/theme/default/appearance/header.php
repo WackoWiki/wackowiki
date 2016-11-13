@@ -23,31 +23,33 @@ else
 // if user are logged, shows "You are UserName"
 if (($logged_in = $this->get_user()))
 {
-	$tpl->uare_link = $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
-	$tpl->uare_account = $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0);
-	$tpl->uare_logout = $this->href('', $this->_t('LoginPage'), 'action=logout');
+	$tpl->uare_link		= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
+	$tpl->uare_account	= $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0);
+	$tpl->uare_logout	= $this->href('', $this->_t('LoginPage'), 'action=logout');
 }
 // else shows login's controls
 else
 {
-	// show Register / Login link
-	$tpl->login_link = $this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '');
+	// show register / login link
+	$tpl->login_link	= $this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '');
 
 	if ($this->db->allow_registration)
 	{
 		$tpl->login_reg_link = $this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'), 0);
 	}
-	// Show Help link
-	//  "<li>".$this->compose_link_to_page($this->_t('HelpPage'), "", $this->_t('Help'), 0)."</li>\n";
+	// show help link
+	//  "<li>" . $this->compose_link_to_page($this->_t('HelpPage'), "", $this->_t('Help'), 0) . "</li>\n";
 }
 
 // outputs bookmarks menu
 // main page
-// "<li>".$this->compose_link_to_page($this->db->root_page)."</li>\n";
+// "<li>" . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
 
 $max_items = $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
 $i = 0;
+
 $tpl->enter('menu_');
+
 foreach ((array)$this->get_menu() as $menu_item)
 {
 	if ($i++ == $max_items)
@@ -61,13 +63,14 @@ foreach ((array)$this->get_menu() as $menu_item)
 
 	if ($this->page['page_id'] == $menu_item[0])
 	{
-		$tpl->active_item = $menu_item[1];
+		$tpl->active_item	= $menu_item[1];
 	}
 	else
 	{
-		$tpl->item_link = $this->format($menu_item[2], 'post_wacko');
+		$tpl->item_link		= $this->format($menu_item[2], 'post_wacko');
 	}
 }
+
 $tpl->leave();
 
 if ($logged_in)
@@ -75,11 +78,11 @@ if ($logged_in)
 	// determines what it should show: "add to menu" or "remove from menu" icon
 	if (!in_array($this->page['page_id'], (array)$this->get_menu_links()))
 	{
-		$tpl->addmark_href = $this->href('', '', 'addbookmark=yes');
+		$tpl->addmark_href		= $this->href('', '', 'addbookmark=yes');
 	}
 	else if (!$this->get_menu_default())
 	{
-		$tpl->removemark_href = $this->href('', '', 'removebookmark=yes');
+		$tpl->removemark_href	= $this->href('', '', 'removebookmark=yes');
 	}
 }
 
@@ -97,9 +100,9 @@ $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_k
 	else
 	{
 		$tpl->enter('out_');
-		$tpl->method = ($method == 'show' ? '.' : $this->href($method));
-		$tpl->hint = $this->_t($hint);
-		$tpl->params = $params;
+		$tpl->method	= ($method == 'show' ? '.' : $this->href($method));
+		$tpl->hint		= $this->_t($hint);
+		$tpl->params	= $params;
 
 		if ($access_key !== '')
 		{
@@ -130,9 +133,9 @@ else
 
 	// edit or source tab
 	if ($this->is_admin()
-			|| ($this->forum
-				? ($this->is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0
-				: $this->has_access('write')))
+		|| ($this->forum
+			? ($this->is_owner() || $this->is_moderator()) && (int) $this->page['comments'] == 0
+			: $this->has_access('write')))
 	{
 		$echo_tab('edit', 'EditTip', 'EditText', 1, '', 'e');
 	}
@@ -164,7 +167,7 @@ else
 	$tpl->enter('droptab_tab_');
 
 	// display more icon and text
-	//  '<li class="sublist"><a href="#" id="more-icon"><img src="'.$this->db->theme_url.'icon/more.png" title="'.$this->_t('PageHandlerMoreTip').'" alt="'.$this->_t('PageHandlerMoreTip').'" /> '.$this->_t('PageHandlerMoreTip')."</a> \n";
+	//  '<li class="sublist"><a href="#" id="more-icon"><img src="' . $this->db->theme_url . 'icon/more.png" title="' . $this->_t('PageHandlerMoreTip') . '" alt="' . $this->_t('PageHandlerMoreTip') . '" /> ' . $this->_t('PageHandlerMoreTip') . "</a> \n";
 	// only display 'more' text that shows handler list on hover
 
 	// print tab
@@ -187,15 +190,15 @@ else
 
 	// remove tab
 	if (($this->is_admin()
-			|| (!$this->db->remove_onlyadmins
-				&& ($this->forum ? $this->is_owner() && (int)$this->page['comments'] == 0 : $this->is_owner()))))
+		|| (!$this->db->remove_onlyadmins
+			&& ($this->forum ? $this->is_owner() && (int) $this->page['comments'] == 0 : $this->is_owner()))))
 	{
 		$echo_tab('remove', 'DeleteTip', 'DeleteText', 2, '', '');
 	}
 
 	// rename tab
 	if ($this->is_admin() || ($this->is_owner()
-			&& (!$this->forum || (int)$this->page['comments'] != 0)))
+		&& (!$this->forum || (int) $this->page['comments'] != 0)))
 	{
 		$echo_tab('rename', 'RenameTip', 'RenameText', 2, '', '');
 	}
@@ -256,9 +259,9 @@ else
 }
 $tpl->leave();
 
-$tpl->search = $this->href('', $this->_t('TextSearchPage'));
-$tpl->breadcrumbs = $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
-// '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8);
+$tpl->search		= $this->href('', $this->_t('TextSearchPage'));
+$tpl->breadcrumbs	= $this->get_page_path($titles = false, ' &gt; ', true, true);
+// '<br />' . $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
 
 if (!isset($this->sess->php_version))
 {
@@ -266,6 +269,7 @@ if (!isset($this->sess->php_version))
 	{
 		$this->set_message($this->_t('ErrorMinPHPVersion'), 'error');
 	}
+
 	$this->sess->php_version = 1;
 }
 

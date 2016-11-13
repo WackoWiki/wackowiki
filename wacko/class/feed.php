@@ -53,7 +53,7 @@ class Feed
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
 		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . "image/wacko_logo.png" . "</url>\n";
+		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png')  . "</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -170,7 +170,7 @@ class Feed
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . "</title>\n";
 		$xml .= "<link>" . $this->engine->db->base_url.str_replace('%2F', '/', rawurlencode($news_cluster)) . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . "image/wacko_logo.png" . "</url>\n";
+		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . "</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -250,7 +250,7 @@ class Feed
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
 		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . "image/wacko_logo.png" . "</url>\n";
+		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . "</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";

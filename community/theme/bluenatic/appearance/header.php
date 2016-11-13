@@ -21,8 +21,8 @@ header('Content-Type: text/html; charset=' . $this->get_charset());
 	<link rel="stylesheet" href="<?php echo $this->db->theme_url; ?>css/page.css" media="screen" />
 	<link rel="stylesheet" href="<?php echo $this->db->theme_url; ?>css/wacko.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->db->theme_url; ?>icon/icon.png" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url;?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url;?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 	<?php
 	// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page

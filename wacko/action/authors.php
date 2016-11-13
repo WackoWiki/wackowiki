@@ -175,7 +175,7 @@ else
 
 		if (isset($licenses[$license]))
 		{
-			$icons = '<img src="' . $this->db->base_url . 'image/spacer.png" alt="' . $licenses[$license][1] . '" title="' . $licenses[$license][1] . '" class="license-' . $license . '">';
+			$icons = '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $licenses[$license][1] . '" title="' . $licenses[$license][1] . '" class="license-' . $license . '">';
 			// constant license
 			$license = '<br />' . $this->_t('DistributedUnder') . '<br />' .
 

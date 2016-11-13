@@ -18,7 +18,7 @@ echo "<lastBuildDate>" . date('r') . "</lastBuildDate>\n";
 echo "<image>\n";
 echo "<title>" . $this->db->site_name . $this->_t('RecentCommentsTitleXML') . "</title>\n";
 echo "<link>" . $this->db->base_url . "</link>\n";
-echo "<url>" . $this->db->base_url . "image/wacko_logo.png" . "</url>\n";
+echo "<url>" . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . "</url>\n";
 echo "<width>108</width>\n";
 echo "<height>50</height>\n";
 echo "</image>\n";
