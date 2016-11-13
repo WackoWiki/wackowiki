@@ -76,14 +76,14 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		{
 			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
-				.'icon/bookmark1.png" alt="+" title="' . 
+				. 'icon/bookmark1.png" alt="+" title="' . 
 				$this->_t('AddToBookmarks')  . '"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
-				.'icon/bookmark2.png" alt="-" title="' . 
+				. 'icon/bookmark2.png" alt="-" title="' . 
 				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 		}
 	}
@@ -199,7 +199,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		<span class="nobr">
 				<?php echo $this->_t('YouAre'); ?>
 				<img src="<?php echo $this->db->theme_url ?>icon/user.png" width="12" height="12" style="vertical-align: baseline; " alt=""/>
-				<?php echo $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) ?>
+				<?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?>
 			</span>
 			<small>
 				(

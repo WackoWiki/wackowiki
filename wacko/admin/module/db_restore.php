@@ -30,9 +30,9 @@ function admin_db_restore(&$engine, &$module)
 //{
 //	while (false !== ($file = readdir($dh)))
 //	{
-//		if (is_dir($dir.'/' . $file) !== true)
+//		if (is_dir($dir . '/' . $file) !== true)
 //		{
-//			chmod($dir.'/' . $file, 0777);
+//			chmod($dir . '/' . $file, 0777);
 //		}
 //	}
 //	closedir($dh);
@@ -51,7 +51,7 @@ function admin_db_restore(&$engine, &$module)
 	$logs			= '';
 	$ikeys			= '';
 	$ifiles			= '';
-	$dir			= UPLOAD_BACKUP_DIR.'/';
+	$dir			= UPLOAD_BACKUP_DIR . '/';
 
 	// IDs PROCESSING (COMMON PROCEDURES)
 	$set = [];
@@ -89,26 +89,26 @@ function admin_db_restore(&$engine, &$module)
 			}
 
 			// show details of backup package
-			echo '<table class="formation">' . 
+			echo '<table class="formation">' .
 						'<tr>
-							<td>' . 
+							<td>' .
 							'</td>
-						</tr>' . 
+						</tr>' .
 					// open row
 					'<tr class="hl_setting">' . "\n".
 
 					// pack
 					 '<td>
 							<table>
-								<tr>' . 
-									'<td style="vertical-align:middle; width:10px;" class="label">' . 
+								<tr>' .
+									'<td style="vertical-align:middle; width:10px;" class="label">' .
 									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ) . '/>
-									#</td>' . 
-									#'<td style="width:10px;">' . 
-									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' . 
+									#</td>' .
+									#'<td style="width:10px;">' .
+									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
 									'</td>
-									<th style="text-align:left;white-space:nowrap;">' . 
-										date($engine->db->date_format.' ' . $engine->db->time_format_seconds, $log[0]).
+									<th style="text-align:left;white-space:nowrap;">' .
+										date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]).
 									'</th>
 								</tr>
 								<tr>
@@ -123,23 +123,23 @@ function admin_db_restore(&$engine, &$module)
 
 									</td>
 								</tr>
-							</table>' . 
+							</table>' .
 						"</td>\n";
 
 					// description
 					echo '<td><table>';
 						// cluster root
-						echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">' . 
+						echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">' .
 								$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ).
 							'</th></tr>' . "\n";
 						// contents
-						echo '<tr>' . 
-								'<th>' . $engine->_t('BackupStructure') . '</th>' . 
-								'<th>' . $engine->_t('BackupData') . '</th>' . 
-								'<th>' . $engine->_t('BackupFiles') . '</th>' . 
+						echo '<tr>' .
+								'<th>' . $engine->_t('BackupStructure') . '</th>' .
+								'<th>' . $engine->_t('BackupData') . '</th>' .
+								'<th>' . $engine->_t('BackupFiles') . '</th>' .
 							'</tr>' . "\n";
 						// structure
-						echo '<tr>' . 
+						echo '<tr>' .
 								'<td>';
 
 						$list = explode(';', $log[3]);
@@ -208,7 +208,7 @@ function admin_db_restore(&$engine, &$module)
 								<input type="checkbox" id="ignore_files" name="ignore_files" value="1" />
 								<label for="ignore_files"><small>' . $engine->_t('IgnoreSameFiles') . ' **</small></label><br />
 							</td>
-						</tr>' . 
+						</tr>' .
 					'</table>
 				<br />';
 
@@ -216,11 +216,11 @@ function admin_db_restore(&$engine, &$module)
 						'<input type="hidden" name="start" value="true" />' . "\n".
 						'<label for="">' . $engine->_t('ConfirmDbRestore') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 						'<input type="submit" id="submit" name="restore" value="yes" style="width:40px;" /> '.
-						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' . 
+						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
 						'<br /><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
 
 				echo '<br /><br />
-						<p><small>' . 
+						<p><small>' .
 							$engine->_t('RestoreOptionsInfo').
 						'</small></p>';
 
@@ -234,7 +234,7 @@ function admin_db_restore(&$engine, &$module)
 
 			set_time_limit(3600);
 
-			# $dir	= UPLOAD_BACKUP_DIR.'/'; // XXX: see above
+			# $dir	= UPLOAD_BACKUP_DIR . '/'; // XXX: see above
 			$pack	= $_POST['backup_id'];
 
 			// set parameters
@@ -287,7 +287,7 @@ function admin_db_restore(&$engine, &$module)
 				else if	($log[2] == true && $ikeys == false)	$mode = 'REPLACE';
 
 				$results .= '<strong>Just download and process dump tables' . "\n".
-					'(Instruction ' . $mode.'):</strong>' . "\n\n";
+					'(Instruction ' . $mode . '):</strong>' . "\n\n";
 
 				// run
 				$overall = 0;
@@ -295,9 +295,9 @@ function admin_db_restore(&$engine, &$module)
 				foreach ($list as $table)
 				{
 					// force sql mode for some tables
-					if (($table == $tables[$engine->db->table_prefix.'acl']['name']
-					||   $table == $tables[$engine->db->table_prefix.'file_link']['name']
-					||   $table == $tables[$engine->db->table_prefix.'link']['name'])
+					if (($table == $tables[$engine->db->table_prefix . 'acl']['name']
+					||   $table == $tables[$engine->db->table_prefix . 'file_link']['name']
+					||   $table == $tables[$engine->db->table_prefix . 'link']['name'])
 					&& $ikeys == false)
 					{
 						$mode = 'REPLACE';
@@ -388,11 +388,11 @@ function admin_db_restore(&$engine, &$module)
 			echo $engine->form_open('delete_backup');
 
 			echo '<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />' . "\n".
-				'<div class="warning">' . 
+				'<div class="warning">' .
 					'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 					'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-					'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' . 
-					'<br /><small>' . $engine->_t('BackupDeleteInfo') . '</small>' . 
+					'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
+					'<br /><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
 				'</div>
 				<br />';
 
@@ -417,10 +417,10 @@ function admin_db_restore(&$engine, &$module)
 					<?php echo $engine->_t('RestoreInfo'); ?>
 				</p>
 <?php
-		if (!is_executable(UPLOAD_BACKUP_DIR.'/'))
+		if (!is_executable(UPLOAD_BACKUP_DIR . '/'))
 		{
-			echo substr(sprintf('%o', fileperms(UPLOAD_BACKUP_DIR.'/')), -4). "<br />\n";
-			echo output_image($engine, false) . '<strong class="red">The '.UPLOAD_BACKUP_DIR.'/'.' directory is not executable.</strong>' .  "<br />\n";
+			echo substr(sprintf('%o', fileperms(UPLOAD_BACKUP_DIR . '/')), -4). "<br />\n";
+			echo output_image($engine, false) . '<strong class="red">The '.UPLOAD_BACKUP_DIR . '/' . ' directory is not executable.</strong>' .  "<br />\n";
 		}
 		else
 		{
@@ -430,10 +430,10 @@ function admin_db_restore(&$engine, &$module)
 <?php
 				echo $engine->form_open('restore');
 
-				$control_buttons =	'<input type="submit" name="restore" id="submit" value="restore" />' . 
+				$control_buttons =	'<input type="submit" name="restore" id="submit" value="restore" />' .
 									'<input type="submit" name="remove" id="submit" value="remove" />';
 
-			#$dir = UPLOAD_BACKUP_DIR.'/';
+			#$dir = UPLOAD_BACKUP_DIR . '/';
 
 			// open backups dir and run through all subdirs
 			if ($dh = opendir(rtrim($dir, '/')))
@@ -475,15 +475,15 @@ function admin_db_restore(&$engine, &$module)
 						// pack
 						echo '<td>
 								<table>
-									<tr>' . 
-										'<td style="vertical-align:middle; width:10px;" class="label">' . 
+									<tr>' .
+										'<td style="vertical-align:middle; width:10px;" class="label">' .
 										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ) . '/>
-										#</td>' . 
-										#'<td style="width:10px;">' . 
-											'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' . 
+										#</td>' .
+										#'<td style="width:10px;">' .
+											'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
 										'</td>
-										<th style="text-align:left;white-space:nowrap;">' . 
-											date($engine->db->date_format.' ' . $engine->db->time_format_seconds, $log[0]).
+										<th style="text-align:left;white-space:nowrap;">' .
+											date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]).
 										'</th>
 									</tr>
 									<tr>
@@ -498,23 +498,23 @@ function admin_db_restore(&$engine, &$module)
 											<a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>
 										</td>
 									</tr>
-								</table>' . 
+								</table>' .
 							"</td>\n";
 
 						// description
 						echo '<td><table>';
 							// cluster root
-							echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">' . 
+							echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">' .
 									$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ).
 								'</th></tr>' . "\n";
 							// contents
-							echo '<tr>' . 
-									'<th>' . $engine->_t('BackupStructure') . '</th>' . 
-									'<th>' . $engine->_t('BackupData') . '</th>' . 
-									'<th>' . $engine->_t('BackupFiles') . '</th>' . 
+							echo '<tr>' .
+									'<th>' . $engine->_t('BackupStructure') . '</th>' .
+									'<th>' . $engine->_t('BackupData') . '</th>' .
+									'<th>' . $engine->_t('BackupFiles') . '</th>' .
 								'</tr>' . "\n";
 							// structure
-							echo '<tr>' . 
+							echo '<tr>' .
 									'<td>';
 
 							$list = explode(';', $log[3]);

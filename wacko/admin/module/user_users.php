@@ -279,7 +279,7 @@ function admin_user_users(&$engine, &$module)
 						"WHERE user_id = '" . $user_id . "'");
 
 					// remove user space
-					$user_space = $engine->db->users_page.'/' . $user['user_name'];
+					$user_space = $engine->db->users_page . '/' . $user['user_name'];
 
 					$engine->remove_referrers	($user_space, true);
 					$engine->remove_links		($user_space, true);
@@ -320,34 +320,34 @@ function admin_user_users(&$engine, &$module)
 		echo $engine->form_open('add_user');
 
 		echo '<h2>' . $engine->_t('UsersAddNew') . '</h2>';
-		echo '<table class="formation">' . 
+		echo '<table class="formation">' .
 				'<tr>
 					<td>
-						<label for="newname">' . $engine->_t('UserName') . '</label>' . 
+						<label for="newname">' . $engine->_t('UserName') . '</label>' .
 					'</td>
 					<td>
 						<input type="text" id="newname" name="newname" value="' . ( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100" />
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
-						<label for="newrealname">' . $engine->_t('RealName') . '</label>' . 
+						<label for="newrealname">' . $engine->_t('RealName') . '</label>' .
 					'<td>
 						<input type="text" id="newrealname" name="newrealname" value="' . ( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100" />
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<label for="email">' . $engine->_t('Email') . '</label>
-					</td>' . 
+					</td>' .
 					'<td>
 						<input type="email" id="email" name="email" value="' . ( isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="50" maxlength="100" />
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
-					</td>' . 
+					</td>' .
 					'<td>
 						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
@@ -364,22 +364,22 @@ function admin_user_users(&$engine, &$module)
 
 				echo '</select>
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
-						</td>' . 
+						</td>' .
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked="checked"' : '' ) . ' />
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<br />
 						<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' . 
+						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
 					'</td>
-				</tr>' . 
+				</tr>' .
 			'</table><br />';
 
 		echo $engine->form_close();
@@ -398,23 +398,23 @@ function admin_user_users(&$engine, &$module)
 			echo $engine->form_open('edit_user');
 
 			echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '" />' . "\n".
-				'<table class="formation">' . 
+				'<table class="formation">' .
 				'<tr>
 					<td>
 						<label for="newname">' . $engine->_t('UsersRename') . ' \'<code>' . htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\' in *</label>
-					</td>' . 
+					</td>' .
 					'<td>
 						<input type="text" id="newname" name="newname" value="' . ( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100" />
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<label for="newrealname">' . $engine->_t('RealName') . '</label> '.
 					'</td>
 					<td>
 						<input type="text" id="newrealname" name="newrealname" value="' . ( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ) . '" size="50" maxlength="100" />
-					</td>' . 
-				'</tr>' . 
+					</td>' .
+				'</tr>' .
 				'<tr>
 					<td>
 						<label for="newemail">' . $engine->_t('Email') . '</label> '.
@@ -422,7 +422,7 @@ function admin_user_users(&$engine, &$module)
 					<td>
 						<input type="email" id="newemail" name="newemail" value="' . ( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ) . '" size="50" maxlength="100" />
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
@@ -443,13 +443,13 @@ function admin_user_users(&$engine, &$module)
 
 					echo '</select>
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<label for="user_lang">' . $engine->_t('ChooseTheme') . '</label>
 					</td>
 					<td>
-						<select style="width:200px;" id="theme" name="theme">' . 
+						<select style="width:200px;" id="theme" name="theme">' .
 
 						$themes = $engine->available_themes();
 
@@ -460,15 +460,15 @@ function admin_user_users(&$engine, &$module)
 
 					echo '</select>
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 					<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
-					</td>' . 
+					</td>' .
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked="checked"' : '' ) . ' />
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<label for="account_status">' . $engine->_t('AccountStatus') . '</label>
@@ -489,16 +489,16 @@ function admin_user_users(&$engine, &$module)
 
 					echo '</select>
 					</td>
-				</tr>' . 
+				</tr>' .
 				'<tr>
 					<td>
 						<br />
 						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' . 
+						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
 						'<br />
-						<small>' . $engine->_t('UsersRenameInfo') . '</small>' . 
+						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
 					'</td>
-				</tr>' . 
+				</tr>' .
 			'</table>
 			<br />';
 
@@ -544,15 +544,15 @@ function admin_user_users(&$engine, &$module)
 
 		echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '" />' . "\n".
 			 '<input type="hidden" name="ids" value="' . implode('-', $set) . '" />' . "\n".
-				 '<table class="formation">' . 
+				 '<table class="formation">' .
 					'<tr>
 						<td>
-							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users.'?</label> '.
+							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users . '?</label> '.
 							'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-							'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' . 
-							'<br /><small>' . $engine->_t('UsersDeleteInfo') . '</small>' . 
+							'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
+							'<br /><small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
 						'</td>
-					</tr>' . 
+					</tr>' .
 				'</table>
 				<br />';
 
@@ -575,32 +575,32 @@ function admin_user_users(&$engine, &$module)
 		<?php
 
 			echo '<tr class="lined">' . "\n".
-					'<th class="label">' . $engine->_t('UserName') . '</th>' . 
-					'<td><strong>' . $user['user_name'] . '</strong></td>' . 
-				'</tr>' . 
+					'<th class="label">' . $engine->_t('UserName') . '</th>' .
+					'<td><strong>' . $user['user_name'] . '</strong></td>' .
+				'</tr>' .
 				'<tr class="lined">' . "\n".
-					'<th  class="label">' . $engine->_t('RealName') . '</th>' . 
-					'<td>' . $user['real_name'] . '</td>' . 
-				'</tr>' . 
+					'<th  class="label">' . $engine->_t('RealName') . '</th>' .
+					'<td>' . $user['real_name'] . '</td>' .
+				'</tr>' .
 				'<tr class="lined">' . "\n".
-					'<th class="label">' . $engine->_t('EmailAddress') . '</th>' . 
-					'<td>' . $user['email'] . '</td>' . 
-				'</tr>' . 
+					'<th class="label">' . $engine->_t('EmailAddress') . '</th>' .
+					'<td>' . $user['email'] . '</td>' .
+				'</tr>' .
 				'<tr class="lined">' . "\n".
-					'<th class="label">' . $engine->_t('YourLanguage') . '</th>' . 
-					'<td>' . $user['user_lang'] . '</td>' . 
-				'</tr>' . 
+					'<th class="label">' . $engine->_t('YourLanguage') . '</th>' .
+					'<td>' . $user['user_lang'] . '</td>' .
+				'</tr>' .
 				'<tr class="lined">' . "\n".
-					'<th class="label">' . $engine->_t('ChooseTheme') . '</th>' . 
-					'<td>' . $user['theme'] . '</td>' . 
-				'</tr>' . 
+					'<th class="label">' . $engine->_t('ChooseTheme') . '</th>' .
+					'<td>' . $user['theme'] . '</td>' .
+				'</tr>' .
 				'<tr class="lined">' . "\n".
-					'<th class="label">' . $engine->_t('UserEnabled') . '</th>' . 
-					'<td>' . $user['enabled'] . '</td>' . 
-				'</tr>' . 
+					'<th class="label">' . $engine->_t('UserEnabled') . '</th>' .
+					'<td>' . $user['enabled'] . '</td>' .
+				'</tr>' .
 				'<tr class="lined">' . "\n".
-					'<th class="label">' . $engine->_t('AccountStatus') . '</th>' . 
-					'<td>' . $status[$user['account_status']] . '</td>' . 
+					'<th class="label">' . $engine->_t('AccountStatus') . '</th>' .
+					'<td>' . $status[$user['account_status']] . '</td>' .
 				'</tr>';
 ?>
 		</table>
@@ -790,7 +790,7 @@ function admin_user_users(&$engine, &$module)
 		// user filter form
 		$search =	$engine->form_open('search_user', ['form_method' => 'get']).
 					'<input type="hidden" name="mode" value="' . $module['mode'] . '" />' .  // required to pass mode module via GET
-					$engine->_t('UsersSearch') . ': </td><td>' . 
+					$engine->_t('UsersSearch') . ': </td><td>' .
 					'<input type="search" name="user" maxchars="40" size="30" value="' . (isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') . '" /> '.
 					'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '" /> '.
 					$engine->form_close();
@@ -807,7 +807,7 @@ function admin_user_users(&$engine, &$module)
 							'<input type="submit" id="button" name="edit" value="' . $engine->_t('UserEditButton') . '" /> '.
 							#'<input type="submit" id="button" name="approve" value="' . $engine->_t('Approve') . '" /> '.
 							'<input type="submit" id="button" name="remove" value="' . $engine->_t('GroupsRemoveButton') . '" /> '.
-							'<input type="hidden" name="ids" value="' . implode('-', $set) . '" />' . 
+							'<input type="hidden" name="ids" value="' . implode('-', $set) . '" />' .
 							'<br />' . "\n".
 								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '" /> '.
 								($set
@@ -848,23 +848,23 @@ function admin_user_users(&$engine, &$module)
 				echo '<tr class="lined">' . "\n".
 						'<td style="vertical-align:middle; width:10px;" class="label">
 							<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ) . '/>
-						</td>' . 
+						</td>' .
 						'<td>
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '" />
-						</td>' . 
-						'<td>' . $row['user_id'] . '</td>' . 
-						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . $row['user_name'] . '</a></strong></td>' . 
-						#'<td style="padding-left:5px; padding-right:5px;">' . $row['real_name'] . '</td>' . 
-						'<td>' . $row['email'] . '</td>' . 
-						'<td>' . $row['total_pages'] . '</td>' . 
-						'<td>' . $row['total_comments'] . '</td>' . 
-						'<td>' . $row['total_revisions'] . '</td>' . 
-						'<td>' . $row['total_uploads'] . '</td>' . 
-						'<td><small><a href="' . $engine->href() . '&amp;user_lang=' . $row['user_lang'] . '">' . $row['user_lang'] . '</a></small></td>' . 
-						'<td>' . $row['enabled'] . '</td>' . 
-						'<td><a href="' . $engine->href() . '&amp;account_status=' . $row['account_status'] . '">' . $status[$row['account_status']] . '</a></td>' . 
-						'<td><small>' . date($engine->db->date_precise_format, strtotime($row['signup_time'])) . '</small></td>' . 
-						'<td><small>' . date($engine->db->date_precise_format, strtotime($row['last_visit'])) . '</small></td>' . 
+						</td>' .
+						'<td>' . $row['user_id'] . '</td>' .
+						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . $row['user_name'] . '</a></strong></td>' .
+						#'<td style="padding-left:5px; padding-right:5px;">' . $row['real_name'] . '</td>' .
+						'<td>' . $row['email'] . '</td>' .
+						'<td>' . $row['total_pages'] . '</td>' .
+						'<td>' . $row['total_comments'] . '</td>' .
+						'<td>' . $row['total_revisions'] . '</td>' .
+						'<td>' . $row['total_uploads'] . '</td>' .
+						'<td><small><a href="' . $engine->href() . '&amp;user_lang=' . $row['user_lang'] . '">' . $row['user_lang'] . '</a></small></td>' .
+						'<td>' . $row['enabled'] . '</td>' .
+						'<td><a href="' . $engine->href() . '&amp;account_status=' . $row['account_status'] . '">' . $status[$row['account_status']] . '</a></td>' .
+						'<td><small>' . date($engine->db->date_precise_format, strtotime($row['signup_time'])) . '</small></td>' .
+						'<td><small>' . date($engine->db->date_precise_format, strtotime($row['last_visit'])) . '</small></td>' .
 					'</tr>';
 			}
 		}

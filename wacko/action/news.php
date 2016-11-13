@@ -219,7 +219,7 @@ if (!empty($this->db->news_cluster))
 		foreach ($pages as $page)
 		{
 			$_category = $this->get_categories($page['page_id']);
-			$_category = !empty($_category) ? $this->_t('Category') . ': ' . $_category.' | ' : '';
+			$_category = !empty($_category) ? $this->_t('Category') . ': ' . $_category . ' | ' : '';
 
 			echo '<article class="newsarticle">';
 			echo '<h2 class="newstitle"><a href="' . $this->href('', $page['tag'], '') . '">' . $page['title'] . "</a></h2>\n";

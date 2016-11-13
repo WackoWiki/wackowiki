@@ -59,7 +59,7 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 		($tag
 			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "").
-		"WHERE ( lower(a.tag) LIKE binary lower(" . $this->db->q('%' . $phrase.'%') . ") ".
+		"WHERE ( lower(a.tag) LIKE binary lower(" . $this->db->q('%' . $phrase . '%') . ") ".
 			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) ".
 		($tag
 			? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " ".

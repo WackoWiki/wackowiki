@@ -138,7 +138,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$body_r	= $this->save_page('Comment' . $num, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id, $parent_id);
 
 			// log event
-			$this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag.' ' . $this->page['title']));
+			$this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag . ' ' . $this->page['title']));
 
 			// restore username after anonymous publication
 			if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])

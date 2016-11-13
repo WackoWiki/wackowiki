@@ -36,7 +36,7 @@ if (($user = $this->get_user()))
 {
 	// user is logged in; display logout form
 	$tpl->u_href = $this->href();
-	$tpl->u_link = $this->compose_link_to_page($this->db->users_page.'/' . $user['user_name'], '', $user['user_name']);
+	$tpl->u_link = $this->compose_link_to_page($this->db->users_page . '/' . $user['user_name'], '', $user['user_name']);
 
 	if (!$this->db->is_null_date($user['last_visit']))
 	{

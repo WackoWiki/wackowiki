@@ -122,14 +122,14 @@ else if($this->has_access('write'))
 						{
 							echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 								 . '"><img src="' .  $this->db->theme_url
-								.'icon/bookmark-remove.png" alt="+" title="' .
+								. 'icon/bookmark-remove.png" alt="+" title="' .
 								$this->_t('AddToBookmarks')  . '"/></a></li>';
 						}
 						else
 						{
 							echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 								 . '"><img src="' .  $this->db->theme_url
-								.'icon/bookmark-add.png" alt="-" title="' .
+								. 'icon/bookmark-add.png" alt="-" title="' .
 								$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 						}
 					}*/
@@ -139,7 +139,7 @@ else if($this->has_access('write'))
 			<?php // If logged in, show username, settings and logout ?>
 			<?php if($user = $this->get_user()) { ?>
 			<div class="user">
-				<?php echo $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()); ?>
+				<?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()); ?>
 				<small>( <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?> |
 				<a href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a> )</small>
 			</div>

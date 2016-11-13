@@ -135,7 +135,7 @@ function admin_content_files(&$engine, &$module)
 			// here would be place for translit
 			$name = $engine->format($name, 'translit');
 
-			$dir	= UPLOAD_GLOBAL_DIR.'/';
+			$dir	= UPLOAD_GLOBAL_DIR . '/';
 			$banned	= explode('|', $engine->db->upload_banned_exts);
 
 			if (in_array(strtolower($ext), $banned))
@@ -185,7 +185,7 @@ function admin_content_files(&$engine, &$module)
 
 			// 5. insert line into DB
 			$engine->db->sql_query("INSERT INTO {$engine->db->table_prefix}upload SET ".
-				"page_id			= '".'0'."', ".
+				"page_id			= '" . '0' . "', ".
 				"file_name			= " . $engine->db->q($small_name) . ", ".
 				"upload_lang		= " . $engine->db->q($engine->db->language) . ", ".
 				"file_description	= " . $engine->db->q($description) . ", ".

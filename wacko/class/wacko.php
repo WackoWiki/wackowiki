@@ -1337,7 +1337,7 @@ class Wacko
 		// get default links
 		if (isset($user['user_name']))
 		{
-			$pages[]	= $this->db->users_page.'/' . $user['user_name'];
+			$pages[]	= $this->db->users_page . '/' . $user['user_name'];
 			$pages[]	= $this->_t('AccountLink');
 		}
 		else
@@ -1834,7 +1834,7 @@ class Wacko
 			if (!$comment_on_id && $this->forum)
 			{
 				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc.' [..]');
+				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc . ' [..]');
 			}
 
 			// preformatter (macros and such)
@@ -2000,12 +2000,12 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// see add_comment handler
-					// $this->log(5, str_replace('%2', $this->tag.' ' . $this->page['title'], str_replace('%1', 'Comment' . $num, $this->_t('LogCommentPosted', SYSTEM_LANG))));
+					// $this->log(5, str_replace('%2', $this->tag . ' ' . $this->page['title'], str_replace('%1', 'Comment' . $num, $this->_t('LogCommentPosted', SYSTEM_LANG))));
 				}
 				else
 				{
 					// added new page
-					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag.' ' . $title));
+					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag . ' ' . $title));
 				}
 
 				// TODO: move to additional function
@@ -2120,12 +2120,12 @@ class Wacko
 					if ($this->page['comment_on_id'] != 0)
 					{
 						// comment modified
-						$this->log(6, Ut::perc_replace($this->_t('LogCommentEdited', SYSTEM_LANG), $tag.' ' . $title));
+						$this->log(6, Ut::perc_replace($this->_t('LogCommentEdited', SYSTEM_LANG), $tag . ' ' . $title));
 					}
 					else
 					{
 						// old page modified
-						$this->log(6, Ut::perc_replace($this->_t('LogPageEdited', SYSTEM_LANG), $tag.' ' . $title));
+						$this->log(6, Ut::perc_replace($this->_t('LogPageEdited', SYSTEM_LANG), $tag . ' ' . $title));
 					}
 
 					// Since there's no revision history for comments it's pointless to do the following for them.
@@ -2152,7 +2152,7 @@ class Wacko
 					// write news feed
 					if ($this->db->news_cluster)
 					{
-						if (substr($this->tag, 0, strlen($this->db->news_cluster.'/')) == $this->db->news_cluster.'/')
+						if (substr($this->tag, 0, strlen($this->db->news_cluster . '/')) == $this->db->news_cluster . '/')
 						{
 							$xml->feed(); // $this->tag
 						}
@@ -2252,7 +2252,7 @@ class Wacko
 			$user_lang = $this->db->language;
 		}
 
-		$tag				= $this->db->users_page.'/' . $user_name;
+		$tag				= $this->db->users_page . '/' . $user_name;
 		// add your user page template here
 		$user_page_template	= '**((user:' . $user_name . ' ' . $user_name . '))** (' . $this->format('::+::', 'pre_wacko') . ')';
 		$change_summary		= $this->_t('NewUserAccount'); //'auto created';
@@ -2992,12 +2992,12 @@ class Wacko
 				$_height .= 'px';
 			}
 
-			$resize = ' style="width:' . $_width.';height:' . $_height;
+			$resize = ' style="width:' . $_width . ';height:' . $_height;
 		}
 
 		if ($_align)
 		{
-			$resize .= ' vertical-align:' . $_align.';"';
+			$resize .= ' vertical-align:' . $_align . ';"';
 		}
 		else if ($resize != '')
 		{
@@ -3023,7 +3023,7 @@ class Wacko
 		{
 			// ((image.png)) - loads only images from image/ folder
 			// XXX: odd behavior, user can't check or upload to image/ folder - how useful is this?
-			$img_link = $this->db->base_url.'/image/' . $text;
+			$img_link = $this->db->base_url . '/image/' . $text;
 		}
 		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg)$/i', preg_replace('/<\/?nobr>/', '', $text)))
 		{
@@ -3061,7 +3061,7 @@ class Wacko
 
 			if ($text == $tag)
 			{
-				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" '.($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $resize.' />';
+				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" '.($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $resize . ' />';
 			}
 			else
 			{
@@ -3253,7 +3253,7 @@ class Wacko
 							{
 								$text = $title;
 								return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
-										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize.' />';
+										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize . ' />';
 							}
 							else
 							{
@@ -3270,7 +3270,7 @@ class Wacko
 							{
 								$text = $title;
 								return '<img src="' . $this->href('file', trim($page_tag, '/'), 'get=' . $file_name) . '" '.
-										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize.' />';
+										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize . ' />';
 							}
 							else
 							{
@@ -3333,7 +3333,7 @@ class Wacko
 				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
-			$url	= $this->href('', $this->db->users_page.'/', 'profile='.implode('/', $parts));
+			$url	= $this->href('', $this->db->users_page . '/', 'profile='.implode('/', $parts));
 
 			$class	= 'user-link';
 			$icon	= $this->_t('OuterIcon');
@@ -3354,7 +3354,7 @@ class Wacko
 				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
-			$url	= $this->href('', $this->db->groups_page.'/', 'profile='.implode('/', $parts));
+			$url	= $this->href('', $this->db->groups_page . '/', 'profile='.implode('/', $parts));
 
 			$class	= 'group-link';
 			$icon	= $this->_t('OuterIcon');
@@ -3386,11 +3386,11 @@ class Wacko
 			$tag			= $otag		= $matches[1];
 			$untag			= $unwtag	= $this->unwrap_link($tag);
 
-			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers.')\/(.*)$/i';
+			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/i';
 			$ptag			= $this->translit($unwtag);
 			$handler		= null;
 
-			if (preg_match( $regex_handlers, '/' . $ptag.'/', $match ))
+			if (preg_match( $regex_handlers, '/' . $ptag . '/', $match ))
 			{
 				$handler	= $match[2];
 
@@ -3400,7 +3400,7 @@ class Wacko
 				}
 
 				$ptag		= $match[1];
-				$unwtag		= '/' . $unwtag.'/';
+				$unwtag		= '/' . $unwtag . '/';
 				$co			= substr_count($_ptag, '/') - substr_count($ptag, '/');
 
 				for ($i = 0; $i < $co; $i++)
@@ -3415,7 +3415,7 @@ class Wacko
 						$data = ''; // XXX: ???
 					}
 
-					$opar	= '/' . $untag.'/';
+					$opar	= '/' . $untag . '/';
 
 					for ($i = 0; $i < substr_count($data, '/') + 2; $i++)
 					{
@@ -3497,7 +3497,7 @@ class Wacko
 
 			if ($img_link)
 			{
-				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize.' />';
+				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . ' />';
 			}
 
 			if ($text)
@@ -3653,7 +3653,7 @@ class Wacko
 		{
 			if ($img_link)
 			{
-				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize.' />';
+				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . ' />';
 			}
 
 			// XXX: obsolete -> see wacko.css
@@ -3839,10 +3839,10 @@ class Wacko
 	function validate_reserved_words( $data )
 	{
 		$_data = $this->translit( $data );
-		$_data = '/' . $_data.'/';
+		$_data = '/' . $_data . '/';
 
 		// Find the string of text
-		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/' . $this->db->standard_handlers.'\/(.*)$/i';
+		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/' . $this->db->standard_handlers . '\/(.*)$/i';
 
 		// Find the word
 		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers . ')\b/i';
@@ -3863,7 +3863,7 @@ class Wacko
 		}
 
 		// TODO: disallow random pages for the first level in the users cluster except the own [UserName].
-		/* if (preg_match( '/\b(' . $this->db->users_page.'\/*\/)\b/i', $_data, $match ))
+		/* if (preg_match( '/\b(' . $this->db->users_page . '\/*\/)\b/i', $_data, $match ))
 		{
 			Ut::debug_print_r($match);
 			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
@@ -4137,7 +4137,7 @@ class Wacko
 
 		/* if ($this->db->tls) // removed by STS - very bad idea to go from http page into https post page
 		{
-			$result = str_replace('http://', 'https://'.($this->db->tls_proxy ? $this->db->tls_proxy.'/' : ''), $result);
+			$result = str_replace('http://', 'https://'.($this->db->tls_proxy ? $this->db->tls_proxy . '/' : ''), $result);
 		} */
 
 		return $result;
@@ -4159,7 +4159,7 @@ class Wacko
 			$this->set_message($this->_t('FormInvalid'), 'error');
 
 			// TODO diag or not?
-			// $this->log(1, '**!!'.'Potential CSRF attack in progress detected.'.'!!**'.' [[/' . $this->page['tag'] . ']] ' . $form_name); # 'Invalid form token'
+			// $this->log(1, '**!!' . 'Potential CSRF attack in progress detected.' . '!!**'.' [[/' . $this->page['tag'] . ']] ' . $form_name); # 'Invalid form token'
 
 			return false;
 		}
@@ -5119,9 +5119,9 @@ class Wacko
 	*/
 	function get_cached_acl($page_id, $privilege, $use_defaults)
 	{
-		if (isset( $this->acl_cache[$page_id.'#' . $privilege.'#' . $use_defaults] ))
+		if (isset( $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ))
 		{
-			return $this->acl_cache[$page_id.'#' . $privilege.'#' . $use_defaults];
+			return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults];
 		}
 		else
 		{
@@ -5140,7 +5140,7 @@ class Wacko
 	function cache_acl($page_id, $privilege, $use_defaults, $acl)
 	{
 		// $acl array must reflect acls table row structure
-		$this->acl_cache[$page_id.'#' . $privilege.'#' . $use_defaults] = $acl;
+		$this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] = $acl;
 	}
 
 	// TODO: add bulk option -> load entire page related priveleges at once in obj-cache

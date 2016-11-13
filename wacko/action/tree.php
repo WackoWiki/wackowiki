@@ -22,7 +22,7 @@ if ($root == '/')	$root	= '';
 if ($root)			$root	= $this->unwrap_link($root);
 
 $_root		= $root; // without slash -> LIKE /%
-$root		= $root.'/';
+$root		= $root . '/';
 
 if (!isset($depth)) $depth = '';
 // TODO: set default depth level via config

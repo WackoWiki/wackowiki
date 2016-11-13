@@ -24,7 +24,7 @@ $user = '';
 
 if ($user = $this->get_user())
 {
-	echo 'id: ' . $this->link($this->db->users_page.'/' . $this->get_user_name(), '', $this->get_user_name()) . ' &nbsp; <a href="' . $this->href('', $this->_t('AccountLink')) . '" title="' . $this->_t('AccountTip') . '">' . $this->_t('AccountText') . '</a> &nbsp; <a href="' . $this->href('', $this->_t('LoginPage')) . '" title="' . $this->_t('SessionTip') . '">' . $this->_t('Session') . '</a> &nbsp; <a onclick="return confirm(\'' . $this->_t('LogoutAreYouSure') . '\');" href="' . $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag)) . '" title="' . $this->_t('LogoutButton') . '">' . $this->_t('LogoutLink') . '</a><br />';
+	echo 'id: ' . $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) . ' &nbsp; <a href="' . $this->href('', $this->_t('AccountLink')) . '" title="' . $this->_t('AccountTip') . '">' . $this->_t('AccountText') . '</a> &nbsp; <a href="' . $this->href('', $this->_t('LoginPage')) . '" title="' . $this->_t('SessionTip') . '">' . $this->_t('Session') . '</a> &nbsp; <a onclick="return confirm(\'' . $this->_t('LogoutAreYouSure') . '\');" href="' . $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag)) . '" title="' . $this->_t('LogoutButton') . '">' . $this->_t('LogoutLink') . '</a><br />';
 }
 else
 {
@@ -91,16 +91,16 @@ echo "\n";
 	{
 		if (in_array($this->tag, $this->get_menu_links()))
 		{
-			echo '<div class="bookmark_out"><a href="' . $this->href('', '', 'removebookmark=yes') . '" title="' . $this->_t('RemoveFromBookmarks') . '"><img src="' . $this->db->theme_url.'images/spacer.png" /></a></div>';
+			echo '<div class="bookmark_out"><a href="' . $this->href('', '', 'removebookmark=yes') . '" title="' . $this->_t('RemoveFromBookmarks') . '"><img src="' . $this->db->theme_url . 'images/spacer.png" /></a></div>';
 		}
 		else
 		{
-			echo '<div class="bookmark_in"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url.'images/spacer.png" /></a></div>';
+			echo '<div class="bookmark_in"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'images/spacer.png" /></a></div>';
 		}
 	}
 	else
 	{
-		echo '<div class="bookmark_in"><img src="' . $this->db->theme_url.'images/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
+		echo '<div class="bookmark_in"><img src="' . $this->db->theme_url . 'images/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
 	}
 	echo "\n";
 
@@ -153,7 +153,7 @@ echo "\n";
 				echo '(' . $this->_t('Created') . ' ' . $this->get_time_formatted($this->page['created']) . '), ';
 			}
 
-			echo $this->_t('Modified') . ' ' . $this->get_time_formatted($this->page['modified']) . ' (' . $this->_t('By') . ': ' . $this->user_link($this->page['user_name'], $lang = '', true, false) .')';
+			echo $this->_t('Modified') . ' ' . $this->get_time_formatted($this->page['modified']) . ' (' . $this->_t('By') . ': ' . $this->user_link($this->page['user_name'], $lang = '', true, false) . ')';
 		}
 	}
 	echo "\n";

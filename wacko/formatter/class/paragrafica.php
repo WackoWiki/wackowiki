@@ -231,10 +231,10 @@ class paragrafica
 						if (strlen($inside))
 						{
 							$pcount++;
-							$pieces[$k] = $this->prefix1.
-										  $page_id.'-' . $pcount.
-										  $this->prefix2.
-										  $inside.
+							$pieces[$k] = $this->prefix1 .
+										  $page_id . '-' . $pcount .
+										  $this->prefix2 .
+										  $inside .
 										  $this->postfix.substr($v, $pos + $sizeof_mark1);
 						}
 					}

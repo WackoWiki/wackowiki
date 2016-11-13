@@ -72,7 +72,7 @@ function admin_system_info(&$engine, &$module)
 	// Sysinfo in array
 	$sysinfo['app_version']			= ['Wacko version', $engine->db->wacko_version];
 	$sysinfo['app_updated']			= ['Last update', $engine->db->maint_last_update];
-	$sysinfo['os']					= ['OS', PHP_OS.' (' . @php_uname() . ')'];
+	$sysinfo['os']					= ['OS', PHP_OS . ' (' . @php_uname() . ')'];
 	$sysinfo['server_name']			= ['Server name', $_SERVER['SERVER_NAME']];
 	$sysinfo['server_software']		= ['Web server', $_SERVER['SERVER_SOFTWARE']];
 	$sysinfo['db_version']			= ['MariaDB / MySQL version', $db_version];
@@ -94,11 +94,11 @@ function admin_system_info(&$engine, &$module)
 
 	foreach ($sysinfo as $param => $value)
 	{
-		echo '<tr class="lined">' . 
-				'<td class="label"><strong>' . $value[0] . '</strong></td>' . 
-				'<td> </td>' . 
-				'<td>' . $value[1] . '</td>' . 
-			#'<tr class="lined"><td colspan="5"></td></tr>' . 
+		echo '<tr class="lined">' .
+				'<td class="label"><strong>' . $value[0] . '</strong></td>' .
+				'<td> </td>' .
+				'<td>' . $value[1] . '</td>' .
+			#'<tr class="lined"><td colspan="5"></td></tr>' .
 			"\n";
 	}
 ?>

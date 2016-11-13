@@ -129,13 +129,13 @@ if ($this->has_access('read'))
 					|| ($this->db->owners_can_remove_comments && $this->is_owner($this->page['page_id']))
 				)))
 				{
-					$handler_button .= '<a href="' . $this->href('remove', $comment['tag']) . '"><img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" style="float: right; padding: 2px;" class="btn-delete"/></a>';
+					$handler_button .= '<a href="' . $this->href('remove', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" style="float: right; padding: 2px;" class="btn-delete"/></a>';
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->is_owner($comment['page_id']))
 				{
-					$handler_button .= '<a href="' . $this->href('edit', $comment['tag']) . '"><img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('EditCommentTip') . '" alt="' . $this->_t('EditComment') . '" style="float: right; padding: 2px;" class="btn-edit"/></a>';
+					$handler_button .= '<a href="' . $this->href('edit', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('EditCommentTip') . '" alt="' . $this->_t('EditComment') . '" style="float: right; padding: 2px;" class="btn-edit"/></a>';
 				}
 
 				if (!empty($handler_button))
@@ -160,7 +160,7 @@ if ($this->has_access('read'))
 
 				echo '<p>' . $this->format($pre_body, 'post_wacko') . "</p>\n";
 
-				echo '<footer>' . 
+				echo '<footer>' .
 						'<ul class="comment-info">' . "\n".
 						"<li>".
 							$this->user_link($comment['owner_name']).
@@ -198,7 +198,7 @@ if ($this->has_access('read'))
 							echo '<a href="' . $this->href('', '', 'parent_id=' . $comment['page_id'] . '#commentform') . '">' . $this->_t('ReplyComment') . '</a>';
 						}
 
-						echo '</li>' . 
+						echo '</li>' .
 						"</ul>\n";
 
 				echo "</div>\n"; */
@@ -227,16 +227,16 @@ if ($this->has_access('read'))
 
 				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim') . '</span></p>' . "\n".
 						'<div class="comment-preview">' . "\n".
-						'<header class="comment-title">' . 
-							'<h2>' . $title . '</h2>' . 
+						'<header class="comment-title">' .
+							'<h2>' . $title . '</h2>' .
 						'</header>' . "\n".
-						'<p>' . $preview . '</p>' . 
+						'<p>' . $preview . '</p>' .
 						"</div>\n</div><br />\n";
 			}
 
 			// load WikiEdit
 			echo '<script src="' . $this->db->base_url . 'js/protoedit.js"></script>' . "\n";
-			echo '<script src="' . $this->db->base_url . 'js/lang/wikiedit.' . $this->user_lang.'.js"></script>' . "\n";
+			echo '<script src="' . $this->db->base_url . 'js/lang/wikiedit.' . $this->user_lang . '.js"></script>' . "\n";
 			echo '<script src="' . $this->db->base_url . 'js/wikiedit.js"></script>' . "\n";
 			echo '<script src="' . $this->db->base_url . 'js/autocomplete.js"></script>' . "\n";
 			?>

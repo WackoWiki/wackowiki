@@ -51,11 +51,11 @@ function admin_db_backup(&$engine, &$module)
 		{
 			if ($val == 1)
 			{
-				$getstr .= '&amp;' . $key.'=1';
+				$getstr .= '&amp;' . $key . '=1';
 			}
 			else
 			{
-				$getstr .= '&amp;' . $key.'=0';
+				$getstr .= '&amp;' . $key . '=0';
 			}
 		}
 	}
@@ -122,9 +122,9 @@ function admin_db_backup(&$engine, &$module)
 				}
 
 				// ...and for these specific tables
-				if ($table == $engine->db->table_prefix.'cache'
-				||  $table == $engine->db->table_prefix.'referrer'
-				||  $table == $engine->db->table_prefix.'log')
+				if ($table == $engine->db->table_prefix . 'cache'
+				||  $table == $engine->db->table_prefix . 'referrer'
+				||  $table == $engine->db->table_prefix . 'log')
 				{
 					$drop = 1;
 				}
@@ -195,9 +195,9 @@ function admin_db_backup(&$engine, &$module)
 	}
 	else
 	{
-		if (!is_writable(UPLOAD_BACKUP_DIR.'/'))
+		if (!is_writable(UPLOAD_BACKUP_DIR . '/'))
 		{
-			echo output_image($engine, false) . '<strong class="red">The '.UPLOAD_BACKUP_DIR.'/'.' directory is not writable.</strong>' .  "<br />\n";
+			echo output_image($engine, false) . '<strong class="red">The '. UPLOAD_BACKUP_DIR . '/' . ' directory is not writable.</strong>' . "<br />\n";
 		}
 		else
 		{
@@ -230,15 +230,15 @@ function admin_db_backup(&$engine, &$module)
 					$check = true;
 				}
 
-				echo '<tr class="hl_setting">' . 
-						'<td class="label"><strong>' . $table['name'] . '</strong></td>' . 
+				echo '<tr class="hl_setting">' .
+						'<td class="label"><strong>' . $table['name'] . '</strong></td>' .
 						'<td style="text-align:center;">&nbsp;&nbsp;
 							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked="checked"' : '' ) . ' />
-						</td>' . 
+						</td>' .
 						'<td style="text-align:center;">
 							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked="checked"' : '' ) . ' />
-						</td>' . 
-					'</tr>' . 
+						</td>' .
+					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
 			}
 ?>
@@ -258,12 +258,12 @@ function admin_db_backup(&$engine, &$module)
 
 				$dir = rtrim($dir, '/');
 
-				echo '<tr>' . 
-						'<td colspan="2" class="label"><strong>' . $dir . '</strong></td>' . 
+				echo '<tr>' .
+						'<td colspan="2" class="label"><strong>' . $dir . '</strong></td>' .
 						'<td style="text-align:center;">&nbsp;&nbsp;
 							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked="checked"' : '' ) . ' />
-						</td>' . 
-					'</tr>' . 
+						</td>' .
+					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
 			}
 ?>

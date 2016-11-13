@@ -106,7 +106,7 @@ $count = $this->db->load_single(
 				($title
 					? "title "
 					: "tag ").
-				"LIKE " . $this->db->q($letter.'%') . " "
+				"LIKE " . $this->db->q($letter . '%') . " "
 			: "")
 	, true);
 
@@ -131,7 +131,7 @@ if (($pages = $this->db->load_all(
 				($title
 					? "title "
 					: "tag ") .
-				"LIKE " . $this->db->q($letter.'%') . " "
+				"LIKE " . $this->db->q($letter . '%') . " "
 			: "") .
 	"ORDER BY " .
 		($title

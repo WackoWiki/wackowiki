@@ -40,7 +40,7 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 	if (isset($_POST['value']))
 	{
 		$page_id		= $this->page['page_id'];
-		$value	= round((string) $_POST['value']);
+		$value	= round((int) $_POST['value']);
 
 		if ($value >  3) $value =  3;
 		if ($value < -3) $value = -3;

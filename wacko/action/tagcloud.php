@@ -44,7 +44,7 @@ if (!function_exists('print_tag_cloud'))
 			// and add the $min_size set above
 			$size = round($min_size + (($value['number'] - $min_qty) * $step));
 
-			echo '<a href="' . $tag_path.'' . $key . '" style="font-size: ' . $size . 'px" title="' . $value['number'] . ' pages tagged with ' . $value['category'] . '">' . $value['category'] . '</a> ';
+			echo '<a href="' . $tag_path . '' . $key . '" style="font-size: ' . $size . 'px" title="' . $value['number'] . ' pages tagged with ' . $value['category'] . '">' . $value['category'] . '</a> ';
 		}
 	}
 }

@@ -163,12 +163,12 @@ if ($doubleclick == true)
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url.'icon/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
+							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
 						}
 						echo "\n";
 
@@ -183,12 +183,12 @@ if ($doubleclick == true)
 					if ($this->get_user())
 					{
 						// compose user identity icon with link to user page
-						echo "<a href=\"" . $this->db->base_url.$this->db->users_page."/" . $this->get_user_name() . "\"><img src=\"" . $this->db->theme_url."icon/user_identity_white.png\" title=\"" . $this->_t('YouAre').$this->get_user_name() . "\" alt=\"" . $this->_t('YouAre').$this->get_user_name() . "\" /></a>\n";
+						echo "<a href=\"" . $this->db->base_url.$this->db->users_page . '/' . $this->get_user_name() . "\"><img src=\"" . $this->db->theme_url."icon/user_identity_white.png\" title=\"" . $this->_t('YouAre').$this->get_user_name() . "\" alt=\"" . $this->_t('YouAre').$this->get_user_name() . "\" /></a>\n";
 						?>
 						<span class="nobr">
 						<?php
 						// display link to user space at UserList cluster (distinct namespace later on)
-						echo $this->compose_link_to_page($this->db->users_page."/" . $this->get_user_name(), "", $this->get_user_name(), 0);
+						echo $this->compose_link_to_page($this->db->users_page . '/' . $this->get_user_name(), "", $this->get_user_name(), 0);
 
 						// TODO: tag ( | ) properly so we can apply css rules
 						?>
@@ -427,12 +427,12 @@ if ($doubleclick == true)
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url.'icon/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url.'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
+							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
 						}
 						echo "\n";
 

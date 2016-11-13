@@ -166,7 +166,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							rtrim($this->db->base_url, '/'),
 							Ut::amp_decode($this->href('', '',
 								['profile' => $this->get_user_name(),
-								'ref' => Ut::http64_encode(gzdeflate($msg_id.'@@' . $subject, 9)),
+								'ref' => Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
 								'#' => 'contacts'])),
 							$this->db->abuse_email,
 							$_POST['mail_body']);

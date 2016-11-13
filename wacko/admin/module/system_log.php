@@ -118,7 +118,7 @@ function admin_system_log(&$engine, &$module)
 	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n ".
 		"FROM {$engine->db->table_prefix}log l ".
-		( $where ? $where : 'WHERE level <= ' . (int) $level.' ' ));
+		( $where ? $where : 'WHERE level <= ' . (int) $level . ' ' ));
 
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
 	$level_pagination		= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
@@ -129,7 +129,7 @@ function admin_system_log(&$engine, &$module)
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ".
 		"FROM {$engine->db->table_prefix}log l ".
 			"LEFT JOIN {$engine->db->table_prefix}user u ON (l.user_id = u.user_id) ".
-		( $where ? $where : 'WHERE l.level <= ' . (int) $level.' ' ).
+		( $where ? $where : 'WHERE l.level <= ' . (int) $level . ' ' ).
 		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
 		$pagination['limit']);
 
@@ -202,14 +202,14 @@ function admin_system_log(&$engine, &$module)
 			$time_tz = $engine->sql2precisetime($row['log_time']);
 
 			echo '<tr class="lined">' . "\n".
-					'<td style="vertical-align:top; text-align:center;">' . $row['log_id'] . '</td>' . 
-					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' . 
-					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' . 
+					'<td style="vertical-align:top; text-align:center;">' . $row['log_id'] . '</td>' .
+					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' .
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' .
 					'<td style="vertical-align:top;">' . $engine->format($row['message'], 'post_wacko') . '</td>' .
-					'<td style="vertical-align:top; text-align:center;"><small>' . 
-						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br />' . 
-						'<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' . 
-					'</small></td>' . 
+					'<td style="vertical-align:top; text-align:center;"><small>' .
+						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br />' .
+						'<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
+					'</small></td>' .
 				'</tr>';
 		}
 	}

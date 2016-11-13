@@ -158,11 +158,11 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					$edit_note = $this->do_unicode_entities($edit_note, $_cf_lang);
 				}
 
-				$edit_note = ' <span class="editnote">[' . $edit_note.']</span>';
+				$edit_note = ' <span class="editnote">[' . $edit_note . ']</span>';
 			}
 
 			// time
-			echo '<li class="lined' . $viewed . '"><span class="dt">' . $time_modified.'&nbsp;&nbsp;</span>';
+			echo '<li class="lined' . $viewed . '"><span class="dt">' . $time_modified . '&nbsp;&nbsp;</span>';
 
 			// new file
 			if ($page['ctype'] == 2)
