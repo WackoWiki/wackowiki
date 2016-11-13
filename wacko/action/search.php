@@ -208,7 +208,7 @@ $highlight_this = function ($text, $words, $the_place)
 			// escape bad regex characters
 			$word		= preg_quote($word);
 			// highlight uppercase and lowercase correctly
-			$text		= preg_replace('/(' . $word.')/i','<span class="highlight">$1</span>' , $text, -1 , $count);
+			$text		= preg_replace('/(' . $word . ')/i','<span class="highlight">$1</span>' , $text, -1 , $count);
 			$the_count	= $count + $the_count;
 		}
 

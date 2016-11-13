@@ -114,7 +114,7 @@ else
 				echo $polls_obj->show_poll_vote($poll['poll_id']);
 			}
 
-			echo '</td>'.($align == 'v' ? '</tr>' : '');
+			echo '</td>' . ($align == 'v' ? '</tr>' : '');
 		}
 
 		echo ($align == 'h' ? '</tr>' : '');

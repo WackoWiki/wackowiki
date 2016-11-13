@@ -160,7 +160,7 @@ if ($this->has_access('read'))
 
 				echo '<p>' . $this->format($pre_body, 'post_wacko') . "</p>\n";
 
-				echo '<footer>'.
+				echo '<footer>' . 
 						'<ul class="comment-info">' . "\n".
 						"<li>".
 							$this->user_link($comment['owner_name']).
@@ -198,7 +198,7 @@ if ($this->has_access('read'))
 							echo '<a href="' . $this->href('', '', 'parent_id=' . $comment['page_id'] . '#commentform') . '">' . $this->_t('ReplyComment') . '</a>';
 						}
 
-						echo '</li>'.
+						echo '</li>' . 
 						"</ul>\n";
 
 				echo "</div>\n"; */
@@ -227,18 +227,18 @@ if ($this->has_access('read'))
 
 				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim') . '</span></p>' . "\n".
 						'<div class="comment-preview">' . "\n".
-						'<header class="comment-title">'.
-							'<h2>' . $title.'</h2>'.
+						'<header class="comment-title">' . 
+							'<h2>' . $title . '</h2>' . 
 						'</header>' . "\n".
-						'<p>' . $preview.'</p>'.
+						'<p>' . $preview . '</p>' . 
 						"</div>\n</div><br />\n";
 			}
 
 			// load WikiEdit
-			echo '<script src="' . $this->db->base_url.'js/protoedit.js"></script>' . "\n";
-			echo '<script src="' . $this->db->base_url.'js/lang/wikiedit.' . $this->user_lang.'.js"></script>' . "\n";
-			echo '<script src="' . $this->db->base_url.'js/wikiedit.js"></script>' . "\n";
-			echo '<script src="' . $this->db->base_url.'js/autocomplete.js"></script>' . "\n";
+			echo '<script src="' . $this->db->base_url . 'js/protoedit.js"></script>' . "\n";
+			echo '<script src="' . $this->db->base_url . 'js/lang/wikiedit.' . $this->user_lang.'.js"></script>' . "\n";
+			echo '<script src="' . $this->db->base_url . 'js/wikiedit.js"></script>' . "\n";
+			echo '<script src="' . $this->db->base_url . 'js/autocomplete.js"></script>' . "\n";
 			?>
 				<noscript><div class="errorbox_js"><?php echo $this->_t('WikiEditInactiveJs'); ?></div></noscript>
 
@@ -333,7 +333,7 @@ if ($this->has_access('read'))
 			// display comments section
 			echo '<section id="section-comments">';
 			echo '<header id="header-comments">';
-			echo '<h1><a href="' . $this->href('', '', 'show_comments=1#header-comments') . '" title="' . $this->_t('ShowComments') . '">' . $show_comments.'</a></h1>';
+			echo '<h1><a href="' . $this->href('', '', 'show_comments=1#header-comments') . '" title="' . $this->_t('ShowComments') . '">' . $show_comments . '</a></h1>';
 			echo '</header>' . "\n";
 			echo "</section>\n";
 		}

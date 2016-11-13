@@ -190,7 +190,7 @@ echo "\n";
 		foreach ($this->categories as $word)
 		{
 			if ($i++ > 0) echo ", ";
-			echo '<a href="' . $this->href('', $this->_t('TextSearchPage'), 'filter=pages&amp;keywords='.rawurlencode($word)) . '">'.strtolower($word) . '</a>';
+			echo '<a href="' . $this->href('', $this->_t('TextSearchPage'), 'filter=pages&amp;keywords='.rawurlencode($word)) . '">' . strtolower($word) . '</a>';
 		}
 
 		echo '</div>';

@@ -203,7 +203,7 @@ function bb2_summary(&$engine)
 					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;' . $argument.'=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
 				}
 
-				echo '<td>'.
+				echo '<td>' . 
 						$link;
 				echo "</td>\n";
 				echo "</tr>\n";

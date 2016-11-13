@@ -219,7 +219,7 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>'.htmlspecialchars($title, null, '') . ":</span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>' . htmlspecialchars($title, null, '') . ":</span></p>\n";
 	}
 
 	if (!isset($_GET['photo']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
@@ -265,11 +265,11 @@ if ($can_view)
 
 			$img	= '<img src="' . $this->db->base_url.$tnb_path . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '/>';
 
-			$caption = '<br><figcaption>'.
-					'<span>' . $file_description.'</span> '.'<br />'.
-					#$file['user'].'<br />'.
-					#$file['picture_w'].'x' . $file['picture_h'].'<br />'.
-					#$file['hits'].'<br />'. // we do exclude images from hit cout atm -> see file handler
+			$caption = '<br><figcaption>' . 
+					'<span>' . $file_description . '</span> ' . '<br />' . 
+					#$file['user'] . '<br />' . 
+					#$file['picture_w'].'x' . $file['picture_h'] . '<br />' . 
+					#$file['hits'] . '<br />' .  // we do exclude images from hit cout atm -> see file handler
 				"</figcaption>\n";
 
 			if (file_exists($tnb_path))

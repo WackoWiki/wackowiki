@@ -37,7 +37,7 @@ else
 	echo "<h3>" . $this->_t('ReferrersText') . " &raquo; " . $this->_t('ViewReferrersPage') . "</h3>";
 	echo '<ul class="menu">
 			<li class="active">' . $this->_t('ViewReferrersPage') . '</li>
-			<li><a href="' . $this->href('referrers_sites', '', 'o=global') . '">'. $this->_t('ViewReferrersGlobal') . "</a></li>
+			<li><a href="' . $this->href('referrers_sites', '', 'o=global') . '">' .  $this->_t('ViewReferrersGlobal') . "</a></li>
 		</ul><br /><br />\n";
 }
 
@@ -88,7 +88,7 @@ if ($referrers)
 		echo '<li class="lined">';
 		echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;'.
 			(($site !== $unknown)
-				? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">'.
+				? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">' . 
 					htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>'
 				: $site
 			);

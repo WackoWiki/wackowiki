@@ -103,7 +103,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 	echo "<br />\n";
 
 	// print navigation
-	echo '<!--nomail-->'.
+	echo '<!--nomail-->' . 
 		'<ul class="menu">';
 
 	$params = 'a=' . $a . '&amp;b=' . $b . '&amp;diffmode=';
@@ -117,7 +117,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		}
 	}
 
-	echo '</ul>'.
+	echo '</ul>' . 
 		'<!--/nomail-->';
 
 	// do diffs

@@ -48,6 +48,6 @@ foreach($names as $name => $v)
 
 $text = str_replace($endstr, '', $text);
 
-echo '<pre class="code"><table>' . $text.'</table></pre>';
+echo '<pre class="code"><table>' . $text . '</table></pre>';
 
 ?>

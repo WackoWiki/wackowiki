@@ -372,7 +372,7 @@ if ($this->is_admin())
 							$deny = 0;
 						}
 
-						echo $privilege.'<br />';
+						echo $privilege . '<br />';
 						// is group?
 						// 1. default groups
 						// 1.1 Everybody

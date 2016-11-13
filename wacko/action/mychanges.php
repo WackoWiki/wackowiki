@@ -20,7 +20,7 @@ if (($user_id = $this->get_user_id()))
 	if (@$_GET['byname'])
 	{
 		echo $this->_t('MyChangesTitle2').
-		' [<a href="' . $this->href('', '', $by('date')) . '">'.
+		' [<a href="' . $this->href('', '', $by('date')) . '">' . 
 		$this->_t('OrderChange') . "</a>].</strong><br /><br />\n";
 
 		$count	= $this->db->load_single(
@@ -82,7 +82,7 @@ if (($user_id = $this->get_user_id()))
 	{
 		echo '<ul class="menu">' . "\n".
 				'<li class="active">' . $this->_t('MyChangesTitle1') . "</li>\n".
-				'<li>'." [<a href=\"" . $this->href('', '', $by('name')) . "\">" . $this->_t('OrderABC') . "</a>]" . "</li>\n".
+				'<li>' . " [<a href=\"" . $this->href('', '', $by('name')) . "\">" . $this->_t('OrderABC') . "</a>]" . "</li>\n".
 				"</ul>\n";
 
 		$count	= $this->db->load_single(

@@ -27,7 +27,7 @@ if (isset($this->categories))
 
 		if ($list)
 		{
-			$output .= '<li>' . $_category.'</li>';
+			$output .= '<li>' . $_category . '</li>';
 		}
 		else
 		{

@@ -243,7 +243,7 @@ if ($upload_allowed)
 				// TODO and if there're TONS of users? maybe simple text entry, not menu?
 				foreach ($users as $user)
 				{
-					echo '<option value="' . $user['user_id'] . '">'.Ut::html($user['user_name']) . "</option>\n";
+					echo '<option value="' . $user['user_id'] . '">' . Ut::html($user['user_name']) . "</option>\n";
 				}
 			}
 	?>

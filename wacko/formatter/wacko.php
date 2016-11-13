@@ -62,13 +62,13 @@ if (!empty($parser->auto_fn['content']))
 	}
 
 	// write the footnotes
-	$text .=	'<br /><br />'.
+	$text .=	'<br /><br />' . 
 				'<div class="layout-box" id="footnotes">
 					<p class="layout-box"><span>' . $this->_t('Footnotes') . ":</span></p>\n".
 					"<dl>\n".
 						$footnotes.
 					"</dl>\n".
-				'</div>'.
+				'</div>' . 
 				'<br />';
 
 	$parser->auto_fn['content'] = '';

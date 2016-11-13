@@ -131,7 +131,7 @@ if ($this->user_allowed_comments())
 					$viewed = ( $user['last_mark'] && $page['comment_user_name'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
 
 					// print entry
-					echo '<li ' . $viewed.'><span class="dt">' . $time.'</span> &mdash; '.
+					echo '<li ' . $viewed.'><span class="dt">' . $time . '</span> &mdash; '.
 					($title
 						? $this->link('/' . $page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
 						: $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)

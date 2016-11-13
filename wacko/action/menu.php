@@ -303,14 +303,14 @@ if ($_user_id)
 
 			if ($system)
 			{
-				echo '<td>'.(!empty($menu_item['menu_lang']) ? $menu_item['menu_lang'] : '') . "</td>\n";
+				echo '<td>' . (!empty($menu_item['menu_lang']) ? $menu_item['menu_lang'] : '') . "</td>\n";
 			}
 
 			echo "</tr>\n";
 		}
 
 		echo '<tfoot>';
-		echo "<tr>\n".'<td colspan="3">' . "\n";
+		echo "<tr>\n" . '<td colspan="3">' . "\n";
 		echo '<input type="submit" name="update_menu" value="' . $this->_t('BookmarkSaveChanges') . '" />';
 		echo '</td><td>';
 		echo '<input type="submit" name="delete_menu_item" value="' . $this->_t('BookmarkDeleteSelected') . '" />';
@@ -326,7 +326,7 @@ if ($_user_id)
 	echo $this->form_open('add_bookmark');
 	echo '<input type="hidden" name="_user_menu" value="yes" />';
 	echo '<br /><br />';
-	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage') . ':</label><br />'.
+	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage') . ':</label><br />' . 
 		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
 
 	if ($default_menu === true)

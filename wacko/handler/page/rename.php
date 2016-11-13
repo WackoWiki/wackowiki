@@ -78,7 +78,7 @@ if ($registered
 
 					if ($this->save_page($this->tag, '', '{{redirect page="/' . $new_name . '"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.Ut::perc_replace($this->_t('RedirectCreated'), $this->link($this->tag)) . "</li>\n";
+						$message .= '<li>' . Ut::perc_replace($this->_t('RedirectCreated'), $this->link($this->tag)) . "</li>\n";
 					}
 
 					$this->clear_cache_wanted_page($this->tag);
@@ -221,13 +221,13 @@ function move(&$engine, $old_page, $new_name)
 		// if ($old_page['supertag'] == $super_new_name)
 		else if ($old_page['tag'] == $new_name)
 		{
-			$message .= '<li>'.Ut::perc_replace($engine->_t('AlreadyNamed'), $engine->link($new_name)) . "</li>\n";
+			$message .= '<li>' . Ut::perc_replace($engine->_t('AlreadyNamed'), $engine->link($new_name)) . "</li>\n";
 		}
 		else
 		{
 			if ($old_page['supertag'] != $super_new_name && $page = $engine->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$message .= '<li>'.Ut::perc_replace($engine->_t('AlreadyExists'), $engine->link($new_name)) . "</li>\n";
+				$message .= '<li>' . Ut::perc_replace($engine->_t('AlreadyExists'), $engine->link($new_name)) . "</li>\n";
 			}
 			else
 			{
@@ -257,7 +257,7 @@ function move(&$engine, $old_page, $new_name)
 
 					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/' . $new_name . '"}}', "-> $new_name"))
 					{
-						$message .= '<li>'.Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link($old_page['tag'])) . "</li>\n";
+						$message .= '<li>' . Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link($old_page['tag'])) . "</li>\n";
 					}
 
 					$engine->clear_cache_wanted_page($old_page['tag']);

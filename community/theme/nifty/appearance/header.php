@@ -10,7 +10,7 @@ header("Content-Type: text/html; charset=" . $this->get_charset());
 <!DOCTYPE html>
 <html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
-	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : '');?></title>
+	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method . ')' : '');?></title>
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex == 1 || $this->page['noindex'] == 1)

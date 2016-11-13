@@ -21,8 +21,8 @@ if (($user_id = $this->get_user_id()))
 	if (@$_GET['bydate'] || $bydate)
 	{
 		echo '<strong>' . $this->_t('ListOwnedPages2') . '</strong>';
-		echo '<br />[<a href="' . $this->href('', '', $by('')) . '">'.
-			$this->_t('OrderABC') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">'.
+		echo '<br />[<a href="' . $this->href('', '', $by('')) . '">' . 
+			$this->_t('OrderABC') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">' . 
 			$this->_t('OrderChange') . "</a>] <br /><br />\n";
 
 		$count	= $this->db->load_single(
@@ -93,7 +93,7 @@ if (($user_id = $this->get_user_id()))
 		echo '<strong>' . $this->_t('ListOwnedPages3') . '</strong>';
 		echo '<br />[<a href="' . 
 			$this->href('', '', $by('')) . '">' . $this->_t('OrderABC').
-			'</a>] [<a href="' . $this->href('', '', $by('date')) . '">'.
+			'</a>] [<a href="' . $this->href('', '', $by('date')) . '">' . 
 			$this->_t('OrderDate') . "</a>]<br /><br />\n";
 
 		if ($pages = $this->db->load_all(

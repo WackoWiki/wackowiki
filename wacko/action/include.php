@@ -74,7 +74,7 @@ else
 			&& ($nomark != 1)
 			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			$edit_link = '<nav class="include-meta">'.
+			$edit_link = '<nav class="include-meta">' . 
 
 				// show page link
 				$this->link('/' . $inc_page['tag']).
@@ -87,7 +87,7 @@ else
 
 				"</nav>\n";
 
-			echo "\n".'<section class="include-page">' . "\n" . $edit_link;
+			echo "\n" . '<section class="include-page">' . "\n" . $edit_link;
 		}
 
 		// body

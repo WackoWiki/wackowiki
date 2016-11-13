@@ -148,7 +148,7 @@ function admin_system_log(&$engine, &$module)
 <?php
 	for ($i = 1; $i <= 7; $i++)
 	{
-		echo '<option value="' . $i . '"' . ( (!isset($_POST['level']) && $level == $i) || (isset($_POST['level']) && $_POST['level'] == $i) ? ' selected="selected"' : '' ) . '>'.strtolower($engine->_t('LogLevel' . $i)) . '</option>' . "\n";
+		echo '<option value="' . $i . '"' . ( (!isset($_POST['level']) && $level == $i) || (isset($_POST['level']) && $_POST['level'] == $i) ? ' selected="selected"' : '' ) . '>' . strtolower($engine->_t('LogLevel' . $i)) . '</option>' . "\n";
 	}
 ?>
 			</select>
@@ -202,14 +202,14 @@ function admin_system_log(&$engine, &$module)
 			$time_tz = $engine->sql2precisetime($row['log_time']);
 
 			echo '<tr class="lined">' . "\n".
-					'<td style="vertical-align:top; text-align:center;">' . $row['log_id'] . '</td>'.
-					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz.'</small></td>'.
-					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>'.
+					'<td style="vertical-align:top; text-align:center;">' . $row['log_id'] . '</td>' . 
+					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' . 
+					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' . 
 					'<td style="vertical-align:top;">' . $engine->format($row['message'], 'post_wacko') . '</td>' .
-					'<td style="vertical-align:top; text-align:center;"><small>'.
-						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>'.'<br />'.
-						'<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>'.
-					'</small></td>'.
+					'<td style="vertical-align:top; text-align:center;"><small>' . 
+						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br />' . 
+						'<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' . 
+					'</small></td>' . 
 				'</tr>';
 		}
 	}

@@ -162,11 +162,11 @@ class Feed
 					'<channel>' . "\n".
 						'<title>' . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . '</title>' . "\n".
 						'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n".
-						'<description>' . $this->engine->_t('RecentNewsXML') . $this->engine->db->site_name.'</description>' . "\n".
+						'<description>' . $this->engine->_t('RecentNewsXML') . $this->engine->db->site_name . '</description>' . "\n".
 						'<copyright>' . $this->engine->href('', $this->engine->db->policy_page) . '</copyright>' . "\n".
-						'<language>' . $this->lang.'</language>' . "\n".
-						'<pubDate>'.date('r') . '</pubDate>' . "\n".
-						'<lastBuildDate>'.date('r') . '</lastBuildDate>' . "\n";
+						'<language>' . $this->lang . '</language>' . "\n".
+						'<pubDate>' . date('r') . '</pubDate>' . "\n".
+						'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . "</title>\n";
 		$xml .= "<link>" . $this->engine->db->base_url.str_replace('%2F', '/', rawurlencode($news_cluster)) . "</link>\n";
@@ -202,18 +202,18 @@ class Feed
 				}
 
 				$xml .= '<item>' . "\n".
-							'<title>' . $title.'</title>' . "\n".
-							'<link>' . $link.'</link>' . "\n".
-							'<guid isPermaLink="true">' . $link.'</guid>' . "\n".
+							'<title>' . $title . '</title>' . "\n".
+							'<link>' . $link . '</link>' . "\n".
+							'<guid isPermaLink="true">' . $link . '</guid>' . "\n".
 							'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n".
-							'<pubDate>' . $pdate.'</pubDate>' . "\n";
+							'<pubDate>' . $pdate . '</pubDate>' . "\n";
 
 				foreach ($categories as $id => $category)
 				{
 					$xml .= '<category>' . $category['category'] . '</category>' . "\n";
 				}
 
-				$xml .= 	( $coms != '' ? '<comments>' . $coms.'</comments>' . "\n" : '' );
+				$xml .= 	( $coms != '' ? '<comments>' . $coms . '</comments>' . "\n" : '' );
 				$xml .= 	( $coms != '' ? '<slash:comments>' . $page['comments'] . '</slash:comments>' . "\n" : '' );
 				$xml .=  '</item>' . "\n";
 

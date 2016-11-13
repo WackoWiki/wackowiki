@@ -119,7 +119,7 @@ function admin_db_repair(&$engine, &$module)
 
 		if ($problems)
 		{
-			echo '<p>' . 'Some database problems could not be repaired.' . '</p>'.  '';
+			echo '<p>' . 'Some database problems could not be repaired.' . '</p>' .   '';
 			$problem_output = '';
 
 			foreach ($problems as $table => $problem)
