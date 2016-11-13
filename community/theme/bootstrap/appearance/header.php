@@ -258,7 +258,7 @@ echo $this->form_close();
 
 	if ($this->has_access('read'))
 	{
-		echo '<li class="dropdown"><a href="#" id="more">' . $this->_t('PageHandlerMoreTip') . '<span class="dropdown_arrow">&#9660;</span></a>'." \n";
+		echo '<li class="dropdown"><a href="#" id="more">' . $this->_t('PageHandlerMoreTip') . '<span class="dropdown_arrow">&#9660;</span></a>' . " \n";
 		echo '<ul class="dropdown_menu">' . "\n";
 
 		// print tab

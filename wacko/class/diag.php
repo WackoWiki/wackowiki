@@ -23,7 +23,7 @@ class Diag
 			{
 				$overall_time = microtime(1) - WACKO_STARTED;
 
-				echo '<div id="debug">'.
+				echo '<div id="debug">' . 
 					 '<p class="debug">Program execution statistics</p>' . "\n<ul>\n";
 
 				// get memory usage
@@ -106,7 +106,7 @@ class Diag
 				if ($config['debug'] >= 2)
 				{
 					$user = $engine->get_user();
-					echo '<p class="debug">Language data</p>'."\n<ul>\n";
+					echo '<p class="debug">Language data</p>' . "\n<ul>\n";
 					echo "\t<li>Multilanguage: " . ($config['multilanguage'] == 1 ? 'true' : 'false') . "</li>\n";
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE set: " . (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false') . "</li>\n";
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE value: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "</li>\n";

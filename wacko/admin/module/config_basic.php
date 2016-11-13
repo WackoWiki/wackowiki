@@ -145,7 +145,7 @@ function admin_config_basic(&$engine, &$module)
 
 						foreach ($themes as $theme)
 						{
-							echo '<option value="' . $theme . '" '.($engine->db->theme == $theme ? 'selected="selected"' : '') . '>' . $theme.'</option>';
+							echo '<option value="' . $theme . '" '.($engine->db->theme == $theme ? 'selected="selected"' : '') . '>' . $theme . '</option>';
 						}
 ?>
 					</select>
@@ -187,7 +187,7 @@ function admin_config_basic(&$engine, &$module)
 
 						foreach ($langs as $lang)
 						{
-							echo '<option value="' . $lang . '" '.($engine->db->language == $lang ? 'selected="selected"' : '') . '>' . $languages[$lang] . ' (' . $lang.')</option>';
+							echo '<option value="' . $lang . '" '.($engine->db->language == $lang ? 'selected="selected"' : '') . '>' . $languages[$lang] . ' (' . $lang . ')</option>';
 						}
 ?>
 					</select>
@@ -239,8 +239,8 @@ function admin_config_basic(&$engine, &$module)
 
 					foreach ($langs as $lang)
 					{
-						echo	"\t\t<td>\n\t\t\t".'<input type="checkbox" name="allowed_languages[' . $n.']" id="lang_' . $lang . '" value="' . $lang . '" '. (in_array($lang, $lang_list) ? ' checked="checked"' : ''). ' />'."\n\t\t\t".
-								'<label for="lang_' . $lang . '">' . $languages[$lang] . ' (' . $lang.')</label>'."\n\t\t</td>\n";
+						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allowed_languages[' . $n . ']" id="lang_' . $lang . '" value="' . $lang . '" '. (in_array($lang, $lang_list) ? ' checked="checked"' : ''). ' />' . "\n\t\t\t".
+								'<label for="lang_' . $lang . '">' . $languages[$lang] . ' (' . $lang . ')</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break
 						if ($n % 3 == 0)

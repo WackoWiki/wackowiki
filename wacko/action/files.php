@@ -212,43 +212,43 @@ if ($can_view)
 			$href_remove	= $this->href('upload', $page, 'remove=' . ($global ? 'global' : 'local') . "&amp;file_id=" . $file_id);
 			$href_edit		= $this->href('upload', $page, 'edit=' . ($global ? 'global' : 'local') . "&amp;file_id=" . $file_id);
 
-			echo '<tr>'.
+			echo '<tr>' . 
 					'<td class="file-">' . $link . '</td>';
 
 			if ($picture == false)
 			{
-				echo '<td class="desc-">' . $desc . '</td>'.
+				echo '<td class="desc-">' . $desc . '</td>' . 
 					'<td class="size-">
 						<span class="size2-">' . $file_size . $hits . '</span>&nbsp;'.
-					'</td>'.
-					'<td class="dt-">'.
+					'</td>' . 
+					'<td class="dt-">' . 
 						'<span class="dt2-">' . $this->get_time_formatted($dt) . '</span>&nbsp;'.
 					'</td>';
 			}
 			else
 			{
-				echo '<td class="desc-">'.
-					'<strong>' . $file['file_name'] . '</strong><br /><br />'.
-					$desc . '<br /><br />'.
+				echo '<td class="desc-">' . 
+					'<strong>' . $file['file_name'] . '</strong><br /><br />' . 
+					$desc . '<br /><br />' . 
 
 					($file['picture_w']
 						? $file['picture_w'] . ' × ' . $file['picture_h'] . 'px<br />'
-						: $hits.'<br />'
+						: $hits . '<br />'
 					).
 
-					$file_size . '<br /><br />'.
-					$this->user_link($file['user_name'], '', true, false) . '<br />'.
+					$file_size . '<br /><br />' . 
+					$this->user_link($file['user_name'], '', true, false) . '<br />' . 
 					$this->get_time_formatted($dt).
 				'</td>';
 			}
 
 			if ($remove_mode)
 			{
-				echo '<td class="tool-">'.
-						'<span class="dt2-">'.
-							'<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>'. # &nbsp;
-							'<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>'.
-						'</span>'.
+				echo '<td class="tool-">' . 
+						'<span class="dt2-">' . 
+							'<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .  # &nbsp;
+							'<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>' . 
+						'</span>' . 
 					 '</td>' . "\n";
 			}
 			else

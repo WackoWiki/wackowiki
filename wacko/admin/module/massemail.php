@@ -124,7 +124,7 @@ $mail_body = '';
 	echo '<tr class="hl_setting">
 			<td class="label">
 				<label for="group_id"><strong>' . $engine->_t('SendToGroup') . ':</strong></label>
-			</td>'.
+			</td>' . 
 			'<td>
 				<select id="group_id" name="group_id">
 					<option value=""></option>';

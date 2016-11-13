@@ -27,7 +27,7 @@ if ($this->has_access('read'))
 
 		if (!$this->page['latest'])
 		{
-			echo '<div class="revisioninfo">'.
+			echo '<div class="revisioninfo">' . 
 				Ut::perc_replace($this->_t('Revision'), $this->href(), $this->tag, $this->page['modified']).
 				'</div>';
 		}
@@ -103,7 +103,7 @@ if ($this->has_access('read'))
 		$data
 		);
 
-		print '<code>'.nl2br(trim($data)) . '</code>';
+		print '<code>' . nl2br(trim($data)) . '</code>';
 
 		$this->current_context--;
 

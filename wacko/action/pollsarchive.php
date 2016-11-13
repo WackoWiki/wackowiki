@@ -43,7 +43,7 @@ $years	= $polls_obj->poll_years();
 // print list
 if (!$nomark)
 {
-	echo '<div class="layout-box"><p class="layout-box"><span>'.
+	echo '<div class="layout-box"><p class="layout-box"><span>' . 
 			($year == 0
 				? $this->_t('PollsArchiveAll')
 				: str_replace('%1', $year, $this->_t('PollsArchiveYear'))
@@ -67,7 +67,7 @@ if (!$nomark)
 
 			echo ($style == 'ul' ? '<li>' : '');
 			echo '<a href="' . 
-				$this->href('', '', 'year=' . $year.'&amp;poll=' . $row['poll_id'] . '&amp;results=1') . '">'.
+				$this->href('', '', 'year=' . $year.'&amp;poll=' . $row['poll_id'] . '&amp;results=1') . '">' . 
 				$date.' (#' . $row['poll_id'] . '): ' . $row['text'] . '</a>';
 			echo ($style == 'br' ? '<br />' : '');
 			echo ($style == 'ul' ? '</li>' : '');
@@ -100,7 +100,7 @@ if (!$nomark)
 		}
 		else
 		{
-			echo '<a href="' . $this->href('', '', 'year=' . $item) . '">' . $item.'</a> ';
+			echo '<a href="' . $this->href('', '', 'year=' . $item) . '">' . $item . '</a> ';
 		}
 	}
 

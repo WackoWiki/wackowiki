@@ -480,8 +480,8 @@ else if (($user = $this->get_user()))
 		: '<img src="' . $this->db->base_url.'image/spacer.png" alt="' . $this->_t('EmailConfirm') . '" title="' . $this->_t('EmailConfirm') . '" class="btn-warning"/>' ?>
 <?php
 		if (!$user['email'] || $code['email_confirm'])
-			echo '<div class="hint"><strong class="cite">'.
-				$this->_t('EmailNotVerified') . '</strong><br />'.
+			echo '<div class="hint"><strong class="cite">' . 
+				$this->_t('EmailNotVerified') . '</strong><br />' . 
 				'<small>' . $this->_t('EmailNotVerifiedDesc').
 				'<strong><a href="' . $this->href('', '', 'resend_code=1') . '">' . $this->_t('HereLink') . '</a></strong>.
 				</small></div>';
@@ -641,36 +641,36 @@ else if (($user = $this->get_user()))
 		$percentage =  round( ($this->upload_quota($user['user_id']) / (($this->db->upload_quota_per_user) / 100)) ) . '%';
 	}
 
-	echo '<aside class="page_tools">'.
-			'<table class="form_tbl">'.
-				'<tr class="lined">'.
+	echo '<aside class="page_tools">' . 
+			'<table class="form_tbl">' . 
+				'<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UserSpace') . "</th>".
 					'<td class="form_right">' . "<a href=\"" . $this->href('', ($this->db->users_page.'/' . $user['user_name'])) . "\">" . $this->db->users_page.'/' . $user['user_name'] . "</a>" . "</td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n" . '<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UsersSignup') . "</th>".
 					'<td class="form_right">' . $this->get_time_formatted($user['signup_time']) . "</td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n" . '<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UsersLastSession') . "</th>".
 					'<td class="form_right">' . $this->get_time_formatted($user['last_visit']) . "</td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n" . '<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UploadQuota') . "&nbsp;&nbsp;</th>".
 
 					'<td class="form_right" title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage.")</span></div></td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n" . '<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UsersPages') . "</th>".
 					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_pages'] . "</a></td>".
-				// "</tr>\n".'<tr class="lined">'.
+				// "</tr>\n" . '<tr class="lined">' . 
 					// '<th class="form_left" scope="row">' . $this->_t('UsersRevisions') . "</th>".
 					// '<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name']) . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_revisions'] . "</a></td>".
-				"</tr>\n".'<tr class="lined">'.
+				"</tr>\n" . '<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UsersComments') . "</th>".
-					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments') . '" title="' . $this->_t('ShowComments') . '">' . $user['total_comments'] . '</a></td>'.
-				"</tr>\n".'<tr class="lined">'.
+					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments') . '" title="' . $this->_t('ShowComments') . '">' . $user['total_comments'] . '</a></td>' . 
+				"</tr>\n" . '<tr class="lined">' . 
 					'<th class="form_left" scope="row">' . $this->_t('UsersUploads') . "</th>".
-					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'uploads') . '" title="' . $this->_t('ShowComments') . '">'.number_format($user['total_uploads'], 0, ',', '.') . '</a></td>'.
-				// "</tr>\n".'<tr class="lined">'.
+					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'uploads') . '" title="' . $this->_t('ShowComments') . '">' . number_format($user['total_uploads'], 0, ',', '.') . '</a></td>' . 
+				// "</tr>\n" . '<tr class="lined">' . 
 				// 	'<th class="form_left" scope="row">' . $this->_t('UsersLogins') . "</th>".
-				// 	'<td class="form_right">'.number_format($user['login_count'], 0, ',', '.') . "</td>".
+				// 	'<td class="form_right">' . number_format($user['login_count'], 0, ',', '.') . "</td>".
 				"</tr>\n".
 			"</table>\n".
 		"</aside>";

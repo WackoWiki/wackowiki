@@ -197,7 +197,7 @@
 					<th class="form_left" scope="row">[ ' _t: MetaTitle ' ]</th>
 					<td class="form_right">[ ' page.title |e ' ]</td>
 				</tr>
-				<tr class="lined">'.
+				<tr class="lined">' . 
 					<th class="form_left" scope="row">[ ' _t: MetaKeywords ' ]</th>
 					<td class="form_right">[ ' page.keywords |e ' ]</td>
 				</tr>

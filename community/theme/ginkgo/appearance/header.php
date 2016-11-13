@@ -58,7 +58,7 @@ if ($this->get_user())
 }
 else
 {
-	echo '<h1 class="navText" style="padding-right:10px;">' . $this->page['title'].'</h1>';
+	echo '<h1 class="navText" style="padding-right:10px;">' . $this->page['title'] . '</h1>';
 }
 // End if
 ?></td>

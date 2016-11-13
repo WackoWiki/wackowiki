@@ -245,7 +245,7 @@ if ($pages = $this->db->load_all(
 		// no results in given level $depth
 		$title_empty_tree = $this->_t('TreeEmptyLevels');
 		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/' . $root, '', rtrim($root, '/')));
-		echo '<em>' . $title_empty_tree.'</em><br/>';
+		echo '<em>' . $title_empty_tree . '</em><br/>';
 	}
 }
 else
@@ -254,7 +254,7 @@ else
 	{
 		$title_empty_tree = $this->_t('TreeEmpty');
 		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/' . $root, '', rtrim($root, '/')));
-		echo '<em>' . $title_empty_tree.'</em><br/>';
+		echo '<em>' . $title_empty_tree . '</em><br/>';
 	}
 }
 

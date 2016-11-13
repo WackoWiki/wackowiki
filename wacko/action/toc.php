@@ -275,7 +275,7 @@ if ($_page)
 					#"<!--FOUR: [" . $ul."]: (" . $i . ")" . $ident_level['li'] . " begin element-->".
 					"\n";
 				echo $tabs[($ident_level['li'] + $ident_level['ul'] - 1)] . $_tabs . "\t".
-					'<a href="' . $toc_item[3] . '#' . $toc_item[0] . '">'.
+					'<a href="' . $toc_item[3] . '#' . $toc_item[0] . '">' . 
 						(!empty($numerate)
 							?	'<span class="tocnumber">' . $toc_item[5] . '</span>'
 							:	'').

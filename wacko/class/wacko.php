@@ -2871,7 +2871,7 @@ class Wacko
 			$this->track_link_to($tag, LINK_PAGE);
 		}
 
-		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text.'</a>';
+		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text . '</a>';
 	}
 
 	// preparing links to save them to body_r
@@ -2902,11 +2902,11 @@ class Wacko
 
 		if ($img_url == 1)
 		{
-			return '<!--imglink:begin-->'.str_replace(' ', '%20', urldecode($tag)) . ' ==' . $text.'<!--imglink:end-->';
+			return '<!--imglink:begin-->' . str_replace(' ', '%20', urldecode($tag)) . ' ==' . $text . '<!--imglink:end-->';
 		}
 		else
 		{
-			return '<!--link:begin-->'.str_replace(' ', '%20', urldecode($tag)) . " ==" . ($this->format_safe ? str_replace('>', "&gt;", str_replace('<', "&lt;", $text)) : $text) . '<!--link:end-->';
+			return '<!--link:begin-->' . str_replace(' ', '%20', urldecode($tag)) . " ==" . ($this->format_safe ? str_replace('>', "&gt;", str_replace('<', "&lt;", $text)) : $text) . '<!--link:end-->';
 		}
 	}
 
@@ -3258,7 +3258,7 @@ class Wacko
 							else
 							{
 								// continue
-								#return '<a href="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" title="' . $title . '">' . $text.'</a>';
+								#return '<a href="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" title="' . $title . '">' . $text . '</a>';
 							}
 						}
 						else
@@ -3275,7 +3275,7 @@ class Wacko
 							else
 							{
 								// continue
-								#return '<a href="' . $this->href('file', trim($page_tag, '/'), 'get=' . $file_name) . '" title="' . $title . '">' . $text.'</a>';
+								#return '<a href="' . $this->href('file', trim($page_tag, '/'), 'get=' . $file_name) . '" title="' . $title . '">' . $text . '</a>';
 							}
 						}
 					}
@@ -3776,11 +3776,11 @@ class Wacko
 
 		if ($linking)
 		{
-			return '<a href="' . $this->href('', $this->db->groups_page, 'profile=' . $group_name) . '" class="group-link">' . $icon . $text.'</a>';
+			return '<a href="' . $this->href('', $this->db->groups_page, 'profile=' . $group_name) . '" class="group-link">' . $icon . $text . '</a>';
 		}
 		else
 		{
-			return '<span class="group-link">' . $icon . $group_name.'</span>';
+			return '<span class="group-link">' . $icon . $group_name . '</span>';
 		}
 	}
 
@@ -3845,7 +3845,7 @@ class Wacko
 		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/' . $this->db->standard_handlers.'\/(.*)$/i';
 
 		// Find the word
-		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers.')\b/i';
+		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers . ')\b/i';
 
 		if (preg_match( $this->REGEX_WACKO_HANDLERS, $_data, $match ))
 		{
@@ -6926,7 +6926,7 @@ class Wacko
 			$pwd_cplx_text .= '. ' . $this->_t('PwdCplxDesc5');
 		}
 
-		return '<br /><small>'.
+		return '<br /><small>' .
 			$this->_t('PwdCplxDesc1') .
 			Ut::perc_replace($this->_t('PwdCplxDesc2'), $this->db->pwd_min_chars).
 			($this->db->pwd_unlike_login > 0

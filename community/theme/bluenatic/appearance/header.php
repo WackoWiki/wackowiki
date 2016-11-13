@@ -31,7 +31,7 @@ header('Content-Type: text/html; charset=' . $this->get_charset());
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 	}
 	?>
-	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . " : " . (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method.')' : ''); ?></title>
+	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . " : " . (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method . ')' : ''); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
 // JS files.
@@ -122,14 +122,14 @@ else if($this->has_access('write'))
 						{
 							echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 								 . '"><img src="' .  $this->db->theme_url
-								.'icon/bookmark-remove.png" alt="+" title="' . 
+								.'icon/bookmark-remove.png" alt="+" title="' .
 								$this->_t('AddToBookmarks')  . '"/></a></li>';
 						}
 						else
 						{
 							echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 								 . '"><img src="' .  $this->db->theme_url
-								.'icon/bookmark-add.png" alt="-" title="' . 
+								.'icon/bookmark-add.png" alt="-" title="' .
 								$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 						}
 					}*/

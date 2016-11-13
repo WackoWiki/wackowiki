@@ -27,7 +27,7 @@ else
 		echo '<tr>';
 			echo '<td class="label"></td>';
 			echo '<td style="text-align:left;width:80%;">' . $row['text'] . '</td>';
-			echo '<td>' . $user.'</td>';
+			echo '<td>' . $user . '</td>';
 		echo '</tr>';
 		echo '<tr>';
 			$vars	= $polls_obj->get_poll_vars($row['poll_id']);
@@ -40,7 +40,7 @@ else
 			}
 
 			echo '</table></td>';
-			echo '<td style="text-align:left; vertical-align:top;">'.
+			echo '<td style="text-align:left; vertical-align:top;">' . 
 				($row['plural'] == 1 ? $this->_t('PollsPlural') : $this->_t('PollsSingular')) . '</td>';
 		echo '</tr>';
 	}

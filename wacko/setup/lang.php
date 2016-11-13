@@ -12,14 +12,14 @@ if (array_key_exists('wacko_version', $config))
 	if ($config['wacko_version'][0] < 5)
 	{
 		$config['is_update'] = null;
-		echo '<ul class="security"><li>'.preg_replace(array('/%1/', '/%2/'), [$config['wacko_version'], WACKO_VERSION], $lang['PleaseUpgradeToR5']) . "</li></ul>\n";
+		echo '<ul class="security"><li>' . preg_replace(array('/%1/', '/%2/'), [$config['wacko_version'], WACKO_VERSION], $lang['PleaseUpgradeToR5']) . "</li></ul>\n";
 		// http://sourceforge.net/projects/wackowiki/files/
 		// http://wackowiki.sourceforge.net/doc/Dev/Release/R55/Upgrade
 	}
 	else
 	{
 		$config['is_update'] = '1';
-		echo '<p>'.preg_replace(array('/%1/', '/%2/'), [$config['wacko_version'], WACKO_VERSION], $lang['UpgradeFromWacko']) . "</p>\n";
+		echo '<p>' . preg_replace(array('/%1/', '/%2/'), [$config['wacko_version'], WACKO_VERSION], $lang['UpgradeFromWacko']) . "</p>\n";
 		echo '<p class="warning">' . $lang['PleaseBackup'] . "</p>\n";
 	}
 }

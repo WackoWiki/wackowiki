@@ -56,14 +56,14 @@ function admin_system_statistics(&$engine, &$module)
 		{
 			if ($table['Name'] == $wtable['name'])
 			{
-				echo '<tr class="lined">'.
-						'<th class="label"><strong>' . $table['Name'] . '</strong></th>'.
+				echo '<tr class="lined">' . 
+						'<th class="label"><strong>' . $table['Name'] . '</strong></th>' . 
 						'<td>&nbsp;&nbsp;&nbsp;'.number_format($table['Rows'], 0, ',', '.') . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Data_length'], false, true, true) . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Index_length'], false, true, true) . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Data_free'], false, true, true) . '</td>' .
-					'</tr>'.
-					#'<tr class="lined"><td colspan="5"></td></tr>'.
+					'</tr>' . 
+					#'<tr class="lined"><td colspan="5"></td></tr>' . 
 					"\n";
 
 				$tdata	+= $table['Data_length'];
@@ -112,8 +112,8 @@ function admin_system_statistics(&$engine, &$module)
 			$tfiles += $files;
 			$tsize += $size;
 
-			echo '<tr class="lined">'.
-					'<td class="label"><strong>' . $dir.'</strong></td>'.
+			echo '<tr class="lined">' . 
+					'<td class="label"><strong>' . $dir . '</strong></td>' . 
 					'<td>&nbsp;&nbsp;&nbsp;' . $files . '</td>' .
 					'<td>' . $engine->binary_multiples($size, false, true, true) . '</td>' .
 				'</tr>' . "\n";

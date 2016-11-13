@@ -252,8 +252,8 @@ else if ($stop_mod !== true)
 {
 	// printing form
 	echo $this->form_open('add_poll', ['page_method' => $mode_file, 'href_param' => '#pollsadd_form']);
-	echo ($moderation === true ? '<input type="hidden" name="mode" value="' . $mode . '" />'.
-		'<input type="hidden" name="moderation" value="' . $edit_id . '" />'.
+	echo ($moderation === true ? '<input type="hidden" name="mode" value="' . $mode . '" />' . 
+		'<input type="hidden" name="moderation" value="' . $edit_id . '" />' . 
 		'<input type="hidden" name="user" value="' . $user . '" />' : '');
 	echo '<a id="pollsadd_form"></a><table class="formation">';
 	echo '<tr>';
@@ -286,9 +286,9 @@ else if ($stop_mod !== true)
 
 		echo '</td>';
 	echo '</tr>';
-	echo '<tr><td colspan="2">'.
+	echo '<tr><td colspan="2">' . 
 		'<input type="checkbox" name="plural" id="plural" value="1"' . ($plural == 1 ? ' checked="checked" ' : ' ') . '/> '.
-		'<label for="plural">' . $this->_t('PollsPlural') . '</label>'.
+		'<label for="plural">' . $this->_t('PollsPlural') . '</label>' . 
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
 	// begin captcha output

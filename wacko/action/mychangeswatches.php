@@ -12,7 +12,7 @@ if ($user_id = $this->get_user_id())
 	$pref		= $this->db->table_prefix;
 
 	echo $this->_t('MyChangesWatches').
-		' (<a href="' . $this->href('', '', 'mode=mychangeswatches&amp;reset=1') . '#list">'.
+		' (<a href="' . $this->href('', '', 'mode=mychangeswatches&amp;reset=1') . '#list">' . 
 		$this->_t('ResetChangesWatches') . '</a>).<br /><br />';
 
 	$pages = $this->db->load_all(

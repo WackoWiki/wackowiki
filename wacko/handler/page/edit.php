@@ -275,7 +275,7 @@ if ($this->has_access('read')
 
 		if ($this->page['comment_on_id'] != 0)
 		{
-			$output .= '<header class="comment-title">' . "\n".'<h2><a href="#">' . $title . "</a></h2>\n</header>\n";
+			$output .= '<header class="comment-title">' . "\n" . '<h2><a href="#">' . $title . "</a></h2>\n</header>\n";
 		}
 		else
 		{
@@ -402,20 +402,20 @@ if ($this->has_access('read')
 	{
 		foreach ($words as $id => $word)
 		{
-			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id.'|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id.'|' . $word['parent_id']]) && $_POST['category' . $id.'|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />'.
+			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id.'|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id.'|' . $word['parent_id']]) && $_POST['category' . $id.'|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />' . 
 						'<label for="category' . $id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
-					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id.'|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id.'|' . $word['parent_id']]) && $_POST['category' . $id.'|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />'.
+					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id.'|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id.'|' . $word['parent_id']]) && $_POST['category' . $id.'|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />' . 
 								'<label for="category' . $id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n";
 				}
 			}
 		}
 
-		$output .= '<br />' . $this->_t('Categories') . ':' . "\n".'<div class="setcategory"><br />' . "\n".substr(implode(' ', $_words), 6) . '</div>' . "\n";
+		$output .= '<br />' . $this->_t('Categories') . ':' . "\n" . '<div class="setcategory"><br />' . "\n".substr(implode(' ', $_words), 6) . '</div>' . "\n";
 		$output .= '<br />' . "\n";
 	}
 
