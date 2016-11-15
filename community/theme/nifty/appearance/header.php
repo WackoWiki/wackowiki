@@ -33,10 +33,10 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 	<?php if ($this->db->policy_page) {?>
 	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
 	<?php } ?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url;?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url;?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
 	<?php if ($this->db->news_cluster) {?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('NewsFeed');?>" href="<?php echo $this->db->base_url;?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('NewsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
 	<?php } ?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php

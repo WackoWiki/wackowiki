@@ -169,7 +169,7 @@ class Feed
 						'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . "</title>\n";
-		$xml .= "<link>" . $this->engine->db->base_url.str_replace('%2F', '/', rawurlencode($news_cluster)) . "</link>\n";
+		$xml .= "<link>" . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . "</link>\n";
 		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . "</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
@@ -213,8 +213,8 @@ class Feed
 					$xml .= '<category>' . $category['category'] . '</category>' . "\n";
 				}
 
-				$xml .= 	( $coms != '' ? '<comments>' . $coms . '</comments>' . "\n" : '' );
-				$xml .= 	( $coms != '' ? '<slash:comments>' . $page['comments'] . '</slash:comments>' . "\n" : '' );
+				$xml .= 	($coms != '' ? '<comments>' . $coms . '</comments>' . "\n" : '');
+				$xml .= 	($coms != '' ? '<slash:comments>' . $page['comments'] . '</slash:comments>' . "\n" : '');
 				$xml .=  '</item>' . "\n";
 
 				if ($i >= $limit)
@@ -297,7 +297,7 @@ class Feed
 					$xml .= "<dc:creator>" . $comment['user_name'] . "</dc:creator>\n";
 
 					$xml .= "<description><![CDATA[" . str_replace("]]>", "]]&gt;", $text) . "]]></description>\n";
-					#$xml .= "<content:encoded><![CDATA[" . str_replace("]]>", "]]&gt;", $text) . "]]></content:encoded>\n";
+					# $xml .= "<content:encoded><![CDATA[" . str_replace("]]>", "]]&gt;", $text) . "]]></content:encoded>\n";
 					$xml .= "</item>\n";
 				}
 			}

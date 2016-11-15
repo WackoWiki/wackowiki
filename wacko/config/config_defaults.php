@@ -32,12 +32,12 @@ $wacko_config_defaults = [
 											? 'https'
 											: 'http'
 										).
-										'://'.$_SERVER['SERVER_NAME'].
+										'://' . $_SERVER['SERVER_NAME'].
 										($_SERVER['SERVER_PORT'] != 80
-											? ':'.$_SERVER['SERVER_PORT']
+											? ':' . $_SERVER['SERVER_PORT']
 											: ''
 										).
-										'/'.preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')).'/' ,
+										'/' . preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')) . '/' ,
 	'rewrite_mode'					=> ($found_rewrite_extension ? '1' : '0'),
 	'tls'							=> 0,
 	'tls_implicit'					=> 0,
@@ -54,8 +54,9 @@ $wacko_config_defaults = [
 	'smtp_host'						=> 'localhost',
 	'smtp_username'					=> '',
 	'smtp_password'					=> '',
-	'smtp_port'						=> 25,
+	'smtp_port'						=> 587,
 	'smtp_connection_mode'			=> '',
+	'smtp_auto_tls'					=> 0,
 	'email_priority'				=> 3,
 
 	'email_from'					=> 'WackoWiki',
