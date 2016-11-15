@@ -49,8 +49,8 @@ class preformatter
 		{
 			return date($wacko->db->date_macro_format);
 		}
-		else if (preg_match('/^(\[\[)(.+)(\]\])$/', $thing, $matches) ||
-				 preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches))
+		else if (  preg_match('/^(\[\[)(.+)(\]\])$/', $thing, $matches)
+				|| preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches))
 		{
 			list (, $b1, $cont, $b2) = $matches;
 

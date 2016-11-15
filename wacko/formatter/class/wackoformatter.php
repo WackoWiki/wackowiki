@@ -620,7 +620,7 @@ class WackoFormatter
 			for ($i = 0; $i < $count; $i++)
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= [];
+				$this->tdindent_closers		= [];
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -635,7 +635,7 @@ class WackoFormatter
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= [];
+				$this->tdindent_closers		= [];
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -649,7 +649,7 @@ class WackoFormatter
 			else
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= [];
+				$this->tdindent_closers		= [];
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -703,8 +703,8 @@ class WackoFormatter
 			return '<span class="underline">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</span>';
 		}
 		// code
-		else if (preg_match('/^\#\#(.*?)\#\#$/', $thing, $matches) ||
-				 preg_match('/^\¹\¹(.*?)\¹\¹$/', $thing, $matches))
+		else if (  preg_match('/^\#\#(.*?)\#\#$/', $thing, $matches)
+				|| preg_match('/^\¹\¹(.*?)\¹\¹$/', $thing, $matches))
 		{
 			return '<code>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</code>';
 		}
@@ -714,8 +714,8 @@ class WackoFormatter
 			return '<small>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</small>';
 		}
 		// cite
-		else if (preg_match('/^\'\'(.*?)\'\'$/s', $thing, $matches) ||
-				 preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s', $thing, $matches))
+		else if (  preg_match('/^\'\'(.*?)\'\'$/s', $thing, $matches)
+				|| preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s', $thing, $matches))
 		{
 			$this->br = 1;
 
@@ -739,8 +739,8 @@ class WackoFormatter
 			return '<mark>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</mark>';
 		}
 		// urls
-		else if (preg_match('/^([[:alpha:]]+:\/\/\S+?|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/', $thing, $matches) ||
-				 preg_match('/^([[:alpha:]]+:\/\/\S+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/', $thing, $matches))
+		else if (  preg_match('/^([[:alpha:]]+:\/\/\S+?|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/', $thing, $matches)
+				|| preg_match('/^([[:alpha:]]+:\/\/\S+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/', $thing, $matches))
 		{
 			$url = strtolower($matches[1]);
 
@@ -871,8 +871,8 @@ class WackoFormatter
 			return '<del>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</del>';
 		}
 		// definitions
-		else if (preg_match('/^\(\?(.+?)(==|\|\|)(.*)\?\)$/', $thing, $matches) ||
-				 preg_match('/^\(\?(\S+)(\s+(.+))?\?\)$/', $thing, $matches))
+		else if (  preg_match('/^\(\?(.+?)(==|\|\|)(.*)\?\)$/', $thing, $matches)
+				|| preg_match('/^\(\?(\S+)(\s+(.+))?\?\)$/', $thing, $matches))
 		{
 			list (, $def, ,$text) = $matches;
 
@@ -891,10 +891,10 @@ class WackoFormatter
 			return '';
 		}
 		// forced links & footnotes
-		else if (preg_match('/^\[\[(.+)(==|\|)(.*)\]\]$/', $thing, $matches) ||
-				 preg_match('/^\(\((.+)(==|\|)(.*)\)\)$/', $thing, $matches) ||
-				 preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $thing, $matches) ||
-				 preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $thing, $matches))
+		else if (  preg_match('/^\[\[(.+)(==|\|)(.*)\]\]$/', $thing, $matches)
+				|| preg_match('/^\(\((.+)(==|\|)(.*)\)\)$/', $thing, $matches)
+				|| preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $thing, $matches)
+				|| preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $thing, $matches))
 		{
 			$url	= isset($matches[1]) ? $matches[1] : '';
 			$text	= isset($matches[3]) ? $matches[3] : '';
@@ -1013,15 +1013,15 @@ class WackoFormatter
 					$url	= str_replace(' ', '', $url);
 					$text	= preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/', '', $text);
 
-					return $result.$wacko->pre_link($url, $text);
+					return $result . $wacko->pre_link($url, $text);
 				}
 			}
 
 			return '';
 		}
 		// image link
-		else if (preg_match('/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/', $thing, $matches) ||
-				 preg_match('/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/', $thing, $matches))
+		else if (  preg_match('/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/', $thing, $matches)
+				|| preg_match('/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/', $thing, $matches))
 		{
 			$url	= isset($matches[1]) ? $matches[1] : '';
 			$img	= isset($matches[3]) ? $matches[3] : '';
@@ -1178,15 +1178,15 @@ class WackoFormatter
 			return $wacko->pre_link($matches[1]) . $matches[2];
 		}
 		// tikiwiki links
-		else if (!$wacko->_formatter_noautolinks &&
-				 $wacko->db->disable_tikilinks != 1 &&
-				 preg_match('/^(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . $wacko->language['ALPHANUM'] . '*\.' . $wacko->language['ALPHA'] . $wacko->language['ALPHANUM'] . '+)$/s', $thing, $matches))
+		else if (!$wacko->_formatter_noautolinks
+				&& $wacko->db->disable_tikilinks != 1
+				&& preg_match('/^(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . $wacko->language['ALPHANUM'] . '*\.' . $wacko->language['ALPHA'] . $wacko->language['ALPHANUM'] . '+)$/s', $thing, $matches))
 		{
 			return $wacko->pre_link($thing);
 		}
 		// npj links
-		else if ((!$wacko->_formatter_noautolinks) &&
-				(preg_match('/^(~?)(' . $wacko->language['ALPHANUM'] . '+\@' . $wacko->language['ALPHA'] . '*(\:' . $wacko->language['ALPHANUM'] . '*)?|' . $wacko->language['ALPHANUM'] . '+\:\:' . $wacko->language['ALPHANUM'] . '+)$/s', $thing, $matches)))
+		else if ((!$wacko->_formatter_noautolinks)
+				&& (preg_match('/^(~?)(' . $wacko->language['ALPHANUM'] . '+\@' . $wacko->language['ALPHA'] . '*(\:' . $wacko->language['ALPHANUM'] . '*)?|' . $wacko->language['ALPHANUM'] . '+\:\:' . $wacko->language['ALPHANUM'] . '+)$/s', $thing, $matches)))
 		{
 			if ($matches[1] == '~')
 			{
@@ -1197,7 +1197,7 @@ class WackoFormatter
 		}
 		// wacko links!
 		else if ((!$wacko->_formatter_noautolinks)
-				 && (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . '+' . $wacko->language['UPPERNUM'] . $wacko->language['ALPHANUM'] . '*)$/s', $thing, $matches)))
+				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . '+' . $wacko->language['UPPERNUM'] . $wacko->language['ALPHANUM'] . '*)$/s', $thing, $matches)))
 		{
 			if ($matches[1] == '~')
 			{

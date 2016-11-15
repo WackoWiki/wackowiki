@@ -179,7 +179,7 @@ class paragrafica
 		do
 		{
 			$_w		= $what;
-			$what	= preg_replace( "!(" . $this->mark2.")((\s|(<br[^>]*>|" . $this->mark3."|" . $this->mark4."))*)(" . $this->mark1.")!si", '$2', $what );
+			$what	= preg_replace( "!(" . $this->mark2 . ")((\s|(<br[^>]*>|" . $this->mark3 . "|" . $this->mark4 . "))*)(" . $this->mark1 . ")!si", '$2', $what );
 		}
 
 		while ($_w != $what);
@@ -235,7 +235,7 @@ class paragrafica
 										  $page_id . '-' . $pcount .
 										  $this->prefix2 .
 										  $inside .
-										  $this->postfix.substr($v, $pos + $sizeof_mark1);
+										  $this->postfix . substr($v, $pos + $sizeof_mark1);
 						}
 					}
 				}
