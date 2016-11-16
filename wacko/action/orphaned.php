@@ -21,11 +21,11 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 		"WHERE " .
 			($tag
 				? "p.tag LIKE '" . $this->db->q($tag . '/%') . " AND "
-				: "").
+				: "") .
 			"l.to_page_id IS NULL " .
 			($deleted != 1
 				? "AND p.deleted <> '1' "
-				: "").
+				: "") .
 			"AND p.comment_on_id = '0' "
 		, true));
 
@@ -44,11 +44,11 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 			"WHERE " .
 				($tag
 					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
-					: "").
+					: "") .
 				"l.to_page_id IS NULL " .
 				($deleted != 1
 					? "AND p.deleted <> '1' "
-					: "").
+					: "") .
 				"AND p.comment_on_id = '0' " .
 			"ORDER BY tag " .
 			$pagination['limit']);

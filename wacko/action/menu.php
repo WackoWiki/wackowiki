@@ -33,7 +33,7 @@ if (!function_exists('load_user_menu'))
 			"WHERE m.user_id = '" . (int) $user_id . "' " .
 				($lang
 					? "AND m.menu_lang =  '" . $lang."' "
-					: "").
+					: "") .
 			"ORDER BY m.menu_position", false);
 
 		return $_menu;
@@ -145,7 +145,7 @@ if (isset($_POST['_user_menu']))
 						"WHERE user_id = '" . (int) $_user_id."' " .
 							($default_menu === true
 									? "AND menu_lang = '" . $_user_lang."' "
-									: "").
+									: "") .
 							"AND page_id = '" . (int) $_page_id."' " .
 						"LIMIT 1"))
 					{

@@ -230,7 +230,7 @@ class Wacko
 				"FROM " . $this->db->table_prefix . "upload " .
 					($user_id
 						? "WHERE user_id = '{$user_id}' "
-						: "").
+						: "") .
 				"LIMIT 1");
 
 		$used_upload_quota = $files['used_quota'];
@@ -1090,7 +1090,7 @@ class Wacko
 						: "supertag = " . $this->db->q($supertag) . " " ).
 						($deleted != 1
 							? "AND p.deleted <> '1' "
-							: "").
+							: "") .
 					"LIMIT 1");
 
 				$owner_id = $page['owner_id'];
@@ -1110,7 +1110,7 @@ class Wacko
 							: "p.supertag = " . $this->db->q($supertag) . " " ).
 							($deleted != 1
 								? "AND p.deleted <> '1' "
-								: "").
+								: "") .
 							"AND revision_id = '" . (int) $revision_id . "' " .
 						"LIMIT 1");
 
@@ -1127,7 +1127,7 @@ class Wacko
 					"WHERE tag = " . $this->db->q($tag) . " " .
 						($deleted != 1
 							? "AND p.deleted <> '1' "
-							: "").
+							: "") .
 					"LIMIT 1");
 
 				$owner_id = $page['owner_id'];
@@ -1145,7 +1145,7 @@ class Wacko
 						"WHERE p.tag = " . $this->db->q($tag) . " " .
 							($deleted != 1
 								? "AND p.deleted <> '1' "
-								: "").
+								: "") .
 							"AND revision_id = '" . (int) $revision_id . "' " .
 						"LIMIT 1");
 
@@ -1321,11 +1321,11 @@ class Wacko
 			"WHERE (b.user_id IN ( '" . $this->get_user_id('System') . "' ) " .
 				($lang
 					? "AND b.menu_lang = " . $this->db->q($lang) . " "
-					: "").
+					: "") .
 					") " .
 				($user
 					? "OR (b.user_id IN ( '" . $user['user_id'] . "' )) "
-					: "").
+					: "") .
 			"", true))
 		{
 			foreach ($menu_items as $item)
@@ -1459,7 +1459,7 @@ class Wacko
 			"WHERE p.page_id = '" . (int) $page_id . "' " .
 				($hide_minor_edit
 					? "AND p.minor_edit = '0' "
-					: "").
+					: "") .
 				(!$show_deleted
 					? "AND p.deleted <> '1' "
 					: "") .
@@ -1495,7 +1495,7 @@ class Wacko
 				"WHERE p.page_id = '" . (int) $page_id . "' " .
 					(!$show_deleted
 						? "AND p.deleted <> '1' "
-						: "").
+						: "") .
 				"ORDER BY p.modified DESC " .
 				"LIMIT 1");
 		}
@@ -1511,10 +1511,10 @@ class Wacko
 			"WHERE page_id = '" . (int) $page_id . "' " .
 				($hide_minor_edit
 					? "AND minor_edit = '0' "
-					: "").
+					: "") .
 				(!$show_deleted
 					? "AND deleted <> '1' "
-					: "").
+					: "") .
 			"LIMIT 1");
 
 		return $count? $count['n'] : 0;
@@ -1528,7 +1528,7 @@ class Wacko
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.from_page_id) " .
 			"WHERE " . ($tag
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
-				: "").
+				: "") .
 				"(l.to_supertag = " . $this->db->q($this->translit($to_tag)) . ") " .
 			"ORDER BY tag", true);
 	}
@@ -1542,7 +1542,7 @@ class Wacko
 				"INNER JOIN " . $this->db->table_prefix . "upload u ON (u.upload_id = l.file_id) " .
 			"WHERE " . ($tag
 					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
-					: "").
+					: "") .
 				"l.file_id = '" . (int) $file_id . "' " .
 			"ORDER BY tag", true);
 	}
@@ -1557,16 +1557,16 @@ class Wacko
 			"WHERE p.comment_on_id = '0' " .
 				($from
 					? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
-					: "").
+					: "") .
 				($tag
 					? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-					: "").
+					: "") .
 				($minor_edit
 					? "AND p.minor_edit = '0' "
-					: "").
+					: "") .
 				(!$deleted
 					? "AND p.deleted <> '1' "
-					: "").
+					: "") .
 				(!$default_pages
 					? "AND (u.account_type = '0' OR p.user_id = '0') "
 					: "")
@@ -1583,19 +1583,19 @@ class Wacko
 		"WHERE p.comment_on_id = '0' " .
 			($from
 				? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
-				: "").
+				: "") .
 			($tag
 				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-				: "").
+				: "") .
 			($minor_edit
 				? "AND p.minor_edit = '0' "
-				: "").
+				: "") .
 			(!$deleted
 				? "AND p.deleted <> '1' "
-				: "").
+				: "") .
 			(!$default_pages
 				? "AND (u.account_type = '0' OR p.user_id = '0') "
-				: "").
+				: "") .
 			"AND r2.revision_id IS NULL " .
 		"ORDER BY p.modified DESC " .
 		$pagination['limit'], true)))
@@ -1640,10 +1640,10 @@ class Wacko
 		"WHERE c.comment_on_id <> '0' " .
 			($tag
 				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-				: "").
+				: "") .
 			($deleted != 1
 				? "AND p.deleted <> '1' AND c.deleted <> '1' "
-				: "").
+				: "") .
 		"ORDER BY c.modified DESC " .
 		"LIMIT " . $limit))
 		{
@@ -1663,7 +1663,7 @@ class Wacko
 				"AND a.page_id = p.page_id " .
 					($tag
 						? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-						: "").
+						: "") .
 				"AND a.privilege = 'read' " .
 			"ORDER BY modified DESC " .
 			"LIMIT {$limit}"))
@@ -2111,7 +2111,7 @@ class Wacko
 								?	"reviewed		= '" . (int) $reviewed . "', " .
 									"reviewed_time	= UTC_TIMESTAMP(), " .
 									"reviewer_id	= '" . (int) $reviewer_id . "', "
-								:	"").
+								:	"") .
 							"title			= " . $this->db->q($title) . " " .
 						"WHERE tag = " . $this->db->q($tag) . " " .
 						"LIMIT 1");
@@ -4211,7 +4211,7 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "referrer " .
 			(!is_null($page_id)
 				? "WHERE page_id = '" . (int) $page_id . "' "
-				: "").
+				: "") .
 			"GROUP BY referrer " .
 			"ORDER BY num DESC");
 	}

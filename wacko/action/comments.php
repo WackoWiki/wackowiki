@@ -39,7 +39,7 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 				: "a.comment_on_id <> '0' ").
 			($deleted != 1
 				? "AND a.deleted <> '1' "
-				: "").
+				: "") .
 			"ORDER BY a.modified DESC " .
 			$pagination['limit']);
 

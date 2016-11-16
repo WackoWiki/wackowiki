@@ -98,7 +98,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		"FROM {$this->db->table_prefix}page AS p, " .
 		($category
 			? "INNER JOIN {$this->db->table_prefix}category_page AS k ON (k.page_id = p.page_id) "
-			: "").
+			: "") .
 			"{$this->db->table_prefix}acl AS a " .
 		"WHERE p.page_id = a.page_id " .
 			"AND a.privilege = 'create' AND a.list = '' " .
@@ -126,7 +126,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		"FROM {$this->db->table_prefix}page AS p " .
 		($category
 			? "INNER JOIN {$this->db->table_prefix}category_page AS k ON (k.page_id = p.page_id) "
-			: "").
+			: "") .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
 			"{$this->db->table_prefix}acl AS a " .
