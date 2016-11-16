@@ -97,10 +97,10 @@ $count = $this->db->load_single(
 		"AND deleted = '0' " .
 		($page
 			? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-			: "").
+			: "") .
 		($lang
 			? "AND page_lang = " . $this->db->q($lang) . " "
-			: "").
+			: "") .
 		($letter !== ''
 			? "AND " .
 				($title

@@ -27,14 +27,14 @@ if (@$_POST['_action'] === 'extended_properties')
 			"footer_files		= '" . (int) $_POST['footer_files'] . "', " .
 			($this->db->footer_rating
 				? "footer_rating	= '" . (int) $_POST['footer_rating'] . "', "
-				: "").
+				: "") .
 			"hide_toc			= '" . (int) $_POST['hide_toc'] . "', " .
 			"hide_index			= '" . (int) $_POST['hide_index'] . "', " .
 			"tree_level			= '" . (int) $_POST['tree_level'] . "', " .
 			($this->is_admin()
 				?	"allow_rawhtml		= '" . (int) $_POST['allow_rawhtml'] . "', " .
 					"disable_safehtml	= '" . (int) $_POST['disable_safehtml'] . "', "
-				: "").
+				: "") .
 			"noindex			= '" . (int) $_POST['noindex'] . "' " .
 		"WHERE page_id = '" . $this->page['page_id'] . "' " .
 		"LIMIT 1");

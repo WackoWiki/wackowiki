@@ -108,7 +108,7 @@ if ($can_view)
 				: '') . " " .
 			($deleted != 1
 			? "AND f.deleted <> '1' "
-					: "").
+					: "") .
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);
 

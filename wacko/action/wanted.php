@@ -21,7 +21,7 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 			"WHERE " .
 				($for
 					? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
-					: "").
+					: "") .
 				"p.tag is NULL GROUP BY wanted_tag "
 		, true));
 
@@ -40,7 +40,7 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 				"WHERE " .
 					($for
 						? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
-						: "").
+						: "") .
 					"p.tag is NULL GROUP BY wanted_tag " .
 				"ORDER BY wanted_tag ASC " .
 				$pagination['limit']);

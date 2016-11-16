@@ -13,22 +13,22 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 	$selector =
 		($tag
 			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
-			: "").
+			: "") .
 		"WHERE (( MATCH(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
 			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
 			"OR lower(a.tag) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) " .
 			($tag
 				? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
 				  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " )"
-				: "").
+				: "") .
 			($filter
 				? "AND a.comment_on_id = '0' "
-				: "").
+				: "") .
 			(!$deleted
 				? ($tag
 						? "AND (a.deleted <> '1' OR b.deleted <> '1') "
 						: "AND a.deleted <> '1' ")
-				: "").
+				: "") .
 			" )";
 
 	$count = $this->db->load_single(
@@ -58,16 +58,16 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 	$selector =
 		($tag
 			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
-			: "").
+			: "") .
 		"WHERE ( lower(a.tag) LIKE binary lower(" . $this->db->q('%' . $phrase . '%') . ") " .
 			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) " .
 		($tag
 			? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
 			  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " )"
-			: "").
+			: "") .
 		($filter
 			? "AND a.comment_on_id = '0' "
-			: "").
+			: "") .
 		(!$deleted
 			? ($tag
 				? "AND (a.deleted <> '1' OR b.deleted <> '1') "
