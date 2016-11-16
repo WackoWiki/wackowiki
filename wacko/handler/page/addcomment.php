@@ -10,7 +10,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	$body		= str_replace("\r", '', trim($_POST['body']));
 	$error		= '';
 	$title		= trim(@$_POST['title']);
-	$parent_id	= (int)@$_POST['parent_id'];
+	$parent_id	= (int) @$_POST['parent_id'];
 
 	// if form token failed
 	if (!$_POST)

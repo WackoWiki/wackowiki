@@ -37,6 +37,7 @@ else if (($user = $this->get_user()))
 	if ($action == 'user_settings_general')
 	{
 		$error = '';
+
 		// no email given
 		if (!$email)
 		{
@@ -75,38 +76,39 @@ else if (($user = $this->get_user()))
 		}
 	}
 
+	// update changed user settings
 	if ($action == 'user_settings_extended')
 	{
 		$sql =
-		"doubleclick_edit	= '" . (int)isset($_POST['doubleclick_edit']) . "', " .
-		"show_comments		= '" . (int)isset($_POST['show_comments']) . "', " .
-		"show_spaces		= '" . (int)isset($_POST['show_spaces']) . "', " .
-		// "typografica		= '" . (int)isset($_POST['typografica']) . "', " .
-		"autocomplete		= '" . (int)isset($_POST['autocomplete']) . "', " .
-		"numerate_links		= '" . (int)isset($_POST['numerate_links']) . "', " .
-		"dont_redirect		= '" . (int)isset($_POST['dont_redirect']) . "', " .
-		"show_files			= '" . (int)isset($_POST['show_files']) . "', " .
-		"hide_lastsession	= '" . (int)isset($_POST['hide_lastsession']) . "', " .
-		"validate_ip		= '" . (int)isset($_POST['validate_ip']) . "', " .
-		"noid_pubs			= '" . (int)isset($_POST['noid_pubs']) . "', " .
-		"session_length		= '" . (int)@$_POST['session_length'] . "' "; // @ to normalize possible discrepancy
+		"doubleclick_edit	= '" . (int) isset($_POST['doubleclick_edit']) . "', " .
+		"show_comments		= '" . (int) isset($_POST['show_comments']) . "', " .
+		"show_spaces		= '" . (int) isset($_POST['show_spaces']) . "', " .
+		// "typografica		= '" . (int) isset($_POST['typografica']) . "', " .
+		"autocomplete		= '" . (int) isset($_POST['autocomplete']) . "', " .
+		"numerate_links		= '" . (int) isset($_POST['numerate_links']) . "', " .
+		"dont_redirect		= '" . (int) isset($_POST['dont_redirect']) . "', " .
+		"show_files			= '" . (int) isset($_POST['show_files']) . "', " .
+		"hide_lastsession	= '" . (int) isset($_POST['hide_lastsession']) . "', " .
+		"validate_ip		= '" . (int) isset($_POST['validate_ip']) . "', " .
+		"noid_pubs			= '" . (int) isset($_POST['noid_pubs']) . "', " .
+		"session_length		= '" . (int) @$_POST['session_length'] . "' "; // @ to normalize possible discrepancy
 	}
 	else if	($action == 'user_settings_notifications')
 	{
 		$sql =
-		"send_watchmail		= '" . (int)isset($_POST['send_watchmail']) . "', " .
-		"allow_intercom		= '" . (int)isset($_POST['allow_intercom']) . "', " .
-		"notify_minor_edit	= '" . (int)isset($_POST['notify_minor_edit']) . "', " .
-		"notify_page		= '" . (int)@$_POST['notify_page'] . "', ".		// @ to notify possible discrepancy
-		"notify_comment		= '" . (int)@$_POST['notify_comment'] . "', ".	// @ to notify possible discrepancy
-		"allow_massemail	= '" . (int)isset($_POST['allow_massemail']) . "' ";
+		"send_watchmail		= '" . (int) isset($_POST['send_watchmail']) . "', " .
+		"allow_intercom		= '" . (int) isset($_POST['allow_intercom']) . "', " .
+		"notify_minor_edit	= '" . (int) isset($_POST['notify_minor_edit']) . "', " .
+		"notify_page		= '" . (int) @$_POST['notify_page'] . "', ".		// @ to notify possible discrepancy
+		"notify_comment		= '" . (int) @$_POST['notify_comment'] . "', ".	// @ to notify possible discrepancy
+		"allow_massemail	= '" . (int) isset($_POST['allow_massemail']) . "' ";
 	}
 	else if	($action == 'user_settings_general')
 	{
 		$sql =
 		"user_lang			= " . $this->db->q($_POST['user_lang']) . ", " .
 		"theme				= " . $this->db->q($_POST['theme']) . ", " .
-		"timezone			= '" . (float)$_POST['timezone'] . "', " .
+		"timezone			= '" . (float) $_POST['timezone'] . "', " .
 		"dst				= '" . (int) $_POST['dst'] . "', " .
 		"sorting_comments	= '" . (int) $_POST['sorting_comments'] . "', " .
 		"menu_items			= '" . (int) $_POST['menu_items'] . "', " .
