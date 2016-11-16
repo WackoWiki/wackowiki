@@ -32,7 +32,8 @@ if (!isset($track))		$track = 0;
 if (!isset($picture))	$picture = null;
 if (!isset($max))		$max = null;
 
-$order_by	= "file_name ASC";
+$order_by			= "file_name ASC";
+$file_name_maxlen	= 80;
 
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
@@ -122,28 +123,20 @@ if ($can_view)
 	$edit_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadEdit') . '" alt="' . $this->_t('UploadEdit') . '" class="btn-edit"/>';
 	$del_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadRemove') . '" alt="' . $this->_t('UploadRemove') . '" class="btn-delete"/>';
 
-	/* if (!$global)
-	{
-		$path = '@' . $filepage['page_id'] . '@';
-	}
-	else
-	{
-		$path = '';
-	} */
-
+	// use absolute path
 	if (!$global)
 	{
 		$path2 = 'file:/' . ($this->slim_url($page)) . '/';
 	}
 	else
 	{
-		$path2 = 'file:';
+		$path2 = 'file:/';
 	}
 
 	// !!!!! patch link to not show pictures when not needed
 	if ($picture == false)
 	{
-		$path2 = str_replace('file:', '_file:', $path2);
+		$path2 = str_replace('file:/', '_file:/', $path2);
 		$style = 'upload';
 	}
 	else
@@ -183,7 +176,9 @@ if ($can_view)
 
 			$file_id	= $file['upload_id'];
 			$file_name	= $file['file_name'];
-			$text		= ($picture == false) ? $file_name : '';
+			// TODO: move to function shorten_string($maxlen)
+			$shown_name = $this->shorten_string($file_name, $file_name_maxlen);
+			$text		= ($picture == false) ? $shown_name : '';
 			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
 			$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
@@ -202,59 +197,59 @@ if ($can_view)
 					&& $this->get_page_owner_id($page_id) == $this->get_user_id())
 				|| $file['user_id'] == $this->get_user_id())
 			{
-				$remove_mode = 1;
+				$operation_mode = 1;
 			}
 			else
 			{
-				$remove_mode = 0;
+				$operation_mode = 0;
 			}
 
-			$href_remove	= $this->href('upload', $page, 'remove=' . ($global ? 'global' : 'local') . "&amp;file_id=" . $file_id);
-			$href_edit		= $this->href('upload', $page, 'edit=' . ($global ? 'global' : 'local') . "&amp;file_id=" . $file_id);
+			$href_remove	= $this->href('upload', $page, 'remove' . "&amp;file_id=" . $file_id);
+			$href_edit		= $this->href('upload', $page, 'edit' . "&amp;file_id=" . $file_id);
 
-			echo '<tr>' . 
+			echo '<tr>' .
 					'<td class="file-">' . $link . '</td>';
 
 			if ($picture == false)
 			{
-				echo '<td class="desc-">' . $desc . '</td>' . 
+				echo '<td class="desc-">' . $desc . '</td>' .
 					'<td class="size-">
 						<span class="size2-">' . $file_size . $hits . '</span>&nbsp;'.
-					'</td>' . 
-					'<td class="dt-">' . 
+					'</td>' .
+					'<td class="dt-">' .
 						'<span class="dt2-">' . $this->get_time_formatted($dt) . '</span>&nbsp;'.
 					'</td>';
 			}
 			else
 			{
-				echo '<td class="desc-">' . 
-					'<strong>' . $file['file_name'] . '</strong><br /><br />' . 
-					$desc . '<br /><br />' . 
+				echo '<td class="desc-">' .
+					'<strong>' . $this->shorten_string($file['file_name'], $file_name_maxlen) . '</strong><br /><br />' .
+					$desc . '<br /><br />' .
 
 					($file['picture_w']
 						? $file['picture_w'] . ' × ' . $file['picture_h'] . 'px<br />'
 						: $hits . '<br />'
 					).
 
-					$file_size . '<br /><br />' . 
-					$this->user_link($file['user_name'], '', true, false) . '<br />' . 
+					$file_size . '<br /><br />' .
+					$this->user_link($file['user_name'], '', true, false) . '<br />' .
 					$this->get_time_formatted($dt).
 				'</td>';
 			}
 
-			if ($remove_mode)
+			if ($operation_mode)
 			{
-				echo '<td class="tool-">' . 
-						'<span class="dt2-">' . 
-							'<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .  # &nbsp;
-							'<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>' . 
-						'</span>' . 
+				echo '<td class="tool-">' .
+						'<span class="dt2-">' .
+							'<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .
+							'<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>' .
+						'</span>' .
 					 '</td>' . "\n";
 			}
 			else
 			{
-				#echo '<td class="tool-">&nbsp;</td>' . "\n";
-				#echo '<td class="tool-">&nbsp;</td>' . "\n";
+				# echo '<td class="tool-">&nbsp;</td>' . "\n";
+				# echo '<td class="tool-">&nbsp;</td>' . "\n";
 			}
 	?>
 

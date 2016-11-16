@@ -171,7 +171,7 @@ echo '<strong>' . $title . "</strong><br /><br />\n";
 $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $spacer)
 {
 	// shorten url name if too long
-	$trunc = (strlen($ref) > $url_maxlen)?  substr($ref, 0, 30) . '[..]' . substr($ref, -20) : $ref;
+	$trunc = $this->shorten_string($ref, $url_maxlen);
 
 	echo '<li class="lined">';
 	echo '<span class="' . $vclass . '">' . $val . '</span>&nbsp;&nbsp;&nbsp;&nbsp;';
