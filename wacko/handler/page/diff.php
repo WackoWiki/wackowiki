@@ -16,7 +16,7 @@ if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
 
 $a			= (int) $_GET['a'];
 $b			= (int) $_GET['b'];
-$diffmode	= (int)@$_GET['diffmode'];
+$diffmode	= (int) @$_GET['diffmode'];
 
 if ($a < 0) $a = 0;
 if ($b < 0) $b = 0;

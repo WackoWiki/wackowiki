@@ -91,7 +91,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	// filter categories
-	$category = (int)@$_GET['category'];
+	$category = (int) @$_GET['category'];
 
 	// make counter query
 	$sql = "SELECT COUNT(p.tag) AS n " .

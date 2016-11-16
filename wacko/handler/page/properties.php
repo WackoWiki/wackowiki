@@ -47,8 +47,8 @@ if (@$_POST['_action'] === 'general_properties')
 			"page_lang			= " . $this->db->q($_POST['page_lang']) . ", " .
 			"theme				= " . $this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')) . ", " .
 			// menu_tag: unused currently, for use in custom theme menus
-			// "menu_tag			= " . $this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . ", " .
-			// "show_menu_tag		= " . $this->db->q((int) $_POST['show_menu_tag']) . ", " .
+			# "menu_tag			= " . $this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . ", " .
+			# "show_menu_tag		= " . $this->db->q((int) $_POST['show_menu_tag']) . ", " .
 			"title				= " . $this->db->q(trim($_POST['title'])) . ", " .
 			"keywords			= " . $this->db->q(trim($_POST['keywords'])) . ", " .
 			"description		= " . $this->db->q(trim($_POST['description'])) . " " .
