@@ -374,9 +374,9 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		{
 			$_root = $engine->translit($root);
 			$pages = $engine->db->load_all(
-				"SELECT page_id ".
-				"FROM " . $engine->db->table_prefix . "page ".
-				"WHERE supertag LIKE " . $engine->db->q($_root . '/%') . " ".
+				"SELECT page_id " .
+				"FROM " . $engine->db->table_prefix . "page " .
+				"WHERE supertag LIKE " . $engine->db->q($_root . '/%') . " " .
 					"OR supertag = " . $engine->db->q($_root) . " ");
 
 			foreach ($pages as $page)
@@ -400,8 +400,8 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		}
 		else
 		{
-			$where = "WHERE tag LIKE " . $engine->db->q($root . '/%') . " ".
-						"OR tag = " . $engine->db->q($root) . " ".
+			$where = "WHERE tag LIKE " . $engine->db->q($root . '/%') . " " .
+						"OR tag = " . $engine->db->q($root) . " " .
 						"OR comment_on_id IN (" . $cluster_pages[$root] . ") ";
 		}
 	}
@@ -432,7 +432,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	$t = 0;
 
 	while (true == $data = $engine->db->load_all(
-	"SELECT * FROM $table ".
+	"SELECT * FROM $table " .
 	( $where ? $where : "" ).
 	$order.
 	Ut::perc_replace($limit, $r)))

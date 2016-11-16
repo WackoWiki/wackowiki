@@ -68,13 +68,13 @@ $mail_body = '';
 			if ($engine->db->enable_email == true && $engine->db->enable_email_notification == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
 			{
 				$subject	= '[' . $engine->db->site_name . '] ' . $mail_subject;
-				$body		= $engine->_t('EmailHello') . ' ' . $user['user_name'] . ",\n\n".
+				$body		= $engine->_t('EmailHello') . ' ' . $user['user_name'] . ",\n\n" .
 
-							$mail_body."\n\n\n".
+							$mail_body."\n\n\n" .
 
-							$engine->_t('EmailDoNotReply') . "\n\n".
-							$engine->_t('EmailGoodbye') . "\n".
-							$engine->db->site_name . "\n".
+							$engine->_t('EmailDoNotReply') . "\n\n" .
+							$engine->_t('EmailGoodbye') . "\n" .
+							$engine->db->site_name . "\n" .
 							$engine->db->base_url;
 
 				$email = new Email($engine);
@@ -89,9 +89,9 @@ $mail_body = '';
 	}
 
 	$available_groups = $engine->db->load_all(
-		"SELECT group_id, group_name ".
-		"FROM {$engine->db->table_prefix}usergroup ".
-		"WHERE active = '1' ".
+		"SELECT group_id, group_name " .
+		"FROM {$engine->db->table_prefix}usergroup " .
+		"WHERE active = '1' " .
 		"ORDER BY BINARY group_name", true);
 
 	#$engine->debug_print_r($available_users);

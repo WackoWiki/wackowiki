@@ -130,8 +130,8 @@ class typografica
 									"\s+(". // repeatable statement: if only one delimiter and little body
 									"[a-z]+(". // alpha-composed attribute, could be followed by equals character
 											"=((\'[^\']*\')|(\"[^\"]*\")|([0-9@\-_a-z:\/?&=\.]+))". //
-											")?".
-										")?".
+											")?" .
+										")?" .
 									")*\/?>|<\!--link:begin-->[^\n]*?==/i";
 			$total	= preg_match_all($re, $data, $matches);
 			$data	= preg_replace($re, "{:typo:markup:1:}", $data);

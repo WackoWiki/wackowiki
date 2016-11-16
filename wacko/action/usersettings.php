@@ -63,10 +63,10 @@ else if (($user = $this->get_user()))
 			{
 				// update users table
 				$this->db->sql_query(
-					"UPDATE " . $this->db->user_table . " SET ".
-						"real_name		= " . $this->db->q(trim($_POST['real_name'])) . ", ".
-						"email			= " . $this->db->q($email) . " ".
-					"WHERE user_id = '" . $user['user_id'] . "' ".
+					"UPDATE " . $this->db->user_table . " SET " .
+						"real_name		= " . $this->db->q(trim($_POST['real_name'])) . ", " .
+						"email			= " . $this->db->q($email) . " " .
+					"WHERE user_id = '" . $user['user_id'] . "' " .
 					"LIMIT 1");
 
 				// log event
@@ -78,25 +78,25 @@ else if (($user = $this->get_user()))
 	if ($action == 'user_settings_extended')
 	{
 		$sql =
-		"doubleclick_edit	= '" . (int)isset($_POST['doubleclick_edit']) . "', ".
-		"show_comments		= '" . (int)isset($_POST['show_comments']) . "', ".
-		"show_spaces		= '" . (int)isset($_POST['show_spaces']) . "', ".
-		// "typografica		= '" . (int)isset($_POST['typografica']) . "', ".
-		"autocomplete		= '" . (int)isset($_POST['autocomplete']) . "', ".
-		"numerate_links		= '" . (int)isset($_POST['numerate_links']) . "', ".
-		"dont_redirect		= '" . (int)isset($_POST['dont_redirect']) . "', ".
-		"show_files			= '" . (int)isset($_POST['show_files']) . "', ".
-		"hide_lastsession	= '" . (int)isset($_POST['hide_lastsession']) . "', ".
-		"validate_ip		= '" . (int)isset($_POST['validate_ip']) . "', ".
-		"noid_pubs			= '" . (int)isset($_POST['noid_pubs']) . "', ".
+		"doubleclick_edit	= '" . (int)isset($_POST['doubleclick_edit']) . "', " .
+		"show_comments		= '" . (int)isset($_POST['show_comments']) . "', " .
+		"show_spaces		= '" . (int)isset($_POST['show_spaces']) . "', " .
+		// "typografica		= '" . (int)isset($_POST['typografica']) . "', " .
+		"autocomplete		= '" . (int)isset($_POST['autocomplete']) . "', " .
+		"numerate_links		= '" . (int)isset($_POST['numerate_links']) . "', " .
+		"dont_redirect		= '" . (int)isset($_POST['dont_redirect']) . "', " .
+		"show_files			= '" . (int)isset($_POST['show_files']) . "', " .
+		"hide_lastsession	= '" . (int)isset($_POST['hide_lastsession']) . "', " .
+		"validate_ip		= '" . (int)isset($_POST['validate_ip']) . "', " .
+		"noid_pubs			= '" . (int)isset($_POST['noid_pubs']) . "', " .
 		"session_length		= '" . (int)@$_POST['session_length'] . "' "; // @ to normalize possible discrepancy
 	}
 	else if	($action == 'user_settings_notifications')
 	{
 		$sql =
-		"send_watchmail		= '" . (int)isset($_POST['send_watchmail']) . "', ".
-		"allow_intercom		= '" . (int)isset($_POST['allow_intercom']) . "', ".
-		"notify_minor_edit	= '" . (int)isset($_POST['notify_minor_edit']) . "', ".
+		"send_watchmail		= '" . (int)isset($_POST['send_watchmail']) . "', " .
+		"allow_intercom		= '" . (int)isset($_POST['allow_intercom']) . "', " .
+		"notify_minor_edit	= '" . (int)isset($_POST['notify_minor_edit']) . "', " .
 		"notify_page		= '" . (int)@$_POST['notify_page'] . "', ".		// @ to notify possible discrepancy
 		"notify_comment		= '" . (int)@$_POST['notify_comment'] . "', ".	// @ to notify possible discrepancy
 		"allow_massemail	= '" . (int)isset($_POST['allow_massemail']) . "' ";
@@ -104,12 +104,12 @@ else if (($user = $this->get_user()))
 	else if	($action == 'user_settings_general')
 	{
 		$sql =
-		"user_lang			= " . $this->db->q($_POST['user_lang']) . ", ".
-		"theme				= " . $this->db->q($_POST['theme']) . ", ".
-		"timezone			= '" . (float)$_POST['timezone'] . "', ".
-		"dst				= '" . (int) $_POST['dst'] . "', ".
-		"sorting_comments	= '" . (int) $_POST['sorting_comments'] . "', ".
-		"menu_items			= '" . (int) $_POST['menu_items'] . "', ".
+		"user_lang			= " . $this->db->q($_POST['user_lang']) . ", " .
+		"theme				= " . $this->db->q($_POST['theme']) . ", " .
+		"timezone			= '" . (float)$_POST['timezone'] . "', " .
+		"dst				= '" . (int) $_POST['dst'] . "', " .
+		"sorting_comments	= '" . (int) $_POST['sorting_comments'] . "', " .
+		"menu_items			= '" . (int) $_POST['menu_items'] . "', " .
 		"list_count			= '" . (int) $_POST['list_count'] . "' " ;
 	}
 	else
@@ -121,9 +121,9 @@ else if (($user = $this->get_user()))
 	{
 		// update user_setting table
 		$this->db->sql_query(
-			"UPDATE " . $this->db->table_prefix . "user_setting SET ".
+			"UPDATE " . $this->db->table_prefix . "user_setting SET " .
 				$sql.
-			"WHERE user_id = '" . (int) $user['user_id'] . "' ".
+			"WHERE user_id = '" . (int) $user['user_id'] . "' " .
 			"LIMIT 1");
 
 		// log event
@@ -428,9 +428,9 @@ else if (($user = $this->get_user()))
 		echo $this->form_open('user_settings_general');
 
 		$code = $this->db->load_single(
-			"SELECT email_confirm ".
-			"FROM {$this->db->user_table} ".
-			"WHERE user_id = '" . (int) $user['user_id'] . "' ".
+			"SELECT email_confirm " .
+			"FROM {$this->db->user_table} " .
+			"WHERE user_id = '" . (int) $user['user_id'] . "' " .
 			"LIMIT 1");
 
 		echo '<h3>' . $this->_t('UserSettings') . ' &raquo; ' . $this->_t('UserSettingsGeneral') . '</h3>';
@@ -644,35 +644,35 @@ else if (($user = $this->get_user()))
 	echo '<aside class="page_tools">' .
 			'<table class="form_tbl">' .
 				'<tr class="lined">' .
-					'<th class="form_left" scope="row">' . $this->_t('UserSpace') . "</th>".
-					'<td class="form_right">' . "<a href=\"" . $this->href('', ($this->db->users_page . '/' . $user['user_name'])) . "\">" . $this->db->users_page . '/' . $user['user_name'] . "</a>" . "</td>".
+					'<th class="form_left" scope="row">' . $this->_t('UserSpace') . "</th>" .
+					'<td class="form_right">' . "<a href=\"" . $this->href('', ($this->db->users_page . '/' . $user['user_name'])) . "\">" . $this->db->users_page . '/' . $user['user_name'] . "</a>" . "</td>" .
 				"</tr>\n" . '<tr class="lined">' .
-					'<th class="form_left" scope="row">' . $this->_t('UsersSignup') . "</th>".
-					'<td class="form_right">' . $this->get_time_formatted($user['signup_time']) . "</td>".
+					'<th class="form_left" scope="row">' . $this->_t('UsersSignup') . "</th>" .
+					'<td class="form_right">' . $this->get_time_formatted($user['signup_time']) . "</td>" .
 				"</tr>\n" . '<tr class="lined">' .
-					'<th class="form_left" scope="row">' . $this->_t('UsersLastSession') . "</th>".
-					'<td class="form_right">' . $this->get_time_formatted($user['last_visit']) . "</td>".
+					'<th class="form_left" scope="row">' . $this->_t('UsersLastSession') . "</th>" .
+					'<td class="form_right">' . $this->get_time_formatted($user['last_visit']) . "</td>" .
 				"</tr>\n" . '<tr class="lined">' .
-					'<th class="form_left" scope="row">' . $this->_t('UploadQuota') . "&nbsp;&nbsp;</th>".
+					'<th class="form_left" scope="row">' . $this->_t('UploadQuota') . "&nbsp;&nbsp;</th>" .
 
-					'<td class="form_right" title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage.")</span></div></td>".
+					'<td class="form_right" title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage.")</span></div></td>" .
 				"</tr>\n" . '<tr class="lined">' .
-					'<th class="form_left" scope="row">' . $this->_t('UsersPages') . "</th>".
-					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_pages'] . "</a></td>".
+					'<th class="form_left" scope="row">' . $this->_t('UsersPages') . "</th>" .
+					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_pages'] . "</a></td>" .
 				// "</tr>\n" . '<tr class="lined">' .
-					// '<th class="form_left" scope="row">' . $this->_t('UsersRevisions') . "</th>".
-					// '<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name']) . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_revisions'] . "</a></td>".
+					// '<th class="form_left" scope="row">' . $this->_t('UsersRevisions') . "</th>" .
+					// '<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name']) . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_revisions'] . "</a></td>" .
 				"</tr>\n" . '<tr class="lined">' .
-					'<th class="form_left" scope="row">' . $this->_t('UsersComments') . "</th>".
+					'<th class="form_left" scope="row">' . $this->_t('UsersComments') . "</th>" .
 					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments') . '" title="' . $this->_t('ShowComments') . '">' . $user['total_comments'] . '</a></td>' .
 				"</tr>\n" . '<tr class="lined">' .
-					'<th class="form_left" scope="row">' . $this->_t('UsersUploads') . "</th>".
+					'<th class="form_left" scope="row">' . $this->_t('UsersUploads') . "</th>" .
 					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'uploads') . '" title="' . $this->_t('ShowComments') . '">' . number_format($user['total_uploads'], 0, ',', '.') . '</a></td>' .
 				// "</tr>\n" . '<tr class="lined">' .
-				// 	'<th class="form_left" scope="row">' . $this->_t('UsersLogins') . "</th>".
-				// 	'<td class="form_right">' . number_format($user['login_count'], 0, ',', '.') . "</td>".
-				"</tr>\n".
-			"</table>\n".
+				// 	'<th class="form_left" scope="row">' . $this->_t('UsersLogins') . "</th>" .
+				// 	'<td class="form_right">' . number_format($user['login_count'], 0, ',', '.') . "</td>" .
+				"</tr>\n" .
+			"</table>\n" .
 		"</aside>";
 	}
 }

@@ -108,9 +108,9 @@ else // login
 						// check for old sha256 password
 						// load old salt
 						$salt = $this->db->load_single(
-							"SELECT salt ".
-							"FROM " . $this->db->user_table . " ".
-							"WHERE user_name = " . $this->db->q($user_name) . " ".
+							"SELECT salt " .
+							"FROM " . $this->db->user_table . " " .
+							"WHERE user_name = " . $this->db->q($user_name) . " " .
 							"LIMIT 1");
 						$hash = hash('sha256', $user_name . $salt['salt'] . $password);
 					}
@@ -122,9 +122,9 @@ else // login
 
 						// update database with the sha256 password for future logins
 						$this->db->sql_query(
-							"UPDATE " . $this->db->table_prefix . "user SET ".
-								"password	= " . $this->db->q($hash) . ", ".
-								"salt		= '' ".
+							"UPDATE " . $this->db->table_prefix . "user SET " .
+								"password	= " . $this->db->q($hash) . ", " .
+								"salt		= '' " .
 							"WHERE user_name = " . $this->db->q($user_name));
 					}
 				}

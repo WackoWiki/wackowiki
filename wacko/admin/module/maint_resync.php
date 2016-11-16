@@ -33,10 +33,10 @@ function admin_maint_resync(&$engine, &$module)
 		{
 			// total pages in ownership
 			$users1 = $engine->db->load_all(
-				"SELECT u.user_id, COUNT(p.tag) AS n ".
-				"FROM {$engine->db->table_prefix}page AS p, {$engine->db->user_table} AS u ".
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
-				"AND p.deleted <> '1' ".
+				"SELECT u.user_id, COUNT(p.tag) AS n " .
+				"FROM {$engine->db->table_prefix}page AS p, {$engine->db->user_table} AS u " .
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' " .
+				"AND p.deleted <> '1' " .
 				"GROUP BY p.owner_id");
 
 			// missing pages
@@ -56,22 +56,22 @@ function admin_maint_resync(&$engine, &$module)
 			foreach ($users as $user)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->db->user_table} ".
-					"SET total_pages = " . (int) $user['n'] . " ".
-					"WHERE user_id = '" . $user['user_id'] . "' ".
+					"UPDATE {$engine->db->user_table} " .
+					"SET total_pages = " . (int) $user['n'] . " " .
+					"WHERE user_id = '" . $user['user_id'] . "' " .
 					"LIMIT 1");
 			}
 
 			// total comments posted
 			$users1 = $engine->db->load_all(
-				"SELECT p.user_id, COUNT(p.tag) AS n ".
-				"FROM {$engine->db->table_prefix}page AS p, {$engine->db->user_table} AS u ".
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
-				"AND p.deleted <> '1' ".
-				"GROUP BY p.user_id ".
+				"SELECT p.user_id, COUNT(p.tag) AS n " .
+				"FROM {$engine->db->table_prefix}page AS p, {$engine->db->user_table} AS u " .
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' " .
+				"AND p.deleted <> '1' " .
+				"GROUP BY p.user_id " .
 
 			// missing comments
-			"UNION ALL ".
+			"UNION ALL " .
 
 				"SELECT
 					u.user_id, '0' as n
@@ -83,7 +83,7 @@ function admin_maint_resync(&$engine, &$module)
 					AND
 					p.owner_id IS NULL
 					OR
-					(p.owner_id = u.user_id AND p.comment_on_id = '0' ".
+					(p.owner_id = u.user_id AND p.comment_on_id = '0' " .
 					"AND p.deleted <> '1' ))
 
 				");
@@ -97,42 +97,42 @@ Ut::debug_print_r($users);
 			foreach ($users as $user)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->db->user_table} ".
-					"SET total_comments = " . (int) $user['n'] . " ".
-					"WHERE user_id = '" . $user['user_id'] . "' ".
+					"UPDATE {$engine->db->user_table} " .
+					"SET total_comments = " . (int) $user['n'] . " " .
+					"WHERE user_id = '" . $user['user_id'] . "' " .
 					"LIMIT 1");
 			}
 
 			// total revisions made
 			$users = $engine->db->load_all(
-				"SELECT r.user_id, COUNT(r.tag) AS n ".
-				"FROM {$engine->db->table_prefix}revision AS r, {$engine->db->user_table} AS u ".
-				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' ".
+				"SELECT r.user_id, COUNT(r.tag) AS n " .
+				"FROM {$engine->db->table_prefix}revision AS r, {$engine->db->user_table} AS u " .
+				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' " .
 				"GROUP BY r.user_id");
 
 			foreach ($users as $user)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->db->user_table} ".
-					"SET total_revisions = " . (int) $user['n'] . " ".
-					"WHERE user_id = '" . $user['user_id'] . "' ".
+					"UPDATE {$engine->db->user_table} " .
+					"SET total_revisions = " . (int) $user['n'] . " " .
+					"WHERE user_id = '" . $user['user_id'] . "' " .
 					"LIMIT 1");
 			}
 
 			// total files uploaded
 			$users = $engine->db->load_all(
-					"SELECT u.user_id, COUNT(f.upload_id) AS n ".
-					"FROM {$engine->db->table_prefix}upload f, {$engine->db->user_table} AS u ".
-					"WHERE f.user_id = u.user_id ".
-					"AND f.deleted <> '1' ".
+					"SELECT u.user_id, COUNT(f.upload_id) AS n " .
+					"FROM {$engine->db->table_prefix}upload f, {$engine->db->user_table} AS u " .
+					"WHERE f.user_id = u.user_id " .
+					"AND f.deleted <> '1' " .
 					"GROUP BY f.user_id");
 
 			foreach ($users as $user)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->db->user_table} ".
-					"SET total_uploads = " . (int) $user['n'] . " ".
-					"WHERE user_id = '" . $user['user_id'] . "' ".
+					"UPDATE {$engine->db->user_table} " .
+					"SET total_uploads = " . (int) $user['n'] . " " .
+					"WHERE user_id = '" . $user['user_id'] . "' " .
 					"LIMIT 1");
 			}
 
@@ -161,9 +161,9 @@ Ut::debug_print_r($users);
 			foreach ($comments as $comment)
 			{
 				$engine->db->sql_query(
-					"UPDATE {$engine->db->table_prefix}page ".
-					"SET comments = " . (int) $comment['n'] . " ".
-					"WHERE page_id = '" . $comment['page_id'] . "' ".
+					"UPDATE {$engine->db->table_prefix}page " .
+					"SET comments = " . (int) $comment['n'] . " " .
+					"WHERE page_id = '" . $comment['page_id'] . "' " .
 					"LIMIT 1");
 			}
 
@@ -244,10 +244,10 @@ Ut::debug_print_r($users);
 
 						// store to DB
 						$engine->db->sql_query(
-							"UPDATE {$engine->db->table_prefix}page SET ".
-								"body_r		= " . $engine->db->q($page['body_r']) . ", ".
-								"body_toc	= " . $engine->db->q($page['body_toc']) . " ".
-							"WHERE page_id = '" . $page['page_id'] . "' ".
+							"UPDATE {$engine->db->table_prefix}page SET " .
+								"body_r		= " . $engine->db->q($page['body_r']) . ", " .
+								"body_toc	= " . $engine->db->q($page['body_toc']) . " " .
+							"WHERE page_id = '" . $page['page_id'] . "' " .
 							"LIMIT 1");
 
 						#if ($body_t) unset($body_t);

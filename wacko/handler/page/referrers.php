@@ -84,24 +84,24 @@ if ($mode)
 $px = $this->db->table_prefix;
 if ($mode == 'perpage')
 {
-	$query = "SELECT r.page_id, COUNT(r.referrer) AS num, p.tag, p.title, p.page_lang ".
-		"FROM " . $px."referrer r ".
-		"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) ".
-		"GROUP BY r.page_id ".
+	$query = "SELECT r.page_id, COUNT(r.referrer) AS num, p.tag, p.title, p.page_lang " .
+		"FROM " . $px."referrer r " .
+		"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) " .
+		"GROUP BY r.page_id " .
 		"ORDER BY num DESC";
 }
 else if ($mode == 'bytime')
 {
-	$query = "SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.page_lang ".
-		"FROM " . $px."referrer r ".
-		"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) ".
+	$query = "SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.page_lang " .
+		"FROM " . $px."referrer r " .
+		"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) " .
 		"ORDER BY r.referrer_time DESC";
 }
 else if ($mode == 'global')
 {
-	$query = "SELECT referrer, COUNT(referrer) AS num ".
-		"FROM " . $px."referrer ".
-		"GROUP BY referrer ".
+	$query = "SELECT referrer, COUNT(referrer) AS num " .
+		"FROM " . $px."referrer " .
+		"GROUP BY referrer " .
 		"ORDER BY num DESC";
 }
 else
@@ -112,10 +112,10 @@ else
 		$this->href('referrers_sites'));
 
 	$query =
-		"SELECT referrer, COUNT(referrer) AS num ".
-		"FROM " . $px."referrer ".
-			"WHERE page_id = '" . (int) $this->page['page_id'] . "' ".
-		"GROUP BY referrer ".
+		"SELECT referrer, COUNT(referrer) AS num " .
+		"FROM " . $px."referrer " .
+			"WHERE page_id = '" . (int) $this->page['page_id'] . "' " .
+		"GROUP BY referrer " .
 		"ORDER BY num DESC";
 }
 

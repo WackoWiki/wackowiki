@@ -89,9 +89,9 @@ class Http
 		chmod($this->file, SAFE_CHMOD);
 
 		$this->db->sql_query(
-			"INSERT INTO " . $this->db->table_prefix . "cache SET ".
-				"name	= " . $this->db->q($this->hash) . ", ".
-				"method	= " . $this->db->q($this->method) . ", ".
+			"INSERT INTO " . $this->db->table_prefix . "cache SET " .
+				"name	= " . $this->db->q($this->hash) . ", " .
+				"method	= " . $this->db->q($this->method) . ", " .
 				"query	= " . $this->db->q($this->query));
 				// TIMESTAMP type is filled automatically by MySQL
 	}
@@ -106,8 +106,8 @@ class Http
 			list($page, $hash) = $this->normalize_page($page);
 
 			$params	= $this->db->load_all(
-				"SELECT method, query ".
-				"FROM " . $this->db->table_prefix . "cache ".
+				"SELECT method, query " .
+				"FROM " . $this->db->table_prefix . "cache " .
 				"WHERE name = " . $this->db->q($hash));
 
 			// Ut::dbg('invalidate_page', $page);
@@ -128,7 +128,7 @@ class Http
 			}
 
 			$this->db->sql_query(
-				"DELETE FROM " . $this->db->table_prefix . "cache ".
+				"DELETE FROM " . $this->db->table_prefix . "cache " .
 				"WHERE name = " . $this->db->q($hash));
 		}
 

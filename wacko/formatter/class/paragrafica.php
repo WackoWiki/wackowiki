@@ -275,10 +275,10 @@ class paragrafica
 		$this->toc = [];
 		$what = preg_replace_callback( '!'.
 				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)".		// 2=depth, 3=id, 4=name
-									"|".
+									"|" .
 				"(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">)".			// 6=id
-									"|".
-				"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
+									"|" .
+				"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .
 				// {{include page="TAG" notoc=1}}
 				"!i", [&$this, 'add_toc_entry'], $what );
 

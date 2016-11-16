@@ -24,13 +24,13 @@ if ($user_id = $this->get_user_id())
 	if (@$_GET['unwatched'])
 	{
 		$count	= $this->db->load_single(
-			"SELECT COUNT(p.tag) AS n ".
-			"FROM {$prefix}page AS p ".
-			"LEFT JOIN {$prefix}watch AS w ".
-				"ON (p.page_id = w.page_id ".
-					"AND w.user_id = '" . (int) $user_id . "') ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND p.deleted <> '1' ".
+			"SELECT COUNT(p.tag) AS n " .
+			"FROM {$prefix}page AS p " .
+			"LEFT JOIN {$prefix}watch AS w " .
+				"ON (p.page_id = w.page_id " .
+					"AND w.user_id = '" . (int) $user_id . "') " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND p.deleted <> '1' " .
 				"AND w.user_id IS NULL", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', 'mode=mywatches&amp;unwatched=1#list');
@@ -40,15 +40,15 @@ if ($user_id = $this->get_user_id())
 			$this->_t('ViewWatchedPages') . '</a>).<br /><br />';
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.tag AS pagetag, p.page_id AS page_id ".
-			"FROM {$prefix}page AS p ".
-			"LEFT JOIN {$prefix}watch AS w ".
-				"ON (p.page_id = w.page_id ".
-					"AND w.user_id = '" . (int) $user_id . "') ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND p.deleted <> '1' ".
-				"AND w.user_id IS NULL ".
-			"ORDER BY pagetag ASC ".
+			"SELECT p.tag AS pagetag, p.page_id AS page_id " .
+			"FROM {$prefix}page AS p " .
+			"LEFT JOIN {$prefix}watch AS w " .
+				"ON (p.page_id = w.page_id " .
+					"AND w.user_id = '" . (int) $user_id . "') " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND p.deleted <> '1' " .
+				"AND w.user_id IS NULL " .
+			"ORDER BY pagetag ASC " .
 			$pagination['limit']))
 		{
 			foreach ($pages as $page)
@@ -88,8 +88,8 @@ if ($user_id = $this->get_user_id())
 	else
 	{
 		$count	= $this->db->load_single(
-			"SELECT COUNT( DISTINCT page_id ) as n ".
-			"FROM {$prefix}watch ".
+			"SELECT COUNT( DISTINCT page_id ) as n " .
+			"FROM {$prefix}watch " .
 			"WHERE user_id = '" . (int) $user_id . "'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', 'mode=mywatches#list');
@@ -99,12 +99,12 @@ if ($user_id = $this->get_user_id())
 			$this->_t('ViewUnwatchedPages') . '</a>).<br /><br />';
 
 		if ($pages = $this->db->load_all(
-			"SELECT w.page_id, p.tag AS tag ".
-			"FROM {$prefix}watch AS w ".
-			"LEFT JOIN {$prefix}page AS p ".
-				"ON (p.page_id = w.page_id) ".
-			"WHERE w.user_id = '" . (int) $user_id . "' ".
-			"GROUP BY tag ".
+			"SELECT w.page_id, p.tag AS tag " .
+			"FROM {$prefix}watch AS w " .
+			"LEFT JOIN {$prefix}page AS p " .
+				"ON (p.page_id = w.page_id) " .
+			"WHERE w.user_id = '" . (int) $user_id . "' " .
+			"GROUP BY tag " .
 			$pagination['limit']))
 		{
 			foreach ($pages as $page)

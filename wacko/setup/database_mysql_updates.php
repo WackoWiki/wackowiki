@@ -13,15 +13,15 @@ $engine		= 'ENGINE=' . $config['database_engine'];
 // ACL
 
 // AUTH TOKEN
-$table_auth_token_r5_4_0 =	"CREATE TABLE {$pref}auth_token (".
-							"auth_token_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-							"selector CHAR(12) NOT NULL DEFAULT '',".
-							"token CHAR(64) NOT NULL DEFAULT '',".
-							"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-							"token_expires DATETIME NULL DEFAULT NULL,".
-							"PRIMARY KEY (auth_token_id),".
-							"UNIQUE KEY idx_selector (selector),".
-							"KEY idx_user_id (user_id)".
+$table_auth_token_r5_4_0 =	"CREATE TABLE {$pref}auth_token (" .
+							"auth_token_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
+							"selector CHAR(12) NOT NULL DEFAULT ''," .
+							"token CHAR(64) NOT NULL DEFAULT ''," .
+							"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+							"token_expires DATETIME NULL DEFAULT NULL," .
+							"PRIMARY KEY (auth_token_id)," .
+							"UNIQUE KEY idx_selector (selector)," .
+							"KEY idx_user_id (user_id)" .
 							") {$engine} COMMENT='' {$charset}";
 
 // CACHE
@@ -44,13 +44,13 @@ $update_config_r5_4_3 = "UPDATE {$pref}config SET config_value = config_value * 
 $update_config_r5_4_4 = "UPDATE {$pref}config SET config_value = config_value * 1024 WHERE config_name = 'upload_quota_per_user'";
 
 // FILE LINK
-$table_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (".
-							"file_link_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-							"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-							"file_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-							"PRIMARY KEY (file_link_id),".
-							"KEY idx_page_id (page_id),".
-							"KEY idx_file_id (file_id)".
+$table_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (" .
+							"file_link_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
+							"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+							"file_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+							"PRIMARY KEY (file_link_id)," .
+							"KEY idx_page_id (page_id)," .
+							"KEY idx_file_id (file_id)" .
 						") {$engine} COMMENT='' {$charset}";
 
 // LOG
@@ -136,11 +136,11 @@ $alter_usergroup_r5_4_1 = "ALTER TABLE {$pref}usergroup ADD group_lang VARCHAR(2
 $alter_watch_r5_4_0 = "ALTER TABLE {$pref}watch ADD pending TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER comment_id";
 
 // WORD
-$table_word_r5_4_0 = "CREATE TABLE {$pref}word (".
-					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"word VARCHAR(255) NOT NULL DEFAULT '',".
-					"replacement VARCHAR(255) NOT NULL DEFAULT '',".
-					"PRIMARY KEY (word_id)".
+$table_word_r5_4_0 = "CREATE TABLE {$pref}word (" .
+					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT," .
+					"word VARCHAR(255) NOT NULL DEFAULT ''," .
+					"replacement VARCHAR(255) NOT NULL DEFAULT ''," .
+					"PRIMARY KEY (word_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
 ?>

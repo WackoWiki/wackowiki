@@ -12,17 +12,17 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 
 	// count pages
 	if ($count_pages = $this->db->load_all(
-		"SELECT DISTINCT page_id ".
-		"FROM " . $pref . "page p ".
-			"LEFT JOIN " . $pref . "page_link l ON ".
-			"((l.to_tag = p.tag ".
-				"AND l.to_supertag = '') ".
-				"OR l.to_supertag = p.supertag) ".
-		"WHERE ".
+		"SELECT DISTINCT page_id " .
+		"FROM " . $pref . "page p " .
+			"LEFT JOIN " . $pref . "page_link l ON " .
+			"((l.to_tag = p.tag " .
+				"AND l.to_supertag = '') " .
+				"OR l.to_supertag = p.supertag) " .
+		"WHERE " .
 			($tag
 				? "p.tag LIKE '" . $this->db->q($tag . '/%') . " AND "
 				: "").
-			"l.to_page_id IS NULL ".
+			"l.to_page_id IS NULL " .
 			($deleted != 1
 				? "AND p.deleted <> '1' "
 				: "").
@@ -35,22 +35,22 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 		$pagination = $this->pagination($count, $limit);
 
 		$orphaned = $this->db->load_all(
-			"SELECT DISTINCT page_id, tag, title ".
-			"FROM " . $pref . "page p ".
-				"LEFT JOIN " . $pref . "page_link l ON ".
-				"((l.to_tag = p.tag ".
-					"AND l.to_supertag = '') ".
-					"OR l.to_supertag = p.supertag) ".
-			"WHERE ".
+			"SELECT DISTINCT page_id, tag, title " .
+			"FROM " . $pref . "page p " .
+				"LEFT JOIN " . $pref . "page_link l ON " .
+				"((l.to_tag = p.tag " .
+					"AND l.to_supertag = '') " .
+					"OR l.to_supertag = p.supertag) " .
+			"WHERE " .
 				($tag
 					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 					: "").
-				"l.to_page_id IS NULL ".
+				"l.to_page_id IS NULL " .
 				($deleted != 1
 					? "AND p.deleted <> '1' "
 					: "").
-				"AND p.comment_on_id = '0' ".
-			"ORDER BY tag ".
+				"AND p.comment_on_id = '0' " .
+			"ORDER BY tag " .
 			$pagination['limit']);
 
 		return [$orphaned, $pagination];

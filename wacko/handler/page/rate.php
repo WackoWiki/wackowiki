@@ -50,25 +50,25 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 		{
 			// try to load current rating entry
 			if ($rating = $this->db->load_single(
-				"SELECT page_id, value, voters ".
-				"FROM {$this->db->table_prefix}rating ".
-				"WHERE page_id = $page_id ".
+				"SELECT page_id, value, voters " .
+				"FROM {$this->db->table_prefix}rating " .
+				"WHERE page_id = $page_id " .
 				"LIMIT 1"))
 			{
 				// update entry
 				$this->db->sql_query(
-					"UPDATE {$this->db->table_prefix}rating SET ".
-						"value		= {$rating['value']} + " . $this->db->q($value) . ", ".
-						"voters		= {$rating['voters']} + 1 ".
+					"UPDATE {$this->db->table_prefix}rating SET " .
+						"value		= {$rating['value']} + " . $this->db->q($value) . ", " .
+						"voters		= {$rating['voters']} + 1 " .
 					"WHERE page_id = $page_id");
 			}
 			else
 			{
 				// create entry
 				$this->db->sql_query(
-					"INSERT INTO {$this->db->table_prefix}rating SET ".
-					"page_id		= $page_id, ".
-					"value			= " . $this->db->q($value) . ", ".
+					"INSERT INTO {$this->db->table_prefix}rating SET " .
+					"page_id		= $page_id, " .
+					"value			= " . $this->db->q($value) . ", " .
 					"voters			= 1");
 					// time is set automatically
 			}

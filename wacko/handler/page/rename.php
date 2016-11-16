@@ -170,10 +170,10 @@ function recursive_move(&$engine, $root, $new_root)
 	$owner_id	= '';
 	$_root		= $engine->translit($root);
 	$pages		= $engine->db->load_all(
-		"SELECT page_id, tag, supertag ".
-		"FROM " . $engine->db->table_prefix . "page ".
-		"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " ".
-			" OR supertag = " . $engine->db->q($_root) . ") ".
+		"SELECT page_id, tag, supertag " .
+		"FROM " . $engine->db->table_prefix . "page " .
+		"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " " .
+			" OR supertag = " . $engine->db->q($_root) . ") " .
 		($owner_id
 			? " AND owner_id ='" . (int) $owner_id."'"
 			: "").

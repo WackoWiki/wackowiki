@@ -49,7 +49,7 @@ switch ($default)
 		echo str_replace("\n", '<br />', Ut::html($text));
 
 		// about the source
-		echo "\n\n<br /><br /><hr />\n\n<p>".
+		echo "\n\n<br /><br /><hr />\n\n<p>" .
 			$this->_t('SourceFrom').
 				$this->link($source, '', $this->_t('SourceFromLink')).
 				"</p>";

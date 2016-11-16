@@ -81,7 +81,7 @@ class Feed
 					$xml .= "<link>" . $this->engine->href('', $page['tag'], '') . "</link>\n";
 					$xml .= "<guid>" . $this->engine->href('', $page['tag'], '') . "</guid>\n";
 					$xml .= "<pubDate>" . date('r', strtotime($page['modified'])) . "</pubDate>\n";
-					$xml .= "<description>" . $page['modified'] . " " . $this->engine->_t('By') . " ".
+					$xml .= "<description>" . $page['modified'] . " " . $this->engine->_t('By') . " " .
 						($page['user_name']
 							? $page['user_name']
 							: $this->engine->_t('Guest')).
@@ -111,13 +111,13 @@ class Feed
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.created, p.body_r, p.comments, p.page_lang ".
-			"FROM {$prefix}page p, ".
-				"{$prefix}acl AS a ".
-			"WHERE p.page_id = a.page_id ".
-				"AND a.privilege = 'read' AND a.list = '*' ".
-				"AND p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' ".
+			"SELECT p.page_id, p.tag, p.title, p.created, p.body_r, p.comments, p.page_lang " .
+			"FROM {$prefix}page p, " .
+				"{$prefix}acl AS a " .
+			"WHERE p.page_id = a.page_id " .
+				"AND a.privilege = 'read' AND a.list = '*' " .
+				"AND p.comment_on_id = '0' " .
+				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
 			"ORDER BY p.tag");
 
 		if ($pages)
@@ -155,17 +155,17 @@ class Feed
 		}
 
 		// build output
-		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n".
-				"<?xml-stylesheet type=\"text/css\" href=\"" . $this->engine->db->theme_url . "css/wacko.css\" media=\"screen\"?>\n".
+		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
+				"<?xml-stylesheet type=\"text/css\" href=\"" . $this->engine->db->theme_url . "css/wacko.css\" media=\"screen\"?>\n" .
 				// TODO: atom.css
-				'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> ' . "\n".
-					'<channel>' . "\n".
-						'<title>' . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . '</title>' . "\n".
-						'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n".
-						'<description>' . $this->engine->_t('RecentNewsXML') . $this->engine->db->site_name . '</description>' . "\n".
-						'<copyright>' . $this->engine->href('', $this->engine->db->policy_page) . '</copyright>' . "\n".
-						'<language>' . $this->lang . '</language>' . "\n".
-						'<pubDate>' . date('r') . '</pubDate>' . "\n".
+				'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> ' . "\n" .
+					'<channel>' . "\n" .
+						'<title>' . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . '</title>' . "\n" .
+						'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
+						'<description>' . $this->engine->_t('RecentNewsXML') . $this->engine->db->site_name . '</description>' . "\n" .
+						'<copyright>' . $this->engine->href('', $this->engine->db->policy_page) . '</copyright>' . "\n" .
+						'<language>' . $this->lang . '</language>' . "\n" .
+						'<pubDate>' . date('r') . '</pubDate>' . "\n" .
 						'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . "</title>\n";
@@ -201,11 +201,11 @@ class Feed
 					$text	= $this->engine->do_unicode_entities($text, $page['page_lang']);
 				}
 
-				$xml .= '<item>' . "\n".
-							'<title>' . $title . '</title>' . "\n".
-							'<link>' . $link . '</link>' . "\n".
-							'<guid isPermaLink="true">' . $link . '</guid>' . "\n".
-							'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n".
+				$xml .= '<item>' . "\n" .
+							'<title>' . $title . '</title>' . "\n" .
+							'<link>' . $link . '</link>' . "\n" .
+							'<guid isPermaLink="true">' . $link . '</guid>' . "\n" .
+							'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n" .
 							'<pubDate>' . $pdate . '</pubDate>' . "\n";
 
 				foreach ($categories as $id => $category)
@@ -224,7 +224,7 @@ class Feed
 			}
 		}
 
-		$xml .= 	'</channel>' . "\n".
+		$xml .= 	'</channel>' . "\n" .
 				'</rss>';
 
 		$this->write_file($name, $xml);
@@ -286,7 +286,7 @@ class Feed
 					}
 
 					$xml .= "<item>\n";
-					$xml .= "<title>" . $comment['title'] . " " . $this->engine->_t('To') . " " . $comment['page_title'] . " " . $this->engine->_t('From') . " ".
+					$xml .= "<title>" . $comment['title'] . " " . $this->engine->_t('To') . " " . $comment['page_title'] . " " . $this->engine->_t('From') . " " .
 						($comment['user_name']
 							? $comment['user_name']
 							: $this->engine->_t('Guest')).
@@ -315,13 +315,13 @@ class Feed
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT p.page_id, p.tag, p.modified ".
-			"FROM {$prefix}page p, ".
-				"{$prefix}acl AS a ".
-			"WHERE p.page_id = a.page_id ".
-				"AND a.privilege = 'read' AND a.list = '*' ".
-				"AND p.comment_on_id = '0' ".
-				"AND p.noindex <> '1' ".
+			"SELECT p.page_id, p.tag, p.modified " .
+			"FROM {$prefix}page p, " .
+				"{$prefix}acl AS a " .
+			"WHERE p.page_id = a.page_id " .
+				"AND a.privilege = 'read' AND a.list = '*' " .
+				"AND p.comment_on_id = '0' " .
+				"AND p.noindex <> '1' " .
 			"ORDER BY p.modified DESC, BINARY p.tag");
 
 		$xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";

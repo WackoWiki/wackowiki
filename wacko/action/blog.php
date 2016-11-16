@@ -92,75 +92,75 @@ if (!empty($blog_cluster))
 	if ($mode == 'latest')
 	{
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND comment_on_id = '0' ".
+			"SELECT COUNT(tag) AS n " .
+			"FROM {$prefix}page " .
+			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+				"AND comment_on_id = '0' " .
 				"AND deleted <> '1' ", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'latest']);
 
 		$pages	= $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
-			"FROM {$prefix}page p ".
-				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND p.deleted <> '1' ".
-			"ORDER BY p.created DESC ".
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
+			"FROM {$prefix}page p " .
+				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+				"AND p.deleted <> '1' " .
+			"ORDER BY p.created DESC " .
 			$pagination['limit'], true);
 	}
 	else if ($mode == 'category')
 	{
 		$count	= $this->db->load_single(
-			"SELECT COUNT(p.tag) AS n ".
-			"FROM {$prefix}category_page c ".
-				"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
-			"WHERE p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND c.category_id = '$category_id' ".
-				"AND p.deleted <> '1' ".
+			"SELECT COUNT(p.tag) AS n " .
+			"FROM {$prefix}category_page c " .
+				"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) " .
+			"WHERE p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+				"AND c.category_id = '$category_id' " .
+				"AND p.deleted <> '1' " .
 				"AND p.comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', ['category' => $category_id]);
 
 		$category_title	= $this->db->load_single(
-			"SELECT category ".
-			"FROM {$prefix}category ".
+			"SELECT category " .
+			"FROM {$prefix}category " .
 			"WHERE category_id = '$category_id' ", false);
 
 		$pages	= $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
-			"FROM {$prefix}page p ".
-				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
-				"INNER JOIN {$prefix}category_page c  ON (c.page_id = p.page_id) ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND p.deleted <> '1' ".
-				"AND c.category_id = '$category_id' ".
-			"ORDER BY p.created DESC ".
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
+			"FROM {$prefix}page p " .
+				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
+				"INNER JOIN {$prefix}category_page c  ON (c.page_id = p.page_id) " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+				"AND p.deleted <> '1' " .
+				"AND c.category_id = '$category_id' " .
+			"ORDER BY p.created DESC " .
 			$pagination['limit'], true);
 	}
 	else if ($mode == 'week')
 	{
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND deleted <> '1' ".
-				"AND created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ".
+			"SELECT COUNT(tag) AS n " .
+			"FROM {$prefix}page " .
+			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+				"AND deleted <> '1' " .
+				"AND created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) " .
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'week']);
 
 		$pages	= $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
-			"FROM {$prefix}page p ".
-				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND p.deleted <> '1' ".
-				"AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) ".
-			"ORDER BY p.created DESC ".
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
+			"FROM {$prefix}page p " .
+				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+				"AND p.deleted <> '1' " .
+				"AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) " .
+			"ORDER BY p.created DESC " .
 			$pagination['limit'], true);
 	}
 	else if ($mode == 'from' && $date)
@@ -168,24 +168,24 @@ if (!empty($blog_cluster))
 		$date	= $this->db->date($date);
 
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}page ".
-			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND deleted <> '1' ".
-				"AND created > '$date' ".
+			"SELECT COUNT(tag) AS n " .
+			"FROM {$prefix}page " .
+			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+				"AND deleted <> '1' " .
+				"AND created > '$date' " .
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'week']);
 
 		$pages	= $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
-			"FROM {$prefix}page p ".
-				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' ".
-				"AND p.deleted <> '1' ".
-				"AND p.created > '$date' ".
-			"ORDER BY p.created DESC ".
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
+			"FROM {$prefix}page p " .
+				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+				"AND p.deleted <> '1' " .
+				"AND p.created > '$date' " .
+			"ORDER BY p.created DESC " .
 			$pagination['limit'], true);
 	}
 
@@ -251,7 +251,7 @@ if (!empty($blog_cluster))
 			echo '<h2 class="newstitle"><a href="' . $this->href('', $page['tag'], '') . '">' . $page['title'] . "</a></h2>\n";
 			echo '<div class="newsinfo"><span><time datetime="' . $this->page['created'] . '">' . $this->get_time_formatted($page['created']) . '</time> ' . $this->_t('By') . ' ' . $this->user_link($page['owner'], '', true, false) . "</span></div>\n";
 			echo '<div class="newscontent">' . $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1) . "</div>\n";
-			echo '<footer class="newsmeta">' . $_category." " . ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText'), 0) . " | " : "") . "  ".
+			echo '<footer class="newsmeta">' . $_category." " . ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText'), 0) . " | " : "") . "  " .
 				'<a href="' . $this->href('', $page['tag'], 'show_comments=1') . '#header-comments" title="' . $this->_t('NewsDiscuss') . ' ' . $page['title'] . '">' . (int) $page['comments'] . " " . $this->_t('Comments') . " &raquo; " . "</a></footer>\n";
 			echo "</article>\n";
 

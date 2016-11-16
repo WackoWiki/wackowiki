@@ -416,7 +416,7 @@ class _DiffEngine
 			USE_ASSERTS && assert($yi < $n_to || $this->xchanged[$xi]);
 			USE_ASSERTS && assert($xi < $n_from || $this->ychanged[$yi]);
 
-			// Skip matching "snake".
+			// Skip matching "snake" .
 			$copy = [];
 			while ( $xi < $n_from && $yi < $n_to
 			&& !$this->xchanged[$xi] && !$this->ychanged[$yi])
@@ -645,7 +645,7 @@ class _DiffEngine
 	 * We are free to choose which identical line is included.
 	 * `compareseq' usually chooses the one at the beginning,
 	 * but usually it is cleaner to consider the following identical line
-	 * to be the "change".
+	 * to be the "change" .
 	 *
 	 * This is extracted verbatim from analyze.c (GNU diffutils-2.7).
 	 */

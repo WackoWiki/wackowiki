@@ -239,7 +239,7 @@ function admin_config_basic(&$engine, &$module)
 
 					foreach ($langs as $lang)
 					{
-						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allowed_languages[' . $n . ']" id="lang_' . $lang . '" value="' . $lang . '" '. (in_array($lang, $lang_list) ? ' checked="checked"' : ''). ' />' . "\n\t\t\t".
+						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allowed_languages[' . $n . ']" id="lang_' . $lang . '" value="' . $lang . '" '. (in_array($lang, $lang_list) ? ' checked="checked"' : ''). ' />' . "\n\t\t\t" .
 								'<label for="lang_' . $lang . '">' . $languages[$lang] . ' (' . $lang . ')</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break

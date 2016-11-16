@@ -53,9 +53,9 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 else
 {
 	$results = $this->db->load_single(
-				"SELECT page_id, value, voters ".
-				"FROM {$this->db->table_prefix}rating ".
-				"WHERE page_id = {$this->page['page_id']} ".
+				"SELECT page_id, value, voters " .
+				"FROM {$this->db->table_prefix}rating " .
+				"WHERE page_id = {$this->page['page_id']} " .
 				"LIMIT 1");
 
 	if ($results['voters'] > 0)			$results['ratio'] = $results['value'] / $results['voters'];

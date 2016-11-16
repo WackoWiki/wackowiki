@@ -41,11 +41,11 @@ if (!isset($legend)) $legend = '';
 
 // collect pages
 if ($pages = $this->db->load_all(
-	"SELECT page_id, tag, supertag, title ".
-	"FROM {$this->db->table_prefix}page ".
-	"WHERE comment_on_id = '0' ".
-		"AND tag LIKE " . $this->db->q($_root . '/%') . " ".
-		"AND deleted <> '1' ".
+	"SELECT page_id, tag, supertag, title " .
+	"FROM {$this->db->table_prefix}page " .
+	"WHERE comment_on_id = '0' " .
+		"AND tag LIKE " . $this->db->q($_root . '/%') . " " .
+		"AND deleted <> '1' " .
 	"ORDER BY tag", true))
 {
 	// pick all subpages up to the desired depth level
@@ -77,8 +77,8 @@ if ($pages = $this->db->load_all(
 	{
 		// cache links
 		if ($links = $this->db->load_all(
-			"SELECT {$this->page_meta} ".
-			"FROM {$this->db->table_prefix}page ".
+			"SELECT {$this->page_meta} " .
+			"FROM {$this->db->table_prefix}page " .
 			"WHERE page_id IN ('" . implode("', '", $page_ids) . "')", true))
 		{
 			foreach ($links as $link)
@@ -92,9 +92,9 @@ if ($pages = $this->db->load_all(
 
 		// cache acls
 		if ($acls = $this->db->load_all(
-			"SELECT page_id, privilege, list ".
-			"FROM {$this->db->table_prefix}acl ".
-			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) ".
+			"SELECT page_id, privilege, list " .
+			"FROM {$this->db->table_prefix}acl " .
+			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) " .
 				"AND privilege = 'read'", true))
 		{
 			foreach ($acls as $acl)
