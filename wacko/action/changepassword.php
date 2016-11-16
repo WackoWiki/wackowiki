@@ -13,9 +13,9 @@ $this->http->ensure_tls($this->href());
 if (($code = (string) @$_REQUEST['secret_code']))
 {
 	$user = $this->db->load_single(
-		"SELECT user_id, user_name ".
-		"FROM " . $this->db->user_table . " ".
-		"WHERE change_password = " . $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed)) . " ".
+		"SELECT user_id, user_name " .
+		"FROM " . $this->db->user_table . " " .
+		"WHERE change_password = " . $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed)) . " " .
 		"LIMIT 1");
 
 	if (!$user)
@@ -55,10 +55,10 @@ if (@$_POST['_action'] === 'change_password' && $user)
 		else
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET ".
-					"change_password	= '', ".
-					"password = " . $this->db->q($this->password_hash($user, $new_password)) . " ".
-				"WHERE user_id = '" . $user['user_id'] . "' ".
+				"UPDATE " . $this->db->user_table . " SET " .
+					"change_password	= '', " .
+					"password = " . $this->db->q($this->password_hash($user, $new_password)) . " " .
+				"WHERE user_id = '" . $user['user_id'] . "' " .
 				"LIMIT 1");
 
 			$diag = $code? 'LogUserPasswordRecovered' : 'LogUserPasswordChanged';
@@ -81,11 +81,11 @@ if (@$_POST['_action'] === 'forgot_password')
 	$user_name	= Ut::strip_spaces($_POST['user_name']);
 	$email		= Ut::strip_spaces($_POST['email']);
 	$user		= $this->db->load_single(
-					"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang ".
-					"FROM " . $this->db->user_table . " u ".
-						"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) ".
-					"WHERE u.user_name = " . $this->db->q($user_name) . " ".
-						"AND u.email = " . $this->db->q($email) . " ".
+					"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang " .
+					"FROM " . $this->db->user_table . " u " .
+						"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+					"WHERE u.user_name = " . $this->db->q($user_name) . " " .
+						"AND u.email = " . $this->db->q($email) . " " .
 					"LIMIT 1");
 
 	if (!$user)
@@ -110,10 +110,10 @@ if (@$_POST['_action'] === 'forgot_password')
 
 		// update table
 		$this->db->sql_query(
-			"UPDATE {$this->db->user_table} SET ".
+			"UPDATE {$this->db->user_table} SET " .
 				"lost_password_request_count = lost_password_request_count + 1, ". // value unused
-				"change_password = " . $this->db->q($code_hash) . " ".
-			"WHERE user_id = '" . (int) $user['user_id'] . "' ".
+				"change_password = " . $this->db->q($code_hash) . " " .
+			"WHERE user_id = '" . (int) $user['user_id'] . "' " .
 			"LIMIT 1");
 
 		// send code

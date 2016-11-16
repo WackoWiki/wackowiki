@@ -13,12 +13,12 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 {
 	// count previous comments
 	$count = $this->db->load_single(
-		"SELECT COUNT(tag) AS n ".
-		"FROM {$this->db->table_prefix}page ".
-		"WHERE comment_on_id = '" . $this->page['comment_on_id'] . "' ".
-			"AND created <= " . $this->db->q($this->page['created']) . " ".
-			"AND deleted <> '1' ".
-		"GROUP BY comment_on_id ".
+		"SELECT COUNT(tag) AS n " .
+		"FROM {$this->db->table_prefix}page " .
+		"WHERE comment_on_id = '" . $this->page['comment_on_id'] . "' " .
+			"AND created <= " . $this->db->q($this->page['created']) . " " .
+			"AND deleted <> '1' " .
+		"GROUP BY comment_on_id " .
 		"LIMIT 1", true);
 
 	// determine comments page number where this comment is located
@@ -112,8 +112,8 @@ if ($this->has_access('read'))
 		if ($this->get_user_id() != $this->page['owner_id'])
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "page SET ".
-					"hits = hits + 1 ".
+				"UPDATE " . $this->db->table_prefix . "page SET " .
+					"hits = hits + 1 " .
 				"WHERE page_id = '" . $this->page['page_id'] . "'");
 		}
 
@@ -124,9 +124,9 @@ if ($this->has_access('read'))
 		if ($user && $this->page['latest'] != 0 && !$noid_protect)
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->db->table_prefix}watch SET ".
-					"pending = '0' ".
-				"WHERE page_id = '" . $this->page['page_id'] . "' ".
+				"UPDATE {$this->db->table_prefix}watch SET " .
+					"pending = '0' " .
+				"WHERE page_id = '" . $this->page['page_id'] . "' " .
 					"AND user_id = '" . $user['user_id'] . "'");
 		}
 
@@ -150,10 +150,10 @@ if ($this->has_access('read'))
 			if ($this->page['latest'] != 0)
 			{
 				$this->db->sql_query(
-					"UPDATE " . $this->db->table_prefix . "page SET ".
-						"body_r		= " . $this->db->q($this->page['body_r']) . ", ".
-						"body_toc	= " . $this->db->q($this->page['body_toc']) . " ".
-					"WHERE page_id = '" . $this->page['page_id'] . "' ".
+					"UPDATE " . $this->db->table_prefix . "page SET " .
+						"body_r		= " . $this->db->q($this->page['body_r']) . ", " .
+						"body_toc	= " . $this->db->q($this->page['body_toc']) . " " .
+					"WHERE page_id = '" . $this->page['page_id'] . "' " .
 					"LIMIT 1");
 			}
 		}
@@ -165,13 +165,13 @@ if ($this->has_access('read'))
 		// display page title
 		if (!$this->hide_article_header)
 		{
-			echo "<header>\n".
+			echo "<header>\n" .
 				 '<h1>';
 			echo isset($this->page['title']) && $this->has_access('read')
 				? $this->page['title']
 				: $this->get_page_path();
 
-			echo "</h1>\n".
+			echo "</h1>\n" .
 				 "</header>\n";
 		}
 

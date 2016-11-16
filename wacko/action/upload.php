@@ -59,6 +59,7 @@ if ($this->can_upload(true) === true)
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" />
 		</td>
 		<td style="white-space: nowrap;">
+		<?php // TODO: add 'accept' attribute depending on config settings, https://www.w3.org/TR/html5/forms.html#attr-input-accept ?>
 			<input type="file" name="file" id="file_upload" />&nbsp;(<?php echo $this->_t('UploadMax') . $this->binary_multiples(($this->db->upload_max_size), false, true, true);?>)
 		</td>
 	</tr>
@@ -92,6 +93,14 @@ if ($this->can_upload(true) === true)
 		</td>
 	</tr>
 	<?php } ?>
+	<tr>
+		<td style="text-align: right">
+			<label for="upload_dest_file"><?php echo $this->_t('UploadDestName');?>:&nbsp;</label>
+		</td>
+		<td>
+			<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value="<?php echo @$_FILES['file']['tmp_name']; ?>"/>
+		</td>
+	</tr>
 	<?php
 	if (!$hide_description)
 	{ ?>

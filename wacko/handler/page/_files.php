@@ -65,9 +65,9 @@ if ($this->has_access('read'))
 	{
 		// load files for this page
 		$files = $this->db->load_single(
-			"SELECT COUNT(upload_id) AS count ".
-			"FROM " . $this->db->table_prefix . "upload ".
-			"WHERE page_id = '" . $this->page['page_id'] . "' ".
+			"SELECT COUNT(upload_id) AS count " .
+			"FROM " . $this->db->table_prefix . "upload " .
+			"WHERE page_id = '" . $this->page['page_id'] . "' " .
 				"AND deleted <> '1' LIMIT 1");
 
 		$have_files = '';

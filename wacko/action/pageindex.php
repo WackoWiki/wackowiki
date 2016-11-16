@@ -91,10 +91,10 @@ if (!isset($letters)
 }
 
 $count = $this->db->load_single(
-	"SELECT COUNT(page_id) AS n ".
-	"FROM {$this->db->table_prefix}page ".
-	"WHERE comment_on_id = '0' ".
-		"AND deleted = '0' ".
+	"SELECT COUNT(page_id) AS n " .
+	"FROM {$this->db->table_prefix}page " .
+	"WHERE comment_on_id = '0' " .
+		"AND deleted = '0' " .
 		($page
 			? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 			: "").
@@ -102,7 +102,7 @@ $count = $this->db->load_single(
 			? "AND page_lang = " . $this->db->q($lang) . " "
 			: "").
 		($letter !== ''
-			? "AND ".
+			? "AND " .
 				($title
 					? "title "
 					: "tag ").

@@ -119,7 +119,7 @@ if ($this->has_access('read'))
 			echo $place_holder . '&nbsp;
 						<a href="' . $this->href('show', '', 'revision_id=' . $page['revision_id']) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
 			echo '<span style="display: inline-block; width:130px;">' . "&nbsp; — (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
-			echo $place_holder."&nbsp;" . $this->_t('By') . " ".
+			echo $place_holder."&nbsp;" . $this->_t('By') . " " .
 						$this->user_link($page['user_name'], '', true, false);
 			echo $edit_note;
 			echo ' '.($page['minor_edit'] ? 'm' : '');

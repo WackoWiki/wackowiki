@@ -116,8 +116,8 @@ function admin_system_log(&$engine, &$module)
 
 	// collecting data
 	$count = $engine->db->load_single(
-		"SELECT COUNT(log_id) AS n ".
-		"FROM {$engine->db->table_prefix}log l ".
+		"SELECT COUNT(log_id) AS n " .
+		"FROM {$engine->db->table_prefix}log l " .
 		( $where ? $where : 'WHERE level <= ' . (int) $level . ' ' ));
 
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
@@ -126,9 +126,9 @@ function admin_system_log(&$engine, &$module)
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&amp;level=' . htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&amp;level_mod=' . htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 	$log = $engine->db->load_all(
-		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ".
-		"FROM {$engine->db->table_prefix}log l ".
-			"LEFT JOIN {$engine->db->table_prefix}user u ON (l.user_id = u.user_id) ".
+		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip " .
+		"FROM {$engine->db->table_prefix}log l " .
+			"LEFT JOIN {$engine->db->table_prefix}user u ON (l.user_id = u.user_id) " .
 		( $where ? $where : 'WHERE l.level <= ' . (int) $level . ' ' ).
 		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
 		$pagination['limit']);
@@ -201,7 +201,7 @@ function admin_system_log(&$engine, &$module)
 			// tz offset
 			$time_tz = $engine->sql2precisetime($row['log_time']);
 
-			echo '<tr class="lined">' . "\n".
+			echo '<tr class="lined">' . "\n" .
 					'<td style="vertical-align:top; text-align:center;">' . $row['log_id'] . '</td>' .
 					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' .
 					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' .

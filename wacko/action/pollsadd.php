@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 // moderation=["true"|"false"]	Run action in moderation context.
 //								Default: "false"
 // edit_id=[id]					Edit/moderate given poll. Only
-//								useful with "moderation='true'".
+//								useful with "moderation='true'" .
 //								Default: null
 
 if (!isset($moderation)) $moderation = '';
@@ -178,11 +178,11 @@ if (isset($_POST['submit_poll']))
 		{
 			$subject =	$this->db->site_name . '. ' . $this->_t('PollsNotifySubj');
 			$body	 =	$this->_t('EmailHello').
-						$this->db->admin_name . ".\n\n".
-						str_replace('%1', $user, $this->_t('PollsNotifyBody')) . "\n".
-						$this->href('', 'admin.php') . "\n\n".
-						$this->_t('EmailGoodbye') . "\n".
-						$this->db->site_name . "\n".
+						$this->db->admin_name . ".\n\n" .
+						str_replace('%1', $user, $this->_t('PollsNotifyBody')) . "\n" .
+						$this->href('', 'admin.php') . "\n\n" .
+						$this->_t('EmailGoodbye') . "\n" .
+						$this->db->site_name . "\n" .
 						$this->db->base_url;
 
 			$email = new Email($this);

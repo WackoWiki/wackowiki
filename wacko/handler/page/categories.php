@@ -50,9 +50,9 @@ if ($this->is_owner() || $this->is_admin())
 		if (isset($_POST['category_id']))
 		{
 			$word = $this->db->load_single(
-				"SELECT category_id, parent_id, category ".
-				"FROM {$this->db->table_prefix}category ".
-				"WHERE category_id = '" . (int) $_POST['category_id'] . "' ".
+				"SELECT category_id, parent_id, category " .
+				"FROM {$this->db->table_prefix}category " .
+				"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
 				"LIMIT 1");
 		}
 
@@ -61,9 +61,9 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			// do we have identical names?
 			if ($this->db->load_single(
-				"SELECT category_id ".
-				"FROM {$this->db->table_prefix}category ".
-				"WHERE category = " . $this->db->q($_POST['category']) . " ".
+				"SELECT category_id " .
+				"FROM {$this->db->table_prefix}category " .
+				"WHERE category = " . $this->db->q($_POST['category']) . " " .
 				"LIMIT 1"))
 			{
 				$this->set_message($this->_t('CategoriesAlreadyExists'));
@@ -73,15 +73,15 @@ if ($this->is_owner() || $this->is_admin())
 			else
 			{
 				$this->db->sql_query(
-					"INSERT INTO {$this->db->table_prefix}category SET ".
+					"INSERT INTO {$this->db->table_prefix}category SET " .
 						($_POST['category_id'] && $_POST['group'] == 1
 							? "parent_id = '". (int)($word['parent_id'] != 0
 								? $word['parent_id']
 								: $word['category_id'] ) . "', "
 							: ''
 						).
-						"category_lang			= " . $this->db->q($this->page['page_lang']) . ", ".
-						"category				= " . $this->db->q($_POST['category']) . ", ".
+						"category_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
+						"category				= " . $this->db->q($_POST['category']) . ", " .
 						"category_description	= " . $this->db->q($_POST['category_description']) . " ");
 
 				$this->set_message($this->_t('CategoriesAdded'), 'success');
@@ -94,10 +94,10 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			// do we have identical names?
 			if ($this->db->load_single(
-				"SELECT category_id ".
-				"FROM {$this->db->table_prefix}category ".
-				"WHERE category = " . $this->db->q($_POST['category']) . " ".
-					"AND category_id <> '" . (int) $_POST['category_id'] . "' ".
+				"SELECT category_id " .
+				"FROM {$this->db->table_prefix}category " .
+				"WHERE category = " . $this->db->q($_POST['category']) . " " .
+					"AND category_id <> '" . (int) $_POST['category_id'] . "' " .
 				"LIMIT 1"))
 			{
 				$this->set_message($this->_t('CategoriesAlreadyExists'));
@@ -107,9 +107,9 @@ if ($this->is_owner() || $this->is_admin())
 			else
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->db->table_prefix}category SET ".
-						"category = " . $this->db->q($_POST['category']) . " ".
-					"WHERE category_id = '" . (int) $_POST['category_id'] . "' ".
+					"UPDATE {$this->db->table_prefix}category SET " .
+						"category = " . $this->db->q($_POST['category']) . " " .
+					"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
 					"LIMIT 1");
 
 				$this->set_message($this->_t('CategoriesRenamed'));
@@ -123,9 +123,9 @@ if ($this->is_owner() || $this->is_admin())
 			if ($_POST['parent_id'] == 0)
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->db->table_prefix}category SET ".
-						"parent_id = 0 ".
-					"WHERE category_id = '" . (int) $_POST['category_id'] . "' ".
+					"UPDATE {$this->db->table_prefix}category SET " .
+						"parent_id = 0 " .
+					"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
 					"LIMIT 1");
 
 				$this->set_message($this->_t('CategoriesUngrouped'));
@@ -134,22 +134,22 @@ if ($this->is_owner() || $this->is_admin())
 			else
 			{
 				$parent = $this->db->load_single(
-					"SELECT parent_id, category ".
-					"FROM {$this->db->table_prefix}category ".
-					"WHERE category_id = '" . (int) $_POST['parent_id'] . "' ".
+					"SELECT parent_id, category " .
+					"FROM {$this->db->table_prefix}category " .
+					"WHERE category_id = '" . (int) $_POST['parent_id'] . "' " .
 					"LIMIT 1");
 
 				if ($parent['parent_id'] == 0)
 				{
 					$this->db->sql_query(
-						"UPDATE {$this->db->table_prefix}category SET ".
-							"parent_id = '" . (int) $_POST['parent_id'] . "' ".
-						"WHERE category_id = '" . (int) $_POST['category_id'] . "' ".
+						"UPDATE {$this->db->table_prefix}category SET " .
+							"parent_id = '" . (int) $_POST['parent_id'] . "' " .
+						"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
 						"LIMIT 1");
 
 					$this->db->sql_query(
-						"UPDATE {$this->db->table_prefix}category SET ".
-							"parent_id = 0 ".
+						"UPDATE {$this->db->table_prefix}category SET " .
+							"parent_id = 0 " .
 						"WHERE parent_id = '" . (int) $_POST['category_id'] . "'");
 
 					$this->set_message($this->_t('CategoriesGrouped'));
@@ -165,16 +165,16 @@ if ($this->is_owner() || $this->is_admin())
 		else if (isset($_POST['delete']) && isset($_POST['category_id']))
 		{
 			$this->db->sql_query(
-				"DELETE FROM {$this->db->table_prefix}category ".
+				"DELETE FROM {$this->db->table_prefix}category " .
 				"WHERE category_id = '" . (int) $_POST['category_id'] . "'");
 
 			$this->db->sql_query(
-				"DELETE FROM {$this->db->table_prefix}category_page ".
+				"DELETE FROM {$this->db->table_prefix}category_page " .
 				"WHERE category_id = '" . (int) $_POST['category_id'] . "'");
 
 			$this->db->sql_query(
-				"UPDATE {$this->db->table_prefix}category SET ".
-					"parent_id = 0 ".
+				"UPDATE {$this->db->table_prefix}category SET " .
+					"parent_id = 0 " .
 				"WHERE parent_id = '" . (int) $_POST['category_id'] . "'");
 
 			$this->set_message($this->_t('CategoriesDeleted'));
@@ -191,8 +191,8 @@ if ($this->is_owner() || $this->is_admin())
 
 	// get currently selected category_ids
 	$_selected = $this->db->load_all(
-		"SELECT category_id ".
-		"FROM {$this->db->table_prefix}category_page ".
+		"SELECT category_id " .
+		"FROM {$this->db->table_prefix}category_page " .
 		"WHERE page_id = '" . $this->page['page_id'] . "'");
 
 	// exploding categories into array
@@ -217,9 +217,9 @@ if ($this->is_owner() || $this->is_admin())
 			if (isset($_POST['change']) || isset($_POST['category_id']))
 			{
 				$word = $this->db->load_single(
-					"SELECT category_id, parent_id, category ".
-					"FROM {$this->db->table_prefix}category ".
-					"WHERE category_id = '" . (int) $_POST['change'] . "' ".
+					"SELECT category_id, parent_id, category " .
+					"FROM {$this->db->table_prefix}category " .
+					"WHERE category_id = '" . (int) $_POST['change'] . "' " .
 					"LIMIT 1");
 
 				$parent_id = ($word['parent_id'] == 0 ? $word['category_id'] : $parent_id = $word['parent_id']);
@@ -280,11 +280,11 @@ if ($this->is_owner() || $this->is_admin())
 				LIMIT 1"))
 			{
 				$parents = $this->db->load_all(
-					"SELECT category_id, category ".
-					"FROM {$this->db->table_prefix}category ".
-					"WHERE parent_id = 0 ".
-						"AND category_lang = " . $this->db->q($word['category_lang']) . " ".
-						"AND category_id <> '" . $word['category_id'] . "' ".
+					"SELECT category_id, category " .
+					"FROM {$this->db->table_prefix}category " .
+					"WHERE parent_id = 0 " .
+						"AND category_lang = " . $this->db->q($word['category_lang']) . " " .
+						"AND category_id <> '" . $word['category_id'] . "' " .
 					"ORDER BY category ASC");
 
 				foreach ($parents as $parent)
@@ -370,8 +370,8 @@ if ($this->is_owner() || $this->is_admin())
 							($this->is_admin() || $this->db->owners_can_change_categories == true
 								? '<input type="radio" name="change" value="' . $category_id . '" />' . "\n\t\t\t"
 								: '') .
-							'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' />' . "\n\t\t\t".
-							'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t".
+							'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' />' . "\n\t\t\t" .
+							'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t" .
 						'&nbsp;&nbsp;&nbsp;</li>' . "\n";
 				}
 			}

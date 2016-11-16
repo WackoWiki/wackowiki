@@ -18,12 +18,12 @@ function handler_show_get_user_stats(&$engine, $user_id)
 	}
 
 	$stats = $engine->db->load_single(
-		"SELECT user_name, ".
-			"total_pages AS pages, ".
-			"total_revisions AS revisions, ".
-			"total_comments AS comments ".
-		"FROM {$engine->db->user_table} ".
-		"WHERE user_id = '" . (int) $user_id . "' ".
+		"SELECT user_name, " .
+			"total_pages AS pages, " .
+			"total_revisions AS revisions, " .
+			"total_comments AS comments " .
+		"FROM {$engine->db->user_table} " .
+		"WHERE user_id = '" . (int) $user_id . "' " .
 		"LIMIT 1");
 
 	$engine->cached_stats[$user_id] = $stats;
@@ -80,9 +80,9 @@ if ($this->has_access('read'))
 		if ($user && $comments && !$noid_protect)
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->db->table_prefix}watch ".
-				"SET comment_id = '0' ".
-				"WHERE page_id = '" . $this->page['page_id'] . "' ".
+				"UPDATE {$this->db->table_prefix}watch " .
+				"SET comment_id = '0' " .
+				"WHERE page_id = '" . $this->page['page_id'] . "' " .
 					"AND user_id = '" . $user['user_id'] . "'");
 		}
 
@@ -154,32 +154,32 @@ if ($this->has_access('read'))
 
 				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
 
-				echo '<header class="comment-title">' . "\n".
-						'<h2><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . "</a></h2>\n".
+				echo '<header class="comment-title">' . "\n" .
+						'<h2><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . "</a></h2>\n" .
 					 "</header>\n";
 
 				echo '<p>' . $this->format($pre_body, 'post_wacko') . "</p>\n";
 
 				echo '<footer>' .
-						'<ul class="comment-info">' . "\n".
-						"<li>".
+						'<ul class="comment-info">' . "\n" .
+						"<li>" .
 							$this->user_link($comment['owner_name']).
-						"</li>\n".
-						'<li><time datetime="' . $comment['created'] . '">' . $this->get_time_formatted($comment['created']) . "</time></li>\n".
+						"</li>\n" .
+						'<li><time datetime="' . $comment['created'] . '">' . $this->get_time_formatted($comment['created']) . "</time></li>\n" .
 						($comment['modified'] != $comment['created']
 							? '<li><time datetime="' . $comment['modified'] . '">' . $this->get_time_formatted($comment['modified']) . "</time> " . $this->_t('CommentEdited') . "</li>\n"
 							: '').
 						/*($user_stats == true
 							? "<li>" . $this->_t('UsersComments') . ': ' . $user_stats['comments'] . '&nbsp;&nbsp; ' . $this->_t('UsersPages') . ': ' . $user_stats['pages'] . '&nbsp;&nbsp; ' . $this->_t('UsersRevisions') . ': ' . $user_stats['revisions'] . "</li>\n"
 							: '').*/
-					"</ul>\n".
+					"</ul>\n" .
 					"</footer>\n";
 				echo "</article>\n";
 
 				// comment footer
 				/* echo '<div class="comment-tool">' . "\n";
-				echo '<ul class="" style="padding-left: 0px;">' . "\n".
-						"".
+				echo '<ul class="" style="padding-left: 0px;">' . "\n" .
+						"" .
 						'<li class="voting">
 							<a title="Vote up" class="vote-up  count-0" href="' . $this->href('rate', '', 'vote=1') . '">
 								<span class="updatable count">0</span>
@@ -225,11 +225,11 @@ if ($this->has_access('read'))
 				$preview = $this->format($preview, 'wacko');
 				$preview = $this->format($preview, 'post_wacko');
 
-				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim') . '</span></p>' . "\n".
-						'<div class="comment-preview">' . "\n".
+				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim') . '</span></p>' . "\n" .
+						'<div class="comment-preview">' . "\n" .
 						'<header class="comment-title">' .
 							'<h2>' . $title . '</h2>' .
-						'</header>' . "\n".
+						'</header>' . "\n" .
 						'<p>' . $preview . '</p>' .
 						"</div>\n</div><br />\n";
 			}

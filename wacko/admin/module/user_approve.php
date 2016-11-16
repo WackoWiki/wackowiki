@@ -109,11 +109,11 @@ function admin_user_approve(&$engine, &$module)
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
 		$user = $engine->db->load_single(
-			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
-			"FROM {$engine->db->table_prefix}user u ".
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) ".
-			"WHERE u.user_id = '" . (int) $user_id . "' ".
-				"AND u.account_type = '0' ".
+			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
+			"FROM {$engine->db->table_prefix}user u " .
+				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"WHERE u.user_id = '" . (int) $user_id . "' " .
+				"AND u.account_type = '0' " .
 			"LIMIT 1");
 	}
 
@@ -121,11 +121,11 @@ function admin_user_approve(&$engine, &$module)
 	if (isset($_GET['approve']) && $user_id )
 	{
 		$user = $engine->db->load_single(
-			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status ".
-			"FROM {$engine->db->table_prefix}user u ".
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) ".
-			"WHERE u.user_id = '" . (int) $user_id . "' ".
-				"AND u.account_type = '0' ".
+			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
+			"FROM {$engine->db->table_prefix}user u " .
+				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"WHERE u.user_id = '" . (int) $user_id . "' " .
+				"AND u.account_type = '0' " .
 			"LIMIT 1");
 
 		if ($_GET['approve'] == 1)
@@ -168,10 +168,10 @@ function admin_user_approve(&$engine, &$module)
 				if ((int) $user_id)
 				{
 					$user = $engine->db->load_single(
-						"SELECT u.user_name ".
-						"FROM {$engine->db->table_prefix}user u ".
-						"WHERE u.user_id = '" . $user_id . "' ".
-							"AND u.account_type = '0' ".
+						"SELECT u.user_name " .
+						"FROM {$engine->db->table_prefix}user u " .
+						"WHERE u.user_id = '" . $user_id . "' " .
+							"AND u.account_type = '0' " .
 						"LIMIT 1");
 
 					$engine->show_message($engine->_t('UsersDeleted'));
@@ -245,9 +245,9 @@ function admin_user_approve(&$engine, &$module)
 
 		// collecting data
 		$count = $engine->db->load_single(
-			"SELECT COUNT(user_name) AS n ".
-			"FROM {$engine->db->table_prefix}user u ".
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) ".
+			"SELECT COUNT(user_name) AS n " .
+			"FROM {$engine->db->table_prefix}user u " .
+				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			( $where ? $where : '' ).
 			( $where ? 'AND ' : "WHERE ").
 				"u.user_name <> '" . $engine->db->admin_name."' "
@@ -257,13 +257,13 @@ function admin_user_approve(&$engine, &$module)
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 		$users = $engine->db->load_all(
-			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang ".
-			"FROM {$engine->db->table_prefix}user u ".
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) ".
+			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
+			"FROM {$engine->db->table_prefix}user u " .
+				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			( $where ? $where : '' ).
 			( $where ? 'AND ' : "WHERE ").
-				"u.account_type = '0' ".
-				"AND u.user_name <> '" . $engine->db->admin_name."' ".
+				"u.account_type = '0' " .
+				"AND u.user_name <> '" . $engine->db->admin_name."' " .
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			$pagination['limit']);
 
@@ -320,7 +320,7 @@ function admin_user_approve(&$engine, &$module)
 							'<input type="submit" id="button" name="approve" value="' . $engine->_t('Approve') . '" /> '.
 							'<input type="submit" id="button" name="remove" value="' . $engine->_t('Deny') . '" /> '.
 							'<input type="hidden" name="ids" value="' . implode('-', $set) . '" />' .
-							'<br />' . "\n".
+							'<br />' . "\n" .
 								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '" /> '.
 								($set
 										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '" /> '.
@@ -355,7 +355,7 @@ function admin_user_approve(&$engine, &$module)
 		{
 			foreach ($users as $row)
 			{
-				echo '<tr class="lined">' . "\n".
+				echo '<tr class="lined">' . "\n" .
 						'<input type="hidden" name="user_id" value="' . $row['user_id'] . '" />' .
 						#'<td style="vertical-align:middle; width:10px;" class="label">' .
 						#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ) . '/>' .

@@ -129,38 +129,38 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// INSERT user
 			$this->db->sql_query(
-				"INSERT INTO " . $this->db->user_table . " ".
-				"SET ".
-					"signup_time	= UTC_TIMESTAMP(), ".
-					"user_name		= " . $this->db->q($user_name) . ", ".
-					"account_lang	= " . $this->db->q($user_lang? $user_lang : $this->db->language) . ", ".
-					"email			= " . $this->db->q($email) . ", ".
-					"password		= " . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ", ".
-					"account_status	= '" . (int) $account_status."', ".
-					"enabled		= '" . (int) $account_enabled."', ".
+				"INSERT INTO " . $this->db->user_table . " " .
+				"SET " .
+					"signup_time	= UTC_TIMESTAMP(), " .
+					"user_name		= " . $this->db->q($user_name) . ", " .
+					"account_lang	= " . $this->db->q($user_lang? $user_lang : $this->db->language) . ", " .
+					"email			= " . $this->db->q($email) . ", " .
+					"password		= " . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ", " .
+					"account_status	= '" . (int) $account_status."', " .
+					"enabled		= '" . (int) $account_enabled."', " .
 					"user_ip		= " . $this->db->q($user_ip) . " ");
 
 			// get new user_id
 			$_user_id = $this->db->load_single(
-				"SELECT user_id ".
-				"FROM " . $this->db->table_prefix . "user ".
-				"WHERE user_name = " . $this->db->q($user_name) . " ".
+				"SELECT user_id " .
+				"FROM " . $this->db->table_prefix . "user " .
+				"WHERE user_name = " . $this->db->q($user_name) . " " .
 				"LIMIT 1");
 			$user_id = $_user_id['user_id'];
 
 			// INSERT user settings
 			$this->db->sql_query(
-				"INSERT INTO " . $this->db->table_prefix . "user_setting ".
-				"SET ".
-					"user_id			= '" . (int) $user_id . "', ".
-					"typografica		= '" . (($this->db->default_typografica == 1) ? 1 : 0) . "', ".
-					"user_lang			= " . $this->db->q(($user_lang ? $user_lang : $this->db->language)) . ", ".
-					"list_count			= '" . (int) $this->db->list_count."', ".
-					"theme				= " . $this->db->q($this->db->theme) . ", ".
-					"notify_minor_edit	= '" . (int) $this->db->notify_minor_edit."', ".
-					"notify_page		= '" . (int) $this->db->notify_page."', ".
-					"notify_comment		= '" . (int) $this->db->notify_comment."', ".
-					"sorting_comments	= '" . (int) $this->db->sorting_comments."', ".
+				"INSERT INTO " . $this->db->table_prefix . "user_setting " .
+				"SET " .
+					"user_id			= '" . (int) $user_id . "', " .
+					"typografica		= '" . (($this->db->default_typografica == 1) ? 1 : 0) . "', " .
+					"user_lang			= " . $this->db->q(($user_lang ? $user_lang : $this->db->language)) . ", " .
+					"list_count			= '" . (int) $this->db->list_count."', " .
+					"theme				= " . $this->db->q($this->db->theme) . ", " .
+					"notify_minor_edit	= '" . (int) $this->db->notify_minor_edit."', " .
+					"notify_page		= '" . (int) $this->db->notify_page."', " .
+					"notify_comment		= '" . (int) $this->db->notify_comment."', " .
+					"sorting_comments	= '" . (int) $this->db->sorting_comments."', " .
 					"send_watchmail		= '1'");
 
 			// INSERT user menu items
@@ -178,8 +178,8 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 				$subject =	$this->_t('EmailWelcome') . $this->db->site_name;
 				$body =		Ut::perc_replace($this->_t('EmailRegistered'),
-								$this->db->site_name, $user_name, $this->user_email_confirm($user_id)) . "\n\n".
-							$this->_t($waiting_approval) . "\n\n".
+								$this->db->site_name, $user_name, $this->user_email_confirm($user_id)) . "\n\n" .
+							$this->_t($waiting_approval) . "\n\n" .
 							$this->_t('EmailRegisteredIgnore') . "\n\n";
 
 				$this->send_user_email(['user_name' => $user_name, 'email' => $email, 'user_lang' => $user_lang], $subject, $body);
@@ -193,10 +193,10 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 					$save = $this->set_language($lang_admin, true);
 
 					$subject	=	$this->_t('NewAccountSubject');
-					$body		=	$this->_t('NewAccountSignupInfo') . "\n\n".
-									$this->_t('NewAccountUsername') . ' ' .	$user_name . "\n".
-									$this->_t('RegistrationLang') . ' ' .	$user_lang . "\n".
-									$this->_t('NewAccountEmail') . ' ' .	$email . "\n".
+					$body		=	$this->_t('NewAccountSignupInfo') . "\n\n" .
+									$this->_t('NewAccountUsername') . ' ' .	$user_name . "\n" .
+									$this->_t('RegistrationLang') . ' ' .	$user_lang . "\n" .
+									$this->_t('NewAccountEmail') . ' ' .	$email . "\n" .
 									$this->_t('NewAccountIP') . ' ' .		$user_ip . "\n\n";
 
 					if ($requires_approval)

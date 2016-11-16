@@ -17,12 +17,12 @@ $file_path		= '';
 $page_id = isset($_GET['global'])? 0 : $this->page['page_id'];
 
 $file = $this->db->load_single(
-	"SELECT u.user_name AS user, f.user_id, f.upload_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits ".
-	"FROM " . $this->db->table_prefix . "upload f ".
-		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
-	"WHERE f.page_id = '" . (int) $page_id . "'".
-		"AND f.file_name = " . $this->db->q($_GET['get']) . " ".
-		"AND f.deleted <> '1' ".
+	"SELECT u.user_name AS user, f.user_id, f.upload_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits " .
+	"FROM " . $this->db->table_prefix . "upload f " .
+		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+	"WHERE f.page_id = '" . (int) $page_id . "'" .
+		"AND f.file_name = " . $this->db->q($_GET['get']) . " " .
+		"AND f.deleted <> '1' " .
 	"LIMIT 1");
 
 if (!$file)
@@ -59,9 +59,9 @@ if (strncmp($type, 'image/', 6)) // do not count images
 {
 	// count file download
 	$this->db->sql_query(
-		"UPDATE {$this->db->table_prefix}upload SET ".
-			"hits = '" . ($file['hits'] + 1) . "' ".
-		"WHERE upload_id = '" . $file['upload_id'] . "' ".
+		"UPDATE {$this->db->table_prefix}upload SET " .
+			"hits = '" . ($file['hits'] + 1) . "' " .
+		"WHERE upload_id = '" . $file['upload_id'] . "' " .
 		"LIMIT 1");
 }
 

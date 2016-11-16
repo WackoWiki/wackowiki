@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 /*
 	{{import}}
-	http://example.com/somecluster/import --> {{import}}, to = "Test".
+	http://example.com/somecluster/import --> {{import}}, to = "Test" .
 	Will be imported at: http://example.com/Test/*
 
 	i.e. no relative addressing

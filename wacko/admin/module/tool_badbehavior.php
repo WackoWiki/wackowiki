@@ -161,9 +161,9 @@ function bb2_summary(&$engine)
 
 		// Query the DB based on variables selected
 		$results = $engine->db->load_all(
-			"SELECT {$argument} as group_type, {$additional_fields} COUNT(log_id) AS n ".
-			"FROM {$engine->db->table_prefix}bad_behavior GROUP BY {$argument} ".
-			"ORDER BY n DESC ".
+			"SELECT {$argument} as group_type, {$additional_fields} COUNT(log_id) AS n " .
+			"FROM {$engine->db->table_prefix}bad_behavior GROUP BY {$argument} " .
+			"ORDER BY n DESC " .
 			"LIMIT 10", true);
 
 	// Display rows to the user
@@ -238,8 +238,8 @@ function bb2_manage(&$engine)
 
 	// collecting data
 	$count = $engine->db->load_single(
-		"SELECT COUNT(log_id) AS n ".
-		"FROM {$engine->db->table_prefix}bad_behavior l ".
+		"SELECT COUNT(log_id) AS n " .
+		"FROM {$engine->db->table_prefix}bad_behavior l " .
 		"WHERE 1=1 " .( $where ? $where : '' ));
 
 	$key_pagination				= isset($_GET['status_key'])		? $_GET['status_key']	: '';
@@ -262,14 +262,14 @@ function bb2_manage(&$engine)
 	// Query the DB based on variables selected
 
 	$totalcount		= $engine->db->load_single(
-		"SELECT COUNT(log_id) AS n ".
+		"SELECT COUNT(log_id) AS n " .
 		"FROM {$engine->db->table_prefix}bad_behavior l ");
 
 	$results		= $engine->db->load_all(
-		"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key ".
-		"FROM `" . $bb_table . "` ".
+		"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key " .
+		"FROM `" . $bb_table . "` " .
 		"WHERE 1=1 " . $where .
-		"ORDER BY `log_id` DESC ".
+		"ORDER BY `log_id` DESC " .
 		$pagination['limit']);
 
 	// Display rows to the user
@@ -332,9 +332,9 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 			{
 				$host = @gethostbyaddr($result['ip']);
 				$engine->db->sql_query(
-						"UPDATE {$engine->db->table_prefix}bad_behavior SET ".
-							"host		= " . $engine->db->q($host) . " ".
-						"WHERE log_id	= '" . (int) $result['log_id'] . "' ".
+						"UPDATE {$engine->db->table_prefix}bad_behavior SET " .
+							"host		= " . $engine->db->q($host) . " " .
+						"WHERE log_id	= '" . (int) $result['log_id'] . "' " .
 						"LIMIT 1");
 			}
 
@@ -351,10 +351,10 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 
 			$time_tz = $engine->sql2precisetime($result['date']);
 
-			echo "<td>".
-					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;ip=' . $result['ip'] . "\">" . $result['ip'] . "</a><br/>".
+			echo "<td>" .
+					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;ip=' . $result['ip'] . "\">" . $result['ip'] . "</a><br/>" .
 					"$host<br/>\n" .
-					$time_tz . "<br/><br/>".
+					$time_tz . "<br/><br/>" .
 					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;status_key=' . $result['status_key'] . "\" title=\"" .'[' . $status_key['response'] . '] ' . $status_key['explanation']. "\">" . $status_key['log'] . "</a>\n";
 
 			if ($httpbl)

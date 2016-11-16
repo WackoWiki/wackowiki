@@ -12,13 +12,13 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 
 	// count pages
 	if ($count_pages = $this->db->load_all(
-			"SELECT DISTINCT l.to_tag AS wanted_tag ".
-			"FROM " . $pref . "page_link l ".
-				"LEFT JOIN " . $pref . "page p ON ".
-				"((l.to_tag = p.tag ".
-					"AND l.to_supertag = '') ".
-					"OR l.to_supertag = p.supertag) ".
-			"WHERE ".
+			"SELECT DISTINCT l.to_tag AS wanted_tag " .
+			"FROM " . $pref . "page_link l " .
+				"LEFT JOIN " . $pref . "page p ON " .
+				"((l.to_tag = p.tag " .
+					"AND l.to_supertag = '') " .
+					"OR l.to_supertag = p.supertag) " .
+			"WHERE " .
 				($for
 					? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
 					: "").
@@ -31,18 +31,18 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 		$pagination = $this->pagination($count, $limit);
 
 		$wanted = $this->db->load_all(
-				"SELECT DISTINCT l.to_tag AS wanted_tag ".
-				"FROM " . $pref . "page_link l ".
-					"LEFT JOIN " . $pref . "page p ON ".
-					"((l.to_tag = p.tag ".
-						"AND l.to_supertag = '') ".
-						"OR l.to_supertag = p.supertag) ".
-				"WHERE ".
+				"SELECT DISTINCT l.to_tag AS wanted_tag " .
+				"FROM " . $pref . "page_link l " .
+					"LEFT JOIN " . $pref . "page p ON " .
+					"((l.to_tag = p.tag " .
+						"AND l.to_supertag = '') " .
+						"OR l.to_supertag = p.supertag) " .
+				"WHERE " .
 					($for
 						? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
 						: "").
-					"p.tag is NULL GROUP BY wanted_tag ".
-				"ORDER BY wanted_tag ASC ".
+					"p.tag is NULL GROUP BY wanted_tag " .
+				"ORDER BY wanted_tag ASC " .
 				$pagination['limit']);
 
 		return [$wanted, $pagination];

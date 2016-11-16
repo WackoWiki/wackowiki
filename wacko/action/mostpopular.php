@@ -60,9 +60,9 @@ if (!$nomark)
 if (!$page)
 {
 	$pages = $this->db->load_all(
-		"SELECT page_id, tag, title, hits ".
-		"FROM " . $this->db->table_prefix . "page ".
-		"ORDER BY hits DESC ".
+		"SELECT page_id, tag, title, hits " .
+		"FROM " . $this->db->table_prefix . "page " .
+		"ORDER BY hits DESC " .
 		"LIMIT {$max}");
 }
 else
@@ -73,30 +73,30 @@ else
 	{
 		// We want to recurse and include all the sub pages of sub pages (and so on) in the listing
 		$pages = $this->db->load_all(
-			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits ".
-			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l ".
-			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) ".
-			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) ".
-			"WHERE a.tag <> '" . $page."' ".
-				"AND a.tag = c.tag ".
-				"AND INSTR(b.tag, '" . $page."') = 1 ".
-				"AND INSTR(c.tag, '" . $page."') = 1 ".
-			"ORDER BY a.hits DESC ".
+			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits " .
+			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
+			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
+			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
+			"WHERE a.tag <> '" . $page."' " .
+				"AND a.tag = c.tag " .
+				"AND INSTR(b.tag, '" . $page."') = 1 " .
+				"AND INSTR(c.tag, '" . $page."') = 1 " .
+			"ORDER BY a.hits DESC " .
 			"LIMIT {$max}");
 	}
 	else
 	{
 		// The only pages we want to display are those directly under the selected page, not their kids and grandkids
 		$pages = $this->db->load_all(
-			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits ".
-			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l ".
-				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) ".
-				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) ".
-			"WHERE a.tag <> '" . $page."' ".
-				"AND a.tag = c.tag ".
-				"AND b.tag = " . $this->db->q($page) . " ".
-				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 ".
-			"ORDER BY a.hits DESC ".
+			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits " .
+			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
+				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
+				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
+			"WHERE a.tag <> '" . $page."' " .
+				"AND a.tag = c.tag " .
+				"AND b.tag = " . $this->db->q($page) . " " .
+				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
+			"ORDER BY a.hits DESC " .
 			"LIMIT {$max}");
 	}
 }
@@ -132,8 +132,8 @@ foreach ($pages as $page)
 				$_link = $this->link('/' . $page['tag'], '', $page['tag']);
 			}
 
-			echo "<tr><td>&nbsp;&nbsp;" . $num.".&nbsp;" . $_link . "</td><td>".
-				"</td><td>".
+			echo "<tr><td>&nbsp;&nbsp;" . $num.".&nbsp;" . $_link . "</td><td>" .
+				"</td><td>" .
 				number_format($page['hits'], 0, ',', '.') . "</td></tr>\n";
 		}
 	}

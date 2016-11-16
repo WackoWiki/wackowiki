@@ -33,7 +33,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		// profile navigation
 		if ($user['user_id'] === $this->get_user_id())
 		{
-			$output1 = #'<h3>' . $this->_t('UserPages') . "</h3>".
+			$output1 = #'<h3>' . $this->_t('UserPages') . "</h3>" .
 			'<ul class="menu" id="list">' . "\n";
 			$output2 = '<li><a href="' . $this->href('', '', 'mode=mypages') . '#list">' . $this->_t('ListMyPages') . "</a></li>\n";
 			$output3 = '<li><a href="' . $this->href('', '', 'mode=mychanges') . '#list">' . $this->_t('ListMyChanges') . "</a></li>\n";
@@ -160,7 +160,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$save = $this->set_language($user['user_lang'], true);
 
 				$body =
-					$this->_t('EmailHello') . $user['user_name'] . ",\n\n".
+					$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
 					Ut::perc_replace($this->_t('UsersPMBody'),
 							$this->get_user_name(),
 							rtrim($this->db->base_url, '/'),
@@ -284,12 +284,12 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
 
 			$pages = $this->db->load_all(
-				"SELECT page_id, tag, title, created, page_lang ".
-				"FROM {$this->db->table_prefix}page ".
-				"WHERE owner_id = '" . $user['user_id'] . "' ".
-					"AND comment_on_id = '0' ".
-					"AND deleted <> '1' ".
-				"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " ".
+				"SELECT page_id, tag, title, created, page_lang " .
+				"FROM {$this->db->table_prefix}page " .
+				"WHERE owner_id = '" . $user['user_id'] . "' " .
+					"AND comment_on_id = '0' " .
+					"AND deleted <> '1' " .
+				"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " " .
 				$pagination['limit']);
 
 			// sorting and pagination
@@ -425,9 +425,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 								$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
 
 								$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
-								$on_page	= $this->_t('To') . ' '.
-									$this->link('/' . $upload['file_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang).
-									' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
+								$on_page	= $this->_t('To') . ' ' .
+											  $this->link('/' . $upload['file_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang) .
+											  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
 							}
 							else
 							{
@@ -450,7 +450,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			else
 			{
 				$tpl->u_up = true;
-				// $this->_t('CommentsDisabled');
 			}
 		}
 	}

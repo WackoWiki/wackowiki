@@ -14,11 +14,11 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 		($tag
 			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "").
-		"WHERE (( MATCH(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) ".
-			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") ".
-			"OR lower(a.tag) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) ".
+		"WHERE (( MATCH(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
+			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
+			"OR lower(a.tag) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) " .
 			($tag
-				? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " ".
+				? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
 				  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " )"
 				: "").
 			($filter
@@ -32,8 +32,8 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 			" )";
 
 	$count = $this->db->load_single(
-		"SELECT COUNT(a.page_id) AS n ".
-		"FROM " . $this->db->table_prefix . "page a ".
+		"SELECT COUNT(a.page_id) AS n " .
+		"FROM " . $this->db->table_prefix . "page a " .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]);
@@ -42,12 +42,12 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 	$results = $this->db->load_all(
 		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size,
 			MATCH(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) AS score,
-			u.user_name, o.user_name as owner_name ".
-		"FROM " . $this->db->table_prefix . "page a ".
-			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) ".
-			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) ".
+			u.user_name, o.user_name as owner_name " .
+		"FROM " . $this->db->table_prefix . "page a " .
+			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) " .
 		$selector.
-		"ORDER BY score DESC ".
+		"ORDER BY score DESC " .
 		$pagination['limit']);
 
 	return [$results, $pagination];
@@ -59,10 +59,10 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 		($tag
 			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "").
-		"WHERE ( lower(a.tag) LIKE binary lower(" . $this->db->q('%' . $phrase . '%') . ") ".
-			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) ".
+		"WHERE ( lower(a.tag) LIKE binary lower(" . $this->db->q('%' . $phrase . '%') . ") " .
+			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) " .
 		($tag
-			? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " ".
+			? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
 			  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " )"
 			: "").
 		($filter
@@ -75,8 +75,8 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 			: "");
 
 	$count = $this->db->load_single(
-		"SELECT COUNT(a.page_id) AS n ".
-		"FROM " . $this->db->table_prefix . "page a ".
+		"SELECT COUNT(a.page_id) AS n " .
+		"FROM " . $this->db->table_prefix . "page a " .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]);
@@ -84,12 +84,12 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 	// load search results
 	$results = $this->db->load_all(
 		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, a.page_size,
-			u.user_name, o.user_name as owner_name ".
-		"FROM " . $this->db->table_prefix . "page a ".
-			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) ".
-			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) ".
+			u.user_name, o.user_name as owner_name " .
+		"FROM " . $this->db->table_prefix . "page a " .
+			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) " .
 		$selector.
-		"ORDER BY a.supertag ".
+		"ORDER BY a.supertag " .
 		$pagination['limit']);
 
 	return [$results, $pagination];

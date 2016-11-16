@@ -128,8 +128,8 @@ function admin_content_pages(&$engine, &$module)
 
 	// collecting data
 	$count = $engine->db->load_single(
-		"SELECT COUNT(page_id) AS n ".
-		"FROM {$engine->db->table_prefix}page l ".
+		"SELECT COUNT(page_id) AS n " .
+		"FROM {$engine->db->table_prefix}page l " .
 		( $where ? $where : "WHERE comment_on_id = '0' " ));
 
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
@@ -138,9 +138,9 @@ function admin_content_pages(&$engine, &$module)
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&amp;level=' . htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&amp;level_mod=' . htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 	$pages = $engine->db->load_all(
-		"SELECT p.*, length(body) as page_size, u.* ".
-		"FROM {$engine->db->table_prefix}page p ".
-			"LEFT JOIN {$engine->db->table_prefix}user u ON (p.user_id = u.user_id) ".
+		"SELECT p.*, length(body) as page_size, u.* " .
+		"FROM {$engine->db->table_prefix}page p " .
+			"LEFT JOIN {$engine->db->table_prefix}user u ON (p.user_id = u.user_id) " .
 		( $where ? $where : "WHERE p.comment_on_id = '0' " ).
 		( $order ? $order : 'ORDER BY p.page_id DESC ' ).
 		$pagination['limit']);
@@ -233,7 +233,7 @@ function admin_content_pages(&$engine, &$module)
 			// tz offset
 			$time_tz = $engine->sql2precisetime($row['modified']);
 
-			echo '<tr class="lined">' . "\n".
+			echo '<tr class="lined">' . "\n" .
 					'<td style="vertical-align:top; text-align:center;">' . $row['page_id'] . '</td>' . 
 					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' . 
 					'<td style="vertical-align:top; padding-left:5px; padding-right:5px;">' . $row['tag'] . '</td>' . 

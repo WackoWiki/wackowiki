@@ -30,12 +30,12 @@ if ($this->can_upload() === true)
 		}
 
 		$file = $this->db->load_single(
-			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
-			"FROM " . $this->db->table_prefix . "upload f ".
-				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
-				"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) ".
-			"WHERE f.page_id = '" . $page_id . "' ".
-				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' ".
+			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag " .
+			"FROM " . $this->db->table_prefix . "upload f " .
+				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+				"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+			"WHERE f.page_id = '" . $page_id . "' " .
+				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' " .
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -136,12 +136,12 @@ if ($this->can_upload() === true)
 		}
 
 		$file = $this->db->load_single(
-			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag ".
-			"FROM " . $this->db->table_prefix . "upload f ".
-				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
-				"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) ".
-			"WHERE f.page_id = '" . $page_id . "' ".
-				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' ".
+			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag " .
+			"FROM " . $this->db->table_prefix . "upload f " .
+				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+				"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+			"WHERE f.page_id = '" . $page_id . "' " .
+				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' " .
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -269,11 +269,11 @@ if ($this->can_upload() === true)
 			}
 
 			$file = $this->db->load_single(
-				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
-				"FROM " . $this->db->table_prefix . "upload f ".
-					"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
-				"WHERE f.page_id = '" . $page_id . "' ".
-					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' ".
+				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description " .
+				"FROM " . $this->db->table_prefix . "upload f " .
+					"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+				"WHERE f.page_id = '" . $page_id . "' " .
+					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' " .
 				"LIMIT 1");
 
 			if (count($file) > 0)
@@ -285,14 +285,14 @@ if ($this->can_upload() === true)
 				{
 					// 2. remove from DB
 					$this->db->sql_query(
-						"DELETE FROM " . $this->db->table_prefix . "upload ".
+						"DELETE FROM " . $this->db->table_prefix . "upload " .
 						"WHERE upload_id = '" . $file['upload_id'] . "'" );
 
 					// update user uploads count
 					$this->db->sql_query(
-						"UPDATE {$this->db->user_table} SET ".
-							"total_uploads = total_uploads - 1 ".
-						"WHERE user_id = '" . $file['user_id'] . "' ".
+						"UPDATE {$this->db->user_table} SET " .
+							"total_uploads = total_uploads - 1 " .
+						"WHERE user_id = '" . $file['user_id'] . "' " .
 						"LIMIT 1");
 
 					$message .= $this->_t('UploadRemovedFromDB') . '<br />';
@@ -343,11 +343,11 @@ if ($this->can_upload() === true)
 			}
 
 			$file = $this->db->load_single(
-				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
-				"FROM " . $this->db->table_prefix . "upload f ".
-					"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) ".
-				"WHERE f.page_id = '" . $page_id . "' ".
-					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' ".
+				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description " .
+				"FROM " . $this->db->table_prefix . "upload f " .
+					"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+				"WHERE f.page_id = '" . $page_id . "' " .
+					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' " .
 				"LIMIT 1");
 
 			if (count($file) > 0)
@@ -367,10 +367,10 @@ if ($this->can_upload() === true)
 
 					// 2. update file metadata
 					$this->db->sql_query(
-						"UPDATE " . $this->db->table_prefix . "upload SET ".
-							"upload_lang		= " . $this->db->q($this->page['page_lang']) . ", ".
-							"file_description	= " . $this->db->q($description) . " ".
-						"WHERE upload_id = '" . $file['upload_id'] . "' ".
+						"UPDATE " . $this->db->table_prefix . "upload SET " .
+							"upload_lang		= " . $this->db->q($this->page['page_lang']) . ", " .
+							"file_description	= " . $this->db->q($description) . " " .
+						"WHERE upload_id = '" . $file['upload_id'] . "' " .
 						"LIMIT 1");
 
 					$message .= $this->_t('UploadEditedMeta') . "<br />";
@@ -399,15 +399,15 @@ if ($this->can_upload() === true)
 
 			// TODO: Set user used_quota in user table (?)
 			$user_files	= $this->db->load_single(
-				"SELECT SUM(file_size) AS used_user_quota ".
-				"FROM " . $this->db->table_prefix . "upload ".
-				"WHERE user_id = '" . $user['user_id'] . "' ".
+				"SELECT SUM(file_size) AS used_user_quota " .
+				"FROM " . $this->db->table_prefix . "upload " .
+				"WHERE user_id = '" . $user['user_id'] . "' " .
 				"LIMIT 1");
 
 			// TODO: Set used_quota in config table (?)
 			$files		= $this->db->load_single(
-				"SELECT SUM(file_size) AS used_quota ".
-				"FROM " . $this->db->table_prefix . "upload ".
+				"SELECT SUM(file_size) AS used_quota " .
+				"FROM " . $this->db->table_prefix . "upload " .
 				"LIMIT 1");
 
 			// Checks
@@ -434,14 +434,24 @@ if ($this->can_upload() === true)
 						$ext = $ext . '.txt';
 					}
 
-					$image = ['gif', 'jpeg', 'jpg', 'png'];
+					$image = ['gif', 'jpeg', 'jpe', 'jpg', 'png'];
 
 					if (in_array($ext, $image))
 					{
 						$is_image = true;
 					}
 
-					$name	= implode('.', $_data);
+					// TODO: check MIME for extension, e.g.
+					// File extension ".pdf" does not match the detected MIME type of the file (image/jpeg).
+					if (isset($_POST['file_dest_name']) && $_POST['file_dest_name'] != '')
+					{
+						$name = $_POST['file_dest_name'];
+					}
+					else
+					{
+						$name	= implode('.', $_data);
+					}
+
 					$name	= str_replace('@', '_', $name);
 
 					// here would be place for translit
@@ -551,23 +561,23 @@ if ($this->can_upload() === true)
 
 								// 5. insert line into DB
 								$this->db->sql_query(
-									"INSERT INTO " . $this->db->table_prefix . "upload SET ".
-										"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', ".
-										"user_id			= '" . $user['user_id'] . "',".
-										"file_name			= " . $this->db->q($small_name) . ", ".
-										"upload_lang		= " . $this->db->q($this->page['page_lang']) . ", ".
-										"file_description	= " . $this->db->q($description) . ", ".
-										"file_size			= '" . (int) $file_size . "',".
-										"picture_w			= '" . (int) $size[0] . "',".
-										"picture_h			= '" . (int) $size[1] . "',".
-										"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . ",".
+									"INSERT INTO " . $this->db->table_prefix . "upload SET " .
+										"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', " .
+										"user_id			= '" . $user['user_id'] . "'," .
+										"file_name			= " . $this->db->q($small_name) . ", " .
+										"upload_lang		= " . $this->db->q($this->page['page_lang']) . ", " .
+										"file_description	= " . $this->db->q($description) . ", " .
+										"file_size			= '" . (int) $file_size . "'," .
+										"picture_w			= '" . (int) $size[0] . "'," .
+										"picture_h			= '" . (int) $size[1] . "'," .
+										"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
 										"uploaded_dt		= " . $this->db->q($uploaded_dt) . " ");
 
 								// update user uploads count
 								$this->db->sql_query(
-									"UPDATE {$this->db->user_table} SET ".
-										"total_uploads = total_uploads + 1 ".
-									"WHERE user_id = '" . $user['user_id'] . "' ".
+									"UPDATE {$this->db->user_table} SET " .
+										"total_uploads = total_uploads + 1 " .
+									"WHERE user_id = '" . $user['user_id'] . "' " .
 									"LIMIT 1");
 
 								// 4. output link to file
@@ -643,13 +653,13 @@ if ($this->can_upload() === true)
 			{
 				if ($this->db->upload_quota_per_user > 0)
 				{
-					$error = $this->_t('UploadMaxFileQuota') . '. <br />' . 
+					$error = $this->_t('UploadMaxFileQuota') . '. <br />' .
 							 'Storage in use ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) . ' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
 				}
 
 				if ($this->db->upload_quota > 0)
 				{
-					$error .= '<br />' . $this->_t('UploadMaxFileQuota') . '. <br />' . 
+					$error .= '<br />' . $this->_t('UploadMaxFileQuota') . '. <br />' .
 							  'Storage in use ' . $this->binary_multiples($files['used_quota'], false, true, true) . ' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota), true, true, true);
 				}
 			}

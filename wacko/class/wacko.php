@@ -134,9 +134,9 @@ class Wacko
 	function get_page_tag($page_id = 0)
 	{
 		$page = $this->db->load_single(
-			"SELECT tag ".
-			"FROM " . $this->db->table_prefix . "page ".
-			"WHERE page_id = '" . (int) $page_id . "' ".
+			"SELECT tag " .
+			"FROM " . $this->db->table_prefix . "page " .
+			"WHERE page_id = '" . (int) $page_id . "' " .
 			"LIMIT 1");
 
 		return $page['tag'];
@@ -155,7 +155,7 @@ class Wacko
 			{
 				// returns array ( [id] => value )
 				$get_page_id = $this->db->load_single(
-					"SELECT page_id ".
+					"SELECT page_id " .
 					"FROM " . $this->db->table_prefix . "page " .
 					"WHERE tag = " . $this->db->q($tag) . " " .
 					"LIMIT 1");
@@ -1081,10 +1081,10 @@ class Wacko
 			if ($supertagged || $page_id)
 			{
 				$page = $this->db->load_single(
-					"SELECT " . $what_p . " ".
-					"FROM " . $this->db->table_prefix . "page p ".
-						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
-						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
+					"SELECT " . $what_p . " " .
+					"FROM " . $this->db->table_prefix . "page p " .
+						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"WHERE " . ($page_id != 0
 						? "page_id  = '" . (int) $page_id . "' "
 						: "supertag = " . $this->db->q($supertag) . " " ).
@@ -1100,18 +1100,18 @@ class Wacko
 					$this->cache_page($page, $page_id, $metadata_only);
 
 					$page = $this->db->load_single(
-						"SELECT p.revision_id, " . $what_r . " ".
-						"FROM " . $this->db->table_prefix . "revision p ".
-							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
-							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
-							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) ".
+						"SELECT p.revision_id, " . $what_r . " " .
+						"FROM " . $this->db->table_prefix . "revision p " .
+							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
 						"WHERE " . ($page_id != 0
 							? "p.page_id  = '" . (int) $page_id . "' "
 							: "p.supertag = " . $this->db->q($supertag) . " " ).
 							($deleted != 1
 								? "AND p.deleted <> '1' "
 								: "").
-							"AND revision_id = '" . (int) $revision_id . "' ".
+							"AND revision_id = '" . (int) $revision_id . "' " .
 						"LIMIT 1");
 
 					$page['owner_id'] = $owner_id;
@@ -1120,11 +1120,11 @@ class Wacko
 			else if (!preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-]/', $tag))
 			{
 				$page = $this->db->load_single(
-					"SELECT " . $what_p . " ".
-					"FROM " . $this->db->table_prefix . "page p ".
-						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
-						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
-					"WHERE tag = " . $this->db->q($tag) . " ".
+					"SELECT " . $what_p . " " .
+					"FROM " . $this->db->table_prefix . "page p " .
+						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+					"WHERE tag = " . $this->db->q($tag) . " " .
 						($deleted != 1
 							? "AND p.deleted <> '1' "
 							: "").
@@ -1137,16 +1137,16 @@ class Wacko
 					$this->cache_page($page, $page_id, $metadata_only);
 
 					$page = $this->db->load_single(
-						"SELECT " . $what_r . " ".
-						"FROM " . $this->db->table_prefix . "revision p ".
-							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) ".
-							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
-							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) ".
-						"WHERE p.tag = " . $this->db->q($tag) . " ".
+						"SELECT " . $what_r . " " .
+						"FROM " . $this->db->table_prefix . "revision p " .
+							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
+						"WHERE p.tag = " . $this->db->q($tag) . " " .
 							($deleted != 1
 								? "AND p.deleted <> '1' "
 								: "").
-							"AND revision_id = '" . (int) $revision_id . "' ".
+							"AND revision_id = '" . (int) $revision_id . "' " .
 						"LIMIT 1");
 
 					$page['owner_id'] = $owner_id;
@@ -1302,8 +1302,8 @@ class Wacko
 
 		// get page links
 		if ($links = $this->db->load_all(
-			"SELECT to_tag ".
-			"FROM " . $this->db->table_prefix . "page_link ".
+			"SELECT to_tag " .
+			"FROM " . $this->db->table_prefix . "page_link " .
 			"WHERE from_page_id = '" . $this->page['page_id'] . "'"))
 		{
 			foreach ($links as $link)
@@ -1314,15 +1314,15 @@ class Wacko
 
 		// get menu links
 		if ($menu_items = $this->db->load_all(
-			"SELECT DISTINCT p.tag ".
-			"FROM " . $this->db->table_prefix . "menu b ".
-				"LEFT JOIN " . $this->db->table_prefix . "page p ON (b.page_id = p.page_id) ".
+			"SELECT DISTINCT p.tag " .
+			"FROM " . $this->db->table_prefix . "menu b " .
+				"LEFT JOIN " . $this->db->table_prefix . "page p ON (b.page_id = p.page_id) " .
 			// TODO: why IN and not = ??
-			"WHERE (b.user_id IN ( '" . $this->get_user_id('System') . "' ) ".
+			"WHERE (b.user_id IN ( '" . $this->get_user_id('System') . "' ) " .
 				($lang
 					? "AND b.menu_lang = " . $this->db->q($lang) . " "
 					: "").
-					") ".
+					") " .
 				($user
 					? "OR (b.user_id IN ( '" . $user['user_id'] . "' )) "
 					: "").
@@ -1370,8 +1370,8 @@ class Wacko
 		$spages_str	= substr($spages_str, 0, strlen($spages_str) - 2);
 
 		if ($links = $this->db->load_all(
-		"SELECT " . $this->page_meta . " ".
-		"FROM " . $this->db->table_prefix . "page ".
+		"SELECT " . $this->page_meta . " " .
+		"FROM " . $this->db->table_prefix . "page " .
 		"WHERE supertag IN (" . $spages_str . ")", true))
 		{
 			foreach ($links as $link)
@@ -1489,7 +1489,7 @@ class Wacko
 		{
 			$revisions = $this->db->load_all(
 				"SELECT 0 AS revision_id, " . $page_meta . " " .
-				"FROM " . $this->db->table_prefix . "page p ".
+				"FROM " . $this->db->table_prefix . "page p " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
 				"WHERE p.page_id = '" . (int) $page_id . "' " .
@@ -1506,9 +1506,9 @@ class Wacko
 	function count_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0)
 	{
 		$count = $this->db->load_single(
-			"SELECT COUNT(page_id) AS n ".
-			"FROM {$this->db->table_prefix}revision ".
-			"WHERE page_id = '" . (int) $page_id . "' ".
+			"SELECT COUNT(page_id) AS n " .
+			"FROM {$this->db->table_prefix}revision " .
+			"WHERE page_id = '" . (int) $page_id . "' " .
 				($hide_minor_edit
 					? "AND minor_edit = '0' "
 					: "").
@@ -1523,27 +1523,27 @@ class Wacko
 	function load_pages_linking_to($to_tag, $tag = '')
 	{
 		return $this->db->load_all(
-			"SELECT p.page_id, p.tag AS tag, p.title ".
-			"FROM " . $this->db->table_prefix . "page_link l ".
-				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.from_page_id) ".
+			"SELECT p.page_id, p.tag AS tag, p.title " .
+			"FROM " . $this->db->table_prefix . "page_link l " .
+				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.from_page_id) " .
 			"WHERE " . ($tag
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 				: "").
-				"(l.to_supertag = " . $this->db->q($this->translit($to_tag)) . ") ".
+				"(l.to_supertag = " . $this->db->q($this->translit($to_tag)) . ") " .
 			"ORDER BY tag", true);
 	}
 
 	function load_file_usage($file_id, $tag = '')
 	{
 		return $this->db->load_all(
-			"SELECT p.page_id, p.tag AS tag, p.title ".
-			"FROM " . $this->db->table_prefix . "file_link l ".
-				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.page_id) ".
-				"INNER JOIN " . $this->db->table_prefix . "upload u ON (u.upload_id = l.file_id) ".
+			"SELECT p.page_id, p.tag AS tag, p.title " .
+			"FROM " . $this->db->table_prefix . "file_link l " .
+				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.page_id) " .
+				"INNER JOIN " . $this->db->table_prefix . "upload u ON (u.upload_id = l.file_id) " .
 			"WHERE " . ($tag
 					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 					: "").
-				"l.file_id = '" . (int) $file_id . "' ".
+				"l.file_id = '" . (int) $file_id . "' " .
 			"ORDER BY tag", true);
 	}
 
@@ -1551,10 +1551,10 @@ class Wacko
 	{
 		// count pages
 		$count_pages = $this->db->load_single(
-			"SELECT COUNT(p.page_id) AS n ".
-			"FROM " . $this->db->table_prefix . "page p ".
-				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
-			"WHERE p.comment_on_id = '0' ".
+			"SELECT COUNT(p.page_id) AS n " .
+			"FROM " . $this->db->table_prefix . "page p " .
+				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+			"WHERE p.comment_on_id = '0' " .
 				($from
 					? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
 					: "").
@@ -1575,12 +1575,12 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if (($pages = $this->db->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name ".
-		"FROM " . $this->db->table_prefix . "page p ".
-			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
-			"INNER JOIN " . $this->db->table_prefix . "revision r1 ON (p.page_id = r1.page_id) ".
-			"LEFT JOIN " . $this->db->table_prefix . "revision r2 ON (p.page_id = r2.page_id AND r1.revision_id < r2.revision_id) ".
-		"WHERE p.comment_on_id = '0' ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
+		"FROM " . $this->db->table_prefix . "page p " .
+			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+			"INNER JOIN " . $this->db->table_prefix . "revision r1 ON (p.page_id = r1.page_id) " .
+			"LEFT JOIN " . $this->db->table_prefix . "revision r2 ON (p.page_id = r2.page_id AND r1.revision_id < r2.revision_id) " .
+		"WHERE p.comment_on_id = '0' " .
 			($from
 				? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
 				: "").
@@ -1596,8 +1596,8 @@ class Wacko
 			(!$default_pages
 				? "AND (u.account_type = '0' OR p.user_id = '0') "
 				: "").
-			"AND r2.revision_id IS NULL ".
-		"ORDER BY p.modified DESC ".
+			"AND r2.revision_id IS NULL " .
+		"ORDER BY p.modified DESC " .
 		$pagination['limit'], true)))
 		{
 			foreach ($pages as $page)
@@ -1606,16 +1606,16 @@ class Wacko
 			}
 
 			if (($read_acls = $this->db->load_all(
-			"SELECT a.page_id, a.privilege, a.list ".
-			"FROM " . $this->db->table_prefix . "acl a ".
-				"INNER JOIN " . $this->db->table_prefix . "page p ON (a.page_id = p.page_id) ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND a.page_id = p.page_id ".
+			"SELECT a.page_id, a.privilege, a.list " .
+			"FROM " . $this->db->table_prefix . "acl a " .
+				"INNER JOIN " . $this->db->table_prefix . "page p ON (a.page_id = p.page_id) " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND a.page_id = p.page_id " .
 				($tag
 					? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 					: '').
-				"AND a.privilege = 'read' ".
-			"ORDER BY modified DESC ".
+				"AND a.privilege = 'read' " .
+			"ORDER BY modified DESC " .
 			"LIMIT {$pagination['perpage']}", true)))
 			{
 				foreach ($read_acls as $read_acl)
@@ -1633,18 +1633,18 @@ class Wacko
 		$limit = $this->get_list_count($limit);
 
 		if ($pages = $this->db->load_all(
-		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag ".
-		"FROM " . $this->db->table_prefix . "page c ".
-			"LEFT JOIN " . $this->db->table_prefix . "user u ON (c.user_id = u.user_id) ".
-			"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) ".
-		"WHERE c.comment_on_id <> '0' ".
+		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag " .
+		"FROM " . $this->db->table_prefix . "page c " .
+			"LEFT JOIN " . $this->db->table_prefix . "user u ON (c.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
+		"WHERE c.comment_on_id <> '0' " .
 			($tag
 				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 				: "").
 			($deleted != 1
 				? "AND p.deleted <> '1' AND c.deleted <> '1' "
 				: "").
-		"ORDER BY c.modified DESC ".
+		"ORDER BY c.modified DESC " .
 		"LIMIT " . $limit))
 		{
 			#$count		= count($pages['page_id']);
@@ -1656,16 +1656,16 @@ class Wacko
 			}
 
 			if ($read_acls = $this->db->load_all(
-			"SELECT a.page_id, a.privilege, a.list ".
-			"FROM " . $this->db->table_prefix . "acl a ".
-				"INNER JOIN " . $this->db->table_prefix . "page p ON (a.page_id = p.page_id) ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND a.page_id = p.page_id ".
+			"SELECT a.page_id, a.privilege, a.list " .
+			"FROM " . $this->db->table_prefix . "acl a " .
+				"INNER JOIN " . $this->db->table_prefix . "page p ON (a.page_id = p.page_id) " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND a.page_id = p.page_id " .
 					($tag
 						? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 						: "").
-				"AND a.privilege = 'read' ".
-			"ORDER BY modified DESC ".
+				"AND a.privilege = 'read' " .
+			"ORDER BY modified DESC " .
 			"LIMIT {$limit}"))
 			{
 				foreach ($read_acls as $read_acl)
@@ -1684,8 +1684,8 @@ class Wacko
 		$pagination	= '';
 
 		$count_deleted = $this->db->load_single(
-			"SELECT COUNT(page_id) AS n ".
-			"FROM " . $this->db->table_prefix . "page ".
+			"SELECT COUNT(page_id) AS n " .
+			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE deleted = '1' LIMIT 1"
 			, $cache);
 
@@ -1696,11 +1696,11 @@ class Wacko
 			$deleted = $this->db->load_all(
 				"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note,
 						p.minor_edit, p.latest, p.handler, p.comment_on_id, p.page_lang, p.title, p.keywords,
-						p.description, u.user_name ".
-				"FROM " . $this->db->table_prefix . "page p ".
-					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) ".
-				"WHERE p.deleted = '1' ".
-				"ORDER BY p.modified DESC, p.tag ASC ".
+						p.description, u.user_name " .
+				"FROM " . $this->db->table_prefix . "page p " .
+					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+				"WHERE p.deleted = '1' " .
+				"ORDER BY p.modified DESC, p.tag ASC " .
 				$pagination['limit'], $cache);
 		}
 
@@ -1710,9 +1710,9 @@ class Wacko
 	function load_categories($tag, $page_id = 0, $cache = false)
 	{
 		$categories = $this->db->load_all(
-			"SELECT c.category_id, c.category ".
-			"FROM {$this->db->table_prefix}category c ".
-				"INNER JOIN {$this->db->table_prefix}category_page cp ON (c.category_id = cp.category_id) ".
+			"SELECT c.category_id, c.category " .
+			"FROM {$this->db->table_prefix}category c " .
+				"INNER JOIN {$this->db->table_prefix}category_page cp ON (c.category_id = cp.category_id) " .
 			"WHERE " . ($page_id != 0
 				? "cp.page_id  = '" . (int) $page_id . "' "
 				: "cp.supertag = " . $this->db->q($this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD)) . " " )
@@ -2031,8 +2031,8 @@ class Wacko
 				{
 					// update user pages count
 					$this->db->sql_query(
-						"UPDATE {$this->db->user_table} SET ".
-							"total_pages = total_pages + 1 ".
+						"UPDATE {$this->db->user_table} SET " .
+							"total_pages = total_pages + 1 " .
 						"WHERE user_id = '" . (int) $owner_id . "' " .
 						"LIMIT 1");
 				}
@@ -2098,7 +2098,7 @@ class Wacko
 							"created		= " . $this->db->q($old_page['created']) . ", " .
 							"owner_id		= '" . (int) $owner_id . "', " .
 							"user_id		= '" . (int) $user_id . "', " .
-							"latest			= '2', ".
+							"latest			= '2', " .
 							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc )) . ", " .
 							"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
 							"body			= " . $this->db->q($body) . ", " .
@@ -2109,7 +2109,7 @@ class Wacko
 							"page_size		= '" . (int) strlen($body) . "', " .
 							(isset($reviewed)
 								?	"reviewed		= '" . (int) $reviewed . "', " .
-									"reviewed_time	= UTC_TIMESTAMP(), ".
+									"reviewed_time	= UTC_TIMESTAMP(), " .
 									"reviewer_id	= '" . (int) $reviewer_id . "', "
 								:	"").
 							"title			= " . $this->db->q($title) . " " .
@@ -2194,7 +2194,7 @@ class Wacko
 				"ip				= '{$old_page['ip']}', " .
 				"owner_id		= '{$old_page['owner_id']}', " .
 				"user_id		= '{$old_page['user_id']}', " .
-				"latest			= '0', ".
+				"latest			= '0', " .
 				"handler		= '{$old_page['handler']}', " .
 				"comment_on_id	= '{$old_page['comment_on_id']}', " .
 				"page_lang		= '{$old_page['page_lang']}', " .
@@ -2298,7 +2298,7 @@ class Wacko
 				$save = $this->set_language($user['user_lang'], true);
 
 				$subject	=	$this->_t('RegistrationApproved');
-				$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name) . "\n\n".
+				$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name) . "\n\n" .
 								$this->_t('EmailRegisteredLogin') . "\n\n";
 
 				$this->send_user_email($user, $subject, $body);
@@ -2319,11 +2319,11 @@ class Wacko
 
 		$to			=	$user['user_name'] . ' <' . $user['email'] . '>';
 		$subject	=	'[' . $this->db->site_name . '] ' . $subject;
-		$body		=	$this->_t('EmailHello') . $user['user_name'] . ",\n\n".
-						Ut::amp_decode($body) . "\n\n".
-						$this->_t('EmailDoNotReply') . "\n\n".
-						$this->_t('EmailGoodbye') . "\n".
-						$this->db->site_name . "\n".
+		$body		=	$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
+						Ut::amp_decode($body) . "\n\n" .
+						$this->_t('EmailDoNotReply') . "\n\n" .
+						$this->_t('EmailGoodbye') . "\n" .
+						$this->db->site_name . "\n" .
 						$this->db->base_url;
 
 		$email = new Email($this);
@@ -2361,9 +2361,9 @@ class Wacko
 							$save = $this->set_language($user['user_lang'], true);
 
 							$subject	=	$this->_t('NewPageCreatedSubj') . " '$title'";
-							$body		=	$this->_t('EmailModerator') . ".\n\n".
-											Ut::perc_replace($this->_t('NewPageCreatedBody'), ( $user_name == GUEST ? $this->_t('Guest') : $user_name )) . "\n".
-											"'$title'\n".
+							$body		=	$this->_t('EmailModerator') . ".\n\n" .
+											Ut::perc_replace($this->_t('NewPageCreatedBody'), ( $user_name == GUEST ? $this->_t('Guest') : $user_name )) . "\n" .
+											"'$title'\n" .
 											$this->href('', $tag) . "\n\n";
 
 							$this->send_user_email($user, $subject, $body);
@@ -2496,11 +2496,11 @@ class Wacko
 						$subject = $this->_t('CommentForWatchedPage') . "'" . $page_title . "'";
 
 						$body .=
-								$this->_t('SomeoneCommented') . "\n".
-								$this->href('', $this->get_page_tag($comment_on_id), '') . "\n\n".
-								$title . "\n".
+								$this->_t('SomeoneCommented') . "\n" .
+								$this->href('', $this->get_page_tag($comment_on_id), '') . "\n\n" .
+								$title . "\n" .
 								"----------------------------------------------------------------------\n\n" .
-								$page_body . "\n\n".
+								$page_body . "\n\n" .
 								"----------------------------------------------------------------------\n\n";
 
 						if ($watcher['notify_comment'] == 2)
@@ -2513,11 +2513,11 @@ class Wacko
 						$subject = $this->_t('WatchedPageChanged') . "'" . $tag . "'";
 
 						$body .=
-								$this->_t('SomeoneChangedThisPage') . "\n".
-								$this->href('', $tag) . "\n\n".
+								$this->_t('SomeoneChangedThisPage') . "\n" .
+								$this->href('', $tag) . "\n\n" .
 								$title . "\n" .
 								"======================================================================\n\n" .
-								$this->format($diff, 'html2mail') . "\n\n".
+								$this->format($diff, 'html2mail') . "\n\n" .
 								"======================================================================\n\n";
 
 						if ($watcher['notify_page'] == 2)
@@ -2541,7 +2541,7 @@ class Wacko
 		$this->db->sql_query(
 			"UPDATE {$this->db->user_table} SET " .
 				"email_confirm = " . $this->db->q(hash_hmac('sha256', $confirm, $this->db->system_seed)) . " " .
-			"WHERE user_id = '" . (int) $user_id . "' ".
+			"WHERE user_id = '" . (int) $user_id . "' " .
 			"LIMIT 1");
 
 		return $this->href('', '', 'confirm=' . $confirm);
@@ -3974,8 +3974,8 @@ class Wacko
 	{
 		// delete related old links in table
 		$this->db->sql_query(
-			"DELETE ".
-			"FROM " . $this->db->table_prefix . "page_link ".
+			"DELETE " .
+			"FROM " . $this->db->table_prefix . "page_link " .
 			"WHERE from_page_id = '" . (int) $from_page_id . "'");
 
 		// page link
@@ -3985,20 +3985,20 @@ class Wacko
 
 			foreach ($link_table as $dummy => $to_tag) // discard strtolowered index
 			{
-				$query .= "('" . (int) $from_page_id . "', '" . $this->get_page_id($to_tag) . "', ".
+				$query .= "('" . (int) $from_page_id . "', '" . $this->get_page_id($to_tag) . "', " .
 							$this->db->q($to_tag) . ", " . $this->db->q($this->translit($to_tag)) . "),";
 			}
 
 			$this->db->sql_query(
-				"INSERT INTO " . $this->db->table_prefix . "page_link ".
-					"(from_page_id, to_page_id, to_tag, to_supertag) ".
+				"INSERT INTO " . $this->db->table_prefix . "page_link " .
+					"(from_page_id, to_page_id, to_tag, to_supertag) " .
 				"VALUES " . rtrim($query, ','));
 		}
 
 		// delete page related old file links in table
 		$this->db->sql_query(
-			"DELETE ".
-			"FROM " . $this->db->table_prefix . "file_link ".
+			"DELETE " .
+			"FROM " . $this->db->table_prefix . "file_link " .
 			"WHERE page_id = '" . (int) $from_page_id . "'");
 
 		// file link
@@ -4012,8 +4012,8 @@ class Wacko
 			}
 
 			$this->db->sql_query(
-				"INSERT INTO " . $this->db->table_prefix . "file_link ".
-				"(page_id, file_id) ".
+				"INSERT INTO " . $this->db->table_prefix . "file_link " .
+				"(page_id, file_id) " .
 				"VALUES " . rtrim($query, ','));
 		}
 	}
@@ -4185,10 +4185,10 @@ class Wacko
 				if (strncasecmp($headless, $we, strlen($we))) // if not from ourselves..
 				{
 					$this->db->sql_query(
-						"INSERT INTO {$this->db->table_prefix}referrer SET ".
-							"page_id		= '" . (int) $this->page['page_id'] . "', ".
-							"referrer		= " . $this->db->q($ref) . ", ".
-							"ip				= " . $this->db->q($this->http->ip) . ", ".
+						"INSERT INTO {$this->db->table_prefix}referrer SET " .
+							"page_id		= '" . (int) $this->page['page_id'] . "', " .
+							"referrer		= " . $this->db->q($ref) . ", " .
+							"ip				= " . $this->db->q($this->http->ip) . ", " .
 							"referrer_time	= UTC_TIMESTAMP()");
 				}
 			}
@@ -4204,15 +4204,15 @@ class Wacko
 	function load_referrers($page_id = null)
 	{
 		return $this->db->load_all(
-			"SELECT ".
+			"SELECT " .
 			(!isset($page_id)
 				? "referrer, count(referrer) AS num "
 				: "page_id, referrer, count(referrer) AS num ").
-			"FROM " . $this->db->table_prefix . "referrer ".
+			"FROM " . $this->db->table_prefix . "referrer " .
 			(!is_null($page_id)
 				? "WHERE page_id = '" . (int) $page_id . "' "
 				: "").
-			"GROUP BY referrer ".
+			"GROUP BY referrer " .
 			"ORDER BY num DESC");
 	}
 
@@ -4750,7 +4750,7 @@ class Wacko
 				"login_count					= login_count + 1, " .
 				"failed_login_count				= 0, " .
 				"lost_password_request_count	= 0 " . // STS value unused
-			"WHERE ".
+			"WHERE " .
 				"user_id						= '" . (int) $user['user_id'] . "' " .
 			"LIMIT 1");
 	}
@@ -6477,7 +6477,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"DELETE a.* ".
+			"DELETE a.* " .
 			"FROM " . $this->db->table_prefix . "acl a " .
 				"LEFT JOIN " . $this->db->table_prefix . "page p " .
 					"ON (a.page_id = p.page_id) " .
@@ -6503,11 +6503,11 @@ class Wacko
 		$remove = implode(', ', $remove);
 
 		$this->db->sql_query(
-			"DELETE FROM {$this->db->table_prefix}page ".
+			"DELETE FROM {$this->db->table_prefix}page " .
 			"WHERE page_id IN ( " . $remove . " )");
 
 		$this->db->sql_query(
-			"DELETE FROM {$this->db->table_prefix}revision ".
+			"DELETE FROM {$this->db->table_prefix}revision " .
 			"WHERE page_id IN ( " . $remove . " )");
 	}
 
@@ -6560,8 +6560,8 @@ class Wacko
 		}
 
 		return $this->db->sql_query(
-			"DELETE FROM {$this->db->table_prefix}revision ".
-			"WHERE tag = " . $this->db->q($tag) . " ".
+			"DELETE FROM {$this->db->table_prefix}revision " .
+			"WHERE tag = " . $this->db->q($tag) . " " .
 				($cluster
 					? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
 					: "") );
@@ -6790,7 +6790,7 @@ class Wacko
 
 		$this->db->sql_query(
 			"UPDATE {$this->db->table_prefix}page SET " .
-				"deleted	= '0' ".
+				"deleted	= '0' " .
 			"WHERE page_id = '" . (int) $page_id . "'");
 	}
 
@@ -7326,7 +7326,7 @@ class Wacko
 				}
 
 				$this->db->sql_query(
-					"INSERT INTO {$this->db->table_prefix}category_page (category_id, page_id) ".
+					"INSERT INTO {$this->db->table_prefix}category_page (category_id, page_id) " .
 					"VALUES " . implode(', ', $values));
 			}
 

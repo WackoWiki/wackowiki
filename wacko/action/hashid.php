@@ -16,10 +16,10 @@ if (isset($this->page['version_id']))
 else
 {
 	$_old_version = $this->db->load_single(
-		"SELECT version_id ".
-		"FROM {$this->db->table_prefix}revision ".
-		"WHERE page_id = '" . $this->page['page_id'] . "' ".
-		"ORDER BY version_id DESC ".
+		"SELECT version_id " .
+		"FROM {$this->db->table_prefix}revision " .
+		"WHERE page_id = '" . $this->page['page_id'] . "' " .
+		"ORDER BY version_id DESC " .
 		"LIMIT 1");
 	$version_id = $_old_version['version_id'] + 1;
 }

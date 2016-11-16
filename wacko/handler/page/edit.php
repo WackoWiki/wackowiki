@@ -248,8 +248,8 @@ if ($this->has_access('read')
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
-		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '" />' . "\n".
-					'<input type="hidden" name="tag"		value="' . $this->tag . '" />' . "\n".
+		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '" />' . "\n" .
+					'<input type="hidden" name="tag"		value="' . $this->tag . '" />' . "\n" .
 					'<input type="hidden" name="add"		value="1" />' . "\n";
 	}
 

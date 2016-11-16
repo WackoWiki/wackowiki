@@ -16,13 +16,13 @@ if ($user_id = $this->get_user_id())
 		$this->_t('ResetChangesWatches') . '</a>).<br /><br />';
 
 	$pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
-			"FROM {$pref}page AS p, {$pref}watch AS w ".
-			"WHERE p.page_id = w.page_id ".
-				"AND p.modified > w.watch_time ".
-				"AND w.user_id = '" . (int) $user_id . "' ".
-				"AND p.user_id <> '" . (int) $user_id . "' ".
-			"GROUP BY p.tag ".
+			"SELECT p.page_id, p.tag, p.modified, w.user_id " .
+			"FROM {$pref}page AS p, {$pref}watch AS w " .
+			"WHERE p.page_id = w.page_id " .
+				"AND p.modified > w.watch_time " .
+				"AND w.user_id = '" . (int) $user_id . "' " .
+				"AND p.user_id <> '" . (int) $user_id . "' " .
+			"GROUP BY p.tag " .
 			"ORDER BY p.modified DESC, p.tag ASC "/*.		TODO pagination
 			"LIMIT $limit"*/);
 
@@ -31,9 +31,9 @@ if ($user_id = $this->get_user_id())
 		foreach ($pages as $page)
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->db->table_prefix}watch ".
-				"SET watch_time = UTC_TIMESTAMP() ".
-				"WHERE page_id = '" . $page['page_id'] . "' ".
+				"UPDATE {$this->db->table_prefix}watch " .
+				"SET watch_time = UTC_TIMESTAMP() " .
+				"WHERE page_id = '" . $page['page_id'] . "' " .
 					"AND user_id = '" . (int) $user_id . "'");
 		}
 

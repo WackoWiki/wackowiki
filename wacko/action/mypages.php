@@ -26,21 +26,21 @@ if (($user_id = $this->get_user_id()))
 			$this->_t('OrderChange') . "</a>] <br /><br />\n";
 
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}page ".
-			"WHERE owner_id = '" . (int) $user_id . "' ".
-				"AND deleted <> '1' ".
+			"SELECT COUNT(tag) AS n " .
+			"FROM {$prefix}page " .
+			"WHERE owner_id = '" . (int) $user_id . "' " .
+				"AND deleted <> '1' " .
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT tag, title, created ".
-			"FROM {$prefix}page ".
-			"WHERE owner_id = '" . (int) $user_id . "' ".
-				"AND deleted <> '1' ".
-				"AND comment_on_id = '0' ".
-			"ORDER BY created DESC, tag ASC ".
+			"SELECT tag, title, created " .
+			"FROM {$prefix}page " .
+			"WHERE owner_id = '" . (int) $user_id . "' " .
+				"AND deleted <> '1' " .
+				"AND comment_on_id = '0' " .
+			"ORDER BY created DESC, tag ASC " .
 			$pagination['limit'], true))
 		{
 			echo '<ul class="ul_list">' . "\n";
@@ -79,13 +79,13 @@ if (($user_id = $this->get_user_id()))
 	else if ((isset($_GET['bychange']) && $_GET['bychange'] == 1) || $bychange == 1)
 	{
 		$count	= $this->db->load_single(
-			"SELECT COUNT( DISTINCT p.tag ) AS n ".
-			"FROM {$prefix}page AS p ".
-			"LEFT JOIN {$prefix}revision AS r ".
-				"ON (p.page_id = r.page_id ".
-					"AND p.owner_id = '" . (int) $user_id . "') ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND p.deleted <> '1' ".
+			"SELECT COUNT( DISTINCT p.tag ) AS n " .
+			"FROM {$prefix}page AS p " .
+			"LEFT JOIN {$prefix}revision AS r " .
+				"ON (p.page_id = r.page_id " .
+					"AND p.owner_id = '" . (int) $user_id . "') " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND p.deleted <> '1' " .
 				"AND r.comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('change'));
@@ -97,16 +97,16 @@ if (($user_id = $this->get_user_id()))
 			$this->_t('OrderDate') . "</a>]<br /><br />\n";
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.tag, p.title, p.modified ".
-			"FROM {$prefix}page AS p ".
-			"LEFT JOIN {$prefix}revision AS r ".
-				"ON (p.page_id = r.page_id ".
-					"AND p.owner_id = '" . (int) $user_id . "') ".
-			"WHERE p.comment_on_id = '0' ".
-				"AND p.deleted <> '1' ".
-				"AND r.comment_on_id = '0' ".
-			"GROUP BY tag ".
-			"ORDER BY modified DESC, tag ASC ".
+			"SELECT p.tag, p.title, p.modified " .
+			"FROM {$prefix}page AS p " .
+			"LEFT JOIN {$prefix}revision AS r " .
+				"ON (p.page_id = r.page_id " .
+					"AND p.owner_id = '" . (int) $user_id . "') " .
+			"WHERE p.comment_on_id = '0' " .
+				"AND p.deleted <> '1' " .
+				"AND r.comment_on_id = '0' " .
+			"GROUP BY tag " .
+			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true))
 		{
 			echo '<ul class="ul_list">' . "\n";
@@ -145,26 +145,26 @@ if (($user_id = $this->get_user_id()))
 	else
 	{
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}page ".
-			"WHERE owner_id = '" . (int) $user_id . "' ".
-				"AND deleted <> '1' ".
+			"SELECT COUNT(tag) AS n " .
+			"FROM {$prefix}page " .
+			"WHERE owner_id = '" . (int) $user_id . "' " .
+				"AND deleted <> '1' " .
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
 		echo '<strong>' . $this->_t('ListOwnedPages') . '</strong>';
-		echo "<br />[<a href=\"" . $this->href('', '', $by('date')) . "\">".
-		$this->_t('OrderDate') . "</a>] [<a href=\"" . $this->href('', '', $by('change')) . "\">".
+		echo "<br />[<a href=\"" . $this->href('', '', $by('date')) . "\">" .
+		$this->_t('OrderDate') . "</a>] [<a href=\"" . $this->href('', '', $by('change')) . "\">" .
 		$this->_t('OrderChange') . "</a>] <br /><br />\n";
 
 		if (($pages = $this->db->load_all(
-			"SELECT tag, title, modified ".
-			"FROM {$prefix}page ".
-			"WHERE owner_id = '" . (int) $user_id . "' ".
-				"AND deleted <> '1' ".
-				"AND comment_on_id = '0' ".
-			"ORDER BY tag ASC ".
+			"SELECT tag, title, modified " .
+			"FROM {$prefix}page " .
+			"WHERE owner_id = '" . (int) $user_id . "' " .
+				"AND deleted <> '1' " .
+				"AND comment_on_id = '0' " .
+			"ORDER BY tag ASC " .
 			$pagination['limit'], true)))
 		{
 			echo '<ul class="ul_list">' . "\n";
