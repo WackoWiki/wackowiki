@@ -76,6 +76,10 @@ if ($this->can_upload() === true)
 			<br /><br />
 			<table>
 				<tr>
+					<th class="form_left" scope="row"><?php echo $this->_t('FileSyntax'); ?>:</th>
+					<td><?php echo '<code>' . $path . $file['file_name'] . '</code>'; ?></td>
+				</tr>
+				<tr>
 					<th class="form_left" scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
 					<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
 				</tr>
@@ -91,7 +95,7 @@ if ($this->can_upload() === true)
 			// image dimension
 			if ($file['picture_w'])
 			{ ?>
-				<tr class="lined">
+				<tr>
 					<th class="form_left" scope="row"><?php echo $this->_t('FileDimension'); ?>:</th>
 					<td><?php echo '' . $file['picture_w'] . ' × ' . $file['picture_h'] . 'px'; ?></td>
 				</tr>
@@ -107,7 +111,7 @@ if ($this->can_upload() === true)
 				</tr>
 				<tr class="">
 					<th class="form_left" scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
-					<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : ''; ?></td>
+					<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></td>
 				</tr>
 				<tr class="lined">
 					<th class="form_left" scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
@@ -151,8 +155,6 @@ if ($this->can_upload() === true)
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
-
-
 				if ($file['page_id'])
 				{
 					$path = 'file:/' . $file['supertag'] . '/';
@@ -182,6 +184,7 @@ if ($this->can_upload() === true)
 		<li><?php echo $this->link($path . $file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->_t('FileSyntax'); ?>:</span><?php echo '<code>' . $path . $file['file_name'] . '</code>'; ?></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
 				<li><span>&nbsp;</span></li>
@@ -196,7 +199,7 @@ if ($this->can_upload() === true)
 				<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $this->shorten_string($file['file_name']); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadDesc'); ?>:</span><?php echo $file['file_description']; ?></li>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : ''; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -231,6 +234,7 @@ if ($this->can_upload() === true)
 		<li><?php echo $this->link($path . $file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->_t('FileSyntax'); ?>:</span><?php echo '<code>' . $path . $file['file_name'] . '</code>'; ?></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
 				<li><span>&nbsp;</span></li>
@@ -245,7 +249,7 @@ if ($this->can_upload() === true)
 				<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $this->shorten_string($file['file_name']); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadDesc'); ?>:</span><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo $file['file_description']; ?>"/></li>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : ''; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -395,14 +399,14 @@ if ($this->can_upload() === true)
 
 			$user		= $this->get_user();
 
-			// TODO: Set user used_quota in user table (?)
+			// TODO: set user used_quota in user table (?)
 			$user_files	= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_user_quota " .
 				"FROM " . $this->db->table_prefix . "upload " .
 				"WHERE user_id = '" . $user['user_id'] . "' " .
 				"LIMIT 1");
 
-			// TODO: Set used_quota in config table (?)
+			// TODO: set used_quota in config table (?)
 			$files		= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_quota " .
 				"FROM " . $this->db->table_prefix . "upload " .
@@ -600,20 +604,21 @@ if ($this->can_upload() === true)
 
 		echo '<h3>' . $this->_t('UploadFiles') . ' &raquo; ' . $this->_t('UserSettingsGeneral') . '</h3>';
 		echo '<ul class="menu">
-			<li class="active">' . $this->_t('UserSettingsGeneral') . '</li>
-			<li><a href="' . $this->href('upload', '', ['show', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadViewProperties') . '</a></li>
-			<li><a href="' . $this->href('upload', '', ['edit', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadEditProperties') . '</a></li>
+				<li class="active">' . $this->_t('UserSettingsGeneral') . '</li>
+				<li><a href="' . $this->href('upload', '', ['show', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadViewProperties') . '</a></li>
+				<li><a href="' . $this->href('upload', '', ['edit', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadEditProperties') . '</a></li>
 
-			<li><a href="' . $this->href('upload', '', ['remove', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadRemoveFile') . "</a></li>
-		</ul><br /><br />\n";
+				<li><a href="' . $this->href('upload', '', ['remove', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadRemoveFile') . "</a></li>
+			</ul><br /><br />\n";
 		?>
 		<ul class="upload">
 			<li><?php echo $this->link($path . $small_name); ?>
 				<ul>
 					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->_t('FileSyntax'); ?>:</span><?php echo '<code>' . $syntax_file . '</code>'; ?></li>
+					<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($user['user_name'], '', true, false); ?></li>
 					<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($uploaded_dt); ?></li>
-					<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo '' . $file_size_ft . ''; ?></li>
+					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo '' . $file_size_ft . ''; ?></li>
 					<?php
 					// image dimension
@@ -622,9 +627,11 @@ if ($this->can_upload() === true)
 					<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo '' . $size[0] . ' × ' . $size[1] . 'px'; ?></li>
 					<?php
 					} ?>
-					<li><span>&nbsp;</span></li>
+
 					<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $small_name; ?></li>
 					<li><span class="info_title"><?php echo $this->_t('UploadDesc'); ?>:</span><?php echo $description; ?></li>
+					<li><span>&nbsp;</span></li>
+					<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo !$is_global? $this->link('/' . $this->page['supertag'], '', $this->page['title'], $this->page['supertag']) : $this->_t('UploadGlobal'); ?></li>
 				</ul>
 			</li>
 		</ul>

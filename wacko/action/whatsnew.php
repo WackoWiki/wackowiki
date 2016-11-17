@@ -179,11 +179,11 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				else
 				{
 					$path2		= '_file:';
-					$on_page	= '<span title="">&rarr; '.'global';
+					$on_page	= '<span title="">&rarr; ' . $this->_t('UploadGlobal');
 				}
 
 				echo '<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('NewFileAdded').
-					'" alt="[file]" class="btn-attachment"/> '.'' . $this->link($path2 . $page['title'], '', $page['title'], '', 0, 1, $_lang).
+					'" alt="[file]" class="btn-attachment"/> '.'' . $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1, $_lang).
 					' ' . $on_page . $separator . $author . '</span>' . $edit_note;
 			}
 			// deleted

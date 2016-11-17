@@ -732,6 +732,7 @@ $wacko_translation = [
 	'UploadFor'					=> 'Filupload',
 	'UploadButtonText'			=> 'Fortsæt',
 	'UploadGlobalText'			=> 'for alle',
+	'UploadGlobal'				=> 'global',
 	'UploadHereText'			=> 'brugere som må se denne side',
 	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'beskrivelse',

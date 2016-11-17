@@ -92,17 +92,17 @@ if ($this->can_upload(true) === true)
 			</div>
 		</td>
 	</tr>
-	<?php } ?>
-	<tr>
+	<?php
+	}
+	/* echo '<tr>
 		<td style="text-align: right">
-			<label for="upload_dest_file"><?php echo $this->_t('UploadDestName');?>:&nbsp;</label>
+			<label for="upload_dest_file">' . $this->_t('UploadDestName') . ':&nbsp;</label>
 		</td>
 		<td>
-		<?php // prefill ? echo @$_FILES['file']['name']; ?>
 			<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value=""/>
 		</td>
-	</tr>
-	<?php
+	</tr>'; */
+
 	if (!$hide_description)
 	{ ?>
 	<tr>

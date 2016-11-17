@@ -387,7 +387,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					$tpl->u_up_u_u2_pagination_text = $pagination['text'];
 
 					$uploads = $this->db->load_all(
-							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page " .
+							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page, c.title file_on_title " .
 							"FROM {$this->db->table_prefix}upload u " .
 								"LEFT JOIN {$this->db->table_prefix}page c ON (u.page_id = c.page_id) " .
 							"WHERE u.user_id = '" . $user['user_id'] . "' " .
@@ -426,17 +426,17 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 								$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
 								$on_page	= $this->_t('To') . ' ' .
-											  $this->link('/' . $upload['file_on_page'], '', $this->get_page_title('', $upload['page_id']), '', 0, 1, $_lang) .
+											  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1, $_lang) .
 											  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
 							}
 							else
 							{
-								$path2		= '_file:';
-								$on_page	= '<span title="">&rarr; global';
+								$path2		= '_file:/';
+								$on_page	= '<span title="">&rarr; ' . $this->_t('UploadGlobal');
 							}
 
 							$tpl->u_up_u_u2_li_t		= $upload['uploaded_dt'];
-							$tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $upload['file_name'], '', 0, 1, $_lang);
+							$tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
 							$tpl->u_up_u_u2_li_onpage	= $on_page;
 							$tpl->u_up_u_u2_li_descr	= $file_description;
 						}
@@ -573,12 +573,14 @@ else
 			{
 				$order = 'desc';
 			}
+
 			$tpl->l_s_arrow_a = $order;
 		}
 		else
 		{
 			$params['sort'] = $sort;
 		}
+
 		$params['order'] = $order;
 
 		$tpl->l_s_link = $this->href('', '', $params);
