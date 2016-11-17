@@ -147,7 +147,7 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Πάρε Ιδιοκτησία',
 	'FilesTip'					=> 'Διαχείριση συνημμένων αρχείων',
 	'FilesText'					=> 'Αρχεία',
-	'DeleteConfirm'				=> 'Επιθυμείτε την ΔΙΑΓΡΑΦΗ της σελίδας;'."\n".'Δεν υπάρχει αναίρεση για αυτή την ενέργεια!.',
+	'DeleteConfirm'				=> 'Επιθυμείτε την ΔΙΑΓΡΑΦΗ της σελίδας;' . "\n" . 'Δεν υπάρχει αναίρεση για αυτή την ενέργεια!.',
 	'DeleteTip'					=> 'Πατήστε για να διαγράψετε την σελίδα.',
 	'DeleteCommentTip'			=> 'Πατήστε εδώ για την διαγραφή του σχόλιου.',
 	'DeleteText'				=> 'διαγραφή',
@@ -179,8 +179,8 @@ $wacko_translation = [
 	'ACLGaveOwnership'			=> ' και δόθηκε ιδιοκτησία στον ',
 	'ACLNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Transferred ownership',
-	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership '."\n".'of following site to you %2',
-	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like '."\n".'(..write..here..).',
+	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership ' . "\n" . 'of following site to you %2',
+	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like ' . "\n" . '(..write..here..).',
 	'ACLRead'					=> 'Ανάγνωση:',
 	'ACLWrite'					=> 'Εγγραφή:',
 	'ACLComment'				=> 'Σχόλια:',
@@ -547,11 +547,11 @@ $wacko_translation = [
 	'YouWantChangePassword'		=> 'Αλλαγή συνθηματικού',
 	'PasswordChanged'			=> 'Το συνθηματικά άλλαξε',
 	'EmailWelcome'				=> 'Εγγραφήκατε στο ',
-	'EmailRegistered'			=> 'Εγγραφήκατε επιτυχώς στο %1.'."\n".'Το όνομα σύνδεσή σας είναι: %2'."\n\n".'Εάν θέλετε να λαμβάνετε ειδοποιήσεις, χρειάζεται να πιστοποιήσετε το ηλεκτρονικό σας  ταχυδρομείο. Παρακαλώ μεταβείτε '."\n".'%3'."\n".'σε αυτό το σύνδεσμο για να το κάνετε.',
+	'EmailRegistered'			=> 'Εγγραφήκατε επιτυχώς στο %1.' . "\n" . 'Το όνομα σύνδεσή σας είναι: %2'."\n\n" . 'Εάν θέλετε να λαμβάνετε ειδοποιήσεις, χρειάζεται να πιστοποιήσετε το ηλεκτρονικό σας  ταχυδρομείο. Παρακαλώ μεταβείτε ' . "\n" . '%3' . "\n" . 'σε αυτό το σύνδεσμο για να το κάνετε.',
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'Αν δεν ζητήσατε εγγραφή, παρακαλώ αγνοήστε το παρόν μήνυμα.',
 	'EmailDoNotReply'			=> 'ΜΗΝ ΑΠΑΝΤΗΣΕΤΕ ΣΕ ΑΥΤΟ ΤΟ ΜΗΝΥΜΑ',
-	'EmailVerify'				=> 'Κάποιος (πιθανόν εσείς) έχει ενεργοποιήσει την ειδοποίηση της ηλεκτρονικής αλληλογραφίας στο %1.'."\n".'Το όνομα χρήστη: %2'."\n\n".'Αν θέλετε να αποδέχεστε ειδοποιήσεις, πρέπει να αποδεχθείτε το email. Παρακαλώ ακολουθήστε '."\n".'%3'."\n".'τον σύνδεσμο για να το κάνετε αυτό.'."\n\n".'',
+	'EmailVerify'				=> 'Κάποιος (πιθανόν εσείς) έχει ενεργοποιήσει την ειδοποίηση της ηλεκτρονικής αλληλογραφίας στο %1.' . "\n" . 'Το όνομα χρήστη: %2'."\n\n" . 'Αν θέλετε να αποδέχεστε ειδοποιήσεις, πρέπει να αποδεχθείτε το email. Παρακαλώ ακολουθήστε ' . "\n" . '%3' . "\n" . 'τον σύνδεσμο για να το κάνετε αυτό.'."\n\n" . '',
 	'EmailConfirm'				=> 'Παρακαλώ επιβεβαιώστε το ηλεκτρονικό σας ταχυδρομείο',
 	'EmailConfirmed'			=> 'Το ηλεκτρονικό σας ταχυδρομείο επιβεβαιώθηκε.',
 	'EmailNotConfirmed'			=> 'Το ηλεκτρονικό σας ταχυδρομείο ΔΕΝ επιβεβαιώθηκε. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
@@ -561,13 +561,13 @@ $wacko_translation = [
 									'until your email-address was confirmed, by following the link in the email sent to you. '.
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotPasswordHint'		=> 'Πληκτρολόγησε το όνομα χρήσης σου και την ηλεκτρονική σου διεύθυνση,'."\n".'και μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ',
+	'ForgotPasswordHint'		=> 'Πληκτρολόγησε το όνομα χρήσης σου και την ηλεκτρονική σου διεύθυνση,' . "\n" . 'και μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ',
 	'ForgotPassword'			=> 'Ξέχασες το συνθηματικό σου?',
 	'SendButton'				=> 'Αποστολή',
 	'UserNotFound'				=> 'Δεν υπάρχει χρήστης με αυτό το όνομα ή με αυτήν την ηλεκτρονική διεύθυνση.',
 	'NotConfirmedEmail'			=> 'Your e-mail address is not confirmed.<br />Mail can\'t be send to non-confirmed address.',
 	'EmailForgotSubject'		=> 'Password renewal for ',
-	'EmailForgotMessage'		=> 'Κάποιος (ακόμα και εσείς) ξέχασε το συνθηματικό για το %1.'."\n".'Όνομα σύνδεσης: %2'."\n\n".'Πατήστε επάνω στο παρακάτω url link ή αντιγράψτε στο στην γραμμή διευθύνσεων του περιηγητή διαδικτύου σας για να αλλάξετε το συνθηματικό σας.'."\n".'%3'."\n\n".'',
+	'EmailForgotMessage'		=> 'Κάποιος (ακόμα και εσείς) ξέχασε το συνθηματικό για το %1.' . "\n" . 'Όνομα σύνδεσης: %2'."\n\n" . 'Πατήστε επάνω στο παρακάτω url link ή αντιγράψτε στο στην γραμμή διευθύνσεων του περιηγητή διαδικτύου σας για να αλλάξετε το συνθηματικό σας.' . "\n" . '%3'."\n\n" . '',
 	'CodeWasSent'				=> 'Αποστάλθηκαν οδηγίες για την ανάκτηση του συνθηματικού σας μέσω ηλεκτρονικού ταχυδρομείου.',
 	'WrongCode'					=> 'Λάθος Κώδικας',
 	'ChangePasswordForUser'		=> '%1\'s τροποποίηση συνθηματικού',
@@ -645,10 +645,10 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'This message has been sent to you by the user %1 from %2. To answer '.
 									'this email, click on the following link (do not use the Reply button / Reply '.
-									'in mailer):'."\n".'%3'."\n\n".''.
-									'----------------------------------------------------------------------'."\n".''.
-									'%5'."\n".''.
-									'----------------------------------------------------------------------'."\n\n".''.
+									'in mailer):' . "\n" . '%3'."\n\n" . ''.
+									'----------------------------------------------------------------------' . "\n" . ''.
+									'%5' . "\n" . ''.
+									'----------------------------------------------------------------------'."\n\n" . ''.
 									'Note: If this message is spam, contains abusive or otherwise '.
 									'violates the rules of the site %2, please send it (using the button Forward /'.
 									'Forward your mail program) to address %4.',
@@ -733,6 +733,7 @@ $wacko_translation = [
 	'UploadButtonText'			=> 'Προχώρησε',
 	'UploadGlobalText'			=> 'για δημόσια προβολή',
 	'UploadHereText'			=> 'μόνο επιτρεπόμενοι χρήστες να μπορούν να δουν την συγκεκριμένη σελίδα',
+	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'περιγραφή',
 	'UploadForbidden'			=> 'Δεν επιτρέπεται να ανεβάσετε εδώ αρχεία.',
 	'UploadNoFile'				=> 'Για κάποιο λόγο, δεν υπάρχει κανένα αρχείο στην φόρμα.',
@@ -746,7 +747,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Τα αρχεία που είναι προσβάσιμα από αυτή την σελίδα',
 	'UploadTitleGlobal'			=> 'Files accessible from anywhere',
 	'UploadEdit'				=> 'edit',
-	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditPropertiesTip'	=> 'Edit the metadata of this file',
 	'UploadEditedMeta'			=> 'Updated metadata of this file',
 	'UploadEditDenied'			=> 'You are not allowed to edit this file',
 	'UploadRemove'				=> 'αφαίρεση',
@@ -764,6 +765,7 @@ $wacko_translation = [
 	'FileSize'					=> 'Size',
 	'FileDimension'				=> 'Διαστάσεις',
 	'FileName'					=> 'Name',
+	'FileAttachedTo'			=> 'Attached to',
 	'FileSyntax'				=> 'Syntax',
 	'FileUsage'					=> 'Συνδέσεις αρχείου',
 	'FileUsageText'				=> 'Τα παρακάτω λήμματα συνδέουν σε αυτό το αρχείο:',
@@ -1212,8 +1214,8 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
+	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

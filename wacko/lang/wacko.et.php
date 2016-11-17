@@ -147,7 +147,7 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Omasta',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Files',
-	'DeleteConfirm'				=> 'Kas tõesti soovid selle lehe KUSTUTADA?'."\n".'Taastamise võimalust enam pole!.',
+	'DeleteConfirm'				=> 'Kas tõesti soovid selle lehe KUSTUTADA?' . "\n" . 'Taastamise võimalust enam pole!.',
 	'DeleteTip'					=> 'Lehe kustutamiseks vajuta siia.',
 	'DeleteCommentTip'			=> 'Click here to delete comment.',
 	'DeleteText'				=> 'Kustuta',
@@ -179,8 +179,8 @@ $wacko_translation = [
 	'ACLGaveOwnership'			=> ' ja anna oma õigused ',
 	'ACLNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Transferred ownership',
-	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership '."\n".'of following site to you %2',
-	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like '."\n".'(..write..here..).',
+	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership ' . "\n" . 'of following site to you %2',
+	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like ' . "\n" . '(..write..here..).',
 	'ACLRead'					=> 'KÕL lehe lugemiseks:',
 	'ACLWrite'					=> 'KÕL lehe kirjutamiseks:',
 	'ACLComment'				=> 'KÕL lehe kommenteerimiseks:',
@@ -547,11 +547,11 @@ $wacko_translation = [
 	'YouWantChangePassword'		=> 'Muuda parool',
 	'PasswordChanged'			=> 'Parool muudetud',
 	'EmailWelcome'				=> 'Sa oled registreerunud ',
-	'EmailRegistered'			=> 'sa oled edukalt registreerunud %1.'."\n".'Sinu kasutajanimi on: %2'."\n\n".'Kui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi '."\n".'%3'."\n".'seda linki, et seda teha.',
+	'EmailRegistered'			=> 'sa oled edukalt registreerunud %1.' . "\n" . 'Sinu kasutajanimi on: %2'."\n\n" . 'Kui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi ' . "\n" . '%3' . "\n" . 'seda linki, et seda teha.',
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'Kui sa pole taodelnud registreerimist, ignoreeri seda teadet ja midagi ei juhtu.',
 	'EmailDoNotReply'			=> 'äRA VASTA SELLELE TEATELE',
-	'EmailVerify'				=> 'Keegi (võib-olla sa ise) on edastanud su e-posti aadressi, et saada sellele teateid %1.'."\n".'Sinu kasutajanimi: %2'."\n\n".'Kui sa tahad saada teateid, pead sa lubama selleks oma e-posti aadressi. Vaata '."\n".'%3'."\n".'seda, et seda teha.'."\n\n".'',
+	'EmailVerify'				=> 'Keegi (võib-olla sa ise) on edastanud su e-posti aadressi, et saada sellele teateid %1.' . "\n" . 'Sinu kasutajanimi: %2'."\n\n" . 'Kui sa tahad saada teateid, pead sa lubama selleks oma e-posti aadressi. Vaata ' . "\n" . '%3' . "\n" . 'seda, et seda teha.'."\n\n" . '',
 	'EmailConfirm'				=> 'Palun kontrolli oma e-posti aadressi',
 	'EmailConfirmed'			=> 'E-posti aadressi õigsus on kinnitust leidnud.',
 	'EmailNotConfirmed'			=> 'E-posti aadress ei leidnud kinnitust. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
@@ -561,13 +561,13 @@ $wacko_translation = [
 									'until your email-address was confirmed, by following the link in the email sent to you. '.
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotPasswordHint'		=> 'Sisetage oma kasutajanimi ja e-posti aadress,'."\n".' siis saadetakse sulle e-postiga instruktsioonid.',
+	'ForgotPasswordHint'		=> 'Sisetage oma kasutajanimi ja e-posti aadress,' . "\n" . ' siis saadetakse sulle e-postiga instruktsioonid.',
 	'ForgotPassword'			=> 'Unustasid parooli?',
 	'SendButton'				=> 'Saada',
 	'UserNotFound'				=> 'Sellist kasutajanimi või e-postii aadressi ei leitud.',
 	'NotConfirmedEmail'			=> 'Sinu e-posti aadress ei leidnud kinnitust..<br />Kirja ei saa saata kinnitust leidmata aadressile.',
 	'EmailForgotSubject'		=> 'Parooli uuendamine ',
-	'EmailForgotMessage'		=> 'Keegi (võib-olla sa ise) on unustanud su parooli %1.'."\n".'Kasutajanimi: %2'."\n\n".'Vajuta lingil, või kopeeri see brauseri aadressi väljale - et muuta oma parool.'."\n".'%3'."\n\n".'',
+	'EmailForgotMessage'		=> 'Keegi (võib-olla sa ise) on unustanud su parooli %1.' . "\n" . 'Kasutajanimi: %2'."\n\n" . 'Vajuta lingil, või kopeeri see brauseri aadressi väljale - et muuta oma parool.' . "\n" . '%3'."\n\n" . '',
 	'CodeWasSent'				=> 'Parooli muutmise instruktsioonid saadeti sulle e-postile.',
 	'WrongCode'					=> 'Vale kood',
 	'ChangePasswordForUser'		=> '%1\'s parooli muutmine',
@@ -645,10 +645,10 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'This message has been sent to you by the user %1 from %2. To answer '.
 									'this email, click on the following link (do not use the Reply button / Reply '.
-									'in mailer):'."\n".'%3'."\n\n".''.
-									'----------------------------------------------------------------------'."\n".''.
-									'%5'."\n".''.
-									'----------------------------------------------------------------------'."\n\n".''.
+									'in mailer):' . "\n" . '%3'."\n\n" . ''.
+									'----------------------------------------------------------------------' . "\n" . ''.
+									'%5' . "\n" . ''.
+									'----------------------------------------------------------------------'."\n\n" . ''.
 									'Note: If this message is spam, contains abusive or otherwise '.
 									'violates the rules of the site %2, please send it (using the button Forward /'.
 									'Forward your mail program) to address %4.',
@@ -733,6 +733,7 @@ $wacko_translation = [
 	'UploadButtonText'			=> 'Nõus',
 	'UploadGlobalText'			=> 'üldise juurdepääsuga',
 	'UploadHereText'			=> 'ainult kasutajad tohivad seda lehte näha',
+	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'kirjeldus',
 	'UploadForbidden'			=> 'Sul ei ole luba siia faili laadida.',
 	'UploadNoFile'				=> 'Mingil põhjusel ei olnud vormil faili.',
@@ -746,7 +747,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Failile on ligipääs siit lehelt',
 	'UploadTitleGlobal'			=> 'Failile on ligipääs ükskõik kust mujalt',
 	'UploadEdit'				=> 'edit',
-	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditPropertiesTip'	=> 'Edit the metadata of this file',
 	'UploadEditedMeta'			=> 'Updated metadata of this file',
 	'UploadEditDenied'			=> 'You are not allowed to edit this file',
 	'UploadRemove'				=> 'eemalda',
@@ -764,6 +765,7 @@ $wacko_translation = [
 	'FileSize'					=> 'Size',
 	'FileDimension'				=> 'Mõõtmed',
 	'FileName'					=> 'Name',
+	'FileAttachedTo'			=> 'Attached to',
 	'FileSyntax'				=> 'Syntax',
 	'FileUsage'					=> 'Failikasutus',
 	'FileUsageText'				=> 'The following pages link to this file:',
@@ -1212,8 +1214,8 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
+	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

@@ -5,43 +5,54 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// TODO:
+// - mode to tag files -> faceted search
+// - show for local files relative and absolute syntax (?)
+
+$get_file = function ($file_id)
+{
+	$file = $this->db->load_single(
+	"SELECT f.upload_id, f.page_id, f.user_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, f.picture_w, f.picture_h, u.user_name, p.supertag, p.title " .
+	"FROM " . $this->db->table_prefix . "upload f " .
+		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+	"WHERE f.upload_id ='" . (int) $file_id . "' " .
+	"LIMIT 1", true);
+
+	return $file;
+};
+
 $is_global		= '';
 $is_image		= '';
 $message		= '';
 $error			= '';
 
-$this->ensure_page(true); // TODO upload for forums?
+$this->ensure_page(true); // TODO: upload for forums?
 
-echo '<h3>' . $this->_t('UploadFiles') . "</h3>\n<br />\n";
+# echo '<h3>' . $this->_t('UploadFiles') . "</h3>\n<br />\n";
 
 // check who u are, can u upload?
 if ($this->can_upload() === true)
 {
-	// SHOW FORMS
+	// 1. SHOW FORMS
 	if (isset($_GET['remove'])) // show the form
 	{
-		if ($_GET['remove'] == 'global')
-		{
-			$page_id = 0;
-		}
-		else
-		{
-			$page_id = $this->page['page_id'];
-		}
+		// 1.a REMOVE FILE CONFIRMATION
+		echo '<h3>' . $this->_t('UploadFiles') . ' &raquo; ' . $this->_t('UploadRemoveFile') . '</h3>';
+		echo '<ul class="menu">
+				<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UserSettingsGeneral') . '</a></li>
+				<li><a href="' . $this->href('upload', '', ['show', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('UploadViewProperties') . '</a></li>
+				<li><a href="' . $this->href('upload', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('UploadEditProperties') . '</a></li>
 
-		$file = $this->db->load_single(
-			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag " .
-			"FROM " . $this->db->table_prefix . "upload f " .
-				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-				"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-			"WHERE f.page_id = '" . $page_id . "' " .
-				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' " .
-			"LIMIT 1");
+				<li class="active">' . $this->_t('UploadRemoveFile') . "</li>
+			</ul><br /><br />\n";
+
+		$file = $get_file((int) $_GET['file_id']);
 
 		if (count($file) > 0)
 		{
 			if ($this->is_admin()
-				|| ($page_id
+				|| ($file['page_id']
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
@@ -54,21 +65,21 @@ if ($this->can_upload() === true)
 				}
 				else
 				{
-					$path = 'file:';
+					$path = 'file:/';
 				}
 
 				echo $this->form_open('remove_file', ['page_method' => 'upload']);
 				// !!!!! place here a reference to delete files
 ?>
 	<ul class="upload">
-		<li><?php echo $this->link($path . $file['file_name']); ?>
+		<li><h4><?php echo $this->link($path . $file['file_name']); ?></h4>
 			<br /><br />
 			<table>
-				<tr class="lined">
+				<tr>
 					<th class="form_left" scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
 					<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
 				</tr>
-				<tr class="">
+				<tr class="lined">
 					<th class="form_left" scope="row"><?php echo $this->_t('FileAdded'); ?>:</th>
 					<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
 				</tr>
@@ -93,6 +104,11 @@ if ($this->can_upload() === true)
 				<tr class="lined">
 					<th class="form_left" scope="row"><?php echo $this->_t('UploadDesc'); ?>:</th>
 					<td><?php echo $file['file_description']; ?></td>
+				</tr>
+				<tr class="">
+					<th class="form_left" scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
+					<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : ''; ?></td>
+				</tr>
 				<tr class="lined">
 					<th class="form_left" scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
 					<td><?php echo $this->action('fileusage', ['file_id' => $file['upload_id'], 'nomark' => 1]); ?></td>
@@ -126,28 +142,12 @@ if ($this->can_upload() === true)
 	}
 	else if (isset($_GET['edit']) || isset($_GET['show'])) // show the form
 	{
-		if (@$_GET['edit'] == 'global' || @$_GET['show'] == 'global')
-		{
-			$page_id = 0;
-		}
-		else
-		{
-			$page_id = $this->page['page_id'];
-		}
-
-		$file = $this->db->load_single(
-			"SELECT f.page_id, f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt, picture_w, picture_h, p.supertag " .
-			"FROM " . $this->db->table_prefix . "upload f " .
-				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-				"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-			"WHERE f.page_id = '" . $page_id . "' " .
-				"AND f.upload_id ='" . (int) $_GET['file_id'] . "' " .
-			"LIMIT 1");
+		$file = $get_file((int) $_GET['file_id']);
 
 		if (count($file) > 0)
 		{
 			if (   $this->is_admin()
-				|| ($page_id
+				|| ($file['page_id']
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
@@ -159,7 +159,7 @@ if ($this->can_upload() === true)
 				}
 				else
 				{
-					$path = 'file:';
+					$path = 'file:/';
 				}
 
 				echo $this->form_open('upload_file', ['page_method' => 'upload']);
@@ -167,14 +167,24 @@ if ($this->can_upload() === true)
 
 				if (isset($_GET['show']))
 				{
-					?>
-	<br />
+					// 1.b SHOW FILE PROPERTIES
+
+					echo '<h3>' . $this->_t('UploadFiles') . ' &raquo; ' . $this->_t('UploadViewProperties') . '</h3>';
+					echo '<ul class="menu">
+							<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UserSettingsGeneral') . '</a></li>
+							<li class="active">' . $this->_t('UploadViewProperties') . '</li>
+							<li><a href="' . $this->href('upload', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('UploadEditProperties') . '</a></li>
+
+							<li><a href="' . $this->href('upload', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('UploadRemoveFile') . "</a></li>
+						</ul><br /><br />\n";
+?>
 	<ul class="upload">
 		<li><?php echo $this->link($path . $file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
+				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></li>
 <?php
 			// image dimension
@@ -183,9 +193,10 @@ if ($this->can_upload() === true)
 				<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo '' . $file['picture_w'] . ' × ' . $file['picture_h'] . 'px'; ?></li>
 <?php
 			} ?>
-				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $this->shorten_string($file['file_name']); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadDesc'); ?>:</span><?php echo $file['file_description']; ?></li>
+				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : ''; ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -195,23 +206,34 @@ if ($this->can_upload() === true)
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
 	<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('EditStoreButton'); ?>" />
 	&nbsp;
+
 	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
-	<br />
+<?php	echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";
+?>
+ 	<br />
 	<br />
 <?php
 				}
 				else if (isset($_GET['edit']))
 				{
-					$message = '<strong>' . $this->_t('UploadEditConfirm') . '</strong>';
-					$this->show_message($message, 'info');
+					// 1.c EDIT FILE PROPERTIES
+					echo '<h3>' . $this->_t('UploadFiles') . ' &raquo; ' . $this->_t('UploadEditProperties') . '</h3>';
+					echo '<ul class="menu">
+							<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UserSettingsGeneral') . '</a></li>
+							<li><a href="' . $this->href('upload', '', ['show', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('UploadViewProperties') . '</a></li>
+							<li class="active">' . $this->_t('UploadEditProperties') . '</li>
+
+							<li><a href="' . $this->href('upload', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('UploadRemoveFile') . "</a></li>
+						</ul><br /><br />\n";
+
 ?>
-	<br />
 	<ul class="upload">
 		<li><?php echo $this->link($path . $file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadBy'); ?>:</span><?php echo $this->user_link($file['user_name'], '', true, false); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></li>
+				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></li>
 <?php
 			// image dimension
@@ -220,9 +242,10 @@ if ($this->can_upload() === true)
 				<li><span class="info_title"><?php echo $this->_t('FileDimension'); ?>:</span><?php echo '' . $file['picture_w'] . ' × ' . $file['picture_h'] . 'px'; ?></li>
 <?php
 			} ?>
-				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
+				<li><span class="info_title"><?php echo $this->_t('FileName'); ?>:</span><?php echo $this->shorten_string($file['file_name']); ?></li>
 				<li><span class="info_title"><?php echo $this->_t('UploadDesc'); ?>:</span><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo $file['file_description']; ?>"/></li>
+				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : ''; ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -255,35 +278,21 @@ if ($this->can_upload() === true)
 	}
 	else
 	{
-		// PROCESS POSTS
-		if (isset($_POST['remove'])) // delete
+		// 2 PROCESS POSTS
+		if (isset($_POST['remove']))
 		{
-			// 1. where, existence
-			if ($_POST['remove'] == 'global')
-			{
-				$page_id = 0;
-			}
-			else
-			{
-				$page_id = $this->page['page_id'];
-			}
+			// 2.a DELETE FILE
 
-			$file = $this->db->load_single(
-				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description " .
-				"FROM " . $this->db->table_prefix . "upload f " .
-					"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-				"WHERE f.page_id = '" . $page_id . "' " .
-					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' " .
-				"LIMIT 1");
+			$file = $get_file((int) $_POST['file_id']);
 
 			if (count($file) > 0)
 			{
 				if ($this->is_admin()
-					|| ($page_id
+					|| ($file['page_id']
 						&& ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($file['user_id'] == $this->get_user_id()))
 				{
-					// 2. remove from DB
+					// remove from DB
 					$this->db->sql_query(
 						"DELETE FROM " . $this->db->table_prefix . "upload " .
 						"WHERE upload_id = '" . $file['upload_id'] . "'" );
@@ -297,10 +306,10 @@ if ($this->can_upload() === true)
 
 					$message .= $this->_t('UploadRemovedFromDB') . '<br />';
 
-					// 3. remove from FS
-					$real_filename = ($page_id
-						? (UPLOAD_PER_PAGE_DIR . '/@' . $page_id . '@')
-						: (UPLOAD_GLOBAL_DIR . '/')).
+					// remove from FS
+					$real_filename = ($file['page_id']
+						? UPLOAD_PER_PAGE_DIR . '/@' . $file['page_id'] . '@'
+						: UPLOAD_GLOBAL_DIR . '/') .
 						$file['file_name'];
 
 					if (@unlink($real_filename))
@@ -330,30 +339,16 @@ if ($this->can_upload() === true)
 				$this->set_message($this->_t('UploadRemoveNotFound'));
 			}
 		}
-		else if (isset($_POST['edit'])) // edit
+		else if (isset($_POST['edit']))
 		{
-			// 1. where, existence
-			if ($_POST['edit'] == 'global')
-			{
-				$page_id = 0;
-			}
-			else
-			{
-				$page_id = $this->page['page_id'];
-			}
+			// 2.b UPDATE CHANGED FILE PROPERTIES
 
-			$file = $this->db->load_single(
-				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description " .
-				"FROM " . $this->db->table_prefix . "upload f " .
-					"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-				"WHERE f.page_id = '" . $page_id . "' " .
-					"AND f.upload_id ='" . (int) $_POST['file_id'] . "' " .
-				"LIMIT 1");
+			$file = $get_file((int) $_POST['file_id']);
 
 			if (count($file) > 0)
 			{
 				if ($this->is_admin()
-					|| ($page_id
+					|| ($file['page_id']
 						&& ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($file['user_id'] == $this->get_user_id()))
 				{
@@ -365,7 +360,7 @@ if ($this->can_upload() === true)
 					$description = $this->format($description, 'safehtml');
 					$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
 
-					// 2. update file metadata
+					// update file metadata
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "upload SET " .
 							"upload_lang		= " . $this->db->q($this->page['page_lang']) . ", " .
@@ -377,11 +372,12 @@ if ($this->can_upload() === true)
 
 					if ($message)
 					{
-						$this->set_message($message);
+						$this->set_message($message, 'success');
 					}
 
 					// log event
 					$this->log(1, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
+					$this->http->redirect($this->href('upload', '', ['show', 'file_id=' . (int) $file['upload_id']]));
 				}
 				else
 				{
@@ -393,8 +389,10 @@ if ($this->can_upload() === true)
 				$this->set_message($this->_t('UploadRemoveNotFound'));
 			}
 		}
-		else if (isset($_POST['upload'])) // process upload
+		else if (isset($_POST['upload']))
 		{
+			// 2.c PROCESS FILE UPLOAD
+
 			$user		= $this->get_user();
 
 			// TODO: Set user used_quota in user table (?)
@@ -580,6 +578,12 @@ if ($this->can_upload() === true)
 									"WHERE user_id = '" . $user['user_id'] . "' " .
 									"LIMIT 1");
 
+								$file_id = $this->db->load_single(
+									"SELECT upload_id " .
+									"FROM " . $this->db->table_prefix . "upload " .
+									"WHERE file_name = " . $this->db->q($small_name) . " " .
+									"LIMIT 1");
+
 								// 4. output link to file
 								// !!!!! write after providing filelink syntax
 								$this->set_message($this->_t('UploadDone'), 'success');
@@ -593,14 +597,23 @@ if ($this->can_upload() === true)
 								{
 									$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $small_name, $file_size_ft));
 								}
-								?>
-		<br />
+
+		echo '<h3>' . $this->_t('UploadFiles') . ' &raquo; ' . $this->_t('UserSettingsGeneral') . '</h3>';
+		echo '<ul class="menu">
+			<li class="active">' . $this->_t('UserSettingsGeneral') . '</li>
+			<li><a href="' . $this->href('upload', '', ['show', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadViewProperties') . '</a></li>
+			<li><a href="' . $this->href('upload', '', ['edit', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadEditProperties') . '</a></li>
+
+			<li><a href="' . $this->href('upload', '', ['remove', 'file_id=' . (int) $file_id['upload_id']]) . '">' . $this->_t('UploadRemoveFile') . "</a></li>
+		</ul><br /><br />\n";
+		?>
 		<ul class="upload">
 			<li><?php echo $this->link($path . $small_name); ?>
 				<ul>
 					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->_t('FileSyntax'); ?>:</span><?php echo '<code>' . $syntax_file . '</code>'; ?></li>
 					<li><span class="info_title"><?php echo $this->_t('FileAdded'); ?>:</span><?php echo $this->get_time_formatted($uploaded_dt); ?></li>
+					<li><span class="info_title"><?php echo $this->_t('FileAttachedTo'); ?>:</span><?php echo '' . $file_size_ft . ''; ?></li>
 					<li><span class="info_title"><?php echo $this->_t('FileSize'); ?>:</span><?php echo '' . $file_size_ft . ''; ?></li>
 					<?php
 					// image dimension
@@ -669,6 +682,9 @@ if ($this->can_upload() === true)
 		{
 			$this->set_message($error, 'error');
 		}
+
+		echo '<h3>' . $this->_t('UploadFiles') . '</h3>';
+		echo "<br /><br />\n";
 
 		echo $this->action('upload', []) . '<br />';
 	}

@@ -39,7 +39,7 @@
 					<li>[ ' link ' ]</li>
 				=]
 				[''// Show Help link
-					//  echo "<li>".$this->compose_link_to_page($this->_t('HelpPage'), "", $this->_t('Help'), 0)."</li>\n"; '']
+					//  echo "<li>" . $this->compose_link_to_page($this->_t('HelpPage'), "", $this->_t('Help'), 0) . "</li>\n"; '']
 				</ul>
 			=]
 	</div>
@@ -124,7 +124,7 @@
 [ === #------------------------------ === ]
 <nav class="breadcrumb">
 	['' breadcrumbs '']
-	['' // echo '<br />'.$this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8); '']
+	['' // echo '<br />' . $this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8); '']
 </nav>
 </header>
 [ === #------------------------------ === ]

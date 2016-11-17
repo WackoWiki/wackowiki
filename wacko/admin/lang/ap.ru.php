@@ -273,6 +273,9 @@ $ap_translation = [
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Сессии прочищены.',
 
+	// Email settings
+	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',
+
 	// log
 	'LogLevel1'					=> 'Критический',
 	'LogLevel2'					=> 'Наивысший',
@@ -307,9 +310,9 @@ $ap_translation = [
 									'<span class="underline">Внимание</span>: во избежание потери информации из базы данных WackoWiki, при указании корня кластера, таблицы из данной резервной копии не будут реструктуризированы, '.
 									'аналогично, при резервировании только структуры таблицы без сохранения данных. '.
 									'Для полной конвертации таблиц в формат резервной копии необходимо произвести <em>полное резервирование всей базы данных (структура и содержимое) без указания кластера</em>.',
-	'BackupCompleted'			=> 'Резервное копирование и архивация завершены.<br />'.
-									'Пакет резервной копии сохранен в папке с названием "(дата)ГГГГММДД_(время)ЧЧММСС" в папке files/backup.<br />'.
-									'Для его получения используйте FTP (не забудьте при копировании сохранять структуру каталогов и имена файлов и директорий).<br />'.
+	'BackupCompleted'			=> 'Резервное копирование и архивация завершены.<br />' . 
+									'Пакет резервной копии сохранен в папке с названием "(дата)ГГГГММДД_(время)ЧЧММСС" в папке files/backup.<br />' . 
+									'Для его получения используйте FTP (не забудьте при копировании сохранять структуру каталогов и имена файлов и директорий).<br />' . 
 									'Восстановить резервную копию или удалить пакет можно в разделе <a href="?mode=db_restore">Восстановление</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 
@@ -324,9 +327,9 @@ $ap_translation = [
 	'RestoreOptionsInfo'		=> '* Перед восстановлением резервной копии <span class="underline">кластера</span> WackoWiki, '.
 									'целевые таблицы не уничтожаются (дабы предотвратить потерю информации из незарезервированных кластеров). '.
 									'Таким образом, в процессе восстановления будут встречаться дублированные записи. '.
-									'В обычном режиме все они будут заменены записями из резервной копии (с помощью SQL-инструкции <code>REPLACE</code>), <br />'.
-									'но если этот флажок установлен, все дубликаты будут пропущены (будут сохранены текущие значения записей), <br />'.
-									'а добавлены в таблицу только записи с новыми ключами (SQL-инструкцией <code>INSERT IGNORE</code>).<br />'.
+									'В обычном режиме все они будут заменены записями из резервной копии (с помощью SQL-инструкции <code>REPLACE</code>), <br />' . 
+									'но если этот флажок установлен, все дубликаты будут пропущены (будут сохранены текущие значения записей), <br />' . 
+									'а добавлены в таблицу только записи с новыми ключами (SQL-инструкцией <code>INSERT IGNORE</code>).<br />' . 
 									'<span class="underline">Заметьте</span>: при восстановлении полной резервной копии сайта эта опция не имеет значения.<br /> '.
 									'<br /> '.
 									'** Если резервная копия содержит пользовательские файлы (глобальные и постраничные, файлы кэша и пр.), то в обычном режиме при восстановлении они заменят одноименные файлы, размещенные в тех же каталогах. '.

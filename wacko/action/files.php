@@ -176,7 +176,6 @@ if ($can_view)
 
 			$file_id	= $file['upload_id'];
 			$file_name	= $file['file_name'];
-			// TODO: move to function shorten_string($maxlen)
 			$shown_name = $this->shorten_string($file_name, $file_name_maxlen);
 			$text		= ($picture == false) ? $shown_name : '';
 			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
