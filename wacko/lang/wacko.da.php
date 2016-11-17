@@ -147,7 +147,7 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Overtag ejerskabet',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Files',
-	'DeleteConfirm'				=> 'Er du sikker på, at du vil SLETTE denne side?'."\n".'Den vil ikke kunne genskabes!.',
+	'DeleteConfirm'				=> 'Er du sikker på, at du vil SLETTE denne side?' . "\n" . 'Den vil ikke kunne genskabes!.',
 	'DeleteTip'					=> 'Klik her for at slette siden.',
 	'DeleteCommentTip'			=> 'Klik her for at slette kommentar.',
 	'DeleteText'				=> 'Slet',
@@ -179,8 +179,8 @@ $wacko_translation = [
 	'ACLGaveOwnership'			=> ' og har overgivet ejeskab til ',
 	'ACLNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Transferred ownership',
-	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership '."\n".'of following site to you %2',
-	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like '."\n".'(..write..here..).',
+	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership ' . "\n" . 'of following site to you %2',
+	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like ' . "\n" . '(..write..here..).',
 	'ACLRead'					=> 'Se tilladelser:',
 	'ACLWrite'					=> 'Angiv tilladelser:',
 	'ACLComment'				=> 'Kommentartilladelser:',
@@ -547,11 +547,11 @@ $wacko_translation = [
 	'YouWantChangePassword'		=> 'Skift password',
 	'PasswordChanged'			=> 'Password ændret',
 	'EmailWelcome'				=> 'Du blev registreret den ',
-	'EmailRegistered'			=> 'Du er nu registreret i %1.'."\n".'Dit brugernavn: %2'."\n\n".'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg '."\n".'%3'."\n".'dette link for at godkende din mail.',
+	'EmailRegistered'			=> 'Du er nu registreret i %1.' . "\n" . 'Dit brugernavn: %2'."\n\n" . 'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg ' . "\n" . '%3' . "\n" . 'dette link for at godkende din mail.',
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'Hvis du ikke har prøvet at registrere dig skal du bare se bort fra denne meddelelse og ingenting vil ske.',
 	'EmailDoNotReply'			=> 'SVAR IKKE PÅ DENNE MEDDELELSE',
-	'EmailVerify'				=> 'Du er nu registreret i %1.'."\n".'Dit brugernavn: %2'."\n\n".'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg '."\n".'%3'."\n".'dette link for at godkende din mail.'."\n\n".'',
+	'EmailVerify'				=> 'Du er nu registreret i %1.' . "\n" . 'Dit brugernavn: %2'."\n\n" . 'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg ' . "\n" . '%3' . "\n" . 'dette link for at godkende din mail.'."\n\n" . '',
 	'EmailConfirm'				=> 'Bekræft din mail',
 	'EmailConfirmed'			=> 'Din mail er bekræftet.',
 	'EmailNotConfirmed'			=> 'Kan ikke bekræfte din mail. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
@@ -561,13 +561,13 @@ $wacko_translation = [
 									'until your email-address was confirmed, by following the link in the email sent to you. '.
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotPasswordHint'		=> 'Oplys dit brugernavn og din emailadresse,'."\n".'så sender vi en mail med instruktioner.',
+	'ForgotPasswordHint'		=> 'Oplys dit brugernavn og din emailadresse,' . "\n" . 'så sender vi en mail med instruktioner.',
 	'ForgotPassword'			=> 'Glemt password?',
 	'SendButton'				=> 'Send',
 	'UserNotFound'				=> 'Ingen bruger med disse oplysninger.',
 	'NotConfirmedEmail'			=> 'Din mailadresse er ikke bekræftet.<br />Vi kan derfor ikke sende dig en mail.',
 	'EmailForgotSubject'		=> 'Password opdatering for ',
-	'EmailForgotMessage'		=> 'Dette er en reminder om password for %1.'."\n".'Dit brugerlogin: %2'."\n\n".'Følg dette link: '."\n".'%3'."\n\n".'',
+	'EmailForgotMessage'		=> 'Dette er en reminder om password for %1.' . "\n" . 'Dit brugerlogin: %2'."\n\n" . 'Følg dette link: ' . "\n" . '%3'."\n\n" . '',
 	'CodeWasSent'				=> 'Password instruktioner sendt til din mail.',
 	'WrongCode'					=> 'Forkert kode',
 	'ChangePasswordForUser'		=> '%1\'s password opdatering',
@@ -645,10 +645,10 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'This message has been sent to you by the user %1 from %2. To answer '.
 								   'this email, click on the following link (do not use the Reply button / Reply '.
-								   'in mailer):'."\n".'%3'."\n\n".''.
-								   '----------------------------------------------------------------------'."\n".''.
-								   '%5'."\n".''.
-								   '----------------------------------------------------------------------'."\n\n".''.
+								   'in mailer):' . "\n" . '%3'."\n\n" . ''.
+								   '----------------------------------------------------------------------' . "\n" . ''.
+								   '%5' . "\n" . ''.
+								   '----------------------------------------------------------------------'."\n\n" . ''.
 								   'Note: If this message is spam, contains abusive or otherwise '.
 								   'violates the rules of the site %2, please send it (using the button Forward /'.
 								   'Forward your mail program) to address %4.',
@@ -733,6 +733,7 @@ $wacko_translation = [
 	'UploadButtonText'			=> 'Fortsæt',
 	'UploadGlobalText'			=> 'for alle',
 	'UploadHereText'			=> 'brugere som må se denne side',
+	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'beskrivelse',
 	'UploadForbidden'			=> 'Du må ikke uploade filer her.',
 	'UploadNoFile'				=> 'Hmmm, der var ikke nogen fil.',
@@ -746,7 +747,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Filer relateret til denne side',
 	'UploadTitleGlobal'			=> 'Filer med global adgang',
 	'UploadEdit'				=> 'edit',
-	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditPropertiesTip'	=> 'Edit the metadata of this file',
 	'UploadEditedMeta'			=> 'Updated metadata of this file',
 	'UploadEditDenied'			=> 'You are not allowed to edit this file',
 	'UploadRemove'				=> 'slet',
@@ -764,6 +765,7 @@ $wacko_translation = [
 	'FileSize'					=> 'Size',
 	'FileDimension'				=> 'Dimensioner',
 	'FileName'					=> 'Name',
+	'FileAttachedTo'			=> 'Attached to',
 	'FileSyntax'				=> 'Syntax',
 	'FileUsage'					=> 'Filanvendelse',
 	'FileUsageText'				=> 'The following pages link to this file:',
@@ -1212,8 +1214,8 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
+	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

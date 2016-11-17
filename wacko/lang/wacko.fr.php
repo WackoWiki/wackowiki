@@ -179,8 +179,8 @@ $wacko_translation = [
 	'ACLGaveOwnership'			=> ' et rendre propriétaire ',
 	'ACLNoNewOwner'				=> ', mais la propriété a été transférée, car l&rsquo;utilisateur %1 n&rsquo;a pas été trouvé.',
 	'NewPageOwnership'			=> 'Propriété transférée',
-	'YouAreNewOwner'			=> 'Le précédent propriétaire de 1% vous a transféré la propriété '."\n".'du site suivant %2',
-	'PageOwnershipInfo'			=> 'Le droit de propriété vous impose un certain nombre d&rsquo;obligations telles que '."\n".'(..écrire..ici..).',
+	'YouAreNewOwner'			=> 'Le précédent propriétaire de 1% vous a transféré la propriété ' . "\n" . 'du site suivant %2',
+	'PageOwnershipInfo'			=> 'Le droit de propriété vous impose un certain nombre d&rsquo;obligations telles que ' . "\n" . '(..écrire..ici..).',
 	'ACLRead'					=> 'Droit de lire&nbsp;:',
 	'ACLWrite'					=> 'Droit d&rsquo;écrire&nbsp;:',
 	'ACLComment'				=> 'Droit de commenter&nbsp;:',
@@ -547,11 +547,11 @@ $wacko_translation = [
 	'YouWantChangePassword'		=> 'Changement de mot de passe',
 	'PasswordChanged'			=> 'Le mot de passe a été changé',
 	'EmailWelcome'				=> 'Bienvenue sur ',
-	'EmailRegistered'			=> 'Votre enregistrement est confirmé sur %1.'."\n".'Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2'."\n\n".'Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra&nbsp;:'."\n".' - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,'."\n".' - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.'."\n\n".'Pour confirmer votre adresse de messagerie suivez '."\n".'%3'."\n".'ce lien, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.',
+	'EmailRegistered'			=> 'Votre enregistrement est confirmé sur %1.' . "\n" . 'Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2'."\n\n" . 'Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra&nbsp;:' . "\n" . ' - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,' . "\n" . ' - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.'."\n\n" . 'Pour confirmer votre adresse de messagerie suivez ' . "\n" . '%3' . "\n" . 'ce lien, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.',
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'Si vous n&rsquo;aviez fait aucune demande d&rsquo;enregistrement, ignorez ce message et rien ne sera fait.',
 	'EmailDoNotReply'			=> 'NE PAS RÉPONDRE À CE MESSAGE',
-	'EmailVerify'				=> 'Quelqu&rsquo;un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.'."\n".'Votre nom d&rsquo;utilisateur (NomWiki)&nbsp;: %2'."\n\n".'Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour cela suivez '."\n".'%3'."\n".'ce lien.'."\n\n".'',
+	'EmailVerify'				=> 'Quelqu&rsquo;un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.' . "\n" . 'Votre nom d&rsquo;utilisateur (NomWiki)&nbsp;: %2'."\n\n" . 'Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour cela suivez ' . "\n" . '%3' . "\n" . 'ce lien.'."\n\n" . '',
 	'EmailConfirm'				=> 'Merci de vérifier votre adresse de messagerie',
 	'EmailConfirmed'			=> 'Adresse de messagerie confirmée.',
 	'EmailNotConfirmed'			=> 'Adresse de messagerie non confirmée. Ceci peut être dû à un code de confirmation erroné, mais cette adresse peut aussi avoir été déjà confirmée. Identifiez-vous et vérifiez-le sur votre page %1.',
@@ -561,13 +561,13 @@ $wacko_translation = [
 									'confirmation de votre adresse de messagerie en suivant le lien contenu dans le courriel qui vous a été envoyé. '.
 									'Si, les jours suivant votre enregistrement vous n&rsquo;avez pas reçu ce courriel, demandez-le en cliquant ',
 
-	'ForgotPasswordHint'		=> 'Indiquez votre NomWiki et votre adresse de messagerie,'."\n".'un courriel avec des instructions vous sera envoyé.',
+	'ForgotPasswordHint'		=> 'Indiquez votre NomWiki et votre adresse de messagerie,' . "\n" . 'un courriel avec des instructions vous sera envoyé.',
 	'ForgotPassword'			=> 'Avez-vous oublié votre mot de passe ?',
 	'SendButton'				=> 'Envoyer',
 	'UserNotFound'				=> 'Aucun utilisateur avec ce nom ou cette adresse de messagerie n&rsquo;a été trouvé.',
 	'NotConfirmedEmail'			=> 'Vous n&rsquo;avez pas confirmé votre adresse de messagerie suite au courriel que vous avez dû recevoir.<br />Aucun courriel ne peut être envoyé à une adresse non confirmée.',
 	'EmailForgotSubject'		=> 'Renouvellement du mot de passe pour ',
-	'EmailForgotMessage'		=> 'Quelqu&rsquo;un (peut-être vous) a perdu son mot de passe pour %1.'."\n".'Votre nom d&rsquo;utilisateur ou NomWiki&nbsp;: %2'."\n\n".'Cliquez sur le lien ou copiez-le dans votre navigateur pour changer votre mot de passe.'."\n".'%3'."\n\n".'',
+	'EmailForgotMessage'		=> 'Quelqu&rsquo;un (peut-être vous) a perdu son mot de passe pour %1.' . "\n" . 'Votre nom d&rsquo;utilisateur ou NomWiki&nbsp;: %2'."\n\n" . 'Cliquez sur le lien ou copiez-le dans votre navigateur pour changer votre mot de passe.' . "\n" . '%3'."\n\n" . '',
 	'CodeWasSent'				=> 'Les instructions pour obtenir un nouveau mot de passe vous ont été envoyées par courriel.',
 	'WrongCode'					=> 'Code erroné',
 	'ChangePasswordForUser'		=> 'Changement de mot de passe pour %1',
@@ -645,10 +645,10 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Le message personnel a été transmis à l&rsquo;utilisateur en texte brut.',
 	'UsersPMBody'				=> 'Ce message vous a été envoyé par l&rsquo;utilisateur %1 de %2. Pour répondre à ce courriel, '.
 								   'cliquez sur le lien suivant (n&rsquo;utilisez pas  le bouton "répondre" de votre logiciel '.
-								   'de courriel):'."\n".'%3'."\n\n".''.
-								   '----------------------------------------------------------------------'."\n".''.
-								   '%5'."\n".''.
-								   '----------------------------------------------------------------------'."\n\n".''.
+								   'de courriel):' . "\n" . '%3'."\n\n" . ''.
+								   '----------------------------------------------------------------------' . "\n" . ''.
+								   '%5' . "\n" . ''.
+								   '----------------------------------------------------------------------'."\n\n" . ''.
 								   'Note: Si ce message est du spam, a un contenu inacceptable ou viole autrement '.
 								   'les règles du site %2, merci de l&rsquo;envoyer (en utilisant le bouton Transmettre /'.
 								   'de votre logiciel de courriel) à l&rsquo;adresse %4.',
@@ -733,6 +733,7 @@ $wacko_translation = [
 	'UploadButtonText'			=> 'Effectuer le dépôt',
 	'UploadGlobalText'			=> 'pour accès public',
 	'UploadHereText'			=> 'seulement pour les utilisateurs autorisés à voir cette page',
+	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'description',
 	'UploadForbidden'			=> 'Vous n&rsquo;êtes pas autorisé à déposer des fichiers ici.',
 	'UploadNoFile'				=> 'Il n&rsquo;y avait pas de fichier joint au formulaire.',
@@ -746,7 +747,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Fichiers accessibles depuis de cette page',
 	'UploadTitleGlobal'			=> 'Fichiers accessibles de n&rsquo;importe quelle page',
 	'UploadEdit'				=> 'modifier',
-	'UploadEditConfirm'			=> 'Modifier les métadonnées de ce fichier',
+	'UploadEditPropertiesTip'	=> 'Modifier les métadonnées de ce fichier',
 	'UploadEditedMeta'			=> 'Les métadonnées de ce fichier on été modifiées',
 	'UploadEditDenied'			=> 'Vous n&rsquo;êtes pas autorisé(e) à modifier ce fichier',
 	'UploadRemove'				=> 'enlever',
@@ -764,6 +765,7 @@ $wacko_translation = [
 	'FileSize'					=> 'Taille',
 	'FileDimension'				=> 'Dimension',
 	'FileName'					=> 'No',
+	'FileAttachedTo'			=> 'Attached to',
 	'FileSyntax'				=> 'Syntax',
 	'FileUsage'					=> 'Utilisation du fichier',
 	'FileUsageText'				=> 'The following pages link to this file:',
@@ -1212,8 +1214,8 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Page [/%1]] modifiée',
 	'LogCommentEdited'			=> 'Commentaire [[/%1]] modifié',
 	'LogUpdatedFileMeta'		=> 'Mis à jour les métadonnées du fichier pour ##%2## à partir de la page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
+	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

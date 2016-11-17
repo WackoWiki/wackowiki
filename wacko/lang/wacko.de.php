@@ -104,7 +104,7 @@ $wacko_translation = [
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Dokument',
 	'RDFLink'					=> 'RDF Dokument',
-	'EmailLink'					=> 'Schreibe E-Mail'."\n".'(E-Mailprogramm wird gestartet)',
+	'EmailLink'					=> 'Schreibe E-Mail' . "\n" . '(E-Mailprogramm wird gestartet)',
 	'JabberLink'				=> 'Chatte über XMPP (Jabber client  wird gestartet)',
 	'PermaLink'					=> 'Permalink',
 	'PermaLinkTip'				=> 'Permalink zu dieser Seite',
@@ -147,7 +147,7 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Seite übernehmen',
 	'FilesTip'					=> 'Dateianhänge verwalten',
 	'FilesText'					=> 'Dateien',
-	'DeleteConfirm'				=> 'Willst du wirklich diese Seite löschen?'."\n".'Diese Aktion kann nicht rückgängig gemacht werden!',
+	'DeleteConfirm'				=> 'Willst du wirklich diese Seite löschen?' . "\n" . 'Diese Aktion kann nicht rückgängig gemacht werden!',
 	'DeleteTip'					=> 'Seite löschen.',
 	'DeleteCommentTip'			=> 'Kommentar löschen.',
 	'DeleteText'				=> 'Löschen',
@@ -179,8 +179,8 @@ $wacko_translation = [
 	'ACLGaveOwnership'			=> ' und Besitzer geändert zu ',
 	'ACLNoNewOwner'				=> ', jedoch wurde der Besitz nicht übertragen, da der Nutzer %1 nicht exsistiert.',
 	'NewPageOwnership'			=> 'Besitz übertragen',
-	'YouAreNewOwner'			=> 'Der frühere Besitzer von 1% hat die folgende Seite '."\n".' auf dich übertragen %2',
-	'PageOwnershipInfo'			=> 'Mit dem Besitz der Seite gehen auch eine Reihe von Verpflichtungen auf dich über wie '."\n".'(..write..here..).',
+	'YouAreNewOwner'			=> 'Der frühere Besitzer von 1% hat die folgende Seite ' . "\n" . ' auf dich übertragen %2',
+	'PageOwnershipInfo'			=> 'Mit dem Besitz der Seite gehen auch eine Reihe von Verpflichtungen auf dich über wie ' . "\n" . '(..write..here..).',
 	'ACLRead'					=> 'Lesen:',
 	'ACLWrite'					=> 'Schreiben:',
 	'ACLComment'				=> 'Kommentare:',
@@ -547,11 +547,11 @@ $wacko_translation = [
 	'YouWantChangePassword'		=> 'Passwort ändern',
 	'PasswordChanged'			=> 'Passwort geändert',
 	'EmailWelcome'				=> 'Du bist registriert bei ',
-	'EmailRegistered'			=> 'Du hast dich bei %1 registriert.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem Link'."\n".'%3',
+	'EmailRegistered'			=> 'Du hast dich bei %1 registriert.' . "\n" . 'Dein Benutzername lautet: %2'."\n\n" . 'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem Link' . "\n" . '%3',
 	'EmailRegisteredLogin'		=> 'Bitte kehre zum Wiki zurück und melde dich mit deinem neuen Benutzernamen und Passwort an.',
 	'EmailRegisteredIgnore'		=> 'Wenn du dich nicht registriert hast, ignoriere diese Nachricht, es wird nichts passieren.',
 	'EmailDoNotReply'			=> 'NICHT AUF DIESE NACHRICHT ANTWORTEN',
-	'EmailVerify'				=> 'Jemand (vielleicht du) hat deine E-Mailadresse als Bestätigungsadresse bei %1 angegeben.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem '."\n".'%3'."\n".'Link.'."\n\n".'',
+	'EmailVerify'				=> 'Jemand (vielleicht du) hat deine E-Mailadresse als Bestätigungsadresse bei %1 angegeben.' . "\n" . 'Dein Benutzername lautet: %2'."\n\n" . 'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem ' . "\n" . '%3' . "\n" . 'Link.'."\n\n" . '',
 	'EmailConfirm'				=> 'Bitte bestätige deine E-Mail.',
 	'EmailConfirmed'			=> 'E-Mail wurde erfolgreich bestätigt.',
 	'EmailNotConfirmed'			=> 'E-Mail konnte nicht bestätigt werden. Dies könnte an einen falschen Bestätigung-Code liegen oder die E-Mail-Adresse wurde möglicherweise bereits bestätigt. Du kannst prüfen ob die E-Mail bereits bestätigt wurde indem du dich anmeldst und deinen Status auf deiner %1 Seite einsiehst.',
@@ -561,13 +561,13 @@ $wacko_translation = [
 									'bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst. '.
 									'Wenn innerhalb weniger Tage nach der Registrierung du keine E-Mail erhalten hast, kannst du sie erneut anfragen, klicke dazu ',
 
-	'ForgotPasswordHint'		=> 'Benutzername und E-Mailadresse angeben,'."\n".'du bekommst dann eine E-Mail mit weiteren Anweisungen.',
+	'ForgotPasswordHint'		=> 'Benutzername und E-Mailadresse angeben,' . "\n" . 'du bekommst dann eine E-Mail mit weiteren Anweisungen.',
 	'ForgotPassword'			=> 'Passwort vergessen?',
 	'SendButton'				=> 'Senden',
 	'UserNotFound'				=> 'Ein Benutzer mit diesem Namen oder E-Mailadresse wurde nicht gefunden.',
 	'NotConfirmedEmail'			=> 'Deine E-Mailadresse ist noch nicht bestätigt<br />E-Mails können nicht an unbestätigte E-Mailadressen verschickt werden.',
 	'EmailForgotSubject'		=> 'Neues Passwort für ',
-	'EmailForgotMessage'		=> 'Jemand (vielleicht du) hat sein Passwort für %1 vergessen.'."\n".'Dein Benutzername lautet: %2'."\n\n".'Um dein Passwort zu ändern, folge diesem Link oder kopiere ihn in die Adresszeile deines Browsers.'."\n".'%3'."\n\n".'',
+	'EmailForgotMessage'		=> 'Jemand (vielleicht du) hat sein Passwort für %1 vergessen.' . "\n" . 'Dein Benutzername lautet: %2'."\n\n" . 'Um dein Passwort zu ändern, folge diesem Link oder kopiere ihn in die Adresszeile deines Browsers.' . "\n" . '%3'."\n\n" . '',
 	'CodeWasSent'				=> 'Eine E-Mail mit Informationen zu deinem Passwort wurde versandt.',
 	'WrongCode'					=> 'Falscher Code',
 	'ChangePasswordForUser'		=> '%1\'s Passwort Änderung',
@@ -645,10 +645,10 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Persönliche Nachricht für den Benutzer im Klartext gesendet.',
 	'UsersPMBody'				=> 'Diese Nachricht wurde dir durch den Benutzer %1 von %2 geschickt. Um auf diese Email-Nachricht zu antworten '.
 								   ', klicke den folgenden Link (do not use the Reply button / Reply '.
-								   'in mailer):'."\n".'%3'."\n\n".''.
-								   '----------------------------------------------------------------------'."\n".''.
-								   '%5'."\n".''.
-								   '----------------------------------------------------------------------'."\n\n".''.
+								   'in mailer):' . "\n" . '%3'."\n\n" . ''.
+								   '----------------------------------------------------------------------' . "\n" . ''.
+								   '%5' . "\n" . ''.
+								   '----------------------------------------------------------------------'."\n\n" . ''.
 								   'Hinweis: Falls diese Nachricht Spam ist, beleidigende oder anderweitig gegen die Regeln der Seite enthält '.
 								   'violates the rules of the site %2, please send it (using the button Forward /'.
 								   'Forward your mail program) to address %4.',
@@ -733,6 +733,7 @@ $wacko_translation = [
 	'UploadButtonText'			=> 'Hochladen',
 	'UploadGlobalText'			=> 'für alle Benutzer',
 	'UploadHereText'			=> 'nur für Benutzer, die diese Seite sehen dürfen',
+	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'Beschreibung',
 	'UploadForbidden'			=> 'Du hast keine Berechtigung, hier Dateien hochzuladen.',
 	'UploadNoFile'				=> 'Keine Datei gefunden... aus irgendeinem Grund.',
@@ -746,7 +747,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Dateien zu dieser Seite',
 	'UploadTitleGlobal'			=> 'Dateien, die global verwendet werden können',
 	'UploadEdit'				=> 'bearbeiten',
-	'UploadEditConfirm'			=> 'Bearbeite Metadaten dieser Datei',
+	'UploadEditPropertiesTip'	=> 'Bearbeite Metadaten dieser Datei',
 	'UploadEditedMeta'			=> 'Metadaten der Datei aktualisiert',
 	'UploadEditDenied'			=> 'Du hast keine Berechtigung, diese Datei zu bearbeiten',
 	'UploadRemove'				=> 'löschen',
@@ -764,6 +765,7 @@ $wacko_translation = [
 	'FileSize'					=> 'Größe',
 	'FileDimension'				=> 'Dimension',
 	'FileName'					=> 'Name',
+	'FileAttachedTo'			=> 'Attached to',
 	'FileSyntax'				=> 'Syntax',
 	'FileUsage'					=> 'Dateiverwendung',
 	'FileUsageText'				=> 'Folgenden Seiten verwenden diese Datei:',
@@ -1212,8 +1214,8 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Seite bearbeitet [[/%1]]',
 	'LogCommentEdited'			=> 'Kommentar bearbeitet [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Datei Metadaten für ##%2## von Seite [[/%1]] aktualisiert',
-	'ErrorMinPHPVersion'		=> 'Die PHP Version muss größer sein als <strong>'.PHP_MIN_VERSION.
-									'</strong>, der Server scheint die Version <strong>'.PHP_VERSION.'</strong> zu nutzen.'.
+	'ErrorMinPHPVersion'		=> 'Die PHP Version muss größer sein als <strong>' . PHP_MIN_VERSION.
+									'</strong>, der Server scheint die Version <strong>' . PHP_VERSION . '</strong> zu nutzen.'.
 									'  Aktualisiere bitte PHP auf eine neuere Version, damit  WackoWiki ordnungsgemäß funtioniert.',
 
 ];

@@ -147,7 +147,7 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Przejmij autorstwo',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Files',
-	'DeleteConfirm'				=> 'Czy na pewno USUN¡Æ tê stronê?'."\n".'Tej czynno¶ci nie mo¿na cofn±æ!.',
+	'DeleteConfirm'				=> 'Czy na pewno USUN¡Æ tê stronê?' . "\n" . 'Tej czynno¶ci nie mo¿na cofn±æ!.',
 	'DeleteTip'					=> 'Usuñ bie¿±c± stronê...',
 	'DeleteCommentTip'			=> 'Click here to delete comment.',
 	'DeleteText'				=> 'Usuñ',
@@ -179,8 +179,8 @@ $wacko_translation = [
 	'ACLGaveOwnership'			=> ' i przeka¿ autorstwo u¿ytkownikowi ',
 	'ACLNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Transferred ownership',
-	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership '."\n".'of following site to you %2',
-	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like '."\n".'(..write..here..).',
+	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership ' . "\n" . 'of following site to you %2',
+	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like ' . "\n" . '(..write..here..).',
 	'ACLRead'					=> 'Odczyt:',
 	'ACLWrite'					=> 'Zapis:',
 	'ACLComment'				=> 'Komentarze:',
@@ -547,11 +547,11 @@ $wacko_translation = [
 	'YouWantChangePassword'		=> 'Zmiana has³a',
 	'PasswordChanged'			=> 'Has³o zosta³o zmienione',
 	'EmailWelcome'				=> 'Dziêkujemy. Rejestracja przebieg³a pomy¶lnie ',
-	'EmailRegistered'			=> 'Dziêkujemy! Twoja rejestracja zosta³a zakoñczona pomy¶lnie'."\n".'Nazwa u¿ytkownika: %2'."\n\n".'Aby w³±czyæ mo¿liwo¶æ otrzymywania powiadomieñ z tej strony nale¿y potwierdziæ swój adres e-mail. W tym celu nale¿y po³±czyæ siê z '."\n".'%3'."\n".'t± stron±.',
+	'EmailRegistered'			=> 'Dziêkujemy! Twoja rejestracja zosta³a zakoñczona pomy¶lnie' . "\n" . 'Nazwa u¿ytkownika: %2'."\n\n" . 'Aby w³±czyæ mo¿liwo¶æ otrzymywania powiadomieñ z tej strony nale¿y potwierdziæ swój adres e-mail. W tym celu nale¿y po³±czyæ siê z ' . "\n" . '%3' . "\n" . 't± stron±.',
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'Je¶li to nie twoje zg³oszenie, zignoruj tê wiadomo¶æ. Nic siê nie stanie.',
 	'EmailDoNotReply'			=> 'NIE ODPOWIADAJ NA TÊ WIADOMO¦Æ',
-	'EmailVerify'				=> 'Kto¶ (prawdopodobnie Ty) zamierza otrzymywaæ powiadomienia do %1 na ten adres e-mail.'."\n".' Twoja nazwa u¿ytkownika:  %2'."\n\n".'Je¿eli chcesz otrzymywaæ od nas powiadomienia niezbêdne jest potwierdzenie. W tym celu nale¿y po³±czyæ siê z '."\n".'%3'."\n".'t± stron±.',
+	'EmailVerify'				=> 'Kto¶ (prawdopodobnie Ty) zamierza otrzymywaæ powiadomienia do %1 na ten adres e-mail.' . "\n" . ' Twoja nazwa u¿ytkownika:  %2'."\n\n" . 'Je¿eli chcesz otrzymywaæ od nas powiadomienia niezbêdne jest potwierdzenie. W tym celu nale¿y po³±czyæ siê z ' . "\n" . '%3' . "\n" . 't± stron±.',
 	'EmailConfirm'				=> 'Weryfikacja adresu e-mail',
 	'EmailConfirmed'			=> 'Adres e-mail zosta³ potwierdzony.',
 	'EmailNotConfirmed'			=> 'Adres e-mail nie móg³ zostaæ potwierdzony. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
@@ -561,13 +561,13 @@ $wacko_translation = [
 									'until your email-address was confirmed, by following the link in the email sent to you. '.
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotPasswordHint'		=> 'Wpisz swój login i adres e-mail,'."\n".'aby zosta³ przes³any do ciebie e-mail z instrukcjami.',
+	'ForgotPasswordHint'		=> 'Wpisz swój login i adres e-mail,' . "\n" . 'aby zosta³ przes³any do ciebie e-mail z instrukcjami.',
 	'ForgotPassword'			=> 'Zapomnia³e¶ has³a?',
 	'SendButton'				=> 'Wy¶lij',
 	'UserNotFound'				=> 'U¿ytkownik z t± nazw± lub adresem e-mail nie zosta³ znaleziony.',
 	'NotConfirmedEmail'			=> 'Twój adres e-mail nie zosta³ potwierdzony.<br />Mail nie mo¿e byæ wysy³any na niepotwierdzony adres.',
 	'EmailForgotSubject'		=> 'Ponowienie has³a dla ',
-	'EmailForgotMessage'		=> 'Kto¶ (prawdopodobnie Ty) zapomnia³ swojego has³a do %1'."\n".'Twój login: %2'."\n\n".'Kliknij na '."\n".'%3'."\n".' albo skopiuj adres do przegl±darki, aby zmieniæ swoje has³o.'."\n\n".'',
+	'EmailForgotMessage'		=> 'Kto¶ (prawdopodobnie Ty) zapomnia³ swojego has³a do %1' . "\n" . 'Twój login: %2'."\n\n" . 'Kliknij na ' . "\n" . '%3' . "\n" . ' albo skopiuj adres do przegl±darki, aby zmieniæ swoje has³o.'."\n\n" . '',
 	'CodeWasSent'				=> 'Instrukcje odzyskiwania has³a zosta³y wys³ane do ciebie przez e-mail',
 	'WrongCode'					=> 'Z³y kod',
 	'ChangePasswordForUser'		=> 'Zmiana has³a %1',
@@ -645,10 +645,10 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'This message has been sent to you by the user %1 from %2. To answer '.
 									'this email, click on the following link (do not use the Reply button / Reply '.
-									'in mailer):'."\n".'%3'."\n\n".''.
-									'----------------------------------------------------------------------'."\n".''.
-									'%5'."\n".''.
-									'----------------------------------------------------------------------'."\n\n".''.
+									'in mailer):' . "\n" . '%3'."\n\n" . ''.
+									'----------------------------------------------------------------------' . "\n" . ''.
+									'%5' . "\n" . ''.
+									'----------------------------------------------------------------------'."\n\n" . ''.
 									'Note: If this message is spam, contains abusive or otherwise '.
 									'violates the rules of the site %2, please send it (using the button Forward /'.
 									'Forward your mail program) to address %4.',
@@ -733,6 +733,7 @@ $wacko_translation = [
 	'UploadButtonText'			=> 'Kontynuuj',
 	'UploadGlobalText'			=> 'do publicznego dostêpu',
 	'UploadHereText'			=> 'wy³±cznie dla u¿ytkowników maj±cych prawo do ogl±dania bie¿±cej strony',
+	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'opis',
 	'UploadForbidden'			=> 'Nie masz prawa na wgrywanie tutaj plików.',
 	'UploadNoFile'				=> 'Z jakiego¶ powodu nie by³o pliku w formularzu.',
@@ -746,7 +747,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Pliki dostêpne z tej strony',
 	'UploadTitleGlobal'			=> 'Pliki dostêpne sk±dkolwiek',
 	'UploadEdit'				=> 'edit',
-	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditPropertiesTip'	=> 'Edit the metadata of this file',
 	'UploadEditedMeta'			=> 'Updated metadata of this file',
 	'UploadEditDenied'			=> 'You are not allowed to edit this file',
 	'UploadRemove'				=> 'usuñ',
@@ -764,6 +765,7 @@ $wacko_translation = [
 	'FileSize'					=> 'Size',
 	'FileDimension'				=> 'Wymiary',
 	'FileName'					=> 'Name',
+	'FileAttachedTo'			=> 'Attached to',
 	'FileSyntax'				=> 'Syntax',
 	'FileUsage'					=> 'Wykorzystanie pliku',
 	'FileUsageText'				=> 'Poni¿sza strona odwo³uje siê do tego pliku:',
@@ -1212,8 +1214,8 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
+	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

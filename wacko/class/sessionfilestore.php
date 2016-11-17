@@ -3,9 +3,9 @@
 class SessionFileStore extends Session
 {
 	// config options:
-	public $cf_file_path = '/tmp';
-	public $cf_file_mode = SAFE_CHMOD;	// should be 0600 in production
-	public $cf_file_encrypt = 1;
+	public $cf_file_path	= '/tmp';
+	public $cf_file_mode	= SAFE_CHMOD;	// should be 0600 in production
+	public $cf_file_encrypt	= 1;
 
 	private $prefix = false;
 	private $fd = null;
@@ -23,6 +23,7 @@ class SessionFileStore extends Session
 		if ($this->prefix === false && $prefix)
 		{
 			$dir = $this->cf_file_path;
+
 			if (!is_writeable($dir) || is_link($dir) || !is_dir($dir))
 			{
 				die('SessionFileStore: inaccessible directory "' . $dir . '"');
@@ -72,6 +73,7 @@ class SessionFileStore extends Session
 		if (($this->open_file($id, $create)))
 		{
 			$stat = fstat($this->fd);
+
 			if (!($size = $stat['size']))
 			{
 				return '';
@@ -82,6 +84,7 @@ class SessionFileStore extends Session
 				$text = $this->decrypt($text);
 				$text and $text = gzinflate($text);
 			}
+
 			return $text;
 		}
 		// error
@@ -114,6 +117,7 @@ class SessionFileStore extends Session
 	{
 		$lvl1 = [];
 		$preflen = strlen($this->prefix);
+
 		foreach ((array) scandir($this->cf_file_path, SCANDIR_SORT_NONE) as $file)
 		{
 			if (!strncmp($file, $this->prefix, $preflen) && strlen($file) == $preflen + 1)
@@ -121,12 +125,15 @@ class SessionFileStore extends Session
 				$lvl1[] = $file;
 			}
 		}
+
 		shuffle($lvl1);
 
 		$lvl2 = [];
+
 		foreach ($lvl1 as $l1)
 		{
 			$l1p = Ut::join_path($this->cf_file_path, $l1);
+
 			foreach ((array) scandir($l1p, SCANDIR_SORT_NONE) as $file)
 			{
 				if (fnmatch('[0-9a-zA-Z][0-9a-zA-Z]', $file))
@@ -134,31 +141,38 @@ class SessionFileStore extends Session
 					$lvl2[] = $l1p . '/' . $file;
 				}
 			}
+
 			if (count($lvl2) > 500) break;	// TODO magic number
 		}
+
 		shuffle($lvl2);
 
 		$nstats = $ndels = 0;
 		$past = time() - $this->cf_gc_maxlifetime;
+
 		foreach ($lvl2 as $l2)
 		{
 			$stats = $dels = 0;
+
 			foreach ((array) scandir($l2, SCANDIR_SORT_NONE) as $file)
 			{
 				if ($file[0] == '.') continue;
 				$full = $l2 . '/' . $file;
 				++$stats;
 				++$nstats;
+
 				if (filemtime($full) < $past && unlink($full))
 				{
 					++$dels;
 					++$ndels;
 				}
 			}
+
 			if ($stats == $dels)
 			{
 				rmdir($l2);
 			}
+
 			if ($nstats > 600 || $ndels > 100) break; // TODO magic number
 		}
 
@@ -182,6 +196,7 @@ class SessionFileStore extends Session
 		$fname = Ut::join_path($this->cf_file_path, $this->prefix . substr($id1, 0, 1), substr($id1, 1, 2), substr($id1, 3));
 
 		clearstatcache();
+
 		if (@file_exists($fname))
 		{
 			// we REQUIRE existant session file to be writable usual file and not symlink
@@ -191,9 +206,11 @@ class SessionFileStore extends Session
 				{
 					return false;
 				}
+
 				// destructive fix attempt
 				unlink($fname) or rmdir($fname);
 				clearstatcache();
+
 				if (@file_exists($fname))
 				{
 					// to no avail... it's OK, let's try other session id ;)
@@ -209,6 +226,7 @@ class SessionFileStore extends Session
 			}
 
 			$dir = dirname($fname);
+
 			if (@file_exists($dir))
 			{
 				if (!is_writeable($dir) || is_link($dir) || !is_dir($dir))
@@ -216,6 +234,7 @@ class SessionFileStore extends Session
 					// destructive fix attempt
 					unlink($dir) or rmdir($dir);
 					clearstatcache();
+
 					if (@file_exists($dir))
 					{
 						return false;
@@ -237,6 +256,7 @@ class SessionFileStore extends Session
 			{
 				break;
 			}
+
 			if (!flock($fd, LOCK_EX))
 			{
 				fclose($fd);
@@ -246,6 +266,7 @@ class SessionFileStore extends Session
 			// we need to be sure to open and lock one and only session jar
 			// this race can be done by unlink/unlock/close in store_destroy
 			clearstatcache();
+
 			if (($stat0 = fstat($fd))
 				&& ($stat = stat($fname))
 				&& $stat0['ino'] == $stat['ino'])
@@ -254,6 +275,7 @@ class SessionFileStore extends Session
 				$this->fd_name = $fname;
 				$this->fd_id = $id;
 				chmod($fname, $this->cf_file_mode);
+
 				return true;
 			}
 
@@ -286,8 +308,10 @@ class SessionFileStore extends Session
 				mb_substr($this->cryptokey, 32, null, '8bit'),
 				true
 			);
+
 			$data = $hmac . $iv . $ciphertext;
 		}
+
 		return $data;
 	}
 
@@ -311,6 +335,7 @@ class SessionFileStore extends Session
 			{
 				return false; // authentication failed
 			}
+
 			// Decrypt
 			$data = openssl_decrypt(
 				$ciphertext,
@@ -320,6 +345,7 @@ class SessionFileStore extends Session
 				$iv
 			);
 		}
+
 		return $data;
 	}
 }

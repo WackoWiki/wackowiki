@@ -147,7 +147,7 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Wordt eigenaar',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Files',
-	'DeleteConfirm'				=> 'Wilt u deze pagina echt verwijderen?'."\n".'U kunt deze handeling niet ongedaan maken!.',
+	'DeleteConfirm'				=> 'Wilt u deze pagina echt verwijderen?' . "\n" . 'U kunt deze handeling niet ongedaan maken!.',
 	'DeleteTip'					=> 'Klik hier om deze pagina te verwijderen.',
 	'DeleteCommentTip'			=> 'Klik hier om deze reactie te verwijderen.',
 	'DeleteText'				=> 'Verwijder',
@@ -179,8 +179,8 @@ $wacko_translation = [
 	'ACLGaveOwnership'			=> ' en maak de volgende gebruiker de eigenaar: ',
 	'ACLNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Transferred ownership',
-	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership '."\n".'of following site to you %2',
-	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like '."\n".'(..write..here..).',
+	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership ' . "\n" . 'of following site to you %2',
+	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like ' . "\n" . '(..write..here..).',
 	'ACLRead'					=> 'Lees:',
 	'ACLWrite'					=> 'Schrijf:',
 	'ACLComment'				=> 'Opmerkingen:',
@@ -547,11 +547,11 @@ $wacko_translation = [
 	'YouWantChangePassword'		=> 'Wachtwoord wijzigen',
 	'PasswordChanged'			=> 'Wachtwoord gewijzigd',
 	'EmailWelcome'				=> 'U hebt geregistreerd bij ',
-	'EmailRegistered'			=> 'Uw registratie bij %1 is succesvol verlopen.'."\n".'Uw gebruikersnaam: %2'."\n\n".'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik '."\n".'%3'."\n".'hier om dit te doen.',
+	'EmailRegistered'			=> 'Uw registratie bij %1 is succesvol verlopen.' . "\n" . 'Uw gebruikersnaam: %2'."\n\n" . 'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik ' . "\n" . '%3' . "\n" . 'hier om dit te doen.',
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'Als u zich niet hebt aangemeld, dan kunt u dit bericht negeren. Dan gebeurt er niets.',
 	'EmailDoNotReply'			=> 'Verstuur geen antwoord op dit bericht',
-	'EmailVerify'				=> 'Iemand (vermoedelijk uzelf) heeft uw emailadres als notificatie-adres ingevuld op %1.'."\n".'Uw gebruikersnaam: %2'."\n\n".'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik '."\n".'%3'."\n".'hier om dit te doen.'."\n\n".'',
+	'EmailVerify'				=> 'Iemand (vermoedelijk uzelf) heeft uw emailadres als notificatie-adres ingevuld op %1.' . "\n" . 'Uw gebruikersnaam: %2'."\n\n" . 'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik ' . "\n" . '%3' . "\n" . 'hier om dit te doen.'."\n\n" . '',
 	'EmailConfirm'				=> 'Controleer uw emailadres',
 	'EmailConfirmed'			=> 'Emailadres is gecontroleerd.',
 	'EmailNotConfirmed'			=> 'Emailadres kon niet worden gecontroleerd. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
@@ -567,7 +567,7 @@ $wacko_translation = [
 	'UserNotFound'				=> 'Er is geen gebruiker gevonden met deze naam of dit emailadres.',
 	'NotConfirmedEmail'			=> 'Uw emailadres is nog niet bevestigd. U kunt dus nog geen notificaties ontvangen.',
 	'EmailForgotSubject'		=> 'Nieuw wachtwoord voor ',
-	'EmailForgotMessage'		=> 'Iemand (vermoedelijk uzelf) heeft om een nieuw wachtwoord voor %1 gevraagd.'."\n".'Uw gebruikersnaam: %2'."\n\n".'Klik op onderstaande link of kopieer het adres naar uw internetbrowser om uw wachtwoord te wijzigen.'."\n".'%3'."\n\n".'',
+	'EmailForgotMessage'		=> 'Iemand (vermoedelijk uzelf) heeft om een nieuw wachtwoord voor %1 gevraagd.' . "\n" . 'Uw gebruikersnaam: %2'."\n\n" . 'Klik op onderstaande link of kopieer het adres naar uw internetbrowser om uw wachtwoord te wijzigen.' . "\n" . '%3'."\n\n" . '',
 	'CodeWasSent'				=> 'Er is een instructie om uw wachtwoord te resetten naar uw emailadres verstuurd.',
 	'WrongCode'					=> 'Verkeerde code',
 	'ChangePasswordForUser'		=> 'Wachtwoord veranderen voor %1',
@@ -645,10 +645,10 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'This message has been sent to you by the user %1 from %2. To answer '.
 									'this email, click on the following link (do not use the Reply button / Reply '.
-									'in mailer):'."\n".'%3'."\n\n".''.
-									'----------------------------------------------------------------------'."\n".''.
-									'%5'."\n".''.
-									'----------------------------------------------------------------------'."\n\n".''.
+									'in mailer):' . "\n" . '%3'."\n\n" . ''.
+									'----------------------------------------------------------------------' . "\n" . ''.
+									'%5' . "\n" . ''.
+									'----------------------------------------------------------------------'."\n\n" . ''.
 									'Note: If this message is spam, contains abusive or otherwise '.
 									'violates the rules of the site %2, please send it (using the button Forward /'.
 									'Forward your mail program) to address %4.',
@@ -733,6 +733,7 @@ $wacko_translation = [
 	'UploadButtonText'			=> 'Doorgaan',
 	'UploadGlobalText'			=> 'voor alle gebruikers',
 	'UploadHereText'			=> 'alleen voor gebruikers die deze pagina mogen zien',
+	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'beschrijving',
 	'UploadForbidden'			=> 'U mag geen bestanden uploaden op deze pagina.',
 	'UploadNoFile'				=> 'Het bestand dat u wilde uploaden is niet gevonden. Heeft u het juiste pad ingevuld?',
@@ -746,7 +747,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Bestanden die vanaf deze pagina te bereiken zijn:',
 	'UploadTitleGlobal'			=> 'Bestanden die door iedereen te bereiken zijn:',
 	'UploadEdit'				=> 'edit',
-	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditPropertiesTip'	=> 'Edit the metadata of this file',
 	'UploadEditedMeta'			=> 'Updated metadata of this file',
 	'UploadEditDenied'			=> 'You are not allowed to edit this file',
 	'UploadRemove'				=> 'verwijderen',
@@ -764,6 +765,7 @@ $wacko_translation = [
 	'FileSize'					=> 'Size',
 	'FileDimension'				=> 'Afmetingen',
 	'FileName'					=> 'Name',
+	'FileAttachedTo'			=> 'Attached to',
 	'FileSyntax'				=> 'Syntaxis',
 	'FileUsage'					=> 'Bestandsgebruik',
 	'FileUsageText'				=> 'The following pages link to this file:',
@@ -1212,8 +1214,8 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
+	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

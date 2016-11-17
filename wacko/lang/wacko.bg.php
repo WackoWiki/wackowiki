@@ -104,7 +104,7 @@ $wacko_translation = [
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
 	'RDFLink'					=> 'RDF Document',
-	'EmailLink'					=> 'Напиши писмо'."\n".'(извикване на пощенската програма)',
+	'EmailLink'					=> 'Напиши писмо' . "\n" . '(извикване на пощенската програма)',
 	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
 	'PermaLink'					=> 'Permalink',
 	'PermaLinkTip'				=> 'Permanent link to this page',
@@ -147,7 +147,7 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Стани собственик',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Files',
-	'DeleteConfirm'				=> 'Действително ли искате да ИЗТРИЕТЕ този текст? '."\n".'По-късно няма да можете да го възстановите.',
+	'DeleteConfirm'				=> 'Действително ли искате да ИЗТРИЕТЕ този текст? ' . "\n" . 'По-късно няма да можете да го възстановите.',
 	'DeleteTip'					=> 'Кликнете, за да изтриете.',
 	'DeleteCommentTip'			=> 'Click here to delete comment.',
 	'DeleteText'				=> 'Изтрий',
@@ -179,8 +179,8 @@ $wacko_translation = [
 	'ACLGaveOwnership'			=> ' и собствеността е променена',
 	'ACLNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Transferred ownership',
-	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership '."\n".'of following site to you %2',
-	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like '."\n".'(..write..here..).',
+	'YouAreNewOwner'			=> 'Former owner of 1% transferred ownership ' . "\n" . 'of following site to you %2',
+	'PageOwnershipInfo'			=> 'The rights of ownership impose a number of obligations on you like ' . "\n" . '(..write..here..).',
 	'ACLRead'					=> 'Права за четене:',
 	'ACLWrite'					=> 'Права за запис:',
 	'ACLComment'				=> 'Права за коментар:',
@@ -547,11 +547,11 @@ $wacko_translation = [
 	'YouWantChangePassword'		=> 'Промяна на паролата',
 	'PasswordChanged'			=> 'Паролата е  успешно променена',
 	'EmailWelcome'				=> 'Регистрация ',
-	'EmailRegistered'			=> 'Успешна регистрация  %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на информация, трябва да потвърдите адреса си. Кликнете на '."\n".'%3'."\n".'този линк.'."\n\n\n".''."\n\n\n".'Ако не сте регистрирани, пропуснете това съобщение.'."\n\n",
+	'EmailRegistered'			=> 'Успешна регистрация  %1.' . "\n" . 'Вашия логин е: %2'."\n\n" . 'За получаване на информация, трябва да потвърдите адреса си. Кликнете на ' . "\n" . '%3' . "\n" . 'този линк.'."\n\n\n" . ''."\n\n\n" . 'Ако не сте регистрирани, пропуснете това съобщение.'."\n\n",
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> '',
 	'EmailDoNotReply'			=> 'НЕ ОТГОВАРЯЙТЕ НА ТОВА СЪОБЩЕНИЕ',
-	'EmailVerify'				=> 'Някой, (вероятно Вие) е дал този адрес в %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на информация, трябва да потвърдите адреса си. Кликнете на '."\n".'%3'."\n".'този линк.'."\n\n".'',
+	'EmailVerify'				=> 'Някой, (вероятно Вие) е дал този адрес в %1.' . "\n" . 'Вашия логин е: %2'."\n\n" . 'За получаване на информация, трябва да потвърдите адреса си. Кликнете на ' . "\n" . '%3' . "\n" . 'този линк.'."\n\n" . '',
 	'EmailConfirm'				=> 'Моля потвърдете вашия email',
 	'EmailConfirmed'			=> 'Вашият email е потвърден успешно.',
 	'EmailNotConfirmed'			=> 'Проблеми с потвърждението. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
@@ -561,13 +561,13 @@ $wacko_translation = [
 									'until your email-address was confirmed, by following the link in the email sent to you. '.
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotPasswordHint'		=> 'Въведете вашия логин и e-mail,'."\n".'и ще ви бъде изпратено писмо с инструкции.',
+	'ForgotPasswordHint'		=> 'Въведете вашия логин и e-mail,' . "\n" . 'и ще ви бъде изпратено писмо с инструкции.',
 	'ForgotPassword'			=> 'Забравена парола?',
 	'SendButton'				=> 'Изпрати',
 	'UserNotFound'				=> 'Няма такъв потребител.',
 	'NotConfirmedEmail'			=> 'Email адреса не е подтвърден.<br/>Не може да се изпрати поща.',
 	'EmailForgotSubject'		=> 'Обновяване на парола за ',
-	'EmailForgotMessage'		=> 'Някой е забравил Вашата парола за %1.'."\n".'Вашия логин е: %2'."\n\n".'За получаване на нова  парола, моля адресирайте следния линк: '."\n".'%3'."\n\n".'',
+	'EmailForgotMessage'		=> 'Някой е забравил Вашата парола за %1.' . "\n" . 'Вашия логин е: %2'."\n\n" . 'За получаване на нова  парола, моля адресирайте следния линк: ' . "\n" . '%3'."\n\n" . '',
 	'CodeWasSent'				=> 'Инструкцията за паролата е изпратена на email.',
 	'WrongCode'					=> 'Неверен код',
 	'ChangePasswordForUser'		=> 'Промяна на парола за %1',
@@ -645,10 +645,10 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'This message has been sent to you by the user %1 from %2. To answer '.
 								   'this email, click on the following link (do not use the Reply button / Reply '.
-								   'in mailer):'."\n".'%3'."\n\n".''.
-								   '----------------------------------------------------------------------'."\n".''.
-								   '%5'."\n".''.
-								   '----------------------------------------------------------------------'."\n\n".''.
+								   'in mailer):' . "\n" . '%3'."\n\n" . ''.
+								   '----------------------------------------------------------------------' . "\n" . ''.
+								   '%5' . "\n" . ''.
+								   '----------------------------------------------------------------------'."\n\n" . ''.
 								   'Note: If this message is spam, contains abusive or otherwise '.
 								   'violates the rules of the site %2, please send it (using the button Forward /'.
 								   'Forward your mail program) to address %4.',
@@ -733,6 +733,7 @@ $wacko_translation = [
 	'UploadButtonText'			=> 'Качване',
 	'UploadGlobalText'			=> 'за всички',
 	'UploadHereText'			=> 'само за имащите достъп до тази страница',
+	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'описание',
 	'UploadForbidden'			=> 'Не можете да качите файл тук.',
 	'UploadNoFile'				=> 'Няма файл.',
@@ -746,7 +747,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Файлове, достъпни от  тази страница',
 	'UploadTitleGlobal'			=> 'Файлове, достъпни отвсякъде',
 	'UploadEdit'				=> 'edit',
-	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditPropertiesTip'	=> 'Edit the metadata of this file',
 	'UploadEditedMeta'			=> 'Updated metadata of this file',
 	'UploadEditDenied'			=> 'You are not allowed to edit this file',
 	'UploadRemove'				=> 'премахване',
@@ -764,6 +765,7 @@ $wacko_translation = [
 	'FileSize'					=> 'Размер',
 	'FileDimension'				=> 'Dimension',
 	'FileName'					=> 'Name',
+	'FileAttachedTo'			=> 'Attached to',
 	'FileSyntax'				=> 'Syntax',
 	'FileUsage'					=> 'Използване на файла',
 	'FileUsageText'				=> 'The following pages link to this file:',
@@ -1212,8 +1214,8 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>'.PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>'.PHP_VERSION.'</strong>.'.
+	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

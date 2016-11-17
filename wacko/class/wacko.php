@@ -2914,13 +2914,13 @@ class Wacko
 	* Returns full <a href=".."> or <img ...> HTML for Tag
 	*
 	* @param string $tag Link content - may be Wacko tag, interwiki wikiname:page tag,
-	* http/file/ftp/https/mailto/xmpp URL, [=] local or remote image-file for <img> link, or local or
-	* remote doc-file; if pagetag is for an external link but not protocol is specified, http:// is prepended
+	*	http/file/ftp/https/mailto/xmpp URL, [=] local or remote image-file for <img> link, or local or
+	*	remote doc-file; if pagetag is for an external link but not protocol is specified, http:// is prepended
 	* @param string $method Optional Wacko method (default 'show' method added in Run() function)
 	* @param string $text Optional text or image-file for HREF link (defaults to same as pagetag)
 	* @param string $title
 	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINKS table).
-	* Optional, default is TRUE
+	*	Optional, default is TRUE
 	* @param boolean $safe If false, then sanitize $text, else no.
 	* @param string $link_lang
 	* @param string $anchor_link Optional HTTP anchor-fragment
@@ -7080,7 +7080,7 @@ class Wacko
 		}
 	}
 
-	function shorten_string($string, $maxlen)
+	function shorten_string($string, $maxlen = 80)
 	{
 		return (strlen($string) > $maxlen)?  substr($string, 0, 30) . '[..]' . substr($string, -20) : $string;
 	}
