@@ -732,6 +732,7 @@ $wacko_translation = [
 	'UploadFor'					=> 'File upload',
 	'UploadButtonText'			=> 'Upload',
 	'UploadGlobalText'			=> 'for public access',
+	'UploadGlobal'				=> 'global',
 	'UploadHereText'			=> 'only for users allowed to view current page',
 	'UploadDestName'			=> 'Name',
 	'UploadDesc'				=> 'description',
