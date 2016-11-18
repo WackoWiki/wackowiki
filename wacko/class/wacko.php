@@ -6406,9 +6406,9 @@ class Wacko
 		// default page title is just page's WikiName
 		return $title
 				? $title
-				: $tag
+				: ($tag
 					? $this->add_spaces_title(trim(substr($tag, strrpos($tag, '/')), '/'))
-					: $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
+					: $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/')));
 	}
 
 	// CLONE / RENAMING / MOVING
