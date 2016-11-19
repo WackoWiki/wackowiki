@@ -163,16 +163,16 @@ $table_page = "CREATE TABLE {$pref}page (" .
 				") {$engine} COMMENT='' {$charset}";
 
 $table_page_link = "CREATE TABLE {$pref}page_link (" .
-		"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
-		"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-		"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-		"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT ''," .
-		"to_supertag VARCHAR(250) NOT NULL DEFAULT ''," .
-		"PRIMARY KEY (link_id)," .
-		"KEY idx_from_tag (from_page_id, to_tag(78))," .
-		"KEY idx_from_page_id (from_page_id)," .
-		"KEY idx_to (to_tag)" .
-		") {$engine} COMMENT='' {$charset}";
+					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
+					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT ''," .
+					"to_supertag VARCHAR(250) NOT NULL DEFAULT ''," .
+					"PRIMARY KEY (link_id)," .
+					"KEY idx_from_tag (from_page_id, to_tag(78))," .
+					"KEY idx_from_page_id (from_page_id)," .
+					"KEY idx_to (to_tag)" .
+					") {$engine} COMMENT='' {$charset}";
 
 $table_poll = "CREATE TABLE {$pref}poll (" .
 					"poll_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -278,6 +278,7 @@ $table_upload = "CREATE TABLE {$pref}upload (" .
 					"file_name VARCHAR(250) NOT NULL DEFAULT ''," .
 					"upload_lang VARCHAR(2) NOT NULL DEFAULT ''," .
 					"file_description VARCHAR(250) NOT NULL DEFAULT ''," .
+					"caption TEXT NOT NULL," .
 					"uploaded_dt DATETIME NULL DEFAULT NULL," .
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
