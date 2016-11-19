@@ -129,8 +129,8 @@ function admin_system_log(&$engine, &$module)
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip " .
 		"FROM {$engine->db->table_prefix}log l " .
 			"LEFT JOIN {$engine->db->table_prefix}user u ON (l.user_id = u.user_id) " .
-		( $where ? $where : 'WHERE l.level <= ' . (int) $level . ' ' ).
-		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
+		( $where ? $where : 'WHERE l.level <= ' . (int) $level . ' ' ) .
+		( $order ? $order : 'ORDER BY l.log_id DESC ' ) .
 		$pagination['limit']);
 
 	echo $engine->form_open('systemlog');

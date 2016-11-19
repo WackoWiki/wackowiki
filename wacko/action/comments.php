@@ -17,7 +17,7 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 		"WHERE " .
 		($tag
 			? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
-			: "a.comment_on_id <> '0' ").
+			: "a.comment_on_id <> '0' ") .
 		(!$deleted
 			? "AND a.deleted <> '1' "
 			: "")
@@ -36,7 +36,7 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 			"WHERE " .
 			($tag
 				? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
-				: "a.comment_on_id <> '0' ").
+				: "a.comment_on_id <> '0' ") .
 			($deleted != 1
 				? "AND a.deleted <> '1' "
 				: "") .
@@ -116,9 +116,9 @@ if ($this->user_allowed_comments())
 				($title == 1
 					? $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
 					: $this->link('/' . $page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'], 0, 1, $page_lang, 0)
-				).
+				) .
 				" . . . . . . . . . . . . . . . . <small>"./*$this->_t('LatestCommentBy').*/" " .
-				$this->user_link($page['comment_user'], '', true, false).
+				$this->user_link($page['comment_user'], '', true, false) .
 				"</small></li>\n";
 			}
 		}

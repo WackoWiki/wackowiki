@@ -140,7 +140,7 @@ if (function_exists('generate_calendar') == false)
 					$content  = $day;
 				}
 
-				$calendar .= '<td'.($classes ? ' class="' . htmlspecialchars($classes, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' : '>').
+				$calendar .= '<td'.($classes ? ' class="' . htmlspecialchars($classes, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' : '>') .
 					($link
 						? '<a href="' . htmlspecialchars($link, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $content . '</a>'
 						: $content) . '</td>';

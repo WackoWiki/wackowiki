@@ -162,10 +162,10 @@ $xhtml_tags = [
 			function ($matches) use ($options)
 			{
 				return
-				'<span style="color: ' . $options['color']['comment'] . ';">&lt;!--'.
+				'<span style="color: ' . $options['color']['comment'] . ';">&lt;!--' .
 				str_replace('&lt;',	'&lt;<!-- -->',
 				str_replace('=',	'=<!-- -->',
-				$matches[1])).
+				$matches[1])) .
 				'--&gt;</span>';
 			},
 		$source);
@@ -176,7 +176,7 @@ $xhtml_tags = [
 			{
 				return
 				$matches[1].
-				$this->format($matches[2], 'highlight/css', ['nopre' => true, 'notypo' => false]).
+				$this->format($matches[2], 'highlight/css', ['nopre' => true, 'notypo' => false]) .
 				'&lt;/style&gt;';
 			},
 		$source);
@@ -218,7 +218,7 @@ $xhtml_tags = [
 		foreach ($lines as $line)
 		{
 			$i += 1;
-			$source .= '<li id="l' . $i . '">' .rtrim($line). "</li>";
+			$source .= '<li id="l' . $i . '">' . rtrim($line) . "</li>";
 		}
 
 		$source .= '</ol>';

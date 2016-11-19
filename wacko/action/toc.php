@@ -278,7 +278,7 @@ if ($_page)
 					'<a href="' . $toc_item[3] . '#' . $toc_item[0] . '">' . 
 						(!empty($numerate)
 							?	'<span class="tocnumber">' . $toc_item[5] . '</span>'
-							:	'').
+							:	'') .
 						'<span class="toctext">' . strip_tags($toc_item[6]) . '</span></a>' . "\n";
 
 					$ident_level['li']++;

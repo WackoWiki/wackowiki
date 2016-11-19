@@ -248,8 +248,8 @@ function admin_user_approve(&$engine, &$module)
 			"SELECT COUNT(user_name) AS n " .
 			"FROM {$engine->db->table_prefix}user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			( $where ? $where : '' ).
-			( $where ? 'AND ' : "WHERE ").
+			( $where ? $where : '' ) .
+			( $where ? 'AND ' : "WHERE ") .
 				"u.user_name <> '" . $engine->db->admin_name."' "
 			);
 
@@ -260,11 +260,11 @@ function admin_user_approve(&$engine, &$module)
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
 			"FROM {$engine->db->table_prefix}user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			( $where ? $where : '' ).
-			( $where ? 'AND ' : "WHERE ").
+			( $where ? $where : '' ) .
+			( $where ? 'AND ' : "WHERE ") .
 				"u.account_type = '0' " .
 				"AND u.user_name <> '" . $engine->db->admin_name."' " .
-			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
+			( $order ? $order : 'ORDER BY u.user_id DESC ' ) .
 			$pagination['limit']);
 
 		// count records by status
@@ -289,7 +289,7 @@ function admin_user_approve(&$engine, &$module)
 		}
 
 		// user filter form
-		$search =			$engine->form_open('search_user', ['form_method' => 'get']).
+		$search =			$engine->form_open('search_user', ['form_method' => 'get']) .
 							'<input type="hidden" name="mode" value="' . $module['mode'] . '" />' .  // required to pass mode module via GET
 							$engine->_t('UsersSearch') . ': </td><td>' .
 							'<input type="search" name="user" maxchars="40" size="30" value="' . (isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') . '" /> '.
@@ -374,10 +374,10 @@ function admin_user_approve(&$engine, &$module)
 						'<td>' .
 							((isset($_GET['account_status']) && $_GET['account_status'] > 0) || !isset($_GET['account_status'])
 								? '<a href="' . $engine->href() . '&amp;approve=1&amp;user_id=' . $row['user_id'] . '">' . $approve_icon . '' . $engine->_t('Approve') . '</a>'
-								: '').
+								: '') .
 							((isset($_GET['account_status']) && $_GET['account_status'] < 2) || !isset($_GET['account_status'])
 								? '<a href="' . $engine->href() . '&amp;approve=2&amp;user_id=' . $row['user_id'] . '">' . $deny_icon . '' . $engine->_t('Deny') . '</a>'
-								: '').
+								: '') .
 						'</td>' .
 					'</tr>';
 			}

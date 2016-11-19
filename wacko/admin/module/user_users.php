@@ -483,7 +483,7 @@ function admin_user_users(&$engine, &$module)
 							echo '<option value="' . $offset . '" '.
 								(isset($user['account_status']) && $user['account_status'] == $offset
 									? 'selected="selected" '
-									: '').
+									: '') .
 								'>' . $status . "</option>\n";
 						}
 
@@ -781,14 +781,14 @@ function admin_user_users(&$engine, &$module)
 			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang " .
 			"FROM {$engine->db->table_prefix}user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			($where ? $where : '').
-			($where ? 'AND ' : "WHERE ").
+			($where ? $where : '') .
+			($where ? 'AND ' : "WHERE ") .
 				"u.account_type = '0' " .
-			($order ? $order : 'ORDER BY u.user_id DESC ').
+			($order ? $order : 'ORDER BY u.user_id DESC ') .
 			$pagination['limit']);
 
 		// user filter form
-		$search =	$engine->form_open('search_user', ['form_method' => 'get']).
+		$search =	$engine->form_open('search_user', ['form_method' => 'get']) .
 					'<input type="hidden" name="mode" value="' . $module['mode'] . '" />' .  // required to pass mode module via GET
 					$engine->_t('UsersSearch') . ': </td><td>' .
 					'<input type="search" name="user" maxchars="40" size="30" value="' . (isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') . '" /> '.

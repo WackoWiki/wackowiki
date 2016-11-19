@@ -186,7 +186,7 @@ class WackoFormatter
 			// escaped html <#...#>
 			($this->object->db->allow_rawhtml == 1
 				? '\<\#.*?\#\>|'
-				: '').
+				: '') .
 			// html comments
 			#"<!--.*-->|" .
 			//? (?...?)
@@ -197,7 +197,7 @@ class WackoFormatter
 				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|" .
 				  "\(\((\S+?)([ \t]+([^\n]+?))?\)\)|" .
 				  "\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]|" .
-				  "\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|").
+				  "\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|") .
 			// ?
 			"\n[ \t]*>+[^\n]*|" .
 			// cite text <[...]>
@@ -268,21 +268,21 @@ class WackoFormatter
 			// tikiwiki links
 			($this->object->db->disable_tikilinks == 1
 				? ''
-				: "\b(" . $object->language['UPPER'] . $object->language['LOWER'] . $object->language['ALPHANUM'] . "*\." . $object->language['ALPHA'] . $object->language['ALPHANUM'] . "+)\b|").
+				: "\b(" . $object->language['UPPER'] . $object->language['LOWER'] . $object->language['ALPHANUM'] . "*\." . $object->language['ALPHA'] . $object->language['ALPHANUM'] . "+)\b|") .
 			// wiki links (beside actions)
 			($this->object->db->disable_wikilinks == 1
 				? ''
-				: "(~?)(?<=[^\." . $object->language['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->language['UPPER'] . $object->language['LOWER'] . "+" . $object->language['UPPERNUM'] . $object->language['ALPHANUM'] . "*)\b|").
+				: "(~?)(?<=[^\." . $object->language['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->language['UPPER'] . $object->language['LOWER'] . "+" . $object->language['UPPERNUM'] . $object->language['ALPHANUM'] . "*)\b|") .
 			// npj links
 			($this->object->db->disable_npjlinks == 1
 				? ''
-				: "(~?)" . $object->language['ALPHANUM'] . "+\@" . $object->language['ALPHA'] . "*(?!" . $object->language['ALPHANUM'] . "*\." . $object->language['ALPHANUM'] . "+)(\:" . $object->language['ALPHANUM'] . "*)?|" . $object->language['ALPHANUM'] . "+\:\:" . $object->language['ALPHANUM'] . "+|").
+				: "(~?)" . $object->language['ALPHANUM'] . "+\@" . $object->language['ALPHA'] . "*(?!" . $object->language['ALPHANUM'] . "*\." . $object->language['ALPHANUM'] . "+)(\:" . $object->language['ALPHANUM'] . "*)?|" . $object->language['ALPHANUM'] . "+\:\:" . $object->language['ALPHANUM'] . "+|") .
 			"\n)/sm";
 
 		$this->NOTLONGREGEXP =
 			"/(" . ($this->object->db->disable_formatters == 1
 				? ''
-				: "\%\%.*?\%\%|").
+				: "\%\%.*?\%\%|") .
 			"~([^ \t\n]+)|" .
 			"\"\".*?\"\"|" .
 			"\{\{[^\n]*?\}\}|" .

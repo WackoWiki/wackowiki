@@ -41,7 +41,7 @@ if (   $this->is_admin()
 		($page_id? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
 		($page_id
 			? '@' . $this->page['page_id'] . '@'
-			: '').
+			: '') .
 		$file['file_name']);
 }
 else

@@ -252,11 +252,11 @@ function bb2_manage(&$engine)
 	#$level_mod_pagination		= isset($_GET['level_mod'])			? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode=badbehavior&amp;setting=bb2_manage'.
-								(!empty($blocked_pagination)			? '&amp;blocked=' . htmlspecialchars($blocked_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($permitted_pagination)			? '&amp;permitted=' . htmlspecialchars($permitted_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($key_pagination)				? '&amp;status_key=' . htmlspecialchars($key_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($ip_pagination)					? '&amp;ip=' . htmlspecialchars($ip_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
-								(!empty($request_method_pagination)		? '&amp;request_method=' . htmlspecialchars($request_method_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').
+								(!empty($blocked_pagination)			? '&amp;blocked=' . htmlspecialchars($blocked_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
+								(!empty($permitted_pagination)			? '&amp;permitted=' . htmlspecialchars($permitted_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
+								(!empty($key_pagination)				? '&amp;status_key=' . htmlspecialchars($key_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
+								(!empty($ip_pagination)					? '&amp;ip=' . htmlspecialchars($ip_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
+								(!empty($request_method_pagination)		? '&amp;request_method=' . htmlspecialchars($request_method_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
 								(!empty($user_agent_pagination)			? '&amp;user_agent=' . htmlspecialchars($user_agent_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
 
 	// Query the DB based on variables selected

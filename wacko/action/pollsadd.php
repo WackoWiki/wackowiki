@@ -161,7 +161,7 @@ if (isset($_POST['submit_poll']))
 		// set confirmation message
 		if ($moderation !== true)
 		{
-			$message = $this->_t('PollsSubmitted').
+			$message = $this->_t('PollsSubmitted') .
 				($startmod == 1 && $admin
 					? ''
 					: ' ' . $this->_t('PollsSubmittedMod'));
@@ -177,7 +177,7 @@ if (isset($_POST['submit_poll']))
 		if ($this->db->enable_email == true && $user != $this->db->admin_name && $moderation !== true)
 		{
 			$subject =	$this->db->site_name . '. ' . $this->_t('PollsNotifySubj');
-			$body	 =	$this->_t('EmailHello').
+			$body	 =	$this->_t('EmailHello') .
 						$this->db->admin_name . ".\n\n" .
 						str_replace('%1', $user, $this->_t('PollsNotifyBody')) . "\n" .
 						$this->href('', 'admin.php') . "\n\n" .
@@ -295,9 +295,9 @@ else if ($stop_mod !== true)
 	echo '<input type="submit" name="submit_poll" id="submit" value="' . $this->_t('PollsSubmit') . '" /> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
-		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('PollsCancel') . '"/></a>' : '').
+		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('PollsCancel') . '"/></a>' : '') .
 			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="startmod" id="startmod" value="1"' . ($startmod == 1 ? ' checked="checked" ' : ' ') . '/> '.
-			'<label for="startmod">' . $this->_t('PollsStartMod') . '</label>' : '').
+			'<label for="startmod">' . $this->_t('PollsStartMod') . '</label>' : '') .
 			'</td></tr>';
 	echo '</table>';
 	echo $this->form_close();

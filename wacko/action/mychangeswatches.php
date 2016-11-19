@@ -11,7 +11,7 @@ if ($user_id = $this->get_user_id())
 {
 	$pref		= $this->db->table_prefix;
 
-	echo $this->_t('MyChangesWatches').
+	echo $this->_t('MyChangesWatches') .
 		' (<a href="' . $this->href('', '', 'mode=mychangeswatches&amp;reset=1') . '#list">' . 
 		$this->_t('ResetChangesWatches') . '</a>).<br /><br />';
 
@@ -46,7 +46,7 @@ if ($user_id = $this->get_user_id())
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				echo '<small>(' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->_t('History')).
+				echo '<small>(' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->_t('History')) .
 					')</small> ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "<br />\n";
 			}
 		}

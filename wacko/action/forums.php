@@ -142,10 +142,10 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					'<td style="width:60%; vertical-align:top;">' .
 						( $this->has_access('read', $forum['page_id'], GUEST) === false
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
-							: '' ).
+							: '' ) .
 						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
 							? '<strong class="cite" title="' . $this->_t('ForumNewPosts') . '">[updated]</strong> '
-							: '' ).
+							: '' ) .
 						'<strong>' . $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '', $_lang) . '</strong><br />' .
 						'<small>' . $forum['description'] . '</small>' .
 					'</td>' .
@@ -164,7 +164,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					}
 
 					echo '<small><a href="' . $this->href('', $comment['comment_on'], 'p=last') . '#' . $comment['tag'] . '">' . $comment['topic_title'] . '</a><br />' .
-						$this->user_link($comment['user_name']).
+						$this->user_link($comment['user_name']) .
 						' (' . $this->get_time_formatted($comment['created']) . ')</small>';
 				}
 				else
@@ -175,7 +175,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					}
 
 					echo '<small><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . '</a><br />' .
-						$this->user_link($comment['user_name']).
+						$this->user_link($comment['user_name']) .
 						' (' . $this->get_time_formatted($comment['created']) . ')</small>';
 				}
 			}

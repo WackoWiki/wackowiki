@@ -216,11 +216,11 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						'<td style="text-align:left;">' . 
 						( !$this->has_access('comment', $topic['page_id'], GUEST)
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
-							: '' ).
+							: '' ) .
 						( $updated
 							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[updated]</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
 							: '<strong>' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
-						).
+						) .
 						'</td>' . 
 						'<td style="text-align:center; white-space: nowrap;"><small title="' . ( $admin ? $topic['ip'] : '' ) . '">' . 
 							'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']) . '&nbsp;&nbsp;<br />' . 

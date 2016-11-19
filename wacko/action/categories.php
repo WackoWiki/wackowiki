@@ -62,7 +62,7 @@ if (!empty($_category))
 
 	echo (!empty($_category) && (!$list && $label == true)
 			? $this->_t('Categories') . ': '
-			: '').
+			: '') .
 		$output;
 
 	if ($list)

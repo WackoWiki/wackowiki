@@ -141,8 +141,8 @@ function admin_content_pages(&$engine, &$module)
 		"SELECT p.*, length(body) as page_size, u.* " .
 		"FROM {$engine->db->table_prefix}page p " .
 			"LEFT JOIN {$engine->db->table_prefix}user u ON (p.user_id = u.user_id) " .
-		( $where ? $where : "WHERE p.comment_on_id = '0' " ).
-		( $order ? $order : 'ORDER BY p.page_id DESC ' ).
+		( $where ? $where : "WHERE p.comment_on_id = '0' " ) .
+		( $order ? $order : 'ORDER BY p.page_id DESC ' ) .
 		$pagination['limit']);
 
 	echo $engine->form_open('content_pages');

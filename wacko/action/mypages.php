@@ -92,7 +92,7 @@ if (($user_id = $this->get_user_id()))
 
 		echo '<strong>' . $this->_t('ListOwnedPages3') . '</strong>';
 		echo '<br />[<a href="' . 
-			$this->href('', '', $by('')) . '">' . $this->_t('OrderABC').
+			$this->href('', '', $by('')) . '">' . $this->_t('OrderABC') .
 			'</a>] [<a href="' . $this->href('', '', $by('date')) . '">' . 
 			$this->_t('OrderDate') . "</a>]<br /><br />\n";
 
@@ -128,7 +128,7 @@ if (($user_id = $this->get_user_id()))
 				}
 
 				// print entry
-				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).
+				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')) .
 					' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "</li>\n";
 
 			}
