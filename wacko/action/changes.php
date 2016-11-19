@@ -105,12 +105,12 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			(!$this->hide_revisions
 				? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')) . ' '
 				: $time
-			).
+			) .
 			'</span> &mdash; '.
 			($title == 1
 				? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
 				: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
-			).
+			) .
 
 			' . . . . . . . . . . . . . . . . <small>' .
 			$this->user_link($page['user_name'], '', true, false) . ' ' .

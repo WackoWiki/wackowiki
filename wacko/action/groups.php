@@ -103,10 +103,10 @@ else
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (g.moderator_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (m.group_id = g.group_id) " .
 		$where.
-		( $where ? 'AND ' : "WHERE ").
+		( $where ? 'AND ' : "WHERE ") .
 			"g.active = '1' " .
 		"GROUP BY g.group_id " .
-		( $order ? $order : "ORDER BY members DESC " ).
+		( $order ? $order : "ORDER BY members DESC " ) .
 		$pagination['limit']);
 
 	// usergroup filter form

@@ -163,15 +163,15 @@ if ($this->has_access('read'))
 				echo '<footer>' .
 						'<ul class="comment-info">' . "\n" .
 						"<li>" .
-							$this->user_link($comment['owner_name']).
+							$this->user_link($comment['owner_name']) .
 						"</li>\n" .
 						'<li><time datetime="' . $comment['created'] . '">' . $this->get_time_formatted($comment['created']) . "</time></li>\n" .
 						($comment['modified'] != $comment['created']
 							? '<li><time datetime="' . $comment['modified'] . '">' . $this->get_time_formatted($comment['modified']) . "</time> " . $this->_t('CommentEdited') . "</li>\n"
-							: '').
+							: '') .
 						/*($user_stats == true
 							? "<li>" . $this->_t('UsersComments') . ': ' . $user_stats['comments'] . '&nbsp;&nbsp; ' . $this->_t('UsersPages') . ': ' . $user_stats['pages'] . '&nbsp;&nbsp; ' . $this->_t('UsersRevisions') . ': ' . $user_stats['revisions'] . "</li>\n"
-							: '').*/
+							: '') .*/
 					"</ul>\n" .
 					"</footer>\n";
 				echo "</article>\n";

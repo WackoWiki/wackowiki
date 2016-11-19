@@ -330,7 +330,7 @@ if ($engine->db->xml_sitemap)
 	<p>
 		Performs re-rendering for all intrasite links and restores
 		the contents of the table 'links' and 'file_links' in the event of damage or injury (this can take
-		considerable time).
+		considerable time) .
 	</p>
 <?php
 	echo $engine->form_open('linksupdate');

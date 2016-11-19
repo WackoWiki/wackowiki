@@ -31,12 +31,12 @@ $wacko_config_defaults = [
 	'base_url'						=> ($_SERVER['SERVER_PORT'] == 443
 											? 'https'
 											: 'http'
-										).
+										) .
 										'://' . $_SERVER['SERVER_NAME'].
 										($_SERVER['SERVER_PORT'] != 80
 											? ':' . $_SERVER['SERVER_PORT']
 											: ''
-										).
+										) .
 										'/' . preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')) . '/' ,
 	'rewrite_mode'					=> ($found_rewrite_extension ? '1' : '0'),
 	'tls'							=> 0,

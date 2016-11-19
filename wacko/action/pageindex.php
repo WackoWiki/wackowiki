@@ -105,7 +105,7 @@ $count = $this->db->load_single(
 			? "AND " .
 				($title
 					? "title "
-					: "tag ").
+					: "tag ") .
 				"LIKE " . $this->db->q($letter . '%') . " "
 			: "")
 	, true);

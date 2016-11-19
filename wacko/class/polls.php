@@ -214,7 +214,7 @@ class Polls
 		}
 		else
 		{
-			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll' . $poll_id.'_form']).
+			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll' . $poll_id.'_form']) .
 					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>' .
 					'<a id="poll' . $poll_id . '_form"></a>' .
 					'<input type="hidden" name="poll" value="' . $poll_id . '" />' .
@@ -226,7 +226,7 @@ class Polls
 				$poll	.= '<tr class="lined"><td class="label">' .
 							($header['plural'] == 1
 								? '<input type="checkbox" id="' . $var['v_id'] . '" name="' . $var['v_id'] . '" value="1" />'
-								: '<input type="radio" id="' . $var['v_id'] . '" name="id" value="' . $var['v_id'] . '" />').
+								: '<input type="radio" id="' . $var['v_id'] . '" name="id" value="' . $var['v_id'] . '" />') .
 							'</td>' .
 						'<td style="width:95%;text-align:left;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>' . "\n";
 			}
@@ -268,7 +268,7 @@ class Polls
 		}
 		else
 		{
-			$poll	= $this->engine->form_open().
+			$poll	= $this->engine->form_open() .
 					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>' .
 					'<a id="poll' . $poll_id . '_form"></a>' .
 					'<table class="formation">' .

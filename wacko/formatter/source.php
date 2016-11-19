@@ -15,8 +15,8 @@ if ($copy_button)
 {
 	$this->add_html_head('<script type="text/javascript" src="' . $this->db->base_url . 'js/clipboard.min.js" async onload="new Clipboard(\'.clipb\')"></script>' . "\n");
 
-	echo '<button class="clipb" style="margin:5px" data-clipboard-target="#' . $div_id . '">' . 
-		$this->_t('SourceCopyToClipboard').
+	echo '<button class="clipb" style="margin:5px" data-clipboard-target="#' . $div_id . '">' .
+		$this->_t('SourceCopyToClipboard') .
 		'</button>';
 }
 
@@ -50,8 +50,8 @@ switch ($default)
 
 		// about the source
 		echo "\n\n<br /><br /><hr />\n\n<p>" .
-			$this->_t('SourceFrom').
-				$this->link($source, '', $this->_t('SourceFromLink')).
+			$this->_t('SourceFrom') .
+				$this->link($source, '', $this->_t('SourceFromLink')) .
 				"</p>";
 		break;
 

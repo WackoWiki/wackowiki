@@ -79,7 +79,7 @@ if ($this->is_owner() || $this->is_admin())
 								? $word['parent_id']
 								: $word['category_id'] ) . "', "
 							: ''
-						).
+						) .
 						"category_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
 						"category				= " . $this->db->q($_POST['category']) . ", " .
 						"category_description	= " . $this->db->q($_POST['category_description']) . " ");
@@ -228,9 +228,9 @@ if ($this->is_owner() || $this->is_admin())
 			echo $this->form_open('add_category', ['page_method' => 'categories']);
 			echo '<input type="hidden" name="category_id" value="' . (int) $parent_id . '" />' . "\n";
 			echo '<table class="formation">';
-			echo '<tr><td><label for="new_category">' . $this->_t('CategoriesAdd') . '</label></td>' . 
+			echo '<tr><td><label for="new_category">' . $this->_t('CategoriesAdd') . '</label></td>' .
 				'<td><input type="text" name="category" id="new_category" value="' . (isset($_POST['category']) ? htmlspecialchars($_POST['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100" /></td></tr>';
-			echo '<tr><td><label for="category_description">' . $this->_t('CategoryDescription') . '</label></td>' . 
+			echo '<tr><td><label for="category_description">' . $this->_t('CategoryDescription') . '</label></td>' .
 				'<td><textarea id="category_description" name="category_description" rows="4" cols="51" maxlength="250"></textarea></td></tr>';
 
 			echo '<tr><td>';
@@ -242,7 +242,7 @@ if ($this->is_owner() || $this->is_admin())
 			}
 
 			echo '<input type="submit" id="submit" name="create" value="' . $this->_t('CategoriesSaveButton') . '" /> '.
-				 '<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' . 
+				 '<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
 				 '</td></tr>';
 			echo '</table><br />';
 			echo $this->form_close();
@@ -263,8 +263,8 @@ if ($this->is_owner() || $this->is_admin())
 					$this->_t('CategoriesRename') . ' \'<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\' in</label> ' .
 					'<input type="text" name="category" id="new_name" value="' . (isset($_POST['category']) ? htmlspecialchars($_POST['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100" /> '.
 					'<input type="submit" id="submit" name="rename" value="' . $this->_t('CategoriesSaveButton') . '" /> ' .
-					'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' . 
-					'<br /><small>' . $this->_t('CategoriesRenameInfo') . '</small>' . 
+					'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
+					'<br /><small>' . $this->_t('CategoriesRenameInfo') . '</small>' .
 					'</td></tr>';
 				echo '</table><br />';
 				echo $this->form_close();
@@ -302,8 +302,8 @@ if ($this->is_owner() || $this->is_admin())
 						$options.
 					'</select> '.
 					'<input type="submit" id="submit" name="ugroup" value="' . $this->_t('CategoriesSaveButton') . '" /> '.
-					'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' . 
-					'<br /><small>' . $this->_t('CategoriesGroupInfo') . '</small>' . 
+					'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
+					'<br /><small>' . $this->_t('CategoriesGroupInfo') . '</small>' .
 					'</td></tr>';
 				echo '</table><br />';
 				echo $this->form_close();
@@ -322,11 +322,11 @@ if ($this->is_owner() || $this->is_admin())
 				echo $this->form_open('remove_category', ['page_method' => 'categories']);
 				echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change'] . '" />' . "\n";
 				echo '<table class="formation">';
-				echo '<tr><td><label for="">' . 
+				echo '<tr><td><label for="">' .
 					$this->_t('CategoriesDelete') . ' \'<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 					'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-					'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' . 
-					'<br /><small>' . $this->_t('CategoriesDeleteInfo') . '</small>' . 
+					'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
+					'<br /><small>' . $this->_t('CategoriesDeleteInfo') . '</small>' .
 					'</td></tr>';
 				echo '</table><br />';
 				echo $this->form_close();
@@ -353,7 +353,7 @@ if ($this->is_owner() || $this->is_admin())
 			echo '<li class="lined"><span class="">' . "\n\t";
 			echo ($this->is_admin() || $this->db->owners_can_change_categories == true
 					? '<input type="radio" name="change" value="' . $category_id . '" />'
-					: '').
+					: '') .
 				'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? ( in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' /> ' . "\n\t" .
 				'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
 

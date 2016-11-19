@@ -566,9 +566,9 @@ function admin_user_groups(&$engine, &$module)
 			"FROM {$engine->db->table_prefix}usergroup g " .
 				"LEFT JOIN {$engine->db->table_prefix}user u ON (g.moderator_id = u.user_id) " .
 				"LEFT JOIN " . $engine->db->table_prefix . "usergroup_member m ON (m.group_id = g.group_id) " .
-			($where ? $where : '').
+			($where ? $where : '') .
 			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name " .
-			($order ? $order : 'ORDER BY group_id DESC ').
+			($order ? $order : 'ORDER BY group_id DESC ') .
 			$pagination['limit']);
 
 	/////////////////////////////////////////////

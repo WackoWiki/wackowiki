@@ -22,7 +22,7 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 		"WHERE " .
 		($tag
 			?	"a2.page_id IS NULL AND b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-			:	"a2.page_id IS NULL AND a.comment_on_id <> '0' ").
+			:	"a2.page_id IS NULL AND a.comment_on_id <> '0' ") .
 		($deleted != 1
 			? "AND a.deleted <> '1' "
 			: "") .
@@ -135,9 +135,9 @@ if ($this->user_allowed_comments())
 					($title
 						? $this->link('/' . $page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
 						: $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
-					).
+					) .
 					' . . . . . . . . . . . . . . . . <small>' . $this->_t('LatestCommentBy') . ' '.
-					$this->user_link($page['comment_owner_name'], '', true, false).
+					$this->user_link($page['comment_owner_name'], '', true, false) .
 					"</small></li>\n";
 				}
 			}

@@ -15,7 +15,7 @@ class preformatter
 			(isset($this->object->user_lang) && isset($this->object->page_lang)
 			 && $this->object->user_lang != $this->object->page_lang
 				? '|\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)'
-				: '').
+				: '') .
 			')/sm';
 	}
 

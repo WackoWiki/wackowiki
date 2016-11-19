@@ -19,7 +19,7 @@ if (($user_id = $this->get_user_id()))
 
 	if (@$_GET['byname'])
 	{
-		echo $this->_t('MyChangesTitle2').
+		echo $this->_t('MyChangesTitle2') .
 		' [<a href="' . $this->href('', '', $by('date')) . '">' . 
 		$this->_t('OrderChange') . "</a>].</strong><br /><br />\n";
 
@@ -65,7 +65,7 @@ if (($user_id = $this->get_user_id()))
 				}
 
 				// print entry
-				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->_t('RevisionTip')).
+				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->_t('RevisionTip')) .
 					' &mdash; ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "</li>\n";
 			}
 
@@ -127,7 +127,7 @@ if (($user_id = $this->get_user_id()))
 				}
 
 				// print entry
-				echo "<li>" . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')).
+				echo "<li>" . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')) .
 					" &mdash; " . $this->compose_link_to_page($page['tag'], '', '', 0) . $edit_note . "</li>\n";
 			}
 

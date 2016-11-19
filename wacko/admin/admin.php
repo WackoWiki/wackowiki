@@ -192,7 +192,7 @@ foreach (Ut::file_glob('admin/{common,module}/*.php') as $filename)
 $menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['lock']['cat']].
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
 				? "\n<ul>\n" . '<li class="active">'
-				: "\n<ul>\n<li>").
+				: "\n<ul>\n<li>") .
 			'<a href="admin.php" title="' . $module['lock']['title'] . '">' . $module['lock']['name'] . '</a>' .
 			"</li>\n";
 

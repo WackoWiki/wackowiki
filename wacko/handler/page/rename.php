@@ -88,7 +88,7 @@ if ($registered
 				$message .= '<li>' . $this->_t('NewNameOfPage') . $this->link('/' . $new_name) . "</li>\n";
 
 				// log event
-				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $this->tag, $new_name).
+				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $this->tag, $new_name) .
 					($need_redirect? $this->_t('LogRenamedPage2', SYSTEM_LANG) : '' ));
 
 				$message .= "</ol>\n";
@@ -267,7 +267,7 @@ function move(&$engine, $old_page, $new_name)
 				$message .= '<li>' . $engine->_t('NewNameOfPage') . $engine->link('/' . $new_name) . "</li>\n";
 
 				// log event
-				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', SYSTEM_LANG), $old_page['tag'], $new_name).
+				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', SYSTEM_LANG), $old_page['tag'], $new_name) .
 					($need_redirect? $engine->_t('LogRenamedPage2', SYSTEM_LANG) : '' ));
 			}
 		}

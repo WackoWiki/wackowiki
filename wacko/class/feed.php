@@ -84,10 +84,10 @@ class Feed
 					$xml .= "<description>" . $page['modified'] . " " . $this->engine->_t('By') . " " .
 						($page['user_name']
 							? $page['user_name']
-							: $this->engine->_t('Guest')).
+							: $this->engine->_t('Guest')) .
 						($page['edit_note']
 							? ' [' . $page['edit_note'] . ']'
-							: '').
+							: '') .
 						"</description>\n";
 					$xml .= "</item>\n";
 				}
@@ -289,7 +289,7 @@ class Feed
 					$xml .= "<title>" . $comment['title'] . " " . $this->engine->_t('To') . " " . $comment['page_title'] . " " . $this->engine->_t('From') . " " .
 						($comment['user_name']
 							? $comment['user_name']
-							: $this->engine->_t('Guest')).
+							: $this->engine->_t('Guest')) .
 						"</title>\n";
 					$xml .= "<link>" . $this->engine->href('', $comment['tag'], '') . "</link>\n";
 					$xml .= "<guid>" . $this->engine->href('', $comment['tag'], '') . "</guid>\n";

@@ -77,13 +77,13 @@ else
 			$edit_link = '<nav class="include-meta">' . 
 
 				// show page link
-				$this->link('/' . $inc_page['tag']).
+				$this->link('/' . $inc_page['tag']) .
 
 				// show edit link
 				($this->has_access('write', $page_id)
 					? '&nbsp;&nbsp;::&nbsp;'.
 					  '<a href="' . $this->href('edit', $inc_page['tag']) . '">' . $this->_t('EditIcon') . '</a>'
-					: '').
+					: '') .
 
 				"</nav>\n";
 

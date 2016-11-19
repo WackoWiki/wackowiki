@@ -81,14 +81,14 @@ $sql = "SELECT
 			INNER JOIN {$this->db->table_prefix}page p ON (cp.page_id = p.page_id) " .
 			($owner
 				? "INNER JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) "
-				: '' ).
+				: '' ) .
 		"WHERE c.category_lang = '{$lang}' " .
 			($root
 				? "AND ( p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) "
-				: '' ).
+				: '' ) .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
-				: '' ).
+				: '' ) .
 		"GROUP BY
 			c.category
 		ORDER BY {$order}";

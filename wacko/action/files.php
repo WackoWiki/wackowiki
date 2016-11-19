@@ -91,7 +91,7 @@ if ($can_view)
 		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' " .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
-				: '').
+				: '') .
 			($deleted != 1
 				? "AND f.deleted <> '1' "
 				: ""), true);
@@ -228,11 +228,11 @@ if ($can_view)
 					($file['picture_w']
 						? $file['picture_w'] . ' × ' . $file['picture_h'] . 'px<br />'
 						: $hits . '<br />'
-					).
+					) .
 
 					$file_size . '<br /><br />' .
 					$this->user_link($file['user_name'], '', true, false) . '<br />' .
-					$this->get_time_formatted($dt).
+					$this->get_time_formatted($dt) .
 				'</td>';
 			}
 

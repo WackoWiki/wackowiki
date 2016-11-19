@@ -1087,7 +1087,7 @@ class Wacko
 						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"WHERE " . ($page_id != 0
 						? "page_id  = '" . (int) $page_id . "' "
-						: "supertag = " . $this->db->q($supertag) . " " ).
+						: "supertag = " . $this->db->q($supertag) . " " ) .
 						($deleted != 1
 							? "AND p.deleted <> '1' "
 							: "") .
@@ -1107,7 +1107,7 @@ class Wacko
 							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
 						"WHERE " . ($page_id != 0
 							? "p.page_id  = '" . (int) $page_id . "' "
-							: "p.supertag = " . $this->db->q($supertag) . " " ).
+							: "p.supertag = " . $this->db->q($supertag) . " " ) .
 							($deleted != 1
 								? "AND p.deleted <> '1' "
 								: "") .
@@ -1613,7 +1613,7 @@ class Wacko
 				"AND a.page_id = p.page_id " .
 				($tag
 					? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-					: '').
+					: '') .
 				"AND a.privilege = 'read' " .
 			"ORDER BY modified DESC " .
 			"LIMIT {$pagination['perpage']}", true)))
@@ -4207,7 +4207,7 @@ class Wacko
 			"SELECT " .
 			(!isset($page_id)
 				? "referrer, count(referrer) AS num "
-				: "page_id, referrer, count(referrer) AS num ").
+				: "page_id, referrer, count(referrer) AS num ") .
 			"FROM " . $this->db->table_prefix . "referrer " .
 			(!is_null($page_id)
 				? "WHERE page_id = '" . (int) $page_id . "' "
@@ -5583,8 +5583,8 @@ class Wacko
 					$menu_item['page_id'],
 					(($title !== '')? $title : $menu_item['tag']),
 					'((' . $menu_item['tag'].
-						(($title !== '')? ' ' . $title : '').
-						($menu_item['menu_lang']? ' @@' . $menu_item['menu_lang'] : '').
+						(($title !== '')? ' ' . $title : '') .
+						($menu_item['menu_lang']? ' @@' . $menu_item['menu_lang'] : '') .
 					'))',
 					$menu_item['menu_lang'],
 				];
@@ -6928,10 +6928,10 @@ class Wacko
 
 		return '<br /><small>' .
 			$this->_t('PwdCplxDesc1') .
-			Ut::perc_replace($this->_t('PwdCplxDesc2'), $this->db->pwd_min_chars).
+			Ut::perc_replace($this->_t('PwdCplxDesc2'), $this->db->pwd_min_chars) .
 			($this->db->pwd_unlike_login > 0
 				? ', ' . $this->_t('PwdCplxDesc3')
-				: '').
+				: '') .
 			($this->db->pwd_char_classes > 0
 				? ', ' . $pwd_cplx_text
 				: '') . '</small>';

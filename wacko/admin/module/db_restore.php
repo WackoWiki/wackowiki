@@ -108,7 +108,7 @@ function admin_db_restore(&$engine, &$module)
 									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
 									'</td>
 									<th style="text-align:left;white-space:nowrap;">' .
-										date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]).
+										date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
 									'</th>
 								</tr>
 								<tr>
@@ -130,7 +130,7 @@ function admin_db_restore(&$engine, &$module)
 					echo '<td><table>';
 						// cluster root
 						echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">' .
-								$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ).
+								$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 							'</th></tr>' . "\n";
 						// contents
 						echo '<tr>' .
@@ -221,7 +221,7 @@ function admin_db_restore(&$engine, &$module)
 
 				echo '<br /><br />
 						<p><small>' .
-							$engine->_t('RestoreOptionsInfo').
+							$engine->_t('RestoreOptionsInfo') .
 						'</small></p>';
 
 			echo $engine->form_close();
@@ -368,7 +368,7 @@ function admin_db_restore(&$engine, &$module)
 			$results .= '<strong>================================================' . "\n" .
 				date('H:i:s') . ' - RESTORATION COMPLETED</strong>';
 
-			$message = $engine->_t('BackupRestored').
+			$message = $engine->_t('BackupRestored') .
 					' <a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($pack, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>.';
 			$engine->show_message($message, 'success');
 ?>
@@ -419,7 +419,7 @@ function admin_db_restore(&$engine, &$module)
 <?php
 		if (!is_executable(UPLOAD_BACKUP_DIR . '/'))
 		{
-			echo substr(sprintf('%o', fileperms(UPLOAD_BACKUP_DIR . '/')), -4). "<br />\n";
+			echo substr(sprintf('%o', fileperms(UPLOAD_BACKUP_DIR . '/')), -4) . "<br />\n";
 			echo output_image($engine, false) . '<strong class="red">The '.UPLOAD_BACKUP_DIR . '/' . ' directory is not executable.</strong>' .  "<br />\n";
 		}
 		else
@@ -483,7 +483,7 @@ function admin_db_restore(&$engine, &$module)
 											'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
 										'</td>
 										<th style="text-align:left;white-space:nowrap;">' .
-											date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]).
+											date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
 										'</th>
 									</tr>
 									<tr>
@@ -505,7 +505,7 @@ function admin_db_restore(&$engine, &$module)
 						echo '<td><table>';
 							// cluster root
 							echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">' .
-									$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ).
+									$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 								'</th></tr>' . "\n";
 							// contents
 							echo '<tr>' .

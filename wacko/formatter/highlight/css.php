@@ -181,7 +181,7 @@ $special_keyword2 = [
 			{
 				return
 				'<span style="color: ' . $options['color']['comment'] . ';">/*'.
-				strip_tags($matches[1]).
+				strip_tags($matches[1]) .
 				'*/</span>';
 			},
 			$css);
@@ -198,7 +198,7 @@ $special_keyword2 = [
 		foreach ($lines as $line)
 		{
 			$i += 1;
-			$source .= '<li id="l' . $i . '">' .trim($line). "</li>";
+			$source .= '<li id="l' . $i . '">' . trim($line) . "</li>";
 		}
 
 		$source .= '</ol>';

@@ -235,7 +235,7 @@ else if (($user = $this->get_user()))
 		<?php
 				echo '<input type="radio" id="notify_page0" name="notify_page" value="0" ' . ($user['notify_page'] == 0 ? 'checked="checked"' : '' ) . '/><label for="notify_page0">' . $this->_t('NotifyOff') . '</label>';
 				echo '<input type="radio" id="notify_page1" name="notify_page" value="1" ' . ($user['notify_page'] == 1 ? 'checked="checked"' : '' ) . '/><label for="notify_page1">' . $this->_t('NotifyAlways') . '</label>';
-				echo '<input type="radio" id="notify_page2" name="notify_page" value="2" ' . ($user['notify_page'] == 2 ? 'checked="checked"' : '' ) . '/><label for="notify_page2" title="' . $this->_t('NotifyPendingPageTip').
+				echo '<input type="radio" id="notify_page2" name="notify_page" value="2" ' . ($user['notify_page'] == 2 ? 'checked="checked"' : '' ) . '/><label for="notify_page2" title="' . $this->_t('NotifyPendingPageTip') .
 					' ' . $this->_t('NotifyPendingTip') . '">' . $this->_t('NotifyPending') . '</label>';
 				// echo '<input type="radio" id="notify_page3" name="notify_page" value="3" ' . ($user['notify_page'] == 3 ? 'checked="checked"' : '' ) . '/><label for="notify_page3">' . $this->_t('NotifyDigest') . '</label>';
 		?>
@@ -249,7 +249,7 @@ else if (($user = $this->get_user()))
 <?php
 				echo '<input type="radio" id="notify_comment0" name="notify_comment" value="0" ' . ($user['notify_comment'] == 0 ? 'checked="checked"' : '' ) . '/><label for="notify_comment0">' . $this->_t('NotifyOff') . '</label>';
 				echo '<input type="radio" id="notify_comment1" name="notify_comment" value="1" ' . ($user['notify_comment'] == 1 ? 'checked="checked"' : '' ) . '/><label for="notify_comment1">' . $this->_t('NotifyAlways') . '</label>';
-				echo '<input type="radio" id="notify_comment2" name="notify_comment" value="2" ' . ($user['notify_comment'] == 2 ? 'checked="checked"' : '' ) . '/><label for="notify_comment2" title="' . $this->_t('NotifyPendingCommentTip').
+				echo '<input type="radio" id="notify_comment2" name="notify_comment" value="2" ' . ($user['notify_comment'] == 2 ? 'checked="checked"' : '' ) . '/><label for="notify_comment2" title="' . $this->_t('NotifyPendingCommentTip') .
 					' ' . $this->_t('NotifyPendingTip') . '">' . $this->_t('NotifyPending') . '</label>';
 				// echo '<input type="radio" id="notify_comment3" name="notify_comment" value="3" ' . ($user['notify_comment'] == 3 ? 'checked="checked"' : '' ) . '/><label for="notify_comment3">' . $this->_t('NotifyDigest') . '</label>';
 ?>
@@ -484,7 +484,7 @@ else if (($user = $this->get_user()))
 		if (!$user['email'] || $code['email_confirm'])
 			echo '<div class="hint"><strong class="cite">' .
 				$this->_t('EmailNotVerified') . '</strong><br />' .
-				'<small>' . $this->_t('EmailNotVerifiedDesc').
+				'<small>' . $this->_t('EmailNotVerifiedDesc') .
 				'<strong><a href="' . $this->href('', '', 'resend_code=1') . '">' . $this->_t('HereLink') . '</a></strong>.
 				</small></div>';
 ?></td>

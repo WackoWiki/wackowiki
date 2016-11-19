@@ -214,7 +214,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// forward
 			$this->set_message(
-				$this->_t('SiteRegistered').
+				$this->_t('SiteRegistered') .
 				'&laquo;' . $this->db->site_name . '&raquo;. <br /><br />' .
 				$this->_t('SiteEmailConfirm'));
 
