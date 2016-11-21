@@ -3,6 +3,7 @@
 /* basic -------------------------------------------------- */
 p,
 td,
+th,
 li,
 select,
 textarea {
@@ -156,6 +157,16 @@ kbd {
 	display: table;
 	clear: both;
 }
+
+/* shadow around mainwrapper */
+/*
+#mainwrapper {
+	background-color: #f5f5f5;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	position: relative;
+}
+*/
 
 form input.submitinput {
 	color: #000;
@@ -687,7 +698,15 @@ fieldset {
 	background: #CCFFCC
 }
 
-.upload td {
+.upload th{
+	color: #444444;
+	font-weight: normal;
+	text-align: left;
+	width: 130px;
+}
+
+.upload td,
+.upload th {
 	padding: 2px 5px 2px 5px;
 	vertical-align: top
 }
@@ -736,6 +755,10 @@ td.file- {
 .upload td.tool- a.tool2-:hover,
 .upload td.tool- a.tool2-:active {
 	color: #ff0000
+}
+
+.fileinfo {
+	overflow-wrap: break-word;
 }
 
 .preview {
@@ -1426,6 +1449,11 @@ th.form_left {
 	margin: 0;
 	padding: 0;
 }
+
+.menu li:first-child {
+	border-left: 1px none;
+}
+
 .menu li {
 	border-left: 1px dotted #CCCCCC;
 	float: left;
@@ -2004,6 +2032,7 @@ ul.upload ul {
 	overflow: hidden;
 	padding-bottom: 5px;
 	text-align: left;
+	overflow-wrap: break-word;
 }
 
 .info_title {
