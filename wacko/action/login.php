@@ -38,27 +38,34 @@ if (($user = $this->get_user()))
 	$tpl->u_href = $this->href();
 	$tpl->u_link = $this->compose_link_to_page($this->db->users_page . '/' . $user['user_name'], '', $user['user_name']);
 
+	$message = null;
+
 	if (!$this->db->is_null_date($user['last_visit']))
 	{
-		$this->set_message($this->_t('LastVisit') .
+		$message .= $this->_t('LastVisit') .
 			' <code>' .
 			$this->get_time_formatted($user['last_visit']) .
-			'</code>');
+			'</code>' . "<br />\n";
 	}
 
 	// Only allow your session to be used from this IP address.
-	$this->set_message($this->_t('BindSessionIp') . ' '.
+	$message .= $this->_t('BindSessionIp') . ' '.
 		($user['validate_ip']? $this->_t('BindSessionIpOn') . ' ' : '') .
 		'<code>' .
 		($user['validate_ip']? $user['ip'] : 'Off') .
-		'</code>');
+		'</code>' . "<br />\n";
 
 	if ($this->db->tls || $this->db->tls_proxy)
 	{
-		$this->set_message($this->_t('TrafficProtection') .
+		$message .= $this->_t('TrafficProtection') .
 			' <code>' .
-			( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'] . ' (' . $_SERVER['SSL_PROTOCOL'] . ')' : 'no' ) .
-			'</code>');
+			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'] . ' (' . $_SERVER['SSL_PROTOCOL'] . ')' : 'no' ) .
+			'</code>' . "<br />\n";
+	}
+
+	if (!empty($message))
+	{
+		$this->set_message($message);
 	}
 
 	$tpl->u_logout = $this->href('', '', 'action=logout');
