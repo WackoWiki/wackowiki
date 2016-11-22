@@ -74,7 +74,7 @@ class Http
 			{
 				if (($contents = file_get_contents($this->file)))
 				{
-					return $contents."\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $timestamp) . " -->\n";
+					return $contents . "\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $timestamp) . " -->\n";
 				}
 			}
 		}
@@ -242,9 +242,9 @@ class Http
 			// cache only for anonymous user
 			if (!isset($this->sess->userprofile))
 			{
-				$this->page = $page;
-				$this->method = $method;
-				$this->caching = $this->check_http_request();
+				$this->page		= $page;
+				$this->method	= $method;
+				$this->caching	= $this->check_http_request();
 			}
 		}
 	}
@@ -486,8 +486,8 @@ class Http
 
 		if (!isset($types))
 		{
-			$conffile = Ut::join_path(CONFIG_DIR, 'mime.types');
-			$cachefile = Ut::join_path(CACHE_CONFIG_DIR, 'mime.types');
+			$conffile	= Ut::join_path(CONFIG_DIR, 'mime.types');
+			$cachefile	= Ut::join_path(CACHE_CONFIG_DIR, 'mime.types');
 
 			clearstatcache();
 
@@ -503,12 +503,15 @@ class Http
 				&& ($types = Ut::unserialize($text))))
 			{
 				$types = [];
+
 				foreach (file($conffile) as $line)
 				{
 					$line = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
+
 					if (count($line) > 1 && ctype_alpha($line[0][0]))
 					{
 						$type = array_shift($line);
+
 						foreach ($line as $ext)
 						{
 							$types[$ext] = $type;
@@ -538,6 +541,7 @@ class Http
 		if (($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename))))
 		{
 			$this->status($code);
+
 			if (defined('HTTP_' . $code) && $this->sendfile0(constant('HTTP_' . $code), null, -1))
 			{
 				echo ($code == 404)? 'File not found' : 'File access prohibited';
@@ -549,6 +553,7 @@ class Http
 	{
 		clearstatcache();
 		$path = realpath($path);
+
 		if (!@file_exists($path))
 		{
 			return 404;
@@ -650,13 +655,16 @@ class Http
 			{
 				$size = $to - $from;
 				$piece = 1 << 16;
+
 				while ($size > 0 && !feof($fp) && !connection_status())
 				{
 					$part = fread($fp, (($size < $piece)? $size : $piece));
+
 					if (!($len = strlen($part)))
 					{
 						break; // error
 					}
+
 					echo $part;
 					$size -= $len;
 				}
@@ -693,10 +701,12 @@ class Http
 		// remove spaces, multiple slashes, .. path parts, and leading/trailing slashes
 		$path = Ut::strip_spaces($path);
 		$path .= '/';
+
 		while (($x = str_replace(['/../', '/./', '//'], '/', $path)) !== $path)
 		{
 			$path = $x;
 		}
+
 		$path = trim($path, '/');
 
 		$path = $this->cut_prefix($tls, $path);
@@ -713,6 +723,7 @@ class Http
 		{
 			$path = (string) substr($path, $n + 1);
 		}
+
 		return $path;
 	}
 

@@ -164,6 +164,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 					"send_watchmail		= '1'");
 
 			// INSERT user menu items
+			// -> set_menu function will prepopulate user menu with default menu items
 
 			if (!$this->db->approve_new_user)
 			{

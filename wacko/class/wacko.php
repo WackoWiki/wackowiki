@@ -3847,7 +3847,7 @@ class Wacko
 		// Find the word
 		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers . ')\b/i';
 
-		if (preg_match( $this->REGEX_WACKO_HANDLERS, $_data, $match ))
+		if (preg_match($this->REGEX_WACKO_HANDLERS, $_data, $match))
 		{
 			// message
 			return $match[0];
@@ -5579,6 +5579,10 @@ class Wacko
 					$title = $menu_item['title'];
 				}
 
+				// [0] - page_id
+				// [1] - menu_title
+				// [2] - menu_item formatted ((tag menu_title @@menu_lang))
+				// [3] - menu_lang
 				$user_menu_formatted[] = [
 					$menu_item['page_id'],
 					(($title !== '')? $title : $menu_item['tag']),
@@ -5602,7 +5606,7 @@ class Wacko
 		$user = $this->get_user();
 
 		// initial menu table construction
-		if ($set != MENU_AUTO || !($menu_formatted || $update) )
+		if ($set != MENU_AUTO || !($menu_formatted || $update))
 		{
 			$menu = 0;
 			if ($set != MENU_DEFAULT)
@@ -5618,8 +5622,8 @@ class Wacko
 			}
 
 			// parsing menu items into page_link table
-			$menu_page_ids = [];
-			$menu_formatted = [];
+			$menu_page_ids	= [];
+			$menu_formatted	= [];
 
 			foreach ($menu as $menu_item)
 			{
@@ -5654,6 +5658,7 @@ class Wacko
 							"user_id			= '" . $user['user_id'] . "', " .
 							"page_id			= '" . $menu_item[0] . "', " .
 							"menu_lang			= '" . $menu_item[3] . "', " .
+							"menu_title			= '" . $menu_item[1] . "', " .
 							"menu_position		= '" . ++$position . "'");
 					}
 
@@ -5675,6 +5680,7 @@ class Wacko
 					"user_id			= '" . $user['user_id'] . "', " .
 					"page_id			= '" . $this->page['page_id'] . "', " .
 					"menu_lang			= " . $this->db->q($lang) . ", " .
+					#"menu_title			= " . $this->db->q($title) . ", " .
 					"menu_position		= '" . ++$position . "'");
 			}
 		}

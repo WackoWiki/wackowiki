@@ -40,6 +40,7 @@ if (($user = $this->get_user()))
 
 	$message = null;
 
+	// show last visit
 	if (!$this->db->is_null_date($user['last_visit']))
 	{
 		$message .= $this->_t('LastVisit') .
@@ -48,18 +49,19 @@ if (($user = $this->get_user()))
 			'</code>' . "<br />\n";
 	}
 
-	// Only allow your session to be used from this IP address.
+	// show IP address restriction for user session
 	$message .= $this->_t('BindSessionIp') . ' '.
 		($user['validate_ip']? $this->_t('BindSessionIpOn') . ' ' : '') .
 		'<code>' .
 		($user['validate_ip']? $user['ip'] : 'Off') .
 		'</code>' . "<br />\n";
 
+	// show traffic protection
 	if ($this->db->tls || $this->db->tls_proxy)
 	{
 		$message .= $this->_t('TrafficProtection') .
 			' <code>' .
-			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'] . ' (' . $_SERVER['SSL_PROTOCOL'] . ')' : 'no' ) .
+			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'] . ' (' . $_SERVER['SSL_PROTOCOL'] . ')' : 'no') .
 			'</code>' . "<br />\n";
 	}
 
