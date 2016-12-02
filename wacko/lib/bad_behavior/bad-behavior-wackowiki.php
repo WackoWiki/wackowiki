@@ -20,7 +20,7 @@ http://bad-behavior.ioerror.us/
 
 WackoWiki implementation, 2016 WackoWiki Team
 Version 0.5
-http://wackowiki.sourceforge.net/doc/Dev/PatchesHacks/BadBehavior
+https://wackowiki.sourceforge.io/doc/Dev/PatchesHacks/BadBehavior
 
 */
 

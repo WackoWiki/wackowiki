@@ -9,7 +9,7 @@
 //   (c) Roman "Kukutz" Ivanov, Evgeny Nedelko, 2003                  //
 // Many thanks to Alexander Babaev, Sergey Kruglov, Evgeny Nedelko    //
 //             and Nikolay Jaremko                                    //
-// http://wackowiki.sourceforge.net/doc/Dev/Projects/WikiEdit         //
+// https://wackowiki.sourceforge.io/doc/Dev/Projects/WikiEdit         //
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
@@ -102,7 +102,7 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
   this.addButton('help', lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
   this.addButton('customhtml', '<li><div style="font:12px Arial;text-decoration:underline; padding: 3px 3px 4px 4px;" id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
   + 'onmouseout=\'this.className="btn-";\' class="btn-" '
-  + 'onclick="this.className=\'btn-pressed\';window.open(\'http://wackowiki.sourceforge.net/doc/' + lang.HelpFormattingPage + '\');" '
+  + 'onclick="this.className=\'btn-pressed\';window.open(\'https://wackowiki.sourceforge.io/doc/' + lang.HelpFormattingPage + '\');" '
   + ' title="' + lang.HelpFormattingTip + '">' + lang.HelpFormatting + ''
   + '</div></li>');
   try {
@@ -645,7 +645,7 @@ WikiEdit.prototype.help = function ()
 {
 s = '         WikiEdit 3.15 \n';
 s += '  (c) Roman Ivanov, WackoWiki Team 2003-2016   \n';
-s += '  http://wackowiki.sourceforge.net/doc/Dev/Projects/WikiEdit \n';
+s += '  https://wackowiki.sourceforge.io/doc/Dev/Projects/WikiEdit \n';
 s += '\n';
 s += lang.HelpAboutTip;
 
