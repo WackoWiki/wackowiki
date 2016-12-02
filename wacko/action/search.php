@@ -50,7 +50,7 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 		"ORDER BY score DESC " .
 		$pagination['limit']);
 
-	return [$results, $pagination];
+	return [$results, $pagination, $count['n']];
 };
 
 $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
@@ -92,7 +92,7 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 		"ORDER BY a.supertag " .
 		$pagination['limit']);
 
-	return [$results, $pagination];
+	return [$results, $pagination, $count['n']];
 };
 
 $get_line_with_phrase = function ($phrase, $string, $insensitive = true, $cleanup = '')
@@ -289,7 +289,7 @@ if (strlen($phrase) >= 3)
 		$results = $full_text_search($phrase, $page, $max, ($filter != 'all'));
 	}
 
-	list ($pages, $pagination) = $results;
+	list ($pages, $pagination, $tcount) = $results;
 
 	if ($pages)
 	{
@@ -308,7 +308,7 @@ if (strlen($phrase) >= 3)
 
 					$_lang		= '';
 					$preview	= '';
-					$count		= false;
+					$ccount		= false;
 
 					// generate preview
 					if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
@@ -317,7 +317,7 @@ if (strlen($phrase) >= 3)
 						$context	= $get_line_with_phrase($phrase, $body, $clean);
 						$context	= $preview_text($context, 500, 0);
 						$context	= $highlight_this($context, $phrase, 0);
-						list($context, $count) = $context;
+						list($context, $ccount) = $context;
 						$preview	= $context;
 					}
 
@@ -336,7 +336,7 @@ if (strlen($phrase) >= 3)
 
 					if ($mode != 'topic')
 					{
-						$tpl->l_count	= $count;
+						$tpl->l_count	= $ccount;
 						$tpl->l_preview	= $preview;
 					}
 				}
@@ -349,7 +349,7 @@ if (strlen($phrase) >= 3)
 		{
 			$tpl->s_mark_diag	= $this->_t(($mode == 'topic' ? 'Topic' : '') . 'SearchResults');
 			$tpl->s_mark_phrase	= $phrase;
-			$tpl->s_mark_count	= $n;
+			$tpl->s_mark_count	= $tcount;
 			$tpl->s_emark		= true;
 		}
 	}
