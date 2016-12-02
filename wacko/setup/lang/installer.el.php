@@ -41,7 +41,7 @@ $lang = [
 'Requirements' => 'Ο διακομιστής πρέπει να έχει τις παρακάτω σε λίστα απαιτήσεις.',
 'OK' => 'OK',
 'Problem' => 'Πρόβλημα',
-'NotePermissions' => 'Το πρόγραμμα εγκατάστασης θα προσπαθήσεις να γράψει δεδομένα ρυθμίσεων στο αρχείο <code>config.php</code>, το οποίο βρίσκετε στον κατάλογο του WackoWiki. Για να δουλέψει αυτό, πρέπει να βεβαιωθείτε ότι ο web server σας μπορεί να γράψει σε αυτό το αρχείο. Εάν δεν μπορεί να το κάνει αυτό, θα πρέπει να το επεξεργαστείτε με το χέρι (το πρόγραμμα εγκατάστασης θα σας πει πως).<br /><br />Δείτε <a href="http://wackowiki.sourceforge.net/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> για λεπτομέρειες.',
+'NotePermissions' => 'Το πρόγραμμα εγκατάστασης θα προσπαθήσεις να γράψει δεδομένα ρυθμίσεων στο αρχείο <code>config.php</code>, το οποίο βρίσκετε στον κατάλογο του WackoWiki. Για να δουλέψει αυτό, πρέπει να βεβαιωθείτε ότι ο web server σας μπορεί να γράψει σε αυτό το αρχείο. Εάν δεν μπορεί να το κάνει αυτό, θα πρέπει να το επεξεργαστείτε με το χέρι (το πρόγραμμα εγκατάστασης θα σας πει πως).<br /><br />Δείτε <a href="https://wackowiki.sourceforge.io/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> για λεπτομέρειες.',
 'ErrorPermissions' => 'Όπως φαίνεται το πρόγραμμα εγκατάστασης δεν μπορεί αυτόματα να θέσει τις απαιτήσεις στα δικαιώματα αρχείων για το WackoWiki να δουλέψει σωστά. Θα προταθείτε αργότερα κατά την διαδικασία εγκατάστασης να τροποποιήσετε με το χέρι τις απαιτήσεις στα δικαιώματα των αρχείων στον διακομιστή σας.',
 'ErrorMinPHPVersion' => 'Η έκδοση της PHP πρέπει να είναι μεγαλύτερη της <strong>' . PHP_MIN_VERSION . '</strong>, ο διακομιστής σας φαίνεται να τρέχει σε προηγούμενη έκδοση. Πρέπει να αναβαθμίσετε σε μία πιο πρόσφατη PHP έκδοση για δουλέψει σωστά το WackoWiki.',
 'Ready' => 'Συγχαρητήρια, διαπιστώνεται ότι ο διακομιστής σας μπορεί να τρέξει το WackoWiki.
@@ -53,16 +53,16 @@ $lang = [
 'site-config' => 'Παραμετροποίηση Site',
 'Name' => 'Όνομα του WackoWiki',
 'NameDesc' => 'Παρακαλώ εισάγεται ένα όνομα για το WackoWiki site σας, αυτό πρέπει να είναι
-της μορφής <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+της μορφής <a href="https://wackowiki.sourceforge.io/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'Home' => 'Αρχική Σελίδα',
-'HomeDesc' => 'Πληκτρολογήστε το όνομα που θέλετε να έχει η αρχική σελίδα σας, αυτή θα είναι η προκαθορισμένη σελίδα που θα βλέπουν οι χρήστες όταν επισκέπτονται το site σας και θα πρέπει να είναι ένα <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'HomeDesc' => 'Πληκτρολογήστε το όνομα που θέλετε να έχει η αρχική σελίδα σας, αυτή θα είναι η προκαθορισμένη σελίδα που θα βλέπουν οι χρήστες όταν επισκέπτονται το site σας και θα πρέπει να είναι ένα <a href="https://wackowiki.sourceforge.io/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomeDefault' => 'HomePage',
 'MultiLang' => 'Πολυγλωσσική Υποστήριξη',
 'MultiLangDesc' => 'Η πολυγλωσσική υποστήριξη σας επιτρέπει να έχετε σελίδες με διαφορετικές γλωσσικές ρυθμίσεις μέσα σε μία μόνη εγκατάσταση. Εάν αυτή η επιλογή είναι ενεργοποιημένη, τότε το πρόγραμμα εγκατάστασης θα δημιουργήσει αρχικές σελίδες για όλες τις διαθέσιμες γλώσσες στην διανομή.',
 'AllowedLang' => 'Allowed Languages',
 'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Όνομα Διαχειριστή',
-'AdminDesc' => 'Εισάγεται το όνομα του διαχειριστή, αυτό πρέπει να είναι ένα <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. WikiAdmin).',
+'AdminDesc' => 'Εισάγεται το όνομα του διαχειριστή, αυτό πρέπει να είναι ένα <a href="https://wackowiki.sourceforge.io/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. WikiAdmin).',
 'Password' => 'Συνθηματικό Διαχειριστή',
 'PasswordDesc' => 'Επέλεξε ένα συνθηματικό για τον διαχειριστή με τουλάχιστον 9 χαρακτήρες.',
 'Password2' => 'Επανέλαβε το συνθηματικό:',
@@ -186,13 +186,13 @@ $lang = [
 'SecurityConsiderations' => 'Προτάσεις Ασφάλειας',
 'SecurityRisk' => 'Σας προτείνεται να αφαιρέσετε το δικαίωμα εγγραφής στο <code>config.php</code> τώρα που έχει γραφτεί. Αφήνοντάς το αρχείο εγγράψιμο μπορεί να αποτελεί ρίσκο ασφάλειας!',
 'RemoveSetupDirectory' => 'Θα πρέπει να διαγράψετε τον κατάλογο "setup" τώρα που η διαδικασία εγκατάστασης έχει ολοκληρωθεί.',
-'ErrorGivePrivileges' => 'Το αρχείο ρυθμίσεων <code>config.php1</code> δεν πρέπει να είναι εγγράψιμο. Θα χρειαστεί να δώσετε στον web server σας προσωρινή πρόσβαση ώστε να γράψει είτε στον κατάλογο του WackoWiki, ή ένα κενό αρχείο με όνομα <code>config.php</code> (<code>touch config.php ; chmod 666 config.php</code>; μην ξεχάσετε να αφαιρέσετε το δικαίωμα εγγραφής αργότερα, π.χ. <code>chmod 644 config.php</code>). Αν, για κάποιο λόγο, δεν μπορείτε να το κάνετε, θα πρέπει να αντιγράψετε το παρακάτω κείμενο σε ένα νέο αρχείο και να το αποθηκεύσετε/ανεβάσετε ως <code>config.php</code> μέσα στον κατάλογο του WackoWiki. Όταν το κάνετε αυτόμ το WackoWiki site σας θα δουλέψει. Εάν όχι, παρακαλώ επισκεφτείται το <a href="http://wackowiki.sourceforge.net/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
+'ErrorGivePrivileges' => 'Το αρχείο ρυθμίσεων <code>config.php1</code> δεν πρέπει να είναι εγγράψιμο. Θα χρειαστεί να δώσετε στον web server σας προσωρινή πρόσβαση ώστε να γράψει είτε στον κατάλογο του WackoWiki, ή ένα κενό αρχείο με όνομα <code>config.php</code> (<code>touch config.php ; chmod 666 config.php</code>; μην ξεχάσετε να αφαιρέσετε το δικαίωμα εγγραφής αργότερα, π.χ. <code>chmod 644 config.php</code>). Αν, για κάποιο λόγο, δεν μπορείτε να το κάνετε, θα πρέπει να αντιγράψετε το παρακάτω κείμενο σε ένα νέο αρχείο και να το αποθηκεύσετε/ανεβάσετε ως <code>config.php</code> μέσα στον κατάλογο του WackoWiki. Όταν το κάνετε αυτόμ το WackoWiki site σας θα δουλέψει. Εάν όχι, παρακαλώ επισκεφτείται το <a href="https://wackowiki.sourceforge.io/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep' => 'Στο επόμενο βήμα, το πρόγραμμα εγκατάστασης θα προσπαθήσει να γράψει το ανανεωμένο αρχείο ρυθμίσεων, <code>config.php</code>.
 Παρακαλώ σιγουρευτείται ότι ο web server σας έχει δικαίωμα πρόσβασης εγγραφής στο αρχείο, αλλιώς θα χρειαστεί να το επεξεργαστείται με το χέρι.
-Ακόμα μία φορά, δείτε για λεπτομέρειες εδώ: <a href="http://wackowiki.sourceforge.net/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
+Ακόμα μία φορά, δείτε για λεπτομέρειες εδώ: <a href="https://wackowiki.sourceforge.io/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
 'WrittenAt' => 'εγγράψιμο στις ',
 'DontChange' => 'μην αλλάξετε την έκδοση του wacko_version με το χέρι!',
-'ConfigDescription' => 'detailed description http://wackowiki.sourceforge.net/doc/Doc/English/Configuration',
+'ConfigDescription' => 'detailed description https://wackowiki.sourceforge.io/doc/Doc/English/Configuration',
 'TryAgain' => 'Δοκιμάστε Πάλι',
 
 ];

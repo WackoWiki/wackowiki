@@ -14,7 +14,7 @@ if (array_key_exists('wacko_version', $config))
 		$config['is_update'] = null;
 		echo '<ul class="security"><li>' . preg_replace(array('/%1/', '/%2/'), [$config['wacko_version'], WACKO_VERSION], $lang['PleaseUpgradeToR5']) . "</li></ul>\n";
 		// http://sourceforge.net/projects/wackowiki/files/
-		// http://wackowiki.sourceforge.net/doc/Dev/Release/R55/Upgrade
+		// https://wackowiki.sourceforge.io/doc/Dev/Release/R55/Upgrade
 	}
 	else
 	{
