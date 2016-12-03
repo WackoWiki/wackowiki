@@ -1506,7 +1506,7 @@ class Wacko
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
-			"FROM {$this->db->table_prefix}revision " .
+			"FROM " . $this->db->table_prefix . "revision " .
 			"WHERE page_id = '" . (int) $page_id . "' " .
 				($hide_minor_edit
 					? "AND minor_edit = '0' "
@@ -1710,8 +1710,8 @@ class Wacko
 	{
 		$categories = $this->db->load_all(
 			"SELECT c.category_id, c.category " .
-			"FROM {$this->db->table_prefix}category c " .
-				"INNER JOIN {$this->db->table_prefix}category_page cp ON (c.category_id = cp.category_id) " .
+			"FROM " . $this->db->table_prefix . "category c " .
+				"INNER JOIN " . $this->db->table_prefix . "category_page cp ON (c.category_id = cp.category_id) " .
 			"WHERE " . ($page_id != 0
 				? "cp.page_id  = '" . (int) $page_id . "' "
 				: "cp.supertag = " . $this->db->q($this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD)) . " " )
@@ -2013,7 +2013,7 @@ class Wacko
 				{
 					// updating comments count for commented page
 					$this->db->sql_query(
-						"UPDATE {$this->db->table_prefix}page SET " .
+						"UPDATE " . $this->db->table_prefix . "page SET " .
 							"comments	= '" . (int) $this->count_comments($comment_on_id) . "', " .
 							"commented	= UTC_TIMESTAMP() " .
 						"WHERE page_id = '" . (int) $comment_on_id . "' " .
@@ -2176,7 +2176,7 @@ class Wacko
 
 		// move revision
 		$this->db->sql_query(
-			"INSERT INTO {$this->db->table_prefix}revision SET " .
+			"INSERT INTO " . $this->db->table_prefix . "revision SET " .
 				"page_id		= '{$old_page['page_id']}', " .
 				"version_id		= '{$old_page['version_id']}', " .
 				"tag			= '{$old_page['tag']}', " .
@@ -2432,7 +2432,7 @@ class Wacko
 						if (!$watcher['comment_id'])
 						{
 							$this->db->sql_query(
-								"UPDATE {$this->db->table_prefix}watch SET " .
+								"UPDATE " . $this->db->table_prefix . "watch SET " .
 									"comment_id	= '" . (int) $page_id . "' " .
 								"WHERE page_id = '" . (int) $comment_on_id . "' " .
 									"AND user_id = '" . $watcher['user_id'] . "'");
@@ -2461,7 +2461,7 @@ class Wacko
 						if (!$watcher['pending'])
 						{
 							$this->db->sql_query(
-								"UPDATE {$this->db->table_prefix}watch SET " .
+								"UPDATE " . $this->db->table_prefix . "watch SET " .
 									"pending	= '1' " .
 								"WHERE page_id = '" . (int) $comment_on_id . "' " .
 									"AND user_id = '" . $watcher['user_id'] . "'");
@@ -4179,7 +4179,7 @@ class Wacko
 				if (strncasecmp($headless, $we, strlen($we))) // if not from ourselves..
 				{
 					$this->db->sql_query(
-						"INSERT INTO {$this->db->table_prefix}referrer SET " .
+						"INSERT INTO " . $this->db->table_prefix . "referrer SET " .
 							"page_id		= '" . (int) $this->page['page_id'] . "', " .
 							"referrer		= " . $this->db->q($ref) . ", " .
 							"ip				= " . $this->db->q($this->http->ip) . ", " .
@@ -4611,13 +4611,13 @@ class Wacko
 		// load latest comment
 		$comment = $this->db->load_single(
 			"SELECT created " .
-			"FROM {$this->db->table_prefix}page " .
+			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE comment_on_id = '" . (int) $comment_on_id . "' " .
 			"ORDER BY created DESC " .
 			"LIMIT 1");
 
 		$this->db->sql_query(
-			"UPDATE {$this->db->table_prefix}page SET " .
+			"UPDATE " . $this->db->table_prefix . "page SET " .
 				"comments	= '" . $this->count_comments($comment_on_id) . "', " .
 				"commented	= " . $this->db->q($comment['created']) . " " .
 			"WHERE page_id	= '" . (int) $comment_on_id . "' " .
@@ -4666,7 +4666,7 @@ class Wacko
 		$this->sess->set_cookie(AUTH_TOKEN, $selector . Ut::http64_encode($authenticator), $session_days);
 
 		$this->db->sql_query(
-			"INSERT INTO {$this->db->table_prefix}auth_token SET " .
+			"INSERT INTO " . $this->db->table_prefix . "auth_token SET " .
 				"selector			= '" . $selector . "', " .
 				"token				= '" . hash('sha256', $authenticator) . "', " .
 				"user_id			= '" . (int) $user['user_id'] . "', " .
@@ -4683,7 +4683,7 @@ class Wacko
 
 			$token = $this->db->load_single(
 				"SELECT auth_token_id, token, user_id " .
-				"FROM {$this->db->table_prefix}auth_token " .
+				"FROM " . $this->db->table_prefix . "auth_token " .
 				"WHERE selector = " . $this->db->q($selector) . " " .
 					"AND token_expires > UTC_TIMESTAMP() " .
 				"LIMIT 1");
@@ -4701,7 +4701,7 @@ class Wacko
 				// re-create auth token on successful use, effectively prolonging it expiration
 				$this->db->sql_query(
 					"DELETE
-					FROM {$this->db->table_prefix}auth_token
+					FROM " . $this->db->table_prefix . "auth_token
 					WHERE auth_token_id = '" . (int) $token['auth_token_id'] . "'");
 
 				if (($user = $this->load_user(0, $token['user_id'])))
@@ -4723,7 +4723,7 @@ class Wacko
 		// NB there can be many tokens for one user
 		$this->db->sql_query(
 			"DELETE
-			FROM {$this->db->table_prefix}auth_token
+			FROM " . $this->db->table_prefix . "auth_token
 			WHERE user_id = '" . (int) $user_id . "'");
 	}
 
@@ -4872,7 +4872,7 @@ class Wacko
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(tag) AS n " .
-			"FROM {$this->db->table_prefix}page " .
+			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE comment_on_id = '" . (int) $comment_on_id . "' " .
 				($deleted != 1
 					? "AND deleted <> '1' "
@@ -4893,7 +4893,7 @@ class Wacko
 		{
 			$count = $this->db->load_single(
 				"SELECT comments " .
-				"FROM {$this->db->table_prefix}page " .
+				"FROM " . $this->db->table_prefix . "page " .
 				"WHERE page_id = '" . (int) $page_id . "' " .
 				"LIMIT 1");
 
@@ -5896,7 +5896,7 @@ class Wacko
 			&& $now > $this->db->maint_last_log)
 		{
 			$this->db->sql_query(
-				"DELETE FROM {$this->db->table_prefix}log " .
+				"DELETE FROM " . $this->db->table_prefix . "log " .
 				"WHERE log_time < DATE_SUB( UTC_TIMESTAMP(), INTERVAL '" . (int) $days . "' DAY )");
 
 			$update['maint_last_log'] = $now + 3 * DAYSECS;
@@ -5937,7 +5937,7 @@ class Wacko
 		if ($now > $this->db->maint_last_session)
 		{
 			$this->db->sql_query(
-				"DELETE FROM {$this->db->table_prefix}auth_token " .
+				"DELETE FROM " . $this->db->table_prefix . "auth_token " .
 				"WHERE token_expires < UTC_TIMESTAMP()");
 
 			$update['maint_last_session'] = $now + 3 * DAYSECS;
@@ -6023,7 +6023,7 @@ class Wacko
 
 			$revision_id	= $this->db->load_single(
 				"SELECT revision_id " .
-				"FROM {$this->db->table_prefix}revision " .
+				"FROM " . $this->db->table_prefix . "revision " .
 				"WHERE page_id = '" . $ids[0] . "' " .
 					"AND version_id = '" . $ids[1] . "' " .
 				"LIMIT 1");
@@ -6391,7 +6391,7 @@ class Wacko
 		{
 			$page = $this->db->load_single(
 				"SELECT title " .
-				"FROM {$this->db->table_prefix}page " .
+				"FROM " . $this->db->table_prefix . "page " .
 				"WHERE " . ($page_id
 					? "page_id	= '" . (int) $page_id . "' "
 					: "tag		= " . $this->db->q($tag) . " ") .
@@ -6504,11 +6504,11 @@ class Wacko
 		$remove = implode(', ', $remove);
 
 		$this->db->sql_query(
-			"DELETE FROM {$this->db->table_prefix}page " .
+			"DELETE FROM " . $this->db->table_prefix . "page " .
 			"WHERE page_id IN ( " . $remove . " )");
 
 		$this->db->sql_query(
-			"DELETE FROM {$this->db->table_prefix}revision " .
+			"DELETE FROM " . $this->db->table_prefix . "revision " .
 			"WHERE page_id IN ( " . $remove . " )");
 	}
 
@@ -6530,7 +6530,7 @@ class Wacko
 
 			// saving updated for the current user and flag it as deleted
 			$this->db->sql_query(
-				"UPDATE {$this->db->table_prefix}page SET " .
+				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"modified	= UTC_TIMESTAMP(), " .
 					"ip			= '" . $this->get_user_ip() . "', " .
 					"deleted	= '1', " .
@@ -6561,7 +6561,7 @@ class Wacko
 		}
 
 		return $this->db->sql_query(
-			"DELETE FROM {$this->db->table_prefix}revision " .
+			"DELETE FROM " . $this->db->table_prefix . "revision " .
 			"WHERE tag = " . $this->db->q($tag) . " " .
 				($cluster
 					? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -6592,7 +6592,7 @@ class Wacko
 
 		// reset comments count
 		$this->db->sql_query(
-			"UPDATE {$this->db->table_prefix}page SET " .
+			"UPDATE " . $this->db->table_prefix . "page SET " .
 				"comments	= '0', " .
 				"commented	= created " .
 			"WHERE tag = " . $this->db->q($tag) . " " .
@@ -6647,7 +6647,7 @@ class Wacko
 		}
 
 		$pages = $this->db->load_all(
-			"SELECT page_id FROM {$this->db->table_prefix}page " .
+			"SELECT page_id FROM " . $this->db->table_prefix . "page " .
 			"WHERE tag = " . $this->db->q($tag) . " " .
 				($cluster === true
 					? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -6656,7 +6656,7 @@ class Wacko
 		foreach ($pages as $page)
 		{
 			$this->db->sql_query(
-				"DELETE FROM {$this->db->table_prefix}rating " .
+				"DELETE FROM " . $this->db->table_prefix . "rating " .
 				"WHERE page_id = '{$page['page_id']}'");
 		}
 
@@ -6690,7 +6690,7 @@ class Wacko
 
 		$this->db->sql_query(
 			"DELETE k.* " .
-			"FROM {$this->db->table_prefix}category_page k " .
+			"FROM " . $this->db->table_prefix . "category_page k " .
 				"LEFT JOIN " . $this->db->table_prefix . "page p " .
 					"ON (k.page_id = p.page_id) " .
 			"WHERE p.tag = " . $this->db->q($tag) . " " .
@@ -6728,7 +6728,7 @@ class Wacko
 
 		$pages = $this->db->load_all(
 			"SELECT page_id " .
-			"FROM {$this->db->table_prefix}page " .
+			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE tag = " . $this->db->q($tag) . " " .
 				($cluster === true
 					? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -6739,7 +6739,7 @@ class Wacko
 			// get filenames
 			$files = $this->db->load_all(
 				"SELECT file_name " .
-				"FROM {$this->db->table_prefix}file " .
+				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id = '" . $page['page_id'] . "'");
 
 			// store a copy in ...
@@ -6757,7 +6757,7 @@ class Wacko
 
 				// flag record as deleted in DB
 				$this->db->sql_query(
-					"UPDATE {$this->db->table_prefix}file SET " .
+					"UPDATE " . $this->db->table_prefix . "file SET " .
 						"deleted	= '1' " .
 					"WHERE page_id = '" . $page['page_id'] . "'");
 			}
@@ -6774,7 +6774,7 @@ class Wacko
 
 				// remove from DB
 				$this->db->sql_query(
-					"DELETE FROM {$this->db->table_prefix}file " .
+					"DELETE FROM " . $this->db->table_prefix . "file " .
 					"WHERE page_id = '" . $page['page_id'] . "'");
 			}
 		}
@@ -6790,7 +6790,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE {$this->db->table_prefix}page SET " .
+			"UPDATE " . $this->db->table_prefix . "page SET " .
 				"deleted	= '0' " .
 			"WHERE page_id = '" . (int) $page_id . "'");
 	}
@@ -6803,7 +6803,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE {$this->db->table_prefix}file SET " .
+			"UPDATE " . $this->db->table_prefix . "file SET " .
 				"deleted	= '0' " .
 			"WHERE page_id = '" . (int) $page_id . "'");
 	}
@@ -7202,7 +7202,7 @@ class Wacko
 
 		// current timestamp set automatically
 		return $this->db->sql_query(
-			"INSERT INTO {$this->db->table_prefix}log SET " .
+			"INSERT INTO " . $this->db->table_prefix . "log SET " .
 				"level		= '" . (int) $level . "', " .
 				"user_id	= '" . ($user_id ? (int) $user_id : 0 ) . "', " .
 				"ip			= " . $this->db->q($this->get_user_ip()) . ", " .
@@ -7243,7 +7243,7 @@ class Wacko
 
 		if ($_categories = $this->db->load_all(
 			"SELECT category_id, parent_id, category " .
-			"FROM {$this->db->table_prefix}category " .
+			"FROM " . $this->db->table_prefix . "category " .
 			"WHERE category_lang = " . $this->db->q($lang) . " " .
 			"ORDER BY parent_id ASC, category ASC", $cache))
 		{
@@ -7252,8 +7252,8 @@ class Wacko
 			{
 				if ($_counts = $this->db->load_all(
 				"SELECT kp.category_id, COUNT(kp.page_id) AS n " .
-				"FROM {$this->db->table_prefix}category k , " .
-					"{$this->db->table_prefix}category_page kp " .
+				"FROM " . $this->db->table_prefix . "category k , " .
+					"" . $this->db->table_prefix . "category_page kp " .
 					($root != ''
 						? "INNER JOIN " . $this->db->table_prefix . "page p ON (kp.page_id = p.page_id) "
 						: '' ) .
@@ -7332,7 +7332,7 @@ class Wacko
 				}
 
 				$this->db->sql_query(
-					"INSERT INTO {$this->db->table_prefix}category_page (category_id, page_id) " .
+					"INSERT INTO " . $this->db->table_prefix . "category_page (category_id, page_id) " .
 					"VALUES " . implode(', ', $values));
 			}
 

@@ -20,7 +20,7 @@ if (isset($top))
 	$pages = $this->db->load_all(
 		"SELECT p.tag AS pagetag, p.title AS title, MAX(r.value) AS rate, " .
 			"r.voters AS votes, (r.value / r.voters) AS ratio " .
-		"FROM {$this->db->table_prefix}page AS p, {$this->db->table_prefix}rating AS r " .
+		"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->table_prefix . "rating AS r " .
 		"WHERE p.page_id = r.page_id AND r.voters >= $min AND r.value > 0 " .
 		"GROUP BY p.tag " .
 		"ORDER BY ratio DESC, votes DESC " .
@@ -56,7 +56,7 @@ if (isset($bottom))
 	$pages = $this->db->load_all(
 		"SELECT p.tag AS pagetag, p.title AS title, MAX(r.value) AS rate, " .
 			"r.voters AS votes, (r.value / r.voters) AS ratio " .
-		"FROM {$this->db->table_prefix}page AS p, {$this->db->table_prefix}rating AS r " .
+		"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->table_prefix . "rating AS r " .
 		"WHERE p.page_id = r.page_id AND r.voters >= $min AND r.value < 0 " .
 		"GROUP BY p.tag " .
 		"ORDER BY ratio DESC, votes DESC " .

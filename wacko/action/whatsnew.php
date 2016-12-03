@@ -27,9 +27,9 @@ if (isset($_GET['markread']) && $user == true)
 // loading new pages/comments
 $pages1 = $this->db->load_all(
 	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 1 AS ctype, p.deleted " .
-	"FROM {$this->db->table_prefix}page p " .
-		"LEFT JOIN {$this->db->table_prefix}page c ON (p.comment_on_id = c.page_id) " .
-		"LEFT JOIN {$this->db->table_prefix}user u ON (p.user_id = u.user_id) " .
+	"FROM " . $this->db->table_prefix . "page p " .
+		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
+		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 	"WHERE (u.account_type = '0' OR p.user_id = '0') " .
 	"ORDER BY p.created DESC " .
 	"LIMIT " . ($max * 2), true);
@@ -37,9 +37,9 @@ $pages1 = $this->db->load_all(
 // loading revisions
 $pages2 = $this->db->load_all(
 	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 1 AS ctype, p.deleted " .
-	"FROM {$this->db->table_prefix}page p " .
-		"LEFT JOIN {$this->db->table_prefix}page c ON (p.comment_on_id = c.page_id) " .
-		"LEFT JOIN {$this->db->table_prefix}user u ON (p.user_id = u.user_id) " .
+	"FROM " . $this->db->table_prefix . "page p " .
+		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
+		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 	"WHERE p.comment_on_id = '0' " .
 		"AND p.deleted = '0' " .
 		"AND (u.account_type = '0' OR p.user_id = '0') " .
@@ -49,9 +49,9 @@ $pages2 = $this->db->load_all(
 // loading uloads
 $files = $this->db->load_all(
 	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, 0 as comment_on_id, f.hits as ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.file_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 2 AS ctype, f.deleted " .
-	"FROM {$this->db->table_prefix}file f " .
-		"LEFT JOIN {$this->db->table_prefix}page c ON (f.page_id = c.page_id) " .
-		"LEFT JOIN {$this->db->table_prefix}user u ON (f.user_id = u.user_id) " .
+	"FROM " . $this->db->table_prefix . "file f " .
+		"LEFT JOIN " . $this->db->table_prefix . "page c ON (f.page_id = c.page_id) " .
+		"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 	"WHERE u.account_type = '0' " .
 		"AND f.deleted = '0' " .
 	"ORDER BY f.uploaded_dt DESC " .

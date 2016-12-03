@@ -32,15 +32,15 @@ function admin_content_deleted(&$engine, &$module)
 	{
 		$id = (int) $_GET['remove'];
 		$engine->db->sql_query(
-			"DELETE FROM {$engine->db->table_prefix}revision " .
+			"DELETE FROM " . $engine->db->table_prefix . "revision " .
 			"WHERE page_id = '" . $id."'");
 
 		$engine->db->sql_query(
-			"DELETE FROM {$engine->db->table_prefix}page " .
+			"DELETE FROM " . $engine->db->table_prefix . "page " .
 			"WHERE page_id = '" . $id."'");
 
 		$engine->db->sql_query(
-			"DELETE FROM {$engine->db->table_prefix}file " .
+			"DELETE FROM " . $engine->db->table_prefix . "file " .
 			"WHERE page_id = '" . $id."'");
 
 	}

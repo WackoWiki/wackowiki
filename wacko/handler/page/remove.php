@@ -139,7 +139,7 @@ if ($this->is_admin()
 			// get list of pages in the cluster
 			if ($list = $this->db->load_all(
 			"SELECT page_id " .
-			"FROM {$this->db->table_prefix}page " .
+			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE tag LIKE " . $this->db->q($this->tag . '/%') . " "))
 			{
 				// remove by one page at a time

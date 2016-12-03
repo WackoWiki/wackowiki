@@ -110,7 +110,7 @@ function admin_user_approve(&$engine, &$module)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM {$engine->db->table_prefix}user u " .
+			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = '" . (int) $user_id . "' " .
 				"AND u.account_type = '0' " .
@@ -122,7 +122,7 @@ function admin_user_approve(&$engine, &$module)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM {$engine->db->table_prefix}user u " .
+			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = '" . (int) $user_id . "' " .
 				"AND u.account_type = '0' " .
@@ -169,7 +169,7 @@ function admin_user_approve(&$engine, &$module)
 				{
 					$user = $engine->db->load_single(
 						"SELECT u.user_name " .
-						"FROM {$engine->db->table_prefix}user u " .
+						"FROM " . $engine->db->table_prefix . "user u " .
 						"WHERE u.user_id = '" . $user_id . "' " .
 							"AND u.account_type = '0' " .
 						"LIMIT 1");
@@ -246,7 +246,7 @@ function admin_user_approve(&$engine, &$module)
 		// collecting data
 		$count = $engine->db->load_single(
 			"SELECT COUNT(user_name) AS n " .
-			"FROM {$engine->db->table_prefix}user u " .
+			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			( $where ? $where : '' ) .
 			( $where ? 'AND ' : "WHERE ") .
@@ -258,7 +258,7 @@ function admin_user_approve(&$engine, &$module)
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
-			"FROM {$engine->db->table_prefix}user u " .
+			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			( $where ? $where : '' ) .
 			( $where ? 'AND ' : "WHERE ") .

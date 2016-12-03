@@ -41,7 +41,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 	}
 
 	if ($_words = $this->db->load_all(
-		"SELECT category FROM {$this->db->table_prefix}category " .
+		"SELECT category FROM " . $this->db->table_prefix . "category " .
 		"WHERE category_id IN (" . $this->db->q($category) . ")", true));
 
 	if ($nomark != 2)
@@ -70,8 +70,8 @@ if ($list && ($ids || isset($_GET['category_id'])))
 
 	if ($pages = $this->db->load_all(
 		"SELECT p.page_id, p.tag, p.title, p.created " .
-		"FROM {$this->db->table_prefix}category_page AS k " .
-			"INNER JOIN {$this->db->table_prefix}page AS p ON (k.page_id = p.page_id) " .
+		"FROM " . $this->db->table_prefix . "category_page AS k " .
+			"INNER JOIN " . $this->db->table_prefix . "page AS p ON (k.page_id = p.page_id) " .
 		"WHERE k.category_id IN (" . $this->db->q($category) . ") AND k.page_id = p.page_id " .
 			($root
 				? "AND (p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . ") "
@@ -79,7 +79,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		"ORDER BY p.{$order} ", true))
 	{
 		if ($_words = $this->db->load_all(
-			"SELECT category FROM {$this->db->table_prefix}category " .
+			"SELECT category FROM " . $this->db->table_prefix . "category " .
 			"WHERE category_id IN (" . $this->db->q($category) . ")", true))
 		{
 			echo '<ol>';

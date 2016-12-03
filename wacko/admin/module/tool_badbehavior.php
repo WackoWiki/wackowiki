@@ -162,7 +162,7 @@ function bb2_summary(&$engine)
 		// Query the DB based on variables selected
 		$results = $engine->db->load_all(
 			"SELECT {$argument} as group_type, {$additional_fields} COUNT(log_id) AS n " .
-			"FROM {$engine->db->table_prefix}bad_behavior GROUP BY {$argument} " .
+			"FROM " . $engine->db->table_prefix . "bad_behavior GROUP BY {$argument} " .
 			"ORDER BY n DESC " .
 			"LIMIT 10", true);
 
@@ -239,7 +239,7 @@ function bb2_manage(&$engine)
 	// collecting data
 	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n " .
-		"FROM {$engine->db->table_prefix}bad_behavior l " .
+		"FROM " . $engine->db->table_prefix . "bad_behavior l " .
 		"WHERE 1=1 " .( $where ? $where : '' ));
 
 	$key_pagination				= isset($_GET['status_key'])		? $_GET['status_key']	: '';
@@ -263,7 +263,7 @@ function bb2_manage(&$engine)
 
 	$totalcount		= $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n " .
-		"FROM {$engine->db->table_prefix}bad_behavior l ");
+		"FROM " . $engine->db->table_prefix . "bad_behavior l ");
 
 	$results		= $engine->db->load_all(
 		"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key " .
@@ -332,7 +332,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 			{
 				$host = @gethostbyaddr($result['ip']);
 				$engine->db->sql_query(
-						"UPDATE {$engine->db->table_prefix}bad_behavior SET " .
+						"UPDATE " . $engine->db->table_prefix . "bad_behavior SET " .
 							"host		= " . $engine->db->q($host) . " " .
 						"WHERE log_id	= '" . (int) $result['log_id'] . "' " .
 						"LIMIT 1");
@@ -863,7 +863,7 @@ function bb2_options(&$engine)
 
 if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 {
-	$sql = "TRUNCATE {$engine->db->table_prefix}badbehavior";
+	$sql = "TRUNCATE " . $engine->db->table_prefix . "badbehavior";
 	$engine->db->sql_query($sql);
 
 	// queries

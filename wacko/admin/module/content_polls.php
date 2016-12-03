@@ -66,7 +66,7 @@ function admin_content_polls(&$engine, &$module)
 		else if (isset($_POST['stop']) && $_POST['id'])
 		{
 			$engine->db->sql_query(
-				"UPDATE {$engine->db->table_prefix}poll SET " .
+				"UPDATE " . $engine->db->table_prefix . "poll SET " .
 					"end = UTC_TIMESTAMP() " .
 				"WHERE poll_id = " . (int) $_POST['id'] . " AND v_id = 0 " .
 				"LIMIT 1");
@@ -77,11 +77,11 @@ function admin_content_polls(&$engine, &$module)
 		else if (isset($_POST['reset']) && $_POST['id'])
 		{
 			$engine->db->sql_query(	// reset start date
-				"UPDATE {$engine->db->table_prefix}poll SET " .
+				"UPDATE " . $engine->db->table_prefix . "poll SET " .
 					"start	= UTC_TIMESTAMP() " .
 				"WHERE poll_id = " . (int) $_POST['id'] . " AND v_id = 0");
 			$engine->db->sql_query(	// reset votes and update servey id
-				"UPDATE {$engine->db->table_prefix}poll SET " .
+				"UPDATE " . $engine->db->table_prefix . "poll SET " .
 					"poll_id		= " . ($polls_obj->get_last_poll_id() + 1) . ", " .
 					"votes	= 0 " .
 				"WHERE poll_id = " . (int) $_POST['id']);
@@ -93,7 +93,7 @@ function admin_content_polls(&$engine, &$module)
 		else if (isset($_POST['activate']) && $_POST['id'])
 		{
 			$engine->db->sql_query(
-				"UPDATE {$engine->db->table_prefix}poll SET " .
+				"UPDATE " . $engine->db->table_prefix . "poll SET " .
 					"start = UTC_TIMESTAMP() " .
 				"WHERE poll_id = " . (int) $_POST['id'] . " AND v_id = 0");
 

@@ -76,9 +76,9 @@ $sql = "SELECT
 			c.category,
 			COUNT(category) AS number
 		FROM
-			{$this->db->table_prefix}category c
-			INNER JOIN {$this->db->table_prefix}category_page cp ON (c.category_id = cp.category_id)
-			INNER JOIN {$this->db->table_prefix}page p ON (cp.page_id = p.page_id) " .
+			" . $this->db->table_prefix . "category c
+			INNER JOIN " . $this->db->table_prefix . "category_page cp ON (c.category_id = cp.category_id)
+			INNER JOIN " . $this->db->table_prefix . "page p ON (cp.page_id = p.page_id) " .
 			($owner
 				? "INNER JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) "
 				: '' ) .
