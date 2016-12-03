@@ -39,7 +39,7 @@ if ($this->is_admin())
 			// total pages in ownership
 			$users = $this->db->load_all(
 				"SELECT p.owner_id, COUNT(p.tag) AS n " .
-				"FROM {$this->db->table_prefix}page AS p, {$this->db->user_table} AS u " .
+				"FROM " . $this->db->table_prefix . "page AS p, {$this->db->user_table} AS u " .
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' " .
 				"GROUP BY p.owner_id");
 
@@ -55,7 +55,7 @@ if ($this->is_admin())
 			// total comments posted
 			$users = $this->db->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n " .
-				"FROM {$this->db->table_prefix}page AS p, {$this->db->user_table} AS u " .
+				"FROM " . $this->db->table_prefix . "page AS p, {$this->db->user_table} AS u " .
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' " .
 				"GROUP BY p.user_id");
 
@@ -71,7 +71,7 @@ if ($this->is_admin())
 			// total revisions made
 			$users = $this->db->load_all(
 				"SELECT r.user_id, COUNT(r.tag) AS n " .
-				"FROM {$this->db->table_prefix}revision AS r, {$this->db->user_table} AS u " .
+				"FROM " . $this->db->table_prefix . "revision AS r, {$this->db->user_table} AS u " .
 				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' " .
 				"GROUP BY r.user_id");
 
@@ -87,7 +87,7 @@ if ($this->is_admin())
 			// total files uploaded
 			$users = $this->db->load_all(
 				"SELECT u.user_id, COUNT(f.file_id) AS n " .
-				"FROM {$this->db->table_prefix}file f, {$this->db->user_table} AS u " .
+				"FROM " . $this->db->table_prefix . "file f, {$this->db->user_table} AS u " .
 				"WHERE f.user_id = u.user_id " .
 				"GROUP BY f.user_id");
 
@@ -128,7 +128,7 @@ if ($this->is_admin())
 		{
 			$pages = $this->db->load_all(
 				"SELECT page_id, tag, page_lang " .
-				"FROM {$this->db->table_prefix}page " .
+				"FROM " . $this->db->table_prefix . "page " .
 				"WHERE title = ''");
 
 			if (!empty($pages))
@@ -147,7 +147,7 @@ if ($this->is_admin())
 						$title = $this->add_spaces_title(trim(substr($page['tag'], strrpos($page['tag'], '/')), '/'));
 
 						$this->db->sql_query(
-							"UPDATE {$this->db->table_prefix}page " .
+							"UPDATE " . $this->db->table_prefix . "page " .
 							"SET title = " . $this->db->q($title) . " " .
 							"WHERE page_id = '" . $page['page_id'] . "' " .
 							"LIMIT 1");
@@ -190,7 +190,7 @@ if ($this->is_admin())
 		{
 			$pages = $this->db->load_all(
 				"SELECT page_id, tag " .
-				"FROM {$this->db->table_prefix}page " .
+				"FROM " . $this->db->table_prefix . "page " .
 				"WHERE comment_on_id = '0'");
 
 			if (!empty($pages))
@@ -204,7 +204,7 @@ if ($this->is_admin())
 					$depth			= count( $_depth_array );
 
 					$this->db->sql_query(
-						"UPDATE {$this->db->table_prefix}page " .
+						"UPDATE " . $this->db->table_prefix . "page " .
 						"SET depth = '" . $depth."' " .
 						"WHERE page_id = '" . $page['page_id'] . "' " .
 						"LIMIT 1");
@@ -242,7 +242,7 @@ if ($this->is_admin())
 		{
 			$pages = $this->db->load_all(
 				"SELECT page_id " .
-				"FROM {$this->db->table_prefix}revision " .
+				"FROM " . $this->db->table_prefix . "revision " .
 				"GROUP BY page_id");
 
 			if (!empty($pages))
@@ -253,7 +253,7 @@ if ($this->is_admin())
 				{
 					$_revisions = $this->db->load_all(
 						"SELECT revision_id, page_id " .
-						"FROM {$this->db->table_prefix}revision " .
+						"FROM " . $this->db->table_prefix . "revision " .
 						"WHERE page_id = '" . $page['page_id'] . "' " .
 						"ORDER BY modified DESC");
 
@@ -264,7 +264,7 @@ if ($this->is_admin())
 						$version_id = $t--;
 
 						$this->db->sql_query(
-							"UPDATE {$this->db->table_prefix}revision " .
+							"UPDATE " . $this->db->table_prefix . "revision " .
 							"SET version_id = '" . $version_id."' " .
 							"WHERE revision_id = '" . $_revision['revision_id'] . "' " .
 							"LIMIT 1");
@@ -308,7 +308,7 @@ if ($this->is_admin())
 			// load old ACLs
 			$_acls = $this->db->load_all(
 				"SELECT page_id, privilege, list " .
-				"FROM {$this->db->table_prefix}acl_old ");
+				"FROM " . $this->db->table_prefix . "acl_old ");
 
 			$old_acl_count = count($_acls);
 
@@ -318,7 +318,7 @@ if ($this->is_admin())
 				// get object_right_id (e.g. 'write' -> 1, 'read' -> 2)
 				$_object_right_id = $this->db->load_single(
 					"SELECT object_right_id " .
-					"FROM {$this->db->table_prefix}acl_right " .
+					"FROM " . $this->db->table_prefix . "acl_right " .
 					"WHERE object_right = '{$_acl['privilege']}'
 					");
 				$object_right_id = $_object_right_id['object_right_id'];
@@ -326,13 +326,13 @@ if ($this->is_admin())
 				// get object_type_id (e.g. 'page' -> 1) / there is only 'page' so far
 				$_object_type_id = $this->db->load_single(
 					"SELECT object_type_id " .
-					"FROM {$this->db->table_prefix}acl_type " .
+					"FROM " . $this->db->table_prefix . "acl_type " .
 					"WHERE object_type = 'page'
 					");
 				$object_type_id = $_object_type_id['object_type_id'];
 
 				// INSERT rights in 'acl' table
-				$sql =	"INSERT INTO {$this->db->table_prefix}acl
+				$sql =	"INSERT INTO " . $this->db->table_prefix . "acl
 						(object_id, object_type_id, object_right_id)
 						VALUES ('{$_acl['page_id']}', '{$object_type_id}', '{$object_right_id}')";
 
@@ -341,7 +341,7 @@ if ($this->is_admin())
 				// get new created $acl_id
 				$acl_id = $this->db->load_single(
 					"SELECT acl_id " .
-					"FROM {$this->db->table_prefix}acl " .
+					"FROM " . $this->db->table_prefix . "acl " .
 					"WHERE object_id = '{$_acl['page_id']}' " .
 						"AND object_type_id = '{$object_type_id}' " .
 						"AND object_right_id = '{$object_right_id}'
@@ -380,7 +380,7 @@ if ($this->is_admin())
 						{
 							$_grant_id = $this->db->load_single(
 								"SELECT group_id " .
-								"FROM {$this->db->table_prefix}usergroup " .
+								"FROM " . $this->db->table_prefix . "usergroup " .
 								"WHERE group_name = 'Everybody'
 								");
 							$grant_id = $_grant_id['group_id'];
@@ -391,7 +391,7 @@ if ($this->is_admin())
 						{
 							$_grant_id = $this->db->load_single(
 								"SELECT group_id " .
-								"FROM {$this->db->table_prefix}usergroup " .
+								"FROM " . $this->db->table_prefix . "usergroup " .
 								"WHERE group_name = 'Registered'
 								");
 							$grant_id = $_grant_id['group_id'];
@@ -402,7 +402,7 @@ if ($this->is_admin())
 						{
 							$_grant_id = $this->db->load_single(
 								"SELECT group_id " .
-								"FROM {$this->db->table_prefix}usergroup " .
+								"FROM " . $this->db->table_prefix . "usergroup " .
 								"WHERE group_name = 'Admins'
 								");
 							$grant_id = $_grant_id['group_id'];
@@ -415,7 +415,7 @@ if ($this->is_admin())
 							{
 								$_groups = $this->db->load_all(
 									"SELECT group_name " .
-									"FROM {$this->db->table_prefix}usergroup ");
+									"FROM " . $this->db->table_prefix . "usergroup ");
 
 								foreach ($_groups as $_group)
 								{
@@ -430,7 +430,7 @@ if ($this->is_admin())
 							{
 								$grant_id = $this->db->load_single(
 									"SELECT group_id " .
-									"FROM {$this->db->table_prefix}usergroup " .
+									"FROM " . $this->db->table_prefix . "usergroup " .
 									"WHERE group_name = '{$privilege}'
 									");
 								$grant_id		= $grant_id['group_id'];
@@ -443,7 +443,7 @@ if ($this->is_admin())
 								{
 									$_users = $this->db->load_all(
 									"SELECT user_name " .
-									"FROM {$this->db->table_prefix}user ");
+									"FROM " . $this->db->table_prefix . "user ");
 
 									foreach ($_users as $_user)
 									{
@@ -458,7 +458,7 @@ if ($this->is_admin())
 								{
 									$_grant_id = $this->db->load_single(
 										"SELECT user_id " .
-										"FROM {$this->db->table_prefix}user " .
+										"FROM " . $this->db->table_prefix . "user " .
 										"WHERE user_name = '{$privilege}'
 										");
 									$grant_id		= $_grant_id['user_id'];
@@ -468,7 +468,7 @@ if ($this->is_admin())
 						}
 
 						// INSERT privileges in 'acl_privilege' table
-						$sql =	"INSERT INTO {$this->db->table_prefix}acl_privilege
+						$sql =	"INSERT INTO " . $this->db->table_prefix . "acl_privilege
 								(acl_id, grant_type_id, grant_id, deny)
 								VALUES ('{$acl_id}', '{$grant_type_id}', '{$grant_id}', '{$deny}')";
 

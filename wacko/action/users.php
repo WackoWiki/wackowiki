@@ -285,7 +285,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 			$pages = $this->db->load_all(
 				"SELECT page_id, tag, title, created, page_lang " .
-				"FROM {$this->db->table_prefix}page " .
+				"FROM " . $this->db->table_prefix . "page " .
 				"WHERE owner_id = '" . $user['user_id'] . "' " .
 					"AND comment_on_id = '0' " .
 					"AND deleted <> '1' " .
@@ -337,7 +337,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 				$comments = $this->db->load_all(
 					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang " .
-					"FROM {$this->db->table_prefix}page c " .
+					"FROM " . $this->db->table_prefix . "page c " .
 						"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
 					"WHERE c.owner_id = '" . $user['user_id'] . "' " .
 						"AND c.comment_on_id <> '0' " .
@@ -388,8 +388,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 					$uploads = $this->db->load_all(
 							"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
-							"FROM {$this->db->table_prefix}file u " .
-								"LEFT JOIN {$this->db->table_prefix}page c ON (u.page_id = c.page_id) " .
+							"FROM " . $this->db->table_prefix . "file u " .
+								"LEFT JOIN " . $this->db->table_prefix . "page c ON (u.page_id = c.page_id) " .
 							"WHERE u.user_id = '" . $user['user_id'] . "' " .
 							"AND u.deleted <> '1' " .
 							// "AND p.deleted <> '1' " .
@@ -520,7 +520,7 @@ else
 	}
 
 	$sql_where =
-			($group_id? "LEFT JOIN {$this->db->table_prefix}usergroup_member m ON (u.user_id = m.user_id) " : "") .
+			($group_id? "LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (u.user_id = m.user_id) " : "") .
 		"WHERE u.account_type = '0' " .
 			"AND u.enabled = '1' " .
 			($group_id? "AND m.group_id = '$group_id' " : "") .

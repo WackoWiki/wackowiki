@@ -53,10 +53,10 @@ $mail_body = '';
 				u.email_confirm,
 				us.allow_massemail
 			FROM
-				{$engine->db->table_prefix}user u
-					INNER JOIN {$engine->db->table_prefix}usergroup_member gm
+				" . $engine->db->table_prefix . "user u
+					INNER JOIN " . $engine->db->table_prefix . "usergroup_member gm
 						ON u.user_id = gm.user_id
-					INNER JOIN {$engine->db->table_prefix}user_setting us
+					INNER JOIN " . $engine->db->table_prefix . "user_setting us
 						ON u.user_id = us.user_id
 			WHERE
 				gm.group_id = '{$group_id}'
@@ -90,7 +90,7 @@ $mail_body = '';
 
 	$available_groups = $engine->db->load_all(
 		"SELECT group_id, group_name " .
-		"FROM {$engine->db->table_prefix}usergroup " .
+		"FROM " . $engine->db->table_prefix . "usergroup " .
 		"WHERE active = '1' " .
 		"ORDER BY BINARY group_name", true);
 

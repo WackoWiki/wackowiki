@@ -22,7 +22,7 @@ if (@$_POST['_action'] === 'extended_properties')
 {
 	$mode = 'extended';
 	$this->db->sql_query(
-		"UPDATE {$this->db->table_prefix}page SET " .
+		"UPDATE " . $this->db->table_prefix . "page SET " .
 			"footer_comments	= '" . (int) $_POST['footer_comments'] . "', " .
 			"footer_files		= '" . (int) $_POST['footer_files'] . "', " .
 			($this->db->footer_rating
@@ -43,7 +43,7 @@ if (@$_POST['_action'] === 'extended_properties')
 if (@$_POST['_action'] === 'general_properties')
 {
 	$this->db->sql_query(
-		"UPDATE {$this->db->table_prefix}page SET " .
+		"UPDATE " . $this->db->table_prefix . "page SET " .
 			"page_lang			= " . $this->db->q($_POST['page_lang']) . ", " .
 			"theme				= " . $this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')) . ", " .
 			// menu_tag: unused currently, for use in custom theme menus
@@ -69,14 +69,14 @@ if ($_POST)
 // load settings
 $revs = $this->db->load_single(
 	"SELECT COUNT(revision_id) AS total " .
-	"FROM {$this->db->table_prefix}revision " .
+	"FROM " . $this->db->table_prefix . "revision " .
 	"WHERE page_id = '" . $this->page['page_id'] . "' " .
 	"GROUP BY tag " .
 	"LIMIT 1");
 
 $rating = $this->db->load_single(
 	"SELECT page_id, value, voters " .
-	"FROM {$this->db->table_prefix}rating " .
+	"FROM " . $this->db->table_prefix . "rating " .
 	"WHERE page_id = {$this->page['page_id']} " .
 	"LIMIT 1");
 

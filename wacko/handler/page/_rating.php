@@ -54,7 +54,7 @@ else
 {
 	$results = $this->db->load_single(
 				"SELECT page_id, value, voters " .
-				"FROM {$this->db->table_prefix}rating " .
+				"FROM " . $this->db->table_prefix . "rating " .
 				"WHERE page_id = {$this->page['page_id']} " .
 				"LIMIT 1");
 

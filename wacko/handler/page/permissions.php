@@ -28,7 +28,7 @@ if (@$_POST['_action'] === 'set_permissions')
 			$new_owner = $this->db->load_single(
 				"SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang " .
 				"FROM {$this->db->user_table} u " .
-					"LEFT JOIN {$this->db->table_prefix}user_setting s ON (u.user_id = s.user_id) " .
+					"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 				"WHERE u.user_id = '" . (int) $uid."' " .
 				"LIMIT 1");
 		}
@@ -81,7 +81,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		// TODO need to rethink/redo
 		$comments = $this->db->load_all(
 			"SELECT page_id " .
-			"FROM {$this->db->table_prefix}page " .
+			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE comment_on_id = '" . (int) $pid."' " .
 				"AND owner_id='" . (int) $uid."'"); // STS ?? for admin too?
 
@@ -117,7 +117,7 @@ if (@$_POST['_action'] === 'set_permissions')
 				"LIMIT 1");
 
 			$this->db->sql_query(
-				"UPDATE {$this->db->table_prefix}page SET " .
+				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"owner_id = '" . (int) $new_id."' " .
 				"WHERE page_id = '" . (int) $pid."' " .
 				"LIMIT 1");
@@ -140,7 +140,7 @@ if (@$_POST['_action'] === 'set_permissions')
 	{
 		$pages = $this->db->load_all(
 			"SELECT page_id, tag, title, owner_id " .
-			"FROM {$this->db->table_prefix}page " .
+			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE (supertag = " . $this->db->q($this->supertag) .
 				" OR supertag LIKE " . $this->db->q($this->supertag . '/%') .
 				") " .

@@ -14,7 +14,7 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 	// count previous comments
 	$count = $this->db->load_single(
 		"SELECT COUNT(tag) AS n " .
-		"FROM {$this->db->table_prefix}page " .
+		"FROM " . $this->db->table_prefix . "page " .
 		"WHERE comment_on_id = '" . $this->page['comment_on_id'] . "' " .
 			"AND created <= " . $this->db->q($this->page['created']) . " " .
 			"AND deleted <> '1' " .
@@ -124,7 +124,7 @@ if ($this->has_access('read'))
 		if ($user && $this->page['latest'] != 0 && !$noid_protect)
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->db->table_prefix}watch SET " .
+				"UPDATE " . $this->db->table_prefix . "watch SET " .
 					"pending = '0' " .
 				"WHERE page_id = '" . $this->page['page_id'] . "' " .
 					"AND user_id = '" . $user['user_id'] . "'");

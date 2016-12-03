@@ -57,7 +57,7 @@ if (!isset($letters)
 
 	$pages = $this->db->load_all(
 		"SELECT tag, title " .
-		"FROM {$this->db->table_prefix}page " .
+		"FROM " . $this->db->table_prefix . "page " .
 		"WHERE comment_on_id = '0' " .
 			"AND deleted = '0' " .
 			($page
@@ -92,7 +92,7 @@ if (!isset($letters)
 
 $count = $this->db->load_single(
 	"SELECT COUNT(page_id) AS n " .
-	"FROM {$this->db->table_prefix}page " .
+	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE comment_on_id = '0' " .
 		"AND deleted = '0' " .
 		($page
@@ -117,7 +117,7 @@ $pages_to_display = [];
 
 if (($pages = $this->db->load_all(
 	"SELECT page_id, tag, title, page_lang " .
-	"FROM {$this->db->table_prefix}page " .
+	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE comment_on_id = '0' " .
 		"AND deleted = '0' " .
 		($page

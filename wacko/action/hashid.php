@@ -17,7 +17,7 @@ else
 {
 	$_old_version = $this->db->load_single(
 		"SELECT version_id " .
-		"FROM {$this->db->table_prefix}revision " .
+		"FROM " . $this->db->table_prefix . "revision " .
 		"WHERE page_id = '" . $this->page['page_id'] . "' " .
 		"ORDER BY version_id DESC " .
 		"LIMIT 1");

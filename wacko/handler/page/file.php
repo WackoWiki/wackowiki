@@ -59,7 +59,7 @@ if (strncmp($type, 'image/', 6)) // do not count images
 {
 	// count file download
 	$this->db->sql_query(
-		"UPDATE {$this->db->table_prefix}file SET " .
+		"UPDATE " . $this->db->table_prefix . "file SET " .
 			"hits = '" . ($file['hits'] + 1) . "' " .
 		"WHERE file_id = '" . $file['file_id'] . "' " .
 		"LIMIT 1");

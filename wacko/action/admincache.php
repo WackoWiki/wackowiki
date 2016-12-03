@@ -16,7 +16,7 @@ if ($this->is_admin())
 		if (isset($_POST['pages_cache']) && ($n = Ut::purge_directory(CACHE_PAGE_DIR)))
 		{
 			// empties cache table and reset AUTO_INCREMENT value to its start value
-			$this->db->sql_query("TRUNCATE {$this->db->table_prefix}cache");
+			$this->db->sql_query("TRUNCATE " . $this->db->table_prefix . "cache");
 			$done->page_n = $n;
 		}
 

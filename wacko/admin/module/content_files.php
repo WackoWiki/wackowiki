@@ -35,7 +35,7 @@ function admin_content_files(&$engine, &$module)
 	{
 		$file = $engine->db->load_single(
 			"SELECT user_id, file_id, file_name, file_size, file_lang, file_description " .
-			"FROM {$engine->db->table_prefix}file " .
+			"FROM " . $engine->db->table_prefix . "file " .
 			"WHERE page_id = 0 " .
 				"AND file_id = '" . (int) $_GET['file_id'] . "' " .
 			"LIMIT 1");
@@ -71,7 +71,7 @@ function admin_content_files(&$engine, &$module)
 		// 1. where, existence
 		$file = $engine->db->load_single(
 			"SELECT user_id, file_id, file_name, file_size, file_lang, file_description " .
-			"FROM {$engine->db->table_prefix}file " .
+			"FROM " . $engine->db->table_prefix . "file " .
 			"WHERE page_id = 0 " .
 				"AND file_id = '" . (int) $_POST['file_id'] . "' " .
 			"LIMIT 1");
@@ -121,7 +121,7 @@ function admin_content_files(&$engine, &$module)
 		$user	= $engine->get_user();
 		$files	= $engine->db->load_all(
 			"SELECT file_id " .
-			"FROM {$engine->db->table_prefix}file " .
+			"FROM " . $engine->db->table_prefix . "file " .
 			"WHERE user_id = '" . $user['user_id'] . "'");
 
 		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
@@ -184,7 +184,7 @@ function admin_content_files(&$engine, &$module)
 			$description = htmlspecialchars($description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 			// 5. insert line into DB
-			$engine->db->sql_query("INSERT INTO {$engine->db->table_prefix}file SET " .
+			$engine->db->sql_query("INSERT INTO " . $engine->db->table_prefix . "file SET " .
 				"page_id			= '" . '0' . "', " .
 				"file_name			= " . $engine->db->q($small_name) . ", " .
 				"file_lang		= " . $engine->db->q($engine->db->language) . ", " .
@@ -296,7 +296,7 @@ function admin_content_files(&$engine, &$module)
 	// load files list
 	$files = $engine->db->load_all(
 		"SELECT file_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, file_description, uploaded_dt " .
-		"FROM {$engine->db->table_prefix}file " .
+		"FROM " . $engine->db->table_prefix . "file " .
 		"WHERE page_id = 0 " .
 		"ORDER BY " . $order_by." " .
 		$pagination['limit']);
