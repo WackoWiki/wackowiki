@@ -32,9 +32,11 @@ class TemplatestSetter extends TemplatestFilters
 		$this->block = ($block !== false);
 
 		$filter = -1;
+
 		foreach ($pipe as $act)
 		{
 			$filter = array_shift($act) ?: '';
+
 			if (strpos($filter, '.') !== false)
 			{
 				array_unshift($act, $filter);
@@ -47,6 +49,7 @@ class TemplatestSetter extends TemplatestFilters
 			}
 
 			$text = $this->call_filter($filter, $text, $act);
+
 			if ($text === false || $text === null)
 			{
 				return;

@@ -107,7 +107,7 @@ if (!isset($tables, $directories))
 			$engine->db->table_prefix . 'upload' => [
 				'name'	=> $engine->db->table_prefix . 'upload',
 				'where'	=> false,
-				'order'	=> 'upload_id',
+				'order'	=> 'file_id',
 				'limit' => 1000
 			],
 			$engine->db->table_prefix . 'user' => [
@@ -264,9 +264,7 @@ function get_table(&$engine, $table, $drop = true)
 
 	$schema_create .= "CREATE TABLE IF NOT EXISTS `$table` (\n";
 
-	//
-	// Ok lets grab the fields...
-	//
+	// get the fields...
 	$result = $engine->db->load_all($field_query);
 
 	foreach ($result as $row)
@@ -297,14 +295,11 @@ function get_table(&$engine, $table, $drop = true)
 
 		$schema_create .= ",\n";
 	}
-	//
+
 	// drop the last ',\n' off ;)
-	//
 	$schema_create = preg_replace('/,' . "\n" . '$/', '', $schema_create);
 
-	//
-	// get any Indexed fields from the database...
-	//
+	// get any indexed fields from the database...
 	$result = $engine->db->load_all($key_query);
 
 	foreach ($result as $row)

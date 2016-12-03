@@ -17,7 +17,7 @@ $file_path		= '';
 $page_id = isset($_GET['global'])? 0 : $this->page['page_id'];
 
 $file = $this->db->load_single(
-	"SELECT u.user_name AS user, f.user_id, f.upload_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits " .
+	"SELECT u.user_name AS user, f.user_id, f.file_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits " .
 	"FROM " . $this->db->table_prefix . "upload f " .
 		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 	"WHERE f.page_id = '" . (int) $page_id . "'" .
@@ -33,7 +33,7 @@ if (!$file)
 
 // 2. check access rights
 if (   $this->is_admin()
-	|| (isset($file['upload_id']) && ($this->page['owner_id'] == $this->get_user_id()))
+	|| (isset($file['file_id']) && ($this->page['owner_id'] == $this->get_user_id()))
 	|| ($this->has_access('read'))
 	|| ($file['user_id'] == $this->get_user_id()) )
 {
@@ -61,7 +61,7 @@ if (strncmp($type, 'image/', 6)) // do not count images
 	$this->db->sql_query(
 		"UPDATE {$this->db->table_prefix}upload SET " .
 			"hits = '" . ($file['hits'] + 1) . "' " .
-		"WHERE upload_id = '" . $file['upload_id'] . "' " .
+		"WHERE file_id = '" . $file['file_id'] . "' " .
 		"LIMIT 1");
 }
 

@@ -191,7 +191,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			// 2.7. upload without page and not global
 			$upload2 = $engine->db->load_all(
 				"SELECT
-					u.upload_id
+					u.file_id
 				FROM
 					{$engine->db->table_prefix}upload u
 					LEFT JOIN {$engine->db->table_prefix}page p ON (u.page_id = p.page_id)
