@@ -74,7 +74,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					u.user_id
 				FROM
-					{$engine->db->table_prefix}upload ul
+					{$engine->db->table_prefix}file ul
 					LEFT JOIN {$engine->db->table_prefix}user u ON (ul.user_id = u.user_id)
 				WHERE
 					u.user_id IS NULL");
@@ -193,7 +193,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					u.file_id
 				FROM
-					{$engine->db->table_prefix}upload u
+					{$engine->db->table_prefix}file u
 					LEFT JOIN {$engine->db->table_prefix}page p ON (u.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL AND
@@ -341,7 +341,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				LIMIT 1");
 
 			$upload = $engine->db->sql_query(
-				"UPDATE {$engine->db->table_prefix}upload ul " .
+				"UPDATE {$engine->db->table_prefix}file ul " .
 					"LEFT JOIN {$engine->db->table_prefix}user u ON (ul.user_id = u.user_id) " .
 				"SET ul.user_id		= '" . (int) $admin_id['user_id'] . "' " .
 				"WHERE
@@ -451,7 +451,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						u.*
 					FROM
-			{$engine->db->table_prefix}upload u
+			{$engine->db->table_prefix}file u
 						LEFT JOIN {$engine->db->table_prefix}page p ON (u.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL AND

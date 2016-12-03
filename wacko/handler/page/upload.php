@@ -14,7 +14,7 @@ $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
 	"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
-	"FROM " . $this->db->table_prefix . "upload f " .
+	"FROM " . $this->db->table_prefix . "file f " .
 		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 	"WHERE f.file_id ='" . (int) $file_id . "' " .
@@ -352,7 +352,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 				{
 					// remove from DB
 					$this->db->sql_query(
-						"DELETE FROM " . $this->db->table_prefix . "upload " .
+						"DELETE FROM " . $this->db->table_prefix . "file " .
 						"WHERE file_id = '" . $file['file_id'] . "'" );
 
 					// update user uploads count
@@ -417,7 +417,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 					// update file metadata
 					$this->db->sql_query(
-						"UPDATE " . $this->db->table_prefix . "upload SET " .
+						"UPDATE " . $this->db->table_prefix . "file SET " .
 							"file_lang		= " . $this->db->q($this->page['page_lang']) . ", " .
 							"file_description	= " . $this->db->q($description) . ", " .
 							"caption			= " . $this->db->q($caption) . " " .
@@ -454,14 +454,14 @@ $this->ensure_page(true); // TODO: upload for forums?
 			// TODO: set user used_quota in user table (?)
 			$user_files	= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_user_quota " .
-				"FROM " . $this->db->table_prefix . "upload " .
+				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE user_id = '" . $user['user_id'] . "' " .
 				"LIMIT 1");
 
 			// TODO: set used_quota in config table (?)
 			$files		= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_quota " .
-				"FROM " . $this->db->table_prefix . "upload " .
+				"FROM " . $this->db->table_prefix . "file " .
 				"LIMIT 1");
 
 			// Checks
@@ -611,7 +611,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 								// 5. insert line into DB
 								$this->db->sql_query(
-									"INSERT INTO " . $this->db->table_prefix . "upload SET " .
+									"INSERT INTO " . $this->db->table_prefix . "file SET " .
 										"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', " .
 										"user_id			= '" . $user['user_id'] . "'," .
 										"file_name			= " . $this->db->q($small_name) . ", " .
@@ -633,7 +633,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 								$file_id = $this->db->load_single(
 									"SELECT file_id " .
-									"FROM " . $this->db->table_prefix . "upload " .
+									"FROM " . $this->db->table_prefix . "file " .
 									"WHERE file_name = " . $this->db->q($small_name) . " " .
 									"LIMIT 1");
 

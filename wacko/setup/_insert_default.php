@@ -34,6 +34,6 @@ $insert_registered_group	= "INSERT INTO " . $config['table_prefix'] . "usergroup
 $insert_moderator_group		= "INSERT INTO " . $config['table_prefix'] . "usergroup (group_name, description, moderator_id, created, is_system, active) VALUES ('Moderator', '', (SELECT user_id FROM " . $config['table_prefix'] . "user WHERE user_name = '" . $config['admin_name'] . "' LIMIT 1), UTC_TIMESTAMP(), '1', '1')";
 $insert_reviewer_group		= "INSERT INTO " . $config['table_prefix'] . "usergroup (group_name, description, moderator_id, created, is_system, active) VALUES ('Reviewer', '', (SELECT user_id FROM " . $config['table_prefix'] . "user WHERE user_name = '" . $config['admin_name'] . "' LIMIT 1), UTC_TIMESTAMP(), '1', '1')";
 
-$insert_logo_image			= "INSERT INTO " . $config['table_prefix'] . "upload (page_id, user_id, file_name, file_description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM " . $config['table_prefix'] . "user WHERE user_name = '" . $config['admin_name'] . "' LIMIT 1), 'wacko_logo.png', 'WackoWiki', UTC_TIMESTAMP(), '1580', '108', '50', 'png')";
+$insert_logo_image			= "INSERT INTO " . $config['table_prefix'] . "file (page_id, user_id, file_name, file_description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM " . $config['table_prefix'] . "user WHERE user_name = '" . $config['admin_name'] . "' LIMIT 1), 'wacko_logo.png', 'WackoWiki', UTC_TIMESTAMP(), '1580', '108', '50', 'png')";
 
 ?>
