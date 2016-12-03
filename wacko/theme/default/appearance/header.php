@@ -50,7 +50,7 @@ $i = 0;
 
 $tpl->enter('menu_');
 
-foreach ((array)$this->get_menu() as $menu_item)
+foreach ((array) $this->get_menu() as $menu_item)
 {
 	if ($i++ == $max_items)
 	{
@@ -76,7 +76,7 @@ $tpl->leave();
 if ($logged_in)
 {
 	// determines what it should show: "add to menu" or "remove from menu" icon
-	if (!in_array($this->page['page_id'], (array)$this->get_menu_links()))
+	if (!in_array($this->page['page_id'], (array) $this->get_menu_links()))
 	{
 		$tpl->addmark_href		= $this->href('', '', 'addbookmark=yes');
 	}

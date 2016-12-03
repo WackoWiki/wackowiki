@@ -1385,7 +1385,7 @@ class Wacko
 
 		$notexists = @array_values(@array_diff($spages, $exists));
 
-		foreach ((array)$notexists as $notexist)
+		foreach ((array) $notexists as $notexist)
 		{
 			if (isset($pages[array_search($notexist, $spages)]))
 			{
@@ -2828,9 +2828,9 @@ class Wacko
 	function slim_url($tag)
 	{
 		$tag = $this->translit($tag, TRANSLIT_DONTCHANGE); // TODO: set config option ?
-		// why we do this, what are the assumptions?
+		// why we do replace this here?
 		//	this behavior is unwanted in the AP, it breaks the redirect for e.g. config_basic.php
-		//	looks like an undo of the reverse in the tranlit function (?)
+		//	looks like a reverse of it in the tranlit function (?)
 		$tag = str_replace('_', "'", $tag);
 
 		if ($this->db->urls_underscores == 1)
@@ -2848,7 +2848,7 @@ class Wacko
 	}
 
 	/**
-	* Add spaces and wraps page Href into <a> </a>
+	* Add spaces and wraps page href into <a> </a>
 	*
 	* @param string $tag Page tag.
 	* @param string $method Wacko method. Optional, default 'show' method added in Run() function.
@@ -4778,10 +4778,10 @@ class Wacko
 				'obsolete' => 'obsolete',
 				'reg_expire' => 'reg_expire',
 				'max_session' => 'max_session',
-				'max_idle' => 'max_idle',
+				'max_idle' => 'max_idle', // You have been logged out due to inactivity.
 				'ua' => 'ua',
 				'tls' => 'tls',
-				'ip' => 'ip',
+				'ip' => 'ip', // due your IP address changed.
 			];*/
 
 			$this->set_message(Ut::perc_replace($this->_t('SessionTerminatedDue', SYSTEM_LANG), $message));
