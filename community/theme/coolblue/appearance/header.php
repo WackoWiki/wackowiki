@@ -11,7 +11,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 <div id="head">
   <?php
 // Searchbar
-echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage')); ?>
+echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
   <input type="search" name="phrase" id="search" />
   <?php
 // Search form close
@@ -54,14 +54,14 @@ echo $this->form_close();
 		{
 			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
-				. 'icon/bookmark1.png" alt="+" title="' . 
+				. 'icon/bookmark1.png" alt="+" title="' .
 				$this->_t('AddToBookmarks')  . '"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
-				. 'icon/bookmark2.png" alt="-" title="' . 
+				. 'icon/bookmark2.png" alt="-" title="' .
 				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 		}
 	}
@@ -84,7 +84,7 @@ if ($this->get_user()) { ?>
   <br />
   <?php
 // Begin Login form
-echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
+echo $this->form_open('login', ['tag' => $this->_t('LoginPage')]); ?>
   <input type="hidden" name="action" value="login" />
   <input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" />
   <?php echo $this->_t('LoginWelcome') ?>:<br />

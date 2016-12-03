@@ -13,7 +13,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		<td style="width:100%; vertical-align:bottom; white-space: nowrap;"><span class="main"><a href="<?php echo $this->db->base_url?>"class="main"><?php echo $this->db->site_name ?></a></span></td>
 		<td style="width:100%;"><div style="text-align:right;"><?php
 // Opens Search form
-echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage'));
+echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]);
 
 // Searchbar
 ?>

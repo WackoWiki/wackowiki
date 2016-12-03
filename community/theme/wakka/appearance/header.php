@@ -71,14 +71,14 @@ else
 		{
 			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
-				. 'icon/bookmark1.png" alt="+" title="' . 
+				. 'icon/bookmark1.png" alt="+" title="' .
 				$this->_t('AddToBookmarks')  . '"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
-				. 'icon/bookmark2.png" alt="-" title="' . 
+				. 'icon/bookmark2.png" alt="-" title="' .
 				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 		}
 	}
@@ -87,7 +87,7 @@ else
 <div id="search">
 <?php
 // Opens Search form
-echo $this->form_open('search', '', 'get', false, $this->_t('TextSearchPage'));
+echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]);
 
 // Searchbar
 ?>

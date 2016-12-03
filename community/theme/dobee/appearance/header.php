@@ -12,7 +12,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 	<tr>
 		<td><?php echo $this->db->site_name ?>: <?php echo $this->get_page_path(); ?>
 		</td>
-		<td class="searchArea" style="text-align:right; vertical-align:bottom;"><?php echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage')); ?>
+		<td class="searchArea" style="text-align:right; vertical-align:bottom;"><?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
 		<input type="search" name="phrase"
 			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0px; margin: 0px; background-color: #FFFFFF;"
 			size="21" /> <?php echo $this->form_close(); ?></td>
@@ -76,14 +76,14 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 							{
 								echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 									 . '"><img src="' .  $this->db->theme_url
-									. 'icon/bookmark1.png" alt="+" title="' . 
+									. 'icon/bookmark1.png" alt="+" title="' .
 									$this->_t('AddToBookmarks')  . '"/></a></li>';
 							}
 							else
 							{
 								echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 									 . '"><img src="' .  $this->db->theme_url
-									. 'icon/bookmark2.png" alt="-" title="' . 
+									. 'icon/bookmark2.png" alt="-" title="' .
 									$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
 							}
 						}
@@ -179,7 +179,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 			</tr>
 		</table>
 		</td>
-		<td><!-- wrapper --> <?php echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
+		<td><!-- wrapper --> <?php echo $this->form_open('login', ['tag' => $this->_t('LoginPage')]); ?>
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->is_watched === true

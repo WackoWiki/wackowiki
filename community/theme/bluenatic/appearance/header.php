@@ -78,7 +78,7 @@ else if($this->has_access('write'))
 	<div id="mainwrapper">
 		<div id="header">
 			<?php // Insert search form ?>
-			<?php echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage')); ?>
+			<?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
 			<input type="search" name="phrase" size="15" value="<?php echo $this->_t('SearchButtonText'); ?>" class="search" />
 			<?php echo $this->form_close(); ?>
 
@@ -165,7 +165,7 @@ else if($this->has_access('write'))
 			</a>
 			<?php } else { ?>
 			<div class="loginbox">
-				<?php echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
+				<?php echo $this->form_open('login', ['tag' => $this->_t('LoginPage')]); ?>
 				<input type="hidden" name="action" value="login" />
 				<input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag); ?>" />
 				<?php echo $this->_t('LoginWelcome'); ?>
