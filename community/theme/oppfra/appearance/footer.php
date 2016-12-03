@@ -117,7 +117,7 @@ if ($this->page)
 
 <?php
 // Opens Search form
-echo $this->form_open('search', '', 'get', $this->_t('TextSearchPage')); ?>
+echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
 <div>
 <?php
 // Searchbar
@@ -132,7 +132,7 @@ echo $this->form_close();
 
 <?php
 // Begin Login form
-echo $this->form_open('login', '', 'post', $this->_t('LoginPage')); ?>
+echo $this->form_open('login', ['tag' => $this->_t('LoginPage')]); ?>
 	<input type="hidden" name="action" value="login" />
 <?php
 

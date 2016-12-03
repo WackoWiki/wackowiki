@@ -4134,11 +4134,6 @@ class Wacko
 				'<input type="hidden" name="_action" value="' . $form_name . '" />' . "\n";
 		}
 
-		/* if ($this->db->tls) // removed by STS - very bad idea to go from http page into https post page
-		{
-			$result = str_replace('http://', 'https://'.($this->db->tls_proxy ? $this->db->tls_proxy . '/' : ''), $result);
-		} */
-
 		return $result;
 	}
 

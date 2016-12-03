@@ -13,7 +13,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 <body>
 <div class="Top<?php if (!$this->get_user()) echo "LoggedOut";?>">
 	<div class="TopRight">
-<?php echo $this->form_open('search', '', 'get', false, $this->_t('TextSearchPage')); ?>
+<?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
 	<span class="nobr">
 <?php
 
@@ -60,7 +60,7 @@ echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('Accoun
 		<table >
 			<tr>
 				<td>
-			<?php echo $this->form_open('login', '', 'post', false, 'Login'); ?>
+			<?php echo $this->form_open('login', ['tag' => $this->_t('LoginPage')]); ?>
 			<input type="hidden" name="action" value="login" />
 			<img src="<?php echo $this->db->theme_url ?>icon/norole.png" width="9" height="15" alt="" /></td>
 				<td><strong><?php echo $this->_t('LoginWelcome') ?>:&nbsp;</strong> </td>

@@ -103,7 +103,7 @@ if ($this->page)
 </div>
 </div>
 	<div class="searchbar">
-		<?php echo $this->form_open('search', '', 'get', false, $this->_t('TextSearchPage')); ?>
+		<?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
 			<span class="nobr"><?php echo $this->_t('SearchText') ?>
 				<input type="search" name="phrase" size="15" />
 			</span>
