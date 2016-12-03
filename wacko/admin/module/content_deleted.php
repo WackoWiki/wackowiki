@@ -40,7 +40,7 @@ function admin_content_deleted(&$engine, &$module)
 			"WHERE page_id = '" . $id."'");
 
 		$engine->db->sql_query(
-			"DELETE FROM {$engine->db->table_prefix}upload " .
+			"DELETE FROM {$engine->db->table_prefix}file " .
 			"WHERE page_id = '" . $id."'");
 
 	}
@@ -87,13 +87,13 @@ function admin_content_deleted(&$engine, &$module)
 			}
 
 			// print entry
-			echo '<tr>' . 
-					'<td class="lined" style="text-align:left">' . 
+			echo '<tr>' .
+					'<td class="lined" style="text-align:left">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - '.
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $page['page_id'] . '">' . $engine->_t('RemoveButton') . '</a> ]'.
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $page['page_id'] . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0, $page['title']) .
-					'</td>' . 
+					'</td>' .
 				"</tr>\n";
 		}
 

@@ -210,7 +210,7 @@ class Wacko
 		{
 			$file = $this->db->load_single(
 				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
-				"FROM " . $this->db->table_prefix . "upload " .
+				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id = '" . (int) $page_id . "' " .
 					"AND file_name = " . $this->db->q($file_name) . " " .
 					($deleted != 1
@@ -227,7 +227,7 @@ class Wacko
 		// get used upload quota
 		$files	= $this->db->load_single(
 				"SELECT SUM(file_size) AS used_quota " .
-				"FROM " . $this->db->table_prefix . "upload " .
+				"FROM " . $this->db->table_prefix . "file " .
 					($user_id
 						? "WHERE user_id = '{$user_id}' "
 						: "") .
@@ -1538,7 +1538,7 @@ class Wacko
 			"SELECT p.page_id, p.tag AS tag, p.title " .
 			"FROM " . $this->db->table_prefix . "file_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.page_id) " .
-				"INNER JOIN " . $this->db->table_prefix . "upload u ON (u.file_id = l.file_id) " .
+				"INNER JOIN " . $this->db->table_prefix . "file u ON (u.file_id = l.file_id) " .
 			"WHERE " . ($tag
 					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 					: "") .
@@ -6739,7 +6739,7 @@ class Wacko
 			// get filenames
 			$files = $this->db->load_all(
 				"SELECT file_name " .
-				"FROM {$this->db->table_prefix}upload " .
+				"FROM {$this->db->table_prefix}file " .
 				"WHERE page_id = '" . $page['page_id'] . "'");
 
 			// store a copy in ...
@@ -6757,7 +6757,7 @@ class Wacko
 
 				// flag record as deleted in DB
 				$this->db->sql_query(
-					"UPDATE {$this->db->table_prefix}upload SET " .
+					"UPDATE {$this->db->table_prefix}file SET " .
 						"deleted	= '1' " .
 					"WHERE page_id = '" . $page['page_id'] . "'");
 			}
@@ -6774,7 +6774,7 @@ class Wacko
 
 				// remove from DB
 				$this->db->sql_query(
-					"DELETE FROM {$this->db->table_prefix}upload " .
+					"DELETE FROM {$this->db->table_prefix}file " .
 					"WHERE page_id = '" . $page['page_id'] . "'");
 			}
 		}
@@ -6803,7 +6803,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE {$this->db->table_prefix}upload SET " .
+			"UPDATE {$this->db->table_prefix}file SET " .
 				"deleted	= '0' " .
 			"WHERE page_id = '" . (int) $page_id . "'");
 	}

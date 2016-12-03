@@ -98,7 +98,7 @@ if ($can_view)
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.file_id) AS n " .
-		"FROM " . $this->db->table_prefix . "upload f " .
+		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE ".
 			($all
@@ -117,7 +117,7 @@ if ($can_view)
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, u.user_name " .
-		"FROM " . $this->db->table_prefix . "upload f " .
+		"FROM " . $this->db->table_prefix . "file f " .
 			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 

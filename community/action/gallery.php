@@ -180,7 +180,7 @@ if ($can_view)
 	// TODO: we want only image files -> AND f.picture_w <> '0'
 	$count = $this->db->load_all(
 		"SELECT f.file_id " .
-		"FROM " . $this->db->table_prefix . "upload f " .
+		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
 			"AND f.picture_w <> '0' " .
@@ -194,7 +194,7 @@ if ($can_view)
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits " .
-		"FROM " . $this->db->table_prefix . "upload f " .
+		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
 			"AND f.picture_w <> '0' " .
@@ -408,9 +408,9 @@ if ($can_view)
 						}
 					}
 
-					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the upload table, remember we can have many derived versions from the original image
+					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the file table, remember we can have many derived versions from the original image
 					/* $this->db->sql_query(
-						"INSERT INTO " . $this->db->table_prefix . "upload SET " .
+						"INSERT INTO " . $this->db->table_prefix . "file SET " .
 						"user_id			= '" . (int) $file['user_id'] . "', " .
 						"page_id			= '" . (int) $file_page['page_id'] . "', " .
 						"file_name			= " . $this->db->q($small_id.$file_name) . ", " .

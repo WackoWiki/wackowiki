@@ -49,7 +49,7 @@ $pages2 = $this->db->load_all(
 // loading uloads
 $files = $this->db->load_all(
 	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, 0 as comment_on_id, f.hits as ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.file_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 2 AS ctype, f.deleted " .
-	"FROM {$this->db->table_prefix}upload f " .
+	"FROM {$this->db->table_prefix}file f " .
 		"LEFT JOIN {$this->db->table_prefix}page c ON (f.page_id = c.page_id) " .
 		"LEFT JOIN {$this->db->table_prefix}user u ON (f.user_id = u.user_id) " .
 	"WHERE u.account_type = '0' " .
@@ -130,7 +130,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				$_lang = '';
 			}
 
-			// - comment lang / upload description lang
+			// - comment lang / file description lang
 			if ($this->page['page_lang'] != $page['cf_lang'])
 			{
 				$_cf_lang = $page['cf_lang'];

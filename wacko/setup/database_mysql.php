@@ -66,7 +66,7 @@ $table_config = "CREATE TABLE {$pref}config (" .
 					"UNIQUE KEY idx_config_name (config_name)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_upload = "CREATE TABLE {$pref}file (" .
+$table_file = "CREATE TABLE {$pref}file (" .
 					"file_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
