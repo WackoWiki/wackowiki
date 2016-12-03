@@ -50,6 +50,12 @@ if (!isset($tables, $directories))
 				'order'	=> 'page_id',
 				'limit' => 1000
 			],
+			$engine->db->table_prefix . 'file' => [
+				'name'	=> $engine->db->table_prefix . 'file',
+				'where'	=> false,
+				'order'	=> 'file_id',
+				'limit' => 1000
+			],
 			$engine->db->table_prefix . 'file_link' => [
 					'name'	=> $engine->db->table_prefix . 'file_link',
 					'where'	=> 'page_id',
@@ -103,12 +109,6 @@ if (!isset($tables, $directories))
 				'where'	=> 'revision_id',
 				'order'	=> 'revision_id',
 				'limit' => 500
-			],
-			$engine->db->table_prefix . 'upload' => [
-				'name'	=> $engine->db->table_prefix . 'upload',
-				'where'	=> false,
-				'order'	=> 'file_id',
-				'limit' => 1000
 			],
 			$engine->db->table_prefix . 'user' => [
 				'name'	=> $engine->db->table_prefix . 'user',

@@ -179,7 +179,7 @@ if ($can_view)
 
 	// TODO: we want only image files -> AND f.picture_w <> '0'
 	$count = $this->db->load_all(
-		"SELECT f.upload_id " .
+		"SELECT f.file_id " .
 		"FROM " . $this->db->table_prefix . "upload f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
@@ -193,7 +193,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits " .
 		"FROM " . $this->db->table_prefix . "upload f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
@@ -246,9 +246,9 @@ if ($can_view)
 
 			$file_description	= $this->format($file['file_description'], 'typografica' );
 
-			if ($this->page['page_lang'] != $file['upload_lang'])
+			if ($this->page['page_lang'] != $file['file_lang'])
 			{
-				$file_description	= $this->do_unicode_entities($file_description, $file['upload_lang']);
+				$file_description	= $this->do_unicode_entities($file_description, $file['file_lang']);
 			}
 
 			// check for upload location: global / per page
