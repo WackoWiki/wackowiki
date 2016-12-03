@@ -34,10 +34,10 @@ function admin_content_files(&$engine, &$module)
 	if (isset($_GET['remove'])) // show the form
 	{
 		$file = $engine->db->load_single(
-			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description " .
+			"SELECT user_id, file_id, file_name, file_size, file_lang, file_description " .
 			"FROM {$engine->db->table_prefix}upload " .
 			"WHERE page_id = 0 " .
-				"AND upload_id = '" . (int) $_GET['file_id'] . "' " .
+				"AND file_id = '" . (int) $_GET['file_id'] . "' " .
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -70,10 +70,10 @@ function admin_content_files(&$engine, &$module)
 	{
 		// 1. where, existence
 		$file = $engine->db->load_single(
-			"SELECT user_id, upload_id, file_name, file_size, upload_lang, file_description " .
+			"SELECT user_id, file_id, file_name, file_size, file_lang, file_description " .
 			"FROM {$engine->db->table_prefix}upload " .
 			"WHERE page_id = 0 " .
-				"AND upload_id = '" . (int) $_POST['file_id'] . "' " .
+				"AND file_id = '" . (int) $_POST['file_id'] . "' " .
 			"LIMIT 1");
 
 		if (count($file) > 0)
@@ -81,7 +81,7 @@ function admin_content_files(&$engine, &$module)
 			// 2. remove from DB
 			$engine->db->sql_query(
 				"DELETE FROM " . $engine->db->table_prefix . "upload " .
-				"WHERE upload_id = '". $file['upload_id'] . "'");
+				"WHERE file_id = '". $file['file_id'] . "'");
 
 			// update user uploads count
 			$engine->db->sql_query(
@@ -120,7 +120,7 @@ function admin_content_files(&$engine, &$module)
 	{
 		$user	= $engine->get_user();
 		$files	= $engine->db->load_all(
-			"SELECT upload_id " .
+			"SELECT file_id " .
 			"FROM {$engine->db->table_prefix}upload " .
 			"WHERE user_id = '" . $user['user_id'] . "'");
 
@@ -187,7 +187,7 @@ function admin_content_files(&$engine, &$module)
 			$engine->db->sql_query("INSERT INTO {$engine->db->table_prefix}upload SET " .
 				"page_id			= '" . '0' . "', " .
 				"file_name			= " . $engine->db->q($small_name) . ", " .
-				"upload_lang		= " . $engine->db->q($engine->db->language) . ", " .
+				"file_lang		= " . $engine->db->q($engine->db->language) . ", " .
 				"file_description	= " . $engine->db->q($description) . ", " .
 				"file_size			= '" . (int) $file_size."'," .
 				"picture_w			= '" . (int) $size[0] . "'," .
@@ -282,7 +282,7 @@ function admin_content_files(&$engine, &$module)
 	$global = true;
 
 	$count = $engine->db->load_all(
-			"SELECT f.upload_id " .
+			"SELECT f.file_id " .
 			"FROM " . $engine->db->table_prefix . "upload f " .
 				"INNER JOIN " . $engine->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"WHERE f.page_id = '". ($global ? 0 : '') . "' " .
@@ -295,7 +295,7 @@ function admin_content_files(&$engine, &$module)
 
 	// load files list
 	$files = $engine->db->load_all(
-		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, file_description, uploaded_dt " .
+		"SELECT file_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, file_description, uploaded_dt " .
 		"FROM {$engine->db->table_prefix}upload " .
 		"WHERE page_id = 0 " .
 		"ORDER BY " . $order_by." " .
@@ -334,12 +334,12 @@ function admin_content_files(&$engine, &$module)
 
 		if ($desc == '') $desc = '&nbsp;';
 
-		$file_id	= $file['upload_id'];
+		$file_id	= $file['file_id'];
 		$file_name	= $file['file_name'];
 		$file_size	= $engine->binary_multiples($file['file_size'], false, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
 		$link		= $engine->link($path2 . $file_name, '', $file_name);
-		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id=' . $file['upload_id'];
+		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id=' . $file['file_id'];
 ?>
 		<tr class="hl_setting">
 			<td style=""><?php echo $link; ?></td>

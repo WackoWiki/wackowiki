@@ -29,6 +29,7 @@ class TemplatestUser extends TemplatestSetter
 		$this->main = $main;
 
 		$tpl = $this->store[$main];
+
 		if (isset($tpl['static']))
 		{
 			$root['chunks'][0] = implode('', $tpl['chunks']);
@@ -38,6 +39,7 @@ class TemplatestUser extends TemplatestSetter
 			$root['chunks'][0] = '';
 			$root['sub'][''][0] = [0, 0, '', [], $main, null];
 		}
+
 		$root['file'] = 0;
 
 		$this->root = $root;
@@ -147,6 +149,7 @@ class TemplatestUser extends TemplatestSetter
 		}
 
 		$args = func_get_args();
+
 		if (($nargs = count($args)) == 1 && is_array($args[0]))
 		{
 			$args = $args[0];
@@ -159,6 +162,7 @@ class TemplatestUser extends TemplatestSetter
 		}
 
 		$value = $args[$nargs - 1];
+
 		if ($value === false || $value === null)
 		{
 			return; // skip if value is empty
@@ -180,6 +184,7 @@ class TemplatestUser extends TemplatestSetter
 				{
 					// path exhaused, only value remains, so we instructed to assign into sub!
 					$err = null;
+
 					if (is_array($name))
 					{
 						foreach ($name as $i => $value)
@@ -203,6 +208,7 @@ class TemplatestUser extends TemplatestSetter
 					{
 						$err = "`$path' do not reference variable";
 					}
+
 					return $err;
 				}
 

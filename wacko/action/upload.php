@@ -96,7 +96,7 @@ if ($this->can_upload(true) === true)
 	}
 	/* echo '<tr>
 		<td style="text-align: right">
-			<label for="upload_dest_file">' . $this->_t('UploadDestName') . ':&nbsp;</label>
+			<label for="upload_dest_file">' . $this->_t('UploadAsName') . ':&nbsp;</label>
 		</td>
 		<td>
 			<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value=""/>
@@ -114,6 +114,14 @@ if ($this->can_upload(true) === true)
 		</td>
 	</tr>
 	<?php } ?>
+	<tr>
+		<td style="text-align: right">
+		</td>
+		<td>
+			<input type="checkbox" name="file_overwrite" id="upload_overwrite" value="1" />
+			<label for="upload_overwrite"><?php echo $this->_t('UploadOverwrite');?></label>
+		</td>
+	</tr>
 	<tr>
 		<td>&nbsp;</td>
 		<td>

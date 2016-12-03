@@ -66,6 +66,28 @@ $table_config = "CREATE TABLE {$pref}config (" .
 					"UNIQUE KEY idx_config_name (config_name)" .
 				") {$engine} COMMENT='' {$charset}";
 
+$table_upload = "CREATE TABLE {$pref}file (" .
+					"file_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"file_name VARCHAR(250) NOT NULL DEFAULT ''," .
+					"file_lang VARCHAR(2) NOT NULL DEFAULT ''," .
+					"file_description VARCHAR(250) NOT NULL DEFAULT ''," .
+					"caption TEXT NOT NULL," .
+					"uploaded_dt DATETIME NULL DEFAULT NULL," .
+					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"file_ext VARCHAR(10) NOT NULL DEFAULT ''," .
+					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0'," .
+					"PRIMARY KEY (file_id)," .
+					"KEY idx_page_id (page_id, file_name)," .
+					"KEY idx_page_id_2 (page_id, uploaded_dt)," .
+					"KEY idx_deleted (deleted)," .
+					"KEY idx_user_id (user_id)" .
+				") {$engine} COMMENT='' {$charset}";
+
 $table_file_link = "CREATE TABLE {$pref}file_link (" .
 					"file_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -271,28 +293,6 @@ $table_tag_page = "CREATE TABLE {$pref}tag_page (" .
 					"KEY idx_tag_id (tag_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_upload = "CREATE TABLE {$pref}upload (" .
-					"upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
-					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"file_name VARCHAR(250) NOT NULL DEFAULT ''," .
-					"upload_lang VARCHAR(2) NOT NULL DEFAULT ''," .
-					"file_description VARCHAR(250) NOT NULL DEFAULT ''," .
-					"caption TEXT NOT NULL," .
-					"uploaded_dt DATETIME NULL DEFAULT NULL," .
-					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"file_ext VARCHAR(10) NOT NULL DEFAULT ''," .
-					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0'," .
-					"PRIMARY KEY (upload_id)," .
-					"KEY idx_page_id (page_id, file_name)," .
-					"KEY idx_page_id_2 (page_id, uploaded_dt)," .
-					"KEY idx_deleted (deleted)," .
-					"KEY idx_user_id (user_id)" .
-				") {$engine} COMMENT='' {$charset}";
-
 $table_user = "CREATE TABLE {$pref}user (" .
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"user_name VARCHAR(80) NOT NULL DEFAULT ''," .
@@ -406,6 +406,7 @@ $table_cache_drop				= "DROP TABLE IF EXISTS {$pref}cache";
 $table_config_drop				= "DROP TABLE IF EXISTS {$pref}config";
 $table_category_drop			= "DROP TABLE IF EXISTS {$pref}category";
 $table_category_page_drop		= "DROP TABLE IF EXISTS {$pref}category_page";
+$table_file_drop				= "DROP TABLE IF EXISTS {$pref}file";
 $table_file_link_drop			= "DROP TABLE IF EXISTS {$pref}file_link";
 $table_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
 $table_page_drop				= "DROP TABLE IF EXISTS {$pref}page";
@@ -416,7 +417,6 @@ $table_referrer_drop			= "DROP TABLE IF EXISTS {$pref}referrer";
 $table_revision_drop			= "DROP TABLE IF EXISTS {$pref}revision";
 $table_tag_drop					= "DROP TABLE IF EXISTS {$pref}tag";
 $table_tag_page_drop			= "DROP TABLE IF EXISTS {$pref}tag_page";
-$table_upload_drop				= "DROP TABLE IF EXISTS {$pref}upload";
 $table_user_drop				= "DROP TABLE IF EXISTS {$pref}user";
 $table_user_setting_drop		= "DROP TABLE IF EXISTS {$pref}user_setting";
 $table_usergroup_drop			= "DROP TABLE IF EXISTS {$pref}usergroup";

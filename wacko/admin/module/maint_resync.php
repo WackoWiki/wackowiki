@@ -121,7 +121,7 @@ Ut::debug_print_r($users);
 
 			// total files uploaded
 			$users = $engine->db->load_all(
-					"SELECT u.user_id, COUNT(f.upload_id) AS n " .
+					"SELECT u.user_id, COUNT(f.file_id) AS n " .
 					"FROM {$engine->db->table_prefix}upload f, {$engine->db->user_table} AS u " .
 					"WHERE f.user_id = u.user_id " .
 					"AND f.deleted <> '1' " .

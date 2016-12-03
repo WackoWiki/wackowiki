@@ -16,6 +16,7 @@ $delete_table[]			= ['usergroup',			$table_usergroup_drop];
 $delete_table[]			= ['usergroup_member',	$table_usergroup_member_drop];
 $delete_table[]			= ['category',			$table_category_drop];
 $delete_table[]			= ['category_page',		$table_category_page_drop];
+$delete_table[]			= ['file',				$table_file_drop];
 $delete_table[]			= ['file_link',			$table_file_link_drop];
 $delete_table[]			= ['log',				$table_log_drop];
 $delete_table[]			= ['page',				$table_page_drop];
@@ -26,7 +27,6 @@ $delete_table[]			= ['referrer',			$table_referrer_drop];
 $delete_table[]			= ['revision',			$table_revision_drop];
 #$delete_table[]		= ['tag',				$table_tag_drop];
 #$delete_table[]		= ['tag_page',			$table_tag_page_drop];
-$delete_table[]			= ['upload',			$table_upload_drop];
 $delete_table[]			= ['user',				$table_user_drop];
 $delete_table[]			= ['user_setting',		$table_user_setting_drop];
 $delete_table[]			= ['watch',				$table_watch_drop];
@@ -45,6 +45,7 @@ $create_table[]			= ['usergroup',			$table_usergroup];
 $create_table[]			= ['usergroup_member',	$table_usergroup_member];
 $create_table[]			= ['category',			$table_category];
 $create_table[]			= ['category_page',		$table_category_page];
+$create_table[]			= ['file',				$table_file];
 $create_table[]			= ['file_link',			$table_file_link];
 $create_table[]			= ['log',				$table_log];
 $create_table[]			= ['page',				$table_page];
@@ -55,7 +56,6 @@ $create_table[]			= ['referrer',			$table_referrer];
 $create_table[]			= ['revision',			$table_revision];
 #$create_table[]		= ['tag',				$table_tag];
 #$create_table[]		= ['tag_page',			$table_tag_page];
-$create_table[]			= ['upload',			$table_upload];
 $create_table[]			= ['user',				$table_user];
 $create_table[]			= ['user_setting',		$table_user_setting];
 $create_table[]			= ['watch',				$table_watch];
@@ -87,6 +87,12 @@ $insert_records[]		= [$lang['InstallingReviewerGroup'],	$insert_reviewer_group,	
 $upgrade['5.1.0'][]		= [$lang['AlterTable'],		'cache',		$alter_cache_r5_1_0,		$lang['ErrorAlteringTable']];
 $upgrade['5.1.0'][]		= [$lang['AlterTable'],		'cache',		$alter_cache_r5_1_1,		$lang['ErrorAlteringTable']];
 
+// file (see 5.4.0)
+$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',		$alter_file_r5_1_0,		$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',		$alter_file_r5_1_1,		$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',		$alter_file_r5_1_2,		$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',		$alter_file_r5_1_3,		$lang['ErrorAlteringTable']];
+
 // page
 $upgrade['5.1.0'][]		= [$lang['AlterTable'],		'page',			$alter_page_r5_1_0,			$lang['ErrorAlteringTable']];
 
@@ -97,12 +103,6 @@ $upgrade['5.1.0'][]		= [$lang['AlterTable'],		'link',			$alter_page_link_r5_1_0,
 
 // revision
 $upgrade['5.1.0'][]		= [$lang['AlterTable'],		'revision',		$alter_revision_r5_1_0,		$lang['ErrorAlteringTable']];
-
-// upload
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',		$alter_upload_r5_1_0,		$lang['ErrorAlteringTable']];
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',		$alter_upload_r5_1_1,		$lang['ErrorAlteringTable']];
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',		$alter_upload_r5_1_2,		$lang['ErrorAlteringTable']];
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',		$alter_upload_r5_1_3,		$lang['ErrorAlteringTable']];
 
 // 5.4.0 ############
 
@@ -128,6 +128,15 @@ $upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',		$update_config_r5_4_1,	
 $upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',		$update_config_r5_4_2,		$lang['ErrorUpdatingTable']];
 $upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',		$update_config_r5_4_3,		$lang['ErrorUpdatingTable']];
 $upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',		$update_config_r5_4_4,		$lang['ErrorUpdatingTable']];
+
+// file
+$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'upload',			$alter_file_r5_4_0,		$lang['ErrorAlteringTable']];
+
+$upgrade['5.5.rc2'][]	= [$lang['RenameTable'],	'file',			$rename_file_r5_4_0,	$lang['ErrorRenamingTable']];
+
+$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',			$alter_file_r5_4_1,		$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',			$alter_file_r5_4_2,		$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',			$alter_file_r5_4_3,		$lang['ErrorAlteringTable']];
 
 // file link
 $upgrade['5.4.0'][]		= [$lang['CreatingTable'],	'file_link',	$table_file_link_r5_4_0,	$lang['ErrorCreatingTable']];
@@ -171,11 +180,6 @@ $upgrade['5.5.rc2'][]	= [$lang['UpdateTable'],	'revision',		$update_revision_r5_
 
 // tag
 $upgrade['5.4.0'][]		= [$lang['AlterTable'],		'tag',			$alter_tag_r5_4_0,			$lang['ErrorAlteringTable']];
-
-// upload
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'upload',		$alter_upload_r5_4_0,		$lang['ErrorAlteringTable']];
-
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'upload',		$alter_upload_r5_4_1,		$lang['ErrorAlteringTable']];
 
 // user
 $upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user',			$alter_user_r5_4_0,			$lang['ErrorAlteringTable']];

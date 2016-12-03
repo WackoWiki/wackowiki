@@ -43,6 +43,19 @@ $update_config_r5_4_2 = "UPDATE {$pref}config SET config_value = config_value * 
 $update_config_r5_4_3 = "UPDATE {$pref}config SET config_value = config_value * 1024 WHERE config_name = 'upload_quota'";
 $update_config_r5_4_4 = "UPDATE {$pref}config SET config_value = config_value * 1024 WHERE config_name = 'upload_quota_per_user'";
 
+// FILE
+$alter_file_r5_1_0 = "ALTER TABLE {$pref}upload ADD INDEX idx_deleted (deleted)";
+$alter_file_r5_1_1 = "ALTER TABLE {$pref}upload DROP INDEX page_id, ADD INDEX idx_page_id (page_id, file_name)";
+$alter_file_r5_1_2 = "ALTER TABLE {$pref}upload DROP INDEX page_id_2, ADD INDEX idx_page_id_2 (page_id, uploaded_dt)";
+$alter_file_r5_1_3 = "ALTER TABLE {$pref}upload CHANGE description file_description VARCHAR(250) NOT NULL DEFAULT ''";
+$alter_file_r5_4_0 = "ALTER TABLE {$pref}upload CHANGE lang upload_lang VARCHAR(2) NOT NULL";
+
+$alter_file_r5_4_1 = "ALTER TABLE {$pref}file ADD caption TEXT NOT NULL AFTER file_description";
+$alter_file_r5_4_2 = "ALTER TABLE {$pref}file CHANGE upload_id file_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_file_r5_4_3 = "ALTER TABLE {$pref}file CHANGE upload_lang file_lang VARCHAR(2) NOT NULL";
+
+$rename_file_r5_4_0 = "RENAME TABLE {$pref}upload TO {$pref}file";
+
 // FILE LINK
 $table_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (" .
 							"file_link_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -100,14 +113,6 @@ $update_revision_r5_4_1 = "UPDATE {$pref}revision SET page_size = LENGTH(body)";
 
 // TAG
 $alter_tag_r5_4_0 = "ALTER TABLE {$pref}tag CHANGE lang tag_lang VARCHAR(2) NOT NULL";
-
-// UPLOAD
-$alter_upload_r5_1_0 = "ALTER TABLE {$pref}upload ADD INDEX idx_deleted (deleted)";
-$alter_upload_r5_1_1 = "ALTER TABLE {$pref}upload DROP INDEX page_id, ADD INDEX idx_page_id (page_id, file_name)";
-$alter_upload_r5_1_2 = "ALTER TABLE {$pref}upload DROP INDEX page_id_2, ADD INDEX idx_page_id_2 (page_id, uploaded_dt)";
-$alter_upload_r5_1_3 = "ALTER TABLE {$pref}upload CHANGE description file_description VARCHAR(250) NOT NULL DEFAULT ''";
-$alter_upload_r5_4_0 = "ALTER TABLE {$pref}upload CHANGE lang upload_lang VARCHAR(2) NOT NULL";
-$alter_upload_r5_4_1 = "ALTER TABLE {$pref}upload ADD caption TEXT NOT NULL AFTER file_description";
 
 // USER
 $alter_user_r5_4_0 = "ALTER TABLE {$pref}user CHANGE session_time last_visit DATETIME DEFAULT NULL";

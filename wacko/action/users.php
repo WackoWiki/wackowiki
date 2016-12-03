@@ -387,7 +387,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					$tpl->u_up_u_u2_pagination_text = $pagination['text'];
 
 					$uploads = $this->db->load_all(
-							"SELECT u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.upload_lang, c.tag file_on_page, c.title file_on_title " .
+							"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
 							"FROM {$this->db->table_prefix}upload u " .
 								"LEFT JOIN {$this->db->table_prefix}page c ON (u.page_id = c.page_id) " .
 							"WHERE u.user_id = '" . $user['user_id'] . "' " .
@@ -401,10 +401,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					{
 						if (!$this->db->hide_locked
 							|| !$upload['page_id']
-							|| $this->has_access('read', $upload['page_id'], $this->get_user_name()))
+							|| $this->has_access('read', $upload['page_id']))
 						{
 							// check current page lang for different charset to do_unicode_entities() against
-							$_lang = ($this->page['page_lang'] != $upload['upload_lang'])?  $upload['upload_lang'] : '';
+							$_lang = ($this->page['page_lang'] != $upload['file_lang'])?  $upload['file_lang'] : '';
 
 							if (($file_description = $upload['file_description']) !== '')
 							{
@@ -436,7 +436,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							}
 
 							$tpl->u_up_u_u2_li_t		= $upload['uploaded_dt'];
-							$tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
+							# $tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
+							$tpl->u_up_u_u2_li_link		= '<a href="' . $this->href('upload', '', ['show', 'file_id=' . (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
 							$tpl->u_up_u_u2_li_onpage	= $on_page;
 							$tpl->u_up_u_u2_li_descr	= $file_description;
 						}

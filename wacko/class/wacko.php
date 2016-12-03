@@ -209,7 +209,7 @@ class Wacko
 		if (empty($file))
 		{
 			$file = $this->db->load_single(
-				"SELECT upload_id, page_id, user_id, file_name, file_size, upload_lang, file_description, picture_w, picture_h, file_ext " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
 				"FROM " . $this->db->table_prefix . "upload " .
 				"WHERE page_id = '" . (int) $page_id . "' " .
 					"AND file_name = " . $this->db->q($file_name) . " " .
@@ -1538,7 +1538,7 @@ class Wacko
 			"SELECT p.page_id, p.tag AS tag, p.title " .
 			"FROM " . $this->db->table_prefix . "file_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.page_id) " .
-				"INNER JOIN " . $this->db->table_prefix . "upload u ON (u.upload_id = l.file_id) " .
+				"INNER JOIN " . $this->db->table_prefix . "upload u ON (u.file_id = l.file_id) " .
 			"WHERE " . ($tag
 					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 					: "") .
@@ -3133,9 +3133,9 @@ class Wacko
 					$have_global = true;
 
 					// tracking file link
-					if ($track && isset($file_data['upload_id']))
+					if ($track && isset($file_data['file_id']))
 					{
-						$this->track_link_to($file_data['upload_id'], LINK_FILE);
+						$this->track_link_to($file_data['file_id'], LINK_FILE);
 					}
 				}
 			}
@@ -3149,9 +3149,9 @@ class Wacko
 					$url = $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
 					// tracking file link
-					if ($track && isset($file_data['upload_id']))
+					if ($track && isset($file_data['file_id']))
 					{
-						$this->track_link_to($file_data['upload_id'], LINK_FILE);
+						$this->track_link_to($file_data['file_id'], LINK_FILE);
 					}
 				}
 			}
@@ -3188,13 +3188,13 @@ class Wacko
 					$url = $this->href('file', trim($page_tag, '/'), 'get=' . $file_name);
 
 					// tracking file link
-					if ($track && isset($file_data['upload_id']))
+					if ($track && isset($file_data['file_id']))
 					{
-						$this->track_link_to($file_data['upload_id'], LINK_FILE);
+						$this->track_link_to($file_data['file_id'], LINK_FILE);
 					}
 
 					if ($this->is_admin()
-					|| ($file_data['upload_id'] && ($this->page['owner_id'] == $this->get_user_id()))
+					|| ($file_data['file_id'] && ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($this->has_access('read', $page_id))
 					|| ($file_data['user_id'] == $this->get_user_id()))
 					{
@@ -4005,9 +4005,9 @@ class Wacko
 		{
 			$query = '';
 
-			foreach ($file_table as $upload_id => $dummy) // index == value, BTW
+			foreach ($file_table as $file_id => $dummy) // index == value, BTW
 			{
-				$query .= "('" . (int) $from_page_id . "', '" . (int) $upload_id . "'),";
+				$query .= "('" . (int) $from_page_id . "', '" . (int) $file_id . "'),";
 			}
 
 			$this->db->sql_query(

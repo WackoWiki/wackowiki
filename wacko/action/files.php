@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 	Showing uploaded by {{upload}} files
 
 	{{files
-		[page="PageName" or global=1]
+		[page="PageName" or global=1 or all=1]
 		[order="time|FILENAME|size|size_desc|ext"]
 		[owner="UserName"]
 		[picture=1]
@@ -17,16 +17,22 @@ if (!defined('IN_WACKO'))
 	}}
  */
 
+// TODO:
+// - add option to select all files: all=1 (?)
+// - add option to filter by tags
+
 $page_id = '';
 
 if (!isset($nomark))	$nomark = '';
 if (!isset($order))		$order = '';
 if (!isset($global))	$global = '';
+if (!isset($all))		$all = '';
 if (!isset($tag))		$tag = ''; // FIXME: $tag == $page
 if (!isset($owner))		$owner = '';
 if (!isset($page))		$page = '';
 if (!isset($ppage))		$ppage = '';
 if (!isset($legend))	$legend = '';
+if (!isset($method))	$method = ''; // for use in page handler
 if (!isset($deleted))	$deleted = 0;
 if (!isset($track))		$track = 0;
 if (!isset($picture))	$picture = null;
@@ -39,6 +45,12 @@ if ($order == 'time')		$order_by = "uploaded_dt DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
 if ($order == 'ext')		$order_by = "file_ext ASC";
+
+// check against standard_handlers
+#if (! in_array($method, ))
+#{
+#	$method = '';
+#}
 
 // do we allowed to see?
 if (!$global)
@@ -85,10 +97,14 @@ if ($can_view)
 	}
 
 	$count = $this->db->load_single(
-		"SELECT COUNT(f.upload_id) AS n " .
+		"SELECT COUNT(f.file_id) AS n " .
 		"FROM " . $this->db->table_prefix . "upload f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' " .
+		"WHERE ".
+			($all
+				? "f.page_id IS NOT NULL "
+				: "f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' "
+				) . " " .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '') .
@@ -96,14 +112,20 @@ if ($can_view)
 				? "AND f.deleted <> '1' "
 				: ""), true);
 
-	$pagination = $this->pagination($count['n'], $max, 'f');
+	$pagination = $this->pagination($count['n'], $max, 'f', '', $method);
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.upload_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name, f.hits " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, u.user_name " .
 		"FROM " . $this->db->table_prefix . "upload f " .
+			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' " .
+
+		"WHERE ".
+			($all
+				? "f.page_id IS NOT NULL "
+				: "f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' "
+				) . " " .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '') . " " .
@@ -146,27 +168,43 @@ if ($can_view)
 
 	$this->print_pagination($pagination);
 
+	$results = count($files);
+
 	if (!$nomark)
 	{
 		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
-		echo '<div class="layout-box"><p class="layout-box"><span>' . $title . ": </span></p>\n";
+		echo '<div class="layout-box"><p class="layout-box"><span>' . $results . ' of ' . '' . $count['n'] . ' ' . $title . ": </span></p>\n";
 	}
 
-	if (count($files))
+	if ($results)
 	{
 		echo '<table class="' . $style . '" >';
 
 
 		foreach ($files as $file)
 		{
+			// path hack for $all parameter, to refactor!
+			if ($all)
+			{
+				// use absolute path
+				if ($file['page_id'])
+				{
+					$path2 = 'file:/' . ($this->slim_url($file['tag'])) . '/';
+				}
+				else
+				{
+					$path2 = 'file:/';
+				}
+			}
+
 			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
 			$dt			= $file['uploaded_dt'];
 			$desc		= $this->format($file['file_description'], 'typografica' );
 
-			if ($this->page['page_lang'] != $file['upload_lang'])
+			if ($this->page['page_lang'] != $file['file_lang'])
 			{
-				$desc	= $this->do_unicode_entities($desc, $file['upload_lang']);
+				$desc	= $this->do_unicode_entities($desc, $file['file_lang']);
 			}
 
 			if ($desc == '')
@@ -174,7 +212,7 @@ if ($can_view)
 				$desc = "&nbsp;";
 			}
 
-			$file_id	= $file['upload_id'];
+			$file_id	= $file['file_id'];
 			$file_name	= $file['file_name'];
 			$shown_name = $this->shorten_string($file_name, $file_name_maxlen);
 			$text		= ($picture == false) ? $shown_name : '';

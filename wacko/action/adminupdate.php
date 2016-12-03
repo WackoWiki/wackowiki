@@ -86,7 +86,7 @@ if ($this->is_admin())
 
 			// total files uploaded
 			$users = $this->db->load_all(
-				"SELECT u.user_id, COUNT(f.upload_id) AS n " .
+				"SELECT u.user_id, COUNT(f.file_id) AS n " .
 				"FROM {$this->db->table_prefix}upload f, {$this->db->user_table} AS u " .
 				"WHERE f.user_id = u.user_id " .
 				"GROUP BY f.user_id");
