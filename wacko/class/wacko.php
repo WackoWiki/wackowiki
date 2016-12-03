@@ -1317,14 +1317,13 @@ class Wacko
 			"SELECT DISTINCT p.tag " .
 			"FROM " . $this->db->table_prefix . "menu b " .
 				"LEFT JOIN " . $this->db->table_prefix . "page p ON (b.page_id = p.page_id) " .
-			// TODO: why IN and not = ??
-			"WHERE (b.user_id IN ( '" . $this->get_user_id('System') . "' ) " .
+			"WHERE (b.user_id = '" . $this->get_user_id('System') . "' " .
 				($lang
 					? "AND b.menu_lang = " . $this->db->q($lang) . " "
 					: "") .
 					") " .
 				($user
-					? "OR (b.user_id IN ( '" . $user['user_id'] . "' )) "
+					? "OR (b.user_id = '" . $user['user_id'] . "' ) "
 					: "") .
 			"", true))
 		{
@@ -5586,7 +5585,7 @@ class Wacko
 				$user_menu_formatted[] = [
 					$menu_item['page_id'],
 					(($title !== '')? $title : $menu_item['tag']),
-					'((' . $menu_item['tag'].
+					'((' . $menu_item['tag'] .
 						(($title !== '')? ' ' . $title : '') .
 						($menu_item['menu_lang']? ' @@' . $menu_item['menu_lang'] : '') .
 					'))',
@@ -5609,6 +5608,7 @@ class Wacko
 		if ($set != MENU_AUTO || !($menu_formatted || $update))
 		{
 			$menu = 0;
+
 			if ($set != MENU_DEFAULT)
 			{
 				$menu = $this->get_user_menu($user['user_id']);
