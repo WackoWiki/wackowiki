@@ -190,8 +190,8 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 				if ($this->db->notify_new_user_account)
 				{
 					/* TODO: set user language for email encoding */
-					$lang_admin = $this->db->language;
-					$save = $this->set_language($lang_admin, true);
+					$lang_admin	= $this->db->language;
+					$save		= $this->set_language($lang_admin, true);
 
 					$subject	=	$this->_t('NewAccountSubject');
 					$body		=	$this->_t('NewAccountSignupInfo') . "\n\n" .
@@ -244,25 +244,25 @@ else
 	if ($this->db->multilanguage)
 	{
 		$languages	= $this->_t('LanguageArray');
-		$sel	= $this->user_agent_language();
+		$sel		= $this->user_agent_language();
 
 		foreach ($this->available_languages() as $lang)
 		{
-			$tpl->r_multi_l_lang = $lang;
-			$tpl->r_multi_l_name = $languages[$lang];
-			$tpl->r_multi_l_selected = ($sel == $lang);
+			$tpl->r_multi_l_lang		= $lang;
+			$tpl->r_multi_l_name		= $languages[$lang];
+			$tpl->r_multi_l_selected	= ($sel == $lang);
 		}
 	}
 
-	$tpl->r_username = $user_name;
-	$tpl->r_password = $password;
-	$tpl->r_confpassword = $conf_password;
-	$tpl->r_only =
+	$tpl->r_username		= $user_name;
+	$tpl->r_password 		= $password;
+	$tpl->r_confpassword	= $conf_password;
+	$tpl->r_only			=
 		Ut::perc_replace($this->_t($this->db->disable_wikiname? 'NameAlphanumOnly' : 'NameCamelCaseOnly'),
 			$this->db->username_chars_min,
 			$this->db->username_chars_max);
-	$tpl->r_complexity = $this->show_password_complexity();
-	$tpl->r_email = $email;
+	$tpl->r_complexity		= $this->show_password_complexity();
+	$tpl->r_email			= $email;
 
 	if ($this->db->policy_page)
 	{
