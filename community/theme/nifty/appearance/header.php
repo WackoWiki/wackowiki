@@ -271,7 +271,7 @@ if ($doubleclick == true)
 	<div class="breadcrumbs">
 	<?php
 	// display a home icon, clickable if its not the root page
-	echo ($this->page['tag'] == $this->db->root_page ? "<img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home_grey_suse.png\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\" />\n" : "<a href=\"" . $this->db->base_url."\"><img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home_grey_suse.png\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\" /></a>");
+	echo ($this->page['tag'] == $this->db->root_page ? "<img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home.svg\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\" />\n" : "<a href=\"" . $this->db->base_url."\"><img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home.svg\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\" /></a>");
 	echo " &gt; ";
 	// show breadcrumbs
 	echo "<span class=\"breadcrumb\">" . $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true) . "</span>";

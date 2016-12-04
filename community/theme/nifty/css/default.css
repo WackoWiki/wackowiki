@@ -357,7 +357,7 @@ float: right;
 }
 
 .bookmark_add img {
-	background-image:url(./../icon/bookmark-add.svg);
+	background-image:url(./../icon/bookmark.svg);
 	background-repeat: no-repeat;
 	height: 16px;
 }
