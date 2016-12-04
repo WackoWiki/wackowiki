@@ -108,7 +108,7 @@ if ($doubleclick == true)
 
 							// compose link with icon to bookmarks list
 							// TODO: add BookmarkTip to translation
-							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark.svg\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a>";
+							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark-new.svg\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a>";
 
 							// display bookmarks text
 							# " . $this->_t('Bookmarks') . "
@@ -183,7 +183,7 @@ if ($doubleclick == true)
 					if ($this->get_user())
 					{
 						// compose user identity icon with link to user page
-						echo "<a href=\"" . $this->db->base_url.$this->db->users_page . '/' . $this->get_user_name() . "\"><img src=\"" . $this->db->theme_url."icon/user_identity_white.png\" title=\"" . $this->_t('YouAre').$this->get_user_name() . "\" alt=\"" . $this->_t('YouAre').$this->get_user_name() . "\" /></a>\n";
+						echo "<a href=\"" . $this->db->base_url.$this->db->users_page . '/' . $this->get_user_name() . "\"><img src=\"" . $this->db->theme_url."icon/user_white.svg\" title=\"" . $this->_t('YouAre').$this->get_user_name() . "\" alt=\"" . $this->_t('YouAre').$this->get_user_name() . "\" /></a>\n";
 						?>
 						<span class="nobr">
 						<?php
