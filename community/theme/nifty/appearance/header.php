@@ -114,26 +114,6 @@ if ($doubleclick == true)
 							# " . $this->_t('Bookmarks') . "
 
 						echo "<ol>\n";
-						// main page
-						#echo "<li>" . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
-						#echo "<li>";
-						// get all bookmarks - old version
-						#$formatedBMs = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-						#$formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs);
-						#echo $formatedBMs;
-
-						// get default bookmarks - if not already displayed at global menu div
-						// $formated_default_bookmarks = $this->format($this->get_default_bookmarks($user['user_lang']), 'wiki');
-						// $formated_default_bookmarks = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_default_bookmarks);
-						// echo $formated_default_bookmarks;
-
-						// get user bookmarks - old version
-						#$formated_user_bookmarks = $this->format($this->get_user_bookmarks($user['user_id']), 'wiki');
-						#$formated_user_bookmarks = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_user_bookmarks);
-						#echo $formated_user_bookmarks;
-
-						#echo "</li>\n";
-
 
 						// bookmarks
 						// TODO: should be taken out of user session
@@ -232,10 +212,7 @@ if ($doubleclick == true)
 					<?php
 					// display global bookmarks as a user menu, inline top
 					// use default bookmarks (owner is system-user)
-					#$formated_default_menu = $this->format($this->get_default_menu($user['user_lang']), 'wiki');
-					#$formated_default_menu = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_default_menu);
-					#echo $formated_default_menu;
-					#echo "</li>\n";
+
 
 					#$this->context[++$this->current_context] = '/';
 					#$this->stop_link_tracking();
