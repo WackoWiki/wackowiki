@@ -108,7 +108,7 @@ if ($doubleclick == true)
 
 							// compose link with icon to bookmarks list
 							// TODO: add BookmarkTip to translation
-							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark.png\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a>";
+							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark.svg\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a>";
 
 							// display bookmarks text
 							# " . $this->_t('Bookmarks') . "
@@ -755,7 +755,7 @@ if ($doubleclick == true)
 							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnWatchText') : $this->_t('WatchText') ): '',
 							$this->method == 'watch',
 							1,
-							($this->is_watched === true ? 'watch-on.png' : 'watch-off.png'),
+							($this->is_watched === true ? 'watch-on.svg' : 'watch-off.svg'),
 							'a');
 
 						// review tab
