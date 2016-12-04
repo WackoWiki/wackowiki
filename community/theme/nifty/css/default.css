@@ -59,8 +59,10 @@ a:active {
 	color: #FF0000;
 }
 
-img {
-	border-width: 0px;
+svg, img {
+	border-width: 0;
+	height: auto;
+	max-width: 100%;
 	vertical-align: middle;
 }
 

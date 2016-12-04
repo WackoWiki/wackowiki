@@ -139,7 +139,7 @@ if ($doubleclick == true)
 						// TODO: should be taken out of user session
 						foreach ($this->get_user_menu($user['user_id']) as $_bookmark)
 						{
-							$formatted_user_menu = $this->format($_bookmark[1], 'wiki');
+							$formatted_user_menu = $this->format($_bookmark[2], 'wiki');
 
 							if ($this->page['page_id'] == $_bookmark[0])
 							{
@@ -242,7 +242,7 @@ if ($doubleclick == true)
 
 					foreach ($this->get_default_menu($user['user_lang']) as $_menu)
 					{
-						$formatted_menu = $this->format($this->format($_menu[1]), 'post_wacko');
+						$formatted_menu = $this->format($this->format($_menu[2]), 'post_wacko');
 
 						if ($this->page['page_id'] == $_menu[0])
 						{
@@ -346,7 +346,7 @@ if ($doubleclick == true)
 				<div id="sidebar-toc-list" class="sidebar-toc-list">
 				<?php
 				// display the page toc list, numerated, without labels and markup
-				echo $this->action('toc', array('numerate' => 0, 'nomark' => 1));
+				echo $this->action('toc', ['numerate' => 0, 'nomark' => 1]);
 				?>
 				</div>
 			</div>
@@ -363,7 +363,7 @@ if ($doubleclick == true)
 				<div id="sidebar-tree" class="sidebar-tree">
 					<?php
 					// display all subpages for this page/cluster, 3 levels down
-					echo $this->action('tree', array('page' => $this->tag, 'depth' => 3, 'nomark' => 1));
+					echo $this->action('tree', ['page' => $this->tag, 'depth' => 3, 'nomark' => 1]);
 
 					// tree
 					#if ($this->db->tree_level == 1)
@@ -403,7 +403,7 @@ if ($doubleclick == true)
 						// TODO: should be taken out of user session
 						foreach ($this->get_user_menu($user['user_id']) as $_menu)
 						{
-						$formatted_user_menu = $this->format($_menu[1], 'wiki');
+						$formatted_user_menu = $this->format($_menu[2], 'wiki');
 
 						if ($this->page['page_id'] == $_menu[0])
 						{
@@ -471,7 +471,7 @@ if ($doubleclick == true)
 				// display the categories for this page
 				// TODO: use category action so you can display all categories (?)
 				// needs to reference to $this->db->category_page at line 142 instead of self
-				echo $this->action('categories', array('list' => 1, 'nomark' => 1));
+				echo $this->action('categories', ['list' => 1, 'nomark' => 1]);
 				?>
 				</div>
 			</div>
@@ -501,7 +501,7 @@ if ($doubleclick == true)
 							// display the page toc list, numerated (?), without labels and markup
 							// toc numerated does not work as intended
 							echo "<div id=\"toc-list\">\n";
-							echo $this->action("toc", array('numerate' => '', 'nomark' => 1));
+							echo $this->action('toc', ['numerate' => '', 'nomark' => 1]);
 							echo "</div>\n";
 						}
 						// TODO: else ... maybe insert a spacer to get in line with header vertical text flow
