@@ -411,7 +411,7 @@ class Wacko
 			}
 			else
 			{
-				// TODO: only FIRST theme's language loaded.... need to fix for multi-themed sites w/ nonempty theme lang files
+				// TODO: only default and users theme's language loaded.... need to fix for themes_per_page sites w/ nonempty theme lang files
 				// theme lang files $theme_translation[]
 				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/wacko.' . $lang . '.php');
 
@@ -2726,7 +2726,7 @@ class Wacko
 	/**
 	* Returns the full URL for a page/method, including any additional URL-parameters and anchor
 	*
-	* @param string $method Optional Wakka method (default 'show' method added in Run() function)
+	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $tag Optional tag. Returns current-page tag if empty
 	* @param mixed $params Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
 	* @param boolean $addpage Optional
@@ -2794,7 +2794,7 @@ class Wacko
 	/**
 	* Returns value for page 'wakka' parameter, in tag[/method][#anchor] format
 	*
-	* @param string $method Optional Wacko method (default 'show' method added in Run() function)
+	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $tag Optional tag - returns current-page tag if empty
 	* @param boolean $addpage Optional
 	* @return string String tag[/method]
@@ -2850,7 +2850,7 @@ class Wacko
 	* Add spaces and wraps page href into <a> </a>
 	*
 	* @param string $tag Page tag.
-	* @param string $method Wacko method. Optional, default 'show' method added in Run() function.
+	* @param string $method Wacko method. Optional, default 'show' method added in run() function.
 	* @param string $text Href text. Optinonal, default is $tag value
 	* @param boolean $track Track this link. Optional, default is TRUE
 	* @param string $title link title. Optional, default is ''
@@ -2915,7 +2915,7 @@ class Wacko
 	* @param string $tag Link content - may be Wacko tag, interwiki wikiname:page tag,
 	*	http/file/ftp/https/mailto/xmpp URL, [=] local or remote image-file for <img> link, or local or
 	*	remote doc-file; if pagetag is for an external link but not protocol is specified, http:// is prepended
-	* @param string $method Optional Wacko method (default 'show' method added in Run() function)
+	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $text Optional text or image-file for HREF link (defaults to same as pagetag)
 	* @param string $title
 	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINKS table).
@@ -5994,14 +5994,15 @@ class Wacko
 		}
 
 		// user settings
-		$this->user_lang = $this->get_user_language();
-		$this->set_language($this->user_lang, true);
-
+		// set user theme prior to user_lang to load theme lang files -> load_translation()
 		if (isset($user['theme']))
 		{
 			$this->db->theme		= $user['theme'];
 			$this->db->theme_url	= $this->db->base_url . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
 		}
+
+		$this->user_lang = $this->get_user_language();
+		$this->set_language($this->user_lang, true);
 
 		// SEO
 		foreach ($this->search_engines as $engine)
@@ -6116,6 +6117,7 @@ class Wacko
 				}
 			}
 
+			// TODO: ['themes_per_page'] load themes language files
 			$this->db->theme_url = $this->db->base_url . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
 
 			// set page categories. this defines $categories (array) object property
@@ -7187,7 +7189,7 @@ class Wacko
 		}
 
 		// check event level: do we have to log it?
-		if (   (int) $this->db->log_level === 0
+		if (    (int) $this->db->log_level === 0
 			|| ((int) $this->db->log_level !== 7
 			&& $level > (int) $this->db->log_level))
 		{
