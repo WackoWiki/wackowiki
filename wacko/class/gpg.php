@@ -109,8 +109,8 @@ class GPG
 					'sf' => $this->stfile,		// status-file
 					'sr' => $this->srfile,		// stderr
 					'cl' => $this->override . ' ' . $request,	// command line params
-					'st' => $input)				// stdin data
-				] // end of content array
+					'st' => $input				// stdin data
+				]) // end of content array
 			] // end of http array
 		]; // end of request array
 
