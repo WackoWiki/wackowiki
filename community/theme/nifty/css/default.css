@@ -3,7 +3,12 @@
 /* basic styles, reset ----------------------------------------------- basic */
 /* TODO: proper reset */
 
-p, td, li, select, textarea {
+p,
+td,
+th,
+li,
+select,
+textarea {
 	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 13px;
 	line-height: 1.3em;
@@ -14,16 +19,19 @@ p, td, li, select, textarea {
 	text-align:left;
 	white-space:pre;
 } */
+
 /* cellspacing */
 table {
-	border-collapse:collapse;
+	border-collapse: collapse;
 	border-spacing: 0;
 	
 }
 /* cellpadding */
-th, td {
+th,
+td {
 	padding: 0px;
 }
+
 label {
 	cursor: pointer;
 }
@@ -1100,7 +1108,8 @@ border-top-right-radius: 4px;*/
 	border-radius: 4px;
 }
 
-#handler img, #handler a img {
+#handler img,
+#handler a img {
 border:medium none;
 height:16px;
 width:16px;
@@ -1200,7 +1209,8 @@ background-repeat: no-repeat;
 
 /* page ----------------------------------------------------- page */
 
-#page, #page-edit {
+#page,
+#page-edit {
 	float: left;
 	width: 98%;
 	padding: 1%;
@@ -1261,7 +1271,9 @@ background-repeat: no-repeat;
 /* files and comments headers are always visible
 unless disabled through settings at config table */
 
-#header-files, #header-comments, #header-rating {
+#header-files,
+#header-comments,
+#header-rating {
 	/*min-height: 18px;*/
 	padding: 5px 1% 5px;
 	color: #444;
@@ -1289,7 +1301,8 @@ unless disabled through settings at config table */
 	padding: 0;
 }
 
-.files, .rating {
+.files, 
+.rating {
 	/*float: right;*/
 	background-color: #FFFFFF;
 	padding: 5px 1%;
@@ -1529,9 +1542,14 @@ li.comment {
 
 
 /* Included pages: SYNTAX {{include page="xyz"}} */
-.include {
+.include-page {
 	background-color: #FCFCFC;
 	padding: 8px;
+}
+
+.include-meta {
+	text-align: right;
+	font-size: 11px;
 }
 
 /* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */
@@ -1583,7 +1601,8 @@ fieldset {
 	vertical-align: bottom
 }
 
-.upload td.dt-, .upload td.file- {
+.upload td.dt-,
+.upload td.file- {
 	white-space: nowrap;
 	font-size: 80%;
 	font-weight: bold;
@@ -1591,16 +1610,16 @@ fieldset {
 }
 
 .upload td.dt- {
-	padding-right: 0
+	padding-right: 0;
 }
 
 .upload td.tool- {
-	padding-right: 0
+	padding-right: 0;
 }
 
 .upload td.size- {
 	padding-right: 0;
-	text-align: right
+	text-align: right;
 }
 
 .upload td.desc- {
@@ -1609,13 +1628,20 @@ fieldset {
 	width: 100%
 }
 
-.upload td.dt- .dt2-, .upload td.tool- .tool2-, .upload td.size- .size2- {
+.upload td.dt- .dt2-,
+.upload td.tool- .tool2-,
+.upload td.size- .size2- {
 	font: 11px Tahoma;
 	color: #666666;
 }
 
-.upload td.tool- a.tool2-:hover, .upload td.tool- a.tool2-:active {
+.upload td.tool- a.tool2-:hover,
+.upload td.tool- a.tool2-:active {
 	color: #ff0000
+}
+
+.fileinfo {
+	overflow-wrap: break-word;
 }
 
 .preview {
@@ -1999,7 +2025,8 @@ p.layout-box span {
 	width: 100%;
 }
 
-.form_tbl td, .form_tbl th {
+.form_tbl td,
+.form_tbl th {
 	padding: 3px;
 	margin: 0px;
 }
@@ -2021,7 +2048,8 @@ p.layout-box span {
 	vertical-align: top;
 	width: 30%;
 }
-td.form_left, th.form_left {
+td.form_left,
+th.form_left {
 	padding-right: 20px;
 }
 
@@ -2038,7 +2066,6 @@ td.form_left, th.form_left {
 .feed .note {
 	font-size: 11px;
 	color: #777;
-	
 }
 
 .feed .note a {
@@ -2071,7 +2098,8 @@ td.form_left, th.form_left {
 	margin-top: 0.9375em;
 }
 
-.topnav ul,.topnav li {
+.topnav ul,
+.topnav li {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -2108,7 +2136,8 @@ td.form_left, th.form_left {
 }
 
 /* lists */
-.ul_list, .revisions {
+.ul_list,
+.revisions {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -2119,12 +2148,37 @@ td.form_left, th.form_left {
 	padding-left: 20px;
 }
 
+.ul_letters {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ul_letters ul {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+.ul_letters li {
+	border-left: 1px dotted #AAAAAA;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 0.5em 0 -0.5em;
+	padding: 0 0.5em;
+	white-space: nowrap;
+}
+
+.ul_letters li.active   {
+	background: #CCFFCC;
+
+}
+
 .revisions li:hover {background: #CCFFCC}
 /* #FCFCFC #FFCC99 #CCFFCC */
 
-
 /* settings */
-.lined td, .lined th {
+.lined td,
+.lined th {
 	border-bottom: 1px dotted #BABFC7;
 }
 
@@ -2132,7 +2186,8 @@ td.form_left, th.form_left {
 	background: #CCFFCC;
 }
 
-.lined-strike td, .lined-strike th {
+.lined-strike td,
+.lined-strike th {
 	border-bottom: 1px dotted #BABFC7;
 	/* text-decoration: line-through; */
 }
@@ -2152,18 +2207,23 @@ td.form_left, th.form_left {
 
 .menu
 {
-	list-style:none outside none;
-	float:right;
-	margin:0;
-	padding:0;
+	list-style: none outside none;
+	float: right;
+	margin: 0;
+	padding: 0;
 }
+
+.menu li:first-child {
+	border-left: 1px none;
+}
+
 .menu li {
-	border-left:1px dotted #CCCCCC;
-	float:left;
-	line-height:1.2em;
-	margin:0 0.5em 0 -0.5em;
-	padding:0 0.5em;
-	white-space:nowrap;
+	border-left: 1px dotted #CCCCCC;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 0.5em 0 -0.5em;
+	padding: 0 0.5em;
+	white-space: nowrap;
 }
 
 /* news / blog extension ******************************************* */
@@ -2176,7 +2236,7 @@ td.form_left, th.form_left {
 	width: 100%;
 }
 
-div.newsarticle:hover {
+article.newsarticle:hover {
 	background: #E7F9FF;
 }
 
@@ -2204,27 +2264,34 @@ div.newsarticle:hover {
 	float: right;
 }
 
-
 table.formation {
 	background-color: #EDEDED;
 	border: 1px solid #CDCDCD;
 }
-table.formation th, tr.formation th {
+table.formation th,
+tr.formation th {
 	background-color: #DDDDDD;
 	letter-spacing: normal;
 	border: 1px solid #CDCDCD;
 }
 
-.nb td, .fyi td, .inf td {
+/* infoboxes -----------------------------------------*/
+.nb td,
+.fyi td,
+.inf td {
 	padding: 5px;
 	height: 50px;
 }
-.nb .text, .fyi .text, .inf .text {
+.nb .text,
+.fyi .text,
+.inf .text {
 	padding-left: 20px;
 	border-top: none;
 	border-bottom: none;
 }
-.nb .sign, .fyi .sign, .inf .sign {
+.nb .sign,
+.fyi .sign,
+.inf .sign {
 	font-weight: 700;
 	font-size: 50px;
 	text-align: center;
@@ -2236,14 +2303,16 @@ table.formation th, tr.formation th {
 	color: #CC0000;
 	font-family: Arial, Helvetica, sans-serif;
 }
-.nb .sign, .nb .text {
+.nb .sign,
+.nb .text {
 	border-color: #CC0000;
 }
 .fyi .sign {
 	color: #00AACC;
 	font-family: "Times New Roman", Times, serif;
 }
-.fyi .sign, .fyi .text {
+.fyi .sign,
+.fyi .text {
 	border-color: #00AACC;
 }
 .inf .sign {
@@ -2253,18 +2322,36 @@ table.formation th, tr.formation th {
 .inf .text {
 	color: #6A7387;
 }
-.inf .sign, .inf .text {
+.inf .sign,
+.inf .text {
 	border-color: #BABFC7;
 }
 
+.diff-zero {
+	background-color: #eee;
+	color: #777;
+	font-style: italic;
+}
+
+.diff-pos {
+	background-color: #efe;
+	color: #008800;
+
+}
+
+.diff-neg {
+	background-color: #fee;
+	color: #c00;
+	font-style: italic;
+}
 
 .desc_rss_feed {
-	float:right;
-	margin-right:20px;
+	float: right;
+	margin-right: 20px;
 }
 
 .viewed {
-	font-weight:600;
+	font-weight: 600;
 }
 
 
