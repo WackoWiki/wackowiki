@@ -35,7 +35,7 @@ class Settings extends Dbal implements ArrayAccess
 				return; // ready for installer
 			}
 
-			require(CONFIG_FILE);
+			require CONFIG_FILE;
 			$this->config = array_merge($wacko_config_defaults, $wacko_config);
 
 			if (!isset($this->config['wacko_version']))
