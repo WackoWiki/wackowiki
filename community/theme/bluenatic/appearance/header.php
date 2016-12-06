@@ -43,12 +43,11 @@ header('Content-Type: text/html; charset=' . $this->get_charset());
 if ($this->method == 'edit')
 {
 	echo "  <script src=\"" . $this->db->base_url . "js/protoedit.js\"></script>\n";
+	echo '<script src="' . $this->db->base_url . 'js/lang/wikiedit.' . $this->user_lang . '.js"></script>' . "\n";
 	echo "  <script src=\"" . $this->db->base_url . "js/wikiedit.js\"></script>\n";
 	echo "  <script src=\"" . $this->db->base_url . "js/autocomplete.js\"></script>\n";
 }
-?>
-	<script src="<?php echo $this->db->base_url;?>js/captcha.js"></script>
-<?php
+
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->get_user())
