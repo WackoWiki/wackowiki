@@ -25,12 +25,12 @@ $TranslitBiLetters		= $this->language['TranslitBiLetters'];
 $tag = $text;
 
 //insert _ between words
-$tag = preg_replace( '/\s+/ms', '_', $tag );
+$tag = preg_replace('/\s+/ms', '_', $tag);
 
-$tag = strtolower( $tag );
-$tag = strtr( $tag, $TranslitCaps, $TranslitSmall );
-$tag = strtr( $tag, $TranslitLettersFrom, $TranslitLettersTo );
-$tag = strtr( $tag, $TranslitBiLetters );
+$tag = strtolower($tag);
+$tag = strtr($tag, $TranslitCaps, $TranslitSmall);
+$tag = strtr($tag, $TranslitLettersFrom, $TranslitLettersTo);
+$tag = strtr($tag, $TranslitBiLetters);
 
 $tag = preg_replace('/[^a-z0-9_.]+/mi', '', $tag);
 

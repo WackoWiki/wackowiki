@@ -222,6 +222,17 @@ class Wacko
 		return $file;
 	}
 
+	static function get_extension($file_name)
+	{
+		if (strpos($file_name, '.') === false)
+		{
+			return '';
+		}
+
+		$filename = explode('.', $file_name);
+		return array_pop($file_name);
+	}
+
 	function upload_quota($user_id = '')
 	{
 		// get used upload quota
@@ -3228,7 +3239,7 @@ class Wacko
 					#$class		= '';
 					$tpl		= 'localfile';
 
-					if ( ($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
+					if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
 					{
 						/* if (!$text)
 						{
@@ -5661,7 +5672,7 @@ class Wacko
 				}
 
 				$title				= $this->get_page_title();
-				$lang				= ($user['user_lang'] != $this->page_lang)? $this->page_lang : '';
+				$lang				= $this->page_lang;
 				$menu_page_ids[]	= $this->page['page_id'];
 				$menu_formatted[]	= [
 										$this->page['page_id'],
@@ -5981,7 +5992,7 @@ class Wacko
 		// check IP validity
 		if ($this->get_user_setting('validate_ip') && $this->get_user_setting('ip') != $this->get_user_ip())
 		{
-			//
+			// TODO: set and load lang??
 			$this->log(1, '<strong><span class="cite">' . Ut::perc_replace($this->_t('LogUserIPSwitched', SYSTEM_LANG), $this->get_user_setting('user_name'), $this->get_user_setting('ip'), $this->get_user_ip()) . '</span></strong>');
 			$this->log_user_out();
 			$this->login_page();
