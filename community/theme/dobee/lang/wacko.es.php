@@ -1,6 +1,5 @@
 <?php
-$theme_translation = array(
-  'ThisPage' => 'This Page',
+$theme_translation = [  'ThisPage' => 'This Page',
   'ExportToXML' => 'Export to XML',
-);
+];
 ?>

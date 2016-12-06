@@ -1,5 +1,4 @@
 <?php
-$theme_translation = array(
-	'' => '',
-);
+$theme_translation = [	'' => '',
+];
 ?>

@@ -489,6 +489,8 @@ if ($doubleclick == true)
 
 				<div id="page-title" class="tab-horizontal">
 					<?php
+					// hide  H1 article header
+					$this->hide_article_header = true;
 					// displays the page title or page tag above page content
 					// TODO: might want to make this clickable for any other than the show handler only
 					echo "<a title=\"". $this->page['title'] ."\" href=\"" . $this->db->base_url.$this->tag."\">" . (isset($this->page['title']) ? $this->page['title'] : $this->tag) . "</a>";

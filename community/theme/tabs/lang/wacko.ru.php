@@ -1,6 +1,5 @@
 <?php
-$theme_translation = array(
-	'EditIcon' => '<img src="' . $this->db->theme_url . 'icon/edit.png" alt="Редактировать вложенную страницу" />',
+$theme_translation = [	'EditIcon' => '<img src="' . $this->db->theme_url . 'icon/edit.png" alt="Редактировать вложенную страницу" />',
 	'ACLStoreButton'  => 'Сохранить',
 	'ACLCancelButton' => 'Отменить\nи вернуться',
 	'ACLAccessDenied' => '<em>Вы не владелец этой страницы.</em>',
@@ -8,5 +7,5 @@ $theme_translation = array(
 	'EditCancelButton'  => 'Отменить\nизменения',
 	'EditPreviewButton' => 'Предварительный просмотр',
 
-);
+];
 ?>

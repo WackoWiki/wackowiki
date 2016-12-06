@@ -30,8 +30,7 @@ screen.css and typography.css at the layout folder.
 
 /* == Edit your main menu here ====================================== */
  
-$menu = array(
-    'WikiSite' => 'Name of Site',
+$menu = [    'WikiSite' => 'Name of Site',
     'YourHomePage' => 'Homepage',
     'http://externlink.com' => 'Go away'
 );

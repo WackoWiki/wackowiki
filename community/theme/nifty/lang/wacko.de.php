@@ -1,6 +1,5 @@
 <?php
-$theme_translation = array(
-	// content sidebar
+$theme_translation = [	// content sidebar
 	'TOCTitle' => 'Inhalt dieser Seite',
 	'RecentCommentsThisPage' => 'Kommentare',
 
@@ -13,5 +12,5 @@ $theme_translation = array(
 	// page handler
 	'PageHandlerMoreTip' => 'mehr',
 	'ReviewNoticeUserAttention' => 'ungesichtet',
-);
+];
 ?>
