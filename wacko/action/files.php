@@ -180,7 +180,6 @@ if ($can_view)
 	{
 		echo '<table class="' . $style . '" >';
 
-
 		foreach ($files as $file)
 		{
 			// path hack for $all parameter, to refactor!
@@ -215,9 +214,13 @@ if ($can_view)
 			$file_id	= $file['file_id'];
 			$file_name	= $file['file_name'];
 			$shown_name = $this->shorten_string($file_name, $file_name_maxlen);
-			$text		= ($picture == false) ? $shown_name : '';
+			$text		= ($picture == false
+							? $shown_name
+							: ($file['picture_w'] || $file['file_ext'] == 'svg'
+								? ''
+								: $shown_name));
 			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
-			$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
+			$file_ext	= $file['file_ext'];
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
 			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')
