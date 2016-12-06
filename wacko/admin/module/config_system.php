@@ -44,8 +44,8 @@ function admin_config_system(&$engine, &$module)
 		$config['cache_sql_ttl']			= (int) $_POST['cache_sql_ttl'];
 		$config['rewrite_mode']				= (int) $_POST['rewrite_mode'];
 		$config['reverse_proxy']			= (int) $_POST['reverse_proxy'];
-		$config['reverse_proxy_header']		= $_POST['reverse_proxy_header'];
-		$config['reverse_proxy_addresses']	= $_POST['reverse_proxy_addresses'];
+		$config['reverse_proxy_header']		= (string) $_POST['reverse_proxy_header'];
+		$config['reverse_proxy_addresses']	= (string) $_POST['reverse_proxy_addresses'];
 
 		$engine->config->_set($config);
 
@@ -66,10 +66,10 @@ function admin_config_system(&$engine, &$module)
 				<small>Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.</small></label></td>
 				<td style="width:40%;">
 					<select style="width:200px;" id="debug_mode" name="debug">
-						<option value="0"<?php echo ( (int) $engine->db->debug === 0 ? ' selected="selected"' : '' );?>>0: debugging is off</option>
-						<option value="1"<?php echo ( (int) $engine->db->debug === 1 ? ' selected="selected"' : '' );?>>1: only the total execution time</option>
-						<option value="2"<?php echo ( (int) $engine->db->debug === 2 ? ' selected="selected"' : '' );?>>2: full-time</option>
-						<option value="3"<?php echo ( (int) $engine->db->debug === 3 ? ' selected="selected"' : '' );?>>3: full detail (DBMS, cache, etc.)</option>
+						<option value="0"<?php echo ((int) $engine->db->debug === 0 ? ' selected="selected"' : '');?>>0: debugging is off</option>
+						<option value="1"<?php echo ((int) $engine->db->debug === 1 ? ' selected="selected"' : '');?>>1: only the total execution time</option>
+						<option value="2"<?php echo ((int) $engine->db->debug === 2 ? ' selected="selected"' : '');?>>2: full-time</option>
+						<option value="3"<?php echo ((int) $engine->db->debug === 3 ? ' selected="selected"' : '');?>>3: full detail (DBMS, cache, etc.)</option>
 					</select>
 				</td>
 			</tr>
@@ -87,7 +87,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="debug_admin_only"><strong>Closed diagnosis:</strong><br />
 				<small>Show debug data of the program (and DBMS) only for the administrator.</small></label></td>
-				<td><input type="checkbox" id="debug_admin_only" name="debug_admin_only" value="1"<?php echo ( $engine->db->debug_admin_only ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="debug_admin_only" name="debug_admin_only" value="1"<?php echo ($engine->db->debug_admin_only ? ' checked="checked"' : '');?> /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -98,7 +98,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cache"><strong>Cache rendered pages:</strong><br />
 				<small>Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.</small></label></td>
-				<td><input type="checkbox" id="cache" name="cache" value="1"<?php echo ( $engine->db->cache ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="cache" name="cache" value="1"<?php echo ($engine->db->cache ? ' checked="checked"' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -114,7 +114,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cache_sql"><strong>Cache DBMS queries:</strong><br />
 				<small>Maintain a local cache the results of certain resource-SQL-queries.</small></label></td>
-				<td><input type="checkbox" id="cache_sql" name="cache_sql" value="1"<?php echo ( $engine->db->cache_sql ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="cache_sql" name="cache_sql" value="1"<?php echo ($engine->db->cache_sql ? ' checked="checked"' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -144,7 +144,7 @@ function admin_config_system(&$engine, &$module)
 				 logging, statistics and access management systems; if you are unsure
 				 about this setting, do not have a reverse proxy, or WackoWiki operates in
 				 a shared hosting environment, this setting should remain disabled.</small></label></td>
-				<td><input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ( $engine->db->reverse_proxy == 1 ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ($engine->db->reverse_proxy == 1 ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -177,8 +177,9 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="rewrite_mode"><strong>Use <code>mod_rewrite</code>:</strong><br />
-				<small>If your web server supports this feature, turn to get "beautiful" the addresses of pages.</small></label></td>
-				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1"<?php echo ( $engine->db->rewrite_mode == 1 ? ' checked="checked"' : '' );?> /></td>
+				<small>If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br />
+				<span class="cite">The value might be overwritten by the Settings class, despite you turn it off, if HTTP_MOD_REWRITE is on.</span></small></label></td>
+				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1" <?php echo ($engine->db->rewrite_mode == 1 ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 		</table>
 		<br />
