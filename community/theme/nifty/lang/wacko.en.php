@@ -1,5 +1,5 @@
 <?php
-$theme_translation = array(
+$theme_translation = [
 
 	// content sidebar
 	'TOCTitle' => 'TOC for this page',
@@ -11,5 +11,5 @@ $theme_translation = array(
 	// page handler
 	'ReviewNoticeUserAttention' => 'not yet reviewed',
 
-);
+];
 ?>

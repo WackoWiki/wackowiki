@@ -1,6 +1,5 @@
 <?php
-$theme_translation = array(
-  'LoginPage' => 'Inloggen',
+$theme_translation = [  'LoginPage' => 'Inloggen',
 
-);
+];
 ?>
