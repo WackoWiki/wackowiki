@@ -23,10 +23,10 @@ class Feed
 	// CONSTRUCTOR
 	function __construct(&$engine)
 	{
-		$this->engine = & $engine;
-		$this->lang = $this->engine->db->language;
+		$this->engine	= & $engine;
+		$this->lang		= $this->engine->db->language;
 		$this->engine->load_translation($this->lang);
-		$this->charset = $this->engine->get_charset($this->lang);
+		$this->charset	= $this->engine->get_charset($this->lang);
 	}
 
 	function write_file($name, $body)
