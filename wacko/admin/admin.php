@@ -138,9 +138,14 @@ if (!isset($engine->sess->ap_created))
 			<br /><br />
 			<?php
 			echo $engine->form_open('emergency', ['tag' => 'admin.php']);
-			// <form action="admin.php" method="post" name="emergency"> -- by STS
 			?>
 				<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
+				<?php
+				// The password here is to prevent the Browser from auto filling login credentials, because it ignores autocomplete="off".
+				// https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
+				?>
+				<!-- disables autocomplete -->
+				<input type="password" style="display:none">
 				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" />
 				<input type="submit" id="submit" value="ok" />
 			</form>
@@ -168,11 +173,8 @@ $engine->sess->ap_last_activity = time(); // update last activity time stamp
 
 if (time() - $engine->sess->ap_created > $session_length)
 {
-	$session_expire			= time() + $session_length;
-	// session started more than 30 minutes(default $session_length) ago  // TODO: $session_time missing!
-	// STS no op now.
-	// $engine->restart_user_session($user, $session_expire); // TODO: we need extra user session here, hence we need a auth_token table
-	$engine->sess->ap_created = time();  // update creation time
+	$session_expire				= time() + $session_length;
+	$engine->sess->ap_created	= time();  // update creation time
 }
 
 ########################################################
@@ -183,7 +185,6 @@ foreach (Ut::file_glob('admin/{common,module}/*.php') as $filename)
 {
 	include $filename;
 }
-
 
 ########################################################
 ##     Build menu                                     ##
