@@ -5,8 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-//     <p class="auto" id="p1249-1">
-//     <hX id="h1249-1>
+//     <p id="p1249-1" class="auto">
+//     <hX id="h1249-1" class="heading">
 
 // this formatter WISELY replace <BR>s with paragraphs.
 

@@ -127,6 +127,40 @@ a:target {
 	/* padding: 5px 10px; */
 }
 
+.heading > a.self-link::before {
+	content: "§";
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s, opacity 0.2s ease 1s;
+}
+
+.heading:hover > a.self-link::before {
+	content: "§";
+	visibility: visible;
+	opacity: 1;
+	text-decoration: none;
+}
+
+a.self-link {
+	border: medium none;
+	height: 2em;
+	left: -30px;
+	opacity: 1;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 30px;
+}
+a.self-link:hover {
+	text-decoration: none;
+}
+.heading > a.self-link {
+	font-size: 83%;
+}
+/* a.self-link::before {
+	content: "¶";
+} */
+
 svg,
 img {
 	border-width: 0px;
@@ -1144,7 +1178,7 @@ th.form_left {
 	padding-right: 20px;
 }
 
-/*Actions --------------------------------------------------*/
+/* Actions --------------------------------------------------*/
 .smaller {
 	font-size: 0.8em;
 }
@@ -1603,6 +1637,42 @@ table.formation td {
 	background-color: #fee;
 	color: #c00;
 	font-style: italic;
+}
+
+/* menus -----------------------------------------*/
+
+#menu-global {
+	float: right;
+	margin: 4px 30px 0 0;
+}
+
+#menu-global ol {
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
+}
+#menu-global li {
+	display: inline-block;
+	font-size: smaller;
+	font-weight: bold;
+	padding: 0 5px;
+}
+#menu-global a {
+	border: medium none;
+	color: #babdb6;
+	display: inline;
+	padding: 0;
+	text-decoration: none;
+}
+#menu-global a:link {
+	color: #babdb6;
+}
+#menu-global a:visited {
+	color: #babdb6;
+}
+#menu-global a:hover {
+	color: #b90022;
+	text-decoration: underline;
 }
 
 #handler {

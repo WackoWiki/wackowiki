@@ -88,16 +88,19 @@ class Settings extends Dbal implements ArrayAccess
 				}
 
 				$this->aliases = [];
+
 				foreach ($ug as $group => $users)
 				{
 					$this->config['aliases'][$group] = implode('\n', $users);
 				}
 
 				$prefix = '';
+
 				foreach (explode('.', parse_url($this->base_url, PHP_URL_HOST)) as $part)
 				{
 					$prefix .= ucfirst(strtolower($part));
 				}
+
 				$prefix .= substr(base64_encode(hash('sha1', $this->base_url . $this->system_seed, true)), 1, 6);
 
 				$this->cookie_prefix	= preg_replace('/[^0-9a-z]+/i', '', $prefix);

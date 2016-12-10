@@ -90,8 +90,8 @@ class paragrafica
 	var $mark4			= '{:typo:markup:1:}<:-:>'; // (!) ultimate wronginator mark:
 	// paragraphs shouldn't be placed regardless to <t->(!).....<-t>
 
-	var $prefix1		= '<p class="auto" id="p';
-	var $prefix2		= '">';
+	var $prefix1		= '<p id="p';
+	var $prefix2		= '" class="auto">';
 	var $postfix		= '</p>';
 
 	function __construct( &$wacko )
@@ -271,9 +271,9 @@ class paragrafica
 		// 1. get all ^^ of this
 		$this->toc = [];
 		$what = preg_replace_callback( '!'.
-				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)".		// 2=depth, 3=id, 4=name
+				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)</h\\2>)".		// 2=depth, 3=id, 4=name
 									"|" .
-				"(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">)".			// 6=id
+				"(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">)".			// 6=id
 									"|" .
 				"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .
 				// {{include page="TAG" notoc=1}}
