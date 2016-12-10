@@ -3,10 +3,7 @@
 
 Typografica library: paragrafica class.
 
----------
-
-Copyright (c) 2004, Kuso Mendokusee <mailto:mendokusee@yandex.ru>
-All rights reserved.
+https://wackowiki.sourceforge.io/doc/Dev/Projects/Typografica
 
 */
 
@@ -269,8 +266,8 @@ class paragrafica
 
 		// ==================================================================
 		// Forming body_toc
-		//  * in wacko formatter we have done "#h1249_1"
-		//  * right here we have done         "#p1249_1"
+		//  * in wacko formatter we have done "#h1249-1"
+		//  * right here we have done         "#p1249-1"
 		// 1. get all ^^ of this
 		$this->toc = [];
 		$what = preg_replace_callback( '!'.

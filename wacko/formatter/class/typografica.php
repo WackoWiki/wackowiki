@@ -2,13 +2,8 @@
 /*
 
 Typografica library: typografica class.
-v.2.6
-23 February 2005.
 
----------
-
-Copyright (c) 2004, Kuso Mendokusee <mailto:mendokusee@yandex.ru>
-All rights reserved.
+https://wackowiki.sourceforge.io/doc/Dev/Projects/Typografica
 
 */
 
