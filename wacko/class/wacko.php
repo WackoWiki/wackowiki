@@ -2742,7 +2742,7 @@ class Wacko
 	* @param mixed $params Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
 	* @param boolean $addpage Optional
 	* @param string $anchor Optional HTTP anchor-fragment
-	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wakka 'rewrite_method' config-parameter)
+	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
 	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '')
 	{
@@ -5672,7 +5672,7 @@ class Wacko
 				}
 
 				$title				= $this->get_page_title();
-				$lang				= $this->page_lang;
+				$lang				= $this->page_lang; // TODO: case -> What if the page_lang of the page itself changes?
 				$menu_page_ids[]	= $this->page['page_id'];
 				$menu_formatted[]	= [
 										$this->page['page_id'],
@@ -6301,17 +6301,17 @@ class Wacko
 
 		if (isset($this->post_wacko_action['toc']))
 		{
-			// #2. find all <hX></hX> & guide them in subroutine
+			// #2. find all <hX id="h1249-1" class="heading"></hX> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\">(.*?)</h\\2>)!i",
+			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)</h\\2>)!i",
 				[&$this, 'numerate_toc_callback_toc'], $what);
 		}
 
 		if (isset($this->post_wacko_action['p']))
 		{
-			// #2. find all <p class="auto"> & guide them in subroutine
+			// #2. find all <p id="p1249-1" class="auto"> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<p class=\"auto\" id=\"(p[0-9]+-[0-9]+)\">(.+?)</p>)!is",
+			$what = preg_replace_callback("!(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">(.+?)</p>)!is",
 				[&$this, 'numerate_toc_callback_p'], $what);
 		}
 
@@ -6320,7 +6320,7 @@ class Wacko
 
 	function numerate_toc_callback_toc($matches)
 	{
-		return '<h' . $matches[2] . ' id="' . $matches[3] . '">' .
+		return '<h' . $matches[2] . ' id="' . $matches[3] . '" class="heading">' .
 			(isset($this->post_wacko_toc_hash[$matches[3]][1])
 				? $this->post_wacko_toc_hash[$matches[3]][1]
 				: $matches[4]) .
@@ -6345,7 +6345,7 @@ class Wacko
 			$style[$v] = str_replace('##', $link, $style[$v]);
 		}
 
-		return $style['_before'] . '<p class="auto" id=' . $matches[2] . '>' .
+		return $style['_before'] . '<p id=' . $matches[2] . ' class="auto">' .
 			$style['before'] . $matches[3] . $style['after'] .
 			'</p>' . $style['_after'];
 	}

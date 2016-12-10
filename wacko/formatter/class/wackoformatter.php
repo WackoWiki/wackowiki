@@ -810,48 +810,54 @@ class WackoFormatter
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h6 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h6>';
+			return $result . '<h6 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h6>';
 		}
 		else if (preg_match('/\n[ \t]*======(.*?)={2,7}$/', $thing, $matches))
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h5 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h5>';
+			return $result . '<h5 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h5>';
 		}
 		else if (preg_match('/\n[ \t]*=====(.*?)={2,7}$/', $thing, $matches))
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h4 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h4>';
+			return $result . '<h4 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h4>';
 		}
 		else if (preg_match('/\n[ \t]*====(.*?)={2,7}$/', $thing, $matches))
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h3 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h3>';
+			return $result . '<h3 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h3>';
 		}
 		else if (preg_match('/\n[ \t]*===(.*?)={2,7}$/', $thing, $matches))
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h2 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h2>';
+			return $result . '<h2 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h2>';
 		}
 		else if (preg_match('/\n[ \t]*==(.*?)={2,7}$/', $thing, $matches))
 		{
-			$result	= $this->indent_close();
+			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h1 id="h' . $this->page_id . '-' . $wacko->header_count . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</h1>';
+			return $result . '<h1 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h1>';
 		}
 		// separators
 		else if (preg_match('/^[-]{4,}$/', $thing))
