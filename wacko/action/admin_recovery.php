@@ -16,12 +16,12 @@ if ($this->is_admin())
 	if (@$_POST['_action'] === 'generate_hash')
 	{
 		// passing vars from user input
-		$user_name		= $this->get_user_name();
-		$tpl->password =
-		$password		= $_POST['recovery_password'];
-		$tpl->confpassword =
-		$confpassword	= $_POST['confpassword'];
-		$complexity		= $this->password_complexity($user_name, $password);
+		$user_name			= $this->get_user_name();
+		$tpl->password		=
+		$password			= $_POST['recovery_password'];
+		$tpl->confpassword	=
+		$confpassword		= $_POST['confpassword'];
+		$complexity			= $this->password_complexity($user_name, $password);
 
 		// confirmed password mismatch
 		if ($confpassword != $password)
@@ -51,7 +51,7 @@ if ($this->is_admin())
 		$this->set_message($this->format($error), 'error');
 	}
 
-	$tpl->href = $this->href();
-
-	$tpl->complexity = $this->show_password_complexity();
+	$tpl->autocomplete	= $this->autocomplete_off();
+	$tpl->href			= $this->href();
+	$tpl->complexity	= $this->show_password_complexity();
 }

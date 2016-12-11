@@ -6833,6 +6833,39 @@ class Wacko
 		return password_verify(base64_encode(hash('sha256', $user['user_name'] . $password, true)), $user['password']);
 	}
 
+	/**
+	 * Provides dummy fields as workaround to turn autocomplete off for password field
+	 *
+	 * <form autocomplete="off"> will turn off autocomplete for the form in most browsers
+	 * except for username/email/password fields
+	 *
+	 * @return string dummy username/email/password fields
+	 */
+	function autocomplete_off()
+	{
+		/* REMARKS
+		 *
+		 * The situation regarding turning autocomplete off is very dissatisfying.
+		 * Right now, the password manager autocomplete into fields with inappropriate values
+		 * with all consequences like an unintentional leak of credentials.
+		 *
+		 * <input autocomplete="nope"> turns off autocomplete on many other browsers that don't respect
+		 * the form's "off", but not for "password" inputs.
+		 *
+		 * <input type="password" autocomplete="new-password" will turn it off for passwords everywhere,
+		 * but firefox don't respect that either.
+		 *
+		 * https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
+		 **/
+
+		// dummy fields for chrome/firefox/opera autofill getting the wrong fields
+		$result =	'<!-- disables autocomplete -->' . "\n" .
+					'<input type="text" style="display:none">' . "\n" .
+					'<input type="password" style="display:none">' . "\n";
+
+		return $result;
+	}
+
 	// run checks of password complexity under current
 	// config settings; returned error diag, or '' if good
 	function password_complexity($login, $pwd)

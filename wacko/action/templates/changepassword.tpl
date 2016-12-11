@@ -4,6 +4,7 @@
 	[= c ChangePassword =
 		<form action="[ ' form ' ]" method="post" name="change_password">
 			['' csrf: change_password '']
+			[''' autocomplete ''']
 			[= secret _ =
 				<input type="hidden" name="secret_code" value="[ ' code | e attr ' ]" />
 			=]

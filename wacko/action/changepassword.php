@@ -139,16 +139,18 @@ if ($user)
 {
 	if ($code)
 	{
-		$tpl->c_title = $this->format(Ut::perc_replace($this->_t('ChangePasswordForUser'), $user['user_name']));
-		$tpl->c_secret_code = $code;
+		$tpl->c_title		= $this->format(Ut::perc_replace($this->_t('ChangePasswordForUser'), $user['user_name']));
+		$tpl->c_secret_code	= $code;
 	}
 	else
 	{
-		$tpl->c_title = $this->format_t('YouWantChangePassword');
-		$tpl->c_current = true;
+		$tpl->c_title		= $this->format_t('YouWantChangePassword');
+		$tpl->c_current		= true;
 	}
-	$tpl->c_complexity = $this->show_password_complexity();
-	$tpl->c_form = $this->href();
+
+	$tpl->c_autocomplete	= $this->autocomplete_off();
+	$tpl->c_complexity		= $this->show_password_complexity();
+	$tpl->c_form			= $this->href();
 }
 else
 {

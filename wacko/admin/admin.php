@@ -141,11 +141,8 @@ if (!isset($engine->sess->ap_created))
 			?>
 				<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
 				<?php
-				// The password here is to prevent the Browser from auto filling login credentials, because it ignores autocomplete="off".
-				// https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
+				echo $engine->autocomplete_off();
 				?>
-				<!-- disables autocomplete -->
-				<input type="password" style="display:none">
 				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" />
 				<input type="submit" id="submit" value="ok" />
 			</form>
