@@ -19,6 +19,7 @@
 				=]
 				</select></p>
 			=]
+			[ ' autocomplete ' ]
 			<p><label for="user_name">[ ' _t: UserName ' ]:</label>
 			<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="[ ' username | e attr ' ]" autocomplete="off" required autofocus />
 			<br /><small>[ ' only ' ]</small></p>
