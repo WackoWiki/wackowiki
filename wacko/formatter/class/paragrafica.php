@@ -7,7 +7,7 @@ https://wackowiki.sourceforge.io/doc/Dev/Projects/Typografica
 
 */
 
-class paragrafica
+class Paragrafica
 {
 	var $ignore			= "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
 	// paragpaph is a chicken-feed like this: <t->text, text, just text<-t>

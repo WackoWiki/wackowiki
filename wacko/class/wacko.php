@@ -1847,7 +1847,7 @@ class Wacko
 				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc . ' [..]');
 			}
 
-			// preformatter (macros and such)
+			// PreFormatter (macros and such)
 			$body = $this->format($body, 'pre_wacko');
 
 			// making page body components
@@ -2803,7 +2803,7 @@ class Wacko
 
 	// returns just PageName[/method].
 	/**
-	* Returns value for page 'wakka' parameter, in tag[/method][#anchor] format
+	* Returns value for page 'wacko' parameter, in tag[/method][#anchor] format
 	*
 	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $tag Optional tag - returns current-page tag if empty

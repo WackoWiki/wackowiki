@@ -10,7 +10,7 @@ if ($text == '')
 	return;
 }
 
-$typo = new typografica($this);
+$typo = new Typografica($this);
 
 // kuso: since dashglued cause rendering bugs in Firefox, this option is now turned off.
 $typo->settings['dashglue'] = false;

@@ -7,7 +7,7 @@ https://wackowiki.sourceforge.io/doc/Dev/Projects/Typografica
 
 */
 
-class typografica
+class Typografica
 {
 	var $wacko;
 	var $skip_tags	= true;
