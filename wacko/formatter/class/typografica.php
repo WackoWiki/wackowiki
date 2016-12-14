@@ -9,7 +9,6 @@ https://wackowiki.sourceforge.io/doc/Dev/Projects/Typografica
 
 class typografica
 {
-
 	var $wacko;
 	var $skip_tags	= true;
 	var $p_prefix	= '<p class="typo">';
@@ -53,7 +52,8 @@ class typografica
 	var $glueleft	= ["ðèñ\.", "òàáë\.", "ñì\.", "èì\.", "óë\.", "ïåð\.", "êâ\.", "îôèñ", "îô\.", "ã\."]; // contains some Russian abberviations, also see below
 	var $glueright	= ["ðóá\.", "êîï\.", "ó\.å\.", "ìèí\."];
 
-	var $settings	= [ 'inches'	=> 1, // convert inches into &quot;
+	var $settings	= [
+							'inches'	=> 1, // convert inches into &quot;
 							'apostroph'	=> 1, // apostroph convertor
 							'laquo'		=> 0, // angle quotes
 							'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
@@ -75,7 +75,7 @@ class typografica
 							'html'		=> 0  // HTML tags ban
 	];
 
-	function __construct( &$wacko )
+	function __construct(&$wacko)
 	{
 		$this->wacko	= &$wacko;
 		$this->indent1	= '<img src="' . $wacko->db->base_url . $this->indent1;
@@ -101,7 +101,7 @@ class typografica
 		// -1. HTML tags ban
 		if ($this->settings['html'])
 		{
-			$data = str_replace( "&", "&amp;", $data );
+			$data = str_replace("&", "&amp;", $data);
 		}
 
 		// 0. Stripping tags
@@ -145,8 +145,8 @@ class typografica
 		// 1. Commas and spaces
 		if ($this->settings['spacing'])
 		{
-			$data = preg_replace('/(\s*)([,]*)/i', '\\2\\1', $data );
-			$data = preg_replace('/(\s*)([\.?!]*)(\s*[¨À-ßA-Z])/', '\\2\\1\\3', $data );
+			$data = preg_replace('/(\s*)([,]*)/i', '\\2\\1', $data);
+			$data = preg_replace('/(\s*)([\.?!]*)(\s*[¨À-ßA-Z])/', '\\2\\1\\3', $data);
 		}
 
 		// 2. Splitting to strings with length no more than XX characters
@@ -154,7 +154,7 @@ class typografica
 		// --- not ported to wacko ---
 
 		// 3. Special characters
-		$data = $this->replace_specials( $data );
+		$data = $this->replace_specials($data);
 
 		// 4. Short words and &nbsp;
 		if ($this->settings['wordglue'])
@@ -165,25 +165,25 @@ class typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/i', '\\1\\2&nbsp;\\4', $data );
-				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i',   '\\1\\2&nbsp;\\4', $data );
+				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/i', '\\1\\2&nbsp;\\4', $data);
+				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i',   '\\1\\2&nbsp;\\4', $data);
 			}
 
 			foreach ($this->glueleft as $i)
 			{
-				$data = preg_replace('/([\\s]+)(" . $i . ")(\s+)/i', "\\1\\2&nbsp;", $data );
+				$data = preg_replace('/([\\s]+)(" . $i . ")(\s+)/i', "\\1\\2&nbsp;", $data);
 			}
 
 			foreach ($this->glueright as $i)
 			{
-				$data = preg_replace('/([\\s]+)(" . $i . ")(\s+)/i', "&nbsp;\\2\\3", $data );
+				$data = preg_replace('/([\\s]+)(" . $i . ")(\s+)/i', "&nbsp;\\2\\3", $data);
 			}
 		}
 
 		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
 		if ($this->settings['dashglue'])
 		{
-			$data = preg_replace('/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/i', '<nobr>\\1</nobr>', $data );
+			$data = preg_replace('/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/i', '<nobr>\\1</nobr>', $data);
 		}
 
 		// 6. Macros
@@ -197,7 +197,7 @@ class typografica
 		if ($this->skip_tags)
 		{
 			$data .= ' ';
-			$a = explode('{:typo:markup:1:}', $data );
+			$a = explode('{:typo:markup:1:}', $data);
 
 			if ($a)
 			{
@@ -214,7 +214,7 @@ class typografica
 		// INFINITY-2. inserting a (next?) ignored regexp
 		{
 			$data .= ' ';
-			$a = explode('{:typo:markup:2:}', $data );
+			$a = explode('{:typo:markup:2:}', $data);
 
 			if ($a)
 			{
@@ -235,7 +235,7 @@ class typografica
 		// ooh, finished
 		if ($this->de_nobr)
 		{
-			$data = str_replace('<nobr>', '<span class="nobr">', str_replace('</nobr>', '</span>', $data ));
+			$data = str_replace('<nobr>', '<span class="nobr">', str_replace('</nobr>', '</span>', $data));
 		}
 
 		return preg_replace('/^(\s)+/', '',  preg_replace('/(\s)+$/', '', $data));
@@ -244,13 +244,13 @@ class typografica
 
 	// -----------------------------------------------------------------------------------
 	// Method is only for internal use. Checks only special characters
-	function replace_specials( $data )
+	function replace_specials($data)
 	{
-		//print "(($data))";
+		// print "(($data))";
 		// 0. inches with digits
 		if ($this->settings['inches'])
 		{
-			$data = preg_replace('/(?<=\s)(([0-9]{1,2}([\.,][0-9]{1,2})?))\"/i', '\\1&quot;', $data );
+			$data = preg_replace('/(?<=\s)(([0-9]{1,2}([\.,][0-9]{1,2})?))\"/i', '\\1&quot;', $data);
 		}
 
 		// 0a. apostroph
@@ -277,7 +277,7 @@ class typografica
 		// 2. angle quotes
 		if ($this->settings['laquo'])
 		{
-			$data	= preg_replace('/\"\"/i', '&quot;&quot;', $data );
+			$data	= preg_replace('/\"\"/i', '&quot;&quot;', $data);
 			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
 			// nb: wacko only regexp follows:
 			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
@@ -359,7 +359,7 @@ class typografica
 		{
 			foreach ($this->phonemasks[0] as $i => $v)
 			{
-				$data = preg_replace( $v, $this->phonemasks[1][$i], $data );
+				$data = preg_replace( $v, $this->phonemasks[1][$i], $data);
 			}
 		}
 
