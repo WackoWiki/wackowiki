@@ -107,7 +107,7 @@ if ($doubleclick == true)
 
 							// compose link with icon to bookmarks list
 							// TODO: add BookmarkTip to translation
-							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark-new.svg\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a>";
+							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark-dark.svg\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a>";
 
 							// display bookmarks text
 							# " . $this->_t('Bookmarks') . "
@@ -472,7 +472,7 @@ if ($doubleclick == true)
 						{
 							// TODO: add translation TocTip and TocText
 							// compose image to indicate a toc-list
-							echo "<a class=\"toc-icon\"><img src=\"" . $this->db->theme_url."icon/toc_ordered.png\" title=\"" . $this->_t('MetaToc') . "\" alt=\"" . $this->_t('MetaToc') . "\" /></a>\n";
+							echo "<a class=\"toc-icon\"><img src=\"" . $this->db->theme_url."icon/toc-ordered.svg\" title=\"" . $this->_t('MetaToc') . "\" alt=\"" . $this->_t('MetaToc') . "\" /></a>\n";
 
 							// display the page toc list, numerated (?), without labels and markup
 							// toc numerated does not work as intended
@@ -503,7 +503,7 @@ if ($doubleclick == true)
 					// display a "back-to-page" button/icon next to the page tag/title
 					if ($this->method !== 'show')
 					{
-						echo "<a href=\"" . $this->db->base_url.$this->tag."\"><img src=\"" . $this->db->theme_url."icon/show_back.png\" title=\"" . $this->_t('ShowTip') . "\" alt=\"" . $this->_t('ShowText') . "\" /></a>";
+						echo "<a href=\"" . $this->db->base_url.$this->tag."\"><img src=\"" . $this->db->theme_url."icon/show-back.svg\" title=\"" . $this->_t('ShowTip') . "\" alt=\"" . $this->_t('ShowText') . "\" /></a>";
 					}
 					?>
 				</div>
