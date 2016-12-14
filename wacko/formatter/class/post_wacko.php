@@ -4,7 +4,7 @@
  * This formatter resolves links and executes actions.
  */
 
-class post_wacko
+class PostWacko
 {
 	var $object;
 

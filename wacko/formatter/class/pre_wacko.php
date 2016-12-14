@@ -4,7 +4,7 @@
  * Preformat text before when saving page: resolves macros and some more
  */
 
-class preformatter
+class PreFormatter
 {
 	var $object;
 

@@ -1,8 +1,8 @@
 <?php
 
-// bbcode parsing class
+// BbCode parsing class
 
-class bbcode
+class BbCode
 {
 	var $object;
 

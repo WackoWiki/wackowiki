@@ -1,6 +1,6 @@
 <?php
 
-class post_safehtml
+class PostSafehtml
 {
 	var $object;
 
