@@ -244,9 +244,9 @@ if ($can_view)
 				$operation_mode = 0;
 			}
 
-			$href_remove	= $this->href('upload', $page, 'remove' . "&amp;file_id=" . $file_id);
-			$href_edit		= $this->href('upload', $page, 'edit' . "&amp;file_id=" . $file_id);
 			$href_info		= $this->href('upload', $page, 'show' . "&amp;file_id=" . $file_id);
+			$href_edit		= $this->href('upload', $page, 'edit' . "&amp;file_id=" . $file_id);
+			$href_remove	= $this->href('upload', $page, 'remove' . "&amp;file_id=" . $file_id);
 
 			echo '<tr>' .
 					'<td class="file-">' . $link . '</td>';
@@ -278,21 +278,17 @@ if ($can_view)
 				'</td>';
 			}
 
-			if ($operation_mode)
-			{
+
 				echo '<td class="tool-">' .
 						'<span class="dt2-">' .
 							'<a href="' . $href_info . '" class="tool2-">' . $info_icon . '</a>' .
-							'<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .
-							'<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>' .
+							($operation_mode
+							? '<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .
+							  '<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>'
+							: '') .
 						'</span>' .
 					 '</td>' . "\n";
-			}
-			else
-			{
-				# echo '<td class="tool-">&nbsp;</td>' . "\n";
-				# echo '<td class="tool-">&nbsp;</td>' . "\n";
-			}
+
 	?>
 
 
@@ -300,7 +296,6 @@ if ($can_view)
 	<?php
 			unset($link);
 			unset($desc);
-			#unset($text);
 		}
 
 			echo '</table>';
