@@ -27,7 +27,7 @@ if (@$_POST['_action'] === 'set_permissions')
 			// admin can benefit to any possible user
 			$new_owner = $this->db->load_single(
 				"SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang " .
-				"FROM {$this->db->user_table} u " .
+				"FROM " . $this->db->user_table . " u " .
 					"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 				"WHERE u.user_id = '" . (int) $uid."' " .
 				"LIMIT 1");
@@ -105,13 +105,13 @@ if (@$_POST['_action'] === 'set_permissions')
 		{
 			// update user statistics
 			$this->db->sql_query(
-				"UPDATE {$this->db->user_table} SET " .
+				"UPDATE " . $this->db->user_table . " SET " .
 					"total_pages	= total_pages - 1 " .
 				"WHERE user_id		= '" . $former_id."' " .
 				"LIMIT 1");
 
 			$this->db->sql_query(
-				"UPDATE {$this->db->user_table} SET " .
+				"UPDATE " . $this->db->user_table . " SET " .
 					"total_pages	= total_pages + 1 " .
 				"WHERE user_id		= '" . $new_id."' " .
 				"LIMIT 1");

@@ -13,7 +13,7 @@ $logged_in	= $this->get_user();
 // display user profile
 if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private message can POST here
 {
-	// hide article H1 header
+	// hide  H1 article header
 	$this->hide_article_header = true;
 
 	// does requested user exists?
@@ -418,13 +418,14 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 							preg_match('/^[^\/]+/', $upload['file_on_page'], $sub_tag);
 
-							// TODO need to be redone, moving to tpl
+							// TODO needs to be redone, moving to tpl
 							if ($upload['page_id']) // !$global
 							{
 								// cache page_id for for has_access validation in link function
 								$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
 
 								$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
+								$on_tag		= $upload['file_on_page'];
 								$on_page	= $this->_t('To') . ' ' .
 											  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1, $_lang) .
 											  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
@@ -432,12 +433,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							else
 							{
 								$path2		= '_file:/';
+								$on_tag		= '';
 								$on_page	= '<span title="">&rarr; ' . $this->_t('UploadGlobal');
 							}
 
 							$tpl->u_up_u_u2_li_t		= $upload['uploaded_dt'];
 							# $tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
-							$tpl->u_up_u_u2_li_link		= '<a href="' . $this->href('upload', '', ['show', 'file_id=' . (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
+							$tpl->u_up_u_u2_li_link		= '<a href="' . $this->href('upload', $on_tag, ['show', 'file_id=' . (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
 							$tpl->u_up_u_u2_li_onpage	= $on_page;
 							$tpl->u_up_u_u2_li_descr	= $file_description;
 						}
@@ -528,7 +530,7 @@ else
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(u.user_name) AS n " .
-		"FROM {$this->db->user_table} u " .
+		"FROM " . $this->db->user_table . " u " .
 		$sql_where, true);
 
 	if ($group_id)
@@ -554,7 +556,7 @@ else
 	// collect data
 	$users = $this->db->load_all(
 		"SELECT u.user_name, u.account_lang, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession " .
-		"FROM {$this->db->user_table} u " .
+		"FROM " . $this->db->user_table . " u " .
 			"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 		$sql_where .
 		$sql_order .

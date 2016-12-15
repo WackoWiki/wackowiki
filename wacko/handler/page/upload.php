@@ -10,6 +10,7 @@ if (!defined('IN_WACKO'))
 // - show for local files relative and absolute syntax (?)
 // - rename or split handler in 'attachment' and 'upload'
 // - move all non GUI code in attachment and upload class
+// - thumbnails
 
 $get_file = function ($file_id)
 {
@@ -372,7 +373,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 					// update user uploads count
 					$this->db->sql_query(
-						"UPDATE {$this->db->user_table} SET " .
+						"UPDATE " . $this->db->user_table . " SET " .
 							"total_uploads = total_uploads - 1 " .
 						"WHERE user_id = '" . $file['user_id'] . "' " .
 						"LIMIT 1");
@@ -678,7 +679,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 									// update user uploads count
 									$this->db->sql_query(
-										"UPDATE {$this->db->user_table} SET " .
+										"UPDATE " . $this->db->user_table . " SET " .
 											"total_uploads = total_uploads + 1 " .
 										"WHERE user_id = '" . $user['user_id'] . "' " .
 										"LIMIT 1");
