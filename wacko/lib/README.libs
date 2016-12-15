@@ -7,7 +7,6 @@ directory			| project			| version	| status
 bad_behavior		| Bad Behavior		| 2.2.18	| patched: various, see repo
 captcha				| freeCap			| 1.4.1		| patched: various, see repo
 htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo
-password_compat		| password_compat	| 1.0.4		| unpatched
 phpmailer			| PHPMailer			| 5.2.16	| unpatched
 phpthumb			| PhpThumb			| 2.1		| unpatched
 safehtml			| SafeHTML			| 1.3.7		| patched: various, see repo
@@ -21,7 +20,6 @@ Upstream projects
 bad_behavior		- http://bad-behavior.ioerror.us/
 freecap				- http://www.puremango.co.uk/2005/04/php_captcha_script_113/
 htmlsax3			- https://pear.php.net/package/XML_HTMLSax3/
-password_compat		- https://github.com/ircmaxell/password_compat
 phpmailer			- https://github.com/PHPMailer/PHPMailer
 phpthumb			- https://github.com/masterexploder/PHPThumb
 safehtml			- https://wackowiki.sourceforge.io/doc/Dev/Projects/SafeHTML

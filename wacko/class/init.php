@@ -11,12 +11,6 @@ define('WACKO_STARTED', microtime(1));
 
 require_once 'config/constants.php';
 
-// Compatibility with the password_* functions that ship with PHP 5.5
-if (version_compare(PHP_VERSION, '5.5.0') < 0)
-{
-	require_once 'lib/php_compatibility/password_compat.php';
-}
-
 // setting PHP error reporting
 switch (PHP_ERROR_REPORTING)
 {
