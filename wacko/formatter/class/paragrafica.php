@@ -94,12 +94,12 @@ class Paragrafica
 	var $prefix2		= '" class="auto">';
 	var $postfix		= '</p>';
 
-	function __construct( &$wacko )
+	function __construct(&$wacko)
 	{
 		$this->wacko = &$wacko;
 	}
 
-	function correct( $what )
+	function correct($what)
 	{
 		// -2. ignoring a regexp (or ignoring next regexp)
 		$ignored = [];
@@ -114,7 +114,7 @@ class Paragrafica
 		}
 
 		// -1. remove t-prefix;
-		$what = str_replace( $this->mark_prefix, '', $what );
+		$what = str_replace($this->mark_prefix, '', $what);
 
 		if (isset($this->wacko->data))
 		{
@@ -131,59 +131,59 @@ class Paragrafica
 		// 1. insert terminators appropriately
 		foreach ($this->t0 as $t)
 		{
-			$what = preg_replace( $t, $this->mark1 . '$1' . $this->mark2, $what );
+			$what = preg_replace($t, $this->mark1 . '$1' . $this->mark2, $what);
 		}
 
 		foreach ($this->t1[0] as $t)
 		{
-			$what = preg_replace( $t, $this->mark1 . '$1', $what );
+			$what = preg_replace($t, $this->mark1 . '$1', $what);
 		}
 
 		foreach ($this->t2[0] as $t)
 		{
-			$what = preg_replace( $t, '$1' . $this->mark2, $what );
+			$what = preg_replace($t, '$1' . $this->mark2, $what);
 		}
 
 		foreach ($this->t1[1] as $t)
 		{
-			$what = preg_replace( $t, $this->mark3 . $this->mark1 . '$1', $what );
+			$what = preg_replace($t, $this->mark3 . $this->mark1 . '$1', $what);
 		}
 
 		foreach ($this->t2[1] as $t)
 		{
-			$what = preg_replace( $t, '$1' . $this->mark2 . $this->mark3, $what );
+			$what = preg_replace($t, '$1' . $this->mark2 . $this->mark3, $what);
 		}
 
 		foreach ($this->t1[2] as $t)
 		{
-			$what = preg_replace( $t, $this->mark4 . $this->mark1 . '$1', $what );
+			$what = preg_replace($t, $this->mark4 . $this->mark1 . '$1', $what);
 		}
 
 		foreach ($this->t2[2] as $t)
 		{
-			$what = preg_replace( $t, '$1' . $this->mark2 . $this->mark4, $what );
+			$what = preg_replace($t, '$1' . $this->mark2 . $this->mark4, $what);
 		}
 
 		// wrap whole text in terminator pair
 		$what = $this->mark2 . $what . $this->mark1;
 
 		// 2bis. swap <t-><br /> -> <br /><t->
-		$what = preg_replace( "!(" . $this->mark2 . ")((\s*<br[^>]*>)+)!si", '$2$1', $what );
+		$what = preg_replace( "!(" . $this->mark2 . ")((\s*<br[^>]*>)+)!si", '$2$1', $what);
 		// noneedin: > eliminating multiple breaks
-		$what = preg_replace( "!((<br[^>]*>\s*)+)(" . $this->mark1 . ")!s", '$3', $what );
+		$what = preg_replace( "!((<br[^>]*>\s*)+)(" . $this->mark1 . ")!s", '$3', $what);
 
 		// 2. cleanup <t->\s<-t>
 		do
 		{
 			$_w		= $what;
-			$what	= preg_replace( "!(" . $this->mark2 . ")((\s|(<br[^>]*>|" . $this->mark3 . "|" . $this->mark4 . "))*)(" . $this->mark1 . ")!si", '$2', $what );
+			$what	= preg_replace( "!(" . $this->mark2 . ")((\s|(<br[^>]*>|" . $this->mark3 . "|" . $this->mark4 . "))*)(" . $this->mark1 . ")!si", '$2', $what);
 		}
 
 		while ($_w != $what);
 
 		// 3. replace each <t->....<-t> to <p class="auto">...</p>
 		$pcount = 0;
-		$pieces = explode( $this->mark2, $what );
+		$pieces = explode($this->mark2, $what);
 
 		if (isset($mark1))
 		{
@@ -212,7 +212,7 @@ class Paragrafica
 					}
 					else
 					{
-						$pieces_inside = explode( $this->mark3, $v );
+						$pieces_inside = explode($this->mark3, $v );
 
 						if (sizeof($pieces_inside) < 3)
 						{
@@ -223,7 +223,7 @@ class Paragrafica
 					if ($insert_p)
 					{
 						$inside = substr($v, 0, $pos);
-						$inside = str_replace( $this->mark3, '', $inside );
+						$inside = str_replace($this->mark3, '', $inside );
 
 						if (strlen($inside))
 						{
@@ -241,16 +241,16 @@ class Paragrafica
 
 		$what = implode('', $pieces);
 		// 4. remove unused <t-> & <-t>
-		$what = str_replace( $this->mark1, '', $what );
-		$what = str_replace( $this->mark2, '', $what );
-		$what = str_replace( $this->mark3, '', $what );
-		$what = str_replace( $this->mark4, '', $what );
+		$what = str_replace($this->mark1, '', $what);
+		$what = str_replace($this->mark2, '', $what);
+		$what = str_replace($this->mark3, '', $what);
+		$what = str_replace($this->mark4, '', $what);
 		// -. done with P
 
 		// INFINITY-2. inserting a (or next?) ignored regexp
 		{
 			$what .= ' ';
-			$a = explode( '{:typo:markup:3:}', $what );
+			$a = explode( '{:typo:markup:3:}', $what);
 
 			if ($a)
 			{
@@ -277,7 +277,7 @@ class Paragrafica
 									"|" .
 				"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .
 				// {{include page="TAG" notoc=1}}
-				"!i", [&$this, 'add_toc_entry'], $what );
+				"!i", [&$this, 'add_toc_entry'], $what);
 
 		return $what;
 	}

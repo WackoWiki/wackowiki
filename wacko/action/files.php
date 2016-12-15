@@ -120,7 +120,6 @@ if ($can_view)
 		"FROM " . $this->db->table_prefix . "file f " .
 			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-
 		"WHERE ".
 			($all
 				? "f.page_id IS NOT NULL "
@@ -141,7 +140,7 @@ if ($can_view)
 	}
 
 	// display
-
+	$info_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadView') . '" alt="' . $this->_t('UploadView') . '" class="btn-info"/>';
 	$edit_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadEdit') . '" alt="' . $this->_t('UploadEdit') . '" class="btn-edit"/>';
 	$del_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadRemove') . '" alt="' . $this->_t('UploadRemove') . '" class="btn-delete"/>';
 
@@ -188,11 +187,12 @@ if ($can_view)
 				// use absolute path
 				if ($file['page_id'])
 				{
-					$path2 = 'file:/' . ($this->slim_url($file['tag'])) . '/';
+					$path2	= 'file:/' . ($this->slim_url($file['tag'])) . '/';
+					$page	= $file['tag'];
 				}
 				else
 				{
-					$path2 = 'file:/';
+					$path2	= 'file:/';
 				}
 			}
 
@@ -246,6 +246,7 @@ if ($can_view)
 
 			$href_remove	= $this->href('upload', $page, 'remove' . "&amp;file_id=" . $file_id);
 			$href_edit		= $this->href('upload', $page, 'edit' . "&amp;file_id=" . $file_id);
+			$href_info		= $this->href('upload', $page, 'show' . "&amp;file_id=" . $file_id);
 
 			echo '<tr>' .
 					'<td class="file-">' . $link . '</td>';
@@ -281,6 +282,7 @@ if ($can_view)
 			{
 				echo '<td class="tool-">' .
 						'<span class="dt2-">' .
+							'<a href="' . $href_info . '" class="tool2-">' . $info_icon . '</a>' .
 							'<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .
 							'<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>' .
 						'</span>' .

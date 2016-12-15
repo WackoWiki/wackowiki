@@ -764,7 +764,7 @@ td.file- {
 
 .upload td.tool- {
 	padding-right: 0;
-	width: 5%;
+	width: 9%;
 }
 
 .upload td.size- {
@@ -1991,6 +1991,14 @@ li.m-source img {
 }
 .btn-feed {
 	background-image: url('./../icon/feed.svg'), none;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+}
+.btn-info {
+	background-image: url('./../icon/dialog-info.svg'), none;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
