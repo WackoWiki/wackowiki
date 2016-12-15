@@ -431,7 +431,7 @@ else if (($user = $this->get_user()))
 
 		$code = $this->db->load_single(
 			"SELECT email_confirm " .
-			"FROM {$this->db->user_table} " .
+			"FROM " . $this->db->user_table . " " .
 			"WHERE user_id = '" . (int) $user['user_id'] . "' " .
 			"LIMIT 1");
 

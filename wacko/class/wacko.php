@@ -2032,7 +2032,7 @@ class Wacko
 
 					// update user comments count
 					$this->db->sql_query(
-						"UPDATE {$this->db->user_table} SET " .
+						"UPDATE " . $this->db->user_table . " SET " .
 							"total_comments = total_comments + 1 " .
 						"WHERE user_id = '" . (int) $owner_id . "' " .
 						"LIMIT 1");
@@ -2041,7 +2041,7 @@ class Wacko
 				{
 					// update user pages count
 					$this->db->sql_query(
-						"UPDATE {$this->db->user_table} SET " .
+						"UPDATE " . $this->db->user_table . " SET " .
 							"total_pages = total_pages + 1 " .
 						"WHERE user_id = '" . (int) $owner_id . "' " .
 						"LIMIT 1");
@@ -2217,7 +2217,7 @@ class Wacko
 		if ($user = $this->get_user())
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->db->user_table} SET " .
+				"UPDATE " . $this->db->user_table . " SET " .
 					"total_revisions = total_revisions + 1 " .
 				"WHERE user_id = '" . $user['user_id'] . "' " .
 				"LIMIT 1");
@@ -2287,7 +2287,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE {$this->db->user_table} SET " .
+			"UPDATE " . $this->db->user_table . " SET " .
 				"enabled		= '" . (int) $enabled . "', " .
 				"account_status	= '" . (int) $account_status . "' " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
@@ -2549,7 +2549,7 @@ class Wacko
 		$confirm = Ut::random_token(21);
 
 		$this->db->sql_query(
-			"UPDATE {$this->db->user_table} SET " .
+			"UPDATE " . $this->db->user_table . " SET " .
 				"email_confirm = " . $this->db->q(hash_hmac('sha256', $confirm, $this->db->system_seed)) . " " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
 			"LIMIT 1");
@@ -2563,12 +2563,12 @@ class Wacko
 
 		if (($user = $this->db->load_single(
 			"SELECT user_name, email " .
-			"FROM {$this->db->user_table} " .
+			"FROM " . $this->db->user_table . " " .
 			"WHERE email_confirm = $hash " .
 			"LIMIT 1")))
 		{
 			$this->db->sql_query(
-				"UPDATE {$this->db->user_table} SET " .
+				"UPDATE " . $this->db->user_table . " SET " .
 					"email_confirm = '' " .
 				"WHERE email_confirm = $hash " .
 				"LIMIT 1");
@@ -4429,7 +4429,7 @@ class Wacko
 		{
 			if ($this->db->load_single(
 			"SELECT user_id " .
-			"FROM {$this->db->user_table} " .
+			"FROM " . $this->db->user_table . " " .
 			"WHERE user_name = " . $this->db->q($user_name) . " " .
 			"LIMIT 1"))
 			{
@@ -4496,7 +4496,7 @@ class Wacko
 		// checking database
 		if ($this->db->load_single(
 		"SELECT user_id " .
-		"FROM {$this->db->user_table} " .
+		"FROM " . $this->db->user_table . " " .
 		"WHERE user_name REGEXP " . $this->db->q(implode('', $user_name)) . " " .
 		"LIMIT 1", true))
 		{
@@ -4513,7 +4513,7 @@ class Wacko
 	{
 		return !!$this->db->load_single(
 			"SELECT user_id " .
-			"FROM {$this->db->user_table} " .
+			"FROM " . $this->db->user_table . " " .
 			"WHERE email = " . $this->db->q($email) . " " .
 			"LIMIT 1");
 	}
@@ -4609,7 +4609,7 @@ class Wacko
 		if ($user['user_id'])
 		{
 			return $this->db->sql_query(
-				"UPDATE {$this->db->user_table} SET " .
+				"UPDATE " . $this->db->user_table . " SET " .
 					"last_mark = UTC_TIMESTAMP() " .
 				"WHERE user_id = '" . $user['user_id'] . "' " .
 				"LIMIT 1");
@@ -4703,7 +4703,7 @@ class Wacko
 			if ($token && $token['token'] === hash('sha256', Ut::http64_decode($authenticator)))
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->db->user_table} SET " .
+					"UPDATE " . $this->db->user_table . " SET " .
 						"last_visit = UTC_TIMESTAMP() " .
 					"WHERE " .
 						"user_id = '" . (int) $token['user_id'] . "' " .
@@ -4749,7 +4749,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE {$this->db->user_table} SET " .
+			"UPDATE " . $this->db->user_table . " SET " .
 				"last_visit						= UTC_TIMESTAMP(), " .
 				"change_password				= '', " .
 				"login_count					= login_count + 1, " .
@@ -4835,7 +4835,7 @@ class Wacko
 	function set_failed_user_login_count($user_id)
 	{
 		$this->db->sql_query(
-			"UPDATE {$this->db->user_table} SET " .
+			"UPDATE " . $this->db->user_table . " SET " .
 				"failed_login_count = failed_login_count + 1 " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
 			"LIMIT 1");

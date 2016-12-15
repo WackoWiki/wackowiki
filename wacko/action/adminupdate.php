@@ -39,14 +39,14 @@ if ($this->is_admin())
 			// total pages in ownership
 			$users = $this->db->load_all(
 				"SELECT p.owner_id, COUNT(p.tag) AS n " .
-				"FROM " . $this->db->table_prefix . "page AS p, {$this->db->user_table} AS u " .
+				"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->user_table . " AS u " .
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' " .
 				"GROUP BY p.owner_id");
 
 			foreach ($users as $user)
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->db->user_table} " .
+					"UPDATE " . $this->db->user_table . " " .
 					"SET total_pages = " . (int) $user['n'] . " " .
 					"WHERE user_id = '" . $user['owner_id'] . "' " .
 					"LIMIT 1");
@@ -55,14 +55,14 @@ if ($this->is_admin())
 			// total comments posted
 			$users = $this->db->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n " .
-				"FROM " . $this->db->table_prefix . "page AS p, {$this->db->user_table} AS u " .
+				"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->user_table . " AS u " .
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' " .
 				"GROUP BY p.user_id");
 
 			foreach ($users as $user)
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->db->user_table} " .
+					"UPDATE " . $this->db->user_table . " " .
 					"SET total_comments = " . (int) $user['n'] . " " .
 					"WHERE user_id = '" . $user['user_id'] . "' " .
 					"LIMIT 1");
@@ -71,14 +71,14 @@ if ($this->is_admin())
 			// total revisions made
 			$users = $this->db->load_all(
 				"SELECT r.user_id, COUNT(r.tag) AS n " .
-				"FROM " . $this->db->table_prefix . "revision AS r, {$this->db->user_table} AS u " .
+				"FROM " . $this->db->table_prefix . "revision AS r, " . $this->db->user_table . " AS u " .
 				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' " .
 				"GROUP BY r.user_id");
 
 			foreach ($users as $user)
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->db->user_table} " .
+					"UPDATE " . $this->db->user_table . " " .
 					"SET total_revisions = " . (int) $user['n'] . " " .
 					"WHERE user_id = '" . $user['user_id'] . "' " .
 					"LIMIT 1");
@@ -87,14 +87,14 @@ if ($this->is_admin())
 			// total files uploaded
 			$users = $this->db->load_all(
 				"SELECT u.user_id, COUNT(f.file_id) AS n " .
-				"FROM " . $this->db->table_prefix . "file f, {$this->db->user_table} AS u " .
+				"FROM " . $this->db->table_prefix . "file f, " . $this->db->user_table . " AS u " .
 				"WHERE f.user_id = u.user_id " .
 				"GROUP BY f.user_id");
 
 			foreach ($users as $user)
 			{
 				$this->db->sql_query(
-					"UPDATE {$this->db->user_table} " .
+					"UPDATE " . $this->db->user_table . " " .
 					"SET total_uploads = " . (int) $user['n'] . " " .
 					"WHERE user_id = '" . $user['user_id'] . "' " .
 					"LIMIT 1");
