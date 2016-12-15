@@ -765,7 +765,9 @@ $this->ensure_page(true); // TODO: upload for forums?
 				echo '<h3>' . $this->_t('UploadAttachments') . '</h3>';
 				echo '<ul class="menu">' .
 						'<li class="active">' . $this->_t('UploadAttachments') . '</li>' .
-						'<li><a href="' . $this->href('upload', '', ['upload']) . '">' . $this->_t('UploadFile') . '</a></li>' .
+						($can_upload
+						? '<li><a href="' . $this->href('upload', '', ['upload']) . '">' . $this->_t('UploadFile') . '</a></li>'
+						: '') .
 					"</ul><br />\n";
 
 				if (isset($_GET['files']) && $_GET['files'] == 'global')
