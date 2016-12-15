@@ -749,6 +749,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Files accessible from this page',
 	'UploadTitleGlobal'			=> 'Files accessible from anywhere',
 	'UploadEdit'				=> 'edit',
+	'UploadView'				=> 'view',
 	'UploadRemoveFile'			=> 'Remove',
 	'UploadAttachments'			=> 'Attachments',
 	'UploadsToPage'				=> 'to page',

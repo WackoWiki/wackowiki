@@ -8,12 +8,13 @@ if (!defined('IN_WACKO'))
 // TODO:
 // - mode to tag files -> faceted search
 // - show for local files relative and absolute syntax (?)
-// - rename or split handler to / in attachments
+// - rename or split handler in 'attachment' and 'upload'
+// - move all non GUI code in attachment and upload class
 
 $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
-	"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
+	"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
 	"FROM " . $this->db->table_prefix . "file f " .
 		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
@@ -23,14 +24,28 @@ $get_file = function ($file_id)
 	return $file;
 };
 
+$format_desc = function($text, $file_lang)
+{
+	#$desc = $text;
+	$desc		= $this->format($text, 'typografica' );
+
+	if ($this->page['page_lang'] != $file_lang)
+	{
+		$desc	= $this->do_unicode_entities($text, $file_lang);
+	}
+
+	return $desc;
+};
+
 $clean_text = function ($string)
 {
 	$string = rtrim($string, '\\');
 
 	// Make HTML in the description redundant
 	$string = $this->format($string, 'pre_wacko');
-	$string = $this->format($string, 'safehtml');
-	$string = htmlspecialchars($string, ENT_COMPAT, $this->get_charset());
+	$string = $this->format($string, 'wacko'); //
+	$string = $this->format($string, 'safehtml'); //
+	#$string = htmlspecialchars($string, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET, $this->get_charset()); // breaks html unicode chars
 
 	return $string;
 };
@@ -215,7 +230,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					} ?>
 					<tr>
 						<th><?php echo $this->_t('UploadDesc'); ?>:</th>
-						<td><?php echo $file['file_description']; ?></td>
+						<td><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></td>
 					</tr>
 <?php
 					// image dimension
@@ -223,7 +238,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					#{ ?>
 						<tr>
 							<th><?php echo $this->_t('FileCaption'); ?>:</th>
-							<td><?php echo $file['caption']; ?></td>
+							<td><?php echo $format_desc($file['caption'], $file['file_lang']); ?></td>
 						</tr>
 <?php
 					#} ?>
@@ -279,11 +294,11 @@ $this->ensure_page(true); // TODO: upload for forums?
 					<table class="upload">
 						<tr>
 							<th><?php echo $this->_t('UploadDesc'); ?>:</th>
-							<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo $file['file_description']; ?>"/></td>
+							<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo htmlspecialchars($file['file_description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>"/></td>
 						</tr>
 						<tr>
 							<th><?php echo $this->_t('FileCaption'); ?>:</th>
-							<td><textarea id="file_caption" name="caption" rows="6" cols="70"><?php echo $file['caption']; ?></textarea></td>
+							<td><textarea id="file_caption" name="caption" rows="6" cols="70"><?php echo htmlspecialchars($file['caption'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></textarea></td>
 						</tr>
 					</table>
 					<br />
@@ -386,6 +401,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 					// log event
 					$this->log(1, Ut::perc_replace($this->_t('LogRemovedFile', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
+					$this->db->invalidate_sql_cache(); // TODO: check if sql cache is enabled plus purge page cache
 					$this->http->redirect($this->href('upload'));
 				}
 				else
@@ -418,7 +434,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					// update file metadata
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "file SET " .
-							"file_lang		= " . $this->db->q($this->page['page_lang']) . ", " .
+							"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
 							"file_description	= " . $this->db->q($description) . ", " .
 							"caption			= " . $this->db->q($caption) . " " .
 						"WHERE file_id = '" . $file['file_id'] . "' " .
@@ -431,8 +447,11 @@ $this->ensure_page(true); // TODO: upload for forums?
 						$this->set_message($message, 'success');
 					}
 
+					// TODO: delete SQL cache
+
 					// log event
 					$this->log(1, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
+					$this->db->invalidate_sql_cache();
 					$this->http->redirect($this->href('upload', '', ['show', 'file_id=' . (int) $file['file_id']]));
 				}
 				else
@@ -535,22 +554,31 @@ $this->ensure_page(true); // TODO: upload for forums?
 						$_name	= $name;
 						$count	= 1;
 
-						while (file_exists($dir . $name . '.' . $ext))
+						if (file_exists($dir . $name . '.' . $ext) && isset($_POST['file_overwrite']))
 						{
-							if ($name === $_name)
+							// TODO: check against file owner, Admin is always allowed
+							// + check for file / page owner
+							// + do file revision (add config option)
+						}
+						else
+						{
+							while (file_exists($dir . $name . '.' . $ext))
 							{
-								$name = $_name . $count;
-							}
-							else
-							{
-								$name = $_name . (++$count);
+								if ($name === $_name)
+								{
+									$name = $_name . $count;
+								}
+								else
+								{
+									$name = $_name . (++$count);
+								}
 							}
 						}
 
 						$result_name	= $name . '.' . $ext;
 						$file_size		= $_FILES['file']['size'];
 
-						// 1.6. check filesize, if asked
+						// 1.6. check filesize
 						$max_filesize	= $this->db->upload_max_size;
 
 						if (isset($_POST['maxsize']))
@@ -609,29 +637,54 @@ $this->ensure_page(true); // TODO: upload for forums?
 								$description	= $clean_text((string) $description);
 								# $caption		= $clean_text((string) $_POST['caption']);
 
-								// 5. insert line into DB
-								$this->db->sql_query(
-									"INSERT INTO " . $this->db->table_prefix . "file SET " .
-										"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', " .
-										"user_id			= '" . $user['user_id'] . "'," .
-										"file_name			= " . $this->db->q($small_name) . ", " .
-										"file_lang		= " . $this->db->q($this->page['page_lang']) . ", " .
-										"file_description	= " . $this->db->q($description) . ", " .
-										# "caption			= " . $this->db->q($caption) . ", " .
-										"file_size			= '" . (int) $file_size . "'," .
-										"picture_w			= '" . (int) $size[0] . "'," .
-										"picture_h			= '" . (int) $size[1] . "'," .
-										"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
-										"uploaded_dt		= " . $this->db->q($uploaded_dt) . " ");
+								if (isset($_POST['file_overwrite']))
+								{
+									$this->db->sql_query(
+										"UPDATE " . $this->db->table_prefix . "file SET " .
+											#"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', " .
+											"user_id			= '" . $user['user_id'] . "'," .
+											#"file_name			= " . $this->db->q($small_name) . ", " .
+											"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
+											"file_description	= " . $this->db->q($description) . ", " .
+											# "caption			= " . $this->db->q($caption) . ", " .
+											"file_size			= '" . (int) $file_size . "'," .
+											"picture_w			= '" . (int) $size[0] . "'," .
+											"picture_h			= '" . (int) $size[1] . "'," .
+											"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
+											"uploaded_dt		= " . $this->db->q($uploaded_dt) . " " .
+										"WHERE " .
+											(!$is_global
+												? "page_id		= '" . $this->page['page_id'] . "' AND "
+												: "" ) .
+											"file_name			= '" . $small_name . "' " .
+										"LIMIT 1");
+								}
+								else
+								{
+									// 5. insert line into DB
+									$this->db->sql_query(
+										"INSERT INTO " . $this->db->table_prefix . "file SET " .
+											"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', " .
+											"user_id			= '" . $user['user_id'] . "'," .
+											"file_name			= " . $this->db->q($small_name) . ", " .
+											"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
+											"file_description	= " . $this->db->q($description) . ", " .
+											# "caption			= " . $this->db->q($caption) . ", " .
+											"file_size			= '" . (int) $file_size . "'," .
+											"picture_w			= '" . (int) $size[0] . "'," .
+											"picture_h			= '" . (int) $size[1] . "'," .
+											"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
+											"uploaded_dt		= " . $this->db->q($uploaded_dt) . " ");
 
-								// update user uploads count
-								$this->db->sql_query(
-									"UPDATE {$this->db->user_table} SET " .
-										"total_uploads = total_uploads + 1 " .
-									"WHERE user_id = '" . $user['user_id'] . "' " .
-									"LIMIT 1");
+									// update user uploads count
+									$this->db->sql_query(
+										"UPDATE {$this->db->user_table} SET " .
+											"total_uploads = total_uploads + 1 " .
+										"WHERE user_id = '" . $user['user_id'] . "' " .
+										"LIMIT 1");
+								}
 
-								$file_id = $this->db->load_single(
+								$file = $this->db->load_single(
 									"SELECT file_id " .
 									"FROM " . $this->db->table_prefix . "file " .
 									"WHERE file_name = " . $this->db->q($small_name) . " " .
@@ -651,65 +704,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 									$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $small_name, $file_size_ft));
 								}
 
-								echo '<h3>' . $this->_t('UploadFiles') . ' &raquo; ' . $this->_t('UploadFile') . '</h3>';
-								echo '<ul class="menu">' .
-										'<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadAttachments') . '</a></li>' .
-										'<li class="active">' . $this->_t('UploadFile') . '</li>' .
-									"</ul><br />\n";
-								?>
-								<div class="fileinfo">
-									<?php
-									echo '<h4>' . $this->link($path . $small_name, '', $this->shorten_string($small_name)) . '</h4>';
-									echo '<ul class="menu">' .
-											'<li><a href="' . $this->href('upload', '', ['show', 'file_id=' . (int) $file_id['file_id']]) . '">' . $this->_t('UploadViewProperties') . '</a></li>' .
-											'<li><a href="' . $this->href('upload', '', ['edit', 'file_id=' . (int) $file_id['file_id']]) . '">' . $this->_t('UploadEditProperties') . '</a></li>' .
-											'<li><a href="' . $this->href('upload', '', ['remove', 'file_id=' . (int) $file_id['file_id']]) . '">' . $this->_t('UploadRemoveFile') . '</a></li>' .
-										"</ul><br /><br />\n";
-
-									echo $this->link($path . $small_name); ?>
-
-									<table class="upload tbl_fixed">
-										<tr>
-											<th><?php echo $this->_t('FileSyntax'); ?>:</th>
-											<td><?php echo '<code>' . $syntax_file . '</code>'; ?></td>
-										</tr>
-										<tr>
-											<th><?php echo $this->_t('UploadBy'); ?>:</th>
-											<td><?php echo $this->user_link($user['user_name'], '', true, false); ?></td>
-										</tr>
-										<tr>
-											<th><?php echo $this->_t('FileAdded'); ?>:</th>
-											<td><?php echo $this->get_time_formatted($uploaded_dt); ?></td>
-										</tr>
-										<tr>
-
-											<th><?php echo $this->_t('FileSize'); ?>:</th>
-											<td><?php echo '' . $file_size_ft . ''; ?></td>
-										</tr>
-
-										<?php
-										// image dimension
-										if ($size[0] != 0)
-										{ ?>
-										<tr>
-											<th><?php echo $this->_t('FileDimension'); ?>:</th>
-											<td><?php echo '' . $size[0] . ' × ' . $size[1] . 'px'; ?></td>
-										</tr>
-										<?php
-										} ?>
-										<tr>
-											<th><?php echo $this->_t('UploadDesc'); ?>:</th>
-											<td><?php echo $description; ?></td>
-
-										</tr>
-										<tr>
-											<th><?php echo $this->_t('FileAttachedTo'); ?>:</th>
-											<td><?php echo !$is_global? $this->link('/' . $this->page['supertag'], '', $this->page['title'], $this->page['supertag']) : $this->_t('UploadGlobal'); ?></td>
-										</tr>
-									</table>
-								<br />
-								</div>
-<?php
+								$this->http->redirect($this->href('upload', '', ['show', 'file_id=' . (int) $file['file_id']]));
 							}
 							else //forbid
 							{
