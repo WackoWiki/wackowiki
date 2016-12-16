@@ -107,7 +107,7 @@ if ($this->can_upload(true) === true)
 	{ ?>
 	<tr>
 		<td style="text-align: right">
-			<label for="upload_desc"><?php echo $this->_t('UploadDesc');?>:&nbsp;</label>
+			<label for="upload_desc"><?php echo $this->_t('FileDesc');?>:&nbsp;</label>
 		</td>
 		<td>
 			<input type="text" name="file_description" id="upload_desc" size="60" maxlength="250"/>

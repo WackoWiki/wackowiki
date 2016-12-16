@@ -275,6 +275,7 @@
 				<li class="m-permissions"><a href="[ ' href: permissions ' ]">[ ' i Icon ' ][ ' _t: SettingsPermissions ' ]</a></li>
 			=]
 			<li class="m-categories"><a href="[ ' href: categories ' ]">[ ' i Icon ' ][ ' _t: SettingsCategories ' ]</a></li>
+			<li class="m-attachments"><a href="[ ' href: attachments ' ]">[ ' i Icon ' ][ ' _t: SettingsAttachments ' ]</a></li>
 			<li class="m-upload"><a href="[ ' href: upload ' ]">[ ' i Icon ' ][ ' _t: SettingsUpload ' ]</a></li>
 			<li class="m-referrers"><a href="[ ' href: referrers ' ]">[ ' i Icon ' ][ ' _t: SettingsReferrers ' ]</a></li>
 			<li class="[ ' watched | list watch-on watch-off ' ]"><a href="[ ' href: watch ' ]">[ ' i Icon ' ][ ' watched | list SetWatch RemoveWatch | _t ' ]</a></li>

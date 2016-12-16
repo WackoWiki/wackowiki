@@ -33,6 +33,7 @@ if (!isset($page))		$page = '';
 if (!isset($ppage))		$ppage = '';
 if (!isset($legend))	$legend = '';
 if (!isset($method))	$method = ''; // for use in page handler
+if (!isset($params))	$params = null; //for $_GET parameters to be passed with the page link
 if (!isset($deleted))	$deleted = 0;
 if (!isset($track))		$track = 0;
 if (!isset($picture))	$picture = null;
@@ -112,7 +113,7 @@ if ($can_view)
 				? "AND f.deleted <> '1' "
 				: ""), true);
 
-	$pagination = $this->pagination($count['n'], $max, 'f', '', $method);
+	$pagination = $this->pagination($count['n'], $max, 'f', $params, $method);
 
 	// load files list
 	$files = $this->db->load_all(
@@ -244,9 +245,9 @@ if ($can_view)
 				$operation_mode = 0;
 			}
 
-			$href_info		= $this->href('upload', $page, 'show' . "&amp;file_id=" . $file_id);
-			$href_edit		= $this->href('upload', $page, 'edit' . "&amp;file_id=" . $file_id);
-			$href_remove	= $this->href('upload', $page, 'remove' . "&amp;file_id=" . $file_id);
+			$href_info		= $this->href('attachments', $page, 'show' . "&amp;file_id=" . $file_id);
+			$href_edit		= $this->href('attachments', $page, 'edit' . "&amp;file_id=" . $file_id);
+			$href_remove	= $this->href('attachments', $page, 'remove' . "&amp;file_id=" . $file_id);
 
 			echo '<tr>' .
 					'<td class="file-">' . $link . '</td>';
