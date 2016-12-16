@@ -1840,8 +1840,12 @@ li.m-categories img {
 	background-image: url('./../icon/tag.svg');
 	background-repeat: no-repeat;
 }
-li.m-upload img {
+li.m-attachments img {
 	background-image: url('./../icon/attachment.svg');
+	background-repeat: no-repeat;
+}
+li.m-upload img {
+	background-image: url('./../icon/upload.svg');
 	background-repeat: no-repeat;
 }
 li.m-clone img {

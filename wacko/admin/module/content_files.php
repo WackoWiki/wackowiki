@@ -60,7 +60,7 @@ function admin_content_files(&$engine, &$module)
 		}
 		else
 		{
-			$engine->show_message($engine->_t('UploadFileNotFound'));
+			$engine->show_message($engine->_t('FileNotFound'));
 		}
 
 		echo '</div>';
@@ -111,7 +111,7 @@ function admin_content_files(&$engine, &$module)
 		}
 		else
 		{
-			$message = $engine->_t('UploadRemoveNotFound');
+			$message = $engine->_t('FileNotFound');
 			$engine->show_message($message);
 		}
 
@@ -255,7 +255,7 @@ function admin_content_files(&$engine, &$module)
 			</td>
 		</tr>
 		<tr>
-			<td><?php echo $engine->_t('UploadDesc');?>:&nbsp;</td>
+			<td><?php echo $engine->_t('FileDesc');?>:&nbsp;</td>
 			<td><input type="text" maxlength="250" name="file_description" size="40"/></td>
 		</tr>
 		<tr>
