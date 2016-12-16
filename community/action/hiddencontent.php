@@ -42,11 +42,11 @@ if ($usergroup !== '' || $username !== '')
 	{
 		// Check if current user is in the specified $usergroup
 		// don't bother if we already identified the user as having access
-		foreach ($this->db->aliases as $gname => $gusers)
+		foreach ($this->db->aliases as $group => $members)
 		{
-			if ($gname === $usergroup)
+			if ($group === $usergroup)
 			{
-				if (in_array($this->get_user_name(), explode(',', $gusers)))
+				if (in_array($this->get_user_name(), explode(',', $members)))
 				{
 					$show_content = true;
 					break;
