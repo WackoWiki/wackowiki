@@ -6,6 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 // action - module for bulk upload files on a wacko wiki site with a record in the database.
+// version 0.6.beta
 // https://wackowiki.sourceforge.io/doc/Dev/PatchesHacks/MultiUpload
 
 ?>
@@ -18,13 +19,12 @@ if (!defined('IN_WACKO'))
 
 // TODO:
 // Content Security Policy: may prevent the loading of the preview tumbs as data:image/jpeg;base64,
+// you need to change the image source directive to: img-src 'self' data:;
 // JS routine should do a redirect to reload page
 // crashed browser while uploading a stack of large files!!!
 // encoding issues with page lang != user lang, eg. en -> ru
 // provide dummy preview for non image files
 // broken global upload
-
-#$this->debug_print_r($_POST);
 
 // check who u are, can u upload?
 if ($this->can_upload() === true)
