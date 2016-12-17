@@ -2742,13 +2742,20 @@ class Wacko
 	* @param mixed $params Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
 	* @param boolean $addpage Optional
 	* @param string $anchor Optional HTTP anchor-fragment
+	* @param boolean $dont_alter Optional Disable slim_url and translit (e.g. for addpage or hashid routing)
 	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
-	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '')
+	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $dont_alter = false)
 	{
 		if (!is_array($params))
 		{
 			$params = $params? [$params] : [];
+		}
+
+		if ($addpage)
+		{
+			$params['add']	= 1;
+			$dont_alter		= true;
 		}
 
 		$href = $this->db->base_url;
@@ -2756,16 +2763,11 @@ class Wacko
 		// enable rewrite_mode in ap_mode to avoid href() appends '?page=' (why?)
 		if ($this->db->rewrite_mode || $this->db->ap_mode)
 		{
-			$href .= $this->mini_href($method, $tag, $addpage);
+			$href .= $this->mini_href($method, $tag, $dont_alter);
 		}
 		else
 		{
-			$params['page'] = $this->mini_href($method, $tag, $addpage);
-		}
-
-		if ($addpage)
-		{
-			$params['add'] = 1;
+			$params['page'] = $this->mini_href($method, $tag, $dont_alter);
 		}
 
 		if ($params)
@@ -2807,21 +2809,21 @@ class Wacko
 	*
 	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $tag Optional tag - returns current-page tag if empty
-	* @param boolean $addpage Optional
+	* @param boolean $dont_alter Optional
 	* @return string String tag[/method]
 	*/
-	function mini_href($method = '', $tag = '', $addpage = false)
+	function mini_href($method = '', $tag = '', $dont_alter = false)
 	{
 		if (!($tag = trim($tag)))
 		{
 			$tag = $this->tag;
 		}
 
-		if (!$addpage && !$this->db->ap_mode)
+		if (!$dont_alter && !$this->db->ap_mode)
 		{
 			$tag = $this->slim_url($tag);
 		}
-		// if (!$addpage)		$tag = $this->translit($tag);
+		// if (!$dont_alter)		$tag = $this->translit($tag);
 
 		$tag = trim($tag, '/.');
 		// $tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
