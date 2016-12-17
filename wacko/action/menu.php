@@ -225,7 +225,7 @@ if (isset($_POST['_user_menu']))
 	$this->config->invalidate_sql_cache();
 
 	// update user menu
-	$this->set_menu(MENU_USER, 1);
+	$this->set_menu(MENU_USER, true);
 
 }
 
@@ -326,7 +326,7 @@ if ($_user_id)
 	echo $this->form_open('add_bookmark');
 	echo '<input type="hidden" name="_user_menu" value="yes" />';
 	echo '<br /><br />';
-	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage') . ':</label><br />' . 
+	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage') . ':</label><br />' .
 		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
 
 	if ($default_menu === true)
