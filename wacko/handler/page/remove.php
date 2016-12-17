@@ -173,7 +173,7 @@ if ($this->is_admin()
 		$this->db->invalidate_sql_cache();
 
 		// update user menu
-		$this->set_menu(MENU_USER, 1);
+		$this->set_menu(MENU_USER, true);
 
 		// update sitemap
 		$this->update_sitemap();
