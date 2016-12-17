@@ -55,7 +55,7 @@ if (
 
 // set up for main show
 $url_maxlen = 80;
-$spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;'; // ' . . . . . . . . . . . . . . . . '
+$spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;';
 $modes		=  ['ViewReferrersPage'		=> '',
 				'ViewReferrersPerPage'	=> 'perpage',
 				'ViewReferrersByTime'	=> 'bytime',
@@ -82,6 +82,7 @@ if ($mode)
 }
 
 $px = $this->db->table_prefix;
+
 if ($mode == 'perpage')
 {
 	$query = "SELECT r.page_id, COUNT(r.referrer) AS num, p.tag, p.title, p.page_lang " .
@@ -178,10 +179,12 @@ $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $space
 	echo '<span class=""><a title="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
 		'" href="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
 		'" rel="nofollow noreferrer">' . htmlspecialchars($trunc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a></span>';
+
 	if ($link)
 	{
 		echo $spacer . '<small>' . $link . '</small>';
 	}
+
 	echo "</li>\n";
 };
 
@@ -205,7 +208,6 @@ $check_ref = function ($ref)
 		// cache page_id for for has_access validation in link function
 		$this->page_id_cache[$ref['tag']] = $page_id;
 
-		//$page_link = $this->compose_link_to_page($referrer['tag']);
 		$link = $this->link('/' . $ref['tag'], '', $ref['title'], '', '', '', $lang, 0);
 	}
 
@@ -250,6 +252,7 @@ if ($mode == 'perpage')
 else if ($mode == 'bytime')
 {
 	$curday = '';
+
 	foreach ($referrers as $referrer)
 	{
 		if (($link = $check_ref($referrer)))
