@@ -91,7 +91,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					$path = 'file:/';
 				}
 
-				echo $this->form_open('remove_file', ['page_method' => 'upload']);
+				echo $this->form_open('remove_file', ['page_method' => 'attachments']);
 ?>
 			<div class="fileinfo"><?php
 			echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
@@ -269,7 +269,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 				{
 					// 1.c EDIT FILE PROPERTIES
 
-					echo $this->form_open('upload_file', ['page_method' => 'upload']);
+					echo $this->form_open('upload_file', ['page_method' => 'attachments']);
 
 					echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileEditProperties') . '</h3>';
 					echo '<ul class="menu">

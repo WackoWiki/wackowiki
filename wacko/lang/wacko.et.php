@@ -383,7 +383,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Otsi',
 	'TopicSearchResults'		=> 'Otsingu tulemused ',
 	'NotFoundInTopics'			=> 'Ei leidunud',
-	'TextSearchPage'			=> 'Otsing',
+	'SearchPage'			=> 'Otsing',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',
