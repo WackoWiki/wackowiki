@@ -383,7 +383,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Търси',
 	'TopicSearchResults'		=> 'Резултати за заглавието на търсената фраза ',
 	'NotFoundInTopics'			=> 'няма в заглавието ',
-	'TextSearchPage'			=> 'Search',
+	'SearchPage'			=> 'Search',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',

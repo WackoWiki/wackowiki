@@ -83,6 +83,7 @@ $wacko_translation = [
 
 	// session notice
 	'SessionTerminatedDue'		=> 'Sitzung ist wegen %1 abgelaufen.',
+									// Die Sitzung wurde wegen Inaktivität beendet.
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
 
 	// other
@@ -383,7 +384,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Suche nach',
 	'TopicSearchResults'		=> 'Suchergebnisse in Titeln für ',
 	'NotFoundInTopics'			=> 'nicht in Titeln gefunden',
-	'TextSearchPage'			=> 'Suche',
+	'SearchPage'			=> 'Suche',
 
 	'PostedBy'					=> 'eingetragen von',
 	'ThisIsCommentOn'			=> 'Das ist ein Kommentar zu',

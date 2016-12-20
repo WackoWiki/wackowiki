@@ -383,7 +383,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Pesquisa de',
 	'TopicSearchResults'		=> 'Tópicos dos resultados da pesquisa de ',
 	'NotFoundInTopics'			=> 'nada encontrado nos tópicos',
-	'TextSearchPage'			=> 'Search',
+	'SearchPage'			=> 'Search',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',
