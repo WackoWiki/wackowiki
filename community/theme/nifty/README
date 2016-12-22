@@ -50,5 +50,6 @@ LICENSE ------------------------------------------------------------------------
 The Default Theme is part of the WackoWiki package.
 BSD licence.
 
-Some Icons were taken from the Oxygen Icons set.
-http://www.oxygen-icons.org
+Icons were taken from the Breeze (Plasma 5 icon theme) Icons set.
+https://github.com/KDE/breeze-icons
+Icons are licensed under the LGPLv3

@@ -17,6 +17,7 @@ define('FORMATTER_DIR',					'formatter');
 define('HANDLER_DIR',					'handler');
 define('IMAGE_DIR',						'image');
 define('THEME_DIR',						'theme');
+define('THUMB_DIR',						'files/thumbs');
 define('UPLOAD_GLOBAL_DIR',				'files/global');
 define('UPLOAD_PER_PAGE_DIR',			'files/perpage');
 define('UPLOAD_BACKUP_DIR',				'files/backup');

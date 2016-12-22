@@ -33,12 +33,12 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 	// check target page existance
 	else if ($page = $this->load_page($prefix . $new_tag, 0, '', LOAD_CACHE, LOAD_META))
 	{
-		$message = $this->_t('PageAlreadyExists') . " &laquo;" . $page['tag'] . "&raquo;. ";
+		$message = Ut::perc_replace($this->_t('PageAlreadyExists'), '<code>' . $page['tag'] . '</code>') . ' ';
 
 		// check existing page write access
 		if ($this->has_access('write', $this->get_page_id($prefix . $new_tag)))
 		{
-			$message .= Ut::perc_replace($this->_t('PageAlreadyExistsEdit'), "<a href=\"" . $this->href('edit', $prefix . $new_tag) . "\">" . $this->_t('PageAlreadyExistsEdit2') . " </a>?");
+			$message .= Ut::perc_replace($this->_t('PageAlreadyExistsEdit'), "<a href=\"" . $this->href('edit', $prefix . $new_tag) . "\">" . $this->_t('PageAlreadyExistsEdit2') . " </a>");
 		}
 		else
 		{
