@@ -77,7 +77,7 @@ else if($this->has_access('write'))
 	<div id="mainwrapper">
 		<div id="header">
 			<?php // Insert search form ?>
-			<?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
+			<?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('SearchPage')]); ?>
 			<input type="search" name="phrase" size="15" value="<?php echo $this->_t('SearchButtonText'); ?>" class="search" />
 			<?php echo $this->form_close(); ?>
 

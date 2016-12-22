@@ -227,15 +227,16 @@ if ($this->has_access('read')
 	$previous	= isset($_POST['previous'])	? $_POST['previous']	: $this->page['modified'];
 	$body		= isset($_POST['body'])		? $_POST['body']		: $this->page['body'];
 	$body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	$title		= isset($_POST['title'])
+	$title		= isset($_POST['title']) // TODO: test, guess this needs () for nested operator
 					? $_POST['title']
-					: isset($this->page['title'])
+					: (isset($this->page['title'])
 						? $this->page['title']
-						: isset($this->sess->title)
-							? empty($this->sess->title)
+						: (isset($this->sess->title)
+							? (empty($this->sess->title)
 								? $this->get_page_title($this->tag)
-								: $this->sess->title
-							: $this->get_page_title($this->tag);
+								: $this->sess->title)
+							: $this->get_page_title($this->tag)
+							));
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
@@ -243,7 +244,10 @@ if ($this->has_access('read')
 
 	// display form
 
-	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
+	// "cf" attribute: it is for so called "critical fields" in the form.
+	// It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
+	// "You are going to leave this page, but there are some changes you made but not saved yet."
+	// Is used by this script to determine which changes it needs to monitor.
 	$output .= $this->form_open('edit_page', ['page_method' => 'edit', 'form_more' => ' cf="true" ']);
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
@@ -443,7 +447,7 @@ if ($this->has_access('read')
 		}
 	}
 ?>
-		wE.init('postText','WikiEdit','edname-w','<?php echo $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';?>');
+		wE.init('postText', 'WikiEdit', 'edname-w', '<?php echo $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';?>');
 	</script>
 	<br />
 
