@@ -7,13 +7,14 @@ if (!defined('IN_WACKO'))
 
 /*!! gallery action :
 
-// requires PHP Thumb Library <http://phpthumb.gxdlabs.com>
+// requires PHP Thumb Library <https://github.com/masterexploder/PHPThumb>
 // optional fancyBox <http://fancyapps.com/fancybox/>
 {{gallery
 
-	Shows photogallery
+	Shows image gallery
 
 	[page		= "page_tag"] - call image from another page
+	[global		= 0|1] - call global images
 	[perrow		= <Number of images per rows> (default = 3)]
 	[nodesc		= 1] - hide descriptions
 	[title		= "Gallery"] - album title
@@ -31,12 +32,26 @@ TODO: config settings
 - image_processing (boolean)
 - thumbnails (boolean)
 
+- split local and global tumbs -> read access
 - generated thumbnails full-blown 32-bit PNGs (or at least 24-bit) resulting in a file size often larger than the original image
 - remove thumbs with file or page
 - load the JS with the header (theme/_common/_header.php), see flash action (to avoid multiple loads)
 - fall back if no JS or Image manipulation library is available
 
 */
+
+$get_file = function ($file_id)
+{
+	$file = $this->db->load_single(
+	"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
+	"FROM " . $this->db->table_prefix . "file f " .
+		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+	"WHERE f.file_id ='" . (int) $file_id . "' " .
+	"LIMIT 1", true);
+
+	return $file;
+};
 
 // Include PHP Thumbnailer
 require_once 'lib/phpthumb/PHPThumb.php';
@@ -83,11 +98,10 @@ require_once 'lib/phpthumb/GD.php';
 <?php
 
 // Loading parameters
-$thumb_dir		= 'files/thumbs';
-$small_id		= 'tn_';
+$thumb_prefix	= 'tn_';
 $imgclass		= '';
 $img_spacer		= '';
-$height			= 150; // $this->db->img_max_thumb_width
+$width			= $this->db->img_max_thumb_width; // default: 150
 
 if (!isset($page))		$page		= '';
 if (!isset($title))		/*$title="Gallery";*/ $nomark = 1;
@@ -123,9 +137,9 @@ else
 }
 
 // we using a parameter token here to sort out multiple instances
-$param_token = substr(hash('md5', $global.$page.$nodesc.$toblank.$owner.$order.$max), 0, 8);
+$param_token = substr(hash('md5', $global . $page . $nodesc . $toblank . $owner . $order . $max), 0, 8);
 
-$order_by = "file_name ASC";
+							$order_by = "file_name ASC";
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
@@ -201,7 +215,7 @@ if ($can_view)
 		($owner
 			? "AND u.user_name = " . $this->db->q($owner) . " "
 			: '') . " " .
-		"ORDER BY f." . $order_by." " .
+		"ORDER BY f." . $order_by . " " .
 		"LIMIT {$pagination['offset']}, {$limit}");
 
 	if (!is_array($files))
@@ -222,7 +236,7 @@ if ($can_view)
 		echo '<div class="layout-box"><p class="layout-box"><span>' . htmlspecialchars($title, null, '') . ":</span></p>\n";
 	}
 
-	if (!isset($_GET['photo']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
+	if (!isset($_GET['file_id']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
 	{
 		if ($table)
 		{
@@ -241,7 +255,7 @@ if ($can_view)
 			$file_width			= ''; // $file['picture_w'];
 			$file_height		= ''; // $file['picture_h'];
 			$prefix_global		= '';
-			$tnb_name			= $small_id.$file_name;
+			$tnb_name			= $thumb_prefix . $file['file_id'] . '.' . $file['file_ext'];
 			$linkto				= $file_name;
 
 			$file_description	= $this->format($file['file_description'], 'typografica' );
@@ -254,16 +268,16 @@ if ($can_view)
 			// check for upload location: global / per page
 			if ($file['page_id'] == '0')
 			{
-				$tnb_path		= $thumb_dir . '/' . $prefix_global . '@' . $tnb_name;
+				$tnb_path		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
 				$url			= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 			}
 			else
 			{
-				$tnb_path		= $thumb_dir . '/@' . $file_page['page_id'] . '@' . $tnb_name;
+				$tnb_path		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
 				$url			= $this->href('file', $source_page_tag, 'get=' . $file_name);
 			}
 
-			$img	= '<img src="' . $this->db->base_url.$tnb_path . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '/>';
+			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '/>';
 
 			$caption = '<br><figcaption>' .
 					'<span>' . $file_description . '</span> ' . '<br />' .
@@ -292,7 +306,7 @@ if ($can_view)
 
 				if (!$toblank)
 				{
-					echo '<a href="' . $this->href('', $this->tag, 'photo=' . $linkto . '&amp;token=' . $param_token . '#' . $param_token) . '">' . $img . "</a>\n";
+					echo '<a href="' . $this->href('', $this->tag, 'file_id=' . $file['file_id'] . '&amp;token=' . $param_token . '#' . $param_token) . '">' . $img . "</a>\n";
 				}
 				else
 				{
@@ -334,12 +348,12 @@ if ($can_view)
 				if ($file['page_id'] == 0)
 				{
 					$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-					$thumb_name		= $thumb_dir . '/' . $prefix_global . '@' . $small_id.$file_name;
+					$thumb_name		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
 				}
 				else
 				{
 					$src_image		= Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
-					$thumb_name		= $thumb_dir . '/@' . $file_page['page_id'] . '@' . $small_id.$file_name;
+					$thumb_name		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
 				}
 
 				if (file_exists($src_image))
@@ -394,12 +408,12 @@ if ($can_view)
 						if (is_object($thumb))
 						{
 							// $thumb->resize(100, 100);
-							$thumb->resize($height, $height);
+							$thumb->resize($width, $width);
 
 							// $thumb->resizePercent(50);
 
 							// $thumb->adaptiveResize(175, 175);
-							#$thumb->adaptiveResize($height, $height);
+							#$thumb->adaptiveResize($width, $width);
 
 							// $thumb->cropFromCenter(200, 100);
 
@@ -413,7 +427,7 @@ if ($can_view)
 						"INSERT INTO " . $this->db->table_prefix . "file SET " .
 						"user_id			= '" . (int) $file['user_id'] . "', " .
 						"page_id			= '" . (int) $file_page['page_id'] . "', " .
-						"file_name			= " . $this->db->q($small_id.$file_name) . ", " .
+						"file_name			= " . $this->db->q($thumb_prefix . $file_name) . ", " .
 						"file_description	= " . $this->db->q($file['file_description']) . ", " .
 						"uploaded_dt		= " . $this->db->q(date("Y-m-d H:i:s")) . ", " .
 						"file_size			= '" . (int)sizeof($newfilename) . "', " .
@@ -439,7 +453,7 @@ if ($can_view)
 
 					if (!$toblank)
 					{
-						echo '<a href="' . $this->href('', $this->tag, 'photo=' . $linkto . '&amp;token=' . $param_token) . '">' . $img . "</a>\n";
+						echo '<a href="' . $this->href('', $this->tag, 'file_id=' . $file['file_id'] . '&amp;token=' . $param_token) . '">' . $img . "</a>\n";
 					}
 					else
 					{
@@ -490,7 +504,8 @@ if ($can_view)
 	}
 	else
 	{
-		// We choose one photo
+		// We choose one image
+		$file = $get_file((int) $_GET['file_id']);
 
 	/* 	<figure class="zoom">
 			<a class="inline" href="#gallery:zoom_123">
@@ -508,20 +523,28 @@ if ($can_view)
 
 		echo '<div id="' . $param_token . '" style="text-align:center;">';
 
-		if (!$global)
+		if (count($file) > 0)
 		{
-			$path2	= 'file:/' . $source_page_tag . '/';
-		}
-		else
-		{
-			$path2	= 'file:';
+			if ($file['page_id'])
+			{
+				$path = 'file:/' . $file['supertag'] . '/';
+			}
+			else
+			{
+				$path = 'file:/';
+			}
+
+			// show image
+			if ($file['picture_w'] || $file['file_ext'] == 'svg')
+			{
+				echo $this->link($path . $file['file_name']);
+
+			}
+
+			echo '<br /><br />';
+			echo '<a href="' . $this->href('', $this->tag, '') . '">&lt; Back</a>';
 		}
 
-		$link	= $this->link($path2.$_GET['photo'], '', '', $_GET['photo']);
-
-		echo $link;
-		echo '<br /><br />';
-		echo '<a href="' . $this->href('', $this->tag, '') . '">&lt; Back</a>';
 		echo "</div>\n";
 	}
 
