@@ -11,6 +11,7 @@ print page and revisions' authors.
 	add		= semicolon-separated list of original authors (for reprinted work or such),
 			  or any appropriate text. wiki-formatting applies.
 			  note: every semicolon-separated block is printed on the new line
+	add_only = takes only authors from add= parameter
 	license	= some free-form text (wiki-formatting applies) or one of predefined constants:
 				- CC-BY-ND			(CreativeCommons-Attribution-NoDerivatives)
 				- CC-BY-NC-SA		(CreativeCommons-Attribution-NonCommercial-ShareAlike)
@@ -25,12 +26,12 @@ print page and revisions' authors.
 
 	https://creativecommons.org/choose/
 	https://en.wikipedia.org/wiki/Creative_Commons_license
-	https://licensebuttons.net/
 */
 
-if (!isset($add)) $add = '';
-if (!isset($license)) $license = (isset($this->db->license) ? $this->db->license : '');
-if (!isset($cluster)) $cluster = '';
+if (!isset($add))		$add		= '';
+if (!isset($add_only))	$add_only	= 0;
+if (!isset($license))	$license	= (isset($this->db->license) ? $this->db->license : '');
+if (!isset($cluster))	$cluster	= '';
 
 echo '<small>';
 
@@ -56,7 +57,7 @@ else
 	}
 
 	// search and process co-authors
-	if ($this->page)
+	if ($this->page && !$add_only)
 	{
 		// load overall authors data from revision and page table
 		if ($_authors = $this->db->load_all(
