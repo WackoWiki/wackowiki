@@ -96,8 +96,6 @@ class Email
 
 	function php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset = '', $xtra_headers = '')
 	{
-		require_once 'lib/phpmailer/PHPMailerAutoload.php';
-
 		$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
 
 		$mail->SetLanguage($this->engine->db->language, 'language/');
