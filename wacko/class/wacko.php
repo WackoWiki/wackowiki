@@ -1359,7 +1359,7 @@ class Wacko
 		$pages[]	= $this->db->users_page;
 		$pages[]	= $this->db->policy_page;
 		$pages[]	= $this->_t('LoginPage');
-		$pages[]	= $this->_t('TextSearchPage');
+		$pages[]	= $this->_t('SearchPage');
 		$pages[]	= $this->tag;
 
 		#$pages[]	= $this->tag;
@@ -1406,14 +1406,18 @@ class Wacko
 
 		$page_ids	= implode(', ', $page_id);
 
-		if ($read_acls = $this->db->load_all(
-		"SELECT page_id, privilege, list " .
-		"FROM " . $this->db->table_prefix . "acl " .
-		"WHERE page_id IN (" . $page_ids . ") AND privilege = 'read'", true))
+		// hack to avoid multiple queries to get non-read privileges
+		if ($acls = $this->db->load_all(
+			"SELECT page_id, privilege, list " .
+			"FROM " . $this->db->table_prefix . "acl " .
+			"WHERE page_id IN (" . $page_ids . ") " .
+			#	"AND privilege = 'read'" .
+			"", true))
 		{
-			foreach ($read_acls as $read_acl)
+			foreach ($acls as $acl)
 			{
-				$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acl);
+				#$this->cache_acl($acl['page_id'], 'read', 1, $acl);
+				$this->cache_acl($acl['page_id'], $acl['privilege'], 1, $acl);
 			}
 		}
 	}
@@ -2742,10 +2746,10 @@ class Wacko
 	* @param mixed $params Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
 	* @param boolean $addpage Optional
 	* @param string $anchor Optional HTTP anchor-fragment
-	* @param boolean $dont_alter Optional Disable slim_url and translit (e.g. for addpage or hashid routing)
+	* @param boolean $alter Optional uses slim_url and translit (turn off for e.g. addpage or hashid routing)
 	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
-	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $dont_alter = false)
+	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true)
 	{
 		if (!is_array($params))
 		{
@@ -2755,7 +2759,7 @@ class Wacko
 		if ($addpage)
 		{
 			$params['add']	= 1;
-			$dont_alter		= true;
+			$alter			= false;
 		}
 
 		$href = $this->db->base_url;
@@ -2763,11 +2767,11 @@ class Wacko
 		// enable rewrite_mode in ap_mode to avoid href() appends '?page=' (why?)
 		if ($this->db->rewrite_mode || $this->db->ap_mode)
 		{
-			$href .= $this->mini_href($method, $tag, $dont_alter);
+			$href .= $this->mini_href($method, $tag, $alter);
 		}
 		else
 		{
-			$params['page'] = $this->mini_href($method, $tag, $dont_alter);
+			$params['page'] = $this->mini_href($method, $tag, $alter);
 		}
 
 		if ($params)
@@ -2809,21 +2813,21 @@ class Wacko
 	*
 	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $tag Optional tag - returns current-page tag if empty
-	* @param boolean $dont_alter Optional
+	* @param boolean $alter Optional
 	* @return string String tag[/method]
 	*/
-	function mini_href($method = '', $tag = '', $dont_alter = false)
+	function mini_href($method = '', $tag = '', $alter = true)
 	{
 		if (!($tag = trim($tag)))
 		{
 			$tag = $this->tag;
 		}
 
-		if (!$dont_alter && !$this->db->ap_mode)
+		if ($alter && !$this->db->ap_mode)
 		{
 			$tag = $this->slim_url($tag);
 		}
-		// if (!$dont_alter)		$tag = $this->translit($tag);
+		// if ($alter)		$tag = $this->translit($tag);
 
 		$tag = trim($tag, '/.');
 		// $tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
