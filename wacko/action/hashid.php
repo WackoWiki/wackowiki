@@ -31,4 +31,4 @@ $id = $hashids->encode($ids);
 
 // dbg('hashiding', $ids, '=>', $id);
 
-$tpl->url = $this->href('', $id, '', '', '', true);
+$tpl->url = $this->href('', $id, '', '', '', false);
