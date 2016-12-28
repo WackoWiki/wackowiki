@@ -324,6 +324,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 		if ($error)
 		{
 			$this->set_message($error, 'error');
+			$this->reload_me();
 		}
 	}
 	else
