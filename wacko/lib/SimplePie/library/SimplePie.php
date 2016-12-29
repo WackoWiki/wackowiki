@@ -33,7 +33,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package SimplePie
- * @version 1.4.2
+ * @version 1.4.3
  * @copyright 2004-2016 Ryan Parman, Geoffrey Sneddon, Ryan McCue
  * @author Ryan Parman
  * @author Geoffrey Sneddon
@@ -50,7 +50,7 @@ define('SIMPLEPIE_NAME', 'SimplePie');
 /**
  * SimplePie Version
  */
-define('SIMPLEPIE_VERSION', '1.4.2');
+define('SIMPLEPIE_VERSION', '1.4.3');
 
 /**
  * SimplePie Build
@@ -1376,6 +1376,13 @@ class SimplePie
 
 			list($headers, $sniffed) = $fetched;
 		}
+		
+		// Empty response check
+		if(empty($this->raw_data)){
+			$this->error = "A feed could not be found at `$this->feed_url`. Empty body.";
+			$this->registry->call('Misc', 'error', array($this->error, E_USER_NOTICE, __FILE__, __LINE__));
+			return false;
+		}
 
 		// Set up array of possible encodings
 		$encodings = array();
@@ -1439,7 +1446,7 @@ class SimplePie
 					$this->data = $parser->get_data();
 					if (!($this->get_type() & ~SIMPLEPIE_TYPE_NONE))
 					{
-						$this->error = "A feed could not be found at $this->feed_url. This does not appear to be a valid RSS or Atom feed.";
+						$this->error = "A feed could not be found at `$this->feed_url`. This does not appear to be a valid RSS or Atom feed.";
 						$this->registry->call('Misc', 'error', array($this->error, E_USER_NOTICE, __FILE__, __LINE__));
 						return false;
 					}
@@ -1469,12 +1476,20 @@ class SimplePie
 		else
 		{
 			$this->error = 'The data could not be converted to UTF-8.';
-			if (!extension_loaded('mbstring') && !extension_loaded('iconv')) {
-				$this->error .= ' You MUST have either the iconv or mbstring extension installed.';
-			} elseif (!extension_loaded('mbstring')) {
-				$this->error .= ' Try installing the mbstring extension.';
-			} elseif (!extension_loaded('iconv')) {
-				$this->error .= ' Try installing the iconv extension.';
+			if (!extension_loaded('mbstring') && !extension_loaded('iconv') && !class_exists('\UConverter')) {
+				$this->error .= ' You MUST have either the iconv, mbstring or intl (PHP 5.5+) extension installed and enabled.';
+			} else {
+				$missingExtensions = array();
+				if (!extension_loaded('iconv')) {
+					$missingExtensions[] = 'iconv';
+				}
+				if (!extension_loaded('mbstring')) {
+					$missingExtensions[] = 'mbstring';
+				}
+				if (!class_exists('\UConverter')) {
+					$missingExtensions[] = 'intl (PHP 5.5+)';
+				}
+				$this->error .= ' Try installing/enabling the ' . implode(' or ', $missingExtensions) . ' extension.';
 			}
 		}
 
