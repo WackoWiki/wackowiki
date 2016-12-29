@@ -41,10 +41,6 @@ else
 	//  "<li>" . $this->compose_link_to_page($this->_t('HelpPage'), "", $this->_t('Help'), 0) . "</li>\n";
 }
 
-// outputs bookmarks menu
-// main page
-// "<li>" . $this->compose_link_to_page($this->db->root_page) . "</li>\n";
-
 $max_items = $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
 $i = 0;
 
@@ -251,15 +247,21 @@ else
 		}
 	}
 
+	// attachments tab
+	if (!$this->forum && $readable)
+	{
+		$echo_tab('attachments', 'FilesTip', 'FilesText', 2, '', 'f');
+	}
+
 	// upload tab
 	if (!$this->forum && $this->has_access('upload'))
 	{
-		$echo_tab('upload', 'FilesTip', 'FilesText', 2, '', 'u');
+		$echo_tab('upload', 'UploadFiles', 'UploadFile', 2, '', 'u');
 	}
 }
 $tpl->leave();
 
-$tpl->search		= $this->href('', $this->_t('TextSearchPage'));
+$tpl->search		= $this->href('', $this->_t('SearchPage'));
 $tpl->breadcrumbs	= $this->get_page_path($titles = false, ' &gt; ', true, true);
 // '<br />' . $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
 
