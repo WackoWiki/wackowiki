@@ -32,7 +32,7 @@ if (function_exists('date_default_timezone_set') && function_exists('date_defaul
 }
 
 // will compress manually to produce correct Content-Length header
-ini_set("zlib.output_compression", "Off");
+ini_set('zlib.output_compression', 'Off');
 ob_start();
 
 // don't let cookies ever interfere with request vars
