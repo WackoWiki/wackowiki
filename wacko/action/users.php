@@ -215,8 +215,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			$tpl->u_last_last_visit = $user['last_visit'];
 		}
 
-		$tpl->u_userPage_text = $home = $this->db->users_page . '/' . $user['user_name'];
-		$tpl->u_userPage_href = $this->href('', $home);
+		$tpl->u_userPage_text	= $home = $this->db->users_page . '/' . $user['user_name'];
+		$tpl->u_userPage_href	= $this->href('', $home);
+		$tpl->u_groupsPage		= $this->href('', $this->db->groups_page);
 
 		// hide contact form if profile is equal with current user
 		if ($user['user_id'] != $this->get_user_id())

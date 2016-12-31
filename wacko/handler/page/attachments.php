@@ -5,11 +5,13 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// TODO:
-// - add mode to tag/label files -> faceted search
-// - show for local files relative and absolute syntax (?)
-// - move all non GUI code in attachment and upload class
-// - thumbnails
+/* TODO:
+ - add mode to tag/label files -> faceted search
+ - show for local files relative and absolute syntax (?)
+ - split in attachments[local|global|all] and filemeta[view|edit|delete] handler
+ - move all non GUI code in attachment and upload class
+ - thumbnails
+ */
 
 $get_file = function ($file_id)
 {
@@ -26,7 +28,6 @@ $get_file = function ($file_id)
 
 $format_desc = function($text, $file_lang)
 {
-	#$desc = $text;
 	$desc		= $this->format($text, 'typografica' );
 
 	if ($this->page['page_lang'] != $file_lang)
@@ -68,7 +69,9 @@ $this->ensure_page(true); // TODO: upload for forums?
 		echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileRemove') . '</h3>';
 		echo '<ul class="menu">' .
 				'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
-				'<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>' .
+				($can_upload
+					? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
+					: '') .
 			"</ul><br />\n";
 
 		$file = $get_file((int) $_GET['file_id']);
@@ -180,7 +183,9 @@ $this->ensure_page(true); // TODO: upload for forums?
 				echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileViewProperties') . '</h3>';
 				echo '<ul class="menu">' .
 						'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
-						'<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>' .
+						($can_upload
+							? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
+							: '') .
 					"</ul><br />\n";
 
 				echo '<div class="fileinfo">';
@@ -188,9 +193,9 @@ $this->ensure_page(true); // TODO: upload for forums?
 				echo '<ul class="menu">' .
 						'<li class="active">' . $this->_t('FileViewProperties') . '</li>' .
 						($can_upload
-								?	'<li><a href="' . $this->href('attachments', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
-									// TODO: file revisions here
-									'<li><a href="' . $this->href('attachments', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('RemoveFile') . '</a></li>'
+							?	'<li><a href="' . $this->href('attachments', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
+								// TODO: file revisions here
+								'<li><a href="' . $this->href('attachments', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('RemoveFile') . '</a></li>'
 							: '') .
 					"</ul><br /><br />\n";
 
@@ -273,9 +278,11 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 					echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileEditProperties') . '</h3>';
 					echo '<ul class="menu">
-							<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>
-							<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . "</a></li>
-						</ul><br />\n";
+							<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
+							($can_upload
+								? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
+								: '') .
+						"</ul><br />\n";
 
 					// !!!!! patch link to not show pictures when not needed
 					$path2 = str_replace('file:/', '_file:/', $path);
@@ -331,6 +338,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 	else
 	{
 		// 2 PROCESS POSTS
+
 		if (isset($_POST['remove']))
 		{
 			// 2.a DELETE FILE
@@ -395,7 +403,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 		}
 		else if (isset($_POST['edit']))
 		{
-			// 2.b UPDATE CHANGED FILE PROPERTIES
+			// 2.b UPDATE FILE PROPERTIES
 
 			$file = $get_file((int) $_POST['file_id']);
 
@@ -443,15 +451,15 @@ $this->ensure_page(true); // TODO: upload for forums?
 		}
 		else
 		{
-			// show uploaded files for current page
+			// 3. show attachments for current page
 			if ($this->has_access('read'))
 			{
 				echo '<h3>' . $this->_t('Attachments') . '</h3>';
 				echo '<ul class="menu">' .
 						'<li class="active">' . $this->_t('Attachments') . '</li>' .
 						($can_upload
-						? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
-						: '') .
+							? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
+							: '') .
 					"</ul><br />\n";
 
 				if (isset($_GET['files']) && $_GET['files'] == 'global')
