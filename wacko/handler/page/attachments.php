@@ -188,7 +188,10 @@ $this->ensure_page(true); // TODO: upload for forums?
 							: '') .
 					"</ul><br />\n";
 
-				echo '<div class="fileinfo">';
+				if ($this->has_access('read', $file['page_id']))
+				{
+					echo '<div class="fileinfo">';
+
 				echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
 				echo '<ul class="menu">' .
 						'<li class="active">' . $this->_t('FileViewProperties') . '</li>' .
@@ -259,7 +262,10 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 				<br />
 
-			<?php	echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";?>
+			<?php
+				}
+
+			echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";?>
 				<br />
 				<br />
 				</div>
