@@ -14,9 +14,10 @@ if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
 	$this->http->redirect($this->href());
 }
 
-$a			= (int) $_GET['a'];
-$b			= (int) $_GET['b'];
-$diffmode	= (int) @$_GET['diffmode'];
+$a					= (int) $_GET['a'];
+$b					= (int) $_GET['b'];
+$diffmode			= (int) @$_GET['diffmode'];
+$hide_minor_edit	= (int) @$_GET['minor_edit'];
 
 if ($a < 0) $a = 0;
 if ($b < 0) $b = 0;
@@ -27,16 +28,16 @@ if ($a == $b)
 	return;
 }
 
-$load_diff_page = function ($id)
+$load_diff_page = function ($revision_id)
 {
 	// extracting
-	if ($id > 0)
+	if ($revision_id > 0)
 	{
 		return $this->db->load_single(
 			"SELECT r.page_id, r.revision_id, r.modified, r.body, r.page_lang, u.user_name " .
 			"FROM " . $this->db->table_prefix . "revision r " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) " .
-			"WHERE r.revision_id = '" . (int) $id."' " .
+			"WHERE r.revision_id = '" . (int) $revision_id."' " .
 			"LIMIT 1");
 	}
 	else
@@ -53,11 +54,13 @@ $load_diff_page = function ($id)
 $page_a = $load_diff_page($b);
 $page_b = $load_diff_page($a);
 
-if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
-		$this->page['page_id'] == $page_b['page_id'] &&
-		$this->has_access('read', $page_a['page_id']))
+if ($page_a && $page_b
+	&& $this->page['page_id'] == $page_a['page_id']
+	&& $this->page['page_id'] == $page_b['page_id']
+	&& $this->has_access('read', $page_a['page_id']))
 {
-	$revisions = $this->load_revisions($this->page['page_id'], 1, $this->is_admin()); // TODO: $hide_minor_edit
+	// TODO: $hide_minor_edit
+	$revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
 
 	$revisions_menu = function ($rev, $page) use ($revisions, $diffmode, $a, $b)
 	{
@@ -69,23 +72,27 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		$out .= '<div class="diffdown-content">';
 
 		$out .= '<!--nomail-->';
+
 		foreach ($revisions as $r)
 		{
 			$act = ($r['revision_id'] == $a || $r['revision_id'] == $b);
+
 			if ($act)
 			{
 				$href = '#';
 			}
 			else
 			{
-				$params = ($a != $rev)? 'a=' . $r['revision_id'] . '&amp;b=' . $b : 'a=' . $a . '&amp;b=' . $r['revision_id'];
-				$href = $this->href('diff', '', $params . '&amp;diffmode=' . $diffmode);
+				$params	= ($a != $rev)? 'a=' . $r['revision_id'] . '&amp;b=' . $b : 'a=' . $a . '&amp;b=' . $r['revision_id'];
+				$href	= $this->href('diff', '', $params . '&amp;diffmode=' . $diffmode);
 			}
+
 			$out .= '<a href="' . $href . '">';
 			$out .= '<span style="display: inline-block; width:40px;">' . $r['version_id'] . '.</span>';
 			$out .= $this->get_time_formatted($r['modified']);
 			$out .= '</a>';
 		}
+
 		$out .= '<!--/nomail-->';
 
 		return $out . '</div></div>';
@@ -98,15 +105,14 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		//'<a href="' . $this->href('', '', ($a > 0 ? 'revision_id=' . $page_a['revision_id'] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
 		//'<a href="' . $this->href('', '', ($b > 0 ? 'revision_id=' . $page_b['revision_id'] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
 		$this->compose_link_to_page($this->tag, '', '', 0)) . "</div>\n";
-	echo "<br />\n";
-
-	echo "<br />\n";
+	echo "<br />\n<br />\n";
 
 	// print navigation
-	echo '<!--nomail-->' . 
+	echo '<!--nomail-->' .
 		'<ul class="menu">';
 
 	$params = 'a=' . $a . '&amp;b=' . $b . '&amp;diffmode=';
+
 	for ($mode = 0; ($text = $this->_t('DiffMode' . $mode)) !== null; ++$mode)
 	{
 		if ($text)
@@ -117,7 +123,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		}
 	}
 
-	echo '</ul>' . 
+	echo '</ul>' .
 		'<!--/nomail-->';
 
 	// do diffs
@@ -161,6 +167,7 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 		{
 			echo "<br />\n" . $this->_t('NoDifferences');
 		}
+
 		break;
 
 	case 0:
@@ -300,10 +307,12 @@ if ($page_a && $page_b && $this->page['page_id'] == $page_a['page_id'] &&
 			{
 				$renderer = new Diff_Renderer_Text_Context;
 			}
+
 			echo '<pre>';
 			echo htmlspecialchars($diff->render($renderer), ENT_NOQUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET);
 			echo '</pre>';
 		}
+
 		break;
 	}
 }
@@ -315,42 +324,42 @@ else
 $this->add_html_head('
 <style>
 .diffbtn {
-    #background-color: #4CAF50;
-    #color: white;
-    padding: 2px 6px;
-    font-size: 12px;
-    border: none;
-    cursor: pointer;
+	#background-color: #4CAF50;
+	#color: white;
+	padding: 2px 6px;
+	font-size: 12px;
+	border: none;
+	cursor: pointer;
 }
 
 .diffdown {
-    position: relative;
-    display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .diffdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 .diffdown-content a {
-    color: black;
-    padding: 2px 6px;
-    text-decoration: none;
-    display: block;
+	color: black;
+	padding: 2px 6px;
+	text-decoration: none;
+	display: block;
 }
 
 .diffdown-content a:hover {background-color: #f1f1f1}
 
 .diffdown:hover .diffdown-content {
-    display: block;
+	display: block;
 }
 
 .diffdown:hover .diffbtn {
-    #background-color: #3e8e41;
+	#background-color: #3e8e41;
 }
 </style>
 ');

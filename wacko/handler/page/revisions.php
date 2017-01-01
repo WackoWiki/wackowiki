@@ -16,7 +16,14 @@ if ($this->hide_revisions)
 $this->ensure_page(true);
 
 // show minor edits
-$hide_minor_edit = @$_GET['minor_edit'];
+if ($this->db->minor_edit)
+{
+	$hide_minor_edit = (int) @$_GET['minor_edit'];
+}
+else
+{
+	$hide_minor_edit = 0;
+}
 
 // show deleted pages
 $show_deleted = $this->is_admin();
@@ -62,7 +69,11 @@ if ($this->has_access('read'))
 		if ($this->db->minor_edit)
 		{
 			// STS: ?!..
-			echo '<br />' . ((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? '<a href="' . $this->href('revisions', '', 'minor_edit=1') . '">' . $this->_t('MinorEditHide') . '</a>' : '<a href="' . $this->href('revisions', '', 'minor_edit=0') . '">' . $this->_t('MinorEditShow') . '</a>');
+			// filter minor edits
+			echo '<input name="minor_edit" value="' . $hide_minor_edit . '" type="hidden">' . "\n";
+			echo '<br />' . ($hide_minor_edit
+					? '<a href="' . $this->href('revisions', '', 'minor_edit=0') . '">' . $this->_t('MinorEditShow') . '</a>'
+					: '<a href="' . $this->href('revisions', '', 'minor_edit=1') . '">' . $this->_t('MinorEditHide') . '</a>');
 		}
 
 		echo "</p>\n" . '<ul class="revisions">' . "\n";
@@ -120,9 +131,9 @@ if ($this->has_access('read'))
 						<a href="' . $this->href('show', '', 'revision_id=' . $page['revision_id']) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
 			echo '<span style="display: inline-block; width:130px;">' . "&nbsp; — (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
 			echo $place_holder."&nbsp;" . $this->_t('By') . " " .
-						$this->user_link($page['user_name'], '', true, false);
+						$this->user_link($page['user_name'], '', true, false) . ' ';
 			echo $edit_note;
-			echo ' '.($page['minor_edit'] ? 'm' : '');
+			echo ' ' . ($page['minor_edit'] ? 'm' : '');
 
 			// review
 			if ($this->db->review)

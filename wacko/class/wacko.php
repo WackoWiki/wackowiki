@@ -150,27 +150,25 @@ class Wacko
 		}
 		else
 		{
-			// soon we'll need to have page_id when saving a new page to continue working with $page_id instead of $tag
 			if (!isset($this->page_id_cache[$tag]))
 			{
-				// returns array ( [id] => value )
-				$get_page_id = $this->db->load_single(
+				$page = $this->db->load_single(
 					"SELECT page_id " .
 					"FROM " . $this->db->table_prefix . "page " .
 					"WHERE tag = " . $this->db->q($tag) . " " .
 					"LIMIT 1");
 
-				// get page_ID value
-				$new_page_id = $get_page_id['page_id'];
+				$page_id = $page['page_id'];
 
-				$this->page_id_cache[$tag] = $new_page_id;
+				// cache it
+				$this->page_id_cache[$tag] = $page_id;
 			}
 			else
 			{
-				$new_page_id = $this->page_id_cache[$tag];
+				$page_id = $this->page_id_cache[$tag];
 			}
 
-			return $new_page_id;
+			return $page_id;
 		}
 	}
 
@@ -3424,6 +3422,7 @@ class Wacko
 					$unwtag	= substr($unwtag, 0, strrpos($unwtag, '/'));
 				}
 
+				// not used ..?
 				if ($handler)
 				{
 					if (!isset($data))

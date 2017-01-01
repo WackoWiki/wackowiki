@@ -103,7 +103,7 @@ if ($this->has_access('read'))
 		$data
 		);
 
-		print '<code>' . nl2br(trim($data)) . '</code>';
+		echo '<code>' . nl2br(trim($data)) . '</code>';
 
 		$this->current_context--;
 
