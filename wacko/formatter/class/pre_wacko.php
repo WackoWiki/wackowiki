@@ -43,11 +43,11 @@ class PreFormatter
 		}
 		else if ($thing == '::@::')
 		{
-			return sprintf($wacko->db->name_date_macro, '((user:' . $wacko->get_user_name() . ' ' . $wacko->get_user_name() . '))', date($wacko->db->date_macro_format));
+			return sprintf($wacko->db->name_date_macro, '((user:' . $wacko->get_user_name() . ' ' . $wacko->get_user_name() . '))', date($this->db->date_format . ' ' . $this->db->time_format));
 		}
 		else if ($thing == '::+::')
 		{
-			return date($wacko->db->date_macro_format);
+			return date($this->db->date_format . ' ' . $this->db->time_format);
 		}
 		else if (  preg_match('/^(\[\[)(.+)(\]\])$/', $thing, $matches)
 				|| preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches))
