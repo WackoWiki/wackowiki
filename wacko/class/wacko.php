@@ -306,8 +306,8 @@ class Wacko
 		// default: d.m.Y H:i
 
 		// XXX: testing strftime(), charset issue with CP1251
-		#setlocale(LC_ALL, $this->language['locale']);
-		#setlocale(LC_ALL, 'ru_RU.UTF-8');
+		#setlocale(LC_TIME, $this->language['locale']);
+		#setlocale(LC_TIME, 'ru_RU.UTF-8');
 		#return $this->try_utf_decode(strftime('%d. %B %Y' . ' ' . '%H.%M', $local_time));
 
 		return date($this->db->date_format . ' ' . $this->db->time_format, $local_time);
