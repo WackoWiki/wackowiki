@@ -193,39 +193,39 @@ $this->ensure_page(true); // TODO: upload for forums?
 					echo '<div class="fileinfo">';
 
 				echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
-				echo '<ul class="menu">' .
-						'<li class="active">' . $this->_t('FileViewProperties') . '</li>' .
-						($can_upload
-							?	'<li><a href="' . $this->href('attachments', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
-								// TODO: file revisions here
-								'<li><a href="' . $this->href('attachments', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('RemoveFile') . '</a></li>'
-							: '') .
-					"</ul><br /><br />\n";
+					echo '<ul class="menu">' .
+							'<li class="active">' . $this->_t('FileViewProperties') . '</li>' .
+							($can_upload
+								?	'<li><a href="' . $this->href('attachments', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
+									// TODO: file revisions here
+									'<li><a href="' . $this->href('attachments', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('RemoveFile') . '</a></li>'
+								: '') .
+						"</ul><br /><br />\n";
 
-				// show image
-				if ($file['picture_w'] || $file['file_ext'] == 'svg')
-				{ ?>
-					<span><?php echo $this->link($path . $file['file_name']); ?></span>
-					<?php
-				} ?>
+					// show image
+					if ($file['picture_w'] || $file['file_ext'] == 'svg')
+					{ ?>
+						<span><?php echo $this->link($path . $file['file_name']); ?></span>
+						<?php
+					} ?>
 
-				<table class="upload tbl_fixed">
-					<tr>
-						<th><?php echo $this->_t('FileSyntax'); ?>:</th>
-						<td><?php echo '<code>' . $path . $file['file_name'] . '</code>'; ?></td>
-					</tr>
-					<tr>
-						<th><?php echo $this->_t('UploadBy'); ?>:</th>
-						<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
-					</tr>
-					<tr>
-					<th><?php echo $this->_t('FileAdded'); ?>:</th>
-						<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
+					<table class="upload tbl_fixed">
+						<tr>
+							<th><?php echo $this->_t('FileSyntax'); ?>:</th>
+							<td><?php echo '<code>' . $path . $file['file_name'] . '</code>'; ?></td>
 						</tr>
-					<tr>
-						<th><?php echo $this->_t('FileSize'); ?>:</th>
-						<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
-					</tr>
+						<tr>
+							<th><?php echo $this->_t('UploadBy'); ?>:</th>
+							<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
+						</tr>
+						<tr>
+						<th><?php echo $this->_t('FileAdded'); ?>:</th>
+							<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
+							</tr>
+						<tr>
+							<th><?php echo $this->_t('FileSize'); ?>:</th>
+							<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
+						</tr>
 <?php
 					// image dimension
 					if ($file['picture_w'])
@@ -263,13 +263,14 @@ $this->ensure_page(true); // TODO: upload for forums?
 				<br />
 
 			<?php
+
+				echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";?>
+					<br />
+					<br />
+					</div>
+<?php
 				}
 
-			echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";?>
-				<br />
-				<br />
-				</div>
-<?php
 			}
 			else if (isset($_GET['edit']))
 			{

@@ -120,7 +120,7 @@ function admin_config_upload(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage per user:</strong><br />
+				<td class="label"><label for="upload_quota_per_user"><strong>Storage quota per user:</strong><br />
 					<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota_per_user, false, true, true, false);?>" />
 					<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota_per_user, false); ?>

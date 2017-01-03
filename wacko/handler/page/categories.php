@@ -5,11 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// Categories tags tagging annotation
+// Categories tags tagging annotation labels
 // TODO:
 //	- multilevel hierarchical categories (first we need to
 //	  find a way to unwrap table-structured SQL data array
 //	  into a tree-structured multilevel array)
+//	- split in functions and move into new class -> tagging for attachments
 
 echo '<h3>';
 echo $this->_t('CategoriesFor') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0);
@@ -67,7 +68,7 @@ if ($this->is_owner() || $this->is_admin())
 				"LIMIT 1"))
 			{
 				$this->set_message($this->_t('CategoriesAlreadyExists'));
-				$_POST['change'] = $_POST['category_id'];
+				$_POST['change_id'] = $_POST['category_id'];
 				$_POST['create'] = 1;
 			}
 			else
@@ -101,7 +102,7 @@ if ($this->is_owner() || $this->is_admin())
 				"LIMIT 1"))
 			{
 				$this->set_message($this->_t('CategoriesAlreadyExists'));
-				$_POST['change'] = $_POST['category_id'];
+				$_POST['change_id'] = $_POST['category_id'];
 				$_POST['rename'] = 1;
 			}
 			else
@@ -214,12 +215,12 @@ if ($this->is_owner() || $this->is_admin())
 		// add new item
 		if (isset($_POST['create']))
 		{
-			if (isset($_POST['change']) || isset($_POST['category_id']))
+			if (isset($_POST['change_id']) || isset($_POST['category_id']))
 			{
 				$word = $this->db->load_single(
 					"SELECT category_id, parent_id, category " .
 					"FROM " . $this->db->table_prefix . "category " .
-					"WHERE category_id = '" . (int) $_POST['change'] . "' " .
+					"WHERE category_id = '" . (int) $_POST['change_id'] . "' " .
 					"LIMIT 1");
 
 				$parent_id = ($word['parent_id'] == 0 ? $word['category_id'] : $parent_id = $word['parent_id']);
@@ -248,16 +249,16 @@ if ($this->is_owner() || $this->is_admin())
 			echo $this->form_close();
 		}
 		// rename item
-		else if (isset($_POST['rename']) && isset($_POST['change']))
+		else if (isset($_POST['rename']) && isset($_POST['change_id']))
 		{
 			if ($word = $this->db->load_single(
 				"SELECT category
 				FROM " . $this->db->table_prefix . "category
-				WHERE category_id = '" . (int) $_POST['change'] . "'
+				WHERE category_id = '" . (int) $_POST['change_id'] . "'
 				LIMIT 1"))
 			{
 				echo $this->form_open('rename_category', ['page_method' => 'categories']);
-				echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change'] . '" />' . "\n";
+				echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change_id'] . '" />' . "\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="new_name">' .
 					$this->_t('CategoriesRename') . ' \'<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\' in</label> ' .
@@ -271,12 +272,12 @@ if ($this->is_owner() || $this->is_admin())
 			}
 		}
 		// (un)group item
-		else if (isset($_POST['ugroup']) && isset($_POST['change']))
+		else if (isset($_POST['ugroup']) && isset($_POST['change_id']))
 		{
 			if ($word = $this->db->load_single(
 				"SELECT category_id, parent_id, category, category_lang
 				FROM " . $this->db->table_prefix . "category
-				WHERE category_id = '" . (int) $_POST['change'] . "'
+				WHERE category_id = '" . (int) $_POST['change_id'] . "'
 				LIMIT 1"))
 			{
 				$parents = $this->db->load_all(
@@ -293,7 +294,7 @@ if ($this->is_owner() || $this->is_admin())
 				}
 
 				echo $this->form_open('group_categories', ['page_method' => 'categories']);
-				echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change'] . '" />' . "\n";
+				echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change_id'] . '" />' . "\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">' .
 					$this->_t('CategoriesGroup') . ' \'<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\' with</label> ' .
@@ -311,16 +312,16 @@ if ($this->is_owner() || $this->is_admin())
 		}
 
 		// delete item
-		if (isset($_POST['delete']) && isset($_POST['change']) && $_POST['change'])
+		if (isset($_POST['delete']) && isset($_POST['change_id']) && $_POST['change_id'])
 		{
 			if ($word = $this->db->load_single(
 				"SELECT category
 				FROM " . $this->db->table_prefix . "category
-				WHERE category_id = '" . (int) $_POST['change'] . "'
+				WHERE category_id = '" . (int) $_POST['change_id'] . "'
 				LIMIT 1"))
 			{
 				echo $this->form_open('remove_category', ['page_method' => 'categories']);
-				echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change'] . '" />' . "\n";
+				echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change_id'] . '" />' . "\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">' .
 					$this->_t('CategoriesDelete') . ' \'<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
@@ -352,7 +353,7 @@ if ($this->is_owner() || $this->is_admin())
 			# if ($n++ > 0) echo '<hr />';
 			echo '<li class="lined"><span class="">' . "\n\t";
 			echo ($this->is_admin() || $this->db->owners_can_change_categories == true
-					? '<input type="radio" name="change" value="' . $category_id . '" />'
+					? '<input type="radio" name="change_id" value="' . $category_id . '" />'
 					: '') .
 				'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? ( in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' /> ' . "\n\t" .
 				'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
@@ -368,7 +369,7 @@ if ($this->is_owner() || $this->is_admin())
 
 					echo "\t\t" . '<li><span class="nobr">' . "\n\t\t\t" .
 							($this->is_admin() || $this->db->owners_can_change_categories == true
-								? '<input type="radio" name="change" value="' . $category_id . '" />' . "\n\t\t\t"
+								? '<input type="radio" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
 								: '') .
 							'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' />' . "\n\t\t\t" .
 							'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t" .
