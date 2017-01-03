@@ -251,7 +251,6 @@ $wacko_config_defaults = [
 	'time_format_seconds'			=> 'H:i:s',
 	'name_date_macro'				=> '%s (%s)',
 	'date_macro_format'				=> 'd.m.Y H:i',
-	'date_precise_format'			=> 'd.m.Y H:i:s',
 	'timezone'						=> 0.00,
 	'dst'							=> 0,
 

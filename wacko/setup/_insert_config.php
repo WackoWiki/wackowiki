@@ -47,7 +47,6 @@ $config_db['comment_delay']					= $config['comment_delay'];
 $config_db['csp']							= $config['csp'];
 $config_db['date_format']					= $config['date_format'];
 $config_db['date_macro_format']				= $config['date_macro_format'];
-$config_db['date_precise_format']			= $config['date_precise_format'];
 $config_db['debug']							= $config['debug'];
 $config_db['debug_admin_only']				= $config['debug_admin_only'];
 $config_db['debug_sql_threshold']			= $config['debug_sql_threshold'];
