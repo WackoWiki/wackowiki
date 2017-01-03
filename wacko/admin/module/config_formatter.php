@@ -48,7 +48,6 @@ function admin_config_formatter(&$engine, &$module)
 		$config['time_format']				= (string) $_POST['time_format'];
 		$config['time_format_seconds']		= (string) $_POST['time_format_seconds'];
 		$config['name_date_macro']			= (string) $_POST['name_date_macro'];
-		$config['date_macro_format']		= (string) $_POST['date_macro_format'];
 		$config['timezone']					= (float)$_POST['timezone'];
 		$config['dst']						= (int) $_POST['dst'];
 		$config['link_target']				= (int) $_POST['link_target'];
@@ -190,16 +189,9 @@ function admin_config_formatter(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="name_date_macro"><strong>The format of a macro:</strong><br />
+				<td class="label"><label for="name_date_macro"><strong>The format of the <code>::@::</code> macro:</strong><br />
 				<small>(name, time), e.g. <code>UserName (17.11.2016 16:48)</code></small></label></td>
 				<td><input type="text" maxlength="50" style="width:200px;" id="name_date_macro" name="name_date_macro" value="<?php echo htmlspecialchars($engine->db->name_date_macro, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="date_macro_format"><strong>Format Date / Time for a macro:</strong></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="date_macro_format" name="date_macro_format" value="<?php echo htmlspecialchars($engine->db->date_macro_format, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
