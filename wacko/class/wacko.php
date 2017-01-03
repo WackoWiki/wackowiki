@@ -295,7 +295,7 @@ class Wacko
 	{
 		$local	= $this->sql2localtime($text);
 
-		return date($this->db->date_precise_format, $local);
+		return date($this->db->date_format . ' ' . $this->db->time_format_seconds, $local);
 	}
 
 	function get_time_formatted($text) // STS: rename to sql_time_formatted
@@ -5261,7 +5261,7 @@ class Wacko
 		// cache
 		$this->_acl	= $acl;
 
-		// lock down to read only
+		// locked down to read only
 		if ($this->db->acl_lock == true && $privilege != 'read')
 		{
 			return false;
