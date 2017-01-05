@@ -330,11 +330,12 @@ $this->ensure_page(true); // TODO: upload for forums?
 	else
 	{
 		// 1.d UPLOAD FILES
-		echo '<h3>' . $this->_t('UploadFiles') . '</h3>';
+
 		echo '<ul class="menu">
-				<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>
-				<li class="active">' . $this->_t('UploadFile') . '</li>' .
-			"</ul><br />\n";
+				<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
+			"</ul>\n";
+
+		echo '<h3>' . $this->_t('UploadFiles') . '</h3>';
 
 		if ($can_upload)
 		{
