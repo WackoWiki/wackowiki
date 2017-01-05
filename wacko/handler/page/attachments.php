@@ -66,13 +66,20 @@ $this->ensure_page(true); // TODO: upload for forums?
 	if (isset($_GET['remove']) & $can_upload) // show the form
 	{
 		// 1.a REMOVE FILE CONFIRMATION
-		echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileRemove') . '</h3>';
 		echo '<ul class="menu">' .
 				'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
 				($can_upload
 					? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
 					: '') .
-			"</ul><br />\n";
+			"</ul>\n";
+
+		echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileRemove') . '</h3>';
+		echo '<ul class="menu">' .
+					'<li><a href="' . $this->href('attachments', '', ['show', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
+					'<li><a href="' . $this->href('attachments', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
+					// file revisions here
+					'<li class="active">' . $this->_t('FileRemove') . '</li>' .
+				"</ul><br /><br />\n";
 
 		$file = $get_file((int) $_GET['file_id']);
 
@@ -98,12 +105,6 @@ $this->ensure_page(true); // TODO: upload for forums?
 ?>
 			<div class="fileinfo"><?php
 			echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
-			echo '<ul class="menu">' .
-					'<li><a href="' . $this->href('attachments', '', ['show', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
-					'<li><a href="' . $this->href('attachments', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
-					// file revisions here
-					'<li class="active">' . $this->_t('FileRemove') . '</li>' .
-				"</ul><br /><br />\n";
 ?>
 			<table class="upload tbl_fixed">
 				<tr>
@@ -179,28 +180,28 @@ $this->ensure_page(true); // TODO: upload for forums?
 			if (isset($_GET['show']))
 			{
 				// 1.b SHOW FILE PROPERTIES
-
-				echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileViewProperties') . '</h3>';
 				echo '<ul class="menu">' .
 						'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
 						($can_upload
 							? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
 							: '') .
-					"</ul><br />\n";
+					"</ul>\n";
 
-				if ($this->has_access('read', $file['page_id']))
-				{
-					echo '<div class="fileinfo">';
-
-				echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
-					echo '<ul class="menu">' .
+				echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileViewProperties') . '</h3>';
+				echo '<ul class="menu">' .
 							'<li class="active">' . $this->_t('FileViewProperties') . '</li>' .
 							($can_upload
 								?	'<li><a href="' . $this->href('attachments', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
 									// TODO: file revisions here
 									'<li><a href="' . $this->href('attachments', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('RemoveFile') . '</a></li>'
 								: '') .
-						"</ul><br /><br />\n";
+						"</ul><br />\n";
+
+				if ($this->has_access('read', $file['page_id']))
+				{
+					echo '<div class="fileinfo">';
+
+				echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
 
 					// show image
 					if ($file['picture_w'] || $file['file_ext'] == 'svg')
@@ -281,30 +282,30 @@ $this->ensure_page(true); // TODO: upload for forums?
 				{
 					// 1.c EDIT FILE PROPERTIES
 
-					echo $this->form_open('upload_file', ['page_method' => 'attachments']);
-
-					echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileEditProperties') . '</h3>';
-					echo '<ul class="menu">
-							<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
+					echo '<ul class="menu">' .
+							'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
 							($can_upload
 								? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
 								: '') .
-						"</ul><br />\n";
+						"</ul>\n";
 
-					// !!!!! patch link to not show pictures when not needed
-					$path2 = str_replace('file:/', '_file:/', $path);
-?>
-					<div class="fileinfo">
-					<?php
-					echo '<h4>' . $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
+					echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileEditProperties') . '</h3>';
 					echo '<ul class="menu">' .
 							'<li><a href="' . $this->href('attachments', '', ['show', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
 							'<li class="active">' . $this->_t('FileEditProperties') . '</li>' .
 							// file revisions here
 							'<li><a href="' . $this->href('attachments', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>' .
-						"</ul><br /><br />\n";
+						"</ul><br />\n";
 
-						?>
+					// !!!!! patch link to not show pictures when not needed
+					$path2 = str_replace('file:/', '_file:/', $path);
+
+					echo $this->form_open('upload_file', ['page_method' => 'attachments']);
+?>
+					<div class="fileinfo">
+					<?php
+					echo '<h4>' . $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
+					?>
 					<table class="upload">
 						<tr>
 							<th><?php echo $this->_t('FileDesc'); ?>:</th>
@@ -461,17 +462,16 @@ $this->ensure_page(true); // TODO: upload for forums?
 			// 3. show attachments for current page
 			if ($this->has_access('read'))
 			{
-				echo '<h3>' . $this->_t('Attachments') . '</h3>';
 				echo '<ul class="menu">' .
-						'<li class="active">' . $this->_t('Attachments') . '</li>' .
+						#'<li class="active">' . $this->_t('Attachments') . '</li>' .
 						($can_upload
 							? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
 							: '') .
-					"</ul><br />\n";
+					"</ul>\n";
 
 				if (isset($_GET['files']) && $_GET['files'] == 'global')
 				{
-					echo '<h4>' . $this->_t('AttachmentsGlobal') . '</h4>';
+					echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('AttachmentsGlobal') . '</h3>';
 					echo '<ul class="menu">' .
 							'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('AttachmentsToPage') . '</a></li>' .
 							'<li class="active">' . $this->_t('AttachmentsGlobal') . '</li>' .
@@ -482,7 +482,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 				}
 				else if (isset($_GET['files']) && $_GET['files'] == 'all')
 				{
-					echo '<h4>' . $this->_t('AttachmentsAll') . '</h4>';
+					echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('AttachmentsAll') . '</h3>';
 					echo '<ul class="menu">' .
 							'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('AttachmentsToPage') . '</a></li>' .
 							'<li><a href="' . $this->href('attachments', '', ['files=global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
@@ -493,7 +493,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 				}
 				else
 				{
-					echo '<h4>' . $this->_t('AttachmentsToPage') . '</h4>';
+					echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('AttachmentsToPage') . '</h3>';
 					echo '<ul class="menu">' .
 							'<li class="active">' . $this->_t('AttachmentsToPage') . '</li>' .
 							'<li><a href="' . $this->href('attachments', '', ['files=global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
