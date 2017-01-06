@@ -362,20 +362,20 @@ if ($this->has_access('read')
 			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
 		}
 
-		// minor edit
-		if ($this->page && $this->db->minor_edit != 0)
-		{
-			$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit"/>';
-			$output .= '<label for="minor_edit">' . $this->_t('EditMinor') . '</label>';
-			$output .= '<br />' . "\n";
-		}
-		else
-		{
-			$output .= '<br />' . "\n";
-		}
-
 		if ($user)
 		{
+			// minor edit
+			if ($this->page && $this->db->minor_edit != 0)
+			{
+				$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit"/>';
+				$output .= '<label for="minor_edit">' . $this->_t('EditMinor') . '</label>';
+				$output .= '<br />' . "\n";
+			}
+			else
+			{
+				$output .= '<br />' . "\n";
+			}
+
 			// reviewed
 			if ($this->page && $this->db->review != 0 && $this->is_reviewer())
 			{

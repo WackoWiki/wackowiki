@@ -9,6 +9,25 @@ if (!defined('IN_WACKO'))
 // can turn off some undesirables by setting text in lang/wacko.??.php
 // files for unwanted DiffMode# to ''
 
+/*
+ * DiffMode
+ * 	0	Full diff
+ * 	1	Simple diff
+ *	2	Source
+ *	3	Side by side
+ *	4	Inline
+ *	5	Unified
+ *	6	Context
+ *
+ * default setting
+ * 	page/revisions.xml	=> 2
+ * 	notify_watcher()	=> 2
+ *
+ * TODO: make diff modes acceccible via config
+ * - to change mode for cases above
+ * - to offer only a subset
+*/
+
 if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
 {
 	$this->http->redirect($this->href());
@@ -64,6 +83,7 @@ if ($page_a && $page_b
 
 	$revisions_menu = function ($rev, $page) use ($revisions, $diffmode, $a, $b)
 	{
+
 		$out = '<div class="diffdown">'; //<button class="diffbtn">';
 		$out .= '<a href="' . $this->href('', '', ($page['revision_id'] > 0? 'revision_id=' . $page['revision_id'] : '')) . '">' .
 			$this->get_time_formatted($page['modified']) .
@@ -71,7 +91,7 @@ if ($page_a && $page_b
 		//$out .= '</button><div class="diffdown-content">';
 		$out .= '<div class="diffdown-content">';
 
-		$out .= '<!--nomail-->';
+		#$out .= '<!--nomail-->';
 
 		foreach ($revisions as $r)
 		{
@@ -93,12 +113,13 @@ if ($page_a && $page_b
 			$out .= '</a>';
 		}
 
-		$out .= '<!--/nomail-->';
+		#$out .= '<!--/nomail-->';
 
 		return $out . '</div></div>';
 	};
 
 	// print header
+	echo "<!--nomail-->\n";
 	echo Ut::perc_replace('<div class="diffinfo">' . $this->_t('Comparison'),
 		$revisions_menu($a, $page_a),
 		$revisions_menu($b, $page_b),
@@ -108,8 +129,7 @@ if ($page_a && $page_b
 	echo "<br />\n<br />\n";
 
 	// print navigation
-	echo '<!--nomail-->' .
-		'<ul class="menu">';
+	echo '<ul class="menu">';
 
 	$params = 'a=' . $a . '&amp;b=' . $b . '&amp;diffmode=';
 
@@ -123,8 +143,8 @@ if ($page_a && $page_b
 		}
 	}
 
-	echo '</ul>' .
-		'<!--/nomail-->';
+	echo "</ul>\n" .
+		"<!--/nomail-->\n";
 
 	// do diffs
 	switch ($diffmode)
