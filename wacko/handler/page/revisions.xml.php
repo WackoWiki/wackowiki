@@ -35,7 +35,7 @@ if ($this->has_access('read') && !$this->hide_revisions)
 
 		$c					= 0;
 		$_GET['b']			= -1;
-		$_GET['diffmode']	= 1;
+		$_GET['diffmode']	= 2; // 2 - source diff
 
 		foreach ($revisions as $page)
 		{
@@ -51,7 +51,7 @@ if ($this->has_access('read') && !$this->hide_revisions)
 
 
 				echo "<item>\n";
-				echo "<title>" . $this->get_time_formatted($_GET['c']) . "</title>\n";
+				echo "<title>" . $page['user_name'] . ': ' . $page['edit_note'] . "</title>\n";
 				echo "<link>" . $this->href('show', '', 'revision_id=' . $_GET['a']) . "</link>\n";
 				echo "<guid isPermaLink=\"true\">" . $this->href('', $etag) . "</guid>\n";
 
