@@ -22,9 +22,9 @@ echo "<url>" . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') 
 echo "<width>108</width>\n";
 echo "<height>50</height>\n";
 echo "</image>\n";
-echo "<language>en-us</language>\n";
-echo "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-// echo "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
+echo "<language>" . $this->page['page_lang'] . "</language>\n";
+#echo "<docs>http://www.rssboard.org/rss-specification</docs>\n";
+#echo "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
 
 if ($this->has_access('read') && !$this->hide_revisions)
 {

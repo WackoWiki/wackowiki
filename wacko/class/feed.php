@@ -58,6 +58,7 @@ class Feed
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
 		$xml .= "<language>" . $this->lang . "</language>\n";
+		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";
 		#$xml .= "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
 
 		if (list ($pages, $pagination) = $this->engine->load_changed())
@@ -174,6 +175,8 @@ class Feed
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
+		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";
+		#$xml .= "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
 
 		$i = 0;
 
@@ -255,6 +258,7 @@ class Feed
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
 		$xml .= "<language>" . $this->lang . "</language>\n";
+		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";
 		#$xml .= "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
 
 		if ($comments = $this->engine->load_comment())

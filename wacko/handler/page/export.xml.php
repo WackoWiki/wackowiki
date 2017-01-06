@@ -16,8 +16,8 @@ echo "\t\t<link>" . $this->db->base_url . "</link>\n";
 echo "\t\t<description>" . $this->_t('ExportClusterXML') . $this->db->site_name . "/" . $this->tag . "</description>\n";
 echo "\t\t<lastBuildDate>" . date('r') . "</lastBuildDate>\n";
 echo "\t\t<language></language>\n";//!!!
-echo "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-echo "\t\t<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
+#echo "<docs>http://www.rssboard.org/rss-specification</docs>\n";
+#echo "\t\t<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
 
 if ($this->has_access('read'))
 {
