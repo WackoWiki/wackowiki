@@ -31,7 +31,7 @@ class Templatest
 		{
 			if ($cache_dir)
 			{
-				$cachefile = Ut::join_path($cache_dir, strtr($filename, '/', ':'));
+				$cachefile = Ut::join_path($cache_dir, strtr($filename, '/', '@'));
 
 				clearstatcache();
 
@@ -362,6 +362,7 @@ class Templatest
 				{
 					$chunks[$chunk++] = substr($text, $offset, $until - $offset);
 				}
+
 				$offset = $next;
 
 				$tag	= trim($m[2][0]);
