@@ -44,6 +44,7 @@ $letter = $get_letter(isset($_GET['letter'])? $_GET['letter'] : $letter);
 
 // get letters of alphabet with existing pages, and cache them in _SESSION
 $letters = &$this->sess->pi_letters;
+
 if (!isset($letters)
 	|| $this->sess->pi_for != $page
 	|| $this->sess->pi_lang != $lang

@@ -2156,7 +2156,9 @@ table.forum td {
 
 /* categories tag ------------- */
 .tag {
-	background: #f0f4f5;
+	/* background: #f0f4f5; */
+	border: 1px solid lightgray;
+	border-radius: 3px;
 	display: inline-block;
 	font-size: 12px;
 	line-height: 1;

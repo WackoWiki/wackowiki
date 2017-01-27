@@ -17,7 +17,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 #if ($this->can_upload())
 #{
 
-	// 3. show attachments for current page
+	// show attachments for current page
 	if ($this->has_access('read'))
 	{
 		echo '<ul class="menu">' .
