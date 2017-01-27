@@ -23,7 +23,7 @@ class Diag
 			{
 				$overall_time = microtime(1) - WACKO_STARTED;
 
-				echo '<div id="debug">' . 
+				echo '<div id="debug">' .
 					 '<p class="debug">Program execution statistics</p>' . "\n<ul>\n";
 
 				// get memory usage

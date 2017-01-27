@@ -17,41 +17,42 @@ class UriRouter
 
 	public function __construct(&$db, &$http)
 	{
-		$this->db = & $db;
-		$this->http = & $http;
+		$this->db	= & $db;
+		$this->http	= & $http;
 
-		$conffile = Ut::join_path(CONFIG_DIR, 'router.conf');
-		$cachefile = Ut::join_path(CACHE_CONFIG_DIR, 'router.conf');
+		$conf_file	= Ut::join_path(CONFIG_DIR, 'router.conf');
+		$cache_file	= Ut::join_path(CACHE_CONFIG_DIR, 'router.conf');
 
 		clearstatcache();
 
-		if (!($conftime = @filemtime($conffile)))
+		if (!($conftime = @filemtime($conf_file)))
 		{
-			$this->aband($conffile . ' not found');
+			$this->aband($conf_file . ' not found');
 		}
 
 		// do not read stale or non-writable cachefile
-		if (!((@filemtime($cachefile) >= $conftime)
-			&& is_writable($cachefile)
-			&& ($text = file_get_contents($cachefile))
+		if (!((@filemtime($cache_file) >= $conftime)
+			&& is_writable($cache_file)
+			&& ($text = file_get_contents($cache_file))
 			&& ($this->config = Ut::unserialize($text))
 			&& array_shift($this->config) == self::CODE_VERSION))
 		{
 			// gather all method handlers available for {method} macro
 			$methods = [];
+
 			foreach (Ut::file_glob(HANDLER_DIR, '*/[!_]*.php') as $method)
 			{
 				$methods[] = pathinfo($method, PATHINFO_FILENAME);
 			}
 			// Ut::dbg('methods', $methods);
 
-			$this->config = $this->read_config($conffile, ['method' => implode('|', $methods)]);
+			$this->config = $this->read_config($conf_file, ['method' => implode('|', $methods)]);
 
 			// cache to file
 			$text = Ut::serialize(array_merge([self::CODE_VERSION], $this->config));
 			// unable to write cache file considered are 'turn config caching off' feature
-			@file_put_contents($cachefile, $text);
-			@chmod($cachefile, SAFE_CHMOD);
+			@file_put_contents($cache_file, $text);
+			@chmod($cache_file, SAFE_CHMOD);
 		}
 	}
 
@@ -66,6 +67,7 @@ class UriRouter
 
 		// populate router's environment
 		$env = ['vars' => $vars, 'changed' => []];
+
 		foreach (self::GLOBALS as $varname)
 		{
 			$env[$varname] = $GLOBALS[$varname]; // $$varname don't work for _GET & others...
@@ -106,19 +108,23 @@ class UriRouter
 	private function route(&$env)
 	{
 		$match = 0;
+
 		foreach ($this->config as $line)
 		{
 			list ($regex, $actions, $lineno) = $line;
 
 			$err = -1;
+
 			if ($regex? ($err = preg_match($regex, $env['vars']['_uri'], $match)) : $match)
 			{
 				if ($err == 1)
 				{
 					$env['match'] = $match;
 				}
+
 				$backtrack = $env;
 				$env['sub'] = [];
+
 				foreach ($env['match'] as $var => $val)
 				{
 					if (preg_match('#[^\d]#', $var))
@@ -128,6 +134,7 @@ class UriRouter
 						$env['changed'][$varname][$varidx] = $val;
 					}
 				}
+
 				$env['vars']['_line'] = $lineno;
 
 				foreach ($actions as $action)
@@ -181,6 +188,7 @@ class UriRouter
 							Diag::dbg('urirouter:', $lineno, $val);
 							continue;
 						}
+
 						switch ($func)
 						{
 							case 'tolower':
@@ -193,6 +201,7 @@ class UriRouter
 								$val = (int) $val;
 								break;
 						}
+
 						$env[$varname][$varidx] = $val;
 						$env['changed'][$varname][$varidx] = $val;
 						continue;
@@ -228,15 +237,19 @@ class UriRouter
 						case '~':
 						case '!~':
 							$exp = explode(':', $val, 2);
+
 							if ($exp[0] == 'hashid')
 							{
 								static $hashids;
 								$seed = $this->db->hashid_seed;
+
 								if (!isset($hashids))
 								{
 									$hashids = new Hashids($seed);
 								}
+
 								$ids = $hashids->decode(preg_replace('#[^a-zA-Z0-9]+#', '', $var));
+
 								if (($n = count($ids)) == $exp[1] + 1)
 								{
 									$match2 = array_slice($ids, 0, $n - 1);
@@ -253,10 +266,12 @@ class UriRouter
 							{
 								$ok = preg_match($val, $var, $match2);
 							}
+
 							if ($ok && $op == '~')
 							{
 								$env['sub'] = $match2;
 							}
+
 							$ok = (!!$ok) === ($op == '~');
 							break;
 
@@ -284,6 +299,7 @@ class UriRouter
 							$ok = ($var <= $val);
 							break;
 					}
+
 					if (!$ok)
 					{
 						$env = 0;
@@ -383,8 +399,8 @@ class UriRouter
 
 					list ($dummy, $var, $dummy2, $func, $op, $val) = $match;
 
-					if (($op == '~' || $op == '!~') &&
-						!(preg_match('/^(hashid:[1-9])$/', $val) || @preg_match($val, '') !== false))
+					if (($op == '~' || $op == '!~')
+						&& !(preg_match('/^(hashid:[1-9])$/', $val) || @preg_match($val, '') !== false))
 					{
 						$this->aband($prefix . 'invalid pattern ' . $val);
 					}

@@ -162,7 +162,7 @@ if ($this->has_access('read'))
 		$data = $this->format($this->page['body_r'], 'post_wacko', ['bad' => 'good']);
 		$data = $this->numerate_toc($data); //  numerate toc if needed
 
-		// display page title
+		// display page title (action & theme wacko.all options)
 		if (!$this->hide_article_header)
 		{
 			echo "<header>\n" .
@@ -196,6 +196,7 @@ else
 	$message = $this->_t('ReadAccessDenied');
 	$this->show_message($message, 'info');
 
+// TODO: test, seems broken
 	if ($this->has_access('read', '', GUEST) === false)
 	{
 		$message = $this->_t('ReadAccessDeniedHintGuest');
@@ -208,7 +209,7 @@ if ($this->forum
 	|| ($this->has_access('read') && $this->page && $this->db->footer_tags == 1
 	|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
-	if ($categories = $this->action('categories', ['page' => '/' . $this->page['tag'], 'list' => 0, 'nomark' => 1], 1))
+	if ($categories = $this->action('categories', ['page' => '/' . $this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0], 1))
 	{
 		echo '<nav class="category">' . $categories . "</nav>\n";
 	}

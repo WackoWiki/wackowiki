@@ -1,6 +1,6 @@
 <?php
 
-// with gratitides took from bsd licensed Zend Framework (http://framework.zend.com/)
+// with gratitudes took from bsd licensed Zend Framework (http://framework.zend.com/)
 
 class TemplatestEscaper
 {
