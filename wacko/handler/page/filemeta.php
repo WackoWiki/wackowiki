@@ -98,7 +98,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					$path = 'file:/';
 				}
 
-				echo $this->form_open('remove_file', ['page_method' => 'attachments']);
+				echo $this->form_open('remove_file', ['page_method' => 'filemeta']);
 ?>
 			<div class="fileinfo"><?php
 			echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
@@ -297,7 +297,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					// !!!!! patch link to not show pictures when not needed
 					$path2 = str_replace('file:/', '_file:/', $path);
 
-					echo $this->form_open('upload_file', ['page_method' => 'attachments']);
+					echo $this->form_open('upload_file', ['page_method' => 'filemeta']);
 ?>
 					<div class="fileinfo">
 					<?php
