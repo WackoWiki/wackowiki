@@ -28,432 +28,428 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 	}
 	else
 	{
-		$profile = ['profile' => $user['user_name']];
+		$profile		= ['profile' => $user['user_name']];
+		$default_tab	= true;
+		$tpl->u_user	= $user;
+		$tpl->u_href	= $this->href();
 
 		// profile navigation
-		if ($user['user_id'] === $this->get_user_id())
+		if ($user['user_id'] == $this->get_user_id())
 		{
-			$output1 = #'<h3>' . $this->_t('UserPages') . "</h3>" .
-			'<ul class="menu" id="list">' . "\n";
-			$output2 = '<li><a href="' . $this->href('', '', 'mode=mypages') . '#list">' . $this->_t('ListMyPages') . "</a></li>\n";
-			$output3 = '<li><a href="' . $this->href('', '', 'mode=mychanges') . '#list">' . $this->_t('ListMyChanges') . "</a></li>\n";
-			$output4 = '<li><a href="' . $this->href('', '', 'mode=mywatches') . '#list">' . $this->_t('ListMyWatches') . "</a></li>\n";
-			$output5 = '<li><a href="' . $this->href('', '', 'mode=mychangeswatches') . '#list">' . $this->_t('ListMyChangesWatches') . "</a></li>\n";
-			$output6 = "</ul>\n";
+			$tpl->u_tab_href0 = $this->href('', '', $profile);
+			$tpl->u_tab_href1 = $this->href('', '', $profile + ['mode' => 'mypages']);
+			$tpl->u_tab_href2 = $this->href('', '', $profile + ['mode' => 'mychanges']);
+			$tpl->u_tab_href3 = $this->href('', '', $profile + ['mode' => 'mywatches']);
+			$tpl->u_tab_href4 = $this->href('', '', $profile + ['mode' => 'mychangeswatches']);
+
 
 			if (isset($_GET['mode']) && $_GET['mode'] == 'mypages')
 			{
-				echo	$output1 .
-				'<li class="active">' . $this->_t('ListMyPages') . "</a></li>\n". #$output2 .
-				$output3 .
-				$output4 .
-				$output5 .
-				$output6;
-				echo	'<h3>' . $this->_t('ListMyPages') . "</h3>";
-				echo	$this->action('mypages');
+				#$tpl->u_tab_userTabs =	$this->_t('ListMyPages'); #$output1 .
+
+				$tpl->u_tab_heading =	$this->_t('ListMyPages');
+				$tpl->u_tab_action =	$this->action('mypages');
+				$default_tab = false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
 			{
-				echo	$output1 .
-				$output2 .
-				$output3 .
-				'<li class="active">' . $this->_t('ListMyWatches') . "</a></li>\n". #$output4 .
-				$output5 .
-				$output6;
-				echo	'<h3>' . $this->_t('ListMyWatches') . "</h3>";
-				echo	$this->action('mywatches');
+				#$tpl->u_tab_userTabs =	$this->_t('ListMyWatches'); #$output3 .
+
+				$tpl->u_tab_heading =	$this->_t('ListMyWatches');
+				$tpl->u_tab_action =	$this->action('mywatches');
+				$default_tab = false;
 			}
-			else if (!isset($_GET['mode']) || $_GET['mode'] == 'mychangeswatches')
+			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychangeswatches')
 			{
-				echo	$output1 .
-				$output2 .
-				$output3 .
-				$output4 .
-				'<li class="active">' . $this->_t('ListMyChangesWatches') . "</a></li>\n". #$output5 .
-				$output6;
-				echo	'<h3>' . $this->_t('ListMyChangesWatches') . "</h3>";
-				echo	$this->action('mychangeswatches');
+				#$tpl->u_tab_userTabs =	$this->_t('ListMyChangesWatches'); #$output4 .
+
+				$tpl->u_tab_heading =	$this->_t('ListMyChangesWatches');
+				$tpl->u_tab_action =	$this->action('mychangeswatches');
+				$default_tab = false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
 			{
-				echo	$output1 .
-				$output2 .
-				'<li class="active">' . $this->_t('ListMyChanges') . "</a></li>\n". #$output3 .
-				$output4 .
-				$output5 .
-				$output6;
-				echo	'<h3>' . $this->_t('ListMyChanges') . "</h3>";
-				echo	$this->action('mychanges');
-			}
-		}
+				#$tpl->u_tab_userTabs =	$this->_t('ListMyChanges'); #$output2 .
 
-		// usergroups
-		if (is_array($this->db->aliases))
-		{
-			// collecting usergroup names where user takes membership
-			$groups = [];
-
-			foreach ($this->db->aliases as $group_name => $group_str)
-			{
-				$group_users = explode('\n', $group_str);
-
-				if (in_array($user['user_name'], $group_users))
-				{
-					$groups[] = $this->group_link($group_name, '', true, false);
-				}
-			}
-
-			$tpl->u_userGroups_list = implode(', ', $groups);
-		}
-		else
-		{
-			$tpl->u_userGroups_na = true;
-		}
-
-		if ($this->page['page_lang'] != $user['account_lang'])
-		{
-			// $user['user_name'] = $this->do_unicode_entities($user['user_name'], $user['account_lang']);
-			// $user['real_name'] = $this->do_unicode_entities($user['real_name'], $user['account_lang']);
-		}
-
-		$allow_intercom = ($this->db->enable_email && $logged_in && $user['email'] && ($this->is_admin() || ($user['allow_intercom'] && !$user['email_confirm'])));
-
-		// prepare and send personal message
-		if (@$_POST['_action'] === 'personal_message' && $allow_intercom && $_POST['mail_body'])
-		{
-			// check for errors
-			$error = '';
-
-			// message is too long
-			if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
-			{
-				$error = Ut::perc_replace($this->_t('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
-			}
-			// personal messages flood control
-			else if (time() - @$this->sess->intercom_delay < $this->db->intercom_delay)
-			{
-				$error = Ut::perc_replace($this->_t('UsersPMFlooded'), $this->db->intercom_delay);
-			}
-
-			// proceed if no error encountered
-			if ($error)
-			{
-				$this->set_message($error, 'error');
+				$tpl->u_tab_heading =	$this->_t('ListMyChanges');
+				$tpl->u_tab_action =	$this->action('mychanges');
+				$default_tab = false;
 			}
 			else
 			{
-				// compose message
-				$prefix		= rtrim(str_replace(['https://www.', 'https://', 'http://www.', 'http://'], '', $this->db->base_url), '/');
-				$msg_id		= date('ymdHi') . '.' . Ut::rand(100000, 999999) . '@' . $prefix;
-				$subject	= $_POST['mail_subject'];
+				#$tpl->u_tab_userTabs =	$this->_t('ListMyPages'); #$output2 .
 
-				if ($subject === '')
-				{
-					$subject = '(no subject)';
-				}
-
-				if (strpos($subject, $prefix1 = '[' . $prefix . ']') === false)
-				{
-					$subject = $prefix1 . ' ' . $subject;
-				}
-
-				$save = $this->set_language($user['user_lang'], true);
-
-				$body =
-					$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
-					Ut::perc_replace($this->_t('UsersPMBody'),
-							$this->get_user_name(),
-							rtrim($this->db->base_url, '/'),
-							Ut::amp_decode($this->href('', '',
-								['profile' => $this->get_user_name(),
-								'ref' => Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
-								'#' => 'contacts'])),
-							$this->db->abuse_email,
-							$_POST['mail_body']);
-
-				// compose headers
-				$headers = [];
-				$headers['Message-ID'] = "<$msg_id>";
-
-				if (($ref = @$_POST['ref']))
-				{
-					$headers['In-Reply-To']	= "<$ref>";
-					$headers['References']	= "<$ref>";
-				}
-
-				$body .= "\n\n" . $this->_t('EmailGoodbye') . "\n" . $this->db->site_name . "\n" . $this->db->base_url;
-
-				// send email
-				$email = new Email($this);
-				$email->send_mail($user['user_name'] . ' <' . $user['email'] . '>', $subject, $body, 'no-reply@' . $prefix, '', $headers, true);
-				$this->set_language($save, true);
-
-				$this->set_message($this->_t('UsersPMSent'));
-				$this->log(4, Ut::perc_replace($this->_t('LogPMSent', SYSTEM_LANG), $this->get_user_name(), $user['user_name']));
-
-				$this->sess->intercom_delay	= time();
-				$this->http->redirect($this->href('', '', $profile + ['#' => 'contacts']));
+				$tpl->u_tab_heading =	$this->_t('ListMyPages');
 			}
 		}
 
-		// header and profile data
-		$tpl->u_user = $user;
-		//$tpl->u_href = $this->href('', $this->tag);
-		$tpl->u_href = $this->href(); // STS let's test - tag here is by default
-
-		// basic info
-		if ($user['hide_lastsession'])
+		if ($default_tab == true)
 		{
-			$tpl->u_last_hidden = true;
-		}
-		else if ($this->db->is_null_date($user['last_visit']))
-		{
-			$tpl->u_last_na = true;
-		}
-		else
-		{
-			$tpl->u_last_last_visit = $user['last_visit'];
-		}
-
-		$tpl->u_userPage_text	= $home = $this->db->users_page . '/' . $user['user_name'];
-		$tpl->u_userPage_href	= $this->href('', $home);
-		$tpl->u_groupsPage		= $this->href('', $this->db->groups_page);
-
-		// hide contact form if profile is equal with current user
-		if ($user['user_id'] != $this->get_user_id())
-		{
-			// only registered users can send PMs
-			if ($logged_in)
+			// usergroups
+			if (is_array($this->db->aliases))
 			{
-				$subject	= (string) @$_POST['mail_subject'];
-				$ref		= (string) @$_POST['ref'];
-				$body		= (string) @$_POST['mail_body'];
+				// collecting usergroup names where user takes membership
+				$groups = [];
 
-				// decompose reply referrer
-				if (($ref0 = @$_GET['ref']))
+				foreach ($this->db->aliases as $group_name => $group_str)
 				{
-					$ref0 = @gzinflate(Ut::http64_decode($ref0)); // suppress ALL errors on parsing user supplied data!
+					$group_users = explode('\n', $group_str);
 
-					if ($ref0 && strpos($ref0, '@@') !== false)
+					if (in_array($user['user_name'], $group_users))
 					{
-						// TODO sanitize? someone can inject something into
-						list($ref, $subject) = explode('@@', Ut::strip_controls($ref0), 2);
-
-						if (strncmp($subject, 'Re:', 3))
-						{
-							$subject = 'Re: ' . $subject;
-						}
+						$groups[] = $this->group_link($group_name, '', true, false);
 					}
 				}
 
-				$tpl->u_pm_pm_href		= $this->href();
-				$tpl->u_pm_pm_username	= $user['user_name'];
+				$tpl->u_userGroups_list = implode(', ', $groups);
+			}
+			else
+			{
+				$tpl->u_userGroups_na = true;
+			}
 
-				if ($ref)
+			if ($this->page['page_lang'] != $user['account_lang'])
+			{
+				// $user['user_name'] = $this->do_unicode_entities($user['user_name'], $user['account_lang']);
+				// $user['real_name'] = $this->do_unicode_entities($user['real_name'], $user['account_lang']);
+			}
+
+			$allow_intercom = ($this->db->enable_email && $logged_in && $user['email'] && ($this->is_admin() || ($user['allow_intercom'] && !$user['email_confirm'])));
+
+			// prepare and send personal message
+			if (@$_POST['_action'] === 'personal_message' && $allow_intercom && $_POST['mail_body'])
+			{
+				// check for errors
+				$error = '';
+
+				// message is too long
+				if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
 				{
-					$tpl->u_pm_pm_ref_ref = $ref;
+					$error = Ut::perc_replace($this->_t('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
+				}
+				// personal messages flood control
+				else if (time() - @$this->sess->intercom_delay < $this->db->intercom_delay)
+				{
+					$error = Ut::perc_replace($this->_t('UsersPMFlooded'), $this->db->intercom_delay);
 				}
 
-				// user must allow incoming messages, and needs confirmed email address set
-				if ($allow_intercom)
+				// proceed if no error encountered
+				if ($error)
 				{
-					$tpl->u_pm_pm_ic_subj = $subject;
+					$this->set_message($error, 'error');
+				}
+				else
+				{
+					// compose message
+					$prefix		= rtrim(str_replace(['https://www.', 'https://', 'http://www.', 'http://'], '', $this->db->base_url), '/');
+					$msg_id		= date('ymdHi') . '.' . Ut::rand(100000, 999999) . '@' . $prefix;
+					$subject	= $_POST['mail_subject'];
+
+					if ($subject === '')
+					{
+						$subject = '(no subject)';
+					}
+
+					if (strpos($subject, $prefix1 = '[' . $prefix . ']') === false)
+					{
+						$subject = $prefix1 . ' ' . $subject;
+					}
+
+					$save = $this->set_language($user['user_lang'], true);
+
+					$body =
+						$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
+						Ut::perc_replace($this->_t('UsersPMBody'),
+								$this->get_user_name(),
+								rtrim($this->db->base_url, '/'),
+								Ut::amp_decode($this->href('', '',
+									['profile' => $this->get_user_name(),
+									'ref' => Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
+									'#' => 'contacts'])),
+								$this->db->abuse_email,
+								$_POST['mail_body']);
+
+					// compose headers
+					$headers = [];
+					$headers['Message-ID'] = "<$msg_id>";
+
+					if (($ref = @$_POST['ref']))
+					{
+						$headers['In-Reply-To']	= "<$ref>";
+						$headers['References']	= "<$ref>";
+					}
+
+					$body .= "\n\n" . $this->_t('EmailGoodbye') . "\n" . $this->db->site_name . "\n" . $this->db->base_url;
+
+					// send email
+					$email = new Email($this);
+					$email->send_mail($user['user_name'] . ' <' . $user['email'] . '>', $subject, $body, 'no-reply@' . $prefix, '', $headers, true);
+					$this->set_language($save, true);
+
+					$this->set_message($this->_t('UsersPMSent'));
+					$this->log(4, Ut::perc_replace($this->_t('LogPMSent', SYSTEM_LANG), $this->get_user_name(), $user['user_name']));
+
+					$this->sess->intercom_delay	= time();
+					$this->http->redirect($this->href('', '', $profile + ['#' => 'contacts']));
+				}
+			}
+
+			// header and profile data
+
+			// basic info
+			if ($user['hide_lastsession'])
+			{
+				$tpl->u_last_hidden = true;
+			}
+			else if ($this->db->is_null_date($user['last_visit']))
+			{
+				$tpl->u_last_na = true;
+			}
+			else
+			{
+				$tpl->u_last_last_visit = $user['last_visit'];
+			}
+
+			$tpl->u_userPage_text	= $home = $this->db->users_page . '/' . $user['user_name'];
+			$tpl->u_userPage_href	= $this->href('', $home);
+			$tpl->u_groupsPage		= $this->href('', $this->db->groups_page);
+
+			// hide contact form if profile is equal with current user
+			if ($user['user_id'] != $this->get_user_id())
+			{
+				// only registered users can send PMs
+				if ($logged_in)
+				{
+					$subject	= (string) @$_POST['mail_subject'];
+					$ref		= (string) @$_POST['ref'];
+					$body		= (string) @$_POST['mail_body'];
+
+					// decompose reply referrer
+					if (($ref0 = @$_GET['ref']))
+					{
+						$ref0 = @gzinflate(Ut::http64_decode($ref0)); // suppress ALL errors on parsing user supplied data!
+
+						if ($ref0 && strpos($ref0, '@@') !== false)
+						{
+							// TODO sanitize? someone can inject something into
+							list($ref, $subject) = explode('@@', Ut::strip_controls($ref0), 2);
+
+							if (strncmp($subject, 'Re:', 3))
+							{
+								$subject = 'Re: ' . $subject;
+							}
+						}
+					}
+
+					$tpl->u_pm_pm_href		= $this->href();
+					$tpl->u_pm_pm_username	= $user['user_name'];
 
 					if ($ref)
 					{
-						$tpl->u_pm_pm_ic_ref_href = $this->href('', '', $profile + ['#' => 'contacts']);
+						$tpl->u_pm_pm_ref_ref = $ref;
 					}
 
-					$tpl->u_pm_pm_ic_body = $body;
+					// user must allow incoming messages, and needs confirmed email address set
+					if ($allow_intercom)
+					{
+						$tpl->u_pm_pm_ic_subj = $subject;
+
+						if ($ref)
+						{
+							$tpl->u_pm_pm_ic_ref_href = $this->href('', '', $profile + ['#' => 'contacts']);
+						}
+
+						$tpl->u_pm_pm_ic_body = $body;
+					}
+					else
+					{
+						$tpl->u_pm_pm_disabled = true;
+					}
 				}
 				else
 				{
-					$tpl->u_pm_pm_disabled = true;
+					$tpl->u_pm_not = true;
 				}
 			}
-			else
+
+			// user-owned pages
+			if ($user['total_pages'])
 			{
-				$tpl->u_pm_not = true;
-			}
-		}
+				$sort_name = (isset($_GET['sort']) && $_GET['sort'] == 'name');
+				$pagination = $this->pagination($user['total_pages'], 10, 'd',
+						$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
 
-		// user-owned pages
-		if ($user['total_pages'])
-		{
-			$sort_name = (isset($_GET['sort']) && $_GET['sort'] == 'name');
-			$pagination = $this->pagination($user['total_pages'], 10, 'd',
-					$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
-
-			$pages = $this->db->load_all(
-				"SELECT page_id, tag, title, created, page_lang " .
-				"FROM " . $this->db->table_prefix . "page " .
-				"WHERE owner_id = '" . $user['user_id'] . "' " .
-					"AND comment_on_id = '0' " .
-					"AND deleted <> '1' " .
-				"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " " .
-				$pagination['limit']);
-
-			// sorting and pagination
-			if ($sort_name)
-			{
-				$tpl->u_pages_date_href = $this->href('', '', $profile + ['sort' => 'date']);
-			}
-			else
-			{
-				$tpl->u_pages_name_href = $this->href('', '', $profile + ['sort' => 'name']);
-			}
-
-			$tpl->u_pages_pagination_text = $pagination['text'];
-
-			// pages list itself
-			foreach ($pages as $page)
-			{
-				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
-				{
-					// check current page lang for different charset to do_unicode_entities() against
-					$_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
-
-					// cache page_id for for has_access validation in link function
-					$this->page_id_cache[$page['tag']] = $page['page_id'];
-
-					$tpl->u_pages_li_created	= $page['created'];
-					$tpl->u_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
-				}
-			}
-		}
-		else
-		{
-			$tpl->u_nopages = true;
-		}
-
-		// last user comments
-		if ($this->user_allowed_comments())
-		{
-			$tpl->u_cmt_n = $user['total_comments'];
-
-			if ($user['total_comments'])
-			{
-				$pagination = $this->pagination($user['total_comments'], 10, 'c', $profile + ['#' => 'comments']);
-				$tpl->u_cmt_c_pagination_text = $pagination['text'];
-
-				$comments = $this->db->load_all(
-					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang " .
-					"FROM " . $this->db->table_prefix . "page c " .
-						"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
-					"WHERE c.owner_id = '" . $user['user_id'] . "' " .
-						"AND c.comment_on_id <> '0' " .
-						"AND c.deleted <> '1' " .
-						"AND p.deleted <> '1' " .
-					"ORDER BY c.created DESC " .
+				$pages = $this->db->load_all(
+					"SELECT page_id, tag, title, created, page_lang " .
+					"FROM " . $this->db->table_prefix . "page " .
+					"WHERE owner_id = '" . $user['user_id'] . "' " .
+						"AND comment_on_id = '0' " .
+						"AND deleted <> '1' " .
+					"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " " .
 					$pagination['limit']);
 
-				// comments list itself
-				foreach ($comments as $comment)
+				// sorting and pagination
+				if ($sort_name)
 				{
-					if (!$this->db->hide_locked || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
+					$tpl->u_pages_date_href = $this->href('', '', $profile + ['sort' => 'date']);
+				}
+				else
+				{
+					$tpl->u_pages_name_href = $this->href('', '', $profile + ['sort' => 'name']);
+				}
+
+				$tpl->u_pages_pagination_text = $pagination['text'];
+
+				// pages list itself
+				foreach ($pages as $page)
+				{
+					if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
 					{
 						// check current page lang for different charset to do_unicode_entities() against
-						$_lang = ($this->page['page_lang'] != $comment['page_lang'])?  $comment['page_lang'] : '';
+						$_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
 
 						// cache page_id for for has_access validation in link function
-						$this->page_id_cache[$comment['tag']] = $comment['page_id'];
+						$this->page_id_cache[$page['tag']] = $page['page_id'];
 
-						$tpl->u_cmt_c_li_created	= $comment['created'];
-						$tpl->u_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
+						$tpl->u_pages_li_created	= $page['created'];
+						$tpl->u_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
 					}
 				}
 			}
 			else
 			{
-				$tpl->u_cmt_none = true;
+				$tpl->u_nopages = true;
 			}
-		}
-		else
-		{
-			$tpl->u_cmtdisabled = true;
-		}
 
-		// last user uploads
-		// show files only for registered users
-		if ($logged_in)
-		{
-			if ($this->db->upload == 1 || $this->is_admin())
+			// last user comments
+			if ($this->user_allowed_comments())
 			{
-				$tpl->u_up_u_n = $user['total_uploads'];
+				$tpl->u_cmt_n = $user['total_comments'];
 
-				if ($user['total_uploads'])
+				if ($user['total_comments'])
 				{
-					$pagination = $this->pagination($user['total_uploads'], 10, 'u', $profile + ['#' => 'comments']);
+					$pagination = $this->pagination($user['total_comments'], 10, 'c', $profile + ['#' => 'comments']);
+					$tpl->u_cmt_c_pagination_text = $pagination['text'];
 
-					$tpl->u_up_u_u2_pagination_text = $pagination['text'];
+					$comments = $this->db->load_all(
+						"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang " .
+						"FROM " . $this->db->table_prefix . "page c " .
+							"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
+						"WHERE c.owner_id = '" . $user['user_id'] . "' " .
+							"AND c.comment_on_id <> '0' " .
+							"AND c.deleted <> '1' " .
+							"AND p.deleted <> '1' " .
+						"ORDER BY c.created DESC " .
+						$pagination['limit']);
 
-					$uploads = $this->db->load_all(
-							"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
-							"FROM " . $this->db->table_prefix . "file u " .
-								"LEFT JOIN " . $this->db->table_prefix . "page c ON (u.page_id = c.page_id) " .
-							"WHERE u.user_id = '" . $user['user_id'] . "' " .
-							"AND u.deleted <> '1' " .
-							// "AND p.deleted <> '1' " .
-							"ORDER BY u.uploaded_dt DESC " .
-							$pagination['limit']);
-
-					// uploads list itself
-					foreach ($uploads as $upload)
+					// comments list itself
+					foreach ($comments as $comment)
 					{
-						if (!$this->db->hide_locked
-							|| !$upload['page_id']
-							|| $this->has_access('read', $upload['page_id']))
+						if (!$this->db->hide_locked || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
 						{
 							// check current page lang for different charset to do_unicode_entities() against
-							$_lang = ($this->page['page_lang'] != $upload['file_lang'])?  $upload['file_lang'] : '';
+							$_lang = ($this->page['page_lang'] != $comment['page_lang'])?  $comment['page_lang'] : '';
 
-							if (($file_description = $upload['file_description']) !== '')
-							{
-								if ($_lang)
-								{
-									$file_description = $this->do_unicode_entities($file_description, $_lang);
-								}
+							// cache page_id for for has_access validation in link function
+							$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 
-								$file_description = ' <span class="editnote">[' . $file_description . ']</span>';
-							}
-
-							preg_match('/^[^\/]+/', $upload['file_on_page'], $sub_tag);
-
-							// TODO needs to be redone, moving to tpl
-							if ($upload['page_id']) // !$global
-							{
-								// cache page_id for for has_access validation in link function
-								$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
-
-								$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
-								$on_tag		= $upload['file_on_page'];
-								$on_page	= $this->_t('To') . ' ' .
-											  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1, $_lang) .
-											  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
-							}
-							else
-							{
-								$path2		= '_file:/';
-								$on_tag		= '';
-								$on_page	= '<span title="">&rarr; ' . $this->_t('UploadGlobal');
-							}
-
-							$tpl->u_up_u_u2_li_t		= $upload['uploaded_dt'];
-							# $tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
-							$tpl->u_up_u_u2_li_link		= '<a href="' . $this->href('attachments', $on_tag, ['show', 'file_id=' . (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
-							$tpl->u_up_u_u2_li_onpage	= $on_page;
-							$tpl->u_up_u_u2_li_descr	= $file_description;
+							$tpl->u_cmt_c_li_created	= $comment['created'];
+							$tpl->u_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
 						}
 					}
 				}
 				else
 				{
-					$tpl->u_up_u_none = true;
+					$tpl->u_cmt_none = true;
 				}
 			}
 			else
 			{
-				$tpl->u_up = true;
+				$tpl->u_cmtdisabled = true;
+			}
+
+			// last user uploads
+			// show files only for registered users
+			if ($logged_in)
+			{
+				if ($this->db->upload == 1 || $this->is_admin())
+				{
+					$tpl->u_up_u_n = $user['total_uploads'];
+
+					if ($user['total_uploads'])
+					{
+						$pagination = $this->pagination($user['total_uploads'], 10, 'u', $profile + ['#' => 'comments']);
+
+						$tpl->u_up_u_u2_pagination_text = $pagination['text'];
+
+						$uploads = $this->db->load_all(
+								"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
+								"FROM " . $this->db->table_prefix . "file u " .
+									"LEFT JOIN " . $this->db->table_prefix . "page c ON (u.page_id = c.page_id) " .
+								"WHERE u.user_id = '" . $user['user_id'] . "' " .
+								"AND u.deleted <> '1' " .
+								// "AND p.deleted <> '1' " .
+								"ORDER BY u.uploaded_dt DESC " .
+								$pagination['limit']);
+
+						// uploads list itself
+						foreach ($uploads as $upload)
+						{
+							if (!$this->db->hide_locked
+								|| !$upload['page_id']
+								|| $this->has_access('read', $upload['page_id']))
+							{
+								// check current page lang for different charset to do_unicode_entities() against
+								$_lang = ($this->page['page_lang'] != $upload['file_lang'])?  $upload['file_lang'] : '';
+
+								if (($file_description = $upload['file_description']) !== '')
+								{
+									if ($_lang)
+									{
+										$file_description = $this->do_unicode_entities($file_description, $_lang);
+									}
+
+									$file_description = ' <span class="editnote">[' . $file_description . ']</span>';
+								}
+
+								preg_match('/^[^\/]+/', $upload['file_on_page'], $sub_tag);
+
+								// TODO needs to be redone, moving to tpl
+								if ($upload['page_id']) // !$global
+								{
+									// cache page_id for for has_access validation in link function
+									$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
+
+									$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
+									$on_tag		= $upload['file_on_page'];
+									$on_page	= $this->_t('To') . ' ' .
+												  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1, $_lang) .
+												  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
+								}
+								else
+								{
+									$path2		= '_file:/';
+									$on_tag		= '';
+									$on_page	= '<span title="">&rarr; ' . $this->_t('UploadGlobal');
+								}
+
+								$tpl->u_up_u_u2_li_t		= $upload['uploaded_dt'];
+								# $tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
+								$tpl->u_up_u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['show', 'file_id=' . (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
+								$tpl->u_up_u_u2_li_onpage	= $on_page;
+								$tpl->u_up_u_u2_li_descr	= $file_description;
+							}
+						}
+					}
+					else
+					{
+						$tpl->u_up_u_none = true;
+					}
+				}
+				else
+				{
+					$tpl->u_up = true;
+				}
 			}
 		}
 	}

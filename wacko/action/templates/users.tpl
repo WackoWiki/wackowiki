@@ -15,6 +15,20 @@ first really BIG template written
 [= Profile =]
 	<h1>[ ' user.user_name |e ' ]</h1>
 	<small><a href="[ ' href ' ]">&laquo; [ ' _t: UsersList ' ]</a></small>
+	
+	[= tab _ =
+		<ul class="menu" id="list">
+			<li><a href="[ ' href0 ' ]">[ ' _t: UsersProfile ' ]</a></li>
+			<li><a href="[ ' href1 ' ]">[ ' _t: ListMyPages ' ]</a></li>
+			<li><a href="[ ' href2 ' ]">[ ' _t: ListMyChanges ' ]</a></li>
+			<li><a href="[ ' href3 ' ]">[ ' _t: ListMyWatches ' ]</a></li>
+			<li><a href="[ ' href4 ' ]">[ ' _t: ListMyChangesWatches ' ]</a></li>
+		</ul>
+			
+		<h2>[ ' heading |e ' ]</h2>
+		[ ' action ' ]
+	=]
+
 	<h2>[ ' _t: UsersProfile ' ]</h2>
 
 	<table style="border-spacing: 3px; border-collapse: separate;">
