@@ -273,7 +273,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 								$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $small_name, $file_size_ft));
 							}
 
-							$this->http->redirect($this->href('attachments', '', ['show', 'file_id=' . (int) $file['file_id']]));
+							$this->http->redirect($this->href('filemeta', '', ['show', 'file_id=' . (int) $file['file_id']]));
 						}
 						else //forbid
 						{
