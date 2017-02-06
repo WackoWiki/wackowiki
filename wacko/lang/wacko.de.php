@@ -494,7 +494,7 @@ $wacko_translation = [
 
 	'UserSettings'				=> 'Benutzereinstellungen',
 	'UserSettingsGeneral'		=> 'Allgemein',
-	'UserSettingsNotifications'	=> 'Mitteilung',
+	'UserSettingsNotifications'	=> 'Mitteilungen',
 
 	'NotifyMinorEdit'			=> 'Benachrichtigung auch bei kleinen Änderungen',
 	'NotifyPageEdit'			=> 'Änderung',
