@@ -167,11 +167,13 @@ $this->ensure_page(true); // TODO: upload for forums?
 		{
 			if ($file['page_id'])
 			{
-				$path = 'file:/' . $file['supertag'] . '/';
+				$path	= 'file:/' . $file['supertag'] . '/';
+				$url	= $this->href('file', trim($file['supertag'], '/'), 'get=' . $file['file_name']);
 			}
 			else
 			{
-				$path = 'file:/';
+				$path	= 'file:/';
+				$url	= $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 			}
 
 			if (isset($_GET['show']))
@@ -203,7 +205,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					// show image
 					if ($file['picture_w'] || $file['file_ext'] == 'svg')
 					{ ?>
-						<span><?php echo $this->link($path . $file['file_name']); ?></span>
+						<span><?php echo '<a href="' . $url . '">' . $this->link($path . $file['file_name']) . '</a>'; ?></span>
 						<?php
 					} ?>
 

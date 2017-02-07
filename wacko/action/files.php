@@ -117,7 +117,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, u.user_name " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, p.supertag, u.user_name " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
@@ -145,25 +145,16 @@ if ($can_view)
 	$edit_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadEdit') . '" alt="' . $this->_t('UploadEdit') . '" class="btn-edit"/>';
 	$del_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadRemove') . '" alt="' . $this->_t('UploadRemove') . '" class="btn-delete"/>';
 
-	// use absolute path
-	if (!$global)
+	if ($picture)
 	{
-		$path2 = 'file:/' . ($this->slim_url($page)) . '/';
-	}
-	else
-	{
-		$path2 = 'file:/';
-	}
-
-	// !!!!! patch link to not show pictures when not needed
-	if ($picture == false)
-	{
-		$path2 = str_replace('file:/', '_file:/', $path2);
-		$style = 'upload';
-	}
-	else
-	{
+		$path1 = 'file:/';
 		$style = 'upload tbl_fixed';
+	}
+	else
+	{
+		// !!!!! patch link to not show pictures when not needed
+		$path1 = '_file:/';
+		$style = 'upload';
 	}
 
 	$this->print_pagination($pagination);
@@ -182,19 +173,17 @@ if ($can_view)
 
 		foreach ($files as $file)
 		{
-			// path hack for $all parameter, to refactor!
-			if ($all)
+			// use absolute path
+			if ($file['page_id'])
 			{
-				// use absolute path
-				if ($file['page_id'])
-				{
-					$path2	= 'file:/' . ($this->slim_url($file['tag'])) . '/';
-					$page	= $file['tag'];
-				}
-				else
-				{
-					$path2	= 'file:/';
-				}
+				$path2	= $path1 . ($this->slim_url($file['tag'])) . '/';
+				$page	= $file['tag'];
+				$url	= $this->href('file', trim($file['supertag'], '/'), 'get=' . $file['file_name']);
+			}
+			else
+			{
+				$path2	= $path1;
+				$url	= $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 			}
 
 			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
@@ -215,14 +204,20 @@ if ($can_view)
 			$file_id	= $file['file_id'];
 			$file_name	= $file['file_name'];
 			$shown_name = $this->shorten_string($file_name, $file_name_maxlen);
-			$text		= ($picture == false
-							? $shown_name
-							: ($file['picture_w'] || $file['file_ext'] == 'svg'
+			$text		= ($picture
+							? ($file['picture_w'] || $file['file_ext'] == 'svg'
 								? ''
-								: $shown_name));
+								: $shown_name)
+							: $shown_name);
 			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
 			$file_ext	= $file['file_ext'];
+
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
+
+			if ($picture && ($file['picture_w'] || $file['file_ext'] == 'svg'))
+			{
+				$link		= '<a href="' . $url . '">' . $link . '</a>';
+			}
 
 			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')
 			{
@@ -252,17 +247,7 @@ if ($can_view)
 			echo '<tr>' .
 					'<td class="file-">' . $link . '</td>';
 
-			if ($picture == false)
-			{
-				echo '<td class="desc-">' . $desc . '</td>' .
-					'<td class="size-">
-						<span class="size2-">' . $file_size . $hits . '</span>&nbsp;'.
-					'</td>' .
-					'<td class="dt-">' .
-						'<span class="dt2-">' . $this->get_time_formatted($dt) . '</span>&nbsp;'.
-					'</td>';
-			}
-			else
+			if ($picture)
 			{
 				echo '<td class="desc-">' .
 					'<strong>' . $this->shorten_string($file['file_name'], $file_name_maxlen) . '</strong><br /><br />' .
@@ -278,7 +263,16 @@ if ($can_view)
 					$this->get_time_formatted($dt) .
 				'</td>';
 			}
-
+			else
+			{
+				echo '<td class="desc-">' . $desc . '</td>' .
+					'<td class="size-">
+						<span class="size2-">' . $file_size . $hits . '</span>&nbsp;'.
+					'</td>' .
+					'<td class="dt-">' .
+						'<span class="dt2-">' . $this->get_time_formatted($dt) . '</span>&nbsp;'.
+					'</td>';
+			}
 
 			echo '<td class="tool-">' .
 					'<span class="dt2-">' .
