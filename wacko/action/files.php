@@ -221,7 +221,7 @@ if ($can_view)
 
 			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')
 			{
-				$hits	= ', ' . $file['hits'] . ' ' . $this->_t('SettingsHits');
+				$hits	= $file['hits'] . ' ' . $this->_t('SettingsHits');
 			}
 			else
 			{
