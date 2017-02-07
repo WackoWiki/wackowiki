@@ -254,7 +254,7 @@ function admin_user_approve(&$engine, &$module)
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') . '&amp;account_status=' . (int) @$_GET['account_status'], '', 'admin.php');
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
