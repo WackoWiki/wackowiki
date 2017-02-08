@@ -68,8 +68,8 @@ function admin_config_email(&$engine, &$module)
 					<small>Enabling email</small></label>
 				</td>
 				<td style="width:40%;">
-					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked="checked"' : '');?> /><label for="enable_email_on">Enabled.</label>
-					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ($engine->db->enable_email == 0 ? ' checked="checked"' : '');?> /><label for="enable_email_off">Disabled.</label>
+					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked="checked"' : '');?> /><label for="enable_email_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ($engine->db->enable_email == 0 ? ' checked="checked"' : '');?> /><label for="enable_email_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -81,8 +81,8 @@ function admin_config_email(&$engine, &$module)
 					<small>Use the PHPMailer class. Enabling this option ...</small></label>
 				</td>
 				<td style="width:40%;">
-					<input type="radio" id="phpmailer_on" name="phpmailer" value="1"<?php echo ($engine->db->phpmailer == 1 ? ' checked="checked"' : '');?> /><label for="phpmailer_on">Enabled.</label>
-					<input type="radio" id="phpmailer_off" name="phpmailer" value="0"<?php echo ($engine->db->phpmailer == 0 ? ' checked="checked"' : '');?> /><label for="phpmailer_off">Disabled.</label>
+					<input type="radio" id="phpmailer_on" name="phpmailer" value="1"<?php echo ($engine->db->phpmailer == 1 ? ' checked="checked"' : '');?> /><label for="phpmailer_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="phpmailer_off" name="phpmailer" value="0"<?php echo ($engine->db->phpmailer == 0 ? ' checked="checked"' : '');?> /><label for="phpmailer_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -177,8 +177,8 @@ function admin_config_email(&$engine, &$module)
 					<small><?php echo $engine->_t('SmtpAutoTlsInfo'); ?></small></label>
 				</td>
 				<td style="width:40%;">
-					<input type="radio" id="smtp_auto_tls_on" name="smtp_auto_tls" value="1" <?php echo ($engine->db->smtp_auto_tls == 1 ? ' checked="checked"' : '');?> /><label for="smtp_auto_tls_on">Enabled.</label>
-					<input type="radio" id="smtp_auto_tls_off" name="smtp_auto_tls" value="0" <?php echo ($engine->db->smtp_auto_tls == 0 ? ' checked="checked"' : '');?> /><label for="smtp_auto_tls_off">Disabled.</label>
+					<input type="radio" id="smtp_auto_tls_on" name="smtp_auto_tls" value="1" <?php echo ($engine->db->smtp_auto_tls == 1 ? ' checked="checked"' : '');?> /><label for="smtp_auto_tls_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="smtp_auto_tls_off" name="smtp_auto_tls" value="0" <?php echo ($engine->db->smtp_auto_tls == 0 ? ' checked="checked"' : '');?> /><label for="smtp_auto_tls_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">

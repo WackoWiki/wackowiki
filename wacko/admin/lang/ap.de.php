@@ -46,6 +46,12 @@ $ap_translation = [
 	'SiteClosed'				=> 'Website geschlossen',
 	'SiteClosedTip'				=> 'Die Website ist geschlossen',
 
+	// Generic
+	'Enabled'					=> 'aktiviert',
+	'Disabled'					=> 'deaktiviert',
+	'Mandatory'					=> 'zwingend',
+	'Admin'						=> 'Admin',
+
 	// MENU
 	// Config Basic module
 	'config_basic'		=> [
@@ -269,6 +275,28 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',
+
+	'EmailFunctionName'			=> 'Email function name',
+	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
+
+	'EnableEmail'				=> 'Enable emails',
+	'EnableEmailInfo'			=> 'Enabling emails',
+
+	'SendTestEmail'				=> 'Send a test email',
+	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
+
+	'SmtpAutoTls'				=> 'Opportunistic TLS',
+	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
+	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
+	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
+	'SmtpPassword'				=> 'SMTP password',
+	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
+	'SmtpPort'					=> 'SMTP server port',
+	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP server address',
+	'SmtpSettings'				=> 'SMTP settings',
+	'SmtpUsername'				=> 'SMTP username',
+	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
 
 	// log
 	'LogLevel1'					=> 'kritisch',

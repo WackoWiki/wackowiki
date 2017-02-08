@@ -46,6 +46,12 @@ $ap_translation = [
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
 
+	// Generic
+	'Enabled'					=> 'Enabled',
+	'Disabled'					=> 'Disabled',
+	'Mandatory'					=> 'Mandatory',
+	'Admin'						=> 'Admin',
+
 	// MENU
 	// Config Basic module
 	'config_basic'		=> [
