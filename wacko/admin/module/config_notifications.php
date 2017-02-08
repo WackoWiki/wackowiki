@@ -62,8 +62,8 @@ function admin_config_notifications(&$engine, &$module)
 						of the user signup process.</small></label>
 				</td>
 				<td style="width:40%;">
-					<input type="radio" id="enable_email_notification_on" name="enable_email_notification" value="1"<?php echo ( $engine->db->enable_email_notification == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_on">Enabled.</label>
-					<input type="radio" id="enable_email_notification_off" name="enable_email_notification" value="0"<?php echo ( $engine->db->enable_email_notification == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_off">Disabled.</label>
+					<input type="radio" id="enable_email_notification_on" name="enable_email_notification" value="1"<?php echo ( $engine->db->enable_email_notification == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="enable_email_notification_off" name="enable_email_notification" value="0"<?php echo ( $engine->db->enable_email_notification == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr>

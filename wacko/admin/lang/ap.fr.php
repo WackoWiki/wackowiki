@@ -27,6 +27,10 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
+	'FormSave'					=> 'Save',
+	'FormReset'					=> 'Reset',
+	'FormUpdate'				=> 'Update',
+
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Log out',
@@ -41,6 +45,12 @@ $ap_translation = [
 	'SiteClose'					=> 'close',
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
+
+	// Generic
+	'Enabled'					=> 'Enabled',
+	'Disabled'					=> 'Disabled',
+	'Mandatory'					=> 'Mandatory',
+	'Admin'						=> 'Admin',
 
 	// MENU
 	// Config Basic module
@@ -265,6 +275,28 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Ces informations sont utilisées lors de l\'envoi de courriers électroniques à vos utilisateurs. Veuillez vous assurer que l\'adresse de courrier électronique spécifiée est correcte car les messages refusés ou échoués seront probablement retournés à cette adresse. Si votre hébergeur ne fournit aucun service d\'envoi de courriers électroniques en PHP par défaut, vous pouvez envoyer directement des messages en utilisant le protocole SMTP. Cela demande l\'adresse d\'un serveur approprié (si besoin, demandez cette information à votre hébergeur internet). Si le serveur exige une authentification (et seulement dans ce cas), saisissez le nom d\'utilisateur, le mot de passe et la méthode d\'authentification nécessaire.',
+
+	'EmailFunctionName'			=> 'Email function name',
+	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
+
+	'EnableEmail'				=> 'Enable emails',
+	'EnableEmailInfo'			=> 'Enabling emails',
+
+	'SendTestEmail'				=> 'Send a test email',
+	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
+
+	'SmtpAutoTls'				=> 'Opportunistic TLS',
+	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
+	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
+	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
+	'SmtpPassword'				=> 'SMTP password',
+	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
+	'SmtpPort'					=> 'SMTP server port',
+	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP server address',
+	'SmtpSettings'				=> 'SMTP settings',
+	'SmtpUsername'				=> 'SMTP username',
+	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
 
 	// log
 	'LogLevel1'					=> 'critique',

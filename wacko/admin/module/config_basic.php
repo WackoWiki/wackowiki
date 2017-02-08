@@ -411,7 +411,7 @@ function admin_config_basic(&$engine, &$module)
 					<small>Shows change summary in the edit mode.</small></td>
 				<td>
 					<input type="radio" id="edit_summary_on" name="edit_summary" value="1"<?php echo ( $engine->db->edit_summary == 1 ? ' checked="checked"' : '' );?> /><label for="edit_summary_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="edit_summary_mandatory" name="edit_summary" value="2"<?php echo ( $engine->db->edit_summary == 2 ? ' checked="checked"' : '' );?> /><label for="edit_summary_mandatory">Mandatory.</label>
+					<input type="radio" id="edit_summary_mandatory" name="edit_summary" value="2"<?php echo ( $engine->db->edit_summary == 2 ? ' checked="checked"' : '' );?> /><label for="edit_summary_mandatory"><?php echo $engine->_t('Mandatory');?></label>
 					<input type="radio" id="edit_summary_off" name="edit_summary" value="0"<?php echo ( !$engine->db->edit_summary ? ' checked="checked"' : '' );?> /><label for="edit_summary_off"><?php echo $engine->_t('MetaOff');?></label>
 				</td>
 			</tr>
@@ -499,7 +499,7 @@ function admin_config_basic(&$engine, &$module)
 					<small>Allows to store and show external referrers.</small></td>
 				<td>
 					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ( $engine->db->enable_referrers == 1 ? ' checked="checked"' : '' );?> /><label for="enable_referrer_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="enable_referrer_admin" name="enable_referrers" value="2"<?php echo ( $engine->db->enable_referrers == 2 ? ' checked="checked"' : '' );?> /><label for="enable_referrer_admin">Admin.</label>
+					<input type="radio" id="enable_referrer_admin" name="enable_referrers" value="2"<?php echo ( $engine->db->enable_referrers == 2 ? ' checked="checked"' : '' );?> /><label for="enable_referrer_admin"><?php echo $engine->_t('Admin');?></label>
 					<input type="radio" id="enable_referrer_off" name="enable_referrers" value="0"<?php echo ( $engine->db->enable_referrers == 0? ' checked="checked"' : '' );?> /><label for="enable_referrer_off"><?php echo $engine->_t('MetaOff');?></label>
 				</td>
 			</tr>
