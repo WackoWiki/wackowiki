@@ -286,9 +286,9 @@ function admin_content_files(&$engine, &$module)
 			"FROM " . $engine->db->table_prefix . "file f " .
 				"INNER JOIN " . $engine->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"WHERE f.page_id = '". ($global ? 0 : '') . "' " .
-	($owner
-	? "AND u.user_name = " . $engine->db->q($owner) . " "
-	: ''), true);
+			($owner
+				? "AND u.user_name = " . $engine->db->q($owner) . " "
+				: ''), true);
 
 	$count		= count($count);
 	$pagination = $engine->pagination($count, $limit, 'f','mode=' . $module['mode'], '', 'admin.php');
@@ -337,7 +337,7 @@ function admin_content_files(&$engine, &$module)
 		$file_id	= $file['file_id'];
 		$file_name	= $file['file_name'];
 		$file_size	= $engine->binary_multiples($file['file_size'], false, true, true);
-		$file_ext	= $engine->get_extension($file_name);
+		$file_ext	= $file['file_ext'];
 		$link		= $engine->link($path2 . $file_name, '', $file_name);
 		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id=' . $file['file_id'];
 ?>
