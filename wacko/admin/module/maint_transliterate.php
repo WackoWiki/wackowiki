@@ -45,7 +45,7 @@ function admin_maint_transliterate(&$engine, &$module)
 		{
 			if ($pages = $engine->db->load_all(
 				"SELECT to_tag
-				FROM " . $engine->db->table_prefix . "link
+				FROM " . $engine->db->table_prefix . "page_link
 				LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				foreach ($pages as $page)
@@ -62,7 +62,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="1"><del>Transliterate field <code>to_supertag</code> in table `link`</del>.</li>
+					<li value="1"><del>Transliterate field <code>to_supertag</code> in table `page_link`</del>.</li>
 				</ol>
 				<br />
 <?php
@@ -96,7 +96,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="2"><del>Transliterate field <code>supertag</code> and <code>super_comment_on</code> in table `page`</del>.</li>
+					<li value="2"><del>Transliterate field <code>supertag</code> in table `page`</del>.</li>
 				</ol>
 				<br />
 <?php
@@ -130,7 +130,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="3"><del>Transliterate field <code>supertag</code> and <code>super_comment_on</code> in table `revision`</del>.</li>
+					<li value="3"><del>Transliterate field <code>supertag</code> in table `revision`</del>.</li>
 				</ol>
 				<br />
 				<p>The update procedure is completed.</p>
@@ -146,7 +146,7 @@ function admin_maint_transliterate(&$engine, &$module)
 	{
 ?>
 		<ol>
-			<li>Transliterate field <code>to_supertag</code> in table `link`.</li>
+			<li>Transliterate field <code>to_supertag</code> in table `page_link`.</li>
 			<li>Transliterate field <code>supertag</code> in table `page`.</li>
 			<li>Transliterate field <code>supertag</code> in table `revision`.</li>
 		</ol>
