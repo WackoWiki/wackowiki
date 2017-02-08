@@ -131,7 +131,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 			</table>
 
 			<?php
-			$this->show_message($this->_t('UploadRemoveConfirm'), 'warning');
+			$this->show_message($this->_t('FileRemoveConfirm'), 'warning');
 			?>
 
 			<br />
@@ -192,7 +192,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 							($can_upload
 								?	'<li><a href="' . $this->href('filemeta', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
 									// TODO: file revisions here
-									'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('RemoveFile') . '</a></li>'
+									'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>'
 								: '') .
 						"</ul><br />\n";
 
