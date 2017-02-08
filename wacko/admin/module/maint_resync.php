@@ -39,7 +39,7 @@ function admin_maint_resync(&$engine, &$module)
 				"AND p.deleted <> '1' " .
 				"GROUP BY p.owner_id");
 
-			// missing pages
+			// missing pages (case: total_pages = 0)
 			$users2 =  $engine->db->load_all(
 				"SELECT
 					u.user_id, '0' as n
@@ -63,14 +63,14 @@ function admin_maint_resync(&$engine, &$module)
 			}
 
 			// total comments posted
-			$users1 = $engine->db->load_all(
+			$users = $engine->db->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n " .
 				"FROM " . $engine->db->table_prefix . "page AS p, {$engine->db->user_table} AS u " .
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' " .
 				"AND p.deleted <> '1' " .
 				"GROUP BY p.user_id " .
 
-			// missing comments
+			// missing comments (case: total_comments = 0)
 			"UNION ALL " .
 
 				"SELECT
@@ -87,12 +87,8 @@ function admin_maint_resync(&$engine, &$module)
 					"AND p.deleted <> '1' ))
 
 				");
-#Ut::debug_print_r($users1);
-#Ut::debug_print_r($users2);
-			#$users = array_merge($users1, $users2);
-#Ut::debug_print_r($users);
-			$users = array_unique($users);
-Ut::debug_print_r($users);
+
+			$users = array_unique($users, SORT_REGULAR);
 
 			foreach ($users as $user)
 			{
@@ -211,7 +207,7 @@ Ut::debug_print_r($users);
 			}
 			else
 			{
-				// truncate table
+				// truncate link tables
 				$i = 0;
 				$engine->db->sql_query("DELETE FROM " . $engine->db->table_prefix . "page_link");
 				$engine->db->sql_query("DELETE FROM " . $engine->db->table_prefix . "file_link");
@@ -248,17 +244,16 @@ Ut::debug_print_r($users);
 								"body_toc	= " . $engine->db->q($page['body_toc']) . " " .
 							"WHERE page_id = '" . $page['page_id'] . "' " .
 							"LIMIT 1");
-
-						#if ($body_t) unset($body_t);
 					}
 
 					// rendering links
 					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_id'] : $page['tag']);
+					// TODO: update_link_table() breaks processing !!! (WHY?)
 					$engine->update_link_table($page['page_id'], $page['body_r']);
 					$engine->current_context--;
 				}
 
-				#$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
+				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
 			}
 			else
 			{
@@ -271,7 +266,7 @@ Ut::debug_print_r($users);
 	<h2>User statistics</h2>
 	<p>
 		User statistics (number of comments and pages owned)
-		in some situations may differ from actual data. <br />This operation
+		in some situations it may differ from actual data. <br />This operation
 		allows updating statistics on current actual data of the database.
 	</p>
 
@@ -328,7 +323,7 @@ if ($engine->db->xml_sitemap)
 	<h2>Wiki-links</h2>
 	<p>
 		Performs re-rendering for all intrasite links and restores
-		the contents of the table 'links' and 'file_links' in the event of damage or injury (this can take
+		the contents of the table 'page_link' and 'file_link' in the event of damage or relocation (this can take
 		considerable time) .
 	</p>
 <?php
