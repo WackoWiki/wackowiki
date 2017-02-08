@@ -161,12 +161,6 @@ $ap_translation = [
 		'title'		=> 'Konvertieren von Tabellen oder Spalten',
 	],
 
-	// DB optimize module
-	'db_optimize'		=> [
-		'name'		=> 'Optimierung',
-		'title'		=> 'Optimierung der Datenbank',
-	],
-
 	// DB Repair module
 	'db_repair'		=> [
 		'name'		=> 'Reperatur',
