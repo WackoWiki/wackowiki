@@ -755,10 +755,6 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Attachments',
-	'AttachmentsEdit'			=> 'edit',
-	'AttachmentsView'			=> 'view',
-	'RemoveFile'				=> 'Remove',
-
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -771,7 +767,7 @@ $wacko_translation = [
 	'FileEditPropertiesTip'		=> 'Edit the metadata of this file',
 	'FileEditedMeta'			=> 'Updated metadata of this file',
 	'FileEditDenied'			=> 'You are not allowed to edit this file',
-	'FileRemove'				=> 'remove',
+	'FileRemove'				=> 'Remove',
 	'FileRemovedFromDB'			=> 'File removed from database',
 	'FileRemovedFromFS'			=> 'File erased from physical hosting',
 	'FileRemovedFromFSError'	=> 'It seems to be impossible to erase file!',

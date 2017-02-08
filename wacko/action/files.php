@@ -141,9 +141,9 @@ if ($can_view)
 	}
 
 	// display
-	$info_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadView') . '" alt="' . $this->_t('UploadView') . '" class="btn-info"/>';
-	$edit_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadEdit') . '" alt="' . $this->_t('UploadEdit') . '" class="btn-edit"/>';
-	$del_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('UploadRemove') . '" alt="' . $this->_t('UploadRemove') . '" class="btn-delete"/>';
+	$info_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('FileViewProperties') . '" alt="' . $this->_t('FileViewProperties') . '" class="btn-info"/>';
+	$edit_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('FileEditProperties') . '" alt="' . $this->_t('FileEditProperties') . '" class="btn-edit"/>';
+	$del_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('FileRemove') . '" alt="' . $this->_t('FileRemove') . '" class="btn-delete"/>';
 
 	if ($picture)
 	{
