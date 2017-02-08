@@ -213,7 +213,7 @@ Ut::debug_print_r($users);
 			{
 				// truncate table
 				$i = 0;
-				$engine->db->sql_query("DELETE FROM " . $engine->db->table_prefix . "link");
+				$engine->db->sql_query("DELETE FROM " . $engine->db->table_prefix . "page_link");
 				$engine->db->sql_query("DELETE FROM " . $engine->db->table_prefix . "file_link");
 			}
 
@@ -231,7 +231,6 @@ Ut::debug_print_r($users);
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
-
 						// build html body
 						$page['body_r'] = $engine->format($page['body'], 'wacko');
 
@@ -254,12 +253,12 @@ Ut::debug_print_r($users);
 					}
 
 					// rendering links
-					$engine->context[++$engine->current_context] = ( $page['comment_on_id'] ? $page['comment_on_id'] : $page['tag'] );
+					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_id'] : $page['tag']);
 					$engine->update_link_table($page['page_id'], $page['body_r']);
 					$engine->current_context--;
 				}
 
-				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
+				#$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
 			}
 			else
 			{
