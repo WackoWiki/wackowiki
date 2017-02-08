@@ -183,7 +183,7 @@ function admin_config_security(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="captcha_new_comment"><strong>New comment:</strong><br />
-					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment. The parameters for fine-tuning are in the configuration file.</small></label>
+					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.</small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="captcha_new_comment" name="captcha_new_comment" value="1"<?php echo ( $engine->db->captcha_new_comment ? ' checked="checked"' : '' );?> />
@@ -195,7 +195,7 @@ function admin_config_security(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="captcha_new_page"><strong>New page:</strong><br />
-					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages. The parameters for fine-tuning are in the configuration file.</small></label>
+					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.</small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="captcha_new_page" name="captcha_new_page" value="1"<?php echo ( $engine->db->captcha_new_page ? ' checked="checked"' : '' );?> />
@@ -207,7 +207,7 @@ function admin_config_security(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="captcha_edit_page"><strong>Edit page:</strong><br />
-					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages. The parameters for fine-tuning are in the configuration file.</small></label>
+					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.</small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="captcha_edit_page" name="captcha_edit_page" value="1"<?php echo ( $engine->db->captcha_edit_page ? ' checked="checked"' : '' );?> />
@@ -219,7 +219,7 @@ function admin_config_security(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="captcha_registration"><strong>Registration:</strong><br />
-					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before registering. The parameters for fine-tuning are in the configuration file.</small></label>
+					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before registering.</small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="captcha_registration" name="captcha_registration" value="1"<?php echo ( $engine->db->captcha_registration ? ' checked="checked"' : '' );?> />
