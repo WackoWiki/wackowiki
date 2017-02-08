@@ -3240,7 +3240,6 @@ class Wacko
 					$alt		= $file_data['file_description'];
 					$img_link	= false;
 					$icon		= $this->_t('OuterIcon');
-					#$class		= '';
 					$tpl		= 'localfile';
 
 					if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
@@ -3272,14 +3271,14 @@ class Wacko
 							else
 							{
 								// continue
-								#return '<a href="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" title="' . $title . '">' . $text . '</a>';
+								# return '<a href="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" title="' . $title . '">' . $text . '</a>';
 							}
 						}
 						else
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							#return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
+							# return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
 							if (!$text)
 							{
 								$text = $title;
@@ -3609,10 +3608,6 @@ class Wacko
 				}
 			}
 
-			// XXX: obsolete -> see wacko.css
-			#$icon			= str_replace('{theme}', $this->db->theme_url, $icon);
-			#$accicon		= str_replace('{theme}', $this->db->theme_url, $accicon);
-
 			// see lang/wacko.all.php
 			$res			= $this->_t('Tpl.' . $tpl);
 			$text			= trim($text);
@@ -3671,8 +3666,6 @@ class Wacko
 				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . ' />';
 			}
 
-			// XXX: obsolete -> see wacko.css
-			#$icon			= str_replace('{theme}', $this->db->theme_url, $icon);
 			$res			= $this->_t('Tpl.' . $tpl);
 
 			if ($res)
