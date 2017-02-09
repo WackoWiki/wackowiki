@@ -440,9 +440,6 @@ function admin_config_security(&$engine, &$module)
 					<input type="number" min="0" maxlength="4" style="width:200px;" id="form_token_time" name="form_token_time" value="<?php echo htmlspecialchars($engine->db->form_token_time, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
 					<br />
