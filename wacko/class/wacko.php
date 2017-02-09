@@ -288,7 +288,7 @@ class Wacko
 	{
 		$local	= $this->sql2localtime($text);
 		$date	= date($this->db->date_format, $local);
-		$time	= date($this->db->time_format_seconds, $local);
+		$time	= date($this->db->time_format, $local);
 	}
 
 	function sql2precisetime($text)
