@@ -3,7 +3,7 @@
 
 Typografica library: paragrafica class.
 
-https://wackowiki.sourceforge.io/doc/Dev/Projects/Typografica
+https://wackowiki.org/doc/Dev/Projects/Typografica
 
 */
 

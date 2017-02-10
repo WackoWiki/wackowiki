@@ -361,7 +361,7 @@ else if (!($_GET && $_POST))
 	<div class="controls"></div>
 </div>
 */ ?>
-<footer id="footer">System <a href="https://wackowiki.sourceforge.io/">WackoWiki</a></footer>
+<footer id="footer">System <a href="https://wackowiki.org/">WackoWiki</a></footer>
 
 <?php
 
