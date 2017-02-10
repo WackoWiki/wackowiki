@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // action - module for bulk upload files on a wacko wiki site with a record in the database.
 // version 0.6.beta
-// https://wackowiki.sourceforge.io/doc/Dev/PatchesHacks/MultiUpload
+// https://wackowiki.org/doc/Dev/PatchesHacks/MultiUpload
 
 ?>
 <script src="<?php echo $this->db->base_url;?>js/jquery.min.js"></script>

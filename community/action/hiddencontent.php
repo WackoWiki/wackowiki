@@ -15,7 +15,7 @@
       [$text=text to display if user meets login requirements]
       [$alt=alternative text to display to users who do not meet the login requirements] - optional
 
-      https://wackowiki.sourceforge.io/doc/Dev/PatchesHacks/HiddenContent
+      https://wackowiki.org/doc/Dev/PatchesHacks/HiddenContent
       }}
    */
 
