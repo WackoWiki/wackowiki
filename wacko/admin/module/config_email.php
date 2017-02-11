@@ -115,8 +115,8 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="email_from"><strong>From Name:</strong><br />
-					<small>The sender name, part of <code>'From:'</code> header in emails for all the email-notification sent from the site.</small></label>
+					<label for="email_from"><strong><?php echo $engine->_t('FromEmailName'); ?>:</strong><br />
+					<small><?php echo $engine->_t('FromEmailNameInfo'); ?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->db->email_from, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
@@ -126,24 +126,24 @@ function admin_config_email(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="noreply_email"><strong>No-reply address:</strong><br />
-				<small>This address, e.g. <code>noreply@example.com</code>, will appear in the <code>'From:'</code> email address field of all your email-notifications sent from the site.</small></label></td>
+				<td class="label"><label for="noreply_email"><strong><?php echo $engine->_t('NoReplyEmail'); ?>:</strong><br />
+				<small><?php echo $engine->_t('NoReplyEmailInfo'); ?></small></label></td>
 				<td><input type="email" maxlength="100" style="width:200px;" id="noreply_email" name="noreply_email" value="<?php echo htmlspecialchars($engine->db->noreply_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
-				<small>This address is used for admin purposes, like new user notification.</small></label></td>
+				<td class="label"><label for="admin_email"><strong><?php echo $engine->_t('AdminEmail'); ?>:</strong><br />
+				<small><?php echo $engine->_t('AdminEmailInfo'); ?></small></label></td>
 				<td><input type="email" maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->db->admin_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="abuse_email"><strong>Email abuse service:</strong><br />
-				<small>Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.</small></label></td>
+				<td class="label"><label for="abuse_email"><strong><?php echo $engine->_t('AbuseEmail'); ?>:</strong><br />
+				<small><?php echo $engine->_t('AbuseEmailInfo'); ?></small></label></td>
 				<td><input type="email" maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->db->abuse_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -162,7 +162,8 @@ function admin_config_email(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="smtp_host"><strong><?php echo $engine->_t('SmtpServer'); ?>:</strong></label></td>
+				<td class="label"><label for="smtp_host"><strong><?php echo $engine->_t('SmtpServer'); ?>:</strong><br />
+				<small><?php echo $engine->_t('SmtpServerInfo'); ?></small></label></td>
 				<td><input type="text" maxlength="50" style="width:200px;" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->db->smtp_host, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
