@@ -103,7 +103,6 @@ function admin_config_email(&$engine, &$module)
 					<small>The e-mail function used to send mails through PHP.</small></label></td>
 				<td>
 					<select style="width:200px;" id="phpmailer_method" name="phpmailer_method">
-						<option value="" <?php echo ((string) $engine->db->phpmailer_method === '' ? ' selected="selected"' : '');?>>default</option>
 						<option value="mail"<?php echo ((string) $engine->db->phpmailer_method === 'mail' ? ' selected="selected"' : '');?>>mail</option>
 						<option value="sendmail"<?php echo ((string) $engine->db->phpmailer_method === 'sendmail' ? ' selected="selected"' : '');?>>sendmail</option>
 						<option value="smtp"<?php echo ((string) $engine->db->phpmailer_method === 'smtp' ? ' selected="selected"' : '');?>>SMTP</option>
