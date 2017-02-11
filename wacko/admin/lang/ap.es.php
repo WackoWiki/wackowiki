@@ -20,10 +20,10 @@ $ap_translation = [
 	],
 
 	// Admin panel
-	'Authorization'			=> 'Autorización',
-	'AuthorizationTip'		=> 'Por favor ingrese la contraseña del administrador (asegúrese que su navegador permita cookies).',
-	'NoRecoceryPassword'	=> 'Contraseña administrativa no especificada!',
-	'NoRecoceryPasswordTip'	=> 'Observación: La falta de una contraseña administrativa es un riesgo de seguridad! Ingrese la contraseña en el archivo de configuración y vuelva a ejecutar el programa.',
+	'Authorization'				=> 'Autorización',
+	'AuthorizationTip'			=> 'Por favor ingrese la contraseña del administrador (asegúrese que su navegador permita cookies).',
+	'NoRecoceryPassword'		=> 'Contraseña administrativa no especificada!',
+	'NoRecoceryPasswordTip'		=> 'Observación: La falta de una contraseña administrativa es un riesgo de seguridad! Ingrese la contraseña en el archivo de configuración y vuelva a ejecutar el programa.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
@@ -47,8 +47,8 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
+	'Enabled'					=> 'Habilitar',
+	'Disabled'					=> 'Deshabilitar',
 	'On'						=> 'on',
 	'Off'						=> 'off',
 	'Mandatory'					=> 'Mandatory',
@@ -259,15 +259,15 @@ $ap_translation = [
 		'title'		=> 'User management',
 	],
 
-	'LogFilterTip'			=> 'Filtrar eventos por criterios',
-	'LogLevel'				=> 'Nivel',
-	'LogLevelNotLower'		=> 'no menos que',
-	'LogLevelNotHigher'		=> 'no más que',
-	'LogLevelEqual'			=> 'igual',
-	'LogNoMatch'			=> 'No hay coincidencias',
-	'LogDate'				=> 'Fecha',
-	'LogEvent'				=> 'Evento',
-	'LogUsername'			=> 'Nombre de usuario',
+	'LogFilterTip'				=> 'Filtrar eventos por criterios',
+	'LogLevel'					=> 'Nivel',
+	'LogLevelNotLower'			=> 'no menos que',
+	'LogLevelNotHigher'			=> 'no más que',
+	'LogLevelEqual'				=> 'igual',
+	'LogNoMatch'				=> 'No hay coincidencias',
+	'LogDate'					=> 'Fecha',
+	'LogEvent'					=> 'Evento',
+	'LogUsername'				=> 'Nombre de usuario',
 
 	'PurgeSessions'				=> 'purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
@@ -278,11 +278,11 @@ $ap_translation = [
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Esta información se usa cuando el Sitio envía emails a sus usuarios. Por favor verifique que la dirección de email ingresada sea válida, cualquier rebote se reenviará a esa dirección. Si su host no provee un servicio de email nativo (utilizable por PHP), entonces use directamente SMTP. Esto requiere la dirección de un servidor apropiado (pregúntele a su ISP de ser necesario). Si (si, y solo si) el servidor requiere autentificación complete el usuario y contraseña. Por favor observe que solo se ofrece autentificación básica, otro tipo de implementación no es posible actualmente.',
 
-	'EmailFunctionName'			=> 'Email function name',
-	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
-	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',
+	'EmailFunctionName'			=> 'Nombre de la función email',
+	'EmailFunctionNameInfo'		=> 'La función empleada por PHP para enviar emails.',
+	'UseSmtpInfo'				=> 'Elija <code>SMTP</code> si quiere o necesita enviar emails mediante un servidor específico en lugar de la función de email local.',
 
-	'EnableEmail'				=> 'Enable emails',
+	'EnableEmail'				=> 'Habilitar envío de emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
 	'FromEmailName'				=> 'From Name',
@@ -294,25 +294,25 @@ $ap_translation = [
 	'AbuseEmail'				=> 'Email abuse service',
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
-	'SendTestEmail'				=> 'Send a test email',
-	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
+	'SendTestEmail'				=> 'Enviar un correo electrónico de prueba',
+	'SendTestEmailInfo'			=> 'Esto enviará un correo electrónico de prueba a la dirección definida en su cuenta.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br />If you don\'t receive it, please check your emails configuration.',
+	'TestEmailMessage'			=> 'El correo electrónico de prueba ha sido enviado.<br />Si no lo recibes, por favor revisa tú configuración de mensajes de correo electrónico.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
-	'SmtpPassword'				=> 'SMTP password',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
-	'SmtpPort'					=> 'SMTP server port',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP server address',
-	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
-	'SmtpSettings'				=> 'SMTP settings',
-	'SmtpUsername'				=> 'SMTP username',
-	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
+	'SmtpConnectionMode'		=> 'Método de autentificación para SMTP',
+	'SmtpConnectionModeInfo'	=> 'Solo usado si se configura usuario/contraseña, pregúntele a su ISP si no está seguro de cual método usar.',
+	'SmtpPassword'				=> 'Contraseña SMTP',
+	'SmtpPasswordInfo'			=> 'Introduzca una contraseña solo si su servidor SMTP lo requiere.<br /><em><strong>ADVERTENCIA:</strong> Esta contraseña será guardada como texto plano en la base de datos y será visible para cualquiera que tenga acceso a la misma o que pueda ver esta página de configuración.</em>',
+	'SmtpPort'					=> 'Puerto servidor SMTP',
+	'SmtpPortInfo'				=> 'Cámbielo solo si sabe que su servidor SMTP está en un puerto diferente. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'Dirección servidor SMTP',
+	'SmtpServerInfo'			=> 'Ten en cuenta que debes proporcionar el protocolo que utiliza tu servidor. Si estás utilizando SSL, tiene que ser <code>ssl://mail.example.com</code>',
+	'SmtpSettings'				=> 'Configuración SMTP',
+	'SmtpUsername'				=> 'Usuario SMTP',
+	'SmtpUsernameInfo'			=> 'Solo introduzca un usuario si su servidor SMTP lo requiere.',
 
 	// log
 	'LogLevel1'					=> 'crítico',
