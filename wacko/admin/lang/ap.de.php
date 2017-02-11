@@ -49,6 +49,8 @@ $ap_translation = [
 	// Generic
 	'Enabled'					=> 'aktiviert',
 	'Disabled'					=> 'deaktiviert',
+	'On'						=> 'on',
+	'Off'						=> 'off',
 	'Mandatory'					=> 'zwingend',
 	'Admin'						=> 'Admin',
 
@@ -276,30 +278,32 @@ $ap_translation = [
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',
 
-	'EmailFunctionName'			=> 'Email function name',
-	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
+	'EmailFunctionName'			=> 'Name der E-Mail-Funktion',
+	'EmailFunctionNameInfo'		=> 'Die PHP-Funktion, die genutzt wird, um E-Mails zu versenden.',
+	'UseSmtpInfo'				=> 'Wähle <code>SMTP</code> aus, wenn du E-Mails über einen SMTP-Server senden möchtest (oder musst), anstatt die PHP-eigene Mail-Funktion zu nutzen.',
 
-	'EnableEmail'				=> 'Enable emails',
-	'EnableEmailInfo'			=> 'Enabling emails',
+	'EnableEmail'				=> 'Aktiviere E-Mail',
+	'EnableEmailInfo'			=> 'Aktiviere E-Mail-Funktionalität',
 
-	'SendTestEmail'				=> 'Send a test email',
-	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
+	'SendTestEmail'				=> 'Test-Mail senden',
+	'SendTestEmailInfo'			=> 'Sendet eine Test-Mail an die in deinem Benutzerkonto hinterlegte Adresse.',
 	'TestEmailSubject'			=> 'WackoWiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, WackoWiki is correctly configured to send emails.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br />If you don\'t receive it, please check your emails configuration.',
+	'TestEmailMessage'			=> 'Die Test-Mail wurde gesendet.<br />Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Konfiguration.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
-	'SmtpPassword'				=> 'SMTP password',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
-	'SmtpPort'					=> 'SMTP server port',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP server address',
-	'SmtpSettings'				=> 'SMTP settings',
-	'SmtpUsername'				=> 'SMTP username',
-	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
+	'SmtpConnectionMode'		=> 'Authentifizierungsmethode für SMTP',
+	'SmtpConnectionModeInfo'	=> 'Nur benötigt, wenn ein Benutzername/Passwort eingegeben ist. Frage deinen Webhosting-Provider, falls du nicht sicher bist, welche Methode du wählen sollst.',
+	'SmtpPassword'				=> 'SMTP-Passwort',
+	'SmtpPasswordInfo'			=> 'Gib nur ein Passwort ein, wenn dein SMTP-Server dies erfordert. <em><strong>WARNUNG:</strong> Dieses Passwort wird im Klartext in der Datenbank gespeichert und ist daher für jeden einsehbar, der Zugriff auf die Datenbank oder diese Konfigurationsseite hat.</em>',
+	'SmtpPort'					=> 'SMTP-Server-Port',
+	'SmtpPortInfo'				=> 'Ändere diese Einstellung nur, wenn du weißt, dass dein SMTP-Server einen anderen Port nutzt. <br />(default: <code>tls</code> auf Port 587 (oder möglicherweise 25) und <code>ssl</code> auf Port 465)',
+	'SmtpServer'				=> 'SMTP-Server-Adresse',
+	'SmtpServerInfo'			=> 'Beachte, dass du das Protokoll angeben musst, das dein Server verwendet. Wird SSL verwendet, musst du "ssl://mail.example.com" angeben.',
+	'SmtpSettings'				=> 'SMTP-Einstellungen',
+	'SmtpUsername'				=> 'SMTP-Benutzername',
+	'SmtpUsernameInfo'			=> 'Gib nur einen Benutzernamen ein, wenn dein SMTP-Server dies erfordert.',
 
 	// log
 	'LogLevel1'					=> 'kritisch',

@@ -97,8 +97,8 @@ function admin_config_security(&$engine, &$module)
 					<small>Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="approve_new_user_on" name="approve_new_user" value="1"<?php echo ( $engine->db->approve_new_user == 1 ? ' checked="checked"' : '' );?> /><label for="approve_new_user_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="approve_new_user_off" name="approve_new_user" value="0"<?php echo ( $engine->db->approve_new_user == 0 ? ' checked="checked"' : '' );?> /><label for="approve_new_user_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="approve_new_user_on" name="approve_new_user" value="1"<?php echo ( $engine->db->approve_new_user == 1 ? ' checked="checked"' : '' );?> /><label for="approve_new_user_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="approve_new_user_off" name="approve_new_user" value="0"<?php echo ( $engine->db->approve_new_user == 0 ? ' checked="checked"' : '' );?> /><label for="approve_new_user_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -173,8 +173,8 @@ function admin_config_security(&$engine, &$module)
 					<small>If enabled, Captcha will be shown in the following cases and if a security threshold is reached.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="enable_captcha_on" name="enable_captcha" value="1"<?php echo ( $engine->db->enable_captcha == 1 ? ' checked="checked"' : '' );?> /><label for="enable_captcha_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="enable_captcha_off" name="enable_captcha" value="0"<?php echo ( $engine->db->enable_captcha == 0 ? ' checked="checked"' : '' );?> /><label for="enable_captcha_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="enable_captcha_on" name="enable_captcha" value="1"<?php echo ( $engine->db->enable_captcha == 1 ? ' checked="checked"' : '' );?> /><label for="enable_captcha_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="enable_captcha_off" name="enable_captcha" value="0"<?php echo ( $engine->db->enable_captcha == 0 ? ' checked="checked"' : '' );?> /><label for="enable_captcha_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -276,8 +276,8 @@ function admin_config_security(&$engine, &$module)
 					<small>Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br />CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br />Disabling Content Security Policy is a security risk !</small></label>
 				</td>
 				<td>
-					<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ( $engine->db->enable_security_headers == 1 ? ' checked="checked"' : '' );?> /><label for="security_headers_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ( $engine->db->enable_security_headers == 0 ? ' checked="checked"' : '' );?> /><label for="security_headers_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ( $engine->db->enable_security_headers == 1 ? ' checked="checked"' : '' );?> /><label for="security_headers_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ( $engine->db->enable_security_headers == 0 ? ' checked="checked"' : '' );?> /><label for="security_headers_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">

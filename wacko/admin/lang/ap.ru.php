@@ -53,6 +53,8 @@ $ap_translation = [
 	// Generic
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
+	'On'						=> 'on',
+	'Off'						=> 'off',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -282,6 +284,7 @@ $ap_translation = [
 
 	'EmailFunctionName'			=> 'Email function name',
 	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
+	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -301,6 +304,7 @@ $ap_translation = [
 	'SmtpPort'					=> 'SMTP server port',
 	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
 	'SmtpServer'				=> 'SMTP server address',
+	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be "ssl://mail.example.com"',
 	'SmtpSettings'				=> 'SMTP settings',
 	'SmtpUsername'				=> 'SMTP username',
 	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',

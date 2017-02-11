@@ -142,8 +142,8 @@ function admin_config_upload(&$engine, &$module)
 				<td class="label"><strong>Create thumbnail:</strong><br />
 					<small>Create a thumbnail in all possible situations.</small></td>
 				<td>
-					<input type="radio" id="img_create_thumbnail_on" name="img_create_thumbnail" value="1"<?php echo ( $engine->db->img_create_thumbnail == 1 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="img_create_thumbnail_off" name="img_create_thumbnail" value="0"<?php echo ( $engine->db->img_create_thumbnail == 0 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="img_create_thumbnail_on" name="img_create_thumbnail" value="1"<?php echo ( $engine->db->img_create_thumbnail == 1 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="img_create_thumbnail_off" name="img_create_thumbnail" value="0"<?php echo ( $engine->db->img_create_thumbnail == 0 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">

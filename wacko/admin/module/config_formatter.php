@@ -103,8 +103,8 @@ function admin_config_formatter(&$engine, &$module)
 				<td class="label"><strong>Filtering HTML:</strong><br />
 				<small>Blocks dangerous HTML-conservation facilities. Turn off the filter to open the site when the support HTML <span class="underline">very</span> undesirable!</small></td>
 				<td>
-					<input type="radio" id="disable_safehtml_on" name="disable_safehtml" value="0"<?php echo ( !$engine->db->disable_safehtml ? ' checked="checked"' : '' );?> /><label for="disable_safehtml_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="disable_safehtml_off" name="disable_safehtml" value="1"<?php echo ( $engine->db->disable_safehtml ? ' checked="checked"' : '' );?> /><label for="disable_safehtml_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="disable_safehtml_on" name="disable_safehtml" value="0"<?php echo ( !$engine->db->disable_safehtml ? ' checked="checked"' : '' );?> /><label for="disable_safehtml_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="disable_safehtml_off" name="disable_safehtml" value="1"<?php echo ( $engine->db->disable_safehtml ? ' checked="checked"' : '' );?> /><label for="disable_safehtml_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -228,8 +228,8 @@ function admin_config_formatter(&$engine, &$module)
 				<td class="label"><strong>Enable Summer Time/DST:</strong><br />
 				<small></small></td>
 				<td>
-					<input type="radio" id="dst_off" name="dst" value="0"<?php echo ( $engine->db->dst == 0 ? ' checked="checked"' : '' );?> /><label for="dst_off"><?php echo $engine->_t('MetaOff');?></label>
-					<input type="radio" id="dst_on" name="dst" value="1"<?php echo ( $engine->db->dst == 1 ? ' checked="checked"' : '' );?> /><label for="dst_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="dst_off" name="dst" value="0"<?php echo ( $engine->db->dst == 0 ? ' checked="checked"' : '' );?> /><label for="dst_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="dst_on" name="dst" value="1"<?php echo ( $engine->db->dst == 1 ? ' checked="checked"' : '' );?> /><label for="dst_on"><?php echo $engine->_t('On');?></label>
 				</td>
 			</tr>
 			<tr>

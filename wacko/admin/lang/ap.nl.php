@@ -10,12 +10,12 @@ $ap_translation = [
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
-		'preferences'	=> 'Preferences',
+		'preferences'	=> 'Voorkeuren',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
-		'maintenance'	=> 'Maintenance',
+		'users'			=> 'Gebruikers',
+		'maintenance'	=> 'Onderhoud',
 		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
+		'extension'		=> 'Extensies',
 		'database'		=> 'Database',
 	],
 
@@ -47,8 +47,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
+	'Enabled'					=> 'Inschakelen',
+	'Disabled'					=> 'Uitschakelen',
+	'On'						=> 'Aan',
+	'Off'						=> 'Uit',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -91,7 +93,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Permissies',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -175,7 +177,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
+		'name'		=> 'Herstellen',
 		'title'		=> 'Restoring backup data',
 	],
 
@@ -229,7 +231,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'Statistieken',
 		'title'		=> 'Show statistics',
 	],
 
@@ -247,7 +249,7 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'Groepen',
 		'title'		=> 'Group management',
 	],
 
@@ -276,30 +278,32 @@ $ap_translation = [
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Deze informatie wordt gebruikt wanneer het site e-mails verstuurt naar je gebruikers. Zorg er voor dat het e-mailadres dat je specificeert geldig is, elk bericht dat niet verstuurd kan worden zal waarschijnlijk hier naar toe verstuurd worden. Als je host geen (PHP gebaseerde) e-mailservice aanbied, dan kan je berichten versturen door gebruik te maken van SMTP. Dit vereist het adres van een server (vraag je provider indien nodig). Als de server authenticatie vereist is (en alleen als het vereist wordt), voer dan de benodigde gebruikersnaam, wachtwoord en authenticatiemethode in.',
 
-	'EmailFunctionName'			=> 'Email function name',
-	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
+	'EmailFunctionName'			=> 'E-mailfunctie-naam',
+	'EmailFunctionNameInfo'		=> 'De e-mailfunctie gebruikt om e-mails te versturen via PHP.',
+	'UseSmtpInfo'				=> 'Selecteer <code>SMTP</code> als je e-mail wilt versturen via een genoemde server in plaats van de lokale e-mailfunctie.',
 
-	'EnableEmail'				=> 'Enable emails',
-	'EnableEmailInfo'			=> 'Enabling emails',
+	'EnableEmail'				=> 'E-mails inschakelen',
+	'EnableEmailInfo'			=> 'E-mails inschakelen',
 
-	'SendTestEmail'				=> 'Send a test email',
-	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
-	'TestEmailSubject'			=> 'WackoWiki is correctly configured to send emails',
-	'TestEmailBody'				=> 'If you received this email, WackoWiki is correctly configured to send emails.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br />If you don\'t receive it, please check your emails configuration.',
+	'SendTestEmail'				=> 'Test e-mail versturen',
+	'SendTestEmailInfo'			=> 'Deze optie verstuurt een test-e-mail naar het e-mailadres dat is opgegeven bij je accountinstellingen.',
+	'TestEmailSubject'			=> 'Wiki is correct geconfigureerd om e-mails te versturen',
+	'TestEmailBody'				=> 'Als je deze e-mail hebt ontvangen, is je wiki correct geconfigureerd om e-mails te versturen.',
+	'TestEmailMessage'			=> 'De test-e-mail is verzonden.<br />Controleer je e-mailconfiguratie als je de test e-mail niet hebt ontvangen.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
-	'SmtpPassword'				=> 'SMTP password',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
-	'SmtpPort'					=> 'SMTP server port',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP server address',
-	'SmtpSettings'				=> 'SMTP settings',
-	'SmtpUsername'				=> 'SMTP username',
-	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
+	'SmtpConnectionMode'		=> 'Authenticatiemethode voor SMTP',
+	'SmtpConnectionModeInfo'	=> 'Alleen gebruiken als een gebruikersnaam/wachtwoord ingesteld is, vraag je provider als je niet zeker bent welke methode je moet gebruiken.',
+	'SmtpPassword'				=> 'SMTP-wachtwoord',
+	'SmtpPasswordInfo'			=> 'Alleen een wachtwoord invoeren als je SMTP-server dit vereist.<br /><em><strong>Waarschuwing:</strong> Dit wachtwoord zal opgeslagen worden als platte tekst in de database, zichtbaar voor iedereen die toegang heeft tot je database of die dit configuratiepagina kan bekijken.</em>',
+	'SmtpPort'					=> 'SMTP-serverpoort',
+	'SmtpPortInfo'				=> 'Verander dit alleen als je weet dat je SMTP-server op een andere poort draait. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP-serveradres',
+	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be "ssl://mail.example.com"',
+	'SmtpSettings'				=> 'SMTP-instellingen',
+	'SmtpUsername'				=> 'SMTP-gebruikersnaam',
+	'SmtpUsernameInfo'			=> 'Voer alleen een gebruikersnaam in als je SMTP-server dit vereist.',
 
 	// log
 	'LogLevel1'					=> 'critical',
