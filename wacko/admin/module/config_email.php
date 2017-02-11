@@ -31,6 +31,27 @@ function admin_config_email(&$engine, &$module)
 	</p>
 	<br />
 <?php
+
+	// send test email
+	if (isset($_POST['send_test_email']))
+	{
+		$subject	= '[' . $engine->db->site_name . '] ' . $engine->_t('TestEmailSubject');
+		$body		= $engine->_t('EmailHello') . ' ' . $engine->db->admin_name . ",\n\n" .
+
+					$engine->_t('TestEmailBody')."\n\n\n" .
+
+					$engine->_t('EmailDoNotReply') . "\n\n" .
+					$engine->_t('EmailGoodbye') . "\n" .
+					$engine->db->site_name . "\n" .
+					$engine->db->base_url;
+
+		$email = new Email($engine);
+		$email->send_mail($engine->db->admin_email, $subject, $body);
+
+		$engine->set_message($engine->_t('TestEmailMessage'), 'success');
+		$engine->http->redirect(rawurldecode($engine->href()));
+	}
+
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
@@ -45,7 +66,6 @@ function admin_config_email(&$engine, &$module)
 		$config['smtp_port']					= (int) $_POST['smtp_port'];
 		$config['smtp_username']				= (string) $_POST['smtp_username'];
 		$config['enable_email']					= (int) $_POST['enable_email'];
-		$config['phpmailer']					= (int) $_POST['phpmailer'];
 		$config['phpmailer_method']				= (string) $_POST['phpmailer_method'];
 
 		$engine->config->_set($config);
@@ -54,6 +74,8 @@ function admin_config_email(&$engine, &$module)
 		$engine->set_message('Updated email settings', 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
+
+
 
 	echo $engine->form_open('email');
 ?>
@@ -70,19 +92,6 @@ function admin_config_email(&$engine, &$module)
 				<td style="width:40%;">
 					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked="checked"' : '');?> /><label for="enable_email_on"><?php echo $engine->_t('Enabled'); ?></label>
 					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ($engine->db->enable_email == 0 ? ' checked="checked"' : '');?> /><label for="enable_email_off"><?php echo $engine->_t('Disabled'); ?></label>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="phpmailer"><strong>PHPMailer:</strong><br />
-					<small>Use the PHPMailer class. Enabling this option ...</small></label>
-				</td>
-				<td style="width:40%;">
-					<input type="radio" id="phpmailer_on" name="phpmailer" value="1"<?php echo ($engine->db->phpmailer == 1 ? ' checked="checked"' : '');?> /><label for="phpmailer_on"><?php echo $engine->_t('Enabled'); ?></label>
-					<input type="radio" id="phpmailer_off" name="phpmailer" value="0"<?php echo ($engine->db->phpmailer == 0 ? ' checked="checked"' : '');?> /><label for="phpmailer_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -137,6 +146,15 @@ function admin_config_email(&$engine, &$module)
 				<small>Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.</small></label></td>
 				<td><input type="email" maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->db->abuse_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="send_test_email"><strong><?php echo $engine->_t('SendTestEmail'); ?>:</strong><br />
+				<small><?php echo $engine->_t('SendTestEmailInfo'); ?></small></label></td>
+				<td><input type="submit" id="send_test_email" name="send_test_email" value="<?php echo $engine->_t('SendTestEmail'); ?>"></td>
+			</tr>
+
 			<tr>
 				<th colspan="2">
 					<br />

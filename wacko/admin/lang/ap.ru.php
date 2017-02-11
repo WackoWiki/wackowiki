@@ -288,6 +288,9 @@ $ap_translation = [
 
 	'SendTestEmail'				=> 'Send a test email',
 	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
+	'TestEmailSubject'			=> 'WackoWiki is correctly configured to send emails',
+	'TestEmailBody'				=> 'If you received this email, WackoWiki is correctly configured to send emails.',
+	'TestEmailMessage'			=> 'The test email has been sent.<br />If you don\'t receive it, please check your emails configuration.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',

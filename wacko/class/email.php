@@ -66,32 +66,7 @@ class Email
 		}
 
 		// use PHPMailer class
-		if ($this->engine->db->phpmailer)
-		{
-			// $this->engine->db->phpMailer_method
-			$this->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset, $xtra_headers);
-		}
-		else
-		{
-			// use PHP mail() function
-			$header = [];
-			$header[] = 'From: =?' . $charset . "?B?" . base64_encode($this->engine->db->site_name) . "?= <" . $this->engine->db->noreply_email;
-			$header[] = 'X-Mailer: PHP/' . phpversion(); // mailer
-			$header[] = 'X-Priority: 3'; // 1 urgent, 3 normal
-			$header[] = 'X-Wacko: ' . $this->engine->db->base_url;
-			$header[] = 'Content-Type: text/plain; charset=' . $charset;
-
-			foreach ($xtra_headers as $name => $value)
-			{
-				$header[] = $name . ': ' . $value;
-			}
-
-			$headers	= implode("\r\n", $header);
-			$subject	= ($subject ? "=?" . $charset . "?B?" . base64_encode($subject) . "?=" : '');
-			$body		= wordwrap($body, 74, "\n", 0);
-
-			@mail($email_to, $subject, $body, $headers);
-		}
+		$this->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset, $xtra_headers);
 	}
 
 	function php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset = '', $xtra_headers = '')

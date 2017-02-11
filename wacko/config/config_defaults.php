@@ -48,7 +48,6 @@ $wacko_config_defaults = [
 	'reverse_proxy_header'			=> '',
 	'reverse_proxy_addresses'		=> '', // 'a.b.c.d', ...'
 
-	'phpmailer'						=> 0,
 	'phpmailer_method'				=> 'mail',
 
 	'smtp_host'						=> 'localhost',
