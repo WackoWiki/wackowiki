@@ -86,8 +86,8 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="enable_email"><strong>Email:</strong><br />
-					<small>Enabling email</small></label>
+					<label for="enable_email"><strong><?php echo $engine->_t('EnableEmail'); ?>:</strong><br />
+					<small><?php echo $engine->_t('EnableEmailInfo'); ?></small></label>
 				</td>
 				<td style="width:40%;">
 					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked="checked"' : '');?> /><label for="enable_email_on"><?php echo $engine->_t('Enabled'); ?></label>
@@ -99,8 +99,9 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="phpmailer_method"><strong>E-mail function name:</strong><br />
-					<small>The e-mail function used to send mails through PHP.</small></label></td>
+					<label for="phpmailer_method"><strong><?php echo $engine->_t('EmailFunctionName'); ?>:</strong><br />
+					<small><?php echo $engine->_t('EmailFunctionNameInfo'); ?><br />
+					<?php echo $engine->_t('UseSmtpInfo'); ?></small></label></td>
 				<td>
 					<select style="width:200px;" id="phpmailer_method" name="phpmailer_method">
 						<option value="mail"<?php echo ((string) $engine->db->phpmailer_method === 'mail' ? ' selected="selected"' : '');?>>mail</option>
@@ -141,7 +142,7 @@ function admin_config_email(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="abuse_email"><strong>Email service abuse:</strong><br />
+				<td class="label"><label for="abuse_email"><strong>Email abuse service:</strong><br />
 				<small>Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.</small></label></td>
 				<td><input type="email" maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->db->abuse_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>

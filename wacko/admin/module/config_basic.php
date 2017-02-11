@@ -166,8 +166,8 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Themes per page:</strong><br />
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				<td>
-					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ( $engine->db->allow_themes_per_page == 1 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ( $engine->db->allow_themes_per_page == 0 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ( $engine->db->allow_themes_per_page == 1 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ( $engine->db->allow_themes_per_page == 0 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -266,9 +266,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Allow comments:</strong><br />
 					<small>Enable comments for guest or registered users only or disable them on the entire site.</small></td>
 				<td>
-					<input type="radio" id="enable_comments" name="enable_comments" value="1" <?php echo ( $engine->db->enable_comments == 1 ? ' checked="checked"' : '' );?> /><label for="enable_comments_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="enable_comments" name="enable_comments" value="1" <?php echo ( $engine->db->enable_comments == 1 ? ' checked="checked"' : '' );?> /><label for="enable_comments_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="enable_comments_guest" name="enable_comments" value="2" <?php echo ( $engine->db->enable_comments == 2 ? ' checked="checked"' : '' );?> /><label for="enable_comments_guest"><?php echo $engine->_t('MetaRegistered');?></label>
-					<input type="radio" id="enable_comments_off" name="enable_comments" value="0" <?php echo ( $engine->db->enable_comments == 0 ? ' checked="checked"' : '' );?> /><label for="enable_comments_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="enable_comments_off" name="enable_comments" value="0" <?php echo ( $engine->db->enable_comments == 0 ? ' checked="checked"' : '' );?> /><label for="enable_comments_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -294,9 +294,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Comments panel:</strong><br />
 					<small>The default display of comments in the bottom of the page.</small></td>
 				<td>
-					<input type="radio" id="footer_comments_on" name="footer_comments" value="1"<?php echo ( $engine->db->footer_comments == 1 ? ' checked="checked"' : '' );?> /><label for="footer_comments_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="footer_comments_on" name="footer_comments" value="1"<?php echo ( $engine->db->footer_comments == 1 ? ' checked="checked"' : '' );?> /><label for="footer_comments_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="footer_comments_guest" name="footer_comments" value="2"<?php echo ( $engine->db->footer_comments == 2 ? ' checked="checked"' : '' );?> /><label for="footer_comments_guest"><?php echo $engine->_t('MetaRegistered');?></label>
-					<input type="radio" id="footer_comments_off" name="footer_comments" value="0"<?php echo ( $engine->db->footer_comments == 0 ? ' checked="checked"' : '' );?> /><label for="footer_comments_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="footer_comments_off" name="footer_comments" value="0"<?php echo ( $engine->db->footer_comments == 0 ? ' checked="checked"' : '' );?> /><label for="footer_comments_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -306,9 +306,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>File panel:</strong><br />
 					<small>The default display of attachments in the bottom of the page .</small></td>
 				<td>
-					<input type="radio" id="footer_files_on" name="footer_files" value="1"<?php echo ( $engine->db->footer_files == 1 ? ' checked="checked"' : '' );?> /><label for="footer_files_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="footer_files_on" name="footer_files" value="1"<?php echo ( $engine->db->footer_files == 1 ? ' checked="checked"' : '' );?> /><label for="footer_files_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="footer_files_guest" name="footer_files" value="2"<?php echo ( $engine->db->footer_files == 2 ? ' checked="checked"' : '' );?> /><label for="footer_files_guest"><?php echo $engine->_t('MetaRegistered');?></label>
-					<input type="radio" id="footer_files_off" name="footer_files" value="0"<?php echo ( $engine->db->footer_files == 0 ? ' checked="checked"' : '' );?> /><label for="footer_files_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="footer_files_off" name="footer_files" value="0"<?php echo ( $engine->db->footer_files == 0 ? ' checked="checked"' : '' );?> /><label for="footer_files_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -318,9 +318,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Rating panel :</strong><br />
 					<small>The default display of the rating panel in the bottom of the page.</small></td>
 				<td>
-					<input type="radio" id="footer_rating_on" name="footer_rating" value="1"<?php echo ( $engine->db->footer_rating == 1 ? ' checked="checked"' : '' );?> /><label for="footer_rating_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="footer_rating_on" name="footer_rating" value="1"<?php echo ( $engine->db->footer_rating == 1 ? ' checked="checked"' : '' );?> /><label for="footer_rating_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="footer_rating_guest" name="footer_rating" value="2"<?php echo ( $engine->db->footer_rating == 2 ? ' checked="checked"' : '' );?> /><label for="footer_rating_guest"><?php echo $engine->_t('MetaRegistered');?></label>
-					<input type="radio" id="footer_rating_off" name="footer_rating" value="0"<?php echo ( $engine->db->footer_rating == 0 ? ' checked="checked"' : '' );?> /><label for="footer_rating_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="footer_rating_off" name="footer_rating" value="0"<?php echo ( $engine->db->footer_rating == 0 ? ' checked="checked"' : '' );?> /><label for="footer_rating_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -330,9 +330,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Tags panel :</strong><br />
 					<small>The default display of the tags panel in the bottom of the page.</small></td>
 				<td>
-					<input type="radio" id="footer_tags_on" name="footer_tags" value="1"<?php echo ( $engine->db->footer_tags == 1 ? ' checked="checked"' : '' );?> /><label for="footer_tags_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="footer_tags_on" name="footer_tags" value="1"<?php echo ( $engine->db->footer_tags == 1 ? ' checked="checked"' : '' );?> /><label for="footer_tags_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="footer_tags_guest" name="footer_tags" value="2"<?php echo ( $engine->db->footer_tags == 2 ? ' checked="checked"' : '' );?> /><label for="footer_tags_guest"><?php echo $engine->_t('MetaRegistered');?></label>
-					<input type="radio" id="footer_tags_off" name="footer_tags" value="0"<?php echo ( $engine->db->footer_tags == 0 ? ' checked="checked"' : '' );?> /><label for="footer_tags_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="footer_tags_off" name="footer_tags" value="0"<?php echo ( $engine->db->footer_tags == 0 ? ' checked="checked"' : '' );?> /><label for="footer_tags_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -342,9 +342,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Hide Revisions:</strong><br />
 					<small>The default display of revisions of the page.</small></td>
 				<td>
-					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ( $engine->db->hide_revisions == 2 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ( $engine->db->hide_revisions == 2 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="hide_revisions_guest" name="hide_revisions" value="1"<?php echo ( $engine->db->hide_revisions == 1 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_guest"><?php echo $engine->_t('MetaRegistered');?></label>
-					<input type="radio" id="hide_revisions_off" name="hide_revisions" value="0"<?php echo ( $engine->db->hide_revisions == 0 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="hide_revisions_off" name="hide_revisions" value="0"<?php echo ( $engine->db->hide_revisions == 0 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -354,8 +354,8 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Table of contents panel :</strong><br />
 					<small>The default display table of contents panel of a page (may need support in the templates).</small></td>
 				<td>
-					<input type="radio" id="hide_toc_on" name="hide_toc" value="0"<?php echo ( !$engine->db->hide_toc ? ' checked="checked"' : '' );?> /><label for="hide_toc_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="hide_toc_off" name="hide_toc" value="1"<?php echo ( $engine->db->hide_toc ? ' checked="checked"' : '' );?> /><label for="hide_toc_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="hide_toc_on" name="hide_toc" value="0"<?php echo ( !$engine->db->hide_toc ? ' checked="checked"' : '' );?> /><label for="hide_toc_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="hide_toc_off" name="hide_toc" value="1"<?php echo ( $engine->db->hide_toc ? ' checked="checked"' : '' );?> /><label for="hide_toc_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -365,8 +365,8 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Sections panel :</strong><br />
 					<small>By default display the panel of adjacent pages (requires support in the templates).</small></td>
 				<td>
-					<input type="radio" id="hide_index_on" name="hide_index" value="0"<?php echo ( !$engine->db->hide_index ? ' checked="checked"' : '' );?> /><label for="hide_index_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="hide_index_off" name="hide_index" value="1"<?php echo ( $engine->db->hide_index ? ' checked="checked"' : '' );?> /><label for="hide_index_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="hide_index_on" name="hide_index" value="0"<?php echo ( !$engine->db->hide_index ? ' checked="checked"' : '' );?> /><label for="hide_index_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="hide_index_off" name="hide_index" value="1"<?php echo ( $engine->db->hide_index ? ' checked="checked"' : '' );?> /><label for="hide_index_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -410,9 +410,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Edit summary:</strong><br />
 					<small>Shows change summary in the edit mode.</small></td>
 				<td>
-					<input type="radio" id="edit_summary_on" name="edit_summary" value="1"<?php echo ( $engine->db->edit_summary == 1 ? ' checked="checked"' : '' );?> /><label for="edit_summary_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="edit_summary_on" name="edit_summary" value="1"<?php echo ( $engine->db->edit_summary == 1 ? ' checked="checked"' : '' );?> /><label for="edit_summary_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="edit_summary_mandatory" name="edit_summary" value="2"<?php echo ( $engine->db->edit_summary == 2 ? ' checked="checked"' : '' );?> /><label for="edit_summary_mandatory"><?php echo $engine->_t('Mandatory');?></label>
-					<input type="radio" id="edit_summary_off" name="edit_summary" value="0"<?php echo ( !$engine->db->edit_summary ? ' checked="checked"' : '' );?> /><label for="edit_summary_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="edit_summary_off" name="edit_summary" value="0"<?php echo ( !$engine->db->edit_summary ? ' checked="checked"' : '' );?> /><label for="edit_summary_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -422,8 +422,8 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Minor edit:</strong><br />
 					<small>Enables minor edit option in the edit mode.</small></td>
 				<td>
-					<input type="radio" id="minor_edit_on" name="minor_edit" value="1"<?php echo ( $engine->db->minor_edit ? ' checked="checked"' : '' );?> /><label for="minor_edit_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="minor_edit_off" name="minor_edit" value="0"<?php echo ( !$engine->db->minor_edit ? ' checked="checked"' : '' );?> /><label for="minor_edit_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="minor_edit_on" name="minor_edit" value="1"<?php echo ( $engine->db->minor_edit ? ' checked="checked"' : '' );?> /><label for="minor_edit_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="minor_edit_off" name="minor_edit" value="0"<?php echo ( !$engine->db->minor_edit ? ' checked="checked"' : '' );?> /><label for="minor_edit_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -433,8 +433,8 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Review:</strong><br />
 					<small>Enables review option in the edit mode.</small></td>
 				<td>
-					<input type="radio" id="review_on" name="review" value="1"<?php echo ( $engine->db->review ? ' checked="checked"' : '' );?> /><label for="review_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="review_off" name="review" value="0"<?php echo ( !$engine->db->review ? ' checked="checked"' : '' );?> /><label for="review_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="review_on" name="review" value="1"<?php echo ( $engine->db->review ? ' checked="checked"' : '' );?> /><label for="review_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="review_off" name="review" value="0"<?php echo ( !$engine->db->review ? ' checked="checked"' : '' );?> /><label for="review_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -444,8 +444,8 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Autosubscribe:</strong><br />
 					<small>Automatically sign a new page in the owner's notice of its changes.</small></td>
 				<td>
-					<input type="radio" id="disable_autosubscribe_on" name="disable_autosubscribe" value="0"<?php echo ( !$engine->db->disable_autosubscribe ? ' checked="checked"' : '' );?> /><label for="disable_autosubscribe_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="disable_autosubscribe_off" name="disable_autosubscribe" value="1"<?php echo ( $engine->db->disable_autosubscribe ? ' checked="checked"' : '' );?> /><label for="disable_autosubscribe_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="disable_autosubscribe_on" name="disable_autosubscribe" value="0"<?php echo ( !$engine->db->disable_autosubscribe ? ' checked="checked"' : '' );?> /><label for="disable_autosubscribe_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="disable_autosubscribe_off" name="disable_autosubscribe" value="1"<?php echo ( $engine->db->disable_autosubscribe ? ' checked="checked"' : '' );?> /><label for="disable_autosubscribe_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -455,8 +455,8 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Allow anonymous publishing:</strong><br />
 					<small>Allow users to published preferably anonymously (to hide the name).</small></td>
 				<td>
-					<input type="radio" id="publish_anonymously_on" name="publish_anonymously" value="1"<?php echo ( $engine->db->publish_anonymously ? ' checked="checked"' : '' );?> /><label for="publish_anonymously_on"><?php echo $engine->_t('MetaOn');?></label>
-					<input type="radio" id="publish_anonymously_off" name="publish_anonymously" value="0"<?php echo ( !$engine->db->publish_anonymously ? ' checked="checked"' : '' );?> /><label for="publish_anonymously_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="publish_anonymously_on" name="publish_anonymously" value="1"<?php echo ( $engine->db->publish_anonymously ? ' checked="checked"' : '' );?> /><label for="publish_anonymously_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="publish_anonymously_off" name="publish_anonymously" value="0"<?php echo ( !$engine->db->publish_anonymously ? ' checked="checked"' : '' );?> /><label for="publish_anonymously_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -498,9 +498,9 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Enable Referrers:</strong><br />
 					<small>Allows to store and show external referrers.</small></td>
 				<td>
-					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ( $engine->db->enable_referrers == 1 ? ' checked="checked"' : '' );?> /><label for="enable_referrer_on"><?php echo $engine->_t('MetaOn');?></label>
+					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ( $engine->db->enable_referrers == 1 ? ' checked="checked"' : '' );?> /><label for="enable_referrer_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="enable_referrer_admin" name="enable_referrers" value="2"<?php echo ( $engine->db->enable_referrers == 2 ? ' checked="checked"' : '' );?> /><label for="enable_referrer_admin"><?php echo $engine->_t('Admin');?></label>
-					<input type="radio" id="enable_referrer_off" name="enable_referrers" value="0"<?php echo ( $engine->db->enable_referrers == 0? ' checked="checked"' : '' );?> /><label for="enable_referrer_off"><?php echo $engine->_t('MetaOff');?></label>
+					<input type="radio" id="enable_referrer_off" name="enable_referrers" value="0"<?php echo ( $engine->db->enable_referrers == 0? ' checked="checked"' : '' );?> /><label for="enable_referrer_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
