@@ -287,8 +287,8 @@ $ap_translation = [
 
 	'SendTestEmail'				=> 'Test-Mail senden',
 	'SendTestEmailInfo'			=> 'Sendet eine Test-Mail an die in deinem Benutzerkonto hinterlegte Adresse.',
-	'TestEmailSubject'			=> 'WackoWiki is correctly configured to send emails',
-	'TestEmailBody'				=> 'If you received this email, WackoWiki is correctly configured to send emails.',
+	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
+	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
 	'TestEmailMessage'			=> 'Die Test-Mail wurde gesendet.<br />Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Konfiguration.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
