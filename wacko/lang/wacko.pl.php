@@ -86,8 +86,8 @@ $wacko_translation = [
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
 
 	// other
-	'Guest'							=> 'Go¶æ',
-	'Help' => 'Pomoc',
+	'Guest'						=> 'Go¶æ',
+	'Help'						=> 'Pomoc',
 	'TopicSearchText'			=> 'Wyszukiwanie wy³±cznie w¶ród tytu³ów',
 	'WordprocessorVersion'		=> 'Wersja Procesor tekstu',
 	'EmailHello'				=> 'Cze¶æ ',
@@ -232,8 +232,8 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'To assign categories to a page select the checkboxes.',
 	'CategoriesStoreButton' 	=> 'Save Categories',
-	'CategoriesSaveButton'		=> 'Submit',
-	'CategoriesCancelButton' 	=> 'Cancel',
+	'CategoriesSaveButton'		=> 'Wy¶lij',
+	'CategoriesCancelButton' 	=> 'Anuluj',
 	'CategoriesAddButton'		=> 'Add',
 	'CategoriesRenameButton'	=> 'Rename',
 	'CategoriesGroupButton'		=> 'Group',
@@ -383,7 +383,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Znajd¼',
 	'TopicSearchResults'		=> 'Tematy - wyniki wyszukiwania: ',
 	'NotFoundInTopics'			=> 'wyszukiwanego s³owa nie odnaleziono w tematach',
-	'SearchPage'			=> 'Search',
+	'SearchPage'				=> 'Search',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',
@@ -451,7 +451,7 @@ $wacko_translation = [
 	'SomeoneCommented'			=> ' skomentowa³ obserwowan± przez Ciebie stronê: ',
 	'AlertReferringPages'		=> 'Do tej strony odwo³uj± siê nastêpuj±ce dokumenty',
 
-	'MarkRead'					=> 'Mark all as read',
+	'MarkRead'					=> 'Oznacz jako przeczytane',
 	'CurrentTime'				=> 'current time',
 	'Created'					=> 'created',
 	'Modified'					=> 'modified',
@@ -493,7 +493,7 @@ $wacko_translation = [
 
 	'UserSettings'				=> 'User settings',
 	'UserSettingsGeneral'		=> 'General',
-	'UserSettingsNotifications'	=> 'Notifications',
+	'UserSettingsNotifications'	=> 'Powiadomienia',
 
 	'NotifyMinorEdit'			=> 'Notify also minor edit',
 	'NotifyPageEdit'			=> 'Edit',
@@ -676,8 +676,8 @@ $wacko_translation = [
 	'MetaTitle'					=> 'Title',
 	'MetaKeywords'				=> 'S³owa kluczowe Meta',
 	'MetaDescription'			=> 'Opis Meta',
-	'MetaOn'					=> 'On',
-	'MetaOff'					=> 'Off',
+	'MetaOn'					=> 'W³±czony',
+	'MetaOff'					=> 'Wy³±czony',
 	'MetaRegistered'			=> 'Registered',
 	'MetaComments'				=> 'Show comments',
 	'MetaFiles'					=> 'Show files panel',
@@ -754,7 +754,7 @@ $wacko_translation = [
 	'UploadUsedStorage'			=> 'Storage in use ',
 
 	// attachments
-	'Attachments'				=> 'Attachments',
+	'Attachments'				=> 'Za³±czniki',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -830,10 +830,10 @@ $wacko_translation = [
 
 	// pagination
 	'ToThePage'					=> 'To page',
-	'Next'						=> 'Next',
-	'Prev'						=> 'Prev',
-	'NextAcr'					=> 'Next',
-	'PrevAcr'					=> 'Prev',
+	'Next'						=> 'Nastêpna',
+	'Prev'						=> 'Poprzednia',
+	'NextAcr'					=> 'Nastêpna',
+	'PrevAcr'					=> 'Poprzednia',
 
 	// filter
 	'Any'						=> 'Any',
@@ -944,19 +944,19 @@ $wacko_translation = [
 	'ModerateSection'			=> 'section / page ',
 
 	'NotModerator'				=> 'You do not have authority to moderate this page / chapter',
-	'ModerateDelete'			=> 'Delete',
+	'ModerateDelete'			=> 'Usuñ',
 	'ModerateDeleteTopic'		=> 'Delete topic / page',
 	'ModerateDeletePosts'		=> 'Delete comments',
-	'ModerateMove'				=> 'Move',
+	'ModerateMove'				=> 'Przenie¶',
 	'ModerateRename'			=> 'Rename',
 	'ModerateSplit'				=> 'Split / Move comments',
-	'ModerateMerge'				=> 'Merge',
+	'ModerateMerge'				=> 'Po³±cz',
 	'ModerateLock'				=> 'Lock',
 	'ModerateUnlock'			=> 'Unlock',
 	'ModerateSet'				=> 'Set',
 	'ModerateReset'				=> 'Reset',
 	'ModerateAccept'			=> 'Accept',
-	'ModerateDecline'			=> 'Cancel',
+	'ModerateDecline'			=> 'Anuluj',
 	'ModerateDeleteConfirm'		=> 'Are you sure you want to <span class="underline">remove</span> the following topics?',
 	'ModerateRenameConfirm'		=> 'Enter a new name for the selected page',
 	'ModerateRenameExists'		=> 'Page same name already exists! Choose a different name.',

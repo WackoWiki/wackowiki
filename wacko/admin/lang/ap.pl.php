@@ -12,7 +12,7 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
+		'users'			=> 'U¿ytkownicy',
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
@@ -28,12 +28,12 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
 	'FormSave'					=> 'Save',
-	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> 'Update',
+	'FormReset'					=> 'Wyczy¶æ',
+	'FormUpdate'				=> 'Aktualizuj',
 
-	'ApHomePage'				=> 'Home Page',
+	'ApHomePage'				=> 'Strona domowa',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Log out',
+	'ApLogOut'					=> 'Wyloguj',
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
@@ -47,10 +47,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
-	'On'						=> 'on',
-	'Off'						=> 'off',
+	'Enabled'					=> 'Odblokuj',
+	'Disabled'					=> 'Zablokuj',
+	'On'						=> 'w³±czony',
+	'Off'						=> 'wy³±czony',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -63,7 +63,7 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'Email',
+		'name'		=> 'E-mail',
 		'title'		=> 'Email settings',
 	],
 
@@ -81,7 +81,7 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
+		'name'		=> 'Powiadomienia',
 		'title'		=> 'Notifications settings',
 	],
 
@@ -93,7 +93,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Uprawnienia',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -159,7 +159,7 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
+		'name'		=> 'Kopia zapasowa',
 		'title'		=> 'Backing up data',
 	],
 
@@ -177,7 +177,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
+		'name'		=> 'Przywracanie',
 		'title'		=> 'Restoring backup data',
 	],
 
@@ -231,7 +231,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'Statystyki',
 		'title'		=> 'Show statistics',
 	],
 
@@ -255,19 +255,19 @@ $ap_translation = [
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
+		'name'		=> 'U¿ytkownicy',
 		'title'		=> 'User management',
 	],
 
-	'LogFilterTip'			=> 'Filter events by criteria',
-	'LogLevel'				=> 'Level',
-	'LogLevelNotLower'		=> 'not less than',
-	'LogLevelNotHigher'		=> 'not higher than',
-	'LogLevelEqual'			=> 'equal',
-	'LogNoMatch'			=> 'No events that meet the criteria',
-	'LogDate'				=> 'Date',
-	'LogEvent'				=> 'Event',
-	'LogUsername'			=> 'Username',
+	'LogFilterTip'				=> 'Filter events by criteria',
+	'LogLevel'					=> 'Level',
+	'LogLevelNotLower'			=> 'not less than',
+	'LogLevelNotHigher'			=> 'not higher than',
+	'LogLevelEqual'				=> 'equal',
+	'LogNoMatch'				=> 'No events that meet the criteria',
+	'LogDate'					=> 'Date',
+	'LogEvent'					=> 'Event',
+	'LogUsername'				=> 'Username',
 
 	'PurgeSessions'				=> 'purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
@@ -276,13 +276,13 @@ $ap_translation = [
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',
+	'EmaiSettingsInfo'			=> 'Te informacje s± u¿ywane przez witrynê podczas wysy³ania e-maili do u¿ytkowników. Sprawd¼ czy podany adres e-mail jest wa¿nym adresem, poniewa¿ wszystkie zwrócone lub niedostarczone wiadomo¶ci bêd± prawdopodobnie odsy³ane na ten adres. Je¶li serwer nie udostêpnia natywnych (opartych na PHP) us³ug e-mail, mo¿na wysy³aæ wiadomo¶ci bezpo¶rednio, u¿ywaj±c protoko³u SMTP. Wymaga to adresu odpowiedniego serwera. Je¶li go nie znasz, zapytaj o niego swojego us³ugodawcê. Je¶li serwer wymaga uwierzytelnienia (i tylko, je¶li wymaga), wprowad¼ nazwê u¿ytkownika, has³o i metodê uwierzytelniania.',
 
-	'EmailFunctionName'			=> 'Email function name',
-	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
-	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',
+	'EmailFunctionName'			=> 'Nazwa funkcji',
+	'EmailFunctionNameInfo'		=> 'Nazwa funkcji e-maila u¿ywana do wysy³ania maili przez PHP.',
+	'UseSmtpInfo'				=> 'Wybierz <code>SMTP</code> , je¶li takie jest twoje ¿yczenie lub trzeba wysy³aæ wiadomo¶ci e-mail przez dany serwer zamiast przez lokaln± funkcjê pocztow±.',
 
-	'EnableEmail'				=> 'Enable emails',
+	'EnableEmail'				=> 'E-mail do wszystkich',
 	'EnableEmailInfo'			=> 'Enabling emails',
 
 	'FromEmailName'				=> 'From Name',
@@ -302,17 +302,36 @@ $ap_translation = [
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
-	'SmtpPassword'				=> 'SMTP password',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
-	'SmtpPort'					=> 'SMTP server port',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP server address',
+	'SmtpConnectionMode'		=> 'Metoda uwierzytelniania dla SMTP',
+	'SmtpConnectionModeInfo'	=> 'Uwierzytelnianie jest u¿ywane tylko wtedy, gdy jest okre¶lona nazwa u¿ytkownika i has³o. Je¶li nie wiesz, jakiej metody u¿yæ, zapytaj swojego dostawcê us³ugi.',
+	'SmtpPassword'				=> 'SMTP Has³o',
+	'SmtpPasswordInfo'			=> 'Nale¿y wprowadziæ tylko, je¶li serwer SMTP tego wymaga.<br /><em><strong>Ostrze¿enie:</strong> Has³o zostanie zapisane w bazie danych jako zwyk³y tekst i bêdzie widoczne dla ka¿dego, kto ma dostêp do bazy danych lub kto mo¿e przegl±daæ tê stronê konfiguracji.</em>',
+	'SmtpPort'					=> 'Port serwera',
+	'SmtpPortInfo'				=> 'Mo¿na zmieniaæ tylko wtedy, gdy wiadomo, ¿e serwer pracuje na innym porcie. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP Adres serwera',
 	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
-	'SmtpSettings'				=> 'SMTP settings',
-	'SmtpUsername'				=> 'SMTP username',
-	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
+	'SmtpSettings'				=> 'Ustawienia SMTP',
+	'SmtpUsername'				=> 'SMTP Nazwa u¿ytkownika',
+	'SmtpUsernameInfo'			=> 'Nale¿y wprowadziæ tylko, je¶li serwer SMTP tego wymaga.',
+
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Tutaj mo¿na dokonaæ konfiguracji g³ównych ustawieñ za³±czników i powi±zanych z nimi kategorii specjalnych.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Maksymalny rozmiar pliku',
+	'UploadMaxFilesizeInfo'		=> 'Maksymalny rozmiar zamieszczanego pliku. Warto¶æ zero (0) - rozmiar zamieszczanego pliku ograniczany jest tylko przez ustawienia PHP.',
+	'UploadQuota'				=> 'Rozmiar przestrzeni dyskowej',
+	'UploadQuotaInfo'			=> 'Maksymalna przestrzeñ dyskowa dostêpna dla wszystkich za³±czników w tej instalacji Wiki. Warto¶æ zero (0) - brak ograniczenia przestrzeni.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Sprawdzaj pliki za³±cznika',
+	'CheckMimetypeInfo'			=> 'Niektóre przegl±darki mog± byæ zmuszane do przybierania nieprawid³owego typu mediów (mimetype) dla wysy³anych plików. Funkcja ta zabezpiecza takie pliki przed odrzuceniem.',
+
+	'CreateThumbnail'			=> 'Zawsze twórz miniaturê',
+	'CreateThumbnailInfo'		=> 'Tworzy miniaturê we wszystkich mo¿liwych sytuacjach. Dziêki tej funkcji miniatura bêdzie wy¶wietlana bezpo¶rednio w po¶cie i u¿ytkownik mo¿e j± klikn±æ, aby zobaczyæ pe³ny obrazek.',
+	'MaxThumbWidth'				=> 'Maksymalna szeroko¶æ miniatury w pikselach',
+	'MaxThumbWidthInfo'			=> 'Generowana miniatura nie bêdzie mog³a przekroczyæ okre¶lonej tutaj szeroko¶ci.',
+	'MinThumbFilesize'			=> 'Minimalny rozmiar pliku miniatury',
+	'MinThumbFilesizeInfo'		=> 'Je¶li rozmiar pliku miniatury jest mniejszy ni¿ zdefiniowana tutaj warto¶æ, miniatura nie zostanie utworzona.',
 
 	// log
 	'LogLevel1'					=> 'critical',
@@ -384,7 +403,7 @@ $ap_translation = [
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Edit',
+	'UserEditButton'			=> 'Edytuj',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user ',
@@ -393,9 +412,9 @@ $ap_translation = [
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
 	'UsersUpdated'				=> 'User successfully updated.',
 
-	'UserName'					=> 'Username',
+	'UserName'					=> 'Nazwa u¿ytkownika',
 	'UserRealname'				=> 'Realname',
-	'UserEmail'					=> 'Email',
+	'UserEmail'					=> 'E-mail',
 	'UserIP'					=> 'IP',
 	'UserLanguage'				=> 'Language',
 	'UserSignuptime'			=> 'Signuptime',
@@ -407,7 +426,7 @@ $ap_translation = [
 	'GroupsDescription'			=> 'Description',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Open',
-	'GroupsActive'				=> 'Active',
+	'GroupsActive'				=> 'Aktywny',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
 	'GroupsAlreadyExists'		=> 'This group already exists.',
@@ -420,11 +439,11 @@ $ap_translation = [
 	'GroupsDelete'				=> 'Are you sure you want to remove group ',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Submit',
-	'GroupsCancelButton'		=> 'Cancel',
+	'GroupsSaveButton'			=> 'Wy¶lij',
+	'GroupsCancelButton'		=> 'Anuluj',
 	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Edit',
-	'GroupsRemoveButton'		=> 'Remove',
+	'GroupsEditButton'			=> 'Edytuj',
+	'GroupsRemoveButton'		=> 'Usuñ',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'MembersAddNew'				=> 'Add new member',

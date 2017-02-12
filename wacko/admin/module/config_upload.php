@@ -27,7 +27,7 @@ function admin_config_upload(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 		<br />
 	<p>
-		Here you can configure the main settings for attachments and the associated special categories.
+		<?php echo $engine->_t('UploadSettingsInfo');?>
 	</p>
 	<br />
 <?php
@@ -44,6 +44,7 @@ function admin_config_upload(&$engine, &$module)
 		$config['upload_max_size']			= (int) $_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']];
 		$config['upload_quota']				= (int) $_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']];
 		$config['upload_quota_per_user']	= (int) $_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
+		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
 		$config['img_create_thumbnail']		= (int) $_POST['img_create_thumbnail'];
 		$config['img_max_thumb_width']		= (int) $_POST['img_max_thumb_width'];
 
@@ -61,7 +62,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					File uploads
+					<?php echo $engine->_t('FileUploads');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
@@ -89,8 +90,8 @@ function admin_config_upload(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_max_size"><strong>Maximum file size:</strong><br />
-					<small>Maximum size of each file.</small></label></td>
+				<td class="label"><label for="upload_max_size"><strong><?php echo $engine->_t('UploadMaxFilesize');?>:</strong><br />
+					<small><?php echo $engine->_t('UploadMaxFilesizeInfo');?></small></label></td>
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_max_size, false, true, true, false);?>" />
 					<?php $x = $engine->binary_multiples_factor($engine->db->upload_max_size, false); ?>
 					<select name="upload_max_size_factor">
@@ -104,8 +105,8 @@ function admin_config_upload(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_quota"><strong>Total upload quota:</strong><br />
-					<small>Maximum drive space available for attachments for the whole engine, with 0 being unlimited. <strong><?php echo $engine->binary_multiples($engine->upload_quota(), false, true, true);?></strong> used.</small></label></td>
+				<td class="label"><label for="upload_quota"><strong><?php echo $engine->_t('UploadQuota');?>:</strong><br />
+					<small><?php echo $engine->_t('UploadQuotaInfo');?><strong> <?php echo $engine->binary_multiples($engine->upload_quota(), false, true, true);?></strong> used.</small></label></td>
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota, false, true, true, false);?>" />
 				<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota, false); ?>
 				<select name="upload_quota_factor">
@@ -120,8 +121,8 @@ function admin_config_upload(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_quota_per_user"><strong>Storage quota per user:</strong><br />
-					<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
+				<td class="label"><label for="upload_quota_per_user"><strong><?php echo $engine->_t('UploadQuotaUser');?>:</strong><br />
+					<small><?php echo $engine->_t('UploadQuotaUserInfo');?></small></label></td>
 				<td><input type="number" min="0" maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo (int) $engine->binary_multiples($engine->db->upload_quota_per_user, false, true, true, false);?>" />
 					<?php $x = $engine->binary_multiples_factor($engine->db->upload_quota_per_user, false); ?>
 					<select name="upload_quota_per_user_factor">
@@ -132,6 +133,17 @@ function admin_config_upload(&$engine, &$module)
 					</select>
 				</td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><strong><?php echo $engine->_t('CheckMimetype');?>:</strong><br />
+					<small><?php echo $engine->_t('CheckMimetypeInfo');?></small></td>
+				<td>
+					<input type="radio" id="check_mimetype_on" name="check_mimetype" value="1"<?php echo ( $engine->db->check_mimetype == 1 ? ' checked="checked"' : '' );?> /><label for="check_mimetype_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="check_mimetype_off" name="check_mimetype" value="0"<?php echo ( $engine->db->check_mimetype == 0 ? ' checked="checked"' : '' );?> /><label for="check_mimetype_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
 			<tr>
 				<th colspan="2">
 					<br />
@@ -139,8 +151,8 @@ function admin_config_upload(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>Create thumbnail:</strong><br />
-					<small>Create a thumbnail in all possible situations.</small></td>
+				<td class="label"><strong><?php echo $engine->_t('CreateThumbnail');?>:</strong><br />
+					<small><?php echo $engine->_t('CreateThumbnailInfo');?></small></td>
 				<td>
 					<input type="radio" id="img_create_thumbnail_on" name="img_create_thumbnail" value="1"<?php echo ( $engine->db->img_create_thumbnail == 1 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="img_create_thumbnail_off" name="img_create_thumbnail" value="0"<?php echo ( $engine->db->img_create_thumbnail == 0 ? ' checked="checked"' : '' );?> /><label for="img_create_thumbnail_off"><?php echo $engine->_t('Off');?></label>
@@ -150,8 +162,8 @@ function admin_config_upload(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>Maximum thumbnail width in pixel:</strong><br />
-					<small>A generated thumbnail will not exceed the width set here.</small></td>
+				<td class="label"><strong><?php echo $engine->_t('MaxThumbWidth');?>:</strong><br />
+					<small><?php echo $engine->_t('MaxThumbWidthInfo');?></small></td>
 				<td><input type="number" min="0" maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo (int) $engine->db->img_max_thumb_width;?>" />px</td>
 			</tr>
 
