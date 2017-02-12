@@ -314,6 +314,25 @@ $ap_translation = [
 	'SmtpUsername'				=> 'Usuario SMTP',
 	'SmtpUsernameInfo'			=> 'Solo introduzca un usuario si su servidor SMTP lo requiere.',
 
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Aquí puedes configurar los principales parámetros para archivos adjuntos y las categorías especiales asociadas.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Tamaño máximo',
+	'UploadMaxFilesizeInfo'		=> 'Tamaño máximo de cada archivo. Si este valor es 0, el tamaño del archivo para subir sólo estará limitado por la configuración de PHP.',
+	'UploadQuota'				=> 'Máximo total para adjuntos',
+	'UploadQuotaInfo'			=> 'Máximo en disco disponible para adjuntos en todo el sitio, 0 significa ilimitado.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Comprobar archivos adjuntos',
+	'CheckMimetypeInfo'			=> 'Algunos navegadores pueden ser engañados para que asuman un mimetype de archivos subibles incorrecto. Esta opción previene que tales archivos que puedan causar eso sean rechazados.',
+
+	'CreateThumbnail'			=> 'Crear vista en miniatura',
+	'CreateThumbnailInfo'		=> 'Crear vista en miniatura siempre que sea posible.',
+	'MaxThumbWidth'				=> 'Ancho máximo de la vista en miniatura en píxeles',
+	'MaxThumbWidthInfo'			=> 'La mini-imagen generada no excederá este ancho.',
+	'MinThumbFilesize'			=> 'Tamaño mínimo para vista en miniatura',
+	'MinThumbFilesizeInfo'		=> 'No crear vista en miniatura para imágenes más pequeñas que esto.',
+
 	// log
 	'LogLevel1'					=> 'crítico',
 	'LogLevel2'					=> 'más alto',

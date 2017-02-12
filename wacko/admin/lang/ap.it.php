@@ -314,6 +314,25 @@ $ap_translation = [
 	'SmtpUsername'				=> 'Nome utente SMTP',
 	'SmtpUsernameInfo'			=> 'Inserisci un nome utente solo se il tuo server SMTP lo richiede.',
 
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Da qui puoi configurare le caratteristiche principali degli allegati e delle categorie speciali collegate.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Dimensione massima',
+	'UploadMaxFilesizeInfo'		=> 'Dimensione massima di ogni file. Se questo valore è uguale a 0, la dimensione del file inviabile sarà limitata solo dalla configurazione PHP.',
+	'UploadQuota'				=> 'Quota massima allegati',
+	'UploadQuotaInfo'			=> 'Dimensione massima riservata su disco per tutti gli allegati; 0 = illimitata.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Controlla allegati',
+	'CheckMimetypeInfo'			=> 'Alcuni browser possono essere ingannati nell\'accettare un mimetype incorretto per i file da caricare. Questa opzione garantisce che i file che possono causare questo problema vengano respinti.',
+
+	'CreateThumbnail'			=> 'Crea miniatura',
+	'CreateThumbnailInfo'		=> 'Crea miniatura in tutte le situazioni possibili.',
+	'MaxThumbWidth'				=> 'Larghezza massima miniatura in pixel',
+	'MaxThumbWidthInfo'			=> 'La miniatura generata non avrà una larghezza superiore a quella impostata qui.',
+	'MinThumbFilesize'			=> 'Dimensioni minime per miniatura',
+	'MinThumbFilesizeInfo'		=> 'Non crea miniature per immagini con dimensioni inferiori a queste.',
+
 	// log
 	'LogLevel1'					=> 'critical',
 	'LogLevel2'					=> 'highest',

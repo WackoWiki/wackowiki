@@ -314,6 +314,25 @@ $ap_translation = [
 	'SmtpUsername'				=> 'SMTP username',
 	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
 
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Here you can configure the main settings for attachments and the associated special categories.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Maximum file size',
+	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the uploadable filesize is only limited by your PHP configuration.',
+	'UploadQuota'				=> 'Total attachment quota',
+	'UploadQuotaInfo'			=> 'Maximum drive space available for attachments for the whole wiki, with 0 being unlimited.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Check attachment files',
+	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
+
+	'CreateThumbnail'			=> 'Create thumbnail',
+	'CreateThumbnailInfo'		=> 'Create a thumbnail in all possible situations.',
+	'MaxThumbWidth'				=> 'Maximum thumbnail width in pixel',
+	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
+	'MinThumbFilesize'			=> 'Minimum thumbnail file size',
+	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
+
 	// log
 	'LogLevel1'					=> 'critical',
 	'LogLevel2'					=> 'highest',

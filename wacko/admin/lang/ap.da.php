@@ -314,6 +314,25 @@ $ap_translation = [
 	'SmtpUsername'				=> 'SMTP-brugernavn',
 	'SmtpUsernameInfo'			=> 'Indtast kun et brugernavn, hvis din SMTP-server kræver det.',
 
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Her kan du ændre og vedligeholde indstillingerne for vedhæftede filer og tilknyttede specialkategorier.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Maksimal filstørrelse',
+	'UploadMaxFilesizeInfo'		=> 'Er størrelsen sat til 0, er det alene din interne PHP-konfiguration, der begrænser filstørrelsen.',
+	'UploadQuota'				=> 'Den totale kvote for vedhæftede filer',
+	'UploadQuotaInfo'			=> 'Maksimum drevplads tilgængelig for vedhæftede filer på hele wiki, 0 betyder ubegrænset.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Kontrol af vedhæftede filer',
+	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfører fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er årsag hertil.',
+
+	'CreateThumbnail'			=> 'Opret miniature',
+	'CreateThumbnailInfo'		=> 'Der oprettes altid en miniature.',
+	'MaxThumbWidth'				=> 'Maksimal bredde på miniature i pixels',
+	'MaxThumbWidthInfo'			=> 'Miniaturer vil ikke blive oprettet bredere end værdien defineret her.',
+	'MinThumbFilesize'			=> 'Grænse for oprettelse af miniature',
+	'MinThumbFilesizeInfo'		=> 'Opret ikke miniature for billeder der er mindre end.',
+
 	// log
 	'LogLevel1'					=> 'critical',
 	'LogLevel2'					=> 'highest',

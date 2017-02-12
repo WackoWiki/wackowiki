@@ -314,6 +314,25 @@ $ap_translation = [
 	'SmtpUsername'				=> 'Nom d\'utilisateur SMTP',
 	'SmtpUsernameInfo'			=> 'Ne saisissez un nom d\'utilisateur que si votre serveur SMTP le demande.',
 
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Vous pouvez configurer sur cette page les réglages relatifs aux pièces jointes et à leurs catégories spéciales.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Taille maximale des pièces jointes',
+	'UploadMaxFilesizeInfo'		=> 'La taille maximale des pièces jointes. Si cette valeur est réglée sur 0, la taille ne sera limitée que par votre configuration de PHP.',
+	'UploadQuota'				=> 'Quota maximal des pièces jointes',
+	'UploadQuotaInfo'			=> 'L\'espace de stockage maximal alloué à la totalité des pièces jointes transférées sur le forum. Réglez cette valeur sur 0 si vous ne souhaitez pas limiter cet espace.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Vérifier les pièces jointes',
+	'CheckMimetypeInfo'			=> 'Certains navigateurs internet peuvent faire erreur en attribuant un type MIME incorrect aux fichiers transférés. Cette option permet de rejeter les fichiers qui présentent un risque de provoquer cette erreur.',
+
+	'CreateThumbnail'			=> 'Générer des miniatures',
+	'CreateThumbnailInfo'		=> 'Génère des miniatures dans toutes les situations possibles.',
+	'MaxThumbWidth'				=> 'Largeur maximale des miniatures',
+	'MaxThumbWidthInfo'			=> 'Les miniatures générées ne dépasseront pas la largeur de cette valeur.',
+	'MinThumbFilesize'			=> 'Taille minimale des miniatures',
+	'MinThumbFilesizeInfo'		=> 'Si la taille des images est inférieure à cette valeur, ces dernières ne seront pas miniaturisées.',
+
 	// log
 	'LogLevel1'					=> 'critique',
 	'LogLevel2'					=> 'le plus élevé',

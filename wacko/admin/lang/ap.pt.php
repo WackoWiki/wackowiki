@@ -314,6 +314,25 @@ $ap_translation = [
 	'SmtpUsername'				=> 'Nome de Utilizador SMTP',
 	'SmtpUsernameInfo'			=> 'Só introduza um Nome se o Servidor de SMTP o pedir.',
 
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Aqui pode configurar as Opções Principais para os Anexos e Categorias Especiais associadas.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Tamanho Máximo de Anexos',
+	'UploadMaxFilesizeInfo'		=> 'Tamanho máximo de cada anexo. Se este valor for 0, o tamanho do ficheiro enviado fica sujeito às permissões do PHP.',
+	'UploadQuota'				=> 'Espaço total de Anexos',
+	'UploadQuotaInfo'			=> 'Espaço máximo em disco reservado aos anexos. 0 = ilimitado.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Verificar ficheiros anexados',
+	'CheckMimetypeInfo'			=> 'Alguns Ficheiros podem obrigar os navegadores e executar funções incorretas. Esta opção permite recusar esses Ficheiros.',
+
+	'CreateThumbnail'			=> 'Criar uma Imagem reduzida',
+	'CreateThumbnailInfo'		=> 'Criar uma Imagem reduzida em todas as situações possíveis.',
+	'MaxThumbWidth'				=> 'Largura máxima das imagens em miniaturas em píxeis',
+	'MaxThumbWidthInfo'			=> 'A largura das miniaturas geradas não ultrapassará a selecionada.',
+	'MinThumbFilesize'			=> 'Tamanho Mínimo de imagem reduzida',
+	'MinThumbFilesizeInfo'		=> 'Não criar imagem reduzida para imagens menores do que o selecionado.',
+
 	// log
 	'LogLevel1'					=> 'critical',
 	'LogLevel2'					=> 'highest',

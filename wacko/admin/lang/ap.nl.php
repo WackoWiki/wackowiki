@@ -314,6 +314,25 @@ $ap_translation = [
 	'SmtpUsername'				=> 'SMTP-gebruikersnaam',
 	'SmtpUsernameInfo'			=> 'Voer alleen een gebruikersnaam in als je SMTP-server dit vereist.',
 
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Hier kan je de hoofdinstellingen voor bijlagen en bijbehorende speciale categorieën instellen.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Maximum bestandsgrootte',
+	'UploadMaxFilesizeInfo'		=> 'Maximum grootte van elk bestand, met 0 als ongelimiteerd, bijgevoegd aan een privébericht.',
+	'UploadQuota'				=> 'Totaal bijlage quota',
+	'UploadQuotaInfo'			=> 'Maximum schijfruimte beschikbaar voor bijlagen van het hele wiki, met 0 als ongelimiteerd.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Controleer bijlage bestanden',
+	'CheckMimetypeInfo'			=> 'Sommige browsers kunnen een incorrecte mimetype voor geüploade bestanden aannemen. Deze optie verzekerd je er van dat zulke bestanden die dit veroorzaken worden afgewezen.',
+
+	'CreateThumbnail'			=> 'Miniatuur aanmaken',
+	'CreateThumbnailInfo'		=> 'Maakt een miniatuur aan in alle mogelijke situaties.',
+	'MaxThumbWidth'				=> 'Maximum miniatuur breedte in pixel',
+	'MaxThumbWidthInfo'			=> 'Een aangemaakte miniatuur zal de hier ingestelde breedte niet overschrijden.',
+	'MinThumbFilesize'			=> 'Minimum miniatuur bestandsgrootte',
+	'MinThumbFilesizeInfo'		=> 'Maakt geen miniatuur aan voor afbeeldingen kleiner dan dit.',
+
 	// log
 	'LogLevel1'					=> 'critical',
 	'LogLevel2'					=> 'highest',

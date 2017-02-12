@@ -314,6 +314,25 @@ $ap_translation = [
 	'SmtpUsername'				=> 'SMTP-Benutzername',
 	'SmtpUsernameInfo'			=> 'Gib nur einen Benutzernamen ein, wenn dein SMTP-Server dies erfordert.',
 
+	// Upload settings
+	'UploadSettingsInfo'		=> 'Hier kannst du die Einstellungen für Dateianhänge und verknüpfte Spezialkategorien vornehmen.',
+	'FileUploads'				=> 'File uploads',
+	'UploadMaxFilesize'			=> 'Maximale Dateigröße',
+	'UploadMaxFilesizeInfo'		=> 'Maximale Größe pro Datei. Die Dateigröße wird nur durch die PHP-Konfiguration beschränkt, wenn 0 als Wert eingestellt wird.',
+	'UploadQuota'				=> 'Maximales Kontingent für Dateianhänge',
+	'UploadQuotaInfo'			=> 'Maximaler für Dateianhänge verfügbarer Speicherplatz für das gesamte Wiki; 0 bedeutet unbegrenzt.',
+	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'CheckMimetype'				=> 'Dateianhänge prüfen',
+	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ für hochgeladene Dateien vorgetäuscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren könnten, abgewiesen werden.',
+
+	'CreateThumbnail'			=> 'Vorschaubild erstellen',
+	'CreateThumbnailInfo'		=> 'Vorschaubild in allen möglichen Fällen erstellen.',
+	'MaxThumbWidth'				=> 'Maximale Breite der Vorschaubilder in Pixeln',
+	'MaxThumbWidthInfo'			=> 'Ein Vorschaubild wird nicht breiter sein als der hier eingestellte Wert.',
+	'MinThumbFilesize'			=> 'Minimale Vorschaubild-Dateigröße',
+	'MinThumbFilesizeInfo'		=> 'Erstellt keine Vorschaubilder bei Bildern, die kleiner sind als dieser Wert.',
+
 	// log
 	'LogLevel1'					=> 'kritisch',
 	'LogLevel2'					=> 'höchste',
