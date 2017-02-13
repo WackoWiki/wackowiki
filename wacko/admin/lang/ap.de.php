@@ -50,8 +50,8 @@ $ap_translation = [
 	// Generic
 	'Enabled'					=> 'aktiviert',
 	'Disabled'					=> 'deaktiviert',
-	'On'						=> 'on',
-	'Off'						=> 'off',
+	'On'						=> 'an',
+	'Off'						=> 'aus',
 	'Mandatory'					=> 'zwingend',
 	'Admin'						=> 'Admin',
 

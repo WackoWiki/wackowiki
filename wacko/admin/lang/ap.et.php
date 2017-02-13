@@ -12,15 +12,15 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
-		'maintenance'	=> 'Maintenance',
-		'messages'		=> 'Messages',
+		'users'			=> 'Kasutajad',
+		'maintenance'	=> 'Hooldamine',
+		'messages'		=> 'Sõnumid',
 		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'database'		=> 'Andmebaas',
 	],
 
 	// Admin panel
-	'AdminPanel'				=> 'Administration Control Panel',
+	'AdminPanel'				=> 'Administraatori juhtpaneel',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -29,12 +29,12 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
 	'FormSave'					=> 'Save',
-	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> 'Update',
+	'FormReset'					=> 'Lähtesta',
+	'FormUpdate'				=> 'Uuendan',
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Log out',
+	'ApLogOut'					=> 'Logi välja',
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
@@ -48,10 +48,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
-	'On'						=> 'on',
-	'Off'						=> 'off',
+	'Enabled'					=> 'Lubatud',
+	'Disabled'					=> 'Keelatud',
+	'On'						=> 'Sees',
+	'Off'						=> 'Väljas',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -94,7 +94,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Õigused',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -160,7 +160,7 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
+		'name'		=> 'Varukoopia',
 		'title'		=> 'Backing up data',
 	],
 
@@ -232,7 +232,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'Statistika',
 		'title'		=> 'Show statistics',
 	],
 
@@ -250,25 +250,25 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'Grupid',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
+		'name'		=> 'Kasutajad',
 		'title'		=> 'User management',
 	],
 
-	'LogFilterTip'			=> 'Filter events by criteria',
-	'LogLevel'				=> 'Level',
-	'LogLevelNotLower'		=> 'not less than',
-	'LogLevelNotHigher'		=> 'not higher than',
-	'LogLevelEqual'			=> 'equal',
-	'LogNoMatch'			=> 'No events that meet the criteria',
-	'LogDate'				=> 'Date',
-	'LogEvent'				=> 'Event',
-	'LogUsername'			=> 'Username',
+	'LogFilterTip'				=> 'Filter events by criteria',
+	'LogLevel'					=> 'Level',
+	'LogLevelNotLower'			=> 'not less than',
+	'LogLevelNotHigher'			=> 'not higher than',
+	'LogLevelEqual'				=> 'equal',
+	'LogNoMatch'				=> 'No events that meet the criteria',
+	'LogDate'					=> 'Date',
+	'LogEvent'					=> 'Event',
+	'LogUsername'				=> 'Username',
 
 	'PurgeSessions'				=> 'purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
@@ -277,11 +277,11 @@ $ap_translation = [
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',
+	'EmaiSettingsInfo'			=> 'Seda infot kasutatakse, kui foorum saadab e-kirja kasutajale. Palun ole kindel, et siinsisestatud e-postiaadress on kehtiv, kõik tagasipõrkuvad või kohaletoimetamata e-kirjad lähevad sinna. Kui su teenusepakkuja ei paku kohalikku (PHP põhist) e-posti teenust , võid saata sõnumeid otse läbi SMTP. See nõuab serveri aadressi (küsi pakkujalt, kui vaja). Kui server nõuab autentimist, (ja vaid sellisel juhul) sisesta vajalik kasutajanimi, parool ja autentimismeetod.',
 
-	'EmailFunctionName'			=> 'Email function name',
-	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
-	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',
+	'EmailFunctionName'			=> 'E-posti funktsiooni nimi',
+	'EmailFunctionNameInfo'		=> 'E-posti funktsioon, mis saadab kirju läbi PHP.',
+	'UseSmtpInfo'				=> 'Vali <code>SMTP</code>, kui soovid või pead e-maili saatma oma serverist Wiki e-posti funktsiooni asemel.',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -303,36 +303,36 @@ $ap_translation = [
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
-	'SmtpPassword'				=> 'SMTP password',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
-	'SmtpPort'					=> 'SMTP server port',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP server address',
-	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
-	'SmtpSettings'				=> 'SMTP settings',
-	'SmtpUsername'				=> 'SMTP username',
-	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
+	'SmtpConnectionMode'		=> 'Autentimismeetod SMTP jaoks',
+	'SmtpConnectionModeInfo'	=> 'Kasutatakse vaid siis, kui kasutajanimi/parool on määratud, küsi oma teenusepakkujalt, kui sa pole kindel, millist meetodit kasutada.',
+	'SmtpPassword'				=> 'SMTP parool',
+	'SmtpPasswordInfo'			=> 'Sisesta parool vaid siis, kui SMTP server seda nõuab..<br /><em><strong>HOIATUS:</strong> See parool salvestatakse lihttekstina andmebaasi, ning on nähtav kõigile kes pääsevad ligi sinu foorumi andmebaasile või sellele leheküljele.</em>',
+	'SmtpPort'					=> 'SMTP serveri port',
+	'SmtpPortInfo'				=> 'Muuda seda vaid siis, kui tead, et SMTP server jookseb teisel pordil. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP serveri aadress',
+	'SmtpServerInfo'			=> 'Pane tähele, et sa pead andma protokolli, mida kasutab sinu server. Kui kasutad SSL, siis see peab olema <code>ssl://mail.example.com</code>',
+	'SmtpSettings'				=> 'SMTP seaded',
+	'SmtpUsername'				=> 'SMTP kasutajanimi',
+	'SmtpUsernameInfo'			=> 'Sisesta kasutajanimi vaid siis, kui server seda nõuab.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Here you can configure the main settings for attachments and the associated special categories.',
+	'UploadSettingsInfo'		=> 'Siin saad sa muuta manuste põhiseadeid ja nendega seotud kategooriaid.',
 	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Maximum file size',
-	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the uploadable filesize is only limited by your PHP configuration.',
-	'UploadQuota'				=> 'Total attachment quota',
-	'UploadQuotaInfo'			=> 'Maximum drive space available for attachments for the whole wiki, with 0 being unlimited.',
+	'UploadMaxFilesize'			=> 'Maksimaalne failisuurus',
+	'UploadMaxFilesizeInfo'		=> 'MMaksimaalne failisuurus igale failile. 0 tähendab maksimumi puudumist.',
+	'UploadQuota'				=> 'Manuseid lubatud',
+	'UploadQuotaInfo'			=> 'Maksimaalne kettaruum, mis on eraldatud terve foorumi manustele. 0 tähendab maksimumi puudumist.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
-	'CheckMimetype'				=> 'Check attachment files',
-	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
+	'CheckMimetype'				=> 'Kontrolli manuseid',
+	'CheckMimetypeInfo'			=> 'Mõndasid veebilehitsejaid saab petta, eeldades, et tegu on vale miimitüübiga. See valik kindlustab, et sellised failid keelatakse.',
 
-	'CreateThumbnail'			=> 'Create thumbnail',
-	'CreateThumbnailInfo'		=> 'Create a thumbnail in all possible situations.',
-	'MaxThumbWidth'				=> 'Maximum thumbnail width in pixel',
-	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
-	'MinThumbFilesize'			=> 'Minimum thumbnail file size',
-	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
+	'CreateThumbnail'			=> 'Loo pisipilt',
+	'CreateThumbnailInfo'		=> 'Loo pisipilt igas võimalikus olukorras.',
+	'MaxThumbWidth'				=> 'Maksimaalne pisipildi laius pikslites',
+	'MaxThumbWidthInfo'			=> 'Loodud pisipilt ei ületa siin määratud laiust.',
+	'MinThumbFilesize'			=> 'Minimaalne pisipildi failisuurus',
+	'MinThumbFilesizeInfo'		=> 'Ära loo pisipilti piltidele, mis on sellest väiksemad.',
 
 	// log
 	'LogLevel1'					=> 'critical',
@@ -404,8 +404,8 @@ $ap_translation = [
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Edit',
-	'UserEnabled'				=> 'Enabled',
+	'UserEditButton'			=> 'Muuda',
+	'UserEnabled'				=> 'Lubatud',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user ',
 	'UsersDeleted'				=> 'The user was deleted from the database.',
@@ -440,11 +440,11 @@ $ap_translation = [
 	'GroupsDelete'				=> 'Are you sure you want to remove group ',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Submit',
-	'GroupsCancelButton'		=> 'Cancel',
+	'GroupsSaveButton'			=> 'Sisesta',
+	'GroupsCancelButton'		=> 'Loobu',
 	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Edit',
-	'GroupsRemoveButton'		=> 'Remove',
+	'GroupsEditButton'			=> 'Muuda',
+	'GroupsRemoveButton'		=> 'Eemalda',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'MembersAddNew'				=> 'Add new member',
