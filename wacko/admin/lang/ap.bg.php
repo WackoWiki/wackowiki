@@ -12,18 +12,19 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
-		'maintenance'	=> 'Maintenance',
+		'users'			=> 'Потребители',
+		'maintenance'	=> 'Поддръжка',
 		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'extension'		=> 'Разширения',
+		'database'		=> 'База данни',
 	],
 
 	// Admin panel
-	'Authorization'			=> 'Authorization',
-	'AuthorizationTip'		=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoceryPassword'	=> 'The administrative password is not specified!',
-	'NoRecoceryPasswordTip'	=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'AdminPanel'				=> 'Администраторски контролен панел',
+	'Authorization'				=> 'Authorization',
+	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
+	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
+	'NoRecoceryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
@@ -49,8 +50,8 @@ $ap_translation = [
 	// Generic
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
-	'On'						=> 'on',
-	'Off'						=> 'off',
+	'On'						=> 'Включено',
+	'Off'						=> 'Изключено',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -64,7 +65,7 @@ $ap_translation = [
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'Email',
-		'title'		=> 'Email settings',
+		'title'		=> 'Email настройки',
 	],
 
 	// Config Filter module
@@ -93,7 +94,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Права',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -207,8 +208,8 @@ $ap_translation = [
 
 	// Mass email module
 	'massemail'		=> [
-		'name'		=> 'Mass email',
-		'title'		=> 'Mass email',
+		'name'		=> 'Масов email',
+		'title'		=> 'Масов email',
 	],
 
 	// System message module
@@ -231,7 +232,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'Статистика',
 		'title'		=> 'Show statistics',
 	],
 
@@ -249,25 +250,25 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'Групи',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
+		'name'		=> 'Потребители',
 		'title'		=> 'User management',
 	],
 
-	'LogFilterTip'			=> 'Filter events by criteria',
-	'LogLevel'				=> 'Level',
-	'LogLevelNotLower'		=> 'not less than',
-	'LogLevelNotHigher'		=> 'not higher than',
-	'LogLevelEqual'			=> 'equal',
-	'LogNoMatch'			=> 'No events that meet the criteria',
-	'LogDate'				=> 'Date',
-	'LogEvent'				=> 'Event',
-	'LogUsername'			=> 'Username',
+	'LogFilterTip'				=> 'Filter events by criteria',
+	'LogLevel'					=> 'Level',
+	'LogLevelNotLower'			=> 'not less than',
+	'LogLevelNotHigher'			=> 'not higher than',
+	'LogLevelEqual'				=> 'equal',
+	'LogNoMatch'				=> 'No events that meet the criteria',
+	'LogDate'					=> 'Date',
+	'LogEvent'					=> 'Event',
+	'LogUsername'				=> 'Username',
 
 	'PurgeSessions'				=> 'purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
@@ -403,7 +404,7 @@ $ap_translation = [
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Edit',
+	'UserEditButton'			=> 'Промени',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user ',
@@ -440,9 +441,9 @@ $ap_translation = [
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsSaveButton'			=> 'Submit',
-	'GroupsCancelButton'		=> 'Cancel',
+	'GroupsCancelButton'		=> 'Откажи',
 	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Edit',
+	'GroupsEditButton'			=> 'Промени',
 	'GroupsRemoveButton'		=> 'Remove',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 

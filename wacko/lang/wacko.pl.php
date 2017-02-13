@@ -414,7 +414,7 @@ $wacko_translation = [
 	'RealName'					=> 'Real name',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Zapisy na stronie',
-	'DoShowComments'				=> 'Domy¶lnie wy¶wietlaj komentarze',
+	'DoShowComments'			=> 'Domy¶lnie wy¶wietlaj komentarze',
 	'DoubleclickEditing'		=> 'W³±cz edycjê przez podwójne klikniêcie',
 	'UpdateSettingsButton'		=> 'Zachowaj zmiany',
 

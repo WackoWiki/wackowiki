@@ -123,7 +123,7 @@ if (!isset($engine->sess->ap_created))
 	<!DOCTYPE html>
 	<html>
 	<head>
-	<title>Authorization Admin</title>
+	<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 	<meta name="robots" content="noindex, nofollow, noarchive" />
 	<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
 	</head>
@@ -252,7 +252,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 <!DOCTYPE html>
 <html>
 <head>
-<title>WackoWiki Management System <?php echo ': ' . $_title; ?></title>
+<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta http-equiv="Content-Type" content="text/html; "/>
 <link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" rel="stylesheet" media="screen" />
@@ -282,8 +282,8 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		</div>
 		<br style="clear: right" />
 		<div id="sections">
-			<a href="<?php echo rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>'; ?>
-			<a href="<?php echo rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' . $engine->_t('ApLogOutTip')  . '">' . $engine->_t('ApLogOut')  . '</a>'; ?>
+			<?php echo '<a href="' . rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>'; ?>
+			<?php echo '<a href="' . rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' . $engine->_t('ApLogOutTip')  . '">' . $engine->_t('ApLogOut')  . '</a>'; ?>
 		</div>
 	</div>
 </header>

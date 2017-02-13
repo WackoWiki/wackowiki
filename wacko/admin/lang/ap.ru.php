@@ -20,6 +20,7 @@ $ap_translation = [
 	],
 
 	// Admin panel
+	'AdminPanel'				=> 'Администраторский раздел',
 	'Authorization'				=> 'Авторизация',
 	'AuthorizationTip'			=> 'Пожалуйста, укажите административный пароль (убедитесь также, что cookies в вашем браузере разрешены).',
 	'NoRecoceryPassword'		=> 'Административный пароль не задан!',
