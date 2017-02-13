@@ -12,14 +12,15 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
-		'maintenance'	=> 'Maintenance',
+		'users'			=> 'Felhasználók',
+		'maintenance'	=> 'Karbantartás',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'database'		=> 'Adatbázis',
 	],
 
 	// Admin panel
+	'AdminPanel'				=> 'Adminisztrátori vezérlõpult',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -29,11 +30,11 @@ $ap_translation = [
 
 	'FormSave'					=> 'Save',
 	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> 'Update',
+	'FormUpdate'				=> 'Frissítés',
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Log out',
+	'ApLogOut'					=> 'Kilépés',
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
@@ -49,8 +50,8 @@ $ap_translation = [
 	// Generic
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
-	'On'						=> 'on',
-	'Off'						=> 'off',
+	'On'						=> 'Bekapcsolva',
+	'Off'						=> 'Kikapcsolva',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -63,8 +64,8 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'Email',
-		'title'		=> 'Email settings',
+		'name'		=> 'E-mail',
+		'title'		=> 'E-mail beállítások',
 	],
 
 	// Config Filter module
@@ -93,7 +94,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Jogosultságok',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -159,7 +160,7 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
+		'name'		=> 'Kimentés',
 		'title'		=> 'Backing up data',
 	],
 
@@ -231,7 +232,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'Statisztika',
 		'title'		=> 'Show statistics',
 	],
 
@@ -249,14 +250,14 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
-		'title'		=> 'Group management',
+		'name'		=> 'Csoportok',
+		'title'		=> 'Csoportok kezelése',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
-		'title'		=> 'User management',
+		'name'		=> 'Felhasználók',
+		'title'		=> 'Felhasználók kezelése',
 	],
 
 	'LogFilterTip'				=> 'Filter events by criteria',
@@ -276,11 +277,11 @@ $ap_translation = [
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',
+	'EmaiSettingsInfo'			=> 'Az alábbi információkat használja a fórum e-mailek küldésekor. Kérünk, gyõzõdj meg róla, hogy az e-mail cím, amit megadsz, helyes, mivel minden nem kézbesíthetõ levél erre a címre fog menni. Ha a tárhelyszolgáltatód nem biztosítja a natív (PHP alapú) e-mail küldést, használhatsz helyette SMTP-t. Ehhez szükség van egy megfelelõ szerver címére (ha szükséges, kérdezd meg a szolgáltatód). Ha (és csak ha) a szerver megköveteli az azonosítást, add meg a szükséges felhasználónevet, jelszót és azonosítási módot.',
 
-	'EmailFunctionName'			=> 'Email function name',
-	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
-	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',
+	'EmailFunctionName'			=> 'E-mail függvény neve',
+	'EmailFunctionNameInfo'		=> 'A függvény neve, amivel e-mailt lehet küldeni PHP-n keresztül.',
+	'UseSmtpInfo'				=> '<code>SMTP</code> Állítsd igenre, ha a helyi mail függvény helyett egy meghatározott szerveren keresztül szeretnéd az e-maileket kiküldeni.',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -302,36 +303,36 @@ $ap_translation = [
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
-	'SmtpPassword'				=> 'SMTP password',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
-	'SmtpPort'					=> 'SMTP server port',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP server address',
+	'SmtpConnectionMode'		=> 'SMTP azonosítási mód',
+	'SmtpConnectionModeInfo'	=> 'Csak akkor van használva, ha egy felhasználónév/jelszó páros meg van adva. Ha nem vagy biztos benne, melyik módot használd, kérdezd meg a szolgáltatódat.',
+	'SmtpPassword'				=> 'SMTP jelszó',
+	'SmtpPasswordInfo'			=> 'Csak akkor adj meg jelszót, ha a használt SMTP szerver megköveteli.<br /><em><strong>Figyelmeztetés:</strong> Ez a jelszó az adatbázisban sima szövegként kerül tárolásra, így bárki által hozzáférhetõ, aki hozzáfér az adatbázishoz vagy látja ezt a beállítás oldalt.</em>',
+	'SmtpPort'					=> 'SMTP szerver port',
+	'SmtpPortInfo'				=> 'Csak akkor változtasd meg, ha tudod, hogy az SMTP szerver más porton van. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP szerver cím',
 	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
-	'SmtpSettings'				=> 'SMTP settings',
-	'SmtpUsername'				=> 'SMTP username',
-	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
+	'SmtpSettings'				=> 'SMTP beállítások',
+	'SmtpUsername'				=> 'SMTP felhasználónév',
+	'SmtpUsernameInfo'			=> 'Csak akkor adj meg felhasználónevet, ha a használt SMTP szerver megköveteli.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Here you can configure the main settings for attachments and the associated special categories.',
+	'UploadSettingsInfo'		=> 'Itt a csatolmányok fõbb beállításait adhatod meg, valamint a speciális kategóriák egyedi opcióit módosíthatod.',
 	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Maximum file size',
-	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the uploadable filesize is only limited by your PHP configuration.',
-	'UploadQuota'				=> 'Total attachment quota',
-	'UploadQuotaInfo'			=> 'Maximum drive space available for attachments for the whole wiki, with 0 being unlimited.',
+	'UploadMaxFilesize'			=> 'Maximum állományméret',
+	'UploadMaxFilesizeInfo'		=> 'Legfeljebb ekkorák lehetnek az állományok. A 0 érték kikapcsolja a korlátozást.',
+	'UploadQuota'				=> 'Csatolmányok tárhelye',
+	'UploadQuotaInfo'			=> 'Az egész fórumon a csatolmányok legfeljebb ekkora helyet foglalhatnak el összesen. A 0 érték kikapcsolja a korlátozást.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
-	'CheckMimetype'				=> 'Check attachment files',
-	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
+	'CheckMimetype'				=> 'Csatolt állományok ellenõrzése',
+	'CheckMimetypeInfo'			=> 'Néhány böngészõ rávehetõ, hogy a feltöltött állományokhoz helytelen MIME típust állapítson meg. Ezzel a beállítással az ennek okozására hajlamos állományok visszautasításra kerülnek.',
 
-	'CreateThumbnail'			=> 'Create thumbnail',
-	'CreateThumbnailInfo'		=> 'Create a thumbnail in all possible situations.',
-	'MaxThumbWidth'				=> 'Maximum thumbnail width in pixel',
-	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
-	'MinThumbFilesize'			=> 'Minimum thumbnail file size',
-	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
+	'CreateThumbnail'			=> 'Kiskép készítése',
+	'CreateThumbnailInfo'		=> 'Minden lehetséges esetben készítsen kisképet.',
+	'MaxThumbWidth'				=> 'Maximum kiskép szélesség pixelben',
+	'MaxThumbWidthInfo'			=> 'A generált kiskép nem fogja túllépni az itt megadott szélességet.',
+	'MinThumbFilesize'			=> 'Minimum kiskép állományméret',
+	'MinThumbFilesizeInfo'		=> 'Ennél kisebb képeknél nem lesz kiskép készítve.',
 
 	// log
 	'LogLevel1'					=> 'critical',
@@ -403,7 +404,7 @@ $ap_translation = [
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Edit',
+	'UserEditButton'			=> 'Szerkesztés',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user ',
@@ -439,11 +440,11 @@ $ap_translation = [
 	'GroupsDelete'				=> 'Are you sure you want to remove group ',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Submit',
-	'GroupsCancelButton'		=> 'Cancel',
+	'GroupsSaveButton'			=> 'Elküld',
+	'GroupsCancelButton'		=> 'Mégsem',
 	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Edit',
-	'GroupsRemoveButton'		=> 'Remove',
+	'GroupsEditButton'			=> 'Szerkesztés',
+	'GroupsRemoveButton'		=> 'Törlés',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'MembersAddNew'				=> 'Add new member',

@@ -12,14 +12,15 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
-		'maintenance'	=> 'Maintenance',
+		'users'			=> 'Μέλη',
+		'maintenance'	=> 'Συντήρηση',
 		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'extension'		=> 'Επεκτάσεις',
+		'database'		=> 'Βάση δεδομένων',
 	],
 
 	// Admin panel
+	'AdminPanel'				=> 'Πίνακας Ελέγχου Διαχειριστή',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -49,8 +50,8 @@ $ap_translation = [
 	// Generic
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
-	'On'						=> 'on',
-	'Off'						=> 'off',
+	'On'						=> 'ΑΝΟΙΧΤΟ',
+	'Off'						=> 'ΚΛΕΙΣΤΟ',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -93,7 +94,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Προσβάσεις',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -249,7 +250,7 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'Ομάδες',
 		'title'		=> 'Group management',
 	],
 
@@ -276,11 +277,11 @@ $ap_translation = [
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',
+	'EmaiSettingsInfo'			=> 'Αυτές οι πληροφορίες χρησιμοποιούνται όταν το σύστημα συζητήσεων στέλνει μηνύματα ηλεκτρονικού ταχυδρομείου στα μέλη σας. Παρακαλώ βεβαιωθείτε ότι η διεύθυνση ηλεκτρονικού ταχυδρομείου που έχετε ορίσει είναι έγκυρη, όλα τα απαγορευμένα ή μη απεσταλμένα μηνύματα μηνύματα κατά πάσα πιθανότητα θα αποστέλλονται σε αυτή τη διεύθυνση. Εάν ο πάροχος φιλοξενίας σας δεν παρέχει μια μητρική (βασισμένη σε PHP) υπηρεσία ηλεκτρονικού ταχυδρομείου, μπορείτε αντί αυτού να στέλνετε μηνύματα απευθείας με χρήση του SMTP. Αυτό απαιτεί τη διεύθυνση ενός κατάλληλου διακομιστή (ρωτήστε τον πάροχο σας εάν είναι απαραίτητο). Εάν ο διακομιστής απαιτεί πιστοποίηση (και μόνο εάν το κάνει) εισάγετε τα απαιτούμενα όνομα χρήστη, κωδικό πρόσβασης και μέθοδο πιστοποίησης.',
 
-	'EmailFunctionName'			=> 'Email function name',
-	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
-	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',
+	'EmailFunctionName'			=> 'Όνομα λειτουργίας ηλεκτρονικού ταχυδρομείου',
+	'EmailFunctionNameInfo'		=> 'Η λειτουργία ηλεκτρονικού ταχυδρομείου που χρησιμοποιείται για την αποστολή ηλεκτρονικών μηνυμάτων μέσω της PHP.',
+	'UseSmtpInfo'				=> 'Επιλέξτε <code>SMTP</code> εάν θέλετε ή πρέπει να στείλετε μήνυμα ηλεκτρονικού ταχυδρομείου μέσω ενός έγκυρου διακομιστή (SMTP), αντί της λειτουργίας τοπικού ταχυδρομείου (λειτουργία PHP).',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -294,44 +295,44 @@ $ap_translation = [
 	'AbuseEmail'				=> 'Email abuse service',
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
-	'SendTestEmail'				=> 'Send a test email',
-	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
-	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
-	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br />If you don\'t receive it, please check your emails configuration.',
+	'SendTestEmail'				=> 'Αποστολή δοκιμαστικού μηνύματος ηλεκτρονικού ταχυδρομείου',
+	'SendTestEmailInfo'			=> 'Αυτό θα αποστείλει ένα δοκιμαστικό μήνυμα ηλεκτρονικού ταχυδρομείου στη διεύθυνση που ορίστηκε στο λογαριασμό σας.',
+	'TestEmailSubject'			=> 'Το WackoWiki είναι σωστά ρυθμισμένο για την αποστολή μηνυμάτων ηλεκτρονικού ταχυδρομείου',
+	'TestEmailBody'				=> 'Αν λάβατε αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου, το WackoWiki είναι σωστά ρυθμισμένο για την αποστολή μηνυμάτων ηλεκτρονικού ταχυδρομείου.',
+	'TestEmailMessage'			=> 'Το δοκιμαστικό μήνυμα ηλεκτρονικού ταχυδρομείου στάλθηκε.<br />Αν δεν το λάβατε, παρακαλούμε ελέγξτε τις ρυθμίσεις του ηλεκτρονικού ταχυδρομείου.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
-	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
-	'SmtpPassword'				=> 'SMTP password',
-	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br /><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
-	'SmtpPort'					=> 'SMTP server port',
-	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP server address',
-	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
-	'SmtpSettings'				=> 'SMTP settings',
-	'SmtpUsername'				=> 'SMTP username',
-	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
+	'SmtpConnectionMode'		=> 'Μέθοδος πιστοποίησης για SMTP',
+	'SmtpConnectionModeInfo'	=> 'Χρησιμοποιείται μόνο εάν έχει οριστεί το όνομα χρήστη / κωδικός πρόσβασης, ρωτήστε τον πάροχο σας εάν δεν είστε βέβαιοι ποια μέθοδο θα χρησιμοποιήσετε.',
+	'SmtpPassword'				=> 'Κωδικός πρόσβασης SMTP',
+	'SmtpPasswordInfo'			=> 'Εισάγετε ένα κωδικό πρόσβασης μόνο εάν ο διακομιστής SMTP το απαιτεί. <em><strong>ΠΡΟΕΙΔΟΠΟΙΗΣΗ:</strong> Αυτός ο κωδικός πρόσβασης θα αποθηκευτεί σαν απλό κείμενο στη βάση δεδομένων, ορατός σε όποιον μπορεί να έχει πρόσβαση στη βάση δεδομένων σας ή που μπορεί να προβάλει αυτή τη σελίδα ρυθμίσεων.</em>',
+	'SmtpPort'					=> 'Θύρα διακομιστή SMTP',
+	'SmtpPortInfo'				=> 'Αλλάξτε το μόνο εάν γνωρίζετε ότι ο διακομιστής SMTP είναι σε μια διαφορετική θύρα. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'Διεύθυνση διακομιστή SMTP',
+	'SmtpServerInfo'			=> 'Σημει΄ψστε ότι πρέπει να περέχετε και το πρωτόκολλο που χρησιμοποιεί ο διακομιστής σας. Αν χρησιμοποιείται SSL, πρέπει να το γράψετε <code>ssl://mail.example.com</code>',
+	'SmtpSettings'				=> 'Ρυθμίσεις SMTP',
+	'SmtpUsername'				=> 'Όνομα χρήστη SMTP',
+	'SmtpUsernameInfo'			=> 'Εισάγετε ένα όνομα χρήστη μόνο εάν ο διακομιστής SMTP το απαιτεί.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Here you can configure the main settings for attachments and the associated special categories.',
+	'UploadSettingsInfo'		=> 'Εδώ μπορείτε να διαμορφώσετε τις προεπιλεγμένες ρυθμίσεις για τα συνημμένα και τις σχετικές ειδικές κατηγορίες.',
 	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Maximum file size',
-	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the uploadable filesize is only limited by your PHP configuration.',
-	'UploadQuota'				=> 'Total attachment quota',
-	'UploadQuotaInfo'			=> 'Maximum drive space available for attachments for the whole wiki, with 0 being unlimited.',
+	'UploadMaxFilesize'			=> 'Μέγιστο μέγεθος αρχείου',
+	'UploadMaxFilesizeInfo'		=> 'Μέγιστο μέγεθος του κάθε αρχείου. Εάν η τιμή είναι 0, το μέγεθος του προς φόρτωση αρχείου περιορίζεται μόνο από τις ρυθμίσεις του PHP σας.',
+	'UploadQuota'				=> 'Συνολική ποσόστωση συνημμένων.',
+	'UploadQuotaInfo'			=> 'Μέγιστος διαθέσιμος χώρος στη μονάδα δίσκου για ολόκληρo το σύστημα συζητήσεων, με 0 είναι απεριόριστος.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
-	'CheckMimetype'				=> 'Check attachment files',
-	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
+	'CheckMimetype'				=> 'Έλεγχος αρχείων συνημμένων',
+	'CheckMimetypeInfo'			=> 'Ορισμένα προγράμματα περιήγησης μπορεί να εξαπατηθούν και να υποθέσουν ένα ανακριβές είδος κωδικοποίησης για τα φορτώσιμα αρχεία. Αυτή η επιλογή εξασφαλίζει ότι τέτοια αρχεία που είναι πιθανό να προκαλέσουν αυτό, να απορρίπτονται.',
 
-	'CreateThumbnail'			=> 'Create thumbnail',
-	'CreateThumbnailInfo'		=> 'Create a thumbnail in all possible situations.',
-	'MaxThumbWidth'				=> 'Maximum thumbnail width in pixel',
-	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
-	'MinThumbFilesize'			=> 'Minimum thumbnail file size',
-	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
+	'CreateThumbnail'			=> 'Δημιουργία μικρογραφίας',
+	'CreateThumbnailInfo'		=> 'Δημιουργία μιας μικρογραφίας σε όλες τις δυνατές θέσεις.',
+	'MaxThumbWidth'				=> 'Μέγιστο πλάτος μικρογραφίας σε εικονοστοιχεία',
+	'MaxThumbWidthInfo'			=> 'Μια μικρογραφία που δημιουργείται δεν θα υπερβαίνει το πλάτος που καθορίζεται εδώ.',
+	'MinThumbFilesize'			=> 'Ελάχιστο μέγεθος αρχείου μικρογραφίας',
+	'MinThumbFilesizeInfo'		=> 'Να μη δημιουργείται μικρογραφία για εικόνες μικρότερες από αυτό.',
 
 	// log
 	'LogLevel1'					=> 'critical',
@@ -403,7 +404,7 @@ $ap_translation = [
 	// User module
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Edit',
+	'UserEditButton'			=> 'Επεξεργασία',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user ',
@@ -442,7 +443,7 @@ $ap_translation = [
 	'GroupsSaveButton'			=> 'Submit',
 	'GroupsCancelButton'		=> 'Cancel',
 	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Edit',
+	'GroupsEditButton'			=> 'Επεξεργασία',
 	'GroupsRemoveButton'		=> 'Remove',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 

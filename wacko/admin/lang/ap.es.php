@@ -20,6 +20,7 @@ $ap_translation = [
 	],
 
 	// Admin panel
+	'AdminPanel'				=> 'Panel de Control de Administración',
 	'Authorization'				=> 'Autorización',
 	'AuthorizationTip'			=> 'Por favor ingrese la contraseña del administrador (asegúrese que su navegador permita cookies).',
 	'NoRecoceryPassword'		=> 'Contraseña administrativa no especificada!',
