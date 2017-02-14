@@ -7267,7 +7267,7 @@ class Wacko
 					$_category .= ', ';
 				}
 
-				$_category .= '<a href="' . $this->href('', '', 'category=' . $category['category_id']) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+				$_category .= '<a href="' . $this->href('', '', 'category_id=' . $category['category_id']) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
 			}
 
 			return $_category;

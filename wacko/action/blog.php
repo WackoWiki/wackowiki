@@ -15,10 +15,10 @@ $blog_cluster = $page;
 if (!empty($blog_cluster))
 {
 	if (!isset($max))	$max = '';
-	if (isset($_GET['category']))
+	if (isset($_GET['category_id']))
 	{
 		$mode			= 'category';
-		$category_id	= $_GET['category'];
+		$category_id	= (int) $_GET['category_id'];
 	}
 	if (!isset($mode))	$mode = 'latest';
 	if (!isset($title))	$title = 1;
