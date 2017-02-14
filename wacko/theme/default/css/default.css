@@ -1509,7 +1509,6 @@ th.form_left {
 	overflow: hidden;
 	padding: 0;
 	width: 100%;
-	/*width: 570px;*/
 }
 
 article.newsarticle:hover {
@@ -1517,7 +1516,7 @@ article.newsarticle:hover {
 }
 
 .newstitle {
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: bold;
 	border: none;
 	border-color: red;
@@ -1525,11 +1524,6 @@ article.newsarticle:hover {
 	border-width: 0 0 0 4px;
 	margin-top: 10px;
 	padding-left: 9px;
-/*	background-color: #DDEEFF;
-	border-color: #CCCCAA -moz-use-text-color;
-	border-style: dashed none;
-	border-width: 1px 0;
-	padding: 3px 0 3px 10px;*/
 }
 
 .newsinfo {

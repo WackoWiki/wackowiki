@@ -394,6 +394,11 @@ a[href $='.txt'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/text.svg') no-repeat scroll left center;
 	padding-left: 17px;
 }
+a[href $='.diff'] .icon,
+a[href $='.patch'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/patch.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
 a[href $='.odt'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/document.svg') no-repeat scroll left center;
 	padding-left: 17px;
