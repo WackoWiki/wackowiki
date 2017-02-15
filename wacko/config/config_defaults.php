@@ -233,8 +233,8 @@ $wacko_config_defaults = [
 
 	'session_length'				=> 30, // cookie_expire_days
 	'allow_persistent_cookie'		=> 1,
-	'session_match_ip'				=> false,
-	'session_match_useragent'		=> true,
+	'session_match_ip'				=> 0, // not in use
+	'session_match_useragent'		=> 1, // not in use
 
 	'enable_security_headers'		=> 1,
 	'csp'							=> 1,

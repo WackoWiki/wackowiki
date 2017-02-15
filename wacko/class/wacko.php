@@ -2681,6 +2681,7 @@ class Wacko
 		{
 			return '';
 		}
+
 		if ($tag == '!')
 		{
 			return $this->context[$this->current_context];
