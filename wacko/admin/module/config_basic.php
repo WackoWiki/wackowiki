@@ -400,6 +400,22 @@ function admin_config_basic(&$engine, &$module)
 					<small>Turns on or off RSS feeds for the entire wiki.</small></label></td>
 				<td><input type="checkbox" id="enable_feeds" name="enable_feeds" value="1"<?php echo ( $engine->db->enable_feeds ? ' checked="checked"' : '' );?> /></td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="xml_sitemap"><strong>XML Sitemap:</strong><br />
+					<small>Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.</small></label></td>
+				<td><input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ( $engine->db->xml_sitemap ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="xml_sitemap_time"><strong>XML Sitemap generation time:</strong><br />
+					<small>Generate a Sitemaps only once in this number of days, zero means on every page change.</small></label></td>
+				<td><input type="number" min="0" maxlength="4" style="width:200px;" id="xml_sitemap_time" name="xml_sitemap_time" value="<?php echo htmlspecialchars($engine->db->xml_sitemap_time, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+			</tr>
 			<tr>
 				<th colspan="2">
 					<br />
@@ -518,22 +534,6 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><label for="noindex"><strong>Block search engines (Search Engine Visibility):</strong><br />
 					<small>I would like to block search engines, but allow normal visitors. Overrides page settings. <br />Discourage search engines from indexing this site, It is up to search engines to honor this request.</small></label></td>
 				<td><input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ( $engine->db->noindex ? ' checked="checked"' : '' );?> /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="xml_sitemap"><strong>XML Sitemap:</strong><br />
-					<small>Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.</small></label></td>
-				<td><input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ( $engine->db->xml_sitemap ? ' checked="checked"' : '' );?> /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="xml_sitemap_time"><strong>XML Sitemap generation time:</strong><br />
-					<small>Generate a Sitemaps only once in this number of days, zero means on every page change.</small></label></td>
-				<td><input type="number" min="0" maxlength="4" style="width:200px;" id="xml_sitemap_time" name="xml_sitemap_time" value="<?php echo htmlspecialchars($engine->db->xml_sitemap_time, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 		</table>
 		<br />

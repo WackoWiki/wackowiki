@@ -121,13 +121,16 @@ table th {
 /*	Form elements	*/
 
 input, select {
-	vertical-align: middle;
+	/* vertical-align: middle; */
 }
 textarea {
 	height: 160px;
 	padding: 3px;
 }
-
+input[type="checkbox"], input[type="radio"] {
+	margin-left: 8px;
+	margin-right: 10px;
+}
 
 /*	Layout styles	*/
 

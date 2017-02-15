@@ -91,6 +91,7 @@ class Wacko
 	*
 	* Crates an instance of Wacko object
 	* @param array $config Current configuration as map key=value
+	*
 	* @return Wacko
 	*/
 	function __construct(&$config, &$http)
@@ -185,6 +186,7 @@ class Wacko
 	* @param string $unwrapped_tag Optional. Unwrapped supertag. If
 	* not set, then check if file exists in global space
 	* @param boolean $deleted
+	*
 	* @return array File description array
 	*/
 	function check_file_exists($file_name, $unwrapped_tag = '', $deleted = 0)
@@ -454,6 +456,7 @@ class Wacko
 
 	/**
 	* Loads language file from lang/lang.<lang>.php.
+	*
 	* @param string $lang Language code
 	*/
 	function load_lang($lang)
@@ -487,6 +490,7 @@ class Wacko
 	* Get array of available resource translations
 	*
 	* @param bool $subset, true for allowed_languages only
+	*
 	* @return Array of language codes
 	*/
 	function available_languages($subset = true)
@@ -595,6 +599,7 @@ class Wacko
 	 * @param string $name Name of message set
 	 * @param string $lang Language code
 	 * @param bool $dounicode
+	 *
 	 * @return string Message set
 	 */
 	function _t($name, $lang = '', $dounicode = true)
@@ -704,6 +709,7 @@ class Wacko
 	*
 	* @param string $string Input string
 	* @param string $lang Target language code
+	*
 	* @return string Converted string
 	*/
 	function do_unicode_entities($string, $lang)
@@ -849,6 +855,7 @@ class Wacko
 	* @param string $tag
 	* @param int $strtolow Change tag case. TRAN_DONTCHANGE - don't change TRAN_LOWERCASE - convert to lowercase
 	* @param unknown_type $donotload WTF: doesn't use
+	*
 	* @return string
 	*/
 	function translit($tag, $strtolow = TRANSLIT_LOWERCASE, $donotload = TRANSLIT_LOAD)
@@ -984,6 +991,7 @@ class Wacko
 	* @param int $cache If LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
 	* @param int $metadataonly If LOAD_ALL loads all page fields including page body, if LOAD_META - only pages_meta fields.
 	* @param boolean $deleted
+	*
 	* @return array Loaded page
 	*/
 	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
@@ -1178,6 +1186,7 @@ class Wacko
 	* @param string $tag Page tag
 	* @param int $page_id
 	* @param boolean $metadataonly Returns only page with equal metadataonly marker. Default value is 0.
+	*
 	* @return mixed Page from cache or FALSE if not found
 	*/
 	function get_cached_page($supertag, $page_id = 0, $metadata_only = 0)
@@ -1273,6 +1282,7 @@ class Wacko
 	*
 	* @param unknown_type $tag
 	* @param int $page_id
+	*
 	* @return boolean  Return TRUE if tag in Wanted cache and FALSE if not
 	*/
 	function get_cached_wanted_page($tag, $page_id = 0)
@@ -1758,19 +1768,25 @@ class Wacko
 		}
 	}
 
-	// PAGE SAVING ROUTINE
-	// $tag				- page address
-	// $title			- page name (metadata)
-	// $body			- page body (plain text)
-	// $edit_note		- edit summary
-	// $minor_edit		- minor edit
-	// $comment_on_id	- commented page id
-	// $parent_id		- commented parent id
-	// $lang			- page language
-	// $mute			- supress email reminders and xml rss recompilation
-	// $user_name		- attach guest pseudonym
-	// $user_page		- user is page owner
-	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = false, $user_page = false)
+	/**
+	 * Page saving routine
+	 *
+	 * @param string	$tag			page address
+	 * @param string	$title			page name (metadata)
+	 * @param string	$body			page body (plain text)
+	 * @param string	$edit_note		edit summary
+	 * @param integer	$minor_edit		minor edit
+	 * @param integer	$reviewed
+	 * @param integer	$comment_on_id	commented page_id
+	 * @param integer	$parent_id		commented parent id
+	 * @param string	$lang			page language
+	 * @param boolean	$mute			supress email reminders and xml rss recompilation
+	 * @param string	$user_name		attach guest pseudonym
+	 * @param boolean	$user_page		user is page owner
+	 *
+	 * @return string	$body_r
+	 */
+	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false)
 	{
 		$desc = '';
 
@@ -1922,46 +1938,46 @@ class Wacko
 						$write_acl	= $this->load_acl($root_id, 'write');
 					}
 
-					$write_acl		= $write_acl['list'];
+					$acl['write']	= $write_acl['list'];
 
 					$read_acl		= $this->load_acl($root_id, 'read');
-					$read_acl		= $read_acl['list'];
+					$acl['read']	= $read_acl['list'];
 
 					$comment_acl	= $this->load_acl($root_id, 'comment');
-					$comment_acl	= $comment_acl['list'];
+					$acl['comment']	= $comment_acl['list'];
 
 					$create_acl		= $this->load_acl($root_id, 'create');
-					$create_acl		= $create_acl['list'];
+					$acl['create']	= $create_acl['list'];
 
 					$upload_acl		= $this->load_acl($root_id, 'upload');
-					$upload_acl		= $upload_acl['list'];
+					$acl['upload']	= $upload_acl['list'];
 
 					// forum topic privileges
 					if ($this->forum)
 					{
-						$write_acl		= $user_name;
-						$comment_acl	= '*';
-						$create_acl		= '';
-						$upload_acl		= '';
+						$acl['write']	= $user_name;
+						$acl['comment']	= '*';
+						$acl['create']	= '';
+						$acl['upload']	= '';
 					}
 				}
 				else if ($comment_on_id)
 				{
 					// Give comments the same read rights as their parent page
 					$read_acl		= $this->load_acl($comment_on_id, 'read');
-					$read_acl		= $read_acl['list'];
-					$write_acl		= '';
-					$comment_acl	= '';
-					$create_acl		= '';
-					$upload_acl		= '';
+					$acl['read']	= $read_acl['list'];
+					$acl['write']	= '';
+					$acl['comment']	= '';
+					$acl['create']	= '';
+					$acl['upload']	= '';
 				}
 				else
 				{
-					$read_acl		= $this->db->default_read_acl;
-					$write_acl		= $this->db->default_write_acl;
-					$comment_acl	= $this->db->default_comment_acl;
-					$create_acl		= $this->db->default_create_acl;
-					$upload_acl		= $this->db->default_upload_acl;
+					$acl['read']	= $this->db->default_read_acl;
+					$acl['write']	= $this->db->default_write_acl;
+					$acl['comment']	= $this->db->default_comment_acl;
+					$acl['create']	= $this->db->default_create_acl;
+					$acl['upload']	= $this->db->default_upload_acl;
 				}
 
 				// determine the depth
@@ -1972,7 +1988,9 @@ class Wacko
 					"INSERT INTO " . $this->db->table_prefix . "page SET " .
 						"version_id		= '1', " .
 						"comment_on_id	= '" . (int) $comment_on_id . "', " .
-						(!$comment_on_id ? "description = " . $this->db->q($desc) . ", " : "") .
+						(!$comment_on_id
+							? "description = " . $this->db->q($desc) . ", "
+							: "") .
 						"parent_id		= '" . (int) $parent_id . "', " .
 						"created		= UTC_TIMESTAMP(), " .
 						"modified		= UTC_TIMESTAMP(), " .
@@ -1989,7 +2007,7 @@ class Wacko
 						"body_toc		= " . $this->db->q($body_toc) . ", " .
 						"edit_note		= " . $this->db->q($edit_note) . ", " .
 						"minor_edit		= '" . (int) $minor_edit . "', " .
-						"page_size		= '" . (int)strlen($body) . "', " .
+						"page_size		= '" . (int) strlen($body) . "', " .
 						(isset($reviewed)
 							?	"reviewed		= '" . (int) $reviewed . "', " .
 								"reviewed_time	= UTC_TIMESTAMP(), " .
@@ -2002,11 +2020,11 @@ class Wacko
 				$page_id = $this->get_page_id($tag);
 
 				// saving acls
-				$this->save_acl($page_id, 'write',		$write_acl);
-				$this->save_acl($page_id, 'read',		$read_acl);
-				$this->save_acl($page_id, 'comment',	$comment_acl);
-				$this->save_acl($page_id, 'create',		$create_acl);
-				$this->save_acl($page_id, 'upload',		$upload_acl);
+				$this->save_acl($page_id, 'read',		$acl['read']);
+				$this->save_acl($page_id, 'write',		$acl['write']);
+				$this->save_acl($page_id, 'comment',	$acl['comment']);
+				$this->save_acl($page_id, 'create',		$acl['create']);
+				$this->save_acl($page_id, 'upload',		$acl['upload']);
 
 				// log event
 				if ($comment_on_id)
@@ -5119,6 +5137,7 @@ class Wacko
 	* @param int $page_id
 	* @param string $privilege ACL privilege: read, write, comment, create, upload
 	* @param boolean $use_defaults
+	*
 	* @return array ACL
 	*/
 	function get_cached_acl($page_id, $privilege, $use_defaults)
@@ -5147,7 +5166,19 @@ class Wacko
 		$this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] = $acl;
 	}
 
-	// TODO: add bulk option -> load entire page related priveleges at once in obj-cache
+	/**
+	* Load ACL
+	*
+	* @param int $page_id
+	* @param string $privilege ACL privilege: read, write, comment, create, upload
+	* @param boolean $use_defaults
+	* @param boolean $use_cache
+	* @param boolean $use_parent
+	* @param string $new_tag
+	*
+	* @return array $acl Access control list
+	*/
+	// TODO: add bulk option -> load entire page related privileges at once in obj-cache
 	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = '')
 	{
 		$acl = '';
@@ -5194,7 +5225,7 @@ class Wacko
 						$tag = strtolower($new_tag);
 					}
 
-					if ( strstr($tag, '/') )
+					if (strstr($tag, '/'))
 					{
 						$parent_tag = preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
 
@@ -5791,7 +5822,7 @@ class Wacko
 		}
 	}
 
-	// USER TRAIL navigation
+	// user trail navigation
 	//		call this function in your theme header or footer
 	//		$separator	= &gt; &raquo;
 	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size)
@@ -5845,7 +5876,6 @@ class Wacko
 	}
 
 	// MAINTENANCE
-
 	function maintenance()
 	{
 		$now	= time();
@@ -5881,8 +5911,8 @@ class Wacko
 		{
 			list($pages, ) = $this->load_deleted(1000, 0);
 
-			$remove = [];
-			$past = $now - DAYSECS * $days;
+			$remove	= [];
+			$past	= $now - DAYSECS * $days;
 
 			foreach ($pages as $page)
 			{
@@ -7138,6 +7168,7 @@ class Wacko
 	function show_captcha($inline = true)
 	{
 		$out = '';
+
 		// captcha is for guests only and if gd available
 		if ($this->db->enable_captcha && !$this->get_user() && extension_loaded('gd'))
 		{
@@ -7186,6 +7217,7 @@ class Wacko
 	 * Check for valid email address.
 	 *
 	 * @param string $email_address = email address to check
+	 *
 	 * @return boolean email valid or invalid
 	 */
 	function validate_email($email_address)
