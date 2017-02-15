@@ -36,7 +36,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					'<li><a href="' . $this->href('attachments', '', ['files=all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
 				"</ul><br /><br />\n";
 
-			echo $this->action('files', ['global' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'global']]) . '<br />';
+			echo $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'global']]) . '<br />';
 		}
 		else if (isset($_GET['files']) && $_GET['files'] == 'all')
 		{

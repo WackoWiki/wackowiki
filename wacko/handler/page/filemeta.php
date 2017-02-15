@@ -442,7 +442,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					}
 
 					// log event
-					$this->log(1, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
+					$this->log(4, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
 					$this->db->invalidate_sql_cache();
 					$this->http->redirect($this->href('filemeta', '', ['show', 'file_id=' . (int) $file['file_id']]));
 				}
