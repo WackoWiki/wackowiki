@@ -186,8 +186,8 @@ function admin_user_users(&$engine, &$module)
 			"AND u.account_type = '0' " .
 			"LIMIT 1");
 
-		#$engine->add_user_page($user['user_name'], $user['user_lang']);
 		$engine->approve_user($user, $user['account_status']);
+		$engine->add_user_page($user['user_name'], $user['user_lang']);
 	}
 	// edit user
 	else if (isset($_POST['edit']) && $user_id && (isset($_POST['newname']) || isset($_POST['moderator_id'])))

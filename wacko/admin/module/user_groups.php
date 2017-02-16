@@ -452,7 +452,7 @@ function admin_user_groups(&$engine, &$module)
 		echo "<h2>" . $engine->_t('GroupsMembersFor') . ": " . $usergroup['group_name'] . "</h2>";
 
 		$members = $engine->db->load_all(
-			"SELECT m.user_id, user_name " .
+			"SELECT m.user_id, u.user_name " .
 			"FROM " . $engine->db->table_prefix . "usergroup g " .
 				"INNER JOIN " . $engine->db->table_prefix . "usergroup_member m ON (g.group_id = m.group_id) " .
 				"INNER JOIN " . $engine->db->table_prefix . "user u ON (m.user_id = u.user_id) " .
@@ -466,7 +466,7 @@ function admin_user_groups(&$engine, &$module)
 			<tr>
 				<th style="width:5px;"></th>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="?mode=groups&order=<?php echo $orderuser; ?>">Username</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . $orderuser; ?>">Username</a></th>
 			</tr>
 <?php
 		foreach ($members as $member)
@@ -475,7 +475,7 @@ function admin_user_groups(&$engine, &$module)
 					'<td>
 						<input type="radio" name="change_member" value="' . $member['user_id'] . '" /></td>' .
 					'<td>' . $member['user_id'] . '</td>' .
-					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id=' . $member['user_id'] . '">' . $member['user_name'] . '</a></strong></td>' .
+					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_users&amp;user_id=' . $member['user_id'] . '">' . $member['user_name'] . '</a></strong></td>' .
 				'</tr>';
 		}
 			?>
@@ -571,36 +571,36 @@ function admin_user_groups(&$engine, &$module)
 			($order ? $order : 'ORDER BY group_id DESC ') .
 			$pagination['limit']);
 
-	/////////////////////////////////////////////
-	//   print list
-	/////////////////////////////////////////////
+		/////////////////////////////////////////////
+		//   print list
+		/////////////////////////////////////////////
 
 		echo $engine->form_open('groups');
 
-			/////////////////////////////////////////////
-			//   control buttons
-			/////////////////////////////////////////////
+		/////////////////////////////////////////////
+		//   control buttons
+		/////////////////////////////////////////////
 
-			$control_buttons =	'<br /><input type="submit" id="button" name="create" value="' . $engine->_t('GroupsAddButton') . '" /> '.
-								'<input type="submit" id="button" name="edit" value="' . $engine->_t('GroupsEditButton') . '" /> '.
-								'<input type="submit" id="button" name="delete" value="' . $engine->_t('GroupsRemoveButton') . '" /> ';
+		$control_buttons =	'<br /><input type="submit" id="button" name="create" value="' . $engine->_t('GroupsAddButton') . '" /> '.
+							'<input type="submit" id="button" name="edit" value="' . $engine->_t('GroupsEditButton') . '" /> '.
+							'<input type="submit" id="button" name="delete" value="' . $engine->_t('GroupsRemoveButton') . '" /> ';
 
-			echo $control_buttons;
+		echo $control_buttons;
 
-			$engine->print_pagination($pagination);
+		$engine->print_pagination($pagination);
 ?>
-			<table style="padding: 3px;" class="formation listcenter">
-				<tr>
-					<th style="width:5px;"></th>
-					<th style="width:5px;">ID</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordergroup; ?>">Group</a></th>
-					<th>Description</th>
-					<th style="width:20px;">Moderator</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordermembers; ?>">Members</a></th>
-					<th style="width:20px;">Open</th>
-					<th style="width:20px;">Active</th>
-					<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $created; ?>">Created</a></th>
-				</tr>
+		<table style="padding: 3px;" class="formation listcenter">
+			<tr>
+				<th style="width:5px;"></th>
+				<th style="width:5px;">ID</th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordergroup; ?>">Group</a></th>
+				<th>Description</th>
+				<th style="width:20px;">Moderator</th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordermembers; ?>">Members</a></th>
+				<th style="width:20px;">Open</th>
+				<th style="width:20px;">Active</th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $created; ?>">Created</a></th>
+			</tr>
 <?php
 		if ($groups)
 		{
@@ -625,7 +625,7 @@ function admin_user_groups(&$engine, &$module)
 			echo '<tr><td colspan="5"><br /><em>No groups that meet the criteria</em></td></tr>';
 		}
 ?>
-			</table>
+		</table>
 <?php
 		$engine->print_pagination($pagination);
 

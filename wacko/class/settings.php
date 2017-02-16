@@ -71,6 +71,7 @@ class Settings extends Dbal implements ArrayAccess
 				if (!($result = $this->load_all(
 						"SELECT
 							g.group_name,
+							u.user_id,
 							u.user_name
 						FROM
 							{$this->table_prefix}usergroup_member gm
@@ -80,18 +81,23 @@ class Settings extends Dbal implements ArrayAccess
 					die("Error loading WackoWiki usergroups data: database `group` table is empty.");
 				}
 
+				$this->groups = [];
 				$ug = [];
 
 				foreach ($result as $row)
 				{
+					// groups array
+					$this->config['groups'][$row['group_name']][] = $row['user_id'];
+
 					$ug[$row['group_name']][] = $row['user_name'];
 				}
 
+				// legacy for ACL list
 				$this->aliases = [];
 
-				foreach ($ug as $group => $users)
+				foreach ($ug as $group => $members)
 				{
-					$this->config['aliases'][$group] = implode('\n', $users);
+					$this->config['aliases'][$group] = implode('\n', $members);
 				}
 
 				$prefix = '';
