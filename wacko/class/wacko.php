@@ -4362,7 +4362,7 @@ class Wacko
 	function action($action, $params = '', $force_link_tracking = 0)
 	{
 		$action = strtolower(trim($action));
-		$errmsg = '<em>' . $this->_t('UnknownAction') . ' "<code>' . $action . '</code>"</em>';
+		$errmsg = '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
 
 		if (!$force_link_tracking)
 		{
@@ -4385,7 +4385,7 @@ class Wacko
 		}
 
 		$method_location	= Ut::join_path($handler, $method . '.php');
-		$errmsg				= '<em>' . $this->_t('UnknownMethod') . ' "<code>' . $method_location . '</code>"</em>';
+		$errmsg				= '<em>' . $this->_t('UnknownMethod') . ' <code>' . $method_location . '</code></em>';
 
 		$result				= $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
 
