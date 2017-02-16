@@ -13,7 +13,7 @@ class Wacko
 	var $http;
 	var $sess;
 	var $dblink;
-	var $page;								// Requested page
+	var $page;								// requested page
 	var $tag;
 	var $method					= '';
 	var $supertag;
@@ -24,8 +24,8 @@ class Wacko
 	var $_acl					= [];
 	var $acl_cache				= [];
 	var $page_id_cache			= [];
-	var $context				= [];		// Page context. Uses for correct processing of inclusions
-	var $current_context		= 0;		// Current context level
+	var $context				= [];		// page context, used for correct processing of inclusions
+	var $current_context		= 0;		// current context level
 	var $header_count			= 0;
 	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	var $first_inclusion		= [];		// for backlinks
@@ -4384,10 +4384,10 @@ class Wacko
 			$handler = 'page';
 		}
 
-		$method_location = Ut::join_path($handler, $method . '.php');
-		$errmsg = '<em>' . $this->_t('UnknownMethod') . ' "<code>' . $method_location . '</code>"</em>';
+		$method_location	= Ut::join_path($handler, $method . '.php');
+		$errmsg				= '<em>' . $this->_t('UnknownMethod') . ' "<code>' . $method_location . '</code>"</em>';
 
-		$result = $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
+		$result				= $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
 
 		return (!strncmp($result, ADD_NO_DIV, strlen(ADD_NO_DIV)))
 			?  substr($result, strlen(ADD_NO_DIV))
@@ -4402,7 +4402,7 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
-		$err	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), $formatter) . '</em>';
+		$err	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
 		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $err, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->db->default_typografica)
