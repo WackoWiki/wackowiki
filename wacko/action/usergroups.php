@@ -21,7 +21,7 @@ if ($user = $this->get_user())
 		$cols = intval($cols);
 	}
 
-	if (is_array($this->db->aliases))
+	if (is_array($this->db->groups))
 	{
 		if (!$nomark)
 		{
@@ -32,7 +32,7 @@ if ($user = $this->get_user())
 
 		$i = 1;
 
-		foreach ($this->db->aliases as $group_name => $group_members)
+		foreach ($this->db->groups as $group_name => $group_members)
 		{
 			if ($i == $cols + 1)
 			{
@@ -40,20 +40,19 @@ if ($user = $this->get_user())
 				$i = 1;
 			}
 
-			$arr			= explode("\\n", $group_members);
 			$allowed_groups	= [];
 
-			sort($arr);
+			sort($group_members);
 
 			/*
 			 If they are an Admin show them all users in all groups
 			 Else they are a normal logged in user so just show them groups they belong to
 			 */
-			if ($this->is_admin() || in_array($user['user_name'], $arr))
+			if ($this->is_admin() || in_array($user['user_id'], $group_members))
 			{
 				echo '<td style="vertical-align:top;">';
 
-				foreach ($arr as $k => $user_name)
+				foreach ($group_members as $k => $user_name)
 				{
 					$allowed_groups[] = $this->user_link($user_name, '', true, false);
 				}
