@@ -36,17 +36,9 @@ function admin_config_email(&$engine, &$module)
 	if (isset($_POST['send_test_email']))
 	{
 		$subject	= '[' . $engine->db->site_name . '] ' . $engine->_t('TestEmailSubject');
-		$body		= $engine->_t('EmailHello') . ' ' . $engine->db->admin_name . ",\n\n" .
+		$body		= $engine->_t('TestEmailBody');
 
-					$engine->_t('TestEmailBody')."\n\n\n" .
-
-					$engine->_t('EmailDoNotReply') . "\n\n" .
-					$engine->_t('EmailGoodbye') . "\n" .
-					$engine->db->site_name . "\n" .
-					$engine->db->base_url;
-
-		$email = new Email($engine);
-		$email->send_mail($engine->db->admin_email, $subject, $body);
+		$engine->send_user_email('System', $subject, $body);
 
 		$engine->set_message($engine->_t('TestEmailMessage'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));

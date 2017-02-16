@@ -27,12 +27,13 @@ class Email
 
 	// MAILER
 	// $email_to			- recipient address
+	// $name_to				- recipient name
 	// $subject, $message	- self-explaining
 	// $email_from			- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
 	// $xtra_headers		- (array) insert additional mail headers
 	// $supress_tls			- don't change all http links to https links in the message body
-	function send_mail($email_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = [], $supress_tls = false)
+	function send_mail($email_to, $name_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = [], $supress_tls = false)
 	{
 		if (!$this->engine->db->enable_email || ( !$email_to || !$subject || !$body) )
 		{
@@ -42,14 +43,6 @@ class Email
 		if (empty($charset))
 		{
 			$charset = $this->engine->get_charset();
-		}
-
-		$name_to		= '';
-
-		if (preg_match('/^([^<>]*)<([^<>]*)>$/', $email_to, $match))
-		{
-			$email_to	= trim($match[2]);
-			$name_to	= trim($match[1]);
 		}
 
 		if (!$email_from)
@@ -159,12 +152,17 @@ class Email
 
 			$mail->Send();
 
-			/*if (!$mail->Send())
+			/* if (!$mail->Send())
 			{
 				$message = "Mailer Error: " . $mail->ErrorInfo;
-				$this->log(1, $message);
+				$this->engine->log(1, $message);
 				exit;
-			}*/
+			}
+			else
+			{
+				$message = "Message has been sent.";
+				$this->engine->log(1, $message);
+			} */
 
 			$send_ok = true;
 		}

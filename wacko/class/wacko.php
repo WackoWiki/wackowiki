@@ -2343,12 +2343,17 @@ class Wacko
 	{
 		if ($user === 'System')
 		{
-			$user = ['user_name' => $this->db->email_from, 'email' => $this->db->noreply_email, 'user_lang' => $this->db->language];
+			$user = [
+				'user_name'		=> $this->db->email_from,
+				'email'			=> $this->db->noreply_email,
+				'user_lang'		=> $this->db->language
+			];
 		}
 
 		$save = $this->set_language($user['user_lang'], true);
 
-		$to			=	$user['user_name'] . ' <' . $user['email'] . '>';
+		$email_to	=	$user['email'];
+		$name_to	=	$user['user_name'];
 		$subject	=	'[' . $this->db->site_name . '] ' . $subject;
 		$body		=	$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
 
@@ -2359,8 +2364,10 @@ class Wacko
 						$this->db->site_name . "\n" .
 						$this->db->base_url;
 
+		$charset	=	$this->get_charset($user['user_lang']);
+
 		$email = new Email($this);
-		$email->send_mail($to, $subject, $body, null, $this->get_charset($user['user_lang']));
+		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset);
 
 		$this->set_language($save, true);
 	}
