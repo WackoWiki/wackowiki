@@ -2079,7 +2079,7 @@ class Wacko
 					// subscribe & notify moderators
 					if (!$mute)
 					{
-						$this->notify_moderator($page_id, $tag, $title, $user_name);
+						$this->notify_moderator($page_id, $tag, $title, $user_id, $user_name);
 					}
 				}
 
@@ -2338,6 +2338,7 @@ class Wacko
 		}
 	}
 
+	// email wrapper
 	function send_user_email($user, $subject, $body)
 	{
 		if ($user === 'System')
@@ -2350,7 +2351,9 @@ class Wacko
 		$to			=	$user['user_name'] . ' <' . $user['email'] . '>';
 		$subject	=	'[' . $this->db->site_name . '] ' . $subject;
 		$body		=	$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
+
 						Ut::amp_decode($body) . "\n\n" .
+
 						$this->_t('EmailDoNotReply') . "\n\n" .
 						$this->_t('EmailGoodbye') . "\n" .
 						$this->db->site_name . "\n" .
@@ -2362,45 +2365,37 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_moderator($page_id, $tag, $title, $user_name)
+	function notify_moderator($page_id, $tag, $title, $user_id, $user_name)
 	{
 		// subscribe & notify moderators
-		if (is_array($this->db->aliases))
+		if (is_array($this->db->groups['Moderator']))
 		{
-			$list	= $this->db->aliases;
+			$members = $this->db->load_all(
+				"SELECT m.user_id, u.user_name, u.email, s.user_lang, u.email_confirm, u.enabled, s.send_watchmail " .
+				"FROM " . $this->db->table_prefix . "usergroup g " .
+					"INNER JOIN " . $this->db->table_prefix . "usergroup_member m ON (g.group_id = m.group_id) " .
+					"INNER JOIN " . $this->db->table_prefix . "user u ON (m.user_id = u.user_id) " .
+					"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+				"WHERE g.group_name = 'Moderator'");
 
-			if (isset($list['Moderator']))
+			foreach ($members as $user)
 			{
-				$moderators	= explode("\\n", $list['Moderator']);
-
-				foreach ($moderators as $moderator)
+				if ($user_id != $user['user_id'])
 				{
-					if ($user_name != $moderator)
+					if ($this->db->enable_email && $this->db->enable_email_notification && $user['enabled'] && !$user['email_confirm'] && $user['send_watchmail'])
 					{
-						$moderator_id = $this->get_user_id($moderator);
+						$save = $this->set_language($user['user_lang'], true);
 
-						$user = $this->db->load_single(
-							"SELECT u.user_name, u.email, s.user_lang, u.email_confirm, u.enabled, s.send_watchmail " .
-							"FROM " . $this->db->user_table." u " .
-								"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = p.user_id) " .
-							"WHERE u.user_id = '" . $moderator_id . "' " .
-							"LIMIT 1");
+						$subject	=	$this->_t('NewPageCreatedSubj') . " '$title'";
+						$body		=	$this->_t('EmailModerator') . ".\n\n" .
+										Ut::perc_replace($this->_t('NewPageCreatedBody'), ($user_name == GUEST ? $this->_t('Guest') : $user_name)) . "\n" .
+										"'$title'\n" .
+										$this->href('', $tag) . "\n\n";
 
-						if ($this->db->enable_email && $this->db->enable_email_notification && $user['enabled'] && !$user['email_confirm'] && $user['send_watchmail'])
-						{
-							$save = $this->set_language($user['user_lang'], true);
+						$this->send_user_email($user, $subject, $body);
 
-							$subject	=	$this->_t('NewPageCreatedSubj') . " '$title'";
-							$body		=	$this->_t('EmailModerator') . ".\n\n" .
-											Ut::perc_replace($this->_t('NewPageCreatedBody'), ( $user_name == GUEST ? $this->_t('Guest') : $user_name )) . "\n" .
-											"'$title'\n" .
-											$this->href('', $tag) . "\n\n";
-
-							$this->send_user_email($user, $subject, $body);
-
-							$this->set_watch($moderator_id, $page_id);
-							$this->set_language($save, true);
-						}
+						$this->set_watch($user['user_id'], $page_id);
+						$this->set_language($save, true);
 					}
 				}
 			}
@@ -2504,6 +2499,7 @@ class Wacko
 					}
 				}
 
+				// removes user from subscription if access writes were revoked
 				if (!$this->has_access('read', $object_id, $watcher['user_name']))
 				{
 					$this->clear_watch($watcher['user_id'], $object_id);
@@ -4961,11 +4957,9 @@ class Wacko
 			return $this->sess->admin_it_is;
 		}
 
-		if (($name = $this->get_user_name()) && isset($this->db->aliases))
+		if (isset($this->db->groups['Admins']) && is_array($this->db->groups['Admins']))
 		{
-			$admins = explode('\n', $this->db->aliases['Admins']);
-
-			if ($admins && in_array($name, $admins))
+			if (in_array($this->get_user_id(), $this->db->groups['Admins']))
 			{
 				return $this->sess->admin_it_is = 1;
 			}
@@ -4981,18 +4975,11 @@ class Wacko
 			return false;
 		}
 
-		if (isset($this->db->aliases) && is_array($this->db->aliases))
+		if (isset($this->db->groups['Moderator']) && is_array($this->db->groups['Moderator']))
 		{
-			$alias = $this->db->aliases;
-
-			if (isset($alias['Moderator']))
+			if (in_array($this->get_user_id(), $this->db->groups['Moderator']))
 			{
-				$moderator = explode("\\n", $alias['Moderator']);
-
-				if ($moderator && in_array($this->get_user_name(), $moderator))
-				{
-					return true;
-				}
+				return true;
 			}
 		}
 
@@ -5006,18 +4993,11 @@ class Wacko
 			return false;
 		}
 
-		if (isset($this->db->aliases) && is_array($this->db->aliases))
+		if (isset($this->db->groups['Reviewer']) && is_array($this->db->groups['Reviewer']))
 		{
-			$alias = $this->db->aliases;
-
-			if (isset($alias['Reviewer']))
+			if (in_array($this->get_user_id(), $this->db->groups['Reviewer']))
 			{
-				$reviewer = explode("\\n", $alias['Reviewer']);
-
-				if ($reviewer && in_array($this->get_user_name(), $reviewer))
-				{
-					return true;
-				}
+				return true;
 			}
 		}
 

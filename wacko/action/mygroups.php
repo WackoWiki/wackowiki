@@ -11,15 +11,13 @@ if (!isset($nomark)) $nomark = '';
 
 if (!function_exists('MyGroups'))
 {
-	function my_groups(&$wacko, $user_name, $alias)
+	function my_groups(&$wacko, $user_id, $groups)
 	{
 		$my_groups_count = 0;
 
-		foreach ($alias as $group_name => $members)
+		foreach ($groups as $group_name => $members)
 		{
-			$group_members = explode("\\n", $members);
-
-			if (in_array ($user_name, $group_members))
+			if (in_array ($user_id, $members))
 			{
 				echo $wacko->group_link($group_name, '', true, false) . '<br />';
 
@@ -33,14 +31,12 @@ if (!function_exists('MyGroups'))
 
 if ($user = $this->get_user())
 {
-	$alias = $this->db->aliases;
-
 	if (!$nomark)
 	{
 		echo '<div class="layout-box"><p class="layout-box"><span>' . $user['user_name'] . ": " . $this->_t('MyGroups') . "</span></p>\n";
 	}
 
-	$groups_count = my_groups($this, $user['user_name'], $alias);
+	$groups_count = my_groups($this, $user['user_id'], $this->db->groups);
 
 	if (!$nomark)
 	{
