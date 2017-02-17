@@ -119,6 +119,8 @@ class Email
 			$mail->Host			= $this->engine->db->smtp_host;		// SMTP server
 
 			$mail->AddCustomHeader('X-Wacko: ' . $this->engine->db->base_url);
+			$mail->AddCustomHeader('Auto-Submitted: auto-generated');	// RFC3834
+			$mail->AddCustomHeader('X-Auto-Response-Suppress: All');	// Microsoft Exchange
 
 			# $mail->Sender		= $this->engine->db->abuse_email;
 			# $mail->AddReplyTo('name@example.com', 'First Last');
