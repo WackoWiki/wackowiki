@@ -2345,7 +2345,7 @@ class Wacko
 		{
 			$user = [
 				'user_name'		=> $this->db->email_from,
-				'email'			=> $this->db->noreply_email,
+				'email'			=> $this->db->admin_email,
 				'user_lang'		=> $this->db->language
 			];
 		}

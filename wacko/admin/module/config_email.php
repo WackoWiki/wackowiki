@@ -35,7 +35,7 @@ function admin_config_email(&$engine, &$module)
 	// send test email
 	if (isset($_POST['send_test_email']))
 	{
-		$subject	= '[' . $engine->db->site_name . '] ' . $engine->_t('TestEmailSubject');
+		$subject	= $engine->_t('TestEmailSubject');
 		$body		= $engine->_t('TestEmailBody');
 
 		$engine->send_user_email('System', $subject, $body);
