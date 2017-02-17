@@ -794,6 +794,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Toon bestanden',
 	'HideFiles'					=> 'Verberg bestanden',
 	'DoShowFiles'				=> 'Altijd bestandslijst tonen',
+	'NoAttachments'				=> 'Er zijn geen bijgevoegde bestanden om weer te geven.',
 
 	'RegistrationLang'			=> 'Taal',
 	'InvalidWikiName'			=> 'De naam die u gekozen heeft is niet geldig',

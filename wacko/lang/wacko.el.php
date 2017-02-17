@@ -794,6 +794,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Εμφάνιση Αρχείων',
 	'HideFiles'					=> 'Απόκρυψη Αρχείων',
 	'DoShowFiles'				=> 'Εμφάνιση λίστας αρχείων εξ\' ορισμού',
+	'NoAttachments'				=> 'Δεν υπάρχουν συνημμένα αρχεία για εμφάνιση.',
 
 	'RegistrationLang'			=> 'Η γλώσσα σας ',
 	'InvalidWikiName'			=> 'Το επιλεγμένο όνομα είναι άκυρο',

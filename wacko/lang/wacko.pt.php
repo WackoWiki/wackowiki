@@ -794,6 +794,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Mostrar Ficheiros',
 	'HideFiles'					=> 'Esconder Ficheiros',
 	'DoShowFiles'				=> 'Por defeito mostra lista de ficheiros',
+	'NoAttachments'				=> 'Não existem Ficheiros a exibir.',
 
 	'RegistrationLang'			=> 'O seu idioma',
 	'InvalidWikiName'			=> 'Nome escolhido não é válido',

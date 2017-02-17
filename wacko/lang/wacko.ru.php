@@ -797,6 +797,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Показать файлы/форму',
 	'HideFiles'					=> 'Скрыть файлы/форму',
 	'DoShowFiles'				=> 'По умолчанию список файлов для страницы отображfется',
+	'NoAttachments'				=> 'Вложения отсутствуют.',
 
 	'RegistrationLang'			=> 'Your language (ваш язык)',
 	'InvalidWikiName'			=> 'Выбранное вами имя страницы неверно',

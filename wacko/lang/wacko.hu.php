@@ -794,6 +794,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Display files / form',
 	'HideFiles'					=> 'Hide files / form',
 	'DoShowFiles'				=> 'Show files lists by default',
+	'NoAttachments'				=> 'Nincs megjelenítendõ csatolt állomány.',
 
 	'RegistrationLang'			=> 'Your language',
 	'InvalidWikiName'			=> 'Chosen name is invalid',

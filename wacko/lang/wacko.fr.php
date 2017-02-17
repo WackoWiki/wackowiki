@@ -794,6 +794,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Montrer les fichiers joints/le formulaire pour en joindre',
 	'HideFiles'					=> 'Cacher les fichiers/le formulaire',
 	'DoShowFiles'				=> 'Montrer la liste des fichiers par défaut',
+	'NoAttachments'				=> 'Aucune pièce jointe.',
 
 	'RegistrationLang'			=> 'Votre langue',
 	'InvalidWikiName'			=> 'Le nom choisi est invalide',
