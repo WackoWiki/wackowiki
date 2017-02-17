@@ -794,6 +794,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Näita faile/vormi',
 	'HideFiles'					=> 'Varja failid/vorm',
 	'DoShowFiles'				=> 'Näita vaikimisi failide nimekirja',
+	'NoAttachments'				=> 'Pole ühtegi manust, mida näidata.',
 
 	'RegistrationLang'			=> 'Sinu keel',
 	'InvalidWikiName'			=> 'Valitud nimi ei ole korrektne',

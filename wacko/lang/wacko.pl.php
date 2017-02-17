@@ -794,6 +794,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Wy¶wietl pliki/formularz',
 	'HideFiles'					=> 'Schowaj pliki/formularz',
 	'DoShowFiles'				=> 'Domy¶lnie poka¿ listê plików',
+	'NoAttachments'				=> 'Nie ma za³±czonych plików do wy¶wietlenia.',
 
 	'RegistrationLang'			=> 'Twój jêzyk',
 	'InvalidWikiName'			=> 'Wybrane imiê jest niepoprawne',

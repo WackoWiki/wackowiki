@@ -292,6 +292,10 @@ if ($can_view)
 
 		echo '</table>';
 	}
+	else
+	{
+		echo '<em>' . $this->_t('NoAttachments') . '</em><br /><br />';
+	}
 
 	unset($files);
 

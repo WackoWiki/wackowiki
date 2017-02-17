@@ -794,6 +794,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Vis filer',
 	'HideFiles'					=> 'Skjul filer',
 	'DoShowFiles'				=> 'Vis altid filer',
+	'NoAttachments'				=> 'Der er ingen vedhæftede filer at vise.',
 
 	'RegistrationLang'			=> 'Dit sprog',
 	'InvalidWikiName'			=> 'Valgt navn er desværre ikke tilladt',

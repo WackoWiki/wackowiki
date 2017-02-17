@@ -795,6 +795,7 @@ $wacko_translation = [
 	'ShowFiles'					=> 'Zeige Dateien',
 	'HideFiles'					=> 'Verberge Dateien',
 	'DoShowFiles'				=> 'Zeige Dateiliste',
+	'NoAttachments'				=> 'Keine Anhänge zum Anzeigen.',
 
 	'RegistrationLang'			=> 'Sprachauswahl',
 	'InvalidWikiName'			=> 'Seitenname ist ungültig',
