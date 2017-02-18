@@ -10,7 +10,7 @@ if (!function_exists('print_tag_cloud'))
 	function print_tag_cloud(&$engine, $tags)
 	{
 		// TODO: add name space 'category'
-		$tag_path = $engine->db->base_url . $engine->db->category_page . '?category=';
+		$tag_path = $engine->db->base_url . $engine->db->category_page . '?category_id=';
 
 		$max_size = 32; // max font size in pixels
 		$min_size = 12; // min font size in pixels
@@ -100,8 +100,8 @@ if ($tags)
 	foreach ($tags as $key => $tag)
 	{
 		$this->cloud[$tag['category_id']] = [
-						'category'	=> $tag['category'],
-						'number'	=> $tag['number']
+			'category'	=> $tag['category'],
+			'number'	=> $tag['number']
 		];
 	}
 
