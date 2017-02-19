@@ -116,15 +116,11 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			{
 				$account_status		= 1;
 				$account_enabled	= 0;
-				$waiting_approval	= 'UserWaitingApproval';
-				$requires_approval	= 'UserRequiresApproval';
 			}
 			else
 			{
 				$account_status		= 0;
 				$account_enabled	= 1;
-				$waiting_approval	= 'EmailRegisteredLogin';
-				$requires_approval	= '';
 			}
 
 			// INSERT user
@@ -146,6 +142,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 				"FROM " . $this->db->table_prefix . "user " .
 				"WHERE user_name = " . $this->db->q($user_name) . " " .
 				"LIMIT 1");
+
 			$user_id = $_user_id['user_id'];
 
 			// INSERT user settings
@@ -175,38 +172,20 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			if ($this->db->enable_email)
 			{
 				// 1. Send signup email to new user
-				$save = $this->set_language($user_lang, true);
+				$new_user = [
+					'user_id'		=> $user_id,
+					'user_name'		=> $user_name,
+					'email'			=> $email,
+					'user_lang'		=> $user_lang,
+					'user_ip'		=> $user_ip
+				];
 
-				$subject =	$this->_t('EmailWelcome') . $this->db->site_name;
-				$body =		Ut::perc_replace($this->_t('EmailRegistered'),
-								$this->db->site_name, $user_name, $this->user_email_confirm($user_id)) . "\n\n" .
-							$this->_t($waiting_approval) . "\n\n" .
-							$this->_t('EmailRegisteredIgnore') . "\n\n";
-
-				$this->send_user_email(['user_name' => $user_name, 'email' => $email, 'user_lang' => $user_lang], $subject, $body);
-				$this->set_language($save, true);
+				$this->notify_user_signup($new_user);
 
 				// 2. notify admin a new user has signed-up
 				if ($this->db->notify_new_user_account)
 				{
-					/* TODO: set user language for email encoding */
-					$lang_admin	= $this->db->language;
-					$save		= $this->set_language($lang_admin, true);
-
-					$subject	=	$this->_t('NewAccountSubject');
-					$body		=	$this->_t('NewAccountSignupInfo') . "\n\n" .
-									$this->_t('NewAccountUsername') . ' ' .	$user_name . "\n" .
-									$this->_t('RegistrationLang') . ' ' .	$user_lang . "\n" .
-									$this->_t('NewAccountEmail') . ' ' .	$email . "\n" .
-									$this->_t('NewAccountIP') . ' ' .		$user_ip . "\n\n";
-
-					if ($requires_approval)
-					{
-						$body .= Ut::perc_replace($this->_t($requires_approval), $this->db->site_name);
-					}
-
-					$this->send_user_email('System', $subject, $body);
-					$this->set_language($save, true);
+					$this->notify_new_account($new_user);
 				}
 			}
 

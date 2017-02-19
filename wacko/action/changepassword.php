@@ -101,13 +101,6 @@ if (@$_POST['_action'] === 'forgot_password')
 		$code		= Ut::random_token(21);
 		$code_hash	= hash_hmac('sha256', $code, $this->db->system_seed);
 
-		$save = $this->set_language($user['user_lang'], true);
-		$subject	=	$this->_t('EmailForgotSubject') . $this->db->site_name;
-		$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
-							$this->db->site_name,
-							$user['user_name'],
-							$this->href('', '', 'secret_code=' . $code)) . "\n\n";
-
 		// update table
 		$this->db->sql_query(
 			"UPDATE " . $this->db->user_table . " SET " .
@@ -117,8 +110,7 @@ if (@$_POST['_action'] === 'forgot_password')
 			"LIMIT 1");
 
 		// send code
-		$this->send_user_email($user, $subject, $body);
-		$this->set_language($save, true);
+		$this->notify_password_reset($user, $code);
 
 		// log event
 		$this->log(3, Ut::perc_replace($this->_t('LogUserPasswordReminded', SYSTEM_LANG), $user['user_name'], $user['email']));
