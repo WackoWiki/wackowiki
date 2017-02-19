@@ -1226,6 +1226,7 @@ $wacko_translation = [
 	'LogPollStopped'			=> 'Arrê du sondage avec l&rsquo;ID %1',
 	'LogFileUploadedLocal'		=> 'Pour la page [[/%1]] nouveau fichier attaché ##%2## (taille %3)',
 	'LogFileUploadedGlobal'		=> 'Attaché un nouveau fichier au dossier global ##%2## (taille %3)',
+	'LogPMSent'					=> 'Private Message ##%1->%2## successfully sent',
 	'LogUserSimiliarName'		=> 'Il y a eu des tentatives d&rsquo;enregistrement sous le même nom d&rsquo;utilisateur&nbsp;: ##%1##',
 	'LogUserRegistered'			=> 'Enregistrement réussi d&rsquo;un nouvel utilisateur ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Activation réussie de l&rsquo;adresse de messagerie ##%1## de l&rsquo;utilisateur ##%2##',

@@ -1226,6 +1226,7 @@ $wacko_translation = [
 	'LogPollStopped'			=> 'Stopped poll with ID %1',
 	'LogFileUploadedLocal'		=> 'To page [[/%1]] uploaded new file ##%2## (size %3)',
 	'LogFileUploadedGlobal'		=> 'Uploaded a new file to global folder ##%2## (size %3)',
+	'LogPMSent'					=> 'Private Message ##%1->%2## successfully sent',
 	'LogUserSimiliarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',
