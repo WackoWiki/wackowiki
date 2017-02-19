@@ -209,7 +209,7 @@ $ap_translation = [
 	// Mass email module
 	'massemail'		=> [
 		'name'		=> 'Rundmail',
-		'title'		=> 'Rundmail',
+		'title'		=> 'Rundmail senden',
 	],
 
 	// System message module

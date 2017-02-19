@@ -33,22 +33,32 @@ function admin_massemail(&$engine, &$module)
 <?php
 $mail_body = '';
 
-	// update settings
+	// send massmail
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$group_id		= (int) $_POST['group_id'];
-		$user_id		= (int) $_POST['user_id'];
+		$user_ids		= '';
+
+		if (isset($_POST['user_id']))
+		{
+			foreach ($_POST['user_id'] as $user_id)
+			{
+				$_user_id[] = (int) $user_id;
+			}
+
+			$user_ids		= implode(', ', $_user_id);
+		}
+
 		$mail_subject	= (string) $_POST['mail_subject'];
 		$mail_body		= (string) $_POST['mail_body'];
 		$language		= (string) $_POST['language'];
-
-		#$engine->config->_set($config);
 
 		$members = $engine->db->load_all(
 			"SELECT DISTINCT
 				gm.user_id,
 				u.user_name,
 				u.email,
+				us.user_lang,
 				u.enabled,
 				u.email_confirm,
 				us.allow_massemail
@@ -59,33 +69,35 @@ $mail_body = '';
 					INNER JOIN " . $engine->db->table_prefix . "user_setting us
 						ON u.user_id = us.user_id
 			WHERE
-				gm.group_id = '{$group_id}'
-					OR u.user_id = '{$user_id}' ",
+				u.account_type = '0'
+					AND (gm.group_id = '{$group_id}'
+						OR u.user_id IN ('{$user_ids}'))",
 				true);
 
-		foreach ($members as $user)
+		if ($members)
 		{
-			if ($engine->db->enable_email == true && $engine->db->enable_email_notification == true && $user['enabled'] == true && $user['email_confirm'] == '' && $user['allow_massemail'] != 0)
+			foreach ($members as $user)
 			{
-				$subject	= '[' . $engine->db->site_name . '] ' . $mail_subject;
-				$body		= $engine->_t('EmailHello') . ' ' . $user['user_name'] . ",\n\n" .
+				if ($engine->db->enable_email == true
+					&& $engine->db->enable_email_notification == true
+					&& $user['enabled'] == true
+					&& $user['email_confirm'] == ''
+					&& $user['allow_massemail'] != 0)
+				{
+					$subject	= $mail_subject;
+					$body		= $mail_body . "\n" .
 
-							$mail_body."\n\n\n" .
-
-							$engine->_t('EmailDoNotReply') . "\n\n" .
-							$engine->_t('EmailGoodbye') . "\n" .
-							$engine->db->site_name . "\n" .
-							$engine->db->base_url;
-
-				$email = new Email($engine);
-				$email->send_mail($user['email'], $subject, $body);
+					$engine->send_user_mail($user, $subject, $body);
+				}
 			}
+
+			$engine->log(2, 'Messemail send: ' . $mail_subject . ' to group / user ' . $group_id);
+			$engine->set_message('Massemail send: ' . $mail_subject, 'success');
+
+			$engine->http->redirect(rawurldecode($engine->href()));
 		}
 
-		$engine->log(1, 'Messemail send: ' . $mail_subject . ' to group / user ' . $group_id);
-		$engine->set_message('Massemail send: ' . $mail_subject, 'success');
-
-		#$engine->http->redirect(rawurldecode($engine->href()));
+		// no results / members
 	}
 
 	$available_groups = $engine->db->load_all(
@@ -106,7 +118,7 @@ $mail_body = '';
 				<label for="user_id"><strong><?php echo $engine->_t('SendToUser'); ?></strong></label>
 			</td>
 			<td>
-				<select id="nuser_id" name="user_id">
+				<select id="nuser_id" name="user_id[]" multiple size="8">
 					<option value=""></option>
 <?php
 			if ($users = $engine->load_users())
@@ -124,7 +136,7 @@ $mail_body = '';
 	echo '<tr class="hl_setting">
 			<td class="label">
 				<label for="group_id"><strong>' . $engine->_t('SendToGroup') . ':</strong></label>
-			</td>' . 
+			</td>' .
 			'<td>
 				<select id="group_id" name="group_id">
 					<option value=""></option>';
