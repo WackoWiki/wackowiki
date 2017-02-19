@@ -98,7 +98,7 @@ function admin_user_users(&$engine, &$module)
 	reset($set);
 
 	/////////////////////////////////////////////
-	//   list change/update
+	//   list change/update processing
 	/////////////////////////////////////////////
 
 	#$user_id = (isset($_POST['user_id']) ? $_POST['user_id'] : isset($_GET['user_id']) ? $_GET['user_id'] : '');
@@ -116,7 +116,7 @@ function admin_user_users(&$engine, &$module)
 			"LIMIT 1");
 	}
 
-	// add user
+	// add user processing
 	if (isset($_POST['create']) && isset($_POST['newname']))
 	{
 		// do we have identical names?
@@ -170,12 +170,25 @@ function admin_user_users(&$engine, &$module)
 			// add user page
 			$engine->add_user_page($_POST['newname'], $_POST['user_lang']);
 
+			if ($engine->db->enable_email)
+			{
+				// 1. Send signup email to new user
+				$new_user = [
+					'user_id'		=> $_user_id['user_id'],
+					'user_name'		=> $_POST['newname'],
+					'email'			=> $_POST['email'],
+					'user_lang'		=> $_POST['user_lang'] ? $_POST['user_lang'] : $engine->db->language
+				];
+
+				$engine->notify_user_signup($new_user);
+			}
+
 			$engine->show_message($engine->_t('UsersAdded'), 'success');
 			$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
 			unset($_POST['create']);
 		}
 	}
-	// approve user
+	// approve user processing
 	else if (isset($_POST['approve']) && $user_id )
 	{
 		$user = $engine->db->load_single(
@@ -189,7 +202,7 @@ function admin_user_users(&$engine, &$module)
 		$engine->approve_user($user, $user['account_status']);
 		$engine->add_user_page($user['user_name'], $user['user_lang']);
 	}
-	// edit user
+	// edit user processing
 	else if (isset($_POST['edit']) && $user_id && (isset($_POST['newname']) || isset($_POST['moderator_id'])))
 	{
 		// do we have identical names?
@@ -233,7 +246,7 @@ function admin_user_users(&$engine, &$module)
 			$engine->log(4, "Updated User //'{$user['user_name']}'//");
 		}
 	}
-	// delete user
+	// delete user processing
 	// TODO: reassign acls, uploads, pages and revisions, delete user page
 	else if (isset($_POST['delete']) && ($user_id || $set == true))
 	{
@@ -314,7 +327,7 @@ function admin_user_users(&$engine, &$module)
 	//   edit forms
 	/////////////////////////////////////////////
 
-	// add new user
+	// add new user form
 	if (isset($_POST['create']))
 	{
 		echo $engine->form_open('add_user');
@@ -384,7 +397,7 @@ function admin_user_users(&$engine, &$module)
 
 		echo $engine->form_close();
 	}
-	// edit user
+	// edit user form
 	else if (isset($_POST['edit']) && $user_id)
 	{
 		if ($user = $engine->db->load_single(
@@ -506,7 +519,7 @@ function admin_user_users(&$engine, &$module)
 		}
 	}
 
-	// delete user
+	// delete user form
 	if (isset($_POST['remove']) && (isset($user_id) || $set == true))
 	{
 		$users	= '';

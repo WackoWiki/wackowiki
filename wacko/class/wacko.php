@@ -2325,20 +2325,14 @@ class Wacko
 			// send email
 			if ($this->db->enable_email)
 			{
-				$save = $this->set_language($user['user_lang'], true);
-
-				$subject	=	$this->_t('RegistrationApproved');
-				$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name) . "\n\n" .
-								$this->_t('EmailRegisteredLogin') . "\n\n";
-
-				$this->send_user_email($user, $subject, $body);
-
-				$this->set_language($save, true);
+				$this->notify_approved_account($user);
 			}
 		}
 	}
 
-	// email wrapper
+	// TODO: move notification functions in own notification class
+
+	// user email wrapper
 	function send_user_email($user, $subject, $body)
 	{
 		if ($user === 'System')
@@ -2366,9 +2360,88 @@ class Wacko
 
 		$charset	=	$this->get_charset($user['user_lang']);
 
+		$this->set_language($save, true);
+
 		$email = new Email($this);
 		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset);
+	}
 
+	function notify_approved_account($user)
+	{
+		$save = $this->set_language($user['user_lang'], true);
+
+		$subject	=	$this->_t('RegistrationApproved');
+		$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name) . "\n\n" .
+						$this->_t('EmailRegisteredLogin') . "\n\n";
+
+		$this->set_language($save, true);
+
+		$this->send_user_email($user, $subject, $body);
+	}
+
+	function notify_new_account($user)
+	{
+		/* TODO: set user language for email encoding */
+		$lang_admin	= $this->db->language;
+		$save		= $this->set_language($lang_admin, true);
+
+		$subject	=	$this->_t('NewAccountSubject');
+		$body		=	$this->_t('NewAccountSignupInfo') . "\n\n" .
+						$this->_t('NewAccountUsername') . ' ' .	$user['user_name'] . "\n" .
+						$this->_t('RegistrationLang') . ' ' .	$user['user_lang'] . "\n" .
+						$this->_t('NewAccountEmail') . ' ' .	$user['email'] . "\n" .
+						$this->_t('NewAccountIP') . ' ' .		$user['user_ip'] . "\n\n";
+
+		if ($this->db->approve_new_user)
+		{
+			$body .= Ut::perc_replace($this->_t('UserRequiresApproval'), $this->db->site_name);
+		}
+
+		$this->send_user_email('System', $subject, $body);
+		$this->set_language($save, true);
+	}
+
+	function notify_new_owner($user)
+	{
+		$save = $this->set_language($user['user_lang'], true);
+
+		$subject	=	$this->_t('NewPageOwnership');
+		$body		=	Ut::perc_replace($this->_t('YouAreNewOwner'), $this->get_user_name(), $this->db->site_name) . "\n\n" . // STS TODO ou, pure shit message!
+						$user['owned'] . "\n" .
+						$this->_t('PageOwnershipInfo') . "\n";
+
+		$this->set_language($save, true);
+
+		$this->send_user_email($user, $subject, $body);
+	}
+
+	function notify_user_signup($user)
+	{
+		$save = $this->set_language($user['user_lang'], true);
+
+		$subject =	$this->_t('EmailWelcome') . $this->db->site_name;
+		$body =		Ut::perc_replace($this->_t('EmailRegistered'),
+						$this->db->site_name, $user['user_name'], $this->user_email_confirm($user['user_id'])) . "\n\n" .
+					($this->db->approve_new_user
+							? $this->_t('UserWaitingApproval')
+							: $this->_t('EmailRegisteredLogin') ) . "\n\n" .
+					$this->_t('EmailRegisteredIgnore') . "\n\n";
+
+		$this->send_user_email($user, $subject, $body);
+		$this->set_language($save, true);
+	}
+
+	function notify_password_reset($user, $code)
+	{
+		$save = $this->set_language($user['user_lang'], true);
+
+		$subject	=	$this->_t('EmailForgotSubject') . $this->db->site_name;
+		$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
+							$this->db->site_name,
+							$user['user_name'],
+							$this->href('', '', 'secret_code=' . $code)) . "\n\n";
+
+		$this->send_user_email($user, $subject, $body);
 		$this->set_language($save, true);
 	}
 
@@ -2597,7 +2670,7 @@ class Wacko
 		}
 	}
 
-	// generate url for email confirmation. used for registration and email change
+	// generate url for email confirmation, used for registration and email change
 	function user_email_confirm($user_id)
 	{
 		$confirm = Ut::random_token(21);

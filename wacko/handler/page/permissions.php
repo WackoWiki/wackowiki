@@ -163,16 +163,7 @@ if (@$_POST['_action'] === 'set_permissions')
 			&& $new_owner['enabled']
 			&& !$new_owner['email_confirm'])
 		{
-			$save = $this->set_language($new_owner['user_lang'], true);
-
-			$subject	= $this->_t('NewPageOwnership');
-			$body		=
-				Ut::perc_replace($this->_t('YouAreNewOwner'), $this->get_user_name(), $this->db->site_name) . "\n\n" . // STS TODO ou, pure shit message!
-				$new_owner['owned'] . "\n" .
-				$this->_t('PageOwnershipInfo') . "\n";
-
-			$this->send_user_email($new_owner, $subject, $body);
-			$this->set_language($save, true);
+			$this->notify_new_owner($new_owner);
 		}
 
 		$message .= $this->_t('ACLGaveOwnership') . '<code>' . $new_owner['user_name'] . '</code>';
