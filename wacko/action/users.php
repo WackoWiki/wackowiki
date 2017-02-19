@@ -157,9 +157,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 					$save = $this->set_language($user['user_lang'], true);
 
-					$body =
-						$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
-						Ut::perc_replace($this->_t('UsersPMBody'),
+					$body =	$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
+							Ut::perc_replace($this->_t('UsersPMBody'),
 								$this->get_user_name(),
 								rtrim($this->db->base_url, '/'),
 								Ut::amp_decode($this->href('', '',
@@ -179,11 +178,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						$headers['References']	= "<$ref>";
 					}
 
-					$body .= "\n\n" . $this->_t('EmailGoodbye') . "\n" . $this->db->site_name . "\n" . $this->db->base_url;
+					$body .=	"\n\n" . $this->_t('EmailGoodbye') . "\n" .
+								$this->db->site_name . "\n" .
+								$this->db->base_url;
 
 					// send email
 					$email = new Email($this);
-					$email->send_mail($user['user_name'] . ' <' . $user['email'] . '>', $subject, $body, 'no-reply@' . $prefix, '', $headers, true);
+					$email->send_mail($user['email'], $user['user_name'], $subject, $body, null, '', $headers, true);
 					$this->set_language($save, true);
 
 					$this->set_message($this->_t('UsersPMSent'));

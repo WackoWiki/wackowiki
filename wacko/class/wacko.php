@@ -2330,6 +2330,7 @@ class Wacko
 		}
 	}
 
+	// NOTIFICATIONS
 	// TODO: move notification functions in own notification class
 
 	// user email wrapper
@@ -2419,13 +2420,14 @@ class Wacko
 	{
 		$save = $this->set_language($user['user_lang'], true);
 
-		$subject =	$this->_t('EmailWelcome') . $this->db->site_name;
-		$body =		Ut::perc_replace($this->_t('EmailRegistered'),
-						$this->db->site_name, $user['user_name'], $this->user_email_confirm($user['user_id'])) . "\n\n" .
-					($this->db->approve_new_user
+		$subject	=	$this->_t('EmailWelcome') . $this->db->site_name;
+		$body		=	Ut::perc_replace($this->_t('EmailRegistered'),
+							$this->db->site_name, $user['user_name'],
+							$this->user_email_confirm($user['user_id'])) . "\n\n" .
+						($this->db->approve_new_user
 							? $this->_t('UserWaitingApproval')
 							: $this->_t('EmailRegisteredLogin') ) . "\n\n" .
-					$this->_t('EmailRegisteredIgnore') . "\n\n";
+						$this->_t('EmailRegisteredIgnore') . "\n\n";
 
 		$this->send_user_email($user, $subject, $body);
 		$this->set_language($save, true);

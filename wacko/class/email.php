@@ -26,6 +26,7 @@ class Email
 	}
 
 	// MAILER
+	//
 	// $email_to			- recipient address
 	// $name_to				- recipient name
 	// $subject, $message	- self-explaining
@@ -116,14 +117,14 @@ class Email
 
 		try
 		{
-			$mail->Host			= $this->engine->db->smtp_host;		// SMTP server
+			$mail->Host			= $this->engine->db->smtp_host;			// SMTP server
 
 			$mail->AddCustomHeader('X-Wacko: ' . $this->engine->db->base_url);
 			$mail->AddCustomHeader('Auto-Submitted: auto-generated');	// RFC3834
 			$mail->AddCustomHeader('X-Auto-Response-Suppress: All');	// Microsoft Exchange
 
-			# $mail->Sender		= $this->engine->db->abuse_email;
-			# $mail->AddReplyTo('name@example.com', 'First Last');
+			# $mail->Sender		= $this->engine->db->abuse_email;		// 'return-path' header
+			# $mail->AddReplyTo('name@example.com', 'First Last');		//
 			$mail->SetFrom($email_from, $name_from);
 			$mail->AddAddress($email_to, $name_to);
 			# $mail->AddBCC($email_to, $name_to);
@@ -157,13 +158,13 @@ class Email
 			/* if (!$mail->Send())
 			{
 				$message = "Mailer Error: " . $mail->ErrorInfo;
-				$this->engine->log(1, $message);
+				$this->engine->log(4, $message);
 				exit;
 			}
 			else
 			{
 				$message = "Message has been sent.";
-				$this->engine->log(1, $message);
+				$this->engine->log(5, $message);
 			} */
 
 			$send_ok = true;
