@@ -90,6 +90,8 @@ $wacko_translation = [
 	'Help'						=> 'Aide',
 	'TopicSearchText'			=> 'Chercher seulement dans les titres',
 	'WordprocessorVersion'		=> 'Version pour logiciel de traitement de texte',
+
+	// notifications
 	'EmailHello'				=> 'Bonjour ',
 	'EmailModerator'			=> 'Moderator',
 	'EmailGoodbye'				=> 'Bien à vous, ',
@@ -97,6 +99,10 @@ $wacko_translation = [
 	'SomeoneChangedThisPage'	=> ' a modifié cette page que vous surveillez&nbsp;: ',
 	'NewPageCreatedSubj'		=> 'A new page',
 	'NewPageCreatedBody'		=> 'User %1 has created a new page: ',
+	'FileUploadedSubj'			=> 'A new file',
+	'FileUploadedBody'			=> 'User %1 has uploaded a new file: ',
+	'FileReplacedBody'			=> 'User %1 has replaced the file: ',
+
 	'ActionDenied'				=> 'Action non autorisée ici.',
 	'TOCTitle'					=> 'Contenu ',
 	'SearchButtonText'			=> 'Rechercher',
