@@ -90,6 +90,8 @@ $wacko_translation = [
 	'Help'						=> 'Pomoc',
 	'TopicSearchText'			=> 'Wyszukiwanie wy³±cznie w¶ród tytu³ów',
 	'WordprocessorVersion'		=> 'Wersja Procesor tekstu',
+
+	// notifications
 	'EmailHello'				=> 'Cze¶æ ',
 	'EmailModerator'			=> 'Moderator',
 	'EmailGoodbye'				=> 'Twój, ',
@@ -97,6 +99,10 @@ $wacko_translation = [
 	'SomeoneChangedThisPage'	=> ' zmieni³ zawarto¶æ obserwowanej przez Ciebie strony: ',
 	'NewPageCreatedSubj'		=> 'A new page',
 	'NewPageCreatedBody'		=> 'User %1 has created a new page: ',
+	'FileUploadedSubj'			=> 'A new file',
+	'FileUploadedBody'			=> 'User %1 has uploaded a new file: ',
+	'FileReplacedBody'			=> 'User %1 has replaced the file: ',
+
 	'ActionDenied'				=> 'Ta czynno¶æ nie mo¿e zostaæ wykonana.',
 	'TOCTitle'					=> 'Spis tre¶ci dokumentu: ',
 	'SearchButtonText'			=> 'Znajd¼',

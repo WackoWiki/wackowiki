@@ -90,6 +90,8 @@ $wacko_translation = [
 	'Help'						=> 'Βοήθεια',
 	'TopicSearchText'			=> 'Αναζήτηση μόνο σε τίτλους',
 	'WordprocessorVersion'		=> 'Έκδοση Επεξεργαστής εγγράφου',
+
+	// notifications
 	'EmailHello'				=> 'Γειά ',
 	'EmailModerator'			=> 'Moderator',
 	'EmailGoodbye'				=> 'Με τα τιμής, ',
@@ -97,6 +99,10 @@ $wacko_translation = [
 	'SomeoneChangedThisPage'	=> ' τροποποίησε την σελίδα που παρακολουθείτε: ',
 	'NewPageCreatedSubj'		=> 'A new page',
 	'NewPageCreatedBody'		=> 'User %1 has created a new page: ',
+	'FileUploadedSubj'			=> 'A new file',
+	'FileUploadedBody'			=> 'User %1 has uploaded a new file: ',
+	'FileReplacedBody'			=> 'User %1 has replaced the file: ',
+
 	'ActionDenied'				=> 'Η ενέργεια δεν επιτρέπετε εδώ.',
 	'TOCTitle'					=> 'Περιεχόμενα ',
 	'SearchButtonText'			=> 'Αναζήτηση',

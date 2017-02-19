@@ -91,6 +91,8 @@ $wacko_translation = [
 	'Help'						=> 'Помощь',
 	'TopicSearchText'			=> 'Искать только в заголовках',
 	'WordprocessorVersion'		=> 'Версия для текстового процессора',
+
+	// notifications
 	'EmailHello'				=> 'Здравствуйте ',
 	'EmailModerator'			=> 'модератор',
 	'EmailGoodbye'				=> 'Всегда ваша, ',
@@ -98,6 +100,10 @@ $wacko_translation = [
 	'SomeoneChangedThisPage'	=> ' изменил(а) эту страницу, за которой вы наблюдаете: ',
 	'NewPageCreatedSubj'		=> 'Создан новый документ',
 	'NewPageCreatedBody'		=> 'Пользователь %1 создал новую страницу: ',
+	'FileUploadedSubj'			=> 'A new file',
+	'FileUploadedBody'			=> 'User %1 has uploaded a new file: ',
+	'FileReplacedBody'			=> 'User %1 has replaced the file: ',
+
 	'ActionDenied'				=> 'Вызов действия запрещён',
 	'TOCTitle'					=> 'Оглавление ',
 	'SearchButtonText'			=> 'Поиск',

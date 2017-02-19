@@ -90,6 +90,8 @@ $wacko_translation = [
 	'Help'						=> 'Help',
 	'TopicSearchText'			=> 'Otsi pealkirjades',
 	'WordprocessorVersion'		=> 'Tekstitöötlusprogramm versioon',
+
+	// notifications
 	'EmailHello'				=> 'Tere ',
 	'EmailModerator'			=> 'Moderator',
 	'EmailGoodbye'				=> 'Tervitades, ',
@@ -97,6 +99,10 @@ $wacko_translation = [
 	'SomeoneChangedThisPage'	=> ' muudetud vaadatav leht: ',
 	'NewPageCreatedSubj'		=> 'A new page',
 	'NewPageCreatedBody'		=> 'User %1 has created a new page: ',
+	'FileUploadedSubj'			=> 'A new file',
+	'FileUploadedBody'			=> 'User %1 has uploaded a new file: ',
+	'FileReplacedBody'			=> 'User %1 has replaced the file: ',
+
 	'ActionDenied'				=> 'See tegevus on keelatud.',
 	'TOCTitle'					=> 'Sisukord ',
 	'SearchButtonText'			=> 'Otsi',

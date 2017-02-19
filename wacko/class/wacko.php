@@ -2079,7 +2079,7 @@ class Wacko
 					// subscribe & notify moderators
 					if (!$mute)
 					{
-						$this->notify_moderator($page_id, $tag, $title, $user_id, $user_name);
+						$this->notify_new_page($page_id, $tag, $title, $user_id, $user_name);
 					}
 				}
 
@@ -2360,7 +2360,7 @@ class Wacko
 						Ut::amp_decode($body) . "\n\n" .
 
 						$this->_t('EmailDoNotReply') . "\n\n" .
-						$this->_t('EmailGoodbye') . "\n" .
+						# $this->_t('EmailGoodbye') . "\n" .
 						$this->db->site_name . "\n" .
 						$this->db->base_url;
 
@@ -2372,7 +2372,33 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_moderator($page_id, $tag, $title, $user_id, $user_name)
+	function notify_new_page($page_id, $tag, $title, $user_id, $user_name)
+	{
+		$subject[]	=	'NewPageCreatedSubj';
+		$subject[]	=	$title;
+
+		$body[]		=	'NewPageCreatedBody';
+		$body[]		=	$user_name;
+		$body[]		=	$title;
+		$body[]		=	$tag;
+
+		$this->	notify_moderator($page_id, $user_id, $subject, $body);
+	}
+
+	function notify_upload($page_id, $tag, $file_name, $user_id, $user_name, $replace)
+	{
+		$subject[]	=	'FileUploadedSubj';
+		$subject[]	=	$file_name;
+
+		$body[]		=	$replace? 'FileReplacedBody' : 'FileUploadedBody';
+		$body[]		=	$user_name;
+		$body[]		=	$file_name;
+		$body[]		=	$page_id? $tag : null;
+
+		$this->	notify_moderator($page_id, $user_id, $subject, $body);
+	}
+
+	function notify_moderator($page_id, $user_id, $subject, $body)
 	{
 		// subscribe & notify moderators
 		if (is_array($this->db->groups['Moderator']))
@@ -2393,16 +2419,21 @@ class Wacko
 					{
 						$save = $this->set_language($user['user_lang'], true);
 
-						$subject	=	$this->_t('NewPageCreatedSubj') . " '$title'";
-						$body		=	$this->_t('EmailModerator') . ".\n\n" .
-										Ut::perc_replace($this->_t('NewPageCreatedBody'), ($user_name == GUEST ? $this->_t('Guest') : $user_name)) . "\n" .
-										"'$title'\n" .
-										$this->href('', $tag) . "\n\n";
+						$_subject	=	$this->_t($subject[0]) . " '$subject[1]'";
 
-						$this->send_user_email($user, $subject, $body);
+						$_body		=	$this->_t('EmailModerator') . ".\n\n" .
+										Ut::perc_replace($this->_t($body[0]), ($body[1] == GUEST ? $this->_t('Guest') : $body[1])) . "\n" .
+										"'$body[2]'\n" .
+										$this->href('', $body[3]) . "\n\n";
 
-						$this->set_watch($user['user_id'], $page_id);
+						$this->send_user_email($user, $_subject, $_body);
+
 						$this->set_language($save, true);
+
+						if ($page_id)
+						{
+							$this->set_watch($user['user_id'], $page_id);
+						}
 					}
 				}
 			}
