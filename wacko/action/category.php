@@ -128,7 +128,7 @@ if (!$ids)
 	// categories list
 	if ($categories = $this->get_categories_list($lang, 1, $root))
 	{
-		echo "<ul>\n";
+		echo '<ul class="ul_list">' . "\n";
 
 		foreach ($categories as $category_id => $word)
 		{

@@ -154,11 +154,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						$subject = '(no subject)';
 					}
 
-					if (strpos($subject, $prefix1 = '[' . $this->db->site_name . ']') === false)
-					{
-						$subject = $prefix1 . ' ' . $subject;
-					}
-
 					// compose headers
 					$headers = [];
 					$headers['Message-ID'] = "<$msg_id>";
