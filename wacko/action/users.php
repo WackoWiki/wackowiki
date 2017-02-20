@@ -114,7 +114,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				// $user['real_name'] = $this->do_unicode_entities($user['real_name'], $user['account_lang']);
 			}
 
-			$allow_intercom = ($this->db->enable_email && $logged_in && $user['email'] && ($this->is_admin() || ($user['allow_intercom'] && !$user['email_confirm'])));
+			$allow_intercom = ($this->db->enable_email
+								&& $logged_in && $user['email']
+								&& ($this->is_admin()
+									|| ($user['allow_intercom'] && !$user['email_confirm'])));
 
 			// prepare and send personal message
 			if (@$_POST['_action'] === 'personal_message' && $allow_intercom && $_POST['mail_body'])
@@ -144,29 +147,17 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					$prefix		= rtrim(str_replace(['https://www.', 'https://', 'http://www.', 'http://'], '', $this->db->base_url), '/');
 					$msg_id		= date('ymdHi') . '.' . Ut::rand(100000, 999999) . '@' . $prefix;
 					$subject	= $_POST['mail_subject'];
+					$body		= $_POST['mail_body'];
 
 					if ($subject === '')
 					{
 						$subject = '(no subject)';
 					}
 
-					if (strpos($subject, $prefix1 = '[' . $prefix . ']') === false)
+					if (strpos($subject, $prefix1 = '[' . $this->db->site_name . ']') === false)
 					{
 						$subject = $prefix1 . ' ' . $subject;
 					}
-
-					$save = $this->set_language($user['user_lang'], true);
-
-					$body =	$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
-							Ut::perc_replace($this->_t('UsersPMBody'),
-								$this->get_user_name(),
-								rtrim($this->db->base_url, '/'),
-								Ut::amp_decode($this->href('', '',
-									['profile' => $this->get_user_name(),
-									'ref' => Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
-									'#' => 'contacts'])),
-								$this->db->abuse_email,
-								$_POST['mail_body']);
 
 					// compose headers
 					$headers = [];
@@ -178,14 +169,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						$headers['References']	= "<$ref>";
 					}
 
-					$body .=	"\n\n" . $this->_t('EmailGoodbye') . "\n" .
-								$this->db->site_name . "\n" .
-								$this->db->base_url;
-
-					// send email
-					$email = new Email($this);
-					$email->send_mail($user['email'], $user['user_name'], $subject, $body, null, '', $headers, true);
-					$this->set_language($save, true);
+					// send notification
+					$this->notify_pm($user, $subject, $body, $headers);
 
 					$this->set_message($this->_t('UsersPMSent'));
 					$this->log(4, Ut::perc_replace($this->_t('LogPMSent', SYSTEM_LANG), $this->get_user_name(), $user['user_name']));

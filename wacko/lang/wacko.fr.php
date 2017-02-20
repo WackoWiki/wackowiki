@@ -649,15 +649,13 @@ $wacko_translation = [
 	'UsersPMFlooded'			=> 'L&rsquo;intervalle séparant l&rsquo;envoi de messages personnels doit être d&rsquo;au moins %1 secondes.',
 	'UsersPMSent'				=> 'le message personnel a été transmis à l&rsquo;utilisateur.',
 	'UsersPMPlnSent'			=> 'Le message personnel a été transmis à l&rsquo;utilisateur en texte brut.',
-	'UsersPMBody'				=> 'Ce message vous a été envoyé par l&rsquo;utilisateur %1 de %2. Pour répondre à ce courriel, '.
+	'UsersPMBody'				=> 'Ce message vous a été envoyé par l&rsquo;utilisateur %1.',
+	'UsersPMReply'				=> 'Pour répondre à ce courriel, '.
 								   'cliquez sur le lien suivant (n&rsquo;utilisez pas  le bouton "répondre" de votre logiciel '.
-								   'de courriel):' . "\n" . '%3'."\n\n" . ''.
-								   '----------------------------------------------------------------------' . "\n" . ''.
-								   '%5' . "\n" . ''.
-								   '----------------------------------------------------------------------'."\n\n" . ''.
-								   'Note: Si ce message est du spam, a un contenu inacceptable ou viole autrement '.
-								   'les règles du site %2, merci de l&rsquo;envoyer (en utilisant le bouton Transmettre /'.
-								   'de votre logiciel de courriel) à l&rsquo;adresse %4.',
+								   'de courriel):',
+	'PMAbuseInfo'				=> 'Note: Si ce message est du spam, a un contenu inacceptable ou viole autrement '.
+								   'les règles du site, merci de l&rsquo;envoyer (en utilisant le bouton Transmettre /'.
+								   'de votre logiciel de courriel) à l&rsquo;adresse %1.',
 	'UsersPMNotLoggedIn'		=> 'Vous n&rsquo;êtes pas enregistré dans le système et ne pouvez envoyer de messages privés aux utilisateurs.',
 
 	// rating handler
