@@ -649,15 +649,12 @@ $wacko_translation = [
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
-	'UsersPMBody'				=> 'This message has been sent to you by the user %1 from %2. To answer '.
-								   'this email, click on the following link (do not use the Reply button / Reply '.
-								   'in mailer):' . "\n" . '%3'."\n\n" . ''.
-								   '----------------------------------------------------------------------' . "\n" . ''.
-								   '%5' . "\n" . ''.
-								   '----------------------------------------------------------------------'."\n\n" . ''.
-								   'Note: If this message is spam, contains abusive or otherwise '.
-								   'violates the rules of the site %2, please send it (using the button Forward /'.
-								   'Forward your mail program) to address %4.',
+	'UsersPMBody'				=> 'This message has been sent to you by the user %1.',
+	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply '.
+								   'in mailer):',
+	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise '.
+								   'violates the rules of the site, please send it (using the button Forward /'.
+								   'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send private messages to users.',
 
 	// rating handler

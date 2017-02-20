@@ -33,8 +33,7 @@ class Email
 	// $email_from			- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
 	// $xtra_headers		- (array) insert additional mail headers
-	// $supress_tls			- don't change all http links to https links in the message body
-	function send_mail($email_to, $name_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = [], $supress_tls = false)
+	function send_mail($email_to, $name_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = [])
 	{
 		if (!$this->engine->db->enable_email || ( !$email_to || !$subject || !$body) )
 		{
@@ -52,12 +51,6 @@ class Email
 		}
 
 		$name_from		= $this->engine->db->email_from;
-
-		// in tls mode substitute protocol name in links substrings
-		if ($this->engine->db->tls && !$supress_tls)
-		{
-			$body = str_replace('http://', 'https://' . ($this->engine->db->tls_proxy ? $this->engine->db->tls_proxy . '/' : ''), $body);
-		}
 
 		// use PHPMailer class
 		$this->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset, $xtra_headers);

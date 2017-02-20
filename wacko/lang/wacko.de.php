@@ -650,15 +650,13 @@ $wacko_translation = [
 	'UsersPMFlooded'			=> 'Der Abstand zwischen dem Senden von persönlichen Nachrichten sollte nicht kleiner sein als %1 Sekunden.',
 	'UsersPMSent'				=> 'Persönliche Nachricht wurde erfolgreich an den Nutzer gesendet.',
 	'UsersPMPlnSent'			=> 'Persönliche Nachricht für den Benutzer im Klartext gesendet.',
-	'UsersPMBody'				=> 'Diese Nachricht wurde dir durch den Benutzer %1 von %2 geschickt. Um auf diese Email-Nachricht zu antworten '.
-								   ', klicke den folgenden Link (do not use the Reply button / Reply '.
-								   'in mailer):' . "\n" . '%3'."\n\n" . ''.
-								   '----------------------------------------------------------------------' . "\n" . ''.
-								   '%5' . "\n" . ''.
-								   '----------------------------------------------------------------------'."\n\n" . ''.
-								   'Hinweis: Falls diese Nachricht Spam ist, beleidigende oder anderweitig gegen die Regeln der Seite enthält '.
-								   'violates the rules of the site %2, please send it (using the button Forward /'.
-								   'Forward your mail program) to address %4.',
+	'UsersPMBody'				=> 'Diese Nachricht wurde dir durch den Benutzer %1 geschickt.',
+	'UsersPMReply'				=> 'Um auf diese Email-Nachricht zu antworten, '.
+								   'klicke den folgenden Link (verwende nicht die Schaltfläche \'Antworten\' '.
+								   'in deinem Mailprogramm):',
+	'PMAbuseInfo'				=> 'Hinweis: Falls diese Nachricht Spam enthält, beleidigt oder anderweitig gegen die Regeln der Seite verstößt, '.
+								   'dann sende sie bitte (unter Verwendung der Schaltfläche \'Weiterleiten\' '.
+								   'in deinem Mailprogramm) an diese Adresse %1.',
 	'UsersPMNotLoggedIn'		=> 'Du bist nicht im System angemeldet und kannst daher keine persönlichen Nachrichten an andere Nutzer übermitteln.',
 
 	// rating handler

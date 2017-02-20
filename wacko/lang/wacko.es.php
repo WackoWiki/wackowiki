@@ -618,47 +618,44 @@ $wacko_translation = [
 	'UploadQuota'				=> 'Used space',
 	'UploadQuotaTip'			=> 'Upload Space Quota',
 	'UsersLogins'				=> 'Logins',
-	'UsersRevisions'		=> 'Revisiones',
-	'UsersSignup'			=> 'Registro',
-	'UsersLastSession'		=> 'Ultima sesión',
-	'UsersNotFound'			=> 'Usuario <code>%2</code> no encontrado. Presione <a href="%1">aquí</a>, para ir a la lista principal.',
-	'UsersProfile'			=> 'Perfil',
-	'UsersContact'			=> 'Contacto',
-	'UsersList'				=> 'Ver la lista completa de los usuarios',
-	'UsersNA'				=> '[no seteado]',
-	'UsersNA2'				=> '[No]',
-	'UsersSignupDate'		=> 'Fecha de registro',
-	'UsersGroupMembership'	=> 'Membresía de grupo',
-	'UsersPersonalInfo'		=> 'Información personal',
-	'UsersOwnedPages'		=> 'Páginas propias',
-	'UsersCommentsPosted'	=> 'Comentarios publicados',
-	'UsersFilesUploaded'	=> 'Files uploaded',
-	'UsersRevisionsMade'	=> 'Revisiones realizados',
-	'UsersDocsSortName'		=> '[Ordenar por nombre]',
-	'UsersDocsSortDate'		=> '[Ordenar por fecha de creación]',
-	'UsersSessionNA'		=> '[no registrado]',
-	'UsersSessionHidden'	=> '[oculto]',
-	'UsersIntercomSubject'	=> 'Título',
-	'UsersIntercomSubjectN'	=> '[iniciar nuevo tema]',
-	'UsersIntercomDisabled'	=> 'Perdón, no desea o no puede recibir mensajes privados.',
-	'UsersIntercomSend'		=> 'enviar',
-	'UsersIntercomDesc'		=> 'Observación: Mensaje privado enviado al email del destinatario '.
-							   'sin revelar su dirección de email. El recipiente podrá responderle usando '.
-							   'un formulario similar en la página del perfil de usted. ',
-	'UsersPMOversized'		=> 'La longitud del mensaje excede el máximo permitido de %1 caracteres. Por favor acorte su mensaje y vuelva a enviar.',
-	'UsersPMFlooded'		=> 'El intervalo entre mensajes personales debe ser mayor de %1 segundos.',
-	'UsersPMSent'			=> 'Mensaje personal enviado exitosamente al usuario.',
-	'UsersPMPlnSent'		=> 'Mensaje personal enviado al usuario en texto plano.',
-	'UsersPMBody'			=> 'Este mensaje le fue enviado por el usuario %1 desde %2. Para responder '.
-							   'este email, presione el siguiente enlace (NO use el botón "Responder" en '.
-							   'su cliente de email):' . "\n" . '%3'."\n\n" . ''.
-							   '----------------------------------------------------------------------' . "\n" . ''.
-							   '%5' . "\n" . ''.
-							   '----------------------------------------------------------------------'."\n\n" . ''.
-							   'Observación: Si este mensaje es spam, tiene un contenido abusivo o viola '.
-							   'de alguna manera las reglas del sitio %2, por favor envíelo (usando el botón "Reenviar" '.
-							   'de su programa de email) a la dirección %4.',
-	'UsersPMNotLoggedIn'	=> 'No está registrado en el sistema y no puede enviar mensajes privados.',
+	'UsersRevisions'			=> 'Revisiones',
+	'UsersSignup'				=> 'Registro',
+	'UsersLastSession'			=> 'Ultima sesión',
+	'UsersNotFound'				=> 'Usuario <code>%2</code> no encontrado. Presione <a href="%1">aquí</a>, para ir a la lista principal.',
+	'UsersProfile'				=> 'Perfil',
+	'UsersContact'				=> 'Contacto',
+	'UsersList'					=> 'Ver la lista completa de los usuarios',
+	'UsersNA'					=> '[no seteado]',
+	'UsersNA2'					=> '[No]',
+	'UsersSignupDate'			=> 'Fecha de registro',
+	'UsersGroupMembership'		=> 'Membresía de grupo',
+	'UsersPersonalInfo'			=> 'Información personal',
+	'UsersOwnedPages'			=> 'Páginas propias',
+	'UsersCommentsPosted'		=> 'Comentarios publicados',
+	'UsersFilesUploaded'		=> 'Files uploaded',
+	'UsersRevisionsMade'		=> 'Revisiones realizados',
+	'UsersDocsSortName'			=> '[Ordenar por nombre]',
+	'UsersDocsSortDate'			=> '[Ordenar por fecha de creación]',
+	'UsersSessionNA'			=> '[no registrado]',
+	'UsersSessionHidden'		=> '[oculto]',
+	'UsersIntercomSubject'		=> 'Título',
+	'UsersIntercomSubjectN'		=> '[iniciar nuevo tema]',
+	'UsersIntercomDisabled'		=> 'Perdón, no desea o no puede recibir mensajes privados.',
+	'UsersIntercomSend'			=> 'enviar',
+	'UsersIntercomDesc'			=> 'Observación: Mensaje privado enviado al email del destinatario '.
+								   'sin revelar su dirección de email. El recipiente podrá responderle usando '.
+								   'un formulario similar en la página del perfil de usted. ',
+	'UsersPMOversized'			=> 'La longitud del mensaje excede el máximo permitido de %1 caracteres. Por favor acorte su mensaje y vuelva a enviar.',
+	'UsersPMFlooded'			=> 'El intervalo entre mensajes personales debe ser mayor de %1 segundos.',
+	'UsersPMSent'				=> 'Mensaje personal enviado exitosamente al usuario.',
+	'UsersPMPlnSent'			=> 'Mensaje personal enviado al usuario en texto plano.',
+	'UsersPMBody'				=> 'Este mensaje le fue enviado por el usuario %1.',
+	'UsersPMReply'				=> 'Para responder este email, presione el siguiente enlace (NO use el botón "Responder" en '.
+								   'su cliente de email):',
+	'PMAbuseInfo'				=> 'Observación: Si este mensaje es spam, tiene un contenido abusivo o viola '.
+								   'de alguna manera las reglas del sitio, por favor envíelo (usando el botón "Reenviar" '.
+								   'de su programa de email) a la dirección %1.',
+	'UsersPMNotLoggedIn'		=> 'No está registrado en el sistema y no puede enviar mensajes privados.',
 
 	// rating handler
 	'RatingDenied'				=> 'No puede calificar esta página.',
