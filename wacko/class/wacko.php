@@ -2334,7 +2334,7 @@ class Wacko
 	// TODO: move notification functions in own notification class
 
 	// user email wrapper
-	function send_user_email($user, $subject, $body)
+	function send_user_email($user, $subject, $body, $xtra_headers = [])
 	{
 		if ($user === 'System')
 		{
@@ -2364,7 +2364,7 @@ class Wacko
 		$this->set_language($save, true);
 
 		$email = new Email($this);
-		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset);
+		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset, $xtra_headers = []);
 	}
 
 	function notify_approved_account($user)
@@ -2420,7 +2420,7 @@ class Wacko
 	{
 		$save = $this->set_language($user['user_lang'], true);
 
-		$subject	=	$this->_t('EmailWelcome') . $this->db->site_name;
+		$subject	=	$this->_t('EmailWelcome');
 		$body		=	Ut::perc_replace($this->_t('EmailRegistered'),
 							$this->db->site_name, $user['user_name'],
 							$this->user_email_confirm($user['user_id'])) . "\n\n" .
@@ -2437,13 +2437,37 @@ class Wacko
 	{
 		$save = $this->set_language($user['user_lang'], true);
 
-		$subject	=	$this->_t('EmailForgotSubject') . $this->db->site_name;
+		$subject	=	$this->_t('EmailForgotSubject');
 		$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
 							$this->db->site_name,
 							$user['user_name'],
 							$this->href('', '', 'secret_code=' . $code)) . "\n\n";
 
 		$this->send_user_email($user, $subject, $body);
+		$this->set_language($save, true);
+	}
+
+	function notify_pm($user, $subject, $body, $header)
+	{
+		$save = $this->set_language($user['user_lang'], true);
+
+		$body		=	Ut::perc_replace($this->_t('UsersPMBody'),
+							$this->get_user_name()) . "\n\n" .
+
+						'----------------------------------------------------------------------' . "\n" .
+						$body . "\n" .
+						'----------------------------------------------------------------------' . "\n\n" .
+
+						$this->_t('UsersPMReply') . "\n\n" .
+						Ut::amp_decode($this->href('', '',
+							['profile' => $this->get_user_name(),
+							'ref' => Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
+							'#' => 'contacts'])) . "\n\n";
+
+						// XXX: do we really need this, less clutter we want
+						# Ut::perc_replace($this->_t('PMAbuseInfo'), $this->db->abuse_email);
+
+		$this->send_user_email($user, $subject, $body, $header);
 		$this->set_language($save, true);
 	}
 
