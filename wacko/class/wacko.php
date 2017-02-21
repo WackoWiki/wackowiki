@@ -2551,8 +2551,8 @@ class Wacko
 
 		if ($comment_on_id)
 		{
-			$object_id = $comment_on_id;
-			$page_title = $this->get_page_title('', $comment_on_id);
+			$object_id		= $comment_on_id;
+			$page_title		= $this->get_page_title('', $comment_on_id);
 		}
 		else
 		{
