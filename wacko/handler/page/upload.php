@@ -58,7 +58,8 @@ if (isset($_POST['upload']) & $can_upload)
 		 && (!$this->db->upload_quota
 			|| ($files['used_quota'] < $this->db->upload_quota)))
 	{
-		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
+		// file there is
+		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name']))
 		{
 			// 1. check out $data
 			$_data	= explode('.', $_FILES['file']['name']);

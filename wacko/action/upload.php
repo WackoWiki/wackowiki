@@ -27,6 +27,8 @@ if ($this->can_upload(true) === true)
 	// displaying
 	echo $this->form_open('upload', ['page_method' => 'upload', 'form_more' => ' enctype="multipart/form-data" ']);
 
+	echo '<input type="hidden" name="upload" value="1" />';
+
 	if ($maxsize)
 	{
 		echo '<input type="hidden" name="maxsize" value="' . floor(1 * $maxsize) . '" />';
@@ -51,6 +53,13 @@ if ($this->can_upload(true) === true)
 		}
 	}
 
+	$accecpt = '';
+
+	// adds 'accept' attribute depending on config settings, https://www.w3.org/TR/html5/forms.html#attr-input-accept
+	if ($this->db->upload_images_only)
+	{
+		$accecpt = 'accept=".gif, .jpg, .png, .svg, image/gif, image/jpeg, image/png, image/svg+xml"';
+	}
 ?>
 <table >
 	<tr>
@@ -59,8 +68,7 @@ if ($this->can_upload(true) === true)
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" />
 		</td>
 		<td style="white-space: nowrap;">
-		<?php // TODO: add 'accept' attribute depending on config settings, https://www.w3.org/TR/html5/forms.html#attr-input-accept ?>
-			<input type="file" name="file" id="file_upload" />&nbsp;(<?php echo $this->_t('UploadMax') . $this->binary_multiples(($this->db->upload_max_size), false, true, true);?>)
+			<input type="file" name="file" id="file_upload" <?php echo $accecpt;?>/>&nbsp;(<?php echo $this->_t('UploadMax') . $this->binary_multiples(($this->db->upload_max_size), false, true, true);?>)
 		</td>
 	</tr>
 	<?php
@@ -131,8 +139,7 @@ if ($this->can_upload(true) === true)
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="upload" value="1" />
-	<?php
+<?php
 	echo $this->form_close();
 }
 else
