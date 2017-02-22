@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 // engine class
 class Wacko
 {
+	var $charset;
 	var $config;							// @deprecated, but will live for a looong time
 	var $db;								// new config
 	var $http;

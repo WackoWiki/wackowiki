@@ -195,11 +195,16 @@ function admin_maint_resync(&$engine, &$module)
 		}
 		else if ($_REQUEST['action'] == 'wikilinks')
 		{
-			// TODO:	1) dies if a rendered page throws a fatal error (e.g. action) -> fix broken page, its the last page shown in the list
-			//			2) Browser will stop after 20 redirects with: ERR_TOO_MANY_REDIRECTS: There were too many redirects. -> load recent url again after error,
-			//				solution: stopp after after 15 redirects and provide a 'contine button
-			//				Chrome and Firefox out of the box is 20, Internet Explorer is 10
-			$limit = 50;
+			/* TODO:	1) dies if a rendered page throws a fatal error (e.g. action) -> fix broken page, its the last page shown in the list
+						2) Browser will stop after 20 redirects with: ERR_TOO_MANY_REDIRECTS: There were too many redirects. -> load recent url again after error,
+							solution: stopp after after 15 redirects and provide a 'contine button
+							Chrome and Firefox out of the box is 20, Internet Explorer is 10
+						3) 5.5.rc3 update_link_table() breaks processing !!! (WHY?)
+							- fails with page having action using templates
+							- (Undefined property: Wacko::$charset) -> include_buffered()
+							- $tpl->setEncoding($this->charset);
+			*/
+			$limit = 3;
 
 			if (isset($_REQUEST['i']))
 			{
@@ -253,7 +258,7 @@ function admin_maint_resync(&$engine, &$module)
 					$engine->current_context--;
 				}
 
-				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
+				#$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
 			}
 			else
 			{

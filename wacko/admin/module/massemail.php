@@ -27,7 +27,7 @@ function admin_massemail(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 	<p>
-		Here you can email a message to either all of your users or all users of a specific group having the option to receive mass emails enabled. To achieve this an email will be sent out to the administrative email address supplied, with a blind carbon copy sent to all recipients. The default setting is to only include 20 recipients in such an email, for more recipients more emails will be sent. If you are emailing a large group of people please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time, you will be notified when the script has completed.</td>
+		Here you can email a message to either all of your users or all users of a specific group having the option to receive mass emails enabled. To achieve this an email will be sent out to the administrative email address supplied, with a blind carbon copy sent to all recipients. The default setting is to only include 20 recipients in such an email, for more recipients more emails will be sent. If you are emailing a large group of people please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time, you will be notified when the script has completed.
 	</p>
 	<br />
 <?php
@@ -151,7 +151,8 @@ $mail_body = '';
 
 			echo '</select>';
 			?>
-			</td></tr>
+				</td>
+			</tr>
 			<tr class="hl_setting">
 				<td class="label"><strong><?php echo $engine->_t('UsersIntercomSubject'); ?>:</strong><br />
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>

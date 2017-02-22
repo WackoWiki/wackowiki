@@ -58,7 +58,7 @@ if ($this->can_upload(true) === true)
 	// adds 'accept' attribute depending on config settings, https://www.w3.org/TR/html5/forms.html#attr-input-accept
 	if ($this->db->upload_images_only)
 	{
-		$accecpt = 'accept=".gif, .jpg, .png, .svg, image/gif, image/jpeg, image/png, image/svg+xml"';
+		$accecpt = 'accept=".gif,.jpg,.png,.svg,image/gif,image/jpeg,image/png,image/svg+xml"';
 	}
 ?>
 <table >

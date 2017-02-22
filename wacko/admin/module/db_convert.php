@@ -324,7 +324,7 @@ function admin_db_convert(&$engine, &$module)
 
 		<h2>Converting Columns to SQL strict</h2>
 		<p>
-			If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.
+			If you have existing tables, that you want to convert to comply with the SQL strict mode, use the following routine.
 		</p>
 		<?php
 		echo $engine->form_open('convert_columns');
