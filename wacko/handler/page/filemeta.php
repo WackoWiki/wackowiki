@@ -43,15 +43,13 @@ $clean_text = function ($string)
 
 	// Make HTML in the description redundant
 	$string = $this->format($string, 'pre_wacko');
-	$string = $this->format($string, 'wacko'); //
+	#$string = $this->format($string, 'wacko'); //
 	$string = $this->format($string, 'safehtml'); //
 	#$string = htmlspecialchars($string, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET, $this->get_charset()); // breaks html unicode chars
 
 	return $string;
 };
 
-$is_global		= '';
-$is_image		= '';
 $message		= '';
 $error			= '';
 $can_upload		= $this->can_upload();
@@ -62,8 +60,10 @@ $this->ensure_page(true); // TODO: upload for forums?
 #if ($this->can_upload())
 #{
 	// 1. SHOW FORMS
-	if (isset($_GET['remove']) & $can_upload) // show the form
+	if (isset($_GET['remove']) && isset($_GET['file_id']))
 	{
+		$file = $get_file((int) $_GET['file_id']);
+
 		// 1.a REMOVE FILE CONFIRMATION
 		echo '<ul class="menu">' .
 				'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
@@ -79,8 +79,6 @@ $this->ensure_page(true); // TODO: upload for forums?
 					// file revisions here
 					'<li class="active">' . $this->_t('FileRemove') . '</li>' .
 				"</ul><br /><br />\n";
-
-		$file = $get_file((int) $_GET['file_id']);
 
 		if (count($file) > 0)
 		{
@@ -159,7 +157,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 		return true;
 	}
-	else if (isset($_GET['edit']) || isset($_GET['show'])) // show the form
+	else if ((isset($_GET['edit']) || isset($_GET['show'])) && isset($_GET['file_id']))
 	{
 		$file = $get_file((int) $_GET['file_id']);
 
@@ -189,7 +187,10 @@ $this->ensure_page(true); // TODO: upload for forums?
 				echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileViewProperties') . '</h3>';
 				echo '<ul class="menu">' .
 							'<li class="active">' . $this->_t('FileViewProperties') . '</li>' .
-							($can_upload
+							(($this->is_admin()
+								|| ($file['page_id']
+									&& $this->page['owner_id'] == $this->get_user_id())
+								|| $file['user_id'] == $this->get_user_id())
 								?	'<li><a href="' . $this->href('filemeta', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
 									// TODO: file revisions here
 									'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>'
