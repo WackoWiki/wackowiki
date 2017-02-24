@@ -206,7 +206,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small>Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="moders_can_edit" name="moders_can_edit" value="<?php echo htmlspecialchars($engine->db->moders_can_edit, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="0" maxlength="4" style="width:200px;" id="moders_can_edit" name="moders_can_edit" value="<?php echo (int) $engine->db->moders_can_edit;?>" />
 				</td>
 			</tr>
 		</table>
