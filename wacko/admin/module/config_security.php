@@ -158,7 +158,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Minimum and maximum number of characters in usernames.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="3" style="width:40px;" id="username_chars_min" name="username_chars_min" value="<?php echo htmlspecialchars($engine->db->username_chars_min, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /> Min&nbsp;&nbsp;<input type="number" min="0" maxlength="3" style="width:40px;" id="username_chars_max" name="username_chars_max" value="<?php echo htmlspecialchars($engine->db->username_chars_max, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /> Max
+					<input type="number" min="0" maxlength="3" style="width:40px;" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>" /> Min&nbsp;&nbsp;<input type="number" min="0" maxlength="3" style="width:40px;" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>" /> Max
 				</td>
 			</tr>
 			<tr>
@@ -308,7 +308,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br />The use of passphrases instead of passwords is encouraged.</small></label>
 				</td>
 				<td>
-					<input type="number" min="5" maxlength="3" style="width:200px;" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo htmlspecialchars($engine->db->pwd_min_chars, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="5" maxlength="3" style="width:200px;" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -354,7 +354,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo htmlspecialchars($engine->db->max_login_attempts, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="0" maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo (int) $engine->db->max_login_attempts;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -366,7 +366,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo htmlspecialchars($engine->db->ip_login_limit_max, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="0" maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo (int) $engine->db->ip_login_limit_max;?>" />
 				</td>
 			</tr>
 			<tr>
@@ -422,7 +422,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Remove event log over a given number of days.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="log_purge_time" name="log_purge_time" value="<?php echo htmlspecialchars($engine->db->log_purge_time, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="0" maxlength="4" style="width:200px;" id="log_purge_time" name="log_purge_time" value="<?php echo (int) $engine->db->log_purge_time;?>" />
 				</td>
 			</tr>
 			<tr class="hl_setting">
@@ -437,7 +437,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The time a user has to submit a form (in seconds).<br /> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="form_token_time" name="form_token_time" value="<?php echo htmlspecialchars($engine->db->form_token_time, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="0" maxlength="4" style="width:200px;" id="form_token_time" name="form_token_time" value="<?php echo (int) $engine->db->form_token_time;?>" />
 				</td>
 			</tr>
 			<tr class="hl_setting">
@@ -452,7 +452,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The lifetime of the user cookie login by default (in days).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="session_length" name="session_length" value="<?php echo htmlspecialchars($engine->db->session_length, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="0" maxlength="4" style="width:200px;" id="session_length" name="session_length" value="<?php echo (int) $engine->db->session_length;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -464,7 +464,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The minimum delay between the publication of the new user comments (in seconds).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo htmlspecialchars($engine->db->comment_delay, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="0" maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo (int) $engine->db->comment_delay;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -476,7 +476,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The minimum delay between sending a private message user connection (in seconds).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="intercom_delay" name="intercom_delay" value="<?php echo htmlspecialchars($engine->db->intercom_delay, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="number" min="0" maxlength="4" style="width:200px;" id="intercom_delay" name="intercom_delay" value="<?php echo (int) $engine->db->intercom_delay;?>" />
 				</td>
 			</tr>
 		</table>

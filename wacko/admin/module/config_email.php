@@ -164,7 +164,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_port"><strong><?php echo $engine->_t('SmtpPort'); ?>:</strong><br />
 				<small><?php echo $engine->_t('SmtpPortInfo'); ?></small></label></td>
-				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->db->smtp_port, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo (int) $engine->db->smtp_port;?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

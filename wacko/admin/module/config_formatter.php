@@ -131,7 +131,7 @@ function admin_config_formatter(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_wikilinks"><strong>Disable Wikilinks:</strong><br />
-				<small>Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page </small></label></td>
+				<small>Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page. This is useful when you work across different namespaces aks clusters. By default it is off.</small></label></td>
 				<td><input type="checkbox" id="disable_wikilinks" name="disable_wikilinks" value="1"<?php echo ( $engine->db->disable_wikilinks ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
