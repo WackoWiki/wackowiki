@@ -34,22 +34,15 @@ if ($max > 500)			$max = 500;
 // check for first param (for what mostpopular is built)
 if (!empty($page))
 {
-	$page		= $this->unwrap_link($page);
-	$ppage		= '/' . $page;
-	$context	= $page;
-	$_page		= $this->load_page($page);
-	if (!$legend)
-		$legend = $page;
-	if (isset($_page['tag']))
-		$link		= $this->href('', $_page['tag']);
+	$a_page		= $this->unwrap_link($page);
+	$ppage		= '/' . $a_page;
+	$_page		= $this->load_page($a_page);
+	if (!$legend)	$legend = $_page;
 }
 else
 {
 	$page		= '';
 	$ppage		= '';
-	$context	= $this->tag;
-	$_page		= $this->page;
-	$link		= '';
 }
 
 if (!$nomark)

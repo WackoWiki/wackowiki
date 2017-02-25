@@ -2827,20 +2827,35 @@ class Wacko
 		$this->http->redirect($url, $permanent);
 	}
 
+	/**
+	 * unwrap tag based on $this->context
+	 *
+	 * looks for tag with relative path and returns tag with absolute path
+	 *
+	 *	$this->context =	'cluster/base'
+	 *		'page'				'cluster/page'
+	 *		'../page'			'page'
+	 *		'!/page'			'cluster/base/page'
+	 *
+	 * @param string $tag
+	 *
+	 * @return string tag with absolute path
+	 */
 	function unwrap_link($tag)
 	{
-		if ($tag == '/')
+		if ($tag == '/')										// '/'
 		{
 			return '';
 		}
 
-		if ($tag == '!')
+		if ($tag == '!')										// '!'
 		{
 			return $this->context[$this->current_context];
 		}
 
 		$new_tag = $tag;
 
+		// get root tag
 		if (isset($this->context[$this->current_context]) && strstr($this->context[$this->current_context], '/'))
 		{
 			$root	= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $this->context[$this->current_context]);
@@ -2850,21 +2865,21 @@ class Wacko
 			$root	= '';
 		}
 
-		if (preg_match('/^\.\/(.*)$/', $tag, $matches))
+		if (preg_match('/^\.\/(.*)$/', $tag, $matches))			// './tag'
 		{
 			$root	= '';
 		}
-		else if (preg_match('/^\/(.*)$/', $tag, $matches))
+		else if (preg_match('/^\/(.*)$/', $tag, $matches))		// '/tag'
 		{
 			$root		= '';
 			$new_tag	= $matches[1];
 		}
-		else if (preg_match('/^\!\/(.*)$/', $tag, $matches))
+		else if (preg_match('/^\!\/(.*)$/', $tag, $matches))	// '!/tag'
 		{
 			$root		= $this->context[$this->current_context];
 			$new_tag	= $matches[1];
 		}
-		else if (preg_match('/^\.\.\/(.*)$/', $tag, $matches))
+		else if (preg_match('/^\.\.\/(.*)$/', $tag, $matches))	// '../tag'
 		{
 			$new_tag	= $matches[1];
 
@@ -2883,6 +2898,7 @@ class Wacko
 			$new_tag = '/' . $new_tag;
 		}
 
+		// build tag with absolute path
 		$tag = $root . $new_tag;
 		$tag = str_replace('//', '/', $tag);
 
