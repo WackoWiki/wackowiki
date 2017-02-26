@@ -1,6 +1,9 @@
 lang = {
+	// default.js
+	ReallySave :			"Really save?",
+
 	// wikiedit.js
-	HelpAbout:				"Hilfe & Über",
+	HelpAbout :				"Hilfe & Über",
 	HelpFormatting :		"Hilfe",
 	HelpFormattingTip :		"Hilfe zur Wiki-Formatierung",
 	HelpFormattingPage :	"Doc/Deutsch/Formatierung",
