@@ -35,6 +35,9 @@ lang = {
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insert table",
 	
+	Link :					"Link",
+	TextForLinking :		"Text for linking",
+	
 	HelpAboutTip : 			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+

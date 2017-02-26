@@ -35,6 +35,9 @@ lang = {
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Tabelle einfügen",
 	
+	Link :					"Link",
+	TextForLinking :		"Text für Verlinkung",
+	
 	HelpAboutTip : 			' Tastenkürzel:\n'+
 							' Strg+B - Fett\n'+
 							' Strg+I - Kursiv\n'+

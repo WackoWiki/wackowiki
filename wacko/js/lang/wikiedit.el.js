@@ -1,7 +1,7 @@
 lang = {
 	// wikiedit.js
 	HelpAbout:				"Help & About",
-	HelpFormatting :		"Βοήθεια",
+	HelpFormatting :		"οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
 	
@@ -34,6 +34,9 @@ lang = {
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insert table",
+	
+	Link :					"Link",
+	TextForLinking :		"Text for linking",
 	
 	HelpAboutTip : 			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+

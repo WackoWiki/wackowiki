@@ -4,7 +4,7 @@
 // v. 3.15                                                            //
 // supported: MZ1.4+, MSIE5+, Opera 8+                                //
 //                                                                    //
-// (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2005             //
+// (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2016             //
 //   based on AutoIndent for textarea                                 //
 //   (c) Roman "Kukutz" Ivanov, Evgeny Nedelko, 2003                  //
 // Many thanks to Alexander Babaev, Sergey Kruglov, Evgeny Nedelko    //
@@ -628,9 +628,9 @@ this.getDefines();
 var n = new RegExp('\n');
 if (!n.test(this.sel)) {
 if (!isAlt) {
-  lnk = prompt('Link:', this.sel);
+  lnk = prompt(lang.Link + ':', this.sel);
   if (lnk == null) lnk = this.sel;
-  sl = prompt('Text for linking:', this.sel);
+  sl = prompt(lang.TextForLinking + ':', this.sel);
   if (sl == null) sl = '';
   this.sel = lnk + ' ' + sl;
 };
