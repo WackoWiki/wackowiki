@@ -51,7 +51,7 @@ if ($this->is_admin())
 		$this->set_message($this->format($error), 'error');
 	}
 
-	$tpl->autocomplete	= $this->autocomplete_off();
+	$tpl->autocomplete	= $this->form_autocomplete_off();
 	$tpl->href			= $this->href();
 	$tpl->complexity	= $this->show_password_complexity();
 }

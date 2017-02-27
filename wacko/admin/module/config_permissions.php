@@ -155,7 +155,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="hide_locked"><strong>Hide inaccessible pages:</strong><br />
-					<small>If the user does not have permission to read the page, hide it in different lists of documents (placed in the link text, however, will still be visible).</small></label>
+					<small>If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).</small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="hide_locked" name="hide_locked" value="1"<?php echo ( $engine->db->hide_locked ? ' checked="checked"' : '' );?> />
