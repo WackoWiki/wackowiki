@@ -140,7 +140,7 @@ if ($user)
 		$tpl->c_current		= true;
 	}
 
-	$tpl->c_autocomplete	= $this->autocomplete_off();
+	$tpl->c_autocomplete	= $this->form_autocomplete_off();
 	$tpl->c_complexity		= $this->show_password_complexity();
 	$tpl->c_form			= $this->href();
 }

@@ -7004,7 +7004,7 @@ class Wacko
 	 *
 	 * @return string dummy username/email/password fields
 	 */
-	function autocomplete_off()
+	function form_autocomplete_off()
 	{
 		/* REMARKS
 		 *

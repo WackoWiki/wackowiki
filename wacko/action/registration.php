@@ -233,7 +233,7 @@ else
 		}
 	}
 
-	$tpl->r_autocomplete	= $this->autocomplete_off();
+	$tpl->r_autocomplete	= $this->form_autocomplete_off();
 	$tpl->r_username		= $user_name;
 	$tpl->r_password 		= $password;
 	$tpl->r_confpassword	= $conf_password;

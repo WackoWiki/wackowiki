@@ -141,10 +141,10 @@ if (!isset($engine->sess->ap_created))
 			?>
 				<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
 				<?php
-				echo $engine->autocomplete_off();
+				echo $engine->form_autocomplete_off();
 				?>
-				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" />
-				<input type="submit" id="submit" value="ok" />
+				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" autofocus/>
+				<input type="submit" id="submit" value="<?php echo $engine->_t('LoginButton'); ?>" />
 			</form>
 		</div>
 	</body>
