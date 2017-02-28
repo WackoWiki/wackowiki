@@ -734,7 +734,7 @@ $wacko_translation = [
 	// upload
 	'UploadFiles'				=> 'Upload files',
 	'UploadFor'					=> 'Plik wgrany',
-	'UploadButtonText'			=> 'Kontynuuj',
+	'UploadButton'				=> 'Kontynuuj',
 	'UploadGlobalText'			=> 'do publicznego dostêpu',
 	'UploadGlobal'				=> 'global',
 	'UploadHereText'			=> 'wy³±cznie dla u¿ytkowników maj±cych prawo do ogl±dania bie¿±cej strony',
