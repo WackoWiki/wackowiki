@@ -2494,7 +2494,7 @@ class Wacko
 		$body[]		=	$replace? 'FileReplacedBody' : 'FileUploadedBody';
 		$body[]		=	$user_name;
 		$body[]		=	$file_name;
-		$body[]		=	$page_id? $tag : null;
+		$body[]		=	$page_id? $tag : $this->_t('UploadGlobal'); // TODO: to page / global
 
 		$this->	notify_moderator($page_id, $user_id, $subject, $body);
 	}
@@ -2522,8 +2522,8 @@ class Wacko
 
 						$_subject	=	$this->_t($subject[0]) . " '$subject[1]'";
 
-						$_body		=	$this->_t('EmailModerator') . ".\n\n" .
-										Ut::perc_replace($this->_t($body[0]), ($body[1] == GUEST ? $this->_t('Guest') : $body[1])) . "\n" .
+						$_body		=	# $this->_t('EmailModerator') . ".\n\n" .
+										Ut::perc_replace($this->_t($body[0]), ($body[1] == GUEST ? $this->_t('Guest') : $body[1])) . "\n\n" .
 										"'$body[2]'\n" .
 										$this->href('', $body[3]) . "\n\n";
 

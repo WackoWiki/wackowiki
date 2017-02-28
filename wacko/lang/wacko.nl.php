@@ -734,7 +734,7 @@ $wacko_translation = [
 	// upload
 	'UploadFiles'				=> 'Upload files',
 	'UploadFor'					=> 'Upload bestand',
-	'UploadButtonText'			=> 'Doorgaan',
+	'UploadButton'				=> 'Doorgaan',
 	'UploadGlobalText'			=> 'voor alle gebruikers',
 	'UploadGlobal'				=> 'global',
 	'UploadHereText'			=> 'alleen voor gebruikers die deze pagina mogen zien',
