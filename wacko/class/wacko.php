@@ -2408,7 +2408,8 @@ class Wacko
 		$save = $this->set_language($user['user_lang'], true);
 
 		$subject	=	$this->_t('NewPageOwnership');
-		$body		=	Ut::perc_replace($this->_t('YouAreNewOwner'), $this->get_user_name(), $this->db->site_name) . "\n\n" . // STS TODO ou, pure shit message!
+		// STS TODO ou, pure shit message!
+		$body		=	Ut::perc_replace($this->_t('YouAreNewOwner'), $this->get_user_name()) . "\n\n" .
 						$user['owned'] . "\n" .
 						$this->_t('PageOwnershipInfo') . "\n";
 
