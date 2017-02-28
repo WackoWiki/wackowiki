@@ -117,6 +117,7 @@ if (isset($_POST['upload']) & $can_upload)
 				$dir = UPLOAD_PER_PAGE_DIR . '/';
 			}
 
+			// TODO: file must be in files table!
 			$replace = (isset($_POST['file_overwrite'])? true : false);
 
 			if (is_writable($dir))
@@ -185,6 +186,9 @@ if (isset($_POST['upload']) & $can_upload)
 						// 3. save to permanent location
 						move_uploaded_file($_FILES['file']['tmp_name'], $dir . $result_name);
 						chmod($dir . $result_name, 0644);
+
+						// replace
+						#clearstatcache();
 
 						if ($is_global)
 						{

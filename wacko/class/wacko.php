@@ -7407,6 +7407,8 @@ class Wacko
 			return true;
 		}
 
+		// TODO: set default lang if !isset($this->language) -> forced logout -> missing format()
+
 		$html			= $this->db->allow_rawhtml;
 		$this->db->allow_rawhtml = 0;
 		$message		= (isset($this->language) ? $this->format($message, 'wacko') : $message);

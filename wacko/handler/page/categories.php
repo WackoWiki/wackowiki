@@ -89,6 +89,8 @@ if ($this->is_owner() || $this->is_admin())
 				$this->log(4, 'Created a new category //' . $_POST['category'] . '//');
 				unset($_POST['create']);
 			}
+
+			$this->http->redirect($this->href('categories'));
 		}
 		// rename item
 		else if (isset($_POST['rename']) && isset($_POST['category']) && isset($_POST['category_id']))
@@ -116,6 +118,8 @@ if ($this->is_owner() || $this->is_admin())
 				$this->set_message($this->_t('CategoriesRenamed'));
 				$this->log(4, 'Category //' . $word['category'] . '// renamed //' . $_POST['category'] . '//');
 			}
+
+			$this->http->redirect($this->href('categories'));
 		}
 		// (un)group item
 		else if (isset($_POST['ugroup']) && isset($_POST['parent_id']) && isset($_POST['category_id']))
@@ -161,6 +165,8 @@ if ($this->is_owner() || $this->is_admin())
 					$this->set_message($this->_t('NoMultilevelGrouping'));
 				}
 			}
+
+			$this->http->redirect($this->href('categories'));
 		}
 		// delete item
 		else if (isset($_POST['delete']) && isset($_POST['category_id']))
@@ -180,6 +186,8 @@ if ($this->is_owner() || $this->is_admin())
 
 			$this->set_message($this->_t('CategoriesDeleted'));
 			$this->log(4, 'Category //' . $word['category'] . '// removed from the database');
+
+			$this->http->redirect($this->href('categories'));
 		}
 	}
 
@@ -339,86 +347,89 @@ if ($this->is_owner() || $this->is_admin())
 	//   print list
 	/////////////////////////////////////////////
 
-	echo $this->form_open('store_categories', ['page_method' => 'categories']);
-
-	// print categories list
-	if (is_array($categories))
+	if (!$_POST)
 	{
-		$i = '';
+		echo $this->form_open('store_categories', ['page_method' => 'categories']);
 
-		echo '<ul class="ul_list hide_radio">' . "\n";
-
-		foreach ($categories as $category_id => $word)
+		// print categories list
+		if (is_array($categories))
 		{
-			# if ($n++ > 0) echo '<hr />';
-			echo '<li class="lined"><span class="">' . "\n\t";
-			echo ($this->is_admin() || $this->db->owners_can_change_categories == true
-					? '<input type="radio" name="change_id" value="' . $category_id . '" />'
-					: '') .
-				'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? ( in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' /> ' . "\n\t" .
-				'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
+			$i = '';
 
-			if (isset($word['childs']) && $word['childs'] == true)
+			echo '<ul class="ul_list hide_radio">' . "\n";
+
+			foreach ($categories as $category_id => $word)
 			{
-				foreach ($word['childs'] as $category_id => $word)
+				# if ($n++ > 0) echo '<hr />';
+				echo '<li class="lined"><span class="">' . "\n\t";
+				echo ($this->is_admin() || $this->db->owners_can_change_categories == true
+						? '<input type="radio" name="change_id" value="' . $category_id . '" />'
+						: '') .
+					'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? ( in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' /> ' . "\n\t" .
+					'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
+
+				if (isset($word['childs']) && $word['childs'] == true)
 				{
-					if ($i++ < 1)
+					foreach ($word['childs'] as $category_id => $word)
 					{
-						echo "\t<ul>\n";
+						if ($i++ < 1)
+						{
+							echo "\t<ul>\n";
+						}
+
+						echo "\t\t" . '<li><span class="nobr">' . "\n\t\t\t" .
+								($this->is_admin() || $this->db->owners_can_change_categories == true
+									? '<input type="radio" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
+									: '') .
+								'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' />' . "\n\t\t\t" .
+								'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t" .
+							'&nbsp;&nbsp;&nbsp;</li>' . "\n";
 					}
-
-					echo "\t\t" . '<li><span class="nobr">' . "\n\t\t\t" .
-							($this->is_admin() || $this->db->owners_can_change_categories == true
-								? '<input type="radio" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
-								: '') .
-							'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' />' . "\n\t\t\t" .
-							'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t" .
-						'&nbsp;&nbsp;&nbsp;</li>' . "\n";
 				}
+
+				if ($i > 0)
+				{
+					echo "\t</ul>\n</li>\n";
+				}
+				else
+				{
+					echo "</li>\n";
+				}
+
+				$i = 0;
 			}
 
-			if ($i > 0)
-			{
-				echo "\t</ul>\n</li>\n";
-			}
-			else
-			{
-				echo "</li>\n";
-			}
+			echo "</ul>\n";
 
-			$i = 0;
+			/////////////////////////////////////////////
+			//   control buttons
+			/////////////////////////////////////////////
+
+			echo '<br />';
+			echo '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ';
+			echo '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a> ';
+			echo '<small><br />' . $this->_t('CategoriesStoreInfo') . '<br /><br /></small> ';
+		}
+		else
+		{
+			// availability depends on the page language and your access rights
+			// additionally you need also the right to create new categories
+			echo $this->_t('NoCategoriesForThisLanguage') . '<br /><br /><br />';
+			echo '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a><br /><br /> ';
 		}
 
-		echo "</ul>\n";
+		if ($this->is_admin() || $this->db->owners_can_change_categories == true)
+		{
+			echo '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ';
+			echo '<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ';
+			echo '<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '" /> ';
+			echo '<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '" /> ';
+			echo '<small><br />' . $this->_t('CategoriesEditInfo') . '</small> ';
+		}
 
-		/////////////////////////////////////////////
-		//   control buttons
-		/////////////////////////////////////////////
-
-		echo '<br />';
-		echo '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ';
-		echo '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a> ';
-		echo '<small><br />' . $this->_t('CategoriesStoreInfo') . '<br /><br /></small> ';
+		echo "<br /><br />";
+		echo $this->form_close();
 	}
-	else
-	{
-		// availability depends on the page language and your access rights
-		// additionally you need also the right to create new categories
-		echo $this->_t('NoCategoriesForThisLanguage') . '<br /><br /><br />';
-		echo '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a><br /><br /> ';
-	}
-
-	if ($this->is_admin() || $this->db->owners_can_change_categories == true)
-	{
-		echo '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ';
-		echo '<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ';
-		echo '<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '" /> ';
-		echo '<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '" /> ';
-		echo '<small><br />' . $this->_t('CategoriesEditInfo') . '</small> ';
-	}
-
-	echo "<br /><br />";
-	echo $this->form_close();
 }
 else
 {
