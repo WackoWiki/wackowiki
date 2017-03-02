@@ -128,14 +128,13 @@ a:target {
 }
 
 .heading > a.self-link::before {
-	content: "§";
+	content: "\00a7"; /* § UTF-8 escape sequences */
 	visibility: hidden;
 }
 
 .heading:hover > a.self-link::before {
-	content: "§";
+	content: "\00a7"; /* § UTF-8 escape sequences */
 	visibility: visible;
-	opacity: 1;
 	text-decoration: none;
 }
 
@@ -153,7 +152,7 @@ a.self-link:hover {
 	font-size: 83%;
 }
 /* a.self-link::before {
-	content: "¶";
+	content: "\00b6"; /* ¶ UTF-8 escape sequences */
 } */
 
 svg,
