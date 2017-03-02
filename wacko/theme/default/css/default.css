@@ -151,8 +151,10 @@ a.self-link:hover {
 .heading > a.self-link {
 	font-size: 83%;
 }
+
+/* ¶ UTF-8 escape sequences */
 /* a.self-link::before {
-	content: "\00b6"; /* ¶ UTF-8 escape sequences */
+	content: "\00b6"; 
 } */
 
 svg,
