@@ -249,6 +249,7 @@ $wacko_translation = [
 	'PagesCategory'				=> 'Categorías de páginas',
 	'CategoryNotExists'			=> 'Categoría no existe.',
 	'CategoryEmpty'				=> 'Categoría vacía.',
+	'NoCategorySelected'			=> 'No category selected.',
 	'TagCloud'					=> 'Nube de palabras',
 
 	// source handler

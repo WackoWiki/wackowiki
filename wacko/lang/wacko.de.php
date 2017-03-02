@@ -245,11 +245,12 @@ $wacko_translation = [
 	'CategoriesRenameButton'	=> 'Umbenennen',
 	'CategoriesGroupButton'		=> 'Gruppieren',
 	'CategoriesRemoveButton'	=> 'Entfernen',
-	'CategoriesEditInfo'		=> 'Um die Kategorie-Liste zu bearbeiten wähle das Optionsfeld.',
+	'CategoriesEditInfo'		=> 'Um die Kategorie-Liste zu bearbeiten, wähle das Optionsfeld.',
 	'NoCategoriesForThisLanguage'	=> 'Kategorien für diese Sprache wurden nicht definiert.',
 	'PagesCategory'				=> 'Seiten der Kategorie',
 	'CategoryNotExists'			=> 'Kategorie gibt es nicht.',
 	'CategoryEmpty'				=> 'Kategorie leer.',
+	'NoCategorySelected'			=> 'Es wurden keine Kategorie ausgewählt.',
 	'TagCloud'					=> 'Wortwolke',
 
 	// source handler

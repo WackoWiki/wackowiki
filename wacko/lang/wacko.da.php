@@ -249,6 +249,7 @@ $wacko_translation = [
 	'PagesCategory'				=> 'Pages category',
 	'CategoryNotExists'			=> 'Kategori eksisterer ikke.',
 	'CategoryEmpty'				=> 'Kategori tom.',
+	'NoCategorySelected'			=> 'No category selected.',
 	'TagCloud'					=> 'Ordsky',
 
 	// source handler
