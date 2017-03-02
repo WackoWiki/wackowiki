@@ -5,7 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-
 // WackoWiki ADMINISTRATION SUBSYSTEM
 
 // TODO:
@@ -91,6 +90,7 @@ if (@$_POST['_action'] === 'emergency')
 	else
 	{
 		$engine->log_user_delay();
+
 		if (!isset($engine->sess->ap_failed_login_count))
 		{
 			$engine->sess->ap_failed_login_count = 0;
@@ -120,13 +120,15 @@ if (!isset($engine->sess->ap_created))
 {
 	header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
-	<!DOCTYPE html>
-	<html>
+<!DOCTYPE html>
+<html>
 	<head>
-	<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
-	<meta name="robots" content="noindex, nofollow, noarchive" />
-	<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
+		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
+		<meta name="robots" content="noindex, nofollow, noarchive" />
+		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen" />
+		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
 	</head>
+
 	<body>
 <?php
 		// here we show messages
@@ -148,7 +150,7 @@ if (!isset($engine->sess->ap_created))
 			</form>
 		</div>
 	</body>
-	</html>
+</html>
 <?php
 	exit;
 }
@@ -178,9 +180,9 @@ if (time() - $engine->sess->ap_created > $session_length)
 ##     Include admin modules and common functions     ##
 ########################################################
 
-foreach (Ut::file_glob('admin/{common,module}/*.php') as $filename)
+foreach (Ut::file_glob('admin/{common,module}/*.php') as $file_name)
 {
-	include $filename;
+	include $file_name;
 }
 
 ########################################################
@@ -220,7 +222,7 @@ foreach ($module as $row)
 			if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
 			{
 				$menu .= '<li class="active">';
-				$_title = $row['cat'] . ' &gt; ' . $row['name'];
+				$_title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $row['name'];
 			}
 			else
 			{
@@ -251,42 +253,53 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
-<meta name="robots" content="noindex, nofollow, noarchive" />
-<meta http-equiv="Content-Type" content="text/html; "/>
-<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" rel="stylesheet" media="screen" />
-<link href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" rel="stylesheet" media="screen" />
+	<head>
+		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
+		<meta name="robots" content="noindex, nofollow, noarchive" />
+		<meta http-equiv="Content-Type" content="text/html; "/>
+		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" media="screen" />
+		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen" />
+		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
+	</head>
 
-</head>
-<body>
-<header id="header">
-	<div id="pane">
-		<div class="left"></div>
-		<div class="middle">
-			<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php"><img src="<?php echo rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, 'wacko_logo.png'); ?>" alt="WackoWiki" width="108" height="50"></a>
+	<body>
+	<header id="header">
+		<div id="pane">
+			<div class="left"></div>
+			<div class="middle">
+				<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php">
+				<?php
+					# echo '<img src="' . rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
+				?>
+					<img src="<?php echo rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, 'wacko_logo.png'); ?>" alt="WackoWiki" width="108" height="50">
+				</a>
+			</div>
+			<div id="tools">
+				<span>
+					<?php
+					$time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
+
+					echo (RECOVERY_MODE === true ? '<strong>' . $engine->_t('RecoveryMode') . '</strong>' : '') .
+					'&nbsp;&nbsp;' .
+					Ut::perc_replace($engine->_t('TimeLeft'), $time_left) .
+					'&nbsp;&nbsp' .
+					$engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')) .
+					'&nbsp;&nbsp' .
+					($db->is_locked() ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) .
+					'&nbsp;&nbsp' .
+					$engine->_t('ApVersion') . ' ' . $engine->db->wacko_version;
+					?>
+				</span>
+			</div>
+			<br style="clear: right" />
+			<div id="sections">
+				<?php
+				echo '<a href="' . rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>';
+				echo '<a href="' . rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' . $engine->_t('ApLogOutTip') . '">' . $engine->_t('ApLogOut') . '</a>';
+				?>
+			</div>
 		</div>
-		<div id="tools">
-			<span>
-				<?php echo (RECOVERY_MODE === true ? '<strong>RECOVERY_MODE</strong>' : ''); ?>
-				&nbsp;&nbsp;
-				<?php $time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
-				echo Ut::perc_replace($engine->_t('TimeLeft'), $time_left); ?>
-				&nbsp;&nbsp;
-				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')); ?>
-				&nbsp;&nbsp;
-				<?php echo ($db->is_locked() ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')); ?>
-				&nbsp;&nbsp;
-				<?php echo $engine->_t('ApVersion') . ' ' . $engine->db->wacko_version; ?>
-			</span>
-		</div>
-		<br style="clear: right" />
-		<div id="sections">
-			<?php echo '<a href="' . rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>'; ?>
-			<?php echo '<a href="' . rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' . $engine->_t('ApLogOutTip')  . '">' . $engine->_t('ApLogOut')  . '</a>'; ?>
-		</div>
-	</div>
-</header>
+	</header>
 
 <?php
 

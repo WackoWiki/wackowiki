@@ -84,12 +84,16 @@ ul, ol {
 img {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
+	height: auto;
+	max-width: 100%;
 }
 a img {
 	color: #333333;
 	text-decoration: underline;
 	vertical-align: middle;
 	border: 0px none;
+	max-height: 100%;
+	width: auto;
 }
 
 

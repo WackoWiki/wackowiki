@@ -11,6 +11,12 @@ if (!defined('IN_WACKO'))
 
 require Ut::join_path(THEME_DIR, '_common/_header.php');
 
+if ($this->db->site_logo)
+{
+	$tpl->logo			= true;
+	$tpl->logo_image	= $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_logo);
+}
+
 if (@$this->page['tag'] == $this->db->root_page)
 {
 	$tpl->root = true;

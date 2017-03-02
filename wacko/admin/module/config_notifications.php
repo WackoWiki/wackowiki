@@ -38,6 +38,7 @@ function admin_config_notifications(&$engine, &$module)
 		$config['notify_minor_edit']			= (int) $_POST['notify_minor_edit'];
 		$config['notify_page']					= (int) $_POST['notify_page'];
 		$config['notify_comment']				= (int) $_POST['notify_comment'];
+		$config['notify_upload']				= (int) $_POST['notify_upload'];
 		$config['notify_new_user_account']		= (int) $_POST['notify_new_user_account'];
 
 		$engine->config->_set($config);

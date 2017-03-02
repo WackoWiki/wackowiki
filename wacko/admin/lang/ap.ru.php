@@ -21,6 +21,7 @@ $ap_translation = [
 
 	// Admin panel
 	'AdminPanel'				=> 'Администраторский раздел',
+	'RecoveryMode'				=> 'Режим восстановления',
 	'Authorization'				=> 'Авторизация',
 	'AuthorizationTip'			=> 'Пожалуйста, укажите административный пароль (убедитесь также, что cookies в вашем браузере разрешены).',
 	'NoRecoceryPassword'		=> 'Административный пароль не задан!',
@@ -52,6 +53,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'Сайт закрыт',
 
 	// Generic
+	'Cancel'					=> 'Cancel',
+	'Add'						=> 'Add',
+	'Edit'						=> 'Edit',
+	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
 	'On'						=> 'on',
@@ -64,6 +69,12 @@ $ap_translation = [
 	'config_basic'		=> [
 		'name'		=> 'Базовые',
 		'title'		=> 'Основные параметры',
+	],
+
+	// Config Appearance module
+	'config_appearance'		=> [
+		'name'		=> 'Внешний вид',
+		'title'		=> 'Appearance settings',
 	],
 
 	// Config Email module
@@ -279,6 +290,16 @@ $ap_translation = [
 	'PurgeSessionsConfirm'		=> 'Увереный в прочистке сессий? Это прекратит сессии всех текущих пользователей.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Сессии прочищены.',
+
+	// Basic settings
+
+
+	// Appearance settings
+	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
+	'LogoOff'					=> 'off',
+	'LogoOnly'					=> 'logo',
+	'LogoAndTitle'				=> 'logo and title',
+
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Эта информация используется для отправки конференцией email-сообщений пользователям. Удостоверьтесь в правильности указанных email-адресов, все возвращённые или не доставленные сообщения будут, вероятно, отправлены на них. Если ваш сервер не обеспечивает использование встроенной (в PHP) службы email, вы можете отправлять сообщения напрямую с использованием SMTP. Для этого необходим адрес подходящего сервера (если нужно, спросите об этом у провайдера). Если сервер требует аутентификации (и только в этом случае), введите необходимые имя, пароль и метод аутентификации.',

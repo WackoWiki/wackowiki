@@ -35,9 +35,6 @@ function admin_config_basic(&$engine, &$module)
 		$config['site_desc']				= (string) $_POST['site_desc'];
 		$config['meta_description']			= (string) $_POST['meta_description'];
 		$config['meta_keywords']			= (string) $_POST['meta_keywords'];
-		$config['theme']					= (string) $_POST['theme'];
-		$config['allow_themes']				= (string) $_POST['allow_themes'];
-		$config['allow_themes_per_page']	= (string) $_POST['themes_per_page'];
 		$config['admin_name']				= (string) $_POST['admin_name'];
 		$config['language']					= (string) $_POST['language'];
 		$config['multilanguage']			= (int) $_POST['multilanguage'];
@@ -85,7 +82,7 @@ function admin_config_basic(&$engine, &$module)
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
-	echo $engine->form_open('basic', ['form_more' => ' enctype="multipart/form-data" ']);
+	echo $engine->form_open('basic');
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
@@ -134,47 +131,6 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					Layout
-				</th>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="theme"><strong>Theme:</strong><br />
-					<small>Template design the site uses by default.</small></label></td>
-				<td>
-					<select style="width:200px;" id="theme" name="theme">
-<?php
-						$themes = $engine->available_themes();
-
-						foreach ($themes as $theme)
-						{
-							echo '<option value="' . $theme . '" '.($engine->db->theme == $theme ? 'selected="selected"' : '') . '>' . $theme . '</option>';
-						}
-?>
-					</select>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><label for="allow_themes"><strong>Allowed Themes:</strong><br />
-					<small>Allowed themes, which the user can choose: "0" - all available themes are allowed (default), <br />"default,coffee" - here only these both themes are allowed.</small></label></td>
-				<td><input type="text" maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->db->allow_themes, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label"><strong>Themes per page:</strong><br />
-					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
-				<td>
-					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked="checked"' : '');?> /><label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked="checked"' : '');?> /><label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<br />
 					Language
 				</th>
 			</tr>
@@ -183,7 +139,7 @@ function admin_config_basic(&$engine, &$module)
 					<small>Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.</small></label></td>
 				<td>
 					<select style="width:200px;" id="language" name="language">
-<?php
+					<?php
 						$languages = $engine->_t('LanguageArray');
 						$langs = $engine->available_languages();
 
@@ -191,7 +147,7 @@ function admin_config_basic(&$engine, &$module)
 						{
 							echo '<option value="' . $lang . '" '.($engine->db->language == $lang ? 'selected="selected"' : '') . '>' . $languages[$lang] . ' (' . $lang . ')</option>';
 						}
-?>
+					?>
 					</select>
 				</td>
 			</tr>
@@ -205,8 +161,8 @@ function admin_config_basic(&$engine, &$module)
 					<input type="checkbox" id="multilanguage" name="multilanguage" value="1"<?php echo ( $engine->db->multilanguage ? ' checked="checked"' : '' );?> />
 				</td>
 			</tr>
-<?php if ($engine->db->multilanguage)
-{?>
+			<?php if ($engine->db->multilanguage)
+			{?>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
@@ -214,7 +170,7 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><label for=""><strong>Allowed languages:</strong><br />
 					<small>It is recomended to select only the set of languages you want to use, other wise all languages are selected.</small></label></td>
 				<td>
-<?php
+				<?php
 					if ($engine->db->multilanguage)
 					{
 						// subset: false
@@ -249,7 +205,7 @@ function admin_config_basic(&$engine, &$module)
 						{
 							echo "\t</tr>\n\t<tr>\n";
 						}
-;
+
 						$n++;
 					}
 
