@@ -53,9 +53,9 @@ class Feed
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
 		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png')  . "</url>\n";
-		$xml .= "<width>108</width>\n";
-		$xml .= "<height>50</height>\n";
+		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . "</url>\n";
+		$xml .= "<width>" . $this->engine->db->logo_width ."</width>\n";
+		$xml .= "<height>" . $this->engine->db->logo_height . "</height>\n";
 		$xml .= "</image>\n";
 		$xml .= "<language>" . $this->lang . "</language>\n";
 		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";
@@ -131,14 +131,14 @@ class Feed
 				#if ($access === true)
 				#{
 					$feed_pages[]	= [
-										'page_id'	=> $page['page_id'],
-										'tag'		=> $page['tag'],
-										'title'		=> $page['title'],
-										'modified'	=> $page['created'],
-										'body_r'	=> $page['body_r'],
-										'comments'	=> $page['comments'],
-										'page_lang'	=> $page['page_lang'],
-										'date'		=> date('Y/m-d', strtotime($page['created']))
+						'page_id'	=> $page['page_id'],
+						'tag'		=> $page['tag'],
+						'title'		=> $page['title'],
+						'modified'	=> $page['created'],
+						'body_r'	=> $page['body_r'],
+						'comments'	=> $page['comments'],
+						'page_lang'	=> $page['page_lang'],
+						'date'		=> date('Y/m-d', strtotime($page['created']))
 
 					];
 				#}
@@ -171,9 +171,9 @@ class Feed
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . "</title>\n";
 		$xml .= "<link>" . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . "</url>\n";
-		$xml .= "<width>108</width>\n";
-		$xml .= "<height>50</height>\n";
+		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . "</url>\n";
+		$xml .= "<width>" . $this->engine->db->logo_width ."</width>\n";
+		$xml .= "<height>" . $this->engine->db->logo_height . "</height>\n";
 		$xml .= "</image>\n";
 		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";
 		#$xml .= "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
@@ -253,9 +253,9 @@ class Feed
 		$xml .= "<image>\n";
 		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
 		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . "</url>\n";
-		$xml .= "<width>108</width>\n";
-		$xml .= "<height>50</height>\n";
+		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . "</url>\n";
+		$xml .= "<width>" . $this->engine->db->logo_width ."</width>\n";
+		$xml .= "<height>" . $this->engine->db->logo_height . "</height>\n";
 		$xml .= "</image>\n";
 		$xml .= "<language>" . $this->lang . "</language>\n";
 		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";

@@ -66,6 +66,7 @@ $wacko_config_defaults = [
 	'notify_page'					=> 2,
 	'notify_comment'				=> 1,
 	'notify_new_user_account'		=> 1,
+	'notify_upload'					=> 1,
 
 	'limit_email_domain'			=> '',
 	'check_mx_record'				=> 0,
@@ -82,6 +83,12 @@ $wacko_config_defaults = [
 	'theme'							=> 'default',
 	'allow_themes'					=> 0,
 	'allow_themes_per_page'			=> 0,
+
+	'site_logo'						=> '',
+	'logo_display'					=> 0,
+	'logo_height'					=> 0,
+	'logo_width'					=> 0,
+	'site_favicon'					=> '',
 
 	'edit_summary'					=> 0,
 	'minor_edit'					=> 0,
@@ -244,6 +251,7 @@ $wacko_config_defaults = [
 	'system_seed'					=> '', // installer autogenerates random one
 	'hashid_seed'					=> '', // installer autogenerates random one
 	'recovery_password'				=> '',
+	'trusted_domains'				=> '', // not in use
 
 	'date_format'					=> 'd.m.Y',
 	'time_format'					=> 'H:i',

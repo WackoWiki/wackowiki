@@ -21,6 +21,7 @@ $ap_translation = [
 
 	// Admin panel
 	'AdminPanel'				=> 'Adminisztrátori vezérlõpult',
+	'RecoveryMode'				=> 'Recovery Mode',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -48,6 +49,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
+	'Cancel'					=> 'Cancel',
+	'Add'						=> 'Add',
+	'Edit'						=> 'Edit',
+	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
 	'On'						=> 'Bekapcsolva',
@@ -60,6 +65,12 @@ $ap_translation = [
 	'config_basic'		=> [
 		'name'		=> 'Basic',
 		'title'		=> 'Basic parameters',
+	],
+
+	// Config Appearance module
+	'config_appearance'		=> [
+		'name'		=> 'Appearance',
+		'title'		=> 'Appearance settings',
 	],
 
 	// Config Email module
@@ -275,6 +286,16 @@ $ap_translation = [
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
+
+	// Basic settings
+
+
+	// Appearance settings
+	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
+	'LogoOff'					=> 'off',
+	'LogoOnly'					=> 'logo',
+	'LogoAndTitle'				=> 'logo and title',
+
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Az alábbi információkat használja a fórum e-mailek küldésekor. Kérünk, gyõzõdj meg róla, hogy az e-mail cím, amit megadsz, helyes, mivel minden nem kézbesíthetõ levél erre a címre fog menni. Ha a tárhelyszolgáltatód nem biztosítja a natív (PHP alapú) e-mail küldést, használhatsz helyette SMTP-t. Ehhez szükség van egy megfelelõ szerver címére (ha szükséges, kérdezd meg a szolgáltatód). Ha (és csak ha) a szerver megköveteli az azonosítást, add meg a szükséges felhasználónevet, jelszót és azonosítási módot.',

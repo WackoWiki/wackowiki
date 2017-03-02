@@ -11,11 +11,16 @@
 	<div id="header-main">
 		<div id="header-top">
 			<h1>
+			[= logo _ =
+				<img src="[ ' image ' ]" alt="" height="[ ' db: logo_height ' ]" width="[ ' db: logo_width ' ]">
+			=]
 			[= root _ =
-				[ ' db: site_name |e ' ]
+				<span>[ ' db: site_name |e ' ]</span>
 			=]
 			[= other _ =
-				<a href="[ ' db: base_url ' ]" title="[ ' db: site_desc |e ' ]">[ ' db: site_name |e ' ]</a>
+				<a href="[ ' db: base_url ' ]" title="[ ' db: site_desc |e ' ]">
+					[ '' LogoImage '' ]
+				<span>[ ' db: site_name |e ' ]</span></a>
 			=]
 			</h1>
 		</div>

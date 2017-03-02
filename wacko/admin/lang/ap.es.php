@@ -21,6 +21,7 @@ $ap_translation = [
 
 	// Admin panel
 	'AdminPanel'				=> 'Panel de Control de Administración',
+	'RecoveryMode'				=> 'Modo de recuperación',
 	'Authorization'				=> 'Autorización',
 	'AuthorizationTip'			=> 'Por favor ingrese la contraseña del administrador (asegúrese que su navegador permita cookies).',
 	'NoRecoceryPassword'		=> 'Contraseña administrativa no especificada!',
@@ -48,6 +49,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
+	'Cancel'					=> 'Cancel',
+	'Add'						=> 'Add',
+	'Edit'						=> 'Edit',
+	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Habilitar',
 	'Disabled'					=> 'Deshabilitar',
 	'On'						=> 'on',
@@ -60,6 +65,12 @@ $ap_translation = [
 	'config_basic'		=> [
 		'name'		=> 'Basic',
 		'title'		=> 'Basic parameters',
+	],
+
+	// Config Appearance module
+	'config_appearance'		=> [
+		'name'		=> 'Apariencia',
+		'title'		=> 'Appearance settings',
 	],
 
 	// Config Email module
@@ -275,6 +286,16 @@ $ap_translation = [
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
+
+	// Basic settings
+
+
+	// Appearance settings
+	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
+	'LogoOff'					=> 'off',
+	'LogoOnly'					=> 'logo',
+	'LogoAndTitle'				=> 'logo and title',
+
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Esta información se usa cuando el Sitio envía emails a sus usuarios. Por favor verifique que la dirección de email ingresada sea válida, cualquier rebote se reenviará a esa dirección. Si su host no provee un servicio de email nativo (utilizable por PHP), entonces use directamente SMTP. Esto requiere la dirección de un servidor apropiado (pregúntele a su ISP de ser necesario). Si (si, y solo si) el servidor requiere autentificación complete el usuario y contraseña. Por favor observe que solo se ofrece autentificación básica, otro tipo de implementación no es posible actualmente.',

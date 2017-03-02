@@ -21,6 +21,7 @@ $ap_translation = [
 
 	// Admin panel
 	'AdminPanel'				=> 'Administrations-Bereich',
+	'RecoveryMode'				=> 'Wiederherstellungs-Modus',
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von deinem Browser akzeptiert werden).',
 	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
@@ -48,6 +49,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'Die Website ist geschlossen',
 
 	// Generic
+	'Cancel'					=> 'Abbrechen',
+	'Add'						=> 'Hinzufügen',
+	'Edit'						=> 'Bearbeiten',
+	'Remove'					=> 'Entfernen',
 	'Enabled'					=> 'aktiviert',
 	'Disabled'					=> 'deaktiviert',
 	'On'						=> 'an',
@@ -60,6 +65,12 @@ $ap_translation = [
 	'config_basic'		=> [
 		'name'		=> 'Allgemein',
 		'title'		=> 'Grundeinstellungen',
+	],
+
+	// Config Appearance module
+	'config_appearance'		=> [
+		'name'		=> 'Aussehen',
+		'title'		=> 'Aussehen-Einstellungen',
 	],
 
 	// Config Email module
@@ -101,7 +112,7 @@ $ap_translation = [
 	// Config Security module
 	'config_security'		=> [
 		'name'		=> 'Sicherheit',
-		'title'		=> 'Sicherheits-Untersysteme-Einstellungen',
+		'title'		=> 'Sicherheits-Einstellungen',
 	],
 
 	// Config System module
@@ -275,6 +286,16 @@ $ap_translation = [
 	'PurgeSessionsConfirm'		=> 'Bist du dir sicher, daß du alle Sitzungen entfernen willst? Dies wird alle Nuzer abmelden.',
 	'PurgeSessionsExplain'		=> 'Entferne alle Sitzungen. Dies wird alle Nuzer abmelden in dem es die auth_token Tabelle leert.',
 	'PurgeSessionsDone'			=> 'Sitzungen erfolgreich enfernt.',
+
+	// Basic settings
+
+
+	// Appearance settings
+	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
+	'LogoOff'					=> 'off',
+	'LogoOnly'					=> 'logo',
+	'LogoAndTitle'				=> 'logo and title',
+
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',

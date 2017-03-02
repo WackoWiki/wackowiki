@@ -26,7 +26,17 @@ if ($this->has_access('read'))
 
 if ($this->db->allow_x11colors)
 {
+	// TODO: $tpl-> ???
 	$tpl_h_x11_colors = $this->db->base_url . Ut::join_path(THEME_DIR, "_common/X11colors.css");
+}
+
+if ($this->db->site_favicon)
+{
+	$tpl->h_favicon = $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_favicon);
+}
+else
+{
+	$tpl->h_favicon = $this->db->theme_url . 'icon/favicon.ico';
 }
 
 if ($this->db->policy_page)

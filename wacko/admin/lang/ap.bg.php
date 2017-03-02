@@ -21,6 +21,7 @@ $ap_translation = [
 
 	// Admin panel
 	'AdminPanel'				=> 'Администраторски контролен панел',
+	'RecoveryMode'				=> 'Режим на възстановяване',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -48,6 +49,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
+	'Cancel'					=> 'Cancel',
+	'Add'						=> 'Add',
+	'Edit'						=> 'Edit',
+	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Включено',
 	'Disabled'					=> 'Изключено',
 	'On'						=> 'Включено',
@@ -60,6 +65,12 @@ $ap_translation = [
 	'config_basic'		=> [
 		'name'		=> 'Basic',
 		'title'		=> 'Basic parameters',
+	],
+
+	// Config Appearance module
+	'config_appearance'		=> [
+		'name'		=> 'Appearance',
+		'title'		=> 'Appearance settings',
 	],
 
 	// Config Email module
@@ -275,6 +286,16 @@ $ap_translation = [
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
+
+	// Basic settings
+
+
+	// Appearance settings
+	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
+	'LogoOff'					=> 'off',
+	'LogoOnly'					=> 'logo',
+	'LogoAndTitle'				=> 'logo and title',
+
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Тази информация се използва от форума при изпращане на email-и до други потребители. Уверете се че email адреса, който сте въвели е валиден, повредените и неполучените съобщения ще бъдат изпращани на този адрес. Ако хостинга ви не позволява използването на php базираната mail(); функция, можете да използвате директно SMTP.',

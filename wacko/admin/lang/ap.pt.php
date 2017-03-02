@@ -21,6 +21,7 @@ $ap_translation = [
 
 	// Admin panel
 	'AdminPanel'				=> 'Painel de Administração',
+	'RecoveryMode'				=> 'Modo de recuperação',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -48,6 +49,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
+	'Cancel'					=> 'Cancel',
+	'Add'						=> 'Add',
+	'Edit'						=> 'Edit',
+	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
 	'On'						=> 'on',
@@ -60,6 +65,12 @@ $ap_translation = [
 	'config_basic'		=> [
 		'name'		=> 'Basic',
 		'title'		=> 'Basic parameters',
+	],
+
+	// Config Appearance module
+	'config_appearance'		=> [
+		'name'		=> 'Aparência',
+		'title'		=> 'Appearance settings',
 	],
 
 	// Config Email module
@@ -275,6 +286,16 @@ $ap_translation = [
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
+
+	// Basic settings
+
+
+	// Appearance settings
+	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
+	'LogoOff'					=> 'off',
+	'LogoOnly'					=> 'logo',
+	'LogoAndTitle'				=> 'logo and title',
+
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Esta informação é usada quando o Fórum envia emails aos Utilizadores. Certifique-se que usa um email válido. Qualquer Mensagem incorreta não será entregue neste endereço. Se o seu serviço de hospedagem não oferece um serviço nativo de email baseado no PHP, pode enviar mensagens através de SMTP. É necessário um Servidor adequado, não especifique qualquer nome antigo aqui! Se o servidor requer autenticação, introduza os nomes e senhas necessários. tenha em atenção que apenas é usada a autenticação básica. Implementações de autenticações diferentes não estão disponíveis.',
