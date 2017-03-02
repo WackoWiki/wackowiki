@@ -75,6 +75,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 		echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileRemove') . '</h3>';
 		echo '<ul class="menu">' .
 					'<li><a href="' . $this->href('filemeta', '', ['show', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
+					// TODO: check rights
 					'<li><a href="' . $this->href('filemeta', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
 					// file revisions here
 					'<li class="active">' . $this->_t('FileRemove') . '</li>' .
@@ -382,6 +383,8 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 					if (@unlink($real_filename))
 					{
+						clearstatcache();
+
 						$message .= $this->_t('FileRemovedFromFS');
 					}
 					else
@@ -396,6 +399,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 					// log event
 					$this->log(1, Ut::perc_replace($this->_t('LogRemovedFile', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
+
 					$this->db->invalidate_sql_cache(); // TODO: check if sql cache is enabled plus purge page cache
 					$this->http->redirect($this->href('attachments'));
 				}
