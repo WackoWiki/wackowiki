@@ -28,7 +28,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 	<link rel="stylesheet" href="<?php echo Ut::join_path(THEME_DIR, "_common/X11colors.css"); ?>" />
 	<?php } ?>
 	<link media="print" rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css" />
-	<link rel="shortcut icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
 	<link  rel="start" title="<?php echo $this->db->root_page;?>" href="<?php echo $this->db->base_url;?>"/>
 	<?php if ($this->db->policy_page) {?>
 	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
