@@ -250,6 +250,7 @@ $wacko_translation = [
 	'PagesCategory'				=> 'Документы категории',
 	'CategoryNotExists'			=> 'Категория не существует.',
 	'CategoryEmpty'				=> 'Категория пуста.',
+	'NoCategorySelected'			=> 'No category selected.',
 	'TagCloud'					=> 'Облако тегов',
 
 	// source handler
