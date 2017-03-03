@@ -37,17 +37,18 @@ function admin_system_info(&$engine, &$module)
 <?php
 
 	// get MariaDB / mysql version
-	$_db_version		= $engine->db->load_single("SELECT version()");
-	$db_version			= $_db_version['version()'];
+	$_db_version			= $engine->db->load_single("SELECT version()");
+	$db_version				= $_db_version['version()'];
 
 	// get SQL mode
-	$_sql_mode			= $engine->db->load_single("SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode");
-	$sql_mode_global	= $_sql_mode['@@GLOBAL.sql_mode'];
-	$sql_mode_session	= $_sql_mode['@@SESSION.sql_mode'];
+	$_sql_mode				= $engine->db->load_single("SELECT @@GLOBAL.sql_mode, @@SESSION.sql_mode");
+	$sql_mode_global		= $_sql_mode['@@GLOBAL.sql_mode'];
+	$sql_mode_session		= $_sql_mode['@@SESSION.sql_mode'];
 
-	// get_cfg_var()	-> returns whatever is in php.ini
-	// ini_get()		-> returns runtime settings
-	$upload_max_filesize = trim(str_replace('M', '', get_cfg_var('upload_max_filesize')));
+	// get_cfg_var()		-> returns whatever is in php.ini
+	// ini_get()			-> returns runtime settings
+	$upload_max_filesize	= trim(str_replace('M', '', get_cfg_var('upload_max_filesize')));
+	$post_max_size			= trim(str_replace('M', '', get_cfg_var('post_max_size')));
 
 	// check if gzip compression is enabled // @extension_loaded('zlib')
 	if (function_exists('ob_gzhandler') || ini_get('zlib.output_compression'))
@@ -81,6 +82,7 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['php_version']			= ['PHP Version', PHP_VERSION];
 	$sysinfo['memory']				= ['Memory', $engine->binary_multiples($_php_ram * 1024 * 1024, false, true, true)];
 	$sysinfo['upload_max_filesize']	= ['Upload max filesize', $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];
+	$sysinfo['post_max_size']		= ['Post max size', $engine->binary_multiples($post_max_size * 1024 * 1024, false, true, true)];
 	$sysinfo['max_execution_time']	= ['Max execution time', get_cfg_var('max_execution_time') . ' seconds'];
 	$sysinfo['session_save_path']	= ['Session path', get_cfg_var('session.save_path')];
 	$sysinfo['default_charset']		= ['PHP default charset', ini_get('default_charset')];

@@ -84,47 +84,73 @@ function admin_config_appearance(&$engine, &$module)
 		unset($_data[count($_data) - 1]);
 
 		// 3. extensions
-		$ext				= strtolower($ext);
-		$image['favicon']	= ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg'];
-		$image['logo']		= ['gif', 'jpeg', 'jpe', 'jpg', 'png'];
+		$ext					= strtolower($ext);
+
+		$image['favicon']		= ['gif', 'ico' , 'jpeg', 'jpe', 'jpg', 'png', 'svg'];
+		$image['logo']			= ['gif', 'jpeg', 'jpe', 'jpg', 'png'];
+		// calculate resonable filesize: Pixels * Bit Depth
+		$max_size['favicon']	= 64 * 64 * 4;
+		$max_size['logo']		= 1024 * 1024 * 2;
 
 		if (in_array($ext, $image[$file]))
 		{
 			if (is_writable(IMAGE_DIR . '/'))
 			{
-				if ($_FILES[$file]['size'] > (1024 * 1024 * 2))
+				if ($_FILES[$file]['size'] > ($max_size[$file]))
 				{
 					$error = $engine->_t('UploadMaxSizeReached');
 				}
 
-				// remove old image from FS, extension of new file may differ
-				$yeah['favicon']	= $engine->db->site_favicon;
-				$yeah['logo']		= $engine->db->site_logo;
-
-				if ($yeah[$file])
-				{
-					$remove_file($file);
-				}
-
-				$result_name	= $file . '.' . $ext;
+				$size			= [0, 0];
+				$size			= @getimagesize($_FILES[$file]['tmp_name']);
 
 				if ($file == 'logo')
 				{
-					$size			= [0, 0];
-					$size			= @getimagesize($_FILES[$file]['tmp_name']);
-
 					$config['logo_height']			= (int) $size[1];
 					$config['logo_width']			= (int) $size[0];
 				}
+				else if ($file == 'favicon'
+					&& ($size[0] > 64 || $size[1] > 64))
+				{
+					#$error = $engine->_t('UploadMaxSizeReached');
+					$error = 'Favicon is bigger than 64 × 64px. <code>' . (int) $size[0] . ' × ' . (int) $size[1] .'px</code>';
+				}
 
-				move_uploaded_file($_FILES[$file]['tmp_name'], Ut::join_path(IMAGE_DIR, $result_name));
-				chmod(Ut::join_path(IMAGE_DIR, $result_name), 0644);
+				if (!$error)
+				{
+					// remove old image from FS, extension of new file may differ
+					$yeah['favicon']	= $engine->db->site_favicon;
+					$yeah['logo']		= $engine->db->site_logo;
 
-				$config['site_' . $file]		= $result_name;
+					if ($yeah[$file])
+					{
+						$remove_file($file);
+					}
 
-				$engine->config->_set($config);
+					$result_name	= $file . '.' . $ext;
 
-				$engine->set_message($engine->_t('UploadDone'), 'success');
+					if ($file == 'logo')
+					{
+						$size			= [0, 0];
+						$size			= @getimagesize($_FILES[$file]['tmp_name']);
+
+						$config['logo_height']			= (int) $size[1];
+						$config['logo_width']			= (int) $size[0];
+					}
+
+					move_uploaded_file($_FILES[$file]['tmp_name'], Ut::join_path(IMAGE_DIR, $result_name));
+					chmod(Ut::join_path(IMAGE_DIR, $result_name), 0644);
+
+					$config['site_' . $file]		= $result_name;
+
+					$engine->config->_set($config);
+
+					$engine->set_message($engine->_t('UploadDone'), 'success');
+				}
+				else
+				{
+					$engine->set_message($error, 'error');
+				}
 			}
 		}
 		else
