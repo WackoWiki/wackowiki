@@ -390,7 +390,7 @@ $ap_translation = [
 									'same when backing up only table structure without saving the data. '.
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br />' .
-									'Backup package files stored in the "(date)YYYYMMDD_(time)HHMMSS" named sub-directory of <code>files/backup</code> directory.<br />' .
+									'Backup package files stored in the <code>%1</code> named sub-directory of <code>files/backup</code> directory.<br />' .
 									'To download it use FTP (maintain the directory structure and file names when copying).<br />' .
 									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',

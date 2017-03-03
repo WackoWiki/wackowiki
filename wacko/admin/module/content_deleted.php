@@ -103,7 +103,7 @@ function admin_content_deleted(&$engine, &$module)
 	}
 	else
 	{
-		echo $engine->_t('NoRecentlyDeleted');
+		echo '<br /><p>' . $engine->_t('NoRecentlyDeleted') . '</p>';
 	}
 }
 

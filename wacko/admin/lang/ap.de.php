@@ -390,7 +390,7 @@ $ap_translation = [
 									'auch wenn nur die Tabellenstruktur gesichert wird, ohne die Daten zu speichern. '.
 									'Um eine vollständige Konvertierung der Tabellen in das Backup-Format vorzunehmen, muss eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em> gemacht werden.',
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br />' .
-									'Die Sicherungspaketdateien wurden im "(date)YYYYMMDD_(time)HHMMSS" benannten Unterverzeichnis unter <code>files/backup</code> abgelegt.<br />' .
+									'Die Sicherungspaketdateien wurden im <code>%1</code> benannten Unterverzeichnis unter <code>files/backup</code> abgelegt.<br />' .
 									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br />' .
 									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="?mode=db_restore">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',

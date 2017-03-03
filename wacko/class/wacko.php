@@ -990,7 +990,7 @@ class Wacko
 	* @param int $page_id
 	* @param int $revision_id
 	* @param int $cache If LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
-	* @param int $metadataonly If LOAD_ALL loads all page fields including page body, if LOAD_META - only pages_meta fields.
+	* @param int $metadataonly If LOAD_ALL loads all page fields including page body, if LOAD_META - only page_meta fields.
 	* @param boolean $deleted
 	*
 	* @return array Loaded page

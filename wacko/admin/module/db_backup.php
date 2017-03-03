@@ -138,7 +138,7 @@ function admin_db_backup(&$engine, &$module)
 		{
 			// check file existance
 			clearstatcache();
-			$filename = $pack.BACKUP_FILE_STRUCTURE;
+			$filename = $pack . BACKUP_FILE_STRUCTURE;
 
 			if (file_exists($filename) === true)
 			{
@@ -157,7 +157,7 @@ function admin_db_backup(&$engine, &$module)
 
 		// save backup log
 		clearstatcache();
-		$filename = $pack.BACKUP_FILE_LOG;
+		$filename = $pack . BACKUP_FILE_LOG;
 
 		if (file_exists($filename) === true)
 		{
@@ -189,7 +189,7 @@ function admin_db_backup(&$engine, &$module)
 
 		$engine->log(1, Ut::perc_replace($engine->_t('LogSavedBackup', SYSTEM_LANG), trim($pack, '/')));
 
-		$message = '<p>' . $engine->_t('BackupCompleted') . '</p>';
+		$message = '<p>' . Ut::perc_replace($engine->_t('BackupCompleted'), $pack) . '</p>';
 
 		$engine->show_message($message, 'success');
 	}
