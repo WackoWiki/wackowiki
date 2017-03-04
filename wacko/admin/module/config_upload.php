@@ -57,6 +57,10 @@ function admin_config_upload(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">
 					<br />
@@ -68,7 +72,7 @@ function admin_config_upload(&$engine, &$module)
 					<label for="upload"><strong>Right to the upload files:</strong><br />
 					<small><code>'admins'</code> means that only users belongig to admins group can upload the files. <code>'1'</code> means that uploading is opened to registered users. <code>'0'</code> means that upload disabled</small></label>
 				</td>
-				<td style="width:40%;">
+				<td>
 					<select style="width:200px;" id="upload" name="upload">
 						<option value="admins"<?php echo ((string) $engine->db->upload === 'admins' ? ' selected="selected"' : '');?>>Admins</option>
 						<option value="1"<?php echo ((string) $engine->db->upload === '1' ? ' selected="selected"' : '');?>>registered users</option>

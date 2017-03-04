@@ -46,13 +46,17 @@ function admin_messages(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">System message</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"  style="vertical-align:top;"><label for="system_message"><strong>System message:</strong><br />
 					<small>Your text here</small></label></td>
-				<td  style="width:40%;"><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

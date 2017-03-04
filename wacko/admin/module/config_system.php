@@ -58,13 +58,17 @@ function admin_config_system(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">Debug mode</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="debug_mode"><strong>Debug mode:</strong><br />
 				<small>Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.</small></label></td>
-				<td style="width:40%;">
+				<td>
 					<select style="width:200px;" id="debug_mode" name="debug">
 						<option value="0"<?php echo ((int) $engine->db->debug === 0 ? ' selected="selected"' : '');?>>0: debugging is off</option>
 						<option value="1"<?php echo ((int) $engine->db->debug === 1 ? ' selected="selected"' : '');?>>1: only the total execution time</option>

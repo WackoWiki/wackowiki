@@ -188,12 +188,14 @@ first really BIG template written
 	=]
 	['' pagination '']
 	<table style="width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
-		<tr>
-			[= s _ =
-				<th><a href="[ ' link ' ]">[ ' what ' ][''' arrow sortsArr ''']</a></th>
-			=]
-		</tr>
-
+		<thead>
+			<tr>
+				[= s _ =
+					<th><a href="[ ' link ' ]">[ ' what ' ][''' arrow sortsArr ''']</a></th>
+				=]
+			</tr>
+		</thead>
+		<tbody>
 		[= none _ =
 			<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
 		=]
@@ -210,6 +212,7 @@ first really BIG template written
 				=]
 			</tr>
 		=]
+		</tbody>
 	</table>
 	['' pagination '']
 

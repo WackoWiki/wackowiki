@@ -189,7 +189,7 @@ function admin_db_backup(&$engine, &$module)
 
 		$engine->log(1, Ut::perc_replace($engine->_t('LogSavedBackup', SYSTEM_LANG), trim($pack, '/')));
 
-		$message = '<p>' . Ut::perc_replace($engine->_t('BackupCompleted'), $pack) . '</p>';
+		$message = '<p>' . Ut::perc_replace($engine->_t('BackupCompleted'), '<code>' . $pack . '</code>') . '</p>';
 
 		$engine->show_message($message, 'success');
 	}

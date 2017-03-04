@@ -76,6 +76,10 @@ function admin_config_security(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">Basic parameters</th>
 			</tr>
@@ -84,7 +88,7 @@ function admin_config_security(&$engine, &$module)
 					<label for="allow_registration"><strong>Register online:</strong><br />
 					<small>Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.</small></label>
 				</td>
-				<td style="width:40%;">
+				<td>
 					<input type="checkbox" id="allow_registration" name="allow_registration" value="1"<?php echo ( $engine->db->allow_registration ? ' checked="checked"' : '' );?> />
 				</td>
 			</tr>

@@ -58,6 +58,10 @@ function admin_config_permissions(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">
 					<br />
@@ -69,7 +73,7 @@ function admin_config_permissions(&$engine, &$module)
 					<label for="default_read_acl"><strong>Read rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label>
 				</td>
-				<td style="width:40%;">
+				<td>
 					<textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_read_acl" name="default_read_acl"><?php echo htmlspecialchars($engine->db->default_read_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
 				</td>
 			</tr>

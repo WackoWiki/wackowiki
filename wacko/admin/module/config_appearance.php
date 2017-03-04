@@ -211,6 +211,10 @@ function admin_config_appearance(&$engine, &$module)
 	?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">
 					<br />
@@ -221,7 +225,7 @@ function admin_config_appearance(&$engine, &$module)
 				<td class="label"  style="vertical-align:top;"><label for="logo"><strong>Site Logo:</strong><br />
 					<small>Your logo will appear at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.</small></label>
 				</td>
-				<td style="width:40%;">
+				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_logo)) && $engine->db->site_logo)
 				{?>
 					<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_logo); ?>" alt="" height="<?php echo $engine->db->logo_height; ?>" width="<?php echo $engine->db->logo_width; ?>"><br />

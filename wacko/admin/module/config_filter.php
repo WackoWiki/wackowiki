@@ -64,6 +64,10 @@ function admin_config_filter(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">Word censoring</th>
 			</tr>
@@ -72,7 +76,7 @@ function admin_config_filter(&$engine, &$module)
 					<label for="spam_filter"><strong>SPAM Filter:</strong><br />
 					<small>Enabling SPAM Filter</small></label>
 				</td>
-				<td style="width:40%;">
+				<td>
 					<input type="radio" id="spam_filter_on" name="spam_filter" value="1"<?php echo ( $engine->db->spam_filter == 1 ? ' checked="checked"' : '' );?> /><label for="spam_filter_on"><?php echo $engine->_t('Enabled'); ?></label>
 					<input type="radio" id="spam_filter_off" name="spam_filter" value="0"<?php echo ( $engine->db->spam_filter == 0 ? ' checked="checked"' : '' );?> /><label for="spam_filter_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
