@@ -171,6 +171,14 @@ if ($can_view)
 	{
 		echo '<table class="' . $style . '" >';
 
+		/* echo '<colgroup>
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+		</colgroup>'; */
+
 		foreach ($files as $file)
 		{
 			// use absolute path
@@ -219,7 +227,7 @@ if ($can_view)
 				$link		= '<a href="' . $url . '">' . $link . '</a>';
 			}
 
-			if ($file_ext != 'gif' && $file_ext != 'jpg' && $file_ext != 'png'&& $file_ext != 'svg')
+			if (!in_array($file_ext, ['gif', 'jpg', 'png', 'svg']))
 			{
 				$hits	= $file['hits'] . ' ' . $this->_t('SettingsHits');
 			}

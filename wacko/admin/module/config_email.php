@@ -73,6 +73,10 @@ function admin_config_email(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">Basic parameters</th>
 			</tr>
@@ -81,7 +85,7 @@ function admin_config_email(&$engine, &$module)
 					<label for="enable_email"><strong><?php echo $engine->_t('EnableEmail'); ?>:</strong><br />
 					<small><?php echo $engine->_t('EnableEmailInfo'); ?></small></label>
 				</td>
-				<td style="width:40%;">
+				<td>
 					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked="checked"' : '');?> /><label for="enable_email_on"><?php echo $engine->_t('Enabled'); ?></label>
 					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ($engine->db->enable_email == 0 ? ' checked="checked"' : '');?> /><label for="enable_email_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>

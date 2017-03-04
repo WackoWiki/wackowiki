@@ -68,6 +68,10 @@ function admin_config_pages(&$engine, &$module)
 ?>
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
+			<colgroup>
+				<col span="1" style="width:60%;">
+				<col span="1" style="width:40%;">
+			</colgroup>
 			<tr>
 				<th colspan="2">General Options</th>
 			</tr>
@@ -82,7 +86,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="forum_cluster"><strong>Cluster Forum:</strong><br />
 				<small>Address of the index (main) page of the forum.</small></label></td>
-				<td style="width:40%;"><input type="text" maxlength="255" style="width:200px;" id="forum_cluster" name="forum_cluster" value="<?php echo htmlspecialchars($engine->db->forum_cluster, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" style="width:200px;" id="forum_cluster" name="forum_cluster" value="<?php echo htmlspecialchars($engine->db->forum_cluster, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
