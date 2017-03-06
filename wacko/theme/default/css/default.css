@@ -840,6 +840,9 @@ p.layout-box span {
 	padding: 0;
 	line-height: 25px;
 }
+
+
+*.heading:target,
 .layout-box dd:target,
 .footnote *:target,
 a:target {
