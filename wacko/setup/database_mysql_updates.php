@@ -53,7 +53,7 @@ $alter_file_r5_4_0 = "ALTER TABLE {$pref}upload CHANGE lang upload_lang VARCHAR(
 $alter_file_r5_4_1 = "ALTER TABLE {$pref}file ADD caption TEXT NOT NULL AFTER file_description";
 $alter_file_r5_4_2 = "ALTER TABLE {$pref}file CHANGE upload_id file_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_file_r5_4_3 = "ALTER TABLE {$pref}file CHANGE upload_lang file_lang VARCHAR(2) NOT NULL";
-$alter_file_r5_4_3 = "ALTER TABLE {$pref}file ADD mimetype VARCHAR(255) NOT NULL DEFAULT '' AFTER file_ext";
+$alter_file_r5_4_4 = "ALTER TABLE {$pref}file ADD mimetype VARCHAR(255) NOT NULL DEFAULT '' AFTER file_ext";
 
 $rename_file_r5_4_0 = "RENAME TABLE {$pref}upload TO {$pref}file";
 
