@@ -783,6 +783,7 @@ $wacko_translation = [
 	'FileAdded'					=> 'Added',
 	'FileSize'					=> 'Size',
 	'FileDimension'				=> 'Dimension',
+	'MimeType'					=> 'MIME-típus',
 	'FileName'					=> 'Name',
 	'FileCaption'				=> 'Caption',
 	'FileAttachedTo'			=> 'Attached to',
