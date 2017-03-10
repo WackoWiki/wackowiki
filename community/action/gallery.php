@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
  * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
  *
  * requires PHP Thumb Library <https://github.com/masterexploder/PHPThumb>
- * optional
+ * optional jQuery <https://jquery.com/>
  * optional fancyBox <http://fancyapps.com/fancybox/3/>
  *
  * {{gallery
@@ -19,11 +19,10 @@ if (!defined('IN_WACKO'))
 	[page		= "page_tag"] - call image from another page
 	[global		= 0|1] - call global images
 	[perrow		= <Number of images per rows> (default = 3)]
-	[nodesc		= 1] - hide descriptions
+	[caption	= 1|2] - 1 show file description, 2 show file caption
 	[title		= "Gallery"] - album title
-	[toblank	= "1|new"] - show large images without page (if = "new" in new browser window)
+	[target		= 1|2] - show large images without page (if = 2 in new browser window)
 	[nomark		= 1] - hide external border
-	[group_id	= "text_group_id"] - group ID of the group, for the organization of scrolling
 	[table		= 1] - pictures in table
 
 	[order		= "time|FILENAME|size|size_desc|ext"]
@@ -68,12 +67,6 @@ require_once 'lib/phpthumb/GD.php';
 <script src="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.js"></script>
 <link rel="stylesheet" media="screen" href="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.css"/>
 
-<script>
-	$("[data-fancybox]").fancybox({
-	// Options will go here
-	});
-</script>
-
 <?php
 
 // Loading parameters
@@ -84,14 +77,14 @@ $width			= $this->db->img_max_thumb_width; // default: 150
 
 if (!isset($page))		$page		= '';
 if (!isset($title))		/*$title="Gallery";*/ $nomark = 1;
-if (!isset($toblank))	$toblank	= ''; #$toblank = 'new';
+if (!isset($target))	$target		= '';
 if (!isset($table))		$table		= 1;
-if (!isset($nodesc))	$nodesc		= '';
+if (!isset($caption))	$caption	= 1;
 if (!isset($nomark))	$nomark		= '';
 
 if (!isset($order))		$order		= '';
-if (!isset($global))	$global		= '';
-if (!isset($tag))		$tag		= ''; // FIXME: $tag == $page
+if (!isset($global))	$global		= 0;
+if (!isset($tag))		$tag		= ''; // FIXME: $tag = $page
 if (!isset($owner))		$owner		= '';
 if (!isset($max))		$max		= '';
 
@@ -114,7 +107,7 @@ else
 }
 
 // we using a parameter token here to sort out multiple instances
-$param_token = substr(hash('sha1', $global . $page . $nodesc . $toblank . $owner . $order . $max), 0, 8);
+$param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
 
 							$order_by = "file_name ASC";
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
@@ -143,7 +136,7 @@ if (!$global)
 	}
 
 	$can_view	= $this->has_access('read', $page_id) || $this->is_admin() || $this->is_owner($page_id);
-	$can_delete	= $this->is_admin() || $this->is_owner($page_id);
+	#$can_delete	= $this->is_admin() || $this->is_owner($page_id);
 }
 else
 {
@@ -184,7 +177,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.caption, f.uploaded_dt, u.user_name AS user, f.hits " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
@@ -233,9 +226,15 @@ if ($can_view)
 			$file_height		= ''; // $file['picture_h'];
 			$prefix_global		= '';
 			$tnb_name			= $thumb_prefix . $file['file_id'] . '.' . $file['file_ext'];
-			$linkto				= $file_name;
 
-			$file_description	= $this->format($file['file_description'], 'typografica' );
+			if ($caption == 1)
+			{
+				$file_description	= $this->format($file['file_description'], 'typografica' );
+			}
+			else if ($caption == 2)
+			{
+				$file_description	= $this->format($file['caption'], 'typografica' );
+			}
 
 			if ($this->page['page_lang'] != $file['file_lang'])
 			{
@@ -256,7 +255,7 @@ if ($can_view)
 
 			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '/>';
 
-			$caption = '<br><figcaption>' .
+			$figcaption = '<br><figcaption>' .
 					'<span>' . $file_description . '</span> ' . '<br />' .
 					#$file['user'] . '<br />' .
 					#$file['picture_w'] . 'x' . $file['picture_h'] . '<br />' .
@@ -296,15 +295,7 @@ if ($can_view)
 
 						if (is_object($thumb))
 						{
-							// $thumb->resize(100, 100);
 							$thumb->resize($width, $width);
-
-							// $thumb->resizePercent(50);
-
-							// $thumb->adaptiveResize(175, 175);
-							#$thumb->adaptiveResize($width, $width);
-
-							// $thumb->cropFromCenter(200, 100);
 
 							// requires correct write permissions!
 							$thumb->save($thumb_name);
@@ -332,15 +323,15 @@ if ($can_view)
 
 			echo '<figure class="zoom">';
 
-			if (!$toblank)
+			if (!$target)
 			{
 				echo '<a href="' . $this->href('', $this->tag, 'file_id=' . $file['file_id'] . '&amp;token=' . $param_token . '#' . $param_token) . '">' . $img . "</a>\n";
 			}
 			else
 			{
-				if ($toblank == 'new')
+				if ($target == 2)
 				{
-					echo '<a href="' . $url . '" data-fancybox="group" data-caption="' . $file['file_description'] . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
+					echo '<a href="' . $url . '" data-fancybox="'. $param_token .'" data-caption="' . $file_description . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
 				}
 				else
 				{
@@ -348,9 +339,9 @@ if ($can_view)
 				}
 			}
 
-			if (!$nodesc)
+			if ($caption)
 			{
-				echo $caption;
+				echo $figcaption;
 			}
 
 			echo "</figure>\n";
@@ -417,11 +408,10 @@ if ($can_view)
 			if ($file['picture_w'] || $file['file_ext'] == 'svg')
 			{
 				echo $this->link($path . $file['file_name']);
-
 			}
 
 			echo '<br /><br />';
-			echo '<a href="' . $this->href('', $this->tag, '') . '">&lt; Back</a>';
+			echo '<a href="' . $this->href('', $this->tag, '') . '">&lt;' . $this->_t('Back') . '</a>';
 		}
 
 		echo "</div>\n";
