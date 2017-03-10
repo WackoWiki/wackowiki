@@ -5,11 +5,14 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/*!! gallery action :
-
-// requires PHP Thumb Library <https://github.com/masterexploder/PHPThumb>
-// optional fancyBox <http://fancyapps.com/fancybox/>
-{{gallery
+/* gallery action :
+ * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
+ *
+ * requires PHP Thumb Library <https://github.com/masterexploder/PHPThumb>
+ * optional
+ * optional fancyBox <http://fancyapps.com/fancybox/3/>
+ *
+ * {{gallery
 
 	Shows image gallery
 
@@ -43,12 +46,12 @@ TODO: config settings
 $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
-	"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
-	"FROM " . $this->db->table_prefix . "file f " .
-		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-	"WHERE f.file_id ='" . (int) $file_id . "' " .
-	"LIMIT 1", true);
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
+		"FROM " . $this->db->table_prefix . "file f " .
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+		"WHERE f.file_id ='" . (int) $file_id . "' " .
+		"LIMIT 1", true);
 
 	return $file;
 };
@@ -60,39 +63,15 @@ require_once 'lib/phpthumb/GD.php';
 ?>
 
 <!-- Add jQuery library -->
-<script src="<?php echo $this->db->base_url;?>js/fancybox/jquery-1.9.0.min.js"></script>
-<!-- Add mousewheel plugin (this is optional) -->
-<script src="<?php echo $this->db->base_url;?>js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+<script src="<?php echo $this->db->base_url;?>js/jquery-3.1.1.min.js"></script>
 <!-- Add fancyBox -->
-<script src="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.pack.js"></script>
-<link rel="stylesheet" href="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.css?v=2.1.4" media="screen" />
-
-<!-- Add Button helper (this is optional) -->
-<link rel="stylesheet" href="<?php echo $this->db->base_url;?>js/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
-<script src="<?php echo $this->db->base_url;?>js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
-
-<!-- Add Thumbnail helper (this is optional) -->
-<link rel="stylesheet" href="<?php echo $this->db->base_url;?>js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
-<script src="<?php echo $this->db->base_url;?>js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script src="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" media="screen" href="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.css"/>
 
 <script>
-
-	$(document).ready(function() {
-		$(".fancybox-thumb").fancybox({
-			prevEffect	: 'none',
-			nextEffect	: 'none',
-			helpers	: {
-				title	: {
-					type: 'inside'
-				},
-				thumbs	: {
-					width	: 50,
-					height	: 50
-				}
-			}
-		});
+	$("[data-fancybox]").fancybox({
+	// Options will go here
 	});
-
 </script>
 
 <?php
@@ -109,8 +88,6 @@ if (!isset($toblank))	$toblank	= ''; #$toblank = 'new';
 if (!isset($table))		$table		= 1;
 if (!isset($nodesc))	$nodesc		= '';
 if (!isset($nomark))	$nomark		= '';
-
-if (!isset($group_id))	$group_id	= 'fancybox-thumb';
 
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= '';
@@ -137,7 +114,7 @@ else
 }
 
 // we using a parameter token here to sort out multiple instances
-$param_token = substr(hash('md5', $global . $page . $nodesc . $toblank . $owner . $order . $max), 0, 8);
+$param_token = substr(hash('sha1', $global . $page . $nodesc . $toblank . $owner . $order . $max), 0, 8);
 
 							$order_by = "file_name ASC";
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
@@ -191,7 +168,7 @@ if ($can_view)
 		return;
 	}
 
-	// TODO: we want only image files -> AND f.picture_w <> '0'
+	// load only image files -> AND f.picture_w <> '0'
 	$count = $this->db->load_all(
 		"SELECT f.file_id " .
 		"FROM " . $this->db->table_prefix . "file f " .
@@ -269,7 +246,7 @@ if ($can_view)
 			if ($file['page_id'] == '0')
 			{
 				$tnb_path		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
-				$url			= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+				$url			= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 			}
 			else
 			{
@@ -286,64 +263,7 @@ if ($can_view)
 					#$file['hits'] . '<br />' .  // we do exclude images from hit cout atm -> see file handler
 				"</figcaption>\n";
 
-			if (file_exists($tnb_path))
-			{
-				if ($table)
-				{
-					if ($cur == 0)
-					{
-						echo '<tr>';
-					}
-
-					echo '<td style="text-align:center;">';
-				}
-				else
-				{
-					echo $img_spacer;
-				}
-
-				echo '<figure class="zoom">';
-
-				if (!$toblank)
-				{
-					echo '<a href="' . $this->href('', $this->tag, 'file_id=' . $file['file_id'] . '&amp;token=' . $param_token . '#' . $param_token) . '">' . $img . "</a>\n";
-				}
-				else
-				{
-					if ($toblank == 'new')
-					{
-						echo '<a href="' . $url . '" class="fancybox-thumb" '.($group_id ? 'rel="' . $group_id . '"' : '') . ' '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
-					}
-					else
-					{
-						echo '<a href="' . $url . '">' . $img . "</a>\n";
-					}
-				}
-
-				if (!$nodesc)
-				{
-					echo $caption;
-				}
-
-				echo "</figure>\n";
-
-				if ($table)
-				{
-					echo "</td>\n";
-				}
-
-				$cur = ($cur + 1) % $images_row;
-
-				if ($cur == 0)
-				{
-					echo ($table ? '</tr>' : '<br />');
-				}
-				else
-				{
-					echo $img_spacer;
-				}
-			}
-			else
+			if (!file_exists($tnb_path))
 			{
 				if ($file['page_id'] == 0)
 				{
@@ -358,42 +278,12 @@ if ($can_view)
 
 				if (file_exists($src_image))
 				{
-					// create tumbnail
-					if (!file_exists($thumb_name))
+					// check for missing source image, we can't trust db record
+					if (!file_exists($thumb_name) && file_exists($src_image))
 					{
+						// create tumbnail
 						@set_time_limit(0);
 						@ignore_user_abort(true);
-
-						## thumbnail library will do all of this math, but in case you're stuck ...
-
-						// Original values obtained from the top image
-						// can come from getimagesize(), imagesx()/imagesy(), or similar
-						/*
-						$source_width		= 66;
-						$source_height		= 100;
-						$thumbnail_width	= 50;
-						$thumbnail_height	= 100;
-
-						// Compute aspect ratios
-						$source_ar			= $source_width / $source_height;
-						$thumbnail_ar		= $thumbnail_width / $thumbnail_height;
-
-						// Compute the output width and height based on the
-						// comparison of aspect ratios
-						if ($source_ar > $thumbnail_ar)
-						{
-							// Use the thumbnail width
-							$output_width	= $thumbnail_width;
-							$output_height	= round($original_height
-												/ $original_width * $thumbnail_width);
-						}
-						else
-						{
-							// Use the thumbnail height
-							$output_height	= $thumbnail_height;
-							$output_width	= round($original_width
-												/ $original_height * $thumbnail_height);
-						} */
 
 						try
 						{
@@ -404,7 +294,6 @@ if ($can_view)
 							// handle error here however you'd like
 						}
 
-						// TODO: trusting blindly the db record can cause -> Fatal error: Call to a member function resize() on a non-object in /wacko/action/gallery.php
 						if (is_object($thumb))
 						{
 							// $thumb->resize(100, 100);
@@ -417,79 +306,69 @@ if ($can_view)
 
 							// $thumb->cropFromCenter(200, 100);
 
-							// $thumb->save($thumb_dir.$file); // requires correct write permissions!
+							// requires correct write permissions!
 							$thumb->save($thumb_name);
 						}
 					}
-
-					// a rather less good idea, for tracking pherhaps with an additional field like 'tumbnail' in the file table, remember we can have many derived versions from the original image
-					/* $this->db->sql_query(
-						"INSERT INTO " . $this->db->table_prefix . "file SET " .
-						"user_id			= '" . (int) $file['user_id'] . "', " .
-						"page_id			= '" . (int) $file_page['page_id'] . "', " .
-						"file_name			= " . $this->db->q($thumb_prefix . $file_name) . ", " .
-						"file_description	= " . $this->db->q($file['file_description']) . ", " .
-						"uploaded_dt		= " . $this->db->q(date("Y-m-d H:i:s")) . ", " .
-						"file_size			= '" . (int)sizeof($newfilename) . "', " .
-						"picture_w			= '" . (int) $diw."', " .
-						"picture_h			= '" . (int) $height."', " .
-						"file_ext			= " . $this->db->q($file_page['file_ext']) . " "); */
-
-					if ($table)
-					{
-						if ($cur == 0)
-						{
-							echo '<tr>';
-						}
-
-						echo '<td style="text-align:center;">';
-					}
-					else
-					{
-						echo $img_spacer;
-					}
-
-					echo '<figure class="zoom">';
-
-					if (!$toblank)
-					{
-						echo '<a href="' . $this->href('', $this->tag, 'file_id=' . $file['file_id'] . '&amp;token=' . $param_token) . '">' . $img . "</a>\n";
-					}
-					else
-					{
-						if ($toblank == 'new')
-						{
-							echo '<a href="' . $url . '" class="fancybox-thumb" '.($group_id ? 'rel="lightbox[' . $group_id . ']"' : 'rel="lightbox"') . ' '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
-						}
-						else
-						{
-							echo '<a href="' . $url . '">' . $img . "</a>\n";
-						}
-
-						if (!$nodesc)
-						{
-							echo $caption;
-						}
-
-						echo "</figure>\n";
-
-						if ($table)
-						{
-							echo("</td>\n");
-						}
-
-						$cur = ($cur + 1) % $images_row;
-
-						if ($cur == 0)
-						{
-							echo ($table ? "</tr>\n" : '<br />');
-						}
-						else
-						{
-							echo $img_spacer;
-						}
-					}
 				}
+
+				// IDEA: adding an additional field like 'tumbnail' in the 'file' table for tracking,
+				// there might be many derived tumbs from the original image
+			}
+
+			if ($table)
+			{
+				if ($cur == 0)
+				{
+					echo '<tr>';
+				}
+
+				echo '<td style="text-align:center;">';
+			}
+			else
+			{
+				echo $img_spacer;
+			}
+
+			echo '<figure class="zoom">';
+
+			if (!$toblank)
+			{
+				echo '<a href="' . $this->href('', $this->tag, 'file_id=' . $file['file_id'] . '&amp;token=' . $param_token . '#' . $param_token) . '">' . $img . "</a>\n";
+			}
+			else
+			{
+				if ($toblank == 'new')
+				{
+					echo '<a href="' . $url . '" data-fancybox="group" data-caption="' . $file['file_description'] . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
+				}
+				else
+				{
+					echo '<a href="' . $url . '">' . $img . "</a>\n";
+				}
+			}
+
+			if (!$nodesc)
+			{
+				echo $caption;
+			}
+
+			echo "</figure>\n";
+
+			if ($table)
+			{
+				echo "</td>\n";
+			}
+
+			$cur = ($cur + 1) % $images_row;
+
+			if ($cur == 0)
+			{
+				echo ($table ? '</tr>' : '<br />');
+			}
+			else
+			{
+				echo $img_spacer;
 			}
 		}
 
@@ -507,7 +386,7 @@ if ($can_view)
 		// We choose one image
 		$file = $get_file((int) $_GET['file_id']);
 
-	/* 	<figure class="zoom">
+		/* 	<figure class="zoom">
 			<a class="inline" href="#gallery:zoom_123">
 				<img alt="File description" src="http://images.123.jpg">
 			</a>
