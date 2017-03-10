@@ -840,6 +840,7 @@ $wacko_translation = [
 	'Prev'						=> 'Προηγούμενο',
 	'NextAcr'					=> 'Next',
 	'PrevAcr'					=> 'Prev',
+	'Back'						=> 'Πίσω',
 
 	// filter
 	'Any'						=> 'Any',

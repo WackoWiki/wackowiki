@@ -1221,6 +1221,16 @@ th.form_left {
 	white-space: nowrap;
 }
 
+/* gallery action */
+.gallery figure {
+	display: inline-table;
+}
+
+.gallery figcaption {
+	display: table-caption;
+	caption-side: bottom;
+}
+
 /*Handlers --------------------------------------------------*/
 
 

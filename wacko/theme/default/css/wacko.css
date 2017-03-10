@@ -142,7 +142,7 @@ del.diff {
 	background: #FFFFFF;
 	border: 1px #888888 solid;
 	/* border-radius: 5px; */
-	font-family: "Courier New";
+	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 10pt;
 	margin: 1em 1.75em;
 	overflow: auto;
