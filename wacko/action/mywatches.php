@@ -69,7 +69,7 @@ if ($user_id = $this->get_user_id())
 							echo "<br />\n";
 						}
 
-						echo "<strong>$first_char</strong><br />\n";
+						echo '<strong>' . $first_char . "</strong><br />\n";
 						$current_char = $first_char;
 					}
 
@@ -125,7 +125,7 @@ if ($user_id = $this->get_user_id())
 							echo "<br />\n";
 						}
 
-						echo "<strong>$first_char</strong><br />\n";
+						echo '<strong>' . $first_char . "</strong><br />\n";
 						$current_char = $first_char;
 					}
 
