@@ -336,7 +336,7 @@ form input.submitinput {
 
 .sqllog {
 	position: relative;
-	//display: inline-block;
+	/* display: inline-block; */
 }
 
 .sqllog .backtrace {
