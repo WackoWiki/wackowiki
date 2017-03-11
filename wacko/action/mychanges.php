@@ -20,26 +20,26 @@ if (($user_id = $this->get_user_id()))
 	if (@$_GET['byname'])
 	{
 		echo $this->_t('MyChangesTitle2') .
-		' [<a href="' . $this->href('', '', $by('date')) . '">' . 
+		' [<a href="' . $this->href('', '', $by('date')) . '">' .
 		$this->_t('OrderChange') . "</a>].</strong><br /><br />\n";
 
 		$count	= $this->db->load_single(
-				"SELECT COUNT(tag) AS n " .
-				"FROM {$prefix}page " .
-				"WHERE user_id = '" . (int) $user_id . "' " .
+			"SELECT COUNT(tag) AS n " .
+			"FROM {$prefix}page " .
+			"WHERE user_id = '" . (int) $user_id . "' " .
 				"AND deleted <> '1' " .
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('name'));
 
 		if (($pages = $this->db->load_all(
-				"SELECT tag, title, modified " .
-				"FROM {$prefix}page " .
-				"WHERE user_id = '" . (int) $user_id . "' " .
+			"SELECT tag, title, modified " .
+			"FROM {$prefix}page " .
+			"WHERE user_id = '" . (int) $user_id . "' " .
 				"AND deleted <> '1' " .
 				"AND comment_on_id = '0' " .
-				"ORDER BY tag ASC, modified DESC " .
-				$pagination['limit'], true)))
+			"ORDER BY tag ASC, modified DESC " .
+			$pagination['limit'], true)))
 		{
 			echo '<ul class="ul_list">' . "\n";
 
@@ -60,7 +60,7 @@ if (($user_id = $this->get_user_id()))
 						echo "</ul>\n<br /></li>\n";
 					}
 
-					echo "<li><strong>$first_char</strong><ul>\n";
+					echo '<li><strong>' . $first_char . "</strong><ul>\n";
 					$cur_char = $first_char;
 				}
 
@@ -86,22 +86,22 @@ if (($user_id = $this->get_user_id()))
 				"</ul>\n";
 
 		$count	= $this->db->load_single(
-				"SELECT COUNT(tag) AS n " .
-				"FROM {$prefix}page " .
-				"WHERE user_id = '" . (int) $user_id . "' " .
+			"SELECT COUNT(tag) AS n " .
+			"FROM {$prefix}page " .
+			"WHERE user_id = '" . (int) $user_id . "' " .
 				"AND deleted <> '1' " .
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
 		if (($pages = $this->db->load_all(
-				"SELECT tag, title, modified, edit_note " .
-				"FROM {$prefix}page " .
-				"WHERE user_id = '" . (int) $user_id . "' " .
+			"SELECT tag, title, modified, edit_note " .
+			"FROM {$prefix}page " .
+			"WHERE user_id = '" . (int) $user_id . "' " .
 				"AND deleted <> '1' " .
 				"AND comment_on_id = '0' " .
-				"ORDER BY modified DESC, tag ASC " .
-				$pagination['limit'], true)))
+			"ORDER BY modified DESC, tag ASC " .
+			$pagination['limit'], true)))
 		{
 			echo '<ul class="ul_list">' . "\n";
 
@@ -117,7 +117,7 @@ if (($user_id = $this->get_user_id()))
 						echo "</ul>\n<br /></li>\n";
 					}
 
-					echo "<li><strong>$day:</strong><ul>\n";
+					echo '<li><strong>' . $day . ":</strong><ul>\n";
 					$cur_day = $day;
 				}
 
@@ -127,7 +127,7 @@ if (($user_id = $this->get_user_id()))
 				}
 
 				// print entry
-				echo "<li>" . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')) .
+				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')) .
 					" &mdash; " . $this->compose_link_to_page($page['tag'], '', '', 0) . $edit_note . "</li>\n";
 			}
 
