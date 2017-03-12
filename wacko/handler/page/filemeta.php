@@ -15,7 +15,7 @@ if (!defined('IN_WACKO'))
 $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
-	"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
+	"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.supertag, p.title " .
 	"FROM " . $this->db->table_prefix . "file f " .
 		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
@@ -238,6 +238,10 @@ $this->ensure_page(true); // TODO: upload for forums?
 						</tr>
 <?php
 					} ?>
+					<tr>
+						<th><?php echo $this->_t('MimeType'); ?>:</th>
+						<td><?php echo '' . $file['mime_type'] . ''; ?></td>
+					</tr>
 					<tr>
 						<th><?php echo $this->_t('FileDesc'); ?>:</th>
 						<td><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></td>
