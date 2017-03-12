@@ -38,7 +38,7 @@ TODO: config settings
 - generated thumbnails full-blown 32-bit PNGs (or at least 24-bit) resulting in a file size often larger than the original image
 - remove thumbs with file or page
 - load the JS with the header (theme/_common/_header.php), see flash action (to avoid multiple loads)
-- fall back if no JS or Image manipulation library is available
+- fall back if no JS or Image manipulation library is available or disabled
 
 */
 
@@ -196,10 +196,8 @@ if ($can_view)
 	// Making an gallery
 	$cur = 0;
 
-	$show_pagination = $this->show_pagination(isset($pagination['text']) ? $pagination['text'] : '');
-
 	// pagination
-	echo $show_pagination;
+	$this->print_pagination($pagination);
 
 	if (!$nomark)
 	{
@@ -423,7 +421,7 @@ if ($can_view)
 	}
 
 	// pagination
-	echo $show_pagination;
+	$this->print_pagination($pagination);
 }
 else
 {

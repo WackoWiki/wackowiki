@@ -179,6 +179,8 @@ class Wacko
 		return WACKO_VERSION;
 	}
 
+	// FILE FUNCTIONS
+
 	/**
 	* Check if file with filename exists. Check only DB entry,
 	* not file in FS
@@ -223,14 +225,14 @@ class Wacko
 		return $file;
 	}
 
-	static function get_extension($file_name)
+	static function get_file_extension($file_name)
 	{
 		if (strpos($file_name, '.') === false)
 		{
 			return '';
 		}
 
-		$filename = explode('.', $file_name);
+		$file_name = explode('.', $file_name);
 		return array_pop($file_name);
 	}
 
@@ -7202,6 +7204,7 @@ class Wacko
 			$make_link = function ($page, $body = '', $attrs = '') use ($method, $tag, $name, $params, $anchor)
 			{
 				$params[$name] = $page;
+
 				return '<a href="' . $this->href($method, $tag, $params, false, $anchor) . '"' . $attrs . '>' .
 						($body ? $body : $page) . '</a>';
 			};
@@ -7274,16 +7277,6 @@ class Wacko
 	}
 
 	// TODO: option for _comments handler, forum action -> CSS small
-	function show_pagination($pagination = '')
-	{
-		if ($pagination)
-		{
-			$pagination = '<nav class="pagination">' . $pagination . "</nav>\n";
-		}
-
-		return $pagination;
-	}
-
 	function print_pagination($pagination)
 	{
 		if (@$pagination['text'])

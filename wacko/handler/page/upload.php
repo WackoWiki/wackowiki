@@ -62,11 +62,41 @@ if (isset($_POST['upload']) & $can_upload)
 		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name']))
 		{
 			// 1. check out $data
+			#$ext = pathinfo($filename, PATHINFO_EXTENSION);
+			$src		= $_FILES['file']['tmp_name'];
+			$mime_type = mime_content_type($src);
+
 			$_data	= explode('.', $_FILES['file']['name']);
 			$ext	= $_data[count($_data) - 1];
 			unset($_data[count($_data) - 1]);
 
+			#php5", ".pht", ".phtml", ".shtml", ".asa", ".cer", ".asax", ".swf", or ".xap"
+
 			// 3. extensions
+			$upload_banned_exts = [
+				// HTML may contain cookie-stealing JavaScript and web bugs
+				'html', 'htm', 'js', 'jsb', 'mhtml', 'mht', 'xhtml', 'xht',
+				// PHP scripts may execute arbitrary code on the server
+				'php', 'phtml', 'php3', 'php4', 'php5', 'phps',
+				// Other types that may be interpreted by some servers
+				'shtml', 'jhtml', 'pl', 'py', 'cgi',
+				// May contain harmful executables for Windows victims
+				'exe', 'scr', 'dll', 'msi', 'vbs', 'bat', 'com', 'pif', 'cmd', 'vxd', 'cpl'
+			];
+
+			$upload_banned_mime = [
+				// HTML may contain cookie-stealing JavaScript and web bugs
+				'text/html', 'text/javascript', 'text/x-javascript', 'application/x-shellscript',
+				// PHP scripts may execute arbitrary code on the server
+				'application/x-php', 'text/x-php',
+				// Other types that may be interpreted by some servers
+				'text/x-python', 'text/x-perl', 'text/x-bash', 'text/x-sh', 'text/x-csh',
+				// Client-side hazards on Internet Explorer
+				'text/scriptlet', 'application/x-msdownload',
+				// Windows metafile, client-side vulnerability on some systems
+				'application/x-msmetafile',
+			];
+
 			$ext	= strtolower($ext);
 			$banned	= explode('|', $this->db->upload_banned_exts);
 
@@ -225,6 +255,7 @@ if (isset($_POST['upload']) & $can_upload)
 									"picture_w			= '" . (int) $size[0] . "'," .
 									"picture_h			= '" . (int) $size[1] . "'," .
 									"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
+									"mime_type			= " . $this->db->q($mime_type) . "," .
 									"uploaded_dt		= " . $this->db->q($uploaded_dt) . " " .
 								"WHERE " .
 									(!$is_global
@@ -248,6 +279,7 @@ if (isset($_POST['upload']) & $can_upload)
 									"picture_w			= '" . (int) $size[0] . "'," .
 									"picture_h			= '" . (int) $size[1] . "'," .
 									"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
+									"mime_type			= " . $this->db->q($mime_type) . "," .
 									"uploaded_dt		= " . $this->db->q($uploaded_dt) . " ");
 
 							// update user uploads count

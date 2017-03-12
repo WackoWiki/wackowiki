@@ -1226,6 +1226,10 @@ th.form_left {
 	display: inline-table;
 }
 
+.gallery figure:hover {
+	background-color: #CCFFCC;
+}
+
 .gallery figcaption {
 	display: table-caption;
 	caption-side: bottom;
@@ -2308,11 +2312,6 @@ table.forum td {
 							44px;
 	height:	22px;
 	width:	66px;
-}
-
-/* gallery action */
-.gallery figure:hover {
-	background-color: #CCFFCC;
 }
 
 input.verify { display:none; }

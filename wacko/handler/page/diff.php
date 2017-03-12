@@ -11,8 +11,8 @@ if (!defined('IN_WACKO'))
 
 /*
  * DiffMode
- * 	0	Full diff
- * 	1	Simple diff
+ *	0	Full diff
+ *	1	Simple diff
  *	2	Source
  *	3	Side by side
  *	4	Inline
@@ -20,12 +20,13 @@ if (!defined('IN_WACKO'))
  *	6	Context
  *
  * default setting
- * 	page/revisions.xml	=> 2
- * 	notify_watcher()	=> 2
+ *	page/revisions.xml	=> 2
+ *	notify_watcher()	=> 2
  *
  * TODO: make diff modes acceccible via config
  * - to change mode for cases above
  * - to offer only a subset
+ * add navigation to move to next of previous diff
 */
 
 if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
