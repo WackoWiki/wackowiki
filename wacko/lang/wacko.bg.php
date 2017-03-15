@@ -298,13 +298,16 @@ $wacko_translation = [
 	'CommentAdded'				=> 'Comment added.',
 	'YouAreNowTheOwner'			=> 'Сега вие сте собственик на тази страница.'  ,
 
-	'DiffMode0'					=> 'Full diff',
-	'DiffMode1'				=> 'Просто сравнение',
-	'DiffMode2'				=> 'Source',
-	'DiffMode3'					=> 'Side by side',
-	'DiffMode4'					=> 'Inline',
-	'DiffMode5'					=> 'Unified',
-	'DiffMode6'					=> 'Context',
+	'DiffMode'		=> [
+		'0'		=> 'Full diff',
+		'1'		=> 'Просто сравнение',
+		'2'		=> 'Source',
+		'3'		=> 'Side by side',
+		'4'		=> 'Inline',
+		'5'		=> 'Unified',
+		'6'		=> 'Context',
+	],
+
 	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> 'Сравни',
 	'CancelDifferencesButton'	=> 'Върни / Отмени',

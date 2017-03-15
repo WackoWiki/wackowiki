@@ -57,6 +57,7 @@ $config_db['default_rename_redirect']		= $config['default_rename_redirect'];
 $config_db['default_typografica']			= $config['default_typografica'];
 $config_db['default_upload_acl']			= $config['default_upload_acl'];
 $config_db['default_write_acl']				= $config['default_write_acl'];
+$config_db['diff_modes']					= $config['diff_modes'];
 $config_db['disable_autosubscribe']			= $config['disable_autosubscribe'];
 $config_db['disable_bracketslinks']			= $config['disable_bracketslinks'];
 $config_db['disable_formatters']			= $config['disable_formatters'];

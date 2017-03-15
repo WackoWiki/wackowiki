@@ -48,17 +48,16 @@ if ($this->has_access('read'))
 		echo "<p>\n";
 		echo '<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '" />';
 
-		$default_mode = 0; // TODO: configurable per user
+		$default_mode	= 0; // TODO: configurable per user
+		$diff_modes		= $this->_t('DiffMode');
+		$diff_mode_list	= explode(',', $this->db->diff_modes);
 
-		for ($mode = 0; ($text = $this->_t($id = 'DiffMode' . $mode)) !== null; ++$mode)
+		foreach($diff_mode_list as $mode)
 		{
-			if ($text)
-			{
-				echo $place_holder .
-							'<input type="radio" id="' . $id . '" name="diffmode" value="' . $mode . '"' .
-							($mode == $default_mode? ' checked="checked"' : '') . ' />' .
-							'<label for="' . $id . '">' . $text . '</label>';
-			}
+			echo $place_holder .
+				'<input type="radio" id="' . 'diff_mode_' . $mode . '" name="diffmode" value="' . $mode . '"' .
+				($mode == $default_mode? ' checked="checked"' : '') . ' />' .
+				'<label for="' . 'diff_mode_' . $mode . '">' . $diff_modes[$mode] . '</label>';
 		}
 
 		echo $place_holder.
@@ -166,8 +165,9 @@ if ($this->has_access('read'))
 			echo  '<a href="' . $this->href('revisions', '', 'show=all') . '">' . $this->_t('RevisionsShowAll') . "</a><br /><br />\n";
 		}
 
-		echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' .
-					$this->_t('CancelDifferencesButton') . '" /></a>' . "\n";
+		echo '<a href="' . $this->href() . '" style="text-decoration: none;">' .
+				'<input type="button" value="' . $this->_t('CancelDifferencesButton') . '" />' .
+			 '</a>' . "\n";
 
 		echo $this->form_close() . "\n";
 	}
