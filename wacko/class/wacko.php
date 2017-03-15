@@ -1959,7 +1959,7 @@ class Wacko
 					if ($this->forum)
 					{
 						$acl['write']	= $user_name;
-						$acl['comment']	= '*';
+						$acl['comment']	= $this->db->default_comment_acl;
 						$acl['create']	= '';
 						$acl['upload']	= '';
 					}
