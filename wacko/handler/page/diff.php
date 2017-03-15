@@ -134,14 +134,14 @@ if ($page_a && $page_b
 
 	$params = 'a=' . $a . '&amp;b=' . $b . '&amp;diffmode=';
 
-	for ($mode = 0; ($text = $this->_t('DiffMode' . $mode)) !== null; ++$mode)
+	$diff_modes		= $this->_t('DiffMode');
+	$diff_mode_list	= explode(',', $this->db->diff_modes);
+
+	foreach($diff_mode_list as $mode)
 	{
-		if ($text)
-		{
-			echo ($diffmode != $mode
-				?	'<li><a href="' . $this->href('diff', '', $params . $mode) . '">' . $text . '</a>'
-				:	'<li class="active">' . $text) . '</li>';
-		}
+		echo ($diffmode != $mode
+			?	'<li><a href="' . $this->href('diff', '', $params . $mode) . '">' . $diff_modes[$mode] . '</a>'
+			:	'<li class="active">' . $diff_modes[$mode]) . '</li>';
 	}
 
 	echo "</ul>\n" .
@@ -342,6 +342,7 @@ else
 	$this->show_message($this->_t('ReadAccessDenied'), 'info');
 }
 
+// TODO move to CSS file
 $this->add_html_head('
 <style>
 .diffbtn {

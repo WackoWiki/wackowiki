@@ -298,13 +298,16 @@ $wacko_translation = [
 	'CommentAdded'				=> 'Σχόλιο προστέθηκε.',
 	'YouAreNowTheOwner'			=> 'Είστε ο ιδιοκτήτης της σελίδας.',
 
-	'DiffMode0'					=> 'Full diff',
-	'DiffMode1'					=> 'Απλά τις διαφορές',
-	'DiffMode2'					=> 'Πηγή',
-	'DiffMode3'					=> 'Side by side',
-	'DiffMode4'					=> 'Inline',
-	'DiffMode5'					=> 'Unified',
-	'DiffMode6'					=> 'Context',
+	'DiffMode'		=> [
+		'0'		=> 'Full diff',
+		'1'		=> 'Απλά τις διαφορές',
+		'2'		=> 'Πηγή',
+		'3'		=> 'Side by side',
+		'4'		=> 'Inline',
+		'5'		=> 'Unified',
+		'6'		=> 'Context',
+	],
+
 	'RevisionsShowAll'			=> 'Εμφάνιση όλων των αναθεωρήσεων...',
 	'ShowDifferencesButton'		=> 'Εμφάνισε Διαφορές',
 	'CancelDifferencesButton'	=> 'Επέστρεψε στο Node / Ακύρωση',

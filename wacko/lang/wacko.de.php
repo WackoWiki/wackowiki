@@ -299,13 +299,16 @@ $wacko_translation = [
 	'CommentAdded'				=> 'Kommentar hinzugefügt.',
 	'YouAreNowTheOwner'			=> 'Du bist nicht der Besitzer dieser Seite.',
 
-	'DiffMode0'					=> 'vollständiger Vergleich',
-	'DiffMode1'					=> 'einfacher Vergleich',
-	'DiffMode2'					=> 'Quelltext',
-	'DiffMode3'					=> 'Nebeneinander',
-	'DiffMode4'					=> 'Inline',
-	'DiffMode5'					=> 'Unified',
-	'DiffMode6'					=> 'Kontext',
+	'DiffMode'		=> [
+		'0'		=> 'vollständiger Vergleich',
+		'1'		=> 'einfacher Vergleich',
+		'2'		=> 'Quelltext',
+		'3'		=> 'Nebeneinander',
+		'4'		=> 'Inline',
+		'5'		=> 'Unified',
+		'6'		=> 'Kontext',
+	],
+
 	'RevisionsShowAll'			=> 'Alle Revisionen anzeigen...',
 	'ShowDifferencesButton'		=> 'Zeige Unterschiede',
 	'CancelDifferencesButton'	=> 'Abbrechen und zurück zur Seite',

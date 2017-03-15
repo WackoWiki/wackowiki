@@ -298,13 +298,16 @@ $wacko_translation = [
 	'CommentAdded'				=> 'Commentaires ajoutés.',
 	'YouAreNowTheOwner'			=> 'Vous n&rsquo;êtes pas le propriétaire de cette page.',
 
-	'DiffMode0'					=> 'Différence complète',
-	'DiffMode1'					=> 'Simple différence entre les deux versions',
-	'DiffMode2'					=> 'Source',
-	'DiffMode3'					=> 'Side by side',
-	'DiffMode4'					=> 'Inline',
-	'DiffMode5'					=> 'Unified',
-	'DiffMode6'					=> 'Context',
+	'DiffMode'		=> [
+		'0'		=> 'Différence complète',
+		'1'		=> 'Simple différence entre les deux versions',
+		'2'		=> 'Source',
+		'3'		=> 'Side by side',
+		'4'		=> 'Inline',
+		'5'		=> 'Unified',
+		'6'		=> 'Context',
+	],
+
 	'RevisionsShowAll'			=> 'Montrer toutes les révisions...',
 	'ShowDifferencesButton'		=> 'Montrer les différences',
 	'CancelDifferencesButton'	=> 'Annuler et revenir',

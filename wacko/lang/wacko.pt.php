@@ -298,13 +298,16 @@ $wacko_translation = [
 	'CommentAdded'				=> 'Comment added.',
 	'YouAreNowTheOwner'			=> 'Voçê é agora o dono desta página.',
 
-	'DiffMode0'					=> 'Full diff',
-	'DiffMode1'				=> 'Diferenças simples',
-	'DiffMode2'				=> 'Source',
-	'DiffMode3'					=> 'Side by side',
-	'DiffMode4'					=> 'Inline',
-	'DiffMode5'					=> 'Unified',
-	'DiffMode6'					=> 'Context',
+	'DiffMode'		=> [
+		'0'		=> 'Full diff',
+		'1'		=> 'Diferenças simples',
+		'2'		=> 'Source',
+		'3'		=> 'Side by side',
+		'4'		=> 'Inline',
+		'5'		=> 'Unified',
+		'6'		=> 'Context',
+	],
+
 	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> 'Mostrar Diferenças',
 	'CancelDifferencesButton'	=> 'Voltar ao Nó (Node) / Cancelar',

@@ -48,6 +48,15 @@ function admin_config_basic(&$engine, &$module)
 			$config['allowed_languages'] = 0;
 		}
 
+		if (is_array($_POST['diff_modes']))
+		{
+			$config['diff_modes'] = (string) implode(',', $_POST['diff_modes']);
+		}
+		else
+		{
+			$config['diff_modes'] = '0,1,2,3,4,5,6';
+		}
+
 		$config['footer_comments']			= (int) $_POST['footer_comments'];
 		$config['footer_files']				= (int) $_POST['footer_files'];
 		$config['footer_rating']			= (int) $_POST['footer_rating'];
@@ -413,6 +422,56 @@ function admin_config_basic(&$engine, &$module)
 				<td>
 					<input type="radio" id="review_on" name="review" value="1"<?php echo ($engine->db->review ? ' checked="checked"' : '');?> /><label for="review_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="review_off" name="review" value="0"<?php echo (!$engine->db->review ? ' checked="checked"' : '');?> /><label for="review_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for=""><strong>Allowed Diff modes:</strong><br />
+					<small>It is recomended to select only the set of diff modes you want to use, other wise all diff modes are selected.</small></label></td>
+				<td>
+				<?php
+					if ($engine->db->multilanguage)
+					{
+						// subset: false
+						$langs = $engine->available_languages(false);
+					}
+					else
+					{
+						$langs[] = $engine->db->language;
+					}
+
+					if (isset($engine->db->diff_modes))
+					{
+						$diff_mode_list = explode(',', $engine->db->diff_modes);
+					}
+					else
+					{
+						$diff_mode_list= [];
+					}
+
+					$diff_modes = $engine->_t('DiffMode');
+					$n = 1;
+
+					echo "<table>\n\t<tr>\n";
+
+					foreach ($diff_modes as $mode => $diff_mode)
+					{
+						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="diff_modes[' . $n . ']" id="mode_' . $mode . '" value="' . $mode . '" '. (in_array($mode, $diff_mode_list) ? ' checked="checked"' : ''). ' />' . "\n\t\t\t" .
+								'<label for="mode_' . $mode . '">' . $diff_modes[$mode] . ' (' . $mode . ')</label>' . "\n\t\t</td>\n";
+
+						// modulus operator: every third loop add a break
+						if ($n % 3 == 0)
+						{
+							echo "\t</tr>\n\t<tr>\n";
+						}
+
+						$n++;
+					}
+
+					echo "\t</tr>\n</table>";
+					?>
 				</td>
 			</tr>
 			<tr class="lined">
