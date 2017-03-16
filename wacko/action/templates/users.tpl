@@ -19,13 +19,13 @@ first really BIG template written
 	[= tab _ =
 		<ul class="menu" id="list">
 			<li><a href="[ ' href0 ' ]">[ ' _t: UsersProfile ' ]</a></li>
-			<li><a href="[ ' href1 ' ]">[ ' _t: ListMyPages ' ]</a></li>
-			<li><a href="[ ' href2 ' ]">[ ' _t: ListMyChanges ' ]</a></li>
-			<li><a href="[ ' href3 ' ]">[ ' _t: ListMyWatches ' ]</a></li>
-			<li><a href="[ ' href4 ' ]">[ ' _t: ListMyChangesWatches ' ]</a></li>
+			<li><a href="[ ' href1 ' ]">[ ' _t: UsersPages ' ]</a></li>
+			<li><a href="[ ' href2 ' ]">[ ' _t: UsersChanges ' ]</a></li>
+			<li><a href="[ ' href3 ' ]">[ ' _t: UsersSubscription ' ]</a></li>
+			<li><a href="[ ' href4 ' ]">[ ' _t: UsersWatches ' ]</a></li>
 		</ul>
 			
-		<h2>[ ' heading |e ' ]</h2>
+		<h2>[ ' heading ' ]</h2>
 		[ ' action ' ]
 	=]
 

@@ -8,11 +8,18 @@ if (!defined('IN_WACKO'))
 // action/mypages.php
 if (!isset($title))		$title = '';
 if (!isset($bydate))	$bydate = '';
+if (!isset($profile))	$profile = ''; // user action
 if (!isset($max))		$max = null;
 if (!isset($bychange))	$bychange = '';
 $cur_char		= '';
 
-$by = function ($by) { return ['mode' => 'mypages', 'by' . $by => 1, '#' => 'list']; };
+$by = function ($by) use ($profile)
+{
+	// TODO: mode is optional $_GET['mode']
+	$profile = ($profile? ['profile' => $profile] : []);
+
+	return $profile + ['mode' => 'mypages', 'by' . $by => 1, '#' => 'list'];
+};
 
 if (($user_id = $this->get_user_id()))
 {
@@ -26,7 +33,7 @@ if (($user_id = $this->get_user_id()))
 			$this->_t('OrderChange') . "</a>] <br /><br />\n";
 
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
+			"SELECT COUNT(page_id) AS n " .
 			"FROM {$prefix}page " .
 			"WHERE owner_id = '" . (int) $user_id . "' " .
 				"AND deleted <> '1' " .

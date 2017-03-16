@@ -9,9 +9,16 @@ if (!defined('IN_WACKO'))
 
 if (!isset($title))		$title = '';
 if (!isset($bydate))	$bydate = '';
+if (!isset($profile))	$profile = ''; // user action
 if (!isset($max))		$max = null;
 
-$by = function ($by) { return ['mode' => 'mychanges', '#' => 'list', 'by' . $by => 1]; };
+$by = function ($by) use ($profile)
+{
+	// TODO: mode is optional $_GET['mode']
+	$profile = ($profile? ['profile' => $profile] : []);
+
+	return $profile + ['mode' => 'mychanges', 'by' . $by => 1, '#' => 'list'];
+};
 
 if (($user_id = $this->get_user_id()))
 {
@@ -20,11 +27,11 @@ if (($user_id = $this->get_user_id()))
 	if (@$_GET['byname'])
 	{
 		echo $this->_t('MyChangesTitle2') .
-		' [<a href="' . $this->href('', '', $by('date')) . '">' .
-		$this->_t('OrderChange') . "</a>].</strong><br /><br />\n";
+			' [<a href="' . $this->href('', '', $by('date')) . '">' .
+			$this->_t('OrderChange') . "</a>].</strong><br /><br />\n";
 
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
+			"SELECT COUNT(page_id) AS n " .
 			"FROM {$prefix}page " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
 				"AND deleted <> '1' " .
@@ -32,14 +39,14 @@ if (($user_id = $this->get_user_id()))
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('name'));
 
-		if (($pages = $this->db->load_all(
+		if ($pages = $this->db->load_all(
 			"SELECT tag, title, modified " .
 			"FROM {$prefix}page " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
 				"AND deleted <> '1' " .
 				"AND comment_on_id = '0' " .
 			"ORDER BY tag ASC, modified DESC " .
-			$pagination['limit'], true)))
+			$pagination['limit'], true))
 		{
 			echo '<ul class="ul_list">' . "\n";
 
@@ -83,7 +90,7 @@ if (($user_id = $this->get_user_id()))
 		echo '<ul class="menu">' . "\n" .
 				'<li class="active">' . $this->_t('MyChangesTitle1') . "</li>\n" .
 				'<li>' . " [<a href=\"" . $this->href('', '', $by('name')) . "\">" . $this->_t('OrderABC') . "</a>]" . "</li>\n" .
-				"</ul>\n";
+			"</ul>\n";
 
 		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n " .
