@@ -20,7 +20,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 	if (!($user = $this->load_user($profile)))
 	{
 		$tpl->not_found = Ut::perc_replace($this->_t('UsersNotFound'),
-				$this->href(), htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET));
+			$this->href(), htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET));
 	}
 	else if (!$user['enabled'])
 	{
@@ -48,7 +48,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyPages'); #$output1 .
 
 				$tpl->u_tab_heading =	$this->_t('ListMyPages');
-				$tpl->u_tab_action =	$this->action('mypages');
+				$tpl->u_tab_action =	$this->action('mypages', $profile);
 				$default_tab = false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
@@ -56,7 +56,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyWatches'); #$output3 .
 
 				$tpl->u_tab_heading =	$this->_t('ListMyWatches');
-				$tpl->u_tab_action =	$this->action('mywatches');
+				$tpl->u_tab_action =	$this->action('mywatches', $profile);
 				$default_tab = false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychangeswatches')
@@ -64,7 +64,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyChangesWatches'); #$output4 .
 
 				$tpl->u_tab_heading =	$this->_t('ListMyChangesWatches');
-				$tpl->u_tab_action =	$this->action('mychangeswatches');
+				$tpl->u_tab_action =	$this->action('mychangeswatches', $profile);
 				$default_tab = false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
@@ -72,7 +72,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyChanges'); #$output2 .
 
 				$tpl->u_tab_heading =	$this->_t('ListMyChanges');
-				$tpl->u_tab_action =	$this->action('mychanges');
+				$tpl->u_tab_action =	$this->action('mychanges', $profile);
 				$default_tab = false;
 			}
 			else
@@ -258,7 +258,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			{
 				$sort_name = (isset($_GET['sort']) && $_GET['sort'] == 'name');
 				$pagination = $this->pagination($user['total_pages'], 10, 'd',
-						$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
+					$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
 
 				$pages = $this->db->load_all(
 					"SELECT page_id, tag, title, created, page_lang " .
@@ -364,14 +364,14 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						$tpl->u_up_u_u2_pagination_text = $pagination['text'];
 
 						$uploads = $this->db->load_all(
-								"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
-								"FROM " . $this->db->table_prefix . "file u " .
-									"LEFT JOIN " . $this->db->table_prefix . "page c ON (u.page_id = c.page_id) " .
-								"WHERE u.user_id = '" . $user['user_id'] . "' " .
+							"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
+							"FROM " . $this->db->table_prefix . "file u " .
+								"LEFT JOIN " . $this->db->table_prefix . "page c ON (u.page_id = c.page_id) " .
+							"WHERE u.user_id = '" . $user['user_id'] . "' " .
 								"AND u.deleted <> '1' " .
-								// "AND p.deleted <> '1' " .
-								"ORDER BY u.uploaded_dt DESC " .
-								$pagination['limit']);
+							// "AND p.deleted <> '1' " .
+							"ORDER BY u.uploaded_dt DESC " .
+							$pagination['limit']);
 
 						// uploads list itself
 						foreach ($uploads as $upload)
@@ -477,6 +477,7 @@ else
 		'signup'		=> 'signup_time',
 		'last_visit'	=> 'last_visit'
 	];
+
 	if (isset($sort_modes[$_sort]))
 	{
 		$_order			= @$_GET['order'];
@@ -485,10 +486,12 @@ else
 			'asc'	=> 'ASC',
 			'desc'	=> 'DESC'
 		];
+
 		if (!isset($order_modes[$_order]))
 		{
 			$_order = 'asc';
 		}
+
 		$params['sort']		= $_sort;
 		$params['order']	= $_order;
 
