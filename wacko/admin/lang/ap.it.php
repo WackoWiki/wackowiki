@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Controlla allegati',
 	'CheckMimetypeInfo'			=> 'Alcuni browser possono essere ingannati nell\'accettare un mimetype incorretto per i file da caricare. Questa opzione garantisce che i file che possono causare questo problema vengano respinti.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Crea miniatura',
 	'CreateThumbnailInfo'		=> 'Crea miniatura in tutte le situazioni possibili.',
 	'MaxThumbWidth'				=> 'Larghezza massima miniatura in pixel',

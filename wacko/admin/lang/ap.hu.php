@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Csatolt állományok ellenõrzése',
 	'CheckMimetypeInfo'			=> 'Néhány böngészõ rávehetõ, hogy a feltöltött állományokhoz helytelen MIME típust állapítson meg. Ezzel a beállítással az ennek okozására hajlamos állományok visszautasításra kerülnek.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Kiskép készítése',
 	'CreateThumbnailInfo'		=> 'Minden lehetséges esetben készítsen kisképet.',
 	'MaxThumbWidth'				=> 'Maximum kiskép szélesség pixelben',

@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Sprawdzaj pliki za³±cznika',
 	'CheckMimetypeInfo'			=> 'Niektóre przegl±darki mog± byæ zmuszane do przybierania nieprawid³owego typu mediów (mimetype) dla wysy³anych plików. Funkcja ta zabezpiecza takie pliki przed odrzuceniem.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Zawsze twórz miniaturê',
 	'CreateThumbnailInfo'		=> 'Tworzy miniaturê we wszystkich mo¿liwych sytuacjach. Dziêki tej funkcji miniatura bêdzie wy¶wietlana bezpo¶rednio w po¶cie i u¿ytkownik mo¿e j± klikn±æ, aby zobaczyæ pe³ny obrazek.',
 	'MaxThumbWidth'				=> 'Maksymalna szeroko¶æ miniatury w pikselach',

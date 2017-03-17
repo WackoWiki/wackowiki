@@ -149,7 +149,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					Thumbnail settings
+					<?php echo $engine->_t('Thumbnails');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">

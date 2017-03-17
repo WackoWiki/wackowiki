@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Controleer bijlage bestanden',
 	'CheckMimetypeInfo'			=> 'Sommige browsers kunnen een incorrecte mimetype voor geüploade bestanden aannemen. Deze optie verzekerd je er van dat zulke bestanden die dit veroorzaken worden afgewezen.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Miniatuur aanmaken',
 	'CreateThumbnailInfo'		=> 'Maakt een miniatuur aan in alle mogelijke situaties.',
 	'MaxThumbWidth'				=> 'Maximum miniatuur breedte in pixel',

@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Verificar ficheiros anexados',
 	'CheckMimetypeInfo'			=> 'Alguns Ficheiros podem obrigar os navegadores e executar funções incorretas. Esta opção permite recusar esses Ficheiros.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Criar uma Imagem reduzida',
 	'CreateThumbnailInfo'		=> 'Criar uma Imagem reduzida em todas as situações possíveis.',
 	'MaxThumbWidth'				=> 'Largura máxima das imagens em miniaturas em píxeis',

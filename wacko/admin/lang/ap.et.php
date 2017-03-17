@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Kontrolli manuseid',
 	'CheckMimetypeInfo'			=> 'Mõndasid veebilehitsejaid saab petta, eeldades, et tegu on vale miimitüübiga. See valik kindlustab, et sellised failid keelatakse.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Loo pisipilt',
 	'CreateThumbnailInfo'		=> 'Loo pisipilt igas võimalikus olukorras.',
 	'MaxThumbWidth'				=> 'Maksimaalne pisipildi laius pikslites',
