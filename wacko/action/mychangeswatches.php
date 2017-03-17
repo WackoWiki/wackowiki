@@ -63,6 +63,8 @@ if ($user_id = $this->get_user_id())
 					')</small> ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "<br />\n";
 			}
 		}
+
+		$this->print_pagination($pagination);
 	}
 	else
 	{
