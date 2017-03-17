@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Провери прикачените файлове',
 	'CheckMimetypeInfo'			=> 'При някои браузъри може да има проблем с MIME типовете. Тази опция оправя този проблем.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Създай галерия',
 	'CreateThumbnailInfo'		=> 'Създай галерия за всички възможни ситуации.',
 	'MaxThumbWidth'				=> 'Максимална ширина на галерия',

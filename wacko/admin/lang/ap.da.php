@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Kontrol af vedhæftede filer',
 	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfører fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er årsag hertil.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Opret miniature',
 	'CreateThumbnailInfo'		=> 'Der oprettes altid en miniature.',
 	'MaxThumbWidth'				=> 'Maksimal bredde på miniature i pixels',

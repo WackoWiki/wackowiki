@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Check attachment files',
 	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Create thumbnail',
 	'CreateThumbnailInfo'		=> 'Create a thumbnail in all possible situations.',
 	'MaxThumbWidth'				=> 'Maximum thumbnail width in pixel',

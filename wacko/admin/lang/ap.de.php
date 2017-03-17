@@ -338,7 +338,7 @@ $ap_translation = [
 
 	// Upload settings
 	'UploadSettingsInfo'		=> 'Hier kannst du die Einstellungen für Dateianhänge und verknüpfte Spezialkategorien vornehmen.',
-	'FileUploads'				=> 'File uploads',
+	'FileUploads'				=> 'Dateien hochladen',
 	'UploadMaxFilesize'			=> 'Maximale Dateigröße',
 	'UploadMaxFilesizeInfo'		=> 'Maximale Größe pro Datei. Die Dateigröße wird nur durch die PHP-Konfiguration beschränkt, wenn 0 als Wert eingestellt wird.',
 	'UploadQuota'				=> 'Maximales Kontingent für Dateianhänge',
@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Dateianhänge prüfen',
 	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ für hochgeladene Dateien vorgetäuscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren könnten, abgewiesen werden.',
 
+	'Thumbnails'				=> 'Vorschaubilder',
 	'CreateThumbnail'			=> 'Vorschaubild erstellen',
 	'CreateThumbnailInfo'		=> 'Vorschaubild in allen möglichen Fällen erstellen.',
 	'MaxThumbWidth'				=> 'Maximale Breite der Vorschaubilder in Pixeln',

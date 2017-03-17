@@ -348,6 +348,7 @@ $ap_translation = [
 	'CheckMimetype'				=> 'Vérifier les pièces jointes',
 	'CheckMimetypeInfo'			=> 'Certains navigateurs internet peuvent faire erreur en attribuant un type MIME incorrect aux fichiers transférés. Cette option permet de rejeter les fichiers qui présentent un risque de provoquer cette erreur.',
 
+	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Générer des miniatures',
 	'CreateThumbnailInfo'		=> 'Génère des miniatures dans toutes les situations possibles.',
 	'MaxThumbWidth'				=> 'Largeur maximale des miniatures',
