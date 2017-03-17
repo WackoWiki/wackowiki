@@ -432,16 +432,6 @@ function admin_config_basic(&$engine, &$module)
 					<small>It is recomended to select only the set of diff modes you want to use, other wise all diff modes are selected.</small></label></td>
 				<td>
 				<?php
-					if ($engine->db->multilanguage)
-					{
-						// subset: false
-						$langs = $engine->available_languages(false);
-					}
-					else
-					{
-						$langs[] = $engine->db->language;
-					}
-
 					if (isset($engine->db->diff_modes))
 					{
 						$diff_mode_list = explode(',', $engine->db->diff_modes);
