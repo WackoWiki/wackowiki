@@ -198,7 +198,16 @@ function admin_config_appearance(&$engine, &$module)
 		#$engine->debug_print_r($_POST);
 		$config['logo_display']				= (int) $_POST['logo_display'];
 		$config['theme']					= (string) $_POST['theme'];
-		$config['allow_themes']				= (string) $_POST['allow_themes'];
+
+		if (is_array($_POST['allow_themes']))
+		{
+			$config['allow_themes'] = (string) implode(',', $_POST['allow_themes']);
+		}
+		else
+		{
+			$config['allow_themes'] = '0';
+		}
+
 		$config['allow_themes_per_page']	= (string) $_POST['themes_per_page'];
 
 		$engine->config->_set($config);
@@ -316,9 +325,38 @@ function admin_config_appearance(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="allow_themes"><strong>Allowed Themes:</strong><br />
+				<td class="label"><label for=""><strong>Allowed Themes:</strong><br />
 					<small>Allowed themes, which the user can choose: <code>0</code> - all available themes are allowed (default), <br /><code>default,coffee</code> - here only these both themes are allowed.</small></label></td>
-				<td><input type="text" maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->db->allow_themes, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td>
+				<?php
+					if (isset($engine->db->allow_themes))
+					{
+						$theme_list = explode(',', $engine->db->allow_themes);
+					}
+					else
+					{
+						$theme_list= [];
+					}
+
+					$themes = $engine->available_themes();
+
+					echo "<table>\n\t<tr>\n";
+
+					foreach ($themes as $n => $theme)
+					{
+						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" '. (in_array($theme, $theme_list) ? ' checked="checked"' : ''). ' />' . "\n\t\t\t" .
+								'<label for="theme_' . $n . '">' . $themes[$n] . '</label>' . "\n\t\t</td>\n";
+
+						// modulus operator: every third loop add a break
+						if ($n % 3 == 0)
+						{
+							echo "\t</tr>\n\t<tr>\n";
+						}
+					}
+
+					echo "\t</tr>\n</table>";
+					?>
+				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
