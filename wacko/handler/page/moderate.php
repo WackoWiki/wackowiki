@@ -583,7 +583,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// count topics and make pagination
 		$count		= $this->db->load_single($sql);
-		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids='.implode('-', $set), 'moderate');
+		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids=' . implode('-', $set), 'moderate');
 
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name, o.user_name as owner_name " .
@@ -1145,7 +1145,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// count posts and make pagination
 		$count		= $this->db->load_single($sql);
-		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids='.implode('-', $set), 'moderate');
+		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids=' . implode('-', $set), 'moderate');
 
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name " .

@@ -893,19 +893,6 @@ $wacko_translation = [
 	'FeedError'					=> 'Impossible de charger ou d&rsquo;analyser le flux',
 	'FeedSource'				=> 'Source:',
 
-	'FeedYearAgo'				=> ' year ago',
-	'FeedYearsAgo'				=> ' years ago',
-	'FeedMonthAgo'				=> ' mois passé',
-	'FeedMonthsAgo'				=> ' mois passés',
-	'FeedWeekAgo'				=> ' semaine passée',
-	'FeedWeeksAgo'				=> ' semaines passées',
-	'FeedDayAgo'				=> ' jour passé',
-	'FeedDaysAgo'				=> ' jours passés',
-	'FeedHourAgo'				=> ' heure passée',
-	'FeedHoursAgo'				=> ' heures passées',
-	'FeedMinuteAgo'				=> ' minute passée',
-	'FeedMinutesAgo'			=> ' minutes passées',
-
 	// XML / RSS autodiscovery
 	'RecentChangesTitleXML'		=> ' - Changements récents',
 	'RecentChangesXML'			=> 'Changements récents au ',
