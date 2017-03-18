@@ -892,19 +892,6 @@ $wacko_translation = [
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
 
-	'FeedYearAgo'				=> ' year ago',
-	'FeedYearsAgo'				=> ' years ago',
-	'FeedMonthAgo'				=> ' month ago',
-	'FeedMonthsAgo'				=> ' months ago',
-	'FeedWeekAgo'				=> ' week ago',
-	'FeedWeeksAgo'				=> ' weeks ago',
-	'FeedDayAgo'				=> ' day ago',
-	'FeedDaysAgo'				=> ' days ago',
-	'FeedHourAgo'				=> ' hour ago',
-	'FeedHoursAgo'				=> ' hours ago',
-	'FeedMinuteAgo'				=> ' minute ago',
-	'FeedMinutesAgo'			=> ' minutes ago',
-
 	// XML / RSS autodiscovery
 	'RecentChangesTitleXML'		=> ' - Recent changes',
 	'RecentChangesXML'			=> 'Recent changes to the ',
