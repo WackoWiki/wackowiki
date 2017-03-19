@@ -52,6 +52,7 @@ $config_db['debug_admin_only']				= $config['debug_admin_only'];
 $config_db['debug_sql_threshold']			= $config['debug_sql_threshold'];
 $config_db['default_comment_acl']			= $config['default_comment_acl'];
 $config_db['default_create_acl']			= $config['default_create_acl'];
+$config_db['default_diff_mode']				= $config['default_diff_mode'];
 $config_db['default_read_acl']				= $config['default_read_acl'];
 $config_db['default_rename_redirect']		= $config['default_rename_redirect'];
 $config_db['default_typografica']			= $config['default_typografica'];

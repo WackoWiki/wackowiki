@@ -97,6 +97,7 @@ $wacko_config_defaults = [
 	'enable_comments'				=> 1,
 	'hide_revisions'				=> 0,
 	'diff_modes'					=> '0,1,2,3,4,5',
+	'default_diff_mode'				=> 2,
 
 	'hide_toc'						=> 0,
 	'hide_index'					=> 0,

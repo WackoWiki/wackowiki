@@ -48,7 +48,7 @@ if ($this->has_access('read'))
 		echo "<p>\n";
 		echo '<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '" />';
 
-		$default_mode	= 0; // TODO: configurable per user
+		$default_mode	= $this->db->default_diff_mode; // TODO: configurable per user
 		$diff_modes		= $this->_t('DiffMode');
 		$diff_mode_list	= explode(',', $this->db->diff_modes);
 
@@ -61,9 +61,9 @@ if ($this->has_access('read'))
 		}
 
 		echo $place_holder.
-					'<a href="' . $this->href('revisions.xml') . '"><img src="' .
-					$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') .
-					'" alt="XML" class="btn-feed"/></a>';
+			'<a href="' . $this->href('revisions.xml') . '"><img src="' .
+			$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') .
+			'" alt="XML" class="btn-feed"/></a>';
 
 		if ($this->db->minor_edit)
 		{

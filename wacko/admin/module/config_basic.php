@@ -48,6 +48,8 @@ function admin_config_basic(&$engine, &$module)
 			$config['allowed_languages'] = 0;
 		}
 
+		$config['default_diff_mode']		= (int) $_POST['default_diff_mode'];
+
 		if (is_array($_POST['diff_modes']))
 		{
 			$config['diff_modes'] = (string) implode(',', $_POST['diff_modes']);
@@ -428,6 +430,25 @@ function admin_config_basic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
+				<td class="label"><label for="default_diff_mode"><strong>Default diff mode:</strong><br />
+					<small>Preselected diff mode.</small></label></td>
+				<td>
+					<select style="width:200px;" id="language" name="default_diff_mode">
+					<?php
+						$diff_modes = $engine->_t('DiffMode');
+
+						foreach ($engine->_t('DiffMode') as $mode => $diff_mode)
+						{
+							echo '<option value="' . $mode . '" '.($engine->db->default_diff_mode == $mode ? 'selected="selected"' : '') . '>' . $diff_mode . ' (' . $mode . ')</option>';
+						}
+					?>
+					</select>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
 				<td class="label"><label for=""><strong>Allowed Diff modes:</strong><br />
 					<small>It is recomended to select only the set of diff modes you want to use, other wise all diff modes are selected.</small></label></td>
 				<td>
@@ -441,7 +462,7 @@ function admin_config_basic(&$engine, &$module)
 						$diff_mode_list= [];
 					}
 
-					$diff_modes = $engine->_t('DiffMode');
+
 					$n = 1;
 
 					echo "<table>\n\t<tr>\n";
@@ -543,7 +564,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="noindex"><strong>Block search engines (Search Engine Visibility):</strong><br />
-					<small>I would like to block search engines, but allow normal visitors. Overrides page settings. <br />Discourage search engines from indexing this site, It is up to search engines to honor this request.</small></label></td>
+					<small>Block search engines, but allow normal visitors. Overrides page settings. <br />Discourage search engines from indexing this site, It is up to search engines to honor this request.</small></label></td>
 				<td><input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ($engine->db->noindex ? ' checked="checked"' : '');?> /></td>
 			</tr>
 		</table>
