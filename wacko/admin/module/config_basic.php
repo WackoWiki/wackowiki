@@ -75,9 +75,9 @@ function admin_config_basic(&$engine, &$module)
 		$config['disable_autosubscribe']	= (int) $_POST['disable_autosubscribe'];
 		$config['default_rename_redirect']	= (int) $_POST['default_rename_redirect'];
 		$config['store_deleted_pages']		= (int) $_POST['store_deleted_pages'];
-		$config['keep_deleted_time']		= (string) $_POST['keep_deleted_time'];
-		$config['pages_purge_time']			= (string) $_POST['pages_purge_time'];
-		$config['referrers_purge_time']		= (string) $_POST['referrers_purge_time'];
+		$config['keep_deleted_time']		= (int) $_POST['keep_deleted_time'];
+		$config['pages_purge_time']			= (int) $_POST['pages_purge_time'];
+		$config['referrers_purge_time']		= (int) $_POST['referrers_purge_time'];
 		$config['noindex']					= (int) $_POST['noindex'];
 		$config['xml_sitemap']				= (int) $_POST['xml_sitemap'];
 		$config['xml_sitemap_time']			= (int) $_POST['xml_sitemap_time'];
