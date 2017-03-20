@@ -24,11 +24,11 @@ define('UPLOAD_BACKUP_DIR',				'files/backup');
 define('XML_DIR',						'xml');
 
 define('CACHE_CONFIG_DIR',				'_cache/config');
-define('CACHE_FEED_DIR',				'_cache/feeds');
-define('CACHE_PAGE_DIR',				'_cache/pages');
-define('CACHE_SQL_DIR',					'_cache/queries');
-define('CACHE_TEMPLATE_DIR',			'_cache/templates');
-//define('CACHE_SESSION_DIR',				'_cache/sessions');
+define('CACHE_FEED_DIR',				'_cache/feed');
+define('CACHE_PAGE_DIR',				'_cache/page');
+define('CACHE_SQL_DIR',					'_cache/query');
+define('CACHE_TEMPLATE_DIR',			'_cache/template');
+//define('CACHE_SESSION_DIR',				'_cache/session');
 define('CACHE_SESSION_DIR',				'/tmp');
 define('SAFE_CHMOD',					0640);				// better to use 0600 in production
 
