@@ -28,8 +28,7 @@ define('CACHE_FEED_DIR',				'_cache/feed');
 define('CACHE_PAGE_DIR',				'_cache/page');
 define('CACHE_SQL_DIR',					'_cache/query');
 define('CACHE_TEMPLATE_DIR',			'_cache/template');
-//define('CACHE_SESSION_DIR',				'_cache/session');
-define('CACHE_SESSION_DIR',				'/tmp');
+define('CACHE_SESSION_DIR',				'/tmp');			// '_cache/session'
 define('SAFE_CHMOD',					0640);				// better to use 0600 in production
 
 define('SITEMAP_XML',					'sitemap.xml');
@@ -66,7 +65,7 @@ define('MENU_DEFAULT',					2);
 define('LINK_PAGE',						0);
 define('LINK_FILE',						1);
 
-define('RECOVERY_MODE',					0);		// restore database
+define('RECOVERY_MODE',					0);					// restore database
 
 define('SQL_MODE_STRICT',				'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY');
 define('SQL_MODE_PERMISSIVE',			'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER');
@@ -86,4 +85,4 @@ define('HTML_FILTERING',				null); // safehtml, htmlpurifier
 define('ACTION4DIFF',					'anchor, toc'); //allowed actions in DIFF
 
 define('PHP_MIN_VERSION',				'5.5.0'); //minimum required PHP version
-define('PHP_ERROR_REPORTING',			6); // PHP error reporting: 0 - off, 5 - all
+define('PHP_ERROR_REPORTING',			6); // PHP error reporting: 0 - off, 6 - all
