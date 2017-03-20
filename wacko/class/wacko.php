@@ -4404,7 +4404,7 @@ class Wacko
 			if (@file_exists($__pathname))
 			{
 				$__tpl = pathinfo($__pathname);
-				$__tpl = Ut::join_path($__tpl['dirname'], 'templates', $__tpl['filename'] . '.tpl'); // STS magic string
+				$__tpl = Ut::join_path($__tpl['dirname'], 'template', $__tpl['filename'] . '.tpl'); // STS magic string
 
 				if (@file_exists($__tpl))
 				{
