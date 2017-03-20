@@ -482,7 +482,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$title		= $tag;
 				$tag 		= ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/', '', $tag);
-				$tag		= str_replace(array(' ', "\t"), '', $tag);
+				$tag		= str_replace([' ', "\t"], '', $tag);
 
 				// check new tag existance
 				if ($old_tag != $this->tag . '/' . $tag && moderate_page_exists($this, $this->tag . '/' . $tag) === true)
@@ -878,7 +878,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$title		= $tag;
 				$tag 		= ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/', '', $tag);
-				$tag		= str_replace(array(' ', "\t"), '', $tag);
+				$tag		= str_replace([' ', "\t"], '', $tag);
 				$old_tag	= $this->tag;
 				$new_tag	= ($section ? $section . '/' : '') . $tag;
 
@@ -983,7 +983,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$page_id	= $this->get_page_id($tag);
 				$tag		= ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/', '', $tag);
-				$tag		= str_replace(array(' ', "\t"), '', $tag);
+				$tag		= str_replace([' ', "\t"], '', $tag);
 
 				if ($forum_cluster === true)
 				{

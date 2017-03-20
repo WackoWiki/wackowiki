@@ -1,7 +1,7 @@
 <form action="<?php echo my_location() ?>?installAction=site-config" method="post">
 <?php
 
-write_config_hidden_nodes(array('none' => ''));
+write_config_hidden_nodes(['none' => '']);
 
 ?>
 <p><?php echo $lang['Requirements']; ?></p>

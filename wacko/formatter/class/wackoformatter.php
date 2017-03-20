@@ -340,7 +340,7 @@ class WackoFormatter
 		{
 			if ($thing[1] == '~')
 			{
-				return '~~' . $this->wacko_preprocess(array(0, substr($thing, 2)));
+				return '~~' . $this->wacko_preprocess([0, substr($thing, 2)]);
 			}
 		}
 

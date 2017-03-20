@@ -11,7 +11,7 @@ $text = preg_replace_callback('/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--
 							  '<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->|'.
 							  '<!--action:begin-->[^\n]+?<!--action:end-->)/sm',
 
-array( &$parser, 'postcallback'), $text);
+[&$parser, 'postcallback'], $text);
 
 if (!isset($options['stripnotypo'])) $options['stripnotypo'] = '';
 

@@ -46,7 +46,7 @@
 <form action="<?php echo my_location() ?>?installAction=database-install" method="post" name="form1">
 <?php
 
-write_config_hidden_nodes(array(
+write_config_hidden_nodes([
 	'database_charset'	=> '',
 	'database_driver'	=> '',
 	'database_engine'	=> '',
@@ -55,7 +55,7 @@ write_config_hidden_nodes(array(
 	'database_database'	=> '',
 	'database_user'		=> '',
 	'database_password'	=> '',
-	'table_prefix'		=> '')
+	'table_prefix'		=> '']
 );
 
 echo '   <input type="hidden" name="password" value="' . (isset($_POST['password']) ? $_POST['password'] : '') . '" />' . "\n";
