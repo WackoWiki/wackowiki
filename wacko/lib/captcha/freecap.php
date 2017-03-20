@@ -130,20 +130,22 @@ if (pack('L', $abyz) == pack('N', $abyz))
 // to increase security, you really should add other fonts
 if ($big_endian)
 {
-	$font_locations = [	'/.ht_freecap_font1_big_e.gdf',
-						'/.ht_freecap_font2_big_e.gdf',
-						'/.ht_freecap_font3_big_e.gdf',
-						'/.ht_freecap_font4_big_e.gdf',
-						'/.ht_freecap_font5_big_e.gdf'
+	$font_locations = [
+		'/.ht_freecap_font1_big_e.gdf',
+		'/.ht_freecap_font2_big_e.gdf',
+		'/.ht_freecap_font3_big_e.gdf',
+		'/.ht_freecap_font4_big_e.gdf',
+		'/.ht_freecap_font5_big_e.gdf'
 	];
 }
 else
 {
-	$font_locations = [	'/.ht_freecap_font1.gdf',
-						'/.ht_freecap_font2.gdf',
-						'/.ht_freecap_font3.gdf',
-						'/.ht_freecap_font4.gdf',
-						'/.ht_freecap_font5.gdf'
+	$font_locations = [
+		'/.ht_freecap_font1.gdf',
+		'/.ht_freecap_font2.gdf',
+		'/.ht_freecap_font3.gdf',
+		'/.ht_freecap_font4.gdf',
+		'/.ht_freecap_font5.gdf'
 	];
 }
 
@@ -160,11 +162,12 @@ $bg_type = 1;
 $blur_bg = true;
 // for bg_type 3, which images should we use?
 // if you add your own, make sure they're fairly 'busy' images (ie a lot of shapes in them)
-$bg_images = [	'/.ht_freecap_im1.jpg',
-				'/.ht_freecap_im2.jpg',
-				'/.ht_freecap_im3.jpg',
-				'/.ht_freecap_im4.jpg',
-				'/.ht_freecap_im5.jpg'
+$bg_images = [
+	'/.ht_freecap_im1.jpg',
+	'/.ht_freecap_im2.jpg',
+	'/.ht_freecap_im3.jpg',
+	'/.ht_freecap_im4.jpg',
+	'/.ht_freecap_im5.jpg'
 ];
 // for non-transparent backgrounds only:
 	// if 0, merges CAPTCHA with bg
@@ -492,7 +495,7 @@ if ($bg_type != 0)
 		// draw grid on x
 		for($i = $rand_func(6, 20); $i < $width * 2; $i += $rand_func(10, 25))
 		{
-			ImageSetThickness($temp_bg,$rand_func(2, 6));
+			ImageSetThickness($temp_bg, $rand_func(2, 6));
 			$text_r			= $rand_func(100, 150);
 			$text_g			= $rand_func(100, 150);
 			$text_b			= $rand_func(100, 150);
@@ -510,7 +513,7 @@ if ($bg_type != 0)
 			$text_b			= $rand_func(100, 150);
 			$text_colour3	= ImageColorAllocate($temp_bg, $text_r, $text_g, $text_b);
 
-			ImageLine($temp_bg, 0, $i, $width*2, $i ,$text_colour3);
+			ImageLine($temp_bg, 0, $i, $width * 2, $i ,$text_colour3);
 		}
 	}
 	else if ($bg_type == 2)
@@ -538,7 +541,7 @@ if ($bg_type != 0)
 			// line terminations and start from there. (I don't think they're that advanced yet..)
 			for ($j = 1; $j < $rand_func(5, 10); $j++)
 			{
-				$points[] = $rand_func(1* (20 * ($i + 1)), 1 * (50 * ($i + 1)));
+				$points[] = $rand_func(1 * (20 * ($i + 1)), 1 * (50 * ($i + 1)));
 				$points[] = $rand_func(30, $height + 30);
 			}
 
