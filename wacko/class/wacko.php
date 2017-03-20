@@ -33,7 +33,7 @@ class Wacko
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link
 	var $unicode_entities		= [];		// common unicode array
 	var $toc_context			= [];
-	var $search_engines			= ['bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', ];
+	var $search_engines			= ['bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider'];
 	var $languages				= null;
 	var $translations			= null;
 	var $wanted_cache			= null;
@@ -327,16 +327,18 @@ class Wacko
 		return date($this->db->date_format . ' ' . $this->db->time_format_seconds, $local);
 	}
 
-	function get_time_interval($ago, $strip = false)
+	// e.g. <time datetime="2017-03-17T12:34:26+01:00" title="17 March 2017 12:34">3 hours ago</time>
+	function get_time_interval($text, $strip = false)
 	{
-		$res = 0 . $this->_t('FeedMinutesAgo');
+		$ago = time() - $text;
+		$res = 0 . $this->_t('MinutesAgo');
 
 		foreach ($this->time_intervals as $val => $name)
 		{
 			if ($ago >= $val)
 			{
 				$interval	= ($ago - $ago % $val) / $val;
-				$res		= $interval . $this->_t('Feed' . $name . ($interval == 1 ? '' : 's') . 'Ago');
+				$res		= Ut::perc_replace($this->_t($name . ($interval == 1 ? '' : 's') . 'Ago'), $interval);
 
 				break;
 			}
@@ -4512,7 +4514,7 @@ class Wacko
 	* Optional, default value is FALSE.
 	* @return string Result of action
 	*/
-	function action($action, $params = '', $force_link_tracking = 0)
+	function action($action, $params = [], $force_link_tracking = 0)
 	{
 		$action = strtolower(trim($action));
 		$errmsg = '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
