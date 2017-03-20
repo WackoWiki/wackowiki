@@ -113,8 +113,8 @@ $mail_body = '';
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<colgroup>
-				<col span="1" style="width:60%;">
-				<col span="1" style="width:40%;">
+				<col span="1" style="width:50%;">
+				<col span="1" style="width:50%;">
 			</colgroup>
 		<tr class="hl_setting">
 			<td class="label">

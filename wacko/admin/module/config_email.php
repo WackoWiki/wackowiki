@@ -74,8 +74,8 @@ function admin_config_email(&$engine, &$module)
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<colgroup>
-				<col span="1" style="width:60%;">
-				<col span="1" style="width:40%;">
+				<col span="1" style="width:50%;">
+				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
 				<th colspan="2">Basic parameters</th>
@@ -191,7 +191,7 @@ function admin_config_email(&$engine, &$module)
 					<label for="smtp_auto_tls"><strong><?php echo $engine->_t('SmtpAutoTls'); ?>:</strong><br />
 					<small><?php echo $engine->_t('SmtpAutoTlsInfo'); ?></small></label>
 				</td>
-				<td style="width:40%;">
+				<td>
 					<input type="radio" id="smtp_auto_tls_on" name="smtp_auto_tls" value="1" <?php echo ($engine->db->smtp_auto_tls == 1 ? ' checked="checked"' : '');?> /><label for="smtp_auto_tls_on"><?php echo $engine->_t('Enabled'); ?></label>
 					<input type="radio" id="smtp_auto_tls_off" name="smtp_auto_tls" value="0" <?php echo ($engine->db->smtp_auto_tls == 0 ? ' checked="checked"' : '');?> /><label for="smtp_auto_tls_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>

@@ -59,8 +59,8 @@ function admin_config_system(&$engine, &$module)
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<colgroup>
-				<col span="1" style="width:60%;">
-				<col span="1" style="width:40%;">
+				<col span="1" style="width:50%;">
+				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
 				<th colspan="2">Debug mode</th>
