@@ -345,19 +345,19 @@ if ($doubleclick == true)
 					#if ($this->db->tree_level == 1)
 					#{
 					    // lower index
-					#    echo $this->action('tree', array('page' => $this->tag, 'depth' => 1, 'nomark' => 0));
+					#    echo $this->action('tree', ['page' => $this->tag, 'depth' => 1, 'nomark' => 0]);
 					#}
 					#else if ($this->db->tree_level == 2)
 					#{
 					    // upper index
 					#    $page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));
-					#    echo $this->action('tree', array('page' => $page, 'depth' => 1, 'nomark' => 0));
+					#    echo $this->action('tree', ['page' => $page, 'depth' => 1, 'nomark' => 0]);
 					#}
 					#else
 					#{
 					    // default index
 					#    $page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));
-					#    echo $this->action('tree', array('page' => $page, 'depth' => 3, 'nomark' => 0));
+					#    echo $this->action('tree', ['page' => $page, 'depth' => 3, 'nomark' => 0]);
 					#}
 					?>
 				</div>
