@@ -349,7 +349,7 @@ if (!$fatal_error)
 <p><?php echo $lang['NextStep'];?></p>
 <form action="<?php echo my_location(); ?>?installAction=write-config" method="post">
 <?php
-	write_config_hidden_nodes(array('DeleteTables' => ''));
+	write_config_hidden_nodes(['DeleteTables' => '']);
 ?>
 	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
 </form>

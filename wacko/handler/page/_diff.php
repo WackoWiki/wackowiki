@@ -472,7 +472,7 @@ class _DiffEngine
 			// when the shortest sequence in X.
 			$flip = true;
 			list ($xoff, $xlim, $yoff, $ylim)
-			= array( $yoff, $ylim, $xoff, $xlim);
+			= [$yoff, $ylim, $xoff, $xlim];
 		}
 
 		if ($flip)
@@ -532,17 +532,17 @@ class _DiffEngine
 			}
 		}
 
-		$seps[] = $flip ? array($yoff, $xoff) : array($xoff, $yoff);
+		$seps[] = $flip ? [$yoff, $xoff] : [$xoff, $yoff];
 		$ymid = $ymids[$this->lcs];
 		for ($n = 0; $n < $nchunks - 1; $n++)
 		{
 			$x1 = $xoff + (int)(($numer + ($xlim - $xoff) * $n) / $nchunks);
 			$y1 = $ymid[$n] + 1;
-			$seps[] = $flip ? array($y1, $x1) : array($x1, $y1);
+			$seps[] = $flip ? [$y1, $x1] : [$x1, $y1];
 		}
-		$seps[] = $flip ? array($ylim, $xlim) : array($xlim, $ylim);
+		$seps[] = $flip ? [$ylim, $xlim] : [$xlim, $ylim];
 
-		return array($this->lcs, $seps);
+		return [$this->lcs, $seps];
 	}
 
 	function _lcs_pos ($ypos)

@@ -103,7 +103,7 @@ class BbCode
 		else if (preg_match('/\\[size\=([\\d]+?)(?:\:[\\w]+?)??\\](.*?)\\[\/size(?:\:[\\w]+?)??\\]/s', $string, $substring))
 		{
 			if		($substring[1] < 13)	return '++' . str_replace('++', '', preg_replace_callback($this->template, $rewrite, $substring[2])) . '++';
-			else if ($substring[1] > 15)	return '**' . str_replace(array('**', '[b]', '[/b]'), '', preg_replace_callback($this->template, $rewrite, $substring[2])) . '**';
+			else if ($substring[1] > 15)	return '**' . str_replace(['**', '[b]', '[/b]'], '', preg_replace_callback($this->template, $rewrite, $substring[2])) . '**';
 			else							return		$substring[2];
 		}
 		// font color

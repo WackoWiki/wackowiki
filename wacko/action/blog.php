@@ -44,7 +44,7 @@ if (!empty($blog_cluster))
 			$namehead	= $name;
 			$name		= ucwords($name);
 			$name		= preg_replace('/[^- \\w]/', '', $name);
-			$name		= str_replace(array(' ', "\t"), '', $name);
+			$name		= str_replace([' ', "\t"], '', $name);
 
 			if ($name == '')
 			{

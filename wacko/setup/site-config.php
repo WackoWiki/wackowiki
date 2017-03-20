@@ -32,7 +32,7 @@
 <form action="<?php echo my_location() ?>?installAction=database-config" method="post" name="form1">
 <?php
 
-write_config_hidden_nodes(array(
+write_config_hidden_nodes([
 	'site_name'			=> '',
 	'root_page'			=> '',
 	'multilanguage'		=> '',
@@ -41,7 +41,7 @@ write_config_hidden_nodes(array(
 	'password'			=> '',
 	'admin_email'		=> '',
 	'base_url'			=> '',
-	'rewrite_mode'		=> '')
+	'rewrite_mode'		=> '']
 );
 
 ?>
