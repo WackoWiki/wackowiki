@@ -208,7 +208,7 @@ function admin_config_appearance(&$engine, &$module)
 			$config['allow_themes'] = '0';
 		}
 
-		$config['allow_themes_per_page']	= (string) $_POST['themes_per_page'];
+		$config['allow_themes_per_page']	= (int) $_POST['themes_per_page'];
 
 		$engine->config->_set($config);
 
