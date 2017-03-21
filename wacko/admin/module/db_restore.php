@@ -102,7 +102,7 @@ function admin_db_restore(&$engine, &$module)
 							<table>
 								<tr>' .
 									'<td style="vertical-align:middle; width:10px;" class="label">' .
-									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ) . '/>
+									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '' ) . '/>
 									#</td>' .
 									#'<td style="width:10px;">' .
 									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
@@ -477,7 +477,7 @@ function admin_db_restore(&$engine, &$module)
 								<table>
 									<tr>' .
 										'<td style="vertical-align:middle; width:10px;" class="label">' .
-										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" '.( in_array($log['pack'], $set) ? ' checked="checked "' : '' ) . '/>
+										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '' ) . '/>
 										#</td>' .
 										#'<td style="width:10px;">' .
 											'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
