@@ -86,8 +86,8 @@ function admin_config_email(&$engine, &$module)
 					<small><?php echo $engine->_t('EnableEmailInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked="checked"' : '');?> /><label for="enable_email_on"><?php echo $engine->_t('Enabled'); ?></label>
-					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ($engine->db->enable_email == 0 ? ' checked="checked"' : '');?> /><label for="enable_email_off"><?php echo $engine->_t('Disabled'); ?></label>
+					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked' : '');?> /><label for="enable_email_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ($engine->db->enable_email == 0 ? ' checked' : '');?> /><label for="enable_email_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -100,9 +100,9 @@ function admin_config_email(&$engine, &$module)
 					<?php echo $engine->_t('UseSmtpInfo'); ?></small></label></td>
 				<td>
 					<select id="phpmailer_method" name="phpmailer_method">
-						<option value="mail"<?php echo ((string) $engine->db->phpmailer_method === 'mail' ? ' selected="selected"' : '');?>>mail</option>
-						<option value="sendmail"<?php echo ((string) $engine->db->phpmailer_method === 'sendmail' ? ' selected="selected"' : '');?>>sendmail</option>
-						<option value="smtp"<?php echo ((string) $engine->db->phpmailer_method === 'smtp' ? ' selected="selected"' : '');?>>SMTP</option>
+						<option value="mail"<?php echo ((string) $engine->db->phpmailer_method === 'mail' ? ' selected' : '');?>>mail</option>
+						<option value="sendmail"<?php echo ((string) $engine->db->phpmailer_method === 'sendmail' ? ' selected' : '');?>>sendmail</option>
+						<option value="smtp"<?php echo ((string) $engine->db->phpmailer_method === 'smtp' ? ' selected' : '');?>>SMTP</option>
 					</select>
 				</td>
 			</tr>
@@ -177,9 +177,9 @@ function admin_config_email(&$engine, &$module)
 				<td class="label"><label for="smtp_connection_mode"><strong><?php echo $engine->_t('SmtpConnectionMode'); ?>:</strong><br />
 				<small><?php echo $engine->_t('SmtpConnectionModeInfo'); ?>.</small></label></td>
 				<td><select id="smtp_connection_mode" name="smtp_connection_mode">
-						<option value="" <?php echo ((string) $engine->db->smtp_connection_mode === '' ? ' selected="selected"' : '');?>><?php echo $engine->_t('None'); ?>none</option>
-						<option value="ssl" <?php echo ((string) $engine->db->smtp_connection_mode === 'ssl' ? ' selected="selected"' : '');?>>SSL</option>
-						<option value="tls" <?php echo ((string) $engine->db->smtp_connection_mode === 'tls' ? ' selected="selected"' : '');?>>TLS</option>
+						<option value="" <?php echo ((string) $engine->db->smtp_connection_mode === '' ? ' selected' : '');?>><?php echo $engine->_t('None'); ?>none</option>
+						<option value="ssl" <?php echo ((string) $engine->db->smtp_connection_mode === 'ssl' ? ' selected' : '');?>>SSL</option>
+						<option value="tls" <?php echo ((string) $engine->db->smtp_connection_mode === 'tls' ? ' selected' : '');?>>TLS</option>
 					</select>
 				</td>
 			</tr>
@@ -192,8 +192,8 @@ function admin_config_email(&$engine, &$module)
 					<small><?php echo $engine->_t('SmtpAutoTlsInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="smtp_auto_tls_on" name="smtp_auto_tls" value="1" <?php echo ($engine->db->smtp_auto_tls == 1 ? ' checked="checked"' : '');?> /><label for="smtp_auto_tls_on"><?php echo $engine->_t('Enabled'); ?></label>
-					<input type="radio" id="smtp_auto_tls_off" name="smtp_auto_tls" value="0" <?php echo ($engine->db->smtp_auto_tls == 0 ? ' checked="checked"' : '');?> /><label for="smtp_auto_tls_off"><?php echo $engine->_t('Disabled'); ?></label>
+					<input type="radio" id="smtp_auto_tls_on" name="smtp_auto_tls" value="1" <?php echo ($engine->db->smtp_auto_tls == 1 ? ' checked' : '');?> /><label for="smtp_auto_tls_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="smtp_auto_tls_off" name="smtp_auto_tls" value="0" <?php echo ($engine->db->smtp_auto_tls == 0 ? ' checked' : '');?> /><label for="smtp_auto_tls_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">

@@ -233,10 +233,10 @@ function admin_db_backup(&$engine, &$module)
 				echo '<tr class="hl_setting">' .
 						'<td class="label"><strong>' . $table['name'] . '</strong></td>' .
 						'<td style="text-align:center;">&nbsp;&nbsp;
-							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked="checked"' : '' ) . ' />
+							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '' ) . ' />
 						</td>' .
 						'<td style="text-align:center;">
-							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked="checked"' : '' ) . ' />
+							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked' : '' ) . ' />
 						</td>' .
 					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
@@ -261,7 +261,7 @@ function admin_db_backup(&$engine, &$module)
 				echo '<tr>' .
 						'<td colspan="2" class="label"><strong>' . $dir . '</strong></td>' .
 						'<td style="text-align:center;">&nbsp;&nbsp;
-							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked="checked"' : '' ) . ' />
+							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '' ) . ' />
 						</td>' .
 					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";

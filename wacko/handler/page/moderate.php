@@ -583,7 +583,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// count topics and make pagination
 		$count		= $this->db->load_single($sql);
-		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids=' . implode('-', $set), 'moderate');
+		$pagination	= $this->pagination($count['n'], $limit, 'p', ['ids' => implode('-', $set)], 'moderate');
 
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name, o.user_name as owner_name " .
@@ -656,7 +656,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '') .
 						'<em>' . implode('<br />', $accept_text) . '</em><br />' .
 						'<select name="section">' .
-							'<option selected="selected"></option>' .
+							'<option selected></option>' .
 							$list.
 						'</select> '.
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
@@ -712,7 +712,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '' ) .
 						'<em>' . implode('<br />', $accept_text) . '</em><br />' . "\n" .
 						'<select name="base">' .
-							'<option selected="selected"></option>' .
+							'<option selected></option>' .
 							$list.
 						'</select> '.
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
@@ -1145,7 +1145,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// count posts and make pagination
 		$count		= $this->db->load_single($sql);
-		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids=' . implode('-', $set), 'moderate');
+		$pagination	= $this->pagination($count['n'], $limit, 'p', ['ids' => implode('-', $set)], 'moderate');
 
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name " .
@@ -1215,7 +1215,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '' ) .
 							'<em>' . $accept_text . '</em><br />' .
 							'<select name="section">' .
-								'<option selected="selected"></option>' .
+								'<option selected></option>' .
 								$list.
 							'</select> or <input type="text" name="cluster" size="50" maxlength="250" /><br />' .
 							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
@@ -1286,8 +1286,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 						'<br />' .
 						'<small>' .
-						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked="checked" ' : '' ) . '/> <label for="after">' . $this->_t('ModerateSplitAllAfter') . '</label><br />' .
-						'<input type="radio" name="scheme" value="selected" id="selected" '.(isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked="checked" ' : '' ) . '/> <label for="selected">' . Ut::perc_replace($this->_t('ModerateSplitSelected'), count($set)) . '</label>' .
+						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked ' : '' ) . '/> <label for="after">' . $this->_t('ModerateSplitAllAfter') . '</label><br />' .
+						'<input type="radio" name="scheme" value="selected" id="selected" '.(isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked ' : '' ) . '/> <label for="selected">' . Ut::perc_replace($this->_t('ModerateSplitSelected'), count($set)) . '</label>' .
 						'</small>' .
 					'</td></tr>' .
 				'</table><br />' . "\n";

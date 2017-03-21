@@ -123,7 +123,7 @@ if ($registered
 
 			if ($this->db->default_rename_redirect == 1)
 			{
-				echo 'checked="checked"';
+				echo 'checked';
 			};
 
 			echo ' /><label for="redirect"> ' . $this->_t('NeedRedirect') . '</label>'; ?>

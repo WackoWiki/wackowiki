@@ -58,12 +58,12 @@ foreach($lang_codes as $key => $value)
 	{
 		if ($_POST['config']['language'] == $key)
 		{
-			echo ' checked="checked" ';
+			echo ' checked ';
 		}
 	}
 	else if ($config['language'] == $key)
 	{
-		echo ' checked="checked" ';
+		echo ' checked ';
 	}
 
 	echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";

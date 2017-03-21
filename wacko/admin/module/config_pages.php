@@ -146,7 +146,7 @@ function admin_config_pages(&$engine, &$module)
 
 						echo '<option value="' . $offset . '" '.
 							($engine->db->license == $offset
-								? 'selected="selected" '
+								? 'selected '
 								: '') .
 							'>' . '[ ' . $offset . ' ] ' . $license . "</option>\n";
 					}

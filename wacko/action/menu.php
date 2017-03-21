@@ -261,7 +261,7 @@ if ($_user_id)
 
 			foreach ($langs as $lang)
 			{
-				echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected="selected" ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+				echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 			}
 
 			echo "</select>\n";
@@ -347,7 +347,7 @@ if ($_user_id)
 
 		foreach ($langs as $lang)
 		{
-			echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected="selected" ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+			echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 		}
 
 		echo "</select>\n";

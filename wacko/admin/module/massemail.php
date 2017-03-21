@@ -183,7 +183,7 @@ $mail_body = '';
 
 						foreach ($langs as $lang)
 						{
-							echo '<option value="' . $lang . '" ' . ($engine->db->language == $lang ? 'selected="selected"' : '') . '>' . $languages[$lang] . ' (' . $lang . ')</option>';
+							echo '<option value="' . $lang . '" ' . ($engine->db->language == $lang ? 'selected' : '') . '>' . $languages[$lang] . ' (' . $lang . ')</option>';
 						}
 ?>
 					</select>

@@ -274,9 +274,9 @@ function admin_config_appearance(&$engine, &$module)
 					<small>Defines the apearence of the Logo. Default is off.</small></label></td>
 				<td>
 					<select id="logo_display" name="logo_display" style="width: 200px;">
-						<option value="0" <?php echo ($engine->db->logo_display  == 0  ? ' selected="selected"' : ''); ?>><?php echo $engine->_t('LogoOff');?></option>
-						<option value="1" <?php echo ($engine->db->logo_display  == 1  ? ' selected="selected"' : ''); ?>><?php echo $engine->_t('LogoOnly');?></option>
-						<option value="2" <?php echo ($engine->db->logo_display  == 2  ? ' selected="selected"' : ''); ?>><?php echo $engine->_t('LogoAndTitle');?></option>
+						<option value="0" <?php echo ($engine->db->logo_display  == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoOff');?></option>
+						<option value="1" <?php echo ($engine->db->logo_display  == 1  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoOnly');?></option>
+						<option value="2" <?php echo ($engine->db->logo_display  == 2  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoAndTitle');?></option>
 					</select>
 				</td>
 			</tr>
@@ -315,7 +315,7 @@ function admin_config_appearance(&$engine, &$module)
 
 						foreach ($themes as $theme)
 						{
-							echo '<option value="' . $theme . '" '.($engine->db->theme == $theme ? 'selected="selected"' : '') . '>' . $theme . '</option>';
+							echo '<option value="' . $theme . '" '.($engine->db->theme == $theme ? 'selected' : '') . '>' . $theme . '</option>';
 						}
 					?>
 					</select>
@@ -344,7 +344,7 @@ function admin_config_appearance(&$engine, &$module)
 
 					foreach ($themes as $n => $theme)
 					{
-						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" '. (in_array($theme, $theme_list) ? ' checked="checked"' : ''). ' />' . "\n\t\t\t" .
+						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" '. (in_array($theme, $theme_list) ? ' checked' : ''). ' />' . "\n\t\t\t" .
 								'<label for="theme_' . $n . '">' . $themes[$n] . '</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break
@@ -365,8 +365,8 @@ function admin_config_appearance(&$engine, &$module)
 				<td class="label"><strong>Themes per page:</strong><br />
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				<td>
-					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked="checked"' : '');?> /><label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked="checked"' : '');?> /><label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?> /><label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked' : '');?> /><label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 		</table>

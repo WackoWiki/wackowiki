@@ -6,7 +6,7 @@
 			<input type="search" name="phrase" id="searchfor" size="40" value="[ ' phrase |e attr ' ]" />
 			<input type="submit" value="[ ' _t: SearchButtonText ' ]" /><br />
 			[= options _ =
-				<input type="checkbox" name="topic"[ ' topic | format ' checked="checked"' ' ] id="checkboxSearch" />
+				<input type="checkbox" name="topic"[ ' topic | format ' checked' ' ] id="checkboxSearch" />
 				<label for="checkboxSearch">[ ' _t: TopicSearchText ' ]</label>
 			=]
 		</form>

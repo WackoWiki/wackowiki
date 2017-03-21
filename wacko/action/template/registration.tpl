@@ -15,7 +15,7 @@
 				<p><label for="user_lang">[ ' _t: RegistrationLang ' ]:</label>
 				<select id="user_lang" name="user_lang">
 				[= l _ =
-					<option value="[ ' lang |e attr ' ]"[ ' selected | format ' selected="selected"' ' ]>[ ' name ' ] ([ ' lang |e ' ])</option>
+					<option value="[ ' lang |e attr ' ]"[ ' selected | format ' selected' ' ]>[ ' name ' ] ([ ' lang |e ' ])</option>
 				=]
 				</select></p>
 			=]

@@ -256,7 +256,7 @@ if ($this->has_access('read'))
 				// publish anonymously
 				if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
-					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" ' . ($this->get_user_setting('noid_pubs') == 1 ? 'checked="checked"' : '' ) . "/>\n";
+					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" ' . ($this->get_user_setting('noid_pubs') == 1 ? 'checked' : '' ) . "/>\n";
 					$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . "</label>\n";
 					$output .= '<br />';
 				}
@@ -264,7 +264,7 @@ if ($this->has_access('read'))
 				// watch a page
 				if ($this->page && !$this->is_watched)
 				{
-					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? 'checked="checked"' : '' ) . " />\n";
+					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? 'checked' : '' ) . " />\n";
 					$output .= '<label for="watchpage">' . $this->_t('NotifyMe') . "</label>\n";
 					$output .= '<br />';
 				}

@@ -150,7 +150,7 @@ function admin_config_permissions(&$engine, &$module)
 					This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.</label>
 				</td>
 				<td>
-					<input type="checkbox" id="acl_lock" name="acl_lock" value="1"<?php echo ( $engine->db->acl_lock ? ' checked="checked"' : '' );?> />
+					<input type="checkbox" id="acl_lock" name="acl_lock" value="1"<?php echo ( $engine->db->acl_lock ? ' checked' : '' );?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -162,7 +162,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small>If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="hide_locked" name="hide_locked" value="1"<?php echo ( $engine->db->hide_locked ? ' checked="checked"' : '' );?> />
+					<input type="checkbox" id="hide_locked" name="hide_locked" value="1"<?php echo ( $engine->db->hide_locked ? ' checked' : '' );?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -174,7 +174,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small>Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="remove_onlyadmins" name="remove_onlyadmins" value="1"<?php echo ( $engine->db->remove_onlyadmins ? ' checked="checked"' : '' );?> />
+					<input type="checkbox" id="remove_onlyadmins" name="remove_onlyadmins" value="1"<?php echo ( $engine->db->remove_onlyadmins ? ' checked' : '' );?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -186,7 +186,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small>Allow page owners to moderate comments on their pages.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="owners_can_remove_comments" name="owners_can_remove_comments" value="1"<?php echo ( $engine->db->owners_can_remove_comments ? ' checked="checked"' : '' );?> />
+					<input type="checkbox" id="owners_can_remove_comments" name="owners_can_remove_comments" value="1"<?php echo ( $engine->db->owners_can_remove_comments ? ' checked' : '' );?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -198,7 +198,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small>Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="owners_can_change_categories" name="owners_can_change_categories" value="1"<?php echo ( $engine->db->owners_can_change_categories ? ' checked="checked"' : '' );?> />
+					<input type="checkbox" id="owners_can_change_categories" name="owners_can_change_categories" value="1"<?php echo ( $engine->db->owners_can_change_categories ? ' checked' : '' );?> />
 				</td>
 			</tr>
 			<tr class="lined">
