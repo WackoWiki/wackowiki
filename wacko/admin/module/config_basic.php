@@ -557,7 +557,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="referrers_purge_time"><strong>Storage time of referrers:</strong><br />
 					<small>Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label></td>
-				<td><input type="number" min="0" maxlength="4" style="width:200px;" id="referrers_purge_time" name="referrers_purge_time" value="<?php (int) $engine->db->referrers_purge_time;?>" /></td>
+				<td><input type="number" min="0" maxlength="4" style="width:200px;" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo (int) $engine->db->referrers_purge_time;?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
