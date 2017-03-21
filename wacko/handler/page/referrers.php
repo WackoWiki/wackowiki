@@ -223,7 +223,7 @@ if (!$referrers)
 	return;
 }
 
-$pagination	= $this->pagination(count($referrers), @$max, 'r', ($mode? 'o=' . $mode : ''), 'referrers');
+$pagination	= $this->pagination(count($referrers), @$max, 'r', ($mode? ['o' => $mode] : ''), 'referrers');
 $referrers	= array_slice($referrers, $pagination['offset'], $pagination['perpage']);
 
 // main show!

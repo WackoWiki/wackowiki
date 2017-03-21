@@ -192,7 +192,7 @@ function admin_db_convert(&$engine, &$module)
 						if ($table['TABLE_NAME'] == $wtable['name'])
 						{
 							echo '<tr class="hl_setting">' .
-									'<td class="label"><input type="checkbox" name="' . $table['TABLE_NAME'] . '" value="table" checked="checked" /></td>' .
+									'<td class="label"><input type="checkbox" name="' . $table['TABLE_NAME'] . '" value="table" checked /></td>' .
 									'<td>&nbsp;&nbsp;<strong>' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</strong></td>' .
 									'<td>' . ($table['ENGINE'] == 'MyISAM' ? '<strong class="red">' : '' ) . $table['ENGINE'] . ($table['ENGINE'] == 'MyISAM' ? '</strong>' : '') . '</td>' .
 								'</tr>' .

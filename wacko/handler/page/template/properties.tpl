@@ -160,7 +160,7 @@
 						<td class="form_right">
 							<select id="page_lang" name="page_lang">
 								[= o _ =
-									<option value="[ ' lang ' ]" [ ' sel | list "" 'selected="selected" ' ' ]>[ ' name ' ] ([ ' lang ' ])</option>
+									<option value="[ ' lang ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' name ' ] ([ ' lang ' ])</option>
 								=]
 							</select>
 							<div class="hint">[ ' _t: BewareChangeLang ' ]</div>
@@ -175,7 +175,7 @@
 								<select id="theme" name="theme">
 									<option value="">--</option>
 									[= o _ =
-										<option value="[ ' theme ' ]" [ ' sel | list "" 'selected="selected" ' ' ]>[ ' theme ' ]</option>
+										<option value="[ ' theme ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' theme ' ]</option>
 									=]
 								</select>
 							</td>

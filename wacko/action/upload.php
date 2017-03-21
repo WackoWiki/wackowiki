@@ -78,7 +78,7 @@ if ($this->can_upload(true) === true)
 		<td>&nbsp;</td>
 		<td>
 			<div>
-				<input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="upload_global_disabled" />
+				<input type="radio" name="_to" disabled="disabled" checked value="global" id="upload_global_disabled" />
 				<input type="hidden" name="to" value="global" /> <?php echo $this->_t('UploadGlobalText'); ?>
 			</div>
 		</td>
@@ -95,7 +95,7 @@ if ($this->can_upload(true) === true)
 				<label for="upload_global"><?php echo $this->_t('UploadGlobalText'); ?></label>
 			</div>
 			<div>
-				<input type="radio" name="to" value="here" checked="checked" id="upload_to_page" />
+				<input type="radio" name="to" value="here" checked id="upload_to_page" />
 				<label for="upload_to_page"><?php echo $this->_t('UploadHereText'); ?></label>
 			</div>
 		</td>

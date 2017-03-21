@@ -98,14 +98,14 @@ for ($count = 0; $count < count($drivers); $count++)
 		if ($config['is_update'] == false)
 		{
 			echo '      <li>
-							<input type="radio" id="db_driver_' . $drivers[$count][0] . '" name="config[database_driver]" value="' . $drivers[$count][1] . '" '.($detected == 0 ? 'checked="checked"' : '') . '>
+							<input type="radio" id="db_driver_' . $drivers[$count][0] . '" name="config[database_driver]" value="' . $drivers[$count][1] . '" '.($detected == 0 ? 'checked' : '') . '>
 							<label for="db_driver_' . $drivers[$count][0] . '">' . $drivers[$count][2] . "</label>
 						</li>\n";
 		}
 		else
 		{
 			echo '      <li>
-							<input type="radio" id="db_driver_' . $drivers[$count][0] . '" name="config[database_driver]" value="' . $drivers[$count][1] . '" '.($config['database_driver'] == $drivers[$count][1] ? 'checked="checked"' : '') . '>
+							<input type="radio" id="db_driver_' . $drivers[$count][0] . '" name="config[database_driver]" value="' . $drivers[$count][1] . '" '.($config['database_driver'] == $drivers[$count][1] ? 'checked' : '') . '>
 							<label for="db_driver_' . $drivers[$count][0] . '">' . $drivers[$count][2] . "</label>
 						</li>\n";
 		}
@@ -146,7 +146,7 @@ echo '    <select id="config[database_charset]" name="config[database_charset]">
 
 for ($count = 0; $count < count($charset); $count++)
 {
-	echo '      <li><option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected="selected"' : '') . '>' . $charset[$count][2] . "</option></li>\n";
+	echo '      <li><option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected' : '') . '>' . $charset[$count][2] . "</option></li>\n";
 	$detected++;
 }
 
@@ -181,7 +181,7 @@ $detected = 0;
 for ($count = 0; $count < count($engines); $count++)
 {
 	echo '      <li>
-					<input type="radio" id="db_engine_' . $engines[$count][0] . '" name="config[database_engine]" value="' . $engines[$count][1] . '" '.($detected == 0 ? 'checked="checked"' : '') . '>
+					<input type="radio" id="db_engine_' . $engines[$count][0] . '" name="config[database_engine]" value="' . $engines[$count][1] . '" '.($detected == 0 ? 'checked' : '') . '>
 					<label for="db_engine_' . $engines[$count][0] . '">' . $engines[$count][2] . "</label>
 				</li>\n";
 	$detected++;

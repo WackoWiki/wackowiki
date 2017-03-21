@@ -248,7 +248,7 @@ if ($this->is_owner() || $this->is_admin())
 
 				if ($parent_id)
 				{
-					echo '<small><input type="radio" id="group1" name="group" value="1" checked="checked" /> <label for="group1">' . $this->_t('CategoriesAddGrouped') . ' \'<code>' . $word['category'] . '</code>\'.</label></small><br />';
+					echo '<small><input type="radio" id="group1" name="group" value="1" checked /> <label for="group1">' . $this->_t('CategoriesAddGrouped') . ' \'<code>' . $word['category'] . '</code>\'.</label></small><br />';
 					echo '<small><input type="radio" id="group0" name="group" value="0" /> <label for="group0">' . $this->_t('CategoriesAddGroupedNo') . '</label></small><br /><br />';
 				}
 
@@ -300,7 +300,7 @@ if ($this->is_owner() || $this->is_admin())
 
 					foreach ($parents as $parent)
 					{
-						$options .= '<option value="' . $parent['category_id'] . '" ' . ($word['parent_id'] == $parent['category_id'] ? 'selected="selected"' : '') . '>' . htmlspecialchars($parent['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</option>';
+						$options .= '<option value="' . $parent['category_id'] . '" ' . ($word['parent_id'] == $parent['category_id'] ? 'selected' : '') . '>' . htmlspecialchars($parent['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</option>';
 					}
 
 					echo $this->form_open('group_categories', ['page_method' => 'categories']);
@@ -374,7 +374,7 @@ if ($this->is_owner() || $this->is_admin())
 				echo ($this->is_admin() || $this->db->owners_can_change_categories == true
 						? '<input type="radio" name="change_id" value="' . $category_id . '" />'
 						: '') .
-					'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? ( in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' /> ' . "\n\t" .
+					'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? ( in_array($category_id, $selected) ? ' checked' : '') : '') . ' /> ' . "\n\t" .
 					'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
 
 				if (isset($word['childs']) && $word['childs'] == true)
@@ -390,7 +390,7 @@ if ($this->is_owner() || $this->is_admin())
 								($this->is_admin() || $this->db->owners_can_change_categories == true
 									? '<input type="radio" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
 									: '') .
-								'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked="checked"' : '') : '') . ' />' . "\n\t\t\t" .
+								'<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' />' . "\n\t\t\t" .
 								'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t" .
 							'&nbsp;&nbsp;&nbsp;</li>' . "\n";
 					}

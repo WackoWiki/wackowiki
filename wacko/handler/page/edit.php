@@ -387,7 +387,7 @@ if ($this->has_access('read')
 			// publish anonymously
 			if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 			{
-				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '"' . ( $this->get_user_setting('noid_pubs') == 1 ? ' checked="checked"' : '' ) . ' />';
+				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '"' . ( $this->get_user_setting('noid_pubs') == 1 ? ' checked' : '' ) . ' />';
 				$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . '</label>';
 				$output .= '<br />' . "\n";
 			}
@@ -395,7 +395,7 @@ if ($this->has_access('read')
 			// watch a page
 			if ($this->page && !$this->is_watched)
 			{
-				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? ' checked="checked"' : '' ) . ' />';
+				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? ' checked' : '' ) . ' />';
 				$output .= '<label for="watchpage">' . $this->_t('NotifyMe') . '</label>';
 				$output .= '<br />' . "\n";
 			}
@@ -406,14 +406,14 @@ if ($this->has_access('read')
 	{
 		foreach ($words as $id => $word)
 		{
-			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />' .
+			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked' : '' ) . ' />' .
 						'<label for="category' . $id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
-					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked="checked"' : '' ) . ' />' .
+					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked' : '' ) . ' />' .
 								'<label for="category' . $id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n";
 				}
 			}

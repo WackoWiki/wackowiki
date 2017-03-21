@@ -67,8 +67,8 @@ function admin_config_notifications(&$engine, &$module)
 						of the user signup process.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="enable_email_notification_on" name="enable_email_notification" value="1"<?php echo ( $engine->db->enable_email_notification == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_on"><?php echo $engine->_t('Enabled'); ?></label>
-					<input type="radio" id="enable_email_notification_off" name="enable_email_notification" value="0"<?php echo ( $engine->db->enable_email_notification == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_off"><?php echo $engine->_t('Disabled'); ?></label>
+					<input type="radio" id="enable_email_notification_on" name="enable_email_notification" value="1"<?php echo ( $engine->db->enable_email_notification == 1 ? ' checked' : '' );?> /><label for="enable_email_notification_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="enable_email_notification_off" name="enable_email_notification" value="0"<?php echo ( $engine->db->enable_email_notification == 0 ? ' checked' : '' );?> /><label for="enable_email_notification_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr>
@@ -83,9 +83,9 @@ function admin_config_notifications(&$engine, &$module)
 					<small>Pending - Sending a email notification only for the first change until the user visits the page again.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="notify_page0" name="notify_page" value="0"<?php echo ( $engine->db->notify_page == 0 ? ' checked="checked"' : '' );?> /><label for="notify_page0"><?php echo $engine->_t('NotifyOff'); ?></label>
-					<input type="radio" id="notify_page1" name="notify_page" value="1"<?php echo ( $engine->db->notify_page == 1 ? ' checked="checked"' : '' );?> /><label for="notify_page1"><?php echo $engine->_t('NotifyAlways'); ?></label>
-					<input type="radio" id="notify_page2" name="notify_page" value="2"<?php echo ( $engine->db->notify_page == 2 ? ' checked="checked"' : '' );?> /><label for="notify_page2"><?php echo $engine->_t('NotifyPending'); ?></label>
+					<input type="radio" id="notify_page0" name="notify_page" value="0"<?php echo ( $engine->db->notify_page == 0 ? ' checked' : '' );?> /><label for="notify_page0"><?php echo $engine->_t('NotifyOff'); ?></label>
+					<input type="radio" id="notify_page1" name="notify_page" value="1"<?php echo ( $engine->db->notify_page == 1 ? ' checked' : '' );?> /><label for="notify_page1"><?php echo $engine->_t('NotifyAlways'); ?></label>
+					<input type="radio" id="notify_page2" name="notify_page" value="2"<?php echo ( $engine->db->notify_page == 2 ? ' checked' : '' );?> /><label for="notify_page2"><?php echo $engine->_t('NotifyPending'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -97,7 +97,7 @@ function admin_config_notifications(&$engine, &$module)
 					<small>Sends notifications also for minor edits.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="notify_minor_edit" name="notify_minor_edit" value="1"<?php echo ( $engine->db->notify_minor_edit ? ' checked="checked"' : '' );?> />
+					<input type="checkbox" id="notify_minor_edit" name="notify_minor_edit" value="1"<?php echo ( $engine->db->notify_minor_edit ? ' checked' : '' );?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -109,9 +109,9 @@ function admin_config_notifications(&$engine, &$module)
 					<small>Pending - Sending a email notification only for the first comment until the user visits the page again.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="notify_comment0" name="notify_comment" value="0"<?php echo ( $engine->db->notify_comment == 0 ? ' checked="checked"' : '' );?> /><label for="notify_comment0"><?php echo $engine->_t('NotifyOff'); ?></label>
-					<input type="radio" id="notify_comment1" name="notify_comment" value="1"<?php echo ( $engine->db->notify_comment == 1 ? ' checked="checked"' : '' );?> /><label for="notify_comment1"><?php echo $engine->_t('NotifyAlways'); ?></label>
-					<input type="radio" id="notify_comment2" name="notify_comment" value="2"<?php echo ( $engine->db->notify_comment == 2 ? ' checked="checked"' : '' );?> /><label for="notify_comment2"><?php echo $engine->_t('NotifyPending'); ?></label>
+					<input type="radio" id="notify_comment0" name="notify_comment" value="0"<?php echo ( $engine->db->notify_comment == 0 ? ' checked' : '' );?> /><label for="notify_comment0"><?php echo $engine->_t('NotifyOff'); ?></label>
+					<input type="radio" id="notify_comment1" name="notify_comment" value="1"<?php echo ( $engine->db->notify_comment == 1 ? ' checked' : '' );?> /><label for="notify_comment1"><?php echo $engine->_t('NotifyAlways'); ?></label>
+					<input type="radio" id="notify_comment2" name="notify_comment" value="2"<?php echo ( $engine->db->notify_comment == 2 ? ' checked' : '' );?> /><label for="notify_comment2"><?php echo $engine->_t('NotifyPending'); ?></label>
 				</td>
 			</tr>
 			<tr class="hl_setting">
@@ -126,7 +126,7 @@ function admin_config_notifications(&$engine, &$module)
 					<small>The Admin will to be notified when a new user has been created using the "signup form".</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="notify_new_user_account" name="notify_new_user_account" value="1"<?php echo ( $engine->db->notify_new_user_account ? ' checked="checked"' : '' );?> />
+					<input type="checkbox" id="notify_new_user_account" name="notify_new_user_account" value="1"<?php echo ( $engine->db->notify_new_user_account ? ' checked' : '' );?> />
 				</td>
 			</tr>
 			<tr class="lined">

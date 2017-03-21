@@ -70,7 +70,6 @@ $insert_records[]		= [$lang['InstallingAdmin'],			$insert_admin,					'admin user
 $insert_records[]		= [$lang['InstallingAdminSetting'],		$insert_admin_setting,			'admin user settings'];
 $insert_records[]		= [$lang['InstallingAdminGroup'],		$insert_admin_group,			'admin group'];
 $insert_records[]		= [$lang['InstallingAdminGroupMember'],	$insert_admin_group_member,		'admin group member'];
-$insert_records[]		= [$lang['InstallingEverybodyGroup'],	$insert_everybody_group,		'everybody group'];
 $insert_records[]		= [$lang['InstallingRegisteredGroup'],	$insert_registered_group,		'registered group'];
 $insert_records[]		= [$lang['InstallingModeratorGroup'],	$insert_moderator_group,		'moderator group'];
 $insert_records[]		= [$lang['InstallingReviewerGroup'],	$insert_reviewer_group,			'reviewer group'];

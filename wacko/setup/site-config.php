@@ -72,7 +72,7 @@ else
    <h2><?php echo $lang['MultiLang'];?></h2>
    <p class="notop"><?php echo $lang['MultiLangDesc'];?></p>
    <label class="indented_label" for="wiki_multilanguage"><?php echo $lang['Enabled'];?></label>
-   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? 'checked="checked"' : '' ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? 'checked' : '' ?> class="checkbox_input" />
    <br />
 
    <div class="fake_hr_seperator">
@@ -110,7 +110,7 @@ echo '<table  class="checkbox_input">' . "\n\t<tr>\n";
 foreach ($langs as $_lang)
 {
 	echo	"\t\t<td>\n\t\t\t" .
-				'<input type="checkbox" name="config[allowed_languages][' . $n . ']" id="lang_' . $_lang . '" value="' . $_lang . '" '. (in_array($_lang, $lang_list) ? ' checked="checked"' : ''). ' />' . "\n\t\t\t" .
+				'<input type="checkbox" name="config[allowed_languages][' . $n . ']" id="lang_' . $_lang . '" value="' . $_lang . '" '. (in_array($_lang, $lang_list) ? ' checked' : ''). ' />' . "\n\t\t\t" .
 				'<label for="lang_' . $_lang . '">' . $_languages[$_lang] . ' (' . $_lang . ')</label>' .
 			"\n\t\t</td>\n";
 
@@ -175,7 +175,7 @@ else
    <h2><?php echo $lang['Rewrite'];?></h2>
    <p class="notop"><?php echo $lang['RewriteDesc'];?></p>
    <label class="indented_label" for="wiki_rewrite"><?php echo $lang['Enabled'];?></label>
-   <input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]"  value="1" <?php echo isset($config['rewrite_mode']) ? 'checked="checked"' : '' ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]"  value="1" <?php echo isset($config['rewrite_mode']) ? 'checked' : '' ?> class="checkbox_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
