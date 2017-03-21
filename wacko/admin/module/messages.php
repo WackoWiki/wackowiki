@@ -54,9 +54,9 @@ function admin_messages(&$engine, &$module)
 				<th colspan="2">System message</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;"><label for="system_message"><strong>System message:</strong><br />
+				<td class="label"><label for="system_message"><strong>System message:</strong><br />
 					<small>Your text here</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td><textarea style="width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -65,7 +65,7 @@ function admin_messages(&$engine, &$module)
 				<td class="label"><label for="system_message_type"><strong>Type:</strong><br />
 					<small>Message type (CSS).</small></label></td>
 				<td>
-					<select style="width:200px;" id="system_message_type" name="system_message_type">
+					<select id="system_message_type" name="system_message_type">
 <?php
 						$typs = ['info', 'warning', 'marquee'];
 

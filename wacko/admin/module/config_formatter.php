@@ -171,7 +171,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="date_format"><strong>The format of the date:</strong><br />
 				<small>(day, month, year)</small></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="date_format" name="date_format" value="<?php echo htmlspecialchars($engine->db->date_format, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="date_format" name="date_format" value="<?php echo htmlspecialchars($engine->db->date_format, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -179,7 +179,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="time_format"><strong>The format of time:</strong><br />
 				<small>(hour, minute)</small></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="time_format" name="time_format" value="<?php echo htmlspecialchars($engine->db->time_format, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="time_format" name="time_format" value="<?php echo htmlspecialchars($engine->db->time_format, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -187,7 +187,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="time_format_seconds"><strong>The format of the exact time:</strong><br />
 				<small>(hours, minutes, seconds)</small></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="time_format_seconds" name="time_format_seconds" value="<?php echo htmlspecialchars($engine->db->time_format_seconds, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="time_format_seconds" name="time_format_seconds" value="<?php echo htmlspecialchars($engine->db->time_format_seconds, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -195,7 +195,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="name_date_macro"><strong>The format of the <code>::@::</code> macro:</strong><br />
 				<small>(name, time), e.g. <code>UserName (17.11.2016 16:48)</code></small></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="name_date_macro" name="name_date_macro" value="<?php echo htmlspecialchars($engine->db->name_date_macro, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="name_date_macro" name="name_date_macro" value="<?php echo htmlspecialchars($engine->db->name_date_macro, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -293,7 +293,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_youarehere_text"><strong>Disable and visualize self-referencing links:</strong><br />
 				<small>Visualizing links to the same page, try to <code>'&lt;b&gt;####&lt;/b&gt;'</code>, all links-to-self became not links, but bold text.</small></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="enable_youarehere_text" name="youarehere_text" value="<?php echo htmlspecialchars($engine->db->youarehere_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="enable_youarehere_text" name="youarehere_text" value="<?php echo htmlspecialchars($engine->db->youarehere_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 		</table>
 		<br />

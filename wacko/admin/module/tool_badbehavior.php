@@ -185,7 +185,7 @@ function bb2_summary(&$engine)
 		{
 			foreach ($results as $result)
 			{
-				echo '<tr id="request-' . '' . '"  style="vertical-align:top;" class="lined">' . "\n";
+				echo '<tr id="request-' . '' . '" class="lined">' . "\n";
 				echo '<td class="label" style="width:5%;">' . $result['n'] . "</td>\n";
 				#echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . "</td>\n";
 
@@ -321,7 +321,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 		{
 			$status_key = bb2_get_response($result['status_key']);
 
-			echo '<tr id="request-' . $result['log_id'] . '"  style="vertical-align:top;" class="lined">' . "\n";
+			echo '<tr id="request-' . $result['log_id'] . '" class="lined">' . "\n";
 
 			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '" /></td>' . "\n";
 
