@@ -73,7 +73,7 @@ function admin_config_upload(&$engine, &$module)
 					<small><code>'admins'</code> means that only users belongig to admins group can upload the files. <code>'1'</code> means that uploading is opened to registered users. <code>'0'</code> means that upload disabled</small></label>
 				</td>
 				<td>
-					<select style="width:200px;" id="upload" name="upload">
+					<select id="upload" name="upload">
 						<option value="admins"<?php echo ((string) $engine->db->upload === 'admins' ? ' selected="selected"' : '');?>>Admins</option>
 						<option value="1"<?php echo ((string) $engine->db->upload === '1' ? ' selected="selected"' : '');?>>registered users</option>
 						<option value="0"<?php echo ((string) $engine->db->upload === '0' ? ' selected="selected"' : '');?>>disabled</option>

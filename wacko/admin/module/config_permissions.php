@@ -69,72 +69,72 @@ function admin_config_permissions(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;">
+				<td class="label">
 					<label for="default_read_acl"><strong>Read rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label>
 				</td>
 				<td>
-					<textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_read_acl" name="default_read_acl"><?php echo htmlspecialchars($engine->db->default_read_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:200px; height:50px;" id="default_read_acl" name="default_read_acl"><?php echo htmlspecialchars($engine->db->default_read_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;">
+				<td class="label">
 					<label for="default_write_acl"><strong>Write rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label>
 				</td>
 				<td>
-					<textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_write_acl" name="default_write_acl"><?php echo htmlspecialchars($engine->db->default_write_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:200px; height:50px;" id="default_write_acl" name="default_write_acl"><?php echo htmlspecialchars($engine->db->default_write_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;">
+				<td class="label">
 					<label for="default_comment_acl"><strong>Comment rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label>
 				</td>
 				<td>
-					<textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_comment_acl" name="default_comment_acl"><?php echo htmlspecialchars($engine->db->default_comment_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:200px; height:50px;" id="default_comment_acl" name="default_comment_acl"><?php echo htmlspecialchars($engine->db->default_comment_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;">
+				<td class="label">
 					<label for="default_create_acl"><strong>Create rights of a sub page by default:</strong><br />
 					<small>Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.</small></label>
 				</td>
 				<td>
-					<textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_create_acl" name="default_create_acl"><?php echo htmlspecialchars($engine->db->default_create_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:200px; height:50px;" id="default_create_acl" name="default_create_acl"><?php echo htmlspecialchars($engine->db->default_create_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;">
+				<td class="label">
 					<label for="default_upload_acl"><strong>Upload rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label>
 				</td>
 				<td>
-					<textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_upload_acl" name="default_upload_acl"><?php echo htmlspecialchars($engine->db->default_upload_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:200px; height:50px;" id="default_upload_acl" name="default_upload_acl"><?php echo htmlspecialchars($engine->db->default_upload_acl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;">
+				<td class="label">
 					<label for="rename_globalacl"><strong>Global rename right:</strong><br />
 					<small>List for admission to the possibility of free rename (move) pages.</small></label>
 				</td>
 				<td>
-					<textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo htmlspecialchars($engine->db->rename_globalacl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo htmlspecialchars($engine->db->rename_globalacl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea>
 				</td>
 			</tr>
 			<tr class="hl_setting">
@@ -210,7 +210,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small>Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="moders_can_edit" name="moders_can_edit" value="<?php echo (int) $engine->db->moders_can_edit;?>" />
+					<input type="number" min="0" maxlength="4" id="moders_can_edit" name="moders_can_edit" value="<?php echo (int) $engine->db->moders_can_edit;?>" />
 				</td>
 			</tr>
 		</table>

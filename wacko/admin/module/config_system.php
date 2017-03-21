@@ -69,7 +69,7 @@ function admin_config_system(&$engine, &$module)
 				<td class="label"><label for="debug_mode"><strong>Debug mode:</strong><br />
 				<small>Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.</small></label></td>
 				<td>
-					<select style="width:200px;" id="debug_mode" name="debug">
+					<select id="debug_mode" name="debug">
 						<option value="0"<?php echo ((int) $engine->db->debug === 0 ? ' selected="selected"' : '');?>>0: debugging is off</option>
 						<option value="1"<?php echo ((int) $engine->db->debug === 1 ? ' selected="selected"' : '');?>>1: only the total execution time</option>
 						<option value="2"<?php echo ((int) $engine->db->debug === 2 ? ' selected="selected"' : '');?>>2: full-time</option>
@@ -83,7 +83,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="debug_sql_threshold"><strong>Threshold performance RDBMS:</strong><br />
 				<small>In the detailed debug mode to record only the queries take longer than the number of seconds.</small></label></td>
-				<td><input type="number" min="0" maxlength="10" style="width:200px;" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo (int) $engine->db->debug_sql_threshold;?>" /></td>
+				<td><input type="number" min="0" maxlength="10" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo (int) $engine->db->debug_sql_threshold;?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -110,7 +110,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cache_ttl"><strong>Term relevance cached pages:</strong><br />
 				<small>Cache pages no more than a specified number of seconds.</small></label></td>
-				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="cache_ttl" name="cache_ttl" value="<?php echo (int) $engine->db->cache_ttl;?>" /></td>
+				<td><input type="number" min="0" maxlength="5" id="cache_ttl" name="cache_ttl" value="<?php echo (int) $engine->db->cache_ttl;?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -126,7 +126,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cache_sql_ttl"><strong>Term relevance Cache Database:</strong><br />
 				<small>Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.</small></label></td>
-				<td><input type="number" min="0" maxlength="5" style="width:200px;" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo (int) $engine->db->cache_sql_ttl;?>" /></td>
+				<td><input type="number" min="0" maxlength="5" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo (int) $engine->db->cache_sql_ttl;?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -158,7 +158,7 @@ function admin_config_system(&$engine, &$module)
 				<small>Set this value if your proxy server sends the client IP in a header
 				 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
 				 addresses, only the last one (the left-most) will be used.</small></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_header, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_header, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -171,7 +171,7 @@ function admin_config_system(&$engine, &$module)
 				 these, that is the request reaches the web server from one of your
 				 reverse proxies. Otherwise, the client could directly connect to
 				 your web server spoofing the X-Forwarded-For headers.</small></label></td>
-				<td><input type="text" maxlength="50" style="width:200px;" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

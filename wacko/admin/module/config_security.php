@@ -265,7 +265,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash and without https://.</small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="100" style="width:200px;" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->db->tls_proxy, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="100" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->db->tls_proxy, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr class="hl_setting">
@@ -293,7 +293,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.</small></label>
 				</td>
 				<td>
-					<select style="width:200px;" id="csp" name="csp">
+					<select id="csp" name="csp">
 						<option value="0"<?php echo ( (int) $engine->db->csp === 0 ? ' selected="selected"' : '' );?>>disabled</option>
 						<option value="1"<?php echo ( (int) $engine->db->csp === 1 ? ' selected="selected"' : '' );?>>strict</option>
 						<option value="2"<?php echo ( (int) $engine->db->csp === 2 ? ' selected="selected"' : '' );?>>custom</option>
@@ -312,7 +312,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br />The use of passphrases instead of passwords is encouraged.</small></label>
 				</td>
 				<td>
-					<input type="number" min="5" maxlength="3" style="width:200px;" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>" />
+					<input type="number" min="5" maxlength="3" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -323,7 +323,7 @@ function admin_config_security(&$engine, &$module)
 					<label for="pwd_char_classes"><strong>The required password complexity:</strong></label>
 				</td>
 				<td>
-					<select style="width:200px;" id="pwd_char_classes" name="pwd_char_classes">
+					<select id="pwd_char_classes" name="pwd_char_classes">
 						<option value="0"<?php echo ( (int) $engine->db->pwd_char_classes === 0 ? ' selected="selected"' : '' );?>>not tested</option>
 						<option value="1"<?php echo ( (int) $engine->db->pwd_char_classes === 1 ? ' selected="selected"' : '' );?>>any letters + numbers</option>
 						<option value="2"<?php echo ( (int) $engine->db->pwd_char_classes === 2 ? ' selected="selected"' : '' );?>>uppercase and lowercase + numbers</option>
@@ -339,7 +339,7 @@ function admin_config_security(&$engine, &$module)
 					<label for="pwd_unlike_login"><strong>Additional complication:</strong></label>
 				</td>
 				<td>
-					<select style="width:200px;" id="pwd_unlike_login" name="pwd_unlike_login">
+					<select id="pwd_unlike_login" name="pwd_unlike_login">
 						<option value="0"<?php echo ( (int) $engine->db->pwd_unlike_login === 0 ? ' selected="selected"' : '' );?>>not tested</option>
 						<option value="1"<?php echo ( (int) $engine->db->pwd_unlike_login === 1 ? ' selected="selected"' : '' );?>>password is not identical to the login</option>
 						<option value="2"<?php echo ( (int) $engine->db->pwd_unlike_login === 2 ? ' selected="selected"' : '' );?>>password does not contain username</option>
@@ -358,7 +358,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo (int) $engine->db->max_login_attempts;?>" />
+					<input type="number" min="0" maxlength="4" id="max_login_attempts" name="max_login_attempts" value="<?php echo (int) $engine->db->max_login_attempts;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -370,7 +370,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo (int) $engine->db->ip_login_limit_max;?>" />
+					<input type="number" min="0" maxlength="4" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo (int) $engine->db->ip_login_limit_max;?>" />
 				</td>
 			</tr>
 			<tr>
@@ -385,7 +385,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The minimum priority of the events recorded in the log.</small></label>
 				</td>
 				<td>
-					<select style="width:200px;" id="log_level" name="log_level">
+					<select id="log_level" name="log_level">
 						<option value="0"<?php echo ( (int) $engine->db->log_level === 0 ? ' selected="selected"' : '' );?>>0: not keep a journal</option>
 						<option value="7"<?php echo ( (int) $engine->db->log_level === 7 ? ' selected="selected"' : '' );?>>7: record all</option>
 						<option value="6"<?php echo ( (int) $engine->db->log_level === 6 ? ' selected="selected"' : '' );?>>6: the minimum level</option>
@@ -406,7 +406,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The minimum priority events displayed in the log by default.</small></label>
 				</td>
 				<td>
-					<select style="width:200px;" id="log_default_show" name="log_default_show">
+					<select id="log_default_show" name="log_default_show">
 						<option value="7"<?php echo ( (int) $engine->db->log_default_show === 7 ? ' selected="selected"' : '' );?>>show all</option>
 						<option value="6"<?php echo ( (int) $engine->db->log_default_show === 6 ? ' selected="selected"' : '' );?>>from the minimum level</option>
 						<option value="5"<?php echo ( (int) $engine->db->log_default_show === 5 ? ' selected="selected"' : '' );?>>from a low</option>
@@ -426,7 +426,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Remove event log over a given number of days.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="log_purge_time" name="log_purge_time" value="<?php echo (int) $engine->db->log_purge_time;?>" />
+					<input type="number" min="0" maxlength="4" id="log_purge_time" name="log_purge_time" value="<?php echo (int) $engine->db->log_purge_time;?>" />
 				</td>
 			</tr>
 			<tr class="hl_setting">
@@ -441,7 +441,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The time a user has to submit a form (in seconds).<br /> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="form_token_time" name="form_token_time" value="<?php echo (int) $engine->db->form_token_time;?>" />
+					<input type="number" min="0" maxlength="4" id="form_token_time" name="form_token_time" value="<?php echo (int) $engine->db->form_token_time;?>" />
 				</td>
 			</tr>
 			<tr class="hl_setting">
@@ -456,7 +456,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The lifetime of the user cookie login by default (in days).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="session_length" name="session_length" value="<?php echo (int) $engine->db->session_length;?>" />
+					<input type="number" min="0" maxlength="4" id="session_length" name="session_length" value="<?php echo (int) $engine->db->session_length;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -468,7 +468,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The minimum delay between the publication of the new user comments (in seconds).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo (int) $engine->db->comment_delay;?>" />
+					<input type="number" min="0" maxlength="4" id="comment_delay" name="comment_delay" value="<?php echo (int) $engine->db->comment_delay;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -480,7 +480,7 @@ function admin_config_security(&$engine, &$module)
 					<small>The minimum delay between sending a private message user connection (in seconds).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" style="width:200px;" id="intercom_delay" name="intercom_delay" value="<?php echo (int) $engine->db->intercom_delay;?>" />
+					<input type="number" min="0" maxlength="4" id="intercom_delay" name="intercom_delay" value="<?php echo (int) $engine->db->intercom_delay;?>" />
 				</td>
 			</tr>
 		</table>

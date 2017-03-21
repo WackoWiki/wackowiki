@@ -165,9 +165,9 @@ $mail_body = '';
 				</td></tr>
 
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;"><label for="mail_body"><strong>Your message:</strong><br />
+				<td class="label"><label for="mail_body"><strong>Your message:</strong><br />
 					<small>Please note that you may enter only plain text. All markup will be removed before sending.</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="mail_body" name="mail_body"  required><?php echo htmlspecialchars($mail_body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td><textarea style="width:200px; height:100px;" id="mail_body" name="mail_body"  required><?php echo htmlspecialchars($mail_body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -176,7 +176,7 @@ $mail_body = '';
 				<td class="label"><label for="language"><strong>Default language:</strong><br />
 					<small>Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.</small></label></td>
 				<td>
-					<select style="width:200px;" id="language" name="language">
+					<select id="language" name="language">
 <?php
 						$languages	= $engine->_t('LanguageArray');
 						$langs		= $engine->available_languages();

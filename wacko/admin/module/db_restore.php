@@ -130,7 +130,7 @@ function admin_db_restore(&$engine, &$module)
 					echo '<td><table>';
 						// cluster root
 						echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">' .
-								$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+								$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 							'</th></tr>' . "\n";
 						// contents
 						echo '<tr>' .
@@ -505,7 +505,7 @@ function admin_db_restore(&$engine, &$module)
 						echo '<td><table>';
 							// cluster root
 							echo '<tr><th colspan="3" style="text-align:left;white-space:nowrap;">' .
-									$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em style="font-weight:normal;" class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+									$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 								'</th></tr>' . "\n";
 							// contents
 							echo '<tr>' .

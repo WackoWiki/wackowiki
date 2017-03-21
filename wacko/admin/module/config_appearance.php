@@ -233,7 +233,7 @@ function admin_config_appearance(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;"><label for="logo"><strong>Site Logo:</strong><br />
+				<td class="label"><label for="logo"><strong>Site Logo:</strong><br />
 					<small>Your logo will appear at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.</small></label>
 				</td>
 				<td>
@@ -287,7 +287,7 @@ function admin_config_appearance(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"  style="vertical-align:top;"><label for="logo"><strong>Site Favicon:</strong><br />
+				<td class="label"><label for="logo"><strong>Site Favicon:</strong><br />
 					<small>Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers.</small></label>
 				</td>
 				<td>
@@ -309,7 +309,7 @@ function admin_config_appearance(&$engine, &$module)
 				<td class="label"><label for="theme"><strong>Theme:</strong><br />
 					<small>Template design the site uses by default.</small></label></td>
 				<td>
-					<select style="width:200px;" id="theme" name="theme">
+					<select id="theme" name="theme">
 					<?php
 						$themes = $engine->available_themes();
 
