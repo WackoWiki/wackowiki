@@ -312,7 +312,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br />The use of passphrases instead of passwords is encouraged.</small></label>
 				</td>
 				<td>
-					<input type="number" min="5" maxlength="3" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>" />
+					<input type="number" min="10" maxlength="3" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>" />
 				</td>
 			</tr>
 			<tr class="lined">
