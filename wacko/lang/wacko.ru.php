@@ -442,7 +442,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'Введенный адрес email уже используется другим пользователем.',
 	'PasswordsDidntMatch'		=> 'Пароли не совпадают.',
 	'SpacesArentAllowed'		=> 'Нельзя использовать в пароле пробел.',
-	'PasswordTooShort'			=> 'Пароль слишком короткий.',
 	'ListMyPages'				=> 'Список ваших страниц',
 	'ListMyChanges'				=> 'Список ваших редакций',
 	'ListMyWatches'				=> 'Список наблюдаемых страниц',
@@ -1029,6 +1028,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'				=> 'заглавных и строчных букв и цифр',
 	'PwdCplxDesc43'				=> 'заглавных и строчных букв, цифр и небуквенных символов',
 	'PwdCplxDesc5'				=> 'Можно использовать любые буквы, цифры и специальные символы, кроме пробелов.',
+
+	'PasswordTooShort'			=> 'Пароль слишком короткий.',
+	'PasswordTooCommon'			=> 'Этот пароль слишком распространен.',
+	'PasswordSameAsUsername'	=> 'Ваш пароль такой же, как и ваше имя пользователя.',
+	'PasswordSameAsEmail'		=> 'Ваш пароль такой же, как и ваш email.',
 
 	// POLLS ADD-ON
 	'PollsTopic'				=> 'Вопрос',

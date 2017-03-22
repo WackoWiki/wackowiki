@@ -441,7 +441,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'Sisestatud e-postiaadress on juba kasutuses.',
 	'PasswordsDidntMatch'		=> 'Parool ei klapi.',
 	'SpacesArentAllowed'		=> 'Tühikud ei ole paroolis lubatud.',
-	'PasswordTooShort'			=> 'Liiga lühike parool.',
 	'ListMyPages'				=> 'List your pages',
 	'ListMyChanges'				=> 'List your changes',
 	'ListMyWatches'				=> 'List of watched pages',
@@ -1026,6 +1025,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
 	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
 	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+
+	'PasswordTooShort'			=> 'Liiga lühike parool.',
+	'PasswordTooCommon'			=> 'See parool on liiga tavaline.',
+	'PasswordSameAsUsername'	=> 'Parool ühtib sinu kasutajanimega.',
+	'PasswordSameAsEmail'		=> 'Parool ühtib sinu meiliaadressiga.',
 
 	// POLLS ADD-ON
 	'PollsTopic'				=> 'Topic',
