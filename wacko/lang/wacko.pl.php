@@ -441,7 +441,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'Wpisany adres e-mail jest ju¿ u¿ywany.',
 	'PasswordsDidntMatch'		=> 'Wprowadzone has³a nie s± identyczne.',
 	'SpacesArentAllowed'		=> 'Has³o nie mo¿e zawieraæ odstêpów.',
-	'PasswordTooShort'			=> 'Wprowadzone has³o jest za krótkie.',
 	'ListMyPages'				=> 'List your pages',
 	'ListMyChanges'				=> 'List your changes',
 	'ListMyWatches'				=> 'List of watched pages',
@@ -1026,6 +1025,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'		=> 'uppercase and lowercase letters and numbers',
 	'PwdCplxDesc43'		=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
 	'PwdCplxDesc5'		=> 'You can use any letters, numbers and special characters, but gaps.',
+
+	'PasswordTooShort'			=> 'Wprowadzone has³o jest za krótkie.',
+	'PasswordTooCommon'			=> 'To has³o jest zbyt popularne.',
+	'PasswordSameAsUsername'	=> 'Twoje has³o jest takie samo jak nazwa u¿ytkownika.',
+	'PasswordSameAsEmail'		=> 'Twoje has³o jest takie samo jak twój e-mail.',
 
 	// POLLS ADD-ON
 	'PollsTopic'		=> 'Topic',

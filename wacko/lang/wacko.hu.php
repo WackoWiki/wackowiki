@@ -441,7 +441,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'The entered email address is already in use.',
 	'PasswordsDidntMatch'		=> 'Passwords didn\'t match.',
 	'SpacesArentAllowed'		=> 'Spaces aren\'t allowed in passwords.',
-	'PasswordTooShort'			=> 'Password too short.',
 	'ListMyPages'				=> 'List your pages',
 	'ListMyChanges'				=> 'List your changes',
 	'ListMyWatches'				=> 'List of watched pages',
@@ -1026,6 +1025,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
 	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
 	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+
+	'PasswordTooShort'			=> 'A jelszó túl rövid.',
+	'PasswordTooCommon'			=> 'A jelszó túl gyakori.',
+	'PasswordSameAsUsername'	=> 'A jelszó ugyanaz, mint a felhasználónevét.',
+	'PasswordSameAsEmail'		=> 'A jelszó ugyanaz, mint az e-mail.',
 
 	// POLLS ADD-ON
 	'PollsTopic'				=> 'Topic',

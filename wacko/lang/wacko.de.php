@@ -442,7 +442,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'Die angegebene E-Mail-Adresse wird bereits verwendet.',
 	'PasswordsDidntMatch'		=> 'Passwörter stimmen nicht überein.',
 	'SpacesArentAllowed'		=> 'Leerzeichen sind im Passwort nicht zulässig.',
-	'PasswordTooShort'			=> 'Passwort zu kurz.',
 	'ListMyPages'				=> 'Liste deiner Seiten',
 	'ListMyChanges'				=> 'Liste deiner Änderungen',
 	'ListMyWatches'				=> 'Liste der beobachteten Seiten',
@@ -1028,6 +1027,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'				=> 'Groß- und Kleinbuchstaben und Zahlen',
 	'PwdCplxDesc43'				=> 'Groß- und Kleinbuchstaben, Ziffern und nicht-alphabetische Zeichen',
 	'PwdCplxDesc5'				=> 'Es können alle Buchstaben, Zahlen und Sonderzeichen, außer Leerzeichen, verwendet werden.',
+
+	'PasswordTooShort'			=> 'Passwort zu kurz.',
+	'PasswordTooCommon'			=> 'Das Passwort wird zu häufig verwendet.',
+	'PasswordSameAsUsername'	=> 'Dein Passwort entspricht deinem Benutzernamen.',
+	'PasswordSameAsEmail'		=> 'Dein Passwort entspricht deiner E-Mail-Adresse.',
 
 	// POLLS ADD-ON
 	'PollsTopic'				=> 'Thema',

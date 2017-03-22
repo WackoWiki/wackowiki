@@ -441,7 +441,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'Η εισαχθείσα διεύθυνση ηλεκτρονικού ταχυδρομείου χρησιμοποιείται ήδη.',
 	'PasswordsDidntMatch'		=> 'Τα συνθηματικά δεν ταιριάζουν.',
 	'SpacesArentAllowed'		=> 'Τα κενά δεν επιτρέπονται στα συνθηματικά.',
-	'PasswordTooShort'			=> 'Το συνθηματικό είναι μικρό.',
 	'ListMyPages'				=> 'List your pages',
 	'ListMyChanges'				=> 'List your changes',
 	'ListMyWatches'				=> 'List of watched pages',
@@ -1026,6 +1025,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
 	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
 	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+
+	'PasswordTooShort'			=> 'Το συνθηματικό είναι μικρό.',
+	'PasswordTooCommon'			=> 'Ο κωδικός πρόσβασης είναι πολύ κοινός.',
+	'PasswordSameAsUsername'	=> 'Ο κωδικός πρόσβασης που έδωσες είναι ο ίδιος με το χρηστώνυμο.',
+	'PasswordSameAsEmail'		=> 'Ο κωδικός πρόσβασής σου είναι ίδιος με τη διεύθυνση ηλεκτρονικού ταχυδρομείου σου.',
 
 	// POLLS ADD-ON
 	'PollsTopic'				=> 'Topic',

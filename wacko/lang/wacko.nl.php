@@ -441,7 +441,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'Het opgegeven e-mailadres is reeds in gebruik.',
 	'PasswordsDidntMatch'		=> 'Wachtwoorden komen niet overeen.',
 	'SpacesArentAllowed'		=> 'Spaties zijn niet toegestaan in wachtwoorden.',
-	'PasswordTooShort'			=> 'Wachtwoord is te kort.',
 	'ListMyPages'				=> 'List your pages',
 	'ListMyChanges'				=> 'List your changes',
 	'ListMyWatches'				=> 'List of watched pages',
@@ -1026,6 +1025,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'		=> 'uppercase and lowercase letters and numbers',
 	'PwdCplxDesc43'		=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
 	'PwdCplxDesc5'		=> 'You can use any letters, numbers and special characters, but gaps.',
+
+	'PasswordTooShort'			=> 'Wachtwoord is te kort.',
+	'PasswordTooCommon'			=> 'Dat wachtwoord wordt al te vaak gebruikt.',
+	'PasswordSameAsUsername'	=> 'Uw wachtwoord is hetzelfde als uw gebruikersnaam.',
+	'PasswordSameAsEmail'		=> 'Uw wachtwoord is hetzelfde als uw e-mailadres.',
 
 	// POLLS ADD-ON
 	'PollsTopic'		=> 'Topic',

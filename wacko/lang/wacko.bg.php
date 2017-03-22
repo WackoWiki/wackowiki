@@ -441,7 +441,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'Въведения email адрес вече се използва от друг потребител.',
 	'PasswordsDidntMatch'		=> 'Паролата не е правилна.',
 	'SpacesArentAllowed'		=> 'Не може да се използват празни символи в паролата.',
-	'PasswordTooShort'			=> 'Паролата е прекалено къса.',
 	'ListMyPages'				=> 'List your pages',
 	'ListMyChanges'				=> 'List your changes',
 	'ListMyWatches'				=> 'List of watched pages',
@@ -1026,6 +1025,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'				=> 'uppercase and lowercase letters and numbers',
 	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
 	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
+
+	'PasswordTooShort'			=> 'Паролата е прекалено къса.',
+	'PasswordTooCommon'			=> 'Тази парола е твърде обща.',
+	'PasswordSameAsUsername'	=> 'Паролата ви е същото като вашето потребителско име.',
+	'PasswordSameAsEmail'		=> 'Паролата ви е същата като вашата електронна поща.',
 
 	// POLLS ADD-ON
 	'PollsTopic'				=> 'Topic',

@@ -441,7 +441,6 @@ $wacko_translation = [
 	'EmailTaken'				=> 'L\'indirizzo e-mail inserito è già in uso.',
 	'PasswordsDidntMatch'		=> 'Password non identiche.',
 	'SpacesArentAllowed'		=> 'Nelle password i caratteri-spazio non sono consentiti.',
-	'PasswordTooShort'			=> 'Password troppo corta.',
 	'ListMyPages'				=> 'List your pages',
 	'ListMyChanges'				=> 'List your changes',
 	'ListMyWatches'				=> 'List of watched pages',
@@ -1026,6 +1025,11 @@ $wacko_translation = [
 	'PwdCplxDesc42'		=> 'uppercase and lowercase letters and numbers',
 	'PwdCplxDesc43'		=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
 	'PwdCplxDesc5'		=> 'You can use any letters, numbers and special characters, but gaps.',
+
+	'PasswordTooShort'			=> 'Password troppo corta.',
+	'PasswordTooCommon'			=> 'Questa password è troppo comune.',
+	'PasswordSameAsUsername'	=> 'La tua password è uguale al tuo nome utente.',
+	'PasswordSameAsEmail'		=> 'La password coincide con l\'email.',
 
 	// POLLS ADD-ON
 	'PollsTopic'		=> 'Topic',
