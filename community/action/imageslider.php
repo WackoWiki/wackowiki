@@ -51,25 +51,30 @@ if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
 if ($order == 'ext')		$order_by = "file_ext ASC";
 
-$widthSettings = '100%'; // 100%, 300px, etc.
+$width_settings			= '100%'; // 100%, 300px, etc.
+
 // default options for slider
-$timeOnSlide		= 6;
-$timeBetweenSlides	= 1;
-$animationTiming	= 'ease';
-$slidyDirection		= 'left';
-$cssAnimationName	= 'slidy';
+$time_on_slide			= 6;
+$time_between_slides	= 1;
+$animation_timing		= 'ease';
+$slidy_direction		= 'left';
+$css_animation_name		= 'slidy';
+
 // options: data-caption, alt, none
-$captionSource		= 'data-caption';
-$captionBackground	= 'rgba(0,0,0,0.3)';
-$captionColor		= '#fff';
-$captionFont		= 'Avenir, Avenir Next, Droid Sans, DroidSansRegular, Corbel, Tahoma, Geneva, sans-serif';
+$caption_source			= 'data-caption';
+$caption_background		= 'rgba(0,0,0,0.3)';
+$caption_color			= '#fff';
+$caption_font			= 'Avenir, Avenir Next, Droid Sans, DroidSansRegular, Corbel, Tahoma, Geneva, sans-serif';
+
 // options: top, bottom
-$captionPosition	= 'bottom';
-//  options: slide, perm, fade
-$captionAppear		= 'slide';
-$captionSize		= '1.6rem';
+$caption_position		= 'bottom';
+
+// options: slide, perm, fade
+$caption_appear			= 'slide';
+$caption_size			= '1.6rem';
+
 // same units
-$captionPadding		= '.6rem';
+$caption_padding		= '.6rem';
 
 // do we allowed to see?
 if (!$global)
@@ -118,7 +123,7 @@ if ($can_view)
 		"SELECT f.file_id " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id']) . "' " .
+		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' " .
 			"AND f.picture_w <> '0' " .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
@@ -135,7 +140,7 @@ if ($can_view)
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id']) . "' " .
+		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' " .
 			"AND f.picture_w <> '0' " .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
@@ -143,7 +148,7 @@ if ($can_view)
 			($deleted != 1
 			? "AND f.deleted <> '1' "
 					: "") .
-		"ORDER BY f." . $order_by." " .
+		"ORDER BY f." . $order_by . " " .
 		"LIMIT {$pagination['offset']}, {$limit}");
 
 	if (!is_array($files))
@@ -155,7 +160,7 @@ if ($can_view)
 
 	if (!$global)
 	{
-		$path2 = 'file:/'.($this->slim_url($page)) . '/';
+		$path2 = 'file:/' . ($this->slim_url($page)) . '/';
 	}
 	else
 	{
@@ -173,26 +178,26 @@ if ($can_view)
 		// calculate data for image slider CSS
 
 		// count the number of images in the slide, including the new cloned element
-		$imgCount		= $factor + 1;
+		$img_count			= $factor + 1;
 		// calculate the total length of the animation by multiplying the number of _actual_ images by the amount of time for both static display of each image and motion between them
-		$totalTime		= ($timeOnSlide + $timeBetweenSlides) * ($imgCount - 1);
-		#$_totalTime	= ($timeOnSlide + $timeBetweenSlides) * ($imgCount);
+		$total_time			= ($time_on_slide + $time_between_slides) * ($img_count - 1);
+		#$_totalTime	= ($time_on_slide + $time_between_slides) * ($img_count);
 		// determine the percentage of time an individual image is held static during the animation
-		$slideRatio		= ($timeOnSlide / $totalTime) * 100;
+		$slide_ratio		= ($time_on_slide / $total_time) * 100;
 		// determine the percentage of time for an individual movement
-		$moveRatio		= ($timeBetweenSlides / $totalTime) * 100;
+		$move_ratio			= ($time_between_slides / $total_time) * 100;
 		// work out how wide each image should be in the slidy, as a percentage.
-		$basePercentage	= 100 / $imgCount;
+		$base_percentage	= 100 / $img_count;
 		// set the initial position of the slidy element
-		$position		= 0;
+		$position			= 0;
 
 		// debug info
-		#echo 'imgCount: '. $imgCount . '<br />';
-		#echo 'totalTime: '. $totalTime . '<br />';
-		#echo 'slideRatio: '. $slideRatio . '<br />';
-		#echo 'moveRatio: '. $moveRatio . '<br />';
-		#echo 'basePercentage: '. $basePercentage . '<br />';
-		#echo 'totalTime: '. $totalTime . '<br />';
+		#echo 'imgCount: ' . $img_count . '<br />';
+		#echo 'totalTime: ' . $total_time . '<br />';
+		#echo 'slideRatio: ' . $slide_ratio . '<br />';
+		#echo 'moveRatio: ' . $move_ratio . '<br />';
+		#echo 'basePercentage: ' . $base_percentage . '<br />';
+		#echo 'totalTime: ' . $total_time . '<br />';
 		?>
 
 		<style>
@@ -206,22 +211,22 @@ if ($can_view)
 		}
 		figure.slider {
 			position: relative;
-			width: <?php echo $imgCount * 100; ?>%;
+			width: <?php echo $img_count * 100; ?>%;
 			font-size: 0;
-			animation: <?php echo $totalTime.'s ' . $animationTiming; ?> slidy infinite;
+			animation: <?php echo $total_time . 's ' . $animation_timing; ?> slidy infinite;
 		}
 		figure.slider:hover {
 			/* animation: animation 1s  16 ease; */
 			animation-play-state: paused;
 		}
 		figure.slider figure {
-			width: <?php echo  $basePercentage; ?>%;
+			width: <?php echo $base_percentage; ?>%;
 			height: auto;
 			display: inline-block;
 			position: inherit;
 		}
 		figure.slider img {
-			width: <?php echo $widthSettings; ?>;
+			width: <?php echo $width_settings; ?>;
 			height: auto;
 		}
 		figure.slider figure figcaption {
@@ -235,13 +240,13 @@ if ($can_view)
 		}
 		div#slider figure {
 			position: relative;
-			width: <?php echo $imgCount * 100; ?>%;
+			width: <?php echo $img_count * 100; ?>%;
 			margin: 0;
 			padding: 0;
 			font-size: 0;
 			left: 0;
 			text-align: left;
-			animation: <?php echo $totalTime.'s ' . $animationTiming; ?> slidy infinite;
+			animation: <?php echo $total_time . 's ' . $animation_timing; ?> slidy infinite;
 		}
 
 		@media screen and (max-width: 500px) {
@@ -271,16 +276,16 @@ if ($can_view)
 		@keyframes slidy {
 
 		<?php
-		if ($slidyDirection == "right")
+		if ($slidy_direction == 'right')
 		{
-			echo "0% \t{ left: -" . (($imgCount - 1) * 100) . "%; }\n";
+			echo "0% \t{ left: -" . (($img_count - 1) * 100) . "%; }\n";
 
-			for ($i = $imgCount - 1; $i > 0; $i--)
+			for ($i = $img_count - 1; $i > 0; $i--)
 			{
-				$position += $slideRatio;
+				$position += $slide_ratio;
 				// make the keyframe the position of the image
 				echo "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
-				$position += $moveRatio;
+				$position += $move_ratio;
 				// make the postion for the _next_ slide
 				echo "\t\t" . $position . "% \t{ left: -" . (($i - 1) * 100) . "%; }\n";
 			}
@@ -290,12 +295,12 @@ if ($can_view)
 			echo "0% \t{ left: 0%; }\n";
 
 			// the slider is moving to the left
-			for ($i = 0; $i < ($imgCount - 1); $i++)
+			for ($i = 0; $i < ($img_count - 1); $i++)
 			{
-				$position += $slideRatio;
+				$position += $slide_ratio;
 				// make the keyframe the position of the image
 				echo "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
-				$position += $moveRatio;
+				$position += $move_ratio;
 				// make the postion for the _next_ slide
 				echo "\t\t" . $position . "% \t{ left: -" . (($i + 1) * 100) . "%; }\n";
 			}
@@ -343,7 +348,7 @@ if ($can_view)
 				?>
 				<figure>
 				<?php echo $link; ?>
-				<figcaption><?php echo $n . '/' . $count.' ' . $desc; ?></figcaption>
+				<figcaption><?php echo $n . '/' . $count . ' ' . $desc; ?></figcaption>
 			</figure>
 	<?php
 			}
