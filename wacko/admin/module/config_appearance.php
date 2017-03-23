@@ -195,7 +195,7 @@ function admin_config_appearance(&$engine, &$module)
 			$upload_file('favicon', '');
 		}
 
-		#$engine->debug_print_r($_POST);
+		#Ut::debug_print_r($_POST);
 		$config['logo_display']				= (int) $_POST['logo_display'];
 		$config['theme']					= (string) $_POST['theme'];
 

@@ -248,7 +248,7 @@ function admin_content_files(&$engine, &$module)
 			<td>&nbsp;</td>
 			<td style="font-size:11px">
 				<div>
-				<input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="toUploadGlobalDisabled" />
+				<input type="radio" name="_to" disabled checked value="global" id="toUploadGlobalDisabled" />
 				<input type="hidden" name="to" value="global" />
 				<?php echo $engine->_t('UploadGlobalText'); ?>
 				</div>
@@ -291,7 +291,7 @@ function admin_content_files(&$engine, &$module)
 				: ''), true);
 
 	$count		= count($count);
-	$pagination = $engine->pagination($count, $limit, 'f','mode=' . $module['mode'], '', 'admin.php');
+	$pagination = $engine->pagination($count, $limit, 'f', ['mode' => $module['mode']], '', 'admin.php');
 
 	// load files list
 	$files = $engine->db->load_all(

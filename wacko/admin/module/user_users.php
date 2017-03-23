@@ -27,8 +27,8 @@ function admin_user_users(&$engine, &$module)
 	$order = '';
 	$error = '';
 
-	#$engine->debug_print_r($_POST);
-	#$engine->debug_print_r($_REQUEST);
+	#Ut::debug_print_r($_POST);
+	#Ut::debug_print_r($_REQUEST);
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
@@ -371,7 +371,7 @@ function admin_user_users(&$engine, &$module)
 				{
 					foreach ($langs as $lang)
 					{
-						echo '<option value="' . $lang . '" '.($user['user_lang'] == $lang ? ' selected="selected"' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+						echo '<option value="' . $lang . '" '.($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 					}
 				}
 
@@ -383,7 +383,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 						</td>' .
 					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked="checked"' : '' ) . ' />
+						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked' : '' ) . ' />
 					</td>
 				</tr>' .
 				'<tr>
@@ -450,7 +450,7 @@ function admin_user_users(&$engine, &$module)
 						{
 							foreach ($langs as $lang)
 							{
-								echo '<option value="' . $lang . '" '.($user['user_lang'] == $lang ? ' selected="selected"' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+								echo '<option value="' . $lang . '" '.($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 							}
 						}
 
@@ -468,7 +468,7 @@ function admin_user_users(&$engine, &$module)
 
 						foreach ($themes as $theme)
 						{
-							echo '<option value="' . $theme . '" '.($user['theme'] == $theme ? 'selected="selected"' : '') . '>' . $theme . '</option>';
+							echo '<option value="' . $theme . '" '.($user['theme'] == $theme ? 'selected' : '') . '>' . $theme . '</option>';
 						}
 
 					echo '</select>
@@ -479,7 +479,7 @@ function admin_user_users(&$engine, &$module)
 					<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 					</td>' .
 					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked="checked"' : '' ) . ' />
+						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '' ) . ' />
 					</td>
 				</tr>' .
 				'<tr>
@@ -495,7 +495,7 @@ function admin_user_users(&$engine, &$module)
 						{
 							echo '<option value="' . $offset . '" '.
 								(isset($user['account_status']) && $user['account_status'] == $offset
-									? 'selected="selected" '
+									? 'selected '
 									: '') .
 								'>' . $status . "</option>\n";
 						}
@@ -788,7 +788,7 @@ function admin_user_users(&$engine, &$module)
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode=' => $module['mode']] (!empty($order_pagination) ? + ['order' => htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : ''), '', 'admin.php');
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang " .
@@ -860,7 +860,7 @@ function admin_user_users(&$engine, &$module)
 			{
 				echo '<tr class="lined">' . "\n" .
 						'<td style="vertical-align:middle; width:10px;" class="label">
-							<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ) . '/>
+							<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked' : '' ) . '/>
 						</td>' .
 						'<td>
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '" />

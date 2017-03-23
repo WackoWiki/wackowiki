@@ -72,7 +72,7 @@ if ($this->can_upload() === true)
 		$file_name			= $_POST['name_edit'];
 		$file_access		= $_POST['access_edit'];
 
-		#$this->set_message($this->debug_print_r($file_access));
+		#$this->set_message(Ut::debug_print_r($file_access));
 
 		/* We get the file extension. */
 		$get_extension		= $this->get_extension($name);

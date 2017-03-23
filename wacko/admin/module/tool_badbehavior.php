@@ -32,7 +32,7 @@ function admin_badbehavior(&$engine, &$module)
 		require_once 'lib/bad_behavior/bad-behavior/responses.inc.php';
 	}
 
-	#$engine->debug_print_r($_POST);
+	#Ut::debug_print_r($_POST);
 
 function bb2_httpbl_lookup($ip)
 {
@@ -203,7 +203,7 @@ function bb2_summary(&$engine)
 					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;' . $argument.'=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
 				}
 
-				echo '<td>' . 
+				echo '<td>' .
 						$link;
 				echo "</td>\n";
 				echo "</tr>\n";
@@ -251,13 +251,13 @@ function bb2_manage(&$engine)
 	#$level_pagination			= isset($_GET['level'])				? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
 	#$level_mod_pagination		= isset($_GET['level_mod'])			? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
 
-	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode=badbehavior&amp;setting=bb2_manage'.
-								(!empty($blocked_pagination)			? '&amp;blocked=' . htmlspecialchars($blocked_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
-								(!empty($permitted_pagination)			? '&amp;permitted=' . htmlspecialchars($permitted_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
-								(!empty($key_pagination)				? '&amp;status_key=' . htmlspecialchars($key_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
-								(!empty($ip_pagination)					? '&amp;ip=' . htmlspecialchars($ip_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
-								(!empty($request_method_pagination)		? '&amp;request_method=' . htmlspecialchars($request_method_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') .
-								(!empty($user_agent_pagination)			? '&amp;user_agent=' . htmlspecialchars($user_agent_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'badbehavior', 'setting' => 'bb2_manage']
+								(!empty($blocked_pagination)			? + ['blocked'			=> htmlspecialchars($blocked_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : '') .
+								(!empty($permitted_pagination)			? + ['permitted'		=> htmlspecialchars($permitted_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : '') .
+								(!empty($key_pagination)				? + ['status_key'		=> htmlspecialchars($key_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : '') .
+								(!empty($ip_pagination)					? + ['ip'				=> htmlspecialchars($ip_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : '') .
+								(!empty($request_method_pagination)		? + ['request_method'	=> htmlspecialchars($request_method_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : '') .
+								(!empty($user_agent_pagination)			? + ['user_agent'		=> htmlspecialchars($user_agent_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : ''), '', 'admin.php');
 
 	// Query the DB based on variables selected
 
@@ -666,8 +666,8 @@ function bb2_options(&$engine)
 			<td class="label"><strong>Enable Bad Behavior:</strong><br />
 				<small>All other settings can be changed in the config folder <code>bb_settings.conf</code>.</small></td>
 			<td>
-				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ( $engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ( $engine->db->ext_bad_behavior ? ' checked' : '' );?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
+				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '' );?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
 			</td>
 		</tr>
 
@@ -683,7 +683,7 @@ function bb2_options(&$engine)
 				<label for="logging_verbose">Verbose</label>
 			</td>
 			<td>
-				<input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked="checked" <?php } ?>/>
+				<input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked <?php } ?>/>
 			</td>
 		</tr>
 
@@ -692,7 +692,7 @@ function bb2_options(&$engine)
 				<label for="logging_normal">Normal (recommended)</label>
 			</td>
 			<td>
-				<input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked="checked" <?php } ?>/>
+				<input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked <?php } ?>/>
 			</td>
 		</tr>
 
@@ -701,7 +701,7 @@ function bb2_options(&$engine)
 				<label for="logging_false">Do not log (not recommended)</label>
 			</td>
 			<td>
-				<input type="radio" id="logging_false" name="logging" value="false" <?php if (!$settings['logging']) { ?>checked="checked" <?php } ?>/>
+				<input type="radio" id="logging_false" name="logging" value="false" <?php if (!$settings['logging']) { ?>checked <?php } ?>/>
 			</td>
 		</tr>
 
@@ -717,7 +717,7 @@ function bb2_options(&$engine)
 				<label for="strict_checking"><strong>Strict checking</strong><br />
 				blocks more spam but may block some people</label>
 			</td>
-			<td><input type="checkbox" id="strict_checking" name="strict" value="true" <?php if ($settings['strict']) { ?>checked="checked" <?php } ?>/></td>
+			<td><input type="checkbox" id="strict_checking" name="strict" value="true" <?php if ($settings['strict']) { ?>checked <?php } ?>/></td>
 		</tr>
 		<tr class="lined">
 			<td colspan="2"></td>
@@ -728,7 +728,7 @@ function bb2_options(&$engine)
 				required for OpenID; increases spam received</label>
 			</td>
 			<td>
-				<input type="checkbox" id="offsite_forms" name="offsite_forms" value="true" <?php if ($settings['offsite_forms']) { ?>checked="checked" <?php } ?>/>
+				<input type="checkbox" id="offsite_forms" name="offsite_forms" value="true" <?php if ($settings['offsite_forms']) { ?>checked <?php } ?>/>
 			</td>
 		</tr>
 
@@ -788,7 +788,7 @@ function bb2_options(&$engine)
 				Select this option if you believe Bad Behavior's site security cookie is not exempt from the 2012 EU cookie regulation. <a href="http://bad-behavior.ioerror.us/2012/05/04/eu-cookie-requirement-disclosure/" rel="noreferrer">More info</a></label>
 			</td>
 			<td>
-				<input type="checkbox" id="eu_cookie" name="eu_cookie" value="true" <?php if ($settings['eu_cookie']) { ?>checked="checked" <?php } ?>/>
+				<input type="checkbox" id="eu_cookie" name="eu_cookie" value="true" <?php if ($settings['eu_cookie']) { ?>checked <?php } ?>/>
 			</td>
 		</tr>
 
@@ -814,7 +814,7 @@ function bb2_options(&$engine)
 				<label for="reverse_proxy">Enable Reverse Proxy</label>
 			</td>
 			<td>
-				<input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="true" <?php if ($settings['reverse_proxy']) { ?>checked="checked" <?php } ?>/>
+				<input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="true" <?php if ($settings['reverse_proxy']) { ?>checked <?php } ?>/>
 			</td>
 		</tr>
 		<tr class="lined">
@@ -916,8 +916,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 					<small>All other settings can be changed in the config folder.</small>
 				</td>
 				<td style="width:50%;">
-					<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ( $engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo ( !$engine->db->ext_bad_behavior ? ' checked="checked"' : '' );?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ( $engine->db->ext_bad_behavior ? ' checked' : '' );?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '' );?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 		</table>
