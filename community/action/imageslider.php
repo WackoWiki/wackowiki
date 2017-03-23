@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
 	Showing images as slider for uploaded by {{upload}} files
 
-	version: 0.4
+	version: 0.5
 
 	{{imageslider
 		[page="PageName" or global=1]
@@ -235,7 +235,7 @@ if ($can_view)
 			background: rgba(0,0,0,0.3);
 			color: #fff;
 			width: 100%;
-			font-size: 2rem;
+			font-size: 1rem;
 			padding: .6rem;
 		}
 		div#slider figure {
@@ -311,12 +311,12 @@ if ($can_view)
 		</style>
 
 		<div id="captioned-gallery">
-		<figure class="slider">
-	<?php
+			<figure class="slider">
+		<?php
 		// adding at the end a clone of the first array for transition loop
 		$files[]	= $files[0];
 		$n			= 0;
-		#$this->debug_print_r($files);
+		#Ut::debug_print_r($files);
 
 		foreach($files as $file)
 		{
@@ -348,12 +348,12 @@ if ($can_view)
 				?>
 				<figure>
 				<?php echo $link; ?>
-				<figcaption><?php echo $n . '/' . $count . ' ' . $desc; ?></figcaption>
-			</figure>
+					<figcaption><?php echo $n . '/' . $count . ' ' . $desc; ?></figcaption>
+				</figure>
 	<?php
 			}
 		}?>
-		</figure>
+			</figure>
 		</div>
 	<?php
 	}

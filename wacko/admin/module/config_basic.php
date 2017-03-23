@@ -30,7 +30,7 @@ function admin_config_basic(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		#$engine->debug_print_r($_POST);
+		#Ut::debug_print_r($_POST);
 		$config['site_name']				= (string) $_POST['site_name'];
 		$config['site_desc']				= (string) $_POST['site_desc'];
 		$config['meta_description']			= (string) $_POST['meta_description'];

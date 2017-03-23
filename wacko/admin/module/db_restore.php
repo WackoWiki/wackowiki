@@ -39,7 +39,7 @@ function admin_db_restore(&$engine, &$module)
 //	chmod($dir, 0777);
 //}
 
-#$engine->debug_print_r($_REQUEST);
+#Ut::debug_print_r($_REQUEST);
 
 	// import passed variables and objects
 	$tables			= & $module['vars'][0];
@@ -452,7 +452,7 @@ function admin_db_restore(&$engine, &$module)
 					} // end dir check
 				} // end while loop
 
-				#$engine->debug_print_r($logs);
+				#Ut::debug_print_r($logs);
 
 				if (is_array($logs))
 				{

@@ -27,8 +27,8 @@ function admin_user_approve(&$engine, &$module)
 	$order = '';
 	$error = '';
 
-	#$engine->debug_print_r($_POST);
-	#$engine->debug_print_r($_REQUEST);
+	#Ut::debug_print_r($_POST);
+	#Ut::debug_print_r($_REQUEST);
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
@@ -248,20 +248,20 @@ function admin_user_approve(&$engine, &$module)
 			"SELECT COUNT(user_name) AS n " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			( $where ? $where : '' ) .
-			( $where ? 'AND ' : "WHERE ") .
+			($where ? $where : '') .
+			($where ? 'AND ' : "WHERE ") .
 				"u.user_name <> '" . $engine->db->admin_name."' "
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') . '&amp;account_status=' . (int) @$_GET['account_status'], '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] (!empty($order_pagination) ? + ['order' => htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : '') + ['account_status' => (int) @$_GET['account_status']], '', 'admin.php');
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			( $where ? $where : '' ) .
-			( $where ? 'AND ' : "WHERE ") .
+			($where ? $where : '') .
+			($where ? 'AND ' : "WHERE ") .
 				"u.account_type = '0' " .
 				"AND u.user_name <> '" . $engine->db->admin_name."' " .
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ) .
@@ -358,13 +358,13 @@ function admin_user_approve(&$engine, &$module)
 				echo '<tr class="lined">' . "\n" .
 						'<input type="hidden" name="user_id" value="' . $row['user_id'] . '" />' .
 						#'<td style="vertical-align:middle; width:10px;" class="label">' .
-						#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked="checked "' : '' ) . '/>' .
+						#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '' ) . '/>' .
 						#'</td>' .
 						#'<td>' .
 						#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '" />' .
 						#'</td>' . <a href="?mode=db_restore">Restore database</a>
 						'<td>' . $row['user_id'] . '</td>' .
-						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_users'.'&amp;user_id=' . $row['user_id'] . '">' . $row['user_name'] . '</a></strong></td>' .
+						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_users' . '&amp;user_id=' . $row['user_id'] . '">' . $row['user_name'] . '</a></strong></td>' .
 						'<td>' . $row['email'] . '</td>' .
 						'<td>' . $row['user_ip'] . '</td>' .
 						'<td><small><a href="' . $engine->href() . '&amp;user_lang=' . $row['user_lang'] . '">' . $row['user_lang'] . '</a></small></td>' .

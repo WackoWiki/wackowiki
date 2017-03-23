@@ -106,7 +106,7 @@ $mail_body = '';
 		"WHERE active = '1' " .
 		"ORDER BY BINARY group_name", true);
 
-	#$engine->debug_print_r($available_users);
+	#Ut::debug_print_r($available_users);
 
 	echo $engine->form_open('massemail');
 ?>

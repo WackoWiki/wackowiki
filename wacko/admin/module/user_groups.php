@@ -113,7 +113,7 @@ function admin_user_groups(&$engine, &$module)
 						"AND account_type = '0' " .
 					"ORDER BY BINARY user_name");
 
-				#$engine->debug_print_r($available_users);
+				#Ut::debug_print_r($available_users);
 
 				echo $engine->form_open('add_group_member');
 
@@ -315,7 +315,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 						</td>' .
 						'<td>
-							<input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked="checked"' : '' ) . ' />
+							<input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked' : '' ) . ' />
 						</td>
 					</tr>' .
 					'<tr>
@@ -323,7 +323,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="active">' . $engine->_t('GroupsActive') . '</label>
 		 				</td>' .
 						'<td>
-		 					<input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked="checked"' : '' ) . ' />
+		 					<input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked' : '' ) . ' />
 		 				</td>
 					</tr>' .
 					'<tr>
@@ -374,7 +374,7 @@ function admin_user_groups(&$engine, &$module)
 					{
 						foreach ($users as $user)
 						{
-							echo '<option value="' . $user['user_id'] . '" '.($usergroup['moderator_id'] == $user['user_id'] ? ' selected="selected"' : '') . '>' . $user['user_name'] . "</option>\n";
+							echo '<option value="' . $user['user_id'] . '" '.($usergroup['moderator_id'] == $user['user_id'] ? ' selected' : '') . '>' . $user['user_name'] . "</option>\n";
 						}
 					}
 
@@ -384,13 +384,13 @@ function admin_user_groups(&$engine, &$module)
 							<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 					</td>' .
 					'<td>
-							<input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked="checked"' : '' ) . ' />
+							<input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '' ) . ' />
 					</td></tr>' .
 					'<tr><td>
 							<label for="active">' . $engine->_t('GroupsActive') . '</label>
 					</td>' .
 					'<td>
-							<input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked="checked"' : '' ) . ' />
+							<input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '' ) . ' />
 					</td></tr>' .
 					'<tr><td>
 						<br />
@@ -559,7 +559,7 @@ function admin_user_groups(&$engine, &$module)
 			);
 
 		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', 'mode=groups'.(!empty($order_pagination) ? '&order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'groups'] (!empty($order_pagination) ? + ['order' => htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : ''), '', 'admin.php');
 
 		$groups = $engine->db->load_all(
 			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name, COUNT(m.user_id) AS members " .

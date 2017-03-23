@@ -1029,7 +1029,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"ORDER BY created ASC");
 
 						// debug Bug #401
-						# $this->debug_print_r($set);
+						# Ut::debug_print_r($set);
 
 						foreach ($_comments as $_comment)
 						{

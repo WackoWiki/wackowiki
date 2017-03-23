@@ -135,7 +135,7 @@ function admin_content_pages(&$engine, &$module)
 	$order_pagination		= isset($_GET['order'])		? $_GET['order']		: '';
 	$level_pagination		= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
 	$level_mod_pagination	= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
-	$pagination				= $engine->pagination($count['n'], $limit, 'p', 'mode=' . $module['mode'].(!empty($order_pagination) ? '&amp;order=' . htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_pagination) ? '&amp;level=' . htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').(!empty($level_mod_pagination) ? '&amp;level_mod=' . htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''), '', 'admin.php');
+	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] . (!empty($order_pagination) ? ['order' => htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : '') . (!empty($level_pagination) ? ['level' => htmlspecialchars($level_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : '') . (!empty($level_mod_pagination) ? ['level_mod' => htmlspecialchars($level_mod_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : ''), '', 'admin.php');
 
 	$pages = $engine->db->load_all(
 		"SELECT p.*, length(body) as page_size, u.* " .
@@ -153,9 +153,9 @@ function admin_content_pages(&$engine, &$module)
 			<?php echo $engine->_t('LogLevel'); ?>
 
 			<select name="level_mod">
-				<option value="not_lower"<?php echo ( !isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_lower') ? ' selected="selected"' : '' ); ?>><?php echo $engine->_t('LogLevelNotLower'); ?></option>
-				<option value="not_higher"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_higher' ? ' selected="selected"' : '' ); ?>><?php echo $engine->_t('LogLevelNotHigher'); ?></option>
-				<option value="equal"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'equal' ? ' selected="selected"' : '' ); ?>><?php echo $engine->_t('LogLevelEqual'); ?></option>
+				<option value="not_lower"<?php echo ( !isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_lower') ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelNotLower'); ?></option>
+				<option value="not_higher"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_higher' ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelNotHigher'); ?></option>
+				<option value="equal"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'equal' ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelEqual'); ?></option>
 			</select>
 
 <?php
@@ -177,7 +177,7 @@ function admin_content_pages(&$engine, &$module)
 		{
 			foreach ($langs as $lang)
 			{
-				echo '<option value="' . $lang . '" '.($_level == $lang ? 'selected="selected" ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+				echo '<option value="' . $lang . '" '.($_level == $lang ? 'selected ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 			}
 		}
 
@@ -234,15 +234,15 @@ function admin_content_pages(&$engine, &$module)
 			$time_tz = $engine->sql2precisetime($row['modified']);
 
 			echo '<tr class="lined">' . "\n" .
-					'<td style="vertical-align:top; text-align:center;">' . $row['page_id'] . '</td>' . 
-					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' . 
-					'<td style="vertical-align:top; padding-left:5px; padding-right:5px;">' . $row['tag'] . '</td>' . 
-					'<td style="vertical-align:top;">' . $row['title'] . '</td>' . 
+					'<td style="vertical-align:top; text-align:center;">' . $row['page_id'] . '</td>' .
+					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' .
+					'<td style="vertical-align:top; padding-left:5px; padding-right:5px;">' . $row['tag'] . '</td>' .
+					'<td style="vertical-align:top;">' . $row['title'] . '</td>' .
 					'<td style="vertical-align:top;">' . $engine->binary_multiples($row['page_size'], false, true, true) . '</td>' .
-					'<td style="vertical-align:top; text-align:center;"><small>' . 
-						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . 
-						'<br />' . '<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' . 
-					'</small></td>' . 
+					'<td style="vertical-align:top; text-align:center;"><small>' .
+						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' .
+						'<br />' . '<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
+					'</small></td>' .
 				'</tr>';
 		}
 	}
