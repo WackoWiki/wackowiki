@@ -257,7 +257,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 		echo '</table>' . "\n";
 
-		echo '<div class="clearfix"><p style="float: left">' . ($user ? '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>' : '' ) . '</p>';
+		echo '<div class="clearfix"><p style="float: left">' . ($user ? '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>' : '') . '</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 	}
