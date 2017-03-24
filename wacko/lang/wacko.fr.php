@@ -1013,6 +1013,7 @@ $wacko_translation = [
 	'ForumNoTopicName'			=> 'Spécifier un nom pour la nouvelle page.',
 	'ForumNewPosts'				=> 'nouveau message',
 	'ForumLocked'				=> 'section verrouillée',
+	'ForumUpdated'				=> 'actualisé',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Le mot de passe est trop court.',

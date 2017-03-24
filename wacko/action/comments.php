@@ -74,7 +74,7 @@ if ($this->user_allowed_comments())
 
 		if ($user)
 		{
-			echo '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead') . '</a></small>';
+			echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
 		}
 
 		if ($root == '' && !(int) $noxml)

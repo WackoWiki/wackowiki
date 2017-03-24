@@ -71,7 +71,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 	if ($user == true)
 	{
-		echo '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead') . '</a></small>';
+		echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
 	}
 
 	if (!(int) $noxml)

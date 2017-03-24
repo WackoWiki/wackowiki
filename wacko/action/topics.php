@@ -26,6 +26,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		++$i;
 		++$off;
 	}
+
 	$this->forum = $i - 1;
 
 	// load user data
@@ -72,7 +73,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		{
 			// redirecting to the edit form
 			$this->sess->title	= $page_title;
-			$this->http->redirect($this->href('edit', $this->tag . '/' . $topic_name, '', 1));
+			$this->http->redirect($this->href('edit', $this->tag . '/' . $topic_name, '', true));
 		}
 	}
 
@@ -91,12 +92,12 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	// filter categories
-	$category = (int) @$_GET['category'];
+	$category_id = (int) @$_GET['category_id'];
 
 	// make counter query
 	$sql = "SELECT COUNT(p.tag) AS n " .
 		"FROM " . $this->db->table_prefix . "page AS p, " .
-		($category
+		($category_id
 			? "INNER JOIN " . $this->db->table_prefix . "category_page AS k ON (k.page_id = p.page_id) "
 			: "") .
 			"" . $this->db->table_prefix . "acl AS a " .
@@ -112,9 +113,9 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		}
 	}
 
-	if ($category)
+	if ($category_id)
 	{
-		$sql .= "AND k.category_id IN ( " . $this->db->q($category) . " ) AND k.page_id = p.page_id ";
+		$sql .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) AND k.page_id = p.page_id ";
 	}
 
 	// count topics and make pagination
@@ -124,7 +125,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// make collector query
 	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page AS p " .
-		($category
+		($category_id
 			? "INNER JOIN " . $this->db->table_prefix . "category_page AS k ON (k.page_id = p.page_id) "
 			: "") .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -142,9 +143,10 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		}
 	}
 
-	if ($category)
+	if ($category_id)
 	{
-			$sql .= "AND k.category_id IN ( " . $this->db->q($category) . " ) AND k.page_id = p.page_id ";
+			$sql .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
+					"AND k.page_id = p.page_id ";
 	}
 
 	$sql .= "ORDER BY p.commented DESC " .
@@ -183,8 +185,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					$comment = $this->db->load_single(
 						"SELECT p.tag, p.ip, p.created, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name " .
 						"FROM " . $this->db->table_prefix . "page p " .
-						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
 						"WHERE p.comment_on_id = '" . $topic['page_id'] . "' " .
 						"ORDER BY p.created DESC " .
 						"LIMIT 1");
@@ -195,9 +197,11 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				}
 
 				// check new comments
-				$updated = ($user['last_mark'] && (
-					($comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']) ||
-					($topic['owner_name'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ));
+				$updated = ($user['last_mark']
+							&& (($comment['user_name'] != $user['user_name']
+									&& $comment['created'] > $user['last_mark'])
+								|| ($topic['owner_name'] != $user['user_name']
+									&& $topic['created'] > $user['last_mark']) ));
 
 				$topic['description'] = htmlspecialchars($topic['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
@@ -214,11 +218,11 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				// print
 				echo '<tbody class="lined"><tr style="background-color: #f9f9f9;">' .
 						'<td style="text-align:left;">' .
-						( !$this->has_access('comment', $topic['page_id'], GUEST)
+						($user && !$this->has_access('comment', $topic['page_id'])
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
 							: '' ) .
-						( $updated
-							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[updated]</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
+						($updated
+							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[' . $this->_t('ForumUpdated') . ']</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
 							: '<strong>' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
 						) .
 						'</td>' .
@@ -233,9 +237,9 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 				if ($comment)
 				{
-					echo '<small' . ($updated ? ' style="font-weight:600;"' : '' ) . ' title="' . ( $admin ? $comment['ip'] : '' ) . '">' .
+					echo '<small' . ($updated ? ' style="font-weight:600;"' : '' ) . ' title="' . ($admin ? $comment['ip'] : '') . '">' .
 						$this->user_link($comment['user_name']) . '<br />' .
-						'<a href="' . $this->href('', $topic['tag'], 'p=last') . '#' . $comment['tag'] . '">' . $this->get_time_formatted($comment['created']) . '</a></small>';
+						'<a href="' . $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]) . '">' . $this->get_time_formatted($comment['created']) . '</a></small>';
 				}
 				else
 				{
@@ -253,7 +257,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 		echo '</table>' . "\n";
 
-		echo '<div class="clearfix"><p style="float: left">' . ($user ? '<small><a href="' . $this->href('', '', 'markread=yes') . '">' . $this->_t('MarkRead') . '</a></small>' : '' ) . '</p>';
+		echo '<div class="clearfix"><p style="float: left">' . ($user ? '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>' : '' ) . '</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 	}
@@ -266,7 +270,9 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		<a id="newtopic"></a><br />
 		<table class="formation">
 			<tr>
-				<td class="label"><label for="topictitle"><?php echo $this->_t('ForumTopicName'); ?>:</label></td>
+				<td class="label">
+					<label for="topictitle"><?php echo $this->_t('ForumTopicName'); ?>:</label>
+				</td>
 				<td>
 					<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="" />
 					<input type="submit" id="submit" value="<?php echo $this->_t('ForumTopicSubmit'); ?>" />
