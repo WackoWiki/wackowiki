@@ -1014,6 +1014,7 @@ $wacko_translation = [
 	'ForumNoTopicName'			=> 'Gib einen Namen für die neue Seite an.',
 	'ForumNewPosts'				=> 'neuer Beitrag',
 	'ForumLocked'				=> 'Bereich gesperrt',
+	'ForumUpdated'				=> 'aktualisiert',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Passwort ist zu kurz.',
