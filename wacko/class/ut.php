@@ -222,9 +222,9 @@ class Ut
 	// helper for error diags in classes: return file:line from where class method called from out of class
 	static function callee($class_filter)
 	{
-		$bt = debug_backtrace();
-		$dir = dirname(dirname(__FILE__)) . '/';
-		$res = '?';
+		$bt		= debug_backtrace();
+		$dir	= dirname(dirname(__FILE__)) . '/';
+		$res	= '?';
 
 		foreach ($bt as $frame)
 		{
@@ -264,7 +264,7 @@ class Ut
 
 		$n = count($parts);
 
-		for ($from = $to = 0; $from < $n; )
+		for ($from = $to = 0; $from < $n;)
 		{
 			if (($part = $parts[$from++]) == '..')
 			{
