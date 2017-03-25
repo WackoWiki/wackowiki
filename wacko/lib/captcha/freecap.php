@@ -1,8 +1,9 @@
 <?php
 /************************************************************\
 *
-*     freeCap v1.4.1 Copyright 2005 Howard Yeend
-*     www.puremango.co.uk
+*     freeCap v1.4.4 Copyright
+*     2005 Howard Yeend (www.puremango.co.uk),
+*     2008 - 2017 WackoWiki Team
 *
 *    This file is part of freeCap.
 *
@@ -35,9 +36,9 @@ if (!defined('IN_WACKO'))
 // try to avoid the 'free p*rn' method of CAPTCHA circumvention
 // see www.wikipedia.com/captcha for more info
 // $site_tags[0] = "To avoid spam, please do NOT enter the text if";
-// $site_tags[1] = "this site is not puremango.co.uk";
+// $site_tags[1] = "this site is not example.com";
 // or more simply:
-//$site_tags[0] = "for use only on puremango.co.uk";
+// $site_tags[0] = "for use only on example.com";
 // reword or add lines as you please
 // or if you don't want any text:
 $site_tags = null;
@@ -513,7 +514,7 @@ if ($bg_type != 0)
 			$text_b			= $rand_func(100, 150);
 			$text_colour3	= ImageColorAllocate($temp_bg, $text_r, $text_g, $text_b);
 
-			ImageLine($temp_bg, 0, $i, $width * 2, $i ,$text_colour3);
+			ImageLine($temp_bg, 0, $i, $width * 2, $i, $text_colour3);
 		}
 	}
 	else if ($bg_type == 2)
