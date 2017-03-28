@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 22 22" width="22" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
- <g id="layer1" transform="translate(0 -1030.4)">
-  <g id="layer1-2" transform="matrix(-1,0,0,1,22,0)">
-   <path id="path4174" d="m3 1033.4v1h16v-1h-16zm0 2v1h13v-1h-13zm0 3v2.25 0.75 0.75 2.25l4-3-4-3zm6 1v1h10v-1h-10zm0 2v1h2v-1h-2zm-6 4v1h16v-1h-16zm0 2v1h13v-1h-13zm14 1v1h2v-1h-2z" fill="#4d4d4d"/>
-  </g>
- </g>
-</svg>
+<svg height="22" viewBox="0 0 22 22" width="22" xmlns="http://www.w3.org/2000/svg"><path d="m3 1033.4v1h16v-1zm0 2v1h13v-1zm0 3v2.25.75.75 2.25l4-3zm6 1v1h10v-1zm0 2v1h2v-1zm-6 4v1h16v-1zm0 2v1h13v-1zm14 1v1h2v-1z" fill="#4d4d4d" transform="matrix(-1 0 0 1 22 -1030.4)"/></svg>

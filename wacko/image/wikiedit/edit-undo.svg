@@ -1,6 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 22 22" width="22" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
- <g id="layer1" transform="translate(0 -1030.4)">
-  <path id="rect4216" d="m8.3008 3l-3.293 3.293-0.207 0.207 0.207 0.207 3.293 3.293 0.707-0.707-2.293-2.293h2.2852 1.008 0.492c3.047 0 5.5 2.453 5.5 5.5s-2.453 5.5-5.5 5.5h-1.5v1h1.5c3.601 0 6.5-2.899 6.5-6.5s-2.899-6.5-6.5-6.5h-0.492-1.008-2.2852l2.293-2.293-0.707-0.707z" transform="translate(0 1030.4)" fill="#4d4d4d"/>
- </g>
-</svg>
+<svg height="22" viewBox="0 0 22 22" width="22" xmlns="http://www.w3.org/2000/svg"><path d="m8.3008 3-3.293 3.293-.207.207.207.207 3.293 3.293.707-.707-2.293-2.293h2.2852 1.008.492c3.047 0 5.5 2.453 5.5 5.5s-2.453 5.5-5.5 5.5h-1.5v1h1.5c3.601 0 6.5-2.899 6.5-6.5s-2.899-6.5-6.5-6.5h-.492-1.008-2.2852l2.293-2.293z" fill="#4d4d4d" transform=""/></svg>
