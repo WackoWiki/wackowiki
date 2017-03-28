@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg id="svg3760" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="24" width="24" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
- <g id="layer1" transform="translate(-550.29 -606.65)">
-  <path id="rect4112" d="m554.29 614.65v2h4v10h2v-10h4v-2z" fill="#4d4d4d"/>
-  <g id="layer1-7" transform="translate(551.29 -422.71)">
-   <path id="rect4108" d="m16.5 3c-0.486 1.7025-1.678 3.1661-2.203 4.3379-0.184 0.3484-0.297 0.7394-0.297 1.1621 0 1.385 1.115 2.5 2.5 2.5s2.5-1.115 2.5-2.5c0-0.4227-0.113-0.8137-0.297-1.1621-0.525-1.1718-1.717-2.6354-2.203-4.3379z" transform="translate(0 1030.4)" fill="#4d4d4d"/>
-  </g>
- </g>
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-550.29 -606.65)"><path d="m554.29 614.65v2h4v10h2v-10h4v-2z" fill="#4d4d4d"/><path d="m16.5 3c-.486 1.7025-1.678 3.1661-2.203 4.3379-.184.3484-.297.7394-.297 1.1621 0 1.385 1.115 2.5 2.5 2.5s2.5-1.115 2.5-2.5c0-.4227-.113-.8137-.297-1.1621-.525-1.1718-1.717-2.6354-2.203-4.3379z" fill="#4d4d4d" transform="translate(551.29 607.69)"/></g></svg>
