@@ -315,7 +315,16 @@ class Wacko
 		#setlocale(LC_TIME, 'ru_RU.UTF-8');
 		#return $this->try_utf_decode(strftime('%d. %B %Y' . ' ' . '%H.%M', $local_time));
 
-		return date($this->db->date_format . ' ' . $this->db->time_format, $local_time);
+		$relative_time = 0;
+
+		if ($relative_time)
+		{
+			return $this->get_time_interval($local_time);
+		}
+		else
+		{
+			return date($this->db->date_format . ' ' . $this->db->time_format, $local_time);
+		}
 
 		// TODO: add options for ..
 		# return $this->get_unix_time_formatted($this->sql2localtime($text));
@@ -1734,15 +1743,16 @@ class Wacko
 		return [$deleted, $pagination];
 	}
 
-	function load_categories($tag, $page_id = 0, $cache = false)
+	function load_categories($object_id = 0, $type_id = 1, $cache = false)
 	{
 		$categories = $this->db->load_all(
 			"SELECT c.category_id, c.category " .
 			"FROM " . $this->db->table_prefix . "category c " .
-				"INNER JOIN " . $this->db->table_prefix . "category_page cp ON (c.category_id = cp.category_id) " .
-			"WHERE " . ($page_id != 0
-				? "cp.page_id  = '" . (int) $page_id . "' "
-				: "cp.supertag = " . $this->db->q($this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD)) . " " )
+				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
+			"WHERE ca.object_id  = '" . (int) $object_id . "' " .
+			($type_id != 0
+				? "AND ca.object_type_id = '" . (int) $type_id . "' "
+				: "AND ca.object_type_id = '" . (int) $type_id . "' " ) // TODO: explode array IN
 			, $cache);
 
 		return $categories;
@@ -5395,7 +5405,17 @@ class Wacko
 		return $acl;
 	}
 
-	// returns true if $user_name (defaults to the current user) has access to $privilege on $page_id (defaults to the current page)
+	/**
+	 * check access privilege
+	 *
+	 * @param string $privilege
+	 * @param string $page_id
+	 * @param string $user_name
+	 * @param int $use_parent
+	 * @param string $new_tag
+	 *
+	 * @return boolean
+	 */
 	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1, $new_tag = '')
 	{
 		if (!$user_name)
@@ -5450,7 +5470,15 @@ class Wacko
 		}
 	}
 
-	function check_acl($user_name, $acl_list, $copy_to_this_acl = false, $debug = 0)
+	/**
+	 *
+	 * @param string $user_name
+	 * @param unknown $acl_list
+	 * @param boolean $copy_to_this_acl
+	 *
+	 * @return boolean
+	 */
+	function check_acl($user_name, $acl_list, $copy_to_this_acl = false)
 	{
 		if (is_array($user_name))
 		{
@@ -6301,7 +6329,7 @@ class Wacko
 			$this->db->theme_url = $this->db->base_url . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
 
 			// set page categories. this defines $categories (array) object property
-			$categories = $this->load_categories('', $this->page['page_id']);
+			$categories = $this->load_categories($this->page['page_id']);
 
 			foreach ($categories as $word)
 			{
@@ -6872,13 +6900,14 @@ class Wacko
 
 		$this->db->sql_query(
 			"DELETE k.* " .
-			"FROM " . $this->db->table_prefix . "category_page k " .
+			"FROM " . $this->db->table_prefix . "category_assignment k " .
 				"LEFT JOIN " . $this->db->table_prefix . "page p " .
-					"ON (k.page_id = p.page_id) " .
-			"WHERE p.tag = " . $this->db->q($tag) . " " .
+					"ON (k.object_id = p.page_id) " .
+			"WHERE (p.tag = " . $this->db->q($tag) . " " .
 				($cluster === true
 					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
-					: "") );
+					: "") . ") " .
+				"AND k.object_type_id = 1");
 
 		return true;
 	}
@@ -7207,6 +7236,11 @@ class Wacko
 			{
 				$params[$name] = $page;
 
+				if ($this->method && $this->method != 'show')
+				{
+					$method = $this->method;
+				}
+
 				return '<a href="' . $this->href($method, $tag, $params, false, $anchor) . '"' . $attrs . '>' .
 						($body ? $body : $page) . '</a>';
 			};
@@ -7419,11 +7453,11 @@ class Wacko
 				"message	= " . $this->db->q($message) . " ");
 	}
 
-	function get_categories($page_id, $cache = true)
+	function get_categories($page_id, $type_id = '', $cache = true)
 	{
 		$_category = '';
 
-		if ($categories	= $this->load_categories('', $page_id, $cache = true))
+		if ($categories	= $this->load_categories($page_id, $type_id, $cache = true))
 		{
 			foreach ($categories as $id => $category)
 			{
@@ -7461,17 +7495,20 @@ class Wacko
 			if ($root !== false)
 			{
 				if ($_counts = $this->db->load_all(
-				"SELECT kp.category_id, COUNT(kp.page_id) AS n " .
+				"SELECT kp.category_id, COUNT(kp.object_id) AS n " .
 				"FROM " . $this->db->table_prefix . "category k , " .
-					"" . $this->db->table_prefix . "category_page kp " .
+					"" . $this->db->table_prefix . "category_assignment kp " .
 					($root != ''
-						? "INNER JOIN " . $this->db->table_prefix . "page p ON (kp.page_id = p.page_id) "
+						? "INNER JOIN " . $this->db->table_prefix . "page p ON (kp.object_id = p.page_id) "
 						: '' ) .
-				"WHERE k.category_lang = " . $this->db->q($lang) . " AND kp.category_id = k.category_id " .
+				"WHERE k.category_lang = " . $this->db->q($lang) . " " .
+					"AND	kp.category_id		= k.category_id " .
+					"AND	kp.object_type_id	= 1 " .
 					($root != ''
-						? "AND ( p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) "
+						? "AND (p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) " .
+						  "AND p.deleted <> '1' "
 						: '') .
-				"GROUP BY category_id", true))
+				"GROUP BY kp.category_id", true))
 				{
 					foreach ($_counts as $count)
 					{
@@ -7494,7 +7531,7 @@ class Wacko
 			{
 				if (isset($categories[$word['parent_id']]))
 				{
-					$categories[$word['parent_id']]['childs'][$id] = $word;
+					$categories[$word['parent_id']]['child'][$id] = $word;
 					unset($categories[$id]);
 				}
 			}
@@ -7511,7 +7548,7 @@ class Wacko
 	// passed through POST global array. returns:
 	//	true	- if something was saved
 	//	false	- if list was empty
-	function save_categories_list($page_id, $dryrun = 0)
+	function save_categories_list($object_id, $type_id, $dryrun = 0)
 	{
 		$set	= '';
 		$ids	= '';
@@ -7536,13 +7573,13 @@ class Wacko
 		{
 			if (!$dryrun)
 			{
-				foreach ($set as $id)
+				foreach ($set as $category_id)
 				{
-					$values[] = "(" . (int) $id . ", '" . (int) $page_id . "')";
+					$values[] = '(' . (int) $category_id . ', ' . (int) $object_id . ', ' . (int) $type_id . ')';
 				}
 
 				$this->db->sql_query(
-					"INSERT INTO " . $this->db->table_prefix . "category_page (category_id, page_id) " .
+					"INSERT INTO " . $this->db->table_prefix . "category_assignment (category_id, object_id, object_type_id) " .
 					"VALUES " . implode(', ', $values));
 			}
 
