@@ -123,17 +123,18 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$inconsistencies['2.1'] = ['acl without page', count($acl)];
 				// -> DELETE
 
-			// 2.2. category_page without page
-			$category_page = $engine->db->load_all(
+			// 2.2. category_assignment without page
+			$category_assignment = $engine->db->load_all(
 				"SELECT
-					cp.*
+					ca.*
 				FROM
-					" . $engine->db->table_prefix . "category_page cp
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (cp.page_id = p.page_id)
+					" . $engine->db->table_prefix . "category_assignment ca
+					LEFT JOIN " . $engine->db->table_prefix . "page p ON (ca.object_id = p.page_id)
 				WHERE
+					ca.object_type_id = 1 AND
 					p.page_id IS NULL");
 
-			$inconsistencies['2.2'] = ['category_page without page', count($category_page)];
+			$inconsistencies['2.2'] = ['category_assignment without page', count($category_assignment)];
 				// -> DELETE
 
 			// 2.3. link without page
@@ -170,7 +171,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					" . $engine->db->table_prefix . "rating r
 					LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
 				WHERE
-				p.page_id IS NULL");
+					p.page_id IS NULL");
 
 			$inconsistencies['2.5'] = ['rating without page', count($rating)];
 				// -> DELETE
@@ -261,18 +262,18 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			{
 				if ($value[1] >= 1)
 				{
-					echo '<tr class="hl_setting">' . 
-						'<td class="label">' . 
+					echo '<tr class="hl_setting">' .
+						'<td class="label">' .
 							($value[1] >= 1
 								? '<strong>' . $value[0] . '</strong>'
 								: '<em class="grey">' . $value[0] . '</em>') .
-							'</td>' . 
-						'<td> </td>' . 
-						'<td>' . 
+							'</td>' .
+						'<td> </td>' .
+						'<td>' .
 							($value[1] >= 1
 								? '<strong>' . $value[1] . '</strong>'
 								: '<em class="grey">' . $value[1] . '</em>') .
-						'</td>' . 
+						'</td>' .
 						'<tr class="lined"><td colspan="5"></td></tr>' . "\n";
 				}
 			}
@@ -326,7 +327,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						m.*
 					FROM
-			" . $engine->db->table_prefix . "menu m
+						" . $engine->db->table_prefix . "menu m
 						LEFT JOIN " . $engine->db->table_prefix . "user u ON (m.user_id = u.user_id)
 					WHERE
 						u.user_id IS NULL");
@@ -354,7 +355,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						us.*
 					FROM
-			" . $engine->db->table_prefix . "user_setting us
+						" . $engine->db->table_prefix . "user_setting us
 						LEFT JOIN " . $engine->db->table_prefix . "user u ON (us.user_id = u.user_id)
 					WHERE
 						u.user_id IS NULL");
@@ -366,7 +367,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						w.*
 					FROM
-			" . $engine->db->table_prefix . "watch w
+						" . $engine->db->table_prefix . "watch w
 						LEFT JOIN " . $engine->db->table_prefix . "user u ON (w.user_id = u.user_id)
 					WHERE
 						u.user_id is NULL");
@@ -379,31 +380,32 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						a.*
 					FROM
-			" . $engine->db->table_prefix . "acl a
+						" . $engine->db->table_prefix . "acl a
 						LEFT JOIN " . $engine->db->table_prefix . "page p ON (a.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
 
 			$_solved['2.1'] = ['acl without page', $engine->config->affected_rows];
 
-			// 2.2. category_page without page
-			$category_page = $engine->db->sql_query(
+			// 2.2. category_assignment without page
+			$category_assignment = $engine->db->sql_query(
 					"DELETE
-						cp.*
+						ca.*
 					FROM
-			" . $engine->db->table_prefix . "category_page cp
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (cp.page_id = p.page_id)
+						" . $engine->db->table_prefix . "category_assignment ca
+						LEFT JOIN " . $engine->db->table_prefix . "page p ON (ca.object_id = p.page_id)
 					WHERE
+						ca.object_type_id = 1 AND
 						p.page_id IS NULL");
 
-			$_solved['2.2'] = ['category_page without page', $engine->config->affected_rows];
+			$_solved['2.2'] = ['category_assignment without page', $engine->config->affected_rows];
 
 			// 2.3. link without page
 			$link = $engine->db->sql_query(
 					"DELETE
 						l.*
 					FROM
-			" . $engine->db->table_prefix . "page_link l
+						" . $engine->db->table_prefix . "page_link l
 						LEFT JOIN " . $engine->db->table_prefix . "page p ON (l.from_page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
@@ -415,7 +417,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						m.*
 					FROM
-			" . $engine->db->table_prefix . "menu m
+						" . $engine->db->table_prefix . "menu m
 						LEFT JOIN " . $engine->db->table_prefix . "page p ON (m.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
@@ -427,7 +429,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						r.*
 					FROM
-			" . $engine->db->table_prefix . "rating r
+						" . $engine->db->table_prefix . "rating r
 						LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
 					WHERE
 					p.page_id IS NULL");
@@ -439,7 +441,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						r.*
 					FROM
-			" . $engine->db->table_prefix . "referrer r
+						" . $engine->db->table_prefix . "referrer r
 						LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
@@ -451,7 +453,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						u.*
 					FROM
-			" . $engine->db->table_prefix . "file u
+						" . $engine->db->table_prefix . "file u
 						LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL AND
@@ -464,7 +466,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						w.*
 					FROM
-			" . $engine->db->table_prefix . "watch w
+						" . $engine->db->table_prefix . "watch w
 						LEFT JOIN " . $engine->db->table_prefix . "page p ON (w.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
@@ -501,18 +503,18 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			{
 				if ($value[1] >= 1)
 				{
-					echo '<tr class="hl_setting">' . 
-							'<td class="label">' . 
+					echo '<tr class="hl_setting">' .
+							'<td class="label">' .
 							($value[1] >= 1
 									? '<strong>' . $value[0] . '</strong>'
 									: '<em class="grey">' . $value[0] . '</em>') .
-									'</td>' . 
-									'<td> </td>' . 
-									'<td>' . 
+									'</td>' .
+									'<td> </td>' .
+									'<td>' .
 									($value[1] >= 1
 											? '<strong>' . $value[1] . '</strong>'
 											: '<em class="grey">' . $value[1] . '</em>') .
-											'</td>' . 
+											'</td>' .
 											'<tr class="lined"><td colspan="5"></td></tr>' . "\n";
 				}
 			}
