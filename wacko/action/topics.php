@@ -97,10 +97,9 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$selector =
 		($category_id
 			? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = p.page_id) "
-			: "") .
+			: "") . ", " .
 			$this->db->table_prefix . "acl AS a " .
 		"WHERE p.page_id = a.page_id " .
-			"AND k.object_type_id = 1 " .
 			"AND p.deleted <> '1' " .
 			"AND a.privilege = 'create' AND a.list = '' " .
 			"AND p.tag LIKE {$this->db->q($this->tag . '/%')} ";
@@ -116,7 +115,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	if ($category_id)
 	{
 		$selector .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
-					 "AND k.object_id = p.page_id "; // TODO: obsolete, see inner join
+					 # "AND k.object_id = p.page_id " . // TODO: obsolete, see inner join
+					 "AND k.object_type_id = 1 ";
 	}
 
 	// make counter query
@@ -132,7 +132,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page AS p " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
+			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
 		$selector .
 		"ORDER BY p.commented DESC " .
 		$pagination['limit'];
@@ -197,7 +197,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				}
 
 				// load related categories
-				$_category = $this->get_categories($topic['page_id']);
+				$_category = $this->get_categories($topic['page_id'], 1);
 				$_category = !empty($_category) ? '<br />' . /* $this->_t('Category') . ': '. */$_category : '';
 
 				// print
