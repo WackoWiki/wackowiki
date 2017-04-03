@@ -94,14 +94,14 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// filter categories
 	$category_id = (int) @$_GET['category_id'];
 
-	// make counter query
-	$sql = "SELECT COUNT(p.tag) AS n " .
-		"FROM " . $this->db->table_prefix . "page AS p, " .
+	$selector =
 		($category_id
-			? "INNER JOIN " . $this->db->table_prefix . "category_page AS k ON (k.page_id = p.page_id) "
+			? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = p.page_id) "
 			: "") .
-			"" . $this->db->table_prefix . "acl AS a " .
+			$this->db->table_prefix . "acl AS a " .
 		"WHERE p.page_id = a.page_id " .
+			"AND k.object_type_id = 1 " .
+			"AND p.deleted <> '1' " .
 			"AND a.privilege = 'create' AND a.list = '' " .
 			"AND p.tag LIKE {$this->db->q($this->tag . '/%')} ";
 
@@ -109,14 +109,20 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	{
 		foreach ($pages as $page)
 		{
-			$sql .= "AND tag NOT LIKE " . $this->db->q($page . '/%') . " ";
+			$selector .= "AND tag NOT LIKE " . $this->db->q($page . '/%') . " ";
 		}
 	}
 
 	if ($category_id)
 	{
-		$sql .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) AND k.page_id = p.page_id ";
+		$selector .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
+					 "AND k.object_id = p.page_id "; // TODO: obsolete, see inner join
 	}
+
+	// make counter query
+	$sql = "SELECT COUNT(p.page_id) AS n " .
+		"FROM " . $this->db->table_prefix . "page AS p, " .
+		$selector;
 
 	// count topics and make pagination
 	$count		= $this->db->load_single($sql);
@@ -125,31 +131,10 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// make collector query
 	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page AS p " .
-		($category_id
-			? "INNER JOIN " . $this->db->table_prefix . "category_page AS k ON (k.page_id = p.page_id) "
-			: "") .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
-			"" . $this->db->table_prefix . "acl AS a " .
-		"WHERE p.page_id = a.page_id " .
-			"AND a.privilege = 'create' AND a.list = '' " .
-			"AND p.tag LIKE {$this->db->q($this->tag . '/%')} ";
-
-	if ($pages)
-	{
-		foreach ($pages as $page)
-		{
-			$sql .= "AND p.tag NOT LIKE " . $this->db->q($page . '/%') . " ";
-		}
-	}
-
-	if ($category_id)
-	{
-			$sql .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
-					"AND k.page_id = p.page_id ";
-	}
-
-	$sql .= "ORDER BY p.commented DESC " .
+		$selector .
+		"ORDER BY p.commented DESC " .
 		$pagination['limit'];
 
 	// load topics data

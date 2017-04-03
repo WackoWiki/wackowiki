@@ -74,15 +74,17 @@ $sql = "SELECT
 			c.category_id,
 			c.category_lang,
 			c.category,
-			COUNT(category) AS number
+			COUNT(c.category_id) AS number
 		FROM
 			" . $this->db->table_prefix . "category c
-			INNER JOIN " . $this->db->table_prefix . "category_page cp ON (c.category_id = cp.category_id)
-			INNER JOIN " . $this->db->table_prefix . "page p ON (cp.page_id = p.page_id) " .
+			INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id)
+			INNER JOIN " . $this->db->table_prefix . "page p ON (ca.object_id = p.page_id) " .
 			($owner
 				? "INNER JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) "
 				: '' ) .
 		"WHERE c.category_lang = '{$lang}' " .
+			"AND ca.object_type_id = 1 " .
+			"AND p.deleted <> '1' " .
 			($root
 				? "AND ( p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) "
 				: '' ) .

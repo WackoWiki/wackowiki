@@ -104,10 +104,11 @@ if (!empty($this->db->news_cluster))
 	{
 		$count	= $this->db->load_single(
 			"SELECT COUNT(p.tag) AS n " .
-			"FROM {$prefix}category_page c " .
-			"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) " .
+			"FROM {$prefix}category_assignment c " .
+				"INNER JOIN {$prefix}page p ON (c.object_id = p.page_id) " .
 			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
 				"AND c.category_id = '$category_id' " .
+				"AND c.object_type_id = 1 " .
 				"AND p.deleted <> '1' " .
 				"AND p.comment_on_id = '0'", true);
 
@@ -122,11 +123,12 @@ if (!empty($this->db->news_cluster))
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
 			"FROM {$prefix}page p " .
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
-				"INNER JOIN {$prefix}category_page c  ON (c.page_id = p.page_id) " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND p.deleted <> '1' " .
+				"INNER JOIN {$prefix}category_assignment c  ON (c.object_id = p.page_id) " .
+			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
 				"AND c.category_id = '$category_id' " .
+				"AND c.object_type_id = 1 " .
+				"AND p.deleted <> '1' " .
+				"AND p.comment_on_id = '0' " .
 			"ORDER BY p.created DESC " .
 			$pagination['limit'], true);
 	}

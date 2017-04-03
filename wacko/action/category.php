@@ -70,9 +70,11 @@ if ($list && ($ids || isset($_GET['category_id'])))
 
 	if ($pages = $this->db->load_all(
 		"SELECT p.page_id, p.tag, p.title, p.created " .
-		"FROM " . $this->db->table_prefix . "category_page AS k " .
-			"INNER JOIN " . $this->db->table_prefix . "page AS p ON (k.page_id = p.page_id) " .
-		"WHERE k.category_id IN (" . $this->db->q($category) . ") AND k.page_id = p.page_id " .
+		"FROM " . $this->db->table_prefix . "category_assignment AS k " .
+			"INNER JOIN " . $this->db->table_prefix . "page AS p ON (k.object_id = p.page_id) " .
+		"WHERE k.category_id IN (" . $this->db->q($category) . ") " .
+			"AND k.object_type_id = 1 " .
+			"AND p.deleted <> '1' " .
 			($root
 				? "AND (p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . ") "
 				: '') .
@@ -126,7 +128,7 @@ if (!$ids)
 	}
 
 	// categories list
-	if ($categories = $this->get_categories_list($lang, 1, $root))
+	if ($categories = $this->get_categories_list($lang, true, $root))
 	{
 		echo '<ul class="ul_list">' . "\n";
 
@@ -138,11 +140,11 @@ if (!$ids)
 
 			echo '<li class="' . (!$inline ? 'inline' : '') . '"> ' . ($list ? '<a href="' . $this->href('', '', 'category_id=' . $category_id) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> × </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '');
 
-			if (isset($word['childs']) && $word['childs'] == true)
+			if (isset($word['child']) && $word['child'] == true)
 			{
 				echo "<ul>\n";
 
-				foreach ($word['childs'] as $category_id => $word)
+				foreach ($word['child'] as $category_id => $word)
 				{
 					echo '<li class="' . (!$inline ? 'inline' : '') . '"> ' . ($list ? '<a href="' . $this->href('', '', 'category_id=' . $category_id) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> × </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '') . "</li>\n";
 				}
@@ -159,7 +161,7 @@ if (!$ids)
 	}
 	else
 	{
-		echo '<em>' . $this->_t('NoCategoriesForThisLanguage') . '</em>';
+		echo '<em>' . $this->_t('NoCategoriesForThisLang') . '</em>';
 	}
 
 	if (!$nomark)
