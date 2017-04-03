@@ -1664,6 +1664,7 @@ class Wacko
 		}
 	}
 
+	// used for comment feed
 	function load_comment($limit = 100, $tag = '', $deleted = 0)
 	{
 		$limit = $this->get_list_count($limit);
@@ -1701,7 +1702,7 @@ class Wacko
 						? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 						: "") .
 				"AND a.privilege = 'read' " .
-			"ORDER BY modified DESC " .
+			"ORDER BY created DESC " .
 			"LIMIT {$limit}"))
 			{
 				foreach ($read_acls as $read_acl)
@@ -7453,7 +7454,7 @@ class Wacko
 				"message	= " . $this->db->q($message) . " ");
 	}
 
-	function get_categories($page_id, $type_id = '', $cache = true)
+	function get_categories($page_id, $type_id = null, $cache = true)
 	{
 		$_category = '';
 
