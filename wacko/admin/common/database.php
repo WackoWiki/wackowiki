@@ -44,8 +44,8 @@ if (!isset($tables, $directories))
 				'order'	=> 'category_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix . 'category_page' => [
-				'name'	=> $engine->db->table_prefix . 'category_page',
+			$engine->db->table_prefix . 'category_assignment' => [
+				'name'	=> $engine->db->table_prefix . 'category_assignment',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000

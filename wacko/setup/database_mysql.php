@@ -51,11 +51,12 @@ $table_category = "CREATE TABLE {$pref}category (" .
 					"UNIQUE KEY idx_category (category_lang, category)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_category_page = "CREATE TABLE {$pref}category_page (" .
-						"category_id INT(10) unsigned NOT NULL DEFAULT 0," .
-						"page_id INT(10) unsigned NOT NULL DEFAULT 0," .
-						"UNIQUE KEY idx_pageword (category_id, page_id)" .
-					") {$engine} COMMENT='' {$charset}";
+$table_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
+					"category_id INT(10) unsigned NOT NULL DEFAULT 0," .
+					"object_type_id INT(10) unsigned NOT NULL DEFAULT 0," .
+					"object_id INT(10) unsigned NOT NULL DEFAULT 0," .
+					"UNIQUE KEY idx_assignment (category_id, object_type_id, object_id)" .
+				") {$engine} COMMENT='' {$charset}";
 
 $table_config = "CREATE TABLE {$pref}config (" .
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -406,7 +407,7 @@ $table_menu_drop				= "DROP TABLE IF EXISTS {$pref}menu";
 $table_cache_drop				= "DROP TABLE IF EXISTS {$pref}cache";
 $table_config_drop				= "DROP TABLE IF EXISTS {$pref}config";
 $table_category_drop			= "DROP TABLE IF EXISTS {$pref}category";
-$table_category_page_drop		= "DROP TABLE IF EXISTS {$pref}category_page";
+$table_category_assignment_drop	= "DROP TABLE IF EXISTS {$pref}category_assignment";
 $table_file_drop				= "DROP TABLE IF EXISTS {$pref}file";
 $table_file_link_drop			= "DROP TABLE IF EXISTS {$pref}file_link";
 $table_log_drop					= "DROP TABLE IF EXISTS {$pref}log";

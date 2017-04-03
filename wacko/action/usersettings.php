@@ -197,7 +197,7 @@ else if (($user = $this->get_user()))
 				<li class="active">' . $this->_t('Bookmarks') . '</li>
 				<li><a href="' . $this->href('', '', 'notification') . '">' . $this->_t('UserSettingsNotifications') . '</a></li>
 				<li><a href="' . $this->href('', '', 'extended') . '">' . $this->_t('UserSettingsExtended') . "</a></li>
-				</ul><br /><br />\n";
+			</ul><br /><br />\n";
 		echo $this->action('menu', ['redirect' => 1]);
 	}
 	// NOTIFICATIONS
