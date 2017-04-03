@@ -17,10 +17,10 @@ define('FORMATTER_DIR',					'formatter');
 define('HANDLER_DIR',					'handler');
 define('IMAGE_DIR',						'image');
 define('THEME_DIR',						'theme');
-define('THUMB_DIR',						'files/thumb');
-define('UPLOAD_GLOBAL_DIR',				'files/global');
-define('UPLOAD_PER_PAGE_DIR',			'files/perpage');
-define('UPLOAD_BACKUP_DIR',				'files/backup');
+define('THUMB_DIR',						'file/thumb');
+define('UPLOAD_GLOBAL_DIR',				'file/global');
+define('UPLOAD_PER_PAGE_DIR',			'file/perpage');
+define('UPLOAD_BACKUP_DIR',				'file/backup');
 define('XML_DIR',						'xml');
 
 define('CACHE_CONFIG_DIR',				'_cache/config');
@@ -64,6 +64,9 @@ define('MENU_DEFAULT',					2);
 
 define('LINK_PAGE',						0);
 define('LINK_FILE',						1);
+
+define('OBJECT_PAGE',					1);
+define('OBJECT_FILE',					2);
 
 define('RECOVERY_MODE',					0);					// restore database
 
