@@ -215,6 +215,8 @@ $wacko_translation = [
 
 	// categories handler
 	'Categories'				=> 'Категории',
+	'CategoriesAssign'			=> 'assign',
+	'CategoriesEdit'			=> 'edit',
 	'Category'					=> 'категория',
 	'CategoriesFor'				=> 'Ключевые слова документа',
 	'CategoriesTip'				=> 'Изменить категории',
@@ -231,11 +233,11 @@ $wacko_translation = [
 	'CategoryDescription'		=> 'Description',
 	'CategoriesAddGrouped'		=> 'Сгруппировать с ключевым словом',
 	'CategoriesAddGroupedNo'	=> 'Не группировать.',
-	'CategoriesRename'			=> 'Переименовать ключевое слово',
+	'CategoriesRename'			=> 'Переименовать ключевое слово %1',
 	'CategoriesRenameInfo'		=> '* Внимание: изменение затронет все документы, которым присвоено это ключевое слово.',
-	'CategoriesGroup'			=> 'Сгруппировать ключевое слово ',
+	'CategoriesGroup'			=> 'Сгруппировать ключевое слово %1 с',
 	'CategoriesGroupInfo'		=> '* Выберите [no group], чтобы разгруппировать ключевое слово.',
-	'CategoriesDelete'			=> 'Вы уверены, что хотите удалить ключевое слово ',
+	'CategoriesDelete'			=> 'Вы уверены, что хотите удалить ключевое слово %1?',
 	'CategoriesDeleteInfo'		=> '* Внимание: изменение затронет все документы, которым присвоено это ключевое слово. Если слово имеет подкатегории, они не будут удалены, а только разгруппированы.',
 	'CategoriesStoreInfo' 		=> 'Присвоить документу ключевые слова, выделенные флажками.',
 	'CategoriesStoreButton' 	=> 'Сохранить категории',
@@ -246,11 +248,11 @@ $wacko_translation = [
 	'CategoriesGroupButton'		=> 'группировать',
 	'CategoriesRemoveButton'	=> 'удалить',
 	'CategoriesEditInfo'		=> 'Отредактировать список ключевых слов (нужное выделить переключателем).',
-	'NoCategoriesForThisLanguage'	=> 'Ключевые слова для данного языка не заданы.',
+	'NoCategoriesForThisLang'	=> 'Ключевые слова для данного языка не заданы.',
 	'PagesCategory'				=> 'Документы категории',
 	'CategoryNotExists'			=> 'Категория не существует.',
 	'CategoryEmpty'				=> 'Категория пуста.',
-	'NoCategorySelected'			=> 'No category selected.',
+	'NoCategorySelected'		=> 'No category selected.',
 	'TagCloud'					=> 'Облако тегов',
 
 	// source handler

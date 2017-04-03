@@ -36,6 +36,15 @@ $alter_category_r5_4_1 = "ALTER TABLE {$pref}category ADD description VARCHAR(25
 $alter_category_r5_4_2 = "ALTER TABLE {$pref}category CHANGE lang category_lang VARCHAR(2) NOT NULL";
 $alter_category_r5_4_3 = "ALTER TABLE {$pref}category CHANGE description category_description VARCHAR(255) NOT NULL DEFAULT ''";
 
+// CATEGORY ASSIGNMENT
+$alter_category_assignment_r5_4_0 = "ALTER TABLE {$pref}category_assignment CHANGE page_id object_id INT(10) UNSIGNED NOT NULL";
+$alter_category_assignment_r5_4_1 = "ALTER TABLE {$pref}category_assignment ADD object_type_id INT(10) UNSIGNED NOT NULL AFTER category_id";
+$alter_category_assignment_r5_4_2 = "ALTER TABLE {$pref}category_assignment DROP INDEX idx_pageword, ADD UNIQUE idx_assignment (category_id, object_type_id, object_id)";
+
+$rename_category_assignment_r5_4_0 = "RENAME TABLE {$pref}category_page TO {$pref}category_assignment";
+
+$update_category_assignment_r5_4_0 = "UPDATE {$pref}category_assignment SET object_type_id = '1' WHERE object_type_id IS NULL";
+
 // CONFIG
 $update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|wordprocessor' WHERE config_name = 'standard_handlers'";
 $update_config_r5_4_1 = "DELETE FROM {$pref}config WHERE config_name IN ('session_expiration', 'x_csp', 'x_frame_option', 'session_encrypt_cookie', 'allow_swfobject', 'revisions_hide_cancel', 'date_precise_format', 'date_macro_format', 'phpmailer')";
@@ -81,7 +90,7 @@ $alter_page_r5_4_2 = "ALTER TABLE {$pref}page ADD version_id INT(10) UNSIGNED NO
 $alter_page_r5_4_3 = "ALTER TABLE {$pref}page CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
 $alter_page_r5_4_4 = "ALTER TABLE {$pref}page ADD page_size INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit";
 
-$update_page_r5_1_0 = "UPDATE {$pref}page AS page SET noindex = '0' WHERE page.noindex IS NULL";
+$update_page_r5_1_0 = "UPDATE {$pref}page SET noindex = '0' WHERE noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
 $update_page_r5_4_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r5_4_2 = "UPDATE {$pref}page AS p, (SELECT user_id FROM {$pref}user WHERE user_name = 'System') AS u SET p.noindex = '1' WHERE p.owner_id = u.user_id";

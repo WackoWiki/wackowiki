@@ -214,6 +214,8 @@ $wacko_translation = [
 
 	// categories handler
 	'Categories'				=> 'Categories',
+	'CategoriesAssign'			=> 'assign',
+	'CategoriesEdit'			=> 'edit',
 	'Category'					=> 'Category',
 	'CategoriesFor'				=> 'Categories for',
 	'CategoriesTip'				=> 'Edit categories',
@@ -230,11 +232,11 @@ $wacko_translation = [
 	'CategoryDescription'		=> 'Description',
 	'CategoriesAddGrouped'		=> 'Grouped with the category',
 	'CategoriesAddGroupedNo'	=> 'No group.',
-	'CategoriesRename'			=> 'Rename the category',
+	'CategoriesRename'			=> 'Rename the category %1 to',
 	'CategoriesRenameInfo'		=> '* Note: Change will affect all pages that are assigned to that category.',
-	'CategoriesGroup'			=> 'Group categories ',
+	'CategoriesGroup'			=> 'Group categories %1 with',
 	'CategoriesGroupInfo'		=> '* Select [no group], to debundled the category.',
-	'CategoriesDelete'			=> 'Are you sure you want to remove category ',
+	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'To assign categories to a page select the checkboxes.',
 	'CategoriesStoreButton'		=> 'Save Categories',
@@ -245,11 +247,11 @@ $wacko_translation = [
 	'CategoriesGroupButton'		=> 'Group',
 	'CategoriesRemoveButton'	=> 'Remove',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
-	'NoCategoriesForThisLanguage'	=> 'Categories for this language are not specified.',
+	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
 	'CategoryNotExists'			=> 'Category does not exist.',
 	'CategoryEmpty'				=> 'Category empty.',
-	'NoCategorySelected'			=> 'No category selected.',
+	'NoCategorySelected'		=> 'No category selected.',
 	'TagCloud'					=> 'Tag Cloud',
 
 	// source handler

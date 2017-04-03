@@ -129,7 +129,7 @@ if ($this->has_access('read')
 			}
 
 			// check categories
-			#if (!$this->page && $this->get_categories_list($this->page_lang, 1) && $this->save_categories_list($this->page['page_id'], 1) !== true)
+			#if (!$this->page && $this->get_categories_list($this->page_lang, 1) && $this->save_categories_list($this->page['page_id'], 1, 1) !== true)
 			#{
 				#$message = 'Select at least one referring category (field) to the page. ';
 				#$this->set_message($message , 'error');
@@ -182,7 +182,7 @@ if ($this->has_access('read')
 					if ($this->page == false)
 					{
 						// new page created
-						$this->save_categories_list($this->get_page_id($this->tag));
+						$this->save_categories_list($this->get_page_id($this->tag), 1);
 					}
 
 					// restore username after anonymous publication
@@ -402,16 +402,16 @@ if ($this->has_access('read')
 		}
 	}
 
-	if (!$this->page && $words = $this->get_categories_list($this->page_lang, 1))
+	if (!$this->page && $words = $this->get_categories_list($this->page_lang, true))
 	{
 		foreach ($words as $id => $word)
 		{
 			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked' : '' ) . ' />' .
 						'<label for="category' . $id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
 
-			if (isset($word['childs']) && $word['childs'] == true)
+			if (isset($word['child']) && $word['child'] == true)
 			{
-				foreach ($word['childs'] as $id => $word)
+				foreach ($word['child'] as $id => $word)
 				{
 					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked' : '' ) . ' />' .
 								'<label for="category' . $id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n";
