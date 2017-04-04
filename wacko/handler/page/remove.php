@@ -51,7 +51,7 @@ if ($this->is_admin()
 			$message .= '<li>' . $this->_t('LinksRemoved') . "</li>\n";
 		}
 
-		if ($this->remove_categories($this->tag))
+		if ($this->remove_page_categories($this->tag))
 		{
 			$message .= '<li>' . $this->_t('CategoriesRemoved') . "</li>\n";
 		}

@@ -97,21 +97,24 @@ if ($can_view)
 		return;
 	}
 
+	$selector =
+		($all
+			? "f.page_id IS NOT NULL "
+			: "f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' "
+			) . " " .
+		($owner
+			? "AND u.user_name = " . $this->db->q($owner) . " "
+			: '') .
+		($deleted != 1
+			? "AND f.deleted <> '1' "
+			: "");
+
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.file_id) AS n " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE ".
-			($all
-				? "f.page_id IS NOT NULL "
-				: "f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' "
-				) . " " .
-			($owner
-				? "AND u.user_name = " . $this->db->q($owner) . " "
-				: '') .
-			($deleted != 1
-				? "AND f.deleted <> '1' "
-				: ""), true);
+		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $max, 'f', $params, $method);
 
@@ -122,16 +125,7 @@ if ($can_view)
 			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE ".
-			($all
-				? "f.page_id IS NOT NULL "
-				: "f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' "
-				) . " " .
-			($owner
-				? "AND u.user_name = " . $this->db->q($owner) . " "
-				: '') . " " .
-			($deleted != 1
-			? "AND f.deleted <> '1' "
-					: "") .
+		$selector .
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);
 

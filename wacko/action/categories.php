@@ -56,7 +56,7 @@ if (!empty($_category))
 	{
 		if (!$nomark)
 		{
-			echo "<div class=\"layout-box\">\n";
+			echo '<div class="layout-box">' . "\n";
 		}
 	}
 

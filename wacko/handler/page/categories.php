@@ -34,7 +34,7 @@ if ($this->is_owner() || $this->is_admin())
 		if (isset($_POST['save']))
 		{
 			// clear old list
-			$this->remove_categories($this->tag);
+			$this->remove_category_assigments($this->page['page_id'], 1);
 
 			// save new list
 			$this->save_categories_list($this->page['page_id'], 1); // TODO: OBJECT_PAGE = 1
@@ -186,29 +186,6 @@ if ($this->is_owner() || $this->is_admin())
 				$this->log(4, 'Category //' . $word['category'] . '// removed from the database');
 
 				$this->http->redirect($this->href('categories', '', 'edit'));
-			}
-		}
-
-		/////////////////////////////////////////////
-		//   building list
-		/////////////////////////////////////////////
-
-		// load categories for the page's particular language
-		$categories = $this->get_categories_list($this->page['page_lang'], false);
-
-		// get currently selected category_ids
-		$_selected = $this->db->load_all(
-			"SELECT category_id " .
-			"FROM " . $this->db->table_prefix . "category_assignment " .
-			"WHERE object_id = '" . $this->page['page_id'] . "' " .
-				"AND object_type_id = 1");
-
-		// exploding categories into array
-		foreach ($_selected as $key => &$val)
-		{
-			if (is_array($val))
-			{
-				$selected[$key] = $val['category_id'];
 			}
 		}
 
@@ -401,72 +378,7 @@ if ($this->is_owner() || $this->is_admin())
 
 		echo $this->form_open('store_categories', ['page_method' => 'categories']);
 
-		// print categories list
-		if (is_array($categories))
-		{
-			$i = '';
-
-			echo '<div class="category_set">' . "\n";
-			echo '<ul class="ul_list hide_radio lined">' . "\n";
-
-			foreach ($categories as $category_id => $word)
-			{
-				echo '<li><span class="">' . "\n\t";
-				echo ($can_edit
-						? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />'
-						: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' /> ' . "\n\t") .
-					'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
-
-				if (isset($word['child']) && $word['child'] == true)
-				{
-					foreach ($word['child'] as $category_id => $word)
-					{
-						if ($i++ < 1)
-						{
-							echo "\t<ul>\n";
-						}
-
-						echo "\t\t" . '<li><span class="nobr">' . "\n\t\t\t" .
-								($can_edit
-									? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
-									: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' />' . "\n\t\t\t") .
-								'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t" .
-							'&nbsp;&nbsp;&nbsp;</li>' . "\n";
-					}
-				}
-
-				if ($i > 0)
-				{
-					echo "\t</ul>\n</li>\n";
-				}
-				else
-				{
-					echo "</li>\n";
-				}
-
-				$i = 0;
-			}
-
-			echo "</ul>\n";
-			echo '</div>' . "\n";
-
-			/////////////////////////////////////////////
-			//   control buttons
-			/////////////////////////////////////////////
-
-			if (!isset($_GET['edit']))
-				echo '<br /><br />' .
-				'<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ' .
-				'<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a> ' .
-				'<small><br />' . $this->_t('CategoriesStoreInfo') . '<br /><br /></small> ';
-		}
-		else
-		{
-			// availability depends on the page language and your access rights
-			// additionally you need also the right to create new categories
-			echo $this->_t('NoCategoriesForThisLang') . '<br /><br /><br />';
-			echo '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a><br /><br /> ';
-		}
+		echo $this->show_category_form($this->page['page_id'], 1, $can_edit);
 
 		if ($can_edit)
 		{

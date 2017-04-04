@@ -6892,7 +6892,7 @@ class Wacko
 					: "") );
 	}
 
-	function remove_categories($tag, $cluster = false)
+	function remove_page_categories($tag, $cluster = false)
 	{
 		if (!$tag)
 		{
@@ -6909,6 +6909,22 @@ class Wacko
 					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
 					: "") . ") " .
 				"AND k.object_type_id = 1");
+
+		return true;
+	}
+
+	function remove_category_assigments($object_id, $type_id)
+	{
+		if (!$object_id && !$type_id)
+		{
+			return false;
+		}
+
+		$this->db->sql_query(
+			"DELETE k.* " .
+			"FROM " . $this->db->table_prefix . "category_assignment k " .
+			"WHERE k.object_id = '" . (int) $object_id . "' " .
+				"AND k.object_type_id = '" . (int) $type_id . "'");
 
 		return true;
 	}
@@ -7498,7 +7514,7 @@ class Wacko
 				if ($_counts = $this->db->load_all(
 				"SELECT kp.category_id, COUNT(kp.object_id) AS n " .
 				"FROM " . $this->db->table_prefix . "category k , " .
-					"" . $this->db->table_prefix . "category_assignment kp " .
+					$this->db->table_prefix . "category_assignment kp " .
 					($root != ''
 						? "INNER JOIN " . $this->db->table_prefix . "page p ON (kp.object_id = p.page_id) "
 						: '' ) .
@@ -7543,6 +7559,103 @@ class Wacko
 		{
 			return false;
 		}
+	}
+
+	function show_category_form($object_id, $type_id, $can_edit = false)
+	{
+		$selected = [];
+
+		/////////////////////////////////////////////
+		//   building list
+		/////////////////////////////////////////////
+
+		// load categories for the page's particular language
+		$categories = $this->get_categories_list($this->page['page_lang'], false);
+
+		// get currently selected category_ids
+		$_selected = $this->db->load_all(
+			"SELECT category_id " .
+			"FROM " . $this->db->table_prefix . "category_assignment " .
+			"WHERE object_id = '" . (int) $object_id . "' " .
+				"AND object_type_id = '" . (int) $type_id ."'");
+
+		// exploding categories into array
+		foreach ($_selected as $key => &$val)
+		{
+			if (is_array($val))
+			{
+				$selected[$key] = $val['category_id'];
+			}
+		}
+
+		// print categories list
+		if (is_array($categories))
+		{
+			$i = '';
+
+			$out = '<div class="category_set">' . "\n";
+			$out .= '<ul class="ul_list hide_radio lined">' . "\n";
+
+			foreach ($categories as $category_id => $word)
+			{
+				$out .= '<li><span class="">' . "\n\t";
+				$out .= ($can_edit
+						? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />'
+						: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' /> ' . "\n\t") .
+					'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
+
+				if (isset($word['child']) && $word['child'] == true)
+				{
+					foreach ($word['child'] as $category_id => $word)
+					{
+						if ($i++ < 1)
+						{
+							$out .=  "\t<ul>\n";
+						}
+
+						$out .=  "\t\t" . '<li><span class="nobr">' . "\n\t\t\t" .
+								($can_edit
+									? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
+									: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' />' . "\n\t\t\t") .
+								'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t" .
+							'&nbsp;&nbsp;&nbsp;</li>' . "\n";
+					}
+				}
+
+				if ($i > 0)
+				{
+					$out .=  "\t</ul>\n</li>\n";
+				}
+				else
+				{
+					$out .=  "</li>\n";
+				}
+
+				$i = 0;
+			}
+
+			$out .=  "</ul>\n";
+			$out .=  '</div>' . "\n";
+
+			/////////////////////////////////////////////
+			//   control buttons
+			/////////////////////////////////////////////
+
+			if (!isset($_GET['edit']))
+				$out .=  '<br /><br />' .
+				'<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ' .
+				'<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a> ' .
+				'<small><br />' . $this->_t('CategoriesStoreInfo') . '<br /><br /></small> ';
+		}
+		else
+		{
+			// availability depends on the page language and your access rights
+			// additionally you need also the right to create new categories
+			$out .=  $this->_t('NoCategoriesForThisLang') . '<br /><br /><br />';
+			$out .=  '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a><br /><br /> ';
+		}
+
+		return $out;
 	}
 
 	// save categories selected in webform. ids are
