@@ -111,7 +111,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					<th class="form_left" scope="row"><?php echo $this->_t('FileAdded'); ?>:</th>
 					<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
 				</tr>
-				<tr class="">
+				<tr>
 					<th class="form_left" scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
 					<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
 				</tr>
@@ -119,11 +119,11 @@ $this->ensure_page(true); // TODO: upload for forums?
 					<th class="form_left" scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
 					<td><?php echo $file['file_description']; ?></td>
 				</tr>
-				<tr class="">
+				<tr>
 					<th class="form_left" scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
 					<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></td>
 				</tr>
-				<tr class="lined">
+				<tr>
 					<th class="form_left" scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
 					<td><?php echo $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]); ?></td>
 				</tr>
@@ -260,7 +260,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 							<th><?php echo $this->_t('FileAttachedTo'); ?>:</th>
 							<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></td>
 						</tr>
-						<tr class="lined">
+						<tr>
 							<th class="form_left" scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
 							<td><?php echo $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]); ?></td>
 						</tr>

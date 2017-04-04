@@ -174,7 +174,7 @@ $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $space
 	// shorten url name if too long
 	$trunc = $this->shorten_string($ref, $url_maxlen);
 
-	echo '<li class="lined">';
+	echo '<li>';
 	echo '<span class="' . $vclass . '">' . $val . '</span>&nbsp;&nbsp;&nbsp;&nbsp;';
 	echo '<span class=""><a title="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
 		'" href="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
@@ -229,7 +229,7 @@ $referrers	= array_slice($referrers, $pagination['offset'], $pagination['perpage
 // main show!
 
 $this->print_pagination($pagination);
-echo '<ul class="ul_list">' . "\n";
+echo '<ul class="ul_list lined">' . "\n";
 
 if ($mode == 'perpage')
 {
@@ -238,7 +238,7 @@ if ($mode == 'perpage')
 		if (($link = $check_ref($referrer)))
 		{
 			echo '<li><strong>' . $link . '</strong> (' . $referrer['num'] . ')';
-			echo "<ul>\n";
+			echo '<ul class="lined">' . "\n";
 
 			foreach ($this->load_referrers($referrer['page_id']) as $ref2)
 			{
@@ -266,7 +266,8 @@ else if ($mode == 'bytime')
 					echo "</ul>\n<br /></li>\n";
 				}
 
-				echo '<li><strong>' . $day . "</strong>\n<ul>\n";
+				echo '<li><strong>' . $day . "</strong>\n";
+				echo '<ul class="lined">' . "\n";
 				$curday = $day;
 			}
 

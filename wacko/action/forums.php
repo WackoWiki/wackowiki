@@ -70,7 +70,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$forums	= $this->db->load_all($sql, true);
 
 	// display list
-	echo '<table class="forum">' .
+	echo '<table class="forum lined">' .
 			'<tr>' .
 				'<th>' . $this->_t('ForumSubforums') . '</th>' .
 				'<th>' . $this->_t('ForumTopics') . '</th>' .
@@ -138,7 +138,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			}
 
 			// print <span class="icon"></span>
-			echo '<tr class="lined">' .
+			echo '<tr>' .
 					'<td style="width:60%; vertical-align:top;">' .
 						( $this->has_access('read', $forum['page_id'], GUEST) === false
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'

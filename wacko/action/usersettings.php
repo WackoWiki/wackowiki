@@ -213,13 +213,13 @@ else if (($user = $this->get_user()))
 		echo $this->form_open('user_settings_notifications');
 		?>
 		<div class="page_settings">
-		<table class="form_tbl">
+		<table class="form_tbl lined">
 		<tbody>
 		<?php
 		if ($this->db->enable_email && $this->db->enable_email_notification)
 		{
 	?>
-			<tr class="lined">
+			<tr>
 				<td class="form_left"><?php echo $this->_t('UserSettingsEmailMe');?>&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" id="send_watchmail" name="send_watchmail" <?php echo $user['send_watchmail']? 'checked' : '' ?> />
@@ -227,7 +227,7 @@ else if (($user = $this->get_user()))
 				</td>
 			</tr>
 
-		<tr class="lined">
+		<tr>
 			<th class="form_left">
 				<label for="notify_page"><?php echo $this->_t('NotifyPageEdit');?></label>
 			</th>
@@ -241,7 +241,7 @@ else if (($user = $this->get_user()))
 		?>
 			</td>
 		</tr>
-		<tr class="lined">
+		<tr>
 			<th class="form_left">
 				<label for="notify_comment"><?php echo $this->_t('NotifyComment');?></label>
 			</th>
@@ -260,7 +260,7 @@ else if (($user = $this->get_user()))
 			if ($this->page && $this->db->minor_edit != 0)
 			{
 	?>
-		<tr class="lined">
+		<tr>
 			<td class="form_left">&nbsp;</td>
 			<td class="form_right">
 				<input type="checkbox" id="notify_minor_edit" name="notify_minor_edit" <?php echo $user['notify_minor_edit']? 'checked' : '' ?> />
@@ -268,7 +268,7 @@ else if (($user = $this->get_user()))
 			</td>
 		</tr>
 		<?php }?>
-		<tr class="lined">
+		<tr>
 			<td class="form_left">&nbsp;</td>
 			<td class="form_right">
 				<input type="checkbox" id="allow_intercom" name="allow_intercom" <?php echo $user['allow_intercom']? 'checked' : '' ?> />
@@ -277,7 +277,7 @@ else if (($user = $this->get_user()))
 		</tr>
 	<?php	}?>
 
-		<tr class="lined">
+		<tr>
 			<td class="form_left">&nbsp;</td>
 			<td class="form_right">
 				<input type="checkbox" id="allow_massemail" name="allow_massemail" <?php echo $user['allow_massemail']? 'checked' : '' ?> />
@@ -309,65 +309,65 @@ else if (($user = $this->get_user()))
 		echo $this->form_open('user_settings_extended');
 ?>
 		<div class="page_settings">
-		<table class="form_tbl">
+		<table class="form_tbl lined">
 		<tbody>
-			<tr class="lined">
+			<tr>
 				<th class="form_left" scope="row"><?php echo $this->_t('UserSettingsOther');?></th>
 				<td class="form_right">
 					<input type="checkbox" id="doubleclick_edit" name="doubleclick_edit" <?php echo $user['doubleclick_edit']? 'checked' : '' ?> />
 					<label for="doubleclick_edit"><?php echo $this->_t('DoubleclickEditing');?></label>
 				</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" id="autocomplete" name="autocomplete" <?php echo $user['autocomplete']? 'checked' : '' ?> />
 					<label for="autocomplete"><?php echo $this->_t('WikieditAutocomplete');?></label>
 				</td>
 			</tr>
-				<tr class="lined">
+				<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" id="numerate_links" name="numerate_links" <?php echo $user['numerate_links']? 'checked' : '' ?> />
 					<label for="numerate_links"><?php echo $this->_t('NumerateLinks');?></label>
 				</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" id="show_comments" name="show_comments" <?php echo $user['show_comments']? 'checked' : '' ?> />
 					<label for="show_comments"><?php echo $this->_t('DoShowComments');?></label>
 				</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" id="show_files" name="show_files" <?php echo $user['show_files']? 'checked' : '' ?> />
 					<label for="show_files"><?php echo $this->_t('DoShowFiles');?></label>
 				</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" id="show_spaces" name="show_spaces" <?php echo $user['show_spaces']? 'checked' : '' ?> />
 					<label for="show_spaces"><?php echo $this->_t('ShowSpaces');?></label>
 				</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" id="dont_redirect" name="dont_redirect" <?php echo $user['dont_redirect']? 'checked' : '' ?> />
 					<label for="dont_redirect"><?php echo $this->_t('DontRedirect');?></label>
 				</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" name="validate_ip" id="validate_ip" <?php echo $user['validate_ip']? 'checked' : '' ?> />
 					<label for="validate_ip"><?php echo $this->_t('ValidateIP');?></label>
 				</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" name="hide_lastsession" id="hide_lastsession" <?php echo $user['hide_lastsession']? 'checked' : '' ?> />
@@ -378,7 +378,7 @@ else if (($user = $this->get_user()))
 		if ($this->db->publish_anonymously)
 		{
 ?>
-			<tr class="lined">
+			<tr>
 				<td class="form_left">&nbsp;</td>
 				<td class="form_right">
 					<input type="checkbox" name="noid_pubs" id="noid_pubs" <?php echo $user['noid_pubs']? 'checked' : '' ?> />
@@ -388,7 +388,7 @@ else if (($user = $this->get_user()))
 <?php
 		}
 ?>
-			<tr class="lined">
+			<tr>
 				<th class="form_left"><label for="session_length"><?php echo $this->_t('SessionDuration');?></label></th>
 				<td class="form_right">
 <?php
@@ -445,9 +445,9 @@ else if (($user = $this->get_user()))
 ?>
 <div class="page_settings">
 
-<table class="form_tbl">
+<table class="form_tbl lined">
 <tbody>
-	<tr class="lined">
+	<tr>
 		<th class="form_left" scope="row">
 			<?php echo $this->_t('UserName');?>
 		</th>
@@ -455,7 +455,7 @@ else if (($user = $this->get_user()))
 			<strong><?php echo $this->user_link($user['user_name'], '', true, false);?></strong>
 		</td>
 	</tr>
-	<tr class="lined">
+	<tr>
 		<th class="form_left" scope="row">
 			<label for="real_name"><?php echo $this->_t('RealName');?></label>
 		</th>
@@ -463,7 +463,7 @@ else if (($user = $this->get_user()))
 			<input type="text" id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" maxlength="80"/>
 		</td>
 	</tr>
-	<tr class="lined">
+	<tr>
 		<th class="form_left" scope="row">
 			<a href="<?php echo $this->href('', 'Password')?>"><?php echo $this->_t('YouWantChangePassword');?></a>
 		</th>
@@ -471,7 +471,7 @@ else if (($user = $this->get_user()))
 			<a href="<?php echo $this->href('', 'password');?>" style="text-decoration: none;"><input type="button" id="button" value="<?php echo $this->_t('YouWantChangePassword');?>" name="_password"/></a>
 		</td>
 	</tr>
-	<tr class="lined">
+	<tr>
 		<th class="form_left" scope="row">
 			<label for="email"><?php echo $this->_t('EmailAddress');?></label>
 		</th>
@@ -493,12 +493,12 @@ else if (($user = $this->get_user()))
 		<td></td>
 		<td></td>
 	</tr>
-	<tr class="lined">
-	<th class="form_left" scope="row">
-		<label for="user_lang"><?php echo $this->_t('YourLanguage');?></label>
-	</th>
-	<td class="form_right">
-		<select id="user_lang" name="user_lang">
+	<tr>
+		<th class="form_left" scope="row">
+			<label for="user_lang"><?php echo $this->_t('YourLanguage');?></label>
+		</th>
+		<td class="form_right">
+			<select id="user_lang" name="user_lang">
 <?php
 
 	$languages = $this->_t('LanguageArray');
@@ -525,7 +525,7 @@ else if (($user = $this->get_user()))
 ?>
 </select></td>
 	</tr>
-	<tr class="lined">
+	<tr>
 		<th class="form_left" scope="row">
 			<label for="theme"><?php echo $this->_t('ChooseTheme');?></label>
 		</th>
@@ -548,7 +548,7 @@ else if (($user = $this->get_user()))
 ?>
 		</select></td>
 	</tr>
-		<tr class="lined">
+	<tr>
 		<th class="form_left" scope="row">
 			<label for="timezone"><?php echo $this->_t('Timezone');?></label>
 		</th>
@@ -576,7 +576,7 @@ else if (($user = $this->get_user()))
 ?>
 		</select></td>
 	</tr>
-	<tr class="lined">
+	<tr>
 		<th class="form_left">
 			<label for="dst"><?php echo $this->_t('DST');?></label>
 		</th>
@@ -587,7 +587,7 @@ else if (($user = $this->get_user()))
 ?>
 		</td>
 	</tr>
-	<tr class="lined">
+	<tr>
 		<th class="form_left">
 			<label for="sorting_comments"><?php echo $this->_t('SortComment');?></label>
 		</th>
@@ -598,11 +598,11 @@ else if (($user = $this->get_user()))
 			</select>
 		</td>
 	</tr>
-	<tr class="lined">
+	<tr>
 		<th class="form_left" scope="row"><label for="menu_items"><?php echo $this->_t('MenuItemsShown');?></label></th>
 		<td class="form_right"><input type="number" id="menu_items" name="menu_items" value="<?php echo $user['menu_items'] ?>" size="40" min="0" max="20" /></td>
 	</tr>
-	<tr class="lined">
+	<tr>
 		<th class="form_left" scope="row">
 			<label for="list_count"><?php echo $this->_t('RecordsPerPage');?></label>
 		</th>
@@ -621,12 +621,12 @@ else if (($user = $this->get_user()))
 		<td></td>
 	</tr>
 	<tr>
-	<td class="form_left">&nbsp;</td>
-	<td class="form_right">
-		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('UpdateSettingsButton'); ?>" />
-		&nbsp;
-		<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->_t('LogoutButton'); ?>" /></a>
-	</td>
+		<td class="form_left">&nbsp;</td>
+		<td class="form_right">
+			<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('UpdateSettingsButton'); ?>" />
+			&nbsp;
+			<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->_t('LogoutButton'); ?>" /></a>
+		</td>
 	</tr>
 	</tbody>
 </table>
@@ -644,33 +644,33 @@ else if (($user = $this->get_user()))
 	}
 
 	echo '<aside class="page_tools">' .
-			'<table class="form_tbl">' .
-				'<tr class="lined">' .
+			'<table class="form_tbl lined">' .
+				'<tr>' .
 					'<th class="form_left" scope="row">' . $this->_t('UserSpace') . "</th>" .
 					'<td class="form_right">' . "<a href=\"" . $this->href('', ($this->db->users_page . '/' . $user['user_name'])) . "\">" . $this->db->users_page . '/' . $user['user_name'] . "</a>" . "</td>" .
-				"</tr>\n" . '<tr class="lined">' .
+				"</tr>\n" . '<tr>' .
 					'<th class="form_left" scope="row">' . $this->_t('UsersSignup') . "</th>" .
 					'<td class="form_right">' . $this->get_time_formatted($user['signup_time']) . "</td>" .
-				"</tr>\n" . '<tr class="lined">' .
+				"</tr>\n" . '<tr">' .
 					'<th class="form_left" scope="row">' . $this->_t('UsersLastSession') . "</th>" .
 					'<td class="form_right">' . $this->get_time_formatted($user['last_visit']) . "</td>" .
-				"</tr>\n" . '<tr class="lined">' .
+				"</tr>\n" . '<tr>' .
 					'<th class="form_left" scope="row">' . $this->_t('UploadQuota') . "&nbsp;&nbsp;</th>" .
 
 					'<td class="form_right" title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage.")</span></div></td>" .
-				"</tr>\n" . '<tr class="lined">' .
+				"</tr>\n" . '<tr>' .
 					'<th class="form_left" scope="row">' . $this->_t('UsersPages') . "</th>" .
 					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_pages'] . "</a></td>" .
-				// "</tr>\n" . '<tr class="lined">' .
+				// "</tr>\n" . '<tr>' .
 					// '<th class="form_left" scope="row">' . $this->_t('UsersRevisions') . "</th>" .
 					// '<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name']) . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_revisions'] . "</a></td>" .
-				"</tr>\n" . '<tr class="lined">' .
+				"</tr>\n" . '<tr>' .
 					'<th class="form_left" scope="row">' . $this->_t('UsersComments') . "</th>" .
 					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments') . '" title="' . $this->_t('ShowComments') . '">' . $user['total_comments'] . '</a></td>' .
-				"</tr>\n" . '<tr class="lined">' .
+				"</tr>\n" . '<tr>' .
 					'<th class="form_left" scope="row">' . $this->_t('UsersUploads') . "</th>" .
 					'<td class="form_right"><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'uploads') . '" title="' . $this->_t('ShowComments') . '">' . number_format($user['total_uploads'], 0, ',', '.') . '</a></td>' .
-				// "</tr>\n" . '<tr class="lined">' .
+				// "</tr>\n" . '<tr>' .
 				// 	'<th class="form_left" scope="row">' . $this->_t('UsersLogins') . "</th>" .
 				// 	'<td class="form_right">' . number_format($user['login_count'], 0, ',', '.') . "</td>" .
 				"</tr>\n" .

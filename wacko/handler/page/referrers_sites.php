@@ -26,7 +26,7 @@ if (!ctype_lower($mode))
 // navigation
 if ($mode == 'global')
 {
-	echo "<h3>" . $this->_t('ReferrersText') . " &raquo; " . $this->_t('ViewReferrersGlobal') . "</h3>";
+	echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ' . $this->_t('ViewReferrersGlobal') . "</h3>\n";
 	echo '<ul class="menu">
 			<li><a href="' . $this->href('referrers_sites') . '">' . $this->_t('ViewReferrersPage') . '</a></li>
 			<li class="active">' . $this->_t('ViewReferrersGlobal') . "</li>
@@ -34,7 +34,7 @@ if ($mode == 'global')
 }
 else
 {
-	echo "<h3>" . $this->_t('ReferrersText') . " &raquo; " . $this->_t('ViewReferrersPage') . "</h3>";
+	echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ' . $this->_t('ViewReferrersPage') . "</h3>\n";
 	echo '<ul class="menu">
 			<li class="active">' . $this->_t('ViewReferrersPage') . '</li>
 			<li><a href="' . $this->href('referrers_sites', '', 'o=global') . '">' .  $this->_t('ViewReferrersGlobal') . "</a></li>
@@ -58,7 +58,7 @@ else
 	$referrers = $this->load_referrers($this->page['page_id']);
 }
 
-echo "<strong>" . $title . "</strong><br /><br />\n";
+echo '<strong>' . $title . "</strong><br /><br />\n";
 
 if ($referrers)
 {
@@ -81,14 +81,14 @@ if ($referrers)
 
 	array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 
-	echo '<ul class="ul_list">' . "\n";
+	echo '<ul class="ul_list lined">' . "\n";
 
 	foreach ($referrer_sites as $site => $site_count)
 	{
-		echo '<li class="lined">';
+		echo '<li>';
 		echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;'.
 			(($site !== $unknown)
-				? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">' . 
+				? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">' .
 					htmlspecialchars($site, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>'
 				: $site
 			);
