@@ -7561,16 +7561,12 @@ class Wacko
 		}
 	}
 
-	function show_category_form($object_id, $type_id, $can_edit = false)
+	function show_category_form($object_id, $type_id, $lang, $can_edit = false)
 	{
 		$selected = [];
 
-		/////////////////////////////////////////////
-		//   building list
-		/////////////////////////////////////////////
-
 		// load categories for the page's particular language
-		$categories = $this->get_categories_list($this->page['page_lang'], false);
+		$categories = $this->get_categories_list($lang, false);
 
 		// get currently selected category_ids
 		$_selected = $this->db->load_all(
@@ -7637,10 +7633,6 @@ class Wacko
 			$out .=  "</ul>\n";
 			$out .=  '</div>' . "\n";
 
-			/////////////////////////////////////////////
-			//   control buttons
-			/////////////////////////////////////////////
-
 			if (!isset($_GET['edit']))
 				$out .=  '<br /><br />' .
 				'<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ' .
@@ -7693,7 +7685,8 @@ class Wacko
 				}
 
 				$this->db->sql_query(
-					"INSERT INTO " . $this->db->table_prefix . "category_assignment (category_id, object_id, object_type_id) " .
+					"INSERT INTO " . $this->db->table_prefix . "category_assignment " .
+						"(category_id, object_id, object_type_id) " .
 					"VALUES " . implode(', ', $values));
 			}
 

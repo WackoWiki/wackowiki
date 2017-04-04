@@ -378,7 +378,11 @@ if ($this->is_owner() || $this->is_admin())
 
 		echo $this->form_open('store_categories', ['page_method' => 'categories']);
 
-		echo $this->show_category_form($this->page['page_id'], 1, $can_edit);
+		echo $this->show_category_form($this->page['page_id'], 1, $this->page['page_lang'], $can_edit);
+
+		/////////////////////////////////////////////
+		//   control buttons
+		/////////////////////////////////////////////
 
 		if ($can_edit)
 		{
