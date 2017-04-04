@@ -40,7 +40,7 @@ function moderate_delete_page(&$engine, $tag)
 	$engine->remove_acls($tag);
 	$engine->remove_watches($tag);
 	$engine->remove_ratings($tag);
-	$engine->remove_categories($tag);
+	$engine->remove_page_categories($tag);
 	$engine->remove_comments($tag);
 	$engine->remove_files($tag);
 	$engine->remove_page($engine->get_page_id($tag));

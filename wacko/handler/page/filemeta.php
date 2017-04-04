@@ -15,14 +15,24 @@ if (!defined('IN_WACKO'))
 $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
-	"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.supertag, p.title " .
-	"FROM " . $this->db->table_prefix . "file f " .
-		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-	"WHERE f.file_id ='" . (int) $file_id . "' " .
-	"LIMIT 1", true);
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.supertag, p.title " .
+		"FROM " . $this->db->table_prefix . "file f " .
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+		"WHERE f.file_id ='" . (int) $file_id . "' " .
+		"LIMIT 1", true);
 
 	return $file;
+};
+
+$meta_navigation = function ($can_upload)
+{
+	return '<ul class="menu">' .
+			'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
+			($can_upload
+				? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
+				: '') .
+		 "</ul>\n";
 };
 
 $format_desc = function($text, $file_lang)
@@ -65,21 +75,17 @@ $this->ensure_page(true); // TODO: upload for forums?
 		$file = $get_file((int) $_GET['file_id']);
 
 		// 1.a REMOVE FILE CONFIRMATION
-		echo '<ul class="menu">' .
-				'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
-				($can_upload
-					? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
-					: '') .
-			"</ul>\n";
+		echo $meta_navigation($can_upload);
 
 		echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileRemove') . '</h3>';
 		echo '<ul class="menu">' .
-					'<li><a href="' . $this->href('filemeta', '', ['show', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
+					'<li><a href="' . $this->href('filemeta', '', ['show', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
 					// TODO: check rights
-					'<li><a href="' . $this->href('filemeta', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
+					'<li><a href="' . $this->href('filemeta', '', ['edit', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
 					// file revisions here
+					'<li><a href="' . $this->href('filemeta', '', ['label', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileLabel') . '</a></li>' .
 					'<li class="active">' . $this->_t('FileRemove') . '</li>' .
-				"</ul><br /><br />\n";
+				"</ul><br />\n";
 
 		if (count($file) > 0)
 		{
@@ -134,8 +140,8 @@ $this->ensure_page(true); // TODO: upload for forums?
 			?>
 
 			<br />
-			<input type="hidden" name="remove" value="<?php echo $_GET['remove'];?>" />
-			<input type="hidden" name="file_id" value="<?php echo $_GET['file_id'];?>" />
+			<input type="hidden" name="remove" value=""/>
+			<input type="hidden" name="file_id" value="<?php echo $file['file_id'];?>" />
 			<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>" />
 			&nbsp;
 			<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
@@ -158,6 +164,57 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 		return true;
 	}
+	else if (isset($_GET['label']) && isset($_GET['file_id']))
+	{
+		$file = $get_file((int) $_GET['file_id']);
+
+		// 1.b LABEL FILE
+		echo $meta_navigation($can_upload);
+
+		echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileLabel') . '</h3>';
+		echo '<ul class="menu">' .
+				'<li><a href="' . $this->href('filemeta', '', ['show', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
+				// TODO: check rights
+				'<li><a href="' . $this->href('filemeta', '', ['edit', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
+				// file revisions here
+				'<li class="active">' . $this->_t('FileLabel') . '</li>' .
+				'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>' .
+			 "</ul><br />\n";
+
+		if (count($file) > 0)
+		{
+			if ($this->is_admin()
+				|| ($file['page_id']
+					&& ($this->page['owner_id'] == $this->get_user_id()))
+				|| ($file['user_id'] == $this->get_user_id()))
+			{
+				if ($file['page_id'])
+				{
+					$path = 'file:/' . $file['supertag'] . '/';
+				}
+				else
+				{
+					$path = 'file:/';
+				}
+
+				// !!!!! patch link to not show pictures when not needed
+				$path2 = str_replace('file:/', '_file:/', $path);
+
+				echo '<h4>' . $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
+
+				echo $this->form_open('store_categories', ['page_method' => 'filemeta']);
+				echo $this->show_category_form($file['file_id'], 2, false);
+				echo '<input type="hidden" name="label" value="" />';
+				echo '<input type="hidden" name="file_id" value="' . $file['file_id'] . '" />';
+				echo $this->form_close();
+			}
+		}
+		else
+		{
+			$message = $this->_t('FileNotFound');
+			$this->show_message($message, 'info');
+		}
+	}
 	else if ((isset($_GET['edit']) || isset($_GET['show'])) && isset($_GET['file_id']))
 	{
 		$file = $get_file((int) $_GET['file_id']);
@@ -177,13 +234,8 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 			if (isset($_GET['show']))
 			{
-				// 1.b SHOW FILE PROPERTIES
-				echo '<ul class="menu">' .
-						'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
-						($can_upload
-							? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
-							: '') .
-					"</ul>\n";
+				// 1.c SHOW FILE PROPERTIES
+				echo $meta_navigation($can_upload);
 
 				echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileViewProperties') . '</h3>';
 				echo '<ul class="menu">' .
@@ -192,9 +244,10 @@ $this->ensure_page(true); // TODO: upload for forums?
 								|| ($file['page_id']
 									&& $this->page['owner_id'] == $this->get_user_id())
 								|| $file['user_id'] == $this->get_user_id())
-								?	'<li><a href="' . $this->href('filemeta', '', ['edit', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
+								?	'<li><a href="' . $this->href('filemeta', '', ['edit', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileEditProperties') . '</a></li>' .
 									// TODO: file revisions here
-									'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>'
+									'<li><a href="' . $this->href('filemeta', '', ['label', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileLabel') . '</a></li>' .
+									'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>'
 								: '') .
 						"</ul><br />\n";
 
@@ -285,21 +338,17 @@ $this->ensure_page(true); // TODO: upload for forums?
 						&& ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($file['user_id'] == $this->get_user_id()))
 				{
-					// 1.c EDIT FILE PROPERTIES
+					// 1.d EDIT FILE PROPERTIES
 
-					echo '<ul class="menu">' .
-							'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
-							($can_upload
-								? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
-								: '') .
-						"</ul>\n";
+					echo $meta_navigation($can_upload);
 
 					echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('FileEditProperties') . '</h3>';
 					echo '<ul class="menu">' .
-							'<li><a href="' . $this->href('filemeta', '', ['show', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
+							'<li><a href="' . $this->href('filemeta', '', ['show', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileViewProperties') . '</a></li>' .
 							'<li class="active">' . $this->_t('FileEditProperties') . '</li>' .
 							// file revisions here
-							'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id=' . (int) $_GET['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>' .
+							'<li><a href="' . $this->href('filemeta', '', ['label', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileLabel') . '</a></li>' .
+							'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id=' . $file['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>' .
 						"</ul><br />\n";
 
 					// !!!!! patch link to not show pictures when not needed
@@ -365,6 +414,8 @@ $this->ensure_page(true); // TODO: upload for forums?
 						&& ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($file['user_id'] == $this->get_user_id()))
 				{
+					$this->remove_category_assigments($file['file_id'], 2);
+
 					// remove from DB
 					$this->db->sql_query(
 						"DELETE FROM " . $this->db->table_prefix . "file " .
@@ -416,6 +467,21 @@ $this->ensure_page(true); // TODO: upload for forums?
 			{
 				$this->set_message($this->_t('FileRemoveNotFound'));
 			}
+		}
+		else if (isset($_POST['label']))
+		{
+			// update Categories list for the current page
+
+			$file = $get_file((int) $_POST['file_id']);
+			// clear old list
+			$this->remove_category_assigments($file['file_id'], 2);
+
+			// save new list
+			$this->save_categories_list($file['file_id'], 2); // TODO: OBJECT_FILE = 2
+
+			$this->log(4, 'Updated page categories [[/' . $this->tag . ' ' . $this->page['title'] . ']]');
+			$this->set_message($this->_t('CategoriesUpdated'), 'success');
+			$this->http->redirect($this->href('filemeta', '', ['label', 'file_id=' . (int) $file['file_id']]));
 		}
 		else if (isset($_POST['edit']))
 		{

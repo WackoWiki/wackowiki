@@ -85,22 +85,25 @@ $px = $this->db->table_prefix;
 
 if ($mode == 'perpage')
 {
-	$query = "SELECT r.page_id, COUNT(r.referrer) AS num, p.tag, p.title, p.page_lang " .
+	$query =
+		"SELECT r.page_id, COUNT(r.referrer) AS num, p.tag, p.title, p.page_lang " .
 		"FROM " . $px."referrer r " .
-		"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) " .
+			"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) " .
 		"GROUP BY r.page_id " .
 		"ORDER BY num DESC";
 }
 else if ($mode == 'bytime')
 {
-	$query = "SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.page_lang " .
+	$query =
+		"SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.page_lang " .
 		"FROM " . $px."referrer r " .
-		"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) " .
+			"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) " .
 		"ORDER BY r.referrer_time DESC";
 }
 else if ($mode == 'global')
 {
-	$query = "SELECT referrer, COUNT(referrer) AS num " .
+	$query =
+		"SELECT referrer, COUNT(referrer) AS num " .
 		"FROM " . $px."referrer " .
 		"GROUP BY referrer " .
 		"ORDER BY num DESC";
@@ -115,7 +118,7 @@ else
 	$query =
 		"SELECT referrer, COUNT(referrer) AS num " .
 		"FROM " . $px."referrer " .
-			"WHERE page_id = '" . (int) $this->page['page_id'] . "' " .
+		"WHERE page_id = '" . (int) $this->page['page_id'] . "' " .
 		"GROUP BY referrer " .
 		"ORDER BY num DESC";
 }
@@ -229,7 +232,7 @@ $referrers	= array_slice($referrers, $pagination['offset'], $pagination['perpage
 // main show!
 
 $this->print_pagination($pagination);
-echo '<ul class="ul_list lined">' . "\n";
+echo '<ul class="ul_list">' . "\n";
 
 if ($mode == 'perpage')
 {
@@ -237,8 +240,8 @@ if ($mode == 'perpage')
 	{
 		if (($link = $check_ref($referrer)))
 		{
-			echo '<li><strong>' . $link . '</strong> (' . $referrer['num'] . ')';
-			echo '<ul class="lined">' . "\n";
+			echo '<li><strong>' . $link . '</strong> (' . $referrer['num'] . ')' .
+				 '<ul class="lined">' . "\n";
 
 			foreach ($this->load_referrers($referrer['page_id']) as $ref2)
 			{
@@ -266,8 +269,9 @@ else if ($mode == 'bytime')
 					echo "</ul>\n<br /></li>\n";
 				}
 
-				echo '<li><strong>' . $day . "</strong>\n";
-				echo '<ul class="lined">' . "\n";
+				echo '<li><strong>' . $day . "</strong>\n" .
+					 '<ul class="lined">' . "\n";
+
 				$curday = $day;
 			}
 
