@@ -203,7 +203,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 				echo '<h4>' . $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
 
 				echo $this->form_open('store_categories', ['page_method' => 'filemeta']);
-				echo $this->show_category_form($file['file_id'], 2, false);
+				echo $this->show_category_form($file['file_id'], 2, $file['file_lang'], false);
 				echo '<input type="hidden" name="label" value="" />';
 				echo '<input type="hidden" name="file_id" value="' . $file['file_id'] . '" />';
 				echo $this->form_close();
