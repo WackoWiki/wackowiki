@@ -520,7 +520,7 @@ footer {
 	background-color: #FFFFFF;
 	padding: 10px 20px;
 	margin: 0 -20px;
-	border-bottom: 1px solid #EEEEEE;
+	border-bottom: 1px solid #EEEEEE; /* disable for category, last .. */
 	float: left;
 	width: 100%;
 }
@@ -1449,9 +1449,6 @@ th.form_left {
 
 }
 
-.revisions li:hover {background: #CCFFCC}
-/* #FCFCFC #FFCC99 #CCFFCC */
-
 /* settings */
 .lined td,
 .lined th {
@@ -1465,8 +1462,13 @@ th.form_left {
 	padding: 0;
 }
 
-.lined:hover {
+.revisions li:hover,
+.lined li:hover,
+.lined tr:hover,
+tr.lined:hover,
+li.lined:hover {
 	background: #CCFFCC;
+	/* #FCFCFC #FFCC99 #CCFFCC */
 }
 
 .lined-strike td,

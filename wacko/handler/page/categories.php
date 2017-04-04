@@ -406,11 +406,12 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			$i = '';
 
-			echo '<ul class="ul_list hide_radio">' . "\n";
+			echo '<div class="category_set">' . "\n";
+			echo '<ul class="ul_list hide_radio lined">' . "\n";
 
 			foreach ($categories as $category_id => $word)
 			{
-				echo '<li class="lined"><span class="">' . "\n\t";
+				echo '<li><span class="">' . "\n\t";
 				echo ($can_edit
 						? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />'
 						: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' /> ' . "\n\t") .
@@ -447,6 +448,7 @@ if ($this->is_owner() || $this->is_admin())
 			}
 
 			echo "</ul>\n";
+			echo '</div>' . "\n";
 
 			/////////////////////////////////////////////
 			//   control buttons

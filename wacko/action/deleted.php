@@ -34,7 +34,8 @@ if ($this->is_admin())
 						echo "</ul>\n<br /></li>\n";
 					}
 
-					echo '<li><strong>' . $day . ":</strong>\n<ul>\n";
+					echo '<li><strong>' . $day . ":</strong>\n" .
+						 '<ul class="lined">' . "\n";
 					$curday = $day;
 				}
 
@@ -50,7 +51,7 @@ if ($this->is_admin())
 				}
 
 				// print entry
-				echo '<li class="lined">' .
+				echo '<li>' .
 						'<span style="text-align:left">' .
 							'<small>' . $time . '</small>  &mdash; ' .
 							// $this->compose_link_to_page($page['tag'], 'revisions', '', 0) .

@@ -7,16 +7,16 @@
 		<h1>[ ' group.group_name |e ' ]</h1>
 		<small><a href="[ ' link ' ]">&laquo; [ ' _t: GroupsList ' ]</a></small>
 		<h2>[ ' _t: GroupsProfile ' ]</h2>
-		<table>
-			<tr class="lined">
+		<table class="lined">
+			<tr>
 				<td class="userprofil">[ ' _t: GroupsDescription ' ]</td>
 				<td>[ ' group.description |e ' ]</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				<td class="userprofil">[ ' _t: GroupsCreated ' ]</td>
 				<td>[ ' group.created | time_formatted ' ]</td>
 			</tr>
-			<tr class="lined">
+			<tr>
 				[== // Have all usergroup pages as sub pages of the current Groups page. ==]
 				<td class="userprofil">[ ' _t: GroupSpace ' ]</td>
 				<td><a href="[ ' groupspace ' ]">[ ' db: groups_page |e ' ]/[ ' group.group_name |e ' ]</a></td>
@@ -41,7 +41,7 @@
 			</tr>
 		</table>
 		<br />
-		<table style="width:100%; white-space:nowrap; padding-right:20px;">
+		<table class="lined" style="width:100%; white-space:nowrap; padding-right:20px;">
 			['' pagination '']
 			<tr>
 				[= head _ =
@@ -49,10 +49,10 @@
 				=]
 			</tr>
 			[= none _ =
-				<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>[ ' _t: GroupsNoMatching ' ]</em></small></td></tr>
+				<tr><td colspan="5" style="padding:10px; text-align:center;"><small><em>[ ' _t: GroupsNoMatching ' ]</em></small></td></tr>
 			=]
 			[= line _ =
-				<tr class="lined">
+				<tr>
 					<td style="padding-left:5px;"><a href="[ ' profile ' ]">[ ' group.group_name |e ' ]</a></td>
 					<td style="text-align:center;">[ ' group.members |e ' ]</td>
 					[= reg _ =

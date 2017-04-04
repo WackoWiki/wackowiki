@@ -31,26 +31,26 @@ first really BIG template written
 
 	<h2>[ ' _t: UsersProfile ' ]</h2>
 
-	<table style="border-spacing: 3px; border-collapse: separate;">
-		<tr class="lined">
+	<table class="lined" style="border-spacing: 3px; border-collapse: separate;">
+		<tr>
 			<td class="userprofil">[ ' _t: RealName ' ]</td>
 			<td>[ ' user.real_name |e ' ]</td>
 		</tr>
-		<tr class="lined">
+		<tr>
 			<td class="userprofil">[ ' _t: UsersSignupDate ' ]</td>
 			<td>[ ' user.signup_time | time_formatted ' ]</td>
 		</tr>
-		<tr class="lined">
+		<tr>
 			<td class="userprofil">[ ' _t: UsersLastSession ' ]</td>
 			<td>[ ''' last lastSession ''' ]</td>
 		</tr>
-		<tr class="lined">
+		<tr>
 			<td class="userprofil">[ ' _t: UserSpace ' ]</td>
 			[= userPage =
 				<td><a href="[ ' href ' ]">[ ' text |e ' ]</a></td>
 			=]
 		</tr>
-		<tr class="lined">
+		<tr>
 			<td class="userprofil"><a href="[ ' groupsPage ' ]">[ ' _t: UsersGroupMembership ' ]</a></td>
 			[= userGroups =
 				<td>[ ' list ' ][ ' na UsersNA2 ' ]</td>
@@ -111,9 +111,9 @@ first really BIG template written
 	[= pages _ =
 		<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
 		['' pagination '']<br />
-		<ul class="ul_list">
+		<ul class="ul_list lined">
 			[= li _ =
-				<li class="lined"><small>[ ' created | time_formatted ' ]</small>  &mdash; [ ' link ' ]</li>
+				<li><small>[ ' created | time_formatted ' ]</small>  &mdash; [ ' link ' ]</li>
 			=]
 		</ul>
 	=]
@@ -127,9 +127,9 @@ first really BIG template written
 		[ ''' none UsersNA2 ''' ]
 		[= c _ =
 			[ ''' pagination ''' ]<br />
-			<ul class="ul_list">
+			<ul class="ul_list lined">
 				[= li _ =
-					<li class="lined"><small>[ ' created | time_formatted ' ]</small> &mdash; [ ' link ' ]</li>
+					<li><small>[ ' created | time_formatted ' ]</small> &mdash; [ ' link ' ]</li>
 				=]
 			</ul>
 		=]
@@ -142,9 +142,9 @@ first really BIG template written
 			[ ''' none UsersNA2 ''' ]
 			[= u2 _ =
 				[ ''' pagination ''' ]<br />
-				<ul class="ul_list">
+				<ul class="ul_list lined">
 					[= li _ =
-						<li class="lined">
+						<li>
 							<small>[ ' t | time_formatted ' ]</small>
 							&mdash; [ ' link ' ]
 							. . . . . . . . . . . . . . . .
@@ -187,7 +187,7 @@ first really BIG template written
 		</form>
 	=]
 	['' pagination '']
-	<table style="width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
+	<table class="lined" style="width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
 		<thead>
 			<tr>
 				[= s _ =
@@ -197,10 +197,10 @@ first really BIG template written
 		</thead>
 		<tbody>
 		[= none _ =
-			<tr class="lined"><td colspan="5" style="padding:10px; text-align:center;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
+			<tr><td colspan="5" style="padding:10px; text-align:center;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
 		=]
 		[= u _ =
-			<tr class="lined">
+			<tr>
 				<td style="padding-left:5px;">[ ' link ' ]</td>
 				<td style="text-align:center;">[ ' user.total_pages |e ' ]</td>
 				<td style="text-align:center;">[ ' user.total_comments |e ' ]</td>

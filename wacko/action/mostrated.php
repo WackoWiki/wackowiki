@@ -30,11 +30,11 @@ if (isset($top))
 
 	if ($pages)
 	{
-		echo '<table>' . "\n";
+		echo '<table class="lined">' . "\n";
 
 		foreach ($pages as $page)
 		{
-			echo '<tr class="lined"><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title'], 0) . '</td>' .
+			echo '<tr><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title'], 0) . '</td>' .
 				 '<td style="width:10px; white-space:nowrap;">&nbsp;<strong>+'.round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
 		}
 
@@ -66,11 +66,11 @@ if (isset($bottom))
 
 	if ($pages)
 	{
-		echo '<table>' . "\n";
+		echo '<table class="lined">' . "\n";
 
 		foreach ($pages as $page)
 		{
-			echo '<tr class="lined"><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title'], 0) . '</td>' .
+			echo '<tr><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title'], 0) . '</td>' .
 				 '<td style="width:10px; white-space:nowrap">&nbsp;<strong>' . round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
 		}
 

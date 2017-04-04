@@ -270,7 +270,7 @@ if ($_user_id)
 			echo '<br /><br />';
 		}
 
-		echo '<table>';
+		echo '<table class="lined">';
 		echo '<tr><th>' . $this->_t('BookmarkNumber') . '</th><th>' . $this->_t('BookmarkTitle') . '</th><th>' . $this->_t('BookmarkPage') . '</th><th>' . $this->_t('BookmarkMark') . '</th><!--<th>Display</th>-->';
 
 		if ($system)
@@ -282,21 +282,21 @@ if ($_user_id)
 
 		foreach ($_menu as $menu_item)
 		{
-			echo '<tr class="lined">
-			<td class="">
-				<input type="number" min="0" name="pos_' . $menu_item['menu_id'] . '" size="2" style="width: 40px;" value="' . $menu_item['menu_position'] . '" />
-			</td>
-			<td>
-				<input type="text" maxlength="100" name="title_' . $menu_item['menu_id'] . '" size="40" value="' . $menu_item['menu_title'] . '" />
-			</td>
-			<td>
-				<!--<input type="radio" id="menu_item' . $menu_item['menu_id'] . '" name="change" value="' . $menu_item['menu_id'] . '" /> -->
-				<label for="menu_item' . $menu_item['menu_id'] . '" title="' . $menu_item['title'] . '">&raquo; ' . $menu_item['tag'] . '</label>
-			</td>
-			<td style="text-align:center;" >
-				<input type="checkbox" id="menu_item' . $menu_item['menu_id'] . '" name="delete_' . $menu_item['menu_id'] . '" />
-			</td>
-			<!--<td>
+			echo '<tr>
+				<td >
+					<input type="number" min="0" name="pos_' . $menu_item['menu_id'] . '" size="2" style="width: 40px;" value="' . $menu_item['menu_position'] . '" />
+				</td>
+				<td>
+					<input type="text" maxlength="100" name="title_' . $menu_item['menu_id'] . '" size="40" value="' . $menu_item['menu_title'] . '" />
+				</td>
+				<td>
+					<!--<input type="radio" id="menu_item' . $menu_item['menu_id'] . '" name="change" value="' . $menu_item['menu_id'] . '" /> -->
+					<label for="menu_item' . $menu_item['menu_id'] . '" title="' . $menu_item['title'] . '">&raquo; ' . $menu_item['tag'] . '</label>
+				</td>
+				<td style="text-align:center;" >
+					<input type="checkbox" id="menu_item' . $menu_item['menu_id'] . '" name="delete_' . $menu_item['menu_id'] . '" />
+				</td>
+				<!--<td>
 
 			'.(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title']) . '
 			</td>-->';
