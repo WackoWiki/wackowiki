@@ -52,6 +52,7 @@ $table_category = "CREATE TABLE {$pref}category (" .
 				") {$engine} COMMENT='' {$charset}";
 
 $table_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
+					"assignment_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"category_id INT(10) unsigned NOT NULL DEFAULT 0," .
 					"object_type_id INT(10) unsigned NOT NULL DEFAULT 0," .
 					"object_id INT(10) unsigned NOT NULL DEFAULT 0," .
