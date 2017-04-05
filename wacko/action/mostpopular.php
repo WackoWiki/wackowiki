@@ -13,6 +13,7 @@ if (!defined('IN_WACKO'))
  {{mostpopular
  [max=50] // maximum number of pages to retrieve
  [for|page="PageName"] // page name to start from in the page hierarchy
+ [title=1] // shows the page title
  [nomark=1] // makes it possible to hide frame around
  [dontrecurse="true|false"] // if set to true the list will only include pages that are direct children of the "for" page
  }}
@@ -70,10 +71,10 @@ else
 			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
 			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
-			"WHERE a.tag <> '" . $page."' " .
+			"WHERE a.tag <> " . $this->db->q($page) . " " .
 				"AND a.tag = c.tag " .
-				"AND INSTR(b.tag, '" . $page."') = 1 " .
-				"AND INSTR(c.tag, '" . $page."') = 1 " .
+				"AND INSTR(b.tag, " . $this->db->q($page) . ") = 1 " .
+				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
 			"ORDER BY a.hits DESC " .
 			"LIMIT {$max}");
 	}
@@ -85,7 +86,7 @@ else
 			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
 				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
-			"WHERE a.tag <> '" . $page."' " .
+			"WHERE a.tag <> " . $this->db->q($page) . " " .
 				"AND a.tag = c.tag " .
 				"AND b.tag = " . $this->db->q($page) . " " .
 				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .

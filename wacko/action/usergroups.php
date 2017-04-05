@@ -30,9 +30,24 @@ if ($user = $this->get_user())
 
 		echo '<table style="border-spacing: 5px; border-collapse: separate; padding: 5px;"><tr>';
 
+		$result = $this->load_all(
+			"SELECT
+				g.group_name,
+				u.user_id,
+				u.user_name
+			FROM
+				" . $this->db->table_prefix . "usergroup_member gm
+					INNER JOIN " . $this->db->table_prefix . "user u ON (gm.user_id = u.user_id)
+					INNER JOIN " . $this->db->table_prefix . "usergroup g ON (gm.group_id = g.group_id)");
+
+		foreach ($result as $row)
+		{
+			$ug[$row['group_name']][] = $row['user_name'];
+		}
+
 		$i = 1;
 
-		foreach ($this->db->groups as $group_name => $group_members)
+		foreach ($ug as $group_name => $group_members)
 		{
 			if ($i == $cols + 1)
 			{

@@ -128,6 +128,7 @@ $upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_cat
 $upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_1,	$lang['ErrorAlteringTable']];
 $upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_2,	$lang['ErrorAlteringTable']];
 $upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_3,	$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_4,	$lang['ErrorAlteringTable']];
 
 $upgrade['5.5.rc2'][]	= [$lang['UpdateTable'],	'category_assignment',	$update_category_assignment_r5_4_0,	$lang['ErrorUpdatingTable']];
 

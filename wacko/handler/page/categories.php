@@ -341,7 +341,7 @@ if ($this->is_owner() || $this->is_admin())
 			{
 				// no record selected
 				$this->set_message($this->_t('NoCategorySelected'), 'info');
-				$this->http->redirect($this->href('categories'));
+				$this->http->redirect($this->href('categories', '', 'edit'));
 			}
 		}
 	}
