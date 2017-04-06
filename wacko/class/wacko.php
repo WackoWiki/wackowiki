@@ -1670,7 +1670,7 @@ class Wacko
 		$limit = $this->get_list_count($limit);
 
 		if ($pages = $this->db->load_all(
-		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag " .
+		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag " .
 		"FROM " . $this->db->table_prefix . "page c " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (c.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
@@ -1678,10 +1678,10 @@ class Wacko
 			($tag
 				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 				: "") .
-			($deleted != 1
+			(!$deleted
 				? "AND p.deleted <> '1' AND c.deleted <> '1' "
 				: "") .
-		"ORDER BY c.modified DESC " .
+		"ORDER BY c.created DESC " .
 		"LIMIT " . $limit))
 		{
 			#$count		= count($pages['page_id']);
@@ -1885,14 +1885,8 @@ class Wacko
 			$body = $this->format($body, 'pre_wacko');
 
 			// making page body components
-			$body_r		= $this->format($body, 'wacko');
-			$body_toc	= '';
-
-			if ($this->db->paragrafica && !$comment_on_id)
-			{
-				$body_r		= $this->format($body_r, 'paragrafica');
-				$body_toc	= $this->body_toc;
-			}
+			$body_r		= $this->compile_body($body, $page_id, $comment_on_id, false);
+			$body_toc	= $this->body_toc;
 
 			// review
 			if (isset($reviewed))
@@ -1997,8 +1991,8 @@ class Wacko
 				}
 
 				// determine the depth
-				$_depth_array	= explode('/', $tag);
-				$depth			= count($_depth_array);
+				$depth_array	= explode('/', $tag);
+				$depth			= count($depth_array);
 
 				$this->db->sql_query(
 					"INSERT INTO " . $this->db->table_prefix . "page SET " .
@@ -2014,8 +2008,7 @@ class Wacko
 						"depth			= '" . (int) $depth . "', " .
 						"owner_id		= '" . (int) $owner_id . "', " .
 						"user_id		= '" . (int) $user_id . "', " .
-						"ip				= " . $this->db->q($ip) . ", " .
-						"latest			= '1', " .
+						"title			= " . $this->db->q($title) . ", " .
 						"tag			= " . $this->db->q($tag) . ", " .
 						"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
 						"body			= " . $this->db->q($body) . ", " .
@@ -2029,8 +2022,9 @@ class Wacko
 								"reviewed_time	= UTC_TIMESTAMP(), " .
 								"reviewer_id	= '" . (int) $reviewer_id . "', "
 							:	"") .
-						"page_lang		= " . $this->db->q($lang) . ", " .
-						"title			= " . $this->db->q($title) . " ");
+						"latest			= '1', " . // new page
+						"ip				= " . $this->db->q($ip) . ", " .
+						"page_lang		= " . $this->db->q($lang) . " " );
 
 				// IMPORTANT! lookup newly created page_id
 				$page_id = $this->get_page_id($tag);
@@ -2140,11 +2134,11 @@ class Wacko
 						"UPDATE " . $this->db->table_prefix . "page SET " .
 							"version_id		= '" . (int)($old_page['version_id'] + 1) . "', " .
 							"comment_on_id	= '" . (int) $comment_on_id . "', " .
+							# "created		= " . $this->db->q($old_page['created']) . ", " .
 							"modified		= UTC_TIMESTAMP(), " .
-							"created		= " . $this->db->q($old_page['created']) . ", " .
 							"owner_id		= '" . (int) $owner_id . "', " .
 							"user_id		= '" . (int) $user_id . "', " .
-							"latest			= '2', " .
+							"title			= " . $this->db->q($title) . ", " .
 							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc )) . ", " .
 							"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
 							"body			= " . $this->db->q($body) . ", " .
@@ -2158,7 +2152,7 @@ class Wacko
 									"reviewed_time	= UTC_TIMESTAMP(), " .
 									"reviewer_id	= '" . (int) $reviewer_id . "', "
 								:	"") .
-							"title			= " . $this->db->q($title) . " " .
+							"latest			= '2' " . // modified page
 						"WHERE tag = " . $this->db->q($tag) . " " .
 						"LIMIT 1");
 
@@ -2187,13 +2181,21 @@ class Wacko
 		// writing xmls
 		if (!$mute)
 		{
-			if (!isset($old_page['comment_on_id']) || !$comment_on_id)
+			if ($this->db->enable_feeds)
 			{
-				if ($this->db->enable_feeds)
+				$xml = new Feed($this);
+
+				// comment it is
+				// TODO: if (!isset($old_page['comment_on_id']) && $comment_on_id)
+				// - takes 20 (hard coded) last (created not modified) comments
+				// - comments might be edited, then write comments feed again
+				if ($comment_on_id)
 				{
-					$xml = new Feed($this);
-					$xml->changes();
 					$xml->comments();
+				}
+				else
+				{
+					$xml->changes();
 
 					// write news feed
 					if ($this->db->news_cluster)
@@ -2213,41 +2215,36 @@ class Wacko
 	}
 
 	// create revision of a given page
-	function save_revision($old_page)
+	function save_revision($page)
 	{
-		// prepare input
-		foreach ($old_page as &$val)
-		{
-			$val = $this->db->quote($val);
-		}
-
 		// move revision
 		$this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "revision SET " .
-				"page_id		= '{$old_page['page_id']}', " .
-				"version_id		= '{$old_page['version_id']}', " .
-				"tag			= '{$old_page['tag']}', " .
-				"modified		= '{$old_page['modified']}', " .
-				"body			= '{$old_page['body']}', " .
+				"page_id		= '" . (int) $page['page_id'] . "', " .
+				"version_id		= '" . (int) $page['version_id'] . "', " .
+				"owner_id		= '" . (int) $page['owner_id'] . "', " .
+				"user_id		= '" . (int) $page['user_id'] . "', " .
+				"title			= " . $this->db->q($page['title']) . ", " .
+				"tag			= " . $this->db->q($page['tag']) . ", " .
+				"supertag		= " . $this->db->q($page['supertag']) . ", " .
+				# "created		= " . $this->db->q($page['created']) . ", " .
+				"modified		= " . $this->db->q($page['modified']) . ", " .
+				"body			= " . $this->db->q($page['body']) . ", " .
 				"body_r			= '', ". // specify value for columns that don't have defaults
-				"formatting		= '{$old_page['formatting']}', " .
-				"edit_note		= '{$old_page['edit_note']}', " .
-				"minor_edit		= '{$old_page['minor_edit']}', " .
-				"page_size		= '{$old_page['page_size']}', " .
-				"reviewed		= '{$old_page['reviewed']}', " .
-				"reviewed_time	= '{$old_page['reviewed_time']}', " .
-				"reviewer_id	= '{$old_page['reviewer_id']}', " .
-				"ip				= '{$old_page['ip']}', " .
-				"owner_id		= '{$old_page['owner_id']}', " .
-				"user_id		= '{$old_page['user_id']}', " .
-				"latest			= '0', " .
-				"handler		= '{$old_page['handler']}', " .
-				"comment_on_id	= '{$old_page['comment_on_id']}', " .
-				"page_lang		= '{$old_page['page_lang']}', " .
-				"supertag		= '{$old_page['supertag']}', " .
-				"title			= '{$old_page['title']}', " .
-				"keywords		= '{$old_page['keywords']}', " .
-				"description	= '{$old_page['description']}'");
+				"formatting		= " . $this->db->q($page['formatting']) . ", " .
+				"edit_note		= " . $this->db->q($page['edit_note']) . ", " .
+				"minor_edit		= '" . (int) $page['minor_edit'] . "', " .
+				"page_size		= '" . (int) $page['page_size'] . "', " .
+				"reviewed		= '" . (int) $page['reviewed'] . "', " .
+				"reviewed_time	= " . $this->db->q($page['reviewed_time']) . ", " .
+				"reviewer_id	= '" . (int) $page['reviewer_id'] . "', " .
+				"latest			= '0', " . // old page
+				"ip				= " . $this->db->q($page['ip']) . ", " .
+				"handler		= " . $this->db->q($page['handler']) . ", " .
+				"comment_on_id	= '" . (int) $page['comment_on_id'] . "', " .
+				"page_lang		= " . $this->db->q($page['page_lang']) . ", " .
+				"keywords		= " . $this->db->q($page['keywords']) . ", " .
+				"description	= " . $this->db->q($page['description']));
 
 		// update user statistics for revisions made
 		if ($user = $this->get_user())
@@ -4579,6 +4576,38 @@ class Wacko
 		return $text;
 	}
 
+	function compile_body($body, $page_id = 0, $comment = false, $store = false)
+	{
+		if (!$body)
+		{
+			return;
+		}
+
+		// build html body
+		$body_r		= $this->format($body, 'wacko');
+		$body_toc	= '';
+
+		// build toc
+		if ($this->db->paragrafica && !$comment)
+		{
+			$body_r		= $this->format($body_r, 'paragrafica');
+			$body_toc	= $this->body_toc;
+		}
+
+		// store to DB ($this->page['latest'] != 0)
+		if ($store && $page_id)
+		{
+			$this->db->sql_query(
+				"UPDATE " . $this->db->table_prefix . "page SET " .
+					"body_r		= " . $this->db->q($body_r) . ", " .
+					"body_toc	= " . $this->db->q($body_toc) . " " .
+				"WHERE page_id = '" . $page_id . "' " .
+				"LIMIT 1");
+		}
+
+		return $body_r;
+	}
+
 	// GROUPS
 	function load_usergroup($group_name, $group_id = 0)
 	{
@@ -6304,7 +6333,7 @@ class Wacko
 
 		if ($this->page)
 		{
-			// override perpage settings
+			// override with perpage settings
 			$page_options = [
 				'footer_comments',
 				'footer_files',

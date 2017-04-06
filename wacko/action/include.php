@@ -60,7 +60,7 @@ else
 		{
 			// recompile body
 			// build html body
-			$strings = $this->format($inc_page['body'], 'wacko');
+			$strings = $this->compile_body($inc_page['body'], null, false, false);
 		}
 
 		// cleaning up
@@ -74,7 +74,7 @@ else
 			&& ($nomark != 1)
 			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			$edit_link = '<nav class="include-meta">' . 
+			$edit_link = '<nav class="include-meta">' .
 
 				// show page link
 				$this->link('/' . $inc_page['tag']) .
