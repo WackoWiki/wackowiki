@@ -39,6 +39,7 @@ $tpl->body = $this->numerate_toc($data); //  numerate toc if needed
 if ((@$this->sess->show_comments[$this->page['page_id']] || $this->forum))
 {
 	$tpl->enter('c_cmt_');
+
 	foreach ($this->load_comments($this->page['page_id']) as $comment)
 	{
 		if (!$comment['body_r'])
@@ -46,11 +47,12 @@ if ((@$this->sess->show_comments[$this->page['page_id']] || $this->forum))
 			$comment['body_r'] = $this->format($comment['body']);
 		}
 
-		$tpl->user = $this->user_link($comment['user_name']);
-		$tpl->created = $comment['created'];
+		$tpl->user		= $this->user_link($comment['user_name']);
+		$tpl->created	= $comment['created'];
 		$comment['modified'] == $comment['created'] or $tpl->edit_time = $comment['modified'];
-		$tpl->body = $this->format($comment['body_r'], 'post_wacko');
+		$tpl->body		= $this->format($comment['body_r'], 'post_wacko');
 	}
+
 	$tpl->leave();
 }
 
@@ -59,11 +61,13 @@ if ($this->numerate_links)
 {
 	$tpl->enter('n_link_');
 	$i = 0;
+
 	foreach ($this->numerate_links as $l => $n)
 	{
 		$i++ or $tpl->delim = '';
 		$tpl->n = $n;
 		$tpl->l = $l;
 	}
+
 	$tpl->leave();
 }

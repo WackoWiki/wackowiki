@@ -112,12 +112,14 @@ class Feed
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.created, p.body_r, p.comments, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang " .
 			"FROM {$prefix}page p, " .
 				"{$prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'read' AND a.list = '*' " .
 				"AND p.comment_on_id = '0' " .
+				"AND p.noindex <> '1' " .
+				"AND p.deleted <> '1' " .
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
 			"ORDER BY p.tag");
 
@@ -193,7 +195,13 @@ class Feed
 				$link	= $this->engine->href('', $page['tag']);
 				$pdate	= date('r', strtotime($page['modified']));
 				$coms	= $this->engine->href('', $page['tag'], 'show_comments=1#header-comments');
-				// TODO: might fail if body_r is empty,
+
+				// recompile if necessary
+				if ($page['body_r'] == '')
+				{
+					$page['body_r'] = $this->engine->compile_body($page['body'], $page['page_id'], false, true);
+				}
+
 				// TODO: format -> add ['feed' => true]
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
 
@@ -278,7 +286,12 @@ class Feed
 				{
 					$count++;
 
-					// TODO: might fail if body_r is empty
+					// recompile if necessary
+					if ($comment['body_r'] == '')
+					{
+						$comment['body_r'] = $this->engine->compile_body($comment['body'], $comment['page_id'], true, true);
+					}
+
 					$text = $this->engine->format($comment['body_r'], 'post_wacko');
 
 					// check current page lang for different charset to do_unicode_entities() against
@@ -326,6 +339,7 @@ class Feed
 				"AND a.privilege = 'read' AND a.list = '*' " .
 				"AND p.comment_on_id = '0' " .
 				"AND p.noindex <> '1' " .
+				"AND p.deleted <> '1' " .
 			"ORDER BY p.modified DESC, BINARY p.tag");
 
 		$xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";

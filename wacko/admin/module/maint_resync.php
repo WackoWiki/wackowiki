@@ -232,23 +232,7 @@ function admin_maint_resync(&$engine, &$module)
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
-						// build html body
-						$page['body_r'] = $engine->format($page['body'], 'wacko');
-
-						// build toc
-						if ($engine->db->paragrafica && $page['comment_on_id'] == 0 && $page['body_toc'] == '')
-						{
-							$page['body_r']		= $engine->format($page['body_r'], 'paragrafica');
-							$page['body_toc']	= $engine->body_toc;
-						}
-
-						// store to DB
-						$engine->db->sql_query(
-							"UPDATE " . $engine->db->table_prefix . "page SET " .
-								"body_r		= " . $engine->db->q($page['body_r']) . ", " .
-								"body_toc	= " . $engine->db->q($page['body_toc']) . " " .
-							"WHERE page_id = '" . $page['page_id'] . "' " .
-							"LIMIT 1");
+						$page['body_r'] = $engine->compile_body($page['body'], $page['page_id'], $page['comment_on_id'], true);
 					}
 
 					// rendering links

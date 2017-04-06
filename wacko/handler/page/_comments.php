@@ -143,13 +143,10 @@ if ($this->has_access('read'))
 					echo '<nav>' . $handler_button . "</nav>\n";
 				}
 
-				if ($comment['body_r'])
+				// recompile if necessary
+				if (!$comment['body_r'])
 				{
-					$pre_body = $comment['body_r'];
-				}
-				else
-				{
-					$pre_body = $this->format($comment['body'], 'wacko');
+					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], true, true);
 				}
 
 				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
@@ -158,7 +155,7 @@ if ($this->has_access('read'))
 						'<h2><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . "</a></h2>\n" .
 					 "</header>\n";
 
-				echo '<p>' . $this->format($pre_body, 'post_wacko') . "</p>\n";
+				echo '<p>' . $this->format($comment['body_r'], 'post_wacko') . "</p>\n";
 
 				echo '<footer>' .
 						'<ul class="comment-info">' . "\n" .

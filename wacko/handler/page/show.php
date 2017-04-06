@@ -136,26 +136,10 @@ if ($this->has_access('read'))
 		if (($this->page['body_r'] == '')
 			|| (($this->page['body_toc'] == '') && $this->db->paragrafica))
 		{
-			// build html body
-			$this->page['body_r'] = $this->format($this->page['body'], 'wacko');
-
-			// build toc
-			if ($this->db->paragrafica)
-			{
-				$this->page['body_r']	= $this->format($this->page['body_r'], 'paragrafica');
-				$this->page['body_toc']	= $this->body_toc;
-			}
-
-			// store to DB
-			if ($this->page['latest'] != 0)
-			{
-				$this->db->sql_query(
-					"UPDATE " . $this->db->table_prefix . "page SET " .
-						"body_r		= " . $this->db->q($this->page['body_r']) . ", " .
-						"body_toc	= " . $this->db->q($this->page['body_toc']) . " " .
-					"WHERE page_id = '" . $this->page['page_id'] . "' " .
-					"LIMIT 1");
-			}
+			// store to DB (0 -> revision)
+			$store		= ($this->page['latest'] ? true : false);
+			$comment	= false;
+			$this->page['body_r'] = $this->compile_body($this->page['body'], $this->page['page_id'], $comment, $store);
 		}
 
 		// parse page body
