@@ -1882,11 +1882,12 @@ class Wacko
 			}
 
 			// PreFormatter (macros and such)
-			$body = $this->format($body, 'pre_wacko');
+			$body			= $this->format($body, 'pre_wacko');
 
 			// making page body components
-			$body_r		= $this->compile_body($body, $page_id, $comment_on_id, false);
-			$body_toc	= $this->body_toc;
+			$paragrafica	= ($comment_on_id ? false : true);
+			$body_r			= $this->compile_body($body, $page_id, $paragrafica, false);
+			$body_toc		= $this->body_toc;
 
 			// review
 			if (isset($reviewed))
@@ -4576,7 +4577,18 @@ class Wacko
 		return $text;
 	}
 
-	function compile_body($body, $page_id = 0, $comment = false, $store = false)
+	/**
+	 * compile body
+	 *
+	 * renders body with [wacko|..] formatter
+	 *
+	 * @param unknown $body
+	 * @param int $page_id
+	 * @param boolean $paragrafica disable paragrafica for comments and include action
+	 * @param boolean $store stores rendered body in database
+	 * @return void|string
+	 */
+	function compile_body($body, $page_id = 0, $paragrafica = false, $store = false)
 	{
 		if (!$body)
 		{
@@ -4588,7 +4600,7 @@ class Wacko
 		$body_toc	= '';
 
 		// build toc
-		if ($this->db->paragrafica && !$comment)
+		if ($this->db->paragrafica && $paragrafica)
 		{
 			$body_r		= $this->format($body_r, 'paragrafica');
 			$body_toc	= $this->body_toc;
