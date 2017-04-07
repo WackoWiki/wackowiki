@@ -199,7 +199,7 @@ class Feed
 				// recompile if necessary
 				if ($page['body_r'] == '')
 				{
-					$page['body_r'] = $this->engine->compile_body($page['body'], $page['page_id'], false, true);
+					$page['body_r'] = $this->engine->compile_body($page['body'], $page['page_id'], true, true);
 				}
 
 				// TODO: format -> add ['feed' => true]
@@ -289,7 +289,7 @@ class Feed
 					// recompile if necessary
 					if ($comment['body_r'] == '')
 					{
-						$comment['body_r'] = $this->engine->compile_body($comment['body'], $comment['page_id'], true, true);
+						$comment['body_r'] = $this->engine->compile_body($comment['body'], $comment['page_id'], false, true);
 					}
 
 					$text = $this->engine->format($comment['body_r'], 'post_wacko');

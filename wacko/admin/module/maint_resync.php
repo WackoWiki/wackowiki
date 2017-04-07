@@ -232,7 +232,8 @@ function admin_maint_resync(&$engine, &$module)
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
-						$page['body_r'] = $engine->compile_body($page['body'], $page['page_id'], $page['comment_on_id'], true);
+						$paragrafica	= ($page['comment_on_id'] ? false : true);
+						$page['body_r']	= $engine->compile_body($page['body'], $page['page_id'], $paragrafica, true);
 					}
 
 					// rendering links

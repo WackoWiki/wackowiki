@@ -146,7 +146,7 @@ if ($this->has_access('read'))
 				// recompile if necessary
 				if (!$comment['body_r'])
 				{
-					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], true, true);
+					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], false, true);
 				}
 
 				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);

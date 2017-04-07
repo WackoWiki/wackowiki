@@ -49,11 +49,8 @@ if ($this->has_access('read'))
 				$message = $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
 				$message .= '<br /><br />';
 				$message .= $this->form_open('restore_page', ['page_method' => 'restore']);
-				#$message .= '<input type="hidden" name="previous" value="' . $latest['modified'] . '" />';
 				$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '" />';
-				#$message .= '<input type="hidden" name="body" value="' . htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />';
 				$message .= '<input type="submit" value="' . $this->_t('RestoreButton') . '" />';
-				#$message .= '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"/></a>';
 				$message .= $this->form_close();
 			}
 			else
@@ -137,9 +134,8 @@ if ($this->has_access('read'))
 			|| (($this->page['body_toc'] == '') && $this->db->paragrafica))
 		{
 			// store to DB (0 -> revision)
-			$store		= ($this->page['latest'] ? true : false);
-			$comment	= false;
-			$this->page['body_r'] = $this->compile_body($this->page['body'], $this->page['page_id'], $comment, $store);
+			$store					= ($this->page['latest'] ? true : false);
+			$this->page['body_r']	= $this->compile_body($this->page['body'], $this->page['page_id'], true, $store);
 		}
 
 		// parse page body
