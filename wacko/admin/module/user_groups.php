@@ -315,7 +315,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 						</td>' .
 						'<td>
-							<input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked' : '' ) . ' />
+							<input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked' : '') . ' />
 						</td>
 					</tr>' .
 					'<tr>
@@ -323,7 +323,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="active">' . $engine->_t('GroupsActive') . '</label>
 		 				</td>' .
 						'<td>
-		 					<input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked' : '' ) . ' />
+		 					<input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked' : '') . ' />
 		 				</td>
 					</tr>' .
 					'<tr>
@@ -384,13 +384,13 @@ function admin_user_groups(&$engine, &$module)
 							<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 					</td>' .
 					'<td>
-							<input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '' ) . ' />
+							<input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '') . ' />
 					</td></tr>' .
 					'<tr><td>
 							<label for="active">' . $engine->_t('GroupsActive') . '</label>
 					</td>' .
 					'<td>
-							<input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '' ) . ' />
+							<input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '') . ' />
 					</td></tr>' .
 					'<tr><td>
 						<br />

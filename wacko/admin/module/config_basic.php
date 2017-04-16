@@ -173,7 +173,7 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><label for="multilanguage"><strong>Multilanguage support:</strong><br />
 					<small>Include a choice of language on the page by page basis.</small></label></td>
 				<td>
-					<input type="checkbox" id="multilanguage" name="multilanguage" value="1"<?php echo ( $engine->db->multilanguage ? ' checked' : '' );?> />
+					<input type="checkbox" id="multilanguage" name="multilanguage" value="1"<?php echo ($engine->db->multilanguage ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<?php if ($engine->db->multilanguage)

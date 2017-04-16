@@ -102,7 +102,7 @@ function admin_db_restore(&$engine, &$module)
 							<table>
 								<tr>' .
 									'<td style="vertical-align:middle; width:10px;" class="label">' .
-									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '' ) . '/>
+									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '/>
 									#</td>' .
 									#'<td style="width:10px;">' .
 									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
@@ -114,13 +114,13 @@ function admin_db_restore(&$engine, &$module)
 								<tr>
 									<td></td>
 									<td>
-										'.(isset($log[6]) ? $log[6] : null) . '
+										' . (isset($log[6]) ? $log[6] : null) . '
 									</td>
 								</tr>
 								<tr>
 									<td></td>
 									<td>
-
+										' . (isset($log[7]) ? $engine->binary_multiples($log[7], false, true, true) : null) . '
 									</td>
 								</tr>
 							</table>' .
@@ -477,7 +477,7 @@ function admin_db_restore(&$engine, &$module)
 								<table>
 									<tr>' .
 										'<td style="vertical-align:middle; width:10px;" class="label">' .
-										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '' ) . '/>
+										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '/>
 										#</td>' .
 										#'<td style="width:10px;">' .
 											'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
@@ -495,7 +495,13 @@ function admin_db_restore(&$engine, &$module)
 									<tr>
 										<td></td>
 										<td>
-											<a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>
+											' . (isset($log[7]) ? $engine->binary_multiples($log[7], false, true, true) : null) . '
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											<br /><a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>
 										</td>
 									</tr>
 								</table>' .

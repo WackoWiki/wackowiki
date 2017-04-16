@@ -87,8 +87,8 @@ function admin_messages(&$engine, &$module)
 				<td class="label"><strong>Enable system message:</strong><br />
 					<small>Show system message.</small></td>
 				<td>
-					<input type="radio" id="sys_message_on" name="enable_system_message" value="1"<?php echo ( $engine->db->enable_system_message == 1 ? ' checked' : '' );?> /><label for="sys_message_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="sys_message_off" name="enable_system_message" value="0"<?php echo ( $engine->db->enable_system_message == 0 ? ' checked' : '' );?> /><label for="sys_message_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="sys_message_on" name="enable_system_message" value="1"<?php echo ($engine->db->enable_system_message == 1 ? ' checked' : '');?> /><label for="sys_message_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="sys_message_off" name="enable_system_message" value="0"<?php echo ($engine->db->enable_system_message == 0 ? ' checked' : '');?> /><label for="sys_message_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 
