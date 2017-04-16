@@ -415,6 +415,7 @@ header {
 
 main {
 	background-color: #FFFFFF;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	padding: 9px 20px 0px;
 	float: left;
 	width: 96%;
@@ -464,9 +465,7 @@ footer {
 	padding: 5px 20px;
 	border-top: none;
 	border-top: 1px dotted #CCCCCC;
-}
-
-.footer {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	margin: 0;
 	float: left;
 	height: auto;
@@ -509,6 +508,7 @@ footer {
 	padding: 2px 20px;
 	margin: 0 -20px;
 	border-top: 1px dotted #CCCCCC;
+	border-bottom: 1px solid #eeeeee;
 	float: left;
 	width: 100%;
 }
@@ -619,7 +619,7 @@ ol#comments {
 .commentform {
 	padding: 10px 20px;
 	margin: 0 -20px;
-	border-top: 1px solid #CCCCCC;
+	/* border-top: 1px solid #CCCCCC; */
 	background-color: #FCFCFC;
 	float: left;
 	width: 100%;
@@ -1155,25 +1155,20 @@ a:target {
 	margin: 0px;
 }
 
-.form_right {
+.form_tbl td {
 	text-align: left;
 	vertical-align: top;
-	width: 70%;
 }
 
-.form_right label {
+.form_tbl td label {
 	color: #666666;
 }
 
-.form_left {
+.form_tbl th {
 	color: #444444;
 	font-weight: bold;
 	text-align: right;
 	vertical-align: top;
-	width: 30%;
-}
-td.form_left,
-th.form_left {
 	padding-right: 20px;
 }
 

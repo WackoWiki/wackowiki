@@ -4582,7 +4582,7 @@ class Wacko
 	 *
 	 * renders body with [wacko|..] formatter
 	 *
-	 * @param unknown $body
+	 * @param string $body
 	 * @param int $page_id
 	 * @param boolean $paragrafica disable paragrafica for comments and include action
 	 * @param boolean $store stores rendered body in database

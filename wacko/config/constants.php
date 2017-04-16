@@ -80,12 +80,12 @@ define('TRANSLIT_DONTLOAD',				1);
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 define('WACKO_VERSION',					'5.5.rc3');
-define('HTML_ENTITIES_CHARSET',			'ISO-8859-1'); // ISO-8859-1, cp1251
+define('HTML_ENTITIES_CHARSET',			'ISO-8859-1');		// ISO-8859-1, cp1251
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 
-define('HTML_FILTERING',				null); // safehtml, htmlpurifier
+define('HTML_FILTERING',				null);				// safehtml, htmlpurifier
 
-define('ACTION4DIFF',					'anchor, toc'); //allowed actions in DIFF
+define('ACTION4DIFF',					'anchor, toc');		//allowed actions in DIFF
 
-define('PHP_MIN_VERSION',				'5.5.0'); //minimum required PHP version
-define('PHP_ERROR_REPORTING',			6); // PHP error reporting: 0 - off, 6 - all
+define('PHP_MIN_VERSION',				'5.5.0');			//minimum required PHP version
+define('PHP_ERROR_REPORTING',			6);					// PHP error reporting: 0 - off, 6 - all
