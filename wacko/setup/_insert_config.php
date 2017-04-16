@@ -62,7 +62,6 @@ $config_db['diff_modes']					= $config['diff_modes'];
 $config_db['disable_autosubscribe']			= $config['disable_autosubscribe'];
 $config_db['disable_bracketslinks']			= $config['disable_bracketslinks'];
 $config_db['disable_formatters']			= $config['disable_formatters'];
-$config_db['disable_npjlinks']				= $config['disable_npjlinks'];
 $config_db['disable_safehtml']				= $config['disable_safehtml'];
 $config_db['disable_tikilinks']				= $config['disable_tikilinks'];
 $config_db['disable_wikilinks']				= $config['disable_wikilinks'];

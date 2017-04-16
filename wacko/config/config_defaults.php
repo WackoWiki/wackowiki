@@ -84,10 +84,10 @@ $wacko_config_defaults = [
 	'allow_themes'					=> 0,
 	'allow_themes_per_page'			=> 0,
 
-	'site_logo'						=> '',
+	'site_logo'						=> 'wacko_logo.png',
 	'logo_display'					=> 0,
-	'logo_height'					=> 0,
-	'logo_width'					=> 0,
+	'logo_height'					=> 50,
+	'logo_width'					=> 108,
 	'site_favicon'					=> '',
 
 	'edit_summary'					=> 0,
@@ -118,7 +118,6 @@ $wacko_config_defaults = [
 	'disable_tikilinks'				=> 1,
 	'disable_bracketslinks'			=> 0,
 	'disable_wikilinks'				=> 1,
-	'disable_npjlinks'				=> 0,
 	'disable_formatters'			=> 0,
 
 	'youarehere_text'				=> '',
