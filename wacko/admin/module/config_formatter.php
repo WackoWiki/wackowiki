@@ -149,14 +149,6 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<!--<tr class="hl_setting">
-				<td class="label"><label for="disable_npjlinks"><strong>Disable Npjlinks:</strong><br />
-				<small>Disables linking for <code>See::Example</code> and <code>user@node:address</code> links.</small></label></td>
-				<td><input type="checkbox" id="disable_npjlinks" name="disable_npjlinks" value="1"<?php echo ( $engine->db->disable_npjlinks ? ' checked' : '' );?> /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>-->
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_formatters"><strong>Disable Formatters:</strong><br />
 				<small>Disables <code>%%code%%</code> syntax, used for highlighters.</small></label></td>

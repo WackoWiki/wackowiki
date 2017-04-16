@@ -273,10 +273,6 @@ class WackoFormatter
 			($this->object->db->disable_wikilinks == 1
 				? ''
 				: "(~?)(?<=[^\." . $object->language['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->language['UPPER'] . $object->language['LOWER'] . "+" . $object->language['UPPERNUM'] . $object->language['ALPHANUM'] . "*)\b|") .
-			// npj links
-			($this->object->db->disable_npjlinks == 1
-				? ''
-				: "(~?)" . $object->language['ALPHANUM'] . "+\@" . $object->language['ALPHA'] . "*(?!" . $object->language['ALPHANUM'] . "*\." . $object->language['ALPHANUM'] . "+)(\:" . $object->language['ALPHANUM'] . "*)?|" . $object->language['ALPHANUM'] . "+\:\:" . $object->language['ALPHANUM'] . "+|") .
 			"\n)/sm";
 
 		$this->NOTLONGREGEXP =
