@@ -82,7 +82,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="default_typografica"><strong>Typographical Proofreader:</strong><br />
 				<small>Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
-				<td><input type="checkbox" id="default_typografica" name="default_typografica" value="1"<?php echo ( $engine->db->default_typografica ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="default_typografica" name="default_typografica" value="1"<?php echo ($engine->db->default_typografica ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -90,7 +90,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="paragrafica"><strong>Paragrafica markings:</strong><br />
 				<small>Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <code>{{toc}}</code>.</small></label></td>
-				<td><input type="checkbox" id="paragrafica" name="paragrafica" value="1"<?php echo ( $engine->db->paragrafica ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="paragrafica" name="paragrafica" value="1"<?php echo ($engine->db->paragrafica ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -98,7 +98,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="allow_rawhtml"><strong>Global HTML Support:</strong><br />
 				<small>Use this option to open a potentially unsafe site.</small></label></td>
-				<td><input type="checkbox" id="allow_rawhtml" name="allow_rawhtml" value="1"<?php echo ( $engine->db->allow_rawhtml ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="allow_rawhtml" name="allow_rawhtml" value="1"<?php echo ($engine->db->allow_rawhtml ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -107,8 +107,8 @@ function admin_config_formatter(&$engine, &$module)
 				<td class="label"><strong>Filtering HTML:</strong><br />
 				<small>Blocks dangerous HTML-conservation facilities. Turn off the filter to open the site when the support HTML <span class="underline">very</span> undesirable!</small></td>
 				<td>
-					<input type="radio" id="disable_safehtml_on" name="disable_safehtml" value="0"<?php echo ( !$engine->db->disable_safehtml ? ' checked' : '' );?> /><label for="disable_safehtml_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="disable_safehtml_off" name="disable_safehtml" value="1"<?php echo ( $engine->db->disable_safehtml ? ' checked' : '' );?> /><label for="disable_safehtml_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="disable_safehtml_on" name="disable_safehtml" value="0"<?php echo ( !$engine->db->disable_safehtml ? ' checked' : '');?> /><label for="disable_safehtml_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="disable_safehtml_off" name="disable_safehtml" value="1"<?php echo ($engine->db->disable_safehtml ? ' checked' : '');?> /><label for="disable_safehtml_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -120,7 +120,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="allow_x11colors"><strong>X11 Colors Usage:</strong><br />
 				<small>Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code> Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
-				<td><input type="checkbox" id="allow_x11colors" name="allow_x11colors" value="1"<?php echo ( $engine->db->allow_x11colors ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="allow_x11colors" name="allow_x11colors" value="1"<?php echo ($engine->db->allow_x11colors ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -128,7 +128,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_tikilinks"><strong>Disable Tikilinks:</strong><br />
 				<small>Disables linking for <code>Double.CamelCaseWords</code>.</small></label></td>
-				<td><input type="checkbox" id="disable_tikilinks" name="disable_tikilinks" value="1"<?php echo ( $engine->db->disable_tikilinks ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="disable_tikilinks" name="disable_tikilinks" value="1"<?php echo ($engine->db->disable_tikilinks ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -136,7 +136,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_wikilinks"><strong>Disable Wikilinks:</strong><br />
 				<small>Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page. This is useful when you work across different namespaces aks clusters. By default it is off.</small></label></td>
-				<td><input type="checkbox" id="disable_wikilinks" name="disable_wikilinks" value="1"<?php echo ( $engine->db->disable_wikilinks ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="disable_wikilinks" name="disable_wikilinks" value="1"<?php echo ($engine->db->disable_wikilinks ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -144,7 +144,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_bracketslinks"><strong>Disable bracketslinks:</strong><br />
 				<small>Disables <code>[[link]]</code> and <code>((link))</code> syntax.</small></label></td>
-				<td><input type="checkbox" id="disable_bracketslinks" name="disable_bracketslinks" value="1"<?php echo ( $engine->db->disable_bracketslinks ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="disable_bracketslinks" name="disable_bracketslinks" value="1"<?php echo ($engine->db->disable_bracketslinks ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -152,7 +152,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_formatters"><strong>Disable Formatters:</strong><br />
 				<small>Disables <code>%%code%%</code> syntax, used for highlighters.</small></label></td>
-				<td><input type="checkbox" id="disable_formatters" name="disable_formatters" value="1"<?php echo ( $engine->db->disable_formatters ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="disable_formatters" name="disable_formatters" value="1"<?php echo ($engine->db->disable_formatters ? ' checked' : '');?> /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -224,8 +224,8 @@ function admin_config_formatter(&$engine, &$module)
 				<td class="label"><strong>Enable Summer Time/DST:</strong><br />
 				<small></small></td>
 				<td>
-					<input type="radio" id="dst_off" name="dst" value="0"<?php echo ( $engine->db->dst == 0 ? ' checked' : '' );?> /><label for="dst_off"><?php echo $engine->_t('Off');?></label>
-					<input type="radio" id="dst_on" name="dst" value="1"<?php echo ( $engine->db->dst == 1 ? ' checked' : '' );?> /><label for="dst_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="dst_off" name="dst" value="0"<?php echo ($engine->db->dst == 0 ? ' checked' : '');?> /><label for="dst_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="dst_on" name="dst" value="1"<?php echo ($engine->db->dst == 1 ? ' checked' : '');?> /><label for="dst_on"><?php echo $engine->_t('On');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -237,7 +237,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_link_target"><strong>Where external links open:</strong><br />
 				<small>Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.</small></label></td>
-				<td><input type="checkbox" id="enable_link_target" name="link_target" value="1"<?php echo ( $engine->db->link_target ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="enable_link_target" name="link_target" value="1"<?php echo ($engine->db->link_target ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -245,7 +245,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_noreferrer"><strong>noreferrer:</strong><br />
 				<small>Requires that the browser should not send an HTTP referer header if the user follows the hyperlink. Adds <code>rel="noreferrer"</code> to the link syntax.</small></label></td>
-				<td><input type="checkbox" id="enable_noreferrer" name="noreferrer" value="1"<?php echo ( $engine->db->noreferrer ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="enable_noreferrer" name="noreferrer" value="1"<?php echo ($engine->db->noreferrer ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -253,7 +253,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_nofollow"><strong>nofollow:</strong><br />
 				<small>Instruct some search engines that the hyperlink should not influence the ranking of the link's target in the search engine's index. Adds <code>rel="nofollow"</code> to the link syntax.</small></label></td>
-				<td><input type="checkbox" id="enable_nofollow" name="nofollow" value="1"<?php echo ( $engine->db->nofollow ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="enable_nofollow" name="nofollow" value="1"<?php echo ($engine->db->nofollow ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -261,7 +261,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_urls_underscores"><strong>Form addresses (URLs) with underscores:</strong><br />
 				<small>For example <code>http://[..]/WackoWiki</code> becames <code>http://[..]/Wacko_Wiki</code> with this option.</small></label></td>
-				<td><input type="checkbox" id="enable_urls_underscores" name="urls_underscores" value="1"<?php echo ( $engine->db->urls_underscores ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="enable_urls_underscores" name="urls_underscores" value="1"<?php echo ($engine->db->urls_underscores ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -269,7 +269,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_show_spaces"><strong>Show spaces in WikiNames:</strong><br />
 				<small>Show spaces in WikiNames, e.g. <code>MyName</code> beeing displayed as <code>My Name</code> with this option.</small></label></td>
-				<td><input type="checkbox" id="enable_show_spaces" name="show_spaces" value="1"<?php echo ( $engine->db->show_spaces ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="enable_show_spaces" name="show_spaces" value="1"<?php echo ($engine->db->show_spaces ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -277,14 +277,14 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_numerate_links"><strong>Numerate links in print view:</strong><br />
 				<small>Numerates and lists all links at the bottom of the print view with this option.</small></label></td>
-				<td><input type="checkbox" id="enable_numerate_links" name="numerate_links" value="1"<?php echo ( $engine->db->numerate_links ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="enable_numerate_links" name="numerate_links" value="1"<?php echo ($engine->db->numerate_links ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="enable_youarehere_text"><strong>Disable and visualize self-referencing links:</strong><br />
-				<small>Visualizing links to the same page, try to <code>'&lt;b&gt;####&lt;/b&gt;'</code>, all links-to-self became not links, but bold text.</small></label></td>
+				<small>Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.</small></label></td>
 				<td><input type="text" maxlength="50" id="enable_youarehere_text" name="youarehere_text" value="<?php echo htmlspecialchars($engine->db->youarehere_text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 		</table>

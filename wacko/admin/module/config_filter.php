@@ -77,8 +77,8 @@ function admin_config_filter(&$engine, &$module)
 					<small>Enabling SPAM Filter</small></label>
 				</td>
 				<td>
-					<input type="radio" id="spam_filter_on" name="spam_filter" value="1"<?php echo ( $engine->db->spam_filter == 1 ? ' checked' : '' );?> /><label for="spam_filter_on"><?php echo $engine->_t('Enabled'); ?></label>
-					<input type="radio" id="spam_filter_off" name="spam_filter" value="0"<?php echo ( $engine->db->spam_filter == 0 ? ' checked' : '' );?> /><label for="spam_filter_off"><?php echo $engine->_t('Disabled'); ?></label>
+					<input type="radio" id="spam_filter_on" name="spam_filter" value="1"<?php echo ($engine->db->spam_filter == 1 ? ' checked' : '');?> /><label for="spam_filter_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="spam_filter_off" name="spam_filter" value="0"<?php echo ($engine->db->spam_filter == 0 ? ' checked' : '');?> /><label for="spam_filter_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">

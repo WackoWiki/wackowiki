@@ -383,7 +383,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 						</td>' .
 					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked' : '' ) . ' />
+						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked' : '') . ' />
 					</td>
 				</tr>' .
 				'<tr>
@@ -479,7 +479,7 @@ function admin_user_users(&$engine, &$module)
 					<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 					</td>' .
 					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '' ) . ' />
+						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '') . ' />
 					</td>
 				</tr>' .
 				'<tr>
@@ -860,7 +860,7 @@ function admin_user_users(&$engine, &$module)
 			{
 				echo '<tr class="lined">' . "\n" .
 						'<td style="vertical-align:middle; width:10px;" class="label">
-							<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked' : '' ) . '/>
+							<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked' : '') . '/>
 						</td>' .
 						'<td>
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '" />

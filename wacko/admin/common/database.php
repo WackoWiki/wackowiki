@@ -18,55 +18,55 @@ if (!isset($tables, $directories))
 				'name'	=> $engine->db->table_prefix . 'acl',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'auth_token' => [
-					'name'	=> $engine->db->table_prefix . 'auth_token',
-					'where'	=> false,
-					'order'	=> 'user_id',
-					'limit' => 1000
+				'name'	=> $engine->db->table_prefix . 'auth_token',
+				'where'	=> false,
+				'order'	=> 'user_id',
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'cache' => [
 				'name'	=> $engine->db->table_prefix . 'cache',
 				'where'	=> false,
 				'order'	=> 'cache_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'config' => [
 				'name'	=> $engine->db->table_prefix . 'config',
 				'where'	=> false,
 				'order'	=> 'config_id',
-				'limit' => 500
+				'limit'	=> 500
 			],
 			$engine->db->table_prefix . 'category' => [
 				'name'	=> $engine->db->table_prefix . 'category',
 				'where'	=> false,
 				'order'	=> 'category_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'category_assignment' => [
 				'name'	=> $engine->db->table_prefix . 'category_assignment',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'file' => [
 				'name'	=> $engine->db->table_prefix . 'file',
 				'where'	=> false,
 				'order'	=> 'file_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'file_link' => [
-					'name'	=> $engine->db->table_prefix . 'file_link',
-					'where'	=> 'page_id',
-					'order'	=> 'page_id',
-					'limit' => 1000
+				'name'	=> $engine->db->table_prefix . 'file_link',
+				'where'	=> 'page_id',
+				'order'	=> 'page_id',
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'log' => [
 				'name'	=> $engine->db->table_prefix . 'log',
 				'where'	=> false,
 				'order'	=> 'log_time',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'menu' => [
 				'name'	=> $engine->db->table_prefix . 'menu',
@@ -78,67 +78,67 @@ if (!isset($tables, $directories))
 				'name'	=> $engine->db->table_prefix . 'page',
 				'where'	=> true,
 				'order'	=> 'tag',
-				'limit' => 500
+				'limit'	=> 500
 			],
 			$engine->db->table_prefix . 'page_link' => [
 				'name'	=> $engine->db->table_prefix . 'page_link',
 				'where'	=> 'from_page_id',
 				'order'	=> 'from_page_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'poll' => [
 				'name'	=> $engine->db->table_prefix . 'poll',
 				'where'	=> false,
 				'order'	=> 'poll_id, v_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'rating' => [
 				'name'	=> $engine->db->table_prefix . 'rating',
 				'where'	=> false,
 				'order'	=> 'page_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'referrer' => [
 				'name'	=> $engine->db->table_prefix . 'referrer',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'revision' => [
 				'name'	=> $engine->db->table_prefix . 'revision',
 				'where'	=> 'revision_id',
 				'order'	=> 'revision_id',
-				'limit' => 500
+				'limit'	=> 500
 			],
 			$engine->db->table_prefix . 'user' => [
 				'name'	=> $engine->db->table_prefix . 'user',
 				'where'	=> false,
 				'order'	=> 'user_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'user_setting' => [
 				'name'	=> $engine->db->table_prefix . 'user_setting',
 				'where'	=> false,
 				'order'	=> 'user_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'usergroup' => [
 				'name'	=> $engine->db->table_prefix . 'usergroup',
 				'where'	=> false,
 				'order'	=> 'group_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'usergroup_member' => [
 				'name'	=> $engine->db->table_prefix . 'usergroup_member',
 				'where'	=> false,
 				'order'	=> 'group_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			],
 			$engine->db->table_prefix . 'watch' => [
 				'name'	=> $engine->db->table_prefix . 'watch',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
-				'limit' => 1000
+				'limit'	=> 1000
 			]
 		];
 
@@ -178,6 +178,24 @@ function set_pack_dir(&$engine, $time)
 	ensure_dir($dir);
 
 	return $dir . '/';
+}
+
+// TODO: modify and move to UT class?
+// https://stackoverflow.com/a/21409562
+function get_directory_size($path)
+{
+	$bytes_total	= 0;
+	$path			= realpath($path);
+
+	if($path !== false && $path != '' && file_exists($path))
+	{
+		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS)) as $object)
+		{
+			$bytes_total += $object->getSize();
+		}
+	}
+
+	return $bytes_total;
 }
 
 // delete backup pack from the server
@@ -220,7 +238,6 @@ function remove_pack(&$engine, $pack)
 	return true;
 }
 
-// adapted and updated from phpBB 2.x
 // construct sql for table restoration
 function get_table(&$engine, $table, $drop = true)
 {
@@ -412,15 +429,15 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 
 	// check file existance
 	clearstatcache();
-	$filename = $pack . $table . BACKUP_FILE_DUMP_SUFFIX;
+	$file_name = $pack . $table . BACKUP_FILE_DUMP_SUFFIX;
 
-	if (file_exists($filename) === true)
+	if (file_exists($file_name) === true)
 	{
-		unlink($filename);
+		unlink($file_name);
 	}
 
 	// open file with write access
-	$file = gzopen($filename, 'ab' . BACKUP_COMPRESSION_RATE);
+	$file = gzopen($file_name, 'ab' . BACKUP_COMPRESSION_RATE);
 
 	// read table data until it's exhausted
 	$r = 0;
@@ -428,8 +445,8 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 
 	while (true == $data = $engine->db->load_all(
 	"SELECT * FROM $table " .
-	( $where ? $where : "" ) .
-	$order.
+	($where ? $where : '') .
+	$order .
 	Ut::perc_replace($limit, $r)))
 	{
 		foreach ($data as $row)
@@ -466,7 +483,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 
 	// save and close file
 	gzclose($file);
-	chmod($filename, 0644);
+	chmod($file_name, 0644);
 
 	return $t;
 }
@@ -500,11 +517,11 @@ function get_files(&$engine, $pack, $dir, $root)
 
 	if ($dh = opendir($dir))
 	{
-		while (false !== ($filename = readdir($dh)))
+		while (false !== ($file_name = readdir($dh)))
 		{
 			// for cluster backup process only affected cluster files
 			if ($root == true && $cluster == true
-				&& (preg_match('/@{1}((d*[0-9])+)@{1}/sm', $filename, $matches)
+				&& (preg_match('/@{1}((d*[0-9])+)@{1}/sm', $file_name, $matches)
 					&& !in_array($matches[1], $engine->cluster_pages[$root]))
 			)
 			{
@@ -512,7 +529,7 @@ function get_files(&$engine, $pack, $dir, $root)
 			}
 
 			// subdirs skipped
-			$fullname = Ut::join_path($dir, $filename);
+			$fullname = Ut::join_path($dir, $file_name);
 
 			if (!is_dir($fullname))
 			{
@@ -520,7 +537,7 @@ function get_files(&$engine, $pack, $dir, $root)
 				{
 					// open input and output files
 					$filep		= fopen($fullname, 'rb');
-					$packname	= Ut::join_path($pack, $dir, $filename . BACKUP_FILE_GZIP_SUFFIX);
+					$packname	= Ut::join_path($pack, $dir, $file_name . BACKUP_FILE_GZIP_SUFFIX);
 					$filez		= gzopen($packname, 'ab' . BACKUP_COMPRESSION_RATE);
 					$r			= 0; // round number
 
@@ -540,7 +557,7 @@ function get_files(&$engine, $pack, $dir, $root)
 				else
 				{
 					// Show warning
-					$error .= 'Can\'t read <code>' . $dir . '/' . $filename . '</code>.<br />';
+					$error .= 'Can\'t read <code>' . $dir . '/' . $file_name . '</code>.<br />';
 				}
 			}
 		}
@@ -586,8 +603,8 @@ function put_data(&$engine, $pack, $table, $mode)
 	$point		= '';
 
 	// open table dump file with read access
-	$filename	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $table . BACKUP_FILE_DUMP_SUFFIX);
-	$file		= gzopen($filename, 'rb');
+	$file_name	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $table . BACKUP_FILE_DUMP_SUFFIX);
+	$file		= gzopen($file_name, 'rb');
 
 	// read and process file in iterations to the end
 	$t			= 0;
@@ -677,12 +694,12 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 	// open backup dir and run through all files
 	if ($dh = opendir($packdir))
 	{
-		while (false !== ($filename = readdir($dh)))
+		while (false !== ($file_name = readdir($dh)))
 		{
-			$plainfile = substr($filename, 0, strpos($filename, BACKUP_FILE_GZIP_SUFFIX));
+			$plainfile = substr($file_name, 0, strpos($file_name, BACKUP_FILE_GZIP_SUFFIX));
 
 			// skip subdirs
-			if (!is_dir(Ut::join_path($packdir, $filename)))
+			if (!is_dir(Ut::join_path($packdir, $file_name)))
 			{
 				$fullname = Ut::join_path($dir, $plainfile);
 
@@ -703,7 +720,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 				}
 
 				// open input and output files
-				$filez	= gzopen(Ut::join_path($packdir, $filename), 'rb');
+				$filez	= gzopen(Ut::join_path($packdir, $file_name), 'rb');
 				$filep	= fopen($fullname, 'wb');
 				$r		= 0; // round number
 

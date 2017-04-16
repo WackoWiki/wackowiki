@@ -86,7 +86,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_images_only"><strong>Allow only upload of images:</strong><br />
 					<small>Allow only uploading of image files on the page.</small></label></td>
-				<td><input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ( $engine->db->upload_images_only ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ($engine->db->upload_images_only ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -142,8 +142,8 @@ function admin_config_upload(&$engine, &$module)
 				<td class="label"><strong><?php echo $engine->_t('CheckMimetype');?>:</strong><br />
 					<small><?php echo $engine->_t('CheckMimetypeInfo');?></small></td>
 				<td>
-					<input type="radio" id="check_mimetype_on" name="check_mimetype" value="1"<?php echo ( $engine->db->check_mimetype == 1 ? ' checked' : '' );?> /><label for="check_mimetype_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="check_mimetype_off" name="check_mimetype" value="0"<?php echo ( $engine->db->check_mimetype == 0 ? ' checked' : '' );?> /><label for="check_mimetype_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="check_mimetype_on" name="check_mimetype" value="1"<?php echo ($engine->db->check_mimetype == 1 ? ' checked' : '');?> /><label for="check_mimetype_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="check_mimetype_off" name="check_mimetype" value="0"<?php echo ($engine->db->check_mimetype == 0 ? ' checked' : '');?> /><label for="check_mimetype_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -156,8 +156,8 @@ function admin_config_upload(&$engine, &$module)
 				<td class="label"><strong><?php echo $engine->_t('CreateThumbnail');?>:</strong><br />
 					<small><?php echo $engine->_t('CreateThumbnailInfo');?></small></td>
 				<td>
-					<input type="radio" id="img_create_thumbnail_on" name="img_create_thumbnail" value="1"<?php echo ( $engine->db->img_create_thumbnail == 1 ? ' checked' : '' );?> /><label for="img_create_thumbnail_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="img_create_thumbnail_off" name="img_create_thumbnail" value="0"<?php echo ( $engine->db->img_create_thumbnail == 0 ? ' checked' : '' );?> /><label for="img_create_thumbnail_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="img_create_thumbnail_on" name="img_create_thumbnail" value="1"<?php echo ($engine->db->img_create_thumbnail == 1 ? ' checked' : '');?> /><label for="img_create_thumbnail_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="img_create_thumbnail_off" name="img_create_thumbnail" value="0"<?php echo ($engine->db->img_create_thumbnail == 0 ? ' checked' : '');?> /><label for="img_create_thumbnail_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">

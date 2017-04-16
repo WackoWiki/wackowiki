@@ -89,7 +89,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="allow_registration" name="allow_registration" value="1"<?php echo ( $engine->db->allow_registration ? ' checked' : '' );?> />
+					<input type="checkbox" id="allow_registration" name="allow_registration" value="1"<?php echo ($engine->db->allow_registration ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -101,8 +101,8 @@ function admin_config_security(&$engine, &$module)
 					<small>Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="approve_new_user_on" name="approve_new_user" value="1"<?php echo ( $engine->db->approve_new_user == 1 ? ' checked' : '' );?> /><label for="approve_new_user_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="approve_new_user_off" name="approve_new_user" value="0"<?php echo ( $engine->db->approve_new_user == 0 ? ' checked' : '' );?> /><label for="approve_new_user_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="approve_new_user_on" name="approve_new_user" value="1"<?php echo ($engine->db->approve_new_user == 1 ? ' checked' : '');?> /><label for="approve_new_user_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="approve_new_user_off" name="approve_new_user" value="0"<?php echo ($engine->db->approve_new_user == 0 ? ' checked' : '');?> /><label for="approve_new_user_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -114,7 +114,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Allow persistent cookies.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="allow_persistent_cookie" name="allow_persistent_cookie" value="1"<?php echo ( $engine->db->allow_persistent_cookie ? ' checked' : '' );?> />
+					<input type="checkbox" id="allow_persistent_cookie" name="allow_persistent_cookie" value="1"<?php echo ($engine->db->allow_persistent_cookie ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -126,7 +126,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Disable register on the website under the names, <span class="underline">like</span> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <span class="underline">identical</span> names.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="antidupe" name="antidupe" value="1"<?php echo ( $engine->db->antidupe ? ' checked' : '' );?> />
+					<input type="checkbox" id="antidupe" name="antidupe" value="1"<?php echo ($engine->db->antidupe ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -138,7 +138,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="disable_wikiname" name="disable_wikiname" value="1"<?php echo ( $engine->db->disable_wikiname ? ' checked' : '' );?> />
+					<input type="checkbox" id="disable_wikiname" name="disable_wikiname" value="1"<?php echo ($engine->db->disable_wikiname ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -150,7 +150,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Different users can register with the same e-mail address.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="allow_email_reuse" name="allow_email_reuse" value="1"<?php echo ( $engine->db->allow_email_reuse ? ' checked' : '' );?> />
+					<input type="checkbox" id="allow_email_reuse" name="allow_email_reuse" value="1"<?php echo ($engine->db->allow_email_reuse ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -177,8 +177,8 @@ function admin_config_security(&$engine, &$module)
 					<small>If enabled, Captcha will be shown in the following cases and if a security threshold is reached.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="enable_captcha_on" name="enable_captcha" value="1"<?php echo ( $engine->db->enable_captcha == 1 ? ' checked' : '' );?> /><label for="enable_captcha_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="enable_captcha_off" name="enable_captcha" value="0"<?php echo ( $engine->db->enable_captcha == 0 ? ' checked' : '' );?> /><label for="enable_captcha_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="enable_captcha_on" name="enable_captcha" value="1"<?php echo ($engine->db->enable_captcha == 1 ? ' checked' : '');?> /><label for="enable_captcha_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="enable_captcha_off" name="enable_captcha" value="0"<?php echo ($engine->db->enable_captcha == 0 ? ' checked' : '');?> /><label for="enable_captcha_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -190,7 +190,7 @@ function admin_config_security(&$engine, &$module)
 					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="captcha_new_comment" name="captcha_new_comment" value="1"<?php echo ( $engine->db->captcha_new_comment ? ' checked' : '' );?> />
+					<input type="checkbox" id="captcha_new_comment" name="captcha_new_comment" value="1"<?php echo ($engine->db->captcha_new_comment ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -202,7 +202,7 @@ function admin_config_security(&$engine, &$module)
 					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="captcha_new_page" name="captcha_new_page" value="1"<?php echo ( $engine->db->captcha_new_page ? ' checked' : '' );?> />
+					<input type="checkbox" id="captcha_new_page" name="captcha_new_page" value="1"<?php echo ($engine->db->captcha_new_page ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -214,7 +214,7 @@ function admin_config_security(&$engine, &$module)
 					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="captcha_edit_page" name="captcha_edit_page" value="1"<?php echo ( $engine->db->captcha_edit_page ? ' checked' : '' );?> />
+					<input type="checkbox" id="captcha_edit_page" name="captcha_edit_page" value="1"<?php echo ($engine->db->captcha_edit_page ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -226,7 +226,7 @@ function admin_config_security(&$engine, &$module)
 					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before registering.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="captcha_registration" name="captcha_registration" value="1"<?php echo ( $engine->db->captcha_registration ? ' checked' : '' );?> />
+					<input type="checkbox" id="captcha_registration" name="captcha_registration" value="1"<?php echo ($engine->db->captcha_registration ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr>
@@ -241,7 +241,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server , otherwise you will lose access to the admin panel!</span></small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="tls" name="tls" value="1"<?php echo ( $engine->db->tls ? ' checked' : '' );?> />
+					<input type="checkbox" id="tls" name="tls" value="1"<?php echo ($engine->db->tls ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -253,7 +253,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Force client reconnection from HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="tls_implicit" name="tls_implicit" value="1"<?php echo ( $engine->db->tls_implicit ? ' checked' : '' );?> />
+					<input type="checkbox" id="tls_implicit" name="tls_implicit" value="1"<?php echo ($engine->db->tls_implicit ? ' checked' : '');?> />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -280,8 +280,8 @@ function admin_config_security(&$engine, &$module)
 					<small>Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br />CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br />Disabling Content Security Policy is a security risk !</small></label>
 				</td>
 				<td>
-					<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ( $engine->db->enable_security_headers == 1 ? ' checked' : '' );?> /><label for="security_headers_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ( $engine->db->enable_security_headers == 0 ? ' checked' : '' );?> /><label for="security_headers_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ($engine->db->enable_security_headers == 1 ? ' checked' : '');?> /><label for="security_headers_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ($engine->db->enable_security_headers == 0 ? ' checked' : '');?> /><label for="security_headers_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">

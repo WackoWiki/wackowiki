@@ -175,10 +175,10 @@ function admin_db_backup(&$engine, &$module)
 			implode(';', $structure),	// 3: structure
 			implode(';', $data),		// 4: table data
 			implode(';', $files),		// 5: files
-			WACKO_VERSION				// 6. wacko_version
+			WACKO_VERSION,				// 6. wacko_version
+			get_directory_size($pack)	// 7: size
 			// TODO: add metadata to avoid conflicts
-			// 7: unique_instance_key	-> warn / show user if he restores data from another deployment or
-			// 8: size
+			// 8: unique_instance_key	-> warn / show user if he restores data from another deployment or
 			// 9: hash
 		];
 
@@ -233,10 +233,10 @@ function admin_db_backup(&$engine, &$module)
 				echo '<tr class="hl_setting">' .
 						'<td class="label"><strong>' . $table['name'] . '</strong></td>' .
 						'<td style="text-align:center;">&nbsp;&nbsp;
-							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '' ) . ' />
+							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '') . ' />
 						</td>' .
 						'<td style="text-align:center;">
-							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked' : '' ) . ' />
+							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked' : '') . ' />
 						</td>' .
 					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
@@ -261,7 +261,7 @@ function admin_db_backup(&$engine, &$module)
 				echo '<tr>' .
 						'<td colspan="2" class="label"><strong>' . $dir . '</strong></td>' .
 						'<td style="text-align:center;">&nbsp;&nbsp;
-							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '' ) . ' />
+							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . ' />
 						</td>' .
 					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";

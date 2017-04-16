@@ -148,7 +148,7 @@ function admin_config_system(&$engine, &$module)
 				 logging, statistics and access management systems; if you are unsure
 				 about this setting, do not have a reverse proxy, or WackoWiki operates in
 				 a shared hosting environment, this setting should remain disabled.</small></label></td>
-				<td><input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ($engine->db->reverse_proxy == 1 ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ($engine->db->reverse_proxy == 1 ? ' checked' : '');?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -183,7 +183,7 @@ function admin_config_system(&$engine, &$module)
 				<td class="label"><label for="rewrite_mode"><strong>Use <code>mod_rewrite</code>:</strong><br />
 				<small>If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br />
 				<span class="cite">The value might be overwritten by the Settings class, despite you turn it off, if HTTP_MOD_REWRITE is on.</span></small></label></td>
-				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1" <?php echo ($engine->db->rewrite_mode == 1 ? ' checked' : '' );?> /></td>
+				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1" <?php echo ($engine->db->rewrite_mode == 1 ? ' checked' : '');?> /></td>
 			</tr>
 		</table>
 		<br />

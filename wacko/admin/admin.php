@@ -282,7 +282,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 					echo (RECOVERY_MODE === true ? '<strong>' . $engine->_t('RecoveryMode') . '</strong>' : '') .
 					'&nbsp;&nbsp;' .
 					Ut::perc_replace($engine->_t('TimeLeft'), $time_left) .
-					'&nbsp;&nbsp' .
+					'&nbsp;&nbsp;' .
 					$engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')) .
 					'&nbsp;&nbsp' .
 					($db->is_locked() ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) .
