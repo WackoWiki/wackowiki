@@ -187,7 +187,7 @@ function get_directory_size($path)
 	$bytes_total	= 0;
 	$path			= realpath($path);
 
-	if($path !== false && $path != '' && file_exists($path))
+	if ($path !== false && $path != '' && file_exists($path))
 	{
 		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS)) as $object)
 		{
