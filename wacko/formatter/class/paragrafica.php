@@ -9,73 +9,73 @@ https://wackowiki.org/doc/Dev/Projects/Typografica
 
 class Paragrafica
 {
-	var $ignore			= "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
+	var $ignore			= '/(<!--notypo-->.*?<!--\/notypo-->)/si'; // regex to be ignored
 	// paragpaph is a chicken-feed like this: <t->text, text, just text<-t>
 	var $wacko;
 	var $t0 			= [ // terminators like <-t>$1<t->
-		"/(<br[^>]*>)(\s*<br[^>]*>)+/si",
-		"/(<hr[^>]*>)/si",
+		'/(<br[^>]*>)(\s*<br[^>]*>)+/si',
+		'/(<hr[^>]*>)/si',
 	];
 	var $t1				= [ // terminators like <-t>$1
 		[ // rightinators
-			"!(<table)!si",
-			"!(<h[1-9][^>]*>)!si",
-			"!(<dl)!si",
-			"!(<(u|o)l)!si",
-			"!(<div)!si",
-			"!(<nav)!si",
-			"!(<aside)!si",
-			"!(<section)!si",
-			"!(<article)!si",
-			"!(<footer)!si",
-			"!(<header)!si",
-			"!(<address)!si",
-			"!(<figure)!si",
-			"!(<figcaption)!si",
-			"!(<p)!si",
-			"!(<form)!si",
-			"!(<textarea)!si",
-			"!(<blockquote)!si",
+			'!(<table)!si',
+			'!(<h[1-9][^>]*>)!si',
+			'!(<dl)!si',
+			'!(<(u|o)l)!si',
+			'!(<div)!si',
+			'!(<nav)!si',
+			'!(<aside)!si',
+			'!(<section)!si',
+			'!(<article)!si',
+			'!(<footer)!si',
+			'!(<header)!si',
+			'!(<address)!si',
+			'!(<figure)!si',
+			'!(<figcaption)!si',
+			'!(<p)!si',
+			'!(<form)!si',
+			'!(<textarea)!si',
+			'!(<blockquote)!si',
 		],
 		[ // wronginators
-			"!(</td>)!si",
+			'!(</td>)!si',
 		],
 		[ // wronginators-2
-			"!(</li>)!si",
+			'!(</li>)!si',
 		],
 		[ // wronginators-3
-			"!(</pre>)!si",
+			'!(</pre>)!si',
 		],
 	];
 	var $t2				= [ // terminators like $1<t->
 		[ // rightinators
-			"!(</table>)!si",
-			"!(</h[1-9]>)!si",
-			"!(</dl>)!si",
-			"!(</(u|o)l>)!si",
-			"!(</div>)!si",
-			"!(</nav>)!si",
-			"!(</aside>)!si",
-			"!(</section>)!si",
-			"!(</article>)!si",
-			"!(</footer>)!si",
-			"!(</header>)!si",
-			"!(</address>)!si",
-			"!(</figure>)!si",
-			"!(</figcaption>)!si",
-			"!(</p>)!si",
-			"!(</form>)!si",
-			"!(</textarea>)!si",
-			"!(</blockquote>)!si",
+			'!(</table>)!si',
+			'!(</h[1-9]>)!si',
+			'!(</dl>)!si',
+			'!(</(u|o)l>)!si',
+			'!(</div>)!si',
+			'!(</nav>)!si',
+			'!(</aside>)!si',
+			'!(</section>)!si',
+			'!(</article>)!si',
+			'!(</footer>)!si',
+			'!(</header>)!si',
+			'!(</address>)!si',
+			'!(</figure>)!si',
+			'!(</figcaption>)!si',
+			'!(</p>)!si',
+			'!(</form>)!si',
+			'!(</textarea>)!si',
+			'!(</blockquote>)!si',
 		],
 		[ // wronginators
-			"!(<td[^>]*>)!si",
+			'!(<td[^>]*>)!si',
 		],
 		[ // wronginators-2
-			"!(<li[^>]*>)!is",
+			'!(<li[^>]*>)!is',
 		],
 		[ // wronginators-3
-			"!(<pre[^>]*>)!is",
+			'!(<pre[^>]*>)!is',
 		],
 	];
 
@@ -168,15 +168,15 @@ class Paragrafica
 		$what = $this->mark2 . $what . $this->mark1;
 
 		// 2bis. swap <t-><br /> -> <br /><t->
-		$what = preg_replace( "!(" . $this->mark2 . ")((\s*<br[^>]*>)+)!si", '$2$1', $what);
+		$what = preg_replace('!(' . $this->mark2 . ')((\s*<br[^>]*>)+)!si', '$2$1', $what);
 		// noneedin: > eliminating multiple breaks
-		$what = preg_replace( "!((<br[^>]*>\s*)+)(" . $this->mark1 . ")!s", '$3', $what);
+		$what = preg_replace('!((<br[^>]*>\s*)+)(' . $this->mark1 . ')!s', '$3', $what);
 
 		// 2. cleanup <t->\s<-t>
 		do
 		{
 			$_w		= $what;
-			$what	= preg_replace( "!(" . $this->mark2 . ")((\s|(<br[^>]*>|" . $this->mark3 . "|" . $this->mark4 . "))*)(" . $this->mark1 . ")!si", '$2', $what);
+			$what	= preg_replace('!(' . $this->mark2 . ')((\s|(<br[^>]*>|' . $this->mark3 . '|' . $this->mark4 . '))*)(' . $this->mark1 . ')!si', '$2', $what);
 		}
 
 		while ($_w != $what);
@@ -212,7 +212,7 @@ class Paragrafica
 					}
 					else
 					{
-						$pieces_inside = explode($this->mark3, $v );
+						$pieces_inside = explode($this->mark3, $v);
 
 						if (sizeof($pieces_inside) < 3)
 						{
@@ -223,7 +223,7 @@ class Paragrafica
 					if ($insert_p)
 					{
 						$inside = substr($v, 0, $pos);
-						$inside = str_replace($this->mark3, '', $inside );
+						$inside = str_replace($this->mark3, '', $inside);
 
 						if (strlen($inside))
 						{
@@ -270,10 +270,10 @@ class Paragrafica
 		//  * right here we have done         "#p1249-1"
 		// 1. get all ^^ of this
 		$this->toc = [];
-		$what = preg_replace_callback( '!'.
-				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)</h\\2>)".		// 2=depth, 3=id, 4=name
+		$what = preg_replace_callback( '!' .
+				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)</h\\2>)" .		// 2=depth, 3=id, 4=name
 									"|" .
-				"(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">)".			// 6=id
+				"(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">)" .			// 6=id
 									"|" .
 				"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .
 				// {{include page="TAG" notoc=1}}
