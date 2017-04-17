@@ -118,14 +118,14 @@ if ($pages = $this->db->load_all(
 					$legend = Ut::perc_replace($legend, $this->link('/' . $root, '', rtrim($root, '/'))) . ':';
 				}
 
-				echo '<nav class="layout-box"><p class="layout-box"><span>' . $legend . "</span></p>\n";
+				echo '<nav class="layout-box"><p><span>' . $legend . "</span></p>\n";
 			}
 		}
 		else
 		{
 			if (!$nomark)
 			{
-				echo '<nav class="layout-box"><p class="layout-box"><span>' . $this->_t('TreeSiteTitle') . "</span></p>\n";
+				echo '<nav class="layout-box"><p><span>' . $this->_t('TreeSiteTitle') . "</span></p>\n";
 			}
 		}
 

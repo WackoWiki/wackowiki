@@ -15,7 +15,7 @@ if (($pages = $this->load_pages_linking_to($tag)))
 {
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('ReferringPages') . ":</span></p>\n";
+		echo '<div class="layout-box"><p><span>' . $this->_t('ReferringPages') . ":</span></p>\n";
 	}
 
 	foreach ($pages as $page)

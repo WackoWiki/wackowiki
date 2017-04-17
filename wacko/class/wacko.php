@@ -6371,7 +6371,7 @@ class Wacko
 			$this->db->theme_url = $this->db->base_url . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
 
 			// set page categories. this defines $categories (array) object property
-			$categories = $this->load_categories($this->page['page_id']);
+			$categories = $this->load_categories($this->page['page_id'], OBJECT_PAGE);
 
 			foreach ($categories as $word)
 			{
@@ -7604,8 +7604,9 @@ class Wacko
 
 	function show_category_form($object_id = '', $type_id = '', $lang, $can_edit = false)
 	{
-		$assigned = [];
-		$selected = [];
+		$assigned	= [];
+		$selected	= [];
+		$out		= '';
 
 		// load categories for the page's particular language
 		$categories = $this->get_categories_list($lang, false);

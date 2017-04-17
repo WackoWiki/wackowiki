@@ -48,7 +48,7 @@ else
 
 if (!$nomark)
 {
-	echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('MostPopularPages') . ": " . $this->link($ppage, '', $legend) . "</span></p>\n";
+	echo '<div class="layout-box"><p><span>' . $this->_t('MostPopularPages') . ": " . $this->link($ppage, '', $legend) . "</span></p>\n";
 }
 
 if (!$page)

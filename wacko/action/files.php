@@ -158,7 +158,7 @@ if ($can_view)
 	if (!$nomark)
 	{
 		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
-		echo '<div class="layout-box"><p class="layout-box"><span>' . $results . ' of ' . '' . $count['n'] . ' ' . $title . ": </span></p>\n";
+		echo '<div class="layout-box"><p><span>' . $results . ' of ' . '' . $count['n'] . ' ' . $title . ": </span></p>\n";
 	}
 
 	if ($results)

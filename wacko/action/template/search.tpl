@@ -19,7 +19,7 @@
 		[''' pagination ''']
 		[= mark _ =
 			<div class="layout-box">
-			<p class="layout-box">
+			<p>
 				<span>[ ' diag ' ] "[ ' phrase |e ' ]" (<strong>[ ' count |e ' ]</strong>):</span>
 			</p>
 		=]
