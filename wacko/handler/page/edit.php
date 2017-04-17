@@ -402,15 +402,12 @@ if ($this->has_access('read')
 		}
 	}
 
-
-
 	if (!$this->page && $words = $this->get_categories_list($this->page_lang, true))
 	{
-		$out = $this->show_category_form('', OBJECT_PAGE, $this->page_lang, false);
-
 		$output .= '<br />' . $this->_t('Categories') . ':' . "\n" .
-					$out . "\n";
-		$output .= '<br />' . "\n";
+					$this->show_category_form('', OBJECT_PAGE, $this->page_lang, false);
+
+
 	}
 
 	echo $output;

@@ -479,7 +479,7 @@ function admin_user_users(&$engine, &$module)
 					<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 					</td>' .
 					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '') . ' />
+						<input type="checkbox" id="enabled" name="enabled" value="1" '. (isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '') . ' />
 					</td>
 				</tr>' .
 				'<tr>
@@ -562,8 +562,8 @@ function admin_user_users(&$engine, &$module)
 						<td>
 							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users . '?</label> '.
 							'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-							'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
-							'<br /><small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
+							'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a><br />' .
+							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
 						'</td>
 					</tr>' .
 				'</table>
@@ -575,7 +575,7 @@ function admin_user_users(&$engine, &$module)
 	// get user
 	if (isset($_GET['user_id']))
 	{
-		echo "<h2>" . $user['user_name'] . "</h2>";
+		echo '<h2>' . $user['user_name'] . "</h2>";
 
 		// user data
 		$status = $engine->_t('AccountStatusArray');
@@ -787,8 +787,9 @@ function admin_user_users(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$order_pagination	= isset($_GET['order']) ? $_GET['order'] : '';
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode=' => $module['mode']] (!empty($order_pagination) ? + ['order' => htmlspecialchars($order_pagination, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : ''), '', 'admin.php');
+		$_order				= isset($_GET['order']) ? $_GET['order'] : '';
+		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : [];
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode=' => $module['mode']] + $order_pagination, '', 'admin.php');
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang " .
