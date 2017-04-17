@@ -7641,8 +7641,8 @@ class Wacko
 			{
 				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
-							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />'
-							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' /> ' . "\n\t") .
+							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '"/>'
+							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '/> ' . "\n\t") .
 						'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label>' . "\n";
 
 				if (isset($word['child']) && $word['child'] == true)
@@ -7656,8 +7656,8 @@ class Wacko
 
 						$out .= "\t\t" . '<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
 									($can_edit
-										? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
-										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' />' . "\n\t\t\t") .
+										? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '"/>' . "\n\t\t\t"
+										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '/>' . "\n\t\t\t") .
 									'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label>' . "\n\t\t" .
 								'</li>' . "\n";
 					}
@@ -7676,24 +7676,24 @@ class Wacko
 			}
 
 			$out .= "</ul>\n";
-			$out .= '</div>' . "\n";
+			$out .= "</div>\n";
 
 			if (!($can_edit || $this->method == 'edit'))
 			{
 				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ' .
-						'<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a> ' .
-						'<small><br />' . $this->_t('CategoriesStoreInfo') . '<br /><br /></small> ';
+						'<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a>' . "<br />\n" .
+						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "<br /><br />\n";
 			}
 		}
 		else
 		{
 			// availability depends on the page language and your access rights
 			// additionally you need also the right to create new categories
-			$out .=  $this->_t('NoCategoriesForThisLang') . '<br /><br /><br />';
+			$out .=  $this->_t('NoCategoriesForThisLang') . "<br /><br /><br />\n";
 
 			if (!$this->method == 'edit')
 			{
-				$out .=  '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a><br /><br /> ';
+				$out .=  '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' . "\n";
 			}
 		}
 
