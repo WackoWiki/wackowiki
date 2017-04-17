@@ -823,14 +823,14 @@ p.preview {
 	background-color: #fcfcfc;
 }
 
-p.layout-box {
+.layout-box p {
 	background: transparent;
 	margin: -1.5em 0px 10px 0px;
 	padding: 0;
 	border: 0;
 }
 
-p.layout-box span {
+.layout-box p span {
 	background: #FFF;
 	padding: 0 1px;
 }

@@ -10,7 +10,6 @@ if (!defined('IN_WACKO'))
 // path -
 // label -
 
-$path = $this->db->category_page;
 if (!isset($list))		$list		= 0;
 if (!isset($label))		$label		= true;
 if (empty($path))		$path		= 'Category';
@@ -23,7 +22,7 @@ if (isset($this->categories))
 {
 	foreach ($this->categories as $id => $category)
 	{
-		$_category = '<a href="' . $this->href('', $path, 'category_id=' . $id) . '" class="tag" rel="tag">' . htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+		$_category = '<a href="' . $this->href('', $this->db->category_page, 'category_id=' . $id) . '" class="tag" rel="tag">' . htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
 
 		if ($list)
 		{
@@ -47,7 +46,7 @@ if (!empty($_category))
 	{
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('Categories') . ":</span></p>\n";
+			echo '<div class="layout-box"><p><span>' . $this->_t('Categories') . ":</span></p>\n";
 		}
 
 		echo '<ol>';
@@ -68,8 +67,8 @@ if (!empty($_category))
 	if ($list)
 	{
 		echo '</ol>';
-
 	}
+
 	if (!$nomark)
 	{
 		echo "</div>\n";

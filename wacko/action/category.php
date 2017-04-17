@@ -56,7 +56,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 			$words = strtolower(implode(', ', $words));
 		}
 
-		echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('PagesCategory') . ($words ? ' &laquo;<strong>' . $words . '</strong>&raquo;' : '' ) . ":</span></p>\n";
+		echo '<div class="layout-box"><p><span>' . $this->_t('PagesCategory') . ($words ? ' &laquo;<strong>' . $words . '</strong>&raquo;' : '' ) . ":</span></p>\n";
 	}
 
 	if ($sort == 'abc')
@@ -124,7 +124,7 @@ if (!$ids)
 	// header
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('Categories') . ($root ? " of cluster " . $this->link('/' . $root, '', '', '', 0) : '') . ":</span></p>\n";
+		echo '<div class="layout-box"><p><span>' . $this->_t('Categories') . ($root ? " of cluster " . $this->link('/' . $root, '', '', '', 0) : '') . ":</span></p>\n";
 	}
 
 	// categories list

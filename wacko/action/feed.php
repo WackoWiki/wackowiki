@@ -126,20 +126,20 @@ else
 			{
 				if ($title != '' && $counturlset == 1)
 				{
-					echo '<p class="layout-box"><span>' . $this->_t('FeedTitle') . ': <strong>' . $this->link($feed->get_permalink(), '', $title, '', 1, 1) . '</strong>' . $lastitems . "<span></p>\n";
+					echo '<p><span>' . $this->_t('FeedTitle') . ': <strong>' . $this->link($feed->get_permalink(), '', $title, '', 1, 1) . '</strong>' . $lastitems . "<span></p>\n";
 				}
 
 				if ($title != '' && $counturlset > 1)
 				{
-					echo '<p class="layout-box"><span>' . $this->_t('FeedTitle') . ': <strong>' . $title . '</strong>' . $lastitems . "</span></p>\n";
+					echo '<p><span>' . $this->_t('FeedTitle') . ': <strong>' . $title . '</strong>' . $lastitems . "</span></p>\n";
 				}
 				else if (!$title && $counturlset == 1)
 				{
-					echo '<p class="layout-box"><span>' . $this->_t('FeedTitle') . ': <strong>' . $this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1) . '</strong>' . $lastitems . "</span></p>\n";
+					echo '<p><span>' . $this->_t('FeedTitle') . ': <strong>' . $this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1) . '</strong>' . $lastitems . "</span></p>\n";
 				}
 				else if (!$title && $counturlset > 1)
 				{
-					echo '<p class="layout-box"><span><strong>' . $this->_t('FeedMulti') . '</strong>' . $lastitems . "</span></p>\n";
+					echo '<p><span><strong>' . $this->_t('FeedMulti') . '</strong>' . $lastitems . "</span></p>\n";
 				}
 			}
 		}

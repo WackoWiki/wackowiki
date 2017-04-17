@@ -43,7 +43,7 @@ $years	= $polls_obj->poll_years();
 // print list
 if (!$nomark)
 {
-	echo '<div class="layout-box"><p class="layout-box"><span>' .
+	echo '<div class="layout-box"><p><span>' .
 			($year == 0
 				? $this->_t('PollsArchiveAll')
 				: str_replace('%1', $year, $this->_t('PollsArchiveYear'))

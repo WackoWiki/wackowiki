@@ -34,7 +34,7 @@ if (@$_POST['_action'] === 'extended_properties')
 			($this->is_admin()
 				?	"allow_rawhtml		= '" . (int) $_POST['allow_rawhtml'] . "', " .
 					"disable_safehtml	= '" . (int) $_POST['disable_safehtml'] . "', "
-				: "") .
+				:	"") .
 			"noindex			= '" . (int) $_POST['noindex'] . "' " .
 		"WHERE page_id = '" . $this->page['page_id'] . "' " .
 		"LIMIT 1");

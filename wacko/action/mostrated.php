@@ -26,7 +26,7 @@ if (isset($top))
 		"ORDER BY ratio DESC, votes DESC " .
 		"LIMIT " . (int) $top);
 
-	echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('RatingTopPages') . ":</span></p>\n";
+	echo '<div class="layout-box"><p><span>' . $this->_t('RatingTopPages') . ":</span></p>\n";
 
 	if ($pages)
 	{
@@ -62,7 +62,7 @@ if (isset($bottom))
 		"ORDER BY ratio DESC, votes DESC " .
 		"LIMIT " . (int) $bottom);
 
-	echo '<div class="layout-box"><p class="layout-box"><span>' . $this->_t('RatingBottomPages') . ":</span></p>\n";
+	echo '<div class="layout-box"><p><span>' . $this->_t('RatingBottomPages') . ":</span></p>\n";
 
 	if ($pages)
 	{
