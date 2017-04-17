@@ -129,7 +129,7 @@ if ($this->has_access('read')
 			}
 
 			// check categories
-			#if (!$this->page && $this->get_categories_list($this->page_lang, 1) && $this->save_categories_list($this->page['page_id'], 1, 1) !== true)
+			#if (!$this->page && $this->get_categories_list($this->page_lang, true) && $this->save_categories_list($this->page['page_id'], OBJECT_PAGE, 1) !== true)
 			#{
 				#$message = 'Select at least one referring category (field) to the page. ';
 				#$this->set_message($message , 'error');
@@ -182,7 +182,7 @@ if ($this->has_access('read')
 					if ($this->page == false)
 					{
 						// new page created
-						$this->save_categories_list($this->get_page_id($this->tag), 1);
+						$this->save_categories_list($this->get_page_id($this->tag), OBJECT_PAGE);
 					}
 
 					// restore username after anonymous publication
@@ -227,7 +227,7 @@ if ($this->has_access('read')
 	$previous	= isset($_POST['previous'])	? $_POST['previous']	: $this->page['modified'];
 	$body		= isset($_POST['body'])		? $_POST['body']		: $this->page['body'];
 	$body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
-	$title		= isset($_POST['title']) // TODO: test, guess this needs () for nested operator
+	$title		= isset($_POST['title'])
 					? $_POST['title']
 					: (isset($this->page['title'])
 						? $this->page['title']
@@ -236,7 +236,7 @@ if ($this->has_access('read')
 								? $this->get_page_title($this->tag)
 								: $this->sess->title)
 							: $this->get_page_title($this->tag)
-							));
+						));
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
@@ -252,18 +252,18 @@ if ($this->has_access('read')
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
-		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '" />' . "\n" .
-					'<input type="hidden" name="tag"		value="' . $this->tag . '" />' . "\n" .
-					'<input type="hidden" name="add"		value="1" />' . "\n";
+		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '"/>' . "\n" .
+					'<input type="hidden" name="tag"		value="' . $this->tag . '"/>' . "\n" .
+					'<input type="hidden" name="add"		value="1"/>' . "\n";
 	}
 
 	echo $output;
 
-	$output			= '';
-	$preview		= '';
-	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="' . $this->_t('EditStoreButton') . '" />&nbsp;'.
-						'<input type="submit" class="OkBtn_Top" name="preview" value="' . $this->_t('EditPreviewButton') . '" />&nbsp;'.
-						'<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '" /></a>' . "\n"; // $this->href('', '', '', 1)
+	$output			=	'';
+	$preview		=	'';
+	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="' . $this->_t('EditStoreButton') . '"/>&nbsp;' .
+						'<input type="submit" class="OkBtn_Top" name="preview" value="' . $this->_t('EditPreviewButton') . '"/>&nbsp;' .
+						'<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '"/></a>' . "\n";
 
 	// preview?
 	if (isset($_POST['preview']))
@@ -402,24 +402,14 @@ if ($this->has_access('read')
 		}
 	}
 
+
+
 	if (!$this->page && $words = $this->get_categories_list($this->page_lang, true))
 	{
-		foreach ($words as $id => $word)
-		{
-			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked' : '' ) . ' />' .
-						'<label for="category' . $id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
+		$out = $this->show_category_form('', OBJECT_PAGE, $this->page_lang, false);
 
-			if (isset($word['child']) && $word['child'] == true)
-			{
-				foreach ($word['child'] as $id => $word)
-				{
-					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category' . $id . '" name="category' . $id . '|' . $word['parent_id'] . '" value="set"' . ( isset($_POST['category' . $id . '|' . $word['parent_id']]) && $_POST['category' . $id . '|' . $word['parent_id']] == 'set' ? ' checked' : '' ) . ' />' .
-								'<label for="category' . $id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n";
-				}
-			}
-		}
-
-		$output .= '<br />' . $this->_t('Categories') . ':' . "\n" . '<div class="setcategory"><br />' . "\n".substr(implode(' ', $_words), 6) . '</div>' . "\n";
+		$output .= '<br />' . $this->_t('Categories') . ':' . "\n" .
+					$out . "\n";
 		$output .= '<br />' . "\n";
 	}
 

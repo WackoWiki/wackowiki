@@ -197,7 +197,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				}
 
 				// load related categories
-				$_category = $this->get_categories($topic['page_id'], 1);
+				$_category = $this->get_categories($topic['page_id'], OBJECT_PAGE);
 				$_category = !empty($_category) ? '<br />' . /* $this->_t('Category') . ': '. */$_category : '';
 
 				// print

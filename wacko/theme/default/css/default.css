@@ -2090,15 +2090,6 @@ li.m-source img {
 	font-weight: 600;
 }
 
-.setcategory {
-	border: 1px solid #9495A2;
-/* 	font-size:11px; */
-	height: 250px;
-	margin-bottom: 27px;
-	overflow: auto;
-	width: auto;
-}
-
 .list_count {
 	text-align: right; 
 	width: 30px; 
@@ -2220,13 +2211,23 @@ table.forum td {
 
 
 /* category handles ------------- */
+.set_category {
+	border: 1px solid #9495A2;
+/* 	font-size:11px; */
+	height: 250px;
+	padding-top: 12px;
+	margin-bottom: 27px;
+	overflow: auto;
+	width: auto;
+}
+
 .hide_radio input[type="radio"] {
 	visibility: hidden;
 	/* display: none; */
 }
 
-.hide_radio span:hover input[type="radio"], 
-.hide_radio span input[type="radio"]:checked
+.hide_radio li:hover input[type="radio"], 
+.hide_radio li input[type="radio"]:checked
 {
 	visibility: visible;
 	/* display: inline; */

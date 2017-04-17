@@ -142,7 +142,7 @@ else if (($user = $this->get_user()))
 
 		if ($email)
 		{
-			$save		= $this->set_language($user['user_lang'], true);
+			$save		=	$this->set_language($user['user_lang'], true);
 			$subject	=	$this->_t('EmailConfirm');
 			$body		=	Ut::perc_replace($this->_t('EmailVerify'),
 								$this->db->site_name,
@@ -222,7 +222,7 @@ else if (($user = $this->get_user()))
 		<?php
 		if ($this->db->enable_email && $this->db->enable_email_notification)
 		{
-	?>
+		?>
 			<tr>
 				<th><?php echo $this->_t('UserSettingsEmailMe');?>&nbsp;</th>
 				<td>
@@ -236,13 +236,13 @@ else if (($user = $this->get_user()))
 				<label for="notify_page"><?php echo $this->_t('NotifyPageEdit');?></label>
 			</th>
 			<td>
-		<?php
+			<?php
 				echo '<input type="radio" id="notify_page0" name="notify_page" value="0"' . ($user['notify_page'] == 0 ? ' checked' : '') . '/><label for="notify_page0">' . $this->_t('NotifyOff') . '</label>';
 				echo '<input type="radio" id="notify_page1" name="notify_page" value="1"' . ($user['notify_page'] == 1 ? ' checked' : '') . '/><label for="notify_page1">' . $this->_t('NotifyAlways') . '</label>';
 				echo '<input type="radio" id="notify_page2" name="notify_page" value="2"' . ($user['notify_page'] == 2 ? ' checked' : '') . '/><label for="notify_page2" title="' . $this->_t('NotifyPendingPageTip') .
 					' ' . $this->_t('NotifyPendingTip') . '">' . $this->_t('NotifyPending') . '</label>';
 				// echo '<input type="radio" id="notify_page3" name="notify_page" value="3" ' . ($user['notify_page'] == 3 ? 'checked' : '') . '/><label for="notify_page3">' . $this->_t('NotifyDigest') . '</label>';
-		?>
+			?>
 			</td>
 		</tr>
 		<tr>
@@ -309,7 +309,7 @@ else if (($user = $this->get_user()))
 				<li><a href="' . $this->href('', '', 'menu') . '">' . $this->_t('Bookmarks') . '</a></li>
 				<li><a href="' . $this->href('', '', 'notification') . '">' . $this->_t('UserSettingsNotifications') . '</a></li>
 				<li class="active">' . $this->_t('UserSettingsExtended') . "</li>
-				</ul><br /><br />\n";
+			</ul><br /><br />\n";
 		echo $this->form_open('user_settings_extended');
 ?>
 		<div class="page_settings">
@@ -494,11 +494,13 @@ else if (($user = $this->get_user()))
 		: '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('EmailConfirm') . '" title="' . $this->_t('EmailConfirm') . '" class="btn-warning"/>' ?>
 <?php
 		if (!$user['email'] || $code['email_confirm'])
+		{
 			echo '<div class="hint"><strong class="cite">' .
 				$this->_t('EmailNotVerified') . '</strong><br />' .
 				'<small>' . $this->_t('EmailNotVerifiedDesc') .
 				'<strong><a href="' . $this->href('', '', 'resend_code=1') . '">' . $this->_t('HereLink') . '</a></strong>.
 				</small></div>';
+		}
 ?></td>
 	</tr>
 	<tr>
@@ -535,7 +537,8 @@ else if (($user = $this->get_user()))
 			) . '>' . $languages[$lang] . ' (' . $lang . ")</option>\n";
 	}
 ?>
-</select></td>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<th scope="row">
@@ -558,7 +561,8 @@ else if (($user = $this->get_user()))
 			) . '>' . $theme . "</option>\n";
 	}
 ?>
-		</select></td>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<th scope="row">
@@ -586,7 +590,8 @@ else if (($user = $this->get_user()))
 			) . '>' . $timezone . "</option>\n";
 	}
 ?>
-		</select></td>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<th>
@@ -659,27 +664,27 @@ else if (($user = $this->get_user()))
 			'<table class="form_tbl lined">' . "\n" .
 				'<tr>' .
 					'<th scope="row">' . $this->_t('UserSpace') . "</th>" .
-					'<td>' . "<a href=\"" . $this->href('', ($this->db->users_page . '/' . $user['user_name'])) . "\">" . $this->db->users_page . '/' . $user['user_name'] . "</a>" . "</td>" .
+					'<td>' . '<a href="' . $this->href('', ($this->db->users_page . '/' . $user['user_name'])) . '">' . $this->db->users_page . '/' . $user['user_name'] . '</a></td>' .
 				"</tr>\n" . '<tr>' .
-					'<th scope="row">' . $this->_t('UsersSignup') . "</th>" .
-					'<td>' . $this->get_time_formatted($user['signup_time']) . "</td>" .
+					'<th scope="row">' . $this->_t('UsersSignup') . '</th>' .
+					'<td>' . $this->get_time_formatted($user['signup_time']) . '</td>' .
 				"</tr>\n" . '<tr>' .
-					'<th scope="row">' . $this->_t('UsersLastSession') . "</th>" .
-					'<td>' . $this->get_time_formatted($user['last_visit']) . "</td>" .
+					'<th scope="row">' . $this->_t('UsersLastSession') . '</th>' .
+					'<td>' . $this->get_time_formatted($user['last_visit']) . '</td>' .
 				"</tr>\n" . '<tr>' .
-					'<th scope="row">' . $this->_t('UploadQuota') . "&nbsp;&nbsp;</th>" .
-					'<td title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage . ")</span></div></td>" .
+					'<th scope="row">' . $this->_t('UploadQuota') . '&nbsp;&nbsp;</th>' .
+					'<td title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage . ')</span></div></td>' .
 				"</tr>\n" . '<tr>' .
 					'<th scope="row">' . $this->_t('UsersPages') . "</th>" .
-					'<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_pages'] . "</a></td>" .
+					'<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_pages'] . '</a></td>' .
 				// "</tr>\n" . '<tr>' .
 					// '<th scope="row">' . $this->_t('UsersRevisions') . "</th>" .
-					// '<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name']) . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_revisions'] . "</a></td>" .
+					// '<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name']) . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_revisions'] . '</a></td>' .
 				"</tr>\n" . '<tr>' .
-					'<th scope="row">' . $this->_t('UsersComments') . "</th>" .
+					'<th scope="row">' . $this->_t('UsersComments') . '</th>' .
 					'<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments') . '" title="' . $this->_t('ShowComments') . '">' . $user['total_comments'] . '</a></td>' .
 				"</tr>\n" . '<tr>' .
-					'<th scope="row">' . $this->_t('UsersUploads') . "</th>" .
+					'<th scope="row">' . $this->_t('UsersUploads') . '</th>' .
 					'<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'uploads') . '" title="' . $this->_t('ShowComments') . '">' . number_format($user['total_uploads'], 0, ',', '.') . '</a></td>' .
 				// "</tr>\n" . '<tr>' .
 				// 	'<th scope="row">' . $this->_t('UsersLogins') . "</th>" .

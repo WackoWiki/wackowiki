@@ -7602,22 +7602,26 @@ class Wacko
 		}
 	}
 
-	function show_category_form($object_id, $type_id, $lang, $can_edit = false)
+	function show_category_form($object_id = '', $type_id = '', $lang, $can_edit = false)
 	{
+		$assigned = [];
 		$selected = [];
 
 		// load categories for the page's particular language
 		$categories = $this->get_categories_list($lang, false);
 
-		// get currently selected category_ids
-		$_selected = $this->db->load_all(
-			"SELECT category_id " .
-			"FROM " . $this->db->table_prefix . "category_assignment " .
-			"WHERE object_id = '" . (int) $object_id . "' " .
-				"AND object_type_id = '" . (int) $type_id ."'");
+		// get currently assigned category_ids
+		if ($object_id && $type_id)
+		{
+			$assigned = $this->db->load_all(
+				"SELECT category_id " .
+				"FROM " . $this->db->table_prefix . "category_assignment " .
+				"WHERE object_id = '" . (int) $object_id . "' " .
+					"AND object_type_id = '" . (int) $type_id ."'");
+		}
 
 		// exploding categories into array
-		foreach ($_selected as $key => &$val)
+		foreach ($assigned as $key => &$val)
 		{
 			if (is_array($val))
 			{
@@ -7630,16 +7634,16 @@ class Wacko
 		{
 			$i = '';
 
-			$out = '<div class="category_set">' . "\n";
+			$out = '<div class="set_category">' . "\n";
 			$out .= '<ul class="ul_list hide_radio lined">' . "\n";
 
 			foreach ($categories as $category_id => $word)
 			{
-				$out .= '<li><span class="">' . "\n\t";
+				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
-						? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />'
-						: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' /> ' . "\n\t") .
-					'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label></span>' . "\n";
+							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />'
+							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' /> ' . "\n\t") .
+						'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label>' . "\n";
 
 				if (isset($word['child']) && $word['child'] == true)
 				{
@@ -7650,18 +7654,18 @@ class Wacko
 							$out .=  "\t<ul>\n";
 						}
 
-						$out .=  "\t\t" . '<li><span class="nobr">' . "\n\t\t\t" .
-								($can_edit
-									? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
-									: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' />' . "\n\t\t\t") .
-								'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label></span>' . "\n\t\t" .
-							'&nbsp;&nbsp;&nbsp;</li>' . "\n";
+						$out .= "\t\t" . '<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
+									($can_edit
+										? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '" />' . "\n\t\t\t"
+										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . ' />' . "\n\t\t\t") .
+									'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label>' . "\n\t\t" .
+								'</li>' . "\n";
 					}
 				}
 
 				if ($i > 0)
 				{
-					$out .=  "\t</ul>\n</li>\n";
+					$out .= "\t</ul>\n</li>\n";
 				}
 				else
 				{
@@ -7671,21 +7675,26 @@ class Wacko
 				$i = 0;
 			}
 
-			$out .=  "</ul>\n";
-			$out .=  '</div>' . "\n";
+			$out .= "</ul>\n";
+			$out .= '</div>' . "\n";
 
-			if (!isset($_GET['edit']))
-				$out .=  '<br /><br />' .
-				'<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ' .
-				'<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a> ' .
-				'<small><br />' . $this->_t('CategoriesStoreInfo') . '<br /><br /></small> ';
+			if (!($can_edit || $this->method == 'edit'))
+			{
+				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ' .
+						'<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a> ' .
+						'<small><br />' . $this->_t('CategoriesStoreInfo') . '<br /><br /></small> ';
+			}
 		}
 		else
 		{
 			// availability depends on the page language and your access rights
 			// additionally you need also the right to create new categories
 			$out .=  $this->_t('NoCategoriesForThisLang') . '<br /><br /><br />';
-			$out .=  '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a><br /><br /> ';
+
+			if (!$this->method == 'edit')
+			{
+				$out .=  '<a href="' . $this->href('') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a><br /><br /> ';
+			}
 		}
 
 		return $out;
