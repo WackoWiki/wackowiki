@@ -37,7 +37,7 @@ if ($this->is_owner() || $this->is_admin())
 			$this->remove_category_assigments($this->page['page_id'], 1);
 
 			// save new list
-			$this->save_categories_list($this->page['page_id'], 1); // TODO: OBJECT_PAGE = 1
+			$this->save_categories_list($this->page['page_id'], OBJECT_PAGE);
 
 			$this->log(4, 'Updated page categories [[/' . $this->tag . ' ' . $this->page['title'] . ']]');
 			$this->set_message($this->_t('CategoriesUpdated'), 'success');
@@ -378,7 +378,7 @@ if ($this->is_owner() || $this->is_admin())
 
 		echo $this->form_open('store_categories', ['page_method' => 'categories']);
 
-		echo $this->show_category_form($this->page['page_id'], 1, $this->page['page_lang'], $can_edit);
+		echo $this->show_category_form($this->page['page_id'], OBJECT_PAGE, $this->page['page_lang'], $can_edit);
 
 		/////////////////////////////////////////////
 		//   control buttons
@@ -386,7 +386,6 @@ if ($this->is_owner() || $this->is_admin())
 
 		if ($can_edit)
 		{
-			echo '<br /><br />';
 			echo '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ';
 			echo '<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ';
 			echo '<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '" /> ';

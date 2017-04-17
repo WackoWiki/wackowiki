@@ -220,7 +220,7 @@ if (!empty($this->db->news_cluster))
 
 		foreach ($pages as $page)
 		{
-			$_category = $this->get_categories($page['page_id'], 1);
+			$_category = $this->get_categories($page['page_id'], OBJECT_PAGE);
 			$_category = !empty($_category) ? $this->_t('Category') . ': ' . $_category . ' | ' : '';
 
 			echo '<article class="newsarticle">';

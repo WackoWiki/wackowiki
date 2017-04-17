@@ -203,7 +203,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 				echo '<h4>' . $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
 
 				echo $this->form_open('store_categories', ['page_method' => 'filemeta']);
-				echo $this->show_category_form($file['file_id'], 2, $file['file_lang'], false);
+				echo $this->show_category_form($file['file_id'], OBJECT_FILE, $file['file_lang'], false);
 				echo '<input type="hidden" name="label" value="" />';
 				echo '<input type="hidden" name="file_id" value="' . $file['file_id'] . '" />';
 				echo $this->form_close();
@@ -477,7 +477,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 			$this->remove_category_assigments($file['file_id'], 2);
 
 			// save new list
-			$this->save_categories_list($file['file_id'], 2); // TODO: OBJECT_FILE = 2
+			$this->save_categories_list($file['file_id'], OBJECT_FILE);
 
 			$this->log(4, 'Updated page categories [[/' . $this->tag . ' ' . $this->page['title'] . ']]');
 			$this->set_message($this->_t('CategoriesUpdated'), 'success');

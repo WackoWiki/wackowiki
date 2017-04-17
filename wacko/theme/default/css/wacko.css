@@ -139,8 +139,8 @@ del.diff {
 .code,
 .code-break,
 .hl-main pre {
-	background: #FFFFFF;
-	border: 1px #888888 solid;
+	background: #FCFCFC;
+	border: 1px lightgray solid;
 	font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
 	font-size: 13px;
 	margin: 1em 1.75em;
@@ -185,6 +185,10 @@ del.diff {
 .usertable tr:hover {
 	background-color: #CCFFCC;
 }
+
+/* .usertable > tbody > tr:nth-of-type(2n+1) {
+	background-color: #f9f9f9;
+} */
 
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 .dtable {
