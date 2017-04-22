@@ -7115,8 +7115,8 @@ class Wacko
 
 		// dummy fields for chrome/firefox/opera autofill getting the wrong fields
 		$result =	'<!-- disables autocomplete -->' . "\n" .
-					'<input type="text" style="display:none">' . "\n" .
-					'<input type="password" style="display:none">' . "\n";
+					'<input type="text" class="verify">' . "\n" .
+					'<input type="password" class="verify">' . "\n";
 
 		return $result;
 	}
