@@ -119,13 +119,6 @@ span.tocnumber {
 	margin-right: 0.3em;
 }
 
-/** Chat-related *************************************************************/
-
-/* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
-td.micq1 {padding: 2px; white-space: nowrap; font-weight: bold;}
-td.micq2 {padding: 2px; white-space: nowrap; font: 10px Trebuchet MS, Tahoma, Arial;}
-td.micq3 {padding: 2px; width: 100%; }
-
 /** Email-related ************************************************************/
 
 /* Quoted message on new email */

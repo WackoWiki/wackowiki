@@ -331,33 +331,6 @@ div .action-content {
 .email-odd, .email-even {
 }
 
-
-
-/** Chat-related *************************************************************/
-
-/* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
-
-.micq1, .micq2, .micq3 {
-	font-family:	"Bitstream Vera Sans Mono", "Courier New", monospace;
-	font-size:		0.85em;
-}
-/* Username */
-.micq1 {
-	font-weight:		900;
-	white-space:		nowrap;
-}
-/* Time, Date */
-.micq2 {
-	font-size:		0.8em;
-	white-space:	nowrap;
-}
-/* Message */
-.micq3 {
-	width:			100%;
-}
-
-
-
 /* Revisions-related *********************************************************/
 
 /* Displays text: "This is an old revision of..." */

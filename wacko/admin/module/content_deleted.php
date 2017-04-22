@@ -88,7 +88,7 @@ function admin_content_deleted(&$engine, &$module)
 
 			// print entry
 			echo '<tr>' .
-					'<td class="lined" style="text-align:left">' .
+					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - '.
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $page['page_id'] . '">' . $engine->_t('RemoveButton') . '</a> ]'.
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $page['page_id'] . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.

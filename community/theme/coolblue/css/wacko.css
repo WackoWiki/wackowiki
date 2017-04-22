@@ -239,24 +239,6 @@ background:#faa;
 .mark-blue {background: #0000ff;}
 .mark-red {background: #ff0000;}
 
-.micq1 {
-font-weight:700;
-padding:2px;
-vertical-align:top;
-}
-
-.micq2 {
-font:10px tahoma, arial;
-padding:2px;
-vertical-align:top;
-}
-
-.micq3 {
-padding:2px;
-vertical-align:top;
-width:100%;
-}
-
 .missingpage {
 border-bottom:1px dashed orange;
 }
