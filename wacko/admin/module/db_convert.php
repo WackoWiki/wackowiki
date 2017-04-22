@@ -182,7 +182,7 @@ function admin_db_convert(&$engine, &$module)
 				<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 					<tr>
 						<th style="width:50px;" colspan="2"><a href="?mode=<?php echo $module['mode']; ?><?php echo $getstr.( (isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1' ); ?>">Table</a></th>
-						<th style="text-align:left;">Typ</th>
+						<th class="t_left">Typ</th>
 					</tr>
 <?php
 				foreach ($results as $table)
@@ -254,9 +254,9 @@ function admin_db_convert(&$engine, &$module)
 			<table style="max-width:500px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
 					<th style="width:50px;">Table</th>
-					<th style="text-align:left;">Column</th>
-					<th style="text-align:left;">Typ</th>
-					<th style="text-align:left;">Default</th>
+					<th class="t_left">Column</th>
+					<th class="t_left">Typ</th>
+					<th class="t_left">Default</th>
 				</tr>
 		<?php
 			foreach ($results as $table)

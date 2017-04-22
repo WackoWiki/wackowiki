@@ -37,7 +37,7 @@ if ($this->is_owner($page_id))
 
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p><span>' . $title.":</span></p>\n";
+			echo '<div class="layout-box"><p><span>' . $title . ":</span></p>\n";
 		}
 
 		echo '<ol class="">' . "\n";

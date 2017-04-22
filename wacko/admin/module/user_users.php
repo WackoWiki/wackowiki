@@ -390,7 +390,7 @@ function admin_user_users(&$engine, &$module)
 					<td>
 						<br />
 						<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
+						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
 					'</td>
 				</tr>' .
 			'</table><br />';
@@ -507,7 +507,7 @@ function admin_user_users(&$engine, &$module)
 					<td>
 						<br />
 						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
+						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
 						'<br />
 						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
 					'</td>
@@ -562,7 +562,7 @@ function admin_user_users(&$engine, &$module)
 						<td>
 							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users . '?</label> '.
 							'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-							'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a><br />' .
+							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" style="width:40px;" /></a><br />' .
 							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
 						'</td>
 					</tr>' .
@@ -860,7 +860,7 @@ function admin_user_users(&$engine, &$module)
 			foreach ($users as $row)
 			{
 				echo '<tr class="lined">' . "\n" .
-						'<td style="vertical-align:middle; width:10px;" class="label">
+						'<td class="label a_middle" style="width:10px;">
 							<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked' : '') . '/>
 						</td>' .
 						'<td>

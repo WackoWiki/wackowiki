@@ -621,7 +621,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'<tr><td>' .
 						'<em>' . implode('<br />', $accept_text) . '</em><br />' .
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 					'</td></tr>' .
 				'</table><br />' . "\n";
 		}
@@ -660,7 +660,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$list.
 						'</select> '.
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 					'</td></tr>' .
 				'</table><br />' . "\n";
 		}
@@ -676,7 +676,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '') .
 						'<input type="text" name="title" size="50" maxlength="250" value="' . $this->get_page_title('', $set[0]) . '" /> '.
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 						(count($set) > 1
 							? '<br /><small>' . $this->_t('ModerateRename1Only') . '</small>'
 							: '') .
@@ -716,7 +716,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$list.
 						'</select> '.
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 					'</td></tr>' .
 				'</table><br />' . "\n";
 		}
@@ -758,18 +758,18 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if ($this->has_access('read', $topic['page_id']))
 			{
 				echo '<tr class="lined">' .
-						'<td style="vertical-align:middle; width:10px;" class="label">
+						'<td class="label a_middle" style="width:10px;">
 							<input type="checkbox" name="' . $topic['page_id'] . '" value="id" ' . (in_array($topic['page_id'], $set) ? ' checked' : '') . '/>
 						</td>' .
-						'<td style="text-align:left; padding-left:5px;">' .
+						'<td style="padding-left:5px;">' .
 							($this->has_access('comment', $topic['page_id'], GUEST) === false
 								? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
 								: '' ) .
 								$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']) . ' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0) . '</strong>' .
 						'</td>' .
-						'<td style="text-align:center;" ' . ($this->is_admin() ? ' title="' . $topic['ip'] . '"' : '' ) . '><small>&nbsp;&nbsp;' . $this->user_link($topic['owner_name'], '', true, false) . '&nbsp;&nbsp;</small></td>' .
-						'<td style="text-align:center;"><small>' . $topic['comments'] . '</small></td>' .
-						'<td style="text-align:center; white-space:nowrap"><small>&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '</small></td>' .
+						'<td class="t_center" ' . ($this->is_admin() ? ' title="' . $topic['ip'] . '"' : '' ) . '><small>&nbsp;&nbsp;' . $this->user_link($topic['owner_name'], '', true, false) . '&nbsp;&nbsp;</small></td>' .
+						'<td class="t_center"><small>' . $topic['comments'] . '</small></td>' .
+						'<td class="t_center white-space:nowrap"><small>&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '</small></td>' .
 					'</tr>' . "\n";
 			}
 		}
@@ -1187,7 +1187,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'<tr><td>' .
 						'<em>' . $accept_text . '</em><br />' .
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 					'</td></tr>' .
 				'</table><br />' . "\n";
 		}
@@ -1226,7 +1226,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 								$list.
 							'</select> or <input type="text" name="cluster" size="50" maxlength="250" /><br />' .
 							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-							'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+							'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 						'</td></tr>' .
 					'</table><br />' . "\n";
 			}
@@ -1242,7 +1242,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							'<em>' . $accept_text . '</em><br />' .
 							'<input type="text" name="cluster" size="50" maxlength="250" /> '.
 							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-							'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+							'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 						'</td></tr>' .
 					'</table><br />' . "\n";
 			}
@@ -1259,7 +1259,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '' ) .
 						'<input type="text" name="title" size="50" maxlength="250" value="' . $this->page['title'] . '" /> '.
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 					'</td></tr>' .
 				'</table><br />' . "\n";
 		}
@@ -1274,7 +1274,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							? '<span class="cite"><strong>' . $error . '</strong></span><br />'
 							: '' ) .
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 					'</td></tr>' .
 				'</table><br />' . "\n";
 		}
@@ -1290,7 +1290,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '') .
 						'<input type="text" name="title" size="50" maxlength="250" value="" /> '.
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '" /> '.
-						'<a href="' . $this->href('moderate') . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
+						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '" /></a>' .
 						'<br />' .
 						'<small>' .
 						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked ' : '' ) . '/> <label for="after">' . $this->_t('ModerateSplitAllAfter') . '</label><br />' .
@@ -1362,10 +1362,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$desc = htmlspecialchars($desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 				echo '<tr class="lined">' .
-						'<td style="vertical-align:middle; width:10px;" class="label">
+						'<td class="label a_middle" style="width:10px;">
 							<input type="checkbox" name="' . $comment['page_id'] . '" value="id"' . ( in_array($comment['page_id'], $set) ? ' checked' : '' ) . '/>
 						</td>' .
-						'<td style="text-align:left; padding-left:5px;">
+						'<td style="padding-left:5px;">
 							<strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . $this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="' . $this->href('', $this->db->users_page, 'profile=' . $comment['owner_name']) . '">' . $this->_t('ModerateUserProfile') . '</a>' : '' ) . '</small></strong>' .
 							'<br />' . $desc .
 						'</td>' .

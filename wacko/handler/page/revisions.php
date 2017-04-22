@@ -165,7 +165,7 @@ if ($this->has_access('read'))
 			echo  '<a href="' . $this->href('revisions', '', 'show=all') . '">' . $this->_t('RevisionsShowAll') . "</a><br /><br />\n";
 		}
 
-		echo '<a href="' . $this->href() . '" style="text-decoration: none;">' .
+		echo '<a href="' . $this->href() . '" class="btn_link">' .
 				'<input type="button" value="' . $this->_t('CancelDifferencesButton') . '" />' .
 			 '</a>' . "\n";
 

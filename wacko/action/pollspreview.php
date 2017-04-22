@@ -15,7 +15,7 @@ $list = $polls_obj->get_polls_list('moderation');
 if (empty($list))
 {
 	echo '<tr><th>' . $this->_t('PollsModeration') . '</th></tr>';
-	echo '<tr><td style="text-align:center;"><em>' . $this->_t('PollsEmptyList') . '</em></td></tr>';
+	echo '<tr><td class="t_center"><em>' . $this->_t('PollsEmptyList') . '</em></td></tr>';
 }
 else
 {
@@ -26,7 +26,7 @@ else
 		$user = (strpos($row['user_name'], '.') ? '<em>' . $this->_t('PollsGuest') . '</em>' : '<a href="' . $this->href('', $this->db->users_page, 'profile=' . $row['user_name']) . '">' . $row['user_name'] . '</a>');
 		echo '<tr>';
 			echo '<td class="label"></td>';
-			echo '<td style="text-align:left;width:80%;">' . $row['text'] . '</td>';
+			echo '<td style="width:80%;">' . $row['text'] . '</td>';
 			echo '<td>' . $user . '</td>';
 		echo '</tr>';
 		echo '<tr>';
@@ -36,11 +36,11 @@ else
 
 			foreach ($vars as $var)
 			{
-				echo '<tr class="lined"><td style="text-align:left;">' . $var['text'] . '</td></tr>';
+				echo '<tr class="lined"><td>' . $var['text'] . '</td></tr>';
 			}
 
 			echo '</table></td>';
-			echo '<td style="text-align:left; vertical-align:top;">' . 
+			echo '<td class="a_top">' .
 				($row['plural'] == 1 ? $this->_t('PollsPlural') : $this->_t('PollsSingular')) . '</td>';
 		echo '</tr>';
 	}

@@ -65,7 +65,7 @@ if ($user = $this->get_user())
 			 */
 			if ($this->is_admin() || in_array($user['user_id'], $group_members))
 			{
-				echo '<td style="vertical-align:top;">';
+				echo '<td class="a_top">';
 
 				foreach ($group_members as $k => $user_name)
 				{

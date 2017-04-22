@@ -209,7 +209,7 @@ class Polls
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">' .
 					'<tr><th>' . $this->engine->_t('PollsError') . '</th></tr>' .
-					'<tr><td style="text-align:center;"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>' .
+					'<tr><td class="t_center"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>' .
 					'</table>';
 		}
 		else
@@ -219,7 +219,7 @@ class Polls
 					'<a id="poll' . $poll_id . '_form"></a>' .
 					'<input type="hidden" name="poll" value="' . $poll_id . '" />' .
 					'<table class="formation">' . "\n" .
-					'<tr><th colspan="2" style="text-align:left;">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
+					'<tr><th colspan="2" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
 
 			foreach ($vars as $var)
 			{
@@ -228,7 +228,7 @@ class Polls
 								? '<input type="checkbox" id="' . $var['v_id'] . '" name="' . $var['v_id'] . '" value="1" />'
 								: '<input type="radio" id="' . $var['v_id'] . '" name="id" value="' . $var['v_id'] . '" />') .
 							'</td>' .
-						'<td style="width:95%;text-align:left;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>' . "\n";
+						'<td class="t_left" style="width:95%;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>' . "\n";
 			}
 
 			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts') . ': ' . $duration.
@@ -263,7 +263,7 @@ class Polls
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">' .
 					'<tr><th>' . $this->engine->_t('PollsError') . '</th></tr>' .
-					'<tr><td style="text-align:center;"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>' .
+					'<tr><td class="t_center"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>' .
 					'</table>';
 		}
 		else
@@ -272,12 +272,12 @@ class Polls
 					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>' .
 					'<a id="poll' . $poll_id . '_form"></a>' .
 					'<table class="formation">' .
-					'<tr><th colspan="3" style="text-align:left;">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>';
+					'<tr><th colspan="3" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>';
 
 			foreach ($vars as $var)
 			{
 				$percent = ($total == 0 ? 0 : round($var['votes'] / $total * 100, 1));
-				$poll	.= '<tr class="lined"><td style="width:95%;text-align:left;">' . $var['text'] . '</td>' .
+				$poll	.= '<tr class="lined"><td class="t_left" style="width:95%;">' . $var['text'] . '</td>' .
 						'<td>&nbsp;<strong>' . $var['votes'] . '</strong>&nbsp;</td>' .
 						'<td>&nbsp;<strong>' . $percent . '%</strong></td></tr>';
 			}

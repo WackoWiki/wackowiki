@@ -144,7 +144,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 			<input type="hidden" name="file_id" value="<?php echo $file['file_id'];?>" />
 			<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>" />
 			&nbsp;
-			<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
+			<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
 			<br />
 			<br />
 			</div>
@@ -323,7 +323,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 			<?php
 
-				echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";?>
+				echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";?>
 					<br />
 					<br />
 					</div>
@@ -376,7 +376,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
 					<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('EditStoreButton'); ?>" />
 					&nbsp;
-					<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
+					<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
 					<br />
 					<br />
 					</div>

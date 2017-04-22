@@ -240,7 +240,7 @@ if ($this->is_owner() || $this->is_admin())
 				}
 
 				echo			'<input type="submit" id="submit" name="create" value="' . $this->_t('CategoriesSaveButton') . '" /> ' .
-								'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
+								'<a href="' . $this->href('categories') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
 							'</td>' .
 						'</tr>' .
 					'</table><br />';
@@ -263,7 +263,7 @@ if ($this->is_owner() || $this->is_admin())
 									'<label for="new_name">' . Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>') . '</label> ' .
 									'<input type="text" name="category" id="new_name" value="' . (isset($_POST['category']) ? htmlspecialchars($_POST['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100" /> '.
 									'<input type="submit" name="rename" id="submit_new_name" value="' . $this->_t('CategoriesSaveButton') . '" /> ' .
-									'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
+									'<a href="' . $this->href('categories') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
 									'<br /><small>' . $this->_t('CategoriesRenameInfo') . '</small>' .
 								'</td>' .
 							'</tr>' .
@@ -304,7 +304,7 @@ if ($this->is_owner() || $this->is_admin())
 										$options .
 									'</select> ' .
 									'<input type="submit" id="submit" name="ugroup" value="' . $this->_t('CategoriesSaveButton') . '" /> ' .
-									'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
+									'<a href="' . $this->href('categories') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
 									'<br /><small>' . $this->_t('CategoriesGroupInfo') . '</small>' .
 								'</td>' .
 							'</tr>' .
@@ -329,7 +329,7 @@ if ($this->is_owner() || $this->is_admin())
 								'<td>' .
 									'<label for="">' . Ut::perc_replace($this->_t('CategoriesDelete'), '<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>') . '</label> ' .
 									'<input type="submit" id="submit_delete" name="delete" value="' . $this->_t('DeleteText') . '" /> ' .
-									'<a href="' . $this->href('categories') . '" style="text-decoration: none;"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
+									'<a href="' . $this->href('categories') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' .
 									'<br /><small>' . $this->_t('CategoriesDeleteInfo') . '</small>' .
 								'</td>' .
 							'</tr>' .

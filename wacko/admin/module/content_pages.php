@@ -238,12 +238,12 @@ function admin_content_pages(&$engine, &$module)
 			$time_tz = $engine->sql2precisetime($row['modified']);
 
 			echo '<tr class="lined">' . "\n" .
-					'<td style="vertical-align:top; text-align:center;">' . $row['page_id'] . '</td>' .
-					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' .
-					'<td style="vertical-align:top; padding-left:5px; padding-right:5px;">' . $row['tag'] . '</td>' .
-					'<td style="vertical-align:top;">' . $row['title'] . '</td>' .
-					'<td style="vertical-align:top;">' . $engine->binary_multiples($row['page_size'], false, true, true) . '</td>' .
-					'<td style="vertical-align:top; text-align:center;"><small>' .
+					'<td class="t_center a_top">' . $row['page_id'] . '</td>' .
+					'<td class="t_center a_top"><small>' . $time_tz . '</small></td>' .
+					'<td class="a_top" style="padding-left:5px; padding-right:5px;">' . $row['tag'] . '</td>' .
+					'<td class="a_top">' . $row['title'] . '</td>' .
+					'<td class="a_top">' . $engine->binary_multiples($row['page_size'], false, true, true) . '</td>' .
+					'<td class="t_center a_top"><small>' .
 						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' .
 						'<br />' . '<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
 					'</small></td>' .
@@ -252,7 +252,7 @@ function admin_content_pages(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
+		echo '<tr><td colspan="5" class="t_center"><br /><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
 	}
 ?>
 		</table>

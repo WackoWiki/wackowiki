@@ -480,7 +480,7 @@ else if (($user = $this->get_user()))
 			<a href="<?php echo $this->href('', 'Password')?>"><?php echo $this->_t('YouWantChangePassword');?></a>
 		</th>
 		<td>
-			<a href="<?php echo $this->href('', 'password');?>" style="text-decoration: none;"><input type="button" id="button" value="<?php echo $this->_t('YouWantChangePassword');?>" name="_password"/></a>
+			<a href="<?php echo $this->href('', 'password');?>" class="btn_link"><input type="button" id="button" value="<?php echo $this->_t('YouWantChangePassword');?>" name="_password"/></a>
 		</td>
 	</tr>
 	<tr>
@@ -642,7 +642,7 @@ else if (($user = $this->get_user()))
 		<td>
 			<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('UpdateSettingsButton'); ?>" />
 			&nbsp;
-			<a href="<?php echo $this->href('', '', 'action=logout');?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->_t('LogoutButton'); ?>" /></a>
+			<a href="<?php echo $this->href('', '', 'action=logout');?>" class="btn_link"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->_t('LogoutButton'); ?>" /></a>
 		</td>
 	</tr>
 	</tbody>

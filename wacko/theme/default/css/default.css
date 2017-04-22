@@ -707,6 +707,31 @@ fieldset {
 	visibility: hidden
 }
 
+/* replaces inline CSS */
+.t_center {
+	text-align: center;
+}
+.t_right {
+	text-align: right;
+}
+.t_left {
+	text-align: left;
+}
+
+.a_top {
+	vertical-align: top;
+}
+
+.a_middle {
+	vertical-align: middle;
+}
+
+a.btn_link {
+	text-decoration: none;
+}
+
+/* <------------------ */
+
 .upload {
 /*	 border: 0 none;
 	border-collapse: collapse; */
@@ -2097,13 +2122,14 @@ li.m-source img {
 	padding-right: 10px
 }
 
-.userprofil {
+.userprofil th{
 	color: #444444;
 	font-weight: bold;
 	width: 100px;
 	white-space: nowrap;
 	vertical-align: top;
 	padding-right: 20px;
+	text-align: left;
 }
 
 ul.upload,

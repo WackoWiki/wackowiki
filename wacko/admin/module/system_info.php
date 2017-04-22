@@ -31,8 +31,8 @@ function admin_system_info(&$engine, &$module)
 	<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 		<tr>
 			<th style="width:120px;">Parameter</th>
-			<th style="text-align:left;"></th>
-			<th style="text-align:left;">Value</th>
+			<th class="t_left"></th>
+			<th class="t_left">Value</th>
 		</tr>
 <?php
 

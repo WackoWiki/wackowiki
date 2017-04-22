@@ -212,7 +212,7 @@ function admin_db_backup(&$engine, &$module)
 ?>
 			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
-					<th style="text-align:right"><?php echo $engine->_t('BackupCluster'); ?>:</th>
+					<th class="t_right"><?php echo $engine->_t('BackupCluster'); ?>:</th>
 					<th colspan="2"><input type="text" name="root" size="30" value="" /></th>
 				</tr>
 				<tr>
@@ -232,10 +232,10 @@ function admin_db_backup(&$engine, &$module)
 
 				echo '<tr class="hl_setting">' .
 						'<td class="label"><strong>' . $table['name'] . '</strong></td>' .
-						'<td style="text-align:center;">&nbsp;&nbsp;
+						'<td class="t_center">&nbsp;&nbsp;
 							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '') . ' />
 						</td>' .
-						'<td style="text-align:center;">
+						'<td class="t_center">
 							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked' : '') . ' />
 						</td>' .
 					'</tr>' .
@@ -260,7 +260,7 @@ function admin_db_backup(&$engine, &$module)
 
 				echo '<tr>' .
 						'<td colspan="2" class="label"><strong>' . $dir . '</strong></td>' .
-						'<td style="text-align:center;">&nbsp;&nbsp;
+						'<td class="t_center">&nbsp;&nbsp;
 							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . ' />
 						</td>' .
 					'</tr>' .

@@ -263,7 +263,7 @@ if ($this->has_access('read')
 	$preview		=	'';
 	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="' . $this->_t('EditStoreButton') . '"/>&nbsp;' .
 						'<input type="submit" class="OkBtn_Top" name="preview" value="' . $this->_t('EditPreviewButton') . '"/>&nbsp;' .
-						'<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '"/></a>' . "\n";
+						'<a href="' . $this->href() . '" class="btn_link"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '"/></a>' . "\n";
 
 	// preview?
 	if (isset($_POST['preview']))

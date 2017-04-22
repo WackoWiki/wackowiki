@@ -201,27 +201,27 @@ else
    </div>
    <h2><?php echo $lang['DBHost'];?></h2>
    <p class="notop"><?php echo $lang['DBHostDesc']; ?></p>
-   <input type="text" maxlength="1000" name="config[database_host]" value="<?php echo $config['database_host'] ?>" class="text_input" />
+   <input type="text" maxlength="1000" name="config[database_host]" value="<?php echo $config['database_host'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
    <h2><?php echo $lang['DBPort'];?></h2>
    <p class="notop"><?php echo $lang['DBPortDesc']; ?></p>
-   <input type="text" maxlength="10" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input" style="width: 100px;" /> <br />
+   <input type="text" maxlength="10" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input"/> <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
    <h2><?php echo $lang['DB'];?></h2>
    <p class="notop"><?php echo $lang['DBDesc']; ?></p>
-   <input type="text" maxlength="64" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input" />
+   <input type="text" maxlength="64" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
    <h2><?php echo $lang['DBUser'];?></h2>
    <p class="notop"><?php echo $lang['DBUserDesc']; ?></p>
-   <input type="text" maxlength="50" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input" />
+   <input type="text" maxlength="50" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
@@ -235,7 +235,7 @@ else
    </div>
    <h2><?php echo $lang['Prefix'];?></h2>
    <p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
-   <input type="text" maxlength="64" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input" />
+   <input type="text" maxlength="64" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
@@ -246,7 +246,7 @@ if ($config['is_update'] == false)
    <h2><?php echo $lang['DeleteTables'];?></h2>
    <p class="notop"><?php echo $lang['DeleteTablesDesc']; ?></p>
    <label class="indented_label" for="wiki_delete_tables"><?php echo $lang['DeleteTables'];?></label>
-   <input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo isset($config['DeleteTables']) ? ' checked' : ''; ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo isset($config['DeleteTables']) ? ' checked' : ''; ?> class="checkbox_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
@@ -258,7 +258,7 @@ else
 	echo '<input type="hidden" value="off" name="config[DeleteTables]">';
 }
 ?>
-   <input type="submit" value="<?php echo $lang['Continue'];?>" class="next" onclick="return check();" />
+   <input type="submit" value="<?php echo $lang['Continue'];?>" class="next" onclick="return check();"/>
 <?php
 	}
 ?>

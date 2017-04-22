@@ -97,7 +97,7 @@ if ($this->has_access('read'))
 					$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '" />';
 					$message .= '<input type="hidden" name="body" value="' . htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />';
 					$message .= '<input type="submit" value="' . $this->_t('ReEditOldRevision') . '" />';
-					$message .= '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"/></a>';
+					$message .= '<a href="' . $this->href() . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"/></a>';
 					$message .= $this->form_close();
 				}
 			}
