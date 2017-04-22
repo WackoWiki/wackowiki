@@ -848,14 +848,14 @@ p.preview {
 	background-color: #fcfcfc;
 }
 
-.layout-box p {
+.layout-box > p {
 	background: transparent;
 	margin: -1.5em 0px 10px 0px;
 	padding: 0;
 	border: 0;
 }
 
-.layout-box p span {
+.layout-box > p span {
 	background: #FFF;
 	padding: 0 1px;
 }
@@ -865,7 +865,6 @@ p.preview {
 	padding: 0;
 	line-height: 25px;
 }
-
 
 *.heading:target,
 .layout-box dd:target,
@@ -1508,7 +1507,6 @@ li.lined:hover {
 .page_tools {
 	float: right;
 	padding: 0px 10px 10px 10px;
-	
 }
 
 .menu
@@ -1659,7 +1657,6 @@ table.formation td {
 .diff-pos {
 	background-color: #efe;
 	color: #008800;
-
 }
 
 .diff-neg {
@@ -2338,4 +2335,5 @@ table.forum td {
 	width:	66px;
 }
 
+/* hides dummy field for bots and autocomplete */
 input.verify { display:none; }
