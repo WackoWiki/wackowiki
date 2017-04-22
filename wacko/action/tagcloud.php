@@ -26,6 +26,7 @@ if (!function_exists('print_tag_cloud'))
 
 		// find the range of values
 		$spread = $max_qty - $min_qty;
+
 		if ($spread == 0)
 		{
 			// we don't want to divide by zero

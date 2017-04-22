@@ -175,7 +175,7 @@ echo "<tr>";
 
 for ($month; $month <= $_range; $month++)
 {
-		echo '<td style="vertical-align: top">';
+		echo '<td class="a_top">';
 		echo generate_calendar($year, $month, $days, $daywidth);
 
 		echo "</td>";

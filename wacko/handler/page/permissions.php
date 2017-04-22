@@ -242,7 +242,7 @@ if ($upload_allowed)
 </p>
 <p>
 	<input type="submit" class="OkBtn" id="submit" value="<?php echo $this->_t('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
-	<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo $this->_t('ACLCancelButton'); ?>"/></a>
+	<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" id="button" value="<?php echo $this->_t('ACLCancelButton'); ?>"/></a>
 </p>
 </div>
 <?php

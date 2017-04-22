@@ -71,12 +71,20 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 	// display list
 	echo '<table class="forum lined">' .
-			'<tr>' .
-				'<th>' . $this->_t('ForumSubforums') . '</th>' .
-				'<th>' . $this->_t('ForumTopics') . '</th>' .
-				'<th>' . $this->_t('ForumPosts') . '</th>' .
-				'<th>' . $this->_t('ForumLastComment') . '</th>' .
-			'</tr>' . "\n";
+			'<colgroup>' .
+				'<col span="1" style="width:60%;">' .
+				'<col span="1">' .
+				'<col span="1">' .
+				'<col span="1">' .
+			'</colgroup>' .
+			'</thead>' .
+				'<tr>' .
+					'<th>' . $this->_t('ForumSubforums') . '</th>' .
+					'<th>' . $this->_t('ForumTopics') . '</th>' .
+					'<th>' . $this->_t('ForumPosts') . '</th>' .
+					'<th>' . $this->_t('ForumLastComment') . '</th>' .
+				'</tr>' . "\n" .
+			'</thead>';
 
 	foreach ($forums as $forum)
 	{
@@ -138,8 +146,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			}
 
 			// print <span class="icon"></span>
-			echo '<tr>' .
-					'<td style="width:60%; vertical-align:top;">' .
+			echo '<tbody><tr>' .
+					'<td class="a_top">' .
 						( $this->has_access('read', $forum['page_id'], GUEST) === false
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
 							: '' ) .
@@ -149,12 +157,12 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						'<strong>' . $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '', $_lang) . '</strong><br />' .
 						'<small>' . $forum['description'] . '</small>' .
 					'</td>' .
-					'<td style="text-align:center" >&nbsp;' . $topics['total'] . '&nbsp;&nbsp;</td>' .
-					'<td style="text-align:center" >&nbsp;' . $posts['total'] . '&nbsp;&nbsp;</td>';
+					'<td class="t_center">&nbsp;' . $topics['total'] . '&nbsp;&nbsp;</td>' .
+					'<td class="t_center">&nbsp;' . $posts['total'] . '&nbsp;&nbsp;</td>';
 
 			if ($comment == true)
 			{
-				echo '<td style="text-align:left; vertical-align:top;">';
+				echo '<td class="a_top">';
 
 				if ($comment['comment_on_id'] == true)
 				{
@@ -190,7 +198,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		}
 	}
 
-	echo '</table>' . "\n";
+	echo '</tbody></table>' . "\n";
 	echo '<br />' . "\n";
 
 	// mark all forums read

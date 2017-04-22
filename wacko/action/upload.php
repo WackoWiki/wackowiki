@@ -103,7 +103,7 @@ if ($this->can_upload(true) === true)
 	<?php
 	}
 	/* echo '<tr>
-		<td style="text-align: right">
+		<td class="t_right">
 			<label for="upload_dest_file">' . $this->_t('UploadAsName') . ':&nbsp;</label>
 		</td>
 		<td>
@@ -114,7 +114,7 @@ if ($this->can_upload(true) === true)
 	if (!$hide_description)
 	{ ?>
 	<tr>
-		<td style="text-align: right">
+		<td class="t_right">
 			<label for="upload_desc"><?php echo $this->_t('FileDesc');?>:&nbsp;</label>
 		</td>
 		<td>
@@ -123,7 +123,7 @@ if ($this->can_upload(true) === true)
 	</tr>
 	<?php } ?>
 	<tr>
-		<td style="text-align: right">
+		<td class="t_right">
 		</td>
 		<td>
 			<input type="checkbox" name="file_overwrite" id="upload_overwrite" value="1" />

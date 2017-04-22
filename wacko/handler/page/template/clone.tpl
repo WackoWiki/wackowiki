@@ -42,7 +42,7 @@ leave it as is for the memories
 	<br /><br />
 	<input type="submit" name="submit" value="[' _t: CloneButton ']" />
 	&nbsp;
-	<a href="[' show ']" style="text-decoration: none;"><input type="button" value="[' _t: EditCancelButton | replace "\n" " " ']"/></a>
+	<a href="[' show ']" class="btn_link"><input type="button" value="[' _t: EditCancelButton | replace "\n" " " ']"/></a>
 </form>
 [ ====================================== editNote =================================== ]
 <br />

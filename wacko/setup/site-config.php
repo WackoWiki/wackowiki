@@ -167,7 +167,7 @@ else
 ?>
    <h2><?php echo $lang['Base'];?></h2>
    <p class="notop"><?php echo $lang['BaseDesc'];?></p>
-   <input type="text" maxlength="1000" name="config[base_url]" value="<?php echo $config['base_url'] ?>" class="text_input" style="width: 907px;" />
+   <input type="text" maxlength="1000" name="config[base_url]" value="<?php echo $config['base_url'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />

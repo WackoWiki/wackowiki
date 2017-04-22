@@ -261,7 +261,7 @@ if ($this->is_admin()
 ?>
 		<br />
 		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>" />&nbsp;
-		<a href="<?php echo $this->href();?>" style="text-decoration: none;"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
+		<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
 		<br />
 <?php
 		echo $this->form_close();

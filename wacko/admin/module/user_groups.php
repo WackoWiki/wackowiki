@@ -142,7 +142,7 @@ function admin_user_groups(&$engine, &$module)
 						<td>
 							<br />
 							<input type="submit" id="submit" name="add_member" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-							'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
+							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
 						'</td>
 					</tr>' .
 				'</table>
@@ -169,7 +169,7 @@ function admin_user_groups(&$engine, &$module)
 							<td>
 								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>' . htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 								'<input type="submit" id="submit" name="remove_member" value="yes" style="width:40px;" /> '.
-								'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width: 40px;" /></a>' .
+								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" style="width: 40px;" /></a>' .
 								'<br /><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
@@ -330,7 +330,7 @@ function admin_user_groups(&$engine, &$module)
 						<td>
 		 					<br />
 		 					<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-							'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
+							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
 						'</td>
 					</tr>' .
 				'</table>
@@ -395,7 +395,7 @@ function admin_user_groups(&$engine, &$module)
 					'<tr><td>
 						<br />
 						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-						'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
+						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
 						'<br /><small>' . $engine->_t('GroupsRenameInfo') . '</small>' .
 					'</td></tr>' .
 					'</table><br />';
@@ -420,7 +420,7 @@ function admin_user_groups(&$engine, &$module)
 							<td>
 								<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
 								'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-								'<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
+								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
 								'<br /><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
@@ -488,7 +488,7 @@ function admin_user_groups(&$engine, &$module)
 
 		echo '<br /><input type="submit" id="button" name="add_member" value="' . $engine->_t('GroupsAddButton') . '" /> ';
 		echo '<input type="submit" id="button" name="remove_member" value="' . $engine->_t('GroupsRemoveButton') . '" /> ';
-		echo '<a href="' . $engine->href() . '" style="text-decoration: none;"><input type="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>';
+		echo '<a href="' . $engine->href() . '" class="btn_link"><input type="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>';
 
 		echo $engine->form_close();
 	}
@@ -611,7 +611,7 @@ function admin_user_groups(&$engine, &$module)
 						'<td>
 							<input type="radio" name="change" value="' . $row['group_id'] . '" /></td>' .
 						'<td>' . $row['group_id'] . '</td>' .
-						'<td style="text-align:left; padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;group_id=' . $row['group_id'] . '">' . $row['group_name'] . '</a></strong></td>' .
+						'<td class="t_left" style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;group_id=' . $row['group_id'] . '">' . $row['group_name'] . '</a></strong></td>' .
 						'<td>' . $row['description'] . '</td>' .
 						'<td><small><a href="' . $engine->href() . '&amp;moderator=' . $row['moderator_id'] . '">' . $row['user_name'] . '</a></small></td>' .
 						'<td>' . $row['members'] . '</td>' .

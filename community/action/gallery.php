@@ -201,18 +201,18 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p class="layout-box"><span>' . htmlspecialchars($title, null, '') . ":</span></p>\n";
+		echo '<div class="layout-box"><p><span>' . htmlspecialchars($title, null, '') . ":</span></p>\n";
 	}
 
 	if (!isset($_GET['file_id']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
 	{
 		if ($table)
 		{
-			echo '<table style="text-align:center; width:100%">';
+			echo '<table class="t_center" style="width:100%;">';
 		}
 		else
 		{
-			echo '<div class="gallery" style="text-align:center;">' . "\n";
+			echo '<div class="gallery t_center">' . "\n";
 		}
 
 		foreach ($files as $file)
@@ -312,7 +312,7 @@ if ($can_view)
 					echo '<tr>';
 				}
 
-				echo '<td style="text-align:center;">';
+				echo '<td class="t_center">';
 			}
 			else
 			{
@@ -389,7 +389,7 @@ if ($can_view)
 			</figcaption>
 		</figure> */
 
-		echo '<div id="' . $param_token . '" style="text-align:center;">';
+		echo '<div id="' . $param_token . '" class="t_center">';
 
 		if (count($file) > 0)
 		{

@@ -52,7 +52,7 @@ if ($this->is_admin())
 
 				// print entry
 				echo '<li>' .
-						'<span style="text-align:left">' .
+						'<span>' .
 							'<small>' . $time . '</small>  &mdash; ' .
 							// $this->compose_link_to_page($page['tag'], 'revisions', '', 0) .
 							'<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' .

@@ -206,11 +206,11 @@ function admin_system_log(&$engine, &$module)
 			$time_tz = $engine->sql2precisetime($row['log_time']);
 
 			echo '<tr class="lined">' . "\n" .
-					'<td style="vertical-align:top; text-align:center;">' . $row['log_id'] . '</td>' .
-					'<td style="vertical-align:top; text-align:center;"><small>' . $time_tz . '</small></td>' .
-					'<td style="vertical-align:top; text-align:center; padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' .
-					'<td style="vertical-align:top;">' . $engine->format($row['message'], 'post_wacko') . '</td>' .
-					'<td style="vertical-align:top; text-align:center;"><small>' .
+					'<td class="t_center a_top">' . $row['log_id'] . '</td>' .
+					'<td class="t_center a_top"><small>' . $time_tz . '</small></td>' .
+					'<td class="t_center a_top" style="padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' .
+					'<td class="a_top">' . $engine->format($row['message'], 'post_wacko') . '</td>' .
+					'<td class="t_center a_top"><small>' .
 						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br />' .
 						'<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
 					'</small></td>' .
@@ -219,7 +219,7 @@ function admin_system_log(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5" style="text-align:center;"><br /><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
+		echo '<tr><td colspan="5" class="t_center"><br /><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
 	}
 ?>
 		</table>

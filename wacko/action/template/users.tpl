@@ -31,27 +31,27 @@ first really BIG template written
 
 	<h2>[ ' _t: UsersProfile ' ]</h2>
 
-	<table class="lined" style="border-spacing: 3px; border-collapse: separate;">
+	<table class="userprofil lined" style="border-spacing: 3px; border-collapse: separate;">
 		<tr>
-			<td class="userprofil">[ ' _t: RealName ' ]</td>
+			<th scope="row">[ ' _t: RealName ' ]</th>
 			<td>[ ' user.real_name |e ' ]</td>
 		</tr>
 		<tr>
-			<td class="userprofil">[ ' _t: UsersSignupDate ' ]</td>
+			<th scope="row">[ ' _t: UsersSignupDate ' ]</th>
 			<td>[ ' user.signup_time | time_formatted ' ]</td>
 		</tr>
 		<tr>
-			<td class="userprofil">[ ' _t: UsersLastSession ' ]</td>
+			<th scope="row">[ ' _t: UsersLastSession ' ]</th>
 			<td>[ ''' last lastSession ''' ]</td>
 		</tr>
 		<tr>
-			<td class="userprofil">[ ' _t: UserSpace ' ]</td>
+			<th scope="row">[ ' _t: UserSpace ' ]</th>
 			[= userPage =
 				<td><a href="[ ' href ' ]">[ ' text |e ' ]</a></td>
 			=]
 		</tr>
 		<tr>
-			<td class="userprofil"><a href="[ ' groupsPage ' ]">[ ' _t: UsersGroupMembership ' ]</a></td>
+			<th scope="row"><a href="[ ' groupsPage ' ]">[ ' _t: UsersGroupMembership ' ]</a></th>
 			[= userGroups =
 				<td>[ ' list ' ][ ' na UsersNA2 ' ]</td>
 			=]
@@ -61,7 +61,7 @@ first really BIG template written
 	[= pm _ =
 		<h2>[ ' _t: UsersContact ' ]</h2>
 		[= not _ =
-			<table class="formation"><tr><td colspan="2" style="text-align:center;"><em>[ ' _t: UsersPMNotLoggedIn ' ]</em></td></tr></table>
+			<table class="formation"><tr><td colspan="2" class="t_center"><em>[ ' _t: UsersPMNotLoggedIn ' ]</em></td></tr></table>
 		=]
 		[= pm _ =
 			[ ' // contact form ' ]
@@ -74,7 +74,7 @@ first really BIG template written
 				=]
 				<table class="formation">
 					[= disabled _ =
-						<tr><td colspan="2" style="text-align:center;"><strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong></td></tr>
+						<tr><td colspan="2" class="t_center"><strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong></td></tr>
 					=]
 					[= ic _ =
 						<tr>
@@ -197,18 +197,18 @@ first really BIG template written
 		</thead>
 		<tbody>
 		[= none _ =
-			<tr><td colspan="5" style="padding:10px; text-align:center;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
+			<tr><td colspan="5" class="t_center" style="padding:10px;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
 		=]
 		[= u _ =
 			<tr>
 				<td style="padding-left:5px;">[ ' link ' ]</td>
-				<td style="text-align:center;">[ ' user.total_pages |e ' ]</td>
-				<td style="text-align:center;">[ ' user.total_comments |e ' ]</td>
-				<td style="text-align:center;">[ ' user.total_revisions |e ' ]</td>
+				<td class="t_center">[ ' user.total_pages |e ' ]</td>
+				<td class="t_center">[ ' user.total_comments |e ' ]</td>
+				<td class="t_center">[ ' user.total_revisions |e ' ]</td>
 				[= reg _ =
-					<td style="text-align:center;">[ ' user.total_uploads |e ' ]</td>
-					<td style="text-align:center;">[ ' user.signup_time | time_formatted ' ]</td>
-					<td style="text-align:center;">[ ' sess lastSession ' ]</td>
+					<td class="t_center">[ ' user.total_uploads |e ' ]</td>
+					<td class="t_center">[ ' user.signup_time | time_formatted ' ]</td>
+					<td class="t_center">[ ' sess lastSession ' ]</td>
 				=]
 			</tr>
 		=]

@@ -77,7 +77,7 @@ else
 ?>
 	<br />
 	<input type="submit" id="submit" name="submit" value="<?php echo $this->_t('PurgeButton'); ?>" />
-	<a href="<?php echo $this->href('properties');?>" style="text-decoration: none;"><input type="button" id="button" value="<?php echo $this->_t('EditCancelButton'); ?>" /></a>
+	<a href="<?php echo $this->href('properties');?>" class="btn_link"><input type="button" id="button" value="<?php echo $this->_t('EditCancelButton'); ?>" /></a>
 	<br />
 
 <?php	echo $this->form_close();

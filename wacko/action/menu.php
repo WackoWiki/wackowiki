@@ -293,7 +293,7 @@ if ($_user_id)
 					<!--<input type="radio" id="menu_item' . $menu_item['menu_id'] . '" name="change" value="' . $menu_item['menu_id'] . '" /> -->
 					<label for="menu_item' . $menu_item['menu_id'] . '" title="' . $menu_item['title'] . '">&raquo; ' . $menu_item['tag'] . '</label>
 				</td>
-				<td style="text-align:center;" >
+				<td class="t_center">
 					<input type="checkbox" id="menu_item' . $menu_item['menu_id'] . '" name="delete_' . $menu_item['menu_id'] . '" />
 				</td>
 				<!--<td>

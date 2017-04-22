@@ -39,8 +39,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			?>
 			<tr>
 				<th style="width:250px;">Inconsistencies</th>
-				<th style="text-align:left;"></th>
-				<th style="text-align:left;">Records</th>
+				<th class="t_left"></th>
+				<th class="t_left">Records</th>
 			</tr>
 			<?php
 			// 1.1 usergroup_member without user
@@ -301,8 +301,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			?>
 			<tr>
 				<th style="width:250px;">Inconsistencies</th>
-				<th style="text-align:left;"></th>
-				<th style="text-align:left;">Records</th>
+				<th class="t_left"></th>
+				<th class="t_left">Records</th>
 			</tr>
 			<?php
 			// 1.1 usergroup_member without user

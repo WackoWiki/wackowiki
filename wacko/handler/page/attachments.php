@@ -61,7 +61,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 			echo $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments']) . '<br />';
 		}
 
-		echo '<a href="' . $this->href() . '" style="text-decoration: none;"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";
+		echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";
 	}
 
 #}
