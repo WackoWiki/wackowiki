@@ -88,8 +88,8 @@ $dict_location = __DIR__ . '/.ht_freecap_words';
 $max_word_length = 6;
 
 // text colour
-// 0=one random colour for all letters
-// 1=different random colour for each letter
+// 0 = one random colour for all letters
+// 1 = different random colour for each letter
 $col_type = 1;
 
 // maximum times a user can refresh the image
@@ -97,7 +97,7 @@ $col_type = 1;
 // further notes re: BF attacks in "avoid brute force attacks" section, below
 // on the other hand, those attempting OCR will find the ability to request new images
 // very useful; if they can't crack one, just grab an easier target...
-// for the ultra-paranoid, setting it to <5 will still work for most users
+// for the ultra-paranoid, setting it to < 5 will still work for most users
 $max_attempts = 15;
 
 // If you are not successful in displaying an image (but the
@@ -151,10 +151,10 @@ else
 }
 
 // background:
-// 0=transparent (if jpg, white)
-// 1=white bg with grid
-// 2=white bg with squiggles
-// 3=morphed image blocks
+// 0 = transparent (if jpg, white)
+// 1 = white bg with grid
+// 2 = white bg with squiggles
+// 3 = morphed image blocks
 // 'random' background from v1.3 didn't provide any extra security (according to 2 independent experts)
 // many thanks to http://ocr-research.org.ua and http://sam.zoy.org/pwntcha/ for testing
 // for jpgs, 'transparent' is white
@@ -191,7 +191,7 @@ $bg_images = [
 // PHP 4.2.0+ doesn't need this, but lower versions will
 $seed_func(make_seed());
 
-// how faded should the bg be? (100=totally gone, 0=bright as the day)
+// how faded should the bg be? (100 = totally gone, 0 = bright as the day)
 // to test how much protection the bg noise gives, take a screenshot of the freeCap image
 // and take it into a photo editor. play with contrast and brightness.
 // If you can remove most of the bg, then it's not a good enough percentage
@@ -269,7 +269,7 @@ else
 
 		$red = ImageColorAllocate($im, 255, 0, 0);
 		// depending on how rude you want to be :-)
-		//ImageString($im,5,0,20,"bugger off you spamming bastards!",$red);
+		//ImageString($im, 5, 0, 20, "bugger off you spamming bastards!", $red);
 		ImageString($im, 5, 15, 20, 'service no longer available', $red);
 
 		send_image($im);
@@ -292,7 +292,7 @@ function make_seed()
 
 function rand_color()
 {
-	global $bg_type,$rand_func;
+	global $bg_type, $rand_func;
 
 	if ($bg_type == 3)
 	{

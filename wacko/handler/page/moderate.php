@@ -616,7 +616,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+				'<table class="formation">' .
 					'<tr><th>' . $this->_t('ModerateDeleteConfirm') . '</th></td>' .
 					'<tr><td>' .
 						'<em>' . implode('<br />', $accept_text) . '</em><br />' .
@@ -648,7 +648,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+				'<table class="formation">' .
 					'<tr><th>' . $this->_t('ModerateMovesConfirm') . '</th></td>' .
 					'<tr><td>' .
 						($error == true
@@ -668,7 +668,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if ($accept_action == 'rename')
 		{
 			echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+				'<table class="formation">' .
 					'<tr><th>' . $this->_t('ModerateRenameConfirm') . '</th></td>' .
 					'<tr><td>' .
 						($error == true
@@ -704,7 +704,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+				'<table class="formation">' .
 					'<tr><th>' . $this->_t('ModerateMergeConfirm') . '</th></td>' .
 					'<tr><td>' .
 						($error == true
@@ -724,7 +724,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// print moderation controls...
 		echo '<input type="hidden" name="ids" value="' . implode('-', $set) . '" />' .
 			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((int) $_GET['p']) : '') . '" />' . "\n";
-		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">' .
+		echo '<table>' .
 				'<tr class="lined">' .
 					'<td colspan="5">' .
 						'<input type="submit" name="delete" id="submit_delete" value="' . $this->_t('ModerateDelete') . '" /> '.
@@ -1182,7 +1182,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$accept_text = '&laquo;' . $this->page['title'] . '&raquo;';
 
 			echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+				'<table class="formation">' .
 					'<tr><th>' . $this->_t('ModerateDeleteConfirm') . '</th></td>' .
 					'<tr><td>' .
 						'<em>' . $accept_text . '</em><br />' .
@@ -1214,7 +1214,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-					'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+					'<table class="formation">' .
 						'<tr><th>' . $this->_t('ModerateMoveConfirm') . '</th></td>' .
 						'<tr><td>' .
 							($error == true
@@ -1233,7 +1233,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			else
 			{
 				echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-					'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+					'<table class="formation">' .
 						'<tr><th>' . $this->_t('ModeratePgMoveConfirm') . '</th></td>' .
 						'<tr><td>' .
 							($error == true
@@ -1251,7 +1251,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if ($accept_action == 'topic_rename')
 		{
 			echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+				'<table class="formation">' .
 					'<tr><th>' . $this->_t('ModerateRenameConfirm') . '</th></td>' .
 					'<tr><td>' .
 						($error == true
@@ -1267,7 +1267,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if ($accept_action == 'posts_delete')
 		{
 			echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+				'<table class="formation">' .
 					'<tr><th>' . Ut::perc_replace($this->_t('ModerateComDelConfirm'), count($set), ( count($set) > 1 ? $this->_t('ModerateComments') : $this->_t('ModerateComment') )) . '</th></td>' .
 					'<tr><td>' .
 						($error == true
@@ -1282,7 +1282,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if ($accept_action == 'posts_split')
 		{
 			echo '<input type="hidden" name="' . $accept_action . '" value="1" />' .
-				'<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">' .
+				'<table class="formation">' .
 					'<tr><th>' . ($forum_cluster === true ? $this->_t('ModerateSplitNewName') : $this->_t('ModerateSplitPageName') ) . '</th></td>' .
 					'<tr><td>' .
 						($error == true
@@ -1303,7 +1303,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// print moderation controls...
 		echo '<input type="hidden" name="ids" value="' . implode('-', $set) . '" />' .
 			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((int) $_GET['p']) : '') . '" />' . "\n";
-		echo '<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;">' .
+		echo '<table>' .
 				'<tr class="lined">' .
 					'<td colspan="2">' .
 						'<input type="submit" name="topic_delete" id="submit" value="' . $this->_t('ModerateDeleteTopic') . '" /> '.

@@ -170,7 +170,10 @@ function bb2_summary(&$engine)
 
 	?>
 <table class="formation">
-<caption><?php #echo $argument; ?></caption>
+	<colgroup>
+		<col span="1" style="width: 5%;">
+		<col span="1">
+	</colgroup>
 	<thead>
 		<tr>
 			<th scope="col">Hits</th>
@@ -186,7 +189,7 @@ function bb2_summary(&$engine)
 			foreach ($results as $result)
 			{
 				echo '<tr id="request-' . '' . '" class="lined">' . "\n";
-				echo '<td class="label" style="width:5%;">' . $result['n'] . "</td>\n";
+				echo '<td class="label">' . $result['n'] . "</td>\n";
 				#echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) . "</td>\n";
 
 				if ($argument == 'status_key')
@@ -203,9 +206,7 @@ function bb2_summary(&$engine)
 					$link		= '<a href="' . '?mode=badbehavior&amp;setting=bb2_manage&amp;' . $argument.'=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
 				}
 
-				echo '<td>' .
-						$link;
-				echo "</td>\n";
+				echo '<td>' . $link . "</td>\n";
 				echo "</tr>\n";
 			}
 		}
@@ -910,16 +911,22 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 		<input type="hidden" name="action" value="bb2_options" />
 
 		<table class="formation">
-			<tr class="hl_setting">
-				<td class="label">
-					<strong>Enable Bad Behavior:</strong><br />
-					<small>All other settings can be changed in the config folder.</small>
-				</td>
-				<td style="width:50%;">
-					<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '');?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
+			<colgroup>
+				<col span="1">
+				<col span="1" style="width:50%;">
+			</colgroup>
+			<tbody>
+				<tr class="hl_setting">
+					<th scope="row" class="label">
+						<strong>Enable Bad Behavior:</strong><br />
+						<small>All other settings can be changed in the config folder.</small>
+					</th>
+					<td>
+						<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
+						<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo (!$engine->db->ext_bad_behavior ? ' checked' : '');?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+					</td>
+				</tr>
+			</tbody>
 		</table>
 		<br />
 		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?> &raquo;" /></div>

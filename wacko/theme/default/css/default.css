@@ -87,6 +87,13 @@ input[type=radio] {
 	margin-left: 8px;
 }
 
+input.captcha {
+	width: 273px;
+}
+
+/* hides dummy field for bots and autocomplete */
+input.verify { display: none; }
+
 body {
 	font-family: Verdana;
 	font-size: 13px;
@@ -2334,9 +2341,6 @@ table.forum td {
 	height:	22px;
 	width:	66px;
 }
-
-/* hides dummy field for bots and autocomplete */
-input.verify { display: none; }
 
 /* diff handler ------------- */
 .diffbtn {

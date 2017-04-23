@@ -7406,7 +7406,7 @@ class Wacko
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
 			$out .= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"/></a>' . "<br />\n";
 			// $out .= $inline ? '' : "<br />\n";
-			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6" style="width: 273px;" />';
+			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6"/>';
 			$out .= $inline ? '' : "<br />\n";
 		}
 
