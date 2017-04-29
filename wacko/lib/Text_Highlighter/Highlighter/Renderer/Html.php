@@ -188,10 +188,12 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
         'inlinetags' => 'hl-inlinetags',
         'mlcomment'  => 'hl-mlcomment',
         'number'     => 'hl-number',
+        'prepro'     => 'hl-prepro',
         'quotes'     => 'hl-quotes',
         'reserved'   => 'hl-reserved',
         'special'    => 'hl-special',
         'string'     => 'hl-string',
+        'types'      => 'hl-types',
         'url'        => 'hl-url',
         'var'        => 'hl-var',
 	);
