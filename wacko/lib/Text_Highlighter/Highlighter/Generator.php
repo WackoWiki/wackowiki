@@ -1209,7 +1209,7 @@ CODE;
 				if (isset($block['partClass'])) {
 					$pc[] = $block['partClass'];
 				} else {
-					$pc[] = NULL;
+					$pc[] = null;
 				}
 				if ($block['type'] == 'block') {
 					$kwm = array();

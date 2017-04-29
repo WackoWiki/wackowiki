@@ -168,18 +168,20 @@ class Text_Highlighter_Renderer_Console extends Text_Highlighter_Renderer
 	}
 
 	/**
-	 * Signals that no more tokens are available
-	 *
-	 * @access public
-	 *
-	 */
+	* Signals that no more tokens are available
+	*
+	* @access public
+	*
+	*/
 	function finalize()
 	{
 		if ($this->_numbers) {
 			$nlines = substr_count($this->_output, "\n") + 1;
 			$len = strlen($nlines);
 			$i = 1;
-			$this->_output = preg_replace('~^~em', '" " . str_pad($i++, $len, " ", STR_PAD_LEFT) . ": "', $this->_output);
+			$this->_output = preg_replace_callback('~^~m', function () use (&$i, $len) {
+				return ' ' . str_pad($i++, $len, ' ', STR_PAD_LEFT) . ': ';
+			}, $this->_output);
 		}
 		$this->_output .= HL_CONSOLE_DEFCOLOR . "\n";
 	}
