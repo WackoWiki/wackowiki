@@ -184,7 +184,7 @@ function admin_user_users(&$engine, &$module)
 			}
 
 			$engine->show_message($engine->_t('UsersAdded'), 'success');
-			$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
+			$engine->log(4, "Created a new user ##{$_POST['newname']}##");
 			unset($_POST['create']);
 		}
 	}
@@ -243,7 +243,7 @@ function admin_user_users(&$engine, &$module)
 				"LIMIT 1");
 
 			$engine->show_message($engine->_t('UsersUpdated'), 'success');
-			$engine->log(4, "Updated User //'{$user['user_name']}'//");
+			$engine->log(4, "Updated User ##{$user['user_name']}##");
 		}
 	}
 	// delete user processing
@@ -314,7 +314,7 @@ function admin_user_users(&$engine, &$module)
 
 					$engine->config->invalidate_config_cache();
 					$engine->show_message($engine->_t('UsersDeleted'), 'success');
-					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
+					$engine->log(4, "User ##{$user['user_name']}## removed from the database");
 				}
 			}
 

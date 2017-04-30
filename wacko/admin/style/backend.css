@@ -136,6 +136,9 @@ input[type="checkbox"], input[type="radio"] {
 	margin-right: 10px;
 }
 
+/* hides dummy field for bots and autocomplete */
+input.verify { display: none; }
+
 /*	Layout styles	*/
 
 .center {
