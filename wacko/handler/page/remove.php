@@ -125,16 +125,16 @@ if ($this->is_admin()
 		// remove ENTIRE cluster
 		if ($this->is_admin() && isset($_POST['cluster']))
 		{
-			$this->remove_referrers		($this->tag, true);
-			$this->remove_links			($this->tag, true);
-			$this->remove_categories	($this->tag, true);
-			$this->remove_acls			($this->tag, true);
-			$this->remove_menu_items	($this->tag, true);
-			$this->remove_watches		($this->tag, true);
-			$this->remove_ratings		($this->tag, true);
-			$this->remove_comments		($this->tag, true, $dontkeep);
-			$this->remove_files			($this->tag, true);
-			$this->remove_revisions		($this->tag, true);
+			$this->remove_referrers				($this->tag, true);
+			$this->remove_links					($this->tag, true);
+			$this->remove_category_assigments	($this->tag, true);
+			$this->remove_acls					($this->tag, true);
+			$this->remove_menu_items			($this->tag, true);
+			$this->remove_watches				($this->tag, true);
+			$this->remove_ratings				($this->tag, true);
+			$this->remove_comments				($this->tag, true, $dontkeep);
+			$this->remove_files					($this->tag, true);
+			$this->remove_revisions				($this->tag, true);
 
 			// get list of pages in the cluster
 			if ($list = $this->db->load_all(
