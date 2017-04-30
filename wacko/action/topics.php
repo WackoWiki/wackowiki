@@ -147,7 +147,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	{
 		// display list
 		echo '<div style="clear: both;">' .
-				'<p style="float: left">' . ($create_access ? '<strong><small class="cite"><a href="#newtopic">' . $this->_t('ForumNewTopic') . '</a></small></strong>' : '') . '</p>';
+				'<p>' . ($create_access ? '<strong><small class="cite"><a href="#newtopic">' . $this->_t('ForumNewTopic') . '</a></small></strong>' : '') . '</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 
@@ -201,7 +201,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				$_category = !empty($_category) ? '<br />' . /* $this->_t('Category') . ': '. */$_category : '';
 
 				// print
-				echo '<tbody class="lined"><tr style="background-color: #f9f9f9;">' .
+				echo '<tbody><tr class="topic">' .
 						'<td>' .
 						($user && !$this->has_access('comment', $topic['page_id'])
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
@@ -211,10 +211,12 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 							: '<strong>' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
 						) .
 						'</td>' .
-						'<td style="text-align:center; white-space: nowrap;"><small title="' . ( $admin ? $topic['ip'] : '' ) . '">' .
-							'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']) . '&nbsp;&nbsp;<br />' .
-							'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '&nbsp;&nbsp;'.
-						'</small></td>' .
+						'<td class="t_center" style="white-space: nowrap;">' .
+							'<small title="' . ($admin ? $topic['ip'] : '') . '">' .
+								'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']) . '&nbsp;&nbsp;<br />' .
+								'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '&nbsp;&nbsp;'.
+							'</small>' .
+						'</td>' .
 						'<td class="t_center"><small>' . $topic['comments'] . '</small></td>' .
 						'<td class="t_center"><small>' . $topic['hits'] . '</small></td>' .
 						'<td>&nbsp;&nbsp;&nbsp;</td>' .
@@ -242,7 +244,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 		echo '</table>' . "\n";
 
-		echo '<div class="clearfix"><p style="float: left">' . ($user ? '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>' : '') . '</p>';
+		echo '<div class="clearfix"><p>' . ($user ? '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>' : '') . '</p>';
 		$this->print_pagination($pagination);
 		echo "</div>\n";
 	}

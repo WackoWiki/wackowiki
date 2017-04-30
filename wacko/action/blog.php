@@ -236,7 +236,7 @@ if (!empty($blog_cluster))
 	}
 
 	echo '<div style="width:100%;">
-			<p style="float: left">' . ($access? '<strong><small class="cite"><a href="#newtopic">' . $this->_t('ForumNewTopic') . '</a></small></strong>' : '') . '</p>';
+			<p>' . ($access? '<strong><small class="cite"><a href="#newtopic">' . $this->_t('ForumNewTopic') . '</a></small></strong>' : '') . '</p>';
 	$this->print_pagination($pagination);
 	echo '<br style="clear:both" />
 		</div>' . "\n";
