@@ -29,10 +29,10 @@ hr {
 /* SYNTAX "  *", "  1.", etc. */
 
 ul, ol {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /** Header related ***********************************************************/

@@ -14,7 +14,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		</td>
 		<td class="searchArea" style="text-align:right; vertical-align:bottom;"><?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
 		<input type="search" name="phrase"
-			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0px; margin: 0px; background-color: #FFFFFF;"
+			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0; margin: 0; background-color: #FFFFFF;"
 			size="21" /> <?php echo $this->form_close(); ?></td>
 	</tr>
 </table>

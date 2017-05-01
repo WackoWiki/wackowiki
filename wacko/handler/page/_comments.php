@@ -175,7 +175,7 @@ if ($this->has_access('read'))
 
 				// comment footer
 				/* echo '<div class="comment-tool">' . "\n";
-				echo '<ul class="" style="padding-left: 0px;">' . "\n" .
+				echo '<ul class="" style="padding-left: 0;">' . "\n" .
 						"" .
 						'<li class="voting">
 							<a title="Vote up" class="vote-up  count-0" href="' . $this->href('rate', '', 'vote=1') . '">

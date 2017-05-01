@@ -2,15 +2,15 @@
 /*	Basic tag styles	*/
 
 body {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 h1, h2, h3, h4, h5, h6 {
 	text-align: left;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 p {
-	margin: 0px;
+	margin: 0;
 }
 code {
 	font-family: "Lucida Console", "Courier New", monospace;
@@ -54,7 +54,7 @@ blockquote {
 	color: #6A7387;
 	font-style: italic;
 	padding-left: 10px;
-	margin: 0px;
+	margin: 0;
 	border-left: 2px solid #BABFC7;
 }
 blockquote em {
@@ -73,7 +73,7 @@ dfn:hover {
 /*	List styles	*/
 
 ul, ol {
-	margin: 0px;
+	margin: 0;
 	padding-left: 30px;
 }
 
@@ -91,7 +91,7 @@ a img {
 	color: #333333;
 	text-decoration: underline;
 	vertical-align: middle;
-	border: 0px none;
+	border: 0 none;
 	max-height: 100%;
 	width: auto;
 }
@@ -102,14 +102,14 @@ a img {
 
 table {
 	width: 100%;
-	margin: 0px;
-	padding: 0px;
-	border: 0px none;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
 }
 table td {
-	margin: 0px;
-	padding: 0px;
-	border: 0px none;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
 	vertical-align: top;
 }
 table th {
@@ -194,7 +194,7 @@ td.label, th.label {
 	text-align: right;
 	padding-right: 5px;
 	border-right: 1px solid #CC0000;
-	border-bottom: 0px !important;
+	border-bottom: 0 !important;
 }
 tr.lined td {
 	border-bottom: 1px dotted #BABFC7;
@@ -216,11 +216,11 @@ table.forum th {
 
 #content fieldset {
 	font-size: 12px;
-	padding-top: 0px;
-	padding-bottom: 0px;
+	padding-top: 0;
+	padding-bottom: 0;
 	padding-left: 30px;
-	padding-right: 0px;
-	margin: 0px;
+	padding-right: 0;
+	margin: 0;
 	border: none;
 }
 #content fieldset legend {
@@ -257,7 +257,7 @@ h2, h3, h4, h5, h6 {
 }
 h1 {
 	font-size: 19px;
-	margin-top: 0px;
+	margin-top: 0;
 }
 h2 {
 	font-size: 17px;
@@ -336,7 +336,6 @@ sup, sub {
 	background: #e9ffd9 none repeat scroll 0 0;
 	background-image: url('./../../image/tick.svg');
 	background-repeat: no-repeat;
-	background-attachment: scroll;
 	background-position: 10px 10px;
 	/* border: 1px solid #adde5c; */
 	color: #008000;
@@ -484,7 +483,7 @@ textarea {
 	border-top: 1px dotted #CCCCCC;
 	border-bottom: 1px dotted #CCCCCC;
 	background-repeat: repeat-x;
-	background-position: 1px 0px;
+	background-position: 1px 0;
 	height: 60px;
 }
 	#pane div.left {
@@ -504,7 +503,7 @@ textarea {
 			line-height: 18px;
 			text-align: center;
 			white-space: normal;
-			margin: 0px;
+			margin: 0;
 			padding-top: 13px;
 			width: 153px;
 			height: 60px;
@@ -657,7 +656,7 @@ nav.menu {
 		border: none;
 		margin-top: 1px;
 		margin-bottom: 1px;
-		padding: 0px;
+		padding: 0;
 		height: 1px;
 	}
 	nav.menu img {
@@ -681,7 +680,7 @@ span.tocnumber {
 	margin-right: 0.3em;
 }
 	nav.menu ul, nav.menu ol {
-		padding-left: 0px;
+		padding-left: 0;
 		list-style: none;
 	}
 	nav.menu ul ul a, nav.menu ol ol a {
@@ -875,16 +874,14 @@ div#loginbox {
 }
 
 a.button {
-	appearance: button;
-
 	text-decoration: none;
 	color: initial;
 }
 a.cancel,
 #page a.cancel:hover ,
-a.cancel:actice{
+a.cancel:active{
 	text-decoration: none !important;
-	border-bottom: 0px none!important;
+	border-bottom: 0 none!important;
 }
 
 .btn-approve {

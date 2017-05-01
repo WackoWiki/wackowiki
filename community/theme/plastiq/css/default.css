@@ -12,7 +12,7 @@ table {
 }
 /* cellpadding */
 th, td {
-	padding: 0px;
+	padding: 0;
 }
 h1 {
 	font-size: 22px;
@@ -208,7 +208,7 @@ textarea {
 	background-image: url(./../images/body_field.png);
 	background-repeat: repeat-x;
 	background-position: top left;
-	padding: 0px;
+	padding: 0;
 }
 
 #page-edit form textarea {
@@ -228,7 +228,7 @@ textarea {
 	list-style:none outside none;
 }
 #postText {
-	padding: 0px;
+	padding: 0;
 }
 
 .layout-box {
@@ -287,8 +287,8 @@ p.layout-box span {
 		font-family: Arial, Helvetica, sans-serif;
 		font-weight: bold;
 		white-space: nowrap;
-		margin: 0px;
-		padding: 0px;
+		margin: 0;
+		padding: 0;
 	}
 	#title h1 {
 		font-size: 24px;
@@ -476,8 +476,8 @@ p.layout-box span {
 	#sidepanel a:hover {
 		color: #FFFFFF;
 		text-decoration: none;
-		padding-top: 0px;
-		padding-bottom: 0px;
+		padding-top: 0;
+		padding-bottom: 0;
 		border-top: 1px solid #FFFFFF;
 		border-bottom: 1px solid #FFFFFF;
 	}
@@ -487,12 +487,12 @@ p.layout-box span {
 		background-color: #FFFFFF;
 	}
 	#sidepanel li em a {
-		padding-top: 0px;
-		padding-bottom: 0px;
+		padding-top: 0;
+		padding-bottom: 0;
 		border: 1px solid #FFFFFF;
 	}
 	#sidepanel ul, #sidepanel ol {
-		padding-left: 0px;
+		padding-left: 0;
 		list-style: none;
 	}
 	#sidepanel ul ul a, #sidepanel ol ol a {
@@ -506,7 +506,7 @@ p.layout-box span {
 		border: none;
 		margin-top: 1px;
 		margin-bottom: 1px;
-		padding: 0px;
+		padding: 0;
 		height: 1px;
 	}
 	#bookmarks, #sections {

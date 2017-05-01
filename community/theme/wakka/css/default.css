@@ -14,7 +14,7 @@ table {
 }
 /* cellpadding */
 th, td {
-	padding: 0px;
+	padding: 0;
 }
 label {
 	cursor: pointer;
@@ -54,7 +54,7 @@ a:active {
 }
 
 img {
-	border-width: 0px;
+	border-width: 0;
 	vertical-align: middle;
 	max-width: 100%;
 	height:auto;
@@ -124,7 +124,7 @@ form input.submitinput {
 }
 
 header {
-	padding-top: 0px;
+	padding-top: 0;
 	padding-right: 10px;
 	padding-bottom: 5px;
 	padding-left: 10px; /*line-height: 22px;*/
@@ -133,14 +133,14 @@ header {
 #header-main {
 	clear: both;
 	overflow: hidden;
-	padding: 10px 0px;
+	padding: 10px 0;
 }
 
 /** Styles for the main content in the page. *********************************/
 	/* Default settings */
 main {
 	background-color: #FFFFFF;
-	padding: 9px 0px 0px;
+	padding: 9px 0 0;
 	border-top-width: 1px;
 	border-top-style: solid;
 	border: 1px inset;
@@ -342,8 +342,8 @@ fieldset {
 .searchbar input {
 	border: none;
 	border-bottom: 1px solid #CCCCAA;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 }
 
 .logBtn {
@@ -357,7 +357,7 @@ fieldset {
 	border: 1px solid #666666;
 	color: #333333;
 	font: menu;
-	margin: 0px;
+	margin: 0;
 	padding: 3px 5px;
 	position: absolute;
 	visibility: hidden
@@ -403,11 +403,11 @@ fieldset {
 	color: #ff0000
 }
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
-p.preview {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+p.preview {color:red; font-weight:bold; margin: -1.5em 0 10px 0; padding: 0; border: 0;}
 .preview p span {background:#FFF; padding:0 1px;}
 
 .layout-box {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:#CCCCCC 1px solid;}
-p.layout-box {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+p.layout-box {background: transparent; margin: -1.5em 0 10px 0; padding: 0; border: 0;}
 p.layout-box span {background:#FFF; padding:0 1px;}
 
 .buttonsspacer {
@@ -439,7 +439,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	color: ButtonText;
 	border: 1px solid ButtonFace;
 	padding: 1px;
-	margin: 0px;
+	margin: 0;
 	cursor: pointer;
 }
 
@@ -685,7 +685,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 
 #cssform1 label {
 	float: left;
-	margin-left: 0px; /*
+	margin-left: 0; /*
 	margin-left: -155px; width of left column*/
 	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
@@ -701,7 +701,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 #cssform1 span.site_count {
 	font-weight: normal;
 	float: left;
-	margin-left: 0px; /*
+	margin-left: 0; /*
 	margin-left: -155px; width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
@@ -733,7 +733,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 }
 
 #navigation {
-	padding: 0px 0px 0px 0px; /*overflow:hidden;*/
+	padding: 0 0 0 0; /*overflow:hidden;*/
 }
 
 #menu-user {
@@ -883,7 +883,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 
 #search_results h3 {
 	font-size: 14px;
-	border-bottom-width: 0px;
+	border-bottom-width: 0;
 	border-bottom-style: none;
 }
 
@@ -963,7 +963,7 @@ ul.upload, ul.upload ul {
 }
 .page_tools {
 	float: right;
-	padding: 0px 40px 10px 10px;
+	padding: 0 40px 10px 10px;
 	
 }
 
