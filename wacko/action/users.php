@@ -165,7 +165,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					}
 
 					// send notification
-					$this->notify_pm($user, $subject, $body, $headers);
+					$this->notify_pm($user, $subject, $body, $headers, $msg_id);
 
 					$this->set_message($this->_t('UsersPMSent'));
 					$this->log(4, Ut::perc_replace($this->_t('LogPMSent', SYSTEM_LANG), $this->get_user_name(), $user['user_name']));
