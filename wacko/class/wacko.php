@@ -2462,7 +2462,7 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_pm($user, $subject, $body, $header)
+	function notify_pm($user, $subject, $body, $header, $msg_id)
 	{
 		$save = $this->set_language($user['user_lang'], true);
 
