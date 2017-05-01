@@ -46,7 +46,7 @@ h1 {
 h2 {
 	position: relative;
 	left: 43px;
-	margin: 20px 0px 0px 0px;
+	margin: 20px 0 0 0;
 	padding: 0;
 	font: normal normal 900 14px Arial, Helvetica, sans-serif;
 	color: #333;
@@ -68,7 +68,7 @@ label {
 }
 
 p.notop {
-	margin-top: 0px;
+	margin-top: 0;
 }
 
 ol {
@@ -121,11 +121,11 @@ hr {
    Main Menu
 */
 .menu {
-	left: 0px;
+	left: 0;
 	clear: both;
 	list-style: none;
 	margin: 0 auto;
-	padding: 4px 0px 8px 0px;
+	padding: 4px 0 8px 0;
 	font-weight: 900;
 	color: #CCCCCC;
 	text-align: center;
@@ -134,7 +134,7 @@ hr {
 .menu li { /*  float: left;*/
 	display: inline;
 	width: auto;
-	margin: 0px 2px;
+	margin: 0 2px;
 }
 
 .item {
@@ -156,7 +156,7 @@ hr {
 .label_lang {
 	position: relative;
 	left: 90px;
-	margin: 10px 0px 0px 5px;
+	margin: 10px 0 0 5px;
 }
 
 .warning {
@@ -209,7 +209,7 @@ hr {
 .label_password2 {
 	position: relative;
 	left: 43px;
-	margin: 0px 10px 0px 20px;
+	margin: 0 10px 0 20px;
 	font-size: 12px;
 	font-weight: 900;
 	text-align: right;
@@ -226,7 +226,7 @@ ul.security {
 
 ul.security li {
 	min-height: 23px;
-	padding: 3px 0px 0px 35px;
+	padding: 3px 0 0 35px;
 	background: url(../image/warning.svg) no-repeat scroll 0% 0%;
 }
 
@@ -237,7 +237,7 @@ ul.security li {
 	position: relative;
 	left: 43px;
 	width: 300px;
-	margin-top: 0px;
+	margin-top: 0;
 }
 
 .checkbox_input {
@@ -255,7 +255,7 @@ ul.security li {
 	position: relative;
 	left: 43px;
 	width: 907px;
-	margin: 0px;
+	margin: 0;
 	padding: 10px;
 	background-color: #EEEEEE;
 	overflow-x: scroll;

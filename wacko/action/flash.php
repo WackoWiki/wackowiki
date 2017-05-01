@@ -36,7 +36,6 @@ extract([
 	'name'		=> '',
 	'styleclass' => '',
 	'align'		=> '',
-	'url'		=> '',
 ], EXTR_SKIP);
 
 $url = htmlspecialchars($url, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);

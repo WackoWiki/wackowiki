@@ -83,7 +83,7 @@
 /* common part */
 
 .left, {
-  padding: 0px 0px 60px 0px;
+  padding: 0 0 60px 0;
   width: 185px;
   margin: 0;
 }
@@ -193,6 +193,6 @@
 
 .left div.modulecontent td {
   margin-top: 4px;
-  padding: 2px 0px;
+  padding: 2px 0;
   vertical-align: middle;
 }

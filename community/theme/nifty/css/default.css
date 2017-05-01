@@ -29,7 +29,7 @@ table {
 /* cellpadding */
 th,
 td {
-	padding: 0px;
+	padding: 0;
 }
 
 label {
@@ -109,7 +109,7 @@ body {
 	line-height: 1.3;
 	color: #000000;
 	background-color: #F6F6F6; /* default #fcfcfc */
-	margin: 0px;
+	margin: 0;
 }
 
 #top-background {
@@ -140,7 +140,7 @@ margin: 0 auto;
 /* header ------------------------------------------------- header */
 
 #header {
-	padding: 0px;
+	padding: 0;
 	height: 30px;
 }
 
@@ -317,7 +317,7 @@ float: right;
 	/*margin: 0 .5em 0 -.5em;*/
 	/*padding: 0 .5em 0 .5em; */
 	white-space: nowrap;
-	padding: 0px;
+	padding: 0;
 	/*margin-right: -110px;*/
 	/*position: relative;
 	left:0px;
@@ -603,7 +603,7 @@ float: right;
 	overflow: vissible;
 	clear: both;
 	/*background-color: #F2F2F2;*/
-	padding: 5px 0px 0px;	
+	padding: 5px 0 0;
 	/*border-color: #DDDDDD #CCCCCC #BBBBBB; */
 }
 
@@ -916,7 +916,7 @@ handler functions (and all others) */
 
 #toc-button-wrapper .toc-icon {
 	float: left;
-	padding: 0px 0px 0px 0px;
+	padding: 0 0 0 0;
 	border: 1px solid transparent;
 	border-bottom: 0 none;
 }
@@ -941,7 +941,7 @@ handler functions (and all others) */
 	}
 
 #toc-button-wrapper #toc-list {
-	margin: 0px -300px 0px -7px;
+	margin: 0 -300px 0 -7px;
 	padding: 15px;
 	background-color: #fff;
 
@@ -959,7 +959,7 @@ handler functions (and all others) */
 }
 
 #toc-button-wrapper .toc-icon img {
-	padding: 0px 5px 0px 5px;
+	padding: 0 5px 0 5px;
 	/*margin-top: -4px;*/
 	opacity: .5;
 }
@@ -1045,7 +1045,7 @@ handler functions (and all others) */
 }
 
 #handler li.sublist {
-	padding: 0px 2px 0px 2px;
+	padding: 0 2px 0 2px;
 	border: 1px solid #F2F2F2;
 	margin-left: 2px;
 }
@@ -1575,8 +1575,8 @@ fieldset {
 .searchbar input {
 	border: none;
 	border-bottom: 1px solid #CCCCAA;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 }
 
 .logBtn {
@@ -1590,7 +1590,7 @@ fieldset {
 	border: 1px solid #666666;
 	color: #333333;
 	font: menu;
-	margin: 0px;
+	margin: 0;
 	padding: 3px 5px;
 	position: absolute;
 	visibility: hidden
@@ -1656,7 +1656,7 @@ fieldset {
 p.preview {
 	color: red;
 	font-weight: bold;
-	margin: -1.5em 0px 10px 0px;
+	margin: -1.5em 0 10px 0;
 	padding: 0;
 	border: 0;
 }
@@ -1678,7 +1678,7 @@ p.preview {
 
 p.layout-box {
 	background: transparent;
-	margin: -1.5em 0px 10px 0px;
+	margin: -1.5em 0 10px 0;
 	padding: 0;
 	border: 0;
 }
@@ -1721,7 +1721,7 @@ p.layout-box span {
 	color: ButtonText;
 	border: 1px solid ButtonFace;
 	padding: 1px;
-	margin: 0px;
+	margin: 0;
 	cursor: pointer;
 }
 
@@ -1995,7 +1995,7 @@ p.layout-box span {
 
 #cssform1 label {
 	float: left;
-	margin-left: 0px; /*
+	margin-left: 0; /*
 	margin-left: -155px; width of left column*/
 	width: 350px;
 	/* width of labels. Should be smaller than left column (155px) to create some right margin*/
@@ -2015,7 +2015,7 @@ p.layout-box span {
 #cssform1 span.site_count {
 	font-weight: normal;
 	float: left;
-	margin-left: 0px; /*
+	margin-left: 0; /*
 	margin-left: -155px; width of left column*/
 	width: 150px;
 	/*width of labels. Should be smaller than left column (155px) to create some right margin*/
@@ -2028,7 +2028,7 @@ p.layout-box span {
 .form_tbl td,
 .form_tbl th {
 	padding: 3px;
-	margin: 0px;
+	margin: 0;
 }
 
 .form_right {
@@ -2131,7 +2131,7 @@ th.form_left {
 
 #search_results h3 {
 	font-size: 14px;
-	border-bottom-width: 0px;
+	border-bottom-width: 0;
 	border-bottom-style: none;
 }
 
@@ -2201,7 +2201,7 @@ th.form_left {
 }
 .page_tools {
 	float: right;
-	padding: 0px 40px 10px 10px;
+	padding: 0 40px 10px 10px;
 	
 }
 

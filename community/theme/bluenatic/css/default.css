@@ -59,7 +59,7 @@ table {
 }
 /* cellpadding */
 th, td {
-	padding: 0px;
+	padding: 0;
 }
 /* Table content: Content is always aligned to top */
 td, tr {
@@ -561,7 +561,7 @@ width:0;
 }
 #cssform1 label {
 	float: left;
-	margin-left: 0px; /*
+	margin-left: 0; /*
 	margin-left: -155px; width of left column*/
 	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
@@ -575,7 +575,7 @@ width:0;
 #cssform1 span.site_count {
 	font-weight: normal;
 	float: left;
-	margin-left: 0px; /*
+	margin-left: 0; /*
 	margin-left: -155px; width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }

@@ -2,12 +2,12 @@
 UL, OL { margin-bottom: 3px; }
 LI { margin-bottom: 2px; }
 
-img {border-width: 0px;	vertical-align: middle; max-width: 100%; height:auto; }
+img {border-width: 0;	vertical-align: middle; max-width: 100%; height:auto; }
 
 /* paddings headers */
 FORM, H1, H2, H3, H4, H5 {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 H1 { color:black; font-family: Trebuchet MS; padding-top:25px; padding-bottom:5px ; font-size: 20pt}
 H2 { color:black; font-family: Trebuchet MS; font-size: 20px; padding-top:20px; padding-bottom:5px }
@@ -59,8 +59,8 @@ span.tocnumber {
   padding: 4px;
         vertical-align: top;
 }
-.dtable { width:100%; border: 0px none; border-collapse: collapse; }
-.dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
+.dtable { width:100%; border: 0 none; border-collapse: collapse; }
+.dtable td { vertical-align:top; border-width: 0;  border-color: #999999;  border-style: none;  padding: 4px; }
 .code, .hl-main pre {
   background: #FFFFFF;
   border: 1px #888888 solid;

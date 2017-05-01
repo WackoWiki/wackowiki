@@ -123,8 +123,8 @@ span.tocnumber {
 }
 #postText {
 	height: 300px;
-	padding-left: 0px;
-	padding-right: 0px;
+	padding-left: 0;
+	padding-right: 0;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -139,8 +139,8 @@ span.tocnumber {
 	font-size: 12px;
 	font-weight: 600;
 	padding: 5px;
-	margin-left: 0px;
-	padding-left: 0px;
+	margin-left: 0;
+	padding-left: 0;
 	border: none;
 }
 
@@ -351,12 +351,12 @@ table.dtable th.userhead, table.dtable td.usercell {
 	padding: 3px;
 }
 
-// Diag
+/*	Diag	*/
 
 
 .sqllog {
 	position: relative;
-	//display: inline-block;
+	/*	display: inline-block;	*/
 }
 
 .sqllog .backtrace {

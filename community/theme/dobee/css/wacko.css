@@ -22,7 +22,7 @@ border-width:1px 0 0;
 /* SYNTAX "  *", "  1.", etc. */
 
 /* Lists */
-ul, ol { margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px }
+ul, ol { margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0 }
 
 
 
@@ -32,7 +32,7 @@ ul, ol { margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 
 
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
 
-form { margin: 0px; padding: 0px }
+form { margin: 0; padding: 0 }
 h1 { padding-top: 2px; padding-bottom: 7px;font: 18pt Trebuchet MS}
 h2 { padding-top: 20px; padding-bottom: 5px; font: italic normal 16pt Trebuchet MS }
 h3 { padding-top: 15px; padding-bottom: 5px; font: 14pt Trebuchet MS }
@@ -84,8 +84,8 @@ del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 
 
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
-.dtable { width: 100%; border: 0px none; border-collapse: collapse }
-.dtable td { border-width: 0px; border-color: #999999; border-style: none; padding: 4px; vertical-align: top }
+.dtable { width: 100%; border: 0 none; border-collapse: collapse }
+.dtable td { border-width: 0; border-color: #999999; border-style: none; padding: 4px; vertical-align: top }
 
 /* Inside the table of content: SYNTAX {{toc}} */
 #toc {
@@ -119,10 +119,10 @@ span.tocnumber {
 
 /* Quotes: SYNTAX <[text]> */
 blockquote { border-left: #999 3px solid; padding: 5px }
-blockquote p { padding: 0px; margin: 5px 0px }
+blockquote p { padding: 0; margin: 5px 0 }
 
 /* Paragraphs */
-p.auto { margin: 0px; padding: 0px; font-size: 100% }
+p.auto { margin: 0; padding: 0; font-size: 100% }
 .pmark { color: #cccccc; font: 10px Arial }
 .pmark a:link,
 .pmark a:visited { color:#cccccc }

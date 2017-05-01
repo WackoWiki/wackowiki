@@ -37,7 +37,7 @@
 
 
 label {cursor:pointer; cursor:hand;}
-img {border-width: 0px;	vertical-align: middle;	}
+img {border-width: 0;	vertical-align: middle;	}
 
 
 
@@ -60,7 +60,7 @@ table {
 }
 /* cellpadding */
 th, td {
-	padding: 0px;
+	padding: 0;
 }
 td {vertical-align: top }
 
@@ -143,16 +143,16 @@ div#page {padding: 10px 10px;}
 .print { font: 12px Trebuchet MS }
 
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
-p.preview {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+p.preview {color:red; font-weight:bold; margin: -1.5em 0 10px 0; padding: 0; border: 0;}
 .preview p span {background:#FFF; padding:0 1px;}
 
 .layout-box {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:#CCCCCC 1px solid;}
-p.layout-box {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+p.layout-box {background: transparent; margin: -1.5em 0 10px 0; padding: 0; border: 0;}
 p.layout-box span {background:#FFF; padding:0 1px;}
 
 .buttonsspacer{width:10px;height:1px;}
 
-#tooltip{ border: 1px solid #666666; margin: 0px; padding: 3px 5px; background: #FFFFFF; color: #333333; font: menu; position: absolute; visibility: hidden }
+#tooltip{ border: 1px solid #666666; margin: 0; padding: 3px 5px; background: #FFFFFF; color: #333333; font: menu; position: absolute; visibility: hidden }
 
 /* vseedit toolbar */
 
@@ -176,7 +176,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	background: ButtonFace;
 	color: ButtonText;
 	border: 1px solid ButtonFace;
-	padding: 1px;  margin: 0px;
+	padding: 1px;  margin: 0;
 	cursor: pointer; cursor: hand; 
 }
 .toolbar .btn- img{
@@ -265,7 +265,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 }
 #cssform1 label {
 	float: left;
-	margin-left: 0px; /*
+	margin-left: 0; /*
 	margin-left: -155px; width of left column*/
 	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
@@ -279,7 +279,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 #cssform1 span.site_count {
 	font-weight: normal;
 	float: left;
-	margin-left: 0px; /*
+	margin-left: 0; /*
 	margin-left: -155px; width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }

@@ -10,15 +10,15 @@
 /*	Basic tag styles	*/
 
 body {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 h1, h2, h3, h4, h5, h6 {
 	text-align: left;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 p {
-	margin: 0px;
+	margin: 0;
 }
 code {
 	font-family: "Lucida Console", "Courier New", monospace;
@@ -60,7 +60,7 @@ blockquote {
 	color: #6A7387;
 	font-style: italic;
 	padding-left: 10px;
-	margin: 0px;
+	margin: 0;
 	border-left: 2px solid #BABFC7;
 }
 blockquote em {
@@ -79,7 +79,7 @@ dfn:hover {
 /*	List styles	*/
 
 ul, ol {
-	margin: 0px;
+	margin: 0;
 	padding-left: 30px;
 }
 
@@ -95,7 +95,7 @@ a img {
 	color: #333333;
 	text-decoration: underline;
 	vertical-align: middle;
-	border: 0px none;
+	border: 0 none;
 }
 
 
@@ -104,14 +104,14 @@ a img {
 
 table {
 	width: 100%;
-	margin: 0px;
-	padding: 0px;
-	border: 0px none;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
 }
 table td {
-	margin: 0px;
-	padding: 0px;
-	border: 0px none;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
 }
 table th {
 	color: #FFFFFF;
@@ -207,11 +207,11 @@ table.forum th {
 
 #content fieldset {
 	font-size: 12px;
-	padding-top: 0px;
-	padding-bottom: 0px;
+	padding-top: 0;
+	padding-bottom: 0;
 	padding-left: 30px;
-	padding-right: 0px;
-	margin: 0px;
+	padding-right: 0;
+	margin: 0;
 	border: none;
 }
 #content fieldset legend {

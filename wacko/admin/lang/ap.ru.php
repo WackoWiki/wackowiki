@@ -29,10 +29,6 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'FormSave'					=> 'Save',
-	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> 'Update',
-
 	'FormSave'					=> 'сохранить',
 	'FormReset'					=> 'сбросить',
 	'FormUpdate'				=> 'обновить',

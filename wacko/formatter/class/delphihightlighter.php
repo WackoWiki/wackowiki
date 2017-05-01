@@ -105,7 +105,7 @@ class DelphiHightlighter{
 	function formatspecialtok($tok, $color, $style)
 	{
 		if (empty($color)) return sprintf("%s$tok%s", $style[0], $style[1]);
-		return sprintf("%s<font color=\"%s\">$tok</font>%s", $style[0], $color, $style[1]);
+		return sprintf("%s<span style=\"color: %s\">$tok</span>%s", $style[0], $color, $style[1]);
 	}
 
 	/*******************************************************************/

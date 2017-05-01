@@ -23,10 +23,10 @@ border-width:1px 0 0;
 /* SYNTAX "  *", "  1.", etc. */
 
 ul, ol {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /** Header related ***********************************************************/
@@ -34,8 +34,8 @@ ul, ol {
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
 
 FORM, H1, H2, H3, H4, H5, H6 {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 
 H1 {
@@ -130,8 +130,8 @@ del.diff {
 	vertical-align: top;
 }
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
-.dtable { width:100%; border: 0px none; border-collapse: collapse; }
-.dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
+.dtable { width:100%; border: 0 none; border-collapse: collapse; }
+.dtable td { vertical-align:top; border-width: 0;  border-color: #999999;  border-style: none;  padding: 4px; }
 
 /* Inside the table of content: SYNTAX {{toc}} */
 #toc {
@@ -165,7 +165,7 @@ span.tocnumber {
 
 /* Quotes: SYNTAX <[text]> */
 blockquote {  border-left:#cccccc 3px solid; padding:5px; color: #999999; }
-blockquote p {  padding:0px;  margin: 5px 0px; }
+blockquote p {  padding:0px;  margin: 5px 0; }
 
 /* Paragraphs */
 p.auto { margin:0px; padding:0px; font-size:100%; }
@@ -248,7 +248,7 @@ span.icon{
 	/* ! required for span width -> inline element */
 	display: inline-block;
 	height: 16px;
-	width: 0px; 
+	width: 0;
 	vertical-align: text-bottom; /* middle */
 }
 
