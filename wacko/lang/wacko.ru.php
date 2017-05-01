@@ -897,6 +897,7 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Пожалуйста, укажите канал новостей с параметром url, например, {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Невозможно загрузить или распознать новости',
 	'FeedSource'				=> 'Источник:',
+	'FeedLastItems'				=> 'last %1 items',
 
 	// XML / RSS autodiscovery
 	'RecentChangesTitleXML'		=> ' - последние изменения',
