@@ -894,6 +894,7 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
+	'FeedLastItems'				=> 'last %1 items',
 
 	// XML / RSS autodiscovery
 	'RecentChangesTitleXML'		=> ' - Πρόσφατες αλλαγές',
