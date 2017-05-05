@@ -26,9 +26,9 @@ var WikiEdit = function () {
 	this.enabled = true;
 	this.tab = false;
 	this.enterpressed = false;
-	this.undostack = new Array();
-	this.buttons = new Array();
-}
+	this.undostack = [];
+	this.buttons = [];
+};
 
 WikiEdit.prototype = new ProtoEdit();
 WikiEdit.prototype.constructor = WikiEdit;
@@ -64,7 +64,7 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
 			this.undosels = this.area.selectionStart;
 			this.undosele = this.area.selectionEnd;
 		} catch (e) {
-		};
+		}
 	}
 
 	if (isIE)
@@ -123,13 +123,13 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
 		toolbar = document.getElementById('tb_' + this.id);
 		toolbar.innerHTML = this.createToolbar(1);
 	} catch (e) {
-	};
-}
+	}
+};
 // switch TAB key interception on and off
 
 WikiEdit.prototype.switchTab = function () {
 	this.tab = !this.tab;
-}
+};
 
 // internal functions ----------------------------------------------------
 
@@ -163,7 +163,7 @@ WikiEdit.prototype._LSum = function (Tag, Text, Skip)
 	Text = q[1] + Tag + q[2];
 
 	return Text;
-}
+};
 
 WikiEdit.prototype._RSum = function (Text, Tag)
 {
@@ -172,7 +172,7 @@ WikiEdit.prototype._RSum = function (Text, Tag)
 	Text = q[1] + Tag + q[2];
 	
 	return Text;
-}
+};
 
 WikiEdit.prototype._TSum = function (Text, Tag, Tag2, Skip)
 {
@@ -227,7 +227,7 @@ WikiEdit.prototype._TSum = function (Text, Tag, Tag2, Skip)
 	}
 	
 	return Text;
-}
+};
 
 WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
 {
@@ -317,7 +317,7 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
 	}
 	
 	return r;
-}
+};
 
 WikiEdit.prototype.keyDown = function (e) {
 	if (!this.enabled) return;
@@ -458,7 +458,7 @@ WikiEdit.prototype.keyDown = function (e) {
 				if (weSave != null) weSave();
 			} 
 			catch (e) {
-			};
+			}
 			break;
 		case 2124: //L
 		case 4172:
@@ -481,7 +481,7 @@ WikiEdit.prototype.keyDown = function (e) {
 					if (weSave != null) weSave();
 				} 
 				catch (e) {
-				};
+				}
 			} 
 			else if (e.shiftKey) { //Shift+Enter
 				res = false;
@@ -584,7 +584,7 @@ WikiEdit.prototype.keyDown = function (e) {
 
 		return false;
 	}
-}
+};
 
 WikiEdit.prototype.getDefines = function ()
 {
@@ -605,7 +605,7 @@ WikiEdit.prototype.getDefines = function ()
 		this.undosels = t.selectionStart;
 		this.undosele = t.selectionEnd;
 	}
-}
+};
 
 WikiEdit.prototype.setAreaContent = function (str)
 {
@@ -621,7 +621,7 @@ WikiEdit.prototype.setAreaContent = function (str)
 	t.value = str;
 	t.setSelectionRange(l, l + l1);
 	if (isMZ) t.scrollTop = this.scroll;
-}
+};
 
 WikiEdit.prototype.insTag = function (Tag, Tag2, onNewLine, expand, strip)
 {
@@ -647,7 +647,7 @@ WikiEdit.prototype.insTag = function (Tag, Tag2, onNewLine, expand, strip)
 	this.setAreaContent(str);
 	
 	return true;
-}
+};
 
 WikiEdit.prototype.unindent = function ()
 {
@@ -691,7 +691,7 @@ WikiEdit.prototype.unindent = function ()
 	this.setAreaContent(r);
 	
 	return true;
-}
+};
 
 WikiEdit.prototype.createLink = function (isAlt)
 {
@@ -707,9 +707,9 @@ WikiEdit.prototype.createLink = function (isAlt)
 			sl = prompt(lang.TextForLinking + ':', this.sel);
 			if (sl == null) sl = '';
 			this.sel = lnk + ' ' + sl;
-		};
+	}
 
-		str = this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;
+	str = this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;
 		t.value = str;
 		t.setSelectionRange(this.sel1.length, str.length - this.sel2.length);
 		
@@ -717,7 +717,7 @@ WikiEdit.prototype.createLink = function (isAlt)
 	}
 	
 	return false;
-}
+};
 
 WikiEdit.prototype.help = function ()
 {
@@ -728,4 +728,4 @@ WikiEdit.prototype.help = function ()
 	s += lang.HelpAboutTip;
 
 	alert(s);
-}
+};

@@ -23,7 +23,7 @@ function AutoComplete(wikiedit, handler)
 	this.regexp_LinkLetter = /[[~a-zA-Z¸¨à-ÿÀ-ß\!\-\.\(\[\/0-9]/;
 
 	this.regexp_LinkWhole = /^(([\(\[]){2})?((\!\/)|[A-Z¨À-ß\/])[a-zA-Z¸¨à-ÿÀ-ß\-\.\/0-9]+$/;
-	this.regexp_LinkCamel = /[a-z¸à-ÿ\.0-9][A-Z¨À-ß]/;;
+	this.regexp_LinkCamel = /[a-z¸à-ÿ\.0-9][A-Z¨À-ß]/;
 	this.regexp_LinkStrict = /^([\(\[]){2}.{2,}/;
 	this.regexp_LinkSubpage = /^!\/.{2,}/;
 }
@@ -49,7 +49,7 @@ AutoComplete.prototype.addButton = function ()
 		+ '>&times;</div>'
 		+ '</li>'
 	);
-}
+};
 
 // ------ inplace specific routines ------ ( MSIE ONLY ) ------
 AutoComplete.prototype.selectInplace = function (pos)
@@ -75,7 +75,7 @@ AutoComplete.prototype.selectInplace = function (pos)
 		var ac = document.getElementById(this.id);
 		ac.innerHTML = this.found_pattern;
 	}
-}
+};
 
 AutoComplete.prototype.redrawInplace = function ()
 {
@@ -149,14 +149,14 @@ AutoComplete.prototype.redrawInplace = function ()
 	
 	// step 2. restore exact selection observed before "inplace magic"
 	this.wikiedit.setAreaContent(str);
-}
+};
 
 AutoComplete.prototype.hideInplace = function ()
 {
 	if (!isIE) return;
 	var inplace = document.getElementById(this.id + '_inplace');
 	inplace.style.display = 'none';
-}
+};
 
 // -------------------
 // reset autocomplete -- hide all stuff, reset patterns
@@ -166,7 +166,7 @@ AutoComplete.prototype.reset = function ()
 	this.found_pattern = false;
 	this.magic_mode = false;
 	this.visualState('hidden');
-}
+};
 
 // inserts found pattern right into textarea
 AutoComplete.prototype.insertFound = function (foundPattern)
@@ -212,7 +212,7 @@ AutoComplete.prototype.insertFound = function (foundPattern)
 	
 	this.wikiedit.setAreaContent(str);
 	this.reset();
-}
+};
 
 // keydown handler. Invoked from wikiedit`s keyDown
 // its job is:
@@ -281,7 +281,7 @@ AutoComplete.prototype.keyDown = function (key, shiftKey)
 	}
 	
 	return false;
-}
+};
 
 // trying to recognize partial pattern (known as "request_pattern")
 // 1. checking it for WikiName likeliness
@@ -298,7 +298,7 @@ AutoComplete.prototype.tryComplete = function (magic_button_mode)
 	}
 	
 	this.request_pattern = false;
-	var _pattern = this.getPattern()
+	var _pattern = this.getPattern();
 	var pattern = this.checkPattern(_pattern, magic_button_mode);
 	
 	if (pattern !== false)
@@ -316,7 +316,7 @@ AutoComplete.prototype.tryComplete = function (magic_button_mode)
 	
 	this.visualState('seeking');
 	this.requestPattern(this.request_pattern);
-}
+};
 
 // finishing recognition process after ajax content arrived
 // if success, lightup green else go red with "404"
@@ -331,7 +331,7 @@ AutoComplete.prototype.finishComplete = function (found_pattern, all_patterns)
 	{
 		this.visualState('found');
 	}
-}
+};
 
 // testing given line on WikiName-likeliness
 // some regexps as follows:
@@ -358,7 +358,7 @@ AutoComplete.prototype.checkPattern = function (pattern, magic_button_mode)
 	}
 	
 	return false;
-}
+};
 
 // strict linking found pattern if it is not a wikilink itself
 AutoComplete.prototype.StrictLink = function (pattern)
@@ -367,7 +367,7 @@ AutoComplete.prototype.StrictLink = function (pattern)
 	if (pattern.match(this.regexp_LinkCamel)) return pattern;
 	
 	return '((' + pattern + '))';
-}
+};
 
 // receiving pattern from textarea
 // some "range" magic
@@ -399,7 +399,7 @@ AutoComplete.prototype.getPattern = function ()
 	
 	if (isIE) return Range.text;
 	else return this.wikiedit.area.value.substr(start, end - start);
-}
+};
 
 // visual state routine. Sets some different visual widgets according to given state
 AutoComplete.prototype.visualState = function (to)
@@ -441,7 +441,7 @@ AutoComplete.prototype.visualState = function (to)
 	}
 	
 	this.visual_state = to;
-}
+};
 
 // ajax "XmlHttpRequest" routine.
 // builds request to server-side, 
@@ -461,7 +461,7 @@ AutoComplete.prototype.requestPattern = function (pattern)
 		if (req.readyState == 4)
 		{
 			var items = req.responseText.split('~~~');
-			var _items = new Array();
+			var _items = [];
 			
 			for (var i = 1; i < items.length; i++)
 				_items[i - 1] = items[i];
@@ -469,17 +469,17 @@ AutoComplete.prototype.requestPattern = function (pattern)
 			if (items.length < 2)
 			{
 				_items[0] = false;
-				_items2 = new Array();
+				_items2 = [];
 			} 
 			else _items2 = _items;
 			
 			launchFinishComplete(items[0], _items[0], _items2);
 		}
-	}
+	};
 	
 	req.open('GET', href, true);
 	req.send(null);
-}
+};
 
 // ajax XmlHttpRequest helper routine.
 // gets invoked after ajax response arrived
