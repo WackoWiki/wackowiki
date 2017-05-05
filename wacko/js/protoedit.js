@@ -6,21 +6,21 @@
 
 For license see LICENSE.TXT
 */
-var isDOM = document.getElementById //DOM1 browser 
+var isDOM = document.getElementById; //DOM1 browser
 var isO = isO5 = window.opera && isDOM; //Opera 5+
-var isO6 = isO && window.print //Opera 6+
-var isO7 = isO && document.readyState //Opera 7+
-var isO8 = isO && document.createProcessingInstruction && (new XMLHttpRequest()).getAllResponseHeaders //Opera 8+
-var isIE = document.all && document.all.item && !isO //Microsoft Internet Explorer 4+
-var isIE5 = isIE && isDOM //MSIE 5+
-var isMZ = isDOM && (navigator.appName == 'Netscape')
+var isO6 = isO && window.print; //Opera 6+
+var isO7 = isO && document.readyState; //Opera 7+
+var isO8 = isO && document.createProcessingInstruction && (new XMLHttpRequest()).getAllResponseHeaders; //Opera 8+
+var isIE = document.all && document.all.item && !isO; //Microsoft Internet Explorer 4+
+var isIE5 = isIE && isDOM; //MSIE 5+
+var isMZ = isDOM && (navigator.appName == 'Netscape');
 var ua = navigator.userAgent.toLowerCase();
 var isSafari = (ua.indexOf('safari') != - 1);
 var ProtoEdit = function () {
 	this.enabled = true;
 	this.MZ = isMZ;
-	this.buttons = new Array();
-}
+	this.buttons = [];
+};
 
 ProtoEdit.prototype._init = function (id, rte) {
 	this.id = id; //id - id of textarea	 
@@ -62,20 +62,20 @@ ProtoEdit.prototype._init = function (id, rte) {
 			}
 		}
 	}
-}
+};
 
 ProtoEdit.prototype.enable = function () {
 	this.enabled = true;
-}
+};
 
 ProtoEdit.prototype.disable = function () {
 	this.enabled = false;
-}
+};
 
 ProtoEdit.prototype.KeyDown = function () {
 	if (!this.enabled) return;
 	return true;
-}
+};
 
 ProtoEdit.prototype.insTag = function (Tag, Tag2) {
 	if (isMZ)
@@ -98,7 +98,7 @@ ProtoEdit.prototype.insTag = function (Tag, Tag2) {
 	}
 	
 	return true;
-}
+};
 
 ProtoEdit.prototype.createToolbar = function (id, width, height, readOnly) {
 	wh = '';
@@ -126,17 +126,17 @@ ProtoEdit.prototype.createToolbar = function (id, width, height, readOnly) {
 	html += '</ul>\n';
 	
 	return html;
-}
+};
 
 ProtoEdit.prototype.addButton = function (name, desc, actionParams, actionName) {
 	if (actionName == null) actionName = this.actionName;
 	var i = this.buttons.length;
-	this.buttons[i] = new Object();
+	this.buttons[i] = {};
 	this.buttons[i].name = name;
 	this.buttons[i].desc = desc;
 	this.buttons[i].actionName = actionName;
 	this.buttons[i].actionParams = actionParams;
-}
+};
 
 ProtoEdit.prototype.checkKey = function (k) {
 	if (k == 85 + 4096 || k == 73 + 4096 || k == 49 + 2048 || k == 50 + 2048 || k == 51 + 2048 || k == 52 + 2048 || k == 53 + 2048 || k == 54 + 2048 ||
@@ -147,14 +147,14 @@ ProtoEdit.prototype.checkKey = function (k) {
 		return true;
 	else
 		return false;
-}
+};
 
 ProtoEdit.prototype.addEvent = function (el, evname, func) {
 	if (isIE || isO8)
 		el.attachEvent('on' + evname, func);
 	else
 		el.addEventListener(evname, func, true);
-}
+};
 
 ProtoEdit.prototype.trim = function (s2) {
 	if (typeof s2 != 'string') return s2;
@@ -180,4 +180,4 @@ ProtoEdit.prototype.trim = function (s2) {
 	}
 	
 	return s; // Return the trimmed string back to the user
-}
+};

@@ -2333,8 +2333,8 @@ table.forum td {
 
 /* diff handler ------------- */
 .diffbtn {
-	#background-color: #4CAF50;
-	#color: white;
+	/*background-color: #4CAF50;*/
+	/*color: white;*/
 	padding: 2px 6px;
 	font-size: 12px;
 	border: none;

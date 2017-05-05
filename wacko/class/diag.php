@@ -242,7 +242,7 @@ class Diag
 			+ '.logtype3{color:orange}'
 			+ '.logtype4{color:red}'
 			+ '</style><title>wackowiki debug console</title>'
-			+ '</head><body onLoad="self.focus()"><table>
+			+ '</head><body onLoad="self.focus()"><table>;
 EOD;
 
 			foreach ($log as $one)
