@@ -64,7 +64,7 @@ $lang = [
 'Admin' => 'Όνομα Διαχειριστή',
 'AdminDesc' => 'Εισάγεται το όνομα του διαχειριστή, αυτό πρέπει να είναι ένα <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. WikiAdmin).',
 'Password' => 'Συνθηματικό Διαχειριστή',
-'PasswordDesc' => 'Επέλεξε ένα συνθηματικό για τον διαχειριστή με τουλάχιστον 9 χαρακτήρες.',
+'PasswordDesc' => 'Επέλεξε ένα συνθηματικό για τον διαχειριστή με τουλάχιστον %1 χαρακτήρες.',
 'Password2' => 'Επανέλαβε το συνθηματικό:',
 'Mail' => 'Ηλεκτρονική Διεύθυνση Διαχειριστή',
 'MailDesc' => 'Εισήγαγε την ηλεκτρονική διεύθυνση του διαχειριστή.',
@@ -101,7 +101,7 @@ $lang = [
 */
 'database-config' => 'Ρυθμίσεις Βάσης',
 'DBDriver' => 'Οδηγός',
-'DBDriverDesc' => 'Ο οδηγός της βάσης που θέλετε να χρησιμοποιήσετε. Θα πρέπει να είναι ένας παραδοσιακός οδηγός εάν δεν έχετε PHP5.1 (ή μεγαλύτερη) και εγκατεστημένο <a href="http://gr.php.net/pdo" target="_blank">PDO</a>.',
+'DBDriverDesc' => 'Ο οδηγός της βάσης που θέλετε να χρησιμοποιήσετε. Θα πρέπει να είναι ένας παραδοσιακός οδηγός εάν δεν έχετε εγκατεστημένο <a href="http://gr.php.net/pdo" target="_blank">PDO</a>.',
 'DBCharset' => 'Charset',
 'DBCharsetDesc' => 'The database charset you want to use.',
 'DBEngine' => 'Engine',

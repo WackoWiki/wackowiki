@@ -19,7 +19,7 @@
 		</p>
 
 		<p><label for="confpassword">[ ' _t: ConfirmPassword ' ]:</label>
-		<input type="password" id="confpassword" name="confpassword" size="24" value="[ ' confpassword |e attr ' ]" /></p>
+		<input type="password" id="confpassword" name="confpassword" size="24" minlength="[ ' db: pwd_min_chars ' ]" value="[ ' confpassword |e attr ' ]" /></p>
 
 		<input type="submit" name="preview" value="[ ' _t: CreatePageButton ' ]" />
 	</form>

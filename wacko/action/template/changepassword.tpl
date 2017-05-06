@@ -23,7 +23,7 @@
 				</p>
 				<p>
 					<label for="conf_password">[ ' _t: ConfirmPassword ']:</label>
-					<input type="password" id="conf_password" name="conf_password" size="24" />
+					<input type="password" id="conf_password" name="conf_password" minlength="[ ' db: pwd_min_chars ' ]" size="24" />
 				</p>
 				<p>
 					<input type="submit" class="OkBtn" value="[ ' _t: RegistrationButton ' ]" />

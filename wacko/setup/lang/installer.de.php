@@ -62,7 +62,7 @@ $lang = [
 'Admin' => 'Verwalter Name',
 'AdminDesc' => 'Gib den Benutzernamen des Verwalters an. Sollte ein <a href="https://wackowiki.org/doc/Doc/Deutsch/WikiName" title="Hilfe lesen" target="_blank">WikiName</a> sein (z.B. WikiAdmin).',
 'Password' => 'Verwalter Passwort',
-'PasswordDesc' => 'Wähle ein Passwort für den Verwalter mit mindestens 9 Zeichen.',
+'PasswordDesc' => 'Wähle ein Passwort für den Verwalter mit mindestens %1 Zeichen.',
 'Password2' => 'Wiederhole Passwort:',
 'Mail' => 'E-Mail Adresse des Verwalters',
 'MailDesc' => 'Gib die E-Mail Adresse des Verwalters ein.',
@@ -99,7 +99,7 @@ $lang = [
 */
 'database-config' => 'Datenbank Konfiguration',
 'DBDriver' => 'Treiber',
-'DBDriverDesc' => 'Der Datenbanktreiber der verwendet werden soll. Du musst einen Altsystem (legacy) Treiber wählen falls PHP5.1 (oder größer) und <a href="http://de2.php.net/pdo" target="_blank">PDO</a> nicht zur Verfügung stehen.',
+'DBDriverDesc' => 'Der Datenbanktreiber der verwendet werden soll. Du musst einen Altsystem (legacy) Treiber wählen falls <a href="http://de2.php.net/pdo" target="_blank">PDO</a> nicht zur Verfügung steht.',
 'DBCharset' => 'Zeichensatz',
 'DBCharsetDesc' => 'Der Datenbankzeichensatz, den du verwenden möchtest.',
 'DBEngine' => 'Engine',

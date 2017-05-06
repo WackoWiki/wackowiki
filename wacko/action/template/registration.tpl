@@ -21,7 +21,7 @@
 			=]
 			[ ' autocomplete ' ]
 			<p><label for="user_name">[ ' _t: UserName ' ]:</label>
-			<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="[ ' username | e attr ' ]" autocomplete="off" required autofocus />
+			<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" value="[ ' username | e attr ' ]" autocomplete="off" required autofocus />
 			<br /><small>[ ' only ' ]</small></p>
 
 			<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>
@@ -30,7 +30,7 @@
 			"</p>
 
 			<p><label for="conf_password">[ ' _t:'ConfirmPassword ' ]:</label>
-			<input type="password" id="conf_password" name="conf_password" size="24" value="[ ' confpassword | e attr ' ]" autocomplete="off" /></p>
+			<input type="password" id="conf_password" name="conf_password" size="24"  minlength="[ ' db: pwd_min_chars ' ]" value="[ ' confpassword | e attr ' ]" autocomplete="off" /></p>
 
 			<p>
 			<label for="email">[ ' _t: Email ' ]:</label>

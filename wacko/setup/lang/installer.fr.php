@@ -62,7 +62,7 @@ $lang = [
 'Admin' => 'Nom de l&rsquo;administrateur',
 'AdminDesc' => 'Indiquez le nom de l&rsquo;administrateur, ce doit être un <a href="https://wackowiki.org/doc/Doc/Francophone/NomWiki" title="Voir l&rsquo;aide" target="_blank">Nom Wiki</a> (e.g. WikiAdmin).',
 'Password' => 'Mot de passe de l&rsquo;administrateur',
-'PasswordDesc' => 'Choisissez un mot de passe d&rsquo;au moins 9 caractères pour l&rsquo;administrateur.',
+'PasswordDesc' => 'Choisissez un mot de passe d&rsquo;au moins %1 caractères pour l&rsquo;administrateur.',
 'Password2' => 'Répétez le mot de passe :',
 'Mail' => 'Adresse de messagerie de l&rsquo;administrateur',
 'MailDesc' => 'Indiquez l&rsquo;adresse de messagerie de l&rsquo;administrateur.',
@@ -99,7 +99,7 @@ $lang = [
 */
 'database-config' => 'Configuration de la base de données',
 'DBDriver' => 'Pilote',
-'DBDriverDesc' => 'Choisissez le pilote de base de données que vous souhaitez utiliser. Pour utiliser un pilote PDO vous devez avoir PHP version 5.1 (ou supérieure) et <a href="http://fr.php.net/pdo" target="_blank">PDO</a> installés.',
+'DBDriverDesc' => 'Choisissez le pilote de base de données que vous souhaitez utiliser. Pour utiliser un pilote PDO vous devez avoir <a href="http://fr.php.net/pdo" target="_blank">PDO</a> installés.',
 'DBCharset' => 'Charset',
 'DBCharsetDesc' => 'The database charset you want to use.',
 'DBEngine' => 'Engine',
