@@ -18,7 +18,7 @@
 				=]
 				<p>
 					<label for="new_password">[ ' _t: NewPassword ' ]:</label>
-					<input type="password" id="new_password" name="new_password" size="24" />
+					<input type="password" id="new_password" name="new_password" minlength="[ ' db: pwd_min_chars ' ]" size="24" />
 					[''' complexity ''']
 				</p>
 				<p>
