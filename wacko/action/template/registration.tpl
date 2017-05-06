@@ -25,7 +25,7 @@
 			<br /><small>[ ' only ' ]</small></p>
 
 			<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>
-			<input type="password" id="password" name="password" size="24" value="[ ' password | e attr ' ]" autocomplete="off" required />
+			<input type="password" id="password" name="password" size="24" minlength="[ ' db: pwd_min_chars ' ]" value="[ ' password | e attr ' ]" autocomplete="off" required />
 			[''' complexity ''']
 			"</p>
 

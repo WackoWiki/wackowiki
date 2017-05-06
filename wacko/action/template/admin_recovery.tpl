@@ -13,7 +13,7 @@
 		['' autocomplete '']
 
 		<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>
-		<input type="password" id="recovery_password" name="recovery_password" size="24" autocomplete="new-password" value="[ ' password |e attr ' ]" />
+		<input type="password" id="recovery_password" name="recovery_password" size="24" minlength="[ ' db: pwd_min_chars ' ]" autocomplete="new-password" value="[ ' password |e attr ' ]" />
 
 		['' complexity | '']
 		</p>
