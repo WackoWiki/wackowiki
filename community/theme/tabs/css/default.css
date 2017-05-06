@@ -276,8 +276,9 @@ ul#buttons_1 {
 	background: ButtonFace;
 	color: ButtonText;
 	border: 1px solid ButtonFace;
-	padding: 1px;  margin: 0;
-	cursor: pointer; cursor: hand;
+	padding: 1px;
+	margin: 0;
+	cursor: pointer;
 }
 .toolbar img {
 	width: 20px;

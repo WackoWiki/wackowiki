@@ -87,7 +87,7 @@ div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-
 #credits {clear: right; color: #4C4749; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
-.comment-info, { color: #AAAAAA }
+.comment-info { color: #AAAAAA }
 /* Change summary */
 .editnote {
   color: #555555;
@@ -179,8 +179,9 @@ p.layout-box span {background:#FFF; padding:0 1px;}
   background: ButtonFace;
   color: ButtonText;
   border: 1px solid ButtonFace;
-  padding: 1px;  margin: 0;
-  cursor: pointer; cursor: hand; 
+  padding: 1px;
+	 margin: 0;
+  cursor: pointer;
  }
  .toolbar img{
   width: 20px;

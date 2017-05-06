@@ -33,15 +33,15 @@ AutoComplete.prototype.addButton = function ()
 {
 	var we = this.wikiedit;
 	this.id = 'autocomplete_' + this.wikiedit.id;
-	we.addButton('customhtml', '<li id="' + this.id + '_li" style="display:none"><div style="font:bold 12px Arial; margin:0; padding: 3px 3px 4px 4px;" id="' + this.id + '" '
+	we.addButton('customhtml', '<li id="' + this.id + '_li" style="display:none;"><div style="font:bold 12px Arial; margin:0; padding: 3px 3px 4px 4px;" id="' + this.id + '" '
 		+ ' onmouseover=\'this.className="btn-pressed";\' '
 		+ ' onmouseout=\'this.className="btn-";\' class="btn-" '
 		+ ' onclick="document.getElementById(' + '\'' + we.id + '\')._owner.autocomplete.insertFound();return false;' + '" '
 		+ ' title="Insert Autocomplete">Autocomplete'
 		+ '</div>'
-		+ (isIE ? '<div style="display:none" class="autocomplete-inplace" id="' + this.id + '_inplace"><hr /></div>' : '')
+		+ (isIE ? '<div style="display:none;" class="autocomplete-inplace" id="' + this.id + '_inplace"><hr /></div>' : '')
 		+ '</li>'
-		+ '<li id="' + this.id + '_reset" style="display:none"><div style="font:12px Arial; padding: 3px 3px 4px 4px;" '
+		+ '<li id="' + this.id + '_reset" style="display:none;"><div style="font:12px Arial; padding: 3px 3px 4px 4px;" '
 		+ 'onmouseover=\'this.className="btn-hover";\' '
 		+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
 		+ ' title="Hide Autocomplete" '

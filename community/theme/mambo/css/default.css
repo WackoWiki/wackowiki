@@ -176,8 +176,9 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	background: ButtonFace;
 	color: ButtonText;
 	border: 1px solid ButtonFace;
-	padding: 1px;  margin: 0;
-	cursor: pointer; cursor: hand; 
+	padding: 1px;
+	margin: 0;
+	cursor: pointer;
 }
 .toolbar .btn- img{
 	width: 20px;

@@ -673,7 +673,7 @@ else if (($user = $this->get_user()))
 					'<td>' . $this->get_time_formatted($user['last_visit']) . '</td>' .
 				"</tr>\n" . '<tr>' .
 					'<th scope="row">' . $this->_t('UploadQuota') . '&nbsp;&nbsp;</th>' .
-					'<td title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage . ')</span></div></td>' .
+					'<td title="' . $this->_t('UploadQuotaTip') . '"><div class="meter"><span style="width: 25%;">' . $this->binary_multiples($this->upload_quota($user['user_id']), false, true, true) . ' (' . $percentage . ')</span></div></td>' .
 				"</tr>\n" . '<tr>' .
 					'<th scope="row">' . $this->_t('UsersPages') . "</th>" .
 					'<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages') . '" title="' . $this->_t('RevisionTip') . '">' . (int) $user['total_pages'] . '</a></td>' .

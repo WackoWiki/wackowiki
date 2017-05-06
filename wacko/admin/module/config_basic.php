@@ -239,7 +239,7 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><strong>Allow comments:</strong><br />
 					<small>Enable comments for guest or registered users only or disable them on the entire site.</small></td>
 				<td>
-					<input type="radio" id="enable_comments" name="enable_comments" value="1" <?php echo ($engine->db->enable_comments == 1 ? ' checked' : '');?> /><label for="enable_comments_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="enable_comments_on" name="enable_comments" value="1" <?php echo ($engine->db->enable_comments == 1 ? ' checked' : '');?> /><label for="enable_comments_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="enable_comments_guest" name="enable_comments" value="2" <?php echo ($engine->db->enable_comments == 2 ? ' checked' : '');?> /><label for="enable_comments_guest"><?php echo $engine->_t('MetaRegistered');?></label>
 					<input type="radio" id="enable_comments_off" name="enable_comments" value="0" <?php echo ($engine->db->enable_comments == 0 ? ' checked' : '');?> /><label for="enable_comments_off"><?php echo $engine->_t('Off');?></label>
 				</td>

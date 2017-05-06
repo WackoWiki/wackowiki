@@ -10,21 +10,20 @@ dfn {
 }
 
 /* Strike through text: SYNTAX --text-- */
-del { color: #999999 }
+del { color: #999999; }
 
 del a:visited,
-del a:link { color: #999999 }
+del a:link { color: #999999; }
 
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
-	border-color: #CCCCCC;
-	border-style: solid none none;
-	border-width: 1px 0 0;
+	border: 0 none #CCCCCC;
+	border-top: 1px solid;
 }
 
 /* No line break */
-.nobr {white-space: nowrap}
+.nobr {white-space: nowrap;}
 
 /** List-related *************************************************************/
 
@@ -57,9 +56,9 @@ h1 {
 	color: #235e9a;
 }
 h2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; border-bottom:3px dotted #ddd; color: #204a87;}
-h3 { font-family: Verdana; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:2px dotted #ddd}
-h4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:1px #999999 solid }
-h5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:1px #bbbbbb solid }
+h3 { font-family: Verdana; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:2px dotted #ddd;}
+h4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:1px #999999 solid;}
+h5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:1px #bbbbbb solid;}
 h6 { font-family: Arial;   font-size: 12px; }
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
@@ -72,13 +71,10 @@ h6 { font-family: Arial;   font-size: 12px; }
 
 /* Displays text: "This is an old revision of..." */
 .revisioninfo {
-	background: #f4fbff none repeat scroll 0 0;
 	border: 1px solid #d5d9e6;
 	color: #cc3333;
 	font-weight: bold;
-	background-image: url(./../icon/revisions.svg);
-	background-repeat: no-repeat;
-	background-position: 10px 10px;
+	background: #f4fbff url(./../icon/revisions.svg) no-repeat scroll 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
 	position: relative;
@@ -167,9 +163,7 @@ del.diff {
 .usertable td, 
 .usertable th
 {
-	border-width: 1px;
-	border-color: #CCCCCC;
-	border-style: solid;
+	border: 1px solid #CCCCCC;
 	padding: 4px;
 	vertical-align: top;
 }
@@ -191,9 +185,7 @@ del.diff {
 }
 .dtable td { 
 	vertical-align: top;
-	border-width: 0;
-	border-color: #999999;
-	border-style: none;
+	border: 0 none #999999;
 	padding: 4px;
 }
 
@@ -222,16 +214,15 @@ span.tocnumber {
 
 /* Quoted message on new email */
 
-.email1 {color: #800000}
-.email2 {color: #808000}
-.email-odd {color: #800000}
-.email-even {color: #808000}
+.email1 {color: #800000;}
+.email2 {color: #808000;}
+.email-odd {color: #800000;}
+.email-even {color: #808000;}
 
 /* Quotes: SYNTAX <[text]> */
 blockquote {
-	border-color: #f5f5f5 #f5f5f5 #f5f5f5 #729fcf;
-	border-style: solid;
-	border-width: 1px 1px 1px 3px;
+	border: 1px solid #f5f5f5;
+	border-left: 3px #729fcf;
 	color: #444444;
 	padding: 25px 30px;
 	font-family: sans-serif;
@@ -242,22 +233,22 @@ blockquote p { padding: 0;  margin: 5px 0; }
 
 /* Paragraphs */
 p.auto { margin: 0; padding: 0; font-size: 100%; }
-.pmark { color: #cccccc; font: 10px Arial }
+.pmark { color: #cccccc; font: 10px Arial; }
 
 .pmark a:link,
-.pmark a:visited { color: #cccccc }
+.pmark a:visited { color: #cccccc; }
 
 .pmark a:hover,
-.pmark a:active  { color: #cc3300 }
+.pmark a:active  { color: #cc3300; }
 
 .pright {}
 
 .pright .p- { float:right; padding: 0 0 0 15px;  }
 .pright .pbody- { }
 
-.pleft { padding: 0 }
+.pleft { padding: 0; }
 .pleft .p- { float: left; padding: 0 15px 0 0;  }
-.pleft .pbody- { padding: 0 }
+.pleft .pbody- { padding: 0; }
 
 /** Text highlighter-related *************************************************/
 

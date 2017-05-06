@@ -58,5 +58,5 @@ lang = {
 							' Strg+Umschalt+O - Geordnete Liste\n'+
 							' Strg+= - Kleiner Text\n'+
 							' Strg+Umschalt+Minus - Horizontale Line\n'+
-							' \n',
+							' \n'
 };

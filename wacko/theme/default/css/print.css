@@ -94,9 +94,8 @@ img {
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
-border-color:			#CCCCCC;
-border-style:			solid none none;
-border-width:			1px 0 0;
+	border: 0 none #CCCCCC;
+	border-top: 1px solid;
 }
 
 /** Often used-related (belongs to too many codes) ***************************/
@@ -117,10 +116,8 @@ pre {
 
 /* Quotes: SYNTAX <[text]> */
 blockquote {
-	border-bottom:		solid 1px #000;
-	border-left:		solid 3px #000;
-	border-right:		solid 1px #000;
-	border-top:			solid 1px #000;
+	border: 1px solid #000;
+	border-left-width: 3px;
 	color:				#000;
 	font-family:		"Bitstream Vera Serif", "Times New Roman", sans-serif;
 	padding:			3px;
@@ -280,7 +277,7 @@ h3 {
 }
 h4 {
 	font-size:			1.2em;
-	margin-bottom:		0.3em
+	margin-bottom:		0.3em;
 }
 h5 {
 	font-size:			1.1em;

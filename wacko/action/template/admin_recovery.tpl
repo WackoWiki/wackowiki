@@ -12,14 +12,14 @@
 		['' csrf: generate_hash '']
 		['' autocomplete '']
 
-		<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>
+		<p><label for="recovery_password">[ ' _t: RegistrationPassword ' ]:</label>
 		<input type="password" id="recovery_password" name="recovery_password" size="24" minlength="[ ' db: pwd_min_chars ' ]" autocomplete="new-password" value="[ ' password |e attr ' ]" />
 
 		['' complexity | '']
 		</p>
 
-		<p><label for="confpassword">[ ' _t: ConfirmPassword ' ]:</label>
-		<input type="password" id="confpassword" name="confpassword" size="24" minlength="[ ' db: pwd_min_chars ' ]" value="[ ' confpassword |e attr ' ]" /></p>
+		<p><label for="conf_password">[ ' _t: ConfirmPassword ' ]:</label>
+		<input type="password" id="conf_password" name="confpassword" size="24" minlength="[ ' db: pwd_min_chars ' ]" value="[ ' confpassword |e attr ' ]" /></p>
 
 		<input type="submit" name="preview" value="[ ' _t: CreatePageButton ' ]" />
 	</form>

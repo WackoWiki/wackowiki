@@ -389,7 +389,6 @@ span.tocnumber {
 background:ButtonFace;
 border:1px solid ButtonFace;
 color:ButtonText;
-cursor:hand;
 margin:0;
 padding:1px;
 }
@@ -509,7 +508,7 @@ font-size:12px;
 }
 
 label {
-cursor:hand;
+
 }
 
 p,td,li,select,textarea {

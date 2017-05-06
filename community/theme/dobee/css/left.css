@@ -82,7 +82,7 @@
 
 /* common part */
 
-.left, {
+.left {
   padding: 0 0 60px 0;
   width: 185px;
   margin: 0;
@@ -145,10 +145,8 @@
 }
 
 .navTitle, .navTitle td, .navTitleOver, .navTitleOver td, .left th {
-  cursor: hand;
   cursor: pointer;
   font-weight: bold;
-  -moz-user-select: none;
 }
 
 .navClosed .titleLeft,

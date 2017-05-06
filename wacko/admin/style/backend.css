@@ -152,19 +152,12 @@ input.verify { display: none; }
 }
 .code, .hl-main pre {
 	letter-spacing: normal;
-	word-spacing: normal;		
-	background-color: #EDEDED;
-	background-image: none;
+	word-spacing: normal;
+	background: #EDEDED none;
 	height: auto;
 	border: none;
 }
-.banner {
-	height: 60px;
-	width: 468px;
-}
-.blink {
-	text-decoration: blink;
-}
+
 .info {
 	font-style: italic;
 	padding-top: 15px;
@@ -216,10 +209,7 @@ table.forum th {
 
 #content fieldset {
 	font-size: 12px;
-	padding-top: 0;
-	padding-bottom: 0;
-	padding-left: 30px;
-	padding-right: 0;
+	padding: 0 0 0 30px;
 	margin: 0;
 	border: none;
 }
@@ -283,19 +273,9 @@ sup, sub {
 	text-decoration:underline;
 }
 
-.banner {
-	border: 1px dashed #B00202;
-	position: relative;
-	float: none;
-}
-
 /* show message boxes */
 .error {
-	background: #f8d4cc;
-	background-image: url('./../../image/cross.svg');
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
+	background: #f8d4cc url('./../../image/cross.svg') no-repeat scroll 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
 	color: #CC3333;
@@ -309,11 +289,7 @@ sup, sub {
 }
 
 .info {
-	background: #F4FBFF;
-	background-image: url('./../../image/info.svg');
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
+	background: #F4FBFF url('./../../image/info.svg') no-repeat scroll 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
 	border: 1px solid #D5D9E6;
@@ -333,10 +309,7 @@ sup, sub {
 }
 
 .success {
-	background: #e9ffd9 none repeat scroll 0 0;
-	background-image: url('./../../image/tick.svg');
-	background-repeat: no-repeat;
-	background-position: 10px 10px;
+	background: #e9ffd9 url('./../../image/tick.svg') no-repeat scroll 10px 10px;
 	/* border: 1px solid #adde5c; */
 	color: #008000;
 	font-weight: bold;
@@ -348,29 +321,18 @@ sup, sub {
 	color: red;
 	font-weight: bold;
 	/*background-color: #fbe6f2;*/
-	background-color: #fcfcfc;
-	background-image: url('./../../image/warning.svg');
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
+	background: #fcfcfc url('./../../image/warning.svg') no-repeat scroll 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
-	border-width: 1px;
-	border-top-style: dotted;
+	border: 1px dotted #d893a1;
 	border-right-style: none;
-	border-bottom-style: dotted;
 	border-left-style: none;
-	border-color: #d893a1;
 }
 
 .hint {
 	border: 1px solid #ffee66;
 	width: auto;
-	background-color: #ffffdd;
-	background-image: url('./../../image/warning.svg');
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
+	background: #ffffdd url('./../../image/warning.svg') no-repeat scroll 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
 	position: relative;
@@ -479,11 +441,9 @@ textarea {
 		display: none;
 	}
 #pane {
-	background-color: #F0F4F5;
 	border-top: 1px dotted #CCCCCC;
 	border-bottom: 1px dotted #CCCCCC;
-	background-repeat: repeat-x;
-	background-position: 1px 0;
+	background: #F0F4F5 repeat-x 1px 0;
 	height: 60px;
 }
 	#pane div.left {
@@ -845,15 +805,13 @@ div#loginbox {
 	vertical-align: middle;
 }
 .cross {
-	background-image: url('../../image/cross.svg'), none;
-	background-repeat: no-repeat;
+	background: url('../../image/cross.svg'), none no-repeat;
 	background-size: 22px 22px;
 	height: 22px;
 	width: 22px;
 }
 .tick {
-	background-image: url('../../image/tick.svg'), none;
-	background-repeat: no-repeat;
+	background: url('../../image/tick.svg'), none no-repeat;
 	background-size: 22px 22px;
 	height: 22px;
 	width: 22px;
@@ -885,16 +843,14 @@ a.cancel:active{
 }
 
 .btn-approve {
-	background-image: url("./../../image/user-approve.svg"), none;
-	background-repeat: no-repeat;
+	background: url("./../../image/user-approve.svg"), none no-repeat;
 	background-size: 16px 16px;
 	display: inline-block;
 	height: 16px;
 	width: 16px;
 }
 .btn-deny {
-	background-image: url("./../../image/user-block.svg"), none;
-	background-repeat: no-repeat;
+	background: url("./../../image/user-block.svg"), none no-repeat;
 	background-size: 16px 16px;
 	display: inline-block;
 	height: 16px;

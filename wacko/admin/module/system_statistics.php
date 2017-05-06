@@ -36,7 +36,7 @@ function admin_system_statistics(&$engine, &$module)
 	<br />
 	Database Statistics:<br />
 	<br />
-	<table style="max-width:500px" class="formation">
+	<table style="max-width:500px;" class="formation">
 		<tr>
 			<th style="width:50px;">Table</th>
 			<th class="t_left">Records</th>
@@ -84,9 +84,9 @@ function admin_system_statistics(&$engine, &$module)
 	<br />
 	File system Statistics:<br />
 	<br />
-	<table style="max-width:300px" class="formation">
+	<table style="max-width:300px;" class="formation">
 		<tr>
-			<th style="width:50px;">Folder</th>
+			<th style="">Folder</th>
 			<th class="t_left">Files</th>
 			<th class="t_left">Size</th>
 		</tr>

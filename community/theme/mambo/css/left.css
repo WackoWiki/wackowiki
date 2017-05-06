@@ -107,10 +107,8 @@ a:hover {
 }
 
 .navTitle, .navTitle td, .navTitleOver, .navTitleOver td, .left th {
-  cursor: hand;
   cursor: pointer;
   font-weight: bold;
-  -moz-user-select: none;
 }
 
 .navClosed .titleLeft,
