@@ -119,9 +119,9 @@ for ($count = 0; $count < count($drivers); $count++)
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['DBCharset'];?></h2>
+   <label class="label_top" for="database_charset"><?php echo $lang['DBCharset'];?></label>
    <p class="notop"><?php echo $lang['DBCharsetDesc']; ?></p>
-   <ul>
+
 <?php
 /*
  Each time a new database charset is supported it needs to be added to this list
@@ -142,7 +142,7 @@ $charset[]	= ['greek',		'greek',	'ISO 8859-7 Greek']; // not tested
 
 $detected = 0;
 
-echo '    <select id="config[database_charset]" name="config[database_charset]">';
+echo '    <select id="database_charset" name="config[database_charset]">';
 
 // set default database charset to cp1251 Windows Cyrillic for Russian
 if ($config['is_update'] == false && $config['language'] == 'ru')
@@ -152,13 +152,12 @@ if ($config['is_update'] == false && $config['language'] == 'ru')
 
 for ($count = 0; $count < count($charset); $count++)
 {
-	echo '      <li><option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected' : '') . '>' . $charset[$count][2] . "</option></li>\n";
+	echo '      <option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected' : '') . '>' . $charset[$count][2] . "</option>\n";
 	$detected++;
 }
 
 echo "    </select>\n";
 ?>
-   </ul>
    <br />
    <?php
 if ($config['is_update'] == false)
@@ -205,43 +204,43 @@ else
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['DBHost'];?></h2>
+   <label class="label_top" for="database_host"><?php echo $lang['DBHost'];?></label>
    <p class="notop"><?php echo $lang['DBHostDesc']; ?></p>
-   <input type="text" maxlength="1000" name="config[database_host]" value="<?php echo $config['database_host'] ?>" class="text_input"/>
+   <input type="text" maxlength="1000" id="database_host" name="config[database_host]" value="<?php echo $config['database_host'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['DBPort'];?></h2>
+   <label class="label_top" for="database_port"><?php echo $lang['DBPort'];?></label>
    <p class="notop"><?php echo $lang['DBPortDesc']; ?></p>
-   <input type="text" maxlength="10" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input"/> <br />
+   <input type="text" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input"/> <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['DB'];?></h2>
+   <label class="label_top" for="database_database"><?php echo $lang['DB'];?></label>
    <p class="notop"><?php echo $lang['DBDesc']; ?></p>
-   <input type="text" maxlength="64" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input"/>
+   <input type="text" maxlength="64" id="database_database" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['DBUser'];?></h2>
+   <label class="label_top" for="database_user"><?php echo $lang['DBUser'];?></label>
    <p class="notop"><?php echo $lang['DBUserDesc']; ?></p>
-   <input type="text" maxlength="50" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input"/>
+   <input type="text" maxlength="50" id="database_user" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['DBPassword'];?></h2>
+   <label class="label_top" for="database_password"><?php echo $lang['DBPassword'];?></label>
    <p class="notop"><?php echo $lang['DBPasswordDesc']; ?></p>
-   <input type="password" maxlength="50" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input" />
+   <input type="password" maxlength="50" id="database_password" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['Prefix'];?></h2>
+   <label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
    <p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
-   <input type="text" maxlength="64" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input"/>
+   <input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />

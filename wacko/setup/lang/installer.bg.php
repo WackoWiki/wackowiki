@@ -99,7 +99,7 @@ $lang = [
 */
 'database-config' => 'Настройка на БД',
 'DBDriver' => 'Driver',
-'DBDriverDesc' => 'The database driver you want to use.  You must choose a legacy driver if you do not have PHP5.1 (or greater) and <a href="http://de2.php.net/pdo" target="_blank">PDO</a> installed.',
+'DBDriverDesc' => 'The database driver you want to use.  You must choose a legacy driver if you do not have <a href="http://de2.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
 'DBCharsetDesc' => 'The database charset you want to use.',
 'DBEngine' => 'Engine',

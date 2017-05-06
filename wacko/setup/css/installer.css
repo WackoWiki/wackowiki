@@ -43,7 +43,8 @@ h1 {
 	color: #333;
 }
 
-h2 {
+h2,
+.label_top {
 	position: relative;
 	left: 43px;
 	margin: 20px 0 0 0;
@@ -79,7 +80,7 @@ ul {
 	list-style: none;
 }
 
-ul, ol {
+ul, ol, select {
 	position: relative;
 	left: 43px;
 	margin: 0;

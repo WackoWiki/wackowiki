@@ -62,7 +62,7 @@ $lang = [
 'Admin' => 'Имя администратора',
 'AdminDesc' => 'Введите имя администратора, оно должно быть <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">ВикиИменем</a> (без русских букв) (например, WikiAdmin).',
 'Password' => 'Пароль администратора',
-'PasswordDesc' => 'Введите пароль (не менее девяти символов).',
+'PasswordDesc' => 'Введите пароль (не менее %1 символов).',
 'Password2' => 'Подтверждение пароля:',
 'Mail' => 'Адрес электронной почты администратора',
 'MailDesc' => 'Введите адрес электронной почты администратора.',
@@ -99,7 +99,7 @@ $lang = [
 */
 'database-config' => 'Настройки БД',
 'DBDriver' => 'Драйвер',
-'DBDriverDesc' => 'Драйвер базы данных, который вы хотите использовать. Нужно выбрать legacy-драйвер, если не используется PHP 5.1 (или старше) с установленным <a href="http://de2.php.net/pdo" target="_blank">PDO</a>.',
+'DBDriverDesc' => 'Драйвер базы данных, который вы хотите использовать. Нужно выбрать legacy-драйвер, если не используется установленным <a href="http://de2.php.net/pdo" target="_blank">PDO</a>.',
 'DBCharset' => 'Charset',
 'DBCharsetDesc' => 'The database charset you want to use.',
 'DBEngine' => 'Engine',

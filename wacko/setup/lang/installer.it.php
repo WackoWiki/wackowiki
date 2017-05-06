@@ -62,7 +62,7 @@ $lang = [
 'Admin' => 'Nome dell\'amministratore',
 'AdminDesc' => 'Immetti username dell\'amministratore (dovrà essere un <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>) (e.g. WikiAdmin).',
 'Password' => 'Admin Password',
-'PasswordDesc' => 'Scegli una password per amministratore (almeno 9 caratteri)',
+'PasswordDesc' => 'Scegli una password per amministratore (almeno %1 caratteri)',
 'Password2' => 'Ripeti password:',
 'Mail' => 'Email dell\'amministratore.',
 'MailDesc' => 'Enter the admins email address.',
@@ -99,7 +99,7 @@ $lang = [
 */
 'database-config' => 'Configurazione del database',
 'DBDriver' => 'Driver',
-'DBDriverDesc' => 'The database driver you want to use.  You must choose a legacy driver if you do not have PHP5.1 (or greater) and <a href="http://de2.php.net/pdo" target="_blank">PDO</a> installed.',
+'DBDriverDesc' => 'The database driver you want to use.  You must choose a legacy driver if you do not have <a href="http://de2.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
 'DBCharsetDesc' => 'The database charset you want to use.',
 'DBEngine' => 'Engine',

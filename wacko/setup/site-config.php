@@ -4,7 +4,7 @@
 		{
 			var f = document.forms.form1;
 
-			if (f.elements['password'].value.length<9)
+			if (f.elements['password'].value.length < 10)
 			{
 				alert('<?php echo $lang['ErrorAdminPasswordShort'];?>');
 				return false;
@@ -45,18 +45,18 @@ write_config_hidden_nodes([
 );
 
 ?>
-   <h2><?php echo $lang['Name'];?></h2>
+   <label class="label_top" for="site_name"><?php echo $lang['Name'];?></label>
    <p class="notop"><?php echo $lang['NameDesc'];?></p>
-   <input type="text" maxlength="250" name="config[site_name]" value="<?php echo $config['site_name']; ?>" class="text_input" />
+   <input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['site_name']; ?>" class="text_input" />
    <?php
 if ($config['is_update'] == false)
 {?>
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['Home'];?></h2>
+   <label class="label_top" for="root_page"><?php echo $lang['Home'];?></label>
    <p class="notop"><?php echo $lang['HomeDesc'];?></p>
-   <input type="text" maxlength="250" name="config[root_page]" value="<?php isset ( $lang['HomeDefault'] ) ? print $lang['HomeDefault'] : print $config['root_page'] ; ?>" class="text_input" />
+   <input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php isset ( $lang['HomeDefault'] ) ? print $lang['HomeDefault'] : print $config['root_page'] ; ?>" class="text_input" />
    <br />
 <?php
 }
@@ -71,8 +71,8 @@ else
 
    <h2><?php echo $lang['MultiLang'];?></h2>
    <p class="notop"><?php echo $lang['MultiLangDesc'];?></p>
-   <label class="indented_label" for="wiki_multilanguage"><?php echo $lang['Enabled'];?></label>
-   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? 'checked' : '' ?> class="checkbox_input" />
+   <label class="indented_label" for="multilanguage"><?php echo $lang['Enabled'];?></label>
+   <input type="checkbox" id="multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? 'checked' : '' ?> class="checkbox_input" />
    <br />
 
    <div class="fake_hr_seperator">
@@ -131,25 +131,25 @@ if ($config['is_update'] == false)
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['Admin'];?></h2>
+   <label class="label_top" for="admin_nam"><?php echo $lang['Admin'];?></label>
    <p class="notop"><?php echo $lang['AdminDesc'];?></p>
-   <input type="text" maxlength="80" name="config[admin_name]" value="<?php if (isset($config['admin_name'])) echo $config['admin_name']; ?>" class="text_input" />
+   <input type="text" minlength="<?php echo $config['username_chars_min'] ?>"  maxlength="<?php echo $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php if (isset($config['admin_name'])) echo $config['admin_name']; ?>" class="text_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['Password'];?></h2>
-   <p class="notop"><?php echo $lang['PasswordDesc'];?></p>
-   <input type="password" maxlength="50" name="password" value="" class="text_input" />
+   <label class="label_top" for="password"><?php echo $lang['Password'];?></label>
+   <p class="notop"><?php echo Ut::perc_replace($lang['PasswordDesc'], $config['pwd_min_chars']);?></p>
+   <input type="password" minlength="<?php echo $config['pwd_min_chars'] ?>" id="password" name="password" value="" class="text_input" />
    <label class="label_password2" for="wiki_admin_password2"><?php echo $lang['Password2'];?></label>
-   <input type="password" maxlength="50" id="wiki_admin_password2" name="password2" value="" class="text_input" />
+   <input type="password" minlength="<?php echo $config['pwd_min_chars'] ?>" id="wiki_admin_password2" name="password2" value="" class="text_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <h2><?php echo $lang['Mail'];?></h2>
+   <label class="label_top" for="admin_email"><?php echo $lang['Mail'];?></label>
    <p class="notop"><?php echo $lang['MailDesc'];?></p>
-   <input type="email" maxlength="320" name="config[admin_email]" value="<?php if (isset($config['admin_email'])) echo $config['admin_email']; ?>" class="text_input" />
+   <input type="email" maxlength="320" id="admin_email" name="config[admin_email]" value="<?php if (isset($config['admin_email'])) echo $config['admin_email']; ?>" class="text_input" />
    <br />
 <?php
 }
@@ -165,9 +165,9 @@ else
 <?php
 
 ?>
-   <h2><?php echo $lang['Base'];?></h2>
+   <label class="label_top" for="base_url"><?php echo $lang['Base'];?></label>
    <p class="notop"><?php echo $lang['BaseDesc'];?></p>
-   <input type="text" maxlength="1000" name="config[base_url]" value="<?php echo $config['base_url'] ?>" class="text_input"/>
+   <input type="text" maxlength="1000" id="base_url" name="config[base_url]" value="<?php echo $config['base_url'] ?>" class="text_input"/>
    <br />
    <div class="fake_hr_seperator">
       <hr />
