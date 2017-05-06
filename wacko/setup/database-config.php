@@ -144,6 +144,12 @@ $detected = 0;
 
 echo '    <select id="config[database_charset]" name="config[database_charset]">';
 
+// set default database charset to cp1251 Windows Cyrillic for Russian
+if ($config['is_update'] == false && $config['language'] == 'ru')
+{
+	$config['database_charset'] = 'cp1251';
+}
+
 for ($count = 0; $count < count($charset); $count++)
 {
 	echo '      <li><option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected' : '') . '>' . $charset[$count][2] . "</option></li>\n";
