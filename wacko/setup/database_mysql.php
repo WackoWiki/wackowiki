@@ -56,6 +56,7 @@ $table_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
 					"category_id INT(10) unsigned NOT NULL DEFAULT 0," .
 					"object_type_id INT(10) unsigned NOT NULL DEFAULT 0," .
 					"object_id INT(10) unsigned NOT NULL DEFAULT 0," .
+					"PRIMARY KEY (assignment_id)," .
 					"KEY idx_object_type_id (object_type_id)," .
 					"UNIQUE KEY idx_assignment (category_id, object_type_id, object_id)" .
 				") {$engine} COMMENT='' {$charset}";
