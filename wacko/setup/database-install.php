@@ -358,7 +358,7 @@ if (!$fatal_error)
 else
 {
 ?>
-<input type="submit" value="<?php echo $lang['Back'];?>" class="next" onclick="javascript: history.go(-1);" />
+<input type="submit" value="<?php echo $lang['Back'];?>" class="next" onclick="history.go(-1);" />
 <input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
 <?php
 }

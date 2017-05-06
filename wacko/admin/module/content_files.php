@@ -246,7 +246,7 @@ function admin_content_files(&$engine, &$module)
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td style="font-size:11px">
+			<td>
 				<div>
 				<input type="radio" name="_to" disabled checked value="global" id="toUploadGlobalDisabled" />
 				<input type="hidden" name="to" value="global" />
@@ -261,7 +261,7 @@ function admin_content_files(&$engine, &$module)
 		<tr>
 			<td>&nbsp;</td>
 			<td>
-				<div style="padding-top:5px">
+				<div style="padding-top:5px;">
 				<input type="submit" id="submit" value="<?php echo $engine->_t('UploadButtonText'); ?>" />
 				</div>
 			</td>

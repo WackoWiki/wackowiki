@@ -1,5 +1,5 @@
-header h1 { font-size: 60%; font-family: verdana }
-p { margin: 0 0 3px 0; padding:0px }
+header h1 { font-size: 60%; font-family: verdana; }
+p { margin: 0 0 3px 0; padding: 0; }
 img { border-width: 0; vertical-align: middle; max-width: 100%; height: auto; }
 
 /* for include */
@@ -8,12 +8,11 @@ img { border-width: 0; vertical-align: middle; max-width: 100%; height: auto; }
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
-	border-color: #CCCCCC;
-	border-style: solid none none;
-	border-width: 1px 0 0;
+	border: 0 none #CCCCCC;
+	border-top: 1px solid;
 }
 
-.nobr {white-space: nowrap}
+.nobr {white-space: nowrap;}
 
-div.action           { margin: 2px; background: #F6F7ED }
+div.action           { margin: 2px; background: #F6F7ED; }
 div.action-content   { padding: 10px 10px 25px 10px; } 

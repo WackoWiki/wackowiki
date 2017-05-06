@@ -58,6 +58,6 @@ lang = {
 							' Ctrl+Shift+O - Ordered List\n'+
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
-							' \n',
+							' \n'
 
 };

@@ -238,7 +238,7 @@ if (!empty($blog_cluster))
 	echo '<div style="width:100%;">
 			<p>' . ($access? '<strong><small class="cite"><a href="#newtopic">' . $this->_t('ForumNewTopic') . '</a></small></strong>' : '') . '</p>';
 	$this->print_pagination($pagination);
-	echo '<br style="clear:both" />
+	echo '<br style="clear:both;" />
 		</div>' . "\n";
 
 	// displaying articles

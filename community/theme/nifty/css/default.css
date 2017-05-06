@@ -216,7 +216,7 @@ float: right;
 
 #menu-user {
 	margin: 0 auto 0;
-	overflow: vissible;
+	overflow: visible;
 	float: left;
 	text-align: left;
 	position: relative;
@@ -255,9 +255,7 @@ float: right;
 	
 	border: 1px solid #BBBBBB;
 	border-bottom: 0 none;
-	
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+
 	border-radius: 5px;
 	}
 
@@ -440,8 +438,6 @@ float: right;
 	}
 	
 .border-box-top-right {
-	-moz-border-radius: 0 20px 0 0;
-	-webkit-border-radius: 0 20px 0 0;
 	border-radius: 0 20px 0 0;
 	
 	background-color: #F6F6F6;
@@ -466,8 +462,6 @@ float: right;
 	}
 
 .border-box-top-left {
-	-moz-border-radius: 20px 0 0 0;
-	-webkit-border-radius: 20px 0 0 0;
 	border-radius: 20px 0 0 0;
 	
 	background-color: #F6F6F6;
@@ -600,7 +594,7 @@ float: right;
 /* content wrapper ------------------------------------------------- content */
 
 #content {
-	overflow: vissible;
+	overflow: visible;
 	clear: both;
 	/*background-color: #F2F2F2;*/
 	padding: 5px 0 0;
@@ -895,7 +889,7 @@ handler functions (and all others) */
 
 #toc-button-wrapper {
 	float:left;
-	overflow: vissible;
+	overflow: visible;
 	position: relative;
 	/*margin-left: 30px;*/
 	/*min-width: 200px*/

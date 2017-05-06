@@ -239,7 +239,7 @@ code {
 }
 #page .outerlink:hover,
 .preview .outerlink:hover {
-	text-decoration:	underlined;
+	text-decoration:	underline;
 }
 #page .outerlink img,
 .preview .outerlink img {

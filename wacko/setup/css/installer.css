@@ -14,7 +14,7 @@ body {
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	background: #FFFFFF no-repeat scroll 0% 0%;
+	background: #FFFFFF no-repeat scroll 0 0;
 	font: normal normal normal 12px Arial, Helvetica, sans-serif;
 	color: #333333;
 	text-align: center;
@@ -163,11 +163,7 @@ hr {
 .warning {
 	border: 1px solid #ffee66;
 	width: auto;
-	background-color: #ffffdd;
-	background-image: url('../image/important.svg');
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
+	background: #ffffdd url('../image/important.svg') no-repeat scroll 10px 10px;
 	margin: 10px 43px;
 	padding: 10px 10px 10px 40px;
 	position: relative;
@@ -181,15 +177,13 @@ hr {
 }
 
 .cross {
-	background-image: url('../image/cross.svg'), none;
-	background-repeat: no-repeat;
+	background: url('../image/cross.svg'), none no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 }
 .tick {
-	background-image: url('../image/tick.svg'), none;
-	background-repeat: no-repeat;
+	background: url('../image/tick.svg'), none no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
@@ -228,7 +222,7 @@ ul.security {
 ul.security li {
 	min-height: 23px;
 	padding: 3px 0 0 35px;
-	background: url(../image/warning.svg) no-repeat scroll 0% 0%;
+	background: url(../image/warning.svg) no-repeat scroll 0 0;
 }
 
 /*

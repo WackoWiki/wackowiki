@@ -5134,8 +5134,6 @@ class Wacko
 
 			return (int) $count['comments'];
 		}
-
-		return false;
 	}
 
 	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0)

@@ -291,7 +291,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 					?>
 				</span>
 			</div>
-			<br style="clear: right" />
+			<br style="clear: right;" />
 			<div id="sections">
 				<?php
 				echo '<a href="' . rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>';

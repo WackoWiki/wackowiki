@@ -133,7 +133,7 @@ if ($this->can_upload(true) === true)
 	<tr>
 		<td>&nbsp;</td>
 		<td>
-			<div style="padding-top: 5px">
+			<div style="padding-top: 5px;">
 				<input type="submit" value="<?php echo $this->_t('UploadButton'); ?>" />
 			</div>
 		</td>
