@@ -87,7 +87,7 @@ $table_file = "CREATE TABLE {$pref}file (" .
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0'," .
 					"PRIMARY KEY (file_id)," .
-					"KEY idx_page_id (page_id, file_name)," .
+					"UNIQUE idx_page_id (page_id, file_name)," .
 					"KEY idx_page_id_2 (page_id, uploaded_dt)," .
 					"KEY idx_deleted (deleted)," .
 					"KEY idx_user_id (user_id)" .
