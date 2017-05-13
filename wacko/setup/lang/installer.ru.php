@@ -97,7 +97,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Настройки БД',
+'database-config' => 'Настройки базы данных',
 'DBDriver' => 'Драйвер',
 'DBDriverDesc' => 'Драйвер базы данных, который вы хотите использовать. Нужно выбрать legacy-драйвер, если не используется установленным <a href="http://de2.php.net/pdo" target="_blank">PDO</a>.',
 'DBCharset' => 'Charset',
