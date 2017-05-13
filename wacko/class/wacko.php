@@ -192,21 +192,8 @@ class Wacko
 	*
 	* @return array File description array
 	*/
-	function check_file_exists($file_name, $unwrapped_tag = '', $deleted = 0)
+	function check_file_exists($file_name, $page_id = 0, $deleted = 0)
 	{
-		if (!$unwrapped_tag)
-		{
-			$page_id = 0;
-		}
-		else if (($page = $this->load_page($unwrapped_tag, 0, '', LOAD_CACHE, LOAD_META)))
-		{
-			$page_id = $page['page_id'];
-		}
-		else
-		{
-			return false;
-		}
-
 		$file = &$this->files_cache[$page_id][$file_name];
 
 		if (empty($file))
@@ -222,7 +209,14 @@ class Wacko
 				"LIMIT 1");
 		}
 
-		return $file;
+		if (empty($file))
+		{
+			return false;
+		}
+		else
+		{
+			return $file;
+		}
 	}
 
 	static function get_file_extension($file_name)
@@ -3325,7 +3319,7 @@ class Wacko
 				#echo '####1: file:some.zip<br />';
 				$file_name = $_file_name;
 
-				if ($file_data = $this->check_file_exists($file_name, $page_tag))
+				if ($file_data = $this->check_file_exists($file_name, 0))
 				{
 					$url = $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 					$have_global = true;
@@ -3342,7 +3336,7 @@ class Wacko
 				#echo '####2: file:/some.zip <br />' . $arr[1] . '####<br />';
 				$file_name = $arr[1];
 
-				if ($file_data = $this->check_file_exists($file_name, $page_tag))
+				if ($file_data = $this->check_file_exists($file_name, 0))
 				{
 					$url = $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
@@ -3381,7 +3375,7 @@ class Wacko
 				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
 				$page_id	= $this->get_page_id($page_tag); // TODO: supertag won't match tag! in cache
 
-				if ($file_data = $this->check_file_exists($file_name, $page_tag))
+				if ($file_data = $this->check_file_exists($file_name, $page_id))
 				{
 					$url = $this->href('file', trim($page_tag, '/'), 'get=' . $file_name);
 
