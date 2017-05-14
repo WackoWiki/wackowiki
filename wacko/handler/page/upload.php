@@ -126,57 +126,74 @@ if (isset($_POST['upload']) & $can_upload)
 			$name	= str_replace('@', '_', $name);
 
 			// here would be place for translit
-			$name = $this->format($name, 'translit');
+			$t_name = $this->format($name, 'translit');
+
+
 
 			// 1.5. +write @page_id@ to name
 			if (isset($_POST['to']) && $_POST['to'] != 'global')
 			{
-				$name = '@' . $this->page['page_id'] . '@' . $name;
+				$is_global	= 0;
+				$fs_name	= '@' . $this->page['page_id'] . '@' . $t_name;
 			}
 			else
 			{
-				$is_global = 1;
+				$is_global	= 1;
+				$fs_name	= $t_name;
 			}
 
 			if ($is_global)
 			{
-				$dir = UPLOAD_GLOBAL_DIR . '/';
+				$page_id	= 0;
+				$dir		= UPLOAD_GLOBAL_DIR . '/';
 			}
 			else
 			{
-				$dir = UPLOAD_PER_PAGE_DIR . '/';
+				$page_id	= $this->page['page_id'];
+				$dir		= UPLOAD_PER_PAGE_DIR . '/';
 			}
 
-			// TODO: file must be in files table!
-			$replace = (isset($_POST['file_overwrite'])? true : false);
+			// file must be in file table!
+			// TODO: check against file owner, Admin is always allowed
+			// + check for file / page owner
+			if (isset($_POST['file_overwrite'])
+				&& $this->check_file_record($t_name . '.' . $ext, $page_id))
+			{
+				$replace = true;
+			}
+			else
+			{
+				$replace = false;
+			}
 
 			if (is_writable($dir))
 			{
-				$_name	= $name;
-				$count	= 1;
+				$new_fs_name	= $fs_name;
+				$count			= 1;
 
-				if (file_exists($dir . $name . '.' . $ext) && $replace)
+				if (file_exists($dir . $fs_name . '.' . $ext)
+					&& $replace)
 				{
-					// TODO: check against file owner, Admin is always allowed
-					// + check for file / page owner
+
+					// TODO:
 					// + do file revision (add config option)
 				}
 				else
 				{
-					while (file_exists($dir . $name . '.' . $ext))
+					while (file_exists($dir . $fs_name . '.' . $ext))
 					{
-						if ($name === $_name)
+						if ($fs_name === $new_fs_name)
 						{
-							$name = $_name . $count;
+							$fs_name = $new_fs_name . $count;
 						}
 						else
 						{
-							$name = $_name . (++$count);
+							$fs_name = $new_fs_name . (++$count);
 						}
 					}
 				}
 
-				$result_name	= $name . '.' . $ext;
+				$result_name	= $fs_name . '.' . $ext;
 				$file_size		= $_FILES['file']['size'];
 
 				// 1.6. check filesize
@@ -237,6 +254,7 @@ if (isset($_POST['upload']) & $can_upload)
 						$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
 						$uploaded_dt	= $this->db->date();
 
+						// TODO: replace option: keep old data if new entry is empty
 						$description	= substr($_POST['file_description'], 0, 250);
 						$description	= $clean_text((string) $description);
 						# $caption		= $clean_text((string) $_POST['caption']);
