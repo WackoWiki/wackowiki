@@ -256,7 +256,7 @@ if ($can_view)
 					$desc . '<br /><br />' .
 
 					($file['picture_w']
-						? $file['picture_w'] . ' × ' . $file['picture_h'] . 'px<br />'
+						? $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px<br />'
 						: $hits . '<br />'
 					) .
 

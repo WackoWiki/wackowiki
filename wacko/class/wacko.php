@@ -182,17 +182,17 @@ class Wacko
 	// FILE FUNCTIONS
 
 	/**
-	* Check if file with filename exists. Check only DB entry,
+	* Check if file with file name exists. Checks only DB entry,
 	* not file in FS
 	*
-	* @param string $file_name Filename
+	* @param string $file_name File name
 	* @param string $unwrapped_tag Optional. Unwrapped supertag. If
 	* not set, then check if file exists in global space
 	* @param boolean $deleted
 	*
 	* @return array File description array
 	*/
-	function check_file_exists($file_name, $page_id = 0, $deleted = 0)
+	function check_file_record($file_name, $page_id = 0, $deleted = 0)
 	{
 		$file = &$this->files_cache[$page_id][$file_name];
 
@@ -3319,7 +3319,7 @@ class Wacko
 				#echo '####1: file:some.zip<br />';
 				$file_name = $_file_name;
 
-				if ($file_data = $this->check_file_exists($file_name, 0))
+				if ($file_data = $this->check_file_record($file_name, 0))
 				{
 					$url = $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 					$have_global = true;
@@ -3336,7 +3336,7 @@ class Wacko
 				#echo '####2: file:/some.zip <br />' . $arr[1] . '####<br />';
 				$file_name = $arr[1];
 
-				if ($file_data = $this->check_file_exists($file_name, 0))
+				if ($file_data = $this->check_file_record($file_name, 0))
 				{
 					$url = $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
@@ -3375,7 +3375,7 @@ class Wacko
 				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
 				$page_id	= $this->get_page_id($page_tag); // TODO: supertag won't match tag! in cache
 
-				if ($file_data = $this->check_file_exists($file_name, $page_id))
+				if ($file_data = $this->check_file_record($file_name, $page_id))
 				{
 					$url = $this->href('file', trim($page_tag, '/'), 'get=' . $file_name);
 

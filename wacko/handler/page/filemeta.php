@@ -287,7 +287,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					{ ?>
 						<tr>
 							<th><?php echo $this->_t('FileDimension'); ?>:</th>
-							<td><?php echo $file['picture_w'] . ' × ' . $file['picture_h'] . 'px'; ?></td>
+							<td><?php echo $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px'; ?></td>
 						</tr>
 <?php
 					} ?>
