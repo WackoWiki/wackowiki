@@ -77,7 +77,7 @@ $purge_time = (($t = $this->db->referrers_purge_time)
 if ($mode)
 {
 	$title = Ut::perc_replace($this->_t('ExternalPagesGlobal'),
-		$this->href('referrers_sites', '', 'o=' . $mode),
+		$this->href('referrers_sites', '', ['o' => $mode]),
 		$purge_time);
 }
 

@@ -17,7 +17,7 @@ if (!isset($text))		$text	= '';
 
 if (!$page) {$page = '';}
 {
-	$output .= $this->href('', $page, 'show_comments=1#header-comments') . "\">";
+	$output .= $this->href('', $page, ['show_comments' => 1, '#' => 'header-comments']) . '">';
 }
 
 if (!$text)
@@ -29,6 +29,6 @@ else
 	$output .= $text;
 }
 
-echo "<a href=\"" . ($output) . "</a>\n";
+echo '<a href="' . ($output) . "</a>\n";
 
 ?>

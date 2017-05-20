@@ -171,7 +171,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						$comment['topic_title'] = $this->do_unicode_entities($comment['topic_title'], $comment['topic_lang']);
 					}
 
-					echo '<small><a href="' . $this->href('', $comment['comment_on'], 'p=last') . '#' . $comment['tag'] . '">' . $comment['topic_title'] . '</a><br />' .
+					echo '<small><a href="' . $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'] . '">' . $comment['topic_title'] . '</a><br />' .
 						$this->user_link($comment['user_name']) .
 						' (' . $this->get_time_formatted($comment['created']) . ')</small>';
 				}

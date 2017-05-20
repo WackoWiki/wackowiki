@@ -498,7 +498,7 @@ else if (($user = $this->get_user()))
 			echo '<div class="hint"><strong class="cite">' .
 				$this->_t('EmailNotVerified') . '</strong><br />' .
 				'<small>' . $this->_t('EmailNotVerifiedDesc') .
-				'<strong><a href="' . $this->href('', '', 'resend_code=1') . '">' . $this->_t('HereLink') . '</a></strong>.
+				'<strong><a href="' . $this->href('', '', ['resend_code' => 1]) . '">' . $this->_t('HereLink') . '</a></strong>.
 				</small></div>';
 		}
 ?></td>
@@ -642,7 +642,7 @@ else if (($user = $this->get_user()))
 		<td>
 			<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('UpdateSettingsButton'); ?>" />
 			&nbsp;
-			<a href="<?php echo $this->href('', '', 'action=logout');?>" class="btn_link"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->_t('LogoutButton'); ?>" /></a>
+			<a href="<?php echo $this->href('', '', ['action' => 'logout']);?>" class="btn_link"><input type="button" class="CancelBtn" id="logout" name="logout" value="<?php echo $this->_t('LogoutButton'); ?>" /></a>
 		</td>
 	</tr>
 	</tbody>

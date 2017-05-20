@@ -37,11 +37,11 @@ else
 	echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ' . $this->_t('ViewReferrersPage') . "</h3>\n";
 	echo '<ul class="menu">
 			<li class="active">' . $this->_t('ViewReferrersPage') . '</li>
-			<li><a href="' . $this->href('referrers_sites', '', 'o=global') . '">' .  $this->_t('ViewReferrersGlobal') . "</a></li>
+			<li><a href="' . $this->href('referrers_sites', '', ['o' => 'global']) . '">' .  $this->_t('ViewReferrersGlobal') . "</a></li>
 		</ul><br /><br />\n";
 }
 
-$href = $this->href('referrers', '', 'o=' . $mode);
+$href = $this->href('referrers', '', ['o' => $mode]);
 if ($mode == 'global')
 {
 	$title		= Ut::perc_replace($this->_t('DomainsSitesPagesGlobal'), $href);

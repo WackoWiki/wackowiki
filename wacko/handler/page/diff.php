@@ -104,8 +104,10 @@ if ($page_a && $page_b
 			}
 			else
 			{
-				$params	= ($a != $rev)? 'a=' . $r['revision_id'] . '&amp;b=' . $b : 'a=' . $a . '&amp;b=' . $r['revision_id'];
-				$href	= $this->href('diff', '', $params . '&amp;diffmode=' . $diffmode);
+				$params	= ($a != $rev)
+							? ['a' => $r['revision_id'],	'b' => $b]
+							: ['a' => $a,					'b' => $r['revision_id']];
+				$href	= $this->href('diff', '', $params + ['diffmode' => $diffmode]);
 			}
 
 			$out .= '<a href="' . $href . '">';
@@ -132,7 +134,7 @@ if ($page_a && $page_b
 	// print navigation
 	echo '<ul class="menu">';
 
-	$params = 'a=' . $a . '&amp;b=' . $b . '&amp;diffmode=';
+	$params = ['a' => $a, 'b' => $b];
 
 	$diff_modes		= $this->_t('DiffMode');
 	$diff_mode_list	= explode(',', $this->db->diff_modes);
@@ -140,7 +142,7 @@ if ($page_a && $page_b
 	foreach($diff_mode_list as $mode)
 	{
 		echo ($diffmode != $mode
-			?	'<li><a href="' . $this->href('diff', '', $params . $mode) . '">' . $diff_modes[$mode] . '</a>'
+			?	'<li><a href="' . $this->href('diff', '', $params + ['diffmode' => $mode]) . '">' . $diff_modes[$mode] . '</a>'
 			:	'<li class="active">' . $diff_modes[$mode]) . '</li>';
 	}
 

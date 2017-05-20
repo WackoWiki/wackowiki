@@ -14,7 +14,7 @@ if ($this->has_access('read'))
 	{
 		$show_files = !!$this->get_user_setting('show_files');
 	}
-	
+
 	if (isset($_GET['show_files']))
 	{
 		$show_files = !!$_GET['show_files'];
@@ -38,7 +38,7 @@ if ($this->has_access('read'))
 		// display files header
 		?>
 		<header id="header-files">
-		<?php echo '<h1><a href="' . $this->href('', '', 'show_files=0') . '" title="' . $this->_t('HideFiles') . '">' . $this->_t('Files') . '</a></h1>'; ?>
+		<?php echo '<h1><a href="' . $this->href('', '', ['show_files' => 0]) . '" title="' . $this->_t('HideFiles') . '">' . $this->_t('Files') . '</a></h1>'; ?>
 		</header>
 
 		<?php
@@ -71,7 +71,7 @@ if ($this->has_access('read'))
 				"AND deleted <> '1' LIMIT 1");
 
 		$have_files = '';
-		
+
 		switch ($c = $files['count'])
 		{
 			case 0:
@@ -97,7 +97,7 @@ if ($this->has_access('read'))
 			// display files section
 			echo '<section id="section-files">' . "\n";
 			echo '<header id="header-files">' . "\n";
-			echo '<h1><a href="' . $this->href('', '', 'show_files=1#header-files') . '" title="' . $this->_t('ShowFiles') . '">' . $have_files . '</a></h1>';
+			echo '<h1><a href="' . $this->href('', '', ['show_files' =>1, '#' => 'header-files']) . '" title="' . $this->_t('ShowFiles') . '">' . $have_files . '</a></h1>';
 			echo '</header>' . "\n";
 			echo "</section>\n";
 		}

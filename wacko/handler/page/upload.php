@@ -327,7 +327,7 @@ if (isset($_POST['upload']) & $can_upload)
 							$this->log(4, Ut::perc_replace($this->_t('LogFileUploadedLocal', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title'], $file_name, $file_size_ft));
 						}
 
-						$this->http->redirect($this->href('filemeta', '', ['show', 'file_id=' . (int) $file['file_id']]));
+						$this->http->redirect($this->href('filemeta', '', ['show', 'file_id' => (int) $file['file_id']]));
 					}
 					else //forbid
 					{
