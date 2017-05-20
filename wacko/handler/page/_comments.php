@@ -100,7 +100,7 @@ if ($this->has_access('read'))
 
 		$this->print_pagination($pagination);
 
-		echo '<h1><a href="' . $this->href('', '', 'show_comments=0') . '" title="' . $this->_t('HideComments') . '">' . $this->_t('Comments') . '</a></h1>';
+		echo '<h1><a href="' . $this->href('', '', ['show_comments' => 0]) . '" title="' . $this->_t('HideComments') . '">' . $this->_t('Comments') . '</a></h1>';
 		echo "</header>\n";
 
 		// display comments themselves
@@ -178,11 +178,11 @@ if ($this->has_access('read'))
 				echo '<ul class="" style="padding-left: 0;">' . "\n" .
 						"" .
 						'<li class="voting">
-							<a title="Vote up" class="vote-up  count-0" href="' . $this->href('rate', '', 'vote=1') . '">
+							<a title="Vote up" class="vote-up  count-0" href="' . $this->href('rate', '', ['vote' => 1]) . '">
 								<span class="updatable count">0</span>
 								<span class="control">&and;</span>
 							</a>
-							<a title="Vote down" class="vote-down  count-0" href="' . $this->href('rate', '', 'vote=0') . '">
+							<a title="Vote down" class="vote-down  count-0" href="' . $this->href('rate', '', ['vote' => 0]) . '">
 								<span class="control">&or;</span>
 							</a>
 						</li>
@@ -192,7 +192,7 @@ if ($this->has_access('read'))
 						// reply button
 						if ($this->is_admin() || $this->is_owner($comment['page_id']))
 						{
-							echo '<a href="' . $this->href('', '', 'parent_id=' . $comment['page_id'] . '#commentform') . '">' . $this->_t('ReplyComment') . '</a>';
+							echo '<a href="' . $this->href('', '', ['parent_id' => $comment['page_id'], '#' => 'commentform']) . '">' . $this->_t('ReplyComment') . '</a>';
 						}
 
 						echo '</li>' .
@@ -330,7 +330,7 @@ if ($this->has_access('read'))
 			// display comments section
 			echo '<section id="section-comments">';
 			echo '<header id="header-comments">';
-			echo '<h1><a href="' . $this->href('', '', 'show_comments=1#header-comments') . '" title="' . $this->_t('ShowComments') . '">' . $show_comments . '</a></h1>';
+			echo '<h1><a href="' . $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']) . '" title="' . $this->_t('ShowComments') . '">' . $show_comments . '</a></h1>';
 			echo '</header>' . "\n";
 			echo "</section>\n";
 		}

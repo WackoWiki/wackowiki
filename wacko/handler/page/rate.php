@@ -78,7 +78,7 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 
 			// rated successfully
 			$this->set_message($this->_t('RatingSuccess'));
-			$this->http->redirect($this->href('', '', 'show_rating=1') . '#rating');
+			$this->http->redirect($this->href('', '', ['show_rating' => 1]) . '#rating');
 		}
 		else
 		{

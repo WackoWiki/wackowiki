@@ -33,7 +33,7 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isse
 
 	// display rating header
 	echo '<header id="header-rating">';
-	echo $this->_t('RatingHeader') . ' [<a href="' . $this->href('', '', 'show_rating=1') . '#header-rating">' . $this->_t('RatingResults') . '</a>]';
+	echo $this->_t('RatingHeader') . ' [<a href="' . $this->href('', '', ['show_rating' => 1]) . '#header-rating">' . $this->_t('RatingResults') . '</a>]';
 	echo "</header>\n";
 
 	// display rating form
@@ -69,7 +69,7 @@ else
 	echo '<header id="header-rating">' . "\n";
 	echo $this->_t('RatingHeaderResults') .
 	(handler_show_page_is_rated($this, $this->page['page_id']) === false
-	? ' [<a href="' . $this->href('', '', 'show_rating=0') . '#header-rating">' . $this->_t('RatingForm') . '</a>]'
+	? ' [<a href="' . $this->href('', '', ['show_rating' => 0]) . '#header-rating">' . $this->_t('RatingForm') . '</a>]'
 	: '');
 	echo "</header>\n";
 

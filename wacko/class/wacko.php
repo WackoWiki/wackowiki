@@ -2450,7 +2450,7 @@ class Wacko
 		$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
 							$this->db->site_name,
 							$user['user_name'],
-							$this->href('', '', 'secret_code=' . $code)) . "\n\n";
+							$this->href('', '', ['secret_code' => $code])) . "\n\n";
 
 		$this->send_user_email($user, $subject, $body);
 		$this->set_language($save, true);
@@ -2469,9 +2469,9 @@ class Wacko
 
 						$this->_t('UsersPMReply') . "\n\n" .
 						Ut::amp_decode($this->href('', '',
-							['profile' => $this->get_user_name(),
-							'ref' => Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
-							'#' => 'contacts'])) . "\n\n";
+							['profile'	=> $this->get_user_name(),
+							'ref'		=> Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
+							'#'			=> 'contacts'])) . "\n\n";
 
 						// XXX: do we really need this, less clutter we want
 						# Ut::perc_replace($this->_t('PMAbuseInfo'), $this->db->abuse_email);
@@ -2716,7 +2716,7 @@ class Wacko
 			"WHERE user_id = '" . (int) $user_id . "' " .
 			"LIMIT 1");
 
-		return $this->href('', '', 'confirm=' . $confirm);
+		return $this->href('', '', ['confirm' => $confirm]);
 	}
 
 	function user_email_confirm_check($code)
@@ -3377,7 +3377,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_record($file_name, $page_id))
 				{
-					$url = $this->href('file', trim($page_tag, '/'), 'get=' . $file_name);
+					$url = $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
 
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
@@ -3459,20 +3459,20 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="' . $this->href('file', trim($page_tag, '/'), 'get=' . $file_name) . '" '.
+								return '<img src="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" '.
 										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize . ' />';
 							}
 							else
 							{
 								// continue
-								#return '<a href="' . $this->href('file', trim($page_tag, '/'), 'get=' . $file_name) . '" title="' . $title . '">' . $text . '</a>';
+								#return '<a href="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" title="' . $title . '">' . $text . '</a>';
 							}
 						}
 					}
 				}
 				else //403
 				{
-					$url		= $this->href('file', trim($page_tag, '/'), 'get=' . $file_name);
+					$url		= $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
 					$icon		= $this->_t('OuterIcon');
 					$img_link	= false;
 					$tpl		= 'localfile';
@@ -3523,7 +3523,7 @@ class Wacko
 				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
-			$url	= $this->href('', $this->db->users_page . '/', 'profile='.implode('/', $parts));
+			$url	= $this->href('', $this->db->users_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'user-link';
 			$icon	= $this->_t('OuterIcon');
@@ -3544,7 +3544,7 @@ class Wacko
 				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
-			$url	= $this->href('', $this->db->groups_page . '/', 'profile='.implode('/', $parts));
+			$url	= $this->href('', $this->db->groups_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'group-link';
 			$icon	= $this->_t('OuterIcon');
@@ -3726,7 +3726,7 @@ class Wacko
 
 			if ($this_page)
 			{
-				$page_link	= $this->href($method, $this_page['tag']).($anchor ? $anchor : '');
+				$page_link	= $this->href($method, $this_page['tag']) . ($anchor ? $anchor : '');
 				$page_id	= $this->get_page_id($tag);
 
 				if ($this->db->hide_locked)
@@ -3939,7 +3939,7 @@ class Wacko
 
 		if ($linking)
 		{
-			return '<a href="' . $this->href('', $this->db->users_page, 'profile=' . $user_name) . '" class="user-link">' . $icon . $text . '</a>';
+			return '<a href="' . $this->href('', $this->db->users_page, ['profile' => $user_name]) . '" class="user-link">' . $icon . $text . '</a>';
 		}
 		else
 		{
@@ -3961,7 +3961,7 @@ class Wacko
 
 		if ($linking)
 		{
-			return '<a href="' . $this->href('', $this->db->groups_page, 'profile=' . $group_name) . '" class="group-link">' . $icon . $text . '</a>';
+			return '<a href="' . $this->href('', $this->db->groups_page, ['profile' => $group_name]) . '" class="group-link">' . $icon . $text . '</a>';
 		}
 		else
 		{
@@ -7516,7 +7516,7 @@ class Wacko
 					$_category .= ', ';
 				}
 
-				$_category .= '<a href="' . $this->href('', '', 'category_id=' . $category['category_id']) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+				$_category .= '<a href="' . $this->href('', '', ['category_id' => $category['category_id']]) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
 			}
 
 			return $_category;
@@ -7862,7 +7862,7 @@ class Wacko
 		else if ($p['comment_on_id'])
 		{
 			// show main page for comment
-			$this->http->redirect($this->href('', $this->get_page_tag($p['comment_on_id']), 'show_comments=1', false, $p['tag']));
+			$this->http->redirect($this->href('', $this->get_page_tag($p['comment_on_id']), ['show_comments' => 1], false, $p['tag']));
 		}
 		else if ($this->forum && !$this->is_admin() && !$forums)
 		{

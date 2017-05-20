@@ -67,7 +67,7 @@ if (!$nomark)
 
 			echo ($style == 'ul' ? '<li>' : '');
 			echo '<a href="' .
-				$this->href('', '', 'year=' . $year . '&amp;poll=' . $row['poll_id'] . '&amp;results=1') . '">' .
+				$this->href('', '', ['year' => $year, 'poll' => $row['poll_id'], 'results' => 1]) . '">' .
 				$date . ' (#' . $row['poll_id'] . '): ' . $row['text'] . '</a>';
 			echo ($style == 'br' ? '<br />' : '');
 			echo ($style == 'ul' ? '</li>' : '');
@@ -89,7 +89,7 @@ if (!$nomark)
 	}
 	else
 	{
-		echo '<a href="' . $this->href('', '', 'year=0') . '">' . $this->_t('PollsAll') . '</a> ';
+		echo '<a href="' . $this->href('', '', ['year' => 0]) . '">' . $this->_t('PollsAll') . '</a> ';
 	}
 
 	foreach ($years as $item)
@@ -100,7 +100,7 @@ if (!$nomark)
 		}
 		else
 		{
-			echo '<a href="' . $this->href('', '', 'year=' . $item) . '">' . $item . '</a> ';
+			echo '<a href="' . $this->href('', '', ['year' => $item]) . '">' . $item . '</a> ';
 		}
 	}
 

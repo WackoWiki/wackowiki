@@ -33,7 +33,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 			echo '<ul class="menu">' .
 					'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('AttachmentsToPage') . '</a></li>' .
 					'<li class="active">' . $this->_t('AttachmentsGlobal') . '</li>' .
-					'<li><a href="' . $this->href('attachments', '', ['files=all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
+					'<li><a href="' . $this->href('attachments', '', ['files' => 'all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
 				"</ul><br /><br />\n";
 
 			echo $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'global']]) . '<br />';
@@ -43,7 +43,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 			echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('AttachmentsAll') . '</h3>';
 			echo '<ul class="menu">' .
 					'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('AttachmentsToPage') . '</a></li>' .
-					'<li><a href="' . $this->href('attachments', '', ['files=global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
+					'<li><a href="' . $this->href('attachments', '', ['files' => 'global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
 					'<li class="active">' . $this->_t('AttachmentsAll') . '</li>' .
 				"</ul><br /><br />\n";
 
@@ -54,8 +54,8 @@ $this->ensure_page(true); // TODO: upload for forums?
 			echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('AttachmentsToPage') . '</h3>';
 			echo '<ul class="menu">' .
 					'<li class="active">' . $this->_t('AttachmentsToPage') . '</li>' .
-					'<li><a href="' . $this->href('attachments', '', ['files=global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
-					'<li><a href="' . $this->href('attachments', '', ['files=all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
+					'<li><a href="' . $this->href('attachments', '', ['files' => 'global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
+					'<li><a href="' . $this->href('attachments', '', ['files' => 'all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
 				"</ul><br /><br />\n";
 
 			echo $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments']) . '<br />';

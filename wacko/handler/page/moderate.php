@@ -1366,7 +1366,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							<input type="checkbox" name="' . $comment['page_id'] . '" value="id"' . ( in_array($comment['page_id'], $set) ? ' checked' : '' ) . '/>
 						</td>' .
 						'<td style="padding-left:5px;">
-							<strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . $this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="' . $this->href('', $this->db->users_page, 'profile=' . $comment['owner_name']) . '">' . $this->_t('ModerateUserProfile') . '</a>' : '' ) . '</small></strong>' .
+							<strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . $this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="' . $this->href('', $this->db->users_page, ['profile' => $comment['owner_name']]) . '">' . $this->_t('ModerateUserProfile') . '</a>' : '' ) . '</small></strong>' .
 							'<br />' . $desc .
 						'</td>' .
 					'</tr>' . "\n";

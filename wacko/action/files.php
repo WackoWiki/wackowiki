@@ -180,7 +180,7 @@ if ($can_view)
 			{
 				$path2	= $path1 . ($this->slim_url($file['tag'])) . '/';
 				$page	= $file['tag'];
-				$url	= $this->href('file', trim($file['supertag'], '/'), 'get=' . $file['file_name']);
+				$url	= $this->href('file', trim($file['supertag'], '/'), ['get' => $file['file_name']]);
 			}
 			else
 			{
@@ -242,9 +242,9 @@ if ($can_view)
 				$operation_mode = 0;
 			}
 
-			$href_info		= $this->href('filemeta', $page, 'show' . "&amp;file_id=" . $file_id);
-			$href_edit		= $this->href('filemeta', $page, 'edit' . "&amp;file_id=" . $file_id);
-			$href_remove	= $this->href('filemeta', $page, 'remove' . "&amp;file_id=" . $file_id);
+			$href_info		= $this->href('filemeta', $page, ['show', 'file_id' => $file_id]);
+			$href_edit		= $this->href('filemeta', $page, ['edit', 'file_id' => $file_id]);
+			$href_remove	= $this->href('filemeta', $page, ['remove', 'file_id' => $file_id]);
 
 			echo '<tr>' .
 					'<td class="file-">' . $link . '</td>';

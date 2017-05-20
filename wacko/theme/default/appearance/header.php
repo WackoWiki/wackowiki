@@ -80,11 +80,11 @@ if ($logged_in)
 	// determines what it should show: "add to menu" or "remove from menu" icon
 	if (!in_array($this->page['page_id'], (array) $this->get_menu_links()))
 	{
-		$tpl->addmark_href		= $this->href('', '', 'addbookmark=yes');
+		$tpl->addmark_href		= $this->href('', '', ['addbookmark' => 1]);
 	}
 	else if (!$this->get_menu_default())
 	{
-		$tpl->removemark_href	= $this->href('', '', 'removebookmark=yes');
+		$tpl->removemark_href	= $this->href('', '', ['removebookmark' => 1]);
 	}
 }
 
