@@ -21,8 +21,8 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 <table style="text-align:center; width:100%;">
 	<tr>
-		<td class="left" style="vertical-align:top; white-space: nowrap; width:185;">
-		<table style="text-align:left; width:185;">
+		<td class="left" style="vertical-align:top; white-space: nowrap; width:185px;">
+		<table style="text-align:left; width:185px;">
 			<tr style="text-align:left;">
 				<td>
 				<table class="navOpened" id="sw_n0" style="text-align:left; width:100%;">

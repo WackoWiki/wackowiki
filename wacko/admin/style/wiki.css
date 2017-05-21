@@ -123,10 +123,7 @@ span.tocnumber {
 }
 #postText {
 	height: 300px;
-	padding-left: 0;
-	padding-right: 0;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding: 5px 0;
 }
 #content fieldset.preview {
 	font-size: 14px;
@@ -138,9 +135,8 @@ span.tocnumber {
 	color: #BABFC7;
 	font-size: 12px;
 	font-weight: 600;
-	padding: 5px;
 	margin-left: 0;
-	padding-left: 0;
+	padding: 5px 5px 5px 0;
 	border: none;
 }
 
