@@ -20,9 +20,9 @@ $i			= '';
 
 if (isset($this->categories))
 {
-	foreach ($this->categories as $id => $category)
+	foreach ($this->categories as $category_id => $category)
 	{
-		$_category = '<a href="' . $this->href('', $this->db->category_page, 'category_id=' . $id) . '" class="tag" rel="tag">' . htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+		$_category = '<a href="' . $this->href('', $this->db->category_page, ['category_id' => $category_id]) . '" class="tag" rel="tag">' . htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
 
 		if ($list)
 		{

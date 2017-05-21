@@ -71,8 +71,8 @@ if ($this->has_access('read'))
 			// filter minor edits
 			echo '<input name="minor_edit" value="' . $hide_minor_edit . '" type="hidden">' . "\n";
 			echo '<br />' . ($hide_minor_edit
-					? '<a href="' . $this->href('revisions', '', 'minor_edit=0') . '">' . $this->_t('MinorEditShow') . '</a>'
-					: '<a href="' . $this->href('revisions', '', 'minor_edit=1') . '">' . $this->_t('MinorEditHide') . '</a>');
+					? '<a href="' . $this->href('revisions', '', ['minor_edit' => 0]) . '">' . $this->_t('MinorEditShow') . '</a>'
+					: '<a href="' . $this->href('revisions', '', ['minor_edit' => 1]) . '">' . $this->_t('MinorEditHide') . '</a>');
 		}
 
 		echo "</p>\n" . '<ul class="revisions">' . "\n";
@@ -127,7 +127,7 @@ if ($this->has_access('read'))
 			echo $place_holder.
 						'<input type="radio" name="b" value="' . (!$c ? '-1' : $page['revision_id']) . '" '.($c == 1 ? 'checked' : '') . ' />';
 			echo $place_holder . '&nbsp;
-						<a href="' . $this->href('show', '', 'revision_id=' . $page['revision_id']) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
+						<a href="' . $this->href('show', '', ['revision_id' => $page['revision_id']]) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
 			echo '<span style="display: inline-block; width:130px;">' . "&nbsp; — (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
 			echo $place_holder."&nbsp;" . $this->_t('By') . " " .
 						$this->user_link($page['user_name'], '', true, false) . ' ';
@@ -162,7 +162,7 @@ if ($this->has_access('read'))
 
 		if ($max && $revision_count > $max)
 		{
-			echo  '<a href="' . $this->href('revisions', '', 'show=all') . '">' . $this->_t('RevisionsShowAll') . "</a><br /><br />\n";
+			echo  '<a href="' . $this->href('revisions', '', ['show' => 'all']) . '">' . $this->_t('RevisionsShowAll') . "</a><br /><br />\n";
 		}
 
 		echo '<a href="' . $this->href() . '" class="btn_link">' .
