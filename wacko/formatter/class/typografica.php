@@ -135,7 +135,7 @@ class Typografica
 			{
 				if ($this->settings['html'])
 				{
-					$matches[0][$i] = '&lt;' + substr($matches[0][$i], 1);
+					$matches[0][$i] = '&lt;' . substr($matches[0][$i], 1);
 				}
 
 				$tags[] = $matches[0][$i];

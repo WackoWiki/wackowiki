@@ -227,7 +227,7 @@ form input.submitinput {
 }
 
 .print {
-	font-family: Verdana;
+	font-family: Verdana, sans-serif;
 	font-size: 12px;
 }
 
@@ -656,7 +656,7 @@ fieldset {
 
 .searchbar {
 	background-color: #F0F4F5;
-	font-family: Verdana;
+	font-family: Verdana, sans-serif;
 	font-size: 13px;
 	line-height: 1.3em;
 }

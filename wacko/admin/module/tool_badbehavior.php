@@ -34,7 +34,7 @@ function admin_badbehavior(&$engine, &$module)
 
 	#Ut::debug_print_r($_POST);
 
-function bb2_httpbl_lookup($ip)
+function bb2_httpbl_lookup(&$engine, $ip)
 {
 	// NB: Many of these are defunct
 	$engines = [
@@ -408,19 +408,30 @@ function bb2_whitelist(&$engine)
 	{
 		#$_POST = array_map('stripslashes_deep', $_POST);
 
-		if ($_POST['ip']) {
+		if ($_POST['ip'])
+		{
 			$whitelists['ip'] = array_filter(preg_split("/\s+/m", $_POST['ip']));
-		} else {
+		}
+		else
+		{
 			$whitelists['ip'] = [];
 		}
-		if ($_POST['url']) {
+
+		if ($_POST['url'])
+		{
 			$whitelists['url'] = array_filter(preg_split("/\s+/m", $_POST['url']));
-		} else {
+		}
+		else
+		{
 			$whitelists['url'] = [];
 		}
-		if ($_POST['useragent']) {
+
+		if ($_POST['useragent'])
+		{
 			$whitelists['useragent'] = array_filter(preg_split("/[\r\n]+/m", $_POST['useragent']));
-		} else {
+		}
+		else
+		{
 			$whitelists['useragent'] = [];
 		}
 

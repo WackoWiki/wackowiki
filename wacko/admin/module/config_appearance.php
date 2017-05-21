@@ -186,8 +186,8 @@ function admin_config_appearance(&$engine, &$module)
 		}
 		else
 		{
-			$config['logo_height']			= (int) $_POST['logo_height'];'';
-			$config['logo_width']			= (int) $_POST['logo_width'];'';
+			$config['logo_height']			= (int) $_POST['logo_height'];
+			$config['logo_width']			= (int) $_POST['logo_width'];
 		}
 
 		if (isset($_FILES['favicon']['tmp_name']) && is_uploaded_file($_FILES['favicon']['tmp_name']))
@@ -223,7 +223,7 @@ function admin_config_appearance(&$engine, &$module)
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<colgroup>
-				<col span="1" style="width:50%;">
+				<col span="1" style="width:50%">
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
