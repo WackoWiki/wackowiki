@@ -144,7 +144,7 @@ foreach ($modes as $text => $i)
 {
 	if ($mode != $i)
 	{
-		echo '<li><a href="' . $this->href('referrers', '', ($i? 'o=' . $i : '')) . '">';
+		echo '<li><a href="' . $this->href('referrers', '', ($i? ['o' => $i] : '')) . '">';
 	}
 	else
 	{

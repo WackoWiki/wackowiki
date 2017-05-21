@@ -248,7 +248,7 @@ if ($can_view)
 			else
 			{
 				$tnb_path		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
-				$url			= $this->href('file', $source_page_tag, 'get=' . $file_name);
+				$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 			}
 
 			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '/>';
@@ -323,7 +323,7 @@ if ($can_view)
 
 			if (!$target)
 			{
-				echo '<a href="' . $this->href('', $this->tag, 'file_id=' . $file['file_id'] . '&amp;token=' . $param_token . '#' . $param_token) . '">' . $img . "</a>\n";
+				echo '<a href="' . $this->href('', $this->tag, ['file_id' => $file['file_id'], 'token' => $param_token, '#' => $param_token]) . '">' . $img . "</a>\n";
 			}
 			else
 			{

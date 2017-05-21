@@ -86,7 +86,7 @@ if ($page_a && $page_b
 	{
 
 		$out = '<div class="diffdown">'; //<button class="diffbtn">';
-		$out .= '<a href="' . $this->href('', '', ($page['revision_id'] > 0? 'revision_id=' . $page['revision_id'] : '')) . '">' .
+		$out .= '<a href="' . $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : '')) . '">' .
 			$this->get_time_formatted($page['modified']) .
 			' <span class="dropdown_arrow">&#9660;</span></a>';
 		//$out .= '</button><div class="diffdown-content">';
@@ -126,8 +126,8 @@ if ($page_a && $page_b
 	echo Ut::perc_replace('<div class="diffinfo">' . $this->_t('Comparison'),
 		$revisions_menu($a, $page_a),
 		$revisions_menu($b, $page_b),
-		//'<a href="' . $this->href('', '', ($a > 0 ? 'revision_id=' . $page_a['revision_id'] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
-		//'<a href="' . $this->href('', '', ($b > 0 ? 'revision_id=' . $page_b['revision_id'] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
+		//'<a href="' . $this->href('', '', ($a > 0 ? ['revision_id' => $page_a['revision_id']] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
+		//'<a href="' . $this->href('', '', ($b > 0 ? ['revision_id' => $page_b['revision_id']] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
 		$this->compose_link_to_page($this->tag, '', '', 0)) . "</div>\n";
 	echo "<br />\n<br />\n";
 

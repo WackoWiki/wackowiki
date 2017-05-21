@@ -232,7 +232,7 @@ class Polls
 			}
 
 			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts') . ': ' . $duration.
-						'<br />' . $this->engine->_t('PollsAdded') . ': ' . (strpos($header['user_id'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user . '</a>') . '</small></td></tr>' .
+						'<br />' . $this->engine->_t('PollsAdded') . ': ' . (strpos($header['user_id'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, ['profile' => $user]) . '">' . $user . '</a>') . '</small></td></tr>' .
 					'<tr><td colspan="2" style="white-space:nowrap;">' .
 					'<input type="submit" name="vote" id="submit" value="' . $this->engine->_t('PollsSubmit') . '" /> '.
 					'<input type="submit" name="results" id="submit" value="' . $this->engine->_t('PollsResults') . '" />' .
@@ -253,7 +253,7 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id, 1);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest') . '</em>' : $header['user_name'] );
+		$user		= (strpos($header['user_id'], '.') ? '<em>' . $this->engine->_t('PollsGuest') . '</em>' : $header['user_name'] );
 		$voters		= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];
@@ -285,7 +285,7 @@ class Polls
 			$poll	.= '<tr><td colspan="3"><small>' . $this->engine->_t('PollsTotalVotes') . ': ' . $voters.
 						'<br />' . ($header['end'] ? $this->engine->_t('PollsLasted') :
 							$this->engine->_t('PollsLasts')) . ': ' . $duration.
-						'<br />' . $this->engine->_t('PollsAdded') . ': '.( strpos($header['user_name'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, 'profile=' . $user) . '">' . $user . '</a>' ) . '</small></td></tr>' .
+						'<br />' . $this->engine->_t('PollsAdded') . ': '.(strpos($header['user_name'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, ['profile' => $user]) . '">' . $user . '</a>') . '</small></td></tr>' .
 					'</table>' .
 					$this->engine->form_close();
 		}

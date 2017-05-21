@@ -42,24 +42,24 @@ class Feed
 		$name	= 'changes';
 		$count	= '';
 
-		$xml = "<?xml version=\"1.0\" encoding=\"" . $this->charset."\"?>\n";
-		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
-		$xml .= "<channel>\n";
-		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentChangesTitleXML') . "</title>\n";
-		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
-		$xml .= "<description>" . $this->engine->_t('RecentChangesXML') . $this->engine->db->site_name." </description>\n";
+		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n";
+		$xml .= '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n";
+		$xml .= '<channel>' . "\n";
+		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('RecentChangesTitleXML') . '</title>' . "\n";
+		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
+		$xml .= '<description>' . $this->engine->_t('RecentChangesXML') . $this->engine->db->site_name . ' </description>' . "\n";
 		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->policy_page) . '</copyright>' . "\n";
-		$xml .= "<lastBuildDate>" . date('r') . "</lastBuildDate>\n";
-		$xml .= "<image>\n";
-		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
-		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . "</url>\n";
-		$xml .= "<width>" . $this->engine->db->logo_width ."</width>\n";
-		$xml .= "<height>" . $this->engine->db->logo_height . "</height>\n";
-		$xml .= "</image>\n";
-		$xml .= "<language>" . $this->lang . "</language>\n";
-		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";
-		#$xml .= "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
+		$xml .= '<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
+		$xml .= '<image>' . "\n";
+		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('RecentChangesTitleXML') . '</title>' . "\n";
+		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
+		$xml .= '<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . '</url>' . "\n";
+		$xml .= '<width>' . $this->engine->db->logo_width . '</width>' . "\n";
+		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
+		$xml .= '</image>' . "\n";
+		$xml .= '<language>' . $this->lang . '</language>' . "\n";
+		#$xml .= '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
+		#$xml .= '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
 		if (list ($pages, $pagination) = $this->engine->load_changed())
 		{
@@ -77,26 +77,26 @@ class Feed
 				if ($access && ($count < $limit))
 				{
 					$count++;
-					$xml .= "<item>\n";
-					$xml .= "<title>" . $page['tag'] . "</title>\n";
-					$xml .= "<link>" . $this->engine->href('', $page['tag'], '') . "</link>\n";
-					$xml .= "<guid>" . $this->engine->href('', $page['tag'], '') . "</guid>\n";
-					$xml .= "<pubDate>" . date('r', strtotime($page['modified'])) . "</pubDate>\n";
-					$xml .= "<description>" . $page['modified'] . " " . $this->engine->_t('By') . " " .
+					$xml .= '<item>' . "\n";
+					$xml .= '<title>' . $page['tag'] . '</title>' . "\n";
+					$xml .= '<link>' . $this->engine->href('', $page['tag'], '') . '</link>' . "\n";
+					$xml .= '<guid>' . $this->engine->href('', $page['tag'], '') . '</guid>' . "\n";
+					$xml .= '<pubDate>' . date('r', strtotime($page['modified'])) . '</pubDate>' . "\n";
+					$xml .= '<description>' . $page['modified'] . ' ' . $this->engine->_t('By') . ' ' .
 						($page['user_name']
 							? $page['user_name']
 							: $this->engine->_t('Guest')) .
 						($page['edit_note']
 							? ' [' . $page['edit_note'] . ']'
 							: '') .
-						"</description>\n";
-					$xml .= "</item>\n";
+						'</description>' . "\n";
+					$xml .= '</item>' . "\n";
 				}
 			}
 		}
 
-		$xml .= "</channel>\n";
-		$xml .= "</rss>\n";
+		$xml .= '</channel>' . "\n";
+		$xml .= '</rss>' . "\n";
 
 		$this->write_file($name, $xml);
 	}
@@ -159,7 +159,7 @@ class Feed
 
 		// build output
 		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
-				"<?xml-stylesheet type=\"text/css\" href=\"" . $this->engine->db->theme_url . "css/wacko.css\" media=\"screen\"?>\n" .
+				'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
 				// TODO: atom.css
 				'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> ' . "\n" .
 					'<channel>' . "\n" .
@@ -170,15 +170,15 @@ class Feed
 						'<language>' . $this->lang . '</language>' . "\n" .
 						'<pubDate>' . date('r') . '</pubDate>' . "\n" .
 						'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
-		$xml .= "<image>\n";
-		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . "</title>\n";
-		$xml .= "<link>" . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . "</url>\n";
-		$xml .= "<width>" . $this->engine->db->logo_width ."</width>\n";
-		$xml .= "<height>" . $this->engine->db->logo_height . "</height>\n";
-		$xml .= "</image>\n";
-		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";
-		#$xml .= "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
+		$xml .= '<image>' . "\n";
+		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('RecentNewsTitleXML') . '</title>' . "\n";
+		$xml .= '<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n";
+		$xml .= '<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n";
+		$xml .= '<width>' . $this->engine->db->logo_width . '</width>' . "\n";
+		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
+		$xml .= '</image>' . "\n";
+		#$xml .= '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
+		#$xml .= '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
 		$i = 0;
 
@@ -194,7 +194,7 @@ class Feed
 				$title	= $page['title'];
 				$link	= $this->engine->href('', $page['tag']);
 				$pdate	= date('r', strtotime($page['modified']));
-				$coms	= $this->engine->href('', $page['tag'], 'show_comments=1#header-comments');
+				$coms	= $this->engine->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments']);
 
 				// recompile if necessary
 				if ($page['body_r'] == '')
@@ -249,25 +249,25 @@ class Feed
 		$access	= '';
 
 		// build output
-		$xml = "<?xml version=\"1.0\" encoding=\"" . $this->charset."\"?>\n";
-		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"" . $this->engine->db->theme_url . "css/wacko.css\" media=\"screen\"?>\n";
-		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
-		$xml .= "<channel>\n";
-		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
-		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
-		$xml .= "<description>" . $this->engine->_t('RecentCommentsXML') . $this->engine->db->site_name." </description>\n";
+		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n";
+		$xml .= '<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n";
+		$xml .= '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n";
+		$xml .= '<channel>' . "\n";
+		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
+		$xml .= '<link>' . $this->engine->db->base_url . "</link>\n";
+		$xml .= '<description>' . $this->engine->_t('RecentCommentsXML') . $this->engine->db->site_name." </description>\n";
 		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->policy_page) . '</copyright>' . "\n";
-		$xml .= "<lastBuildDate>" . date('r') . "</lastBuildDate>\n";
-		$xml .= "<image>\n";
-		$xml .= "<title>" . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . "</title>\n";
-		$xml .= "<link>" . $this->engine->db->base_url . "</link>\n";
-		$xml .= "<url>" . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . "</url>\n";
-		$xml .= "<width>" . $this->engine->db->logo_width ."</width>\n";
-		$xml .= "<height>" . $this->engine->db->logo_height . "</height>\n";
-		$xml .= "</image>\n";
-		$xml .= "<language>" . $this->lang . "</language>\n";
-		#$xml .= "<docs>http://www.rssboard.org/rss-specification</docs>\n";
-		#$xml .= "<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
+		$xml .= '<lastBuildDate>' . date('r') . "</lastBuildDate>\n";
+		$xml .= '<image>' . "\n";
+		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('RecentCommentsTitleXML') . '</title>' . "\n";
+		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
+		$xml .= '<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n";
+		$xml .= '<width>' . $this->engine->db->logo_width . '</width>' . "\n";
+		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
+		$xml .= '</image>' . "\n";
+		$xml .= '<language>' . $this->lang . '</language>' . "\n";
+		#$xml .= '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
+		#$xml .= '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
 		if ($comments = $this->engine->load_comment())
 		{
@@ -302,26 +302,26 @@ class Feed
 						$comment['page_title']	= $this->engine->do_unicode_entities($comment['page_title'], $comment['page_lang']);
 					}
 
-					$xml .= "<item>\n";
-					$xml .= "<title>" . $comment['title'] . " " . $this->engine->_t('To') . " " . $comment['page_title'] . " " . $this->engine->_t('From') . " " .
+					$xml .= '<item>' . "\n";
+					$xml .= '<title>' . $comment['title'] . ' ' . $this->engine->_t('To') . ' ' . $comment['page_title'] . ' ' . $this->engine->_t('From') . ' ' .
 						($comment['user_name']
 							? $comment['user_name']
 							: $this->engine->_t('Guest')) .
-						"</title>\n";
-					$xml .= "<link>" . $this->engine->href('', $comment['tag'], '') . "</link>\n";
-					$xml .= "<guid>" . $this->engine->href('', $comment['tag'], '') . "</guid>\n";
-					$xml .= "<pubDate>" . date('r', strtotime($comment['modified'])) . "</pubDate>\n";
-					$xml .= "<dc:creator>" . $comment['user_name'] . "</dc:creator>\n";
+						'</title>' . "\n";
+					$xml .= '<link>' . $this->engine->href('', $comment['tag'], '') . '</link>' . "\n";
+					$xml .= '<guid>' . $this->engine->href('', $comment['tag'], '') . '</guid>' . "\n";
+					$xml .= '<pubDate>' . date('r', strtotime($comment['modified'])) . '</pubDate>' . "\n";
+					$xml .= '<dc:creator>' . $comment['user_name'] . '</dc:creator>' . "\n";
 
-					$xml .= "<description><![CDATA[" . str_replace("]]>", "]]&gt;", $text) . "]]></description>\n";
-					# $xml .= "<content:encoded><![CDATA[" . str_replace("]]>", "]]&gt;", $text) . "]]></content:encoded>\n";
-					$xml .= "</item>\n";
+					$xml .= '<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n";
+					# $xml .= '<content:encoded><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></content:encoded>' . "\n";
+					$xml .= '</item>' . "\n";
 				}
 			}
 		}
 
-		$xml .= "</channel>\n";
-		$xml .= "</rss>\n";
+		$xml .= '</channel>' . "\n";
+		$xml .= '</rss>' . "\n";
 
 		$this->write_file($name, $xml);
 	}
@@ -342,39 +342,39 @@ class Feed
 				"AND p.deleted <> '1' " .
 			"ORDER BY p.modified DESC, BINARY p.tag");
 
-		$xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-		$xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+		$xml = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
+		$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
 		if ($pages)
 		{
 			foreach ($pages as $page)
 			{
-				$xml .= "<url>\n";
-				$xml .= "<loc>" . $this->engine->href('', $page['tag']) . "</loc>\n";
-				$xml .= "<lastmod>" . substr($page['modified'], 0, 10)  . "</lastmod>\n";
+				$xml .= '<url>' . "\n";
+				$xml .= '<loc>' . $this->engine->href('', $page['tag']) . '</loc>' . "\n";
+				$xml .= '<lastmod>' . substr($page['modified'], 0, 10)  . '</lastmod>' . "\n";
 
 				$days_since_last_changed = (time() - strtotime($page['modified'])) / DAYSECS;
 
 				if ($days_since_last_changed < 30)
 				{
-					$xml .= "<changefreq>daily</changefreq>\n";
+					$xml .= '<changefreq>daily</changefreq>' . "\n";
 				}
 				else if ($days_since_last_changed < 60)
 				{
-					$xml .= "<changefreq>monthly</changefreq>\n";
+					$xml .= '<changefreq>monthly</changefreq>' . "\n";
 				}
 				else
 				{
-					$xml .= "<changefreq>yearly</changefreq>\n";
+					$xml .= '<changefreq>yearly</changefreq>' . "\n";
 				}
 
 				// The only thing I'm not sure about how to handle dynamically...
-				$xml .= "<priority>0.8</priority>\n";
-				$xml .= "</url>\n";
+				$xml .= '<priority>0.8</priority>' . "\n";
+				$xml .= '</url>' . "\n";
 			}
 		}
 
-		$xml .= "</urlset>\n";
+		$xml .= '</urlset>' . "\n";
 
 		file_put_contents(SITEMAP_XML, $xml);
 		@chmod(SITEMAP_XML, 0644);
