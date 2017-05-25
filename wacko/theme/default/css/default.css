@@ -353,39 +353,29 @@ header {
 	clear: both;
 	overflow: hidden;
 	float: left;
-	padding: 20px 20px 5px 20px;
 	background: #FFFFFF;
 	width: 100%;
 }
 
 .menu-main {
-	padding: 5px 20px 0;
 	float: left;
-	/*overflow: hidden;
-	*/
 	height: 25px;
 	background: #FFFFFF;
 	width: 100%;
 }
 
-#mainwrapper > header {
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-	/* padding: 20px 20px 5px; */
-}
-
 .breadcrumb {
-	/*overflow:hidden;#F6F6F6*/
-	/* background: #D2D0D0; */
+	background-color: #fcfcfc;
 	border-bottom: 1px dotted #B2B0B0;
 	border-top: 1px dotted #B2B0B0;
-	/*clear:both;
-	*/color: #333333;
+	color: #333333;
 	font-size: 0.75em;
 	font-weight: normal;
 	margin: 0;
 	padding: 0.1em 20px;
+	margin-left: -20px;
 	float: left;
-	 width: 100%;
+	width: 100%;
 }
 
 /** Styles for the main content in the page. *********************************/
@@ -396,6 +386,7 @@ header {
 	margin: 0 auto 1rem;
 }
 
+#mainwrapper > header,
 main {
 	background-color: #FFFFFF;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -1216,6 +1207,7 @@ a:target {
 
 #menu-user li:first-child {
 	border-left: 1px none;
+	padding: 1px 6px 4px 0;
 }
 
 #menu-user li {
