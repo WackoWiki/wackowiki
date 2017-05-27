@@ -355,6 +355,7 @@ header {
 	float: left;
 	background: #FFFFFF;
 	width: 100%;
+	padding-bottom: 5px;
 }
 
 .menu-main {
@@ -362,6 +363,7 @@ header {
 	height: 25px;
 	background: #FFFFFF;
 	width: 100%;
+	padding-top: 5px;
 }
 
 .breadcrumb {
@@ -1858,119 +1860,119 @@ li.m-source img {
 }
 
 .btn-reload {
-	background: url('./../icon/reload.svg'), none no-repeat;
+	background: url('./../icon/reload.svg') no-repeat;
 	background-size: 22px 22px;
 	height: 22px;
 	width: 22px;
 	display: inline-block;
 }
 .btn-menu {
-	background: url('./../icon/menu.svg'), none no-repeat;
+	background: url('./../icon/menu.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-addbookmark {
-	background: url('./../icon/bookmark.svg'), none no-repeat;
+	background: url('./../icon/bookmark.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-removebookmark {
-	background: url('./../icon/bookmark-remove.svg'), none no-repeat;
+	background: url('./../icon/bookmark-remove.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-delete {
-	background: url('./../icon/delete.svg'), none no-repeat;
+	background: url('./../icon/delete.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-edit {
-	background: url('./../icon/edit.svg'), none no-repeat;
+	background: url('./../icon/edit.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-feed {
-	background: url('./../icon/feed.svg'), none no-repeat;
+	background: url('./../icon/feed.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-info {
-	background: url('./../icon/dialog-info.svg'), none no-repeat;
+	background: url('./../icon/dialog-info.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-tick {
-	background: url('./../icon/tick.svg'), none no-repeat;
+	background: url('./../icon/tick.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-warning {
-	background: url('./../icon/warning.svg'), none no-repeat;
+	background: url('./../icon/warning.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-add_page {
-	background: url('./../icon/page-add.svg'), none no-repeat;
+	background: url('./../icon/page-add.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-page {
-	background: url('./../icon/show.svg'), none no-repeat;
+	background: url('./../icon/show.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-comment {
-	background: url('./../icon/comment.svg'), none no-repeat;
+	background: url('./../icon/comment.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-attachment {
-	background: url('./../icon/attachment.svg'), none no-repeat;
+	background: url('./../icon/attachment.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-upload {
-	background: url('./../icon/upload.svg'), none no-repeat;
+	background: url('./../icon/upload.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-unlocked {
-	background: url('./../icon/unlocked.svg'), none no-repeat;
+	background: url('./../icon/unlocked.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 }
 .btn-locked {
-	background: url('./../icon/locked.svg'), none no-repeat;
+	background: url('./../icon/locked.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
