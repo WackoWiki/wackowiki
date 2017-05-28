@@ -223,7 +223,7 @@ function admin_config_appearance(&$engine, &$module)
 		<input type="hidden" name="action" value="update" />
 		<table class="formation">
 			<colgroup>
-				<col span="1" style="width:50%">
+				<col span="1" style="width:50%;">
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>

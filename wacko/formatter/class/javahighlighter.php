@@ -42,19 +42,19 @@ class JavaHighlighter{
 	/*************************************************/
 	/* Les styles donnes pour chaque type de donnees */
 	/*************************************************/
-	var $stylekeyword	= array("<strong>", "</strong>");
-	var $styletext		= array("", "");
-	//var $stylestring	= array("<span style=\"background-color:yellow\">", "</span>");
-	var $stylestring	 = array("","");
-	var $stylecomment	= array("<em>", "</em>");
-	var $stylesymbol	= array("", "");
-	var $stylenumber	= array("", "");
-	var $stylepreproc	= array("<em>", "</em>");
+	var $stylekeyword	= ["<strong>", "</strong>"];
+	var $styletext		= ["", ""];
+	//var $stylestring	= ["<span style=\"background-color:yellow\">", "</span>");
+	var $stylestring	 = ["",""];
+	var $stylecomment	= ["<em>", "</em>"];
+	var $stylesymbol	= ["", ""];
+	var $stylenumber	= ["", ""];
+	var $stylepreproc	= ["<em>", "</em>"];
 
 	/*****************/
 	/* Keywords */
 	/*****************/
-	var $keywords = array(
+	var $keywords = [
     'abstract','double','double','strictfp','boolean','else',
     'interface','super','break','extends','long','switch','byte','final','native',
     'synchronized','case','finally','new','this','catch','float','package','throw','char','for',
@@ -62,30 +62,30 @@ class JavaHighlighter{
     'private','throws','class','goto','protected','transient','const','if','public','try',
     'constructor','destructor','library','set','inherited','object','overload',
     'continue','implements','return','void','default','import','short','volatile',
-    'do','instanceof','static','while');
+    'do','instanceof','static','while'];
 	/***********************************/
 	/* Delimiters for comment */
 	/***********************************/
-	var $commentdelimiters = array(
-	array("//", "\n"),
-	array("/*", "*/"),
-	array("/**", "*/")
-	);
+	var $commentdelimiters = [
+		["//", "\n"],
+		["/*", "*/"],
+		["/**", "*/"]
+	];
 
 	/********************************************/
 	/* Delimiters for Strings */
 	/********************************************/
-	var $stringdelimiters = array(
-	array("\"", "\"")
-	);
+	var $stringdelimiters = [
+		["\"", "\""]
+	];
 
 	/********************************************************/
 	/* Delimiters for pre-processor-instructions */
 	/********************************************************/
-	var $preprocdelimiters = array(
-	array("(*\$", "*)"),
-	array("{\$", "}")
-	);
+	var $preprocdelimiters = [
+		["(*\$", "*)"],
+		["{\$", "}"]
+	];
 
 	/////////////////////////////////////////////////////////////////////////////////////////
 	// Le code en lui-meme
@@ -105,7 +105,7 @@ class JavaHighlighter{
 	function formatspecialtok($tok, $color, $style)
 	{
 		if (empty($color)) return sprintf("%s$tok%s", $style[0], $style[1]);
-		return sprintf("%s<span style=\"color: %s\">$tok</span>%s", $style[0], $color, $style[1]);
+		return sprintf("%s<span style=\"color: %s;\">$tok</span>%s", $style[0], $color, $style[1]);
 	}
 
 	/*******************************************************************/
@@ -144,7 +144,7 @@ class JavaHighlighter{
 	/***************************************************/
 	/* On regarde si on ne tombe pas sur un delimiteur */
 	/***************************************************/
-	function parsearray($array, $color = "#000080", $style = array("<em>", "</em>"))
+	function parsearray($array, $color = "#000080", $style = ["<em>", "</em>"])
 	{
 		// On effectue quelques verifications
 		if (!is_array($array))   return FALSE;

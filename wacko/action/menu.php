@@ -48,7 +48,7 @@ if (!isset($system))
 }
 
 $message		= '';
-$user			= '';
+$user			= [];
 $default_menu	= '';
 $menu_lang		= '';
 

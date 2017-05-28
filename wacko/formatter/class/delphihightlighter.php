@@ -40,18 +40,18 @@ class DelphiHightlighter{
 	/*************************************************/
 	/* Les styles donnes pour chaque type de donnees */
 	/*************************************************/
-	var $stylekeyword	= array("<strong>", "</strong>");
-	var $styletext		= array("", "");
-	var $stylestring	= array("<span style=\"background-color:yellow\">", "</span>");
-	var $stylecomment	= array("<em>", "</em>");
-	var $stylesymbol	= array("", "");
-	var $stylenumber	= array("", "");
-	var $stylepreproc	= array("<em>", "</em>");
+	var $stylekeyword	= ["<strong>", "</strong>"];
+	var $styletext		= ["", ""];
+	var $stylestring	= ["<span style=\"background-color:yellow;\">", "</span>"];
+	var $stylecomment	= ["<em>", "</em>"];
+	var $stylesymbol	= ["", ""];
+	var $stylenumber	= ["", ""];
+	var $stylepreproc	= ["<em>", "</em>"];
 
 	/*****************/
 	/* Les mots cles */
 	/*****************/
-	var $keywords = array(
+	var $keywords = [
     'unit','interface','implementation','initialization','finalization','uses',
     'type','var','begin','end','with','do','function','procedure','property',
     'to','as','is','while','loop','for','repeat','until','use','class','private',
@@ -61,31 +61,31 @@ class DelphiHightlighter{
     'override','virtual','abstract','read','write','default','program','absolute',
     'asm','external','stdcall','resourcestring','downto','exports','inline',
     'raise','goto','label','dispinterface','file','threadvar','not','or','and',
-    'xor','mod','shl','shr','div');
+    'xor','mod','shl','shr','div'];
 
 	/***********************************/
 	/* Les delimiteurs de commentaires */
 	/***********************************/
-	var $commentdelimiters = array(
-	array("//", "\n"),
-	array("{", "}"),
-	array("(*", "*)")
-	);
+	var $commentdelimiters = [
+		["//", "\n"],
+		["{", "}"],
+		["(*", "*)"]
+	];
 
 	/********************************************/
 	/* Les delimiteurs de chaines de caracteres */
 	/********************************************/
-	var $stringdelimiters = array(
-	array("'", "'")
-	);
+	var $stringdelimiters = [
+		["'", "'"]
+	];
 
 	/********************************************************/
 	/* Les delimiteurs d'instructions pour le preprocesseur */
 	/********************************************************/
-	var $preprocdelimiters = array(
-	array("(*\$", "*)"),
-	array("{\$", "}")
-	);
+	var $preprocdelimiters = [
+		["(*\$", "*)"],
+		["{\$", "}"]
+	];
 
 	/////////////////////////////////////////////////////////////////////////////////////////
 	// Le code en lui-meme
@@ -105,7 +105,7 @@ class DelphiHightlighter{
 	function formatspecialtok($tok, $color, $style)
 	{
 		if (empty($color)) return sprintf("%s$tok%s", $style[0], $style[1]);
-		return sprintf("%s<span style=\"color: %s\">$tok</span>%s", $style[0], $color, $style[1]);
+		return sprintf("%s<span style=\"color: %s;\">$tok</span>%s", $style[0], $color, $style[1]);
 	}
 
 	/*******************************************************************/
@@ -144,7 +144,7 @@ class DelphiHightlighter{
 	/***************************************************/
 	/* On regarde si on ne tombe pas sur un delimiteur */
 	/***************************************************/
-	function parsearray($array, $color = "#000080", $style = array("<em>", "</em>"))
+	function parsearray($array, $color = "#000080", $style = ["<em>", "</em>"])
 	{
 		// On effectue quelques verifications
 		if (!is_array($array))   return FALSE;

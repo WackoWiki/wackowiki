@@ -373,9 +373,8 @@ header {
 	color: #333333;
 	font-size: 0.75em;
 	font-weight: normal;
-	margin: 0;
 	padding: 0.1em 20px;
-	margin-left: -20px;
+	margin: 0 0 0 -20px;
 	float: left;
 	width: 100%;
 }

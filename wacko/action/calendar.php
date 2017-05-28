@@ -180,7 +180,7 @@ for ($month; $month <= $_range; $month++)
 
 		echo "</td>";
 
-		if ($month%3 == 0 and $month < $_range)
+		if ($month % 3 == 0 and $month < $_range)
 		{
 			echo "</tr>\n<tr>";
 		}

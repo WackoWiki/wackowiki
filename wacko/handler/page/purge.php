@@ -19,7 +19,7 @@ if (!($this->is_owner() || $this->is_admin()))
 if (@$_POST['_action'] === 'purge_data')
 {
 	// purge page
-	$message = "<ol><em>";
+	$message = "<ol>";
 
 	$title = $this->tag . ' ' . $this->page['title'];
 
@@ -50,7 +50,7 @@ if (@$_POST['_action'] === 'purge_data')
 		$message .= '<li>' . $this->_t('PageCachePurged') . "</li>\n";
 	}
 
-	$message .= '</em></ol><br />';
+	$message .= '</ol><br />';
 	$message .= $this->_t('ThisActionHavenotUndo') . "\n";
 
 	$this->show_message($message, 'success');

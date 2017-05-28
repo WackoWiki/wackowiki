@@ -34,6 +34,7 @@ class Wacko
 	var $unicode_entities		= [];		// common unicode array
 	var $toc_context			= [];
 	var $search_engines			= ['bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider'];
+	var $language				= null;
 	var $languages				= null;
 	var $translations			= null;
 	var $wanted_cache			= null;
@@ -499,7 +500,7 @@ class Wacko
 	*
 	* @param bool $subset, true for allowed_languages only
 	*
-	* @return Array of language codes
+	* @return array Array of language codes
 	*/
 	function available_languages($subset = true)
 	{
@@ -861,8 +862,8 @@ class Wacko
 	* Transliterate tag to supertag
 	*
 	* @param string $tag
-	* @param int $strtolow Change tag case. TRAN_DONTCHANGE - don't change TRAN_LOWERCASE - convert to lowercase
-	* @param unknown_type $donotload WTF: doesn't use
+	* @param integer $strtolow Change tag case. TRAN_DONTCHANGE - don't change TRAN_LOWERCASE - convert to lowercase
+	* @param integer $donotload WTF: doesn't use
 	*
 	* @return string
 	*/
@@ -1288,7 +1289,7 @@ class Wacko
 	/**
 	* Check if page is in cache
 	*
-	* @param unknown_type $tag
+	* @param string $tag
 	* @param int $page_id
 	*
 	* @return boolean  Return TRUE if tag in Wanted cache and FALSE if not
@@ -3047,7 +3048,7 @@ class Wacko
 	* @param boolean $track Track this link. Optional, default is TRUE
 	* @param string $title link title. Optional, default is ''
 	* @param string $params additional parameters. Optional, default is ''
-	* @return unknown
+	* @return string
 	*/
 	function compose_link_to_page($tag, $method = '', $text = '', $track = 1, $title = '', $params = '')
 	{
@@ -4123,7 +4124,7 @@ class Wacko
 	* Link-tracking used to collect all links in processed text.
 	*
 	* @param string $tag
-	* @param enum $link_type [LINK_PAGE|LINK_FILE]
+	* @param integer $link_type [LINK_PAGE|LINK_FILE]
 	*
 	*/
 	function track_link_to($tag, $link_type)

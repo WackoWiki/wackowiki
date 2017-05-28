@@ -81,8 +81,8 @@ function admin_db_convert(&$engine, &$module)
 			$engine->show_message($message, 'success');
 ?>
 			<br />
-			<div class="code" style="padding:3px;">
-				<small><pre><?php echo $sql_log; ?></pre></small>
+			<div class="code">
+				<pre><?php echo $sql_log; ?></pre>
 			</div><br />
 <?php
 		}
@@ -116,8 +116,8 @@ function admin_db_convert(&$engine, &$module)
 
 			?>
 			<br />
-			<div class="code" style="padding: 3px;">
-				<small><pre><?php echo $sql_log; ?></pre></small>
+			<div class="code">
+				<pre><?php echo $sql_log; ?></pre>
 			</div><br />
 		<?php
 		}

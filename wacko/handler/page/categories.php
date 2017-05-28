@@ -324,7 +324,7 @@ if ($this->is_owner() || $this->is_admin())
 				{
 					echo $this->form_open('remove_category', ['page_method' => 'categories']);
 					echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change_id'] . '" />' . "\n" .
-						'<table class="formation">';
+						'<table class="formation">' .
 							'<tr>' .
 								'<td>' .
 									'<label for="">' . Ut::perc_replace($this->_t('CategoriesDelete'), '<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>') . '</label> ' .

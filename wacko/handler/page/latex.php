@@ -48,8 +48,8 @@ if ($this->has_access('read'))
 			'</em>',
 			'<small>',						// Small
 			'</small>',
-			'<tt>',							// Monospaced
-			'</tt>',
+			'<code>',							// Monospaced
+			'</code>',
 			'<li>',							// List item
 			'</li>',
 			'</ul>',						// End of unnumbered list
