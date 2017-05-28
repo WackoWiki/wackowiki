@@ -194,7 +194,7 @@ $ap_translation = [
 	],
 
 	// Dashboard module
-	'lock'		=> [
+	'main'		=> [
 		'name'		=> 'Haupt-Menü',
 		'title'		=> 'WackoWiki Administration',
 	],

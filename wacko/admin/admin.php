@@ -189,14 +189,14 @@ foreach (Ut::file_glob('admin/{common,module}/*.php') as $file_name)
 ##     Build menu                                     ##
 ########################################################
 
-$menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['lock']['cat']].
-			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
+$menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['main']['cat']].
+			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'main' || (!$_GET && !$_POST)
 				? "\n<ul>\n" . '<li class="active">'
 				: "\n<ul>\n<li>") .
-			'<a href="admin.php" title="' . $module['lock']['title'] . '">' . $module['lock']['name'] . '</a>' .
+			'<a href="admin.php" title="' . $module['main']['title'] . '">' . $module['main']['name'] . '</a>' .
 			"</li>\n";
 
-$category = $module['lock']['cat'];
+$category = $module['main']['cat'];
 
 uasort($module,
 		create_function(
@@ -213,7 +213,7 @@ foreach ($module as $row)
 {
 	if ($row['status'] === true)
 	{
-		if ($row['mode'] != 'lock')
+		if ($row['mode'] != 'main')
 		{
 			$menu .= ($row['cat'] != $category
 						? "</ul>\n</li>\n" . '<li class="text submenu2">' . $engine->_t('CategoryArray')[$row['cat']] . "<ul>\n"
@@ -280,14 +280,14 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 					$time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
 
 					echo (RECOVERY_MODE === true ? '<strong>' . $engine->_t('RecoveryMode') . '</strong>' : '') .
-					'&nbsp;&nbsp;' .
-					Ut::perc_replace($engine->_t('TimeLeft'), $time_left) .
-					'&nbsp;&nbsp;' .
-					$engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')) .
-					'&nbsp;&nbsp' .
-					($db->is_locked() ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) .
-					'&nbsp;&nbsp' .
-					$engine->_t('ApVersion') . ' ' . $engine->db->wacko_version;
+						'&nbsp;&nbsp;' .
+						Ut::perc_replace($engine->_t('TimeLeft'), $time_left) .
+						'&nbsp;&nbsp;' .
+						$engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')) .
+						'&nbsp;&nbsp' .
+						($db->is_locked() ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) .
+						'&nbsp;&nbsp' .
+						$engine->_t('ApVersion') . ' ' . $engine->db->wacko_version;
 					?>
 				</span>
 			</div>
@@ -355,8 +355,8 @@ if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
 }
 else if (!($_GET && $_POST))
 {
-	$exec = 'admin_lock';
-	$exec($engine, $module['lock']);
+	$exec = 'admin_main';
+	$exec($engine, $module['main']);
 }
 
 ########################################################
