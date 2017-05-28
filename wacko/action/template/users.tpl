@@ -78,7 +78,7 @@ first really BIG template written
 					=]
 					[= ic _ =
 						<tr>
-							<td class="label" style="width:50px; white-space:nowrap;">[ ' _t: UsersIntercomSubject ' ]:</td>
+							<td class="label nowrap" style="width:50px;">[ ' _t: UsersIntercomSubject ' ]:</td>
 							<td>
 								<input type="text" name="mail_subject" value="[ ' subj |e attr ' ]" size="60" maxlength="200" />
 								[= ref _ =
@@ -187,7 +187,7 @@ first really BIG template written
 		</form>
 	=]
 	['' pagination '']
-	<table class="lined" style="width:100%; white-space:nowrap; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
+	<table class="lined nowrap" style="width:100%; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
 		<thead>
 			<tr>
 				[= s _ =

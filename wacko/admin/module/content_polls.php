@@ -177,7 +177,7 @@ function admin_content_polls(&$engine, &$module)
 							rawurldecode($engine->href('', $mode_file.'&amp;poll=' . $row['poll_id'] . '&amp;results=1')) . '">' .
 							date('d/m', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
-					echo '<td style="white-space:nowrap;">' . $polls_obj->poll_time($row['start'], time()) . '</td>';
+					echo '<td class="nowrap">' . $polls_obj->poll_time($row['start'], time()) . '</td>';
 				echo '</tr>';
 			}
 
@@ -266,7 +266,7 @@ function admin_content_polls(&$engine, &$module)
 						rawurldecode($engine->href('', $mode_file.'&amp;year=' . $year.'&amp;poll=' . $row['poll_id'] . '&amp;results=1')) . '">' .
 						date('d/m/y', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
-					echo '<td style="white-space:nowrap;">' . $polls_obj->poll_time($row['start'], $row['end']) . '</td>';
+					echo '<td class="nowrap">' . $polls_obj->poll_time($row['start'], $row['end']) . '</td>';
 				echo '</tr>';
 			}
 		}

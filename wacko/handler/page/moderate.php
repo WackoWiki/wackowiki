@@ -769,7 +769,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'</td>' .
 						'<td class="t_center" ' . ($this->is_admin() ? ' title="' . $topic['ip'] . '"' : '' ) . '><small>&nbsp;&nbsp;' . $this->user_link($topic['owner_name'], '', true, false) . '&nbsp;&nbsp;</small></td>' .
 						'<td class="t_center"><small>' . $topic['comments'] . '</small></td>' .
-						'<td class="t_center white-space:nowrap"><small>&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '</small></td>' .
+						'<td class="t_center nowrap"><small>&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '</small></td>' .
 					'</tr>' . "\n";
 			}
 		}

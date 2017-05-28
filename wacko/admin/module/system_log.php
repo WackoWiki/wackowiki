@@ -163,7 +163,7 @@ function admin_system_log(&$engine, &$module)
 <?php
 		$engine->print_pagination($pagination);
 ?>
-		<table style="padding: 3px;" class="formation">
+		<table class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
 				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordertime;  ?>"><?php echo $engine->_t('LogDate'); ?></a></th>

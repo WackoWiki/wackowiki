@@ -233,7 +233,7 @@ class Polls
 
 			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts') . ': ' . $duration.
 						'<br />' . $this->engine->_t('PollsAdded') . ': ' . (strpos($header['user_id'], '.') ? $user : '<a href="' . $this->engine->href('', $this->engine->db->users_page, ['profile' => $user]) . '">' . $user . '</a>') . '</small></td></tr>' .
-					'<tr><td colspan="2" style="white-space:nowrap;">' .
+					'<tr><td colspan="2" class="nowrap">' .
 					'<input type="submit" name="vote" id="submit" value="' . $this->engine->_t('PollsSubmit') . '" /> '.
 					'<input type="submit" name="results" id="submit" value="' . $this->engine->_t('PollsResults') . '" />' .
 					'</tr></td>' .

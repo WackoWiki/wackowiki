@@ -67,7 +67,7 @@ if ($this->can_upload(true) === true)
 			<label for="file_upload"><?php echo $this->_t('UploadFor');?>:&nbsp;</label>
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" />
 		</td>
-		<td style="white-space: nowrap;">
+		<td class="nowrap">
 			<input type="file" name="file" id="file_upload" <?php echo $accecpt;?>/>&nbsp;(<?php echo $this->_t('UploadMax') . $this->binary_multiples(($this->db->upload_max_size), false, true, true);?>)
 		</td>
 	</tr>

@@ -584,7 +584,7 @@ function admin_user_users(&$engine, &$module)
 		?>
 		<input type="hidden" name="user_id" value="<?php echo $user_id; ?>" />
 
-		<table style="padding: 3px;" class="formation">
+		<table class="formation">
 		<?php
 
 			echo '<tr class="lined">' . "\n" .
@@ -836,7 +836,7 @@ function admin_user_users(&$engine, &$module)
 
 		$engine->print_pagination($pagination);
 ?>
-		<table style="padding: 3px;" class="formation listcenter">
+		<table class="formation listcenter">
 			<tr>
 				<th style="width:5px;"></th>
 				<th style="width:5px;"></th>
