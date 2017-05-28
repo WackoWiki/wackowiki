@@ -25,7 +25,7 @@ function admin_user_groups(&$engine, &$module)
 {
 	$where			= '';
 	$order			= '';
-	$usergroup		= '';
+	$usergroup		= [];
 	$orderuser		= '';
 
 /*	TODO:

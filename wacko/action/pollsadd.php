@@ -30,7 +30,7 @@ $admin = $this->is_admin();
 // basic privilege check for moderation mode
 if ($moderation === true && !$admin)
 {
-	$moderation === false;
+	$moderation = false;
 }
 
 // preloading poll data for moderation purposes

@@ -372,7 +372,9 @@ function admin_db_restore(&$engine, &$module)
 					' <a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($pack, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>.';
 			$engine->show_message($message, 'success');
 ?>
-			<div class="code" style="padding:3px;"><small><pre><?php echo $results; ?></pre></small></div><br />
+			<div class="code">
+				<pre><?php echo $results; ?></pre>
+			</div><br />
 <?php
 			$engine->log(1, 'Restored backup of a database ' . $pack);
 		}
