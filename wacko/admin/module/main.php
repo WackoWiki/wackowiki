@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 ########################################################
 ##   Welcome screen and site locking                  ##
 ########################################################
-$_mode = 'lock';
+$_mode = 'main';
 
 $module[$_mode] = [
 		'order'	=> 100,
@@ -22,7 +22,7 @@ $module[$_mode] = [
 
 ########################################################
 
-function admin_lock(&$engine, &$module)
+function admin_main(&$engine, &$module)
 {
 	// import passed variables and objects
 	$config			= & $module['objs'][0];
