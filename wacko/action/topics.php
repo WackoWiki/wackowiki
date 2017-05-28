@@ -211,7 +211,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 							: '<strong>' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
 						) .
 						'</td>' .
-						'<td class="t_center" style="white-space: nowrap;">' .
+						'<td class="t_center nowrap">' .
 							'<small title="' . ($admin ? $topic['ip'] : '') . '">' .
 								'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']) . '&nbsp;&nbsp;<br />' .
 								'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '&nbsp;&nbsp;'.

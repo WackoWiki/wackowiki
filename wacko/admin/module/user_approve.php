@@ -338,7 +338,7 @@ function admin_user_approve(&$engine, &$module)
 
 		$engine->print_pagination($pagination);
 ?>
-		<table style="padding: 3px;" class="formation listcenter">
+		<table class="formation listcenter">
 			<tr>
 				<!--<th style="width:5px;"></th>-->
 				<!--<th style="width:5px;"></th>-->

@@ -107,7 +107,7 @@ function admin_db_restore(&$engine, &$module)
 									#'<td style="width:10px;">' .
 									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
 									'</td>
-									<th class="t_left" style="white-space:nowrap;">' .
+									<th class="t_left nowrap">' .
 										date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
 									'</th>
 								</tr>
@@ -129,7 +129,7 @@ function admin_db_restore(&$engine, &$module)
 					// description
 					echo '<td><table>';
 						// cluster root
-						echo '<tr><th colspan="3" class="t_left" style="white-space:nowrap;">' .
+						echo '<tr><th colspan="3" class="t_left nowrap">' .
 								$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 							'</th></tr>' . "\n";
 						// contents
@@ -484,7 +484,7 @@ function admin_db_restore(&$engine, &$module)
 										#'<td style="width:10px;">' .
 											'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
 										'</td>
-										<th class="t_left" style="white-space:nowrap;">' .
+										<th class="t_left nowrap">' .
 											date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
 										'</th>
 									</tr>
@@ -512,7 +512,7 @@ function admin_db_restore(&$engine, &$module)
 						// description
 						echo '<td><table>';
 							// cluster root
-							echo '<tr><th colspan="3" class="t_left" style="white-space:nowrap;">' .
+							echo '<tr><th colspan="3" class="t_left nowrap">' .
 									$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 								'</th></tr>' . "\n";
 							// contents

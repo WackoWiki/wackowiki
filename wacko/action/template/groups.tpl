@@ -41,7 +41,7 @@
 			</tr>
 		</table>
 		<br />
-		<table class="lined" style="width:100%; white-space:nowrap; padding-right:20px;">
+		<table class="lined nowrap" style="width:100%; padding-right:20px;">
 			['' pagination '']
 			<tr>
 				[= head _ =

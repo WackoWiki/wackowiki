@@ -35,7 +35,7 @@ if (isset($top))
 		foreach ($pages as $page)
 		{
 			echo '<tr><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title'], 0) . '</td>' .
-				 '<td style="width:10px; white-space:nowrap;">&nbsp;<strong>+'.round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
+				 '<td class="nowrap" style="width:10px;">&nbsp;<strong>+'.round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
 		}
 
 		echo '</table>' . "\n";
@@ -71,7 +71,7 @@ if (isset($bottom))
 		foreach ($pages as $page)
 		{
 			echo '<tr><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title'], 0) . '</td>' .
-				 '<td style="width:10px; white-space:nowrap;">&nbsp;<strong>' . round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
+				 '<td class="nowrap" style="width:10px;">&nbsp;<strong>' . round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
 		}
 
 		echo '</table>' . "\n";
