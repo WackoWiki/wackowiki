@@ -415,6 +415,12 @@ class Ut
 		return $rnd;
 	}
 
+	// checks if the parameter is an empty string or a string containing only whitespace
+	function is_blank($str)
+	{
+		return ctype_space($str) || $str === '';
+	}
+
 	static function is_empty($val)
 	{
 		return $val === '' || $val === null || $val === false;
