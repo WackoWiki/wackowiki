@@ -1,4 +1,4 @@
-@import "wacko.css";
+,@import "wacko.css";
 
 /* basic -------------------------------------------------- */
 p,
@@ -1218,6 +1218,11 @@ a:target {
 	border-left: 0;
 }
 
+#menu-user li:first-child.active {
+	margin-left: -6px;
+	padding-left: 6px;
+}
+
 #menu-user li.active {
 	font-weight: 600;
 	background: #439ce8 linear-gradient(to bottom, #43ace8, #4383e8) repeat-x;
@@ -2128,63 +2133,79 @@ table.forum td {
 
 /* authors action ------------- */
 .license-CC-BY {
-	background: url('../../../image/cc-by.svg') no-repeat 0;
+	background-image:	url('../../../image/cc-by.svg');
+	background-repeat:	no-repeat;
+	background-position:	0;
 	height:	22px;
 	width:	22px;
 }
 .license-CC-ZERO {
-	background: url('../../../image/cc-zero.svg') no-repeat 0;
+	background-image:	url('../../../image/cc-zero.svg');
+	background-repeat:	no-repeat;
+	background-position:	0;
 	height:	22px;
 	width:	22px;
 }
 .license-PD {
-	background: url('../../../image/cc-pd.svg') no-repeat 0;
+	background-image:	url('../../../image/cc-pd.svg');
+	background-repeat:	no-repeat;
+	background-position:	0;
 	height:	22px;
 	width:	22px;
 }
 .license-CC-BY-SA {
-	background: url('../../../image/cc-by.svg'),
-	url('../../../image/cc-sa.svg') no-repeat,
-	no-repeat 0,
-	22px;
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-sa.svg');
+	background-repeat:	no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px;
 	height:	22px;
 	width:	44px;
 }
 .license-CC-BY-ND {
-	background: url('../../../image/cc-by.svg'),
-	url('../../../image/cc-nd.svg') no-repeat,
-	no-repeat 0,
-	22px;
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-nd.svg');
+	background-repeat:	no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px;
 	height:	22px;
 	width:	44px;
 }
 .license-CC-BY-NC {
-	background: url('../../../image/cc-by.svg'),
-	url('../../../image/cc-nc.svg') no-repeat,
-	no-repeat 0,
-	22px;
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-nc.svg');
+	background-repeat:	no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px;
 	height:	22px;
 	width:	44px;
 }
 .license-CC-BY-NC-SA {
-	background: url('../../../image/cc-by.svg'),
-	url('../../../image/cc-nc.svg'),
-	url('../../../image/cc-sa.svg') no-repeat,
-	no-repeat,
-	no-repeat 0,
-	22px,
-	44px;
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-nc.svg'),
+						url('../../../image/cc-sa.svg');
+	background-repeat:	no-repeat,
+						no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px,
+							44px;
 	height:	22px;
 	width:	66px;
 }
 .license-CC-BY-NC-ND {
-	background: url('../../../image/cc-by.svg'),
-	url('../../../image/cc-nc.svg'),
-	url('../../../image/cc-nd.svg') no-repeat,
-	no-repeat,
-	no-repeat 0,
-	22px,
-	44px;
+	background-image:	url('../../../image/cc-by.svg'),
+						url('../../../image/cc-nc.svg'),
+						url('../../../image/cc-nd.svg');
+	background-repeat:	no-repeat,
+						no-repeat,
+						no-repeat;
+	background-position:	0,
+							22px,
+							44px;
 	height:	22px;
 	width:	66px;
 }
