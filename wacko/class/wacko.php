@@ -110,8 +110,8 @@ class Wacko
 	// Backward compatibility wrapper for legacy sql functions
 
 	/**
-	 * @deprecated use db->sql_query() instead
-	 */
+	* @deprecated use db->sql_query() instead
+	*/
 	function sql_query($query, $debug = 0)
 	{
 		return $this->dblink->sql_query($query, $debug);
@@ -126,8 +126,8 @@ class Wacko
 	}
 
 	/**
-	 * @deprecated use db->load_single() instead
-	 */
+	* @deprecated use db->load_single() instead
+	*/
 	function load_single($query, $docache = false)
 	{
 		return $this->dblink->load_single($query, $docache);
@@ -229,6 +229,54 @@ class Wacko
 
 		$file_name = explode('.', $file_name);
 		return array_pop($file_name);
+	}
+
+	/**
+	 * File extension check
+	 *
+	 * @param string $file_name File name.
+	 * @return boolean
+	 */
+	function file_extension_check($file_name)
+	{
+		$allowed_list	= $this->db->upload_allowed_exts;
+		$banned_list	= $this->db->upload_banned_exts;
+
+		// get extension
+		$file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+
+		// check against disallowed files
+		if (!Ut::is_blank($banned_list))
+		{
+			$banned_exts = explode('|', $banned_list);
+
+			foreach ($banned_exts as $extension)
+			{
+				if (0 == strcasecmp($extension, $file_extension))
+				{
+					return false;
+				}
+			}
+		}
+
+		// if the allowed list is note populated then the file must be allowed
+		if (Ut::is_blank($allowed_list))
+		{
+			return true;
+		}
+
+		// check against allowed files
+		$allowed_exts = explode('|', $allowed_list);
+
+		foreach ($allowed_exts as $extension)
+		{
+			if (0 == strcasecmp($extension, $file_extension))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	function upload_quota($user_id = '')
@@ -1113,7 +1161,7 @@ class Wacko
 						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"WHERE " . ($page_id != 0
 						? "page_id  = '" . (int) $page_id . "' "
-						: "supertag = " . $this->db->q($supertag) . " " ) .
+						: "supertag = " . $this->db->q($supertag) . " ") .
 						($deleted != 1
 							? "AND p.deleted <> '1' "
 							: "") .
@@ -1133,7 +1181,7 @@ class Wacko
 							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
 						"WHERE " . ($page_id != 0
 							? "p.page_id  = '" . (int) $page_id . "' "
-							: "p.supertag = " . $this->db->q($supertag) . " " ) .
+							: "p.supertag = " . $this->db->q($supertag) . " ") .
 							($deleted != 1
 								? "AND p.deleted <> '1' "
 								: "") .
@@ -6313,7 +6361,6 @@ class Wacko
 			else
 			{
 				$page		= $this->load_page($this->tag, 0, $revision_id);
-				#$page		= $this->load_page($this->tag, 0, $revision_id, '', '', true);
 			}
 
 			// TODO: obsolete? Add description what it does
