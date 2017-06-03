@@ -85,7 +85,7 @@ class Email
 				// 2 = client and server messages
 				# $mail->SMTPDebug	= 2;	// enables SMTP debug information (for testing)
 
-				if (!$this->is_blank($this->engine->db->smtp_username))
+				if (!Ut::is_blank($this->engine->db->smtp_username))
 				{
 					// Use SMTP Authentication
 					$mail->SMTPAuth = true;
@@ -93,7 +93,7 @@ class Email
 					$mail->Password = $this->engine->db->smtp_password;
 				}
 
-				if (!$this->is_blank($this->engine->db->smtp_connection_mode))
+				if (!Ut::is_blank($this->engine->db->smtp_connection_mode))
 				{
 					$mail->SMTPSecure = $this->engine->db->smtp_connection_mode;
 				}
@@ -178,11 +178,4 @@ class Email
 
 		return $send_ok;
 	}
-
-	// checks if the parameter is an empty string or a string containing only whitespace
-	function is_blank($str)
-	{
-		return ctype_space($str) || $str === '';
-	}
-
 }
