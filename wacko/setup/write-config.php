@@ -79,15 +79,11 @@ else
 
 echo "         </ul>\n";
 
-// TODO: show feedback?
-if ($config['is_update'])
-{
-	// purge old cache files
-	Ut::purge_directory(CACHE_PAGE_DIR);
-	Ut::purge_directory(CACHE_SQL_DIR);
-	Ut::purge_directory(CACHE_CONFIG_DIR);
-	Ut::purge_directory(CACHE_TEMPLATE_DIR);
-}
+// purge old cache files
+Ut::purge_directory(CACHE_PAGE_DIR);
+Ut::purge_directory(CACHE_SQL_DIR);
+Ut::purge_directory(CACHE_CONFIG_DIR);
+Ut::purge_directory(CACHE_TEMPLATE_DIR);
 
 echo "         <h2>" . $lang['SecurityConsiderations'] . "</h2>\n";
 echo "         <ul class=\"security\">\n";
