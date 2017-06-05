@@ -201,12 +201,6 @@ switch ($config['database_driver'])
 			/* case 'sqlite3': */
 
 			case 'mysql_pdo':
-
-				if ($config['database_driver'] == 'mysql_pdo')
-				{
-					#$config['database_driver'] = 'mysql';
-				}
-
 				$dsn = "mysql:host=" . $config['database_host'].($config['database_port'] != '' ? ";port=" . $config['database_port'] : '') . ";dbname=" . $config['database_database'].($config['database_charset'] != '' ? ";charset=" . $config['database_charset'] : '');
 				break;
 
@@ -249,7 +243,7 @@ switch ($config['database_driver'])
 		if (!$fatal_error)
 		{
 			// Check if database version matches engine and switch to MyISAM if necessary
-			if ($result	= $dblink->query($db_version))
+			if ($result = $dblink->query($db_version))
 			{
 				$_result		= $result->fetch(PDO::FETCH_ASSOC);
 				$mysql_version	= substr($_result['mysql_version'], 0, strpos($_result['mysql_version'], '-'));
