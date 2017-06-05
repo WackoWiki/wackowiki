@@ -70,6 +70,8 @@ $alter_file_r5_4_6 = "ALTER TABLE {$pref}file ADD modified_dt DATETIME NULL DEFA
 
 $rename_file_r5_4_0 = "RENAME TABLE {$pref}upload TO {$pref}file";
 
+$update_file_r5_4_0 = "UPDATE {$pref}file SET modified_dt = uploaded_dt WHERE modified_dt IS NULL";
+
 // FILE LINK
 $table_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (" .
 							"file_link_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
