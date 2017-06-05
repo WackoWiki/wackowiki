@@ -66,6 +66,7 @@ $alter_file_r5_4_2 = "ALTER TABLE {$pref}file CHANGE upload_id file_id INT(10) U
 $alter_file_r5_4_3 = "ALTER TABLE {$pref}file CHANGE upload_lang file_lang VARCHAR(2) NOT NULL";
 $alter_file_r5_4_4 = "ALTER TABLE {$pref}file ADD mime_type VARCHAR(255) NOT NULL DEFAULT '' AFTER file_ext";
 $alter_file_r5_4_5 = "ALTER TABLE {$pref}file DROP INDEX idx_page_id, ADD UNIQUE idx_page_id (page_id, file_name)";
+$alter_file_r5_4_6 = "ALTER TABLE {$pref}file ADD modified_dt DATETIME NULL DEFAULT NULL AFTER uploaded_dt";
 
 $rename_file_r5_4_0 = "RENAME TABLE {$pref}upload TO {$pref}file";
 

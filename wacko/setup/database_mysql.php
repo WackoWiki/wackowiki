@@ -79,6 +79,7 @@ $table_file = "CREATE TABLE {$pref}file (" .
 					"file_description VARCHAR(250) NOT NULL DEFAULT ''," .
 					"caption TEXT NOT NULL," .
 					"uploaded_dt DATETIME NULL DEFAULT NULL," .
+					"modified_dt DATETIME NULL DEFAULT NULL," .
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0'," .

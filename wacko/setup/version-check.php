@@ -20,8 +20,21 @@ write_config_hidden_nodes(['none' => '']);
 	*/
 	?>
 <h2><?php echo $lang['ModRewrite']; ?></h2>
-<p class="notop"><?php echo $lang['ModRewriteInstalled']; ?>   <?php if (function_exists('apache_get_modules')) { echo output_image(in_array('mod_rewrite', apache_get_modules())); } else { echo $lang['ModRewriteStatusUnknown']; } ?></p>
+<p class="notop"><?php echo $lang['ModRewriteInstalled']; ?>
 	<?php
+	if (function_exists('apache_get_modules'))
+	{
+		echo output_image(in_array('mod_rewrite', apache_get_modules()));
+	}
+	else
+	{
+		echo $lang['ModRewriteStatusUnknown'];
+	} ?>
+</p>
+	<?php
+	// TODO: check for mb_string, iconv, bcmath, pcre, pcre utf-8, ctype, gd, JSON, SPL extension
+	// https://secure.php.net/manual/en/function.extension-loaded.php
+
 	/*
 	 Check which database extensions are installed and what versions of the db are there
 	 */

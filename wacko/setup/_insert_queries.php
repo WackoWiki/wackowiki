@@ -149,6 +149,7 @@ $upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_2,			
 $upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_3,			$lang['ErrorAlteringTable']];
 $upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_4,			$lang['ErrorAlteringTable']];
 $upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_5,			$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_6,			$lang['ErrorAlteringTable']];
 
 // file link
 $upgrade['5.4.0'][]		= [$lang['CreatingTable'],	'file_link',		$table_file_link_r5_4_0,	$lang['ErrorCreatingTable']];

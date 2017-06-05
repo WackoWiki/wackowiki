@@ -276,7 +276,8 @@ if (isset($_POST['upload']) & $can_upload)
 									"picture_h			= '" . (int) $size[1] . "'," .
 									"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
 									"mime_type			= " . $this->db->q($mime_type) . "," .
-									"uploaded_dt		= " . $this->db->q($uploaded_dt) . " " .
+									"uploaded_dt		= " . $this->db->q($uploaded_dt) . ", " .
+									"modified_dt		= UTC_TIMESTAMP() " .
 								"WHERE " .
 									(!$is_global
 										? "page_id		= '" . $this->page['page_id'] . "' AND "
@@ -300,7 +301,8 @@ if (isset($_POST['upload']) & $can_upload)
 									"picture_h			= '" . (int) $size[1] . "'," .
 									"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
 									"mime_type			= " . $this->db->q($mime_type) . "," .
-									"uploaded_dt		= " . $this->db->q($uploaded_dt) . " ");
+									"uploaded_dt		= " . $this->db->q($uploaded_dt) . "," .
+									"modified_dt		= UTC_TIMESTAMP() ");
 
 							// update user uploads count
 							$this->db->sql_query(
