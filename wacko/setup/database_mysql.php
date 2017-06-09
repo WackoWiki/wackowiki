@@ -57,6 +57,8 @@ $table_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
 					"object_type_id INT(10) unsigned NOT NULL DEFAULT 0," .
 					"object_id INT(10) unsigned NOT NULL DEFAULT 0," .
 					"PRIMARY KEY (assignment_id)," .
+					"KEY idx_category_id (category_id)," .
+					"KEY idx_object_id (object_id)," .
 					"KEY idx_object_type_id (object_type_id)," .
 					"UNIQUE KEY idx_assignment (category_id, object_type_id, object_id)" .
 				") {$engine} COMMENT='' {$charset}";
@@ -290,13 +292,18 @@ $table_tag = "CREATE TABLE {$pref}tag (" .
 					"KEY idx_tag_name (tag_name)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_tag_page = "CREATE TABLE {$pref}tag_page (" .
-					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+$table_tag_assignment = "CREATE TABLE {$pref}tag_assignment (" .
+					"assignment_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"tag_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"date_attached DATETIME NULL DEFAULT NULL," .
-					"PRIMARY KEY (page_id, tag_id)," .
-					"KEY idx_tag_id (tag_id)" .
+					"object_type_id INT(10) unsigned NOT NULL DEFAULT 0," .
+					"object_id INT(10) unsigned NOT NULL DEFAULT 0," .
+					"PRIMARY KEY (assignment_id)," .
+					"KEY idx_tag_id (tag_id)," .
+					"KEY idx_object_id (object_id)," .
+					"KEY idx_object_type_id (object_type_id)," .
+					"UNIQUE KEY idx_assignment (tag_id, object_type_id, object_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
 $table_user = "CREATE TABLE {$pref}user (" .
@@ -422,7 +429,7 @@ $table_rating_drop				= "DROP TABLE IF EXISTS {$pref}rating";
 $table_referrer_drop			= "DROP TABLE IF EXISTS {$pref}referrer";
 $table_revision_drop			= "DROP TABLE IF EXISTS {$pref}revision";
 $table_tag_drop					= "DROP TABLE IF EXISTS {$pref}tag";
-$table_tag_page_drop			= "DROP TABLE IF EXISTS {$pref}tag_page";
+$table_tag_assignment_drop		= "DROP TABLE IF EXISTS {$pref}tag_assignment";
 $table_user_drop				= "DROP TABLE IF EXISTS {$pref}user";
 $table_user_setting_drop		= "DROP TABLE IF EXISTS {$pref}user_setting";
 $table_usergroup_drop			= "DROP TABLE IF EXISTS {$pref}usergroup";

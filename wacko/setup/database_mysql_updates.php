@@ -41,7 +41,7 @@ $alter_category_assignment_r5_4_0 = "ALTER TABLE {$pref}category_assignment CHAN
 $alter_category_assignment_r5_4_1 = "ALTER TABLE {$pref}category_assignment ADD assignment_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (assignment_id)";
 $alter_category_assignment_r5_4_2 = "ALTER TABLE {$pref}category_assignment ADD object_type_id INT(10) UNSIGNED NOT NULL AFTER category_id";
 $alter_category_assignment_r5_4_3 = "ALTER TABLE {$pref}category_assignment DROP INDEX idx_pageword, ADD UNIQUE idx_assignment (category_id, object_type_id, object_id)";
-$alter_category_assignment_r5_4_4 = "ALTER TABLE {$pref}category_assignment ADD INDEX idx_object_type_id (object_type_id)";
+$alter_category_assignment_r5_4_4 = "ALTER TABLE {$pref}category_assignment ADD INDEX idx_category_id (category_id), ADD INDEX idx_object_id (object_id), ADD INDEX idx_object_type_id (object_type_id)";
 
 $rename_category_assignment_r5_4_0 = "RENAME TABLE {$pref}category_page TO {$pref}category_assignment";
 
