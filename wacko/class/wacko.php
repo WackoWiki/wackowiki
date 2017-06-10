@@ -3615,7 +3615,8 @@ class Wacko
 			}
 
 			$url	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
-			$icon	= $this->_t('IwIcon');
+			$class	= 'iw-' . $matches[1];
+			$icon	= $this->_t('OuterIcon'); # $this->_t('IwIcon');
 			$tpl	= 'interwiki';
 		}
 		else if (preg_match('/^([\!\.\-' . $this->language['ALPHANUM_P'] . ']+)(\#[' . $this->language['ALPHANUM_P'] . '\_\-]+)?$/', $tag, $matches))

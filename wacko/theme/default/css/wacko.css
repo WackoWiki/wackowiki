@@ -320,6 +320,16 @@ mark {background: #ffffaa;}
 .mark-blue {background: #9ec6ff;}
 .mark-red {background: #ffbaba;}
 
+/* InterWiki links: SYNTAX (HostPrefix:Term) */
+a.iw-source .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/repository.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.iw-bugs .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/report-bug.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+
 /* Wiki links: SYNTAX (prefix://) */
 span.icon{
 /* 	background-size: 16px 16px;*/
