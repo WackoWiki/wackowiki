@@ -3615,7 +3615,7 @@ class Wacko
 			}
 
 			$url	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
-			$class	= 'iw-' . $matches[1];
+			$class	= 'iw-' . strtolower($matches[1]);
 			$icon	= $this->_t('OuterIcon'); # $this->_t('IwIcon');
 			$tpl	= 'interwiki';
 		}
