@@ -19,7 +19,7 @@ del a:link { color: #999999; }
 /* Horizontal rule: SYNTAX ---- */
 hr {
 	border: 0 none #CCCCCC;
-	border-top: 1px solid;
+	border-top: 1px solid #CCCCCC;
 }
 
 /* No line break */
@@ -222,7 +222,7 @@ span.tocnumber {
 /* Quotes: SYNTAX <[text]> */
 blockquote {
 	border: 1px solid #f5f5f5;
-	border-left: 3px #729fcf;
+	border-left: 3px solid #729fcf;
 	color: #444444;
 	padding: 25px 30px;
 	font-family: sans-serif;
