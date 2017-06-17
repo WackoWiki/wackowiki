@@ -3168,6 +3168,7 @@ class Wacko
 	*/
 	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1)
 	{
+		// TODO: add case for audio and video file <audio> / <video>
 		$class		= '';
 		$icon		= '';
 		$img_link	= false;
@@ -3370,7 +3371,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_record($file_name, 0))
 				{
-					$url = $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$url = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 					$have_global = true;
 
 					// tracking file link
@@ -3387,7 +3388,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_record($file_name, 0))
 				{
-					$url = $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$url = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
@@ -3491,20 +3492,20 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
+								return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
 										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize . ' />';
 							}
 							else
 							{
 								// continue
-								# return '<a href="' . $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" title="' . $title . '">' . $text . '</a>';
+								# return '<a href="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" title="' . $title . '">' . $text . '</a>';
 							}
 						}
 						else
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							# return '<img src="' . $this->db->base_url.Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
+							# return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
 							if (!$text)
 							{
 								$text = $title;
