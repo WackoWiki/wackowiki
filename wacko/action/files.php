@@ -185,7 +185,7 @@ if ($can_view)
 			else
 			{
 				$path2	= $path1;
-				$url	= $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
+				$url	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 			}
 
 			$this->files_cache[$file['page_id']][$file['file_name']] = $file;

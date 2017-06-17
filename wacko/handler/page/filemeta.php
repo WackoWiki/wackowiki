@@ -229,7 +229,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 			else
 			{
 				$path	= 'file:/';
-				$url	= $this->db->base_url.Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
+				$url	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 			}
 
 			if (isset($_GET['show']))

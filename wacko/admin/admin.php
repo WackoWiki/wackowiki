@@ -72,7 +72,7 @@ if (@$_POST['_action'] === 'emergency')
 			)
 		)
 	{
-		$engine->db->cookie_path				= preg_replace('|https?://[^/]+|i', '', $engine->db->base_url.'');
+		$engine->db->cookie_path				= preg_replace('|https?://[^/]+|i', '', $engine->db->base_url . '');
 
 		$engine->sess->ap_created				=
 		$engine->sess->ap_last_activity			= time();
