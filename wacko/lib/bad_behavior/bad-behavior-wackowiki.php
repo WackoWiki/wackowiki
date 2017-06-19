@@ -18,7 +18,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 Please report any problems to bad . bots AT ioerror DOT us
 http://bad-behavior.ioerror.us/
 
-WackoWiki implementation, 2016 WackoWiki Team
+WackoWiki implementation, 2017 WackoWiki Team
 Version 0.5
 https://wackowiki.org/doc/Dev/PatchesHacks/BadBehavior
 
@@ -39,8 +39,8 @@ define('BB2_CWD', dirname(__FILE__));
 
 // Settings you can adjust for Bad Behavior.
 // Most of these are unused in non-database mode.
-// DO NOT EDIT HERE; instead make changes in settings.ini.
-// These settings are used when settings.ini is not present.
+// DO NOT EDIT HERE; instead make changes in bb_settings.conf.
+// These settings are used when bb_settings.conf is not present.
 $bb2_settings_defaults = [
 	'log_table'					=> $db->table_prefix . 'bad_behavior',
 	'display_stats'				=> false,
@@ -176,14 +176,14 @@ function bb2_email() {
 
 // retrieve whitelist
 function bb2_read_whitelist() {
-	return @parse_ini_file('config/bb_whitelist.conf'); // dirname(BB2_CORE) . 'whitelist.ini'
+	return @parse_ini_file('config/bb_whitelist.conf'); // dirname(BB2_CORE) . 'bb_whitelist.conf'
 }
 
 // retrieve settings from database
 // Settings are hard-coded for non-database use
 function bb2_read_settings() {
 	global $bb2_settings_defaults;
-	$settings = @parse_ini_file('config/bb_settings.conf'); // dirname(__FILE__) . 'settings.ini'
+	$settings = @parse_ini_file('config/bb_settings.conf'); // dirname(__FILE__) . 'bb_settings.conf'
 	if (!$settings) $settings = [];
 	return @array_merge($bb2_settings_defaults, $settings);
 }
