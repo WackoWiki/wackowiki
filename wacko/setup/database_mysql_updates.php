@@ -150,6 +150,8 @@ $alter_user_setting_r5_4_6 = "ALTER TABLE {$pref}user_setting ADD notify_page TI
 $alter_user_setting_r5_4_7 = "ALTER TABLE {$pref}user_setting ADD notify_comment TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER notify_page";
 $alter_user_setting_r5_4_8 = "ALTER TABLE {$pref}user_setting ADD menu_items INT(2) UNSIGNED NOT NULL DEFAULT '5' AFTER list_count";
 
+$update_user_setting_r5_4_0 = "UPDATE {$pref}user_setting SET theme = 'default'";
+
 // USERGROUP
 $alter_usergroup_r5_4_0 = "ALTER TABLE {$pref}usergroup CHANGE moderator moderator_id INT(10) UNSIGNED NOT NULL DEFAULT '0'";
 $alter_usergroup_r5_4_1 = "ALTER TABLE {$pref}usergroup ADD group_lang VARCHAR(2) NOT NULL AFTER group_name";

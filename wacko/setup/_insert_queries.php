@@ -70,7 +70,6 @@ $insert_records[]		= [$lang['InstallingAdmin'],				$insert_admin,					'admin use
 $insert_records[]		= [$lang['InstallingAdminSetting'],			$insert_admin_setting,			'admin user settings'];
 $insert_records[]		= [$lang['InstallingAdminGroup'],			$insert_admin_group,			'admin group'];
 $insert_records[]		= [$lang['InstallingAdminGroupMember'],		$insert_admin_group_member,		'admin group member'];
-#$insert_records[]		= [$lang['InstallingRegisteredGroup'],		$insert_registered_group,		'registered group'];
 $insert_records[]		= [$lang['InstallingModeratorGroup'],		$insert_moderator_group,		'moderator group'];
 $insert_records[]		= [$lang['InstallingReviewerGroup'],		$insert_reviewer_group,			'reviewer group'];
 
@@ -216,6 +215,8 @@ $upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_set
 $upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_7,	$lang['ErrorAlteringTable']];
 
 $upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_8,	$lang['ErrorAlteringTable']];
+
+$upgrade['5.5.rc3'][]	= [$lang['UpdateTable'],	'user_setting',		$update_user_setting_r5_4_0,	$lang['ErrorUpdatingTable']];
 
 // Make sure these are in order!
 $upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'user',				$update_user_r5_4_0,		$lang['ErrorUpdatingTable']];
