@@ -145,7 +145,6 @@ $lang = [
 'InstallingAdminGroup' => 'Dodanie grupy Administratorzy',
 'InstallingAdminGroupMember' => 'Adding Admins Group Member',
 'InstallingEverybodyGroup' => 'Adding Everybody Group',
-'InstallingRegisteredGroup' => 'Adding Registered Group',
 'InstallingModeratorGroup' => 'Adding Moderator Group',
 'InstallingReviewerGroup' => 'Adding Reviewer Group',
 'InstallingLogoImage' => 'Adding Logo Image',

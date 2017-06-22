@@ -145,7 +145,6 @@ $lang = [
 'InstallingAdminGroup' => 'Gruppe Admins hinzugefügt',
 'InstallingAdminGroupMember' => 'Gruppe Admins Mitglied hinzugefügt',
 'InstallingEverybodyGroup' => 'Gruppe Everybody hinzugefügt',
-'InstallingRegisteredGroup' => 'Gruppe Registered hinzugefügt',
 'InstallingModeratorGroup' => 'Gruppe Moderator hinzugefügt',
 'InstallingReviewerGroup' => 'Gruppe Reviewer hinzugefügt',
 'InstallingLogoImage' => 'Füge WackoWiki Logo hinzu',
