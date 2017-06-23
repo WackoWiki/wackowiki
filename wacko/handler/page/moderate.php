@@ -201,15 +201,18 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->forum	= true;
 
 	// resave first comment as new topic page
-	$first_tag		= $engine->get_page_tag(array_shift($comment_ids));
-	$page			= $engine->load_page($first_tag);
+	$first_page_id	= array_shift($comment_ids);
+	$page			= $engine->load_page('', $first_page_id);
 
 	// temporary unset page context
 	$oldpage = $engine->page;
 	unset($engine->page);
 
+	// TODO: title
+	$title = $page['title'];
+
+	// TODO: pass user, else save_page might fail due missing write privilege
 	// resave modified body
-	$page['body']	= '==' . $title . "==\n\n" . $page['body'];
 	$engine->save_page($new_tag, $title, $page['body'], '', '', '', 0, '', '', true);
 
 	// set page context back
@@ -260,7 +263,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	}
 
 	// remove old first comment
-	moderate_delete_page($engine, $first_tag);
+	moderate_delete_page($engine, $page['tag']);
 
 	// update page_link table
 	$page = $engine->load_page('', $new_page_id);
@@ -1066,11 +1069,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						else
 						{
 							$this->set_message($this->_t('ModerateCommentsSplitFailed'), 'error');
-							$this->log(2, 'Error when separating comments from the topic ((/' . $this->tag . ')) a new topic ' . $section . '/' . $tag . ': page was not created');
+							$this->log(2, 'Error when separating comments from the topic ((/' . $this->tag . ')) a new topic ##' . $section . '/' . $tag . '##: page was not created');
 						}
 					}
 					else
 					{
+						$ids_str = '';
+
 						foreach ($comment_ids as $comment_id)
 						{
 							$ids_str .= "'" . $comment_id."', ";
@@ -1102,7 +1107,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						foreach ($comments as $comment)
 						{
 							$this->context[++$this->current_context] = $comment['tag'];
-							$engine->update_link_table($comment['page_id'], $comment['body_r']);
+							$this->update_link_table($comment['page_id'], $comment['body_r']);
 							$this->current_context--;
 
 							// saving acls

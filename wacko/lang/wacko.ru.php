@@ -1223,6 +1223,7 @@ $wacko_translation = [
 	'LogUserPasswordMismatch'	=> '!!Пользователь ##%1## не смог изменить свой пароль: несоответствие текущего пароля!!',
 	'LogUserIPSwitched'			=> 'Несанкционированная смена IP-адреса пользователя ##%1## с ##%2## на ##%3##',
 	'LogPageImported'			=> 'Импортирован документ [[/%1]]',
+	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
 	'LogPageCreated'			=> 'Создан новый документ [[/%1]]',
 	'LogPageMetaUpdated'		=> 'Обновлены свойства документа [[/%1]]',
 	'LogPageOwnershipClaimed'	=> 'Пользователь вступил во владение документом [[/%1]]',

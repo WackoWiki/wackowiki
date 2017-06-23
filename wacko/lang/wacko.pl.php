@@ -998,7 +998,7 @@ $wacko_translation = [
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
 	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
 	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br />Usually this should not happen, so let the incident site administrator.<br />As a precaution, issue has been preserved in its original form.',
-	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to a given page.',
+	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
 	'ForumSubforums'			=> 'Dzia³',
@@ -1220,6 +1220,7 @@ $wacko_translation = [
 	'LogUserPasswordMismatch'	=> '!!User ##%1## failed to change his password: Password mismatch with current!!',
 	'LogUserIPSwitched'			=> 'Unauthorized switched IP-address of the user ##%1## from ##%2## to ##%3##',
 	'LogPageImported'			=> 'Imported page [[/%1]]',
+	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
 	'LogPageCreated'			=> 'Created new page [[/%1]]',
 	'LogPageMetaUpdated'		=> 'Updated page meta data [[/%1]]',
 	'LogPageOwnershipClaimed'	=> 'You claimed ownership of the page [[/%1]]',

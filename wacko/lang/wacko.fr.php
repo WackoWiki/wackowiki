@@ -1221,6 +1221,7 @@ $wacko_translation = [
 	'LogUserPasswordMismatch'	=> '!!L&rsquo;utilisateur ##%1## a échoué à modifier son mot de passe&nbsp;: le mot de passe ne correspond pas avec celui en cours!!',
 	'LogUserIPSwitched'			=> 'Changement non autorisé de l&rsquo;adresse IP de l&rsquo;utilisateur ##%1## de ##%2## à ##%3##',
 	'LogPageImported'			=> 'Page [[/%1]] importée',
+	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
 	'LogPageCreated'			=> 'Nouvelle page [[/%1]] créée',
 	'LogPageMetaUpdated'		=> 'Mise à jour des méta données de [[/%1]]',
 	'LogPageOwnershipClaimed'	=> 'Vous avez revendiqué la propriété de la page [[/%1]]',
