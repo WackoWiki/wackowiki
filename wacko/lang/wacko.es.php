@@ -1220,6 +1220,7 @@ $wacko_translation = [
 	'LogUserPasswordMismatch'	=> '!!Usuario ##%1## fallo de cambiar la contraseña: Contraseña actual no coincide!!',
 	'LogUserIPSwitched'			=> 'Cambio de dirección IP no autorizado de usuario ##%1## de ##%2## a ##%3##',
 	'LogPageImported'			=> 'Página importada [[/%1]]',
+	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
 	'LogPageCreated'			=> 'Nueva página creada [[/%1]]',
 	'LogPageMetaUpdated'		=> 'Metadatos de página actualizada [[/%1]]',
 	'LogPageOwnershipClaimed'	=> 'Usted solicitó propiedad de página [[/%1]]',

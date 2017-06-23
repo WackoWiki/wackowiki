@@ -1912,8 +1912,8 @@ class Wacko
 
 		// check privileges
 		if ( ($this->page && $this->has_access('write', $page_id))
-			|| (!$this->page && $this->has_access('create', '', $user_name)) // TODO: (!$this->page && $this->has_access('create', $tag))
-			#	|| $this->is_admin() // XXX: Only for testing - comment out afterwards!
+			|| (!$this->page && $this->has_access('create', '', $user_name, '', $tag)) // TODO: (!$this->page && $this->has_access('create', $tag))
+				# || $this->is_admin() // XXX: Only for testing - comment out afterwards! (moderate handler)
 			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
 			|| $user_page == true)
 		{
@@ -2220,6 +2220,10 @@ class Wacko
 					}
 				} // end of new != old
 			} // end of existing page
+		}
+		else
+		{
+			$this->log(2, Ut::perc_replace($this->_t('LogSaveNoRights', SYSTEM_LANG), $tag . ' ' . $title));
 		}
 
 		// writing xmls
@@ -3456,7 +3460,7 @@ class Wacko
 				}
 			}
 
-			//try to find in global / local storage and return if success
+			// try to find in global / local storage and return if success
 			if (is_array($file_data))
 			{
 				#echo '---------------------------<br />';
