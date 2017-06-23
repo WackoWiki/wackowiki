@@ -561,8 +561,8 @@ function admin_user_users(&$engine, &$module)
 					'<tr>
 						<td>
 							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users . '?</label> '.
-							'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" style="width:40px;" /></a><br />' .
+							'<input type="submit" id="submit" name="delete" value="yes" /> '.
+							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a><br />' .
 							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
 						'</td>
 					</tr>' .

@@ -162,7 +162,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Minimum and maximum number of characters in usernames.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="3" style="width:40px;" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>" /> Min&nbsp;&nbsp;<input type="number" min="0" maxlength="3" style="width:40px;" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>" /> Max
+					<input type="number" min="0" maxlength="3" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>" /> Min&nbsp;&nbsp;<input type="number" min="0" maxlength="3" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>" /> Max
 				</td>
 			</tr>
 			<tr>
