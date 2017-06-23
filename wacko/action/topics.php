@@ -254,8 +254,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	{
 		echo $this->form_open('add_topic');
 		?>
-		<a id="newtopic"></a><br />
-		<table class="formation">
+		<br />
+		<table id="newtopic" class="formation">
 			<tr>
 				<td class="label">
 					<label for="topictitle"><?php echo $this->_t('ForumTopicName'); ?>:</label>

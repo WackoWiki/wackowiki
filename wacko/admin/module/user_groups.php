@@ -168,8 +168,8 @@ function admin_user_groups(&$engine, &$module)
 						'<tr>
 							<td>
 								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>' . htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-								'<input type="submit" id="submit" name="remove_member" value="yes" style="width:40px;" /> '.
-								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" style="width: 40px;" /></a>' .
+								'<input type="submit" id="submit" name="remove_member" value="yes" /> '.
+								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a>' .
 								'<br /><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
@@ -419,8 +419,8 @@ function admin_user_groups(&$engine, &$module)
 						'<tr>
 							<td>
 								<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-								'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
+								'<input type="submit" id="submit" name="delete" value="yes" /> '.
+								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a>' .
 								'<br /><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .

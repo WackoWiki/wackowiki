@@ -215,8 +215,8 @@ function admin_db_restore(&$engine, &$module)
 				echo	'<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />' . "\n" .
 						'<input type="hidden" name="start" value="true" />' . "\n" .
 						'<label for="">' . $engine->_t('ConfirmDbRestore') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-						'<input type="submit" id="submit" name="restore" value="yes" style="width:40px;" /> '.
-						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
+						'<input type="submit" id="submit" name="restore" value="yes" /> '.
+						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a>' .
 						'<br /><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
 
 				echo '<br /><br />
@@ -392,8 +392,8 @@ function admin_db_restore(&$engine, &$module)
 			echo '<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '" />' . "\n" .
 				'<div class="warning">' .
 					'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-					'<input type="submit" id="submit" name="delete" value="yes" style="width:40px;" /> '.
-					'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" style="width:40px;" /></a>' .
+					'<input type="submit" id="submit" name="delete" value="yes" /> '.
+					'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a>' .
 					'<br /><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
 				'</div>
 				<br />';
