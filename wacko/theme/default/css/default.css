@@ -2057,6 +2057,10 @@ table.forum td {
 	background-color: #E7F9FF;
 }
 
+#newtopic:target {
+	background-color: #ffeeee;
+}
+
 /* categories tag ------------- */
 .tag {
 	/* background: #f0f4f5; */
