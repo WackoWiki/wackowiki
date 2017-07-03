@@ -780,7 +780,7 @@ class WackoFormatter
 			// These regexp needed for workaround MSIE bug (</ul></blockquote>)
 			if (preg_match('/<\/ul>[\s\r\t\n]*$/i', $result))
 			{
-				$result.= $this->z_gif;
+				$result .= $this->z_gif;
 			}
 
 			return $result; // '<blockquote>' . $result . '</blockquote>';
@@ -1179,17 +1179,6 @@ class WackoFormatter
 				&& $wacko->db->disable_tikilinks != 1
 				&& preg_match('/^(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . $wacko->language['ALPHANUM'] . '*\.' . $wacko->language['ALPHA'] . $wacko->language['ALPHANUM'] . '+)$/s', $thing, $matches))
 		{
-			return $wacko->pre_link($thing);
-		}
-		// npj links
-		else if ((!$wacko->_formatter_noautolinks)
-				&& (preg_match('/^(~?)(' . $wacko->language['ALPHANUM'] . '+\@' . $wacko->language['ALPHA'] . '*(\:' . $wacko->language['ALPHANUM'] . '*)?|' . $wacko->language['ALPHANUM'] . '+\:\:' . $wacko->language['ALPHANUM'] . '+)$/s', $thing, $matches)))
-		{
-			if ($matches[1] == '~')
-			{
-				return $matches[2];
-			}
-
 			return $wacko->pre_link($thing);
 		}
 		// wacko links!
