@@ -34,7 +34,7 @@ class RawHtmlFormatter
 			$formatter = strtolower($language);
 
 			if ($formatter == "\xF1")	$formatter = 'c';
-			if ($formatter == 'c')		$formatter = 'comments';
+			if ($formatter == 'c')		$formatter = 'comment';
 			if ($formatter == '')		$formatter = 'code';
 
 			$output .= $wacko->format(trim($code), $formatter);
