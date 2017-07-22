@@ -789,6 +789,14 @@ td.file- {
 	width: 178px; */
 }
 
+.fileinfo a img:hover {
+	box-shadow: 0 0 10px 0 #93cee9;
+}
+
+.fileinfo a img:active {
+	box-shadow: 0 0 10px 0 #3daee9;
+}
+
 .preview {
 	margin: .8em 2px 2px;
 	padding: 10px;
