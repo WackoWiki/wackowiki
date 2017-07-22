@@ -158,7 +158,7 @@ if (!isset($engine->sess->ap_created))
 // setting temporary admin user context
 $session_length = 1800; // 1800 -> 30 minutes
 
-if (time() - $engine->sess->ap_last_activity > 900) //1800
+if (time() - $engine->sess->ap_last_activity > 900) // 1800
 {
 	// last request was more than 15 minutes ago
 	unset($engine->sess->ap_created);

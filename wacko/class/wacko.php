@@ -7465,6 +7465,7 @@ class Wacko
 	function validate_captcha()
 	{
 		$word_ok = true;
+
 		if (isset($this->sess->freecap_shown))
 		{
 			$word_ok = false;
