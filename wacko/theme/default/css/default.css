@@ -2131,13 +2131,22 @@ table.forum td {
 
 /* category handles ------------- */
 .set_category {
-	border: 1px solid #9495A2;
+	border: 1px solid #eeeeee;
 /* 	font-size:11px; */
-	height: 250px;
+	height: 400px;
 	padding-top: 12px;
 	margin-bottom: 27px;
 	overflow: auto;
 	width: auto;
+}
+
+.category_browser {
+	width: 100%;
+}
+
+/* TODO: vertical-align: middle; for input and label */
+.category_browser td {
+	vertical-align: top;
 }
 
 .hide_radio input[type="radio"] {

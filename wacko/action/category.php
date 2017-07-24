@@ -10,7 +10,6 @@ if (!defined('IN_WACKO'))
 //	list		- make categories clickable links which display pages of a given category (1 (default) or 0)
 //	ids			- display pages which belong to these comma-separated categories ids (default none)
 //	lang		- categories language if necessary (defaults to current page lang)
-//	inline		- display all categories on one line and not emphisize main categories (1 or 0 (default))
 //	sort		- order pages alphabetically ('abc', default) or creation date ('date')
 //	nomark		- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
 
@@ -18,7 +17,6 @@ if (!isset($root))			$root	= '/';
 if (!isset($list))			$list	= 1;
 if (!isset($ids))			$ids	= '';
 if (!isset($lang))			$lang	= $this->page['page_lang'];
-if (!isset($inline))		$inline	= '';
 if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 {
 	$sort = 'abc';
@@ -130,23 +128,25 @@ if (!$ids)
 	// categories list
 	if ($categories = $this->get_categories_list($lang, true, $root))
 	{
-		echo '<ul class="ul_list">' . "\n";
+		$total	= ceil(count($categories) / 4);
+		$n		= 1;
+
+		echo '<table class="category_browser">' . "\n\t<tr>\n" . "\t\t<td>\n";
+		echo '<ul class="ul_list lined">' . "\n";
 
 		foreach ($categories as $category_id => $word)
 		{
 			$spacer = '&nbsp;&nbsp;&nbsp;';
 
-			# if (!$inline && $i++ > 0) echo '<br />';
-
-			echo '<li class="' . (!$inline ? 'inline' : '') . '"> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '');
+			echo '<li> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '');
 
 			if (isset($word['child']) && $word['child'] == true)
 			{
-				echo "<ul>\n";
+				echo "\n<ul>\n";
 
 				foreach ($word['child'] as $category_id => $word)
 				{
-					echo '<li class="' . (!$inline ? 'inline' : '') . '"> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '') . "</li>\n";
+					echo '<li> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '') . "</li>\n";
 				}
 
 				echo "</ul>\n</li>\n";
@@ -155,9 +155,20 @@ if (!$ids)
 			{
 				echo "</li>\n";
 			}
+
+			// modulus operator: every n loop add a break
+			if ($n % $total == 0)
+			{
+				echo "</ul>\n";
+				echo "\t\t</td>\n\t\t<td>\n";
+				echo '<ul class="ul_list lined">' . "\n";
+			}
+
+			$n++;
 		}
 
 		echo "</ul>\n";
+		echo "\t\t</td>\n\t</tr>\n</table>\n";
 	}
 	else
 	{

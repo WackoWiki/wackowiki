@@ -6487,6 +6487,8 @@ class Wacko
 	{
 		$this->body_toc = '';
 
+		#$this->body_toc = serialize($toc); //json_encode
+
 		foreach ($toc as $k => $v)
 		{
 			$toc[$k] = implode('<heading,col>', $v);
@@ -6497,6 +6499,8 @@ class Wacko
 
 	function build_toc($tag, $from, $to, $numerate, $link = -1)
 	{
+		$_toc = [];
+
 		if (isset($this->tocs[$tag]))
 		{
 			return $this->tocs[$tag];
@@ -6514,14 +6518,13 @@ class Wacko
 		}
 
 		$page['body_toc']	= (isset($page['body_toc']) ? $page['body_toc'] : null);
+		#$toc				= unserialize($page['body_toc']); //json_decode
 		$toc				= explode('<heading,row>', $page['body_toc']);
 
 		foreach ($toc as $k => $toc_item)
 		{
 			$toc[$k] = explode('<heading,col>', $toc_item);
 		}
-
-		$_toc = [];
 
 		foreach ($toc as $k => $toc_item)
 		{
@@ -7680,10 +7683,13 @@ class Wacko
 		// print categories list
 		if (is_array($categories))
 		{
-			$i = '';
+			$total	= ceil(count($categories) / 4);
+			$i		= 0;
+			$n		= 1;
 
 			$out = '<div class="set_category">' . "\n";
-			$out .= '<ul class="ul_list hide_radio lined">' . "\n";
+			$out .= '<table class="category_browser">' . "\n\t<tr>\n" . "\t\t<td>\n";
+			$out .= '<ul class="ul_list lined">' . "\n"; // hide_radio
 
 			foreach ($categories as $category_id => $word)
 			{
@@ -7699,7 +7705,7 @@ class Wacko
 					{
 						if ($i++ < 1)
 						{
-							$out .=  "\t<ul>\n";
+							$out .= "\t<ul>\n";
 						}
 
 						$out .= "\t\t" . '<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
@@ -7717,13 +7723,24 @@ class Wacko
 				}
 				else
 				{
-					$out .=  "</li>\n";
+					$out .= "</li>\n";
 				}
+
+				// modulus operator: every n loop add a break
+				if ($n % $total == 0)
+				{
+					$out .= "</ul>\n";
+					$out .= "\t\t</td>\n\t\t<td>\n";
+					$out .= '<ul class="ul_list lined">' . "\n"; // hide_radio
+				}
+
+				$n++;
 
 				$i = 0;
 			}
 
 			$out .= "</ul>\n";
+			$out .= "\t\t</td>\n\t</tr>\n</table>\n";
 			$out .= "</div>\n";
 
 			if (!($can_edit || $this->method == 'edit'))
