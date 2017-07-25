@@ -4,7 +4,7 @@
 		{
 			var f = document.forms.form1;
 
-			if (f.elements['password'].value.length < 10)
+			if (f.elements['password'].value.length < <?php echo $config['pwd_admin_min_chars'];?>)
 			{
 				alert('<?php echo $lang['ErrorAdminPasswordShort'];?>');
 				return false;
@@ -139,10 +139,10 @@ if ($config['is_update'] == false)
       <hr />
    </div>
    <label class="label_top" for="password"><?php echo $lang['Password'];?></label>
-   <p class="notop"><?php echo Ut::perc_replace($lang['PasswordDesc'], $config['pwd_min_chars']);?></p>
-   <input type="password" minlength="<?php echo $config['pwd_min_chars'] ?>" id="password" name="password" value="" class="text_input" />
+   <p class="notop"><?php echo Ut::perc_replace($lang['PasswordDesc'], $config['pwd_admin_min_chars']);?></p>
+   <input type="password" minlength="<?php echo $config['pwd_admin_min_chars'] ?>" id="password" name="password" value="" class="text_input" />
    <label class="label_password2" for="wiki_admin_password2"><?php echo $lang['Password2'];?></label>
-   <input type="password" minlength="<?php echo $config['pwd_min_chars'] ?>" id="wiki_admin_password2" name="password2" value="" class="text_input" />
+   <input type="password" minlength="<?php echo $config['pwd_admin_min_chars'] ?>" id="wiki_admin_password2" name="password2" value="" class="text_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />

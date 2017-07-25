@@ -195,6 +195,12 @@ if ($this->is_owner() || $this->is_admin())
 
 		if ($this->is_admin() || $this->db->owners_can_change_categories == true)
 		{
+			$edit_header = '<h3>' . $this->_t('CategoriesTip') . "</h3>\n" .
+				'<ul class="menu">
+					<li><a href="' . $this->href('categories', '', '') . '">' . $this->_t('CategoriesAssign') . '</a></li>
+					<li class="active">' . $this->_t('CategoriesEdit') . '</li>' .
+				"</ul><br />\n";
+
 			// add new item
 			if (isset($_POST['create']))
 			{
@@ -209,6 +215,7 @@ if ($this->is_owner() || $this->is_admin())
 					$parent_id = ($word['parent_id'] == 0 ? $word['category_id'] : $parent_id = $word['parent_id']);
 				}
 
+				echo $edit_header;
 				echo $this->form_open('add_category', ['page_method' => 'categories']);
 				echo '<input type="hidden" name="category_id" value="' . (int) $parent_id . '" />' . "\n";
 				echo '<table class="formation">' .
@@ -255,6 +262,7 @@ if ($this->is_owner() || $this->is_admin())
 					WHERE category_id = '" . (int) $_POST['change_id'] . "'
 					LIMIT 1"))
 				{
+					echo $edit_header;
 					echo $this->form_open('rename_category', ['page_method' => 'categories']);
 					echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change_id'] . '" />' . "\n";
 					echo '<table class="formation">' .
@@ -293,6 +301,7 @@ if ($this->is_owner() || $this->is_admin())
 						$options .= '<option value="' . $parent['category_id'] . '" ' . ($word['parent_id'] == $parent['category_id'] ? 'selected' : '') . '>' . htmlspecialchars($parent['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
 					}
 
+					echo $edit_header;
 					echo $this->form_open('group_categories', ['page_method' => 'categories']);
 					echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change_id'] . '" />' . "\n" .
 						 '<table class="formation">' .
@@ -322,6 +331,7 @@ if ($this->is_owner() || $this->is_admin())
 					WHERE category_id = '" . (int) $_POST['change_id'] . "'
 					LIMIT 1"))
 				{
+					echo $edit_header;
 					echo $this->form_open('remove_category', ['page_method' => 'categories']);
 					echo '<input type="hidden" name="category_id" value="' . (int) $_POST['change_id'] . '" />' . "\n" .
 						'<table class="formation">' .

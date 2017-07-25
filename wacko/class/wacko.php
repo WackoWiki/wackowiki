@@ -7176,7 +7176,7 @@ class Wacko
 	{
 		$unlike_login	= $this->db->pwd_unlike_login;
 		$char_classes	= $this->db->pwd_char_classes;
-		$min_chars		= $this->db->pwd_min_chars;
+		$min_chars		= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
 		$res			= '';
 
 		$l = strlen($login);
@@ -7258,6 +7258,8 @@ class Wacko
 
 	function show_password_complexity()
 	{
+		$min_chars		= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
+
 		if ($this->db->pwd_char_classes > 0)
 		{
 			$pwd_cplx_text = $this->_t('PwdCplxDesc4');
@@ -7280,7 +7282,7 @@ class Wacko
 
 		return '<br /><small>' .
 			$this->_t('PwdCplxDesc1') .
-			Ut::perc_replace($this->_t('PwdCplxDesc2'), $this->db->pwd_min_chars) .
+			Ut::perc_replace($this->_t('PwdCplxDesc2'), $min_chars) .
 			($this->db->pwd_unlike_login > 0
 				? ', ' . $this->_t('PwdCplxDesc3')
 				: '') .
