@@ -142,6 +142,7 @@ if ($user)
 
 	$tpl->c_autocomplete	= $this->form_autocomplete_off();
 	$tpl->c_complexity		= $this->show_password_complexity();
+	$tpl->c_minchars		= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
 	$tpl->c_form			= $this->href();
 }
 else

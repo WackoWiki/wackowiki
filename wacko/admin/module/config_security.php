@@ -48,6 +48,7 @@ function admin_config_security(&$engine, &$module)
 		$config['tls']							= (int) $_POST['tls'];
 		$config['tls_implicit']					= (int) $_POST['tls_implicit'];
 		$config['tls_proxy']					= trim((string) $_POST['tls_proxy']);
+		$config['pwd_admin_min_chars']			= (int) $_POST['pwd_admin_min_chars'];
 		$config['pwd_min_chars']				= (int) $_POST['pwd_min_chars'];
 		$config['pwd_char_classes']				= (int) $_POST['pwd_char_classes'];
 		$config['pwd_unlike_login']				= (int) $_POST['pwd_unlike_login'];
@@ -313,6 +314,18 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<input type="number" min="10" maxlength="3" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>" />
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="pwd_admin_min_chars"><strong>Minimum Admin password length:</strong><br />
+					<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br />The use of passphrases instead of passwords is encouraged.</small></label>
+				</td>
+				<td>
+					<input type="number" min="15" maxlength="3" id="pwd_admin_min_chars" name="pwd_admin_min_chars" value="<?php echo (int) $engine->db->pwd_admin_min_chars;?>" />
 				</td>
 			</tr>
 			<tr class="lined">

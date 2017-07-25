@@ -141,6 +141,7 @@ $config_db['paragrafica']					= $config['paragrafica'];
 $config_db['phpmailer_method']				= $config['phpmailer_method'];
 $config_db['policy_page']					= $config['policy_page'];
 $config_db['publish_anonymously']			= $config['publish_anonymously'];
+$config_db['pwd_admin_min_chars']			= $config['pwd_admin_min_chars'];
 $config_db['pwd_char_classes']				= $config['pwd_char_classes'];
 $config_db['pwd_min_chars']					= $config['pwd_min_chars'];
 $config_db['pwd_unlike_login']				= $config['pwd_unlike_login'];

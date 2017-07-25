@@ -223,6 +223,8 @@ $wacko_config_defaults = [
 	'pwd_unlike_login'				=> 1,
 	'pwd_char_classes'				=> 0,
 	'pwd_min_chars'					=> 10,
+	'pwd_admin_min_chars'			=> 15,
+
 
 	'system_message'				=> '',
 	'system_message_type'			=> '',
