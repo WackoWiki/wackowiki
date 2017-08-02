@@ -216,6 +216,8 @@ $upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_set
 
 $upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_8,	$lang['ErrorAlteringTable']];
 
+$upgrade['5.5.rc3'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_9,	$lang['ErrorAlteringTable']];
+
 $upgrade['5.5.rc3'][]	= [$lang['UpdateTable'],	'user_setting',		$update_user_setting_r5_4_0,	$lang['ErrorUpdatingTable']];
 
 // Make sure these are in order!

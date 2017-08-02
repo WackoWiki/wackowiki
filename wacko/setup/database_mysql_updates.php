@@ -149,6 +149,7 @@ $alter_user_setting_r5_4_5 = "ALTER TABLE {$pref}user_setting ADD notify_minor_e
 $alter_user_setting_r5_4_6 = "ALTER TABLE {$pref}user_setting ADD notify_page TINYINT(1) UNSIGNED NOT NULL DEFAULT '2' AFTER notify_minor_edit";
 $alter_user_setting_r5_4_7 = "ALTER TABLE {$pref}user_setting ADD notify_comment TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER notify_page";
 $alter_user_setting_r5_4_8 = "ALTER TABLE {$pref}user_setting ADD menu_items INT(2) UNSIGNED NOT NULL DEFAULT '5' AFTER list_count";
+$alter_user_setting_r5_4_9 = "ALTER TABLE {$pref}user_setting ADD diff_mode TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER numerate_links";
 
 $update_user_setting_r5_4_0 = "UPDATE {$pref}user_setting SET theme = 'default'";
 

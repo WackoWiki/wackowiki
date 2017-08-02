@@ -300,6 +300,7 @@ $wacko_translation = [
 	'CommentAdded'				=> 'Commentaires ajoutés.',
 	'YouAreNowTheOwner'			=> 'Vous n&rsquo;êtes pas le propriétaire de cette page.',
 
+	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [
 		'0'		=> 'Différence complète',
 		'1'		=> 'Simple différence entre les deux versions',

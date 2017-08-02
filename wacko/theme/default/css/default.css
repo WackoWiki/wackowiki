@@ -2149,6 +2149,11 @@ table.forum td {
 	vertical-align: top;
 }
 
+.item-multiplier-x,
+.item-multiplier-count {
+	color: #767676;
+}
+
 .hide_radio input[type="radio"] {
 	visibility: hidden;
 	/* display: none; */

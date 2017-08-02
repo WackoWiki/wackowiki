@@ -430,10 +430,10 @@ function admin_config_basic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="default_diff_mode"><strong>Default diff mode:</strong><br />
+				<td class="label"><label for="default_diff_mode"><strong><?php echo $engine->_t('DefaultDiffMode');?>:</strong><br />
 					<small>Preselected diff mode.</small></label></td>
 				<td>
-					<select id="language" name="default_diff_mode">
+					<select id="default_diff_mode" name="default_diff_mode">
 					<?php
 						$diff_modes = $engine->_t('DiffMode');
 

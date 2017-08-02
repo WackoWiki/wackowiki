@@ -86,6 +86,7 @@ else if (($user = $this->get_user()))
 		// "typografica		= '" . (int) isset($_POST['typografica']) . "', " .
 		"autocomplete		= '" . (int) isset($_POST['autocomplete']) . "', " .
 		"numerate_links		= '" . (int) isset($_POST['numerate_links']) . "', " .
+		"diff_mode			= '" . (int) $_POST['diff_mode'] . "', " .
 		"dont_redirect		= '" . (int) isset($_POST['dont_redirect']) . "', " .
 		"show_files			= '" . (int) isset($_POST['show_files']) . "', " .
 		"hide_lastsession	= '" . (int) isset($_POST['hide_lastsession']) . "', " .
@@ -333,7 +334,7 @@ else if (($user = $this->get_user()))
 					<label for="autocomplete"><?php echo $this->_t('WikieditAutocomplete');?></label>
 				</td>
 			</tr>
-				<tr>
+			<tr>
 				<td>&nbsp;</td>
 				<td>
 					<input type="checkbox" id="numerate_links" name="numerate_links" <?php echo $user['numerate_links']? 'checked' : '' ?> />
@@ -396,6 +397,23 @@ else if (($user = $this->get_user()))
 <?php
 		}
 ?>
+			<tr class="hl_setting">
+				<th><label for="default_diff_mode"><?php echo $this->_t('DefaultDiffMode');?></label></th>
+				<td>
+					<select id="default_diff_mode" name="diff_mode">
+					<?php
+					$default_mode	= $user['diff_mode'] ?: $this->db->default_diff_mode;
+					$diff_modes		= $this->_t('DiffMode');
+					$diff_mode_list	= explode(',', $this->db->diff_modes);
+
+					foreach($diff_mode_list as $mode)
+					{
+						echo '<option value="' . $mode . '" '.($default_mode == $mode ? 'selected' : '') . '>' . $diff_modes[$mode] . '</option>';
+					}
+					?>
+					</select>
+				</td>
+			</tr>
 			<tr>
 				<th><label for="session_length"><?php echo $this->_t('SessionDuration');?></label></th>
 				<td>
