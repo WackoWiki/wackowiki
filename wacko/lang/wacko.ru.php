@@ -301,6 +301,7 @@ $wacko_translation = [
 	'CommentAdded'				=> 'Комментарий добавлен.',
 	'YouAreNowTheOwner'			=> 'Теперь вы владелец этой страницы.'  ,
 
+	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [
 		'0'		=> 'Вики-сравнение',
 		'1'		=> 'Простое',

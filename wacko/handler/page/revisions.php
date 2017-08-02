@@ -48,7 +48,8 @@ if ($this->has_access('read'))
 		echo "<p>\n";
 		echo '<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '" />';
 
-		$default_mode	= $this->db->default_diff_mode; // TODO: configurable per user
+		$user			= $this->get_user();
+		$default_mode	= $user['diff_mode'] ?: $this->db->default_diff_mode;
 		$diff_modes		= $this->_t('DiffMode');
 		$diff_mode_list	= explode(',', $this->db->diff_modes);
 
@@ -81,7 +82,7 @@ if ($this->has_access('read'))
 		{
 			$max = 0;
 		}
-		else if (($user = $this->get_user()))
+		else if (($user))
 		{
 			$max = $user['list_count'];
 		}
@@ -90,7 +91,7 @@ if ($this->has_access('read'))
 			$max = $this->db->list_count;
 		}
 
-		$c = 0;
+		$c					= 0;
 		$revision_count		= count($revisions);
 		$diff_class			= '';
 		$this->parent_size	= 0;
