@@ -354,7 +354,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (" .
 					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'," .
 					"autocomplete TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
 					"numerate_links TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'," .
-					"diff_mode TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'," .
+					"diff_mode TINYINT(1) UNSIGNED NOT NULL DEFAULT '2'," .
 					"notify_minor_edit TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'," .
 					"notify_page TINYINT(1) UNSIGNED NOT NULL DEFAULT '2'," .
 					"notify_comment TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'," .

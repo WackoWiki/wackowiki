@@ -161,6 +161,7 @@ function admin_user_users(&$engine, &$module)
 					"user_lang			= " . $engine->db->q(($_POST['user_lang'] ? $_POST['user_lang'] : $engine->db->language)) . ", " .
 					"list_count			= '" . (int) $engine->db->list_count."', " .
 					"theme				= " . $engine->db->q($engine->db->theme) . ", " .
+					"diff_mode			= '" . (int) $engine->db->default_diff_mode . "', " .
 					"notify_minor_edit	= '" . (int) $engine->db->notify_minor_edit."', " .
 					"notify_page		= '" . (int) $engine->db->notify_page."', " .
 					"notify_comment		= '" . (int) $engine->db->notify_comment."', " .
