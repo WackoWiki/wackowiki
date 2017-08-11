@@ -7745,11 +7745,20 @@ class Wacko
 			$out .= "\t\t</td>\n\t</tr>\n</table>\n";
 			$out .= "</div>\n";
 
+			// control buttons
 			if (!($can_edit || $this->method == 'edit'))
 			{
 				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ' .
 						'<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a>' . "<br />\n" .
-						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "<br /><br />\n";
+						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
+			}
+			else
+			{
+				$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ' .
+						'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ' .
+						'<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '" /> ' .
+						'<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '" /> ' .
+						'<small><br />' . $this->_t('CategoriesEditInfo') . '</small>';
 			}
 		}
 		else

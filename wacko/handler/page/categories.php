@@ -390,19 +390,6 @@ if ($this->is_owner() || $this->is_admin())
 
 		echo $this->show_category_form($this->page['page_id'], OBJECT_PAGE, $this->page['page_lang'], $can_edit);
 
-		/////////////////////////////////////////////
-		//   control buttons
-		/////////////////////////////////////////////
-
-		if ($can_edit)
-		{
-			echo '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ';
-			echo '<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ';
-			echo '<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '" /> ';
-			echo '<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '" /> ';
-			echo '<small><br />' . $this->_t('CategoriesEditInfo') . '</small>';
-		}
-
 		echo "<br /><br />";
 		echo $this->form_close();
 	}
