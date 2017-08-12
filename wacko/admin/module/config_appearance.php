@@ -326,7 +326,7 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for=""><strong>Allowed Themes:</strong><br />
-					<small>Allowed themes, which the user can choose: <code>0</code> - all available themes are allowed (default), <br /><code>default,coffee</code> - here only these both themes are allowed.</small></label></td>
+					<small>Select the allowed themes, which the user can choose, otherwise all available themes are allowed.</small></label></td>
 				<td>
 				<?php
 					if (isset($engine->db->allow_themes))

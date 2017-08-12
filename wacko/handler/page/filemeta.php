@@ -266,19 +266,19 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 					<table class="upload tbl_fixed">
 						<tr>
-							<th><?php echo $this->_t('FileSyntax'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('FileSyntax'); ?>:</th>
 							<td><?php echo '<code>' . $path . $file['file_name'] . '</code>'; ?></td>
 						</tr>
 						<tr>
-							<th><?php echo $this->_t('UploadBy'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
 							<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
 						</tr>
 						<tr>
-						<th><?php echo $this->_t('FileAdded'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('FileAdded'); ?>:</th>
 							<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
 							</tr>
 						<tr>
-							<th><?php echo $this->_t('FileSize'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
 							<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
 						</tr>
 <?php
@@ -286,17 +286,17 @@ $this->ensure_page(true); // TODO: upload for forums?
 					if ($file['picture_w'])
 					{ ?>
 						<tr>
-							<th><?php echo $this->_t('FileDimension'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('FileDimension'); ?>:</th>
 							<td><?php echo $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px'; ?></td>
 						</tr>
 <?php
 					} ?>
 					<tr>
-						<th><?php echo $this->_t('MimeType'); ?>:</th>
+						<th scope="row"><?php echo $this->_t('MimeType'); ?>:</th>
 						<td><?php echo '' . $file['mime_type'] . ''; ?></td>
 					</tr>
 					<tr>
-						<th><?php echo $this->_t('FileDesc'); ?>:</th>
+						<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
 						<td><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></td>
 					</tr>
 <?php
@@ -304,19 +304,24 @@ $this->ensure_page(true); // TODO: upload for forums?
 					#if ($file['picture_w'])
 					#{ ?>
 						<tr>
-							<th><?php echo $this->_t('FileCaption'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
 							<td><?php echo $format_desc($file['caption'], $file['file_lang']); ?></td>
 						</tr>
 <?php
 					#} ?>
 						<tr>
-							<th><?php echo $this->_t('FileAttachedTo'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
 							<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></td>
 						</tr>
 						<tr>
 							<th scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
 							<td><?php echo $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]); ?></td>
 						</tr>
+						<tr>
+							<th scope="row"><?php echo $this->_t('Category'); ?>:</th>
+							<td><?php echo $this->action('categories', ['page' => '/' . $this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0], 1); ?></td>
+						</tr>
+
 				</table>
 
 				<br />
@@ -362,13 +367,46 @@ $this->ensure_page(true); // TODO: upload for forums?
 					?>
 					<table class="upload">
 						<tr>
-							<th><?php echo $this->_t('FileDesc'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
 							<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo htmlspecialchars($file['file_description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>"/></td>
 						</tr>
 						<tr>
-							<th><?php echo $this->_t('FileCaption'); ?>:</th>
+							<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
 							<td><textarea id="file_caption" name="caption" rows="6" cols="70"><?php echo htmlspecialchars($file['caption'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></textarea></td>
 						</tr>
+							<tr>
+						<th scope="row">
+							<label for="file_lang"><?php echo $this->_t('YourLanguage');?></label>
+						</th>
+						<td>
+							<select id="file_lang" name="file_lang">
+				<?php
+
+					$languages = $this->_t('LanguageArray');
+
+					if ($this->db->multilanguage)
+					{
+						$langs = $this->available_languages();
+					}
+					else
+					{
+						$langs = [$this->db->language];
+					}
+
+					foreach ($langs as $lang)
+					{
+						echo '<option value="' . $lang . '"' .
+							($file['file_lang'] == $lang
+								? ' selected '
+								: (!isset($file['file_lang']) && $this->db->language == $lang
+									? ' selected'
+									: '')
+							) . '>' . $languages[$lang] . ' (' . $lang . ")</option>\n";
+					}
+				?>
+							</select>
+						</td>
+					</tr>
 					</table>
 					<br />
 
@@ -499,11 +537,12 @@ $this->ensure_page(true); // TODO: upload for forums?
 					$description	= substr($_POST['file_description'], 0, 250);
 					$description	= $clean_text((string) $description);
 					$caption		= $clean_text((string) $_POST['caption']);
+					$file_lang		= isset($_POST['file_lang']) ? $_POST['file_lang'] : $file['file_lang'];
 
 					// update file metadata
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "file SET " .
-							"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
+							"file_lang			= " . $this->db->q($file_lang) . ", " .
 							"file_description	= " . $this->db->q($description) . ", " .
 							"caption			= " . $this->db->q($caption) . ", " .
 							"modified_dt		= UTC_TIMESTAMP() " .
