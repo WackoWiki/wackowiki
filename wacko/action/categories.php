@@ -5,6 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// shows all categories assigned to an particular object (page, file)
+
 // list -
 // nomark -
 // path -

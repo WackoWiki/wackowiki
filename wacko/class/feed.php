@@ -188,7 +188,7 @@ class Feed
 			{
 				$i++;
 
-				$categories	= $this->engine->load_categories($page['page_id'], '', false);
+				$categories	= $this->engine->load_categories($page['page_id'], OBJECT_PAGE, false);
 
 				// this is a news article
 				$title	= $page['title'];

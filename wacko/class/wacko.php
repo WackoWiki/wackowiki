@@ -7563,11 +7563,11 @@ class Wacko
 				"message	= " . $this->db->q($message) . " ");
 	}
 
-	function get_categories($page_id, $type_id = null, $cache = true)
+	function get_categories($object_id, $type_id = null, $cache = true)
 	{
 		$_category = '';
 
-		if ($categories	= $this->load_categories($page_id, $type_id, $cache = true))
+		if ($categories	= $this->load_categories($object_id, $type_id, $cache = true))
 		{
 			foreach ($categories as $id => $category)
 			{
@@ -7690,7 +7690,10 @@ class Wacko
 			$n		= 1;
 
 			$out = '<div class="set_category">' . "\n";
-			$out .= '<table class="category_browser">' . "\n\t<tr>\n" . "\t\t<td>\n";
+			// TODO: div or fieldset?
+			#$out .= '<fieldset class="set_category"><legend>' . $this->_t('Categories') . ' (' . $lang . ")</legend>\n";
+			$out .= '<table class="category_browser">' . "\n";
+			$out .= "\t<tr>\n" . "\t\t<td>\n";
 			$out .= '<ul class="ul_list lined">' . "\n"; // hide_radio
 
 			foreach ($categories as $category_id => $word)
@@ -7743,6 +7746,7 @@ class Wacko
 
 			$out .= "</ul>\n";
 			$out .= "\t\t</td>\n\t</tr>\n</table>\n";
+			#$out .= '</fieldset>';
 			$out .= "</div>\n";
 
 			// control buttons
@@ -7752,7 +7756,7 @@ class Wacko
 						'<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a>' . "<br />\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
-			else
+			else if ($can_edit || ! $this->method == 'edit')
 			{
 				$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ' .
 						'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ' .
