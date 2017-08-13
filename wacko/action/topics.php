@@ -115,8 +115,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	if ($category_id)
 	{
 		$selector .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
-					 # "AND k.object_id = p.page_id " . // TODO: obsolete, see inner join
-					 "AND k.object_type_id = 1 ";
+					 "AND k.object_type_id = " . OBJECT_PAGE . " ";
 	}
 
 	// make counter query

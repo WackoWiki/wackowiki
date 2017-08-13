@@ -15,6 +15,7 @@ if (!defined('IN_WACKO'))
 
 if (!isset($root))			$root	= '/';
 if (!isset($list))			$list	= 1;
+if (!isset($type_id))		$type_id	= OBJECT_PAGE;
 if (!isset($ids))			$ids	= '';
 if (!isset($lang))			$lang	= $this->page['page_lang'];
 if (!isset($sort) || !in_array($sort, ['abc', 'date']))
@@ -22,6 +23,7 @@ if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 	$sort = 'abc';
 }
 if (!isset($nomark))		$nomark = '';
+$type_id = isset($_GET['type_id']) ? (int) $_GET['type_id'] : OBJECT_PAGE;
 
 $root = $this->unwrap_link($root);
 
@@ -74,7 +76,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		"WHERE k.category_id IN (" . $this->db->q($category) . ") " .
 			"AND k.object_type_id = 1 " .
 			"AND p.deleted <> '1' " .
-			($root
+			(($root && $type_id = OBJECT_PAGE)
 				? "AND (p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . ") "
 				: '') .
 		"ORDER BY p.{$order} ", true))
@@ -140,7 +142,7 @@ if (!$ids)
 		{
 			$spacer = '&nbsp;&nbsp;&nbsp;';
 
-			echo '<li> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '');
+			echo '<li> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '');
 
 			if (isset($word['child']) && $word['child'] == true)
 			{
@@ -148,7 +150,7 @@ if (!$ids)
 
 				foreach ($word['child'] as $category_id => $word)
 				{
-					echo '<li> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '') . "</li>\n";
+					echo '<li> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '') . "</li>\n";
 				}
 
 				echo "</ul>\n</li>\n";

@@ -1009,14 +1009,14 @@ class Wacko
 		}
 
 		// add assigned categories
-		if (isset($this->categories))
+		if (isset($this->categories[OBJECT_PAGE]))
 		{
 			if (!empty($meta_keywords))
 			{
 				$meta_keywords .= ', ';
 			}
 
-			$meta_keywords .= strtolower(implode(', ', $this->categories));
+			$meta_keywords .= strtolower(implode(', ', $this->categories[OBJECT_PAGE]));
 		}
 
 		return $meta_keywords;
@@ -6421,7 +6421,7 @@ class Wacko
 
 			foreach ($categories as $word)
 			{
-				$this->categories[$word['category_id']] = $word['category'];
+				$this->categories[OBJECT_PAGE][$word['category_id']] = $word['category'];
 			}
 
 			unset($categories, $word);
@@ -7563,11 +7563,11 @@ class Wacko
 				"message	= " . $this->db->q($message) . " ");
 	}
 
-	function get_categories($object_id, $type_id = null, $cache = true)
+	function get_categories($object_id, $type_id = null, $method = '', $tag = '', $params = [], $cache = true)
 	{
 		$_category = '';
 
-		if ($categories	= $this->load_categories($object_id, $type_id, $cache = true))
+		if ($categories	= $this->load_categories($object_id, $type_id, $cache))
 		{
 			foreach ($categories as $id => $category)
 			{
@@ -7576,7 +7576,7 @@ class Wacko
 					$_category .= ', ';
 				}
 
-				$_category .= '<a href="' . $this->href('', '', ['category_id' => $category['category_id']]) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+				$_category .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
 			}
 
 			return $_category;

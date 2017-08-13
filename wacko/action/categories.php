@@ -13,6 +13,7 @@ if (!defined('IN_WACKO'))
 // label -
 
 if (!isset($list))		$list		= 0;
+if (!isset($type_id))	$type_id	= OBJECT_PAGE;
 if (!isset($label))		$label		= true;
 if (empty($path))		$path		= 'Category';
 if (!isset($nomark))	$nomark		= '';
@@ -22,9 +23,9 @@ $i			= '';
 
 if (isset($this->categories))
 {
-	foreach ($this->categories as $category_id => $category)
+	foreach ($this->categories[$type_id] as $category_id => $category)
 	{
-		$_category = '<a href="' . $this->href('', $this->db->category_page, ['category_id' => $category_id]) . '" class="tag" rel="tag">' . htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+		$_category = '<a href="' . $this->href('', $this->db->category_page, ['category_id' => $category_id, 'type_id' => $type_id]) . '" class="tag" rel="tag">' . htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
 
 		if ($list)
 		{
