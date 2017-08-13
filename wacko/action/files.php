@@ -38,9 +38,15 @@ if (!isset($deleted))	$deleted = 0;
 if (!isset($track))		$track = 0;
 if (!isset($picture))	$picture = null;
 if (!isset($max))		$max = null;
+if (!isset($type_id))	$type_id = null;
 
 $order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
+
+// filter categories
+$type_id			= isset($_GET['type_id']) ? (int) $_GET['type_id'] : $type_id;
+$category_id		= (int) @$_GET['category_id'];
+
 
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
@@ -98,6 +104,10 @@ if ($can_view)
 	}
 
 	$selector =
+		($category_id
+			? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = f.file_id) "
+			: "") . " " .
+			"WHERE ".
 		($all
 			? "f.page_id IS NOT NULL "
 			: "f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' "
@@ -109,11 +119,16 @@ if ($can_view)
 			? "AND f.deleted <> '1' "
 			: "");
 
+	if ($category_id)
+	{
+		$selector .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
+					 "AND k.object_type_id = " . OBJECT_FILE . " ";
+	}
+
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.file_id) AS n " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE ".
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $max, 'f', $params, $method);
@@ -124,7 +139,6 @@ if ($can_view)
 		"FROM " . $this->db->table_prefix . "file f " .
 			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE ".
 		$selector .
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);

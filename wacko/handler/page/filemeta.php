@@ -318,8 +318,8 @@ $this->ensure_page(true); // TODO: upload for forums?
 							<td><?php echo $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]); ?></td>
 						</tr>
 						<tr>
-							<th scope="row"><?php echo $this->_t('Category'); ?>:</th>
-							<td><?php echo $this->action('categories', ['page' => '/' . $this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0], 1); ?></td>
+							<th scope="row"><?php echo $this->_t('Categories'); ?>:</th>
+							<td><?php echo $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']); ?></td>
 						</tr>
 
 				</table>

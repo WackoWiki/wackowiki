@@ -47,39 +47,39 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			{
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyPages'); #$output1 .
 
-				$tpl->u_tab_heading =	$this->_t('ListMyPages');
-				$tpl->u_tab_action =	$this->action('mypages', $profile);
-				$default_tab = false;
+				$tpl->u_tab_heading		= $this->_t('ListMyPages');
+				$tpl->u_tab_action		= $this->action('mypages', $profile);
+				$default_tab			= false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
 			{
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyWatches'); #$output3 .
 
-				$tpl->u_tab_heading =	$this->_t('ListMyWatches');
-				$tpl->u_tab_action =	$this->action('mywatches', $profile);
-				$default_tab = false;
+				$tpl->u_tab_heading		= $this->_t('ListMyWatches');
+				$tpl->u_tab_action		= $this->action('mywatches', $profile);
+				$default_tab			= false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychangeswatches')
 			{
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyChangesWatches'); #$output4 .
 
-				$tpl->u_tab_heading =	$this->_t('ListMyChangesWatches');
-				$tpl->u_tab_action =	$this->action('mychangeswatches', $profile);
-				$default_tab = false;
+				$tpl->u_tab_heading		= $this->_t('ListMyChangesWatches');
+				$tpl->u_tab_action		= $this->action('mychangeswatches', $profile);
+				$default_tab			= false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
 			{
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyChanges'); #$output2 .
 
-				$tpl->u_tab_heading =	$this->_t('ListMyChanges');
-				$tpl->u_tab_action =	$this->action('mychanges', $profile);
-				$default_tab = false;
+				$tpl->u_tab_heading		= $this->_t('ListMyChanges');
+				$tpl->u_tab_action		= $this->action('mychanges', $profile);
+				$default_tab			= false;
 			}
 			else
 			{
 				#$tpl->u_tab_userTabs =	$this->_t('ListMyPages'); #$output2 .
 
-				$tpl->u_tab_heading =	$this->_t('ListMyPages');
+				$tpl->u_tab_heading		= $this->_t('ListMyPages');
 			}
 		}
 
@@ -180,11 +180,11 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// basic info
 			if ($user['hide_lastsession'])
 			{
-				$tpl->u_last_hidden = true;
+				$tpl->u_last_hidden	= true;
 			}
 			else if ($this->db->is_null_date($user['last_visit']))
 			{
-				$tpl->u_last_na = true;
+				$tpl->u_last_na		= true;
 			}
 			else
 			{
