@@ -13,11 +13,11 @@ if (!defined('IN_WACKO'))
 //	sort		- order pages alphabetically ('abc', default) or creation date ('date')
 //	nomark		- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
 
-if (!isset($root))			$root	= '/';
-if (!isset($list))			$list	= 1;
+if (!isset($root))			$root		= '/';
+if (!isset($list))			$list		= 1;
 if (!isset($type_id))		$type_id	= OBJECT_PAGE;
-if (!isset($ids))			$ids	= '';
-if (!isset($lang))			$lang	= $this->page['page_lang'];
+if (!isset($ids))			$ids		= '';
+if (!isset($lang))			$lang		= $this->page['page_lang'];
 if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 {
 	$sort = 'abc';
@@ -33,17 +33,17 @@ if ($list && ($ids || isset($_GET['category_id'])))
 {
 	if ($ids)
 	{
-		$category = preg_replace('/[^\d, ]/', '', $ids);
+		$category_ids = preg_replace('/[^\d, ]/', '', $ids);
 	}
 	else
 	{
-		$category = (int) $_GET['category_id'];
+		$category_ids = (int) $_GET['category_id'];
 	}
 
 	if ($_words = $this->db->load_all(
 		"SELECT category " .
 		"FROM " . $this->db->table_prefix . "category " .
-		"WHERE category_id IN (" . $this->db->q($category) . ")", true));
+		"WHERE category_id IN (" . $this->db->q($category_ids) . ")", true));
 
 	if ($nomark != 2)
 	{
@@ -73,7 +73,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		"SELECT p.page_id, p.tag, p.title, p.created " .
 		"FROM " . $this->db->table_prefix . "category_assignment AS k " .
 			"INNER JOIN " . $this->db->table_prefix . "page AS p ON (k.object_id = p.page_id) " .
-		"WHERE k.category_id IN (" . $this->db->q($category) . ") " .
+		"WHERE k.category_id IN (" . $this->db->q($category_ids) . ") " .
 			"AND k.object_type_id = 1 " .
 			"AND p.deleted <> '1' " .
 			(($root && $type_id = OBJECT_PAGE)
@@ -84,7 +84,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		if ($_words = $this->db->load_all(
 			"SELECT category " .
 			"FROM " . $this->db->table_prefix . "category " .
-			"WHERE category_id IN (" . $this->db->q($category) . ")", true))
+			"WHERE category_id IN (" . $this->db->q($category_ids) . ")", true))
 		{
 			echo '<ol>';
 
