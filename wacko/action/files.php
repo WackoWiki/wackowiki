@@ -23,22 +23,22 @@ if (!defined('IN_WACKO'))
 
 $page_id = '';
 
-if (!isset($nomark))	$nomark = '';
-if (!isset($order))		$order = '';
-if (!isset($global))	$global = '';
-if (!isset($all))		$all = '';
-if (!isset($tag))		$tag = ''; // FIXME: $tag == $page
-if (!isset($owner))		$owner = '';
-if (!isset($page))		$page = '';
-if (!isset($ppage))		$ppage = '';
-if (!isset($legend))	$legend = '';
-if (!isset($method))	$method = ''; // for use in page handler
-if (!isset($params))	$params = null; //for $_GET parameters to be passed with the page link
-if (!isset($deleted))	$deleted = 0;
-if (!isset($track))		$track = 0;
-if (!isset($picture))	$picture = null;
-if (!isset($max))		$max = null;
-if (!isset($type_id))	$type_id = null;
+if (!isset($nomark))	$nomark		= '';
+if (!isset($order))		$order		= '';
+if (!isset($global))	$global		= '';
+if (!isset($all))		$all		= '';
+if (!isset($tag))		$tag		= ''; // FIXME: $tag == $page
+if (!isset($owner))		$owner 		= '';
+if (!isset($page))		$page		= '';
+if (!isset($ppage))		$ppage		= '';
+if (!isset($legend))	$legend		= '';
+if (!isset($method))	$method		= ''; // for use in page handler
+if (!isset($params))	$params		= null; //for $_GET parameters to be passed with the page link
+if (!isset($deleted))	$deleted	= 0;
+if (!isset($track))		$track		= 0;
+if (!isset($picture))	$picture	= null;
+if (!isset($max))		$max		= null;
+if (!isset($type_id))	$type_id	= null;
 
 $order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
@@ -265,6 +265,10 @@ if ($can_view)
 
 			if ($picture)
 			{
+				// get context for filter
+				$method_filter	= $this->method == 'show' ? '' : $this->method;
+				$param_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global'])) ? ['files' => $_GET['files']] : [];
+
 				echo '<td class="desc-">' .
 					'<strong>' . $this->shorten_string($file['file_name'], $file_name_maxlen) . '</strong><br /><br />' .
 					$desc . '<br /><br />' .
@@ -276,7 +280,8 @@ if ($can_view)
 
 					$file_size . '<br /><br />' .
 					$this->user_link($file['user_name'], '', true, false) . '<br />' .
-					$this->get_time_formatted($dt) .
+					$this->get_time_formatted($dt) . '<br /><br />' .
+					$this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter);
 				'</td>';
 			}
 			else

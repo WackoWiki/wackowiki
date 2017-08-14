@@ -7565,7 +7565,8 @@ class Wacko
 
 	function get_categories($object_id, $type_id = null, $method = '', $tag = '', $params = [], $cache = true)
 	{
-		$_category = '';
+		$_category		= '';
+		$category_id	= (int) @$_GET['category_id'];
 
 		if ($categories	= $this->load_categories($object_id, $type_id, $cache))
 		{
@@ -7576,7 +7577,14 @@ class Wacko
 					$_category .= ', ';
 				}
 
-				$_category .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+				if ($category_id == $category['category_id'])
+				{
+					$_category .= '<span class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</span>';
+				}
+				else
+				{
+					$_category .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+				}
 			}
 
 			return $_category;
