@@ -14,12 +14,13 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 		($tag
 			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "") .
-		"WHERE (( MATCH(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
-			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
-			"OR lower(a.tag) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) " .
+		"WHERE ((MATCH (a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
+					"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
+					"OR lower(a.tag) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
+				") " .
 			($tag
 				? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
-				  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " )"
+				  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . ") "
 				: "") .
 			($filter
 				? "AND a.comment_on_id = '0' "
@@ -46,7 +47,7 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 		"FROM " . $this->db->table_prefix . "page a " .
 			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) " .
-		$selector.
+		$selector .
 		"ORDER BY score DESC " .
 		$pagination['limit']);
 
@@ -63,7 +64,7 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) " .
 		($tag
 			? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
-			  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " )"
+			  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . ") "
 			: "") .
 		($filter
 			? "AND a.comment_on_id = '0' "
@@ -88,7 +89,7 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 		"FROM " . $this->db->table_prefix . "page a " .
 			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) " .
-		$selector.
+		$selector .
 		"ORDER BY a.supertag " .
 		$pagination['limit']);
 
@@ -148,7 +149,7 @@ $preview_text = function ($text, $limit, $tags = 0)
 
 	if ($tags == 0)
 	{
-		return substr($text, 0, $limit) . " [..]";
+		return substr($text, 0, $limit) . ' [..]';
 	}
 	else
 	{
@@ -179,7 +180,7 @@ $preview_text = function ($text, $limit, $tags = 0)
 			}
 		}
 
-		return $return . "[..]";
+		return $return . '[..]';
 	}
 };
 
@@ -198,23 +199,20 @@ $highlight_this = function ($text, $words, $the_place)
 		}
 
 		// Check if it's excluded
-		if ( in_array( strtolower($word), $exclude_list ) )
+		if (in_array(strtolower($word), $exclude_list))
 		{
-
+			// skip
 		}
 		else
 		{
-			#$text = str_ireplace($word, "<span class=\"highlight\">" . $word . "</span>", $text, $count); // XXX: replaced with preg_replace()
 			// escape bad regex characters
 			$word		= preg_quote($word);
+
 			// highlight uppercase and lowercase correctly
-			$text		= preg_replace('/(' . $word . ')/i','<span class="highlight">$1</span>' , $text, -1 , $count);
+			$text		= preg_replace('/(' . $word . ')/i','<mark class="highlight">$1</mark>' , $text, -1 , $count);
 			$the_count	= $count + $the_count;
 		}
-
 	}
-	//added to show how many keywords were found
-	#echo '<br /><div class="emphasis">A search for <strong>' . $words. '</strong> found <strong>' . $the_count . '</strong> matches within the ' . $the_place. '.</div><br />';
 
 	return [$text, $the_count];
 };
@@ -333,6 +331,7 @@ if (strlen($phrase) >= 3)
 					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
 					$tpl->l_mtime		= $page['modified'];
 					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);
+					$tpl->l_category	= $this->get_categories($page['page_id'], OBJECT_PAGE);
 
 					if ($mode != 'topic')
 					{
