@@ -33,6 +33,7 @@
 						<br />
 						<span class="search_meta">[ ' userlink ' ] [ ' mtime | time_formatted ' ] - [ ' psize ' ]</span>
 						[ ' preview | nl2br ' ]
+						[ ' category ' ]
 					=]
 				</li>
 			=]
