@@ -8,13 +8,20 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
+$full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 0)
 {
+	$category_id	=  null;
+	extract($filter, EXTR_IF_EXISTS);
+
 	$selector =
+		($category_id
+			? "LEFT JOIN " . $this->db->table_prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
+			: "") .
 		($tag
 			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "") .
-		"WHERE ((MATCH (a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
+		"WHERE ((MATCH
+					(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
 					"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
 					"OR lower(a.tag) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
 				") " .
@@ -22,8 +29,11 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 				? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
 				  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . ") "
 				: "") .
-			($filter
+			($scope
 				? "AND a.comment_on_id = '0' "
+				: "") .
+			($category_id
+				? "AND ca.category_id = " . (int) $category_id . " "
 				: "") .
 			(!$deleted
 				? ($tag
@@ -54,9 +64,15 @@ $full_text_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 	return [$results, $pagination, $count['n']];
 };
 
-$tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
+$tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 0)
 {
+	$category_id	=  null;
+	extract($filter, EXTR_IF_EXISTS);
+
 	$selector =
+		($category_id
+			? "LEFT JOIN " . $this->db->table_prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
+			: "") .
 		($tag
 			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "") .
@@ -66,8 +82,11 @@ $tag_search = function ($phrase, $tag, $limit, $filter, $deleted = 0)
 			? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
 			  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . ") "
 			: "") .
-		($filter
+		($scope
 			? "AND a.comment_on_id = '0' "
+			: "") .
+		($category_id
+			? "AND ca.category_id = " . (int) $category_id . " "
 			: "") .
 		(!$deleted
 			? ($tag
@@ -228,25 +247,33 @@ if (!isset($page))		$page		= '';
 if (!isset($topic))		$topic		= '';
 if (!isset($title))		$title		= '';
 if (!isset($filter))	$filter		= '';
+if ($filter)			$scope = $filter; // depreciated
 if (!isset($style))		$style		= '';
+if (!isset($scope))		$scope		= '';
 if (!isset($nomark))	$nomark		= '';
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
 if (!isset($max))		$max		= null;
 if (!isset($clean))		$clean		= false;
 
-$user	= $this->get_user();
 
-$mode = ($topic || isset($_GET['topic']))? 'topic' : 'full';
+
+$user			= $this->get_user();
+$category_id	= isset($_GET['category_id']) ? $_GET['category_id'] : 0;
+$mode			= ($topic || isset($_GET['topic']))? 'topic' : 'full';
+
+$filter = [
+	'category_id' => $category_id,
+];
 
 if (!in_array($style, ['br', 'ul', 'ol', 'comma']))
 {
 	$style = 'ol';
 }
 
-if ($filter != 'pages')
+if ($scope != 'pages')
 {
-	$filter = 'all';
+	$scope = 'all';
 }
 
 if (isset($$term)) // TODO: some historical junk, $vars currently not available
@@ -280,11 +307,11 @@ if (strlen($phrase) >= 3)
 {
 	if ($mode == 'topic')
 	{
-		$results = $tag_search($phrase, $page, $max, ($filter != 'all'));
+		$results = $tag_search($phrase, $page, $max, ($scope != 'all'), $filter);
 	}
 	else
 	{
-		$results = $full_text_search($phrase, $page, $max, ($filter != 'all'));
+		$results = $full_text_search($phrase, $page, $max, ($scope != 'all'), $filter);
 	}
 
 	list ($pages, $pagination, $tcount) = $results;
@@ -331,7 +358,7 @@ if (strlen($phrase) >= 3)
 					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
 					$tpl->l_mtime		= $page['modified'];
 					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);
-					$tpl->l_category	= $this->get_categories($page['page_id'], OBJECT_PAGE);
+					$tpl->l_category	= $this->get_categories($page['page_id'], OBJECT_PAGE, '', '', ['phrase' => $phrase]);
 
 					if ($mode != 'topic')
 					{
