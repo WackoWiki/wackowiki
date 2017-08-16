@@ -20,7 +20,7 @@
 		[= mark _ =
 			<div class="layout-box">
 			<p>
-				<span>[ ' diag ' ] "[ ' phrase |e ' ]" (<strong>[ ' count |e ' ]</strong>):</span>
+				<span>[ ' diag ' ] "<strong>[ ' phrase |e ' ]</strong>" ([ ' count |e ' ]):</span>
 			</p>
 		=]
 		[= ul _ =

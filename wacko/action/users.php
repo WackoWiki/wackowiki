@@ -36,6 +36,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 		// profile navigation
 		if ($user['user_id'] == $this->get_user_id())
 		{
+			// TODO: disable link for active tab
 			$tpl->u_tab_href0 = $this->href('', '', $profile);
 			$tpl->u_tab_href1 = $this->href('', '', $profile + ['mode' => 'mypages']);
 			$tpl->u_tab_href2 = $this->href('', '', $profile + ['mode' => 'mychanges']);
@@ -45,41 +46,31 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 			if (isset($_GET['mode']) && $_GET['mode'] == 'mypages')
 			{
-				#$tpl->u_tab_userTabs =	$this->_t('ListMyPages'); #$output1 .
-
 				$tpl->u_tab_heading		= $this->_t('ListMyPages');
 				$tpl->u_tab_action		= $this->action('mypages', $profile);
 				$default_tab			= false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
 			{
-				#$tpl->u_tab_userTabs =	$this->_t('ListMyWatches'); #$output3 .
-
 				$tpl->u_tab_heading		= $this->_t('ListMyWatches');
 				$tpl->u_tab_action		= $this->action('mywatches', $profile);
 				$default_tab			= false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychangeswatches')
 			{
-				#$tpl->u_tab_userTabs =	$this->_t('ListMyChangesWatches'); #$output4 .
-
 				$tpl->u_tab_heading		= $this->_t('ListMyChangesWatches');
 				$tpl->u_tab_action		= $this->action('mychangeswatches', $profile);
 				$default_tab			= false;
 			}
 			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
 			{
-				#$tpl->u_tab_userTabs =	$this->_t('ListMyChanges'); #$output2 .
-
 				$tpl->u_tab_heading		= $this->_t('ListMyChanges');
 				$tpl->u_tab_action		= $this->action('mychanges', $profile);
 				$default_tab			= false;
 			}
 			else
 			{
-				#$tpl->u_tab_userTabs =	$this->_t('ListMyPages'); #$output2 .
-
-				$tpl->u_tab_heading		= $this->_t('ListMyPages');
+				$tpl->u_tab_heading		= $this->_t('UsersProfile');
 			}
 		}
 
@@ -101,11 +92,11 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					}
 				}
 
-				$tpl->u_userGroups_list = implode(', ', $groups);
+				$tpl->u_prof_userGroups_list = implode(', ', $groups);
 			}
 			else
 			{
-				$tpl->u_userGroups_na = true;
+				$tpl->u_prof_userGroups_na = true;
 			}
 
 			if ($this->page['page_lang'] != $user['account_lang'])
@@ -180,20 +171,20 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// basic info
 			if ($user['hide_lastsession'])
 			{
-				$tpl->u_last_hidden	= true;
+				$tpl->u_prof_last_hidden	= true;
 			}
 			else if ($this->db->is_null_date($user['last_visit']))
 			{
-				$tpl->u_last_na		= true;
+				$tpl->u_prof_last_na		= true;
 			}
 			else
 			{
-				$tpl->u_last_last_visit = $user['last_visit'];
+				$tpl->u_prof_last_last_visit = $user['last_visit'];
 			}
 
-			$tpl->u_userPage_text	= $home = $this->db->users_page . '/' . $user['user_name'];
-			$tpl->u_userPage_href	= $this->href('', $home);
-			$tpl->u_groupsPage		= $this->href('', $this->db->groups_page);
+			$tpl->u_prof_userPage_text	= $home = $this->db->users_page . '/' . $user['user_name'];
+			$tpl->u_prof_userPage_href	= $this->href('', $home);
+			$tpl->u_prof_groupsPage		= $this->href('', $this->db->groups_page);
 
 			// hide contact form if profile is equal with current user
 			if ($user['user_id'] != $this->get_user_id())
@@ -222,34 +213,34 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						}
 					}
 
-					$tpl->u_pm_pm_href		= $this->href();
-					$tpl->u_pm_pm_username	= $user['user_name'];
+					$tpl->u_prof_pm_pm_href		= $this->href();
+					$tpl->u_prof_pm_pm_username	= $user['user_name'];
 
 					if ($ref)
 					{
-						$tpl->u_pm_pm_ref_ref = $ref;
+						$tpl->u_prof_pm_pm_ref_ref = $ref;
 					}
 
 					// user must allow incoming messages, and needs confirmed email address set
 					if ($allow_intercom)
 					{
-						$tpl->u_pm_pm_ic_subj = $subject;
+						$tpl->u_prof_pm_pm_ic_subj = $subject;
 
 						if ($ref)
 						{
-							$tpl->u_pm_pm_ic_ref_href = $this->href('', '', $profile + ['#' => 'contacts']);
+							$tpl->u_prof_pm_pm_ic_ref_href = $this->href('', '', $profile + ['#' => 'contacts']);
 						}
 
-						$tpl->u_pm_pm_ic_body = $body;
+						$tpl->u_prof_pm_pm_ic_body = $body;
 					}
 					else
 					{
-						$tpl->u_pm_pm_disabled = true;
+						$tpl->u_prof_pm_pm_disabled = true;
 					}
 				}
 				else
 				{
-					$tpl->u_pm_not = true;
+					$tpl->u_prof_pm_not = true;
 				}
 			}
 
@@ -272,14 +263,14 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				// sorting and pagination
 				if ($sort_name)
 				{
-					$tpl->u_pages_date_href = $this->href('', '', $profile + ['sort' => 'date']);
+					$tpl->u_prof_pages_date_href = $this->href('', '', $profile + ['sort' => 'date']);
 				}
 				else
 				{
-					$tpl->u_pages_name_href = $this->href('', '', $profile + ['sort' => 'name']);
+					$tpl->u_prof_pages_name_href = $this->href('', '', $profile + ['sort' => 'name']);
 				}
 
-				$tpl->u_pages_pagination_text = $pagination['text'];
+				$tpl->u_prof_pages_pagination_text = $pagination['text'];
 
 				// pages list itself
 				foreach ($pages as $page)
@@ -292,25 +283,25 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						// cache page_id for for has_access validation in link function
 						$this->page_id_cache[$page['tag']] = $page['page_id'];
 
-						$tpl->u_pages_li_created	= $page['created'];
-						$tpl->u_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
+						$tpl->u_prof_pages_li_created	= $page['created'];
+						$tpl->u_prof_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
 					}
 				}
 			}
 			else
 			{
-				$tpl->u_nopages = true;
+				$tpl->u_prof_nopages = true;
 			}
 
 			// last user comments
 			if ($this->user_allowed_comments())
 			{
-				$tpl->u_cmt_n = $user['total_comments'];
+				$tpl->u_prof_cmt_n = $user['total_comments'];
 
 				if ($user['total_comments'])
 				{
 					$pagination = $this->pagination($user['total_comments'], 10, 'c', $profile + ['#' => 'comments']);
-					$tpl->u_cmt_c_pagination_text = $pagination['text'];
+					$tpl->u_prof_cmt_c_pagination_text = $pagination['text'];
 
 					$comments = $this->db->load_all(
 						"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang " .
@@ -334,19 +325,19 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							// cache page_id for for has_access validation in link function
 							$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 
-							$tpl->u_cmt_c_li_created	= $comment['created'];
-							$tpl->u_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
+							$tpl->u_prof_cmt_c_li_created	= $comment['created'];
+							$tpl->u_prof_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
 						}
 					}
 				}
 				else
 				{
-					$tpl->u_cmt_none = true;
+					$tpl->u_prof_cmt_none = true;
 				}
 			}
 			else
 			{
-				$tpl->u_cmtdisabled = true;
+				$tpl->u_prof_cmtdisabled = true;
 			}
 
 			// last user uploads
@@ -355,13 +346,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			{
 				if ($this->db->upload == 1 || $this->is_admin())
 				{
-					$tpl->u_up_u_n = $user['total_uploads'];
+					$tpl->u_prof_up_u_n = $user['total_uploads'];
 
 					if ($user['total_uploads'])
 					{
 						$pagination = $this->pagination($user['total_uploads'], 10, 'u', $profile + ['#' => 'comments']);
 
-						$tpl->u_up_u_u2_pagination_text = $pagination['text'];
+						$tpl->u_prof_up_u_u2_pagination_text = $pagination['text'];
 
 						$uploads = $this->db->load_all(
 							"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
@@ -414,22 +405,22 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 									$on_page	= '<span title="">&rarr; ' . $this->_t('UploadGlobal');
 								}
 
-								$tpl->u_up_u_u2_li_t		= $upload['uploaded_dt'];
-								# $tpl->u_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
-								$tpl->u_up_u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
-								$tpl->u_up_u_u2_li_onpage	= $on_page;
-								$tpl->u_up_u_u2_li_descr	= $file_description;
+								$tpl->u_prof_up_u_u2_li_t		= $upload['uploaded_dt'];
+								# $tpl->u_prof_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
+								$tpl->u_prof_up_u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
+								$tpl->u_prof_up_u_u2_li_onpage	= $on_page;
+								$tpl->u_prof_up_u_u2_li_descr	= $file_description;
 							}
 						}
 					}
 					else
 					{
-						$tpl->u_up_u_none = true;
+						$tpl->u_prof_up_u_none = true;
 					}
 				}
 				else
 				{
-					$tpl->u_up = true;
+					$tpl->u_prof_up = true;
 				}
 			}
 		}

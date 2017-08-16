@@ -29,7 +29,7 @@ first really BIG template written
 		[ ' action ' ]
 	=]
 
-	<h2>[ ' _t: UsersProfile ' ]</h2>
+	[= prof _ =
 
 	<table class="userprofile lined">
 		<tr>
@@ -156,6 +156,7 @@ first really BIG template written
 			=]
 		=]
 	=]
+=]
 
 [ === userPagesByDate === ]
 <a href="[ ' href ' ]#pages">[ ' _t: UsersDocsSortDate ' ]</a>
@@ -178,16 +179,31 @@ first really BIG template written
 			[= hid _ =
 				<input type="hidden" name="[ ' param |e attr ' ]" value="[ ' value |e attr ' ]" />
 			=]
-			<table class="formation"><tr><td class="label">
-			[ ' _t: UsersSearch ' ]: </td><td>
-			<input type="search" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" /> ['' '']
-			<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]" /> ['' '']
-			['' // echo <input type="submit" id="button" value="_t('UsersOpenProfile') . '" name="gotoprofile" /> '']
-			</td></tr></table><br />
+			<table class="formation">
+				<tr>
+					<td class="label">
+						[ ' _t: UsersSearch ' ]:
+					</td>
+					<td>
+						<input type="search" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" /> ['' '']
+						<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]" /> ['' '']
+						['' // echo <input type="submit" id="button" value="_t('UsersOpenProfile') . '" name="gotoprofile" /> '']
+					</td>
+				</tr>
+			</table><br />
 		</form>
 	=]
 	['' pagination '']
 	<table class="lined nowrap" style="width:100%; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
+		<colgroup>
+			<col span="1" style="padding-left:5px;">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+		</colgroup>
 		<thead>
 			<tr>
 				[= s _ =

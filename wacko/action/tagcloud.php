@@ -7,10 +7,10 @@ if (!defined('IN_WACKO'))
 
 if (!function_exists('print_tag_cloud'))
 {
-	function print_tag_cloud(&$engine, $tags)
+	function print_tag_cloud(&$engine, $tags, $method = '')
 	{
 		// TODO: add name space 'category'
-		$tag_path = $engine->db->base_url . $engine->db->category_page . '?category_id=';
+		$tag = $engine->db->category_page;
 
 		$max_size = 32; // max font size in pixels
 		$min_size = 12; // min font size in pixels
@@ -45,7 +45,7 @@ if (!function_exists('print_tag_cloud'))
 			// and add the $min_size set above
 			$size = round($min_size + (($value['number'] - $min_qty) * $step));
 
-			echo '<a href="' . $tag_path . '' . $key . '" style="font-size: ' . $size . 'px;" title="' . $value['number'] . ' pages tagged with ' . $value['category'] . '">' . $value['category'] . '</a> ';
+			echo '<a href="' . $engine->href($method, $tag, ['category_id' => $key]) . '" style="font-size: ' . $size . 'px;" title="' . $value['number'] . ' pages tagged with ' . $value['category'] . '">' . $value['category'] . '</a> ';
 		}
 	}
 }

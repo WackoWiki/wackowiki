@@ -11,19 +11,34 @@ if (!defined('IN_WACKO'))
 
 require Ut::join_path(THEME_DIR, '_common/_header.php');
 
-if ($this->db->site_logo)
+// site logo and title
+if ($this->db->site_logo && $this->db->logo_display >= 1)
 {
-	$tpl->logo			= true;
-	$tpl->logo_image	= $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_logo);
+	$tpl->site_logo			= true;
+	$tpl->site_logo_path	= $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_logo);
+}
+else
+{
+	$tpl->site_logo			= false;
+	$tpl->site_logo_path	= '';
+}
+
+if ($this->db->logo_display === 0 || $this->db->logo_display == 2)
+{
+	$tpl->site_title		= true;
+}
+else
+{
+	$tpl->site_title		= false;
 }
 
 if (@$this->page['tag'] == $this->db->root_page)
 {
-	$tpl->root = true;
+	$tpl->site_link			= false;
 }
 else
 {
-	$tpl->other = true;
+	$tpl->site_link			= true;
 }
 
 // if user are logged, shows "You are UserName"

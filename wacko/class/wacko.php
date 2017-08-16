@@ -7577,7 +7577,7 @@ class Wacko
 					$_category .= ', ';
 				}
 
-				if ($category_id == $category['category_id'])
+				if ($category_id == $category['category_id']) // TODO: might be an array!
 				{
 					$_category .= '<span class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</span>';
 				}

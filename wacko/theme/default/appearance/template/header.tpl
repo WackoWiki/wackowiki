@@ -11,16 +11,19 @@
 	<div id="header-main">
 		<div id="header-top">
 			<h1>
-			[= logo _ =
-				<img src="[ ' image ' ]" alt="" height="[ ' db: logo_height ' ]" width="[ ' db: logo_width ' ]">
-			=]
-			[= root _ =
-				<span>[ ' db: site_name |e ' ]</span>
-			=]
-			[= other _ =
-				<a href="[ ' db: base_url ' ]" title="[ ' db: site_desc |e ' ]">
-					[ '' LogoImage '' ]
-				<span>[ ' db: site_name |e ' ]</span></a>
+			[= site _ =
+				[= link _ =
+					<a href="[ ' db: base_url ' ]" title="[ ' db: site_desc |e ' ]">
+				=]
+				[= logo _ =
+					<img src="[ ' path ' ]" alt="[ ' db: site_name |e ' ]" height="[ ' db: logo_height ' ]" width="[ ' db: logo_width ' ]">
+				=]
+				[= title _ =
+					<span>[ ' db: site_name |e ' ]</span>
+				=]
+				[= link _ =
+					</a>
+				=]
 			=]
 			</h1>
 		</div>
@@ -146,3 +149,6 @@
 ['' im TabImage ''] ['' title '']
 [ === TabImage === ]
 <img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title ' ]" />
+
+[ === LogoImage === ]
+<img src="[ ' image ' ]" alt="" height="[ ' db: logo_height ' ]" width="[ ' db: logo_width ' ]">
