@@ -1999,7 +1999,12 @@ li.m-source img {
 	padding-right: 10px;
 }
 
-.userprofil th{
+.userprofile {
+	border-spacing: 3px; 
+	border-collapse: separate;
+}
+
+.userprofile th{
 	color: #444444;
 	font-weight: bold;
 	width: 100px;

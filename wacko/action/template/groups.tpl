@@ -7,7 +7,7 @@
 		<h1>[ ' group.group_name |e ' ]</h1>
 		<small><a href="[ ' link ' ]">&laquo; [ ' _t: GroupsList ' ]</a></small>
 		<h2>[ ' _t: GroupsProfile ' ]</h2>
-		<table class="userprofil lined">
+		<table class="userprofile lined">
 			<tr>
 				<th scope="row">[ ' _t: GroupsDescription ' ]</th>
 				<td>[ ' group.description |e ' ]</td>

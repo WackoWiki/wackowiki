@@ -31,7 +31,7 @@ first really BIG template written
 
 	<h2>[ ' _t: UsersProfile ' ]</h2>
 
-	<table class="userprofil lined" style="border-spacing: 3px; border-collapse: separate;">
+	<table class="userprofile lined">
 		<tr>
 			<th scope="row">[ ' _t: RealName ' ]</th>
 			<td>[ ' user.real_name |e ' ]</td>
