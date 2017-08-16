@@ -5,6 +5,25 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$category_link = function ($word, $category_id, $type_id, $filter = [], $list)
+{
+	$selected = (in_array($category_id, $filter));
+
+	return ($list
+				? ($selected
+					? '<span rel="tag" class="tag">'
+					: '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id]) . '" rel="tag" class="tag">')
+				: '') .
+			htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
+			($list
+				? ($selected
+					? '</span>'
+					: '</a>' ) .
+				  '<span class="item-multiplier-x"> &times; </span>' .
+				  '<span class="item-multiplier-count">' . (int) $word['n'] . '</span>'
+				: '');
+};
+
 // settings:
 //	root		- where to start counting from (defaults to current tag)
 //	list		- make categories clickable links which display pages of a given category (1 (default) or 0)
@@ -24,6 +43,7 @@ if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 }
 if (!isset($nomark))		$nomark = '';
 $type_id = isset($_GET['type_id']) ? (int) $_GET['type_id'] : OBJECT_PAGE;
+$filter = [];
 
 $root = $this->unwrap_link($root);
 
@@ -34,10 +54,20 @@ if ($list && ($ids || isset($_GET['category_id'])))
 	if ($ids)
 	{
 		$category_ids = preg_replace('/[^\d, ]/', '', $ids);
+		$filter = implode(',', $ids);
 	}
 	else
 	{
 		$category_ids = (int) $_GET['category_id'];
+
+		if (is_array($category_ids))
+		{
+
+		}
+		else
+		{
+			$filter[]	= (int) $_GET['category_id'];
+		}
 	}
 
 	if ($_words = $this->db->load_all(
@@ -142,7 +172,7 @@ if (!$ids)
 		{
 			$spacer = '&nbsp;&nbsp;&nbsp;';
 
-			echo '<li> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '');
+			echo '<li> ' . $category_link($word, $category_id, $type_id, $filter, $list);
 
 			if (isset($word['child']) && $word['child'] == true)
 			{
@@ -150,7 +180,7 @@ if (!$ids)
 
 				foreach ($word['child'] as $category_id => $word)
 				{
-					echo '<li> ' . ($list ? '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id]) . '" rel="tag" class="tag">' : '') . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ($list ? '</a>' . '<span class="item-multiplier-x"> &times; </span><span class="item-multiplier-count">' . (int) $word['n'] . '</span>' : '') . "</li>\n";
+					echo '<li> ' . $category_link($word, $category_id, $type_id, $filter, $list) . "</li>\n";
 				}
 
 				echo "</ul>\n</li>\n";
@@ -164,7 +194,8 @@ if (!$ids)
 			if ($n % $total == 0)
 			{
 				echo "</ul>\n";
-				echo "\t\t</td>\n\t\t<td>\n";
+				echo "\t\t</td>\n" .
+					 "\t\t<td>\n";
 				echo '<ul class="ul_list lined">' . "\n";
 			}
 
