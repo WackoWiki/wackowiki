@@ -560,7 +560,7 @@ function admin_user_groups(&$engine, &$module)
 
 		$_order				= isset($_GET['order']) ? $_GET['order'] : '';
 		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : [];
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode=' => $module['mode']] + $order_pagination, '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
 
 		$groups = $engine->db->load_all(
 			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name, COUNT(m.user_id) AS members " .
