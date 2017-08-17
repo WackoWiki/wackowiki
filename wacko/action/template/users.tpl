@@ -24,7 +24,7 @@ first really BIG template written
 			<li><a href="[ ' href3 ' ]">[ ' _t: UsersSubscription ' ]</a></li>
 			<li><a href="[ ' href4 ' ]">[ ' _t: UsersWatches ' ]</a></li>
 		</ul>
-			
+
 		<h2>[ ' heading ' ]</h2>
 		[ ' action ' ]
 	=]

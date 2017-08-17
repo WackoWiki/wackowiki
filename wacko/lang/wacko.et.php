@@ -685,6 +685,7 @@ $wacko_translation = [
 	// Properties
 	'PropertiesFor'				=> ' %1 seadistused.',
 	'MetaInfo'					=> 'META võtmesõnad/kirjeldus, mis lisatakse HTML-i päisesse.',
+	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Title',
 	'MetaKeywords'				=> 'META võtmesõnad',
 	'MetaDescription'			=> 'META kirjeldus',

@@ -150,5 +150,3 @@
 [ === TabImage === ]
 <img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title ' ]" />
 
-[ === LogoImage === ]
-<img src="[ ' image ' ]" alt="" height="[ ' db: logo_height ' ]" width="[ ' db: logo_width ' ]">

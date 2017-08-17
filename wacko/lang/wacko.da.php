@@ -685,6 +685,7 @@ $wacko_translation = [
 	// Properties
 	'PropertiesFor'				=> 'Indstillinger for %1',
 	'MetaInfo'					=> 'META Keywords/Description metadata.',
+	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Title',
 	'MetaKeywords'				=> 'Keywords',
 	'MetaDescription'			=> 'Meta Description (beskrivelse)',
