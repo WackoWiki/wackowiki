@@ -790,7 +790,7 @@ function admin_user_users(&$engine, &$module)
 
 		$_order				= isset($_GET['order']) ? $_GET['order'] : '';
 		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : [];
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode=' => $module['mode']] + $order_pagination, '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang " .
