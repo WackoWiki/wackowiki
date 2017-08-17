@@ -685,6 +685,7 @@ $wacko_translation = [
 	// Properties
 	'PropertiesFor'				=> 'Ustawienia dla %1',
 	'MetaInfo'					=> 'S³owa kluczowe/Opis META które zostan± dodane do nag³ówków HTML.',
+	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Title',
 	'MetaKeywords'				=> 'S³owa kluczowe Meta',
 	'MetaDescription'			=> 'Opis Meta',

@@ -687,6 +687,7 @@ $wacko_translation = [
 	// Properties
 	'PropertiesFor'				=> 'Eigenschaften für Seite %1',
 	'MetaInfo'					=> 'META Schlüsselwörter/Beschreibungen, die in den HTML-Kopf eingefügt werden.',
+	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Titel',
 	'MetaKeywords'				=> 'Schlüsselwörter',
 	'MetaDescription'			=> 'Beschreibung',

@@ -20,10 +20,12 @@ if ($this->db->site_logo && $this->db->logo_display >= 1)
 else
 {
 	$tpl->site_logo			= false;
-	$tpl->site_logo_path	= '';
 }
 
-if ($this->db->logo_display === 0 || $this->db->logo_display == 2)
+if ($this->db->logo_display == 0
+	|| $this->db->logo_display == 2
+	#|| (!$this->db->site_logo && $this->db->logo_display >= 1)
+)
 {
 	$tpl->site_title		= true;
 }

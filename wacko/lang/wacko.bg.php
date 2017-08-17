@@ -685,6 +685,7 @@ $wacko_translation = [
 	// Properties
 	'PropertiesFor'				=> 'Настройки на %1',
 	'MetaInfo'					=> 'Ключови думи/Описание  (за HTML МЕТА таговете).',
+	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Title',
 	'MetaKeywords'				=> 'Ключови думи',
 	'MetaDescription'			=> 'Описание',

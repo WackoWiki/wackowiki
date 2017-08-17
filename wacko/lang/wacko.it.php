@@ -685,6 +685,7 @@ $wacko_translation = [
 	// Properties
 	'PropertiesFor'				=> 'Impostazioni per %1',
 	'MetaInfo'					=> 'META Keywords/Description that get inserted into the HTML headers.',
+	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Title',
 	'MetaKeywords'				=> 'Keywords',
 	'MetaDescription'			=> 'Meta Descrizione',
