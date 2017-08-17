@@ -27,7 +27,7 @@ function write_config_hidden_nodes($skip_values)
 {
 	global $config;
 
-	$config_parameters = array_diff_key($config, $skip_values, ['aliases' => '']);
+	$config_parameters = array_diff_key($config, $skip_values, ['aliases' => '', 'groups' => '']);
 
 	if (is_array($config_parameters))
 	{
