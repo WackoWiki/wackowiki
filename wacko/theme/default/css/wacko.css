@@ -438,6 +438,7 @@ a[href $='.svg'] .icon {
 	padding-left: 17px;
 }
 a[href $='.mp3'] .icon,
+a[href $='.m4a'] .icon,
 a[href $='.ogg'] .icon,
 a[href $='.opus'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/audio.svg') no-repeat scroll left center;
