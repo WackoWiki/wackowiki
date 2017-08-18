@@ -18,8 +18,8 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page('Category',		'Category',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page('Groups',		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page('Categoría',		'Categoría',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page('Grupos',		'Grupos',		'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page('Users',		'Usuarios',		'{{users}}',			$page_lang, 'Admins', false, false);
 }
 
