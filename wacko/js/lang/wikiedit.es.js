@@ -1,11 +1,11 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
+	ReallySave :			"Realmente guardar?",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
-	HelpFormatting :		"Help",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpAbout :				"Ayuda & Acerca de",
+	HelpFormatting :		"Ayuda",
+	HelpFormattingTip :		"Ayuda de formatear el Wiki",
 	HelpFormattingPage :	"Doc/English/Formatting",
 	
 	Heading1 :				"Heading 1",
@@ -13,35 +13,35 @@ lang = {
 	Heading3 :				"Heading 3",
 	Heading4 :				"Heading 4",
 	Heading5 :				"Heading 5",
-	Bold :					"Bold",
-	Italic :				"Italic",
-	Underline :				"Underline",
-	Strikethrough :			"Strikethrough",
-	Code :					"Code",
-	List :					"List",
-	NumberedList :			"Numbered list",
-	Left :					"Left",
-	Center :				"Center",
-	Right :					"Right",
-	Justify :				"Justify",
+	Bold :					"Negrita",
+	Italic :				"Cursivo",
+	Underline :				"Subrayado",
+	Strikethrough :			"Tachado",
+	Code :					"Codigo",
+	List :					"Lista",
+	NumberedList :			"Lista enumerada",
+	Left :					"Izquierda",
+	Center :				"Centro",
+	Right :					"Derecha",
+	Justify :				"Justificar",
 	Outdent :				"Outdent",
 	Indent :				"Indent",
 	CodeWrapper :			"Code Wrapper",
 	HTML :					"HTML",
-	Action :				"Action",
-	Line :					"Line",
-	Signature :				"Signature",
+	Action :				"Accion",
+	Line :					"Linea",
+	Signature :				"Firma",
 	Quote :					"Quote",
-	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
-	Shade :					"Shade",
+	MarkedText :			"Texto marcado",
+	HighlightText :			"Texto sobresaliente",
+	Shade :					"Sombra",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
+	InsertTable :			"Insertar tabla",
 	
-	Link :					"Link",
-	TextForLinking :		"Text for linking",
+	Link :					"Enlace",
+	TextForLinking :		"Texto del enlace",
 	
-	HelpAboutTip : 			' Shortcuts:\n'+
+	HelpAboutTip : 			' Teclas rápidas:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
@@ -52,7 +52,7 @@ lang = {
 							' Ctrl+J - MarkUp (!!)\n'+
 							' Ctrl+H - MarkUp (??)\n'+
 							' Alt+L - Link\n'+
-							' Ctrl+L - Link with description\n'+
+							' Ctrl+L - Link con descripcion\n'+
 							' Ctrl+Shift+L - Unordered List\n'+
 							' Ctrl+Shift+N - Ordered List\n'+
 							' Ctrl+Shift+O - Ordered List\n'+

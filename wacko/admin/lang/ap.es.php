@@ -6,15 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'				=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'MainNote'				=> 'Observación: Antes de realizar actividades de administración se recomienda bloquear el acceso al sitio!',
 
 	'CategoryArray'		=> [
-		'basics'		=> 'Basic functions',
-		'preferences'	=> 'Preferences',
-		'content'		=> 'Content',
-		'users'			=> 'Users',
-		'maintenance'	=> 'Maintenance',
-		'messages'		=> 'Messages',
+		'basics'		=> 'Funciones básicas',
+		'preferences'	=> 'Preferencias',
+		'content'		=> 'Contenido',
+		'users'			=> 'Ususarios',
+		'maintenance'	=> 'Mantenimiento',
+		'messages'		=> 'Mensajes',
 		'extension'		=> 'Extension',
 		'database'		=> 'Database',
 	],
@@ -27,140 +27,140 @@ $ap_translation = [
 	'NoRecoceryPassword'		=> 'Contraseña administrativa no especificada!',
 	'NoRecoceryPasswordTip'		=> 'Observación: La falta de una contraseña administrativa es un riesgo de seguridad! Ingrese la contraseña en el archivo de configuración y vuelva a ejecutar el programa.',
 
-	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
+	'ErrorLoadingModule'		=> 'Error cargar admin module %1: no existe.',
 
-	'FormSave'					=> 'Save',
+	'FormSave'					=> 'Guardar',
 	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> 'Update',
+	'FormUpdate'				=> 'Actualizar',
 
 	'ApHomePage'				=> 'Home Page',
-	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
+	'ApHomePageTip'				=> 'ir a la página home, sin salir de la administración',
 	'ApLogOut'					=> 'Log out',
-	'ApLogOutTip'				=> 'quit system administration',
+	'ApLogOutTip'				=> 'salir de la administración del sistema',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'TimeLeft'					=> 'Tiempo restante:  %1 minutos',
 	'ApVersion'					=> 'version',
 
-	'SiteOpen'					=> 'open',
-	'SiteOpened'				=> 'site opened',
-	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'close',
-	'SiteClosed'				=> 'site closed',
-	'SiteClosedTip'				=> 'The site is closed',
+	'SiteOpen'					=> 'abrir',
+	'SiteOpened'				=> 'sitio abierto',
+	'SiteOpenedTip'				=> 'El sitio está abierto',
+	'SiteClose'					=> 'cerrar',
+	'SiteClosed'				=> 'sitio cerrado',
+	'SiteClosedTip'				=> 'El sitio está cerrado',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
-	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
+	'Cancel'					=> 'Cancelar',
+	'Add'						=> 'Agregar',
+	'Edit'						=> 'Editar',
+	'Remove'					=> 'Remover',
 	'Enabled'					=> 'Habilitar',
 	'Disabled'					=> 'Deshabilitar',
 	'On'						=> 'on',
 	'Off'						=> 'off',
-	'Mandatory'					=> 'Mandatory',
+	'Mandatory'					=> 'Obligatorio',
 	'Admin'						=> 'Admin',
 
 	// MENU
 	// Config Basic module
 	'config_basic'		=> [
 		'name'		=> 'Basic',
-		'title'		=> 'Basic parameters',
+		'title'		=> 'parámetros básicos',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
 		'name'		=> 'Apariencia',
-		'title'		=> 'Appearance settings',
+		'title'		=> 'configuración de apariencia',
 	],
 
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'Email',
-		'title'		=> 'Email settings',
+		'title'		=> 'configuración Email',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'title'		=> 'configuración de Filtros',
 	],
 
 	// Config Formatter module
 	'config_formatter'		=> [
 		'name'		=> 'Formatter',
-		'title'		=> 'Formatting options',
+		'title'		=> 'opciones de Formatter',
 	],
 
 	// Config Notifications module
 	'config_notifications'		=> [
 		'name'		=> 'Notifications',
-		'title'		=> 'Notifications settings',
+		'title'		=> 'configuración de notificationes',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
 		'name'		=> 'Pages',
-		'title'		=> 'Pages and site parameters',
+		'title'		=> 'parámetros de páginas y del sitio',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
 		'name'		=> 'Permissions',
-		'title'		=> 'Permissions settings',
+		'title'		=> 'configuración de permisos',
 	],
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Security',
-		'title'		=> 'Security subsystems settings',
+		'name'		=> 'Seguridad',
+		'title'		=> 'configuración de seguridad',
 	],
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
-		'title'		=> 'System options',
+		'name'		=> 'Sistema',
+		'title'		=> 'configuración del sistema',
 	],
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Upload',
-		'title'		=> 'Attachment settings',
+		'name'		=> 'Adjuntos',
+		'title'		=> 'configuración de adjuntos',
 	],
 
 	// Categories module
 	'content_categories'		=> [
-		'name'		=> 'Categories',
-		'title'		=> 'Manage categories',
+		'name'		=> 'Categorias',
+		'title'		=> 'configurar categorias',
 	],
 
 	// Comments module
 	'content_comments'		=> [
-		'name'		=> 'Comments',
-		'title'		=> 'Manage comments',
+		'name'		=> 'Comentarios',
+		'title'		=> 'configurar comentarios',
 	],
 
 	// Deleted module
 	'content_deleted'		=> [
-		'name'		=> 'Deleted',
+		'name'		=> 'Eliminar',
 		'title'		=> 'Newly deleted content',
 	],
 
 	// Files module
 	'content_files'		=> [
-		'name'		=> 'Files',
-		'title'		=> 'Manage uploaded files',
+		'name'		=> 'Archivos',
+		'title'		=> 'administrar archivos adjuntos',
 	],
 
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Menu',
-		'title'		=> 'Add, edit or remove default menu items',
+		'title'		=> 'Agregar, editar o eliminar itemes del menu',
 	],
 
 	// Pages module
 	'content_pages'		=> [
-		'name'		=> 'Pages',
-		'title'		=> 'Manage pages',
+		'name'		=> 'Paginas',
+		'title'		=> 'aministrar páginas',
 	],
 
 	// Polls module
@@ -178,31 +178,31 @@ $ap_translation = [
 	// DB Convert module
 	'db_convert'		=> [
 		'name'		=> 'Convert',
-		'title'		=> 'Converting Tables or Columns',
+		'title'		=> 'Convertir tablas o columnas',
 	],
 
 	// DB Repair module
 	'db_repair'		=> [
-		'name'		=> 'Repair',
-		'title'		=> 'Repair and Optimize Database',
+		'name'		=> 'Reparar',
+		'title'		=> 'Reparar y optimizar base de datos',
 	],
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
-		'title'		=> 'Restoring backup data',
+		'name'		=> 'Restaurar',
+		'title'		=> 'Restaurar datos de backup',
 	],
 
 	// Dashboard module
 	'main'		=> [
-		'name'		=> 'Main Menu',
+		'name'		=> 'Menu Principal',
 		'title'		=> 'WackoWiki Administration',
 	],
 
 	// Inconsistencies module
 	'maint_inconsistencies'		=> [
-		'name'		=> 'Inconsistencies',
-		'title'		=> 'Fixing Data Inconsistencies',
+		'name'		=> 'Inconsistencias',
+		'title'		=> 'Reparando inconsistencias de datos',
 	],
 
 	// Data Synchronization module
@@ -226,49 +226,49 @@ $ap_translation = [
 	// System message module
 	'messages'		=> [
 		'name'		=> 'System message',
-		'title'		=> 'System messages',
+		'title'		=> 'Mensajes del sistema',
 	],
 
 	// System Info module
 	'system_info'		=> [
 		'name'		=> 'System Info',
-		'title'		=> 'System Informations',
+		'title'		=> 'System Information',
 	],
 
 	// System log module
 	'system_log'		=> [
 		'name'		=> 'System log',
-		'title'		=> 'Log of system events',
+		'title'		=> 'Log de eventos del sistema',
 	],
 
 	// Statistics module
 	'system_statistics'		=> [
 		'name'		=> 'Statistics',
-		'title'		=> 'Show statistics',
+		'title'		=> 'Mostrar estadísticas',
 	],
 
 	// Bad Behavior module
 	'badbehavior'		=> [
 		'name'		=> 'Bad Behavior',
-		'title'		=> 'Bad Behavior',
+		'title'		=> 'Mal comportamiento',
 	],
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
-		'title'		=> 'User registration approval',
+		'name'		=> 'Aprobar',
+		'title'		=> 'Aprobación de registro de usuario',
 	],
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
-		'title'		=> 'Group management',
+		'name'		=> 'Grupos',
+		'title'		=> 'Administración de Grupos',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
-		'title'		=> 'User management',
+		'name'		=> 'Usuarios',
+		'title'		=> 'Administración de Usuarios',
 	],
 
 	'LogFilterTip'				=> 'Filtrar eventos por criterios',
@@ -291,10 +291,10 @@ $ap_translation = [
 
 
 	// Appearance settings
-	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
+	'AppearanceSettingsInfo'	=> 'Configuración predeterminada de visualización para el sitio.',
 	'LogoOff'					=> 'off',
 	'LogoOnly'					=> 'logo',
-	'LogoAndTitle'				=> 'logo and title',
+	'LogoAndTitle'				=> 'logo y título',
 
 
 	// Email settings
@@ -305,25 +305,25 @@ $ap_translation = [
 	'UseSmtpInfo'				=> 'Elija <code>SMTP</code> si quiere o necesita enviar emails mediante un servidor específico en lugar de la función de email local.',
 
 	'EnableEmail'				=> 'Habilitar envío de emails',
-	'EnableEmailInfo'			=> 'Enabling emails',
+	'EnableEmailInfo'			=> 'habilitando emails',
 
-	'FromEmailName'				=> 'From Name',
-	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
-	'NoReplyEmail'				=> 'No-reply address',
-	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
-	'AdminEmail'				=> 'Email of the site owner',
-	'AdminEmailInfo'			=> 'This address is used for admin purposes, like new user notification.',
+	'FromEmailName'				=> 'Nombre remitente',
+	'FromEmailNameInfo'			=> 'Nombre del remitente, parte de la cabecera <code>From:</code> en emails para todas las notificaciones de email desde este sitio.',
+	'NoReplyEmail'				=> 'dirección no-responder',
+	'NoReplyEmailInfo'			=> 'Esta dirección, p.ej. <code>noreply@example.com</code> aparecerá en el campo <code>From:</code> del email en todas las notificaciones de email desde este sitio.',
+	'AdminEmail'				=> 'Email del dueño del sitio',
+	'AdminEmailInfo'			=> 'Esta dirección es para efectos de administración, por ejemplo notificación de nuevo usuario.',
 	'AbuseEmail'				=> 'Email abuse service',
-	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
+	'AbuseEmailInfo'			=> 'Dirección para asuntos urgentes: registro de un email estraño etc. Puee coincidir con e anterior.',
 
 	'SendTestEmail'				=> 'Enviar un correo electrónico de prueba',
 	'SendTestEmailInfo'			=> 'Esto enviará un correo electrónico de prueba a la dirección definida en su cuenta.',
-	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
-	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
+	'TestEmailSubject'			=> 'El Wiki está configurado correctamente para enviar emails',
+	'TestEmailBody'				=> 'Si recibió este email su Wiki está configurado correctamente para enviar emails.',
 	'TestEmailMessage'			=> 'El correo electrónico de prueba ha sido enviado.<br />Si no lo recibes, por favor revisa tú configuración de mensajes de correo electrónico.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
-	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
+	'SmtpAutoTlsInfo'			=> 'Habilita automáticamente encriptación si el servidor publica encriptación TLS (luego de conectar al servidor), aunque no se haya configurado el modo de conexión para <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Método de autentificación para SMTP',
 	'SmtpConnectionModeInfo'	=> 'Solo usado si se configura usuario/contraseña, pregúntele a su ISP si no está seguro de cual método usar.',
 	'SmtpPassword'				=> 'Contraseña SMTP',
@@ -343,7 +343,7 @@ $ap_translation = [
 	'UploadMaxFilesizeInfo'		=> 'Tamaño máximo de cada archivo. Si este valor es 0, el tamaño del archivo para subir sólo estará limitado por la configuración de PHP.',
 	'UploadQuota'				=> 'Máximo total para adjuntos',
 	'UploadQuotaInfo'			=> 'Máximo en disco disponible para adjuntos en todo el sitio, 0 significa ilimitado.',
-	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUser'			=> 'Cuota de espacio por usuario',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
 	'CheckMimetype'				=> 'Comprobar archivos adjuntos',
 	'CheckMimetypeInfo'			=> 'Algunos navegadores pueden ser engañados para que asuman un mimetype de archivos subibles incorrecto. Esta opción previene que tales archivos que puedan causar eso sean rechazados.',
@@ -366,65 +366,65 @@ $ap_translation = [
 	'LogLevel7'					=> 'depuración',
 
 	// Massemail
-	'SendToGroup'				=> 'Send to group',
-	'SendToUser'				=> 'Send to user',
+	'SendToGroup'				=> 'Enviar a grupo',
+	'SendToUser'				=> 'Enviar a usuario',
 
 	// User approval module
-	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
-	'Approve'					=> 'Approve',
-	'Deny'						=> 'Deny',
-	'Pending'					=> 'Pending',
-	'Approved'					=> 'Approved',
-	'Denied'					=> 'Denied',
+	'UserApproveInfo'			=> 'Aprobar nuevos usuarios antes de permitir su login al sitio.',
+	'Approve'					=> 'Aprobar',
+	'Deny'						=> 'Rechazar',
+	'Pending'					=> 'Pendiente',
+	'Approved'					=> 'Aprobado',
+	'Denied'					=> 'Rechazado',
 
 	// DB Backup module
-	'BackupStructure'			=> 'Structure',
-	'BackupData'				=> 'Data',
-	'BackupFolder'				=> 'Folder',
-	'BackupTable'				=> 'Table',
+	'BackupStructure'			=> 'Estructura',
+	'BackupData'				=> 'Datos',
+	'BackupFolder'				=> 'Carpeta',
+	'BackupTable'				=> 'Tabla',
 	'BackupCluster'				=> 'Cluster',
-	'BackupFiles'				=> 'Files',
-	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br />' .
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br />' .
+	'BackupFiles'				=> 'Archivos',
+	'BackupSettings'			=> 'Indique el esquema de backup deseado.<br />' .
+									'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br />' .
 									'<br />' .
-									'<span class="underline">Attention</span>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
-									'same when backing up only table structure without saving the data. '.
-									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
-	'BackupCompleted'			=> 'Backing up and archiving completed.<br />' .
-									'Backup package files stored in the %1 named sub-directory of <code>files/backup</code> directory.<br />' .
-									'To download it use FTP (maintain the directory structure and file names when copying).<br />' .
-									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
-	'LogSavedBackup'			=> 'Saved backup database ##%1##',
+									'<span class="underline">Atención</span>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, '.
+									'igual al realizar backup de solamente la estructura de tabla sin guardar los datos. '.
+									'Para realizar la conversión completa de las tablas al formato de backup debe realizar <em> el backup completo de base de datos (estructura y datos) sin especificar el cluster</em>.',
+	'BackupCompleted'			=> 'Backup y archivación terminado.<br />' .
+									'Archivo del backup guardado en subdirectorio %1 en <code>files/backup</code>.<br />' .
+									'Use FTP para descargarlo (mantenga la estructura de diretorios y nombres de archivos al copiar).<br />' .
+									'Para restaurar una copia del backup o remover un paquete, ingrese en <a href="?mode=db_restore">Restaurar base de datos</a>.',
+	'LogSavedBackup'			=> 'Guardado backup de base de datos ##%1##',
 
 	// DB Restore module
-	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
-	'ConfirmDbRestore'			=> 'Do you want to restore backup',
-	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
-	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
-	'BackupDelete'				=> 'Are you sure you want to remove backup',
+	'RestoreInfo'				=> 'Puede restaurar un backup existente o removerlo del servidor.',
+	'ConfirmDbRestore'			=> 'Desea restaurar un backup',
+	'ConfirmDbRestoreInfo'		=> 'Por favor espere, esto puede durar unos minutos.',
+	'RestoreWrongVersion'		=> 'Versión de WackoWiki incorrecta!',
+	'BackupDelete'				=> 'Seguro que desea eliminar el backup',
 	'BackupDeleteInfo'			=> '',
-	'RestoreOptions'			=> 'Additional restore options',
-	'RestoreOptionsInfo'		=> '* Before restoring the <span class="underline">cluster backup</span>, '.
-									'the target tables are not destroyed (to prevent loss of information from the clusters that have not been backed up). '.
-									'Thus, during the recovery process duplicate records will occur. '.
-									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), '.
-									'but if this checkbox is checked, all duplicates are skipped (the current values of records will be kept), '.
-									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br />' .
-									'<span class="underline">Notice</span>: When restore complete backup of the site, this option has no value.<br />' .
+	'RestoreOptions'			=> 'Opciones adicionales de restaurar',
+	'RestoreOptionsInfo'		=> '* Antes de restaurar el <span class="underline">cluster backup</span>, '.
+									'no se destruyen las tablas de destino (para evitar pérdida de información de los cluster que no tienen backup). '.
+									'Por lo tanto habrá registros duplicados durante el proceso de restauración. '.
+									'En el modo normal todos se reemplazarán por los registros desde el backup (usando la instrucción SQL <code>REPLACE</code>), '.
+									'pero si se marca esta casilla, se omiten todos los duplicados (se mantienen los registros actuales), '.
+									'y solamente se agregan en la tabla registros con claves nuevas (instrucción SQL <code>INSERT IGNORE</code>).<br />' .
+									'<span class="underline">Observación</span>: Al restaurar el backup completo del sitio esta opción se ignora.<br />' .
 									'<br />' .
-									'** If the backup contains the user files (global and perpage, cache files, etc.), '.
-									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. '.
-									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
-	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated table keys (not replace)',
-	'IgnoreSameFiles'			=> 'Ignore the same files (not overwrite)',
-	'NoBackupsAvailable'		=> 'No backups available.',
-	'BackupEntireSite'			=> 'Entire site',
-	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
-	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
-	'LogRemovedBackup'			=> 'Removed database backup ##%1##',
+									'** Si el backup contiene los archivos de usuario (global y por página, archivos cache, etc.), '.
+									'en modo normal serán sustituidos al rastaurar con igual nombre y en la misma ubicación de directorio. '.
+									'Esta opción permite guardar los archivos actuales y restaurar de un backup solamente los archivos nuevos (que faltan en el servidor).',
+	'IgnoreDuplicatedKeys'		=> 'Ignorar claves duplicadas de tabla (no reemplazar)',
+	'IgnoreSameFiles'			=> 'Ignorar archivos iguales (no sobreescribir)',
+	'NoBackupsAvailable'		=> 'No existe backup.',
+	'BackupEntireSite'			=> 'Sitio completo',
+	'BackupRestored'			=> 'Se restauró el backup, abajo se adjunta un reporte de resumen. Para eliminar este paquete de backup, presione',
+	'BackupRemoved'				=> 'Se eliminó con éxito el backup seleccionado.',
+	'LogRemovedBackup'			=> 'Backup de base de datos eliminado ##%1##',
 
 	// User module
-	'UsersAdded'				=> 'User added',
+	'UsersAdded'				=> 'Usuario agregado',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'UserEditButton'			=> 'Edit',
 	'UserEnabled'				=> 'Habilitado',
@@ -435,14 +435,14 @@ $ap_translation = [
 	'UsersRenameInfo'			=> '* Observación: El cambio afectará a todas las páginas asignadas a este usuario.',
 	'UsersUpdated'				=> 'Usuario actualizado satisfactoriamente.',
 
-	'UserName'					=> 'Username',
-	'UserRealname'				=> 'Realname',
+	'UserName'					=> 'Nombre de usuario',
+	'UserRealname'				=> 'Nombre real',
 	'UserEmail'					=> 'Email',
 	'UserIP'					=> 'IP',
-	'UserLanguage'				=> 'Language',
+	'UserLanguage'				=> 'Idioma',
 	'UserSignuptime'			=> 'Signuptime',
-	'UserActions'				=> 'Actions',
-	'NoMatchingUser'			=> 'No users that meet the criteria',
+	'UserActions'				=> 'Acciones',
+	'NoMatchingUser'			=> 'No hay usuarios con este criterio',
 
 	// Groups module
 	'GroupsMembersFor'			=> 'Miembros del grupo',
@@ -462,7 +462,7 @@ $ap_translation = [
 	'GroupsDelete'				=> 'Está seguro que desea eliminar el grupo ',
 	'GroupsDeleteInfo'			=> '* Observación: El cambio afectará a todas los miembros del grupo.',
 	'GroupsStoreButton'			=> 'Guardar Grupos',
-	'GroupsSaveButton'			=> 'GUardar',
+	'GroupsSaveButton'			=> 'Guardar',
 	'GroupsCancelButton'		=> 'Cancelar',
 	'GroupsAddButton'			=> 'Agregar',
 	'GroupsEditButton'			=> 'Editar',
@@ -470,7 +470,7 @@ $ap_translation = [
 	'GroupsEditInfo'			=> 'Marque el botón de radio para editar la lista de grupos.',
 
 	'MembersAddNew'				=> 'Miembro nuevo',
-	'MembersAdded'				=> 'Added new member to the group successfully.',
+	'MembersAdded'				=> 'Nuevo miembro agregado al grupo con éxito.',
 	'MembersRemove'				=> 'Está seguro que desea remover el miembro ',
 	'MembersRemoved'			=> 'Miembro eliminado del grupo.',
 	'MembersDeleteInfo'			=> '* Observación: El cambio afectará a todos los miembros asignados al grupo.',
