@@ -569,7 +569,7 @@ $wacko_translation = [
 	'EmailNotConfirmed'			=> 'Email cannot be confirmed. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'Email not verified!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, '.
-									'messages from other users, as well you <span class="underline">will not be able to recover a forgotten password</span>, '.
+									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, '.
 									'until your email-address was confirmed, by following the link in the email sent to you. '.
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
@@ -964,7 +964,7 @@ $wacko_translation = [
 	'ModerateReset'				=> 'Reset',
 	'ModerateAccept'			=> 'Accept',
 	'ModerateDecline'			=> 'Mégsem',
-	'ModerateDeleteConfirm'		=> 'Are you sure you want to <span class="underline">remove</span> the following topics?',
+	'ModerateDeleteConfirm'		=> 'Are you sure you want to <strong>remove</strong> the following topics?',
 	'ModerateRenameConfirm'		=> 'Enter a new name for the selected page',
 	'ModerateRenameExists'		=> 'Page same name already exists! Choose a different name.',
 	'ModerateRename1Only'		=> 'Note: renamed to be only the first page you chose!',
@@ -975,7 +975,7 @@ $wacko_translation = [
 	'ModerateMoveNotExists'		=> 'The page / cluster does not exist. Please check the name and try again.',
 	'ModerateMergeConfirm'		=> 'Choose a topic, which should combine the remaining',
 	'ModerateMerge2Min'			=> 'To join you must select at least two topics!',
-	'ModerateComDelConfirm'		=> 'Are you sure you want to <span class="underline">remove</span> %1 %2?',
+	'ModerateComDelConfirm'		=> 'Are you sure you want to <strong>remove</strong> %1 %2?',
 	'ModerateComment'			=> 'Comment',
 	'ModerateComments'			=> 'Comments',
 	'ModerateSplitNewName'		=> 'Specify a name for separable topic and select a separation schema',

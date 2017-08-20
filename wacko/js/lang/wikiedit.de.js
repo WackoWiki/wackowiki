@@ -13,6 +13,7 @@ lang = {
 	Heading3 :				"Überschrift 3",
 	Heading4 :				"Überschrift 4",
 	Heading5 :				"Überschrift 5",
+	Heading6 :				"Überschrift 6",
 	Bold :					"Fett (Strg+B)",
 	Italic :				"Kursiv (Strg+I)",
 	Underline :				"Unterstrichen (Strg+U)",

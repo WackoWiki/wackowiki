@@ -4,7 +4,7 @@ lang = {
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",
-	HelpFormatting :		"�������",
+	HelpFormatting :		"Help",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
 	
@@ -13,6 +13,7 @@ lang = {
 	Heading3 :				"Heading 3",
 	Heading4 :				"Heading 4",
 	Heading5 :				"Heading 5",
+	Heading6 :				"Heading 6",
 	Bold :					"Bold",
 	Italic :				"Italic",
 	Underline :				"Underline",

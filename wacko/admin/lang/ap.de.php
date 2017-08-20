@@ -387,7 +387,7 @@ $ap_translation = [
 	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br />' .
 									'Der Stammcluster wirkt sich nicht auf die Sicherung der globalen Dateisicherung und der Cache-Dateien aus (die Auswahl wird immer vollständig gespeichert).<br />' .
 									'<br />' .
-									'<span class="underline">Achtung</span>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, '.
+									'<strong>Achtung</strong>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, '.
 									'auch wenn nur die Tabellenstruktur gesichert wird, ohne die Daten zu speichern. '.
 									'Um eine vollständige Konvertierung der Tabellen in das Backup-Format vorzunehmen, muss eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em> gemacht werden.',
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br />' .
@@ -404,13 +404,13 @@ $ap_translation = [
 	'BackupDelete'				=> 'Willst du die Datensicherung wirklich entfernen',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Zusätzliche Otionen zur Daten-Wiederherstellung',
-	'RestoreOptionsInfo'		=> '* Vor dem Wiederherstellen der <span class="underline">Cluster-Sicherung</span>, '.
+	'RestoreOptionsInfo'		=> '* Vor dem Wiederherstellen der <strong>Cluster-Sicherung</strong>, '.
 									'werden die Zieltabellen nicht zerstört (um den Verlust von Informationen aus den Clustern, die nicht gesichert wurden, zu verhindern).. '.
 									'Somit werden während des Wiederherstellungsvorgangs doppelte Datensätze auftreten. '.
 									'Im normalen Modus werden alle Dateien durch die Datensätze ersetzt (mit SQL-Anweisung <code>REPLACE</code>), '.
 									'aber wenn dieses Kontrollkästchen aktiviert ist, werden alle Duplikate übersprungen (die aktuellen Werte der Datensätze werden beibehalten), '.
 									'und nur die Datensätze mit neuem Schlüssel werden in die Tabelle aufgenommen (SQL-Anweisung <code>INSERT IGNORE</code>).<br />' .
-									'<span class="underline">Hinweis</span>: Wenn Sie eine vollständige Sicherung der Site wiederherstellen, hat diese Option keinen Zweck.<br />' .
+									'<strong>Hinweis</strong>: Wenn Sie eine vollständige Sicherung der Site wiederherstellen, hat diese Option keinen Zweck.<br />' .
 									'<br />' .
 									'** Wenn die Sicherung die Benutzerdateien (global und perpage, Cache-Dateien usw.) enthält, '.
 									'ersetzen sie im normalen Modus die vorhandenen Dateien mit denselben Namen und werden beim Wiederherstellen in demselben Verzeichnis abgelegt. '.
