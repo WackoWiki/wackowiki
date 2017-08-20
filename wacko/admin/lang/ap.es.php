@@ -387,7 +387,7 @@ $ap_translation = [
 	'BackupSettings'			=> 'Indique el esquema de backup deseado.<br />' .
 									'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br />' .
 									'<br />' .
-									'<span class="underline">Atención</span>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, '.
+									'<strong>Atención</strong>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, '.
 									'igual al realizar backup de solamente la estructura de tabla sin guardar los datos. '.
 									'Para realizar la conversión completa de las tablas al formato de backup debe realizar <em> el backup completo de base de datos (estructura y datos) sin especificar el cluster</em>.',
 	'BackupCompleted'			=> 'Backup y archivación terminado.<br />' .
@@ -404,13 +404,13 @@ $ap_translation = [
 	'BackupDelete'				=> 'Seguro que desea eliminar el backup',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Opciones adicionales de restaurar',
-	'RestoreOptionsInfo'		=> '* Antes de restaurar el <span class="underline">cluster backup</span>, '.
+	'RestoreOptionsInfo'		=> '* Antes de restaurar el <strong>cluster backup</strong>, '.
 									'no se destruyen las tablas de destino (para evitar pérdida de información de los cluster que no tienen backup). '.
 									'Por lo tanto habrá registros duplicados durante el proceso de restauración. '.
 									'En el modo normal todos se reemplazarán por los registros desde el backup (usando la instrucción SQL <code>REPLACE</code>), '.
 									'pero si se marca esta casilla, se omiten todos los duplicados (se mantienen los registros actuales), '.
 									'y solamente se agregan en la tabla registros con claves nuevas (instrucción SQL <code>INSERT IGNORE</code>).<br />' .
-									'<span class="underline">Observación</span>: Al restaurar el backup completo del sitio esta opción se ignora.<br />' .
+									'<strong>Observación</strong>: Al restaurar el backup completo del sitio esta opción se ignora.<br />' .
 									'<br />' .
 									'** Si el backup contiene los archivos de usuario (global y por página, archivos cache, etc.), '.
 									'en modo normal serán sustituidos al rastaurar con igual nombre y en la misma ubicación de directorio. '.

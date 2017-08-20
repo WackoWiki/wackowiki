@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Note: Before the administration of technical activities <span class="underline">strongly</span> are encouraged to block access to the site!',
+	'MainNote'					=> 'Note: Before the administration of technical activities <strong>strongly</strong> are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
@@ -387,7 +387,7 @@ $ap_translation = [
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br />' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br />' .
 									'<br />' .
-									'<span class="underline">Attention</span>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
+									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
 									'same when backing up only table structure without saving the data. '.
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br />' .
@@ -404,13 +404,13 @@ $ap_translation = [
 	'BackupDelete'				=> 'Are you sure you want to remove backup',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',
-	'RestoreOptionsInfo'		=> '* Before restoring the <span class="underline">cluster backup</span>, '.
+	'RestoreOptionsInfo'		=> '* Before restoring the <strong>cluster backup</strong>, '.
 									'the target tables are not destroyed (to prevent loss of information from the clusters that have not been backed up). '.
 									'Thus, during the recovery process duplicate records will occur. '.
 									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), '.
 									'but if this checkbox is checked, all duplicates are skipped (the current values of records will be kept), '.
 									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br />' .
-									'<span class="underline">Notice</span>: When restore complete backup of the site, this option has no value.<br />' .
+									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br />' .
 									'<br />' .
 									'** If the backup contains the user files (global and perpage, cache files, etc.), '.
 									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. '.

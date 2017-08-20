@@ -13,6 +13,7 @@ lang = {
 	Heading3 :				"Heading 3",
 	Heading4 :				"Heading 4",
 	Heading5 :				"Heading 5",
+	Heading6 :				"Heading 6",
 	Bold :					"Negrita",
 	Italic :				"Cursivo",
 	Underline :				"Subrayado",
