@@ -189,7 +189,7 @@ if ($this->forum
 	|| ($this->has_access('read') && $this->page && $this->db->footer_tags == 1
 	|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
-	if ($categories = $this->action('categories', ['page' => '/' . $this->page['tag'], 'list' => 0, 'nomark' => 1, 'label' => 0], 1))
+	if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1))
 	{
 		echo '<nav class="category">' . $categories . "</nav>\n";
 	}
