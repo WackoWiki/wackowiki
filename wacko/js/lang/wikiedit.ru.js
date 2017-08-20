@@ -1,62 +1,62 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
+	ReallySave :			"Действительно сохранить?",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
-	HelpFormatting :		"Help",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpAbout :				"Справка и о программе",
+	HelpFormatting :		"Помощь",
+	HelpFormattingTip :		"Помощь по Wiki-разметке",
 	HelpFormattingPage :	"Doc/Russian/WackoSintaksis",
 	
-	Heading1 :				"Heading 1",
-	Heading2 :				"Heading 2",
-	Heading3 :				"Heading 3",
-	Heading4 :				"Heading 4",
-	Heading5 :				"Heading 5",
-	Bold :					"Bold",
-	Italic :				"Italic",
-	Underline :				"Underline",
-	Strikethrough :			"Strikethrough",
-	Code :					"Code",
-	List :					"List",
-	NumberedList :			"Numbered list",
-	Left :					"Left",
-	Center :				"Center",
-	Right :					"Right",
-	Justify :				"Justify",
-	Outdent :				"Outdent",
-	Indent :				"Indent",
-	CodeWrapper :			"Code Wrapper",
+	Heading1 :				"Заголовок 1",
+	Heading2 :				"Заголовок 2",
+	Heading3 :				"Заголовок 3",
+	Heading4 :				"Заголовок 4",
+	Heading5 :				"Заголовок 5",
+	Bold :					"Жирный",
+	Italic :				"Курсив",
+	Underline :				"Подчеркнутый",
+	Strikethrough :			"Зачеркнутый",
+	Code :					"Моноширинный",
+	List :					"Маркированный список",
+	NumberedList :			"Нумерованный список",
+	Left :					"По левому краю",
+	Center :				"По центру",
+	Right :					"По правому краю",
+	Justify :				"По ширине",
+	Outdent :				"Выступ",
+	Indent :				"Отступ",
+	CodeWrapper :			"Обертка кода",
 	HTML :					"HTML",
-	Action :				"Action",
-	Line :					"Line",
-	Signature :				"Signature",
-	Quote :					"Quote",
-	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
-	Shade :					"Shade",
-	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
+	Action :				"Действие",
+	Line :					"Горизонтальная линия",
+	Signature :				"Подпись",
+	Quote :					"Цитата",
+	MarkedText :			"Красный текст",
+	HighlightText :			"Выделенный желтым текст",
+	Shade :					"Тень",
+	Hyperlink :				"Гиперссылка",
+	InsertTable :			"Вставить таблицу",
 	
-	Link :					"Link",
-	TextForLinking :		"Text for linking",
+	Link :					"Ссылка",
+	TextForLinking :		"Текст ссылки",
 	
-	HelpAboutTip : 			' Shortcuts:\n'+
-							' Ctrl+B - Bold\n'+
-							' Ctrl+I - Italic\n'+
-							' Ctrl+U - Underline\n'+
-							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
-							' Alt+I or Ctrl+T - Indent\n'+
-							' Alt+U or Ctrl+Shift+T - Unindent\n'+
-							' Ctrl+J - MarkUp (!!)\n'+
-							' Ctrl+H - MarkUp (??)\n'+
-							' Alt+L - Link\n'+
-							' Ctrl+L - Link with description\n'+
-							' Ctrl+Shift+L - Unordered List\n'+
-							' Ctrl+Shift+N - Ordered List\n'+
-							' Ctrl+Shift+O - Ordered List\n'+
-							' Ctrl+= - Small text\n'+
-							' Ctrl+Shift+Minus - Horizontal line\n'+
+	HelpAboutTip : 			' Сочетания клавиш:\n'+
+							' Ctrl+B - Жирный\n'+
+							' Ctrl+I - Курсив\n'+
+							' Ctrl+U - Подчеркнутый\n'+
+							' Ctrl+Shift+S - Зачеркнутый\n'+
+							' Ctrl+Shift+1 .. 4 - Заголовок 1..4\n'+
+							' Alt+I или Ctrl+T - Оступ\n'+
+							' Alt+U или Ctrl+Shift+T - Убрать отступ\n'+
+							' Ctrl+J - Красный текст\n'+
+							' Ctrl+H - Выделенный желтым текст\n'+
+							' Alt+L - Ссылка\n'+
+							' Ctrl+L - Ссылка с описанием\n'+
+							' Ctrl+Shift+L - Маркированный список\n'+
+							' Ctrl+Shift+N - Нумерованный список\n'+
+							' Ctrl+Shift+O - Нумерованный список\n'+
+							' Ctrl+= - Мелкий текст\n'+
+							' Ctrl+Shift+Минус - Горизонтальная линия\n'+
 							' \n'
 };

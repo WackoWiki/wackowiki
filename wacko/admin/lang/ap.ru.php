@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Внимание: перед проведением технических административных мероприятий <span class="underline">настоятельно</span> рекомендуется закрыть доступ к сайту!',
+	'MainNote'					=> 'Внимание: перед проведением технических и/или административных мероприятий <strong>настоятельно</strong> рекомендуется закрыть доступ к сайту!',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Базовые функции',
@@ -14,8 +14,8 @@ $ap_translation = [
 		'content'		=> 'Контент',
 		'users'			=> 'Пользователей',
 		'maintenance'	=> 'Обслуживание',
-		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
+		'messages'		=> 'Сообщения',
+		'extension'		=> 'Расширения',
 		'database'		=> 'База данных',
 	],
 
@@ -27,7 +27,7 @@ $ap_translation = [
 	'NoRecoceryPassword'		=> 'Административный пароль не задан!',
 	'NoRecoceryPasswordTip'		=> 'Внимание: отсутствие административного пароля представляет угрозу для безопасности! Укажите пароль в файле настроек и запустите программу повторно.',
 
-	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
+	'ErrorLoadingModule'		=> 'Ошибка загрузки административного модуля %1: модуль не существует.',
 
 	'FormSave'					=> 'сохранить',
 	'FormReset'					=> 'сбросить',
@@ -49,16 +49,16 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'Сайт закрыт',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
-	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
-	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
-	'On'						=> 'on',
-	'Off'						=> 'off',
-	'Mandatory'					=> 'Mandatory',
-	'Admin'						=> 'Admin',
+	'Cancel'					=> 'Отмена',
+	'Add'						=> 'Добавить',
+	'Edit'						=> 'Редактировать',
+	'Remove'					=> 'Удалить',
+	'Enabled'					=> 'Включено',
+	'Disabled'					=> 'Выключено',
+	'On'						=> 'Вкл.',
+	'Off'						=> 'Выкл.',
+	'Mandatory'					=> 'Обязательное',
+	'Admin'						=> 'Администратор',
 
 	// MENU
 	// Config Basic module
@@ -70,31 +70,31 @@ $ap_translation = [
 	// Config Appearance module
 	'config_appearance'		=> [
 		'name'		=> 'Внешний вид',
-		'title'		=> 'Appearance settings',
+		'title'		=> 'Параметры внешнего вида',
 	],
 
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'Email',
-		'title'		=> 'Email settings',
+		'title'		=> 'Настройки Email',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'name'		=> 'Фильтр',
+		'title'		=> 'Настройки фильтра',
 	],
 
 	// Config Formatter module
 	'config_formatter'		=> [
-		'name'		=> 'Formatter',
-		'title'		=> 'Formatting options',
+		'name'		=> 'Форматтер',
+		'title'		=> 'Настройки форматирования',
 	],
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
-		'title'		=> 'Notifications settings',
+		'name'		=> 'Уведомления',
+		'title'		=> 'Настройки уведомлений',
 	],
 
 	// Config Pages module
@@ -105,8 +105,8 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
-		'title'		=> 'Permissions settings',
+		'name'		=> 'Разрешения',
+		'title'		=> 'Настройки разрешений',
 	],
 
 	// Config Security module
@@ -123,20 +123,20 @@ $ap_translation = [
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Upload',
-		'title'		=> 'Attachment settings',
+		'name'		=> 'Загрузка',
+		'title'		=> 'Настройки загруженных файлов',
 	],
 
 	// Categories module
 	'content_categories'		=> [
-		'name'		=> 'Categories',
-		'title'		=> 'Manage categories',
+		'name'		=> 'Категории',
+		'title'		=> 'Управление категориями',
 	],
 
 	// Comments module
 	'content_comments'		=> [
-		'name'		=> 'Comments',
-		'title'		=> 'Manage comments',
+		'name'		=> 'Комментарии',
+		'title'		=> 'Управление комментариям',
 	],
 
 	// Deleted module
@@ -154,13 +154,13 @@ $ap_translation = [
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Меню',
-		'title'		=> 'Add, edit or remove default menu items',
+		'title'		=> 'Добавление, редактирование или удаление пунктов стандартного меню',
 	],
 
 	// Pages module
 	'content_pages'		=> [
 		'name'		=> 'Страницы',
-		'title'		=> 'Manage pages',
+		'title'		=> 'Управление страницами',
 	],
 
 	// Polls module
@@ -177,20 +177,20 @@ $ap_translation = [
 
 	// DB Convert module
 	'db_convert'		=> [
-		'name'		=> 'Convert',
-		'title'		=> 'Converting Tables or Columns',
+		'name'		=> 'Преобразование',
+		'title'		=> 'Преобразование таблиц или столбцов',
 	],
 
 	// DB Repair module
 	'db_repair'		=> [
-		'name'		=> 'Repair',
-		'title'		=> 'Repair and Optimize Database',
+		'name'		=> 'Восстановление таблиц',
+		'title'		=> 'Восстановление и оптимизация базы данных ',
 	],
 
 	// DB Restore module
 	'db_restore'		=> [
 		'name'		=> 'Восстановление базы',
-		'title'		=> 'Восстановление резервных данных',
+		'title'		=> 'Восстановление резервной копии данных',
 	],
 
 	// Dashboard module
@@ -201,8 +201,8 @@ $ap_translation = [
 
 	// Inconsistencies module
 	'maint_inconsistencies'		=> [
-		'name'		=> 'Inconsistencies',
-		'title'		=> 'Fixing Data Inconsistencies',
+		'name'		=> 'Несоответствия',
+		'title'		=> 'Исправление нарушений целостности данных',
 	],
 
 	// Data Synchronization module
@@ -213,26 +213,26 @@ $ap_translation = [
 
 	// Transliterate module
 	'maint_transliterate'		=> [
-		'name'		=> 'Transliterate',
-		'title'		=> 'Update the supertag in the database records',
+		'name'		=> 'Транслитерация',
+		'title'		=> 'Обновление столбца supertag в записях базы данных',
 	],
 
 	// Mass email module
 	'massemail'		=> [
-		'name'		=> 'Mass email',
-		'title'		=> 'Mass email',
+		'name'		=> 'Массовая рассылка',
+		'title'		=> 'Массовая рассылка Email',
 	],
 
 	// System message module
 	'messages'		=> [
-		'name'		=> 'System message',
-		'title'		=> 'System messages',
+		'name'		=> 'Системные сообщения',
+		'title'		=> 'Системные сообщения',
 	],
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
-		'title'		=> 'System Informations',
+		'name'		=> 'Сведения о системе',
+		'title'		=> 'Сведения о системе',
 	],
 
 	// System log module
@@ -243,32 +243,32 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
-		'title'		=> 'Show statistics',
+		'name'		=> 'Статистика',
+		'title'		=> 'Статистика системы',
 	],
 
 	// Bad Behavior module
 	'badbehavior'		=> [
-		'name'		=> 'Bad Behavior',
-		'title'		=> 'Bad Behavior',
+		'name'		=> 'Плохое поведение',
+		'title'		=> 'Подозрительная активность',
 	],
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
-		'title'		=> 'User registration approval',
+		'name'		=> 'Подтверждение регистраций',
+		'title'		=> 'Подтверждение регистраций пользователей',
 	],
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Групп',
-		'title'		=> 'Group management',
+		'name'		=> 'Группы',
+		'title'		=> 'Управление группами',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Пользователей',
-		'title'		=> 'User management',
+		'name'		=> 'Пользователи',
+		'title'		=> 'Управление пользователями',
 	],
 
 	'LogFilterTip'				=> 'Отфильтровать события по критериям',
@@ -281,20 +281,20 @@ $ap_translation = [
 	'LogEvent'					=> 'Событие',
 	'LogUsername'				=> 'Пользователь',
 
-	'PurgeSessions'				=> 'очистить',
-	'PurgeSessionsTip'			=> 'Прочистить все сессии',
-	'PurgeSessionsConfirm'		=> 'Увереный в прочистке сессий? Это прекратит сессии всех текущих пользователей.',
-	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
-	'PurgeSessionsDone'			=> 'Сессии прочищены.',
+	'PurgeSessions'				=> 'удалить',
+	'PurgeSessionsTip'			=> 'Удалить все сессии',
+	'PurgeSessionsConfirm'		=> 'Уверены в удалении сессий? Это прекратит сессии всех текущих пользователей.',
+	'PurgeSessionsExplain'		=> 'Удалить все сессии. Это прекратит сессии всех текущих пользователей с очисткой таблицы auth_token.',
+	'PurgeSessionsDone'			=> 'Сессии удалены.',
 
 	// Basic settings
 
 
 	// Appearance settings
-	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
-	'LogoOff'					=> 'off',
-	'LogoOnly'					=> 'logo',
-	'LogoAndTitle'				=> 'logo and title',
+	'AppearanceSettingsInfo'	=> 'Управление стандартными настройками отображения сайта.',
+	'LogoOff'					=> 'выкл.',
+	'LogoOnly'					=> 'логотип',
+	'LogoAndTitle'				=> 'логотип и заголовок',
 
 
 	// Email settings
@@ -305,16 +305,16 @@ $ap_translation = [
 	'UseSmtpInfo'				=> 'Выберите <code>SMTP</code>, если хотите или должны отправлять email-сообщения через сервер вместо локальной функции mail.',
 
 	'EnableEmail'				=> 'Разрешить email-сообщения',
-	'EnableEmailInfo'			=> 'Enabling emails',
+	'EnableEmailInfo'			=> 'Разрешить отправку email-сообщений сайтом',
 
-	'FromEmailName'				=> 'From Name',
-	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
-	'NoReplyEmail'				=> 'No-reply address',
-	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
+	'FromEmailName'				=> 'Имя отправителя по-умолчанию',
+	'FromEmailNameInfo'			=> 'Имя отправителя отображается в поле <code>From:</code> во всех email-уведомлениях, посылаемых сайтом.',
+	'NoReplyEmail'				=> 'Адрес отправителя по-умолчанию',
+	'NoReplyEmailInfo'			=> 'Адрес отправителя по-умолчанию, например <code>noreply@example.com</code>, отображается в поле <code>From:</code> во всех email-уведомлениях, посылаемых сайтом.',
 	'AdminEmail'				=> 'Обратный email-адрес',
-	'AdminEmailInfo'			=> 'This address is used for admin purposes, like new user notification.',
-	'AbuseEmail'				=> 'Email abuse service',
-	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
+	'AdminEmailInfo'			=> 'Этот адрес используется для административных целей, например уведомления новых пользователей.',
+	'AbuseEmail'				=> 'Email-адрес для жалоб',
+	'AbuseEmailInfo'			=> 'Для запросов по срочным поводам: регистрация с чужого email и т.д. Может совпадать с предыдущим.',
 
 	'SendTestEmail'				=> 'Отправить тестовое email-сообщение',
 	'SendTestEmailInfo'			=> 'Будет отправлено тестовое email-сообщение на адрес, указанный в вашей учётной записи.',
@@ -322,14 +322,14 @@ $ap_translation = [
 	'TestEmailBody'				=> 'Если вы получили это письмо, значит WackoWiki правильно настроен для отправки email-сообщений.',
 	'TestEmailMessage'			=> 'Тестовое email-сообщение отправлено.<br />Если вы не получили тестовое email-сообщение, проверьте настройки почты.',
 
-	'SmtpAutoTls'				=> 'Opportunistic TLS',
-	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
+	'SmtpAutoTls'				=> 'Оппортунистический TLS',
+	'SmtpAutoTlsInfo'			=> 'Автоматически включает шифрование, если сервер поддерживает TLS-шифрование. Даже если вы не указали режим соединения для <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Метод аутентификации для SMTP',
 	'SmtpConnectionModeInfo'	=> 'Используется только в случае, если заданы имя/пароль. Спросите у своего провайдера, если не уверены, какой метод аутентификации использовать.',
 	'SmtpPassword'				=> 'Пароль SMTP',
 	'SmtpPasswordInfo'			=> 'Введите пароль, только если SMTP требует этого.<br /><em><strong>Внимание:</strong> этот пароль будет сохранён в базе данных в незашифрованном виде и будет виден всем, кто имеет доступ к ней или к этой странице настроек.</em>',
 	'SmtpPort'					=> 'Порт сервера SMTP',
-	'SmtpPortInfo'				=> 'Изменяйте порт только в том случае, если вам точно известно, что сервер использует другой порт. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpPortInfo'				=> 'Изменяйте порт только в том случае, если вам точно известно, что сервер использует другой порт. <br />(стандартно: <code>tls</code> порт 587 (или 25) и <code>ssl</code> порт 465)',
 	'SmtpServer'				=> 'Адрес сервера SMTP',
 	'SmtpServerInfo'			=> 'Учтите, что необходимо указывать протокол для соединения с сервером SMTP. Например: <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'Настройки SMTP',
@@ -338,17 +338,17 @@ $ap_translation = [
 
 	// Upload settings
 	'UploadSettingsInfo'		=> 'Здесь вы можете настроить основные параметры вложений и связанных с ними специальных категорий.',
-	'FileUploads'				=> 'File uploads',
+	'FileUploads'				=> 'Загрузка файлов',
 	'UploadMaxFilesize'			=> 'Максимальный размер файла',
 	'UploadMaxFilesizeInfo'		=> 'Максимальный размер каждого загружаемого файла. Если значение равно 0, размер файла ограничен только конфигурацией PHP.',
 	'UploadQuota'				=> 'Общая квота вложений',
 	'UploadQuotaInfo'			=> 'Максимально доступное дисковое пространство для вложений. Значение 0 соответствует неограниченному размеру.',
-	'UploadQuotaUser'			=> 'Storage quota per user',
-	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'UploadQuotaUser'			=> 'Квота на суммарный объем файлов, загруженных пользователем',
+	'UploadQuotaUserInfo'		=> 'Ограничение суммарного объема файлов, который может загружать один пользователь, 0 означает отсутствие ограничения.',
 	'CheckMimetype'				=> 'Проверять вложения',
 	'CheckMimetypeInfo'			=> 'Некоторые браузеры могут быть обмануты при определении MIME-типа загружаемых файлов. Включение данной опции гарантирует, что такие файлы, вероятнее всего, будут отклоняться во время загрузки.',
 
-	'Thumbnails'				=> 'Thumbnails',
+	'Thumbnails'				=> 'Миниатюры',
 	'CreateThumbnail'			=> 'Создавать миниатюры',
 	'CreateThumbnailInfo'		=> 'При включении опции для загружаемых рисунков будут создаваться миниатюры во всех возможных ситуациях.',
 	'MaxThumbWidth'				=> 'Максимальная ширина миниатюр',
@@ -366,8 +366,8 @@ $ap_translation = [
 	'LogLevel7'					=> 'Отладочный',
 
 	// Massemail
-	'SendToGroup'				=> 'Send to group',
-	'SendToUser'				=> 'Send to user',
+	'SendToGroup'				=> 'Послать группе',
+	'SendToUser'				=> 'Послать пользователю',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Санкционировать новых пользователей.',
@@ -387,81 +387,81 @@ $ap_translation = [
 	'BackupSettings'			=> 'Укажите требуемую схему резервирования. '.
 									'Корневой кластер не влияет на резервное копирование глобальных файлов и файлов кэша (при их выборе они всегда сохраняются полностью).<br /> '.
 									'<br /> '.
-									'<span class="underline">Внимание</span>: во избежание потери информации из базы данных WackoWiki, при указании корня кластера, таблицы из данной резервной копии не будут реструктуризированы, '.
+									'<strong>Внимание</strong>: во избежание потери информации из базы данных WackoWiki, при указании корня кластера, таблицы из данной резервной копии не будут реструктуризированы, '.
 									'аналогично, при резервировании только структуры таблицы без сохранения данных. '.
 									'Для полной конвертации таблиц в формат резервной копии необходимо произвести <em>полное резервирование всей базы данных (структура и содержимое) без указания кластера</em>.',
 	'BackupCompleted'			=> 'Резервное копирование и архивация завершены.<br />' .
 									'Пакет резервной копии сохранен в папке с названием %1 в папке <code>files/backup</code>.<br />' .
 									'Для его получения используйте FTP (не забудьте при копировании сохранять структуру каталогов и имена файлов и директорий).<br />' .
 									'Восстановить резервную копию или удалить пакет можно в разделе <a href="?mode=db_restore">Восстановление</a>.',
-	'LogSavedBackup'			=> 'Saved backup database ##%1##',
+	'LogSavedBackup'			=> 'Сохранена резервная копия базы данных ##%1##',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Вы можете восстановить любой из найденных резервных пакетов, либо удалить его с сервера.',
-	'ConfirmDbRestore'			=> 'Do you want to restore backup',
-	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
-	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
-	'BackupDelete'				=> 'Are you sure you want to remove backup',
+	'ConfirmDbRestore'			=> 'Вы хотите восстановить резервную копию',
+	'ConfirmDbRestoreInfo'		=> 'Пожалуйста, подождите. Это может занять несколько минут.',
+	'RestoreWrongVersion'		=> 'Неправильная версия WackoWiki!',
+	'BackupDelete'				=> 'Вы уверены, что хотите удалить резервную копию',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Дополнительные опции для восстановления',
-	'RestoreOptionsInfo'		=> '* Перед восстановлением резервной копии <span class="underline">кластера</span> WackoWiki, '.
+	'RestoreOptionsInfo'		=> '* Перед восстановлением резервной копии <strong>кластера</strong> WackoWiki, '.
 									'целевые таблицы не уничтожаются (дабы предотвратить потерю информации из незарезервированных кластеров). '.
 									'Таким образом, в процессе восстановления будут встречаться дублированные записи. '.
 									'В обычном режиме все они будут заменены записями из резервной копии (с помощью SQL-инструкции <code>REPLACE</code>), <br />' .
 									'но если этот флажок установлен, все дубликаты будут пропущены (будут сохранены текущие значения записей), <br />' .
 									'а добавлены в таблицу только записи с новыми ключами (SQL-инструкцией <code>INSERT IGNORE</code>).<br />' .
-									'<span class="underline">Заметьте</span>: при восстановлении полной резервной копии сайта эта опция не имеет значения.<br /> '.
+									'<strong>Заметьте</strong>: при восстановлении полной резервной копии сайта эта опция не имеет значения.<br /> '.
 									'<br /> '.
 									'** Если резервная копия содержит пользовательские файлы (глобальные и постраничные, файлы кэша и пр.), то в обычном режиме при восстановлении они заменят одноименные файлы, размещенные в тех же каталогах. '.
 									'Эта опция позволяет сохранить текущие копии файлов, а восстановить из резервной копии только новые (отсутствующие на сервере) файлы. ',
 	'IgnoreDuplicatedKeys'		=> 'Игнорировать дубликатные ключи таблицы (не заменять)',
 	'IgnoreSameFiles'			=> 'Игнорировать одноименные файлы (не перезаписывать)',
-	'NoBackupsAvailable'		=> 'No backups available.',
+	'NoBackupsAvailable'		=> 'Резервные копии отсутствуют.',
 	'BackupEntireSite'			=> 'Весь сайт',
 	'BackupRestored'			=> 'Резервная копия восстановлена, отчет выполнения приложен ниже. Чтобы удалить данную резервную копию, нажмите здесь',
 	'BackupRemoved'				=> 'Выбранная резервная копия успешно удалена.',
-	'LogRemovedBackup'			=> 'Removed database backup ##%1##',
+	'LogRemovedBackup'			=> 'Удалена резервная копия базы данных ##%1##',
 
 	// User module
 	'UsersAdded'				=> 'Пользователь добавлен',
-	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Edit',
+	'UsersDeleteInfo'			=> 'Удаление пользователя',
+	'UserEditButton'			=> 'Редактировать',
 	'UserEnabled'				=> 'Включено',
 	'UsersAddNew'				=> 'Добавить нового пользователя',
-	'UsersDelete'				=> 'Are you sure you want to remove user ',
-	'UsersDeleted'				=> 'The user was deleted from the database.',
-	'UsersRename'				=> 'Rename the user',
-	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
-	'UsersUpdated'				=> 'User successfully updated.',
+	'UsersDelete'				=> 'Вы уверены, что хотите удалить пользователя ',
+	'UsersDeleted'				=> 'Пользователь был удален из базы данных.',
+	'UsersRename'				=> 'Переименовать пользователя',
+	'UsersRenameInfo'			=> '* Внимание: Изменения затронут все страницы этого пользователя.',
+	'UsersUpdated'				=> 'Пользователь успешно обновлен.',
 
-	'UserName'					=> 'Username',
-	'UserRealname'				=> 'Realname',
+	'UserName'					=> 'Имя пользователя',
+	'UserRealname'				=> 'Настоящее имя',
 	'UserEmail'					=> 'Email',
 	'UserIP'					=> 'IP',
-	'UserLanguage'				=> 'Language',
-	'UserSignuptime'			=> 'Signuptime',
-	'UserActions'				=> 'Actions',
-	'NoMatchingUser'			=> 'No users that meet the criteria',
+	'UserLanguage'				=> 'Язык',
+	'UserSignuptime'			=> 'Дата регистрации',
+	'UserActions'				=> 'Действия',
+	'NoMatchingUser'			=> 'Нет пользователей, соответствующих заданным критериям',
 
 	// Groups module
 	'GroupsMembersFor'			=> 'Участники группы',
 	'GroupsDescription'			=> 'Описание',
 	'GroupsModerator'			=> 'Модератор',
-	'GroupsOpen'				=> 'Open',
-	'GroupsActive'				=> 'Active',
+	'GroupsOpen'				=> 'Открытая',
+	'GroupsActive'				=> 'Активная',
 	'GroupsTip'					=> 'Редактировать группу',
 	'GroupsUpdated'				=> 'Группы обновлены',
-	'GroupsAlreadyExists'		=> 'Эта группа уже cуществует.',
+	'GroupsAlreadyExists'		=> 'Эта группа уже существует.',
 	'GroupsAdded'				=> 'Группа добавлена.',
 	'GroupsRenamed'				=> 'Группы переименована.',
 	'GroupsDeleted'				=> 'Группа удалена из базы данных и всех страниц.',
 	'GroupsAdd'					=> 'Добавить новую группу',
 	'GroupsRename'				=> 'Удалить группу',
-	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
-	'GroupsDelete'				=> 'Are you sure you want to remove group ',
-	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
+	'GroupsRenameInfo'			=> '* Внимание: Изменения затронут все страницы пользователей, входящих в группу.',
+	'GroupsDelete'				=> 'Вы уверены, что хотите удалить группу ',
+	'GroupsDeleteInfo'			=> '* Внимание: Изменения затронут всех пользователей, входящих в группу.',
 	'GroupsStoreButton'			=> 'Сохранить группы',
-	'GroupsSaveButton'			=> 'Submit',
+	'GroupsSaveButton'			=> 'Отправить',
 	'GroupsCancelButton'		=> 'Отменить',
 	'GroupsAddButton'			=> 'Добавить',
 	'GroupsEditButton'			=> 'Изменить',
@@ -472,7 +472,7 @@ $ap_translation = [
 	'MembersAdded'				=> 'Участник добавлен в группу.',
 	'MembersRemove'				=> 'Даете добро на удаление участника ',
 	'MembersRemoved'			=> 'Участник из группы удален.',
-	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
+	'MembersDeleteInfo'			=> '* Внимание: Изменения затронут всех пользователей, входящих в группу.',
 
 ];
 
