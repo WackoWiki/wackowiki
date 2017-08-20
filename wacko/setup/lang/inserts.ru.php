@@ -18,9 +18,9 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page('Category',		'Category',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page('Groups',		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page('Users',		'Пользователи',	'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page('Категории',		'Категории',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page('Группы',	    	'Группы',		    '{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page('Пользователи',		'Пользователи',	    '{{users}}',			$page_lang, 'Admins', false, false);
 }
 
 insert_page('Каталог',			'Каталог',				'{{pageindex}}',				$page_lang, 'Admins', false, true, 'Каталог');

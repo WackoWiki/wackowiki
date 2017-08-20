@@ -18,14 +18,14 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Регистрация нового пользователя:',
-	'RegistrationRealName'		=> 'Show Name',
+	'RegistrationRealName'		=> 'Отображаемое имя',
 	'RegistrationPassword'		=> 'Пароль',
 	'RegistrationButton'		=> 'Поехали',
 	'RegistrationUserNameOwned'	=> 'Данное имя уже зарегистрировано. Выберите другое.',
 	'RegistrationPage'			=> 'Регистрация',
 	'SiteRegistered'			=> 'Вы успешно зарегистрировались на сайте ',
-	'RegistrationEmailInfo'		=> 'Действующий емэйл адрес, на который будут высылаться все сообщение от ВакоВики.'.
-		' Емэйл не будет публично доступен и будт использваться исключительно для получения регистрационной информации или для запрошенных уведомлений и новостей.',
+	'RegistrationEmailInfo'		=> 'Действующий email адрес, на который будут высылаться все сообщения от WackoWiki.'.
+		' Email не будет публично доступен и будет использоваться исключительно для получения регистрационной информации или для запрошенных уведомлений и новостей.',
 	'SiteEmailConfirm'			=> 'Пожалуйста, подтвердите свой почтовый адрес согласно высланным инструкциям. <br />Обратите внимание, что, не подтвердив адрес, вы не сможете восстановить забытый пароль!',
 	'NameTooShort'				=> 'Имя пользователя слишком короткое, минимально допустимая длина составляет %2 символов.',
 	'NameTooLong'				=> 'Имя пользователя слишком длинное, максимально допустимая длина составляет %2 символов.',
@@ -40,9 +40,9 @@ $wacko_translation = [
 	'NewAccountIP'				=> 'IP-адрес клиента:',
 	'NewAccountSignupInfo'		=> 'Создана следующая учетная запись:',
 
-	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
-	'UserRequiresApproval'		=> 'To approve or deny this user access to %1 go to the admin panel.',
-	'UserApprovalInfo'			=> 'After you register, your request will be sent to the site administrator for approval. You will then receive an email with further instructions.',
+	'UserWaitingApproval'		=> 'Email был отправлен администратору сайта. Администратор проверит предоставленную информацию и одобрит или отклонит ваш запрос.',
+	'UserRequiresApproval'		=> 'Чтобы одобрить или отклонить доступ этого пользователя к %1 перейдите в панель администрирования.',
+	'UserApprovalInfo'			=> 'После вашей регистрации администратору системы будет отправлен запрос на одобрение. Затем вы получите email с дальнейшими инструкциями.',
 
 	'UserApprovalPending'		=> 'Ваш аккаунт ожидает утверждения.',
 	'UserApprovalDenied'		=> 'Вашему аккаунту отказано в доступе.',
@@ -65,15 +65,15 @@ $wacko_translation = [
 	'Session'					=> 'сессия',
 	'SessionTip'				=> 'параметры текущего сеанса работы',
 	'SessionDuration'			=> 'Длительность сессии',
-	'SessionDurationSession'	=> 'browser session',
+	'SessionDurationSession'	=> 'Продолжительность сессии веб-браузера',
 	'SessionDurationDay'		=> 'сутки',
 	'SessionDurationWeek'		=> 'неделя',
 	'SessionDurationMonth'		=> 'месяц',
 	'LoggedInAs'				=> 'Вы авторизованы в системе как ',
 
-	'ClearCookies'				=> 'Удалить все кукезы',
+	'ClearCookies'				=> 'Удалить все куки (cookie)',
 	'BindSessionIp'				=> 'Привязать сессию к IP-адресу',
-	'BindSessionIpOn'			=> 'enabled (the current IP',
+	'BindSessionIpOn'			=> 'Включено (текущий IP-адрес',
 	'TrafficProtection'			=> 'Защищенное соединение:',
 	'SessionEnds'				=> 'Эта сессия закончится в',
 	'LastVisit'					=> 'Последнее посещение',
@@ -83,8 +83,8 @@ $wacko_translation = [
 	'LoginAttemtsExceeded'		=> 'Вы превысили максимально допустимое количество попыток входа.<br />Теперь, кроме имени и пароля, требуется ввести код подтверждения, показанный на картинке ниже.',
 
 	// session notice
-	'SessionTerminatedDue'		=> 'Session terminated due to %1',
-	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+	'SessionTerminatedDue'		=> 'Сессия прекращена по причине: %1',
+	'IPAddressChanged'			=> 'IP-адрес изменился на %1 (был %2)',
 
 	// other
 	'Guest'						=> 'Гость',
@@ -100,9 +100,9 @@ $wacko_translation = [
 	'SomeoneChangedThisPage'	=> ' изменил(а) эту страницу, за которой вы наблюдаете: ',
 	'NewPageCreatedSubj'		=> 'Создан новый документ',
 	'NewPageCreatedBody'		=> 'Пользователь %1 создал новую страницу: ',
-	'FileUploadedSubj'			=> 'A new file',
-	'FileUploadedBody'			=> 'User %1 has uploaded a new file: ',
-	'FileReplacedBody'			=> 'User %1 has replaced the file: ',
+	'FileUploadedSubj'			=> 'Новый файл',
+	'FileUploadedBody'			=> 'Пользователь %1 загрузил новый файл: ',
+	'FileReplacedBody'			=> 'Пользователь %1 заменил файл: ',
 
 	'ActionDenied'				=> 'Вызов действия запрещён',
 	'TOCTitle'					=> 'Оглавление ',
@@ -112,7 +112,7 @@ $wacko_translation = [
 	'PDFLink'					=> 'Документ PDF',
 	'RDFLink'					=> 'Документ RDF',
 	'EmailLink'					=> 'Написать письмо (вызов почтовой программы)',
-	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
+	'JabberLink'				=> 'Начать чат по XMPP (будет запущен клиент Jabber)',
 	'PermaLink'					=> 'Постоянная ссылка',
 	'PermaLinkTip'				=> 'Постоянная ссылка страницы',
 
@@ -215,8 +215,8 @@ $wacko_translation = [
 
 	// categories handler
 	'Categories'				=> 'Категории',
-	'CategoriesAssign'			=> 'assign',
-	'CategoriesEdit'			=> 'edit',
+	'CategoriesAssign'			=> 'назначить',
+	'CategoriesEdit'			=> 'редактировать',
 	'Category'					=> 'категория',
 	'CategoriesFor'				=> 'Ключевые слова документа',
 	'CategoriesTip'				=> 'Изменить категории',
@@ -230,7 +230,7 @@ $wacko_translation = [
 	'NoMultilevelGrouping'		=> 'Многоуровневая группировка ключевых слов невозможна.',
 	'CategoriesDeleted'			=> 'Ключевое слово удалено из базы данных и из всех документов.',
 	'CategoriesAdd'				=> 'Добавить новое ключевое слово',
-	'CategoryDescription'		=> 'Description',
+	'CategoryDescription'		=> 'Описание',
 	'CategoriesAddGrouped'		=> 'Сгруппировать с ключевым словом',
 	'CategoriesAddGroupedNo'	=> 'Не группировать.',
 	'CategoriesRename'			=> 'Переименовать ключевое слово %1',
@@ -252,19 +252,19 @@ $wacko_translation = [
 	'PagesCategory'				=> 'Документы категории',
 	'CategoryNotExists'			=> 'Категория не существует.',
 	'CategoryEmpty'				=> 'Категория пуста.',
-	'NoCategorySelected'		=> 'No category selected.',
+	'NoCategorySelected'		=> 'Категория не выбрана.',
 	'TagCloud'					=> 'Облако тегов',
 
 	// source handler
-	'SourceText'				=> 'Source',
-	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
+	'SourceText'				=> 'Исходник',
+	'SourceTip'					=> 'Просмотр wiki-исходника (%%-форматтеры не показаны)',
 	'SourceFrom'				=> 'адрес оригинала: ',
-	'SourceFromLink'			=> 'reference',
-	'SourceCopyToClipboard'		=> 'Копировать в клипборд',
+	'SourceFromLink'			=> 'ссылка',
+	'SourceCopyToClipboard'		=> 'Копировать в буфер обмена',
 
 	// Groups action
 	'GroupsSearch'				=> 'Искать группы',
-	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
+	'GroupsNoMatching'			=> 'Подходящие группы не найдены. Попробуйте смягчить критерий поиска.',
 	'GroupsFilter'				=> 'Искать',
 	'GroupsOpenProfile'			=> 'Перейти к профилю',
 	'GroupsName'				=> 'Группа',
@@ -284,7 +284,7 @@ $wacko_translation = [
 	'EditPreviewButton'			=> 'Предварительный просмотр',
 	'EditPreview'				=> 'Предварительный просмотр',
 	'EditPreviewSlim'			=> 'Предварительный просмотр',
-	'Chars'						=> 'chars',
+	'Chars'						=> 'Символы',
 	'EditNote'					=> 'Описание изменений',
 	'EditNoteMissing'			=> 'Пропущено описание изменений',
 	'EditMinor'					=> 'Незначительная правка',
@@ -294,14 +294,14 @@ $wacko_translation = [
 	'NotifyMe'					=> 'Уведомлять о новых комментариях и изменениях документа',
 	'OverwriteAlert'			=> 'УВЕДОМЛЕНИЕ О ПЕРЕЗАПИСИ: Эта страница была изменена кем-то ещё, пока вы редактировали её.<br/>Пожалуйста, скопируйте свои изменения и отредактируйте страницу повторно.',
 	'WriteAccessDenied'			=> 'У вас нет прав на изменение этой страницы.',
-	'EmptyPage'					=> 'Page body was empty - он не будет сохранен!',
+	'EmptyPage'					=> 'Пустое тело страницы - не будет сохранено!',
 	'EmptyComment'				=> 'Комментарий пуст - он не будет сохранен!',
-	'CommentAccessDenied'		=> '!Извините, у вас нет прав на коментирование этой страницы.',
+	'CommentAccessDenied'		=> 'Извините, у вас нет прав на комментирование этой страницы!',
 	'CommentFlooded'			=> 'Интервал между публикацией сообщений должен быть не менее %1 секунд.',
 	'CommentAdded'				=> 'Комментарий добавлен.',
 	'YouAreNowTheOwner'			=> 'Теперь вы владелец этой страницы.'  ,
 
-	'DefaultDiffMode'			=> 'Default diff mode',
+	'DefaultDiffMode'			=> 'Стандартный режим сравнения',
 	'DiffMode'		=> [
 		'0'		=> 'Вики-сравнение',
 		'1'		=> 'Простое',
@@ -322,8 +322,8 @@ $wacko_translation = [
 	'History'					=> 'История',
 	'ReEditOldRevision'			=> 'Редактировать эту старую версию',
 
-	'ExternalPages'				=> 'Внешние страницы, ссылающеся на&nbsp;%1<br /> (%2) (<a href="%3">список сайтов</a>):',
-	'ExternalPagesGlobal'		=> 'Внешние страницы, ссылающеся (%2) <br /> (<a href="%1">список сайтов</a>):',
+	'ExternalPages'				=> 'Внешние страницы, ссылающиеся на&nbsp;%1<br /> (%2) (<a href="%3">список сайтов</a>):',
+	'ExternalPagesGlobal'		=> 'Внешние страницы, ссылающиеся (%2) <br /> (<a href="%1">список сайтов</a>):',
 	'Last24Hours'				=> 'за последние сутки',
 	'LastDays'					=> 'за последние %1 дней',
 	'DomainsSitesPages'			=> 'Сайты, на которых есть ссылки на&nbsp;%1<br /> (%2)  (<a href="%3">список отдельных страниц</a>):',
@@ -342,7 +342,7 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Удалить комментарий',
 	'RemoveCluster'				=> 'Удалить все страницы кластера',
 	'RemoveDontKeep'			=> 'Не сохранять копию удаленной страницы и комментариев',
-	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
+	'RemoveDontKeepComment'		=> 'Не сохранять копию удаленного комментария',
 	'ReferrersRemoved'			=> 'Внешние ссылки на страницу удалены.',
 	'LinksRemoved'				=> 'Локальные ссылки удалены.',
 	'CategoriesRemoved'			=> 'Ключевые слова страницы удалены.',
@@ -367,7 +367,7 @@ $wacko_translation = [
 	'Footnotes'					=> 'Сноски',
 	'Footnote'					=> 'Сноска',
 	'MostPopularPages'			=> 'Популярные страницы',
-	'MostCommentedPages'		=> 'Most commented pages',
+	'MostCommentedPages'		=> 'Самые комментируемые страницы',
 	'NoAccessToSourcePage'		=> 'Недостаточно прав для чтения страницы, вызываемой из действия.',
 	'SourcePageDoesntExist'		=> 'Страницы, вызываемая из действия, пока не существует.',
 	'NotLoggedInThusEdited'		=> 'Вы не зарегистрированы в системе, поэтому невозможно определить, какие страницы вы редактировали.',
@@ -388,7 +388,7 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'автор последнего комментария',
 	'NoRecentlyCommented'		=> 'Комментариев давно не было.',
 	'NoRecentlyDeleted'			=> 'Удаленных документов не найдено.',
-	'CommentsDisabled'			=> 'Comments are not available.',
+	'CommentsDisabled'			=> 'Комментарии недоступны.',
 
 	'SearchResults'				=> 'Результаты поиска фразы ',
 	'NotFound'					=> 'не найден',
@@ -405,7 +405,7 @@ $wacko_translation = [
 	'To'						=> 'до',
 	'By'						=> 'пользователем',
 	'From'						=> 'от',
-	'For'						=> 'for',
+	'For'						=> 'для',
 	'ReturnToCommented'			=> 'Возврат к комментируемой странице',
 
 	'PagesLinkingTo'			=> 'Страницы, ссылающиеся на ',
@@ -417,7 +417,7 @@ $wacko_translation = [
 	'UnWatchText'				=> 'Не следить',
 	'UserSettingsStored'		=> 'Ваши настройки сохранены',
 	'LoggedOut'					=> 'Вы вышли из системы',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> 'В целях обеспечения безопасности ваша авторизованная сессия работы с сайтом прекращена. Пожалуйста, залогиньтесь снова.',
 
 	// user settings
 	'SettingsCodeResent'		=> 'Повторный код подтверждения email выслан на Ваш адрес.',
@@ -473,7 +473,7 @@ $wacko_translation = [
 	'TreeClusterTitle'			=> 'Дерево кластера %1',
 	'TreeSiteTitle'				=> 'Дерево сайта',
 	'TreeEmpty'					=> '%1&nbsp;не содержит подстраниц.',
-	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeEmptyLevels'			=> '%1&nbsp;не содержит подстраниц заданных уровней глубины. Увеличьте значение глубины.',
 
 	// clone handler
 	'ClonePage'					=> 'Клонировать страницу',
@@ -484,8 +484,8 @@ $wacko_translation = [
 	'ClonedFrom'				=> 'Клонировано с %1.',
 	'MassClone'					=> 'Клонировать весь кластер',
 	'MassCloning'				=> 'Клонируем кластер.',
-	'CloneCannotRead'			=> 'Unreadable page <strong>%1</strong>.',
-	'CloneCannotCreate'			=> 'Uncreatable page <strong>%1</strong>.',
+	'CloneCannotRead'			=> 'Невозможно прочитать страницу <strong>%1</strong>.',
+	'CloneCannotCreate'			=> 'Невозможно создать страницу <strong>%1</strong>.',
 
 	'SortComment'				=> 'Сортировать комментарии',
 	'SortCommentAsc'			=> 'Свежие снизу',
@@ -517,9 +517,9 @@ $wacko_translation = [
 	'NotifyDigest'				=> 'Digest',
 	'NotifyPendingPageTip'		=> 'Высылается уведомление лишь о первом изменении страницы.',
 	'NotifyPendingCommentTip'	=> 'Высылается уведомление лишь о первом комментарии к наблюдаемой странице.',
-	'NotifyPendingTip'			=> 'Notification is automatically re-enabled when you visit the current version of the page.',
+	'NotifyPendingTip'			=> 'Уведомление включится автоматически, когда вы посетите текущую версию этой страницы.',
 
-	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
+	'FurtherPending'			=> 'Если вы не посетите эту страницу, то в случае последующих изменений страницы, других уведомлений не будет.',
 
 	'UserSettingsEmailMe'		=> 'Уведомить о...',
 
@@ -561,7 +561,7 @@ $wacko_translation = [
 	'PasswordChanged'			=> 'Пароль успешно изменён',
 	'EmailWelcome'				=> 'Регистрация в ',
 	'EmailRegistered'			=> 'Вы успешно зарегистрировались в %1.' . "\n" . 'Ваше имя пользователя: %2'."\n\n" . 'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:' . "\n" . '%3',
-	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredLogin'		=> 'Пожалуйста, перейдите на сайт с установленной Wiki-системой и войдите, используя ваши имя пользователя и пароль.',
 	'EmailRegisteredIgnore'		=> 'Если вы не запрашивали никакой регистрации, проигнорируйте это сообщение, и ничего не произойдёт.',
 	'EmailDoNotReply'			=> 'НЕ ОТВЕЧАЙТЕ НА ЭТО СООБЩЕНИЕ',
 	'EmailVerify'				=> 'Кто-то (возможно, вы], указал ваш электронный адрес в %1.' . "\n" . 'Ваше имя пользователя: %2'."\n\n" . 'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:' . "\n" . '%3' . "\n" . '',
@@ -571,7 +571,7 @@ $wacko_translation = [
 	'EmailNotVerified'			=> 'Адрес не подтверждён!',
 	'EmailNotVerifiedDesc'		=> 'Вы не сможете получать уведомления об изменении и комментариях '.
 									'наблюдаемых страниц, сообщения от других пользователей, а также '.
-									'<span class="underline">не будете иметь возможность восстановить забытый пароль</span>, '.
+									'<strong>не будете иметь возможность восстановить забытый пароль</strong>, '.
 									'пока не подтвердите свой email-адрес, пройдя по ссылке из '.
 									'отправленного вам письма. Если в течение суток после регистрации '.
 									'вы так и не получили письмо, запросите его повторно, щёлкнув ',
@@ -589,7 +589,7 @@ $wacko_translation = [
 
 	'Watchers'					=> 'Список наблюдающих за %1',
 	'NoWatchers'				=> 'За страницей %1 никто не наблюдает',
-	'NotOwnerAndViewWatchers'	=> 'Вы не владеете cтраницей %1 и поэтому не можете получить список наблюдающих за ней',
+	'NotOwnerAndViewWatchers'	=> 'Вы не владеете страницей %1 и поэтому не можете получить список наблюдающих за ней',
 
 	// mywatches action
 	'WatchedPages'				=> 'Список всех страниц, за изменениями которых вы следите',
@@ -606,14 +606,14 @@ $wacko_translation = [
 	'NoChangesWatches'			=> 'Среди наблюдаемых страниц нет изменений.',
 
 	// whatsnew action
-	'NewCommentAdded'			=> 'Added new comment',
-	'NewFileAdded'				=> 'Added new file',
-	'NewPageCreated'			=> 'Created a new page',
-	'NewRevisionAdded'			=> 'Changed page',
-	'Cluster'					=> 'cluster',
-	'PageDeleted'				=> 'Page deleted',
-	'CommentDeleted'			=> 'Comment deleted',
-	'FileDeleted'				=> 'File deleted',
+	'NewCommentAdded'			=> 'Добавлен новый комментарий',
+	'NewFileAdded'				=> 'Добавлен новый файл',
+	'NewPageCreated'			=> 'Создана новая страница',
+	'NewRevisionAdded'			=> 'Изменена страница',
+	'Cluster'					=> 'кластер',
+	'PageDeleted'				=> 'Удалена страница',
+	'CommentDeleted'			=> 'Удален комментарий',
+	'FileDeleted'				=> 'Удален файл',
 
 	// users action
 	'UsersSearch'				=> 'Найти пользователя',
@@ -622,9 +622,9 @@ $wacko_translation = [
 	'UsersNoMatching'			=> 'Подходящих пользователей не найдено. Попробуйте более мягкий критерий поиска.',
 	'UsersName'					=> 'Имя',
 	'UsersPages'				=> 'Документы',
-	'UsersChanges'				=> 'Changes',
-	'UsersSubscription'			=> 'Subscription',
-	'UsersWatches'				=> 'Watches',
+	'UsersChanges'				=> 'Изменения',
+	'UsersSubscription'			=> 'Подписка',
+	'UsersWatches'				=> 'Наблюдения',
 	'UsersComments'				=> 'Комментарии',
 	'UsersUploads'				=> 'Загрузки',
 	'UploadQuota'				=> 'Занято места',
@@ -664,7 +664,7 @@ $wacko_translation = [
 	'UsersPMBody'				=> 'Данное сообщение было отправлено вам пользователем %1.',
 	'UsersPMReply'				=> 'Чтобы ответить на это письмо, пройдите по следующей ссылке (не используйте кнопку Ответить/Reply '.
 								   'в почтовой программе):',
-	'PMAbuseInfo'				=> 'Внимание: если это письмо является спамом, содержит оскорбления или иным образом '.
+	'PMAbuseInfo'				=> 'Внимание: если это письмо является СПАМом, содержит оскорбления или иным образом '.
 								   'нарушает правила сайта, пожалуйста, перешлите его (используя кнопку Переслать/'.
 								   'Forward вашей почтовой программы) на адрес %1.',
 	'UsersPMNotLoggedIn'		=> 'Вы не зарегистрированы в системе и не можете отправлять личные сообщения пользователям.',
@@ -688,18 +688,18 @@ $wacko_translation = [
 	// Properties
 	'PropertiesFor'				=> 'Свойства документа %1',
 	'MetaInfo'					=> 'Ключевые слова/Описание&nbsp;&mdash; поля, вставляемые в HTML-заголовок каждой страницы (META).',
-	'MetaTag'					=> 'Tag',
+	'MetaTag'					=> 'Тэг',
 	'MetaTitle'					=> 'Заголовок',
 	'MetaKeywords'				=> 'Ключевые слова',
 	'MetaDescription'			=> 'Описание',
 	'MetaOn'					=> 'Вкл.',
 	'MetaOff'					=> 'Выкл.',
-	'MetaRegistered'			=> 'Registered',
+	'MetaRegistered'			=> 'Зарегистрированный',
 	'MetaComments'				=> 'Отображение панели комментариев',
 	'MetaFiles'					=> 'Отображение панели файлов',
 	'MetaRating'				=> 'Отображение панели рейтинга',
 	'MetaToc'					=> 'Отображение панели оглавления документа',
-	'MetaIndex'					=> 'Отображение панели резделов кластера',
+	'MetaIndex'					=> 'Отображение панели разделов кластера',
 	'MetaIndexMode'				=> 'Режим отображения разделов',
 	'MetaIndexFull'				=> 'Дерево',
 	'MetaIndexUpper'			=> 'Верхние',
@@ -729,7 +729,7 @@ $wacko_translation = [
 	'SettingsModerate'			=> 'Moderate',
 	'SettingsPermissions'		=> 'Доступ',
 	'AclForEntireCluster'		=> 'для всех страниц кластера',
-	'SettingsAttachments'		=> 'Attachments',
+	'SettingsAttachments'		=> 'Приложенные файлы',
 	'SettingsUpload'			=> 'Загрузка файлов',
 	'SettingsCategories'		=> 'Рубрики / ключевые слова',
 	'SettingsReferrers'			=> 'Ссылки',
@@ -738,18 +738,18 @@ $wacko_translation = [
 	'SettingsWordprocessor'		=> 'Версия для Текстовый процессор',
 	'SettingsLatex'				=> 'Версия для LaTeX',
 	'SettingsXML'				=> 'Экспорт в XML',
-	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
+	'NeedToChangeLang'			=> 'Неподдерживаемый язык страницы "<code>%1</code>" должен быть изменен.',
 	'BewareChangeLang'			=> 'Не меняйте язык, если вы не понимаете, что делаете. Смена языка приведёт к переименованию страницы согласно правил транслита нового языка и нечитабельности её неанглийского содержимого. Отменить это действие можно при помощи обратной смены языка.',
 	'SetLang'					=> 'Смена языка страницы',
 	'SetMenuLabel'				=> 'Метка для меню',
-	'SetShowMenuLabel'			=> 'Show in navigation',
+	'SetShowMenuLabel'			=> 'Отображать в меню',
 
 	// upload
 	'UploadFiles'				=> 'Загрузка файлов',
 	'UploadFor'					=> 'Загрузка файла',
 	'UploadButton'				=> 'Загрузить',
 	'UploadGlobalText'			=> 'будет доступен всем посетителям',
-	'UploadGlobal'				=> 'global',
+	'UploadGlobal'				=> 'для всей системы',
 	'UploadHereText'			=> 'только читателям данной страницы',
 	'UploadAsName'				=> 'Введите имя файла в вики (необязательно)',
 	'UploadOverwrite'			=> 'Перезаписать существующие файлы',
@@ -757,7 +757,7 @@ $wacko_translation = [
 	'UploadForbidden'			=> 'Вам запрещено загружать сюда файлы.',
 	'UploadNoFile'				=> 'Почему-то в форме не был передан файл',
 	'UploadMaxSizeReached'		=> 'Файл слишком большого размера!',
-	'UploadDirNotWritable'		=> 'File directory is not writable!',
+	'UploadDirNotWritable'		=> 'Запись в папку для загрузки файлов невозможна!',
 	'UploadNotAPicture'			=> 'Разрешено загружать только картинки, а вы что послали?',
 	'UploadMaxFileQuota'		=> 'Вы превысили квоту загружаемых файлов',
 	'UploadDone'				=> 'Успешно загружен файл',
@@ -770,21 +770,21 @@ $wacko_translation = [
 	'UploadUsedStorage'			=> 'Использовано ',
 
 	// attachments
-	'Attachments'				=> 'Attachments',
-	'AttachmentsToPage'			=> 'to page',
-	'AttachmentsPerPage'		=> 'per page',
-	'AttachmentsByTime'			=> 'by time',
-	'AttachmentsGlobal'			=> 'global',
-	'AttachmentsAll'			=> 'all',
+	'Attachments'				=> 'Приложенные файлы',
+	'AttachmentsToPage'			=> 'для страницы',
+	'AttachmentsPerPage'		=> 'только читателям данной страницы',
+	'AttachmentsByTime'			=> 'по времени',
+	'AttachmentsGlobal'			=> 'для всей системы',
+	'AttachmentsAll'			=> 'все',
 
-	'FileViewProperties'		=> 'View',
-	'FileViewPropertiesTip'		=> 'View the metadata of this file',
-	'FileEditProperties'		=> 'edit',
+	'FileViewProperties'		=> 'Просмотр',
+	'FileViewPropertiesTip'		=> 'Просмотр метаданных файла',
+	'FileEditProperties'		=> 'Редактировать',
 	'FileEditPropertiesTip'		=> 'Редактировать метаданные файла',
 	'FileEditedMeta'			=> 'Метаданные обновлены',
 	'FileEditDenied'			=> 'Вам не дозволено редактировать этот файл',
-	'FileLabel'					=> 'Label',
-	'FileLabelTip'				=> 'Label this file',
+	'FileLabel'					=> 'Метка',
+	'FileLabelTip'				=> 'Задать метку для файла',
 	'FileRemove'				=> 'удалить',
 	'FileRemovedFromDB'			=> 'Файл удалён из базы данных.',
 	'FileRemovedFromFS'			=> 'Файл стёрт с жёсткого диска сервера.',
@@ -795,14 +795,14 @@ $wacko_translation = [
 
 	'UploadBy'					=> 'Загружен',
 	'FileAdded'					=> 'Добавлен',
-	'FileModified'				=> 'Modified',
-	'FileSize'					=> 'Размер',
-	'FileDimension'				=> 'Dimension',
+	'FileModified'				=> 'Изменен',
+	'FileSize'					=> 'Объем',
+	'FileDimension'				=> 'Размер',
 	'MimeType'					=> 'MIME-тип',
 	'FileName'					=> 'Имя',
-	'FileCaption'				=> 'Caption',
-	'FileAttachedTo'			=> 'Attached to',
-	'FileSyntax'				=> 'Syntax',
+	'FileCaption'				=> 'Заголовок',
+	'FileAttachedTo'			=> 'Приложен к',
+	'FileSyntax'				=> 'Синтаксис',
 	'FileUsage'					=> 'Использование файла',
 	'FileUsageText'				=> 'Страницы, ссылающиеся на этот файл:',
 	'NoFileUsage'				=> 'Нет страниц, ссылающихся на данный файл.',
@@ -813,17 +813,17 @@ $wacko_translation = [
 	'Files'						=> 'Файлы',
 	'ShowFiles'					=> 'Показать файлы/форму',
 	'HideFiles'					=> 'Скрыть файлы/форму',
-	'DoShowFiles'				=> 'По умолчанию список файлов для страницы отображfется',
-	'NoAttachments'				=> 'Вложения отсутствуют.',
+	'DoShowFiles'				=> 'По умолчанию список файлов для страницы отображется',
+	'NoAttachments'				=> 'Приложенные файлы отсутствуют.',
 
-	'RegistrationLang'			=> 'Your language (ваш язык)',
+	'RegistrationLang'			=> 'Ваш язык (your language)',
 	'InvalidWikiName'			=> 'Выбранное вами имя страницы неверно',
 	'InvalidUserName'			=> 'Выбранное вами имя страницы неверно',
 	'PleaseLogin'				=> '((Settings Введите имя пользователя и пароль))',
 	'Bookmarks'					=> 'Личное меню',
 	'ReallyDeleteComment'		=> 'Вы действительно хотите УДАЛИТЬ комментарий? <br />Восстановить его потом не удастся.',
 	'ForgotLink'				=> '((/Пароль Забыли пароль?))',
-	'RegistrationClosed'		=> 'Регистрация на данном сайте невозможна. Попробуйте связаться с админом.',
+	'RegistrationClosed'		=> 'Регистрация на данном сайте невозможна. Попробуйте связаться с администратором.',
 	'ACLForCluster'				=> 'Права доступа для КЛАСТЕРА %1',
 	'ACLAreYouSure'				=> 'Вы собираетесь сменить права этой страницы и всех подстраниц. Продолжить?',
 
@@ -847,7 +847,7 @@ $wacko_translation = [
 	'ImportSuccess'				=> 'Импортировано успешно.',
 	'MassRenaming'				=> 'Рекурсивное переименование',
 	'MassNewName'				=> 'Введите новое имя кластера',
-	'MassNeedRedirect'			=> 'Поставить на старых страницых перенаправление на новые',
+	'MassNeedRedirect'			=> 'Поставить на старых страницах перенаправление на новые',
 
 	// pagination
 	'ToThePage'					=> 'На страницу',
@@ -858,7 +858,7 @@ $wacko_translation = [
 	'Back'						=> 'Назад',
 
 	// filter
-	'Any'						=> 'Any',
+	'Any'						=> 'Любой',
 
 	// My Groups
 	'UserGroups'				=> 'Группы пользователей',
@@ -885,22 +885,22 @@ $wacko_translation = [
 	// Cache
 	'ClearCache'				=> 'Очистить кэш',
 	'CacheCleared'				=> 'Кэш очищен.',
-	'ConfigCache'				=> 'Config cache',
-	'FeedCache'					=> 'Feed cache',
-	'PageCache'					=> 'Page cache',
-	'SQLCache'					=> 'SQL cache',
-	'TemplateCache'				=> 'Template cache',
+	'ConfigCache'				=> 'Кэш настроек',
+	'FeedCache'					=> 'Кэш лент',
+	'PageCache'					=> 'Кэш страниц',
+	'SQLCache'					=> 'Кэш SQL-запросов',
+	'TemplateCache'				=> 'Кэш шаблонов',
 
 	// Flash
-	'FlashNoURL'				=> 'Please specify a Flash file with the Parameter url. (e.g. {{flash url="file:the_movie.swf"}} )',
+	'FlashNoURL'				=> 'Пожалуйста, укажите адрес Flash-файла с помощью параметра url, например, {{flash url="file:the_movie.swf"}}',
 
 	// Feed
 	'FeedTitle'					=> 'Заголовок канала новостей',
 	'FeedMulti'					=> 'Несколько источников',
-	'FeedNoURL'					=> 'Пожалуйста, укажите канал новостей с параметром url, например, {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
+	'FeedNoURL'					=> 'Пожалуйста, укажите канал новостей с помощью параметра url, например, {{feed url="http://example.com/xml/comments_wackowiki.xml"}}',
 	'FeedError'					=> 'Невозможно загрузить или распознать новости',
 	'FeedSource'				=> 'Источник:',
-	'FeedLastItems'				=> 'last %1 items',
+	'FeedLastItems'				=> 'Последних элементов: %1',
 
 	// XML / RSS autodiscovery
 	'RecentChangesTitleXML'		=> ' - последние изменения',
@@ -927,26 +927,26 @@ $wacko_translation = [
 	'CaptchaReloadWarning'		=> 'К сожалению, невозможно загрузить новую картинку, попробуйте обновить страницу целиком',
 
 	// news
-	'News'						=> 'News',
+	'News'						=> 'Новости',
 	'NewsName'					=> 'Заголовок',
 	'NewsSubmit'				=> 'добавить',
 	'NewsNoName'				=> 'Вы забыли указать заголовок добавляемой новости.',
 	'NewsNotAvailable'			=> 'Новостей нет.',
-	'NewsNoClusterDefined'		=> 'No News cluster defined.',
+	'NewsNoClusterDefined'		=> 'Кластер новостей не задан.',
 	'NewsDiscuss'				=> 'Обсудить новость...',
 
 	// Review
-	'Reviewer'					=> 'Reviewer',
-	'Reviewed'					=> 'reviewed',
-	'Review'					=> 'review',
-	'ReviewedBy'				=> 'reviewed by',
-	'RemoveReview'				=> 'Remove review for this page',
-	'SetReview'					=> 'Reviewed this page',
-	'SetAsReviewed'				=> 'Set page as reviewed',
-	'SetAsUnreviewed'			=> 'Set page as unreviewed',
+	'Reviewer'					=> 'Проверяющий',
+	'Reviewed'					=> 'проверено',
+	'Review'					=> 'проверка',
+	'ReviewedBy'				=> 'проверено',
+	'RemoveReview'				=> 'Удалить статус проверенной у этой страницы',
+	'SetReview'					=> 'Проверил эту страницу',
+	'SetAsReviewed'				=> 'Отметить страницу как проверенную',
+	'SetAsUnreviewed'			=> 'Отметить страницу как непроверенную',
 
 	// word filter
-	'PotentialSpam'				=> 'Identified Potential Spam',
+	'PotentialSpam'				=> 'Идентифицировано как возможный СПАМ',
 
 	// moderation handler
 	'Moderation'				=> 'Модерация',
@@ -967,7 +967,7 @@ $wacko_translation = [
 	'ModerateReset'				=> 'сбросить',
 	'ModerateAccept'			=> 'подтвердить',
 	'ModerateDecline'			=> 'отменить',
-	'ModerateDeleteConfirm'		=> 'Вы действительно хотите <span class="underline">удалить</span> следующие темы?',
+	'ModerateDeleteConfirm'		=> 'Вы действительно хотите <strong>удалить</strong> следующие темы?',
 	'ModerateRenameConfirm'		=> 'Введите новое название для выбранной страницы',
 	'ModerateRenameExists'		=> 'Одноименная страница уже существует! Выберите другое название.',
 	'ModerateRename1Only'		=> 'Внимание: переименована будет только первая выбранная вами страница!',
@@ -978,7 +978,7 @@ $wacko_translation = [
 	'ModerateMoveNotExists'		=> 'Указанный документ/кластер не существует. Пожалуйста, проверьте правильность имени и повторите попытку.',
 	'ModerateMergeConfirm'		=> 'Выберите тему, с которой следует объединить остальные',
 	'ModerateMerge2Min'			=> 'Для объединения необходимо выбрать как минимум две темы!',
-	'ModerateComDelConfirm'		=> 'Вы действительно хотите <span class="underline">удалить</span> %1 %2?',
+	'ModerateComDelConfirm'		=> 'Вы действительно хотите <strong>удалить</strong> %1 %2?',
 	'ModerateComment'			=> 'комментарий',
 	'ModerateComments'			=> 'комментариев',
 	'ModerateSplitNewName'		=> 'Укажите название для отделяемой темы и выберите схему разделения',
@@ -986,7 +986,7 @@ $wacko_translation = [
 	'ModerateSplitAllAfter'		=> 'Отделить все комментарии после первого выбранного (и включая его)',
 	'ModerateSplitSelected'		=> 'Отделить только выбранные комментарии (всего %1)',
 	'ModerateUserProfile'		=> 'профиль',
-	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
+	'ModerateNoItemChosen'		=> 'Пожалуйста выберите хотя бы один пункт с помощью кнопки "Устанвоить".',
 
 	'ModerateSection2'				=> 'модерировать раздел...',
 	'ModerateTopicsDeleted'			=> 'Выбранные темы успешно удалены.',
@@ -1148,12 +1148,12 @@ $wacko_translation = [
 		'es' => 'испанский',
 	],
 
-	'AccountStatus'				=> 'Account status',
+	'AccountStatus'				=> 'Статус аккаунта',
 	'AccountStatusArray' => [
-		'0' => 'active',
-		'1' => 'pending',
-		'2' => 'blocked',
-		'3' => 'inactive',
+		'0' => 'активен',
+		'1' => 'ожидает',
+		'2' => 'заблокирован',
+		'3' => 'неактивен',
 	],
 
 	'JustNow'		=> 'только сейчас',
@@ -1185,10 +1185,10 @@ $wacko_translation = [
 	'InYears'		=> 'через %1 года',
 
 	// binary multiples
-	'DecimalPrefixShort'		=> ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-	'DecimalPrefixLong'			=> ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'],
-	'BinaryPrefixShort'			=> ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
-	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
+	'DecimalPrefixShort'		=> ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ', 'ПБ', 'ЭБ', 'ЗБ', 'ЙБ'],
+	'DecimalPrefixLong'			=> ['Байт', 'Килобайт', 'Мегабайт', 'Гигабайт', 'Терабайт', 'Петабайт', 'Эксабайт', 'Зеттабайт', 'Йоттабайт'],
+	'BinaryPrefixShort'			=> ['Б', 'КиБ', 'МиБ', 'ГиБ', 'ТиБ', 'ПиБ', 'ЭиБ', 'ЗиБ', 'ЙиБ'],
+	'BinaryPrefixLong'			=> ['Байт', 'Кибибайт', 'Мебибайт', 'Гибибайт', 'Тебибайт', 'Пебибайт', 'Эксбибайт', 'Зебибайт', 'Йобибайт'],
 
 	// loading error
 	'UnknownAction'				=> 'Неизвестное действие',
@@ -1199,7 +1199,7 @@ $wacko_translation = [
 	'LogAdminLoginSuccess'		=> 'Успешный вход в административную панель',
 	'LogAdminLogout'			=> 'Завершение работы в административной панели',
 	'LogAdminLoginFailed'		=> '!!Неудачная попытка авторизации в административной панели!!',
-	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
+	'LogAdminLoginLocked'		=> 'Вход в административную панель закрыт.',
 	'LogUserCookieForged'		=> '!!**Попытка авторизации по поддельному cookie с логином ##%1##**!!',
 	'LogRemovedPage'			=> '!!Удалена страница ##%1## (автор %2)!!',
 	'LogRemovedCluster'			=> '!!Удален **кластер** ##%1## (автор %2)!!',
@@ -1214,7 +1214,7 @@ $wacko_translation = [
 	'LogACLUpdated'				=> 'Обновлен ACL документа [[/%1]]',
 	'LogOwnershipChanged'		=> 'Право владения документом [[/%1]] передано пользователю ##%2##',
 	'LogUserLoginFailed'		=> '!!Неудачная попытка авторизации в системе с логином ##~%1##!!',
-	'LogClonedPage'				=> 'Page ##%1## cloned to [[/%2]]',
+	'LogClonedPage'				=> 'Страница ##%1## скопирована в [[/%2]]',
 	'LogRenamedPage'			=> 'Документ ##%1## переименован в [[/%2]]',
 	'LogRenamedPage2'			=> '. На старой странице установлена ссылка на новую',
 	'LogSplittedPage'			=> 'Комментарии от документа [[/%1]] отделены в документ [[/%2]]',
@@ -1225,7 +1225,7 @@ $wacko_translation = [
 	'LogUserPasswordMismatch'	=> '!!Пользователь ##%1## не смог изменить свой пароль: несоответствие текущего пароля!!',
 	'LogUserIPSwitched'			=> 'Несанкционированная смена IP-адреса пользователя ##%1## с ##%2## на ##%3##',
 	'LogPageImported'			=> 'Импортирован документ [[/%1]]',
-	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
+	'LogSaveNoRights'			=> 'Нет соответствующих прав для сохранения страницы [[/%1]]',
 	'LogPageCreated'			=> 'Создан новый документ [[/%1]]',
 	'LogPageMetaUpdated'		=> 'Обновлены свойства документа [[/%1]]',
 	'LogPageOwnershipClaimed'	=> 'Пользователь вступил во владение документом [[/%1]]',
@@ -1247,9 +1247,9 @@ $wacko_translation = [
 	'LogUserSettingsUpdate'		=> 'Пользователь ##%1## обновил свои настройки',
 	'LogPageEdited'				=> 'Отредактирован документ [[/%1]]',
 	'LogCommentEdited'			=> 'Отредактирован комментарий [[/%1]]',
-	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'Вакавики ожидает версию php не менее <strong>' . PHP_MIN_VERSION.
+	'LogUpdatedFileMeta'		=> 'Обновлены метаданные файла для ##%2## со страницы [[/%1]]',
+	'ErrorMinPHPVersion'		=> 'WackoWiki требуется версия php не ниже <strong>' . PHP_MIN_VERSION.
 									'</strong>, на вашем же сервере используется <strong>' . PHP_VERSION . '</strong>.'.
-									'  Для корректной работы системы рекомендуется апгрейд php.',
+									'  Для корректной работы системы рекомендуется обновление версии php.',
 
 ];
