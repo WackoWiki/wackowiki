@@ -52,6 +52,7 @@ if ($this->is_owner() || $this->is_admin())
 					"SELECT category_id, parent_id, category " .
 					"FROM " . $this->db->table_prefix . "category " .
 					"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
+						"AND category_lang = " . $this->page['page_lang'] . " " .
 					"LIMIT 1");
 			}
 
