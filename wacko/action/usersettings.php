@@ -703,7 +703,7 @@ else if (($user = $this->get_user()))
 					'<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments') . '" title="' . $this->_t('ShowComments') . '">' . $user['total_comments'] . '</a></td>' .
 				"</tr>\n" . '<tr>' .
 					'<th scope="row">' . $this->_t('UsersUploads') . '</th>' .
-					'<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'uploads') . '" title="' . $this->_t('ShowComments') . '">' . number_format($user['total_uploads'], 0, ',', '.') . '</a></td>' .
+					'<td><a href="' . $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'uploads') . '" title="' . $this->_t('ShowFiles') . '">' . number_format($user['total_uploads'], 0, ',', '.') . '</a></td>' .
 				// "</tr>\n" . '<tr>' .
 				// 	'<th scope="row">' . $this->_t('UsersLogins') . "</th>" .
 				// 	'<td>' . number_format($user['login_count'], 0, ',', '.') . "</td>" .
