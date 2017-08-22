@@ -23,7 +23,7 @@ var ProtoEdit = function () {
 };
 
 ProtoEdit.prototype._init = function (id, rte) {
-	this.id = id; //id - id of textarea	 
+	this.id = id; //id - id of textarea
 	this.area = document.getElementById(id); //area - textarea object
 	this.area._owner = this; //area._owner - this
 	
@@ -174,9 +174,9 @@ ProtoEdit.prototype.trim = function (s2) {
 	}
 	
 	// Note that there are two spaces in the string - look for multiple spaces within the string
-	while (s.indexOf('	') != - 1) {
+	while (s.indexOf('  ') != - 1) {
 		// Again, there are two spaces in each of the strings
-		s = s.substring(0, s.indexOf('	')) + s.substring(s.indexOf('	') + 1, s.length);
+		s = s.substring(0, s.indexOf('  ')) + s.substring(s.indexOf('  ') + 1, s.length);
 	}
 	
 	return s; // Return the trimmed string back to the user

@@ -85,8 +85,8 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
 	this.addButton('strike', lang.Strikethrough, '\'--\',\'--\'');
 	this.addButton('code', lang.Code, "'##','##'");
 	this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
-	this.addButton('ul', lang.List, '\'	* \',\'\',0,1,1');
-	this.addButton('ol', lang.NumberedList, '\'	1. \',\'\',0,1,1');
+	this.addButton('ul', lang.List, '\'  * \',\'\',0,1,1');
+	this.addButton('ol', lang.NumberedList, '\'  1. \',\'\',0,1,1');
 	this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
 	//this.addButton('left', lang.Left,"'%%(wacko wrapper=text wrapper_align=left)','%%',2");
 	this.addButton('center', lang.Center, '\'%%(wacko wrapper=text wrapper_align=center)\',\'%%\',2');
@@ -94,7 +94,7 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
 	this.addButton('justify', lang.Justify, '\'%%(wacko wrapper=text wrapper_align=justify)\',\'%%\',2');
 	this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
 	this.addButton('outdent', lang.Outdent, '', 'document.getElementById(\'' + this.id + '\')._owner.unindent');
-	this.addButton('indent', lang.Indent, '\'	\',\'\',0,1');
+	this.addButton('indent', lang.Indent, '\'  \',\'\',0,1');
 	this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
 	this.addButton('quote', lang.Quote, '\'<[\',\']>\',2');
 	this.addButton('source', lang.CodeWrapper,"'%% ',' %%',2");
@@ -238,7 +238,7 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
 	var fOut = false;
 	var add = 0;
 	var f = false;
-	var w = new RegExp('^	( *)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))');
+	var w = new RegExp('^  ( *)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))');
 	if (!isO8) Text = Text.replace(new RegExp('\r', 'g'), '');
 	if (!isO8) var lines = Text.split('\n');
 	else var lines = Text.split('\r\n');
@@ -400,7 +400,7 @@ WikiEdit.prototype.keyDown = function (e) {
 			if (e.shiftKey || Key == 4181) {
 				res = this.unindent();
 			} else {
-				res = this.insTag('	', '', 0, 1);
+				res = this.insTag('  ', '', 0, 1);
 			}
 			break;
 		case 2097: //1
@@ -463,7 +463,7 @@ WikiEdit.prototype.keyDown = function (e) {
 		case 2124: //L
 		case 4172:
 			if (e.shiftKey && e.ctrlKey) {
-				res = this.insTag('	* ', '', 0, 1, 1);
+				res = this.insTag('  * ', '', 0, 1, 1);
 			} else if (e.altKey || e.ctrlKey) {
 				res = this.createLink(e.altKey);
 			}
@@ -471,7 +471,7 @@ WikiEdit.prototype.keyDown = function (e) {
 		case 2127: //O
 		case 2126: //N
 			if (e.ctrlKey && e.shiftKey)
-			res = this.insTag('	1. ', '', 0, 1, 1);
+			res = this.insTag('  1. ', '', 0, 1, 1);
 			break;
 		case 13:
 		case 2061:
