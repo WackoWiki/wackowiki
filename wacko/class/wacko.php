@@ -552,6 +552,9 @@ class Wacko
 	*/
 	function available_languages($subset = true)
 	{
+		// TODO: add $reset option to reset sess->available_languages
+		//		for AP basic module, else the user must logout/login again
+		//		after changing the languge set to be available
 		$lang_list = &$this->sess->available_languages;
 
 		if (!isset($lang_list))
@@ -7764,14 +7767,6 @@ class Wacko
 						'<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a>' . "<br />\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
-			else if ($can_edit || ! $this->method == 'edit')
-			{
-				$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ' .
-						'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ' .
-						'<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '" /> ' .
-						'<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '" /> ' .
-						'<small><br />' . $this->_t('CategoriesEditInfo') . '</small>';
-			}
 		}
 		else
 		{
@@ -7783,6 +7778,16 @@ class Wacko
 			{
 				$out .=  '<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' . "\n";
 			}
+		}
+
+		// edit control buttons
+		if ($can_edit || ! $this->method == 'edit')
+		{
+			$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ' .
+					'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ' .
+					'<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '" /> ' .
+					'<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '" /> ' .
+					'<small><br />' . $this->_t('CategoriesEditInfo') . '</small>';
 		}
 
 		return $out;
