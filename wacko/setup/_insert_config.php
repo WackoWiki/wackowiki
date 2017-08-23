@@ -6,14 +6,19 @@ $config_insert	= '';
 // set back theme to default, just a precaution
 # $config['theme'] = 'default';
 
+if (!isset($config['allowed_languages']))
+{
+	$config['allowed_languages'] = '';
+}
+
 if (!isset($config['multilanguage']))
 {
 	$config['multilanguage'] = 0;
 }
 
-if (!isset($config['allowed_languages']))
+if (!isset($config['rewrite_mode']))
 {
-	$config['allowed_languages'] = '';
+	$config['rewrite_mode'] = 0;
 }
 
 // inserting secondary config values

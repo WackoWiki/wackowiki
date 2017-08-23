@@ -332,6 +332,7 @@ class Http
 				case 2:
 					$csp_config = file_get_contents(CONFIG_DIR . '/csp_custom.conf');
 					$csp_custom = str_replace(["\r", "\n", "\t"], '', $csp_config);
+					// TODO: cache?
 					header($csp_custom);
 					break;
 			}

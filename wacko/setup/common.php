@@ -89,7 +89,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 {
 	global $lang;
 	global $config;
-	global $dblink;
+	global $dblink; // TODO: broken, mysqli_error() expects parameter 1 to be mysqli, null given
 
 	echo "            <li>" . $text."   ".output_image($condition);
 
