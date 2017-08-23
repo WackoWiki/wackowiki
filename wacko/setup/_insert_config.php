@@ -4,7 +4,7 @@ $config_db		= [];
 $config_insert	= '';
 
 // set back theme to default, just a precaution
-# $config['theme'] = 'default';
+$config['theme'] = 'default';
 
 if (!isset($config['allowed_languages']))
 {
@@ -19,6 +19,11 @@ if (!isset($config['multilanguage']))
 if (!isset($config['rewrite_mode']))
 {
 	$config['rewrite_mode'] = 0;
+}
+
+if (empty($config['noreply_email']))
+{
+	$config_db['noreply_email'] = $config['admin_email'];
 }
 
 // inserting secondary config values
@@ -131,7 +136,7 @@ $config_db['news_levels']					= $config['news_levels'];
 $config_db['nofollow']						= $config['nofollow'];
 $config_db['noindex']						= $config['noindex'];
 $config_db['noreferrer']					= $config['noreferrer'];
-$config_db['noreply_email']					= !empty($config['noreply_email'])? $config['noreply_email'] : $config['admin_email'];
+$config_db['noreply_email']					= $config['noreply_email'];
 $config_db['notify_comment']				= $config['notify_comment'];
 $config_db['notify_minor_edit']				= $config['notify_minor_edit'];
 $config_db['notify_new_user_account']		= $config['notify_new_user_account'];

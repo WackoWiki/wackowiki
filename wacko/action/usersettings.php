@@ -433,10 +433,6 @@ else if (($user = $this->get_user()))
 				</td>
 			</tr>-->
 			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
 				<td>&nbsp;</td>
 				<td>
 					<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('UpdateSettingsButton'); ?>" />
@@ -520,10 +516,6 @@ else if (($user = $this->get_user()))
 				</small></div>';
 		}
 ?></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td></td>
 	</tr>
 	<tr>
 		<th scope="row">
@@ -650,10 +642,6 @@ else if (($user = $this->get_user()))
 				<option value="100"<?php echo ($user['list_count'] == 100 ? ' selected' : '');?>>100</option>
 			</select>
 		</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
