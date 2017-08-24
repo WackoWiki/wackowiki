@@ -142,6 +142,14 @@ $this->ensure_page(true); // TODO: upload for forums?
 			<br />
 			<input type="hidden" name="remove" value=""/>
 			<input type="hidden" name="file_id" value="<?php echo $file['file_id'];?>" />
+			<?php
+			if ($this->db->store_deleted_pages && $this->is_admin())
+			{
+				echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
+				echo '<label for="dontkeep">' . $this->_t('RemoveDontKeepFile') . '</label><br />';
+				echo '<br />';
+			}
+			?>
 			<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>" />
 			&nbsp;
 			<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
@@ -442,8 +450,8 @@ $this->ensure_page(true); // TODO: upload for forums?
 		if (isset($_POST['remove']))
 		{
 			// 2.a DELETE FILE
-
-			$file = $get_file((int) $_POST['file_id']);
+			$dontkeep	= (isset($_POST['dontkeep']) && $this->is_admin());
+			$file		= $get_file((int) $_POST['file_id']);
 
 			if (count($file) > 0)
 			{
@@ -452,37 +460,58 @@ $this->ensure_page(true); // TODO: upload for forums?
 						&& ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($file['user_id'] == $this->get_user_id()))
 				{
-					$this->remove_category_assigments($file['file_id'], 2);
+					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 
-					// remove from DB
-					$this->db->sql_query(
-						"DELETE FROM " . $this->db->table_prefix . "file " .
-						"WHERE file_id = '" . $file['file_id'] . "'" );
-
-					// update user uploads count
-					$this->db->sql_query(
-						"UPDATE " . $this->db->user_table . " SET " .
-							"total_uploads = total_uploads - 1 " .
-						"WHERE user_id = '" . $file['user_id'] . "' " .
-						"LIMIT 1");
-
-					$message .= $this->_t('FileRemovedFromDB') . '<br />';
-
-					// remove from FS
-					$real_filename = ($file['page_id']
-						? UPLOAD_PER_PAGE_DIR . '/@' . $file['page_id'] . '@'
-						: UPLOAD_GLOBAL_DIR . '/') .
-						$file['file_name'];
-
-					if (@unlink($real_filename))
+					// store a copy in ...
+					if ($this->db->store_deleted_pages && !$dontkeep)
 					{
-						clearstatcache();
+						// TODO: moved to backup folder
+						/*foreach ($files as $file)
+						{
+							// remove from FS
+							$file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.
+									$page['page_id'] . '@' . $file['file_name']);
 
-						$message .= $this->_t('FileRemovedFromFS');
+							@unlink($file_name);
+						}*/
+
+						// flag record as deleted in DB
+						$this->db->sql_query(
+							"UPDATE " . $this->db->table_prefix . "file SET " .
+								"deleted	= '1' " .
+							"WHERE file_id = '" . $file['file_id'] . "'");
 					}
 					else
-					{
-						$this->set_message($this->_t('FileRemovedFromFSError'), 'error');
+					{	// remove from DB
+						$this->db->sql_query(
+							"DELETE FROM " . $this->db->table_prefix . "file " .
+							"WHERE file_id = '" . $file['file_id'] . "'" );
+
+						// update user uploads count
+						$this->db->sql_query(
+							"UPDATE " . $this->db->user_table . " SET " .
+								"total_uploads = total_uploads - 1 " .
+							"WHERE user_id = '" . $file['user_id'] . "' " .
+							"LIMIT 1");
+
+						$message .= $this->_t('FileRemovedFromDB') . '<br />';
+
+						// remove from FS
+						$real_filename = ($file['page_id']
+							? UPLOAD_PER_PAGE_DIR . '/@' . $file['page_id'] . '@'
+							: UPLOAD_GLOBAL_DIR . '/') .
+							$file['file_name'];
+
+						if (@unlink($real_filename))
+						{
+							clearstatcache();
+
+							$message .= $this->_t('FileRemovedFromFS');
+						}
+						else
+						{
+							$this->set_message($this->_t('FileRemovedFromFSError'), 'error');
+						}
 					}
 
 					if ($message)
@@ -512,7 +541,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 			$file = $get_file((int) $_POST['file_id']);
 			// clear old list
-			$this->remove_category_assigments($file['file_id'], 2);
+			$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 
 			// save new list
 			$this->save_categories_list($file['file_id'], OBJECT_FILE);

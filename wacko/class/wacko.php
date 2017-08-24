@@ -1761,9 +1761,37 @@ class Wacko
 		}
 	}
 
-	function load_deleted($limit = 50, $cache = true)
+	function load_deleted_files($limit = 50, $cache = true)
 	{
-		$deleted = [];
+		$deleted	= [];
+		$pagination	= '';
+
+		$count_deleted = $this->db->load_single(
+			"SELECT COUNT(file_id) AS n " .
+			"FROM " . $this->db->table_prefix . "file " .
+			"WHERE deleted = '1' LIMIT 1"
+			, $cache);
+
+		if ($count_deleted['n'])
+		{
+			$pagination = $this->pagination($count_deleted['n'], $limit);
+
+			$deleted = $this->db->load_all(
+				"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.uploaded_dt, f.modified_dt, f.file_description,
+						f.file_lang, f.caption, u.user_name " .
+				"FROM " . $this->db->table_prefix . "file f " .
+					"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+				"WHERE f.deleted = '1' " .
+				"ORDER BY f.modified_dt DESC, f.file_name ASC " .
+				$pagination['limit'], $cache);
+		}
+
+		return [$deleted, $pagination];
+	}
+
+	function load_deleted_pages($limit = 50, $cache = true)
+	{
+		$deleted	= [];
 		$pagination	= '';
 
 		$count_deleted = $this->db->load_single(
@@ -6168,7 +6196,7 @@ class Wacko
 		if (($days = $this->db->keep_deleted_time) > 0
 			&& $now > $this->db->maint_last_delpages)
 		{
-			list($pages, ) = $this->load_deleted(1000, 0);
+			list($pages, ) = $this->load_deleted_pages(1000, 0);
 
 			$remove	= [];
 			$past	= $now - DAYSECS * $days;
@@ -7059,7 +7087,7 @@ class Wacko
 		{
 			// get filenames
 			$files = $this->db->load_all(
-				"SELECT file_name " .
+				"SELECT file_id, file_name " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id = '" . $page['page_id'] . "'");
 
@@ -7067,14 +7095,17 @@ class Wacko
 			if ($this->db->store_deleted_pages && !$dontkeep)
 			{
 				// TODO: moved to backup folder
-				/*foreach ($files as $file)
+				foreach ($files as $file)
 				{
 					// remove from FS
-					$file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.
+					/* $file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.
 							$page['page_id'] . '@' . $file['file_name']);
 
-					@unlink($file_name);
-				}*/
+					@unlink($file_name); */
+
+					// remove category assigments
+					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+				}
 
 				// flag record as deleted in DB
 				$this->db->sql_query(
@@ -7091,6 +7122,11 @@ class Wacko
 						$page['page_id'] . '@' . $file['file_name']);
 
 					@unlink($file_name);
+
+					// remove category assigments
+					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+
+					// TODO: update user uploads count
 				}
 
 				// remove from DB

@@ -18,6 +18,8 @@ if (!($this->is_owner() || $this->is_admin()))
 
 if (@$_POST['_action'] === 'purge_data')
 {
+	$dontkeep = (isset($_POST['dontkeep']) && $this->is_admin());
+
 	// purge page
 	$message = "<ol>";
 
@@ -25,14 +27,14 @@ if (@$_POST['_action'] === 'purge_data')
 
 	if (isset($_POST['comments']))
 	{
-		$this->remove_comments($this->tag);
+		$this->remove_comments($this->tag, false, $dontkeep);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllComments', SYSTEM_LANG), $title));
 		$message .= "<li>" . $this->_t('CommentsPurged') . "</li>\n";
 	}
 
 	if (isset($_POST['files']))
 	{
-		$this->remove_files($this->tag);
+		$this->remove_files($this->tag, false, $dontkeep);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllFiles', SYSTEM_LANG), $title));
 		$message .= "<li>" . $this->_t('FilesPurged') . "</li>\n";
 	}
@@ -73,6 +75,12 @@ else
 		<input type="checkbox" id="purgerevisions" name="revisions" />
 		<label for="purgerevisions"><?php echo $this->_t('PurgeRevisions') ?></label><br />
 <?php
+		if ($this->db->store_deleted_pages)
+		{
+			echo '<br />';
+			echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
+			echo '<label for="dontkeep">' . $this->_t('RemoveDontKeep') . '</label><br />';
+		}
 	}
 ?>
 	<br />
