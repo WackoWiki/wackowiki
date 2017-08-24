@@ -33,16 +33,16 @@ function admin_content_deleted(&$engine, &$module)
 		$id = (int) $_GET['remove'];
 		$engine->db->sql_query(
 			"DELETE FROM " . $engine->db->table_prefix . "revision " .
-			"WHERE page_id = '" . $id."'");
+			"WHERE page_id = '" . $id . "' ");
 
 		$engine->db->sql_query(
 			"DELETE FROM " . $engine->db->table_prefix . "page " .
-			"WHERE page_id = '" . $id."'");
+			"WHERE page_id = '" . $id . "' " .
+				"AND deleted = '1'");
 
 		$engine->db->sql_query(
 			"DELETE FROM " . $engine->db->table_prefix . "file " .
-			"WHERE page_id = '" . $id."'");
-
+			"WHERE page_id = '" . $id . "'");
 	}
 
 	// restore specific page revisions
@@ -53,7 +53,6 @@ function admin_content_deleted(&$engine, &$module)
 		$engine->restore_file($id);
 	}
 
-
 ?>
 	<p>
 		List of removed pages and copies which were in the table revision.
@@ -61,9 +60,17 @@ function admin_content_deleted(&$engine, &$module)
 		or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)
 	</p>
 <?php
-	list($pages, $pagination) = $engine->load_deleted(50, false);
 
-	if ($pages)
+	if (isset($_GET['type']) && $_GET['type'] == OBJECT_FILE)
+	{
+		list($files, $pagination) = $engine->load_deleted_files(50, false);
+	}
+	else
+	{
+		list($pages, $pagination) = $engine->load_deleted_pages(50, false);
+	}
+
+	if (isset($pages))
 	{
 		$engine->print_pagination($pagination);
 
@@ -89,8 +96,9 @@ function admin_content_deleted(&$engine, &$module)
 			// print entry
 			echo '<tr>' .
 					'<td class="lined">' .
-						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - '.
+						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $page['page_id'] . '">' . $engine->_t('RemoveButton') . '</a> ]'.
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;archive=' . $page['page_id'] . '">' . $engine->_t('ArchiveButton') . '</a> ]'.
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $page['page_id'] . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0, $page['title']) .
 					'</td>' .
@@ -101,9 +109,48 @@ function admin_content_deleted(&$engine, &$module)
 
 		$engine->print_pagination($pagination);
 	}
+	else if ($files)
+	{
+		$engine->print_pagination($pagination);
+
+		echo '<table>';
+
+		$curday = '';
+		foreach ($files as $file)
+		{
+			// day header
+			list($day, $time) = explode(' ', $file['modified_dt']);
+
+			if ($day != $curday)
+			{
+				if ($curday)
+				{
+					echo "\n";
+				}
+
+				echo '<tr><td colspan="2"><br /><strong>' . date($engine->db->date_format, strtotime($day)) . ":</strong></td></tr>\n";
+				$curday = $day;
+			}
+
+			// print entry
+			echo '<tr>' .
+					'<td class="lined">' .
+						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $file['file_id'] . '">' . $engine->_t('RemoveButton') . '</a> ]'.
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;archive=' . $file['file_id'] . '">' . $engine->_t('ArchiveButton') . '</a> ]'.
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $file['file_id'] . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.
+						$engine->compose_link_to_page($file['file_name'], 'revisions', '', 0, $file['file_description']) .
+					'</td>' .
+				"</tr>\n";
+		}
+
+		echo '</table>';
+
+		$engine->print_pagination($pagination);
+	}
 	else
 	{
-		echo '<br /><p>' . $engine->_t('NoRecentlyDeleted') . '</p>';
+		echo '<br /><p>' . $engine->_t('NoDeletedPages') . '</p>';
 	}
 }
 
