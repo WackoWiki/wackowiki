@@ -678,7 +678,7 @@ WikiEdit.prototype.unindent = function ()
 		}
 
 		if (fIn) {
-			r += line.replace(/^(	)|\t/, '');
+			r += line.replace(/^(  )|\t/, '');
 		} else {
 			r += line;
 		}
@@ -721,8 +721,8 @@ WikiEdit.prototype.createLink = function (isAlt)
 
 WikiEdit.prototype.help = function ()
 {
-	s = '				WikiEdit 3.15 \n';
-	s += '	(c) Roman Ivanov, WackoWiki Team 2003-2016	 \n';
+	s = '				WikiEdit 3.16 \n';
+	s += '	(c) Roman Ivanov, WackoWiki Team 2003-2017	 \n';
 	s += '	https://wackowiki.org/doc/Dev/Projects/WikiEdit \n';
 	s += '\n';
 	s += lang.HelpAboutTip;
