@@ -133,7 +133,7 @@ if ($this->is_admin()
 			$this->remove_watches				($this->tag, true);
 			$this->remove_ratings				($this->tag, true);
 			$this->remove_comments				($this->tag, true, $dontkeep);
-			$this->remove_files					($this->tag, true);
+			$this->remove_files_perpage			($this->tag, true);
 			$this->remove_revisions				($this->tag, true);
 
 			// get list of pages in the cluster
